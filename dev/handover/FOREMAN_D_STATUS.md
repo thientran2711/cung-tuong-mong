@@ -43,7 +43,7 @@ main at start = eba64ead4.
 | D21 full review r2 → fix | review/coop-b1b5-fix @7c7fcc45 | opus | SẴN SÀNG KIỂM (worker archived) → final reviewer coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ RUNNING |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
-| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death | opus | worker session_01DgYSWoy8UWVPrve6HEjZfR RUNNING (12:58Z; mortality live) |
+| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer npc-death-r1 RUNNING 13:42Z |
 | D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | PASS 1c31bd79 (review/preg-rate-r1; reviewer archived) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
 | C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
@@ -76,6 +76,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- (13:42Z s5, from D4 npc-death; decided by Foreman D per OD:L51, owner may override) (1) quest rgl_ly3 no longer frees Phế phi Lý ('về chùa tu hành'): she stays until death per OD:L641 'She only leaves when she dies' → KEEP the worker's change. (2) court officers now get a full j59 personal name like first holders (was surname only 'Thái y Vương') → KEEP (one naming rule). ART NEEDED for Foreman C: eunuch/official/maid/mama portrait pools too small now that dead NPCs' portraits are never reused (list in reports/npc-death.md § ART NEEDED).
 - (13:10Z s5) KIT REQUEST for main s16 kit keeper: kit DANGER button + kit confirm dialog (from cloud-del; details in dev/kit/KIT_REQUESTS.md + reports/cloud-del.md). C44 delete button waits on it; please write KIT READY in FOREMAN_D.md INBOX.
 - ANSWERED s16 12:55Z: PARKED, do not work around. (was: s4 10:58Z) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
 - ANSWERED s16 12:55Z: P1 YES, P2 bot first, P3 NO → danh-p1 worker. (was: s4 10:58Z) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed; one-core fixes PASS (danh-balance-r1). Reviewer: P1 gain measured +12.5 Danh/life, not the +55 arithmetic (1 seed).
