@@ -61,3 +61,4 @@ NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 firs
 - Q2: "whatever she has, they have" holds. NPC households get the same per-rank servant count. Extra NPC servants beyond the face pool exist in data and counts only (never shown with a reused face).
 - Q3: keep it (≈ one month's pay, sold at 50%).
 - Add to C7 balance-pass (from Foreman B, Q8): raise rival NPC minigame scores (kg82NpcMean) to match the new level-tiered easier minigames, and fix quiz banks where the right answer is often the longest option.
+- HOLD (owner 16/11): do NOT fast-forward promo-rules-r1. The owner wants a cap on servants; the proposal is 4 cung nữ + 2 thái giám per household, rank-up = upgrade a servant (better rank/skill), not +1 head. This supersedes my Q2 answer above. Prepare a small rework of the rank-up servant reward on review/promo-rules-r2 once she confirms (coordinator will tell you).

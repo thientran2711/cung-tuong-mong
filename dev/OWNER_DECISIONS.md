@@ -1128,3 +1128,8 @@ All must work in co-op.
 ## 16/11 (session 8) — Rolled lifespan (thọ số) for everyone (owner)
 - Owner: at game start EVERYONE (player, NPCs, maids, eunuchs, Emperor, Thái hậu…) rolls a lifespan die. Example: she rolls 68, so she lives to 68, then dies of illness, the life ends and a new life starts. A roll of 24 at age 20 gives only 4 years. No reroll. Children born in game (princes, crown prince, princesses) roll too; some get 1–5 and die young of smallpox or an epidemic.
 - → review/mortality told: the age core = a rolled lifespan per person (saved), shortened by poison, assassination, illness and childbirth. Pending owner answers: visible vs hidden roll; dice curve and floors (player, Emperor); whether care can lengthen it.
+
+## 16/11 (session 8) — Cap on named staff (owner)
+- Owner: 10–16 named ma ma / cô cô is far too many. Getting to know 12 consorts is already tiring; the Cung nhân list is already too long. She wants a ceiling on maids and eunuchs, kept in balance. One person can hold 3–4 duties. Thin, useless extra NPCs must go.
+- Proposed (pending her OK on numbers): palace-wide named staff = 3 ma ma (Giáo tập Trữ Tú cung, Chưởng sự Từ Ninh cung, Quản sự Khôn Ninh cung) + 2 thái giám (the existing Tổng quản, and one Kính sự phòng). Each holds several duties. Her household is capped at 4 cung nữ + 2 thái giám; a rank-up UPGRADES a servant instead of adding one. NPC households have the same cap.
+- Impact: promo-rules-r1 (one free servant per rank, up to 5+4) is ON HOLD until she answers.
