@@ -41,4 +41,4 @@
 | weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | RUNNING | 16/11 06:00Z |
 | scheme-games-port-r1 kit sign-off (jopic grid-auto-rows:max-content) | review/scheme-games-port-r1 | main s10 | — | KIT OK → merge-train-4 | 16/11 06:00Z |
 | owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | RUNNING | 16/11 05:54Z |
-| C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | (opus reviewer session, id follows) | RUNNING | 16/11 05:58Z |
+| C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | RUNNING | 16/11 05:58Z |
