@@ -387,7 +387,7 @@
 | one-core LAND (opus, BIG): re-merge review/one-core 7b9d022f onto main, extend guard to code added since, wire one-core-guard + kit-conform into dev/tools/quickcheck.sh (go-live gate) (owner 20:32Z) | review/one-core-land | main s23 | session_01UV1Szk8AZeChPCcurAVa6F | RUNNING | 16/11 20:29Z |
 | figure cut-out clean + hi-res (URGENT owner bug 20:35Z; Luân hồi neck streak/warped face; resumes paused face-sharp/fig-hd-upscale) | review/fig-cutout-clean | C | (C opens) | INBOX | 16/11 20:29Z |
 | cut-out + hoa điền ROOT CAUSE (opus, URGENT owner bug 20:35–20:38Z): code vs image; code fixes on review/fig-cutout-code; image list → C | review/fig-cutout-code | main s23 | session_01UV1SziJ9niRHRJg3rL83SA | RUNNING | 16/11 20:30Z |
-| road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | session_01N1tNP2bUuTx3dm594CtR4n | RUNNING | 16/11 20:33Z |
+| road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | session_01N1tNP2bUuTx3dm594CtR4n | DONE FAIL 1 (thd_hoc) @401ae165 (archived) | 16/11 20:33Z |
 | coop-contest review r1 (opus, BIG co-op) of 73eec76f | review/coop-contest-r1 | main s23 | session_01UV1SzieyRmsLoEEWXsp3iw | RUNNING | 16/11 20:32Z |
 | kit-fit round 2b review r1 (sonnet, SMALL kit + consistency scan) of 7865ed13a | review/kit-fit-r1 | main s23 | session_01UV1SzgZnaUtF1u31GfAqQr | PASS 59812a63 → LIVE b53ba8b9 (s24) | 16/11 20:32Z |
 | night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | session_01UV1Szj7YLUcLKMH5ncGTcL | RUNNING | 16/11 20:32Z |
@@ -426,3 +426,4 @@
 | npc-death re-wire (opus; golive HOLD 21:20Z): wire jnpcd/jly into main's j95 place-people record (Lý in Trường Môn viện OD:L641, place list after death, Thái y viện 'ty'), fix test fc | review/npc-death-wire | D | session_01DgYSWmnHZUiVyRMR9vMwku | RUNNING | 16/11 21:27Z |
 | kit-fit r3 review r1 (sonnet, SMALL kit + consistency + co-op) of 2d6a50e3 | review/kit-fit-r3-r1 | main s24 | session_01UV1SzmFpim4M3rHm45ksp9 | RUNNING | 16/11 22:35Z |
 | stage-figsize HOTFIX (opus, URGENT owner bug 21:20Z): people tiny on the stage after page-scale live 1aa0edb2; giant clipped eunuch + label overlap; blank side-card portraits | review/stage-figsize | main s24 | (s24 opening) | RUNNING | 16/11 21:20Z |
+| road-b3-fix2 (opus): r1 FAIL item 1 thd_hoc .5–.11 never runs (pupil age gate) + family scan | review/road-b3-fix2 | B | session_01N1tNP6woPkxcr3RNgPTnGa | RUNNING | 16/11 21:36Z |
