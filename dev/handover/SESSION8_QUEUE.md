@@ -21,7 +21,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | A13 | review/recipes-r1 (finish cut review) | QUEUED |
 
 ## B. Workers on FAILED reviews (§3)
-| B1 | review/night-end-r1 FAIL 6 items + in-night picture by tone + light night panel (C30 merged) + follow-ups | RUNNING |
+| B1 | review/night-end-r1 @ 8d1652244 (r2: FAIL fixed + tone pictures + light panel + follow-ups) | REVIEWING (night-end-r2) |
 | B2 | review/outside-r2-r1 FAIL 5 items → worker (owner asked s8) | RUNNING |
 
 ## C. Unfinished workers (§4 + §9)
