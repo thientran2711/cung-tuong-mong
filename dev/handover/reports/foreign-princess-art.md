@@ -50,3 +50,10 @@ IDs gpt-2-6: BD set H lineup Ifiu8b6tvE (base LwoO1OfswO + c01 ref KLDgbFzkqp + 
 OD line per figure: Đáp ứng/Tần/Phi = L1207 home costume + colour/richness steps (+owner ticks 16/11 19:20Z: BD Đáp ứng opt 1, Tần kept, Phi opt-2 hair); Quý phi = L1207 + L1212(a) own court robe + L1256(2) in-game Quý phi language; L1238 right hand holds a prop, own faces (BD vs NC differ). Tần BD changed: the approved Tần figure is redrawn with a bigger head (face/costume same).
 Credits: 14 x 40 = 560 (v8-v12 total 1,600).
 STATUS: WAIT for the owner's verdict. STEP 2 not started.
+
+## OWNER on v11 (20:47Z via Foreman C s7): BD APPROVED with Quý phi B. NC Quý phi APPROVED (B = xSX7K4MjfW). NC home ranks looked fat/bulky -> redrawn (v13). Method rule from the owner: say "draw this girl in this outfit with the body of this reference image", no numbers.
+## v13 SAMPLE READY
+File: `foreign-princess-art/sample-v13.jpg` = approved BD Tần | NC Đáp ứng | Tần | Phi (redrawn) | NC Quý phi (approved B).
+Prompt (gpt-2-6, no numbers): draw the girls of image 1 in the same outfits/hair/faces with exactly the body of the Tần of image 2 (approved BD lineup 9ZFGOzzNYZ), skirt falling naturally, not puffed; image 3 = slim original N2FUFwO6D9. Chosen DoJmkmVpcl (alts jUBOny6LD0, fHGKOkMCDY). Quý phi on the sheet = approved NC B xSX7K4MjfW (the DoJm lineup re-drew her slightly, not used). Heads pixel-read 13.2% (home), chin>sole aligned (x0.99-1.00).
+Credits: 3 x 40 = 120 (v8-v13 total 1,720).
+STATUS: WAIT for the owner's verdict on v13; then STEP 2 (full set).
