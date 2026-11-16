@@ -24,9 +24,10 @@ function epidemic(){const P=consorts().filter(p=>p===S||p.alive&&!p.out);if(!rol
  for(const p of P)if(houseOf(p)===hk){if(roll(35))ev+=catchIll(p,"daumua")||(p!==S?`${p.name} nhiễm bệnh. `:"");p.confined=Math.max(p.confined||0,1);for(const k of kidsOf(p))if(roll(45)){k.hp-=40;if(k.hp<=0)ev+=kidDie(k,"mất vì đậu mùa",p===S)}(p.staff||[]).slice().forEach(s=>{if(roll(10))p.staff.splice(p.staff.indexOf(s),1)})}
  return ev}
 function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epidemic();
+ if(worldOn()){/* Emperor + Thái hậu illness: world facts, rolled on the host only (jcoopworld worldOn) */
  if(S.emp.age>50&&!illOf(S.emp)&&roll(3)){S.emp.ill={k:"longthe",st:1,known:true};S.emp.mood=2;ev+="Long thể bất an, Hoàng thượng ít vào hậu cung. "}
  else if(illOf(S.emp)){if(roll(35)){S.emp.ill=null;ev+="Long thể đã an. "}else if(S.emp.ill.st<3&&roll(30))S.emp.ill.st++}
- if(!S.thDead){if(!S.thIll&&roll(2))S.thIll={k:pick(["phonghan","lao"]),st:1,known:true};else if(S.thIll){if(roll(30))S.thIll=null;else if(S.thIll.st<3)S.thIll.st++;else if(roll(20)){S.thDead=true;S.th=0;ev+="<b>Thái hậu băng hà vì bệnh.</b> "}}}
+ if(!S.thDead){if(!S.thIll&&roll(2))S.thIll={k:pick(["phonghan","lao"]),st:1,known:true};else if(S.thIll){if(roll(30))S.thIll=null;else if(S.thIll.st<3)S.thIll.st++;else if(roll(20)){S.thDead=true;S.th=0;ev+="<b>Thái hậu băng hà vì bệnh.</b> "}}}}
  for(const p of consorts())if(p.fakeIll){p.fakeIll--;if(roll(15)){p.fakeIll=0;ap(p,{danh:-6});punish(p,"giả bệnh khi quân",1);if(p===S)ev+=`<span class="r">Thái y khác bắt mạch: ngươi giả bệnh.</span> `}}
  return ev}
 /* the Emperor avoids the sick; quarantine blocks nights */
@@ -65,7 +66,7 @@ function lotEffect(l){if(!l)return"";if(l.dom==="Hung")return l.lv>=3?"Tuần n�
  const st=Math.abs(b)>=10?"khoảng một bậc":"nửa bậc";const ex=b<0?(Math.abs(b)>=10?"Chắc → Khá chắc":"có khi Chắc → Khá chắc"):(b>=10?"Khá chắc → Chắc":"có khi Khá chắc → Chắc");
  return `Tuần này: các việc thuộc «${l.dom}» ${b<0?"khó":"dễ"} thành hơn ${st} (${ex}).${names.length?` Gồm: ${names.join(", ")}${names.length>=5?"…":""}.`:""}`}
 function lotHTML(l){const L=LOTS[l.i];return `<div class="xam"><div class="tube">Xăm</div><div class="stick">${LV[l.lv]}</div></div><p style="text-align:center"><b>Quẻ ${LV[l.lv]}</b> · ${l.dom}</p><p style="text-align:center;font-style:italic">${L[1].replace("\n","<br>")}</p><p class="past" style="text-align:center">${L[2]}</p><p style="text-align:center"><span class="ef ${LVB[l.lv]<0||(l.dom==="Hung"&&l.lv>=3)?"r":LVB[l.lv]>0?"g":"n"}">${lotEffect(l)}</span></p>`}
-function newLots(){const l=drawLot(S,false);S.relot=0;for(const v of liveRivals(true))drawLot(v,false);log(`Xin xăm: quẻ ${LV[l.lv]} · ${l.dom}.`);if(!window.__dawnOn)Q.push({t:"Gieo quẻ đầu tuần",h:lotHTML(l)})}
+function newLots(){const l=drawLot(S,false);S.relot=0;if(worldOn())for(const v of liveRivals(true))drawLot(v,false);/* NPC lots: host only */log(`Xin xăm: quẻ ${LV[l.lv]} · ${l.dom}.`);if(!window.__dawnOn)Q.push({t:"Gieo quẻ đầu tuần",h:lotHTML(l)})}
 function reLot(better){if(S.dead||Q.length)return;if(!better){if(S.relot||S.bac<BAL.lot.bac||!can(BAL.lot.k))return;apply({bac:-BAL.lot.bac});spend(BAL.lot.k);S.relot=1}const l=drawLot(S,!!better);log(`Gieo lại: quẻ ${LV[l.lv]} · ${l.dom}.`);Q.push({t:better?"Xin xăm ở Phật đường":"Gieo lại quẻ",h:lotHTML(l)});render()}
 /* which domain an act belongs to */
 const ACTDOM={spy:"Mưu kế",frame:"Mưu kế",poison:"Mưu kế",rumor:"Mưu kế",bribe:"Mưu kế",block:"Mưu kế",musk:"Mưu kế",catswap:"Mưu kế",ksab:"Mưu kế",kpoison:"Mưu kế",pond:"Mưu kế",kframe:"Mưu kế",plant:"Mưu kế",accuse:"Danh",vp:"Danh",takeaway:"Con cái",ally:"Giao thiệp",gift:"Giao thiệp",steal:"Sủng",road:"Sủng"};
