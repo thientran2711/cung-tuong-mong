@@ -39,7 +39,7 @@ function khPgRisk(p){const G=BAL.pgRisk;if(!G||!p)return[0,""];const why=[];let 
  const s=Math.max(0,(p.pgS||0)-G.freeSuc)*G.work;if(s>0){r+=s;why.push("lao lực")}
  if((p.suc||0)<G.lowSuc2At&&(p.suc||0)>=30){r+=G.lowSuc2;why.push("thân thể suy kiệt")}
  r=Math.min(G.cap,r);if(p.anthai)r/=2;return[r,why.join(", ")]}
-function khStat(k){try{(window.__khN=window.__khN||{})[k]=(window.__khN[k]||0)+1}catch(e){}if(typeof rtStat==="function")rtStat(k)}
+function khStat(k){try{(window.__khN=window.__khN||{})[k]=(window.__khN[k]||0)+1}catch(e){}if(typeof rtStat==="function"&&/^ng_/.test(k))rtStat(k)}
 /* is this NPC driven to use a 'lệch sổ' birth against the mother? (self-interest: her own son vs a son, a rival for the same rank, deep dislike) */
 function khMotive(v,m,k){if(!v||!m||v===m)return false;const vs=(v===S?S.kids:v.kids||[]).some(x=>x.alive&&x.sex==="m");
  return (vs&&k.sex==="m")||(Math.abs(rkOf(v)-rkOf(m))<=1&&aff(v,m)<0)||aff(v,m)<=-30||(v.oan||0)>=45&&m===S}
