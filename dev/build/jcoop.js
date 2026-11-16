@@ -44,7 +44,9 @@ function live(){const C=window.COOP;if(!C)return;const s=st.seats||{},x=other(),
  C.frozen=!!(st.you&&st.status!=="off"&&!st.bothIn);  /* PROTOCOL 6: the world runs only while both seats are online */
  C.waiting=!st.you||st.status==="off"?false:!(s[x])?"room":(e[st.you]&&!e[x])?"week":false}
 function base(){return String(COOP.url||DEF_URL).replace(/\/+$/,"")}
-function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pid())}&name=${encodeURIComponent(COOP.name||"")}`}
+/* Sổ mây (jcloud): a room joined on another device keeps that device's pid here, so this device takes the same seat */
+function pidFor(code){try{const m=JSON.parse(LS.get("ctm-coop-pids")||"{}");const v=m&&m[code];if(typeof v==="string"&&/^[A-Za-z0-9]{8,32}$/.test(v))return v}catch(e){}return pid()}
+function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pidFor(code))}&name=${encodeURIComponent(COOP.name||"")}`}
 async function gz(s){const cs=new CompressionStream("gzip");const w=cs.writable.getWriter();w.write(new TextEncoder().encode(s));w.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer())}
 async function gunz(buf){const ds=new DecompressionStream("gzip");const w=ds.writable.getWriter();w.write(new Uint8Array(buf));w.close();return await new Response(ds.readable).text()}
 async function rx(ev){lastRx=Date.now();let m;
@@ -82,7 +84,7 @@ async function join(code){code=String(code||"").trim().toUpperCase();
  if(r.status===404)throw {code:"noroom"};if(!r.ok)throw {code:"net"};
  const j=await r.json().catch(()=>({}));const me=pid();
  /* full = both seats taken; the server still lets a known pid back in, so only refuse early when we are sure */
- if(j.seats&&j.seats.a&&j.seats.b&&LS.get("ctm-coop-room")!==code)throw {code:"full"};
+ if(j.seats&&j.seats.a&&j.seats.b&&LS.get("ctm-coop-room")!==code&&pidFor(code)===pid())throw {code:"full"};
  return wait(code)}
 function resume(){const c=LS.get("ctm-coop-room");if(!c)return null;return wait(c)}
 function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep)LS.del("ctm-coop-room");
@@ -107,6 +109,6 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
 addEventListener("pageshow",e=>{if(e.persisted)hidAt=hidAt||1;wake()});
 addEventListener("focus",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
 addEventListener("online",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
-window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},state:st,create,join,resume,leave,send,on,off,emit,other,
+window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},pidFor,state:st,create,join,resume,leave,send,on,off,emit,other,
  code:"",seat:null,week:0,online:{a:false,b:false},ended:{a:false,b:false},frozen:false,waiting:false,live};
 }catch(e){console.error(e)}})();
