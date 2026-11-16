@@ -82,11 +82,9 @@ function apply(o){const pops=[];
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
-function popNum(k,v,i){const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
-  const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;
-  const hud=el.id!=="stage";s.style.left=Math.max(4,Math.min(innerWidth-120,r.left+r.width/2-40))+"px";
-  s.style.top=(hud?r.bottom+4+i*18:r.top+r.height*0.35+i*20)+"px";s.style.animationDelay=(i*.12)+"s";
-  document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
+function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */
+  const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
+  const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;s.style.left=Math.max(4,r.left)+"px";s.style.top=(r.bottom+4)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
 function log(h){S.logSeq=(S.logSeq||0)+1;S.logs.unshift(`<span class="ld">T${S.month}/${S.year} ${TUAN[S.tuan]}</span>${h}`);if(S.logs.length>150)S.logs.length=150}
 function when(){return `Năm ${S.year}, tháng ${S.month}, ${TUAN[S.tuan]} (${SEASON[S.month-1]})`}
 function fx(cls,el){const e=el||$("game");e.classList.remove(cls);void e.offsetWidth;e.classList.add(cls);setTimeout(()=>e.classList.remove(cls),950)}
