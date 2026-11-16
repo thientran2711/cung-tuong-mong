@@ -25,7 +25,7 @@ Manifest img/ACTS.json `acts` now maps (exact card title → key → img/act-<ke
 | Lạnh nhạt | tiep-dai-lanh-nhat-h | reuse |
 | Rỉ tai chuyện trong cung | ban-tan-h | reuse |
 | Hòa giải | hoa-giai-h | NEW (two sets of hands joined over tea, peony) |
-| Hạ nhục | ha-nhuc-h | NEW (sleeve sweeps cup + gift off the table, crushed flower) |
+| Hạ nhục | ha-nhuc-h | NEW, REPAINTED 16/11 20:10Z per Foreman C (first try had a modern ribbon-wrapped box): sleeve sweeps an antique red-lacquer gold-inlay food box + palace sweets (osmanthus cakes) and a cup off the table, crushed peony, no bow/ribbon |
 | Thử lòng | thu-long-h | NEW (folded note offered, jade pendant + hairpin bait) |
 | Nương theo | nuong-theo-h | NEW (junior one step behind a gold-and-crimson senior, red corridor) |
 | Khuyên Hoàng thượng mưa móc đều khắp | khuyen-mua-mong-h | NEW (dragon sleeve guided toward several doorways, peonies) |
@@ -36,3 +36,6 @@ Note: two of the new pictures contain a little Chinese signage/decree text from 
 
 ## ROLLOVER
 Context is small; no rollover needed.
+
+## Redo 16/11 20:10Z
+ha-nhuc-h repainted (period lacquer food box, no ribbon/bow), looked at, re-uploaded to the CDN (same name, 200 OK). First attempt discarded (never kept).
