@@ -5,8 +5,8 @@ Base main at start: 900ace7fb.
 
 | Item | Branch | Model | State |
 |---|---|---|---|
-| A6 thaiy review | review/thaiy @1445f4315 → review/thaiy-r1 | sonnet | RUNNING (reviewer) |
-| A7 cycle review | review/cycle @578384ce9 (after A6; keep jcycle last) | sonnet | QUEUED (waits A6) |
+| A6 thaiy review | review/thaiy-r1 | sonnet | PASS f7c61f829 |
+| A7 cycle review | review/cycle @578384ce9 merged onto review/thaiy-r1 → review/cycle-r1 (jcycle last) | opus | RUNNING (reviewer) |
 | A8 cal-plus review | review/cal-plus @08c66800a → review/cal-plus-r1 | sonnet | RUNNING (reviewer) |
 | A9 promo-rules review | review/promo-rules @53b0084d0 → review/promo-rules-r1 (glow/crack → §68) | opus | RUNNING (reviewer) |
 | A11 cardflip review | review/cardflip @1daf0d9d4 → review/cardflip-r1 | sonnet | RUNNING (reviewer) |
@@ -28,6 +28,8 @@ Base main at start: 900ace7fb.
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
 
 PASS review/kit-popup-sample-r1 fa02fc6565575e284ad7dc1e0c8553cdfcdf400d (C18; descends from main 583858942; 5 pop-up samples on real kitModal, KIT §8; jkitpage.js conflict kept both samples)
+PASS review/thaiy-r1 f7c61f829ce0a2cc3653143685e4280977c819e2 (A6; descends from main 583858942; thaiy.js 49/49 at 5 viewports, coop-e2e 59/59; jthaiy after jty in assemble). Note: at top ranks the bạc road (12.5–15% of pay) is cheaper in feel than the 3-khắc/Sức-5 road → handed to C7 balance-pass bạc-equivalence scan, not a blocker.
+NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 first (or just cycle-r1 when it passes, it contains both).
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
 - Person subject always gets the full-body event-stage figure, even in the ĐIỀU info pop-up (no small 3:4 portrait on main); at 1180 one run drew no figure (figure-load race?) → stage-fig-size (C17, session 8).
