@@ -8,8 +8,8 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,OU
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
- await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw,#ktut{display:none!important}'});
- const reset=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#kpop').forEach(e=>e.remove());const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}Q.length=0});
+ await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw,#ktut,.kmov{display:none!important}'});
+ const reset=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#kpop,.kmov').forEach(e=>e.remove());const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}Q.length=0});
  const states={
   milestone:()=>{},
   arc:()=>{const A=newThread67('td_an','m');S.st.ch.n=2;A.chap=2;A.i=1;pickNext67(A);A.due=0;A.dl=S.turn+6;A.hist.push('Hồi một: chọn đường');A.used.push(A.nb);S.st.M=A;S.st.ms=null},
