@@ -19,15 +19,16 @@ const {chromium}=require('playwright');const [,,URL,NM,SZ,ORIG]=process.argv;con
    for(const el of document.querySelectorAll('#panel .mspot, [data-go]')){let k=el.dataset.go||el.dataset.ak;if(!k){const t=el.textContent.replace(/^\d+/,'').trim();const f=NM.find(z=>t.indexOf(z[0])===0);if(!f)continue;k=f[1]}if(k.indexOf('kpm:')===0||k in shown)continue;const s=el.querySelector('.msil');shown[k]=s?+(s.getAttribute('aria-label')||'0').split(' ')[0]:0}
    const R=S.roster;if(!R||R.key!==j95key())return{norec:1};const kh=j95kh();const rec={},kind={};const who=R.who||{};
    const kd=id=>id==="emp"?"emp":id==="th"?"th":id[0]==="v"?"consort":id.indexOf("mm:")===0?(id==="mm:me"?"her maid":"consort maid"):id[0]==="s"?"servant":id.indexOf("c:")===0?id:id[0]==="m"?"man":id[0]==="q"?"official":id[0]==="k"?(id.indexOf("k:me:")===0?"her child":"child"):"other";
-   for(const id in R.P){const k=R.P[id][kh][0];if(!k||k===J95OUT_||id==="me"||(id==="mm:me"&&k===S.place&&k!=="home"))continue;/* her party is not a shadow */(rec[k]=rec[k]||[]).push(id);kind[id]=kd(id)}
-   const vis={};/* who the map counts at each place (its own rule: arrival khắc, j95vis) */for(const k in shown){vis[k]=[];const ka=typeof j95arrKh==="function"?j95arrKh(k):kh;for(const id in R.P){if(R.P[id][ka][0]===k&&j95vis(id,k))vis[k].push(id)}}
-   const out={place:S.place,kh,shown,tot:0,rec:0,hidden:[],extra:[],twice:[],offmap:[]};const seen={};
+   const LK=typeof j95lk==="function"?j95lk:(x=>x);const HERE=LK(S.place);/* the maid road: her "home" = her mistress's palace */
+   for(const id in R.P){const k=LK(R.P[id][kh][0]);if(!k||k===J95OUT_||id==="me"||(id==="mm:me"&&k===S.place&&k!=="home"))continue;/* her party is not a shadow */(rec[k]=rec[k]||[]).push(id);kind[id]=kd(id)}
+   const vis={};/* who the map counts at each place (its own rule: arrival khắc, j95vis) */for(const k in shown){vis[k]=[];const ka=typeof j95arrKh==="function"?j95arrKh(k):kh;for(const id in R.P){if(LK(R.P[id][ka][0])===k&&j95vis(id,R.P[id][ka][0]))vis[k].push(id)}}
+   const out={place:HERE,kh,shown,tot:0,rec:0,hidden:[],extra:[],twice:[],offmap:[]};const seen={};
    for(const k in shown){out.tot+=shown[k];for(const id of vis[k]){if(seen[id])out.twice.push(id+"@"+seen[id]+"+"+k);seen[id]=k}}
-   for(const k in rec){out.rec+=rec[k].length;if(!(k in shown)&&k!==S.place){for(const id of rec[k])out.offmap.push(k+":"+kind[id]);continue}
+   for(const k in rec){out.rec+=rec[k].length;if(!(k in shown)&&k!==HERE){for(const id of rec[k])out.offmap.push(k+":"+kind[id]);continue}
     if(shown[k]!==rec[k].length)out.diff=(out.diff||[]).concat(k+" hiện "+shown[k]+" sổ "+rec[k].length);
     for(const id of rec[k])if(!(vis[k]||[]).includes(id))out.hidden.push(k+":"+kind[id]+":"+((who[id]||[])[0]||id))}
    for(const k in shown){const now=rec[k]||[];const ex=(vis[k]||[]).filter(id=>!now.includes(id));for(const id of ex)out.extra.push(k+":"+kind[id]+" (đến khắc khác)");if(shown[k]!==(vis[k]||[]).length)out.extra.push(k+": hiện "+shown[k]+" ≠ đếm "+(vis[k]||[]).length)}
-   /* the stage at her place = the record there now */try{if(S.visit&&S.visit.k===S.place){const st=kitHereCount();const rh=(rec[S.place]||[]).length;if(st!==rh)out.stage=S.place+" sân khấu "+st+" sổ "+rh+" ["+S.visit.people.map(p=>p.kind).join(",")+"]"}}catch(e){out.stage="lỗi "+e.message}
+   /* the stage at her place = the record there now */try{if(S.visit&&S.visit.k===S.place){const st=kitHereCount();const rh=(rec[HERE]||[]).length;if(st!==rh)out.stage=S.place+" sân khấu "+st+" sổ "+rh+" ["+S.visit.people.map(p=>p.kind).join(",")+"]"}}catch(e){out.stage="lỗi "+e.message}
    return out});
   if(m.dead||m.norec){rep.push(m);if(m.dead)break;continue}
   agg.moments++;agg.sumShown+=m.tot;agg.sumRec+=m.rec;if(m.hidden.length||m.extra.length||m.twice.length||m.offmap.length||m.diff||m.stage)agg.bad++;if(m.stage)agg.stage=(agg.stage||[]).concat(m.stage).slice(0,12);
