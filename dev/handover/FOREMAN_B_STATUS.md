@@ -1,23 +1,23 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 02:53Z — cap 12, each agent ≤2 browsers. Running 12/12: 9 workers (C41, C24, D34, D36, C46, C32, C26b, D33, D42) + 3 reviewers (weekbook-entries, contest-ui, lost-items-port). Waiting: D41 (Foreman C D29 roster still RUNNING), D31 (re-measure with C7). PASS so far: 13.
+Updated: 11/16/2026 03:25Z — 10 Foreman B PASSes are LIVE on main (merge trains 1–2). Waiting for fast-forward: succession-port-r1, palace-map-port-r1, lost-items-port-r1, weather-port-r1, weekbook-entries-r1, map-labels-r1. Running: 6 workers (C24, C41 finisher, D34, D42, D33, D31) + 4 reviewers (stat-fx-2, contest-ui-r3, page-curl2). Blocked: D36 (KIT REQUEST podium), D41 (Foreman C D29).
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
 |---|---|---|---|
-| C23 mg-easy | review/mg-easy-r1 | sonnet | PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
+| C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg @c859d8b4 | sonnet | RUNNING (finisher: Dung scores 0 under bot, missing viewports) |
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed; told to GROW kitGoalDetail from review/tutorial-r2 per coordinator note) |
-| C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
-| C27 buoi-transition | review/buoi-transition-r1 | sonnet | PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
-| C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
-| C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
-| C28 room-btn | review/room-btn-r1 | sonnet | PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
-| C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
+| C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
+| C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
+| C39 tab-underline | review/tab-underline-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS d8b54d0970ac8591d07163650058485f4bceb818 |
+| C40 actcard-small | review/actcard-small-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
+| C28 room-btn | review/room-btn-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
+| C29 rel-picker | review/rel-picker-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS ce7c076a38d55c95901d19002832983f91560052 |
 | C32 page-curl2 | review/page-curl2 @3b7e5ea0 | sonnet | REVIEWING (review/page-curl2-r1, sonnet) |
 | C33 weekbook-entries | review/weekbook-entries-r1 | sonnet | PASS 1badc13c817d0d67971439fd6d2cbd944e47ad89 |
 | C34 contest-ui | review/contest-ui-r2 @c881ae6b (r1 FAIL fixed) | sonnet | REVIEWING (review/contest-ui-r3, sonnet) |
-| C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
-| C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
+| C35 pcard-fill | review/pcard-fill-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
+| C37 panel-size | review/panel-size-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
 | C26b stat-fx follow-up | review/stat-fx-2 @f4096090 | sonnet | REVIEWING (review/stat-fx-2-r1, sonnet); contains stat-fx-r1 + pcard-fill-r1 |
 | C46 map-labels | review/map-labels-r1 | sonnet | PASS e23562007d7f431fce9fdbc95bf1f2799ad6a350 (KIT KEEPER: §34.1d re-skin) |
 | D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
@@ -27,7 +27,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D33 routes-port | review/routes-port | opus | RUNNING (route numbers within spec; bot table for C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
-| D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
+| D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
 | D42 places-leftovers | review/places-port (built on review/palace-map-port-r1) | sonnet | RUNNING |
@@ -53,7 +53,8 @@ PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends f
 ## CDN
 All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills,orb}.webp (C27), img/kit/ico-room.webp + ico-map.webp (C28). Branch review/cdn-pending-b is obsolete (images only; never merge it; delete it — Foreman B's delete push was refused by the server).
 
-## KIT KEEPER NEEDED (ONE KIT KEEPER rule, owner 16/11 — these Foreman B branches were built before the rule reached B and add/change kit parts; main coordinator's kit keeper please approve/renumber before fast-forward)
+## KIT KEEPER NEEDED
+(Keeper on main already: renumbered buoi-transition §71→§74, room-btn §72→§75 (KIT_NUMBERS.md); fixed rel-picker .knr-s, actcard-small info mark = §46 ktinfo, tab-underline observer scope, appearance 28.8b text. Items below not yet handled stay open.) (ONE KIT KEEPER rule, owner 16/11 — these Foreman B branches were built before the rule reached B and add/change kit parts; main coordinator's kit keeper please approve/renumber before fast-forward)
 - buoi-transition-r1: KIT §71 jbuoi.js (buổi transition overlay)
 - room-btn-r1: KIT §72 kitBackBtnHtml (painted back button)
 - pcard-fill-r1: KIT §73 person-card fill blocks (uses existing parts only; new section = layout recipe)
