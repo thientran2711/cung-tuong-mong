@@ -790,11 +790,16 @@ festivals, tranh tài…), Tranh ghế result (j34), hoàng tự khảo thí (j5
                     (kitKnown false → name "Người lạ"); no figure art → the kit's tall 3:4 frame (`kitPortrait(p,{size:"lg"})`). Never a round avatar.
                     Per place a soft STAGE LIGHT (`--kl` colour): .kpod-beam = soft spotlight falling from above onto the person (in front, screen blend, faint),
                     .kpod-pool = oval pool of light at the feet on the step, .kpod-motes = a few small floating motes. Nhất warm gold, Nhì soft silver-white,
-                    Tam pale copper-rose; higher place = a little brighter; all subtle. Her own column: a little brighter + "Ngươi" tag ("Con ngươi" for her child).
-      .kpod-step    lacquered dais block (img/kit/podium-step.webp, border-image), Nhất step highest, Nhì middle, Tam lowest (heights fitted to content)
-        .kpod-medal img/kit/medal-1|2|3.webp (gold / silver / bronze cloud medallion with tassels) + word Nhất / Nhì / Tam
+                    Tam pale copper-rose; higher place = a little brighter; all subtle. Her own column: a little brighter.
+                    THE FIGURES ARE THE BIGGEST THING ON THE STAGE (26.1): height = all the stage height left above the tallest plaque (`--kfh`),
+                    ONE figure scale for all three places (KIT_FIG `--kf`, children by age; owner 15/11: only the plaque height differs).
+      .kpod-step    = THE NAME PLAQUE (26.1, owner 15/11 08:55Z "the podium shrinks to just the name-plate cell under the feet"): cream kit card,
+                    gold hairline (Nhất a little richer); Nhất plaque highest, Nhì middle, Tam lowest (content height + a small lift, kpodFit); feet on its top edge.
+                    No lacquered dais (podium-step.webp is no longer used).
+        .kpod-you   "Ta" tag ("Con ta" for her child; caller text via `you`) on the plaque's top-LEFT corner
+        .kpod-medal img/kit/medal-1|2|3.webp + word Nhất / Nhì / Tam, at the plaque's top-RIGHT corner, poking up a little
         .kpod-plq   cream kit plaque: rank title + name (kitName, rank colour), sub (e.g. "Xuất sắc"), score "N phần", prize (kitChip or text, green)
-  .kpod-ft          her place when she is not in the top three ("Ngươi đứng thứ 5 trong 5 người · 18 phần") + the ONE kit button "Tiếp" (.kbtn)
+  .kpod-ft          her place when she is not in the top three ("Ta đứng thứ 5 trong 5 người · 18 phần") + the ONE kit button "Tiếp" (.kbtn)
   .kpod-fx          confetti layer
 ```
 Motion (CSS + Web Animations, transform/opacity only): Tam rises at 0.3 s, Nhì 1.0 s, Nhất 1.8 s (step grows, figure drops in, its light fades in).
@@ -802,7 +807,8 @@ The celebration FOLLOWS HER, whatever her place: paper + petals in her place col
 from HER figure when her column appears and fall over HER step, then a light petal fall over her step; at Nhất a little stronger (second burst, longer fall).
 Outside the top three: only the place lights, no confetti. Tap anywhere (not the button) = skip to the final state; Enter/Esc = skip, then Tiếp.
 `prefers-reduced-motion: reduce` → final state at once, no motes, no confetti.
-Layout: figures sized by the free height (`--kfh`, Nhất 100 %, others 84 %), never cover the plaques; plaques wrap text (no truncation), no horizontal
+Layout: figures sized by the free height (`--kfh`, one scale), never cover the plaques; short screens (height ≤ 520 px, 844x390) use a one-line plaque
+and a compact header (in j90 itself — no other module may restyle `.kpod-*`; jcui's copy was moved here); plaques wrap text (no truncation), no horizontal
 scroll; tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (shots dev/shots/podium/).
 
 API (data only):
@@ -812,8 +818,15 @@ kitPodiumShow([{who:person, score:75 /* or "8.5 phần" */, place:1, prize:[["S�
 kitPodium(list,o)            // HTML only (no overlay)
 kitPodiumTag(qItem,list,o)   // a Q item shows the podium first, then its panel (non-enumerable: never saved)
 kitFigOf(person)             // full-body src (figure, kid figure, or stranger silhouette)
+kpodCol(entry)               // one podium column (Bảng vàng builds its own stage from it)
 ```
-Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no faces. medal-1..3 (240 px, keyed), podium-step (512x384), podium-bg (1344x752).
+### 26.1 Plaque = step, entry fields (owner 15/11 08:55Z; kit-keeper-1 16/11 for D36 Bảng vàng, from review/rank-ui 895c898ef)
+Optional per entry, for people that are not game persons (Bảng vàng players, jrank): `fig` (figure src; `""` = no figure → the face fallback),
+`face` (fallback HTML instead of kitPortrait), `nameH` (name HTML instead of kitName; must be a `kname` chip), `you` (own-tag text), `mine:true`
+(her own column without being `S`). Every podium user takes these from the kit; nobody restyles `.kpod-*` outside j90.
+Test: `node dev/test/podium-plaque.js <url> <outdir> [sizes]` (contest + Bảng vàng entries; medal top-right, "Ta" top-left, Nhất highest,
+figure > 2 x plaque, no "false"/"undefined" text, no overflow).
+Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no faces. medal-1..3 (240 px, keyed), podium-bg (1344x752); podium-step (512x384) retired by 26.1.
 
 ## 27. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
 The week summary (dawn) is an old ledger she turns page by page. j87 replaces the j79 week panel; "Vào ngày mới" on the closing page
@@ -2711,6 +2724,11 @@ hat) under the chips, feet on the floor, aspect kept. Man and woman alike (no ×
 so two adults still fill the column on Fold 755; only a narrower screen gives them one common factor. Measured (fig-fill.js):
 painted height ≈ 0.99 of the column under the chips; ≈ 0.93 of the whole column with a two-line chip on top (the chip itself takes the
 rest). Stage figures, 32.6 picture bands and week-book figures keep KIT_FIG (33).
+
+### 32.7d A PERSON DIALOG WITHOUT OPTIONS — the text side scrolls, the person column keeps the dialog height (owner 15/11 end card; kit-keeper-1 for D36) — jk4 CSS + `kitDpNat`
+A 32.7 dialog with no `.opts` (end card "Kiếp này", Đã rõ cards): grid rows = (banner) + `minmax(0,1fr)`; `.kpmain` scrolls by itself, so the person column
+is never stretched to the text length and the whole figure stays in view (844x390 included). `kitDpNat` counts the full text (scrollHeight) for the
+32.7c height. Her own figure chip = rank + name (`kitStageFig` `named:q===S`, already on main). Narrow (portrait phone) layout unchanged.
 
 ### 32.7c PERSON DIALOG HEIGHT = ITS CONTENT (owner 11/15 "Khung to quá", "VIỆC · Có người đến") — `kitDpFit` (jk4)
 Every person dialog (32.7: visitors, invitations, confrontations, the shop) is as tall as its content — title + event text + options —

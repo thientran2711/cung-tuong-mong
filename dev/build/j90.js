@@ -23,19 +23,19 @@ function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.ass
  if(L.every(x=>x.place))L.sort((a,b)=>a.place-b.place);else{L.sort((a,b)=>(parseFloat(b.score)||0)-(parseFloat(a.score)||0));L.forEach((x,i)=>x.place=i+1)}return L}
 function kpodPrize(pz){if(!pz)return"";if(typeof pz==="string")return `<span class="kpod-pz">${pz}</span>`;
  if(Array.isArray(pz))return `<span class="kchips">${pz.filter(x=>x&&(typeof x==="string"||x[1])).map(x=>typeof x==="string"?x:kitChip(x[0],x[1])).join("")}</span>`;return""}
-function kpodName(p){if(!p)return"";if(!kitIsKnown(p))return `<b class="kname" style="--rc:#7a7e84">Người lạ</b>`;return p===S?kitName(S,{named:true}):kitName(p)}
-function kpodCol(x){const p=x.who,i=x.place-1,known=kitIsKnown(p),src=kitFigOf(p);
+function kpodName(p,x){if(x&&x.nameH)return x.nameH;/* KIT 26.1: a caller-made name (Bảng vàng player name) */if(!p)return"";if(!kitIsKnown(p))return `<b class="kname" style="--rc:#7a7e84">Người lạ</b>`;return p===S?kitName(S,{named:true}):kitName(p)}
+function kpodCol(x){const p=x.who,i=x.place-1,own=x.fig!==undefined,known=own||kitIsKnown(p),src=own?x.fig:kitFigOf(p);/* KIT 26.1 optional entry fields: fig (figure src, "" = none), face (fallback HTML), nameH, you */
  const kf=(()=>{try{const f=KIT_FIG.fac(src,p&&typeof p.age==="number"?p.age:undefined);return Math.min(1,f/KIT_FIG.man).toFixed(3)}catch(e){return 1}})();
  const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" style="--kf:${kf}" src="${src}" alt="" draggable="false" onerror="kitImgErr(this,{sel:'.kpod-fig',cls:'kpod-nofig'})">`:"";
- const fb=`<span class="kpod-fb">${kitPortrait(p,{size:"lg"})}</span>`;
+ const fb=`<span class="kpod-fb">${x.face||kitPortrait(p,{size:"lg"})||""}</span>`;/* never print "false" while the portrait list loads */
  const sc=x.score==null||x.score===""?"":typeof x.score==="number"?`${x.score} phần`:x.score;
  return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
-  `<div class="kpod-fig${src?"":" kpod-nofig"}"><span class="kpod-pool" aria-hidden="true"></span>${fig}${fb}<span class="kpod-beam" aria-hidden="true"></span><span class="kpod-motes" aria-hidden="true">${"<i></i>".repeat([5,4,3][i])}</span>${p===S||x.mine?`<span class="kpod-you">${p===S?"Ngươi":"Con ngươi"}</span>`:""}</div>`+
-  `<div class="kpod-step"><span class="kpod-medal"><img src="${KIT_DIR}medal-${i+1}.webp" alt="" onerror="this.remove()"><b>${KPOD_WORD[i]}</b></span>`+
-  `<span class="kpod-plq">${kpodName(p)}${x.sub?`<small class="kpod-sub">${x.sub}</small>`:""}${sc?`<small class="kpod-sc">${sc}</small>`:""}${kpodPrize(x.prize)}</span></div></div>`}
+  `<div class="kpod-fig${src?"":" kpod-nofig"}"><span class="kpod-pool" aria-hidden="true"></span>${fig}${fb}<span class="kpod-beam" aria-hidden="true"></span><span class="kpod-motes" aria-hidden="true">${"<i></i>".repeat([5,4,3][i])}</span></div>`+
+  `<div class="kpod-step">${p===S||x.mine?`<span class="kpod-you">${x.you||(p===S?"Ta":"Con ta")}</span>`:""}<span class="kpod-medal" title="${KPOD_WORD[i]}"><img src="${KIT_DIR}medal-${i+1}.webp" alt="" onerror="this.remove()"><b>${KPOD_WORD[i]}</b></span>`+
+  `<span class="kpod-plq">${kpodName(p,x)}${x.sub?`<small class="kpod-sub">${x.sub}</small>`:""}${sc?`<small class="kpod-sc">${sc}</small>`:""}${kpodPrize(x.prize)}</span></div></div>`}
 function kitPodium(list,o){o=o||{};const L=kpodNorm(list);const top=L.slice(0,3);const me=L.find(x=>x.who===S);
  const cols=[top[1],top[0],top[2]].filter(Boolean).map(kpodCol).join("");
- const mine=me&&me.place>3?`<div class="kpod-mine">${kitFaceH(S,"xs")}<span>Ngươi đứng thứ ${me.place} trong ${L.length} người${me.score!=null?` · ${typeof me.score==="number"?me.score+" phần":me.score}`:""}</span></div>`:"";
+ const mine=me&&me.place>3?`<div class="kpod-mine">${kitFaceH(S,"xs")}<span>Ta đứng thứ ${me.place} trong ${L.length} người${me.score!=null?` · ${typeof me.score==="number"?me.score+" phần":me.score}`:""}</span></div>`:"";
  return `<div class="kpod${me&&me.place<=3?" kpod-mine"+me.place:""}${me&&me.place===1?" kpod-win":""}${top.length<3?" kpod-n"+top.length:""}" role="dialog" aria-label="${KP_SEAL.honor}">`+
   `<div class="kpod-hd">${kpHeader("honor",o.title||"Bảng vàng",o.sub||"")}</div>`+
   `<div class="kpod-stage">${cols}</div>`+
@@ -44,9 +44,11 @@ function kpodReduced(){try{return matchMedia("(prefers-reduced-motion: reduce)")
 /* layout: step heights from content (Nhất highest), figure height from the space left */
 function kpodFit(root){try{const st=root.querySelector(".kpod-stage");if(!st)return;const cols=[...st.querySelectorAll(".kpod-col")];
  const steps=cols.map(c=>c.querySelector(".kpod-step"));steps.forEach(s=>s.style.minHeight="0px");
- const H=st.clientHeight,lift=Math.round(Math.min(56,Math.max(22,H*.06)));const by=k=>{const c=st.querySelector(".kpod-p"+k);return c?c.querySelector(".kpod-step"):null};
- let prev=0,m=0;[3,2,1].forEach(k=>{const s=by(k);if(!s)return;const h=Math.max(s.offsetHeight,prev?prev+lift/2:0);s.style.minHeight=h+"px";prev=h;m=Math.max(m,h)});
- const fh=Math.max(120,H-m-26);root.style.setProperty("--kfh",fh+"px");root.style.setProperty("--kstep",m+"px")}catch(e){}}
+ const H=st.clientHeight,lift=Math.round(Math.min(26,Math.max(10,H*.045)));const by=k=>{const c=st.querySelector(".kpod-p"+k);return c?c.querySelector(".kpod-step"):null};
+ let prev=0,m=0;[3,2,1].forEach(k=>{const s=by(k);if(!s)return;const h=Math.max(s.offsetHeight,prev?prev+lift:0);s.style.minHeight=h+"px";prev=h;m=Math.max(m,h)});
+ /* KIT 26.1 (owner 15/11 08:55Z): the plaque IS the step; the figures take ALL the height left above the tallest plaque (one figure scale, KIT_FIG) */
+ const md=st.querySelector(".kpod-medal");const poke=md?Math.round(md.offsetHeight*.42):0;
+ const fh=Math.max(60,H-m-Math.max(6,poke*.25));root.style.setProperty("--kfh",fh+"px");root.style.setProperty("--kstep",m+"px")}catch(e){}}
 /* celebration follows HER column (whatever her place), colours by place: Nhất gold-red, Nhì silver-white, Tam copper-pink; transform-only */
 const KPOD_FX={1:{pap:["#c23b22","#e0a526","#f0d070","#b0402c","#fff3c4"],pet:["#f7c6d0","#fff0f3","#e48aa4"]},
  2:{pap:["#e9edf3","#c9d1dc","#ffffff","#aeb8c6","#dfe6ee"],pet:["#ffffff","#f3f5f9","#e6ebf2"]},
@@ -112,7 +114,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
   C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));L=C.map((p,i)=>({who:p,place:i+1,score:`${String(Math.round(tot(p)*10)/10).replace(".",",")} phần`,prize:i===0?(c.r===7?"Lập làm Hoàng hậu":`Phong ${RANKS[c.r].n}`):null}))}}catch(e){L=null}
  const r=e0.apply(this,arguments);try{if(L&&L.length>=2){const m=Q.slice().reverse().find(x=>x&&x.t==="Kết quả tranh ghế"&&!x.__pod);if(m)kitPodiumTag(m,L,{sub:c.r===7?"Ghế Hoàng hậu":`Ghế ${RANKS[c.r].n}`})}}catch(e){}return r}})();
 
-/* ---------- kit CSS (tokens of j79; art img/kit/podium-bg, podium-step, medal-1..3) ---------- */
+/* ---------- kit CSS (tokens of j79; art img/kit/podium-bg, medal-1..3; podium-step.webp no longer used: KIT 26.1 plaque = step) ---------- */
 (function(){const st=document.createElement("style");st.id="kit90";st.textContent=`
 #kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
 .kpod{position:relative;width:100%;max-width:1100px;height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;
@@ -126,24 +128,25 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-col{position:relative;flex:1 1 0;min-width:0;max-width:300px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
  animation:kpodRise .7s cubic-bezier(.2,.9,.3,1.25) var(--d) both}
 .kpod-p1{max-width:330px;z-index:2}.kpod-p2,.kpod-p3{z-index:1}
-.kpod-fig{position:relative;width:100%;height:var(--kfh,300px);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
+.kpod-fig{position:relative;width:100%;height:var(--kfh,300px);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-3px;z-index:2;
  animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
-.kpod-img{height:calc(100% * var(--kf,1));width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
+/* height wins (owner 08:55Z: the figure is the biggest thing on the stage); a wide sleeve may reach a little past the column */
+.kpod-img{height:calc(100% * var(--kf,1));width:auto;max-width:150%;flex:none;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
 .kpod-img.kpod-unk{opacity:.92}
 .kpod-fb{display:none;height:100%;align-items:flex-end;justify-content:center}.kpod-nofig .kpod-img{display:none}.kpod-nofig .kpod-fb{display:flex}
 .kpod-fb .pfwrap{height:96%;display:flex;flex-direction:column;align-items:center}.kpod-fb .pcp.kit{height:100%;width:auto!important;max-width:100%}.kpod-fb .pfrw{display:none}
-.kpod-you{position:absolute;left:50%;bottom:calc(clamp(56px,11vw,100px) * .62);transform:translateX(-50%);font-family:var(--display);font-weight:700;font-size:.72rem;color:#5a3a10;background:#fff3c4;border:1px solid #a8740c;border-radius:10px;padding:1px 9px;white-space:nowrap;box-shadow:0 0 0 3px #fff3c466}
-.kpod-step{position:relative;width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 6px 10px;
- border:solid transparent;border-width:14px 8px 8px;border-image:url(img/kit/podium-step.webp) 34 14 14 fill / 14px 8px 8px stretch;background:#a8301f;background-clip:padding-box;
- box-shadow:0 10px 18px #3a1a1050;animation:kpodStep .55s ease-out var(--d) both}
-.kpod-medal{position:relative;z-index:4;width:clamp(48px,9vw,84px);margin-top:calc(clamp(48px,9vw,84px) * -.55);flex:none;filter:drop-shadow(0 3px 4px #3a1a1070)}
-.kpod-p1 .kpod-medal{width:clamp(56px,11vw,100px);margin-top:calc(clamp(56px,11vw,100px) * -.55)}
+.kpod-you{position:absolute;left:6px;top:0;transform:translateY(-55%);z-index:5;font-family:var(--display);font-weight:700;font-size:.72rem;color:#5a3a10;background:#fff3c4;border:1px solid #a8740c;border-radius:10px;padding:1px 9px;white-space:nowrap;box-shadow:0 0 0 3px #fff3c466}
+/* KIT 26.1: the step = the kit name plaque (cream card, gold hairline, no lacquered dais); the medal pokes out of its top-RIGHT corner, "Ta" sits on its top-LEFT */
+.kpod-step{--kmd:clamp(36px,6vw,58px);position:relative;width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;z-index:3;
+ background:linear-gradient(#fffaf0,#f6ead6);border:1px solid #c9a46a;border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff90,0 6px 14px #3a1a1038;
+ animation:kpodStep .55s ease-out var(--d) both}
+.kpod-p1 .kpod-step{--kmd:clamp(42px,7vw,68px);border-color:#b8862a;box-shadow:inset 0 0 0 1px #ffffff90,0 0 0 2px #e8c76a70,0 8px 18px #3a1a1040}
+.kpod-medal{position:absolute;z-index:4;right:0;top:0;width:var(--kmd);transform:translate(30%,-42%);filter:drop-shadow(0 3px 4px #3a1a1070);pointer-events:none}
 .kpod-medal img{display:block;width:100%;height:auto}
-.kpod-medal b{position:absolute;left:0;right:0;top:39.6%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:800;font-size:clamp(.78rem,1.8vw,1.1rem);line-height:1;color:#5a3010;text-shadow:0 1px 0 #fff8e0a0}
-.kpod-p1 .kpod-medal b{font-size:clamp(.9rem,2.1vw,1.3rem)}
-.kpod-plq{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;box-sizing:border-box;text-align:center;background:#fffaf0f2;border:1px solid #c9a46a;border-radius:6px;
- padding:5px 6px;box-shadow:inset 0 0 0 1px #ffffff80;overflow-wrap:anywhere}
+.kpod-medal b{position:absolute;left:0;right:0;top:39.6%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:800;font-size:calc(var(--kmd) * .24);line-height:1;color:#5a3010;text-shadow:0 1px 0 #fff8e0a0}
+.kpod-plq{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;width:100%;box-sizing:border-box;text-align:center;
+ padding:7px calc(var(--kmd) * .5);overflow-wrap:anywhere}
 .kpod-plq .kname{font-size:clamp(.74rem,1.6vw,.92rem);line-height:1.25}.kpod-plq .kti{display:block;font-size:.86em;font-weight:600}
 .kpod-sub,.kpod-sc{display:block;font-size:.7rem;color:var(--dim);line-height:1.25}.kpod-sc{font-weight:700;color:var(--ink)}
 .kpod-plq .kchips{display:flex;flex-wrap:wrap;justify-content:center;gap:3px}.kpod-plq .kchips .chip,.kpod-plq .kchip{font-size:.68rem}
@@ -154,7 +157,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
  background:linear-gradient(to bottom,rgba(var(--kl),0) 0%,rgba(var(--kl),calc(var(--ka) * .55)) 35%,rgba(var(--kl),var(--ka)) 100%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(6px);
  -webkit-mask-image:linear-gradient(to right,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(to right,transparent,#000 25%,#000 75%,transparent);
  animation:kpodFade 1s ease-out calc(var(--d) + .5s) both}
-.kpod-pool{position:absolute;left:50%;bottom:-4px;width:110%;height:clamp(22px,5.5vh,44px);transform:translate(-50%,50%);z-index:-1;pointer-events:none;border-radius:50%;
+.kpod-pool{position:absolute;left:50%;bottom:-2px;width:110%;height:clamp(22px,5.5vh,44px);transform:translate(-50%,50%);z-index:-1;pointer-events:none;border-radius:50%;
  background:radial-gradient(ellipse at center,rgba(var(--kl),var(--kpa)) 0,rgba(var(--kl),calc(var(--kpa) * .45)) 45%,rgba(var(--kl),0) 72%);animation:kpodFade .9s ease-out calc(var(--d) + .5s) both}
 .kpod-motes{position:absolute;inset:0 10%;z-index:3;pointer-events:none}
 .kpod-motes i{position:absolute;width:5px;height:5px;border-radius:50%;background:rgb(var(--kl));box-shadow:0 0 6px 2px rgba(var(--kl),.8);opacity:0;animation:kpodMote 4.2s ease-in-out infinite}
@@ -174,6 +177,15 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 @keyframes kpodFig{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes kpodFade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kpod-col,.kpod-fig,.kpod-step,.kpod-beam,.kpod-pool{animation:none!important}.kpod-motes{display:none}}
-@media (max-width:599px){.kpod-hd{padding:8px 8px 0}.kpod-hd .kptitle{font-size:.95rem}.kpod-step{padding:0 3px 8px;border-width:12px 6px 6px}.kpod-plq{padding:4px 3px}.kpod-plq .kname{font-size:.72rem}}
+@media (max-width:599px){.kpod-hd{padding:8px 8px 0}.kpod-hd .kptitle{font-size:.95rem}.kpod-plq{padding:6px calc(var(--kmd) * .38)}.kpod-plq .kname{font-size:.72rem}}
 @media (orientation:landscape) and (max-height:820px){.kpod-hd{padding-top:8px}.kpod-ft{padding:6px 12px 10px}}
+/* short landscape (844x390; was jcui's private block): compact header + one-line plaque so the figures keep their scale */
+@media (max-height:520px){
+.kpod-hd{padding:5px 10px 0}.kpod-hd .kph{padding:3px 12px;gap:8px;min-width:0}.kpod-hd .kptitle{font-size:.86rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.kpod-hd .kpsub{display:none}
+.kpod-stage{padding-top:2px}
+.kpod-step{--kmd:34px}.kpod-p1 .kpod-step{--kmd:40px}
+.kpod-plq{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:6px;row-gap:1px;padding:9px 22px 3px}
+.kpod-plq .kname{font-size:.74rem;line-height:1.2}.kpod-plq .kti{display:inline;font-size:.82em;margin-right:3px}.kpod-sub{display:none}.kpod-sc,.kpod-pz,.kpod-fx2{font-size:.66rem;line-height:1.2}
+.kpod-plq .kchips{flex:0 0 100%;gap:2px}.kpod-plq .kchips .chip,.kpod-plq .kchip{font-size:.66rem;padding:0 5px;line-height:1.35}
+.kpod-ft{padding:4px 12px 6px}.kpod-next{min-height:0;padding-top:5px;padding-bottom:5px;font-size:.9rem}}
 `;document.head.appendChild(st)})();

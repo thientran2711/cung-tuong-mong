@@ -26,7 +26,7 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | 58 | LỊCH THÁNG (kitMonthCal, kitDeskCal) | main, jmcal.js | done |
 | 59 | PLACEHOLDER PICTURES (KIT_PH) | main, jph.js | done |
 | 60 | MAKEUP COLOURS (kitSwatches, kitFaceZoom, 60.5 toilReveal) | review/mk-colour | SIGNED+FIX (K2) |
-| 61 | FIG-BG silk scroll behind full-body figures | review/fig-bg | SIGNED (K1) |
+| 61 | FIG-BG silk scroll behind full-body figures | review/fig-bg-k1 | KIT OK (kit-keeper-1; merged on main 02a0d3f1) |
 | 62 | NIGHT-END + NEW-DAY pictures (kitNightEnd, kitNewDay) | review/night-end-r2 | awaiting merge |
 | 63 | RECIPES (jrcp.js) | review/recipes-r1 | number reserved; KIT text MISSING on the branch |
 | 64 | ITEMS IN EVENTS (kitItemTag, kitItemFx) | main, jitev.js | done |
@@ -44,7 +44,10 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | **76** | **kitPalaceMap · palace detail map** (was a second "§71") | review/palace-map-port-r1 | RENUMBERED in merge-train-3 |
 | **77** | **kitStageRail · stage icon rail (Lịch · Chat · Mục tiêu)** (owner 16/11) | review/goal-strip-fix-r1 | — |
 | **78** | **PLACE ICON kitPlaceIcon + HAPPENING MARK kitHapMark** (was provisional "§71") | review/act-dedupe-r1 | FINAL (kit keeper 16/11) |
-| 79+ | free | | next free number is 79 |
+| 79 | TÁT AS A SHORT GAME · kg82SlapBar / slapGame (Foreman D) | review/slap-mg | RESERVED (HANDOVER_SESSION9); branch text says §76 → MUST RENUMBER to §79 |
+| 80 | CO-OP CHAT "Thư từ" · kitChatBtn / kitChatPanel (Foreman D) | review/coop-chat | RESERVED (HANDOVER_SESSION9); branch text says §76 → MUST RENUMBER to §80 |
+| (26.1, 32.7d) | podium plaque = step + entry fields fig/face/nameH/you; person dialog without options (text scrolls) | review/kit-keeper-1 | KIT OK (kit-keeper-1, D36) — sub-numbers of existing parts, no new top number |
+| 81+ | free | | next free number is 81 (C41 "kitHintRing §76" in FOREMAN_B_STATUS: §76 is kitPalaceMap; if it becomes a kit part it takes 81) |
 
 Why this order: face-sharp (§71) and tutorial (§72) were already registered by the coordinator in their own branch text ("§72 = coordinator registry; §71 = kitFigHD"), pcard-fill moved itself to §73 to get out of the way; buoi-transition and room-btn only had "to confirm / provisional" labels, so they move.
 
