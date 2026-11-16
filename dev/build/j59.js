@@ -227,7 +227,7 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 .tokens.j59strip{scroll-snap-type:x mandatory}
 .stage.j59 .tokens.j59strip>.tok{flex:0 0 auto;scroll-snap-align:start;box-sizing:border-box;display:flex;justify-content:center;align-items:flex-end}
 .stage.j59 .tokens.j59strip>.tok.fig .tag{max-width:none}
-/* kv3:.kv1 */:where(.kv1) .game:not(.maptab){grid-template-rows:auto minmax(40dvh,1fr) minmax(0,1fr) auto!important}
+/* kv3:.kv1 */:where(.kv1) .game:not(.maptab){grid-template-rows:auto minmax(calc(40*var(--kvh,1dvh)),1fr) minmax(0,1fr) auto!important}
 /* the stage's bottom wash (::after, #fff6e866) must sit under the people, not over her figure */
 .stage.j59::after{z-index:0}
 .stage.j59 #mefig{z-index:1}

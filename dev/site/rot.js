@@ -2,12 +2,12 @@
    The page is a thin HOST: the game runs inside ONE frame (#krotf) whose size is the DESIGN size, scaled uniformly to the screen like a
    resized window, centred, with paper-coloured bars:
      landscape (and narrow portrait phones, pre-rotated)  1180 x 820  (the iPad layout)
-     portrait (Fold-size, width/height >= 0.62)          590 x 820   (ONE PAGE = the iPad half, KIT_FRAME)
+     portrait (Fold-size, width/height >= 0.62)          590 x 852   (ONE PAGE = the iPad half + 32 px for its taller tab bar, KIT_FRAME)
      s = min(available width / design width, available height / design height)
    Narrow portrait phones (width/height < 0.62: 390x844, 412x915, 412x1058 …): the frame is also rotated 90° so the landscape layout appears
    sideways and the player turns the phone; turned to real landscape the rotation drops (no reload).
    Inside the frame the game sees ONLY the design size: innerWidth/innerHeight, every media query and every JS breakpoint read 1180x820 or
-   590x820 (one page), so the layout never reflows on the device (kitView() = {w,h,s,rot}). The browser maps touches and drags through the frame's
+   590x852 (one page), so the layout never reflows on the device (kitView() = {w,h,s,rot}). The browser maps touches and drags through the frame's
    transform, so pointer coordinates (page curl, sliders, map pan) arrive already divided by s and rotated; fixed popovers stay inside the frame.
    screen.orientation.lock('landscape') is tried only for a narrow portrait screen in an installed PWA / fullscreen (never Fold, never iPad).
    ROTATE PROMPT (owner 15/11 05:50Z "390x844 shows the rotate prompt"; review/small-bugs-3): "Xoay ngang điện thoại để chơi" shows EVERY time
@@ -18,11 +18,15 @@
    Test hook: window.__krot {host, rotated, s, dw, dh}. */
 /* KIT_FRAME (KIT §0, owner 16/11 07:47Z + 07:50Z): ONE PAGE = half of the iPad spread. Landscape = SPREAD (2 pages side by side:
    LEFT = room / stage, RIGHT = open tab); portrait = ONE PAGE at a time (room home, a tab opens the right page full screen). The only
-   design sizes: spread 1180x820, page 590x820. html.kv2 (spread) / html.kv1 (one page) = THE layout switch for chrome; never width queries. */
-window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:820},margin:8,pageMargin:4,gutter:0};
+   design sizes: spread 1180x820, page 590x852. html.kv2 (spread) / html.kv1 (one page) = THE layout switch for chrome; never width queries. */
+/* PAGE BOX (owner 16/11 17:00Z s20, OD:L345 + OD:L1278): the page content box is 582x623 in BOTH modes, so the one page IS the spread's right page
+   scaled — same columns, rows and positions (bag rows, fills by free height, everything). The one page's canvas is the spread's height + 32 px
+   because its chrome is 32 px taller (bottom bar = two rows of 4 tabs, 76 px, vs the spread's one row, 44 px; owner 16/11 13:25Z (C)).
+   box = the page content box both modes must measure (dev/test/page-scale.js fails if they differ). Change chrome height → change page.h. */
+window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0};
 function kvPages(){return innerWidth<innerHeight?1:2}
 function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
- r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");
+ r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px");
  if(!kvMark.on){kvMark.on=1;addEventListener("resize",kvMark)}}
 (function(){var inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  if(inFrame){document.documentElement.classList.add("kview-in");
