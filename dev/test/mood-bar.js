@@ -20,7 +20,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   const shot=async(nm,fn)=>{await p.evaluate(fresh);await sleep(800);const r0=await p.evaluate(fn);await sleep(3500);
    const m=await p.evaluate(()=>{const M=document.getElementById('modal');const d=M&&!M.hidden&&M.querySelector('.dlg');const dr=d&&d.getBoundingClientRect();
     const over=d?[...d.querySelectorAll('*')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>dr.right+1}).map(e=>e.className||e.tagName).slice(0,4):[];
-    return{modal:!!d,title:d?(d.querySelector('.kph,h3,h2')||{}).textContent:"",bar:!!(d&&d.querySelector('.ksbar')),hscroll:document.documentElement.scrollWidth>innerWidth+1,over,
+    return{modal:!!d,title:d?(d.querySelector('.kph,h3,h2')||{}).textContent:"",bar:!!(M&&!M.hidden&&M.querySelector('.ksbar')),hscroll:document.documentElement.scrollWidth>innerWidth+1,over,
      secs:d?[...d.querySelectorAll('.kpst,h4')].map(h=>h.textContent.trim()).filter(Boolean).slice(0,8):[]}});
    res[nm]=Object.assign({r0},m);if(m.hscroll||m.over.length)bad++;await p.screenshot({path:`${OUT}/${wh}-${nm}.jpg`,type:'jpeg',quality:60})};
   await shot('box',`(${low.toString()})(),emoBox("me"),[S.mood.v,mbBand().name]`);

@@ -42,5 +42,24 @@ change the success odds of her acts, her choices and how others see her (e.g. sa
 - Measure: `dev/measure/inmood.js` (INP2 counters) + `python3 dev/measure/anmood.py LABEL=<glob>` on runb.js sensible-bot lives.
 
 ## Status / log
-- 16/11: module + BAL + mood box + self tile + tests written; first 1-life bot run: mean v −16.7 (chronic weekly pushes too strong) → conf −3, foe cap 2,
-  bac −1, friends from thiện cảm 30.
+- 16/11: module + BAL + mood box + self tile + tests written. Tuning by bot runs (sensible bot runb.js + inpage6, 9 origins, HHSTOP):
+
+| run | change | lives | mean v | mean abs v | tuần at v ≥ 60 | tuần at v ≤ −60 | longest extreme streak | odds shift (mean / max pts) |
+|---|---|---|---|---|---|---|---|---|
+| t1 | first numbers | 1 | −16.7 | 25.4 | 0.6 % | 6.8 % | 7 | −1.95 / 6 |
+| q1 | weekly pushes softer | 4 | −26.0 | 33.2 | 0.4 % | 15.5 % | 17 | −2.25 / 6 |
+| q2 | negative feelings ×⅔ + saturation 160 | 4 | −5.5 | 18.5 | 0.0 % | 0.1 % | 1 | −0.65 / 4 |
+| q3 | feelings between, saturation 240 | 4 | −7.8 | 21.7 | 0.1 % | 1.2 % | 3 | −0.73 / 5 |
+| q4 | saturation 320, cấm túc −2, foes from oán 60 | 4 | −7.5 | 21.4 | 0.0 % | 1.9 % | 4 | −0.68 / 5 |
+| **ON (shipped numbers, rest fix)** | hỏng −3, foes cap 1 | **30** | **+4.7** | **20.3** | **0.8 %** | **0.5 %** | **5 (mean 2.3 / life)** | **+0.49 / 6** |
+
+ON histogram (v rounded to 20): −80 0 % · −60 1 % · −40 7 % · −20 18 % · 0 30 % · +20 28 % · +40 13 % · +60 3 % · +80 0 %. Pushes over 13 089 tuần:
+thành +66 818, hỏng −24 463, rest +19 855, feelings −12 253, cấm túc −10 268, foes −10 131, bạc −7 662, sick −6 393, Sức +6 766, weather −2 391,
+friends +2 646. Thiện cảm by mood +22, extra jealousy at Hân hoan +208, 36 locked show-off cards, comfort visits 1 (→ added chLow 15 % at the low band).
+
+Outcome, mood OFF (`window.__moodOff=1`, same build) vs ON, n = 30 each: Hoàng hậu 0 % vs 3 %, early death 33 % vs 30 % (causes OFF childbirth 4,
+poison 2, caught 2, illness 1, other 1 · ON childbirth 6, poison 3). With n = 30 a share has a standard error of ~8 points: no measurable
+change in outcome; the bar is not stuck (mean +4.7, extremes 1.3 % of tuần, longest streak 5 tuần) and its effect on odds is modest (≤ 6 points,
+mean +0.5). Not re-measured after chLow (adds only a rare positive push at the low band).
+- Screenshots `node dev/test/mood-bar.js` at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844: PASS (no page error, no page overflow,
+  no dialog overflow; old save without S.mood loads → Bình thản 0). Looked at all of them; long boxes scroll inside the panel on phones.
