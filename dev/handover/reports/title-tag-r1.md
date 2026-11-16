@@ -1,0 +1,5 @@
+
+## Fix for item 3 (kit keeper, 11/16): glow contrast on paintings
+- Root cause of the 1.0-1.3:1: the review/scan made letters transparent with `color:transparent` which lost to the kit's `color:var(--rt)!important` (same specificity), so the "halo" still contained the letters themselves. Fixed the test (`-webkit-text-fill-color:transparent` on `.stage .tag .j59t/.j59n`) and rewrote dev/test/stage-tag-contrast.py glow-aware (letters mask from t<bu>.png vs g<bu>.png; letter colour vs the halo behind the letters). Old stale stage-tag-contrast.js removed.
+- Kit fix (jk4 PT/HT): inner glow = stacked LIGHT tints of the rank colour (14-30 % + white) with the saturated colour only further out (neon), her tag +16px; the suggested dark hairline was NOT added (it darkens the halo behind the letters: measured 1.7:1 with it).
+- Result at 1180x820@2 (day + night): rank lines 3.6-4.0:1, names 14-17:1 (was ~1:1 only because of the broken measure). All 17 rank/servant tones computed against their 14 % tint: >= 3.2:1.
