@@ -10494,6 +10494,8 @@ RD97L.push({a:"thd_tro_11",tag:"Học trò thành Ngự sử, một lòng với 
    {n2} = another live royal child (the clever pupil, prefers a rival's child, else hers; engine-carried S.st.f14.n2). No story-only NPC. */
 function thdHocKids(){try{return allKids().filter(([k])=>k&&k.alive)}catch(e){return[]}}
 function thdHocCast(A){const vf=v=>(v.kids||[]).some(k=>k.alive);
+ /* the carried mother lost her last child: she leaves the road, another mother of a live child is cast (the engine tells the recast) */
+ try{const K=S.st.f14&&S.st.f14.act,v0=K&&K.v!=null?RV(K.v):null;if(v0&&!vf(v0))delete K.v}catch(e){}
  if(!rdCast(A,["v"],{v:vf}))return false;const v=rv67(A,"v");if(!v||!vf(v))return false;
  try{const f=(S.st&&S.st.f14)||{};const L=thdHocKids();const vk=(v.kids||[]).filter(k=>k.alive);
   let a=f.n1&&vk.some(k=>k.name===f.n1)?f.n1:vk[0].name;
@@ -44946,7 +44948,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="005acc2e5a2d";window.CTM_BUILD=BUILD;
+const BUILD="3dfccf775a26";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

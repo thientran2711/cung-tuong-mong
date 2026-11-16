@@ -6,6 +6,8 @@
    {n2} = another live royal child (the clever pupil, prefers a rival's child, else hers; engine-carried S.st.f14.n2). No story-only NPC. */
 function thdHocKids(){try{return allKids().filter(([k])=>k&&k.alive)}catch(e){return[]}}
 function thdHocCast(A){const vf=v=>(v.kids||[]).some(k=>k.alive);
+ /* the carried mother lost her last child: she leaves the road, another mother of a live child is cast (the engine tells the recast) */
+ try{const K=S.st.f14&&S.st.f14.act,v0=K&&K.v!=null?RV(K.v):null;if(v0&&!vf(v0))delete K.v}catch(e){}
  if(!rdCast(A,["v"],{v:vf}))return false;const v=rv67(A,"v");if(!v||!vf(v))return false;
  try{const f=(S.st&&S.st.f14)||{};const L=thdHocKids();const vk=(v.kids||[]).filter(k=>k.alive);
   let a=f.n1&&vk.some(k=>k.name===f.n1)?f.n1:vk[0].name;

@@ -10,11 +10,11 @@ const {chromium}=require('playwright');
 const [,,URL,NL]=process.argv;const NLIV=+NL||2;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
- p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
+ p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'load',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof eg12==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;
   const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)};
-  window.__end=(k,cs,pick)=>{quiet=true;window.__forceOrigin=k;start();quiet=false;Q.length=0;if(S.origin.k!==k||!S.st.f14)return{err:'origin '+S.origin.k};
+  window.__end=(k,cs,pick)=>{try{localStorage.setItem('ctm-tm96','1')}catch(e){}quiet=true;window.__forceOrigin=k;try{start()}catch(e){quiet=false;return{err:'start '+e.message+' '+(e.stack||'').split('\n').slice(1,3).join(' | ')}}quiet=false;Q.length=0;if(typeof S==='undefined'||!S)return{err:'no S'};if(S.origin.k!==k||!S.st.f14)return{err:'origin '+S.origin.k};
    const c=S.st.ch,P=c.plan,j=P.indexOf('end:12');const eg=!!S.st.f14.eg;const plan0=P.join(',');if(j<0)return{err:'no end:12 '+plan0};
    /* her state for the case */
    if(k!=='cnv'||cs!=='maid'){if(S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('test')}}

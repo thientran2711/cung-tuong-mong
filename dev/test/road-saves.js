@@ -2,12 +2,12 @@
    1) a save from the MAIN build (before the frame and the roads) loads, keeps its plan, has no S.st.f14.rd, plays 60 buổi;
    2) a save of this build in a life whose road is NOT full (phase-1 frame, origin dtq) loads, keeps its plan, plays on;
    3) a full-road life (tt) saved in the middle of the road (ser → deser) keeps the road, its cast and its plan, and plays on.
-   usage: node dev/test/road-saves.js <url> <main url> */
+   usage: node dev/test/road-saves.js <url> <main url> [origins, default tt] */
 const {chromium}=require('playwright');
-const [,,URL,MAIN]=process.argv;
+const [,,URL,MAIN,OR]=process.argv;/* OR = comma list of origins for the full-road mid-road save (default tt; B3: thd,cnv) */
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,700))};
  const boot=async url=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
-  p.on('pageerror',e=>errs.push(url.slice(-20)+': '+e.message.slice(0,200)));await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});
+  p.on('pageerror',e=>errs.push(url.slice(-20)+': '+e.message.slice(0,200)));await p.goto(url,{waitUntil:'load',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);return p};
  const mk=async(url,k,months)=>{const q=await boot(url);const s=await q.evaluate(([k,months])=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}
    SLOT=3;window.__forceOrigin=k;document.getElementById('title').hidden=true;quiet=true;start();quiet=false;
@@ -18,7 +18,7 @@ const [,,URL,MAIN]=process.argv;
   await q.context().close();return s};
  const olds=[];if(MAIN)olds.push(['main build (dtq)',await mk(MAIN,'dtq',3),'old']);olds.push(['this build, phase-1 frame (dtq)',await mk(URL,'dtq',3),'p1']);
  try{localStorage}catch(e){}
- const full=await mk(URL,'tt',40);olds.push(['this build, full road (tt) mid-road',full,'full']);
+ for(const o of (OR||'tt').split(',')){const full=await mk(URL,o,40);olds.push([`this build, full road (${o}) mid-road`,full,'full'])}
  const q=await boot(URL);
  for(const [nm,o,kind] of olds){if(o.retry){chk(`${nm}: save built`,false,o);continue}
   const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));
