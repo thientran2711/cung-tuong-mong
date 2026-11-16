@@ -23,7 +23,7 @@ function j76spills(c){return !!S&&!S.dead&&c>0&&used<BAL.time.khac&&used+c>BAL.t
    - the day is short (buổi tối never runs past the night) → "hết khắc trong ngày (cần N, còn M)";
    - 0 left / a spill already running → "hết khắc buổi này (cần N)" (the buổi turns first).
    A card bound to ANOTHER buổi gets a plain ✓ "N khắc": its own Buổi chip says why it is closed now. */
-function j76arrive(c){const left=Math.max(0,BAL.time.khac-used);let b=S.buoi||0,r=c-left;while(r>0&&b<B4L){b++;r-=4}return BUOI[b].replace("Buổi ","buổi ")}
+function j76arrive(c){const left=Math.max(0,BAL.time.khac-used);let b=S.buoi||0,r=c-left;while(r>0&&b<B4L){b++;r-=BAL.time.khac}return BUOI[b].replace("Buổi ","buổi ")}
 function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:true};const left=Math.max(0,BAL.time.khac-used),b=S.buoi||0;
  if(a&&a.b!=null&&a.b!==b)return{t:`${c} khắc`,ok:true};
  if(used+c<=BAL.time.khac)return{t:`${c} khắc (còn ${left})`,ok:true};
