@@ -162,7 +162,7 @@
 | nw-poem reviewer | review/nw-poem-r1 | B | session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) | DONE PASS 5d200041 (archived) | 16/11 11:47Z |
 | skin-light: owner bug player vs maid skin/light mismatch on stage (whole figure group, one kit light) | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku (opus) | RUNNING | 16/11 11:53Z |
 | cardflip-glow2: owner bug thị tẩm frame = whole-frame glow, no chasing light (kit-wide) | review/cardflip-glow2 | main s15 | session_01UV1SzhKvfZJ5FbwZFnCStj (sonnet) | RUNNING | 16/11 11:55Z |
-| skin-light | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku | SẴN SÀNG KIỂM b6147b82 | 16/11 11:57Z |
+| skin-light | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku | WAITING owner (test 477457cc; v1 b6147b82 NOT to merge) | 16/11 11:57Z |
 | cardflip-glow2: owner bug whole-frame glow in thị tẩm card flip (not a running ring light; whole group) | review/cardflip-glow2 | main s15 (fast lane worker) | worker cardflip-glow2 (sonnet) | RUNNING | 16/11 12:10Z |
 | promo-reveal-fix: LIVE regression rank-up chest + servant reveal no longer show (bisect + whole-group fix) | review/promo-reveal-fix | main s16 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus, ex promo-skip reviewer) | RUNNING | 16/11 12:17Z |
 | emperor-visit review (opus) | review/emperor-visit-r1 | D | session_01DgYSWoamKdMf5ewt8WHax6 | RUNNING | 16/11 12:18Z |
