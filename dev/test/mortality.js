@@ -19,7 +19,7 @@ const R=path.resolve(__dirname,'../..');const MONTHS=+process.argv[2]||240,LIVES
    L.end=S.dead?(S.fate||"dead")+" @ year "+S.year+" age "+S.age:"alive year "+S.year;res.lives.push(L)}
   /* forced Emperor fates */
   const F=[["childless low rank",()=>{S.rank=0;S.kids=[];S.age=22;S.sung=10}],["childless Phi",()=>{S.rank=4;S.kids=[];S.sung=20}],["childless favourite, low Đức",()=>{S.rank=3;S.kids=[];S.sung=90;S.duc=10;S.th=0;BAL.mort.fate.tuanP=100}],["childless favourite, Đức 60",()=>{S.rank=3;S.kids=[];S.sung=90;S.duc=60;BAL.mort.fate.tuanP=100}],["daughter",()=>{S.rank=2;S.kids=[mkKid("f",3)]}]];
-  for(const [n,f] of F){start();quiet();rivals.forEach(v=>v.kids=[]);S.heir=null;f();S.mort.empDue="Ngự thiện có độc";
+  for(const [n,f] of F){start();quiet();rivals.forEach(v=>v.kids=[]);S.heir=null;f();S.tho=S.age+30;S.mort.empDue="Ngự thiện có độc";
    S.month=12;let ev="";const ink=[];const ki=window.kitInk;window.kitInk=o=>ink.push(o&&o.title);try{ev=monthTick()}catch(e){res.errs.push(n+": "+String(e).slice(0,160))}
    const q=(Q[0]||{});window.kitInk=ki;res.fates.push({n,dead:S.dead,fate:S.fate,ink:ink.join("|"),t:String(q.h||"").replace(/<[^>]+>/g,'').slice(0,260)});quiet();BAL.mort.fate.tuanP=25}
   /* birth: force hard births → the Emperor's choice; stillbirth; plain hard birth survived */
