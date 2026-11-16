@@ -19,3 +19,4 @@ Before/after (visibleTrack / strayLine; rows scanned ~280 per viewport)
 | 390x844@3 | 7-15 | n/a | 94 | 0 | 0 |
 | 412x1058@2 | 15 | n/a | 94 | 0 | 0 |
 Page errors: 0 in all viewports (before and after). Act cards untouched. No new images, no kit part missing.
+- review r1: merged main 2d038139; KIT.md §46 documents the edge fade; mutation-driven fade check throttled to 150 ms.

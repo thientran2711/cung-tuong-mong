@@ -322,7 +322,8 @@ const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.rel
 function kitTabFade(){try{document.querySelectorAll(KIT_CHIPROWS).forEach(r=>{const o=r.scrollWidth>r.clientWidth+2&&getComputedStyle(r).overflowX!=="visible";r.classList.toggle("kfl",o&&r.scrollLeft>2);r.classList.toggle("kfr",o&&r.scrollLeft+r.clientWidth<r.scrollWidth-2)})}catch(e){}}
 let kitTfQ=0;function kitTabFadeSoon(){if(kitTfQ)return;kitTfQ=requestAnimationFrame(()=>{kitTfQ=0;kitTabFade()})}
 document.addEventListener("scroll",e=>{const r=e.target;if(r&&r.matches&&r.matches(KIT_CHIPROWS))kitTabFadeSoon()},true);addEventListener("resize",kitTabFadeSoon);
-try{new MutationObserver(kitTabFadeSoon).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+/* DOM changes (the page mutates ~500x/s while idle): throttled to one check per 150 ms, never per frame */
+let kitTfM=0;try{new MutationObserver(()=>{if(kitTfM)return;kitTfM=setTimeout(()=>{kitTfM=0;kitTabFadeSoon()},150)}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
 
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
