@@ -117,3 +117,6 @@ fest (owner's VIỆC Tiết Thanh minh), choice, many, court0 (person-card act r
 2. Card flip §67 (jflip): Fold 755x1000 row labels overlap under the raised card; iPad 1180x820 a faded label shows through the result chip. Fix in the kit
    card-flip layout; before/after shots (labelled, full screen). Probe hint: kit-conform.js hides `.kcf` — the flip overlay is #kroul/.kcf.
 Recipe: worktree + `bash dev/site/build_site.sh` + `python3 -m http.server`; restore index.html/sw.js/assets.json before commit; re-run dev/test/kit-fit.js (must stay 0).
+3. (s22 19:15Z) YES: the equal-gap rule (§32.2b) also covers the week-book person page (j87 kitStageFig + jsl kitBookFigClamp) and the identity card
+   (j79 kpIdFig) — whole group. Then merge latest origin/main, push ONE sha, before|after shots Fold 755x1000 + iPad 1180x820 for all items, report
+   "SẴN SÀNG KIỂM <sha>" to MAIN s22 = session_01UV1SzjhT28XQmRt2EHNffg (one reviewer for all).
