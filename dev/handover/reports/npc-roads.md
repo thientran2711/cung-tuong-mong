@@ -5,7 +5,8 @@ Branch `review/npc-roads` (base = Foreman B engine `review/road-map-next` 33b878
 engine fixes as they land; never patches jroad.js). Progress file: dev/PROGRESS_review-npc-roads.md on the branch.
 
 ## STATUS
-- STEP 1 = this PLAN (below). Build not started. Ask nothing of the owner.
+- STEP 1 = this PLAN (below), pushed 18:30Z (docs 848a3b9b).
+- U0 core + U1 consorts BUILT on review/npc-roads (see BUILD U0+U1 at the end). U2 maids + U3 men = next (design at the end).
 
 ## 0. LUẬT ƯU TIÊN SỐ 1 — what exists and is reused (checked origin/main + review/road-map-next + road-b1/b2/b3 + docs reports)
 | piece | where | reuse |
@@ -116,3 +117,57 @@ Dependency: this branch carries review/road-map-next → review/story14-p1-r2 (n
 - C1 (Foreman C AG1 npc-agent): NPC road field is `p.nr` (`p.nr.o` origin key, `p.nr.r` road id), not `p.road`.
 - Pictures: none needed for U0–U3 (help card = j72 card with the NPC's face; news = log lines). Missing pictures: NONE → nothing for C.
 - KIT: person-card road line needs an existing kit row (check pcard/kitLine §42 in U1); KIT REQUEST if none.
+
+## BUILD U0+U1 (consorts)
+- dev/build/jnroad.js (assembled after jreign.js): `p.nr` state; origin from her house (BAL.nroad.org; fromMaid → cn; tt/dtq never shared
+  with the player); road = one of the origin's 4 j67 premises, avoiding the player's road and roads other NPCs hold; chapters = ARC67[road]
+  (.4) + ROAD14[road][5..11] read at run time (missing → skipped); monthly (monthTick wrapper, host only, `__nroff` off switch) a due
+  chapter is played with her own stats: odds = odA(v, base + stat/div ± Lợi thế of her last chapter + help), stat = the one the
+  chapter's climax options reward; end = the chapter's own E tag; gain AND loss on her fields + house power (BAL.nroad.fx); real rival
+  (another consort or the player when she is cold to the player, at most BAL.nroad.meMax at once): real oán both ways, result lands on
+  the player; dead rival recast and told in the news line; dead/out NPC → road closed.
+- Help hồi: one chapter per NPC road per life (index in BAL.nroad.helpN) → j72 follow-up `nr_<kind>` (8 kinds: emp, th, hh, thu letter,
+  do (dò la, B = her rival), y (thái y), che (shelter), bac (loan)); title «{A}: «road» · Chương n «chapter»» (+ jstory «Phụ tuyến · … ·
+  Lời nhờ»); asked only with a real motive (bond ≥ askRel, same faction/side, never her own rival); options: Sức road vs bạc road
+  (bạc by rank BAL.nroad.bac/bacRk) + betray (tell her rival: rival bond +, her bond −, her chapter harder); every option cost + real loss.
+  Result → her chapter (hb ±BAL.nroad.help) + j72 nợ ân ledger + bond.
+- News: «Tin trong cung · {A} · «road» chương n: «chapter» — ending» (≤ BAL.nroad.newsMo a month; always when the player is the rival).
+- Person card (Hậu cung): row «Tuyến truyện: «road» · qua chương n: tag» in .pcinfo (same pattern as j85 ducLine / j24 danger line).
+
+## NEXT: U2 maids + U3 men (design for the successor)
+- U2 maids (jnroad.js, same engine): staff maids (`allServ()` role maid, each consort's `p.staff`) + the player's maids get `s.nr` with
+  o:"cnv" and a cnv road (cnv_chu/ban/mat/ma; their {mis} = the maid's real mistress). Help hồi asker kind "sv"/"maid" in j72 (q72A).
+  Chapters read wording by «maid» state (no S.srv for NPCs: the maid is always «kẻ hầu» in her own lines). A maid raised to consort
+  (j88 f88Carry / j8 sendMaid / j14 mlEye / jkc) keeps her nr: wrap f88Carry → `n.nr = {…m.nr, o:"cn", r: a cn road, n: next chapter}`
+  (origin cn = Cung nữ được sủng hạnh). Bot cost: ~40 maids × a monthly check — keep it O(n) with the `t` due turn (already so).
+- U3 men: NEW data (ROAD_MAP §4.10 to add, B checks canon): 20 templates × .4–.11 short off-screen lines (title + 3 ending tags with
+  k sign + test stat + cast key), attached only to real men: Thị vệ (gd): «Đường lên Thống lĩnh», «Mối tình bên cổng cung», «Án mất
+  trộm ngự khố» · Thái y: «Y thư thất truyền», «Đơn thuốc bị tráo» · Vương gia: «Đất phong», «Lòng người ngoài biên» · Nhạc sư: «Khúc
+  nhạc mừng thọ» · Sứ thần: «Điều ước hai nước» · Họa sư: «Bức họa mỹ nhân» · Tổng quản: «Ấn Tổng quản», «Đường về quê» · Kính sự
+  phòng: «Sổ ghi Kính sự phòng» · tiểu thái giám: «Từ tiểu thái giám đi lên» · quan (j55 house heads): «Ghế Thượng thư», «Lời đàn
+  hặc», «Thông gia với phủ khác» · hoàng tử (age ≥ BAL): «Thái phó và học vấn», «Ngôi Đông cung», «Ra trận lập công». Effects through
+  real fields only (S.men af/loyal, eunuch rank, house pow tdPowAdd, kid study/heir weight); Emperor + Thái hậu = jreign (no new road).
+  Help kinds reuse the 8 nr_* templates with rk "man"/"off"/"eun"/"doc" (q72A kinds exist).
+- Engine needs unchanged (§8). No pictures needed.
+
+## TESTS (U0+U1, review/npc-roads f699bbf4)
+| test | result |
+|---|---|
+| npc-roads.js @755x1000, 4 lives × 180 months (tt, dtq, thd, muoi), build = review/npc-roads + road-b1/b2/b3 merged LOCALLY (not pushed) | 38/38 PASS: 113 NPC roads, every road of her origin, chapters in order .4→.11, roads close after .11, none plays after death/close, ≤1 help hồi per NPC, 0 page errors; chapter ends 359 won / 112 middle / 263 lost; player as rival 3 of 113 |
+| same test, help part: 8 kinds × (option 0, betray) | titles «{A}: «road» · Chương n «chapter»»; ok → her next chapter +Lợi thế, betray → harder; gain-and-loss scan 24 options, 0 without cost or real loss |
+| npc-roads-saves.js @1180x820 (this build + LIVE main site save) | 5/5 PASS: main save loads, live consorts get a road (lazy), ser/deser keeps every v.nr, plays on, person card row present, 0 page errors |
+| save size | NPC road state 4.1–5.1 KB per save (25–31 consorts over 15 years) vs 640–820 KB whole save (< 1 %) |
+- On review/npc-roads ALONE only tt has .5–.11 (engine branch), so other NPC roads close after .4 until B's roads land (by design).
+- OPEN (not blocking): in bot lives the help hồi was offered 0 times in 113 roads — the bot builds no bonds, so the motive gate (bond ≥
+  BAL.nroad.askRel, same faction/side) never opens; in the forced test the quests work. Balance pass with a bond-building bot = U4.
+- Not done: screenshots (the bot page stays behind the rebirth/boot cover; the row is one text span in the existing kit person card
+  .pcinfo, j85 pattern; the help card is the unchanged j72 card) → reviewer please eyeball Hậu cung card + one nr_* offer at 755x1000 / 1180x820.
+- Kit: no CSS, no new part. VANPHONG: cổ trang lines, no %, odds shown by j72's ladder words.
+
+SẴN SÀNG KIỂM f699bbf4b9355398c7ad1387baab4f1b0bb59fc0 (U0+U1 consorts; U2/U3 next on the same branch)
+
+## HANDOVER (worker rollover, context ≈ START_CTX + 25 %)
+Successor (opened by Foreman D): continue review/npc-roads with U2 maids, U3 men, U4 bond-bot balance per 'NEXT' above. Worktree
+/home/user/wt/npcr may be reused; the local test branch tmp/npcr-full (+ /home/user/wt/npcrt) was removed — recreate by merging
+origin/review/road-b1/b2/b3 into a local copy (conflicts: assemble.py = union of lists, jbal2.js = keep both sides, index.html/sw.js
+rebuild). Tests: `node dev/test/npc-roads.js <url> 4 180` (~40 min), `node dev/test/npc-roads-saves.js <url> https://thientran2711.github.io/cung-tuong-mong/`.
