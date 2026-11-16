@@ -12,7 +12,9 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  const mk=async(name)=>{const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
   await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);const p=await ctx.newPage();p.setDefaultTimeout(150000);
   p.on('pageerror',e=>errs.push(name+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::/.test(m.text()))errs.push(name+' console: '+m.text())});
-  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return{ctx,p}};
+  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+  for(let i=0;i<120;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':(window.KLOAD?'':'ok')});if(s==='ok')break;await p.waitForTimeout(500)}/* first-run download card (jload) skipped */
+  return{ctx,p}};
  const newLife=async p=>{await p.evaluate(()=>{window.__prevS=S;SLOT=1;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}Q.length=0;start()});
   await p.waitForFunction(()=>(typeof NLP!=='undefined'&&NLP)||(S&&S!==window.__prevS&&!S.dead&&S.rkSeed));
   await p.evaluate(()=>{if(typeof NLP!=='undefined'&&NLP)nlAccept(false);Q.length=0;$('modal').hidden=true;render()});
@@ -36,7 +38,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  const board=p=>p.evaluate(()=>{const R=[...document.querySelectorAll('#krkov .krk-list .krk-row:not(.krk-hd)')].map(r=>({rk:+r.querySelector('.krk-rk').textContent,s:+r.querySelector('.krk-s b').textContent,pn:r.querySelector('.krk-pn').textContent.replace(/\s*(Ngươi|Ta)$/,''),mine:r.classList.contains('krk-mine')}));
   const me=document.querySelector('#krkov .krk-me');return{rows:R,me:me&&me.textContent,meRow:!!(me&&me.querySelector('.krk-row')),pod:[...document.querySelectorAll('#krkov .kpod-col')].map(c=>c.className.match(/kpod-p\d/)[0]+':'+c.querySelector('.kname').textContent),
    figs:[...document.querySelectorAll('#krkov .kpod-img')].map(i=>i.complete&&i.naturalWidth>0),tab:(document.querySelector('#krkov .ksubb.on')||{}).textContent}});
- const openBoard=async(p,tab)=>{await p.evaluate(t=>rkOpen(t),tab||'lives');await p.waitForFunction(()=>document.querySelector('#krkov .krk-list')||/Chưa có/.test((document.querySelector('#krkov .krk-body')||{}).textContent||''));await p.waitForTimeout(600)};
+ const openBoard=async(p,tab)=>{await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});/* first-run download card is not under test */await p.evaluate(t=>rkOpen(t),tab||'lives');await p.waitForFunction(()=>document.querySelector('#krkov .krk-list')||/Chưa có/.test((document.querySelector('#krkov .krk-body')||{}).textContent||''));await p.waitForTimeout(600)};
  const sorted=rows=>rows.every((r,i)=>!i||rows[i-1].s>=r.s)&&rows.every((r,i)=>r.rk===i+1);
 
  if(process.env.PART!=='old'){

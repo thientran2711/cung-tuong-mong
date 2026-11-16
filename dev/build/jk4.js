@@ -167,7 +167,7 @@ document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest
    overlay is picked up the same way when KIT_RASH exists). Band: headArt (31.16) or the event picture (kitEvArt), in its category frame. ---------- */
 function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src=o.src||(typeof kitFigOf==="function"?kitFigOf(q):"");if(!src)return"";
  let fx="";try{if(typeof kitFxLayers==="function"&&!/unknown-fig/.test(src))fx=kitFxLayers(q,kitFile(src));if(window.KIT_RASH&&KIT_RASH.on&&KIT_RASH.on(q)&&KIT_RASH.style){const st=KIT_RASH.style(kitFile(src));if(st)fx+=`<img class="kscar krash" src="${KIT_RASH.src(q)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}}catch(e){}
- let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true,named:q===S}):(q.name||"")/* her own figure: rank + name too (owner 15/11, not "Ngươi") */}catch(e){nm=q.name||""}}
+ let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true}):(q.name||"")}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
  return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
@@ -355,8 +355,6 @@ function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#mo
 window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran.webp":"50% 55%","ev-hoang-de-gian.webp":"50% 15%","ev-di-san.webp":"50% 15%","ev-le-thu.webp":"50% 15%","ev-le-thu-2.webp":"50% 15%","ev-le-thu-3.webp":"50% 15%","ev-le-dong-2.webp":"50% 15%","ev-thoi-tiet-3.webp":"50% 15%","ev-dieu-troi.webp":"50% 15%","ev-dieu-lanh.webp":"50% 15%","ev-mat-uoc.webp":"50% 15%"},window.KIT_FOCUS||{});/* dev/review/event-banners.md */
 function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
  const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
- /* a dialog with no option list (end card, Đã rõ cards): the text side scrolls, the figure column stays the visible height (sticky) */
- if(!narrow&&!mb.querySelector(":scope > .opts")){const cs=getComputedStyle(mb);mb.style.setProperty("--kdcolh",Math.max(80,mb.clientHeight-parseFloat(cs.paddingTop||0)-parseFloat(cs.paddingBottom||0))+"px")}else mb.style.removeProperty("--kdcolh");
  const F=[...col.querySelectorAll(":scope > .kesf")].filter(f=>!f.classList.contains("kesno"));if(!F.length)return;let wait=false;
  const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");const b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;
   if(!b){wait=true}const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
@@ -458,8 +456,6 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
 html body #modal .dlg.kdper>#mb>.opts,html body #modal .dlg.kdper>#mb>.opts.k3grid:has(> button.ka){display:flex!important;flex-direction:column!important;grid-template-columns:none!important}
 html body #modal .dlg.kdper>#mb>.opts>*:disabled{order:1!important}
 html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!important;flex:none!important;order:0!important;grid-column:auto!important;min-height:max-content!important;height:auto!important}
-#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts)){overflow-y:auto!important;grid-template-rows:none!important;grid-auto-rows:max-content}
-#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))>.kpb>.kpsubj.kes{position:sticky!important;top:0;align-self:start;height:var(--kdcolh,auto)!important}
 #modal .dlg.kdper .kes>.kesf{position:absolute;margin:0;display:block;flex:none}
 #modal .dlg.kdper .kes>.kesf .kesfi{display:block;position:relative}
 #modal .dlg.kdper .kes .kesimg{display:block;max-width:none!important;max-height:none!important}
