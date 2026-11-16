@@ -1,4 +1,4 @@
-# coop-one-world review r1 — VERDICT: PASS cb84d1ba
+# coop-one-world review r1 — VERDICT: PASS b11f70db
 
 Reviewer session_01UV1SzjwwR8MVK2MWpikBAb (opus), coordinator MAIN s24. Date 11/16/2026. START_CTX ≈ 7 % of 1M (rollover ≈ 32 %, ceiling 60 %).
 Reviewed: review/coop-one-world @ 008ed0b9 (worker report reports/coop-one-world-fix.md, audit reports/coop-one-world.md).
@@ -36,3 +36,9 @@ Rules read: START_CORE, START_WORKER, START_REVIEWER; OD "(16/11 ~19:57Z … OWN
 
 Shots: none (no UI change). Scratch: /home/user/wt/cow-notes (probes: probe-buoi.js, solo-seed.js, epi.js) — not in git.
 ~95 % xong / ~90 % chơi được (co-op one world).
+
+## Addendum (s24 21:00Z note, sent to s25): worker head 912ca80b
+- 912ca80b (test-only on top of 008ed0b9: dev/tools/quickcheck.d/50-coop-one-world.sh, coop-serve optional root, probe takes QC_WT) merged → **review/coop-one-world-r1 @ b11f70db** (ff from main c1e1bbd1). The gate hook runs: 2 seeds PASS. Main's quickcheck.sh does not run quickcheck.d yet (that lands with review/one-core-land), so the hook is inert until then.
+- quickcheck b11f70db: PASS · 202 s · open 1046 ms · old save ok · render 304/351, tab 324/355, buổi 1098/1164 ms, tasks>200ms 13/13.
+- coop-world.js claim "28/30, only stale pre-night-gate checks": NOT reproduced. 3 runs on the branch and 1 on a main c1e1bbd1 build all end in the same test-script crash (TypeError reading 'name'/'id' in page.evaluate; on main and on one branch run also FAIL "each sees the other" / "A sees B in the garden"). The test is stale on main as well, so these are not branch faults; it needs a rewrite before it counts as a gate.
+- assemble.py order note (jnf.js BEFORE jcoopone.js): jnf.js is not on main yet; whoever lands it must keep jcoopone.js LAST. coop-contest's W_KEYS additions must be unioned with thIll/cm/men/menG2 (+ main's tn).
