@@ -16983,7 +16983,9 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
     use: the master pays useBac bạc (dress, rouge); a used maid who rises turns her back at useTurn % (loyalty set under riseLoy).
     riseLoy / riseRel = a risen maid with lòng ≥ riseLoy stays her old master's friend (relation ±riseRel; j14, was 60 / 25).
     seekCd = months before the same maid seeks his notice again (after her seek ends or she is punished). */
- frameCatch:30,poisonCatch:40,hitCatch:30,caughtDuc:3,caughtDanh:2,caughtOan:10,useBac:20,useTurn:35,riseLoy:60,riseRel:25,seekCd:6}});
+ frameCatch:30,poisonCatch:40,hitCatch:30,caughtDuc:3,caughtDanh:2,caughtOan:10,useBac:20,useTurn:35,riseLoy:60,riseRel:25,seekCd:6,
+ /* review/servant-mline-r3 (ONE CORE, same values): fightLose = % that the scuffle loser is the maid who started it; poisonW = deed weight of a caught poisoning (frame / beat = 1) */
+ fightLose:50,poisonW:2}});
 /* ================= j92: VẬT PHẨM · TRANG PHỤC · MẠNG CHE MẶT (logic + data only; UI through kit components) ================= */
 /* ---- KIT_VEIL: pearl-strand face veils by rank (hủy dung, j70 scarOf(p).veil / p.scar.veil) ----
    img/veil-t1..t8.png (480x445, transparent, gpt-2-6): one per consort rank 0..7 (Đáp ứng → Hoàng hậu), richer each step:
@@ -37293,19 +37295,19 @@ function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"
  const M=(p.staff||[]).filter(s=>s.role==="maid");if(!M.length||!roll(B.feud))return"";
  const foes=others(p).filter(t=>t&&(!G||t===S)&&(t.staff||[]).some(x=>x.role==="maid")&&hostility(p,t)>=B.feudHost);if(!foes.length)return"";
  const t=pick(foes),a=pick(M),b=pick(t.staff.filter(x=>x.role==="maid"));if(!a||!b)return"";const see=mlSee(p,t);const k=roll(B.feudPoison)?"poison":roll(B.feudFrame)?"frame":"fight";mlC("feud_"+k);
- if(k==="fight"){a.loyal=cl(a.loyal+B.fightLoy,0,100);b.loyal=cl(b.loyal+B.fightLoy,0,100);const l=roll(50)?a:b;/* the loser of the scuffle is slapped: either side */mlFx(typeof slapGive==="function"?slapGive:null,l,l===a?t:p,"cãi nhau giành việc");
+ if(k==="fight"){a.loyal=cl(a.loyal+B.fightLoy,0,100);b.loyal=cl(b.loyal+B.fightLoy,0,100);const l=roll(B.fightLose)?a:b;/* the loser of the scuffle is slapped: either side */mlFx(typeof slapGive==="function"?slapGive:null,l,l===a?t:p,"cãi nhau giành việc");
   if(see)ev+=`${a.name} (cung ${NM(p)}) và ${b.name} (cung ${NM(t)}) giành việc ở Nội vụ phủ, cào cấu nhau giữa sân; ${l.name} bị tát. `}
  else if(k==="frame"){if(roll(B.frameCatch)){/* caught: b is cleared, a is punished by her own master to save face */
    a.loyal=cl(a.loyal-B.frameLoy,0,100);mlFx(typeof penGive==="function"?penGive:null,a,"quy","bị bắt quả tang vu oan người khác",p);
    const d=mlCaught(p,t,"frame",1,`sai người hầu vu oan cung nữ cung ${t===S?"ta":t.name}`);
-   if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp, bị ${t===S?"ngươi":t.name} tra ra; ${a.name} bị phạt quỳ${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ trên ${p.name} +${d}`:""}. `}
+   if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp, bị ${t===S?"ngươi":t.name} tra ra; ${a.name} bị phạt quỳ${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
   else{b.loyal=cl(b.loyal-B.frameLoy,0,100);b.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,b,"quy","bị vu ăn cắp",t);
    if(roll(B.frameOut)&&t!==S){t.staff.splice(t.staff.indexOf(b),1);mlC("frameOut")}if(see)ev+=`${a.name} (cung ${NM(p)}) vu cho ${b.name} (cung ${NM(t)}) ăn cắp; ${b.name} bị phạt quỳ${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}}
  else{mlFx(typeof pzGive==="function"?pzGive:null,b,B.poisonLv,"bị bỏ độc vào bát cơm",p);let died=false;if(roll(B.poisonDie)){(t.staff||[]).splice(t.staff.indexOf(b),1);died=true;mlC("poisonDie");if(see)ev+=`${b.name} (cung ${NM(t)}) ăn bát cơm ${a.name} (cung ${NM(p)}) đưa sang, không qua khỏi. `}
   else if(see)ev+=`${b.name} (cung ${NM(t)}) trúng độc trong bát cơm, môi tím tái mấy ngày. `;
   if(roll(B.poisonCatch)){/* caught: the poisoner is taken to Thận hình ti (leaves her master) */const i=p.staff.indexOf(a);if(i>=0)p.staff.splice(i,1);mlC("poisonOut");
-   const d=mlCaught(p,t,"poison",2,`sai người hầu bỏ độc cung nữ cung ${t===S?"ta":t.name}`);
-   if(see)ev+=`Thái y tra ra độc trong bát cơm ${a.name} (cung ${NM(p)}) đưa sang; ${a.name} bị giải sang Thận hình ti${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ trên ${p.name} +${d}`:""}. `}}
+   const d=mlCaught(p,t,"poison",B.poisonW,`sai người hầu bỏ độc cung nữ cung ${t===S?"ta":t.name}`);
+   if(see)ev+=`Thái y tra ra độc trong bát cơm ${a.name} (cung ${NM(p)}) đưa sang; ${a.name} bị giải sang Thận hình ti${p===S?`; Danh −${B.caughtDanh}`:t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}}
  return ev}
 /* 4. a consort targets another palace's maid (co-op guest: pickTarget (jcoopworld) returns only her, so an NPC's act aimed at her
    household lands on her side, NPC vs NPC rolls on the host) */
@@ -37315,9 +37317,9 @@ function mlHit(p){const B=mlB();if(p===S||!roll(B.hit))return"";const t=pickTarg
  else if(k==="beat"){mlFx(typeof slapGive==="function"?slapGive:null,s,p,`bị ${p.name} đánh`);s.loyal=cl(s.loyal+B.beatLoy,0,100);
   /* a beating is done in the open: always a true deed; the victim's mistress resents it, and holds proof of it at hitEv % */
   deedAdd(p,"mlbeat",t,1,`đánh người hầu cung ${t===S?"ta":t.name} giữa đường`);oanAdd(t,p,B.caughtOan);const d=roll(B.hitEv)?evA(t,p,B.evN):0;mlC("ev",d);if(t===S)mlC("evMe",d);
-  if(see)ev+=`${p.name} gặp ${s.name} (cung ${NM(t)}) giữa đường, bắt quỳ, sai vả miệng${t===S?`; nàng về khóc với ngươi (thiện cảm +${B.beatLoy})${d?`; chứng cứ trên ${p.name} +${d}`:""}`:""}. `}
+  if(see)ev+=`${p.name} gặp ${s.name} (cung ${NM(t)}) giữa đường, bắt quỳ, sai vả miệng${t===S?`; nàng về khóc với ngươi (thiện cảm +${B.beatLoy})${d?`; chứng cứ về ${p.name} +${d}`:""}`:""}. `}
  else if(roll(B.hitCatch)){/* caught: the maid is cleared, the consort behind it is exposed */const d=mlCaught(p,t,"hframe",1,`vu oan người hầu cung ${t===S?"ta":t.name}`);
-  if(see)ev+=`Người của ${p.name} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ, bị tra ra; ${p.name} mất mặt${t===S&&d?`; chứng cứ trên ${p.name} +${d}`:""}. `}
+  if(see)ev+=`Người của ${p.name} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ, bị tra ra; ${p.name} mất mặt${t===S&&d?`; chứng cứ về ${p.name} +${d}`:""}. `}
  else{s.loyal=cl(s.loyal-B.frameLoy,0,100);s.trouble=wk();mlFx(typeof penGive==="function"?penGive:null,s,"quy",`bị ${p.name} vu tội`,p);if(t!==S&&roll(B.frameOut)){t.staff.splice(t.staff.indexOf(s),1);mlC("frameOut")}
   if(see)ev+=`Người của ${p.name} vu cho ${s.name} (cung ${NM(t)}) làm vỡ đồ ngự tứ; ${s.name} bị phạt${t===S?" (ngươi có thể Che chở ở Hậu cung › Cung nhân)":""}. `}
  return ev}
@@ -37354,7 +37356,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="94d406130ee1";window.CTM_BUILD=BUILD;
+const BUILD="8e18cd8bd2e1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
