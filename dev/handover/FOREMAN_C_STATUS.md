@@ -1,8 +1,27 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+NEXT FOREMAN C SESSION: opened by session 3 at 15:50Z 16/11 (id in the line below once created). Session 3 stops; its hourly trigger trig_01HmZ7ThpeFBcFqGr6YqchsV is DISABLED.
+
+## HANDOVER (Foreman C session 3 → session 4, 15:50Z 16/11)
+Why: session 3 context ~29% (START_CTX ~7% → limit 32%), and a large new ART load arrived (owner 15:35Z: ALL drawing is Foreman C's). Session 4: read this block, SESSION 3 LOG, ## PASS, ## QUESTIONS, CLAIMS.md rows with C, dev/handover/reports/ (new), FOREMAN_C.md lines from '(15:25Z s18)' on, OWNER_DECISIONS from 16/11 14:45Z on. Push helper used by s3: /home/user/wt/push.sh (union-resolves CLAIMS/STATUS) — recreate it (fetch --depth=30 under flock, rebase, union conflict markers, push).
+RUNNING sessions (C):
+- review/title-sys-r1 — opus reviewer session_011xDdVPyukDTYtkKKSrnDY8 (TITLE SYSTEM phase 1 @06dd80ae). On PASS → ## PASS; then phase 2 (emperor hiệu, confiscation/atonement, theft via Foreman D's item ledger, sắc phong items) is the next C item.
+- review/schedules3-r4 → people-ledger — opus worker session_011xDdVNZkQ6SnAs8Rttsbwj. Told at 15:45Z (past its limit) to finish STAGE 1 only (report reports/review-schedules3-r4.md 'SẴN SÀNG KIỂM') and write a HANDOVER for STAGE 2 PEOPLE LEDGER (branch review/people-ledger @afcac6cb) in that report, then stop. Session 4: open opus reviewer review/schedules3-r5 for stage 1, and an opus SUCCESSOR for stage 2 (brief: owner OD 13:40Z/13:42Z/13:50Z + FOREMAN_C 13:55Z/14:15Z/14:25Z, continue from the handover). Archive the old worker.
+- review/story14-p1-r2 — opus worker session_011xDdVPicFAyWqznz92TPU8 told at 15:45Z to push WIP + write reports/review-story14-p1-r2.md 'HANDOVER TO FOREMAN B' and stop (owner 15:35Z: story roads → Foreman B only; C keeps only story-chapter ART). Then archive it and note the hand-off in QUESTIONS for Foreman B.
+NEW ART LOAD (owner 15:35Z OD:L1345 (2): "giao tài khoản C vẽ toàn bộ mọi thứ"; owner checks pictures WITH C DIRECTLY → send samples to her with SendUserFile, short Vietnamese caption). Claim each in CLAIMS before opening (sonnet art workers; Magnific gpt-2-6; no rosy layer; cổ trang Trung Hoa; look at every image):
+  (a) FIGURE-PROPORTION AUDIT of every full-body figure vs her standard female/male proportion (Thái hậu squashed; 1.4 too tall; no stretching) → list + 3 samples to her first; sizes from main's review/kit-size (4 figure sizes) once KIT READY (OD 16/11 15:00Z GROUP 1–2, FOREMAN_C 15:25Z).
+  (b) transition / night pictures: NO clear faces, BACKS only; the 3 'Gối đầu' pictures REJECTED → repaint, 1 sample first.
+  (c) anim-pace season + festival buổi-transition SAMPLE art (1 each, then the rest) + buổi icons sáng/trưa/chiều/tối (OD 15:10Z 7.5) — code/motion by review/anim-pace session_01UV1SzjsxJomT3ov3kXyta3; coordinate directly.
+  (d) calendar icon in ancient Chinese style + square-icon art (OD 15:10Z group 8; code by session_01UV1SzgoYoth94RALW92Jg4); placeholder picture sets per orientation/size for kit-size/kit-marks (7.3).
+  (e) story-chapter art (from story roads, once Foreman B asks).
+  Held: C9 huadian #4 + D23 mole audit until main's skin-norosy is live.
+SAMPLES SENT TO THE OWNER (15:45Z, SendUserFile in C's chat): title plates (3 tiers), item art audit sheet (16 missing + 46 low-res; batch ~2,700 cr), cắm hoa board + podium spring/autumn. Waiting for her verdict → then mass production workers.
+Main session now: MAIN SESSION 18/19 (see HANDOVER_SESSION9.md); send_message from account C to main sessions fails ('not found') → use QUESTIONS.
+
+
 ORDER 16/11 applied (session 3): separate sessions only, claim before work, hourly self-wake trig_01HmZ7ThpeFBcFqGr6YqchsV (fires :30 each hour into session_011xDdVSPB2kuFjWy26nTiZa), no art until main hands a batch.
 START_CTX (session 3) = ~7% (~70k of 1M; get_session reads 0, own estimate). Roll over at >= 32% of the window, hard ceiling 60%, or at first summarisation.
-last wake: 14:45Z 16/11
+last wake: 15:45Z 16/11
 Connectors (session 3, 10:35Z): Cloudflare token active · disk 27 GB free, .git 1.6 GB (no repack).
 
 ## SESSION 3 LOG
@@ -122,6 +141,7 @@ Base main at start: 900ace7fb.
 | D-list rest (D3, D9, D11–D14, D19, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
+PASS review/b-answers-art-r1 82756a8010e59bcbdcda035e176fd89cf7d583e4 (3 D50 full-body figures Phế phi họ Lý / Quản sự Tân Giả khố / Thầy dạy Thượng thư phòng, 4 age bands, FIGURES-others.json; descends from origin/main 2232ea32; 'Sáng hôm sau' banner img/ev-morning-after-b.webp on CDN — slot only on review/emperor-visit jvisit.js:81; cắm hoa sample NOT wired; note: lone figure name label near stage bottom at 755x1000 (shared stage layout))
 PASS review/art-complete-r2 d5ca28a8a8f803ed4f4302c3b4bfb34a83853bb0 (orphan #29: A12 eunuch picker + grown kids; descends from origin/main 0ee35a63; code delta jartc.js +15 lines only; 3780 picks 0 empty; 1152 CDN files 200; no rosy layer; follow-ups in reports/review-art-complete-r2.md)
 PASS review/item512-art-r1 f9d1095615598d34d697fd569deb6c20ae0f571f (item512 art: 22 items needed no new art (IT-key mapping), 8 marks redrawn → img/mark512/, pets 88/88 OK; parent chain contains origin/main 18fb8252; only PROGRESS + 2 contact sheets, no game code; report reports/review-item512-art-r1.md)
 PASS review/perf-r1 d2221602f32c24270fe5d50b36ac78be3775edf6 (D15 download-size + perf; descends from origin/main 399483e3; reviewer fixed first-hour list missing the cung nữ life + SW iframe mismatch; HOST mode + SW + cold profile measured; report reports/review-perf-r1.md; K16 (index.html fetched 3×) still a kit-keeper request)

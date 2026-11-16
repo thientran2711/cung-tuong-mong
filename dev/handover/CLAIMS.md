@@ -203,7 +203,7 @@
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | (opening) | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | (opening) | RUNNING | 16/11 13:45Z |
 | mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | session_01N1tNP2JhbsLfaydyiNBr2T | RUNNING | 16/11 13:45Z |
-| story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | session_011xDdVPicFAyWqznz92TPU8 | RUNNING | 16/11 13:45Z |
+| story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C→B | session_011xDdVPicFAyWqznz92TPU8 | HANDING TO FOREMAN B (owner 15:35Z story roads → B) | 16/11 13:45Z |
 | A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | session_011xDdVNdbaZdiyTm7es9XyE | PASS d5ca28a8 | 16/11 13:45Z |
 | TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | session_011xDdVQBTWm3Y9JWADY4izD (successor 2; #1 session_011xDdVSqS6DtgnaKSH6DMoG rolled over @e464c0f0) | SẴN SÀNG KIỂM 06dd80ae | 16/11 13:45Z |
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | session_011xDdVQyUUHebsanYuwk4gH | SAMPLE READY (waits owner) | 16/11 13:45Z |
@@ -227,7 +227,7 @@
 | phone-bars review (sonnet; 3a022369 incl. design-scale-p2-r1 d8950434) | review/phone-bars-r1 | main s18 | session_01UV1SzivoRHdnDUDwc6UZKt | RUNNING | 16/11 14:30Z |
 | promo-rules.js 755 'reveal shown' FAIL — pre-existing on main ee5d33de (found by mt8), fix owed | (to assign) | main s18 | — | OPEN | 16/11 14:30Z |
 | D29 fix r4 (jroute ledger bypass) THEN PEOPLE LEDGER (OD 13:40Z/13:50Z, inbox 13:55Z/14:15Z/14:25Z) — one opus worker, same files | review/schedules3-r4 → review/people-ledger | C | session_011xDdVNZkQ6SnAs8Rttsbwj | RUNNING | 16/11 14:45Z |
-| b-answers-art review (sonnet) | review/b-answers-art-r1 | C | session_011xDdVNJ5KnQBuvmjYW1icF | RUNNING | 16/11 14:45Z |
+| b-answers-art review (sonnet) | review/b-answers-art-r1 | C | session_011xDdVNJ5KnQBuvmjYW1icF | PASS 82756a80 | 16/11 14:45Z |
 | history-maid-nights expert (sonnet; OD 15:05Z (3)): maids serving the Emperor, unranked mothers, low-born children, promotion when a seat frees — history, dramas, games → report | (report only) | main s18 | session_01UV1SzkcknDUwnxx9Dk4v3Q | RUNNING | 16/11 15:08Z |
 | square-icons: round icon buttons (room left column + every round icon button) → square kit button (OD 15:05Z (1)) | review/square-icons | main s18 | session_01UV1SzgoYoth94RALW92Jg4 | RUNNING | 16/11 15:08Z |
 | anim-pace: buổi transition full-screen in landscape, clearer, slower + whole-game animation pace audit + season/festival transition variants sample (OD 15:05Z (5)(6)) | review/anim-pace | main s18 | session_01UV1SzjsxJomT3ov3kXyta3 | RUNNING | 16/11 15:08Z |
