@@ -228,3 +228,7 @@
 | promo-rules.js 755 'reveal shown' FAIL — pre-existing on main ee5d33de (found by mt8), fix owed | (to assign) | main s18 | — | OPEN | 16/11 14:30Z |
 | D29 fix r4 (jroute ledger bypass) THEN PEOPLE LEDGER (OD 13:40Z/13:50Z, inbox 13:55Z/14:15Z/14:25Z) — one opus worker, same files | review/schedules3-r4 → review/people-ledger | C | session_011xDdVNZkQ6SnAs8Rttsbwj | RUNNING | 16/11 14:45Z |
 | b-answers-art review (sonnet) | review/b-answers-art-r1 | C | session_011xDdVNJ5KnQBuvmjYW1icF | RUNNING | 16/11 14:45Z |
+| history-maid-nights expert (sonnet; OD 15:05Z (3)): maids serving the Emperor, unranked mothers, low-born children, promotion when a seat frees — history, dramas, games → report | (report only) | main s18 | (opening) | RUNNING | 16/11 15:08Z |
+| square-icons: round icon buttons (room left column + every round icon button) → square kit button (OD 15:05Z (1)) | review/square-icons | main s18 | (opening) | RUNNING | 16/11 15:08Z |
+| anim-pace: buổi transition full-screen in landscape, clearer, slower + whole-game animation pace audit + season/festival transition variants sample (OD 15:05Z (5)(6)) | review/anim-pace | main s18 | (opening) | RUNNING | 16/11 15:08Z |
+| lag-play (opus): play-time + co-op lag audit, fix top causes, play-time perf budget test (OD 15:05Z (4), first priority) | review/lag-play | main s18 | (opening) | RUNNING | 16/11 15:08Z |
