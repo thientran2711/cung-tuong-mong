@@ -126,7 +126,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* a picture the option already carries: that picture, in the slot */
  if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-act-/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
- if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
+ if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
