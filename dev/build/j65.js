@@ -138,7 +138,8 @@ function fixToast(){const t=document.getElementById("rtoast");if(!t||t.dataset.n
  t.dataset.nr=t.innerHTML.length+""}
 try{const rs0=resultShow;resultShow=function(){const r=rs0.apply(this,arguments);try{fixToast()}catch(e){console.error(e)}return r}}catch(e){}
 /* tooltips that only repeat the visible text (kept where the text is cut off) */
-function fixTitles(){document.querySelectorAll("[title]").forEach(e=>{const a=T(e.getAttribute("title")).replace(/^·\s*/,""),b=T(e.textContent).replace(/^·\s*/,"");if(a&&a===b&&e.scrollWidth<=e.clientWidth+1&&e.clientWidth>0)e.removeAttribute("title")})}
+/* lag-play: all measurements first, then the removals (a removal between two reads forced one layout per titled element) */
+function fixTitles(){const R=[];document.querySelectorAll("[title]").forEach(e=>{const a=T(e.getAttribute("title")).replace(/^·\s*/,""),b=T(e.textContent).replace(/^·\s*/,"");if(a&&a===b&&e.scrollWidth<=e.clientWidth+1&&e.clientWidth>0)R.push(e)});R.forEach(e=>e.removeAttribute("title"))}
 
 /* ===== stated deltas = real deltas (owner 11/14: "Lòng cung nữ +6" when only +3 fitted under 100) ===== */
 const BOUNDS={th:[-100,100],hh:[-100,100]};
