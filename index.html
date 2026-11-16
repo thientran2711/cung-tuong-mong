@@ -16838,6 +16838,8 @@ Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:80
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
    Reviewer r1 (coordinator ruling 15/11): owner rule 08:10Z wins -> false (no allowance, no "quá hạn mức"). */
 Object.assign(BAL,{itd:{allow:false}});
+/* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
+BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* ================= jdiff: ĐỘ KHÓ KIẾP NÀY · Dễ / Vừa / Khó (owner 11/14 21:30Z, OD:L85; row placement OD:L128) =================
    Re-port of review/difficulty v8 onto main (review/difficulty-port, D31).
    Chosen on the identity card ("Thân phận kiếp này", while NLP is set), stored per life in S.diff ("de" | "vua" | "kho"),
@@ -20310,9 +20312,7 @@ window.rashGive=rashGive;window.RASH=RASH;
 /* ================= jearn: ĐỒ PHẢI CÓ ĐƯỢC, KHÔNG TỰ RƠI XUỐNG (owner 11/14 19:30Z, review/items-earned) =================
    Audit + rules: dev/ITEMS_EARNED.md. Every item comes from crafting, buying or being given/rewarded; the same for NPCs.
    This module holds the small fixes to the free grants other than the veil (jveil). ================= */
-/* review/balance carries jk2b's Tư trang (K2) but not j92cat's collection counter: without it the wardrobe block threw
-   "wdColInfo is not defined" and vanished. Minimal stand-in until the wardrobe catalogue (j92cat) lands: count what she holds. */
-if(typeof wdColInfo!=="function"){window.wdColInfo=function(){let n=0;try{const w=wdOf(S);const seen={};for(const sl of ["tram","y"])if(w[sl])seen[w[sl].k]=1;(S.inv||[]).forEach(e=>{if(e&&!e.h&&wdItem(e))seen[e.k]=1});n=Object.keys(seen).length}catch(e){}return{n,title:null,next:null}}}
+/* wdColInfo (collection counter) now lives in jcol.js (D49); the old stand-in is gone. */
 
 /* ---------- 1. Trang phục: no phantom "phẩm phục được cấp" that is always at hand ----------
    Before (j92): everyone wore a free {from:"base"} outfit of her CURRENT phẩm, re-issued out of nothing after a promotion,
@@ -20343,6 +20343,55 @@ function earnFromChest(p,sl){const P=Math.min(8,wdPOf(p));const L=(p.inv||[]).fi
 (function(){if(typeof wdOffUI!=="function")return;const f0=wdOffUI;wdOffUI=function(sl){if(sl==="y"){try{log("Muốn thay y phục, chọn bộ khác trong Rương đồ rồi Mặc.")}catch(e){}return}return f0.apply(this,arguments)};window.wdOffUI=wdOffUI})();
 (function(){if(typeof wdInvHTML!=="function")return;const h0=wdInvHTML;wdInvHTML=function(){const h=h0.apply(this,arguments);return h.replace(/<button data-wd="off" data-sl="y"[\s\S]*?<\/button>/g,"")}})();
 (function(){if(typeof wdSrcTxt!=="function")return;const s0=wdSrcTxt;wdSrcTxt=function(e){if(e&&e.src==="cap")return"Nội vụ phủ cấp khi nhập cung";if(e&&e.src==="nvp")return`Nội vụ phủ cấp${e.d?", "+e.d:""}`;return s0.apply(this,arguments)}})();
+/* ================= jcol: BỘ SƯU TẬP -> DANH HIỆU + PHÚC DUYÊN (D49; owner 11/14: OD L45-46) =================
+   Per life, S.col = every distinct item kind she has ever held (chest or worn). Reaching BAL.col.ms counts (20/50/100/200) gives a
+   danh hiệu (kept in Sổ luân hồi, shown in its Bộ sưu tập section) and Phúc duyên (pdAdd, so a kiếp dở dang loses it like every other
+   Phúc duyên of the life). Once per life: the grant is also written to a persistent ledger keyed by the life ("cung-colms"), so loading
+   an earlier save of the same life never pays twice. Old saves: S.col is built from what she holds now, milestones already reached are
+   granted once (one card). Per-player: nothing here is sent in co-op. Replaces the jearn stand-in (wdColInfo).
+   UI: kitRows (rows67) in the existing reward card (kind "reward") and in the Sổ luân hồi page; no new part. */
+const COLL_KEY="cung-colms";
+function colLedger(){let d=null;try{d=store.get(COLL_KEY)}catch(e){}if(!d||typeof d!=="object")d={best:0,ms:{},lives:{}};d.ms=d.ms||{};d.lives=d.lives||{};return d}
+function colLedgerSave(d){try{const k=Object.keys(d.lives);if(k.length>BAL.col.keep)k.slice(0,k.length-BAL.col.keep).forEach(x=>delete d.lives[x]);store.set(COLL_KEY,d)}catch(e){}}
+/* unique life id stamped when the life starts (a same-name same-origin new life must not inherit the old life's once-only grants); old saves without it fall back to name|origin */
+function colId(){return S&&S.origin?(S.colLid||`${S.name}|${S.origin.k}`):""}
+if(typeof start==="function")(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&!S.colLid)S.colLid="L"+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}catch(e){}return r}})();
+function colHeld(){const out={};try{const w=wdOf(S);for(const sl of ["tram","y"])if(w&&w[sl]&&w[sl].k)out[w[sl].k]=1}catch(e){}
+ (S.inv||[]).forEach(e=>{if(e&&e.k&&!e.h&&typeof IT!=="undefined"&&IT[e.k])out[e.k]=1});return out}
+function colN(){return S&&S.col?Object.keys(S.col).length:0}
+function colMsList(){return BAL.col.ms}
+function colTitleOf(n){let t=null;for(const m of colMsList())if(n>=m[0])t=m;return t}
+function colNext(n){return colMsList().find(m=>n<m[0])||null}
+/* what the old stand-in returned, now real: {n, title, next} */
+window.wdColInfo=function(){const n=colN(),t=colTitleOf(n),x=colNext(n);return{n,title:t?t[2]:null,next:x?{at:x[0],more:x[0]-n,title:x[2]}:null}};
+let colBusy=false;
+function colCheck(){if(!S||S.dead||colBusy||!S.origin||!S.name||(typeof NLP!=="undefined"&&NLP))return;colBusy=true;try{
+ S.col=S.col||{};const h=colHeld();for(const k in h)S.col[k]=1;const n=colN();
+ const L=colLedger(),id=colId();const mine=L.lives[id]=L.lives[id]||{};S.colMs=S.colMs||{};
+ const got=[];for(const m of colMsList()){if(n<m[0])continue;if(mine[m[0]]){S.colMs[m[0]]=1;continue}
+  mine[m[0]]=1;S.colMs[m[0]]=1;L.ms[m[0]]=(L.ms[m[0]]||0)+1;got.push(m)}
+ if(n>(L.best||0))L.best=n;
+ if(got.length||n>(mine.n||0)){mine.n=n;colLedgerSave(L)}
+ if(!got.length)return;
+ let pd=0;for(const m of got){pd+=m[1];try{pdAdd(m[1],`bộ sưu tập đủ ${m[0]} món, được danh hiệu «${m[2]}»`,"col_"+m[0])}catch(e){}}
+ const top=got[got.length-1],nx=colNext(n);
+ Q.push({t:"Bộ sưu tập",kind:"reward",who:pMe(),h:`<p>Trong rương đã có ${n} món khác nhau.</p>`+rows67([["Danh hiệu",got.map(m=>`«${m[2]}»`).join(", "),"g"],["Phúc duyên",`+${pd}`,"g"],["Đã tích",`${n} món`,"t"],nx?["Mốc kế",`«${nx[2]}» khi đủ ${nx[0]} món`,"t"]:["Mốc kế","Đã đủ mọi danh hiệu","t"]])+`<p class="past">Danh hiệu ghi vào Sổ luân hồi. Phúc duyên chỉ nhận một lần mỗi kiếp; kiếp dở dang thì mất.</p>`});
+ setTimeout(()=>{try{const M=$("modal");if(M&&M.hidden&&Q.length)showModal()}catch(e){}},0)
+ }catch(e){console.error(e)}finally{colBusy=false}}
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{colCheck()}catch(e){}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{colCheck()}catch(e){}return r}})();
+/* Sổ luân hồi: Bộ sưu tập section (kitRows); old books have no ledger -> empty section hidden unless a life is running */
+function colBookHTML(){const L=colLedger();const any=Object.keys(L.ms).length||L.best;const live=S&&!S.dead&&S.origin;if(!any&&!live)return"";
+ const R=[];const n=live?(colN()||0):0;
+ if(live){const x=colNext(n);R.push(["Kiếp này",`${n} món${colTitleOf(n)?` · «${colTitleOf(n)[2]}»`:""}`,colTitleOf(n)?"g":"t"]);if(x)R.push(["Mốc kế",`«${x[2]}» khi đủ ${x[0]} món (còn ${x[0]-n})`,"t"])}
+ const bt=colTitleOf(L.best||0);R.push(["Nhiều nhất",`${L.best||0} món${bt?` · «${bt[2]}»`:""}`,bt?"g":"t"]);
+ for(const m of colMsList())R.push([`Đủ ${m[0]} món`,`«${m[2]}»${L.ms[m[0]]?` · ${L.ms[m[0]]} kiếp`:" · chưa đạt"}`,L.ms[m[0]]?"g":""]);
+ R.push(["Ghi chú","Món đồ không mang sang kiếp sau; danh hiệu thì ở lại trong sổ."]);
+ return `<h3>Bộ sưu tập</h3>`+rows67(R)}
+if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{return h+colBookHTML()}catch(e){return h}}})();
+/* the life's Sổ luân hồi line gets the title it reached */
+(function(){const l0=lifeSave;lifeSave=function(f){const r=l0.apply(this,arguments);try{if(S&&S.origin){colCheck();const t=colTitleOf(colN());if(t&&typeof kpLifeNote==="function")kpLifeNote(`Danh hiệu: «${t[2]}»`)}}catch(e){}return r}})();
+/* old saves: nothing to migrate, S.col is built from what she holds on the first check after load */
 /* ================= jlost: ĐỒ THẤT LẠC VÀ MINH OAN (owner 15/11 00:25Z: theft/framing as pure game rules; review/lost-items) =================
    Abstract rules only: an item "thất lạc" (goes missing) from a chest and may later "được tìm thấy" somewhere. Nothing describes how.
    The same rules for her and for every consort (two-way).
@@ -35198,7 +35247,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6a4bc1ebeaf6";window.CTM_BUILD=BUILD;
+const BUILD="695fccae424e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
