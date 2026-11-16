@@ -33,6 +33,8 @@ const CN_QI=c=>{const w=({hh:"bản cung",th:"ai gia",emp:"trẫm"})[CN_QK()];re
 /* The rival {v} is her old mistress (cast in .4, marked v.oldmis). Rank comparisons read S.rank and the rival's own rank field, never a typed name. */
 const CNCHU_RN=i=>RANKS[Math.max(0,Math.min(i|0,RANKS.length-1))].n;
 const CNCHU_VR=A=>{const v=A&&A.act?rv67(A,"v"):null;return v?(v.rank|0):Math.min((S.rank|0)+1,RANKS.length-1)};
+/* cn_chu .8 opening: the sentence that is true for the real rank gap */
+const CNCHU_GAPT=A=>{const u=CNCHU_UP(A);return u>=0?"Ngươi đã ngang nàng, cả cung chờ xem ngươi có vượt lên không.":u+1===0?"Chỉ còn một bước, cả cung đã bắt đầu đổi cách chào ngươi.":`Nàng còn hơn ngươi ${kitNumVi(-u)} bậc, vậy mà cả cung đã bắt đầu đổi cách chào ngươi.`};
 const CNCHU_UP=A=>(S.rank|0)-CNCHU_VR(A);/* >0: she sits above her old mistress; 0: equal; <0: still below */
 const CNCHU_MARK=A=>{const v=rv67(A,"v");if(v)v.oldmis=true;return true};
 
@@ -136,7 +138,7 @@ rdDef("cn_chu",7,{t:"Bẫy trong yến tiệc",w:"hh",sj:"cái bẫy trong yến
 rdDef("cn_chu",8,{t:"Ngang hàng",w:"emp",sj:"chuyện ngươi ngồi ngang chủ cũ",cast(A){return rdCast(A,["v"],CN_NORECAST)&&CNCHU_MARK(A)},
  g:()=>`Hoàng thượng hỏi ${CN_Q()}: phẩm của ngươi đã nên ngang {v} chưa. Ngồi ngang chủ cũ là vinh, mà cũng là cái đích cho mọi mũi tên.`,
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Một bước nữa",w:"emp",need:["v"],if:RDW(1),t:A=>`Ngươi đang ở bậc ${CNCHU_RN(S.rank)}, {v} ở bậc ${CNCHU_RN(CNCHU_VR(A))}. ${CNCHU_UP(A)>=0?"Ngươi đã ngang nàng, cả cung chờ xem ngươi có vượt lên không.":CNCHU_UP(A)===-1?"Chỉ còn một bước, cả cung đã bắt đầu đổi cách chào ngươi.":`Nàng còn hơn ngươi ${kitNumVi(-CNCHU_UP(A))} bậc, vậy mà cả cung đã bắt đầu đổi cách chào ngươi.`}`,o:[
+ B:{s1:{h:"Một bước nữa",w:"emp",need:["v"],if:RDW(1),t:A=>`Ngươi đang ở bậc ${CNCHU_RN(S.rank)}, {v} ở bậc ${CNCHU_RN(CNCHU_VR(A))}. ${CNCHU_GAPT(A)}`,o:[
   {n:"Giữ lễ với {v} như cũ",c:{danh:-2},w:{duc:3},f:"kind",wx:"không ai chê ngươi kiêu",lx:"người dưới tưởng ngươi vẫn kém nàng",go:A=>{rdRel(A,"v",5)},rt:"Ngươi vẫn chào {v} trước, như mọi khi."},
   {n:"Nhận lời chào của người dưới",c:{},o:()=>45+S.danh/4,w:{danh:3},sc:1,f:"hard",wx:"uy của ngươi thành hình",l:{duc:-2},lx:"bị nói là đã quên mình",rt:"Các phi tần nhỏ bắt đầu sang cung ngươi thỉnh an.",rf:"Người ta bảo ngươi vội ngồi lên chỗ chưa phải của mình."},
   {need:["th"],n:"Xin Hoàng thượng khoan bàn phẩm",c:{sung:-2},w:{duc:2,th:3},wx:"Thái hậu khen biết điều",lx:"lời bàn nguội đi",rt:"Thái hậu nghe chuyện, gật gù khen."}]},
@@ -189,7 +191,7 @@ rdDef("cn_chu",9,{t:"Vượt bậc",w:"v",sj:"lúc {v} sa cơ",cast(A){const ok=
   {n:"Đổi lời giúp lấy một lời thật",c:{},o:()=>45+S.tamco/3,w:{tamco:3},sc:1,f:"hard",wx:"{v} khai chuyện chén ngọc năm xưa",l:{duc:-2},lx:"{v} thấy bị ép",rt:"{v} viết: “Chén ngọc là ta làm vỡ.” Ngươi giữ tờ giấy ấy.",rf:"{v} xé đơn, không xin nữa."}]},
  x1:{h:"Phán một lỗi của {v}",w:"hh",need:["v"],t:A=>`Cung nữ của {v} làm vỡ đồ ngự dụng. ${CN_Q()} bảo: “${CN_QY(1)} ${CNCHU_UP(A)>0?"nay đứng trên nàng":CNCHU_UP(A)===0?"nay đứng ngang nàng":"thấy tận mắt"}, việc này ${CN_QY()} phán.” Cả cung chờ xem.`,o:[
   {n:"Tha, tự đền đồ vỡ",c:{bac:-40},o:A=>40+(A.f.kind?20:0)+(CNCHU_UP(A)>=BAL.road.cn_chu.gap?10:0)+S.duc/8,e:["win","mid"],go:A=>{rdRel(A,"v",8)},rt:"{v} cúi đầu thật sâu trước ngươi, lần đầu tiên.",rf:"Ngươi tha, người ta bảo ngươi mềm yếu."},
-  {n:"Xử đúng phép, không nặng không nhẹ",c:{suc:-2},o:A=>35+(A.f.hard?15:0)+(CNCHU_UP(A)>=BAL.road.cn_chu.gap?10:0)+S.danh/5,e:["win","lose"],rt:"Cả cung phục: ngươi xử như xử bất kỳ ai.",rf:"Người ta nói ngươi mượn phép để trả thù."},
+  {n:"Xử đúng phép, không nặng không nhẹ",c:{suc:-2},o:A=>45+(A.f.hard?15:0)+(CNCHU_UP(A)>=BAL.road.cn_chu.gap?10:0)+S.danh/5,e:["win","lose"],rt:"Cả cung phục: ngươi xử như xử bất kỳ ai.",rf:"Người ta nói ngươi mượn phép để trả thù."},
   {need:["hh"],n:"Xin Hoàng hậu tự phán",c:{hh:-2},w:{duc:2},e:"mid",lx:"bỏ dịp tỏ lòng",rt:"Hoàng hậu phạt nhẹ, không nhắc tên ngươi."}]}},
  E:{win:{k:1,tag:"Ơn trên kẻ dưới",t:"Người ta nói: kẻ hầu năm xưa đứng trên chủ cũ mà không đạp lên nàng. Tiếng ngươi vượt cả phẩm của ngươi.",fx:{danh:6,duc:3}},
   mid:{k:0,tag:"Phép là phép",t:"Việc xong theo lệ. {v} không mang ơn, cũng không thêm oán.",fx:{tamco:2}},
@@ -418,7 +420,7 @@ rdDef("cn_tinh",9,{t:"Kính sự phòng tra xét",w:"eun",sj:"cuộc tra xét c�
   {n:"Pha trà như thuở hầu trà",c:{suc:-2},w:{sung:2},wx:"ngài nhớ ngày đầu gặp ngươi",lx:"chuyện không được nói ra, đêm thức trắng",rt:"Hoàng thượng uống chén trà, mỉm cười như năm nào."},
   {n:"Xin ngài đừng nghe lời đồn",c:{},o:()=>45+S.danh/4,w:{sung:1},sc:1,wx:"ngài biết ngươi bị vu",l:{sung:-2},lx:"ngài thấy ngươi lo quá",rt:"Hoàng thượng bảo: “Trẫm chỉ nghe sổ.”",rf:"Hoàng thượng hỏi: “Nàng sợ điều gì?”"}]},
  x1:{h:"Tờ trình của Kính sự phòng",w:"eun",t:"{eun} dâng tờ trình lên Hoàng thượng. Ngài đọc, rồi quay sang ngươi: “Nàng có muốn nói thêm gì không?”",o:[
-  {n:"Thưa: thiếp để sổ nói thay",c:{},o:A=>30+(A.f.roster?15:0)+(A.f.calm?10:0)+(S.danh>=BAL.road.cn_tinh.danh?15:0),e:["win","mid"],rt:"Tờ trình viết: không có chứng. Hoàng thượng gấp lại: “Xong.”",rf:"Tờ trình viết: chưa đủ chứng, chưa thể kết."},
+  {n:"Thưa: thiếp để sổ nói thay",c:{},o:A=>15+(A.f.roster?15:0)+(A.f.calm?10:0)+(S.danh>=BAL.road.cn_tinh.danh?15:0),e:["win","mid"],rt:"Tờ trình viết: không có chứng. Hoàng thượng gấp lại: “Xong.”",rf:"Tờ trình viết: chưa đủ chứng, chưa thể kết."},
   {n:"Xin đối chất với kẻ tố",c:{suc:-3},o:A=>35+(A.f.open?15:0)+(A.f.roster?10:0)+S.tamco/5,e:["win","lose"],go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Kẻ tố lắp bắp, khai ra người của {v} đã dặn mình.",rf:"Kẻ tố khóc lóc thề thốt. Hoàng thượng cho ngươi cấm túc chờ xét."},
   {n:"Xin tự cấm túc cho yên lòng người",c:{sung:-3},w:{duc:3},e:"mid",lx:()=>`cấm túc ${kitNumVi(BAL.road.cn_tinh.cam)} tháng, không gặp Hoàng thượng`,go:()=>CN_CAM(S,BAL.road.cn_tinh.cam),rt:"Ngươi tự đóng cửa cung. Người ta bảo ngươi biết phép."}]}},
  E:{win:{k:1,tag:"Trong sạch trên sổ",w:"emp",t:"Kính sự phòng kết: không có chứng. Hoàng thượng sai đốt tờ tố, và đêm ấy lật thẻ ngươi.",fx:{sung:5,danh:3}},
@@ -733,7 +735,7 @@ const CNT_DL=()=>kitNumVi(BAL.road.cn_than.dl);
 rdDef("cn_than",5,{t:"Di vật của ma ma",w:"maid",sj:"bọc di vật lão ma ma để lại",cast(A){return rdCast(A,["v"],CN_NORECAST)},
  g:"Lão ma ma đã mất, để lại một bọc vải chưa ai mở. Trong đó có thể là lá thư của mẹ ruột ngươi, cũng có thể là thứ khiến kẻ khác mất ngủ.",
  p:[["s1","s2","s3"],["c1","c2","c3"],["t1"],["x1"]],
- B:{s1:{h:"Người đến chúc mừng",w:"maid",if:RDW(1),t:()=>(rdPrev()==="r97"?"Từ ngày Thái hậu nhận ra miếng ngọc và ngươi được phong Huyện chúa,":"Từ ngày tên họ Thẩm được nhắc lại,")+" cung ngươi đông khách. Giữa đám người chúc mừng, một tiểu thái giám hỏi khéo: lão ma ma có để lại gì không?",o:[
+ B:{s1:{h:"Người đến chúc mừng",w:"maid",if:RDW(1),t:()=>(rdPrev()==="r97"?"Từ ngày miếng ngọc được nhận ra và ngươi được phong Huyện chúa,":"Từ ngày tên họ Thẩm được nhắc lại,")+" cung ngươi đông khách. Giữa đám người chúc mừng, một tiểu thái giám hỏi khéo: lão ma ma có để lại gì không?",o:[
   {n:"Hỏi ngược ai sai hắn đến",c:{suc:-2},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,f:"who",wx:"biết có kẻ thèm di vật",l:{},lx:"hắn chạy mất",rt:"Hắn lắp bắp, lỡ miệng nhắc đến một phủ lão Thái phó.",rf:"Hắn cười trừ, xin lui."},
   {n:"Đáp ma ma chẳng để lại gì",c:{duc:-2},w:{tamco:1},f:"quiet",wx:"kẻ dò tạm yên",lx:"nói dối trước đông người, lòng áy náy; phải lấy bọc vải gấp hơn",rt:"Tiểu thái giám gật gù đi ra."}]},
  s2:{h:"Di vật không người nhận",w:"eun",if:RDW(0),t:()=>(rdPrev()==="mid"?"Cha ruột ngươi đã được rửa oan, nhưng ngươi vẫn mang thân phận cũ.":"Ngươi bị coi là mạo nhận, thân thế còn lưng chừng.")+" Đồ đạc của lão ma ma bị Nội vụ phủ giữ lại vì không ai đứng ra nhận, sắp đem đốt cùng đồ người chết.",o:[

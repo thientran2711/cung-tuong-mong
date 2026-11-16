@@ -101,7 +101,7 @@ rdDef("muoi_tuoc",7,{t:"Con nhà buôn",w:"v",sj:"lời chê xuất thân của 
   {n:"Đem bánh chia cho cung nhân",c:{danh:-2},w:{duc:3,mat:1},f:"true",wx:"cung nhân nhớ ơn ngươi",lx:"phi tần càng cười ngươi gần kẻ hầu",rt:"Cung nữ các cung kháo nhau về bánh nhân muối hoa."},
   {n:"Ghi tên ba cung ấy",c:{suc:-2},w:{tamco:2},wx:"biết ai coi thường ngươi",lx:"lòng thêm nặng, mất ngủ mà chẳng gỡ được gì",rt:"Ngươi ghi ba cái tên vào sổ riêng."}]},
  t1:{h:"Đèn hoa đăng",w:"emp",t:()=>`Đèn được treo khắp Ngự hoa viên. Theo lệ, ai từ bậc ${MUOI_RN(BAL.road.muoi_tuoc.rkSeat)} trở lên được đề thơ lên đèn; người dưới bậc ấy dâng một món tài nghệ.`,o:[
-  {n:"Đề thơ lên đèn",if:()=>S.rank>=BAL.road.muoi_tuoc.rkSeat,c:{suc:-2},o:()=>40+S.tai/3,w:{danh:3},sc:1,f:"wit",wx:"thơ treo cao cho cả cung đọc",l:{danh:-3},lx:"thơ kém cũng treo cao cho cả cung đọc",rt:"Bài thơ về sóng biển và hạt muối được Hoàng thượng đứng đọc lâu.",rf:"Có người đọc thơ ngươi rồi bấm nhau cười."},
+  {n:"Đề thơ lên đèn",if:()=>S.rank>=BAL.road.muoi_tuoc.rkSeat,c:{suc:-2},o:()=>40+S.tai/3,w:{danh:3},sc:1,f:"wit",wx:"thơ treo cao cho cả cung đọc",l:{danh:-3},lx:"thơ kém cũng treo cao cho cả cung đọc",rt:"Bài thơ về sóng biển và hạt muối được Hoàng thượng đứng đọc lâu.",rf:"Có người đọc thơ ngươi rồi huých nhau cười."},
   {n:"Dâng một khúc đàn",c:{suc:-3},o:()=>35+S.tai/3,w:{sung:2},sc:1,f:"wit",wx:"Hoàng thượng dừng chân nghe",l:{danh:-2},lx:"đàn lạc phím giữa yến",rt:"Tiếng đàn lặng cả vườn.",rf:"Một dây đàn đứt giữa khúc."},
   {n:"Nhường người khác đề trước",c:{danh:-2},w:{duc:2},wx:"không tranh với ai",lx:"đêm nay không ai nhớ đến ngươi",rt:"Ngươi đứng sau, ngắm đèn."}]},
  x1:{h:"Trước mặt Hoàng thượng",w:"emp",t:"Hoàng thượng đến muộn, hỏi: “Nghe nói ở đây có người chê xuất thân của ái phi?” Cả yến im phăng phắc. {v} cúi đầu chờ ngươi lên tiếng.",o:[
@@ -137,7 +137,7 @@ rdDef("muoi_tuoc",8,{t:"Công với triều đình",w:"emp",sj:"con đê Giang N
   {n:"Cầu trời, chờ",c:{suc:-2},w:{duc:2},f:"pray",wx:"không tốn thêm gì",lx:"thức trắng đêm, phó mặc may rủi",rt:"Ngươi thắp hương suốt đêm."}]},
  x1:{h:"Ngự sử về xem đê",w:"emp",t:"Hoàng thượng sai Ngự sử về xem đê. Lời tâu của y sẽ quyết định công của nhà ngươi là thật hay là mua.",o:[
   {n:"Nhờ cha mời Ngự sử đến tận làng",c:{suc:-4},o:A=>45+(A.f.own?10:0)-(A.f.weak?12:0)+S.duc/6,e:["win","lose"],rt:"Dân làng quỳ kín hai bên đê, kể từng đêm nhà ngươi giữ đê.",rf:"Dân làng sợ quan, không ai dám nói."},
-  {n:"Bảo cha trình sổ chi tiêu từng đồng",c:{},o:A=>30+(A.f.sue?10:0)+(A.f.seen?8:0)+S.mat*3,e:["win","mid"],rt:"Ngự sử đọc sổ, tâu: “Không thiếu một đồng.”",rf:"Ngự sử khen sổ rõ, nhưng nói đê chưa qua đủ một mùa lũ."},
+  {n:"Bảo cha trình sổ chi tiêu từng đồng",c:{},o:A=>20+(A.f.sue?10:0)+(A.f.seen?8:0)+S.mat*2,e:["win","mid"],rt:"Ngự sử đọc sổ, tâu: “Không thiếu một đồng.”",rf:"Ngự sử khen sổ rõ, nhưng nói đê chưa qua đủ một mùa lũ."},
   {n:"Để nhà biếu Ngự sử lộ phí",c:{bac:-50},w:{danh:1},e:"mid",lx:"công còn mà mang tiếng lót tay",rt:"Ngự sử nhận lộ phí, tâu vừa đủ khen."}]}},
  E:{win:{k:1,tag:"Công đê được ghi",w:"emp",t:"Lời tâu của Ngự sử khen con đê nhà ngươi đắp. Hoàng thượng phê: “Có công với dân.” Lần này không ai nói đó là công mua.",fx:{danh:7,sung:2}},
   mid:{k:0,tag:"Công nửa thật nửa mua",t:"Đê đứng, nhưng lời tâu nhạt. Triều đình ghi nhà ngươi “có góp”, không ghi “có công”.",fx:{danh:2}},
@@ -398,7 +398,7 @@ rdDef("muoi_lau",9,{t:"Người lái thuyền",w:"maid",sj:"lão lái thuyền �
  x1:{h:"Lời khai",w:"emp",t:"Lão lái thuyền được đưa đến Đại Lý tự. Ngươi ở trong cung, chỉ nghe tin qua huynh trưởng: trước công đường, lão run rẩy nhìn quanh.",o:[
   {n:"Để lão khai trước công đường",c:{suc:-4},o:A=>40+(A.f.safe?10:0)+(A.f.daughter?12:0)+(A.f.vhelp?6:0),e:["win","lose"],rt:"Lão kể từng bao muối, từng người khiêng. Cả công đường lặng ngắt.",rf:"Lão nhìn thấy một người của Diêm vận sứ trong đám đông, rồi câm lặng."},
   {n:"Nhờ Ngự sử xin cho lão khai kín",c:{},o:A=>20+(A.f.found?6:0)+(A.f.official?6:0)+S.danh/6,e:["win","mid"],rt:"Lời khai kín được niêm phong, đóng dấu Đại Lý tự.",rf:"Lời khai kín ít người tin."},
-  {n:"Giữ lão cho phiên xử sau",c:{bac:-20},e:"mid",wx:"lão còn sống, phiên xử sau có thêm người khai",lx:"lời khai chưa thành, tốn bạc nuôi giữ",go:()=>{MUOI_FL("muoi_lau.keep",1)},rt:"Lão được giấu ở một nơi chỉ ngươi biết."}]}},
+  {n:"Giữ lão cho phiên xử sau",c:{bac:-20},w:{mat:1},e:"mid",wx:"lão còn sống, phiên xử sau có thêm người khai",lx:"lời khai chưa thành, tốn bạc nuôi giữ",go:()=>{MUOI_FL("muoi_lau.keep",1)},rt:"Lão được giấu ở một nơi chỉ ngươi biết."}]}},
  E:{win:{k:1,tag:"Nhân chứng đã khai",w:"emp",t:"Lời khai của lão lái thuyền nằm trong hồ sơ Đại Lý tự. Diêm vận sứ không còn nói được rằng đêm ấy không ai thấy.",fx:{danh:4,mat:1}},
   mid:{k:0,tag:"Nhân chứng còn giữ",t:"Lão còn sống, còn ở trong tay ngươi. Lời khai đến phiên xử mới nói.",fx:{tamco:2}},
   lose:{k:-1,tag:"Nhân chứng mất",t:"Lão lái thuyền biến mất khỏi kinh. Có người nói lão về quê, có người nói lão đã xuống sông.",fx:{danh:-3}}}});
@@ -558,7 +558,7 @@ rdDef("muoi_doi",7,{t:"Tiếng tích trữ",w:"v",sj:"lời đồn nhà ngươi 
   {n:"Tâu: thiếp không rõ việc nhà",c:{sung:-2},w:{tamco:1},wx:"không nhận gì",lx:"ngài biết ngươi giấu",rt:"Hoàng thượng không hỏi nữa."}]},
  x1:{h:"Ngày khám kho",w:"v",need:["v"],t:"{v} xin Hoàng thượng sai người khám kho nhà ngươi trước mặt Ngự sử. Ngày khám đã định.",o:[
   {n:"Xin cha mời Ngự sử đến kho trước ngày định",c:{suc:-4,bac:-20},o:A=>50+(A.f.open?10:0),e:["win","lose"],rt:"Ngự sử đến sớm, sổ khớp từng thạch. {v} không còn gì để nói.",rf:"Ngự sử đếm ra số thóc lệch với sổ khai."},
-  {n:"Đưa tờ sổ giả cho Hoàng thượng xem",c:{},o:A=>30+(A.f.proof?20:0)+(A.f.trap?15:0)+(A.f.trace?10:0)+S.mat*3,e:["win","mid"],go:(A,ok)=>{rdOan(A,"v",ok?12:5)},rt:"Dấu son giả bị Hoàng thượng nhận ra ngay.",rf:"{v} nói tờ sổ là do kẻ khác làm, việc khép lại lửng lơ."},
+  {n:"Đưa tờ sổ giả cho Hoàng thượng xem",c:{},o:A=>20+(A.f.proof?20:0)+(A.f.trap?15:0)+(A.f.trace?10:0)+S.mat*2,e:["win","mid"],go:(A,ok)=>{rdOan(A,"v",ok?12:5)},rt:"Dấu son giả bị Hoàng thượng nhận ra ngay.",rf:"{v} nói tờ sổ là do kẻ khác làm, việc khép lại lửng lơ."},
   {n:"Xin rút việc khám kho, chịu tiếng",c:{danh:-3},w:{duc:2},e:"mid",lx:"tiếng tích trữ đeo theo",rt:"Ngươi xin Hoàng thượng thôi khám. Ngài thuận."}]}},
  E:{win:{k:1,tag:"Kho mở, lời đồn chết",w:"emp",t:"Kho bến Giang Khẩu mở ra trước Ngự sử: thóc giống, sổ sách rõ ràng. {v} bị Hoàng thượng quở là ngồi lê đôi mách. Từ đó không ai dám nhắc kho ngầm nhà ngươi.",fx:{danh:6,sung:2},go:A=>{rdOan(A,"v",8)}},
   mid:{k:0,tag:"Lời đồn lắng xuống",t:"Không ai thắng, không ai thua. Lời đồn nhạt đi, nhưng thỉnh thoảng vẫn có người nhắc.",fx:{tamco:2}},
