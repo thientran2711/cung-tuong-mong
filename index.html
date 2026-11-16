@@ -6639,6 +6639,7 @@ st.textContent=`
 #modal .kpt-mount #slots{display:flex;flex-direction:column;gap:6px;margin:0 0 6px}
 /* KIT slot card (owner 16/11 "info on top, buttons below"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, any similar list):
    h4.kpst, the kit info rows FULL WIDTH on top, the kit buttons in ONE row below (equal width); short values never wrap word by word */
+.kcstabs{margin:0 0 8px}
 .kslot{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:2px 0 8px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
 .kslot>.kpst{margin:0}
 .kslot .kb{margin:0;width:100%}
@@ -6658,7 +6659,7 @@ document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
 const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:"Thông tin cập nhật"};
-const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
+const SUBH={slots:"Ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
 const SONO=["một","hai","ba"];
 function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
@@ -6668,7 +6669,18 @@ function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 cla
 /* owner 16/11: two separate sets on this screen: the solo sổ (above) and the co-op rooms (jslots, below); a room never writes a sổ */
 function roomsHTML(){try{return window.CTM_ROOMS?CTM_ROOMS.html():""}catch(e){return ""}}
 window.CTM_SLOTWHO=slotWho;window.CTM_SLOTDATE=slotDate;window.CTM_DRAWSLOTS=()=>drawSlots();
-function drawSlots(){const s=$("slots");if(s)s.innerHTML=slotsHTML()+roomsHTML()}
+/* Chọn sổ = TWO kit tabs (KIT 46 tab row, same part as Mua/Bán): "Một mình" (3 sổ) | "Cùng hảo hữu" (3 phòng); opens on the mode last played */
+const CSK="ctm-chonso-tab";let CSTAB="";
+function csGet(){if(CSTAB)return CSTAB;let v=null;try{v=localStorage.getItem(CSK)}catch(e){}
+ if(v!=="solo"&&v!=="coop"){let r=0;try{r=window.CTM_ROOMS?CTM_ROOMS.list().length:0}catch(e){}v=!lastSlot()&&r?"coop":"solo"}return CSTAB=v}
+function csSet(v){CSTAB=v;try{localStorage.setItem(CSK,v)}catch(e){}}
+function csSub(){const M=$("modal");const e=M&&M.classList.contains("kptitle")&&M.querySelector('.kpt-mount[data-pg="slots"]')?M.querySelector(".dlg > .kph .kpsub"):null;if(e)e.textContent=csGet()==="coop"?SUBH.slotsco:SUBH.slots}
+function drawSlots(){const s=$("slots");if(!s)return;const t=csGet();
+ s.innerHTML=`<div class="pctabs kcattabs kcstabs" role="tablist">${kitTabRowHTML([{k:"solo",label:"Một mình"},{k:"coop",label:"Cùng hảo hữu"}],t,"data-kcs")}</div>`+(t==="coop"?roomsHTML():slotsHTML());csSub()}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots [data-kcs]");if(!b)return;e.stopPropagation();csSet(b.dataset.kcs);drawSlots();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}},true);
+/* playing a mode makes it the tab the list opens on next time */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots button[data-load],#slots button[data-new]:not([data-ask])");if(b)csSet("solo")},true);
+try{if(window.COOP&&COOP.on)COOP.on("start",()=>csSet("coop"))}catch(e){}
 /* Thiết lập with the kit controls; "Mở tiếng" and "Im tiếng" are ONE switch (Tiếng) */
 optHTML=function(){return `<div class="optbox kctls">${kitToggle({id:"o-snd",label:"Tiếng",sub:"nhạc, tiếng động, giọng",on:!!(OPT.snd&&!OPT.mute),yes:"Mở tiếng",no:"Im tiếng"})}
  ${kitSlider({id:"o-mus",label:"Nhạc",value:OPT.mus})}${kitSlider({id:"o-sfx",label:"Tiếng động",value:OPT.sfx})}${kitSlider({id:"o-vo",label:"Giọng",value:OPT.vo==null?.7:OPT.vo})}
@@ -6712,7 +6724,7 @@ function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;co
 function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}
 function subOpen(pg){dropAll();if(pg==="opt"){xioReset();try{wireOpt();wireXio()}catch(e){}try{if(window.CTM_CLOUD)CTM_CLOUD.wire()}catch(e){}}
  if(pg==="slots")drawSlots();
- SM=kitModal({scene:true,kind:"notice",title:HEAD[pg]||"",sub:SUBH[pg]||"",html:`<div class="kpt-mount" data-pg="${pg}"></div>`,cls:"kptitle"});mount()}
+ SM=kitModal({scene:true,kind:"notice",title:HEAD[pg]||"",sub:(pg==="slots"&&csGet()==="coop"?SUBH.slotsco:SUBH[pg])||"",html:`<div class="kpt-mount" data-pg="${pg}"></div>`,cls:"kptitle"});mount()}
 function pastBody(){let h="";try{h=pastHTML()||""}catch(e){}h=h.replace(/^<h3>Sổ luân hồi<\/h3>/,"");
  if(!/pcrow|Kiếp \d/.test(h))h=`<p class="past">Chưa có kiếp nào được ghi.</p>`+h;return h}
 function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg;if(T.hidden){dropAll();return}
@@ -16788,12 +16800,17 @@ function faceChoose(id){if(!faceOn()||!id||id===S.pid||!f88List(id).length)retur
    no role. She is now ONE persistent person (S.lyF, saved; same face every visit) drawn from the cold-palace consort art (tier cold:
    plain clothes, no jewellery, no forehead mark), with the matching round portrait in the talk panel.
    Loaded right after j88 (its tier-aware picker gives consort-rank dress only to the player and rivals: f88Wear). */
+/* B-answers art (D50): Phế phi họ Lý, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
+   fallen/steward/tutor, 4 age bands each, same manifest format). Until the manifest lists them, Lý keeps the cold-palace consort art. */
+const NPCFIX={tgk:{name:"Quản sự Tân Giả khố",age:36,role:"steward"},ttp:{name:"Thầy dạy Thượng thư phòng",age:36,role:"tutor"}};
+function lyArt(){try{return !!(FIGIX&&FIGIX.fallen)}catch(e){return false}}
+function npcFixOf(p){if(!p||p.kind!=="npc"||p.sid)return null;const k=Object.keys(NPCFIX).find(k=>NPCFIX[k].name===p.name);if(!k||!(FIGIX&&FIGIX[NPCFIX[k].role]))return null;S.npcFix=S.npcFix||{};if(!S.npcFix[k])S.npcFix[k]={name:NPCFIX[k].name,age:NPCFIX[k].age,npcFix:k};return S.npcFix[k]}
 function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:34,lyF:1};return S.lyF}
-(function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref)return lyFallen()}catch(e){}return w0.apply(this,arguments)};
- const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return["consort"];return r0.apply(this,arguments)};
+(function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
+ const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
  const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF)return -1;return t0.apply(this,arguments)};
- if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&who.lyF)return true;return e0.apply(this,arguments)}}
- if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){const r=f0.apply(this,arguments);try{if(p&&p.kind==="fallen"&&!p.ref){const src=figFor(p,"por");if(src)return Object.assign({},r,{src,hue:0})}}catch(e){}return r}}})();
+ if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&(who.lyF||who.npcFix))return true;return e0.apply(this,arguments)}}
+ if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){const r=f0.apply(this,arguments);try{if(p&&((p.kind==="fallen"&&!p.ref)||npcFixOf(p))){const src=figFor(p,"por");if(src)return Object.assign({},r,{src,hue:0})}}catch(e){}return r}}})();
 /* ================= j89 TRANH SỰ KIỆN (data only: no CSS, no HTML, no UI) =================
    img/EVENTS.json = {default, categories:{cat:{title,files:[...]}}, events:{eventId:cat}}; art = img/ev-<cat>[-n].webp, 3:4, no faces.
    evArtOf(eventId, salt) -> image path ("" before the manifest loads). The kit owner wires it into news / week-book pages.
@@ -23139,6 +23156,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 (function(){const st=document.createElement("style");st.id="kshop-css";st.textContent=`
 .dlg.kshopd #mr{display:none!important}
 .dlg.kshopd.kdper>#mb>.kpb>.kpmain{grid-row:1/-1;min-height:0;display:flex;flex-direction:column;position:static}
+/* review/care-overlap: a shop / care dialog (kshopd) with the KIT 50 banner (kdpban, row 1 of the right column): the body starts UNDER the picture, never beside it in the same row (it spanned rows 1 to -1 and the picture covered the bars / first tiles); the banner is part of #mb's grid, so every kshopd dialog (pet shop, errand shop, pet care) gets the same rows */
+.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:2/-1;overflow-y:auto;overscroll-behavior:contain}
 .kshop{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1 1 auto}
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
@@ -28171,7 +28190,7 @@ const st=document.createElement("style");st.id="kit-ht";st.textContent=`
    2. group 'core' (UI, kit, scenes, maps, items, sounds; ~80 MB) missing → the LOADING SCREEN (title backdrop, kit scene panel, bar with MB)
       blocks entry until done (resumes file by file after a cut or reload; "Vào cung ngay" appears when the line is cut or stalls).
    3. group 'fig' (figures, portraits, event/story/festival art; ~550 MB) then downloads in the background, 2 at a time, with a small
-      kit chip at the bottom-left (tap = tạm ngưng / thỉnh tiếp, remembered). Save-Data or too little room = skipped (the worker still
+      kit status icon (kitStatusIcon, KIT §77.1: a small square download icon in the stage rail / title dock; tap = info panel with tạm ngưng / thỉnh tiếp, remembered). Save-Data or too little room = skipped (the worker still
       caches each picture the game actually shows).
    navigator.storage.persist() is asked once downloading starts; navigator.storage.estimate() is checked before the background sets.
    Requests carry 'x-ctm-load' so sw.js lets them through and this module writes the cache itself (one write, no copy through page script).
@@ -28185,7 +28204,7 @@ const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("
    marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
 const CDNB=(typeof IMG_BASE==="string"&&IMG_BASE)||"";
 const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&f[0].startsWith("img/")?CDNB:location.href).href;
-let el=null,chip=null,shown=false,speed=[],enterCb=[];
+let el=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
 /* ---------- kit CSS (section 35) ---------- */
@@ -28204,15 +28223,6 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 .kload .kpopts{display:flex;justify-content:flex-end;gap:8px;padding:2px 14px 12px;margin:0}
 .kload .kpopts:empty{display:none}
 /* kv3:.kv1 */:where(.kv1) .kload .klb{padding:8px 10px 2px}:where(.kv1) .kload .kpopts{padding:2px 10px 10px}
-.kloadchip{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700;max-width:calc(100vw - 16px);opacity:.92}
-.kloadchip .kchip{display:inline-flex;align-items:center;gap:7px;margin:0;font-size:.72rem;padding:3px 10px;border-color:var(--gold);background:#fffaf0f0;box-shadow:0 2px 8px #0003;cursor:pointer;font-family:inherit}
-.kloadchip .kprog-t{width:64px;flex:none;height:6px}
-.kloadchip.done{animation:kloadFade 1.2s 1.5s ease forwards}
-body.kload-dock .game{box-sizing:border-box!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 30px)!important}
-/* review 11/15 (844x390 place card): the chip never sits over a dialog's text — it steps aside while a dialog / mini game is open */
-body:has(#modal:not([hidden])) .kloadchip,body:has(#ov:not([hidden])) .kloadchip{visibility:hidden}
-body.kload-dock .kloadchip{opacity:1}body.kload-dock .kloadchip .kchip{padding:2px 9px;box-shadow:none}
-@keyframes kloadFade{to{opacity:0;visibility:hidden}}
 `;document.head.appendChild(st)})();
 
 /* ---------- the bar (kit 35): label above, track + "a / b MB" beside, sub line under ---------- */
@@ -28297,37 +28307,24 @@ async function refresh(grp){const c=await caches.open(AC);HAVE=new Set((await c.
  if(grp==="core")coreList=l;else figList=l}
 addEventListener("online",()=>{if(KLOAD.err==="offline"){KLOAD.err="";if(KLOAD.phase==="core")runCore();else if(bgOn)runBg()}});
 
-/* ---------- background sets + chip ---------- */
-let bgOn=false,bgRun=false;
-function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total)return;
- if(!chip){chip=document.createElement("div");chip.className="kloadchip";document.body.appendChild(chip)}
- const done=!g.left,v=g.total?g.have/g.total*100:100;
- chip.classList.toggle("done",done);if(done&&!chip.__kgone){chip.__kgone=1;chip.addEventListener("animationend",()=>{chip.classList.add("gone");chip.hidden=true;placeChip()},{once:true})}placeChip();
- chip.innerHTML=`<button class="kchip" data-klc="1" aria-label="Thỉnh tranh nhân vật">${done?"Đã thỉnh đủ tranh nhân vật":KLOAD.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Thỉnh tranh nhân vật"}<span class="kprog-t"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n" style="font-size:.72rem">${mb(g.have)} / ${mb(g.total)} MB</b></button>`}
-/* sits at the bottom-left, lifted above whatever kit bar/panel is docked at the bottom there (tab bar, title menu) so it covers no button */
-/* review/hau-cung-ui (owner 11/15 04:15Z: the chip covered "Kẻ hầu 1/1…" and the Hậu cung list): while a life is on screen the chip never floats
-   over the game — the game frame gives up a slim strip UNDER the tab bar (body.kload-dock: .game padding-bottom) and the chip sits in it.
-   Only a dialog's own buttons lift it (as before). Title screen / no game: the old placement below. */
-function placeChip(){if(!chip)return;const H=innerHeight;
- const g=document.querySelector(".game"),tt=document.getElementById("title");const play=!!(g&&g.getClientRects().length&&!(tt&&!tt.hidden&&tt.getClientRects().length));
- const dock=play&&!chip.classList.contains("gone");if(document.body.classList.contains("kload-dock")!==dock){document.body.classList.toggle("kload-dock",dock);try{dispatchEvent(new Event("resize"))}catch(e){}}
- /* a full-screen book (Sổ tuần) owns the whole screen, its page-turn bar included: the chip waits behind it */
- const book=document.body.classList.contains("kbk-open");chip.style.visibility=book?"hidden":"";
- if(dock){let up=0;document.querySelectorAll("#modal:not([hidden]) .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;up=Math.max(up,H-r.top)});
-  chip.style.bottom=up?`calc(env(safe-area-inset-bottom,0px) + ${Math.round(up)+6}px)`:"calc(env(safe-area-inset-bottom,0px) + 2px)";return}
- let lift=0;
- document.querySelectorAll("#tabs,#modal:not([hidden]) .dlg,#kload .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();
-  if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;lift=Math.max(lift,H-r.top)});
- /* review 11/15: never over the stage name chips (names are never covered) — sit above the name row it would touch */
- const cw=(chip.firstElementChild||chip).getBoundingClientRect().width||300;
- document.querySelectorAll("#stage .tag,#j59metag>*,#stage .j59more").forEach(e=>{const r=e.getBoundingClientRect();
-  if(!r.width||r.left>cw+12||r.right<4||r.top<H*.35||H-r.bottom>lift+60)return;lift=Math.max(lift,H-r.top+2)});
- chip.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${Math.round(lift)+8}px)`}
-addEventListener("resize",placeChip);setInterval(placeChip,1500);
-/* test hook (dev/test, review/hau-cung-ui): show the background chip with fake numbers, no download */
+/* ---------- background sets: ONE status icon (KIT §77.1 kitStatusIcon; owner 16/11 16:25Z: no chip, no strip — a small download icon in the corner,
+   a calm bobbing arrow while it runs, tap → kit info panel with the details + "Tạm ngưng / Thỉnh tiếp") ---------- */
+let bgOn=false,bgRun=false,dlDoneAt=0;
+const dlState=()=>{const g=KLOAD.fig,done=!g.left;return{g,done,paused:!!KLOAD.paused&&!done,err:!done&&!KLOAD.paused&&!!KLOAD.err}};
+const dlWords=s=>s.done?"Đã thỉnh đủ tranh nhân vật":s.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Đang thỉnh tranh nhân vật";
+function dlPanel(){const s=dlState(),g=s.g;
+ const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":"Dừng việc tải ngầm; muốn thì thỉnh tiếp sau.",fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
+ return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
+  {h:"Tiến độ",html:kitProgress({have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
+  {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],["Đã về",`${mb(g.have)} / ${mb(g.total)} MB`],["Còn lại",s.done?"không còn":`${g.left} tệp`]]}],opts:o}}
+function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
+ const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
+ kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,glyph:()=>dlState().done?"✓":"↓",
+  busy:()=>{const q=dlState();return !q.done&&!q.paused&&!KLOAD.err},done:()=>dlState().done,badge:()=>{const q=dlState();return q.paused||q.err},
+  show:()=>!dlState().done||Date.now()-dlDoneAt<5000,panel:dlPanel});
+ kitStatusIcon.refresh();if(s.done)setTimeout(()=>{try{kitStatusIcon.refresh()}catch(e){}},5200)}
+/* test hook (dev/test, review/hau-cung-ui, review/status-icons): show the status icon with fake numbers, no download */
 KLOAD.testChip=(have,total)=>{bgOn=true;KLOAD.fig.total=total||635e6;KLOAD.fig.have=have||12e6;KLOAD.fig.left=KLOAD.fig.have<KLOAD.fig.total?1:0;paintChip()};
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klc]");if(!b)return;e.stopPropagation();if(!KLOAD.fig.left)return;
- KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()},true);
 async function startBg(){if(bgOn||!MAN)return;if(!figList.length){KLOAD.phase="all";return}
  const cn=navigator.connection;/* perf budget: no background set on Data-saver, a mobile-data line or a slow line (the pictures the game shows still cache on use) */
  if(cn&&(cn.saveData||cn.type==="cellular"||/^(slow-2g|2g|3g)$/.test(cn.effectiveType||"")))return;
@@ -28953,8 +28950,8 @@ function petcBars(P){return kitStatRow([{cells:[["No",P.full],["Sạch",P.clean]
 function petcFig(){return document.querySelector("#modal .kpsubj.kes .kesimg")||document.querySelector("#modal .kpsubj.kes")}
 function petcOpen(i){const P=tsbPets(S)[i];if(!P)return;petcInit(P);PETC.i=i;PETC.game=null;const T=petT(P),s=petStage(P),a=petcStageSrc(P,1);
  try{if(!document.getElementById("modal").hidden)closeModal()}catch(e){}
- kitModal({kind:"info",title:`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${BAL.pet.stages[s]} · ${PET_TIER[T.tr]}`,pick:true,
-  stage:[{__fig:a.src,__cap:T.n,__role:BAL.pet.stages[s],age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
+ kitModal({kind:"info",title:`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s])} · ${PET_TIER[T.tr]}`,pick:true,
+  stage:[{__fig:a.src,__cap:T.n,__role:(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s]),age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
 function petcClose(){PETC.i=-1;PETC.game=null;try{closeModal()}catch(e){}try{render()}catch(e){}}
 function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=tsbMaid(S);
  const g=(k,n,x)=>pbtn(`data-petc="${k}"`,n,`tốn: ${BAL.pet.khac} khắc · ${x}`,t1);
@@ -29037,6 +29034,95 @@ window.coopPetAct=function(kind){try{const k={care:"petcare",help:"petcare",harm
 (function(){if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){if(m&&m.kit&&(m.kit.shop||m.kit.pick))return null;return a0.apply(this,arguments)};window.kitEvArt=kitEvArt})();
 /* no private CSS: the care screen is kit parts only (person dialog, kitStatRow, kitRows, kitGameFrame, .kgbtn, pbtn) */
 window.petcOpen=petcOpen;window.petStage=petStage;window.petcGrow=petcGrow;
+/* ================= jpetlife: TUỔI THỌ THÚ NUÔI — pets live and die like people (owner 16/11 18:15Z idea, 18:50Z approval, OD:L1143 mirror) =================
+   Numbers: BAL.pet.life (one core, OD:L1267). Pure core between CORE markers (dev/measure/pet-life-sim.js reuses it in node).
+   1. LIFESPAN: every pet (hers, every NPC's — NPC agent law OD:L1386: same roll, same rule) rolls ONE lifespan the first time this file sees it
+      (P.life = years, P.lifeW = week of that year it ends), from BAL.pet.life.dice[group of its species] (bell curve {mean,sd,lo,hi}),
+      conditioned on being above its present age. Species → group: BAL.pet.life.grp (small beasts shortest, birds / fish longer, the crane and the
+      tier-3 spirit beasts long, the three Ngự tứ divine pets very long but NOT immortal). Age = weeks owned (P.at, the same clock as the growth
+      stages), BAL.pet.life.wY weeks a year. Old saves: a pet without P.at gets the youngest age its stage allows; its first roll leaves it at least
+      BAL.pet.life.floorW weeks.
+   2. GIÀ (old): from the group's `old` years on, the pet is Già (P.old=1), shown as its stage ("Già") — it keeps its growth stage's effect
+      (Linh thú stays Linh thú in what it does) but tires faster: No / Sạch / Vui fall × BAL.pet.life.oldDecay each week. Becoming old = one quiet card.
+   3. DEATH by fate when the lifespan ends (số trời). Care lengthens it only a little: each pet-year with Khí lực (P.care) ≥ careOk and Tình cảm ≥
+      careAff gives careP % for +1 year, total never above the group's careMax (HARD CEILING); a year with Khí lực < careLapse takes one gained
+      year back. Neglect deaths (jpetcare) stay as they are.
+   4. FAREWELL: her pet → a quiet kit notice card (rare event, owner 16/11 17:25Z: big frame only for rare things) with the pet's picture, the grave
+      under the plum tree and the keepsake: item `petkv` (Kỷ vật, never sold / given; the picture reuses the kit painting of the sachet, tuithom).
+      NPC pets: a log line, the keepsake in the NPC's chest. No punishment: an old-age death never triggers the Thái hậu "lost her gift" rule (jpet
+      petLose, src "th") — that rule stays for neglect / harm / theft only. A Ngự tứ pet that dies takes its ĐỠ MỘT MẠNG with it; NO compensation
+      (owner 16/11 18:50Z, verbatim scope).
+   5. Co-op: her own pets roll locally; NPC pets roll and die on the host only (jmort convention), the guest mirrors the host's state. */
+Object.assign(BAL.pet,{life:{on:1,wY:36,floorW:4,oldDecay:1.4,careOk:70,careAff:50,careP:25,careLapse:40,giaArt:0,
+ /* years: mean / sd / lo / hi of the bell curve; old = age the pet turns Già; careMax = most years care can add (hard ceiling) */
+ dice:{thu:{mean:12,sd:3,lo:6,hi:20,old:9,careMax:1},chim:{mean:15,sd:4,lo:7,hi:25,old:11,careMax:1},ca:{mean:18,sd:5,lo:8,hi:30,old:13,careMax:1},
+  hac:{mean:30,sd:7,lo:18,hi:45,old:22,careMax:2},linh:{mean:28,sd:7,lo:15,hi:45,old:21,careMax:2},than:{mean:40,sd:10,lo:22,hi:70,old:30,careMax:3}},
+ grp:{meomuop:"thu",cho:"thu",tho:"thu",meo:"thu",sutu:"thu",linhmieu:"thu",hoami:"chim",sao:"chim",uyenuong:"chim",vet:"chim",camke:"chim",
+  cavang:"ca",cachep:"ca",lyngu:"ca",hac:"hac",cuuvi:"linh",thienma:"linh",ngoctho:"linh",phuong:"linh",bachloc:"than",kylan:"than",thanhlong:"than"},
+ oldN:"Già"}});
+/*CORE{*/
+function plGauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function plDice(k){const L=BAL.pet.life;return L.dice[L.grp[k]]||L.dice.thu}
+/* one lifespan in whole years for species k, not below `min` years (conditioned: redraw) */
+function plRoll(k,min){const c=plDice(k);for(let i=0;i<200;i++){const x=Math.floor(Math.max(c.lo,Math.min(c.hi,c.mean+c.sd*plGauss())));if(x>=min)return x}return Math.ceil(min)}
+/* the pet-year tick of care: returns the new care years (never above careMax, never below 0) */
+function plCareYear(P,k){const L=BAL.pet.life,c=plDice(k),x=P.lifeX||0;
+ if((P.care||0)>=L.careOk&&(P.aff||0)>=L.careAff&&x<c.careMax&&Math.random()*100<L.careP)return x+1;
+ if((P.care||0)<L.careLapse&&x>0)return x-1;return x}
+/*}CORE*/
+(function(){if(typeof BAL!=="object"||!BAL.pet||!BAL.pet.life||typeof petWeek!=="function")return;const L=BAL.pet.life;
+const cw=()=>window.COOPW&&COOPW.on,host=()=>!cw()||COOPW.seat==="a";
+const owners=()=>[S].concat(typeof petNpcs==="function"?petNpcs():liveRivals(true));
+function ageW(P){return Math.max(0,tsbWk()-(P.at||0))}
+function ageY(P){return Math.floor(ageW(P)/L.wY)}
+/* give P a lifespan once (old save: an age that fits its stage, at least floorW weeks left) */
+function plAssign(P){if(!P||P.life>0||!P.t)return P;const k=petK(P.t);
+ if(P.at==null){const s=typeof petStage==="function"?petStage(P):0;P.at=tsbWk()-((BAL.pet.ageW&&BAL.pet.ageW[s])||0)}
+ const w=ageW(P),min=(w+L.floorW)/L.wY;P.life=plRoll(k,min);P.lifeW=Math.floor(Math.random()*L.wY);
+ if(P.life*L.wY+P.lifeW<w+L.floorW)P.lifeW=Math.min(L.wY-1,w+L.floorW-P.life*L.wY);P.lifeY=ageY(P);P.old=ageY(P)>=plDice(k).old?1:0;return P}
+function plEnd(P){return P.life*L.wY+(P.lifeW||0)}
+/* the stage word shown for a pet: Già over its growth stage (jpetcare petcStageN) */
+window.petcStageN=function(P){try{if(P&&P.old)return L.oldN}catch(e){}return BAL.pet.stages[typeof petStage==="function"?petStage(P):0]};
+/* the keepsake: a small sachet holding a little fur / feather / scale of the pet; never sold, never given (keep), no effect */
+try{IT.petkv={n:"Túi kỷ vật",kd:"Kỷ vật",d:"Túi thơm nhỏ giữ chút lông, vảy của thú nuôi đã khuất · không bán, không tặng",pr:0,keep:1,tg:[]};
+ if(typeof ITIMG==="object"&&ITIMG)ITIMG.petkv=ITIMG.tuithom||"tuithom";
+ const n0=iname;iname=function(e){const r=n0.apply(this,arguments);return e&&e.k==="petkv"&&e.of?`${r} (${e.of})`:r}}catch(e){console.error("petkv",e)}
+/* the Thái hậu gift line names what still costs her favour: neglect / harm / loss, never old age */
+try{for(const k of ["hac","kylan"])if(PET[k]&&PET[k].bad)PET[k].bad=PET[k].bad.replace(/để chết hay bị hại|để mất/,"để chết vì bỏ bê, bị hại hay để mất (chết già thì không)")}catch(e){}
+/* death ledger for audits / bots: S.petDl = [{k species, a age years, x care years, who me|npc, y year}] (last 300) */
+function note(p,P){try{(S.petDl=S.petDl||[]).push({k:petK(P.t),a:ageY(P),x:P.lifeX||0,who:p===S?"me":"npc",y:S.year});if(S.petDl.length>300)S.petDl.shift()}catch(e){}}
+function farewell(P,T,y){const facts=[`${T.n} đã ở bên ngươi ${y} năm, đêm qua nằm yên trong ổ, ra đi thanh thản.`,
+  `Ngươi cho chôn nó dưới gốc mai sau cung, giữ lại một túi kỷ vật.`];if(T.rescue)facts.push("Phúc đỡ một mạng của thần thú cũng theo nó mà đi.");
+ setTimeout(()=>{try{if(typeof petcFx==="function")petcFx();kitModal({kind:"notice",title:`Tiễn biệt ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${L.oldN} · ${PET_TIER[T.tr]}`,
+  itemPic:typeof petcPic==="function"?petcPic(P,true):"",facts})}catch(e){console.error("pet farewell",e)}},60)}
+function oldCard(P,T){setTimeout(()=>{try{if(typeof petcFx==="function")petcFx();kitModal({kind:"notice",title:`${T.n} đã già`,sub:`${L.oldN} · ${PET_TIER[T.tr]}`,
+  itemPic:typeof petcPic==="function"?petcPic(P,true):"",facts:[`Công dụng vẫn giữ như cũ, nhưng nó mau mệt: No, Sạch, Vui hao nhanh hơn, phải chăm nhiều hơn.`,"Chăm khéo thì nó ở thêm với ngươi được ít lâu; tuổi trời đã định, không giữ mãi được."]})}catch(e){}},60)}
+/* one pet dies of old age: remove it the way jpet does, with no Thái hậu penalty (src cleared first), keepsake to the owner */
+function die(p,i,P){const me=p===S,T=petT(P),y=ageY(P);note(p,P);P.src="";
+ const n=petLose(p,i,"qua đời vì tuổi già");if(!n)return;
+ try{(p.inv=p.inv||[]).push({k:"petkv",of:T.n})}catch(e){}
+ if(me){log(`<span class="r">${T.n} của ngươi đã qua đời vì tuổi già (${y} năm). Ngươi chôn nó dưới gốc mai, giữ lại túi kỷ vật.</span>`);if(tsbOn()&&!tsbBot())farewell(P,T,y)}
+ else try{log(`${NM(p)}: ${T.n.toLowerCase()} của nàng đã chết già.`)}catch(e){}}
+function plWeek(){if(!L.on||!S||S.dead)return;const D=BAL.pet.decay,ex=L.oldDecay-1;
+ for(const p of owners()){const me=p===S;if(!me&&!host())continue;const Lp=tsbPets(p);
+  for(let i=Lp.length-1;i>=0;i--){const P=plAssign(Lp[i]);if(!P||!P.t)continue;const k=petK(P.t),c=plDice(k),y=ageY(P);
+   /* a new pet-year: care adds a little (hard ceiling) or a lapse takes it back */
+   if(y>(P.lifeY|0)){for(let n=(P.lifeY|0);n<y;n++){const x0=P.lifeX||0,x=plCareYear(P,k);if(x!==x0){P.life+=x-x0;P.lifeX=x;if(plEnd(P)<ageW(P))P.life=Math.ceil(ageW(P)/L.wY)}}P.lifeY=y}
+   if(ageW(P)>=plEnd(P)){die(p,i,P);continue}
+   if(!P.old&&y>=c.old){P.old=1;try{log(`${me?"":NM(p)+": "}${petT(P).n} đã già.`)}catch(e){}if(me&&tsbOn()&&!tsbBot())oldCard(P,petT(P))}
+   /* old pets tire faster: the extra share of the week's fall (the base fall ran in jpetcare petWeek) */
+   if(P.old&&ex>0&&P.full!=null){P.full=cl(P.full-D.full*ex,0,100);P.clean=cl(P.clean-D.clean*ex,0,100);P.joy=cl(P.joy-D.joy*ex,0,100);if(typeof petcSync==="function")petcSync(P)}}}}
+const w0=petWeek;petWeek=function(){const r=w0.apply(this,arguments);try{plWeek()}catch(e){console.error("petlife week",e)}return r};
+/* a new pet gets its lifespan lazily (next week / its card): a stolen pet first takes its old P.at (jpetcare petsteal), then rolls */
+/* old saves: roll once at load */
+const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(L.on)for(const p of owners())for(const P of tsbPets(p))plAssign(P)}catch(e){}return r};
+/* the pet card (one kit table, KIT §51): Già on the "Lớn" row, the pet's age, and what old age costs */
+const r0=petRowsL;petRowsL=function(P,i){const R=r0.apply(this,arguments);try{if(!L.on||!P)return R;plAssign(P);const y=ageY(P),w=ageW(P)%L.wY;
+ const age=["Tuổi",[`${y?`${y} năm `:""}${w} tuần${P.old?` · ${L.oldN}: mau mệt, No, Sạch, Vui hao nhanh hơn`:""}`],"n"];
+ const j=R.findIndex(r=>r&&r[0]==="Lớn");if(j>=0){if(P.old)R[j]=["Lớn",`<b>${L.oldN}</b> (${BAL.pet.stages[petStage(P)]})`];R.splice(j+1,0,age)}else R.push(age)}catch(e){}return R};
+/* the Già picture: switch giaArt (https://ctm-img.victoria-tntt.workers.dev/img/pet512/pet-<key>-gia.webp from Foreman C, KIT REQUEST) — until then the growth-stage picture */
+if(typeof petcStageSrc==="function"){const s0=petcStageSrc;petcStageSrc=function(P,big){const a=s0.apply(this,arguments);try{if(L.giaArt&&P&&P.old){const k=petK(P.t);return{src:`https://ctm-img.victoria-tntt.workers.dev/img/${big?"pet512/":""}pet-${k}-gia.webp`,fb:a.src,scale:1}}}catch(e){}return a}}
+window.plAssign=plAssign;window.plWeek=plWeek;window.plAgeY=ageY})();
 /* ================= jplace: THẺ NƠI CHỐN (KIT 32.8) + ONE OPTION LAYOUT RULE (KIT 32.9) — owner 11/15 08:55Z / 08:58Z =================
    Every place card (tap a place on Dư đồ or in Danh sách nơi; Xin bái kiến / Xin yết kiến / Lẻn vào; the greeting card; the last walk
    of a buổi) wears the SAME large place-event frame as place event dialogs (32.6): TOP = the place picture of the current season + buổi
@@ -36076,7 +36162,7 @@ Object.assign(BAL,{cardFlip:{
     (t.centre = lift2 + turn.lift; t.res = centre + turn.move + turn.pause; t.end = res + turn.tail): change the numbers here only. */
  turn:{lift:700,move:1300,pause:1100,tail:4200,ease:"cubic-bezier(.45,0,.55,1)"},
  slow:BAL.pace,  /* = the ONE kit pace (BAL.pace, KIT §83; owner 16/11 "vẫn còn nhanh quá"): every hard-coded motion below × slow; t / turn / hold are already the slowed numbers */
- t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6500,lift2:7600,centre:0,res:0,end:0},other:.82,
+ t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6200,lift2:7600,centre:0,res:0,end:0},other:.82,
  hold:{me:5200},  /* only the fallback when the kit button part is missing */
  /* the reveal light = the WHOLE frame glows (owner 16/11 12:00Z: "nguyên cái khung nó phát sáng lên", never a light that runs round the ring): one soft warm halo hugging the frame ring
     (path = the frame ring's rectangle, fractions of the card), breathing slowly (opacity only, `breath` ms per cycle); nothing is drawn over the portrait window. */
@@ -36087,8 +36173,12 @@ Object.assign(BAL,{cardFlip:{
  plates:{l:{ar:4/3,a:"cf-gplate-ksp",b:"cf-gplate-emp",fa:{x0:.125,y0:.235,x1:.875,y1:.700},fb:{x0:.125,y0:.235,x1:.875,y1:.700},rim:{x0:.055,y0:.150,x1:.945,y1:.790}},
          p:{ar:3/4,a:"cf-gplate-ksp-p",b:"cf-gplate-emp-p",fa:{x0:.105,y0:.272,x1:.890,y1:.695},fb:{x0:.105,y0:.300,x1:.892,y1:.655},rim:{x0:.02,y0:.21,x1:.98,y1:.75}}},
  portraitBelow:.95, /* screen w/h below this uses the portrait pair */
- /* the painted hand: pinch point (fraction of the sprite), sprite height in card heights */
- hand:{px:.70,py:.905,h:2.7},
+ /* the Emperor's hand (kit part kitEmpHand; owner 16/11 17:40Z: bigger, a whole hand + sleeve reaching in from the screen edge, never cut, never pasted on).
+    px,py = pinch point (fraction of the sprite); rot = degrees the sprite is turned so the sleeve runs straight up out of the screen; sleeve = the two sprite edges that
+    carry the sleeve (left edge rows 0..cutL, top edge columns 0..cutT, measured from the pixels): they must lie ABOVE the screen top, so the sprite height is at least
+    pinchY / room (room = how much of the sprite height lies above the pinch point at the lowest cut edge after the turn, ~.62). h = minimum height in card heights,
+    minH / maxH = fractions of the screen height. reach / press / leave = the ease-in, the touch-down dip (fraction of a card height) and the retreat. */
+ hand:{px:.70,py:.905,rot:32,cutL:.43,cutT:.43,room:.58,h:3.6,minH:.40,maxH:.86,reach:.7,press:.06,lift:.10,leave:.8,shadow:{dx:.11,dy:.075,blur:.022,op:.4,hi:2.1}},
  skipNoPick:false}});
 (function(){
 const CF=BAL.cardFlip;{const t=CF.t,u=CF.turn;t.centre=t.lift2+u.lift;t.res=t.centre+u.move+u.pause;t.end=t.res+u.tail}const DIR="https://ctm-img.victoria-tntt.workers.dev/img/kit/";const AR=550/1037;
@@ -36099,6 +36189,38 @@ const red=()=>{try{return typeof kmReduced==="function"?kmReduced():matchMedia("
 function snd(n,at){const go=()=>{try{if(window.__bot)return;if(typeof sfx==="function")sfx(n)}catch(e){}};if(at)setTimeout(go,at);else go()}
 /* load AND decode before the scene starts (img.decode(): the bitmap is ready, nothing is decoded mid-flip); the Image is kept so the decoded bitmap stays cached */
 const PRE={},KEEP=[];function preload(src){if(PRE[src])return PRE[src];const im=new Image();KEEP.push(im);PRE[src]=new Promise(r=>{let d=0;const done=()=>{if(!d){d=1;r()}};setTimeout(done,2500);im.onerror=done;im.onload=()=>{try{im.decode().then(done,done)}catch(e){done()}}});im.src=src;return PRE[src]}
+/* ---------- KIT PART kitEmpHand (KIT §67b): the Emperor's hand ----------
+   ONE part for every place his hand appears (today only this scene). The painted sleeve + hand (cf-hand-emp) is sized from the SCREEN, never from the card alone, turned so the
+   forearm runs straight up, and placed so the sprite's two cut edges (where the sleeve leaves the picture) lie above the top of the screen: it always comes IN FROM THE SCREEN EDGE
+   as a whole arm, never a cut-off picture floating on the scene. Two layers, both transform-only: the hand and a soft blurred shadow (the hand's own silhouette) that lies on the
+   tray, far off while the hand is high and tucked under it when it touches. No fade-in: the arm slides in along its own axis (ease-out), dips a hair to touch the card, lifts WITH it by
+   the same pixels, and leaves the way it came (ease-in). `hand` = the .kcf-hand wrapper (fixed, holds .kcf-hs shadow + .kcf-hi hand); `tel` = the card; opt.still = no motion. */
+function kitEmpHand(hand,tel,opt){opt=opt||{};const H=CF.hand,SH=H.shadow,hi=hand.querySelector(".kcf-hi"),hs=hand.querySelector(".kcf-hs");let g=null,cur=null;
+ const A2=(el,kf,op)=>{try{return el.animate(kf,Object.assign({fill:"forwards"},op))}catch(e){return null}};
+ const aspect=()=>(hi.naturalWidth&&hi.naturalHeight)?hi.naturalWidth/hi.naturalHeight:306/480;
+ function place(){const r=tel.getBoundingClientRect(),vh=innerHeight,ar=aspect();const px=r.left+r.width*.5,py=r.top+r.height*.12;
+  const th=H.rot*Math.PI/180,c=Math.cos(th),sn=Math.sin(th);
+  /* lowest cut-edge point after the turn: left edge (0,cutL) and top edge (cutT,0), measured from the pinch point, in sprite-height units */
+  const rel=(u,v)=>{const x=(u-H.px)*ar,y=v-H.py;return{x:x*c-y*sn,y:x*sn+y*c}};
+  const up=Math.min(-rel(0,H.cutL).y,-rel(H.cutT,0).y,-rel(0,0).y);   /* how far above the pinch the lowest cut point sits, per sprite height */
+  let hh=Math.max(r.height*H.h,vh*H.minH,py/Math.min(H.room,up*.97));hh=Math.min(hh,vh*H.maxH);
+  /* if the height cap stops the arm leaving the screen, tuck the pinch point no lower than the cap allows (the hand is as big as the screen lets it be) */
+  const hw=hh*ar;g={px,py,hh,hw,r,reach:py+hh*.42};
+  Object.assign(hand.style,{left:(px-hw*H.px)+"px",top:(py-hh*H.py)+"px",width:hw+"px",height:hh+"px"});
+  for(const im of [hi,hs]){im.style.transformOrigin=`${H.px*100}% ${H.py*100}%`;im.style.transform=`rotate(${H.rot}deg)`}
+  hs.style.filter=`brightness(0) blur(${(hh*SH.blur).toFixed(1)}px)`;hs.style.opacity=SH.op;
+  return g}
+ return{
+  reach(ms){place();hand.classList.add("on");const k=g;if(opt.still)return;const d=Math.round(k.reach),pr=k.r.height*H.press,e="cubic-bezier(.2,.75,.25,1)";
+   /* one move: slide in along the arm (ease-out) to the card, then the touch-down dip, and rest there until the card is picked */
+   cur=A2(hand,[{transform:`translate(${-k.hh*.05}px,${-d}px)`,easing:e},{transform:"none",offset:H.reach},{transform:`translateY(${pr}px)`}],{duration:ms,easing:"ease-in-out"});
+   const sh=(m,o)=>`translate(${k.hh*SH.dx*m}px,${k.hh*SH.dy*m}px) rotate(${H.rot}deg)`;
+   A2(hs,[{transform:sh(SH.hi),opacity:SH.op*.5,easing:e},{transform:sh(1),opacity:SH.op,offset:H.reach},{transform:sh(.8)}],{duration:ms,easing:"ease-in-out"})},
+  lift(ms,ease){if(!g||opt.still)return;const pr=g.r.height*H.press,up=g.r.height*(H.press-H.lift);A2(hand,[{transform:`translateY(${pr}px)`},{transform:`translateY(${up}px)`}],{duration:ms,easing:ease});
+   A2(hs,[{transform:`translate(${g.hh*SH.dx*.8}px,${g.hh*SH.dy*.8}px) rotate(${H.rot}deg)`},{transform:`translate(${g.hh*SH.dx*1.35}px,${g.hh*SH.dy*1.35}px) rotate(${H.rot}deg)`}],{duration:ms,easing:ease})},
+  leave(ms){if(!g||opt.still){hand.classList.remove("on");return}const y=g.r.height*(H.press-H.lift),d=Math.round(g.reach+g.hh*.1);
+   A2(hand,[{transform:`translateY(${y}px)`},{transform:`translate(${-g.hh*.05}px,${-d}px)`}],{duration:ms,easing:"cubic-bezier(.5,0,.8,.5)"})}}}
+window.kitEmpHand=kitEmpHand;
 function byId(id){if(id==="me")return S;return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id)||null}
 function rk(p){try{return p===S?S.rank:rkOf(p)}catch(e){return p&&p.rank||0}}
 function cycleOf(p){try{if(typeof inCycle==="function")return !!inCycle(p);if(typeof cycleDaysOf==="function"){const d=cycleDaysOf(p,S.month);return Array.isArray(d)&&d.includes(S.tuan)}}catch(e){}return false}
@@ -36137,11 +36259,11 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
  const cards=deck.map((c,i)=>{const p=all[i];const lab=`${esc(rankName(c.p))} ${esc(nameOf(c.p))}`;
-  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}"><div class="kcf-f">${face(c.p)}${c.p===S?`<i class="kcf-mine"></i>`:""}</div>${tagOf(c.p,p.w)}</div>`}).join("");
+  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}"><i class="kcf-cs"></i><div class="kcf-f">${face(c.p)}${c.p===S?`<i class="kcf-mine"></i>`:""}</div>${tagOf(c.p,p.w)}</div>`}).join("");
  ov.innerHTML=`<div class="kcf-w" style="left:${B.x.toFixed(1)}px;top:${B.y.toFixed(1)}px;width:${B.W.toFixed(1)}px;height:${B.H.toFixed(1)}px">
   <img class="kcf-pl kcf-a" src="${ART.a}" alt="" draggable="false"><img class="kcf-pl kcf-b" src="${ART.b}" alt="" draggable="false">
   <div class="kcf-cards">${cards}</div><div class="kcf-lamp"></div><div class="kcf-vig"></div></div>
-  <img class="kcf-hand" src="${ART.hand}" alt="" draggable="false">
+  <div class="kcf-hand"><img class="kcf-hs" src="${ART.hand}" alt="" draggable="false"><img class="kcf-hi" src="${ART.hand}" alt="" draggable="false"></div>
   <div class="kmcap kcf-cap">Kính sự phòng dâng thẻ bài</div><div class="kcf-res"></div><div class="kmhint">Chạm để bỏ qua</div>`;
  document.body.appendChild(ov);
  const W=ov.querySelector(".kcf-w"),cap=ov.querySelector(".kcf-cap"),res=ov.querySelector(".kcf-res"),hand=ov.querySelector(".kcf-hand");
@@ -36206,14 +36328,12 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   A(W,[{transform:"none"},{transform:"translateX(-4%) scale(1.03)",offset:.45},{transform:"none"}],{duration:1050*SL,easing:"ease-in-out",fill:"none"});snd("sfx-step",120)});
  /* 4 · his hand reaches in; the card lifts, glows and grows to the centre */
  if(!tel){later(T.hand,()=>showRes());later(T.hand+600,final);return{ov,close}}
- later(T.hand,()=>{const r=tel.getBoundingClientRect();const hh=Math.min(innerHeight*.78,r.height*CF.hand.h),hw=hh*701/1100;
-  const x=r.left+r.width*.5-hw*CF.hand.px,y=r.top+r.height*.12-hh*CF.hand.py;Object.assign(hand.style,{left:x+"px",top:y+"px",height:hh+"px",width:hw+"px"});hand.classList.add("on");
-  A(hand,[{transform:`translate(${-hw*.35}px,${-hh*.75}px) rotate(-6deg)`,opacity:0},{transform:"none",opacity:1}],{duration:650*sp*SL,easing:"cubic-bezier(.25,.8,.3,1)"})});
+ const eh=kitEmpHand(hand,tel,{still,time:sp*SL});
+ later(T.hand,()=>eh.reach(T.lift2-T.hand));
  later(T.lift2,()=>{snd("sfx-tablet-flip");tel.classList.add("kcf-pick");ov.classList.add("kcf-dim");
-  liftA=A(tel,[{transform:"none"},{transform:"translateY(-10%) scale(1.08)"}],{duration:CF.turn.lift*sp,easing:CF.turn.ease});
-  A(hand,[{transform:"none",opacity:1},{transform:"translateY(-9%)",opacity:1}],{duration:CF.turn.lift*sp,easing:CF.turn.ease})});
+  liftA=A(tel,[{transform:"none"},{transform:`translateY(${-CF.hand.lift*100}%) scale(1.08)`}],{duration:CF.turn.lift*sp,easing:CF.turn.ease});eh.lift(CF.turn.lift*sp,CF.turn.ease)});
  later(T.centre,()=>{const r0=tel.getBoundingClientRect();const c=centreRect();
-  A(hand,[{transform:"translateY(-9%)",opacity:1},{transform:`translate(${-r0.width}px,-70%)`,opacity:0}],{duration:CF.turn.move*sp*.8,easing:"ease-in"});
+  eh.leave(CF.turn.move*sp*CF.hand.leave);
   if(liftA){try{liftA.cancel()}catch(e){}liftA=null}
   Object.assign(tel.style,{left:(c.x-B.x)+"px",top:(c.y-B.y)+"px",width:c.w+"px"});const r1=tel.getBoundingClientRect();
   A(tel,[{transform:`translate(${r0.left-r1.left}px,${r0.top-r1.top}px) scale(${r0.width/r1.width})`,transformOrigin:"0 0"},{transform:"none",transformOrigin:"0 0"}],{duration:CF.turn.move*sp,easing:CF.turn.ease})});
@@ -36303,8 +36423,12 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-halo{position:fixed;z-index:6;pointer-events:none;border:3px solid #fff0b8f0;box-shadow:0 0 calc(var(--hb)*.45) calc(var(--hs)*.7) #fff6cc,0 0 var(--hb) var(--hs) #ffd877f2,0 0 calc(var(--hb)*2.2) calc(var(--hs)*1.6) #ffb23fb0,0 0 calc(var(--hb)*4) calc(var(--hs)*2) #ff9a2e55;opacity:var(--ho,1)}
 .kcf-halo.kcf-breath{animation:kcfBreath var(--hd,3600ms) ease-in-out infinite}
 @keyframes kcfBreath{0%,100%{opacity:var(--hl,.62)}50%{opacity:var(--ho,.9)}}
-.kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none;filter:sepia(.18) saturate(.95) brightness(.9) drop-shadow(6px 10px 8px #1a0a0480)}
+.kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none}
 .kcf-hand.on{display:block}
+.kcf-hand img{position:absolute;inset:0;width:100%;height:100%;user-select:none;pointer-events:none}
+.kcf-hi{filter:sepia(.14) saturate(.96) brightness(.93)}   /* the same warm grade as the tray; no drop-shadow here (the blurred .kcf-hs under it is the shadow) */
+.kcf-cs{position:absolute;left:8.5%;top:17.8%;width:83%;height:54.4%;border-radius:3cqw;background:#1a0804;filter:blur(2.4cqw);opacity:0;pointer-events:none;transition:opacity calc(.7s*var(--kcf-s,1)) ease,transform calc(.7s*var(--kcf-s,1)) ease}
+.kcf-pick .kcf-cs{opacity:.5;transform:translate(5cqw,9cqw)}   /* the card he lifted throws a soft shadow on the tray that moves away as it rises */
 .kcf-act .kcf-hand,.kcf-act .kcf-seal{will-change:transform}
 .kcf-cap{position:absolute;left:0;right:0;top:max(10px,env(safe-area-inset-top));text-align:center;z-index:7;padding:0 12px}
 .kcf-res{position:absolute;left:0;right:0;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 22px);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px;opacity:0;pointer-events:none}
@@ -36552,7 +36676,7 @@ window.kitCoach=kitCoach;window.kitCoachOff=coachOff;
 
 /* ---------- kitTip: small lời dặn card, never blocks, once each ---------- */
 let TIPEL=null;
-function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next,.kloadchip").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
+function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
  el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
@@ -37215,6 +37339,8 @@ function sgRun(id,k,m){const v=RV(id),i=rivals.indexOf(v);if(i<0)return;SG.mod=m
    the goal strip on the stage and on top of Hành sự, §72.2; a small dot while the goal changed and she has not opened it).
    (2) Chat is added by co-op chat (review/coop-chat) through the API:
      kitStageRail.add({id, icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/….webp", title:"Tên", onTap:fn, badge:()=>bool, when:()=>bool, order:20})
+   Status-icon extras (§77.1, used by kitStatusIcon in jstatus.js): glyph:"↓" (text placeholder instead of icon), busy:()=>bool (tiny CSS-only motion on the glyph),
+   done:()=>bool (still, green), onTitle:true (also shown in a fixed bottom-left dock while no game is on screen).
      kitStageRail.remove(id) · kitStageRail.paint() (re-draw now; it also re-draws after every renderStage / render and on resize).
    Kit look: the square kit icon button (card paper, gold hairline, soft shadow) with a painted icon; the badge = the kit seal-red dot.
    Old saves load unchanged: S.goalSeen is new and optional. */
@@ -37227,11 +37353,20 @@ function place(el,st){try{const t=st.querySelector("#sc-t");const R0=st.getBound
   if(t&&t.offsetParent){const q=t.getBoundingClientRect();if(q.bottom>R0.top&&q.top<R0.top+80)top=Math.max(top,Math.round(q.bottom-R0.top+6))}
   el.style.top=top+"px"}catch(e){}}
 function paint(){try{const st=document.getElementById("stage");let el=document.getElementById("krail");
- const live=typeof S!=="undefined"&&S&&!S.dead;if(!st||!live){if(el)el.remove();return}
- const L=R.filter(x=>val(x.when,true));if(!L.length){if(el)el.remove();return}
+ const tt=document.getElementById("title");const onTitle=!!(tt&&!tt.hidden&&tt.getClientRects().length);
+ /* on a portrait tab that hides the stage (its height is 0) the stage rail cannot be seen: only the status icons stay, in the fixed corner dock above the tab bar */
+ const stOn=!!st&&st.getBoundingClientRect().height>40;
+ const live=typeof S!=="undefined"&&S&&!S.dead&&!!st&&!onTitle&&stOn;
+ /* no game on screen (title / loading): only items flagged onTitle (status icons, §77.1) live in a fixed corner dock; the game's own shortcuts wait */
+ let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
+ const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
- const h=L.map(x=>{const b=val(x.badge,false);return `<button type="button" class="krailb${b?" kbadge":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}"><img src="${x.icon}" alt="" decoding="async"></button>`}).join("");
- if(el.__h!==h){el.innerHTML=h;el.__h=h}if(el.parentNode!==st)st.appendChild(el);place(el,st)}catch(e){console.error("kitStageRail",e)}}
+ const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" class="krailb${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${x.icon}" alt="" decoding="async">`}</button>`}).join("");
+ const host=live?st:document.body;el.classList.toggle("kstdock",!live);
+ if(el.__h!==h){el.innerHTML=h;el.__h=h}if(el.parentNode!==host)host.appendChild(el);
+ if(live){place(el,st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
+ /* the stage may collapse / grow a moment after a tab change: look once more when the layout has settled */
+ if(!paint.__t){paint.__t=setTimeout(()=>{paint.__t=0;const s2=document.getElementById("stage"),on=!!s2&&s2.getBoundingClientRect().height>40;if(on!==stOn)paint()},450)}}catch(e){console.error("kitStageRail",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#krail [data-rail]");if(!b)return;e.stopPropagation();e.preventDefault();
  const x=byId(b.dataset.rail);if(!x||typeof x.onTap!=="function")return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(y){}try{x.onTap()}catch(y){console.error("rail tap",y)}paint()},true);
 try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);paint();return r}}}catch(e){}
@@ -37251,11 +37386,44 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
  background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8892b);box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),inset 0 0 0 3px var(--k-hair,#e6d3ac),0 2px 6px #0003;display:flex;align-items:center;justify-content:center}
 .krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .krailb:active{transform:scale(.94)}
+.krailg{font:700 22px/1 var(--body,inherit);color:var(--ink,#3a2418);display:block;pointer-events:none}
+.krailb.kbusy .krailg{animation:krailDl calc(1.8s*var(--pace,1)) ease-in-out infinite}
+@keyframes krailDl{0%,100%{transform:translateY(-3px);opacity:.55}50%{transform:translateY(3px);opacity:1}}
+.krailb.kdone .krailg{color:var(--k-ok,#3c6b32)}
+.krail.kstdock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700}
+body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
  html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["mo-calendar","Lịch tháng",0],["ico-chat","Chat",0],["mo-edict-closed","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
+/* ================= jstatus: kitStatusIcon — ONE status icon (KIT §77.1, owner 16/11 16:25Z, review/status-icons) =================
+   Owner: "nhiều game bây giờ nó làm rất là đơn giản. Nó chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi
+   biết là có cái gì đó đang download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon
+   được thì mình cứ việc bỏ thôi."  → a status that has no business on screen as a chip/strip is a SQUARE kit icon (the stage rail button, §77) with
+   a tiny activity animation while it is running; tap → a kit info panel (kitPanel kind "info", ✕ top-right / tap outside / Esc, NO "Đã hiểu").
+   API:  kitStatusIcon.set(id, {title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec | onTap:fn (own card), order})
+         kitStatusIcon.refresh()  (call after the state changed) · kitStatusIcon.remove(id) · kitStatusIcon.items()
+   - It lives in the stage rail (left column, under the scene title, never over a face); while no game is on screen (title) the same square button sits
+     in a fixed bottom-left dock (rail `onTitle`). Nothing else floats; no strip, no chip, no reserved band under the tab bar.
+   - busy = glyph bobs up and down (transform + opacity only, BAL.pace slow, off under reduced motion / Hiệu ứng Gọn: `reducedMotion()`); done = still, green;
+     badge = the kit seal-red dot (something needs her: paused / error).
+   - glyph is a PLAIN TEXT PLACEHOLDER until Foreman C draws the painted icon (ART REQUEST: download icon → swap `glyph` for `icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/….webp"`).
+   Old saves: no state, nothing stored (the pause flag stays in localStorage as before). */
+(function(){try{
+const M=new Map();
+function railItem(id,o){return{id:"st-"+id,order:o.order||40,title:o.title,glyph:()=>{try{return(typeof o.glyph==="function"?o.glyph():o.glyph)||"•"}catch(e){return"•"}},icon:o.icon,
+ busy:o.busy,done:o.done,badge:o.badge,onTitle:true,when:()=>{try{return o.show?!!o.show():true}catch(e){return false}},onTap:()=>open(id)}}
+function set(id,o){if(!id||!o)return;M.set(id,o);if(window.kitStageRail)kitStageRail.add(railItem(id,o))}
+function refresh(){if(window.kitStageRail)kitStageRail.paint()}
+function remove(id){M.delete(id);if(window.kitStageRail)kitStageRail.remove("st-"+id)}
+function open(id){const o=M.get(id);if(o&&typeof o.onTap==="function"){o.onTap();return}if(!o||typeof o.panel!=="function")return;let sp=null;try{sp=o.panel()}catch(e){console.error("kitStatusIcon panel",e)}if(!sp)return;
+ sp=Object.assign({kind:"info"},sp);sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
+ try{kitPanel(sp,true);showModal()}catch(e){console.error("kitStatusIcon open",e)}}
+window.kitStatusIcon={set,refresh,remove,open,items:()=>[...M.keys()]};
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.1",title:"kitStatusIcon · icon trạng thái (đang chạy · xong · cần chú ý), chạm → bảng thông tin",
+ html:()=>`<div class="kitpg-row" style="position:relative;height:70px"><nav class="krail" style="position:static;flex-direction:row">${[["Đang thỉnh tranh (nhấp nhô)"," kbusy","↓"],["Đã thỉnh đủ"," kdone","✓"],["Tạm ngưng (có chấm đỏ)"," kbadge","↓"]].map(([t,c,g])=>`<button type="button" class="krailb kglyph${c}" title="${t}"><span class="krailg">${g}</span></button>`).join("")}</nav></div>`})}catch(e){}
+}catch(e){console.error("jstatus",e)}})();
 /* j84 — VĂN PHONG: every player-visible word in one classical (cổ trang) register. Style guide: dev/kit/VANPHONG.md.
    Must stay the LAST module. It changes no rule or number: (1) data patches (tab names, tooltips); (2) one replacement
    table window.VP applied to text nodes and to title/aria-label/placeholder/data-s attributes as they appear on screen
@@ -43713,7 +43881,7 @@ window.__ctmBuilt=1;
    a new build NEVER reloads the page in the middle of play.
    - registers sw.js (updateViaCache none) and asks for a new sw.js on open, on every return to the foreground and every 20 min.
      A new worker takes over ('controllerchange') → the build is "pending".
-   - pending while playing: only the kit chip "Có bản mới" on the top bar (#kupdchip, beside her rank). Tap → kit card
+   - pending while playing: only the kit status icon "Có bản mới" (kitStatusIcon "upd", KIT §77.1: square rail icon with a red dot, no chip on the top bar). Tap → kit card
      "Có bản mới · Mở bản mới ngay?" with Để sau / Mở bản mới.
    - the new build opens by itself only at a natural break:
        · Sang buổi / Sang ngày mới: once the new buổi has begun (and its dialogs are read; not after she has spent a khắc of it),
@@ -43730,7 +43898,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="688e7813d04d";window.CTM_BUILD=BUILD;
+const BUILD="8be5738e1d83";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
@@ -43828,9 +43996,6 @@ function hookCoop(){const c=coop();if(!c||!c.on||K.hooked)return;K.hooked=true;
 
 /* ---------- kit pieces: chip on the top bar, the card, the one-line notice ---------- */
 function css(){if($i("kit-upd"))return;const st=document.createElement("style");st.id="kit-upd";st.textContent=`
-.kupdchip{position:fixed;z-index:25;display:inline-flex;align-items:center;gap:5px;margin:0;font:600 .72rem/1.25 var(--body,inherit);padding:2px 9px 2px 7px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:#fffaf0f0;color:var(--ink,#3a2418);box-shadow:0 2px 8px #0002;cursor:pointer;white-space:nowrap}
-.kupdchip::before{content:"";width:7px;height:7px;border-radius:50%;background:#b0402c;box-shadow:0 0 0 2px #b0402c33}
-.kupdchip[hidden]{display:none}
 .kupd{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);transform:translateX(-50%);z-index:9700;width:min(420px,calc(100vw - 24px));animation:kupdIn .3s ease}
 .kupd .dlg.kpanel{width:100%;max-width:none;margin:0;box-shadow:0 6px 24px #0006}
 .kupd .dlg.kpanel .kpb{padding:8px 14px 2px;min-height:0;flex:none}.kupd .dlg.kpanel .kpnote{margin:0}
@@ -43839,27 +44004,10 @@ function css(){if($i("kit-upd"))return;const st=document.createElement("style");
 @keyframes kupdIn{from{opacity:0;transform:translate(-50%,12px)}}
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
-/* beside her rank / age on the top bar; under the date when that row is full; never over another part of the bar (nor the Trân nữ seal):
-   no free spot in the bar (one-row iPad bar with a long name) -> just under the bar, centred */
-function place(){const el=$i("kupdchip");if(!el)return;
- const show=K.pending&&!K.leaving&&playing()&&!busy();el.hidden=!show;K.chip=show;if(!show)return;
- const hud=document.querySelector("header.hud"),r=$i("me-r"),d=$i("me-d"),me=$i("me");if(!hud||!r||!me){el.style.cssText="top:8px;right:8px";return}
- const H0=hud.getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight,sl=hud.querySelector(".kseal-hud");/* the Trân nữ seal (jseal) owns the bar's right end */
- const H={left:H0.left,top:H0.top,bottom:H0.bottom,right:sl?Math.min(H0.right,sl.getBoundingClientRect().left-4):H0.right};
- const others=[...hud.children].filter(e=>e!==me&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
- const free=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&!others.some(q=>x<q.right+4&&x+w>q.left-4&&y<q.bottom&&y+h>q.top);
- const row=r.closest(".k3rr")||r,rr=[row,...row.querySelectorAll("*")].map(e=>e.getBoundingClientRect()).filter(q=>q.width).reduce((a,q)=>({right:Math.max(a.right,q.right),top:a.top,height:a.height}),row.getBoundingClientRect()),dr=d?d.getBoundingClientRect():rr;
- /* 3rd spot (one-row iPad bar, rank row full): right of the "Buổi …" line, checked against every visible leaf of the bar + the seal, so it
-    never lands on the stage under the bar (owner 16:40Z: the update chip must not sit over the scene) */
- const tm=hud.querySelector("#k3tc .k3time"),lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
- const leafFree=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&y>=H0.top&&y+h<=H0.bottom&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+1&&y+h>q.top-1);
- const tr=tm&&tm.getBoundingClientRect(),c3=tr&&tr.width?[[tr.right+12,tr.top+(tr.height-h)/2]].filter(([x,y])=>leafFree(x,y)):[];
- const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].filter(([x,y])=>free(x,y)).concat(c3)[0]||[Math.max(H.left+4,(H.left+H.right-w)/2),H0.bottom+4];
- el.style.left=Math.round(at[0])+"px";el.style.top=Math.round(at[1])+"px"}
-function chip(){css();let el=$i("kupdchip");
- if(!el){el=document.createElement("button");el.id="kupdchip";el.className="kchip kupdchip";el.type="button";el.textContent="Có bản mới";el.setAttribute("aria-label","Có bản mới · chạm để xem");
-  el.addEventListener("click",e=>{e.stopPropagation();card()});document.body.appendChild(el)}
- place()}
+/* the status icon (kitStatusIcon "upd", jstatus): shown only while a new build is pending, she is playing and no dialog is open; the rail repaints on every tick */
+const showIcon=()=>!!(K.pending&&!K.leaving&&playing()&&!busy());
+function place(){K.chip=showIcon();try{if(window.kitStatusIcon)kitStatusIcon.refresh()}catch(e){}}
+function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,glyph:"⟳",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
 K.showChip=()=>{K.pending=true;chip()};/* test hook (dev/test/brand-seal.js): the chip alone, no card */
 function close(){if(K.cardEl){K.cardEl.remove();K.cardEl=null}place()}
 function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")return null;
