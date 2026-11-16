@@ -34,9 +34,12 @@
 | kinh | 87% / 100% / 9.5 (n=30) | 20% / 93% / 7.8 (n=30) | 0% / 0% / 5.0 (n=30) | 0% / 0% / 0.0 (n=30) |
 | may | 83% / 97% / 9.2 (n=30) | 20% / 73% / 7.2 (n=30) | 0% / 0% / 4.7 (n=30) | 0% / 0% / 0.0 (n=30) |
 | mua | 60% / 67% / 7.3 (n=30) | 40% / 47% / 5.8 (n=30) | 37% / 47% / 5.7 (n=30) | 0% / 0% / 0.0 (n=30) |
+| td_cong | 90% / 93% / 9.7 (n=30) | 37% / 43% / 7.6 (n=30) | 27% / 27% / 7.1 (n=30) | 0% / 0% / 0.0 (n=30) |
+| td_dung | 0% / 0% / 0.0 (n=30) | 0% / 0% / 0.0 (n=30) | 0% / 0% / 0.0 (n=30) | 0% / 0% / 1.8 (n=30) |
+| td_hanh | 83% / 97% / 9.4 (n=30) | 100% / 100% / 9.8 (n=30) | 90% / 93% / 9.1 (n=30) | 0% / 0% / 0.0 (n=30) |
 | theu | 30% / 77% / 7.7 (n=30) | 23% / 57% / 7.1 (n=30) | 20% / 63% / 6.8 (n=30) | 0% / 0% / 0.0 (n=30) |
 | ve | 93% / 100% / 9.7 (n=30) | 17% / 90% / 7.7 (n=30) | 0% / 0% / 4.5 (n=30) | 0% / 0% / 0.0 (n=30) |
-| **mean of kinds** | 67% | 34% | 17% | 0% |
+| **mean of kinds** | 65% | 36% | 21% | 0% |
 
 Reading: target "skilled at matching level 20–30 % Xuất sắc, random ~0 %": ban 30, dan 30, den 27, duho 30, hat 20, hoa 30, kim 30, kinh 20, may 20, theu 23, ve 17, huong 37, mua 40 → 11 of 16 inside 20–30 % (ve 17, huong 37 close; ±8 points is the n=30 noise).
 Random bot 0 % everywhere. Order Dễ > Vừa > Khó holds for every engine except co/den/mua/theu (flat).
@@ -46,8 +49,13 @@ OUT OF TARGET (open, honest):
 - mua (Múa) 40 %, flat across tiers — memory errors are all-or-nothing; mgMore adds steps but the bot's slip model dominates.
 - dauho (Đầu hồ): the skilled bot itself cannot aim the fling (≈3/10 everywhere) → not calibrated; kAdj 0.
 - Khó for the tracing games (ve/kinh/may) and hat: mean ≈ 5 ("Khá"), 0 % Giỏi — harsh but only when the occasion is ≥ 1.5 levels above her skill.
+- Tứ đức games (jtd, new on main): wired (mgSet, mgTol, float scores). td_cong 37 % at Vừa (kG 1.6); td_hanh (share portions) saturates like co/banh; td_dung (balance the bowl) — the skilled bot cannot play its hold-left/right control (0/10), not calibrated. td_ngon (Ứng đối) is a WORD game → UNASSIGNED for a no-word replacement.
 - Not tiered (no board ease today, own BAL.toil / pet numbers): Điểm trang (jtoil), Chải chuốt (j92), Phối đồ (jts), pet care games (jpetcare).
 
 ## Resume
 - Re-measure one engine: `node dev/measure/mg-bots.js http://127.0.0.1:<port>/index.html <kind> hoc/0/2,hoc/4/2,hoc/6/1 skilled,random 30 3 /tmp/x.json` (serve the repo root after `bash dev/site/build_site.sh`).
 - Trim only `BAL.mgTier.kAdj[kind]` (ease) or `kG[kind]` (grade curve).
+
+## Tests (11/16/2026, merged origin/main 9ddb3f6c)
+`node dev/test/mg-balance-vp.js <old main build> <new build>`: old save (slot 3, made on the main build) loads; 28 minigame kinds (every KG82_KIND with an engine, incl. exam quiz kinds, Tứ đức games, Chải chuốt) open and FINISH
+at 755x1000@2, 1000x755@1, 1180x820@2, 1366x1024@2, 844x390@2, 390x844@2; the "Độ khó" tier row shows on the contest intro; 0 page errors; 0 horizontal overflow. Site rebuilt (dev/site/build_site.sh).
