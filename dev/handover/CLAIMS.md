@@ -68,3 +68,6 @@
 | low-context canon split (OD:L1241) — same worker as canon-pairs | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus) | RUNNING | 16/11 06:46Z |
 | D6 review | review/econ-items-r1 | C | session_011xDdVQ5xcrYDf3N1snQ5L1 | RUNNING | 06:46Z 16/11 |
 | C44 cloud-save-r1 re-merge on main (auto-deploys coop Worker) | review/merge-hot-4 | main s11 | session_01UV1SzhS3WeMXFgk8CgeevX (sonnet) | RUNNING | 16/11 06:47Z |
+| kc-lore reviewer | review/kc-lore-r1 | main s11 | session_01UV1SzhPB8Tmqmw8DBzHGe3 (sonnet) | RUNNING | 16/11 06:53Z |
+| merge-train-5: personality-r1, tuduc-pic-r1, newgame-ui-r3, opt-pics3-r1, skin-audit-r1 → main | review/merge-train-5 | main s11 | session_01UV1SzkywkDv2a9TAUts211 (sonnet) | RUNNING | 16/11 06:53Z |
+| npc-mind: personality/sở trường/thích/ghét inventory + NPC choice audit (OD:L1248-1249) | review/npc-mind | main s11 | session_01UV1SzjTpyN5PV8pMieq1vi (opus) | RUNNING | 16/11 06:53Z |
