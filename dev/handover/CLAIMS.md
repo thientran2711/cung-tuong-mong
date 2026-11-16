@@ -320,3 +320,5 @@
 | chonso-cloud (sonnet; owner UI): Sổ mây row in Chọn sổ (Một mình tab), same jcloud flows; base chonso-tabs | review/chonso-cloud | main s21 | session_01UV1SzhtbwfLqLoE2yRviHi | RUNNING | 16/11 18:28Z |
 | pl-courtyards review r1 (sonnet) of d98df6602 (+ exact MISSING table = C paint order) | review/pl-courtyards-r1 | main s21 | session_01UV1SzicVqzEzvngQp4ujo4 | RUNNING | 16/11 18:30Z |
 | go-live-kit review r2 (sonnet, BIG) of 35d6206c | review/go-live-kit-r2 | main s21 | session_01UV1Szh1sDq4htTKesRN96t | RUNNING | 16/11 18:31Z |
+| page-scale review r1 (opus, BIG) of 1f4912486 + re-merge tutrang-layout c39139e51 | review/page-scale-r1 | main s21 | session_01UV1SzkGZ6JD6JjaGpLMDdF | RUNNING | 16/11 18:32Z |
+| two-way-acts r2 successor (sonnet): shots of new options, OPEN rows, ECONOMY.md canon fix | review/two-way-acts | main s21 | session_01UV1SzkuSsv7KHqJJgVJZY6 | RUNNING | 16/11 18:32Z |
