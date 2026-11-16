@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"85bd467e+","t":"2026-11-16T19:41Z","c":"night-steal-r2 review: PASS (steal code equal both ways, one core); F1 her-only jealousy in danger/hostility = most of her 32 % vs 21 % gap…","b":"ddb643fdac26","h":[{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
+window.CTM_BI={"s":"2dc67e47+","t":"2026-11-16T20:11Z","c":"night-steal-r2: co-op e2e runs (r2 vs main) in report","b":"dc77f32a2a2a","h":[{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -2617,7 +2617,11 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
+  app.ticker.maxFPS=60;
+  /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
+     buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
+  {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
+  const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
 function pxCap(){return kitView().pages===1?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
@@ -3129,7 +3133,7 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
   if(k==="lot"&&S.lot){const can1=!S.relot&&S.bac>=10&&can(1);Q.unshift({t:`Quẻ ${LV[S.lot.lv]} · ${S.lot.dom}`,h:lotHTML(S.lot)+`<p class="past">${HX.lot}</p>`+(can1?`<div class="opts"><button class="opt" id="relot2">Gieo lại<small>${kitParse("Chắc chắn · tốn: Bạc -10, 1 khắc")}</small></button></div>`:"")});showModal();const r=$("relot2");if(r)r.onclick=()=>{Q.shift();showModal();reLot(false)};return}
   if(k==="bl"){Q.unshift({t:"Bổng lộc",h:blCard()});showModal();return}if(k==="aw"){Q.unshift({t:"Ân thưởng",h:awCard()});showModal();return}const t=HX[k]||b.textContent;Q.unshift({t:b.textContent.replace(/[+-]\d+$/,"").trim(),h:`<p>${t}</p>`});showModal()}}
 /* keep the Pixi scene the size of the stage whenever the layout changes (not only on window resize) */
-(function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
+(function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}try{if(typeof kitStagePause==="function")kitStagePause()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
 /* every disabled button says why */
 function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=4?"hết khắc buổi này":"Sức dưới 20";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
 (function(){const kf=kitFix;kitFix=function(root){kf(root);(root||document).querySelectorAll(".rbtn button:disabled,.btn:disabled,.pcb button:disabled").forEach(b=>{if(b.querySelector(".kwhy"))return;const sm=b.querySelector("small");const w=guessWhy(b);if(!w)return;if(sm)sm.insertAdjacentHTML("afterbegin",`<span class="kwhy">${w}</span> `);else b.insertAdjacentHTML("beforeend",`<small><span class="kwhy">${w}</span></small>`)})}})();
@@ -4124,6 +4128,10 @@ document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [da
  if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap kbackb";b.innerHTML=typeof kitBackBtnHtml==="function"?kitBackBtnHtml("map","Dư đồ"):"‹ Dư đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
  if(b.parentNode!==st)st.appendChild(b)}catch(e){}return r}})();
 document.addEventListener("click",e=>{const t=e.target.closest("button[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
+/* lag-play (owner 16/11 15:05Z): ONE coalesced late render for every "a picture arrived, redraw" case (portraits, kid portraits, unknown
+   silhouettes, por fallbacks). Each used to run its own full render() — a whole-game redraw per picture (~0.5 s on a slow phone). */
+function kitRenderSoon(ms){clearTimeout(kitRenderSoon.t);kitRenderSoon.t=setTimeout(()=>{try{if(typeof S!=="undefined"&&S)render()}catch(e){}},ms==null?250:ms)}
+window.kitRenderSoon=kitRenderSoon;
 
 /* ================= FIGURES v2: every manifest merged; one identity per person for life, never reused in a game ================= */
 /* img/FIGURES.json (consorts, player, emperor, eunuchs), img/FIGURES-servants.json (maid, mama, eunuch), img/FIGURES-others.json
@@ -4170,7 +4178,7 @@ figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p)
 /* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
 const PORK={};
 function porOf(who,fb){try{if(!who||!FIGS.length)return fb;const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");if(!src)return fb;
- if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;clearTimeout(window.__porT);window.__porT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
+ if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
 (function(){const W=(name,get)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{const who=get.apply(this,arguments);if(r&&typeof r==="object"&&who)r.src=porOf(who,r.src);else if(typeof r==="string"&&who)return porOf(who,r)}catch(e){}return r}};
  W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pDoc",()=>S.court&&S.court.ty);W("pServ0",s=>s);W("maidSrc",m=>m);W("courtSrc",(k,c)=>c);W("pMan",m=>m)})();
 /* place screens: every person present stands full-body when art exists (servants, physician and eunuchs too) */
@@ -6153,8 +6161,10 @@ function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);c
 const J59U={};function j59unkSrc(g){const u=`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-${g}.webp`;if(J59U[g]===undefined){J59U[g]=null;const im=new Image();im.onload=()=>{J59U[g]=u;j59sched()};im.onerror=()=>{J59U[g]=false};im.src=u}return J59U[g]}
 function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
  if(u){b.classList.remove("j59unk");if(im.getAttribute("src")!==u)im.src=u}else b.classList.add("j59unk")}
-function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];
- if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);g.title=g.innerText.replace(/\n/g," · ");const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
+function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];const TT=[];
+ if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);TT.push(g);const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
+ /* lag-play: the tooltips read innerText (a layout read) AFTER all the writes: one layout instead of one per person */
+ {const V=TT.map(g=>g.innerText.replace(/\n/g," · "));TT.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})}
  const me=document.getElementById("mefig");let mt=document.getElementById("j59metag");
  if(!me){if(mt)mt.remove();return null}
  if(!mt){mt=document.createElement("div");mt.id="j59metag";mt.className="tok j59me";mt.style.visibility="hidden";mt.innerHTML='<span class="tag"></span>';st.appendChild(mt)}
@@ -6400,7 +6410,10 @@ window.j59CourtNames=j59CourtNames;
    Dư đồ counts other people only (her own place wears her own mark). ---------- */
 function kitHereCount(){try{const V=S&&S.visit;if(!V||V.k!==S.place)return 0;return (V.people||[]).filter(j59person).length}catch(e){return 0}}
 window.kitHereCount=kitHereCount;
-function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||"").trim();if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m))return;const n=kitHereCount();
+function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||"").trim();const n=kitHereCount();
+ /* a longer stage line that starts with the count ("Ở đây còn N người. Càn Ninh cung: …") keeps its text, its count follows the stage (people ledger:
+    the record can bring people in after the line was written) */
+ if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
 const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */
@@ -6515,7 +6528,7 @@ function kidFig(k){const id=kidId(k);if(!id)return null;const B=(KIDIX[kidRole(k
 function kidFigSrc(k,kind){const f=kidFig(k);if(!f)return"";return figPath(kind==="por"?f.por:(f.file||f.src))}
 /* portraits: the identity's por once it has loaded, the old face until then (or if it fails) */
 const KPORK={},KPIM=[];
-function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;clearTimeout(window.__kporT);window.__kporT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
+function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
 /* every band of the child's identity is fetched early, so a birthday never flashes the old face */
 function kidPreAll(k){const id=kidId(k);if(!id)return;const B=(KIDIX[kidRole(k)]||{})[id]||{};KIDBANDS.forEach(b=>{if(B[b])kidPre(figPath(B[b].por))})}
 function kidPor(k,fb){try{kidPreAll(k);const src=kidFigSrc(k,"por");if(!src)return fb;if(KPORK[src]===1)return src;kidPre(src);return fb}catch(e){return fb}}
@@ -11433,7 +11446,7 @@ function k61InitNew(){if(!S)return;S.known={me:3};k61SeedChiTon();S.nkn={me:{}};
  W("pv",v=>v);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pMaid",()=>S.maid);W("pDoc",()=>S.court&&S.court.ty);W("pServ",s=>s);W("pServ0",s=>s);
  W("pMan",m=>m);W("pMin",h=>h);W("kidFace",k=>k);W("pEunCourt",k=>S.court&&S.court[k]);W("pMsg",()=>S.court&&S.court.tq);W("courtSrc",(k,c)=>c);W("maidSrc",m=>m);
  W("pFaceOf",p=>{if(!p||p.kind==="chest")return null;if(p.kind==="ksp"&&!p.ref)return S.court&&S.court.ksp;if(p.kind==="peddler"&&!p.ref)return S.court&&S.court.ped;return null})})();
-const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new Image();im.onload=()=>{K61U[g]=1;try{if(S)render()}catch(e){}};im.src=`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-${g}.webp`}catch(e){}});
+const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new Image();im.onload=()=>{K61U[g]=1;kitRenderSoon(250)};im.src=`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-${g}.webp`}catch(e){}});
 function k61G(e){const k=k61Kind(e);return k==="kid"?"k":["emp","man","eun","tq","phys","off"].includes(k)?"m":"f"}
 function k61Sil(p){const e=k61PortEnt(p);if(!e||isKnown61(e))return p;const g=k61G(e);
  return Object.assign({},p,{src:K61U[g]?`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",rw:p.rw?(k61Named(e)?k61Lab(e):k61Short(e)):p.rw,stranger:1})}
@@ -12690,7 +12703,9 @@ const KIT_ACT_CATS=[["hai-nguoi",/hạ độc|đẩy|vu |vu oan|trù ẻo|ngáng
  ["hau-ha",/hầu|dâng|chăm|phục dịch|quét|lau|lĩnh đồ|theo hầu|việc chủ|canh|nấu|pha trà/i],["nghi-ngoi",/nghỉ|ngủ|tắm|dưỡng|chải chuốt|giả bệnh|tĩnh dưỡng/i],
  ["buon-ban",/bán|mua|buôn|chợ|đổi|bạc/i],["le-nghi",/vấn an|thỉnh an|lễ|cầu|chùa|phật|xin xăm|cúng|bái/i],["giao-thiep",/thăm|tặng|kết|trò chuyện|mời|gặp|tâm sự|làm thân|nói/i],["di-lai",/đi |dạo|sang|ra |vào |đến /i]];
 let KIT_ACTS={acts:{},have:[]};try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/ACTS.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j){KIT_ACTS=j;try{document.querySelectorAll("button.ka.kcard[data-kart]").forEach(b=>{b.removeAttribute("data-kart");kpActArt(b)})}catch(e){}}}).catch(()=>{})}catch(e){}
-const kpSlug=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+/* memoised (pure; hot in act-card lookups) */
+const KPSLUG_C=new Map();const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
+const kpSlug0=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 function kitActCat(name){for(const [c,re] of KIT_ACT_CATS)if(re.test(name))return c;return"giao-thiep"}
 function kitActArt(name){const A=KIT_ACTS.acts||{};const key=A[name]||A[kpSlug(name)];const cat=kitActCat(name);const have=KIT_ACTS.have||[];
  return{src:key?`https://ctm-img.victoria-tntt.workers.dev/img/act-${key}.webp`:have.includes("act-cat-"+cat)?`https://ctm-img.victoria-tntt.workers.dev/img/act-cat-${cat}.webp`:"",cat,label:(KIT_ACTS.cats||{})[cat]||{"hau-ha":"Hầu hạ","hoc-tap":"Học tập","giao-thiep":"Giao thiệp","muu-ke":"Mưu kế","hai-nguoi":"Hại người","nghi-ngoi":"Nghỉ ngơi","buon-ban":"Buôn bán","le-nghi":"Lễ nghi","di-lai":"Đi lại"}[cat]}}
@@ -12838,7 +12853,13 @@ function kpActCtx(kan,n){try{const b=kan.closest&&kan.closest("button[data-vlear
   if(n==="Học với Thái hậu")return"Xin Thái hậu cho học cùng";if(n==="Tự học, làm tác phẩm")return"Tự luyện, làm tác phẩm";return n}
 function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpActCtx(kan,kpPlain(c.textContent))}
 const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
-function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+/* lag-play (owner 16/11 15:05Z, lag = first priority): kitActKey is pure in (name, KIT_ACTS) but walked every act table entry
+   (kpSlug of each) and was called for every act card on every DOM change (kaNorm MutationObserver + kpActArt wrappers): ~300 ms per
+   buổi on a 4x-slow phone. Memoised per KIT_ACTS object (a new ACTS.json load starts a fresh cache). */
+var KAK_SRC=null,KAK_C=new Map();
+function kitActKey(name){if(KAK_SRC!==KIT_ACTS){KAK_SRC=KIT_ACTS;KAK_C=new Map()}const k=typeof name==="string"?name:String(name==null?"":name);let v=KAK_C.get(k);
+ if(v===undefined){v=kitActKey0(name);if(KAK_C.size>5000)KAK_C.clear();KAK_C.set(k,v)}return v}
+function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
  let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
  for(const p in P)if(name.startsWith(p))take(p,P[p]);
  for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}
@@ -12923,7 +12944,7 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
    (its 60 fps WebGL redraw competed with the face picker's decodes: one page turn waited ~470 ms on the GPU read-back); it restarts when
    the stage shows again. */
 function kitStageCovered(){try{const M=$("modal");if($("kroul"))return true;if(!M||M.hidden||!M.classList.contains("kpscene"))return false;const bg=getComputedStyle(M).backgroundImage;return !!bg&&bg!=="none"}catch(e){return false}}
-function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const cov=kitStageCovered();const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
+function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const st0=$("stage");const cov=kitStageCovered()||!!(st0&&!st0.clientHeight)/* lag-play: a 0-px (hidden) stage draws nothing visible */;const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
  try{if(typeof KFX!=="undefined"&&KFX.app){const t=KFX.app.ticker;if(kitStageCovered()){if(t.started){t.stop();KFX.__kpause=1}}else if(KFX.__kpause){KFX.__kpause=0;if(typeof kfWake==="function")kfWake()}}}catch(e){}}
 (function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitStagePause()})};const go=()=>{const M=$("modal");if(!M||!document.body)return setTimeout(go,300);
  new MutationObserver(kick).observe(M,{attributes:true,attributeFilter:["class","hidden"]});new MutationObserver(kick).observe(document.body,{childList:true});setInterval(kitStagePause,1500)};go()})();
@@ -13364,17 +13385,27 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
+/* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
+   layout per scroller per frame during a page turn).
+   Reading scrollTop forces a layout every frame of the turn, so it is read only after a scroll happened somewhere (or a face changed). */
+let KCL_SCROLLN=0;try{document.addEventListener("scroll",()=>{KCL_SCROLLN++},{capture:true,passive:true})}catch(e){}
+function kclLkSync(faces){let need=false;for(const Fc of faces)if(Fc.__kln!==KCL_SCROLLN||Fc.__klk!==Fc.lk)need=true;if(!need)return;for(const Fc of faces){Fc.__kln=KCL_SCROLLN;Fc.__klk=Fc.lk}
+ const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+  /* lag-play: the copy is a still picture clipped to the page: a box that starts below the visible bottom cannot show and (in flow,
+     after everything above it) cannot move what shows, so it keeps its class styles only (no per-property freeze). */
+  const rb=Math.min(src.getBoundingClientRect().bottom,innerHeight)+2;
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
-   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){const c0=getComputedStyle(a);for(const k of KCL_FREEZE){const v=c0[k];if(v)b.style[k]=v}}
-   else if(i&&b.style&&getComputedStyle(a).display==="none")b.style.display="none";
-   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
-   const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
+   let ra=null;if(i){ra=a.getBoundingClientRect();if(ra.top>rb&&(ra.width||ra.height))continue}
+   const ca=getComputedStyle(a);/* lag-play: ONE computed style object per element (was read 2-3 times) */
+   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){for(const k of KCL_FREEZE){const v=ca[k];if(v)b.style[k]=v}}
+   else if(i&&b.style&&ca.display==="none")b.style.display="none";
+   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);if(i&&ca.position==="sticky")b.style.position="relative";
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
    if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
-   if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
+   if(i&&a.firstElementChild){const r=ra||a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
@@ -13480,7 +13511,7 @@ function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;const s=Math.sin(Math.PI*p),c=Math.cos(Math.PI*p);
   /* a live face follows its page's scroll (the new page may still settle while the sheet turns) */
-  for(const Fc of [F,B])for(const [a,b] of Fc.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   const ang=-180*p,tilt=4.2*s,skew=-2.4*s,lift=-0.014*h*s;
   sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
   /* the face turning away from the light darkens, the one landing brightens */
@@ -13520,7 +13551,7 @@ function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o
  const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;
-  for(const bx of [F,B])for(const [a,b] of bx.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   sheet.style.transform=`translate3d(${(-p*w).toFixed(2)}px,0,0)`;
   B.style.transform=`translate3d(${((1-p)*w*.2).toFixed(2)}px,0,0)`;
   dim.style.opacity=(.26*(1-p)).toFixed(3);edge.style.opacity=Math.min(1,(1-p)*8).toFixed(3)}
@@ -13566,10 +13597,14 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  try{take()}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
  /* the new page finishes its layout a moment later (person card sizing, chips): print it again once it has settled */
- let alive=true;const reback=()=>{if(!alive)return;try{take()}catch(e){}};
+ let alive=true,dirty=false;const reback=()=>{if(!alive)return;dirty=false;try{take()}catch(e){}};
+ /* lag-play (owner 16/11 15:05Z): a re-print copies the whole page with its computed styles (~100-400 ms on a slow phone); it ran
+    unconditionally at 90 ms. Now only when the page changed since the last print: a DOM change, a picture still loading, or a new sig. */
+ const kmo=new MutationObserver(()=>{dirty=true});try{kmo.observe(el,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){}
+ const loading=()=>{try{return [...el.querySelectorAll("img")].some(im=>im.getAttribute("src")&&!im.complete)}catch(e){return true}};
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
- let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
- const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
+ let s0=sig(),ld=loading();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(()=>{if(dirty||ld)reback()},90);
+ const fin=()=>{alive=false;clearInterval(iv);kmo.disconnect();host.remove();if(kclLive===end)kclLive=null};
  let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);
  /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
     copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */
@@ -13841,12 +13876,14 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
   const order=t=>{const B=[...document.querySelectorAll("#tabs [data-tab]")].map(b=>b.dataset.tab);const i=B.indexOf(t);return i<0?99:i};
   render=function(){const self=this,args=arguments;let out,done=false;const t1=typeof tab!=="undefined"?tab:null,t0=last;
    const pn=document.getElementById("panel");const call=()=>{done=true;out=r0.apply(self,args)};
-   try{if(pn&&t0!=null&&t1!==t0&&t0!=="go"&&t1!=="go"&&typeof S!=="undefined"&&S&&!S.dead)kitCurlSwap(pn,call,{dir:order(t1)>=order(t0)?1:-1});else call()}
+   /* owner OD 16/11 15:45Z + 15:55Z: a TAB change has NO animation on any device (no curl, no paper slide, no fade): instant swap.
+      The page turn lives only inside the Tuần lục book (kitBook). kitCurlSwap stays in the kit, unused by tabs. */
+   try{call()}
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
-    else if(t0==="go"&&t1!=="go"&&pn){if(!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}
+    if(mv){kitLeather(mv);/* reviewer lag-play-r1: portrait tab change = no effect at all (owner 15:45Z) → the map unrolls in landscape only */if(t0!=null&&t0!=="go"&&t1==="go"&&!kitIsPortrait())kitUnroll(mv);else kitUnrollKeep(mv)}
+    else if(t0==="go"&&t1!=="go"&&pn){/* map → page: instant too (owner 15:45Z, no fade on tab changes) */
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
    return out};
@@ -13876,7 +13913,11 @@ const KBK_ART={cover:"https://ctm-img.victoria-tntt.workers.dev/img/book-cover.w
    title has a picture here draws it in the label (art cover only); any other title keeps the text. */
 const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
-(function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k);if(r.__kbk)r.__kbk.relayout()})};im.src=u}catch(e){}}})();
+/* lag-play (owner 16/11 15:05Z): ONE coalesced book re-layout. Every picture that arrived (book art, each figure's size/head measure)
+   re-paginated every open book at once — 1-20 s per picture on a slow phone while a new life's figures stream in. */
+function kitBookRelayoutSoon(ms){clearTimeout(kitBookRelayoutSoon.t);kitBookRelayoutSoon.t=setTimeout(()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}),ms==null?120:ms)}
+window.kitBookRelayoutSoon=kitBookRelayoutSoon;
+(function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k)});kitBookRelayoutSoon()};im.src=u}catch(e){}}})();
 
 function kbkSfx(){try{if(typeof auOk!=="function"||!auOk())return;const C=window.__bellCtx||(window.__bellCtx=new (window.AudioContext||window.webkitAudioContext)());const t=C.currentTime,n=Math.floor(C.sampleRate*.28);
  const buf=C.createBuffer(1,n,C.sampleRate),d=buf.getChannelData(0);for(let i=0;i<n;i++){const e=i/n;d[i]=(Math.random()*2-1)*Math.pow(1-e,2)*(e<.08?e/.08:1)}
@@ -17021,7 +17062,8 @@ function fixToast(){const t=document.getElementById("rtoast");if(!t||t.dataset.n
  t.dataset.nr=t.innerHTML.length+""}
 try{const rs0=resultShow;resultShow=function(){const r=rs0.apply(this,arguments);try{fixToast()}catch(e){console.error(e)}return r}}catch(e){}
 /* tooltips that only repeat the visible text (kept where the text is cut off) */
-function fixTitles(){document.querySelectorAll("[title]").forEach(e=>{const a=T(e.getAttribute("title")).replace(/^·\s*/,""),b=T(e.textContent).replace(/^·\s*/,"");if(a&&a===b&&e.scrollWidth<=e.clientWidth+1&&e.clientWidth>0)e.removeAttribute("title")})}
+/* lag-play: all measurements first, then the removals (a removal between two reads forced one layout per titled element) */
+function fixTitles(){const R=[];document.querySelectorAll("[title]").forEach(e=>{const a=T(e.getAttribute("title")).replace(/^·\s*/,""),b=T(e.textContent).replace(/^·\s*/,"");if(a&&a===b&&e.scrollWidth<=e.clientWidth+1&&e.clientWidth>0)R.push(e)});R.forEach(e=>e.removeAttribute("title"))}
 
 /* ===== stated deltas = real deltas (owner 11/14: "Lòng cung nữ +6" when only +3 fitted under 100) ===== */
 const BOUNDS={th:[-100,100],hh:[-100,100]};
@@ -17737,6 +17779,13 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
+   led.court = khắc of buổi sáng that are the morning court (thượng triều): Hoàng thượng + the officials on the court roster (jmen menMinW) are
+   at Cần Chính điện (thu) every one of those khắc, no dice, no surprise.
+   led.cnt = which moment the Dư đồ shadows of the OTHER places are counted at (QUESTION FOR MAIN, review-people-ledger report):
+   "now" (owner 13:50Z wording: every place's count at ONE moment, the counts add up to the record, nobody twice / missing) or "arrive"
+   (main's dev/test/stage-counts.js: a place's count = the people she meets on arrival, after the walk's khắc). One switch, read by j95. */
+Object.assign(BAL,{led:{court:2,cnt:"now"}});
 
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
@@ -20293,7 +20342,7 @@ function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt")
    the art in each band (alpha mask read once per picture from a small canvas), so the Tư chất / Trong cung blocks may sit beside a figure's
    head or between two figures but never over the painted body. Falls back to the element box while a mask is not ready. ---------- */
 const KIT_MASK={};
-function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null;KIT_MASK[src]={};const I=new Image();I.crossOrigin="anonymous";I.onload=()=>{try{const N=24,Wc=48;const c=document.createElement("canvas");c.width=Wc;c.height=N*4;const x=c.getContext("2d");x.drawImage(I,0,0,Wc,N*4);const d=x.getImageData(0,0,Wc,N*4).data;const b=[];
+function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null;KIT_MASK[src]={};const I=new Image();I.crossOrigin="anonymous";I.onload=()=>{try{const N=24,Wc=48;const c=document.createElement("canvas");c.width=Wc;c.height=N*4;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(I,0,0,Wc,N*4);const d=x.getImageData(0,0,Wc,N*4).data;const b=[];
   for(let r=0;r<N;r++){let lo=1,hi=0;for(let yy=r*4;yy<r*4+4;yy++)for(let xx=0;xx<Wc;xx++){if(d[(yy*Wc+xx)*4+3]>40){lo=Math.min(lo,xx/Wc);hi=Math.max(hi,(xx+1)/Wc)}}b.push(hi>lo?[lo,hi]:null)}
   KIT_MASK[src]={b};setTimeout(()=>{try{khStage()}catch(e){}},30)}catch(e){KIT_MASK[src]={b:null,bad:1}}};I.src=src;return null}
 kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.querySelectorAll("#mefig, #tokens .tok img.figimg, #tokens .tok:not(.fig) .md").forEach(e=>{if(!e.offsetParent&&e.id!=="mefig")return;const r=e.getBoundingClientRect();if(r.width<8||r.height<8)return;
@@ -22465,6 +22514,9 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{emoMonth()}catch(e){}return r}})();
 /* motive gate (j95): feelings are a recorded motive. Wrapped lazily so it works whatever the load order. */
+/* one answer per question (people ledger, owner 16/11 13:40Z: every act has ONE recorded reason): "sad, wants to be alone" holds for half
+   of the friendly acts, chosen by the calendar (life seed + buổi + who + whom + what), not a fresh roll — asking the gate again gives the same answer */
+function emoHalf(a,t,kind){try{if(typeof j95hash==="function"&&typeof j95key==="function"&&S&&S.roster)return j95hash((S.j95seed||0)+"|"+j95key()+"|emo|"+emoKey(a)+"|"+emoKey(t)+"|"+kind)%100<50}catch(x){}return roll(50)}
 function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;window.__emoGate=1;const g0=motiveOK;
  motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!emoOn()||!a||!t||a===S||a===t||typeof a!=="object")return g;const e=emoGet(a);if(e.k==="binh")return g;
   const at=e.t!=null&&e.t===emoKey(t);const H=typeof H95!=="undefined"&&H95.has(kind),F=typeof F95!=="undefined"&&F95.has(kind);
@@ -22472,7 +22524,7 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
    if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=50&&emoBrake(a,t)>=1){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
   if(H&&g.ok&&(e.k==="so"||e.k==="dau")&&e.v>=60){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
   if(F&&!g.ok&&e.k==="vui"&&e.v>=60&&aff(a,t)>-30){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
-  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&roll(50)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
+  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&emoHalf(a,t,kind)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
@@ -23073,7 +23125,7 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #mo
 (function(){
  /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
  const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.crossOrigin="anonymous";/* CDN pictures: CORS or the canvas read fails (review/stage-side) */im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
-   const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
+   const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
    /* owner 11/15 05:45Z ("khung nhảy"): ONE portrait box for every person — the trimmed headroom is the same constant for every frame
       (KIT_PORT_TRIM = the tallest crest's top), never measured per frame, so switching people never moves or resizes the frame */
@@ -25100,6 +25152,8 @@ function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=t
 (function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
 #modal .dlg:has(>.kit-x.kxabs){position:relative}
 #modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+/* the ✕ of a card without a .kph header owns a reserved strip (36 px + 2x6): content and scrollers start under it, so it never overlaps text or a scrolled option list (fold-popw, whole group: every dialog / overlay panel) */
+#modal .dlg:has(>.kit-x.kxabs),#ov .kpanel:has(>.kit-x.kxabs){padding-top:48px!important;box-sizing:border-box}
 #modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
 #modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
 #modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}
@@ -25648,15 +25702,15 @@ window.KIT_LIGHT=KIT_LIGHT;
  const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}html body .kbk-person.kbk-full>.kbk-por{overflow:clip!important}`;document.head.appendChild(st);
  /* where the BODY stands in the picture (0..1 of its width): centre of the head = alpha mass of the top 16 % rows. Trains/outpainted hems
     make many figures asymmetric, so the body is not the picture centre. CDN images are CORS-open; on failure 0.5. */
- function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d");g.drawImage(I,0,0,w,h);
+ function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(I,0,0,w,h);
    const d=g.getImageData(0,0,w,Math.max(2,Math.round(h*.16))).data;let sx=0,sa=0;for(let i=3;i<d.length;i+=4){const a=d[i];if(a>40){sx+=((i>>2)%w)*a;sa+=a}}return sa?sx/sa/w:.5}catch(e){return .5}}
  function learn(src,then){if(AR[src]!=null)return;AR[src]=0;const I=new Image();I.crossOrigin="anonymous";
    I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
  /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
  window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
-   if(!AR[src]){learn(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));return ""}   /* the book's own re-layout, same reading position */
+   if(!AR[src]){learn(src,()=>kitBookRelayoutSoon());return ""}   /* the book's own re-layout, same reading position */
    const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
-   const bb=kitFigBody(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
+   const bb=kitFigBody(src,()=>kitBookRelayoutSoon());if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
    const g=kitBookFig(bb,kfr0*KIT_FIG.man,pic);
    const fs=Math.max(13,Math.min(17,PW/34)),boxW=PW*R.w,colMax=boxW-fs-Math.min(TEXT_MIN,boxW-base-fs);   /* text ≥ 220 px, or never narrower than a normal figure's page */
    const per=hx*ar+TORSO,need=k=>per*g.ih*k+4;                                                  /* body right edge when the figure starts at the column's left */
@@ -25739,7 +25793,11 @@ function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((
 function menOrder(m,w){if(m.rw!=="nhạc sư"&&m.rw!=="họa sư")return null;const i=+m.id.slice(1)||0;if((w+i)%2)return null;
  const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?2:(w>>1)%2?2:0,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
 function menFestOn(){try{return festToday()}catch(e){return null}}
-function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
+/* the fixed schedule (duty rosters, work orders, festivals, visits, the morning audience): the same on BOTH roads (people ledger, owner 16/11
+   13:40Z: "people outside the palace leave only at their set hours", no random presence); the maid road takes this instead of j22's dice.
+   Four buổi a tuần (jtime4): night = the last buổi (B4L), the afternoon (old buổi 1) = 2. */
+function menSchedRoad(){try{return menRoad()||(!!S&&!S.dead&&typeof isSrv==="function"&&isSrv())}catch(e){return false}}
+function menSched(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,ww="";const i=+m.id.slice(1)||0;
   if(rw==="thị vệ"){k=menDuty(m,w,b);ww=k?"duty":""}
   else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b===2){k=menHcPal(sick[w%sick.length]);ww="summons"}else if(!night){k="tyv";ww="duty"}}
@@ -25747,7 +25805,10 @@ function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=
   else if(rw==="nhạc sư"||rw==="họa sư"){const o=menOrder(m,w);if(o&&o.b===b){k=o.k;ww="order"}}
   else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}else if(f&&!night){k="vuon";ww="fest"}}
   if(k){W[m.id]=k;Y[m.id]={w:ww,k}}}
- S.menW=W;S.menWhy=Y;menPlanWeek();
+ S.menW=W;S.menWhy=Y;menMinW(b,w,f)}
+/* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
+function menMinW(b,w,f){S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+function menPlace(){menSched();const W=S.menW,Y=S.menWhy;const b=S.buoi||0,w=wk();menPlanWeek();
  /* today's plans come true where they were planned */
  for(const P of (S.menPlans||[])){if(P.w!==w||P.done)continue;const m=manById(P.m);if(!m||menBanned(m)){P.done=1;continue}const v=P.v!=null?RV(P.v):null;
   if(P.v!=null&&(!v||!v.alive||v.out)){P.done=1;continue}
@@ -25756,8 +25817,7 @@ function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=
   else if(P.b!==b)continue;
   P.done=1;W[m.id]=P.k;Y[m.id]={w:"stray",k:P.k,r:P.r,v:P.opp?null:P.v,why:P.why,likeV:P.r==="seek"?P.v:null,plan:P.id,h:P.h,from:P.from,hide:P.hide};
   if(v&&!P.opp)S.where[v.id]=P.k;menStat("stray");menStat("c_"+P.r);menNpcSee(m,Y[m.id])}
- /* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
- S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+}
 /* PLANS, made at the start of each tuần for the next one (and the current one when a life has none yet) */
 function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)return;const first=S.menPW==null;S.menPW=w;
  S.menPlans=S.menPlans.filter(P=>P.w>=w-1);for(const t of first?[w,w+1]:[w+1])menMakePlans(t)}
@@ -25780,7 +25840,10 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
 function menEye(p){return p===S?(S.mat||0)*8+(S.tamco||0)/3:(p.mat||0)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
  log(`<span class="g">Tai mắt báo: nghe nói ${when}, có nam nhân sẽ lẻn vào ${placeName(P.k)}${menEye(S)>=P.hide+30&&P.v!=null&&RV(P.v)?`, gặp ${menVT(RV(P.v))}`:""}. Muốn thấy tận mắt thì có mặt ở đó lúc ấy.</span>`);menStat("tip")}catch(e){}}
-(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace()}catch(e){console.error("menPlace",e)}return r}})();
+/* she becomes a maid after the consort start ran (j42 srvInit): this buổi's schedule is read again for her road (the consort start's court
+   roster must not linger for a buổi) */
+(function(){if(typeof srvInit!=="function")return;const s0=srvInit;srvInit=function(){const r=s0.apply(this,arguments);try{if(menSchedRoad()&&!menRoad())menSched()}catch(e){console.error("menSched",e)}return r}})();
+(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace();else if(menSchedRoad())menSched()}catch(e){console.error("menPlace",e)}return r}})();
 (function(){const c0=countAt;countAt=function(k){let n=c0(k);try{if(menRoad())for(const c in (S.minW||{}))if(S.minW[c]===k)n++}catch(e){}return n}})();
 
 /* ---------- 2. zones on the map data and the place cards ---------- */
@@ -30176,20 +30239,25 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
 const KRN_SKIP=".kname,.kti,[data-vp-skip],[data-krn-skip],script,style,textarea,input,option,select";
 const KRN_BLK=".kft,.krv,.kitem,.logs > div,p,li,button,.kptitle,.kpsub,figcaption,td,.kpnote,.tag";
 let KRN_C={k:"",rx:null,m:null};
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&kitTitle(p))}catch(e){return null}if(!L.length)return null;
+/* lag-play (owner 16/11 15:05Z): one rank-name pass reads the title of every person (kitTitle -> kitFace -> portrait/figure lookups)
+   for the table AND again per match, per root: ~0.8 s per tab on a slow phone. Inside ONE pass (no game state changes there) each
+   person's title is read once. */
+let KRN_TM=null;
+function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
+function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
 function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitleTail(b,t)||kpTitleTail(b.trimEnd()+" ",t)))return true;
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
-function kitRankNamePaint(root,dry){const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
+function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
  const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
   const pv=krnPrevText(n);T.rx.lastIndex=0;let m,last=0,hit=false;const f=document.createDocumentFragment();
-  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=kitTitle(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
+  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=krnT(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
    if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index)))continue;
    /* a name label on its own (card heading, portrait caption) whose title sits in a sibling element of the same card: titled */
    if(v.trim()===nm){let up=n.parentElement,ok=false;/* r1: a short sibling label of the name (person card .pcrk "Hoàng hậu" beside .pcname) holds its title */
@@ -30205,8 +30273,8 @@ window.kitRankNamePaint=kitRankNamePaint;
    replacements are skipped (they hold no bare name), so it never loops; too many roots in one frame → one full pass. */
 (function(){let q=false,full=true;const R=new Set();
  const run=()=>{q=false;const all=full,L=[...R];full=false;R.clear();if(window.__krnOff)return;
-  try{if(all||L.length>120){kitRankNamePaint(document.body);return}
-   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}};
+  KRN_TM=new Map();try{if(all||L.length>120){kitRankNamePaint(document.body);return}
+   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}finally{KRN_TM=null}};
  const add=n=>{const e=n&&(n.nodeType===1?n:n.parentElement);if(e&&!(e.matches&&e.matches(".kname,.kname *")))R.add(e)};
  const mo=new MutationObserver(M=>{for(const m of M){if(m.type==="characterData")add(m.target);else m.addedNodes.forEach(add)}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}full=true;run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
@@ -30652,7 +30720,9 @@ function kitMeMark(fig){try{
 /* drop markers whose figure is gone (scene change, dialog closed) */
 function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector(":scope>#mefig")||h.querySelector(":scope>img.kesimg")&&h.closest(".kesme")))m.remove()})}
 function kmmAll(){kmmSweep();const me=document.getElementById("mefig");if(me)kitMeMark(me);document.querySelectorAll(".kesme img.kesimg").forEach(kitMeMark)}
-let kmmT=0;function kmmSched(){clearTimeout(kmmT);requestAnimationFrame(kmmAll);kmmT=setTimeout(()=>{kmmAll();setTimeout(kmmAll,700)},250)}
+/* lag-play (owner 16/11 15:05Z): every DOM change queued ANOTHER frame callback + a 700 ms follow-up that was never cancelled (dozens of
+   full mark passes per buổi, each with layout reads). Now one pending frame pass and one timer chain, restarted by the last change. */
+let kmmT=0,kmmT2=0,kmmQ=0;function kmmSched(){clearTimeout(kmmT);clearTimeout(kmmT2);if(!kmmQ)kmmQ=requestAnimationFrame(()=>{kmmQ=0;kmmAll()});kmmT=setTimeout(()=>{kmmAll();kmmT2=setTimeout(kmmAll,700)},250)}
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{kmmSched()}catch(e){}return r}})();
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);if(q&&typeof S!=="undefined"&&q===S&&h)h=h.replace('<figure class="kesf"','<figure class="kesf kesme"')}catch(e){}return h}})();
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kmmSched()}catch(e){}return r}})();
@@ -37711,7 +37781,7 @@ window.kitMePor=mePor;
 if(typeof porOf==="function"){const p1=porOf;porOf=function(who,fb){const r=p1.apply(this,arguments);try{if(who===S&&S&&typeof r==="string"&&/(^|\/)por-[^/]*\.webp/.test(r)&&!oldFace(r))S.porMe=r;if(who===S&&S&&(!r||(oldFace(r)&&!figReady()))){const m=mePor();if(m)return m}}catch(e){}return r}}
 /* a por that fails to load falls back to the old face in place (never a broken frame) */
 document.addEventListener("error",e=>{try{const im=e.target;if(!im||im.tagName!=="IMG")return;const s=im.getAttribute("src")||"";if(!/(^|\/)por-/.test(s)||im.dataset.jimgFb)return;
-  if(typeof PORK!=="undefined")PORK[s]=0;if(typeof KPORK!=="undefined"&&/por-kid-/.test(s))KPORK[s]=0;im.dataset.jimgFb="1";clearTimeout(window.__jimgT);window.__jimgT=setTimeout(()=>{try{if(S)render()}catch(x){}},300)}catch(x){}},true);
+  if(typeof PORK!=="undefined")PORK[s]=0;if(typeof KPORK!=="undefined"&&/por-kid-/.test(s))KPORK[s]=0;im.dataset.jimgFb="1";kitRenderSoon(300)}catch(x){}},true);
 
 /* 2 — a silhouette always stands in the stone frame */
 const isSil=f=>!!f&&(f.stranger||/kit\/unknown-[fmk]\.webp/.test(String(f.src||"")));
@@ -38001,7 +38071,10 @@ function kitPhNote(kind,id,tone,title){try{const k=kind+"|"+id;if(KIT_PH_SEEN[k]
 const kitPhPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
 /* manifests ready? (before they arrive every id looks unmapped: no placeholder, no record) */
 function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
-function kitPhActReady(){try{return typeof KIT_ACTS!=="undefined"&&!!KIT_ACTS&&!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}catch(e){return false}}
+/* cached per KIT_ACTS object (Object.keys of the whole act table ran per act card per DOM change) */
+var KPHAR_SRC=null,KPHAR_V=false;
+function kitPhActReady(){try{if(typeof KIT_ACTS==="undefined"||!KIT_ACTS)return false;if(KPHAR_SRC!==KIT_ACTS||KPHAR_SRC.acts!==KPHAR_A){KPHAR_SRC=KIT_ACTS;KPHAR_A=KIT_ACTS.acts;KPHAR_V=!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}return KPHAR_V}catch(e){return false}}
+var KPHAR_A=null;
 const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
 /* ---- events ---- */
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
@@ -39432,13 +39505,17 @@ const BTR_FEST={newyear:{tint:"#ee8f80",fx:[["petal-peach",16],["lantern",3]]},n
  thanhminh:{tint:"#cfe3c6",fx:[["petal-plum",10],["paper",6]]},doanngo:{tint:"#bfe0a8",fx:[["leaf",10],["jade",4]]},
  phoenix:{tint:"#f2cb8a",fx:[["petal-peach",12],["streak",3]]},thattich:{tint:"#b9b4ee",fx:[["orb",4],["spark",10]]},
  trungthu:{tint:"#f6dc92",fx:[["lantern",4],["osmanthus",10]]},trungcuu:{tint:"#f0b868",fx:[["osmanthus",12],["leaf",6]]},
- dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]}};
+ dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]},
+ vulan:{tint:"#9fb4d8",fx:[["orb",5],["incense",3]]},vantho:{tint:"#f6b070",fx:[["petal-peach",10],["spark",8]]},lapbat:{tint:"#f0dcc0",fx:[["snow",10],["incense",3]]}};
 /* painted band skins that exist on the CDN (sample pictures made before the 15:35Z rule "all drawing → Foreman C"; the rest of the art list is in dev/handover/reports/anim-pace.md → Foreman C) */
-const BTR_ART={thu:1,trungthu:1};
+const BTR_ART={xuan:1,ha:1,thu:1,dong:1,newyear:1,nguyentieu:1,thanhminh:1,doanngo:1,phoenix:1,thattich:1,trungthu:1,trungcuu:1,dongchi:1,giaothua:1,vulan:1,vantho:1,lapbat:1};
 /* painted palace-style buổi icons img/fx/buoi-ico-<0 sáng|1 trưa|2 chiều|3 tối>.webp (owner 16/11 KIT review 7.5; art by Foreman C): set the flag to 1 when the file is on the CDN; 0 = no icon (today's look) */
-const BTR_ICON=[0,0,0,0];
+const BTR_ICON=[1,1,1,1];
 /* sun / moon on a 0..1 arc: t = place along the band, v = visible (0..1) per buổi */
 const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:.86,v:1},m:{t:-.1,v:0}},{s:{t:1.08,v:0},m:{t:.5,v:1}}];
+/* MOON on the tối band by the game's lunar tuần (month = 3 tuần: S.tuan 0 thượng tuần, 1 rằm, 2 hạ tuần; owner 16/11 ~18:58Z). Painted phase sprites img/fx/buoi-moon-<crescent|full|halfL>.webp replace the orb moon; bands that paint their own moon (trungthu, nguyentieu, vulan) or have none (giaothua) show no sprite and hide the orb moon (never two moons) */
+const BTR_MOONBAND={trungthu:1,nguyentieu:1,vulan:1,giaothua:1},BTR_PHASE=["crescent","full","halfL"];
+function btrMoon(b,V,tuan){if(b!==3)return{ph:"",none:0};if(V.fest&&BTR_MOONBAND[V.fest.k])return{ph:"",none:1};const t=Math.max(0,Math.min(2,tuan|0));return{ph:BTR_PHASE[t],none:0}}
 let btrPrev=null,btrEl=null,btrEnd=null;
 /* the 4 painted pieces (~130 KB, SW-cached after the first fetch) are warmed once the game has been running a while, so the FIRST buổi change already shows them (on demand = not at boot) */
 const BTR_KEEP=[];function btrWarm(){try{if(typeof S==="undefined"||!S){setTimeout(btrWarm,7000);return}if(btrStill())return;["wash","mist","hills","orb"].forEach(n=>{const i=new Image();BTR_KEEP.push(i);i.src=BTR_BASE+"buoi-"+n+".webp"})}catch(e){}}
@@ -39458,10 +39535,11 @@ function buoiShift(){
   /* the variant tint is mixed into the buổi tint (night keeps its dark; a festival colours it more than a season) */
   const mix=VF?34:22;d.style.cssText=`--bt-tint:color-mix(in srgb,${VT} ${mix}%,${C.tint});--bt-wash:color-mix(in srgb,#2a1c10 ${b===3?0:16}%,color-mix(in srgb,${VT} ${Math.round(mix*.6)}%,${C.wash}));--bt-ink:${C.ink};--bt-s0:${C.sky[0]};--bt-s1:${C.sky[1]}`;
   const artKey=V.fest&&BTR_ART[V.fest.k]?V.fest.k:BTR_ART[V.sea]?V.sea:"";
+  const MN=btrMoon(b,V,(window.__btrVar&&window.__btrVar.tuan!=null)?window.__btrVar.tuan:(S.tuan||0));
   const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?260:kitPace(dawn?2000:1700);
   d.innerHTML=still?`<i class="btr-tint"></i>`:
    `<i class="btr-tint"></i><i class="btr-wash"></i>${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}<i class="btr-vig"></i>`+
-   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon"></i></div>`+
+   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
   document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
@@ -39502,7 +39580,7 @@ function buoiShift(){
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
-.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}
+.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}.btr-moon.btr-mph{background-size:contain;background-position:center;filter:drop-shadow(0 0 2px rgba(90,52,20,.85)) drop-shadow(0 0 7px rgba(60,40,90,.5))}.btr-moon.btr-nomoon{display:none}
 .btr-title{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
 .btr-plate{inset:0;background:var(--bt-tint);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;opacity:.96}
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
@@ -40362,6 +40440,8 @@ function j95gate(){return !!(typeof S!=="undefined"&&S&&!window.__j95off)}
 /* jmen (main, owner 11/15 "no dice for men in the hậu cung") decides where every man is each buổi and his reason (S.menW / S.menWhy) and makes
    the lovers' trysts; the record takes those in and never places men on its own while jmen runs */
 function j95men(){try{return typeof menRoad==="function"&&menRoad()}catch(e){return false}}
+/* the fixed men's schedule on any road (jmen menSched: the maid road too) */
+function j95ms(){try{return typeof menSchedRoad==="function"&&menSchedRoad()}catch(e){return false}}
 function j95err(w,e){try{if(J95.errs.length<20)J95.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
 function j95dice(p){return Math.random()*100<p}
 function j95pw(L){/* [[x,w],...] → x */const T=L.reduce((s,x)=>s+Math.max(0,x[1]),0);if(!(T>0))return L.length?L[0][0]:null;let r=Math.random()*T;for(const x of L){r-=Math.max(0,x[1]);if(r<=0)return x[0]}return L[L.length-1][0]}
@@ -40424,6 +40504,12 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
 function j95actLog(a,t,k,g){try{if(!S.roster)return;const L=S.roster.acts=S.roster.acts||[];L.push({id:j95id(a),kh:j95kh(),k,t:j95id(t),why:g.why||"",ok:g.ok?1:0,ex:g.ex?1:0});if(L.length>60)L.shift();
  if(!g.ok){J95.stat.gate++;J95.stat.gateBy[k]=(J95.stat.gateBy[k]||0)+1}else J95.stat.pass++}catch(e){}}
 function j95id(p){if(!p)return null;if(p===S)return"me";if(p.id!=null&&p.rel!=null)return"v"+p.id;return null}
+/* ONE id style for every ledger (people S.roster, causes jmem, items jil — owner 16/11 13:40Z one ledger): the record id of a person object
+   or a record id string: "me" · "v<id>" consort · "s<sid>" servant / elder · "m<n>" man · "emp" · "th" · "k:<mother>:<i>" child · "c:<post>" */
+function ledgerId(p){try{if(p==null)return null;if(typeof p==="string")return p==="S"?"me":/^rv:/.test(p)?"v"+p.slice(3):p;if(p===S)return"me";if(S.emp&&p===S.emp)return"emp";if(S.thO&&p===S.thO)return"th";
+ if(p.id!=null&&p.rel!=null)return"v"+p.id;if(typeof p.id==="string"&&/^m\d+$/.test(p.id))return p.id;if(p.sid!=null)return"s"+p.sid;
+ for(const [k,mo] of (typeof allKids==="function"?allKids():[]))if(k===p)return"k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k)}catch(e){}return null}
+window.ledgerId=ledgerId;
 
 /* ---------------- 3. THE REGISTRY: everyone alive in the palace now ---------------- */
 function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{if(seen[id])return;seen[id]=1;L.push({id,name,role,kind,home,ref})};
@@ -40442,9 +40528,9 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
  if(S.court)for(const c in S.court){const o=S.court[c];if(o&&o.name)add("c:"+c,o.name,o.n||c,"court",{tq:"dtd",ksp:"ksp",ped:"ksp",ty:"tyv"}[c]||"ksp")}
  const present=id=>(R&&R.P&&R.P[id])||j95z().sec.some(x=>x.b===id&&x.key===j95key());
- const jm=j95men();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
+ const jm=j95men()||j95ms();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
  /* officials (j55) inside for the morning audience / a festival banquet this buổi (jmen S.minW) */
- if(j95men())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
+ if(j95men()||j95ms())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
  try{for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const hk=!mo?(S.out?(qOn()?"kn":"tn"):"home"):mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn");const kp=PXT&&typeof plxKidPlace==="function"?plxKidPlace(k):null;add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k),k.name,k.sex==="m"?"Hoàng tử":"Công chúa","kid",kp||hk,k)}}catch(e){}
  if(PXT){add("c:tgk","Quản sự Tân Giả khố","Quản sự Tân Giả khố","fix","tgk");let tt=false;try{tt=plxKids("ttp").length>0}catch(e){}add("c:ttp","Thầy dạy Thượng thư phòng","Thầy dạy Thượng thư phòng","fix",tt?"ttp":J95OUT_)}
  return L}
@@ -40809,7 +40895,7 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
      if(cm&&k===cm.y.k){const a=cm.y.r==="tryst"?"tryst":cm.y.r==="letter"?"letter":"here";for(let i=0;i<4;i++)R.P[id][i]=[k,a,cm.id,cm.y.r==="tryst"?`tư tình với ${mn?mn.name:"một nam nhân"}`:cm.y.r==="letter"?"lén gửi thư ra ngoài cung":`${mn?mn.name:"một nam nhân"} nán lại cung nàng`];continue}
      const why=k==="home"?"được mời / sang thăm cung ngươi":k===palaceOf(v)?"không được vào chỗ định đến, quay về":"đổi chỗ theo lệ";for(let i=0;i<4;i++)R.P[id][i]=[k,k==="home"?"visit":"back",k==="home"?"me":null,why]}}
    for(const m of S.men||[]){if(!m.alive)continue;const k=(S.menW||{})[m.id];if(k){R.who[m.id]=[m.name,m.role];const y=MY[m.id]||{};const ae=j95menAct(m,k,y);R.P[m.id]=[0,1,2,3].map(()=>ae.slice())}}
-   for(const m of S.men||[]){if(!m.alive||(S.menW||{})[m.id]||(!jm&&(m.rw==="thái y"||m.rw==="thị vệ")))continue;if(!j95z().sec.some(x=>x.b===m.id&&x.wk===wk()&&x.c===R.c))delete R.P[m.id]}
+   for(const m of S.men||[]){if(!m.alive||(S.menW||{})[m.id]||(!jm&&!j95ms()&&(m.rw==="thái y"||m.rw==="thị vệ")))continue;if(!j95z().sec.some(x=>x.b===m.id&&x.wk===wk()&&x.c===R.c))delete R.P[m.id]}
    for(const id in R.P)if(id.indexOf("q:")===0)delete R.P[id];/* officials: re-read from this buổi's S.minW by j95sync */
    delete R.__w0;j95secApply(R);j95sync(true,true)}catch(e){j95err("wrap",e)}return r};
  const sp0=spend;spend=function(){const r=sp0.apply(this,arguments);try{if(j95on()&&S.roster)j95sync()}catch(e){j95err("spend",e)}return r};
@@ -40880,6 +40966,84 @@ setTimeout(()=>{try{
  for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95final()&&typeof renderStage==="function")renderStage()}catch(e){j95err("final:"+n,e)}return r}}
  if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const L=hp0.apply(this,arguments);try{if(j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(L))j95elderFix(L,"home",S.roster,j95kh())}catch(e){j95err("home",e)}return L}}
 }catch(e){j95err("finalwrap",e)}},0);
+/* ================= PEOPLE LEDGER (owner core law 16/11 13:40Z + 13:50Z s17; review/people-ledger) =================
+   EVERY person in the record is really somewhere and seen there: Dư đồ counts, at every place, everyone the record puts there at the CURRENT
+   khắc (nobody hidden, nobody counted from another khắc), so the places' counts add up to the record (her own self is not a shadow); the
+   stage draws every one of them (j59 pages a crowd). One rule, read from the one record (S.roster), on the consort road AND the maid road
+   (her "home" = the servants' room of her mistress's palace, j95lk; no caps of 4 consorts / only the mistress at home any more). Switch for measuring: J95.led=false gives back the old "only who the stage drew" rule. */
+J95.led=true;
+function j95led(){return J95.led!==false&&j95on()}
+/* the maid road (j42): her "home" is the servants' room of her mistress's palace, one place on the map (srvGoTo sends that palace to "home") */
+function j95srvR(){return typeof isSrv==="function"&&isSrv()}
+function j95lk(k){if(k==="home"&&j95srvR()){const m=srvM();return m?palaceOf(m):k}return k}
+function j95at(w,k){return w===k||(j95srvR()&&j95lk(w)===j95lk(k))}
+/* her party: she is not a shadow ("bóng: người khác đang ở đó, không tính ta"), nor is her trusted maid walking with her away from home */
+function j95party(id,k){return id==="me"||(id==="mm:me"&&k===S.place&&k!=="home")}
+(function(){const v0=j95vis;j95vis=function(id,k){if(j95led())return !!(id&&k&&k!==J95OUT_&&!j95party(id,k));return v0.apply(this,arguments)};
+ const a0=j95arrKh;j95arrKh=function(k){if(j95led()&&j95cntNow())return j95kh();return a0.apply(this,arguments)}})();
+/* the one switch for the Dư đồ moment (BAL.led.cnt): "now" = one moment for every place (owner 13:50Z); "arrive" = each place at her arrival */
+function j95cntNow(){try{return !(BAL.led&&BAL.led.cnt==="arrive")}catch(e){return true}}
+function j95sv(id){const sid=+String(id).slice(1);try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&s.sid===sid)return s}catch(e){}return null}
+/* the record id of a stage entry (the same mapping j95stage uses, plus children, maids, elders, other people's servants) */
+function j95ledId(p){if(!p)return null;if(p.lid)return p.lid;const k=p.kind;try{
+ if(k==="srv"){const s=p.sk;if((s==="rv"||s==="hh"||s==="mis")&&p.ref&&p.ref.id!=null)return"v"+p.ref.id;if(s==="sv"&&p.sid!=null)return"s"+p.sid;if(s==="emp")return"emp";if(s==="ty")return"c:ty";if(s==="man"&&(p.mid||p.ref))return p.mid||p.ref.id;return null}
+ if((k==="rival"||k==="hh"||k==="fallen")&&p.ref)return"v"+p.ref.id;if(k==="emp")return"emp";if(k==="th")return"th";if(k==="maid")return"mm:me";
+ if(k==="man"&&p.ref)return p.ref.id;if(k==="ty")return"c:ty";if(k==="ksp")return"c:ksp";if(k==="peddler")return"c:ped";if(k==="min"&&p.ref&&p.ref.c!=null)return"q:"+p.ref.c;
+ if(k==="elder"&&p.ref&&p.ref.sid!=null)return"s"+p.ref.sid;if((k==="serv"||k==="npc")&&p.sid!=null)return"s"+p.sid;
+ if(k==="npc"&&/^Quản sự Tân Giả khố/.test(p.name||""))return"c:tgk";if(k==="npc"&&/^Thầy dạy/.test(p.name||""))return"c:ttp";
+ if(k==="kid"&&p.ref){const i=(S.kids||[]).indexOf(p.ref);if(i>=0)return"k:me:"+i;for(const v of rivals){const j=(v.kids||[]).indexOf(p.ref);if(j>=0)return"k:"+v.id+":"+j}}}catch(e){}return null}
+/* a stage entry for a record id (kit stage figure kinds only: rival/hh/fallen/emp/th/maid/serv/npc/kid/ty/ksp/peddler/elder) */
+function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
+ if(j95srvR()){const m=srvM();
+  if(c==="v"){const v=RV(+id.slice(1));if(v&&v.alive&&!v.out)return{kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`}}
+  else if(id==="emp")return{kind:"srv",sk:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng"};
+  else if(id==="c:ty")return{kind:"srv",sk:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"};
+  else if(c==="s"){const s=j95sv(id);if(s&&!s.eid){let o=null;try{o=rivals.find(v=>(v.staff||[]).includes(s))||null}catch(e){}if(o&&o!==m&&!S.srv.met.includes(s.sid))S.srv.met.push(s.sid);
+   return{kind:"srv",sk:"sv",ref:s,sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):(s.role==="maid"?"Cung nữ":"Thái giám")} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`}}}
+  else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${x.trait} · ${tinhW(x.tinh)}`}}return null}
+  else if(id.indexOf("q:")===0){const h=(trS().H||{})[id.slice(2)];return h?{kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.roster.P[id][j95kh()][0]==="thu"?"vào chầu":"dự yến"}`}:null}}
+ if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
+ if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
+ if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
+ if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}`}:null;
+ if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));const m=v&&v.maid;if(!m||!m.name)return null;return{kind:"npc",lid:id,name:m.name,ini:m.name.split(" ").pop()[0],col:"#b9a48a",info:who[1]||"Cung nữ thân tín"}}
+ if(c==="s"){const s=j95sv(id);if(!s)return null;if(s.eid)return j95elderEntry(s);if((S.staff||[]).includes(s)&&typeof hsvPerson==="function"&&typeof hsvOn==="function"&&hsvOn())return hsvPerson(s);
+  return{kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:who[1]||(s.role==="maid"?"Cung nữ":"Thái giám")}}
+ if(c==="k"){const P=id.split(":");const mo=P[1]==="me"?null:RV(+P[1]);const L=mo?mo.kids:S.kids;const k=L&&L[+P[2]];if(!k||!k.alive)return null;return{kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#f0d070":k.sex==="m"?"#9ab0d0":"#c9a0e0",info:who[1]||""}}
+ if(id==="c:ty"){const o=S.court&&S.court.ty;return{kind:"ty",name:o&&o.name||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"}}
+ if(id==="c:ksp"){const o=S.court&&S.court.ksp;return{kind:"ksp",name:o&&o.name||"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Kính sự phòng · Giữ thẻ bài các phi tần"}}
+ if(id==="c:ped"){const o=S.court&&S.court.ped;return{kind:"peddler",name:o&&o.name||"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"}}
+ if(id.indexOf("c:")===0)return{kind:"npc",lid:id,name:who[0]||"Thái giám",ini:String(who[0]||"Hoạn").split(" ").pop()[0],col:"#8a8aa0",info:who[1]||""}}catch(e){j95err("ledObj",e)}return null}
+/* the stage = the record at her place now: add everyone missing, drop people this pass added who left */
+function j95ledStage(){if(!j95led())return false;const V=S.visit;if(!V||!Array.isArray(V.people)||V.k!==S.place||S.dead)return false;if(typeof isKc==="function"&&isKc())return false;
+ const R=S.roster;if(!R||R.key!==j95key())return false;const k=S.place,kh=j95kh(),srv=j95srvR();let ch=false;const here=id=>R.P[id]&&j95at(R.P[id][kh][0],k);
+ /* anyone drawn whom the record puts elsewhere now leaves; one figure per person */const seen=new Set();
+ for(let i=0;i<V.people.length;i++){const p=V.people[i];const id=j95ledId(p);if(!id)continue;if((R.P[id]||p.j95led)&&!here(id)||seen.has(id)){V.people.splice(i,1);i--;ch=true;continue}seen.add(id)}
+ const have=seen;
+ for(const id in R.P){if(j95party(id,k)||have.has(id)||!here(id))continue;if(!srv&&id[0]==="m"&&id[1]!=="m")continue;/* men: j95stage draws them (the maid road: here) */if(!srv&&id.indexOf("q:")===0)continue;/* officials: j95stage */
+  const o=j95ledObj(id);if(!o)continue;o.j95led=1;if(!o.lid&&!j95ledId(o))o.lid=id;V.people.push(o);have.add(id);ch=true}
+ if(ch)popIdx=null;return ch}
+(function(){const f0=j95final;j95final=function(){let ch=f0.apply(this,arguments);try{if(j95ledStage())ch=true}catch(e){j95err("led",e)}return ch}})();
+/* other people's servants / maids / children on her stage: no orders to them (their acts are for HER household and HER children) */
+(function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){try{if(p&&p.j95led&&(p.kind==="npc"||(p.kind==="kid"&&!(S.kids||[]).includes(p.ref))||(j95srvR()&&p.kind!=="srv")))return[]}catch(e){}return t0.apply(this,arguments)}})();
+/* the map count = the record, at every place (jplx's own list count at Dãy nhà cung nhân / Tân Giả khố / schools and jact's Nội vụ phủ +1
+   are other sources of the same people): registered last, so it is the outermost countAt */
+setTimeout(()=>{try{const c2=countAt;countAt=function(k){try{if(j95led()&&S&&!S.dead&&!S.out&&S.roster&&S.roster.key===j95key()&&!(typeof isKc==="function"&&isKc())){const R=S.roster;const kh=j95cntNow()||j95at(S.place,k)?j95kh():j95arrKh(j95lk(k));let n=0;for(const id in R.P){const w=R.P[id][kh][0];if(j95at(w,k)&&j95vis(id,w))n++}return n}}catch(e){}return c2.apply(this,arguments)}}catch(e){j95err("ledcount",e)}},0);
+/* FIXED SCHEDULE (owner 16/11 13:40Z: "giống như là một cái lịch … ai ở đâu làm gì là phải có hết", no random presence): the record's plan
+   for a buổi is a calendar, not a fresh roll. Every planning step draws from a generator seeded by the life (S.j95seed, saved) and the buổi
+   key (plus the person for a single plan), so the same buổi always has the same schedule however often or late it is computed (a newcomer,
+   a reload, the dev tool). Habits, weekly intentions and surprises keep their reasons; only the dice became the calendar's. */
+function j95hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function j95rng(seed){let a=seed>>>0;return function(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function j95seed(){if(!S.j95seed)S.j95seed=1+Math.floor(Math.random()*2147483646);return S.j95seed}
+function j95cal(tag,f){return function(){if(J95.cal===false||!S)return f.apply(this,arguments);const r0=Math.random;Math.random=j95rng(j95hash(j95seed()+"|"+j95key()+"|"+tag(...arguments)));try{return f.apply(this,arguments)}finally{Math.random=r0}}}
+J95.cal=true;
+j95week=j95cal(()=>"wk"+wk(),j95week);j95plan=j95cal(()=>"plan",j95plan);
+/* the morning court is not a habit but a duty (owner 16/11 13:40Z, mandatory times): the first BAL.led.court khắc of buổi sáng, Hoàng thượng
+   holds court at Cần Chính điện; his own plan (and a surprise) only shapes the khắc after it */
+(function(){const e0=j95planEmp;j95planEmp=function(c){const P=e0.apply(this,arguments);try{if(c===0&&J95.court!==false&&Array.isArray(P)){const n=Math.min(4,(BAL.led&&BAL.led.court)||0);for(let i=0;i<n;i++)P[i]=["thu","court",null,"lệ thượng triều buổi sáng"]}}catch(e){j95err("court",e)}return P}})();
+J95.court=true;
+j95planRival=j95cal(v=>"v"+(v&&v.id),j95planRival);j95planOther=j95cal(p=>"o"+(p&&p.id),j95planOther);j95planEmp=j95cal(()=>"emp",j95planEmp);j95planTH=j95cal(()=>"th",j95planTH);
 /* ================= j95b: CỔNG ĐỘNG CƠ CHO SỰ KIỆN + NƠI CHỐN TRONG CÂU CHỮ + HIỂU LẦM DO TIN ĐỒN =================
    Adds three things to j95 (wraps only; edits no file):
    1) EVENT ACTOR GATE. Every event that names a real person (j68 weekly templates, j7 ev(), stock dilemmas, j4/j42 story cards,
@@ -44004,7 +44168,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ddb643fdac26";window.CTM_BUILD=BUILD;
+const BUILD="dc77f32a2a2a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

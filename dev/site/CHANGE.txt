@@ -1,1 +1,1 @@
-Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ.
+Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ.
