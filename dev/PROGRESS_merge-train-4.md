@@ -21,16 +21,37 @@ module inserted after its predecessor in the branch's list.
 Assemble tail: … jtruth, jkpc, jcycle, jtds (jcycle and jtds wrap disjoint functions: jcycle deal/endTurn/flip/monthPay/nightCh/nightScene/
 rivalsMonth/stealNight/talkOpts; jtds addVir/virCost/deser/tdFinish/lessonVir/wkLv/wkrMat/rcpListOpen/rcpOldSave/render/ktArtSkills/start/ktWorksHTML).
 
-## Merge-breakage fixes (in the tuduc-sub merge commit)
+13. scheme-games-port-r1 e25486e0 (13th PASS, added by coordinator s10; kit keeper approved its jopic grid-auto-rows max-content) — jsgame after jgoal
+14. origin/main a363cc14 (goal-strip-fix), 0a311183 (reign-road; jbal2 keeps BAL.col + BAL.rg), 0c23da40 (act-dedupe, outside-r2, kit-sweep,
+    cardflip-smooth, pcard-actrow, facefx) merged on top. Assemble tail now: jtruth, jkpc, jcycle, jtds, jact, jkc
+    (jact/jkc wrap deal/talkOpts/endTurn/render like jcycle/jtds; main's jact dedupe and jkc home road stay outermost so they see every card).
+
+## Merge-breakage fixes
 - Owner rule carried by act-text-r1 (one word "Tự học"; "Học với ma ma"; log "Học X với ma ma giáo tập") was undone by tuduc-mg / tuduc-sub
   text: jtabs Tứ đức buttons, jtd TD_MODE + log, jtds practice ("Tự học, làm đồ", log "tự học") brought back in line.
 - jtds teacher-log rewrite regex also matches the new log form.
 - j79 kpActCtx (placeholder-pics3 picture keys) accepts the new labels ("Tự học", "Học với ma ma", "Học với Thái hậu",
   "Tự học, làm tác phẩm") → same ACTS.json pictures as before.
+- Result sound (result-sfx rule: every kg82ShowRes passes ok): jroute blood test (!!ok), jtd Tứ đức (raw>=5), jsgame scheme game
+  (odds up/down/same -> true/false/null). result-sfx-scan: 10/10 call sites.
+- dev/test/tuduc-mg.js: tuduc-sub puts the work dialog ('Làm', then material) in front of a lesson; the bot now picks it.
 - Update notes: new id 2026-11-16b in dev/build/jnotes.js.
 
 ## KIT
 No new § sections in this train; no duplicate § numbers (§6.x / §57.x are subsections). Next free §81.
 
-## Tests
-(see below)
+## Tests (final round on the main-0c23da40 merge, 3 in parallel; flaky ones re-run alone)
+PASS: routes (5 sizes), difficulty (5), tuduc-mg 8/8 x5, tuduc-sub x5, cycle ALL OK (5 + 390x844 rotate), thaiy, collect-ms x5,
+result-sfx (5), sfx-smoke (5 + 390x844, old save), small-art-wire (5; servant-pouch check flaky under load, alone PASS - known),
+reign x5, schemegames x5, schemewire x5, schemesave, stage-rail (5), act-dedupe-w1 x5, act-dedupe-vp (FAIL 2 under load, alone 0,
+same on main), kc-end, outside/oldsave, coop-home, kit-conform, pcard-actrow (5), coop-e2e, rotate-prompt, boot-flash 755 + 1180.
+chapter-detail: 755/1180/1366 PASS; 1000x755 flaky (passes 1 of 3 alone: #kxcatch intercepts the card tap); 844x390 FAILS on its
+own branch build too (pre-existing).
+goal.js: fails on main 0c23da40 too ('tour did not start', ktut blocks the tap; old-save step reads S after a reload that holds
+no save - identical on main). placeholder-pics.js: stale (expects placeholder cards, all now have pictures) - identical on its own
+branch; dev/art/pp3/scan.js identical to the branch (8 titles, 7 changed, 0 errors).
+act-text-scan: see dev/handover/reports/merge-train-4.md.
+
+## Open (not merge breakage, for owners)
+- jroute rtHlCards: 'đợi qua cơn giận của Hoàng thượng (còn NaN tháng)' when no cooldown is set (routes-port-r1 itself).
+- act-text-scan (pre-main-merge build): kemgain 5, glue 1 (the NaN line), twice 7, long 164 (act-text K8 layout).
