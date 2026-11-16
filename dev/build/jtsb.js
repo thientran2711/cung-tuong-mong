@@ -29,9 +29,9 @@ function tsbNeedMark(){try{const m=Q[0];if(!m||!m.opts||!m.opts.some(o=>o&&o.nee
 /* an option whose Cần is unmet cannot be taken (its button is disabled); a direct call (bot, co-op) falls back to the first allowed option, never a dead end */
 (function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&o.need&&o.need.some(n=>!n.ok)){const j=m.opts.findIndex(x=>!x.need||x.need.every(n=>n.ok));if(j>=0)return c0.call(this,j)}}catch(e){}return c0.apply(this,arguments)}})();
 function tsbArt(f,label){return{src:`img/${f}.webp`,label:label||""}}
-function tsbNeedKhac(c){return{t:`${c} khắc (còn ${4-used})`,ok:used+c<=4}}
+function tsbNeedKhac(c){return j76need(c)} /* the day's khắc (j76): spills into the next buổi */
 function tsbNeedBac(n){return{t:`Bạc ${n} (có ${S.bac})`,ok:S.bac>=n}}
-function tsbKh(c){const n=Math.max(0,Math.min(c,4-used));if(n)spend(n)}
+function tsbKh(c){if(typeof j76spills==='function'&&j76spills(c)){spend(c);return}const n=Math.max(0,Math.min(c,4-used));if(n)spend(n)}
 
 /* ---------------- scars: j70 when present, else the same p.scar shape ---------------- */
 const TSB_SCAR=[null,{n:"nhẹ",d:10,sung:4,danh:1,need:4,perm:0},{n:"vừa",d:25,sung:8,danh:3,need:8,perm:3},{n:"nặng",d:45,sung:14,danh:5,need:14,perm:15}];
