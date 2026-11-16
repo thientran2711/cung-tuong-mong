@@ -48,7 +48,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
 Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
- age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6},night:{sung:3,an:2}});
+ age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
 Object.assign(BAL,{route:{ /* jroute «Lối riêng» (tư tình / trốn cung / rời cung / ẩn dật / nghiệm thân): every rule number of that module */
@@ -172,7 +172,7 @@ Object.assign(BAL,{
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */
       trace:{bac:-10}}, /* silver to have the rumour traced */
- kitpage:{demo:{age:19,k:1,tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1}},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
+ kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1}},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
       listen:{duc:1}},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
  diff:{bac:{de:1.5,vua:1,kho:.7}},   /* starting bạc × by difficulty (Dễ / Vừa / Khó) */
