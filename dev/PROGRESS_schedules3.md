@@ -138,3 +138,18 @@ flow otherwise, nothing was saved); roster_dom ORIGIN env; maid road: map checke
 the mistress); audit knows elder / npc / fixture stage entries, elders' posts in (l), plxKidPlace in (k), jplx places in (c);
 roster.js tool knows elders + jplx places. **Known main bug kept visible, not hidden**: jstaff draws the Đức Thọ cung elder at Tân Giả khố
 too (consort road as well) → map at Tân Giả khố = record + 1; the audit counts it as `knownTgkElder`, roster_dom as `known`.
+
+Final results on the merged build (main 0a311183 + this branch):
+| test | result |
+|---|---|
+| roster_audit sens 18 (all 9 origins) | 17 498 checks: (a),(b),(d)–(r) 0; (c) 2 (one moment, see open 1); page errors 0; J95/J95B errors 0 |
+| roster_audit rand 18 (shard 4) | 9 248 checks: all 0; page errors 0 |
+| roster_oldsave (save made on main → this build) | loads at 755x1000 + 1180x820, record built on load, 12 buổi clean, 0 errors |
+| stage-counts.js | thd 139 / cnv 62 walks, 0 mismatches, 0 errors |
+| roster_dom 20 moments | 755x1000 random 0 bad, 1180x820 random 0 bad, 755x1000 maid road (cnv) 0 bad; 0 page errors, no overflow |
+| rotate prompt, built root page, iPhone 390x844 host mode | "Xoay ngang điện thoại để chơi" shown, game frame 1180x820 rotated, 0 errors |
+| person card "Thói quen" 755x1000 | kit rows (Buổi sáng · Ngự hoa viên · Tai mắt kể · 3 lần …), end of right column |
+Open: (1) 1 moment in 36 lives: a walk to Đức Thọ cung drew Thái hậu without her Chưởng sự cô cô (jstaff stage hook missed on that path;
+record right). (2) Known (a) at a mid-buổi maid→consort promotion (documented above) did not show this round. (3) Main bugs for session 8:
+jstaff Tân Giả khố double placement (both roads), jmen 3-buổi assumption; the jplx×jstaff overlaps are reconciled in j95 (point 3) but the
+owners of jplx/jstaff may prefer to fix them at source.
