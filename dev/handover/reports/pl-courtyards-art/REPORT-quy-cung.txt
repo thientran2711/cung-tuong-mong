@@ -1,0 +1,50 @@
+dir nhat-quy-cung: 48 rows, 48 done, 0 failed. KB 94-275
+nhat-quy-cung-nguyentieu-sang.webp | 261 KB | res-base RGB [np.int64(8), np.int64(3), np.int64(-2)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-nguyentieu-trua.webp | 248 KB | res-base RGB [np.int64(6), np.int64(1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-nguyentieu-chieu.webp | 251 KB | res-base RGB [np.int64(5), np.int64(0), np.int64(-4)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-thanhminh-sang.webp | 255 KB | res-base RGB [np.int64(5), np.int64(3), np.int64(-1)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-thanhminh-trua.webp | 249 KB | res-base RGB [np.int64(3), np.int64(1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-thanhminh-chieu.webp | 244 KB | res-base RGB [np.int64(3), np.int64(1), np.int64(-1)] | redo 0 | looked at: ok 
+nhat-quy-cung-thanhminh-toi.webp | 102 KB | res-base RGB [np.int64(2), np.int64(2), np.int64(1)] | redo 0 | looked at: ok 
+nhat-quy-cung-doanngo-sang.webp | 260 KB | res-base RGB [np.int64(5), np.int64(2), np.int64(0)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) served_by_noon_file_map_parity
+nhat-quy-cung-doanngo-chieu.webp | 243 KB | res-base RGB [np.int64(0), np.int64(-1), np.int64(-3)] | redo 0 | looked at: ok served_by_noon_file_map_parity
+nhat-quy-cung-doanngo-toi.webp | 133 KB | res-base RGB [np.int64(2), np.int64(2), np.int64(5)] | redo 0 | looked at: ok 
+nhat-quy-cung-phoenix-sang.webp | 244 KB | res-base RGB [np.int64(7), np.int64(2), np.int64(-1)] | redo 0 | looked at: ok 
+nhat-quy-cung-phoenix-trua.webp | 250 KB | res-base RGB [np.int64(7), np.int64(1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-phoenix-chieu.webp | 250 KB | res-base RGB [np.int64(8), np.int64(1), np.int64(-2)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-phoenix-toi.webp | 117 KB | res-base RGB [np.int64(2), np.int64(0), np.int64(0)] | redo 0 | looked at: ok 
+nhat-quy-cung-thattich-sang.webp | 250 KB | res-base RGB [np.int64(5), np.int64(1), np.int64(-3)] | redo 0 | looked at: ok 
+nhat-quy-cung-thattich-trua.webp | 256 KB | res-base RGB [np.int64(5), np.int64(0), np.int64(-4)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-thattich-chieu.webp | 250 KB | res-base RGB [np.int64(5), np.int64(0), np.int64(-5)] | redo 0 | looked at: ok 
+nhat-quy-cung-trungcuu-sang.webp | 252 KB | res-base RGB [np.int64(6), np.int64(1), np.int64(-4)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-trungcuu-trua.webp | 268 KB | res-base RGB [np.int64(9), np.int64(5), np.int64(-3)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-trungcuu-chieu.webp | 263 KB | res-base RGB [np.int64(5), np.int64(-1), np.int64(-4)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-trungcuu-toi.webp | 143 KB | res-base RGB [np.int64(4), np.int64(1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-dongchi-sang.webp | 242 KB | res-base RGB [np.int64(2), np.int64(0), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-dongchi-trua.webp | 248 KB | res-base RGB [np.int64(3), np.int64(0), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-dongchi-chieu.webp | 239 KB | res-base RGB [np.int64(2), np.int64(-1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-dongchi-toi.webp | 94 KB | res-base RGB [np.int64(1), np.int64(0), np.int64(0)] | redo 0 | looked at: ok 
+nhat-quy-cung-giaothua-sang.webp | 244 KB | res-base RGB [np.int64(3), np.int64(-1), np.int64(-3)] | redo 0 | looked at: ok 
+nhat-quy-cung-giaothua-trua.webp | 239 KB | res-base RGB [np.int64(5), np.int64(0), np.int64(-3)] | redo 0 | looked at: ok 
+nhat-quy-cung-giaothua-chieu.webp | 239 KB | res-base RGB [np.int64(3), np.int64(-1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-vulan-sang.webp | 254 KB | res-base RGB [np.int64(6), np.int64(1), np.int64(-3)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-vulan-trua.webp | 264 KB | res-base RGB [np.int64(6), np.int64(2), np.int64(-2)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-vulan-chieu.webp | 254 KB | res-base RGB [np.int64(6), np.int64(2), np.int64(-2)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-vulan-toi.webp | 128 KB | res-base RGB [np.int64(5), np.int64(2), np.int64(-1)] | redo 0 | looked at: ok 
+nhat-quy-cung-vantho-sang.webp | 267 KB | res-base RGB [np.int64(5), np.int64(2), np.int64(-7)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-vantho-trua.webp | 275 KB | res-base RGB [np.int64(7), np.int64(4), np.int64(-5)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-vantho-chieu.webp | 252 KB | res-base RGB [np.int64(8), np.int64(4), np.int64(-3)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-vantho-toi.webp | 130 KB | res-base RGB [np.int64(9), np.int64(5), np.int64(-4)] | redo 0 | looked at: ok 
+nhat-quy-cung-lapbat-sang.webp | 250 KB | res-base RGB [np.int64(2), np.int64(-1), np.int64(-3)] | redo 0 | looked at: ok 
+nhat-quy-cung-lapbat-trua.webp | 246 KB | res-base RGB [np.int64(2), np.int64(-1), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-lapbat-chieu.webp | 243 KB | res-base RGB [np.int64(2), np.int64(-2), np.int64(-3)] | redo 0 | looked at: ok 
+nhat-quy-cung-lapbat-toi.webp | 95 KB | res-base RGB [np.int64(1), np.int64(0), np.int64(0)] | redo 0 | looked at: ok 
+nhat-quy-cung-thanhtho-sang.webp | 264 KB | res-base RGB [np.int64(6), np.int64(1), np.int64(-5)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-thanhtho-trua.webp | 256 KB | res-base RGB [np.int64(7), np.int64(3), np.int64(-3)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-thanhtho-chieu.webp | 259 KB | res-base RGB [np.int64(7), np.int64(1), np.int64(-5)] | redo 0 | looked at: ok (KB slightly >250, q65 floor) 
+nhat-quy-cung-thanhtho-toi.webp | 123 KB | res-base RGB [np.int64(7), np.int64(3), np.int64(-2)] | redo 0 | looked at: ok 
+nhat-quy-cung-tang-sang.webp | 243 KB | res-base RGB [np.int64(12), np.int64(15), np.int64(13)] | redo 0 | looked at: ok; brighter by white cloth (allowed) 
+nhat-quy-cung-tang-trua.webp | 251 KB | res-base RGB [np.int64(13), np.int64(23), np.int64(25)] | redo 1 | looked at: ok (KB slightly >250, q65 floor); brighter by white cloth (allowed) 
+nhat-quy-cung-tang-chieu.webp | 251 KB | res-base RGB [np.int64(9), np.int64(10), np.int64(7)] | redo 0 | looked at: ok (KB slightly >250, q65 floor); brighter by white cloth (allowed) 
+nhat-quy-cung-tang-toi.webp | 116 KB | res-base RGB [np.int64(8), np.int64(8), np.int64(8)] | redo 0 | looked at: ok; brighter by white cloth (allowed) 
+Notes: gpt-2-6 output is 1344px, upscaled to 1792; winter base has snow on ground (base itself). Extra small figures/white rabbit lanterns in nguyentieu-trua came from base/model, minor.
