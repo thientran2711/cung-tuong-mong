@@ -69,7 +69,7 @@ let LG=null,ATT={},fold=0,depth=0,lab="",clickLab="";
 function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={}}
 function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
   const w=Object.assign({},ATT);if(why)for(const k in why)if(why[k])(w[k]=w[k]||[]).push(why[k]);
-  if(S.dead||quiet){reset();return}
+  if(quiet){reset();return}/* a death's last act still gets its line (its cost) */
   const n=(S.logSeq||0)-LG.seq;const parts=lsFix(lsLines(n),LG.v).filter(p=>p.a!==p.b&&LG.v[p.k]!==p.b);
   let did=false;if(parts.length){const L=String(label||lab||clickLab||"Trong cung").replace(/[.:\s]+$/,"");log(`${L}: ${parts.map(p=>partH(p,w)).join(", ")}.`);did=true}
   reset();return did}catch(e){console.error("lsSync",e);reset()}}
