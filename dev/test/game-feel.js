@@ -7,7 +7,7 @@ const [,,BASE,OUT,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const VP=[[755,1000,2,'fold'],[1180,820,2,'ipad'],[412,1058,2,'phone']];
 const PH=(process.env.PH||'1234').split('');const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);
 const sleep=t=>new Promise(r=>setTimeout(r,t));
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){start();if(!isSrv()&&!(window.isKc&&isKc()))break}Q.length=0;document.getElementById('modal').hidden=true;
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 function watch(p,errs,reqs){p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
  p.on('request',q=>{if(/pixi/.test(q.url()))reqs.push({t:Date.now(),u:q.url().split('/').slice(-2).join('/')})})}

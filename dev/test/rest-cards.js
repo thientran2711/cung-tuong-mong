@@ -2,7 +2,7 @@
    Dưỡng sức: only buổi tối, uses every khắc left (≥ BAL.restDsMinK), Sức +BAL.restDsSuc, a tonic from the chest or Bạc BAL.restDsBac.
    Một lát: any buổi, BAL.restLatK khắc, Sức +BAL.restLatSuc, free, eases a bad mood by BAL.restLatEmo.
    usage: node dev/test/rest-cards.js <url> */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/pw-roulette');const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});/* wait for the loader (jload) to hand over, else start() can run before the game is ready and S stays undefined */
