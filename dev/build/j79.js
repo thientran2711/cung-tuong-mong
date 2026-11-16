@@ -605,7 +605,9 @@ const KIT_ACT_CATS=[["hai-nguoi",/hạ độc|đẩy|vu |vu oan|trù ẻo|ngáng
  ["hau-ha",/hầu|dâng|chăm|phục dịch|quét|lau|lĩnh đồ|theo hầu|việc chủ|canh|nấu|pha trà/i],["nghi-ngoi",/nghỉ|ngủ|tắm|dưỡng|chải chuốt|giả bệnh|tĩnh dưỡng/i],
  ["buon-ban",/bán|mua|buôn|chợ|đổi|bạc/i],["le-nghi",/vấn an|thỉnh an|lễ|cầu|chùa|phật|xin xăm|cúng|bái/i],["giao-thiep",/thăm|tặng|kết|trò chuyện|mời|gặp|tâm sự|làm thân|nói/i],["di-lai",/đi |dạo|sang|ra |vào |đến /i]];
 let KIT_ACTS={acts:{},have:[]};try{fetch("img/ACTS.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j){KIT_ACTS=j;try{document.querySelectorAll("button.ka.kcard[data-kart]").forEach(b=>{b.removeAttribute("data-kart");kpActArt(b)})}catch(e){}}}).catch(()=>{})}catch(e){}
-const kpSlug=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+/* memoised (pure; hot in act-card lookups) */
+const KPSLUG_C=new Map();const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
+const kpSlug0=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 function kitActCat(name){for(const [c,re] of KIT_ACT_CATS)if(re.test(name))return c;return"giao-thiep"}
 function kitActArt(name){const A=KIT_ACTS.acts||{};const key=A[name]||A[kpSlug(name)];const cat=kitActCat(name);const have=KIT_ACTS.have||[];
  return{src:key?`img/act-${key}.webp`:have.includes("act-cat-"+cat)?`img/act-cat-${cat}.webp`:"",cat,label:(KIT_ACTS.cats||{})[cat]||{"hau-ha":"Hầu hạ","hoc-tap":"Học tập","giao-thiep":"Giao thiệp","muu-ke":"Mưu kế","hai-nguoi":"Hại người","nghi-ngoi":"Nghỉ ngơi","buon-ban":"Buôn bán","le-nghi":"Lễ nghi","di-lai":"Đi lại"}[cat]}}
@@ -753,7 +755,13 @@ function kpActCtx(kan,n){try{const b=kan.closest&&kan.closest("button[data-vlear
   if(n==="Học với Thái hậu")return"Xin Thái hậu cho học cùng";if(n==="Tự học, làm tác phẩm")return"Tự luyện, làm tác phẩm";return n}
 function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpActCtx(kan,kpPlain(c.textContent))}
 const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
-function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+/* lag-play (owner 16/11 15:05Z, lag = first priority): kitActKey is pure in (name, KIT_ACTS) but walked every act table entry
+   (kpSlug of each) and was called for every act card on every DOM change (kaNorm MutationObserver + kpActArt wrappers): ~300 ms per
+   buổi on a 4x-slow phone. Memoised per KIT_ACTS object (a new ACTS.json load starts a fresh cache). */
+var KAK_SRC=null,KAK_C=new Map();
+function kitActKey(name){if(KAK_SRC!==KIT_ACTS){KAK_SRC=KIT_ACTS;KAK_C=new Map()}const k=typeof name==="string"?name:String(name==null?"":name);let v=KAK_C.get(k);
+ if(v===undefined){v=kitActKey0(name);if(KAK_C.size>5000)KAK_C.clear();KAK_C.set(k,v)}return v}
+function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
  let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
  for(const p in P)if(name.startsWith(p))take(p,P[p]);
  for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}
@@ -845,7 +853,7 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
    (its 60 fps WebGL redraw competed with the face picker's decodes: one page turn waited ~470 ms on the GPU read-back); it restarts when
    the stage shows again. */
 function kitStageCovered(){try{const M=$("modal");if($("kroul"))return true;if(!M||M.hidden||!M.classList.contains("kpscene"))return false;const bg=getComputedStyle(M).backgroundImage;return !!bg&&bg!=="none"}catch(e){return false}}
-function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const cov=kitStageCovered();const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
+function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const st0=$("stage");const cov=kitStageCovered()||!!(st0&&!st0.clientHeight)/* lag-play: a 0-px (hidden) stage draws nothing visible */;const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
  try{if(typeof KFX!=="undefined"&&KFX.app){const t=KFX.app.ticker;if(kitStageCovered()){if(t.started){t.stop();KFX.__kpause=1}}else if(KFX.__kpause){KFX.__kpause=0;if(typeof kfWake==="function")kfWake()}}}catch(e){}}
 (function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitStagePause()})};const go=()=>{const M=$("modal");if(!M||!document.body)return setTimeout(go,300);
  new MutationObserver(kick).observe(M,{attributes:true,attributeFilter:["class","hidden"]});new MutationObserver(kick).observe(document.body,{childList:true});setInterval(kitStagePause,1500)};go()})();

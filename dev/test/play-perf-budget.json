@@ -1,0 +1,5 @@
+{"_note":"PLAY-TIME perf budget (owner 16/11 15:05Z: no lag in play or co-op, first priority). ONE place for these numbers; read by dev/test/play-perf.js and dev/test/coop-lag.js (exit 1 on any miss). Ms on Chromium CPU-throttled 4x (phone-like) on the shared 4-CPU test box: single runs swing +-40 %, rerun a miss once. Keys ending in FpsMin are floors, the rest ceilings. These are REGRESSION CEILINGS set ~30-50 % above review/lag-play (11/16), not the goal: see _target.",
+ "_target":{"tapP95":200,"tapMax":400,"actLongTaskMax":300,"transFpsMin":30,"soakLongTaskMax":600,"coopActionP95":1000,"coopTurnP95":2000,"coopSyncKBMax":16},
+ "_measured_1116":"lag-play 98bf74e5 fold: tap p95 2.1 s, worst long task 1.8 s (soak 2.5 s); origin/main 2232ea32: 2.4 s, 9.1 s (soak 16.5 s). Full table: dev/handover/reports/lag-play.md",
+ "default":{"tapP95":3500,"tapMax":8000,"actLongTaskMax":4500,"transFpsMin":2.5,"idleFpsMin":30,"soakLongTasksPerMin":130,"soakLongTaskMax":4000,"heapGrowthMB":15,"domGrowth":1500,"intervalsEnd":20,"saveMs":120,"pageErrors":0,
+  "coopTurnP95":10000,"coopActionP95":8000,"coopSyncKBMax":100,"coopResendPerMin":12,"coopLongTaskMax":6000}}

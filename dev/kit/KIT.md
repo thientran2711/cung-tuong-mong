@@ -1325,10 +1325,14 @@ Scene rule (same branch, jk2b kitEvArt): a dialog id with NO EVENTS category (pl
 is in (j17 evArt, season × buổi), never the j89 default category (Triều chính, officials kneeling).
 
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
-- K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
-  card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
-  only when the player knows it (`wdSlots().label`). Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, giver, status if
-  known, where the "Hặc ăn mặc sai phẩm" act is). Replaces j92's temporary "Trâm: … / Y phục: …" chips.
+- K1 `kitWearSlots(p,{size})` (review/dress-offence, owner 16/11 18:30Z: "6 wear slots + the pet = 7"): SEVEN kitItem tiles right under the portrait on
+  EVERY person card (player, consorts, maids, ma ma, Thái hậu…): Cài tóc (`p.wd.tram`) · Đeo tay · Đeo eo · Túi thơm (jinv worn IT.sl) · Khăn che mặt
+  (KIT_VEIL) · Y phục (`p.wd.y`) · Theo hầu (jpet `p.petOn`); an empty slot = the empty kitItem with the slot name. Data: `dressSlots(p)` / `dressView(p)`
+  (jdress). Marks, all existing kit parts, shown ONLY when the player has SEEN that dress (`dressNow(S,p)`: same place this buổi, or a Dò la report,
+  while she still wears the same set; her own row always): kitItem corner tag `mark:["Vượt phẩm","r"]` on a piece above the wearer's rank (WD pieces
+  only once their phẩm is known), the item's Xa xỉ box (`lux`), and the label row `.kwearl` = outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị /
+  Phạm tang, when known) + `.kitl` "Xa xỉ N / M" (her total vs her rank allowance; red when above; `BAL.lux.xx.showBud` false = total only).
+  Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, what she has seen, where Tố vượt phẩm / Tố xa xỉ are).
 - K2 Rương đồ: REMOVED (review/balance-unified, 11/15). The wardrobe has no block of its own; it lives in Tư trang's ONE bag + "Đang mang"
   (`dev/build/jwdinv.js`, after jinv): WD trâm in the bag tab Trang sức, WD y phục in the tab Y phục (picture `WD_ITEMS[k].icon` = img/wd-<key>.webp,
   grade ground, corner Xa xỉ N); worn ones carry the worn band (Đang mặc, one word for every slot), pawned ones the tag "đang cầm". Đang mang: Cài tóc = `p.wd.tram`,
@@ -1428,9 +1432,10 @@ Chọn sổ (j74): one kit section per sổ: `h4.kpst` "Sổ một/hai/ba" + `ki
 KIT SLOT ROW `.kslot` (owner 16/11 "info on top, buttons below"; COMPACT s22, kit request "3 sổ + Phúc duyên on iPad 1180x820 without scrolling,
 room for the Sổ mây card"): ONE part for every sổ / room / Sổ mây / Nhập ám hiệu slot. Grid of two columns: the slot name `h4.kpst` as a 6.4em
 label column on the left (rule on its right, words kept together); on the right the `kitRows` on top as label+value PAIRS that flow on a line
-(a pair never splits; a value wraps only when it alone is longer than the line) and the `.kslot-a` kit buttons in ONE row below (32 px, equal
-width). Same rule in both canvases (no breakpoint). Solo row 83 px (was 144), room row 102 px; iPad: Một mình panel 482 px of the 574 max
-(+ one Sổ mây card ≈ 87 px still fits), Cùng hảo hữu 542 px; Fold: no scroll. Test `dev/test/kit-fit2.js` slots / slotsco; kit page sample "§29 slot" (j74).
+(a pair never splits; a value wraps only when it alone is longer than the line, `text-wrap:pretty`) and the `.kslot-a` kit buttons in ONE row below (32 px, equal
+width). Same rule in both canvases (no breakpoint). Solo row 83 px (was 144), room row 102 px, Sổ mây 73, Nhập ám hiệu 82; iPad 1180x820: Một mình
+(Sổ mây + 3 sổ + Phúc duyên) 560 px of the 574 max, no scroll; Cùng hảo hữu (Nhập ám hiệu + 3 rooms) scrolls 54 px; Fold 755x1000: no scroll. Test `dev/test/kit-fit2.js` slots / slotsco; kit page sample "§29 slot" (j74).
+- **Sổ mây card in Chọn sổ (owner 16/11, review/chonso-cloud, `jcloud.js` `miniHTML()`):** first card on the "Một mình" tab, above the 3 sổ, the SAME `.kslot` part: `h4.kpst` "Sổ mây" + `kitRows` (Tình trạng; linked: Ám hiệu masked `••••-••XY` + "đồng bộ lúc" time) + `.kslot-a` buttons from the ONE `btnsHTML()` shared with Thiết lập › Sổ mây (not linked: Giữ sổ trên mây / Nối sổ; linked: Đồng bộ ngay / Ám hiệu sổ / Các bản đã giữ). Opens the same `data-cl` jcloud flows; no co-op card (a co-op life never lives in the cloud).
 + `.kbtn` "Tiếp tục kiếp này" / `.kbtn.alt` "Kiếp mới" (asks "Chắc chắn?" once). The list is redrawn on every visit, so a half-confirmed
 "Chắc chắn?" never survives leaving the screen; the Nạp sổ paste box closes when Thiết lập is left.
 
@@ -1532,7 +1537,7 @@ tam-cung-dem .68/.94, thai-y-vien .45/.9, tu-ninh-cung .5/.9. A new room adds it
 Two views instead of the split: HOME = the room full screen between the slim top bar and the tab bar (stage HUD plaques on it; figures big on the
 floor; tap a person = card) · PANEL = a bottom tab opens full screen in place of the room (sub-tabs, compact picker strip, person card get the
 whole height). Back to the room: tap the active tab again, or "‹ Phòng" (kit `.btn`, top bar, only shown in PANEL view); "Sang buổi" always lands
-in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen and returns to the room.
+in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen (`html body .game#game.k3ph.k3pop>#popw{grid-area:stage}`: j59dock gave it `grid-area:panel`, which the one-page grid does not have, so it squeezed the top bar to 329 px) and returns to the room.
 Result cards / events overlay as before. Classes on `.game`: `k3ph` (shell on) · `k3home` · `k3pop`. Room view measured: 686x880 670x720 (0.93) ·
 755x1000 739x867 (0.85) · 412x1058 400x860 (0.47) · 390x844 378x646 (0.59). Landscape / ≥ 1000 px keep the split (31.3).
 
@@ -1836,27 +1841,32 @@ week book j87, kitBookSpread, any future book). Never write a private turn.
    through each other and the old page's bottom chips poke out under the curl). The turning sheet is fully OPAQUE paper on both faces
    (solid paper ground `.ksht-face` behind the printed content); no opacity, blend or filter on the sheet or its content, no backdrop show-
    through; only the page underneath is visible BESIDE the sheet, never through it; nothing of the old page exists outside the sheet.
-   A live page turn (tab switch) and a single-page book turn are CLIPPED at the spine (`vanish`): the sheet lifts, stands up at the spine
+   A single-page book turn is CLIPPED at the spine (`vanish`): the sheet lifts, stands up at the spine
    and is gone there — it never fades and never lies over the picture page (iPad) or off screen (phone). Checked mid-turn at 20/45/70 %
    on 755x1000@2, 412x1058@2, 1180x820@2, 1366x1024@2 (dev/shots/review/page-curl/).
 5. **Timing — ONE constant `KIT_TURN_MS` = 800 ms** (jbook; owner 11/15 01:50Z "cho animation lật trang chậm lại": was 680–760 ms, then 1300 ms; 16/11 KIT REQUEST C32b → 800 ms, the 1300 ms curl felt stiff) for
-   every turn (tab switch, week book, book swap), ease `kitTurnEase` (slow lift, even swing, long gentle settle as it lands). A finger drag
+   every book turn (week book, book swap; tabs: none, §34.0a), ease `kitTurnEase` (slow lift, even swing, long gentle settle as it lands). A finger drag
    follows the finger; its release finishes in proportion. A new tap while a turn runs makes the running turn jump to its end at once, then
    the new one starts (fast taps never pile up, jam or leave a sheet behind). Only transforms (and the face shading) change per frame.
-6. **Input:** tab bar buttons, ‹ › buttons and keys turn the page everywhere; a horizontal SWIPE exists ONLY inside the Tuần lục book (`kitBook`: landscape curl following the finger, portrait paper slide). Nowhere else in the game swipes between tabs (owner 15/11): tabs change by tap, then the short tab-change animation of 34.0b plays. The page swipe is ignored in the map, dialogs, form controls and anything that scrolls sideways (person strip, chips).
+6. **Input:** tab bar buttons, ‹ › buttons and keys turn the page everywhere; a horizontal SWIPE exists ONLY inside the Tuần lục book (`kitBook`: landscape curl following the finger, portrait paper slide). Nowhere else in the game swipes between tabs (owner 15/11): tabs change by tap and the page swaps at once (§34.0a, no animation). The page swipe is ignored in the map, dialogs, form controls and anything that scrolls sideways (person strip, chips).
 7. **"Cảnh động" off (`OPT.fxon=false`) or prefers-reduced-motion:** no turn animation at all — the page changes at once (short cross-fade).
 ```js
 const t=kitSheetTurn({host, front, back, under, w, h, x, y, p:0, ctx, vanish, shadeL, shadeR}); // spine = left edge at (x,y)
 t.set(p);           // 0 = flat on the right (front up) … 1 = turned onto the left (back up); backward = run 1 → 0
 t.setBack(el); t.setFront(el); t.destroy();
 kitCurl(o)          // = kitSheetTurn(o) (old call shape kept for j87 / kitBookSpread); the corner-fold engine is kept as kitCurlFold, unused
-kitCurlSwap(el, fn, {dir, ms});   // live tab switch (#panel); kitCurlSwap.hold(p) / .end() = test hooks
+kitCurlSwap(el, fn, {dir, ms});   // kept in the kit, NOT used by tabs (§34.0a); kitCurlSwap.hold(p) / .end() = test hooks
 ```
 Test: `node dev/test/sheet-turn.js <url> WxH@dpr <out> <tag>` (frames held with kitCurlSwap.hold, one #panel, no overflow, fast taps,
 swipe, Cảnh động off). Shots: `dev/shots/page-curl2/`.
 
+### 34.0a TAB CHANGE = INSTANT, NO ANIMATION (owner OD 16/11 15:45Z + 15:55Z; review/lag-play)
+A tab change (#tabs, every device, portrait AND landscape, Fold AND iPad) swaps the page at once: no curl, no paper slide, no fade
+(also Dư đồ → page). The page turn below applies ONLY inside the Tuần lục book (`kitBook`). `kitCurlSwap` is kept in the kit but no
+tab uses it. (Also the biggest tab-switch lag: the turn copied the whole page 3–4 times.) The Dư đồ leather unroll (kitUnroll) plays only in LANDSCAPE; portrait shows the map at once (owner 15:45Z: portrait tab change = no effect at all; reviewer lag-play-r1).
+
 ### 34.0b PORTRAIT = PAPER SLIDE, LANDSCAPE = CURL (owner 15/11 "Page turn only on landscape"; review/page-curl2-r1, C32; keeper text 16/11)
-One rule for every page change (tab switch via `kitCurlSwap`, Tuần lục via `kitBook`, any future book): `kitIsPortrait()` (orientation: portrait — phones and Fold portrait, one page on screen, no book to turn) → the page is a sheet of paper that SLIDES sideways (`kitSlideSheet`, called as `kitSheetTurn({…, slide:true})`, same host/front/back/under/set(p) API and same `.ksht*` classes, no new CSS; only transform changes per frame); landscape (book spread or a wide single page) → the whole-sheet curl of 34.0.
+One rule for every BOOK page change (Tuần lục via `kitBook`, any future book; tab switches: §34.0a, none): `kitIsPortrait()` (orientation: portrait — phones and Fold portrait, one page on screen, no book to turn) → the page is a sheet of paper that SLIDES sideways (`kitSlideSheet`, called as `kitSheetTurn({…, slide:true})`, same host/front/back/under/set(p) API and same `.ksht*` classes, no new CSS; only transform changes per frame); landscape (book spread or a wide single page) → the whole-sheet curl of 34.0.
 - Durations: `KIT_SLIDE_MS` = 300 ms (portrait slide, ease `kitSlideEase` = ease-out cubic), `KIT_TURN_MS` = 800 ms (landscape curl, `kitTurnEase`). Both are read by every caller; a caller never passes its own number (`kitCurlSwap` `ms` is for tests only).
 - Gọn / "Cảnh động" off / reduced motion: no slide and no curl; a ~120 ms cross-fade (`kitCurlFade`, j87 `fade`).
 - Swipe: only inside `kitBook` (see 34.0 item 6).
@@ -1881,16 +1891,15 @@ kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or pre
   sheet over the last 28 % (a live page leaving the screen). `keepId` keeps the root id on the copy so `#id` styles still apply.
 - Cheap per frame: the old page and the flap sit in overflow-hidden half-plane boxes aligned to the fold; a frame changes only
   `transform`/`opacity` (compositor), no clip-path, no layout, no repaint. One copy per face (no strips).
-- Durations: week book 680 ms, book swap 700 ms, live tab switch 720 ms (owner range 600–800 ms).
-- Live wiring (jbook, end): a tab switch in the game (tab bar, Hậu cung/Mệnh truyện sub-tabs) = `kitCurlSwap(#panel)`; forward when the new
-  tab is right of the old one in the tab bar, else mirrored. Phone (one page): the right-edge corner lifts. No curl when the panel box changes
-  (to/from Dư đồ: the map unrolls instead, leaving it fades) or the panel is hidden (phone home).
+- Durations: week book 680 ms, book swap 700 ms, kitCurlSwap 720 ms (unused by tabs, §34.0a).
+- Live wiring (jbook, end): a tab switch in the game (tab bar, Hậu cung/Mệnh truyện sub-tabs) = instant swap, no curl / slide / fade (§34.0a).
+  To Dư đồ: landscape → the map unrolls (kitUnroll); portrait → the map is there at once. Leaving Dư đồ: instant.
 
 ### 34.1b kitLeather — Dư đồ is an unrolled LEATHER MAP, not a book page (owner 11/15 04:00Z)
 `kitLeather(el)` (CSS only, no new art): tanned hide with grain + burnt edges, uneven hide outline, stitched border, two rolled ends, the
 painting inset with a soft burnt edge and leather tone. Full panel, no gutter, no spine, no paper. The info strip that used to sit over the
 map (season · khắc left · travel cost legend · festival chip) is removed; the map tools (− + ⓘ Ra vào, Danh sách) float on the painting.
-`kitUnroll(el)`: going to the map, it unrolls from the middle (the two rolls slide out); reduced motion / Cảnh động off: none.
+`kitUnroll(el)`: going to the map in landscape (portrait: none, §34.0a), it unrolls from the middle (the two rolls slide out); reduced motion / Cảnh động off: none.
 **KIT_MAP_MS** (jbook, owner 11/15 01:30Z "Dư đồ animation cuộn cho chậm lại") = the ONE map-motion timing: `unroll` 1150 ms (was 620 ms),
 `ease` cubic-bezier(.45,.05,.3,1) (ease-in-out: soft start, soft stop). Any touch / click / wheel / key on the map during the unroll ends
 it at once (final frame), so the player's hand is never fought. A re-render during the unroll (e.g. a portrait finishing loading) that
@@ -1948,7 +1957,7 @@ kitBookSpread.wantsPic(host)              // false on phones: skip building the 
 - Single: only the text page (`.kbs-r`). Forward swap: the old page curls away to the left revealing the new one; dir −1: the new page curls
   back in. Swipes are left to the caller (tab bar / gestures of the live layout).
 - `double`: the Dư đồ map — shown as the leather map (kitLeather) over the whole book area in both modes; pages, gutter and paper
-  edge are hidden. Turning to it unrolls the map; leaving it fades (the map is not a page, it never curls).
+  edge are hidden. Turning to it unrolls the map in landscape (portrait: at once, §34.0a); leaving it is instant (the map is not a page, it never curls).
 - Paper skin `.kpaper` (warm paper, faint fibres, edge tint) is reusable on its own for any page-like surface.
 
 ### 34.3 kitBookPic — the picture page (illustration only)
@@ -3817,27 +3826,6 @@ SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình v
 - The chapter detail closes like every kit modal: ✕ in the header, tap outside, Esc (a "Đóng" close option → 32.10 kit ✕).
 - Sample: kit page §77. Test: `node dev/test/stage-rail.js <url> <outdir> [WxH,...]` (rail inside the stage, no button over a face box,
   no goal strip, no desk calendar, goal → detail with ✕ / Esc / outside close, calendar → LỊCH panel).
-<<<<<<< HEAD
-
-### 77.1 kitStatusIcon · ONE status icon (owner 16/11 16:25Z, review/status-icons) — `dev/build/jstatus.js` (after jrail) on top of `kitStageRail`
-Owner: "nhiều game bây giờ … chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi biết là có cái gì đó đang
-download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon được thì mình cứ việc bỏ thôi."
-RULE: a status that only says "something is running / done / needs you" is NEVER a chip, strip or reserved band on screen. It is a status icon = the §77 square
-rail button + (optional) activity animation + tap → a kit info panel with the details.
-- API: `kitStatusIcon.set(id,{title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec, order})` · `.refresh()` · `.remove(id)`.
-  It registers a rail item `st-<id>` (rail extras: `glyph` text instead of a painted `icon`, `busy`, `done`, `onTitle`). Old saves: nothing stored.
-- Look/motion: the rail button as §77. busy = the glyph bobs ±3 px with opacity .55→1 (transform + opacity only, `calc(1.8s*var(--pace))`, no layout, no
-  JS timer; off under reduced motion / Hiệu ứng Gọn via `reducedMotion()` — static glyph then); done = still, green; badge = the seal-red dot (needs her).
-  No @media (KIT §0). While no game is on screen the rail items with `onTitle` sit in a fixed bottom-left dock (`.krail.kstdock`; hidden behind dialogs / the book).
-- Panel: `kitPanel({kind:"info",look:1,…})`; the only options are real actions (e.g. "Tạm ngưng / Thỉnh tiếp"); closing = ✕ / tap outside / Esc, never "Đã hiểu".
-- PLACEHOLDER GLYPHS (text ↓ ✓ ⟳) until Foreman C paints the icons: ART REQUEST: download icon, update icon (then `icon:"img/kit/….webp"`, no code change elsewhere).
-- Users: `dl` (Thỉnh tranh nhân vật, jload; own info panel) · `upd` (Có bản mới, swreg; `onTap` opens its own card §35.2). NOT status icons: co-op buổi clock `#kctm` + friend chip `#kctmf`
-  (jcooptimer; the countdown must stay readable — owner/coordinator ruling 16/11).
-- Sample: kit page §77.1. Test: `node dev/test/status-icon.js <url> <outdir> [WxH,...]` (idle → none; busy; paused dot; done ✓ then gone; panel ✕ / Esc / no "Đã hiểu";
-  no old chip / dock band; game padding-bottom unchanged; icon 44 px inside the stage, over no face).
-
-=======
->>>>>>> origin/main
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
 

@@ -1,7 +1,7 @@
-SẴN SÀNG KIỂM b62028a82 (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
+SẴN SÀNG KIỂM __SHA__ (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
 
 # ROUND 2 — kit keeper successor for MAIN s22 (16/11)
-START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 (clean) + round-2 kit changes; site rebuilt + committed.
+START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 + round-2 kit changes + merge origin/main 7b5e5e49 (KIT.md: kept both slot paragraphs, dropped a duplicate §77.1 main had moved; site files from a fresh build); site rebuilt + committed.
 
 ## What changed (kit parts only)
 1. **§32.2b equal gaps, whole group** (owner s21/s22: every full figure in a frame):
@@ -26,18 +26,21 @@ START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/mai
 |---|---|---|---|---|
 | book gap top/bot | 57/38 | 49/47 | 47/35 | 40/41 |
 | id gap top/bot | 812/−696 (176 px figure in a strip) | 15/14 (above panel) | 121/10 | 66/65 |
-| slots (Một mình) panel scroll | 0 (row 144) | 0 (row 83) | 99 px (panel 574) | 0 (panel 482 of 574) |
-| slotsco (Cùng hảo hữu) scroll | 97 px (row 186) | 0 (row 102) | 223 px | 0 (panel 542) |
+| slots (Một mình) panel scroll | 0 (row 144) | 0 (row 83) | 99 px (panel 574, no Sổ mây yet) | 0 (panel 560 of 574 incl. Sổ mây card) |
+| slotsco (Cùng hảo hữu) scroll | 97 px (row 186) | 0 (row 102) | 223 px (no join card yet) | 54 px incl. Nhập ám hiệu card (542 without it) |
 | flip me: tags over pick/chip/each other | 2 / 0 / 0 (scene shrunk) | 0/0/0 | 2 / 0 / 2 | 0/0/0 |
 | flip other | 2 / 0 / 0 | 0/0/0 | 3 / 0 / 1 | 0/0/0 |
 Extra sizes (after): id 412x1058 17/16, 1366x1024 82/82; book 412x1058 31/31, 1366x1024 39/39 (older line definition).
-Room for the Sổ mây card (review/chonso-cloud, not merged here): Một mình panel 482 + one card ≈ 87 = ~569 ≤ 574 on iPad. Its Cùng hảo hữu
-tab adds a "Nhập ám hiệu" card (~66 px) → ~608 > 574: that tab would scroll ~34 px on iPad (Fold none). Rooms show 5 pairs (3 lines).
+AFTER THE SECOND MAIN MERGE (main 7b5e5e49 = review/chonso-cloud live: Sổ mây card on Một mình, Nhập ám hiệu card on Cùng hảo hữu):
+iPad 1180x820 Một mình = Sổ mây 73 + 3 sổ 83 + Phúc duyên → panel 560 of 574, NO scroll ✓. Cùng hảo hữu = Nhập ám hiệu 82 + 3 rooms 102
+(5 pairs = 3 lines) + Phúc duyên → scrolls 54 px on iPad (Fold: none). Closing that needs a content call, not a kit one — options for MAIN:
+(a) shorter Nhập ám hiệu row (its explanation "Gõ ám hiệu hảo hữu gửi để vào phòng của hảo hữu" wraps to 2 lines) or drop the row (-19 px);
+(b) rooms without the "Tuổi" pair (date + name are enough) → 2 lines (-57 px); (c) accept the small scroll on the co-op tab.
 
 ## Tests
-- kit-fit2.js (new): AFTER 0 violations, 0 page errors (755x1000 + 1180x820; id/book also 412x1058 + 1366x1024). BEFORE 12.
+- kit-fit2.js (new): AFTER 1 violation = slotsco iPad 54 px scroll (co-op join card, see above), 0 page errors (755x1000 + 1180x820; id/book also 412x1058 + 1366x1024). BEFORE 12.
 - kit-fit.js (round 1, 30 cases): 0 violations, 0 page errors (both sizes).
-- kit-conform: 755 CONFORMS 87 / MISSING 15, 1180 CONFORMS 86 / MISSING 16, MIXED 0, CUSTOM 0, floats none (MISSING = stale place-tap cases as in round 1).
+- kit-conform (after the 2nd merge): 755 CONFORMS 88 / MISSING 15, 1180 CONFORMS 86 / MISSING 16, MIXED 0, CUSTOM 0, floats none (MISSING = stale place-tap cases as in round 1).
 - Old save: ts-oldsave main build → this build: loads, 12 weeks, 0 page errors.
 - media-check: 0 width breakpoints.
 
@@ -46,7 +49,7 @@ book, id, slots, slotsco, flipme, flipother × 755x1000 / 1180x820 (12).
 
 ## Not done / notes
 - Card-flip demo shows cards of a fresh life (few rivals); 12-card trays with long names were not reached in this run.
-- review/chonso-cloud must be merged after this (it touches j74 drawSlots; its .kslot cards inherit the compact row with no change).
+- review/chonso-cloud is now on main and merged here: its Sổ mây / Nhập ám hiệu .kslot cards take the compact row with no change.
 
 (round 1) SẴN SÀNG KIỂM e383a4dd7
 
