@@ -31,7 +31,7 @@ function css(){if(document.getElementById("kchat-css"))return;const st=document.
 #kchatp .kchat-row .kinput{width:100%;box-sizing:border-box;min-height:44px;font-size:1rem}
 #kchatp .kchat-row .kbtn{flex:none;margin:0;min-height:44px}
 .kcm{max-width:84%;padding:6px 10px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:12px;background:#fffaf0;color:var(--ink,#3a2418);font-family:var(--body);overflow-wrap:anywhere;white-space:pre-wrap}
-.kcm.me{align-self:flex-end;background:#f3e3bf;border-color:var(--gold,#c9a46a);border-bottom-right-radius:3px}
+.kcm.mine{align-self:flex-end;background:#f3e3bf;border-color:var(--gold,#c9a46a);border-bottom-right-radius:3px}
 .kcm.fr{align-self:flex-start;border-bottom-left-radius:3px}
 .kcm .kcm-h{display:flex;gap:8px;align-items:baseline;font-size:.72rem;color:var(--dim,#8a7355);white-space:normal}
 .kcm .kcm-h b{font-size:.8rem;color:var(--ink,#3a2418)}
@@ -40,7 +40,7 @@ function css(){if(document.getElementById("kchat-css"))return;const st=document.
 const BU=b=>{try{const n=(typeof BUOI!=="undefined"&&BUOI[b])||"";return n}catch(e){return""}};
 /* game-style time: "hạ tuần, tháng 3 · Buổi chiều" */
 function kitChatWhen(g){g=g||{};try{const t=typeof TUAN!=="undefined"&&TUAN[g.t]||"";return `${t?t+", ":""}tháng ${g.m||1}${BU(g.b)?" · "+BU(g.b):""}`}catch(e){return""}}
-function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"me":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(m.n||(mine?"Ta":"Hảo hữu"))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
+function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(m.n||(mine?"Ta":"Hảo hữu"))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
 function kitChatList(msgs,seat){return (msgs&&msgs.length)?msgs.map(m=>kitChatBubble(m,m.s===seat)).join(""):`<p class="kpnote kchat-empty">Chưa có thư nào. Viết đôi dòng gửi hảo hữu.</p>`}
 function kitChatPanel(o){css();o=o||{};const nm=o.name?esc(String(o.name).slice(0,24)):"hảo hữu";
  const inp=typeof kitInput==="function"?kitInput({id:"kchat-in",label:"Thư",placeholder:"Viết thư gửi hảo hữu…"}):`<input class="kinput" id="kchat-in" placeholder="Viết thư gửi hảo hữu…">`;
@@ -93,7 +93,7 @@ function notify(m){const vis=live()&&!!railBtn();ST.sounds++;
  if(!vis||!B){try{if(typeof kitLine==="function")kitLine("Có thư từ hảo hữu")}catch(e){}return}   /* no rail on screen: a line instead */
  if(still()||window.__bot)return;                    /* Gọn / reduced motion / bots: the rail's kit dot only (no shake, no particles) */
  css();ST.shakes++;B.classList.remove("kchat-shake");void B.offsetWidth;B.classList.add("kchat-shake");setTimeout(()=>{B.classList.remove("kchat-shake")},1500);
- try{if(typeof kitFxBurst==="function")kitFxBurst("glowburst",B,6);if(typeof kitFxLight==="function")kitFxLight("glow-gold",B,{inside:true,dur:2000,scale:1.5,opacity:.7})}catch(e){}}
+ try{if(typeof kitFxBurst==="function")kitFxBurst("glowburst",B,6);if(typeof kitFxLight==="function")kitFxLight("glow-gold",B,{inside:true,dur:1600,scale:.8,opacity:.45})}catch(e){}}
 function add(m){if(!m||!m.i||ST.msgs.some(x=>x.i===m.i))return false;ST.msgs.push(m);ST.msgs.sort((a,b)=>a.i-b.i);while(ST.msgs.length>50)ST.msgs.shift();return true}
 COOP.on("chat",d=>{if(!live()||!d||!d.m)return;const fresh=add(d.m);if(!fresh)return;const mine=d.m.s===seat();
  if(ST.open){markSeen();fillList();if(!mine){try{if(typeof kitSfx==="function")kitSfx("tap")}catch(e){}}return}

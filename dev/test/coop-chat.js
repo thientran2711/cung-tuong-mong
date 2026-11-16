@@ -49,9 +49,13 @@ const life=async o=>{for(let i=0;i<30;i++){const r=await o.p.evaluate(()=>{const
   const b=bs.find(x=>/^(Nhận thân phận|Nhập cung|Tiến cung|Vào cung|Tiếp)/.test(x.textContent.trim()))||bs.find(x=>!/Bỏ qua|Quay/.test(x.textContent))||bs[0];if(b){b.click();return b.textContent.trim()}return'wait'});
   if(r==='gone')return true;await clear(o,3);await sleep(600)}return false};
 const home=async o=>{await o.p.evaluate(()=>{try{if(S.place!=='home'&&typeof goTo==='function')goTo('home');tab='act';render()}catch(e){}});await sleep(500)};
-async function inRoomWorld(A,B,code){for(const o of[A,B]){const t0=Date.now();let w=false;while(Date.now()-t0<120000){const c=await clear(o);w=await o.p.evaluate(()=>__co().world);if(w)break;await sleep(500)}console.log('   world',o.name,w,Math.round((Date.now()-t0)/1000)+'s')}}
-(async()=>{const b=await chromium.launch();
- const A=await mk(b,'A',[...VA,0]),B=await mk(b,'B',[...VB,1]);ALL.push(A,B);
+const rstep=async o=>{const r=await o.p.evaluate(()=>{const k=document.getElementById('kroul');if(!k)return null;const bs=[...k.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);
+  const b=bs.find(x=>/^(Nhận thân phận|Nhập cung|Tiến cung|Vào cung|Tiếp)/.test(x.textContent.trim()))||bs.find(x=>!/Bỏ qua|Quay/.test(x.textContent))||bs[0];if(!b)return'wait';const q=b.getBoundingClientRect();return{x:q.left+q.width/2,y:q.top+q.height/2}});
+  if(r===null)return'gone';if(r==='wait')return'wait';try{await o.p.mouse.click(r.x,r.y)}catch(e){}return'clicked'};
+async function dismiss(o){for(let i=0;i<40;i++){const r=await rstep(o);await clear(o,2);if(r==='gone')return true;await sleep(500)}return false}
+async function inRoomWorld(A,B,code){const t0=Date.now();while(Date.now()-t0<150000){await rstep(A);await rstep(B);await clear(A,3);await clear(B,3);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}console.log('   world',await A.p.evaluate(()=>__co().world),await B.p.evaluate(()=>__co().world),Math.round((Date.now()-t0)/1000)+'s')}
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-web-security','--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults']}:{});
+ const A=await mk(b,'A',[...VA,1]),B=await mk(b,'B',[...VB,1]);ALL.push(A,B);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
  ok(await A.p.evaluate(()=>!document.querySelector('#krail [data-rail="chat"]')&&!window.COOPW.on),'solo / title: no chat icon, co-op off');
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);
@@ -59,24 +63,25 @@ async function inRoomWorld(A,B,code){for(const o of[A,B]){const t0=Date.now();le
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code');const code=(await C(A)).code;await clear(A);
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined, both online');
-await A.p.evaluate(()=>{try{OPT.fxon=true;OPT.fxpick=true}catch(e){}});await inRoomWorld(A,B);ok(await life(A)&&await life(B),'both chose a thân phận');await clear(A);await clear(B);await home(A);await home(B);
+await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rstep(B);await clear(A,3);await clear(B,3);if(ra==='gone'&&rb==='gone')break;await sleep(600)}await A.p.emulateMedia({reducedMotion:'no-preference'});/* A: motion ON from here (the roulette / world entry runs reduced, like coop-e2e) */ok(await until(A,()=>__co().world,null,60000)&&await until(B,()=>__co().world,null,60000),'both players are in the shared world');for(const o of[A,B])for(let i=0;i<12;i++){const m=await o.p.evaluate(()=>{const b=document.querySelector('#modal:not([hidden]) [data-nl="ok"]');if(b){b.click();return 1}return 0});if(!m)break;await sleep(700)}
+ await clear(A);await clear(B);await home(A);await home(B);
  ok(await until(A,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000)&&await until(B,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000),'both rooms show the chat icon');
  for(const o of[A,B]){const i=await ICON(o);ok(i&&i.left&&i.vis&&i.badge==='','icon on the LEFT of the room scene, no badge yet ('+o.name+')',i)}
  await shot(A,'01-icon');await shot(B,'01-icon');
  /* A writes through the UI while closed→open */
- await A.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
+ await dismiss(A);await A.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
  ok(await A.p.evaluate(()=>/Thư từ/.test(document.querySelector('#kchatp .kptitle').textContent)&&!!document.querySelector('#kchatp .kit-x')&&!!document.querySelector('#kchatp .kchat-empty')),'frame: title Thư từ, kit ✕, empty note');
  await shot(A,'02-open-empty');
  const nasty='Chào <b>muội</b> & <img src=x onerror=window.__xss=1> ơi';
  await A.p.fill('#kchat-in',nasty);await A.p.click('#kchat-go',{noWaitAfter:true});
- ok(await until(A,()=>COOPCHAT.msgs.length===1),'A sees her own line (server echo)');
+ ok(await until(A,()=>COOPCHAT.msgs.length===1),'A sees her own line (server echo)',await A.p.evaluate(()=>({st:COOP.state&&COOP.state.status,peer:COOP.state&&COOP.state.peerOnline,ws:COOP.ws&&COOP.ws.readyState,cw:!!(window.COOPW&&COOPW.on),S:typeof S!=='undefined'&&!!S&&!S.dead,mc:window.COOPCHAT&&COOPCHAT.msgs.length,v:!!document.querySelector('#kchat-in'),val:(document.querySelector('#kchat-in')||{}).value,errs:0})).catch(e=>String(e)));console.log('   A.errs',A.errs.slice(0,3));
  ok(await until(B,()=>COOPCHAT.msgs.length===1),'B receives it');
  const nA=await A.p.evaluate(()=>S.name);
  const bi=await ICON(B);ok(bi&&bi.badge==='1'&&/kbadge/.test(bi.cls),'B: unread badge 1 + lit icon',bi);
  
  ok(await B.p.evaluate(()=>COOPCHAT.sounds===1&&(KSFX.log.concat(KSFX.drop).some(x=>x.m==='notice'||/notice/.test(x.n||'')))),'B: notification sound requested (kit sfx notice)',await B.p.evaluate(()=>({s:COOPCHAT.sounds,l:KSFX.log.concat(KSFX.drop).slice(-3)})));
  await shot(B,'03-unread');
- await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
+ await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
  const bub=await B.p.evaluate(()=>{const x=document.querySelector('#kchatp .kcm.fr');return{t:x.querySelector('.kcm-x').textContent,html:x.querySelector('.kcm-x').children.length,n:x.querySelector('.kcm-h b').textContent,w:x.querySelector('.kcm-h span').textContent,xss:!!window.__xss,un:COOPCHAT.unread}});
  ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n===nA&&/tháng/.test(bub.w),'sender = her character name, game-style time',[bub.n,bub.w]);ok(bub.un===0,'opening marks it read');
  await shot(B,'04-open-friend');
@@ -106,7 +111,7 @@ await A.p.evaluate(()=>{try{OPT.fxon=true;OPT.fxpick=true}catch(e){}});await inR
  ok(await until(B,n=>COOPCHAT.msgs.length===n,seenB+1,25000),'rejoin: history reloaded (all lines, in order) incl. the line sent while away',await B.p.evaluate(()=>COOPCHAT.msgs.map(m=>m.i)));
  const bi2=await ICON(B);ok(bi2&&bi2.badge==='2'||bi2&&bi2.badge==='1'||bi2&&+bi2.badge>=1,'rejoin: unread badge counts what she missed',bi2);
  await shot(B,'07-rejoined');
- await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
+ await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
  ok(await B.p.evaluate(()=>document.querySelectorAll('#kchatp .kcm').length===COOPCHAT.msgs.length&&COOPCHAT.msgs.length>=5),'history list shows every line');
  /* other places: the rail is on every stage */
  await B.p.click('#kchatp .kit-x',{noWaitAfter:true});const s0=await B.p.evaluate(()=>COOPCHAT.sounds);
