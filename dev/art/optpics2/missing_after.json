@@ -1,0 +1,117 @@
+{
+ "eventsChecked": 303,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Cẩm Tú (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Khương Uyển Nhi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Chu Ngọc Dao",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Mạnh Ngưng Sương",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Thẩm Thanh Ca",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Vân Thanh Liên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Đoan Mộc Khinh Vũ",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Nhan Hồng Diệp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thử lòng bằng một tin giả",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Mộ Dung Bích Dao",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Tống Hải Đường",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Thu Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tin hắn, thưởng an lòng",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 95,
+ "actsPh": [],
+ "errs": []
+}

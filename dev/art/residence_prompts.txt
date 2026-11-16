@@ -1,0 +1,11 @@
+# Lời nhắc SỬA (gpt-2-6, 2k, 3:2, 1 tham chiếu ảnh = bản xuân-sáng của chính phòng đó). Ghép: HEAD + SEASON[mùa] + TIME[buổi] + TAIL
+HEAD: Edit this painting. Keep EXACTLY the same room, camera, composition, architecture, furniture, carpet and floor, and the same soft hand-painted painterly guofeng style (not photoreal, not glossy). Change only the season and the time of day.
+xuan: Season: SPRING as it is now (blossoms outside and in the vases unchanged).
+ha: Season: SUMMER. Everything seen outside becomes lush deep-green summer foliage; flowering trees now in full green leaf; any pond shows pink lotus flowers in bloom among big lotus leaves; vase flowers become lotus or summer blooms; a round silk fan lies on a table.
+thu: Season: AUTUMN. Trees seen outside turn red, orange and golden, a few fallen leaves on paths and in the courtyard; vase flowers become chrysanthemums and autumn branches; warm amber air.
+dong: Season: WINTER. Snow on roofs, courtyard, branches and railings outside under a pale winter sky; flowering trees bare with snow; vase flowers become red winter plum blossoms; a bronze charcoal brazier glows softly; a soft fur throw lies on the seat.
+sang: Time: clear MORNING, soft fresh morning sunlight with gentle lattice shadows, lanterns unlit.
+trua: Time: bright MIDDAY, strong high sun, short crisp shadows, the brightest light of the day, lanterns unlit.
+chieu: Time: late AFTERNOON, warm golden slanting sunlight and long amber shadows across the floor, lanterns unlit.
+toi: Time: calm NIGHT, deep blue night sky with a soft moon outside, all lanterns lit with a warm golden glow, a few lit candles, warm light pooling on the floor and cool moonlight through the windows.
+TAIL: No people, no text.
