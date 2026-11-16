@@ -196,7 +196,7 @@
 | merge-train-8 successor c (sonnet) | review/merge-train-8 | main s17 | session_01UV1SzhTCE7SXbum6V4ghBh | RUNNING | 16/11 13:39Z |
 | D4 npc-death review | review/npc-death-r1 | D | session_01DgYSWocL5CmLHseB9i8sEn | PASS 5f58a715 | 16/11 14:03Z |
 | D4 npc-death review | review/npc-death-r1 | D | (reviewer opening) | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 13:42Z |
-| story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
+| story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | session_011xDdVPicFAyWqznz92TPU8 (archived) | SẴN SÀNG KIỂM f5305341 | 16/11 13:45Z |
 | A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
 | TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | (opening) | RUNNING | 16/11 13:45Z |
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | (opening) | RUNNING | 16/11 13:45Z |
@@ -260,3 +260,4 @@
 | PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | session_011xDdVQ9uFz3dWEEUrZZp9W | RUNNING | 16/11 16:06Z |
 | tutrang-layout (sonnet; owner-bug fast lane; OD 16/11 16:20Z): Tư trang › Túi đồ — wear slots one vertical column left, bigger bag grid right, small pet strip below; whole group (every wear-slot/bag place); samples 755x1000 + 1180x820 to owner first | review/tutrang-layout | main s20 | session_01UV1SzkXdhk3ejaZYACftuT | RUNNING | 16/11 16:22Z |
 | status-icons (sonnet; owner-bug fast lane; OD 16/11 16:25Z): 'Thỉnh tranh' download chip → small kit square download icon in a corner + downloading animation + tap → detail panel; whole group: every status chip that fits in an icon | review/status-icons | main s20 | session_01UV1Szh7JPiQw9nJJ8XwPbe | RUNNING | 16/11 16:24Z |
+| story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | (opening) | RUNNING | 16/11 16:22Z |
