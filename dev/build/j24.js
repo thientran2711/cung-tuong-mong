@@ -5,9 +5,9 @@ function danger(v,t){const tr=v.trait==="Hiểm độc"?10:v.trait==="Hiền là
 function bandOf(d){let b=0;for(let i=0;i<BANDS.length;i++)if(d>=BANDS[i][0])b=i;return b}
 function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&allow.includes(k)&&a.ok(v,t)&&w>0)O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);
- if(allow.includes("plant")&&v.inv.some(e=>e.t||IT[e.k].il))O.push(["plant",3]);
+ if(allow.includes("plant")&&v.inv.some(e=>e.t||(IT[e.k]||{}).il))O.push(["plant",3]);
  if(!O.length)return"";const w=O.map(x=>x[1]);let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const k=O[i][0];
- if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||IT[e.k].il));return runAct(v,t,k)}
+ if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]||{}).il));return runAct(v,t,k)}
 /* chance per buổi rises within a band */
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;const d=danger(v,t),b=bandOf(d);if(!b)continue;
   const lo=BANDS[b][0],hi=b<3?BANDS[b+1][0]:100;let c=[0,.03,.04,.05][b]+[0,.03,.04,.05][b]*cl((d-lo)/(hi-lo),0,1);if(t.shield)c*=.5;if(t===S&&S.lot&&S.lot.dom==="Hung")c*=1.5;if(t===S&&S.guardWarn){c*=.5}if(t===S)c*=BAL.hz;
