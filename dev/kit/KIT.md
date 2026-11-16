@@ -2843,6 +2843,7 @@ Emperor's visits. It is the 32.7 person dialog:
 - RIGHT, bottom: the options as kit option cards (Được / Mất / odds), doable first; TWO per row when every option is short (≤ 2 rows,
   ≤ 70 characters), else one per row (`.opts.kdpo2`). Only the options scroll.
 - Height = content (32.7c), inside the standard person-dialog box.
+- Shop / care dialogs (`.kshopd`: pet shop, errand shop, pet care) carry the same banner; their body (`.kpmain`) starts in grid row 2 UNDER it and scrolls itself (review/care-overlap: it spanned rows 1 to -1 and the picture covered the bars / first tiles). Test: `node dev/test/care-scan.js <url> <WxH@dpr> <outdir>` (cases in dev/test/care-cases.js; add every new kshopd dialog there).
 `window.KIT_EVENT_DP=false` restores 32.6 (people on the picture) for a test. Test: `node dev/test/event-dp.js <url> <outdir> <tag> [sizes]
 [kinds]` (mock, long, nopic, emp: banner in the right column, focus, fill, chip above, option columns, empty space under the options).
 - Tap (owner 11/15): no visible label; TAPPING any seal (hers or an NPC's, any frame size) opens the kit popover `kpPop` (j79) with the mood

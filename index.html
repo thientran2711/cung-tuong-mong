@@ -23111,6 +23111,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 (function(){const st=document.createElement("style");st.id="kshop-css";st.textContent=`
 .dlg.kshopd #mr{display:none!important}
 .dlg.kshopd.kdper>#mb>.kpb>.kpmain{grid-row:1/-1;min-height:0;display:flex;flex-direction:column;position:static}
+/* review/care-overlap: a shop / care dialog (kshopd) with the KIT 50 banner (kdpban, row 1 of the right column): the body starts UNDER the picture, never beside it in the same row (it spanned rows 1 to -1 and the picture covered the bars / first tiles); the banner is part of #mb's grid, so every kshopd dialog (pet shop, errand shop, pet care) gets the same rows */
+.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:2/-1;overflow-y:auto;overscroll-behavior:contain}
 .kshop{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1 1 auto}
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
@@ -42620,7 +42622,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="87f849f34187";window.CTM_BUILD=BUILD;
+const BUILD="0ea9140f842c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

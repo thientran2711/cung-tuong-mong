@@ -423,6 +423,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 (function(){const st=document.createElement("style");st.id="kshop-css";st.textContent=`
 .dlg.kshopd #mr{display:none!important}
 .dlg.kshopd.kdper>#mb>.kpb>.kpmain{grid-row:1/-1;min-height:0;display:flex;flex-direction:column;position:static}
+/* review/care-overlap: a shop / care dialog (kshopd) with the KIT 50 banner (kdpban, row 1 of the right column): the body starts UNDER the picture, never beside it in the same row (it spanned rows 1 to -1 and the picture covered the bars / first tiles); the banner is part of #mb's grid, so every kshopd dialog (pet shop, errand shop, pet care) gets the same rows */
+.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:2/-1;overflow-y:auto;overscroll-behavior:contain}
 .kshop{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1 1 auto}
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
