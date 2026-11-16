@@ -234,12 +234,16 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
    (at most oanCap), her trait (tr), the player's Tâm cơ (tam: [neutral, per]) and Đức (duc: [neutral, per]), and how many consorts with oán ≥ foeOan
    watch her (at most foeCap). odds = [min, max] odds of a chancy story option after the context.
    shift: an ending no roll decides moves one step worse with base − c × slope and one step better with base + c × slope (each between min and max,
-   c = context + (Lợi thế − 1) × sc); base is the same both ways, so a neutral life leans neither way. */
+   c = context + (Lợi thế − 1) × sc); base is the same both ways, so a neutral life leans neither way.
+   q = tutorial quests of chapters 1–3 (jtq14.js, review/tut-quests): bac = Bạc paid the moment one quest is done (c consort, s cung nữ who still
+   serves); need = how many times a quest's deed must be done (default 1); narr = the BAL.staff post whose holder tells the tutorial (OD:L1432:
+   gt Giáo tập ma ma for a new consort, kn Quản sự ma ma for a new palace maid). */
 Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,sung:10,tap:8},
  goal:{sung:25,rel:30,art:2,tin:60,nt:25},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
  hate:{min:25,base:15,friend:20},tr:{"Hiểm độc":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Nhu mì":2,"Hiền lành":4,"Trung hậu":3},
  ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},odds:[5,95],
- shift:{base:15,slope:2,sc:2,min:5,max:40}},
+ shift:{base:15,slope:2,sc:2,min:5,max:40},
+ q:{bac:{c:15,s:3},need:{ban:1},narr:{c:"gt",s:"kn"}}},
 /* cung nữ được sủng hạnh (j42 cnvName): from Hoàng thượng để ý ≥ at, each time he notices her the odds he asks her name and raises her
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});

@@ -22,7 +22,8 @@ function tabName(k){try{if(k==="act")return isS()?"Phận sự":"Hành sự";if(
 function road(){try{const Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||null;return Q0?Q0.t:""}catch(e){return""}}
 function chapter(){try{/* a road with its own chapter (jkc at home before the tuyển tú) */if(typeof window.kitGoalAlt==="function"){const a=window.kitGoalAlt();if(a)return a}if(!S||!S.st)return null;const c=S.st.ch,m=S.st.ms,M=S.st.M;
  if(typeof v267==="function"&&v267()&&c){
-  if(m&&typeof MS67==="object"&&MS67[m.id]){const d=MS67[m.id],st=d.steps(m);return{kind:"ms",id:m.id,n:c.n,max:c.max,t:d.t(),g:d.g(),steps:st.map(x=>({t:x[0],ok:!!x[1]})),any:!!d.any}}
+  if(m&&typeof MS67==="object"&&MS67[m.id]){const d=MS67[m.id],st=d.steps(m);/* a tutorial chapter with quests (jtq14): every line must be done; its open quests are the "Việc nên làm" with "Đi làm" */
+  return{kind:"ms",id:m.id,n:c.n,max:c.max,t:d.t(),g:d.g(),steps:st.map(x=>({t:x[0],ok:!!x[1]})),any:!!d.any&&!m.q14,todo:m.q14&&typeof tq14Todo==="function"?tq14Todo(m):null}}
   if(M&&typeof ARC67==="object"&&ARC67[M.a]){const a=ARC67[M.a],P=(typeof pos67==="function"&&pos67(M))||{c:M.chap||1,i:M.i||0,n:M.seq.length};
    return{kind:"arc",n:P.c,max:c.max,t:a.t,g:fill67(a.g,M),act:P.i,acts:P.n,next:hint67(M),wait:!!M.cur,hist:M.hist||[],sc:M.sc||0,dl:M.dl}}
   if(c.all)return{kind:"all",n:c.n,max:c.max,t:"Mệnh truyện trọn vẹn",g:c.fin||""}}
