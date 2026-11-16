@@ -24,11 +24,13 @@ function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector("
  want.forEach((r,i)=>{const w=r.parentElement;if(bar.children[i]!==r)bar.insertBefore(r,bar.children[i]||null);
   if(w&&w!==bar&&w!==P&&!w.children.length&&!w.textContent.trim())w.remove()});
  [...bar.children].forEach(c=>{if(!want.includes(c))c.remove()});
- P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;bar.style.setProperty("margin-left","-"+pl,"important");bar.style.setProperty("margin-right","-"+pr,"important");bar.style.paddingLeft=pl;bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h)P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
+ P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;/* lag-play-2: write only what changed (an equal write still dirties style) */if(bar.style.marginLeft!=="-"+pl)bar.style.setProperty("margin-left","-"+pl,"important");if(bar.style.marginRight!=="-"+pr)bar.style.setProperty("margin-right","-"+pr,"important");if(bar.style.paddingLeft!==pl)bar.style.paddingLeft=pl;if(bar.style.paddingRight!==pr)bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h&&P.style.getPropertyValue("--kpbarh")!==h+"px")P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
 window.kitPane=kitPane;
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);kitPane();return r};
  if(typeof k3CatTabs==="function"){const k0=k3CatTabs;k3CatTabs=function(){const r=k0.apply(this,arguments);kitPane();return r}}
- try{const P=$("panel");if(P)new MutationObserver(()=>kitPane()).observe(P,{childList:true})}catch(e){}
+ /* review/lag-play-2: the observer fired right after every renderPanel (which had just run kitPane) and after kitPane's own prepend, each time
+   reading computed style + layout mid-task; it now runs once in the next frame (before paint), for changes made outside renderPanel. */
+ let kpQ=0;try{const P=$("panel");if(P)new MutationObserver(()=>{if(!kpQ)kpQ=requestAnimationFrame(()=>{kpQ=0;kitPane()})}).observe(P,{childList:true})}catch(e){}
  addEventListener("resize",()=>{clearTimeout(window.__kpT);window.__kpT=setTimeout(kitPane,60)})})();
 (function(){const st=document.createElement("style");st.id="kit-pane";st.textContent=`
 #panel.kpane{padding-top:0!important;scroll-padding-top:calc(var(--kpbarh,0px) + 6px)}
