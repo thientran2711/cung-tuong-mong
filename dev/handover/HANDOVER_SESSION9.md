@@ -370,3 +370,28 @@ PENDING: after merge-train-9 lands → percent-measure re-run → fresh % to own
 Self-wake: create_trigger was DENIED by the auto-mode classifier in s19 (owner told). s20 may try once; if denied, rely on notifications.
 - (16:25Z) MAIN SESSION 20 = session_01UV1SzkV1TN7FVh1df33ZuZ; START_CTX ≈ 5 % of 1M window (estimate; get_session reads 0) → rollover at 30 %, ceiling 60 %. Hourly create_trigger DENIED again (auto-mode classifier) → rely on notifications.
 - (16:58Z) s20 notes: LIVE main 2e9615fb (phone-bars 0ce59361, tham-flip-ui de239eca, tut-place 2e9615fb). OD:L1370 go-live = no trains, foremen push own PASS, tiered checks; go-live-kit worker session_01UV1SziX5AtFSgrnkfGWXgw. Owner-bug candidate (unassigned): tutorial replay 'Xem lại lời dặn' from title menu fails ~1 in 4 (menu modal stays open, jtut.js l.401-404). Running: tutrang-layout session_01UV1SzkXdhk3ejaZYACftuT (owner 16:55Z layout: pet under Y phục in left column, bag fills right), status-icons session_01UV1Szh7JPiQw9nJJ8XwPbe (+kupdchip), kit-size #3 session_01UV1Szjj42P74XsFm4trr8J, kit-marks-r1 reviewer (re-merge), night-time analyst v2 (unarchived), lag-play, tool-trial-3d, merge-train-9 (told to stop + list). Owner pending: night package 1–5 (Lượt 12), pet 'Chăm' button 1–3 (Lượt 15), kit-size #3 sheets.
+
+## S20 → S21 HANDOVER (17:05Z real; s20 ctx ≈ 30 % of window ≥ START 5 % + 25 % → rollover)
+Read: START_CORE + START_FOREMAN + START_MAIN IN FULL; OWNER_DECISIONS from "(16/11 16:35Z" to the end (L1370 go-live rule, 16:45Z kit-size review (1)–(6), 16:55Z Tư trang, 17:00Z page scale, 17:05Z kit-marks OK, 17:15Z + 17:50Z = L1386 NPC AGENT LAW (her soul-of-the-game rule, in dev/rules/topic/people-life.md), 17:20Z item sizes scale from XL master, 17:25Z result frame only for big events, 17:30Z pet sub-tab + pets on stage, 17:40Z no PlayCanvas / hand only, 18:00Z pets on stage details); CLAIMS last 30 rows; this block.
+main = fb367740 (s20 put live: phone-bars 0ce59361 [by s19], tham-flip-ui de239eca, tut-place 2e9615fb, kit-marks-r1 fb367740).
+GO-LIVE (OD:L1370): no trains; foremen push their own PASS (FF-only), tiered review; go-live-kit worker builds tier/quickcheck/build line/rollback/nightly.
+OWNER WAITING (answer → act):
+- Night package (s20 Lượt 26): 1 = ledger 5 nights/tuần (rec) · 2 = 10 nights (measure first) · 3 = more played days per tuần (big). NOTE after L1386 the Emperor must CHOOSE the nights as an agent (analyst told). Maid nights moved to the npc-agent audit.
+- "Vượt phẩm" mark on worn items (s20 Lượt 29): 1 = red kit mark on items above the wearer's rank (seen-only) (rec) · 2 = no. ("Tố vượt phẩm" act already exists: j8.js:124, j9.js:73 placeHarms.)
+- Kit-size #3 sheets (when they land) → self-check vs OD 16:45Z/17:20Z/17:25Z → owner.
+RUNNING (all report to main; s21 must send_message each to re-point):
+- kit-size #3 (opus kit keeper) session_01UV1Szjj42P74XsFm4trr8J — samples only; got 17:20Z (XL master scaling) + 17:25Z (big-event result frames only).
+- tutrang-layout #2 (sonnet) session_01UV1SzkjW5zkFL55LvUPgkv — pet box under Y phục, bag fills right, inner tabs Túi đồ|Thú cưng|Việc; old-save test must run; shots → owner.
+- page-scale (opus) session_01UV1SzibwMrHrCm5SBrYNJR — Fold page = iPad right page scaled (bag 7 vs 4 rows), whole game + test.
+- status-icons (sonnet) session_01UV1Szh7JPiQw9nJJ8XwPbe — download chip → kitStatusIcon (+ #kupdchip); after its new sha → open a sonnet reviewer (SMALL tier) → push. ART (download glyph) asked of C.
+- go-live-kit (opus) session_01UV1SziX5AtFSgrnkfGWXgw.
+- flip-hand (sonnet) session_01UV1SzieCnk4JS2TaGbUqL2 — demo-like hand in the 2D card flip, before|after video → owner.
+- stage-pets (sonnet) session_01UV1SzjxPCjFV2CKvbUzghY — theo-hầu pet beside each person on stage, S/M/L, occlusion check; art from C (inbox 18:00Z).
+- npc-agent AUDIT (opus, report) session_01UV1SzhFdDBPWMRVxf6VqG8 → reports/npc-agent.md → ONE recommendation to owner; implementation → Foreman C.
+- night-time analyst v2 (opus) session_01UV1SzhuYF9iVGubAH5xsE6 (unarchived) — §10–§15, Emperor-as-agent framing, no maid part.
+- lag-play (opus) session_01UV1SzhF1ExMpqSUL9vigZu — no status reply yet to s20; ask.
+- merge-train-9 session_01UV1SzhR7Tb1NFJYg1HjaXd — told to STOP and send the list of PASS branches it carried (owners B/C/D push them one by one); no reply yet.
+- fp v7 worker session_01UV1SzhXgLn4WHG9rL1BT7L idle (owner fp v7 hair answer pending) — archive if still idle.
+Foreman C inbox (s20): Thái hậu full redraw (slimmer robes), download glyph, 22 pet cut-outs S/M/L, NPC-agent law + people-ledger/schedules shas.
+Unassigned owner-bug candidate: tutorial replay "Xem lại lời dặn" from title menu fails ~1 in 4 (menu modal stays open, jtut.js l.401-404) → sonnet worker.
+Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notifications.
