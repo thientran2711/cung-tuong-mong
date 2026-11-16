@@ -26,7 +26,14 @@
       Uses: talk option "Lấy chuyện riêng ép nàng" (strong secret → she owes one ân, Oán +, risk) on the rival card.
    SHOWN (kit parts only): person card (jpcf) blocks "Kỷ niệm" and "Ân oán chưa dứt" = kitRows; strong new memories / hook changes write
    a Sổ ghi line, so they appear in Tuần lục with the week's other entries. No new component, no CSS.
-   Off switch: window.__memOff=true. Test: dev/test/memories.js. */
+   Off switch: window.__memOff=true. Test: dev/test/memories.js.
+   MEM-UPGRADE (review/mem-upgrade; owner 16/11 13:25Z (A) memories + 13:40Z ONE LEDGER (b) causes; docs dev/PROGRESS_review-mem-upgrade.md):
+   - storage: her memories stay in S.mem["me|<about>"]; every other holder (consort, Emperor, Thái hậu, servant "s<sid>") keeps them on itself
+     (.mem = {<about>:[records]}) = world state in co-op (host authority, same on both sides); old saves migrate once (memMig).
+   - per-person fade (BAL.mem.fadeT by nết × fixed per-person spread fadeJit); LIFELONG memories (m.L: BAL.mem.life deeds or weight ≥ lifeMin) never fade.
+   - memory-driven behaviour: danger (will to harm / favour gate), revenge in kind (MIRROR in the NPC mind), everyday dealings (npcSocial), servants' loyalty.
+   - CAUSE LEDGER: causeAdd/causeWhy/causeQuery/causeLine; every act family below writes who did what to whom and why; memories link to their cause (m.c).
+   Tests: dev/test/mem-upgrade.js, dev/test/mem-coop.js. Measure: dev/measure/mem-behaviour.js. */
 (function(){
 const B=()=>BAL.mem;
 const BH=()=>BAL.hook;
@@ -47,7 +54,7 @@ const MEM_DEEDS={
  broken:[-1,1,"thất hứa với {o}"],pressed:[-1,0,"lấy chuyện riêng ép {o}"],scheme:[-1,0,"giở trò “{x}” với {o}"],
  good:[1,0,"giúp {o} trong chuyện “{x}”"],bad:[-1,0,"làm {o} phật lòng trong chuyện “{x}”"],
  /* mem-upgrade: everyday dealings (npcSocial), the Emperor's punishments, servants, big events */
- help:[1,0,"sang giúp {o} việc trong cung"],visit:[1,0,"sang thăm {o} lúc ốm mệt"],warn:[1,0,"báo cho {o} biết có kẻ rắp tâm hại"],mediate:[1,0,"đứng ra hòa giải giùm {o}"],
+ help:[1,0,"sang giúp {o} việc trong cung"],visit:[1,0,"sang thăm {o} lúc ốm mệt"],warn:[1,0,"báo cho {o} biết có kẻ rắp tâm hại"],mediate:[1,0,"đứng ra hòa giải cho {o}"],
  humiliate:[-1,0,"hạ nhục {o} trước mặt cung nhân"],drop:[-1,0,"lạnh nhạt với {o} lúc sa cơ"],nightsteal:[-1,0,"cướp đêm thị tẩm của {o}"],threat:[-1,0,"dọa nạt {o}"],
  demote:[-1,1,"giáng {o} xuống một bậc"],confine:[-1,0,"phạt {o} cấm túc"],srvreward:[1,0,"thưởng cho {o}"],srvpunish:[-1,0,"phạt {o}"],
  srvshield:[1,1,"che chở {o} trước Thận Hình ti"],rescue:[1,1,"cứu {o} một mạng"]};
@@ -225,7 +232,7 @@ function causeWhy(b,t,s){b=mk(b);t=mk(t);s=s>0?1:-1;try{
 function causeAdd(by,to,a,o){if(off())return null;o=o||{};const b=mk(by),t=mk(to);if(!b||!t||b===t||!isP(b)||!isP(t))return null;
  const s=o.s>0?1:-1;const y=o.y||causeWhy(b,t,s);
  const home=hObj(t)||hObj(b);const Z=home?czOf(home):czMine();const H=hkS();H.cn=(H.cn||0)+1;
- let tag="";try{tag=window.COOPW&&COOPW.on?COOPW.seat||"":""}catch(e){}const id="c"+tag+(S.turn||0)+"."+H.cn;
+ let tag="";try{tag=(window.COOPW&&COOPW.seat)||""}catch(e){}const id="c"+tag+(S.turn||0)+"."+H.cn;
  const r={w:nowW(),dt:dtNow(),q:H.cn,by:b,to:t,a:String(a||""),s,y};if(o.n)r.n=plainT(o.n).slice(0,40);if(o.d&&MEM_DEEDS[o.d])r.d=o.d;if(o.x)r.x=plainT(o.x).slice(0,60);if(o.r)r.r=o.r;
  Z[id]=r;czPrune(Z);return id}
 function causeQuery(f){f=f||{};if(off())return[];const by=f.by!=null?mk(f.by):null,to=f.to!=null?mk(f.to):null,who=f.who!=null?mk(f.who):null;const R=[];
@@ -318,10 +325,11 @@ if(typeof relAdd==="function"){const l0=relAdd;relAdd=function(x,y,n){const r=l0
 if(typeof noteAdd==="function"){const n0=noteAdd;noteAdd=function(id,t){const r=n0.apply(this,arguments);
  try{if(!off()&&/tư thông với|không khớp đêm thị tẩm/.test(String(t||""))){const v=mp(id);if(v&&v!==S)hookAdd("secret","me",v,{t:/tư thông/.test(t)?"chuyện tư thông":"cái thai không khớp sổ Kính sự phòng",str:"strong",src:"note"})}}catch(e){}return r}}
 /* 6. npcSocial acts (SOC): everyday kindness and spite between people → the one it was done to remembers; cause always */
-const SOC2DEED={help:"help",visit:"visit",warn:"warn",mediate:"mediate",provoke:"provoke",humiliate:"humiliate",spy:"spy",ally:"ally",drop:"drop",steal:"nightsteal",feign:"care",apologise:"apology"};
-if(typeof SOC==="object")for(const k in SOC2DEED){const s=SOC[k];if(!s||typeof s.run!=="function")continue;const run0=s.run;const d=SOC2DEED[k];const sg=MEM_DEEDS[d][0];
- s.run=function(v,t){if(off()||!v||!t||v===t)return run0.apply(this,arguments);let y=null;try{y=causeWhy(v,t,k==="feign"?-1:sg)}catch(e){}const r=run0.apply(this,arguments);
-  try{if(r){const c=causeAdd(v,t,k,{s:k==="feign"?-1:sg,y,n:k,d});memAdd(t,v,d,{c});if(k==="mediate")memAdd(S,v,"mediate",{c})}}catch(e){}return r}}
+/*    (test = thử lòng: a cause only; feign = a hostile plan wearing a kind face: the cause is hostile, the target remembers kindness) */
+const SOC2DEED={help:"help",visit:"visit",warn:"warn",mediate:"mediate",provoke:"provoke",humiliate:"humiliate",spy:"spy",ally:"ally",drop:"drop",steal:"nightsteal",feign:"care",apologise:"apology",test:null};
+if(typeof SOC==="object")for(const k in SOC2DEED){const s=SOC[k];if(!s||typeof s.run!=="function")continue;const run0=s.run;const d=SOC2DEED[k];const sg=k==="feign"||k==="test"?-1:MEM_DEEDS[d][0];
+ s.run=function(v,t){if(off()||!v||!t||v===t)return run0.apply(this,arguments);let y=null;try{y=causeWhy(v,t,sg)}catch(e){}const r=run0.apply(this,arguments);
+  try{if(r){const c=causeAdd(v,t,k,{s:sg,y,n:k,d:d||""});if(d)memAdd(t,v,d,{c});if(k==="mediate")memAdd(S,v,"mediate",{c})}}catch(e){}return r}}
 /* 7. punish: the Emperor's cấm túc / giáng (j8), the stated offence is the cause */
 if(typeof punish==="function"){const p0=punish;punish=function(p,why,sev){let P=p,W=why;if(typeof p==="string"){W=p;P=S}const rk0=P?rkOf(P):0;const r=p0.apply(this,arguments);
  try{if(!off()&&P){const dem=rkOf(P)<rk0;const c=causeAdd("emp",P,"punish",{s:-1,y:{k:"toi",x:plainT(W).slice(0,50)},n:dem?"giáng":"cấm túc",d:dem?"demote":"confine"});memAdd(P,"emp",dem?"demote":"confine",{c,quiet:1})}}catch(e){}return r}}
