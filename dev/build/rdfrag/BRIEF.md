@@ -26,3 +26,9 @@ OUTPUT: write your chapters to dev/build/rdfrag/<road>.js (one file per road: he
   (adapt the stub if your file needs more globals; the engine's later wrappers are cut off by the replace).
 Size guide: ~4–6 KB per chapter like the pilot (7 chapters ≈ 35 KB per road).
 FINAL MESSAGE (short, English): files written; per road the rewritten ROAD_MAP lines (".5 Title — one line [cast]" × 7 + .11 endings + rare) to paste into §4.8/§4.9; BAL.road keys needed; new story-only NPCs; HISTORY CHECK items; anything you could not do.
+
+## PATTERN FIXES from reviewer road-map-r1 (BINDING, apply to every option you write; added after start)
+1. NEVER read A.sc (Lợi thế) inside an option's o: — j67 oOf67 already adds it. Use only S.* stats in o:.
+2. EVERY option needs a REAL loss: a cost c:{…}, or a failure loss l:{…} on an option with odds, or a relation/oán change in go (rdRel/rdOan), or a flag that changes the next opening, or an ending. lx text alone does NOT count; lx must describe that real effect. Zero no-effect options, zero free gains (w with no c and no l). Check: node /home/user/wt/b3/dev/measure/road-option-scan.js /home/user/wt/b3/dev/build/rdfrag/<road>.js (adapt args if the script expects other input; read its header) → must report 0 free-gain / 0 no-effect / 0 double Lợi thế.
+3. Guard every beat whose text states a cast person's rank, rise, illness, child or office with if: on that person's real state (or a cast filter rdCast(A,["v"],{v:fn})).
+4. rdRel / rdOan / RDW now live in jroad.js (engine) — still do NOT redeclare them.

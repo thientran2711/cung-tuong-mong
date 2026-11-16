@@ -1,0 +1,244 @@
+/* ---------- cnv_chu · Bí mật của chủ nhân ---------- */
+/* BAL.road keys needed: none (deadlines are worded in the story: "trước khi trời sáng", "trước rằm").
+   Story (one secret in layers): the musk {mis} hid left Thái y viện under the name of {v}'s palace; Ôn thái y (story-only NPC) warned {mis}
+   in the letter she burned; {mis} stole the packet on its way to the kitchen of a pregnant consort (the good deed she never told, because
+   telling means confessing how she lost her own child to the same musk). Half of it leaks (.8), the Trung cung asks (.9), Thận hình ty
+   questions (.10), the Emperor decides (.11).
+   Servant start (ROAD_MAP §8.4): every chapter reads right whether she is still a maid (isSrv) or already raised (S.srv.risen; {mis} is then
+   her former mistress, srvM keeps her). Maid-only effects (tin, nt, e67merit) only through need:["srv"] options or CHU_MIS / CHU_NT. */
+const CHU_R=()=>!!(S.srv&&S.srv.risen);
+const CHU_T=(a,b)=>()=>CHU_R()?b:a;/* text: maid wording / consort wording */
+const CHU_Q=()=>{try{return qOn()?"Hoàng hậu":"Thái hậu"}catch(e){return"Hoàng hậu"}};/* who holds the inner palace */
+/* {mis} relation, real both ways (OD:L1247); as a maid also Chủ tin */
+function CHU_MIS(n){try{const m=srvMis67();if(m&&m.alive){relAdd(S,m,n);if(n<0&&typeof oanAdd==="function")oanAdd(m,S,-n)}
+ if(typeof isSrv==="function"&&isSrv())S.tin=Math.max(0,Math.min(100,(S.tin||0)+n))}catch(e){}return""}
+/* the Emperor's eye: Hoàng thượng để ý while a maid (BAL.ntRise then offers the rise), Sủng once raised */
+function CHU_NT(n){try{if(typeof isSrv==="function"&&isSrv()){S.nt=Math.max(0,Math.min(100,(S.nt||0)+n));return `Hoàng thượng để ý +${n}.`}apply({sung:Math.round(n/3)});return `Sủng +${Math.round(n/3)}.`}catch(e){return""}}
+const CHU_E=()=>CHU_R()?S.sung:S.nt;/* odds term for options that reach the Emperor */
+
+rdDef("cnv_chu",5,{t:"Gói thuốc",w:"doc",sj:"gói thuốc của {mis}",cast(A){return rdCast(A,["v"])},
+ g:"Gói xạ hương {mis} giấu vẫn nằm đó. Ở Thái y viện, mỗi lạng xạ hương xuất kho đều ghi tên cung nhận. Biết gói thuốc từ đâu ra là biết bí mật này nặng đến đâu.",
+ p:[["s1","s2","s3"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Chìa khóa rương thuốc",w:"mis",if:()=>rdPrev()==="win",t:CHU_T("Từ đêm ấy {mis} coi ngươi là tâm phúc. Nàng giao ngươi giữ chìa khóa rương thuốc, dặn: “Gói giấy dầu ở đáy rương, không ai được đụng, kể cả ngươi.”","Ngươi đã rời cung {mis}, nhưng nàng vẫn coi ngươi là người duy nhất biết chuyện. Nàng sai người lén đưa sang chìa khóa rương thuốc: “Giữ hộ ta. Cung ta không còn ai đáng tin.”"),o:[
+  {n:"Giữ chìa khóa, không mở rương",c:{},w:{duc:2},wx:"{mis} thêm tin ngươi",lx:"không biết trong rương có gì",go:()=>CHU_MIS(4),rt:"Ngươi đeo chìa khóa vào cổ, chưa từng tra vào ổ."},
+  {n:"Mở rương xem gói giấy dầu",c:{},o:()=>45+S.mat*5,w:{mat:1},sc:1,f:"know",wx:"biết gói thuốc ghi tên cung nào",l:{danh:-1},lx:"{mis} thấy dấu niêm bị động",go:(A,ok)=>{if(!ok)CHU_MIS(-6)},rt:"Giấy dầu có dấu đỏ của Thái y viện, ghi «xuất cho cung {v}».",rf:"Dấu niêm rách một góc. Hôm sau {mis} nhìn ngươi khác hẳn."},
+  {n:"Xin {mis} cho biết thật",c:{suc:-2},o:()=>40+S.duc/4,w:{tamco:1},sc:1,wx:"nghe từ chính miệng nàng",l:{},lx:"{mis} cho là ngươi tò mò",go:(A,ok)=>CHU_MIS(ok?5:-4),rt:"{mis} chỉ nói: “Thứ này không phải của ta. Ta giữ nó để nó không đến tay người khác.”",rf:"{mis} lạnh giọng: “Giữ chìa khóa là đủ.”"}]},
+ s2:{h:"Kẻ đã nói",w:"mis",if:()=>rdPrev()==="win2",t:CHU_T("Ngươi đã trình chuyện lên trên, nhưng không đủ chứng cứ để động đến {mis}. Nội vụ phủ trả ngươi về hầu nàng như cũ, và nàng biết chính ngươi đã nói.","Ngươi đã trình chuyện lên trên. Nay ngươi là tiểu chủ, còn {mis}, chủ cũ của ngươi, gặp ngươi ở đâu cũng quay mặt đi."),o:[
+  {n:"Quỳ xin {mis} tha lỗi",c:{suc:-3},o:()=>35+S.duc/4,w:{duc:2},sc:1,wx:"{mis} nguôi một phần",l:{danh:-1},lx:"bị cho là kẻ hai lòng",go:(A,ok)=>CHU_MIS(ok?6:-3),rt:"{mis} im rất lâu rồi nói: “Ngươi nói vì ngươi sợ. Ta hiểu sợ là gì.”",rf:"{mis} bước qua, không nhìn."},
+  {n:"Lặng lẽ tìm thêm chứng cứ",c:{bac:-15},o:()=>45+S.mat*5,w:{mat:1},sc:1,f:"know",wx:"có manh mối về gói thuốc",l:{},lx:"bị {mis} bắt gặp",go:(A,ok)=>{if(!ok)CHU_MIS(-5)},rt:"Một y đồng nói gói xạ hương ấy xuất kho dưới tên cung {v}.",rf:"{mis} bắt gặp ngươi lục rương."},
+  {n:"Báo tiếp lên trên mỗi điều thấy",c:{duc:-2},w:{hh:4},f:"tell",wx:"Trung cung nhớ ngươi",lx:"{mis} coi ngươi là kẻ phản",go:()=>CHU_MIS(-8),rt:"Ngươi gửi thêm một lời qua người của Trung cung."}]},
+ s3:{h:"Mẩu giấy trong gối",w:"me",if:()=>rdPrev()!=="win"&&rdPrev()!=="win2",t:"Ngươi đã tránh xa chuyện ấy. Nhưng tối qua có ai nhét vào gối ngươi một mẩu giấy: «Xạ hương ở cung {mis} là của ai, ngươi biết.»",o:[
+  {n:"Đốt mẩu giấy",c:{},w:{duc:2},wx:"không để lại dấu",lx:"kẻ viết vẫn rình đâu đó",rt:"Ngươi đốt mẩu giấy trong lò, chờ tro nguội mới ngủ."},
+  {n:"Đem mẩu giấy đến {mis}",c:{suc:-2},o:()=>40+S.duc/4,w:{tamco:1},sc:1,wx:"{mis} biết ngươi đứng về phía nàng",l:{},lx:"{mis} nghi chính ngươi viết",go:(A,ok)=>CHU_MIS(ok?8:-5),rt:"{mis} đọc, tay run: “Có kẻ biết rồi.”",rf:"{mis} nhìn nét chữ rồi nhìn ngươi."},
+  {n:"Lần ra kẻ nhét giấy",c:{bac:-15},o:()=>40+S.mat*5,w:{mat:1},sc:1,f:"know",wx:"biết ai đang rình",l:{danh:-1},lx:"kẻ ấy biết ngươi dò",rt:"Nét chữ là của một cung nữ áo xanh, người hay qua lại cung {v}.",rf:"Không ai nhận."}]},
+ c1:{h:"Sổ xuất kho Thái y viện",w:"doc",t:"Mỗi lạng xạ hương ra khỏi Thái y viện đều phải ghi sổ. Một y đồng nói có thể cho ngươi xem, nếu có bạc, và phải trước khi sổ tháng này nộp lên viện phán.",o:[
+  {n:"Đưa bạc xem sổ",c:{bac:-30},o:()=>50+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"thấy tận mắt tên cung nhận thuốc",l:{danh:-2},lx:"y đồng khai ra ngươi",rt:"Sổ ghi: ba lạng xạ hương xuất cho cung {v}; người ký nhận thay là Ôn thái y.",rf:"Viện phán bắt gặp y đồng, hắn khai có người trong cung hỏi sổ."},
+  {n:"Hỏi khéo một thái y quen",c:{suc:-2},o:()=>40+S.tai/4,w:{tamco:1},sc:1,wx:"biết chuyện mà không để dấu",l:{},lx:"thái y lảng đi",rt:"Thái y thở dài: “Hỏi Ôn thái y. Ông ấy ký sổ tháng ấy.”",rf:"Thái y nói không nhớ."},
+  {n:"Thôi, không dò nữa",c:{},w:{duc:2},wx:"không dính vào Thái y viện",lx:"manh mối nguội dần",rt:"Ngươi quay về, không hỏi ai."}]},
+ c2:{h:"{v} hỏi sổ thuốc",w:"v",need:["v"],t:"{v} sai người đến Thái y viện hỏi: tháng trước có ai tra sổ xạ hương không. Nàng đang tìm gói thuốc thất lạc.",o:[
+  {n:"Xóa dấu chân mình",c:{bac:-20},w:{mat:1},wx:"không ai biết ngươi đã đến viện",lx:"tốn bạc, y đồng vẫn nhớ mặt",rt:"Y đồng nhận bạc, quên luôn ngày ngươi đến."},
+  {n:"Để mặc {v} dò",c:{},w:{duc:1},wx:"không phải làm gì thêm",lx:"{v} để mắt đến cung {mis}",go:A=>{rdOan(A,"v",4)},rt:"Người của {v} đi một vòng, ghi chép rồi về."},
+  {n:"Thả tin giả cho {v}",c:{suc:-2},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,wx:"{v} đi tìm sai chỗ",l:{danh:-2},lx:"{v} biết có người giở trò",go:(A,ok)=>{rdOan(A,"v",ok?6:8)},rt:"{v} cho lục cả kho hương của Ngự thiện phòng.",rf:"{v} cười nhạt: “Kẻ nào bày trò này, ta sẽ biết.”"}]},
+ t1:{h:"Ôn thái y",w:"doc",t:"Ngươi gặp Ôn thái y ở hành lang Thái y viện. Ông già run tay, nói khẽ: “Bức thư {mis} đốt là của ta. Ta xin ngươi đừng hỏi nữa.”",o:[
+  {n:"Hứa giữ kín cho ông",c:{},w:{duc:3},f:"doc",wx:"Ôn thái y nợ ngươi một lần",lx:"điều ông biết vẫn khóa trong miệng ông",rt:"Ông cúi đầu cảm ơn, đi rất nhanh."},
+  {n:"Ép ông nói hết",c:{suc:-3},o:()=>40+S.tamco/3,w:{mat:1},sc:1,f:"know",wx:"biết thêm nửa câu chuyện",l:{duc:-3},lx:"ông sợ, xin cáo bệnh",rt:"Ông nói: gói thuốc ra khỏi viện dưới tên cung {v}, nhưng đến tay {mis} bằng đường khác. Ông chỉ dám nói đến đó.",rf:"Ông ôm ngực, gọi người đỡ về."},
+  {n:"Báo {mis} rằng ông đã nói",c:{},w:{tamco:1},wx:"{mis} biết ngươi không giấu nàng",lx:"Ôn thái y không còn tin ngươi",go:()=>CHU_MIS(5),rt:"{mis} gật đầu: “Ông ấy là người tốt. Đừng làm khó ông.”"}]},
+ x1:{h:"Gói thuốc trong tay ai",w:"mis",t:"Giờ ngươi biết gói xạ hương ra khỏi Thái y viện dưới tên cung {v}. Đem điều ấy về đâu?",o:[
+  {n:"Nói với {mis} điều ngươi biết",c:{suc:-4},o:A=>35+A.sc*8+(A.f.know?10:0)+S.duc/6,e:["win","lose"],rt:"{mis} nắm tay ngươi: “Vậy ngươi đã hiểu vì sao ta giấu.”",rf:"{mis} tái mặt: “Ai cho ngươi đi dò?”"},
+  {n:"Giữ trong lòng, chép lại một bản",c:{},w:{mat:1},e:"mid",lx:"một mình gánh chuyện",rt:"Ngươi chép tên cung {v} vào mảnh lụa, khâu vào lót áo."},
+  {n:"Lén cho {v} biết có người đã biết",c:{duc:-3},o:()=>40+S.tamco/3,e:["mid","lose"],go:A=>{rdOan(A,"v",6)},rt:"{v} thôi sai người dò hỏi, nhưng nhìn ngươi như nhìn cây gai.",rf:"{v} lần ra chính ngươi gửi lời."}]}},
+ E:{win:{k:1,tag:"Người cùng giữ bí mật",w:"mis",t:"{mis} kể ngươi nghe nửa câu chuyện: gói xạ hương ấy nàng lấy được từ tay người khác, không phải để dùng. Nửa kia nàng chưa nói, nhưng từ nay ngươi là người duy nhất nàng nói cùng.",fx:{tamco:2,danh:2},go:()=>{CHU_MIS(10);return e67merit(4)}},
+  mid:{k:0,tag:"Biết mà im",t:"Ngươi biết gói thuốc từ đâu ra. Chưa ai biết ngươi biết.",fx:{mat:1}},
+  lose:{k:-1,tag:"{mis} nghi ngươi",w:"mis",t:"{mis} cho là ngươi dò chuyện để bán. Từ nay nàng khóa rương, đổi chỗ giấu, và không gọi ngươi vào phòng trong nữa.",fx:{danh:-2},go:()=>CHU_MIS(-10)}}});
+
+rdDef("cnv_chu",6,{t:"Kẻ dò hỏi",w:"v",sj:"kẻ dò hỏi chuyện cung {mis}",cast(A){return rdCast(A,["v"])},
+ g:"Cung {v} đã biết mất một gói xạ hương. Người của nàng bắt đầu dò khắp nơi: ai trực đêm ấy, ai dọn phòng, ai biết gì. Giữ miệng mình, và miệng người quanh mình.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Cung nữ áo xanh",w:"maid",if:RDW(1),t:CHU_T("Từ khi {mis} kể ngươi nửa câu chuyện, nàng hay gọi ngươi vào nói riêng. Cũng từ đó, một cung nữ áo xanh của cung {v} sáng nào cũng ngồi cạnh ngươi ở giếng nước.","Từ khi {mis} kể ngươi nửa câu chuyện, nàng hay sai người mời ngươi sang uống trà. Cũng từ đó, một cung nữ áo xanh xin vào hầu cung ngươi, nói là Nội vụ phủ phân xuống."),o:[
+  {n:"Làm như không biết, nói chuyện vặt",c:{},w:{tamco:1},wx:"nàng không moi được gì",lx:"nàng vẫn ngồi đó mỗi ngày",rt:"Ngươi kể chuyện quê, chuyện giặt áo, chuyện mưa."},
+  {n:"Hỏi ngược lại nàng",c:{suc:-2},o:()=>40+S.tamco/3,w:{mat:1},sc:1,f:"own",wx:"biết nàng là người của ai",l:{},lx:"nàng biết ngươi đã đề phòng",rt:"Nàng lỡ miệng nhắc tên cung {v}.",rf:"Nàng cười, đổi chuyện."},
+  {n:"Báo {mis} có kẻ rình",c:{},w:{duc:1},wx:"{mis} thêm tin ngươi",lx:"cả cung căng như dây đàn",go:()=>CHU_MIS(5),rt:"{mis} gật đầu: “Để nó rình. Ta biết rồi.”"}]},
+ s2:{h:"Nén bạc ở giếng nước",w:"maid",if:RDW(0),t:CHU_T("{mis} giữ ngươi ở xa. Một sáng ở giếng nước, cung nữ áo xanh của cung {v} dúi vào tay ngươi một nén bạc: “Kể ta nghe đêm ấy chủ ngươi đốt gì.”","{v} tự mời ngươi sang uống trà, rót cho ngươi chén đầu, hỏi như vô tình: “Muội từng hầu {mis}, hẳn biết nàng hay mất ngủ vì chuyện gì?”"),o:[
+  {n:"Nhận bạc, kể chuyện vô hại",c:{duc:-3},w:{bac:20},wx:"có bạc, họ tưởng ngươi đã ngả",lx:"một lần nhận là có lần sau",rt:"Ngươi kể {mis} hay đau đầu, hay đốt trầm."},
+  {n:"Từ chối thẳng",c:{},w:{duc:2},wx:"giữ được mình",lx:"cung {v} ghi tên ngươi",go:A=>{rdOan(A,"v",4)},rt:"Ngươi đặt lại nén bạc, đứng dậy."},
+  {n:"Giả nhận, quay về báo {mis}",c:{suc:-2},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,f:"own",wx:"{mis} biết ngươi một lòng",l:{danh:-2},lx:"bị nghi là kẻ hai mang",go:(A,ok)=>CHU_MIS(ok?8:-4),rt:"{mis} nghe xong, lần đầu mỉm cười với ngươi.",rf:"Có người thấy ngươi nhận bạc, chạy đi kể trước."}]},
+ c1:{h:"Đôi hoa tai bạc",w:"maid",t:CHU_T("Một cung nữ cùng phòng có thêm đôi hoa tai bạc mới. Nàng tránh mắt ngươi.","Một cung nữ trong cung ngươi có thêm đôi hoa tai bạc mới. Nàng tránh mắt ngươi."),o:[
+  {n:"Hỏi thẳng nàng",c:{},o:()=>40+S.duc/4,w:{mat:1},sc:1,wx:"nàng khai đã bán tin gì",l:{},lx:"nàng chạy đi mách",rt:"Nàng khóc: chỉ kể giờ ngươi trực đêm.",rf:"Nàng chối, rồi xin đổi chỗ."},
+  {n:"Theo xem nàng gặp ai",c:{suc:-3},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"own",wx:"biết đường tin đi",l:{},lx:"bị nàng phát hiện",rt:"Nàng đưa tin cho cung nữ áo xanh ở sau giả sơn.",rf:"Nàng ngoái lại, thấy ngươi."},
+  {n:"Cho nàng bạc gấp đôi để quay về",c:{bac:-30},w:{duc:1},wx:"đường rò thành của ngươi",lx:"tốn bạc, nàng có thể ăn hai đầu",rt:"Nàng nhận bạc, dập đầu."}]},
+ c2:{h:"{v} ra mặt",w:"v",need:["v"],t:"{v} chặn ngươi ở cửa ngự hoa viên: “Thứ gì của cung ta, sớm muộn cũng về cung ta. Ngươi nên nghĩ cho mình.”",o:[
+  {n:"Cúi đầu, không đáp",c:{},w:{duc:2},wx:"không để lọt một lời",lx:"{v} cho là ngươi sợ",rt:"{v} phẩy tay áo bỏ đi."},
+  {n:"Đáp cứng: không biết gì",c:{},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"{v} biết ngươi không dễ dọa",l:{danh:-2},lx:"{v} nổi giận",go:(A,ok)=>{rdOan(A,"v",ok?5:8)},rt:"{v} nhìn ngươi một lúc, rồi cười: “Được.”",rf:"{v} tát ngươi trước mặt người qua lại."},
+  {n:"Hỏi {v} muốn đổi gì",c:{duc:-2},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,wx:"biết {v} sợ điều gì",l:{},lx:"{v} nghĩ ngươi bán được",go:(A,ok)=>{rdRel(A,"v",ok?6:-4)},rt:"{v} buột miệng: “Chỉ cần gói giấy dầu, không cần gì khác.”",rf:"{v} không đáp, chỉ nhớ mặt ngươi."}]},
+ t1:{h:"Ai đứng sau cung nữ áo xanh",w:"eun",t:"Ngươi lần ra: tin cung nữ áo xanh gom được đều qua tay một thái giám dưới quyền {eun} trước khi đến cung {v}. Nghĩa là Nội vụ phủ cũng đã nghe.",o:[
+  {n:"Mua chuộc thái giám ấy",c:{bac:-40},o:()=>45+S.mat*4,w:{mat:1},sc:1,wx:"tin đi qua tay hắn sẽ bị lọc",l:{},lx:"hắn ăn bạc rồi báo lên",rt:"Hắn nhận bạc, hứa “chép sai vài chữ”.",rf:"Hắn nhận bạc, rồi báo lại {eun}."},
+  {n:"Báo {mis} đề phòng Nội vụ phủ",c:{},w:{tamco:1},wx:"{mis} kịp đổi chỗ giấu",lx:"Nội vụ phủ thấy cung {mis} giữ kẽ",go:()=>CHU_MIS(4),rt:"{mis} dời gói thuốc ra khỏi rương ngay đêm ấy."},
+  {n:"Để yên, giả như chưa biết",c:{},w:{duc:1},wx:"không đánh động ai",lx:"đường tin vẫn chảy",rt:"Ngươi im lặng quan sát."}]},
+ x1:{h:"Bắt kẻ dò hỏi",w:"maid",t:"Đêm nay cung nữ áo xanh hẹn gặp người mua tin ở góc sân sau. Bắt tận tay, cho nàng mang tin giả về, hay để yên?",o:[
+  {n:"Bắt tận tay, giao {mis} xử",c:{suc:-5},o:A=>40+A.sc*8+S.mat*4,e:["win","lose"],rt:"Cung nữ áo xanh bị bắt cùng mẩu giấy ghi giờ trực của cả cung.",rf:"Nàng chạy thoát, chỉ còn lời ngươi nói."},
+  {n:"Cho nàng mang tin giả về",c:{},lx:"kẻ dò hỏi vẫn ở lại trong cung",o:A=>40+(A.f.own?15:0)+S.tamco/4,e:["win","mid"],rt:"Cung {v} tin rằng gói thuốc đã bị đốt.",rf:"Tin giả bị nghi, nhưng nàng không moi thêm được gì."},
+  {n:"Để yên, khép kín cửa",c:{},w:{duc:2},e:"mid",lx:"kẻ dò hỏi vẫn ở đó",rt:"Ngươi khóa cửa sân sau, đi ngủ sớm."}]}},
+ E:{win:{k:1,tag:"Kẻ dò hỏi bị bắt",w:"mis",t:"Người của {v} bị bắt hoặc bị lừa. {mis} biết, trong lúc cả cung chao đảo, ngươi là người đứng giữ cửa.",fx:{danh:4},go:A=>{rdOan(A,"v",8);CHU_MIS(8);return e67merit(4)}},
+  mid:{k:0,tag:"Cửa đã khép",t:"Tin không lọt thêm, nhưng kẻ dò hỏi vẫn còn đó, và {v} vẫn chưa thôi tìm.",fx:{mat:1}},
+  lose:{k:-1,tag:"Tin đã lọt",w:"v",t:"{v} biết đêm ấy ai trực ở cung {mis}. Từ nay ánh mắt nàng dừng trên ngươi mỗi khi gặp.",fx:{danh:-3},go:A=>{rdOan(A,"v",6)}}}});
+
+rdDef("cnv_chu",7,{t:"Chủ thử lòng",w:"mis",sj:"phép thử của {mis}",cast(A){return rdCast(A,["v"])},
+ g:"{mis} không tin ai trọn vẹn, kể cả ngươi. Nàng bày một phép thử: cho ngươi biết một điều, rồi xem điều ấy có lọt ra ngoài không.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Đứa con năm ngoái",w:"mis",if:RDW(1),t:CHU_T("Sau vụ cung nữ áo xanh, {mis} gọi ngươi vào, đóng cửa, kể: “Năm ngoái ta mất một đứa con. Trong lò hương phòng ta có xạ hương.” Nàng dừng ở đó, nhìn ngươi.","Sau vụ cung nữ áo xanh, {mis} sang tận cung ngươi, cho người hầu lui hết, kể: “Năm ngoái ta mất một đứa con. Trong lò hương phòng ta có xạ hương.” Nàng dừng ở đó, nhìn ngươi."),o:[
+  {n:"Hỏi ai đã làm",c:{},o:()=>40+S.duc/4,w:{mat:1},sc:1,wx:"nghe tên kẻ hại nàng",l:{},lx:"{mis} cho là ngươi hỏi nhiều",go:(A,ok)=>{if(!ok)CHU_MIS(-3)},rt:"{mis} không nói tên, chỉ nhìn về phía cung {v}.",rf:"{mis} quay mặt đi."},
+  {n:"Quỳ xuống nghe, không hỏi",c:{},w:{duc:2},f:"loyal",wx:"{mis} thấy ngươi biết giữ",lx:"chỉ biết được nửa chuyện",go:()=>CHU_MIS(5),rt:"{mis} đặt tay lên vai ngươi rất lâu."},
+  {n:"Khuyên nàng tâu lên",c:{suc:-2},o:()=>35+S.duc/4,w:{duc:3},sc:1,wx:"{mis} nghĩ đến lẽ phải",l:{},lx:"{mis} giận ngươi ngây thơ",go:(A,ok)=>CHU_MIS(ok?3:-5),rt:"{mis} lắc đầu: “Chưa đủ chứng. Nói ra là ta chết trước.”",rf:"{mis} cười buồn: “Ngươi chưa biết trong cung này lời nói rẻ đến đâu.”"}]},
+ s2:{h:"Lời đồn về ngươi",w:"mis",if:RDW(0),t:"{mis} gọi ngươi đến, giọng lạnh: “Có người nói ngươi đã kể chuyện đêm ấy. Ta muốn nghe từ miệng ngươi.”",o:[
+  {n:"Thề chưa nói với ai",c:{},o:()=>40+S.duc/4,w:{duc:1},sc:1,f:"loyal",wx:"{mis} tạm tin",l:{},lx:"{mis} không tin lời thề",go:(A,ok)=>CHU_MIS(ok?5:-4),rt:"{mis} gật đầu: “Ta sẽ xem.”",rf:"{mis} cười nhạt: “Ai cũng thề.”"},
+  {n:"Kể thật mình từng bị dò",c:{},w:{tamco:1},wx:"{mis} biết ai đang nhắm vào nàng",lx:"{mis} biết ngươi từng giấu nàng",go:()=>CHU_MIS(2),rt:"{mis} nghe hết, im lặng."},
+  {n:"Im lặng chịu trách",c:{suc:-3},w:{duc:2},wx:"không thêm lời nào để bị bắt bẻ",lx:"{mis} cho là ngươi có tật",go:()=>CHU_MIS(-3),rt:"Ngươi cúi đầu suốt buổi."}]},
+ c1:{h:"Lời đồn giả",w:"mis",t:"Hôm sau cả cung xôn xao: «{mis} giấu thư tình trong rương». Hôm qua, chỉ có ngươi nghe {mis} nhắc đến cái rương. Hoặc đó là phép thử.",o:[
+  {n:"Đi tìm gốc lời đồn",c:{suc:-3},o:()=>40+S.mat*5,w:{mat:1},sc:1,f:"know",wx:"chứng minh không phải ngươi",l:{},lx:"càng dò càng bị nghi",rt:"Lời đồn bắt đầu từ chính một cung nữ {mis} vừa dặn riêng.",rf:"Không ai nhận đã nói trước."},
+  {n:"Đến thưa với {mis}: không phải ngươi",c:{},o:()=>40+S.duc/4,w:{duc:1},sc:1,f:"loyal",wx:"{mis} thấy ngươi thẳng",l:{},lx:"tự đến là tự nhận nghi",go:(A,ok)=>CHU_MIS(ok?5:-3),rt:"{mis} cười: “Ta biết. Ta chỉ xem ngươi có đến không.”",rf:"{mis} chỉ nói: “Lui ra.”"},
+  {n:"Im lặng, để thời gian nói",c:{},w:{tamco:1},wx:"không tự đưa mình vào bẫy",lx:"lời đồn sống thêm vài ngày",rt:"Ngươi làm việc như thường."}]},
+ c2:{h:"Hộp gấm niêm phong",w:"mis",t:"{mis} đưa ngươi một hộp gấm niêm phong: “Đem đến chỗ Ôn thái y, trước giờ Thái y viện đóng cửa. Không được mở.”",o:[
+  {n:"Đem đi, không mở",c:{suc:-2},w:{duc:2},f:"loyal",wx:"qua phép thử",lx:"không biết mình mang gì",go:()=>CHU_MIS(6),rt:"Ôn thái y nhận hộp, mở ra: chỉ là một gói trà. Ông cười: “Nàng thử ngươi đấy.”"},
+  {n:"Lén mở xem",c:{},o:()=>45+S.tamco/4,w:{mat:1},sc:1,wx:"biết hộp chỉ là phép thử",l:{},lx:"dấu niêm không còn như cũ",go:(A,ok)=>{if(!ok)CHU_MIS(-8)},rt:"Trong hộp chỉ có trà. Ngươi niêm lại khéo đến mức không ai nhận ra.",rf:"Niêm bị lệch, Ôn thái y nhìn thấy."},
+  {n:"Hỏi vì sao phải giấu",c:{},o:()=>35+S.duc/4,w:{tamco:1},sc:1,wx:"{mis} nói thật một phần",l:{},lx:"{mis} cho là ngươi cãi",go:(A,ok)=>CHU_MIS(ok?3:-4),rt:"{mis} nói: “Vì ta muốn biết ngươi có hỏi không. Ngươi đã hỏi.”",rf:"{mis} giật lại hộp, sai người khác."}]},
+ t1:{h:"Lý do của phép thử",w:"mis",t:"{mis} thú nhận: những việc nguy nàng từng sai ngươi đều là phép thử. “Ta chưa từng định hại ai. Ta chỉ cần biết ai sẽ làm khi được sai.”",o:[
+  {n:"Giận vì bị thử",c:{},w:{tamco:2},wx:"{mis} biết ngươi không phải con rối",lx:"chủ tớ xa thêm một bước",go:()=>CHU_MIS(-4),rt:"Ngươi đáp: “Lòng người không phải để thử.”"},
+  {n:"Hiểu cho nàng",c:{},w:{duc:3},f:"loyal",wx:"{mis} nhẹ lòng",lx:"chấp nhận còn bị thử",go:()=>CHU_MIS(6),rt:"{mis} thở dài: “Ở đây, không thử thì chết.”"},
+  {n:"Hỏi gói thuốc thật ra để làm gì",c:{suc:-2},o:()=>40+S.duc/4,w:{mat:1},sc:1,f:"know",wx:"biết gói thuốc là chứng cứ",l:{},lx:"{mis} đóng lòng lại",rt:"{mis} nói: “Nó là thứ đã giết con ta. Ta giữ để có ngày đặt nó trước mặt kẻ đã làm.”",rf:"{mis} nói: “Chưa đến lúc.”"}]},
+ x1:{h:"Phép thử cuối",w:"mis",t:"{mis} để gói xạ hương trên bàn rồi ra ngoài. Cửa không khóa. Ngoài sân, người của cung {v} đang đi qua.",o:[
+  {n:"Ngồi canh gói thuốc đến khi chủ về",c:{suc:-4},o:A=>45+A.sc*8+(A.f.loyal?10:0),e:["win","mid"],rt:"{mis} về, thấy ngươi vẫn ngồi đó, mắt đỏ vì thức.",rf:"Ngươi thiếp đi lúc gần sáng. Gói thuốc còn đó, nhưng {mis} thấy ngươi ngủ."},
+  {n:"Cất gói thuốc vào chỗ kín",c:{},lx:"tay ngươi chạm vào gói thuốc",o:A=>40+S.tamco/4+A.sc*6,e:["win","lose"],rt:"{mis} về, không thấy gói thuốc, nhìn ngươi. Ngươi chỉ chỗ. Nàng gật đầu: “Ngươi nghĩ trước ta một bước.”",rf:"{mis} về, không thấy gói thuốc, cho là ngươi định lấy."},
+  {n:"Đem trả gói thuốc cho Thái y viện",c:{duc:-1},o:()=>40+S.duc/5,e:["mid","lose"],go:()=>CHU_MIS(-6),rt:"Thái y viện nhận lại, không hỏi. {mis} mất chứng cứ nhưng không mất mạng.",rf:"Viện phán giữ gói thuốc lại, ghi tên cung {mis}."}]}},
+ E:{win:{k:1,tag:"Qua phép thử",w:"mis",t:"{mis} kể hết: xạ hương đã giết đứa con của nàng năm ngoái, và gói này là chứng cứ duy nhất nàng có. Từ nay nàng không thử ngươi nữa.",fx:{danh:2,tamco:1},go:()=>{CHU_MIS(12);return e67merit(5)}},
+  mid:{k:0,tag:"Nửa tin nửa ngờ",t:"{mis} tin ngươi giữ được miệng, nhưng chưa tin ngươi giữ được việc.",fx:{duc:1}},
+  lose:{k:-1,tag:"Trượt phép thử",w:"mis",t:"{mis} cho là ngươi rắp tâm lấy gói thuốc. Nàng chuyển ngươi ra xa, và đổi người giữ chìa khóa.",fx:{danh:-2},go:()=>CHU_MIS(-12)}}});
+
+rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về xạ hương ở cung {mis}",cast(A){return rdCast(A,["v"])},
+ g:"Lời đồn đến tai Trung cung: «cung {mis} có xạ hương». Chỉ một nửa sự thật lọt ra, nửa tệ nhất. Trước khi trời sáng, Nội vụ phủ sẽ khám cung.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Tin báo nửa đêm",w:"eun",if:RDW(1),t:()=>`{mis} đã tin ngươi trọn. Nửa đêm, một tiểu thái giám chạy đến báo: sáng mai Nội vụ phủ khám cung {mis}, theo lệnh ${CHU_Q()}. Gói thuốc vẫn ở chỗ cũ.`,o:[
+  {n:"Mang gói thuốc ra khỏi cung",c:{suc:-3},o:()=>40+S.mat*5,w:{tamco:2},sc:1,f:"hide",wx:"gói thuốc không còn ở cung {mis}",l:{danh:-3},lx:"bị bắt đang mang xạ hương",rt:"Ngươi giấu gói thuốc trong giỏ đồ giặt, đưa ra khỏi cung trước canh tư.",rf:"Thị vệ gác cửa nhìn giỏ đồ rất lâu, nhớ mặt ngươi."},
+  {n:"Giấu vào chỗ không ai khám",c:{},o:()=>45+S.tamco/4,w:{mat:1},sc:1,f:"hide",wx:"gói thuốc vẫn trong tầm tay",l:{},lx:"chỗ giấu không chắc",rt:"Ngươi nhét gói thuốc vào ruột chiếc gối thêu của {mis}.",rf:"Chỗ giấu ngươi chọn, Nội vụ phủ nào cũng biết."},
+  {n:"Khuyên {mis} tự đem nộp trước",c:{},o:()=>35+S.duc/4,w:{duc:3},sc:1,f:"clean",wx:"không còn gì để bị khám ra",l:{},lx:"{mis} cho là ngươi bỏ nàng",go:(A,ok)=>CHU_MIS(ok?2:-6),rt:"{mis} nghĩ rất lâu: “Nếu nộp, ta phải nói nó từ đâu.”",rf:"{mis} hất tay ngươi ra."}]},
+ s2:{h:"Ánh mắt cả cung",w:"mis",if:RDW(0),t:"Cả cung đồn có kẻ từng hầu cung {mis} đã khai chuyện xạ hương. Mọi ánh mắt đổ về ngươi, và sáng mai Nội vụ phủ khám cung.",o:[
+  {n:"Đến gặp {mis} trước khi ai khác",c:{suc:-2},o:()=>40+S.duc/4,w:{duc:1},sc:1,wx:"{mis} nghe ngươi trước",l:{},lx:"{mis} đã tin lời đồn",go:(A,ok)=>CHU_MIS(ok?6:-4),rt:"{mis} nghe xong, nói: “Không phải ngươi. Ta biết là ai.”",rf:"{mis} không cho ngươi vào."},
+  {n:"Tìm ra kẻ thật sự đã nói",c:{bac:-20},o:()=>40+S.mat*5,w:{mat:1},sc:1,f:"know",wx:"biết lời đồn đi từ cung {v}",l:{},lx:"tốn bạc mà không ra",rt:"Lời đồn đi ra từ cung {v}, qua miệng cung nữ áo xanh.",rf:"Ai cũng nói nghe người khác kể."},
+  {n:"Xin nghỉ ốm tránh mặt",c:{},w:{suc:3},wx:"tránh được bão miệng",lx:"vắng mặt là có tật",rt:"Ngươi nằm trong phòng, nghe tiếng bàn tán ngoài sân."}]},
+ c1:{h:"Đoàn khám cung",w:"eun",t:CHU_T("Thái giám của {eun} lục từng rương. Một người dừng lại trước chỗ ngươi ngủ.","Đoàn khám cung đến cả cung ngươi, vì ngươi từng là người cung {mis}. Một thái giám của {eun} dừng lại trước rương áo của ngươi."),o:[
+  {n:"Đứng yên cho khám",c:{},w:{duc:2},wx:"không có gì phải giấu",lx:"đồ riêng bị lật tung",rt:"Hắn lật hết, không thấy gì."},
+  {n:"Dúi bạc cho thái giám",c:{bac:-30},o:()=>50+S.mat*3,w:{tamco:1},sc:1,wx:"hắn khám qua loa",l:{danh:-2},lx:"hắn báo có người đút lót",rt:"Hắn khám qua loa rồi đi.",rf:"Hắn cầm bạc, ghi luôn vào sổ: «có người lo lót»."},
+  {n:"Hỏi có lệnh bằng giấy chưa",c:{},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"đoàn khám phải giữ phép",l:{},lx:"bị cho là chống lệnh",rt:"Hắn lúng túng, chỉ khám lướt.",rf:"Hắn đọc lệnh to cho cả sân nghe."}]},
+ c2:{h:"{v} châm dầu",w:"v",need:["v"],t:()=>`{v} đến thỉnh an ${CHU_Q()}, buột miệng: “Nghe nói người trực đêm ở cung {mis} biết hết.”`,o:[
+  {n:"Xin vào thỉnh an cùng lúc, đối mặt",c:{suc:-3},o:()=>35+S.danh/4,w:{danh:2},sc:1,wx:"lời {v} bị chặn ngay",l:{danh:-2},lx:"bị cho là hỗn",go:(A,ok)=>{rdOan(A,"v",ok?8:5)},rt:"Ngươi thưa đúng một câu, {v} không đáp được.",rf:"Ngươi bị cho lui ra ngoài cửa."},
+  {n:"Nhờ người nói đỡ",c:{bac:-30},o:()=>45+S.mat*4,w:{mat:1},sc:1,wx:"có người đỡ lời",l:{},lx:"người nói đỡ cũng bị nghi",rt:"Một nữ quan cũ nói: người trực đêm đâu biết gì.",rf:"Không ai dám mở miệng."},
+  {n:"Để mặc {v} nói",c:{},w:{duc:1},wx:"không bị kéo vào cãi",lx:"lời {v} ở lại trong tai Trung cung",go:A=>{rdOan(A,"v",3)},rt:"Ngươi không làm gì."}]},
+ t1:{h:"Trung cung cho gọi",w:"hh",need:["hh"],t:"Hoàng hậu {hh} cho gọi ngươi riêng: “Bản cung chỉ hỏi một câu: xạ hương trong cung {mis} là để hại ai?”",o:[
+  {n:"Thưa: không để hại ai",c:{},o:()=>40+S.hh/4,w:{hh:3},sc:1,wx:"Hoàng hậu ngờ có ẩn tình",l:{hh:-3},lx:"Hoàng hậu cho là ngươi bao che",rt:"Hoàng hậu nhìn ngươi rất lâu: “Vậy là để giữ.”",rf:"Hoàng hậu nói: “Ai giấu xạ hương cũng nói thế.”"},
+  {n:"Thưa: không biết",c:{hh:-2},w:{tamco:1},wx:"không lộ thêm một chữ",lx:"Hoàng hậu không vui",rt:"Hoàng hậu cho lui."},
+  {n:"Xin Hoàng hậu cho thêm thời gian",c:{suc:-2},o:()=>35+S.duc/4,w:{hh:2},sc:1,wx:"có thời gian tìm chứng",l:{hh:-2},lx:"bị cho là trì hoãn",rt:"Hoàng hậu cho ba ngày.",rf:"Hoàng hậu nói: “Trời sáng là khám.”"}]},
+ x1:{h:"Trời sáng",w:"eun",t:"Đoàn khám cung đến rương cuối cùng. Gói thuốc ở đâu, chỉ ngươi và {mis} biết.",o:[
+  {n:"Đánh lạc hướng đoàn khám",c:{suc:-5},o:A=>40+A.sc*8+(A.f.hide?10:0)+S.tamco/5,e:["win","lose"],rt:"Đoàn khám về tay không.",rf:"Gói thuốc lộ ra giữa sân."},
+  {n:"Để {mis} tự nộp, nói rõ gốc gác",c:{},lx:"{mis} phải kể nỗi đau của mình",o:A=>40+(A.f.clean?10:0)+S.duc/5,e:["mid","lose"],rt:()=>`${CHU_Q()} nghe nửa đầu câu chuyện, cho {mis} thời gian.`,rf:"Không ai tin nửa sau câu chuyện."},
+  {n:"Nhận gói thuốc là của mình",c:{danh:-4},w:{duc:3},e:"take",lx:"ngươi mang tiếng giữ xạ hương",rt:"Ngươi bước ra, quỳ xuống: “Gói ấy là của người này.”"}]}},
+ E:{win:{k:1,tag:"Đoàn khám về tay không",w:"mis",t:"Nội vụ phủ không tìm thấy gì. Lời đồn chết dần. {mis} biết đêm ấy ai đã cứu nàng.",fx:{danh:3},go:A=>{rdOan(A,"v",6);CHU_MIS(10);return e67merit(4)}},
+  mid:{k:0,tag:"Nửa sự thật trước Trung cung",t:"Trung cung biết có gói thuốc, biết nó ra từ cung {v}, nhưng chưa biết vì sao nó ở cung {mis}.",fx:{mat:1}},
+  take:{k:0,tag:"Gánh thay chủ",w:"mis",t:CHU_T("Ngươi nhận gói thuốc là của mình, bị phạt quỳ ba ngày ở sân Nội vụ phủ. {mis} đứng sau rèm nhìn, không nói gì, nhưng đêm ấy sai người mang thuốc xuống cho ngươi.","Ngươi nhận gói thuốc là của mình, bị cấm túc một tháng. {mis} sai người lén mang trà sang, kèm một chữ: «Nợ»."),fx:{danh:-2,duc:2},go:()=>CHU_MIS(15)},
+  lose:{k:-1,tag:"Gói thuốc bị tìm ra",w:"eun",t:"Gói xạ hương lộ ra giữa sân. {mis} bị cấm túc chờ tra, còn ngươi bị giữ lại để hỏi.",fx:{danh:-4,suc:-5},go:()=>CHU_MIS(-6)}}});
+
+rdDef("cnv_chu",9,{t:"Giữ hay nói",w:"hh",sj:"lời khai về {mis}",cast(A){return rdCast(A,["v"])},
+ g:"Trung cung đòi một lời khai. Nói thật thì {mis} lộ cả điều nàng giấu lẫn điều nàng chịu; giữ kín thì ngươi gánh. Ôn thái y là người duy nhất có thể nói thay ngươi, và ông đang muốn đi.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Gọi lúc canh hai",w:"hh",if:RDW(1),t:()=>`Đoàn khám cung về tay không, nhưng ${CHU_Q()} không bỏ. Lúc canh hai, người của Trung cung đến gọi ngươi đi, chỉ một mình.`,o:[
+  {n:"Đi ngay, không báo {mis}",c:{},w:{duc:1},wx:"không ai nói ngươi thông đồng",lx:"{mis} sẽ biết ngươi đi một mình",go:()=>CHU_MIS(-2),rt:"Ngươi khoác áo, theo đèn lồng đi."},
+  {n:"Nhắn {mis} một lời trước khi đi",c:{suc:-2},o:()=>45+S.mat*4,w:{tamco:1},sc:1,wx:"{mis} biết ngươi đi đâu",l:{},lx:"người nhắn bị bắt gặp",go:(A,ok)=>{if(ok)CHU_MIS(4)},rt:"{mis} nhắn lại: “Nói gì cũng được, đừng nói về đứa con.”",rf:"Người của Trung cung thấy ngươi dừng lại thì thầm."},
+  {n:"Xin đến vào sáng mai",c:{},o:()=>35+S.danh/4,w:{suc:2},sc:1,wx:"có một đêm nghĩ",l:{hh:-3},lx:"Trung cung phật ý",rt:"Người của Trung cung đồng ý.",rf:"Họ đứng chờ ở cửa, không đi."}]},
+ s2:{h:"Lời nhắn của {mis}",w:"mis",if:RDW(0),t:"{mis} bị giữ trong cung, không ai được ra vào. Nàng nhờ người nhắn ngươi: “Nếu bị hỏi, cứ nói thật về cung {v}. Đừng nói về ta.”",o:[
+  {n:"Nhận lời, làm như nàng dặn",c:{},w:{duc:1},f:"loyal",wx:"{mis} yên lòng",lx:"chỉ nói được nửa sự thật",go:()=>CHU_MIS(4),rt:"Ngươi gật đầu với người đưa tin."},
+  {n:"Nhắn lại: phải nói cả hai",c:{},o:()=>35+S.duc/4,w:{duc:2},sc:1,wx:"{mis} nghĩ lại",l:{},lx:"{mis} cho là ngươi đã ngả",go:(A,ok)=>CHU_MIS(ok?2:-5),rt:"{mis} nhắn: “Vậy thì nói, nhưng chờ Ôn thái y.”",rf:"{mis} không nhắn lại nữa."},
+  {n:"Tìm cách vào gặp nàng",c:{bac:-30},o:()=>40+S.mat*5,w:{mat:1},sc:1,wx:"nghe tận miệng nàng",l:{danh:-2},lx:"bị bắt vì vào nơi cấm",rt:"Ngươi vào được nửa canh giờ.",rf:"Thị vệ giữ ngươi ở cửa."}]},
+ c1:{h:"Ôn thái y muốn đi",w:"doc",t:"Ôn thái y xin cáo bệnh về quê, đi trước rằm. Nếu ông đi, không ai còn nói được gói thuốc ra khỏi viện thế nào.",o:[
+  {n:"Đến xin ông ở lại",c:{suc:-3},o:A=>40+(A.f.doc?10:0)+S.duc/4,w:{duc:2},sc:1,f:"doc",wx:"ông ở lại thêm ít ngày",l:{},lx:"ông sợ, vẫn đi",rt:"Ông thở dài: “Thêm mười ngày. Không hơn.”",rf:"Ông đã thu xếp hòm xiểng."},
+  {n:"Xin ông viết lời khai trước khi đi",c:{bac:-20},o:()=>45+S.tamco/4,w:{mat:1},sc:1,f:"know",wx:"có lời khai trên giấy",l:{},lx:"ông không dám ký tên",rt:"Ông viết, ký, đóng dấu riêng.",rf:"Ông viết nhưng không ký."},
+  {n:"Để ông đi",c:{},w:{duc:2},wx:"ông giữ được mạng",lx:"mất người làm chứng",rt:"Ngươi tiễn ông đến cửa Tây."}]},
+ c2:{h:"Hộp trâm của {v}",w:"v",need:["v"],t:"{v} gửi ngươi một hộp trâm vàng: “Chuyện ở cung {mis} chẳng liên quan đến cung ta, phải không?”",o:[
+  {n:"Nhận hộp trâm",c:{duc:-3},w:{bac:40},wx:"{v} tưởng ngươi đã im",lx:"cầm của {v} là mắc nợ {v}",go:A=>{rdRel(A,"v",5)},rt:"Ngươi cất hộp trâm dưới đáy rương."},
+  {n:"Trả nguyên hộp",c:{},w:{duc:2},wx:"tay sạch",lx:"{v} biết ngươi không mua được",go:A=>{rdOan(A,"v",6)},rt:"Hộp trâm về lại cung {v}, niêm còn nguyên."},
+  {n:"Nhận rồi trình lên Trung cung",c:{suc:-2},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"{v} lộ ý mua chuộc",l:{danh:-2},lx:"bị cho là tham rồi đổ vạ",go:(A,ok)=>{rdOan(A,"v",ok?10:6)},rt:"Trung cung giữ hộp trâm làm chứng.",rf:"{v} nói đó là quà thưởng, không có ý gì."}]},
+ t1:{h:"Điều {mis} chưa nói",w:"mis",t:"{mis} kể nốt: gói xạ hương ấy nàng lấy trộm từ tay người của cung {v}, trên đường đến bếp một phi tần đang mang thai. Nàng đốt thư Ôn thái y để giữ mạng ông. Nàng không nói ra, vì nói ra là phải kể mình đã mất con thế nào.",o:[
+  {n:"Khuyên nàng nói hết",c:{suc:-2},o:()=>35+S.duc/4,w:{duc:3},sc:1,f:"clean",wx:"{mis} chịu nói",l:{},lx:"{mis} sợ",go:(A,ok)=>CHU_MIS(ok?4:-3),rt:"{mis} gật đầu: “Nếu ngươi đứng cạnh ta.”",rf:"{mis} lắc đầu, khóc."},
+  {n:"Hứa giữ đến cùng",c:{},w:{duc:1},f:"loyal",wx:"{mis} tin ngươi trọn",lx:"việc thiện của nàng sẽ không ai biết",go:()=>CHU_MIS(8),rt:"{mis} nắm tay ngươi, không nói gì."},
+  {n:"Hỏi phi tần mang thai năm ấy là ai",c:{},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"save",wx:"có thêm một người làm chứng",l:{},lx:"{mis} sợ kéo người khác vào",rt:"Nàng là một phi tần ở Tây cung; đứa trẻ năm ấy nay đã biết đi.",rf:"{mis} không nói."}]},
+ x1:{h:"Lời khai",w:"hh",t:()=>`Đêm ấy ${CHU_Q()} hỏi lần cuối. Ngươi nói gì, {mis} sống theo lời ấy.`,o:[
+  {n:"Giữ kín, thưa không biết gì",c:{suc:-4},o:A=>40+A.sc*8+(A.f.loyal?15:0),e:["win","lose"],rt:"Không có lời khai, Trung cung không xử được {mis}.",rf:"Trung cung không tin ngươi, cho người canh giữ."},
+  {n:"Kể hết, cả điều tốt lẫn điều xấu",c:{},lx:"điều {mis} giấu không còn là của nàng",o:A=>35+(A.f.know?10:0)+(A.f.save?10:0)+S.duc/5,e:["win","mid"],rt:"Trung cung nghe đến chuyện phi tần mang thai thì đặt chén trà xuống.",rf:"Trung cung nghe hết, nhưng chưa tin nửa sau."},
+  {n:"Khai {mis} giấu xạ hương, không nói vì sao",c:{duc:-4},w:{hh:6},e:"tell",lx:"{mis} sẽ không tha",rt:"Ngươi khai đúng một nửa. Nửa kia ngươi giữ cho mình."}]}},
+ E:{win:{k:1,tag:"Bí mật còn trong tay ngươi",w:"mis",t:"Lời khai của ngươi giữ {mis} đứng vững qua đêm ấy. Trung cung biết có ẩn tình, và biết ngươi là người nắm nó.",fx:{danh:3,tamco:1},go:()=>CHU_MIS(10)},
+  mid:{k:0,tag:"Sự thật nằm trên bàn Trung cung",t:"Cả câu chuyện đã được kể. Trung cung chưa tin hết, nhưng cũng chưa xử ai.",fx:{duc:3}},
+  tell:{k:0,tag:"Đứng về phía Trung cung",w:"hh",t:"Ngươi khai nửa xấu của sự thật. Trung cung nhớ ngươi là người biết điều. {mis} nhớ ngươi là người đã bán nàng.",fx:{hh:6,danh:2},go:()=>CHU_MIS(-15)},
+  lose:{k:-1,tag:"Lời khai bị nghi",t:"Trung cung cho là ngươi và {mis} thông đồng. Cả hai bị canh giữ, chờ Thận hình ty.",fx:{danh:-4},go:()=>CHU_MIS(3)}}});
+
+rdDef("cnv_chu",10,{t:"Đêm tra hỏi",w:"eun",sj:"đêm tra hỏi ở Thận hình ty",cast(A){return rdCast(A,["v"])},
+ g:"Vụ xạ hương được giao cho Thận hình ty. Đêm nay mọi người từng hầu cung {mis} bị gọi đi hỏi, từng người một. {eun} ngồi ghế trên, người của {v} đứng sau rèm.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Roi của Thận hình ty",w:"eun",if:RDW(1),t:CHU_T("Lời ngươi đã giữ được {mis} qua một đêm. Nhưng {v} xin giao vụ cho Thận hình ty, nơi lời khai được lấy bằng roi. Tên ngươi là tên thứ ba trong danh sách.","Lời ngươi đã giữ được {mis} qua một đêm. Nhưng {v} xin giao vụ cho Thận hình ty. Ngươi nay là tiểu chủ, không ai dám đánh, nhưng {eun} xin ngươi đến «đối chứng» trong một gian phòng kín."),o:[
+  {n:"Đến sớm, xem ai bị hỏi trước",c:{suc:-2},o:()=>45+S.mat*4,w:{mat:1},sc:1,wx:"biết lời khai của người khác",l:{},lx:"bị đuổi ra",rt:"Ngươi nghe được cung nữ áo xanh đã khai trước.",rf:"Thị vệ đóng cửa trước mặt ngươi."},
+  {n:"Lo bạc cho người canh",c:{bac:-30},w:{suc:2},wx:"được ngồi chờ chỗ ấm",lx:"tốn bạc",rt:"Người canh mang cho ngươi chén nước nóng."},
+  {n:"Đi như thường, không lo lót",c:{},w:{duc:2},wx:"không ai bắt được lỗi",lx:"phải chờ cả đêm trong lạnh",rt:"Ngươi ngồi chờ đến canh ba."}]},
+ s2:{h:"Gọi tên đầu tiên",w:"eun",if:RDW(0),t:"Từ sau lời khai đêm trước, ai cũng tránh ngươi. Đêm nay Thận hình ty gọi tên ngươi đầu tiên.",o:[
+  {n:"Đi ngay, giữ bình tĩnh",c:{suc:-3},w:{duc:2},wx:"không để lộ sợ hãi",lx:"vào trước là bị hỏi kỹ nhất",rt:"Ngươi bước vào, quỳ xuống, chờ."},
+  {n:"Xin {mis} gửi người đi cùng",c:{},o:()=>35+S.duc/4,w:{tamco:1},sc:1,wx:"có người làm chứng cho ngươi",l:{},lx:"{mis} không dám",go:(A,ok)=>{if(ok)CHU_MIS(3)},rt:"{mis} gửi một ma ma già đi theo.",rf:"{mis} im lặng."},
+  {n:"Dúi bạc để được hỏi sau",c:{bac:-40},o:()=>50+S.mat*3,w:{mat:1},sc:1,wx:"biết người khác khai gì trước",l:{danh:-2},lx:"bị ghi là lo lót",rt:"Tên ngươi bị dời xuống cuối.",rf:"Thái giám nhận bạc rồi vẫn gọi ngươi."}]},
+ c1:{h:"Cung nữ áo xanh khai",w:"maid",t:"Cung nữ áo xanh của cung {v} khai: đêm ấy nàng thấy ngươi cầm gói thuốc đi về phía bếp một phi tần khác.",o:[
+  {n:"Bác lời nàng bằng giờ trực",c:{},o:()=>40+S.mat*5,w:{danh:2},sc:1,wx:"lời khai của nàng sai giờ",l:{danh:-3},lx:"giờ trực bị sửa",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Sổ trực ghi giờ ấy ngươi đang ở phòng {mis}.",rf:"Trang sổ trực đêm ấy đã bị xé."},
+  {n:"Hỏi nàng ai dạy nói",c:{suc:-3},o:()=>35+S.tamco/3,w:{tamco:2},sc:1,wx:"nàng run, khai sai thêm",l:{},lx:"bị cho là ép nhân chứng",rt:"Nàng nhìn về phía rèm, nơi người của {v} đứng.",rf:"Nàng khóc to, {eun} quát ngươi im."},
+  {n:"Im lặng, chờ người khác bác",c:{},w:{duc:1},wx:"không tự làm rối",lx:"lời nàng ở lại trong hồ sơ",rt:"Ngươi chỉ cúi đầu."}]},
+ c2:{h:"Ôn thái y bị giữ",w:"doc",t:"Ôn thái y bị giữ ở Thận hình ty. Ông già yếu, không chịu nổi roi.",o:[
+  {n:"Lo bạc cho ông bớt roi",c:{bac:-40},w:{duc:3},wx:"ông còn sức để khai",lx:"tốn bạc",rt:"Người coi ngục nhận bạc, cho ông nằm chỗ khô."},
+  {n:"Xin {eun} cho gặp ông",c:{suc:-2},o:()=>40+S.danh/4,w:{mat:1},sc:1,f:"know",wx:"nghe ông dặn lời cuối",l:{},lx:"bị nghi thông cung",rt:"Ông thì thầm: “Lời khai của ta ở chỗ {mis}. Ta đã viết từ năm ngoái.”",rf:"{eun} lắc đầu."},
+  {n:"Mặc ông tự khai",c:{},w:{tamco:1},wx:"không dính tay",lx:"ông có thể khai sai vì sợ",rt:"Ngươi không đến."}]},
+ t1:{h:"{eun} ra giá",w:"eun",t:"{eun} nói khẽ: “Vụ này lên đến Hoàng thượng là có người mất đầu. Ta khép được nó, nếu có người nhận một tội nhỏ: giữ thuốc không báo.”",o:[
+  {n:"Nhận tội nhỏ thay chủ",c:{danh:-3},w:{duc:2},f:"loyal",wx:"{mis} thoát",lx:"tên ngươi vào sổ tội",go:()=>CHU_MIS(8),rt:"{eun} gật đầu, ghi một dòng."},
+  {n:"Không nhận, đòi xét đến cùng",c:{suc:-2},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"clean",wx:"{eun} không dám ép",l:{},lx:"{eun} ghi nhớ ngươi",rt:"{eun} cười: “Gan đấy.”",rf:"{eun} nói: “Vậy thì cứ hỏi tiếp.”"},
+  {n:"Đưa bạc cho y khép vụ",c:{bac:-60},o:()=>45+S.mat*3,w:{tamco:1},sc:1,wx:"vụ được khép êm",l:{danh:-3},lx:"y lấy bạc mà không khép",rt:"{eun} cất bạc, gật đầu.",rf:"{eun} cất bạc, rồi vẫn hỏi tiếp."}]},
+ x1:{h:"Đối chứng",w:"eun",t:()=>`Canh tư, {eun} cho ngươi đứng đối mặt cung nữ áo xanh, trước người của {v} và người của ${CHU_Q()}.`,o:[
+  {n:"Đưa sổ xuất kho và lời Ôn thái y",c:{suc:-4},o:A=>35+A.sc*8+(A.f.know?10:0)+S.mat*4,e:["win","lose"],rt:"Sổ ghi tên cung {v}. Cung nữ áo xanh quỳ sụp.",rf:"Lời Ôn thái y không có dấu, {eun} gạt đi."},
+  {n:"Giữ một lời: không biết",c:{},lx:"cung {v} không bị đụng đến",o:A=>45+S.tamco/5,e:["mid","lose"],rt:"Không ai bẻ được lời ngươi. Vụ treo lại.",rf:"Cung nữ áo xanh khai thêm, ngươi không có gì để bác."},
+  {n:"Xin dâng chuyện lên Hoàng thượng",c:{suc:-4},o:A=>35+A.sc*6+CHU_E()/4+S.danh/6,e:["win","mid"],go:(A,ok)=>ok?CHU_NT(9):"",rt:"Hoàng thượng nghe chuyện, cho đòi hồ sơ lên ngự án.",rf:"Lời xin bị giữ lại ở Nội vụ phủ."}]}},
+ E:{win:{k:1,tag:"Lời khai lật ngược",w:"eun",t:"Mũi tra hỏi quay về cung {v}. Cung nữ áo xanh khai ra ai đã sai nàng. {mis} được nới cấm túc.",fx:{danh:4},go:A=>{rdOan(A,"v",10);CHU_MIS(8);return e67merit(5)}},
+  mid:{k:0,tag:"Vụ án treo lại",t:"Không ai bị kết tội, không ai được rửa. Hồ sơ nằm trên bàn {eun}, chờ một tay đẩy.",fx:{tamco:1}},
+  lose:{k:-1,tag:"{mis} bị kết tội giữ xạ hương",w:"mis",t:"Thận hình ty kết tội {mis} giữ xạ hương không báo. Nàng bị cấm túc, ngươi bị ghi tên là người biết mà không nói.",fx:{danh:-4},go:()=>CHU_MIS(-4)}}});
+
+rdDef("cnv_chu",11,{t:"Dao hai lưỡi",w:"mis",sj:"bí mật của {mis}",cast(A){return rdCast(A,["v"])},
+ g:"Vụ xạ hương đi đến hồi cuối. Bí mật của {mis} sẽ thành ơn hay thành tội, và ngươi đứng ở đâu khi nó ngã xuống. Đây là kết cục truyện xuất thân của ngươi.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Trước khi trời sáng",w:"mis",if:RDW(1),t:CHU_T("Thận hình ty đã quay mũi về cung {v}. {mis} được nới cấm túc, đến tìm ngươi ở phòng kẻ hầu lúc trời chưa sáng: “Ngày mai Hoàng thượng hỏi. Ta muốn ngươi đứng cạnh ta.”","Thận hình ty đã quay mũi về cung {v}. {mis} được nới cấm túc, đến cung ngươi lúc trời chưa sáng: “Ngày mai Hoàng thượng hỏi. Ta muốn muội đứng cạnh ta.”"),o:[
+  {n:"Nhận lời đứng cạnh nàng",c:{},w:{duc:2},f:"loyal",wx:"{mis} vững lòng",lx:"buộc mình vào số phận nàng",go:()=>CHU_MIS(6),rt:"{mis} siết tay ngươi."},
+  {n:"Xin đứng riêng, nói riêng",c:{},w:{tamco:2},f:"self",wx:"giữ đường lui cho mình",lx:"{mis} buồn",go:()=>CHU_MIS(-3),rt:"{mis} gật đầu chậm: “Ừ. Ngươi cũng phải sống.”"},
+  {n:"Hỏi nàng muốn nói đến đâu",c:{suc:-2},o:()=>40+S.duc/4,w:{mat:1},sc:1,wx:"biết nàng dám nói hết",l:{},lx:"nàng còn do dự",rt:"{mis} nói: “Đến đứa con. Hết.”",rf:"{mis} nói: “Ta chưa biết.”"}]},
+ s2:{h:"Cây trâm gãy",w:"mis",if:RDW(0),t:"{mis} vẫn bị giam lỏng. Nàng nhờ người mang đến cho ngươi một cây trâm gãy đôi: “Còn một việc ta chỉ nhờ được ngươi.”",o:[
+  {n:"Nhận trâm, nghe việc",c:{},w:{duc:2},f:"loyal",wx:"{mis} còn tin ngươi",lx:"nhận là phải làm",go:()=>CHU_MIS(5),rt:"Việc ấy là tìm người mẹ năm xưa ở Tây cung."},
+  {n:"Gửi trả trâm",c:{},w:{tamco:1},f:"self",wx:"rút chân khỏi vụ án",lx:"{mis} chỉ còn một mình",go:()=>CHU_MIS(-6),rt:"Ngươi gói trâm lại, gửi trả."},
+  {n:"Đến tận nơi gặp nàng",c:{bac:-30},o:()=>40+S.mat*5,w:{mat:1},sc:1,wx:"nghe tận miệng nàng",l:{danh:-2},lx:"bị bắt vì vào nơi cấm",rt:"{mis} gầy rộc, nhưng mắt vẫn sáng.",rf:"Thị vệ giữ ngươi lại ở cửa."}]},
+ c1:{h:"Người mẹ ở Tây cung",w:"me",t:"Phi tần ở Tây cung năm ấy nay đã có một đứa con biết đi. Nàng chưa từng biết có gói xạ hương trên đường đến bếp mình.",o:[
+  {n:"Xin nàng làm chứng",c:{suc:-3},o:()=>35+S.danh/4,w:{danh:2},sc:1,f:"good",wx:"có người được cứu đứng ra",l:{},lx:"nàng sợ, đóng cửa",rt:"Nàng ôm con, nói: “Ta sẽ đến.”",rf:"Nàng sai người đóng cổng."},
+  {n:"Kể cho nàng biết ai đã cứu con nàng",c:{},w:{duc:3},f:"good",wx:"nàng mang ơn {mis}",lx:"thêm một người biết chuyện",rt:"Nàng khóc, gửi tặng {mis} một chiếc khóa vàng."},
+  {n:"Không kéo nàng vào",c:{},w:{duc:1},wx:"mẹ con nàng được yên",lx:"mất một nhân chứng",rt:"Ngươi đứng nhìn đứa trẻ chơi trong sân, rồi đi."}]},
+ c2:{h:"{v} cầu hòa",w:"v",need:["v"],t:"{v} sai người đến: “Dừng ở đây. Cung ta sẽ không bao giờ đụng đến ngươi nữa.”",o:[
+  {n:"Nhận lời giảng hòa",c:{duc:-2},w:{suc:3},wx:"một kẻ thù bớt đi",lx:"cái chết của đứa trẻ năm ấy không ai trả",go:A=>{rdRel(A,"v",10)},rt:"{v} gửi thêm một hộp trà."},
+  {n:"Từ chối, giữ đường cũ",c:{},w:{duc:2},wx:"không bán sự thật",lx:"{v} dốc hết sức chống lại",go:A=>{rdOan(A,"v",8)},rt:"Ngươi để người đưa tin đứng chờ ở cửa đến tối."},
+  {n:"Giả nhận để {v} lơi tay",c:{},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,wx:"{v} không chuẩn bị gì cho ngày mai",l:{danh:-2},lx:"{v} biết bị lừa",go:(A,ok)=>{rdOan(A,"v",ok?10:6)},rt:"{v} tin, cho người canh về nghỉ.",rf:"{v} cười: “Ngươi tưởng ta ngốc?”"}]},
+ t1:{h:"Câu hỏi của {mis}",w:"mis",t:"{mis} hỏi: “Nếu chỉ một người được đứng dậy sau chuyện này, ngươi muốn là ai?”",o:[
+  {n:"Đáp: là chủ nhân",c:{},w:{duc:2},f:"loyal",wx:"{mis} nhớ suốt đời",lx:"đặt mình xuống dưới",go:()=>CHU_MIS(6),rt:"{mis} quay đi lau mắt."},
+  {n:"Đáp: là cả hai",c:{},w:{tamco:1},f:"both",wx:"{mis} thấy ngươi không bỏ ai",lx:"đòi cả hai là có thể mất cả hai",go:()=>CHU_MIS(3),rt:"{mis} cười: “Tham thật.”"},
+  {n:"Đáp: là chính mình",c:{duc:-2},w:{tamco:2},f:"self",wx:"nói thật lòng",lx:"{mis} lạnh đi",go:()=>CHU_MIS(-5),rt:"{mis} gật đầu: “Ít nhất ngươi không nói dối.”"}]},
+ x1:{h:"Trước ngự án",w:"emp",t:"Hồ sơ vụ xạ hương lên đến ngự án. Hoàng thượng cho gọi {mis}, cho gọi cả ngươi.",o:[
+  {n:"Nói hết, xin công cho {mis}",c:{suc:-5},o:A=>35+A.sc*8+(A.f.loyal?10:0)+(A.f.good?10:0)+S.duc/6,e:["win","both"],rt:"Hoàng thượng nghe đến đứa trẻ ở Tây cung thì đứng dậy.",rf:"Hoàng thượng nghe, nhưng không có chứng, ngài chỉ thở dài."},
+  {n:"Nói phần mình, để {mis} tự gánh phần nàng",c:{},lx:"{mis} đứng một mình",o:A=>40+(A.f.self?10:0)+S.tamco/5+CHU_E()/6,e:["rise","both"],rt:"Hoàng thượng nhớ ngươi là người nói thật đầu tiên.",rf:"Lời ngươi lẫn vào lời mọi người."},
+  {n:"Xin Hoàng thượng khép vụ, không truy",c:{},w:{duc:3},e:"both",lx:"không ai được rửa tiếng",rt:"Hoàng thượng phẩy tay: “Khép.”"}]}},
+ E:{win:{k:1,tag:"Tâm phúc trọn đời của {mis}",w:"mis",t:"Hoàng thượng biết gói xạ hương năm ấy đã cứu một long thai. {mis} được rửa tiếng, cung {v} bị phạt cấm túc. Từ nay {mis} gọi ngươi là người nhà, và đi đâu cũng nhắc tên ngươi trước mặt Hoàng thượng.",fx:{danh:8,duc:3},go:A=>{rdOan(A,"v",12);CHU_MIS(25);const r=CHU_NT(15);return [r,e67merit(8)].filter(Boolean).join(" ")}},
+  rise:{k:0,tag:"{mis} ngã, ngươi đứng lên",w:"emp",t:"{mis} bị phạt bổng một năm vì giữ xạ hương không báo. Hoàng thượng nhớ ngươi là người nói thật trước mặt ngài. Ngươi bước lên, còn {mis} ở lại phía sau, nhìn theo.",fx:{danh:5},go:()=>{CHU_MIS(-20);return CHU_NT(18)}},
+  both:{k:-1,tag:"Chủ tớ cùng lùi một bước",t:"Vụ án khép lại, không ai được rửa tiếng. {mis} bị phạt bổng, ngươi bị ghi tên trong sổ tội nhỏ của Nội vụ phủ. Hai người lặng lẽ sống tiếp, mỗi người mang một nửa bí mật.",fx:{danh:-4},go:()=>CHU_MIS(5)}}});
+RD97L.push({a:"cnv_chu_11",tag:"Việc thiện trong bóng tối",w:"emp",p:.12,n:"Xin Hoàng thượng cho gọi người mẹ ở Tây cung đến",c:{suc:-4},
+ path:["Kể cho nàng biết ai đã cứu con nàng","Xin nàng làm chứng","Đáp: là cả hai","Đáp: là chủ nhân","Từ chối, giữ đường cũ","Nhận lời đứng cạnh nàng","Nhận trâm, nghe việc"],np:2,bad:["Đáp: là chính mình","Nhận lời giảng hòa","Gửi trả trâm"],sc:2,x:[()=>S.duc>=40,"Đức từ 40"],
+ t:"Người mẹ ở Tây cung bế con quỳ trước ngự án: “Nếu không có nàng ấy, đứa trẻ này đã không được sinh ra.” Hoàng thượng lặng đi rất lâu. Ngài ban cho {mis} một chữ «Nhân» viết tay, và khi {mis} xin chia công, ngài cho gọi cả ngươi lên nhận thưởng. Từ đó trong cung ai cũng biết: hai người đã giữ một việc thiện suốt bao năm mà không đòi ai trả.",
+ fx:{danh:12,duc:4},go:A=>{CHU_MIS(30);try{rdOan(A,"v",12)}catch(e){}return CHU_NT(20)},rw:"nt_dongchau",ti:"Người giữ việc thiện"});

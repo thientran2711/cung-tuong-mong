@@ -37,7 +37,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
  B:{s1:{h:"Thái y bắt mạch",w:"doc",t:"Thái y bắt mạch xong, ngập ngừng: “Mạch nương nương hơi hàn, chưa phải hết đường. Có điều phải kiên nhẫn, lại tốn kém.”",o:[
   {n:"Xin bài thuốc dài ngày",c:{bac:-50},w:{},wx:"dễ thụ thai hơn trong mấy tháng tới",lx:"thuốc đắng, tốn bạc",go:()=>{S.fert=Math.max(S.fert||0,BAL.road.end.fertM)},rt:"Thái y kê đơn, dặn uống đủ ba tháng."},
   {n:"Giữ kín bệnh mạch",c:{suc:-3},o:()=>45+S.mat*5,w:{danh:2},sc:1,wx:"không ai biết ngươi lo",l:{danh:-3},lx:"chuyện lộ ra thì thành chuyện cười",rt:"Thái y hứa không ghi vào sổ mạch.",rf:"Sổ mạch đến tay người khác."},
-  {n:"Cảm tạ, không chữa",c:{},w:{duc:3},wx:"lòng yên, không tốn bạc",lx:"bỏ một cơ hội",rt:"Ngươi đóng hộp thuốc, bảo thái y lui."}]},
+  {n:"Cảm tạ, không chữa",c:{th:-2},w:{duc:3},wx:"lòng yên, không tốn bạc",lx:"Thái hậu trách ngươi không lo hương hỏa",rt:"Ngươi đóng hộp thuốc, bảo thái y lui."}]},
  s2:{h:"Lời bàn sau lưng",w:"v",need:["v"],t:"Ở tiệc thưởng hoa, {v} bế con ngồi cạnh Thái hậu, cười: “Cung của tỷ tỷ yên tĩnh thật, chẳng như cung muội, cả ngày ồn tiếng trẻ.”",o:[
   {n:"Cười đáp, khen đứa trẻ",c:{suc:-2},w:{duc:3},wx:"giữ thể diện",lx:"{v} được thế lấn tới",rt:"Thái hậu gật gù: ngươi biết điều."},
   {n:"Đáp trả một câu",c:{},o:()=>40+S.tamco/3,w:{danh:2},sc:1,wx:"{v} cứng họng",l:{danh:-3},lx:"thành kẻ ghen con người",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Cả bàn tiệc lặng đi, {v} đỏ mặt.",rf:"Thái hậu nhíu mày: ngươi hẹp lượng."},
@@ -46,9 +46,9 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
   {n:"Chép kinh bảy ngày",c:{suc:-5},w:{th:4},wx:"Thái hậu thấy ngươi thành tâm; dễ có thai hơn",lx:"bảy ngày không gặp được Hoàng thượng",go:()=>{S.pray=Math.max(S.pray||0,BAL.road.end.prayM)},rt:"Bảy ngày qua, hương trong điện không tắt."},
   {n:"Cúng dường chùa ngoài cung",c:{bac:-40},w:{danh:3},wx:"tiếng hiền đức ra ngoài",lx:"tốn bạc",rt:"Chùa dựng bia ghi tên công đức của ngươi."},
   {n:"Thưa: mệnh có thì tự đến",c:{th:-3},w:{duc:2},wx:"không ép mình",lx:"Thái hậu cho là ngươi cứng đầu",rt:"Thái hậu thở dài, không nói thêm."}]},
- c2:{h:"Công chúa mất mẹ",w:"th",need:["th"],t:"Một công chúa nhỏ vừa mất mẹ. Thái hậu hỏi ai trong lục cung chịu trông nom nó những ngày đầu.",o:[
+ c2:{h:"Công chúa mất mẹ",w:"th",need:["th"],if:()=>allKids().some(([k,v])=>v&&k.alive&&k.sex==="f"&&(!v.alive||v.out)),t:"Một công chúa nhỏ vừa mất mẹ. Thái hậu hỏi ai trong lục cung chịu trông nom nó những ngày đầu.",o:[
   {n:"Xin được trông nom",c:{suc:-4,bac:-20},w:{th:6,duc:3},wx:"Thái hậu thấy ngươi có lòng",lx:"thêm việc, thêm tốn",rt:"Đứa bé ôm cổ ngươi ngủ thiếp đi."},
-  {n:"Nhường người có con",c:{},w:{duc:1},wx:"không vướng chuyện nhà người",lx:"bỏ lỡ lòng Thái hậu",rt:"Thái hậu giao đứa bé cho người khác."},
+  {n:"Nhường người có con",c:{th:-3},w:{duc:1},wx:"không vướng chuyện nhà người",lx:"Thái hậu quý ngươi bớt đi",rt:"Thái hậu giao đứa bé cho người khác."},
   {n:"Tiến cử một phi tần hiền",c:{suc:-2},o:()=>45+S.danh/5,w:{danh:3},sc:1,wx:"được hai người mang ơn",l:{th:-2},lx:"người kia làm hỏng việc",rt:"Thái hậu khen ngươi biết người.",rf:"Người ngươi tiến cử để đứa bé ốm."}]},
  c3:{h:"Hoàng thượng thăm cung",w:"emp",t:"Hoàng thượng ghé cung ngươi, ngồi lâu hơn thường lệ: “Cung nàng yên quá. Trẫm có khi lại cần một chỗ yên như thế.”",o:[
   {n:"Giữ ngài ở lại dùng bữa",c:{bac:-20},w:{sung:5},wx:"ngài vui",lx:"tốn bạc bày tiệc",rt:"Đêm ấy ngài nghỉ lại cung ngươi."},
@@ -77,15 +77,15 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi
  s4:{h:"Lục cung chờ xem",w:"me",if:A=>egQueen()&&!rv67(A,"v"),t:"Ngươi ngồi ngôi Trung cung chưa lâu. Lục cung cung kính, nhưng ai cũng chờ xem ngươi trị việc ra sao, có thiên vị ai không.",o:[
   {n:"Định lại lệ lục cung",c:{suc:-4},o:()=>40+S.tai/3,w:{danh:4},sc:1,wx:"lục cung nề nếp",l:{danh:-3},lx:"lệ mới làm nhiều người phật ý",rt:"Lệ mới được chép thành sổ, ai cũng theo.",rf:"Mấy cung than phiền, lệ mới bỏ dở."},
   {n:"Giữ lệ cũ, ban ơn đều tay",c:{bac:-40},w:{duc:3},wx:"lục cung yên",lx:"tốn bạc",rt:"Lục cung khen ngươi công bằng."},
-  {n:"Nhờ Thái hậu chỉ bảo",c:{},w:{th:4},wx:"Thái hậu vui",lx:"bị coi là chưa tự đứng được",rt:"Thái hậu dạy ngươi từng việc."}]},
- s2:{h:"Trung cung lung lay",w:"hh",if:()=>!egQueen()&&qOn(),t:"Hoàng hậu {hh} ốm đã lâu, việc lục cung bỏ bê. Trong triều đã có người dâng sớ xin chọn người phụ việc Trung cung.",o:[
-  {n:"Xin vào hầu bệnh Hoàng hậu",c:{suc:-5},w:{hh:6,duc:3},wx:"Hoàng hậu và Thái hậu thấy ngươi trung hậu",lx:"mất nhiều ngày bên giường bệnh",rt:"Hoàng hậu nắm tay ngươi: “Muội có lòng.”"},
+  {n:"Nhờ Thái hậu chỉ bảo",c:{danh:-2},w:{th:4},wx:"Thái hậu vui",lx:"Danh giảm: bị coi là chưa tự đứng được",rt:"Thái hậu dạy ngươi từng việc."}]},
+ s2:{h:"Trung cung lung lay",w:"hh",if:()=>!egQueen()&&qOn(),t:"Trong triều có người dâng sớ chê việc lục cung dưới tay Hoàng hậu {hh} bê trễ, xin chọn người phụ việc Trung cung.",o:[
+  {n:"Xin vào giúp Hoàng hậu",c:{suc:-5},w:{hh:6,duc:3},wx:"Hoàng hậu thấy ngươi trung hậu",lx:"mất nhiều ngày làm việc không công",rt:"Hoàng hậu nắm tay ngươi: “Muội có lòng.”"},
   {n:"Xin phụ việc lục cung",c:{hh:-6},o:()=>40+S.tai/3+S.danh/5,w:{danh:4},sc:1,wx:"tay nắm việc lục cung",l:{duc:-3},lx:"bị nói là nhòm ngó ngôi Trung cung",rt:"Hoàng thượng giao ngươi coi sổ lục cung một mùa.",rf:"Hoàng thượng chọn {v}."},
-  {n:"Đứng ngoài, chờ thời",c:{},w:{tamco:2},wx:"không để lộ ý",lx:"người khác nhanh chân hơn",rt:"Ngươi đóng cửa cung, chỉ nghe ngóng."}]},
+  {n:"Đứng ngoài, chờ thời",c:{danh:-2},w:{tamco:2},wx:"không để lộ ý",lx:"Danh giảm: người khác nhanh chân hơn",rt:"Ngươi đóng cửa cung, chỉ nghe ngóng."}]},
  s3:{h:"Ngôi Trung cung bỏ trống",w:"emp",if:()=>!egQueen()&&!qOn(),t:"Ngôi Trung cung đã trống. Triều đình chia phe: phe muốn lập người có hoàng tử, phe muốn lập người nhà thế gia, phe chờ ý Thái hậu.",o:[
   {n:"Nhờ nhà mình vận động triều thần",c:{bac:-50},o:()=>40+S.danh/4,w:{danh:3},sc:1,wx:"có tiếng nói trong triều",l:{sung:-3},lx:"Hoàng thượng ghét hậu cung kết bè ngoài triều",rt:"Mấy vị Thượng thư dâng sớ nhắc tên ngươi.",rf:"Ngự sử hặc nhà ngươi kết bè."},
   {n:"Thỉnh an Thái hậu mỗi sáng",c:{suc:-4},w:{th:6},wx:"Thái hậu nhớ đến ngươi",lx:"không có thời gian cho việc khác",rt:"Thái hậu khen ngươi biết lễ."},
-  {n:"Không động tĩnh gì",c:{},w:{duc:3},wx:"tiếng không tham ngôi",lx:"không ai nhắc tên ngươi",rt:"Ngươi vẫn sống như mọi ngày."}]},
+  {n:"Không động tĩnh gì",c:{danh:-3},w:{duc:3},wx:"tiếng không tham ngôi",lx:"Danh giảm: không ai nhắc tên ngươi",rt:"Ngươi vẫn sống như mọi ngày."}]},
  c1:{h:"{v} tung lời đồn",w:"v",need:["v"],t:"Khắp lục cung râm ran: nhà ngươi từng nhận hối lộ, ngươi không đủ đức làm mẫu nghi. Ai cũng biết lời ấy từ cung {v} mà ra.",o:[
   {n:"Tìm kẻ tung tin",c:{bac:-30},o:()=>45+S.mat*5,w:{danh:3},sc:1,wx:"rửa được tiếng",l:{danh:-3},lx:"không tìm ra, tiếng càng xấu",go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Cung nữ tung tin khai ra cung {v}.",rf:"Kẻ tung tin trốn mất."},
   {n:"Lấy việc thiện mà đáp",c:{bac:-40},w:{duc:5},wx:"việc thiện át lời đồn",lx:"tốn bạc, lời đồn vẫn còn",rt:"Ngươi phát gạo cho cung nhân già, lời đồn tự lặng."},
@@ -93,11 +93,11 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi
  c2:{h:"Sổ lễ Thái miếu",w:"th",need:["th"],t:"Sắp đến đại lễ Thái miếu. Thái hậu muốn xem ai trong lục cung lo nổi việc sắp đặt lễ nghi cho đúng phép.",o:[
   {n:"Nhận lo việc lễ",c:{suc:-6},o:()=>40+S.tai/3+S.duc/5,w:{th:6,danh:3},sc:1,wx:"Thái hậu thấy ngươi đủ sức gánh việc",l:{th:-4},lx:"sai một lễ là mất mặt cả đời",rt:"Đại lễ trọn vẹn, không sai một bước.",rf:"Một bài vị đặt sai chỗ, Thái hậu không vui."},
   {n:"Dâng bạc lo lễ",c:{bac:-60},w:{th:3},wx:"lễ chu toàn",lx:"tốn bạc, công không về tay ngươi",rt:"Thái hậu nhận bạc, khen ngươi biết điều."},
-  {n:"Nhường {v} lo lễ",c:{},if:A=>!!rv67(A,"v"),w:{duc:2},wx:"không phải gánh việc",lx:"{v} lấy được lòng Thái hậu",rt:"{v} nhận việc, liếc ngươi đắc ý."}]},
+  {n:"Nhường {v} lo lễ",c:{th:-3},if:A=>!!rv67(A,"v"),w:{duc:2},wx:"không phải gánh việc",lx:"{v} lấy được lòng Thái hậu, Thái hậu quý ngươi bớt đi",rt:"{v} nhận việc, liếc ngươi đắc ý."}]},
  t1:{h:"Sớ lập hậu",w:"emp",t:"Một bản sớ lập hậu được dâng lên. Trong sớ có tên ngươi, có tên {v}. Hoàng thượng chưa phê.",o:[
   {n:"Nhờ Thái hậu nói giúp",c:{th:-5},o:()=>40+S.th/3,w:{danh:3},sc:1,wx:"Thái hậu lên tiếng",l:{sung:-2},lx:"Hoàng thượng không thích bị ép",rt:"Thái hậu nói với Hoàng thượng một câu.",rf:"Thái hậu bảo việc này để Hoàng thượng định."},
   {n:"Dâng một bài trần tình",c:{suc:-3},o:()=>40+S.tai/3,w:{sung:3},sc:1,wx:"ngài thấy lòng ngươi",l:{danh:-2},lx:"bị nói là tự tiến cử",rt:"Hoàng thượng đọc đi đọc lại bài trần tình.",rf:"Bài trần tình bị trả lại không phê."},
-  {n:"Im lặng chờ thánh ý",c:{},w:{duc:3},wx:"tiếng không tranh",lx:"phe kia nói nhiều hơn",rt:"Ngươi không nói một lời."}]},
+  {n:"Im lặng chờ thánh ý",c:{sung:-2},w:{duc:3},wx:"tiếng không tranh",lx:"Sủng giảm: phe kia nói nhiều hơn",rt:"Ngươi không nói một lời."}]},
  x1:{h:"Thánh ý",w:"emp",t:A=>egQueen()?"Hoàng thượng triệu ngươi và {v} cùng đến điện. Ngài hỏi: lục cung loạn đã lâu, lỗi tại ai?":"Hoàng thượng triệu ngươi đến điện, hỏi: “Nếu trẫm giao lục cung cho nàng, nàng lấy gì giữ nó yên?”",o:[
   {n:"Thưa: lấy đức mà giữ",c:{suc:-5},o:()=>35+S.duc/3+S.th/6,e:["win","mid"],rt:"Hoàng thượng gật đầu thật lâu.",rf:"Hoàng thượng nói: đức thì ai cũng tự xưng."},
   {n:"Thưa: lấy phép mà giữ",c:{suc:-5},o:()=>35+S.tamco/3+S.danh/6,e:["win","lose"],rt:"Hoàng thượng thấy ngươi cứng rắn, đủ sức trị lục cung.",rf:"Hoàng thượng lắc đầu: nàng quá cứng."},
@@ -109,7 +109,7 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi
 /* ---------- ch14 · ke14 · Mẫu nghi thiên hạ ---------- */
 ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi Đông cung",cast(A){return egMomRv(A)},
  g:()=>egHeirMine()?"Con ngươi đã là Thái tử, nhưng ngôi Đông cung là ngôi bị nhắm nhiều nhất. Giữ được con đến ngày lên ngôi, ngươi thành Hoàng thái hậu.":mySons().length?"Đưa con mình lên ngôi Đông cung: Hoàng thượng thương con, triều thần tin con, các bà mẹ khác không hại được con. Khi con lên ngôi, ngươi thành Hoàng thái hậu.":"Không có hoàng tử của riêng mình, ngươi làm mẹ của cả lục cung: con của ai cũng là con trong nhà. Mẫu nghi thiên hạ là đức, không chỉ là ngôi.",
- p:[["s1","s2","s3"],["c1","c2","G.th","G.emp"],["t1"],["x1"]],
+ p:[["s1","s2","s3","s4"],["c1","c2","G.th","G.emp"],["t1"],["x1"]],
  B:{s1:{h:"Đông cung bị nhắm",w:"kid",if:()=>egHeirMine(),t:"Thái tử {k} vừa khỏi một trận sốt lạ. Thái y nói khẽ: món điểm tâm hôm ấy không do Ngự thiện phòng làm.",o:[
   {n:"Đổi hết người hầu Đông cung",c:{bac:-40,suc:-3},w:{mat:1},wx:"Đông cung kín kẽ hơn",lx:"người vô tội cũng bị đuổi",rt:"Đông cung thay người mới, toàn người ngươi chọn."},
   {n:"Lần theo món điểm tâm",c:{suc:-4},o:()=>45+S.mat*5,if:A=>!!rv67(A,"v"),w:{danh:3},sc:1,wx:"tìm ra kẻ ra tay",l:{danh:-3},lx:"đánh động mà không bắt được ai",go:(A,ok)=>{if(ok)rdOan(A,"v",10)},rt:"Dấu vết dẫn về cung {v}.",rf:"Kẻ đưa điểm tâm đã bị diệt khẩu."},
@@ -117,14 +117,18 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
  s2:{h:"Ngôi Đông cung còn ngỏ",w:"emp",if:()=>!egHeirMine()&&mySons().length>0,t:"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, cũng nhắc đến con của {v}.",o:[
   {n:"Mời thầy giỏi dạy {k}",c:{bac:-50},w:{},wx:"con tiến bộ, Hoàng thượng để ý",lx:"tốn bạc",go:()=>e67heir(6),rt:"Thầy mới khen {k} sáng dạ."},
   {n:"Cho {k} theo Hoàng thượng đi săn",c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:2},wx:"con được ngài để mắt",l:{sung:-3},lx:"con ngã ngựa thì ngươi mang tiếng",go:(A,ok)=>ok?e67heir(8):"",rt:"{k} bắn trúng một con nai, Hoàng thượng cười lớn.",rf:"{k} sợ ngựa, Hoàng thượng nhíu mày."},
-  {n:"Dặn con giữ mình, chưa tranh",c:{},w:{duc:3},wx:"con không thành bia",lx:"người khác đi trước",rt:"{k} gật đầu, lặng lẽ học bài."}]},
- s3:{h:"Mẹ của lục cung",w:"th",if:()=>!mySons().length,t:"Mùa đông năm ấy rét đậm, mấy hoàng tự nhỏ ốm liền. Thái hậu hỏi: ai trong lục cung đứng ra lo cho bọn trẻ?",o:[
+  {n:"Dặn con giữ mình, chưa tranh",c:{},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"{k} gật đầu, lặng lẽ học bài."}]},
+ s3:{h:"Mẹ của lục cung",w:"th",if:()=>!mySons().length&&allKids().some(([k,v])=>v&&k.alive),t:"Mùa đông năm ấy rét đậm, mấy hoàng tự nhỏ ốm liền. Thái hậu hỏi: ai trong lục cung đứng ra lo cho bọn trẻ?",o:[
   {n:"Đứng ra lo cho các hoàng tự",c:{suc:-5,bac:-30},w:{th:5,danh:3},wx:"lục cung gọi ngươi là mẹ hiền",lx:"mệt và tốn",rt:"Bọn trẻ khỏi bệnh, mẹ chúng tạ ơn ngươi."},
   {n:"Mời thái y giỏi nhất",c:{bac:-50},w:{danh:3},wx:"việc chu toàn",lx:"tốn bạc",rt:"Thái y túc trực, không đứa nào nặng thêm."},
-  {n:"Để các bà mẹ tự lo",c:{},w:{suc:3},wx:"không vướng",lx:"Thái hậu thấy ngươi vô tình",rt:"Ngươi chỉ gửi thuốc bổ."}]},
+  {n:"Để các bà mẹ tự lo",c:{th:-4},w:{suc:3},wx:"không vướng",lx:"Thái hậu quý ngươi bớt: thấy ngươi vô tình",rt:"Ngươi chỉ gửi thuốc bổ."}]},
+ s4:{h:"Cung nhân già yếu",w:"me",if:()=>!mySons().length&&!allKids().some(([k,v])=>v&&k.alive),t:"Mùa đông rét đậm. Ở Tây sở, mấy chục cung nhân già yếu không người chăm, không áo ấm. Chuyện đến tai ngươi trước tiên.",o:[
+  {n:"Đứng ra lo cho họ",c:{suc:-5,bac:-30},w:{th:4,danh:3},wx:"cả cung gọi ngươi là mẹ hiền",lx:"mệt và tốn",rt:"Tây sở ấm lửa suốt mùa đông."},
+  {n:"Tâu Nội vụ phủ cấp thêm",c:{suc:-2},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"việc công lo việc công",l:{danh:-2},lx:"Nội vụ phủ chối, ngươi mất mặt",rt:"Nội vụ phủ phát thêm than củi.",rf:"Nội vụ phủ đáp: không có lệ ấy."},
+  {n:"Gửi chút bạc rồi thôi",c:{bac:-10},w:{duc:1},wx:"đỡ được phần nào",lx:"tốn chút bạc, người ta chê qua loa",rt:"Bạc đến tay họ, nhưng không đủ."}]},
  c1:{h:"Bà mẹ của hoàng tử khác",w:"v",need:["v"],t:"{v} đến cung ngươi, nụ cười rất ngọt: “Bọn trẻ lớn cả rồi. Tỷ tỷ với muội nên cùng một lòng, đừng để người ngoài chia rẽ.”",o:[
   {n:"Bắt tay với {v}",c:{duc:-2},o:()=>40+S.tamco/3,w:{danh:2},sc:1,wx:"bớt một phe chống",l:{danh:-3},lx:"{v} lợi dụng ngươi",go:(A,ok)=>{rdRel(A,"v",ok?12:-6)},rt:"Hai cung từ nay qua lại.",rf:"{v} đem chuyện hai người kể với triều thần."},
-  {n:"Từ chối khéo",c:{},w:{tamco:2},wx:"không bị ràng buộc",lx:"{v} biết ngươi đề phòng",go:A=>{rdOan(A,"v",4)},rt:"Ngươi rót trà, nói chuyện hoa cỏ."},
+  {n:"Từ chối khéo",c:{danh:-1},w:{tamco:2},wx:"không bị ràng buộc",lx:"{v} oán ngươi đề phòng",go:A=>{rdOan(A,"v",4)},rt:"Ngươi rót trà, nói chuyện hoa cỏ."},
   {n:"Dò ý nàng ta",c:{suc:-3},o:()=>45+S.mat*5,w:{mat:1},sc:1,wx:"biết {v} đang tính gì",l:{danh:-2},lx:"{v} nhận ra",rt:"{v} lỡ lời nhắc đến một nhà quyền thần.",rf:"{v} cười, không để lộ gì."}]},
  c2:{h:"Năm mất mùa",w:"emp",t:"Phương nam mất mùa, dân đói kéo về kinh. Hoàng thượng muốn hậu cung làm gương tiết kiệm.",o:[
   {n:"Cắt bớt bổng lộc cung mình",c:{bac:-60},w:{danh:5,duc:3},wx:"dân và triều khen ngươi",lx:"cung ngươi thiếu thốn một mùa",rt:"Tiếng ngươi ra tận ngoài kinh."},
@@ -133,7 +137,7 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
  t1:{h:"Lời dạy cho con",w:"kid",t:A=>mySons().length?"Đêm khuya, {k} hỏi ngươi: “Mẫu thân, làm vua thì phải giỏi nhất, hay phải hiền nhất?”":"Một hoàng tự nhỏ ngươi từng trông nom hỏi: “Nương nương, sao người lại thương cả con của người khác?”",o:[
   {n:"Dạy: phải biết người",c:{suc:-2},w:{tamco:2},wx:"đứa trẻ khôn hơn",lx:"lời ấy đến tai người khác thì thành mưu",go:()=>mySons().length?e67heir(4):"",rt:"Đứa trẻ nhớ lời ngươi."},
   {n:"Dạy: phải thương dân",c:{suc:-2},w:{duc:3},wx:"lời hay truyền ra ngoài",lx:"có kẻ cho là mềm yếu",go:()=>mySons().length?e67heir(4):"",rt:"Thầy dạy nghe lại, chép vào sách."},
-  {n:"Bảo nó tự nghĩ",c:{},w:{danh:1},wx:"đứa trẻ tự lập",lx:"bỏ lỡ một lúc dạy con",rt:"Đứa trẻ ngồi nghĩ rất lâu."}]},
+  {n:"Bảo nó tự nghĩ",c:{suc:-1},w:{danh:1},wx:"đứa trẻ tự lập",lx:"thức khuya, mất sức",rt:"Đứa trẻ ngồi nghĩ rất lâu."}]},
  x1:{h:"Đại lễ đầu xuân",w:"emp",t:"Đại lễ đầu xuân. Hoàng thượng đứng trước Thái miếu, các hoàng tự đứng sau. Ai đứng gần ngài nhất, cả triều sẽ nhìn.",o:[
   {n:"Lo trọn lễ, không tranh chỗ",c:{suc:-5},o:()=>35+S.duc/3+S.danh/6,e:["win","mid"],rt:"Hoàng thượng thấy ngươi đứng đúng chỗ của bậc mẫu nghi.",rf:"Lễ trọn, nhưng không ai nhắc tên ngươi."},
   {n:"Đưa con đứng gần Hoàng thượng",c:{suc:-5},o:()=>35+S.sung/3+S.tamco/6,e:["win","lose"],need:["kid"],rt:"Hoàng thượng đặt tay lên vai {k}.",rf:"Triều thần xì xào ngươi tranh ngôi cho con."},

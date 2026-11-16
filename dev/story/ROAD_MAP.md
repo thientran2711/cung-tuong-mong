@@ -348,43 +348,45 @@ Rule learnt from the pilot: `.4` already closes its own first conflict (its 3–
 - .10 Ngọn lửa — the letter burns or reaches the Emperor [emp]
 - .11 Bí mật được chôn — endings: secret buried, the Thái hậu in her debt / secret out, the Thái hậu falls, she survives / secret used as her own power; rare: the victim's kin is rewarded quietly and peace is made [th, emp]
 
-### 4.8 thd — Con gái thầy đồ nghèo
+### 4.8 thd — Con gái thầy đồ nghèo — BUILT (review/road-b3, dev/build/jrd_thd.js; all .5–.11 + one rare finale per road)
+{dad} prints «phụ thân» for thd (dad67 covers tt/dtq only); text says "cha". {n1}/{n2} = the .4 arc's story names, carried in S.st.f14
+(engine request to the jroad owner to carry A.n1/A.n2 generally; thd_tro carries its own until then).
 **thd_tho · Danh hiệu Tài nữ**
 - .4 Danh hiệu Tài nữ — the Hàn lâm viện opens a Tài nữ contest; someone waits to accuse her of plagiarism [emp, v]
-- .5 Đề thi — the theme leaks [off, v]
-- .6 Bài thơ bị trộm — her draft goes missing [maid, v]
-- .7 Vòng thi — the contest (real art minigame via playArt) [emp]
-- .8 Lời vu đạo thơ — the accusation [v, off]
-- .9 Chứng minh — prove authorship [off, emp]
-- .10 Ngày yết bảng — results [emp]
-- .11 Tài nữ — endings: named Tài nữ / honourable mention / shamed; rare: the Emperor asks her to edit a court anthology [emp]
-**thd_sach · Bản thảo của cha**
+- .5 Lời thơ vượt tường cung — the Xuân thí for the Ngự tuyển anthology; {v}'s uncle (a Thị độc) holds the entry list; the theme leaked to {v}; dad's village school roof leaks [emp, v, n1]
+- .6 Tập nháp bị trộm — her village draft book stolen; a paid copyist re-dates the poems; search {v}'s palace, buy them back, or rewrite from memory [maid, v, n1]
+- .7 Vòng thi Ngự hoa viên — the contest round; {v} may recite her stolen lines; the inkstone tampered with; village voice or court style [emp, v, th, n1]
+- .8 Lời vu đạo thơ — {v}'s uncle accuses her with forged old pages; a rumour says dad wrote her poems [v, emp, n1]
+- .9 Chứng minh — the village paper's watermark ledger, dad's old letters, {v}'s deal; four more lines written live before the Emperor [emp, v, n1]
+- .10 Ngày yết bảng — the score book scraped and altered; {v} asks for mercy; dad walks to the capital; how the slanderer is judged [emp, v, n1]
+- .11 Tài nữ — Endings: Tài nữ của Đại Hy / Thơ có tên, danh hiệu không / Gác bút; rare: Ngươi biên tập Ngự tuyển thi tập [emp, v]
+**thd_sach · Bản thảo của cha** ({v} = the daughter of {n1}, the Thượng thư the book names)
 - .4 Bản thảo của cha — dad's book names a powerful house's corruption [dad, off]
-- .5 In hay giấu — publish now or wait [dad]
-- .6 Kẻ bị chỉ mặt — the house strikes back [off, v]
-- .7 Cha bị đe dọa — dad threatened at home [dad, man]
-- .8 Dâng sách — present the book to the Emperor [emp]
-- .9 Văn tự ngục — the book is called seditious (HISTORY CHECK: văn tự ngục) [off, emp]
-- .10 Bảo vệ cha — she defends dad [emp]
-- .11 Chữ nghĩa — endings: dad honoured, book adopted / book banned, dad safe / dad jailed (she keeps rank); rare: the book starts a reform and dad joins the Hàn lâm viện [dad, emp]
-**thd_tro · Học trò của cha**
+- .5 In hay giấu — volume two lists the dyke-bribe takers; print before the flood season; a Giang Nam printer; one page names a Hoàng hậu relative [maid, v]
+- .6 Kẻ bị chỉ mặt — {n1}'s protégé censors attack the book; {v} cuts her palace supplies; the old Hoài Bắc dyke clerk brings the true ledger [v, emp]
+- .7 Cha bị đe dọa — the village school burned, the arsonists return next market day; the magistrate is {n1}'s man; bring dad to the capital or guard him [maid, v]
+- .8 Dâng sách — the fair copy before the autumn court lecture; {v} bribes the copyist; ledger attached or kept back; whose hands carry the book [emp, v]
+- .9 Văn tự ngục — a half-quoted sentence makes the book "phỉ báng triều đình"; dad jailed by Đại Lý tự; {v} testifies (HISTORY CHECK) [emp, v]
+- .10 Bảo vệ cha — the Emperor judges; the ledger produced; dad says choose the book over him [emp, v]
+- .11 Chữ nghĩa — Endings: Sách cha thành sách triều đình / Sách cấm, cha bình an về quê / Cha bị giam, ngươi giữ được ngôi; rare: Sách mở đường cải cách, cha vào Hàn lâm viện [emp, v]
+**thd_tro · Học trò của cha** ({n1} = dad's student from .4, {n2} = {v}'s elder cousin, a bought Tiến sĩ)
 - .4 Học trò của cha — dad's poor student topped the exam and was failed by a bought paper [man]
-- .5 Đề thi bị bán — who sold the questions [off]
-- .6 Bảng vàng — the false top candidate's family [off, v]
-- .7 Học trò bị truy — the student is hunted [man, gd]
-- .8 Đơn kêu oan — a petition through her [emp]
-- .9 Triều đình chấn động — the scandal hits the ministry [off, emp]
-- .10 Thi lại — a re-examination [man, emp]
-- .11 Công bằng khoa cử — endings: the student restored, cheaters fall / student restored quietly / the case buried; rare: the student becomes a censor loyal to her [man, emp]
-**thd_hoc · Thầy giáo trong cung** (needs ≥1 royal child alive; else replaced by a shared arc — few children at start, OD 16/11)
+- .5 Đề thi bị bán — 3 openings by .4's end; the engraving clerk; the Lễ bộ seal of the Thị lang (dad's old classmate); confession before the clerk is sent to Vân Nam [maid, v, dad]
+- .6 Bảng vàng — {n2} a bought Tiến sĩ now Tri huyện; ink scripts before Lễ bộ burns old papers; poem test at Hàn lâm viện [v, dad, emp]
+- .7 Học trò bị truy — {v}'s maternal house frames {n1}; ten-day warrant of phủ Thuận Thiên; the night search [maid, v]
+- .8 Đơn kêu oan — scholars' petition (dad signs first on the lost branch); Đăng Văn drum; {v} weeps to the Thái hậu [emp, dad, v, th]
+- .9 Triều đình chấn động — a scapegoat clerk "hangs himself"; the list of bought Tiến sĩ; {v} kneels for her house; how far to punish [emp, v, th]
+- .10 Thi lại — palace re-exam at Bảo Hòa điện; a planted crib note; {v} begs for {n2} [emp, v]
+- .11 Công bằng khoa cử — Endings: Khoa trường trong sạch / Học trò được trả tên / Khoa án bị chôn vùi; rare: Học trò thành Ngự sử, một lòng với ngươi [emp, v, dad]
+**thd_hoc · Thầy giáo trong cung** (needs a live royal child: {v} = a consort with a live child, {n1} = that child, {n2} = another real royal child; a chapter whose child is gone is replaced by a shared arc)
 - .4 Thầy giáo trong cung — the Emperor sets her to teach the young princes and princesses [emp, kid*]
-- .5 Học trò nhỏ — a lazy prince, a clever princess [kid*]
-- .6 Mẹ của học trò — a mother thinks she favours another child [v]
-- .7 Kỳ khảo hạch — the Emperor tests the children [emp]
-- .8 Đứa trẻ bị phạt — a child punished under her care [v, kid*]
-- .9 Bài học đạo lý — a lesson that reaches the Emperor's ear [emp]
-- .10 Kết khóa — the term ends [emp, v]
-- .11 Người thầy — endings: honoured teacher, mothers grateful / honoured but hated by one mother / dismissed; rare: a prince calls her his teacher for life (later Đông cung weight) [kid*, emp]
+- .5 Học trò nhỏ — 3 openings by .4's end; hidden brushes; {v}'s snacks; cane marks on {n1}'s palm; monthly recitation [emp, v]
+- .6 Mẹ của học trò — {v} sits in / sends a spy maid; complaint at the Hoàng hậu's greeting [v, hh]
+- .7 Kỳ khảo hạch — the princes before the Six Ministers; a eunuch sells the questions; {v} drives {n1} into fever [emp, eun, v]
+- .8 Đứa trẻ bị phạt — {n1} tears {n2}'s book; the ruler rule; {v} storms in; who takes the blame [v, doc, emp]
+- .9 Bài học đạo lý — Mạnh Tử "dân vi quý" before the Emperor; a Thị giảng impeaches her with {v} [emp, v]
+- .10 Kết khóa — the term's book; {v} asks her to name {n1}; which child can carry great things [emp, v]
+- .11 Người thầy — Endings: Người thầy được tôn kính / Được tôn mà một mẹ còn hận / Thôi dạy Thượng thư phòng; rare: Học trò bái ngươi làm thầy trọn đời [emp, v, dad]
 
 ### 4.9 cnv — Cung nữ tuyển vào cung (servant start; chapters read S.srv.risen: maid wording before, consort wording after)
 **cnv_chu · Bí mật của chủ nhân**
