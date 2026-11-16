@@ -7,7 +7,7 @@
 const KIT_SAMPLES=[];window.KIT_SAMPLES=KIT_SAMPLES;
 function kitSamplePage(){try{let pg=document.getElementById("kitpage");if(!pg){pg=document.createElement("div");pg.id="kitpage";pg.setAttribute("role","dialog");pg.setAttribute("aria-label","Trang mẫu kit");document.body.appendChild(pg)}
  pg.innerHTML=`<div class="kitpg-h"><b>Trang mẫu kit</b><small>${KIT_SAMPLES.length} thành phần · dev/kit/KIT.md</small><button type="button" class="kitpg-x" aria-label="Đóng">✕</button></div>`+
-  KIT_SAMPLES.map(x=>{let h="";try{h=x.html()}catch(e){h=`<em class="r">lỗi: ${String(e.message||e).slice(0,80)}</em>`}
+  KIT_SAMPLES.map(x=>{let h="";try{h=x.html()}catch(e){h=(typeof S==="undefined"||!S)?`<em class="kitpg-nog">Mẫu này đọc dữ liệu của ván đang chơi: mở trang mẫu (#kit) sau khi đã vào game.</em>`:`<em class="r">lỗi: ${String(e.message||e).slice(0,80)}</em>`}
    return `<section class="kitpg-s" data-kit="${x.id}"><h4 class="kpst">${x.id} · ${x.title}</h4>${x.where?`<p class="kitpg-w">${x.where}</p>`:""}<div class="kitpg-b">${h}</div></section>`}).join("");
  pg.hidden=false;pg.querySelector(".kitpg-x").onclick=()=>{pg.hidden=true;if(location.hash==="#kit")history.replaceState(null,"",location.pathname+location.search)};
  try{if(typeof kitFix==="function")kitFix(pg);if(typeof kaNorm==="function")kaNorm(pg.querySelector(".kitpg-ev")||pg);if(typeof kitActCompactOn==="function")kitActCompactOn(pg)}catch(e){}return pg}catch(e){console.error("kitSamplePage",e)}}
@@ -139,3 +139,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* §50.2 kitPersonDlg (owner 16/11 07:35Z, OD:L448): the person pop-up outside #modal — figure left, picture right top, info, buttons; one frame size per event */
 KIT_SAMPLES.push({id:"§50.2",title:"kitPersonDlg: hộp thoại có người ngoài #modal (lời dặn, mẹo)",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" data-kpd2="tip">Mở lời dặn mẫu (cỡ coach)</button><button type="button" class="kbtn alt" data-kpd2="tour">Mở lời dặn tân thủ (4 trang cùng cỡ)</button></div>`});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpd2]");if(!b)return;e.stopPropagation();e.preventDefault();try{if(b.dataset.kpd2==="tip")kitTip({id:"kitpg",title:"Lời dặn mẫu",html:"<p>Một lời dặn ngắn của ma ma.</p>"});else window.kitTour()}catch(x){console.error(x)}},true);
+
+/* KIT 83.9 danger button + kitConfirm (kit sample) */
+KIT_SAMPLES.push({id:"§83.9",title:"kitDanger · .kbtn.kdanger + kitConfirm",where:"<b>Irreversible actions</b> (delete the cloud sổ, new life, …). Same size as <code>.kbtn</code>; yes = danger button, no = the panel's own quiet button; optional type-to-confirm field. Samples: button, disabled button, and a live pop-up trigger.",
+ html:()=>`<div class="kitpg-row"><button class="kbtn">Đã hiểu</button><button class="kbtn alt">Thôi</button><button class="kbtn kdanger">Xóa sổ mây</button><button class="kbtn kdanger" disabled>Xóa sổ mây</button></div><p><button class="lnk" style="font-size:.95rem" onclick="kitConfirm({title:'Xóa sổ trên mây?',lines:['Sổ trên mây sẽ mất, không lấy lại được.'],yes:'Xóa sổ mây',type:'XOA'})">Mở thử hộp xác nhận (gõ XOA)</button></p>`});

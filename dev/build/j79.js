@@ -286,6 +286,20 @@ function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(
    if(h&&t0&&t0!==h){while(h.firstChild)t0.appendChild(h.firstChild);h.remove();if(e!==h&&!e.children.length&&!e.textContent.trim()){e.remove();continue}}
    if(e.parentElement===par)prev=e}})}
 function kitModal(spec){const m=kitPanel(spec,true);showModal();return m}
+/* ================= KIT 83.9 · DANGER BUTTON + kitConfirm (kit request cloud-del / Foreman D, s18) =================
+   `.kbtn.kdanger` = the button for an IRREVERSIBLE action: same size and shape as `.kbtn`, but charcoal with a cinnabar rim (never the lacquer red of `.kbtn`).
+   `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` = a centre pop-up on kitModal: the lines, optional "type <code> to confirm" field (kitInput; the danger button stays
+   disabled until it matches), `.kbtn.alt` no (the panel's own button) and `.kbtn.kdanger` yes. onYes runs once, then the pop-up closes. */
+function kitConfirm(o){o=o||{};const id="kcf"+(window.__kcf=(window.__kcf||0)+1),need=o.type?String(o.type):"";let done=false;
+ const body=`<div class="kcf" data-kcf-id="${id}">${(o.lines||[]).map(l=>`<p>${l}</p>`).join("")}${need?`<p class="kcf-t">Gõ <b>${need}</b> để xác nhận.</p>${typeof kitInput==="function"?kitInput({id:id+"i",label:"Xác nhận",placeholder:need}):`<input id="${id}i" class="kinput">`}`:""}<div class="kcf-b"><button type="button" class="kbtn kdanger" data-kcf-yes="${id}"${need?" disabled":""}>${o.yes||"Xóa"}</button></div></div>`;
+ window.__kcfH=window.__kcfH||{};window.__kcfH[id]=()=>{if(done)return;done=true;try{o.onYes&&o.onYes()}catch(e){console.error(e)}try{closeModal()}catch(e){}};
+ return kitModal({kind:"notice",title:o.title||"Chắc chắn?",sections:[{h:"",html:body}],btn:o.no||"Thôi",onClose:()=>{if(!done){done=true;try{o.onNo&&o.onNo()}catch(e){}}}})}
+window.kitConfirm=kitConfirm;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcf-yes]");if(b&&!b.disabled){const h=window.__kcfH&&window.__kcfH[b.dataset.kcfYes];if(h)h()}});
+document.addEventListener("input",e=>{const i=e.target;if(!i||!i.id||!/^kcf\d+i$/.test(i.id))return;const id=i.id.slice(0,-1),w=i.closest(".kcf"),need=w&&w.querySelector(".kcf-t b"),y=w&&w.querySelector("[data-kcf-yes]");if(y&&need)y.disabled=i.value.trim()!==need.textContent});
+(function(){const st=document.createElement("style");st.id="kit-danger";st.textContent=`html body .kbtn.kdanger{background:linear-gradient(#3a2d28,#241a16)!important;color:#ffe9dc!important;border:1px solid #d9482b!important;box-shadow:inset 0 0 0 1px #ff9c7a40,0 1px 0 #d9c49a!important}
+html body .kbtn.kdanger:disabled{opacity:1;background:#d8cdbd!important;color:#6b5643!important;border-color:#b9a98f!important;box-shadow:none!important;cursor:not-allowed}
+.kcf p{margin:.3em 0}.kcf-t{color:var(--k-lab,#8a7350)}.kcf-b{display:flex;justify-content:center;margin-top:.7em}`;document.head.appendChild(st)})();
 function kpKind(m){if(m.kit&&m.kit.kind)return m.kit.kind;const t=String(m.t||""),c=String(m.cls||"");
  if(/night/.test(c))return"night";if(/\bend\b/.test(c))return"end";if(/^Tin trong cung/.test(t))return"news";if(/^Tai mắt|báo tin/.test(t))return"intel";
  if(/^Kết quả|^Bị bắt|^Bị từ chối|^Được (yết kiến|mời)/.test(t))return"result";if(/ban thưởng|Ân thưởng|Bổng lộc/.test(t))return m.opts?"choice":/Bổng lộc|Ân thưởng$/.test(t)?"rule":"reward";

@@ -96,5 +96,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
- try{if(!S)return"";const v=(typeof rivals!=="undefined"&&rivals[0])||null;if(!v)return"";return `<div class="kitpg-row" style="width:min(100%,520px)">${pcfBlocks(v,{},true)}</div>`}catch(e){return""}}})}catch(e){}
+ try{const v=S&&(typeof rivals!=="undefined"&&rivals[0])||null;if(v){const h=pcfBlocks(v,{},true);if(h)return `<div class="kitpg-row" style="width:min(100%,520px)">${h}</div>`}
+  /* no game open (#kit): the same blocks built from kit parts with demo data (owner 11/16 15:00Z 3.6: the sample was EMPTY) */
+  return `<div class="kitpg-row" style="width:min(100%,520px)"><div style="width:100%">${kitRows([["Tâm trạng","Vui vẻ, dễ gần"],["Sở trọng","Thi họa, trà ngon"],["Đã biết","Hay giúp người, giận khó nói"],["Dạo này","Được ban thưởng ở Ngự hoa viên"]])}${kitRelTable(kitRelRows(null)||[])||kitRel2([{head:"Nàng → ta",dir:"them",rows:[{w:"Thiện cảm",now:12,kind:"good"},{w:"Oán",now:3,kind:"bad"},{w:"Ghen",now:8,kind:"bad"}]},{head:"Ta → nàng",dir:"me",rows:[{w:"Thiện cảm",now:20,kind:"good"}]}])}</div></div>`}catch(e){return""}}})}catch(e){}
 })();

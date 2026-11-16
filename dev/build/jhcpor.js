@@ -32,8 +32,10 @@ html body .pc[class][class]>.pcl:has(>.pcp.kfw)>.pcname{min-height:auto!importan
 `;document.head.appendChild(st)})();
 /* kit page sample (#kit): the card cell for a stranger, a maid and the Emperor (s = 0: frame already full width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pcard · ô chân dung khung chuẩn (sát tên)",html:()=>{
- const P=[rivals&&rivals[0],S&&S.maid,S&&S.emp].filter(Boolean);
- return `<div class="kitpg-row" style="align-items:flex-start">${P.map(p=>`<div style="width:240px">${pcard({f:kitFace(p),name:p.name||"",col:"var(--gold)",groups:[]})}</div>`).join("")}</div>`}})}catch(e){}
+ /* the kit page opens before any game (#kit, no S): demo people = the kit's soft silhouettes (owner 11/16 15:00Z 2.2: the sample was EMPTY) */
+ const live=typeof S!=="undefined"&&S&&S.emp&&S.name;const sf=(rk,rw,ini,src,col)=>({rk,rw,w:[rk],src,hue:0,ini,col});
+ const P=live?[rivals&&rivals[0],S.maid,S.emp].filter(Boolean).map(p=>({f:kitFace(p),name:p.name||""})):[{f:sf("c3","Tần","Ta","img/kit/unknown-f.webp","#c9a0e0"),name:"Phi tần mẫu"},{f:sf("m0","Cung nữ","Lan","img/kit/unknown-f.webp","#5fa39a"),name:"Cung nữ mẫu"},{f:sf("emp","Hoàng thượng","Đế","img/kit/unknown-m.webp","#f0d070"),name:"Hoàng thượng"}];
+ return `<div class="kitpg-row" style="align-items:flex-start">${P.map(x=>live?`<div style="width:240px">${pcard({f:x.f,name:x.name,col:"var(--gold)",groups:[]})}</div>`:`<div class="pc" style="overflow:visible;width:200px"><div class="pcl">${kitNameRank(x.f.rw==="Hoàng thượng"?"":x.f.rw,x.name,x.f.col)}${pcPort(x.f)}</div></div>`).join("")}</div>`}})}catch(e){}
 /* review/hc-portrait-r1 (reviewer): the person switch stays smooth with per-frame box tops.
    (a) the strip's frames are the NARROW files, so the card's -w file was fetched only on the click: the new portrait showed without its frame
        for 150-500 ms on a first visit. Every frame shown in the panel now warms its -w file (once per file).
