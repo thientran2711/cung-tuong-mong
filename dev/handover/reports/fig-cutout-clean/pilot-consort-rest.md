@@ -1,4 +1,8 @@
 # PILOT consort-rest (a18) — 10 files, repainted whole-figure, NOT on CDN
+## v2 = 4K (lead order 16/11 23:19Z, owner: never low resolution) — SUPERSEDES the 2k table below
+Same prompts/refs, gpt-2-6 at 2048x4096, resolution 4k, 80 cr each = 800 cr (plus 650 cr for the superseded 2k round = 1450 cr total). 4k masters -> finish_fig.py (fig 900 + hd 1800 where CDN has hd) + extra 2700-tall hd2 copy for sheets (not uploaded). Sheets (replaced, 2k set deleted) show old | new hd2 2700 | face+bust crop at NATIVE 4k pixels.
+4k QA: PASS c18-t5 (all clean). Pinhole-only FAIL (hair strands / crown beads): c10 27, c24 6, c30 6, c07 8, c03 4. Halo WARN c12 2260, c30 2128, c24 1632 (looked clean on dark). Edge 0 everywhere, height +-2 %. Looked at all 10 faces at native 4k (forehead crops): every huadian is a tiny flower/butterfly/leaf, no teardrop; faces beautiful, soft round-almond warm eyes. 2k notes now fixed in 4k: c18 fan is FOLDED, c22 butterfly huadian small, c15 ear glow gone (prompt: no haze around the head). c12 old skirt hole gone, c24 shoes visible, c10 train+crown inside canvas, c22/c30 eyes open.
+## v1 (2k) record below
 START_CTX ~6% of window (own estimate). Rollover at START+25%, never above 60%.
 Recipe = FAMILY_BRIEF (gpt-2-6, 1024x2048, 2k, refs [old fig, face 01/05/12/18], 65 cr each) -> finish_fig.py -> qa_fig.py. Credits: 10 x 65 = 650. No retries needed. No CDN upload.
 Sheets: pilot-consort-rest/<key>-a18-{light,dark}.jpg = old fig | new (hd 1800 where CDN has hd = c12,c15,c16,c18,c22,c24,c30; fig 900 for c03,c07,c10 which have no hd twin) | face+bust native master crop (1024-px master, no downscale).
