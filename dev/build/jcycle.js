@@ -44,7 +44,11 @@ if(typeof BAL==="object")BAL.cyc={
     by the month's end → mừng hụt rumSung/rumDanh, the same as a rival's forged "không báo"). Both lies: flipped during the cycle → the
     Kính sự phòng mama checks: passes with lieO + loyalty/lieLoyal + Tâm cơ/lieTc, caught = Sủng -lieSung, Danh -lieDanh, night lost, S.ksKnows;
     and the false line is FORGERY EVIDENCE: at the month's end each foe reading the book (npcRead) gets chứng cứ +1 on her. */
- rep:{luiDuc:2,luiNext:.5,luiCover:3,somDuc:3,giauGhen:4,lieO:50,lieLoyal:4,lieTc:5,lieSung:6,lieDanh:4}};
+ rep:{luiDuc:2,luiNext:.5,luiCover:3,somDuc:3,giauGhen:4,lieO:50,lieLoyal:4,lieTc:5,lieSung:6,lieDanh:4},
+ /* FERTILE WINDOW (owner 16/11 s9, D57 review/preg-rate, option 4 = 1+3): conception per night × by where the night falls in HER TRUE cycle
+    (not what she reported): peak = the tuần after her cycle tuần (≈ 10–17 days after it starts), low = the tuần before it, cyc = her cycle
+    tuần itself (a tryst / stolen night). No cycle (age ≥ 50, pregnant) → × 1. The base itself was doubled in BAL.conc (jbal.js). */
+ fert:{peak:1.6,low:.5,cyc:.1}};
 const B=()=>(typeof BAL==="object"&&BAL.cyc)||{};
 const cl_=(x,a,b)=>Math.max(a,Math.min(b,x));
 function cyH(s){s=String(s==null?"":s);let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return h>>>0}
@@ -104,6 +108,15 @@ const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.de
   if(typeof isSrv==="function"&&isSrv())return r;const c=cyb();
   if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
+ }catch(e){console.error(e)}return r};
+/* ---------- 7. FERTILE WINDOW (D57): conceiveCh × BAL.cyc.fert by her cycle phase this tuần; one notice when her peak tuần starts ---------- */
+function cyPhase(p){try{p=p||S;if(!S||!p||!cyHas(p,cyCur()))return"";const d=(((S.tuan||0)-cyBase(p).t)%3+3)%3;return d===1?"peak":d===0?"cyc":"low"}catch(e){return""}}
+window.cyPhase=cyPhase;
+const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{const h=cyPhase(p||S),F=B().fert||{};if(h&&F[h]!=null)return Math.round(c*F[h])}catch(e){}return c};
+/* a tryst / affair (trystCh, jbal): the BAL.trystC floor/cap bound the chance BEFORE the cycle factor, so her cycle tuần stays near nil and the peak still rises */
+trystCh=function(p){p=p||S;const T=BAL.trystC,v=cl_(cc0(p),T[0],T[1]);try{const h=cyPhase(p),F=B().fert||{};if(h&&F[h]!=null)return Math.min(T[1],Math.round(v*F[h]))}catch(e){}return v};
+const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return r;const c=cyb();
+  if(!S.preg&&cyPhase(S)==="peak"&&c.ft!==wk()){c.ft=wk();let w="";try{w=chanceLvl(conceiveCh(S))}catch(e){}log(`Ma ma dặn nhỏ: qua kỳ nguyệt sự chừng mươi ngày, tuần này là lúc dễ đậu thai nhất${w?` (có thai mỗi lần thị tẩm: ${w})`:""}.`)}
  }catch(e){console.error(e)}return r};
 /* Tranh sủng / Chặn ngự giá deck cards (j75 getters): closed with the reason during her cycle */
 const dl0=deal;deal=function(){const r=dl0.apply(this,arguments);try{if(!S||!Array.isArray(deck))return r;
