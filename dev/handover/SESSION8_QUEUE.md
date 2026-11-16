@@ -125,3 +125,6 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | LIVE 16/11 | main = 4f5e5f3b3 (merge-train-1 + 2). In: boot-flash, stage-fig-size, face-sharp-r1, hc-portrait-revert, gift-pick, ev-art-fit, tab-underline, actcard-small, pcard-fill, mg-easy, buoi-transition, room-btn, rel-picker, appearance-port, stat-fx, pic-dupes-r2, kit-popup-sample, thaiy, cal-plus, pick-hint+rank-colour, cardflip, promo-rules + kit keeper fixes. Post-merge regression worker running (review/postmerge-fix-1). |
 | C59 | elder-staff 06a008041 reviewer running |
 | C60 | review/coop-chat (owner-approved co-op chat) | RUNNING (sonnet) |
+| C61 | review/fig-hd-upscale (Magnific upscale HD for servants/eunuchs/men; owner approved credits) | RUNNING (sonnet) |
+| C62 | review/servant-system (room-stage household bug + servant audit/proposal) | RUNNING (opus) |
+| C63 | review/facefx-all-r1 (fit rows + merge main) | RUNNING (sonnet) |
