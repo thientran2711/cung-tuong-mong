@@ -33,6 +33,8 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const K=o=>o.p.evaluate(()=>({k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),bend:COOPW.bend,pend:COOPW.pend,pb:!!COOPW.pendBuoi,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,chip:(document.getElementById('kctm')||{}).textContent||'',chipOn:!!(document.getElementById('kctm')&&!document.getElementById('kctm').hidden)}));
+/* r1: a seat already night-ready by itself (a night with the Emperor → jnight) counts as pressed */
+const isRd=o=>o.p.evaluate(()=>!!(window.COOPW&&COOPW.on&&COOPW.nReady&&COOPW.nReady()));
 const press1=o=>o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});
 async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(await press1(o))return true;await clear(o);await sleep(300)}return false}
 const setTm=(o,t)=>o.p.evaluate(t=>{Object.assign(BAL.coopTm,t)},t);
@@ -74,7 +76,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(a.date===c.date&&a.b===c.b&&a.b===0,tag+': same date, both at buổi sáng',[a.date,c.date,a.b,c.b])}
  /* one seat ready at tối: it must stay in tối, the other untouched */
  async function readyOnly(X,Y,tag){const x0=await D(X),y0=await D(Y);
-  await clear(X);ok(await press(X),tag+': '+X.name+' presses Sẵn sàng at tối');await sleep(6000);for(let i=0;i<2;i++){await clear(X);await sleep(300)}
+  await clear(X);/* r1: a night with the Emperor (jnight toMorning) may already have marked her ready: that counts as pressed */
+  ok(await X.p.evaluate(()=>!!(COOPW.nReady&&COOPW.nReady()))||await press(X),tag+': '+X.name+' presses Sẵn sàng at tối (or is already ready)');await sleep(6000);for(let i=0;i<2;i++){await clear(X);await sleep(300)}
   const x1=await D(X),y1=await D(Y);
   ok(x1.b===LAST&&x1.date===x0.date&&!x1.pend&&x1.sent!==x1.w&&x1.w===x0.w,tag+': '+X.name+' stays in buổi tối, same date, no night run yet',[x0,x1]);
   ok(x1.ready&&x1.dis&&/Chờ hảo hữu/.test(x1.next),tag+': '+X.name+' button says Chờ hảo hữu…',x1.next);
@@ -82,21 +85,24 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(await until(Y,()=>COOPW.tm.frReady(),null,10000),tag+': '+Y.name+' sees the friend ready');return x0.w}
  /* 1 host first */
  if(await toNight('1')){const w0=await readyOnly(A,B,'1');await shot(A,'cn-hostready-755x1000');
-  await clear(B);ok(await press(B),'1: guest presses');await merged('1',w0)}
+  await clear(B);ok(await isRd(B)||await press(B),'1: guest presses');await merged('1',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 2 guest first */
  if(await toNight('2')){const w0=await readyOnly(B,A,'2');await shot(B,'cn-guestready-1180x820');
-  await clear(A);ok(await press(A),'2: host presses');await merged('2',w0)}
+  await clear(A);ok(await isRd(A)||await press(A),'2: host presses');await merged('2',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 3 night event open on the host while the guest is ready */
- if(await toNight('3')){const w0=(await D(A)).w;
+ if(await toNight('3')&&(await D(A)).ready){/* r1: the host is already night-ready (a night with the Emperor during clear() → jnight): case 3 needs a host that has NOT
+   pressed; both ready = a legal commit. Just finish the night for both and say so. */console.log('n/a 3: host already ready (night with the Emperor); case 3 skipped this run');
+  const w0=(await D(A)).w;await clear(B);await press(B);await merged('3 n/a',w0)}
+ else if((await D(A)).b>=LAST){const w0=(await D(A)).w;
   await A.p.evaluate(()=>{window.__pick=0;pushModal({t:'Biến cố đêm',h:'<p>Có tiếng động ngoài hiên.</p>',opts:[{n:'Ra xem',fx:{},x:'',go:()=>{window.__pick++}},{n:'Mặc kệ',fx:{},x:'',go:()=>{}}]});showModal();render()});
-  await clear(B);ok(await press(B),'3: guest presses while the host has a night event open');await sleep(6000);
+  await clear(B);ok(await isRd(B)||await press(B),'3: guest presses while the host has a night event open');await sleep(6000);
   const a=await D(A),c=await D(B);ok(a.w===w0&&c.w===w0&&c.b===LAST&&!c.pend&&a.b===LAST&&!a.pend&&a.Q===1,'3: nobody advances while the host reads',[a,c]);
   await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Ra xem/.test(x.textContent));b.click()});
   ok(await A.p.evaluate(()=>__pick)===1,'3: host chose');await sleep(1500);
   const a2=await D(A);ok(a2.b===LAST&&a2.w===w0,'3: closing the event does not advance by itself',a2);
-  await clear(A);ok(await press(A),'3: host presses');await merged('3',w0);ok(await A.p.evaluate(()=>__pick)===1,'3: the choice ran once')}
+  await clear(A);ok(await isRd(A)||await press(A),'3: host presses');await merged('3',w0);ok(await A.p.evaluate(()=>__pick)===1,'3: the choice ran once')}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 4 time out at tối, guest AFK */
  if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
