@@ -23,7 +23,8 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
- {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
+ {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`},
+ {id:"§43.1",title:"Việc gọn: dấu ! mở chi tiết (kitActZoom)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
 /* KIT §51 kit table (review/kit-table): kitRows (one label column per table, values at one x), kitRowsJoin, kitReqRows, relation chip */
 KIT_SAMPLES.push(
  {id:"§51",title:"kitRows · bảng kit (nhãn dài xuống dòng, giá trị thẳng một cột)",html:()=>kitRows([["Đêm thị tẩm vui",["Trâm ngọc bích, Túi thơm",kitChip("Bạc",20,"g")],"t"],["Sinh hoàng tử",["Ngọc bội ngự ban",kitChip("Bạc",30,"g")],"t"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","Vòng ngọc","t"],["Chưa biết","chưa rõ","n"]])},
@@ -37,6 +38,10 @@ KIT_SAMPLES.push(
   const row=cls=>`<div class="kitpg-row ${cls}" style="padding:10px;border-radius:8px;${cls==="krs"?"background:linear-gradient(#26304a,#121624)":"background:#fbf3e2"}">${L.map(([r,n])=>kitNameRank(r,r===n?"":n)).join("")}</div>`;
   const me=cls=>`<div class="kitpg-row ${cls}" style="margin-top:8px;padding:10px;border-radius:8px;${cls==="krs"?"background:linear-gradient(#26304a,#121624)":"background:#fbf3e2"}">${kitNameRank("Tần","Tên của nàng (48.1b)","",true)}${kitNameRank("Tần","Người khác","")}</div>`;
   return row("")+`<div style="height:8px"></div>`+row("krs")+me("")+me("krs")}},
+ {id:"§48.3",title:"Phẩm + tên trong dòng chữ (kitRankNameH / kitRankPaint): hàng chọn người, nhật ký · nền sáng, nền tối",html:()=>{const P=[["Hoàng hậu","Chu Thục Nghi","#d9b13a"],["Quý phi","Tần Kiều Nguyệt","#c8102e"],["Phi","Hạ Tố Tâm","#7e3cc8"],["Thường tại","Lâm Uyển","#1a7f37"],["Cung nữ thân tín","Ngọc Lan","#0a7d68"]];
+  const nm=([t,n,c])=>`<b class="kname" style="--rc:${c}"><span class="kti" style="--rt:${kitRankTone(t,c)}">${t}</span> ${n}</b>`;
+  const box=(cls,bg)=>`<div class="${cls}" style="padding:10px;border-radius:8px;background:${bg}">${P.slice(0,3).map(x=>`<div style="padding:6px 8px;margin:4px 0;border:1px solid #c9a46a66;border-radius:6px">${nm(x)}</div>`).join("")}<p style="margin:6px 0 0">${nm(P[4])} nghe lén được chuyện của ${nm(P[1])}; ${nm(P[3])} được ban thưởng.</p></div>`;
+  return box("","#fbf3e2")+`<div class="modal night" style="position:static;display:block;background:none;margin-top:8px">${box("","#140b08;color:#f3e6cf")}</div>`}},
  {id:"§49.1",title:"kitRelRow: thiện cảm · oán · sủng · chưa rõ",html:()=>`<div style="max-width:320px">${kitRelRow({kind:"quy",a:"Hoàng hậu",b:"ta",v:-24})}${kitRelRow({kind:"oan",a:"Ta",b:"Hoàng hậu",v:12})}${kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:41})}${kitRelRow({kind:"quy",a:"Tô Lan Chi",b:"Ôn Ngưng Sương",v:null})}</div>`});
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so hint + risk come from the real kitHint. */
@@ -88,3 +93,30 @@ KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọ
 
 /* §28.19b corner mark (review/mood-dialog) */
 KIT_SAMPLES.push({id:"§28.19b",title:"kitSceneArt o.mark: dấu tâm trạng ở góc tranh",html:()=>`<div class="kitpg-row">${[["vui","img/ev-mood-vui.webp","Vui"],["lo","img/ev-tan-phong.webp","Khương Lạc Anh được tấn phong"],["m-gian","img/ev-mood-gian.webp","Giận"],["an","img/ev-mood-an.webp","Chưa rõ lòng người"]].map(([k,src,lab])=>`<div style="width:220px">${kitSceneArt(src,lab,{shape:"wide",mark:`img/kit/emo-${k}.webp`,markAlt:lab})}</div>`).join("")}</div>`});
+
+/* §8 PANEL KIT — the ONE pop-up frame (review/kit-popup-sample, owner 11/15 "cho xem kit pop-up"): the kit page cannot draw #modal inline
+   (one modal, fixed, above the game), so this sample lists the variants and each button opens the REAL pop-up with kitModal (same data
+   path as the game: kpBuild + kitEventStage + kitEvArt + kitDlgFit); the kit page hides while it is open and comes back on close.
+   Variants: ĐIỀU info about a person · LUẬT rule with its small 3:4 picture slot · VIỆC event (stage figure column + scene band + act-card
+   options) · KẾT QUẢ result · TIN news without a person (picture in its type frame, 32.3). Real sample people: Thái hậu, Hoàng hậu. */
+function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="function")return false;
+ const R=typeof liveRivals==="function"?liveRivals(true):[];const qp=typeof queenP==="function"?queenP():null;
+ const q=(qp&&qp!==S?qp:null)||R.find(v=>v.queen)||R[0]||null;const v2=R.find(v=>v!==q)||q;const nop=()=>{};
+ const pg=document.getElementById("kitpage");const was=!!(pg&&!pg.hidden);const back=()=>{if(was)pg.hidden=false};
+ if(typeof Q!=="undefined"&&Q.length)return false;if(pg)pg.hidden=true;
+ const S0={
+  info:{kind:"info",title:"Thái hậu",sub:"Từ Ninh cung",subject:pTH(),facts:["Thái hậu là mẹ của Hoàng thượng, đứng đầu hậu cung.","Người trọng lễ nghi, ghét kẻ phô trương."],
+   sections:[{h:"Lòng người với ta",chips:[kitChip("Thiện cảm",12),kitChip("Đức",3)]},{h:"Cách lấy lòng",rows:[["Thỉnh an mỗi tuần",kitChip("Thiện cảm",2),"t"],["Dâng kinh chép tay",kitChip("Thiện cảm",5),"t"]]}],btn:"Đã hiểu"},
+  rule:{kind:"rule",title:"Bổng lộc",facts:["Mỗi tháng Nội vụ phủ phát bổng lộc theo phẩm vị.","Phẩm càng cao, bạc càng nhiều."],rows:[["Thường tại",kitChip("Bạc",20,"g"),"t"],["Quý nhân",kitChip("Bạc",40,"g"),"t"]],btn:"Đã hiểu"},
+  event:q&&{kind:"choice",title:"Hoàng hậu triệu kiến",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua ta được lật thẻ bài."}],
+   opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm ăn năm thua · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
+  result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
+  news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
+ const sp=S0[k];if(!sp){back();return false}sp.onClose=back;
+ if(sp.opts)sp.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});kitModal(sp);return true}catch(e){console.error("kitPopSample",e);const pg=document.getElementById("kitpage");if(pg)pg.hidden=false;return false}}
+window.kitPopSample=kitPopSample;
+KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LUẬT · VIỆC · KẾT QUẢ · TIN (chạm để mở pop-up thật)",html:()=>{
+ const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"]];
+ const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
+  (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
