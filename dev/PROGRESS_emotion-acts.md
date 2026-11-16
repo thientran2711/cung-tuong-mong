@@ -48,7 +48,7 @@ their wording; pillow talk (j8 night1) answers could be greyed by her mood like 
 | r1 | first numbers (her line 60, NPC extreme 70) | 7 | 0.43 | 24.9 | hers too rare to be felt; NPC "extreme" too common |
 | r2 | her line 45, NPC extreme 80 | 2 | 1.99 | 19.8 | one hot life: 5 Phạm thượng (each a cấm túc) |
 | r3 | Phạm thượng weight .35, never while cấm túc | 30 (27 + 3 TIMEOUT) | 1.74 | 20.5 | TIMEOUT = dead end in the (5) lock → fixed (lock only when an affordable other answer of the right kind exists) |
-| r4 | lock fix | 12 | see report | | confirmation: no TIMEOUT |
+| r4 | lock fix | 12 (0 TIMEOUT) | 1.73 | — | confirmation: early death 58 % (n 12), HH 0 %; no dead end |
 
 Outcome BASE (same build without this branch, n = 32) vs r3 (n = 27 valid): Hoàng hậu 0 % vs 4 %; early death (old age, nunnery,
 leaving the palace excluded) 47 % vs 52 % — with n ≈ 30 a share has a standard error of ~9 points: no measurable change.
