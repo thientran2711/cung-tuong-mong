@@ -22,3 +22,9 @@ Then finish_fig.py (900/por) + fit_fig --H 1800 (hd for all, only eunuch-u01 had
 LOOKED at: 12 masters on grey (all faces beautiful/handsome, skin porcelain like the praised four, frontal/calm, hands readable, five fingers, shoes/boots visible, no men in pink/purple, kids read as children and are lovely) and at native 700px face+bust crops of every file: huadians are tiny five-petal flowers (no teardrop/droplet), men/eunuch none. Nothing regenerated.
 Notes/risks: (1) suthan keeps the old red fur coat (crimson is allowed for men). (2) kid-p03 boy's face is slightly older-looking than 9 but still a child; flag for the owner. (3) Eunuch u01 hat has big translucent grey wings (as in the old file). (4) qa_fig huadian auto is useless for men/kids (reads hats/hairpins) — eyes only.
 Sheets: pilot-misc/<key>-{light,dark}.jpg = old (x2 upscaled, for size comparison) | new hd 1800 fitted | face+bust native 700px crop of the master.
+
+## Masters (Magnific creation ids, 2k, 1024x2048, kept on the account; local PNGs are scratch)
+eunuch-u01 TdUtFCqVNR | eunuch-u05-r2 0eSIQC0TfW | eunuch-u09-r3 s789zGil8e | kid-f01-a14 yiEGDDLPW9 | kid-f05-a14 aFAkU3mfSh | kid-p03-a9 Cqzr72fEEy | mama-k01 bxVSNT35Y2 | mama-k05 TdUtFUPVNR | man-huynh-1 3z5T87dREY | man-quytu-3 DoJvbzipcl | man-suthan-1 WDloEZKcXe | man-thaiy-1 Lwo4GkOswO
+Uploaded old-figure refs (creations): u01 u5YjJpnQLD, u05-r2 P3uzDlP42C, u09-r3 rgdORFKxtc, kid-f01 dtPCK0MXSL, kid-f05 huZ5lBcvqL, kid-p03 Bh9u1D9oQR, mama-k01 0eSIunwTfW, mama-k05 aFAkSmwfSh, huynh fHG1UvnCDY, quytu-3 VXwmFT4MMU, suthan 4RQneNt9Aa, thaiy rgdOZLnxtc.
+Batch note (lead 23:25Z): kid prompts add "a child of about N years, round soft cheeks".
+4k note (lead 23:19Z): this pilot is 2k (generated before that message reached me). Not regenerated at 4k pending the lead's answer.
