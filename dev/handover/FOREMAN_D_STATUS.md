@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 14:32Z (s5 handing over → s6 = <filled below>; s5 wake deleted, s6 creates its own)
+last wake: 16/11 14:32Z (s5 handing over → s6 = session_01DgYSWkUCM7ZUmRkGFwQvQu; s5 wake deleted, s6 creates its own)
 s5 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
@@ -186,7 +186,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - PARKED: D8 poison roads (s16: do not work around the classifier). ART NEEDED (for C): 'Sáng hôm sau' banner for the Emperor-visit morning.
 - Main coordinator = MAIN SESSION 16 session_01UV1SzhWSw7EETVzp3xX5hi (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
-## HANDOVER (Foreman D s5 → s6, 16/11 14:32Z; reason: context 39 % ≥ START_CTX 5 % + 25 % budget (30 %)) — s6 = <filled below>
+## HANDOVER (Foreman D s5 → s6, 16/11 14:32Z; reason: context 39 % ≥ START_CTX 5 % + 25 % budget (30 %)) — s6 = session_01DgYSWkUCM7ZUmRkGFwQvQu
 - s5 hourly wake trig_01F8KntmXAMD8Qv2nmzjZDMf is DELETED at handover; s6 creates its own.
 - RUNNING D sessions (reports land in dev/handover/reports/<name>.md; they read Foreman D's id from the "last wake" line at the top of this file):
   reviewers: emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 · coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ (long co-op re-run) · item-ledger-r1 session_01DgYSWmMK8v6NhgpHp4fg8k (must close 6 missing ids + 2 net kinds; wire cause field to mem-upgrade once live)
