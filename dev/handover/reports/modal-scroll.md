@@ -1,1 +1,1 @@
-# modal-scroll — PASS f6cddf761d, FAST-FORWARDED to main by session 8 (live bug: modal touch scroll). 0 STUCK at 5 sizes. Note: btnOut PEND:plantpick at 1000x755/1180x820 also on main (pre-existing).
+# modal-scroll — PASS f6cddf761d (review/modal-scroll-r1, base eba64ead4). NOT fast-forwarded: main moved to a363cc14a. LIVE BUG (owner cannot swipe the Học Cầm picker) → merge onto main first. 0 STUCK at 5 sizes; panel-size ok (btnOut PEND:plantpick pre-existing).
