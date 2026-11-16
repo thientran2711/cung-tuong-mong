@@ -84,7 +84,7 @@ function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(
  if(mode==="self")return can(2)&&S.suc>=25;return can(2)&&S.suc>=10}
 function tdsReset(){TDV.pend=null;TDV.tch=null;TDV.hit=null;TDV.raw=null;TDV.skip=0;RCPT.k=null;RCPT.t=null}
 function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(2);
- if(S.bac>=fee)O.push({n:"Ma ma giáo tập",fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}});
+ O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
  for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
   go:()=>{TDV.tch=String(v.id);RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(!O.length){log(`Chưa có ai dạy ${V.n}: ma ma cần ${fee} bạc, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
