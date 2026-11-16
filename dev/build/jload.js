@@ -7,7 +7,7 @@
    2. group 'core' (UI, kit, scenes, maps, items, sounds; ~80 MB) missing → the LOADING SCREEN (title backdrop, kit scene panel, bar with MB)
       blocks entry until done (resumes file by file after a cut or reload; "Vào cung ngay" appears when the line is cut or stalls).
    3. group 'fig' (figures, portraits, event/story/festival art; ~550 MB) then downloads in the background, 2 at a time, with a small
-      kit chip at the bottom-left (tap = tạm ngưng / thỉnh tiếp, remembered). Save-Data or too little room = skipped (the worker still
+      kit status icon (kitStatusIcon, KIT §77.1: a small square download icon in the stage rail / title dock; tap = info panel with tạm ngưng / thỉnh tiếp, remembered). Save-Data or too little room = skipped (the worker still
       caches each picture the game actually shows).
    navigator.storage.persist() is asked once downloading starts; navigator.storage.estimate() is checked before the background sets.
    Requests carry 'x-ctm-load' so sw.js lets them through and this module writes the cache itself (one write, no copy through page script).
@@ -21,7 +21,7 @@ const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("
    marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
 const CDNB=(typeof IMG_BASE==="string"&&IMG_BASE)||"";
 const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&f[0].startsWith("img/")?CDNB:location.href).href;
-let el=null,chip=null,shown=false,speed=[],enterCb=[];
+let el=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
 /* ---------- kit CSS (section 35) ---------- */
@@ -40,15 +40,6 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 .kload .kpopts{display:flex;justify-content:flex-end;gap:8px;padding:2px 14px 12px;margin:0}
 .kload .kpopts:empty{display:none}
 /* kv3:.kv1 */:where(.kv1) .kload .klb{padding:8px 10px 2px}:where(.kv1) .kload .kpopts{padding:2px 10px 10px}
-.kloadchip{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700;max-width:calc(100vw - 16px);opacity:.92}
-.kloadchip .kchip{display:inline-flex;align-items:center;gap:7px;margin:0;font-size:.72rem;padding:3px 10px;border-color:var(--gold);background:#fffaf0f0;box-shadow:0 2px 8px #0003;cursor:pointer;font-family:inherit}
-.kloadchip .kprog-t{width:64px;flex:none;height:6px}
-.kloadchip.done{animation:kloadFade 1.2s 1.5s ease forwards}
-body.kload-dock .game{box-sizing:border-box!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 30px)!important}
-/* review 11/15 (844x390 place card): the chip never sits over a dialog's text — it steps aside while a dialog / mini game is open */
-body:has(#modal:not([hidden])) .kloadchip,body:has(#ov:not([hidden])) .kloadchip{visibility:hidden}
-body.kload-dock .kloadchip{opacity:1}body.kload-dock .kloadchip .kchip{padding:2px 9px;box-shadow:none}
-@keyframes kloadFade{to{opacity:0;visibility:hidden}}
 `;document.head.appendChild(st)})();
 
 /* ---------- the bar (kit 35): label above, track + "a / b MB" beside, sub line under ---------- */
@@ -133,37 +124,24 @@ async function refresh(grp){const c=await caches.open(AC);HAVE=new Set((await c.
  if(grp==="core")coreList=l;else figList=l}
 addEventListener("online",()=>{if(KLOAD.err==="offline"){KLOAD.err="";if(KLOAD.phase==="core")runCore();else if(bgOn)runBg()}});
 
-/* ---------- background sets + chip ---------- */
-let bgOn=false,bgRun=false;
-function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total)return;
- if(!chip){chip=document.createElement("div");chip.className="kloadchip";document.body.appendChild(chip)}
- const done=!g.left,v=g.total?g.have/g.total*100:100;
- chip.classList.toggle("done",done);if(done&&!chip.__kgone){chip.__kgone=1;chip.addEventListener("animationend",()=>{chip.classList.add("gone");chip.hidden=true;placeChip()},{once:true})}placeChip();
- chip.innerHTML=`<button class="kchip" data-klc="1" aria-label="Thỉnh tranh nhân vật">${done?"Đã thỉnh đủ tranh nhân vật":KLOAD.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Thỉnh tranh nhân vật"}<span class="kprog-t"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n" style="font-size:.72rem">${mb(g.have)} / ${mb(g.total)} MB</b></button>`}
-/* sits at the bottom-left, lifted above whatever kit bar/panel is docked at the bottom there (tab bar, title menu) so it covers no button */
-/* review/hau-cung-ui (owner 11/15 04:15Z: the chip covered "Kẻ hầu 1/1…" and the Hậu cung list): while a life is on screen the chip never floats
-   over the game — the game frame gives up a slim strip UNDER the tab bar (body.kload-dock: .game padding-bottom) and the chip sits in it.
-   Only a dialog's own buttons lift it (as before). Title screen / no game: the old placement below. */
-function placeChip(){if(!chip)return;const H=innerHeight;
- const g=document.querySelector(".game"),tt=document.getElementById("title");const play=!!(g&&g.getClientRects().length&&!(tt&&!tt.hidden&&tt.getClientRects().length));
- const dock=play&&!chip.classList.contains("gone");if(document.body.classList.contains("kload-dock")!==dock){document.body.classList.toggle("kload-dock",dock);try{dispatchEvent(new Event("resize"))}catch(e){}}
- /* a full-screen book (Sổ tuần) owns the whole screen, its page-turn bar included: the chip waits behind it */
- const book=document.body.classList.contains("kbk-open");chip.style.visibility=book?"hidden":"";
- if(dock){let up=0;document.querySelectorAll("#modal:not([hidden]) .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;up=Math.max(up,H-r.top)});
-  chip.style.bottom=up?`calc(env(safe-area-inset-bottom,0px) + ${Math.round(up)+6}px)`:"calc(env(safe-area-inset-bottom,0px) + 2px)";return}
- let lift=0;
- document.querySelectorAll("#tabs,#modal:not([hidden]) .dlg,#kload .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();
-  if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;lift=Math.max(lift,H-r.top)});
- /* review 11/15: never over the stage name chips (names are never covered) — sit above the name row it would touch */
- const cw=(chip.firstElementChild||chip).getBoundingClientRect().width||300;
- document.querySelectorAll("#stage .tag,#j59metag>*,#stage .j59more").forEach(e=>{const r=e.getBoundingClientRect();
-  if(!r.width||r.left>cw+12||r.right<4||r.top<H*.35||H-r.bottom>lift+60)return;lift=Math.max(lift,H-r.top+2)});
- chip.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${Math.round(lift)+8}px)`}
-addEventListener("resize",placeChip);setInterval(placeChip,1500);
-/* test hook (dev/test, review/hau-cung-ui): show the background chip with fake numbers, no download */
+/* ---------- background sets: ONE status icon (KIT §77.1 kitStatusIcon; owner 16/11 16:25Z: no chip, no strip — a small download icon in the corner,
+   a calm bobbing arrow while it runs, tap → kit info panel with the details + "Tạm ngưng / Thỉnh tiếp") ---------- */
+let bgOn=false,bgRun=false,dlDoneAt=0;
+const dlState=()=>{const g=KLOAD.fig,done=!g.left;return{g,done,paused:!!KLOAD.paused&&!done,err:!done&&!KLOAD.paused&&!!KLOAD.err}};
+const dlWords=s=>s.done?"Đã thỉnh đủ tranh nhân vật":s.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Đang thỉnh tranh nhân vật";
+function dlPanel(){const s=dlState(),g=s.g;
+ const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":"Dừng việc tải ngầm; muốn thì thỉnh tiếp sau.",fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
+ return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
+  {h:"Tiến độ",html:kitProgress({have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
+  {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],["Đã về",`${mb(g.have)} / ${mb(g.total)} MB`],["Còn lại",s.done?"không còn":`${g.left} tệp`]]}],opts:o}}
+function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
+ const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
+ kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,glyph:()=>dlState().done?"✓":"↓",
+  busy:()=>{const q=dlState();return !q.done&&!q.paused&&!KLOAD.err},done:()=>dlState().done,badge:()=>{const q=dlState();return q.paused||q.err},
+  show:()=>!dlState().done||Date.now()-dlDoneAt<5000,panel:dlPanel});
+ kitStatusIcon.refresh();if(s.done)setTimeout(()=>{try{kitStatusIcon.refresh()}catch(e){}},5200)}
+/* test hook (dev/test, review/hau-cung-ui, review/status-icons): show the status icon with fake numbers, no download */
 KLOAD.testChip=(have,total)=>{bgOn=true;KLOAD.fig.total=total||635e6;KLOAD.fig.have=have||12e6;KLOAD.fig.left=KLOAD.fig.have<KLOAD.fig.total?1:0;paintChip()};
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klc]");if(!b)return;e.stopPropagation();if(!KLOAD.fig.left)return;
- KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()},true);
 async function startBg(){if(bgOn||!MAN)return;if(!figList.length){KLOAD.phase="all";return}
  const cn=navigator.connection;/* perf budget: no background set on Data-saver, a mobile-data line or a slow line (the pictures the game shows still cache on use) */
  if(cn&&(cn.saveData||cn.type==="cellular"||/^(slow-2g|2g|3g)$/.test(cn.effectiveType||"")))return;
