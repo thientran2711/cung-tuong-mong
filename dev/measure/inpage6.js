@@ -49,7 +49,7 @@ function randomStep(){
   window.__turnActs++;{const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used;if(window.__rtk!==tk){window.__rtk=tk;window.__rn=0}if(++window.__rn>30){window.__rn=0;window.__buoi++;nextBuoi();return}}rpick(cand)()}
 // ---- SENSIBLE
 function needs(){const nx=S.rank<7?RANKS[S.rank+1]:{s:70,d:70};return{ws:1+Math.max(0,nx.s-S.sung)/12,wd:1+Math.max(0,nx.d-S.danh)/8}}
-const BAD=/Mật báo chuyện|Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc|Đẩy con nàng xuống hồ|Đẩy nàng xuống hồ sen|Ngáng chân/i;
+const BAD=/Mật báo chuyện|Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc|Đẩy con nàng xuống hồ|Đẩy nàng xuống hồ sen|Đẩy xuống hồ sen|Ngáng chân/i;
 function valW(w,N){w=w||{};return (w.nt||0)*.6+(w.tin||0)*.25+(w.sung?sg(w.sung):0)*N.ws+(w.danh||0)*N.wd+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3+(w.tai||0)*.2+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)+(w.suc||0)*(S.suc<50?.3:.05)}
 function costW(c){c=c||{};return (c.suc||0)*(S.suc<50?.35:.08)+(c.bac||0)*(S.bac<60?.09:.035)+(c.duc?c.duc*3:0)+(c.sung||0)+(c.danh||0)}
 function scoreAct(a,N,cost){

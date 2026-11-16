@@ -1,0 +1,5 @@
+const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));
+(async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block'});await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
+const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(process.argv[2]);
+for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
+console.log(JSON.stringify(await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;quiet=true;window.__nlInner=1;start();window.__nlInner=0;return {staff:(S.staff||[]).map(s=>[s.name,s.role,s.age,s.rk,s.tr]),mat:S.mat,pt:typeof pickTarget, k:Object.keys(BAL.mline).length}})),errs);await b.close()})();
