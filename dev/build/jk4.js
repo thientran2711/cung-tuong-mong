@@ -109,6 +109,11 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
  html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me room" "tc tc tc" "stats stats stats"!important}
  html body header.hud>#k3tc{justify-self:stretch}
  .k3tc .k3tt{grid-template-rows:auto!important;grid-auto-flow:column;justify-content:start;gap:0 12px!important}
+ /* KIT 31.2a (review/small-bugs-3): the state row never runs past the edge — under 600 px both lines flow as ONE wrapping row of whole
+    items (time, toilette, weather, quẻ, every K3_STATE chip): an item is never split, the next one drops to a new line */
+ html body header.hud .k3tc .k3tt{display:flex!important;flex-wrap:wrap;align-items:center;column-gap:12px;row-gap:0;min-width:0;max-width:100%}
+ html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{display:contents!important}
+ html body header.hud .k3tt .k3r{white-space:nowrap;margin-right:0!important;max-width:100%}
  .k3tt>.kstl,.k3tt>.kstv{height:24px;line-height:24px;font-size:.7rem;font-family:var(--body,inherit)}.k3tc .k3tt .kstl .k3r{height:24px;line-height:24px}
  #kstrow>.kstg+.kstg{padding-left:6px}#kstrow{gap:0 6px}
  #kstrow .kst>.kstl{font-size:0;gap:0}#kstrow .kst>.kstl img.ic{width:16px;height:16px}
@@ -120,18 +125,37 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
    since tassel-fix (owner 15/11 06:35Z) the jade pendant + tassel hang below it whole (cell 550/1037), so the frame is 1037/795 of the name block. */
 function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("(min-width:600px)").matches?Math.round(mi.getBoundingClientRect().height):0;
  const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
+/* review/small-bugs-3 (1000x755: a long date "Tháng chạp · trung tuần · năm thứ hai mươi ba" ran under the weather icon): her block and the time
+   block never touch — the right edge of her text + 8 px must stay left of the time block's first text/icon, else the two-row bar */
+function kitHdClash(hd,tc){try{const me=hd.querySelector(":scope>.me");if(!me||!tc||!tc.offsetParent)return false;let r=0,l=1e9;
+ const leaf=(root,f)=>{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(!n.nodeValue.trim())continue;const rg=document.createRange();rg.selectNodeContents(n);for(const q of rg.getClientRects())if(q.width)f(q)}
+  root.querySelectorAll("img,svg").forEach(e=>{const q=e.getBoundingClientRect();if(q.width)f(q)})};
+ leaf(me,q=>{r=Math.max(r,q.right)});leaf(tc,q=>{l=Math.min(l,q.left)});return r>0&&l<1e9&&r+8>l}catch(e){return false}}
+/* one-row bar only from this width (1366 iPad Pro); 1000–1279 (iPad 1180, split views) = the two-row bar, always */
+const KHD1_MIN=1280;
 function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=matchMedia("(min-width:1000px)").matches;
- if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");hd.classList.remove("khd2");
+ if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");
+ /* review/stage-side (owner 16/11 "nó không có giữ cố định một chỗ"): the bar form is FIXED per viewport, never re-decided by content
+    (a dialog, a longer clothes / weather line). < KHD1_MIN px wide = always two rows; wider = one row, measured once per viewport size,
+    and once it needed two rows it keeps them for that size (one-way latch = hysteresis: it never flips back on shorter text). */
+ const vk=innerWidth+"x"+innerHeight;if(window.__khdVk!==vk){window.__khdVk=vk;window.__khd2=innerWidth<KHD1_MIN}
+ let bad=!!window.__khd2;
+ if(!bad){hd.classList.remove("khd2");
  /* the one-row bar always wears the seal in its right gutter (KIT 39 .kseal-pad: 1000–1179 px cells icon-only) — measure it in that form */
  if(hd.classList.contains("has-kseal"))hd.classList.add("kseal-pad");
  const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
- const bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1);
+ bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
 try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
+/* review/small-bugs-3-r1: the bar re-fits when its CONTENT changes after render (a later module writes the date / weather / quẻ, a picture
+   loads): 1180x820 "Mộ Dung Tuyết Nhi · Tháng chạp · thượng tuần · năm thứ hai mươi ba" stayed one row under the weather icon */
+(function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitHdFit()})};const go=()=>{const hd=document.querySelector("header.hud");if(!hd)return setTimeout(go,500);
+ new MutationObserver(kick).observe(hd,{subtree:true,childList:true,characterData:true});hd.addEventListener("load",kick,true)};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
 /* a short helper line (".kphelp": "Mới biết tên ⓘ") opens its full text on tap too (touch has no hover tooltip) */
 document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest(".kphelp");if(!h||!h.title||typeof kpPop!=="function")return;e.stopPropagation();try{kpPop(h,`<div class="kpopt">${kitStatEsc(h.title)}</div>`)}catch(x){}},true);
 
@@ -141,12 +165,12 @@ document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest
    person-act reports, succession) and by the week book's person pages (kitStageFig). A dialog may name its people: stage:[p1,p2] (max 2).
    Figures: kitFigOf(p) (right tier / age band / unknown silhouette) + the scar / veil overlays laid on the drawn figure (kitFxLayers; a rash
    overlay is picked up the same way when KIT_RASH exists). Band: headArt (31.16) or the event picture (kitEvArt), in its category frame. ---------- */
-function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src=typeof kitFigOf==="function"?kitFigOf(q):"";if(!src)return"";
+function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src=o.src||(typeof kitFigOf==="function"?kitFigOf(q):"");if(!src)return"";
  let fx="";try{if(typeof kitFxLayers==="function"&&!/unknown-fig/.test(src))fx=kitFxLayers(q,kitFile(src));if(window.KIT_RASH&&KIT_RASH.on&&KIT_RASH.on(q)&&KIT_RASH.style){const st=KIT_RASH.style(kitFile(src));if(st)fx+=`<img class="kscar krash" src="${KIT_RASH.src(q)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}}catch(e){}
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true}):(q.name||"")}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="async" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
@@ -157,7 +181,7 @@ function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.query
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
   if(!a&&typeof kitEvArt==="function")a=kitEvArt(m);
-  if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a)));mb.prepend(d)}}
+  if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a),a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}}
  body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());
  const s=document.createElement("div");s.className="kpsubj kes kes"+figs.length;s.innerHTML=figs.join("");body.prepend(s);body.classList.add("kphas","kesb");dlg.classList.add("kesdlg");return true}catch(e){console.error("kitEventStage",e);return false}}
 window.kitEventStage=kitEventStage;window.kitStageFig=kitStageFig;
@@ -195,7 +219,6 @@ window.kitEvCat=kitEvCat;
   if(ev&&!ev.classList.contains("ksart-cat")){const im=ev.querySelector("img");const c=kitEvCat(m,{src:im&&im.getAttribute("src")});if(c.col){ev.classList.add("ksart-cat",c.cls);ev.style.setProperty("--kcc",c.col)}}}}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kit-evstage";st.textContent=`
 .kpb.kphas.kesb{grid-template-columns:clamp(130px,40%,260px) minmax(0,1fr);gap:12px;align-items:start}
-#modal .dlg.kpanel.kesdlg{max-width:min(640px,calc(100vw - 24px))!important}
 .kpb.kphas.kesb:has(> .kes2){grid-template-columns:clamp(180px,46%,340px) minmax(0,1fr)}
 .kpsubj.kes{display:flex;flex-direction:row;align-items:flex-end;justify-content:center;gap:2px;position:sticky;top:0}
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
@@ -358,7 +381,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* column width: the people (or the widest name chip); the right column keeps ≥ 280 px — if not, one common factor */
   let need=Math.max(tot,capW)+12,k=1;
   if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
-  else{const dw=Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
+  else{const dw=d.clientWidth||Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
   const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
   L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
@@ -419,8 +442,7 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
  const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitDpFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)})})();
 (function(){const st=document.createElement("style");st.id="kit-dlgperson";st.textContent=`
-#modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important;height:min(calc(100dvh - 32px),720px);
- width:min(calc(var(--kdpw,240px) + 470px),calc(100vw - 24px));max-width:none!important}
+#modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important}
 #modal .dlg.kpanel.kdper>*{flex:none}
 #modal .dlg.kdper>#mb,.modal .dlg.kdscroll.kdper>#mb{flex:1 1 auto!important;min-height:0;display:grid!important;overflow:hidden!important;
  grid-template-columns:var(--kdpw,240px) minmax(0,1fr);grid-template-rows:max-content minmax(0,1fr);column-gap:14px;align-content:stretch}
@@ -442,7 +464,6 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
 #modal .dlg.kdper .kfact.kfnodot{grid-template-columns:minmax(0,1fr)}
 #modal .dlg.kdper #mr{padding-left:calc(var(--kdpw,240px) + 28px)}
-#modal .dlg.kdper.kdnarrow{width:calc(100vw - 16px);height:calc(100dvh - 24px)}
 #modal .dlg.kdper.kdnarrow>#mb{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-auto-rows:max-content}
 #modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(48dvh,460px) max-content minmax(0,1fr)!important}
 #modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(48dvh,460px) max-content!important}
@@ -670,6 +691,26 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
   new MutationObserver(sync).observe(t,{attributes:true,attributeFilter:["class","hidden"]});sync()};
  const find=()=>watch(document.getElementById("rtoast"));find();
  obs=new MutationObserver(()=>{if(document.getElementById("rtoast")){find();obs.disconnect()}});obs.observe(document.body,{childList:true})})();
+/* ================= KIT 32.10a · A FLOATING CARD NEVER COVERS A DIALOG (review/small-bugs-3; owner shot 844x390: the result card sat on the
+   dialog's option buttons and its tap catcher ate the first tap) =================
+   While any dialog is open (#modal, every [role=dialog] layer: reward box, game frame, book, item sheet, podium…) the floating cards — the act
+   result card #rtoast and the one-line pill #kupdline (kitLine) — are PARKED: hidden, no tap catcher. When the last dialog closes, a parked
+   result card comes back with a fresh timer (its lines are also in Sổ ghi). One body class `kdlg-on`, set by kitDialogOpen(). */
+function kitDialogOpen(){for(const d of document.querySelectorAll('#modal,[role="dialog"]')){if(d.closest("#rtoast,#kupdline"))continue;
+  if(d.id==="modal"){if(!d.hidden&&getComputedStyle(d).display!=="none")return true;continue}
+  if(d.closest("#modal"))continue;if(!d.getClientRects().length)continue;const cs=getComputedStyle(d);if(cs.visibility==="hidden"||+cs.opacity===0)continue;return true}return false}
+window.kitDialogOpen=kitDialogOpen;
+(function(){let pend=0,on=false;const css=document.createElement("style");css.id="kit-dlg-park";
+ css.textContent="body.kdlg-on #rtoast,body.kdlg-on #kupdline{visibility:hidden!important;pointer-events:none!important;transition:none!important}";document.head.appendChild(css);
+ const sync=()=>{pend=0;const d=kitDialogOpen();if(d===on)return;on=d;document.body.classList.toggle("kdlg-on",d);const t=document.getElementById("rtoast");
+  if(d){if(typeof kitCatchOff==="function")kitCatchOff();return}
+  if(t&&t.classList.contains("on")&&!t.hidden){clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),7000);
+   if(typeof kitCatchOn==="function")kitCatchOn(t,()=>{t.classList.remove("on");clearTimeout(window.__rtT)})}};
+ const kick=()=>{if(!pend)pend=requestAnimationFrame(sync)};
+ const go=()=>{new MutationObserver(kick).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["hidden","class"]});kick()};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
+/* the result card's own catcher never turns on under an open dialog */
+(function(){const k0=window.kitCatchOn;if(typeof k0!=="function")return;window.kitCatchOn=kitCatchOn=function(card){if(card&&card.id==="rtoast"&&document.body.classList.contains("kdlg-on"))return;return k0.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.id="kit-catch";st.textContent=`
 #kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
 #kxcatch[hidden]{display:none!important}
@@ -700,32 +741,40 @@ window.kitActCompactOn=kitActCompactOn;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
   const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+/* KIT §43 + §6.2 (review/opt-pics): the compact card rules are ONE string (kitCompactCSS(B)) used twice: inside a narrow kpane, and ALWAYS for a
+   dialog option card (B = button.ka.kart.kopt, jopic) — the one compact act-card form game-wide. w × h = picture box: owner override 15/11 — the small card's picture is a 3:4 PORTRAIT RECTANGLE (84x112;
+   72x96 in a pane under 420 px), the act art's own aspect, never a square crop; the big Hành sự card is untouched. */
+function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
+ ${B}{--kaw:${w}px!important;--kah:${h}px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+ ${B}>.kaart>.ksart>:not(img){display:none!important}
+ ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
+ ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
+ ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ ${B} .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
+ /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
+    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
+ ${B} small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+ ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+ ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+
+`}
+window.kitCompactCSS=kitCompactCSS;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
  .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
- button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
- button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
- button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
- button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
- button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
- button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
- button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
- button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
- /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
-    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
- button.ka.kart small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
- button.ka.kart small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
- button.ka.kart small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
- button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
+${kitCompactCSS("button.ka.kart",84,112)}
 }
 @container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:72px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+ button.ka.kart{--kaw:72px!important;--kah:96px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();

@@ -83,7 +83,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
  if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L);
  if(!R){R=document.createElement("div");R.id="kshR";R.className="ksh kshR";st.appendChild(R)}
- L.hidden=false;R.hidden=false;st.classList.add("k3g");
+ L.hidden=false;R.hidden=false;st.classList.add("k3g");k3RW(st);
  /* left: time · tư chất · tình trạng */
  const bu=k3hc("buoi"),lot=k3hc("lot"),wx=$$("hud2")&&$$("hud2").querySelector(".kmwx");
  let t="";if(bu){const w=String(BUOI[S.buoi||0]);{const left=typeof used!=="undefined"?Math.max(0,4-used):4;t+=`<button type="button" class="k3r k3time" data-k3="buoi" title="Còn ${left} khắc trong buổi" aria-label="${esc(w)}, còn ${left} khắc"><span class="k3l">${esc(w)}</span><span class="k3dots">${[0,1,2,3].map(i=>`<i class="${i<left?"on":""}"></i>`).join("")}</span></button>`}}
@@ -101,12 +101,12 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
  if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
   R.classList.remove("k3c2");
-  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(!window.__kasOpen,true)+hY;R.innerHTML=one;R.dataset.h=one}
-  /* tassel-fix (owner 15/11 06:35Z): the plaque frames show the whole pendant + tassel (KIT 28.0), so a short stage (phone landscape)
-     may still be crowded with Ân sủng folded: the court plaques then stand in TWO aligned columns (same frame size, never smaller) */
-  if(k3AsCrowded(st,R))R.classList.add("k3c2")}
- /* a tapped-open Ân sủng card stays inside the stage: the column scrolls instead of running past the floor */
- R.classList.toggle("kasx",!!R.querySelector(".kasopen"));
+  /* review/stage-side (owner 16/11 "lúc nào nó cũng thể hiện đầy đủ … không cần thu gọn"): the column always shows EVERYTHING —
+     no folded "Ân sủng ›" chip, no fold title; when it is taller than the stage it scrolls inside itself */
+  /* review/stage-side (owner 16/11 "làm cái khung dọc giống như ở trên màn hình điện thoại"): the side info is ALWAYS ONE narrow
+     vertical column at the stage's right edge — the tassel-fix two-column block (.k3c2) is gone; a column taller than the stage
+     scrolls inside itself (.kasx) */}
+ R.classList.add("kasx");
  k3Gut()}catch(e){console.error("k3Stage",e)}}
 window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
@@ -115,7 +115,10 @@ function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try
 try{document.fonts&&document.fonts.ready.then(k3Relay)}catch(e){}
 if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){const r=r1.apply(this,arguments);k3Relay();return r}}
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
-function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;
+/* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
+   on every screen and every render: 24 % of the stage, 132–172 px */
+function k3RW(st){const W=st.clientWidth;if(!W)return;const v=Math.round(Math.max(132,Math.min(172,W*.24)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
+function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
  /* KIT 33: an EMPTY plaque column (no plaques, zero height) reserves no gutter — the floor belongs to the people */
@@ -192,7 +195,10 @@ html body .stage.k3g #sc-t h2{display:block!important;font-size:1.05rem;line-hei
 html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
-.kshR{position:absolute;top:8px;right:8px;width:max-content;min-width:var(--kgw,150px);max-width:46%;z-index:2;align-items:stretch}
+.kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-width:0;max-width:none;z-index:2;align-items:stretch;box-sizing:border-box}
+/* review/stage-side: one narrow column; every plaque is the column width (border-box), names / labels wrap, nothing runs past its edge */
+.kshR *{box-sizing:border-box}.kshR .k3c .k3ct>b{white-space:normal!important;overflow-wrap:anywhere}.kshR .k3c .k3ct{flex:1 1 auto}
+.kshR .k3r>b{white-space:normal;text-align:right}
 /* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
 .kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
@@ -208,7 +214,6 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh .k3wx{padding-left:0!important;font-size:.75rem!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
 .ksh .k3wx img{width:18px!important;height:18px!important;border-radius:50%}
 .ksh .k3cs{display:flex;flex-direction:column;gap:4px}
-.kshR.k3c2{max-width:52%}.kshR.k3c2 .k3cs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;align-items:stretch}.kshR.k3c2 .k3c .k3ct>b{white-space:normal}
 .ksh .k3c{display:flex;align-items:center;gap:5px;padding:2px 6px 2px 3px;font:inherit;text-align:left;cursor:pointer;min-height:0;color:var(--ink);width:100%}
 .ksh .k3c .md{flex:0 0 auto}
 .ksh .k3c .k3ct{display:flex;flex-direction:column;line-height:1.2;min-width:0}
@@ -224,7 +229,7 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 /* Ân sủng plaque under the court chips (owner 11/15 04:05Z) */
 .ksh .kas .k3r{column-gap:8px}.ksh .kas .k3r>b{color:var(--ink)}
 .ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
-.kshR.kasx{max-height:calc(100% - 16px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.kshR.kasx{max-height:calc(100% - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
 .ksh .kas1{padding:2px 6px}.ksh .kas-one .k3l{font-weight:700;color:var(--gold)}.ksh .kas-one>b{color:var(--gold)}
 `;document.head.appendChild(css);
 
@@ -373,15 +378,19 @@ html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none
    top-right corner beside the name row instead of taking a row of its own above the acts. ---------- */
 (function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
 html body .pc:has(>.pcr>.pcx){position:relative}
-/* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) */
-html body #popw{z-index:12!important}
-html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
+/* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) AND the pane bar
+   (jpane .kpbar, z 40, KIT §45) — at 12 the bar's chips covered the card's top and its ✕ (owner 16/11 "Nút tắt bị che", review/press-fx-r1) */
+html body #popw{z-index:41!important}
+html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8;translate:0 var(--kpcxy,0px)}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
 /* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
 html body .pc>.pcr>.pcx+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
 html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
+/* the card's ✕ stays in the card's top-right corner while the card's own body scrolls (owner 16/11 "Nút tắt bị che": on a phone the room card
+   .pc scrolls inside itself and the absolute ✕ scrolled away with the acts) — it is moved down by the card's scrollTop (--kpcxy) */
+document.addEventListener("scroll",e=>{const pc=e.target;if(!pc||!pc.classList||!pc.classList.contains("pc"))return;const x=pc.querySelector(":scope>.pcr>.pcx");if(x)pc.style.setProperty("--kpcxy",pc.scrollTop+"px")},{capture:true,passive:true});
 
 /* ---------- 10. NAME TAGS NEVER OVERLAP (KIT 31.12): name tags under figures stay one line; when two tags would touch, the later one
    steps one line down (or up when there is no room under it). Runs after every stage render and on resize. ---------- */
@@ -465,7 +474,7 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
   const sh=B.filter((x,i)=>!L[i]);const cols=g.classList.contains("k3g3")?3:2;B.forEach(x=>x.classList.remove("k3odd"));if(sh.length%cols)sh[sh.length-1].classList.add("k3odd")})}catch(e){}}
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
  try{const mb=document.getElementById("mb");const ha=m&&(m.headArt||(m.kit&&m.kit.headArt));if(mb&&ha&&!mb.querySelector(":scope > .kdlgart")){const src=typeof ha==="string"?ha:ha.src,lab=typeof ha==="string"?"":(ha.label||"");
-  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab});mb.prepend(d)}}catch(e){}
+  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab,mark:typeof ha==="string"?"":ha.mark||"",markAlt:typeof ha==="string"?"":ha.markAlt||""});mb.prepend(d)}}catch(e){}
  requestAnimationFrame(k3OptCols);setTimeout(k3OptCols,300);return r}
  addEventListener("resize",()=>setTimeout(k3OptCols,60));
  const st=document.createElement("style");st.id="k3-opts";st.textContent=`
@@ -487,7 +496,7 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #mo
        below), one row, equal spacing, shared baselines. ---------- */
 (function(){
  /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
- const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
+ const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.crossOrigin="anonymous";/* CDN pictures: CORS or the canvas read fails (review/stage-side) */im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
    const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
    /* owner 11/15 05:45Z ("khung nhảy"): ONE portrait box for every person — the trimmed headroom is the same constant for every frame
