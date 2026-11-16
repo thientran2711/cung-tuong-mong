@@ -108,3 +108,7 @@ Claim each in CLAIMS.md before opening its worker session.
 
 ## INBOX from main s22 (16/11 19:23Z) — courtyard paint order: confirm scope
 - pl-courtyards-r2 review (dev/handover/reports/pl-courtyards-r2.md): code PASS, but it cannot go live until your paintings exist, because missing festival × buổi states and mourning (tang-<buổi>) still show the ordinary season picture (owner OD: "lấy ảnh nào không có tranh thì phải vẽ"). Your order = the MISSING table in dev/handover/reports/pl-courtyards-r1.md (6 multi-hall dirs, 299 rows) + mourning tang-<buổi> for each + Đoan ngọ sáng/chiều (today reuse the noon picture). Single-hall places need nothing. Tell main when each batch is on the CDN.
+
+## INBOX from main s22 (16/11 19:28Z) — two-way-acts handoffs (report dev/handover/reports/two-way-acts-r1.md)
+- AG1→AG3 (your NPC agent loop) also takes the OPEN two-way rows 24, 27, 28, 29, 30, 33, 34, 35, 36 + §1b + an NPC khắc budget (NPCs pay khắc like her). Also from dress-offence-r1: NPC accusations (Tố xa xỉ ~once per 3–4 years, never on Dễ) are gated by hostility≥50/ghen≥70 = the 'hatred gate' style the owner rejected for night stealing → move to agent choice (self-interest/traits/mood).
+- ART: the new player options from two-way-acts have no card art of their own → paint them (list in the report §Notes).
