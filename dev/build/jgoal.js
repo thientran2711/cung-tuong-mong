@@ -1,5 +1,5 @@
 /* jgoal: MỤC TIÊU ĐỜI MÌNH (owner 16/11 "Khi mới chọn nhân vật, không thấy khung báo nhiệm vụ chính tuyến, hoặc mục tiêu đời mình? Chơi bị
-   lạc lối." + "Không bấm xem được" on the Hành sự goal strip) — KIT.md §71. One data source, three kit pieces:
+   lạc lối." + "Không bấm xem được" on the Hành sự goal strip) — KIT.md §72. One data source, three kit pieces:
    - kitGoalNow(): the main road of this life (QUEST67 + milestone chapters of j67), the current chapter goal in plain words, its steps with
      live progress, and 2–3 concrete next things to do, each with WHERE to tap ({tab, act} → "Đi làm").
    - kitGoalStrip(): THE goal strip = the old Hành sự line ".obj67" (j67) made a real button (kit seal edge + "›"); also laid on the main
@@ -120,7 +120,7 @@ const css=document.createElement("style");css.id="kit-goal";css.textContent=`
 .kgoalst .kgoal-go{width:24px;height:24px}
 @media (max-width:599px){.kgoal-t{font-size:.8rem}.kgoalst{width:calc(100% - 16px)}}
 `;document.head.appendChild(css);
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitGoalStrip · kitGoalDetail · kitGoalCard (mục tiêu chương, việc kế, chạm xem)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitGoalStrip · kitGoalDetail · kitGoalCard (mục tiêu chương, việc kế, chạm xem)",
  html:()=>`<div class="kitpg-row" style="max-width:480px">${kitGoalStrip()||kitGoalStrip({G:{kicker:"Chương 1",title:"Nhập cung, đứng vững",step:"Được tấn phong một bậc (nay Đáp ứng)",next:[{t:"Đi thỉnh an Hoàng hậu sáng mai"}]}})}</div>`})}catch(e){}
 window.kitGoalNow=kitGoalNow;window.kitGoalStrip=kitGoalStrip;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
 }catch(e){console.error("jgoal",e)}})();

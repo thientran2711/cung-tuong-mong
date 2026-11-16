@@ -1,5 +1,5 @@
 
-/* jtut: HƯỚNG DẪN TÂN THỦ (owner 11/15 03:55Z "hướng dẫn tân thủ cho người chơi làm quen tính năng của game") — KIT.md §71 (71.1–71.3; was §36 on the old branch, §36 is Hậu cung on main).
+/* jtut: HƯỚNG DẪN TÂN THỦ (owner 11/15 03:55Z "hướng dẫn tân thủ cho người chơi làm quen tính năng của game") — KIT.md §72 (72.1–72.3; was §36 on the old branch, §36 is Hậu cung on main).
    One kit, two pieces, both drawn as the kit panel (.dlg.kpanel, kpHeader, .kbtn) with the guide's portrait in the kit frame (pcPort, role mama):
    - kitCoach(spec): spotlight (the step's target stays bright inside a gold ring, the rest is dimmed) + a small coach card placed beside the
      target, never over it when the step asks for a tap. Re-measured on every resize / rotation / scroll and while the target moves.
@@ -82,6 +82,11 @@ const st=document.createElement("style");st.id="kit-tut";st.textContent=`
 .ktut-say .ktut-do{color:var(--gold);font-weight:600}
 .ktut-card .kpopts,.ktip .kpopts{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:6px 14px 12px;margin:0;min-height:0;position:static}
 .ktut-card .kpopts .kbtn,.ktip .kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
+.ktut-pic{height:min(150px,19vh);overflow:hidden;border-radius:var(--k-rad,8px);margin:0 0 8px}
+.ktut-pic>*{width:100%!important;height:100%!important;max-width:none!important;margin:0!important}
+.ktut-pic img{width:100%;height:100%;object-fit:cover}
+.ktut-big .ktut-say{max-height:calc(100vh - 150px);overflow:auto}
+#ktut .ktut-card.ktut-big{width:min(580px,calc(100vw - 24px))}
 .kpseal.kp-guide{background:#a0584a;border-color:#6e3a30}
 .ktip[hidden]{display:none!important}
 .ktip{position:fixed;left:50%;translate:-50% 0;z-index:9200;width:min(420px,calc(100vw - 24px));pointer-events:none}
@@ -207,10 +212,39 @@ function grpHTML(k){const L=grpKeys(k);if(srv()&&k==="staff")return say(`<p>Đ�
  const rows=L.map(x=>[tabLabel(x),say(SUBSAY[x]||""),"n"]).filter(r=>r[1]);
  if(L.length<2)return say(`<p>${rows[0]?rows[0][0]+": "+rows[0][1]+".":""}</p>`);
  return say(`<p>Mục ${grpLabel(k)} có ${L.length} phần, chạm hàng trên cùng để đổi:</p>`)+kitRows(rows)}
+/* ---------- GAME NÀY CHƠI GÌ: the intro pages of step 1 ---------- */
+function pic(src,lab){try{if(!src)return"";return `<div class="ktut-pic">${kitSceneArt(src,lab||"",{shape:"wide",cap:false})}</div>`}catch(e){return""}}
+function ia(k){try{const a=kitInfoArt(k);return a&&a.src||""}catch(e){return""}}
+function owide(){try{return typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k)}catch(e){return""}}
+const rows=L=>kitRows(L.map(x=>[x[0],say(x[1]),x[2]||""]));
+const INTRO=[
+ {t:"Game này là gì",h:()=>pic(owide(),"")+say(`<p>{M} là ${MM_NAME}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
+  rows([["Đây là","một kiếp người trong hậu cung: {x} là một cô gái vừa vào cung, mỗi ngày tự chọn việc mà làm để sống sót và đi lên"],
+   ["Mỗi kiếp","một thân phận khác (con nhà quyền thế, nhà buôn, cung nữ…), một Hoàng thượng khác, một hậu cung khác"],
+   ["Lựa chọn","không có đường định sẵn; việc nào cũng ghi rõ cái được và cái giá"]])},
+ {t:"Mục tiêu",h:()=>pic(ia("Sắc phong"),"")+rows([["Sống sót","trong cung có người thương, có kẻ ghen, kẻ hại; giữ được mạng mình là trước hết"],
+   srv()?["Đi lên","từ thân cung nữ, được chủ tin và Hoàng thượng để mắt thì được phong Đáp ứng, rồi leo như phi tần"]
+    :["Đi lên",`từ ${RANKS[0].n}, Thường tại, Quý nhân, Tần, Phi, Quý phi, Hoàng quý phi tới Hoàng hậu; con lên ngôi thì thành Hoàng thái hậu`],
+   ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
+   ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; dải mục tiêu trên màn luôn cho biết chương này cần gì"],
+   ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
+ {t:"Một ngày chơi thế nào",h:()=>pic(ia("Hành sự"),"")+rows([["Buổi · khắc","mỗi ngày bốn buổi: sáng, trưa, chiều, tối; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
+   [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
+   srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
+   srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
+   srv()?null:["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
+   ["Sự việc","tin trong cung, sự kiện, lời mời tự tìm đến; {x} chọn cách đáp"],["Sang buổi","hết khắc thì qua buổi; qua buổi tối là sang ngày mới"]].filter(Boolean))},
+ {t:"Được · mất",h:()=>pic(ia("Luân hồi")||ia("Mệnh truyện"),"")+rows([["Mất","bệnh nặng, sinh nở gặp nạn, bị người hại thì hết kiếp","r"],
+   ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
+   ["Được",srv()?"được phong vị, có người nâng đỡ, đi tới đâu tùy {x}":"ngôi Hoàng hậu; con lên ngôi thì làm Hoàng thái hậu, buông rèm nhiếp chính, hay tự lên ngôi","g"],
+   ["Phúc duyên","kiếp sau không mang theo gì; chỉ Phúc duyên tích được để đổi thân phận"],
+   ["Chơi cùng bạn","hai người một hậu cung, mỗi người một thân phận, một mục tiêu riêng"]])+say(`<p>{X} chạm <b>Tiếp</b> để {m} chỉ qua mấy chỗ trên màn.</p>`)}];
+function introHTML(i){const P=INTRO[i];return P.h()}
 /* ---------- LƯỢT DẪN ĐẦU KIẾP: 12 steps ---------- */
 const STEPS=[
- {id:"chao",title:"Lời chào",big:true,prep(){goRoom()},
-  html:()=>say(`<p>{M} là ${MM_NAME}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung.</p><p>{M} xin chỉ qua mấy chỗ cần biết. {X} chạm <b>Tiếp</b> để nghe, hay <b>Bỏ qua lời dặn</b> nếu đã thạo.</p>`)},
+ /* step 1 = "Game này chơi gì" (owner 16/11: "bạn tôi hỏi ủa game này chơi cái gì? Mục tiêu là gì? Làm gì?"): 4 short pages, each with a
+    painted picture (kitSceneArt) + kit rows; "Tiếp" turns the page, the last page goes on to the tour; "Bỏ qua lời dặn" on every page. */
+ {id:"chao",title:()=>INTRO[T.page||0].t,big:true,pages:()=>INTRO.length,prep(){goRoom()},html:()=>introHTML(T.page||0)},
  {id:"tuchat",title:"Thanh trên cùng",target:"#kstrow",prep(){goRoom()},
   html:()=>srv()?say(`<p>Tám ô trên cùng là căn cơ của {x}: Sắc, Tài, Tâm cơ, Đức là tư chất; Bạc để chi tiêu, Sức để làm việc, Chủ tin là chủ nhân tin {x} bao nhiêu, Danh là tiếng tăm.</p><p>Chạm vào ô nào cũng có lời giải.</p>`)
    :say(`<p>Tám ô trên cùng là căn cơ của {x}:</p>${kitRows([R("Tư chất","Sắc · Tài · Tâm cơ · Đức"),R("Bạc","tiền riêng để chi tiêu"),R("Sức","để làm việc; dưới 20 thì không làm được việc nặng"),R("Sủng","Hoàng thượng thương {x} bao nhiêu"),R("Danh","tiếng tăm trong cung")].map(x=>[x[0],say(x[1]),x[2]]))}<p>Chạm vào ô nào cũng có lời giải.</p>`)},
@@ -240,14 +274,14 @@ const STEPS=[
  {id:"so",title:"Ghi sổ · Nạp sổ",target:"#menu",pad:4,prep(){goRoom()},
   html:()=>say(`<p>Sổ tự ghi sau mỗi việc. Chạm ☰ để về màn đầu: chọn sổ, nạp lại kiếp đang chơi, xem Sổ luân hồi.</p><p>Chép sổ và Nạp sổ nằm trong Thiết lập; muốn nghe {m} dặn lại thì chọn <b>Xem lại lời dặn</b>.</p>`)},
  {id:"quabuoi",title:"Sang buổi",target:"#next",pad:4,side:"above",prep(){goRoom()},last:true,
-  html:()=>say(`<p>Hết khắc hay muốn nghỉ thì chạm <b>Sang buổi</b>. Qua hết buổi tối là sang ngày mới, hết tuần thì: Hoàng thượng lật thẻ bài, rút quẻ mới.</p><p>{M} xin lui. Gặp việc mới, {m} sẽ dặn thêm đôi lời.</p>`)}];
+  html:()=>say(`<p>Hết khắc hay muốn nghỉ thì chạm <b>Sang buổi</b>. Qua buổi tối là sang ngày mới, cũng là tuần mới: Hoàng thượng lật thẻ bài, rút quẻ mới.</p><p>{M} xin lui. Gặp việc mới, {m} sẽ dặn thêm đôi lời.</p>`)}];
 window.KTUT_STEPS=STEPS;
 const TOUR_TABS={the:"act",dudo:"go",tutrang:"inv",muctieu:"story",khac:"que"};
 function steps(){return STEPS.filter(s=>!s.when||s.when())}
 function total(){return steps().filter(s=>s.id!=="ketqua").length}
 function numOf(s){const L=steps().filter(x=>x.id!=="ketqua");const i=L.indexOf(s);return i<0?L.indexOf(STEPS[STEPS.indexOf(s)-1])+1:i+1}
 
-function tourStart(){if(T.on)return;tipOff();T.on=true;T.step=-1;T.paused=false;T.res0=window.kaLastResult;next()}
+function tourStart(){if(T.on)return;tipOff();T.on=true;T.step=-1;T.page=0;T.paused=false;T.res0=window.kaLastResult;next()}
 function tourEnd(how){T.on=false;T.step=-1;coachOff();PICK=null;REC.tour=how||"done";REC.asked=1;saveRec();try{if(S&&!coop())S.tutTour=1}catch(e){}
  const t=resOn();if(t)setTimeout(()=>t.classList.remove("on"),200);T.tipGap=Date.now()+2500;T.replay=false}
 function next(){const was=STEPS[T.step];if(was&&was.id==="ketqua"){const t=resOn();if(t)t.classList.remove("on")}let i=T.step+1;while(i<STEPS.length){const s=STEPS[i];if((!s.when||s.when())&&!(s.skipIf&&s.skipIf()))break;i++}
@@ -258,8 +292,9 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
  const n=numOf(s),tot=total();
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
-  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:`${MM_NAME} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
-   on(k){if(k==="skip")return tourEnd("skip");if(k==="next")next()}})},prep&&s.prep?560:0)}
+  const np=s.pages?s.pages():0,pg=T.page||0;
+  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MM_NAME} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
+   on(k){if(k==="skip")return tourEnd("skip");if(k==="next"){if(np&&pg<np-1){T.page=pg+1;show(false);return}T.page=0;next()}}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
  if(T.waitRes){if(resOn()||Date.now()-T.waitRes>3000){T.waitRes=0;next()}return true}
@@ -351,7 +386,8 @@ try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not 
 /* ---------- Thiết lập: "Lời dặn tân thủ" switch (kit toggle) ---------- */
 try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
   const tg=kitToggle({id:"o-tut",label:"Lời dặn tân thủ",sub:"ma ma chỉ lối, dặn khi gặp việc mới",on:optOn()});
-  return h.replace(/<\/div>\s*$/,tg+"</div>")};
+  const rb=(typeof S!=="undefined"&&S&&!S.dead)?`<button type="button" class="kbtn alt ktutb" data-ktut-replay="1">Xem lại lời dặn<small>Game này chơi gì · ${MM_NAME} chỉ lối</small></button>`:"";
+  return h.replace(/<\/div>\s*$/,tg+rb+"</div>")};
  const ow=wireOpt;wireOpt=function(){const r=ow.apply(this,arguments);try{const t=document.getElementById("o-tut");if(t)t.onchange=e=>{OPT.tut=!!e.target.checked;saveOpt();try{if(OPT.tut&&S)S.tutOld=0}catch(x){}if(!OPT.tut){tipOff();T.pend={}}}}catch(e){}return r};
  window.optHTML=optHTML;window.wireOpt=wireOpt}catch(e){console.error(e)}
 
@@ -362,5 +398,6 @@ function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- const c=document.querySelector('#modal.kpthome [data-tgo="cont"]');T.replay=true;try{if(S)S.tutOld=0}catch(x){}if(c)c.click()},true);
+ const c=document.querySelector('#modal.kpthome [data-tgo="cont"]');T.replay=true;try{if(S)S.tutOld=0}catch(x){}
+ if(c)c.click();else{/* from Thiết lập in play: close the panel, the tour starts when the screen is free */const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()}},true);
 }catch(e){console.error(e)}})();

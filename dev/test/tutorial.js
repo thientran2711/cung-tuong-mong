@@ -28,11 +28,13 @@ const out=o=>console.log(JSON.stringify(o));
    await shot(p,String(n).padStart(2,'0')+'-'+m.id);out({TAG,...m});
    if(!m.inView)fail('card out of view',{id:m.id});if(m.overflowX)fail('overflowX',{id:m.id});if(m.cut)fail('cut text',{id:m.id});if(m.interact&&m.overlap)fail('card over the tap target',{id:m.id});
    if(m.id==='thu'){const h=m.hole;await p.mouse.click(h.x+h.w*.7,h.y+h.h/2);await until(p,()=>KTUT_STEPS[KTUT.step].id!=='thu',20000);continue}
+   if(m.id==='chao'){/* the 4 intro pages "Game này chơi gì" */for(let pg=1;pg<=4;pg++){const s2=await metrics(p);await shot(p,'00-intro-'+pg);out({TAG,intro:pg,sub:s2.sub,inView:s2.inView,cut:s2.cut});if(!s2.inView)fail('intro page out of view',{pg});
+     if(!new RegExp('trang '+pg+'/4').test(s2.sub||''))fail('intro page number',{pg,sub:s2.sub});if(pg<4){await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());await p.waitForTimeout(900)}}}
    const st=m.step;await p.evaluate(()=>{const b=document.querySelector('#ktut [data-ktut=next]');if(b)b.click()});
    await until(p,s=>KTUT.step!==s,8000,st)}
   const r=await p.evaluate(()=>({tour:KTUT.rec.tour,saved:S.tutTour,hidden:document.getElementById('ktut').hidden,used}));out({TAG,end:r});if(r.tour!=='done'||!r.hidden)fail('tour end');
   /* resize / rotate mid-tour: replay to step 2 and turn the screen */
-  await p.evaluate(()=>{kitTour()});await until(p,()=>!document.getElementById('ktut').hidden);await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());await p.waitForTimeout(1500);
+  await p.evaluate(()=>{kitTour()});await until(p,()=>!document.getElementById('ktut').hidden);for(let i=0;i<4;i++){await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());await p.waitForTimeout(700)}await p.waitForTimeout(1500);
   await p.setViewportSize({width:H,height:W});await p.waitForTimeout(1800);const rm=await metrics(p);out({TAG,rotated:rm});await shot(p,'rot-'+rm.id);
   const hr=await p.evaluate(()=>{const r=document.querySelector('#kstrow').getBoundingClientRect(),h=document.querySelector('#ktut .ktut-hole').getBoundingClientRect();return Math.abs(r.top-6-h.top)+Math.abs(r.left-6-h.left)});if(hr>4)fail('hole not on target after rotate',{hr});
   await p.setViewportSize({width:W,height:H});await p.waitForTimeout(800);await p.evaluate(()=>document.querySelector('#ktut [data-ktut=skip]').click());

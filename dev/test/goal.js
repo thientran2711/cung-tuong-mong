@@ -1,4 +1,4 @@
-/* KIT §71 goal (jgoal) + tutorial start: new life → "Mệnh truyện kiếp này" card right after Nhập cung; goal strip in Hành sự + on the stage;
+/* KIT §72 goal (jgoal) + tutorial start: new life → "Mệnh truyện kiếp này" card right after Nhập cung; goal strip in Hành sự + on the stage;
    tap → chapter detail; "Đi làm" → tab + ring; old save past week 2 → no goal card, no tour, no tips.
    usage: node dev/test/goal.js <url> <W>x<H> [shotdir] [origin=tt]   (prints JSON; exit 1 on a FAIL) */
 const {chromium}=require('playwright');

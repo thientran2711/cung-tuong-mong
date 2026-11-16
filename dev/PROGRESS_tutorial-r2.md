@@ -3,20 +3,20 @@
 Replaces review/tutorial (WIP 2/3, ~770 behind): its 3 files were re-ported onto today's main, not merged.
 
 ## What is in
-- `dev/build/jtut.js` (KIT §71.1, was §36 on the old branch): Quế ma ma guide, kitCoach spotlight + kitTip first-time tips, tour ≤12 steps
-  (chào · thanh trên · buổi/khắc/quẻ · đọc thẻ · làm thử (+thẻ kết quả) · Dư đồ · Hậu cung group · Giao tình group · Tư trang · Mục tiêu chương
+- `dev/build/jtut.js` (KIT §72.1, was §36 on the old branch): Quế ma ma guide, kitCoach spotlight + kitTip first-time tips, tour ≤12 steps
+  (step 1 = "Game này chơi gì": 4 pages with pictures — what the game is, the goal, how a day works, win/lose + Phúc duyên + co-op · thanh trên · buổi/khắc/quẻ · đọc thẻ · làm thử (+thẻ kết quả) · Dư đồ · Hậu cung group · Giao tình group · Tư trang · Mục tiêu chương
   (goal strip) · ☰ ghi/nạp sổ · Sang buổi). Group steps read the live tab layout (`#tabs [data-tab]`, `KG`, `.ksub [data-ksub]`).
-  Thiết lập switch "Lời dặn tân thủ", ☰ "Xem lại lời dặn". Sổ in its first 2 weeks: asked once; past week 2: no tour, no ask, no tips (S.tutOld).
+  Thiết lập switch "Lời dặn tân thủ" + "Xem lại lời dặn" button there and in ☰. Sổ in its first 2 weeks: asked once; past week 2: no tour, no ask, no tips (S.tutOld).
   Fixes vs old WIP: fresh-life flag not tied to `quiet` (Luân hồi waits for figures), trial act = quiet card (never Điểm trang / lessons that open
   a mini game), any other kit panel pauses the tour, ring clipped to the visible part of the scroll box and above the bottom bar, tap-step card
   narrows into the free side on phone landscape, tips wait while a coach ring is open, staff wording "Ta tin cậy" (VANPHONG fixer scan clean).
-- `dev/build/jgoal.js` (KIT §71.2–71.3): kitGoalNow (one data source) · kitGoalStrip (the EXISTING Hành sự line `.obj67` of j67 is now this kit
+- `dev/build/jgoal.js` (KIT §72.2–72.3): kitGoalNow (one data source) · kitGoalStrip (the EXISTING Hành sự line `.obj67` of j67 is now this kit
   strip, tappable, "›"; also on the main stage, left of the stage chips, hidden when the Hành sự strip shows) · kitGoalDetail (chapter detail,
   MINIMAL view for review/chapter-detail C24) with "Đi làm" options (open the tab + ring the act card) · kitGoalCard "Mệnh truyện kiếp này"
   queued right after the Nhập cung card of a new life (each machine / own life; co-op guest too). Chapter card on Mệnh truyện › Chương này opens
   the detail too.
 - `dev/build/j67.js`: the Hành sự goal line uses kitGoalStrip (falls back to the old line if jgoal is missing).
-- KIT.md §71 (number PROVISIONAL — coordinator registry). Kit sample page: KIT_SAMPLES §71.
+- KIT.md §72 (number PROVISIONAL — coordinator registry). Kit sample page: KIT_SAMPLES §72.
 
 ## Tests (serve the repo ROOT after `bash dev/site/build_site.sh`; dev/index.html alone does not boot)
 - `node dev/test/goal.js <url> WxH [shotdir] [origin]` — goal card after Nhập cung, tour starts, strip, tap → detail, Đi làm → ring, old sổ
@@ -26,6 +26,6 @@ Replaces review/tutorial (WIP 2/3, ~770 behind): its 3 files were re-ported onto
 - Images on headless need HTTPS_PROXY (the tests pass it to chromium).
 
 ## Open / for the coordinator
-- KIT §71 number to confirm. review/newgame-ui may change the Nhập cung card into the event frame: the goal card finds it by title /^Nhập cung/
+- KIT §72 number to confirm. review/newgame-ui may change the Nhập cung card into the event frame: the goal card finds it by title /^Nhập cung/
   (also kit.title), so it stays right after it. review/chapter-detail (C24) should grow kitGoalDetail instead of a second panel.
 - Co-op: only by design (all local per machine; start() runs on each machine) — no 2-device run done here.
