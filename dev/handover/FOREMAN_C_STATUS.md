@@ -95,6 +95,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:25Z cut-out lead: skirt cut is in the REAL file (canvas 672 px too narrow; c20 alpha touches L/R on ~420 rows) — also old sprites touch edges a few px → regenerate on wider canvas + QA rule 'alpha touches any canvas edge = FAIL' for every file; one skin ref (c01). New 4-figure sample coming.
 - 21:27Z cut-out sample v2 (c20/c02/c08/c14 new + c01 skin ref; 1024x2048, 0 px edge touch, one skin tone) looked at → SENT to owner (also explained to her: 'tách nền' = repaint on transparent background, no cutting).
 - 21:28Z cf-tray E-bright r3 looked at → SENT to owner. FP v16 (NC ranks step up: Đáp ứng consort silver, Tần richer, Phi crown + long coat) HELD by C: BD Tần + Quý phi B skin warmer than NC → v16b with their skin-only fixes on the sheet.
+- 21:29Z C9 #3: 72 FAIL por fixed at ~0.085 + uploaded (md5 checked), specks/m22-t6 rect gone (code review/huadian-size f931416e, report §r6). OPEN: ty1-8 por median 0.095 (clusters 0.10–0.13), twins, m45-t1 patch → folded into fig-cutout-clean regen (those ty files are repainted anyway; huadian painted small + measured in QA). C9 worker ARCHIVED.
 
 =======
 >>>>>>> a1438803 (Foreman C s7: handover to s8)
