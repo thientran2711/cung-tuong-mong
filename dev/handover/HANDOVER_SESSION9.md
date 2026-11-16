@@ -421,3 +421,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (18:04Z s21) care-overlap 7c02ff56 (one kit rule jinv.js; carries pet-lifespan-r1) → SMALL reviewer; worker archived.
 - (18:15Z s21) stage-pets A|B REJECTED by owner (figures too small vs kit figure scale 85–90 %) → worker r2 told to redo at full scale (overlap/stagger + fold column), full-screen labelled shots. LESSON: self-check figure scale rule before sending any stage/figure sample.
 - (18:22Z s21) Owner SWIPE STAGE spec (OD last line) → sent to stage-pets r3 worker (replaces 3-on-one-stage). Courtyard map level: check what is live (review/palace-map not live; palace-map-port live).
+- (18:11Z s21) PASS waiting to go live (main can't push; owner to decide): pet-lifespan-r1 0e8e3684, flip-hand-r1 673dafc09 (FLAG: iPad touch moment = long bare forearm). tut-replay ecd2ffb3 (root: autosave stored the open menu card) → BIG reviewer; worker + flip-hand reviewer archived.

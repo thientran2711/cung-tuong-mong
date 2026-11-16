@@ -305,3 +305,4 @@
 | care-overlap review r1 (sonnet, SMALL) of 7c02ff56 | review/care-overlap-r1 | main s21 | session_01UV1SzhEkrfs7MvRDaDQHp8 | RUNNING | 16/11 18:04Z |
 | origin-intros review r1 (opus, BIG: entry flow) of 30b37ea0 on main + review/kc-roads-cn-nc-fix2 (D; ships after it) | review/origin-intros-r1 | C | session_011xDdVRKUzkmr3cK3M5QXvn | RUNNING | 16/11 18:06Z |
 | stage-pets r3 successor (sonnet): 3 people + pets at KIT figure scale 85–90 %, stagger/overlap, fold column | review/stage-pets | main s21 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 18:06Z |
+| tut-replay review r1 (sonnet, BIG save) of ecd2ffb3 | review/tut-replay-r1 | main s21 | session_01UV1SzhK2qhxKezAoaM3cbk | RUNNING | 16/11 18:11Z |
