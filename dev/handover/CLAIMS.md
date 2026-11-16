@@ -291,7 +291,7 @@
 | stage-pets r2 successor (sonnet): backdrop wait, S pet size, 3-people samples A (narrow right column) | B (shrink) for owner | review/stage-pets | main s21 | session_01UV1Szi6MsAMKHyAGi1WvNc | RUNNING | 16/11 17:35Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | RUNNING | 16/11 17:36Z |
 | D GO-LIVE prep (worker merges+tests; Foreman D runs golive.sh --yes itself) | review/<each>-golive | D | session_01DgYSWnvC5ntuJ6oLspAoXu | RUNNING | 16/11 17:45Z |
-| NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | session_01DgYSWmUVjZctWQWG8HUzdY | RUNNING | 16/11 17:45Z |
+| NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | session_01DgYSWmUVjZctWQWG8HUzdY | DONE SẴN SÀNG KIỂM f699bbf4 (archived) | 16/11 17:45Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan-r1 | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | DONE PASS 0e8e3684 | 16/11 |
 | status-icons r2 review (sonnet, SMALL) of 0613ec0a5 | review/status-icons-r1 | main s21 | session_01UV1Szkts9Mdx3Ydnpyf3No | DONE PASS e47bba8a | 16/11 |
 | care-overlap (sonnet, UI bug on live): Chăm screen act picture covers top bars — whole group via kit | review/care-overlap | main s21 | session_01UV1SzhZKa3YaPKzy8XgdPe | RUNNING | 16/11 17:44Z |
@@ -333,5 +333,5 @@
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
 | emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | RUNNING | 16/11 18:50Z |
-| npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | (opening) | RUNNING | 16/11 18:50Z |
-| NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads-u2 | D | (opening) | RUNNING | 16/11 18:50Z |
+| npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | RUNNING | 16/11 18:50Z |
+| NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | RUNNING | 16/11 18:50Z |
