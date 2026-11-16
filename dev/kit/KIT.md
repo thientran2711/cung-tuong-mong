@@ -79,8 +79,8 @@ Kit core: `j15` (person card, pager, buttons), `j17` (effect lines), `j19` (act 
 ### 1.3 ONE rank palette (harem + servants + roles) — `dev/build/j1.js` (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn")
 The values are typed ONLY in j1: `RCOL` (8 ranks), `RCOL_COLD` (lãnh cung), `MRCOL` (maids), `ERCOL` (eunuchs), `KIT_ROLE` (non-rank roles). Nobody keeps a copy:
 read live `RCOL[rank]` / `KIT_RANK_COL[rank]` / `kitRankCol(rank|'cold')` (j60) / `kitServCol(role,rank)`. Used by: halo, ring, chips, card colour `--c`, portrait ground `.rk-c0..c7`,
-text tone. The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 4.0:1
-on parchment #fbf3e2 (bold serif title); `kitRankTone(title)` looks the title up in `KIT_RT` (title words → base colour read from j1) and applies `kitToneOf`.
+text tone. The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 2.8:1
+on parchment #fbf3e2 (jewel tones; legibility comes from the 48.1h edge); `kitRankTone(title)` looks the title up in `KIT_RT` (title words → base colour read from j1) and applies `kitToneOf`.
 Portrait grounds `.rk-c0..c7` are generated from `RCOL` by the `kit-rk` style (jk4), not typed in CSS.
 
 | rank | name | base colour (RCOL) | family |
@@ -2701,10 +2701,12 @@ the top edge (KIT 33: figures fill the stage), where the scene title (top left) 
 a label over the head would cover either. Pets: no pet card exists on main yet.
 Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-fill.js` (chip bottom ≤ painted top).
 
+**48.1h ONE EDGE for every rank text** (owner 11/16 "nhạt nhòa" + main s17): the rank colour stays vivid; legibility = `-webkit-text-stroke:.45px` of the same hue deepened (45 % + ink) with `paint-order:stroke fill` + a soft shadow `0 1px 1.5px #3a1e0c38`, on every title (`.krt .knr-r .j59t .kti .pcrk .kname .kti…`); the painting rules (48.1d/e) add their light halo on top.
+
 ### 48.1 RANK TITLE · `kitRankTone` + `.krt` / `.krn` (owner, ref. shot of another game: a title floating above the name) — `dev/build/jk4.js`
 The rank / role line above every name is a TITLE, the name under it is plain ink. One look everywhere a rank sits over a name:
 - TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), VIVID
-  (owner 11/16: every tone ≥ 4.0:1 on parchment #fbf3e2, derived by `kitToneOf`), no chip, no background.
+  (owner 11/16: jewel tones derived by `kitToneOf`, ≥ 2.8:1 on parchment #fbf3e2, legible through the 48.1h edge), no chip, no background.
 - FRAMED UI (dialogs incl. kitEventDp captions, person cards, Tuần lục, lists, podium plates, kit page): PLAIN text in the vivid tone — no glow,
   no outline. On a dark `.modal.night` panel the tone is lightened (55 % + white), still plain.
 - ON A PAINTING (stage name tags `.j59t` over the scene, captions over a picture `.kesov`, the kit sample's scene row `.krs`): the tone
