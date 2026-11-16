@@ -58,3 +58,4 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 
 ## Coordinator update 16/11 (kit keeper)
 - §76 = kitPalaceMap (merge-train-3, LIVE). §77 = kitStageRail (review/goal-strip-fix). §78 = kitPlaceIcon + kitHapMark (review/act-dedupe). §79 = slap minigame engine/marks (review/slap-mg). Next free: §80.
+- (16/11) kitChatBtn/Panel/List/Bubble (review/coop-chat) = §80 (it wrote §76; renumber at merge). Next free: §81.
