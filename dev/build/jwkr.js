@@ -91,7 +91,7 @@ function wkrBody(){const k=KWR.k,kinds=wkKindsOf(k).filter(x=>WKR[x]);const kind
   `<div class="kshg">${WKR[kind].map(r=>wkrTile(kind,r,l)).join("")}</div></div>`}
 function wkrRefresh(){const el=document.querySelector("#modal .kshop.kwr");if(!el)return;const g=el.querySelector(".kshg"),st=g?g.scrollTop:0;el.outerHTML=wkrBody();const g2=document.querySelector("#modal .kshop.kwr .kshg");if(g2)g2.scrollTop=st}
 /* step 2: the material for that recipe (the j83 cards: odds at 5 phần, score needed per tier, ceiling, gift / sale value) */
-function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=wkrOf(kind,rid),a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?5+l*5:0;const O=[];
+function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=wkrOf(kind,rid),a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+plain(fmt(K.fin)):""}`,
   go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
  O.push({n:"Thôi",fx:{}});
