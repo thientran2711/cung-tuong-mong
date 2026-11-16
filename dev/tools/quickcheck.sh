@@ -54,5 +54,6 @@ node "$KIT/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | te
 LINE=$(tail -1 "$OUT/run.log")
 if [ "$GRC" != 0 ]; then RC=1; LINE="QUICKCHECK FAIL · ${GLINE} · ${LINE#QUICKCHECK * · }"; fi
 if [ -n "$NOTBUILT" ]; then RC=1; LINE="QUICKCHECK FAIL · NOT BUILT: index.html at ${SHA:0:8} differs from a fresh build (run bash dev/site/build_site.sh, commit) · ${LINE#QUICKCHECK * · }"; fi
+[ "$GRC" = 0 ] && LINE="$LINE · core gates PASS"
 echo "$LINE · build ${BUILD_S} s · total $(( $(date +%s)-T0 )) s"
 exit $RC
