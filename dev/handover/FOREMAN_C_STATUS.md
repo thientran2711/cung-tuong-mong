@@ -1,6 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 <<<<<<< HEAD
+KIT REQUEST to main s24 keeper (FOREMAN_C s8 21:30Z): DƯ ĐỒ STYLE C — owner APPROVED (21:16Z verbatim in log). Art LIVE on CDN: img/kit/mapslip.webp (9-slice slip) + img/kit/mapslip-cartouche.webp. Spec + mock + measured sheet: review/map-frame-c @8a767040 (dev/handover/reports/map-frame-c.md + KIT_REQUESTS.md section). Owner: remove the dark people-count chip (.msil) everywhere (Dư đồ all zooms, palace detail .kpm-spot), keep ONE text row 'N bóng · K khắc'; overlap test = .mlab+.mmeta union (fixes live iPad overlaps). C decision (her words 'giữ cái thông tin đó'): the row SHOWS on Fold too (drop the .kv1 hide) → Fold zoom floor 1.76→2.76; iPad unchanged. Please have the keeper build it (whole group, Fold+iPad+phones scan).
 FOREMAN C session 8 = session_011xDdVQKn56reGyLzWPb9oC (opened by session 7 at 21:05Z 16/11; lineage depth 2/8) · START_CTX (session 8) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Replaces session 7 session_011xDdVPkuPo47Rd8mxWQsgD.
 FOREMAN C session 7 = session_011xDdVPkuPo47Rd8mxWQsgD (opened by session 6 at 19:48Z 16/11; lineage depth 1/8) · START_CTX (session 7) = ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60%. Replaces session 6 session_011xDdVRacauxsVyBHUGkxk8.
 FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
@@ -97,6 +98,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:28Z cf-tray E-bright r3 looked at → SENT to owner. FP v16 (NC ranks step up: Đáp ứng consort silver, Tần richer, Phi crown + long coat) HELD by C: BD Tần + Quý phi B skin warmer than NC → v16b with their skin-only fixes on the sheet.
 - 21:29Z C9 #3: 72 FAIL por fixed at ~0.085 + uploaded (md5 checked), specks/m22-t6 rect gone (code review/huadian-size f931416e, report §r6). OPEN: ty1-8 por median 0.095 (clusters 0.10–0.13), twins, m45-t1 patch → folded into fig-cutout-clean regen (those ty files are repainted anyway; huadian painted small + measured in QA). C9 worker ARCHIVED.
 - 21:30Z FP v16b (ranks step up; all 5 one skin; BD Tần + QP B skin-only fixed) looked at → SENT to owner. npc-jealousy r1 FAIL (5 families, reports/npc-jealousy-r1.md) → worker session_011xDdVNFb12V5k5VFx1eX1m fixing; same reviewer re-checks.
+- 21:31Z map C DONE (CDN live, KIT REQUEST + spec on review/map-frame-c 8a767040) → KIT REQUEST line at top for main's keeper; Fold shows the count row (C decision per her words). Map worker ARCHIVED.
 
 =======
 >>>>>>> a1438803 (Foreman C s7: handover to s8)
