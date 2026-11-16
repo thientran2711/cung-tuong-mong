@@ -334,7 +334,7 @@
 | single-hall direct (sonnet): single-hotspot places skip the courtyard step (owner rule), on pl-courtyards-r1 | review/single-hall | main s21 | (see HANDOVER) | RUNNING | 16/11 18:40Z |
 | road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | DONE FAIL 9+coop (archived) | 16/11 18:42Z |
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
-| people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
+| people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | LIVE caa73a87 (20:07Z) | 16/11 18:48Z |
 | emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | DONE FAIL 2 (archived) | 16/11 18:50Z |
 | npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | RUNNING | 16/11 18:50Z |
 | NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | DONE SẴN SÀNG KIỂM 02405da5 (archived; reviewer npc-roads-r1 now covers U0–U4) | 16/11 18:50Z |
@@ -377,4 +377,4 @@
 | co-op one-world audit analyst (opus; owner 19:57Z: any shared system computed separately / double-counted) | handover | main s23 (opened by s22) | session_01UV1Szk87bTSJicgPTiFX6E | RUNNING | 16/11 19:57Z |
 | weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | session_01UV1SziHY4wM9n3vdh5DZ81 | RUNNING | 16/11 20:03Z |
 | stage-pets r7 (opus): Fold = 2 people per view at FIXED slots (swipe for more), pets FIXED spot tied to owner slot on every stage/place (OD 19:54Z + 20:04Z) | review/stage-pets-r7 | main s23 | session_01UV1Szk2pMiNBA4H6RniQUP | RUNNING | 16/11 20:04Z |
-| NPC AGENT AG1 core + AG1b witness (opus; reports/npc-agent.md §5 + FOREMAN_C.md 18:00Z/19:28Z; base main caa73a87 with people-ledger + two-way-acts) | review/npc-agent | C | (opening) | RUNNING | 16/11 20:08Z |
+| NPC AGENT AG1 core + AG1b witness (opus; reports/npc-agent.md §5 + FOREMAN_C.md 18:00Z/19:28Z; base main caa73a87 with people-ledger + two-way-acts) | review/npc-agent | C | session_011xDdVQdAMNqfygpH41qGcQ | RUNNING | 16/11 20:08Z |

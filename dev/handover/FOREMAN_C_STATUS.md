@@ -34,6 +34,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 19:57Z GO-LIVE PUSH: buoi-art 84c00794 (see ANSWER line). Reviewer session_011xDdVP1UyUGDme7dK1Zmpy ARCHIVED.
 - 20:07Z GO-LIVE PUSH: PEOPLE LEDGER main 23595c37 → caa73a87 (review/people-ledger-r1 PASS e3d29d73, re-merged by C onto 84c00794 then 23595c37: only index.html/sw.js regenerated; quickcheck PASS 146 s, old save ok, perf ≈ live; pushed by hand — golive.sh tag push is 403). Reviewer note for AG: j22 roll(55) men haunt bypass at life start (1/12 lives) → AG train fixes.
 - 20:07Z small-art-c: snow-real-1..7 + fly-real-1..4 on CDN (ANSWER to main) + 9 two-way card pictures (6 new, 3 reused) + ACTS.json on CDN.
+- 20:08Z NPC AGENT train started: AG1+AG1b opus session_011xDdVQdAMNqfygpH41qGcQ (review/npc-agent, base main caa73a87). people-ledger-r1 reviewer ARCHIVED. small-art-c: 6 new cards looked at → redo ha-nhuc-h (modern ribbon gift box), then archive.
 
 ## SESSION 6 LOG
 - 17:49Z start (owner-opened, depth 0). Session 5 told to stop + ARCHIVED; its trigger trig_01QgAdMjgXXZm1ovzYPbju1W DELETED; own hourly wake trig_01B8ZVK48GgTwdRJjCS83QdG (:51 each hour). All 10 running C sessions told C = session 6.
