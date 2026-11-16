@@ -195,7 +195,7 @@ function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl
  if(by===S){m.af=(m.af||0)+15;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
 
 /* the player's choice */
-function menEyes(k,c){return liveRivals(true).filter(w=>w!==c&&(S.where||{})[w.id]===k).reduce((s,w)=>s+1+(w.mat||0)/2,0)}
+function menEyes(k,c){return liveRivals(true).filter(w=>w!==c&&whereOf(w)===k).reduce((s,w)=>s+1+(w.mat||0)/2,0)}
 function menChoose(m,v,y,a){const at=placeName(y.k);menStat("ch_"+a);if(a==="nghe"&&!v&&y.hv!=null){const hv=RV(y.hv);if(hv&&hv.alive&&!hv.out){v=hv;y=Object.assign({},y,{v:hv.id,hv:null})}}
  if(a==="bao"){menKh(1);try{k61Know(m,"Thị vệ tra hỏi, khai tên hắn.",true,2)}catch(e){}menReport(S,m,v,y,0);return}
  if(a==="ccti"){menKh(2);try{k61Know(m,"Cung Chính ti ghi tên hắn.",true,2)}catch(e){}menReport(S,m,v,y,1);return}
@@ -224,11 +224,11 @@ function menNpcAct(w,m,c,y){const d=menDecide(w,c);menStat("npc_"+d);
  if(d==="listen"&&c&&c!==w){if(menEye(w)>=(y.hide||0)+10)evA(w,c,1);return d}
  return d}
 /* a consort standing at that place in that buổi sees it; she understands it iff her eyes reach how well it is hidden */
-function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(const w of liveRivals(true)){if(w===c||(S.where||{})[w.id]!==y.k||menEye(w)<(y.hide||0))continue;menStat("npcSee");const d=menNpcAct(w,m,c,y);if(d==="report")break}}
+function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(const w of liveRivals(true)){if(w===c||whereOf(w)!==y.k||menEye(w)<(y.hide||0))continue;menStat("npcSee");const d=menNpcAct(w,m,c,y);if(d==="report")break}}
 /* she is the one caught: a private word with a man in the hậu cung while another consort is there */
 (function(){const t0=talk;talk=function(oi){let p=null,a=null;try{p=S&&curPeople()[popIdx];a=p&&p.kind==="man"&&talkOpts(p)[oi]}catch(e){}const before=S&&S.logSeq;const r=t0.apply(this,arguments);
  try{if(a&&menRoad()&&!S.dead&&S.logSeq!==before&&!/^Chào hỏi/.test(a.n)&&menZone(S.place)==="hc"){const m=p.ref;const y={k:S.place,r:m.tinh>=50||m.trysts?"meet":"talk"};
-  for(const w of liveRivals(true)){if((S.where||{})[w.id]!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
+  for(const w of liveRivals(true)){if(whereOf(w)!==S.place||menEye(w)<20)continue;menStat("seenMe");const d=menDecide(w,S);
    if(d==="report"){if(y.r==="talk"){ap(w,{danh:2});apply({danh:-4});oanAdd(S,w,10);log(`<span class="r">${rkName(w)} ${w.name} thấy ngươi nói chuyện riêng với ${m.name} ở ${placeName(S.place)} và đem chuyện đi rêu rao: Danh -4.</span>`)}else menReport(w,m,S,y,0);break}
    if(d==="hide"||d==="listen"){evA(w,S,d==="hide"?2:1);break}}}}catch(e){console.error("men talk",e)}return r}})();
 
