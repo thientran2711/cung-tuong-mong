@@ -11097,7 +11097,8 @@ function k61Shown(m){try{if(!m||!S||m.__k61||!k61S()||k61Look(m))return;const E=
 /* WHEN: only the dialog that is really drawn. j68 evGate (assembled before j61, so it runs INSIDE this wrapper) holds / drops optional
    events from Q right before drawing; revealing Q[0] before it ran met people whose dialog never opened (review face-reveal r1). So the
    reveal runs right after evGate; without j68 (or for an item left unrevealed) it runs here, before / after drawing. */
-(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){const r=g0.apply(this,arguments);try{k61Shown(Q[0])}catch(e){}return r}}
+(function(){if(typeof evGate==="function"){const g0=evGate;/* D13 jspread (review spread-events-r3): evGate(1) = a dry sift inside a buổi change, nothing is drawn → no meeting */
+ evGate=function(dry){const r=g0.apply(this,arguments);if(!dry)try{k61Shown(Q[0])}catch(e){}return r}}
  const s0=showModal;showModal=function(){try{if(typeof evGate!=="function")k61Shown(Q[0])}catch(e){}const r=s0.apply(this,arguments);
   try{const M=document.getElementById("modal");if(M&&!M.hidden&&Q[0]&&!Q[0].__k61)k61Shown(Q[0])}catch(e){}return r}})();
 /* old saves (cheap backfill, once): a consort the old rule named in a dialog ("… đến tận nơi nói chuyện với ngươi") was never marked met,
@@ -39314,7 +39315,11 @@ function sp13Tick(){/* inside / right after a buổi change: this buổi's own u
 (function(){
  const nb0=nextBuoi;nextBuoi=function(){if(SP13.off())return nb0.apply(this,arguments);const k0=S&&SP13.now();SP13.nb++;let r;
   try{r=nb0.apply(this,arguments)}finally{SP13.nb--;if(!SP13.nb)SP13.vo=0}
-  try{if(S&&!S.dead&&!SP13.off()&&SP13.now()!==k0){sp13Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){console.error("spread",e)}return r};
+  try{if(S&&!S.dead&&!SP13.off()&&SP13.now()!==k0){
+   /* review r3: a module that paints the modal itself during the change (j95b after() calls its inner showModal when a false warning is
+      purged and the modal READS open) leaves a card on screen; if planning moves that card, repaint so the screen shows Q[0] */
+   const hd=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden"),M=$("modal"),p0=M&&!hd.get.call(M)?Q[0]:null;
+   sp13Tick();if(Q.length&&(M.hidden||(p0&&Q[0]!==p0)))showModal()}}catch(e){console.error("spread",e)}return r};
  /* during the buổi change the cards arrive in several batches (endTurn, news, j70, j68 …): nothing is shown until the change is over,
     then the whole batch is planned at once and the first card shown. Each blocked call still runs the queue's show-time sifting (sp13Pre) and
     from the first card on the modal reads as open to the game code (SP13.vo, a JS-only view of M.hidden: no DOM change, nothing painted), so the
@@ -41444,7 +41449,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ac562f9075d8";window.CTM_BUILD=BUILD;
+const BUILD="efbd1cccaeef";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

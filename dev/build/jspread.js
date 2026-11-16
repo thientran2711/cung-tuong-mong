@@ -95,7 +95,11 @@ function sp13Tick(){/* inside / right after a buổi change: this buổi's own u
 (function(){
  const nb0=nextBuoi;nextBuoi=function(){if(SP13.off())return nb0.apply(this,arguments);const k0=S&&SP13.now();SP13.nb++;let r;
   try{r=nb0.apply(this,arguments)}finally{SP13.nb--;if(!SP13.nb)SP13.vo=0}
-  try{if(S&&!S.dead&&!SP13.off()&&SP13.now()!==k0){sp13Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){console.error("spread",e)}return r};
+  try{if(S&&!S.dead&&!SP13.off()&&SP13.now()!==k0){
+   /* review r3: a module that paints the modal itself during the change (j95b after() calls its inner showModal when a false warning is
+      purged and the modal READS open) leaves a card on screen; if planning moves that card, repaint so the screen shows Q[0] */
+   const hd=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden"),M=$("modal"),p0=M&&!hd.get.call(M)?Q[0]:null;
+   sp13Tick();if(Q.length&&(M.hidden||(p0&&Q[0]!==p0)))showModal()}}catch(e){console.error("spread",e)}return r};
  /* during the buổi change the cards arrive in several batches (endTurn, news, j70, j68 …): nothing is shown until the change is over,
     then the whole batch is planned at once and the first card shown. Each blocked call still runs the queue's show-time sifting (sp13Pre) and
     from the first card on the modal reads as open to the game code (SP13.vo, a JS-only view of M.hidden: no DOM change, nothing painted), so the

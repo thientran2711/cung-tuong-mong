@@ -193,7 +193,8 @@ function k61Shown(m){try{if(!m||!S||m.__k61||!k61S()||k61Look(m))return;const E=
 /* WHEN: only the dialog that is really drawn. j68 evGate (assembled before j61, so it runs INSIDE this wrapper) holds / drops optional
    events from Q right before drawing; revealing Q[0] before it ran met people whose dialog never opened (review face-reveal r1). So the
    reveal runs right after evGate; without j68 (or for an item left unrevealed) it runs here, before / after drawing. */
-(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){const r=g0.apply(this,arguments);try{k61Shown(Q[0])}catch(e){}return r}}
+(function(){if(typeof evGate==="function"){const g0=evGate;/* D13 jspread (review spread-events-r3): evGate(1) = a dry sift inside a buổi change, nothing is drawn → no meeting */
+ evGate=function(dry){const r=g0.apply(this,arguments);if(!dry)try{k61Shown(Q[0])}catch(e){}return r}}
  const s0=showModal;showModal=function(){try{if(typeof evGate!=="function")k61Shown(Q[0])}catch(e){}const r=s0.apply(this,arguments);
   try{const M=document.getElementById("modal");if(M&&!M.hidden&&Q[0]&&!Q[0].__k61)k61Shown(Q[0])}catch(e){}return r}})();
 /* old saves (cheap backfill, once): a consort the old rule named in a dialog ("… đến tận nơi nói chuyện với ngươi") was never marked met,
