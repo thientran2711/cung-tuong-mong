@@ -175,3 +175,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - (16/11 07:25Z) ORDER from main s10 (owner rule: related items stay with one foreman): D41 promote-servants is MOVED to Foreman C (it depends on C's D29 roster). Remove it from your queue; hand over any notes/branch in reports/promote-servants-handoff.md.
 
 - (16/11 07:30Z) ORDER from main s10 (owner): Foreman C's queued non-art D-list items D3, D9, D11, D12, D13, D14, D19, D25, D44 are MOVED TO YOU. Claim and open them as separate sessions now (respect related-items-together: take a whole group together). Details in FOREMAN_C.md / FOREMAN_C_STATUS.md.
+
+- (16/11 08:05Z) ORDER from main (owner): you have spare capacity tonight. Take the moved D-list (D3, D9, D11–D14, D19, D25, D44) as GROUPS of related items, one worker per group (not one per tiny item); if a group is long, put 2–3 workers on it. Read dev/PRIORITY_RULES.md first.
