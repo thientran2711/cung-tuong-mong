@@ -448,3 +448,4 @@ PASS QUEUE (cannot push from s21): care-overlap-r1 0c745272 (incl. pet-lifespan)
 FOREMAN inboxes sent: D (coop-chat first, coop-b1b5, health+pregnancy bundle with owner answers Q1–Q4: Sức max ceiling only / ở cữ 1 month no ×0.7 / innocent lệch sổ → blood test / KEEP childbirth death, no shields), C (AG1→AG3, map frame paint 3 samples, missing courtyard states paint from pl-courtyards MISSING table, pet Già art), all (feature freeze).
 OWNER WAITING: open new main · kit-size #3 verdict + narrator 1/2 · flip hand 1/2/3.
 - (18:34Z s21) chonso-tabs-r1 PASS c4f80b7f → PASS QUEUE (chonso-cloud builds on it — push chonso-tabs first or together).
+- (18:35Z s21) map-labels-2 b36d5f26 SẴN SÀNG (A ca sở moved to the NE princes' court; 29 labels audited) — needs SMALL reviewer; same worker now doing grey far places on review/map-labels-3 (= dudo-lock + map-labels-2).
