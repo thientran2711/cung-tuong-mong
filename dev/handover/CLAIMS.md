@@ -332,6 +332,6 @@
 | road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | RUNNING | 16/11 18:42Z |
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
-| emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | (opening) | RUNNING | 16/11 18:50Z |
+| emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | RUNNING | 16/11 18:50Z |
 | npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | (opening) | RUNNING | 16/11 18:50Z |
 | NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads-u2 | D | (opening) | RUNNING | 16/11 18:50Z |
