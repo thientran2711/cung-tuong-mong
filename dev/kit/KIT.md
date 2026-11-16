@@ -12,12 +12,25 @@ Anything not listed here, or listed but drawn differently, is a FAIL.
 "⟳ Xoay ngang điện thoại để chơi" (`#krottip`, one line, `width:max-content`) shows on EVERY open and every turn back to portrait, until she turns the
 phone (it goes) or taps it; the sideways game stays playable under it. Direct mode (tests, `?khost=0`) shows the same prompt without catching taps.
 (Was: once per device for 4 s, localStorage `ctm-rot-tip` — a returning player saw the sideways title screen only; the prompt wrapped to 2 lines.)
+**0.0 ONE DESIGN FRAME = ONE PAGE (owner 16/11 07:47Z + 07:50Z, OD:L112 L116 L123 L345; review/design-scale).** The unit is ONE PAGE
+**590 x 820** = exactly half of the iPad spread. `window.KIT_FRAME = {spread:{w:1180,h:820}, page:{w:590,h:820}, margin:8, pageMargin:4, gutter:0}` (rot.js) is
+the only place these numbers live; CSS reads `--kpage-w/--kpage-h`; JS asks `kitView().pages` (1 or 2). `html.kv2` = SPREAD (landscape: LEFT page
+= her room / stage, RIGHT page = the open tab, two EQUAL 582 px page boxes meeting at the book binding); `html.kv1` = ONE PAGE (portrait: the room
+home is the main screen, a tab opens the RIGHT page full screen, the active tab or "Về phòng" goes back — kitPhoneShell §31.7, now keyed to
+`kitView().pages===1`; tab change by tap + short page animation, swipe only in Tuần lục, OD:L985). The page box is 582 px in both modes, so the Fold page
+IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
+- RULE: page CONTENT (panels, person card, act cards, chips, kit panels/modals, stage plaques and figures) has NO width/orientation breakpoint;
+  the same CSS lays it out in both modes. Only CHROME (top bar, tab bar, page grid, back-to-room) and full-canvas SCREENS (title, roulette, map,
+  scene panel, mini-game overlay, podium, load) may differ per mode, written once per mode (phase 3: `:where(.kv1/.kv2)` selectors only).
+- Audit: `node dev/measure/media-audit.js 590` (every breakpoint, class PAGE/LAND/ALWAYS/DEAD/ENV); `node dev/measure/kv-codemod.js` must report
+  no `drop`/`unwrap` action left (a content rule with a breakpoint = FAIL). Test: `dev/test/design-scale.js` (right/left page rects equal within 1 px).
+
 The game is laid out at exactly TWO design sizes and never reflows on a device: the picture is scaled uniformly, like resizing a window.
 
 | screen | layout drawn | how it is shown |
 |---|---|---|
 | any landscape: Fold 1000x755, iPad 1180x820 / 1366x1024, phones 844x390 … | **1180 x 820** (the iPad layout) | scaled by s = min(vw/1180, vh/820), centred |
-| portrait, width/height ≥ 0.62 (Fold 755x1000, iPad portrait) | **755 x 1000** | scaled by s = min(vw/755, vh/1000), centred |
+| portrait, width/height ≥ 0.62 (Fold 755x1000, iPad portrait) | **590 x 820** (ONE PAGE = the iPad half) | scaled by s = min(vw/590, vh/820), centred (Fold: s 1.2195, 18 px paper bars) |
 | narrow portrait phone, width/height < 0.62 (390x844, 412x915, 412x1058) | **1180 x 820** | pre-ROTATED 90° (the player turns the phone), then scaled; one-time tip "Xoay ngang điện thoại để chơi"; turning to real landscape drops the rotation without reload |
 
 - How: index.html is a thin HOST (rot.js, top of `<head>`, turns the rest of the page into inert `<plaintext>` — never `window.stop()`, which
@@ -2212,7 +2225,7 @@ kitBook, game / lesson results in #ov and the person card opened from the room #
   (jk3 §9); the week book at the screen's top right (`.kbk > .kbk-x`); a game result at its header's right end. A floating card inside a
   panel (shop item card) uses the same class at its own top right. `kitXAdd(dlg, close)` adds it (once) and wires it.
 - THE ✕ IS NEVER COVERED (owner 16/11 "Nút tắt bị che", review/press-fx-r1): nothing in or over a panel may sit on its ✕. The docked room card
-  `#popw` lies above the pane bar (`#popw` z 41 > `.kpbar` z 40, jk3 §9), and the panel person card's top line is the pane bar's bottom
+  `#popw` lies above the pane bar (`#popw` z 41 > `.kpbar` z 29, jk3 §9), and the panel person card's top line is the pane bar's bottom
   (`kitPcSize`, jk2b, KIT 45.2), so a card is never scrolled with its top under the bar. When the card's own body scrolls (phones), the ✕ follows: jk3 §9 sets `--kpcxy` = the card's
   scrollTop and the ✕ is translated by it, so it never leaves the card's top-right corner. Test dev/test/press-fx.js
   (check "✕ on top"): for every tab with a room person open and the panel + card scrolled to the end, the point under `#popx` must hit `#popx`.
@@ -3335,6 +3348,60 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   PEND builder: event → item → choice → act; fails on a destroying/handing choice with no item found, or an item without a picture).
 - Kit page (§47): sample "§64" = every story item tag + one button per act.
 
+## 62. NIGHT-END + NEW-DAY PICTURES · kitNightEnd · kitNewDay (owner 15/11 19:35Z, review/night-end) — `dev/build/jne.js` (after jevb, before j84)
+Owner: a closing picture for each night shows the END-of-night mood (never the bedding act, no faces), how the night moved the Emperor's
+mood (liked / did not like) and the rewards; sound + light by mood; a new-day picture by season / festival when no bedding night.
+- **kitNightEnd({tier, m0, m1, before, items, line})** — a kit motion stage (j93 kmStage, queued with kmPush, id `#kneov`): the picture
+  (4:3, `img/kit/ne-night-<tier>.webp`, framed like every kit picture: gold line + parchment ring) with its light layer, the title
+  (Đêm mặn nồng · Đêm êm đềm · Đêm lạnh nhạt), one line, then the kit list panel `.kmlist` = ONE `kitRows` table (§51): Hoàng thượng |
+  mood before → after · ngài hài lòng / bình thản / không vui (g / n / r), Được / Mất = `kaResultRows(before)` (Sủng, Ân tình, Danh, Bạc …
+  before → after), Kèm = `kitKemRow`; reward rows = `kitItem` sm + `kitGradeChip` + name (the kitReward list row). Button Nhận (reward) /
+  Tiếp tục. Tap during the picture = show all; tap outside the list after = close. On close each reward item flies to Tư trang
+  (`kitFlyItem`). It REPLACES the night's result toast ("Đêm thị tẩm") and the pillow-talk option's toast; the bestow tray (`kitReward`) is
+  held during her night and shown on this card instead (no double reveal).
+- **Tier rule** = `BAL.nightEnd` (jne): points = the night's own score `s` (j8 night1: prep + talk fit + his mood + luck, −2 confiscation)
+  + toilette today (jtoil makeup tuyệt/đẹp +1, vụng/diêm dúa −1) − 2 if the pillow talk lost her Sủng or Ân tình − 2 if she is ill;
+  ≥ 6 mặn nồng, ≥ 3 êm đềm, else lạnh nhạt. His mood after: warm one step better, cold one step worse (never to giận dữ), normal unchanged.
+  `window.kneLast` = {tier, pts, why[], m0, m1, items} for tests.
+- **kitNewDay({host, night, day, wx, then})** — plays inside the week panel `#dawn` BEFORE the Tuần lục book (j87) when she had NO bedding
+  night in the tuần that ended: beat 1 the lonely night (`ne-night-lonely`; Đêm không được triệu: "Đêm qua Hoàng thượng nghỉ ở cung X" /
+  "không lật thẻ bài nào" / "Thẻ bài của ngươi được lật, nhưng đêm qua ngươi không hầu giá" / stolen on the road / lãnh cung; or Đêm theo lệ:
+  mùng một / rằm at the Empress's palace — j75 nightWhy causes), beat 2 the dawn: season `ne-dawn-<xuan|ha|thu|dong>` or, on a festival
+  day (`festToday`), that festival's own band picture `ev-fest-<k>-b.webp` ("Sáng <tên lễ>"), the day's weather drifting over it
+  (petals / plum / maple / snow / rain / fireflies by `S.wx`). 2.2 s + 2.4 s (`BAL.nightEnd.lonelyMs/dawnMs`), tap = skip to the book.
+  Not for a servant (isSrv: lonely beat skipped only) — a bedded tuần shows no beats (the night card closed that night).
+- **Sound** (kitSfx when review/sfx is merged, else j11 sfx): warm sfx-zither + vo-f-laugh-soft-1 · normal sfx-wx-crickets + sfx-night ·
+  cold sfx-candle-out + vo-f-sigh-1 · lonely / custom sfx-night-watch (mõ canh) + sfx-wind · dawn sfx-wx-birds (đông: sfx-wind); j18 bell
+  still rings with the book. **Light (r2, painted only, §68):** `kitFxLight` clips placed INSIDE the picture at the painted light source (LIGHT table in jne):
+  warm candle flicker + painted peach petals · normal candle + painted fireflies (orb) · cold candle gutters out + moonlight fades in, NO
+  particles, no celebration (j11 nightFx's night/favour bursts are held during her night) · lonely lantern dims + the season's drift
+  (petals / fireflies / leaves / snow) · dawn glow-gold rises + the day's weather (painted petal / plum / leaf / snow / streak-rain /
+  orb-firefly frames of the §68 atlases). Particles are DOM frames clipped to the picture: they never cover the words or the list.
+  Gọn / reduced motion: still lights (poster), no particles, same texts.
+- Layout: column (picture over list) everywhere; landscape up to 900 px high (phone 844x390, 1000x755, 1180x820) = picture left, list right.
+  The Nhận / Tiếp tục button sits under the list (outside its scroll): always on screen (844x390 included); the list scrolls.
+- **62.3 In-night pictures by tone (owner s8):** the pillow-talk dialog (night2) shows `ev-night2-warm` (close) when the night
+  score s ≥ 6, `ev-night2-tender` (hand in hand; both drawn by review/pic-dupes) when s ≥ 3, else `ev-night2` (apart) — same thresholds as its j8 text
+  (kitEvBanner wrapper in jne). ksp / prep keep their own banners; night1 (quilt carry) belongs to review/pic-dupes.
+- **62.4 One pop-up look (owner s8):** the night dialogs (.modal.night) use the same light paper kit panel as every pop-up; the night
+  feel = jbd backdrop picture + ĐÊM seal only. Scan: `python3 dev/tools/dark_panels.py index.html` (0 dark panel rules).
+- Art (gpt-2-6, folder ba4aecfe, no faces, light/dark by tone; r2 redraw 1536x1152, ids `dev/art/night-end-r2-gens.txt`):
+  `img/kit/ne-night-{warm,normal,cold}.webp`, the lonely night PER SEASON `img/kit/ne-night-lonely-{xuan,ha,thu,dong}.webp`,
+  `img/kit/ne-dawn-{xuan,ha,thu,dong}.webp`; festivals reuse the 14 `ev-fest-<k>-b.webp`. Each picture has a focal point (FOC in jne)
+  → `object-position`; portrait screens show the dawn / lonely beats in a 3:4 frame cropped around it.
+- **62.5 Follow-ups (owner 15/11 21:10Z, L666–669):** rằm (trung tuần) / festival nights show `img/kit/ne-night-ram-{warm,normal}` /
+  `ne-night-fest-{warm,normal}` (cold keeps `ne-night-cold`; the line names the festival). The lonely beat when he slept at another palace says
+  the music drifts from it (stranger rule: an unmet consort is not named) + soft zither. Morning after (save field `S.neMorn {d, tier}`, old saves:
+  absent → nothing): mặn nồng → dialog "Kính sự phòng ghi sổ" (Danh +`BAL.nightEnd.after.warmDanh`); lạnh nhạt → "Lời ra tiếng vào" (Danh
+  `coldDanh`) with the jtoil reaction buttons Nhẫn nhịn / Cười trừ / Đáp lại. Bots / no UI: the Danh change only.
+- **Loading:** a painted 32x24 thumbnail (inline LQ) shows blurred at once; the picture fades in on load; the card / beat waits at most
+  `BAL.nightEnd.wait` (700 ms) for it. Never an empty frame.
+- **Scene rule (owner 15/11 ~21:45Z, all full-scene pictures):** every full-scene picture serves landscape AND portrait screens. Paint
+  landscape, high-res (≥ 1536 px wide), the subject inside a centred safe zone; store a focal point per picture and crop portrait screens
+  (755x1000 = 3:4, 9:16) around it with `object-position`. **Painted only (owner):** every picture, light and particle here is PAINTED art
+  (Magnific gpt-2-6); code only animates painted sprites (transform / opacity / filter) — no CSS-gradient glows, CSS dots or lines as art.
+- Kit sample page: §62 (all 9 pictures + "Xem thẻ đêm" opens a sample card). Test: `node dev/test/night-end.js <url> <outdir> <WxH,…>`.
+
 ## 67. LẬT THẺ BÀI · kitCardFlip — the end-of-day card-flip scene (owner 15/11 20:50Z, review/cardflip) — `dev/build/jflip.js` (after jsfx, before j84)
 Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). Played once per week after the tablet is decided
 (j8 `flip` → j75 `S.nightWhy` → j93), through the kit motion queue `kmPush`, after the week panel / Tuần lục book / title (never over them).
@@ -3725,3 +3792,15 @@ STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-c
 night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar (`kitCalendar`, dawn) · co-op scenes (`jcoop*`: buổi clock end, waiting-strip results) · the card-flip VIDEOS (`cardflip-videos`) · a `kitFlipNote`-like note is NOT a scene (no tap) and stays.
 The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
 Sample: kit page §81 (opens a real scene: the button shows after the animation and only it closes). Test: `dev/test/scene-end.js`.
+
+### 45.4 PANE BAR NEVER OVER A POP-UP (main s14 bug ".kpbar above modal"; review/kit-keeper-2)
+`.kpbar` (the sticky pane bar, §45) was z-index 40 while every `.modal` (dialogs, notices, results) is z-index 30, so the bar drew OVER an open pop-up. The bar is now z-index 29: under every `.modal` (30), the week summary `.dawn` (40), toasts (45); `#popw` (41) still lies above the bar. Rule: nothing sticky inside `#panel` may use a z-index ≥ 30 (it would cross the pop-up layer). Test: `dev/test/kpbar-modal.js` (a pop-up open over every pane tab: the pop-up's centre point belongs to the pop-up, not to the bar).
+
+### 28.13b BIG ITEM · frameless + hi-res (D3 item-big, OD:L686; KIT REQUEST from review/item-big @adda320; review/kit-keeper-2) — `kitItem` / `kitItemBigSrc` (jk2b)
+Sizes `lg` (150 px) and `xl` (min(260 px, 36 dvh)) of `kitItem` are the CENTRE picture of an item (info pop-up, gift / econ / pet-care / veil / mark pictures, reward spotlight): they carry NO frame — no border, no ground, no box-shadow, no overflow clip, no tier ground image
+(the 9-slice frame and the t-ground of §28.13 are for `slot` / `sm` / `md` only). The painting stands alone on the pop-up's paper with a soft drop shadow; the grade is shown by the grade word under it (`.kitg`, grade colour) and the name; the floating chips (`kitq` ×N, `kits` Ngự, `kiton`, `kitm`, `kitx` Xa xỉ) stay.
+`kitItem({…, frame:true})` keeps the frame for a special case (none today).
+HI-RES: for lg / xl a small painting `img/item-X.webp` (256) is requested as `img/item512/item-X.webp` (512; `kitItemBigSrc(src)` does the mapping, other sources unchanged); if the 512 file is missing the small one is shown (`onerror`, one swap). So the ~20 call sites that passed the small src (jgift, jinv, jkrev, jmark, jpet, jpetcare, jveil, jwdinv, jlost …) are hi-res and frameless WITHOUT being touched.
+Not covered (own source functions, no item512 mapping): pet stage pictures, veil / mark pictures, wardrobe `wd-*` icons (`img/wd512/…` are already 512 where the call site passes them), the 22 items with no `item512` painting (list in reports/item-big.md → ART REQUEST). Tư trang grid (`slot`) and all lists (`sm` / `md`) keep their frame.
+SPLIT with 28.13f (main s14, 16/11, OD:L686): CENTRE displays — the receive / lose / reward NOTICES whose picture slot holds the item (`kind:"notice"` + `itemPic`: kitLose "Mất đồ", receive, reward; `.kpb.kphas > .kpsubj.kpitem`; jinv `kpBuild` skips `kitSlotDress` for them) show the ITEM ALONE, big (picture column `min(150px,38%)`), sharp, frameless. The bag / Tư trang item pop-up (`kinvOpen`), every `kind:"info"` panel with an item picture (gift, econ, veil, mark) and the equipment-slot cards stay COMPACT with the grade frame + ground (28.13f, owner "ĐIỀU · Ô cài tóc far too big"): `kitSlotDress` marks their item `kitem-fr` (frame on, 64 px header icon). Rule for new code: item alone in the middle of a notice = lg/xl frameless; item as a row/slot/card in a list or bag = md / slot / `frame:true`.
+Sample: kit page §28.13b. Test: `dev/test/item-big.js` (also the real "Mất đồ" notice box ≥ 120 px and the bag pop-up still framed).

@@ -574,19 +574,10 @@ CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"|
  /* she did not take the seat (not a demotion for a fault): no "Bị giáng" scene from the j93 rank watcher */
  try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMS===S)KMSNAP.rank=nr}catch(e){}
  /* r1 fix 3 (OD:L1228): no waiting claim on the seat. A full seat gives the LARGE one-off compensation of the promo-skip rule (jexam
-    promoFullSeat when that branch is in, else the same rule here; numbers BAL.psk.seat): big silver, rare gifts, a phong hiệu without a
+    promoFullSeat, the ONE implementation since promo-skip is on main; numbers BAL.psk.seat): big silver, rare gifts, a phong hiệu without a
     rank change, favour for her family; loss: the consorts' jealousy. Her rank stays; the next one goes through the normal exam. */
- let t="";if(nr===r-1){try{t=typeof promoFullSeat==="function"?promoFullSeat(S,"coop",{}):coopFullSeat()}catch(e){console.error(e)}}
+ let t="";if(nr===r-1){try{t=promoFullSeat(S,"coop",{})}catch(e){console.error(e)}}
  pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p>${t?`<p>${t}</p>`:""}`})};
-function coopFullSeat(){const B=BAL.psk.seat,to=(S.rank||0)+1,rk=RANKS[to].n,parts=[];
- let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100)),hieu="";
- if(!S.hieu){const used=rivals.map(v=>v.hieu);const L=TITLES.filter(x=>!used.includes(x));if(L.length){hieu=pick(L);S.hieu=hieu}}
- if(!hieu)bac+=B.hieuBac;apply({bac,danh:B.danh});parts.push(`<span class="g">Bạc +${bac}</span>`,`<span class="g">Danh +${B.danh}</span>`);if(hieu)parts.push(`<span class="g">phong hiệu «${esc(hieu)}»</span>`);
- for(let i=0;i<B.gifts;i++)try{bestow(S,"promo")}catch(e){}if(B.gifts)parts.push(`<span class="g">${B.gifts} món ngự ban</span>`);
- try{const c=clanOf(S);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push(`<span class="g">nhà ngoại được ân</span>`);
- ghenAll(B.ghen);
- return `Hoàng thượng ban hậu thưởng thay cho tấn phong: ${parts.join(", ")}. Muốn lên ${esc(rk)} vẫn phải qua khảo hạch như mọi người. <span class="r">Lục cung ghen với ngươi (ghen +${B.ghen}).</span>`}
-CW.fullSeat=coopFullSeat;
 
 /* ---------- hooks ---------- */
 const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(CW.on&&!host())return "";return f.apply(this,arguments)}};

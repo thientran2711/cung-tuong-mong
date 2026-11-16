@@ -8,7 +8,7 @@ function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").r
   const add=` Lý do: ${[rsn6(rows.filter(x=>x[0])),why].filter(Boolean).join(" · ")}.`;return r.replace(/\s*$/,"")+add+" "}}catch(e){}return r}})();
 (function(){if(typeof fillSeats!=="function")return;const f0=fillSeats;fillSeats=function(){window.__fill6=0;try{for(const r of [6,5,4,3]){if(!seatFree(r))continue;const C=consorts().filter(p=>rkOf(p)===r-1&&!p.out&&!p.confined&&promoReqP(p).every(x=>x[0]));if(C.length>=2){window.__fill6=C.length;break}}}catch(e){}
  try{return f0.apply(this,arguments)}finally{window.__fill6=0}}})();
-(function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử (mẹ có hoàng tử, dưới bậc Quý phi, được thăng một bậc). ")}catch(e){}return r}})();
+(function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử đầu lòng (thăng một bậc, không qua khảo hạch). ")}catch(e){}return r}})();
 (function(){if(typeof wkSummary!=="function")return;wkSummary=function(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const L0=S.logs.slice(0,n).map(plain).filter(x=>x&&!/^Xin xăm|^Gieo lại|^Đến /.test(x));const SEN=[];
  for(const x of L0)for(const t of x.split(kRx("(?<=[.!?])\\s+",""))){const u=t.trim();if(!u)continue;if(/^Lý do:/.test(u)&&SEN.length){SEN[SEN.length-1].why=u;continue}if(!SEN.some(o=>o.t===u))SEN.push({t:u})}
