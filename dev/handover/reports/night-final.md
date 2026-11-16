@@ -111,3 +111,68 @@ Found on main (not fixed here, outside scope): j75's deck wrapper only decorates
 ### 5.4 Not done
 - STEP 4 (10-night ledger V3-B hooks the same commit) NOT started — context budget. stealPassNF already takes {live:false} (lines only), so the ledger wrapper only has to call window.stealPass(holder,{live:false}) per non-played night.
 - A dedicated two-seat test of a guest Tranh sủng resolved on the host (att → gres) is not written; covered by code reading only.
+
+
+## 6. WORKER s25 (session_01UV1SzmDJB3ATP9ffVSmFoc, coordinator MAIN s25 session_01UV1SziKxSHwSbnqfZWF5mM)
+START_CTX ≈ 4 % of 1M (own estimate). Rules read: PREAMBLE, START_CORE, START_WORKER, OD last 4 lines verbatim (22:00Z, 22:10Z, 22:25Z canon overwrite of 22:14Z/22:17Z), OD 20:58Z card-flip bug, OD 20:32Z co-op first.
+RULE USED: the 22:25Z CANON OVERWRITE (the brief's "resolve once at the end of the 4th khắc" was the overwritten 22:14Z text; told MAIN at start).
+
+### 6.0 STEP 0 — merge origin/main f1509d7c
+assemble order = main + `'jeitem.js','jnf.js','jcoopone.js','jlag2.js'`; jnf `host()` = `window.worldOn()` when present (coop-one-world), else seat a. review/flip-entry's jfe.js is NOT on main (nothing to delete). Generated files rebuilt.
+
+### 6.1 Night rule (jnf.js §2b, OD 22:25Z + 22:10Z + 22:17Z)
+| rule | how |
+|---|---|
+| flip at the start of tối names the intended one | unchanged (§1) |
+| a try (her card, ACT menu, the co-op friend, an NPC agent) belongs to the khắc it is made in; cost paid then; one try a night (j75 ntTry) | `myTry` / stealNight wrapper → S.nfA {d, L:[{w,mode,o,k,npc}], K, gU, n} |
+| khắc k resolves ONCE as soon as every PLAYER had khắc k | `pump()`: single player = at once when she presses; co-op = on the host when both seats passed k (guest sends its khắc `{u}` on render; "Sẵn sàng" = all 4) |
+| players' tries of k: one roll each vs own odds; one success wins; several → higher Sủng; equal → fair seeded roll (FNV of day+khắc+sorted ids, same on any seat, order-free) | `nfResolve` + `seedPick`; "largest margin" and "earlier try" REMOVED |
+| NPC tries of k only AFTER the players of k | `npcTries`: agents' acts made in k + jsteal agent choice now (stealWant's night chance spread over 4 khắc: 1−(1−p)^¼), ≤ BAL.steal.maxTry a night; same tie rule |
+| her WIN → sequence now, day ends | `herWin`: summons "Kính sự phòng báo tin" (ev-ksp art, eunuch) → prep (bath, makeup; ev-prep) → night1 (to the Emperor) → night2 (talk; ev-night2-*) → night-end card (curtain picture, jne §62) → jnight ends the day. All existing scenes/kit parts; no new art |
+| her FAIL | Sủng −BAL.steal.failSung, she plays on; the deck card now shows its lock + reason (STEP 4) |
+| success that lost the tie | no Sủng loss; line "X cũng mời được Hoàng thượng, nhưng ngài chọn sang cung Y" |
+| nobody wins | the intended consort's night at the end of tối (her held summons plays then; NPC = rivalNight at endTurn) |
+| his own visit "Thắp đèn hầu rượu" | decided + played at once (as a won night) |
+| co-op | guest try → `{att:{mode,o,k}}` to host; host resolves; `gres` list back (per khắc, applied once: S.nfR); guest win → guest plays her own night (herWin); host win → host plays its own |
+| ledger (not played nights) | `stealPass(holder,{live:false})` = one NPC batch, lines only (same tie rule) |
+Numbers: only BAL.steal + oSteal; no new constants.
+
+### 6.2 STEP 2 — no reward for speed / order: audit (whole game)
+| place | before | now |
+|---|---|---|
+| night steals (jnf) | resolved at the commit; tie → earlier try; NPC agents could act at flip time | per khắc after her; tie → Sủng → seeded roll |
+| jsteal flip pass (servant route / home route, !nfOn) | random order, "first win ends it" | `window.stealPass` = one batch, same tie rule |
+| co-op last seat in the same week (jcoopworld seatWeek) | "the host keeps it" (seat order) | higher Sủng keeps it; equal → seeded roll (week+rank); each seat decides the same from merged data; text no longer says "trước" |
+| jcoopworld night "first to press sat in the new day" | already fixed on main (nightReady gate) | — |
+| other grep hits (first/earlier/trước/race/quota/đủ người) | Promise.race image loads, text only, NPC fillSeats by merit | not order/speed rules — nothing to fix |
+
+### 6.3 STEP 4 — j75 steal card lock
+j75 deck wrapper now matches `a.b===B4L` (was `===2`): the card greys out with "Đêm nay ngươi đã thử giành một lần rồi" / "Đêm nay Hoàng thượng đã ở cung X".
+
+### 6.4 Tests (last build)
+| test | result |
+|---|---|
+| night-multi.js (REWRITTEN for 22:25Z: win at once + sequence · fail at once + lock/reason · NPC only after her khắc · Sủng tie + seeded order-free · NPC↔NPC at the tick · ledger) | 6/6, 11 of 12 runs (the 1 early fail = her cycle tuần; fixture now skips cycle lives) |
+| night-final.js (cases 2/4/5 updated: steal + his visit play at once; NPC takes her held night at a khắc) | 6/6 ×5 |
+| night-steal-unit.js | 29/29 (×6; one run = page-load timeout) |
+| night-day.js (won try plays at once, held summons at end of tối, stale) | ok |
+| log-sync-night.js | PASS |
+| cardflip.js 755x1000 + 1180x820 | PASS, 0 errors, old save ok |
+| night-steal-oldsave.js | loads, 0 errors (prints FAIL only because it expects the OLD build to lack BAL.steal — known) |
+| coop-night.js (live Worker) | 105/105 (main baseline 101/105) |
+| coop-steal.js NEW (two seats: guest try resolved on host in the khắc both had; host gives the night to the friend; guest plays her own night; NPC none · same-khắc tie → higher Sủng) | see §6.5 |
+| coop-e2e.js | see §6.5 |
+| quickcheck.sh | PASS (open 1257 ms, old save ok, perf ≈ live) |
+Shots (scratch, not in git): Fold 755x1000 + iPad 1180x820 — flip at tối, summons, prep, night, night-end curtain, next day. Looked at: all kit dialogs, no overflow.
+
+### 6.5 Co-op results + status
+| test | result |
+|---|---|
+| coop-steal.js NEW (live Worker) | 20/20 on the last build (an earlier run 17/20: both test players were in their cycle tuần → their tries were refused by jcycle, a game rule; the test now marks lie=wk()) |
+| coop-e2e.js (live Worker) | 59/59 |
+| coop-night.js (live Worker) | 105/105 |
+
+Branch review/night-final @ fdc9297b — SẴN SÀNG KIỂM.
+Not done (context): STEP 5 10-night ledger — the hook is ready: per not-played night call `window.stealPass(holder,{live:false})` (one NPC batch, lines only, same tie rule).
+Watch in review: (1) a co-op host's own try waits ("chờ Hoàng thượng định đoạt") until the guest has passed that khắc — by design (no speed reward); (2) the co-op seat rule change (jcoopworld seatWeek) touches promotions, not nights.
+Save fields added: S.nfA now {d,L,K,gU,n}; S.nfR {d,k[]} (old saves: absent → rebuilt, harmless).
