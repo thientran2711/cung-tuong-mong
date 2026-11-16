@@ -66,6 +66,6 @@ const ALL=process.env.ALLK||'dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,
    return{last:KG82.last,overflowX:document.documentElement.scrollWidth>innerWidth,inner:d.scrollWidth>d.clientWidth+1,trunc,cut,coThe:(d.innerText||'').includes('có thể')}});
   dov.push(...await domOv());const cov=await p.evaluate(()=>({ov:window.__ov,over:KG82.over||0}));
   if(SHOTS==='all')await shot(`${kind}-${SZ}-3result`);
-  await p.locator('#kg82ok').tap();await p.waitForTimeout(200);const got=await p.evaluate(()=>window.__res);
+  await require('./lib/roulette').closeResult(p);await p.waitForTimeout(200);const got=await p.evaluate(()=>window.__res);
   res.push({kind,eng:await p.evaluate(k=>KG82_KIND[k].e,kind),real,trusted:rt,raw:info.last&&info.last.raw,score:got&&got.score,place:got&&got.place,of:got&&got.of,done:!!got,ox:info.overflowX,inner:info.inner,trunc:info.trunc,cut:info.cut,coThe:info.coThe,hudOver:hudOver+cov.over,hudMax,textOverText:cov.ov.map(o=>o.key),domOverlap:[...new Set(dov)]})}
  console.log(JSON.stringify({size:SZ,res,errors:errs}));await b.close()})();

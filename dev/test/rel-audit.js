@@ -1,7 +1,7 @@
 /* review/sub-odds (owner 11/15 05:15Z): every act that names a relation change ("Hoàng hậu quý ngươi +4", "nàng quý ngươi +10", "Thái hậu
    quý ngươi +8") must change THAT field. Runs every Hành sự act (3 origins × 3 buổi) and every talk option on every consort, forces success,
    diffs S.hh / S.th / aff(v,S) / aff(S,v) and reports claims with no matching change.  usage: node dev/test/rel-audit.js <baseURL> */
-const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));const BASE=process.argv[2];
+const {chromium}=require('./lib/pw-roulette');const sleep=t=>new Promise(r=>setTimeout(r,t));const BASE=process.argv[2];
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});
  for(let i=0;i<300;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s)break;await sleep(500)}

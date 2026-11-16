@@ -1,6 +1,6 @@
 /* one screenshot per contest kind WHILE PLAYING (painted board + sprites): the oracle plays for a moment, then pauses, then #kg82 is shot.
    usage: node dev/test/mgshots91.js <baseURL> <W>x<H>@<dpr> <outdir> [kinds,comma] [hoc]   (hoc = lesson boards via playArt) */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,KL,CTX]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const T={dan:3200,hat:4500,co:1300,dauho:2600,ban:2600,tho:1500,doi:1500,doden:2600,ve:2200,hoa:2600,theu:500,kim:1600,mua:450,banh:7000,huong:1300};
 /* memory games are shot while the pattern / steps are being shown */

@@ -3,7 +3,7 @@
    Viewports: Fold 755x1000@2, iPad portrait 820x1180@2, iPad 1180x820@2 + 1366x1024@2, phones 412x1058@2 + 390x844@3.
    Checks: page errors, the right plaque column (court chips + Ân sủng) inside the stage, no overlap with figures / name tags, no clipped label,
    no ladder word (Liều…) in the chips, the sheet cannot open (top-bar Tư chất / plaque taps), collapsed "Ân sủng ›" chip opens its kit card. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,BASE,PAGE,OUT,TAG]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function skipLoader(p){for(let i=0;i<300;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}

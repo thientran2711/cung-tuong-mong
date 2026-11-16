@@ -1,7 +1,7 @@
 /* LUẬT SỬA CẢ NHÓM scan (review/stat-fx): "a gain shown in red / a loss shown in green". Walks every tab, the kit page and every act card the game
    builds, and lists each coloured value (.ef .kchip .krd b .fly .ksfl) whose sign contradicts its colour by the game's own meaning (kcls/kpSent).
    usage: node dev/test/stat-fx-scan.js http://localhost:<port>/index.html [W]x[H]   → prints JSON {checked, bad:[{where,cls,text}]} */
-const {chromium}=require('playwright');const [,,URL,SZ]=process.argv;const [W,H]=(SZ||'755x1000').split('x').map(Number);const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/pw-roulette');const [,,URL,SZ]=process.argv;const [W,H]=(SZ||'755x1000').split('x').map(Number);const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&(typeof nlFigsReady!=='function'||nlFigsReady()),null,{timeout:120000});
  await p.evaluate(()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await sleep(800);

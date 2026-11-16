@@ -1,7 +1,7 @@
 /* jbook kitCurl (= kitSheetTurn, whole sheet) in the week book (j87): mid-turn frames + reduced-motion fade + drag.
    usage: node dev/test/page-curl.js <baseURL> <W>x<H>@dpr <outdir>
    Frames are taken by freezing requestAnimationFrame and stepping the tween by hand (exact progress, no timing luck). */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=`${W}x${H}`;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));

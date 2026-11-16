@@ -2,7 +2,7 @@
    usage: node dev/test/curl-live.js <baseURL> <W>x<H>@dpr <outdir> <tag>
    Writes <tag>-map.jpg, <tag>-unroll-40.jpg, <tag>-tab-{25,45,65}.jpg (Hậu cung → Cung nhân frozen mid-curl), <tag>-back-45.jpg,
    <tag>-after.jpg; prints overflow / errors / truncation checks. */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push('console:'+m.text())});

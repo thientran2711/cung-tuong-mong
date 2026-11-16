@@ -1,6 +1,6 @@
 /* review/servant-system (LUẬT SỬA CẢ NHÓM): every place her household (trusted maid + S.staff maids / eunuchs) should appear.
    usage: node dev/test/house-scan.js <url>   (run on main's build = before, on the branch build = after). Pictures are not loaded. */
-const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/pw-roulette');const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(Object.assign({args:['--disable-dev-shm-usage','--blink-settings=imagesEnabled=false']},px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{}));const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block',ignoreHTTPSErrors:true});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(240000);
  await p.goto(process.argv[2],{waitUntil:'domcontentloaded',timeout:240000});

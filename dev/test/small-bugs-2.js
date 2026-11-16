@@ -9,7 +9,7 @@
    4 SLOTS  no stage figure (or its name chip) under a stage panel (#kshR, #kshL plaques) in lãnh cung, home, vườn with 1–3 other people.
    5 GAME   the j82 frame's progress cell: exam = "Môn", engines = their own word (Hồi / Câu), contest result = "Hạng".
    Prints JSON {checks:{name:[problems]}, errs}. */
-const {chromium}=require('playwright');const fs=require('fs');const crypto=require('crypto');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const crypto=require('crypto');
 const [,,URL,VP,OLD,SHOTS]=process.argv;const m=/^(\d+)x(\d+)@?([\d.]*)$/.exec(VP);const W=+m[1],H=+m[2],DPR=+(m[3]||1);
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function boot(p,url){await p.goto(url,{waitUntil:'domcontentloaded',timeout:240000});

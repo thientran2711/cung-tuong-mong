@@ -10,7 +10,7 @@
    env: SAVE=<save json> skips step 1 (a save written by an earlier run: <outdir>/save.json); IMGREV=<commit with img/ in git> for pictures.
    Note: the driver only visits palaces, so S.met stays empty and every consort is a stranger; to test real faces, add S.met entries to the
    save (e.g. 2 of every 3 consorts) — the others stay strangers and must be the grey silhouette in the strip AND in the rows. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const path=require('path');
 const [,,URL,OUT,MW,WK]=process.argv;const MINW=+MW||30,WEEKS=+WK||6;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 /* one game tick, the way a player would: a game on screen -> its VISIBLE skip ("Để …"), then its result button / ✕; open dialog -> first
    visible choice it can pay for; Sổ tuần -> "Vào ngày mới"; else next buổi. r8 (11/15): NO workarounds any more — the driver used to

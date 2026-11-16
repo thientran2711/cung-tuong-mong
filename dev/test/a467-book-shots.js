@@ -1,6 +1,6 @@
 /* act-pics2 a467: Tuần lục "Tổng lược" page shots after a few of her lines (one with its own ACTS picture, one with none).
    usage: node dev/test/a467-book-shots.js <build url> <outdir>  → <outdir>/book-<W>x<H>.jpg; prints overflow, broken images, page errors per size */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const SIZES=process.env.ONE?[[755,1000,2]]:[[755,1000,2],[1000,755,1],[1180,820,2],[1366,1024,2],[844,390,1],[390,844,1]];
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  for(const [W,H,D] of SIZES){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

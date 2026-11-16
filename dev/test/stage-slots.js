@@ -4,7 +4,7 @@
    For each case (place with 1, 2, 3, 5 other people; a man and a eunuch among them) it walks every page and measures every figure:
    core-centre x vs the slot centre, feet y vs the floor line, name chip rects (inside the slot, no overlap), how often she appears,
    the Dư đồ count, the title count and the chips. Prints JSON; shots <outdir>/<tag>-<WxH>-<case>-p<page>.jpg (SHOTS=0: none). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,OUT,TAG,OLD]=process.argv;
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,URL,VP,OUT,TAG,OLD]=process.argv;
 const m=/^(\d+)x(\d+)@([\d.]+)$/.exec(VP);const W=+m[1],H=+m[2],DPR=+m[3];fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function boot(p,url){await p.goto(url,{waitUntil:'domcontentloaded',timeout:240000});

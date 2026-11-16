@@ -7,7 +7,7 @@
    5. co-op screen opens (title "Chơi cùng bạn" when the build has it)
    6. [offline] after the service worker is ready: offline reload, pictures still show
    Prints one JSON line. */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,NEW,OLD,SZ,OUT,OFF]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ.replace('@','_');
 const CDN='ctm-img.victoria-tntt.workers.dev';
 (async()=>{const b=await chromium.launch();

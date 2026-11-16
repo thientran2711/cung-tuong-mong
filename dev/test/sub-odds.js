@@ -2,7 +2,7 @@
    usage: node dev/test/sub-odds.js <baseURL of the site root> <page: index.html|before.html> <outdir> <tag>
    Fold 755x1000@2 + iPad 1180x820@2: Hành sự buổi tối (Chặn ngự giá, Tranh sủng), the result card, Đêm thị tẩm (prep + night1), HUD.
    Checks: page errors, text clipped in the cards, and the word detector: no ladder word after a label colon / bracket (side chance). */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,BASE,PAGE,OUT,TAG]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 /* a ladder word right after ':' or '(' = a side chance written on the act ladder (the act's own odds stand alone in the chip) */
