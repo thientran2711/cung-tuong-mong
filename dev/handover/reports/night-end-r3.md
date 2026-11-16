@@ -6,3 +6,7 @@ Test fix: night-end.js now calls kmReset() after cleanup (a removed scene left k
 Kit consistency: card uses kitRows/kitItem/kitGradeChip/kbtn; no private parts.
 Pending: end-button. Night card already ends with Nhận / Tiếp tục. Lonely + dawn beats still close by tap ("Chạm để bỏ qua"); scene-end kit part not on main yet. Main wires it in the sweep.
 Result: PASS (end-button pending).
+
+## Update (s16 GO): READY a5d9d2bc
+Re-merged origin/main cab4a766 (assemble.py conflict: main list + jne after jevb), site rebuilt. KIT §81 wired: lonely + dawn beats no longer close by themselves or by tap (tap = skip to last beat); ONE kitSceneEnd button "Tiếp theo" closes them. Night card: removed tap-outside-close; only its own Nhận / Tiếp tục button closes it.
+Tests (6 viewports): 0 errors, button in view, picture clear of button, no auto-close after 9 s, tap does not close, button closes. night-end.js showed the card missing at 755 and 390 once when run in parallel with another run (load flake); rerun alone: both pass.
