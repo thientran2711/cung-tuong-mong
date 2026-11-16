@@ -118,7 +118,7 @@ function rtCaughtBy(v,m,what){const T=rtS();rtStat("tt_caught");
  rtReport(v,m)}
 function rtReport(v,m){const T=rtS();rtStat("tt_report");{const kk=rtKidsAlive().find(k=>k.tf&&!k.tfOk);if(kk&&!T.ng){log(`<span class="r">${rtVn(v)} tâu: ${kk.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</span>`);rtNgSet(kk,v.id,false);return}}const ev=(typeof evG==="function"?evG(v,S):2)||2;
  if(roll(cl(35+ev*8+T.heat/4,10,90))){rtExpose(m,`${rtVn(v)} tố giác ngươi tư thông với ${m.name}.`)}
- else{apply({sung:-10,danh:-6});rtHeat(15);m.ban=wk()+24;log(`<span class="r">${rtVn(v)} tố ngươi tư thông với ${rtMnm(m)}; chứng cứ chưa đủ. Hoàng thượng quở trách, cấm y vào hậu cung. Sủng -10 · Danh -6.</span>`)}}
+ else{if(v&&v!==S&&v.alive){ap(v,{danh:-8});oanAdd(S,v,25);affAdd(S,v,-20);punish(v,"vu cáo người khác tư thông",1)}/* two-way law: the failed accuser pays like her (j95accuse) */apply({sung:-10,danh:-6});rtHeat(15);m.ban=wk()+24;log(`<span class="r">${rtVn(v)} tố ngươi tư thông với ${rtMnm(m)}; chứng cứ chưa đủ. Hoàng thượng quở trách, cấm y vào hậu cung. Sủng -10 · Danh -6.</span>`)}}
 function rtExpose(m,how){const T=rtS();T.exposed=1;rtEnd("tt_lo");T.tt=null;T.bm=null;rtStat("tt_exposed");log(`<span class="r">${how}</span>`);
  try{affairExposed(m,"Chuyện tư tình bị lộ:")}catch(e){m.alive=false;deathSentence("Bị ban chết vì tư thông")}}
 /* ---------- 2. TRỐN KHỎI CUNG ---------- */

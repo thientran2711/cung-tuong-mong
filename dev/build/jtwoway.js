@@ -22,10 +22,12 @@ Object.assign(BAL,{tw:{
  provoke:{},              /* Khiêu khích (j2 talk rival) */
  confNo:{danh:-3,th:-5},  /* Tịch thu vô cớ (Hoàng hậu, empAct conf) */
  reward:{bac:-30},        /* Ban thưởng (Hoàng hậu, empAct reward) */
+ maid:{bac:-20},         /* buying a rival's maid (j70 bribe 'Dùng bạc' base price; j8 maidMonthP, NPC pays it too) */
+ cold:{suc:-10},         /* petition to leave lãnh cung (j14 'Tìm chứng cứ minh oan'; NPC release attempt pays it too) */
  accBestow:40,            /* Tố giác thành: chance of a reward from the throne (was 100 for NPCs, 40 for her) */
  /* gains (one source, read by both sides and by the option text) */
  g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,preg:[6,5,-5],ann:[6,5,6],
-    provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10}
+    provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5}
 }});
 function twCost(k){return (BAL.tw&&BAL.tw[k])||{}}
 /* can doer a pay deed k? (the player's rule: bạc ≥ price; a Sức cost needs more Sức than it costs, j76) */
@@ -65,6 +67,8 @@ TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y!==t));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung`}});
 TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){a.inv.splice(i,1);return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
+TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<6)},
+ run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
 /* whom t resents most (not the doer): the quarrel a mediator can settle */
 function twFoeOf(a,t){if(!t)return null;const L=[S].concat(liveRivals(true)).filter(x=>x!==a&&x!==t&&oan(t,x)>=20);return L.sort((x,y)=>oan(t,y)-oan(t,x))[0]||null}
 window.TW=TW;window.twDo=twDo;window.twCost=twCost;
@@ -99,6 +103,7 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   add("drop",`ngươi lạnh với nàng -${g.drop}`);
   add("follow",`nàng quý ngươi +${g.follow}`);
   add("gossip",`một phi tần khác Danh -${g.gossip}`);
+  add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
   add("flaunt",`mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();
 /* her Thái hậu / Hoàng hậu greetings: the same BAL.tw cost (gains stay in her card's w/l, which read the same numbers) */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&(p.kind==="th"||p.kind==="hh")){const g=G();for(const a of A){

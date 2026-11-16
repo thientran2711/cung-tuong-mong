@@ -421,7 +421,7 @@ function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S
   if(out==="one"){evA(v,S,1);continue}evA(v,S,2);v.j95saw={w:wk(),m:m.id};
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
-  if(hard.ok&&hostility(v,S)>=40&&evG(v,S)>=2&&j95dice(40)){const o=cl(25+evG(v,S)*15,5,90);if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}punish(v,"vu cáo người khác tư thông",1)}
+  if(hard.ok&&hostility(v,S)>=40&&evG(v,S)>=2&&j95dice(40)){const o=cl(25+evG(v,S)*15,5,90);if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-8});oanAdd(S,v,25);affAdd(S,v,-20);punish(v,"vu cáo người khác tư thông",1)}
   else if(aff(v,S)>=20){j95z().owe["by:"+v.id]=wk()}}}
 
 /* ---------------- 8. DATA FOR THE KIT: habits she knows ---------------- */

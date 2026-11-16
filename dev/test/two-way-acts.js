@@ -40,6 +40,13 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   T("player has Hủy dung in her Sát hại group",RVGRP.find(g=>g[0]==="Sát hại")[1].includes("huydung"));
   // 8. the player's talk option runs the same deed (cost once)
   {fresh(S);S.rank=7;const LL=topicOpts(v),ix=LL.findIndex(a=>a.n==="Hạ nhục");v.danh=50;v.oan=0;const o0=oan(v,S),d0=v.danh;const a=LL[ix];if(a.c)apply(a.c);const rr=a.run();T("player Hạ nhục: nàng oán +, Danh nàng −",oan(v,S)>o0&&v.danh<d0,JSON.stringify([ix,rr,o0,oan(v,S),d0,v.danh]))}
+  // 9. rows 23/25/26/31/32: maid bribe, admonition, lãnh cung petition, failed accusation, theft
+  {fresh(v);v.bac=500;const b0=v.bac;S.bac=500;S.maid=S.maid||{name:"x",loyal:10};S.maid.loyal=10;S.schemes=0;const m0=maidMonthP(S);T("23 NPC bribing a maid pays the player price",v.bac<b0||m0===""||liveRivals(true).some(x=>x.bac<500),String(m0).slice(0,40));
+   v.bac=0;liveRivals(true).forEach(x=>x.bac=0);S.maid.loyal=10;T("23 broke NPC cannot bribe",maidMonthP(S)==="");}
+  {T("25 admon deed exists, needs a queen doer",TW.admon&&!TW.admon.req(v,w));}
+  {fresh(v);v.out=true;v.th=60;v.suc=5;let n=0;const so=v.suc;const was=BAL.tw.cold.suc;T("26 cold petition costs Sức (BAL.tw.cold) and needs Sức>10",!twCanPay(v,"cold")&&was===-10)}
+  {S.danh=50;v.danh=50;v.oan=0;const d0=v.danh,o0=oan(S,v);ap(v,{danh:-8});oanAdd(S,v,25);T("31 failed accusation hurts accuser like her",v.danh<d0&&oan(S,v)>o0)}
+  {fresh(v);const R=liveRivals(true);R.forEach(x=>x.bac=0);T("32 broke rivals cannot steal",loCause(S).cause!=="riv")}
   return out});
  let bad=0;for(const r of R){if(!r.ok)bad++;console.log((r.ok?"PASS ":"FAIL ")+r.n+(r.ok?"":"  "+r.d))}
  console.log("page errors:",errs.length,errs.slice(0,3).join(" | "));console.log(bad?`${bad} FAIL`:"ALL PASS");await b.close();process.exit(bad||errs.length?1:0)})();

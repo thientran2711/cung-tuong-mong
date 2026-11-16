@@ -31,16 +31,16 @@ everywhere (they act on dice: SOC weekly 60 %, rivalsTurn want×4 %, rivalsBuoi,
 | 20 | j8:422 | HH ban thưởng | NPC conjured item, free | FIXED same as hers: bạc 30, rel +20, regard +10, Danh +3 (BAL.tw.reward) |
 | 21 | j28 SOC.humiliate/visit/mediate/flaunt/test/drop/follow/gossip/check | NPC-only deeds | player had no option | FIXED one TW deed each, NPC side unchanged numbers; PLAYER OPTIONS added to the rival talk list (Thăm lúc ốm mệt, Hòa giải, Hạ nhục, Thử lòng, Lạnh nhạt, Nương theo, Rỉ tai chuyện trong cung, Khoe quà ngự ban); "check" = TW deed only (player already has Kiểm tra đồ j8:469) |
 | 22 | j70:484 | Hủy dung | NPC-only (not in her RVGRP) | FIXED added to her "Sát hại" group |
-| 23 | j8:348 | monthly bribe of a maid | NPC free, gains bạc | OPEN (should be ACT bribe bạc 40 + odds) |
+| 23 | j8:348 | monthly bribe of a maid | NPC free, gains bạc | FIXED (r2) BAL.tw.maid: buyer pays the player's price (20 × schemeRk/Guard mult) and needs the bạc |
 | 24 | j75:142 | Nói xấu gối đầu (pillow slander) | NPC-only, free | OPEN (needs a night-scene option for her; night domain) |
-| 25 | j75:174 | "mưa móc đều khắp" admonition | NPC queen/TH only, player-queen excluded | OPEN |
-| 26 | j14:24 | lãnh cung release | NPC free 3 %/month vs her paid cards | OPEN |
+| 25 | j75:174 | "mưa móc đều khắp" admonition | NPC queen/TH only, player-queen excluded | FIXED (r2) TW deed admon + player option when she is Hoàng hậu (Sủng −5, 6-week cooldown); NPC path unchanged |
+| 26 | j14:24 | lãnh cung release | NPC free 3 %/month vs her paid cards | FIXED (r2) BAL.tw.cold Sức −10 paid by the NPC on each release attempt + her odds; her card reads it |
 | 27 | j14:38, j42:201 | buy another palace's servant | NPC-only, flat roll | OPEN (agent loop row 27/28 npc-agent.md) |
 | 28 | jmline:59-89 | maid feuds, beat/frame a maid | NPC-only, free | OPEN |
 | 29 | j22:38-41 | NPC affair / KSP book check | abstract dice, no steps / NPC-only audit | OPEN |
 | 30 | jroute:224, :268 | monthly blackmail no roll; NPC escape free | vs her rolled uyhiep / paid escape prep | OPEN |
-| 31 | j95:430, jroute:121 | NPC accusing her tryst: no Danh loss on failure | vs her Danh −8, oán +25, punish | OPEN |
-| 32 | jlost:49 | theft as a loss cause, free | vs laydo bạc 30 + Đức 4 | OPEN (laydo not in mindMenu) |
+| 31 | j95:430, jroute:121 | NPC accusing her tryst: no Danh loss on failure | vs her Danh −8, oán +25, punish | FIXED (r2) failed accuser (j95 + jroute) Danh −8, oán +25, thiện cảm −20, punish — same as hers |
+| 32 | jlost:49 | theft as a loss cause, free | vs laydo bạc 30 + Đức 4 | FIXED (r2) rival theft pays laydo price (bạc LO.act.bac, Đức) and needs the bạc |
 | 33 | jpoison:106 | NPC dish conjured | she cooks (khắc + materials) | OPEN |
 | 34 | j24:27 | conjured gift to her | she gives a real item | OPEN |
 | 35 | j10:96-104, j55:132/116, j61:90, j42:231-429 | faction moves, ministers' impeachments, target learning, master's beatings/orders/cnvBlack | free vs her 1–2 khắc cards / NPC-only | OPEN |
@@ -75,7 +75,7 @@ Per deed the NPC now pays her exact BAL.tw cost (tests §3). Remaining gap = HOW
   | before (main) | 3 / 33.7 | 72.6 | 97.2 | 5 of 13 881 | 0 |
   | after | 3 / 40.4 | 72.4 | 96.9 | 7 of 17 108 | 3 725 |
   NPC Sức drops only 0.3: each deed now costs the same, but NPCs act ~once a week. It will drop to her level only when the agent loop gives NPCs her khắc budget (AG1). Honest result: the "drop off ~97" target is NOT met by cost parity alone.
-- NOT DONE: Fold 755x1000@2 + iPad 1180x820@2 shots of the 2 new options (Thăm lúc ốm mệt, Hạ nhục). dev/test/two-way-shots.js exists but the plain assembled dev/index.html opens the talk card in a broken frame (needs the site build dev/site/build_site.sh + real place visit); options are confirmed present at both sizes (has:[true,true], no overflow).
+- DONE (r2): shots below. (old note) Fold 755x1000@2 + iPad 1180x820@2 shots of the 2 new options (Thăm lúc ốm mệt, Hạ nhục). dev/test/two-way-shots.js exists but the plain assembled dev/index.html opens the talk card in a broken frame (needs the site build dev/site/build_site.sh + real place visit); options are confirmed present at both sizes (has:[true,true], no overflow).
 
 ## 4. Risks (gain vs loss)
 | risk | likelihood | severity | detect / fix |
@@ -87,3 +87,12 @@ Per deed the NPC now pays her exact BAL.tw cost (tests §3). Remaining gap = HOW
 
 ## 5. HANDOVER (rollover at ≈ 29 % context; coordinator opens the successor)
 Branch review/two-way-acts (see SẴN SÀNG KIỂM sha in dev/PROGRESS_two-way-acts.md). Successor: (1) site build + shots Fold/iPad of the rival talk card showing Thăm lúc ốm mệt + Hạ nhục (dev/test/two-way-shots.js; open via Dư đồ → place → tap the consort); (2) optional: OPEN rows 23, 25, 26, 31, 32 are small deed fixes in the same style (TW deed + BAL.tw); (3) update ECONOMY.md:54.
+
+## 6. r2 (successor worker): shots, kit bug, rows 23/25/26/31/32, ECONOMY.md
+- Harness: webdriver browsers run direct mode (no 590x820 design canvas), so the plain build looked broken. Shots now use ?khost=1 (dev/test/two-way-shots.js, served over http, taps the real token).
+- REAL KIT BUG (also on live main): on the Fold one-page view, opening ANY person card collapsed the grid (stage 0 px, top bar 329 px wide, card 241 px, tabs squeezed). Cause: #popw.j59dock sets grid-area:panel; the k3ph grid only has hud/stage/bar areas. Fix: one CSS line in jk3.js (k3pop>#popw{grid-area:stage}), noted in KIT §31.7. Probe before/after: popw 241x579 at left 345 → 582x591 at left 4.
+- Shots (dir /home/user/wt/twa-shots): talk-fold-2.jpg, talk-ipad-2.jpg show Thăm lúc ốm mệt, Hạ nhục, Thử lòng, Rỉ tai chuyện trong cung. Hòa giải / Lạnh nhạt / Nương theo only appear when their requirement holds (foe exists, aff ≥ 30 and she is down, rank gap).
+- ✕ sits over the scrolled option list in both sizes (pre-existing kit behaviour, not changed).
+- ECONOMY.md line 54 rewritten in place (no schemeRkNpc / GuardNpc).
+- Tests: two-way-acts.js 49 checks ALL PASS (new rows 23/25/26/31/32 are smoke-level checks of the new code), old-save 40 weeks ok 0 errors, coop-e2e see PROGRESS.
+- Gap count now: 37 audited rows, 27 fixed, 9 open (24, 27, 28, 29, 30, 33, 34, 35, 36), 1 by design; + 1b list for the agent loop. Rows 24/27–30/33–36 are night-scene or agent-loop work.
