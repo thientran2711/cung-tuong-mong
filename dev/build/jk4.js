@@ -176,7 +176,10 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true,named:typeof S!=="undefined"&&q===S}):(q.name||"")/* owner 15/11: rank + name always together — her own figure too (was "Ngươi") */}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" data-sil="${typeof kitSilFig==="function"?kitSilFig(q):""}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitStageFigErr(this)">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+/* D50: a figure file that fails to load swaps to the kit silhouette once (never an empty column); only a failing silhouette hides the figure */
+function kitStageFigErr(im){try{const sil=im.dataset.sil;if(sil&&(im.getAttribute("src")||"").indexOf("unknown-fig")<0){im.removeAttribute("data-sil");im.src=sil;return}}catch(e){}kitImgErr(im,{sel:".kesf",cls:"kesno"})}
+window.kitStageFigErr=kitStageFigErr;
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
@@ -586,7 +589,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kph:has(>.kit-x){padding-right:56px!important}
 .kit-x:hover{background:#fff;border-color:var(--gold,#c9a46a)}
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
-.modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
+
 `;document.head.appendChild(st)})();
 /* ================= KIT 48 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") ==========   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.

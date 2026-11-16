@@ -12,7 +12,7 @@
        Clear moment: Chương 2 "Ba ngả đường" (and again Chương 4 Hồi 2 "Lối rẽ"); any time after: Mệnh truyện › Triều cục › "Đổi phe"
        (a price: the side left behind turns on her, Danh, trust starts low; cooldown BAL.rg.swCd months, at most BAL.rg.swMax).
        Each side: its own errands between chapters (power push, trust, own gains), its own enemies (the other sides' consorts and houses),
-       its own ending (winner: Hoàng thượng = tấn phong / Thái hậu = che chở + Thái hậu quý ngươi / quyền thần = bạc + nhà ngoại thế lực;
+       its own ending (winner: Hoàng thượng = tấn phong thẳng, không khảo hạch (owner 16/11 06:20Z) / Thái hậu = che chở + Thái hậu quý ngươi / quyền thần = bạc + nhà ngoại thế lực;
        loser: the mirror loss). Family: tt = the regent's daughter, ch = the Thái hậu's kin, dtq = the general's house (backs the Thái hậu),
        thd = Hàn lâm (the Emperor's scholars); going against the father's side costs his favour.
    (3) NPC consorts belong to sides by their house (rgSideOf): Tể tướng → quyền thần; Đại tướng quân / Thái hậu kin → Thái hậu;
@@ -210,7 +210,7 @@ function rgRes(id,i,od){const b=rgBeatDef(id);if(!b)return;const o=rgOpts(b)[i];
  r.done[id]=(r.done[id]||0)+1;r.last=S.turn;
  if(ok){apply(o.w||{});if(o.pw)rgPush(side,o.pw);if(o.tr)rgTr(o.tr);if(o.lq)rgQAf(o.lq);if(o.lead)rgLead(side,o.lead)}
  else{apply(o.l||{});if(o.pl)rgPush(side,o.pl);if(o.lq)rgQAf(o.lq);
-  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,1);ex.push(`${v.name} nắm Chứng cứ về ngươi.`)}}
+  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,1);ex.push(`${(()=>{try{return typeof kitKnownName!=="function"||kitKnownName(v)}catch(e){return true}})()?v.name:"Một vị phi tần chưa quen biết"} nắm Chứng cứ về ngươi.`)}}
   if(o.pun){try{punish(S,"can dự chuyện triều chính",o.pun)}catch(e){}}}
  if(o.lq0)rgQAf(o.lq0);
  if(o.join)ex.push(rgJoin(o.join,id==="c2a",o.swc));
@@ -244,10 +244,11 @@ function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.r
 function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W.out,s=rgSideNow();const k=.5+r.tr/100;const Bg=BAL.rg;let t="";const b0=Math.round(Bg.bacWin*(typeof rkMul67==="function"?rkMul67():1));
  if(!s){apply({danh:Bg.ngoai});r.res="ngoai";t="Đứng ngoài cuộc, giữ được mình.";return t}
  if(s===o){r.res="win";
-  if(s==="emp"){apply({sung:Math.round(Bg.winSung*k),danh:Bg.winDanh});/* owner 15/11 17:20Z: promotion needs the EXAM → the reward is an exam at once with the conditions waived (jexam exGrace), never a free rank */
-   if(S.rank<Bg.rankCap&&typeof exGrace==="function"&&S.sung>=(typeof sungFloor==="function"?sungFloor(S.rank+1):0)+Bg.rankSung){exGrace(S,"m");const e=exS(S);e.gw="rg";t=`Bệ hạ nhớ công phò tá, ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện.`}else t="Bệ hạ nhớ công, ban thưởng hậu hĩnh."}
-  else if(s==="th"){apply({th:Math.round(Bg.winTh*k),danh:Bg.winDanh});S.shield=Math.max(S.shield||0,Bg.winShield);t=`Thái hậu nhớ công, che chở ngươi ${Bg.winShield} tháng: phi tần khó hại ngươi.`}
-  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,8);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi."}
+  if(s==="emp"){apply({sung:Math.round(Bg.winSung*k),danh:Bg.winDanh});/* owner 16/11 06:20Z/06:45Z: a long road's reward = DIRECT rank, no exam, through the one hook jexam promoReward (seats apply); cap Bg.rankCap + the Sủng floor guard the jump */
+   const d=S.rank<Bg.rankCap&&typeof promoReward==="function"&&S.sung>=(typeof sungFloor==="function"?sungFloor(S.rank+1):0)+Bg.rankSung?promoReward(S,"emp",{fx:1}):"";
+   t=d?`Bệ hạ nhớ công phò tá. ${d}`:"Bệ hạ nhớ công, ban thưởng hậu hĩnh."}
+  else if(s==="th"){apply({th:Math.round(Bg.winTh*k),danh:Bg.winDanh});S.shield=Math.max(S.shield||0,Bg.winShield);t=`Thái hậu nhớ công, che chở ngươi ${Bg.winShield} tháng: phi tần khó hại ngươi.`;const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"th",{fx:1}):"";if(d)t+=` ${d}`}
+  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,8);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi.";const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"quyen",{fx:1}):"";if(d)t+=` ${d}`}
   rgLead(s,0)}
  else{r.res="lose";
   if(s==="emp"){apply({sung:-Bg.loseSung,th:-Bg.loseTh});t="Phe bệ hạ thua, nhà Tể tướng và Thái hậu đều để ý ngươi."}
@@ -386,13 +387,14 @@ function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Triều cụ
  let h=kitSkillCard({kind:"story",k:"rg",kicker:"Phụ tuyến",name:RGT,level:done,max:tot,word:"Hồi",bar:false,next:"",img:typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"",
   acts:rgSideNow()&&!W.out?[pbtn(`data-rgsw="1"`,"Đổi phe",`tốn: Danh -${BAL.rg.swDanh}`,rgCanSwitch())]:[]});
  const s=rgSideNow();
+ /* only people she knows by name (kitKnownName); the rest are counted (same family as the 'Phi ???' fix, owner 16/11) */
+ const mem=k=>kitNameList(rgMembers(k),v=>`${rkName(v)} ${v.name}`,"chưa ai");
  h+=rows67([["Mục tiêu","Hoàng thượng mới đăng cơ, quyền còn trong tay Thái hậu và Tể tướng phụ chính. Ngươi chọn đứng về phía ai, hay đứng ngoài."],
   ["Chương",c?`Chương ${c} «${RGC[c-1].t}»`:"chưa mở"],["Triều cục",W.out?({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:`${rgQN()} nhiếp chính`})[W.out]:rgPWord(W.p),W.out?"g":""],
   ["Phe của ngươi",s?rgSideTag(s):r.side==="ngoai"?"đứng ngoài":"chưa chọn",s?"g":""],s?["Phe tin ngươi",r.tr>=60?"rất tin":r.tr>=35?"tin":r.tr>=15?"còn dè dặt":"chưa tin"]:null,
   rgFam()?["Nhà ngươi",({quyen:"phụ thân là Tể tướng phụ chính",th:"đứng sau Thái hậu",emp:"theo bệ hạ"})[rgFam()]]:null,
-  r.res?["Kết cục của ngươi",r.res==="win"?"phe ngươi thắng":r.res==="lose"?"phe ngươi thua":"đứng ngoài, giữ được mình",r.res==="win"?"g":r.res==="lose"?"r":""]:null]);
- const mem=k=>rgMembers(k).map(v=>`${rkName(v)} ${v.name}`).join(", ")||"chưa ai";
- h+=rows67([["Phe Hoàng thượng",mem("emp")],["Phe Thái hậu",S.thDead?"Thái hậu đã mất":mem("th")],["Phe quyền thần",mem("quyen")]]);
+  r.res?["Kết cục của ngươi",r.res==="win"?"phe ngươi thắng":r.res==="lose"?"phe ngươi thua":"đứng ngoài, giữ được mình",r.res==="win"?"g":r.res==="lose"?"r":""]:null,
+  ["Phe Hoàng thượng",mem("emp")],["Phe Thái hậu",S.thDead?"Thái hậu đã mất":mem("th")],["Phe quyền thần",mem("quyen")]]);
  h+=kitChecks(RGC.map((ch,i)=>[ch.b.every(id=>r.done[id]),`Chương ${i+1} «${ch.t}»${i<c?"":" · chưa tới"}`]));
  if(W.n&&W.n.length)h+=rows67(W.n.slice(0,4).map(x=>{const i=x.indexOf(": ");return[x.slice(0,i),x.slice(i+2)]}));
  return h}

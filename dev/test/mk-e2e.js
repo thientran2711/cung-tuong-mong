@@ -55,12 +55,14 @@ fs.mkdirSync(DIR,{recursive:true});
  await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/toil-${tag}-5-result.jpg`,quality:70});
  out.rec=await p.evaluate(()=>S.toilette);
  /* reveal e2e: real minigame -> real preset -> the reveal appears; the close card names the preset; tap skips */
+ /* main's kit scenes now end with the KIT 81 button: tap any .kmend that stands in front of the reveal */
+ for(let i=0;i<60&&!(await p.$('.ktrv'));i++){await p.evaluate(()=>{const b=document.querySelector('.kmov .kmend,.kmend');if(b)b.click()});await p.waitForTimeout(400)}
  await p.waitForSelector('.ktrv',{timeout:60000});out.revShown=true;
  await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/e2e-${tag}-rev1.jpg`,quality:60});
  await p.click('.ktrv-ov');await p.waitForTimeout(2500);
  out.card=await p.evaluate(()=>{const c=document.querySelector('.ktrv-card');return c?c.innerText.replace(/\n/g,' | '):null});
  await p.screenshot({path:`${DIR}/e2e-${tag}-rev2.jpg`,quality:60});
- for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov').catch(()=>{});await p.waitForTimeout(900)}
+ for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov .kmend').catch(()=>{});await p.waitForTimeout(900)}
  out.revGone=!(await p.$('.ktrv'));
  await p.waitForSelector('#toildone');out.resultCard=await p.evaluate(()=>document.querySelector('#toildone').closest('#kg82,.kg82,body').innerText.slice(0,300));
  await p.screenshot({path:`${DIR}/e2e-${tag}-result.jpg`,quality:60});
