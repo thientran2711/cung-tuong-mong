@@ -233,7 +233,7 @@ function loSteal(a,t,self){a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="functi
  const cg=caught(a,t,false,"sai người lấy trộm đồ trong rương "+NM(t));if(cg)return cg;
  if(!roll(loStealO(a,t,self))){relAdd(a,t,-4);return `Người ${NM(a)} sai đi lấy đồ của ${NM(t)} không gặp lúc vắng người, đành về tay không. `}
  const keep=a===S||roll(LO.keepP);const c=loLose(t,{cause:"riv",by:key(a),keep:keep?1:0});if(!c)return `Rương ${NM(t)} không còn món nào đáng lấy. `;
- const nm=loNm(c.k);if(a===S)return `<span class="g">Người của ngươi lấy được ${nm} trong rương ${NM(t)}</span>; món ấy nay nằm trong rương ngươi. Đeo ra ngoài thì dễ bị nhận ra. `;
+ const nm=loNm(c.k);if(a===S)return `<span class="g">Người của ngươi lấy được ${nm} trong rương ${wdNm(t)}</span>; món ấy nay nằm trong rương ngươi. Đeo ra ngoài thì dễ bị nhận ra. `;
  return `${NMc(a)} sai người lấy ${nm} trong rương ${NM(t)}. `}
 A("laydo","Sai người lấy trộm đồ",{c:{bac:-LO.act.bac},ok:(a,t)=>(a.bac||0)>=LO.act.bac&&loStealOk(a,t),o:(a,t)=>loStealO(a,t),x:"một món quý trong rương nàng về tay ngươi",
  f:(a,t)=>{ap(a,{bac:-LO.act.bac});return loSteal(a,t,false)}});
