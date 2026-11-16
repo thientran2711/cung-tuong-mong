@@ -60,3 +60,15 @@ evidence collected against her; fake evidence only through a frame scheme that c
   before this, consorts' grudges against each other almost never reached a band → 0 NPC-vs-NPC frame acts in a year).
 - Measures: `dev/measure/evtruth-odds.js` (odds of each step over all pairs, fast) and `dev/measure/evtruth-frames.js` (idle clean player,
   N years, counts attempts / planted / cleared by road).
+- BAL.truth now: frameW 2, frameW1 2, npcFrameP 10 (%/tuần), npcFrameMal 40, frameHide 30; defence clamp 10–85 unchanged.
+- Numbers (fresh courts, real act pipeline, 200 trials each; CPU was saturated so long plays were cut short):
+  - per Vu oan attempt NPC→NPC: planted 15–25 %, victim clears 16–35 % of planted → sticks 13–18 % of attempts (before: NPC defence
+    stacked to ~85 → almost never stuck).
+  - per attempt NPC→player (maid guard, j70 self-watch): planted ~10–27 % (frameHide 0: 15–24 %, with a strong maid near 7 %).
+  - NPC-vs-NPC attempts: 0/yr before (no grudge bands) → npcFrame 3.6 rolls/yr ≈ 3 attempts + scheme-menu frames (≈1–3/yr seen) →
+    ≈ 1 planted frame between consorts per year, most of them stick.
+  - player's defence by road (Tai mắt 0 / 2 / 4): Kính sự phòng no night 10/20/30, with a night 45/55/65, maid witness 35/45/55,
+    Thái y 40/50/60 (Bạc −10), evidence on the framer 50/60/70 (costs 1 piece); Nhận tội = Danh −6, safe. Every road can fail.
+  - failed defence: Danh −12 (−16 hard), Sủng −10, punish sev 2 = 50 % demoted one rank, else cấm túc 2 tháng.
+- Known (shared kit layout, not this branch): at 755x1000 the person column's full figure can spread over the text column once it loads
+  (all PEND dialogs with who:pv); 390x844 is behind the rotate prompt.
