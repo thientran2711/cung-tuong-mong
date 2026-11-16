@@ -14,8 +14,8 @@ const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (defaul
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;
-  window.__run=(k,road,pick)=>{quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
-   try{localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1')}catch(e){}window.__forceOrigin=k;start();quiet=false;Q.length=0;
+  window.__run=async(k,road,pick)=>{quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
+   try{localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1')}catch(e){}window.__forceOrigin=k;start();quiet=false;await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin)||++n>150)r();else setTimeout(t,100)};t()});/* start() can set S a tick later (fresh storage) */Q.length=0;
    if(typeof S==='undefined'||!S||!S.origin)return{err:'boot'};/* the boot screen can reset S after a slow load (parallel runs): retried */
    if(S.origin.k!==k||!S.st.f14)return{err:'origin '+S.origin.k};
    const seq=[],vs=[],ends=[];let lastN=0,stuck=0,err=null,mon=0;

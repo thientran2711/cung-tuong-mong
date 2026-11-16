@@ -15,7 +15,7 @@ for(const [id,a] of Object.entries(ARC67)){chap++;
   }}
  for(const k of ['t','g'])if(/\d/.test(nd67tok(a[k]||'')))typed.push(id+'.'+k);
  for(const [bk,b] of Object.entries(a.B||{})){if(/\d/.test(nd67tok(b.t||''))||/\d/.test(nd67tok(b.h||'')))typed.push(id+'.'+bk);(b.o||[]).forEach(o=>{for(const k of['n','rt','rf','wx','lx'])if(/\d|%/.test(nd67tok(o[k]||'')))typed.push(`${id}.${bk}.${k}:${o[k]}`)})}
- for(const [ek,E] of Object.entries(a.E||{}))if(/\d|%/.test(nd67tok(E.t+E.tag)))typed.push(id+'.E.'+ek)}
+ for(const [ek,E] of Object.entries(a.E||{}))if(/\d|%/.test(nd67tok(E.t)+nd67tok(E.tag)))typed.push(id+'.E.'+ek)}
 console.log('chapters',chap,'options',n);console.log('FREE GAIN (no cost, no numeric loss):',free.length);free.forEach(x=>console.log('  '+x));
 console.log('NO COST NO GAIN NO LOSS (text-only):',textOnly.length);textOnly.forEach(x=>console.log('  '+x));
 console.log('digits/% in text:',typed);
