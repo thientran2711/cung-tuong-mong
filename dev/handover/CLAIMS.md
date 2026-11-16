@@ -24,7 +24,7 @@
 | D-R2 row-align re-review | review/row-align-r2 | D | s1 agent stopped (interim a603afd0); reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV | RUNNING | 16/11 05:41Z |
 | C43 coop-invite-ux | review/coop-invite-ux | D | in-session agent of Foreman D s1 | DONE cb77dda4 (SẴN SÀNG KIỂM) | 16/11 05:40Z |
 | C44 cloud-save | review/cloud-save | D | in-session agent of Foreman D s1 | DONE 38bf315f (SẴN SÀNG KIỂM) | 16/11 05:58Z |
-| D50 dialog fig placeholder | review/dlg-fig-ph | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
+| D50 dialog fig placeholder | review/dlg-fig-ph | D | in-session agent of Foreman D s1 | DONE 0bf17ac4 (SẴN SÀNG KIỂM) | 16/11 05:59Z |
 | balance-after-truth re-run | review/balance-after-truth | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | reign-road review | review/reign-road-r1b | D | in-session agent of Foreman D s1 | STOPPED (duplicate of main's r1; 2 extra findings in reports/reign-road-r1b.md) | 16/11 05:40Z |
 | C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | RUNNING | 16/11 05:27Z |
@@ -42,3 +42,4 @@
 | scheme-games-port-r1 kit sign-off (jopic grid-auto-rows:max-content) | review/scheme-games-port-r1 | main s10 | — | KIT OK → merge-train-4 | 16/11 06:00Z |
 | owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | RUNNING | 16/11 05:54Z |
 | C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | RUNNING | 16/11 05:58Z |
+| D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | (reviewer session, id follows) | RUNNING | 16/11 05:59Z |

@@ -11,7 +11,7 @@ main at start = eba64ead4.
 | D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV RUNNING |
 | C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWo9bFK5NRcy5Hrr3UX RUNNING |
 | C44 cloud-save (Sổ mây) | review/cloud-save @38bf315f → review/cloud-save-r1 | opus | SẴN SÀNG KIỂM → opus reviewer session_01DgYSWq1uCD8NVh8dB3LBba (normal + SECURITY) RUNNING |
-| D50 consort placeholder frame in dialog person column | review/dlg-fig-ph | sonnet | RUNNING |
+| D50 consort placeholder frame in dialog person column | review/dlg-fig-ph @0bf17ac4 → review/dlg-fig-ph-r1 | sonnet | SẴN SÀNG KIỂM → reviewer RUNNING |
 | balance-after-truth re-run | review/balance-after-truth | opus | RUNNING |
 | reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
 | C3 art-complete part 2 | review/art-complete | — | MOVED to Foreman C (owner Q-D1 answer, s9) |
@@ -31,6 +31,7 @@ main at start = eba64ead4.
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- ART NEEDED (for Foreman C, art owner since Q-D1; from D50): full-body figures for Phế phi họ Lý, Quản sự Tân Giả khố, Thầy dạy Thượng thư phòng — 4 age bands each (they now show the kit silhouette).
 - C44 (a): the worker made the Sổ mây code 26 chars (130 bits) with Chép/Gửi buttons. OWNER_DECISIONS l.1016 (coordinator design, owner did not object) says 8 chars; the ≥128-bit rule came from D s1's brief, not the owner. Default = keep 8 chars + strong server-side rate limit/lockout, unless the main chat asks the owner once and she wants the long code. The reviewer is told to judge 8-char + lockout.
 - C44 (b): no "xóa sổ trên mây" button (the drop endpoint exists and is tested). Add one? (main chat / owner)
 - C44 deploy note: merging to main AUTO-DEPLOYS through .github/workflows/coop-worker.yml (migration v2 adds the Vault DO); no Cloudflare connector needed. If the account rejects the [[ratelimits]] blocks, remove them and redeploy. Smoke test in dev/PROGRESS_review-cloud-save.md.
