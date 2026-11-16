@@ -37,3 +37,11 @@ for arg in sys.argv[1:]:
     print("   NPC outbursts kind:reaction:",dict(no.most_common(30)))
     print("   NPC extremes:",dict(ne))
     print("   NPC acts:",dict(na.most_common(20)))
+    # emotion-acts-2: per NPC kind (c consort, e Emperor, t Thái hậu, s servant, m man, o court, q minister, k child): outbursts / acts / extremes and lines seen
+    K=collections.defaultdict(lambda:[0,0,0,0,0])
+    for c,i in ((na,1),(no,0),(ne,2)):
+        for k,v in c.items():K[k.split(":")[0]][i]+=v
+    for k,v in tot("say").items():
+        kd,s=k.split(":");K[kd][3 if s=="seen" else 4]+=v
+    print("   per kind (outbursts / acts / extremes / lines seen / lines hidden):"," · ".join(f"{k} {v[0]}/{v[1]}/{v[2]}/{v[3]}/{v[4]}" for k,v in sorted(K.items())))
+    print("   misc:",dict(tot("misc")))
