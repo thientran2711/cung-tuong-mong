@@ -386,3 +386,4 @@
 | one-core LAND (opus, BIG): re-merge review/one-core 7b9d022f onto main, extend guard to code added since, wire one-core-guard + kit-conform into dev/tools/quickcheck.sh (go-live gate) (owner 20:32Z) | review/one-core-land | main s23 | session_01UV1Szk8AZeChPCcurAVa6F | RUNNING | 16/11 20:29Z |
 | figure cut-out clean + hi-res (URGENT owner bug 20:35Z; Luân hồi neck streak/warped face; resumes paused face-sharp/fig-hd-upscale) | review/fig-cutout-clean | C | (C opens) | INBOX | 16/11 20:29Z |
 | cut-out + hoa điền ROOT CAUSE (opus, URGENT owner bug 20:35–20:38Z): code vs image; code fixes on review/fig-cutout-code; image list → C | review/fig-cutout-code | main s23 | session_01UV1SziJ9niRHRJg3rL83SA | RUNNING | 16/11 20:30Z |
+| road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | (opening) | RUNNING | 16/11 20:33Z |
