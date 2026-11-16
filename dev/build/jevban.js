@@ -24,7 +24,9 @@ function kitEvBanner(m){try{const key=kitDlgKey(m);if(key){const f=`img/ev-${key
   const room=typeof evArt==="function"?evArt():"";return room?{src:room,lab:"",key:key||"",own:false}:null}catch(e){return null}}
 window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
 /* the existing dialog pictures (left picture / band, jk2b kitEvArt) take the banner when it exists */
-(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.art&&!m.stArt){const b=kitEvBanner(m);if(b&&b.own)return{src:b.src,lab:b.lab}}}catch(e){}return k0.apply(this,arguments)}})();
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.art&&!m.stArt){/* review/ev-art-fit: a warning reuses the threat banner j70thr (a court audience) — its meaning group wins */
+  if(typeof kitEvFit==="function"&&KIT_EVFIT_OVER.test(kitEvFitText(m).t)){const f=kitEvFit(m);if(f&&f.id&&typeof evArtOf==="function"){window.__evFitWhy="fit:"+f.rule;return{src:evArtOf(f.id,0),lab:evArtTitle(f.id)}}}
+  const b=kitEvBanner(m);if(b&&b.own)return{src:b.src,lab:b.lab}}}catch(e){}return k0.apply(this,arguments)}})();
 /* an own banner already paints the people of the scene: the stage figures (kitEventStage → .kesov over the picture, jk4) would stand
    a second, grey/cut-out person in the middle of it — on such a banner the overlay is dropped (the text and the speaker row name them) */
 (function(){if(typeof kitEventStage!=="function")return;const k0=kitEventStage;kitEventStage=function(m){const r=k0.apply(this,arguments);
