@@ -33,7 +33,7 @@ main at start = eba64ead4.
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid-r1 @3a875687 | opus | PASS (see ## PASS; reviewer archived) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
-| D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
+| D58 close-maid-by-origin v2 | review/close-maid @0aa7fdd9 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer close-maid-r1 session_01DgYSWpkGbZi35U4djYBBCe RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam @ab50be5c | opus | SẴN SÀNG KIỂM (contains kc-roads-cn-nc-r1 ef6e7a05 + mg-balance 96736fff; worker archived) → reviewer session_01DgYSWp7SJ7frNoZUnBtM7q RUNNING (review/entry-exam-r1) |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING — VISIT half only (extends existing j7 'empnight'); POISON half PARKED (worker's reply blocked by a safety classifier) → QUESTIONS |
@@ -139,6 +139,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:06Z: close-maid SẴN SÀNG KIỂM 0aa7fdd9 (relayed by s3) → opus reviewer close-maid-r1; worker archived.
 - 11:02Z: coop-guest-maid-r1 PASS 3a875687 → READY; reviewer archived.
 - 10:58Z: danh-balance SẴN SÀNG KIỂM 319dce59 → reviewer claimed. emperor-visit worker stopped (poison half blocked by classifier) → told to do visit half only; poison half parked in QUESTIONS.
 - 10:55Z: s4 took over; messaged the 8 running sessions; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo. Took kc-roads fix (main s15 10:52Z INBOX: 'kc-roads fix → D').

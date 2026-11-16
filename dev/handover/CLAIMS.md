@@ -118,7 +118,7 @@
 | D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | FAIL f74f95d3 (6 fixes) | 16/11 08:26Z |
 | story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | FAIL → fix list in reports/story14-p1-r1.md | 16/11 08:26Z |
 | act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | DONE PASS 072687e2 | 16/11 08:40Z |
-| servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
+| servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | DONE SẴN SÀNG KIỂM 0aa7fdd9 | 16/11 08:40Z |
 | slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | DONE SẴN SÀNG KIỂM dd0b618f | 16/11 08:40Z |
 | ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | DONE SẴN SÀNG KIỂM ab50be5c | 16/11 08:40Z |
 | D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | RUNNING | 16/11 08:40Z |
@@ -149,3 +149,4 @@
 | kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | RUNNING | 16/11 10:55Z |
 | danh-balance review (opus) | review/danh-balance-r1 | D | session_01DgYSWncjcb6DFsEZJo6AvA (opus) | RUNNING | 16/11 10:58Z |
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |
+| close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | RUNNING | 16/11 11:06Z |
