@@ -4,7 +4,7 @@
 const {chromium}=require('playwright');
 const [,,URL,YRS,NS,BALJ]=process.argv;const YEARS=+YRS||10,SEEDS=+NS||3;
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=1500']});const all=[];
- const S0=+(process.env.SEED0||1);for(let sd=S0;sd<S0+SEEDS;sd++){const ctx=await b.newContext({viewport:{width:1000,height:755},serviceWorkers:'block'});
+ const S0=+(process.env.SEED0||1);for(let sd=S0;sd<S0+SEEDS;sd++){const ctx=await b.newContext({viewport:{width:1000,height:755},serviceWorkers:'block',reducedMotion:'reduce'});
   await ctx.addInitScript(([sd])=>{let s=sd*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},[sd]);
   await ctx.route(/\.(webp|png|jpe?g|mp3|ogg|m4a|mp4|webm)(\?|$)/i,r=>r.abort());
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
