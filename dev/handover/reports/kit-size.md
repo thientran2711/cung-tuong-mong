@@ -149,3 +149,12 @@ START_CTX ≈ 4 % of 1M (context_usage read 0; estimate). Rollover at ≈ 29 %, 
 
 ### HANDOVER (next kit-size worker)
 Open: 2, 3, 6 above; coop-e2e + quickcheck result lines are in the READY message to main. Server: node dev/test/cdn-overlay-serve.js 8733 <wt> <empty list>. Rebuild: bash dev/site/build_site.sh.
+
+## kit-size #8 (sonnet, 16/11 ~22:00Z–) — branch review/kit-size-8 from c4e35f53 + main f1509d7c (assemble.py file list merged: main's list + jksize.js)
+START_CTX ≈ 4 % (+#7 same session continued). Rollover reached (~29 %): successor takes over.
+- Pager caption: "trang x/y · N dung mạo" → "trang x/y" (j79.js kitPicker; KIT §28 line text updated; owner: no counts).
+- Item 3 (Xa xỉ master, whole group): ONE geometry in container units of the frame (`.kitem>.kitb{container-type:inline-size}`, `.kitx` = the XL master 34/150 at 4/150 written in cqw; word hidden under a 100 px frame via @container; min 14 px box / 8 px digits). kitItem emits `<span class=kxw>Xa xỉ</span><b>N</b>` itself, so EVERY caller (jinv, jwdinv, jitd, jgift, jkrev, jveil... ~40) gets it with no caller edit; kszItem3 now just reuses it (its private .kitx CSS + regex deleted; jinv.js:184 override deleted). Measured dev/test/kit-size8-lux.js: box/frame 0.227 (md, lg, xl), 0.269 sm / 0.241 slot (min-size clamp), offsets 0.026–0.027, 0 page errors. NOT done: grade chip overlay on the frame edge for every caller (kszItem3 has it; kitItem still prints the grade line under the frame) — needs owner OK because it changes ~40 layouts.
+- Item 2 (kit-conform now, 755/1180): CONFORMS 83/84, MISSING 16/15 (stale place-tap), MIXED 4: place:tgk, place:ttp, place:night = T2 "two pictures: band + left picture" (place arrival card has BOTH the banner and the left place picture → drop the band, T2 = one picture left), and SRV:night2 T7 "generic picture on a person option" (option picture on a person option = use the person's portrait / none). Not fixed yet.
+- kit-size5 (20 cases x 2 devices) on this build: no overflow, no cut text, no Đã hiểu, page errors none.
+### HANDOVER (next kit-size worker)
+Open: (2) fix the 4 MIXED above (find the place-arrival builder via dev/test/kit-conform.js:81-84 + j42 tgk/ttp, pxKind j11:114; one picture left only; then re-run kit-conform both devices); (3b) grade chip overlay in kitItem if owner agrees; (6) kit page sample (jkitpage.js) for the live frame, focal crop and the Xa xỉ master. Then coop-e2e + quickcheck (alone, no parallel runs) and READY to main s25.

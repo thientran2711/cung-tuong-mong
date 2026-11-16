@@ -1068,7 +1068,7 @@ function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid
    decoded in idle time, so a page turn is one class toggle on already-decoded thumbnails (small WebP, kitTn). */
 function kitPickerShow(root,pg){const c=root.__kpc;if(!c)return;const {per,pages,B}=c;pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
  B.forEach((b,i)=>{const on=i>=pg*per&&i<(pg+1)*per;if(b.hidden===on)b.hidden=!on});
- const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages}`:"";
  const idle=window.requestIdleCallback||(f=>setTimeout(f,60));idle(()=>{[pg+1,pg-1].forEach(q=>kitPickerDecode(root,q))});try{const o=KIT_PICK[root.dataset.pick];o&&o.onPage&&o.onPage(kitPickerPage(root,pg))}catch(e){}}
 function kitPickerPage(root,pg){const c=root.__kpc;if(!c||pg<0||pg>=c.pages)return[];return c.B.slice(pg*c.per,(pg+1)*c.per)}
 function kitPickerDecode(root,pg){return Promise.all(kitPickerPage(root,pg).flatMap(b=>[...b.querySelectorAll("img")]).map(im=>im.decode?im.decode().catch(()=>0):0))}

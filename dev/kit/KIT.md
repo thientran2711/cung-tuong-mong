@@ -824,7 +824,7 @@ shown even for a stranger (stage 0 "Người lạ"); every other tile reads "ch�
 
 ## 23. PORTRAIT PICKER (kit 2)
 `kitPicker({id, title, items:[{k, face, label}], cur, filters:[[key,label]], filter, rows:2, note, onPick(k), onFilter(key)})`: small rectangular
-kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4 · 32 dung mạo"; no inner scroll, no half row), selection = gold ring +
+kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4" — never a count of faces: owner "đừng ghi số", 16/11; no inner scroll, no half row), selection = gold ring +
 ✓ badge on a pale-gold tile (`.ksel`), radio semantics, arrow keys + Enter/Space. Filter tabs = sub-tab look. j86 (face pick on the identity
 card) uses it with `facePool(filter)` (84 faces, filters Phi tần / Cung nữ) when present, else the 32 consort faces; the standing figure follows.
 

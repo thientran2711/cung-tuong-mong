@@ -217,7 +217,7 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
 function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
- let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0}).replace(/>Xa xỉ (\d+)<\/i>/,'><span class="kxw">Xa xỉ</span><b>$1</b></i>');
+ let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0});
  return `<span class="kszit" data-s="${size}">${it}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
 function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
  const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],loss=[],keep=[];let kind="";
@@ -443,15 +443,13 @@ KIT_SIZE.item3={master:150,size:{XL:150,L:104,M:72,slot:72},word:{XL:true,L:true
 .kszit3[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit3[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
 .kszit3 .kits,.kszit3 .kitn,.kszit3 .kitg{display:none}
 /* the XL master box (one geometry, scaled with the frame) */
-.kszit3 .kitx{position:absolute;top:4px;right:4px;left:auto;bottom:auto;box-sizing:border-box;width:34px;height:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:1px;
- white-space:nowrap;text-align:center;line-height:1;font:700 10px/1 var(--body,sans-serif);border-radius:4px}
-.kszit3 .kitx>b{font-size:13px}.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
+.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
 .ksz3pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .ksz3pick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
 .ksz3pick>div>b{font:600 .74rem/1.2 var(--body)}.ksz3pick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .ksz3wear{display:flex;gap:6px;align-items:flex-start}.ksz3wear>div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;max-width:96px;text-align:center}`;document.head.appendChild(st)})();
 function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3,f=(I3.size[size]||72)/I3.master;
- const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true})).replace(/>Xa xỉ (\d+)<\/i>/,'><span class="kxw">Xa xỉ</span><b>$1</b></i>');
+ const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true}));
  return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--f:${f.toFixed(4)}"><span class="ksz3m">${it}</span>${o.empty?"":`<b class="kszgc" style="--kgc:${gcol}">${gname}</b>`}</span>`}
 function kszItemTile3(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}
  return kszItem3({src:I.src,grade:I.grade,lux:lux||0},size,I.gname||G.n,G.c)}

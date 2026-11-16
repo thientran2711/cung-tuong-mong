@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c4e35f53+","t":"2026-11-16T21:28Z","c":"kit-size #7: event pictures always FILL the frame (cover, crop centred on the focal box; blur-pad .kpz deleted); kit-size7-pics guard 329x4…","b":"6e00a1db2a63","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
+window.CTM_BI={"s":"f70a04b4+","t":"2026-11-16T21:59Z","c":"kit-size #7: event pictures always FILL the frame (cover, crop centred on the focal box; blur-pad .kpz deleted); kit-size7-pics guard 329x4…","b":"b49f703fd70d","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -13213,7 +13213,7 @@ function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid
    decoded in idle time, so a page turn is one class toggle on already-decoded thumbnails (small WebP, kitTn). */
 function kitPickerShow(root,pg){const c=root.__kpc;if(!c)return;const {per,pages,B}=c;pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
  B.forEach((b,i)=>{const on=i>=pg*per&&i<(pg+1)*per;if(b.hidden===on)b.hidden=!on});
- const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages}`:"";
  const idle=window.requestIdleCallback||(f=>setTimeout(f,60));idle(()=>{[pg+1,pg-1].forEach(q=>kitPickerDecode(root,q))});try{const o=KIT_PICK[root.dataset.pick];o&&o.onPage&&o.onPage(kitPickerPage(root,pg))}catch(e){}}
 function kitPickerPage(root,pg){const c=root.__kpc;if(!c||pg<0||pg>=c.pages)return[];return c.B.slice(pg*c.per,(pg+1)*c.per)}
 function kitPickerDecode(root,pg){return Promise.all(kitPickerPage(root,pg).flatMap(b=>[...b.querySelectorAll("img")]).map(im=>im.decode?im.decode().catch(()=>0):0))}
@@ -20989,7 +20989,7 @@ window.kitItemBigSrc=kitItemBigSrc;
 function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]||KIT_GRADE[0];const sz=o.size||"md";const slot=sz==="slot";const bigSz=(sz==="lg"||sz==="xl")&&!o.frame;
  const lab=o.label&&!slot?`<span class="kitl kitl-${o.label[1]||"n"}">${o.label[0]}</span>`:"";const tip=(o.tip||o.name||"").replace(/"/g,"&quot;");
  return `<span class="kitem kitem-${sz}${o.empty?" kitem-empty":" kig"+Math.max(0,Math.min(4,o.grade|0))}${o.on?" kitem-on":""}${o.sel?" kitem-sel":""}${(sz==="lg"||sz==="xl")&&o.frame?" kitem-fr":""}${(o.grade|0)===4&&!o.empty?" kitem-nt":""}" style="--ig:${g.g};--ic:${g.c}${g.r?";--ir:"+g.r:""}" ${o.data||""} title="${tip}"${slot&&!o.empty?` aria-label="${tip}"`:""}>`+
-  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}">Xa xỉ ${o.lux}</i>`:""}</span>`+
+  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}"><span class="kxw">Xa xỉ</span><b>${o.lux}</b></i>`:""}</span>`+
   (slot?"":`<span class="kitn">${o.name||""}</span>${o.empty?"":`<span class="kitg">${g.n}</span>`}${lab}`)+`</span>`}
 (function(){const st=document.createElement("style");st.id="k2b-item-big";st.textContent=`
 /* the picture column of an item pop-up / notice (kitLose, gift, econ, veil, mark: .kpb.kphas > .kpsubj.kpitem) is the big-item width, not the 72-104 px portrait column; the compact bag slot card (.kitslot, 28.13f) keeps its 64 px header icon */
@@ -21066,8 +21066,12 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem[class*=" kig"]>.kitb .kitq{right:9%;bottom:8%}.kitem[class*=" kig"]>.kitb .kits{left:9%;top:8%}.kitem[class*=" kig"]>.kitb .kitm{right:8%;top:7%}
 .kitem[class*=" kig"]>.kitb .kiton{left:7%;right:7%;bottom:6%;border-radius:3px}
 .kitem.kitem-on[class*=" kig"]>.kitb{outline:2px solid #2d7a52;outline-offset:1px}
-.kitem .kitx{position:absolute;right:7%;top:7%;z-index:2;font-style:normal;font-size:.56rem;line-height:1.3;white-space:nowrap;padding:0 4px;border-radius:0 6px 0 6px;background:#4a2c1ee0;color:#ffe9b0;font-weight:700;letter-spacing:.01em}
-.kitem-lg .kitx,.kpsubj .kitx{font-size:.72rem;padding:1px 6px}
+/* XA XỈ BOX = ONE MASTER (owner 16/11 17:20Z, KIT §84 (5)): the box is the XL master (frame 150 px: box 34x34 at 4 px from top/right, word 10 px, number 13 px) written in CONTAINER UNITS of the frame (.kitb is the container), so at EVERY size and in EVERY place (bag slot, tile, lg, xl, tap panel, kszItem3) it keeps exactly the same place and size relative to the frame; only its content changes: word + number from a 100 px frame, number only below (min 14 px box / 8 px digits so a 54 px bag slot stays legible) */
+.kitem>.kitb{container-type:inline-size}
+.kitem .kitx{position:absolute;top:2.667cqw;right:2.667cqw;left:auto;bottom:auto;z-index:2;box-sizing:border-box;width:max(22.667cqw,14px);height:max(22.667cqw,14px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.667cqw;padding:.667cqw;
+ white-space:nowrap;text-align:center;line-height:1;font-style:normal;font-weight:700;font-size:max(6.667cqw,5px);border-radius:2.667cqw;background:#4a2c1ee0;color:#ffe9b0}
+.kitem .kitx>b{font-size:max(8.667cqw,8px)}
+@container (max-width:99px){.kitem .kitx>.kxw{display:none}.kitem .kitx>b{font-size:max(12.667cqw,8px)}}
 /* page-scale-r1: the wear column (kitEquipSlots col:true, 40-72 px slots: Tư trang, Chọn y phục, pet box) never shows the Xa xỉ tag: wider than a 40 px slot it was cut ("a xỉ 33") and hid the picture; the same items show it in the bag and the tap panel, the total stays on the sum line */
 .keq.keqv .kitem .kitx{display:none}
 /* corner plan when the luxury tab sits top-right: seal "Ngự" and the "đã tẩm" tag go bottom-left (above the worn band) */
@@ -23476,7 +23480,6 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem{position:static!important;width:64px;margin:0;padding:0;top:auto}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem>.kitem{--isz:64px!important;width:64px!important}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitg{display:none}
-#modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitx{font-size:.62rem;padding:1px 4px}
 #modal .dlg.kitslot .kslinfo{min-width:0}
 #modal .dlg.kitslot .kslinfo>.kinvrows{margin:0}
 #modal .dlg.kitslot .kslinfo>p{margin:4px 0 0}
@@ -45085,7 +45088,7 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
 function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
- let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0}).replace(/>Xa xỉ (\d+)<\/i>/,'><span class="kxw">Xa xỉ</span><b>$1</b></i>');
+ let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0});
  return `<span class="kszit" data-s="${size}">${it}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
 function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
  const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],loss=[],keep=[];let kind="";
@@ -45311,15 +45314,13 @@ KIT_SIZE.item3={master:150,size:{XL:150,L:104,M:72,slot:72},word:{XL:true,L:true
 .kszit3[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit3[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
 .kszit3 .kits,.kszit3 .kitn,.kszit3 .kitg{display:none}
 /* the XL master box (one geometry, scaled with the frame) */
-.kszit3 .kitx{position:absolute;top:4px;right:4px;left:auto;bottom:auto;box-sizing:border-box;width:34px;height:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:1px;
- white-space:nowrap;text-align:center;line-height:1;font:700 10px/1 var(--body,sans-serif);border-radius:4px}
-.kszit3 .kitx>b{font-size:13px}.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
+.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
 .ksz3pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .ksz3pick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
 .ksz3pick>div>b{font:600 .74rem/1.2 var(--body)}.ksz3pick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .ksz3wear{display:flex;gap:6px;align-items:flex-start}.ksz3wear>div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;max-width:96px;text-align:center}`;document.head.appendChild(st)})();
 function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3,f=(I3.size[size]||72)/I3.master;
- const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true})).replace(/>Xa xỉ (\d+)<\/i>/,'><span class="kxw">Xa xỉ</span><b>$1</b></i>');
+ const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true}));
  return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--f:${f.toFixed(4)}"><span class="ksz3m">${it}</span>${o.empty?"":`<b class="kszgc" style="--kgc:${gcol}">${gname}</b>`}</span>`}
 function kszItemTile3(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}
  return kszItem3({src:I.src,grade:I.grade,lux:lux||0},size,I.gname||G.n,G.c)}
@@ -45530,7 +45531,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6e00a1db2a63";window.CTM_BUILD=BUILD;
+const BUILD="b49f703fd70d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
