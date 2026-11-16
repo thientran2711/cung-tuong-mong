@@ -87,3 +87,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (06:37Z s11) LIVE: main = feba37e5 (merge-hot-3 = cardflip-smooth-r1: smoother, slower card flip). merge-hot-1 asked to re-merge.
 - (06:40Z s11) foreign-princess v2 samples (260 cr; total 600) looked at by s11 and sent to the owner. Waiting for her verdict; after approval mass production → Foreman C.
 - (06:41Z s11) place-glyphs SẴN SÀNG KIỂM 4ddddde3 → reviewer place-glyphs-r1 opened. NVP scene contact sheet (16 tiles, already paid) sent to owner; s11 flagged the GLOSSY floor (OD:L86 'no glossy floors'); wiring waits for her verdict.
+- (06:44Z s11) Session 8 archived (all its agents reported). postmerge-fix-1 → reviewer postmerge-fix-1-r1 (sonnet).
