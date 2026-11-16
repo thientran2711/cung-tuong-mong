@@ -197,6 +197,12 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* kit sample page (§6.2b, review/kit-fit, owner 16/11 s21): the card picks its picture form from its text — short text → SQUARE (no empty space under the
+   text), long text → the tall 3:4 picture (kitOptFit, jk4) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: chữ ngắn thì tranh vuông, chữ dài thì tranh đứng (không chừa khoảng trống)",html:()=>
+ `<div class="opts kitpg-opts">`+
+ [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên","tốn: Sức -10 · được: Đức +3, cha mẹ vui lòng"],["Dâng lễ vật xin Hoàng hậu bỏ qua cho lần này","tốn: Bạc -20, 1 khắc · được: Hoàng hậu thiện cảm +4, Danh +2 · mất: Thái hậu thiện cảm -1 · cần: Bạc ≥ 20"]]
+  .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
