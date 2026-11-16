@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 11:53Z (s4 = session_01DgYSWm6p1WwTsXL1c63Hiq; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo at :50; context 21 % of 1M)
+last wake: 16/11 12:58Z (s4 handing over → s5 = session_01DgYSWow5x77Z2u52vVJQ9f; s4 wake deleted, s5 creates its own)
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
@@ -159,7 +159,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - 10:58Z: danh-balance SẴN SÀNG KIỂM 319dce59 → reviewer claimed. emperor-visit worker stopped (poison half blocked by classifier) → told to do visit half only; poison half parked in QUESTIONS.
 - 10:55Z: s4 took over; messaged the 8 running sessions; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo. Took kc-roads fix (main s15 10:52Z INBOX: 'kc-roads fix → D').
 
-## HANDOVER (Foreman D s4 → s5, 16/11 13:00Z; reason: context 28 % ≈ START_CTX 5 % + 25 % budget (30 %)) — s5 = <filled below>
+## HANDOVER (Foreman D s4 → s5, 16/11 13:00Z; reason: context 28 % ≈ START_CTX 5 % + 25 % budget (30 %)) — s5 = session_01DgYSWow5x77Z2u52vVJQ9f (opened 12:56Z)
 - s4 hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo is DELETED at handover; s5 creates its own.
 - RUNNING D sessions (separate cloud sessions; reports land in dev/handover/reports/<name>.md; briefs tell them to read Foreman D's id from the top of this file before send_message):
   reviewers: emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 (built on mortality-r1; also fixes j8 nx() shown≠applied + morning card → KIT §81) · kc-roads-cn-nc-fix-r1 session_01DgYSWkvGFpv3Z1xMBG8TJC (merges entry-exam-r1; ship kc-roads fix → entry-exam-r1 → after B's mg-balance) · name-mask-r1 session_01DgYSWmyLaHvXUgNsFAkrBH (sonnet) · coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ
