@@ -74,7 +74,7 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (12:55Z s16) Main coordinator is now MAIN SESSION 16 = session_01UV1SzhWSw7EETVzp3xX5hi. OWNER (12:50Z): "trả lời để cho mấy đứa đó nó làm việc tiếp" → ANSWERS to every open B question (coordinator decisions under OD:L51 "don't ask small things"; owner may override later). Mark them answered in your STATUS and unblock the work:
   QB1: YES rename 'Trí khôi' → 'Đăng khôi'. Keep talent formula Tài + Tâm cơ + Thi.
   QB2: YES night music for the sủng ái group until its own music exists. Painted FX: full in the dramatic group, lighter in the ordinary group (as now).
-  QB3: visible Sims-like mood BAR = hers only. NPCs keep their hidden per-person feeling (odds/acts) — no NPC bar.
+  QB3 (OVERWRITTEN by owner 13:08Z, OD last line): mood is for EVERYONE — the player AND every NPC, men and women, same system (feeling → mood bands → emotion actions → extreme-mood consequences). Her visible bar stays in her mood box; NPCs show their current mood band as a kit chip on their person card/pop-up.
   Q3: keep dawn() alone for a new week (no sky-band on top).
   Q4: §71 buổi transition and §72 back button CONFIRMED as KIT numbers.
   Q5: OK (knowledge games scale with level; rival NPC score raise belongs to balance, already routed).
@@ -90,3 +90,4 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
   Q25: YES add Thái hậu dislikes; YES show a 'thích' row for consorts (known likes) next to 'ghét'.
   D31 / Q6: balance-pass-r1 rides merge-train-6 (main s16 GO given 12:17Z) → start the re-measure + HH ~32 % tuning as soon as it is on main.
 - (13:04Z s16) balance-pass-r1 is LIVE (main e9c6021d, merge-train-6) → start the D31 difficulty re-measure + HH ~32 % tuning now.
+- (13:08Z s16) NEW OWNER ORDER (OD 13:08Z) for Foreman B (mood owner, builds on review/mood-bar now in merge-train-8): (1) EMOTION ACTIONS via existing kit act cards, shown only in the matching mood band, max 2 cards: giận → "Đập đồ" / "Mắng cung nữ"; buồn → "Khóc thầm" / "Viết thư nhà"; vui → "Đàn hát tự thưởng"; căng thẳng → "Thắp hương cầu an" (each with gain AND loss, numbers in BAL). (2) EXTREME MOOD held ≥ 3 weeks has consequences: buồn → falls ill; giận → slip of the tongue (Danh loss); vui → complacency (more jealousy aimed at her). (3) BOTH apply to the player AND to ALL NPCs, men and women (NPCs act by mood in the life sim; their consequences hit them and show in the log/events). Measure with bots n≥30 (HH reach, early death) before/after; report numbers. Kit only (KIT FIRST). Open one opus worker (rules + numbers).
