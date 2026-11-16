@@ -10,7 +10,11 @@
    (people who died that month and are not in the ledger, classified from the month's text). Her ending = over() title + fate. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const R=path.resolve(__dirname,'../..');const CH=+process.env.CHUNK||5;const LIVES=+process.argv[2]||20,YEARS=+process.argv[3]||5,OUT=process.argv[4];
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
+const MERGE=process.argv[2]==="--merge";
+(async()=>{if(MERGE){const all={};for(const f of process.argv.slice(3)){const d=JSON.parse(fs.readFileSync(f,'utf8'));for(const k in d)if(k!=="pageErrors"){all[k]=all[k]||{lives:[],deaths:[],errs:[]};for(const x of ["lives","deaths","errs"])all[k][x].push(...d[k][x])}}
+  return report(all,Object.keys(all),+process.env.YEARS||5,[])}
+ const b=await chromium.launch({args:['--js-flags=--max-old-space-size=900','--disable-gpu']});const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
+ await ctx.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());
  await ctx.route('http://ts.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=R+u;if(!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});
   r.fulfill({status:200,contentType:/\.html$/.test(f)?'text/html; charset=utf-8':/\.json$/.test(f)?'application/json':'application/octet-stream',body:fs.readFileSync(f)})});
  const errs=[];
@@ -19,7 +23,7 @@ const R=path.resolve(__dirname,'../..');const CH=+process.env.CHUNK||5;const LIV
  for(const style of STY){all[style]={lives:[],deaths:[],errs:[]};
   for(let done=0;done<LIVES;done+=CH){
   const page=await ctx.newPage();page.on('pageerror',e=>errs.push(e.message.slice(0,200)));
-  await page.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());await page.goto('http://ts.local/dev/index.html',{waitUntil:'domcontentloaded',timeout:120000});await page.waitForTimeout(2500);
+  await page.goto('http://ts.local/dev/index.html',{waitUntil:'domcontentloaded',timeout:120000});await page.waitForTimeout(2500);
   if(process.env.MORT_OFF)await page.evaluate(()=>{BAL.mort.on=0});
   let part;try{part=await page.evaluate(([style,LIVES,YEARS])=>{const quiet=()=>{try{Q.length=0}catch(e){}};const out={lives:[],deaths:[],errs:[]};
    const strip=x=>String(x).replace(/<[^>]+>/g,'');let ending=null;const o0=over;over=function(h,t,fate,alive){ending={h,fate:strip(fate),t:strip(t).slice(0,160),alive:!!alive,age:S.age,year:S.year};return o0.apply(this,arguments)};
@@ -52,6 +56,9 @@ const R=path.resolve(__dirname,'../..');const CH=+process.env.CHUNK||5;const LIV
   await page.close();for(const k of ["lives","deaths","errs"])all[style][k].push(...part[k]);}
   console.error(style,"done",all[style].lives.length,all[style].errs.slice(0,2))}
  all.pageErrors=errs.slice(0,10);if(OUT)fs.writeFileSync(OUT,JSON.stringify(all));
+ report(all,STY,YEARS,errs);await b.close()})().catch(e=>{console.error(e);process.exit(1)});
+
+function report(all,STY,YEARS,errs){
  /* tables */
  const pct=(a,n)=>n?(100*a/n).toFixed(0)+"%":"-";
  for(const st of STY.filter(x=>x!=="world")){const L=all[st].lives,n=L.length;const dead=L.filter(l=>l.end&&l.end.h!=="alive");
@@ -70,4 +77,4 @@ const R=path.resolve(__dirname,'../..');const CH=+process.env.CHUNK||5;const LIV
  const D=[].concat(...STY.map(s=>all[s].deaths.map(d=>Object.assign({s},d))));
  const G={};D.forEach(d=>{const g=G[d.g]=G[d.g]||{n:0,c:{},h:{}};g.n++;g.c[d.c]=(g.c[d.c]||0)+1;const bin=d.a<10?"0-9":d.a<20?"10-19":d.a<30?"20-29":d.a<40?"30-39":d.a<50?"40-49":d.a<60?"50-59":d.a<70?"60-69":d.a<80?"70-79":"80+";g.h[bin]=(g.h[bin]||0)+1});
  console.log("\n## deaths by group (all styles): cause counts · age histogram");for(const g in G)console.log(g,G[g].n,JSON.stringify(G[g].c),JSON.stringify(G[g].h));
- console.log("pageErrors",errs.length,errs.slice(0,3));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
+ console.log("pageErrors",errs.length,errs.slice(0,3))}
