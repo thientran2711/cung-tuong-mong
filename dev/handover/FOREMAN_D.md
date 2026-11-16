@@ -21,4 +21,4 @@ Workers:
 - D52 skin-match audit of the 7347 figures never measured (plan in PROGRESS_review-skin-match.md).
 - LATER, only when the main coordinator writes "GO" here: act-split wave 2 (outings, festivals) and wave 3 (night sneaking), after review/act-dedupe wave 1 lands.
 - D54 (owner 16/11, high priority) PAINT the missing buổi versions: every room or place scene that lacks its own sáng/trưa/chiều/tối painting gets them, as Magnific gpt-2-6 edits of the approved scene (same layout, only light/sky/lamps change). Put the 4 seasons in too where the place uses seasons. The CSS buổi tint is being removed (review/postmerge-fix-1 lists the scenes without a set; scan SCIMG/j94 yourself if that list is not there yet). Send the owner a contact sheet per place before going live; she approves art.
-- D55 small: book-page figures (.kbp-fig, jbook.js) have a ground shadow without url(#kfa), so a faint rectangle can show. Apply the kit alpha-clean filter there (face-sharp-r2 reviewer note). Also: portrait 390x844 fetches HD for figures drawn >900 px (≈400 KB) — acceptable, note only.
+- D55 (moved back to the main session: review/book-fig).
