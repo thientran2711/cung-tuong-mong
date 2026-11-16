@@ -93,9 +93,16 @@ function lapse(m){/* raised while maid quests are open: they cannot be done any 
 function qSteps(m){if(!m||!m.q14)return[];lapse(m);return m.q14.L.map(q=>{const d=defOf(m.q14.v,m.id,q.id);if(!d)return null;const N=need(q.id);
  return[`${d.t}${N>1?` (${Math.min(q.n,N)}/${N})`:""}${q.x?" · không còn hợp thân phận mới":""}`,!!(q.ok||q.x),"q"]}).filter(Boolean)}
 window.tq14Steps=qSteps;
+/* the quest list in the two cards: kit §46 kitChecks (✓/✗ chip + text, the same part as the chapter detail's steps) */
+function qChecks(m){const L=qSteps(m).map(x=>[x[1],esc(x[0])]);return typeof kitChecks==="function"?kitChecks(L.filter(x=>!x[0]).concat(L.filter(x=>x[0]))):""}
 /* "Việc nên làm" with "Đi làm" (jgoal nextSteps reads C.todo) */
 function todo(m){if(!m||!m.q14)return null;const L=[];for(const q of m.q14.L){if(q.ok||q.x)continue;const d=defOf(m.q14.v,m.id,q.id);if(!d)continue;
-  L.push({t:d.t,why:say(d.why),tab:d.tab,act:d.act,card:d.card,tl:d.tl})}return L.length?L:null}
+  L.push({t:d.t,why:say(d.why)+hint(q.id),tab:d.tab,act:d.act,card:d.card,tl:d.tl})}return L.length?L:null}
+/* nothing in the chest for this quest: say where to get one (the Nội vụ phủ shop button is in Tư trang) */
+function hint(id){try{const inv=S.inv||[];
+ if(id==="trang"&&!inv.some(e=>e&&!e.h&&((typeof wdItem==="function"&&wdItem(e))||(IT[e.k]&&IT[e.k].sl))))return " Rương chưa có món nào để thay: nhờ thái giám mua một món rồi mặc vào.";
+ if(id==="ban"&&typeof econSellable==="function"&&!econSellable(S).some(x=>x&&!x.no))return " Rương chưa còn món nào bán được: nhờ thái giám mua một món, hoặc chờ đồ được ban thưởng.";
+}catch(e){}return ""}
 window.tq14Todo=todo;
 /* ---------- the chapter: steps, goal text, done rule ---------- */
 for(const id of ["nhap14","sung14","tap14"]){const d=MS67[id];if(!d)continue;
@@ -109,9 +116,9 @@ window.tq14Real=function(m,st){/* jst14 «Lỡ dịp» rule: did she really fini
 function init(m){const v=variant();const L=((TQ[v]||{})[m.id]||[]).map(q=>({id:q.id,n:0}));if(L.length)m.q14={v,L}}
 function introCard(m){if(quiet||window.__bot||typeof kitPanel!=="function")return;const c=S.st.ch,d=MS67[m.id],n=narr();
  const rows=[["Lời dặn",say(INTRO[m.q14.v][m.id]).replace("{N}",esc(n.name)+(n.office?`, ${esc(n.office)},`:""))],["Mục tiêu",d.g()],
-  ["Việc phải làm",m.q14.L.map(q=>{const x=defOf(m.q14.v,m.id,q.id);return `✗ ${x.t}`}).join("<br>")],
   ["Phần thưởng",`mỗi việc xong: Bạc +${QB().bac[m.q14.v]}; đủ việc và đạt mục tiêu: phần thưởng của chương`],msHan67(m,1)];
- kitPanel({kind:"info",title:`Chương ${c.n}: ${d.t()}`,sub:`${n.name} dặn`,sections:[{h:"",rows:rows.map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
+ kitPanel({kind:"info",title:`Chương ${c.n}: ${d.t()}`,sub:`${n.name} dặn`,sections:[{h:"",rows:rows.slice(0,2).map(r=>[r[0],r[1],r[2]||""])},
+  {h:"Việc phải làm",html:qChecks(m)},{h:"",rows:rows.slice(2).map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
 (function(){const m0=msStart67;msStart67=function(id){if(!(typeof f14==="function"&&f14()&&F14T.test(id)))return m0.apply(this,arguments);
  /* the same steps as j67 msStart67, with the quests set before anything is shown */
  const c=S.st.ch;c.n++;S.st.ms={id,r0:S.rank,t0:S.turn};S.st.M=null;const d=MS67[id];init(S.st.ms);
@@ -119,10 +126,9 @@ function introCard(m){if(quiet||window.__bot||typeof kitPanel!=="function")retur
  log(`<b>Chương ${c.n}: ${d.t()}.</b> ${d.g()}`);introCard(S.st.ms);syncMain67()}})();
 /* ---------- a deed is done ---------- */
 function doneCard(m,d,b){if(quiet||window.__bot||typeof kitPanel!=="function")return;const n=narr(),c=S.st.ch,ch=MS67[m.id];
- const left=m.q14.L.filter(q=>!q.ok&&!q.x).map(q=>defOf(m.q14.v,m.id,q.id)).filter(Boolean).map(x=>x.t);
- const rows=[["Lời dặn",`${esc(n.name)}: ${say(d.ok)}`],["Phần thưởng",`Bạc +${b}`,"g"],
-  ["Còn lại",left.length?left.join("<br>"):"Đủ việc ma ma dặn. Đạt mục tiêu của chương thì chương xong, có thưởng."]];
- kitPanel({kind:"result",title:`Xong việc: ${d.t}`,sub:`Chương ${c.n} · ${ch.t()}`,sections:[{h:"",rows:rows.map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
+ const left=m.q14.L.filter(q=>!q.ok&&!q.x).length;
+ const rows=[["Lời dặn",`${esc(n.name)}: ${say(d.ok)}`],["Phần thưởng",`Bạc +${b}`,"g"]].concat(left?[]:[["Còn lại","Đủ việc ma ma dặn. Đạt mục tiêu của chương thì chương xong, có thưởng."]]);
+ kitPanel({kind:"result",title:`Xong việc: ${d.t}`,sub:`Chương ${c.n} · ${ch.t()}`,sections:[{h:"",rows:rows.map(r=>[r[0],r[1],r[2]||""])},{h:"Việc ma ma dặn",html:qChecks(m)}],subject:n.face||null,btn:"Đã hiểu"})}
 function note(ev,det){const m=active();if(!m)return;lapse(m);let hit=0;
  for(const q of m.q14.L){if(q.ok||q.x)continue;const d=defOf(m.q14.v,m.id,q.id);if(!d||d.ev!==ev||(d.m&&!d.m(det)))continue;
   q.n++;hit=1;if(q.n>=need(q.id)){q.ok=1;const b=QB().bac[m.q14.v]||0;try{apply({bac:b})}catch(e){S.bac=(S.bac||0)+b}

@@ -16,7 +16,7 @@ const [,,URL,SHOTS]=process.argv;
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(800);return p};
  const life=async(p,k)=>{await p.evaluate(k=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__forceOrigin=k;start()},k);
   await dismissRoulette(p);await p.waitForFunction(k=>typeof S!=='undefined'&&S&&S.origin&&S.origin.k===k&&S.st&&S.st.ms&&!document.querySelector('.kroul,#kroul,#kroulw'),k,{timeout:60000});
-  await p.evaluate(()=>{window.__cards=[];const k0=kitPanel;kitPanel=function(sp){try{window.__cards.push({t:sp.title,sub:sp.sub,subj:!!sp.subject,rows:(sp.sections||[]).flatMap(s=>(s.rows||[]).map(r=>r[0]+': '+String(r[1]).replace(/<[^>]+>/g,' ')))})}catch(e){}return k0.apply(this,arguments)};window.kitPanel=kitPanel;
+  await p.evaluate(()=>{window.__cards=[];const k0=kitPanel;kitPanel=function(sp){try{window.__cards.push({t:sp.title,sub:sp.sub,subj:!!sp.subject,rows:(sp.sections||[]).flatMap(s=>(s.rows||[]).map(r=>r[0]+': '+String(r[1]).replace(/<[^>]+>/g,' ')).concat(s.html?[(s.h||'')+': '+String(s.html).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()]:[])),kchk:(sp.sections||[]).some(s=>/class="kchecks"/.test(s.html||''))})}catch(e){}return k0.apply(this,arguments)};window.kitPanel=kitPanel;
    window.__clear=()=>{Q.length=0;try{const md=document.getElementById('modal');if(md)md.hidden=true}catch(e){}try{showModal()}catch(e){}};
    window.__month=()=>{const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__clear();used=0;if(S.dead){S.dead=false;S.suc=60}S.suc=Math.max(S.suc||0,60);try{nextBuoi()}catch(e){return e.message}}__clear();return null};
    window.__st=()=>{const m=S.st.ms;return m?{id:m.id,q:m.q14?m.q14.L.map(q=>q.id+(q.ok?'+':q.x?'x':'-')):null,steps:MS67[m.id].steps(m).map(x=>(x[1]?'✓':'✗')+x[0]+(x[2]?'['+x[2]+']':''))}:{id:null,M:S.st.M&&S.st.M.a}};
@@ -56,7 +56,7 @@ const [,,URL,SHOTS]=process.argv;
   e=await p.evaluate(()=>__month());const past=await p.evaluate(()=>S.st.ch.past.slice(-1)[0]);s=await st(p);
   chk('A all quests + milestone: chapter 1 closes «Xong» (reward), chapter 2 opens with sell/beauty/buy quests',past&&past.ms==='nhap14'&&past.tag==='Xong'&&s.id==='sung14'&&s.q.join()==='ban-,diem-,mua-',[e,past,s]);
   C=await p.evaluate(()=>__cards.filter(c=>/^Chương 2/.test(c.t)));
-  chk('A chapter 2 open card = narrator kit panel (person, "dặn", quests, reward, Hạn)',C.length===1&&C[0].subj&&/dặn$/.test(C[0].sub)&&C[0].rows.some(x=>/^Việc phải làm/.test(x))&&C[0].rows.some(x=>/^Hạn/.test(x)),C);
+  chk('A chapter 2 open card = narrator kit panel (person, "dặn", quests, reward, Hạn)',C.length===1&&C[0].subj&&/dặn$/.test(C[0].sub)&&C[0].rows.some(x=>/^Việc phải làm/.test(x))&&C[0].kchk&&C[0].rows.some(x=>/^Hạn/.test(x)),C);
   if(SHOTS){await p.evaluate(()=>{Q.length=0;kitPanel(Object.assign({},window.__lastSpec||{}));});}
   /* sell: the Tư trang sell button path (econSellUI → econSell) */
   r=await p.evaluate(()=>{__clear();used=0;const L=econSellable(S).filter(x=>x&&!x.no);if(!L.length)return 'nothing sellable '+JSON.stringify(S.inv.map(e=>e.k));econSellUI(L[0].ix);__clear();return null});s=await st(p);
