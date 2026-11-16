@@ -25,7 +25,7 @@ function compare(a,b){if(!a||!b)return{err:'missing page'};let n=0,full=0,xw=0;c
 async function game(b,W,H,url,D){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D||1,serviceWorkers:'block',hasTouch:!!D,isMobile:W<1100&&!!D});
  await c.addInitScript(SEED);await c.addInitScript(CLEAN0);const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});await p.goto(url,{waitUntil:'commit'});return{c,p,errs}}
-async function ready(f){await f.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await f.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:180000}).catch(()=>{});await sleep(1500)}
+async function ready(f){await f.waitForFunction(()=>typeof start==='function'&&document.readyState==='complete',null,{timeout:180000});await f.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:180000}).catch(()=>{});await sleep(1500)}
 const settle=async f=>{for(let i=0;i<8;i++){await sleep(1200);const had=await f.evaluate(()=>!!document.querySelector('[id^=kroul],#dawn,#kload,#kpodov,.kmov')||Q.length>0||!document.getElementById('modal').hidden);if(!had&&i>2)return;await f.evaluate(()=>CLEAN())}};
 const openTab=k=>{CLEAN();const b=document.querySelector(`#tabs [data-kg="${k}"]`)||document.querySelector(`#tabs [data-tab="${k}"]`);b&&b.click()};
 (async()=>{const b=await chromium.launch();const R={layout:{},devices:{}};const BASE=BASE0.replace(/\/?$/,'/')+'index.html';

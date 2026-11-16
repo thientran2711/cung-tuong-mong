@@ -128,8 +128,8 @@ function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBou
 /* ---------- 3. PHONE PORTRAIT: the stage takes ~40 % of the screen (was 27 %); the panel keeps the rest ---------- */
 (function(){const st=document.createElement("style");st.id="k2b-phone";st.textContent=`
 /* kv3:.kv1 */
- :where(.kv1) .game:not(.maptab):not(.cardtab){grid-template-rows:auto minmax(0,40dvh) minmax(0,1fr) auto!important}
- :where(.kv1) .game.cardtab{grid-template-rows:auto minmax(0,24dvh) minmax(0,1fr) auto!important}
+ :where(.kv1) .game:not(.maptab):not(.cardtab){grid-template-rows:auto minmax(0,calc(40*var(--kvh,1dvh))) minmax(0,1fr) auto!important}
+ :where(.kv1) .game.cardtab{grid-template-rows:auto minmax(0,calc(24*var(--kvh,1dvh))) minmax(0,1fr) auto!important}
  :where(.kv1) header.hud>.me .dt{font-size:.66rem!important;line-height:1.2}
  :where(.kv1) header.hud>.hud2.khud.col{flex-wrap:nowrap!important;gap:3px!important}
  :where(.kv1) header.hud>.hud2.khud>.h2t{min-height:26px!important;height:26px;padding:0 6px!important;font-size:.7rem!important}
@@ -615,7 +615,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
 .dlg.kpsc .kpb.kpid>.kpsubj{display:none!important}
 /* origin picture = a wide band across the top of the card (kitSceneArt), height capped so the choices stay on screen */
 .dlg.kpsc .kpid>.kpidart{width:100%;position:relative}
-.dlg.kpsc .kpid>.kpidart>.ksart{aspect-ratio:auto;height:clamp(84px,19dvh,190px)}
+.dlg.kpsc .kpid>.kpidart>.ksart{aspect-ratio:auto;height:clamp(84px,calc(19*var(--kvh,1dvh)),190px)}
 .dlg.kpsc .kpid>.kpidart>.ksart>img{object-position:center 45%}
 /* the two choices never leave the screen (owner 11/14: "Đổi thân phận (−100…" was cut at 686x880): the body scrolls under them */
 .modal.kpscene .dlg.kpsc.kfpon>#mb{overflow-y:auto!important;overscroll-behavior:contain}
@@ -705,7 +705,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
 .kroul .krgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;align-items:stretch}
 /* kv3:.kv2 */:where(.kv2) .kroul .krgrid{grid-template-columns:repeat(5,minmax(0,1fr))}
 /* one origin card: outer .krt moves (shuffle / centre), inner .krc flips; front in flow (gives the size), back laid over it */
-.kroul .krt{position:relative;width:clamp(96px,min(26vw,17dvh),150px);perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
+.kroul .krt{position:relative;width:clamp(96px,min(26vw,calc(17*var(--kvh,1dvh))),150px);perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
 .kroul .krc{position:relative;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.1,.2,1)}
 .kroul .krt.down .krc{transform:rotateY(180deg)}
 .kroul .krf,.kroul .krb{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;box-sizing:border-box}
@@ -726,7 +726,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
 .kroul.krrm *,.kroul.krrm{transition:none!important;animation:none!important}
 .krfly{pointer-events:none}
 .dlg.krin.krinL{animation:krinL .55s cubic-bezier(.2,.8,.2,1)}.dlg.krin.krinP{animation:krinP .55s cubic-bezier(.2,.8,.2,1)}
-@keyframes krinL{from{transform:translateX(40vw);opacity:0}}@keyframes krinP{from{transform:translateY(30vh);opacity:0}}
+@keyframes krinL{from{transform:translateX(40vw);opacity:0}}@keyframes krinP{from{transform:translateY(calc(30*var(--kvh,1vh)));opacity:0}}
 @media (prefers-reduced-motion:reduce){.kroul *,.kroul{transition:none!important;animation:none!important}.dlg.krin{animation:none!important}}
 `;document.head.appendChild(st)})();
 
@@ -754,7 +754,7 @@ function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]
 /* the picture column of an item pop-up / notice (kitLose, gift, econ, veil, mark: .kpb.kphas > .kpsubj.kpitem) is the big-item width, not the 72-104 px portrait column; the compact bag slot card (.kitslot, 28.13f) keeps its 64 px header icon */
 html body #modal .dlg:not(.kitslot) .kpb.kphas:has(>.kpsubj.kpitem){grid-template-columns:min(150px,38%) minmax(0,1fr)}
 html body #modal .dlg:not(.kitslot) .kpb.kphas>.kpsubj.kpitem>.kitem-lg:not(.kitem-fr){--isz:100%;width:100%}
-html body .kitem-lg:not(.kitem-fr){--isz:150px}html body .kitem-xl:not(.kitem-fr){--isz:min(260px,36dvh)}
+html body .kitem-lg:not(.kitem-fr){--isz:150px}html body .kitem-xl:not(.kitem-fr){--isz:min(260px,calc(36*var(--kvh,1dvh)))}
 html body .kitem-lg:not(.kitem-fr)>.kitb,html body .kitem-xl:not(.kitem-fr)>.kitb{background:none!important;border:0!important;box-shadow:none!important;outline:0!important;overflow:visible!important;border-radius:0!important}
 html body .kitem-lg:not(.kitem-fr)>.kitb::after,html body .kitem-xl:not(.kitem-fr)>.kitb::after{display:none!important}
 html body .kitem-lg:not(.kitem-fr)>.kitb>img,html body .kitem-xl:not(.kitem-fr)>.kitb>img{width:100%!important;height:100%!important;object-fit:contain;filter:drop-shadow(0 6px 9px #3a201666) drop-shadow(0 1px 2px #3a20164d)}

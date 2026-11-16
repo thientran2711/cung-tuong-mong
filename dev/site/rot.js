@@ -26,7 +26,7 @@
 window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0};
 function kvPages(){return innerWidth<innerHeight?1:2}
 function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
- r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");
+ r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px");
  if(!kvMark.on){kvMark.on=1;addEventListener("resize",kvMark)}}
 (function(){var inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  if(inFrame){document.documentElement.classList.add("kview-in");

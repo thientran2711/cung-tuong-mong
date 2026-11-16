@@ -254,16 +254,16 @@ window.kitOnePic=kitOnePic;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,calc(40*var(--kvh,1dvh)),400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
 .kesf .kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
 .kesf .kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
-#mb>.kdlgart.kesband>.ksart{height:clamp(84px,18dvh,190px)}
+#mb>.kdlgart.kesband>.ksart{height:clamp(84px,calc(18*var(--kvh,1dvh)),190px)}
 /* week book person page: the full-body figure in the portrait column */
-.kbk-por .kesf{align-items:center}.kbk-por .kesfi>.kesimg{width:auto;max-width:100%;height:auto;max-height:calc(min(62dvh,560px)*var(--kfr,1))}
-.kbk.narrow .kbk-por .kesfi>.kesimg{max-height:calc(46dvh*var(--kfr,1))}
+.kbk-por .kesf{align-items:center}.kbk-por .kesfi>.kesimg{width:auto;max-width:100%;height:auto;max-height:calc(min(calc(62*var(--kvh,1dvh)),560px)*var(--kfr,1))}
+.kbk.narrow .kbk-por .kesfi>.kesimg{max-height:calc(calc(46*var(--kvh,1dvh))*var(--kfr,1))}
 `;document.head.appendChild(st)})();
 
 /* ---------- Thái hậu chip opens HER person card (owner: not the Giao tình tab), same pcard component as the Emperor's card (showEmp) ---------- */
@@ -275,8 +275,8 @@ function kitThCardHTML(){try{const R=(typeof kitCourtRows==="function"?kitCourtR
 /* ================= KIT 32.5 · DIALOG: ONLY THE OPTIONS SCROLL (owner 11/15, dev/owner-shots/1115-dlg-scroll-*.jpg) =================
    Every option dialog / event card (showModal with .opts — kitEventStage people, headArt, speaker portrait, story text, notes): the dialog
    is a flex column; the title, the picture / figures and the story text stay FIXED and visible (flex:none); ONLY the options list
-   scrolls (flex:1, overflow auto) with a soft top shadow once it is scrolled. The picture may shrink on short screens (max 28vh;
-   Fold / phones 24vh); if the fixed part still takes more than 55 % of the dialog, the picture is compressed first (down to 14vh),
+   scrolls (flex:1, overflow auto) with a soft top shadow once it is scrolled. The picture may shrink on short screens (max calc(28*var(--kvh,1vh));
+   Fold / phones calc(24*var(--kvh,1vh))); if the fixed part still takes more than 55 % of the dialog, the picture is compressed first (down to calc(14*var(--kvh,1vh))),
    figures scale with it. Dialogs without .opts (Đã rõ cards, person cards, Luân hồi / identity panels .kpscopts) are unchanged. */
 function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidden)return;const d=M.querySelector(".dlg"),mb=document.getElementById("mb");
  const o=mb&&mb.querySelector(":scope > .opts");if(!d||!o){if(d)d.classList.remove("kdscroll");return}
@@ -317,8 +317,8 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll.kdtx>#mb>.kpb.kphas{display:grid;grid-template-rows:minmax(0,1fr)}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;transition:box-shadow .2s;flex:1 1 auto}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
-.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,28vh)}
-.modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,28vh) + 40px)}
+.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,calc(28*var(--kvh,1vh)))}
+.modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,calc(28*var(--kvh,1vh))) + 40px)}
 /* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
@@ -359,7 +359,7 @@ window.kitEsOvFit=kitEsOvFit;
 (function(){if(typeof kitDlgFit!=="function")return;const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitEsOvFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitEsOvFit,140)})})();
 (function(){const st=document.createElement("style");st.id="kit-esov";st.textContent=`
-#mb>.kdlgart.kesonpic>.ksart{position:relative;height:var(--kdpic,30vh)!important;max-height:none!important;min-height:150px}
+#mb>.kdlgart.kesonpic>.ksart{position:relative;height:var(--kdpic,calc(30*var(--kvh,1vh)))!important;max-height:none!important;min-height:150px}
 #mb>.kdlgart.kesonpic>.ksart>img{object-position:center 60%}
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
@@ -381,7 +381,7 @@ window.kitEsOvFit=kitEsOvFit;
    on one line above the name chips; two people packed by their core with ≤ 20 % overlap, KIT 33 rule 4). RIGHT: the event text on top
    (the small face of a fact row stays; the empty dot of a "world" row is dropped), the options below, stacked one per row with their
    full Cần / Tốn / Được / Mất / Kèm lines and the odds; ONLY the options scroll (32.5). Dialogs with a picture band keep 32.6.
-   Phones (< 600 px): figure on top (big: min(48dvh, 460 px)), text, then the options; only the options scroll.
+   Phones (< 600 px): figure on top (big: min(calc(48*var(--kvh,1dvh)), 460 px)), text, then the options; only the options scroll.
    No DOM move: .kpb becomes display:contents so its figure column and text join #mb's grid next to .opts (kitDlgFit keeps working). */
 function kitDpOn(){const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return null;const d=M.querySelector(".dlg.kesdlg");
  const col=mb.querySelector(":scope > .kpb > .kpsubj.kes");if(!d||!col||mb.querySelector(".kesov"))return null;return{d,mb,col}}
@@ -565,8 +565,8 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 html body button.ka .kan>.md.kfc{zoom:.43;margin:0 8px 0 0!important;vertical-align:middle}
 #modal .dlg.kdper #mr{padding-left:calc(var(--kdpw,240px) + 28px)}
 #modal .dlg.kdper.kdnarrow>#mb{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-auto-rows:max-content}
-#modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(48dvh,460px) max-content minmax(0,1fr)!important}
-#modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(48dvh,460px) max-content!important}
+#modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(calc(48*var(--kvh,1dvh)),460px) max-content minmax(0,1fr)!important}
+#modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(calc(48*var(--kvh,1dvh)),460px) max-content!important}
 #modal .dlg.kdper.kdnarrow>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1}
 #modal .dlg.kdper.kdnarrow>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdnarrow>#mb>.kdpr{grid-column:1}
 #modal .dlg.kdper.kdnarrow>#mb>.opts{grid-column:1;grid-row:-2/-1}
@@ -707,7 +707,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 (function(){const st=document.createElement("style");st.id="kit-event-dp";st.textContent=`
 #modal .dlg.kdper.kdpbanner>#mb{grid-template-rows:max-content max-content minmax(0,1fr)!important}
 #modal .dlg.kdper>#mb>.kdlgart.kdpban{grid-column:2!important;grid-row:1!important;margin:0 0 8px!important;padding:0!important;min-width:0;width:auto!important;height:auto!important;max-height:none!important}
-html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;height:clamp(96px,24vh,190px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important}
+html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;height:clamp(96px,calc(24*var(--kvh,1vh)),190px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important}
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}

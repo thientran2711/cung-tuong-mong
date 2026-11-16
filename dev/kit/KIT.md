@@ -17,8 +17,19 @@ phone (it goes) or taps it; the sideways game stays playable under it. Direct mo
 the only place these numbers live; CSS reads `--kpage-w/--kpage-h`; JS asks `kitView().pages` (1 or 2). `html.kv2` = SPREAD (landscape: LEFT page
 = her room / stage, RIGHT page = the open tab, two EQUAL 582 px page boxes meeting at the book binding); `html.kv1` = ONE PAGE (portrait: the room
 home is the main screen, a tab opens the RIGHT page full screen, the active tab or "Về phòng" goes back — kitPhoneShell §31.7, now keyed to
-`kitView().pages===1`; tab change by tap + short page animation, swipe only in Tuần lục, OD:L985). The page box is 582 px in both modes, so the Fold page
-IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
+`kitView().pages===1`; tab change by tap + short page animation, swipe only in Tuần lục, OD:L985). The page box is **582 x 623 in both modes**, so the Fold page
+IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.1737).
+**0.0a ONE PAGE BOX (owner 16/11 17:00Z s20, OD:L345 + OD:L1278; review/page-scale):** "màn hình dọc của điện thoại là cái scale ra của cái màn hình
+ngang của iPad" — the open page must be the iPad right page scaled: same columns, rows and element positions. Root cause of the bag showing more rows on
+one side (owner: 7 rows vs 4): the one-page canvas was 590x820 but its bottom bar is 32 px taller (two rows of 4 tabs, 76 px, vs the spread's one row,
+44 px), so its page box was 582x591 vs the spread's 582x623, and every layout that fills free height by pixels (kitInvFit bag rows + extra column,
+equipment slot size, fills) laid out differently. Fix (ONE place, `KIT_FRAME` in rot.js + kvfallback.js): the one-page canvas is **590 x 852** =
+the spread's height + the extra chrome, so `KIT_FRAME.box` = 582x623 is the page box in both modes and nothing inside a page ever sees a different size.
+RULE: whoever changes chrome height in ONE mode (top bar, bottom bar, back-to-room) changes `KIT_FRAME.page.h` by the same amount; page code never
+reads the page height to decide columns/rows. **No `N vh` / `N dvh` sizes** inside the canvas (the one-page canvas is 32 px taller, so 1vh differs):
+use `calc(N*var(--kvh))`, `--kvh` = 1 % of the SPREAD height (8.2 px) in both modes, set by rot.js/kvfallback (review/page-scale codemod: 50 sizes in
+17 files — kit panel `--kph`, dialog art bands, reward tabs, pickers …); `100vh`/`100dvh` (fill the canvas) stay. `media-check.js` (build) fails on a new one. Test: `dev/test/page-scale.js` (every tab + every sub-tab of its first tab row + common pop-ups: page boxes
+equal, every grid same columns x rows, ≥95 % of first-screen element rects equal within 2 px; Dư đồ is a full-canvas map screen, exempt).
 - RULE: page CONTENT (panels, person card, act cards, chips, kit panels/modals, stage plaques and figures) has NO width/orientation breakpoint;
   the same CSS lays it out in both modes. Only CHROME (top bar, tab bar, page grid, back-to-room) and full-canvas SCREENS (title, roulette, map,
   scene panel, mini-game overlay, podium, load) may differ per mode, written once per mode with `:where(.kv1)` / `:where(.kv2)` selectors
@@ -30,25 +41,25 @@ IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
 - TOP BAR on the one page (jk4, design-scale p2): the time block flows as ONE wrapping row of whole items (18 px lines) and `kitTcFit` scales it
   down together (zoom 5 % steps, min 80 %) when it would be taller than her name block — so the bar has the spread's height and the page box
   under it is the spread's (582x623 both modes).
-- BOTTOM BAR on the one page (owner 16/11 13:25Z (C), review/phone-bars; sample §0b): the 8 tabs are TWO ROWS OF 4 big buttons (36 px rows, label .86 rem via j57 `--tfs`; `tabsFit` sets `cols = ceil(n/2)` when `kitView().pages===1`, the spread keeps ONE row) and Sang buổi is ONE tall 84 px button spanning both rows at the right (p1 `:where(.kv1) .bar .main`). One rule in the kit bar, no per-screen CSS. The page box under the bars is ~25 px shorter than the spread's — the price of the bigger buttons (see the phone-bars report).
+- BOTTOM BAR on the one page (owner 16/11 13:25Z (C), review/phone-bars; sample §0b): the 8 tabs are TWO ROWS OF 4 big buttons (36 px rows, label .86 rem via j57 `--tfs`; `tabsFit` sets `cols = ceil(n/2)` when `kitView().pages===1`, the spread keeps ONE row) and Sang buổi is ONE tall 84 px button spanning both rows at the right (p1 `:where(.kv1) .bar .main`). One rule in the kit bar, no per-screen CSS. Its extra 32 px are added to the one-page canvas (590x852, §0.0a), so the page box under the bars stays the spread's 582x623.
 - TAB MODE (j6 `KIT_TABMODE` = maptab, cardtab): every tab-dependent class of `.game` is reset before EVERY panel render; the open tab's renderer
   sets its own. Test: `dev/test/tab-pairs.js` (every tab→tab pair, real taps, 1180x820 + 755x1000).
 - OPEN (design-scale-p2 review, phase 4): kit modals / page content still carry per-mode `:where(.kv1/.kv2)` rules carried over by the phase-3 codemod, which this RULE forbids: jpdlg `.kpdlg` grid, j79 dawn `.kpanel` paddings + `.kpsc` scene-person card (kpid grid, kstgrid, kpfaces, modal placement), j93 kitReward `.kmtabs/.kmbloom/.kmbox`, jpm `.kpm-list`, jgpick `.kipd2` two-column, p1 `.art .pcb` (kv2), jtoil `.toilw` (KIT REQUEST: one-page toilette), jcooptimer chip. Each must become ONE rule for both modes (the spread's); `grep -n 'kv3:.kv' dev/build` lists them.
-- Audit: `node dev/measure/media-audit.js 590` (must list ENV only). Test: `dev/test/design-scale.js` (right/left page rects equal within 1 px).
+- Audit: `node dev/measure/media-audit.js 590` (must list ENV only). Tests: `dev/test/design-scale.js` (right/left page rects equal within 1 px), `dev/test/page-scale.js` (every tab, §0.0a).
 
 The game is laid out at exactly TWO design sizes and never reflows on a device: the picture is scaled uniformly, like resizing a window.
 
 | screen | layout drawn | how it is shown |
 |---|---|---|
 | any landscape: Fold 1000x755, iPad 1180x820 / 1366x1024, phones 844x390 … | **1180 x 820** (the iPad layout) | scaled by s = min(vw/1180, vh/820), centred |
-| portrait, width/height ≥ 0.62 (Fold 755x1000, iPad portrait) | **590 x 820** (ONE PAGE = the iPad half) | scaled by s = min(vw/590, vh/820), centred (Fold: s 1.2195, 18 px paper bars) |
+| portrait, width/height ≥ 0.62 (Fold 755x1000, iPad portrait) | **590 x 852** (ONE PAGE = the iPad half; page box 582x623 as on the spread, +32 px for its taller tab bar) | scaled by s = min(vw/590, vh/852), centred (Fold: s 1.1737, 31 px paper bars) |
 | narrow portrait phone, width/height < 0.62 (390x844, 412x915, 412x1058) | **1180 x 820** | pre-ROTATED 90° (the player turns the phone), then scaled; one-time tip "Xoay ngang điện thoại để chơi"; turning to real landscape drops the rotation without reload |
 
 - How: index.html is a thin HOST (rot.js, top of `<head>`, turns the rest of the page into inert `<plaintext>` — never `window.stop()`, which
   leaves a page Chromium never paints) holding ONE frame `#krotf` (`index.html?krot=1`) of the design size, `transform:
   [translateX(vw) rotate(90deg)] translate(ox,oy) scale(s)`, origin 0 0; the bars around it are paper `#f6efe2` (never black).
 - Inside the frame the game sees only the design size: `innerWidth/innerHeight`, every CSS media query and every JS breakpoint read
-  1180x820 or 755x1000. `kitView()` → `{w,h,s,rot,design}` is THE function to ask for the view (s = the screen scale). Never read
+  1180x820 or 590x852. `kitView()` → `{w,h,s,rot,design}` is THE function to ask for the view (s = the screen scale). Never read
   `screen.*` or the host's size from game code.
 - Pointer / touch / drag coordinates (page curl, sliders, map pan) arrive already divided by s and un-rotated (the browser maps them through
   the frame's transform); fixed popovers and overlays live inside the frame, so they stay on the canvas. Nothing in the game divides by s.

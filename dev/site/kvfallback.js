@@ -5,5 +5,5 @@
 if(typeof window.kitView!=="function")(function(){window.KIT_FRAME=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:852},box:{w:582,h:623},margin:8,pageMargin:4,gutter:0};
  var P=function(){return innerWidth<innerHeight?1:2};
  var M=function(){var r=document.documentElement,p=P();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
-  r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px")};
+  r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");/* --kvh = 1 % of the SPREAD height in both modes: page content and pop-ups size by it, never by vh/dvh (the one page is 32 px taller, §0.0a) */r.style.setProperty("--kvh",KIT_FRAME.spread.h/100+"px")};
  window.kitView=function(){return{w:innerWidth,h:innerHeight,s:1,rot:false,design:false,pages:P()}};M();addEventListener("resize",M)})();
