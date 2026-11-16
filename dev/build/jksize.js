@@ -238,3 +238,223 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
  h+=`<h3>7.3 placeholder pictures: ONE set per real orientation (portrait 3:4 · landscape · square) × tone (light · dark), shown at every size of that orientation</h3><p class="kszn">Today: 2 event (640x480) + 2 act (384x506) pictures stretched into every slot. Spec: ph-{light,dark}-{p,l,q}.webp painted at the largest size of its orientation (PL 162x216 → 3:4 at 486x648, LL 860x260 → 3.3:1 at 1720x520, Q72 → 1:1 at 288x288) — ART REQUEST → Foreman C (all drawing is C's, OD 15:35Z). Below: the slots with today's pictures.</p>`;
  h+=`<div>${[["portrait","img/ph-act-light.webp",["PS","PM","PL"]],["landscape","img/ph-event-light.webp",["LS","LM","LL"]],["square","img/ph-act-dark-v2.webp",["Q56","Q64","Q72"]]].map(([n,src,L])=>`<div class="kszlab">${n}</div><div class="kszrow" style="align-items:flex-end;margin-bottom:10px">${L.map(k=>box(k,src)).join("")}</div>`).join("")}</div>`;
  return h}
+
+/* ================= v3 · kit-size #3 (owner 16/11 16:45Z s20, OD "(16/11 16:45Z, s20 chat)" (1)–(6)) =================
+   (1) EVERY frame shows BOTH the person AND the event picture (the event picture = the real game path: the event's own picture, else
+       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own gets its NARRATOR (KIT_SIZE.v3.narrator: the player's
+       thân tín maid tells news / rules / notices; Hoàng thượng brings nights and rewards).
+   (2) every kind comes in S / M / L / XL and EACH SIZE HAS ITS OWN PRESENTATION (KIT_SIZE.v3.pres):
+       S  = "one": ONE main picture LEFT, chosen by what the frame is about (KIT_SIZE.v3.focus):
+            event-centred → the event picture LEFT (stretched to the body height), the person = small kit avatar (mdH) inside the info;
+            person-centred → the person's portrait frame LEFT (pcPort, tag above), the event picture = a small strip at the top of the info.
+       M / L / XL = "fig": the FULL FIGURE left (figure M / L / XL) + the event picture TOP-RIGHT, as wide as the info + button column.
+       No empty space: the body is exactly as tall as its left column; the event picture in the info column GROWS to fill what the
+       text leaves (never smaller than its subject needs); content taller than the left column → the next size (XL scrolls inside).
+   (3) event pictures are cropped around their SUBJECT (KIT_PIC_SUBJ, box in 0..1 of the picture): the crop is centred on it and the
+       strip is never shorter than the subject (ev-hh-viec: the gold seal whole). Pictures without a box: centred, smallest strip.
+   (4) BUTTONS: the frame layout first, then its button area = a GRID: cell ≥ KIT_SIZE.v3.btn.cellS (140) → cols = what fits the
+       area (S: the whole frame width under the body; M/L/XL: the info column). A short button (class S: ≤ 2 rows, ≤ 70 chars) takes ONE
+       cell; a long one (LS / LR) takes the cells it needs for ≥ cellLong (280) (full row on narrow frames). So "Im lặng" is one compact cell.
+   ONE builder kszFrame3(spec,size), ONE picker kitFramePick3(spec,host), ONE fitter kitFrameApply3(dlg). Nobody sets a size per screen. */
+KIT_SIZE.v3={
+ focus:{news:"event",rule:"event",notice:"event",night:"event",intel:"event",evidence:"event",reward:"event",week:"event",
+        info:"person",result:"person",choice:"person",threat:"person",person:"person",end:"person"},
+ narrator:{news:"maid",rule:"maid",notice:"maid",week:"maid",intel:"maid",evidence:"maid",threat:"maid",person:"maid",info:"maid",choice:"maid",
+        reward:"emp",night:"emp",end:"me",result:"me"},
+ pres:{S:"one",M:"fig",L:"fig",XL:"fig"},
+ /* S = small content: body up to bodyS, body + its button rows up to capS */
+ bodyS:200,capS:{kv1:400,kv2:400},
+ colS:104,porS:88,picMinS:139,evMin:{one:46,fig:56},
+ btn:{cellS:140,cellLong:280,gap:6}};
+/* v3 figure sizes (measured BODY px, × KIT_FIG.fac) of the "fig" presentations: big enough that M holds more than S, L more than M, XL more than L */
+KIT_SIZE.fig3={M:{h:290,cw:140},L:{h:370,cw:176},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
+Object.assign(KIT_SIZE.lay,{M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
+/* subject boxes of event pictures [x0,y0,x1,y1] (0..1). One registry; a picture added later gets its box here (else centred). */
+const KIT_PIC_SUBJ={"ev-hh-viec":[.42,.22,.79,.5],"ev-thinh-an":[.28,.3,.78,.97],"info-thai-hau":[.18,.08,.95,.72],"ev-news-tin-trong-cung":[0,.2,1,.9],
+ "ev-tin-don":[.28,.18,.85,.68],"info-bong-loc":[.03,.38,.62,.76],"ev-mat-bao":[.28,.12,.85,.82],"info-chung-cu":[.02,.45,.8,.88],"act-cat-ban-thuong":[0,.12,.78,.72],
+ "ev-canh-phong":[.3,.14,.9,.95],"act-cat-le-nghi":[.18,.28,.85,.88],"info-noi-vu":[.32,.32,1,.9]};
+window.KIT_PIC_SUBJ=KIT_PIC_SUBJ;
+function kitPicSubj(src){const k=String(src||"").replace(/[?#].*$/,"").replace(/^.*\//,"").replace(/\.\w+$/,"");return KIT_PIC_SUBJ[k]||null}
+window.kitPicSubj=kitPicSubj;
+(function(){const V=KIT_SIZE.v3,Z=KIT_SIZE,css=[];
+ for(const k of ["M","L","XL"]){const g=Z.fig[Z.lay[k].fig];css.push(`.ksz3[data-lay="${k}"]{--kszfh:${g.h}px;--kszcw:${g.cw}px}`)}
+ css.push(`
+.ksz3 .k3body{display:flex;gap:12px;padding:10px 12px 12px;align-items:stretch;box-sizing:border-box}
+.ksz3 .k3right{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.ksz3 .k3right>.kfacts,.ksz3 .k3right>.kb{flex:none}
+.ksz3[data-pres="fig"] .k3body>.kszfig{align-self:center}
+.ksz3 .k3main{flex:none;width:${V.colS}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.ksz3 .k3main>.kt3{text-align:center;width:max-content;max-width:${V.colS+24}px}
+.ksz3 .k3mpor{align-self:center}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
+.ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
+.ksz3 .k3mpic{align-self:stretch;justify-content:stretch;min-height:${V.picMinS}px}
+.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
+.ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
+.ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
+.ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
+.ksz3[data-pres="one"]>.k3btns{padding:0 12px 12px}
+.ksz3 .k3btns>.kszb{grid-column:span var(--k3s,1);width:auto;min-width:0}
+.ksz3 .kszb[data-kbs="S"] .kszr{flex-wrap:wrap;row-gap:0;white-space:nowrap}.ksz3 .k3meas{display:block}.ksz3 .k3meas .kszbt{min-width:7em}
+.ksz3 .kszfig>.kt3{max-width:calc(var(--kszcw) + 24px)}
+.ksz3.kszf{max-height:none}`);
+ const st=document.createElement("style");st.id="k-size3";st.textContent=css.join("\n");document.head.appendChild(st)})();
+function kszWho3(sp){if(sp.who)return sp.who;const n=KIT_SIZE.v3.narrator[sp.kind]||"maid";try{return n==="me"?S:n==="emp"?S.emp:S.maid}catch(e){return null}}
+/* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
+function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
+function kszPic3(src,cls){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",{shape:"wide",cap:false})}</div>`}
+function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}
+ if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
+ const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
+ return `<div class="k3main k3mpor">${tag}${pcPort(f)}</div>`}
+/* spec {kind,title,sub,who?,pic?,facts,rows,opts} + size K → frame html (kitFrameApply3 after mount) */
+function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=kszWho3(sp),ev=kszEvSrc3(sp);
+ const R=[];let left="";
+ if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
+ else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}
+ let facts=(sp.facts||[]).slice();
+ /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
+ if(pres==="one"&&foc==="event"&&who&&!facts.some(f=>f&&typeof f==="object"&&f.who)&&sp.say)facts.unshift({who,text:sp.say});
+ if(facts.length)R.push(kitFacts(facts,{group:false}));if(sp.rows&&sp.rows.length)R.push(kitRows(sp.rows));
+ const btns=sp.opts&&sp.opts.length?`<div class="k3btns">${sp.opts.map(kszBtn).join("")}</div>`:"";
+ if(pres==="fig"&&btns)R.push(btns);
+ let head=kpHeader(sp.kind,sp.title,sp.sub);if(!(sp.opts&&sp.opts.length))head=head.replace(/<\/div>$/,kitXHTML('data-kszx="1"',"Đóng")+"</div>");
+ return `<div class="dlg kszf ksz3 kpanel" data-kind="${sp.kind}" data-ksz="${K}" data-pres="${pres}" data-focus="${foc}" data-lay="${K}">${head}<div class="k3body">${left}<div class="k3right">${R.join("")}</div></div>${pres==="one"?btns:""}</div>`}
+/* crop every event picture around its subject; strips never shorter than the subject (returns nothing; sets min-height + object-position) */
+function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(!im||!im.naturalWidth)return;const W=im.naturalWidth,H=im.naturalHeight;
+ const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;const w=c.clientWidth;
+ if(sj&&c.classList.contains("k3ev")){const need=Math.min(Math.ceil(w*.45),Math.ceil((sj[3]-sj[1])*H*(w/W)*1.06));/* never taller than a 2.2:1 strip: a tall subject is centred, not shown whole */const base=KIT_SIZE.v3.evMin[c.closest(".ksz3").dataset.pres]||56;c.style.minHeight=Math.max(base,need)+"px"}
+ const h=c.clientHeight||1,s=Math.max(w/W,h/H),vw=w/s,vh=h/s;const b=sj||[.15,.15,.85,.85];const cx=(b[0]+b[2])/2*W,cy=(b[1]+b[3])/2*H;
+ const px=W-vw>1?Math.min(1,Math.max(0,(cx-vw/2)/(W-vw))):.5,py=H-vh>1?Math.min(1,Math.max(0,(cy-vh/2)/(H-vh))):.5;im.style.objectPosition=`${(px*100).toFixed(1)}% ${(py*100).toFixed(1)}%`})}
+/* (4) button grid: cols from the area width, short buttons one cell, long ones the cells they need */
+function kszBtnGrid3(root){root.querySelectorAll(".k3btns").forEach(g=>{const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return;const bs=[...g.querySelectorAll(":scope>.kszb")];
+ /* the cell = what the widest SHORT button needs at its narrowest (title ≥ 7 em, a row may put its value under its label, chips never break), never less than cellS */
+ g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.width="min-content";need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.width=""});g.classList.remove("k3meas");
+ const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
+ bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))})}
+/* the left column decides the body height; the event picture in the info grows into what the text leaves */
+function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
+ if(R){R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");/* XL: the body stays the figure's height, more text scrolls inside the info column */if(dlg.dataset.ksz==="XL"&&L){R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}kszPicFit3(dlg);kszPicFit3(dlg);return dlg.dataset.ksz}
+/* does the content fit this size? (info column measured with the event picture at its smallest) */
+function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
+ const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=(parseFloat(ev.style.minHeight)||KIT_SIZE.v3.evMin[dlg.dataset.pres])+"px"}
+ const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
+ if(dlg.dataset.pres==="fig")return need<=lh+2;const btn=dlg.querySelector(":scope>.k3btns");
+ const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[m]}
+/* THE picker: the smallest size whose presentation holds the content */
+function kitFramePick3(sp,host){for(const K of ["S","M","L","XL"]){host.innerHTML=kszFrame3(sp,K);const d=host.firstElementChild;kitFrameApply3(d);if(kitFrameFits3(d))return K}return"XL"}
+Object.assign(window,{kszFrame3,kitFrameApply3,kitFrameFits3,kitFramePick3,kszPicFit3,kszBtnGrid3});
+/* ---- v3 sample content: every kind × S / M / L / XL with a REALISTIC length for that size (kit page + dev/test/kit-size3.js) ---- */
+function kszSpecs3(){const P=kszPeople(),ch=(l,v,c)=>kitChip(l,v,c),op=(t,rows)=>({t,pic:kszOptPic(t),rows}),me=S,mx=S&&S.maid,q=P.q,th=P.th,v2=P.v2,emp=P.emp;
+ const pay=i=>{try{return BAL.pay[i]}catch(e){return null}};const pr=i=>[RANKS[i].n,pay(i)!=null?ch("Bạc",pay(i),"g"):"theo phẩm","t"];
+ const cut=(a,n)=>a.slice(0,n);const mk=(base,F,Rw,N)=>({S:Object.assign({},base,{facts:cut(F,N.S[0]),rows:cut(Rw,N.S[1])}),M:Object.assign({},base,{facts:cut(F,N.M[0]),rows:cut(Rw,N.M[1])}),
+  L:Object.assign({},base,{facts:cut(F,N.L[0]),rows:cut(Rw,N.L[1])}),XL:Object.assign({},base,{facts:cut(F,N.XL[0]),rows:cut(Rw,N.XL[1])})});
+ const X={};
+ X.news=mk({kind:"news",title:"Tin trong cung",sub:"Thượng tuần · tháng Ba",say:"thưa: sáng nay trong cung có tin mới."},
+  [{who:v2,text:"được lật thẻ bài đêm qua.",chips:[["Sủng",3]]},"Tháng này được mùa khắp nơi.",{who:q,text:"ban lụa cho các cung nhân giữ lễ trong tháng."},{who:th,text:"đau đầu, miễn thỉnh an hai buổi."},
+   "Tin triều đình: sứ thần Tây Vực sắp vào kinh dâng cống.",{who:emp,text:"ngự giá Ngự hoa viên ngắm mẫu đơn, gọi đàn sáo hầu.",chips:[["Vui",2]]},"Nội vụ phủ phát than sưởi sớm hơn mọi năm.",{who:v2,text:"sai cung nữ đi dò hỏi ở Thượng y cục."},"Thái y viện đổi người trực đêm."],[],
+  {S:[2,0],M:[4,0],L:[6,0],XL:[9,0]});
+ X.rule=mk({kind:"rule",title:"Bổng lộc",sub:"Luật hậu cung",say:"thưa: luật bổng lộc như sau."},
+  ["Mỗi tháng Nội vụ phủ phát bổng lộc theo phẩm vị.","Phẩm càng cao, bạc càng nhiều.","Bổng phát vào ngày mùng một; ai bị phạt bổng thì tháng đó không được lĩnh.","Bạc dư có thể thưởng cung nhân, mua lễ vật hay góp việc thiện."],
+  [pr(0),pr(1),pr(2),pr(3),pr(4),pr(5),pr(6)],{S:[2,0],M:[2,3],L:[3,5],XL:[4,7]});
+ X.notice=mk({kind:"notice",title:"Nội vụ phủ báo",sub:"Trung tuần · tháng Mười",say:"thưa: Nội vụ phủ vừa sai người đến báo."},
+  ["Than sưởi mùa đông phát từ tuần sau.","Mỗi cung được hai giỏ, cung chủ vị được bốn giỏ.","Ai cần thêm thì xin ở Nội vụ phủ, trừ vào bổng tháng sau.","Cung nào để than ẩm sẽ bị nhắc nhở.","Đêm có gió bấc, các cung giữ lửa cẩn thận, không để cháy rèm."],
+  [["Giỏ than",ch("Bạc",-5,"g"),"t"],["Áo bông mới",ch("Bạc",-12,"g"),"t"],["Lò sưởi tay",ch("Bạc",-8,"g"),"t"]],{S:[2,0],M:[3,1],L:[4,2],XL:[5,3]});
+ X.night=mk({kind:"night",title:"Đêm thượng tuần",sub:"Canh hai",say:"cho gọi ta đến Dưỡng Tâm điện."},
+  [{who:emp,text:"lật thẻ bài của ta.",chips:[["Sủng",4]]},"Đêm yên, trăng sáng.",{who:me,kind:"me",text:"được hầu tẩm, sáng mai về cung.",chips:[["Sức",-10]]},"Kính sự phòng ghi tên ta vào sổ.",{who:v2,text:"nghe tin, đóng cửa cung sớm.",chips:[["Ghen",3]]},"Sáng mai các cung sẽ biết.","Nếu có tin vui, Thái y sẽ bắt mạch sau một tháng."],[],
+  {S:[2,0],M:[3,0],L:[5,0],XL:[7,0]});
+ X.intel=mk({kind:"intel",title:"Mật báo",sub:"Tai mắt ở Cảnh Nhân cung",say:"thưa nhỏ: tai mắt vừa báo về."},
+  [{who:v2,text:"sai người mang thư ra ngoài cung lúc canh ba."},"Người mang thư là thái giám họ Lưu.",{who:v2,text:"gặp riêng Thái y Trương hai lần trong tuần."},"Chưa rõ thư gửi cho ai.","Nếu sai người theo dõi tiếp thì có thể biết thêm, nhưng dễ lộ.","Tai mắt xin thêm bạc để giữ miệng người gác cửa."],
+  [["Chứng cứ",ch("Chứng cứ",1)],["Độ tin","Khá chắc","t"]],{S:[2,0],M:[3,0],L:[4,2],XL:[6,2]});
+ X.evidence=mk({kind:"evidence",title:"Chứng cứ: bức thư",sub:"Tìm được ở Cảnh Nhân cung",say:"thưa: nô tỳ tìm được thứ này."},
+  [{who:v2,text:"giấu bức thư dưới đáy hộp phấn."},"Thư niêm sáp đỏ, nét chữ của người trong nhà.","Thư nhắc đến việc đổi thuốc an thai.","Ngày ghi trong thư trùng với ngày Thái y Trương đến bắt mạch.","Còn thiếu người làm chứng."],
+  [["Đủ để","Hặc tội nhẹ","t"],["Thiếu","Người làm chứng","t"],["Giữ trong","Hộp gỗ ở tẩm cung","t"]],{S:[2,0],M:[3,1],L:[4,2],XL:[5,3]});
+ X.reward=mk({kind:"reward",title:"Hoàng thượng ban thưởng",sub:"Sau đêm Trung thu",say:"sai Lý tổng quản mang đồ ban đến."},
+  [{who:emp,text:"khen ta đàn khúc Xuân giang hay.",chips:[["Sủng",3]]},"Đồ ban: một đôi vòng ngọc, hai xấp lụa Hàng Châu.",{who:q,text:"sai người đến chúc mừng."},"Các cung đều biết ta được ban thưởng.",{who:v2,text:"đóng cửa không ra ngoài.",chips:[["Ghen",4]]}],
+  [["Vòng ngọc",ch("Sắc",2)],["Lụa Hàng Châu",ch("Bạc",30,"g")],["Danh tiếng",ch("Danh",2)]],{S:[2,0],M:[2,2],L:[3,3],XL:[5,3]});
+ X.week=mk({kind:"week",title:"Tuần lục · tuần đầu tháng Ba",sub:"Tổng kết bảy ngày",say:"thưa: tuần này có mấy việc."},
+  [{who:me,kind:"me",text:"thỉnh an Hoàng hậu đủ bảy buổi.",chips:[["Đức",2]]},{who:emp,text:"lật thẻ bài của ta một lần.",chips:[["Sủng",4]]},{who:v2,text:"ganh ghét ta ra mặt.",chips:[["Oán",3]]},"Bổng tháng phát đủ.",{who:th,text:"khen ta chép kinh chăm.",chips:[["Thiện cảm",3]]},"Trời trở lạnh, các cung phát than.",{who:mx,text:"ốm hai ngày, đã khỏi."}],[],
+  {S:[2,0],M:[3,0],L:[5,0],XL:[7,0]});
+ X.info=mk({kind:"info",title:"Thái hậu",sub:"Từ Ninh cung",who:th},
+  ["Thái hậu là mẹ của Hoàng thượng, đứng đầu hậu cung.","Người trọng lễ nghi, ghét kẻ phô trương.","Mỗi sáng mùng một, các phi tần đến Từ Ninh cung thỉnh an.","Người thích nghe kinh Phật và ngắm hoa mai."],
+  [["Lòng người với ta",[ch("Thiện cảm",12),ch("Đức",3)]],["Thỉnh an mỗi tuần",ch("Thiện cảm",2),"t"],["Dâng kinh chép tay",ch("Thiện cảm",5),"t"],["Dâng trà ngon",ch("Thiện cảm",3),"t"],["Phô trương",ch("Thiện cảm",-4),"t"]],
+  {S:[1,1],M:[2,2],L:[3,3],XL:[4,5]});
+ /* KẾT QUẢ frame = big / rare events only (owner 17:25Z): routine actions keep the small result toast (j63 rtoast .karesult) */
+ X.result=mk({kind:"result",title:"Kết quả tranh ghế",sub:"Ghế Tần · Cảnh Nhân cung",who:v2},
+  [{who:v2,text:"thắng, được lên Tần, dọn về Cảnh Nhân cung."},{who:me,kind:"me",text:"thua, thêm Oán với người thắng.",chips:[["Oán",10]]},"Các phi tần khác ghen thêm với người thắng.",{who:q,text:"ban cho người thắng một đôi trâm ngọc."},{who:emp,text:"ghé Cảnh Nhân cung ngay tối đó.",chips:[["Sủng",2]]},"Ghế Tần tiếp theo trống ít nhất ba tháng nữa."],
+  [[v2?v2.name:"Người thắng",ch("Điểm",86,"g")],[S.name,ch("Điểm",79,"g")],["Người thứ ba",ch("Điểm",71,"g")]],{S:[2,0],M:[3,1],L:[4,2],XL:[6,3]});
+ X.threat=mk({kind:"threat",title:"Cảnh giác: có kẻ dòm ngó",sub:"Hạ tuần · tối",who:v2},
+  [{who:v2,text:"sai cung nữ đứng ngoài cửa cung ta hai đêm liền."},"Có người đổi chén trà trên bàn ta khi ta vắng.","Thái giám gác cửa nói thấy bóng người lúc canh ba.","Đồ ăn đưa đến muộn, hộp thức ăn bị mở.","Nên đổi người hầu trà và giữ chìa khóa kho riêng.","Cung nữ mới đến tuần trước hay hỏi giờ ta ngủ.","Người của Thượng thực cục nói có kẻ hỏi món ta thích ăn."],
+  [["Nguy",ch("Nguy",2)],["Đề phòng","Đổi người hầu trà","t"],["Hỏi","Thái giám gác cửa","t"]],{S:[2,0],M:[3,1],L:[4,2],XL:[7,3]});
+ X.person=mk({kind:"person",title:v2?v2.name:"Phi tần",sub:"Cảnh Nhân cung",who:v2},
+  [{who:v2,text:"vào cung cùng đợt với ta."},"Nhà làm quan ở Giang Nam.","Giỏi thêu, thích hoa lan.","Từng bị Hoàng hậu phạt quỳ một lần.","Không ưa người khoe khoang.","Thân với Thục phi, hay qua lại Trường Xuân cung.","Mỗi tháng gửi thư về nhà một lần."],
+  [["Nàng với ta",[ch("Thiện cảm",-4),ch("Ghen",6)]],["Ta với nàng",ch("Thiện cảm",2)],["Quen biết","Vừa phải","t"],["Phe","Hoàng hậu","t"]],{S:[1,1],M:[2,2],L:[3,3],XL:[7,4]});
+ X.end=mk({kind:"end",title:"Hết một kiếp",sub:"Năm thứ mười hai",who:me},
+  [{who:me,kind:"me",text:"khép mắt ở Vĩnh Thọ cung, tuổi năm mươi tám."},"Một đời từ Đáp ứng lên đến Quý phi.","Hai con đã thành gia thất.","Hoàng thượng truy phong, an táng ở phi lăng.","Người trong cung nhớ ta là người hiền hậu.","Cung nữ thân tín ở lại giữ mộ ba năm."],
+  [["Phẩm cao nhất","Quý phi","t"],["Con cái","Hai người","t"],["Tiếng để lại",ch("Đức",30)],["Điểm kiếp",ch("Điểm",420,"g")]],{S:[2,0],M:[3,1],L:[4,2],XL:[6,4]});
+ const hh={kind:"choice",title:"Hoàng hậu triệu kiến",sub:"Thượng tuần · buổi sáng",who:q,pic:"img/ev-hh-viec.webp"};
+ X.choice={S:Object.assign({},hh,{facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung."}],opts:[op("Đi ngay",[["Tốn","1 khắc"]]),op("Cáo bệnh",[["Mất",ch("Thiện cảm",-2)]])]}),
+  M:Object.assign({},hh,{facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua."}],opts:[op("Cúi đầu nhận lỗi",[["Được",ch("Thiện cảm",5)]]),op("Im lặng",[["Mất",ch("Thiện cảm",-2)]])]}),
+  L:Object.assign({},hh,{facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua ta được lật thẻ bài."}],opts:[op("Cúi đầu nhận lỗi",[["Được",ch("Thiện cảm",5)]]),op("Thưa do Hoàng thượng định",[["Được",ch("Danh",2)]]),op("Dâng lễ vật",[["Tốn",ch("Bạc",-20)]]),op("Im lặng",[["Mất",ch("Thiện cảm",-2)]])]}),
+  XL:Object.assign({},hh,{facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung trước mặt các phi tần, hỏi chuyện đêm qua ta được lật thẻ bài mà không đến thỉnh an sớm."},"Các phi tần đứng quanh, có người che miệng cười.","Cung nữ của Hoàng hậu đứng chặn ở cửa."],
+   opts:[op("Cúi đầu nhận lỗi",[["Được",ch("Thiện cảm",5)]]),op("Im lặng",[["Mất",ch("Thiện cảm",-2)]]),
+    op("Thưa rằng do Hoàng thượng định",[["Được",ch("Danh",1)],["Mất",ch("Thiện cảm",-4)],["Gợi ý","đúng lý nhưng làm nàng mất mặt"]]),
+    op("Dâng chén trà, đổi chuyện",[["Cần","Trà ≥ 2"],["Được",ch("Thiện cảm",4)]]),
+    op("Quỳ xuống nhận lỗi, xin Hoàng hậu dạy bảo",[["Tốn","1 khắc"],["Được",ch("Thiện cảm",6)+ch("Đức",1)],["Mất",ch("Danh",-1)],["Gợi ý","Hoàng hậu ưa người biết phận, nhận lỗi trước mặt mọi người thì nàng nguôi giận nhanh"]])]})};
+ return X}
+window.kszSpecs3=kszSpecs3;
+/* sheet: one kind, the 4 sizes side by side (+ what the content picks), or area "items3" */
+const KSZ3_NAME={news:"TIN",rule:"LUẬT",notice:"BÁO",choice:"VIỆC",result:"KẾT QUẢ",info:"ĐIỀU",night:"ĐÊM",intel:"MẬT BÁO",evidence:"CHỨNG CỨ",reward:"BAN THƯỞNG",week:"TUẦN",threat:"CẢNH GIÁC",person:"NGƯỜI",end:"KIẾP"};
+function kszSheet3(kind){const old=document.getElementById("kszsheet");if(old)old.remove();const kk=window.kitKnown;window.kitKnown=()=>true;let X;try{X=kszSpecs3()[kind];{const host=document.createElement("div");host.style.cssText="position:absolute;left:-5000px;top:0;width:900px";document.body.appendChild(host);try{X=Object.assign({},X,kszFill3(X.XL,host))}finally{host.remove()}}}finally{}
+ const V=KIT_SIZE.v3,foc=V.focus[kind];const d=document.createElement("div");d.id="kszsheet";
+ let h=`<h2>${KSZ3_NAME[kind]||kind} · S / M / L / XL (${kitSzMode()==="kv2"?"iPad landscape 1180x820":"Fold portrait 755x1000"})</h2><p class="kszn">${foc==="event"?"Event-centred kind: S leads with the EVENT picture (person = small avatar inside the info).":"Person-centred kind: S leads with the PERSON's portrait frame (event picture = strip at the top of the info)."} M / L / XL: full figure left + event picture top-right, as wide as the info + button column; the picture grows into what the text leaves, so no frame has empty space.${(kind==="info"||kind==="choice"||kind==="news"||kind==="week")?" Thái hậu art: current files kept — Foreman C is redrawing every Thái hậu picture (slimmer robes).":""}${kind==="result"?" KẾT QUẢ frame = big / rare events only (tranh ghế, kỳ thi, mưu kế); routine actions keep today's small result toast at the bottom.":""}</p><div class="ksz3col" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">`;
+ try{for(const K of ["S","M","L","XL"])h+=`<div data-k3="${K}"><div class="kszlab">${K}</div>${kszFrame3(X[K],K)}<div class="kszn k3pick"></div></div>`}finally{window.kitKnown=kk}
+ window.__ksz3X=X;h+=`</div>`;d.innerHTML=h.replace(/ loading="lazy"/g,"");document.body.appendChild(d);
+ const fit=()=>d.querySelectorAll(".ksz3").forEach(kitFrameApply3);fit();d.querySelectorAll("img").forEach(i=>i.complete||i.addEventListener("load",fit,{once:true}));return d}
+/* after the pictures are in: what does each sample's content pick (proof that the content is realistic for that size)? */
+function kszPick3Report(kind){const kk=window.kitKnown;window.kitKnown=()=>true;const X=window.__ksz3X||kszSpecs3()[kind];const host=document.createElement("div");host.style.cssText="position:absolute;left:-5000px;top:0";document.body.appendChild(host);
+ const out={};try{for(const K of ["S","M","L","XL"])out[K]=kitFramePick3(X[K],host)}finally{host.remove();window.kitKnown=kk}return out}
+/* sample content per size = the MOST of this kind's content that the picker puts in that size (so every sample is full, none spills) */
+function kszLevels3(sp){const F=sp.facts||[],R=sp.rows||[],O=sp.opts||[],T=F.length+R.length+O.length,L=[];for(let n=1;n<=T;n++){const nf=Math.min(F.length,Math.max(1,Math.round(n*F.length/T))),no=Math.min(O.length,Math.round(n*O.length/T)),nr=Math.max(0,Math.min(R.length,n-nf-no));
+ if(O.length&&!no)continue;L.push(Object.assign({},sp,{facts:F.slice(0,nf),rows:R.slice(0,nr),opts:O.length?O.slice(0,no):undefined}))}return L}
+function kszFill3(pool,host){const out={},L=kszLevels3(pool);for(const sp of L){const K=kitFramePick3(sp,host);let ok=true;if(K==="XL"){host.innerHTML=kszFrame3(sp,"XL");const d=host.firstElementChild;kitFrameApply3(d);ok=kitFrameFits3(d,true)}if(ok)out[K]=sp}return out}
+Object.assign(window,{kszSheet3,kszPick3Report,kszFill3,kszLevels3});
+/* ---- v3 ITEMS (owner 16/11 17:20Z, OD, overrides the corner-badge idea): ONE MASTER = the XL item (frame + picture + Xa xỉ square box),
+   SCALED UNIFORMLY to L and M (and the bag slot): the Xa xỉ box scales WITH the frame, so it sits in exactly the same place at every size and
+   covers the picture exactly as little as on XL. Only its CONTENT changes: word + number (XL, L), number only (M, slot), same box geometry.
+   The grade CHIP is NOT scaled (fixed readable size per size), centred on the bottom edge. Sizes: XL 150 (master) · L 104 · M 72 · slot = its cell. */
+KIT_SIZE.item3={master:150,size:{XL:150,L:104,M:72,slot:72},word:{XL:true,L:true,M:false,slot:false}};
+(function(){const st=document.createElement("style");st.id="k-size3-items";st.textContent=`
+.kszit3{position:relative;display:inline-block;vertical-align:bottom;line-height:0;width:calc(${150}px * var(--f));height:calc(${150}px * var(--f));margin-bottom:.8em}
+.kszit3>.ksz3m{position:absolute;left:0;top:0;width:150px;height:150px;transform:scale(var(--f));transform-origin:0 0}
+.kszit3>.ksz3m>.kitem{--isz:150px}
+.kszit3>.kszgc{position:absolute;left:50%;translate:-50% 50%;bottom:0;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none}
+.kszit3[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit3[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
+.kszit3 .kits,.kszit3 .kitn,.kszit3 .kitg{display:none}
+/* the XL master box (one geometry, scaled with the frame) */
+.kszit3 .kitx{position:absolute;top:4px;right:4px;left:auto;bottom:auto;box-sizing:border-box;width:34px;height:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:1px;
+ white-space:nowrap;text-align:center;line-height:1;font:700 10px/1 var(--body,sans-serif);border-radius:4px}
+.kszit3 .kitx>b{font-size:13px}.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
+.ksz3pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.ksz3pick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
+.ksz3pick>div>b{font:600 .74rem/1.2 var(--body)}.ksz3pick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
+.ksz3wear{display:flex;gap:6px;align-items:flex-start}.ksz3wear>div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;max-width:96px;text-align:center}`;document.head.appendChild(st)})();
+function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3,f=(I3.size[size]||72)/I3.master;
+ const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true})).replace(/>Xa xỉ (\d+)<\/i>/,'><span class="kxw">Xa xỉ</span><b>$1</b></i>');
+ return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--f:${f.toFixed(4)}"><span class="ksz3m">${it}</span>${o.empty?"":`<b class="kszgc" style="--kgc:${gcol}">${gname}</b>`}</span>`}
+function kszItemTile3(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}
+ return kszItem3({src:I.src,grade:I.grade,lux:lux||0},size,I.gname||G.n,G.c)}
+function kszItemDetail3(k){return kszItemDetail(k).replace(/^<div class="kszidc">/,'<div class="kszidc ksz3card">').replace(/<span class="kszit" data-s="M">[\s\S]*?<\/b><\/span>/,()=>kszItemTile3(k,"M"))}
+function kszWearRow3(p){try{return `<div class="ksz3wear">${wdSlots(p).map(x=>{const G=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))];return `<div>${kszItem3({src:x.empty?"":kitItemSrc(x.k,x.icon),grade:x.grade,empty:x.empty},"M",x.gradeName||G.n,G.c)}<span>${x.name}</span></div>`}).join("")}</div>`}catch(e){return""}}
+function kszItemsSheet3(){const ks=["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).filter(k=>{try{return kitItemInfo(k)}catch(e){return false}});
+ let h=`<h2>Items · ONE XL master scaled to L / M / slot (Xa xỉ box scales with the frame) · sizes XL / L / M + bag slot</h2>`;
+ h+=`<h3>Item sizes · ONE master (XL) scaled down to L / M / slot: frame, picture and Xa xỉ box keep the same proportions (L / XL word + number, M / slot number only) · grade chip unscaled, centred on the bottom edge · S 52 dropped</h3><div class="kszrow" style="align-items:flex-end;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">${s==="slot"?"bag slot (72 here; fills its cell)":s}</div>${kszItemTile3(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
+ const ng=Object.keys(IT).find(k=>{try{return kitItemInfo(k).grade===4}catch(e){return false}});if(ng)h+=`<div class="kszrow" style="align-items:flex-end;margin-top:8px;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">Ngự · ${s}</div>${kszItemTile3(ng,s)}</div>`).join("")}</div>`;
+ h+=`<h3>6.2 detail card · the same items as sheet 8 (Áo gấm thêu hải đường: the robe is no longer covered)</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:1120px">${ks.map(kszItemDetail3).join("")}</div>`;
+ const pk=Object.keys(IT).filter(k=>!IT[k].story&&IT[k].sl).slice(0,6);
+ h+=`<h3>6.3 pick grid (M = the master scaled)</h3><div class="ksz3pick" style="max-width:640px">${pk.map(k=>{const I=kipItem({k});const use=String(I.use||"").replace(/^[^:]*:\s*/,"");return `<div>${kszItemTile3(k,"M")}<b style="color:${I.col}">${I.name}</b><small>${use}</small></div>`}).join("")}</div>`;
+ h+=`<h3>6.5 item tag in events · M tile (S dropped), name under</h3><div class="kszrow" style="gap:18px">${pk.slice(0,6).map(k=>`<div style="text-align:center;width:96px">${kszItemTile3(k,"M")}<div style="font-size:.68rem">${kitItemInfo(k).name}</div></div>`).join("")}</div>`;
+ h+=`<h3>Wear row on the person card · grade = the chip ON the frame (no grade line under the picture)</h3>${kszWearRow3(S)}`;return h}
+function kszItemsSheet3Show(){const old=document.getElementById("kszsheet");if(old)old.remove();const d=document.createElement("div");d.id="kszsheet";d.innerHTML=kszItemsSheet3().replace(/ loading="lazy"/g,"");document.body.appendChild(d);return d}
+Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3});
+/* kit page hook: kitSizeSheet("v3:<kind>") = one kind at S / M / L / XL; kitSizeSheet("items3") = the v3 items sheet */
+(function(){const k0=window.kitSizeSheet;window.kitSizeSheet=function(area){if(/^v3:/.test(area||""))return kszSheet3(area.slice(3));if(area==="items3")return kszItemsSheet3Show();return k0(area)}})();
