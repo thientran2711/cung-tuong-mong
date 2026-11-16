@@ -28,3 +28,17 @@ START_CTX not recorded; rolled over for context. Read: CLAUDE.md, START_CORE/WOR
 - After: calm front-facing standing pose, hands joined at waist, same face/hair/pin/gown colour, feet+shoes fully visible, no halo on dark or light. Before: body in profile/looking back + grey halo along sleeve/hair.
 - Note: gown sleeves are slightly wider/looser than the old sprite (pose change); face/outfit kept. NOT uploaded to CDN yet — awaiting owner verdict. Scratch masters: render.png 672x2160 (CDN webp target 900 tall).
 - Scan split/consort sheets c16–c19, c21–c25, c27–c32: pending.
+
+## SCAN FINISHED + FAILING LIST + CREDITS (successor, 16/11 ~21:30Z)
+Consort sheets c16–c19, c21–c25, c27–c32 viewed (a18; looks ty3,t1,t5,tm0,ngheo,kc): all non-ty looks frontal/clean, no back-turn, no visible anatomy fault at sheet scale. ty3 is a calm frontal pose for c16,c17,c18,c19,c21–c25,c27–c31 (hands at chest/brow/skirt; no L/R fault seen at sheet scale; fingers not checked at 100%). c32-ty3 = 3/4 profile, borderline (repaint with the back-turned set to be safe).
+Combined failing set (consort scan + helper-scan.md):
+| set | files | fix | credits @65 |
+|---|---|---|---|
+| consort ty, back-turned (c02,08,14,20,26,+32) 6x8x4 | 192 | new calm pose | ~12,500 |
+| consort ty, halo only (26 consorts x8x4) | 832 | plain re-cut/regenerate | ~54,100 |
+| maid ty back-turned (m03,08,...,48) 10x8x4 | 320 | new calm pose | ~20,800 |
+| maid ty, halo only | 1,342 | plain re-cut/regenerate | ~87,300 |
+| everything else (consort non-ty, other maids, eunuch, kid, men) | ~8,100 | none (false-positive flags) | 0 |
+| TOTAL | 2,686 | | ~174,600 (account has ~1.28M) |
+Local free rim-fix tested (local-rim-fix-test-c05-ty3.jpg: left original, right fixed, dark+light): removes the halo but notches hair strands and cheek edge -> NOT acceptable at face level. Recommendation: regenerate transparent (same recipe as the sample) for all 2,686; cut cost by doing ONE age (a18) per look first, then a26/a36/a51 as separate edits only if the owner wants the age differences kept (ages differ in face; cannot copy a18). Alternative to test (not yet): 1k resolution to roughly halve cost — display height <=900px so 1k (1536 tall) suffices; verify face sharpness first.
+Batch waits for the owner's verdict on luanhoi-sample-c20-c02-ty3-*.jpg.
