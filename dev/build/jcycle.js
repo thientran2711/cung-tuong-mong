@@ -68,9 +68,19 @@ function cycleLate(p){try{p=p||S;if(!cyPreg(p)||cyAge(p)>=50||p.pregWk==null)ret
 /* calendar: month m (1..12) → days in its next occurrence (or `ahead` months ahead) */
 function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahead:((+m-(S.month||1))%12+12)%12;if(!(o>=0))o=0;const mi=cyCur()+o;return cyHas(p,mi)?cyDaysM(p,mi):[]}catch(e){return[]}}
 /* the TRAY (Kính sự phòng's view): her card is off while in her cycle tuần, unless she reported falsely this tuần (báo sớm / giấu) */
-function cyTray(p){if(!cycOn(p))return false;if(p===S){const c=S.cyb||{};if(c.lie===wk())return false}return true}
+function cyTray(p){if(!cycOn(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
+/* co-op (review/coop-b1b5-fix): the OTHER player's entry carries her own report too — her S.cyb, relayed at once by jcoopworld (ctm-p2
+   "cyb", COOPW.fcyb) and in her blob after every merge — so the host's flip, nightCh, the book and the rivals read ONE fact (OD:L96):
+   her "báo sớm / giấu" keeps her card on the host's tray, her "báo lùi" halves her next flip and makes the book read late, her
+   "Sửa sổ" hides her pregnancy from the host's rivals, her "giấu" / a forged line shows as "không báo" in the other player's book.
+   null = an NPC (no report of her own; the book follows the truth / cyHideOf's clever-rival rule). */
+function cybOf(p){if(p===S)return S.cyb||{};if(p&&p.coop&&window.COOPW&&typeof COOPW.fcyb==="function")try{return COOPW.fcyb()||{}}catch(e){}return null}
+const CYK=["lie","lieM","back","rk","rv","df","hide","rum","giauM"];
+/* what jcoopworld relays: this week's flags + whether her maid's card is still waiting for her answer (the host's flip waits for it) */
+function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefined)o[k]=c[k];const w=wk();return{w,c:o,pend:c.df===w&&c.rk!==w}}
+window.cyRec=cyRec;window.cyWk=()=>wk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
-function cyLateSeen(p){p=p||S;const n=cycleLate(p);if(p!==S)return n;const c=S.cyb||{},R=(B().rep||{});if(c.back!=null&&S.pregWk!=null&&S.pregWk-c.back>=0&&S.pregWk-c.back<=(R.luiCover||3))return Math.max(0,n-1);return n}
+function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
 window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
@@ -78,7 +88,7 @@ function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a
 const RSN="Đang kỳ nguyệt sự, thẻ bài tạm cất, không tiện hầu giá";
 
 /* ---------- 2. the flip: off the tray during her cycle tuần ---------- */
-const nc0=nightCh;nightCh=function(p){const c=nc0.apply(this,arguments);try{if(c&&cyTray(p||S))return 0;const q=p||S,k=S.cyb||{};if(c&&q===S&&k.back!=null&&wk()-k.back===1)return c*((B().rep||{}).luiNext||.5)}catch(e){}return c};
+const nc0=nightCh;nightCh=function(p){const c=nc0.apply(this,arguments);try{if(c&&cyTray(p||S))return 0;const q=p||S,k=cybOf(q);if(c&&k&&k.back!=null&&wk()-k.back===1)return c*((B().rep||{}).luiNext||.5)}catch(e){}return c};
 const sn0=stealNight;stealNight=function(a){if(a&&cyTray(a))return "";return sn0.apply(this,arguments)};
 for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(!A0)continue;const ok0=A0.ok;A0.ok=function(a){if(a&&cyTray(a))return false;return ok0.apply(this,arguments)}}
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(){if(cyTray(S))return RSN;return l0?l0.apply(this,arguments):""}}
@@ -147,7 +157,7 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
  return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: “Kỳ nguyệt sự của ${xg} đã tới (${dName(cyDaysM(S,cyCur()))}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
 /* co-op (review r3): the deferred flip runs outside endTurn's withoutFriend (jcoopworld), so take the friend entry out here too:
    otherwise the Emperor could "pick" the other player's card in MY world (rivalNight would then write Sủng/thai deltas into her row) */
-function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);
+function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||COOPW.tnShared/* reviewer r2: jcoopworld B2 (one host-drawn night, friend in the host deck, guest draws nothing) */||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);
  try{return f()}finally{for(const [i,v] of out.reverse())if(!rivals.includes(v))rivals.splice(Math.min(i,rivals.length),0,v)}}
 /* act-card tab (KIT_ACT_CATS data line, as jexam does): the cycle-book cards are intel / forgery = "Mưu kế", not the default "Giao thiệp" */
 try{if(typeof KIT_ACT_CATS!=="undefined"&&Array.isArray(KIT_ACT_CATS))KIT_ACT_CATS.unshift(["muu-ke",/nguyệt sự|báo ngày giả|xem sổ/i])}catch(e){}
@@ -156,19 +166,19 @@ const fl1=flip;flip=function(){try{if(cyAsk()){S.tonight=null;return}}catch(e){c
 const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
 
 /* ---------- 3. the book ---------- */
-function cyHideOf(p){if(p===S){const h=cyb().hide;return !!(h&&S.preg&&h===S.pregWk)}
+function cyHideOf(p){const k=p===S?cyb():cybOf(p);if(k){const h=k.hide;return !!(h&&p.preg&&h===p.pregWk)}
  if(!p.preg||p.fake||p.pregWk==null)return false;return (p.tamco||0)>=B().rvHideTc&&cyH("cyh|"+p.id+"|"+p.pregWk)%100<B().rvHide}
 /* what the book says for p in month offset k (0 = this month, -1 = last month) */
 function cyRep(p,k){const mi=cyCur()+k,t=cyBase(p).t;if(cyAge(p)>=50)return{s:"old"};
- const rum=p===S&&cyb().rum;if(rum&&rum.m===mi&&k===0&&!rum.fixed)return{s:"miss",forged:1};
+ const k0=cybOf(p),rum=k0&&k0.rum;if(rum&&rum.m===mi&&k===0&&!rum.fixed)return{s:"miss",forged:1};
  if(k===0&&(S.tuan||0)<t)return{s:"wait",t};
  /* truly pregnant at that month's cycle week? */
  const cw=wk()-(S.tuan||0)+3*k+t;const preg=cyPreg(p)&&p.pregWk!=null&&cw>p.pregWk;
- if(preg&&p===S&&cyCover()&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
+ if(preg&&k0&&cyCover(p)&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
  if(preg&&!cyHideOf(p))return{s:"miss"};return{s:"ok",d:cyDaysM(p,mi),fake:!!(p.preg&&p.fake)}}
 /* evidence-truth (main, jtruth): evidence only for a real wrong in the ledger; write the deed first, announce what evA really gave */
 function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,1,x)}catch(e){}}
-function cyCover(){const c=S.cyb||{};return c.back!=null&&S.pregWk!=null&&S.pregWk-c.back>=0&&S.pregWk-c.back<=((B().rep||{}).luiCover||3)}
+function cyCover(p){p=p||S;const c=cybOf(p);return !!c&&c.back!=null&&p.pregWk!=null&&p.pregWk-c.back>=0&&p.pregWk-c.back<=((B().rep||{}).luiCover||3)}
 function cyRepText(r){if(r.s==="old")return kitChip("đã dứt kỳ","n");if(r.s==="wait")return `chưa tới kỳ (${TU[r.t]})`;if(r.s==="miss")return kitChip("không báo","r");return `đã báo, ${dName(r.d)}`}
 function cyNights(p){const m0=wk()-(S.tuan||0);return (p.nightLog||[]).filter(w=>w>=m0&&w<=wk()).length}
 function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().filter(p=>p===S||(p.alive&&!p.out));S.cyKnow=S.cyKnow||{};let found=[];
@@ -238,6 +248,6 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
  }catch(e){console.error(e)}return ev};
 /* rival vs rival (world; host only in co-op because rivalsMonth is muted on the guest) */
 const rm0=rivalsMonth;rivalsMonth=function(){let ev=rm0.apply(this,arguments)||"";try{const L=liveRivals(true).filter(v=>v.alive&&!v.out);
-  for(const t of L){if(!cyPreg(t)||!t.hidden||cycleLate(t)<1||cyHideOf(t))continue;const a=L.find(x=>x!==t&&!x.coop&&hostility(x,t)>=B().foeHost&&roll(B().rvRead));if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
+  for(const t of L){if(!cyPreg(t)||!t.hidden||cyLateSeen(t)<1||cyHideOf(t))continue;const a=L.find(x=>x!==t&&!x.coop&&hostility(x,t)>=B().foeHost&&roll(B().rvRead));if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
  }catch(e){console.error(e)}return ev};
 })();
