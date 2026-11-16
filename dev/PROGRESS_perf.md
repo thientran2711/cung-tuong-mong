@@ -54,3 +54,16 @@ Long tasks are mostly the synthetic bot's render storms (a click every 60 ms) un
 Needs the built root (run `bash dev/site/build_site.sh` first), Playwright + the CDN reachable (uses HTTPS_PROXY). Serves the root with a GitHub-Pages-like server (gzip, ETag, max-age=600).
 Per device: cold first-load bytes by type/source until the title is usable, the 30 s after, time to title, time to first playable turn, JS heap after N buổi (gc), long tasks >200 ms, warm visit.
 Prints one JSON line per device plus a table; exit 1 when any metric exceeds `dev/test/perf-budget.json`. ~3 min per device (cold load dominates). One Chromium at a time.
+
+## review/perf-r1 (reviewer, on origin/main bad941b4)
+- Merged review/perf onto main (only generated files conflicted; rebuilt with build_site.sh).
+- first-hour.txt missed whole roads: dev/measure/firsthour.js rerolled away the cung nữ servant life (`cnv`) and random lives skipped origins
+  (no `cn`/`dtq`/`thd`/`tt` room art). In a 1-week fold life on the merged build 100 files (5.8 MB) the first week showed were `lazy`, incl. her own
+  first room (phong-cung-nu-*), act pictures and kit pictures. Fix: firsthour.js now plays ONE life per origin (window.__forceOrigin, ORIGINS incl.
+  cnv); re-recorded on fold + ipadAir x 9 origins x 3 weeks (union): 933 -> 1,552 files; core 531 files 31.7 MB -> 632 files 43.2 MB.
+  After: fold 2 lives x 2 weeks, Data-saver: 23 non-figure lazy files (act-*-h variants of week 2), iphone14: 1.
+- sw.tpl.js: the krot iframe answer took the NETWORK response even when the host had been given the SAVED copy (slow line > 4 s), so the iframe
+  could run a newer build than its host (reproduced: dev/test/upgrade-sw.js --slow phase 4 FAILS on the D15 worker, iframe eeee… vs host fb02…).
+  Now HOSTR is exactly the response the top-level host navigation was given. Test passes.
+- New tests: dev/test/lazy-offline.js (fresh install + offline), dev/test/upgrade-sw.js (old main SW + caches -> this build). See dev/test/README.md.
+- perf-budget.json firstLoadMB 50 -> 62 (bigger core, measured 55.2 MB).

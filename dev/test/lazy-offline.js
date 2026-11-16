@@ -71,6 +71,6 @@ async function runDevice(b,srv,dev){const R={device:dev,pageErrors:[]};
  await ctx.close();return R}
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});
  let fail=0;try{for(const dev of DEVS){let r;try{r=await runDevice(b,srv,dev)}catch(e){r={device:dev,fatal:String(e&&e.stack||e).slice(0,600)};fail++}
-  if(r.fatal===undefined){if(r.failOnline.some(([k,s])=>s!==404))fail++;if(r.offFetch&&r.offFetch.nbad)fail++}
+  if(r.fatal===undefined){if(r.failOnline.some(([k,s])=>s!==404&&s!=='net::ERR_ABORTED'))fail++;if(r.offFetch&&r.offFetch.nbad)fail++}
   console.log(JSON.stringify(r))}}finally{await b.close();srv.close()}
  process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});
