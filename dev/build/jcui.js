@@ -49,6 +49,9 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
   if(typeof kitReward==="function")kitReward({kind:m.place===1?"chest":"tray",title:"Ban thưởng hội thi",from:m.title,items:it,bac:m.bac})}catch(e){console.error(e)}}
 /* origin line of a prize item in the bag */
 (function(){if(typeof kinvFrom!=="function")return;const f0=kinvFrom;kinvFrom=function(f){return f==="thi"?"Thưởng hội thi":f0.apply(this,arguments)}})();
+/* owner 16/11 (Q15): her contest titles show as ONE kit row list in three places: Sổ ân thưởng (all 40), her profile card (selfCardHTML, newest 5) and the Mệnh truyện tab (panel67, newest 5). Rows = [date, title, tone] */
+window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[];return(n?H.slice(0,n):H).map(x=>[x.d,x.t,"t"])};
+(function(){if(typeof panel67!=="function")return;const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{if(kcuHonorRows(1).length)h+=`<h3>Danh hiệu thi tài</h3>`+rows67(kcuHonorRows(5))}catch(e){}return h}})();
 /* her contest titles live in the Sổ ân thưởng page */
 (function(){if(typeof awCard!=="function")return;const a0=awCard;awCard=function(){let h=a0.apply(this,arguments);try{const H=(S&&S.honors)||[];
   h+=`<h3>Danh hiệu thi tài</h3>${H.length?kitRows(H.map(x=>[x.d,[`<span class="ef t">${x.t}</span>`],"t"])):`<p class="past">Chưa đoạt danh hiệu nào.</p>`}`}catch(e){}return h}})();

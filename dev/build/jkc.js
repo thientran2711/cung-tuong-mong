@@ -637,7 +637,7 @@ function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x)
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isKc())return s0.apply(this,arguments);
  return pcard({f:pMe(),col:"#b08a8a",name:S.name,rank:kcTitle(),lines:[`${S.age} tuổi`,S.origin.n],note:`Kỳ tuyển tú còn ${Math.max(0,kcMonthsLeft())} tháng.`,tabKey:"kcme",
   groups:[["Tư chất",[["Sắc",S.sac,"t"],["Tài",S.tai,"t"],["Tâm cơ",S.tamco,"t"],["Đức",S.duc,"t"],["Sức",S.suc,"t"],["Bạc",kitChip("Bạc",S.bac,"n"),"t"],["Danh",S.danh,"t"]]],
-   ["Nhà",[["Gia thanh",S.kgt,"t"],["Áp lực hôn sự",S.kap,S.kap>=60?"r":"t"],["Hồi môn",kitChip("Bạc",S.khm,"n"),"t"]]]]})}})();
+   ["Nhà",[["Gia thanh",S.kgt,"t"],["Áp lực hôn sự",S.kap,S.kap>=60?"r":"t"],["Hồi môn",kitChip("Bạc",S.khm,"n"),"t"]]]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[])})}})();
 /* the title screen slot line */
 (function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
  if(d&&d.S&&d.S.kc&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,"Tiểu thư ngoài cung ")}})}catch(e){}return r}})();

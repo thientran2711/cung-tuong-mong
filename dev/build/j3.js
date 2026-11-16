@@ -96,7 +96,7 @@ function endTurn(){
   rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
   flip();if(!S.dead)newLots();
   if(ev)Q.splice(qStart,0,{t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${ev}</p>`});
-  if(S.justCrowned){S.justCrowned=0;record("Lên ngôi Hoàng hậu");Q.unshift({t:"Mẫu nghi thiên hạ",cls:"end",who:pMe(),h:`<p>Sau ${S.year} năm trong cung, ${S.name} nhận kim sách kim ấn, lên ngôi Hoàng hậu.</p><p>Con đường còn lại: đưa một hoàng tử lên ngôi, thành Hoàng thái hậu.</p>`,btn:"Tiếp tục"})}
+  if(S.justCrowned){S.justCrowned=0;record("Lên ngôi Hoàng hậu");Q.unshift({t:"Mẫu nghi thiên hạ",cls:"end",art:"img/ev-tan-phong.webp",who:pMe(),h:`<p>Sau ${S.year} năm trong cung, ${S.name} nhận kim sách kim ấn, lên ngôi Hoàng hậu.</p><p>Con đường còn lại: đưa một hoàng tử lên ngôi, thành Hoàng thái hậu.</p>`,btn:"Tiếp tục"})}
   if(ev)log(ev);
   curtain();deal();render()}
 function monthTick(){let ev="";
