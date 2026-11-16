@@ -109,7 +109,7 @@ function walkWhy(tc){const left=Math.max(0,4-used);return left<=0?"hết khắc"
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(typeof CW!=="undefined"&&CW&&CW.on)return null;
+function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(window.COOPW&&COOPW.on)return null; /* co-op world (jcoopworld: window.COOPW; the global CW is a face-key helper) */
  const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,4-used);if(tc<=left)return null;
  let a={ok:true};if(typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
  return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}

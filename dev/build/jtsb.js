@@ -29,9 +29,9 @@ function tsbNeedMark(){try{const m=Q[0];if(!m||!m.opts||!m.opts.some(o=>o&&o.nee
 /* an option whose Cần is unmet cannot be taken (its button is disabled); a direct call (bot, co-op) falls back to the first allowed option, never a dead end */
 (function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&o.need&&o.need.some(n=>!n.ok)){const j=m.opts.findIndex(x=>!x.need||x.need.every(n=>n.ok));if(j>=0)return c0.call(this,j)}}catch(e){}return c0.apply(this,arguments)}})();
 function tsbArt(f,label){return{src:`img/${f}.webp`,label:label||""}}
-function tsbNeedKhac(c){return{t:`${c} khắc (còn ${4-used})`,ok:used+c<=4}}
+function tsbNeedKhac(c){return j76need(c)} /* the day's khắc (j76): spills into the next buổi */
 function tsbNeedBac(n){return{t:`Bạc ${n} (có ${S.bac})`,ok:S.bac>=n}}
-function tsbKh(c){const n=Math.max(0,Math.min(c,4-used));if(n)spend(n)}
+function tsbKh(c){if(typeof j76spills==='function'&&j76spills(c)){spend(c);return}const n=Math.max(0,Math.min(c,4-used));if(n)spend(n)}
 
 /* ---------------- scars: j70 when present, else the same p.scar shape ---------------- */
 const TSB_SCAR=[null,{n:"nhẹ",d:10,sung:4,danh:1,need:4,perm:0},{n:"vừa",d:25,sung:8,danh:3,need:8,perm:3},{n:"nặng",d:45,sung:14,danh:5,need:14,perm:15}];
@@ -129,7 +129,7 @@ PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const 
 PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;const ev=pp.k==="uyhiep";const e=pp.ix>=0?S.inv[pp.ix]:null;const want=e&&!e.h?e:null;const g=tsbBulPay(a,S);
  if(!want&&g<5&&!ev)return null;const o0=tsbBulO(a,S,ev);const nm=tsbNm(a);const hate=[];if((a.ghen||0)>=30)hate.push("ghen với ngươi");if(oan(a,S)>=15)hate.push("ôm oán ngươi");
  const what=want?`<b>${tsbItemN(want)}</b>${want.w?" (ngươi đang đeo)":""}`:`${g} lượng bạc`;
- const tile=want&&typeof kitItem==="function"?`<div class="tsbtile">${kitItem({src:tsbItemSrc(want),name:tsbItemN(want),grade:tsbItemGrade(want),size:"md"})}</div>`:"";
+ const tile=want&&typeof kitItem==="function"?`<div class="tsbtile">${kitItem({src:tsbItemSrc(want),name:tsbItemN(want),grade:tsbItemGrade(want),size:"md",data:typeof kitItemTap==="function"?kitItemTap({e:want}):""})}</div>`:"";
  const why=ev?`${tsbCap(nm)} nắm ${evG(a,S)} chứng cứ của ngươi, sai người đến nói: muốn chuyện yên thì nộp ${what}.`:`${tsbCap(nm)} cậy phẩm cao hơn ngươi${hate.length?` (nàng ${hate.join(", ")})`:""}, ${together(a,S)?"chặn ngươi giữa đường":"sai cung nữ đến tận cung ngươi"}, đòi ngươi nộp ${what}.`;
  const rep=pp.n>=2?`<p class="past">Đây là lần thứ ${pp.n} nàng làm khó ngươi.</p>`:"";
  const O=[];const lose=want?`${tsbItemN(want)} -1`:`Bạc -${g}`;

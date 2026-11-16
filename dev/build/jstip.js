@@ -103,7 +103,7 @@ function stipReveal(entries,o){try{if(window.__bot||(typeof quiet!=="undefined"&
  if(typeof kmOn==="function"&&!kmOn())return;kitReward({kind:o.kind||"gift",title:o.title||"Hộp gấm",from:o.sub||"",items:entries.map(e=>stipRevItem(e.k)),bac:o.bac||0})}catch(e){console.error("stipReveal",e)}}
 const STIP_FROM={emp:["royal","Ngự tứ","Hoàng thượng ban"],th:["tray","Mâm thưởng","Thái hậu ban"],hh:["tray","Mâm thưởng","Hoàng hậu ban"],noivu:["chest","Rương bảo vật","Nội vụ phủ phát"],story:["gift","Hộp gấm",""]};
 function goodsGive(p,keys,o){o=o||{};p=p||S;const L=(Array.isArray(keys)?keys:[keys]).filter(k=>IT[k]);if(!L.length||!p)return"";p.inv=p.inv||[];
- const from=o.from||"story";const E=L.map(k=>{const e={k,from,d:S.turn};p.inv.push(e);return e});
+ const from=o.from||"story";const E=L.map(k=>{const e={k,from,d:S.turn};if(o.who)e.giver=o.who;p.inv.push(e);return e});
  if(p===S){const F=STIP_FROM[from]||STIP_FROM.story;stipReveal(E,{kind:o.kind||F[0],title:o.title||F[1],sub:o.sub||F[2]||(o.who?`${o.who} tặng`:"")})}
  const cnt={};L.forEach(k=>cnt[k]=(cnt[k]||0)+1);return Object.keys(cnt).map(k=>`${IT[k].n}${cnt[k]>1?" ×"+cnt[k]:""}`).join(", ")}
 window.goodsGive=goodsGive;
@@ -162,10 +162,13 @@ window.stipEvItem=stipEvItem;
     go:()=>{const j=stipTeaIx();if(j>=0)S.inv.splice(j,1);relDo(A.A,n);log(n>=0?`Ngươi pha ${it.n} mời ${A.A.n||"khách"}; nàng khen trà thơm.`:`<span class="r">Trà mốc, ${A.A.n||"khách"} nhấp một ngụm rồi đặt xuống.</span>`)}})}}
  }catch(e){console.error("stip e68",e)}return d}})();
 /* ---------- j67 stories: beat / option / end field gi:[key or [keys], from] ---------- */
-function stipGi(gi){if(!gi)return"";const [k,fr]=Array.isArray(gi)?gi:[gi,"story"];return goodsGive(S,k,{from:fr||"story"})}
+/* the giver of a story gift (review/small-bugs-3: every gift box names its real giver, never an empty "from" line): the result text
+   "{mis} thưởng ngươi…" names the token; emp/th/hh gifts are named by STIP_FROM */
+function stipWho67(A,txt){try{const m=String(txt||"").match(/\{(\w+)\}\s*(?:thưởng|tặng|ban|gửi|cho)/);if(!m||m[1]==="me"||typeof TOK67!=="object"||!TOK67[m[1]])return"";return fill67("{"+m[1]+"}",A)}catch(e){return""}}
+function stipGi(gi,who){if(!gi)return"";const [k,fr]=Array.isArray(gi)?gi:[gi,"story"];return goodsGive(S,k,{from:fr||"story",who:who||""})}
 (function(){if(typeof res67==="function"){const r0=res67;res67=function(tk,bid,i){let b=null,o=null;try{const A=th67(tk);if(A&&A.cur===bid){b=beatDef67(A,bid);o=b?opts67(A,b)[i]:null}}catch(e){}
-  const r=r0.apply(this,arguments);try{const n=[o&&o.gi?stipGi(o.gi):"",b&&b.gi&&!(o&&o.nogi)?stipGi(b.gi):""].filter(Boolean).join(", ");if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r}}
- if(typeof end67==="function"){const e0=end67;end67=function(A,k){const r=e0.apply(this,arguments);try{const a=ARC67[A.a],E=a&&a.E[k];if(E&&E.gi){const n=stipGi(E.gi);if(n)log(`${n} vào rương.`)}}catch(e){console.error(e)}return r}}})();
+  const r=r0.apply(this,arguments);try{const A=th67(tk);const n=[o&&o.gi?stipGi(o.gi,stipWho67(A,o.rt)):"",b&&b.gi&&!(o&&o.nogi)?stipGi(b.gi,stipWho67(A,b.t)):""].filter(Boolean).join(", ");if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r}}
+ if(typeof end67==="function"){const e0=end67;end67=function(A,k){const r=e0.apply(this,arguments);try{const a=ARC67[A.a],E=a&&a.E[k];if(E&&E.gi){const n=stipGi(E.gi,stipWho67(A,E.t));if(n)log(`${n} vào rương.`)}}catch(e){console.error(e)}return r}}})();
 /* ---------- j71 festival prizes named in the text (festival:contest → item, to the winner when she wins) ---------- */
 const STIP_FPRIZE={"newyear:mua":"gamto","nguyentieu:co":"trahop","phoenix:ban":"cungbac"};
 (function(){for(const f of ["cRun7","cFin7"]){if(typeof window[f]!=="function")continue;const o=window[f];window[f]=function(k,kind){let w0=0;try{w0=j7s().win||0}catch(e){}const r=o.apply(this,arguments);

@@ -156,7 +156,7 @@ window.kitThey=kitThey;
 
 /* 13. every other consort-act outcome text that says "thù −N" / "thân ±N" is a relAdd in the code (j8): drawn with the real numbers */
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;for(const k of Object.keys(AOUT)){const d=Object.getOwnPropertyDescriptor(AOUT,k);if(!d||d.get||!Array.isArray(d.value))continue;const old=d.value;
- const fx=s=>{const t=T();if(!t||typeof s!=="string")return s;return s.replace(/(nàng )?thù -(\d+)/g,(m,_,n)=>pvRel(t,-n)).replace(/(nàng )?thân ([+\-])(\d+)/g,(m,_,sg,n)=>pvRel(t,(sg==="+"?1:-1)*n))};
+ const fx=s=>{const t=T();if(!t||typeof s!=="string")return s;return s.replace(/(nàng )?thù -(\d+)/g,(m,_,n)=>pvRel(t,-n)).replace(/(nàng )?(?:thân|thiện cảm) ([+\-])(\d+)/g,(m,_,sg,n)=>pvRel(t,(sg==="+"?1:-1)*n))};
  try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){return old.map(fx)},set(v){}})}catch(e){}}})();
 
 /* 14. harm acts offered at a PLACE (j9 placeHarms) drew their card from ACT.x + the cost as a gain: no Tốn line, no outcome,
