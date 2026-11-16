@@ -549,3 +549,51 @@ setTimeout(()=>{try{
  for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95final()&&typeof renderStage==="function")renderStage()}catch(e){j95err("final:"+n,e)}return r}}
  if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const L=hp0.apply(this,arguments);try{if(j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(L))j95elderFix(L,"home",S.roster,j95kh())}catch(e){j95err("home",e)}return L}}
 }catch(e){j95err("finalwrap",e)}},0);
+/* ================= PEOPLE LEDGER (owner core law 16/11 13:40Z + 13:50Z s17; review/people-ledger) =================
+   EVERY person in the record is really somewhere and seen there: Dư đồ counts, at every place, everyone the record puts there at the CURRENT
+   khắc (nobody hidden, nobody counted from another khắc), so the places' counts add up to the record (her own self is not a shadow); the
+   stage draws every one of them (j59 pages a crowd). One rule, read from the one record (S.roster). The maid road keeps its own stage rules
+   (j42 srvVisitOf / j59srvCount) for now. Switch for measuring: J95.led=false gives back the old "only who the stage drew" rule. */
+J95.led=true;
+function j95led(){return J95.led!==false&&j95on()&&!(typeof isSrv==="function"&&isSrv())}
+/* her party: she is not a shadow ("bóng: người khác đang ở đó, không tính ta"), nor is her trusted maid walking with her away from home */
+function j95party(id,k){return id==="me"||(id==="mm:me"&&k===S.place&&k!=="home")}
+(function(){const v0=j95vis;j95vis=function(id,k){if(j95led())return !!(id&&k&&k!==J95OUT_&&!j95party(id,k));return v0.apply(this,arguments)};
+ const a0=j95arrKh;j95arrKh=function(k){if(j95led())return j95kh();return a0.apply(this,arguments)}})();
+function j95sv(id){const sid=+String(id).slice(1);try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&s.sid===sid)return s}catch(e){}return null}
+/* the record id of a stage entry (the same mapping j95stage uses, plus children, maids, elders, other people's servants) */
+function j95ledId(p){if(!p)return null;if(p.lid)return p.lid;const k=p.kind;try{
+ if((k==="rival"||k==="hh"||k==="fallen")&&p.ref)return"v"+p.ref.id;if(k==="emp")return"emp";if(k==="th")return"th";if(k==="maid")return"mm:me";
+ if(k==="man"&&p.ref)return p.ref.id;if(k==="ty")return"c:ty";if(k==="ksp")return"c:ksp";if(k==="peddler")return"c:ped";if(k==="min"&&p.ref&&p.ref.c!=null)return"q:"+p.ref.c;
+ if(k==="elder"&&p.ref&&p.ref.sid!=null)return"s"+p.ref.sid;if((k==="serv"||k==="npc")&&p.sid!=null)return"s"+p.sid;
+ if(k==="npc"&&/^Quản sự Tân Giả khố/.test(p.name||""))return"c:tgk";if(k==="npc"&&/^Thầy dạy/.test(p.name||""))return"c:ttp";
+ if(k==="kid"&&p.ref){const i=(S.kids||[]).indexOf(p.ref);if(i>=0)return"k:me:"+i;for(const v of rivals){const j=(v.kids||[]).indexOf(p.ref);if(j>=0)return"k:"+v.id+":"+j}}}catch(e){}return null}
+/* a stage entry for a record id (kit stage figure kinds only: rival/hh/fallen/emp/th/maid/serv/npc/kid/ty/ksp/peddler/elder) */
+function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
+ if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
+ if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
+ if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
+ if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}`}:null;
+ if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));const m=v&&v.maid;if(!m||!m.name)return null;return{kind:"npc",lid:id,name:m.name,ini:m.name.split(" ").pop()[0],col:"#b9a48a",info:who[1]||"Cung nữ thân tín"}}
+ if(c==="s"){const s=j95sv(id);if(!s)return null;if(s.eid)return j95elderEntry(s);if((S.staff||[]).includes(s)&&typeof hsvPerson==="function"&&typeof hsvOn==="function"&&hsvOn())return hsvPerson(s);
+  return{kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:who[1]||(s.role==="maid"?"Cung nữ":"Thái giám")}}
+ if(c==="k"){const P=id.split(":");const mo=P[1]==="me"?null:RV(+P[1]);const L=mo?mo.kids:S.kids;const k=L&&L[+P[2]];if(!k||!k.alive)return null;return{kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#f0d070":k.sex==="m"?"#9ab0d0":"#c9a0e0",info:who[1]||""}}
+ if(id==="c:ty"){const o=S.court&&S.court.ty;return{kind:"ty",name:o&&o.name||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"}}
+ if(id==="c:ksp"){const o=S.court&&S.court.ksp;return{kind:"ksp",name:o&&o.name||"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Kính sự phòng · Giữ thẻ bài các phi tần"}}
+ if(id==="c:ped"){const o=S.court&&S.court.ped;return{kind:"peddler",name:o&&o.name||"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"}}
+ if(id.indexOf("c:")===0)return{kind:"npc",lid:id,name:who[0]||"Thái giám",ini:String(who[0]||"Hoạn").split(" ").pop()[0],col:"#8a8aa0",info:who[1]||""}}catch(e){j95err("ledObj",e)}return null}
+/* the stage = the record at her place now: add everyone missing, drop people this pass added who left */
+function j95ledStage(){if(!j95led())return false;const V=S.visit;if(!V||!Array.isArray(V.people)||V.k!==S.place||S.dead)return false;if(typeof isKc==="function"&&isKc())return false;
+ const R=S.roster;if(!R||R.key!==j95key())return false;const k=S.place,kh=j95kh();let ch=false;const here=id=>R.P[id]&&R.P[id][kh][0]===k;
+ /* anyone drawn whom the record puts elsewhere now leaves; one figure per person */const seen=new Set();
+ for(let i=0;i<V.people.length;i++){const p=V.people[i];const id=j95ledId(p);if(!id)continue;if((R.P[id]||p.j95led)&&!here(id)||seen.has(id)){V.people.splice(i,1);i--;ch=true;continue}seen.add(id)}
+ const have=seen;
+ for(const id in R.P){if(j95party(id,k)||have.has(id)||!here(id))continue;if(id[0]==="m"&&id[1]!=="m")continue;/* men: j95stage draws them */if(id.indexOf("q:")===0)continue;/* officials: j95stage */
+  const o=j95ledObj(id);if(!o)continue;o.j95led=1;if(!o.lid&&!j95ledId(o))o.lid=id;V.people.push(o);have.add(id);ch=true}
+ if(ch)popIdx=null;return ch}
+(function(){const f0=j95final;j95final=function(){let ch=f0.apply(this,arguments);try{if(j95ledStage())ch=true}catch(e){j95err("led",e)}return ch}})();
+/* other people's servants / maids / children on her stage: no orders to them (their acts are for HER household and HER children) */
+(function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){try{if(p&&p.j95led&&(p.kind==="npc"||(p.kind==="kid"&&!(S.kids||[]).includes(p.ref))))return[]}catch(e){}return t0.apply(this,arguments)}})();
+/* the map count = the record, at every place (jplx's own list count at Dãy nhà cung nhân / Tân Giả khố / schools and jact's Nội vụ phủ +1
+   are other sources of the same people): registered last, so it is the outermost countAt */
+setTimeout(()=>{try{const c2=countAt;countAt=function(k){try{if(j95led()&&S&&!S.dead&&!S.out&&S.roster&&S.roster.key===j95key()&&!(typeof isKc==="function"&&isKc())){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;return n}}catch(e){}return c2.apply(this,arguments)}}catch(e){j95err("ledcount",e)}},0);
