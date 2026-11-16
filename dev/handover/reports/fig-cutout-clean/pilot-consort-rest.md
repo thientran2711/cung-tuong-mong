@@ -21,3 +21,9 @@ Sheets: pilot-consort-rest/<key>-a18-{light,dark}.jpg = old fig | new (hd 1800 w
 Edge: 0 canvas contact on all (fit_fig keeps old height +-2 %). Pinhole FAIL flags are only hair-strand/tassel-bead gaps (same as urgent5 c28/m47 accepted); no teardrop on any forehead (looked at every crop). All faces beautiful, skin matches praised faces, nobody back-turned, hands 5 fingers, left/right right, shoes visible on all.
 Prompt changes vs brief: none besides per-figure gesture line; c24 added "visible embroidered silk shoes below the hem"; c10 "whole train inside the canvas"; c22/c30 "eyes open, gently looking at viewer" (old figures had eyes closed/down).
 Finished files are in scratch only (regenerable from the same prompts); waiting for the lead's GO.
+
+## Master ids (Magnific creations, account Personal) and local finished files
+Uploaded old-figure refs: c12 yiEGMF2PW9, c10 ovNQr3T829, c24 O6CAVFCynm, c03 lJINzaBgv9, c07 SymiYEDUb8, c15 lJINzC8gv9, c18 huZ5lc3vqL, c22 tC3qLWxmZJ, c30 yiEGM1cPW9, c16 tC3qL0LmZJ (face refs 01 N2HYqYa6D9, 05 bxVgMSX5Y2, 12 dtPf4EDXSL, 18 eIyaPEVdqL).
+4K masters (2048x4096, CURRENT): c12-tm0 Lwo4cA6swO, c10-t8 xSXyY2CjfW, c24-tm1 rgdOn28xtc, c03-kc bxVSZ3L5Y2, c07-ngheo Cqzr4PDEEy, c15-t1 4RQn88j9Aa, c16-tm3 9ZFYIt9NYZ, c18-t5 79aZeBEJAL, c22-tcold w4vRpom7EI, c30-t8 iGb0hus3uK.
+2k masters (superseded): c12 u5YjJCoQLD, c10 JNf2VtqOq4, c24 0eSIQsvTfW, c03 nVLXfxHYQD, c07 KLDwiMvkqp, c15 iGb0obP3uK, c16 aFAkUYQfSh, c18 cpg8uP10eP, c22 IfiHLY0tvE, c30 1leJRa4r4r.
+Finished webps (fig/hd/tn/por + hd2 2700): scratch of the pilot session only (outroot out4), NOT committed, NOT on CDN; rebuild = download master -> finish_fig.py. Lead QA rule from now: ignore hair/crown-bead pinholes <400 px.
