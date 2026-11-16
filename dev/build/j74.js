@@ -32,15 +32,15 @@ st.textContent=`
    on a line (each pair keeps its words together; a value wraps only when it alone is longer than the line, never word by word) — and the
    kit buttons in ONE row below (equal width). One rule in both canvases (kv1 / kv2), no breakpoint. */
 .kcstabs{margin:0 0 6px}
-.kslot{display:grid;grid-template-columns:6.4em minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;row-gap:4px;align-items:start;padding:2px 0 5px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kslot{display:grid;grid-template-columns:6.4em minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;row-gap:3px;align-items:start;padding:1px 0 4px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
 .kslot>.kpst{grid-column:1;grid-row:1/span 2;align-self:stretch;margin:0;border-bottom:0;border-right:1px solid var(--k-hair,#e6d3ac);padding:3px 8px 0 0;line-height:1.25;text-wrap:balance;overflow-wrap:normal;word-break:normal}
-.kslot>.kb,.kslot .kb{grid-column:2;margin:0;width:100%;display:flex;flex-wrap:wrap;align-items:baseline;gap:1px 16px}
+.kslot>.kb,.kslot .kb{grid-column:2;margin:0;width:100%;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 16px;line-height:1.22}
 .kslot .kb>.kr{display:inline-flex;align-items:baseline;gap:6px;max-width:100%;min-width:0}
 .kslot .kb>.kr>.krl{flex:0 0 auto}
 .kslot .kb .krv{min-width:0;overflow-wrap:normal;word-break:normal;text-wrap:pretty}
 .kslot>.kslot-a{grid-column:2}
 .kslot-a{display:flex;gap:8px;flex-wrap:nowrap;justify-content:stretch}
-.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:32px;padding:3px 10px;font-size:.84rem;white-space:normal}
+.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:30px;padding:2px 10px;font-size:.84rem;white-space:normal}
 .kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
 /* Thiết lập: kit controls (KIT.md 28) */
 .optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}
@@ -64,7 +64,7 @@ function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 cla
 /* owner 16/11: two separate sets on this screen: the solo sổ (above) and the co-op rooms (jslots, below); a room never writes a sổ */
 function cloudMini(){try{return window.CTM_CLOUD&&CTM_CLOUD.mini?CTM_CLOUD.mini():""}catch(e){return ""}}
 /* Chọn sổ › Cùng hảo hữu: the title's co-op button opens this tab, so "Nhập ám hiệu" (jcooplobby join flow) lives here too */
-function coopJoin(){return `<div class="kslot kjoin"><h4 class="kpst">Nhập ám hiệu</h4>${kitRows([["Hảo hữu mời","Gõ ám hiệu hảo hữu gửi để vào phòng của hảo hữu","t"]])}<div class="kslot-a"><button class="kbtn alt" data-coop="join">Nhập ám hiệu</button></div></div>`}
+function coopJoin(){return `<div class="kslot kjoin"><h4 class="kpst">Nhập ám hiệu</h4>${kitRows([["Hảo hữu mời","Gõ ám hiệu hảo hữu gửi","t"]])}<div class="kslot-a"><button class="kbtn alt" data-coop="join">Nhập ám hiệu</button></div></div>`}
 function roomsHTML(){try{return window.CTM_ROOMS?CTM_ROOMS.html():""}catch(e){return ""}}
 window.CTM_SLOTWHO=slotWho;window.CTM_SLOTDATE=slotDate;window.CTM_DRAWSLOTS=()=>drawSlots();
 /* Chọn sổ = TWO kit tabs (KIT 46 tab row, same part as Mua/Bán): "Một mình" (3 sổ) | "Cùng hảo hữu" (3 phòng); opens on the mode last played */

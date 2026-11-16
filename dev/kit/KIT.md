@@ -1432,9 +1432,10 @@ Chọn sổ (j74): one kit section per sổ: `h4.kpst` "Sổ một/hai/ba" + `ki
 KIT SLOT ROW `.kslot` (owner 16/11 "info on top, buttons below"; COMPACT s22, kit request "3 sổ + Phúc duyên on iPad 1180x820 without scrolling,
 room for the Sổ mây card"): ONE part for every sổ / room / Sổ mây / Nhập ám hiệu slot. Grid of two columns: the slot name `h4.kpst` as a 6.4em
 label column on the left (rule on its right, words kept together); on the right the `kitRows` on top as label+value PAIRS that flow on a line
-(a pair never splits; a value wraps only when it alone is longer than the line, `text-wrap:pretty`) and the `.kslot-a` kit buttons in ONE row below (32 px, equal
-width). Same rule in both canvases (no breakpoint). Solo row 83 px (was 144), room row 102 px, Sổ mây 73, Nhập ám hiệu 82; iPad 1180x820: Một mình
-(Sổ mây + 3 sổ + Phúc duyên) 560 px of the 574 max, no scroll; Cùng hảo hữu (Nhập ám hiệu + 3 rooms) scrolls 54 px; Fold 755x1000: no scroll. Test `dev/test/kit-fit2.js` slots / slotsco; kit page sample "§29 slot" (j74).
+(a pair never splits; a value wraps only when it alone is longer than the line, `text-wrap:pretty`; info line-height 1.22) and the `.kslot-a` kit
+buttons in ONE row below (30 px, equal width). Same rule in both canvases (no breakpoint). Solo row 72 px (was 144), room row 88 px, Sổ mây 66,
+Nhập ám hiệu 55 (its row shortened to "Gõ ám hiệu hảo hữu gửi", MAIN s22 content call (a)); iPad 1180x820: Một mình (Sổ mây + 3 sổ + Phúc duyên)
+520 px of the 574 max, Cùng hảo hữu (Nhập ám hiệu + 3 rooms + Phúc duyên) 558 px — no scroll on either tab; Fold 755x1000: no scroll. Test `dev/test/kit-fit2.js` slots / slotsco; kit page sample "§29 slot" (j74).
 - **Sổ mây card in Chọn sổ (owner 16/11, review/chonso-cloud, `jcloud.js` `miniHTML()`):** first card on the "Một mình" tab, above the 3 sổ, the SAME `.kslot` part: `h4.kpst` "Sổ mây" + `kitRows` (Tình trạng; linked: Ám hiệu masked `••••-••XY` + "đồng bộ lúc" time) + `.kslot-a` buttons from the ONE `btnsHTML()` shared with Thiết lập › Sổ mây (not linked: Giữ sổ trên mây / Nối sổ; linked: Đồng bộ ngay / Ám hiệu sổ / Các bản đã giữ). Opens the same `data-cl` jcloud flows; no co-op card (a co-op life never lives in the cloud).
 + `.kbtn` "Tiếp tục kiếp này" / `.kbtn.alt` "Kiếp mới" (asks "Chắc chắn?" once). The list is redrawn on every visit, so a half-confirmed
 "Chắc chắn?" never survives leaving the screen; the Nạp sổ paste box closes when Thiết lập is left.

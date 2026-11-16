@@ -1,4 +1,11 @@
-SẴN SÀNG KIỂM 6b9ca17da (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
+SẴN SÀNG KIỂM __SHA__ (ROUND 2b; round 2 was 6b9ca17da) (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
+
+# ROUND 2b (MAIN s22 content call (a), report to MAIN s23)
+- "Nhập ám hiệu" row shortened: "Gõ ám hiệu hảo hữu gửi để vào phòng của hảo hữu" → "Gõ ám hiệu hảo hữu gửi" (one line).
+- That alone left 35 px, so the ONE slot part was tightened for every slot (kit, whole group): info line-height 1.22, row gap 3, padding 1/4,
+  buttons 30 px. Rows: sổ 72, room 88, Sổ mây 66, join 55. iPad 1180x820: Một mình 520 / 574, Cùng hảo hữu 558 / 574 — NO scroll on either
+  tab; Fold none. Tuổi kept on room rows. Merged origin/main caa73a87 (built files only). kit-fit2.js re-run: 0 violations, 0 page errors
+  (755x1000 + 1180x820, all 12 cases). After shots: dev/handover/reports/kit-fit/r2b-{slots,slotsco}-{755x1000,1180x820}.jpg (before = r2-*).
 
 # ROUND 2 — kit keeper successor for MAIN s22 (16/11)
 START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 + round-2 kit changes + merge origin/main 7b5e5e49 (KIT.md: kept both slot paragraphs, dropped a duplicate §77.1 main had moved) + merge origin/main 23595c37 (fold-popw-r1; only built files conflicted); site rebuilt + committed. Tests re-run after the last merge: kit-fit2 / kit-fit same results.
