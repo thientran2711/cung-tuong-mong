@@ -52,6 +52,9 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   ok("6 old save (no new keys) plays a month",!err&&S.luxRep!=null,[err,S.luxRep]);
   /* gift API for D19 */
   const g=luxGift("vongvang",S,v);ok("7 luxGift API",g&&g.v>0&&["mon","vua","hop","hau"].includes(g.st),g);
+  /* 8. family scan (LUẬT SỬA CẢ NHÓM): every Hành sự card with a side line (risk) shows it in Kèm */
+  {const lo2=luxOf;const miss=[];let n=0;for(const f of [.95,.01]){luxOf=p=>{const x=lo2(p);return p===S?Object.assign({},x,{sc:Math.round(x.bud*f),lv:1}):x};S.buoi=0;S.toilSeen=null;deal();
+   deck.forEach((a,i)=>{if(!a.risk)return;n++;const h=cardH(a,i).replace(/<[^>]+>/g," ");if(!/Kèm/.test(h))miss.push(a.n)})}luxOf=lo2;ok("8 deck cards with a side line show Kèm",miss.length===0,{n,miss})}
   return out});
  let fail=0;for(const [n,c,x] of R){console.log((c?"PASS ":"FAIL ")+n+(c?"":"  "+x));if(!c)fail++}
  console.log(errs.length?"PAGE ERRORS: "+errs.join(" | "):"no page errors");await b.close();process.exit(fail||errs.length?1:0)})();

@@ -92,7 +92,7 @@ if(typeof toilFx==="function"){const tf0=toilFx;toilFx=function(p,host,F,baseSta
   if(t&&t.hk==="strict"&&t.danh&&X.danh<0)X.danh=0;/* the strict host's plain Danh already counts */
   if(!X.danh&&!X.duc){if(t&&V)t.lux=V;return t}
   t=t||{aff:0,danh:0,duc:0,why:[],hk:toilHostKind(host),dress:V&&V.v,mk:""};t.danh=(t.danh||0)+X.danh;t.duc=(t.duc||0)+X.duc;t.lux=V;
-  const lab=`Xa xỉ ${V?V.sc:0} giữa dịp ${V&&V.R?V.R.n:""}: ${X.why.join(", ")}${X.duc?`, Đức ${X.duc>0?"+":""}${X.duc}`:""}${X.danh?`, Danh ${X.danh>0?"+":""}${X.danh}`:""}`;
+  const lab=`Xa xỉ ${V?V.sc:0} giữa dịp ${V&&V.R?V.R.n:""}: ${X.why.join(", ")}`;/* the numbers are in the rider's total */
   const i=t.why.findIndex(w=>/^y phục /.test(w[0]));if(i>=0)t.why[i]=[`${t.why[i][0]} (${lab})`,t.why[i][1]];else t.why.push([`y phục ${V?V.word:""} (${lab})`,0]);
   return t}catch(e){console.error("lux toilFx",e);return t}}}
 /* thiếu lễ (jaudit) does not fire in mourning white or under a frugal edict — plain is what is asked then */
@@ -161,3 +161,11 @@ function luxGift(k,from,to){const G=BAL.lux.gift;const v=typeof k==="number"?k:l
  const st=r<G.lo?"mon":r>G.hi?"hau":r>=G.fit[0]&&r<=G.fit[1]?"hop":"vua";
  return{v,r,bud,st,word:{mon:"quà mọn",vua:"vừa lễ",hop:"hợp lễ",hau:"quá hậu"}[st],pts:{lo:Math.round(G.lo*bud),fit:[Math.round(G.fit[0]*bud),Math.round(G.fit[1]*bud)],hi:Math.round(G.hi*bud)}}}
 window.luxGift=luxGift;
+
+/* ---------- LUẬT SỬA CẢ NHÓM: a Hành sự card copied from a talk option (j2 directActs: Thỉnh an Thái hậu / Hoàng hậu …) dropped the option's
+   side line (a.risk): thiếu lễ, the day's look and the luxury verdict were applied but never shown on the deck card. The deck card (j19 cardH)
+   already has a Kèm row for " · kèm: …" in a.x — every card with a risk now uses it (display copy; the act itself is untouched). ---------- */
+(function(){if(typeof cardH!=="function")return;const c0=cardH;cardH=function(a,i){try{if(a&&typeof a.risk==="string"&&a.risk&&!/ · kèm: /.test(a.x||"")){const b=Object.assign({},a,{x:(a.x||"")+" · kèm: "+a.risk});return c0.call(this,b,i)}}catch(e){}return c0.apply(this,arguments)}})();
+/* the rider words: a frugal host pleased by plain dress is not "thiếu lễ" (jtoil's head said so when the look added a line) */
+(function(){if(typeof aaThieuLeTxt!=="function")return;const t0=aaThieuLeTxt;aaThieuLeTxt=function(host,f0){const s=t0.apply(this,arguments);try{const L=leAttire(S,"",host);
+ if(L.state==="plain"&&luxHostKind(host)==="frugal"&&(f0||L.delta).duc>=0){const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";return s.replace(/^thiếu lễ \([^)]*\)/,`y phục giản dị hợp ý ${who}`)}}catch(e){}return s}})();
