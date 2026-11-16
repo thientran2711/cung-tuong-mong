@@ -29118,15 +29118,15 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
 .kgame .kgbody.kgpic-on{display:grid;grid-template-columns:minmax(150px,36%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;overflow:hidden}
 .kgpic{position:relative;margin:10px 0 10px 14px;border:1px solid var(--line);border-radius:var(--k-rad);overflow:hidden;background:#f1e6d2;min-height:220px;box-shadow:0 0 0 2px #fffaf0 inset}
 .kgpic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;display:block}
-.kginfo{min-width:0;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;height:100%}
+.kginfo{min-width:0;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;max-height:calc(100dvh - 128px)}
 .kginfo .kgbox{flex:0 1 auto}
 .kg82.kg-idle .kghud{display:none}
 .kgrv{max-height:clamp(120px,30dvh,260px);overflow-y:auto;overscroll-behavior:contain;margin:0 0 4px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:0 6px}
 .kgrv .kfacts{margin:0}
 .kg82 .kg82act{position:sticky;bottom:0;background:linear-gradient(#fffaf000,var(--k-card) 22%);padding-top:10px;margin-bottom:0;z-index:2}
 @media (max-width:699px){.kgame .kgbody.kgpic-on{display:block;overflow:visible}.kgpic{margin:8px 10px 0;min-height:0;height:104px}.kgpic img{object-position:50% 55%}
- .kg82:not(.kg-idle) .kgpic{display:none}.kginfo{height:auto;overflow:visible}#ov .mg.kg82{overflow-y:auto}.kgrv{max-height:clamp(110px,26dvh,220px)}}
-@media (max-height:520px) and (min-width:700px){.kgpic{min-height:0;margin-top:6px;margin-bottom:6px}.kgrv{max-height:clamp(90px,34dvh,200px)}}
+ .kg82:not(.kg-idle) .kgpic{display:none}.kginfo{max-height:none;overflow:visible}#ov .mg.kg82{overflow-y:auto}.kgrv{max-height:clamp(110px,26dvh,220px)}}
+@media (max-height:520px) and (min-width:700px){.kgpic{min-height:0;margin-top:6px;margin-bottom:6px}.kginfo{max-height:calc(100dvh - 92px)}.kgrv{max-height:clamp(90px,34dvh,200px)}}
 `;document.head.appendChild(st)})();
 
 </script>
@@ -29154,7 +29154,7 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8696471cba98";window.CTM_BUILD=BUILD;
+const BUILD="9dc5bd5d2563";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
