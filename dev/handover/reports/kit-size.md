@@ -102,3 +102,23 @@ kit-conform (all PEND + SRV + places, both devices): T7 CONFORMS 73 · T1 7–8 
 6. Kit page sample for the live frame (KIT_SAMPLES.push) — not added.
 Server for tests: `node dev/test/cdn-overlay-serve.js <port> <wt> <empty list>`; rebuild `bash dev/site/build_site.sh`, then `git checkout index.html sw.js assets.json` before committing. Shots outside git (/home/user/wt/ksz2-shots).
 7. OWNER feedback on the #4 TIN sheet (relayed by s22 19:54Z; verbatim = last line of dev/OWNER_DECISIONS.md): (1) S event picture is a tall portrait strip matching none of the kit's standard picture sizes → use ONLY the kit's standard picture sizes/ratios (KIT_SIZE.pic: portrait PS/PM/PL 3:4, landscape LS/LM/LL, narrow NS/NM/NL, square Q) and state which size each frame size uses (live: `.k3mpic` in kszLiveLay3 / kszFrame3 "one"); (2) M picture size is fine but the CROP is wrong (the letter is cut / off-centre) → every event picture needs a focal point so its subject stays inside the crop at every size: whole group = `KIT_PIC_SUBJ` boxes for EVERY event picture (today only 12) + `kszPicFit3` must keep the box inside the crop (not only centre it). Deliver before/after for TIN, Fold + iPad, images on the CDN (img/_review/kit-size5/). Report to MAIN s23 = session_01UV1SziE5Dau1pVrytppq81 (s22 handed over).
+
+## kit-size #6 (opus, 16/11 ~20:35Z–) — s23 task (worker; coordinator = MAIN s23 session_01UV1SziE5Dau1pVrytppq81)
+START_CTX ≈ 4 % of 1M (context_usage read 0; estimate). Rollover at ≈ 29 %, ceiling 60 %.
+Merged origin/main 95282e69 + review/kit-fit 7865ed13 (§6.2b square option cards). Old shots removed from git (26 kit-size jpgs; kit-fit's 10 left out of the merge) — build's img-allowlist failed on them.
+
+### Done
+- Item 1 (Fold VIỆC 5 options): after kit-fit §6.2b the 5 cards are half height. Fold choice-5 = XL 562x584, 2 cols, NO scroll (before: XL with ~240 px scroll); iPad XL no scroll. Every other case unchanged (S); evidence XL scrolls by nature.
+- Item 7 (OWNER TIN feedback, KIT §84 (3) + (9b)):
+  (1) S event picture = standard PM 120x160 (3:4), not stretched (`KIT_SIZE.v3.picS`); before it was a 104x194 strip.
+  (2) focal crop: `KIT_PIC_SUBJ` now has a box for EVERY event picture (329 = ev-* 280 + info-* 30 + act-cat-* 19; before 12). Boxes marked by eye on contact sheets with a 10 % grid (3 helpers + check sheets with the boxes drawn; old #3 box kept for ev-hh-viec = the seal). `kitPicFocus` keeps the whole subject inside the crop (cover when it fits, else zoom-out over a blurred copy `.kpz`); strip floor = subject, capped at the NM narrow ratio so frames don't grow a size. `kitSceneArt` centres every event picture on its subject outside v3 frames too. Guard: `dev/test/kit-size7-focus.js` (329/329, 0 bad).
+  Before/after (TIN, S/M/L/XL, CDN): img/_review/kit-size5/tin-ba-755x1000.jpg · tin-ba-1180x820.jpg (looked at: the letter whole at every size; S = 3:4).
+- kit-size5 (20 cases × Fold/iPad): no page errors, no frame off screen, no cut text, no "Đã hiểu"; sizes as #5 except choice-5 Fold (XL no scroll).
+
+### Open — HANDOVER (not done this session)
+2. Verify the 3 MIXED place cards on origin/main (kit-conform on the old build).
+3. Items → `kszItem3` inside jk2b `kitItem`.
+4. "Đã hiểu" audit: 78 literals / 41 files (list via `git grep -c 'Đã hiểu' -- 'dev/build/j*.js'`); only info frames lose it (OD:L1261 keeps tutorial / scene-end).
+5. old-save + coop-e2e (CO-OP FIRST, OD 20:32Z: a PASS criterion) on this build.
+6. Kit page sample for the live frame + focal crop.
+Note: with the new subject floors some sample contents pick one size larger on the #4 sheets (sheet marks ✗); live frames are picked by content, so this is expected.
