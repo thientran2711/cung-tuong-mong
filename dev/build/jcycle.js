@@ -67,7 +67,7 @@ function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahe
 function cyTray(p){if(!cycOn(p))return false;if(p===S){const c=S.cyb||{};if(c.lie===wk())return false}return true}
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);if(p!==S)return n;const c=S.cyb||{},R=(B().rep||{});if(c.back!=null&&S.pregWk!=null&&S.pregWk-c.back>=0&&S.pregWk-c.back<=(R.luiCover||3))return Math.max(0,n-1);return n}
-window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
+window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
 function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a<=10?"mồng ":"ngày "}${a}\u2060–\u2060${b}`}
@@ -106,20 +106,23 @@ const dl0=deal;deal=function(){const r=dl0.apply(this,arguments);try{if(!S||!Arr
 /* ---------- 2b. THE MONTHLY REPORT (owner 16/11): when her cycle tuần starts, her maid asks how to report it to Kính sự phòng.
    The week's flip waits for the answer (flip() is called again from the option), so a false report really puts her card back on the tray. ---------- */
 function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.maid)return false;if(!cycOn(S))return false;const c=cyb();if(c.rk===wk()||c.df===wk())return false;
- if(typeof PEND!=="object"||typeof pushDil!=="function")return false;c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
+ if(typeof PEND!=="object"||typeof pushDil!=="function")return false;
+ /* review r3: never on the first screen of a new life (start() runs flip right after "Nhập cung"): that week the maid reports truly */
+ if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
+ c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
 PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),loyal=S.maid.loyal||50,po=cyLieO(),
   lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=S.rank>=7?"Hoàng hậu nương nương":S.rank>=3?"nương nương":"tiểu chủ";
- const done=k=>{c.rk=wk();c.rv=k;try{flip()}catch(e){console.error(e)}try{render()}catch(e){}};
+ const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
  const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
  const lie=k=>()=>{c.lie=wk();c.lieM=cyCur();c.lieEv=0;if(k==="giau"){c.giauM=cyCur();c.rum={by:"me",m:cyCur(),self:1};try{ghenAll(R.giauGhen)}catch(e){}}};
  /* the option card is a palace-event card (kit hidden-outcome mode, KIT 28.6): Tốn row + one truthful HINT + risk chip; the hint names the
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
     the kit option card in a scrolling dialog: KIT REQUEST in PROGRESS_cycle.md.) */
- const H=[["sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất tuần này","an toàn"],
-  [`${word(lo).toLowerCase()}; có thai thì người ngoài muộn một tháng mới đoán ra; nhưng tổn Đức, tuần sau thẻ bài khó được lật; hỏng thì Tổng quản biết chuyện`,"có rủi ro"],
-  [`thẻ bài vẫn nằm trên khay; nhưng tổn Đức, bị ma ma soát ra (${chanceW(100-po)}) thì mất sủng, kẻ thù có thể nắm chứng cứ`,"có rủi ro"],
-  [`thẻ bài vẫn nằm trên khay; nhưng cả cung đồn có tin vui, cuối tháng chưa có thai thì mừng hụt; bị ma ma soát ra thì mất sủng`,"liều"]];
+ const H=[["sổ ghi đúng, không ai bắt bẻ được; nhưng thẻ bài tạm cất tuần này","an toàn"], /* review r3: hints shortened to fit the kit option card at 755 (KIT REQUEST K11 aside); giấu now names the evidence risk too */
+  [`${word(lo).toLowerCase()}; có thai thì người ngoài muộn đoán ra; tổn Đức, tuần sau khó được lật thẻ; hỏng thì Tổng quản biết`,"có rủi ro"],
+  [`thẻ bài vẫn trên khay; tổn Đức; bị ma ma soát ra (${chanceW(100-po)}) thì mất sủng; kẻ thù có thể nắm chứng cứ`,"có rủi ro"],
+  [`thẻ bài vẫn trên khay; cả cung đồn có tin vui, không có thai thì mừng hụt; bị soát ra thì mất sủng; kẻ thù có thể nắm chứng cứ`,"liều"]];
  const O=[
   mk("Báo đúng ngày",{wt:[G6("sổ ghi đúng")],k:["thẻ bài tạm cất tuần này"],wl:"Ma ma báo đúng ngày; Kính sự phòng tạm cất thẻ bài của ngươi tuần này."},"dung"),
   mk("Báo lùi vài hôm",{c:{duc:-R.luiDuc},p:lo,wt:[G6("nếu sắp có thai: ngày khớp đêm thị tẩm"),G6("người ngoài muộn một tháng mới đoán ra")],l:{danh:-B().backDanh},lt:[R6("Tổng quản biết chuyện của ngươi")],
@@ -129,6 +132,12 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];
  O.forEach((o,i)=>{o.hint=H[i][0];o.risk=H[i][1]});
  return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: “Kỳ nguyệt sự của ${xg} đã tới (${dName(cyDaysM(S,cyCur()))}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
+/* co-op (review r3): the deferred flip runs outside endTurn's withoutFriend (jcoopworld), so take the friend entry out here too:
+   otherwise the Emperor could "pick" the other player's card in MY world (rivalNight would then write Sủng/thai deltas into her row) */
+function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);
+ try{return f()}finally{for(const [i,v] of out.reverse())if(!rivals.includes(v))rivals.splice(Math.min(i,rivals.length),0,v)}}
+/* act-card tab (KIT_ACT_CATS data line, as jexam does): the cycle-book cards are intel / forgery = "Mưu kế", not the default "Giao thiệp" */
+try{if(typeof KIT_ACT_CATS!=="undefined"&&Array.isArray(KIT_ACT_CATS))KIT_ACT_CATS.unshift(["muu-ke",/nguyệt sự|báo ngày giả|xem sổ/i])}catch(e){}
 const fl1=flip;flip=function(){try{if(cyAsk()){S.tonight=null;return}}catch(e){console.error(e)}return fl1.apply(this,arguments)};
 /* never answered (closed, reloaded): the week ends with the true report */
 const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
@@ -169,7 +178,7 @@ const to0=talkOpts;talkOpts=function(p){const A=to0.apply(this,arguments);try{if
   const r=Math.min(7,S.rank||0),cost=B().read[r],af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;const po=cl_(Math.round(B().peekO+af*B().peekAf+(S.tamco||0)/B().peekTc),5,95);
   const lk=A[0]&&A[0].k61?{lock:true,t:"Chưa biết người này là ai"}:{};/* j61 stranger gate: greet first, like every other talk card */
   A.push(Object.assign({n:"Xem sổ nguyệt sự",c:{bac:-cost},o:100,x:"thấy từng người báo kỳ ngày nào, ai tháng này không báo",run:()=>cyBook("đút lót xem sổ")},lk));
-  A.push(Object.assign({n:"Hầu chuyện, xem lén sổ nguyệt sự",c:{suc:-B().peekSuc},o:po,act:1,x:`thấy từng người báo kỳ ngày nào · hỏng: bị bắt gặp, Danh -${B().peekDanh}, Tổng quản phật ý`,
+  A.push(Object.assign({n:"Hầu chuyện, xem lén sổ nguyệt sự",c:{suc:-B().peekSuc},o:po,act:1,x:`thấy từng người báo kỳ ngày nào · hỏng: bị Tổng quản bắt gặp (thiện cảm -${B().peekAfLoss}), Danh -${B().peekDanh}`,
    run:()=>{if(roll(po))return cyBook("xem lén");apply({danh:-B().peekDanh});if(S.court&&S.court.ksp)S.court.ksp.af.me=af-B().peekAfLoss;return "bị Tổng quản bắt gặp đang liếc sổ; Danh -"+B().peekDanh+"."}},lk));
  }catch(e){console.error(e)}return A};
 
@@ -178,7 +187,7 @@ function cyDeck(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))ret
  /* the book as HÀNH SỰ cards (owner 16/11: no walk to Dư đồ; the Kính sự phòng place keeps its two talk cards as a shortcut) — same two roads */
  {const af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0,po=od(B().peekO+af*B().peekAf+(S.tamco||0)/B().peekTc);
   deck.push({n:"Xem sổ nguyệt sự",t:"Lót tay thái giám Kính sự phòng, mở sổ ma ma các cung báo kỳ.",c:{bac:-B().read[r]},o:100,k:1,w:{},l:{},x:"thấy từng người báo kỳ ngày nào, ai tháng này không báo",dom:"Mưu kế",go:()=>{cyBook("đút lót xem sổ")}});
-  deck.push({n:"Xem lén sổ nguyệt sự",t:"Sang Kính sự phòng hầu chuyện Tổng quản, liếc trộm cuốn sổ trên án.",c:{suc:-B().peekSuc},o:po,k:2,w:{},l:{danh:-B().peekDanh},x:"thấy từng người báo kỳ ngày nào · hỏng: bị bắt gặp, Tổng quản phật ý",dom:"Mưu kế",go:()=>{cyBook("xem lén")},
+  deck.push({n:"Xem lén sổ nguyệt sự",t:"Sang Kính sự phòng hầu chuyện Tổng quản, liếc trộm cuốn sổ trên án.",c:{suc:-B().peekSuc},o:po,k:2,w:{},l:{danh:-B().peekDanh},x:`thấy từng người báo kỳ ngày nào · hỏng: bị Tổng quản bắt gặp (thiện cảm -${B().peekAfLoss})`,dom:"Mưu kế",go:()=>{cyBook("xem lén")},
    fail:()=>{if(S.court&&S.court.ksp){const a=S.court.ksp.af;a.me=(a.me||0)-B().peekAfLoss}log("Bị Tổng quản bắt gặp đang liếc sổ nguyệt sự.")}})}
  /* báo lùi last month: a mismatched conception already fits a real night (as "Khai lùi ngày nguyệt sự" would) */
  if(S.preg&&S.pregMismatch&&cyCover()&&(S.nightLog||[]).some(w=>S.pregWk-w>=2&&S.pregWk-w<=6)){S.pregMismatch=false;log("Nhờ ma ma đã báo lùi kỳ nguyệt sự, ngày có thai trong sổ Kính sự phòng khớp một đêm thị tẩm.")}

@@ -93,3 +93,27 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
   (one earlier run aborted once with "ksp roads missing" in logic section 5 — random start state; the test now reports the state instead
   of crashing; the rerun passed); thaiy.js 49/49; cardflip.js 5 sizes: no page errors, no overflow, cards inside tray; coop-e2e 59/59 (room T5YM).
 - State: pushed review/cycle-r2; nothing local-only; no art generated, no CDN upload.
+
+## Review r3 (review/cycle-r3 = cycle-r2 7d57639e8 + origin/main 9b4f1697a) — reviewer (rules/numbers), A7
+- Merge: assemble.py = main's list (+ jtut, jgoal, jstaff) with `jcycle.js` LAST; generated files rebuilt (build_site.sh).
+- Fixes made by the reviewer:
+  1. Tab: the cycle-book cards fell into "Giao thiệp" (KIT_ACT_CATS default). Data line in jcycle (same pattern as jexam):
+     `["muu-ke",/nguyệt sự|báo ngày giả|xem sổ/i]` → Xem sổ / Xem lén sổ nguyệt sự, Sửa sổ nguyệt sự, Dặn ma ma báo ngày giả,
+     Khai lùi ngày nguyệt sự, the ksp talk shortcut and "Xem sổ thị tẩm" now sort to "Mưu kế" (like "Hối lộ Kính sự phòng sửa sổ").
+     Before → after: 7 cards giao-thiep/hau-ha → muu-ke. No kit change.
+  2. Co-op: the deferred flip (option button → flip()) ran OUTSIDE endTurn's withoutFriend, so the Emperor could pick the co-op
+     friend's entry in my world (rivalNight would write Sủng/thai deltas into her row on merge). `cyNoFriend(flip)` takes coop
+     entries out around that call (test g).
+  3. New life: start() flips right after "Nhập cung" → the pop-up could be the very first thing a new player sees. That week the
+     maid reports truly by default, no pop-up (test f).
+  4. "Xem lén sổ nguyệt sự": "Tổng quản phật ý" showed under ĐƯỢC (kit row parser). Now "hỏng: bị Tổng quản bắt gặp (thiện cảm -2)"
+     on the deck card and the ksp shortcut → MẤT row.
+  5. Pop-up hints shortened so no option card touches its border at 755 (K11 min-height issue stays with the kit keeper);
+     "Giấu" hint now also names the forgery-evidence risk.
+- Numbers check (no change): báo đúng safe; báo lùi Đức −2 + Khai-lùi odds, costs flip weight (this tuần off + next ×0.5), only pays
+  for a planned hidden/mismatched pregnancy — cheaper than reactive Khai lùi (Đức −6) but blind; báo sớm Đức −3 buys a full extra
+  flip tuần at a mama check (50 + loyalty/4 + Tâm cơ/5) + 12 %/foe evidence; giấu is not free: ghen +4 and near-sure mừng hụt
+  (Sủng −3 Danh −2) unless she conceives, foes learn a real pregnancy a month early, same check + evidence → roughly sớm's price
+  in other currencies, not dominant.
+- Tests (site build): cycle.js ALL OK at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+390x844 rotate) incl. new f/g;
+  test setup now starts with `__nlInner` (was stuck on a seeded servant life at 844); thaiy.js 29/29 (755); coop-e2e 59/59.

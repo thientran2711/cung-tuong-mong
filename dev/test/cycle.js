@@ -21,7 +21,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
   if(narrow){await p.waitForTimeout(4000);const rot=await p.evaluate(()=>{const f=document.getElementById('krotf');if(!f)return false;const t=getComputedStyle(f).transform;const m=t.match(/matrix\(([^)]+)\)/);if(!m)return false;const v=m[1].split(',').map(Number);return Math.abs(v[0])<0.01&&Math.abs(v[1])>0.01});R[SZ]=rot?'ok rotate prompt':'NO rotate prompt';if(!rot)bad++;await ctx.close();continue}
   await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
+   window.__nlInner=1;for(let i=0;i<60;i++){start();if(!isSrv())break}window.__nlInner=0;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
   await p.waitForTimeout(1500);
   if(!logicDone){logicDone=true;
    const L=await p.evaluate(()=>{const f=[],info={};const clear=()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true};
@@ -103,6 +103,11 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
      S.pregMismatch=true;S.nightLog=[S.pregWk-3];deal();if(S.pregMismatch)f.push('lùi: mismatch not covered');S.turn=tt;S.preg=0;S.hidden=false;S.pregMismatch=false}
     /* e: unanswered → the week ends with the true report */
     m=pop();if(m){clear();const c=S.cyb;endTurn();if(c.rv!=='dung')f.push('unanswered not defaulted '+c.rv);const dw=document.getElementById('dawn');if(dw)dw.remove();document.body.classList.remove('kbk-open')}
+    /* f (r3): no pop-up on the first screen of a new life (start() flips right after "Nhập cung"): that week reads as báo đúng */
+    {Q.length=0;S.cyb={};S.tuan=myT;Q.push({t:"Nhập cung",h:"<p>x</p>"});flip();if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up on a new life start');if(!(S.cyb.rv==='dung'&&S.cyb.rk===wk()))f.push('start: no default report');
+     info.startQ=Q.map(x=>x.t);clear();S.cyb={}}
+    {const fr=liveRivals(false).find(x=>!x.preg);if(fr&&window.COOPW){const on=COOPW.on;fr.coop=true;S.tuan=(myT+1)%3;let got=0;try{COOPW.on=true;for(let i=0;i<200;i++){S.tonight=null;S.ntk=null;S.ntTry=null;cyNoFriend(flip);if(S.tonight===fr)got++}}finally{COOPW.on=on;delete fr.coop}
+      if(got)f.push('co-op: deferred flip picked the friend '+got);if(!rivals.includes(fr))f.push('co-op: friend entry lost');Q.length=0;S.tuan=myT}}
     S.cyb={};S.tuan=t0;clear();
     /* 8 old save */
     const s=ser();delete s.cyb;delete s.cyKnow;const js=JSON.stringify(s).replace(/,"cyKnowMe":-?\d+/g,'').replace(/,"cyKnow":\{[^}]*\}/g,'').replace(/,"cyEvi":"?f?-?\d+"?/g,'');
