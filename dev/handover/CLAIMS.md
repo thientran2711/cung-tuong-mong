@@ -372,7 +372,7 @@
 | stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | RUNNING | 16/11 19:49Z |
 | coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | DONE (reports/coop-contest-check.md) | 16/11 19:46Z |
 | mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | session_01N1tNP4ZB3MEyANJVvpH6Ba | DONE LIVE 7c5523ad (archived) | 16/11 19:52Z |
-| coop-contest-fix (opus, BIG co-op; owner Q 19:52Z; plan = reports/coop-contest-check.md Recommendation) | review/coop-contest | main s23 | session_01UV1SzhQgRNCuk7EHMhqYPi | RUNNING | 16/11 19:54Z |
+| coop-contest-fix (opus, BIG co-op; owner Q 19:52Z) | review/coop-contest | main s23 | session_01UV1SzhQgRNCuk7EHMhqYPi | SẴN SÀNG 73eec76f | 16/11 19:54Z |
 | emotion-acts-3 (opus): fix emotion-acts-2-r1 FAIL 2 (Tuần lục NPC line grammar/page filing; bots ON early death 66 % vs OFF 39 % + tuẫn táng cause) | review/emotion-acts-3 | B | session_01N1tNP6kQXZcxcwCXnwMTdP | RUNNING | 16/11 19:59Z |
 | co-op one-world audit analyst (opus; owner 19:57Z: any shared system computed separately / double-counted) | handover | main s23 (opened by s22) | session_01UV1Szk87bTSJicgPTiFX6E | DONE (reports/coop-one-world.md) | 16/11 19:57Z |
 | weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | session_01UV1SziHY4wM9n3vdh5DZ81 | RUNNING | 16/11 20:03Z |
@@ -387,3 +387,8 @@
 | figure cut-out clean + hi-res (URGENT owner bug 20:35Z; Luân hồi neck streak/warped face; resumes paused face-sharp/fig-hd-upscale) | review/fig-cutout-clean | C | (C opens) | INBOX | 16/11 20:29Z |
 | cut-out + hoa điền ROOT CAUSE (opus, URGENT owner bug 20:35–20:38Z): code vs image; code fixes on review/fig-cutout-code; image list → C | review/fig-cutout-code | main s23 | session_01UV1SziJ9niRHRJg3rL83SA | RUNNING | 16/11 20:30Z |
 | road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | (opening) | RUNNING | 16/11 20:33Z |
+| coop-contest review r1 (opus, BIG co-op) of 73eec76f | review/coop-contest-r1 | main s23 | (opening:cc) | RUNNING | 16/11 20:32Z |
+| kit-fit round 2b review r1 (sonnet, SMALL kit + consistency scan) of 7865ed13a | review/kit-fit-r1 | main s23 | (opening:kf) | RUNNING | 16/11 20:32Z |
+| night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | (opening:nf) | RUNNING | 16/11 20:32Z |
+| kit-size #5 successor keeper (opus): reports/kit-size.md items 1-7 incl. owner TIN fixes | review/kit-size | main s23 | (opening:ks) | RUNNING | 16/11 20:32Z |
+| kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | (opening:k3) | RUNNING | 16/11 20:32Z |
