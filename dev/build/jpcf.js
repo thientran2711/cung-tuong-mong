@@ -54,7 +54,9 @@ function pcfQuick(e){try{if(typeof rivals==="undefined"||typeof rvGroups!=="func
  const B=[];const push=b=>{if(b&&/<button(?![^>]*disabled)/.test(b))B.push(b)};
  try{push(scoutBtn(e))}catch(x){}try{push(seeBtn(e))}catch(x){}try{const g=rvGroups(e,i).find(([h])=>h==="Giao thiệp");(g&&g[1]||[]).forEach(push)}catch(x){}
  if(!B.length)return"";return `<div class="kpsec"><h4 class="kpst">Việc nhanh</h4><div class="kskacts pcb">${B.slice(0,3).map(b=>`<div class="kpanec">${b}</div>`).join("")}</div></div>`}catch(x){return""}}
-function pcfBlocks(e,o,quick){return [pcfMood(e),pcfRel(e),pcfTaste(e),pcfIntel(e),pcfLog(e),quick?pcfQuick(e):""].filter(Boolean).join("")}
+/* PCF_X: more blocks from other modules (jmem: Kỷ niệm, Ân oán chưa dứt), each f(person) -> kitRows HTML or "" */
+function pcfX(e){try{return (window.PCF_X||[]).map(f=>{try{return f(e)||""}catch(x){return""}}).join("")}catch(x){return""}}
+function pcfBlocks(e,o,quick){return [pcfMood(e),pcfRel(e),pcfTaste(e),pcfIntel(e),pcfX(e),pcfLog(e),quick?pcfQuick(e):""].filter(Boolean).join("")}
 window.pcfBlocks=pcfBlocks;window.pcfEnt=pcfEnt;
 if(typeof pcard==="function"){const p0=pcard;pcard=function(o){let e=null;try{if(!window.__pcfOff&&o&&!o.__pcf)e=pcfEnt(o)}catch(x){}
  if(!e)return p0.apply(this,arguments);
