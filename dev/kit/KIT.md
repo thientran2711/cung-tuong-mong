@@ -823,10 +823,13 @@ reveal in `S.kstat`. Defaults: Sủng from the Kính sự phòng book (`S.kf`), 
 shown even for a stranger (stage 0 "Người lạ"); every other tile reads "chưa rõ" until the matching reveal.
 
 ## 23. PORTRAIT PICKER (kit 2)
-`kitPicker({id, title, items:[{k, face, label}], cur, filters:[[key,label]], filter, rows:2, note, onPick(k), onFilter(key)})`: small rectangular
-kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4 · 32 dung mạo"; no inner scroll, no half row), selection = gold ring +
-✓ badge on a pale-gold tile (`.ksel`), radio semantics, arrow keys + Enter/Space. Filter tabs = sub-tab look. j86 (face pick on the identity
-card) uses it with `facePool(filter)` (84 faces, filters Phi tần / Cung nữ) when present, else the 32 consort faces; the standing figure follows.
+`kitPicker({id, title, items:[{k, face, label}], cur, rows:2, note, onPick(k)})`: small rectangular
+kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4 · 52 dung mạo"; no inner scroll, no half row), selection = gold ring +
+✓ badge on a pale-gold tile (`.ksel`), radio semantics, arrow keys + Enter/Space. **NO TABS (owner 16/11 s23, "bỏ cái tab đấy luôn, chỉ hiện ra
+những cái khung avatar"): a face / avatar picker shows ONE list of frames, no "Phi tần 32 | Cung nữ 52" tabs, no counts on tabs; the GAME picks the set from her
+identity, she never filters** — `kitFaceScope()` (j88, the one rule for solo + co-op + new life): a cung nữ life (palace maid, `isSrv()` / origin `cnv`) →
+the 52 maid faces only; every other life (phi tần) → `facePool("all")` = 84 (32 consort + 52 maid, every maid identity has consort dress art).
+(`filters` / `onFilter` stay in the part for a future non-face picker; no face picker passes them.) j86 (face pick on the identity card) is the only user; the standing figure follows.
 
 ## 24. VEIL OVERLAY (kit 2, for j70 scars)
 `scarOf(p).veil` → the veil is drawn over the face in every tall portrait (`.kin > img.kveil`, over the portrait image box), every small frame
@@ -1169,6 +1172,21 @@ AND at rebirth (hooked on `nlCard`, once per rolled life). The origin is pre-rol
 - **Chip baseline rule (owner 11/15, kit-wide)**: any card tile with a chip/label under a wrapping title is a flex column with the chip pinned to
   the bottom (`margin-top:auto`) and the tiles of a grid row stretched to one height, so the chips of a row share ONE line. Measured 0 px spread per row.
 - Reduced motion (`prefers-reduced-motion` or Cảnh động off): same steps, no motion (instant flips, no shuffle travel, no fly).
+
+#### 28.11b IDENTITY CARD BODY (kit-fit r3, reviewer: name + age line lost / clipped on iPad + Fold)
+Root cause: the road cards (jkc `.kkcp` "Con đường", 300 px) were inserted at #mb level, between `.kpscroll` and the pinned Nhận / Đổi row, so the scroll area kept 106 px (iPad) and
+the name + age line (`.kpidn`) sat under the sticky strip. Now the road section is INSIDE `.kpscroll` (before the face picker); only Nhận / Đổi stay pinned. One-page (kv1) card: picture
+`clamp(84px,14dvh,190px)`. Test: kit-fit3 "idn" (name + age line fully inside the scroll area, 5 sizes). The Fold figure column (~90 px) was fixed in r2b (§28.11a: figure above the panel, 263 px at 755x1000).
+
+#### 28.12b ORIGIN / IDENTITY CARD GRID — `kitRouFit` (jk2b), ONE fit for every origin picker (owner 16/11 s23: "to ra, trải dài hết cái màn nền")
+The origin cards (Luân hồi `#kroul`; the same `.krgrid` / `.krt` is what every origin / identity pick uses, new life and co-op life alike — co-op runs the same `nlCard` → `kitRoulette`)
+grow to span the background width: side margin `--krside` = 5 % of the width (14..72 px, so the title, the moon wheel and the scene stay visible), ONE gap `--krgap`
+(10..20 px = 1.6 % of the short side) between columns, rows AND between title → cards → Tiếp / Bỏ qua, page padding `--krpad`. Card width `--krw` (≤ 300 px) is found by measuring:
+for 5 / 4 / 3 / 2 columns the widest card for which title + all rows + buttons fit the screen; among the (almost) widest the FEWEST rows wins (landscape 2 pages: ≥ 70 % of the widest;
+portrait: ≥ 85 %). Result: iPad 1180x820 and 1366x1024 5 × 2, Fold 755x1000 4 × 3, Fold cover 412x1058 and phone 390x844 3 × 4. A last partial row is centred.
+Picture, name and chip scale with the card (`--krw`: name 8.8 %, chip 7 %, padding 4.5 %, name ≤ 1.2rem, chip ≤ 1rem); all tiles of the grid get ONE height (chips share the baseline, §28.12).
+Re-fitted on resize and when fonts load (never after a card is picked). `data-krc` / `data-krw` on `#kroul` = the chosen columns / width (tests).
+Sample: kit page §28.12b. Test: `node dev/test/kit-fit3.js <url> <outdir> [WxH,...]` (cards inside the screen, no horizontal scroll, side margins equal, gaps equal, face picker without tabs, 52 / 84 faces).
 - Test: `node dev/test/inv-origin.js <url> WxH@dpr <out> <tag>` (`window.__kroulStep` 0 face-up · 1 shuffling · 2 pick · 3 revealed). Shots `dev/shots/inv-origin/`.
 ### 28.13 kitItem — ONE item tile (KIT READY)
 `kitItem({src, name, grade:0..4, qty, label:[text,"ok"|"no"|"n"], on, empty, size:"sm"|"md"|"lg"|"xl", data, tip})` → `.kitem` (52 / 72 / 104 / 150 px; xl = the reveal spotlight, KIT §54.1).
