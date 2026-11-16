@@ -132,21 +132,19 @@ function eaAfFav(o){let b=null,bv=-999;const L=[S].concat(liveC());for(const x o
 /* a minister's clan most hostile (dir −1) / friendliest (dir 1) */
 function eaClan(h,dir){try{if(typeof CLANS==="undefined"||typeof tdRel!=="function")return null;let b=null,bv=null;for(const c of CLANS){if(c===h.c)continue;const v=tdRel(h.c,c)*dir;if(bv==null||v>bv){bv=v;b=c}}return b}catch(e){return null}}
 function eaMins(){try{return S.trieu&&S.trieu.H?Object.values(S.trieu.H).filter(h=>h&&h.name):[]}catch(e){return[]}}
-/* ---------- a line she can see (kit news rows "Tin trong cung" / court news / Sổ ghi), one rule for every kind ----------
-   consorts: newsAdd (its own seen rule: tai mắt); ministers: the court news (tdNews); the Emperor / Thái hậu: public, always in the news;
-   everyone else: in the news when she knows / has seen the person (jface fxSeen); her own household (her servants, her children) also in Sổ ghi. */
+/* ---------- a line she can see: Sổ ghi (log), which the week card reads ("Chuyện khác"); one rule for every kind ----------
+   (S.news "Tin trong cung" is no longer drawn since the kit week card (j79 dawn draws wkSummary groups) — jlost does the same: newsAdd + log.)
+   consorts: newsAdd decides whether word reaches her (tai mắt; it also lets her learn their nết), then the log; ministers: the court news
+   (tdNews, Triều tab); the Emperor / Thái hậu: public, always; everyone else: when she knows / has seen the person (jface fxSeen, the fog
+   rule of every face) or the person is of her own household (her maid / servants / children). */
 window.EA_SAY={};
 function eaKeyOf(p){try{if(p===S.maid)return"maid";if(p&&p.sid!=null&&p!==S.emp)return"s"+p.sid;const kd=eaKind(p);if(kd==="q")return"q:"+p.c;if(kd==="o"){for(const c in S.court)if(S.court[c]===p)return"o:"+c}if(kd==="m")return"m:"+p.id;if(kd==="k")return"k:"+(p.name||"");return typeof emoKey==="function"?emoKey(p):""}catch(e){return""}}
-function eaByKeyAny(k){try{if(!k)return null;if(k==="maid")return S.maid||null;if(k.startsWith("q:"))return eaMins().find(h=>h.c===k.slice(2))||null;if(k.startsWith("o:"))return S.court&&S.court[k.slice(2)]||null;if(k.startsWith("m:"))return (S.men||[]).find(m=>m.id===k.slice(2))||null;
- if(k.startsWith("k:"))return (allKids().find(a=>a[0].name===k.slice(2))||[])[0]||null;return byKey(k)}catch(e){return null}}
-/* the face of a news row whose person is not a consort (kit face of that person) */
-window.eaFaceOf=function(k){try{const p=eaByKeyAny(k);if(!p)return null;if(p.isMin&&typeof pMin==="function")return pMin(p);if((S.men||[]).includes(p)&&typeof pMan==="function")return pMan(p);return typeof kitFace==="function"?kitFace(p):null}catch(e){return null}};
 function eaMine2(p){try{if(p===S.maid||(S.staff||[]).includes(p))return true;return (S.kids||[]).includes(p)}catch(e){return false}}
 function eaSay(p,line){if(!line||!p)return;const kd=eaKind(p);let seen=false;
- try{if(kd==="c"){if(typeof newsAdd==="function"&&p.id!=null){const n0=(S.news||[]).length&&S.news[0];newsAdd(p,"emo",line);seen=!!(S.news&&S.news[0]&&S.news[0]!==n0)}}
+ try{if(kd==="c"){if(typeof newsAdd==="function"&&p.id!=null){const n0=S.news&&S.news[0];newsAdd(p,"emo",line);seen=!!(S.news&&S.news[0]&&S.news[0]!==n0)}}
   else if(kd==="q"){if(typeof tdNews==="function"&&S.trieu){tdNews(line);seen=true}}
-  else{const pub=kd==="e"||kd==="t";const sn=pub||(typeof fxSeen==="function"?fxSeen(p):true);if(sn){S.news=S.news||[];S.news.unshift({w:W(),id:null,ek:eaKeyOf(p),k:"emo",t:line});if(S.news.length>40)S.news.length=40;seen=true}
-   if(eaMine2(p))log(line)}}catch(e){}
+  else seen=kd==="e"||kd==="t"||eaMine2(p)||(typeof fxSeen==="function"?fxSeen(p):false);
+  if(seen&&kd!=="q")log(line)}catch(e){}
  cnt(EA_SAY,kd+(seen?":seen":":hid"))}
 /* ======================= (1) HER EMOTION ACT CARDS ======================= */
 const EA_ART={"Đập đồ":"trut-gian-h","Mắng cung nữ":"phat-vo-co-h","Khóc thầm":"nhin-loi-mia-h","Viết thư nhà":"gui-thu-qua-con-h","Đàn hát tự thưởng":"dan-dem-trang","Thắp hương cầu an":"cau-tu"};
@@ -295,7 +293,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  /* ---- Thái hậu ---- */
  case"tkinh":{const N=NK().t;let ill="";if(!S.thIll&&roll(N.ill)){eaIll(p,r.g==="so"?"matngu":"phonghan");ill="; sáng ra Thái hậu nhiễm bệnh"}
   const L=[S].concat(liveC()).filter(x=>!(x===S&&(S.out||S.dead||S.confined)));const f=L.sort((a,b)=>(b.th||0)-(a.th||0))[0];if(f){target=f;ap(f,{suc:-N.suc,th:N.thUp})}
-  h=`Thái hậu ${r.n.toLowerCase()}${f?`, gọi ${f===S?"ngươi":f.name} đến tụng kinh cùng (Sức −${N.suc}, Thái hậu +${N.thUp})`:""}${ill}.`;break}
+  h=`Thái hậu ${r.n.toLowerCase()}${f?`, gọi ${f===S?"ngươi":f.name} đến tụng kinh cùng (Sức −${N.suc}, Thái hậu thiện cảm +${N.thUp})`:""}${ill}.`;break}
  case"eyen":{const f=eaTopSung(),n=NK().e.sung;p.mood=0;if(f){target=f;ap(f,{sung:n})}for(const x of liveC())if(f&&x!==f)oanAdd(x,f,Math.round(BAL.ea.ext.oan/2));
   h=`Hoàng thượng vui, mở yến ngắm hoa, chỉ gọi ${f?(f===S?"ngươi":f.name):"vài người"} ngồi gần (Sủng +${n}); các cung khác để bụng.`;break}
  /* ---- men of the palace ---- */
@@ -352,7 +350,7 @@ function eaHitMe(p,k,o){try{o=o||{};const F=BAL.ea.fx[k]||{};const tk=o.tk||"eve
  const T={cham:["Bị châm chọc",`<p>${Nm(p)} gặp ngươi ở ngự hoa viên, buông mấy câu châm chọc chua cay. Người xung quanh nghe rõ cả.</p>`,`${nm(p)} thiện cảm −${F.rel}`,"img/act-dap-tra-mia-h.webp"],
   ban:[p===S.thO?"Thái hậu ban thưởng":"Hoàng thượng ban thưởng",`<p>${p===S.thO?"Thái hậu":"Hoàng thượng"} đang vui, ban thưởng khắp hậu cung. Thái giám mang bạc đến cung ngươi.</p>`,`Bạc +${F.bac}`,"img/act-thuong.webp"],
   noi:["Long nhan đại nộ",`<p>Hoàng thượng đang giận, một lời của ngươi chạm đúng chỗ phật ý. Ngài phất tay áo bỏ đi.</p>`,`Sủng −${F.sung}`,"img/act-xu-toi-h.webp"],
-  quo:["Thái hậu quở trách",`<p>${quoH}</p>`,`Thái hậu −${o.n||F.th}`,"img/act-xu-toi-h.webp"],
+  quo:["Thái hậu quở trách",`<p>${quoH}</p>`,`Thái hậu thiện cảm −${o.n||F.th}`,"img/act-xu-toi-h.webp"],
   nghi:["Hoàng thượng nghi kỵ",`<p>Hoàng thượng mấy hôm nay nhìn ngươi khác hẳn, hỏi han mấy câu bóng gió rồi lạnh nhạt bỏ đi.</p>`,`Sủng −${o.n||0}`,"img/act-xu-toi-h.webp"],
   egian:["Long nhan đại nộ",`<p>Hoàng thượng giận dữ đã mấy tuần, giận lây cả hậu cung: chẳng ai được ngài cho sắc mặt tốt.</p>`,o.past||"","img/act-xu-toi-h.webp"],
   evui:["Hoàng thượng sủng ái ra mặt",`<p>Hoàng thượng vui vẻ mấy tuần liền, ngày nào cũng gọi ngươi bầu bạn, ban thưởng không ngớt. Các cung nhìn ngươi bằng ánh mắt khác.</p>`,o.past||"","img/act-thuong.webp"],
@@ -422,8 +420,8 @@ function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&e.v>=E().npc.e
    line=`Hoàng thượng vui, sủng ái ${f?(f===S?"ngươi":f.name):"người bên cạnh"} ra mặt; các cung ganh ghét.`}}
  else if(kd==="t"){
   if(sad||ext==="so"){eaIll(p,sad?"tambenh":"matngu");line=`Thái hậu ${sad?"ưu uất":"lo âu"} mấy tuần, phượng thể bất an.`}
-  else if(ext==="gian"){const n=2*N.t.th,tk=eaTemper(p).k;for(const x of liveC())ap(x,{th:-n});if(!S.out){apply({th:-n});eaHitMe(p,"tgian",{past:`Thái hậu −${n}`,tk})}line=`Thái hậu ${QUO_W[tk]} cả hậu cung (mọi phi tần Thái hậu −${n}).`}
-  else{const L=[S].concat(liveC()).filter(x=>!(x===S&&S.out));const f=L.sort((a,b)=>(b.th||0)-(a.th||0))[0],n=2*N.t.th;if(f){ap(f,{th:n});if(f===S){try{ghenAll(X.ghen)}catch(x){}eaHitMe(p,"tvui",{past:`Thái hậu +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
+  else if(ext==="gian"){const n=2*N.t.th,tk=eaTemper(p).k;for(const x of liveC())ap(x,{th:-n});if(!S.out){apply({th:-n});eaHitMe(p,"tgian",{past:`Thái hậu thiện cảm −${n}`,tk})}line=`Thái hậu ${QUO_W[tk]} cả hậu cung (Thái hậu thiện cảm với mọi phi tần −${n}).`}
+  else{const L=[S].concat(liveC()).filter(x=>!(x===S&&S.out));const f=L.sort((a,b)=>(b.th||0)-(a.th||0))[0],n=2*N.t.th;if(f){ap(f,{th:n});if(f===S){try{ghenAll(X.ghen)}catch(x){}eaHitMe(p,"tvui",{past:`Thái hậu thiện cảm +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
    line=`Thái hậu vui, thiên vị ${f?(f===S?"ngươi":f.name):"người bên cạnh"} ra mặt; các cung để bụng.`}}
  eaSay(p,line)}
 /* ======================= THE TUẦN ======================= */
@@ -446,7 +444,7 @@ const EA_NACT={m:{gian:"Ra thao trường luyện võ",buon:"Viết thư về qu
  t:{gian:"Tụng kinh cho nguôi giận",buon:"Ngồi lần tràng hạt",so:"Thắp hương cầu an",ghen:"Ngồi lần tràng hạt",vui:"Ngắm hoa trong vườn"}};
 function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e){}
  for(const p of eaPeople()){const e=p.emo;const g=e&&e.v>=15?eaGrpK(e.k):null;eaExtNpc(p,g);if(!g)continue;const T=eaTemper(p),kd=eaKind(p);
-  if(e.v>=N.outV){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h);if(o.target===S&&!eaMine2(p))log(o.h)}}}}
+  if(e.v>=N.outV){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h)}}}}
   else if(e.v>=N.actV&&roll(N.actCh)){/* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
    const C=E().card,cg=g==="ghen"?"buon":g;
    if(kd==="c"){const L=Object.keys(C).filter(k=>C[k].g===cg);if(!L.length)continue;const k=pick(L),c=C[k];if(c.bac&&(p.bac||0)<c.bac)continue;const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);
@@ -460,7 +458,7 @@ function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e
 (function(){if(typeof flip!=="function")return;const f0=flip;flip=function(){try{const E=S&&S.emp;if(E&&E.eaQ===W()&&!window.__eaOff&&!roll(Math.round((E.eaQx||0)*100))){S.tonight=null;cnt(EA_N,"noFlip");return}}catch(e){}return f0.apply(this,arguments)}})();
 /* (6) QUỞ TRÁCH BY TEMPER + MOOD: the Emperor's verdict (j8 punish → cấm túc) follows his feeling of the moment (angry +, joyful −, BAL.ea.quo)
    and his words follow his nết; one rule for her and every consort (the log line shows both). */
-const QUO_E={hot:"Hoàng thượng đập bàn quát",even:"Hoàng thượng nghiêm giọng phán",timid:"Hoàng thượng thở dài phán"};
+const QUO_E={hot:"Hoàng thượng đập bàn quát lớn",even:"Hoàng thượng nghiêm giọng hạ chỉ",timid:"Hoàng thượng thở dài hạ chỉ"};
 (function(){if(typeof punish!=="function")return;const p0=punish;punish=function(p,why,sev){if(!eaOn()||!S.emp)return p0.apply(this,arguments);
  const q=typeof p==="string"?S:p;const c0=(q&&q.confined)||0;const Q=Q6(),e=S.emp.emo;const md=e&&e.v>=Q.v?(e.k==="gian"?1:e.k==="vui"?-1:0):0;const tk=eaTemper(S.emp).k;let mNew=null;
  const l0=log;log=function(h){try{if(typeof h==="string"){const m=/bị cấm túc (\d+) tháng/.exec(h);if(m){const a=+m[1];mNew=Math.max(1,a+md*Q.mo);h=h.replace(m[0],`bị cấm túc ${mNew} tháng`).replace(/<\/span>$/,"")+` ${QUO_E[tk]}${md>0?"; ngài đang giận, phạt nặng thêm":md<0?"; ngài đang vui, phạt nhẹ đi":""}.</span>`;if(md)cnt(EA_N,md>0?"quoUp":"quoDn")}
@@ -503,6 +501,6 @@ window.eaLockWhy=eaLockWhy;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m.opts)document.querySelectorAll("#modal .opts > button.opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];const why=eaLockWhy(c,m);if(!why)return;
   b.disabled=true;const sm=b.querySelector("small");if(sm)sm.textContent="Cần: "+why;if(!c.__eaN){c.__eaN=1;cnt(EA_N,"lock")}})}catch(e){}return r}})();
 (function(){if(typeof chooseM!=="function")return;const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts&&eaLockWhy(m.opts[i],m)){/* the button is disabled; a script call (bots) takes the answer her temper allows */const j=m.opts.findIndex(o=>o&&!eaLockWhy(o,m)&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));if(j<0||j===i)return;arguments[0]=i=j}}catch(e){}return c0.apply(this,arguments)}})();
-window.eaDo=eaDo;window.eaKeyOf=eaKeyOf;window.eaExtNpc=eaExtNpc;window.eaPeople=eaPeople;window.eaNpcWeek=eaNpcWeek;
+window.eaDo=eaDo;window.eaKeyOf=eaKeyOf;window.eaSay=eaSay;window.eaExtNpc=eaExtNpc;window.eaPeople=eaPeople;window.eaNpcWeek=eaNpcWeek;
 window.eaStat=function(){return JSON.parse(JSON.stringify(EA_N))};
 })();
