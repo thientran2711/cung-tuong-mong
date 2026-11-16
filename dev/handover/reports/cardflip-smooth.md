@@ -1,3 +1,1 @@
-# review/cardflip-smooth — worker DONE (relayed by session 8)
-- sha ff8f5949d6 (base 9b4f1697a). Smooth + slower flip: 1.15 s ease-in-out plus a 600 ms pause before the reveal (BAL.cardFlip.turn). Static vignette/lamp replace the moving mask and soft-light plates (small look change). Decode before the scene; batched layout; no re-parent.
-- NOT visually verified (CDN blocked, box overloaded). A session-8 reviewer is running → review/cardflip-smooth-r1; its verdict goes here.
+# cardflip-smooth — PASS 53ee5b81a5 (review/cardflip-smooth-r1, base eba64ead4; re-merge onto current main, no conflict expected: only jflip.js/KIT.md/measure). Smooth, slower flip (1.15 s ease) + 0.7 s pause before the reveal; plates and portraits right; the look ≈ main; it also fixes the old seal placement. Reduced motion → final still. A real iPad fps check is still open — ask the owner to try it.
