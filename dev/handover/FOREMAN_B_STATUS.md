@@ -3,7 +3,7 @@ ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; ro
 last wake: 11/16/2026 05:19Z
 Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
 
-## HANDOVER (Foreman B session 1 → session 2, 11/16/2026 05:19Z)
+## HANDOVER (Foreman B session 1 → session 2 = session_01N1tNP3StF4VxqkqTsQSt3a, 11/16/2026 05:19Z)
 - Slice B state: 24 PASS (20 LIVE on main via trains 1–3). PASS not yet on main: routes-port-r1 (D33, conditional loi-rieng §6.1), chapter-detail-r1 (C24), tuduc-mg-r1 (C41), difficulty-port-r1 (D31, conditional .kdiff override). Full shas under ## PASS.
 - Still running as OLD in-session agents of session 1 (they finish on their own; if no report file appears within ~2 h, re-open from the pushed branch/PROGRESS as a separate session):
   * C41b tuduc-pic — branch review/tuduc-pic (from tuduc-mg-r1 + main; pass TD_BG as pic in jtd tdPlay → picture-left frame). Needs a reviewer when "SẴN SÀNG KIỂM".
