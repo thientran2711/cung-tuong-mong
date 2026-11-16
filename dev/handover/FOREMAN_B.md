@@ -3,7 +3,7 @@ Owner (16/11, session 8): open a second account, run a foreman there with at mos
 
 ## Roles
 - Main coordinator (session 8, account A): owner chat, OWNER_DECISIONS, SESSION8_QUEUE, ALL fast-forwards of main, urgent live bugs, co-op, reviews of its own slice.
-- Foreman B (account B): runs ONLY the items listed under "Slice B" below. Max 15 agents at once (owner 16/11) (workers + reviewers). Never talks to the owner. Never pushes main. Never edits OWNER_DECISIONS.md or SESSION8_QUEUE.md (coordinator's files). Writes ONLY dev/handover/FOREMAN_B_STATUS.md (+ its workers' review/* branches).
+- Foreman B (account B): runs ONLY the items listed under "Slice B" below. Max 12 agents at once, each agent ≤2 browsers; art workers fill free slots (owner 16/11) (workers + reviewers). Never talks to the owner. Never pushes main. Never edits OWNER_DECISIONS.md or SESSION8_QUEUE.md (coordinator's files). Writes ONLY dev/handover/FOREMAN_B_STATUS.md (+ its workers' review/* branches).
 
 ## How Foreman B works
 1. Setup like HANDOVER_TO_SESSION8 §0.2 (sparse worktrees under /home/user/wt, fetch --depth=30 under flock, PREAMBLE.txt + REVIEWER.txt copied with "Coordinator = Foreman B (reports to main session 8)"). Cloudflare token + Magnific must be connected on account B (ask the owner once if missing; never paste secrets in chat).

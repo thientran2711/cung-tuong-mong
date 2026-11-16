@@ -1083,3 +1083,4 @@ All must work in co-op.
 - (16/11, session 8) Owner: Foreman C is open; account B (and C) now have a valid Cloudflare key → foremen upload their own images (PENDING CDN lists should be uploaded by them now).
 - (16/11, session 8) Owner: Foreman C may run up to 15 agents (FOREMAN_C.md updated). Foreman B stays at 8.
 - (16/11, session 8) Owner: Foreman B may also run up to 15 agents; give both foremen work. → moved the 12 branch re-ports (D29–D34, D36, D38–D42) from Slice C to Slice B (C had not started).
+- (16/11, session 8) Owner: Foreman B AND Foreman C run at most 12 agents each (each ≤2 browsers; art in free slots). Main coordinator keeps ~12–14 running (machine has 4 CPUs).
