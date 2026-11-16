@@ -64,7 +64,7 @@ rdDef("tt_co",6,{t:"Kẻ đọc trộm thư",w:"maid",sj:"kẻ đọc trộm th�
   {n:"Bỏ qua, chỉ giữ cung mình kín",c:{mat:-1},w:{duc:2},wx:"yên chuyện",lx:"kẻ đứng sau còn đó, đường tin của ngươi vẫn bị dòm",rt:"Ngươi khép cửa cung."}]},
  x1:{h:"Bắt tận tay",w:"v",t:"Đêm nay người của {v} sẽ đến lấy bản chép cuối cùng. Ngươi có thể bắt tận tay, hoặc để nó đi.",o:[
   {n:"Cho thị vệ phục sẵn",c:{suc:-5},o:A=>40+S.mat*4,e:["win","lose"],rt:"Người của {v} bị bắt cùng bản chép.",rf:"Kẻ đến lấy thư chạy thoát, chỉ còn lời ngươi nói."},
-  {n:"Để nó lấy thư giả đi",c:{},o:A=>40+(A.f.own?15:0)+S.tamco/4,e:["win","mid"],rt:"Thư giả đến tay kẻ đứng sau, hắn đi sai một nước lớn.",rf:"Thư giả bị nhận ra, nhưng đường rò đã bị chặn."},
+  {n:"Để nó lấy thư giả đi",c:{mat:-1},o:A=>40+(A.f.own?15:0)+S.tamco/4,e:["win","mid"],rt:"Thư giả đến tay kẻ đứng sau, hắn đi sai một nước lớn.",rf:"Thư giả bị nhận ra, nhưng đường rò đã bị chặn."},
   {n:"Đóng cửa, không bắt ai",c:{},w:{duc:3},e:"mid",lx:"không ai bị trừng trị",rt:"Ngươi thôi viết thư, đường rò tự tắt."}]}},
  E:{win:{k:1,tag:"Bắt được kẻ đọc trộm thư",w:"v",t:"Người của {v} bị bắt tận tay. Từ nay chẳng ai dám đưa tay vào cung ngươi.",fx:{danh:5,mat:1},go:A=>{rdOan(A,"v",10);return ""}},
   mid:{k:0,tag:"Đường rò đã chặn",t:"Thư nhà kín lại, nhưng kẻ đứng sau vẫn chưa lộ mặt.",fx:{mat:1}},
