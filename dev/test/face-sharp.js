@@ -21,6 +21,7 @@ const ID=ID0||'consort:c30';
  await p.evaluate(()=>{Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;document.querySelectorAll('.kmov').forEach(e=>e.remove())});
  await p.waitForTimeout(3000);
  await p.waitForFunction(()=>{const L=[...document.querySelectorAll('#mefig,#tokens img.figimg')];return L.length&&L.every(i=>i.complete&&i.naturalWidth>0)},null,{timeout:90000}).catch(()=>{});
+ if(process.env.SELECT)await p.evaluate(()=>{const me=document.getElementById('mefig');if(me)me.click()});if(process.env.SELECT)await p.waitForTimeout(1500);
  lg('loaded');await p.waitForTimeout(1500);
  const info=await p.evaluate(()=>{const L=[];[document.getElementById('mefig'),...document.querySelectorAll('#tokens img.figimg')].forEach(e=>{if(!e)return;const r=e.getBoundingClientRect();if(r.width<5)return;const cs=getComputedStyle(e);
    L.push({who:e.id==='mefig'?'me':'tok',src:(e.currentSrc||e.src).split('/').pop(),nw:e.naturalWidth,nh:e.naturalHeight,x:r.left,y:r.top,w:r.width,h:r.height,

@@ -502,9 +502,9 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 /* full-body figures */
 .stage{container-type:size}
 .tok.fig{min-width:0}
-.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
 .tok.fig:hover .figimg{transform:translateY(-3px)}
-#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);pointer-events:none}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);pointer-events:none}
 .stage.hasme .tokens{justify-content:flex-end}
 /* review/face-sharp (owner 15/11): no idle sway on people pictures; an animated transform/filter re-samples the face every frame (hazy face) */
 @keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}
@@ -5953,8 +5953,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  st.__j59here=persons}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
-const SG=(a,o)=>`var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
-const HG=(a,c)=>`var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
+const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
+const HG=(a,c)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
 const css=document.createElement("style");css.textContent=`
 /* rank badge fills follow the new RCOL (c0 trắng ngà ngọc trai, owner 11/15; c1 xanh lục, c3 hồng phấn; others already match) */
 .rk-c0{background:linear-gradient(160deg,#fbf8f1,#e6dfcf)!important;border-color:#9c8f74!important}
@@ -5989,8 +5989,8 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 #mefig.j59sel,.stage.j59 .tok.fig.j59sel .figimg{filter:${SG(9,.95)}}
 .stage.j59 .tok.j59sel:not(.fig) .md{box-shadow:0 0 0 2px #fff3c4,0 0 10px 2px rgba(255,243,196,.9)!important}
 .stage.j59 .tok .tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;letter-spacing:.01em;color:var(--ink);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
-.stage.j59 .tok.fig.j59unk .figimg{filter:grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 6px 6px #0004)!important}
-.stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 0 2px #fff3c4) drop-shadow(0 0 7px rgba(255,243,196,.9))!important}
+.stage.j59 .tok.fig.j59unk .figimg{filter:url(#kfa) grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 6px 6px #0004)!important}
+.stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:url(#kfa) grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 0 2px #fff3c4) drop-shadow(0 0 7px rgba(255,243,196,.9))!important}
 .stage.j59 .tok .tag .j59t.j59only{font-size:.76rem}
 .stage.j59 .tok .tag .j59n{display:block;line-height:1.2}
 .stage.j59 .tok.j59me{position:absolute;z-index:2;min-width:0;padding:0;transform:translateX(-50%);pointer-events:none;cursor:default}
@@ -6016,7 +6016,7 @@ html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;
 html body #stage.j59ph #kshR .k3p{width:auto}
 html body #stage.j59slot #mefig.j59off,html body #stage.j59slot #j59metag.j59off{display:none!important}
 html body #stage.j59slot .j59more{transform:none;min-height:40px;padding:4px 0;z-index:4}
-.stage.j59 .tok.fig .figimg.j59sil{filter:brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:.92}
+.stage.j59 .tok.fig .figimg.j59sil{filter:url(#kfa) brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:.92}
 /* her idle sway breathes from the feet: no vertical lift, so her feet stay on the slot floor line with everyone else */
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) scale(1,1.012)}}`;document.head.appendChild(css);
 /* the person card (#popw) docks in the lower panel area (a side sheet beside the stage on wide screens), so the stage
@@ -12059,7 +12059,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 @media (orientation:portrait){.modal.kpscene{align-items:flex-end!important;padding:12px 4vw 16px!important}.modal.kpscene .dlg.kpsc{max-width:min(680px,100%)!important}}
 @media (max-width:599px){.dlg.kpsc .kpb.kpid{grid-template-columns:104px minmax(0,1fr)!important;gap:10px!important}.dlg.kpsc .kpid .kpidn{font-size:1.02rem}.dlg.kpsc .kpid .kpidt{font-size:.84rem}.dlg.kpsc .kpid .kstgrid{grid-template-columns:1fr 1fr}.dlg.kpsc .kpid .kst-tile{padding:2px 6px}.dlg.kpsc .kpid .kst-tile>.kstv{font-size:.84rem}}
 /* 3b · identity with her standing figure */
-.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:94dvh;filter:drop-shadow(0 6px 18px #0006)}
+.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:94dvh;filter:url(#kfa) drop-shadow(0 6px 18px #0006)}
 .modal.kpscene.kpfig>.dlg{position:relative;z-index:1}
 .modal.kpscene.kpfig{justify-content:flex-end!important;align-items:center!important;padding:12px 2.5vw!important}
 .modal.kpscene.kpfig .dlg.kpsc{max-width:min(560px,54vw)!important}
@@ -14803,7 +14803,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-fig{position:relative;width:100%;height:calc(var(--kfh,300px) * .84);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
  animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
-.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
+.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-img.kpod-unk{opacity:.92}
 .kpod-fb{display:none;height:100%;align-items:flex-end;justify-content:center}.kpod-nofig .kpod-img{display:none}.kpod-nofig .kpod-fb{display:flex}
 .kpod-fb .pfwrap{height:96%;display:flex;flex-direction:column;align-items:center}.kpod-fb .pcp.kit{height:100%;width:auto!important;max-width:100%}.kpod-fb .pfrw{display:none}
@@ -20745,7 +20745,7 @@ window.kitEvCat=kitEvCat;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
@@ -20838,7 +20838,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
-#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
 #mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:none;border:0;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
@@ -27928,6 +27928,42 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh
  `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+
  `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
+/* ================= jfighd: kitFigHD — HIGH-RES FIGURES WHERE A FIGURE IS SHOWN BIG (review/face-sharp, owner 15/11 "mặt vẫn bị mất nét") =================
+   Every full-body figure file (fig-*.webp) is 900 px tall. The identity screen shows her at 94 dvh (~1.7-2.1x on a tablet), the stage at
+   1.2-1.4x, dialogs and cards up to ~1.5x: the browser upscales the 900 px file and her face goes soft. img/hd/fig-*.webp is the SAME
+   painting at up to 1800 px (dev/figwork/hdcut.py: cut from the gpt-2-6 sheet it came from, all later fixes kept by detail transfer).
+   img/FIGURES-hd.json = {"fig-x.webp":[w900,wHd], ...}: the files that have an HD twin.
+   ONE rule for every <img> of a figure anywhere in the game: give it srcset "<900 file> w900w, <hd file> wHdw" and sizes = its drawn width,
+   so the browser itself loads the HD twin only when the picture is drawn bigger than the 900 px file (width x devicePixelRatio > w900)
+   and keeps the light file otherwise (performance budget). src stays the 900 file (all code that compares / keys on src is unchanged).
+   A src change by any code drops a stale srcset at once (MutationObserver). Test hook: window.KFHD {n, list}. ================= */
+(function(){
+ const K=window.KFHD={map:null,n:0,ld:0};const RE=/\/img\/(fig-[^\/?#]+\.webp)(?:[?#].*)?$/;
+ function hdUrl(lo){return lo.replace(/\/img\/(fig-[^\/?#]+\.webp)/,"/img/hd/$1")}
+ function fit(im){try{const s=im.getAttribute("src")||"";const m=RE.exec(im.src||s);const ent=m&&K.map&&K.map[m[1]];
+   if(!ent){if(im.dataset.kfhd){im.removeAttribute("srcset");im.removeAttribute("sizes");delete im.dataset.kfhd}return}
+   const ss=`${im.src} ${ent[0]}w, ${hdUrl(im.src)} ${ent[1]}w`;if(im.getAttribute("srcset")!==ss){im.setAttribute("srcset",ss);im.dataset.kfhd=m[1];K.n++}
+   const w=Math.round(im.getBoundingClientRect().width);const sz=(w>4?w:ent[0])+"px";if(im.getAttribute("sizes")!==sz)im.setAttribute("sizes",sz)}catch(e){}}
+ function all(){if(!K.map)return;document.querySelectorAll("img").forEach(im=>{if(im.dataset.kfhd||RE.test(im.src||""))fit(im)})}
+ window.kitFigHD=fit;window.kitFigHDAll=all;
+ function load(){if(K.ld)return;K.ld=1;try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-hd.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&typeof j==="object"){K.map=j.files||j;K.list=Object.keys(K.map).length;all()}}).catch(()=>{K.ld=0})}catch(e){K.ld=0}}
+ load();setInterval(()=>{K.ld=0;load()},300000);
+ let T=0;const sched=()=>{if(T)return;T=requestAnimationFrame(()=>{T=0;all()})};
+ try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){const im=m.target;if(im.tagName==="IMG"&&m.attributeName==="src")fit(im)}else if(m.addedNodes.length){sched();break}}})
+  .observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["src"]})}catch(e){}
+ addEventListener("resize",()=>{clearTimeout(window.__kfhdT);window.__kfhdT=setTimeout(all,150)});
+ document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&RE.test(t.src||"")&&!t.dataset.kfhdw){t.dataset.kfhdw=1;fit(t)}},true);
+})();
+/* ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
+   The cut-out figures keep a faint alpha haze (alpha 1–12) over much of their box (background removal + lossy WebP alpha). Every
+   drop-shadow (her rank halo, the selection glow, the ground shadow) also shadows that haze, so the glow showed as a yellow / grey
+   RECTANGLE. url(#kfa) comes FIRST in every people-picture filter (p1 #mefig / .tok.fig .figimg, j59 HG/SG, jk4 .kesimg, j79 .kidfig2,
+   j90 .kpod-img): alpha' = 1.07·alpha − 0.065, so the haze becomes 0 and the body is unchanged; the drop-shadows then trace the silhouette.
+   Static (no animation: KIT motion rule STILL PEOPLE). */
+(function(){try{if(document.getElementById("kfa"))return;const d=document.createElementNS("http://www.w3.org/2000/svg","svg");d.setAttribute("width","0");d.setAttribute("height","0");
+ d.setAttribute("aria-hidden","true");d.style.cssText="position:absolute;width:0;height:0;overflow:hidden";
+ d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.07" intercept="-0.065"/></feComponentTransfer></filter></defs>';
+ (document.body||document.documentElement).appendChild(d)}catch(e){}})();
 
 </script>
 
@@ -27954,7 +27990,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="77caaf9b52da";window.CTM_BUILD=BUILD;
+const BUILD="d3dbd7efb38c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
