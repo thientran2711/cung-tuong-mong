@@ -1,0 +1,14 @@
+img/fig-physician-a30.webp
+img/fig-physician-a55.webp
+img/fig-physician-p1-a18.webp
+img/fig-physician-p1-a26.webp
+img/fig-physician-p1-a36.webp
+img/fig-physician-p1-a51.webp
+img/fig-physician-p2-a18.webp
+img/fig-physician-p2-a26.webp
+img/fig-physician-p2-a36.webp
+img/fig-physician-p2-a51.webp
+img/fig-physician-p3-a18.webp
+img/fig-physician-p3-a26.webp
+img/fig-physician-p3-a36.webp
+img/fig-physician-p3-a51.webp

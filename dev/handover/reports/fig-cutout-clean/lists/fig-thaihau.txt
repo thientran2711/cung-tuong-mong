@@ -1,0 +1,15 @@
+img/fig-thaihau-1.webp
+img/fig-thaihau-2.webp
+img/fig-thaihau-3.webp
+img/fig-thaihau-h1-a18.webp
+img/fig-thaihau-h1-a26.webp
+img/fig-thaihau-h1-a36.webp
+img/fig-thaihau-h1-a51.webp
+img/fig-thaihau-h2-a18.webp
+img/fig-thaihau-h2-a26.webp
+img/fig-thaihau-h2-a36.webp
+img/fig-thaihau-h2-a51.webp
+img/fig-thaihau-h3-a18.webp
+img/fig-thaihau-h3-a26.webp
+img/fig-thaihau-h3-a36.webp
+img/fig-thaihau-h3-a51.webp
