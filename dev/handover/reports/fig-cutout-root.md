@@ -76,3 +76,13 @@ back-turned pose from those sheets. Anatomy (L/R hand, fingers, arm continuity):
 ## 5. Other finding (not this task)
 Fold 755x1000: the identity card's figure column is only ~90 px wide, so the big figure shows ~176 px tall in the bottom-left corner
 (same on live main) — layout issue for the kit keeper.
+
+## 6. Owner photos matched to files (CDN img/_review/owner-refs-1116/, SIFT match: 97–148 good matches vs <=39 for the next file)
+| Owner photo | File (all ages = same style-tier) | Defect | Owner | HD twin | Scan (a18: cutcheck / transl.) |
+|---|---|---|---|---|---|
+| owner-luanhoi-cutout-1116 (white-blue robe, scroll) | fig-consort-c30-t2-a18 | DARK MARK on the neck is PAINTED in the file (same in live and new build, sheet owner-c30-t2-neck-before-after.jpg); soft halo behind the hair | re-cut + paint fix | yes | 1.62 / 18.0 |
+| owner-luanhoi-cutout-1116b (maroon, raised hand) | fig-consort-c26-t2-a18 | smoke between arm, sleeve and head, translucent sleeve | re-cut | yes | 2.77 / 25.3 (worst of the 5) |
+| owner-luanhoi-huadian-1116 (green robe, book) | fig-consort-c28-t2-a18 | oversize red teardrop hoa điền (also on the C9 R3 FAIL list "c28-t2 oversize drops") | huadian shrink (por + fig + hd + tn) | yes | 2.15 / 15.3 |
+| owner-luanhoi-anatomy-1116 (beige, looking back, scroll) | fig-maid-m22-t2-a18 | arm on her left ends in a RIGHT hand + back-turned pose | repaint | NO (soft on iPad) | 1.28 / 0.5 |
+| owner-luanhoi-backpose-1116 (lilac, back turned, flowers) | fig-maid-m47-t2-a18 | back-turned / looking-back pose (rejected) | repaint | NO (soft on iPad) | 0.98 / 3.4 |
+Add the back-pose list: m22-t2, m47-t2 + c08-t1, c26-t1, c02-t1, c25-t2, m43-t1 (section 4c). All four ages (a18/a26/a36/a51) and the por/tn/hd twins of each style-tier go together.
