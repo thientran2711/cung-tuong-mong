@@ -1,6 +1,6 @@
 /* PAGE = SPREAD PAGE, SCALED — every tab (owner 16/11 17:00Z s20: "ô hành trang là có tới 7 hàng, còn một bên là ô hành trang chỉ có 4 hàng";
    rule OD:L345 + OD:L1278, KIT §0.0). Same seeded game at the two design sizes (direct mode): SPREAD 1180x820 (iPad landscape, RIGHT page)
-   and ONE PAGE 590x820 (= Fold 755x1000 portrait divided by s 1.2195). For every visible bottom tab, the open page (#panel) is measured:
+   and ONE PAGE KIT_FRAME.page (590x852 = Fold 755x1000 portrait divided by s 1.1737). For every visible bottom tab, the open page (#panel) is measured:
    - page box (w,h); every visible element's rect relative to the page box, keyed by a stable DOM path;
    - every CSS grid inside the page: columns x rows (rows = ceil(children/cols));
    A tab FAILS when a grid's columns/rows differ, or an element present on both pages moves/resizes by more than TOL px (default 2),
