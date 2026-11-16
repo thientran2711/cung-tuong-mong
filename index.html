@@ -557,14 +557,6 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .kcard .kwhy{font-size:.72rem;color:#b5482f;font-weight:600}
 /* rank grounds */
 .pcp,.md{background-color:#5a1e16}
-.rk-c0{background:linear-gradient(160deg,#cfe0d2,#9fbfa8)!important;border-color:#8fae98!important}
-.rk-c1{background:linear-gradient(160deg,#e6dcc2,#c2b08a)!important;border-color:#b8a274!important}
-.rk-c2{background:linear-gradient(160deg,#cfdcea,#93aecb)!important;border-color:#7d9cbf!important}
-.rk-c3{background:repeating-linear-gradient(45deg,#cfe6c8 0 6px,#bcd9b3 6px 12px)!important;border-color:#7aa07a!important}
-.rk-c4{background:repeating-linear-gradient(45deg,#e2cdea 0 6px,#d3b8df 6px 12px)!important;border-color:#a07ab0!important}
-.rk-c5{background:radial-gradient(circle at 30% 20%,#f6d0c8,#d98a7a)!important;border-color:#c06a6a!important}
-.rk-c6{background:radial-gradient(circle at 30% 20%,#ffe2b0,#e0a04a)!important;border-color:#d98a3a!important;box-shadow:0 0 0 1px #fff,0 0 0 3px #e9c46a,0 3px 10px #5a3a2044!important}
-.rk-c7{background:radial-gradient(circle at 50% 18%,#f3c35a 0,#b0281a 55%,#6a1208 100%)!important;border-color:#f0d070!important;box-shadow:0 0 0 1px #fff,0 0 0 3px #d4a020,0 3px 12px #6a120866!important}
 .rk-th{background:radial-gradient(circle at 50% 20%,#fff1b8,#e3b93a 60%,#a0761a)!important;border-color:#c9a0e0!important}
 .rk-emp{background:radial-gradient(circle at 50% 20%,#fff6b0,#f0c419 55%,#b48a00)!important;border-color:#f0d070!important;box-shadow:0 0 0 1px #fff,0 0 0 3px #c99a10,0 3px 12px #6a4a0066!important}
 .rk-sv0{background:linear-gradient(#d6d3cf,#b3afa9)!important;border-color:#9a948c!important}.rk-sv1{background:linear-gradient(#e7dccb,#cbb89c)!important;border-color:#b9a48a!important}
@@ -791,7 +783,13 @@ const RANKS=[
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
 /* palace heads (chủ vị): Tần, Phi, Quý phi, Hoàng quý phi (owner 11/14, OWNER_DECISIONS) — rank index ≥ PAL_HEAD */
 const PAL_HEAD=3;
-const RCOL=["#9c8f74","#a8946a","#6a8aa0","#7aa07a","#a07ab0","#c06a6a","#d98a3a","#f0d070"];
+/* KIT 1.3 · THE ONE RANK PALETTE (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn"): every rank colour in the game is read from here (ring, halo, chips, card colour, portrait ground
+   .rk-cN, text tone via kitToneOf in jk4). Vivid bases, same colour family per rank; text on paper is DERIVED (kitToneOf), never typed again. Nobody keeps a copy. */
+const RCOL=["#b8862f","#27b04c","#2d7ef0","#f0489a","#9b4ee6","#ee2a3f","#ff7a10","#ffc20a"];/* Đáp ứng champagne-bronze, Thường tại green, Quý nhân blue, Tần pink, Phi purple, Quý phi red, Hoàng quý phi orange, Hoàng hậu gold */
+const RCOL_COLD="#8fa3b8";/* Lãnh cung / Phế phi: cool steel grey */
+window.MRCOL=["#2fa08a","#12b58c","#3a78e0","#e4552b","#8d5ee6"];/* maids: thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet */
+window.ERCOL=["#7fa850","#20a860","#2f8ac8","#c4642a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
+const KIT_ROLE={emp:"#f0a800",th:"#d0701a",ty:"#12b5ac",prince:"#1f9be8",princess:"#f0543c",stranger:"#6e7681",official:"#3a6fe0",guard:"#5879a8",mama:"#b97a2a",slate:"#5a7a9a"};/* non-rank roles (never pink/purple for men) */
 const ORIGINS=[
  {k:"tt",n:"Con gái Tể tướng",r:2,o:{danh:25,bac:150},hh:-15,th:5,art:{cam:1},t:"Nhà quyền thế. Hoàng hậu coi ngươi là mối lo."},
  {k:"dtq",n:"Con gái Đại tướng quân",r:1,o:{danh:15,suc:100,bac:80},hh:0,th:0,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},
@@ -2787,7 +2785,7 @@ function searchMaids(){if(!can(2))return;const head=S.staff.find(s=>s.role==="ma
 try{if(!$("title").hidden)wireOpt()}catch(e){}
 /* ================= PERSON CARD: portrait box, info under it, actions on the right; one card at a time with a face strip ================= */
 const PG={};
-function pFaceOf(p){if(!p)return{src:"",ini:"?",col:"#8a7a6a"};if(p.kind==="emp")return pEmp();if(p.kind==="th")return pTH();if(p.kind==="maid")return pMaid();if(p.kind==="ty")return pDoc();
+function pFaceOf(p){if(!p)return{src:"",ini:"?",col:KIT_ROLE.slate};if(p.kind==="emp")return pEmp();if(p.kind==="th")return pTH();if(p.kind==="maid")return pMaid();if(p.kind==="ty")return pDoc();
  if(p.kind==="ksp")return{src:courtSrc("ksp",S.court&&S.court.ksp),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="peddler")return{src:courtSrc("ped",S.court&&S.court.ped),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="kid"&&p.ref)return kidFace(p.ref);
  if(p.kind==="hh"&&p.ref){const f=pv(p.ref);return f}if(p.ref&&p.kind!=="kid"&&p.kind!=="chest")return pv(p.ref);return{src:"",ini:p.ini,col:p.col}}
 function pcPort(f,col,status){const rb=/^c\d/.test(f.rk||"")&&RIMG[+f.rk.slice(1)]?`<img class="pcb2" src="https://ctm-img.victoria-tntt.workers.dev/img/${RIMG[+f.rk.slice(1)]}.webp" alt="" onerror="this.remove()">`:"";return `<div class="pcp${f.src?"":" noimg"}${f.rk?" rk-"+f.rk.split(" ").join(" rk-"):""}" style="--c:${col||f.col||"var(--gold)"}">${f.src?`<img src="${f.src}" alt="" data-i="${f.ini||""}" onerror="kitImgErr(this,{cls:'noimg',swap:1})">`:(f.ini||"")}${rb}${status?`<em class="pcs">${status}</em>`:""}</div>`}
@@ -6057,10 +6055,8 @@ setTimeout(tabsFit,0);
    anyone's height. Adult women share one head-to-feet height, men are 7% taller, children shorter by age. Feet stand on
    one floor line. Her figure keeps the same height as everyone else and gets a thin outline glow in her rank colour instead (gentle pulse
    only when "Hiệu ứng hình" is on and the system does not ask for reduced motion). */
-/* KIT · rank colour palette (owner 11/14), set on the shared RCOL from j1 so badges, frames and the halo all follow:
+/* KIT · rank colour palette: the values live ONLY in j1 (RCOL / MRCOL / ERCOL / RCOL_COLD / KIT_ROLE); this module just reads them. Families:
    Đáp ứng nâu xám, Thường tại xanh lục, Quý nhân xanh lam, Tần hồng phấn, Phi tím, Quý phi đỏ, Hoàng quý phi cam, Hoàng hậu vàng; lãnh cung #cfd3d8 */
-window.MRCOL=["#9aa3a8","#5fa39a","#4f74a8","#a0584a","#6a5a8e"];window.ERCOL=["#8f9a8a","#5f8a6a","#3f6a8a","#7a4a3a"];
-try{["#9c8f74","#7aa07a","#6a8aa0","#d48fa6","#a07ab0","#c06a6a","#d98a3a","#f0d070"].forEach((c,i)=>{RCOL[i]=c})}catch(e){}
 (function(){
 const J59BB={},J59W={};
 /* figure body box: the kit measurement (kitFigBody, jkit) — J59BB stays as the read cache other modules use */
@@ -6071,7 +6067,7 @@ function j59fac(src,p){return KIT_FIG.fac(src,j59age(p))}
 let j59q=0;function j59sched(){if(j59q)return;j59q=requestAnimationFrame(()=>{j59q=0;j59lay()})}
 /* KIT · rank halo colour: one source for "her rank colour" = RCOL (j1, same list the rank badges/frames use); lãnh cung = pale grey */
 function j59srv(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
-function haloColor(){try{if(S&&S.out)return"#cfd3d8";if(j59srv())return(window.MRCOL||[])[S.srv.rk||0]||"#9aa3a8";const k=S&&S.rank!=null?S.rank:0;return(typeof RCOL!=="undefined"&&RCOL[k])||"#f0d070"}catch(e){return"#f0d070"}}
+function haloColor(){try{if(S&&S.out)return RCOL_COLD;if(j59srv())return(window.MRCOL||[])[S.srv.rk||0]||"#9aa3a8";const k=S&&S.rank!=null?S.rank:0;return(typeof RCOL!=="undefined"&&RCOL[k])||"#f0d070"}catch(e){return"#f0d070"}}
 window.haloColor=haloColor;
 /* scene name tags: title/role (small, on top) above the name, from the game's own ladders */
 function j59esc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
@@ -6089,10 +6085,10 @@ function j59title(p){try{if(!p)return"";if(p===S)return j59srv()?SRK.maid[S.srv.
 function j59known(p){try{if(typeof kitKnown!=="function")return true;const w=p===S?S:typeof figWho==="function"?figWho(p):p&&(p.ref||p);return kitKnown(w,p)!==false}catch(e){return true}}
 /* KIT · title colours: MRCOL/ERCOL (set at the top of this module), Emperor imperial gold, Thái hậu deep amber, others slate */
 
-const J59C={emp:"#c9a227",th:"#b06f1c",slate:"#5a6878"};
+const J59C=KIT_ROLE;
 function j59col(p){try{if(p===S)return haloColor();const k=p&&p.kind;if(k==="emp")return J59C.emp;if(k==="th")return J59C.th;if(k==="hh")return RCOL[7];
  const w=typeof figWho==="function"?figWho(p):(p.ref||p);if(!w)return J59C.slate;
- if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return w.out?"#cfd3d8":RCOL[w.queen?7:w.rank]||J59C.slate;
+ if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return w.out?RCOL_COLD:RCOL[w.queen?7:w.rank]||J59C.slate;
  if(w===S.maid||w.role==="maid")return MRCOL[srk(w)]||MRCOL[1];
  if(w.role==="eunuch"||w===(S.court||{}).tq||w===(S.court||{}).ksp||w===(S.court||{}).ped)return ERCOL[w.role==="eunuch"?srk(w):3]||ERCOL[1];
  return w.hcol||w.houseCol||J59C.slate}catch(e){return J59C.slate}}
@@ -6259,10 +6255,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
 const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
 const HG=(a,c)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
 const css=document.createElement("style");css.textContent=`
-/* rank badge fills follow the new RCOL (c0 trắng ngà ngọc trai, owner 11/15; c1 xanh lục, c3 hồng phấn; others already match) */
-.rk-c0{background:linear-gradient(160deg,#fbf8f1,#e6dfcf)!important;border-color:#9c8f74!important}
-.rk-c1{background:linear-gradient(160deg,#d6e6d0,#a3c39b)!important;border-color:#7aa07a!important}
-.rk-c3{background:repeating-linear-gradient(45deg,#f6dbe4 0 6px,#ecc6d3 6px 12px)!important;border-color:#d48fa6!important}
+/* portrait ground classes .rk-c0..c7 are generated from RCOL by the "kit-rk" style in jk4, not typed here */
 .stage.j59{--halo:#f0d070}
 #popw.j59dock{grid-area:panel;position:relative;z-index:4;min-height:0;min-width:0;display:flex}
 #popw.j59dock:empty{display:none}
@@ -9890,7 +9883,7 @@ function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ 
   lines:[`<b>${q72Title(X)}</b>`,`${KIND72[T.kind]} · bước ${x.st+1}/${T.s.length} · còn <b class="${left<=1?"r":""}">${left} tuần</b>`,X.B?`Liên quan: ${mdH(X.B.f,"xs")} ${X.B.n}`:"",dt?(dt>0?`<span class="g">${q72Short(X.A)} đang nợ ngươi ${dt} ân</span>`:`<span class="r">Ngươi đang nợ ${q72Short(X.A)} ${-dt} ân</span>`):""],
   chips:[chip(`Thành: ${ok.map(plain).join(", ")||"êm chuyện"}`,"ok"),chip(`Hỏng/lỡ hẹn: ${no.map(plain).join(", ")}`,"hot"),bad.length?chip(`Bại lộ: ${bad.map(plain).join(", ")}`,"hot"):""],
   groups:[["Bước này",B],["Các bước",rows.concat(lg)],["Bỏ việc",[drop]]]})}
-function q72HCard(h){const f=h.f||{ini:"?",col:"#8a7a6a"};const seal=h.res==="ok"?`<span class="g">Xong</span>`:h.res==="bad"?`<span class="r">Bại lộ</span>`:h.res==="gone"?"Dừng giữa chừng":`<span class="r">Không thành</span>`;
+function q72HCard(h){const f=h.f||{ini:"?",col:KIT_ROLE.slate};const seal=h.res==="ok"?`<span class="g">Xong</span>`:h.res==="bad"?`<span class="r">Bại lộ</span>`:h.res==="gone"?"Dừng giữa chừng":`<span class="r">Không thành</span>`;
  return pcard({f,name:h.n||"",rank:f.rw||"",tabKey:"q72h",lines:[`<b>${h.t}</b>`,seal,h.end||"",h.tok?`Kết quả: ${h.tok}`:""],groups:[["Đã làm",(h.lg||[]).map(t=>`<div class="pcrow"><span>${t}</span></div>`)]],empty:"Không còn việc gì cần làm."})}
 function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
  let h=`<div class="ph"><span>Việc nhờ đang làm <b>${q.a.length}/${Q72CFG.max}</b> · lời nhờ tháng này ${mo}/${Q72CFG.mo}</span><span>Xong ${q.n.ok||0} · hỏng ${(q.n.fail||0)+(q.n.bad||0)} · từ chối ${q.n.dec||0}</span></div>`;
@@ -10779,8 +10772,8 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
         kitKnown(p) (hook, default true, overridable: assign window.kitKnown) · KIT_RANK_COL[rank|'cold'] (live view of RCOL).
    Wraps pcPort, mdH, pcard, renderStage and the face constructors; no other module is edited. ================= */
 const KIT_DIR="https://ctm-img.victoria-tntt.workers.dev/img/kit/";
-/* ONE rank palette: the global RCOL (j1, re-set by j59) for ranks 0..7, plus lãnh cung grey; read live, never copied */
-const KIT_COLD_COL="#cfd3d8";
+/* ONE rank palette: the global RCOL (j1) for ranks 0..7, plus lãnh cung grey; read live, never copied */
+const KIT_COLD_COL=RCOL_COLD;
 const KIT_RANK_COL=new Proxy({},{get:(t,k)=>k==="cold"||k==="8"?KIT_COLD_COL:(typeof RCOL!=="undefined"?RCOL[k]:undefined),has:(t,k)=>k==="cold"||(+k>=0&&+k<8)});
 function kitRankCol(r){return r==="cold"?KIT_COLD_COL:RCOL[Math.max(0,Math.min(7,+r||0))]}
 /* roles with their frame / ground / rim metal */
@@ -10790,7 +10783,7 @@ const KIT_ROLES={player:{n:"Ngươi",sex:"f",metal:null},consort:{n:"Phi tần",
  official:{n:"Quan",sex:"m",metal:"#a8742f"},physician:{n:"Thái y",sex:"m",metal:"#c9a86a"},man:{n:"Nam nhân",sex:"m",metal:"#c9ccd2"},royal:{n:"Vương gia",sex:"m",metal:"#d9b25f"},
  guard:{n:"Thị vệ",sex:"m",metal:"#9aa2a8"},unknown:{n:"Người lạ",sex:"f",metal:"#b8bcc2"},other:{n:"",sex:"f",metal:"#c9a24a"}};
 /* servant rank palettes (owner 11/14): maids thô sử..nữ quan, eunuchs tiểu thái giám..tổng quản; a global MRCOL/ERCOL wins when defined */
-window.KIT_MRCOL=window.KIT_MRCOL||["#9aa3a8","#5fa39a","#4f74a8","#a0584a","#6a5a8e"];window.KIT_ERCOL=window.KIT_ERCOL||["#8f9a8a","#5f8a6a","#3f6a8a","#7a4a3a"];
+window.KIT_MRCOL=window.MRCOL;window.KIT_ERCOL=window.ERCOL;/* aliases of the j1 palette, never copies of values */
 function kitServCol(role,r){const M=typeof MRCOL!=="undefined"?MRCOL:window.KIT_MRCOL,E=typeof ERCOL!=="undefined"?ERCOL:window.KIT_ERCOL;const L=role==="eunuch"?E:M;return L[Math.max(0,Math.min(L.length-1,+r||0))]}
 const KIT_ORIGINS=["tt","dtq","muoi","cn","nc","td","ch","thd"];
 /* the hook another worker implements; keep the name; override by assigning window.kitKnown */
@@ -10851,7 +10844,7 @@ function kitFace(p){try{if(!p)return{src:"",ini:"?"};if(p===S)return pMe();if(p=
  if(p.kind&&typeof pFaceOf==="function"&&!p.name)return pFaceOf(p);if(rivals.includes(p))return pv(p);if(allKids().some(([k])=>k===p))return kidFace(p);
  if(p.role==="maid"||p.role==="eunuch")return pServ(p);if(S.court){const k=Object.keys(S.court).find(x=>S.court[x]===p);if(k)return k==="ty"?pDoc():pEunCourt(k)}
  if((S.men||[]).includes(p))return pMan(p);if(typeof pMin==="function"&&typeof CLANS!=="undefined"&&p.c&&CLANS.includes(p.c))return pMin(p);if(typeof h54Face==="function"&&(p.off||p.house))return h54Face(p)}catch(e){}
- const f={src:"",ini:String(p.name||"?").split(" ").pop()[0]||"?",col:"#8a7a6a"};f.__kp=p;f.__kr=personRoleRank(p);return f}
+ const f={src:"",ini:String(p.name||"?").split(" ").pop()[0]||"?",col:KIT_ROLE.slate};f.__kp=p;f.__kr=personRoleRank(p);return f}
 /* ONE helper: size "lg" = the tall 3:4 frame (pframe), "big"/"sm"/"xs"/"" = round avatar */
 function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.size==="frame"?pframe(f):mdH(f,o.size||"")}
 /* the tall frame: one picture per frame (550x1037: every frame has the SAME portrait opening 384x506 at (83,214); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); the box is 480 canvas units wide and as tall as the canvas, the stage (.kin) is scaled by the opening (box width / 480) and centred, so every opening is identical; side ornaments may reach past the box edges, crest and tassel are inside its height */
@@ -11659,7 +11652,7 @@ function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return
 /* KIT 48.1: the rank-title colour of a title (kitRankTone lives in jk4, later in the build; until then the CSS falls back to --rc) */
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
- const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
+ const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
 function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
@@ -23780,14 +23773,33 @@ window.kitNameRank=kitNameRank;
    Classes: `.krt` title, `.krn` name (kitNameRank sets both); the same look is given (CSS below) to every rank-over-name block that is built
    elsewhere: stage name tags (.j59t / .j59n), kitEventDp / 32.7 captions (.kpsn .kname .kti — kitName sets --rt on .kti), person cards
    (.pcrk over .pcname), the Tuần lục person heading (.kbk-pname). Inline titles inside sentences (kitName in prose) keep the plain look. */
-const KIT_RT=[[/hoàng quý phi/,"#b04a00"],[/phế phi|lãnh cung/,"#5d6b7a"],[/quý phi/,"#c8102e"],[/hoàng hậu/,"#8c5f00"],[/thái hậu/,"#9c4f12"],
- [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,"#8f6800"],[/phi$/,"#7e3cc8"],[/(^|\s)tần$/,"#c42a78"],[/quý nhân/,"#1f5fcc"],[/thường tại/,"#1a7f37"],
- [/đáp ứng/,"#876638"],[/thô sử/,"#52746a"],[/chưởng sự|cô cô/,"#b4441e"],[/nữ quan/,"#6a46b8"],[/đại cung nữ/,"#2f5db0"],[/cung nữ|thị nữ/,"#0a7d68"],
- [/ma ma|nhũ mẫu|vú/,"#8f5a24"],[/tổng quản/,"#934414"],[/thủ lĩnh/,"#2a5f92"],[/tiểu thái giám/,"#59743a"],[/thái giám|nội giám/,"#1f7a48"],
- [/thái y|ngự y/,"#0a7d76"],[/hoàng tử|thái tử|vương/,"#1a6fb8"],[/công chúa/,"#bf412b"],[/người lạ/,"#666666"],
- [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,"#2f55a4"],[/thị vệ|vệ|lính|tướng/,"#465f80"]];
+/* KIT 48.1f THE TONE (owner 11/16 13:00Z "nhạt nhòa → tươi hơn"): the colour of a title on PAPER is DERIVED from the one palette (RCOL / MRCOL / ERCOL /
+   RCOL_COLD / KIT_ROLE, j1): same hue, saturation kept high, lightness lowered only as far as needed for >= 4.0:1 on parchment (bold serif title) #fbf3e2.
+   No second table of hexes: change a base in j1 and every title, chip, ring, halo and portrait ground changes with it. */
+const KIT_TONE_CACHE={};
+function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[key])return KIT_TONE_CACHE[key];
+ const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),lin=c=>(c/=255)<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4),lum=h=>{const[r,g,b]=rgb(h).map(lin);return .2126*r+.7152*g+.0722*b};
+ const P=paper||"#fbf3e2",cr=h=>{const a=lum(h),b=lum(P);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+ let[r,g,b]=rgb(base).map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b);let l=(M+m)/2,s=0,H=0;
+ if(M!==m){const d=M-m;s=l>.5?d/(2-M-m):d/(M+m);H=M===r?(g-b)/d+(g<b?6:0):M===g?(b-r)/d+2:(r-g)/d+4;H*=60}
+ if(s>=.4)s=Math.max(s,.75);/* vivid families stay vivid; steel-grey stays grey */
+ const hx=(H,s,l)=>{const f=n=>{const k=(n+H/30)%12,a=s*Math.min(l,1-l);return Math.round((l-a*Math.max(-1,Math.min(k-3,9-k,1)))*255).toString(16).padStart(2,"0")};return"#"+f(0)+f(8)+f(4)};
+ let x=hx(H,s,l);while(cr(x)<4&&l>.04){l-=.005;x=hx(H,s,l)}return KIT_TONE_CACHE[key]=x}
+window.kitToneOf=kitToneOf;
+/* title words -> the BASE colour (read live from the j1 palette), then kitToneOf */
+const KIT_RT=[[/hoàng quý phi/,()=>RCOL[6]],[/phế phi|lãnh cung/,()=>RCOL_COLD],[/quý phi/,()=>RCOL[5]],[/hoàng hậu/,()=>RCOL[7]],[/thái hậu/,()=>KIT_ROLE.th],
+ [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,()=>KIT_ROLE.emp],[/phi$/,()=>RCOL[4]],[/(^|\s)tần$/,()=>RCOL[3]],[/quý nhân/,()=>RCOL[2]],[/thường tại/,()=>RCOL[1]],
+ [/đáp ứng/,()=>RCOL[0]],[/thô sử/,()=>MRCOL[0]],[/chưởng sự|cô cô/,()=>MRCOL[3]],[/nữ quan/,()=>MRCOL[4]],[/đại cung nữ/,()=>MRCOL[2]],[/cung nữ|thị nữ/,()=>MRCOL[1]],
+ [/ma ma|nhũ mẫu|vú/,()=>KIT_ROLE.mama],[/tổng quản/,()=>ERCOL[3]],[/thủ lĩnh/,()=>ERCOL[2]],[/tiểu thái giám/,()=>ERCOL[0]],[/thái giám|nội giám/,()=>ERCOL[1]],
+ [/thái y|ngự y/,()=>KIT_ROLE.ty],[/hoàng tử|thái tử|vương/,()=>KIT_ROLE.prince],[/công chúa/,()=>KIT_ROLE.princess],[/người lạ/,()=>KIT_ROLE.stranger],
+ [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,()=>KIT_ROLE.official],[/thị vệ|vệ|lính|tướng/,()=>KIT_ROLE.guard]];
 function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
- for(const [re,c] of KIT_RT)if(re.test(s))return c;return col?`color-mix(in srgb,${col} 80%,#000)`:"#7a5a30"}
+ for(const [re,c] of KIT_RT)if(re.test(s))return kitToneOf(c());return /^#[0-9a-f]{6}$/i.test(col||"")?kitToneOf(col):KIT_ROLE.slate}
+/* KIT 48.1g PORTRAIT GROUND .rk-c0..c7 (the round avatar / portrait ground by rank): generated from RCOL (was typed in p1.html + j59, two stale copies) */
+(function(){const m=(c,p)=>`color-mix(in srgb,${c} ${p}%,#fff)`;let css="";
+ RCOL.forEach((c,i)=>{const bg=i===3||i===4?`repeating-linear-gradient(45deg,${m(c,22)} 0 6px,${m(c,38)} 6px 12px)`:i>=5?`radial-gradient(circle at 30% 20%,${m(c,28)},${m(c,66)})`:`linear-gradient(160deg,${m(c,20)},${m(c,52)})`;
+  css+=`.rk-c${i}{background:${bg}!important;border-color:${c}!important${i>=6?`;box-shadow:0 0 0 1px #fff,0 0 0 3px ${m(c,70)},0 3px 10px ${c}55!important`:""}}\n`});
+ const st=document.createElement("style");st.id="kit-rk";st.textContent=css;document.head.appendChild(st)})();
 window.kitRankTone=kitRankTone;window.KIT_RT=KIT_RT;
 /* KIT 48.1b (owner 15/11 ~20:10Z): HER own name (the local player's character only, also in co-op) = black ink + a soft light-gold glow
    (class .kmy on the name line), so she spots herself at once; everybody else's name stays plain ink. kitIsMyName(name) = it is S.name. */
@@ -23833,10 +23845,10 @@ html body #mb .kesov>.kpsn,html body #modal .dlg.kdper .kes>.kpsn.kdpcap,html bo
 /* 48.3 (owner 15/11 session 8): a title INSIDE a line (kitName in prose, picker rows, lists, logs, toasts; kitRankPaint) is in its rank
    tone too — plain text, no glow, no outline, the line's own font; lightened on .modal.night (below) */
 html body .kname .kti{color:var(--rt,inherit)!important;text-shadow:none!important}
-html body .modal.night .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
+html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
-html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
+html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
 html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;
@@ -29639,7 +29651,7 @@ function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors()
  else{h+=q.np.length?`<div class="ktpeople">${q.np.map(z=>{const v=RV(z.a);return `<div class="ktprow">${v?kitPersonLine(v,{sub:`${z.w} · ${z.t}`}):`<div class="kpl"><span class="kplt">${z.t}<small>${z.w}</small></span></div>`}</div>`}).join("")}</div>`:kitEmpty("Việc nhờ","Chưa nghe chuyện gì.")}
  return h}
 function ktPerson(a,what){const v=a&&a.id!=null&&typeof RV==="function"?RV(a.id):null;if(v&&v.name)return kitPersonLine(v,{sub:what});
- const f=a&&a.f||{ini:"?",col:"#8a7a6a"};return `<div class="kpl">${typeof mdH==="function"?mdH(f,"sm"):""}<span class="kplt"><b>${ktEsc(q72Short(a))}</b><small>${what}</small></span></div>`}
+ const f=a&&a.f||{ini:"?",col:KIT_ROLE.slate};return `<div class="kpl">${typeof mdH==="function"?mdH(f,"sm"):""}<span class="kplt"><b>${ktEsc(q72Short(a))}</b><small>${what}</small></span></div>`}
 function ktPersonK(k,name,what){let v=null;try{const m=/^r(\d+)$/.exec(k)||/^(\d+)$/.exec(k);if(m)v=RV(+m[1])}catch(e){}if(v&&v.name)return kitPersonLine(v,{sub:what});return `<div class="kpl"><span class="kplt"><b>${ktEsc(name)}</b><small>${what}</small></span></div>`}
 if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 (function(){const st=document.createElement("style");st.id="kit-tabs";st.textContent=`
@@ -30080,12 +30092,17 @@ KIT_SAMPLES.push(
  {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
 KIT_SAMPLES.push(
- {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu","#3f62a8")}${kitNameRank("Đáp ứng","Trịnh Ngọc Hành","#9c8f74")}${kitNameRank("","Hoàng thượng","#b08a2a")}</div>`},
+ {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu",kitRankCol(2))}${kitNameRank("Đáp ứng","Trịnh Ngọc Hành",kitRankCol(0))}${kitNameRank("","Hoàng thượng",KIT_ROLE.emp)}</div>`},
+ {id:"§1.3",title:"Bảng màu phẩm DUY NHẤT (RCOL · MRCOL · ERCOL · lãnh cung): màu gốc tươi + màu chữ trên giấy (kitToneOf) + hàng chọn",html:()=>{
+  const S3=[["Đáp ứng",RCOL[0]],["Thường tại",RCOL[1]],["Quý nhân",RCOL[2]],["Tần",RCOL[3]],["Phi",RCOL[4]],["Quý phi",RCOL[5]],["Hoàng quý phi",RCOL[6]],["Hoàng hậu",RCOL[7]],["Lãnh cung",RCOL_COLD],
+   ["Thô sử",MRCOL[0]],["Cung nữ",MRCOL[1]],["Đại cung nữ",MRCOL[2]],["Chưởng sự cô cô",MRCOL[3]],["Nữ quan",MRCOL[4]],["Tiểu thái giám",ERCOL[0]],["Thái giám",ERCOL[1]],["Thủ lĩnh",ERCOL[2]],["Tổng quản",ERCOL[3]]];
+  const sw=([n,c])=>`<span style="display:inline-flex;align-items:center;gap:6px;margin:3px 10px 3px 0"><i class="rk-swatch" style="display:inline-block;width:22px;height:22px;border-radius:50%;background:${c};border:2px solid #fff;box-shadow:0 0 0 1px ${c}"></i><b class="kname"><span class="kti" style="--rt:${kitToneOf(c)}">${n}</span></b></span>`;
+  return `<div style="padding:10px;border-radius:8px;background:#fbf3e2">${S3.map(sw).join("")}</div><div style="padding:10px;margin-top:8px;border-radius:8px;background:#fbf3e2">${RCOL.map((c,i)=>`<span class="md rk-c${i}" style="display:inline-block;width:34px;height:34px;border-radius:50%;margin:2px 6px 2px 0;border:2px solid;--c:${c}"></span>`).join("")}</div>`}},
  {id:"§48.1",title:"Danh hiệu phẩm (kitRankTone): mọi phẩm · nền sáng, nền tối, cảnh",html:()=>{const L=[["Đáp ứng","Trịnh Ngọc Hành"],["Thường tại","Lâm Uyển"],["Quý nhân","Khương Mạn Châu"],["Tần","Tô Vân"],["Phi","Mộ Dung Yên"],["Quý phi","Hàn Hồng Diệp"],["Hoàng quý phi","Thẩm Khinh Vũ"],["Hoàng hậu","Phó Thanh"],["Phế phi · lãnh cung","Lục Ca"],["Thái hậu","Thái hậu"],["Hoàng thượng","Hoàng thượng"],["Cung nữ thô sử","Tiểu Đào"],["Cung nữ","Hồng Ngọc"],["Đại cung nữ","Thanh Trúc"],["Chưởng sự cô cô","Tần cô cô"],["Nữ quan","Bạch Lộ"],["Ma ma","Quế ma ma"],["Tiểu thái giám","Tiểu Lộc"],["Thái giám","Phúc An"],["Thủ lĩnh thái giám","Lý Trung"],["Tổng quản thái giám","Lý Liên Anh"],["Thái y","Thẩm Minh"],["Thị vệ","Mạc Thừa Vũ"],["Lễ bộ thượng thư","Vương Tuấn"],["Hoàng tử","Dận Hữu"],["Công chúa","Minh Châu"],["Người lạ","???"]];
   const row=cls=>`<div class="kitpg-row ${cls}" style="padding:10px;border-radius:8px;${cls==="krs"?"background:linear-gradient(#26304a,#121624)":"background:#fbf3e2"}">${L.map(([r,n])=>kitNameRank(r,r===n?"":n)).join("")}</div>`;
   const me=cls=>`<div class="kitpg-row ${cls}" style="margin-top:8px;padding:10px;border-radius:8px;${cls==="krs"?"background:linear-gradient(#26304a,#121624)":"background:#fbf3e2"}">${kitNameRank("Tần","Tên của nàng (48.1b)","",true)}${kitNameRank("Tần","Người khác","")}</div>`;
   return row("")+`<div style="height:8px"></div>`+row("krs")+me("")+me("krs")}},
- {id:"§48.3",title:"Phẩm + tên trong dòng chữ (kitRankNameH / kitRankPaint): hàng chọn người, nhật ký · nền sáng, nền tối",html:()=>{const P=[["Hoàng hậu","Chu Thục Nghi","#d9b13a"],["Quý phi","Tần Kiều Nguyệt","#c8102e"],["Phi","Hạ Tố Tâm","#7e3cc8"],["Thường tại","Lâm Uyển","#1a7f37"],["Cung nữ thân tín","Ngọc Lan","#0a7d68"]];
+ {id:"§48.3",title:"Phẩm + tên trong dòng chữ (kitRankNameH / kitRankPaint): hàng chọn người, nhật ký · nền sáng, nền tối",html:()=>{const P=[["Hoàng hậu","Chu Thục Nghi",kitRankCol(7)],["Quý phi","Tần Kiều Nguyệt",kitRankCol(5)],["Phi","Hạ Tố Tâm",kitRankCol(4)],["Thường tại","Lâm Uyển",kitRankCol(1)],["Cung nữ thân tín","Ngọc Lan",MRCOL[1]]];
   const nm=([t,n,c])=>`<b class="kname" style="--rc:${c}"><span class="kti" style="--rt:${kitRankTone(t,c)}">${t}</span> ${n}</b>`;
   const box=(cls,bg)=>`<div class="${cls}" style="padding:10px;border-radius:8px;background:${bg}">${P.slice(0,3).map(x=>`<div style="padding:6px 8px;margin:4px 0;border:1px solid #c9a46a66;border-radius:6px">${nm(x)}</div>`).join("")}<p style="margin:6px 0 0">${nm(P[4])} nghe lén được chuyện của ${nm(P[1])}; ${nm(P[3])} được ban thưởng.</p></div>`;
   return box("","#fbf3e2")+`<div class="modal night" style="position:static;display:block;background:none;margin-top:8px">${box("","#140b08;color:#f3e6cf")}</div>`}},
@@ -39122,7 +39139,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="48eb7cbd01f6";window.CTM_BUILD=BUILD;
+const BUILD="3f184441c536";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

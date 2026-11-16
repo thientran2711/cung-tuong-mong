@@ -14,7 +14,7 @@ function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return
 /* KIT 48.1: the rank-title colour of a title (kitRankTone lives in jk4, later in the build; until then the CSS falls back to --rc) */
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
- const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
+ const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
 function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
