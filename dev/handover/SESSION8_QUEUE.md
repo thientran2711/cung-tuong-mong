@@ -10,7 +10,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | A2 | review/fxkit → r1 PASS f012058f3 | LIVE |
 | A3 | review/small-bugs-3 → r1 PASS d34b5116a | LIVE |
 | A4 | review/fix-float → r9 PASS 7ba53114d | LIVE (main fast-forwarded) |
-| A5 | review/coop-timer | REVIEWING (coop-timer-r1, HIGH: stuck-buổi fix + reconnect + countdown + friend chip) — NOTIFY OWNER WHEN LIVE |
+| A5 | review/coop-timer → r1 PASS b2690dfb3 (stuck-buổi fix, reconnect, countdown, friend chip KIT §69.2) | LIVE (owner notified) |
 | A6 | review/thaiy | QUEUED |
 | A7 | review/cycle (after A6; keep jcycle last) | QUEUED |
 | A8 | review/cal-plus | QUEUED |
@@ -25,7 +25,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | B2 | review/outside-r2-r1 FAIL 5 items → worker (owner asked s8) | RUNNING |
 
 ## C. Unfinished workers (§4 + §9)
-| C1 | review/face-sharp @ 23b3c13a (urgent part; HD batch continuing; KIT §71) | REVIEWING (face-sharp-r1, sonnet) |
+| C1 | face-sharp-r1 PASS ca5791108 → merge-train-1 (HD batch continuing) | MERGING |
 | C2 | review/rank-colour @ 99b8b62 (KIT §48.3) | REVIEWING together with pick-hint-r1 |
 | C3 | review/art-complete @ e8a7446e4+ (part 2 PAUSED by coordinator to free a slot; resume from /home/user/wt/artc PROGRESS) | QUEUED |
 | C4 | review/act-pics2 @ 5f80a2727 (237/380 live; 143 left from thu-cu-lot) | RESUME later (QUEUED) |
@@ -41,7 +41,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C14 | review/row-align @ 0886f329b | reviewer stopped (stuck) → re-review QUEUED-NEXT |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
 | C16 | review/item-info → r1 PASS 3ef079f61 | LIVE |
-| C17 | review/stage-fig-size @ 85c33890f (KIT §32.2a cap+crop, week book, aspect, identity figure retry) | REVIEWING (stage-fig-size-r1) |
+| C17 | stage-fig-size-r1 PASS 11881dfa1 → merge-train-1 | MERGING |
 
 ## D. UNASSIGNED owner asks (§5; ledger worker refines into dev/handover/OWNER_LEDGER.md)
 D35 → RUNNING as review/tutorial-r2 (+ goal card + goal chip, owner s8)
@@ -79,7 +79,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C20 | review/act-text @ 593e66b3a (PAUSED for slot; left: full after-scan 6 states, 755 panel scan fix, long rows) | QUEUED (resume) |
 | C21 | review/khac-day → r1 PASS 2d038139e (+ co-op walk-spill COOPW fix) | LIVE |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
-| C22 | review/boot-flash @ 6b1d6855d (boot cover + watchdog + kRx lookbehind fix for old Safari) | REVIEWING (boot-flash-r1, opus) |
+| C22 | boot-flash-r1 PASS 20f4d7c9e → merge-train-1 | MERGING |
 | C23 [→ FOREMAN B] | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
 | C24 [→ FOREMAN B] | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
 | C25 | review/press-fx @ bf4f654e3 | REVIEWING (press-fx-r1, URGENT + close-button fix) |
