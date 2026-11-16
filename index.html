@@ -18788,6 +18788,8 @@ const VL={base:[6,10,15,22,35,50,75,110,160],gMul:[1,1.5,2.2,3.2],cover:[2/3,.6,
 const VL_NAME=["Mạng sa","Mạng chuỗi bạc lưu ly","Mạng dây lụa hồng kết trai","Mạng bạc chạm hoa","Mạng vàng nhạt kết mã não","Mạng kim hoa ngọc bích","Mạng kim vân trân châu","Mạng kim ty mẫu đơn","Mạng phượng điểm thúy"];
 const VL_COVER=["che được ít","che khá kín","che kín","che rất kín","che kín, lại là ân điển"];
 function vlKey(P,g){return g>=4?"mcnt":`mc${cl(P|0,0,8)}${cl(g|0,0,3)}`}
+/* a veil is worn over a wounded (j70 scar) or rashy (jrash) face */
+function vlNeed(p){return !!(p&&(p.scar||p.rash))}
 function vlIsK(k){return typeof k==="string"&&/^mc(nt|\d\d)$/.test(k)}
 function vlIs(e){return !!(e&&vlIsK(e.k))}
 function vlP(e,p){if(!vlIs(e))return 0;if(e.k==="mcnt")return Math.min(8,wdPOf(p||S));return +e.k[2]}
@@ -18806,19 +18808,19 @@ function vlSrc(k,p){const t=vlTier({k},p||S);return `https://ctm-img.victoria-tn
 /* ---------- worn veil <-> p.scar.veil; old saves ---------- */
 function vlMig(p){try{if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;if(p.scar)vlMig(p);else if(p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;if(p.scar)vlMig(p);if(!vlNeed(p)&&p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{for(const p of vlPeople())vlMig(p)}catch(e){}return r}})();
 const VL_TIER0=KIT_VEIL.tierOf.bind(KIT_VEIL);
-KIT_VEIL.on=function(p){try{if(!p||!p.scar)return false;vlMig(p);return !!p.vl}catch(e){return false}};
-KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&p.scar)return vlTier(p.vl,p)||VL_TIER0(p)}catch(e){}return VL_TIER0(p)};
+KIT_VEIL.on=function(p){try{if(!p||!vlNeed(p))return false;vlMig(p);return !!p.vl}catch(e){return false}};
+KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_TIER0(p)}catch(e){}return VL_TIER0(p)};
 /* the grade decides how much of the wound the veil hides (Thường = the old 2/3) */
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar&&p.scar.veil&&p.vl){const d=p.scar.d;r=cl(r+Math.round(d*2/3)-Math.round(d*VL.cover[vlG(p.vl)]),0,130)}}catch(e){}return r}})();
 (function(){const s0=scarOf;scarOf=function(p){const r=s0.apply(this,arguments);try{const q=p||S;if(r&&q.vl&&q.scar&&q.scar.veil)r.sacLost=Math.round(q.scar.d*VL.cover[vlG(q.vl)])}catch(e){}return r};window.scarOf=scarOf})();
 
 /* ---------- wear / take off (same function for everyone) ---------- */
-function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!p.scar)return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;p.scar.veil=1;return IT[e.k].n}
+function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return IT[e.k].n}
 function vlOff(p){if(!p||!p.vl)return"";const n=IT[p.vl.k].n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
 function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)&&!x.e.h)}
 /* useItem on a veil = wear it (never consumed) */
@@ -18834,13 +18836,13 @@ function vlReveal(obs,k,how){if(!vlIsK(k)||k==="mcnt")return"";if(obs===S){S.wdk
 (function(){const p0=wdP;wdP=function(e,p){if(vlIs(e))return vlP(e,p);return p0.apply(this,arguments)}})();
 (function(){const b0=wdBelPE;wdBelPE=function(obs,e,owner){if(vlIs(e)){if(e.k==="mcnt")return vlP(e,owner);if(vlKnows(obs,e))return vlP(e,owner);
   const n=WD.autoErr[wdHash(wdKey(obs)+e.k)%WD.autoErr.length];return vlP(e,owner)+n}return b0.apply(this,arguments)}})();
-(function(){const s0=wdStatusBy;wdStatusBy=function(p,pf){const s=s0.apply(this,arguments);try{if(s!=="tang"&&p&&p.vl&&p.scar&&p.vl.k!=="mcnt"){if(pf(p.vl)-Math.min(8,wdPOf(p))>=1)return "over"}}catch(e){}return s}})();
-(function(){const k0=wdKnownStatus;wdKnownStatus=function(p){if(p&&p.vl&&p.scar&&!vlKnows(S,p.vl))return null;return k0.apply(this,arguments)}})();
-(function(){const k0=wdKnowAll;wdKnowAll=function(obs,p){const r=k0.apply(this,arguments);try{if(p&&p.vl&&p.scar)vlReveal(obs,p.vl.k,"")}catch(e){}return r}})();
-(function(){const c0=wdCur;wdCur=function(p){const r=c0.apply(this,arguments);return p&&p.vl&&p.scar?r+"|"+p.vl.k:r}})();
+(function(){const s0=wdStatusBy;wdStatusBy=function(p,pf){const s=s0.apply(this,arguments);try{if(s!=="tang"&&p&&p.vl&&vlNeed(p)&&p.vl.k!=="mcnt"){if(pf(p.vl)-Math.min(8,wdPOf(p))>=1)return "over"}}catch(e){}return s}})();
+(function(){const k0=wdKnownStatus;wdKnownStatus=function(p){if(p&&p.vl&&vlNeed(p)&&!vlKnows(S,p.vl))return null;return k0.apply(this,arguments)}})();
+(function(){const k0=wdKnowAll;wdKnowAll=function(obs,p){const r=k0.apply(this,arguments);try{if(p&&p.vl&&vlNeed(p))vlReveal(obs,p.vl.k,"")}catch(e){}return r}})();
+(function(){const c0=wdCur;wdCur=function(p){const r=c0.apply(this,arguments);return p&&p.vl&&vlNeed(p)?r+"|"+p.vl.k:r}})();
 /* a successful hặc vượt phẩm also takes an over-phẩm veil (not a ngự tứ) */
 (function(){const a0=wdAccuse;wdAccuse=function(a,t){const pre=(()=>{try{return wdStatus(t)}catch(e){return""}})();const r=a0.apply(this,arguments);
-  try{if(pre==="over"&&t&&t.vl&&t.scar&&t.vl.k!=="mcnt"&&vlP(t.vl,t)>Math.min(8,wdPOf(t))&&/vượt phẩm: <span[^>]*>thành/.test(r)){const n=IT[t.vl.k].n;t.vl=null;t.scar.veil=0;return r+`${n} bị tịch thu. `}}catch(e){}return r}})();
+  try{if(pre==="over"&&t&&t.vl&&vlNeed(t)&&t.vl.k!=="mcnt"&&vlP(t.vl,t)>Math.min(8,wdPOf(t))&&/vượt phẩm: <span[^>]*>thành/.test(r)){const n=IT[t.vl.k].n;t.vl=null;if(t.scar)t.scar.veil=0;return r+`${n} bị tịch thu. `}}catch(e){}return r}})();
 
 /* ---------- getting one: the same functions for her and for every consort ---------- */
 /* bought / crafted entries keep their source in .src (no .from): j93 shows a gift chest only for real gifts (.from) */
@@ -18889,7 +18891,7 @@ PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O
  O.push(vlOpt({n:"Sai người mua lén ngoài cung",fx:{},x:ag?`tốn: 1 khắc · thành: rẻ hơn, nhiều kiểu · kèm: chưa rõ phẩm, lộ ra thì Danh -${VL.outDanh}`:"chưa có ma ma, thái giám hay cung nữ tin cẩn để sai",go:()=>{if(!ag||!can(1))return;pushDil(mkP("vlout"),"Mua lén ngoài cung")}}));
  for(const G of vlGivers(S))O.push(vlOpt({n:`Xin ${G.n} ban mạng`,fx:{},x:`${word(G.o)} · tốn: 1 khắc · thành: ${G.n} ban mạng Tinh phẩm đúng phẩm · hỏng: ${G.n} với ngươi -${VL.askFail}`,go:()=>{if(!can(1))return;spend(1);log(vlAsk(S,G.k));render()}}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
- return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
+ return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}${S.rash&&typeof rshOf==="function"?`Mặt ngươi nổi mẩn (${rshOf(S).name}): Sắc đang mất ${rshOf(S).lost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
 PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>Tự tay kết mạng che mặt bằng trò thêu. Phẩm của mạng là phần chơi, cộng ${a?a.n:"Thêu thùa"} bậc ${lv}, cộng vật liệu: thường thêm 0, tốt thêm 1, quý thêm 2.</p><p class="past">Dưới 6 ra mạng Thường, từ 6 Tinh phẩm, từ 10 Trân phẩm, từ 14 Tuyệt phẩm. Vật liệu quý ra kiểu mạng phẩm cao. Chơi được 5 phần: vải sa ra ${WD_GRADE[vlG({k:vlCraftOut(S,0,5)})]}, dây bạc ra ${WD_GRADE[vlG({k:vlCraftOut(S,1,5)})]}, kim tuyến ra ${WD_GRADE[vlG({k:vlCraftOut(S,2,5)})]}.</p>`,o:O}};
@@ -18916,9 +18918,9 @@ if(typeof wrapR==="function"){wrapR("vlWearUI",()=>"Đeo mạng che mặt")}
   d.o[i]=o}catch(e){console.error(e)}return d}})();
 
 /* ---------- Tư trang: the veil block (kit parts: kpsec, kitItem, kitFacts, act cards) ---------- */
-function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!S.scar&&!L.length&&!S.vl)return"";const sc=S.scar?scarOf(S):null;const pick=window.__vlPick;
+function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!vlNeed(S)&&!L.length&&!S.vl)return"";const sc=S.scar?scarOf(S):null;const pick=window.__vlPick;
  let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Mạng che mặt</h4>`;
- const note=sc?(S.vl?[`Mặt bị thương (${sc.name}) · đang che, Sắc mất ${sc.sacLost}`,"n"]:[`Mặt bị thương (${sc.name}) · chưa che, Sắc mất ${sc.sacLost}`,"no"]):["Mặt lành, chưa cần đeo","ok"];
+ const note=sc?(S.vl?[`Mặt bị thương (${sc.name}) · đang che, Sắc mất ${sc.sacLost}`,"n"]:[`Mặt bị thương (${sc.name}) · chưa che, Sắc mất ${sc.sacLost}`,"no"]):(S.rash&&typeof rashNote==="function"?rashNote(S):["Mặt lành, chưa cần đeo","ok"]);
  const wornT=S.vl?kitItem({src:vlSrc(S.vl.k),name:IT[S.vl.k].n,grade:vlG(S.vl),size:"md",on:true,tip:IT[S.vl.k].d}):kitItem({empty:true,name:"Chưa đeo mạng",size:"md"});
  h+=`<div class="kwdnow"><div class="kwear kwbig">${wornT}</div><div class="kwdnote">${kitChip(note[0],note[1])}${sc?`<span class="past">Còn ${sc.weeksLeft} tuần nữa mới lành.${S.vl?` ${vlKnows(S,S.vl)?"Đồ phẩm "+wdPName(vlP(S.vl,S)):"Chưa rõ phẩm của mạng."}`:""}</span>`:""}</div></div>`;
  const B0=[];if(S.vl)B0.push(pbtn(`data-vl="off"`,"Tháo mạng",`tốn: không tốn gì · thành: cất vào rương · kèm: Sắc mất trở lại ${S.scar?S.scar.d:0}`,""));
@@ -18926,7 +18928,7 @@ function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!S.scar&&!L.le
  h+=`<div class="rbtn">${B0.join("")}</div>`;
  if(L.length){h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:vlSrc(x.e.k),name:IT[x.e.k].n,grade:vlG(x.e),size:"lg",sel:x.ix===pick,label:vlKnows(S,x.e)?["đồ phẩm "+wdPName(vlP(x.e,S)),"n"]:null,data:`data-vlpick="${x.ix}" role="button" tabindex="0"`,tip:IT[x.e.k].d})).join("")+`</div>`;
   const x=L.find(y=>y.ix===pick);if(x){const e=x.e,it=IT[e.k],g=vlG(e);const B=[];
-   B.push(pbtn(`data-vl="wear" data-ix="${x.ix}"`,"Đeo mạng",`tốn: không tốn gì · thành: ${S.scar?`Sắc mất còn ${Math.round(S.scar.d*VL.cover[g])}`:"che vết thương"}${vlKnows(S,e)?"":" · kèm: chưa rõ phẩm, có thể vượt phẩm"}`,S.scar?"":"mặt lành, chưa cần đeo"));
+   B.push(pbtn(`data-vl="wear" data-ix="${x.ix}"`,"Đeo mạng",`tốn: không tốn gì · thành: ${S.scar?`Sắc mất còn ${Math.round(S.scar.d*VL.cover[g])}`:S.rash?"che chỗ nổi mẩn":"che vết thương"}${vlKnows(S,e)?"":" · kèm: chưa rõ phẩm, có thể vượt phẩm"}`,vlNeed(S)?"":"mặt lành, chưa cần đeo"));
    B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,e.k==="mcnt"?"đồ ngự tứ: không được đem tặng":whyTime(2)));
    B.push(pbtn(`data-it="sell" data-ix="${x.ix}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,e.k==="mcnt"?"đồ ngự tứ: bán là bất kính":""));
    /* KIT §70: the picked veil = the shared item detail (picture, name, grade, Được, Lai lịch, Ghi chú) with its acts */
@@ -18937,7 +18939,7 @@ function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}
 (function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const W=(S.inv||[]).filter(e=>vlIs(e)&&!e.h);W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
  let x="";try{x=vlInvHTML()}catch(e){console.error(e)}if(!x)return h;if(W.length)h=h.replace(/<p class="past">Rương trống\.[^<]*<\/p>/,"");
- if(S.scar)return x+h;const j=h.indexOf('<div class="ph"><span>Đang đeo');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
+ if(vlNeed(S))return x+h;const j=h.indexOf('<div class="ph"><span>Đang đeo');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-vl],[data-vlpick]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.vlpick!=null){window.__vlPick=+b.dataset.vlpick;try{render()}catch(e){}return}
  const a=b.dataset.vl;if(a==="get")vlGetUI();else if(a==="off")vlOffUI();else if(a==="wear")vlWearUI(+b.dataset.ix)},true);
@@ -18945,7 +18947,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- NPCs: the same ways, by trait and purse (monthly) ---------- */
 function vlNpcBestIx(v){const L=vlChest(v);if(!L.length)return -1;const P=Math.min(8,wdPOf(v));const bold=/Kiêu ngạo|Tham vọng/.test((typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" "));
  const ok=L.filter(x=>wdBelPE(v,x.e,v)<=P+(bold?1:0));const C=(ok.length?ok:L).sort((a,b)=>vlG(b.e)-vlG(a.e));return C[0].ix}
-function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!v.scar){if(v&&v!==S)vlSync(v);return}vlMig(v);if(v.vl)return;
+function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!vlNeed(v)){if(v&&v!==S)vlSync(v);return}vlMig(v);if(v.vl)return;
  let i=vlNpcBestIx(v);if(i<0){const P=Math.min(8,wdPOf(v));const k0=vlKey(P,0);
   if((v.bac||0)>=IT[k0].pr+10&&roll(VL.npcBuy)){const k=(v.bac||0)>=IT[vlKey(P,1)].pr+30&&roll(50)?vlKey(P,1):k0;vlBuyNvp(v,k)}
   else if(vlLv(v)>=1&&roll(VL.npcCraft)){const m=(v.bac||0)>=VL.mat[1]+20&&roll(50)?1:0;vlCraft(v,m,R(11))}
@@ -18953,16 +18955,235 @@ function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!v.scar){if(v&&v!==S)vlSyn
   i=vlNpcBestIx(v)}
  if(i>=0){vlWear(v,i);try{if(typeof knows!=="function"||knows(v))log(`${rkName(v)} ${v.name} đeo mạng che mặt.`)}catch(e){}}}
 /* friends send one to whoever is scarred and unveiled (her too: the gift arrives as the usual gift card) */
-function vlFriendGift(t){if(!t||!t.scar||t.vl||vlChest(t).length)return;const P=Math.min(8,wdPOf(t));const k=vlKey(P,0);
+function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const P=Math.min(8,wdPOf(t));const k=vlKey(P,0);
  const F=liveRivals(true).filter(v=>v!==t&&v.alive&&!v.out&&aff(v,t)>=50&&(v.bac||0)>=IT[k].pr+20);if(!F.length||!roll(VL.giftP))return;const v=pick(F);
  ap(v,{bac:-IT[k].pr});v.inv=v.inv||[];v.inv.push({k,from:"nvp"});const r=giveTo(v,t,v.inv.length-1);if(r&&t!==S&&(typeof knows!=="function"||knows(t)))try{log(r)}catch(e){}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){vlSync(S);for(const v of rivals)if(v)vlNpcMonth(v);vlFriendGift(S);for(const v of liveRivals(true))vlFriendGift(v)}}catch(e){console.error(e)}return r}})();
 /* healed faces put the veil back in the chest (weekly, after j70 heal70) */
-(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of vlPeople())if(p&&p.vl&&!p.scar)vlSync(p)}catch(e){}return r}})();
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of vlPeople())if(p&&p.vl&&!vlNeed(p))vlSync(p)}catch(e){}return r}})();
 /* the Emperor's bestowal on a scarred, unveiled consort may add a veil of her phẩm (Trân phẩm) */
-(function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&p.scar&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
+(function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&vlNeed(p)&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
   if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${kitItem({src:vlSrc(k),name:IT[k].n,grade:2,size:"lg"})}</p><p>Hoàng thượng thương ngươi bị thương trên mặt, ban thêm <b>${IT[k].n}</b> (Trân phẩm).</p>`,btn:"Tạ ơn"});log(`Được Hoàng thượng ban ${IT[k].n}.`)}}}catch(e){console.error(e)}return r}})();
 window.vlWear=vlWear;window.vlOff=vlOff;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;
+/* ================= jface: kitFaceFx — ONE shared layer for face conditions (owner 11/14 01:15Z, review/appearance) =================
+   Registry: KIT_FACEFX.add({id, z, ready, state(p), seen(p,st), sac(p,st), chip(p,st), html(p,file,st)}).
+     state(p)   → the true condition object or null (rules: Sắc, cards, healing run on this, whatever the player knows)
+     seen(p,st) → may the player see it on this face (herself, or she knows/has seen the person)
+     sac(p,st)  → Sắc lost while it lasts (added into effSac, so nights, contests, jealousy follow)
+     chip(p,st) → [text, cls] for the person card, shown only when seen
+     html(p,file,st) → the layer markup for one picture (por-* or fig-*), placed from the veil/scar fit boxes; "" when no fit data
+   ready=false keeps the PICTURE hidden (logic + chip still run) until the owner approves that entry's pilot.
+   Layer order everywhere: portrait < face fx (by z: 10 pallor/poison, 20 rash, 30 slap) < scar < veil < frame.
+   One hook each on kitFxLayers (portraits, small frames, room-stage and event-stage figures), effSac and pcard.
+   Entries here: ốm yếu (ill, CSS), trúng độc (doc, CSS), bị tát (tat, img/fx-slap.png), bị phạt quỳ/trượng (phat, chip only).
+   Postponed (no art yet, plug in later with add()): dưỡng nhan glow, tóc bạc sớm, đậu mùa marks. jrash registers itself here. ================= */
+window.KIT_FACEFX={list:[],
+ add:function(d){if(!d||!d.id)return;this.list=this.list.filter(x=>x.id!==d.id);d.z=d.z==null?50:d.z;this.list.push(d);this.list.sort((a,b)=>a.z-b.z)},
+ get:function(id){return this.list.find(x=>x.id===id)||null},
+ each:function(p,fn){if(!p)return;for(const d of this.list){let st=null;try{st=d.state(p)}catch(e){st=null}if(st)try{fn(d,st)}catch(e){}}},
+ seenOf:function(d,p,st){try{return d.seen?!!d.seen(p,st):(p===S)}catch(e){return false}},
+ /* geometry helpers: the veil-fit box (whole lower face, band = nose bridge) and the scar-fit box (cheek facing the viewer) */
+ box:function(tbl,file,x){const n=String(file||"").split("/").pop();const r=tbl&&tbl[n];if(!r)return "";x=x||{};const dx=x.dx||0,dy=x.dy||0,sw=x.sw||1,sh=x.sh||1;
+  return `left:${(r[0]+r[2]*dx).toFixed(2)}%;top:${(r[1]+r[3]*dy).toFixed(2)}%;width:${(r[2]*sw).toFixed(2)}%;height:${(r[3]*sh).toFixed(2)}%;transform:rotate(${r[4]}deg);transform-origin:${x.o||"50% 16.5%"}`},
+ faceBox:function(file){return this.box(window.KIT_VEIL&&KIT_VEIL.fit,file)},
+ cheekBox:function(file,x){return this.box(window.KIT_SCAR&&KIT_SCAR.fit,file,Object.assign({o:"50% 50%"},x||{}))},
+ /* the CSS face tint (no painted art): backdrop pallor + tint + under-eye shadow + lip colour; v = {sat,br,tint,eye,lip} */
+ cssFace:function(file,cls,v){const st=this.faceBox(file);if(!st)return "";const ex=KIT_FACEFX.get("expr");const lm=!!(ex&&ex.ready&&window.KIT_EXPR&&KIT_EXPR.has(file));const vars=`;--sat:${v.sat};--br:${v.br};--tint:${v.tint}`+(lm?"":`;--eye:${v.eye};--lip:${v.lip}`);
+  return `<i class="kff ${cls}" aria-hidden="true" style="${kitFxVars(st)}${vars}"><b class="pl"></b><b class="tn"></b><b class="ey"></b><b class="lp"></b></i>`}};
+window.kitFaceFx=KIT_FACEFX;
+(function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){let h=f0.apply(this,arguments);if(!p||!file)return h;let pre="";
+  KIT_FACEFX.each(p,(d,st)=>{if(d.ready&&d.html&&KIT_FACEFX.seenOf(d,p,st)){const x=d.html(p,file,st);if(x)pre+=x}});return pre+h}})();
+(function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{let lost=0;KIT_FACEFX.each(p,(d,st)=>{if(d.sac)lost+=d.sac(p,st)||0});if(lost)r=cl(r-lost,0,130)}catch(e){}return r}})();
+(function(){const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const nm=String(o.name).replace(/<[^>]*>/g,"");const p=nm===S.name?S:rivals.find(v=>v.name===nm);
+  if(p){const C=[];KIT_FACEFX.each(p,(d,st)=>{if(d.chip&&KIT_FACEFX.seenOf(d,p,st)){const c=d.chip(p,st);if(c)C.push(chip(c[0],c[1]||"hot"))}});if(C.length)o=Object.assign({},o,{chips:(o.chips||[]).concat(C)})}}}catch(e){}return p0.call(this,o)}})();
+(function(){const st=document.createElement("style");st.id="kface-fx";st.textContent=`
+.kfx>i.kff,.kfxf>i.kff{position:absolute;display:block;pointer-events:none;left:var(--fleft);top:var(--ftop);width:var(--fwidth);height:var(--fheight);transform:var(--ftf,none);transform-origin:var(--fto,50% 16.5%)}
+.kff>b{position:absolute;inset:0;display:block}
+.kff>b.pl,.kff>b.tn{inset:-42% -10% -4% -10%}
+.kff>b.pl{-webkit-backdrop-filter:saturate(var(--sat)) brightness(var(--br));backdrop-filter:saturate(var(--sat)) brightness(var(--br));-webkit-mask-image:radial-gradient(44% 46% at 52% 48%,#000 50%,transparent 100%);mask-image:radial-gradient(44% 46% at 52% 48%,#000 50%,transparent 100%)}
+.kff>b.tn{background:radial-gradient(42% 44% at 52% 48%,var(--tint) 0%,transparent 100%)}
+.kff>b.ey{background:radial-gradient(11% 3.6% at 33% 20.5%,var(--eye) 0%,transparent 100%),radial-gradient(10% 3.4% at 72.5% 20.5%,var(--eye) 0%,transparent 100%)}
+.kff>b.lp{background:radial-gradient(12.5% 3.6% at 56% 55.5%,var(--lip) 0%,var(--lip) 35%,transparent 100%)}
+.kfx>img.kslap,.kfxf>img.kslap{opacity:.5}`;document.head.appendChild(st)})();
+
+/* ---------- shared helpers ---------- */
+const FXF={ill:[0,2,4,6],weakSuc:25,doc:[0,4,7],docWk:[0,3,4],slowWk:9,docMed:40,docNpcHeal:35,docNotice:30,
+ tat:3,tatWk:2,tatDuc:-2,tatRel:-20,penQuy:-8,penWk:[0,1,2],phatDuc:-1,phatRel:-15,cd:3};
+function fxSeen(p){try{if(!p)return false;if(p===S)return true;if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false;return typeof knows!=="function"||!!knows(p)}catch(e){return false}}
+function fxLeft(u){return Math.max(1,(u|0)-wk())}
+function fxWho(p){return p===S?"Ngươi":(p&&p.name)||""}
+function fxLog(p,t){try{if(p===S||fxSeen(p))log(t)}catch(e){}}
+
+/* ---------- 1. ỐM YẾU: paler skin, faint shadow under the eyes, pale lips; while ill (j13 p.ill), ốm sau độc dần (p.sick) or Sức very low ---------- */
+const FXILL=[null,{sat:.70,br:1.06,tint:"rgba(242,240,238,.22)",eye:"rgba(122,96,128,.22)",lip:"rgba(236,212,206,.50)"},
+ {sat:.60,br:1.07,tint:"rgba(236,236,232,.27)",eye:"rgba(112,90,122,.28)",lip:"rgba(234,213,207,.60)"},
+ {sat:.50,br:1.08,tint:"rgba(232,232,228,.32)",eye:"rgba(104,84,116,.34)",lip:"rgba(232,214,208,.70)"}];
+/* the matching face (KIT_EXPR mix): tired / pained, under-eye shadow and dry pale lips on the landmarks */
+const FXILLX=[null,{buon:.5,eye:"150,120,150,.20",lip:"236,212,206,.45,n"},{buon:.55,dau:.25,eye:"134,108,140,.24",lip:"234,213,207,.55,n"},{buon:.6,dau:.5,eye:"120,96,130,.26",lip:"232,214,208,.62,n"}];
+KIT_FACEFX.add({id:"ill",z:10,ready:true,                  /* owner approved (pilot 2) */
+ state:p=>{if(!p||p===S&&S.dead)return null;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k!=="docman"&&i.k!=="longthe")return{lvl:cl(i.st|0,1,3),ill:i};
+  if((p.sick||0)>0)return{lvl:2};if(typeof p.suc==="number"&&p.suc<FXF.weakSuc&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
+ seen:(p,st)=>p===S||(st.ill?(typeof illKnown!=="function"||illKnown(p))&&fxSeen(p):fxSeen(p)),
+ sac:(p,st)=>FXF.ill[st.lvl],
+ chip:(p,st)=>st.ill?null:[st.weak?"Sắc mặt nhợt nhạt":"Người ốm yếu, xanh xao","hot"],   /* an illness already has its own chip (j13 illName) */
+ html:(p,file,st)=>KIT_FACEFX.cssFace(file,"kff-ill",FXILL[st.lvl])});
+
+/* ---------- 2. TRÚNG ĐỘC: lips faintly blue-violet, skin greyish pale. p.pz {sev 1..2, until, by, how, at, dx (physician confirmed), nt (noticed by her)} ---------- */
+const FXDOC=[null,{sat:.56,br:1.0,tint:"rgba(200,214,200,.26)",eye:"rgba(100,100,130,.28)",lip:"rgba(140,118,172,.55)"},
+ {sat:.48,br:1.0,tint:"rgba(198,214,198,.30)",eye:"rgba(96,98,128,.32)",lip:"rgba(140,118,172,.62)"}];
+const FXDOCX=[null,{dau:.7,eye:"110,110,140,.26",lip:"140,118,172,.38"},{dau:.9,eye:"110,110,140,.30",lip:"140,118,172,.45"}];
+function pzGive(p,sev,how,by,weeks){if(!p||(p!==S&&(!p.alive||p.out)))return;sev=cl(sev|0,1,2);const u=wk()+(weeks||FXF.docWk[sev]);
+ if(p.pz){p.pz.sev=Math.max(p.pz.sev,sev);p.pz.until=Math.max(p.pz.until,u);if(by)p.pz.by=key(by);return}
+ p.pz={sev,until:u,how:how||"",by:by?key(by):null,at:wk(),dx:0,nt:0}}
+function pzOf(p){if(!p)return null;if(p.pz&&p.pz.until>wk())return p.pz;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k==="docman")return{sev:i.st>=2?2:1,ill:1};return null}
+function fxObservant(){try{return (S.mat||0)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
+KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pilot 2) */
+ state:p=>pzOf(p),
+ seen:(p,st)=>fxSeen(p),                                /* the face itself shows to anyone who sees her; what it MEANS needs an eye (chip) */
+ sac:(p,st)=>FXF.doc[st.sev],
+ chip:(p,st)=>p===S?[st.dx||st.ill?"Trúng độc · môi tím tái":"Môi tím tái, người lả đi","hot"]:fxObservant()?["Môi tím tái: như trúng độc","hot"]:null,
+ html:(p,file,st)=>KIT_FACEFX.cssFace(file,"kff-doc",FXDOC[st.sev])});
+/* causes: Hạ độc (j8 ACT.poison, also the dish of j83 and maids' orders that call it) and Hạ độc dần (j30) — two-way, the same for everyone */
+(function(){try{const P=ACT.poison,f0=P.f;P.f=function(a,t){const s0=t?t.suc:0;const r=f0.apply(this,arguments);try{if(t&&(t===S?!S.dead:t.alive)&&t.suc<s0&&/trúng độc/.test(String(r||""))&&!/thuốc giải/.test(String(r||"")))pzGive(t,2,"độc trong điểm tâm",a)}catch(e){}return r}}catch(e){}})();
+(function(){try{const P=ACT.slowpoison,f0=P.f;P.f=function(a,t){const s0=t?(t.sick||0):0;const r=f0.apply(this,arguments);try{if(t&&(t.sick||0)>s0)pzGive(t,1,"độc ngấm dần",a,FXF.slowWk)}catch(e){}return r}}catch(e){}})();
+/* weekly: wears off; Thái y medicine / Y thuật / NPC care heal faster; she may NOTICE it on someone she sees — a clue for the evidence system */
+function pzWeek(p){const z=p&&p.pz;if(!z)return;if(z.until<=wk()){p.pz=null;fxLog(p,p===S?"Môi ngươi đã hồng trở lại, độc tan hết.":`${p.name} đã khỏe lại, sắc môi hồng như cũ.`);return}
+ if(p!==S&&(roll(FXF.docNpcHeal)||((p.arts&&p.arts.y)||0)>=2))z.until--;
+ if(p!==S&&!z.nt&&fxObservant()&&fxSeen(p)&&(typeof together!=="function"||together(S,p)||roll(40))){z.nt=1;let t=`Ngươi để ý môi ${p.name} tím tái, sắc mặt xám, giống người trúng độc.`;
+  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(FXF.docNotice+(S.doctor?20:0))){evA(S,by,1);t+=` Ngươi lần theo thang thuốc, ra dấu vết người của ${by.name}: Chứng cứ về ${by.name} +1.`}try{log(t)}catch(e){}}}
+PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];const y=(S.arts&&S.arts.y)||0;
+ o.push(ch70("Mời thái y bắt mạch, giải độc",{c:{bac:-FXF.docMed},wt:[G70("rõ là độc gì, mau tan")],ok:()=>{z.dx=1;z.until=Math.max(wk()+1,z.until-2);let t="Thái y bắt mạch, nói ngươi trúng độc, kê thang giải độc.";
+  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(40+(S.doctor?20:0))){evA(S,by,1);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} +1.`}return t}}));
+ if((S.inv||[]).some(e=>e.k==="giaidoc"&&!e.h))o.push(ch70("Uống thuốc giải trong rương",{wt:[G70("độc tan ngay")],k:[R70("dùng hết 1 thuốc giải")]," ok":null,ok:()=>{takeItem(S,"giaidoc");S.pz=null;return "Ngươi uống thuốc giải, môi hồng trở lại."}}));
+ o.push(ch70("Tự sắc thuốc giải độc",{p:cl(30+y*15,5,95),c:{suc:-3},wt:[G70("độc tan sớm hơn")],lt:[R70("uống sai vị, lâu khỏi hơn")],ok:()=>{z.until=Math.max(wk()+1,z.until-1);return "Ngươi tự sắc cam thảo, lục đậu giải độc."},no:()=>{z.until++;return "Thuốc không hợp, độc lâu tan hơn."}}));
+ o.push(ch70("Nằm nghỉ chờ khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${fxLeft(z.until)} tuần`)],ok:()=>"Ngươi nằm nghỉ, uống nước cháo loãng."}));
+ return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
+
+/* ---------- 3. BỊ TÁT: a faint soft handprint on the cheek for a few tuần (https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png on the scar-fit cheek box) ---------- */
+function slapGive(p,by,why){if(!p||(p!==S&&(!p.alive||p.out)))return"";p.slap={until:wk()+FXF.tatWk+(roll(30)?1:0),by:by?key(by):null,at:wk()};
+ const t=`${fxWho(p)} bị ${by?(by===S?"ngươi":by.name):"người ta"} tát${why?" vì "+why:""}: má in dấu tay, Sắc -${FXF.tat} vài tuần.`;fxLog(p,t);return t}
+KIT_FACEFX.add({id:"tat",z:30,ready:true,                  /* owner approved the handprint (pilot 11/14) */
+ state:p=>p&&p.slap&&p.slap.until>wk()?p.slap:null,
+ seen:(p,st)=>fxSeen(p),
+ sac:(p,st)=>{const vg=p.vl&&typeof vlG==="function"?vlG(p.vl):-1;return Math.round(FXF.tat*(vg>=0&&window.VL?VL.cover[vg]:1))},
+ chip:(p,st)=>[`Má in dấu tay · còn ${fxLeft(st.until)} tuần`,"hot"],
+ html:(p,file,st)=>{const s=KIT_FACEFX.cheekBox(file,{dx:.04,dy:.17,sw:.9,sh:.9});return s?`<img class="kslap" src="https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png" alt="" aria-hidden="true" style="${kitFxVars(s)}" onerror="this.remove()">`:""}});
+
+/* ---------- 4. BỊ PHẠT QUỲ / ĐÁNH TRƯỢNG: a status chip (no art); walking costs one more khắc while it lasts (her), NPCs scheme less ---------- */
+function penGive(p,k,why,by){if(!p||(p!==S&&(!p.alive||p.out)))return;const sev=k==="truong"?2:1;const u=wk()+FXF.penWk[sev];p.pen={k,until:Math.max(u,p.pen&&p.pen.until||0),why:why||"",by:by?key(by):null}}
+const PEN_N={quy:"Bị phạt quỳ, gối đau",truong:"Bị đánh trượng, đi lại khó"};
+KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip and rules only */
+ state:p=>p&&p.pen&&p.pen.until>wk()?p.pen:null,
+ seen:(p,st)=>fxSeen(p),
+ chip:(p,st)=>[`${PEN_N[st.k]||PEN_N.quy} · đi chậm · còn ${fxLeft(st.until)} tuần`,"hot"]});
+(function(){const t0=travel;travel=function(a,b){const r=t0.apply(this,arguments);try{if(r>0&&S&&S.pen&&S.pen.until>wk())return r+1}catch(e){}return r}})();
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(v&&v.pen&&v.pen.until>wk()&&roll(50))return[]}catch(e){}return O}})();
+
+/* ---------- causes for slap + punishment ---------- */
+/* maid path (j42): talking back to the mistress, refusing her order, the beating */
+(function(){try{const s0=PEND.cnvScold;if(s0)PEND.cnvScold=function(){const d=s0.apply(this,arguments);try{const op=d&&d.o&&d.o.find(x=>x.n==="Cãi lại");const m=typeof srvM==="function"?srvM():null;if(op&&op.go){const g=op.go;op.go=function(){const q0=S.suc;const r=g.apply(this,arguments);try{if(S.suc<q0)penGive(S,"quy","cãi lại chủ");else if(roll(50))slapGive(S,m,"cãi lại")}catch(e){}return r}}}catch(e){}return d}}catch(e){}})();
+(function(){try{const s0=PEND.cnvOrd;if(s0)PEND.cnvOrd=function(){const d=s0.apply(this,arguments);try{const op=d&&d.o&&d.o.find(x=>x.n==="Từ chối");if(op&&op.go){const g=op.go;op.go=function(){const q0=S.suc;const r=g.apply(this,arguments);try{if(S.suc<q0&&!S.dead)penGive(S,"quy","từ chối lệnh chủ")}catch(e){}return r}}}catch(e){}return d}}catch(e){}})();
+(function(){if(typeof srvMoodEvent!=="function")return;const s0=srvMoodEvent;srvMoodEvent=function(){const n=Q.length;const r=s0.apply(this,arguments);try{if(Q.length>n&&Q[Q.length-1]&&Q[Q.length-1].t==="Bị đánh đòn"&&!S.dead)penGive(S,"truong","bị chủ sai đánh")}catch(e){}return r}})();
+/* the acts, two-way (same rules for her and every consort): Tát (higher rank, same place) and Phạt quỳ (Hoàng hậu, or three ranks above) */
+function fxAuth(a,t){try{return !!a&&!!t&&a!==t&&(a.queen||(a===S&&S.rank>=7)||rkOf(a)>=rkOf(t)+3)}catch(e){return false}}
+A("tat","Tát",{c:{duc:FXF.tatDuc},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"nàng in dấu tay trên má, Sắc giảm vài tuần · nàng oán ngươi",f:(a,t)=>{
+ if(typeof ducAdd==="function")ducAdd(a,FXF.tatDuc,"tát người");else ap(a,{duc:FXF.tatDuc});relAdd(t,a,FXF.tatRel);slapGive(t,a,"");let r=`${NMc(a)} giáng một cái tát lên má ${NM(t)}. `;
+ if((t.sung||0)>=60&&roll(30)){ap(a,{sung:-4});r+=`Hoàng thượng nghe chuyện, không vui (Sủng ${a===S?"ngươi":NM(a)} -4). `}return `<span class="${t===S?"r":"g"}">${r}</span>`}});
+A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:"nàng quỳ nửa ngày ngoài sân: Sức -8, đi lại chậm một tuần · nàng oán ngươi",f:(a,t)=>{
+ if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
+ if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
+try{AOUT.tat=["nàng in dấu tay trên má, Sắc -3 vài tuần; nàng oán ngươi",""];AOUT.phatquy=["nàng quỳ phạt: Sức -8, đi lại chậm một tuần; nàng oán ngươi",""]}catch(e){}
+try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
+ LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
+try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}
+try{for(const k of ["tat","phatquy"]){if(!BANDS[1][2].includes(k))BANDS[1][2].push(k);const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes(k))g[1].push(k)}}catch(e){}
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O.length)return O;const b=bandOf(danger(v,t));if(b>=1){
+  if(ACT.tat.ok(v,t)){const w=.8*persW(v,"trip");if(w>0)O.push(["tat",w])}if(ACT.phatquy.ok(v,t)){const w=.7*persW(v,"trip");if(w>0)O.push(["phatquy",w])}}}catch(e){}return O}})();
+
+/* ---------- 5. EXPRESSIONS: removed (owner 11/14 22:50Z — feelings are shown by the small mood icons, not by reshaping faces in code). faceExpr kept as a no-op for old callers. */
+function faceExpr(){}
+
+/* stage figures: jk2b's .kfxf box copies the figure's offset box but not its transform (figures are centred with translateX(-50%)),
+   so every face layer (veil, scar, rash, slap, expression) sat half a figure to the right. Copy the transform onto the box. */
+(function(){if(typeof kitFigFx!=="function")return;const k0=kitFigFx;kitFigFx=function(){const r=k0.apply(this,arguments);try{const st=$("stage");if(st)st.querySelectorAll(".kfxf").forEach(s=>{const img=s.parentElement&&s.parentElement.querySelector("img.kfxon");if(!img)return;const cs=getComputedStyle(img);s.style.transform=cs.transform==="none"?"":cs.transform;s.style.transformOrigin=cs.transformOrigin})}catch(e){}return r}})();
+/* ---------- weekly pass, the same for everyone ---------- */
+(function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){
+  for(const p of [S].concat(rivals||[])){if(!p)continue;if(p.pz)pzWeek(p);if(p.slap&&p.slap.until<=wk()){p.slap=null;if(p===S)log("Dấu tay trên má ngươi đã lặn.")}if(p.pen&&p.pen.until<=wk())p.pen=null;if(p.expr&&p.expr.until<=wk())p.expr=null}
+  if(S.pz&&S.pz.until>wk()&&!Q.some(m=>m.pid==="pzcard")&&(typeof evCooldown!=="function"||evCooldown("pzcard",FXF.cd))){const d=mkP("pzcard",{});if(d){Q.push({t:"Trúng độc",h:d.t,opts:d.o,who:pMe(),pid:d.pid,pp:d.pp});if($("modal").hidden)showModal()}}}}catch(x){console.error(x)}return r}})();
+window.faceExpr=faceExpr;window.pzGive=pzGive;window.slapGive=slapGive;window.penGive=penGive;
+/* ================= jrash: NỔI MẨN (dị ứng) — a timed face condition for everyone (owner 11/14, review/items-earned) =================
+   p.rash = {sev 1..3, until (tuần), how, by, at, tr}. Same rules for her and for every consort (two-way).
+   Causes: spring pollen (the j68f springAllergy event and a small monthly spring roll), son phấn không hợp / tainted
+   (Son phấn Dương Châu), bad luck (ăn phải món lạ), and the hostile act "Bỏ phấn lạ" (band Hại nhỏ, motive-gated like
+   the other schemes, same odds and evidence trail for everyone).
+   Effects: Sắc − RASH.d[sev] while it lasts (effSac, so nights, contests, jealousy follow as with hủy dung); heals in 1–4 tuần,
+   one tuần sooner each tuần under Thái y medicine (bạc) or with Y thuật bậc 2+.
+   A veil (jveil) works for a rash too: Sắc lost while veiled = d × VL.cover[grade]; same Vượt phẩm rule.
+   Picture: KIT_RASH overlay (https://ctm-img.victoria-tntt.workers.dev/img/rash-1..3.png, gpt-2-6), placed from the veil fit boxes (nose bridge = band line);
+   layer order portrait < rash < scar < veil < frame. Shown only when the player knows (herself, or knows(p)).
+   KIT_RASH.ready=true: owner approved the overlays (15/11; nấc 1 redrawn, nấc 2–3 as drawn). ================= */
+const RASH={d:[0,5,10,16],wk:[0,1,2,3],spring:4,luck:1,cos:5,actBac:15,actDuc:-4,sevW:[.5,.35,.15],medBac:15,npcMed:30,cd:3};
+const RASH_N=["","nhẹ","vừa","nặng"];
+function rashPick(W){const x=Math.random();return x<W[0]?1:x<W[0]+W[1]?2:3}
+function rashName(p){return p===S?"ngươi":(p&&p.name)||""}
+function rashGive(p,sev,how,by){if(!p||(p!==S&&(!p.alive||p.out)))return"";sev=cl(sev|0,1,3);const w=RASH.wk[sev]+(sev===3&&roll(50)?1:0);
+ if(p.rash){if(p.rash.sev>=sev){p.rash.until=Math.max(p.rash.until,wk()+w);return""}}
+ p.rash={sev,until:wk()+w,how:how||"",by:by?key(by):null,at:wk(),tr:0};
+ const t=`${p===S?"Ngươi":p.name} nổi mẩn trên mặt (${RASH_N[sev]}${how?", vì "+how:""}): Sắc -${RASH.d[sev]} khi chưa khỏi.`;
+ if(p===S){try{log(t)}catch(e){}}else if(typeof knows!=="function"||knows(p)){try{log(t)}catch(e){}}return t}
+function rshOf(p){p=p||S;const r=p&&p.rash;if(!r)return null;const left=Math.max(1,r.until-wk());const vg=p.vl&&typeof vlG==="function"?vlG(p.vl):-1;
+ const lost=Math.round(RASH.d[r.sev]*(vg>=0?VL.cover[vg]:1));return{sev:r.sev,name:RASH_N[r.sev],lost,weeksLeft:left,veiled:vg>=0,chip:`Nổi mẩn (${RASH_N[r.sev]}) · còn ${left} tuần`}}
+window.rshOf=rshOf;
+function rashNote(p){const r=rshOf(p);return r?[`Mặt nổi mẩn (${r.name}) · ${r.veiled?"đang che":"chưa che"}, Sắc mất ${r.lost}`,r.veiled?"n":"no"]:["Mặt lành, chưa cần đeo","ok"]}
+/* weekly healing, the same rule for everyone */
+function rashHeal(p){const r=p&&p.rash;if(!r)return;const me=p===S;let fast=false;
+ if(r.tr>0){r.tr--;fast=true}else if(me?(S.arts&&S.arts.y>=2):((p.arts&&p.arts.y>=2)||roll(RASH.npcMed)))fast=true;
+ if(fast)r.until--;if(wk()>=r.until){p.rash=null;if(me)log("Mẩn đỏ trên mặt ngươi đã lặn hết.");else if(typeof knows!=="function"||knows(p))log(`${p.name} đã khỏi nổi mẩn.`)}}
+(function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){rashHeal(S);for(const v of rivals)if(v&&v.rash)rashHeal(v);
+  if(S.rash&&!Q.some(m=>m.pid==="rashcard")&&(typeof evCooldown!=="function"||evCooldown("rashcard",RASH.cd))){const d=mkP("rashcard",{});if(d){Q.push({t:"Nổi mẩn",h:d.t,opts:d.o,who:pMe(),pid:d.pid,pp:d.pp});if($("modal").hidden)showModal()}}}}catch(x){console.error(x)}return r}})();
+/* her card: medicine, herbs, the veil, or wait */
+PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=[];const y=(S.arts&&S.arts.y)||0;
+ o.push(ch70("Mời thái y kê thuốc",{c:{bac:-RASH.medBac},wt:[G70("hai tuần tới mỗi tuần lặn nhanh thêm")],ok:()=>{r.tr=2;return "Thái y kê thuốc bôi, thuốc uống."}}));
+ o.push(ch70("Tự sắc thuốc thảo mộc",{p:cl(35+y*15,5,95),c:{suc:-3},wt:[G70("hai tuần tới mỗi tuần lặn nhanh thêm")],lt:[R70("uống sai vị, mẩn lâu thêm một tuần")],ok:()=>{r.tr=2;return "Ngươi tự sắc thuốc kim ngân, cúc hoa."},no:()=>{r.until++;return "Thuốc không hợp, mẩn lâu thêm."}}));
+ if(typeof vlChest==="function"){const L=vlChest(S);
+  if(S.vl)o.push(ch70(`Tháo ${IT[S.vl.k].n}`,{wt:[G70("không còn vướng víu")],k:[R70(`Sắc mất trở lại ${RASH.d[r.sev]}`)],ok:()=>{vlOff(S);return "Ngươi tháo mạng che mặt."}}));
+  else if(L.length){const b=L.slice().sort((a,c)=>vlG(c.e)-vlG(a.e))[0];const it=IT[b.e.k];o.push(ch70(`Đeo ${it.n}`,{wt:[G70(`Sắc mất còn ${Math.round(RASH.d[r.sev]*VL.cover[vlG(b.e)])}`)],ok:()=>{const j=S.inv.indexOf(b.e);return j>=0&&vlWear(S,j)?`Ngươi đeo ${it.n}.`:""}}))}
+  else o.push({n:"Tìm mạng che mặt",fx:{},x:"chưa có mạng: tự tay kết, đặt mua hay xin ban",j67:"tốn: không tốn gì · thành: tự tay kết, đặt mua hay xin ban",go:()=>pushDil(mkP("vlget"),"Mạng che mặt")})}
+ o.push(ch70("Để tự khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${x.weeksLeft} tuần`)],ok:()=>"Ngươi để mẩn tự lặn."}));
+ return{who:pMe(),t:`<p>Mặt ngươi nổi mẩn đỏ (${x.name}${r.how?", vì "+r.how:""}): Sắc đang mất ${x.lost}; còn chừng ${x.weeksLeft} tuần mới lặn.</p>`,o}};
+/* ---------- causes ---------- */
+/* spring pollen event (j68f): each choice keeps its text; afterwards the face may break out (less with the physician) */
+(function(){try{const E=E68I.springAllergy;if(!E)return;const o0=E.o;E.o=function(X){const O=o0.apply(this,arguments);const P=[15,30,55];
+  O.forEach((op,i)=>{const g0=op.go;op.go=function(){const r=g0?g0.apply(this,arguments):undefined;try{if(roll(P[Math.min(i,2)]))rashGive(S,i>=2?rashPick([.55,.4,.05]):1,"phấn hoa xuân")}catch(e){}return r}});return O}}catch(e){}})();
+/* monthly: a spring breeze for everyone, and bad luck any time (two-way) */
+(function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){const spring=(S.month||0)>=1&&(S.month||0)<=3;
+  for(const p of [S].concat(liveRivals(true))){if(p.rash)continue;if(spring&&roll(RASH.spring))rashGive(p,rashPick([.75,.22,.03]),"phấn hoa xuân");else if(roll(RASH.luck))rashGive(p,rashPick([.7,.25,.05]),"ăn phải món lạ")}}}catch(e){console.error(e)}return r}})();
+/* son phấn: a tainted box (pha chì) always, an ordinary one sometimes, brings out a rash */
+(function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];const k=e&&e.k,t=e&&e.t;const r=u0.apply(this,arguments);
+  try{if(k==="sonphan"&&r&&(t==="chi"||roll(RASH.cos))){const x=rashGive(p,t==="chi"?rashPick([.3,.45,.25]):1,"son phấn không hợp",t==="chi"&&e.by?byKey(e.by):null);return r+(x?" "+x:"")}}catch(x){}return r}})();
+/* the hostile act: slip an irritating powder / strange incense into her cosmetics (band Hại nhỏ, motive-gated) */
+function oRash(a){return odA(a,45+(a.tamco||0)/5+(a.mat||0)*3)}
+A("rash","Bỏ phấn lạ",{c:{bac:-RASH.actBac,duc:RASH.actDuc},ok:(a,t)=>(a.bac||0)>=RASH.actBac&&!t.rash,o:a=>oRash(a),x:"nàng nổi mẩn mặt, Sắc giảm vài tuần",f:(a,t)=>{
+ ap(a,{bac:-RASH.actBac});if(typeof ducAdd==="function")ducAdd(a,RASH.actDuc,"bỏ phấn lạ");else ap(a,{duc:RASH.actDuc});a.schemes=(a.schemes||0)+1;
+ const c=caught(a,t,true,"trộn phấn lạ vào hộp phấn của "+NM(t));if(c)return c;
+ if(!roll(oRash(a))){if(roll(40))evA(t,a,1);return `${NMc(a)} sai người trộn phấn lạ vào hộp phấn của ${NM(t)}, nhưng ${t===S?"ngươi":"nàng"} không dùng tới. `}
+ const sev=rashPick(RASH.sevW);rashGive(t,sev,"phấn lạ",a);return `<span class="${t===S?"r":"g"}">${NMc(t)} thoa phải phấn lạ, mặt nổi mẩn (${RASH_N[sev]}): Sắc -${RASH.d[sev]} tới khi khỏi.</span> `}});
+try{AOUT.rash=["nàng nổi mẩn mặt, Sắc giảm 5–16 trong 1–4 tuần","bị lộ: nàng nắm chứng cứ, oán ngươi"]}catch(e){}
+try{LACK.rash=t=>S.bac<RASH.actBac?`cần Bạc ${RASH.actBac}`:t&&t.rash?"mặt nàng đang nổi mẩn":""}catch(e){}
+try{ACTDOM.rash="Mưu kế";J78VERB.rash="trộn phấn lạ vào hộp phấn của {t}";HARMK["Bỏ phấn lạ"]="rash"}catch(e){}
+try{if(!BANDS[1][2].includes("rash"))BANDS[1][2].push("rash");const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes("rash"))g[1].push("rash")}catch(e){}
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandOf(danger(v,t));if(b>=1&&ACT.rash.ok(v,t)){let w=1.2*persW(v,"rash");if((t.sac||0)>(v.sac||0)+8)w*=1.5;if(w>0)O.push(["rash",w])}}catch(e){}return O}})();
+
+/* ---------- picture: KIT_RASH, placed from the veil fit boxes (rash art: nose bridge at RB of a square image) ---------- */
+window.KIT_RASH={ready:true,RB:.47,WX:1.08,src:function(sev){return `https://ctm-img.victoria-tntt.workers.dev/img/rash-${cl(sev|0,1,3)}.png`},
+ on:function(p){try{return !!(p&&p.rash)&&(p===S||typeof knows!=="function"||!!knows(p))}catch(e){return false}},
+ style:function(file){try{const n=String(file||"").split("/").pop();const r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return "";
+  const W=r[2]*this.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3],L=r[0]+r[2]/2-W/2,T=bandY-this.RB*H;
+  return `left:${L.toFixed(2)}%;top:${T.toFixed(2)}%;width:${W.toFixed(2)}%;height:${H.toFixed(2)}%;transform:rotate(${r[4]}deg);transform-origin:50% ${(this.RB*100).toFixed(1)}%`}catch(e){return ""}}};
+/* one entry in the shared face-fx registry (jface KIT_FACEFX): picture layer, Sắc and the person-card chip */
+KIT_FACEFX.add({id:"rash",z:20,ready:KIT_RASH.ready,state:p=>p&&p.rash?rshOf(p):null,seen:p=>KIT_RASH.on(p),sac:(p,x)=>x.lost,chip:(p,x)=>[x.chip,"hot"],
+ html:(p,file,x)=>{const st=KIT_RASH.style(file);return st?`<img class="krash" src="${KIT_RASH.src(p.rash.sev)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`:""}});
+window.rashGive=rashGive;window.RASH=RASH;
 /* ================= jearn: ĐỒ PHẢI CÓ ĐƯỢC, KHÔNG TỰ RƠI XUỐNG (owner 11/14 19:30Z, review/items-earned) =================
    Audit + rules: dev/ITEMS_EARNED.md. Every item comes from crafting, buying or being given/rewarded; the same for NPCs.
    This module holds the small fixes to the free grants other than the veil (jveil). ================= */
@@ -20905,10 +21126,9 @@ document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest
    beside the text, under a wide scene band (the event / header picture), with the option group below (optLayout rows/grid, KIT 31.16).
    Used automatically by every kit panel whose subject is a person (weekly events with a main actor, Mệnh truyện chapters, night / thị tẩm,
    person-act reports, succession) and by the week book's person pages (kitStageFig). A dialog may name its people: stage:[p1,p2] (max 2).
-   Figures: kitFigOf(p) (right tier / age band / unknown silhouette) + the scar / veil overlays laid on the drawn figure (kitFxLayers; a rash
-   overlay is picked up the same way when KIT_RASH exists). Band: headArt (31.16) or the event picture (kitEvArt), in its category frame. ---------- */
+   Figures: kitFigOf(p) (right tier / age band / unknown silhouette) + the scar / veil overlays laid on the drawn figure (kitFxLayers; the rash, pallor, poison and handprint layers come through the same call). Band: headArt (31.16) or the event picture (kitEvArt), in its category frame. ---------- */
 function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src=o.src||(typeof kitFigOf==="function"?kitFigOf(q):"");if(!src)return"";
- let fx="";try{if(typeof kitFxLayers==="function"&&!/unknown-fig/.test(src))fx=kitFxLayers(q,kitFile(src));if(window.KIT_RASH&&KIT_RASH.on&&KIT_RASH.on(q)&&KIT_RASH.style){const st=KIT_RASH.style(kitFile(src));if(st)fx+=`<img class="kscar krash" src="${KIT_RASH.src(q)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}}catch(e){}
+ let fx="";try{if(typeof kitFxLayers==="function"&&!/unknown-fig/.test(src))fx=kitFxLayers(q,kitFile(src));/* the rash layer comes from kitFxLayers (jface registry: jrash) */}catch(e){}
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true}):(q.name||"")}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
@@ -29399,7 +29619,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f9080a3cd893";window.CTM_BUILD=BUILD;
+const BUILD="5f97b8777567";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

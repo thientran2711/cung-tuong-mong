@@ -904,6 +904,21 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Tall frame and small frame: `.kfxc` (clip = photo window) > `.kfx` (box of the por picture, same 1.14x cut as the portrait); stage figures:
   `.kfxf` box laid over the figure image (idle animation off on that figure).
 - Scar only when the player knows (`KIT_SCAR.on`: herself or j70 `knows(p)`, or `p.scar.known`); a veil is public; never on the grey silhouette.
+### 28.8b FACE FX REGISTRY — `kitFaceFx` / `KIT_FACEFX` (review/appearance-port, dev/build/jface.js) — ONE layer for every face condition
+- Every condition that changes how a face looks registers ONE entry; nobody adds their own hook on `kitFxLayers`, `effSac` or `pcard`:
+  `KIT_FACEFX.add({id, z, ready, state(p), seen(p,st), sac(p,st), chip(p,st), html(p,file,st)})`.
+  `state` = the true condition (rules run on it whatever the player knows) · `seen` = may she see it on this face · `sac` = Sắc lost (summed into
+  `effSac`) · `chip` = `[text, cls]` on the person card when seen · `html` = the layer markup for one por-/fig- picture ("" without fit data).
+  `ready:false` hides only the PICTURE (logic and chip still run) until the owner approves that entry's pilot.
+- Layer order (z): portrait < 5 expression patch < 10 ốm pallor < 12 trúng độc < 20 rash < 30 slap < scar < veil < frame. All entries reach the tall
+  frame, the small frame and the room-stage figures through the one `kitFxLayers` hook; a later event-stage / identity-card figure only needs to
+  call `kitFxLayers(p,file)` into a `.kfx`/`.kfxf` box. The `.kfxf` box now copies the figure's transform (figures are centred with translateX).
+- Helpers: `KIT_FACEFX.faceBox(file)` (veil-fit box, band = nose bridge), `cheekBox(file,{dx,dy,sw,sh})` (scar-fit cheek box, fractions of the box),
+  `cssFace(file,cls,{sat,br,tint,eye,lip})` (CSS-only pallor: backdrop saturate/brightness masked to the face oval + tint; eye/lip spots only as
+  fallback when the face has no landmarks).
+- Entries: `expr` (z5, kitFaceExpr below), `ill` (ốm / Sức < 25, CSS), `doc` (trúng độc, CSS), `rash` (jrash, img/rash-1..3.png), `tat` (img/fx-slap.png,
+  approved), `phat` (phạt quỳ / trượng: chip only). Postponed, plug in the same way: dưỡng nhan glow, tóc bạc sớm, đậu mùa marks.
+### 28.8c FACE EXPRESSIONS — removed (owner 11/14 22:50Z): no code-reshaped faces; feelings are shown by the small mood icons (emotion kit).
 ### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
