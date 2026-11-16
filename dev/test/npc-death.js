@@ -17,12 +17,12 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
    r.fulfill({status:200,contentType:/\.html$/.test(f)?'text/html; charset=utf-8':/\.json$/.test(f)?'application/json':/\.webp$/.test(f)?'image/webp':'application/octet-stream',body:fs.readFileSync(f)})});
   if(!shots)await ctx.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());
   return ctx};
- const errs=[];const boot=async(p,u)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function'&&typeof S!=='undefined',null,{timeout:180000});await p.waitForTimeout(2500)};
+ const errs=[];const boot=async(p,u)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await p.waitForTimeout(2500)};
  const ctx=await mk({width:1000,height:755});const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  /* 1 old save */
  if(OLDR){await boot(p,'http://ts.local/old/dev/index.html');
   const o=await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;try{store.set(NL_KEY,null)}catch(e){}start();Q.length=0;for(let m=0;m<6;m++){try{monthTick()}catch(e){}Q.length=0}
-   delete S.lyF;try{save()}catch(e){return "save "+e}return {name:S.name,y:S.year,ly:!!S.lyF}});
+   delete S.lyF;const m=document.getElementById('modal');if(m)m.hidden=true;quiet=false;try{NLP=false}catch(e){}try{save()}catch(e){return "save "+e}return {name:S.name,y:S.year,ly:!!S.lyF}});
   await boot(p,'http://ts.local/dev/index.html');
   const r=await p.evaluate(()=>{const d=loadSlot(3);if(!d)return{err:"no save"};SLOT=3;quiet=true;deser(d);quiet=false;try{document.getElementById('title').hidden=true;deal();render()}catch(e){return{err:String(e)}}
    const ly=S.lyF;const t0=ly&&ly.tho;let err="";for(let m=0;m<24;m++){try{monthTick()}catch(e){err=String(e).slice(0,120);break}Q.length=0;if(S.dead)break}
@@ -32,12 +32,12 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
  const ev=f=>p.evaluate(f);
  await ev(()=>{for(const f of [].concat(...Object.values(FPOOL)))FAV[f]=1;SLOT=3;try{store.set(NL_KEY,null)}catch(e){}start();Q.length=0;faceInit()});
  /* 2 Lý beside a fallen rival; empty after her death */
- const r2=await ev(()=>{const v=rivals.find(x=>x.alive&&!x.queen);v.out=1;const a=lcPeople("Phế phi").map(x=>x.ref?x.ref.name:x.name);
-  goTo("lc");const vis=(S.visit.people||[]).map(x=>x.name);S.place="home";v.out=0;
+ const r2=await ev(()=>{const v=rivals.find(x=>x.alive&&!x.queen);v.out=1;const LL=lcPeople("Phế phi");const a=LL.map(x=>x.ref?x.ref.name:x.name),nr=LL.filter(x=>!x.ref).length;
+  goTo("lc");const vis=(S.visit.people||[]).map(x=>x.name),vn=(S.visit.people||[]).filter(x=>x.kind==="fallen"&&!x.ref).length;S.place="home";v.out=0;
   const y=lyFallen();const K=new Set();const t=(function(){y.tho=y.age;y.thoM=S.month;return mortMonth()})();
   const b=lcPeople("Phế phi").map(x=>x.name);goTo("lc");const vis2=(S.visit.people||[]).length;const msg=S.visit.msg;S.place="home";
-  return{a,vis,dead:!!y.dead,txt:String(t).replace(/<[^>]+>/g,'').match(/Phế phi họ Lý[^.]*\./)+"",b,vis2,msg}});
- ok(r2.a.length===2&&r2.a.includes("Phế phi họ Lý")&&r2.vis.includes("Phế phi họ Lý")&&r2.vis.length===2,'Trường Môn viện: Lý stays beside a fallen rival',r2.vis);
+  return{a,nr,vn,vis,dead:!!y.dead,txt:String(t).replace(/<[^>]+>/g,'').match(/Phế phi [^.]*Trường Môn viện[^.]*\./)+"",b,vis2,msg}});
+ ok(r2.a.length===2&&r2.nr===1&&r2.vn===1&&r2.vis.length===2,'Trường Môn viện: Lý stays beside a fallen rival',r2.vis);
  ok(r2.dead&&/qua đời ở Trường Môn viện/.test(r2.txt),'Lý dies of her lifespan, news line shown',r2.txt);
  ok(r2.b.length===0&&r2.vis2===0,'after her death nobody stands in for her (empty until a real person comes)',r2.msg);
  /* 3 maid death */
@@ -70,8 +70,11 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
  /* 7 screenshots */
  for(const [W,H] of [[755,1000],[1180,820]]){const c2=await mk({width:W,height:H},2,true);const q=await c2.newPage();q.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await boot(q,'http://ts.local/dev/index.html');
-  await q.evaluate(()=>{SLOT=3;try{store.set(NL_KEY,null)}catch(e){}document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
-   const v=rivals.find(x=>x.alive&&!x.queen);v.out=1;S.year=3;goTo("lc")});await q.waitForTimeout(6000);
-  await q.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});await q.waitForTimeout(800);
-  await q.screenshot({path:`${OUT}/lc-ly-${W}x${H}.png`});await c2.close()}
+  await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}
+   Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}const st=document.createElement("style");st.textContent=".kroul{display:none!important}";document.head.appendChild(st);tab="go";render()});
+  for(let i=0;i<15;i++){await q.waitForTimeout(400);const srv=await q.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s});if(!srv)break}
+  await q.evaluate(()=>{document.querySelectorAll(".kroul").forEach(e=>e.remove());Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
+   const v=rivals.find(x=>x.alive&&!x.queen);v.out=1;goTo("lc");Q.length=0;if(md)md.hidden=true;tab="go";render()});await q.waitForTimeout(5000);
+  await q.evaluate(()=>{document.querySelectorAll('.kmov,.kroul,#kpop').forEach(e=>e.remove());Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;tab=innerWidth<innerHeight?"go":"act";render();scrollTo(0,0);document.querySelectorAll("*").forEach(e=>{if(e.scrollTop)e.scrollTop=0});try{if(innerWidth<innerHeight){const b=document.querySelector("#tabs [aria-selected=\"true\"]");if(b)b.click()}}catch(e){}});await q.waitForTimeout(2500);
+  await q.screenshot({path:`${OUT}/lc-ly-${W}x${H}.jpg`,type:'jpeg',quality:80});await c2.close()}
  console.log(`\n${res.filter(r=>r[0]).length}/${res.length} passed`);await b.close();process.exit(res.every(r=>r[0])?0:1)})().catch(e=>{console.error(e);process.exit(1)});

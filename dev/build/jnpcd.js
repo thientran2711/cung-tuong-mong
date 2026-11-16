@@ -61,7 +61,7 @@ if(typeof monthTick==="function")window.monthTick=monthTick=watched(monthTick);
 window.lyDie=function(p,why){if(!p||p.dead)return "";p.dead=1;p.dY=S.year;const L=S.rgL&&S.rgL.ly;const cleared=p.cleared||(L&&L.done);
  /* a cold-palace death (the jmort accident texts — Nam Uyển, yến tiệc — do not fit a prisoner) */
  const how=pick(["lâm bệnh, không thuốc thang,","nhiễm phong hàn giữa đêm đông,","trượt chân bên giếng cạn trong viện,"]);
- const t=`Phế phi họ Lý ${how} qua đời ở Trường Môn viện, thọ ${p.age} tuổi.`+(cleared?" Án oan năm xưa đã được rửa, bà nhắm mắt thanh thản.":L&&L.st?" Tâm nguyện rửa oan của bà chưa thành.":" Không ai đến nhận thi hài.");
+ const t=`Phế phi ${S.lcfPn||"họ Lý"} ${how} qua đời ở Trường Môn viện, thọ ${p.age} tuổi.`+(cleared?" Án oan năm xưa đã được rửa, bà nhắm mắt thanh thản.":L&&L.st?" Tâm nguyện rửa oan của bà chưa thành.":" Không ai đến nhận thi hài.");
  try{if(L&&!L.done)delete S.rgL.ly}catch(e){}
  return `<span class="r">${t}</span> `};
 /* she exists from the first day (so she ages and rolls a lifespan), on new games and old saves alike */
