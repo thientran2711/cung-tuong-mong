@@ -2,9 +2,7 @@
    Pilot origin of jroad.js. Same arc shape as j67 (p = pools of hồi: mở đầu / rắc rối / bước ngoặt / cao trào; B = hồi; E = kết cục).
    Openings read how the chapter before ended (rdK: 1 won, 0 middle, −1 lost), so the same road does not read the same twice (OD:L1253).
    The road's people are cast once and carried (rdCast). Hostile roles are real both ways (relAdd / oanAdd, OD:L1247). */
-const rdRel=(A,k,n)=>{const v=rv67(A,k);if(v)relAdd(S,v,n);return v};
-const rdOan=(A,k,n)=>{const v=rv67(A,k);if(v)oanAdd(v,S,n);return v};
-const RDW=k=>()=>rdK()>0===(k>0)&&(k>0||rdK()<=0);/* opening filter: RDW(1) after a won chapter, RDW(0) after a middle or lost one */
+/* rdRel / rdOan / RDW live in jroad.js (engine, shared by every jrd_<origin>.js) */
 
 /* ---------- tt_co · Quân cờ trong tay cha ---------- */
 rdDef("tt_co",5,{t:"Môn sinh của cha",w:"dad",sj:"môn sinh của phủ Tể tướng",cast(A){return rdCast(A,["v"])},

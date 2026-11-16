@@ -11,6 +11,11 @@
    closes the origin story (replaces the j67 «Kết cục xuất thân» milestone for this life).
    ONE CORE (OD:L1267): chapter-level numbers live in BAL.road (jbal2.js). Kit only: every screen is the j67 card / kit event frame. */
 const ROAD14={};
+/* shared helpers for every road data file (jrd_<origin>.js): hostile/friendly roles are REAL both ways (OD:L1247) */
+const rdRel=(A,k,n)=>{const v=rv67(A,k);if(v)relAdd(S,v,n);return v};
+const rdOan=(A,k,n)=>{const v=rv67(A,k);if(v)oanAdd(v,S,n);return v};
+const RDW=k=>()=>rdK()>0===(k>0)&&(k>0||rdK()<=0);/* opening filter: RDW(1) after a won chapter, RDW(0) after a middle or lost one */
+
 /* register one chapter: n = 5..11 */
 function rdDef(road,n,def){const id=road+"_"+n;ARC67[id]=Object.assign({o:"rd",road,rn:n},def);(ROAD14[road]=ROAD14[road]||{})[n]=id;
  try{if(typeof RTHEME67==="object"&&!RTHEME67[id])RTHEME67[id]=def.rth||RTHEME67[road]||"court"}catch(e){}return id}
