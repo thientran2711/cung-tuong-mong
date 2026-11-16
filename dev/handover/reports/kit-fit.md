@@ -1,4 +1,4 @@
-SẴN SÀNG KIỂM __SHA__ (ROUND 2b; round 2 was 6b9ca17da) (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
+SẴN SÀNG KIỂM 7865ed13a (ROUND 2b; round 2 was 6b9ca17da) (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
 
 # ROUND 2b (MAIN s22 content call (a), report to MAIN s23)
 - "Nhập ám hiệu" row shortened: "Gõ ám hiệu hảo hữu gửi để vào phòng của hảo hữu" → "Gõ ám hiệu hảo hữu gửi" (one line).
