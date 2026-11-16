@@ -116,8 +116,11 @@ window.KG82=KG82;
 /* the progress cell's label follows the game type (review/small-bugs-2): exams count "Môn", contest results "Hạng", the engines their own
    word ("Hồi 2/5" -> Hồi · 2/5, "Câu 1/5" -> Câu · 1/5). o.round = a fixed word for the whole frame (exam: "Môn"; engine updates then keep it). */
 const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(Nhất|Nhì|Ba|Hạng\s*\d+)$/;
+/* the painted illustration of what is contested (picture LEFT of every game frame, owner 15/11): the kind's own board painting */
+/* kinds with no board painting yet (duho, den, may): no picture column at all (KIT REQUEST) */
+function kg82Pic(kind){return ["duho","den","may"].includes(kind)?"":`img/kit/mg-${kg82BgName(kind)}.webp`}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
- if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box"});
+ if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
   `<div class="kghud">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
 /* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
@@ -128,12 +131,12 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
 function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.phase="";
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
-function kg82ShowRes(html){const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
+function kg82ShowRes(html){{const d=kg82El();if(d){d.classList.remove("kg-run");d.classList.add("kg-idle")}}const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
 
 /* ---------- canvas helper ---------- */
 function kg82Canvas(box,hRatio,hMax){const W=Math.max(240,Math.floor(box.clientWidth||300));const H=Math.round(Math.min(W*hRatio,hMax||520,Math.max(260,(innerHeight||800)*.56)));
@@ -375,7 +378,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
 const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,quiz:kg82Quiz,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
-function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";
+function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
  let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;onEnd(cl(Math.round(raw),0,10))}};
  const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
  /* the board paintings load first (≤2.5 s), then the game starts */
@@ -392,11 +395,11 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  const rows=R.map(x=>{if(x&&x.score!=null){let p=null;try{p=rivals.find(v=>v.id===x.id)||null}catch(e){}const t=Math.round(x.talent!=null?x.talent:x.score),pr=Math.round(x.prep||0);const lk=x.luck!=null?Math.round(x.luck):x.score-t-pr;return{p,id:x.id,name:x.name||(p&&p.name)||"",face:x.face,t,pr,lk,score:Math.round(x.score)}}
   const t=kg82Parts(x,kind).total,lk=Math.round(kg82NpcRaw(x,kind)/10*luck);return{p:x,id:x.id,name:x.name,face:null,t,pr:0,lk,score:t+lk}});
  const title=o.title||"Hội thi";const artLabel=o.artName?o.artName[0].toUpperCase()+o.artName.slice(1):K.n;
- const d=kg82Open({art:artLabel,title:`${title} · ${K.t}`,how:K.how});if(!d){if(o.onDone)o.onDone(null);return}
+ const d=kg82Open({art:artLabel,title:`${title} · ${K.t}`,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(null);return}
  const box=kg82Box();const tRows=partsOk?me.parts.map(([l,v])=>[l,kg82Chip("cộng",v,"g")]):[["Tài nghệ",kg82Chip(`cộng${o.talentBy?` (${o.talentBy})`:""}`,talent,"g")]];
  const SK=R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.lv));
- const intro=()=>{KG82.phase="intro";box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",`${kg82DiffWord(KG82.lv,kind)} · theo bậc tài nghệ ${KG82.lv}`,"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
-  (rows.length?`<h4 class="kpst">Đối thủ</h4>`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`}))):"")+
+ const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",`${kg82DiffWord(KG82.lv,kind)} · theo bậc tài nghệ ${KG82.lv}`,"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
+  (rows.length?`<h4 class="kpst">Đối thủ</h4><div class="kgrv">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(kind,raw=>finish(raw,false));$("kg82skip").onclick=()=>finish(SK,true)};
  const finish=(raw,skipped)=>{KG82.phase="result";const skill=Math.round(raw/10*luck),score=talent+prep+skill;
@@ -404,9 +407,12 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   const place=1+rows.filter(r=>r.score>=score).length,of=rows.length+1;
   all.push({who:S,p:S,me:1,id:"me",name:S.name,score,sub:`màn thi ${raw}/10 (${skill}) + tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""}`});
   const ord=all.filter(x=>!x.me).sort((a,b)=>b.score-a.score);ord.splice(place-1,0,all[all.length-1]);
+  /* real prizes by place (jcui, BAL.cp): themed item + bạc + chest + title + Emperor's gift; NPC winners are paid the same */
+  let cup=null;try{if(typeof cuAward==="function")cup=cuAward(o,ord,place,of,kind)}catch(e){console.error(e)}
   const st=o.stakes||null;let gains=[],losses=[];if(st){if(place===1)gains=kg82Norm(st.win);else if(place<=3)gains=kg82Norm(st.top3);if(place===of&&of>2)losses=kg82Norm(st.last);losses=losses.concat(kg82Norm(st.paid));
    const neg=gains.filter(x=>x[1]<0);gains=gains.filter(x=>x[1]>0);losses=losses.concat(neg);
    if(o.applyStakes){const ob={};const add=s=>{if(s&&!Array.isArray(s))for(const k in s)ob[k]=(ob[k]||0)+s[k]};if(place===1)add(st.win);else if(place<=3)add(st.top3);if(place===of&&of>2)add(st.last);try{apply(ob)}catch(e){}}}
+  if(cup&&cup.mine&&cup.mine.bac)gains.push(["Bạc",cup.mine.bac]);
   const pw=["Nhất","Nhì","Ba"][place-1]||`Hạng ${place}`;
   const sRows=[["Màn thi",skipped?`${raw}/10 (để tài nghệ quyết định) → ${kg82Plain(kg82Chip("cộng",skill,"g"))}`:`${raw}/10 · ${kg82Word(raw)} → cộng ${skill}`,"t"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[],[["Tổng",`<b>${score}</b> phần`,"t"]]);
   const stand=kg82Facts(ord.map((x,i)=>({who:x.who,auto:false,text:`<span class="kgrow"><span><b class="kgpl">${i+1}.</b> ${kg82Name(x.p,x.name)}</span><b>${x.score}</b></span><small>${x.sub}</small>`})));
@@ -415,16 +421,18 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   const note=st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"");
   const tParts=partsOk?me.parts:[[`Tài nghệ${o.talentBy?` (${o.talentBy})`:""}`,talent]];
   const kitRes=typeof kitGameResult==="function"?kitGameResult({parts:[["Màn thi",skipped?`Để tài nghệ quyết định, ${raw}/10 → +${skill}`:`${kg82Word(raw)} ${raw}/10 → +${skill}`]].concat(tParts.map(([l,v])=>[l,`+${v}`]),prep?[["Chuẩn bị",`+${prep}`]]:[]),
-   total:`${score} phần`,place:pw,of,rivals:ord.map(x=>({who:x.p||x.who,score:x.score,sub:x.sub})),gains,losses,note}):null;
+   total:`${score} phần`,place:pw,of,rivals:ord.map(x=>({who:x.p||x.who,score:x.score,sub:x.sub})),gains,losses,note,extra:cup&&cup.html}):null;
   const html=(kitRes||`<h4 class="kpst">Phần của ngươi</h4>${kg82Rows(sRows)}<h4 class="kpst">Bảng định thứ</h4>${stand}${tail}`)+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
   kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("round",pw);kg82Set("time","đã hết");
   const out={score,raw,skill,talent,prep,skipped,place,of,standings:ord.map(x=>({id:x.id,name:x.name,score:x.score})),shown:true};KG82.last=out;
   const ok=$("kg82ok");ok.onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(out)}catch(e){console.error(e)}};const dd=kg82El();if(dd)dd.scrollTop=0;try{ok.focus({preventScroll:true})}catch(e){}};
+ /* owner 15/11: everyone who competes with her becomes KNOWN at the contest (face + name, "đã gặp") */
+ try{if(typeof cuMeet==="function")cuMeet(rows.map(r=>r.p))}catch(e){console.error(e)}
  intro()}
 
 /* =============== playArt: the same mini-game for works / lessons, no rivals =============== */
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{KG82.lv=kg82LvFor(S,kind)}catch(e){KG82.lv=0}
- const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
+ const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const done=(raw,skipped)=>{KG82.phase="result";const html=kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
   kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped})}catch(e){console.error(e)}}};
