@@ -36935,7 +36935,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
   if(sc>=KC.cut[0]&&roomFor("consort")){try{const v=newRival(sc>=KC.cut[2]?2:sc>=KC.cut[1]?1:0);v.name=m.name;v.age=Math.max(18,m.age);v.fid=m.fid;v.sac=m.sac;v.tai=m.tai;v.trait=m.tr;if(m.danh)v.danh=m.danh;
    rivals.push(v);try{affAdd(v,S,Math.round(m.af/2))}catch(e){}try{k61Know(v,"người nhà",true,3)}catch(e){}m.pal=v.id;L.push(v)}catch(e){console.error(e)}}}
  try{palFix()}catch(e){}deal();
- const rk=RANKS[rank].n;if(fallCard)Q.push(fallCard);Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. ${S.name} vào cung, phong <b>${rk}</b>.</p>`+
+ const rk=RANKS[rank].n;if(fallCard)Q.push(fallCard);Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. Ngươi vào cung, phong <b>${rk}</b>.</p>`+
   kitRows([["Mang theo",[kitChip("Bạc",S.bac,"n")+(fall?" (hồi môn bị tịch thu)":" (có hồi môn)"),`Danh ${S.danh}`],"t"],[fall?"Tỳ nữ thân tín":"Tỳ nữ hồi môn",S.maid?S.maid.name:"không","t"],["Đã biết trong cung",`${S.kc.intel.length} phi tần`,"t"]].concat(L.map(v=>[v.name,`cũng vào cung, ${RANKS[v.rank].n}`,"t"])))});
  log(`<b class="g">Vào cung theo kỳ tuyển tú: ${rk}.</b>`);kcSnapReset();try{if(typeof kcHook==="function")kcHook("enter",{rank})}catch(e){}tab="act";render()}
 
@@ -37234,6 +37234,8 @@ function kc2T(r,t,name,age,role,tr,af,more){return Object.assign({id:"f"+r,r,t,n
 /* round 3 (owner OD:L1288): every home road ends at the SAME calendar point as the tiểu thư roads (the tuyển tú of year KC.ty, Sơ tuyển month):
    "Vào cung ngay / Chờ" is one choice for every origin, and two friends who both wait enter in the same month without any forced link */
 function kc2Due(){return (S.turn||0)+(KC.ty-S.year)*12+(KC.tm-1-S.month)}
+/* reviewer r1: a home person whose title IS her name (Xuân Đào, Bà Tư) keeps its capitals in running text; role titles go lower case */
+function kc2Lt(m){return m&&/^(xd|ba)$/.test(m.r)?String(m.t):String(m&&m.t||"").toLowerCase()}
 function kc2Init(d){const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;const gl=shuf(KCMN.slice());const g=()=>gl.pop();const fam=[];
  const T=(r,t,name,age,role,trs,af,more)=>kc2T(r,t,name,age,role,pick(trs),af,more);
  if(d==="dan"){
@@ -37539,7 +37541,7 @@ function kc2EnterNc(tier,sc,raw){const K=S.kc;const top=(S.origin&&S.origin.r)||
  S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.max(S.danh,6+Math.round(S.kgt/5)));S.bac=Math.min(400,S.bac+S.khm);
  S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+10,0,100);try{kcPd(rank>=top?10:5,`hòa thân, phong ${RANKS[rank].n}`)}catch(e){}
  try{palFix()}catch(e){}deal();const L=kc2L();
- Q.push({t:"Nhập cung",who:pMe(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-nhap-cung.webp",h:`<p>Lễ ra mắt xong. Hoàng thượng ban chiếu: công chúa ${L.land} ${S.name} vào cung, phong <b>${RANKS[rank].n}</b>${rank<top?` (hòa ước cho tới ${RANKS[top].n}; lễ ra mắt chưa đủ)`:""}.</p>`+
+ Q.push({t:"Nhập cung",who:pMe(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-nhap-cung.webp",h:`<p>Lễ ra mắt xong. Hoàng thượng ban chiếu: công chúa ${L.land} vào cung, phong <b>${RANKS[rank].n}</b>${rank<top?` (hòa ước cho tới ${RANKS[top].n}; lễ ra mắt chưa đủ)`:""}.</p>`+
   kitRows([["Màn chơi",`${raw}/10`,"t"],["Phẩm vị",`${RANKS[rank].n} · cao nhất ${RANKS[top].n}`,rank<top?"r":"t"],[NAMES.kgt,S.kgt,"t"],["Mang theo",[kitChip("Bạc",S.bac,"n")+" (có hồi môn)",`Danh ${S.danh}`],"t"],
    ["Tỳ nữ cố quốc",S.maid?S.maid.name:"không","t"],["Đã biết trong cung",`${K.intel.length} phi tần`,"t"]])});
  log(`<b class="g">Hòa thân sang Đại Hy: ${RANKS[rank].n}.</b>`)}
@@ -37555,7 +37557,7 @@ function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.
 /* ---------- UI: the jkc panels with this road's people and words ---------- */
 (function(){const f0=kcFamList;kcFamList=function(w){if(!S||!S.kc||!S.kc.kd)return f0.apply(this,arguments);return S.kc.fam.filter(m=>m.alive&&!(m.hide&&!S.kc.sx)&&(w==="ban"?!!m.out:!m.out))}})();
 (function(){const c0=kcFamCard;kcFamCard=function(m){if(!S||!S.kc||!S.kc.kd)return c0.apply(this,arguments);const acts=kcFamActs(m);
- const rel=kitRelRow({kind:"quy",a:m.t,b:"ta",v:m.af})+kitRelRow({kind:"quy",a:"Ta",b:m.t.toLowerCase(),v:m.me})+(m.oan?kitRelRow({kind:"oan",a:m.t,b:"ta",v:m.oan}):"");
+ const rel=kitRelRow({kind:"quy",a:m.t,b:"ta",v:m.af})+kitRelRow({kind:"quy",a:"Ta",b:kc2Lt(m),v:m.me})+(m.oan?kitRelRow({kind:"oan",a:m.t,b:"ta",v:m.oan}):"");
  const f=kcFace(m);return pcard({f,col:f.col,name:m.name,rank:m.t,lines:[`${m.age} tuổi`,`Tính ${m.tr.toLowerCase()}`,`Đang ở ${kcAt(m).toLowerCase()}`],note:rel,tabKey:"kcfam",
   groups:[["Việc",acts.map(([a,i])=>cardH(a,i))]],empty:"Lúc này chưa có việc nào làm được với người này."})}})();
 (function(){const h0=kcFamHTML;kcFamHTML=function(){if(!S||!S.kc||!S.kc.kd)return h0.apply(this,arguments);const dan=S.kc.kd==="dan";const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=deck.map((a,i)=>[a,i]).filter(([a])=>a.g==="fam"&&!a.who);
@@ -37574,7 +37576,7 @@ function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.
 (function(){const a0=kcArtHTML;kcArtHTML=function(){if(!S||!S.kc||!S.kc.kd)return a0.apply(this,arguments);const L=deck.map((a,i)=>[a,i]).filter(([a])=>a.g==="art");if(!L.length)return"";const dan=S.kc.kd==="dan";
  return kitSkillCard({kind:"info",k:"le",name:dan?"Học lễ nghi trong cung":"Học lễ nghi Đại Hy",kicker:dan?"Thôn quê":"Cố quốc",level:S.kc.le,max:5,word:"Lễ nghi",desc:dan?"Bà Tư dạy cách đi đứng, quỳ lạy, đáp lời; ngày tuyển ma ma xem.":"Ma ma theo sứ đoàn dạy lễ Đại Hy; Lễ ra mắt xem.",bar:false,next:"",acts:L.map(([a,i])=>cardH(a,i))})}})();
 (function(){const m0=kcMapHTML;kcMapHTML=function(){if(!S||!S.kc||!S.kc.kd)return m0.apply(this,arguments);const dan=S.kc.kd==="dan";const sub=dan?["Quanh nhà","Trong làng"]:kc2L().sub;
- const B=k=>{const P=KCPL[k];const w=kcGoWhy(k);const who=kcHere(k).map(m=>m.t.toLowerCase());return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?"tốn: 1 khắc":"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
+ const B=k=>{const P=KCPL[k];const w=kcGoWhy(k);const who=kcHere(k).map(kc2Lt);return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?"tốn: 1 khắc":"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
  const mine=Object.keys(KCPL).filter(kc2Mine);const inH=mine.filter(k=>KCPL[k][2]),out=mine.filter(k=>!KCPL[k][2]);
  const T=kitSubTabs("kcgo",[{k:"phu",label:sub[0],n:inH.length},{k:"kinh",label:sub[1],n:out.length}]);
  return T.html+(T.cur==="kinh"?`<p class="kpnote">${kitInfo(dan?"Ra khỏi xóm":"Ra ngoài",dan?"Đi xa nhà tốn một khắc mỗi chiều; tối không ra khỏi xóm":"Ra ngoài cần tỳ nữ đi cùng; buổi tối không ra ngoài")}</p>`:"")+`<div class="opts kcmap">${(T.cur==="kinh"?out:inH).map(B).join("")}</div>`}})();
@@ -37751,7 +37753,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f620c2143685";window.CTM_BUILD=BUILD;
+const BUILD="8d5d539caf92";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

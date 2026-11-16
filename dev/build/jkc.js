@@ -546,7 +546,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
   if(sc>=KC.cut[0]&&roomFor("consort")){try{const v=newRival(sc>=KC.cut[2]?2:sc>=KC.cut[1]?1:0);v.name=m.name;v.age=Math.max(18,m.age);v.fid=m.fid;v.sac=m.sac;v.tai=m.tai;v.trait=m.tr;if(m.danh)v.danh=m.danh;
    rivals.push(v);try{affAdd(v,S,Math.round(m.af/2))}catch(e){}try{k61Know(v,"người nhà",true,3)}catch(e){}m.pal=v.id;L.push(v)}catch(e){console.error(e)}}}
  try{palFix()}catch(e){}deal();
- const rk=RANKS[rank].n;if(fallCard)Q.push(fallCard);Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. ${S.name} vào cung, phong <b>${rk}</b>.</p>`+
+ const rk=RANKS[rank].n;if(fallCard)Q.push(fallCard);Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. Ngươi vào cung, phong <b>${rk}</b>.</p>`+
   kitRows([["Mang theo",[kitChip("Bạc",S.bac,"n")+(fall?" (hồi môn bị tịch thu)":" (có hồi môn)"),`Danh ${S.danh}`],"t"],[fall?"Tỳ nữ thân tín":"Tỳ nữ hồi môn",S.maid?S.maid.name:"không","t"],["Đã biết trong cung",`${S.kc.intel.length} phi tần`,"t"]].concat(L.map(v=>[v.name,`cũng vào cung, ${RANKS[v.rank].n}`,"t"])))});
  log(`<b class="g">Vào cung theo kỳ tuyển tú: ${rk}.</b>`);kcSnapReset();try{if(typeof kcHook==="function")kcHook("enter",{rank})}catch(e){}tab="act";render()}
 
