@@ -83,14 +83,28 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  await shot(B,'03-unread');
  await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
  const bub=await B.p.evaluate(()=>{const x=document.querySelector('#kchatp .kcm.fr');return{t:x.querySelector('.kcm-x').textContent,html:x.querySelector('.kcm-x').children.length,n:x.querySelector('.kcm-h b').textContent,w:x.querySelector('.kcm-h span').textContent,xss:!!window.__xss,un:COOPCHAT.unread}});
- ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n===nA&&/tháng/.test(bub.w),'sender = her character name, game-style time',[bub.n,bub.w]);ok(bub.un===0,'opening marks it read');
+ ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n==='Hảo hữu'&&/tháng/.test(bub.w),'unmet friend: signature = the header chip label "Hảo hữu" (OD:L165), game-style time',[bub.n,bub.w]);
+ /* met friend (j61 stage 2): her real name, panel header too (reopen), kitRankNamePaint leaves it alone */
+ await B.p.evaluate(()=>{k61Know(k61CoopEnt(),'test',true,2)});
+ await B.p.evaluate(s=>document.querySelector(s).click(),'#kchatp .kit-x');await until(B,()=>!document.getElementById('kchatp'));
+ await B.p.evaluate(s=>document.querySelector(s).click(),'#krail [data-rail="chat"]');await B.p.waitForSelector('#kchatp .kcm');await B.p.waitForTimeout(600);
+ const bubM=await B.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(bubM.n===nA&&bubM.h.includes(nA),'met friend: signature + header = her real name',[bubM,nA]);await shot(B,'04b-open-friend-met');ok(bub.un===0,'opening marks it read');
  await shot(B,'04-open-friend');
  await B.p.fill('#kchat-in','Được thôi.');await B.p.keyboard.press('Enter');
  ok(await until(B,()=>COOPCHAT.msgs.length===2),'B sends with Enter');
  await B.p.keyboard.press('Escape');ok(await until(B,()=>!document.getElementById('kchatp')),'Esc closes the frame back to the icon');
  /* A has the frame open: the reply shows at once, no badge */
  ok(await until(A,()=>COOPCHAT.msgs.length===2&&document.querySelectorAll('#kchatp .kcm').length===2),'A (frame open): reply appears in the list, in order');
+ const aU=await A.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(aU.n==='Hảo hữu'&&/hảo hữu/i.test(aU.h),'host, unmet friend: signature + header = "Hảo hữu" (same label as the header chip)',aU);
  await shot(A,'05-two-lines');
+ /* host, friend met: real name */
+ const nB=await B.p.evaluate(()=>S.name);await A.p.evaluate(()=>{k61Know(k61CoopEnt(),'test',true,2)});
+ await A.p.evaluate(s=>document.querySelector(s).click(),'#kchatp .kit-x');await until(A,()=>!document.getElementById('kchatp'));
+ await A.p.evaluate(s=>document.querySelector(s).click(),'#krail [data-rail="chat"]');await A.p.waitForSelector('#kchatp .kcm.fr');await A.p.waitForTimeout(600);
+ const aM=await A.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(aM.n===nB&&aM.h.includes(nB),'host, friend met: signature + header = her real name',[aM,nB]);await shot(A,'05b-two-lines-met');
  await A.p.click('#kchatp .kit-x',{noWaitAfter:true});ok(await until(A,()=>!document.getElementById('kchatp')&&!!document.querySelector('#krail [data-rail="chat"]')),'✕ closes the frame back to the icon');
  ok((await ICON(A)).badge==='','A: no unread after reading');
  /* a line while the frame is closed on A (motion ON): shake + glow + sound */
