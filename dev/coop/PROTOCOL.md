@@ -155,5 +155,5 @@ Room-scoped (this Durable Object only; no endpoint reads another room), plain te
 | `chat` | server → BOTH seats (sender too) | `m:{i,s:"a"|"b",n,x,w,g,ts}` — `i` = per-room increasing id. |
 | `room` | server → client | now also `chat:[m…]` = the last 50 messages (history after reconnect / rejoin). |
 Storage: DO key `chat` (array, last 50). Deleted with the room (30 days idle). Clients escape the text when drawing it; the server stores it raw. Old clients ignore `chat` / `room.chat`.
-Client: `dev/build/jcoopchat.js` (KIT §76). Tests: `coop/worker/test/chat.test.mjs`, `dev/test/coop-chat.js`.
+Client: `dev/build/jcoopchat.js` (KIT §80). Tests: `coop/worker/test/chat.test.mjs`, `dev/test/coop-chat.js`.
 

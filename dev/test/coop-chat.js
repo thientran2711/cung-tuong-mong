@@ -1,4 +1,4 @@
-/* Co-op chat "Thư từ" (KIT §76, review/coop-chat): two Playwright clients in one room against the LIVE Worker.
+/* Co-op chat "Thư từ" (KIT §80, review/coop-chat): two Playwright clients in one room against the LIVE Worker.
    usage: python3 dev/build/assemble.py && node dev/test/coop-chat.js <outdir> [AxB@dpr default 755x1000@2] [BxH default 1180x820@2] [workerURL]
    A (host) runs with motion on (shake + glow), B (guest) with reduced motion (still glow only). Checks: send/receive, badge, shake, sound flag,
    escaping, 300-char cut, ✕ / Esc, history after rejoin, a line sent while the friend was away, never in solo (no icon before / after co-op). */
@@ -43,8 +43,8 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const CC=(o,f,a)=>o.p.evaluate(f,a);
-const ICON=o=>o.p.evaluate(()=>{const b=document.getElementById('kchat');if(!b||b.hidden||!b.offsetParent)return null;const r=b.getBoundingClientRect(),st=document.getElementById('stage').getBoundingClientRect();
-  return{x:r.left-st.left,y:r.top-st.top,w:r.width,h:r.height,left:r.left-st.left<st.width/2,badge:(b.querySelector('.kchat-n')||{}).textContent||'',cls:b.className,vis:r.width>0&&r.right<=innerWidth&&r.left>=0}});
+const ICON=o=>o.p.evaluate(()=>{const b=document.querySelector('#krail [data-rail="chat"]');if(!b||!b.offsetParent)return null;const r=b.getBoundingClientRect(),st=document.getElementById('stage').getBoundingClientRect();
+  return{x:r.left-st.left,y:r.top-st.top,w:r.width,h:r.height,left:r.left-st.left<st.width/2,badge:/kbadge/.test(b.className)?'1':'',cls:b.className,vis:r.width>0&&r.right<=innerWidth&&r.left>=0}});
 const life=async o=>{for(let i=0;i<30;i++){const r=await o.p.evaluate(()=>{const k=document.getElementById('kroul');if(!k)return'gone';const bs=[...k.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);
   const b=bs.find(x=>/^(Nhận thân phận|Nhập cung|Tiến cung|Vào cung|Tiếp)/.test(x.textContent.trim()))||bs.find(x=>!/Bỏ qua|Quay/.test(x.textContent))||bs[0];if(b){b.click();return b.textContent.trim()}return'wait'});
   if(r==='gone')return true;await clear(o,3);await sleep(600)}return false};
@@ -53,18 +53,18 @@ async function inRoomWorld(A,B,code){for(const o of[A,B]){const t0=Date.now();le
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'A',[...VA,0]),B=await mk(b,'B',[...VB,1]);ALL.push(A,B);
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
- ok(await A.p.evaluate(()=>!document.getElementById('kchat')&&!window.COOPW.on),'solo / title: no chat icon, co-op off');
+ ok(await A.p.evaluate(()=>!document.querySelector('#krail [data-rail="chat"]')&&!window.COOPW.on),'solo / title: no chat icon, co-op off');
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);
  ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code');const code=(await C(A)).code;await clear(A);
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined, both online');
 await A.p.evaluate(()=>{try{OPT.fxon=true;OPT.fxpick=true}catch(e){}});await inRoomWorld(A,B);ok(await life(A)&&await life(B),'both chose a thân phận');await clear(A);await clear(B);await home(A);await home(B);
- ok(await until(A,()=>!!document.getElementById('kchat'),null,8000)&&await until(B,()=>!!document.getElementById('kchat'),null,8000),'both rooms show the chat icon');
+ ok(await until(A,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000)&&await until(B,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000),'both rooms show the chat icon');
  for(const o of[A,B]){const i=await ICON(o);ok(i&&i.left&&i.vis&&i.badge==='','icon on the LEFT of the room scene, no badge yet ('+o.name+')',i)}
  await shot(A,'01-icon');await shot(B,'01-icon');
  /* A writes through the UI while closed→open */
- await A.p.click('#kchat',{noWaitAfter:true});ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
+ await A.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
  ok(await A.p.evaluate(()=>/Thư từ/.test(document.querySelector('#kchatp .kptitle').textContent)&&!!document.querySelector('#kchatp .kit-x')&&!!document.querySelector('#kchatp .kchat-empty')),'frame: title Thư từ, kit ✕, empty note');
  await shot(A,'02-open-empty');
  const nasty='Chào <b>muội</b> & <img src=x onerror=window.__xss=1> ơi';
@@ -72,11 +72,11 @@ await A.p.evaluate(()=>{try{OPT.fxon=true;OPT.fxpick=true}catch(e){}});await inR
  ok(await until(A,()=>COOPCHAT.msgs.length===1),'A sees her own line (server echo)');
  ok(await until(B,()=>COOPCHAT.msgs.length===1),'B receives it');
  const nA=await A.p.evaluate(()=>S.name);
- const bi=await ICON(B);ok(bi&&bi.badge==='1'&&/kchat-un/.test(bi.cls),'B: unread badge 1 + lit icon',bi);
+ const bi=await ICON(B);ok(bi&&bi.badge==='1'&&/kbadge/.test(bi.cls),'B: unread badge 1 + lit icon',bi);
  
  ok(await B.p.evaluate(()=>COOPCHAT.sounds===1&&(KSFX.log.concat(KSFX.drop).some(x=>x.m==='notice'||/notice/.test(x.n||'')))),'B: notification sound requested (kit sfx notice)',await B.p.evaluate(()=>({s:COOPCHAT.sounds,l:KSFX.log.concat(KSFX.drop).slice(-3)})));
  await shot(B,'03-unread');
- await B.p.click('#kchat',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
+ await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
  const bub=await B.p.evaluate(()=>{const x=document.querySelector('#kchatp .kcm.fr');return{t:x.querySelector('.kcm-x').textContent,html:x.querySelector('.kcm-x').children.length,n:x.querySelector('.kcm-h b').textContent,w:x.querySelector('.kcm-h span').textContent,xss:!!window.__xss,un:COOPCHAT.unread}});
  ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n===nA&&/tháng/.test(bub.w),'sender = her character name, game-style time',[bub.n,bub.w]);ok(bub.un===0,'opening marks it read');
  await shot(B,'04-open-friend');
@@ -86,12 +86,12 @@ await A.p.evaluate(()=>{try{OPT.fxon=true;OPT.fxpick=true}catch(e){}});await inR
  /* A has the frame open: the reply shows at once, no badge */
  ok(await until(A,()=>COOPCHAT.msgs.length===2&&document.querySelectorAll('#kchatp .kcm').length===2),'A (frame open): reply appears in the list, in order');
  await shot(A,'05-two-lines');
- await A.p.click('#kchatp .kit-x',{noWaitAfter:true});ok(await until(A,()=>!document.getElementById('kchatp')&&!!document.getElementById('kchat')),'✕ closes the frame back to the icon');
+ await A.p.click('#kchatp .kit-x',{noWaitAfter:true});ok(await until(A,()=>!document.getElementById('kchatp')&&!!document.querySelector('#krail [data-rail="chat"]')),'✕ closes the frame back to the icon');
  ok((await ICON(A)).badge==='','A: no unread after reading');
  /* a line while the frame is closed on A (motion ON): shake + glow + sound */
  await B.p.fill('#kchat-in','').catch(()=>{});await B.p.evaluate(()=>COOPCHAT.send('Còn nữa, muội ơi'));
  ok(await until(A,()=>COOPCHAT.unread===1),'A: unread 1 while closed');
- const ai=await ICON(A);ok(ai&&ai.badge==='1'&&/kchat-glow/.test(ai.cls),'A: badge + glow',ai);
+ const ai=await ICON(A);ok(ai&&ai.badge==='1'&&/kbadge/.test(ai.cls),'A: badge + glow',ai);
  ok(await A.p.evaluate(()=>COOPCHAT.shakes>=1&&COOPCHAT.sounds>=1),'A (motion on): shakes counted + sound requested',await A.p.evaluate(()=>[COOPCHAT.shakes,COOPCHAT.sounds]));
  ok(await B.p.evaluate(()=>COOPCHAT.shakes===0),'B (reduced motion): no shake, still glow only');
  await shot(A,'06-shake');
@@ -106,18 +106,18 @@ await A.p.evaluate(()=>{try{OPT.fxon=true;OPT.fxpick=true}catch(e){}});await inR
  ok(await until(B,n=>COOPCHAT.msgs.length===n,seenB+1,25000),'rejoin: history reloaded (all lines, in order) incl. the line sent while away',await B.p.evaluate(()=>COOPCHAT.msgs.map(m=>m.i)));
  const bi2=await ICON(B);ok(bi2&&bi2.badge==='2'||bi2&&bi2.badge==='1'||bi2&&+bi2.badge>=1,'rejoin: unread badge counts what she missed',bi2);
  await shot(B,'07-rejoined');
- await B.p.click('#kchat',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
+ await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
  ok(await B.p.evaluate(()=>document.querySelectorAll('#kchatp .kcm').length===COOPCHAT.msgs.length&&COOPCHAT.msgs.length>=5),'history list shows every line');
- /* other places: no icon, a toast for new lines */
+ /* other places: the rail is on every stage */
  await B.p.click('#kchatp .kit-x',{noWaitAfter:true});const s0=await B.p.evaluate(()=>COOPCHAT.sounds);
  await B.p.evaluate(()=>{S.place='vuon';tab='act';render()});await sleep(800);
- ok(await B.p.evaluate(()=>!document.getElementById('kchat')||document.getElementById('kchat').hidden),'away from her room the icon is not on the stage');
+ ok(await B.p.evaluate(()=>!!document.querySelector('#krail [data-rail="chat"]')),'other place: the same rail icon (one column on every stage)');
  await A.p.evaluate(()=>COOPCHAT.send('Ta ở đây.'));
  ok(await until(B,n=>COOPCHAT.sounds>n&&COOPCHAT.unread>=1,s0,15000),'away: a new line still gives the sound + unread count');
- ok(await B.p.evaluate(()=>/thư từ/i.test((document.getElementById('kupdline')||{}).textContent||'')),'away: kitLine "Có thư từ hảo hữu"');
+ ok(await B.p.evaluate(()=>/kbadge/.test(document.querySelector('#krail [data-rail="chat"]').className)),'other place: rail dot lit for the new line');
  await B.p.evaluate(()=>{S.place='home';render()});
  /* leaving co-op: gone (solo never shows it) */
- await A.p.evaluate(()=>COOP.leave());await sleep(800);ok(await A.p.evaluate(()=>!document.getElementById('kchat')||document.getElementById('kchat').hidden),'after leaving co-op the icon is gone');
+ await A.p.evaluate(()=>COOP.leave());await sleep(800);ok(await A.p.evaluate(()=>!document.querySelector('#krail [data-rail="chat"]')),'after leaving co-op the rail has no Chat icon');
  ok(A.errs.length+B.errs.length===0,'no page errors',[...A.errs,...B.errs].slice(0,4));
  const bad=res.filter(r=>!r[0]);console.log(bad.length?'FAILED '+bad.length:'ALL OK',res.length+' checks');fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok   ':'FAIL ')+r[1]).join('\n'));
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
