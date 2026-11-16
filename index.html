@@ -510,11 +510,10 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 /* full-body figures */
 .stage{container-type:size}
 .tok.fig{min-width:0}
-.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%;animation:figidle 5s ease-in-out infinite}
 .tok.fig:hover .figimg{transform:translateY(-3px)}
-#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);pointer-events:none}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);animation:meidle 4.6s ease-in-out infinite;pointer-events:none}
 .stage.hasme .tokens{justify-content:flex-end}
-/* review/face-sharp (owner 15/11): no idle sway on people pictures; an animated transform/filter re-samples the face every frame (hazy face) */
 @keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) translateY(-2px) scale(1,1.012)}}
 @media (prefers-reduced-motion:reduce){.tok.fig .figimg,#mefig{animation:none}}
@@ -5977,8 +5976,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  st.__j59here=persons}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
-const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
-const HG=(a,c)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
+const SG=(a,o)=>`var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
+const HG=(a,c)=>`var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
 const css=document.createElement("style");css.textContent=`
 /* rank badge fills follow the new RCOL (c0 trắng ngà ngọc trai, owner 11/15; c1 xanh lục, c3 hồng phấn; others already match) */
 .rk-c0{background:linear-gradient(160deg,#fbf8f1,#e6dfcf)!important;border-color:#9c8f74!important}
@@ -6013,15 +6012,16 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 #mefig.j59sel,.stage.j59 .tok.fig.j59sel .figimg{filter:${SG(9,.95)}}
 .stage.j59 .tok.j59sel:not(.fig) .md{box-shadow:0 0 0 2px #fff3c4,0 0 10px 2px rgba(255,243,196,.9)!important}
 .stage.j59 .tok .tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;letter-spacing:.01em;color:var(--ink);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
-.stage.j59 .tok.fig.j59unk .figimg{filter:url(#kfa) grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 6px 6px #0004)!important}
-.stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:url(#kfa) grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 0 2px #fff3c4) drop-shadow(0 0 7px rgba(255,243,196,.9))!important}
+.stage.j59 .tok.fig.j59unk .figimg{filter:grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 6px 6px #0004)!important}
+.stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 0 2px #fff3c4) drop-shadow(0 0 7px rgba(255,243,196,.9))!important;animation:figidle 5s ease-in-out infinite!important}
 .stage.j59 .tok .tag .j59t.j59only{font-size:.76rem}
 .stage.j59 .tok .tag .j59n{display:block;line-height:1.2}
 .stage.j59 .tok.j59me{position:absolute;z-index:2;min-width:0;padding:0;transform:translateX(-50%);pointer-events:none;cursor:default}
 .stage.j59 .tok.j59me .tag{width:max-content;text-align:center}
-/* review/face-sharp (owner 15/11 "mặt bị mất nét"): NO continuous animation on a people picture. The old idle sway (meidle/figidle,
-   scale 1→1.012) and the pulsing halo / selection glow (j59halo / j59selp, animated filter) made the compositor re-sample her picture
-   every frame: face detail −8…−13 % (dev/test/face-sharp.js), her face hazy beside a still, crisp maid. Halo and glow stay, static. */
+@media (prefers-reduced-motion:no-preference){
+.stage.j59.j59fx #mefig{animation:meidle 4.6s ease-in-out infinite,j59halo 3.8s ease-in-out infinite}
+.stage.j59.j59fx #mefig.j59sel{animation:meidle 4.6s ease-in-out infinite,j59selp 2.6s ease-in-out infinite}
+.stage.j59.j59fx .tok.fig.j59sel .figimg{animation:figidle 5s ease-in-out infinite,j59selp 2.6s ease-in-out infinite}}
 @keyframes j59halo{0%,100%{filter:${HG(4,40)}}50%{filter:${HG(6,52)}}}
 @keyframes j59selp{0%,100%{filter:${SG(7,.85)}}50%{filter:${SG(11,1)}}}
 /* KIT 33.7 slot template: the people layer covers the stage, every person stands absolutely in a fixed slot (left/bottom from j59lay) */
@@ -6040,7 +6040,7 @@ html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;
 html body #stage.j59ph #kshR .k3p{width:auto}
 html body #stage.j59slot #mefig.j59off,html body #stage.j59slot #j59metag.j59off{display:none!important}
 html body #stage.j59slot .j59more{transform:none;min-height:40px;padding:4px 0;z-index:4}
-.stage.j59 .tok.fig .figimg.j59sil{filter:url(#kfa) brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:.92}
+.stage.j59 .tok.fig .figimg.j59sil{filter:brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:.92}
 /* her idle sway breathes from the feet: no vertical lift, so her feet stay on the slot floor line with everyone else */
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) scale(1,1.012)}}`;document.head.appendChild(css);
 /* the person card (#popw) docks in the lower panel area (a side sheet beside the stage on wide screens), so the stage
@@ -12136,7 +12136,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 @media (orientation:portrait){.modal.kpscene{align-items:flex-end!important;padding:12px 4vw 16px!important}.modal.kpscene .dlg.kpsc{max-width:min(680px,100%)!important}}
 @media (max-width:599px){.dlg.kpsc .kpb.kpid{grid-template-columns:104px minmax(0,1fr)!important;gap:10px!important}.dlg.kpsc .kpid .kpidn{font-size:1.02rem}.dlg.kpsc .kpid .kpidt{font-size:.84rem}.dlg.kpsc .kpid .kstgrid{grid-template-columns:1fr 1fr}.dlg.kpsc .kpid .kst-tile{padding:2px 6px}.dlg.kpsc .kpid .kst-tile>.kstv{font-size:.84rem}}
 /* 3b · identity with her standing figure */
-.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:94dvh;filter:url(#kfa) drop-shadow(0 6px 18px #0006)}
+.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:94dvh;filter:drop-shadow(0 6px 18px #0006)}
 .modal.kpscene.kpfig>.dlg{position:relative;z-index:1}
 .modal.kpscene.kpfig{justify-content:flex-end!important;align-items:center!important;padding:12px 2.5vw!important}
 .modal.kpscene.kpfig .dlg.kpsc{max-width:min(560px,54vw)!important}
@@ -14966,7 +14966,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-fig{position:relative;width:100%;height:calc(var(--kfh,300px) * .84);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
  animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
-.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
+.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-img.kpod-unk{opacity:.92}
 .kpod-fb{display:none;height:100%;align-items:flex-end;justify-content:center}.kpod-nofig .kpod-img{display:none}.kpod-nofig .kpod-fb{display:flex}
 .kpod-fb .pfwrap{height:96%;display:flex;flex-direction:column;align-items:center}.kpod-fb .pcp.kit{height:100%;width:auto!important;max-width:100%}.kpod-fb .pfrw{display:none}
@@ -17963,7 +17963,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
  return{hint:parts.join("; "),risk}}
 /* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
 function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
- const odd=((b.querySelector(":scope > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
+ const odd=((b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
  const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
@@ -17973,13 +17973,13 @@ function kitRisk(word){const r=KIT_RISK[word]||KIT_RISK["có rủi ro"];return `
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint + risk chip, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
- const od=b.querySelector(":scope > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
+ const od=b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
  if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
-  const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
+  const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
    (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
@@ -20957,7 +20957,7 @@ window.kitEvCat=kitEvCat;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
@@ -21050,7 +21050,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
-#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
 #mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:none;border:0;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
@@ -21476,33 +21476,41 @@ window.kitActCompactOn=kitActCompactOn;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
   const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+/* KIT §43 + §6.2 (review/opt-pics): the compact card rules are ONE string (kitCompactCSS(B)) used twice: inside a narrow kpane, and ALWAYS for a
+   dialog option card (B = button.ka.kart.kopt, jopic) — the one compact act-card form game-wide. w × h = picture box: owner override 15/11 — the small card's picture is a 3:4 PORTRAIT RECTANGLE (84x112;
+   72x96 in a pane under 420 px), the act art's own aspect, never a square crop; the big Hành sự card is untouched. */
+function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
+ ${B}{--kaw:${w}px!important;--kah:${h}px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+ ${B}>.kaart>.ksart>:not(img){display:none!important}
+ ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
+ ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
+ ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ ${B} .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
+ /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
+    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
+ ${B} small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+ ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+ ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+
+`}
+window.kitCompactCSS=kitCompactCSS;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
  .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
- button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
- button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
- button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
- button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
- button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
- button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
- button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
- button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
- /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
-    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
- button.ka.kart small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
- button.ka.kart small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
- button.ka.kart small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
- button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
+${kitCompactCSS("button.ka.kart",84,112)}
 }
 @container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:72px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+ button.ka.kart{--kaw:72px!important;--kah:96px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
 /* ================= jseal: kitSeal · ẤN TRÂN NỮ (owner 11/15, review/brand; KIT §39) =================
@@ -28788,53 +28796,173 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh
  `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+
  `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
-/* ================= jfighd: kitFigHD — HIGH-RES FIGURES WHERE A FIGURE IS SHOWN BIG (review/face-sharp, owner 15/11 "mặt vẫn bị mất nét") =================
-   Every full-body figure file (fig-*.webp) is 900 px tall. The identity screen shows her at 94 dvh (~1.7-2.1x on a tablet), the stage at
-   1.2-1.4x, dialogs and cards up to ~1.5x: the browser upscales the 900 px file and her face goes soft. img/hd/fig-*.webp is the SAME
-   painting at up to 1800 px (dev/figwork/hdcut.py: cut from the gpt-2-6 sheet it came from, all later fixes kept by detail transfer).
-   img/FIGURES-hd.json = {"fig-x.webp":[w900,wHd], ...}: the files that have an HD twin.
-   ONE rule for every <img> of a figure anywhere in the game: give it srcset "<900 file> w900w, <hd file> wHdw" and sizes = its drawn width,
-   so the browser itself loads the HD twin only when the picture is drawn bigger than the 900 px file (width x devicePixelRatio > w900)
-   and keeps the light file otherwise (performance budget). src stays the 900 file (all code that compares / keys on src is unchanged).
-   A src change by any code drops a stale srcset at once (MutationObserver). Test hook: window.KFHD {n, list}. ================= */
-(function(){
- const K=window.KFHD={map:null,n:0,ld:0,bad:{}};const RE=/\/img\/(fig-[^\/?#]+\.webp)(?:[?#].*)?$/;
- function hdUrl(lo){return lo.replace(/\/img\/(fig-[^\/?#]+\.webp)/,"/img/hd/$1")}
- function fit(im){try{const s=im.getAttribute("src")||"";const m=RE.exec(im.src||s);const ent=m&&K.map&&!K.bad[m[1]]&&K.map[m[1]];
-   if(!ent){if(im.dataset.kfhd){im.removeAttribute("srcset");im.removeAttribute("sizes");delete im.dataset.kfhd}return}
-   const ss=`${im.src} ${ent[0]}w, ${hdUrl(im.src)} ${ent[1]}w`;if(im.getAttribute("srcset")!==ss){im.setAttribute("srcset",ss);im.dataset.kfhd=m[1];K.n++}
-   const w=Math.round(im.getBoundingClientRect().width);const sz=(w>4?w:ent[0])+"px";if(im.getAttribute("sizes")!==sz)im.setAttribute("sizes",sz)}catch(e){}}
- function all(){if(!K.map)return;document.querySelectorAll("img").forEach(im=>{if(im.dataset.kfhd||RE.test(im.src||""))fit(im)})}
- window.kitFigHD=fit;window.kitFigHDAll=all;
- function load(){if(K.ld)return;K.ld=1;try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-hd.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&typeof j==="object"){K.map=j.files||j;K.list=Object.keys(K.map).length;all()}}).catch(()=>{K.ld=0})}catch(e){K.ld=0}}
- /* FALLBACK: a browser that picked an HD twin which fails to load (missing file / network) shows NO picture (srcset candidate failed, src not retried).
-   Drop the srcset at once so the 900 px src loads, and never offer that twin again this session. */
- document.addEventListener("error",e=>{const t=e.target;try{if(t&&t.tagName==="IMG"&&t.dataset.kfhd&&/\/img\/hd\//.test(t.currentSrc||"")){K.bad[t.dataset.kfhd]=1;K.fb=(K.fb||0)+1;t.removeAttribute("srcset");t.removeAttribute("sizes");delete t.dataset.kfhd;const s=t.getAttribute("src");t.setAttribute("src",s)}}catch(x){}},true);
- load();setInterval(()=>{K.ld=0;load()},300000);
- let T=0;const sched=()=>{if(T)return;T=requestAnimationFrame(()=>{T=0;all()})};
- try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){const im=m.target;if(im.tagName==="IMG"&&m.attributeName==="src")fit(im)}else if(m.addedNodes.length){sched();break}}})
-  .observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["src"]})}catch(e){}
- addEventListener("resize",()=>{clearTimeout(window.__kfhdT);window.__kfhdT=setTimeout(all,150)});
- document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&RE.test(t.src||"")&&!t.dataset.kfhdw){t.dataset.kfhdw=1;fit(t)}},true);
-})();
-/* ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
-   The cut-out figures keep a faint alpha haze (alpha 1–12) over much of their box (background removal + lossy WebP alpha). Every
-   drop-shadow (her rank halo, the selection glow, the ground shadow) also shadows that haze, so the glow showed as a yellow / grey
-   RECTANGLE. url(#kfa) comes FIRST in every people-picture filter (p1 #mefig / .tok.fig .figimg, j59 HG/SG, jk4 .kesimg, j79 .kidfig2,
-   j90 .kpod-img): alpha' = 1.07·alpha − 0.065, so the haze becomes 0 and the body is unchanged; the drop-shadows then trace the silhouette.
-   Static (no animation: KIT motion rule STILL PEOPLE). */
-(function(){try{if(document.getElementById("kfa"))return;const d=document.createElementNS("http://www.w3.org/2000/svg","svg");d.setAttribute("width","0");d.setAttribute("height","0");
- d.setAttribute("aria-hidden","true");d.style.cssText="position:absolute;width:0;height:0;overflow:hidden";
- d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.07" intercept="-0.065"/></feComponentTransfer></filter></defs>';
- (document.body||document.documentElement).appendChild(d)}catch(e){}})();
-/* kit page sample (§71): one figure drawn large (HD twin when drawn above 900 px) with the static rank halo and the static selection glow */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitFigHD · #kfa (người sắc nét, viền sáng theo dáng)",
- html:()=>{const f="https://ctm-img.victoria-tntt.workers.dev/img/fig-consort-c30-t2-a18.webp";const st=h=>`height:${h}px;width:auto;display:inline-block;vertical-align:bottom;margin:0 10px`;
-  return `<div class="kitpg-row" style="align-items:flex-end;background:#3a2a22;padding:10px;border-radius:6px">`+
-   `<img src="${f}" alt="" style="${st(220)};filter:url(#kfa) drop-shadow(0 8px 8px #0006)">`+
-   `<img src="${f}" alt="" style="${st(360)};filter:url(#kfa) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 5px rgba(255,236,170,.5))">`+
-   `<img src="${f}" alt="" style="${st(520)};filter:url(#kfa) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 9px rgba(255,236,170,.95))">`+
-   `</div><p class="past">Trái → phải: thường · vầng phẩm (tĩnh) · đang chọn (tĩnh). Cao hơn 900 px ảnh gốc thì tự nạp bản HD; viền sáng ôm dáng người, không thành ô chữ nhật.</p>`}})}catch(e){}
+/* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
+   Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
+   Markup dev/handover/refs/owner-option-picture-left.jpg (docs branch). Coordinator: ONE act-card form = the COMPACT card of Hậu cung (KIT §43):
+   small picture left (~1/4), title + Cần/Tốn/Được/Mất/Gợi ý rows right, height = content; tap the picture = enlarge.
+   Owner ruling: one picture per MEANING GROUP (all "nhận lỗi / cúi đầu" share one, all "dâng lễ vật" share one …), reused everywhere.
+   ONE place: every dialog option (`#modal .opts` button.ka, kit choice panel `.kpscopts`), after the j63 frame (kaNorm1) built it:
+     kpOptArt(b) → `.kaart` slot (kitArtFrame, the act-card picture frame) + `.kabody` (the rows) + classes `kart kopt` → compact CSS (jk4 KIT §43,
+     shared rule set kitCompactCSS). The tiny portrait icon in the title (.md, j25 / pickers) leaves the title.
+   Picture of an option (kitOptPic(title, b)), first hit wins:
+     1. kitActKey(title) — the option IS an act, or ACTS.json already has its own choice picture (act-pics2 "-h" keys);
+     2. ACTS.json "log" meaning rules (kbkRules, j87: the Tuần lục picture of that same choice line), key "-" = none;
+     3. KIT_OPT_RULES — the meaning groups below (regex on the plain option title) → shared group picture img/act-opt-<group>.webp;
+     4. a picture the option already carries (a person's portrait .md img, an item picture) — pickers of people / items;
+     5. the KIT §59 act placeholder (light / dark by kitPhTone), recorded once in CTM_MISSING_PICS as kind "opt".
+   A key whose file is not on the CDN (https://ctm-img.victoria-tntt.workers.dev/img/_index.json) is skipped (next rule).
+   Tap / click on the picture = kitPicZoom(src) (does not choose the option). ============================================================ */
+const KIT_OPT_RULES=[
+ /* (meaning group → picture key; "opt-*" = painted for this group by review/opt-pics, every other key = an existing act / choice picture reused) */
+ /* — leave it / not now — */
+ [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|cảm ơn, không cần)/i,"opt-thoi"],
+ /* r1: "Đi / Vẫn đi" = going, "Ở lại" = staying put — not the turning-away picture */
+ [/^(vẫn đi|đi$|đi \()/i,"den-ngay-h"],[/^ở lại/i,"o-yen-nghi-h"],
+ [/(che phần lớn)/i,"giau-trong-ruong-h"],
+ [/^(im lặng|làm thinh|lặng thinh|nín lặng|cười trừ|giả vờ không hiểu|nghe và giữ kín)/i,"im-lang-h"],
+ [/^(không dự|không đến|không dâng lễ|không phát|không bày tiệc|cáo mệt|khéo cáo mệt|bỏ thi|đóng cửa giữ mình|ở yên|ở cung|sống thật thanh tĩnh|để mặc, giữ mình|bình thản chờ|đứng ngoài|mặc kệ|làm ngơ|bỏ mặc|bỏ ngoài tai|mặc họ|không dính vào)/i,"o-yen-nghi-h"],
+ [/(ngồi xem|chỉ xem|đứng xem|đứng nhìn|cổ vũ)/i,"dung-xem-h"],
+ [/^(không cho|không giao|không bán|khéo từ chối|từ chối|cự tuyệt|không nhận|không chịu|khiêm nhường)/i,"tu-choi-h"],
+ [/(trả lại|gửi trả)/i,"tra-lai-qua"],
+ /* — named small groups (reused act pictures) — */
+ [/(hạ độc|bỏ độc|hạc đỉnh hồng|thạch tín|thuốc độc)/i,"ha-doc"],
+ [/(dự thi|ghi tên)/i,"ghi-ten-du-thi-h"],
+ [/^(mạng |kết bằng|tìm mạng)/i,"tu-tay-ket-h"],
+ [/(nhờ vẽ|cho vẽ|nét bút)/i,"ve-tranh"],
+ [/(về phe|kết thân|kết nghĩa|đồng minh)/i,"ket-minh-g-h"],
+ [/(tìm lỗi|lật lại chuyện)/i,"do-la-h"],
+ [/(sớ)/i,"dang-so"],
+ [/(trả nợ|đòi bằng được)/i,"uy-hiep-doi-bac-h"],
+ [/(khen)/i,"khen-mot-cau-h"],
+ [/(lấy lại lòng hoàng thượng)/i,"tro-chuyen-hoang-thuong"],
+ [/(trang sức|phối đồ|điểm trang)/i,"diem-trang-h"],
+ [/(hàn lâm|tiến sĩ|mời thầy)/i,"moi-thay-day-nghe-h"],
+ /* — humble / apologise / beg — */
+ [/(nhận lỗi|nhận tội|tạ lỗi|tạ tội|xin lỗi|cúi đầu đi qua|nhún nhường|hạ mình|^nhịn)/i,"cui-dau-nhan-loi-h"],
+ [/(quỳ xin|khóc lóc xin|xin tha|van xin|dập đầu|xin bà cứu)/i,"quy-xin-tha-h"],
+ [/^(thưa|bẩm|kể thật|giải thích|phân trần|thanh minh|biện bạch|tự thú)/i,"opt-thua-trinh"],
+ [/^(vâng|vâng chỉ|tuân|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
+ /* — gifts / silver — */
+ [/(lì xì)/i,"li-xi-h"],
+ [/(đút bạc|đưa bạc|bỏ bạc mua|lo lót|hối lộ|mua chuộc|bịt miệng|im miệng)/i,"dut-bac-rut-loi-h"],
+ [/(dâng lễ|lễ vật|lễ mọn|mang lễ|gửi lễ|biếu|dâng ngọc|đáp lễ|tặng)/i,"bieu-qua-h"],
+ [/(gửi bạc|góp bạc|quyên|cho vay|xóa nợ|cứu lụt|lều cháo|dâng thóc|kèm bạc)/i,"gui-bac-chua-benh-h"],
+ [/(cược|ván nhỏ|ván lớn|chơi ván)/i,"cuoc-thien-xa-h"],
+ /* — answer back / warn / cold — */
+ [/(lạnh nhạt|lạnh lùng|ngoảnh mặt)/i,"lanh-lung-h"],
+ [/(cảnh cáo|dọa)/i,"canh-bao-h"],
+ [/(đáp|cãi|phản đòn|mắng|vặn lại|khiêu khích|khéo lời hóa giải|đối chất)/i,"dap-tra-mia-h"],
+ /* — report / evidence / spy — */
+ [/(chứng cứ|kẽ hở|lời khai|nắm lại thóp)/i,"trinh-chung-cu-hh-h"],
+ [/(ghi nhớ|ghi lại|trả thù)/i,"ghi-nho-chung-cu-h"],
+ [/^(tố\s|mách|báo|kể với|mật báo|tâu|dâng thư|dâng sớ)/i,"to-giac"],
+ [/(theo dõi|canh chừng|người canh)/i,"sai-theo-doi"],
+ [/(dò|thăm dò|hỏi thẳng|hỏi thăm|hỏi ma ma|gợi chuyện|lục tìm|hỏi cho ra lẽ)/i,"do-la-h"],
+ [/^(sai|nhờ|giao cho|đổi .* sang việc khác|đổi hắn)/i,"sai-nguoi-tang-h"],
+ [/(xin cung chính ti tra|tra xét)/i,"xin-ht-tra-xet-h"],
+ /* — hide / burn / secret love — */
+ [/(đốt|xóa mọi dấu|xóa dấu|tiêu hủy)/i,"dot-tho-h"],
+ [/(giấu|giữ kín|giữ lại|giữ thư|giữ tín vật|ép cành hoa|cất)/i,"giau-trong-ruong-h"],
+ [/(buông tay|quên ta|quên mình|đừng tìm ta|đừng chờ ta|cắt hẳn|ngừng mọi liên lạc|tránh hẳn|giữ khoảng cách|ta còn gia tộc)/i,"opt-buong-tay"],
+ [/(lời hẹn|nắm tay|như năm ấy|giả sơn)/i,"hen-gap"],
+ /* — harm / timing — */
+ [/(thử bằng kim bạc|thử trước|nếm trước|kim bạc)/i,"nghiem-doc-h"],
+ [/(vu oan|vu cho|phao tin|tung tin|đồn)/i,"vu-oan-h"],
+ [/^(ngày hội đông người|lúc nàng|khi nàng|sau cơn mưa|một đêm vắng)/i,"opt-rinh-cho"],
+ [/(phạt|trách|đánh(?! lạc hướng)|quở|đuổi)/i,"phat-vi-h"],
+ /* — guard the palace — */
+ [/(canh giữ|soát|chuyển đồ quý|đồ quý|giữ đèn nến|che chắn|sửa gấp|thuê thợ|cho người sửa|chắp lại)/i,"opt-canh-giu"],
+ [/(hoảng sợ|hô thị vệ|lao vào cứu)/i,"opt-hoang-so"],
+ /* — kindness / help / talk — */
+ [/(an ủi|vỗ về|khuyên|làm lành)/i,"khuyen-giu-long-the-h"],
+ [/(giúp|đỡ lời|nói giúp|che chở|bênh|cứu|tận tâm)/i,"giup-do-nang-h"],
+ [/(tiệc|pha trà|mời khách|pha .* mời)/i,"bay-o-yen-tiec-h"],
+ [/(chúc mừng|bái kiến|thỉnh an|chào)/i,"bai-kien-h"],
+ [/(xin hoàng thượng|xin ngài|xin thái hậu|xin hoàng hậu|ân điển|ban hôn|ban mạng|xin nội vụ|^xin )/i,"xin-an-dien-h"],
+ /* — prayer / medicine / children — */
+ [/(chép|kinh)/i,"chep-kinh-h"],
+ [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
+ [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
+ [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
+ /* r1: "chàng" alone (any line about him) is the LAST resort — petitions / help for him hit their own group first */
+ [/(chàng)/i,"hen-gap"],
+];
+const kitOptPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/[\s ]+/g," ").trim();
+/* r1 (LUẬT SỬA CẢ NHÓM): a meaning-group hit must be whole words — JS \b does not know Vietnamese letters, so "dò" hit "Viết một dòng",
+   "sớ" hit "sớm", "đồn" hit "đồng minh". A match counts only when no letter touches it on either side. */
+function kitOptHit(re,t){try{const g=new RegExp(re.source,re.flags.replace("g","")+"g");let m;while((m=g.exec(t))){const a=t[m.index-1]||"",z=t[m.index+m[0].length]||"";
+  const L=c=>/\p{L}/u.test(c),s=m[0];if(!(L(a)&&L(s[0]||""))&&!(L(z)&&L(s[s.length-1]||"")))return true;if(!m[0].length)g.lastIndex++}return false}catch(e){return re.test(t)}}
+function kitOptOnCdn(src){try{return typeof kitPhOnCdn!=="function"||kitPhOnCdn(src)}catch(e){return true}}
+/* the picture of an option title: {src, key, how} — how = rule | act | log | own | ph */
+function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if(!k||k==="-")return null;
+  let src="";if(String(k).startsWith("ev:")||String(k).startsWith("scene:")){try{src=(kbkKeySrc(k,"",t,"")||[])[0]||""}catch(e){}}else src=`https://ctm-img.victoria-tntt.workers.dev/img/act-${k}.webp`;
+  return src&&kitOptOnCdn(src)?{src,key:k,how}:null};
+ let r=null;
+ if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
+  try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
+  for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
+ /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
+ if(t){try{const v=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name&&t.startsWith(r.name)):null;
+   const f=v&&typeof pv==="function"?pv(v):/^Hoàng thượng$/.test(t)&&typeof pEmp==="function"?pEmp():/^Thái hậu$/.test(t)&&typeof pTH==="function"?pTH():null;
+   if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}catch(e){}
+  try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&IT[k].n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
+   const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
+ /* a picture the option already carries: that picture, in the slot */
+ if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-act-/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
+ if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
+  try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
+ return{src:"",key:"",how:"none"}}
+/* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
+/* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
+const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
+function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
+ const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
+ const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
+ const p=kitOptPic(name,b);
+ /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
+ kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());
+ if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
+ let cat="";try{cat=typeof kitActCat==="function"?kitActCat(name):""}catch(e){}const col=(typeof KIT_CAT!=="undefined"&&KIT_CAT[cat]||[])[1]||"";
+ let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+ let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
+ if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
+window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;
+(function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.matches&&b.classList.contains("ka")&&b.matches(KIT_OPT_SEL))kpOptArt(b)}catch(e){}return r}})();
+try{if(typeof kaNorm==="function"&&document.getElementById("modal"))kaNorm(document.getElementById("modal"))}catch(e){}
+
+/* ---- kitPicZoom(src): the picture enlarged over everything; tap anywhere closes (KIT §6.2) ---- */
+function kitPicZoom(src){try{if(!src)return;let z=document.getElementById("kpzoom");if(!z){z=document.createElement("div");z.id="kpzoom";z.setAttribute("role","dialog");
+  z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
+ z.innerHTML=`<div class="kpzf">${kitSceneArt(src,"",{shape:"tall"})}</div>`;z.hidden=false}catch(e){}}
+window.kitPicZoom=kitPicZoom;
+/* capture phase: a tap on an option's picture enlarges it and does NOT choose the option */
+document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kaart[data-kzoom]");if(!a)return;
+ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitPicZoom(a.dataset.kzoom)}catch(x){}},true);
+(function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
+#kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
+#kpzoom[hidden]{display:none!important}
+#kpzoom .kpzf{width:min(78vw,calc(82vh * 3 / 4),506px)}
+button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
+button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
+${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):""}
+/* one option card per row, full width (owner L109: horizontal option cards, no 2-col gaps; with the picture a half-width cell left the
+   rows a thin column). Overrides jk3 31.16 k3grid and the person-dialog 2-column rules (jk4 32.7 / KIT 50 kdpo2, jplace): :is(#mb,*) +
+   the repeated class only lift the specificity above theirs (2 ids, 5 classes). */
+html body #modal :is(#mb,*)>.opts.opts.opts>button.ka.kopt.kart{grid-column:1/-1!important;order:0!important}
+html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body #modal :is(#mb,*)>.kpscopts.kpscopts.kpscopts:has(> button.ka.kopt.kart),.kitpg-opts:has(> button.ka.kopt.kart){display:grid!important;flex-direction:unset!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;align-items:stretch!important;align-content:start!important}
+/* equal sizes: a row is never lower than the picture + padding (the options area scrolls, KIT 32.5: a "1fr" row would be squeezed into
+   its height), so cards with the usual rows are all the same height; a card with more text grows, never clips */
+html body button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important;box-sizing:border-box}
+/* review/opt-pics r1: the person dialog (jk4 32.7 .kdper) sets min-height:max-content on every option (2 ids, 3 classes); in its short
+   scrolling grid at 844x390 that let the rows shrink to 41 px and the 130 px cards OVERLAPPED. The picture floor must win there too. */
+html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
+`;document.head.appendChild(st)})();
+/* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
+ `<div class="opts kitpg-opts">`+
+ [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
+  .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 
 </script>
 
@@ -28861,7 +28989,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitFi
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="69874dde8367";window.CTM_BUILD=BUILD;
+const BUILD="8e6e3afc83ca";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
