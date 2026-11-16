@@ -255,7 +255,7 @@
 | STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 15:58Z |
 | ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | DONE (PASS 81f86655) | 16/11 15:57Z |
 | kit-size #2 (opus, kit keeper; OD 16:00Z (1)–(9)) | review/kit-size | main s19 | session_01UV1SzhfEWsjainSgb3FHP9 | RUNNING | 16/11 15:57Z |
-| emotion-acts review (opus; e9bd51ee) | review/emotion-acts-r1 | B | session_01N1tNP36vT978Q89SfwTmPC | RUNNING | 16/11 16:04Z |
+| emotion-acts review (opus; e9bd51ee) | review/emotion-acts-r1 | B | session_01N1tNP36vT978Q89SfwTmPC | DONE FAIL 2 items (archived) | 16/11 16:04Z |
 | D29 review (opus) of schedules3-r4 @f388b4de | review/schedules3-r5 | C | session_011xDdVPgkrf4Nx6Fu4w3gr5 | RUNNING | 16/11 16:06Z |
 | PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | session_011xDdVQ9uFz3dWEEUrZZp9W | RUNNING | 16/11 16:06Z |
 | tutrang-layout (sonnet; owner-bug fast lane; OD 16/11 16:20Z): Tư trang › Túi đồ — wear slots one vertical column left, bigger bag grid right, small pet strip below; whole group (every wear-slot/bag place); samples 755x1000 + 1180x820 to owner first | review/tutrang-layout | main s20 | session_01UV1SzkXdhk3ejaZYACftuT | RUNNING | 16/11 16:22Z |
@@ -263,3 +263,4 @@
 | story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | session_011xDdVSfRLPar78kg13jMBC | RUNNING | 16/11 16:22Z |
 | go-live-kit (opus; OD:L1370): tier classifier script, 5–10 min pre-push quick check, build number + 'what changed' line in game menu, one-step rollback, nightly full suite | review/go-live-kit | main s20 | session_01UV1SziX5AtFSgrnkfGWXgw | RUNNING | 16/11 16:36Z |
 | TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd | RUNNING | 16/11 16:34Z |
+| emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | (opening) | RUNNING | 16/11 16:41Z |
