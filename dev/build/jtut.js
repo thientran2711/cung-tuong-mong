@@ -319,7 +319,7 @@ function loop(){try{
   if(T.paused){if(s&&s.id==="thu"&&T.tryDone){T.tryDone=false;next();return}show(false);return}
   return}
  if(T.ask){if(busy()){coachOff();T.askHid=true}else if(T.askHid){T.askHid=false;askOnce()}return}
- if(busy()){if(TIPEL)TIPEL.hidden=true;return}
+ if(busy()||CUR){/* a dialog, or a kitCoach ring from elsewhere (jgoal "Đi làm"): the tip waits */if(TIPEL)TIPEL.hidden=true;return}
  if(TIPEL&&TIPEL.hidden){TIPEL.hidden=false;tipPlace()}
  if(T.replay){T.replay=false;tourStart();return}
  if(!T.fresh&&S.tutOld==null&&!S.tutTour){S.tutOld=oldSave()?1:0;if(S.tutOld)S.tutTour=1}

@@ -67,7 +67,7 @@ function art(){try{return{src:typeof kitOriginWide==="function"?kitOriginWide(S.
 function nextRows(N){return N.map((x,i)=>[`Việc ${i+1}`,`<b>${esc(x.t)}</b><br><span class="past">${esc(x.why)} · chạm: ${esc(x.where)}</span>`,""])}
 function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
 function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
- const sec=[{h:"Mục tiêu chương",rows:[["Chương",`${G.kicker}${C.max?`/${C.max}`:""} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]]}];
+ const sec=[{h:"Mục tiêu chương",rows:[["Chương",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]]}];
  if(C.kind==="ms")sec.push({h:C.any?"Tiến độ · xong một điều là đủ":"Tiến độ",html:typeof kitChecks==="function"?kitChecks(C.steps.map(x=>[x.ok,esc(x.t)])):""});
  if(C.kind==="ms"&&C.id==="nhap"&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
   sec.push({h:`Muốn lên ${RANKS[S.rank+1].n}`,html:typeof kitReqRows==="function"?kitReqRows(R):""})}catch(e){}}
@@ -75,7 +75,7 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
   if(C.dl!=null)R.push(["Hạn",`còn ${Math.max(0,C.dl-S.turn)} tháng`,C.dl-S.turn<=1?"r":""]);if(C.hist.length)R.push(["Đã qua",C.hist.map(esc).join("<br>")]);sec.push({h:"Tiến độ",rows:R})}
  if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]});
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
- kitPanel({kind:"rule",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),subject:pMe(),stage:[S],sections:sec,opts:nextOpts(G.next),btn:"Đóng"},true);showModal()}
+ kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),subject:pMe(),stage:[S],sections:sec,opts:nextOpts(G.next),btn:"Đóng"},true);showModal()}
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
 function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
  const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
