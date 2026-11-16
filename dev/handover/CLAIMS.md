@@ -268,7 +268,7 @@
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
 | kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | session_01UV1Szjj42P74XsFm4trr8J | RUNNING | 16/11 16:50Z |
 | road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | session_01N1tNP4jWtq6Qf3eWpQ7krw | DONE FAIL 5 (archived) | 16/11 16:47Z |
-| road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | RUNNING | 16/11 16:47Z |
+| road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | DONE handed to fix A/B (archived) | 16/11 16:47Z |
 | road B2 chapters nc(+bd)+td+ch .5–.11 (opus helper) | review/road-b2 | B | session_01N1tNP4zDh6M8kQNxdcYKvM | RUNNING | 16/11 16:47Z |
 | road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | DONE SẴN SÀNG bcc79551 (archived) | 16/11 16:47Z |
 | page-scale (opus; OD 17:00Z + OD:L345/L1278): phone portrait page = iPad right page scaled uniformly — root cause + whole-group fix for every tab panel (bag 7 vs 4 rows first) + comparison test | review/page-scale | main s20 | session_01UV1SzibwMrHrCm5SBrYNJR | RUNNING | 16/11 17:00Z |
