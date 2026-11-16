@@ -93,9 +93,13 @@ const KP_CONS_RX=/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại
 const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô|[Cc]ung nữ(?: thân tín)?|[Tt]hái giám|[Tt]ổng quản|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]hợ [^ ]+|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử|[Tt]iểu chủ|[Cc]hủ tử|[Nn]ương nương|[Tt]ú nữ) $/;
 /* the text ends with the first word(s) of t (her own title, shortened) */
 function kpTitleTail(pre,t){const w=String(t||"").split(" ").filter(Boolean);for(let k=w.length;k>=1;k--){const x=w.slice(0,k).join(" ")+" ";if(pre.endsWith(x)||pre.toLowerCase().endsWith(x.toLowerCase()))return true}return false}
-function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
- for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
-  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));
+/* whole names only (flip-newlife / outside-r2 bug: "Lan Chi" was painted INSIDE the already-painted "Mộc Lan Chi", giving "Đoan Cung nữ thân tín Mộc Lan Chi"):
+   an occurrence counts only if it is not glued to letters and does not lie inside an occurrence of a longer, already-painted name (cov) */
+function kpFindName(s,n,cov){const L=/[A-Za-zÀ-ỹĐđ]/;const rg=[];for(const c of cov||[])if(c!==n&&c.includes(n)){let j=-1;while((j=s.indexOf(c,j+1))>=0)rg.push([j,j+c.length])}
+ let i=-1;while((i=s.indexOf(n,i+1))>=0){const e=i+n.length;if(L.test(s[i-1]||"")||L.test(s[e]||""))continue;if(rg.some(r=>i>=r[0]&&e<=r[1]))continue;return i}return -1}
+function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);const cov=[];
+ for(const [n,p] of people){if(!plain.includes(n)||who.includes(p)||kpFindName(plain,n,cov)<0)continue;who.push(p);cov.push(n);let done=false;
+  h=kpMapText(h,s=>{if(done)return s;const i=kpFindName(s,n,cov.slice(0,-1));if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));
    /* owner 11/15 16:55Z (fix-float): an older line still carries her rank of that day ("Đáp ứng X" after she became Thường tại): a consort is
       always drawn with her CURRENT title, the old one is dropped */
    else if(t&&KP_CONS_RX.test(pre)&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p))))pre=pre.replace(KP_CONS_RX,"");
@@ -249,9 +253,13 @@ function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r==
  for(const k in KIT_HXMAP){const R=r&&KIT_GLOSS_ROAD[r],t=KIT_HXMAP[k];HX[k]=R&&R[t]!=null?`${t}: ${R[t].charAt(0).toLowerCase()+R[t].slice(1)}`:KIT_HX0[k]}}catch(e){}}
 window.kitHxRoad=kitHxRoad;
 /* ---------- popover (odds ladder, glossary): never a modal, never covers the scene for long; any tap closes ---------- */
-function kpPop(anchor,html){let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
- p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();const W=Math.min(300,innerWidth-24);p.style.width=W+"px";
- let x=Math.max(12,Math.min(innerWidth-W-12,r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
+function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
+ p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
+ /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
+ const W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
+ let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
+ if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
+ let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
 document.addEventListener("click",e=>{const p=document.getElementById("kpop");const od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");
  if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
  if(p&&!p.hidden)p.hidden=true},true);
@@ -335,6 +343,10 @@ html body #modal:not(.pcm) .dlg.kpanel>#mr{flex:0 0 auto}
 /* KIT §8.1 short notice: centred in the one-size frame (margin:auto 0 centres when it fits, top-aligned + scroll when it does not — nothing is clipped) */
 html body #modal:not(.pcm) .dlg.kpanel>#mb{display:flex;flex-direction:column}
 html body #modal:not(.pcm) .dlg.kpanel>#mb>*{flex:0 0 auto}
+/* KIT §8.1 SCROLL CHAIN (owner 16/11 "Không vuốt được"): only the panel's own scroller (#mb, the dawn .kpb, the person card .pc) holds the
+   swipe. A nested scroller (.kshg grid, .opts list, .pcl ...) hands the swipe on when it has nothing (more) to scroll: with
+   overscroll-behavior:contain the browser latches the finger to it and #mb never moves (the 10-piece Học Cầm grid was unreachable by touch). */
+html body #modal .dlg>#mb *,html body #modal .pc *,.dawn .dbox.kpanel>.kpb *{overscroll-behavior:auto}
 html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort{margin:auto 0;text-align:center;align-items:center}
 html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line);box-shadow:inset 0 -2px 0 #fffaf0,0 1px 0 #e6d3ac}

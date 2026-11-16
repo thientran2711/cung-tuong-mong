@@ -382,7 +382,8 @@ function note70(o){const z=j70();const a=o.a,A=ACT[o.k];const who=o.known?title7
  for(const x of (o.self||[]))rows.push(`Tự ý giúp ngươi: ${x.t}${o.ok?", nhưng không ngăn được":""}.`);
  if(!o.ok&&o.by.length)rows.push(`Phòng bị đã chặn: ${o.by.join(", ")}.`);else if(!o.ok&&!(o.self||[]).length)rows.push("Không có lệnh phòng bị nào của ngươi dính vào; kẻ ấy tự hỏng việc.");
  if(o.gain>0)rows.push(G70(`Ngươi được: ${o.gain} chứng cứ về ${who} (chứng minh nàng ${what}); nay có ${ev}${ev>=need?", đủ để tố giác":`, cần ${need} để tố giác`}.`));
- if(lost.length)rows.push(R70(`Ngươi mất: ${lost.join(", ")}.`));
+ /* log-sync r1: a loss the body already states ("Sức -43") is not said twice (the Sổ ghi would count it twice) */
+ {const bt=String(o.body||"").replace(/<[^>]+>/g,"");const L2=lost.filter(x=>!bt.includes(x));if(L2.length)rows.push(R70(`Ngươi mất: ${L2.join(", ")}.`))}
  return rows.join(" ").trim()+" "}
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(r&&a&&a!==S&&t!==S)return String(r).replace(/\(sai ([^)]+) đi\)/,`(${a.name} sai $1 đi)`)}catch(e){}return r}})();
 /* ---------- data for the kit ---------- */
