@@ -241,6 +241,8 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 
 
 ## QUESTIONS FOR MAIN (s7)
+- (20:43Z) KIT REQUEST y-duoc (for the main kit keeper; filed in dev/kit/KIT_REQUESTS.md on review/suc-khoe-fix): new kit act category 'Y dược' (KIT_CAT + KIT_ACT_CATS in j79, KIT.md §6.1 legend + kit page). Today medicine acts scatter: An thai, Tự bốc thuốc, Tự bào chế thuốc an thai, Bài thuốc dễ thụ thai, Báo tin có thai, Giả mang thai, Uống thuốc thúc sinh → 'Giao thiệp'; Xin chữa bệnh → Học tập; Mua thuốc bổ → Buôn bán; Uống thuốc phá thai → Hại người. Category art img/act-cat-y-duoc.webp already on CDN. suc-khoe-fix F6 waits on it (rest of the fix continues).
+- (20:43Z) ART NEEDED for Foreman C: act picture act-uong-thuoc-thuc-sinh.webp (ACTS.json key 'Uống thuốc thúc sinh', induced-birth drug, health+pregnancy bundle) — kit placeholder meanwhile.
 - (20:37Z) NPC ROADS (D) depends on story14-p1-r2 (Foreman C) and road-map-next (Foreman B) — neither is on main. Who ships them, and when? D cannot go live with npc-roads before them.
 | P5 STORY BOT balance | review/story-bot | opus | worker session_01DgYSWknF3zCGUsx9BmG3ub RUNNING 20:40Z |
 | 10-night ledger (main s22 19:41Z) | — | — | MOVED to main's night-final successor (main s23 20:10Z, OD:L1229) |
