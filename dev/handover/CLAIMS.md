@@ -66,7 +66,7 @@
 | story-roads 14 chapters: plan + phase 1 (frame + j67 port) | review/story14-p1 | main s11 | session_01UV1SzkHMTxeSLrXW9U3BdC (opus, structure) | RUNNING | 16/11 06:46Z |
 | card-flip videos for owner (me picked / other picked) | (handover reports only) | main s11 | session_01UV1SzhNCLWgwR9ozmc9zcD (sonnet) | DONE (sent) | 16/11 06:46Z |
 | low-context canon split (OD:L1241) — same worker as canon-pairs | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus) | DONE (dev/rules, make_index.py) | 16/11 06:46Z |
-| D6 review | review/econ-items-r1 | C | session_011xDdVQ5xcrYDf3N1snQ5L1 | RUNNING | 06:46Z 16/11 |
+| D6 review | review/econ-items-r1 | C | session_011xDdVQ5xcrYDf3N1snQ5L1 | PASS eed75e73f | 06:46Z 16/11 |
 | C44 cloud-save-r1 re-merge on main (auto-deploys coop Worker) | review/merge-hot-4 | main s11 | session_01UV1SzhS3WeMXFgk8CgeevX (sonnet) | LIVE a96b3464 (post-deploy smoke PASS: run 43820129878, coop-e2e 59/59 live) | 16/11 06:47Z |
 | kc-lore reviewer | review/kc-lore-r1 | main s11 | session_01UV1SzhPB8Tmqmw8DBzHGe3 (sonnet) | RUNNING | 16/11 06:53Z |
 | merge-train-5: personality-r1, tuduc-pic-r1, newgame-ui-r3, opt-pics3-r1, skin-audit-r1 → main | review/merge-train-5 | main s11 | session_01UV1SzkywkDv2a9TAUts211 (sonnet) | RUNNING | 16/11 06:53Z |
@@ -84,3 +84,6 @@
 | slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | RUNNING | 16/11 07:27Z |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | RUNNING | 16/11 07:27Z |
 | Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | RUNNING | 16/11 07:27Z |
+| D26 review (opus) | review/memories-r1 | C | (opening, s2 session_011xDdVRG4cue2p9fUsdAg68) | RUNNING | 07:26Z 16/11 |
+| D41 review (opus) | review/promote-servants-r1 | C | (opening, s2) | RUNNING | 07:26Z 16/11 |
+| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | (opening, s2) | RUNNING | 07:26Z 16/11 |
