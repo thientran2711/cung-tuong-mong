@@ -13,7 +13,9 @@
    usage: NODE_PATH=$(npm root -g) node dev/test/evtruth-bot.js http://127.0.0.1:PORT/index.html [lives=6] [seed=1] */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const [,,URL,NL,SEED]=process.argv;const LIVES=+NL||6;const seed=+SEED||1;
-const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');
+let INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');
+for(const h of ['function scoreAct(a,N,cost){','function talkScore(t,N){const{p,a}=t;']){if(!INP.includes(h))throw new Error('inpage4 hook moved: '+h);
+ INP=INP.replace(h,h+'if(window.__cleanBad&&window.__cleanBad(a))return -1e9;')}
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=1500']});
  const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
  await ctx.addInitScript(([sd])=>{let s=sd*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},[seed]);
@@ -28,8 +30,7 @@ const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8
   /* CLEAN: the bot never does a wrong. Cards / talks / choices that cost Đức, or whose text names a wrong, are refused. */
   const WRONG=/độc|xạ hương|vu |vu oan|cài đồ|giá họa|đẩy|trù ẻo|bùa|tư thông|đưa tình|liếc mắt|hẹn|mua chuộc|đút lót|hối lộ|đồ cấm|chợ đen|tung tin|ly gián|ngáng|uy hiếp|ép nộp|phóng hỏa|thú dữ|hủy dung|diệt khẩu|giả mang thai|mật thư|trộm|lục rương|lục lọi|nhận quà|thư tình|tráo/i;
   window.__wrong=WRONG;
-  const s0=scoreAct;scoreAct=function(a,N,c){if(WRONG.test(a.n)||(a.c&&a.c.duc<0)||(a.w&&a.w.duc<0))return -1e9;return s0.apply(this,arguments)};
-  const t0=talkScore;talkScore=function(t,N){if(WRONG.test(t.a.n)||(t.a.c&&t.a.c.duc<0))return -1e9;return t0.apply(this,arguments)};
+  window.__cleanBad=a=>!!a&&(WRONG.test(a.n||'')||(a.c&&a.c.duc<0)||(a.w&&a.w.duc<0));
   /* event choices: drop the options that cost Đức or name a wrong (the rest go to the sensible chooser) */
   const pm=pushModal;pushModal=function(m){try{if(m&&m.opts&&m.opts.length>1){const ok=m.opts.filter(o=>!((o.fx&&o.fx.duc<0)||WRONG.test(o.n||"")));if(ok.length&&ok.length<m.opts.length){m.__all=m.opts;m.opts=ok}}}catch(e){}return pm.apply(this,arguments)};
   window.__T={lives:[]};
@@ -45,6 +46,7 @@ const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8
  const out=[];const t0=Date.now();let guard=0;
  while(out.length<LIVES&&guard<4000){guard++;
   const st=await p.evaluate(()=>{for(let i=0;i<200;i++){window.__bot.step('sens',1);if(S&&S.turn>=24&&!S.dead&&!Q.length)return'done';if(S&&S.dead)return'dead'}return'run'});
+  if(guard%5===0)console.error('tick',guard,JSON.stringify(await p.evaluate(()=>({t:S.turn,tu:S.tuan,b:S.buoi,q:Q.length,qt:Q[0]&&Q[0].t,qo:Q[0]&&Q[0].opts&&Q[0].opts.length,mg:!!S.mg,ov:!document.getElementById('ov').hidden,out:S.out,conf:S.confined,dead:S.dead,used:typeof used!=='undefined'?used:null,acts:JSON.stringify(window.__acts).slice(0,300),modal:!document.getElementById('modal').hidden}))));
   if(st!=='run'){const r=await p.evaluate(()=>{const x=window.__lifeStats();window.__lifeReset();start();return x});r.end=st;out.push(r);console.error('life',out.length,JSON.stringify(r),Math.round((Date.now()-t0)/1000)+'s')}}
  const sum=k=>out.reduce((a,r)=>a+(r[k]||0),0);
  const clean=out.filter(r=>r.deedsMe===0);

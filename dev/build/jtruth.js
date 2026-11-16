@@ -90,7 +90,7 @@ function frameExpose(a,p,how){const T=BAL.truth;ap(a,{danh:-T.fDanh});if(typeof 
  relAdd(a,p,-20);evA(p,a,2);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
  const A=a===S?"Ngươi":a.name,P=p===S?"Ngươi":p.name;return `${P} minh oan được: ${how}. ${A} bị lộ là kẻ vu khống: Danh -${T.fDanh}, Đức -${T.fDuc}, bị phạt. `}
 let FRAME_LAST="";
-(function(){const f0=framed;framed=function(p,why){FRAME_LAST="";const a=ACTX.a&&ACTX.a!==p?ACTX.a:null;if(!a||!p)return f0.apply(this,arguments);
+(function(){const f0=framed;framed=function(p,why){FRAME_LAST="";const a=ACTX.a&&ACTX.a!==p?ACTX.a:null;if(!a||!p||window.__truthAuto)return f0.apply(this,arguments);
  if(p===S&&!window.__truthAuto){pushDil(mkP("vuoan",{a:key(a),why}),"Bị vu oan");return -1}
  const D=frameDef(p,a);try{window.__frames=(window.__frames||0)+1;if(p===S)window.__framesMe=(window.__framesMe||0)+1}catch(e){}
  if(roll(D.o)){FRAME_LAST=frameExpose(a,p,D.how);try{window.__framesClear=(window.__framesClear||0)+1;if(p===S)window.__framesMeClear=(window.__framesMeClear||0)+1}catch(e){}return 0}
