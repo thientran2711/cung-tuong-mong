@@ -170,3 +170,4 @@
 | kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | RUNNING | 16/11 12:20Z |
 | weather-fx2 | review/weather-fx2 | main s16 | session_01UV1SzhWSw7EETVzp3xX5hi→worker weather-fx2 (this session) | RUNNING | 16/11 12:26Z |
 | name-mask review (sonnet) | review/name-mask-r1 | D | session_01DgYSWmyLaHvXUgNsFAkrBH | RUNNING | 16/11 12:40Z |
+| skin-norosy: owner verdict B (12:45Z) — remove rosy-skin layer from ALL pictures, keep later edits; no kitFigLight | review/skin-norosy | main s16 | session_01UV1SzjQcW4S8GoPGj8rDyk (opus) | RUNNING | 16/11 12:43Z |
