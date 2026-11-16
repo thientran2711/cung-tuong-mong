@@ -96,7 +96,8 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   showRes(true);const h=ov.querySelector(".kmhint");if(h)h.textContent="Chạm để đóng";later((me?CF.hold.me:CF.hold.other)+(still?800:0),close)}
  function close(){if(phase===2)return;phase=2;Q.forEach(clearTimeout);ov.classList.add("km-out");try{lightH&&lightH.stop&&lightH.stop(200)}catch(e){}setTimeout(()=>ov.remove(),260);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}}
  ov.addEventListener("click",e=>{e.stopPropagation();if(phase===0)final("tap");else close()});
- let shown=false,lightH=null;function showRes(now){if(shown)return;shown=true;res.innerHTML=o.resHTML||"";res.classList.add("on");
+ let shown=false,lightH=null;function glow(){if(lightH||still||!tel)return;try{if(typeof kitFxLight==='function')lightH=kitFxLight('glow-gold',tel,{dur:2600})}catch(e){}}
+ function showRes(now){if(shown)return;shown=true;if(me)glow();res.innerHTML=o.resHTML||"";res.classList.add("on");
   if(me){ov.classList.add("kcf-mine");stamp();if(!still){burst();petals()}snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
   cap.textContent=o.cap2||"Hoàng thượng lật thẻ bài"}
  function burst(){if(!tel)return;const r=tel.getBoundingClientRect();const at={x:r.left+r.width/2,y:r.top+r.height*.38};
@@ -136,7 +137,7 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   A(hand,[{transform:"translateY(-9%)",opacity:1},{transform:`translate(${-r0.width}px,-70%)`,opacity:0}],{duration:520,easing:"ease-in"});
   Object.assign(tel.style,{left:c.x+"px",top:c.y+"px",width:c.w+"px"});const r1=tel.getBoundingClientRect();
   A(tel,[{transform:`translate(${r0.left-r1.left}px,${r0.top-r1.top}px) scale(${r0.width/r1.width})`,transformOrigin:"0 0"},{transform:"none",transformOrigin:"0 0"}],{duration:700*sp,easing:"cubic-bezier(.3,.7,.2,1)"});
-  try{if(typeof kitFxLight==="function"&&!still)lightH=kitFxLight("glow-gold",tel,{dur:2600})}catch(e){}});
+  glow()});
  later(T.res,()=>showRes());later(T.end+(me?0:-600),final);
  return{ov,close,final}}
 
@@ -201,9 +202,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-c.kcf-grey{filter:grayscale(1) brightness(.62) contrast(.9) drop-shadow(2px 3px 2px #0006)}
 .kcf-c.kcf-gone{display:none}
 .kcf-dim .kcf-c:not(.kcf-pick){filter:sepia(.2) brightness(.42) drop-shadow(2px 3px 2px #0006)}
-.kcf-c.kcf-pick{z-index:5;filter:brightness(1.06) drop-shadow(0 0 10px #ffe7a0) drop-shadow(0 0 26px #f0b84299);animation:kcfGlow 1.6s ease-in-out .3s infinite alternate}
-.kcf-mine .kcf-c.kcf-pick{filter:brightness(1.1) drop-shadow(0 0 14px #fff0c0) drop-shadow(0 0 38px #f0b842cc)}
-@keyframes kcfGlow{to{filter:brightness(1.12) drop-shadow(0 0 16px #fff0c0) drop-shadow(0 0 40px #f0b842bb)}}
+.kcf-c.kcf-pick{z-index:5;filter:brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the gold glow is painted: kitFxLight("glow-gold") + kitFxBurst("glowburst") (KIT §68), never a CSS drop-shadow glow */
 .kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none;filter:sepia(.18) saturate(.95) brightness(.9) drop-shadow(6px 10px 8px #1a0a0480)}
 .kcf-hand.on{display:block}
 .kcf-cap{position:absolute;left:0;right:0;top:max(10px,env(safe-area-inset-top));text-align:center;z-index:7;padding:0 12px}
