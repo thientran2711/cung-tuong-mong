@@ -71,7 +71,7 @@
 | kc-lore reviewer | review/kc-lore-r1 | main s11 | session_01UV1SzhPB8Tmqmw8DBzHGe3 (sonnet) | RUNNING | 16/11 06:53Z |
 | merge-train-5: personality-r1, tuduc-pic-r1, newgame-ui-r3, opt-pics3-r1, skin-audit-r1 → main | review/merge-train-5 | main s11 | session_01UV1SzkywkDv2a9TAUts211 (sonnet) | RUNNING | 16/11 06:53Z |
 | npc-mind: personality/sở trường/thích/ghét inventory + NPC choice audit (OD:L1248-1249) | review/npc-mind | main s11 | session_01UV1SzjTpyN5PV8pMieq1vi (opus) | RUNNING | 16/11 06:53Z |
-| weather-fx-one reviewer | review/weather-fx-one-r1 | main s11 | session_01UV1SzkPmftvVeoQw464NEK (sonnet) | RUNNING | 16/11 06:55Z |
+| weather-fx-one reviewer | review/weather-fx-one-r1 | main s11 | session_01UV1SzkPmftvVeoQw464NEK (sonnet) | LIVE 2940a545, smoke PASS (archived) | 16/11 06:55Z |
 | kit-keeper-2: event-frame #mb scroll, C32b curl speed, podium.js test | review/kit-keeper-2 | main s11 | session_01UV1SzjsFdjAm6CFetJ7BrB (sonnet) | RUNNING | 16/11 06:55Z |
 | pre-palace home roads for cn + nc (all branches), td pattern (OD:L1251) | review/kc-roads-cn-nc | main s11 | session_01UV1Szk5QsvVYvw2L45Qpqa (opus) | RUNNING | 16/11 06:59Z |
 | D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | RUNNING | 07:06Z 16/11 |
@@ -107,3 +107,4 @@
 | D13 spread events across buổi (on top of D29 schedules3 @9b1d82fa) | review/spread-events | B | session_01N1tNP4LQMHt6zowrVAmxXG (opus) | RUNNING | 16/11 07:58Z |
 | coop-rejoin-xdev REVIEW (opus) | review/coop-rejoin-xdev-r1 | main s13 | session_01UV1SzjVyTZhydVYEDmAGJV | RUNNING | 16/11 08:06Z |
 | stage-slots-fix REVIEW (sonnet) + jk4/jk2b popup column overlap (whole group) | review/stage-slots-fix-r1 | main s13→s14 | session_01UV1SziRAU7gAwVeXFiPNfo | RUNNING | 16/11 08:15Z |
+| test-drift-roulette (6+ tests vs #kroul) + tutorial first-run check | review/test-drift-roulette | main s14 | session_01UV1SzkFT88BKzJLdb7NFY6 (sonnet) | RUNNING | 16/11 08:20Z |
