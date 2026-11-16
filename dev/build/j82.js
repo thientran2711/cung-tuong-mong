@@ -16,19 +16,19 @@
 const KG82_KIND={
  dan:{e:"rhythm",n:"Đàn",t:"Tấu khúc",how:"Hoa mai rơi theo bốn dây Cung, Thương, Giốc, Chủy. Chạm vào dây khi hoa chạm vạch son."},
  hat:{e:"rhythm",n:"Hát",t:"Hát theo phách",how:"Phách rơi theo bốn cung giọng. Chạm vào cột khi phách chạm vạch son."},
- co:{e:"go",n:"Cờ",t:"Ăn quân",how:"Mỗi thế cờ có một nhóm quân trắng chỉ còn một chỗ trống bên cạnh (một khí). Chạm vào chỗ trống ấy, đặt quân đen để ăn nhóm. Bậc thấp có vòng vàng khoanh nhóm quân trắng; chưa thấy chỗ thì chạm Gợi ý."},
+ co:{e:"go",n:"Cờ",t:"Ăn quân",how:"Mỗi thế cờ có một nhóm quân trắng chỉ còn một chỗ trống bên cạnh (một khí). Chạm vào chỗ trống ấy, đặt quân đen để ăn nhóm. Bậc thấp có vòng vàng khoanh nhóm quân trắng; chưa thấy chỗ thì chạm Gợi ý. Ăn nhanh thì được trọn phần."},
  dauho:{e:"aim",n:"Đầu hồ",t:"Ném tên vào bình",how:"Mũi tên đưa qua đưa lại trên miệng bình. Chạm khi mũi tên ở ngay giữa miệng bình. 6 lần ném."},
  ban:{e:"aim",n:"Bắn cung",t:"Bắn hồng tâm",how:"Ngắm đưa qua đưa lại trên bia. Chạm khi ngắm ở giữa hồng tâm. 6 phát tên."},
- tho:{e:"quiz",b:"doi",n:"Thơ",t:"Nối vần",how:"Chọn câu thơ đối chỉnh nhất với câu cho sẵn. 5 câu, mỗi câu 10 giây."},
- doi:{e:"quiz",b:"doi",n:"Câu đối",t:"Đối câu",how:"Chọn vế đối chỉnh nhất cho vế ra. 5 câu, mỗi câu 10 giây."},
+ tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
+ doi:{e:"doiline"},/* filled by jnwp */
  doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý."},
  ve:{e:"pattern",m:"ink",n:"Vẽ",t:"Nhớ nét bút",how:"Nét mực hiện trên ô giấy rồi tan. Chạm lại đúng những ô có nét mực. 5 hồi."},
  hoa:{e:"pattern",m:"flower",n:"Cắm hoa",t:"Nhớ thế hoa",how:"Hoa hiện trên các ô bình rồi khuất. Chạm lại đúng những ô có hoa. 5 hồi."},
  theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
  kim:{e:"pattern",m:"silk",n:"Khéo tay",t:"Nhớ mẫu kết",how:"Nút kết hiện trên khung rồi khuất. Chạm lại đúng những ô có nút kết. 5 hồi."},
- mua:{e:"steps",n:"Múa",t:"Theo bước múa",how:"Xem các bước sáng lên theo thứ tự rồi chạm lại đúng thứ tự. 5 hồi, hồi sau dài hơn."},
- banh:{e:"quiz",b:"bep",n:"Bếp núc",t:"Chọn món",how:"Chọn món hay vị đúng cho từng việc. 5 câu, mỗi câu 10 giây."},
- huong:{e:"quiz",b:"huong",n:"Điều hương",t:"Chọn hương",how:"Chọn vị hương đúng cho từng việc. 5 câu, mỗi câu 10 giây."}};
+ mua:{e:"steps",n:"Múa",t:"Theo bước múa",how:"Xem các bước sáng lên theo thứ tự rồi chạm lại đúng thứ tự. 5 hồi, hồi sau dài hơn. Mỗi bước phải chạm kịp nhịp, chậm nhịp là hồi ấy dừng; bàn dễ cho lỡ một bước mỗi hồi."},
+ banh:{e:"cook"},/* filled by j91 */
+ huong:{e:"blend"}};/* filled by j91 */
 const KG82_PLAIN={cam:"dan",ky:"co",thi:"tho",hoa:"ve",vu:"mua",y:"huong",nau:"banh"};
 /* talent formula per kind: the same coefficients as j71 SC7 (so the parts add up to the j71 talent number) */
 const KG82_F={doden:[["tai",.55],["tamco",.3],["thi",4]],tho:[["tai",.5],["thi",8]],doi:[["tai",.55],["thi",6],["hoa",2]],dan:[["tai",.3],["cam",9]],
@@ -40,23 +40,6 @@ const KG82_F85={theu:[["tai",.3],["theu",7],["hoa",2],["help",1]],kim:[["tamco",
 function kg82Has85(k){try{return typeof artLv==="function"&&typeof S!=="undefined"&&S&&S.arts&&k in S.arts}catch(e){return false}}
 function kg82FormulaOf(kind){const f=KG82_F85[kind];if(f&&f.every(([s])=>!/^(theu|nau)$/.test(s)||kg82Has85(s)))return f;return KG82_F[kind]||[]}
 const KG82_STAT={tai:"Tài",tamco:"Tâm cơ",sac:"Sắc",suc:"Sức"};
-const KG82_HUONG=[{q:"Muốn hương thanh, an thần cho giấc ngủ, chọn vị nào?",a:"Trầm hương",w:["Xạ hương","Long não","Hùng hoàng"]},
- {q:"Người đang mang thai phải tránh xa thứ hương nào?",a:"Xạ hương",w:["Hoa nhài","Trầm hương","Đàn hương"]},
- {q:"Hương nào dùng ướp trà, thơm dịu và ngọt?",a:"Hoa nhài",w:["Long não","Ngải cứu","Hùng hoàng"]},
- {q:"Đốt lên để đuổi muỗi và côn trùng mùa hè?",a:"Ngải cứu",w:["Hoa hồng","Mộc lan","Quế hoa"]},
- {q:"Hương gỗ ấm, dùng trong chùa và lễ cúng?",a:"Đàn hương",w:["Bạc hà","Hoa sen","Vỏ quýt"]},
- {q:"Ngày hè oi bức, muốn mát đầu tỉnh táo?",a:"Bạc hà",w:["Xạ hương","Đàn hương","Trầm hương"]},
- {q:"Hoa nào thơm ngọt mùa thu, dùng làm nhân bánh?",a:"Quế hoa",w:["Ngải cứu","Long não","Hùng hoàng"]},
- {q:"Ướp áo xiêm cho thơm lâu và tránh mọt?",a:"Long não",w:["Hoa nhài","Bạc hà","Quế hoa"]}];
-const KG82_BEP=[{q:"Mùa hè oi bức, nấu món gì giải nhiệt?",a:"Chè đậu xanh",w:["Gà tần sâm","Lẩu dê","Rượu gừng"]},
- {q:"Bồi bổ cho người mới sinh nở?",a:"Gà ác tần thuốc bắc",w:["Chè đậu xanh","Canh khổ qua","Gỏi cá"]},
- {q:"Tết Trung thu dâng bánh gì?",a:"Bánh nướng nhân sen",w:["Bánh chưng","Bánh trôi","Bánh tro"]},
- {q:"Tết Đoan ngọ làm bánh gì?",a:"Bánh tro",w:["Bánh dẻo","Bánh chưng","Bánh trôi"]},
- {q:"Tết Hàn thực mùng ba tháng ba làm bánh gì?",a:"Bánh trôi",w:["Bánh nướng","Bánh tro","Bánh chưng"]},
- {q:"Chưng yến sào thêm gì cho thanh ngọt?",a:"Đường phèn",w:["Nước mắm","Ớt","Giấm"]},
- {q:"Người bị cảm lạnh, nấu bát canh với gì?",a:"Gừng và hành",w:["Khổ qua","Rau má","Đậu xanh"]},
- {q:"Món canh nào Hoàng thượng thường dùng cho mát gan?",a:"Canh hạt sen",w:["Canh ớt","Canh dê","Canh rượu"]}];
-
 /* ---------- small helpers ---------- */
 const kg82El=()=>document.getElementById("kg82");
 const kg82Kit=()=>typeof kitGameFrame==="function";
@@ -78,7 +61,7 @@ function kg82Help(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[])
 /* difficulty / fair NPC roll (j91): lv = the person's best art level in the kind's formula (0–5); a higher level makes the game easier
    (wider timing windows, longer looks); NPCs (person rivals) roll the mini-game by the SAME level: raw ≈ 4 + 0.4·lv ± 4 */
 function kg82LvFor(p,kind){let m=0;try{kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&!KG82_STAT[s])m=Math.max(m,kg82Lv(p,s)||0)})}catch(e){}return cl(Math.round(m),0,5)}
-function kg82NpcMean(lv){return 4+.4*lv}
+function kg82NpcMean(lv){const N=BAL.mgTier.npc;return N[0]+N[1]*lv}/* ONE CORE (mg-balance-r1): BAL.mgTier.npc */
 function kg82NpcRaw(p,kind){const r=(Math.random()+Math.random()+Math.random())/3;return cl(Math.round(kg82NpcMean(kg82LvFor(p,kind))+(r-.5)*8),0,10)}
 window.kg82NpcRaw=kg82NpcRaw;window.kg82LvFor=kg82LvFor;
 /* mg-easy (owner 15/11): the games that look like "knowledge" (thơ, câu đối, vấn đáp của khảo hạch, cờ) must be winnable by matching what is SHOWN, never by knowing old verse.
@@ -86,10 +69,10 @@ window.kg82NpcRaw=kg82NpcRaw;window.kg82LvFor=kg82LvFor;
    tier 1 (lv 2–3) Vừa; tier 2 (lv 4+) Khó = more to fill, aids only on the Gợi ý button. Every tier keeps the Gợi ý button (costs a little, never blocks). */
 const KG82_KNOW={tho:1,doi:1,co:1,le:1,tc:1,xa:1,thq:1};
 function kg82Know(kind){return !!KG82_KNOW[kind]}
-function kg82Tier(lv){lv=+lv||0;return lv<=1?0:lv<=3?1:2}
+function kg82Tier(e){/* mg-balance 16/11: env.lv is the board EASE from mgTier (jmgt), higher = easier; aid tier 0 Dễ · 1 Vừa · 2 Khó (BAL.mgTier.aid) */const A=BAL.mgTier.aid;e=+e||0;return e>=A[0]?0:e>=A[1]?1:2}
 /* "first time" flag per game kind: the 1-screen demo shows once (S.mgSeen, old saves start empty) */
 function kg82Seen(kind,set){try{if(KG82.noDemo)return true;if(typeof S==="undefined"||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m[kind]=1;return true}return !!m[kind]}catch(e){return true}}
-function kg82DiffWord(lv,kind){if(kind&&kg82Know(kind))return["Dễ · có gợi ý ngay trên bàn","Vừa · gợi ý bớt đi","Khó · gợi ý ở nút Gợi ý"][kg82Tier(lv)];return["Khó (chưa học)","Khó","Vừa","Vừa","Dễ hơn","Dễ hơn"][cl(lv,0,5)]}
+function kg82DiffWord(lv,kind){return mgDiffTxt(KG82.tier||mgTier(kind,{lv}),kind)}
 function kg82StatV(p,s){if(s==="sac"){try{return effSac(p)}catch(e){return p.sac||0}}return p[s]||0}
 /* the talent parts of a person for a kind: [[label, points]] (rounded so they add up to the rounded total) */
 function kg82Parts(p,kind){const F=kg82FormulaOf(kind);const raw=[];F.forEach(([s,c])=>{if(s==="help"){raw.push([`Người hầu đắc lực`,kg82Help(p)*c]);return}
@@ -113,7 +96,10 @@ window.KG82=KG82;
 const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(Nhất|Nhì|Ba|Hạng\s*\d+)$/;
 /* the painted illustration of what is contested (picture LEFT of every game frame, owner 15/11): the kind's own board painting */
 /* kinds with no board painting yet (duho, den, may): no picture column at all (KIT REQUEST) */
-function kg82Pic(kind){return ["duho","den","may"].includes(kind)?"":`img/kit/mg-${kg82BgName(kind)}.webp`}
+/* r2 (slap-mg-r2, whole family): a kind whose painting is not on the CDN yet (img/_index.json, jevban KIT_CDNHAVE) gets no picture column at all,
+   instead of a broken picture for the ~2 s the CDN retry takes; it is listed once in CTM_MISSING_PICS (kind "mg") so it gets painted. */
+function kg82Pic(kind){if(["duho","den","may"].includes(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
+ try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
@@ -192,11 +178,11 @@ function kg82DrawPops(g,list,now){for(let i=list.length-1;i>=0;i--){const p=list
 /* =============== ENGINES: eng(box, env) -> stop(); env.end(raw0to10) once; env.hud({score,round,time}); KG82.peek for tests =============== */
 /* 1. RHYTHM (đàn, hát): plum blossoms fall along four strings, tap the string at the vermilion line */
 function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=env.kind==="hat"?["Cung","Thương","Giốc","Chủy"]:["Cung","Thương","Giốc","Chủy"];
- const N=20,fall=2100+(env.lv||0)*80,HIT=H*.8,lw=W/4,WIN=220+(env.lv||0)*14;const notes=[];let t=1700,last=-1,rep=0;
+ const N=20,fall=2100+(env.lv||0)*80,HIT=H*.8,lw=W/4,WIN=(220+(env.lv||0)*14)*mgTol(env);const notes=[];let t=1700,last=-1,rep=0;
  for(let i=0;i<N;i++){let l=Math.floor(Math.random()*4);if(l===last&&++rep>=2){l=(l+1+Math.floor(Math.random()*3))%4;rep=0}else if(l!==last)rep=0;last=l;notes.push({l,t,st:0});t+=880+Math.floor(Math.random()*260)}
  const end=notes[N-1].t+700;let credit=0,miss=0,stop=false,raf=0;const pops=[],flash=[0,0,0,0];const t0=performance.now();
  const pc=kg82Col("--peony","#e48aa4"),red=kg82Col("--red","#c23b22"),gold=kg82Col("--gold","#8f5f0c");
- const sc=()=>Math.round(10*Math.max(0,credit)/N);
+ const sc=()=>10*Math.max(0,credit)/N;/* mg-balance: float; kg82Play grades + rounds */
  function draw(now){const tt=now-t0;kg82Bg(g,W,H,env.kind,.08,1);const bw=Math.min(46,lw*.42);
   for(let i=0;i<4;i++){const x=lw*(i+.5);if(flash[i]>now){g.fillStyle="#fff3c855";g.fillRect(lw*i,0,lw,H)}
    /* the silk string (live mark) and its painted bridge */
@@ -212,7 +198,7 @@ function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=
   draw(now);if(tt>end){stop=true;return env.end(sc())}raf=requestAnimationFrame(frame)}
  function tap(l){if(stop)return;const tt=performance.now()-t0;let best=null,bd=1e9;for(const n of notes){if(n.st||n.l!==l)continue;const d=Math.abs(n.t-tt);if(d<bd){bd=d;best=n}}
   flash[l]=performance.now()+120;
-  if(best&&bd<=WIN){best.st=1;const q=bd<=100?1:.6;credit+=q;kg82Pop(pops,lw*(l+.5),HIT-24,q===1?"Tuyệt!":"Được",q===1?kg82Col("--good","#2d7a52"):gold);kg82Pluck(l,true)}
+  if(best&&bd<=WIN){best.st=1;const q=bd<=100*mgTol(env)?1:.6;credit+=q;kg82Pop(pops,lw*(l+.5),HIT-24,q===1?"Tuyệt!":"Được",q===1?kg82Col("--good","#2d7a52"):gold);kg82Pluck(l,true)}
   else{credit-=.3;kg82Pop(pops,lw*(l+.5),HIT-24,"Lệch",red);kg82Pluck(l,false)}}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x]=C.at(e);tap(cl(Math.floor(x/lw),0,3))});
  const keys={d:0,f:1,j:2,k:3,"1":0,"2":1,"3":2,"4":3};const kd=e=>{if(e.key in keys){e.preventDefault();tap(keys[e.key])}};document.addEventListener("keydown",kd);
@@ -220,27 +206,29 @@ function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
 
 /* 2. GO (cờ): find the move that captures the white group in atari */
-function kg82GoGen(n,sz){const idx=(r,c)=>r*n+c,nb=i=>{const r=Math.floor(i/n),c=i%n,o=[];if(r>0)o.push(i-n);if(r<n-1)o.push(i+n);if(c>0)o.push(i-1);if(c<n-1)o.push(i+1);return o};
+function kg82GoGen(n,sz,more){const idx=(r,c)=>r*n+c,nb=i=>{const r=Math.floor(i/n),c=i%n,o=[];if(r>0)o.push(i-n);if(r<n-1)o.push(i+n);if(c>0)o.push(i-1);if(c<n-1)o.push(i+1);return o};
  const groups=B=>{const seen=new Set(),G=[];for(let i=0;i<B.length;i++){if(!B[i]||seen.has(i))continue;const st=[i],gp=[],lib=new Set();seen.add(i);
   while(st.length){const j=st.pop();gp.push(j);for(const k of nb(j)){if(!B[k])lib.add(k);else if(B[k]===B[i]&&!seen.has(k)){seen.add(k);st.push(k)}}}G.push({c:B[i],s:gp,lib})}return G};
  for(let a=0;a<400;a++){const B=Array(n*n).fill(0);let s=idx(1+Math.floor(Math.random()*(n-2)),1+Math.floor(Math.random()*(n-2)));const W=[s];B[s]=2;
   while(W.length<sz){const c=nb(W[Math.floor(Math.random()*W.length)]).filter(k=>!B[k]);if(!c.length)break;const k=c[Math.floor(Math.random()*c.length)];B[k]=2;W.push(k)}
   if(W.length<sz)continue;const lib=[...new Set(W.flatMap(nb).filter(k=>!B[k]))];if(lib.length<2)continue;const L=lib[Math.floor(Math.random()*lib.length)];lib.forEach(k=>{if(k!==L)B[k]=1});
-  const extra=3+Math.floor(Math.random()*4);for(let e=0,t=0;e<extra&&t<60;t++){const k=Math.floor(Math.random()*n*n);if(B[k]||k===L||nb(k).includes(L))continue;B[k]=e%2?1:2;e++}
+  const extra=3+Math.floor(Math.random()*4)+(more|0);/* mg-balance-2: more stones (more groups to read) at low ease */for(let e=0,t=0;e<extra&&t<60;t++){const k=Math.floor(Math.random()*n*n);if(B[k]||k===L||nb(k).includes(L))continue;B[k]=e%2?1:2;e++}
   const G=groups(B);if(G.some(x=>x.lib.size===0))continue;
   const caps=new Set();for(let i=0;i<B.length;i++){if(B[i])continue;for(const x of G)if(x.c===2&&x.lib.size===1&&x.lib.has(i))caps.add(i)}
   if(caps.size!==1||!caps.has(L))continue;
   /* the black stones that surround must not be capturable by a white move either (keeps the puzzle clean) */
   if(G.some(x=>x.c===1&&x.lib.size===1))continue;
-  const tgt=G.find(x=>x.c===2&&x.lib.has(L)&&x.lib.size===1);return{B,L,cap:tgt.s}}
+  const tgt=G.find(x=>x.c===2&&x.lib.has(L)&&x.lib.size===1);return{B,L,cap:tgt.s,wg:G.filter(x=>x.c===2).length}}
  return null}
 function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Math.min(W,H),ox=(W-S0)/2,s=S0/(n+.4),m=s*.7;
  const px=i=>ox+m+(i%n)*s,py=i=>(H-S0)/2+m+Math.floor(i/n)*s;const R0=[1,2,2,3,3];let round=0,pts=0,P=null,phase="",t0=0,stop=false,raf=0,mark=null,fade=null;const pops=[];
  /* mg-easy: tier 0/1 draw a gold ring round the white group in danger (it has ONE empty neighbour left); a quiet glow shows that last empty spot when she stalls or presses Gợi ý (a little score) */
- const tier=kg82Tier(env.lv),LIM=[22000,15000,10000][tier],IDLE=[6000,10000,0][tier];let hintAt=0,hinted=false,tAct=0;
+ const tier=kg82Tier(env.lv),IDLE=[6000,10000,0][tier];
+ /* mg-balance-2: time per position, the time a capture still earns full marks, extra stones: BAL.mgTier.lev.co by ease */
+ const LIM=Math.round(mgLev(env,"co","lim")),FAST=Math.round(mgLev(env,"co","fast")),MORE=Math.round(mgLev(env,"co","extra"));let hintAt=0,hinted=false,tAct=0;
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=`<button class="kgbtn" id="kg82gohint">Gợi ý<small>chỉ chỗ ăn, bớt một ít phần</small></button>`;box.appendChild(hb);
  const doHint=()=>{if(phase!=="play"||stop||!P)return;if(!hinted){hinted=true;kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Quân trắng chỉ còn một khí ở đây",kg82Col("--gold","#8f5f0c"))}hintAt=performance.now()};hb.querySelector("button").onclick=doHint;
- function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end(Math.round(pts)),300)}P=kg82GoGen(n,R0[round])||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}P=kg82GoGen(n,R0[round],MORE)||kg82GoGen(n,R0[round])||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
  function stone(x,y,c,a){if(kg82Spr(g,c===1?"co-black":"co-white",x,y,s*.92,s*.92,{alpha:a==null?1:a}))return;g.save();g.globalAlpha=a==null?1:a;const r=s*.44;const gr=g.createRadialGradient(x-r*.35,y-r*.35,r*.1,x,y,r);
   if(c===1){gr.addColorStop(0,"#666");gr.addColorStop(1,"#111")}else{gr.addColorStop(0,"#fff");gr.addColorStop(1,"#cfc8bc")}g.fillStyle=gr;g.shadowColor="#0006";g.shadowBlur=3;g.shadowOffsetY=1.5;g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fill();g.restore()}
  function draw(now){kg82Bg(g,W,H,"co",0,1);const bx=ox+m-s*.55,by=(H-S0)/2+m-s*.55,bs=(n-1)*s+s*1.1;
@@ -258,39 +246,14 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
    env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}else env.hud({score:`${Math.round(pts)}/10`,time:"–"});
   draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play"||stop)return;tAct=performance.now();const [x,y]=C.at(e);let bi=-1,bd=1e9;for(let i=0;i<n*n;i++){const d=Math.hypot(px(i)-x,py(i)-y);if(d<bd){bd=d;bi=i}}
-  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){pts+=hinted?1.4:2;mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
+  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const el=performance.now()-t0,sp=el<=FAST?1:1-.4*Math.min(1,(el-FAST)/Math.max(1,LIM-FAST));pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (down to 60 %) */mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
   else{mark={i:bi,ok:false};kg82Pop(pops,px(bi),py(bi)-s*.6,"Chưa ăn được",kg82Col("--red","#c23b22"));kg82Pluck(0,false)}round++;setTimeout(next,950)});
- KG82.peek=()=>phase==="play"&&P?C.client(px(P.L),py(P.L)):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
-
-/* 3. QUIZ (bếp núc, điều hương) */
-function kg82Bank(b){const wc=s=>s.replace(/,/g,"").split(" ").length;
- if(b==="doi"){const D=typeof DOI!=="undefined"?DOI:[["Núi cao mây phủ","Sông rộng sóng xô"]];return kg82Shuf(D).slice(0,5).map(([x,y])=>{let w=D.filter(p=>p[1]!==y&&wc(p[1])===wc(y)).map(p=>p[1]);if(w.length<2)w=w.concat(D.filter(p=>p[1]!==y&&!w.includes(p[1])).map(p=>p[1]));return{l:"Vế ra",q:x,a:y,w:kg82Shuf(w).slice(0,3)}})}
- const B=b==="bep"?KG82_BEP:b==="y"&&typeof YQ!=="undefined"?YQ:KG82_HUONG;return kg82Shuf(B).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,3)}))}
-function kg82Quiz(box,env){const Qs=kg82Bank(KG82_KIND[env.kind].b);let r=0,pts=0,stop=false,tm=0,t0=0,lock=false,cur=null,cost=0,gone=[],tAct=0,auto=false;
- /* mg-easy: tier by the player's level: fewer wrong choices, more time, the Gợi ý button (drops one wrong answer; a little score) and, at tier 0/1, a quiet auto-hint when she stalls */
- const tier=kg82Tier(env.lv),NW=[1,2,3][tier],LIM=[20000,15000,10000][tier],IDLE=[8000,13000,0][tier],HC=.6,AC=.3;
- const wrap=document.createElement("div");wrap.className="kg82quiz";box.appendChild(wrap);
- function wrongs(){return cur.map((o,i)=>i).filter(i=>cur[i]!==Qs[r].a&&!gone.includes(i))}
- function show(){if(stop)return;if(r>=Qs.length){stop=true;return env.end(pts)}const q=Qs[r];cur=kg82Shuf([q.a].concat(kg82Shuf(q.w).slice(0,NW)));lock=false;gone=[];cost=0;auto=false;t0=tAct=performance.now();
-  wrap.innerHTML=kg82Rows([[q.l,`<span class="ef t"><b>${q.q}</b></span>`]])+`<div class="kg82opts">${cur.map((o,i)=>`<button class="kgbtn" data-i="${i}">${o}</button>`).join("")}</div>`+
-   `<div class="kg82act"><button class="kgbtn" data-hint="1" id="kg82hint">Gợi ý<small>bỏ một lời sai, bớt một ít phần</small></button></div><div class="kpnote" id="kg82tip" style="visibility:hidden">&nbsp;</div>`;
-  wrap.querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>pickA(+b.dataset.i));wrap.querySelector("#kg82hint").onclick=()=>hint(false);tip(IDLE?"Chưa rõ thì chạm Gợi ý, ma ma sẽ chỉ cho một lời không hợp.":"")}
- function tip(t){const e=wrap.querySelector("#kg82tip");if(e){e.textContent=t||"\u00a0";e.style.visibility=t?"":"hidden"}}
- function hint(isAuto){if(lock||stop)return;const w=wrongs();if(!w.length){tip("Chỉ còn lời đúng, cứ chọn.");return}const i=w[Math.floor(Math.random()*w.length)];gone.push(i);cost+=isAuto?AC:HC;tAct=performance.now();
-  const b=wrap.querySelector(`button[data-i="${i}"]`);if(b){b.disabled=true;b.innerHTML=kg82Chip(`✗ ${cur[i]}`,"r")}
-  tip(isAuto?"Ma ma khẽ nhắc: lời này chưa hợp.":"Lời này chưa hợp, bỏ đi."+(wrongs().length?"":" Còn một lời, chọn nó."));if(!wrongs().length){const h=wrap.querySelector("#kg82hint");if(h)h.disabled=true}}
- function pickA(i){if(lock||stop)return;lock=true;const q=Qs[r];const ok=i>=0&&cur[i]===q.a;if(ok)pts+=Math.max(.4,2-cost);kg82Pluck(ok?3:0,ok);
-  wrap.querySelectorAll("button[data-i]").forEach(b=>{const k=+b.dataset.i;b.disabled=true;if(cur[k]===q.a)b.innerHTML=kg82Chip(`✓ ${cur[k]}`,"g");else if(k===i)b.innerHTML=kg82Chip(`✗ ${cur[k]}`,"r")});
-  const h=wrap.querySelector("#kg82hint");if(h)h.disabled=true;
-  if(i<0)wrap.insertAdjacentHTML("beforeend",kg82Rows([["Hết giờ",`Lời đúng: ${q.a}`,"r"]]));r++;setTimeout(show,1000)}
- tm=setInterval(()=>{if(stop)return;const now=performance.now(),left=LIM-(now-t0);env.hud({score:`${Math.round(pts)}/10`,round:`Câu ${Math.min(r+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`});if(left<=0&&!lock)pickA(-1);
-  else if(IDLE&&!lock&&now-tAct>IDLE&&wrongs().length>1)hint(true)},150);
- KG82.peek=()=>{if(lock||stop||!cur)return null;const i=cur.indexOf(Qs[r].a);return{sel:`#${box.id||"kg82box"} button[data-i="${i}"]`}};
- show();return()=>{stop=true;clearInterval(tm)}}
+ /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
+ KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
 
 /* 4. PATTERN (vẽ, cắm hoa, thêu, khéo tay): remember which cells were painted */
 function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
- const R0=[3,4,4,5,6];let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[];const LIM=9000,SHOW=2300+(env.lv||0)*160;
+ const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[];const LIM=9000,SHOW=2300+(env.lv||0)*160;
  const cx=i=>ox+(i%n+.5)*c,cy=i=>oy+(Math.floor(i/n)+.5)*c;
  function motif(i,a,ghost){g.save();g.globalAlpha=a;const x=cx(i),y=cy(i),r=c*.34;
   if(ghost){g.strokeStyle=kg82Col("--good","#2d7a52");g.setLineDash([5,4]);g.lineWidth=2;g.strokeRect(x-r,y-r,r*2,r*2);g.restore();return}
@@ -304,7 +267,7 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
   else if(mot==="flower"){kg82Blossom(g,x,y,r*.95,kg82Col("--peony","#e48aa4"),false);g.strokeStyle="#5fa58c";g.lineWidth=3;g.beginPath();g.moveTo(x,y+r*.5);g.quadraticCurveTo(x+r*.4,y+r,x+r*.1,y+r*1.2);g.stroke()}
   else{g.strokeStyle="#c23b22";g.lineWidth=r*.16;g.lineCap="round";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x-r*.7+d*r,y-r*.7);g.lineTo(x+r*.7+d*r,y+r*.7);g.stroke()}g.strokeStyle="#c9a03a";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x+r*.7+d*r,y-r*.7);g.lineTo(x-r*.7+d*r,y+r*.7);g.stroke()}}
   g.restore()}
- function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end(Math.round(pts)),300)}pat=kg82Shuf([...Array(n*n).keys()]).slice(0,R0[round]);tapped=[];phase="show";t0=performance.now()}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}pat=kg82Shuf([...Array(n*n).keys()]).slice(0,R0[round]);tapped=[];phase="show";t0=performance.now()}
  function judge(){phase="judge";const ok=tapped.filter(i=>pat.includes(i)).length;const got=2*ok/pat.length;pts+=got;
   kg82Pop(pops,W/2,oy+18,ok===pat.length?"Đúng cả!":`Đúng ${ok}/${pat.length}`,ok===pat.length?kg82Col("--good","#2d7a52"):kg82Col("--gold","#8f5f0c"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,env.kind,0,1);
@@ -325,9 +288,9 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
 /* 5. STEPS (múa): watch the steps light up, then repeat them */
 function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
  const mx=W/2,my=H/2,D=Math.min(W,H)*.31,pr=Math.min(W,H)*.15;const pos=[[mx,my-D],[mx-D,my],[mx+D,my],[mx,my+D]];
- const R0=[3,3,4,4,5];let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];const SP=620+(env.lv||0)*30,IDLE=6000;
+ const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* easy boards forgive RT wrong steps per round */
  const pc=kg82Col("--peony","#e48aa4"),gold=kg82Col("--gold","#8f5f0c");
- function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end(Math.round(pts)),300)}seq=Array.from({length:R0[round]},()=>Math.floor(Math.random()*4));inp=0;phase="show";t0=performance.now()+500}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}seq=Array.from({length:R0[round]},()=>Math.floor(Math.random()*4));inp=0;rtl=RT;phase="show";t0=performance.now()+500}
  function endRound(ok){phase="judge";const got=2*ok/seq.length;pts+=got;kg82Pop(pops,mx,my-8,ok===seq.length?"Đẹp lắm!":`Đúng ${ok}/${seq.length} bước`,ok===seq.length?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,"mua",0,.55);kg82Spr(g,"mua-fan",mx,my-D*.06,D*.5,null,{alpha:.95});
   let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP*.72)showI=seq[i]}}
@@ -341,7 +304,7 @@ function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["�
  function frame(now){if(stop&&phase!=="judge")return;if(phase==="play"&&now-lastTap>IDLE)endRound(inp);
   env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"xem bước":phase==="play"?`${Math.max(0,Math.ceil((IDLE-(now-lastTap))/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);let bi=-1,bd=1e9;pos.forEach(([px,py],i)=>{const d=Math.hypot(px-x,py-y);if(d<bd){bd=d;bi=i}});if(bd>pr*1.5)return;
-  lit=bi;litUntil=performance.now()+180;lastTap=performance.now();if(bi===seq[inp]){kg82Pluck(bi,true);inp++;if(inp>=seq.length)endRound(inp)}else{kg82Pluck(0,false);endRound(inp)}});
+  lit=bi;litUntil=performance.now()+180;lastTap=performance.now();if(bi===seq[inp]){kg82Pluck(bi,true);inp++;if(inp>=seq.length)endRound(inp)}else if(rtl>0){rtl--;kg82Pluck(0,false);kg82Pop(pops,mx,my-8,"Lỡ một bước, chạm lại",kg82Col("--gold","#8f5f0c"))}else{kg82Pluck(0,false);endRound(inp)}});
  KG82.peek=()=>phase==="play"?C.client(...pos[seq[inp]]):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
 /* 6. AIM (bắn cung, đầu hồ): the marker swings, tap when it is over the centre */
@@ -363,26 +326,26 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
   if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+((pot?ty-50*kz:ty)-H*.16)*kk;if(!kg82Spr(g,an,flyX,yy,46*kz,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;env.hud({score:`${Math.round(10*pts/N)}/10`,round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} ${pot?"tên":"phát"}`});draw(now);raf=requestAnimationFrame(frame)}
- function shoot(){if(lock||stop)return;const now=performance.now();const x=pos(now);const d=Math.abs(x-cx)/A/(1+(env.lv||0)*.06);const q=d<.08?1:d<.2?.75:d<.35?.5:d<.55?.25:0;lock=true;flyAt=now;flyX=x;
+ function shoot(){if(lock||stop)return;const now=performance.now();const x=pos(now);const d=Math.abs(x-cx)/A/(1+(env.lv||0)*.06)/mgTol(env);const q=d<.08?1:d<.2?.75:d<.35?.5:d<.55?.25:0;lock=true;flyAt=now;flyX=x;
   setTimeout(()=>{pts+=q;if(q>0)shots.push({x:cx+(x-cx)*(pot?.35:.55)});kg82Pop(pops,cx,ty-80,q===1?(pot?"Trúng giữa bình!":"Hồng tâm!"):q>=.5?"Trúng":q>0?"Sượt qua":"Trượt",q>=.5?kg82Col("--good","#2d7a52"):q>0?kg82Col("--gold","#8f5f0c"):kg82Col("--red","#c23b22"));kg82Pluck(k,q>0);
-   k++;if(k>=N){stop=true;draw(performance.now());return setTimeout(()=>env.end(Math.round(10*pts/N)),600)}setTimeout(()=>{lock=false;t0=performance.now()-Math.random()*1500},450)},360)}
+   k++;if(k>=N){stop=true;draw(performance.now());return setTimeout(()=>env.end((10*pts/N)),600)}setTimeout(()=>{lock=false;t0=performance.now()-Math.random()*1500},450)},360)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();shoot()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();shoot()}};document.addEventListener("keydown",kd);
  KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return Math.abs(x-cx)/A<.04?C.client(W/2,H*.8):null};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
-const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,quiz:kg82Quiz,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
+const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
- let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;onEnd(cl(Math.round(raw),0,10))}};
+ let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;onEnd(mgGrade(raw,kind))}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
  const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
-function kg82Word(raw){return raw>=9?"Xuất sắc":raw>=7?"Giỏi":raw>=5?"Khá":raw>=3?"Tạm được":"Vụng"}
+function kg82Word(raw){return mgWord(raw)}/* thresholds in BAL.mgTier.word (jmgt) */
 function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x&&x[1]);return Object.entries(st).filter(([k,v])=>v&&typeof v==="number").map(([k,v])=>[(typeof NAMES!=="undefined"&&NAMES[k])||k,v])}
 
 /* =============== startContest =============== */
 function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.onDone(null);return}
- const kind=kg82Kind(o.art,o.artName,false),K=KG82_KIND[kind];KG82.ctx="thi";kg82Preload(kind);const luck=o.luck||30,prep=Math.round(o.prep||0);KG82.lv=kg82LvFor(S,kind);
+ const kind=kg82Kind(o.art,o.artName,false),K=KG82_KIND[kind];KG82.ctx="thi";kg82Preload(kind);const luck=o.luck||30,prep=Math.round(o.prep||0);mgSet(kind,{occ:o.occ||"hoi",big:!!o.big});/* mg-balance: board ease from the tier (jmgt) */
  const me=kg82Parts(S,kind);const talent=o.talent!=null?Math.round(o.talent):me.total;const partsOk=me.total===talent;
  /* rivals: j71 rows, persons, or 3 present consorts */
  let R=o.rivals;if(!R){try{R=kg82Shuf(liveRivals(true).filter(v=>!v.confined)).slice(0,3)}catch(e){R=[]}}
@@ -391,8 +354,8 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  const title=o.title||"Hội thi";const artLabel=o.artName?o.artName[0].toUpperCase()+o.artName.slice(1):K.n;
  const d=kg82Open({art:artLabel,title:`${title} · ${K.t}`,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(null);return}
  const box=kg82Box();const tRows=partsOk?me.parts.map(([l,v])=>[l,kg82Chip("cộng",v,"g")]):[["Tài nghệ",kg82Chip(`cộng${o.talentBy?` (${o.talentBy})`:""}`,talent,"g")]];
- const SK=R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.lv));
- const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",`${kg82DiffWord(KG82.lv,kind)} · theo bậc tài nghệ ${KG82.lv}`,"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
+ const SK=R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.tier.lv));
+ const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
   (rows.length?`<h4 class="kpst">Đối thủ</h4><div class="kgrv">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(kind,raw=>finish(raw,false));$("kg82skip").onclick=()=>finish(SK,true)};
@@ -425,7 +388,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  intro()}
 
 /* =============== playArt: the same mini-game for works / lessons, no rivals =============== */
-function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{KG82.lv=kg82LvFor(S,kind)}catch(e){KG82.lv=0}
+function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc"})}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const done=(raw,skipped)=>{KG82.phase="result";const html=kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
   kg82ShowRes(html,raw>=5);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
@@ -444,8 +407,8 @@ window.startContest=startContest;window.playArt=playArt;
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 `;document.head.appendChild(st)})();
 
-/* lesson games (Tài nghệ tab, openMG) for the j85 arts: Thêu = the stitch-pattern game, Nấu nướng = the cooking quiz; same engines, 1–3 lesson points */
-const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: chọn món","banh"]};
-function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const env={kind,lv,hud:()=>{},end:raw=>{KG82.peek=()=>null;end(raw>=8?3:raw>=5?2:1)}};
+/* lesson games (Tài nghệ tab, openMG) for the j85 arts: Thêu = the stitch-pattern game, Nấu nướng = the cooking game (j91 cook, no word games); same engines, 1–3 lesson points */
+const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]};
+function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const T=mgSet(kind,{occ:"hoc",lv}),L=BAL.mgTier.lesson;const env={kind,lv:T.ease,hud:()=>{},end:raw=>{KG82.peek=()=>null;raw=mgGrade(raw,kind);end(raw>=L[1]?3:raw>=L[0]?2:1)}};
  kg82Preload(kind).then(()=>{if(dead)return;try{stop=KG82_ENG[KG82_KIND[kind].e](b,env)}catch(e){console.error(e);end(1)}});return()=>{dead=true;if(stop)stop()}}]}
 (function(){if(typeof openMG!=="function"||typeof MG==="undefined")return;const o0=openMG;openMG=function(k){try{if(KG82_MGL[k])MG[k]=kg82Lesson(k)}catch(e){}return o0.apply(this,arguments)}})();
