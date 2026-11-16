@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
 const ROOT=path.resolve(__dirname,'../..');const MT={html:'text/html',js:'text/javascript',json:'application/json'};
 const CASES={
  /* tư tình → đêm riêng → lời hứa → theo hắn ra cổng */
- tc_cung:`const m=man('thị vệ');card('tt0'+m.id);card('tt1');m.tinh=80;card('tt2');card('tt2');card('tt3');pick(/Cùng hắn tính đường trốn/);S.buoi=B4L;card('tcgo_theo')`,
+ tc_cung:`const m=man('thị vệ');card('tt0'+m.id);card('tt1');m.tinh=80;card('tt2');card('tt2');card('tt3');pick(/Cùng y tính đường trốn/);S.buoi=B4L;card('tcgo_theo')`,
  /* trốn cung: đủ bước, tháng chạp, lẫn vào đoàn cung nữ */
  tc_dan:`card('tc0');card('tc_guard');S.maid.loyal=90;card('tc_maid');card('tc_home');card('tc_route');card('tc_pass');card('tc_cloth');S.month=12;card('tcgo_doan')`,
  tc_lien:`card('tc0');S.maid.loyal=90;card('tc_maid');card('tc_pass');card('tc_cloth');S.month=12;card('tcgo_doan')`,
