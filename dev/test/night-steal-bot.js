@@ -1,5 +1,5 @@
 /* night-steal frequency bot (review/night-steal). Real weekly loop (endTurn → resolveTonight → rivalsTurn → flip(+steal pass)).
- usage: node dev/test/night-steal-bot.js <index.html> <lives> <years> <out.json>   env SEED0, SUNG (her Sủng floor, default 25), K (BAL.steal.k override), CYASK=1 keeps the cycle question (default: off, so every flip resolves), DIFF=de|vua|kho sets the life difficulty (jdiff)
+ usage: node dev/test/night-steal-bot.js <index.html> <lives> <years> <out.json>   env SEED0, SUNG (her Sủng floor, default 25), K (BAL.steal.k override), CYASK=1 keeps the cycle question (default: off, so every flip resolves), DIFF=de|vua|kho sets the life difficulty (jdiff), GHEN0=1 zeroes every NPC ghen each week (r2 counterfactual: the her-only jealousy term)
  Counts every Tranh sủng / Chặn ngự giá try made by an NPC (stealNight called by anyone but her), per flip night, split by target (her / NPC)
  and by the doer's first trait. Works on old builds too (flip-time steals counted the same way).
  night-steal-2: per night also [her?, holder rank, tries, stolen] in L.N (holder = the one robbed, else the night's pick) → same-rank NPC control row in
@@ -14,7 +14,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   const p=await ctx.newPage();p.setDefaultTimeout(3600000);await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
   p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto('file://'+path.resolve(PAGE),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
-  if(process.env.K)await p.evaluate(`BAL.steal.k=${+process.env.K}`);
+  if(process.env.GHEN0)await p.evaluate('window.__G0=1');if(process.env.K)await p.evaluate(`BAL.steal.k=${+process.env.K}`);
   const part=await p.evaluate(([n,Y,SUNG,NOCY0,DIFF])=>{const out=[];try{document.getElementById('title').hidden=true}catch(e){}window.render=function(){};if(!NOCY0&&typeof cyAsk==="function")cyAsk=function(){return false};
    let L=null,inF=false,inStart=false,nt=null;const st0=start;start=function(){inStart=true;try{return st0.apply(this,arguments)}finally{inStart=false}};const T=(k,v=1)=>L[k]=(L[k]||0)+v;
    const sn=stealNight;stealNight=function(v,t,mode){const before=tonightOf();const r=sn.apply(this,arguments);
@@ -26,7 +26,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    for(let l=0;l<n;l++){L={tr:{}};try{localStorage.clear()}catch(e){}
     for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}if(DIFF&&typeof diffApply==="function"){S.diff=DIFF;diffApply()}Q.length=0;S.mg=0;
     for(let w=0;w<Y*36&&!S.dead;w++){
-     S.sung=Math.max(S.sung,SUNG);S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,60);S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
+     if(window.__G0)for(const v of liveRivals(true))v.ghen=0;S.sung=Math.max(S.sung,SUNG);S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,60);S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
      if(S.tonight==="me"){S.tonight=null;try{night(S)}catch(e){}}
      Q.length=0;S.mg=0;try{endTurn()}catch(e){out.push({err:String(e).slice(0,160)});break}Q.length=0;S.mg=0;T("rivN",liveRivals(true).length)}
     out.push(L)}
