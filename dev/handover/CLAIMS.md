@@ -91,7 +91,7 @@
 | person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | RUNNING | 16/11 07:30Z |
 | stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | RUNNING | 16/11 07:30Z |
 | ONE design frame + uniform scale; Fold portrait = iPad half (OD 07:47Z, 07:50Z) — plan + phase 1 | review/design-scale | main s12 | session_01UV1SzjmR9rHoafmnuNS1KA (opus) | RUNNING | 16/11 07:30Z |
-| coop-rejoin-xdev: rejoin from ANOTHER device keeps personal stats (per-seat Worker copy) | review/coop-rejoin-xdev | main s12 | session_01UV1SzjMEc5viCb8vMx3A49 (opus) | RUNNING | 16/11 07:58Z |
+| coop-rejoin-xdev: rejoin from ANOTHER device keeps personal stats (per-seat Worker copy) | review/coop-rejoin-xdev | main s12 | session_01UV1SzjMEc5viCb8vMx3A49 (opus) | SẴN SÀNG KIỂM 53b7b4f6 | 16/11 07:58Z |
 | night-end-r2 reviewer (stalled since s8) + end button when kit ready | review/night-end-r3 | main s12 | session_01UV1SzkTTgASxgc7UuFiJDs (sonnet) | RUNNING | 16/11 07:58Z |
 | mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | session_01UV1SzkBzFb19bZRxsyptRX (opus) | RUNNING | 16/11 08:00Z |
 | promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | RUNNING | 16/11 08:00Z |
