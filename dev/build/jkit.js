@@ -15,7 +15,7 @@ window.KIT_FIG=KIT_FIG;
    phoenix headdresses above the head are NOT counted as height. Returns the result when ready, else null and calls cb once measured.
    (Same code as review/men jk4; the cache lives on window so a second identical copy can never clash.) */
 function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});const o=KIT_FB[src];if(o&&o.v)return o.v;if(o){o.w.push(cb);return null}const e={v:null,w:[cb]};KIT_FB[src]=e;
- const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";
+ const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";/* review/stage-side: pictures live on the CDN (cross-origin): without CORS the canvas is tainted, getImageData throws and every figure measured as its whole image box (cores far too wide → paging, crowding) */im.crossOrigin="anonymous";
  im.onload=()=>{let v={t:0,b:1,l:0,r:1,ht:0,ar:im.naturalWidth/Math.max(1,im.naturalHeight)};try{const nh=im.naturalHeight,nw=im.naturalWidth,h=Math.min(500,nh),w=Math.max(1,Math.round(nw*h/nh));
    const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;
    let t=h,b=-1,l=w,r=-1;for(let y=0;y<h;y++){const q=y*w*4;for(let i=0;i<w;i++){if(d[q+i*4+3]>40){if(y<t)t=y;if(y>b)b=y;if(i<l)l=i;if(i>r)r=i}}}
@@ -30,8 +30,12 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
      let A=c,Z=c;while(A>0&&d[q+(A-1)*4+3]>40)A--;while(Z<w-1&&d[q+(Z+1)*4+3]>40)Z++;return[A,Z+1]};
     let ws=null;const mn=(r-l)*.4;for(let f=.35;f<=.8;f+=.02){const R=run(Math.round(ht+bh*f));if(R&&R[1]-R[0]>=mn&&(!ws||R[1]-R[0]<ws[1]-ws[0]))ws=R}
     if(ws){const cc=(ws[0]+ws[1])/2,hw=(ws[1]-ws[0])*.6;cl=Math.max(l,cc-hw);cr=Math.min(r+1,cc+hw)}
-    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w}}}catch(x){}done(v)};
- im.onerror=()=>done({t:0,b:1,l:0,r:1,ht:0,ar:.45});im.src=src;return null}
+    /* KIT 32.2 crop rule (review/stage-fig-size): width profile — wl[k] / wr[k] = left / right paint edge of the rows from the painted top
+       down to k/20 of the painted height (fractions of the picture width), so a dialog can fit "head → knees" into a capped column */
+    const wl=[],wr=[];let ml=w,mr=-1;for(let k=0,y=t;k<=20;k++){const ye=t+Math.round((b-t)*k/20);for(;y<=ye;y++){const q=y*w*4;for(let i=0;i<ml;i++)if(d[q+i*4+3]>40){ml=i;break}for(let i=w-1;i>mr;i--)if(d[q+i*4+3]>40){mr=i;break}}
+     wl.push((mr<0?l:ml)/w);wr.push((mr<0?r+1:mr+1)/w)}
+    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}done(v)};
+ im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */im.src=src;return null}
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
    o.text: put img.dataset.i as the parent's text; o.swap: replace the img by img.dataset.i. */

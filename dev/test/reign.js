@@ -45,8 +45,8 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  r=await p.evaluate(()=>{S.reign.sideT=S.turn-99;rgSwitchOpen();const m=Q[0];const i=m.opts.findIndex(o=>/Thái hậu/.test(o.n));const d0=S.danh;chooseM(i);Q.length=0;return{side:S.reign.side,sw:S.reign.sw,dd:S.danh-d0,why:rgCanSwitch()}});
  console.log('switch',JSON.stringify(r));ok(r.side==='th'&&r.sw===1,'switched to th');ok(r.dd<0,'switch costs Danh');ok(!!r.why,'cooldown after a switch');
  /* 5. Tâm nguyện pane */
- r=await p.evaluate(()=>{KTSUB.story='rgl';render();const P=document.getElementById('panel');return{t:P.innerText.slice(0,2000),rows:(P.innerText.match(/Bước 1\/3|Đã thành|không còn/g)||[]).length,ovf:P.scrollWidth>P.clientWidth+1}});
- ok(r.rows>=5,'Tâm nguyện lists the people ('+r.rows+')');ok(!r.ovf,'no overflow (Tâm nguyện)');await shot('goal');
+ r=await p.evaluate(()=>{KTSUB.story='rgl';render();const P=document.getElementById('panel');return{t:P.innerText.slice(0,2000),rows:(P.innerText.match(/bước 1\/3|đã thành|không còn/gi)||[]).length,kpl:P.querySelectorAll('.ktprow .kpl').length,ovf:P.scrollWidth>P.clientWidth+1}});
+ ok(r.rows>=5,'Tâm nguyện lists the people ('+r.rows+')');ok(r.kpl>=5,'Tâm nguyện people are kit person lines ('+r.kpl+')');ok(!r.ovf,'no overflow (Tâm nguyện)');await shot('goal');
  /* 6. a line offer is a real j72 offer from its person */
  await clear();
  r=await p.evaluate(()=>{S.rgL={};const x=rgLNext();if(!x)return{none:1};q72Offer(x,'');showModal();const m=Q[0];return{t:m.t,h:plain(m.h).slice(0,120),tid:x.tid}});
@@ -55,7 +55,9 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  /* 7. outcome bands + her result */
  r=await p.evaluate(()=>{const res=[];for(const [pw,side] of [[75,'emp'],[52,'th'],[30,'quyen'],[30,'emp']]){const W=rgW();W.out='';W.p=pw;W.ch=6;S.reign.res='';S.reign.side=side;rgDecide();const before={sung:S.sung,th:S.th,bac:S.bac,rank:S.rank};const t=rgMine();
    res.push({pw,side,out:W.out,res:S.reign.res,t,d:{sung:S.sung-before.sung,th:S.th-before.th,bac:S.bac-before.bac,rank:S.rank-before.rank}})}return res});
- console.log('outcome',JSON.stringify(r));ok(r[0].out==='emp'&&r[0].res==='win','p 75 → thân chính, emp side wins');ok(r[1].out==='th'&&r[1].res==='win','p 52 → rèm châu');ok(r[2].out==='quyen'&&r[2].res==='win','p 30 → nhiếp chính');ok(r[3].res==='lose','emp side loses at p 30');
+ console.log('outcome',JSON.stringify(r));ok(r[0].out==='emp'&&r[0].res==='win','p 75 → thân chính, emp side wins');ok(r[1].out==='th'&&r[1].res==='win','p 52 → rèm châu');ok(r[2].out==='quyen'&&r[2].res==='win','p 30 → nhiếp chính');ok(r[3].res==='lose','emp side loses at p 30');ok(r[0].d.rank===0,'emp win never gives a free rank (owner: promotion needs the exam)');
+ r=await p.evaluate(()=>{const e=S.ex||{};const g=e.grace===S.rank+1&&e.gw==='rg';const t0=S.turn;S.empDead=1;const on=rgOn();S.empDead=0;S.succ={on:1};const on2=rgOn();S.succ=null;return{g,on,on2}});
+ console.log('exam/emp-dead',JSON.stringify(r));ok(r.g,'emp win grants the exam (grace, conditions waived)');ok(!r.on&&!r.on2,'the road stops once the Emperor is dead / succession epilogue');
  r=await p.evaluate(()=>{Q.length=0;const W=rgW();W.out='emp';S.reign.side='emp';S.reign.done={};for(const c of RGC)for(const id of c.b)if(id!=='c6b')S.reign.done[id]=1;const id=rgNext();rgFire(id);showModal();return{id,t:Q[0].t}});
  ok(r.id==='c6b','after the outcome the last beat comes');await shot('c6b');
  /* 8. co-op guest never moves the court clock; old saves get nothing */

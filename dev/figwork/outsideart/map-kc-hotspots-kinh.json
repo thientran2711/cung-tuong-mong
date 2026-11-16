@@ -1,0 +1,122 @@
+{
+ "image": {
+  "file": "img/map-kc-kinh.webp",
+  "w": 1792,
+  "h": 1000
+ },
+ "coords": "normalized 0..1 of the picture; box = top-left x,y + w,h; anchor = label point",
+ "places": {
+  "kc_chua": {
+   "name": "Chùa Hộ Quốc",
+   "art": "temple + pagoda, left",
+   "box": {
+    "x": 0.0,
+    "y": 0.22,
+    "w": 0.25,
+    "h": 0.38
+   },
+   "anchor": {
+    "x": 0.125,
+    "y": 0.372
+   }
+  },
+  "kc_cho": {
+   "name": "Phố chợ",
+   "art": "market street, centre-left",
+   "box": {
+    "x": 0.27,
+    "y": 0.15,
+    "w": 0.22,
+    "h": 0.45
+   },
+   "anchor": {
+    "x": 0.38,
+    "y": 0.33
+   }
+  },
+  "kc_tra": {
+   "name": "Trà lâu",
+   "art": "two-storey tea house, centre",
+   "box": {
+    "x": 0.5,
+    "y": 0.35,
+    "w": 0.17,
+    "h": 0.27
+   },
+   "anchor": {
+    "x": 0.585,
+    "y": 0.458
+   }
+  },
+  "kc_sach": {
+   "name": "Thư phường",
+   "art": "bookshop, right",
+   "box": {
+    "x": 0.81,
+    "y": 0.4,
+    "w": 0.15,
+    "h": 0.22
+   },
+   "anchor": {
+    "x": 0.885,
+    "y": 0.488
+   }
+  },
+  "kc_hau": {
+   "name": "Phủ thế giao",
+   "art": "marquis mansion, upper right",
+   "box": {
+    "x": 0.68,
+    "y": 0.05,
+    "w": 0.3,
+    "h": 0.3
+   },
+   "anchor": {
+    "x": 0.83,
+    "y": 0.17
+   }
+  },
+  "kc_nha": {
+   "name": "Nhà họ (về phủ)",
+   "art": "family mansion gate, bottom left",
+   "box": {
+    "x": 0.15,
+    "y": 0.58,
+    "w": 0.22,
+    "h": 0.27
+   },
+   "anchor": {
+    "x": 0.26,
+    "y": 0.688
+   }
+  },
+  "kc_ben": {
+   "name": "Bến sông, thuyền hoa",
+   "art": "river with boats, bottom",
+   "box": {
+    "x": 0.3,
+    "y": 0.78,
+    "w": 0.5,
+    "h": 0.2
+   },
+   "anchor": {
+    "x": 0.55,
+    "y": 0.86
+   }
+  },
+  "kc_cung": {
+   "name": "Thần Võ môn (cổng cung, ngày tuyển tú)",
+   "art": "imperial wall + gate, top centre",
+   "box": {
+    "x": 0.44,
+    "y": 0.0,
+    "w": 0.2,
+    "h": 0.1
+   },
+   "anchor": {
+    "x": 0.54,
+    "y": 0.04
+   }
+  }
+ }
+}

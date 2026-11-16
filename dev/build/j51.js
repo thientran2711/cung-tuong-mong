@@ -70,7 +70,7 @@ heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.hei
  const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
  if(!roll(wait?5:15))return"";
  let r=Math.random()*c.reduce((a,b)=>a+b.w,0),i=0;while(r>c[i].w&&i<c.length-1){r-=c[i].w;i++}const x=c[i];setHeir(x.k,x.v);fx("gold");
- const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`xét hiền tài: Tài ${x.k.tal}, mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}, được ngài thương ${x.k.fond}${x.truong?", lại là con trưởng":""}`:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
+ const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}; mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}${x.truong?", lại là con trưởng":""}`/* r1: keeps the "lập hiền: Tài N, được ngài thương N" form so j53 swaps the raw talent for the Văn/Đức/Võ words (rival: rumour word) */:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
  return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};
 /* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử (ván mới S.ps: người nặng ký nhất, trưởng tử chỉ là một phần) */
 (function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>S.ps?b.w-a.w:a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();

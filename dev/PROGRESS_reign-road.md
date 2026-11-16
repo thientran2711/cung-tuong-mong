@@ -16,8 +16,7 @@ consequences), every named character gets a side quest line (D5). Reuse: j55 cou
    Chương 6 opens: p ≥ B → Hoàng thượng thân chính (regent's house pow −30, Thái hậu withdraws), p < A → Tể tướng nhiếp chính,
    else Thái hậu buông rèm. Winners' consorts Sủng +, losers' −.
 3. **Faction road** S.reign.side: Hoàng thượng / Thái hậu / quyền thần (Tể tướng, phụ chính) / đứng ngoài. Each side: own gains on the road
-   (Sủng / Thái hậu favour / Bạc + house), own missions, own enemies (other sides' consorts −, own side +), own ending (win: tấn phong one
-   rank / Thái hậu che chở 6 months + favour / Bạc + Tai mắt + house; lose: mirror). Trust (tr) scales the win. Family by origin:
+   (Sủng / Thái hậu favour / Bạc + house), own missions, own enemies (other sides' consorts −, own side +), own ending (win: an exam at once with the conditions waived (r1: never a free rank) / Thái hậu che chở 6 months + favour / Bạc + Tai mắt + house; lose: mirror). Trust (tr) scales the win. Family by origin:
    tt = the regent's daughter, ch/dtq = Thái hậu side, thd = Hoàng thượng side (going against the father: his favour −). Switch: at
    Chương 4 Hồi 2 or Mệnh truyện › Triều cục › "Đổi phe" (Danh −5, old leader −, old side's consorts −8, trust 10, cooldown 6 months, ≤2).
    NPC consorts' side by house (rgSideOf). Thái hậu dies → her side dissolves (she becomes đứng ngoài; a "th" outcome resolves to the
@@ -65,3 +64,6 @@ consequences), every named character gets a side quest line (D5). Reuse: j55 cou
 - Epilogue after a "quyền thần nhiếp chính" outcome (the Emperor's counter-coup years later) and after "rèm châu" (the Thái hậu's death).
 - Co-op: both players see their own beats; a joint beat (both on the same side) would be a nice addition.
 - Painted event art for the 6 chapters (now the place art via evArt()).
+
+## Reviewer r1 (review/reign-road-r1)
+Merged main 63cf7b12a; fixes: emp win = exam grace (jexam exGrace) not a free rank; rgOn off after the Emperor's death / during the succession epilogue; kit: no body title, no `.past` hint block, Đổi phe in kitSkillCard acts, Tâm nguyện = kit person lines + kitInfo. See dev/review/reign-road.md.

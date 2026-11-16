@@ -35,10 +35,11 @@ function drop(){if(!LM)return;const i=Q.indexOf(LM);if(i>=0)Q.splice(i,1);LM=nul
 function peerWord(){const s=COOP.state,x=COOP.other(),p=s.seats&&x&&s.seats[x];return !p?["chưa vào phòng","n"]:p.online?["đã vào phòng","g"]:["đang vắng","r"]}
 function stored(){try{return localStorage.getItem("ctm-coop-room")||""}catch(e){return ""}}
 function body(pg){const s=COOP.state;
- if(pg==="co"){const r=stored();return `<div class="kcol-act">${r?`<button class="kbtn k1" data-coop="resume">Trở lại phòng ${esc(r)}<small>cuộc chơi chung lần trước</small></button>`:""}<button class="kbtn k1" data-coop="make">Mời hảo hữu<small>lập phòng, gửi ám hiệu cho hảo hữu</small></button><button class="kbtn alt k1" data-coop="join">Nhập ám hiệu<small>hảo hữu đã gửi ám hiệu hay đường dẫn</small></button></div>`}
+ if(pg==="co"){const R=window.CTM_ROOMS;const full=R&&R.full();return `<div class="kcol-act"><button class="kbtn k1" data-coop="make">Mời hảo hữu<small>lập phòng mới, gửi ám hiệu cho hảo hữu</small></button><button class="kbtn alt k1" data-coop="join">Nhập ám hiệu<small>hảo hữu đã gửi ám hiệu hay đường dẫn</small></button></div>`+
+   (R?`<div class="kcol-rooms">${R.html()}</div>`+(full?`<div class="kpnote">Đã đủ ba phòng. Lập hay vào phòng mới thì phòng cũ nhất rời khỏi danh sách; muốn giữ, bỏ trước một phòng khác.</div>`:""):"")}
  if(pg==="wait"){const c=s.room||CODE;const pw=peerWord();
   return `<div class="kcol-code">${kitRows([["Ám hiệu",esc(c),"t"],["Hảo hữu",pw[0],pw[1]]])}</div>`+
-   kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+
+   kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+(s.you!=="b"&&typeof kitCoopLenRow==="function"?kitCoopLenRow():"")+/* the host picks the buổi length (jcooptimer, KIT §69) */
    `<div class="kcol-act"><button class="kbtn k1" data-coop="share">Gửi đường dẫn cho hảo hữu<small>qua Zalo, Messenger, tin nhắn</small></button><button class="kbtn alt" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="copycode">Chép mã ${esc(c)}</button></div>`+
    `<div class="kpnote">${s.status==="open"?"Hảo hữu chạm vào đường dẫn (hay chọn Cùng hảo hữu, Nhập ám hiệu, gõ ám hiệu) là vào phòng. Giữ màn này mở: hảo hữu vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
  if(pg==="join")return kitInput({id:"coop-code",label:"Ám hiệu",value:CODE,placeholder:"bốn chữ hảo hữu gửi"})+
@@ -64,14 +65,15 @@ function toast(msg){try{const n=document.querySelector("#modal.kcoop .kpnote");i
 async function make(){ERR="";try{open("wait");const r=await COOP.create();CODE=r.room;open("wait")}catch(e){ERR=errText(e);open("err")}}
 async function join(code){code=String(code||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"");if(!code){toast("Hãy gõ ám hiệu.");return}
  CODE=code;PEND=true;try{open("join");await COOP.join(code);PEND=false;if(PG==="join")open("wait")}catch(e){PEND=false;ERR=errText(e);open("err")}}
-async function resume(){ERR="";CODE=stored();try{open("join");await COOP.resume();open("wait")}catch(e){ERR=errText(e);open("err")}}
+async function resume(code){ERR="";CODE=code||stored();try{if(code)localStorage.setItem("ctm-coop-room",code)}catch(e){}try{open("join");await COOP.resume();open("wait")}catch(e){ERR=errText(e);open("err")}}
 function errText(e){const c=e&&(e.code||e.message)||"";
  if(/full/i.test(c))return "Phòng này đã đủ hai người.";if(/not.?found|no.?room|404/i.test(c))return "Không thấy phòng mang mã này. Xem lại mã hảo hữu gửi.";
  return "Chưa nối được với phòng. Xem lại đường mạng rồi thử lại."}
 $("modal").addEventListener("click",e=>{const b=e.target.closest("button[data-coop]");if(!b)return;e.stopPropagation();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
  const a=b.dataset.coop;
- if(a==="co")return open("co");if(a==="resume")return resume();if(a==="make")return make();if(a==="join")return open("join");if(a==="back")return back();
+ if(a==="co")return open("co");if(a==="resume")return resume(b.dataset.room||"");
+ if(a==="forget"){if(b.dataset.ask==="1"){b.dataset.ask="2";b.innerHTML="Chắc chắn?<small>Phòng rời khỏi danh sách</small>";return}try{CTM_ROOMS.forget(b.dataset.room)}catch(x){}if(PG==="co")open("co");else try{showTitle()}catch(x){}return}if(a==="make")return make();if(a==="join")return open("join");if(a==="back")return back();
  if(a==="go"){const c=$("coop-code");return join(c?c.value:CODE)}
  if(a==="copy"||a==="fzcopy"){copy(link(COOP.state.room||CODE),b,"Đã chép đường dẫn");return}
  if(a==="copycode"){copy(COOP.state.room||CODE,b,"Đã chép mã");return}
@@ -96,7 +98,7 @@ COOP.on("error",e=>{if(LM&&(PG==="wait"||PG==="join")){ERR=errText(e);open("err"
 COOP.on("both",()=>{if(!LM)return;drop();PG="";try{T.hidden=true}catch(e){}const s=COOP.state;COOP.emit("start",{room:s.room,you:s.you,host:s.you==="a",week:s.week,state:s.C})});
 /* freeze overlay: kit panel markup (.modal.kpscene > .dlg.kpanel with kpHeader), above everything, no way around it but waiting or leaving */
 let FZ=null;
-const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang nối lại."],peer:["Đợi hảo hữu trở lại","Hảo hữu đã rời cuộc. Hậu cung dừng lại cho đến khi hảo hữu trở lại."],
+const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang tự nối lại, không mất gì."],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
  week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
