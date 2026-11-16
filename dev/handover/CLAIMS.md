@@ -476,3 +476,4 @@
 | WHOLE FIGURE REPAINT pilot eunuch-kid-mama-man (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVPRFDEZZgSVGj5StKL | RUNNING | 16/11 23:16Z |
 | WHOLE FIGURE REPAINT pilot hero-4k-test (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVQK3g91ieUt2tJBYy7 | RUNNING | 16/11 23:16Z |
 | kit-size #9 grade chip on item frame edge everywhere (sonnet keeper; owner chose 1, s26) | review/kit-size-9 | main s26 | (opening) | RUNNING | 16/11 23:18Z |
+| origin intro pictures ~45 panels + G2–G7 (VẼ by main s26 23:05Z; ch1–4 first; samples first) (sonnet art) | review/intro-art | C | session_011xDdVQJPz4LjYQi4oTALJR | RUNNING | 16/11 23:22Z |
