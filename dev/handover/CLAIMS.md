@@ -6,7 +6,7 @@
 | modal-scroll reviewer | review/modal-scroll-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | an-tinh-fix + log-sync reviewer | review/an-tinh-fix-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | pcard-actrow reviewer | review/pcard-actrow-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| goal-strip-fix + kit-sweep | review/kit-sweep | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| goal-strip-fix + kit-sweep | review/kit-sweep | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | goal-strip LIVE a363cc14a; kit-sweep RUNNING | 16/11 05:19Z |
 | facefx-all reviewer | review/facefx-all-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | book-fig reviewer | review/book-fig-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | cardflip-smooth reviewer | review/cardflip-smooth-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
