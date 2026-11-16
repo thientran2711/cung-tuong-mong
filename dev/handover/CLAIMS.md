@@ -256,5 +256,5 @@
 | ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | RUNNING | 16/11 15:57Z |
 | kit-size #2 (opus, kit keeper; OD 16:00Z (1)–(9)) | review/kit-size | main s19 | session_01UV1SzhfEWsjainSgb3FHP9 | RUNNING | 16/11 15:57Z |
 | emotion-acts review (opus; e9bd51ee) | review/emotion-acts-r1 | B | session_01N1tNP36vT978Q89SfwTmPC | RUNNING | 16/11 16:04Z |
-| D29 review (opus) of schedules3-r4 @f388b4de | review/schedules3-r5 | C | (opening) | RUNNING | 16/11 16:06Z |
-| PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | (opening) | RUNNING | 16/11 16:06Z |
+| D29 review (opus) of schedules3-r4 @f388b4de | review/schedules3-r5 | C | session_011xDdVPgkrf4Nx6Fu4w3gr5 | RUNNING | 16/11 16:06Z |
+| PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | session_011xDdVQ9uFz3dWEEUrZZp9W | RUNNING | 16/11 16:06Z |
