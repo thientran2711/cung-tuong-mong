@@ -171,3 +171,255 @@ Successor (opened by Foreman D): continue review/npc-roads with U2 maids, U3 men
 /home/user/wt/npcr may be reused; the local test branch tmp/npcr-full (+ /home/user/wt/npcrt) was removed — recreate by merging
 origin/review/road-b1/b2/b3 into a local copy (conflicts: assemble.py = union of lists, jbal2.js = keep both sides, index.html/sw.js
 rebuild). Tests: `node dev/test/npc-roads.js <url> 4 180` (~40 min), `node dev/test/npc-roads-saves.js <url> https://thientran2711.github.io/cung-tuong-mong/`.
+
+## BUILD U2 + U3 + U4 (successor worker session_01DgYSWnAp8mvj9ZAfXiKrhf, START_CTX ≈ 5 % of the 1M window, own estimate)
+- U2 maids (jnroad.js): every staff maid of every house (allServ role maid) + the player's trusted maid S.maid lives one of the 4 cnv roads
+  (cnv_chu/ban/mat/ma, .5–.11 from jrd_cnv when landed); {mis} = her real mistress (ownerOf; the player for her own maids). Her odds =
+  BAL.nroad.base + (m.st + her trait m.tr + servant rank × m.rk) / div (+ Lợi thế after a won chapter, + help). Chapter end on real fields:
+  mp (merit → servant rank, j14) and loyal (to her mistress) + her mistress's Danh share; rival = the coldest maid of ANOTHER house (af both
+  ways). Asks the player only with a real motive: her own maid with loyal ≥ m.askLoy, another house's maid when the player is close to her
+  mistress (bond ≥ askRel or same faction). A maid raised to consort (j8 sendMaid, j14/jmline eye — both go through j88 f88Carry, wrapped)
+  keeps her road state: same log, same help chapter, goes on as a cn road from her next chapter (`pr` = her old road; `wasMaid` → origin cn).
+  News «Tin trong cung · X, người hầu của …» (own maids always, others within newsMo). Road line on her card in the Kẻ hầu tab (pcard lines,
+  the j70 staff-tab pattern).
+- Help-card voice (all 8 nr_* cards, whole group): a consort says ta + Tỷ tỷ / Muội muội, a maid nô tỳ + Tiểu chủ / Nương nương (tsGoi),
+  a eunuch nô tài, a man thần (Vương gia: bản vương), VANPHONG §2. FIX (same group): the address after a full stop was lowercase
+  («… rồi. tỷ tỷ được …») in all 8 cards → capitalised.
+- U3 men (NEW dev/build/jnroadm.js, after jnroad.js): 20 templates × 8 chapters (proposed §4.10 below) on the REAL men only: S.men by role
+  (the m96 Thanh mai trúc mã man excluded: his story owns him), court men S.court (tq, ksp, ty, ped), staff eunuchs (servant engine, road
+  eun_len), the house heads (trS().H; the player's own father excluded: her road owns him), sons of NPC consorts ≥ BAL.nroad.men.kidAge
+  (her own children excluded: ch12 is about them). Odds from his own stat (S.men loyal, house head sk, prince tal; court men BAL st).
+  Real fields both ways (BAL.nroad.men): S.men loyal (jmen bribe odds) + rival man's loyal; court men af toward a patron consort / away
+  from the other side (ksp af.me = the night-register odds of jcycle), a lost chapter costs the patron Danh; house heads pow + rival
+  house pow + house relation (enmity; off_thong binds/splits the two houses); princes fond/tal/hp + rival prince's fond. When the
+  player's side is hit (her house, her son, she is the patron/foe) the news line always shows and says so. Help asks: S.men tinh ≥ askTinh,
+  court men / house heads af.me ≥ askAf, allied house (tdRel ≥ askRel); princes and the Nội vụ phủ buyer never ask.
+  Man kinds read ONLY men templates (bug found in test: kind "st" Sứ thần matched j67's o:"st" shared arc st_the).
+- Tags of men chapters are story words only: never a rank, a death, a dismissal or an heir (real state stays with its own systems).
+- Kit: no CSS, no new part (j72 card, log lines, pcard lines). VANPHONG scan of every new string: no %, no digits, no banned words
+  («Bạn học» → «Đồng môn», «nước mình» → «bản quốc», «công mình» → «công lao»).
+
+## TESTS (U2+U3+U4, review/npc-roads 02405da5; build = this branch + road-b1/b2/b3 merged LOCALLY, not pushed)
+| test | result |
+|---|---|
+| npc-roads.js @755x1000, 4 lives × 180 months (tt, dtq, thd, muoi) — consort regression after the refactor | 38/38 PASS (110 NPC roads, gain-and-loss scan 24 options → 0 without cost/loss) |
+| npc-roads-maids.js, 2 lives × 120 months + forced raise / help / card | 22/22 PASS: 36–52 maid roads a life, all cnv, in order, rival always another house; staff eunuchs live eun_len; 4 raised maids a life go on as cn with the same log; help cards say nô tỳ + Tiểu chủ; Kẻ hầu card line |
+| npc-roads-men.js, 2 lives × 120 months + forced help / prince / card / co-op guest | 23/23 PASS: 17–18 men roads a life (S.men 9, court 4, houses 4–5), .4→.11 in order, tags on every end, no road for her father / m96 / her children, fields in range; help for man/doc/eun/ksp/off with thần / nô tài / bản vương; prince road .4→.11 moves fond/tal/hp; card line once he is known; guest plays nothing |
+| npc-roads-saves.js @1180x820 (LIVE main save + this build) | 6/6 PASS (+ maid/eunuch/man road state survives ser/deser) |
+| save size | consorts 3.9–5.7 KB + maids/eunuchs 1.4–2.3 KB + men 2.1–2.5 KB per save (≈ 1 % of a 575–765 KB save) |
+
+## U4 BALANCE (dev/measure/npc-roads-bal.js, month-loop lives, 40 lives × 15 years per style)
+| run | style | her death % | NPC Danh / Sủng / rank (live) | NPC dead | HH seat held % | kids dead | chapters consort/servant/men | help asked consort/servant/men |
+|---|---|---|---|---|---|---|---|---|
+| 1st numbers | off | 40.0 | — | 3.9 | 17.5 | 1.3 | 0/0/0 | 0/0/0 |
+| 1st numbers | on | 37.5 | — | 4.3 | 42.5 | 2.4 | 79.5/90.0/132.7 | 0.8/0.2/0.3 |
+| after rebalance | off | 42.5 | 66.1 / 92.1 / 3.8 | 4.0 | 37.5 | 1.7 | 0/0/0 | 0/0/0 |
+| after rebalance | on | 48.6 | 60.3 / 89.8 / 3.8 | 4.4 | 54.3 | 1.4 | 74.9/80.5/122.7 | 0.9/0.3/0.2 |
+| after rebalance | bond | 40.0 | 63.8 / 90.8 / 3.7 | 4.1 | 25.0 | 1.8 | 75.0/71.0/124.2 | 5.5/2.1/9.2 |
+- Rebalance (BAL.nroad.fx): wins outnumber losses (≈ 50 : 37), so win {danh 3, sung 2, suc −4} vs lose {danh −4, sung −3, suc −2}, mid {suc −2, danh −1}
+  → expected Danh/Sủng of a chapter ≈ 0; NPC Danh/Sủng/rank with roads ON ≈ OFF (above). The «HH seat held» column is noise at n = 40: the OFF
+  build alone moved 17.5 → 37.5 % between runs of the same code. Her death % and NPC deaths stay within noise.
+- The month loop does not play her climb, so «her HH reach» is not read here (the full-play bot npc-roads.js has no rank metric); NPC-world skew is.
+- Help hồi with a bond-building player: ≈ 17 asks in 15 years (≈ 1 a year) vs ≈ 1.4 with no bonds → the motive gate works (U1 OPEN item closed).
+
+### 4.10 Men — road templates (PROPOSED by Foreman D, review/npc-roads jnroadm.js; canon check Foreman B)
+Off-screen roads of REAL men (U3). Each chapter: title (player text) [cast key w] — win tag / lose tag (middle = «việc còn dở dang»); .11 = win / middle / lose. Test stat in brackets after the road. Tags are story words only: never a rank, a death, a dismissal or an heir.
+**gd — Thị vệ (S.men)**
+- gd_tl · Đường lên Thống lĩnh [loyal]
+  - .4 Ca trực đêm mưa [gd] — giữ vững cổng cung / để lọt kẻ lạ
+  - .5 Kẻ đứng trên [gd] — được Thống lĩnh để mắt / bị Thống lĩnh quở
+  - .6 Đồng liêu ghen [gd] — êm chuyện với đồng liêu / bị đồng liêu gài
+  - .7 Bạc lót tay [bac] — từ chối bạc bẩn / dính tiếng nhận bạc
+  - .8 Hộ giá đi săn [emp] — hộ giá chu toàn / để ngựa kinh trước thánh giá
+  - .9 Kỳ khảo võ [gd] — đứng đầu kỳ khảo / thua kém người sau
+  - .10 Lời tiến cử [off] — được tiến cử / lời tiến cử bị gác lại
+  - .11 Đường lên Thống lĩnh [emp] — được Hoàng thượng nhớ tên / giữ được chỗ đứng / lỡ đường thăng tiến
+- gd_tinh · Mối tình bên cổng cung [loyal]
+  - .4 Chiếc khăn rơi [gd] — trả khăn kín đáo / bị người khác trông thấy
+  - .5 Lời hẹn dưới cây hòe [gd] — giữ được lời hẹn / lỡ hẹn
+  - .6 Kẻ dòm ngó [eun] — qua mắt kẻ dòm ngó / bị kẻ dòm ngó ghi tên
+  - .7 Thư tay [man] — thư đến tay người nhận / thư lạc đường
+  - .8 Lệnh đổi ca [gd] — vẫn được trực chỗ cũ / bị đổi đi xa
+  - .9 Tin đồn trong cung [eun] — tin đồn lắng xuống / tin đồn lan rộng
+  - .10 Chọn giữa tình và chức [gd] — giữ được cả hai / phải buông một
+  - .11 Mối tình bên cổng cung [gd] — hẹn ngày nàng ra cung / giữ trong lòng, không nói / dứt tình cho yên thân
+- gd_kho · Án mất trộm ngự khố [loyal]
+  - .4 Đêm ngự khố mất đồ [eun] — báo kịp lúc / bị nghi đầu tiên
+  - .5 Dấu chân bên tường [gd] — lần ra dấu vết / dấu vết bị xóa
+  - .6 Kẻ tình nghi [eun] — tìm ra kẻ đáng ngờ / bị đổ oan một phần
+  - .7 Thận Hình ti tra hỏi [eun] — khai rõ ràng, được thả / chịu đòn tra
+  - .8 Món đồ trở lại [bac] — tìm lại món đồ / món đồ bặt tăm
+  - .9 Kẻ đứng sau [off] — lần ra kẻ đứng sau / bị chặn đường tra xét
+  - .10 Trình án [emp] — án được trình lên / án bị dìm
+  - .11 Án mất trộm ngự khố [emp] — rửa sạch tiếng, được thưởng / án khép lại, không ai được gì / mang tiếng mãi
+**ty — Thái y (S.men Thái y + court Thái y)**
+- ty_thu · Y thư thất truyền [loyal]
+  - .4 Cuốn sách nát [man] — giữ được cuốn sách / sách mất mấy trang
+  - .5 Phương thuốc lạ [man] — đọc ra phương thuốc / đọc sai một vị
+  - .6 Thử thuốc [bac] — thuốc có hiệu / thuốc vô hiệu
+  - .7 Đồng liêu dị nghị [off] — thuyết phục được Thái y viện / bị chê là tà thuật
+  - .8 Bệnh dịch ngoài thành [emp] — cứu được nhiều người / dịch lan rộng
+  - .9 Tranh công [off] — giữ được công lao / bị kẻ khác nhận công
+  - .10 Dâng sách [emp] — sách được dâng lên / sách bị gác xó
+  - .11 Y thư thất truyền [emp] — y thư được chép vào Thái y viện / giữ riêng một bản / sách cháy, chỉ còn trong trí nhớ
+- ty_tra · Đơn thuốc bị tráo [loyal]
+  - .4 Thang thuốc khác màu [man] — nhận ra kịp / không nhận ra
+  - .5 Ai chạm vào thuốc [eun] — lần ra người chạm thuốc / dấu vết đứt
+  - .6 Lời đe dọa [v] — đứng vững trước lời dọa / im lặng vì sợ
+  - .7 Bệnh nhân trở nặng [bac] — cứu được bệnh nhân / bệnh nhân nguy kịch
+  - .8 Thái y viện xét việc [off] — được tin / bị nghi
+  - .9 Chứng cứ [v] — giữ được chứng cứ / chứng cứ bị lấy mất
+  - .10 Trước mặt Hoàng hậu [hh] — lời khai được tin / bị buộc tội
+  - .11 Đơn thuốc bị tráo [hh] — rửa oan, kẻ tráo thuốc lộ mặt / giữ được tiếng, mất lòng tin / mang tiếng oan, vẫn bị nghi
+**vg — Vương gia (S.men)**
+- vg_dat · Đất phong [loyal]
+  - .4 Chiếu ban đất [emp] — nhận đất màu mỡ / nhận đất cằn
+  - .5 Mùa màng [bac] — mùa được / mất mùa
+  - .6 Quan địa phương [off] — quan địa phương phục / quan địa phương chống
+  - .7 Lời gièm vào kinh [emp] — lời gièm bị gạt / lời gièm lọt tai Hoàng thượng
+  - .8 Thuế đất [bac] — nộp đủ thuế / thiếu thuế
+  - .9 Thái hậu hỏi han [th] — được Thái hậu khen / bị Thái hậu trách
+  - .10 Dâng biểu [emp] — biểu được chuẩn / biểu bị bác
+  - .11 Đất phong [emp] — đất phong yên ổn, dân quý / giữ được đất, mất lòng triều / đất phong lụn bại
+- vg_bien · Lòng người ngoài biên [loyal]
+  - .4 Tin biên ải [emp] — được đi trấn biên / bị giữ lại kinh
+  - .5 Quân lương [bac] — đủ quân lương / thiếu quân lương
+  - .6 Tướng dưới quyền [gd] — tướng dưới quyền phục / tướng dưới quyền ngờ vực
+  - .7 Sứ giặc đến [envoy] — giữ thể diện triều đình / để sứ giặc lấn lời
+  - .8 Trận đầu [gd] — thắng trận đầu / thua trận đầu
+  - .9 Lời đồn mưu phản [emp] — lời đồn tan / lời đồn bám theo
+  - .10 Về kinh [emp] — về kinh trong vinh dự / về kinh lặng lẽ
+  - .11 Lòng người ngoài biên [emp] — biên ải yên, lòng người theo / giữ được biên, mất lòng triều / bị Hoàng thượng nghi kỵ
+**ns — Nhạc sư (S.men)**
+- ns_tho · Khúc nhạc mừng thọ [loyal]
+  - .4 Lệnh soạn khúc [th] — nhận lệnh vui vẻ / nhận lệnh trong lo âu
+  - .5 Bản phổ cũ [man] — tìm được bản phổ cũ / bản phổ thiếu trang
+  - .6 Đàn bị hỏng [bac] — sửa được đàn / đàn hỏng hẳn
+  - .7 Nhạc công bỏ đi [man] — giữ được nhạc công / thiếu người tấu
+  - .8 Tập trước Thái hậu [th] — Thái hậu gật đầu / Thái hậu nhíu mày
+  - .9 Kẻ chép trộm [man] — giữ được khúc nhạc / khúc nhạc bị chép trộm
+  - .10 Đêm trước tiệc thọ [th] — mọi thứ sẵn sàng / còn dở dang
+  - .11 Khúc nhạc mừng thọ [th] — khúc nhạc vang khắp Đức Thọ cung / tấu xong, không ai nhắc / lạc một nhịp trước Thái hậu
+**st — Sứ thần (S.men)**
+- st_uoc · Điều ước hai nước [loyal]
+  - .4 Quốc thư [envoy] — trao quốc thư đúng lễ / sai lễ khi trao quốc thư
+  - .5 Lễ bộ tiếp sứ [off] — được tiếp đãi chu đáo / bị Lễ bộ làm khó
+  - .6 Điều khoản đầu [off] — giữ được lợi cho bản quốc / phải nhượng một điều
+  - .7 Quà dâng Thái hậu [th] — quà được nhận / quà bị trả lại
+  - .8 Tai mắt quanh sứ quán [gd] — thoát được tai mắt / bị theo dõi sát
+  - .9 Hội đàm [emp] — hội đàm êm thấm / hội đàm căng thẳng
+  - .10 Đóng ấn [emp] — ấn được đóng / việc đóng ấn bị hoãn
+  - .11 Điều ước hai nước [emp] — điều ước thành, hai nước giao hảo / điều ước tạm hoãn / hội đàm đổ vỡ
+**hs — Họa sư (S.men)**
+- hs_hoa · Bức họa mỹ nhân [loyal]
+  - .4 Lệnh vẽ chân dung [emp] — nhận lệnh vẽ / nhận lệnh trong lo sợ
+  - .5 Phi tần ngồi họa [v] — nét vẽ được khen / bị chê vẽ không giống
+  - .6 Bạc lót tay [bac] — từ chối bạc lót tay / nhận bạc, vẽ đẹp thêm
+  - .7 Bức họa bị đổi [eun] — giữ được bức thật / bức họa bị tráo
+  - .8 Hoàng thượng xem tranh [emp] — Hoàng thượng khen / Hoàng thượng phật ý
+  - .9 Lời vu [v] — gạt được lời vu / mang tiếng vu
+  - .10 Bức họa cuối [emp] — hoàn thành bức họa / bức họa dang dở
+  - .11 Bức họa mỹ nhân [emp] — bức họa treo ở Càn Ninh cung / tranh cất vào kho / bị cấm cầm cọ một thời
+**tq — Tổng quản (S.court.tq)**
+- tq_an · Ấn Tổng quản [loyal]
+  - .4 Ấn bị dời chỗ [eun] — tìm lại ấn / ấn trễ một ngày
+  - .5 Kẻ nhòm ngó ghế [eun] — dẹp được kẻ nhòm ngó / kẻ nhòm ngó lớn mạnh
+  - .6 Sổ chi tiêu [bac] — sổ sách sạch / sổ sách hụt
+  - .7 Phe phi tần [v] — giữ được thế đứng giữa / bị kéo vào một phe
+  - .8 Hoàng thượng hỏi tội [emp] — được tha / bị quở
+  - .9 Thái hậu ra mặt [th] — Thái hậu che chở / Thái hậu lạnh nhạt
+  - .10 Người nối tay [eun] — chọn được người tin cẩn / người nối tay trở mặt
+  - .11 Ấn Tổng quản [emp] — giữ ấn vững vàng / giữ ấn, mất lòng người dưới / suýt mất ấn
+- tq_que · Đường về quê [loyal]
+  - .4 Thư từ quê [man] — thư báo bình an / thư báo tin dữ
+  - .5 Xin phép về thăm [emp] — được chuẩn / bị bác
+  - .6 Gửi bạc về quê [bac] — bạc đến nơi / bạc bị chặn
+  - .7 Họ hàng tìm đến [man] — giúp được họ hàng / họ hàng làm khó
+  - .8 Người cũ trong làng [man] — gặp lại người cũ / người cũ đã khuất
+  - .9 Lời đồn ăn bớt [eun] — lời đồn bị bác / lời đồn bám theo
+  - .10 Ngôi mộ tổ [bac] — sửa được mộ tổ / không kịp sửa mộ
+  - .11 Đường về quê [emp] — lo xong việc quê, lòng nhẹ nhõm / lo được một nửa / quê nhà xa mãi
+**ksp — Kính sự phòng (S.court.ksp)**
+- ksp_so · Sổ ghi Kính sự phòng [loyal]
+  - .4 Một dòng bị tẩy [eun] — phát hiện kịp / không ai hay
+  - .5 Thẻ bài lật sai [emp] — sửa được sai sót / sai sót đến tai bề trên
+  - .6 Phi tần đút lót [v] — từ chối khéo / nhận bạc, mang nợ
+  - .7 Hoàng hậu xem sổ [hh] — sổ sạch / sổ có chỗ lạ
+  - .8 Kẻ chép sổ [eun] — giữ được sổ / sổ bị chép ra ngoài
+  - .9 Tin có thai [man] — ghi đúng ngày / ghi lệch ngày
+  - .10 Sổ được trình [emp] — sổ khớp từng dòng / sổ lệch một dòng
+  - .11 Sổ ghi Kính sự phòng [emp] — sổ được tin như vàng / giữ được sổ, người ghi bị nghi / sổ thành mối họa
+**eun — tiểu thái giám (staff eunuchs + Nội vụ phủ S.court.ped)**
+- eun_len · Từ tiểu thái giám đi lên [loyal]
+  - .4 Việc nặng đầu tiên [eun] — làm xong chu toàn / làm hỏng việc
+  - .5 Sư phụ [eun] — được sư phụ nhận dạy / bị sư phụ bỏ
+  - .6 Đồng liêu chèn ép [eun] — qua được chèn ép / bị chèn ép
+  - .7 Việc kín của chủ [mis] — giữ kín việc của chủ / để lộ việc của chủ
+  - .8 Bạc đầu tiên [bac] — để dành được bạc / mất bạc
+  - .9 Được giao việc lớn [mis] — việc lớn thành / việc lớn hỏng
+  - .10 Lời tiến cử [eun] — được tiến cử / bị gạt tên
+  - .11 Từ tiểu thái giám đi lên [mis] — thành người tin cẩn của chủ / vẫn là kẻ hầu lặng lẽ / bị chủ ghẻ lạnh
+**off — house heads (j55 trS().H, her father excluded)**
+- off_ghe · Giữ ghế trong triều [sk]
+  - .4 Tờ biểu đầu năm [emp] — biểu được khen / biểu bị chê
+  - .5 Kẻ dòm ghế [off] — dẹp được kẻ dòm ghế / kẻ dòm ghế lớn mạnh
+  - .6 Việc trong bộ [off] — việc trong bộ trôi chảy / việc trong bộ ách tắc
+  - .7 Ngự sử xét sổ [off] — qua được kỳ xét / bị bắt lỗi
+  - .8 Lòng Hoàng thượng [emp] — Hoàng thượng tin / Hoàng thượng ngờ
+  - .9 Môn sinh [off] — môn sinh đắc lực / môn sinh phản thầy
+  - .10 Buổi chầu lớn [emp] — đứng vững trước triều / bị triều thần vây
+  - .11 Giữ ghế trong triều [emp] — ghế vững như bàn thạch / giữ được ghế, mất bè cánh / ghế lung lay
+- off_dan · Lời đàn hặc [sk]
+  - .4 Tấu đàn hặc [off] — tấu bị gạt / tấu được đem ra nghị
+  - .5 Ngự sử tra xét [off] — sổ sách sạch / sổ sách có vết
+  - .6 Đồng minh trong triều [off] — đồng minh đứng ra / đồng minh im lặng
+  - .7 Chứng cứ [off] — chứng cứ bị bác / chứng cứ được tin
+  - .8 Lời trong hậu cung [hh] — hậu cung nói đỡ / hậu cung im lặng
+  - .9 Đại Lý tự xét [off] — được minh oan một phần / bị kết một tội nhẹ
+  - .10 Hoàng thượng định đoạt [emp] — được tha / bị phạt bổng
+  - .11 Lời đàn hặc [emp] — rửa sạch, kẻ đàn hặc mất mặt / qua được, tiếng còn vương / mang tội, phủ suy
+- off_thong · Thông gia với phủ khác [sk]
+  - .4 Lời ngỏ [off] — lời ngỏ được nhận / lời ngỏ bị từ chối
+  - .5 Xem tuổi [off] — tuổi hợp / tuổi xung
+  - .6 Sính lễ [bac] — sính lễ xứng / sính lễ thiếu
+  - .7 Kẻ chen ngang [off] — gạt được kẻ chen ngang / bị kẻ chen ngang phá
+  - .8 Hoàng thượng hỏi đến [emp] — Hoàng thượng chuẩn / Hoàng thượng chần chừ
+  - .9 Lời đồn trong kinh [off] — lời đồn tan / lời đồn làm hai phủ ngờ nhau
+  - .10 Ngày cưới [off] — lễ cưới linh đình / lễ cưới lặng lẽ
+  - .11 Thông gia với phủ khác [emp] — hai phủ kết thành một khối / thông gia mà không thân / hôn sự đổ vỡ, hai phủ thành thù
+**hz — sons of NPC consorts ≥ BAL.nroad.men.kidAge**
+- hz_hoc · Thái phó và học vấn [tal]
+  - .4 Ngày đầu ở Thượng thư phòng [off] — được Thái phó khen / bị Thái phó phạt
+  - .5 Kinh sử [off] — thuộc làu kinh sử / học trước quên sau
+  - .6 Đồng môn [off] — kết thân với đồng môn / bất hòa với đồng môn
+  - .7 Phụ hoàng khảo bài [emp] — trả lời trôi chảy / ấp úng trước phụ hoàng
+  - .8 Cưỡi ngựa bắn cung [gd] — bắn trúng hồng tâm / ngã ngựa
+  - .9 Bài văn đầu tay [off] — bài văn được truyền tay / bài văn bị chê
+  - .10 Kỳ khảo cuối [emp] — đứng đầu các hoàng tử / đứng sau các hoàng tử
+  - .11 Thái phó và học vấn [emp] — văn võ song toàn, phụ hoàng đẹp lòng / học hành bình thường / bị phụ hoàng chê lười
+- hz_le · Lễ trưởng thành [tal]
+  - .4 Lễ đội mũ [emp] — được ban áo mũ / lễ bị hoãn
+  - .5 Phủ đệ đầu tiên [bac] — phủ đệ chu toàn / phủ đệ thiếu thốn
+  - .6 Người hầu cận [eun] — chọn được người hầu tin cẩn / người hầu ăn bớt
+  - .7 Ra mắt tông thân [th] — tông thân khen / tông thân chê
+  - .8 Việc triều đầu tiên [off] — làm tròn việc / làm hỏng việc
+  - .9 Lời khuyên của mẫu phi [mom] — nghe lời mẫu phi / trái ý mẫu phi
+  - .10 Phụ hoàng ban thưởng [emp] — được ban thưởng / không được nhắc tên
+  - .11 Lễ trưởng thành [emp] — được phụ hoàng tin giao việc / trưởng thành lặng lẽ / bị chê chưa ra dáng
+- hz_tran · Ra trận lập công [tal]
+  - .4 Xin ra trận [emp] — được chuẩn / bị giữ lại
+  - .5 Tướng già dạy việc [gd] — được tướng già nhận dạy / bị tướng già coi thường
+  - .6 Quân lương [bac] — quân lương đủ / quân lương thiếu
+  - .7 Trận đầu [gd] — thắng trận đầu / thua trận đầu
+  - .8 Thư mẫu phi [mom] — thư đến kịp / thư thất lạc
+  - .9 Công và tội [off] — công được ghi / tội bị kể
+  - .10 Khải hoàn [emp] — khải hoàn trong tiếng reo / trở về lặng lẽ
+  - .11 Ra trận lập công [emp] — lập công lớn, phụ hoàng ban thưởng / về bình an, công nhỏ / bại trận, mang tiếng
+## FOR FOREMAN B (relay by Foreman D)
+- §4.10 above is a PROPOSAL (data = dev/build/jnroadm.js on review/npc-roads; the rows are printed from that file). Please check canon
+  (titles, cast keys, no clash with §5.2/§5.4) and copy into ROAD_MAP §4.10; changes → tell D, the data follows the map.
+- No new story-only NPC, no new place name (Thượng thư phòng, Thận Hình ti, Càn Ninh cung, Đức Thọ cung, Đại Lý tự already in the game).
+
+SẴN SÀNG KIỂM 02405da5cc35a01450d2dccd1ee3f2f70c5585a2 (U2 maids + U3 men + U4 balance; U0+U1 reviewed separately at f699bbf4)
+- Reviewer please eyeball at 755x1000 / 1180x820: Kẻ hầu card road line (own maid), a Nam nhân card (known man), one maid nr_* offer.
+- Not done: screenshots (bot pages stay behind the boot cover); no viewport run of the cards (text lines in existing kit cards only).
