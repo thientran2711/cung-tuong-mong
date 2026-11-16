@@ -1047,3 +1047,11 @@ All must work in co-op.
 - RULE: two separate lists — solo ≥3 slots, co-op ≥3 rooms (each remembers ám hiệu, friend, her character); co-op never writes into solo slots; menu shows both with name/rank/age/date; try to recover overwritten solo saves. → worker review/save-slots (HIGH; waiting for a free slot — act-text asked to wrap up).
 - (16/11, session 8) Owner (verbatim, repeated from yesterday): "phải có một cái địa điểm cố định để mà mình gắn hình vào từng người ... nếu mà chỉ có một người thì người đó phải đứng giữa ... nếu mà có 2 người là 2 người phải đứng ở 2 cái vị trí cũng cố định ... chia đều ... cân đối. Và cái thứ ba đó là 3 người ... Chứ bây giờ ... hai người dồn hết bên trái, nhìn nó đâu có đẹp đâu." Screenshot dev/handover/refs/owner-stage-slots-left.jpg (iPad landscape: 2 people crammed into the left half of the stage, names overlapping, the right half empty behind the side column).
 - RULE (fixed stage slots): the stage area = the part NOT covered by the side info column. Layouts: 1 person → centre; 2 → at 1/3 and 2/3 of the free width (equal spacing); 3 → 1/4, 2/4, 3/4 (middle one slightly forward/larger optional); more → paging (as now). Same figure scale for all; name tags under each, never overlapping; the side column never covers a slot. Same on every viewport. → review/stage-side worker (one narrow side column) + fixed slot layouts, j59.
+
+## 16/11 (session 8) — Pick the model by task weight (owner)
+- Owner (verbatim): "khi mà mở thợ là phải chọn đúng cái model với đúng cái mức việc của nó. Ví dụ như một cái thợ, một cái việc nhẹ thôi mà mở cái model cao quá sẽ tốn credit."
+- RULE (all coordinators + Foreman B), set the Agent `model` explicitly on every spawn:
+  - haiku: docs-only / ledger / status edits, simple scans or file lists, single-line wording fixes, re-running an existing test.
+  - sonnet (DEFAULT): normal workers (one feature or one UI family), all reviewers, art workers (Magnific generation + look + upload), small bug fixes.
+  - opus: only hard cross-system work — co-op sync / netcode, save/migration/data-loss, performance root-cause (load/lag/WebKit), big multi-module refactors, or a task that already failed twice on sonnet.
+  - Never fable for routine work. Log the chosen model in SESSION8_QUEUE / FOREMAN_B_STATUS next to the item.
