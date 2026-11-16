@@ -16,18 +16,16 @@ function fpNum(k){return +String(k).replace(/\D/g,"")||0}
 /* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
 /* j88 (review/face-84) API when present: faceOn() · facePool(filter) -> [{id, src, n, por, fig, mine}] · faceChoose(id) */
 const FP88=()=>typeof facePool==="function"&&typeof faceChoose==="function";
-window.__fpF=window.__fpF||(String((typeof S!=="undefined"&&S&&S.pid)||"").startsWith("maid:")?"maid":"consort");
+/* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the 52 maid faces only, every phi tần life the whole 84 (32 consort + 52 maid, all have consort dress art) */
 /* review/newgame-ui (owner 15/11 "quá lag"): the item list is built ONCE per (pool, her tier, age, dress, roll) — facePool walked all 84
    identities twice (por + fig) on every pick and every tab (≈ 0.3–1.8 s on a tablet); the cells show the small pre-sized copy (kitTn) */
 const FP_C={};
-function fpKey(f){let t="",a="",v="";try{t=figTierOf(S);a=figAgeOf(S);v=(typeof isSrv==="function"&&isSrv())?"s":"c"}catch(e){}return [f,t,a,v,(NLP&&NLP.seed)||""].join("|")}
-function fpItems(){const key=fpKey(window.__fpF);if(FP_C[key])return FP_C[key];let L=null;
- try{if(FP88()){L=(facePool(window.__fpF)||[]).map(x=>{const f=Object.assign({},pMe());f.src=(typeof kitTn==="function"&&kitTn(x.por))||x.por||"";f.rw="";f.big=x.por||"";return{k:x.id,face:f,label:`${x.src==="maid"?"Dung mạo cung nữ":"Dung mạo"} ${x.n}`,fig:x.fig||""}})}}catch(e){L=null}
+function fpKey(){const f=kitFaceScope();let t="",a="",v="";try{t=figTierOf(S);a=figAgeOf(S);v=(typeof isSrv==="function"&&isSrv())?"s":"c"}catch(e){}return [f,t,a,v,(NLP&&NLP.seed)||""].join("|")}
+function fpItems(){const key=fpKey();if(FP_C[key])return FP_C[key];let L=null;
+ try{if(FP88()){L=(facePool(kitFaceScope())||[]).map(x=>{const f=Object.assign({},pMe());f.src=(typeof kitTn==="function"&&kitTn(x.por))||x.por||"";f.rw="";f.big=x.por||"";return{k:x.id,face:f,label:`${x.src==="maid"?"Dung mạo cung nữ":"Dung mạo"} ${x.n}`,fig:x.fig||""}})}}catch(e){L=null}
  L=L&&L.length?L:fpKeys().map(k=>({k,face:fpFace(k),label:`Dung mạo ${fpNum(k)}`}));if(KIT_TN)FP_C[key]=L;return L}
-function fpCount(f){try{return typeof f88Keys==="function"?f88Keys(f).length:facePool(f).length}catch(e){return 0}}
 function fpHTML(){return kitPicker({id:"face",title:"Dung mạo · chạm để chọn",items:fpItems(),cur:S.pid,rows:2,
-  filters:FP88()?[["consort",`Phi tần ${fpCount("consort")}`],["maid",`Cung nữ ${fpCount("maid")}`]]:null,filter:window.__fpF,
-  note:"Dung mạo chỉ để nhìn, không đổi tư chất.",onPick:fpPick,onFilter:f=>{window.__fpF=f;fpRedraw()},onPage:fpPrefetch})}
+    note:"Dung mạo chỉ để nhìn, không đổi tư chất.",onPick:fpPick,onPage:fpPrefetch})}
 /* the faces on the page in view: their low-res standing figures are fetched + decoded ahead, so a pick shows her at once */
 const FP_PF={};function fpPrefetch(btns){try{const M=Object.fromEntries(fpItems().map(x=>[x.k,x]));(btns||[]).forEach(b=>{const x=M[b.dataset.pk];const lo=x&&x.fig&&kitTn(x.fig);if(!lo||FP_PF[lo])return;
   const im=new Image();im.decoding="async";im.src=lo;FP_PF[lo]=im;im.decode&&im.decode().catch(()=>0);try{kitFigBody(lo)}catch(e){}})}catch(e){}}
@@ -70,8 +68,8 @@ function fpSel(k){const r=document.querySelector("#modal .kpick[data-pick=face]"
 function fpRefresh(){try{const m=Q[0];if(!(m&&m.nl))return;m.faces=[[pMe(),S.name]];const sj=document.querySelector("#modal .kpid .kpsubj");if(sj)sj.innerHTML=pframe(pMe());
   fpSel(S.pid);if(typeof kpIdFig==="function")kpIdFig($("modal"))}catch(e){console.error(e)}}
 function fpPick(k){if(!fpOn())return;fpSel(k);if(!(FP88()?faceChoose(k):fpSet(k)))return;window.__fpDirty=1;fpRefresh()}
-/* the other tab is ready before she taps it: its items built and its thumbnails fetched + decoded in idle time */
-function fpWarm(){try{if(!FP88()||!fpOn())return;const cur=window.__fpF;const oth=cur==="maid"?"consort":"maid";window.__fpF=oth;let L;try{L=fpItems()}finally{window.__fpF=cur}
+/* the one list is warmed in idle time: its thumbnails fetched + decoded before she scrolls to them */
+function fpWarm(){try{if(!FP88()||!fpOn())return;const L=fpItems();
  L.forEach(x=>{const s=x.face&&x.face.src;if(s&&!FP_PF[s]){const im=new Image();im.decoding="async";im.src=s;FP_PF[s]=im;im.decode&&im.decode().catch(()=>0)}})}catch(e){}}
 /* the crisp figure starts loading on touch-down, ~100 ms before the tap ends */
 document.addEventListener("pointerdown",e=>{try{const b=e.target.closest&&e.target.closest('#modal .kpick[data-pick=face] .kpki');if(!b)return;const x=fpItems().find(i=>i.k===b.dataset.pk);if(x&&x.fig&&!FP_PF[x.fig]){const im=new Image();im.src=x.fig;FP_PF[x.fig]=im}}catch(x){}},true);

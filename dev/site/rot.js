@@ -56,8 +56,14 @@ function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle(
   if(o&&o.lock&&pwa&&narrow(innerWidth,innerHeight))o.lock("landscape").catch(function(){})}catch(e){}}
  /* boot cover (kboot.js, KIT §14.1) in the design box, from the first paint until the frame has painted its own copy */
  var cw=d.createElement("div");cw.id="kbootw";cw.style.cssText="position:fixed;top:0;left:0;transform-origin:0 0;overflow:hidden;z-index:4";
+ /* SAFE AREA (stage-figsize, owner iPad photo 16/11 3:56 PM: the iOS status bar covered the top of the header — buổi dots, 'Chưa điểm trang', the top of
+    her name — and a paper strip sat under the tab bar): the frame is fitted into the screen MINUS env(safe-area-inset-*) (status bar, home indicator,
+    notch), never under them; when the screen is taller than the design (4:3 iPads: 1366x1024, 1024x768) the frame stands on the BOTTOM of the safe
+    area so the tab bar is flush with the SCREEN bottom (the bottom inset = the home-indicator line is not kept free in landscape; a 44 px tab is still tapped above it) and the spare paper strip goes to the top, beside the status bar. Narrow rotated phones keep the old centring. */
+ var sap=null;function insets(){if(window.__kinsetsTest)return window.__kinsetsTest;/* test hook (dev/test/host-safe-area.js) */try{if(!sap){sap=d.createElement("div");sap.style.cssText="position:fixed;left:0;top:0;width:0;height:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)";(d.body||d.documentElement).appendChild(sap)}
+  var c=getComputedStyle(sap);return{t:parseFloat(c.paddingTop)||0,r:parseFloat(c.paddingRight)||0,b:parseFloat(c.paddingBottom)||0,l:parseFloat(c.paddingLeft)||0}}catch(e){return{t:0,r:0,b:0,l:0}}}
  function geo(){var w=window.innerWidth,h=window.innerHeight;if(!w||!h)return null;
-  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,AW=nr?h:w,AH=nr?w:h,s=Math.min(AW/DW,AH/DH),ox=(AW-DW*s)/2,oy=(AH-DH*s)/2;
+  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,I0=nr?{t:0,r:0,b:0,l:0}:insets(),I={t:I0.t,r:I0.r,l:I0.l,b:land?0:I0.b}/* landscape: the tab bar goes flush to the screen bottom, under the thin home-indicator line (owner: no strip under the tabs) */,AW=(nr?h:w)-I.l-I.r,AH=(nr?w:h)-I.t-I.b,s=Math.min(AW/DW,AH/DH),ox=I.l+(AW-DW*s)/2,oy=I.t+(nr?(AH-DH*s)/2:(AH-DH*s));
   return{w:w,h:h,nr:nr,DW:DW,DH:DH,s:s,tf:(nr?"translateX("+w+"px) rotate(90deg) ":"")+"translate("+ox.toFixed(2)+"px,"+oy.toFixed(2)+"px) scale("+s.toFixed(4)+")"}}
  function place(el,g){if(el.style.width!==g.DW+"px")el.style.width=g.DW+"px";if(el.style.height!==g.DH+"px")el.style.height=g.DH+"px";el.style.transform=g.tf}
  (function(){var g=geo();if(!g||!window.__kbootHost)return;place(cw,g);d.documentElement.appendChild(cw);window.__kbootHost(cw,g.DW,g.DH);
