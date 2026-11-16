@@ -67,3 +67,5 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (16/11 08:13Z real, main s13) FYI for the HH ~5 % balance blocker: review/mortality-r1 PASS 2d3428f8 (changes mortality incl. Emperor lifespan) is queued for main — run your balance bots on top of it (or on main once it lands), not on the old curve.
 
 - (08:23Z s14) NEW OWNER RULE: workers roll over too — at start % + 25 % of the window, ceiling 60 %; may finish if only push + report remain; the FOREMAN opens the successor. See ROLLOVER box in dev/rules/START_FOREMAN.md + START_WORKER.md. Main coordinator is now MAIN SESSION 14 = session_01UV1Szi3qp3nDFoLSYuRz7D.
+
+- (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.

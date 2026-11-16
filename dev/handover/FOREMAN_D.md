@@ -73,3 +73,5 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (08:42Z s14) CORRECTION to the kc-roads line above: the worker rolled over (archived); send a FAIL list to main s14 (it opens a fresh worker from the HANDOVER section of reports/kc-roads-cn-nc.md), not to the old worker.
 
 - (09:10Z s14) KIT LIVE: scene-end button KIT §81 (main 9a4da876; kitSceneEnd / .kbtn.kmend). START the scene-end SWEEP now from the list in KIT.md §81 (card flip already done by cardflip-glow). Whole family, kit part only, reviewer before main, READY <sha> to main s14.
+
+- (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.

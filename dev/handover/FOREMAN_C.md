@@ -62,3 +62,5 @@ Claim each in CLAIMS.md before opening its worker session.
 - (08:23Z s14) NEW OWNER RULE: workers roll over too — at start % + 25 % of the window, ceiling 60 %; may finish if only push + report remain; the FOREMAN opens the successor. See ROLLOVER box in dev/rules/START_FOREMAN.md + START_WORKER.md. Main coordinator is now MAIN SESSION 14 = session_01UV1Szi3qp3nDFoLSYuRz7D.
 
 - (08:43Z s14) ART REQUEST (mass production, Foreman C): hi-res item512 pictures for the 22 items without item512 + pet/veil/mark pictures — list in dev/handover/reports/item-big.md (review/kit-keeper-2). Style STYLE_ANCHOR, gpt-2-6 only, look at every image, log model + creation id per picture. Start after kit-keeper-2-r1 PASS (main s14 tells you) or now if you have free art slots — pictures go to CDN img/item512/.
+
+- (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
