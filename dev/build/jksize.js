@@ -475,7 +475,7 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
    NOT converted (pages, not event frames): identity card .kpid, person card (pcm), scene panels without a kind, and bodies holding a page part
    (KSZ_LIVE_SKIP: calendars, pickers, inventories, shops, relation tables, stat grids, tables, exam / card-flip pages). */
 const KSZ_LIVE_SKIP=".kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
-KIT_SIZE.v3.office={ksp:"Kính sự phòng"};/* (s22) the ĐÊM narrator's tag names his office, not the bare "Thái giám" */
+KIT_SIZE.v3.office={ksp:"Kính sự phòng"};KIT_SIZE.v3.live={maxOpts:7,maxSecs:4};/* (s22) the ĐÊM narrator's tag names his office, not the bare "Thái giám" */
 (function(){const r0=kszRankName;kszRankName=function(p){const R=r0(p);try{if(p&&S&&S.court&&p===S.court.ksp&&KIT_SIZE.v3.office.ksp)R[0]=KIT_SIZE.v3.office.ksp}catch(e){}return R};window.kszRankName=kszRankName})();
 function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .kdlgart img, :scope > .kpb > .kpsubj.kpev img, :scope > .kpb > .kpsubj.kpiart img");if(im)src=im.getAttribute("src")||"";
  if(!src&&m&&m.kit&&m.kit.pic)src=m.kit.pic;if(!src&&m&&m.headArt&&m.headArt.src)src=m.headArt.src;
@@ -517,6 +517,8 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
  const kind=dlg.dataset.kind;if(!KIT_SIZE.v3.focus[kind])return false;const body=mb.querySelector(":scope > .kpb");if(!body||body.matches(".kpid"))return false;
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
+ /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
+ const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
  let P=[];try{P=kitStagePeople(m)}catch(e){}const who=P[0]||kszWho3({kind});const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");

@@ -71,3 +71,33 @@ ART REQUEST (→ Foreman C via main): Thái hậu figures fig-thaihau-h1/h2/h3-a
 Known / open: kitFigBody head-top detection (ht) returns ht = t for these figures (pink/gold ornaments pass the skin test) → crowns counted as body; same for every person so the scale is still equal, but a stricter skin test would size bodies more exactly (kit-wide family change, not done). XL portrait VIỆC with 4 long options scrolls inside the info column (cap 732).
 Sheets: dev/handover/reports/kit-size/ba-755x1000-*.jpg, ba-1180x820-*.jpg (BEFORE | AFTER, 1600 px wide, ≤ 2000 px tall). Tools: dev/test/kit-size-ba.js (before/after blocks) + dev/test/kit-size-compose.py.
 Next (successor): wait for the owner's verdict via main; then phase 2 (wire kszFrame/kszBtn/kitFrameApply into kpBuild / kitEventStage / kitDpFit / compact cards; move the item CSS into jk2b kitItem; audit the 67 "Đã hiểu" literals: info frames only).
+
+## kit-size #5 — PHASE 2 live (opus, 16/11 ~19:50Z–) — s22 task (worker; coordinator = s22 session_01UV1SzjhT28XQmRt2EHNffg)
+START_CTX ≈ 3 % of 1M (context_usage read 0; estimate). Rollover at ≈ 28 %, ceiling 60 %. Rolled over at ≈ 28 % (handover below; the COORDINATOR opens the successor).
+Branch review/kit-size: merged origin/main (7b5e5e49) → 08129f3d; code f130133c + this commit.
+
+### Done
+- `kitFrameLive3` (jksize.js, KIT.md §84 "PHASE 2 · LIVE"): every #modal kit panel of a KP_SEAL kind becomes THE v3 frame (moves the game's nodes; option handlers kept). jksize.js added to the build (assemble.py, last module). Narrator via `kszWho3` / BAL.staff.narrator; ĐÊM tag = "Kính sự phòng" (KIT_SIZE.v3.office). Option cards in the v3 grid (`kszBtnGridLive3`). Old fit passes skip a live frame. Pages/menus excluded (list in KIT.md).
+- Tests: `dev/test/kit-size5.js` (20 cases) and `dev/test/kit-conform.js` template T7.
+
+### Measured (kit-size5, Fold 755x1000 · iPad 1180x820; page errors none on both)
+| case | Fold size / box | iPad size / box | notes |
+|---|---|---|---|
+| info, info-person, result, threat, person, end | S 380 | S 380 | portrait pendant + event strip, 0 empty |
+| rule, news, notice, night, intel, reward, week, headart-notice | S 380 | S 380 | event picture left, info centred (top gap = bottom gap) |
+| notice-long | L 560 (XL on a slow picture load) | XL 860 / L | 0 cut |
+| choice (2 opts) | S, grid 2 cols | S, 2 cols | |
+| headart-choice | L, 2 cols | L, 2 cols | |
+| choice-5 (5 opts, Hoàng hậu) | XL 562, 1 col, info column SCROLLS ~240 px | XL 860, 3 cols, no scroll | Fold risk (owner note): see open item 1 |
+| evidence (long page of evidence cards) | XL, scrolls in info column | XL, scrolls | big content by nature |
+No frame leaves the screen, no horizontal overflow, no cut text (ellipsis/scroll check), no visible "Đã hiểu" button (✕ in header, kitCloseSync).
+kit-conform (all PEND + SRV + places, both devices): T7 CONFORMS 73 · T1 7–8 · T2 2 · T3 1; MIXED 3 = place:tgk / place:ttp / place:night "two pictures: band + left picture" (T2, NOT converted frames — verify whether this exists on main before blaming phase 2); MISSING 15–16 = the stale place-walk cases noted in #3 (test waits not fixed yet).
+
+### Open — HANDOVER for the next kit-size worker (in this order)
+1. Fold XL with ≥ 5 option cards scrolls inside the 304-px info column. Tried: options moved under the body (full width) → frame taller than the Fold screen, clipped; reverted. Options: (a) accept scroll (approved #3 "XL: more scrolls inside the info column"), (b) square option cards (§6.2b kit-fit, review/kit-fit not merged yet — once merged the cards are ~half height and choice-5 likely fits), (c) a narrower figure column at XL on kv1. Recommend (b): merge review/kit-fit first, re-measure.
+2. Verify the 3 MIXED place cards on origin/main (kit-conform with the old build); if pre-existing, report as separate bug.
+3. Items → `kszItem3` XL master inside jk2b `kitItem` (not started).
+4. "Đã hiểu" literal audit: 78 literals in 41 files (jlost 8, jksize 5, jkitpage 5, jk4 5, jts 4, jdh2 4, jtut 3, j77 3, …; `git grep -c 'Đã hiểu' -- 'dev/build/j*.js'`). Rule: only info frames lose it (tutorial / scene-end keep, OD:L1261). In #modal the button is already hidden by kitCloseSync (✕) — audit the other surfaces.
+5. Runs not done yet: an old-save test (e.g. dev/test/two-way-oldsave.js) and dev/test/coop-e2e.js on this build; kit-conform place-walk waits.
+6. Kit page sample for the live frame (KIT_SAMPLES.push) — not added.
+Server for tests: `node dev/test/cdn-overlay-serve.js <port> <wt> <empty list>`; rebuild `bash dev/site/build_site.sh`, then `git checkout index.html sw.js assets.json` before committing. Shots outside git (/home/user/wt/ksz2-shots).
