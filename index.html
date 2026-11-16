@@ -2341,24 +2341,45 @@ try{const H=window.claude&&window.claude.hot;if(H){if(typeof H.snapshot==="funct
 (()=>{let s=1;try{s=+localStorage.getItem("hclh-slot")||1}catch(e){}SLOT=s;showTitle()})();
 /* ================= SETTINGS, SOUND, FEEDBACK, SCENE LAYER ================= */
 const RM=(()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}})();
-const OPT=Object.assign({snd:false,mus:.5,sfx:.7,mute:false,vib:true,fxon:true},(()=>{try{return JSON.parse(localStorage.getItem("hclh-opt")||"{}")}catch(e){return{}}})());
+/* ONE-LINE SWITCH (owner question OPEN: sound on by default?). false = "Bật âm thanh" until the player turns it on (unchanged). Set true to ship sound-on-by-default. */
+const SND_DEFAULT=false;
+const OPT=Object.assign({snd:SND_DEFAULT,mus:.5,sfx:.7,mute:false,vib:true,fxon:true},(()=>{try{return JSON.parse(localStorage.getItem("hclh-opt")||"{}")}catch(e){return{}}})());
 function saveOpt(){try{localStorage.setItem("hclh-opt",JSON.stringify(OPT))}catch(e){}}
 /* ---- audio: HTMLAudio, starts after the first tap, missing files fail silently ---- */
 const AU={unlocked:false,cur:null,curName:"",duck:1,cache:{}};
 function auOk(){return AU.unlocked&&OPT.snd&&!OPT.mute&&!document.hidden}
-function mkAudio(n,loop){try{const a=new Audio(`audio/${n}.mp3`);a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1});return a}catch(e){return null}}
+function mkAudio(n,loop,route){try{const a=new Audio(`audio/${n}.mp3`);a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1});if(route)auRoute(a);return a}catch(e){return null}}
+/* ---- iOS / WebAudio layer (review/result-sfx): iPhone ignores element.volume and only unlocks audio on touchend / click / keydown (not a touch pointerdown).
+   AU.ctx = one AudioContext, resumed + a silent buffer played on every real gesture (re-armed after the page was hidden or the phone interrupted it).
+   Music (and the heartbeat loop) go through a GainNode and expose the same `volume` property, so the slider, mute and ducking work on iPhone; sfx play from decoded
+   AudioBuffers (jsfx sfx()) through a GainNode too. Everything falls back to plain HTMLAudio when WebAudio is missing. */
+function auRoute(a){try{if(!AU.ctx||AU.ctx.state==="closed"||a.__gain)return;const src=AU.ctx.createMediaElementSource(a),g=AU.ctx.createGain();src.connect(g);g.connect(AU.ctx.destination);let v=1;a.__gain=g;
+ Object.defineProperty(a,"volume",{configurable:true,get:()=>v,set:x=>{v=Math.max(0,Math.min(1,+x||0));g.gain.value=v}})}catch(e){}}
+function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e)return e.buf||null;const o=c[n]={buf:null,fail:0};
+ try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1})}catch(e){o.fail=1}return null}
+const AU_PRELOAD=["sfx-win","sfx-fail","sfx-learn-good","sfx-learn-bad","sfx-seal-stamp","sfx-tap","sfx-expose","sfx-scheme","sfx-rank-new","sfx-podium","sfx-buy","sfx-coin"];
+function auUnlock(){try{const C=window.AudioContext||window.webkitAudioContext;
+ if(C&&!AU.ctx){try{AU.ctx=new C({latencyHint:"interactive"})}catch(e){try{AU.ctx=new C()}catch(x){}}}
+ try{if(navigator.audioSession&&navigator.audioSession.type!=="playback")navigator.audioSession.type="playback"}catch(e){}
+ const c=AU.ctx;if(c&&c.state!=="running"){const p=c.resume();if(p&&p.catch)p.catch(()=>{})}
+ if(c&&!AU.silent){AU.silent=1;try{const s=c.createBufferSource();s.buffer=c.createBuffer(1,1,22050);s.connect(c.destination);s.start(0)}catch(e){}if(!AU.pre){AU.pre=1;AU_PRELOAD.forEach(auBuf)}}
+ if(!AU.unlocked){AU.unlocked=true;auTick()}}catch(e){if(!AU.unlocked)AU.unlocked=true}}
+window.auUnlock=auUnlock;
 function musVol(){return OPT.mute||!OPT.snd?0:OPT.mus*AU.duck}
 function fadeTo(a,v,ms,done){if(!a)return;const v0=a.volume,t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,v0+(v-v0)*f))}catch(e){}if(f<1)setTimeout(st,60);else if(done)done()};st()}
-function startTrack(n){const a=mkAudio(n,false);if(!a)return null;a.volume=0;a.addEventListener("timeupdate",()=>{if(AU.curName!==n||a.handoff||!a.duration)return;if(a.currentTime>a.duration-1.6){a.handoff=1;const b=startTrack(n);if(b){AU.cur=b;fadeTo(b,musVol(),1500)}fadeTo(a,0,1500,()=>{try{a.pause()}catch(e){}})}});if(auOk()){const p=a.play();if(p&&p.catch)p.catch(()=>{})}return a}
+function startTrack(n){const a=mkAudio(n,false,true);if(!a)return null;a.volume=0;a.addEventListener("timeupdate",()=>{if(AU.curName!==n||a.handoff||!a.duration)return;if(a.currentTime>a.duration-1.6){a.handoff=1;const b=startTrack(n);if(b){AU.cur=b;fadeTo(b,musVol(),1500)}fadeTo(a,0,1500,()=>{try{a.pause()}catch(e){}})}});if(auOk()){const p=a.play();if(p&&p.catch)p.catch(()=>{})}return a}
 function setMusic(n){if(AU.curName===n&&AU.cur)return;AU.curName=n;const old=AU.cur;const a=startTrack(n);AU.cur=a;if(a)fadeTo(a,musVol(),1200);if(old)fadeTo(old,0,1200,()=>{try{old.pause()}catch(e){}})}
-function heartLoop(on){try{if(on&&auOk()){if(!AU.hb){AU.hb=mkAudio("sfx-heartbeat",true)}if(AU.hb&&AU.hb.paused){AU.hb.volume=OPT.sfx*.6;const p=AU.hb.play();if(p&&p.catch)p.catch(()=>{})}}else if(AU.hb&&!AU.hb.paused)AU.hb.pause()}catch(e){}}
+function heartLoop(on){try{if(on&&auOk()){if(!AU.hb){AU.hb=mkAudio("sfx-heartbeat",true,true)}if(AU.hb&&AU.hb.paused){AU.hb.volume=OPT.sfx*.6;const p=AU.hb.play();if(p&&p.catch)p.catch(()=>{})}}else if(AU.hb&&!AU.hb.paused)AU.hb.pause()}catch(e){}}
 function sfx(n){if(!auOk())return;try{let a=AU.cache[n];if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return;const b=a.cloneNode();b.volume=OPT.sfx;const p=b.play();if(p&&p.catch)p.catch(()=>{});
  AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},650)}catch(e){}}
 function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.place==="lc")return"bgm-cold";const m=Q[0];if(m&&(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="night1"&&m.pid!=="night2"&&m.pid!=="shop"))return"bgm-tension";
  if(m&&(m.pid==="night1"||m.pid==="night2"||m.cls==="night"))return"bgm-night";if((S.month===1||S.month===7)&&S.tuan===0)return"bgm-festival";return (S.buoi||0)===B4L?"bgm-night":"bgm-day"}
 function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
-document.addEventListener("pointerdown",()=>{if(!AU.unlocked){AU.unlocked=true;auTick()}},{capture:true});
-document.addEventListener("visibilitychange",()=>{try{if(document.hidden){if(AU.cur)AU.cur.pause()}else auTick()}catch(e){}if(PX.app){try{document.hidden?PX.app.ticker.stop():PX.app.ticker.start()}catch(e){}}});
+/* real gestures only: touchend / click / pointerup / keydown unlock iOS; pointerdown counts for a mouse (or when WebAudio is missing), a touch pointerdown is not a gesture there */
+for(const ev of ["touchend","click","pointerup","keydown"])document.addEventListener(ev,auUnlock,{capture:true,passive:true});
+document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock()},{capture:true,passive:true});
+window.addEventListener("pageshow",()=>{AU.silent=0});
+document.addEventListener("visibilitychange",()=>{try{if(document.hidden){if(AU.cur)AU.cur.pause()}else{AU.silent=0;if(AU.ctx&&AU.ctx.state!=="running"){const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}auTick()}}catch(e){}if(PX.app){try{document.hidden?PX.app.ticker.stop():PX.app.ticker.start()}catch(e){}}});
 /* ---- feedback(kind): sound + haptics + visual, one helper ---- */
 const VIB={tap:8,coin:15,decree:[20,40,20],promote:[30,30,60],poison:[80,40,120],expose:[120],birth:[15,30,15,30,15],night:[10],heart:[40,120,40,600],hit:[30]};
 const SFXN={tap:"sfx-tap",open:"sfx-open",coin:"sfx-coin",decree:"sfx-decree",promote:"sfx-promote",poison:"sfx-poison",expose:"sfx-expose",birth:"sfx-birth",night:"sfx-night",page:"sfx-page",step:"sfx-step",good:"sfx-learn-good",bad:"sfx-learn-bad",verdict:"sfx-decree",hit:"sfx-expose"};
@@ -14384,7 +14405,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   const kitRes=typeof kitGameResult==="function"?kitGameResult({parts:[["Màn thi",skipped?`Để tài nghệ quyết định, ${raw}/10 → +${skill}`:`${kg82Word(raw)} ${raw}/10 → +${skill}`]].concat(tParts.map(([l,v])=>[l,`+${v}`]),prep?[["Chuẩn bị",`+${prep}`]]:[]),
    total:`${score} phần`,place:pw,of,rivals:ord.map(x=>({who:x.p||x.who,score:x.score,sub:x.sub})),gains,losses,note}):null;
   const html=(kitRes||`<h4 class="kpst">Phần của ngươi</h4>${kg82Rows(sRows)}<h4 class="kpst">Bảng định thứ</h4>${stand}${tail}`)+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("round",pw);kg82Set("time","đã hết");
+  kg82ShowRes(html,place<=3);kg82Set("score",`${raw}/10`);kg82Set("round",pw);kg82Set("time","đã hết");
   const out={score,raw,skill,talent,prep,skipped,place,of,standings:ord.map(x=>({id:x.id,name:x.name,score:x.score})),shown:true};KG82.last=out;
   const ok=$("kg82ok");ok.onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(out)}catch(e){console.error(e)}};const dd=kg82El();if(dd)dd.scrollTop=0;try{ok.focus({preventScroll:true})}catch(e){}};
  intro()}
@@ -14393,7 +14414,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{KG82.lv=kg82LvFor(S,kind)}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const done=(raw,skipped)=>{KG82.phase="result";const html=kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
+  kg82ShowRes(html,raw>=5);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped})}catch(e){console.error(e)}}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để trời định<small>tính 5/10</small></button></div>`;
  $("kg82go").onclick=()=>kg82Play(kind,raw=>done(raw,false));$("kg82skip").onclick=()=>done(5,true)}
@@ -16490,7 +16511,7 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
  const d=kg82Open({art:"Chải chuốt",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
  const done=zone=>{spend(1);wdGroomApply(S,zone);const t=wdItemsTxt(S);log(`Ngươi chải chuốt, ${zone==="ok"?"ăn vận vừa vặn":zone==="over"?"ăn vận lộng lẫy":"ăn vận giản dị"}: ${t}.`);
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html);$("kg92ok").onclick=()=>{kg82Close();render()}};
+  kg82ShowRes(html,zone==="ok");$("kg92ok").onclick=()=>{kg82Close();render()}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg92skip">Bỏ qua<small>tính như Tự chọn đồ</small></button></div>`;
  $("kg92go").onclick=()=>{box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
   let stop=null;try{stop=kg92Groom(box,env)}catch(e){console.error(e);env.end(5);return}KG82.run={stop:()=>{if(stop)stop()}}};
@@ -25824,13 +25845,13 @@ function exStart(){const e=exS(S);const P=exPlan(S);
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
-  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`);
+  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
   kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
   kg82Open({art:"Khảo hạch",round:"Môn",title:`Kết quả · ${exRk(P.to)}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
   const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
   const note=sc.pass?`Đỗ. ${P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${exRk(P.to)}.`}`:`Trượt. Chờ ${exCd(P.to)} tháng mới được thi lại.`;
-  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
+  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,null);/* final: exDone plays examPass / examFail */
   kg82Set("score",String(sc.total));kg82Set("round",`${n}/${n}`);kg82Set("time","đã hết");try{$("kg82ok").scrollIntoView({block:"nearest"})}catch(x){}
   $("kg82ok").onclick=()=>{e.pend=null;kg82Close();exDone(S,r);try{save()}catch(x){}render()}};
  round()}
@@ -27258,7 +27279,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
  const over=made&&(st.parts.thick||0)>=BAL.toil.diemThick;const look=!made?null:over?"diem":score>=BAL.toil.tier[1]?"dep":null;
  S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:st.occ.map(o=>o.k),look};
- const mk=made?(look==="diem"?"diem":toilTier(score)):"moc";const good=mk==="dep"||mk==="tuyet";try{kitSfx(!made?"mirror":good?"good":mk==="vung"||mk==="diem"?"bad":"mirror")}catch(e){}
+ const mk=made?(look==="diem"?"diem":toilTier(score)):"moc";const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&(mk==="vung"||mk==="diem")?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`trang điểm ${TOIL_MK[mk]} (${score} phần)`:"để mặt mộc"}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];
  if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],
@@ -27268,7 +27289,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  const eff=[];try{for(const h of ["th",qOn()?rivals[0]:null,"emp"].filter(Boolean)){if(h==="th"&&S.thDead)continue;const r=leAttire(S,"",h);const t=r.toil;if(!t||!t.aff)continue;
   eff.push(`${toilWho(h)}: ${h==="emp"?(t.aff>0?"Sủng +1":"Sủng -1"):`thiện cảm ${t.aff>0?"+":""}${t.aff}`} khi gặp hôm nay`)}}catch(e){}
  const html=`<div class="kgr">${kitRows(rows.concat([["Hôm nay",eff.length?eff:["không ai đổi cách nhìn ta"],"n"]]))}</div><div class="kg82act"><button class="${kg82Btn()}" id="toildone">Đã hiểu</button></div>`;
- toilHUD({score:made?`${score}/100`:"–",round:"4/4",time:"đã xong"});kg82ShowRes(html);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()};
+ toilHUD({score:made?`${score}/100`:"–",round:"4/4",time:"đã xong"});kg82ShowRes(html,tOk);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()};
  try{save()}catch(e){}}
 (function(){const st=document.createElement("style");st.id="toil-css";st.textContent=`
 #kg82 .toilw{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:10px 14px;align-items:start}
@@ -27700,7 +27721,7 @@ function tsGame(o){const odds=cl(Math.round(o.odds||50),5,95);const skipRes=()=>
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how});if(!d){o.onDone(skipRes());return}const box=kg82Box();
  const fin=(r)=>{KG82.phase="result";KG82.tsRisk=null;const rows=[["Màn chơi",r.skipped?`Bỏ qua: tính theo cơ may (${word(odds)}) → ${r.ok?"thuận":"không thuận"}`:`${r.raw}/10 · ${kg82Word(r.raw)}`,"t"]];
   if(o.risk)rows.push(["Hộ giá",r.guard?"kịp lúc":"không kịp, cấm quân lo liệu",r.guard?"g":"n"]);if(o.note)rows.push(["Ghi chú",o.note,"n"]);
-  kg82ShowRes(tsRows(rows)+`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`);kg82Set("score",`${r.raw}/10`);kg82Set("time","đã hết");
+  kg82ShowRes(tsRows(rows)+`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`,r.skipped?!!r.ok:r.raw>=5);kg82Set("score",`${r.raw}/10`);kg82Set("time","đã hết");
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone(r)}catch(e){console.error(e)}}};
  KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button><button class="kbtn alt" id="kg82skip">Bỏ qua<small>tính theo cơ may thường: ${word(odds)}</small></button></div>`;
  $("kg82go").onclick=()=>kg82Play(o.kind,raw=>fin({raw,skipped:false,guard:o.risk?(KG82.tsGuard?1:0):null}));$("kg82skip").onclick=()=>fin(skipRes())}
@@ -28144,15 +28165,21 @@ for(const k of Object.keys(SFXN))if(/^sfx-pet-/.test(SFXN[k]))SFXL[SFXN[k]]={g:.
 /* ---- the mixer (replaces j11 sfx; same name, every caller keeps working) ---- */
 function ksfxBusy(){const now=performance.now();KSFX.live=KSFX.live.filter(v=>!v.a.ended&&!v.a.paused&&now<v.until);let n=KSFX.live.length;
  try{if(typeof VO!=="undefined"&&VO.cur&&!VO.cur.paused&&!VO.cur.ended)n++}catch(e){}return n}
-sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(window.__bot||(typeof quiet!=="undefined"&&quiet))return ksfxDrop(n,"quiet");
+sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(window.__bot||(typeof quiet!=="undefined"&&quiet))return ksfxDrop(n,"quiet");
  const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<90)return ksfxDrop(n,"twice");
  if(ksfxBusy()>=3){if(ui)return ksfxDrop(n,"full");const v=KSFX.live.find(x=>x.ui)||KSFX.live.find(x=>now-x.t0>500);if(!v)return ksfxDrop(n,"full");try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}
- try{let a=AU.cache[n];if(a&&a.dead&&now-(a.deadT||(a.deadT=now))>4000){a=null}if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return ksfxDrop(n,"dead");const b=a.cloneNode();
-  b.volume=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));
-  if(o.rate&&o.rate!==1){try{b.preservesPitch=false;b.mozPreservesPitch=false;b.webkitPreservesPitch=false}catch(e){}b.playbackRate=o.rate}
-  KSFX.last[n]=now;const dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):2200)+80;KSFX.live.push({a:b,ui,t0:now,until:now+dur});
-  KSFX.log.push({n,m:o.m||"",ui:ui?1:0,t:Math.round(now)});if(KSFX.log.length>400)KSFX.log.splice(0,100);
-  const p=b.play();if(p&&p.catch)p.catch(()=>{});
+ try{const vol=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));let b=null,dur=0,web=0;
+  /* WebAudio first (iPhone ignores element.volume): a decoded buffer through a GainNode; until it is decoded the HTMLAudio clone plays */
+  const cx=AU.ctx,buf=cx&&cx.state==="running"?auBuf(n):null;
+  if(buf){try{const src=cx.createBufferSource(),g=cx.createGain();src.buffer=buf;g.gain.value=vol;if(o.rate&&o.rate!==1)src.playbackRate.value=o.rate;src.connect(g);g.connect(cx.destination);
+   b={ended:false,paused:false,pause(){this.paused=true;try{src.stop()}catch(e){}}};src.onended=()=>{b.ended=true};src.start();web=1;dur=buf.duration*1000/(o.rate||1)+80}catch(e){b=null}}
+  if(!b){let a=AU.cache[n];if(a&&a.dead&&now-(a.deadT||(a.deadT=now))>4000){a=null}if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return ksfxDrop(n,"dead");b=a.cloneNode();
+   b.volume=vol;
+   if(o.rate&&o.rate!==1){try{b.preservesPitch=false;b.mozPreservesPitch=false;b.webkitPreservesPitch=false}catch(e){}b.playbackRate=o.rate}
+   dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):2200)+80}
+  KSFX.last[n]=now;KSFX.live.push({a:b,ui,t0:now,until:now+dur});
+  KSFX.log.push({n,m:o.m||"",ui:ui?1:0,t:Math.round(now),w:web});if(KSFX.log.length>400)KSFX.log.splice(0,100);
+  if(!web){const p=b.play();if(p&&p.catch)p.catch(()=>{})}
   if(!ui){AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},Math.min(2200,dur))}
   return true}catch(e){return ksfxDrop(n,"err "+e.message)}};
 function kitSfx(m,o){const f=SFXN[m];if(!f)return false;o=o||{};if(o.at){setTimeout(()=>sfx(f,Object.assign({m},o,{at:0})),o.at);return true}return sfx(f,Object.assign({m},o))}
@@ -28198,8 +28225,7 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
    else if(/km-reward/.test(cls))ksfxReward(st.ov)}catch(e){console.error(e)}return st});
  W("kitFlipNote",o=>function(p){const r=o.apply(this,arguments);try{if(p&&p!==S)kitSfx("notice",{at:120})}catch(e){}return r});
  W("kitXamPlay",o=>function(el,lot){const x=o.apply(this,arguments);try{ksfxXam(x,lot)}catch(e){}return x});
- W("kitResultFx",o=>function(card){const r=o.apply(this,arguments);try{if(card){const ok=card.classList.contains("ok");const red=typeof kmReduced==="function"&&kmReduced();
-   kitSfx("seal",{at:red?0:280});kitSfx(ksfxOutcome(ok,card.textContent),{at:red?60:520});const k=ksfxText(card.textContent);if(k)kitSfx(k,{at:red?120:900})}}catch(e){}return r});
+ /* the result card sound (seal + win / fail / expose / scheme + the card's own word) lives in kitResultSfx below, wrapped on resultShow itself (not on kitResultFx, which only runs when kmOn) */
  W("kitCalendar",o=>function(){const r=o.apply(this,arguments);try{kitSfx("week");kitSfx("turn",{at:350})}catch(e){}return r});
  /* the week book (j87 Sổ tuần) shows the lot as a page, without j93's tube: the lot's bell / wooden fish after the calendar */
  W("dawn",o=>function(){const r=o.apply(this,arguments);try{const w=document.getElementById("dawn");if(w&&S&&S.lot&&!w.querySelector(".kmxam")&&typeof LVB!=="undefined"){
@@ -28218,12 +28244,12 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
  W("wkSell",o=>function(p){const r=o.apply(this,arguments);try{if(r&&me(p))kitSfx("sell")}catch(e){}return r});
  W("giveTo",o=>function(a){const r=o.apply(this,arguments);try{if(r&&me(a))kitSfx("give")}catch(e){}return r});
  /* --- podium (j90): the gong, then her place (top three = a new honour) --- */
- W("kitPodiumShow",o=>function(list){const r=o.apply(this,arguments);try{if(r){kitSfx("podium");const L=Array.isArray(list)?list:[];const i=L.findIndex(x=>x&&x.who===S);
+ W("kitPodiumShow",o=>function(list){const r=o.apply(this,arguments);try{if(r){KSFX.podAt=performance.now();kitSfx("podium");const L=Array.isArray(list)?list:[];const i=L.findIndex(x=>x&&x.who===S);
    if(i>=0&&i<3)kitSfx("rankNew",{at:1300})}}catch(e){}return r});
  /* --- page turns of the books (jbook §34) --- */
  W("kitSheetTurn",o=>function(){try{kitSfx("turn")}catch(e){}return o.apply(this,arguments)});
  /* --- minigames: the running kind, notes, hit / miss words, one stroke per move --- */
- W("kg82Play",o=>function(kind){KSFX.mg=kind||"";return o.apply(this,arguments)});
+ W("kg82Play",o=>function(kind){KSFX.mg=kind||"";KSFX.mgShown=0;return o.apply(this,arguments)});
  W("kg82Close",o=>function(){KSFX.mg="";return o.apply(this,arguments)});
  const RATE=[1,1.122,1.26,1.498,1.682,2];
  W("kg82Pluck",o=>function(i,ok){try{if(typeof auOk==="function"&&auOk()&&!(AU.cache["sfx-mg-pluck"]&&AU.cache["sfx-mg-pluck"].dead)){KSFX.mgT=performance.now();
@@ -28247,7 +28273,7 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
   W("kitLose",o=>function(x,op){const r=o.apply(this,arguments);try{op=op||{};if(x&&!Array.isArray(x)&&typeof x==="object"&&x.bac!=null&&!x.k){ksfxOnce("coinOut");return r}
     const m=ksfxLoseKey(op);if(m)ksfxOnce(m)}catch(e){}return r});
   W("kitCoins",o=>function(dir){const r=o.apply(this,arguments);try{if(dir==="out")ksfxOnce("coinOut")}catch(e){}return r});
-  W("kitFx",o=>function(kind){const r=o.apply(this,arguments);try{if(SFXN[kind]&&!SFXFX_SKIP.test(kind))kitSfx(kind,{g:kind==="lantern"?.7:1})}catch(e){}return r});
+  W("kitFx",o=>function(kind){const r=o.apply(this,arguments);try{if((kind==="mgwin"||kind==="mglose")&&ksfxMgOnce()){KSFX.mgShown=0;return r}if(SFXN[kind]&&!SFXFX_SKIP.test(kind))kitSfx(kind,{g:kind==="lantern"?.7:1})}catch(e){}return r});
   W("exDone",o=>function(p,res){const r=o.apply(this,arguments);try{if(p===S&&res)kitSfx(res.pass?"examPass":"examFail",{at:200})}catch(e){}return r});
   W("petAdd",o=>function(p,t){const r=o.apply(this,arguments);try{if(r&&me(p)&&SFXPET[t])kitSfx(SFXPET[t],{at:400})}catch(e){}return r})};
  late();KSFX.late=late;
@@ -28261,6 +28287,28 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
    if(on&&KSFX.coop===false)kitSfx("join");KSFX.coop=on}catch(e){}},1000);
  /* --- render: state diff (her own state only; a loaded save only takes a snapshot) --- */
  W("render",o=>function(){const r=o.apply(this,arguments);try{ksfxDiff()}catch(e){console.error(e)}if(!KSFX.lateDone){KSFX.lateDone=1;try{late()}catch(e){}}return r})})();
+/* ============ ONE RESULT SOUND (review/result-sfx) ============
+   Every result the player sees plays exactly ONE result sound, once, whatever path made it:
+   - result card (resultShow, all wrappers j19/j25/j63/j65/jaudit/...): seal stamp, then win / fail / expose / scheme (+ the card's own word) — on resultShow itself, independent of kmOn;
+   - minigame result panel (kg82ShowRes(html, ok): contest j82, lesson/work j82 playArt, grooming j92, exam round jexam, toilette jtoil, tsGame jts):
+     ok=true -> mgwin, ok=false -> mglose, ok=null/undefined -> no sound (exam final: exDone owns it; contest podium: kitPodiumShow owns it);
+   kitResultSfx(ok,o) drops a second call within 1.5 s (KSFX.rsDrop counts them), so no path can double. Legacy j11 openMG feedback(good/bad) right after a panel is dropped too. */
+KSFX.rs=-1e9;KSFX.rsDrop=0;KSFX.rsLog=[];
+function kitResultSfx(ok,o){o=o||{};const now=performance.now();
+ if(ok!==true&&ok!==false)return false;
+ if(now-KSFX.rs<1500){KSFX.rsDrop++;return false}KSFX.rs=now;KSFX.rsLog.push({ok,src:o.src||"",t:Math.round(now)});if(KSFX.rsLog.length>200)KSFX.rsLog.splice(0,50);
+ const red=typeof kmReduced==="function"&&kmReduced();
+ if(o.mg){kitSfx(ok?"mgwin":"mglose",{m:"result"});return true}
+ kitSfx("seal",{at:red?0:280,m:"result"});kitSfx(ksfxOutcome(ok,o.text),{at:red?60:520,m:"result"});const k=ksfxText(o.text);if(k)kitSfx(k,{at:red?120:900,m:"result"});return true}
+/* a minigame panel sounded < 2 min ago: the old openMG feedback("good"/"bad") that follows the "Đã hiểu" tap (sfx + kitFx mgwin / mglose) must stay silent; consumed by kitFx */
+function ksfxMgOnce(){return KSFX.mgShown&&performance.now()-KSFX.mgShown<120000}
+window.kitResultSfx=kitResultSfx;
+(function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__ksfx)return false;const w=f(o);w.__ksfx=1;window[n]=w;return true};
+ W("resultShow",o=>function(){const t0=window.__rtT;const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");
+   if(t&&t.classList.contains("on")&&window.__rtT!==t0&&!window.__bot)kitResultSfx(t.classList.contains("ok"),{text:t.textContent,src:"card"})}catch(e){console.error(e)}return r});
+ W("kg82ShowRes",o=>function(html,ok){const p0=KSFX.podAt||0;const r=o.apply(this,arguments);try{if(ok===true||ok===false){if((KSFX.podAt||0)!==p0)KSFX.rs=performance.now();/* the podium sounded: it is this contest's result sound */
+    else if(kitResultSfx(ok,{mg:1,src:"mg"}))KSFX.mgShown=performance.now()}}catch(e){console.error(e)}return r});
+})();
 /* one sound for a moment that two paths announce (sellItem then kitLose "sell"; buy then kitCoins "out"): skip when the same file played < 1.5 s ago */
 /* kitFx kinds whose sound another path owns: the result card (kitResultFx: seal + outcome), the locked button (pointerdown) */
 const SFXFX_SKIP=/^(win|fail|expose|verdict|lock)$/;
@@ -29078,7 +29126,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c37d9c00a6f1";window.CTM_BUILD=BUILD;
+const BUILD="a095b011dc96";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
