@@ -24,7 +24,7 @@ const KFK_SP={
  lantern:{n:4,s:128,d:30},spark:{n:9,s:64,d:26,b:"add"},ember:{n:9,s:40,d:12,b:"add"},orb:{n:3,s:96,d:34,b:"add",t:1},
  streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},
  glowburst:{n:1,s:256,d:220}, /* the painted gold glow still with true alpha (luma): reads on light paper AND dark scenes */
- brush:{n:9,s:160,d:70},"petal-gold":{n:9,s:56,d:22},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
+ brush:{n:9,s:160,d:70},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
  "gift-hands":{n:3,s:288,d:200}, /* review/gift-pick: a maid's hands (celadon sleeves) carrying 0 the lacquer box with its ribbon · 1 the box, ribbon untied · 2 the silk bundle */
  gift:{n:4,s:160,d:120},letter:{n:4,s:128,d:90}  /* gift: 0 closed lacquer box · 1 box open with light · 2 silk-wrapped bundle · 3 untied ribbon;
                                                     letter: 0 sealed letter · 1 open letter · 2 rolled note · 3 envelope */
@@ -41,7 +41,7 @@ const KFK_SHEET={ /* dev/fxwork/sheet.sh: cols×rows frames of w×h (true alpha)
 };
 /* motion per kind for kitFxBurst (fall | burst | rise | bloom | rain) */
 const KFK_MOVE={"petal-plum":"fall","petal-peach":"fall","petal-lotus":"fall",osmanthus:"fall",leaf:"fall",snow:"fall",ash:"fall",paper:"burst",
- coin:"rain",glowburst:"flash",lotuslight:"flash","petal-gold":"fall",jade:"burst",incense:"rise",brush:"flash",gift:"flash",letter:"flash",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
+ coin:"rain",glowburst:"flash",lotuslight:"flash",jade:"burst",incense:"rise",brush:"flash",gift:"flash",letter:"flash",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
 const KFK=window.KFK={loaded:new Set(),tex:{},lights:0,sheets:0,pool:[],made:0,freed:0,log:[],live:new Set()};
 const kfkU=f=>KFK_BASE+f;
 function kfkLow(){try{const c=navigator.connection;return !!((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2))}catch(e){return false}}
@@ -206,4 +206,5 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"paint
   `<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_EDGE).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxEdge('${n}')">edge ${n}</button>`).join("")}`+
   `<button type="button" class="kbtn alt" onclick="kitFxGift('give',this,{kind:'silk'})">gift give</button><button type="button" class="kbtn alt" onclick="kitFxGift('open',this)">gift open</button>`+
   `<button type="button" class="kbtn alt" onclick="kitFxGift('refuse',this)">gift refuse</button><button type="button" class="kbtn alt" onclick="kitFxLetter(this)">letter</button></div>`+
+  `<div class="kitpg-row kfxk-pgr">${["petal","wind","snow","snowh","frost","drizzle","storm","mist","fly","sun","bolt"].map(k=>`<button type="button" class="kbtn alt" onclick="kfWxPreview('${k}')">weather ${k}</button>`).join("")}</div>`+
   `<div class="kitpg-row kfxk-pgr">${Object.keys(FX).filter(k=>k!=="lock").map(k=>`<button type="button" class="kbtn alt" onclick="kitFx('${k}',{el:this})">kitFx ${k}</button>`).join("")}</div>`})}catch(e){}

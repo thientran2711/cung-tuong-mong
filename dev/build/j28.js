@@ -20,22 +20,22 @@ function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p
 /* each trait = weights over the act menu + reaction rules; a person's behaviour = product of both traits' weights */
 const PERS={
  "Hiểm độc":{tend:"nhẫn nại giăng bẫy, ngoài mặt thân thiện",w:{poison:3,kpoison:3,frame:2.5,kframe:2.5,plant:2.5,musk:3,catswap:2.5,pushp:2,feign:3,warn:.2,help:.4,mediate:.2,provoke:.5},dang:10,slight:1,forgive:.6,trust:.8,gift:1},
- "Kiêu ngạo":{tend:"khiêu khích, hạ nhục trước mặt người, khoe ân sủng, không chịu xin lỗi",w:{provoke:3,humiliate:3,flaunt:3,rumor:1.5,trip:1.5,help:.5,mediate:.3,apologise:.1},dang:0,slight:1.6,forgive:.6,trust:1,gift:.5,lavish:60},
- "Hiền lành":{tend:"giúp người, can ngăn, thăm người ốm, dễ bỏ qua",w:{help:3,warn:2.5,mediate:3,visit:3,apologise:2,poison:.15,kpoison:.15,frame:.2,plant:.2,musk:.15,pushp:.15,provoke:.2,humiliate:.1},dang:-15,slight:.6,forgive:2,trust:1.3,gift:1.2,harmGate:70},
+ "Kiêu ngạo":{tend:"khiêu khích, hạ nhục trước mặt người, khoe ân sủng, không chịu xin lỗi",w:{steal:1.5,provoke:3,humiliate:3,flaunt:3,rumor:1.5,trip:1.5,help:.5,mediate:.3,apologise:.1},dang:0,slight:1.6,forgive:.6,trust:1,gift:.5,lavish:60},
+ "Hiền lành":{tend:"giúp người, can ngăn, thăm người ốm, dễ bỏ qua",w:{steal:.5,help:3,warn:2.5,mediate:3,visit:3,apologise:2,poison:.15,kpoison:.15,frame:.2,plant:.2,musk:.15,pushp:.15,provoke:.2,humiliate:.1},dang:-15,slight:.6,forgive:2,trust:1.3,gift:1.2,harmGate:70},
  "Đa nghi":{tend:"dò xét, thử lòng, soát quà, chậm tin, nhanh ngờ",w:{spy:3,test:3,check:3,help:.6,ally:.6},dang:0,slight:1.2,forgive:.8,trust:.5,gift:.6,suspectWarn:1},
  "Tham vọng":{tend:"bám người mạnh, cướp đêm thị tẩm, bỏ đồng minh sa cơ, đút lót Kính sự phòng",w:{ally:2.5,steal:3,bribeksp:3,drop:3,block:2,accuse:1.5,bribe:1.5},dang:0,slight:1,forgive:1,trust:1,gift:1,riseGift:2},
- "Nhu mì":{tend:"tránh va chạm, theo người cầm đầu phe, dễ bị bạn mạnh xui làm",w:{follow:3,help:1.2,provoke:.2,humiliate:.1,poison:.3,frame:.4,pushed:3},dang:-10,slight:.8,forgive:1.4,trust:1.1,gift:1.1},
+ "Nhu mì":{tend:"tránh va chạm, theo người cầm đầu phe, dễ bị bạn mạnh xui làm",w:{steal:.5,follow:3,help:1.2,provoke:.2,humiliate:.1,poison:.3,frame:.4,pushed:3},dang:-10,slight:.8,forgive:1.4,trust:1.1,gift:1.1},
  /* second traits */
  "Hiếu thảo":{tend:"kính Thái hậu, giữ nề nếp",w:{serveTH:3,provoke:.7},dang:-3,slight:1,forgive:1.1,trust:1,gift:1},
  "Ghen tuông":{tend:"ghen ngay khi người khác được sủng",w:{steal:1.6,trip:1.5,rumor:1.4,block:1.5},dang:5,slight:1.2,forgive:.8,trust:1,gift:1,ghen:1.6},
  "Tham tiền":{tend:"mê bạc vàng, dễ mua chuộc",w:{bribe:1.5,flaunt:1.3},dang:0,slight:1,forgive:1,trust:1,gift:1.6},
- "Trọng nghĩa":{tend:"giữ lời, không bỏ bạn lúc hoạn nạn",w:{help:1.6,warn:1.6,drop:.1},dang:-5,slight:1,forgive:1.2,trust:1.2,gift:1},
+ "Trọng nghĩa":{tend:"giữ lời, không bỏ bạn lúc hoạn nạn",w:{steal:.8,help:1.6,warn:1.6,drop:.1},dang:-5,slight:1,forgive:1.2,trust:1.2,gift:1},
  "Nhiều chuyện":{tend:"buôn chuyện, tin gì cũng lan",w:{rumor:2,gossip:3,spy:1.3},dang:0,slight:1,forgive:1,trust:1,gift:1},
  "Thù dai":{tend:"nhớ oán rất lâu",w:{provoke:1.2},dang:5,slight:1.4,forgive:.3,trust:.9,gift:.8},
  "Cả nể":{tend:"khó từ chối ai, dễ bị nhờ vả",w:{help:1.3,pushed:1.8,follow:1.5},dang:-3,slight:.8,forgive:1.3,trust:1.2,gift:1.1},
- "Thẳng thắn":{tend:"nói thẳng, ghét mưu ngầm",w:{feign:.2,plant:.5,frame:.6,warn:1.5,provoke:1.3},dang:0,slight:1.1,forgive:1.1,trust:1,gift:1},
+ "Thẳng thắn":{tend:"nói thẳng, ghét mưu ngầm",w:{steal:.7,feign:.2,plant:.5,frame:.6,warn:1.5,provoke:1.3},dang:0,slight:1.1,forgive:1.1,trust:1,gift:1},
  "Mê tín":{tend:"tin điềm báo, sợ bùa ngải",w:{check:1.5,pray:3},dang:0,slight:1,forgive:1,trust:1,gift:1},
- "Khéo léo":{tend:"khéo lấy lòng người trên",w:{ally:1.5,serveTH:1.5,gift:1.5},dang:0,slight:.9,forgive:1.1,trust:1,gift:1},
+ "Khéo léo":{tend:"khéo lấy lòng người trên",w:{steal:1.4,ally:1.5,serveTH:1.5,gift:1.5},dang:0,slight:.9,forgive:1.1,trust:1,gift:1},
  /* servants */
  trung:{tend:"che chắn cho chủ, báo trước nguy",w:{warn:3,blame:3,dirty:.4},dang:-10,slight:1,forgive:1.2,trust:1.3,gift:1},
  tham:{tend:"ăn cắp, bán tin, làm việc bẩn vì bạc",w:{steal:3,sell:3,dirty:2,black:3},dang:0,slight:1,forgive:1,trust:.9,gift:1.6},

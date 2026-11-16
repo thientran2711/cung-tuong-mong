@@ -248,16 +248,20 @@ window.kitBackBtnHtml=kitBackBtnHtml;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0",title:"Khung thiết kế · một trang = nửa trang đôi iPad (co giãn đều)",
  html:()=>{const F=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:820}},k=.2,v=(typeof kitView==="function"?kitView():{pages:2}),pg=(t,c)=>`<div style="width:${F.page.w*k}px;height:${F.page.h*k}px;border:1px solid var(--line);background:${c};display:grid;place-items:center;font-size:.7rem;color:var(--ink)">${t}</div>`;
   return `<div class="kitpg-row" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap"><div><div style="display:flex">${pg("Phòng (trang trái)","#f3e6c9")}${pg("Thẻ đang mở (trang phải)","#fbf3dd")}</div><small>Ngang: ${F.spread.w}×${F.spread.h}</small></div><div>${pg("Phòng ⇄ thẻ","#fbf3dd")}<small>Dọc: ${F.page.w}×${F.page.h}</small></div><small>Đang xem: ${v.pages===1?"một trang":"trang đôi"}</small></div>`}})}catch(e){}
+/* KIT §0 sample: the ONE-PAGE bottom bar — 8 tabs as TWO ROWS OF 4 + Sang buổi as one tall button (owner 16/11 13:25Z (C); the real bar gets the same from :where(.kv1) in p1.html + tabsFit) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0b",title:"Thanh tab dưới · một trang: 2 hàng x 4 nút + Sang buổi",
+ html:()=>`<nav class="bar" style="width:582px;max-width:100%;display:flex;gap:5px;align-items:stretch"><div class="tabs" style="flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(36px,1fr);gap:4px;overflow:visible">${["Hành sự","Dư đồ","Hậu cung","Giao tình","Hoàng tự","Tư trang","Tài nghệ","Mệnh truyện"].map((t,i)=>`<button type="button" aria-selected="${i===0}" style="min-height:36px;padding:2px 4px;border-radius:8px;font-size:.86rem">${t}</button>`).join("")}</div><button type="button" class="main" style="width:84px;padding:4px 6px;white-space:normal;font-size:.95rem;line-height:1.15;border-radius:8px">Sang buổi</button></nav>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 /* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
 function k3Phone(){try{return kitView().pages===1}catch(e){return false}}
-function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
+function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
  let rb=$$("k3room");const hd=document.querySelector("header.hud");
- if(on&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
- if(rb)rb.hidden=!(on&&(!K3SH.home||pop));
+ if(alive&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room kbackb";rb.innerHTML=kitBackBtnHtml("room","Về phòng");rb.title="Về phòng";rb.setAttribute("aria-label","Về phòng");rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
+ /* owner 16/11 (Q6): wide / landscape (two-page spread) shows the room button too, always; one-page view keeps it only while away from the room home */
+ if(rb)rb.hidden=!alive||(on&&K3SH.home&&!pop);
  document.querySelectorAll("#tabs [data-tab]").forEach(b=>b.classList.toggle("k3dim",on&&K3SH.home&&!pop))}catch(e){console.error("k3Shell",e)}}
 window.k3Shell=k3Shell;
 function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
@@ -291,6 +295,8 @@ html body .game#game.k3ph.k3home:not(.maptab)>#panel{display:none!important}
 html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto minmax(0,1fr) auto!important}
 html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!important;min-height:0!important;height:0!important;border:0!important;overflow:hidden!important}
 html body .game#game.k3ph.k3pop>#panel{display:none!important}
+/* the person card docked by j59 (#popw.j59dock, grid-area:panel) has no 'panel' area on the one-page grid: it took implicit tracks and squeezed the top bar to 329 px (Fold, found by review/two-way-acts shots) — it takes the page box like a tab panel */
+html body .game#game.k3ph.k3pop>#popw{grid-area:stage!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
 html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;padding:0 12px;font-weight:600;color:var(--gold);white-space:nowrap}
 /* KIT §75 painted back button (room / map): icon + short label, no bar */
@@ -526,7 +532,7 @@ html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button
 html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
 html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #modal .k3grid>button.ka.k3odd{grid-column:1/-1}
-#mb>.kdlgart{margin:0 0 8px}#mb>.kdlgart>.ksart{aspect-ratio:auto;height:clamp(90px,22dvh,220px)}#mb>.kdlgart>.ksart>img{object-position:center 45%}
+#mb>.kdlgart{margin:0 0 8px}#mb>.kdlgart>.ksart{aspect-ratio:auto;height:clamp(90px,calc(22*var(--kvh,1dvh)),220px)}#mb>.kdlgart>.ksart>img{object-position:center 45%}
 `;document.head.appendChild(st)})();
 
 /* ---------- 14. ONE PERSON CARD + CATEGORY PICTURE FRAMES + ALIGNED TOP BAR (owner 11/14, kit owner #2) ----------
@@ -540,7 +546,7 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #mo
 (function(){
  /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
  const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.crossOrigin="anonymous";/* CDN pictures: CORS or the canvas read fails (review/stage-side) */im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
-   const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
+   const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
    /* owner 11/15 05:45Z ("khung nhảy"): ONE portrait box for every person — the trimmed headroom is the same constant for every frame
       (KIT_PORT_TRIM = the tallest crest's top), never measured per frame, so switching people never moves or resizes the frame */

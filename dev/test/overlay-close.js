@@ -5,7 +5,7 @@
    Openers: lessons (Tự học / Học với thầy / Xin Thái hậu cho học cùng) for every art, practice (mastered art), resume after load (S.mg in
    the save, with and without mode), a j5 lesson game directly, playArt, a festival contest (startContest), Chải chuốt (wdGroomUI).
    usage: node dev/test/overlay-close.js <url> [outjson]  — prints a table: opener · path · ok/fail · what was left */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROME||'/usr/bin/google-chrome'});const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.route(/^https?:\/\//,r=>/127\.0\.0\.1|localhost/.test(r.request().url())?r.continue():r.abort());
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

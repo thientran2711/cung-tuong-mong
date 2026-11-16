@@ -3,13 +3,13 @@
       more: Non = only cheers the palace (Sức +1 a week); Thiếu niên = the species' own use, weaker (× BAL.pet.mul[1]); Trưởng thành = full use;
       Linh thú = stronger use (× mul[3]) and, for Ngự tứ, ĐỠ MỘT MẠNG (only at Linh thú). petT(P) returns the stage's effects (the one source the rules read).
       The pet card shows the stage, what works now and what the next stage unlocks + its requirement. Growing up = an immediate card. Linh thú = its own picture (-lt), no code glow (owner).
-   2. CARE like a virtual pet: P.full (No), P.clean (Sạch), P.joy (Vui), P.aff (Tình cảm) 0..100; P.care (khí lực, read by jpet) = the mean of
+   2. CARE like a virtual pet: P.full (No; owner 15/11 ~22:30Z: label stays "No", higher = better), P.clean (Sạch), P.joy (Vui), P.aff (Tình cảm) 0..100; P.care (khí lực, read by jpet) = the mean of
       No/Sạch/Vui. "Chăm" opens a full-screen kit view: the pet big (stage art img/pet512/pet-<key>-non|-tn|(grown)|-lt, falling back to the grown art,
       smaller for the young), the four bars, and three short games, each BAL.pet.khac khắc — Cho ăn (drag the food this species eats onto it),
       Tắm / chải lông (even strokes), Chơi (tap when the toy passes the middle). Score = how she plays (no dice). A trusted servant can be put in
       charge (BAL.pet.maidEff of the gain, every week, 4 weeks). Stats fall every week (BAL.pet.decay); long neglect (mean < BAL.pet.sad) → an omen
       card, then sick (Sức of the pet's use off), then after BAL.pet.neglectW weeks it runs away / fades (immediate card).
-   3. Other palaces (NPC consorts; co-op friend: hook coopPetAct, see note): Giúp chăm thú (petcare) — her khắc, the owner's thiện cảm +;
+   3. Other palaces (NPC consorts and the co-op friend, relayed by jcoopworld res.pet): Giúp chăm thú (petcare) — her khắc, the owner's thiện cảm +;
       Hại thú (thaopet, jpet) as before; Trộm thú (petsteal) — odds fall with the pet's stage (BAL.pet.stealO), bites (Sức −), alarm, caught
       (Danh, oán, chứng cứ); a stolen pet keeps its stage with tình cảm BAL.pet.stolenAff. NPCs use the same acts on her (and each other).
    4. NPCs: same stages and stats (data only, they feed when they have the bạc). Old saves: stage from the time already owned, stats from khí lực. */
@@ -27,10 +27,13 @@ function petStage(P){petcInit(P);return P.stg|0}
 function petcNext(P){const s=petStage(P);if(s>=3)return null;const need=s+1;return{s:need,age:BAL.pet.ageW[need],aff:BAL.pet.affNeed[need],ageNow:Math.max(0,tsbWk()-(P.at||0)),affNow:Math.round(P.aff||0)}}
 const PETC_MAIN=["sniff","guard","beast","sungN","anN","omen","th","spy","soft","rescue"];
 const PETC_CACHE={};
+/* Ngự tứ: ĐỠ MỘT MẠNG only at Linh thú (coordinator s7, 15/11 20:05Z; Trưởng thành does not) — the base text says so, younger stages drop it */
+const PETC_RESCUE=/(khi đã thành Linh thú thì )?ĐỠ MỘT MẠNG[^;·]*;?\s*/;
 function petcStageT(T,s,k){const key=k+"|"+s;if(PETC_CACHE[key])return PETC_CACHE[key];const X=Object.assign({},T);const m=BAL.pet.mul[s];
- if(s===0){for(const f of PETC_MAIN)delete X[f];X.suc=Math.max(1,T.suc||0);X.use=`còn non: chỉ làm cung thêm vui (Sức +1 mỗi tuần) · lớn lên mới ${T.use}`}
+ if(s===0){for(const f of PETC_MAIN)delete X[f];X.suc=Math.max(1,T.suc||0);X.use=`còn non: chỉ làm cung thêm vui (Sức +1 mỗi tuần) · lớn lên mới ${T.rescue?String(T.use).replace(PETC_RESCUE,"")+" · đỡ một mạng: chỉ khi thành Linh thú":T.use}`}
  else{for(const f of PETC_MAIN){if(X[f]==null||f==="rescue")continue;if(Array.isArray(X[f]))X[f]=[Math.round(X[f][0]*m),X[f][1]];else X[f]=f==="sniff"?Math.min(95,Math.round(X[f]*m)):Math.max(1,Math.round(X[f]*m))}
-  if(T.rescue&&s<3){delete X.rescue;X.use=String(T.use).replace(/ĐỠ MỘT MẠNG[^;·]*;?\s*/,"")+" · đỡ một mạng: khi thành Linh thú"}
+  if(T.rescue&&s<3){delete X.rescue;X.use=String(T.use).replace(PETC_RESCUE,"")+" · đỡ một mạng: chỉ khi thành Linh thú"}
+  if(T.rescue&&s===3)X.use=String(T.use).replace("khi đã thành Linh thú thì ","")
   X.use=(s===1?"còn nhỏ, công dụng yếu: ":s===3?"Linh thú, công dụng mạnh: ":"")+(X.use||T.use)}
  return PETC_CACHE[key]=X}
 (function(){const t0=petT;petT=function(P){const T=t0.apply(this,arguments);try{if(P&&typeof P==="object"&&P.t)return petcStageT(T,petStage(P),petK(P.t))}catch(e){}return T}})();
@@ -49,7 +52,7 @@ function petcGrow(p,P,quiet){const n=petcNext(P);if(!n||n.ageNow<n.age||(P.aff||
 function petcPic(P,big){const a=petcStageSrc(P,1);const T=petT(P);return kitItem({src:a.src,name:"",grade:T.tr,size:"lg"}).replace('<span class="kitn"></span>','')}
 function petcFx(){try{if(typeof kitSfx==="function")kitSfx("notice");else if(typeof sfx==="function")sfx("sfx-notice")}catch(e){}} /* the old "chime" name had no file (404) */
 /* ---------- the week: decay, servant care, NPC care, omen → sick → gone; growth ---------- */
-petWeek=function(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
+petWeek=function(){for(const p of [S].concat(typeof petNpcs==="function"?petNpcs():liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
   if(p.out){for(let i=L.length-1;i>=0;i--)petLose(p,i,"Nội vụ phủ thu lại khi vào lãnh cung");if(me)log(`<span class="r">Vào lãnh cung, thú nuôi của ngươi bị Nội vụ phủ thu lại hết.</span>`);continue}
   const winter=S.month>=10,D=BAL.pet.decay;
   for(let i=L.length-1;i>=0;i--){const P=petcInit(L[i]),T=petT(P);let ex=0;if(T.pond&&rkOf(p)<3)ex+=4;if(T.weak&&winter)ex+=5;
@@ -74,8 +77,8 @@ function petcBars(P){return kitStatRow([{cells:[["No",P.full],["Sạch",P.clean]
 function petcFig(){return document.querySelector("#modal .kpsubj.kes .kesimg")||document.querySelector("#modal .kpsubj.kes")}
 function petcOpen(i){const P=tsbPets(S)[i];if(!P)return;petcInit(P);PETC.i=i;PETC.game=null;const T=petT(P),s=petStage(P),a=petcStageSrc(P,1);
  try{if(!document.getElementById("modal").hidden)closeModal()}catch(e){}
- kitModal({kind:"info",title:`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${BAL.pet.stages[s]} · ${PET_TIER[T.tr]}`,pick:true,
-  stage:[{__fig:a.src,__cap:T.n,__role:BAL.pet.stages[s],age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
+ kitModal({kind:"info",title:`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s])} · ${PET_TIER[T.tr]}`,pick:true,
+  stage:[{__fig:a.src,__cap:T.n,__role:(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s]),age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
 function petcClose(){PETC.i=-1;PETC.game=null;try{closeModal()}catch(e){}try{render()}catch(e){}}
 function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=tsbMaid(S);
  const g=(k,n,x)=>pbtn(`data-petc="${k}"`,n,`tốn: ${BAL.pet.khac} khắc · ${x}`,t1);
@@ -87,9 +90,9 @@ function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPe
 function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"});
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
 function petcGain(kind,score){const P=tsbPets(S)[PETC.i];if(!P)return;const G=BAL.pet.gain[kind],v=Math.round(G[0]+(G[1]-G[0])*score),f={feed:"full",bath:"clean",play:"joy"}[kind];
- P[f]=cl(P[f]+v,0,100);const af=Math.round(BAL.pet.affGain[0]+(BAL.pet.affGain[1]-BAL.pet.affGain[0])*score);P.aff=cl(P.aff+af,0,100);if(kind==="play")apply({suc:1});petcSync(P);P.bad=0;
- const T=petT(P);const s0=petStage(P);const grew=petcGrow(S,P,false);const msg=`${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${v}, Tình cảm +${af}${score>=.8?" · rất vừa ý":score<.35?" · chưa khéo":""}.`;
- log(`Ngươi ${({feed:"cho",bath:"tắm cho",play:"chơi với"})[kind]} ${T.n.toLowerCase()} (${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${v}, Tình cảm +${af}).`);
+ const f0=P[f];P[f]=cl(P[f]+v,0,100);/* show what really changed (a full pet cannot get fuller) */const vv=Math.round(P[f]-f0);const af=Math.round(BAL.pet.affGain[0]+(BAL.pet.affGain[1]-BAL.pet.affGain[0])*score);P.aff=cl(P.aff+af,0,100);if(kind==="play")apply({suc:1});petcSync(P);P.bad=0;
+ const T=petT(P);const s0=petStage(P);const grew=petcGrow(S,P,false);const lbl=`${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${vv}`;const msg=`${lbl}, Tình cảm +${af}${score>=.8?" · rất vừa ý":score<.35?" · chưa khéo":""}.`;
+ const pn=T.n.toLowerCase();log(`Ngươi ${({feed:`cho ${pn} ăn`,bath:`tắm cho ${pn}`,play:`chơi với ${pn}`})[kind]} (${lbl}, Tình cảm +${af}).`);
  if(grew&&petStage(P)!==s0){petcClose();return}/* the "đã lớn" card (petcGrow) comes next */petcDraw(msg)}
 /* game 1: pick the food this species eats and drag it onto the pet (or tap the food, then the pet) */
 function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)];const L=[ok].concat(PETC_FOODS.filter(x=>x!==ok).sort(()=>Math.random()-.5).slice(0,2)).sort(()=>Math.random()-.5);
@@ -136,7 +139,7 @@ A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0
  if(roll(BAL.pet.stealBite[s])){ap(a,{suc:-BAL.pet.stealSuc});r+=`${T.n} cắn, cào ${a===S?"ngươi":NM(a)} (Sức -${BAL.pet.stealSuc}). `}
  const c=caught(a,t,false,`trộm ${T.n.toLowerCase()} của ${NM(t)}`);if(c){ap(a,{danh:-BAL.pet.stealCaughtDanh});return r+c}
  if(!roll(petStealO(a,t))){relAdd(a,t,-6);return r+`${T.n} kêu inh ỏi, người trong cung ${NM(t)} chạy ra; ${a===S?"ngươi":NM(a)} phải bỏ đi tay không. `}
- const stg=s;tsbPets(t).splice(j,1);if(t.petOn===j)t.petOn=-1;else if(t.petOn>j)t.petOn--;const N=petAdd(a,P.t,`Lấy từ cung ${t.name}`,"stolen");if(N){N.stg=stg;N.at=P.at;N.aff=BAL.pet.stolenAff}
+ const stg=s;/* petLose (not a bare splice): the follow bonus leaves with the pet, the next one follows (review/coop-pets) */petLose(t,j,"bị trộm mất");const N=petAdd(a,P.t,`Lấy từ cung ${t.name}`,"stolen");if(N){N.stg=stg;N.at=P.at;N.aff=BAL.pet.stolenAff}
  if(t===S&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi bị trộm",who:typeof pMe==="function"?pMe():null,h:`<p class="r">Sáng ra không thấy ${T.n.toLowerCase()} đâu; cửa lồng mở, có dấu người lạ.</p>`});
  return r+`${a===S?"Ngươi":NMc(a)} lén mang ${T.n.toLowerCase()} của ${NM(t)} về cung. `}});
 try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[1].push(k)};add("Giao thiệp","petcare");add("Hại nặng","petsteal");
@@ -146,8 +149,11 @@ try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[
 /* NPC minds: friendly ones help (with her too), greedy / hostile ones steal (higher stages less tempting: harder) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&v!==S&&tsbPets(t).length){
   if(rel(v,t)>=20&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Hiểm độc"))&&hostility(v,t)>=40&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
-/* co-op hook: the friend's palace (jcoop): call coopPetAct(kind, friendId) to relay "petcare" / "petsteal" through the room's act relay — NOT wired yet. */
-window.coopPetAct=window.coopPetAct||function(kind,fid){try{if(typeof coopAct==="function")coopAct({k:"pet-"+kind,to:fid})}catch(e){}};
+/* co-op (review/coop-pets): the friend's entry carries her live pets, so the act tabs offer petcare / thaopet / petsteal on her exactly as on an
+   NPC; jcoopworld's runAct wrapper sends what happened to her pets (res.pet) and her client applies it to her own pets.
+   coopPetAct(kind) = the same act from code/tests: kind "care"|"harm"|"steal" (or the act key) on the friend entry; returns the result text. */
+window.coopPetAct=function(kind){try{const k={care:"petcare",help:"petcare",harm:"thaopet",steal:"petsteal"}[kind]||kind;const f=window.COOPW&&COOPW.on&&COOPW.friend&&COOPW.friend();
+ if(!f||!ACT[k]||!ACT[k].ok(S,f))return"";return runAct(S,f,k)}catch(e){console.error(e);return""}};
 /* old saves: every pet gets its stage + stats once */
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{for(const p of [S].concat(rivals||[]))for(const P of tsbPets(p))petcInit(P),petcSync(P)}catch(e){}return r}})();
 /* KIT 28.13d rule (review/pets-fix): a shop / pick person dialog (kitModal {shop} or {pick}) is not an event: no event band picture over it

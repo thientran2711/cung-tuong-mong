@@ -1,6 +1,6 @@
 /* khac-day run test: the spill really runs (owner 15/11 "Khắc check must use the whole DAY's khắc").
    usage: node dev/test/khac-day-run.js <page url> <W>x<H> <outdir>  → JSON results + screenshots (act tab, sáng with 1 khắc left) */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,URL,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'})).newPage();
  p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));

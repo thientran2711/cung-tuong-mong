@@ -66,7 +66,8 @@ function rtSpot(m){const night=rtNight(),w=(S.menW||{})[m.id];
  if((m.rw==="họa sư"||m.rw==="nhạc sư")&&!night&&S.rt&&S.rt.order===wk())return{k:"home",why:"y vào cung ngươi theo lệnh"};
  if(w==="tn"&&!night)return{k:"tn",why:"y vào thỉnh an Thái hậu"};
  return null}
-function rtWit(k){if(k==="home")return[];return liveRivals(true).filter(v=>S.where&&S.where[v.id]===k)}
+/* witnesses = consorts the ONE record (whereOf = S.roster at this khắc) puts at k now; nobody from another place (schedules3-r4) */
+function rtWit(k){if(k==="home")return[];return liveRivals(true).filter(v=>whereOf(v)===k)}
 function rtPlace(k){try{return k==="home"?"cung ngươi":placeName(k)}catch(e){return k}}
 function rtSeeO(k,extra){const w=watcher();const W=rtWit(k).length;return od(80-(RTC.heat[k]||14)-W*12+(w?Math.round(w.loyal/10):0)-rtDuc()+rtDf().o-(extra||0)-Math.round(rtS().heat/5))}
 function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=60?"lương tâm cắn rứt (Đức cao)":"";
@@ -103,17 +104,21 @@ function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m
   r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  log(r);if((m.tinh||0)>=80&&!tt.prom&&["thị vệ","vương gia","thái y"].includes(m.rw)){tt.prom=1;tt.st=4;rtPush("rtPromise",{m:m.id})}}
 /* seen while meeting: the witness decides by her nature (same rule as an NPC seeing an NPC) */
-function rtSeen(m,k,what){const W=rtWit(k);const pool=W.length?W:liveRivals(true).filter(x=>(x.mat||0)>=2);rtHeat(what==="dem"?30:20);
- const v=pool.length&&roll(W.length?100:55)?pick(pool):null;
+function rtSeen(m,k,what){const W=rtWit(k);rtHeat(what==="dem"?30:20);
+ const v=W.length?pick(W):null;
  if(!v){log(`Có tiếng bước chân ngoài hiên; ngươi và ${rtMnm(m)} kịp tản đi. Người trong cung bắt đầu xì xào.`);return}
  evA(v,S,what==="dem"?3:2);try{noteAdd(v.id,`bắt gặp ngươi với ${m.name}`)}catch(e){}rtCaughtBy(v,m,what)}
+/* what the witness does goes through the shared motive gate + record (OD:L35): blackmail = uyhiep, report = tocao (schedules3-r4) */
+function rtGateT(v,t,k){try{if(typeof motiveOK!=="function")return{ok:true,why:""};const g=motiveOK(v,t,k);if(typeof j95actLog==="function")j95actLog(v,t,k,g);return g}catch(e){return{ok:true,why:""}}}
+function rtGate(v,k){return rtGateT(v,S,k)}
 function rtCaughtBy(v,m,what){const T=rtS();rtStat("tt_caught");
  if(aff(v,S)>=45){relAdd(S,v,5);log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng lặng lẽ quay đi, giữ kín cho ngươi.`);return}
- const greedy=/Tham|Hiểm/.test(v.trait||"");if(greedy||roll(55)){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
+ const greedy=/Tham|Hiểm/.test(v.trait||"");if((greedy||roll(55))&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
+ if(!rtGate(v,"tocao").ok){log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng không nói gì, nhưng đã ghi nhớ.`);return}
  rtReport(v,m)}
 function rtReport(v,m){const T=rtS();rtStat("tt_report");{const kk=rtKidsAlive().find(k=>k.tf&&!k.tfOk);if(kk&&!T.ng){log(`<span class="r">${rtVn(v)} tâu: ${kk.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</span>`);rtNgSet(kk,v.id,false);return}}const ev=(typeof evG==="function"?evG(v,S):2)||2;
  if(roll(cl(35+ev*8+T.heat/4,10,90))){rtExpose(m,`${rtVn(v)} tố giác ngươi tư thông với ${m.name}.`)}
- else{apply({sung:-10,danh:-6});rtHeat(15);m.ban=wk()+24;log(`<span class="r">${rtVn(v)} tố ngươi tư thông với ${rtMnm(m)}; chứng cứ chưa đủ. Hoàng thượng quở trách, cấm y vào hậu cung. Sủng -10 · Danh -6.</span>`)}}
+ else{if(v&&v!==S&&v.alive){ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}/* two-way law: the failed accuser pays like her (j95accuse) */apply({sung:-10,danh:-6});rtHeat(15);m.ban=wk()+24;log(`<span class="r">${rtVn(v)} tố ngươi tư thông với ${rtMnm(m)}; chứng cứ chưa đủ. Hoàng thượng quở trách, cấm y vào hậu cung. Sủng -10 · Danh -6.</span>`)}}
 function rtExpose(m,how){const T=rtS();T.exposed=1;rtEnd("tt_lo");T.tt=null;T.bm=null;rtStat("tt_exposed");log(`<span class="r">${how}</span>`);
  try{affairExposed(m,"Chuyện tư tình bị lộ:")}catch(e){m.alive=false;deathSentence("Bị ban chết vì tư thông")}}
 /* ---------- 2. TRỐN KHỎI CUNG ---------- */
@@ -249,7 +254,7 @@ function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  const w=watcher();T.heat=cl(T.heat-RTC.decay-(w&&w.loyal>=80?2:0),0,100);if(S.out)T.wasCold=1;
  /* someone hostile pieces it together (two-way: same as NPCs seeing NPCs) */
  const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){const v=pick(foes);evA(v,S,1);rtCaughtBy(v,m,"gap")}}
- if(T.bm&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive){if((T.bm.k||0)>=8){log(`${RV(T.bm.v).name} đã vơ đủ; nàng thôi đòi bạc.`);T.bm=null}else rtPush("rtBm",{v:T.bm.v})}
+ if(T.bm&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive){if((T.bm.k||0)>=8){log(`${RV(T.bm.v).name} đã vơ đủ; nàng thôi đòi bạc.`);T.bm=null}else if(!rtGate(RV(T.bm.v),"uyhiep").ok){log(`${RV(T.bm.v).name} thôi đòi bạc của ngươi.`);T.bm=null}else rtPush("rtBm",{v:T.bm.v})}
  /* her children by the lover */
  for(const k of rtKidsAlive())if(k.tf&&!k.tfOk&&(k.age||0)>=3&&(k.age||0)<=12&&roll(RTC.kidRoll)){rtPush("rtKid",{k:k.name});break}
  /* quiet life */
@@ -267,7 +272,7 @@ function rtNpcMonth(){let ev="";for(const v of liveRivals(false)){if(v.queen)con
   for(const k of (v.kids||[]))if(k.alive&&!k.tfOk&&(k.age||0)>=3&&roll(k.tf?1:.15)){ev+=rtNgNpcAuto(v,k);break}}
  return ev}
 /* she can stumble on an NPC getting ready to flee (night, same place) */
-function rtNpcMeet(){if(!rtRoad()||!rtNight()||Q.length)return;const T=rtS();for(const v of liveRivals(false)){if(!v.rtEsc||v.rtEsc.seen)continue;if(S.where&&S.where[v.id]===S.place&&S.place!=="home"&&roll(RTC.npcSee)){v.rtEsc.seen=1;rtPush("rtNpcEsc",{v:v.id});return}}}
+function rtNpcMeet(){if(!rtRoad()||!rtNight()||Q.length)return;const T=rtS();for(const v of liveRivals(false)){if(!v.rtEsc||v.rtEsc.seen)continue;if(whereOf(v)===S.place&&S.place!=="home"&&roll(RTC.npcSee)){v.rtEsc.seen=1;try{if(typeof j95bPut==="function")j95bPut("v"+v.id,S.place,"scheme","lén chuẩn bị trốn khỏi cung (kế đã lập từ trước)","rtNpcEsc")}catch(e){}rtPush("rtNpcEsc",{v:v.id});return}}}
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(S&&!S.dead&&!Q.length)rtNpcMeet()}catch(e){}return r}})();
 /* the lover's child carries his blood (k.tf); same for NPC consorts */
 (function(){const b0=birthP;birthP=function(p,fake){const tf=p===S?S.trueFather:p.trueFather;const n0=(p.kids||[]).length;const r=b0.apply(this,arguments);
@@ -351,7 +356,7 @@ function rtNgLose(confess,innocent,why){const T=S.rt,N=T.ng,k=rtNgKid();const m=
  if(k){k.alive=false;k.gone=1;log(`<span class="r">${k.name} bị tước danh phận hoàng tự, đưa ra khỏi cung giao người nuôi.</span>`)}T.tt=null;T.bm=null;
  if(confess)cold(innocent?"Nhận tội tư thông (oan)":"Nhận tội tư thông");else if(roll(50))deathSentence(why?`Bị ban chết vì ${why}`:"Bị ban chết vì con không phải cốt nhục hoàng gia");else cold(why||"Con không phải cốt nhục hoàng gia")}
 /* NPC mothers: the same bowl (alum by the mother, oil by a framer) */
-function rtNgNpcAuto(v,k){const truth=!k.tf;const alum=!truth&&((v.tamco||0)>=55||roll(25));const foe=liveRivals(false).find(x=>x!==v&&aff(x,v)<-30&&/Hiểm/.test(x.trait||""));
+function rtNgNpcAuto(v,k){const truth=!k.tf;const alum=!truth&&((v.tamco||0)>=55||roll(25));const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<-30&&/Hiểm/.test(x.trait||""));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
  if(truth&&!foe)return"";const oil=!!foe&&roll(40);const shown=alum?true:oil?false:truth;k.tfOk=1;rtStat("npc_ng");const seen=(S.mat||0)>=2;
  if(shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
  k.alive=false;k.gone=1;rtStat(truth?"npc_ng_oan":"npc_ng_lo");const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(50))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;
@@ -372,7 +377,7 @@ RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
 (function(){const r0=rtNgCards;rtNgCards=function(){let A=r0.apply(this,arguments);try{if(rtS().open)A=A.concat(rtNgNpcCards())}catch(e){}return A}})();
 /* rivals may frame her innocent child (rare; two-way) */
 (function(){const m0=rtMonth;rtMonth=function(){let ev=m0.apply(this,arguments);try{const T=S.rt;if(T&&!T.ng&&!S.out){const k=rtKidsAlive().find(x=>!x.tfOk&&(x.age||0)>=2);
- const f=k&&liveRivals(true).find(v=>/Hiểm/.test(v.trait||"")&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&&roll(k.tf?2:.6)){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(70):null)}}}catch(e){}return ev}})();
+ const f=k&&liveRivals(true).find(v=>/Hiểm/.test(v.trait||"")&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&&roll(k.tf?2:.6)&&rtGate(f,"accuse").ok){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(70):null)}}}catch(e){}return ev}})();
 /* ---------- NGHIỆM THÂN on the shared mini-game frame (j82 kg82Open / kitGameFrame / kitGameResult, KIT §13) ----------
    1) rtNgSleight(kind, n, cb(ok)): the tampering mini-game — the watchers' gaze cones sweep the hall; tap «Ra tay» while no gaze is on the
       bowl. 3 hồi, need 2. Speed and cone width from the number of watchers, her Tâm cơ and Tai mắt. «Để Tâm cơ quyết định» = one roll with
