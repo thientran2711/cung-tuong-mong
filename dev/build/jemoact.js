@@ -229,19 +229,19 @@ function eaHitMe(p,k){try{const F=BAL.ea.fx[k]||{};if(!eaMeSlot()){log(`${Nm(p)}
   ban:[p===S.thO?"Thái hậu ban thưởng":"Hoàng thượng ban thưởng",`<p>${p===S.thO?"Thái hậu":"Hoàng thượng"} đang vui, ban thưởng khắp hậu cung. Thái giám mang bạc đến cung ngươi.</p>`,`Bạc +${F.bac}`,"img/act-thuong.webp"],
   noi:["Long nhan đại nộ",`<p>Hoàng thượng đang giận, một lời của ngươi chạm đúng chỗ phật ý. Ngài phất tay áo bỏ đi.</p>`,`Sủng −${F.sung}`,"img/act-xu-toi-h.webp"],
   quo:["Thái hậu quở trách",`<p>Thái hậu đang không vui, lúc thỉnh an quở trách ngươi mấy câu trước mặt mọi người.</p>`,`Thái hậu −${F.th}`,"img/act-xu-toi-h.webp"]}[k];if(!T)return;
-  Q.push({t:T[0],who:p===S.emp||p===S.thO?undefined:eaWho(p),art:T[3],hideOut:true,h:T[1]+`<p class="past">${T[2]}.</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}catch(e){}}
+  Q.push({t:T[0],who:p===S.emp||p===S.thO?undefined:eaWho(p),art:T[3],hideOut:true,h:T[1]+`<p class="past">${T[2]}</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}catch(e){}}
 /* her outburst: the kit event frame, no choice (owner: not a punishment, no damage control after the fact) */
 function eaMeOut(g){const P=eaPick(S,g);if(!P)return false;const r=P.r;const o=eaDo(S,r);if(!o)return false;cnt(EA_N.out,r.k);cnt(EA_N.outT,P.T.k+":"+g);
  const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:"ghen",vui:"vui"}[g];
  log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`);
  if(window.__bot||typeof Q==="undefined")return true;
  Q.push({t:r.n,who:o.target&&o.target!==S?eaWho(o.target):undefined,art:`img/act-${r.art||"trut-gian-h"}.webp`,hideOut:true,
-  h:`<p>${o.h}</p><p>Vì ${why} quá mà ra nông nỗi; lần sau nên giữ lòng cho bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}.</p>`:""}`,
+  h:`<p>${o.h}</p><p>Vì ${why} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
 /* hỏi tội: the higher-rank mistress whose maid she scolded comes the next tuần (a real choice, gain and loss each) */
 function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;const H=E().hoi;EA_N.hoi++;
  const o=clp(H.try+(S.rank-rkOf(v))*H.rk+Math.round((S.danh||0)/H.dn),5,95);const ttl=v.queen?"Hoàng hậu":nm(v);
- const opts=S.bac<H.bac?[]:[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`Chắc chắn · thành: ${ttl} thiện cảm +${H.aff}, nguôi giận`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
+ const opts=[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`Chắc chắn · thành: ${ttl} thiện cảm +${H.aff}, nguôi giận`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
  if(S.maid)opts.push({n:"Đổ lỗi cho cung nữ hỗn hào",risk:"an toàn",hint:"giữ thể diện, cung nữ chịu tội thay",x:`Chắc chắn · thành: giữ thể diện · kèm: lòng ${S.maid.name} −${H.loy}`,fx:{},go:()=>{loyAdd(S.maid,-H.loy);log(`Ngươi đổ cho ${S.maid.name} hỗn hào; ${S.maid.name} quỳ chịu tội thay.`)}});
  opts.push({n:"Cãi lý",risk:"liều",hint:"có thể giữ được thể diện, có thể chuốc họa",x:`${word(o)} · thành: Danh +${H.win} · hỏng: Danh −${H.lose}, ${ttl} oán +${H.oan}`,fx:{},go:()=>{if(roll(o)){apply({danh:H.win});log(`Ngươi cãi lý với ${ttl}: cung nữ kia hỗn trước. ${ttl} đành bỏ qua.`)}else{apply({danh:-H.lose});oanAdd(v,S,H.oan);log(`<span class="r">Ngươi cãi lý với ${ttl}, không ai bênh; chuyện lan khắp hậu cung.</span>`)}}});
  Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${ttl} dẫn theo cung nữ hôm trước đến cung ngươi: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
@@ -256,7 +256,7 @@ function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M
  else if(ext==="vui"){try{ghenAll(X.ghen)}catch(e){}A.smug=w+X.smugWk;t="Đắc ý quên mình";art="img/ev-tin-don.webp";h=`<p>Mấy tuần liền mọi chuyện thuận lợi, ngươi vui ra mặt, nói cười chẳng giữ ý. Kẻ ganh ghét bắt đầu thì thầm sau lưng.</p>`;past=`Kẻ ganh ghen +${X.ghen}; ${X.smugWk} tuần tới kẻ ganh ghen thêm`}
  else if(ext==="so"){catchIll(S,"matngu");t="Lo âu mất ngủ";art="img/act-xa-huong.webp";h=`<p>Lo âu mấy tuần liền, đêm nào ngươi cũng trằn trọc đến canh năm. Thái y nói ngươi mắc chứng mất ngủ.</p>`;past="Mắc Chứng mất ngủ"}
  log(`<span class="r">${t}.</span> ${past}.`);
- if(ui)Q.push({t,art,hideOut:true,h:`${h}<p>Cảm xúc cực độ kéo dài ${X.wk} tuần trở lên thì sinh chuyện.</p><p class="past">${past}.</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
+ if(ui)Q.push({t,art,hideOut:true,h:`${h}<p>Cảm xúc cực độ kéo dài ${X.wk} tuần trở lên thì sinh chuyện.</p><p class="past">${past}</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
 /* smug: rivals grow more jealous of her for smugWk tuần */
 (function(){if(typeof ghenAll!=="function")return;const g0=ghenAll;ghenAll=function(n){try{if(n>0&&eaOn()&&S.ea&&S.ea.smug>W()){n=Math.round(n*E().ext.smugK);arguments[0]=n}}catch(e){}return g0.apply(this,arguments)}})();
 function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&e.v>=E().npc.extV?g:null;
