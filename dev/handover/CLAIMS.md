@@ -306,6 +306,7 @@
 | night-steal review r1 (opus, BIG) of 4b5919af | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled over 7 runs, not 19-22 %; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:01Z |
 | lag-play review r1 (opus, BIG perf) of 7200e7d2 | review/lag-play-r1 | main s21 | session_01UV1Szh3qnjMBBhwLSJrxVX | PASS f89c5635 (on main a0d93ac8; report dev/handover/reports/lag-play-r1.md on that branch) | 16/11 19:45Z |
 | lag-play-2 (opus): render chain split, co-op seat delta, leak, Pixi preload | review/lag-play-2 | main s21 | session_01UV1Szkd2Q5KusFL1heLce8 | RUNNING | 16/11 18:02Z |
+| lag-play-2 review r1 (opus, BIG perf + co-op) of d006dfdd | review/lag-play-2-r1 | main s22 | session_01UV1SzjyH2iaj5P368p1TBN | PASS 2418930c (code 6cba5143 on main b53ba8b9; reviewer fix a08a152b urgent seat copy; worker NOT deployed; report dev/handover/reports/lag-play-2-r1.md on that branch) | 16/11 21:18Z |
 | care-overlap review r1 (sonnet, SMALL) of 7c02ff56 | review/care-overlap-r1 | main s21 | session_01UV1SzhEkrfs7MvRDaDQHp8 | RUNNING | 16/11 18:04Z |
 | origin-intros review r1 (opus, BIG: entry flow) of 30b37ea0 on main + review/kc-roads-cn-nc-fix2 (D; ships after it) | review/origin-intros-r1 | C | session_011xDdVRKUzkmr3cK3M5QXvn | RUNNING | 16/11 18:06Z |
 | stage-pets r3 successor (sonnet): 3 people + pets at KIT figure scale 85–90 %, stagger/overlap, fold column | review/stage-pets | main s21 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 18:06Z |
