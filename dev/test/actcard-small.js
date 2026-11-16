@@ -18,7 +18,7 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   const ratioOK=m.sizes.every(x=>Math.abs(x-0.75)<0.02),markOK=m.marks.every(Boolean);
   /* pick a card whose picture centre is really hit by the pointer (not under the sticky pane bar) */
   const pt=await p.evaluate(async()=>{const cs=[...document.querySelectorAll('#panel button.ka.kart')].filter(c=>c.offsetParent&&!c.classList.contains('kopt')&&c.getBoundingClientRect().width>0);
-   for(const c of cs){c.scrollIntoView({block:'center'});await new Promise(r=>setTimeout(r,150));const a=c.querySelector(':scope>.kaart');const r=a.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;const el=document.elementFromPoint(x,y);if(el&&a.contains(el))return[x,y]}return null});
+   for(const c of cs){c.scrollIntoView({block:'center'});await new Promise(r=>setTimeout(r,450));const a=c.querySelector(':scope>.kaart');const r=a.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;const el=document.elementFromPoint(x,y);if(el&&a.contains(el))return[x,y]}return null});
   let z={open:false,img:false,title:''};
   if(pt){await p.mouse.click(pt[0],pt[1]);await sleep(900);
    z=await p.evaluate(()=>{const z=document.getElementById('modal');return{open:!!z&&!z.hidden,img:!!(z&&z.querySelector('.kpiart img')),title:z&&z.querySelector('.kptitle')?z.querySelector('.kptitle').textContent:''}})}
