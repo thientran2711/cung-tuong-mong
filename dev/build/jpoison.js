@@ -73,7 +73,7 @@ PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?
   O.push({n:`${P.n} vào ${dn} tặng ${rkName(t)} ${t.name}`,fx:{},x:pgLine(t,pk,X),o:X.o,base:BAL.pg.base,why:()=>pgOdds(S,t,e).F,
    go:()=>{spend(2);const i=S.inv.indexOf(e);const r=pgGive(S,t,i,pk);if(r)log(r)}})}}
  O.sort((x,y)=>y.o-x.o);O.push({n:"Thôi",fx:{}});
- return{t:`<p>Lén bỏ độc vào <b>${dn}</b> rồi tặng ai? Hoàng thượng và Thái hậu luôn có người nếm thử, không thể.</p><p class="past">Khả năng theo: Tâm cơ của ngươi, người nhận tin ngươi đến đâu, món khéo đến đâu; trừ đi: người nhận cảnh giác, thái y tâm phúc, kim bạc, cung nữ nếm trước.</p>`,o:O}};
+ return{t:`<p>Lén bỏ độc vào <b>${dn}</b> rồi tặng ai? Hoàng thượng và Thái hậu luôn có người nếm thử, không thể.</p><p class="past">Thành hay bại tùy: Tâm cơ của ngươi, người nhận tin ngươi đến đâu, món đồ khéo đến đâu; người nhận càng cảnh giác, có thái y tâm phúc, kim bạc thử độc hay cung nữ nếm trước thì càng khó.</p>`,o:O}};
 try{KIT_ACT_PIDS.add("pgpick")}catch(e){}
 /* her side when a dish comes in (poisoned or not) — arrives unbidden: event-choice rule (price + Cần + hint) */
 PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;const nd=(S.inv||[]).findIndex(e=>e&&e.k==="kimbac"&&!e.h);const m=S.maid;

@@ -79,7 +79,7 @@ function kitSfx(m,o){const f=SFXN[m];if(!f)return false;o=o||{};if(o.at){setTime
 window.kitSfx=kitSfx;window.SFXN=SFXN;window.SFXL=SFXL;
 /* words on a card the player reads → the matching sound (first match; one per card). Sounds only, never a voice: voices follow the card's
    tone in j36 (voTone). Whole words where a syllable also lives inside other words (tát ≠ Bồ tát, trượng ≠ trượng phu). */
-const SFXTXT=[[/bị phạt quỳ|phạt quỳ|quỳ ngoài sân|quỳ trước|quỳ suốt|quỳ đến/i,"kneel"],[/\d+ trượng|(đánh|ăn|chịu|phạt)[^.]{0,14}trượng|đánh đòn|ăn roi|vả miệng|(?<!\p{L})(?<!bồ\s)tát(?!\p{L})/iu,"cane"],
+const SFXTXT=[[/bị phạt quỳ|phạt quỳ|quỳ ngoài sân|quỳ trước|quỳ suốt|quỳ đến/i,"kneel"],[/\d+ trượng|(đánh|ăn|chịu|phạt)[^.]{0,14}trượng|đánh đòn|ăn roi|vả miệng/iu,"cane"],[kRx("(?<!\\p{L})(?<!bồ\\s)tát(?!\\p{L})","iu"),"cane"],
  [/cấm túc/i,"doorShut"],[/tịch thu|sung công/i,"confiscate"],[/soát phòng|lục soát|soát quà|khám xét/i,"search"],[/bị cướp|giật lấy|giật mất|bị trộm|lấy cắp/i,"rob"],
  [/thu hồi|lấy mất|đánh mất|mất món/i,"itemLose"],[/sảy thai|mất con|hư thai/i,"wither"],[/kim bạc (hóa |chuyển |đổi )?(đen|màu)|có độc|bị bỏ độc|phát hiện (ra )?độc|thử độc thấy/i,"poisonFound"],
  [/trả lại quà|gửi trả|không dám nhận|khước từ món quà/i,"giftBack"],[/cắt xén|bớt xén|ăn bớt|cắt bớt bổng/i,"skim"],
