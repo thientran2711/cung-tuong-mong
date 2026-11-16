@@ -6,6 +6,7 @@
 #   2. node dev/tools/quickcheck.js: open (Fold) · old save from the LIVE build loads and plays a buổi (Fold) · perf smoke vs the live build (iPad)
 # Live build = origin/main (env CTM_LIVE_REF). When the sha IS live main, the build before it is used (previous live/* tag, else the
 # previous commit that changed index.html). Nothing is pushed or committed; generated files are put back as they were.
+# The check scripts always come from the CURRENT worktree (an older sha may not have them); the build comes from the sha.
 # Exit 0 = PASS, 1 = FAIL. Last line = one-line summary. Details: <worktree>/.quickcheck/quickcheck.json
 set -o pipefail
 T0=$(date +%s)
@@ -41,7 +42,7 @@ BUILD_S=$(( $(date +%s)-TB ))
 NOTBUILT=""
 if ! cmp -s <(git -C "$WT" show "$SHA:index.html" | norm) <(norm < "$WT/index.html"); then NOTBUILT=1; fi
 # 2. browser checks on the build
-node "$WT/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | tee "$OUT/run.log"; RC=${PIPESTATUS[0]}
+node "$TOP/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | tee "$OUT/run.log"; RC=${PIPESTATUS[0]}
 # put the generated files back as committed (unless they had local edits before)
 [ -z "$DIRTY" ] && git -C "$WT" checkout -q -- index.html sw.js assets.json 2>/dev/null
 LINE=$(tail -1 "$OUT/run.log")

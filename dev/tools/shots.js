@@ -1,11 +1,11 @@
 /* SMALL-tier shots (go-live kit, owner OD:L1370 (b)): the owner's two devices first — Fold 755x1000 and iPad 1180x820 — real device
    profiles, HOST mode (dev/test/lib/device.js), the BUILT root index.html. Title, then a new life: home + every visible tab.
    usage: bash dev/site/build_site.sh && node dev/tools/shots.js <outdir> [device ...] [--no-net]   (default fold ipadAir; JPEG q70 @2x)
-   Look at every picture. Exit 1 on a page error or horizontal overflow. Pictures come from the CDN (--no-net = grey boxes, faster). */
+   CTM_ROOT=<dir> serves another built site. Look at every picture. Exit 1 on a page error or horizontal overflow. Pictures come from the CDN (--no-net = grey boxes, faster). */
 const {chromium}=require('playwright');const D=require('../test/lib/device');const fs=require('fs');
 const A=process.argv.slice(2);const OUT=A.find(a=>!a.startsWith('--')&&!D.DEVICES[a])||'shots';fs.mkdirSync(OUT,{recursive:true});
 const DEVS=A.filter(a=>D.DEVICES[a]);const NET=!A.includes('--no-net');let bad=0;
-(async()=>{const srv=await D.serveRoot();const b=await chromium.launch();
+(async()=>{const srv=await D.serveRoot(process.env.CTM_ROOT||undefined);const b=await chromium.launch();
  for(const dev of (DEVS.length?DEVS:['fold','ipadAir'])){const dd=D.DEVICES[dev];const tag=dd.w+'x'+dd.h;
   const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:2,reducedMotion:'reduce'});await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
   if(!NET)await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());

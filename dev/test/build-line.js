@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
 const OUT=process.argv[2]?process.argv[2]:require('path').resolve(__dirname,'../shots/build-line');fs.mkdirSync(OUT,{recursive:true});
 const DEVS=process.argv.slice(3).length?process.argv.slice(3):['fold','ipadAir'];
 let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
-(async()=>{const srv=await D.serveRoot();const b=await chromium.launch();
+(async()=>{const srv=await D.serveRoot(process.env.CTM_ROOT||undefined);const b=await chromium.launch();
  for(const dev of DEVS){const dd=D.DEVICES[dev];const tag=dd.w+'x'+dd.h;
   const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:2,reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
