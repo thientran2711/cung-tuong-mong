@@ -103,3 +103,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (07:15Z s11) Owner on fp v2 (OD:L1256) → v3 redo sent to the sample worker (new distinct faces for nc and bd, hair per rank, rank costume colours matched to game dress tiers, no fur).
 - (07:05Z s11) place-glyphs v2 SAMPLE (3: Kính sự phòng, Lãnh cung, Tân Giả khố; 120 cr) looked at + sent to owner. Waiting for her verdict; then remaining 6 → Foreman C.
 - (07:05Z s11) MAIN FREEZE: no other ff until merge-hot-1 lands (it re-merges a942395b now).
+- (07:09Z s11) ff QUEUE (main frozen): 1 merge-hot-1 → 2 flip-newlife-r1 (PASS 4c14d7f8, waits for go) → 3 servant-system-r1 (PASS e82a9bcf, waits for go). 844x390 pcard acts clipped → kit-keeper-2 item 4.
