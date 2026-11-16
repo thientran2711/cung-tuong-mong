@@ -2279,12 +2279,22 @@ function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k=
  return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}
 function walkSpillGo(k){const P=walkSpill(k);if(!P||!P.ok||Q.length)return;window.__walkSpill={k,from:S.place,rest:P.rest,b:P.b,tries:0};
  spend(P.now);nextBuoi();walkSpillTick()}
+/* ONE "go there" rule for every button that walks her to a place (map, list, person cards, generic data-go) — owner-bug 16/11 18:30Z
+   "chỗ nào cũng khóa hết" (review/dudo-lock): a walk longer than the khắc left is never a lock while walk spill can take her there.
+   walkBlock(k,tc) = the reason a go-button is disabled ("" = may go now, or arrives next buổi); walkLate(k,tc) = true when she arrives
+   next buổi; walkGo(k) = go now, or spill into the next buổi. */
+function walkBlock(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return"";const P=walkSpill(k);return P&&P.ok?"":walkWhy(tc)}
+function walkLate(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return false;const P=walkSpill(k);return !!(P&&P.ok)}
+function walkGo(k){if(!S||S.dead||Q.length)return;if(k==="home"||k===S.place||S.confined||S.out){goTo(k);return}const tc=travel(S.place,k);if(walkOk(tc)){goTo(k);return}if(walkLate(k,tc))walkSpillGo(k)}
 function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){window.__walkSpill=null;return}
  const md=document.getElementById("modal");if(Q.length||(md&&!md.hidden)||S.mg){setTimeout(walkSpillTick,300);return}
  const b=S.buoi||0;
  if(b===W.b-1&&S.place===W.from&&W.tries<3){W.tries++;nextBuoi();setTimeout(walkSpillTick,300);return} /* the buổi did not turn yet (an event card came first) */
  if(b!==W.b||S.place!==W.from){window.__walkSpill=null;return}
- goTo(W.k);if(S.place===W.k)window.__walkSpill=null}
+ goTo(W.k);if(S.place===W.k)window.__walkSpill=null;
+ /* review/dudo-lock: the place shut while she walked (the rule read the new buổi before NPCs moved, e.g. a maid's mistress left): never a
+    silent stop at home — the place card says why, the walk spent is not refunded (she did walk) */
+ else if(!Q.length){window.__walkSpill=null;try{if(typeof j77Card==="function")j77Card(W.k)}catch(e){}}}
 function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?(wet()?3:2):1}
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
@@ -2496,7 +2506,7 @@ $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
 /* wiring */
 $("panel").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const d=b.dataset;
  if(d.pg){PG[d.pg]=+d.pi;renderPanel();const on=$("panel").querySelector(".pface.on");if(on)on.scrollIntoView({block:"nearest",inline:"nearest"});return}
- if(d.i!==undefined)act(+d.i);else if(d.r!==undefined)doAct(+d.r,d.a);else if(d.e!==undefined)empAct(+d.e,d.k);else if(d.it)itemAct(d.it,+d.ix);else if(d.inv)invAct(d.inv);else if(d.go)goTo(d.go);else if(d.sv)servAct(d.sv,+d.sid);else if(d.cv)courtAct(d.cv,d.ck);else if(d.hire){if(S.bac>=20&&roomFor(d.hire)){apply({bac:-20});S.staff.push(mkServ(d.hire));render()}}else if(d.plantsv){pushDil(mkP("plantsv"),"Cài người");render()}else if(d.fa)facAct(d.fa,d);else if(d.rec)recommend(+d.rec);else if(d.smaid)searchMaids();else if(d.relot)reLot(false);else if(d.rel){relSel=isNaN(+d.rel)?d.rel:+d.rel;render()}else if(d.art)lesson(d.art);else if(b.id==="master")hireMaster()};
+ if(d.i!==undefined)act(+d.i);else if(d.r!==undefined)doAct(+d.r,d.a);else if(d.e!==undefined)empAct(+d.e,d.k);else if(d.it)itemAct(d.it,+d.ix);else if(d.inv)invAct(d.inv);else if(d.go)walkGo(d.go);else if(d.sv)servAct(d.sv,+d.sid);else if(d.cv)courtAct(d.cv,d.ck);else if(d.hire){if(S.bac>=20&&roomFor(d.hire)){apply({bac:-20});S.staff.push(mkServ(d.hire));render()}}else if(d.plantsv){pushDil(mkP("plantsv"),"Cài người");render()}else if(d.fa)facAct(d.fa,d);else if(d.rec)recommend(+d.rec);else if(d.smaid)searchMaids();else if(d.relot)reLot(false);else if(d.rel){relSel=isNaN(+d.rel)?d.rel:+d.rel;render()}else if(d.art)lesson(d.art);else if(b.id==="master")hireMaster()};
 $("stage").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.id==="popx"){popIdx=null;popMsg="";renderStage();return}
  if(b.dataset.p!==undefined){popIdx=+b.dataset.p;popMsg="";renderStage();return}
@@ -3205,9 +3215,9 @@ function seenFaces(k){const L=seenAt(k),n=countAt(k);if(!n)return"";return `<spa
 /* walk to a consort and open her card; if she has gone, say where, offer to follow */
 function goSee(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=whereOf(v);
  const open=()=>{const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");if(i>=0){popIdx=i;popMsg=""}else{const now=whereOf(v);S.visit.msg=`${v.name} vừa rời đi, sang ${placeName(now)}. <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}renderStage()};
- if(S.place===k){open();return}const tc=travel(S.place,k);if(!walkOk(tc)||S.confined||S.out)return;goTo(k);open()}
-function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!walkOk(tc)?walkWhy(tc):"";
- return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,`Chắc chắn · tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
+ if(S.place===k){open();return}const tc=travel(S.place,k);if(S.confined||S.out)return;if(!walkOk(tc)){walkGo(k);return}goTo(k);open()}
+function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":walkBlock(k,tc);
+ return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,walkLate(k,tc)?`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi buổi sau, có khi nàng đã đi chỗ khác`:`Chắc chắn · tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-see]");if(s&&!s.disabled){e.preventDefault();e.stopPropagation();goSee(+s.dataset.see);return}const f=e.target.closest("[data-follow]");if(f){e.preventDefault();e.stopPropagation();goSee(+f.dataset.follow)}},true);
 /* finding someone: send her eyes (1 khắc), or invite her over */
 function scoutBtn(v){if(!v||!v.alive||v.out||locKnown(v)||together(S,v))return"";const o=od(50+(S.mat||0)*8+S.tamco/10);return pbtn(`data-scout="${v.id}"`,"Sai tai mắt dò nơi ở",`${word(o)} · tốn: 1 khắc · thành: biết nàng ở đâu buổi này · hỏng: không dò ra`,whyTime(1))}
@@ -3222,8 +3232,8 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-scout]");i
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k)curPeople().forEach(p=>{if(p.ref&&p.kind!=="chest"&&p.ref.id!=null)seeLoc(p.ref,k)})}catch(e){}return r}})();
 /* ===== visiting a consort at her own palace: chance she is home; her gatekeeper may tell where she went ===== */
 function visitBtn(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=palaceOf(v),tc=travel(S.place,k);if(S.place===k)return"";
- return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`Chắc chắn · tốn: ${tc} khắc · thành: nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!walkOk(tc)?walkWhy(tc):"")}
-function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(!walkOk(tc)||S.confined||S.out)return;goTo(k);if(S.place!==k)return;
+ return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`Chắc chắn · tốn: ${tc} khắc · thành: ${walkLate(k,tc)?"đến nơi buổi sau, ":""}nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":walkBlock(k,tc))}
+function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(S.confined||S.out)return;if(!walkOk(tc)){walkGo(k);return}goTo(k);if(S.place!==k)return;
  const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");
  if(i>=0){if(aff(v,S)<=-40){S.visit.tk=S.visit.tk||{};S.visit.tk[i]=1;S.visit.msg=`${v.name} cáo bệnh không tiếp ngươi (nàng ghét ngươi).`}else{popIdx=i;popMsg=""}}
  else{const now=whereOf(v);const friend=aff(v,S)>=20||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “Nương nương sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg="Cung nữ gác cửa: “Nương nương đi vắng.”"}
@@ -3283,7 +3293,7 @@ function affairMonth(){if(!S||!S.men)return"";let ev="";
 function manCard(m){const f=pMan(m);const known=m.seen===bkey();
  const lines=[tuoi(m.age),`Tính: <b>${m.trait}</b>`,m.tinh>=10||m.letters?`Hắn quý ngươi: <span class="ef ${m.tinh>=50?"r":"g"}">${tinhW(m.tinh)}</span>`:`Hắn quý ngươi: <span class="ef n">chưa rõ</span>`,`Ngươi quý hắn: <span class="ef ${m.af>10?"g":"n"}">${typeof quyW==="function"?quyW(m.af):affW(m.af)} · ${m.af}</span>`,known?`Thấy ở ${placeName(S.menW[m.id]||"")} (buổi này)`:"Nơi ở: không rõ"];
  const tt=[m.letters?`${m.letters} lần trao khăn, thư (tang vật nếu bị lục)`:"",m.trysts?`${m.trysts} lần hẹn riêng · người dễ biết chuyện: ${whoMayKnow()}`:"",S.trueFather===m.id&&S.preg?"Cha thật của đứa bé trong bụng ngươi":""].filter(Boolean);
- return pcard({f,col:"#6a8aa0",name:m.name,rank:m.role,lines,chips:[m.trysts?chip("Tư tình","hot"):""],note:tt.length?`<b>Tư tình</b> (chỉ ngươi biết): ${tt.join(" · ")}`:"Gặp hắn ở nơi hắn hay lui tới để trò chuyện.",groups:[["Gặp mặt",[known&&S.place!==S.menW[m.id]?pbtn(`data-go="${S.menW[m.id]}"`,"Đến chỗ hắn",`Chắc chắn · tốn: ${travel(S.place,S.menW[m.id])} khắc`,!walkOk(travel(S.place,S.menW[m.id]))?walkWhy(travel(S.place,S.menW[m.id])):""):""]]],empty:`<p>Lúc này chưa có việc nào làm được với hắn từ thẻ này: chỉ gặp được hắn ở nơi hắn hay lui tới (${m.haunts.map(placeName).join(", ")}), đúng buổi hắn có mặt (xem Dư đồ).</p><p class="past">Khi bắt gặp hắn làm điều khuất tất, ngươi sẽ được chọn: báo thị vệ, báo Cung Chính ti, giấu giúp, núp nghe lén hoặc làm như không thấy.</p>`})}
+ return pcard({f,col:"#6a8aa0",name:m.name,rank:m.role,lines,chips:[m.trysts?chip("Tư tình","hot"):""],note:tt.length?`<b>Tư tình</b> (chỉ ngươi biết): ${tt.join(" · ")}`:"Gặp hắn ở nơi hắn hay lui tới để trò chuyện.",groups:[["Gặp mặt",[known&&S.place!==S.menW[m.id]?pbtn(`data-go="${S.menW[m.id]}"`,"Đến chỗ hắn",`Chắc chắn · tốn: ${travel(S.place,S.menW[m.id])} khắc`,walkBlock(S.menW[m.id])):""]]],empty:`<p>Lúc này chưa có việc nào làm được với hắn từ thẻ này: chỉ gặp được hắn ở nơi hắn hay lui tới (${m.haunts.map(placeName).join(", ")}), đúng buổi hắn có mặt (xem Dư đồ).</p><p class="past">Khi bắt gặp hắn làm điều khuất tất, ngươi sẽ được chọn: báo thị vệ, báo Cung Chính ti, giấu giúp, núp nghe lén hoặc làm như không thấy.</p>`})}
 /* the dossier tab lists the men after the consorts */
 /* owner 11/15 05:35Z: men have their own Hậu cung sub-tab (jhc "Nam nhân"); Phi tần lists consorts only */
 (function(){const r0=rvTabHTML;rvTabHTML=function(){menInit();const M=(S.men||[]).filter(m=>m.alive);if(M.length||!M.length)return r0();const n=rivals.length;
@@ -4500,8 +4510,12 @@ function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why
  /* KIT map-label rule (owner 11/15 "map grey box"): a locked place wears the SAME label as every place (name + "N bóng") plus a small lock
     mark; no grey box over the map art, no reason line, no buttons on the map — a tap opens the kit option card (j77Card: reason, Xin yết
     kiến / bái kiến, Lẻn vào with odds and khắc) */
- inner=inner.replace(/(<span class="mlab">[\s\S]*?)(<\/span>)/,`$1${ACC_LOCK}$2`);
- return `<div class="mspot${cls.replace(/\soff/g,"")} off agrey" data-ak="${k}"${attrs} aria-label="${accName(k)}: ${st.why}">${inner}</div>`}
+ /* owner-bug 16/11 18:30Z "chỗ nào cũng khóa hết" (review/dudo-lock): the lock mark means a RULE keeps her out (accessOf fails: st.kind;
+    cấm túc / lãnh cung). A place that is open but farther than the khắc left this buổi is NOT locked: walk spill takes her there next
+    buổi (card "Đi (đến nơi vào buổi sau)"), so its label stays the plain label with the red "đi N khắc" — no lock mark. */
+ const lock=!st.walk;
+ if(lock)inner=inner.replace(/(<span class="mlab">[\s\S]*?)(<\/span>)/,`$1${ACC_LOCK}$2`);
+ return `<div class="mspot${cls.replace(/\soff/g,"")} off ${lock?"agrey":"awalk"}" data-ak="${k}"${attrs} aria-label="${accName(k)}: ${st.why}">${inner}</div>`}
 const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" aria-hidden="true"><path d="M3 6V4.2a3 3 0 0 1 6 0V6" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="1.5" y="6" width="9" height="7" rx="1.5" fill="currentColor"/></svg>`;
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{h=h.replace(/<button class="mspot([^"]*)" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,cls,k,attrs,inner)=>accSpot(all,cls,k,attrs,inner));
@@ -4512,7 +4526,7 @@ const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" ar
  try{h=h.replace(/<button class="mtile" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,k,attrs,inner)=>{const st=accState(k);if(st.here)return all.replace('class="mtile"','class="mtile ahere"');if(!st.why)return all;
    inner=inner.replace(/<span class="mchip">[^<]*<\/span>/g,"");inner=inner.replace('<span class="mband">',`<span class="mband"><span class="mchip agw">${st.why}</span>`);
    const acts=st.kind?`<span class="tacts">${accMini(k,st,1).replace(/<\/?span class="macts">/g,"")}</span>`:"";
-   return `<div class="mtile agrey" data-ak="${k}"${attrs.replace(/\sdisabled/g,"")}>${inner}${acts}</div>`});
+   return `<div class="mtile ${st.walk?"awalk":"agrey"}" data-ak="${k}"${attrs.replace(/\sdisabled/g,"")}>${inner}${acts}</div>`}); /* awalk: open, only farther than the khắc left (walk spill) — not greyed as locked (review/dudo-lock) */
   h=h.replace('<div class="pmap">',`<div class="ph"><button class="btn" data-acinfo="1">ⓘ Ra vào cung cấm<small>ai được vào đâu, lúc nào</small></button></div><div class="pmap">`)}catch(e){}
  return h}})();
 /* TRA CỨU: Ra vào cung cấm */
@@ -4528,8 +4542,10 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  <p>Chỗ có dấu khóa: không vào được lúc này. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã rõ"});showModal()}
 /* look: the same label as every place + a lock mark (no grey box) */
 (function(){const st=document.createElement("style");st.textContent=`
-.mspot.agrey{cursor:pointer;pointer-events:auto}
+.mspot.agrey,.mspot.awalk{cursor:pointer;pointer-events:auto}
 .mspot.agrey .mlab{opacity:1!important}
+/* owner 16/11 "chỗ không đủ khắc thì cho nút màu xám" (review/map-labels-2): ONE kit state for an open place that is farther than the khắc left (.awalk): the same label, greyed; still tappable (walk spill). Map label + Danh sách tile both. Real rule locks (.agrey) keep the normal label + lock mark. */
+.mspot.awalk .mlab{background:#d3d0c6f5;color:#6e6c63;border-color:#a9a698;box-shadow:0 1px 3px #3a2a1e40}.mspot.awalk .mlab i{background:#c2bfb3;color:#6e6c63}.mspot.awalk .mlab em{color:#8a3a2c}.mspot.awalk .mres{filter:grayscale(1);opacity:.75}
 .mspot .mlab .mlock{flex:none;display:block;margin-left:0;opacity:1;color:#6b4a1c}.mspot .mlab .kmlock{flex:none}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
@@ -4539,6 +4555,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 .mspot .acb i,.mtile .acb i{font-style:normal;color:#f3e6cf;font-weight:400}
 .mspot .acb:disabled,.mtile .acb:disabled{opacity:.5;cursor:default;filter:grayscale(1)}
 /* kv3:.kv1 */:where(.kv1) .mspot .mwhy{font-size:.5rem}:where(.kv1) .mspot .acb,:where(.kv1) .mtile .acb{font-size:.5rem;min-height:18px}
+.mtile.awalk{cursor:pointer;background-color:#6d6d68!important;background-blend-mode:luminosity;border-color:#77776f}.mtile.awalk .mband{filter:grayscale(1);opacity:.8}
 .mtile.agrey{background-color:#6d6d68!important;background-blend-mode:luminosity;cursor:default;border-color:#77776f}
 .mtile.agrey .mband{filter:grayscale(1);opacity:.8}
 .mtile .mchip.agw{background:#3a3a36;color:#d8d8cf;border:1px solid #77776f}
@@ -38997,7 +39014,7 @@ const PLX={
  cnh:{n:"Dãy nhà cung nhân",fn:"chỗ ăn ngủ của cung nữ, thái giám",d:"Dãy nhà thấp mái xám, cung nữ và thái giám ăn ngủ ở đây.",img:"cung-nhan",box:{x:.085,y:.645,w:.11,h:.155},anchor:{x:.14,y:.69},pos:[2,-1],fl:.42},
  tgk:{n:"Tân Giả khố",fn:"Hoán y cục: nơi cung nhân chịu phạt giặt giũ",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",img:"tan-gia-kho",box:{x:.097,y:.466,w:.13,h:.10},anchor:{x:.16,y:.50},pos:[1,-1]},
  ttp:{n:"Thượng thư phòng",fn:"học đường của hoàng tử, công chúa",d:"Nơi các hoàng tử, công chúa theo thầy học chữ, học võ.",img:"thuong-thu-phong",box:{x:.825,y:.635,w:.07,h:.09},anchor:{x:.86,y:.67},pos:[0,3],fl:.62},
- acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.30,y:.235,w:.115,h:.215},anchor:{x:.355,y:.33},pos:[2,3],fl:.62},
+ acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.742,y:.098,w:.095,h:.125},anchor:{x:.79,y:.16},pos:[2,3],fl:.62},
  dc:{n:"Đông cung",fn:"nơi Thái tử ở",d:"Điện của Thái tử, trang trọng mà không phô trương.",img:"dong-cung",box:{x:.795,y:.425,w:.075,h:.185},anchor:{x:.83,y:.47},pos:[1,3],fl:.62}};
 const PLX_NEW=["cnh","ttp","acs","dc"]; /* places with their own picture file; tgk keeps j94's */
 const PLX_AGE=6,PLX_ADULT=18;
@@ -43758,7 +43775,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="44b139497e4d";window.CTM_BUILD=BUILD;
+const BUILD="c983c8e628a8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
