@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4ba6a2b2","t":"2026-11-16T22:57Z","c":"kit-size #8: report (successor section, open owner question)","b":"713a699d5852","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
+window.CTM_BI={"s":"d4baf3b6","t":"2026-11-16T23:38Z","c":"Phẩm của món đồ nay nằm ngay trên viền khung ảnh, mọi nơi đều giống nhau.","b":"340321296257","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -19987,7 +19987,7 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
  /* KIT §70: an item of the box (not the silver) is tappable: kitItemCard with the shared item detail */
  const kt=x=>x.k?` data-kid="${kmEsc(x.k)}" role="button" tabindex="0"`:"";if(coins)seq.push({n:`Bạc +${coins}`,img:`${KM_DIR}mo-ingot-silver.webp`,g:0,gn:"Bạc",coin:1});
  const info=x=>({name:x.n,src:x.img,src512:x.img,grade:x.g,gname:x.gn||KG[x.g].n,col:x.coin?"#c9a46a":KG[x.g].c,sub:""});
- const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
+ const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,gname:x.gn||"",size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
  const rows=seq.map(x=>`<div class="kmrow"${kt(x)}>${typeof kitGradeChip==="function"?kitGradeChip(x.g,{name:x.gn,size:"sm",col:x.coin?"#c9a46a":""}):""}<b${x.coin?' class="g"':""}>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`).join("");
  const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
@@ -21111,8 +21111,10 @@ window.kitItemBigSrc=kitItemBigSrc;
 function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]||KIT_GRADE[0];const sz=o.size||"md";const slot=sz==="slot";const bigSz=(sz==="lg"||sz==="xl")&&!o.frame;
  const lab=o.label&&!slot?`<span class="kitl kitl-${o.label[1]||"n"}">${o.label[0]}</span>`:"";const tip=(o.tip||o.name||"").replace(/"/g,"&quot;");
  return `<span class="kitem kitem-${sz}${o.empty?" kitem-empty":" kig"+Math.max(0,Math.min(4,o.grade|0))}${o.on?" kitem-on":""}${o.sel?" kitem-sel":""}${(sz==="lg"||sz==="xl")&&o.frame?" kitem-fr":""}${(o.grade|0)===4&&!o.empty?" kitem-nt":""}" style="--ig:${g.g};--ic:${g.c}${g.r?";--ir:"+g.r:""}" ${o.data||""} title="${tip}"${slot&&!o.empty?` aria-label="${tip}"`:""}>`+
-  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}"><span class="kxw">Xa xỉ</span><b>${o.lux}</b></i>`:""}</span>`+
-  (slot?"":`<span class="kitn">${o.name||""}</span>${o.empty?"":`<span class="kitg">${g.n}</span>`}${lab}`)+`</span>`}
+  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}"><span class="kxw">Xa xỉ</span><b>${o.lux}</b></i>`:""}${o.empty?"":kitItemGrade(g,o)}</span>`+
+  (slot?"":`<span class="kitn">${o.name||""}</span>${lab}`)+`</span>`}
+/* KIT §54.1b GRADE CHIP ON THE FRAME (owner 16/11 ~23:18Z s26, choice "1"): the grade (Phẩm) of EVERY kitItem — bag slot, wear slot, tile, lg, xl, pet, gift, shop, reveal — is the kitGradeChip(size "fr") centred ON the bottom edge of the picture frame; there is NO grade line under the picture any more. o.gname = grade word override (pets: PET_TIER, works: WTIER). One place, no caller variant. */
+function kitItemGrade(g,o){const gi=Math.max(0,Math.min(4,o.grade|0));return typeof kitGradeChip==="function"?kitGradeChip(gi,{size:"fr",name:o.gname}):`<span class="kgchip kgchip-fr kgc${gi}" style="--gc:${g.c}">${o.gname||g.n}</span>`}
 (function(){const st=document.createElement("style");st.id="k2b-item-big";st.textContent=`
 /* the picture column of an item pop-up / notice (kitLose, gift, econ, veil, mark: .kpb.kphas > .kpsubj.kpitem) is the big-item width, not the 72-104 px portrait column; the compact bag slot card (.kitslot, 28.13f) keeps its 64 px header icon */
 html body #modal .dlg:not(.kitslot) .kpb.kphas:has(>.kpsubj.kpitem){grid-template-columns:min(150px,38%) minmax(0,1fr)}
@@ -21148,7 +21150,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem.kitem-slot.kitem-empty>.kitb{background:linear-gradient(#efe5d2,#e9dcc5);border:1px solid #d6c29c;box-shadow:inset 0 2px 5px #5a3a2030,inset 0 -1px 0 #fff8}
 .kitem .kitm{position:absolute;right:2px;top:2px;font-style:normal;font-size:.58rem;line-height:1.3;border-radius:5px;padding:0 4px;background:#fffaf0e6;border:1px solid}
 .kitem .kitm-r{color:#c23b22;border-color:#c23b2266}.kitem .kitm-g{color:#2d7a52;border-color:#2d7a5266}.kitem .kitm-n{color:#8a7350;border-color:#d2b07188}
-.kitem>.kitb{position:relative;width:var(--isz);aspect-ratio:1;border-radius:8px;background:radial-gradient(circle at 50% 40%,#fff 0,var(--ig) 70%);border:2px solid var(--ic);box-shadow:inset 0 0 0 2px #fff8,0 1px 3px #5a3a2033;display:grid;place-items:center;overflow:hidden}
+.kitem>.kitb{position:relative;width:var(--isz);aspect-ratio:1;border-radius:8px;background:radial-gradient(circle at 50% 40%,#fff 0,var(--ig) 70%);border:2px solid var(--ic);box-shadow:inset 0 0 0 2px #fff8,0 1px 3px #5a3a2033;display:grid;place-items:center;overflow:visible}
 .kitem.kitem-nt>.kitb{border-color:var(--ic);box-shadow:inset 0 0 0 2px var(--ir),inset 0 0 0 4px #fff6,0 0 8px #f0d070aa}
 .kitem>.kitb>img{width:86%;height:86%;object-fit:contain;filter:drop-shadow(0 1px 2px #0003)}
 .kitem.kitem-empty>.kitb{background:repeating-linear-gradient(45deg,#f6efe4 0 6px,#efe6d7 6px 12px);border-style:dashed;border-color:#c8b89c}
@@ -21160,7 +21162,6 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem.kitem-sel>.kitb,.kitem.kitem-slot.kitem-sel>.kitb{box-shadow:0 0 0 3px var(--gold,#c9a46a),0 4px 10px #5a3a2040;transform:translateY(-2px)}
 .kitem>.kitn{font-size:.7rem;line-height:1.15;color:var(--ink);font-weight:600;overflow-wrap:anywhere}
 .kitem-lg>.kitn{font-size:.78rem}.kitem-sm>.kitn{font-size:.62rem}
-.kitem>.kitg{font-size:.6rem;color:var(--ic);font-weight:700;text-transform:uppercase;letter-spacing:.02em}
 .kitl{font-size:.62rem;border-radius:6px;padding:0 5px;border:1px solid}.kitl-ok{color:#2d7a52;border-color:#2d7a5266;background:#eaf5ee}.kitl-no{color:#c23b22;border-color:#c23b2266;background:#fbecea}.kitl-n{color:#8a7350;border-color:#d2b07188;background:#fbf4e6}
 .kwear{display:flex;gap:6px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:2px 0 4px}
 .pc .pcl>.kwear{float:left;clear:left;width:var(--kpcw);margin:0 12px 6px 0}
@@ -21185,8 +21186,9 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem[class*=" kig"]>.kitb>img{width:76%;height:76%;position:relative;z-index:0}
 .kitem[class*=" kig"]>.kitb>.kitq,.kitem[class*=" kig"]>.kitb>.kits,.kitem[class*=" kig"]>.kitb>.kiton,.kitem[class*=" kig"]>.kitb>.kitm{z-index:2}
 .kitem[class*=" kig"].kitem-nt>.kitb{box-shadow:0 0 8px #f0d070aa}
-.kitem[class*=" kig"]>.kitb .kitq{right:9%;bottom:8%}.kitem[class*=" kig"]>.kitb .kits{left:9%;top:8%}.kitem[class*=" kig"]>.kitb .kitm{right:8%;top:7%}
-.kitem[class*=" kig"]>.kitb .kiton{left:7%;right:7%;bottom:6%;border-radius:3px}
+/* corner plan (KIT §54.1b): grade chip = bottom edge centre (straddles it) · Xa xỉ box = top-right · Ngự seal = top-left · "đã tẩm" tag = top-right, or left under the seal row when the Xa xỉ box is there · qty = bottom-right, lifted above the chip · worn band = above the chip */
+.kitem[class*=" kig"]>.kitb .kitq{right:9%;bottom:calc(max(6cqw,5px) + 3%)}.kitem[class*=" kig"]>.kitb .kits{left:9%;top:8%}.kitem[class*=" kig"]>.kitb .kitm{right:8%;top:7%}
+.kitem[class*=" kig"]>.kitb .kiton{left:7%;right:7%;bottom:calc(max(6cqw,5px) + 2%);border-radius:3px}
 .kitem.kitem-on[class*=" kig"]>.kitb{outline:2px solid #2d7a52;outline-offset:1px}
 /* XA XỈ BOX = ONE MASTER (owner 16/11 17:20Z, KIT §84 (5)): the box is the XL master (frame 150 px: box 34x34 at 4 px from top/right, word 10 px, number 13 px) written in CONTAINER UNITS of the frame (.kitb is the container), so at EVERY size and in EVERY place (bag slot, tile, lg, xl, tap panel, kszItem3) it keeps exactly the same place and size relative to the frame; only its content changes: word + number from a 100 px frame, number only below (min 14 px box / 8 px digits so a 54 px bag slot stays legible) */
 .kitem>.kitb{container-type:inline-size}
@@ -21196,10 +21198,10 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 @container (max-width:99px){.kitem .kitx>.kxw{display:none}.kitem .kitx>b{font-size:max(12.667cqw,8px)}}
 /* page-scale-r1: the wear column (kitEquipSlots col:true, 40-72 px slots: Tư trang, Chọn y phục, pet box) never shows the Xa xỉ tag: wider than a 40 px slot it was cut ("a xỉ 33") and hid the picture; the same items show it in the bag and the tap panel, the total stays on the sum line */
 .keq.keqv .kitem .kitx{display:none}
-/* corner plan when the luxury tab sits top-right: seal "Ngự" and the "đã tẩm" tag go bottom-left (above the worn band) */
-.kitem[class*=" kig"]:has(.kitx)>.kitb .kits{top:auto;bottom:8%;left:7%}.kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{top:auto;right:auto;bottom:8%;left:7%}
-.kitem[class*=" kig"]:has(.kitx)>.kitb .kits~.kitm{bottom:30%}
-.kitem.kitem-on[class*=" kig"]:has(.kitx)>.kitb .kits,.kitem.kitem-on[class*=" kig"]:has(.kitx)>.kitb .kitm{bottom:26%}
+/* the Xa xỉ box sits top-right, so the "đã tẩm" tag moves to the top-left (under the seal "Ngự" when both are there) */
+.kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{right:auto;left:9%;top:max(31cqw,19px)}
+/* room for the half of the grade chip that hangs below the frame (named tiles; a bag slot has no name line and relies on its grid gap) */
+.kitem:not(.kitem-slot)>.kitb:has(>.kgchip-fr){margin-bottom:max(calc(var(--isz)*.06),5px)}
 `;const st=document.createElement("style");st.id="k2b-itemgrade";st.textContent=c;document.head.appendChild(st)})();
 
 /* ---------- 16. STAGE LAYOUT OWNER = j59 (main): after merging main, j59 lays out the stage (one height for every adult by the visible body,
@@ -23612,7 +23614,6 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kslhead{display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 12px;align-items:start;margin:0 0 6px}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem{position:static!important;width:64px;margin:0;padding:0;top:auto}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem>.kitem{--isz:64px!important;width:64px!important}
-#modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitg{display:none}
 #modal .dlg.kitslot .kslinfo{min-width:0}
 #modal .dlg.kitslot .kslinfo>.kinvrows{margin:0}
 #modal .dlg.kitslot .kslinfo>p{margin:4px 0 0}
@@ -23658,6 +23659,8 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 /* kv: dropped @media (max-width:899px) (one page = spread page, KIT §0) */
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
+/* KIT §54.1b: the grade chip hangs half below the frame, so the caption under a wear / pet slot starts below it */
+.keq .keqc>.kitem-slot:not(.kitem-empty){margin-bottom:max(calc(var(--keqsz,var(--kside,72px))*.06),6px)}
 @supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
  .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}.keq .keqc>.keqnm{margin-top:0}}
 .keq .keqnote{display:flex;justify-content:center;min-width:0}.keq .keqnote>.keql2{flex-basis:auto}
@@ -29707,7 +29710,7 @@ function petTake(t,from,src){if(!petHasFree(S)){const j=petWorst(S);if(j<0)retur
    the autumn hunt (Đi săn group), caring for a pet (act-cham-thu-nuoi) */
 function petArtOf(t,label,g){try{if(g){const id="cat:"+g;const src=typeof evArtOf==="function"?evArtOf(id,0):"";if(src)return{src,label:typeof evArtTitle==="function"?evArtTitle(id):""}}
  return{src:"https://ctm-img.victoria-tntt.workers.dev/img/act-cham-thu-nuoi.webp",label:label||"Thú nuôi"}}catch(e){return undefined}}
-function petPicK(t,lead){t=petK(t);const T=PET[t];return{facts:lead?[String(lead).replace(/<[^>]+>/g,"")]:undefined,itemPic:kitItem({src:petSrc(t,1,typeof petcStageSrc==="function"?"-non":""),name:"",grade:T.tr,size:"lg",lux:petLux(t)}).replace('<span class="kitn"></span>','').replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`)}}
+function petPicK(t,lead){t=petK(t);const T=PET[t];return{facts:lead?[String(lead).replace(/<[^>]+>/g,"")]:undefined,itemPic:kitItem({src:petSrc(t,1,typeof petcStageSrc==="function"?"-non":""),name:"",grade:T.tr,gname:PET_TIER[T.tr],size:"lg",lux:petLux(t)}).replace('<span class="kitn"></span>','')}}
 function petCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;if(d.kit&&!d.kit.facts)d.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];Q.push({t:title||d.title,h:d.t,opts:d.o,headArt:d.headArt,kit:d.kit,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});tsbShow();return true}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsbPet/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.kit=d.kit;if(q.kit&&!q.kit.facts)q.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];q.stage=undefined}}})}catch(e){}return out}})();
 PEND.tsbPetGift=pp=>{if(!S)return null;pp.t=petK(pp.t);const T=PET[pp.t];if(!T)return null;const O=[];
@@ -29746,10 +29749,9 @@ try{ACTDOM.thaopet="Mưu kế"}catch(e){}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)){const j=petTarget(t);if(j>=0){const tr=petT(tsbPets(t)[j]).tr;O.forEach(x=>{if(x[0]==="thaopet")x[1]*=1+tr*.5})}}}catch(e){}return O}})();
 
 /* ---------------- Tư trang: ô thú nuôi (kitEquipSlots, cùng kit với Đang mang) ---------------- */
-function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),name:big?"":T.n,grade:T.tr,lux:petLux(P.t),size:big?"lg":"slot",on:!big&&S.petOn===i,onText:"Theo hầu",tip:`${T.n} · ${PET_TIER[T.tr]} · Xa xỉ ${petLux(P.t)}`});
- /* same tile as items: grade frame + colour, Ngự seal on Ngự tứ */
- const h2=h.replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`);
- return h2}
+function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),name:big?"":T.n,grade:T.tr,gname:PET_TIER[T.tr],lux:petLux(P.t),size:big?"lg":"slot",on:!big&&S.petOn===i,onText:"Theo hầu",tip:`${T.n} · ${PET_TIER[T.tr]} · Xa xỉ ${petLux(P.t)}`});
+ /* same tile as items: grade frame + colour, Ngự seal on Ngự tứ; the chip on the frame reads the pet tier (gname) */
+ return h}
 function petCareW(P){const c=P.care||0;return c>=70?["Khỏe","g"]:c>=30?["Cần chăm","n"]:["Biếng ăn","r"]}
 /* LEFT COLUMN pet box (owner 16/11 16:55Z): directly under Y phục, same column width, slot = wear-slot size; name / age / effect as small lines.
    Shows the pet that follows her (else the first); 0 pets = one empty slot + "Chưa nuôi con nào". Tap = the Thú cưng sub-tab of Tư trang. */
@@ -32859,11 +32861,11 @@ function kitItemInfo(x){const e=x&&typeof x==="object"?x:{k:x};const k=e.k;const
  g=Math.max(0,Math.min(4,g|0));const G=KG[g]||KG[0];return{k,name,src,src512:src512||src,grade:g,gname:gn||G.n,col:G.c,sub}}
 function krEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function kitGradeChip(g,o){o=o||{};g=Math.max(0,Math.min(4,g|0));const G=(typeof KIT_GRADE!=="undefined"&&KIT_GRADE[g])||{n:"Thường",c:"#9a8a78"};
- return `<span class="kgchip kgc${g}${o.size==="sm"?" kgchip-sm":""}" style="--gc:${o.col||G.c}">${krEsc(o.name||G.n)}${o.extra?` · ${krEsc(o.extra)}`:""}</span>`}
+ return `<span class="kgchip kgc${g}${o.size==="sm"?" kgchip-sm":o.size==="fr"?" kgchip-fr":""}" style="--gc:${o.col||G.c}">${krEsc(o.name||G.n)}${o.extra?` · ${krEsc(o.extra)}`:""}</span>`}
 function kitRevealHTML(I,o){o=o||{};const R=(typeof BAL==="object"&&BAL.reveal)||{};
  return `<div class="krev" style="--gc:${I.col};--krise:${(R.rise||550)}ms">`+`<i class="krevl" aria-hidden="true"></i>`+
-  kitItem({src:I.src512||I.src,name:"",grade:I.grade,size:"xl",tip:I.name}).replace('<span class="kitn"></span>','')+
-  `<b class="krevn">${krEsc(I.name)}</b>${kitGradeChip(I.grade,{name:I.gname,extra:o.noSub?"":I.sub})}${o.from?`<small class="krevf">${krEsc(o.from)}</small>`:""}</div>`}
+  kitItem({src:I.src512||I.src,name:"",grade:I.grade,gname:I.gname,size:"xl",tip:I.name}).replace('<span class="kitn"></span>','')+
+  `<b class="krevn">${krEsc(I.name)}</b>${!o.noSub&&I.sub?`<small class="krevs">${krEsc(I.sub)}</small>`:""}${o.from?`<small class="krevf">${krEsc(o.from)}</small>`:""}</div>`}
 window.kitItemInfo=kitItemInfo;window.kitGradeChip=kitGradeChip;window.kitRevealHTML=kitRevealHTML;
 
 /* ---------- §54.2 kitLose ---------- */
@@ -32883,7 +32885,7 @@ function kitCoins(dir,n,from){if(!krOn()||krStill()||!(n>0))return;const R=(type
  try{if(typeof sfx==="function")sfx("sfx-coin")}catch(e){}}
 /* one item tile leaving from the Tư trang tab: "away" (sold), "give" (given), "fall" (faded away) */
 function krFly(I,mode,i){if(krStill())return null;const R=(typeof BAL==="object"&&BAL.reveal)||{};const p=krBagPt();const w=document.createElement("div");w.className="klsfly";
- w.innerHTML=kitItem({src:I.src,name:"",grade:I.grade,size:"md",tip:I.name}).replace('<span class="kitn"></span>','');document.body.appendChild(w);
+ w.innerHTML=kitItem({src:I.src,name:"",grade:I.grade,gname:I.gname,size:"md",tip:I.name}).replace('<span class="kitn"></span>','');document.body.appendChild(w);
  const ww=w.offsetWidth||72,hh=w.offsetHeight||72;const x0=Math.max(8,Math.min(innerWidth-ww-8,p.x-ww/2+(i||0)*24)),y0=Math.max(8,(p.r&&p.r.top>innerHeight*.6?p.r.top-hh-14:p.y-hh/2));
  const at=(x,y,s,o,r)=>({transform:`translate(${x}px,${y}px) scale(${s}) rotate(${r||0}deg)`,opacity:o});let K,d;
  if(mode==="fall"){K=[at(x0,y0-10,.7,0),Object.assign(at(x0,y0-18,1,1),{offset:.25,filter:"grayscale(0)"}),Object.assign(at(x0+10,y0+130,.9,0,14),{filter:"grayscale(1)"})];d=R.fall||1300}
@@ -32895,7 +32897,7 @@ function kitLose(x,o){o=o||{};if(!krOn())return;if(x&&!Array.isArray(x)&&typeof 
  if(why==="sell"||why==="give"||why==="fade"){let last=null;L.forEach((I,i)=>{last=krFly(I,why==="sell"?"away":why,i)||last});
   if(why==="sell"&&o.bac)setTimeout(()=>kitCoins("in",o.bac,last||krBagPt()),last?Math.round(last.d*.55):0);return}
  /* lose: the kit notice card; its picture (the kit item panel picture, itemPic) = the lost item fading and falling (CSS, §54.2); more items are named in the text */
- const I0=L[0];const pic=kitItem({src:I0.src512||I0.src,name:"",grade:I0.grade,size:"lg",tip:I0.name}).replace('<span class="kitn"></span>','').replace('class="kitem ','class="kitem klsfall ');
+ const I0=L[0];const pic=kitItem({src:I0.src512||I0.src,name:"",grade:I0.grade,gname:I0.gname,size:"lg",tip:I0.name}).replace('<span class="kitn"></span>','').replace('class="kitem ','class="kitem klsfall ');
  const names=L.map(I=>I.name);const facts=[];if(o.text)facts.push(o.text);facts.push(`Mất khỏi Tư trang: ${names.join(", ")}.`);
  try{const was=document.getElementById("modal");const open=was&&!was.hidden;
   kitPanel({kind:"notice",title:o.title||"Mất đồ",sub:L.length>1?`${L.length} món`:`${L[0].sub?L[0].sub+" · ":""}${L[0].gname}`,itemPic:pic,facts,btn:"Đã hiểu",cls:"klose"});
@@ -32907,15 +32909,16 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .kgchip{display:inline-block;font-size:.84rem;font-weight:700;line-height:1.3;padding:2px 12px;border-radius:999px;background:var(--gc);color:#fff;white-space:nowrap;box-shadow:inset 0 0 0 1px #fff4;text-shadow:0 1px 1px #0003}
 .kgchip.kgc4{background:linear-gradient(#c9a227,#a8261c)}
 .kgchip-sm{font-size:.66rem;padding:1px 7px;border-radius:6px}
+/* kitItem's grade chip (size "fr", KIT §54.1b): centred ON the bottom edge of the picture frame; every measure is in container units of the frame (.kitb is the container) so it scales with the frame: 7 px minimum at a wear or bag slot (43-58 px), 9.2 % of the frame at M (72), L (104), XL (150) */
+.kitb>.kgchip-fr{position:absolute;left:50%;bottom:0;translate:-50% 50%;z-index:3;font-size:max(9.2cqw,7px);line-height:1;font-weight:700;padding:max(1.3cqw,1px) max(2.4cqw,2px);border-radius:max(2.2cqw,2px);letter-spacing:.02em;box-shadow:0 0 0 max(.7cqw,1px) #fffaf0,0 1px 3px #0005;pointer-events:none;text-shadow:0 1px 1px #0004}
 /* §54.1 reveal spotlight (kitGain, each item of kitReward) */
 .krev{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#fff3dc}
 .krevl{position:absolute;left:50%;top:75px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:krevBurst calc(var(--krise)*2) ease-out both,krevBreath 2.4s ease-in-out calc(var(--krise)*2) infinite}
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
-.krev>.kitem>.kitg{display:none}
 .krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
-.krev>.kgchip{position:relative;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
+.krevs{position:relative;font-size:.8rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
 .krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
 .krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
 .krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
@@ -32936,7 +32939,8 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 `;document.head.appendChild(st)})();
 /* kit sample page (#kit, jkitpage): §54.1 grade chips + one reveal spotlight, §54.2 the lose card picture */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
- {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",where:"<b>ONE chip part</b> <code>kitGradeChip(grade,{size,name,extra})</code> in two sizes, never two parts: <b>normal</b> = under the item name on the reveal card (kitGain / kitReward), item detail, lists; <b>sm</b> (<code>size:\"sm\"</code>) = the grade tag laid over an item picture / inside a tight row (kitItem tile, Tư trang, week-book rows). Rows below: normal chips, a normal chip with a maker note, then the sm chip.",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} <span class="kitpg-w" style="margin:0 0 0 14px;padding-left:12px;border-left:1px solid var(--k-hair)">chip cỡ NHỎ (<code>size:"sm"</code>, cùng một chip, dùng làm nhãn đề trên ảnh vật phẩm) →</span>${kitGradeChip(1,{size:"sm"})}</div>`+
+ {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",where:"<b>ONE chip part</b> <code>kitGradeChip(grade,{size,name,extra})</code> in three sizes, never two parts: <b>normal</b> = a text line (lists, maker notes); <b>sm</b> (<code>size:\"sm\"</code>) = inside a tight row without a picture (week-book rows); <b>fr</b> (<code>size:\"fr\"</code>, KIT §54.1b) = the grade of EVERY item picture: kitItem draws it centred ON the bottom edge of the frame at every size (bag slot, M, L, XL, reveal card, detail card), scaled in container units of the frame; there is no grade line under a picture. Rows below: normal chips, a normal chip with a maker note, the sm chip, then item frames at 4 sizes with the fr chip.",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} <span class="kitpg-w" style="margin:0 0 0 14px;padding-left:12px;border-left:1px solid var(--k-hair)">chip cỡ NHỎ (<code>size:"sm"</code>, cùng một chip, dùng làm nhãn đề trên ảnh vật phẩm) →</span>${kitGradeChip(1,{size:"sm"})}</div>`+
+  `<div class="kitpg-row" style="align-items:flex-end;gap:16px">${[["slot",0],["md",1],["lg",3],["xl",4]].map(([z,g])=>`<span style="width:${z==="slot"?58:z==="md"?72:z==="lg"?104:150}px;display:inline-block">${kitItem({src:kitItemInfo("nhansam").src,name:"",grade:g,size:z,tip:z})}</span>`).join("")}</div>`+
   `<div class="kitpg-row" style="background:#1a0f0acc;padding:14px;border-radius:8px">${kitRevealHTML(kitItemInfo("nhansam"),{from:"Thái hậu ban"})}</div>`},
  {id:"§54.2",title:"kitLose: thẻ mất đồ (món mờ dần, rơi)",html:()=>`<div class="kitpg-row"><span class="klspic">${["vongngoc","tramngoc"].map((k,i)=>{const I=kitItemInfo(k);return kitItem({src:I.src,name:I.name,grade:I.grade,size:"lg"}).replace('class="kitem ','class="kitem klsfall ')}).join("")}</span></div>`})}catch(e){}
 /* ================= jfx — CẢM GIÁC GAME (game feel, owner 11/14–11/15) — KIT § Cảm giác/FX =================
@@ -33941,8 +33945,8 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§64",title:"kitIt
      kitItemRef(ref)               → R {k, e, g, I (kitItemInfo §54.1), wd, it, work, veil, worn, who} — the resolver (null = no such item)
      kitItemDetailRows(ref, o)     → kitRows (KIT §51): Phẩm · Loại · Hợp đề · Được · Mất · Xa xỉ · Lai lịch · Ghi chú (empty rows dropped)
                                      o = {months, dress, pawn, note:[…], lead:[[label,val,cls]…] rows put first (price), noLux}
-     kitItemDetail(ref, o)         → HTML block `.kidet`: picture (kitItem, the kit graded frame) · name in the grade colour · kitGradeChip(grade,
-                                     kind) · "Đang mặc" chip · the rows · o.acts (pbtn buttons, any data-* the caller handles). o.size "md"|"lg".
+     kitItemDetail(ref, o)         → HTML block `.kidet`: picture (kitItem, the kit graded frame) · name in the grade colour (the grade chip is ON the
+                                     picture frame, kitItem KIT §54.1b) · kind · "Đang mặc" chip · the rows · o.acts (pbtn buttons, any data-* the caller handles). o.size "md"|"lg".
      kitItemCard(ref, o)           → floats the block over the screen (above dialogs and minigames): ✕ (kit-x) / tap outside / Esc close it.
                                      o.acts = [{id, n, sub, why, go()}] → kit buttons; a tap runs go() and closes the card.
      kitItemTap(ref)               → `data-kid… role="button" tabindex="0"` attributes: any tile carrying them opens kitItemCard on tap
@@ -34007,11 +34011,11 @@ function kitItemDetailRows(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return""
   ["Xa xỉ",X?X.vals.map((v,i)=>i===1&&X.over?`<span class="ef r">${v}: quá hạn mức</span>`:v):[],"n"],["Lai lịch",F,"n"],["Ghi chú",G,"n"]]))}
 /* the block */
 function kitItemDetail(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return"";const I=R.I;const sz=o.size||"md";
- const pic=kitItem({src:sz==="lg"?I.src512||I.src:I.src,name:"",grade:I.grade,size:sz,qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
- const kind=kidKind(R);const chip=typeof kitGradeChip==="function"?kitGradeChip(I.grade,{name:I.gname,size:"sm"}):"";
+ const pic=kitItem({src:sz==="lg"?I.src512||I.src:I.src,name:"",grade:I.grade,gname:I.gname,size:sz,qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
+ const kind=kidKind(R);/* the grade = the chip ON the picture frame (kitItem, KIT §54.1b), not a second chip here */
  const acts=(o.acts||[]).map(a=>typeof a==="string"?a:pbtn(`data-kidact="${a.id}"`,a.n,a.sub||"",a.why||"")).join("");
  return `<div class="kidet kidet-${sz}${o.cls?" "+o.cls:""}" data-kidk="${kidEsc(R.k)}"><div class="kidhd"><span class="kidpic">${pic}</span><div class="kidt">`+
-  `<b class="kidn" style="color:${I.col}">${kidEsc(I.name)}</b><span class="kidsub">${chip}<span class="kidkind">${kidEsc(kind)}</span>${R.worn?(typeof kitChip==="function"?kitChip("Đang mặc","g"):""):""}</span></div></div>`+
+  `<b class="kidn" style="color:${I.col}">${kidEsc(I.name)}</b><span class="kidsub"><span class="kidkind">${kidEsc(kind)}</span>${R.worn?(typeof kitChip==="function"?kitChip("Đang mặc","g"):""):""}</span></div></div>`+
   `<div class="kinvrows kidrows">${kitItemDetailRows(R,o)}</div>${acts?`<div class="rbtn kidacts">${acts}</div>`:""}</div>`}
 /* the floating card */
 const KIDC={card:null};
@@ -34021,8 +34025,8 @@ function kitItemCard(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return null;ki
  /* KIT §8.2 T2 (review/kit-sweep, owner 16/11 "kit chung đâu"): the item card is the kit PANEL frame (kpHeader seal ĐIỀU + name + kind,
     kit ✕ in the header) with the item picture LEFT (.kpsubj.kpiart) and its kit rows + acts RIGHT; no private card frame. */
  const I=R.I,acts2=acts.map(a=>typeof a==="string"?a:pbtn(`data-kidact="${a.id}"`,a.n,a.sub||"",a.why||"")).join("");
- const pic=kitItem({src:I.src512||I.src,name:"",grade:I.grade,size:"lg",qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
- const chip=typeof kitGradeChip==="function"?kitGradeChip(I.grade,{name:I.gname,size:"sm"}):"";const worn=R.worn&&typeof kitChip==="function"?kitChip("Đang mặc","g"):"";
+ const pic=kitItem({src:I.src512||I.src,name:"",grade:I.grade,gname:I.gname,size:"lg",qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
+ const worn=R.worn&&typeof kitChip==="function"?kitChip("Đang mặc","g"):"";
  const head=(typeof kpHeader==="function"?kpHeader("info",`<span style="color:${I.col}">${kidEsc(I.name)}</span>`,kidEsc(kidKind(R))):`<div class="kph"><b>${kidEsc(I.name)}</b></div>`).replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-kidx="1"'):'<button type="button" class="kit-x" data-kidx="1" aria-label="Lui">✕</button>')+"</div>");
  f.innerHTML=`<div class="dlg kpanel kidc" data-kind="info" role="dialog" aria-modal="true" aria-label="${kidEsc(I.name)}">${head}<div class="body kidb"><div class="kpb kphas kpinfo kidet" data-kidk="${kidEsc(R.k)}"><div class="kpsubj kpiart kidpic">${pic}</div><div class="kpmain">${worn?`<div class="kpsec">${worn}</div>`:""}<div class="kinvrows kidrows">${kitItemDetailRows(R,o)}</div>${acts2?`<div class="rbtn kidacts">${acts2}</div>`:""}</div></div></div></div>`;
  document.body.appendChild(f);KIDC.card={R,o};try{if(typeof kitFix==="function")kitFix(f)}catch(e){}try{const x=f.querySelector(".kit-x");x&&x.focus({preventScroll:true})}catch(e){}
@@ -34051,7 +34055,7 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 (function(){const st=document.createElement("style");st.id="kid-css";st.textContent=`
 .kidet{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kidet .kidhd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center}
-.kidet .kidpic>.kitem{margin:0}.kidet .kidpic .kitg{display:none}
+.kidet .kidpic>.kitem{margin:0}
 .kidet .kidt{display:flex;flex-direction:column;gap:3px;min-width:0}
 .kidet .kidn{font-family:var(--display);font-size:1.05rem;line-height:1.25;overflow-wrap:anywhere}
 .kidet .kidsub{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:.78rem;color:var(--ink2,#6a5040)}
@@ -35873,7 +35877,7 @@ function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Objec
  const [mv,mc]=moodRow(o.m0,o.m1,o.tier);
  const rows=[["Hoàng thượng",mv,mc]];if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
  let tb=kitRows(rows);try{const kem=kitKemRow(K);if(kem)tb=tb.replace(/<\/span>$/,kem+"</span>")}catch(e){}
- const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",tip:I.name}).replace('<span class="kitn"></span>',""):""}${typeof kitGradeChip==="function"?kitGradeChip(I.grade||0,{size:"sm"}):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
+ const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",gname:I.gname,tip:I.name}).replace('<span class="kitn"></span>',""):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
  const html=`<div class="kne kne-${o.tier}">${picHTML(DIR+T.pic+".webp",o.tier)}<div class="kne-side"><div class="kne-cap"><b>${T.t}</b>${o.line?`<small>${esc(o.line)}</small>`:""}</div>
   <div class="kmlist">${tb}${items}</div><button class="kbtn kmtake kne-take" data-km-close>${items?"Nhận":"Tiếp tục"}</button></div></div>`;
  const keys=(o.items||[]).map(e=>e.k);
@@ -45323,10 +45327,7 @@ window.kitSizeSheet=kitSizeSheet;
 const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 (function(){const st=document.createElement("style");st.id="k-size-items";st.textContent=`
 .kszit{position:relative;display:inline-block;line-height:0}
-.kszit>.kszgc{position:absolute;left:50%;translate:-50% 50%;bottom:0;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none;letter-spacing:.02em}
-.kszit[data-s="S"]>.kszgc{font-size:.5rem;padding:1px 3px}
-/* (owner 16:10Z) grade chip size follows the item size: S small · M · L · XL LARGE */
-.kszit[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
+/* grade chip = kitItem's own chip ON the frame (KIT §54.1b), scaled with the frame; no sample-only chip */
 .kszit{margin-bottom:.6em}
 /* (owner 16:10Z / 16:15Z) Ngự: ONE mark only = the "Ngự tứ" grade chip; the red "Ngự" corner mark is dropped */
 .kszit .kits{display:none}
@@ -45334,7 +45335,7 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszit .kitx{position:absolute;top:3px;right:3px;left:auto;box-sizing:border-box;aspect-ratio:1;width:auto;min-width:2.5em;height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:2px;white-space:nowrap;text-align:center;line-height:1;font-size:.5rem;border-radius:3px}
 .kszit .kitx>b{font-size:1.25em}.kszit[data-s="S"] .kitx{min-width:1.9em}.kszit[data-s="S"] .kitx>.kxw{display:none}
 .kszit[data-s="L"] .kitx{font-size:.62rem}.kszit[data-s="XL"] .kitx{font-size:.78rem}
-.kszit .kitn,.kszit .kitg{display:none}
+.kszit .kitn{display:none}
 .kszidc{box-sizing:border-box;border:1px solid var(--line,#d2b071);border-radius:8px;background:var(--panel,#fffaf0);padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:.8rem}
 .kszidh{display:flex;gap:10px;align-items:flex-start}
 .kszidt{display:flex;flex-direction:column;gap:3px;min-width:0}
@@ -45346,8 +45347,8 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
 function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
- let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0});
- return `<span class="kszit" data-s="${size}">${it}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
+ let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,gname:I.gname,size:KSZ_ITEM[size],frame:true,lux:lux||0});
+ return `<span class="kszit" data-s="${size}">${it}</span>`}
 function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
  const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],loss=[],keep=[];let kind="";
  for(const r of rows){const l=(r.querySelector(".krl")||{}).textContent||"";const v=r.querySelector(".krv");
@@ -45559,34 +45560,27 @@ function kszLevels3(sp){const F=sp.facts||[],R=sp.rows||[],O=sp.opts||[],T=F.len
  if(O.length&&!no)continue;L.push(Object.assign({},sp,{facts:F.slice(0,nf),rows:R.slice(0,nr),opts:O.length?O.slice(0,no):undefined}))}return L}
 function kszFill3(pool,host){const out={},L=kszLevels3(pool);let xl0=null;for(const sp of L){const K=kitFramePick3(sp,host);let ok=true;if(K==="XL"){xl0=xl0||sp;host.innerHTML=kszFrame3(sp,"XL");const d=host.firstElementChild;kitFrameApply3(d);ok=kitFrameFits3(d,true)}if(ok)out[K]=sp}if(!out.XL&&xl0)out.XL=xl0;return out}
 Object.assign(window,{kszSheet3,kszPick3Report,kszFill3,kszLevels3});
-/* ---- v3 ITEMS (owner 16/11 17:20Z, OD, overrides the corner-badge idea): ONE MASTER = the XL item (frame + picture + Xa xỉ square box),
-   SCALED UNIFORMLY to L and M (and the bag slot): the Xa xỉ box scales WITH the frame, so it sits in exactly the same place at every size and
-   covers the picture exactly as little as on XL. Only its CONTENT changes: word + number (XL, L), number only (M, slot), same box geometry.
-   The grade CHIP is NOT scaled (fixed readable size per size), centred on the bottom edge. Sizes: XL 150 (master) · L 104 · M 72 · slot = its cell. */
+/* ---- v3 ITEMS (owner 16/11 17:20Z, OD, overrides the corner-badge idea; grade chip moved ON the frame by owner 16/11 ~23:18Z s26, KIT §54.1b): the item sizes are the real kitItem sizes (XL 150 · L 104 · M 72 · bag slot = its cell);
+   the Xa xỉ box and the grade chip are written in container units of the frame, so both keep the same place relative to the frame at every size. Only the Xa xỉ CONTENT changes: word + number (XL, L), number only (M, slot). */
 KIT_SIZE.item3={master:150,size:{XL:150,L:104,M:72,slot:72},word:{XL:true,L:true,M:false,slot:false}};
 (function(){const st=document.createElement("style");st.id="k-size3-items";st.textContent=`
-.kszit3{position:relative;display:inline-block;vertical-align:bottom;line-height:0;width:calc(${150}px * var(--f));height:calc(${150}px * var(--f));margin-bottom:.8em}
-.kszit3>.ksz3m{position:absolute;left:0;top:0;width:150px;height:150px;transform:scale(var(--f));transform-origin:0 0}
-.kszit3>.ksz3m>.kitem{--isz:150px}
-.kszit3>.kszgc{position:absolute;left:50%;translate:-50% 50%;bottom:0;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none}
-.kszit3[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit3[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
-.kszit3 .kits,.kszit3 .kitn,.kszit3 .kitg{display:none}
-/* the XL master box (one geometry, scaled with the frame) */
-.kszit3[data-w="0"] .kitx>.kxw{display:none}.kszit3[data-w="0"] .kitx>b{font-size:19px}
+.kszit3{position:relative;display:inline-block;vertical-align:bottom;width:var(--w);margin-bottom:.8em}
+.kszit3 .kits,.kszit3 .kitn{display:none}
 .ksz3pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .ksz3pick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
 .ksz3pick>div>b{font:600 .74rem/1.2 var(--body)}.ksz3pick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .ksz3wear{display:flex;gap:6px;align-items:flex-start}.ksz3wear>div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.66rem;max-width:96px;text-align:center}`;document.head.appendChild(st)})();
-function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3,f=(I3.size[size]||72)/I3.master;
- const it=kitItem(Object.assign({},o,{name:"",size:"xl",frame:true}));
- return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--f:${f.toFixed(4)}"><span class="ksz3m">${it}</span>${o.empty?"":`<b class="kszgc" style="--kgc:${gcol}">${gname}</b>`}</span>`}
+function kszItem3(o,size,gname,gcol){const I3=KIT_SIZE.item3;
+ /* the REAL kitItem at the real size (XL 150 / L 104 / M 72 / bag slot): frame, Xa xỉ box and the grade chip ON the frame (KIT §54.1b) are the kit's own, scaled in container units; no transform copy, no sample-only chip */
+ const it=kitItem(Object.assign({},o,{name:"",gname,size:{XL:"xl",L:"lg",M:"md",slot:"slot"}[size]||"md",frame:true}));
+ return `<span class="kszit3" data-s="${size}" data-w="${I3.word[size]?1:0}" style="--w:${I3.size[size]||72}px">${it}</span>`}
 function kszItemTile3(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}
  return kszItem3({src:I.src,grade:I.grade,lux:lux||0},size,I.gname||G.n,G.c)}
 function kszItemDetail3(k){return kszItemDetail(k).replace(/^<div class="kszidc">/,'<div class="kszidc ksz3card">').replace(/<span class="kszit" data-s="M">[\s\S]*?<\/b><\/span>/,()=>kszItemTile3(k,"M"))}
 function kszWearRow3(p){try{return `<div class="ksz3wear">${wdSlots(p).map(x=>{const G=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))];return `<div>${kszItem3({src:x.empty?"":kitItemSrc(x.k,x.icon),grade:x.grade,empty:x.empty},"M",x.gradeName||G.n,G.c)}<span>${x.name}</span></div>`}).join("")}</div>`}catch(e){return""}}
 function kszItemsSheet3(){const ks=["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).filter(k=>{try{return kitItemInfo(k)}catch(e){return false}});
- let h=`<h2>Items · ONE XL master scaled to L / M / slot (Xa xỉ box scales with the frame) · sizes XL / L / M + bag slot</h2>`;
- h+=`<h3>Item sizes · ONE master (XL) scaled down to L / M / slot: frame, picture and Xa xỉ box keep the same proportions (L / XL word + number, M / slot number only) · grade chip unscaled, centred on the bottom edge · S 52 dropped</h3><div class="kszrow" style="align-items:flex-end;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">${s==="slot"?"bag slot (72 here; fills its cell)":s}</div>${kszItemTile3(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
+ let h=`<h2>Items · the real kitItem at XL / L / M / bag slot (Xa xỉ box + grade chip ON the frame, both scale with it)</h2>`;
+ h+=`<h3>Item sizes · frame, picture, Xa xỉ box (L / XL word + number, M / slot number only) and the grade chip ON the bottom edge keep the same proportions at every size · S 52 dropped</h3><div class="kszrow" style="align-items:flex-end;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">${s==="slot"?"bag slot (72 here; fills its cell)":s}</div>${kszItemTile3(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
  const ng=Object.keys(IT).find(k=>{try{return kitItemInfo(k).grade===4}catch(e){return false}});if(ng)h+=`<div class="kszrow" style="align-items:flex-end;margin-top:8px;gap:22px">${["XL","L","M","slot"].map(s=>`<div><div class="kszlab">Ngự · ${s}</div>${kszItemTile3(ng,s)}</div>`).join("")}</div>`;
  h+=`<h3>6.2 detail card · the same items as sheet 8 (Áo gấm thêu hải đường: the robe is no longer covered)</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:1120px">${ks.map(kszItemDetail3).join("")}</div>`;
  const pk=Object.keys(IT).filter(k=>!IT[k].story&&IT[k].sl).slice(0,6);
@@ -45817,7 +45811,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="713a699d5852";window.CTM_BUILD=BUILD;
+const BUILD="340321296257";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
