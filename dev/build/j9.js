@@ -109,11 +109,12 @@ function walkWhy(tc){const left=Math.max(0,4-used);return left<=0?"hết khắc"
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(window.COOPW&&COOPW.on)return null; /* co-op world (jcoopworld: window.COOPW; the global CW is a face-key helper) */
- const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,4-used);if(tc<=left)return null;
- let a={ok:true};if(typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
- return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}
-function walkSpillGo(k){const P=walkSpill(k);if(!P||!P.ok||Q.length)return;window.__walkSpill={k,from:S.place,rest:P.rest,b:P.b,tries:0};
+function walkSpill(k,o){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null; /* co-op too (time-spill sweep 16/11): her buổi ends with `bend`, the walk finishes when the room turns (walkSpillTick waits for it) */
+ const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,4-used),pre=(o&&o.pre)||0;if(pre+tc<=left)return null;
+ let a={ok:true};if(!(o&&o.pass)&&typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
+ const now=Math.max(0,left-pre);return{k,tc,now,rest:tc-now,b:b+1,ok:!!a.ok,why:a.why||""}}
+/* o.pass: she was let in this buổi (asked / sneaked / led in): the pass holds when she arrives next buổi. o.pre: khắc already spent here first */
+function walkSpillGo(k,o){const P=walkSpill(k,o);if(!P||!P.ok||Q.length)return;window.__walkSpill={k,from:S.place,rest:P.rest,b:P.b,tries:0,pass:!!(o&&o.pass),wk:wkKey()};
  spend(P.now);nextBuoi();walkSpillTick()}
 /* ONE "go there" rule for every button that walks her to a place (map, list, person cards, generic data-go) — owner-bug 16/11 18:30Z
    "chỗ nào cũng khóa hết" (review/dudo-lock): a walk longer than the khắc left is never a lock while walk spill can take her there.
@@ -125,8 +126,10 @@ function walkGo(k){if(!S||S.dead||Q.length)return;if(k==="home"||k===S.place||S.
 function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){window.__walkSpill=null;return}
  const md=document.getElementById("modal");if(Q.length||(md&&!md.hidden)||S.mg){setTimeout(walkSpillTick,300);return}
  const b=S.buoi||0;
- if(b===W.b-1&&S.place===W.from&&W.tries<3){W.tries++;nextBuoi();setTimeout(walkSpillTick,300);return} /* the buổi did not turn yet (an event card came first) */
+ const coop=!!(window.COOPW&&COOPW.on);if(coop&&W.wk&&W.wk!==wkKey()){window.__walkSpill=null;return}
+ if(b===W.b-1&&S.place===W.from&&(W.tries<3||coop)){W.tries++;if(W.tries<=3)nextBuoi();setTimeout(walkSpillTick,coop?600:300);return} /* the buổi did not turn yet (an event card came first; co-op: the friend has not ended the buổi yet) */
  if(b!==W.b||S.place!==W.from){window.__walkSpill=null;return}
+ if(W.pass&&typeof accGrant==="function")accGrant(S,W.k);
  goTo(W.k);if(S.place===W.k)window.__walkSpill=null;
  /* review/dudo-lock: the place shut while she walked (the rule read the new buổi before NPCs moved, e.g. a maid's mistress left): never a
     silent stop at home — the place card says why, the walk spent is not refunded (she did walk) */

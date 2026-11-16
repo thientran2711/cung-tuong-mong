@@ -3,6 +3,7 @@
 # usage: bash dev/tools/quickcheck.sh [sha|ref] [--net] [--cpu N] [--runs N] [--inject-render-ms N (self-test)]     (default: HEAD of the current worktree)
 #   1. the sha must hold its OWN build: dev/site/build_site.sh is run and index.html must come out the same (only the build line
 #      window.CTM_BI may differ, it depends on what is live right now) -> else FAIL "not built"
+#   1b. node dev/test/time-spill-guard.js: no buổi-only khắc gate (static + runtime, owner OD L852/L886)
 #   2. node dev/tools/quickcheck.js: open (Fold) · old save from the LIVE build loads and plays a buổi (Fold) · perf smoke vs the live build (iPad)
 # Live build = origin/main (env CTM_LIVE_REF). When the sha IS live main, the build before it is used (previous live/* tag, else the
 # previous commit that changed index.html). Nothing is pushed or committed; generated files are put back as they were.
@@ -44,6 +45,9 @@ if ! (cd "$WT" && bash dev/site/build_site.sh > "$OUT/build.log" 2>&1); then tai
 BUILD_S=$(( $(date +%s)-TB ))
 NOTBUILT=""
 if ! cmp -s <(git -C "$WT" show "$SHA:index.html" | norm) <(norm < "$WT/index.html"); then NOTBUILT=1; fi
+# 1b. TIME-SPILL GUARD (owner OD L852/L886, 16/11 21:42Z): no act blocked by THIS buổi's khắc while the day has them (static scan + runtime)
+if ! TSG=$(cd "$WT" && timeout 300 node "$KIT/dev/test/time-spill-guard.js" "$WT" 2>&1); then echo "$TSG" | grep -E '^FAIL' | head -8; [ -z "$DIRTY" ] && git -C "$WT" checkout -q -- index.html sw.js assets.json 2>/dev/null; echo "QUICKCHECK FAIL · time-spill guard: $(echo "$TSG" | tail -1)"; exit 1; fi
+echo "$TSG" | tail -1
 # 2. browser checks on the build
 node "$KIT/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | tee "$OUT/run.log"; RC=${PIPESTATUS[0]}
 # put the generated files back as committed (unless they had local edits before)

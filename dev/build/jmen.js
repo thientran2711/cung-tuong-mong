@@ -179,7 +179,7 @@ function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img
 function menCard(m,v,y,heard){try{k61Know(m,"",true,1);if(v)k61Know(v,"",true,1)}catch(e){}const d=mkP("menEnc",{m:m.id,v:v?v.id:null,k:y.k,r:y.r,p:y.p||0,why:y.why||null,lv:y.likeV!=null?y.likeV:null,hv:y.hv!=null?y.hv:null,h:heard?1:0});if(!d)return;
  Q.push({t:heard?"Nghe lén sau hòn giả sơn":"Nam nhân nơi cấm địa",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",pid:d.pid,pp:d.pp});if(!window.__bot)showModal()}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid==="menEnc"){const d=mkP("menEnc",q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows"}}})}catch(e){}return out}})();
-function menKh(n){const c=Math.max(0,Math.min(n,4-used));if(c)spend(c)}
+function menKh(n){if(typeof j76spills==='function'&&j76spills(n)){spend(n);return}const c=Math.max(0,Math.min(n,4-used));if(c)spend(c)} /* runs on into the next buổi like every act (time-spill sweep 16/11) */
 
 /* ---------- 4. the shared outcomes (the player and NPC consorts use the same ones) ---------- */
 /* by reports m (and the companion c) at the scene (formal=0) or to the Cung Chính ti (formal=1) */
