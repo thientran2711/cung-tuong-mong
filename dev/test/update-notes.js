@@ -1,6 +1,6 @@
 /* Update notes (D10): pop-up once per release, Settings "Thông tin cập nhật", never blocks boot / save load / co-op.
    usage: python3 dev/build/assemble.py && node dev/test/update-notes.js [WxH ...]   (default: the 5 viewports + 390x844) */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/pw-roulette');const {serve,BASE}=require('./coop-serve.js');
 const VPS=(process.argv.slice(2).length?process.argv.slice(2):['755x1000','1000x755','1180x820','1366x1024','844x390','390x844']).map(s=>s.split('x').map(Number));
 const OUTD=require('path').resolve(__dirname,'../shots/update-notes');require('fs').mkdirSync(OUTD,{recursive:true});let bad=0;
 const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
