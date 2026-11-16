@@ -1,32 +1,24 @@
-# map-frame-art — SAMPLE READY, round 2 (restrained frames)
-Round 1 (carved lacquer / silk+dragons / cloisonné) REJECTED by the owner 16/11: "xấu quá, sến" (too thick, saturated, busy). Round-1 samples replaced by these files.
-New brief (Foreman C): thin band (~half), muted colours that sit with the map parchment + kit cream/red-brown UI, no figurative ornament.
-Base origin/main. Nothing on main, no PR, no CDN upload yet.
+# map-frame-art — SAMPLE READY, round 3 (irregular parchment-leather sheet, no rectangular frame)
+Rounds 1-2 (rectangular borders: ornate, then thin/muted) REJECTED by the owner. Her words 16/11: the map should look like ONE sheet of old leather/parchment (giấy da), slightly torn or cut in a nice way, "đâu mà vuông vức như vậy". So: no frame at all, the map's own outline becomes an irregular sheet; the kit-cream page shows around it. Base origin/main; nothing on main, no PR, no CDN upload yet.
 
-## 3 new styles (Magnific gpt-2-6, folder ba4aecfe…, flat #00FF00 centre keyed to transparent, despilled, every image looked at)
-- (a) thin dark rosewood rim, hairline gold inlay line inside, tiny plain gold L corner brackets
-- (b) narrow museum-mount silk band, soft ink-grey/ivory with woven texture, hairline gold inner edge, plain corners
-- (c) aged tea-stained paper edge, faint ink line, faint pale-brown window-lattice corner
-Per style 2 paintings (2:1 for iPad 1180x820, 1:1 for Fold 755x1000), resized to ~device size @2 so almost no edge stretch.
+## 3 variants (Magnific gpt-2-6, folder ba4aecfe…, every image looked at)
+- (a) lightly torn edges: ragged fibrous torn rim, a few nicks, one small tear, darker aged rim; window edge also hand-torn
+- (b) deckled hand-cut edge: soft wavy feathered outline like handmade paper
+- (c) elegantly cut shape: gently curved sides, concave scalloped cartouche corners, soft worn rounded corners
+Two paintings per variant (2:1 iPad, 1:1 Fold). Painted on magenta (outside) + green (map window) chroma, both keyed out, edge fringe despilled; ONE small tint pass (saturation x0.52) so the leather sits with the map paper and the kit cream UI.
 
-## Mock method (real CSS, live Dư đồ)
-Built game from origin/main, screenshots 1180x820@2 and 755x1000@2 (Playwright, CDN map art loaded). `.kleather` leather/rolls/stitch hidden, clip-path off, painting padded under the frame; frame = `.kleather::before{border:Bpx solid transparent;border-image:url(frame) S/stretch;border-image-width:S/2px}`. Spec in frames-spec.json: px size, slice S (final px), band B (@2 px).
-
-| file | px | slice S | band @2 (css) | KB |
-|---|---|---|---|---|
-| mapframe-a-ipad | 2324x1162 | 79 | 33 (16.5) | 37 |
-| mapframe-b-ipad | 2324x1162 | 73 | 33 (16.5) | 56 |
-| mapframe-c-ipad | 2324x1162 | 79 | 35 (17.5) | 56 |
-| mapframe-a-fold | 1500x1500 | 81 | 33 (16.5) | 45 |
-| mapframe-b-fold | 1500x1500 | 110 | 47 (23.5) | 120 |
-| mapframe-c-fold | 1500x1500 | 88 | 40 (20) | 72 |
-
-Band is ~1/3 of round 1 (50/64 css) and the map gets that room back. Files are tiny (37-120 KB), well under the budget.
+## How it is built (real CSS on the live Dư đồ, 1180x820@2 and 755x1000@2; map art from CDN)
+Per variant and device two webp, sized to the `.kleather` box @2 (iPad 2324x1242, Fold 1490x1538):
+- `mapsheet-<v>-<dev>.webp` = the sheet overlay (parchment ring, outside AND map window transparent)
+- `mapsheet-<v>-<dev>-mask.webp` = silhouette alpha (everything inside the outer irregular outline)
+CSS recipe (replaces kitLeather's clip-path/gradients/rolls/stitch):
+`.kleather{padding:0;background:none;clip-path:none;-webkit-mask:url(mask) 0 0/100% 100% no-repeat;mask:…}` ; `.kleather::before{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;background:url(overlay) 0 0/100% 100% no-repeat}` ; `.mapsc` fills the box (height 100%, no radius/shadow); `.maptools` inset about 13% top / 7% sides (Fold 11%) / 8% bottom so buttons stay inside the window; shadow = `filter:drop-shadow(0 3px 5px #3a1e0a66)` on `.panel:has(>.kleather)`. The map stays pannable under the overlay (pointer-events none). Whole-image stretch only (aspect 1.87 vs 2:1 and 0.97 vs 1:1: invisible).
+Sizes (KB overlay / mask): see frames-spec.json (about 160-250 / 20-40); window_pct = hole bbox in % of the image.
 
 ## Self-check vs owner art rules
-Painted, never code-drawn: yes (CSS only places the painting). Sharp at @2: yes (about 1:1 pixels). Small files: yes. Static, no perf cost. Hairline gold edge held crisp in the mock; no green fringe seen.
-Honest notes for the owner: (a) reads very dark maroon-brown on the cream UI; (c) paper is a warmer yellow than the map parchment; (b) is the quietest. A tint pass is possible on the chosen one.
+Painted, never code-drawn: yes (CSS only layers the painting). Sharp @2: overlay is at device size. Small files: overlay 160-250 KB (a-ipad ~247 KB is the largest), masks <40 KB. Static image, no perf cost. Edge fringe: magenta/green despilled, checked on the real page (pink halo found on (b) in the first pass and fixed).
+Honest notes: the map tools row (Ra vào / Danh sách) on Fold already overlaps a hall label at the top in current main (not caused by the sheet); on (c) Fold the cut corner needs the 11% side inset. Labels near the window edge can be clipped by the sheet like any panning map. Window shape stays slightly wavy in (a)/(b), cut-corner in (c).
 Files: sample-{a,b,c}-{ipad,fold}.jpg + sheet-map-frames.jpg in `map-frame-art/`.
 
 ## Next (after owner choice)
-Upload the chosen style's 2 webp to the CDN img/kit/mapframe-<style>-<ipad|fold>.webp, kit-keeper spec, KIT READY-for-keeper.
+Upload the chosen variant's 4 webp (2 overlays + 2 masks) to the CDN as img/kit/mapsheet-<v>-<ipad|fold>[-mask].webp, kit-keeper spec (above), KIT READY-for-keeper.

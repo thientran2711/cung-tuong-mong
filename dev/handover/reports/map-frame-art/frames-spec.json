@@ -1,56 +1,86 @@
 {
- "mapframe-a-ipad.webp": {
+ "mapsheet-a-ipad": {
   "px": [
    2324,
-   1162
+   1242
   ],
-  "slice": 79,
-  "band": 33,
-  "bytes": 36766
+  "overlay_kb": 244,
+  "mask_kb": 37,
+  "window_pct": [
+   3.4,
+   8.3,
+   95.8,
+   93.3
+  ]
  },
- "mapframe-b-ipad.webp": {
+ "mapsheet-b-ipad": {
   "px": [
    2324,
-   1162
+   1242
   ],
-  "slice": 73,
-  "band": 33,
-  "bytes": 56280
+  "overlay_kb": 170,
+  "mask_kb": 34,
+  "window_pct": [
+   2.6,
+   6.3,
+   97.2,
+   93.8
+  ]
  },
- "mapframe-c-ipad.webp": {
+ "mapsheet-c-ipad": {
   "px": [
    2324,
-   1162
+   1242
   ],
-  "slice": 79,
-  "band": 35,
-  "bytes": 55630
+  "overlay_kb": 173,
+  "mask_kb": 28,
+  "window_pct": [
+   3.5,
+   10.0,
+   96.2,
+   89.5
+  ]
  },
- "mapframe-a-fold.webp": {
+ "mapsheet-a-fold": {
   "px": [
-   1500,
-   1500
+   1490,
+   1538
   ],
-  "slice": 81,
-  "band": 33,
-  "bytes": 45060
+  "overlay_kb": 200,
+  "mask_kb": 30,
+  "window_pct": [
+   4.2,
+   7.1,
+   95.3,
+   94.0
+  ]
  },
- "mapframe-b-fold.webp": {
+ "mapsheet-b-fold": {
   "px": [
-   1500,
-   1500
+   1490,
+   1538
   ],
-  "slice": 110,
-  "band": 47,
-  "bytes": 120276
+  "overlay_kb": 156,
+  "mask_kb": 28,
+  "window_pct": [
+   4.3,
+   6.9,
+   93.8,
+   94.0
+  ]
  },
- "mapframe-c-fold.webp": {
+ "mapsheet-c-fold": {
   "px": [
-   1500,
-   1500
+   1490,
+   1538
   ],
-  "slice": 88,
-  "band": 40,
-  "bytes": 71960
+  "overlay_kb": 159,
+  "mask_kb": 19,
+  "window_pct": [
+   6.7,
+   9.4,
+   93.3,
+   90.6
+  ]
  }
 }
