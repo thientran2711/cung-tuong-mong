@@ -165,7 +165,7 @@
 | skin-light | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku | WAITING owner (test 477457cc; v1 b6147b82 NOT to merge) | 16/11 11:57Z |
 | cardflip-glow2: owner bug whole-frame glow in thị tẩm card flip (not a running ring light; whole group) | review/cardflip-glow2 | main s15 (fast lane worker) | worker cardflip-glow2 (sonnet) | RUNNING | 16/11 12:10Z |
 | promo-reveal-fix: LIVE regression rank-up chest + servant reveal no longer show (bisect + whole-group fix) | review/promo-reveal-fix | main s16 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus, ex promo-skip reviewer) | RUNNING | 16/11 12:17Z |
-| emperor-visit review (opus) | review/emperor-visit-r1 | D | session_01DgYSWoamKdMf5ewt8WHax6 | RUNNING | 16/11 12:18Z |
+| emperor-visit review (opus) | review/emperor-visit-r1 | D | session_01DgYSWoamKdMf5ewt8WHax6 | DONE (PASS b2e34df7) | 16/11 12:18Z |
 | cardflip-glow2 REVIEW (sonnet; owner-bug fast lane) | review/cardflip-glow2-r1 | main s16 | session_01UV1Szk2fgA2KyKg3zrmLgn | RUNNING | 16/11 12:19Z |
 | kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | FAIL 1 BLOCKING (Chờ value) @3dba018d | 16/11 13:46Z |
 | weather-fx2 | review/weather-fx2 | main s16 | session_01UV1SzhWSw7EETVzp3xX5hi→worker weather-fx2 (this session) | RUNNING | 16/11 12:26Z |
@@ -232,3 +232,4 @@
 | square-icons: round icon buttons (room left column + every round icon button) → square kit button (OD 15:05Z (1)) | review/square-icons | main s18 | session_01UV1SzgoYoth94RALW92Jg4 | RUNNING | 16/11 15:08Z |
 | anim-pace: buổi transition full-screen in landscape, clearer, slower + whole-game animation pace audit + season/festival transition variants sample (OD 15:05Z (5)(6)) | review/anim-pace | main s18 | session_01UV1SzjsxJomT3ov3kXyta3 | RUNNING | 16/11 15:08Z |
 | lag-play (opus): play-time + co-op lag audit, fix top causes, play-time perf budget test (OD 15:05Z (4), first priority) | review/lag-play | main s18 | session_01UV1SzhF1ExMpqSUL9vigZu | RUNNING | 16/11 15:08Z |
+| ghenAll x1.5 shown≠applied family (emperor-visit-r1 follow-up) | review/ghen-shown | D | (opening) | RUNNING | 16/11 15:05Z |
