@@ -1,6 +1,6 @@
 # PROGRESS — review/cloud-save-r1 (reviewer: normal + security review of C44 Sổ mây)
 
-Base: review/cloud-save @38bf315 merged onto origin/main 0a31118 (assemble.py conflict: jcloud.js kept after jslots; site rebuilt).
+Base: review/cloud-save @38bf315 merged onto origin/main 0a31118, then c4e89f8 (assemble.py conflicts: jcloud.js kept after jslots; site rebuilt). After the 2nd merge: vault 48, cloud-save 45 OK, save-slots OK.
 
 ## Reviewer changes on -r1
 - Sync code 26 → 8 chars (owner design) with a persisted per-network miss guard in vault.js (works without `[[ratelimits]]`);
