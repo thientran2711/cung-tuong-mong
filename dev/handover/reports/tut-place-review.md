@@ -1,4 +1,4 @@
-# tut-place review (reviewer) - PASS review/tut-place @ c82e567c
+# tut-place review (reviewer) - PASS; READY sha 2e9615fb on review/tut-place-ready (= c82e567c + origin/main de239eca merged, site rebuilt, tour 755+1180 and podium re-run green)
 Contains current origin/main 0ce59361 (fast-forwardable). Changes vs main outside dev/test: dev/build/jtut.js place() only, rebuilt index.html + sw.js.
 Serial runs, cdn-overlay-serve, Playwright, no page errors:
 - tutorial tour,skip: 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2 all fails 0.
