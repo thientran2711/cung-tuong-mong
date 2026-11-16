@@ -83,7 +83,13 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  await shot(B,'03-unread');
  await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
  const bub=await B.p.evaluate(()=>{const x=document.querySelector('#kchatp .kcm.fr');return{t:x.querySelector('.kcm-x').textContent,html:x.querySelector('.kcm-x').children.length,n:x.querySelector('.kcm-h b').textContent,w:x.querySelector('.kcm-h span').textContent,xss:!!window.__xss,un:COOPCHAT.unread}});
- ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n===nA&&/tháng/.test(bub.w),'sender = her character name, game-style time',[bub.n,bub.w]);ok(bub.un===0,'opening marks it read');
+ ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n==='Hảo hữu'&&/tháng/.test(bub.w),'unmet friend: signature = the header chip label "Hảo hữu" (OD:L165), game-style time',[bub.n,bub.w]);
+ /* met friend (j61 stage 2): her real name, panel header too (reopen), kitRankNamePaint leaves it alone */
+ await B.p.evaluate(()=>{k61Know(COOPW.friend(),'test',true,2)});
+ await B.p.evaluate(s=>document.querySelector(s).click(),'#kchatp .kit-x');await until(B,()=>!document.getElementById('kchatp'));
+ await B.p.evaluate(s=>document.querySelector(s).click(),'#krail [data-rail="chat"]');await B.p.waitForSelector('#kchatp .kcm');await B.p.waitForTimeout(600);
+ const bubM=await B.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
+ ok(bubM.n===nA&&bubM.h.includes(nA),'met friend: signature + header = her real name',[bubM,nA]);await shot(B,'04b-open-friend-met');ok(bub.un===0,'opening marks it read');
  await shot(B,'04-open-friend');
  await B.p.fill('#kchat-in','Được thôi.');await B.p.keyboard.press('Enter');
  ok(await until(B,()=>COOPCHAT.msgs.length===2),'B sends with Enter');
