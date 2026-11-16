@@ -99,16 +99,17 @@ COOP.on("both",()=>{if(!LM)return;drop();PG="";try{T.hidden=true}catch(e){}const
 /* freeze overlay: kit panel markup (.modal.kpscene > .dlg.kpanel with kpHeader), above everything, no way around it but waiting or leaving */
 let FZ=null;
 const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang tự nối lại, không mất gì."],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
+ moved:["Cuộc chơi đã sang máy khác","Ngươi vừa vào phòng này từ một máy khác; cuộc chơi đi theo máy ấy, ở đây dừng lại. Muốn chơi tiếp ở máy này: Về màn đầu, Cùng hảo hữu, Trở lại phòng."],
  week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
  if(!FZ){FZ=document.createElement("div");FZ.id="coopfz";FZ.className="modal kpscene";FZ.setAttribute("role","alertdialog");document.body.appendChild(FZ)}
- FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Ám hiệu",esc(COOP.state.room||""),"t"],["Hảo hữu",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div>${why==="peer"?`<div class="kpnote" style="margin:4px 12px 0">Gửi lại đường dẫn cho hảo hữu: hảo hữu chạm vào là trở lại đúng chỗ cũ, không mất gì.</div>`:""}<div class="row" id="mrz">${why==="peer"?`<button class="kbtn" data-coop="fzcopy">Chép đường dẫn</button>`:""}<button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
+ FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Ám hiệu",esc(COOP.state.room||""),"t"],["Hảo hữu",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":COOP.state.status==="moved"?"đang ở máy khác":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div>${why==="peer"?`<div class="kpnote" style="margin:4px 12px 0">Gửi lại đường dẫn cho hảo hữu: hảo hữu chạm vào là trở lại đúng chỗ cũ, không mất gì.</div>`:""}<div class="row" id="mrz">${why==="peer"?`<button class="kbtn" data-coop="fzcopy">Chép đường dẫn</button>`:""}<button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
  const s=FZ.querySelector(".kpseal");if(s)s.remove()}
 document.addEventListener("click",e=>{const c=e.target.closest("#coopfz [data-coop]");if(c){e.stopPropagation();copy(link(COOP.state.room||CODE),c,"Đã chép đường dẫn");return}const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
 function check(){const s=COOP.state;if(!s.playing){fz(false);return}
  const x=COOP.other(),e=s.ended||{};
- if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
+ if(s.status==="moved")fz(true,"moved");else if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
 COOP.on("status",check);
 COOP.on("start",()=>{COOP.state.playing=true;COOP.live();check()});
 COOP.on("week",()=>setTimeout(check,0));
