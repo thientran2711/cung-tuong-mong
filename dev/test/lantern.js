@@ -1,0 +1,20 @@
+/* nw-lantern: plays the Thắp đèn game (kind doden). usage: node dev/test/lantern.js <url> <W>x<H>@<dpr> <outdir> ; env LV=0..5 (forces the player's level -> tier), BOT=oracle|skilled|random, N=trials, SHOTS=1 (screenshot at 2.5 / 9 / 16 s)
+   oracle = KG82.peek taps at once · skilled = oracle with 1.5–2.5 s per tap and 6 % wrong taps · random = random cell taps. Prints raw per trial + errors + overflow. */
+const {chromium}=require('playwright');const [,,BASE,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const LV=process.env.LV||'2',BOT=process.env.BOT||'oracle',N=+(process.env.N||1),SH=process.env.SHOTS;
+(async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});
+ const run=async idx=>{const ctx=await b.newContext({ignoreHTTPSErrors:true,viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+  await p.evaluate(()=>{SLOT=3;if(typeof kitRoulette==='function')kitRoulette=o=>{try{o&&o.done&&o.done()}catch(e){}};document.getElementById('title').hidden=true;try{start()}catch(e){}});
+  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.arts,null,{timeout:60000});
+  await p.evaluate(lv=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove());kg82LvFor=()=>+lv;KG82.noDemo=1;S.tai=62;render();
+   window.__res=null;startContest({art:'doden',title:'Hội',rivals:liveRivals(true).slice(0,3),prep:5,onDone:r=>window.__res=r||{none:1}})},LV);
+  await p.waitForTimeout(500);await p.evaluate(()=>{const g=document.getElementById('kg82go');if(g)g.click()});
+  await p.waitForFunction(()=>KG82.phase==='play',null,{timeout:20000});
+  await p.evaluate(([bot])=>{const pe=(el,x,y)=>{if(!el)return;['pointerdown','pointerup'].forEach(t=>el.dispatchEvent(new PointerEvent(t,{clientX:x,clientY:y,pointerType:'touch',pointerId:5,isPrimary:true,bubbles:true,cancelable:true})))};let nx=0;
+   const tick=()=>{if(KG82.phase==='play'){const now=performance.now();const cv=document.querySelector('.kg82cv');if(cv){const r=cv.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)cv.scrollIntoView({block:'center'})}if(now>nx){if(bot==='random'){const C=KG82.cells&&KG82.cells();if(C&&C.length){const c=C[Math.floor(Math.random()*C.length)];pe(document.elementFromPoint(c.x,c.y),c.x,c.y)}nx=now+600}
+     else{let pk=KG82.peek();if(pk&&pk.x!=null){if(bot==='skilled'&&Math.random()<.06){const C=KG82.cells();const c=C[Math.floor(Math.random()*C.length)];pk=c}pe(document.elementFromPoint(pk.x,pk.y),pk.x,pk.y);nx=now+(bot==='skilled'?1500+Math.random()*1000:120)}}}}setTimeout(tick,16)};tick()},[BOT]);
+  if(SH){let prev=0;for(const s of (process.env.SHOT_T||'2500,9000,16000').split(',').map(Number)){await p.waitForTimeout(s-prev);prev=s;try{await p.locator('#kg82').screenshot({path:`${OUT}/lamp-${SZ}-${LV}-${idx}-${s}.jpg`,type:'jpeg',quality:60,timeout:10000})}catch(e){}}}
+  const t1=Date.now();while(Date.now()-t1<(BOT==='random'?150000:100000)){if(await p.evaluate(()=>KG82.phase!=='play'))break;await p.waitForTimeout(400)}
+  const info=await p.evaluate(()=>({ph:KG82.phase,ox:document.documentElement.scrollWidth>innerWidth,raw:KG82.last&&KG82.last.raw}));info.sec=Math.round((Date.now()-t1)/1000);info.err=errs;await ctx.close();return info};
+ const out=[];for(let i=0;i<N;i+=4){const batch=await Promise.all(Array.from({length:Math.min(4,N-i)},(_,k)=>run(i+k)));out.push(...batch)}
+ const raws=out.map(o=>o.raw);console.log(JSON.stringify({size:SZ,LV,BOT,n:N,raws,mean:+(raws.reduce((a,x)=>a+(x||0),0)/N).toFixed(2),ge9:raws.filter(x=>x>=9).length,eq10:raws.filter(x=>x===10).length,overflow:out.some(o=>o.ox),errors:[...new Set(out.flatMap(o=>o.err))],notDone:out.filter(o=>o.ph==='play').length}));await b.close()})();

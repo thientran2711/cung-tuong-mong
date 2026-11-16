@@ -26,7 +26,7 @@ function modalStep(sens){
       let pickI;
       if(!sens)pickI=rpick(okIdx)[1];
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
-        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
+        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
       note("dilemma");chooseM(pickI);return true}
     closeModal();return true}
   return false}
@@ -40,16 +40,18 @@ function fire(f){f()}
 function randomStep(){
   const cand=[];
   deck.forEach((a,i)=>{if(cardOK(a))cand.push(()=>{note("card",a.n);act(i)})});
+  if(!window.__hsOnly){/* danh-balance: Hành-sự-only random player */
   places().forEach(p=>{if(placeOK(p))cand.push(()=>{note("go");goTo(p.k)})});
   rivals.forEach((v,i)=>{if(v.alive&&!v.out&&can(2))rvBtns(i).forEach(k=>cand.push(()=>{note("scheme_"+k);doAct(i,k)}))});
   lessonCands().forEach(a=>cand.push(()=>{note("lesson");lesson(a.k)}));
   if(S.bac>=60&&!S.master)cand.push(()=>{note("master");hireMaster()});
   talkCands().forEach(t=>cand.push(()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}));
+  }
   if(!cand.length||window.__turnActs>=40){window.__buoi++;if(!cand.length&&used<=1)window.__idle++;window.__turnActs=0;nextBuoi();return}
   window.__turnActs++;{const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used;if(window.__rtk!==tk){window.__rtk=tk;window.__rn=0}if(++window.__rn>30){window.__rn=0;window.__buoi++;nextBuoi();return}}rpick(cand)()}
 // ---- SENSIBLE
 function needs(){const nx=S.rank<7?RANKS[S.rank+1]:{s:70,d:70};return{ws:1+Math.max(0,nx.s-S.sung)/12,wd:1+Math.max(0,nx.d-S.danh)/8}}
-const BAD=/Mật báo chuyện|Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc/i;
+const BAD=/Mật báo chuyện|Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc|Đẩy con nàng xuống hồ|Đẩy nàng xuống hồ sen|Đẩy xuống hồ sen|Ngáng chân/i;
 function valW(w,N){w=w||{};return (w.nt||0)*.6+(w.tin||0)*.25+(w.sung?sg(w.sung):0)*N.ws+(w.danh||0)*N.wd+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3+(w.tai||0)*.2+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)+(w.suc||0)*(S.suc<50?.3:.05)}
 function costW(c){c=c||{};return (c.suc||0)*(S.suc<50?.35:.08)+(c.bac||0)*(S.bac<60?.09:.035)+(c.duc?c.duc*3:0)+(c.sung||0)+(c.danh||0)}
 function scoreAct(a,N,cost){
@@ -61,7 +63,7 @@ function scoreAct(a,N,cost){
   let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
   if(a.x){if(/chứng cứ/.test(a.x))v+=1.5;if(/Hoàng thượng thương/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=(S.preg?0:1.5);if(/thị tẩm/.test(a.x))v+=3*o;if(/nguy cơ sảy thai/.test(a.x))v+=3}
   try{const SA=STORY[S.origin.k];if(SA&&SA.acts&&SA.acts().some(x=>x.n===a.n))v+=6}catch(e){}
-  if(a.n==="Báo tin có thai")v+=50;
+  if(a.n==="Báo tin có thai")v+=50;if(a.toil)v+=6;/* balance-pass: a sensible player makes up each morning (jtoil: else "Thái hậu chê dung nhan", Đức/Danh) */
   if(/An thai|Tự bào chế thuốc an thai/.test(a.n)&&!S.anthai)v+=40;
   if(a.n==="Nghỉ ngơi dưỡng sức"&&S.suc<35)v+=60;
   if(a.n==="Tranh sủng")v+=2;
@@ -85,15 +87,16 @@ function sensibleStep(){
   if(window.__aff)for(const x of (S.staff||[]).concat(S.maid?[S.maid]:[]))if((x.loyal||0)>=60&&tinOf(x)<60)x.tin=60;
   const N=needs();
   // accuse
-  if(can(2)){const accs=[];rivals.forEach((v,i)=>{if(v.alive&&!v.out&&rvBtns(i).includes("accuse")){const o=ACT.accuse.o?ACT.accuse.o(S,v):70;accs.push({v,i,o})}});
+  const HS=!!window.__hsOnly;/* danh-balance: Hành-sự-only player (indanh.js) */
+  if(!HS&&can(2)){const accs=[];rivals.forEach((v,i)=>{if(v.alive&&!v.out&&rvBtns(i).includes("accuse")){const o=ACT.accuse.o?ACT.accuse.o(S,v):70;accs.push({v,i,o})}});
     accs.sort((a,b)=>(b.v.queen-a.v.queen)||b.v.rank-a.v.rank);
     if(accs.length&&accs[0].o>=60){note("accuse");doAct(accs[0].i,"accuse");return}}
   const opts=[];
-  if(qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
+  if(!HS&&qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
-  talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
+  if(!HS)talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
-  if(L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
+  if(!HS&&L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
   const sea=SEASON[S.month-1];const W=S.where||{};
   const pls=[];
   const place=(k,s)=>{const p=places().find(x=>x.k===k);if(p&&placeOK(p))pls.push({k,s:s/Math.sqrt(travel(S.place,k)||1)})};
@@ -105,7 +108,7 @@ function sensibleStep(){
   if(!S.preg&&S.sung<35)place("ksp",.8);
   if(S.arts.y<2)place("tyv",.6);
   if(window.__aff)for(const id in (S.menW||{})){place(S.menW[id],2.5)}
-  pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
+  if(!HS)pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
   const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
   const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
   if(op2.length&&op2[0].s>0.35){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}

@@ -349,7 +349,7 @@ function maidMonthP(p){if(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pic
  const a=pool.slice().sort((x,y)=>rel(x,p)-rel(y,p))[0];const me=p===S;let ev;
  if(p.schemes>0){ap(p,{danh:-10});evA(a,p,2);relAdd(a,p,-10);ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, đem chuyện ngươi bày mưu hại người kể ra ngoài.</span> Danh -10. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ. `;punish(p,"bị cung nữ tố giác mưu kế",2)}
  else{const g=Math.min(30,p.bac);ap(p,{bac:-g});ap(a,{bac:g});ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, lấy trộm hộp trang sức của ngươi rồi bỏ trốn.</span> Bạc -30. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, trộm bạc bỏ trốn. `}
- if(me){S.maid=newMaid(pick(MAIDS.filter(x=>x!==m.name)),40);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (lòng 40). `}
+ if(me){S.maid=newMaid(pick(MAIDS.filter(x=>x!==m.name)),BAL.cmaid.newLoy);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (thiện cảm ${S.maid.loyal}). `}
  p.maid={name:pick(MAIDS),loyal:40};return S.mat>=3?ev:""}
 function maidMonth(){return maidMonthP(S)}
 function kidsMonth(){let ev="";const moms=[[S,S.kids]].concat(rivals.map(v=>[v,v.kids]));

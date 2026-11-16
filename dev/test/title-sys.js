@@ -71,7 +71,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   two('w_kim',1,'phuc',()=>lotB(S,'Con cái'));if(B.phuc[1]!==B.phuc[0])F.push('luck touched conception');
   S.preg=null;S.lastBirth=null;two('kids',3,'thai',()=>conceiveCh(S));if(B.thai[0]>0&&B.thai[1]-B.thai[0]!==BAL.dh.B.thai.v[1])F.push('thai '+B.thai);
   if(dhObj(S,'kids')&&(BAL.dh.T.kids.ch||[]).includes('thai')&&dhB(S,'thai'))F.push('thai at step 1');
-  two('a_doc',50,'nghe',()=>{const k='thi',a=S.artp[k];Math.random=()=>0;try{addArt(k,1)}finally{Math.random=()=>0.5}return S.artp[k]-a});if(!(B.nghe[1]>B.nghe[0]))F.push('nghe');
+  two('a_doc',50,'nghe',()=>{const k='thi';S.arts[k]=1;S.artp[k]=0;const tot=()=>S.arts[k]*1000+S.artp[k];const a=tot();Math.random=()=>0;try{addArt(k,1)}finally{Math.random=()=>0.5}return tot()-a});if(!(B.nghe[1]>B.nghe[0]))F.push('nghe');
   two('w_tho',1,'thi',()=>SC7.tho.f(S));if(B.thi[1]-B.thi[0]!==BAL.dh.B.thi.v[0])F.push('thi');
   two('a_nhan',5,'suc',()=>j76sleep(S));if(B.suc[1]-B.suc[0]!==BAL.dh.B.suc.v[0])F.push('suc');
   {const r0=window.roll;const rec=[];window.roll=o=>{rec.push(o);return false};try{two('m_kinh',1,'don',()=>{rec.length=0;try{ACT.rumor.f(v0,S)}catch(e){}return rec.join(',')})}finally{window.roll=r0}

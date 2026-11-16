@@ -73,7 +73,7 @@ function bTxt(t,v){if(!v)return "";if(FLAT.includes(t))return `${(typeof NAMES==
 function pickOf(p,key,i){const L=choices(key,i);const e=((p&&p.dh)||{})[key]||{};return L.includes(e.pick)?e.pick:(L[0]||null)}
 function fxOf(key,i,p){const t=pickOf(p,key,i);return t?[t,bv(t,i)]:null}
 function fxTxt(key,i,p){const f=fxOf(key,i,p);return f?`${bTxt(f[0],f[1])} (khi đeo)`:""}
-function chTxt(key,i){const L=choices(key,i);return L.length>1?`chọn một: ${L.map(bLab).join(" · ")}`:""}
+function chTxt(key,i){const L=choices(key,i);if(L.length<2)return "";const N=L.map(bLab);return `chọn một: ${N.join(" hay ")}`}
 /* the title object handed to the kit (KIT §82: {id,name,tier,when,how,fx}) */
 function dhObj(p,key){const d=DH[key],e=p&&(p.dh||{})[key];if(!d||!e||e.i==null||e.i<0)return null;const i=e.i,N=need(key);
  const nx=N[i+1]!=null?` · đủ ${N[i+1]} ${d.u||"lần"}: lên bậc ${KIT_TIER_NAME[Math.min(7,tierOf(key,i+1))]}`:"";
@@ -165,7 +165,7 @@ function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=
  const cur=wornKey(S)===key?pickOf(S,key,e.i):null;
  const opts=L.map(t=>({n:bLab(t)+(t===cur?" · đang lấy":""),fx:{},x:bTxt(t,bv(t,e.i)),go:()=>{e.pick=t;if(wornKey(S)===key)dhApplyFx(S);else dhWear(S,key,true);
   if(typeof log==="function")log(`Ngươi đeo danh hiệu «${o.name}»: ${bTxt(t,bv(t,e.i))}.`);if(back)dhPanel()}}));
- opts.push({n:back?"Quay lại":"Để sau",fx:{},go:()=>{if(back)dhPanel()}});
+ opts.push({n:back?"Quay lại":"Để sau",fx:{},x:back?"về sổ danh hiệu":"cất vào sổ danh hiệu",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
 window.dhPick=dhPick;
