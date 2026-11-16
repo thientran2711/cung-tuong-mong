@@ -14,7 +14,7 @@ function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return
 /* KIT 48.1: the rank-title colour of a title (kitRankTone lives in jk4, later in the build; until then the CSS falls back to --rc) */
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
- const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
+ const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
 function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
@@ -466,7 +466,7 @@ KP_SEAL.week="TUẦN";
  const G=sum.groups.filter(g=>g[1].length);for(const [h,L] of G)secs.push(`<div class="kpsec"><h4 class="kpst">${h}</h4>${kitFacts(L,{group:false})}</div>`);
  if(!G.length&&!me.length)secs.push(`<div class="kpsec">${kitFacts([{text:"Một tuần yên ả.",kind:"world",auto:false}])}</div>`);
  w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",kitDate(S.month,S.year,S.tuan),`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
- w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:1400);
+ w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:kitPace(1400));
  const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest("#dawn-go"))close()};/* KIT 81 (owner OD:L1261): only the button closes the week-change scene */const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
 (function(){const st=document.createElement("style");st.id="kp-dawn-css";st.textContent=`
 .dawn .dbox.kpanel{position:relative;z-index:1;width:var(--kpw);max-width:var(--kpw);height:var(--kph);max-height:var(--kph);overflow:auto;background:var(--k-card);border:1px solid var(--gold);border-radius:10px;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #000a;padding:0;text-align:left;color:var(--ink)}

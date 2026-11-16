@@ -176,7 +176,7 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true,named:typeof S!=="undefined"&&q===S}):(q.name||"")/* owner 15/11: rank + name always together — her own figure too (was "Ngươi") */}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" data-sil="${typeof kitSilFig==="function"?kitSilFig(q):""}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitStageFigErr(this)">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ const dh=o.plate&&typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(q)):"";return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" data-sil="${typeof kitSilFig==="function"?kitSilFig(q):""}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitStageFigErr(this)">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${dh}${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 /* D50: a figure file that fails to load swaps to the kit silhouette once (never an empty column); only a failing silhouette hides the figure */
 function kitStageFigErr(im){try{const sil=im.dataset.sil;if(sil&&(im.getAttribute("src")||"").indexOf("unknown-fig")<0){im.removeAttribute("data-sil");im.src=sil;return}}catch(e){}kitImgErr(im,{sel:".kesf",cls:"kesno"})}
 window.kitStageFigErr=kitStageFigErr;
@@ -191,7 +191,7 @@ window.kitDefaultBanner=kitDefaultBanner;
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
  /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
- const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
+ const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p,{plate:true})).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
@@ -610,14 +610,33 @@ window.kitNameRank=kitNameRank;
    Classes: `.krt` title, `.krn` name (kitNameRank sets both); the same look is given (CSS below) to every rank-over-name block that is built
    elsewhere: stage name tags (.j59t / .j59n), kitEventDp / 32.7 captions (.kpsn .kname .kti — kitName sets --rt on .kti), person cards
    (.pcrk over .pcname), the Tuần lục person heading (.kbk-pname). Inline titles inside sentences (kitName in prose) keep the plain look. */
-const KIT_RT=[[/hoàng quý phi/,"#b04a00"],[/phế phi|lãnh cung/,"#5d6b7a"],[/quý phi/,"#c8102e"],[/hoàng hậu/,"#8c5f00"],[/thái hậu/,"#9c4f12"],
- [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,"#8f6800"],[/phi$/,"#7e3cc8"],[/(^|\s)tần$/,"#c42a78"],[/quý nhân/,"#1f5fcc"],[/thường tại/,"#1a7f37"],
- [/đáp ứng/,"#876638"],[/thô sử/,"#52746a"],[/chưởng sự|cô cô/,"#b4441e"],[/nữ quan/,"#6a46b8"],[/đại cung nữ/,"#2f5db0"],[/cung nữ|thị nữ/,"#0a7d68"],
- [/ma ma|nhũ mẫu|vú/,"#8f5a24"],[/tổng quản/,"#934414"],[/thủ lĩnh/,"#2a5f92"],[/tiểu thái giám/,"#59743a"],[/thái giám|nội giám/,"#1f7a48"],
- [/thái y|ngự y/,"#0a7d76"],[/hoàng tử|thái tử|vương/,"#1a6fb8"],[/công chúa/,"#bf412b"],[/người lạ/,"#666666"],
- [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,"#2f55a4"],[/thị vệ|vệ|lính|tướng/,"#465f80"]];
+/* KIT 48.1f THE TONE (owner 11/16 13:00Z "nhạt nhòa → tươi hơn"): the colour of a title on PAPER is DERIVED from the one palette (RCOL / MRCOL / ERCOL /
+   RCOL_COLD / KIT_ROLE, j1): same hue, saturation kept high, lightness lowered only as far as needed for >= 3.6:1 on parchment #fbf3e2 (jewel tones: framed UI shows the vivid tone as PLAIN text (no edge, owner 11/16 13:50Z); only paintings get the light halo 48.1d/e).
+   No second table of hexes: change a base in j1 and every title, chip, ring, halo and portrait ground changes with it. */
+const KIT_TONE_CACHE={};
+function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[key])return KIT_TONE_CACHE[key];
+ const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),lin=c=>(c/=255)<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4),lum=h=>{const[r,g,b]=rgb(h).map(lin);return .2126*r+.7152*g+.0722*b};
+ const P=paper||"#fbf3e2",cr=h=>{const a=lum(h),b=lum(P);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+ let[r,g,b]=rgb(base).map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b);let l=(M+m)/2,s=0,H=0;
+ if(M!==m){const d=M-m;s=l>.5?d/(2-M-m):d/(M+m);H=M===r?(g-b)/d+(g<b?6:0):M===g?(b-r)/d+2:(r-g)/d+4;H*=60}
+ if(s>=.4)s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey */
+ const hx=(H,s,l)=>{const f=n=>{const k=(n+H/30)%12,a=s*Math.min(l,1-l);return Math.round((l-a*Math.max(-1,Math.min(k-3,9-k,1)))*255).toString(16).padStart(2,"0")};return"#"+f(0)+f(8)+f(4)};
+ let x=hx(H,s,l);while(cr(x)<3.6&&l>.04){l-=.005;x=hx(H,s,l)}return KIT_TONE_CACHE[key]=x}
+window.kitToneOf=kitToneOf;
+/* title words -> the BASE colour (read live from the j1 palette), then kitToneOf */
+const KIT_RT=[[/hoàng quý phi/,()=>RCOL[6]],[/phế phi|lãnh cung/,()=>RCOL_COLD],[/quý phi/,()=>RCOL[5]],[/hoàng hậu/,()=>RCOL[7]],[/thái hậu/,()=>KIT_ROLE.th],
+ [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,()=>KIT_ROLE.emp],[/phi$/,()=>RCOL[4]],[/(^|\s)tần$/,()=>RCOL[3]],[/quý nhân/,()=>RCOL[2]],[/thường tại/,()=>RCOL[1]],
+ [/đáp ứng/,()=>RCOL[0]],[/thô sử/,()=>MRCOL[0]],[/chưởng sự|cô cô/,()=>MRCOL[3]],[/nữ quan/,()=>MRCOL[4]],[/đại cung nữ/,()=>MRCOL[2]],[/cung nữ|thị nữ/,()=>MRCOL[1]],
+ [/ma ma|nhũ mẫu|vú/,()=>KIT_ROLE.mama],[/tổng quản/,()=>ERCOL[3]],[/thủ lĩnh/,()=>ERCOL[2]],[/tiểu thái giám/,()=>ERCOL[0]],[/thái giám|nội giám/,()=>ERCOL[1]],
+ [/thái y|ngự y/,()=>KIT_ROLE.ty],[/hoàng tử|thái tử|vương/,()=>KIT_ROLE.prince],[/công chúa/,()=>KIT_ROLE.princess],[/người lạ/,()=>KIT_ROLE.stranger],
+ [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,()=>KIT_ROLE.official],[/thị vệ|vệ|lính|tướng/,()=>KIT_ROLE.guard]];
 function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
- for(const [re,c] of KIT_RT)if(re.test(s))return c;return col?`color-mix(in srgb,${col} 80%,#000)`:"#7a5a30"}
+ for(const [re,c] of KIT_RT)if(re.test(s))return kitToneOf(c());return /^#[0-9a-f]{6}$/i.test(col||"")?kitToneOf(col):KIT_ROLE.slate}
+/* KIT 48.1g PORTRAIT GROUND .rk-c0..c7 (the round avatar / portrait ground by rank): generated from RCOL (was typed in p1.html + j59, two stale copies) */
+(function(){const m=(c,p)=>`color-mix(in srgb,${c} ${p}%,#fff)`;let css="";
+ RCOL.forEach((c,i)=>{const bg=i===3||i===4?`repeating-linear-gradient(45deg,${m(c,22)} 0 6px,${m(c,38)} 6px 12px)`:i>=5?`radial-gradient(circle at 30% 20%,${m(c,28)},${m(c,66)})`:`linear-gradient(160deg,${m(c,20)},${m(c,52)})`;
+  css+=`.rk-c${i}{background:${bg}!important;border-color:${c}!important${i>=6?`;box-shadow:0 0 0 1px #fff,0 0 0 3px ${m(c,70)},0 3px 10px ${c}55!important`:""}}\n`});
+ const st=document.createElement("style");st.id="kit-rk";st.textContent=css;document.head.appendChild(st)})();
 window.kitRankTone=kitRankTone;window.KIT_RT=KIT_RT;
 /* KIT 48.1b (owner 15/11 ~20:10Z): HER own name (the local player's character only, also in co-op) = black ink + a soft light-gold glow
    (class .kmy on the name line), so she spots herself at once; everybody else's name stays plain ink. kitIsMyName(name) = it is S.name. */
@@ -628,24 +647,20 @@ window.kitIsMyName=kitIsMyName;
  const T=H([".krt",".knr>.knr-r",".stage .tok .tag .j59t",".stage #j59metag .tag .j59t",".kpsn .kname .kti",".pc .pcl .pcrk",".kpstrip .kpsn small",".kbk-pname .kname .kti",".kpod-plq .kname .kti"]);
  const N=H([".krn",".knr>.knr-n",".stage .tok .tag .j59n",".stage #j59metag .tag .j59n",".kpsn .kname",".pc .pcl .pcname",".kpstrip .kpsn b",".kbk-pname .kname",".kpod-plq .kname"]);
  /* ON A PAINTING (owner 22:25Z): stage name tags over the scene, captions laid over a picture (.kesov), the kit sample's scene row (.krs) */
- const PT=H([".stage #j59metag .tag .j59t",".stage .tok .tag.j59mine .j59t","#mb .kesov>.kpsn .kname .kti",".krs .krt",".krs .knr>.knr-r"]);
- const PN=H([".stage #j59metag .tag .j59n","#mb .kesov>.kpsn .kname",".krs .krn",".krs .knr>.knr-n"]);
- /* 48.1e STAGE: ONLY HER TAG GLOWS (owner 15/11 session 8 "chỉ có tôi là mới có chữ phẩm và tên là phát sáng thôi, còn những người khác là
-    bình thường"; overrides 48.1d for the stage). Her tag = #j59metag / any stage tag of S (class .j59mine set by j59tags; co-op: each player's own S, the friend's tag is plain).
-    Everybody else's stage tag: plain rank colour + plain ink name, NO glow (no blurred halo); only a 0.6px hairline paper edge with zero blur
-    (reads as the letter's own edge, not light) so the plain words stay readable on a dark carpet / night scene (OS = other people's tag parts). */
- const OS=H([".stage .tok .tag:not(.j59mine)",".stage .tok .tag:not(.j59mine) .j59t",".stage .tok .tag:not(.j59mine) .j59n"]);
+ const PT=H([".stage .tok .tag .j59t",".stage #j59metag .tag .j59t","#mb .kesov>.kpsn .kname .kti",".krs .krt",".krs .knr>.knr-r"]);
+ const HT=H([".stage #j59metag .tag .j59t",".stage .tok .tag.j59mine .j59t"]);/* HER rank line: brighter than the others */
+ const PN=H([".stage .tok .tag .j59n",".stage #j59metag .tag .j59n","#mb .kesov>.kpsn .kname",".krs .krn",".krs .knr>.knr-n"]);
+ /* 48.1e GLOW ON PAINTINGS ONLY (owner 11/16 13:55Z, option 1): on a painted background (stage tags, .kesov captions, .krs) EVERY person's RANK line glows in its own rank colour, the NAME line gets the light-gold glow, her tag glows brighter than the others; on paper / frames there is NO edge and NO glow (plain vivid text). */
  st.textContent=`
 :root{--krt-ol:#1c100a;--krt-ink:#2a1a12}
 ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight:700!important;font-style:normal;letter-spacing:.03em!important;
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d (owner 15/11 "Phẩm của tôi cũng viền sáng như tên"): on a painting HER rank line (stage: hers only, 48.1e) gets the SAME light
- halo as the name line under it (was a dark outline + tinted glow, hard to read), in its full rank tone so it keeps its colour on the light halo */
- text-shadow:0 0 1px #fff8ee,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
-${PN}{text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
-${OS}{text-shadow:-.6px 0 0 #fff8ee,.6px 0 0 #fff8ee,0 -.6px 0 #fff8ee,0 .6px 0 #fff8ee!important}
+${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d/e: rank line on a painting = its rank tone; right around the letters the glow is a LIGHT tint of its own rank colour (stacked so letter vs halo >= 3:1, scan stage-tag-contrast.py), then the saturated rank colour further out (the neon); 1 px paper rim (no dark hairline: it darkens the halo behind the letters) */
+ text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt)))!important}
+${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt))),0 0 16px var(--tc,var(--rc,var(--rt)))!important}
+${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
    like every other card head (48.1), so the side column keeps its width at 755 / 844 */
@@ -661,12 +676,12 @@ html body .stage.j59 #tokens .tok .tag,html body .stage.j59 #j59metag .tag{backg
 /* 48.1c (owner 15/11 ~20:40Z): person-dialog captions (kitEventDp .kdpcap, event-stage .kesov captions) have NO box */
 html body #mb .kesov>.kpsn,html body #modal .dlg.kdper .kes>.kpsn.kdpcap,html body .kesf>.kpsn{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 /* 48.3 (owner 15/11 session 8): a title INSIDE a line (kitName in prose, picker rows, lists, logs, toasts; kitRankPaint) is in its rank
-   tone too — plain text, no glow, no outline, the line's own font; lightened on .modal.night (below) */
+   tone too — the line's own font, plain: no glow, no outline, no shadow; lightened on .modal.night (below) */
 html body .kname .kti{color:var(--rt,inherit)!important;text-shadow:none!important}
-html body .modal.night .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
+html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
-html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
+html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
 html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;

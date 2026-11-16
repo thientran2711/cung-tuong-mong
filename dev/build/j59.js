@@ -5,10 +5,8 @@
    anyone's height. Adult women share one head-to-feet height, men are 7% taller, children shorter by age. Feet stand on
    one floor line. Her figure keeps the same height as everyone else and gets a thin outline glow in her rank colour instead (gentle pulse
    only when "Hiệu ứng hình" is on and the system does not ask for reduced motion). */
-/* KIT · rank colour palette (owner 11/14), set on the shared RCOL from j1 so badges, frames and the halo all follow:
+/* KIT · rank colour palette: the values live ONLY in j1 (RCOL / MRCOL / ERCOL / RCOL_COLD / KIT_ROLE); this module just reads them. Families:
    Đáp ứng nâu xám, Thường tại xanh lục, Quý nhân xanh lam, Tần hồng phấn, Phi tím, Quý phi đỏ, Hoàng quý phi cam, Hoàng hậu vàng; lãnh cung #cfd3d8 */
-window.MRCOL=["#9aa3a8","#5fa39a","#4f74a8","#a0584a","#6a5a8e"];window.ERCOL=["#8f9a8a","#5f8a6a","#3f6a8a","#7a4a3a"];
-try{["#9c8f74","#7aa07a","#6a8aa0","#d48fa6","#a07ab0","#c06a6a","#d98a3a","#f0d070"].forEach((c,i)=>{RCOL[i]=c})}catch(e){}
 (function(){
 const J59BB={},J59W={};
 /* figure body box: the kit measurement (kitFigBody, jkit) — J59BB stays as the read cache other modules use */
@@ -19,7 +17,7 @@ function j59fac(src,p){return KIT_FIG.fac(src,j59age(p))}
 let j59q=0;function j59sched(){if(j59q)return;j59q=requestAnimationFrame(()=>{j59q=0;j59lay()})}
 /* KIT · rank halo colour: one source for "her rank colour" = RCOL (j1, same list the rank badges/frames use); lãnh cung = pale grey */
 function j59srv(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
-function haloColor(){try{if(S&&S.out)return"#cfd3d8";if(j59srv())return(window.MRCOL||[])[S.srv.rk||0]||"#9aa3a8";const k=S&&S.rank!=null?S.rank:0;return(typeof RCOL!=="undefined"&&RCOL[k])||"#f0d070"}catch(e){return"#f0d070"}}
+function haloColor(){try{if(S&&S.out)return RCOL_COLD;if(j59srv())return(window.MRCOL||[])[S.srv.rk||0]||"#9aa3a8";const k=S&&S.rank!=null?S.rank:0;return(typeof RCOL!=="undefined"&&RCOL[k])||"#f0d070"}catch(e){return"#f0d070"}}
 window.haloColor=haloColor;
 /* scene name tags: title/role (small, on top) above the name, from the game's own ladders */
 function j59esc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
@@ -37,17 +35,17 @@ function j59title(p){try{if(!p)return"";if(p===S)return j59srv()?SRK.maid[S.srv.
 function j59known(p){try{if(typeof kitKnown!=="function")return true;const w=p===S?S:typeof figWho==="function"?figWho(p):p&&(p.ref||p);return kitKnown(w,p)!==false}catch(e){return true}}
 /* KIT · title colours: MRCOL/ERCOL (set at the top of this module), Emperor imperial gold, Thái hậu deep amber, others slate */
 
-const J59C={emp:"#c9a227",th:"#b06f1c",slate:"#5a6878"};
+const J59C=KIT_ROLE;
 function j59col(p){try{if(p===S)return haloColor();const k=p&&p.kind;if(k==="emp")return J59C.emp;if(k==="th")return J59C.th;if(k==="hh")return RCOL[7];
  const w=typeof figWho==="function"?figWho(p):(p.ref||p);if(!w)return J59C.slate;
- if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return w.out?"#cfd3d8":RCOL[w.queen?7:w.rank]||J59C.slate;
+ if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return w.out?RCOL_COLD:RCOL[w.queen?7:w.rank]||J59C.slate;
  if(w===S.maid||w.role==="maid")return MRCOL[srk(w)]||MRCOL[1];
  if(w.role==="eunuch"||w===(S.court||{}).tq||w===(S.court||{}).ksp||w===(S.court||{}).ped)return ERCOL[w.role==="eunuch"?srk(w):3]||ERCOL[1];
  return w.hcol||w.houseCol||J59C.slate}catch(e){return J59C.slate}}
 function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);const T=x=>`<span class="j59t" style="--tc:${c};--rt:${typeof kitRankTone==="function"?kitRankTone(x,c):c}">${j59esc(x)}</span>`;
  name=String(name==null?"":name);if(t&&name!==t&&name.indexOf(t+" ")===0)name=name.slice(t.length+1);
  if(!kn)return T(t||"Người lạ")+`<span class="j59n" style="--tc:${c}">???</span>`;
- if(t&&t===name)return T(t).replace('class="j59t"','class="j59t j59only"');return(t?T(t):"")+`<span class="j59n${p===S?" kmy":""}" style="--tc:${c}">${j59esc(name)}</span>`}
+ if(t&&t===name)return T(t).replace('class="j59t"','class="j59t j59only"');return(typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(p),{id:false}):"")+(t?T(t):"")+`<span class="j59n${p===S?" kmy":""}" style="--tc:${c}">${j59esc(name)}</span>`}
 /* strangers: grey full-body silhouette from the kit when the asset exists, else a grey blur of their own figure */
 const J59U={};function j59unkSrc(g){const u=`img/kit/unknown-fig-${g}.webp`;if(J59U[g]===undefined){J59U[g]=null;const im=new Image();im.onload=()=>{J59U[g]=u;j59sched()};im.onerror=()=>{J59U[g]=false};im.src=u}return J59U[g]}
 function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
@@ -207,10 +205,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
 const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
 const HG=(a,c)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
 const css=document.createElement("style");css.textContent=`
-/* rank badge fills follow the new RCOL (c0 trắng ngà ngọc trai, owner 11/15; c1 xanh lục, c3 hồng phấn; others already match) */
-.rk-c0{background:linear-gradient(160deg,#fbf8f1,#e6dfcf)!important;border-color:#9c8f74!important}
-.rk-c1{background:linear-gradient(160deg,#d6e6d0,#a3c39b)!important;border-color:#7aa07a!important}
-.rk-c3{background:repeating-linear-gradient(45deg,#f6dbe4 0 6px,#ecc6d3 6px 12px)!important;border-color:#d48fa6!important}
+/* portrait ground classes .rk-c0..c7 are generated from RCOL by the "kit-rk" style in jk4, not typed here */
 .stage.j59{--halo:#f0d070}
 #popw.j59dock{grid-area:panel;position:relative;z-index:4;min-height:0;min-width:0;display:flex}
 #popw.j59dock:empty{display:none}

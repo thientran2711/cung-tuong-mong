@@ -13,7 +13,7 @@ function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o
 function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Sang ngày mới":"Sang buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=4&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=4&&!Q.length&&!S.dead)nextBuoi()},350)}
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
  if(Q.length&&$("modal").hidden)showModal();save()}
-function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n)+(S.hieu?` · hiệu ${S.hieu}`:"");$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
+function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+rkName(S);$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
  $("me-p").innerHTML=mdH(pMe(),"sm");
  for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=S[k];const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
  $("emp-p").innerHTML=mdH(pEmp(),"sm");$("emp-n").textContent=S.emp.era;const m=MOODS[S.emp.mood];$("emp-m").innerHTML=`<span class="${m[1]}">${m[0]}</span>`}
