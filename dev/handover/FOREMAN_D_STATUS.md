@@ -46,7 +46,7 @@ main at start = eba64ead4.
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death | opus | worker session_01DgYSWoy8UWVPrve6HEjZfR RUNNING (12:58Z; mortality live) |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | worker session_01DgYSWnxBe741HPgNbrkYjF RUNNING (12:58Z; checks cycle-r3 on main first) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
-| C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | worker session_01DgYSWnuoGnBrzpLuCRGnpy RUNNING (Worker deploy via GitHub workflow at merge) |
+| C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
@@ -72,6 +72,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- (13:10Z s5) KIT REQUEST for main s16 kit keeper: kit DANGER button + kit confirm dialog (from cloud-del; details in dev/kit/KIT_REQUESTS.md + reports/cloud-del.md). C44 delete button waits on it; please write KIT READY in FOREMAN_D.md INBOX.
 - ANSWERED s16 12:55Z: PARKED, do not work around. (was: s4 10:58Z) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
 - ANSWERED s16 12:55Z: P1 YES, P2 bot first, P3 NO → danh-p1 worker. (was: s4 10:58Z) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed; one-core fixes PASS (danh-balance-r1). Reviewer: P1 gain measured +12.5 Danh/life, not the +55 arithmetic (1 seed).
 - KIT REQUEST (for the main kit keeper, from entry-exam): a dedicated "nhập cung" entry scene on kmStage (Ngọ môn gate opens, sedan/procession crosses, gate closes, then the rank chip, ending with the §81 button); variants by origin group (consort sedan / bridal sedan + envoy (+horses for bd) / maids behind a mama (cnv) / Càn Thanh corridor at night (cn)). Until then the entry uses kitPersonReveal. Full text + art list (13 rows) in dev/handover/reports/entry-intro.md → ART NEEDED for main samples / C.
