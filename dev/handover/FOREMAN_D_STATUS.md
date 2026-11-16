@@ -37,3 +37,5 @@ main at start = eba64ead4.
 - Waiting: slap-mg review (facefx-all on main?), coop-chat review (kitStageRail on main?), servant-system phase 2 (fix A + audit reviewed?), act waves 2–3 (GO here?).
 - Blocked on Q-D1 (no Magnific / Cloudflare on account D): C3, D51 sprites, D54, D56, fig-hd-upscale + face-sharp-hd2, C44 deploy.
 - D52 is Foreman C's (review/skin-audit). Shared briefs for workers: dev/handover/PREAMBLE.txt + REVIEWER.txt (s1 had local copies at /home/user/wt/FOREMAN_D_*.txt; sessions do not share disk — paste the brief text in each create_session prompt).
+
+- ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
