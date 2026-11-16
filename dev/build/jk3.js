@@ -322,6 +322,14 @@ window.kitTabRowHTML=function(list,cur,attr){return list.map(x=>`<button class="
 /* sticky only where the page is long (see the KIT RULE in the CSS below) */
 function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollHeight>P.clientHeight*1.5;P.querySelectorAll(".kcattabs").forEach(r=>r.classList.toggle("kstick",long))}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
+/* tab-underline (C39): chip/tab rows that scroll sideways show NO scrollbar track or thumb (the grey bar / brown stub the owner saw); the overflow is hinted by a soft edge fade on the side that has more chips (.kfl / .kfr, set by kitTabFade) */
+const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip";
+function kitTabFade(){try{document.querySelectorAll(KIT_CHIPROWS).forEach(r=>{const o=r.scrollWidth>r.clientWidth+2&&getComputedStyle(r).overflowX!=="visible";r.classList.toggle("kfl",o&&r.scrollLeft>2);r.classList.toggle("kfr",o&&r.scrollLeft+r.clientWidth<r.scrollWidth-2)})}catch(e){}}
+let kitTfQ=0;function kitTabFadeSoon(){if(kitTfQ)return;kitTfQ=requestAnimationFrame(()=>{kitTfQ=0;kitTabFade()})}
+document.addEventListener("scroll",e=>{const r=e.target;if(r&&r.matches&&r.matches(KIT_CHIPROWS))kitTabFadeSoon()},true);addEventListener("resize",kitTabFadeSoon);
+/* DOM changes (the page mutates ~500x/s while idle): throttled to one check per 150 ms, never per frame */
+let kitTfM=0;try{new MutationObserver(()=>{if(kitTfM)return;kitTfM=setTimeout(()=>{kitTfM=0;kitTabFadeSoon()},150)}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
  const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(o&&o.classList.contains("kcattabs")&&!o.classList.contains("kinvtabs"))o.remove();return}
@@ -350,7 +358,13 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .kcattabs+*{margin-top:0!important}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
-html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}
+html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important}#panel .kcattabs .pct{flex:0 0 auto}
+/* tab-underline (C39): no scrollbar on any chip row; edge fade instead */
+.pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip,html body header.hud>.hud2,html body #panel .kcattabs,.pc.kpnar[data-k2] .kpstick .pctabs{scrollbar-width:none!important;-ms-overflow-style:none!important}
+.pctabs::-webkit-scrollbar,.kcattabs::-webkit-scrollbar,.ksub::-webkit-scrollbar,.ksubs::-webkit-scrollbar,.kmc-tabs::-webkit-scrollbar,.kchips::-webkit-scrollbar,.chips::-webkit-scrollbar,.relsel::-webkit-scrollbar,.hud2::-webkit-scrollbar,.j59strip::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;background:transparent!important}
+.kfr:not(.kfl){-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
+.kfl:not(.kfr){-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px);mask-image:linear-gradient(90deg,transparent,#000 22px)}
+.kfl.kfr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
 `;document.head.appendChild(cssC);
 })();
 

@@ -959,7 +959,7 @@ setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=nu
 .pc.kpnar[data-k2]>.pcl>.kpbars{grid-area:bars;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:4px;margin:4px 0 0;font-size:.78rem}
 .pc.kpnar[data-k2]>.pcl>.kwear,.pc.kpnar[data-k2]>.pcl>.kpfacts{display:none!important}
 .pc.kpnar[data-k2] .kpstick{margin:0 -7px 6px;padding:5px 7px}
-.pc.kpnar[data-k2] .kpstick .pctabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin;gap:5px}
+.pc.kpnar[data-k2] .kpstick .pctabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:5px}
 .pc.kpnar[data-k2] .kpstick .pctabs>.pct{flex:0 0 auto;white-space:nowrap}
 .kpsheetb .kwear{margin:0 0 8px}.kpsheetb .kpfacts{display:flex;flex-direction:column;gap:6px}
 /* compact picker strip on portrait screens under 1000 px: one row of small faces + names, pager arrows */
