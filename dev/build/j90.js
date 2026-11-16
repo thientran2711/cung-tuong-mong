@@ -155,11 +155,11 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-pz{font-size:.74rem;font-weight:700;color:var(--good)}.kpod-fx2{font-size:.68rem}.kpod-fx2 .g{color:var(--good);font-weight:700}.kpod-fx2 .r{color:var(--bad);font-weight:700}
 .kpod-p1{--kl:255,212,104;--ka:.17;--kpa:.95}.kpod-p2{--kl:226,234,246;--ka:.12;--kpa:.85}.kpod-p3{--kl:240,176,150;--ka:.11;--kpa:.8}
 .kpod-mine1 .kpod-p1,.kpod-mine2 .kpod-p2,.kpod-mine3 .kpod-p3{--ka:.24;--kpa:1}
-.kpod-beam{position:absolute;left:50%;bottom:4%;width:150%;height:calc(var(--kfh,300px) * 1.25);transform:translateX(-50%);z-index:3;pointer-events:none;mix-blend-mode:screen;
+.kpod-beam{position:absolute;left:50%;bottom:4%;width:150%;height:calc(var(--kfh,300px) * 1.25);transform:translateX(-50%);z-index:-1;/* KIT §68.7: the beam stands BEHIND the figure, never over her */pointer-events:none;mix-blend-mode:screen;
  background:linear-gradient(to bottom,rgba(var(--kl),0) 0%,rgba(var(--kl),calc(var(--ka) * .55)) 35%,rgba(var(--kl),var(--ka)) 100%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(6px);
  -webkit-mask-image:linear-gradient(to right,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(to right,transparent,#000 25%,#000 75%,transparent);
  animation:kpodFade calc(1s*var(--pace)) ease-out calc(var(--d) + calc(.5s*var(--pace))) both}
-.kpod-pool{position:absolute;left:50%;bottom:-4px;width:110%;height:clamp(22px,5.5vh,44px);transform:translate(-50%,50%);z-index:-1;pointer-events:none;border-radius:50%;
+.kpod-pool{position:absolute;left:50%;bottom:-4px;width:110%;height:clamp(22px,calc(5.5*var(--kvh,1vh)),44px);transform:translate(-50%,50%);z-index:-1;pointer-events:none;border-radius:50%;
  background:radial-gradient(ellipse at center,rgba(var(--kl),var(--kpa)) 0,rgba(var(--kl),calc(var(--kpa) * .45)) 45%,rgba(var(--kl),0) 72%);animation:kpodFade calc(.9s*var(--pace)) ease-out calc(var(--d) + calc(.5s*var(--pace))) both}
 .kpod-motes{position:absolute;inset:0 10%;z-index:3;pointer-events:none}
 .kpod-motes i{position:absolute;width:5px;height:5px;border-radius:50%;background:rgb(var(--kl));box-shadow:0 0 6px 2px rgba(var(--kl),.8);opacity:0;animation:kpodMote 4.2s ease-in-out infinite}

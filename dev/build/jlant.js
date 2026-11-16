@@ -7,7 +7,7 @@
    Uses only existing kit parts: j82 game frame + canvas, k91Btns / k91DemoCard / k91Pointer / k91Loop, the doden-bg painting. KIT REQUEST: none.
    Registers KG82_ENG.lamp; KG82_KIND.doden (j82) points at it. Old saves: key "doden" unchanged; the demo flag is the new key "doden2". */
 BAL.lantern={field:[8,10,12],same:[3,3,4],lit:[3,4,5],rows:[2,3,3],seq:[3,4,5],lim:[32000,28000,24000],idle:[9000,14000,0],
- pts:[3,3.5,3.5],miss:.18,speed:.3,hint:.3,tier:null,
+ pts:[3,3.5,3.5],miss:.18,hint:.3,/* time part: jmgt mgPace (BAL.mgTier.lev.doden) */tier:null,
  timeout:.6,autoHint:.5,bad:[1300,1300,500],glow:3500,pause:[900,1100],short:{h:520,min:240}};
 const LM_COL=[["#c23b22","#ff8a6a","#6e1608"],["#d99a1b","#ffe08a","#7a5206"],["#2f9d78","#8ff0c8","#0f5a40"]];
 function lmTier(env){const T=BAL.lantern.tier;if(T!=null)return cl(+T||0,0,2);
@@ -48,10 +48,10 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    o.T=Array(n).fill(0);idx.forEach(i=>o.T[i]=1);o.P=Array(n).fill(0);o.cols=cols;o.rows=rows;o.need=lit;o.sc=lmShuf([0,1,2,3]).slice(0,1)[0]}
   else{const m=B.seq[tier];const pairs=lmShuf([0,1,2,3].flatMap(s=>[0,1,2].map(c=>({s,c})))).slice(0,m);o.S=pairs;o.tray=lmShuf(pairs.map((p,i)=>({...p,i,used:0,bad:0})));o.k=0;o.need=m}
   return o}
- function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(Math.round(cl(pts,0,10))),400)}R=mk(rd);t0=tAct=performance.now()}
- function fin(timeout){if(R.fin)return;const now=performance.now(),sp=cl(1-(now-t0)/LIM,0,1),base=B.pts[R.type];let p;
+ function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}R=mk(rd);t0=tAct=performance.now()}
+ function fin(timeout){if(R.fin)return;const now=performance.now(),sp=mgPace(env,"doden",now-t0,LIM)/* review/mg-tune: the ONE time part (was its own speed share) */,base=B.pts[R.type];let p;
   const frac=R.type===0?R.found/R.need:R.type===1?R.P.filter((v,i)=>v===R.T[i]).length/R.P.length:R.k/R.need;
-  p=timeout?base*frac*B.timeout:base*(1-B.speed+B.speed*sp);p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
+  p=timeout?base*frac*B.timeout:base*sp;p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
   kg82Pop(pops,W/2,H*.5,timeout?"Hết giờ":"Đèn đã sáng!",timeout?K91C.gold():K91C.good());kg82Pluck(3,!timeout);setTimeout(next,B.pause[timeout?1:0])}
  function nextTarget(){if(!R||R.fin)return null;
   if(R.type===0){const i=R.L.findIndex(x=>x.ok&&!x.on);return i<0?null:{i}}
@@ -97,7 +97,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    if(R.glow===i&&now-R.glowAt<B.glow&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
  k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
- KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];return C.client(c.x+c.w/2,c.y+c.h/2)};
+ KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];/* cands (review/mg-tune, bots only): the lanterns a person looks through for this tap */const n=R.type===0?R.L.filter(x=>!x.on).length:R.type===1?R.P.length:R.tray.filter(x=>!x.used).length;return Object.assign(C.client(c.x+c.w/2,c.y+c.h/2),{cands:n})};
  /* test oracle for the random-play measure: every cell centre of the round */
  KG82.cells=()=>{if(!R||R.fin)return[];return geo().f.map(c=>C.client(c.x+c.w/2,c.y+c.h/2))};
  /* short screens (844x390): the dialog scrolls, so bring the board to the top of the scroll area where it fits whole above the Gợi ý button */

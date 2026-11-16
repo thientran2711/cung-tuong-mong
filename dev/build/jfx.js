@@ -93,11 +93,14 @@ function kfTex(){}
    applies to neutral art (orb, streak, smoke). Old shape names map to their painted kind. */
 const KF_ALIAS={glow:"orb",star:"spark",blob:"smoke",petal:"petal-plum"};
 function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
-const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?["petal-peach","petal-plum"]:m<=6?["petal-lotus"]:m<=9?["leaf","osmanthus"]:["snow","snow","petal-plum"]};
+/* THE ONE SWAP LINE for the real-look weather pictures (owner 16/11 snow + fireflies redo): snow = soft round flakes, firefly = glowing point. Now the painted soft "orb"; when
+   Foreman C's snow-real-* / fly-real-* land on the CDN, add them to KFK_SP (jfxkit.js) and change ONLY these two names. */
+const KF_SPR={snow:"orb",fly:"orb"};
+const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?["petal-peach"]:m<=6?["orb","ember"]:m<=9?["leaf","osmanthus"]:[KF_SPR.snow,KF_SPR.snow,"petal-plum"]};  /* spring = PINK peach blossom only (never yellow = autumn); summer = sunlit motes + light rays, no petals (owner 16/11 12:08Z) */
 function kfBudget(n){const w=kitView().pages===1?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
 const R01=()=>Math.random(),RS=(a,b)=>a+Math.random()*(b-a);
 const KF_SPAWN={
- rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
+ rays(p){if(typeof kfkPersons==="function"){/* KIT §68.7: light rays never start on a person: a rim light on the persons around the point instead */const P=kfkPersons({x:p.x-160,y:p.y-160,w:320,h:320});if(P.length){kitFxRim(P,{tone:"glow-gold",a:.9,dur:1800});return}}const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
  stars(p){const n=kfBudget(14),r=p.r,w=r?Math.max(120,r.width):260,h=r?Math.max(80,r.height):200;for(let i=0;i<n;i++){kfSp("spark",p.x+RS(-.55,.55)*w,p.y+RS(-.6,.5)*h,{life:RS(50,80),fade:"inout",tw:RS(.15,.3),vy:-.15},null,RS(.5,1.1)).rotation=0}},
  coins(p){const n=kfBudget(18);for(let i=0;i<n;i++){const s=kfSp("coin",RS(.08,.92)*innerWidth,RS(-120,-10),{vx:RS(-.6,.6),vy:RS(2,4),g:.22,life:RS(90,120),spin:RS(-.03,.03),coin:1,a0:1},null,RS(.8,1.25));s.v.ph=R01()*6}},
  ink(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("ink",p.x+RS(-60,60),p.y+RS(-50,50),{life:RS(70,95),grow:RS(.01,.02),a0:RS(.55,.75)},null,RS(.6,1.2))},
@@ -115,12 +118,12 @@ const KF_SPAWN={
  golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
  jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
  incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
- lotus(p){kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
+ lotus(p){if(typeof kfkPersons==="function"){/* KIT §68.7 */const P=kfkPersons({x:p.x-130,y:p.y-130,w:260,h:260});if(P.length){kitFxRim(P,{tone:"lotuslight",a:.8,dur:2200});return}}kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
  peach(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.5,.3),vy:RS(1.1,2),life:RS(150,210),spin:RS(-.05,.05),sway:.9,fade:"inout"},null,RS(.8,1.3))},
  letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]}
 };
 /* painted kinds each spawner needs (loaded before it runs); other modules adding KF_SPAWN kinds add their row here */
-const KF_PET=()=>{const s=KF_SEASON();return s[0]==="snow"?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s};
+const KF_PET=()=>{const s=KF_SEASON();return s[0]===KF_SPR.snow&&s.length>1?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s[0]==="orb"?["petal-lotus"]:s};
 const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:["ink"],flowers:["petal-peach","petal-plum","osmanthus"],petals:()=>KF_PET(),
  motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],
  brush:["brush"],goldpetals:["petal-peach"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
@@ -131,14 +134,16 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
   if(v.life<=0||(v.amb&&(v.lay==="wx"&&KFX.sr?(s.y>KFX.sr.y+KFX.sr.h+20||s.y<KFX.sr.y-90||s.x<KFX.sr.x-90||s.x>KFX.sr.x+KFX.sr.w+90):(s.y>H+20||s.y<-90||s.x<-90||s.x>W+90)))){kfkFree(s);L.splice(i,1);continue}
   if(v.fx!=null){if(KFX.sr){s.x=KFX.sr.x+v.fx*KFX.sr.w;s.y=KFX.sr.y+v.fy*KFX.sr.h}v.ph+=.03*d;s.alpha=v.a0*(.7+.3*Math.sin(v.ph*3));continue}
-  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
+  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;if(v.drag!==1){const k=Math.pow(v.drag,d);v.vx*=k;v.vy=v.vy*k+v.g*d}else if(v.g)v.vy+=v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
-  const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);s.alpha=Math.max(0,a);
+  const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);if(v.bl){const q=.5+.5*Math.sin(v.ph*v.bl);a*=.3+.7*Math.sqrt(q)}s.alpha=Math.max(0,a);
   if(v.amb)amb++}
- KFX.live=L.length;KFX.amb=amb;
+ KFX.live=L.length;KFX.amb=amb;kfBoltTick(d);
+ /* PERF (owner 16/11 lag): ambient-only weather (snow / fireflies / petals / mist) runs at 30 fps (motion is dt-based, so speed is unchanged); bursts and lightning get 60; rain streaks are dt-based too */
+ {let fast=KFX.bt!=null;if(!fast)for(let i=0;i<L.length;i++){const v=L[i].v;if(!v.amb){fast=true;break}}const mf=fast?60:30;if(KFX.app.ticker.maxFPS!==mf){KFX.app.ticker.maxFPS=mf;KFX.tgt=mf}}
  /* quality: frames slower than ~48 fps for half a second → fewer particles; steady 58+ for 4 s → back up */
- const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<48){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>58){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
- if(!L.length&&!KFX.ambOn){KFX.app.ticker.stop();KFX.app.renderer.render(KFX.app.stage);KFX.app.canvas.style.display="none"}}
+ const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<(KFX.tgt||60)*.8){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>(KFX.tgt||60)*.96){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
+ if(!L.length&&!KFX.ambOn&&KFX.bt==null){KFX.app.ticker.stop();KFX.app.renderer.render(KFX.app.stage);KFX.app.canvas.style.display="none"}}
 /* TWO kit layers on the ONE jfx Pixi canvas (#kfxcv: painted sprites only, pointer-events none; owner 16/11):
    (1) WEATHER ("wx"): today's weather S.wx (j12 WX) — rain, snow, mist, weather petals / leaves, night fireflies — clipped to the STAGE rectangle (Pixi mask),
        its own bolder look (bigger, denser, wind gusts). j11's stage layer no longer makes weather particles.
@@ -146,38 +151,64 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
        stage rectangle it hides itself while the weather is the same kind of falling thing (never two copies of petals at once).
    Night = a slight dim only (colour kept). Gọn / reduced motion (kfStill) = none. Both capped (KF_WX cap x phone x adaptive KFX.q, plus KFK_CAP). */
 const KF_WX={
- petal:{k:["petal-peach","petal-plum"],cap:22,vx:[.2,1],vy:[1.2,2.2],sway:1,spin:.07,sc:[1.5,2.3],a0:.88,gust:1,fall:1},
+ petal:{k:["petal-peach"],cap:26,vx:[.2,1],vy:[1.2,2.2],sway:1,spin:.07,sc:[1.5,2.3],a0:.95,gust:1,fall:1,tint:0xffc4d4},  /* hoa đào: deeper pink than the raw art, never yellow */
  leaf:{k:["leaf"],cap:16,vx:[0,.8],vy:[1.2,2],sway:1.1,spin:.05,sc:[1.4,2],a0:.9,gust:.8,fall:1},
- wind:{k:["leaf"],cap:20,vx:[2,3.4],vy:[.6,1.3],sway:.5,spin:.09,sc:[1.2,1.9],a0:.9,gust:1.3,fall:1,fromLeft:1},
- snow:{k:["snow"],cap:28,vx:[-.3,.3],vy:[.7,1.3],sway:.6,spin:.02,sc:[1,1.8],a0:.9,gust:.3,fall:1},
- snowh:{k:["snow"],cap:48,vx:[-1,.2],vy:[1.2,2.2],sway:.7,spin:.02,sc:[1,1.9],a0:.9,gust:.6,fall:1},
- frost:{k:["snow"],cap:10,vx:[-.2,.2],vy:[.4,.8],sway:.4,spin:.01,sc:[.8,1.2],a0:.75,fall:1},
- snowp:{k:["snow","snow","petal-plum"],cap:26,vx:[-.3,.5],vy:[.7,1.4],sway:.7,spin:.03,sc:[1.1,1.9],a0:.9,gust:.5,fall:1},
- drizzle:{k:["streak"],cap:38,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
- storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
+ wind:{k:["leaf","leaf","leaf","streak"],cap:96,vx:[5,9],vy:[.3,1.4],sway:1.4,spin:.12,sc:[1.3,2.1],a0:.95,gust:2.2,fall:1,fromLeft:1,line:1},  /* blown leaves + pale wind streaks, gusting */
+ snow:{k:[KF_SPR.snow],cap:150,vx:[-.3,.3],vy:[.7,1.3],sway:.6,spin:.02,sc:[1.5,2.5],a0:1,gust:.3,fall:1,snow:1},  /* blue-tinted flakes read on light paintings too */
+ snowh:{k:[KF_SPR.snow],cap:190,vx:[-1,.2],vy:[1.2,2.2],sway:.7,spin:.02,sc:[1.4,2.5],a0:1,gust:.6,fall:1,snow:1},
+ frost:{k:[KF_SPR.snow],cap:26,vx:[-.2,.2],vy:[.4,.8],sway:.4,spin:.01,sc:[1.1,1.7],a0:.9,fall:1,snow:1},
+ snowp:{k:[KF_SPR.snow,KF_SPR.snow,"petal-plum"],cap:84,vx:[-.3,.5],vy:[.7,1.4],sway:.7,spin:.03,sc:[1.4,2.4],a0:1,gust:.5,fall:1,snow:1},
+ drizzle:{k:["streak"],cap:20,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
+ storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2],bolt:1},
  mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
- fly:{k:["orb"],cap:10,vx:[-.3,.3],vy:[-.3,.3],sway:.6,a0:.8,float:1,tint:0xfff07a,sc:[.3,.5],life:[240,420]},
+ fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
  gold:{k:["petal-peach"],cap:20,vx:[-.3,.3],vy:[.8,1.5],sway:.8,spin:.05,sc:[1,1.6],a0:.85,gust:.4}
 };
+/* LIGHTNING (owner 16/11 12:08Z: flash the WHOLE background frame): one plain light wash over the full stage rectangle, above figures and art
+   (the weather layer's own stage mask), two quick strobes then a fade; j11 calls kfBolt() with the thunder sound; Gọn / reduced motion = no flash */
+function kfBolt(full){if(kfStill()||!kfOn())return;kfApp().then(()=>{kfWxSync();const P=window.PIXI;KFX.bfull=!!full||!KFX.sr;const r=KFX.bfull?{x:0,y:0,w:innerWidth,h:innerHeight}:KFX.sr,par=KFX.bfull?KFX.root:KFX.wroot;if(!P||!r||!par)return;
+ if(!KFX.bolt){const b=new P.Sprite(P.Texture.WHITE);b.tint=0xf2f6ff;b.alpha=0;KFX.bolt=b}
+ const b=KFX.bolt;b.x=r.x;b.y=r.y;b.width=r.w;b.height=r.h;KFX.bt=0;par.addChild(b);kfWake()}).catch(()=>{})}
+function kfBoltTick(d){const b=KFX.bolt;if(!b||KFX.bt==null)return;const t=KFX.bt+=d,r=KFX.bfull?{x:0,y:0,w:innerWidth,h:innerHeight}:KFX.sr;if(r){b.x=r.x;b.y=r.y;b.width=r.w;b.height=r.h}
+ b.alpha=t<3?.92:t<7?.92-(t-3)*.2:t<10?.8:Math.max(0,.8*Math.exp(-(t-10)/7));if(t>48){b.alpha=0;KFX.bt=null}}
 function kfWxCfg(){try{if(typeof S==="undefined"||!S)return null;const w=S.wx?S.wx.k:"dust",night=(S.buoi||0)===B4L,nm=S.wx?S.wx.n:"";let id=null;
  if(w==="petal"||w==="leaf"||w==="wind"||w==="snow"||w==="snowh"||w==="frost"||w==="snowp"||w==="storm")id=w;else if(w==="rain")id="drizzle";else if(w==="mist")id="mist";
  else if(night&&(w==="dust"||nm==="đom đóm"))id="fly";
  /* festival days (was code-drawn in j33 via pxKind): which festival and which buổi come ONLY from the FESTFX table (gold / fly rows); indoor/outdoor does not matter; replaces the weather as before */
  try{if(kfFestFx("gold"))id="gold";else if(kfFestFx("fly"))id="fly"}catch(e){}
  if(!id)return null;const c=Object.assign({lay:"wx"},KF_WX[id]);c.id=id;c.night=night;return c}catch(e){return null}}
-function kfSeCfg(){return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.5,.9],sway:.9,spin:.03,sc:[.7,1.05],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
+const KF_RAYS={lay:"se2",id:"rays",k:["streak","streak","streak","glowburst"],cap:9,float:1,ray:1,vx:[-.12,.12],vy:[0,.08],a0:.6,life:[320,520],sc:[1,1.2],tint:0xfff2b8};  /* summer light shafts: painted streak stretched into soft slanted beams */
+function kfSeCfg(){const m=(typeof S!=="undefined"&&S&&S.month)||1,night=typeof S!=="undefined"&&S&&(S.buoi||0)===B4L;
+ /* SUMMER (Apr-Jun, lotus season): no petals; sunlit golden motes drifting up through the light (+ light rays, see KF_RAYS) */
+ if(m>=4&&m<=6&&night)return{lay:"se",id:"sunn",k:["orb"],cap:0,off:1,float:1,vx:[0,0],vy:[0,0],sc:[1,1],a0:0,life:[60,60],night};  /* no sunlight at night: the night room shows fireflies (weather layer) only */
+ if(m>=4&&m<=6)return{lay:"se",id:"sun",k:KF_SEASON(),cap:36,float:1,vx:[-.25,.25],vy:[-.55,-.15],sway:.5,sc:[1.1,2],a0:.95,life:[260,420],tint:0xffe08a,night};
+ return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.5,.9],sway:.9,spin:.03,sc:[.7,1.05],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
 function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
 function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
  if(!KFX.wroot){KFX.wroot=new P.Container();KFX.wmask=new P.Sprite(P.Texture.WHITE);KFX.wroot.mask=KFX.wmask;KFX.app.stage.addChild(KFX.wroot,KFX.wmask)}  /* clip = a plain white rectangle sprite, not art */
  if(r){KFX.wmask.x=r.x;KFX.wmask.y=r.y;KFX.wmask.width=r.w;KFX.wmask.height=r.h}else{KFX.wmask.width=0;KFX.wmask.height=0}}
 function kfWxCap(c){const q=KFX.q,m=(kitView().pages===1?.65:1),box=c.lay==="wx"&&KFX.sr?Math.min(1,KFX.sr.w*KFX.sr.h/(innerWidth*innerHeight*.5)):1;return Math.max(2,Math.round(c.cap*m*q*Math.max(c.rain?.75:.4,box)))}
-function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth,h:innerHeight};if(!sr)return;const k=c.k[Math.floor(R01()*c.k.length)],vx=RS(c.vx[0],c.vx[1]),vy=RS(c.vy[0],c.vy[1]),sc=RS(c.sc[0],c.sc[1]),a0=c.a0*(c.night?.82:1);let x,y,v;
- if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1}}
- else{x=c.fromLeft?sr.x+RS(-60,sr.w*.7):sr.x+RS(-.04,1.04)*sr.w;y=scatter?sr.y+RS(0,sr.h):sr.y+RS(-30,-8);v={vx,vy,life:Math.ceil((sr.h+140)/vy)+60,sway:c.sway||0,spin:c.rain?0:RS(-c.spin,c.spin),fade:"none",a0,amb:1}}
+function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth,h:innerHeight};if(!sr)return;const k=c.k[Math.floor(R01()*c.k.length)],vx=RS(c.vx[0],c.vx[1]),sc=RS(c.sc[0],c.sc[1]),a0=c.a0*(c.night?.82:1),zs=c.snow&&k===KF_SPR.snow?Math.pow(R01(),1.5):null,vy=RS(c.vy[0],c.vy[1])*(zs==null?1:.6+.9*zs);let x,y,v;
+ if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);if(c.ray){x=sr.x+RS(.3,1.02)*sr.w;y=sr.y+RS(-.05,.3)*sr.h}v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1,tw:c.tw||0}}
+ else{const ln=c.line&&k==="streak";x=c.fromLeft?(scatter?sr.x+RS(0,sr.w):sr.x-50):sr.x+RS(-.04,1.04)*sr.w;y=c.fromLeft||scatter?sr.y+RS(0,sr.h*.95):sr.y+RS(-30,-8);v={vx:ln?vx*2.4:vx,vy:ln?vy*.5:vy,life:ln?Math.ceil((sr.w+200)/(vx*2.4))+30:c.fromLeft?Math.ceil((sr.w+200)/vx)+30:Math.ceil((sr.h+140)/vy)+60,sway:ln?0:c.sway||0,spin:c.rain||ln?0:RS(-c.spin,c.spin),fade:"none",a0:ln?.7:a0,amb:1,ln}}
  v.lay=c.lay;if(c.gust)v.gust=c.gust;if(c.fall&&c.lay==="wx")v.fam=1;
  const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;
- if(c.rain){const z=Math.max(.7,Math.min(1,sr.h/520));/* streak length follows the stage height (short stage on a phone in landscape) */s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*2.6*z,s.v.sc*3*z);s.blendMode="normal"}else if(c.float)s.rotation=0;
+ if(zs!=null&&!c.rain){/* REAL SNOW: soft round flakes of mixed size; far = tiny + crisp + slow, near = big + soft (blurred look) + faster + wider sway; blue-white so it reads on light paintings */
+  const b=s.v.sc/sc,z=zs;s.scale.set(b*(.3+.9*z));s.blendMode="normal";s.tint=z<.5?0x8cade6:0xc2d5f7;s.v.a0=.98-.45*z*z;s.v.sway=(c.sway||0)*(.5+1*z);s.v.spin=0;
+  /* crisp white core on the soft blue body: reads on light AND dark paintings; same path, same sway */
+  const t2=z>.4?kfSp(KF_SPR.snow,x,y,Object.assign({},s.v,{a0:Math.min(1,s.v.a0+.1),ph:s.v.ph}),0xffffff,sc*(.14+.34*z),"normal"):null;if(t2&&t2.v&&t2.v.max){t2.rotation=0;t2.v.ph=s.v.ph;if(KFX.wroot&&c.lay==="wx")KFX.wroot.addChild(t2)}}
+ else if(c.glow&&!c.rain){/* REAL FIREFLY: z = depth (near = bigger + brighter); halo (green-gold, big, soft) + tiny warm core twin sharing the same path and the same slow blink; additive on the night painting */
+  const z=R01(),b=s.v.sc/sc,add=c.night?"add":"normal",bl=RS(.75,1.25);s.rotation=0;s.scale.set(b*(1.1+1.4*z));s.blendMode=add;s.tint=0xa8ff30;s.v.a0=(add==="add"?.8:.5)*(.65+.35*z);s.v.bl=bl;
+  const t2=kfSp(KF_SPR.fly,x,y,Object.assign({},s.v,{a0:1,ph:s.v.ph,bl}),0xfff8b0,b*(.4+.5*z),add);if(t2&&t2.v&&t2.v.max){t2.rotation=0;t2.v.ph=s.v.ph;t2.v.bl=bl;if(KFX.wroot&&c.lay==="wx")KFX.wroot.addChild(t2)}}
+if(c.ray&&k==="glowburst"){s.x=sr.x+sr.w*.9;s.y=sr.y+sr.h*.03;s.scale.set(s.v.sc*3.4);s.v.a0=.5;s.blendMode="normal";s.tint=0xffffff}
+ else if(c.ray){s.rotation=2.25+RS(-.12,.12);s.scale.set(s.v.sc*RS(13,18),s.v.sc*RS(7,11));s.blendMode="normal"}
+ else if(s.v.ln){s.rotation=Math.atan2(s.v.vy,s.v.vx);s.scale.set(s.v.sc*RS(5,9),s.v.sc*RS(1.1,1.8));s.blendMode="normal";s.tint=0xb7a688}
+ else if(c.rain){const z=Math.max(.7,Math.min(1,sr.h/520));/* streak length follows the stage height (short stage on a phone in landscape) */s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*2.6*z,s.v.sc*3*z);s.blendMode="normal"}else if(c.float)s.rotation=0;
  if(c.lay==="wx"&&KFX.wroot)KFX.wroot.addChild(s)}
+/* kit page sample (§68.6): one full-screen burst of a weather kind, no game state needed (id = KF_WX key, "sun" = summer rays + motes, "bolt" = lightning) */
+function kfWxPreview(id){if(id==="bolt"){kfBolt(true);return}
+ const c=id==="sun"?kfSeCfg():Object.assign({lay:"se"},KF_WX[id]);if(id==="sun"){c.lay="se";c.id="sun";c.k=["orb","ember"];c.tint=0xffe08a}if(!c||!c.k)return;
+ const L=id==="sun"?[c,KF_RAYS]:[c];kfApp().then(()=>kfkLoad(L.flatMap(x=>x.k))).then(()=>{for(const q of L){const n=Math.round(kfWxCap(q)*.8);for(let i=0;i<n;i++)kfWxSpawn(Object.assign({},q,{lay:q.lay,float:q.float}),true)}kfWake()}).catch(()=>{})}
 function kfWxClear(lay,ms){for(const s of KFX.parts)if(s.v&&s.v.amb&&(!lay||s.v.lay===lay)){s.v.fade="out";s.v.max=ms||40;s.v.life=Math.min(s.v.life,ms||40)}}
 function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&!kfStill()&&!document.hidden&&kfOn()&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
 let kfAmbT=0;
@@ -193,14 +224,15 @@ function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfA
   kfAmbT=setInterval(()=>{if(!kfAmbWant()){KFX.ambOn=false;clearInterval(kfAmbT);kfAmbT=0;kfWxClear();kfDecoClear();KFX.decoK="";return}kfWxSync();
    let se=kfSeCfg();const w=kfWxCfg();const L=[];
    /* ONE petal effect: falling weather of the SAME kind as the season (peach/plum in spring, leaves in autumn, snow in winter) IS the season layer, full screen, in the weather's bolder motion but gentler count/size */
-   if(w&&w.fall&&w.k.some(k=>se.k.includes(k))){se=Object.assign({},w,{lay:"se",cap:Math.round(w.cap*.55),sc:[w.sc[0]*.7,w.sc[1]*.7],a0:Math.min(.8,w.a0)});L.push(se)}
-   else{L.push(se);if(w&&KFX.sr)L.push(w)}
+   if(w&&w.fall&&!w.line&&w.k.some(k=>se.k.includes(k))){se=Object.assign({},w,{lay:"se",cap:Math.round(w.cap*.85),sc:[w.sc[0]*.9,w.sc[1]*.9],a0:Math.min(.95,w.a0)});L.push(se)}
+   else{if(!se.off)L.push(se);if(w&&KFX.sr)L.push(w)}
+   if(se.id==="sun"&&!(typeof kfkPersons==="function"&&KFX.sr&&kfkPersons({x:KFX.sr.x,y:KFX.sr.y,w:KFX.sr.w,h:KFX.sr.h}).length))L.push(KF_RAYS);/* KIT §68.7: no light shafts over persons on the stage */else if(KFX.keys.se2){KFX.keys.se2="";kfWxClear("se2",60)}
    if(!L.some(c=>c.lay==="wx")&&KFX.keys.wx){KFX.keys.wx="";kfWxClear("wx",60)}
    kfDeco();
    for(const c of L){const key=c.id+"|"+c.night+"|"+c.k.join();
-    if(key!==KFX.keys[c.lay]){const first=!KFX.keys[c.lay];KFX.keys[c.lay]=key;if(!first)kfWxClear(c.lay,90);kfkLoad(c.k).then(()=>{const n=Math.round(kfWxCap(c)*(c.float?.5:.7));if(!c.float)for(let i=0;i<n;i++)kfWxSpawn(c,true);kfWake()}).catch(()=>{});continue}
+    if(key!==KFX.keys[c.lay]){const first=!KFX.keys[c.lay];KFX.keys[c.lay]=key;if(!first)kfWxClear(c.lay,90);kfkLoad(c.k).then(()=>{const n=Math.round(kfWxCap(c)*(c.float?.5:c.snow?.9:.7));if(!c.float)for(let i=0;i<n;i++)kfWxSpawn(c,true);kfWake()}).catch(()=>{});continue}
     let cap=kfWxCap(c);
-    const n=Math.min(c.rain?12:1,cap-kfAmbLive(c.lay));for(let i=0;i<n;i++)kfWxSpawn(c,false);if(n>0)kfWake()}},250)}).catch(()=>{kfAmbT=0})}
+    const n=Math.min(c.rain?12:c.line?6:c.snow?3:1,cap-kfAmbLive(c.lay));for(let i=0;i<n;i++)kfWxSpawn(c,false);if(n>0)kfWake()}},250)}).catch(()=>{kfAmbT=0})}
 /* ---------- numbers fly from the result card into their top-bar cell ---------- */
 const KF_CELL={sung:"hud-sung",danh:"hud-danh",suc:"hud-suc",bac:"hud-bac",duc:"hud-duc",sac:"hud-sac",tai:"hud-tai",tamco:"hud-tamco"};
 function kfNumbers(card,before){if(!card||!before||typeof S==="undefined"||!S)return;const keys=typeof RKEYS!=="undefined"?RKEYS:[];const L=[];
