@@ -77,3 +77,24 @@ mindPickBy edits, keep both sides. The agent loop should read `ghenOf(v,t)` / `d
 
 ## Handover (if a successor is needed)
 Done except review. Worktrees: /home/user/wt/jeal (branch), /home/user/wt/jeal-base (main build for before runs), tools /home/user/wt/jeal-tools, outputs /home/user/wt/jeal-out.
+
+---
+# r2 fixes (answer to npc-jealousy-r1.md FAIL) — SẴN SÀNG KIỂM 7ba04507
+Branch review/npc-jealousy: merge origin/main 60eb3d93 (generated files only conflicted), code+build 2450e40d, test 7ba04507.
+
+| r1 item | fix |
+|---|---|
+| 1 unit test not deterministic | page RNG seeded (addInitScript); random night reward `bestow` stubbed in the night case (both sides have it); `S.tonight/S.ntk` reset before the steal case; Sắc +1 kept out of the decay case (BAL.ghenW.sac lifted in-test); jemo mood aimed at one person switched off in the danger case. **10/10 runs green, 20 cases** (and 34 more runs green while hunting) |
+| 2 start jealousy her-only | **nobody starts jealous**: j1 newRival `ghen:R(15)` → 0 (gp starts empty) — one rule for every arrival site (j2/j3/j7/j8/j14/j27/j55/jcoopask all go through newRival); co-op join (jcoopworld r[m][mp]) no longer rolls a guest-side R(15) for gp → host and guest both 0 (fixes the r1 co-op note too, host-computed) |
+| 3 j20 queenRewards | `ghenAdd(w,q,-BAL.ghenW.qReward)` (5, in BAL); re-grep of raw `.ghen` writes: the rest are her dialogs/cards/UI (j2 acts, j7/j24 events, j42 maid, jtoil, jts, jtsb, jne, jroute, jthaiy her pregnancy) |
+| 4 jexam hậu thưởng | jealousy only, the same both ways: her → ghenAll(psk.ghen) (text unchanged), NPC → ghenAt(p,psk.ghen); the her-only `oanAdd(S,p,B.oan)` removed (B.oan was not a BAL.psk key) |
+| 5 stale gp keys | `ghenGone(k)`: NPC id < 900 not found or dead → pruned every week in ghenWeek and skipped by ghenMax; pid keys ≥ 900 kept |
+| found while testing | as a **cung nữ** she is not in consorts(), so ghenWeek skipped her row (her ghen never decayed — a regression vs main). Her row is always in the weekly loop now (unit case) |
+
+Tests on the merged build: npc-jealousy-unit 10/10 × 20 cases, night-steal-unit 29/29, old save (two-way-oldsave, current main build → branch, 40 weeks) 0 errors,
+**coop-e2e 59/59** on an idle box, 0 page errors. Bot (night-steal-bot 20 lives × 3 y × seeds 13000/37000 = 40 lives/build, current main b53…):
+| build | her stolen | same-rank control | gap | all tries / 10 nights |
+|---|---|---|---|---|
+| main | 24.0 % (171) | 20.1 % (607) | +3.9 | 3.54 |
+| r2 | 21.7 % (157) | 25.5 % (1026) | −3.8 (noise, sign flips between seed sets) | 3.67 |
+Noted, not changed: jroute.js:282 her-only danger ×.6 while S.rt.ad is on (a road effect of hers); jmood ghenAll mood factor (NPC mood bar = separate feature, r1 note).
