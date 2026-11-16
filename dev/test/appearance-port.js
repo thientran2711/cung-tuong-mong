@@ -66,7 +66,7 @@ if(OUT)fs.mkdirSync(OUT,{recursive:true});
   const all=F.everyone();ill=all.filter(q=>q.ill&&!['consort','player','emp'].includes(F.kind(q))).length;harm=all.filter(q=>q.pz||q.slap||q.rash).length;o.monthly={ill,harm,n:all.length};
   chk('cause.servant.ill-or-harm',ill+harm>0);
   /* a picture of someone with no fit rows plugs in when rows exist (emperor / eunuch / child): same layer, no per-kind code */
-  const fit={};for(const k of ['emp','staff','kid']){const q=who[k];if(!q)continue;const f=kitFile(k==='kid'?(kidFigSrc(q,'por')||''):((/src="([^"]*)"/.exec(kitPortrait(q,{size:'sm'}))||[])[1])||'');const base=Object.keys(KIT_VEIL.fit).find(x=>x.startsWith('por-consort'));if(f&&!KIT_VEIL.fit[f]){KIT_VEIL.fit[f]=KIT_VEIL.fit[base];KIT_SCAR.fit[f]=KIT_SCAR.fit[base]}
+  const fit={};for(const k of ['emp','staff','kid']){const q=who[k];if(!q)continue;const f=kitFile(k==='kid'?(kidFigSrc(q,'por')||''):((/src="([^"]*)"/.exec(kitPortrait(q,{size:'sm'}))||[])[1])||'');if(!f){fit[k]=['none',null];continue}const base=Object.keys(KIT_VEIL.fit).find(x=>x.startsWith('por-consort'));if(f&&!KIT_VEIL.fit[f]){KIT_VEIL.fit[f]=KIT_VEIL.fit[base];KIT_SCAR.fit[f]=KIT_SCAR.fit[base]}
    reset(q);pzGive(q,2,'thử',null);const h=kitFxLayers(q,f);fit[k]=[f,/kff-doc/.test(h)];chk('layer.fitrows.'+k,/kff-doc/.test(h));reset(q)}
   window.kitKnown=kk0;o.fit=fit;return o});
  R.errs=errs;R.bad=bad;console.log(JSON.stringify(R));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
