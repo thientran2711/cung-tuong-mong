@@ -40,7 +40,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
   const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
@@ -66,8 +66,8 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
 
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
- await A.ctx.addInitScript(()=>{window.__forceOrigin='tt';try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{try{const b=document.querySelector('#modal:not([hidden]) [data-kcp="nha"]:not(.ksel)');if(b&&!(typeof S!=='undefined'&&S&&S.kc))b.click()}catch(e){}},200)});
- await B.ctx.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}});
+ await A.ctx.addInitScript(()=>{window.__forceOrigin='tt';try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{try{document.querySelectorAll('.krskip').forEach(b=>b.click());const ro=document.getElementById('kroul');if(ro){const s=[...ro.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(s)s.click()}const b=document.querySelector('#modal:not([hidden]) [data-kcp="nha"]:not(.ksel)');if(b&&!(typeof S!=='undefined'&&S&&S.kc))b.click()}catch(e){}},200)});
+ await B.ctx.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{try{document.querySelectorAll('.krskip').forEach(b=>b.click());const ro=document.getElementById('kroul');if(ro){const s=[...ro.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(s)s.click()}}catch(e){}},300)});
  /* 1 host makes a room */
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await shot(A,'01-title');
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
@@ -81,7 +81,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
  ok(await until(A,()=>!__co().frozen,null,20000),'A unfrozen when B is in');
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
- ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both players are in the shared world');await clear(A);await clear(B);
+ ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both players are in the shared world',await Promise.all([A,B].map(o=>o.p.evaluate(()=>({S:typeof S!=='undefined'&&!!S,kc:typeof S!=='undefined'&&S&&!!S.kc,pick:typeof S!=='undefined'&&S&&S.kcPick,base:!!(window.COOPW&&COOPW.base),inLife:COOPW.inLife,hold:COOPW.holdMe,modal:(document.getElementById('modal')||{}).hidden===false?document.getElementById('modal').innerText.slice(0,200):'',btns:[...document.querySelectorAll('#modal button')].map(b=>(b.disabled?'D:':'')+(b.offsetParent?'':'H:')+b.textContent.trim().slice(0,30)),kroul:!!document.getElementById('kroul'),title:!(document.getElementById('title')||{}).hidden,tr:COOPW.tr.slice(-10),errs:0})).catch(e=>e.message))));await clear(A);await clear(B);
  const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
