@@ -129,7 +129,7 @@
 | design-scale REVIEW (opus; one page 590x820, uniform scale) | review/design-scale-r1 | main s14 | session_01UV1SzkHA4ScRWkoirdEoSn (opus) | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | DONE FAIL 6 (2 blocking) → fixes in coop-b1b5-p2 | 16/11 09:08Z |
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWojcdi663Kf9L2DK1G (successor of …njWQ, rolled over 2740a299) | RUNNING | 16/11 09:08Z |
-| slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | RUNNING | 16/11 09:19Z |
+| slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | DONE PASS 6444443b (ship with mg-balance) | 16/11 09:19Z |
 | item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | session_011xDdVP6DUKfEQP1er7RbtD (sonnet) | RUNNING | 16/11 09:27Z |
 | reign-road-fix review (sonnet) | review/reign-road-fix-r1 | D | session_01DgYSWoxLbnCcR7gE2i3QKu | DONE PASS 90c5b9e5 | 16/11 09:31Z |
 | kc-roads-cn-nc round 3 review (opus; main s14 08:41Z) | review/kc-roads-cn-nc-r1 | D | session_01DgYSWnY5pFVmEYGWvruZFs | DONE FAIL 4 → main s14 opens fixer | 16/11 09:31Z |

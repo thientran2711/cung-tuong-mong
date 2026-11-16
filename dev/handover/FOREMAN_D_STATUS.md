@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:08Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:10Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -32,7 +32,7 @@ main at start = eba64ead4.
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid | opus | worker session_01DgYSWoeRakcsjerKcBESWQ RUNNING |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
-| slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → reviewer session_01DgYSWoEfbFL74QqJ1ySvjK RUNNING (review/slap-mg-r3) |
+| slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
@@ -46,6 +46,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/slap-mg-r3 6444443b9abea1c78daac2a6a6a1b5dab8d0e9db (slap minigame §79: tiers via B's mgTier, skilled nặng 26 %, demo+hint, ONE CORE, Gọn mode; SHIP AFTER/WITH review/mg-balance — branch has mg-balance 96736fff, not its tip d1ca11be: re-merge tip + rerun dev/test/slap-mg.js before ship; ART NEEDED 7 files in reports/slap-mg-r2.md → art owner)
 - READY review/servant-mline-r3 b82d3bf3b0bc6096c92eebaff5ae91731868b8ac (servant-system part C jmline active NPC maid line + gain/loss caught chance per act + co-op host guard; contains part A servant-system-r1; main 18fb8252 ancestor; report reports/review-servant-mline-r3.md)
 - READY review/scene-end-sweep-r1 67db47f616f41f93098ba64bbcdfee646053d517 (owner OD 07:20Z: every animation scene ends with a kit §81 button; toilReveal, kitGain, j79 dawn, roulette converted; main 18fb8252 ancestor; non-blocking: kitPodiumShow missing from the scan table, j18 dawn onclick dead code)
 - READY review/reign-road-fix-r1 90c5b9e50641edb94c2bcec465cc31e1c66bba49 (orphan #33: unmet consorts no longer shown as "Quý phi ???" in Triều cục + 11 other sites via kitNameList; main 18fb8252 ancestor; report reports/review-reign-road-fix-r1.md)
