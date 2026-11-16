@@ -3728,3 +3728,34 @@ STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-c
 night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar (`kitCalendar`, dawn) · co-op scenes (`jcoop*`: buổi clock end, waiting-strip results) · the card-flip VIDEOS (`cardflip-videos`) · a `kitFlipNote`-like note is NOT a scene (no tap) and stays.
 The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
 Sample: kit page §81 (opens a real scene: the button shows after the animation and only it closes). Test: `dev/test/scene-end.js`.
+
+## 61. FIG-BG · silk hanging scroll behind every full-body figure · kitFigBgKey / KIT_FIGBG (owner 15/11 ~20:40Z option A, review/fig-bg) — `dev/build/jfigbg.js` (last module, after jact)
+The person is painted ON a vertical silk hanging scroll: roller rod with knob ends at the TOP and at the BOTTOM, brocade mount, silk field. Colour + motif say the status.
+- Wiring (one place): `kitStageFig` puts `data-fb="<key>"` on `<figure class="kesf">`; the CSS of jfigbg paints the scroll on that figure's column with `border-image`
+  (rods + mount keep their size, the silk stretches): `.kbk-por` (Tuần lục person page) and `.kes` (kitEventDp / kitEventStage column, first figure's key). Never make a private scroll/frame.
+- ONE figure size inside the scroll: every adult stands at the same size (men NOT taller), children by age. Book: `--kfr = .93 x min(1, kfr x KIT_FIG.man)` (headroom under the rod); dialog column: already `min(1, fac)`.
+- Crop rule (owner 15/11 20:50Z): the figure sits in the silk window (`overflow:hidden`); a wide robe that would pass the window edge is CROPPED, never sticks out. The dialog column widens by the border (`kitDpFit`).
+- Name chip in the dialog column sits on the painting: light halo (text-shadow), same vivid colour.
+- Art: `img/kit/figbg-<key>.webp` 448x800 (8-49 KB each, loaded on demand = one download per key), Magnific gpt-2-6 9:16, empty of people.
+| key | status | silk colour | motif |
+|---|---|---|---|
+| c0 | Đáp ứng | ngà (ivory) | white plum blossom |
+| c1 | Thường tại | pale green | bamboo, orchid |
+| c2 | Quý nhân | pale blue | lotus, water ripples |
+| c3 | Tần (also công chúa) | pale pink | peony |
+| c4 | Phi | pale lavender | wisteria |
+| c5 | Quý phi | pale rose-red | camellia |
+| c6 | Hoàng quý phi | pale amber-orange | golden chrysanthemum |
+| c7 | Hoàng hậu | pale yellow, gold mount | phoenix, peony |
+| cold | Lãnh cung | cold grey, plain mount | bare branch, no gold |
+| emp | Hoàng thượng | imperial ochre-gold, gilded rods | dragon, auspicious clouds |
+| th | Thái hậu | dusty mauve-taupe | pine, cranes, longevity peach |
+| serv | maid / mama / eunuch | grey hemp, linen mount | willow |
+| man | Vương gia / official / guard / physician / prince / công tử | grey-green ink wash | bamboo, misty mountains |
+| unk | stranger (unknown silhouette) | warm stone-beige | mist |
+The rank colours follow the portrait-frame / trung y colours (OWNER_DECISIONS 15/11 10:08Z). Sample: kit page `#kit` § 61 (one scroll per key).
+
+### 61.1 reviewer fixes (review/fig-bg-k1-r1)
+- The dialog name chip (`.kdpcap`) wraps INSIDE the silk window (white-space normal, max-width = window) and kitDpFit clamps it to the window, not the border box (a long name was cropped by the scroll).
+- Book: a column with a silk scroll keeps its normal width (`kitBookFigCol` returns "" for `data-fb`) — the scroll window crops a wide robe; it never widens the column (text ≥ 220 px kept). The book figure keeps main's KIT 34.6 vertical offset.
+- The dialog column's border is INSIDE the capped column (kit keeper change); the older sentence "the dialog column widens by the border" above no longer applies.
