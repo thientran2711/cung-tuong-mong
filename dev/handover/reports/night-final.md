@@ -105,7 +105,7 @@ Found on main (not fixed here, outside scope): j75's deck wrapper only decorates
 | log-sync-night.js | PASS |
 | night-steal-oldsave.js (old = origin/main) | loads, same name, 6 steal tries, 0 errors; the script prints FAIL only because it still expects the OLD build to have no BAL.steal (main has it since night-steal-r2) |
 | cardflip.js 755x1000, 412x1058, 1180x820, 1366x1024 @2 | 0 page errors, no h-scroll, old save ok |
-| coop-e2e.js (live Worker) | 57/59 — the 2 misses = known "A frozen when B left" flake (reports coop-name-mask, review-schedules3-r5: same on plain main) |
+| coop-e2e.js (live Worker) | 59/59 on the last build (first run before the RR fix 57/59: the known "A frozen when B left" flake, same on plain main per reports coop-name-mask / review-schedules3-r5) |
 | coop-night.js (live Worker) | 101/105 after the RR fix = exactly main's own result (baseline run on origin/main 392fff60: 101/105, the same 4 "host sees the wait" misses in cases 7/9/10/13). Before the fix: case 3 FAILED once (both seats stuck in tối after the host's held commit); main passes case 3 |
 
 ### 5.4 Not done
