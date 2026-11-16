@@ -3036,3 +3036,14 @@ Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §7
   seal), else just under the bar at the right edge. Tap → `#kctmp` kit panel (`kpHeader("notice",name,"Hảo hữu cùng chơi")` + kitRows Hảo hữu /
   Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
   waiting notice only. Samples on the kit page "§69".
+
+## 71. PLACE ICON · kitPlaceIcon + HAPPENING MARK · kitHapMark (owner 16/11 Dư đồ split, review/act-dedupe) — `dev/build/jact.js`
+_(Section number provisional: pending the coordinator's registry.)_
+- `kitPlaceIcon(k, size=14)` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE
+  the place name on every place-name site: Dư đồ map label (`.mspot .mlab`), Danh sách tile (`.mtile b`), stage place title (`#sc-t h2`).
+  Map `KIT_PLACE_IC`: Nội vụ phủ `bac` (mua sắm) · Thái y viện `y-thuat` · Ngự hoa viên `hoa` · Cần Chính điện / Dưỡng Hòa điện `sung` (gặp Hoàng thượng)
+  · Đức Thọ cung `duc` (thỉnh an, chép kinh) · Càn Ninh cung `danh` (phượng ấn). Missing glyphs (KIT REQUEST 16/11): Kính sự phòng (thẻ bài),
+  Lãnh cung, tẩm cung / cung phi tần — those names show no icon until the kit keeper draws them. Faces never go on place names.
+- `kitHapMark(k)` → `<i class="khap">!</i>` when place k has a happening this buổi (`adHapAt`): a 13 px light-gold disc (`--trim`) with an
+  ink "!" and a cream ring, after the place name (map label and list tile). Max 2 places per buổi, re-rolled every buổi, gone after she arrives.
+- Kit page sample `§71`.
