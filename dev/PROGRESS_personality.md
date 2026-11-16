@@ -1,4 +1,4 @@
-# PROGRESS — review/personality (item D7) — PAUSED (Foreman C order, cap 12)
+# PROGRESS — review/personality (item D7) — RESUMED 16/11, built (see Built)
 
 Task: personality + 13 "trọng" virtues for ALL characters (player included), Thái hậu archetypes picked per life,
 thỉnh an no longer flat +8 (depends on the target's personality/virtues, her standing, mood). Owner: OD L598, L599
@@ -32,6 +32,29 @@ thỉnh an no longer flat +8 (depends on the target's personality/virtues, her s
   chance of a scolding (negative); same function for Hoàng hậu thỉnh an (LUẬT SỬA CẢ NHÓM: j68f snow, j42 NPC greet too).
 - Display: card text only through existing act-card/kit (no new chips); person card trọng line needs a kit row -> check
   kitLine (§42) / pcard lines first, else KIT REQUEST.
+
+## Built (16/11, resumed by worker D7)
+- `dev/build/jtrong.js` (assembled right after jaudit.js), numbers in `BAL.trong`. Builds ON j28 PERS/traitsOf (nothing replaced).
+  - 13 virtues `VIRT` + glosses `VIRT_GL`. `trongOf(p)` → 2 virtues for EVERY person: player, Emperor, Thái hậu (from archetype),
+    consorts, servants, her maid. Deterministic from id/name hash (co-op: players keyed by name, so both seats agree); the first virtue
+    leans on the nết (`TR_V`), some nết exclude virtues (`TR_BAN`, e.g. Tham tiền never Liêm/Kiệm). Stored lazily as `.trong` (old saves migrate).
+  - Player now has a nết too: `S.pTr` (kept off `.trait` because figure art reads `.trait`); `traitsOf(S)` returns it (feeds jemo emotions).
+  - Deeds tagged `DEED` (+1 honours / -1 offends). `trongMul(judge,tags)` = 1 + 0.5 per honoured − 0.6 per offended virtue (can go < 0).
+    * Topic talk with consorts (`topicOpts`): the option is rebuilt with `chatF × trongMul`, so "nàng quý ngươi +N" on the card = what happens.
+    * NPC social deeds (SOC): deed context around affAdd/oanAdd → the judge's regard/oán follows their trọng (NPC↔NPC and NPC↔her; her own trọng judges deeds done to her).
+  - Thái hậu archetypes `TH_ARCH` (Từ ái / Nghiêm khắc / Đa nghi / Quyền uy / Sùng Phật) in `S.thO.arch` (co-op world key thO).
+    Old saves: mapped from `S.thTrait` (Hiền lành→Từ ái, Đa nghi→Đa nghi, Kiêu ngạo→Quyền uy); `S.thTrait` is kept = archetype's PERS trait.
+  - ONE greeting rule `trGreet(who,host)`: gain = base(archetype) × trọng × rank (Quyền uy/Nghiêm khắc weigh rank) × host mood × her mood
+    × repetition (greets in the last 3 mornings fade it, floor .35) × saturation (above the archetype's ceiling it fades to 0 within 15)
+    + (−2 if the host is angry) → can be 0 or negative. Odds per archetype ± trọng ± mood; a failed greeting = scolding (`l`).
+    Used by: Thỉnh an Thái hậu (talk + deck act), Thỉnh an Hoàng hậu (talk + deck act), snow-day "Vẫn lội tuyết đi thỉnh an" (j68f),
+    NPC serveTH (j28 SOC), servant-road "Hành lễ thỉnh an" (j42). The card shows the real number in Được/Mất; reasons in Kèm (`risk`)
+    and in "Vì sao" (`why`).
+  - Lowering: a month with no thỉnh an → Thái hậu −neg (Nghiêm khắc 3, Đa nghi/Quyền uy 2, Sùng Phật 1, Từ ái 0); above ceiling+10 → −1/month.
+  - Display (no new UI part, ONE KIT KEEPER rule respected): extra person-card lines "Trọng: …" (and "Tính nết: …" on her own card and the
+    Thái hậu card) → the existing kitPcGrid turns them into ordinary kit chips. Trọng shows "?" until learnt (a deed that touches it,
+    60% per touch; she always knows her own). Thái hậu's archetype is shown after her first greeting.
+- `dev/test/trong-check.js` (old save from main build → load, migration, greeting curves, neglect, card chips at 6 viewports).
 
 ## Done
 - Worktree, sparse checkout, main builds (`python3 dev/build/assemble.py`).
