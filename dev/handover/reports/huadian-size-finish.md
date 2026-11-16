@@ -20,3 +20,11 @@ OD:L592 "Huadian size: 8.5%" = 0.085 x face width (sheet sample 0.07 was too sma
 5. Check ty1-8 families (sizes + motifs, all 4 ages + fig/hd twins); fix any > 0.088 or non-flower.
 6. Check Luân hồi large figures in the browser (hd twins used there) after the drops are fixed; counts before/after; cdn_sync same names (python3 dev/site/cdn_sync.py <files>); then report SẴN SÀNG KIỂM.
 Cut-out worker session_011xDdVQi9izFkArmuejM2aM was told: I touch only forehead pixels; if it regenerates figures, I re-apply huadian after (no reply yet).
+
+## r5 (art worker #3, 16/11 ~21:40Z) — HANDOVER at ~25% context (worker rollover rule); coordinator opens the successor
+START_CTX ~5%. Code: review/huadian-size @ e46bef2d (pushed; no images in git).
+Done: re-ran runswap on the 72 por of r4_probs.txt (orig = live CDN, donors fetched with dev/art/huadian-size/r4_fetch.sh pattern: curl https://ctm-img.victoria-tntt.workers.dev/img/por-<style>-t<T>-a<A>.webp). 72/72 swapped; a18 before/after sheet LOOKED AT: all 18 style-tiers now small flowers at 0.085 (c02-t2/t5, c28-t2 drops gone; c14, c25, c28-t6, m14, m22, m34, m43, m45, m47, m48 OK). Counts: FAIL por before 72 (oversized/non-flower), after 72 flowers; aged ages not all clean yet (below).
+Remaining pendant dots at a26/36/51: stray.py (new) cleans a18 only; aged files (c18-t6 triple dots, m43-t5, m45-t1, m47-t3, m47-t6, c25-t5/t6 specks) need explicit per-file rects (mark centre = winx in swap log, dots 8-20 px below / left-below for c18-t6). Also still bad: c25-t4 a26/a36/a51 (pale donor + a leftover old flower at a51 — try donor c03-t4/m05), m22-t6 light rectangle at a26-51, c25-t5-a36 stray arrow right of mark (visible in a36 crop at x+25).
+dotclean.py: do NOT use at large FW (smears brows). Use stray.py (env SIDE/BOT/AREA).
+Todo unchanged for the rest: (2) twins fig/hd/tn via runpatch with WINLOG=swap log — BUT fig-cutout-clean lead may regenerate fig/hd transparent (owner sample c20/c02-ty3 waiting for her verdict; no file names yet) so do twins from the NEW fig when it tells the names; (3) 22 skipped por by hand; (5) ty1-8 check; (6) Luân hồi browser check, cdn_sync same names, report SẴN SÀNG KIỂM.
+Pitfall repeated: Bash shell vars do not persist between calls (a name list built in one call is empty in the next) — write lists to a file.
