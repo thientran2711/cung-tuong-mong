@@ -2104,7 +2104,7 @@ function walkWhy(tc){const left=Math.max(0,4-used);return left<=0?"hết khắc"
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(typeof CW!=="undefined"&&CW&&CW.on)return null;
+function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(window.COOPW&&COOPW.on)return null; /* co-op world (jcoopworld: window.COOPW; the global CW is a face-key helper) */
  const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,4-used);if(tc<=left)return null;
  let a={ok:true};if(typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
  return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}
@@ -10196,7 +10196,7 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
 (function(){const g0=guessWhy;guessWhy=function(b){const r=g0.apply(this,arguments);if(r==="Sức dưới 20")return whyTime(2)||(S&&S.suc<SUC_FLOOR?j76sucWhy(2):"")||r;return r}})();
 /* travel: finish this buổi on the road, the clock turns, then arrive in the new buổi */
 (function(){const g0=goTo;goTo=function(k){
- try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())){
+ try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())&&!(window.COOPW&&COOPW.on)){
   const tc=travel(S.place,k),room=4-used;
   if(tc>room&&room>0&&can(tc+1)&&!(typeof accessOf==="function"&&!accessOf(S,k).ok)){const b0=S.buoi||0;
    S.j76carry=tc-room;S.j76ck=j76key();used=4;log(`Đường xa: đi hết ${BUOI[b0].toLowerCase()}, đến nơi đã sang ${j76nextName()}.`);nextBuoi();
@@ -10257,7 +10257,7 @@ function j77Kh(n){return walkOk(n)}
 /* the map's walk reason reads the DAY (owner 15/11): a walk longer than this buổi's khắc spills (j9 walkSpill, card "Đi (đến nơi vào buổi sau)");
    only buổi tối (no walk past the night) or a place closed when she would arrive is a real stop, said in words */
 function j77WalkWhy(tc,k){const left=Math.max(0,4-used),b=S.buoi||0;if(left>0&&b>=B4L)return `hết khắc trong ngày (đi ${tc} khắc)`;
- const P=k&&typeof walkSpill==="function"?walkSpill(k):null;if(P)return P.ok?`đi ${tc} khắc, đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}`:`đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}: ${P.why}`;return walkWhy(tc)}
+ const P=k&&typeof walkSpill==="function"?walkSpill(k):null;if(P)return P.ok?`đi ${tc} khắc, đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}`:`đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()} — ${P.why}`;if(left>0&&window.COOPW&&COOPW.on)return `không kịp đến trong ${String(BUOI[b]).toLowerCase()} (đi ${tc} khắc)`;return walkWhy(tc)} /* co-op: no walk spill (the room turns the buổi together) */
 /* an entry that holds only for THIS buổi (asked / sneaked / greeted / led in now) cannot spill: say why in words, not "còn N" (owner 15/11) */
 function j77Bound(n){const b=S.buoi||0;return b>=B4L?`hết khắc trong ngày (cần ${n} khắc)`:`không kịp trong ${String(BUOI[b]).toLowerCase()} (cần ${n} khắc)`}
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
@@ -10289,7 +10289,7 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  const st=accState(k);const nm=accName(k);let n=0;try{n=countAt(k)}catch(e){}
  const left=Math.max(0,4-used);const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;const bu=i=>String(BUOI[i]||"").toLowerCase();
  const L=[sp&&sp.ok?`<p>Đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
- if(sp&&!sp.ok)L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`);
+ if(sp&&!sp.ok&&!String(st.why||"").includes(sp.why))L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`); /* said once (j77WalkWhy already names it) */
  if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng, trưa và chiều.</p>`);
  if(n)L.push(`<p class="past">Có ${n} bóng người ở đó.</p>`);
  const opts=[];
@@ -10416,7 +10416,7 @@ function accGuestSpill(k,tc,bound){if(bound||j77Kh(tc)||typeof walkSpill!=="func
 function accGuestWhy(k,tc,bound){if(S.confined)return"đang cấm túc";if(S.out)return"đang ở lãnh cung";const a=accessOf(S,k);if(!a.ok)return"";if(j77Kh(tc))return"";
  if(accGuestSpill(k,tc,bound))return"";const b=S.buoi||0,bu=String(BUOI[b]||"").toLowerCase();
  if(bound)return `không kịp gặp nàng trong ${bu} (đi ${tc} khắc)`;if(b>=B4L)return `hết khắc trong ngày (đi ${tc} khắc)`;
- const P=typeof walkSpill==="function"?walkSpill(k):null;return P&&!P.ok&&P.why?`đến nơi đã sang ${String(BUOI[b+1]).toLowerCase()}: ${P.why}`:`hết khắc buổi này (đi ${tc} khắc)`}
+ const P=typeof walkSpill==="function"?walkSpill(k):null;return P&&!P.ok&&P.why?`đến nơi đã sang ${String(BUOI[b+1]).toLowerCase()} — ${P.why}`:`không kịp đến trong ${bu} (đi ${tc} khắc)`}
 function accGuestNeed(h,k,tc){const P=accGuestSpill(k,tc);if(!P||/data-kneed=|\sdisabled/.test(h.slice(0,h.indexOf(">")+1)))return h;
  return h.replace(/^<button /,`<button data-kneed="${encodeURIComponent(JSON.stringify([{t:`đi ${tc} khắc (đến nơi ${String(BUOI[P.b]).toLowerCase()})`,ok:true}]))}" `)}
 function accLockTag(k){const a=accessOf(S,k);return a.ok?"":` · (${a.why}: chạm để xem cách vào)`}
@@ -28340,7 +28340,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5a6c2faeb3a4";window.CTM_BUILD=BUILD;
+const BUILD="daeb96141f0d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

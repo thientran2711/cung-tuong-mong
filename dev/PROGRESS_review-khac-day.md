@@ -44,3 +44,21 @@
 | Dư đồ (nơi) | 192 / 154 / 0 | 78 / 12 | 192 / 162 / 0 / 232 | 0 / 0 |
 Wrong red per state before: sáng/trưa/chiều with 0–1 left ≈55–58 each (2–3 at 2–3 left); buổi tối 0. After: 0 in all 20 states.
 (Before "reason" items in Tài nghệ/Hoàng tự/Kẻ hầu were j76 whyTime words, already day-aware.)
+
+## Reviewer r1 (review/khac-day-r1, merged onto origin/main f8f51797c)
+- Merge: only index.html / sw.js / assets.json conflicted (build outputs) → rebuilt with dev/site/build_site.sh.
+- FOUND + fixed: the co-op guard in j9 `walkSpill` read `typeof CW!=="undefined"&&CW.on`, but the global `CW` is the face-key helper
+  (`CW=n=>"@W"+n`); the co-op world object is `window.COOPW`. So walk spill was NOT off in co-op (map card + the new j77 visit chip
+  promised "đến nơi buổi trưa", then the walk was lost because the co-op buổi only turns through bend). Now `window.COOPW&&COOPW.on`;
+  the j76 goTo "Đường xa" path gets the same co-op guard. In co-op a too-long walk now reads "không kịp đến trong buổi … (đi N khắc)"
+  (map tile + person-card visit); acts still spill in co-op (j76 carry, paid when the room turns the buổi).
+- Fixed wording: closed-next-buổi place said its reason twice with two colons ("…: đến nơi đã sang buổi tối: đóng cửa tối. Đi đến nơi
+  vào buổi tối cũng không được: đóng cửa tối.") → once: "đến nơi đã sang buổi tối — đóng cửa tối."
+- dev/test/walk-spill.js updated (current start(), 4 buổi, generic arrival khắc): spill/night/closed pass.
+- dev/test/coop-e2e.js: `COOP_SPILL=1` makes seat A spill a 2-khắc act every day buổi and checks the next buổi pays the carry once.
+- Results: khac-day-run A–G pass (755x1000, 1000x755, 1180x820, 844x390); khac-day-scan percount 0 / wrongred 0; spill effects equal
+  to the fit run (same seed); Tài nghệ spill; old save with S.j76carry and no S.j76ck pays the carry; coop-e2e plain 59/59 ×3,
+  COOP_SPILL=1 79/79 (10 spills, used=1 after each turn, never 0/2).
+- Owner L484 (Dư đồ, tối with 4 khắc, no Bái kiến): not reproduced on this build — in buổi tối with 4 khắc every palace with a chủ vị
+  offers "Bái kiến <rank> rồi vào"; Càn Ninh (Hoàng hậu) outside thỉnh an shows "Xin bái kiến" with the reason; tối with 1 khắc says
+  "hết khắc trong ngày (đi 2 khắc)" + "Sang ngày mới".

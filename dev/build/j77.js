@@ -21,7 +21,7 @@ function j77Kh(n){return walkOk(n)}
 /* the map's walk reason reads the DAY (owner 15/11): a walk longer than this buổi's khắc spills (j9 walkSpill, card "Đi (đến nơi vào buổi sau)");
    only buổi tối (no walk past the night) or a place closed when she would arrive is a real stop, said in words */
 function j77WalkWhy(tc,k){const left=Math.max(0,4-used),b=S.buoi||0;if(left>0&&b>=B4L)return `hết khắc trong ngày (đi ${tc} khắc)`;
- const P=k&&typeof walkSpill==="function"?walkSpill(k):null;if(P)return P.ok?`đi ${tc} khắc, đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}`:`đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}: ${P.why}`;return walkWhy(tc)}
+ const P=k&&typeof walkSpill==="function"?walkSpill(k):null;if(P)return P.ok?`đi ${tc} khắc, đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}`:`đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()} — ${P.why}`;if(left>0&&window.COOPW&&COOPW.on)return `không kịp đến trong ${String(BUOI[b]).toLowerCase()} (đi ${tc} khắc)`;return walkWhy(tc)} /* co-op: no walk spill (the room turns the buổi together) */
 /* an entry that holds only for THIS buổi (asked / sneaked / greeted / led in now) cannot spill: say why in words, not "còn N" (owner 15/11) */
 function j77Bound(n){const b=S.buoi||0;return b>=B4L?`hết khắc trong ngày (cần ${n} khắc)`:`không kịp trong ${String(BUOI[b]).toLowerCase()} (cần ${n} khắc)`}
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
@@ -53,7 +53,7 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  const st=accState(k);const nm=accName(k);let n=0;try{n=countAt(k)}catch(e){}
  const left=Math.max(0,4-used);const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;const bu=i=>String(BUOI[i]||"").toLowerCase();
  const L=[sp&&sp.ok?`<p>Đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
- if(sp&&!sp.ok)L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`);
+ if(sp&&!sp.ok&&!String(st.why||"").includes(sp.why))L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`); /* said once (j77WalkWhy already names it) */
  if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng, trưa và chiều.</p>`);
  if(n)L.push(`<p class="past">Có ${n} bóng người ở đó.</p>`);
  const opts=[];
@@ -180,7 +180,7 @@ function accGuestSpill(k,tc,bound){if(bound||j77Kh(tc)||typeof walkSpill!=="func
 function accGuestWhy(k,tc,bound){if(S.confined)return"đang cấm túc";if(S.out)return"đang ở lãnh cung";const a=accessOf(S,k);if(!a.ok)return"";if(j77Kh(tc))return"";
  if(accGuestSpill(k,tc,bound))return"";const b=S.buoi||0,bu=String(BUOI[b]||"").toLowerCase();
  if(bound)return `không kịp gặp nàng trong ${bu} (đi ${tc} khắc)`;if(b>=B4L)return `hết khắc trong ngày (đi ${tc} khắc)`;
- const P=typeof walkSpill==="function"?walkSpill(k):null;return P&&!P.ok&&P.why?`đến nơi đã sang ${String(BUOI[b+1]).toLowerCase()}: ${P.why}`:`hết khắc buổi này (đi ${tc} khắc)`}
+ const P=typeof walkSpill==="function"?walkSpill(k):null;return P&&!P.ok&&P.why?`đến nơi đã sang ${String(BUOI[b+1]).toLowerCase()} — ${P.why}`:`không kịp đến trong ${bu} (đi ${tc} khắc)`}
 function accGuestNeed(h,k,tc){const P=accGuestSpill(k,tc);if(!P||/data-kneed=|\sdisabled/.test(h.slice(0,h.indexOf(">")+1)))return h;
  return h.replace(/^<button /,`<button data-kneed="${encodeURIComponent(JSON.stringify([{t:`đi ${tc} khắc (đến nơi ${String(BUOI[P.b]).toLowerCase()})`,ok:true}]))}" `)}
 function accLockTag(k){const a=accessOf(S,k);return a.ok?"":` · (${a.why}: chạm để xem cách vào)`}

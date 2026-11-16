@@ -86,7 +86,7 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
 (function(){const g0=guessWhy;guessWhy=function(b){const r=g0.apply(this,arguments);if(r==="Sức dưới 20")return whyTime(2)||(S&&S.suc<SUC_FLOOR?j76sucWhy(2):"")||r;return r}})();
 /* travel: finish this buổi on the road, the clock turns, then arrive in the new buổi */
 (function(){const g0=goTo;goTo=function(k){
- try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())){
+ try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())&&!(window.COOPW&&COOPW.on)){
   const tc=travel(S.place,k),room=4-used;
   if(tc>room&&room>0&&can(tc+1)&&!(typeof accessOf==="function"&&!accessOf(S,k).ok)){const b0=S.buoi||0;
    S.j76carry=tc-room;S.j76ck=j76key();used=4;log(`Đường xa: đi hết ${BUOI[b0].toLowerCase()}, đến nơi đã sang ${j76nextName()}.`);nextBuoi();
