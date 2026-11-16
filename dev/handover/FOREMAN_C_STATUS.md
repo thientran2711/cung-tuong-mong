@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+FOREMAN C session 8 = session_011xDdVQKn56reGyLzWPb9oC (opened by session 7 at 21:05Z 16/11; lineage depth 2/8) · START_CTX (session 8) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Replaces session 7 session_011xDdVPkuPo47Rd8mxWQsgD.
 FOREMAN C session 7 = session_011xDdVPkuPo47Rd8mxWQsgD (opened by session 6 at 19:48Z 16/11; lineage depth 1/8) · START_CTX (session 7) = ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60%. Replaces session 6 session_011xDdVRacauxsVyBHUGkxk8.
 FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
 ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
