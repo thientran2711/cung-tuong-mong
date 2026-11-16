@@ -84,6 +84,6 @@
 | slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | RUNNING | 16/11 07:27Z |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | RUNNING | 16/11 07:27Z |
 | Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | RUNNING | 16/11 07:27Z |
-| D26 review (opus) | review/memories-r1 | C | (opening, s2 session_011xDdVRG4cue2p9fUsdAg68) | RUNNING | 07:26Z 16/11 |
-| D41 review (opus) | review/promote-servants-r1 | C | (opening, s2) | RUNNING | 07:26Z 16/11 |
-| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | (opening, s2) | RUNNING | 07:26Z 16/11 |
+| D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | RUNNING | 07:26Z 16/11 |
+| D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
+| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
