@@ -47,7 +47,7 @@ function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k o
  try{if(!f14())return r;const c=S.st.ch,rd=S.st.f14.road;if(!rd||!rdFull(rd))return r;
   const P=c.plan,a=P.indexOf("o"),b=P.indexOf("st:st_the");if(a<0||b<a||c.i>=a)return r;
   const mid=["o"];for(let n=BAL.road.first;n<=BAL.road.last;n++)mid.push("st:"+ROAD14[rd][n]);
-  P.splice(a,b-a+1,...mid);S.st.f14.rd=rd;S.st.f14.act={};S.st.f14.ends={}}catch(e){console.error(e)}return r}})();
+  P.splice(a,b-a+1,...mid);S.st.f14.rd=rd;S.st.f14.act={};S.st.f14.ends={};S.st.f14.fb={};S.st.f14.q97={p:0,b:0}}catch(e){console.error(e)}return r}})();
 /* carry the road's people into the next chapter */
 (function(){const n0=newThread67;newThread67=function(id,kind){const a=ARC67[id];
  if(rdOn()&&a&&(a.o==="rd"||id===S.st.f14.rd)&&a.road!==undefined&&!a.cast){const A=n0.apply(this,arguments);if(A)Object.assign(A.act,S.st.f14.act);return A}

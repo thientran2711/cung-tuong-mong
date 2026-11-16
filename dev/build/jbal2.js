@@ -300,7 +300,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  dtq_bien:{grain:3,speak:4},  /* grain: months before Hộ bộ closes the spring books (.5); speak: lowest rank index whose memorial reaches the desk (.9) */
  dtq_vu:{lim:2},              /* months before Đại Lý tự opens the đối chất (.9) */
  dtq_binh:{mon:3},            /* months for the camp half of the tiger tally to reach the capital (.5) */
- dtq_huynh:{mon:3},           /* months before the Hắc Thủy freezes and the ransom road closes (.5) */
+ dtq_huynh:{mon:3,owe:100},   /* mon: months before the Hắc Thủy freezes and the ransom road closes (.5); owe: bạc the Tổng quản takes back (loan + interest) when .5 ends after «Mượn bạc» (c1, w bạc 80) */
  muoi_tuoc:{rkSeat:4},        /* lowest rank index allowed to write a lantern poem at the Trung thu feast (.7) */
  muoi_lau:{rkSend:3},         /* lowest rank index allowed to send goods into a prison through Nội vụ phủ (.8) */
  muoi_doi:{han:3},            /* months to pay the relief contribution before Hộ bộ closes its books (.8) */

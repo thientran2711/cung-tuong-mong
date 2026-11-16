@@ -6,7 +6,7 @@
 const {chromium}=require('playwright');
 const [,,URL,MAIN]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,700))};
- const boot=async url=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const boot=async url=>{const [VW,VH]=(process.env.VP||'1180x820').split('x').map(Number);const ctx=await b.newContext({viewport:{width:VW,height:VH},deviceScaleFactor:2,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(url.slice(-20)+': '+e.message.slice(0,200)));await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);return p};
  const mk=async(url,k,months)=>{for(let t=0;t<4;t++){const r=await mk1(url,k,months);if(!r||!r.retry)return r}return{retry:1}};/* boot can reset S after a rebuild: retried */
