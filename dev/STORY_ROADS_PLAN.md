@@ -1,0 +1,114 @@
+# STORY ROADS PLAN — the 14-chapter life (Cung Tường Mộng)
+
+Status: owner chose this direction 16/11 08:30Z ("Ok, chọn hướng tuyến truyện 14 chương đi" = option 1 of the 07:05Z recommendation).
+Owner words: read the appendix (OWNER_DECISIONS lines copied verbatim) and dev/PRIORITY_RULES.md in full; this plan never replaces them.
+Build branch for phase 1: `review/story14-p1` (report: dev/handover/reports/story14-p1.md).
+
+## 0. What already exists (LUẬT ƯU TIÊN SỐ 1 check, 16/11)
+- `dev/build/j67.js` (owner 11/14): 4 premises per origin (36 arcs) + 8 shared arcs (`o:"*"`) + 3 stage arcs (`st_the` Gây dựng thế lực,
+  `st_con` Con đường của con, `st_dong` Ngôi Đông cung) + court/scholar arcs; each arc 3–6 hồi (mở đầu → 1–3 rắc rối → bước ngoặt → cao trào
+  → kết), ≥3 endings, real rivals cast with `castRv67`, history of the last 10 arcs per origin (`ctm-arcs`), chapter deadline, Lợi thế,
+  reward item by outcome. v3 frame "about 13 chapters": nhap, sung, 4 origin arcs, origin ending, 3 shared, 3 stage, hau, ke.
+  Header rule: a lost chapter never closes the Hoàng hậu / Hoàng thái hậu road.
+- `j4.js` origin roads (v1 story, old saves), `jkc.js` pre-palace home road (6 origins), `j96.js` Thanh mai trúc mã chapters
+  (spliced into the plan), `j72.js` Việc nhờ (2–5 step favours from real people), `jreign.js` reign road + 3-step lines for 6 key people,
+  `jgoal.js` chapter goal + chapter detail (KIT §72), `jtut.js` coach/tips tour (KIT §72), `jtabs.js` Mệnh truyện tab.
+- Queued, not on main: `review/chapter-detail-r1` (jchap.js: hồi-by-hồi chapter detail, folded into kitGoalDetail),
+  `review/tutorial-r2*`. Phase 1 touches jgoal/jtabs only by a few lines so these still merge.
+
+## 1. The frame (all phases)
+A life = 14 chapters (chương) in three parts. Each chapter has several hồi (3–5 for her own chapters).
+| Part | Chapters | Content | Built in |
+|---|---|---|---|
+| Phần đầu · Nhập cung học việc | 1–3 | new-player chapters: each quest is DONE by really using a feature (e.g. sell 1–2 items from the chest); reward only on completion; a chapter closed by its time limit gives nothing; replaying a life gives no free tutorial reward | frame P1, quests P2 |
+| Phần giữa · Truyện xuất thân | 4–11 | ONE of the origin's 4 roads, rolled at đầu thai, avoiding the roads played lately; 8 chapters of that road | P1 (j67 mapped), P3 (4 full roads) |
+| Phần cuối · Ngôi Trung cung | 12–14 | endgame: con đường của con / ngôi Đông cung, Tranh ngôi Trung cung, Mẫu nghi thiên hạ | P1 (existing), P4 (full) |
+
+Rules that hold in every phase:
+- Roles are cast from REAL people of this life (rivals, men, servants, family, officials); story-only named NPCs are allowed when a road needs
+  them (e.g. the old steward of her ruined house), created for that road and shown with an existing face.
+- A hồi fires only for a real in-game reason (a person's goal, grudge, debt, faction move, an event, a deadline) — never a daily dice.
+  j67 today: hồi open from the "Mệnh truyện" card when due; servant life: beats come on their own. P3 adds reason triggers per hồi.
+- Every reward has a gain AND a loss (OD rule 16/11 07:15Z). P2/P3 rewards are written with both columns; P1 keeps j67's existing
+  choice costs and chapter rewards unchanged (noted for P5 balance).
+- Failing a chapter never closes the Hoàng hậu road (j67 rule). A chapter that cannot run (no arc left, already Hoàng hậu, son already
+  Thái tử) is replaced by a shared arc so the numbers stay 1..14.
+- Only new lives get the frame; every older save keeps its old frame (v1 story, j67 v2/v3).
+- Kit parts only (LUẬT KIT TRƯỚC); wording per dev/kit/VANPHONG.md ("Mệnh truyện" for the tab, never "Tuyến truyện" on screen).
+
+## 2. Phases
+### Phase 1 — frame + port j67 (review/story14-p1, built 16/11)
+- `dev/build/jst14.js` (after j67.js): new life → `S.st.f14={v:1,road}`, `S.st.v2=4`, plan
+  `ms:nhap14, ms:sung14, ms:tap14 | o,o,o,o, fin, s,s,s (cnv: ms:len14,s,s), st:st_the | end:12, ms:hau, ms:ke`.
+- Road roll: the first premise is picked among the origin's 4 avoiding the ctm-arcs history (fresh first) and names the road; the other 3
+  premises follow (each chapter's outcome picks the next, j67 chNext67), then shared arcs + Gây dựng thế lực up to chapter 11.
+- Chapter 12 = st_dong (son) / st_con (child) / a shared arc; 13 = Tranh ngôi Trung cung; 14 = Mẫu nghi thiên hạ.
+- Thanh mai trúc mã chapters (j96, jkc) are moved out of Phần đầu into Phần giữa and replace shared arcs (frame stays 14).
+- Tutorial milestones nhap14 / sung14 / tap14 (Học quy củ: a friend at thân tình 30 + one art at bậc 2) / len14 (cnv, 12-month limit):
+  real state checks; the time-limit step closes the chapter with NO Danh and NO item ("Lỡ dịp").
+- UI (existing kit only): chapter detail (kitGoalDetail) gets a section "Đời người · 14 chương" (kitRows: three parts, where she is,
+  chapters left); Mệnh truyện tab chip row gets `kchip` "Chương n/14 · <part>" and "còn N chương"; servant road panel same words.
+- Tests: dev/test/story14-frame.js (sensible bot lives + fast story bot over all 9 origins walking 1..14, detail/tab text, tutorial
+  reward rule, old saves from main and from frame-off).
+
+### Phase 2 — tutorial chapters + origin intros (next)
+Tutorial chapters 1–3, each 3–5 hồi, each hồi a TASK that is done only when she really does it, reward on completion with a gain and a loss:
+- Ch1 "Nhập cung, đứng vững": thỉnh an (Hành sự card played), go to a place on Dư đồ, read a person card (Hậu cung), wear an outfit
+  (Tư trang › mặc), sang buổi / sang ngày once.
+- Ch2 "Lần đầu được sủng": learn one art lesson (Tài nghệ), play one art mini-game, give a gift to a person (gift picker), serve the
+  Emperor once (night / dâng canh), answer one event card.
+- Ch3 "Học quy củ trong cung": sell 1–2 items from the chest (Tư trang › bán), buy one item (Nhờ thái giám mua đồ), take one Việc nhờ
+  (j72) to its end, make one ally (Giao tình), read Sổ ghi.
+State per task: counters written by the feature itself (S.tu14.{sold,bought,gift,...}); no counter → the task cannot be marked; the coach
+(jtut kitCoach) may point at the button but never completes the task. Replay: tasks reset per life, rewards only when done again (no skip-with-reward).
+Servant life (cnv) gets its own three chapters (phận sự, Đồng liêu, chủ tin).
+
+Origin intros (OD:L1244): every origin (incl. cung nữ and hòa thân, who go straight into the palace without a home road) gets
+- a NARRATED intro with ILLUSTRATIONS (3–4 painted panels, kit scene panel kitPanel({scene:true}) + kitTiles), and
+- an ENTRY animation (palace gate → selection hall, kit §67/§68 painted FX parts), and
+- a tuyển tú MINIGAME that decides the entry rank by score: high score → the highest rank of that selection; fail → a lower rank
+  (never "the highest rank the origin allows"). Reason shown on the result card (caught the Emperor's / Thái hậu's eye, Hoàng hậu's word…).
+  Draft: 3 hồi — dung nghi (pose/bearing, tap timing), ứng đối (answer the Thái hậu's question, 3 choices by trait), tài nghệ (one
+  short art mini-game from j82). Score 0..30 → rank ladder of that selection per origin (table in P2, balanced in P5).
+  Hòa thân: the welcome audience replaces the selection; cung nữ: the cung nữ selection (rank = post: cung nữ bậc / đại cung nữ).
+ART NEEDED — SAMPLES ONLY, made by the MAIN chat (owner 07:30Z/07:45Z), mass production by Foreman C after approval. This worker
+generates no art. Sample list for main:
+1. one origin intro set as the sample (Con gái Tể tướng): 4 landscape panels (phủ at dawn, farewell to the family, sedan at the
+   palace gate, kneeling in the selection hall), style per dev/art/OWNER_ART_RULES.md;
+2. the selection hall (Điện tuyển tú) background, landscape, 4 buổi variants later;
+3. the selection audience: Emperor and Thái hậu seated (existing figures reused, only the throne-dais scene is new);
+4. one candidate-line panel (her among 5–6 candidates, backs/three-quarter, no faces revealing personality);
+5. the entry animation key frames: palace gate opening, path of the Tử cấm thành (2–3 frames) — or confirm the kit §68 painted FX can do it;
+6. hòa thân arrival panel (envoy procession) and cung nữ selection panel (Nội vụ phủ courtyard) as the two "no home road" samples.
+Then (after approval) per origin 4 panels × 9 origins → Foreman C.
+
+### Phase 3 — four full roads per origin
+Each origin: 4 different roads (today's 4 premises grow into 4 roads), each road = 8 chapters (4–11) × 3–5 hồi, own cast slots
+(real NPC by role; story-only NPC where needed), ≥3 endings per road, reason triggers per hồi (goal / grudge / debt / faction / event),
+gain-and-loss on every choice and reward. Roll at đầu thai avoiding recent roads (ctm-arcs). Content plan per origin → Foreman (content).
+Shared arcs stay as fillers only when a road chapter cannot run.
+
+### Phase 4 — endgame chapters 12–14
+Ch12 child road / Đông cung (with a road for childless lives: nuôi con nuôi / Thái hậu's heir choice), ch13 Tranh ngôi Trung cung as hồi
+(not only rank milestones), ch14 Mẫu nghi thiên hạ (kế vị, Hoàng thái hậu), seat rules (j30 SEATCAP) and promo-skip rules apply.
+
+### Phase 5 — bot balance
+Same harness and target band as the origin balance (OD:L19 + L43): Hoàng hậu ~20–40 % per origin; per-road win/lose spread;
+chapter length (months) per part; reward value vs cost per rank (BALANCE rule 15/11 20:30Z). Report table; no new rules.
+
+## 3. PENDING — NPC roads (OD:L1243). NOT APPROVED, DO NOT BUILD
+Proposal (owner asked for a recommendation): consorts (and maids) get their OWN origin + one of the 4 roads of that origin, 14 chapters like
+hers, so they live with goals. Parts of an NPC's road can be HER side quest (helping them), but not every chapter asks her: her help = ONE
+hồi (one task), where her own chapters have 3–5 hồi. Otherwise NPCs need no extra side quests.
+Recommendation draft for the coordinator: NPC roads run as light state (chapter n, road id, flags) advanced by the existing NPC month
+simulation, no dialogs; only the hồi that names her becomes a j72-style Việc nhờ with gain and loss; cap 1 open NPC request at a time.
+Waits for the owner's answer.
+
+## Appendix — owner decisions, copied verbatim from dev/OWNER_DECISIONS.md
+[OD:L1223] - (16/11 06:30Z, s10) OWNER STANDING RULING (from her s9 words 05:51–05:52Z; original ruling lost, history search reports/owner-history-chapters.md): EVERY origin has 4 DIFFERENT story roads (tuyến truyện) for variety; she recalls 12–14 chapters per origin. Today main has ONE road per origin with n:3 steps (td n:5). Meaning of "12–14 chương" (per road vs total over the 4 roads) asked to the owner 06:30Z — do not build until answered. Scope later: content plan per origin → Foreman (content), not main.
+[OD:L1226] - (16/11 07:05Z, s10) OWNER (verbatim summary, story roads; she had to re-state it because earlier chats lost it): 9 origins × only 1 road = 9 roads = boring, players learn them by heart. On đầu thai: roll the origin, THEN roll one of MANY different roads, every road fully different. A life spans 14 CHAPTERS in total (not 3). The first chapters work as a NEW-PLAYER TUTORIAL: quests that make her use each game feature, with rewards. Each chapter has several hồi. LIVING WORLD: replaying the same road can end differently; the people in a road are REAL characters of this life (not always the same NPC A), and when they come to her it must be for a REAL in-game reason (their goals, grudges, debts, faction, events), never a dice roll that day. Coordinator found on main: j67 (owner 11/14) already has 4 premises per origin (36 + court/scholar/st), 3–6 hồi each, casts real rivals (castRv67), >=3 endings, avoids the last 10 played. Recommendation sent 07:05Z; plan in dev/STORY_ROADS_PLAN.md after she approves.
+[OD:L1233] - (16/11 07:55Z, s10) OWNER (tutorial chapters): the new-player tutorial is NOT "show the button". Each tutorial quest makes her DO the task to finish it (e.g. sell 1–2 items from the private chest) and the reward comes only when the task is done. Replaying lives does not get free tutorial rewards: the "skip but still rewarded" idea from the 07:05Z recommendation is REJECTED.
+[OD:L1234] - (16/11 07:55Z, s10) OWNER (story cast): story-only named NPCs are OK when the road needs them (e.g. the old steward of her ruined house seeking shelter in a revenge road) — they need not be game-world people. Separately: she already ruled that EVERY NPC in the game must have side quests (phụ tuyến) for her — check whether it is built (today jreign gives 3-step quest lines to only 6 key people; every named person has a Tâm nguyện). Also check the old rule: does failing a chapter close her road to Hoàng hậu (j67 header: a lost road never closes the Hoàng hậu / Hoàng thái hậu road) or must all chapters be done first.
+[OD:L1242] - (16/11 08:30Z, s10) OWNER: "Ok, chọn hướng tuyến truyện 14 chương đi" → coordinator picks option 1 of the 07:05Z recommendation: chapters 1–3 = tutorial (quests must be DONE for the reward, no skip-with-reward), 4–11 = one of the origin's 4 roads, 12–14 = endgame; roles cast from real NPCs; hồi fire only for real in-game reasons; story-only NPCs allowed; phased build (1 frame + port j67, 2 tutorial, 3 extend roads per origin, 4 endgame, 5 bot balance).
+[OD:L1243] - (16/11 08:30Z, s10) OWNER (NPC roads, asks for a recommendation): instead of side quests for every NPC, give NPCs (esp. consorts, also maids) their OWN origin + one of the 4 roads of that origin, 14 chapters like hers, so they live with goals; parts of an NPC's main road can be HER side quest (helping them) — but not every chapter asks her; her help = ONE hồi (one task) where her own chapters have 3–5 hồi. Otherwise NPCs need no extra side quests.
+[OD:L1244] - (16/11 08:30Z, s10) OWNER (origins without a home road): cung nữ and hòa thân going straight into the palace is fine (no extra home road). BUT every origin needs its own NARRATED intro with ILLUSTRATIONS, and an ENTRY animation; the entry rank must have a REASON like real tuyển tú (catching the Emperor's / Thái hậu's eye gives a higher rank) with a MINIGAME exam: high score → the highest rank of that selection, fail → lower rank (not "the highest rank the origin allows").
