@@ -21,7 +21,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 
 ## Topic files (read only when the task touches the topic)
 
-- dev/rules/topic/art-animations.md (13.6 KB): animations, page curl, effects, glow, sprites, videos
+- dev/rules/topic/art-animations.md (14.1 KB): animations, page curl, effects, glow, sprites, videos
 - dev/rules/topic/art-costumes.md (15.7 KB): costumes, hair, jewellery, veils, makeup, huadian, foreign costumes
 - dev/rules/topic/art-events-effects.md (26.3 KB): event, story, act and minigame pictures
 - dev/rules/topic/art-faces-figures.md (22.1 KB): faces, figures, portraits, ages, poses, proportions
