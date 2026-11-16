@@ -1,0 +1,202 @@
+{
+ "cto01": {
+  "ref": "lJ8IhuEgv9",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same deep sapphire blue with silver-white colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a richer layered silk robe of a high-ranking scholar-gentleman in the same colour family, hair in a topknot with a hair crown, hands clasped behind the back. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a richer layered silk robe of a high-ranking scholar-gentleman in deeper tones of the same colour family, holding a closed folding fan. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-1-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-1",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-1-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-1",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto02": {
+  "ref": "s7o8mQil8e",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same jade green with ivory colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a richer layered silk robe of a high-ranking scholar-gentleman in the same colour family, hair in a topknot with a hair crown, holding a thin book. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a richer layered silk robe of a high-ranking scholar-gentleman in deeper tones of the same colour family, holding a walking staff of dark wood. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-2-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-2",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-2-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-2",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto03": {
+  "ref": "iGqb1GE3uK",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same ivory white with sky blue colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a richer layered silk robe of a high-ranking scholar-gentleman in the same colour family, hair in a topknot with a hair crown, holding a rolled scroll. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a richer layered silk robe of a high-ranking scholar-gentleman in deeper tones of the same colour family, hands clasped in front. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-3-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-3",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-3-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-3",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto04": {
+  "ref": "Do7J4IIpcl",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same navy blue with gold colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a rich brocade robe of the head of a great house in the same colour family, hair in a topknot with a hair crown, holding a tea cup. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a rich brocade robe of the head of a great house in deeper tones of the same colour family, holding a string of prayer beads. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-4-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-4",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-4-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-4",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto05": {
+  "ref": "jUXBtJpLD0",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same teal with pale grey colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a rich brocade robe of the head of a great house in the same colour family, hair in a topknot with a hair crown, holding a jade pendant. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a rich brocade robe of the head of a great house in deeper tones of the same colour family, holding a rolled scroll. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-5-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-5",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-5-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-5",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto06": {
+  "ref": "eIOyNaHdqL",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same emerald green with cream colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a fitted dark brocade robe of a senior general's family with a broad belt, upright military bearing in the same colour family, hair in a topknot with a hair crown, one hand resting on a sheathed sword. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a fitted dark brocade robe of a senior general's family with a broad belt, upright military bearing in deeper tones of the same colour family, holding a tea cup. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-6-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-6",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-6-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-6",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto07": {
+  "ref": "vQZ2nKza47",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same slate grey-blue with white colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a richer layered silk robe of a high-ranking scholar-gentleman in the same colour family, hair in a topknot with a hair crown, holding a writing brush. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a richer layered silk robe of a high-ranking scholar-gentleman in deeper tones of the same colour family, holding an open book. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-7-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-7",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-7-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-7",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto08": {
+  "ref": "Bh493QBoQR",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same warm brown with cream colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a rich brocade robe of the head of a great house in the same colour family, hair in a topknot with a hair crown, holding a closed folding fan. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a rich brocade robe of the head of a great house in deeper tones of the same colour family, holding a jade pendant. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-8-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-8",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-8-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-8",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto09": {
+  "ref": "SytmfZ9Ub8",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same midnight blue with jade colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a fitted dark brocade robe of a senior general's family with a broad belt, upright military bearing in the same colour family, hair in a topknot with a hair crown, holding a riding whip. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a fitted dark brocade robe of a senior general's family with a broad belt, upright military bearing in deeper tones of the same colour family, hands clasped behind the back. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-9-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-9",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-9-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-9",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "cto10": {
+  "ref": "CqGzcseEEy",
+  "prompt": "Edit of the reference image: redraw the SAME man (exactly the same face, same features, same identity, same pale celadon green with white colour family) at two OLDER ages. Semi-realistic painterly guofeng style, near-3D realistic rendering, soft natural light, exactly matching the rendering of the reference; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; very handsome refined looks at every age; no moles or marks on the face. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline. Left: the same man at about 43 years old, mature and distinguished, a neat short black beard and moustache, a few faint lines at the eyes, a richer layered silk robe of a high-ranking scholar-gentleman in the same colour family, hair in a topknot with a hair crown, holding a small go game box. Right: the same man at about 57 years old, an elegant elder, grey-streaked hair and a longer grey-black beard, gentle wrinkles, still handsome and upright, a richer layered silk robe of a high-ranking scholar-gentleman in deeper tones of the same colour family, holding a bamboo flute. Calm composed still standing poses, robes and sleeves hanging straight, no flying sashes. Wealthy. NOT pink, NOT purple. No text, no frames.",
+  "figs": [
+   {
+    "file": "fig-man-congtu-10-a36",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-10",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-congtu-10-a51",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-10",
+    "ageBand": "a51"
+   }
+  ]
+ }
+}
