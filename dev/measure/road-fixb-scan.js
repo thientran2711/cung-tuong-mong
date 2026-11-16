@@ -32,14 +32,14 @@ for(const[id,a]of Object.entries(ARC67)){const f=owner[id];if(!f||!FR.test(f))co
    const safe=eo.filter(o=>roll(o)&&ek(en(o)[1])>=0&&ek(en(o)[0])>ek(en(o)[1])),bold=eo.filter(o=>roll(o)&&ek(en(o)[1])<0&&ek(en(o)[0])>0);let hit=[];
    for(const s of safe)for(const d of bold)if(costOf(s)===0&&!(base(d)>=base(s)+10))hit.push(`safe «${s.n}» b${Math.round(base(s))} vs bold «${d.n}» b${Math.round(base(d))} c${costOf(d)}`);
    for(const x of eo)for(const y of eo)if(x!==y){const wx=Math.min(ek(en(x)[0]),ek(en(x)[1])),bx=Math.max(ek(en(x)[0]),ek(en(x)[1])),by=Math.max(ek(en(y)[0]),ek(en(y)[1]));
-    if(wx>=by&&bx>by&&costOf(x)<=costOf(y)&&wsum(x)>=wsum(y))hit.push(`«${x.n}» worst>=best of «${y.n}» at <= cost`)}
+    if(wx>=by&&bx>by&&costOf(x)<=costOf(y)&&wsum(x)>=wsum(y)&&!y.go)hit.push(`«${x.n}» worst>=best of «${y.n}» at <= cost`)}
    /* free sure option with a gain beside a free rolled mid/lose with no upside */
    for(const x of eo)if(!roll(x)&&costOf(x)===0&&wsum(x)>0)for(const y of eo)if(roll(y)&&costOf(y)===0&&ek(en(y)[0])<=ek(en(x)[0]))hit.push(`free sure «${x.n}» beside free «${y.n}»`);
    if(hit.length)add(f,'DOM',`${id}.${bk}: `+hit.join(' | '))}
   /* EMPTY: a beat whose every option needs hh/th (or has an if) while the beat itself does not need them: no option left when she is gone */
   for(const k of ['hh','th']){if(!bneed.includes(k)&&O.length&&O.every(o=>(o.need||[]).includes(k)))add(f,'EMPTY',`${id}.${bk} all options need ${k}`)}
   const bt=T(b.t)+T(b.h);
-  const guardHH=s=>/qOn|_QK|need:\["hh"|MUOIN_NOQ|HH_OK|hhOk|_Q\(\)|_QP\(\)/.test(s);
+  const guardHH=s=>/qOn|_QK|CN_J|need:\["hh"|MUOIN_NOQ|HH_OK|hhOk|_Q\(\)|_QP\(\)/.test(s);
   const chk=(txt,need,ifs,lab)=>{if(/Hoàng hậu|Càn Ninh|\{hh\}/.test(txt)&&!need.includes('hh')&&!bneed.includes('hh')&&!guardHH(ifs+bif+txt))add(f,'HH',lab);
    if(/Thái hậu|Thọ Khang|Từ Ninh|\{th\}/.test(txt)&&!need.includes('th')&&!bneed.includes('th')&&!/thDead/.test(ifs+bif+txt))add(f,'TH',lab)};
   chk(bt+(b.w==='hh'?' {hh}':'')+(b.w==='th'?' {th}':''),[],'',`${id}.${bk} beat`);
@@ -52,7 +52,7 @@ const BAN=[[/chắc chắn/i,'chắc chắn'],[/(^|[^a-zà-ỹ])bạn(?! bè)([^
 for(const f of files){if(!FR.test(f))continue;const L=fs.readFileSync('dev/build/'+f,'utf8').split('\n');
  L.forEach((l,i)=>{const strs=(l.match(/"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`/g)||[]).join(' ');for(const[r,w]of BAN)if(r.test(strs))add(f,'WORD',`L${i+1} ${w}`);
   if(/\["không","một","hai"/.test(l))add(f,'NUM',`L${i+1} private number-word table`);
-  if(/RANKS\[[^\]]*\b[1-9]\b/.test(l)||/Math\.min\([^)]*,\s*7\)/.test(l))add(f,'NUM',`L${i+1} typed rank index`);
+  if(/RANKS\[[^\]]*\b[1-9]\b/.test(l.replace(/length-1/g,""))||/Math\.min\([^)]*,\s*7\)/.test(l))add(f,'NUM',`L${i+1} typed rank index`);
   if(/(mười|mươi|trăm) lượng/.test(strs))add(f,'NUM',`L${i+1} typed lượng`);})}
 const keys=['DOM','INV','HH','TH','WORD','NUM','EMPTY'];console.log('file'.padEnd(14)+keys.map(k=>k.padStart(6)).join(''));
 for(const f of Object.keys(R).sort()){console.log(f.padEnd(14)+keys.map(k=>String(R[f][k].length).padStart(6)).join(''));if(V)for(const k of keys)R[f][k].forEach(s=>console.log('  '+k+' '+s))}
