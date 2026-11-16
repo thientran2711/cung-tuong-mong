@@ -1,0 +1,20 @@
+# Report: Sổ mây in Chọn sổ (review/chonso-cloud)
+What: first card of Chọn sổ › "Một mình" (above the 3 sổ), the same `.kslot` kit card. Not linked: state + "Giữ sổ trên mây" / "Nối sổ". Linked: state, ám hiệu masked (`••••-••XY`), "đồng bộ lúc <time>", "Đồng bộ ngay" / "Ám hiệu sổ" / "Các bản đã giữ" ("Chọn bản sổ" while a conflict waits). Same jcloud flows (data-cl handlers, panels, unlink inside "Ám hiệu sổ"); one `btnsHTML()` feeds this card AND Thiết lập › Sổ mây (kept). Closing a flow returns to Chọn sổ. Co-op tab: no card. Subtitle: "Sổ mây ở trên, rồi ba sổ chơi một mình. Phúc duyên ở dưới."
+Group scan: Sổ mây shown in 2 places only, both now from btnsHTML; words unified ("Gửi ngay" → "Đồng bộ ngay"; state row label "Tình trạng"); help text "Thiết lập › Sổ mây › Nối sổ" → "Chọn sổ › Một mình › Sổ mây › Nối sổ".
+Files: dev/build/jcloud.js, j74.js, KIT.md, tests (new dev/test/chonso-cloud.js; save-slots.js card asserts; cloud-save.js hides #dawn/.kcf overlays that blocked clicks), site rebuilt.
+Tests: chonso-cloud.js 26/26 OK (Fold 755x1000 = device A, iPad 1180x820 = device B, two contexts: make → link → sync from the card → unlink, masked code, 0 page errors, no overflow); save-slots.js 755x1000+1180x820 ALL OK (old sổ + old room code load); cloud-save.js 45/45 OK; kit-conform 755x1000: 0 MIXED/CUSTOM, floats none (MISSING = dialogs not sampled, same as before).
+Shots: dev/handover/reports/chonso-cloud/1-slots-off-phone.jpg (not linked), 3-slots-on-phone.jpg (linked), 5-slots-final-{phone,ipad}.jpg (not linked, after unlink); phone=Fold 755x1000, ipad=1180x820.
+KNOWN: iPad 1180x820 the panel scrolls inside itself (already the tabs-branch KIT REQUEST: compact 2-column .kslot); the card adds ~120px to that.
+iOS: review/ios-install-first notice says "Thiết lập › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ". After both merge, change to "Chọn sổ › Một mình › Sổ mây: Giữ sổ trên mây; ở ứng dụng chọn Nối sổ" (jload.js, one string) — patch branch review/chonso-cloud-ios (1 commit on ios-install-first).
+Handover: nothing pending.
+
+## Part 2 (owner bug via main s21): title buttons open the panel
+- Title "Chơi một mình" (sub-line "Tiếp tục: <last kiếp>" kept as info only) no longer jumps into the last save: it opens Chọn sổ on "Một mình" (Sổ mây card + 3 sổ; she picks Tiếp tục kiếp này / Kiếp mới per sổ). Title "Cùng hảo hữu" opens Chọn sổ on "Cùng hảo hữu" (3 phòng); its old lobby entry "Nhập ám hiệu" moved into that tab as one kit `.kslot.kjoin` card (same jcooplobby join flow); "Mời hảo hữu" is on each empty room.
+- Code: j74 homeMenu (data-tgo="slots" data-cstab="solo"), j74 click handler sets the tab, jcooplobby addBtn (data-tgo="slots" data-cstab="coop"), j74 coopJoin().
+- "Kiếp mới" (title, beside it) now DUPLICATES the panel: it opens the same Chọn sổ (on the last-played tab). Not removed (needs owner OK); suggest dropping it, leaving 3 buttons.
+- "Sổ luân hồi" (past kiếp log) and "Thiết lập" unaffected.
+- Tests: save-slots.js ALL OK both sizes (new asserts: title solo → Một mình tab + Sổ mây, game not started; title co-op → Cùng hảo hữu tab + Nhập ám hiệu + 3 rooms; chonso 3-sổ/3-phòng card counts exclude the new cards); chonso-cloud.js 26/26. coop-lobby.js edited (`[data-coop=make]` .first()) but NOT run (needs a served URL arg); coop-lobby/img-quality still click `.kco`, which now lands on the panel, so their lobby shots must be redone by their owners.
+- Shots: title-solo-755x1000.jpg, title-solo-1180x820.jpg, chonso-coop-1180x820.jpg.
+- Merged origin/main (cde8029d) into this branch; built files rebuilt.
+
+Final merge (s22 request): merged latest origin/main (chonso-tabs + ios-install-first live) and applied the iOS notice patch (jload.js: "Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây") in this branch — one sha, no separate iOS branch needed. Re-run: save-slots ALL OK (755x1000 + 1180x820), chonso-cloud 26/26, cloud-save 45/45, ios_install_first ALL PASS. iPad scroll growth: left to the kit keeper's compact .kslot row (kit-fit); no private row here. Shots (Fold + iPad): title-solo-*, chonso-coop-*.
