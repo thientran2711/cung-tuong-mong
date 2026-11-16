@@ -21,7 +21,7 @@ const {chromium}=require('playwright');const path=require('path');
     const want=Math.min(T[1],Math.round(Math.max(T[0],Math.min(T[1],raw))*F[h]));if(trystCh(S)!==want)f.push(`trystCh ${h}: ${trystCh(S)} vs ${want}`)}
    /* main's j24/j95 wrap tryst / affairMonth: read the j22 bodies from the page source, not the wrappers */const src=[...document.scripts].map(x=>x.text).join('\n').split(/\nfunction (?=tryst\(|affairMonth\()/).slice(1).map(x=>x.split('\nfunction ')[0]).join('\n');if(/roll\((5|15)\)\)\{/.test(src)||!/trystCh/.test(src))f.push('tryst/affair roll not via trystCh')}
   /* notice */
-  S.preg=0;S.fake=0;S.tuan=(cyBase(S).t+1)%3;const nL=()=>(S.logs||[]).filter(x=>/dễ đậu thai/.test(x)).length;
+  S.preg=0;S.fake=0;S.buoi=3;/* flip-entry: the card flip (and its peak notice) runs only at buổi tối */S.tuan=(cyBase(S).t+1)%3;const nL=()=>(S.logs||[]).filter(x=>/dễ đậu thai/.test(x)).length;
   const L0=nL();S.cyb=S.cyb||{};S.cyb.ft=null;flip();Q.length=0;const L1=nL();flip();Q.length=0;const L2=nL();
   if(L1!==L0+1)f.push('peak notice not logged '+L0+'→'+L1);if(L2!==L1)f.push('peak notice twice');
   S.cyb.ft=null;S.preg=2;flip();Q.length=0;if(nL()!==L2)f.push('notice while pregnant');S.preg=0;
