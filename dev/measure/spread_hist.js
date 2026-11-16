@@ -37,6 +37,15 @@ const HOOK=`(function(){
  if(typeof evDropInfo==="function"){const d0=evDropInfo;evDropInfo=function(m){try{if(m){m.__h13opt=1;const st=String(new Error().stack).split("\\n")[2]||"";const f=(st.match(/at (\\S+)/)||[])[1]||"?";let why=f;
    if(f==="evGate"){try{const sc=evS(),K=evKeys(m),now=wk(),tl=sc.tpl[K.tpl],kl=sc.key[K.key];why+=((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key))?":cooldown":(EVHOLD.length>=E68S.hold?":holdfull":":dayfull")}catch(e){}}
    H.dropWhy[why]=(H.dropWhy[why]||0)+1}}catch(e){}return d0.apply(this,arguments)}}
+ /* review r1 FAIL 1: cards created per generator that gates on the queue length inside a buổi change (OFF vs ON per 100 tuần) */
+ H.gen={};H.gq={};const G=(k,n)=>{if(n>0&&H.cur)H.gen[k]=(H.gen[k]||0)+n};
+ const wrapQ=(name,key)=>{try{const f0=eval(name);if(typeof f0!=="function")return;const w=function(){const n=Q.length;try{if(H.cur){const h=H.gq[key]=H.gq[key]||[0,0,0,0,0,0];h[Math.min(5,n)]++;if(${process.env.GQX?1:0}&&(H.gqx=H.gqx||[]).length<60&&key==="j70 show70")H.gqx.push((S.buoi||0)+":"+Q.map(m=>String(m.t||"").slice(0,18)+(m.pid?"/"+m.pid:"")).join("|"))}}catch(e){}const r=f0.apply(this,arguments);try{G(key,Q.length-n)}catch(e){}return r};eval(name+"=w")}catch(e){}};
+ const wrapR=(name,key)=>{try{const f0=eval(name);if(typeof f0!=="function")return;const w=function(){const r=f0.apply(this,arguments);try{if(r)G(key,1)}catch(e){}return r};eval(name+"=w")}catch(e){}};
+ wrapQ("show70","j70 show70");wrapQ("e68Tick","j68 e68Tick");wrapQ("q72Tick","j72 q72Tick");wrapQ("petMonth","jpet petMonth");wrapQ("kcWeek","jkc kcWeek");
+ wrapR("mFire7","j71 merit");wrapR("rgLNext","jreign rgLNext");wrapR("makeDil","j3 dilemma");
+ try{const p0=push70;push70=function(p){const st=p&&p.pend;const r=p0.apply(this,arguments);try{if(r)G("j70 push:"+st,1)}catch(e){}return r}}catch(e){}
+ if(${process.env.GQX?1:0}){const sm2=showModal;showModal=function(){const b=Q.slice();const r=sm2.apply(this,arguments);try{if(H.inNB&&H.cur){H.rmv=H.rmv||{};for(const m of b)if(!Q.includes(m)){const k=String(m.t||"").slice(0,22)+(m.pid?"/"+m.pid:"");H.rmv[k]=(H.rmv[k]||0)+1}H.smn=(H.smn||0)+1}}catch(e){}return r}}
+ try{const sm1=showModal;showModal=function(){try{for(const m of Q)if(m&&typeof m==="object"&&!m.__h13g){m.__h13g=1;if(m.t==="Thỉnh bình an mạch")G("jthaiy routine",1)}}catch(e){}return sm1.apply(this,arguments)}}catch(e){}
  const st0=start;start=function(){flush();const r=st0.apply(this,arguments);try{begin()}catch(e){}return r};
  const ov0=over;over=function(){try{if(H.cur)H.cur.k1=Math.max(H.cur.k1,bk())}catch(e){}flush();return ov0.apply(this,arguments)};
  window.__H13end=function(){/* life cap: close at WEEKS tuần */if(S&&!S.dead&&H.cur&&wk()-Math.floor(H.cur.k0/B4N)>=${WEEKS}){H.cur.k1=bk()-1;flush();Q=[];try{if(typeof SP13!=="undefined")SP13.reset()}catch(e){}start()}};
@@ -47,14 +56,14 @@ const HOOK=`(function(){
  await page.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await page.waitForTimeout(500);
  await page.evaluate(()=>localStorage.clear());await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(500);
  await page.evaluate(PRE);await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
- await page.evaluate(`window.__servPolicy='';window.__aff=0;window.__balO=null;window.__fairO=null;window.__q72O=null;window.__xO=null;window.__q72off=1`);
+ await page.evaluate(`window.__servPolicy='';window.__aff=0;window.__balO=null;window.__fairO=null;window.__q72O=null;window.__xO=null;window.__q72off=${process.env.Q72?0:1}`);
  for(const f of [process.env.BOT||'inpage6.js','inbal.js'])await page.evaluate(fs.readFileSync(path.join(M,f),'utf8'));
  await page.evaluate(HOOK);await page.evaluate(()=>start());
  const t0=Date.now();let n=0;
  while(true){n=await page.evaluate(([m])=>{for(let i=0;i<10;i++){window.__bot.step(m,20);window.__H13end()}return window.__H.lives},[mode]);if(n>=LIVES)break;if(Date.now()-t0>(+process.env.CAP||2400)*1e3){console.log('time cap');break}}
  const out=await page.evaluate(()=>{const H=window.__H;const st=a=>{const n=a.length||1,s=a.reduce((x,y)=>x+y,0);const h=[0,0,0,0,0,0];a.forEach(v=>h[Math.min(5,v)]++);return{n:a.length,mean:+(s/n).toFixed(3),hist:h,p95:a.slice().sort((x,y)=>x-y)[Math.floor(a.length*.95)]||0}};
   return{lives:H.lives,weeks:H.weeks,slot:H.slot.map(st),slotEv:H.slotEv.map(st),max:H.max,maxAt:H.maxAt,shown:H.shown,pushed:H.pushed,lost:H.lost,lostEx:H.lostEx,optDrop:H.optDrop,dropWhy:H.dropWhy,j68late:H.j68late||0,heavy:H.heavy||[],purge:H.purge||0,early:H.early,late:H.late,lateEx:H.lateEx,
-   carried:H.carried,titles:Object.entries(H.tt).sort((a,b)=>b[1].reduce((x,y)=>x+y)-a[1].reduce((x,y)=>x+y)).slice(0,80),waitMax:Math.max(0,...H.wait),errs:H.errs.slice(0,10),sp:typeof SP13!=="undefined"?SP13.stat:null,off:!!window.__spreadOff,
+   carried:H.carried,titles:Object.entries(H.tt).sort((a,b)=>b[1].reduce((x,y)=>x+y)-a[1].reduce((x,y)=>x+y)).slice(0,80),waitMax:Math.max(0,...H.wait),gen:H.gen,gq:H.gq,rmv:H.rmv||{},smn:H.smn||0,gqx:H.gqx||[],errs:H.errs.slice(0,10),sp:typeof SP13!=="undefined"?SP13.stat:null,off:!!window.__spreadOff,
    ends:window.__res.slice(-60).map(r=>(r.origin||"")+":"+(r.title||"").slice(0,20))}});
  out.pageErrors=errs.slice(0,20);out.pageErrorN=errs.length;out.mode=mode;
  fs.writeFileSync(OUT,JSON.stringify(out,null,1));

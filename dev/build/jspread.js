@@ -31,7 +31,7 @@ const SP13KEEP=/^Tin trong cung/;
 const SP13DAY=/^(Lời cảnh báo|Mưu hại|Sau vụ mưu hại|Điềm báo|Tai mắt báo tin)|( · Lời mời| · Lễ$| · Dâng lễ| · Trò vui| · Đặt cược| · Thi |^(Tết|Tiết|Lễ|Hội) [^·]+$)/;
 /* review r1: the last buổi of this tuần, for a card that must stay in its tuần (warnings / plots / festival-day cards), else null */
 function sp13End(m,now,cs){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,"");return SP13DAY.test(t)?now-cs+B4N-1:null}
-const SP13={L:[],stat:{plan:0,moved:0,carried:0,released:0,forced:0,void:0,held:0,flushed:0,load:0,keep:0},nb:0,held:0,
+const SP13={vo:0,L:[],stat:{plan:0,moved:0,carried:0,released:0,forced:0,void:0,held:0,flushed:0,load:0,keep:0},nb:0,held:0,
  off(){return !!(window.__spreadOff||(window.COOPW&&COOPW.on)||!S||S.dead)},
  now(){return wk()*B4N+(S.buoi||0)},
  st(){const z=S.sp13=S.sp13||{q:[],k:-1,n:0};if(!Array.isArray(z.q))z.q=[];return z},
@@ -78,6 +78,14 @@ function sp13Plan(){if(SP13.off())return;const now=SP13.now(),cs=S.buoi||0,cap=s
   const end=sp13End(m,now,cs);let d=due===now?now+1:Math.min(due,now+lim);if(end!=null&&d>end)d=end;if(d<=now){sp13Count(m);continue}
   out.push(i);m.__sp13.due=d;SP13.L.push({m,b0:now,due:d,slotDue:d,code,end,ser:code?null:sp13Ser(m)});SP13.stat.moved++}
  for(let j=out.length-1;j>=0;j--)Q.splice(out[j],1);if(out.length)sp13Sync()}
+/* review r1 FAIL 1 (LUẬT SỬA CẢ NHÓM): the generators that run inside a buổi change gate on the queue length (j70 show70 Q>2, j68 e68Tick Q>2,
+   j72 q72Tick Q>3, jpet petMonth Q>2, jkc kcWeek Q>2, jthaiy routine Q<3, j71 merit Q<=5, jreign Q<=1). Without D13 the first showModal of the
+   change already sifts the queue (j68 evGate holds / drops the extra optional cards, j95b drops warnings the ledger makes false), so those gates
+   see the sifted queue. D13 blocks that showModal; a blocked call now runs the same sifting, minus the "shown" marks (evGate dry), so every
+   gate sees the same queue as without D13 — the cards this change really brings — and makes neither fewer nor more cards. D13 only paces. */
+function sp13Pre(){if(!Q.length)return;SP13.vo=1;SP13.stat.pre=(SP13.stat.pre||0)+1;
+ try{if(typeof evGate==="function")evGate(1)}catch(e){console.error("spread pre",e)}
+ try{if(typeof j95bPurgeWarn==="function")j95bPurgeWarn(0)}catch(e){console.error("spread pre",e)}}
 function sp13Tick(){/* inside / right after a buổi change: this buổi's own unmovable cards (news…) first, then the waiting cards that are due
    (older first), then the new movable cards (planned against what is left of the cap) */
  if(SP13.off())return;const z=SP13.st(),now=SP13.now();const fresh=Q.filter(m=>m&&typeof m==="object"&&!m.__sp13);if(z.rk===now&&!fresh.length)return;
@@ -86,11 +94,15 @@ function sp13Tick(){/* inside / right after a buổi change: this buổi's own u
  if(z.rk!==now){z.rk=now;sp13Release()}const mv=fresh.filter(m=>sp13Movable(m));Q=Q.concat(mv.filter(m=>sp13Code(m)),mv.filter(m=>!sp13Code(m)));sp13Plan()}
 (function(){
  const nb0=nextBuoi;nextBuoi=function(){if(SP13.off())return nb0.apply(this,arguments);const k0=S&&SP13.now();SP13.nb++;let r;
-  try{r=nb0.apply(this,arguments)}finally{SP13.nb--}
+  try{r=nb0.apply(this,arguments)}finally{SP13.nb--;if(!SP13.nb)SP13.vo=0}
   try{if(S&&!S.dead&&!SP13.off()&&SP13.now()!==k0){sp13Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){console.error("spread",e)}return r};
  /* during the buổi change the cards arrive in several batches (endTurn, news, j70, j68 …): nothing is shown until the change is over,
-    then the whole batch is planned at once and the first card shown */
- const sm0=showModal;showModal=function(){if(SP13.nb&&S&&!S.dead&&!SP13.off()&&$("modal").hidden)return;return sm0.apply(this,arguments)};
+    then the whole batch is planned at once and the first card shown. Each blocked call still runs the queue's show-time sifting (sp13Pre) and
+    from the first card on the modal reads as open to the game code (SP13.vo, a JS-only view of M.hidden: no DOM change, nothing painted), so the
+    callers that skip showModal while a card is open skip it here too and the sifting runs at the same calls as without D13 */
+ try{const M=$("modal"),hd=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden");if(M&&hd&&hd.get)Object.defineProperty(M,"hidden",{configurable:true,
+  get(){return SP13.vo?false:hd.get.call(this)},set(v){hd.set.call(this,v)}})}catch(e){console.error("spread",e)}
+ const sm0=showModal;showModal=function(){if(SP13.nb&&S&&!S.dead&&!SP13.off()&&(SP13.vo||$("modal").hidden)){sp13Pre();return}return sm0.apply(this,arguments)};
  /* save: data cards written into S.sp13.q; a waiting code card holds the autosave (jqsave rule) */
  const sv0=save;save=function(){if(!S||quiet||S.dead||SP13.off())return sv0.apply(this,arguments);
   if(SP13.L.some(x=>x.code)){SP13.held=1;SP13.stat.held++;return}SP13.held=0;

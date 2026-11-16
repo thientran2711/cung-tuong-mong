@@ -11,11 +11,12 @@ const N=+process.argv[2]||10,POL=process.argv[3]||'sens',ORIG=(process.argv[4]||
  async function mkPage(){const p=await c.newPage();p.on('pageerror',e=>{if(!/onerror/.test(e.stack||''))errs.push(String(e.stack||e.message).slice(0,400))});
  await p.goto(GAME,{waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);
  await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await p.waitForTimeout(1200);
- await p.evaluate(([pol,diff])=>{window.__bot=1;window.__POL=pol;window.__kcO='nha';try{localStorage.setItem('ctm-diff',diff)}catch(e){}
+ await p.evaluate(`window.__kcOFF=${process.env.OFF?1:0}`);await p.evaluate(([pol,diff])=>{window.__bot=1;window.__POL=pol;window.__kcO='nha';try{localStorage.setItem('ctm-diff',diff)}catch(e){}
   try{PX.app.ticker.stop()}catch(e){}
   render=()=>{};renderStage=()=>{};renderPanel=()=>{};renderHUD=()=>{};showModal=()=>{};try{curtain=()=>{}}catch(e){}try{save=()=>{}}catch(e){}try{resultShow=()=>{}}catch(e){}
   lesson=function(k){const l=S.arts[k],cost=5+l*5;if(!can(2)||l>=5||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);addArt(k,2+R(2))};
   window.__out=[];
+  /* review spread-events r1 FAIL 1: kcWeek cards per life, D13 off (OFF=1) vs on */window.__kcw={calls:0,cards:0};if(window.__kcOFF)window.__spreadOff=1;try{const f0=kcWeek;kcWeek=function(){const n=Q.length;const r=f0.apply(this,arguments);window.__kcw.calls++;window.__kcw.cards+=Math.max(0,Q.length-n);return r}}catch(e){}
   const _over=over;over=function(h,t,f){try{window.__out.push({o:S.origin.k,end:S.kc&&!S.kc.inPal?h:"?",fate:String(f||"").replace(/<[^>]+>/g,""),turn:S.turn,inPal:!!(S.kc&&S.kc.inPal)})}catch(e){}return _over.apply(this,arguments)};
  },[POL,DIFF]);
  await p.evaluate(fs.readFileSync(path.join(__dirname,'inkc.js'),'utf8'));
@@ -27,7 +28,7 @@ const N=+process.argv[2]||10,POL=process.argv[3]||'sens',ORIG=(process.argv[4]||
    window.__forceOrigin=o;Q=[];S=null;start();Q=[];if(!S.kc)kcInit();Q=[];window.__forceOrigin=undefined;try{$("modal").hidden=true;$("ov").hidden=true}catch(e){}
    const RR=window.__kcRun(window.__POL);const guard=RR.guard,ring=RR.ring;
    const K=S.kc;return{o,inPal:!!K.inPal,rank:K.inPal?K.r:null,end:K.end,dead:!!S.dead,fate:S.fate||"",turn:S.turn,early:!!(K.tt&&K.tt.early),so:K.so?K.soOk:null,sc:K.tt?K.tt.sc:null,
-    sac:S.sac,tai:S.tai,danh:S.danh,duc:S.duc,bac:S.bac,arts:Math.max(...Object.values(S.arts)),le:K.le,kap:S.kap,kgt:S.kgt,ld:S.kld,intel:K.intel.length,sis:K.fam.filter(m=>m.pal).length,guard,ring:guard>=6000?ring:null}
+    sac:S.sac,tai:S.tai,danh:S.danh,duc:S.duc,bac:S.bac,arts:Math.max(...Object.values(S.arts)),le:K.le,kap:S.kap,kgt:S.kgt,ld:S.kld,intel:K.intel.length,sis:K.fam.filter(m=>m.pal).length,guard,ring:guard>=6000?ring:null,kcw:window.__kcw}
   }catch(e){return{o,err:String(e&&e.stack||e).slice(0,300)}}},o)}catch(e){r={o,err:'crash '+String(e).slice(0,200)}}
   try{await p.close()}catch(e){}r.secs=Math.round((Date.now()-t1)/1000);res.push(r);fs.writeFileSync(OUTF,JSON.stringify(res));process.stderr.write(`${o} ${i} ${r.inPal?'palace '+r.rank:r.end||r.fate||r.err} ${r.secs}s\n`)}
  const cat=r=>r.err?'err':r.inPal?'palace':(/Bỏ trốn cùng|Vợ Trạng|Vương phi|Nữ tướng|Hòa thân|Nữ thương/.test(r.end||''))?'rare':r.end==='chết'||/chết|Chết|Tự vẫn|Hồng nhan/.test(r.fate)&&!r.end?'death':r.end&&r.end!=='chết'?(r.end==='Xuất gia'||r.end==='Nữ phu tử'?'other':'married'):'death';
