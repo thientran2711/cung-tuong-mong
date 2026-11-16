@@ -50,8 +50,8 @@
 | ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | PAUSED (owner asleep) | 16/11 06:55Z |
 | ART D56 icons + Nội vụ phủ scene + 12 missing place glyphs | review/place-glyphs | main s10 | session_01UV1SzmEsuu42GCFecC9HGf | PAUSED (owner asleep) | 16/11 06:55Z |
 | D25 veil/scar box follows zoom | review/veil-zoom | C | session_011xDdVQH85mp5QLY8bMqh7D | RUNNING | 06:08Z 16/11 |
-| C35b review | review/pcard-dislikes-r1 | B | (id follows) | RUNNING | 16/11 06:20Z |
-| D3 item-big | review/item-big | B | (id follows) | RUNNING | 16/11 06:20Z |
-| D9 header-own | review/header-own | B | (id follows) | RUNNING | 16/11 06:20Z |
-| D12 mood-bar | review/mood-bar | B | (id follows) | RUNNING | 16/11 06:20Z |
+| C35b review | review/pcard-dislikes-r1 | B | session_01N1tNP2GaMKbqSeCQe8Lxot | RUNNING | 16/11 06:20Z |
+| D3 item-big | review/item-big | B | session_01N1tNP3vh5qQKaG75iP6uRK | RUNNING | 16/11 06:20Z |
+| D9 header-own | review/header-own | B | session_01N1tNP6D57poL6nUn778JPv | RUNNING | 16/11 06:20Z |
+| D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzkA992D8a1WtiJdtWw | RUNNING | 16/11 07:45Z |

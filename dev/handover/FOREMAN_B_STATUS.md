@@ -23,10 +23,10 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C41 tuduc-mg | review/tuduc-mg-r1 | sonnet | PASS 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 |
 | C41b tuduc-pic | review/tuduc-pic-r1 | sonnet | PASS 2954ff9fb9367940b62bb9b824645a14c60191e0 (reviewer session_01N1tNP4dwJ1QEvs8oHcaKvZ) |
 | C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
-| C35b pcard-dislikes | review/pcard-dislikes @6eaca058 | sonnet | REVIEWING — worker SẴN SÀNG KIỂM 06:1xZ; reviewer session on review/pcard-dislikes-r1 (id follows) |
-| D3 item-big | review/item-big | sonnet | RUNNING — claimed 06:20Z (moved from C, order 07:30Z); code/display only, art paused tonight |
-| D9 header-own | review/header-own | sonnet | RUNNING — claimed 06:20Z (moved from C) |
-| D12 mood-bar | review/mood-bar | opus | RUNNING — claimed 06:20Z (moved from C) |
+| C35b pcard-dislikes | review/pcard-dislikes @6eaca058 | sonnet | REVIEWING — worker SẴN SÀNG KIỂM 06:1xZ; reviewer session session_01N1tNP2GaMKbqSeCQe8Lxot on review/pcard-dislikes-r1 (06:20Z) |
+| D3 item-big | review/item-big | sonnet | RUNNING — session session_01N1tNP3vh5qQKaG75iP6uRK (06:20Z) (moved from C, order 07:30Z); code/display only, art paused tonight |
+| D9 header-own | review/header-own | sonnet | RUNNING — session session_01N1tNP6D57poL6nUn778JPv (06:20Z) (moved from C) |
+| D12 mood-bar | review/mood-bar | opus | RUNNING — session session_01N1tNP2hssUsxJwKBBsGRUZ (06:20Z) (moved from C) |
 | D11 presentation | — | — | HELD — overlaps D51 fxkit wiring + fxkit sprite art (main) and art is paused; see QUESTIONS Q24 |
 | D13 spread events | — | opus | HELD — needs Foreman C's D29 roster (cross-foreman wait); Q24 |
 | D14 học thành tài scene | — | — | HELD — painted scene = art (paused tonight) + after fxkit; Q24 |
