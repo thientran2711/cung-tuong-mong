@@ -928,7 +928,7 @@ setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=nu
  render=function(){const out=r0.apply(this,arguments);try{const t=typeof tab!=="undefined"?tab:null;if(t!==last){last=t;requestAnimationFrame(again);setTimeout(again,160);setTimeout(again,480)}}catch(e){}return out};
  window.render=render},0);
 (function(){const P=$("panel");if(!P)return;const mark=e=>{if(!(e.target.closest&&e.target.closest(".pc")))P.__kpcUser=1};P.addEventListener("touchstart",mark,{passive:true});P.addEventListener("wheel",mark,{passive:true});
- document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],[data-tab],.ksubb"))P.__kpcUser=0},true)})();
+ document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],button[data-tab],.ksubb"))P.__kpcUser=0},true)})();
 (function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`
 .pc[data-k2]{max-height:var(--kpcmax,none)!important;overflow-y:auto!important;overscroll-behavior:contain;padding:0 7px 7px!important}
 .pc[data-k2].kpcfull{height:var(--kpcmax)!important;min-height:var(--kpcmax)!important;flex:0 0 auto!important}
