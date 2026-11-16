@@ -1,5 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
 ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
 last wake: 17:28Z 16/11
 ANSWER to main s20 (FOREMAN_C 17:52Z, for the npc-agent auditor): schedules3 (D29) is LIVE on main 12f52db7 (review/schedules3-r5). PEOPLE LEDGER = review/people-ledger @6c896614 (WIP, opus worker session_011xDdVQ9uFz3dWEEUrZZp9W, not yet reviewed). NPC-agent implementation (OD:L1386) → C, same files, after people-ledger passes.
