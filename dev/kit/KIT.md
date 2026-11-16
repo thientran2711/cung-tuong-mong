@@ -1035,6 +1035,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
   a reference to its own figure (`s.__fig`) and copies THAT figure's transform (jface); before, her own box (host `#stage`) copied the first token's
   transform whenever another figure stood on the stage. kitFaceZoom / the reveal draw the picture and the layers in one box (already exact).
   Check: `node dev/test/veil-zoom.js <url> <W>x<H>@dpr [outdir] [--host <device>]` (every place, every family; must print `fail 0`).
+- **Stage-box follow (D25-r2):** `kitFxPut` (jk2b) lays the stage `.kfxf` box through the one function `kitFxLay(box,img)` (drawn rect + the picture's own transform) and re-lays it with a ResizeObserver + load event whenever the picture's size changes, because j59 (stage slot layout) re-sizes figures after the box is put (1180x820: box 215 px wide over a 125 px figure, veil half a figure off). One rule for every stage figure and token.
 ### 28.8b FACE FX REGISTRY — `kitFaceFx` / `KIT_FACEFX` (review/appearance-port, dev/build/jface.js) — ONE layer for every face condition
 - Every condition that changes how a face looks registers ONE entry; nobody adds their own hook on `kitFxLayers`, `effSac` or `pcard`:
   `KIT_FACEFX.add({id, z, ready, state(p), seen(p,st), sac(p,st), chip(p,st), html(p,file,st)})`.

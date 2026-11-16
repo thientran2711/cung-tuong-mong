@@ -20,7 +20,7 @@ const MEASURE=function(label,TOL,STOL){
   let td=false;for(let a=c;a&&a!==document.body;a=a.parentElement){if(/^matrix3d/.test(getComputedStyle(a).transform)){td=true;break}}if(td){out.push({label,skip3d:1});continue}
   let pic=null;
   if(c.classList.contains('kfx')){const host=(c.closest('.kfxc')||c).parentElement;pic=host.querySelector(':scope>img.kpor')||host.querySelector('img[src*="por-"]')||host.querySelector('img:not(.kfr):not(.kgem):not(.kcrest):not(.kemb)')}
-  else{const p=c.parentElement;pic=p.querySelector(':scope>img.kfxon')||p.querySelector(':scope>img.figimg')||p.querySelector(':scope>img#mefig')||p.querySelector(':scope>img')||p.querySelector('img.kfxon')||p.querySelector('img.figimg')}
+  else{const p=c.parentElement;pic=c.__fig||p.querySelector(':scope>img.kfxon')||p.querySelector(':scope>img.figimg')||p.querySelector(':scope>img#mefig')||p.querySelector(':scope>img')||p.querySelector('img.kfxon')||p.querySelector('img.figimg')}
   if(!pic){out.push({label,miss:'no picture for layer box'});continue}
   const file=nm(pic.currentSrc||pic.src);const pr=pic.getBoundingClientRect();const cs=getComputedStyle(pic);
   let dl=pr.left,dt=pr.top,dw=pr.width,dh=pr.height;const nw=pic.naturalWidth,nh=pic.naturalHeight;
