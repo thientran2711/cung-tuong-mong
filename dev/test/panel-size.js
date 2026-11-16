@@ -24,13 +24,14 @@ const EXEMPT=/^(pcm|zoom)/; /* person card keeps pcard (KIT §3); picture zoom i
     const bs=(M&&M.querySelector('#mb'));const sc=[...el.querySelectorAll('*')].filter(x=>x.scrollHeight>x.clientHeight+2&&/auto|scroll/.test(getComputedStyle(x).overflowY)).map(x=>(x.id||x.className||x.tagName).toString().split(' ')[0]).slice(0,3);
     const btn=el.querySelector('#mr button,.kbtn');const br=btn&&btn.getBoundingClientRect();
     const xb=el.querySelector('.kph>.kit-x');const xr=xb&&xb.getBoundingClientRect();const kh=(el.querySelector('.kph')||el).getBoundingClientRect();const xIn=xr?xr.top>=kh.top-1&&xr.bottom<=kh.bottom+1:null;
-    const seal=(el.querySelector('.kpseal')||{}).textContent||'';
-    return{kind,w:Math.round(r.width),h:Math.round(r.height),top:Math.round(r.top),cls:el.className.toString().replace(/\s+/g,' ').slice(0,70),mcls:M.className.replace(/\s+/g,' '),seal,
+    const seal=(el.querySelector('.kpseal')||{}).textContent||'';const sb=el.querySelector('.kpb.kpshort');let ksc=null;if(sb){const bm=sb.getBoundingClientRect(),kids=[...sb.children].filter(c=>c.offsetParent!==null).map(c=>c.getBoundingClientRect()),mm=kids.length?{left:Math.min(...kids.map(k=>k.left)),right:Math.max(...kids.map(k=>k.right)),top:Math.min(...kids.map(k=>k.top)),bottom:Math.max(...kids.map(k=>k.bottom))}:sb.getBoundingClientRect(),ctr=r=>(r.top+r.bottom)/2;ksc={dy:Math.round(ctr(mm)-ctr(bm)),ta:getComputedStyle(sb).textAlign,mx:Math.round((mm.left+mm.right)/2-(bm.left+bm.right)/2)}}
+    return{kind,w:Math.round(r.width),h:Math.round(r.height),top:Math.round(r.top),cls:el.className.toString().replace(/\s+/g,' ').slice(0,70),mcls:M.className.replace(/\s+/g,' '),seal,ksc,
      fits:r.top>=-1&&r.bottom<=innerHeight+1&&r.left>=-1&&r.right<=innerWidth+1,btnIn:br&&br.width>0?br.bottom<=r.bottom+1&&br.top>=r.top:null,scroll:sc,xIn,hs:el.scrollWidth>el.clientWidth+2}});
    if(m)size[name]=m;else size[name]={missing:1};
    await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const d=document.querySelector('.dawn');if(d)d.remove();const o=document.getElementById('ov');if(o){o.hidden=true;o.innerHTML=''}try{kitItemCardClose&&kitItemCardClose()}catch(e){}});};
   const run=async(name,fn)=>{try{await p.evaluate(fn)}catch(e){errs.push(name+': '+String(e.message).slice(0,120))}await measure(name)};
   await run('info-short',()=>kitModal({kind:"info",title:"Điều ngắn",sub:"Một dòng",facts:["Một câu ngắn."]}));
+  await run('kpshort',()=>kitModal({kind:"info",title:"Một lời",sub:"ngắn",facts:["Chỉ một câu ngắn thôi."]}));
   await run('info-long',()=>kitModal({kind:"info",title:"Điều dài",sub:"Nhiều dòng",facts:Array.from({length:26},(_,i)=>"Câu số "+(i+1)+" dài vừa phải để thành hàng.")}));
   await run('rule',()=>kitModal({kind:"rule",title:"Luật nhỏ",sub:"phép tắc",sections:[{h:"Thang",tiers:[{k:"1–3",n:"nhỏ",d:"một",c:"g"},{k:"4–6",n:"vừa",d:"hai",c:"r"}]}]}));
   await run('news',()=>{Q.push({t:"Tin trong cung",h:"<p>Một tin ngắn.</p>"});showModal()});
@@ -58,6 +59,7 @@ const EXEMPT=/^(pcm|zoom)/; /* person card keeps pcard (KIT §3); picture zoom i
  fs.writeFileSync(OUT,JSON.stringify(R,null,1));
  for(const wh of Object.keys(R)){const s=R[wh].size;const ks=Object.keys(s).filter(k=>!s[k].missing&&!EXEMPT.test(k));
   const ws=[...new Set(ks.map(k=>s[k].w))],hs=[...new Set(ks.map(k=>s[k].h))];
-  console.log(wh,'cases',ks.length,'widths',ws.join('/'),'heights',hs.sort((a,b)=>a-b).join('/'),'| missing:',Object.keys(s).filter(k=>s[k].missing).join(','),'| nofit:',ks.filter(k=>!s[k].fits).join(','),'| xOut:',ks.filter(k=>s[k].xIn===false).join(','),'| btnOut:',ks.filter(k=>s[k].btnIn===false).join(','),'| errs',R[wh].errs.length);
+  console.log(wh,'cases',ks.length,'widths',ws.join('/'),'heights',hs.sort((a,b)=>a-b).join('/'),'| missing:',Object.keys(s).filter(k=>s[k].missing).join(','),'| nofit:',ks.filter(k=>!s[k].fits).join(','),'| xOut:',ks.filter(k=>s[k].xIn===false).join(','),'| btnOut:',ks.filter(k=>s[k].btnIn===false).join(','),'| kpshort:',ks.filter(k=>s[k].ksc).map(k=>k+' dy='+s[k].ksc.dy+' mx='+s[k].ksc.mx+' '+s[k].ksc.ta).join(';')||'NONE','| errs',R[wh].errs.length);
+  const off=ks.filter(k=>s[k].ksc&&(Math.abs(s[k].ksc.dy)>8||Math.abs(s[k].ksc.mx)>8||s[k].ksc.ta!=='center'));if(off.length||!ks.some(k=>s[k].ksc)){console.log('  KPSHORT FAIL',off.join(',')||'no kpshort case rendered');bad++}
   if(ws.length>1||hs.length>1)bad++}
  await b.close();process.exit(bad?1:0)})();
