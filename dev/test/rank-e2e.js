@@ -10,7 +10,7 @@ const [,,BASE,RURL,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [
 const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.push(m)};
 (async()=>{const b=await chromium.launch();const errs=[];process.on('unhandledRejection',e=>{console.log('ABORT',e.message.split('\n')[0],'errors:',JSON.stringify(errs.slice(0,6)));process.exit(2)});
  const mk=async(name,fresh)=>{const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
-  await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kload{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();p.setDefaultTimeout(150000);
+  await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kload{display:none!important}.kcf{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();p.setDefaultTimeout(150000);
   p.on('pageerror',e=>errs.push(name+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::/.test(m.text()))errs.push(name+' console: '+m.text())});
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   for(let i=0;i<120;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':(window.KLOAD?'':'ok')});if(s==='ok')break;await p.waitForTimeout(500)}/* first-run download card (jload) skipped */
@@ -52,6 +52,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  await endLife(A.p,{rank:7,years:5,danh:60,duc:50});const e1=await endRank(A.p);ok(/hạng 1 trên 1/.test(e1),'end card: '+e1);
  await shot(A.p,2,'endcard');
  /* owner 15/11: end card = kit person dialog; figure fills the column, name + rank above it, kit rows (no boxed .pcb panels), "Xem Bảng vàng" */
+ await A.p.waitForFunction(()=>{const i=document.querySelector('#modal .kesimg');return i&&i.complete&&i.naturalWidth>0&&getComputedStyle(i.closest('.kesf')).visibility!=='hidden'},null,{timeout:30000}).catch(()=>{});await A.p.waitForTimeout(400);/* figure is a CDN picture: measure after it has loaded */
  const ec=await A.p.evaluate(()=>{const d=document.querySelector('#modal .dlg');const col=d.querySelector('.kpsubj.kes'),im=d.querySelector('.kes .kesimg'),cap=d.querySelector('.kes .kpsn');const c=col.getBoundingClientRect(),r=im.getBoundingClientRect(),q=cap?cap.getBoundingClientRect():null;
   return{fill:(r.bottom-(q?q.top:r.top))/c.height,above:!!q&&q.bottom<=r.top+40,boxes:d.querySelectorAll('#mb .pcb').length,kit:d.querySelectorAll('.krk-end .kpst, .kend-life .kpst').length,btn:(d.querySelector('.krk-eb')||{}).textContent,ngu:/Ngươi/.test(d.innerText)}});
  ok(ec.fill>=.95&&ec.above&&ec.boxes===0&&ec.kit===2&&ec.btn==='Xem Bảng vàng'&&!ec.ngu,'end card: figure + name fill the column, name above, kit rows, Xem Bảng vàng '+JSON.stringify(ec));ok((await layout(A.p,'endcard')).bad.length===0,'end card layout '+JSON.stringify((await layout(A.p,'endcard')).bad));
@@ -62,6 +63,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  /* guest C: a short life, then rename */
  const C=await mk('C');await newLife(C.p);await endLife(C.p,{rank:0,years:1});ok(/hạng 4 trên 4/.test(await endRank(C.p)),'short life is last');
  await C.p.evaluate(()=>document.querySelector('.krk-end .kbtn').click());await C.p.waitForSelector('#krkov .krk-list');await C.p.waitForTimeout(800);
+ await C.p.waitForFunction(()=>{const f=[...document.querySelectorAll('#krkov .kpod-fig img, #krkov .kpod-col img')];return !f.length||f.every(i=>i.complete)},null,{timeout:30000}).catch(()=>{});await C.p.waitForTimeout(600);
  let bd=await board(C.p);ok(bd.rows.length===4&&sorted(bd.rows),'Kiếp board: 4 rows in order '+bd.rows.map(r=>r.s).join(' > '));
  ok(bd.rows[3].mine&&bd.rows.filter(r=>r.mine).length===1,'C: own life marked');ok(bd.meRow&&/Kiếp vừa rồi/.test(bd.me),'C: own row at the bottom');
  ok(bd.pod.length===3&&bd.pod[1].startsWith('kpod-p1')&&bd.figs.every(Boolean),'podium: three places, Nhất centre, figures loaded '+bd.pod.join(' | '));
