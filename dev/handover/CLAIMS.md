@@ -429,4 +429,4 @@
 | road-b3-fix2 (opus): r1 FAIL item 1 thd_hoc .5–.11 never runs (pupil age gate) + family scan | review/road-b3-fix2 | B | session_01N1tNP6woPkxcr3RNgPTnGa | RUNNING | 16/11 21:36Z |
 | road-b2-fix (opus): r1 FAIL items 1–8 (nc/bd/td/ch dominance, continuity, effects, history rules, modern words) + scan checks | review/road-b2-fix | B | session_01N1tNP6BwuYAqkmCNc2VAG2 | RUNNING | 16/11 21:37Z |
 | D PASS for main batch: seatcap-r1 PASS 7d463838 (golive ce1538ba) · mem-upgrade-r1 PASS 64b40270 (golive 60fb873f + __j95off test fix) · preg-rate-r1 PASS 1c31bd79 (golive 3f2a92d8) · ghen-shown-r1 PASS 81f86655 · danh-p1-r1 PASS dd3363ff — details FOREMAN_D_STATUS ## PASS FOR MAIN BATCH | — | D → main | — | PASS (waiting main batch) | 16/11 21:40Z |
-| suc-khoe review r2 (opus, BIG) of da50857d | review/suc-khoe-r2 | D | (opening) | RUNNING | 16/11 21:42Z |
+| suc-khoe review r2 (opus, BIG) of da50857d | review/suc-khoe-r2 | D | session_01DgYSWmYNeB92ubrzxwYmXs | RUNNING | 16/11 21:42Z |
