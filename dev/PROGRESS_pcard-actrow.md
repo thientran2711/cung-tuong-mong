@@ -1,0 +1,3 @@
+# review/pcard-actrow
+Done: person-card acts = KIT §6.3 long row at every width/host (jk4 `#kit-pcard-actrow`, `kaNorm` -> `kitActCompactOn`); gift rows keep sub-tab filter + portrait (jgift); person-target pickers carry `kgt` (jopic `kitOptPic`, jwhy/j8/j10); person dialog list = flex column + `kdpall` whole-column scroll (jk4/jopic). KIT.md §6.3; kit sample "§6.3"; test dev/test/pcard-actrow.js; table dev/test/pcard-actrow-table.md.
+Not done / watch: pictures were blocked in the sandbox (layout verified, real art not eyeballed); other picker builders that build options in loops without `kgt` still rely on the portrait-chip / name rule (grep `n:v.name` when adding one).
