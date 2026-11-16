@@ -465,3 +465,4 @@
 | coop-main-faults (opus, co-op): coop-p2 B1 bribe 'tai mắt' fail+hang; coop-b1 step 8 laydo; coop-night case-4 'sees the wait'; roster_dom 7–8 people-ledger mismatches | review/coop-main-faults | main s26 | session_01UV1SzhtAPtuPxkPbKD16am | RUNNING | 16/11 22:53Z |
 | reviewers: coop-contest-fix 00b76227 (opus BIG) · diemtrang-score f22147fd (opus) · kit-size-8 1a296f39 (sonnet SMALL) | review/*-r1 | main s26 | coop-contest session_01UV1SziJoyYJ3o5iLXG8BuP · diemtrang-score session_01UV1Szh78yi6jMh9mRXX7Pm · kit-size-8 session_01UV1SzmDCD75UQVH2PCzs2e | RUNNING | 16/11 22:53Z |
 | BATCH 23:32 builder (opus): 11 PASS branches (4 main + B tut-quests, road-b1-fixa + D seatcap, mem-upgrade, preg-rate, ghen-shown, danh-p1) → review/batch-2300; main s26 pushes | review/batch-2300 | main s26 | session_01UV1SzmGLUepYfBP7dwyHAo | RUNNING | 16/11 22:58Z |
+| ch1-4 status per origin (sonnet, read-only; owner OD 22:00Z) | — | main s26 | (opening) | RUNNING | 16/11 22:59Z |
