@@ -177,3 +177,8 @@
 | D13 spread-events fix pass (opus): Q-length gates inside the buổi change (j70/j68/j72/jpet/jkc) | review/spread-events-r2 | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
 | mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
 | owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
+| coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | (s4 opening) | RUNNING | 16/11 12:58Z |
+| D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | (s4 opening) | RUNNING | 16/11 12:58Z |
+| D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | (s4 opening) | RUNNING | 16/11 12:58Z |
+| Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | (s4 opening) | RUNNING | 16/11 12:58Z |
+| C44 'Xóa sổ trên mây' button (kit danger button + confirm) | review/cloud-del | D | (s4 opening) | RUNNING | 16/11 12:58Z |
