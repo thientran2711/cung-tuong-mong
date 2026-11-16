@@ -14,3 +14,6 @@ Honest: heads now ~5-10% LARGER than the reference (safe side; could be toned to
 
 ## SAMPLE v3 (owner verdict on v2: heads too big, bodies too small; NO numbers in prompts)
 Method (owner's words): gpt-2-6, image 1 = approved reference figure (c01 / Emperor) = body/height/proportions to copy; image 2 = previous-round figure (face + checked costume); prompt: "draw this person wearing this outfit with exactly the same body, height and proportions as the reference figure". No numbers anywhere. Sheet: sample-sheet-v3.jpg (reference | previous | new, no numbers). Cost 6x40+3x3 = 249.
+
+## SAMPLE v4 (owner rejected v3; method = her words: base image IS the approved reference figure)
+gpt-2-6 edit: image 1 = approved reference (c01 / Emperor) = the body, never redrawn; image 2 = previous-round figure (face + checked costume). Prompt: keep image 1's body/height/head size/shoulders/stance; replace only face+hair and clothes with image 2's. Sheet: sample-sheet-v4.jpg (reference | previous | new, no numbers). Cost 249. Note: women inherit c01's arm pose (beads at chest).
