@@ -8,7 +8,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C41 tuduc-mg | review/tuduc-mg | sonnet | RUNNING (resumed) |
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
-| C27 buoi-transition | review/buoi-transition @7e80679c | sonnet | REVIEWING (review/buoi-transition-r1, resumed) — images on CDN |
+| C27 buoi-transition | review/buoi-transition-r1 | sonnet | PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
 | C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn @11afc011 | sonnet | REVIEWING (review/room-btn-r1, resumed) — icons on CDN |
@@ -25,7 +25,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D30 palace-map-port | review/palace-map-port | sonnet | RUNNING |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
-| D34 scheme-games-port | review/scheme-games-port | sonnet | QUEUED |
+| D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | QUEUED |
 | D39 appearance-port | review/appearance-port | sonnet | QUEUED |
 | D40 weather-risk-port | review/weather-port | sonnet | QUEUED |
@@ -36,6 +36,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
 PASS review/actcard-small-r1 e3664469fbeddf8e7c9fafb851bd1fda73b6354d (C40; descends from main 900ace7f; reviewer turned the zoom into kitModal kind info = KIT §8 frame, KIT §43.1 + sample)
 PASS review/mg-easy-r1 94644c1e6342eb7ea1003aae090cd5310a9597e5 (C23; knowledge minigames level-tiered + aids; reviewer swapped private .kg82tip → kit .kpnote)
+PASS review/buoi-transition-r1 c91bfdc4629fbf4ebf84307f543d44a394ff138b (C27; ink-wash buổi transition, KIT §71 jbuoi.js; 4 images already on CDN)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
