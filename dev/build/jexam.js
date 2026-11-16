@@ -133,6 +133,18 @@ function exDirectUp(p,why,o){o=o||{};const me=p===S;if(!p||rkOf(p)>=6||p.out)ret
  if(me){exDrop();if(o.fx){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}}
  return me?`<b class="g">Thánh chỉ: ${why}, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (${why}). `}
 function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
+/* ONE hook for every long-road promotion reward (owner 16/11 06:45Z). PROMO_SRC = the switch per source: "direct" rank, "grace" = an exam at
+   once with the conditions waived, "none" = no rank. son1 = her FIRST prince; later sons and every princess = grace. Faction sides th / quyen
+   are "none" until the owner rules (one switch here). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat goes to
+   promoFullSeat (the owner is choosing the equivalent reward; placeholder, no payload invented). */
+const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"none",quyen:"none"};
+const PROMO_WHY={son1:"mừng hoàng tử",emp:"Bệ hạ nhớ công phò tá",th:"Thái hậu nhớ công",quyen:"nhà Tể tướng tiến cử"};
+function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
+ if(m==="grace")return typeof exGrace==="function"?exGrace(p,src==="dau"?"f":"m"):"";
+ const nx=rkOf(p)+1;if(typeof seatFree==="function"&&!seatFree(nx))return promoFullSeat(p,src,o);
+ return exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o)}
+/* placeholder (owner deciding the form of the equivalent reward): records the case only, gives nothing yet */
+function promoFullSeat(p,src,o){try{p.promoFull=(p.promoFull||[]).concat([{src,to:rkOf(p)+1,t:S.turn}]).slice(-8)}catch(e){}return""}
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
 function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
@@ -151,7 +163,7 @@ function exDone(p,r){const e=exS(p),to=e.to,rk=exRk(to),me=p===S;e.n=(e.n||0)+1;
 /* NPCs sit the exam when the month's decree would look at them (rivalsMonth → promoteP); a son's grace raises the rank once passed */
 (function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){
  try{if(exOn()&&p&&rkOf(p)<7&&!exSrv(p)){const e=exS(p);if(p!==S&&exCanSit(p))exDone(p,exSim(p));
-   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined)return exGraceUp(p)}}catch(x){console.error("exam",x)}
+   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined&&(typeof seatFree!=="function"||seatFree(rkOf(p)+1)))return exGraceUp(p)/* seats still apply (owner 06:45Z): a full seat waits */}}catch(x){console.error("exam",x)}
  return p0.apply(this,arguments)}})();
 
 /* ---------- her window: opens when she becomes eligible, lapses when it runs out ---------- */
@@ -276,5 +288,5 @@ function exChips(){if(!exOn()||S.rank>=7||S.out)return"";const e=exS(S);const L=
 if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
 (function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. Sinh hoàng tử: tấn phong ngay, không phải thi. Sinh công chúa: được ân thi ngay, không cần đủ điều kiện. Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
  if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
-window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exDirectUp=exDirectUp;window.exGrace=exGrace;
+window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exDirectUp=exDirectUp;window.promoReward=promoReward;window.promoFullSeat=promoFullSeat;window.PROMO_SRC=PROMO_SRC;window.exGrace=exGrace;
 window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;
