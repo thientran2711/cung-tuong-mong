@@ -58,7 +58,9 @@ Wrong red per state before: sáng/trưa/chiều with 0–1 left ≈55–58 each 
 - dev/test/coop-e2e.js: `COOP_SPILL=1` makes seat A spill a 2-khắc act every day buổi and checks the next buổi pays the carry once.
 - Results: khac-day-run A–G pass (755x1000, 1000x755, 1180x820, 844x390); khac-day-scan percount 0 / wrongred 0; spill effects equal
   to the fit run (same seed); Tài nghệ spill; old save with S.j76carry and no S.j76ck pays the carry; coop-e2e plain 59/59 ×3,
-  COOP_SPILL=1 79/79 (10 spills, used=1 after each turn, never 0/2).
+  COOP_SPILL=1 (after re-merge of main d34b5116a): 77/77 with 9 spills, `used` read at the turn = 1 every time (never 0/2); one other run had
+  the known presence flake 'A frozen when B left' (unrelated; plain 59/59 on the same build). A card that asks first (Tự học → kg82
+  minigame) spends at the end and spills then (checked: sáng 1 left → Sức -15, trưa used 1); the e2e skips such cards.
 - Owner L484 (Dư đồ, tối with 4 khắc, no Bái kiến): not reproduced on this build — in buổi tối with 4 khắc every palace with a chủ vị
   offers "Bái kiến <rank> rồi vào"; Càn Ninh (Hoàng hậu) outside thỉnh an shows "Xin bái kiến" with the reason; tối with 1 khắc says
   "hết khắc trong ngày (đi 2 khắc)" + "Sang ngày mới".
