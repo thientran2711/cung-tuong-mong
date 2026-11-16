@@ -181,7 +181,8 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 #kctmf{position:fixed;z-index:24;max-width:calc(100vw - 16px)}
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
-@media (max-width:599px),(max-height:430px){.kctmf .kctmf-n{max-width:5.5em}.kctmf .kctmf-s{font-size:.68rem}}
+.kctmf .kctmf-sh{display:none}
+@media (max-width:599px),(max-height:430px){.kctmf .kctmf-n{max-width:6.5em}.kctmf .kctmf-s{font-size:.68rem}.kctmf .kctmf-l{display:none}.kctmf .kctmf-sh{display:inline}}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
@@ -217,7 +218,7 @@ const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],wor
 const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
 function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;
  const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t">${o.clock==="pz"?"Đợi":"Còn"} ${mmss(o.left)}</span>`;
- return `<button type="button" class="kchips kctmf" data-ctm="fr" aria-label="${esc((o.name||"Hảo hữu của ta")+": "+s[2])}"><span class="kctmf-f">${o.face||""}</span><span class="kctmf-n">${esc(o.name||"Hảo hữu của ta")}</span><span class="kchip ${s[0]} kctmf-s"><b>${s[1]}</b> ${s[2]}</span>${clk}</button>`}
+ return `<button type="button" class="kchips kctmf" data-ctm="fr" aria-label="${esc((o.name||"Hảo hữu của ta")+": "+s[2])}"><span class="kctmf-f">${o.face||""}</span><span class="kctmf-n">${o.name?esc(o.name):`<span class="kctmf-l">Hảo hữu của ta</span><span class="kctmf-sh">Hảo hữu</span>`}</span><span class="kchip ${s[0]} kctmf-s"><b>${s[1]}</b> ${s[2]}</span>${clk}</button>`}
 function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
  const fw={ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
   away:"đang vắng hay mất kết nối · hảo hữu mở lại trò chơi là tự vào lại",hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc";
@@ -271,7 +272,7 @@ function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}if(!FP){FP=docume
 function paint(force){if(!live()||S.dead){hideChip();return}try{paintF()}catch(e){console.error(e)}const v=view();const M=$("modal"),T=$("title"),nx=$("next");
  if(!v||!nx||!nx.offsetParent||(M&&!M.hidden)||(T&&!T.hidden)||document.getElementById("coopfz")||HP){if(EL&&!EL.hidden)EL.hidden=true;return}
  const fo=(COOP.state.seats||{})[other()];const fr=frReady()?"ready":!COOP.state.peerOnline?"away":(v.hold&&v.hold!==CW.seat)?"hold":(FS.key===v.key&&FS.pz)?"busy":"";
- const me=myRd();if(me&&fr!=="ready"&&waitKey!==v.key){waitKey=v.key;try{kitLine("Hảo hữu đang dở tay, xin đợi · trong lúc đợi vẫn xem được các tab, Tư trang, Sổ ghi",5000)}catch(e){}}
+ const me=myRd();/* the waiting words live in the strip itself (a kitLine on top of it hid them) */
  /* she can still press "Sẵn sàng" and her khắc are spent: the kit selected look (.ksel) on the button */
  const go=!me&&!nx.disabled&&typeof used==="number"&&used>=4;if(nx.classList.contains("ksel")!==go)nx.classList.toggle("ksel",go);
  const state=v.up||(v.run&&v.left<=0)?"up":(v.pz||v.hold)?"pz":(!v.run||frozenRoom())?"stop":"run";

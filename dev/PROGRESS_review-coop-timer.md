@@ -66,3 +66,21 @@
   · `COOP_OLD_REF=origin/main node dev/test/coop-e2e.js .tmp/e2e` · ts-oldsave: serve .tmp with old.html (git show origin/main:index.html) + new.html
   on one free port, `node dev/test/ts-oldsave.js http://127.0.0.1:P/old.html http://127.0.0.1:P/new.html`.
 - Site: `bash dev/site/build_site.sh` then commit index.html sw.js assets.json.
+
+## Reviewer r1 (review/coop-timer-r1, 16/11) — merged onto origin/main 3ef079f61 + live co-op fixes
+- Merge: assemble = main's list + jcooptimer after jkitpage; j84 = main (fix-float r9 resolution); jbal2 keeps BAL.itd + BAL.coopTm; KIT §69 after main's sections.
+- LIVE BUG "xong buổi sáng, không sang buổi" (owner 16/11) — causes + fixes:
+  1. jcoop.js: after a phone sleep / app switch the socket LOOKS open (readyState 1) but is dead; visibilitychange only reconnected a closed
+     socket, so her `bend` went into the dead socket and the server dropped the seat after 45 s ("Hảo hữu đã rời cuộc"). Now: on visible /
+     pageshow reconnect at once when away > 3 s or nothing came in for PING+5 s, else ping and reconnect after 3 s silence; PING 10 s, SILENT 25 s.
+  2. jcoopworld syncRoom: catching up with a room that stepped while she was away was skipped when a dialog was open and never re-armed
+     (her next bend → badbuoi → stuck). Now onBuoi always runs (keeps pendBuoi until the dialog closes); badbuoi while the room is ahead and
+     multi-step gaps catch up too.
+  3. #next lock always says why: "Chờ hảo hữu…" / "Đợi hảo hữu" / "Hảo hữu đang vắng" / "Đang nối lại…" / "Đợi cùng bản mới" (was a faded
+     "Sang buổi" with no word). Freeze panel: "Hảo hữu mở lại trò chơi là tự vào lại". Khắc spent + can press → .ksel on #next.
+- Friend chip at the top (KIT §69.2, coordinator spec of the owner's words): face (stranger rule) + name / "Hảo hữu của ta" + ✓ Đã sẵn sàng /
+  ! Đang bận / … Đang làm việc / ✕ Đang vắng / ⏸ Tạm dừng + "Còn m:ss"; inside the bar (own strip when the bar is full); tap → kit panel.
+  Status pushed on change (st: bz = dialog/event/mini game open, kh = khắc left). Waiting: bottom strip "Hảo hữu đang dở tay, xin đợi" +
+  "Trong lúc đợi: xem các tab, Tư trang, Sổ ghi" + kitLine once.
+- New test dev/test/coop-sleep.js (dead socket → lost bend → wake; room steps while away + dialog open; server STALE → freeze panel;
+  friend chip states + shots at 755x1000 / 1180x820 / 1366x1024 / 1000x755 / 844x390).
