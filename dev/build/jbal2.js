@@ -399,7 +399,8 @@ BAL.orig={
  cnv: {sac:[45,70],tai:[10,25],tamco:[15,25],duc:30,danh:2,sung:0,bac:8,suc:85,mat:0,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
  quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,mat:0,th:0,hh:0,art:{cam:14,thi:12,theu:12,hoa:8},vir:{dung:10}},
  npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
- npc:{danh:8,bac:20,art:4,mal:6}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓ */
+ npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
+   study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick */
 };
 /* ONE ladder for every art (ARTS) and every Tứ đức course (VIR): points 0–100, bậc 0–5 by floor (tier), named (nm); bậc 5 Tông sư = 100 points = a lifetime's mastery.
    gain: points per lesson point (the lesson game gives 1–3; teachers more) at each bậc — the higher, the slower (bot table in the report).
@@ -409,10 +410,11 @@ BAL.orig={
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
  gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6}};
 /* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
-   (0–49 ×1 · 50–69 ×.6 · 70–84 ×.35 · 85+ ×.2); the same for her and every NPC; fractions roll (expected value). */
+   (0–39 ×1 · 40–59 ×.5 · 60–79 ×.25 · 80+ ×.1); the same for her and every NPC; fractions roll (expected value).
+   Sủng / Danh are NOT on the curve (they gate promotion; owner proposal first, see the report): adding "sung" to keys is the whole change. */
 /* the odds word ladder (VANPHONG; word() in j1 reads it): floors of Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc (below the first: Liều) */
 BAL.lad=[31,46,56,66,81,91];
-BAL.grow={keys:["sac","tai","tamco"],band:[50,70,85],mul:[1,.6,.35,.2]};
+BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
 /* NIGHT CHOICES after the card flip (owner 22:45Z / 22:50Z / 23:05Z). Odds of each choice = b + Σ w[stat]×stat + art + trait fit + Emperor mood
    (window.nfOdds in jnf reads these through oSteal(a,mode) / oKeep(p)). No khắc, no Sức, no Đức is paid: only gain / loss (cost 0).
    feign = Tranh sủng: favour pulls him (Sủng), safer, small loss, small extra prize. road = Chặn ngự giá: beauty + art on his path, bolder:

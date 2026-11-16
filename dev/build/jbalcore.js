@@ -38,7 +38,7 @@ function origSet(p,k,npc){const o=origRow(k);p.org=k;p.arts=p.arts||{};p.artp=p.
  p.sac=origRoll(o.sac);p.tai=origRoll(o.tai);p.tamco=origRoll(o.tamco);p.duc=origRoll(o.duc);p.suc=origRoll(o.suc);
  const ap0=Object.assign({},o.art||{});
  if(npc){const N=BAL.orig.npc,rk=npc.rank|0,mal=npc.malice==null?40:npc.malice;
-  p.tamco=cl(p.tamco+Math.round((mal-40)/N.mal),0,100);p.duc=cl(p.duc+Math.round((40-mal)/2)+R(11)-5,0,100);
+  p.tamco=cl(p.tamco+Math.round((mal-40)/N.mal),0,100);p.duc=cl(p.duc+Math.round((40-mal)/2)+R(11)-5+N.duc,0,100);
   p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.mat=origRoll(o.mat)+R(2);p.th=origRoll(o.th)+R(20)-5;p.hh=origRoll(o.hh)+R(20)-5;
   const best=Object.keys(ap0).sort((a,b)=>ap0[b]-ap0[a]).slice(0,2);if(!best.length)best.push("cam");for(const b of best)ap0[b]=(ap0[b]||0)+rk*N.art}
  else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.mat=origRoll(o.mat);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
