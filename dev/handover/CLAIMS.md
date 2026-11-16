@@ -182,4 +182,4 @@
 | D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | RUNNING | 16/11 12:58Z |
 | Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | RUNNING | 16/11 12:58Z |
 | C44 'Xóa sổ trên mây' button (kit danger button + confirm) | review/cloud-del | D | session_01DgYSWnuoGnBrzpLuCRGnpy | BLOCKED KIT REQUEST (danger button + confirm dialog; worker archived, base review/cloud-save-r1 @7e187abe, plan in reports/cloud-del.md) | 16/11 13:10Z |
-| seatcap review | review/seatcap-r1 | D | (reviewer opening) | RUNNING | 16/11 13:08Z |
+| seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | RUNNING | 16/11 13:08Z |

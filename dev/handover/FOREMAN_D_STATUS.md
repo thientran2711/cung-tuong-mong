@@ -33,7 +33,7 @@ main at start = eba64ead4.
 | kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix @de331af6 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer kc-roads-cn-nc-fix-r1 session_01DgYSWkvGFpv3Z1xMBG8TJC RUNNING (merges entry-exam-r1 too) |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid-r1 @3a875687 | opus | PASS (see ## PASS; reviewer archived) |
-| SEATCAP over cap (pre-existing, servant note A) | review/seatcap @48e5a9c7 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer seatcap-r1 RUNNING (13:08Z) |
+| SEATCAP over cap (pre-existing, servant note A) | review/seatcap @48e5a9c7 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer seatcap-r1 session_01DgYSWoAxb67pTNnGiGEUTw RUNNING (13:08Z) |
 | D58 close-maid-by-origin v2 | review/close-maid-r1 @ebc85f78 | opus | PASS (see ## PASS; reviewer archived) |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam-r1 @d7364cb2 | opus | PASS (see ## PASS; ships AFTER kc-roads-cn-nc-fix + mg-balance; reviewer archived) |
