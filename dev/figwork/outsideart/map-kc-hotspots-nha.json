@@ -1,0 +1,137 @@
+{
+ "image": {
+  "file": "img/map-kc-nha.webp",
+  "w": 1792,
+  "h": 1000,
+  "note": "one picture (day), grade by buổi/season with the scene-light grade like other scenes"
+ },
+ "coords": "normalized 0..1 of the picture; box = top-left x,y + w,h; anchor = label point",
+ "places": {
+  "kc_khue": {
+   "name": "Khuê phòng",
+   "art": "two-storey chamber, centre back",
+   "box": {
+    "x": 0.41,
+    "y": 0.15,
+    "w": 0.17,
+    "h": 0.22
+   },
+   "anchor": {
+    "x": 0.495,
+    "y": 0.238
+   }
+  },
+  "kc_sanh": {
+   "name": "Chính sảnh",
+   "art": "main hall, centre",
+   "box": {
+    "x": 0.36,
+    "y": 0.38,
+    "w": 0.27,
+    "h": 0.24
+   },
+   "anchor": {
+    "x": 0.495,
+    "y": 0.476
+   }
+  },
+  "kc_thu": {
+   "name": "Thư phòng của cha",
+   "art": "study among bamboo, right",
+   "box": {
+    "x": 0.76,
+    "y": 0.44,
+    "w": 0.17,
+    "h": 0.2
+   },
+   "anchor": {
+    "x": 0.845,
+    "y": 0.52
+   }
+  },
+  "kc_me": {
+   "name": "Viện mẫu thân",
+   "art": "wisteria courtyard, left",
+   "box": {
+    "x": 0.06,
+    "y": 0.42,
+    "w": 0.24,
+    "h": 0.26
+   },
+   "anchor": {
+    "x": 0.18,
+    "y": 0.524
+   }
+  },
+  "kc_di": {
+   "name": "Viện di nương",
+   "art": "west courtyard with pond, left back",
+   "box": {
+    "x": 0.1,
+    "y": 0.17,
+    "w": 0.22,
+    "h": 0.22
+   },
+   "anchor": {
+    "x": 0.21,
+    "y": 0.258
+   }
+  },
+  "kc_vuon": {
+   "name": "Hoa viên nhà",
+   "art": "lotus pond, pavilion, back",
+   "box": {
+    "x": 0.3,
+    "y": 0.0,
+    "w": 0.5,
+    "h": 0.13
+   },
+   "anchor": {
+    "x": 0.55,
+    "y": 0.052
+   }
+  },
+  "kc_tu": {
+   "name": "Từ đường",
+   "art": "dark-roofed hall, right back",
+   "box": {
+    "x": 0.72,
+    "y": 0.15,
+    "w": 0.17,
+    "h": 0.22
+   },
+   "anchor": {
+    "x": 0.805,
+    "y": 0.238
+   }
+  },
+  "kc_hoc": {
+   "name": "Phòng học",
+   "art": "small hall beside the khuê phòng",
+   "box": {
+    "x": 0.6,
+    "y": 0.22,
+    "w": 0.11,
+    "h": 0.13
+   },
+   "anchor": {
+    "x": 0.655,
+    "y": 0.272
+   }
+  },
+  "kc_cong": {
+   "name": "Cổng nhà",
+   "art": "main gate, bottom (go out to the city)",
+   "box": {
+    "x": 0.4,
+    "y": 0.78,
+    "w": 0.22,
+    "h": 0.14
+   },
+   "anchor": {
+    "x": 0.51,
+    "y": 0.836
+   }
+  }
+ }
+}

@@ -88,14 +88,14 @@ function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.
   if(c&&c.a===t&&c.t===S)ctx={how:`Người của ngươi bắt quả tang ${j78who(t)}`,proves:`${j78Who(t)} định ${j78act(c.k,S)}`,aim:"me"};
   else if(c&&c.a===S&&c.t===t)ctx={how:`Ngươi ${j78act(c.k,t)}`};
   else if(c&&c.a&&c.a!==S&&c.t&&c.t!==S)ctx={how:`Tai mắt của ngươi thấy ${j78who(t)} ra tay`};
-  J78.ctx=ctx;try{e0.apply(this,arguments);evdSync()}finally{J78.ctx=null}return}
+  J78.ctx=ctx;try{const r=e0.apply(this,arguments);evdSync();return r}finally{J78.ctx=null}}
  const r=e0.apply(this,arguments);evdSync();return r}})();
 (function(){const s0=seenNPC;seenNPC=function(v,t,txt){if(!txt||t===S||v===S)return s0.apply(this,arguments);const prev=J78.ctx;J78.ctx={how:"Tai mắt của ngươi thấy tận mắt",proves:plain(txt).replace(/\s*\(sai .*?đi\)\s*$/,"")};try{return s0.apply(this,arguments)}finally{J78.ctx=prev}}})();
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0];const c=m&&m.opts&&m.opts[i];const prev=J78.ctx;
   if(c&&!prev)J78.ctx={how:`${m.t}: ${plain(c.n)}`,__t:plain(m.h||"")};
   try{return c0.apply(this,arguments)}finally{try{evdSync()}finally{J78.ctx=prev}}}})();
 /* event text is the proof when it names her */
-(function(){const m0=j78mkEvd;j78mkEvd=function(v,c){if(c&&c.__t&&!c.proves){const s=c.__t.split(/(?<=[.!?])\s+/).find(x=>x.includes(v.name));if(s)c=Object.assign({},c,{proves:s.replace(/[.!?]$/,"")})}return m0.call(this,v,c)}})();
+(function(){const m0=j78mkEvd;j78mkEvd=function(v,c){if(c&&c.__t&&!c.proves){const s=c.__t.split(kRx("(?<=[.!?])\\s+","")).find(x=>x.includes(v.name));if(s)c=Object.assign({},c,{proves:s.replace(/[.!?]$/,"")})}return m0.call(this,v,c)}})();
 (function(){const t0=talk;talk=function(oi){const p=S&&curPeople()[popIdx];let a=null;try{a=p&&talkOpts(p)[oi]}catch(e){}const prev=J78.ctx;
   if(a)J78.ctx={how:p.kind==="maid"?`${S.maid.name} được sai đi dò la`:p.kind==="fallen"?`${j78Who(p.ref)} (phế phi) kể chuyện cũ`:a.n};
   try{return t0.apply(this,arguments)}finally{J78.ctx=prev;evdSync()}}})();
@@ -107,13 +107,13 @@ function j78maidT(){const L=liveRivals(true);if(!L.length)return null;S.mspy=S.m
 function j78maidFail(){const x=j78maidT();if(!x)return;oanAdd(x,S,5);S.mspy.done=1;
  log(`${S.maid.name} nấp nghe ngoài cửa sổ ${placeName(palaceOf(x))} thì bị người của ${j78who(x)} bắt gặp, bị phạt quỳ ngoài sân. Nàng sợ vì bị sai việc nguy hiểm: lòng -5. ${j78Who(x)} đoán ra ngươi sai người dò mình: oán ngươi +5.`)}
 function j78maidSpy(){const x=j78maidT();if(!x)return"";
- const facts=intelLearn(x,2,{by:S.maid.name,how:"Sai đi dò la"});J78.ctx={how:`${S.maid.name} được sai đi dò la`};x.ev++;evdSync();J78.ctx=null;
- log(`${S.maid.name} nghe lén chuyện của ${j78who(x)}: ${facts} ${J78_WHERE}`);return ""}
+ const facts=intelLearn(x,2,{by:S.maid.name,how:"Sai đi dò la"});J78.ctx={how:`${S.maid.name} được sai đi dò la`};const n=evA(S,x,1);evdSync();J78.ctx=null;
+ log(`${S.maid.name} nghe lén chuyện của ${j78who(x)}: ${facts}${n?"":" Không có gì sai trái để làm chứng cứ."} ${J78_WHERE}`);return ""}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{
-  if(p&&p.kind==="maid"){const i=A.findIndex(a=>a.n==="Sai đi dò la");const x=j78maidT();if(i>=0&&x)A[i]=Object.assign({},A[i],{x:`nghe lén ${j78who(x)}: biết 2 điều thật về nàng · chứng cứ +1`,risk:`${S.maid.name} bị bắt gặp thì sợ hãi (lòng -5) · ${j78who(x)} đoán ra ngươi: oán ngươi +5`,go:j78maidSpy,fail:j78maidFail})}
-  if(p&&p.kind==="rival"){const i=A.findIndex(a=>a.n==="Nghe lén câu chuyện");if(i>=0)A[i]=Object.assign({},A[i],{x:"biết 1 điều thật về nàng · chứng cứ +1"})}
-  if(p&&p.kind==="fallen"&&p.ref){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");if(i>=0){const f=p.ref;A[i]=Object.assign({},A[i],{x:"biết 1 việc thật một phi tần đã làm · chứng cứ +1",go:()=>{const t=liveRivals(true);if(!t.length)return;const withDeed=t.filter(v=>j78deeds(v).length);const x=pick(withDeed.length?withDeed:t);
-    const facts=intelLearn(x,1,{by:`${j78Who(f)} (phế phi)`,how:"Hỏi chuyện cũ"});J78.ctx={how:`${j78Who(f)} (phế phi) kể chuyện cũ`};x.ev++;evdSync();J78.ctx=null;log(`${j78Who(f)} kể chuyện của ${j78who(x)}: ${facts} ${J78_WHERE}`)}})}}
+  if(p&&p.kind==="maid"){const i=A.findIndex(a=>a.n==="Sai đi dò la");const x=j78maidT();if(i>=0&&x)A[i]=Object.assign({},A[i],{x:`nghe lén ${j78who(x)}: biết 2 điều thật về nàng · chứng cứ +1 nếu nàng từng làm điều sai`,risk:`${S.maid.name} bị bắt gặp thì sợ hãi (lòng -5) · ${j78who(x)} đoán ra ngươi: oán ngươi +5`,go:j78maidSpy,fail:j78maidFail})}
+  if(p&&p.kind==="rival"){const i=A.findIndex(a=>a.n==="Nghe lén câu chuyện");if(i>=0)A[i]=Object.assign({},A[i],{x:"biết 1 điều thật về nàng · chứng cứ +1 nếu nàng từng làm điều sai"})}
+  if(p&&p.kind==="fallen"&&p.ref){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");if(i>=0){const f=p.ref;A[i]=Object.assign({},A[i],{x:"biết 1 việc thật một phi tần đã làm · chứng cứ +1 nếu có",go:()=>{const t=liveRivals(true);if(!t.length)return;const withDeed=t.filter(v=>j78deeds(v).length);const x=pick(withDeed.length?withDeed:t);
+    const facts=intelLearn(x,1,{by:`${j78Who(f)} (phế phi)`,how:"Hỏi chuyện cũ"});J78.ctx={how:`${j78Who(f)} (phế phi) kể chuyện cũ`};const n=evA(S,x,1);evdSync();J78.ctx=null;log(`${j78Who(f)} kể chuyện của ${j78who(x)}: ${facts}${n?"":" Không có gì sai trái để làm chứng cứ."} ${J78_WHERE}`)}})}}
   if(p&&p.kind==="th"){const pk=S.ktPick&&RV(S.ktPick);const i=A.findIndex(a=>/^Kể tội/.test(a.n));
    if(i>=0&&pk&&pk.alive&&!pk.out&&!pk.queen&&(pk.ev||0)>0){const t=pk;A[i]=Object.assign({},A[i],{n:`Kể tội ${t.name}`,lock:false,o:od(40+t.ev*10+S.th/5),go:()=>{t.rel-=15;t.ev--;t.sung=cl(t.sung-10,0,100);S.ktPick=null;log(`${j78Who(t)} bị Thái hậu quở trách, mất sủng.`)}})}}
  }catch(e){}return A}})();
