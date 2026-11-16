@@ -51,3 +51,13 @@ s21 asked: (1) 3 people + 3 pets on the stage at once (iPad, Fold if it fits), (
 - (3) Pet visible heights = class × H: iPad 2 people H≈200 → S 36 px, M 52, L 68; Fold H≈260 → S 47, M 68, L 88; 1 person 542 → S 98, M 141, L 184. If S reads too small, raise `KIT_PET.h.S` (.18 → .24) — costs width (re-measure).
 - (4) Placeholder labels: Hoàng hậu = unknown-silhouette (stranger art), pets = placeholder pictures (data-ph).
 Code state: review/stage-pets fdaba9cae unchanged; worktree /home/user/wt/sp (sparse), servers on 8955/8960 can be killed.
+
+## ROUND 2 RESULT (worker, 11/16/2026) — code review/stage-pets @ 1650774a
+Fixes: (2) test now waits for the place painting (#scimg background + Pixi copy) before each shot; all r2 shots re-taken, painting present. (3) KIT_PET.h S .18→.24, M .26→.30, L stays .34 (.36 covered 8–9 % of torso, rejected). Pet visible px (S/M/L): 3 people on page, A: iPad 43/54/61, Fold 57/71/80; B: iPad 36/45/50, Fold 47/59/66. 2 people (default): iPad S 48 / L 67, Fold S 63 / L 89. 1 person: iPad 118/148/167, Fold 130/163/184.
+(1) SAMPLES only (owner decides): kit part KIT 33.9 `KIT_STAGE3` (jkit.js), switch `?st3=A|B` or `KIT_STAGE3.v`; default null = today's behaviour (2 + "+N"). Both keep the slot rule, no overlap, Fold = iPad page scaled.
+| | A: column folds to 56 px portrait icons, text hidden (title/tap keep the card) | B: column kept, everyone shrinks |
+|---|---|---|
+| iPad 1180x820, 3 people + 3 pets, woman body px | 172–179 (−22 % vs 230 = 2 people no pets) | 144–149 (−35 %) |
+| Fold 755x1000 | 229–237 (−30 % vs 340) | 189–196 (−44 %) |
+A costs: Ân sủng / stat rows and chip text are hidden while 3 people stand there (portraits only). B costs: smaller people, plaque column unchanged. Tests: all A/B cases pass (face 0 %, torso ≤ 6.2 %, no neighbour overlap); default variant 16 cases pass on both devices, 0 page errors. NOT run: kit-conform, old-save (no save field touched; default path unchanged except S/M sizes). Shots: stage-pets-shots/r2-*.jpg; sheets r2-sheet-AB-1180x820.jpg / r2-sheet-AB-755x1000.jpg (rows n3SML, n3LLL, n3MMM; A left, B right). Placeholders: Hoàng hậu = unknown silhouette art, pets = placeholder pictures.
+Handover: START_CTX ≈ 4 %, ended ≈ 25 %. Nothing pending.
