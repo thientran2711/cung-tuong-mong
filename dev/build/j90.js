@@ -127,7 +127,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-fig{position:relative;width:100%;height:calc(var(--kfh,300px) * .84);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
  animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
-.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
+.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-img.kpod-unk{opacity:.92}
 .kpod-fb{display:none;height:100%;align-items:flex-end;justify-content:center}.kpod-nofig .kpod-img{display:none}.kpod-nofig .kpod-fb{display:flex}
 .kpod-fb .pfwrap{height:96%;display:flex;flex-direction:column;align-items:center}.kpod-fb .pcp.kit{height:100%;width:auto!important;max-width:100%}.kpod-fb .pfrw{display:none}
