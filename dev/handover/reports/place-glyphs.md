@@ -32,3 +32,15 @@ Owner reviews the sheet (samples). If approved: mass production/wiring goes to F
 - Nội vụ phủ scene: 15 paid edits downloaded and looked at (all 16 incl. base on one sheet). All consistent (same room/camera, correct season + buổi, no people, no text). Nothing redone. Observation for the owner: the floor is fairly glossy/reflective (owner rule OD:L86 "no glossy floors") — her call. NOT wired.
   Sheet (1560x1040, base + 15): CDN https://ctm-img.victoria-tntt.workers.dev/img/nvp-scene-contact-sheet.png ; also dev/handover/reports/place-glyphs-nvp-scene-sheet.png.
   Full-size scene PNGs are only in the Magnific folder (ids above); not uploaded to the CDN as game files yet (waiting for approval).
+
+## v2 SAMPLE (owner: "vẽ lại biểu tượng nơi chốn ... không giống phong cách game"), 3 of 9, NOT wired, live files untouched
+Rules read: START_CORE/WORKER/ART + art-items-pets + art-frames-kit located and grepped for icon/style/seal/sample rules (not every line of the 53 KB read), plus STYLE_ANCHOR.
+What "game style" is (looked at item icons item-chenthuoc/cocngoc/bangda/dan-co/bo-dieu, kit icons ico-map/ico-room, act-an-thai, the Dư đồ map painting):
+- Muted, dusty palette: pale celadon/jade, aged ivory, weathered wood, brick/maroon red (never pure saturated red), old pale gold.
+- Soft natural light, near-3D painterly surface detail (patina, wood grain, glaze), no hard cartoon highlights; map = ink line + watercolour.
+- Gold is only a THIN edge line / small corner touches; decoration is restrained (one peony motif on a surface, not covering everything).
+- My v1 glyphs were the opposite: saturated red+gold, thick gold bevels, ornament on every surface, glossy cartoon look.
+Sample sheet: dev/handover/reports/place-glyphs-v2-sample.png (old | new | game reference, large + 14/28 px). New = ksp (jade tablets), lc (cold-palace gate; alpha cleaned in code from a hazy cut-out, no regeneration), tgk (wash tub).
+Prompts: gpt-2-6, 1k, 1:1, transparent, refs = 3 game item pictures (chenthuoc, cocngoc, bangda), 1 candidate each. Credits: 3 x 40 = 120.
+Verdict: new ones sit with the game items (palette, light, detail). At 14 px the pale tablets (ksp) are less punchy than v1 but still read as tablets; flag if she wants stronger contrast.
+Next if approved: redo the other 6 (cung, vuon, cnh, ttp, acs, dc) the same way (mass production -> Foreman C), then replace img/place-*.webp on the CDN.
