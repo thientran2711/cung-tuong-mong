@@ -219,7 +219,7 @@ function panel67(){const row=(a,b)=>`<div class="pcrow"><span>${a}</span><span>$
 if(typeof srvRoadHTML==="function")(function(){const r0=srvRoadHTML;srvRoadHTML=function(){const h=r0.apply(this,arguments);try{if(v267())return h+`<div class="st67">${panel67()}</div>`}catch(e){}return h}})();
 /* ---------- shared outcome helpers (only existing systems) ---------- */
 function e67heir(n){const s=son67();if(s){s.fond=cl((s.fond||0)+n,0,100);return `Hoàng thượng thương ${s.name} hơn (+${n}).`}apply({danh:3});return "Chưa có hoàng tử: Danh +3."}
-function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0)return"";v.rank=Math.max(0,v.rank-1);return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
+function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0)return"";v.rank=seatDown(v,v.rank-1);return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
 function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (thiện cảm +${n||30}).`}
 function e67foe(v,n){if(!rvOk67(v))return"";n=Math.round((n||15)/2);oanAdd(v,S,n);return `${v.name} oán ngươi thêm.`}
 function e67pun(v,n){if(!rvOk67(v))return"";v.sung=Math.max(0,(v.sung||0)-n);return `${v.name}: Sủng -${n}.`}
