@@ -33,6 +33,7 @@ Object.assign(BAL,{lux:{
  /* frugal edict: when ≥ edictN people in the palace have tiếng xa hoa (a frugal Thái hậu: edictNF), chance edictP each month, lasts edictM months,
     not again within edictCd months. While it stands: everyone above its range at month end Đức −2 (her: also Thái hậu −2); plain dress 1 in 3 Đức +1 */
  edictN:4,edictNF:3,edictP:25,edictM:3,edictCd:24,edictTh:-2,
+ npcCalm:70,npcCalmProud:25,/* chance an NPC with tiếng xa hoa (or above an edict) dresses one phẩm lower that month */
  lanhDuc:-1,          /* lavish dress in lãnh cung (monthly) */
  /* Hội phối đồ: theme range is absolute (4 pieces), capped by her allowance; a floor never above capLo × allowance */
  capLo:.45,ctFit:3,ctShow:1,ctOver:-2,ctPlainK:4,ctPlainMin:-1,ctDuc:-1,
@@ -99,9 +100,9 @@ if(typeof toilFx==="function"){const tf0=toilFx;toilFx=function(p,host,F,baseSta
 /* her phô trương verdicts taken count toward the reputation */
 (function(){if(typeof aaThieuLeApply!=="function")return;const ap0=aaThieuLeApply;aaThieuLeApply=function(host,f0){let L=null;try{L=leAttire(S,"",host)}catch(e){}const r=ap0.apply(this,arguments);
  try{const V=L&&L.toil&&L.toil.lux;if(V&&(V.v==="photruong"||V.v==="vuot")&&(f0||L.delta)&&((f0||L.delta).duc||(f0||L.delta).aff))S.luxRepD=Math.min(2,(S.luxRepD|0)+1)}catch(e){}return r}})();
-/* NPCs waiting on Thái hậu: the same extra (Đức) — jtoil applies Thái hậu's regard and Danh */
+/* NPCs waiting on Thái hậu: the same extra (Đức), at most once a month (they wait on her far more often than she can) — jtoil applies regard and Danh */
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);
- try{if(v&&v!==S&&toilOn(v)){const F=toilFOf("th");const X=luxExtra(v,"th",F,luxVerdict(v,F,"th"));if(X.duc)ap(v,{duc:X.duc})}}catch(e){}return r}}}catch(e){}})();
+ try{if(v&&v!==S&&toilOn(v)&&v.luxXM!==S.turn){const F=toilFOf("th");const X=luxExtra(v,"th",F,luxVerdict(v,F,"th"));if(X.duc){ap(v,{duc:X.duc});v.luxXM=S.turn}}}catch(e){}return r}}}catch(e){}})();
 /* NPCs: their dress verdict is their real clothes (j92 dresses them by nết each month), not a dice look */
 (function(){if(typeof toilNpc!=="function")return;const n0=toilNpc;toilNpc=function(v){const o=n0.apply(this,arguments);try{let x=null;try{x=luxOf(v)}catch(e){}
  if(x&&x.sc>0){const V=luxVerdict(v,toilFOf("th"),"th");o.dv=V.v==="tang"||V.v==="vuot"?"photruong":V.v;o.style=V.style}}catch(e){}return o}})();
@@ -130,6 +131,9 @@ function luxMonthX(p){const B=BAL.lux;let r="";const me=p===S;if(!p||p.alive===f
  else if(was&&me)r+="Tiếng xa hoa của ngươi đã lắng. ";
  if(luxEdictOn()){const R=luxRange(p,"thinhan");if(ratio>R.hi){if(me){apply({duc:B.edictDuc});if(!S.thDead&&S.luxEdict.by==="th")apply({th:B.edictTh});r+=`<span class="r">Ngươi ăn vận quá lệnh tiết kiệm. Đức ${B.edictDuc}${!S.thDead&&S.luxEdict.by==="th"?`, Thái hậu ${B.edictTh}`:""}.</span> `}else ap(p,{duc:B.edictDuc})}
   else if(x.sc>0&&ratio<=R.fit[1]&&roll(33)){if(me){apply({duc:1});r+="Ngươi giữ lệnh tiết kiệm, được khen. Đức +1. "}else ap(p,{duc:1})}}
+ /* NPCs learn: with tiếng xa hoa or above an edict they tone down (nết Kiêu ngạo / Tham vọng seldom) — j92 wdAutoFor one phẩm lower */
+ if(!me){try{const over=luxXaHoa(p)||(luxEdictOn()&&ratio>luxRange(p,"thinhan").hi);const t=traitsOf(p);
+  if(over&&roll(t.some(x=>x==="Kiêu ngạo"||x==="Tham vọng")?BAL.lux.npcCalmProud:BAL.lux.npcCalm)&&typeof wdAutoFor==="function")wdAutoFor(p,-1)}catch(e){}}
  return r}
 if(typeof luxMonth==="function"){const lm0=luxMonth;luxMonth=function(p){let r="";try{r=lm0.apply(this,arguments)||""}catch(e){}try{r+=luxMonthX(p);if(p===S)r+=luxEdictTry()}catch(e){console.error("luxMonth",e)}return r}}
 /* co-op: one edict for the palace — "luxEdict" is in jcoopworld W_KEYS */
