@@ -282,3 +282,4 @@
 | tut-replay (sonnet; owner-bug fast lane): title-menu 'Xem lại lời dặn' fails ~1/4, modal stays open — root cause + whole group close-then-open | review/tut-replay | main s21 | session_01UV1SzhwFvXdge1mpQh57PG | RUNNING | 16/11 17:09Z |
 | dudo-lock (opus; owner-bug fast lane OD 16/11 18:30Z (4)): Dư đồ every place locked for a Quý nhân — root cause + whole group, shots | review/dudo-lock | main s21 | session_01UV1SzhgcdBcFg9cbDHVifr | RUNNING | 16/11 17:13Z |
 | dress-offence (opus; OD 16/11 18:30Z (1)–(3)): Tố vượt phẩm + new Tố xa xỉ two-way, Dò la 'dress seen' evidence, person card 6 wear slots + pet, Vượt phẩm mark when seen | review/dress-offence | main s21 | session_01UV1SzkwJVSXiL35uMTReNj | RUNNING | 16/11 17:13Z |
+| suc-khoe analyst (opus, report; OD 16/11 18:45Z): history check postpartum + ONE proposal Sức khỏe = Sức regen speed, BAL, bot-measured | reports/suc-khoe.md | main s21 | session_01UV1Szi7v8PddXTW8k42Jd1 | RUNNING | 16/11 17:15Z |
