@@ -33,7 +33,7 @@ main at start = eba64ead4.
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid-r1 @3a875687 | opus | PASS (see ## PASS; reviewer archived) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
-| D58 close-maid-by-origin v2 | review/close-maid @0aa7fdd9 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer close-maid-r1 session_01DgYSWpkGbZi35U4djYBBCe RUNNING |
+| D58 close-maid-by-origin v2 | review/close-maid-r1 @ebc85f78 | opus | PASS (see ## PASS; reviewer archived) |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam @ab50be5c | opus | SẴN SÀNG KIỂM (contains kc-roads-cn-nc-r1 ef6e7a05 + mg-balance 96736fff; worker archived) → reviewer session_01DgYSWp7SJ7frNoZUnBtM7q RUNNING (review/entry-exam-r1) |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING — VISIT half only (extends existing j7 'empnight'); POISON half PARKED (worker's reply blocked by a safety classifier) → QUESTIONS |
@@ -49,6 +49,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+READY review/close-maid-r1 ebc85f78446186a4a990024b17c73091c700f218 (D58 close maid by origin v2, BAL.cmaid; also carries READY servant-mline-r3; reviewer fixed S.cm clash with jcmood → S.cmaid (monthly crash), ONE CORE newLoy/spyDanh; main 9ddb3f6c ancestor; report reports/review-close-maid-r1.md)
 READY review/danh-balance-r1 9a1133f0bdeb1c649e5fb9d1546d779f59154b80 (Danh gates/succession/charity numbers now read BAL.danhG/succN/charity — value-neutral, proven by literal-vs-BAL table + runtime probe; no BAL value changed; report reports/review-danh-balance-r1.md)
 READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op guest maid can rise via guest→host request; reviewer fixed NPC over-cap on host + srvout request; trial merge with coop-b1b5-p2: only jbal2 conflict, keep both; report reports/review-coop-guest-maid-r1.md)
 - READY review/slap-mg-r3 6444443b9abea1c78daac2a6a6a1b5dab8d0e9db (slap minigame §79: tiers via B's mgTier, skilled nặng 26 %, demo+hint, ONE CORE, Gọn mode; SHIP AFTER/WITH review/mg-balance — branch has mg-balance 96736fff, not its tip d1ca11be: re-merge tip + rerun dev/test/slap-mg.js before ship; ART NEEDED 7 files in reports/slap-mg-r2.md → art owner)
@@ -141,6 +142,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:47Z: close-maid-r1 PASS ebc85f78 → READY; reviewer archived.
 - 11:16Z: coop-b1b5-r2 FAIL 1 BLOCKING (jcycle × co-op guest) → opus fix worker from r2 @d5879537; reviewer archived.
 - 11:13Z: danh-balance-r1 PASS 9a1133f0 → READY; reviewer archived. Reviewer note for the P1 proposal: '+55 Danh' is arithmetic; measured +12.5 (1 seed, overlapping CIs; run_par.js not reproducible per seed).
 - 11:06Z: close-maid SẴN SÀNG KIỂM 0aa7fdd9 (relayed by s3) → opus reviewer close-maid-r1; worker archived.
