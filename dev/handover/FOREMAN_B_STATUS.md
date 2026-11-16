@@ -6,7 +6,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg @3af1d2c4 | sonnet | REVIEWING (review/tuduc-mg-r1, sonnet) |
-| C24 chapter-detail | review/chapter-detail @e46ea012 (contains tutorial-r2) | sonnet | REVIEWING (review/chapter-detail-r1, sonnet) |
+| C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS d8b54d0970ac8591d07163650058485f4bceb818 |
@@ -53,6 +53,7 @@ PASS review/page-curl2-r1 3f95e00368db1e5acf3aca47889ce7cb42861a4b (C32; portrai
 PASS review/stat-fx-2-r1 6d4540a7cf2b61de482fde24f9e3df36782fa61f (C26b; person card / status tiles glow on re-render, grudges inverted; k61How full sentences; mood tile without cause = plain kit card. Number colour itself waits for the §57.1 KIT REQUEST)
 PASS review/places-port-r1 add62a7e9283cd328ddd9a46951abf0210e7bb26 (D42; 5 new reachable places + children by age + access rules; owner-approved paintings; CONTAINS review/palace-map-port-r1 (D30) — fast-forward this one and D30 comes with it; kitPalaceMap now KIT §76, confirm)
 PASS review/routes-port-r1 332308a1961681e37e0e4de78e86adc9aac5524d (D33; Lối riêng routes + blood test + bowl art; ẩn dật vow now 34/34 harmful acts; CONDITIONAL: keeper registers category loi-rieng #2c6e5a in KIT §6.1; old-save not re-run by reviewer, worker's passed)
+PASS review/chapter-detail-r1 936a2fe78b457ad3339c8554c46c6d674c4edf57 (C24; grows kitGoalDetail — one panel, no kit part changed; chapter tap → detail + inline progress; dead-tap scan 0 confirmed dead; nit: inline progress repeats Hạn/Lợi thế; tiny private .chapgo + cursor rules for keeper to absorb)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
