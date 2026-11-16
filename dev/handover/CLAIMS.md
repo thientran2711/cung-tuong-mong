@@ -26,3 +26,15 @@
 | D50 dialog fig placeholder | review/dlg-fig-ph | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | balance-after-truth re-run | review/balance-after-truth | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | reign-road review | review/reign-road-r1 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
+| D29 schedules/roster re-port | review/schedules3 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D23+D24 mole audit + eye patch | review/mole-audit | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D52 skin-match audit | review/skin-audit | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D7 personality review | review/personality-r1 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D6 econ-items | review/econ-items | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D18 origins review | review/origins-r1 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D27 toil-react review | review/toil-react-r1 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| A7b cycle art | review/cycle-art | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| C9 huadian fixes (worker 3) | review/huadian-size-r2 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D15 download-size + perf | review/perf | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D17 luxury | review/luxury | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
+| D53b material dialog pictures | review/opt-pics3 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |

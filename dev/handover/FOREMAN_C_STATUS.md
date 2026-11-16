@@ -1,4 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
+ORDER 16/11 applied (05:19Z 16/11): no new in-session subagents — every new worker/reviewer is a separate cloud session (create_session); workers report to their branch + PROGRESS + dev/handover/reports/<branch>.md; items claimed in dev/handover/CLAIMS.md before opening; hourly self-wake.
+last wake: 05:19Z 16/11
+Context: this session is already far past start+25% (long session, est.). The 12 in-session agents below were started before the order and may finish; Foreman C rolls over (HANDOVER block + create_session) as soon as they have reported or at the first summarisation, whichever comes first.
 Updated: 11/16/2026 05:30Z — 12 agents running (cap 12). Repack done: .git packs 17 GB → 4.1 GB (56 → 2 packs), disk 4.6 → 21 GB free. Will repack again if packs pass ~12 GB.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
@@ -114,6 +117,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q14 (owner, D18): a distinct foreign-princess LOOK (dress + face) per origin would need 8 ranks × 4 ages = 32 figures + 32 portraits ≈ 2000+ Magnific credits per origin (nc and bd now use the shared consort faces). Draw for nc and bd?
 - Art follow-up (D16 reviewer): material-choice dialogs for Tứ đức/arts show the generic Tài nghệ picture instead of embroidery/makeup/letters/charms → next opt-pics round (Foreman C art slot).
 - KIT REQUEST K13 (C7 reviewer, from main): opt-render 755x1000 'A:giftto not in cost mode' — the empty-bag gift picker id 'giftto' is missing from KIT_ACT_PIDS in jk2b.js.
+- COORD with Foreman D (D50): Foreman C already finished D50 as an audit (no art missing; code causes: placeholder shown before figure load + S.fidUsed never released) — see NOTE above; Foreman D's review/dlg-fig-ph should use it. D52 stays with Foreman C (review/skin-audit RUNNING), as FOREMAN_D_STATUS notes.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
