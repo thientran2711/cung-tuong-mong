@@ -1081,3 +1081,4 @@ All must work in co-op.
 - (16/11, session 8) Owner confirmed: top bar on 1000–1279 px (iPad landscape 1180) stays fixed at TWO rows (as review/stage-side built).
 - (16/11, session 8) Owner opened a THIRD account: Foreman C → dev/handover/FOREMAN_C.md (slice: pending reviews A6–A9, A11, A13, C18, C19; workers C20, C6–C9; most of D-list), status dev/handover/FOREMAN_C_STATUS.md. Note: Foreman B reports its Cloudflare token is invalid ('Invalid API Token') → its new images stay PENDING CDN; main coordinator uploads them at merge.
 - (16/11, session 8) Owner: Foreman C is open; account B (and C) now have a valid Cloudflare key → foremen upload their own images (PENDING CDN lists should be uploaded by them now).
+- (16/11, session 8) Owner: Foreman C may run up to 15 agents (FOREMAN_C.md updated). Foreman B stays at 8.
