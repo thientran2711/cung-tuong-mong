@@ -1,7 +1,7 @@
 # balance-core — report (worker session_01UV1Szkjt9soqZga18GCoey, opened by MAIN s26)
 
 START_CTX ≈ 4 % of the 1M window. Branch **review/balance-core** (base origin/main 08725411). Owner lines: OD 16/11 22:45Z, 22:50Z, 23:00Z, 23:05Z, 23:08Z, 22:10Z.
-Status: built + tested at **7c581f8c**; **ships only after the owner agrees to the OWNER PROPOSAL (§7)** (main shows it to her first).
+Status: built + tested at **80dbed1e**; **ships only after the owner agrees to the OWNER PROPOSAL (§7)** (main shows it to her first).
 
 ## 0. What the owner saw ("một cái tài lên 75 … chơi một xíu lên 100")
 Measured on main (dev/index.html, 12 starts per origin, probe + sens bot):
@@ -106,7 +106,7 @@ Odds = b + Σ w×stat + best-art bonus + trait fit (stealFit) + Emperor mood (mm
 |---|---|---|---|---|---|---|---|
 | Tranh sủng (feign) | 34 | Sủng .35, Sắc .05 | .5 | — | Sủng −3, Đức −1 | −10 / +15 | 0 |
 | Chặn ngự giá (road) | 12 | Sắc .35, Sủng .05 | 1.5 | Sủng +6, Danh +2 | Sủng −5, Danh −2 | −25 / +30 | −4 |
-| Giữ chân (keep) `BAL.steal.keep` (names agreed with night-final) | base 35 | Sủng .3, Sắc .1 | 1 | success: every try against her −1 rung (`rungDown`); nobody took it: Sủng +gain 2; robbed anyway: hit × oan 1.5; npcP .5 (night-final tunes) | — | | |
+| Giữ chân (keep) `BAL.steal.keep` (names agreed with night-final) | base 35 | Sủng .3, Sắc .1 | 1 | success: every try against her −1 rung (`rungDown`); nobody took it: Sủng +gain 2; robbed anyway: hit × oan 1.5; npcP .85 (night-final value) | — | | |
 Best art: most points; Emperor's month art (S.emp.ea {f,d}, rolled monthly, his trait doubles the weight of the arts he prizes): favoured +odds[bậc] × 1, disfavoured −odds[bậc] × .75, other 0.
 Who knows the month art: Tai mắt ≥ 5 at the month start; else each week a rumour 5 + Tai mắt × 4 %; "dò được" via discover 35 %; NPCs the same (measured: she knows it ≈ 18 % of weeks with Tai mắt 0–1, NPCs ≈ 13–18 %).
 Measured on the real consort population (her + NPCs, 2 seeds × 3 lives × 2 y, value of a night = 8 Sủng), road base 12: **best choice Tranh sủng ≈ 62 %, Chặn ngự giá ≈ 33 %, Thôi ≈ 5 %**
@@ -163,7 +163,7 @@ Giữ chân Hoàng thượng thành: mọi người tranh đêm của nàng tụ
 - dev/test/balance-core.js (new): 38/38 PASS, 0 page errors (origins from table ×10, NPC origin, ladder 70–130 lessons, two-way lesson, old-save migration, growth both ways, feign rides Sủng / road rides Sắc, oKeep, rungDown, month art fav ↑ dis ↓, Tai mắt learning, road loss from BAL, word() reads BAL.lad, ARTFX prints BAL).
 - dev/test/night-steal-unit.js: 29/29 PASS (twice), 0 errors.
 - dev/test/balance-night.js (new): the §5 population measure.
-- quickcheck on 7c581f8c: QUICKCHECK PASS · open 1056 ms · old save ok · perf new/live render 231/208 ms, tab 275/238, buổi 939/668, long tasks 11/9 (earlier run on 10fa43d4: new faster than live on all four → box noise). balance-core.js 38/38 ×7 runs, night-steal-unit 29/29.
+- quickcheck on 80dbed1e: QUICKCHECK PASS · open 1056 ms · old save ok · perf new/live render 231/208 ms, tab 275/238, buổi 939/668, long tasks 11/9 (earlier run on 10fa43d4: new faster than live on all four → box noise). balance-core.js 38/38 ×7 runs, night-steal-unit 29/29.
 - Not run: coop-e2e (live Worker) — the co-op change is two guard names in jcoopone; please run once at go-live.
 
 ## 9. Notes for night-final (review/night-final) and merge
