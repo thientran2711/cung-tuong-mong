@@ -11,7 +11,7 @@ const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
  await page.evaluate(()=>localStorage.clear());await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(500);
  await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
  await page.evaluate(`window.__servPolicy='${process.env.SERV||''}';window.__aff=${process.env.AFF?1:0};window.__balO=${process.env.BALJ||'null'};window.__fairO=${process.env.FAIRJ||'null'};window.__q72O=${process.env.Q72J||'null'};window.__xO=${process.env.XJ||'null'};window.__q72off=${process.env.Q72OFF?1:0}`);
- for(const f of ['inpage5.js','inq72.js','inbal.js'])await page.evaluate(fs.readFileSync(path.join(M,f),'utf8'));
+ for(const f of ['inpage5.js','inq72.js','inbal.js'].concat(process.env.EXTRA?process.env.EXTRA.split(','):[]))await page.evaluate(fs.readFileSync(path.join(M,f),'utf8'));
  const t0=Date.now();let n=0;
  while(true){n=await page.evaluate(([m])=>window.__bot.step(m,200),[mode]);
   fs.writeFileSync(out,JSON.stringify(await page.evaluate(()=>window.__res)));
