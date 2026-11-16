@@ -15,7 +15,7 @@ const m=/^(\d+)x(\d+)@([\d.]+)$/.exec(VP);const W=+m[1],H=+m[2],DPR=+m[3];fs.mkd
   return{maid:S.maid.name,staff:S.staff.map(s=>s.name+' ('+s.role+')'),kids:S.kids.filter(k=>k.alive).length}});
  await p.addStyleTag({content:'img.figimg,#mefig,#tokens .tok{animation:none!important}'});
  const ck=[];const pages=[];
- for(let pg=0;pg<6;pg++){await sleep(1500);/* the slot layout waits for every figure picture (j59lay): wait for them */
+ for(let pg=0;pg<12;pg++){await sleep(1500);/* the slot layout waits for every figure picture (j59lay): wait for them */
   for(let w=0;w<120;w++){const ok=await p.evaluate(()=>{const im=[...document.querySelectorAll('#mefig, #tokens img.figimg')];return im.length>0&&im.every(i=>i.complete&&i.naturalWidth>0)&&!!document.getElementById('stage').dataset.j59free});if(ok)break;await sleep(1000)}await sleep(800);
   const r=await p.evaluate(()=>{const st=document.getElementById('stage');const vis=e=>e&&e.offsetParent!==null&&getComputedStyle(e).display!=='none'&&getComputedStyle(e).visibility!=='hidden'&&e.getBoundingClientRect().width>2;
    const ppl=curPeople();const L=[];const me=document.getElementById('mefig');if(vis(me))L.push('me');
@@ -34,7 +34,7 @@ const m=/^(\d+)x(\d+)@([\d.]+)$/.exec(VP);const W=+m[1],H=+m[2],DPR=+m[3];fs.mkd
  await p.evaluate(()=>{const st=document.getElementById('stage');st.__j59p=0;j59lay()});await sleep(800);
  const card=await p.evaluate(async()=>{const P=curPeople();const i=P.findIndex(q=>q.kind==='serv'&&q.ref.role==='eunuch');if(i<0)return{none:1};
   const pages=+((document.getElementById('stage').dataset.j59pg||'0,1').split(',')[1]);
-  for(let k=0;k<6;k++){const t=document.querySelector(`#tokens .tok[data-p="${i}"]`);if(t&&t.offsetParent!==null){t.click();break}const c=document.querySelector('#stage .j59more.j59mr');if(c)c.click();await new Promise(r=>setTimeout(r,700))}
+  for(let k=0;k<12;k++){const t=document.querySelector(`#tokens .tok[data-p="${i}"]`);if(t&&t.offsetParent!==null){t.click();break}const c=document.querySelector('#stage .j59more.j59mr');if(c)c.click();await new Promise(r=>setTimeout(r,700))}
   await new Promise(r=>setTimeout(r,900));const pc=document.querySelector('#pop .pc, .pc');
   return{name:P[i].name,popIdx:typeof popIdx==='number'?popIdx:null,acts:talkOpts(P[i]).map(a=>a.n),btns:[...document.querySelectorAll('#pop button.opt, .pc button.opt')].map(b=>b.textContent.trim().slice(0,30)),card:!!pc}});
  if(process.env.SHOTS!=='0')await p.screenshot({path:`${OUT}/${TAG}-${W}x${H}-card.jpg`,type:'jpeg',quality:60});
