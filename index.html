@@ -42170,7 +42170,9 @@ function oiSel(home){const k=oiK();const o=S.origin||{};const top=o.r||0;const K
 function oiAlso(){try{return entCtx({}).also||""}catch(e){return"Sắc, Tài, Đức, tài nghệ"}}
 function oiPanelSpec(P,i,n,home){const k=oiK();const [src,txt0,cap]=P;const txt=oiT(txt0);const last=i===n-1;
  const tone=typeof kitPhTone==="function"?kitPhTone(txt):"light";const fb=(typeof KIT_PH!=="undefined"&&KIT_PH.ev&&KIT_PH.ev[tone])||"https://ctm-img.victoria-tntt.workers.dev/img/ph-event-light.webp";
- const pic=typeof kitSceneArt==="function"?kitSceneArt(src,cap||"",{shape:"wide",fb}):"";
+ /* §59: a key not on the CDN index (KIT_CDNHAVE, kitPhOnCdn) shows the placeholder at once; the onerror fallback stays for the rest */
+ let on=true;try{on=typeof kitPhOnCdn!=="function"||kitPhOnCdn(src)}catch(e){}
+ const pic=typeof kitSceneArt==="function"?kitSceneArt(on?src:fb,cap||"",{shape:"wide",fb}):"";
  let tail="";if(last){const X=oiSel(home);tail=kitTiles([["Xuất thân",S.origin.n],["Cao nhất kỳ này",X.top],[home?"Rồi sẽ qua":"Sắp qua",X.head],["Xét theo",oiAlso()]])}
  return{scene:true,kind:"notice",title:`Tiền truyện · ${S.origin.n}`,sub:`${i+1}/${n}`,html:pic+`<p>${txt}</p>`+tail,cls:"koi",btn:last?(home?"Tiếp theo":k==="cnv"?"Theo ma ma":"Vào cung"):"Tiếp theo",
   onClose:last&&!home?()=>{try{oiGate("dir")}catch(e){console.error(e)}}:null}}
@@ -42217,7 +42219,7 @@ function oiWord(key,pos,g,A,way){const maid=g==="maid";const Q0=oiQueen();
 function oiWhy(P,tier,g,A,way){const L=P.filter(p=>isFinite(p[1])&&Math.abs(p[1])>=.5).sort((a,b)=>b[1]-a[1]);const up=L.find(p=>p[1]>0),dn=L.slice().reverse().find(p=>p[1]<0);
  const U=up?oiWord(up[0],true,g,A,way):"",D=dn?oiWord(dn[0],false,g,A,way):"";
  if(tier>=2)return U||(g==="maid"?"Ma ma ghi tên ngươi vào hàng đầu":"Hoàng thượng giữ thẻ bài, ban hoa");
- if(tier===1)return U&&D?`${U}; nhưng ${D.charAt(0).toLowerCase()+D.slice(1)}`:U?`${U}, nhưng chưa đủ để được phong cao nhất`:(D||"Không ai chê, cũng không ai khen");
+ if(tier===1)return U&&D?`${U}; nhưng ${/^(Thái hậu|Hoàng|Ma ma|Lễ nghi|Lời)/.test(D)?D:D.charAt(0).toLowerCase()+D.slice(1)}`:U?`${U}, nhưng chưa đủ để ${g==="maid"?"được chia về hầu phi tần bậc cao":"được phong cao nhất"}`:(D||"Không ai chê, cũng không ai khen");
  return D||(g==="maid"?"Ma ma không để ý tới ngươi":"Hoàng thượng không để ý tới ngươi")}
 function oiGroup(){const k=oiK();return k==="cnv"?"maid":(k==="nc"||k==="bd")?"bride":"consort"}
 function oiRow(why){return kitRows([["Vì sao",why,"t"]])}
@@ -42273,7 +42275,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fdb0c129e144";window.CTM_BUILD=BUILD;
+const BUILD="3fe317b05e59";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

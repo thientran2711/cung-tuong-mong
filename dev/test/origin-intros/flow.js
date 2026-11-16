@@ -23,7 +23,7 @@ const HEAD={nc:'Lễ ra mắt',bd:'Lễ ra mắt',cn:'Xét phong danh phận',cn
   R.q0=await p.evaluate(()=>Q.map(m=>m.t+(m.oiP?'#'+m.oiP:'')));
   /* the intro panels */
   const want=ROAD==='nha'?3:4;const pan=[];
-  for(let i=0;i<want+1;i++){for(let w=0;w<20&&await p.evaluate(()=>{const im=document.querySelector('#modal figure.ksart img');return !!(im&&!(im.complete&&im.naturalWidth&&im.dataset.fb==='1')&&!(im.complete&&im.naturalWidth))});w++)await sleep(250);
+  for(let i=0;i<want+1;i++){for(let w=0;w<48&&await p.evaluate(()=>{const im=document.querySelector('#modal figure.ksart img');return !!(im&&!(im.complete&&im.naturalWidth&&im.dataset.fb==='1')&&!(im.complete&&im.naturalWidth))});w++)await sleep(250);
    const s=await p.evaluate(()=>{const m=Q[0];if(!m||!m.oiP)return null;const M=document.getElementById('modal');const d=M.querySelector('.dlg');const fig=d&&d.querySelector('figure.ksart');const img=fig&&fig.querySelector('img');const shown=!!(img&&img.complete&&img.naturalWidth);
      const r=d.getBoundingClientRect();return{n:m.oiP,t:m.t,scene:M.classList.contains('kpscene'),sub:(d.querySelector('.kph')||{}).innerText||'',fig:!!fig,src:img?img.getAttribute('src'):'',shown,txt:(d.querySelector('#mb p')||{}).textContent||'',tiles:d.querySelectorAll('.kst-tile').length,
       btn:(document.getElementById('mclose')||{}).textContent||'',fit:r.bottom<=innerHeight+1&&r.right<=innerWidth+1&&r.top>=-1,ovx:document.documentElement.scrollWidth>innerWidth+1}});
