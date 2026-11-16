@@ -3347,7 +3347,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   "Giữa đường, Hoàng thượng bị mời sang cung khác.") and who has the night. No flip → "Đêm nay Hoàng thượng không lật thẻ bài nào."
 - Wording (VANPHONG): Kính sự phòng dâng thẻ bài · Thẻ bài người không thể hầu giá được rút ra · Thẻ bài được dâng lên Hoàng thượng ·
   Hoàng thượng lật thẻ bài · Đêm nay ngươi được thị tẩm. · Thẻ bài của ngươi được lật. · Tối nay: <bậc> <tên> / được chọn hầu đêm nay.
-- Tap = final still, second tap = close; closes by itself (`hold`). Reduced motion / Cảnh động off = the final still only. Phone landscape
+- Tap while it plays = the final still; the scene never closes by itself or by a tap: it ends with ONE kit button `kitSceneEnd` (§81): "Chuẩn bị thị tẩm" when she is picked (`pick=="me"`), "Ta biết rồi" otherwise (owner OD:L1261, 16/11). Reduced motion / Cảnh động off = the final still only. Phone landscape
   (h < 560, w/h > 1.5): card left of centre, chip on the right. Servant road, bots, `quiet`: no scene. No save state (old saves load).
 - Co-op: the friend's card is on the tray (her real eligibility); the scene waits while `COOPW.pend` so both players see it when the merged
   week arrives. Each player's pick is still rolled locally (protocol unchanged).
@@ -3360,6 +3360,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   mutation for the many body MutationObservers while it moves); (7) reduced motion / Gọn (`kmReduced`) = final still only (unchanged).
   Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
   before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
+- REVEAL LIGHT ALONG THE FRAME + SLOWER (owner 16/11, review/cardflip-glow): the old reveal (`kitFxLight("glow-gold")` on the card + `kitFxBurst("glowburst"/"spark")` at 38% height) sat on the portrait and hid the face. Now `edgeLight()` (only caller: `showRes`) puts `BAL.cardFlip.edge.n` (14) painted gold glows (§68 `kitFxObj("glowburst")`, true alpha) on the frame ring's centre line (`edge.path`, fractions of the card) and circles them along it (`edge.lap` 4200 ms/lap, linear, until the scene closes); sparks (`kitFxSprite("spark")`) leave the frame edge going OUTWARD. Nothing is drawn over the portrait window. Gọn / reduced motion: the glows stand still on the ring. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
