@@ -107,6 +107,6 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C44 | review/cloud-save (owner s8: same character on phone + iPad, solo + co-op; sync code, auto upload, conflict pick, 10 versions) | QUEUED-NEXT |
 | C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
-| C47 | review/stage-side (owner s8: iPad stage side cards → one narrow vertical column like phone) | QUEUED-NEXT |
+| C47 | review/stage-side @ 3441d4618 (one column always expanded, fixed slots i/(k+1), header fixed per viewport, crossOrigin root cause) | REVIEWING (stage-side-r1, sonnet) — owner Q: 1180 header 2 rows ok? |
 | C48 review/save-slots @ 0bfc455c6 (jslots.js) | REVIEWING (save-slots-r1, opus) |
 | C49 | review/palace-start (owner s8: accession start, few children 0–2 mixed, no đích tử at start, slow NPC births, princesses everywhere) | RUNNING (opus) |
