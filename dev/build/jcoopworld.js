@@ -307,7 +307,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
-function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
+function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
   /* rejoin / reload (owner 16/11: "khắc và việc đã làm bị mất"): her own week as it stood (snapLoad), never the week start again */
@@ -424,15 +424,21 @@ function seatPush(o,now){if(!CW.on||CW.seatOld||!o||COOP.state.status!=="open")r
  if(!now&&Date.now()-seatAt<SEAT_MS){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},SEAT_MS-(Date.now()-seatAt));return}
  const k=JSON.stringify([o.week,o.buoi,o.used,o.d,o.c]);if(k===seatLast)return;
  seatAt=Date.now();COOP.send({t:"seat",sv:CW.ssv||0,o}).then(ok=>{if(ok)seatLast=k})}
-COOP.on("seatok",m=>{if(typeof m.sv==="number")CW.ssv=Math.max(CW.ssv||0,m.sv)});
+COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk()}});
 COOP.on("error",m=>{if(m&&m.code==="seatold"){CW.seatOld=true;T("seatold "+m.sv)}});
-COOP.on("week",()=>{seatLast="";CW.seatOld=false;CW.ssv=0});  /* the server starts the seat versions again each week */
+COOP.on("week",m=>{seatLast="";CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
+/* review/coop-rejoin-xdev-r1: a device that was only ASLEEP (socket gone, page kept, e.g. the Fold locked) while she played on another
+   device reconnects by itself (no begin): when the room's copy of her seat is newer and was written by another device, take it, so this
+   device does not go on with its stale week (and its own copies are accepted again instead of "seatold"). */
+COOP.on("room",m=>{if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
+ if(!R||!R.dev||R.dev===DEV||(R.sv||0)<=(CW.ssvWk===R.week?CW.ssv||0:0)||!snapOk(R,m.state))return;T("snap wake server sv"+(R.sv||0));
+ if(CW.restore(R)){CW.ssv=m.msv||R.sv||0;CW.ssvWk=R.week;CW.seatOld=false;seatLast="";T("restored "+R.week+"."+R.buoi+" u"+R.used)}});
 function snapOk(o,C){const P=C&&C.P&&C.P[CW.seat];
  return !!(o&&o.d&&P&&o.room===COOP.state.room&&o.seat===CW.seat&&o.week===wk()&&(o.c&&o.c.life||0)===(P.life||0)&&o.d.S&&o.d.S.name===P.name)}
 function pickSnap(L,R){if(!R)return L;if(!L)return R;if(R.dev&&R.dev===L.dev)return L;return (R.sv||0)>(L.sv||0)?R:L}
 function snapLoad(C){try{let L=null;try{L=JSON.parse(localStorage.getItem(SNK)||"null")}catch(e){}if(!snapOk(L,C))L=null;
  const R=snapOk(COOP.state.mine,C)?COOP.state.mine:null;const o=pickSnap(L,R);
- CW.ssv=Math.max(L&&L.sv||0,COOP.state.msv||0);CW.seatOld=false;seatLast="";if(o)T("snap "+(o===R?"server":"local")+" sv"+(o.sv||0));return o}catch(e){return null}}
+ CW.ssv=Math.max(L&&L.sv||0,COOP.state.msv||0);CW.ssvWk=wk();CW.seatOld=false;seatLast="";if(o)T("snap "+(o===R?"server":"local")+" sv"+(o.sv||0));return o}catch(e){return null}}
 CW.pickSnap=pickSnap;CW.seatVer=()=>({ssv:CW.ssv||0,dev:DEV,old:!!CW.seatOld});
 addEventListener("pagehide",()=>{if(CW.on)snapSave(true)});document.addEventListener("visibilitychange",()=>{if(CW.on&&document.hidden)snapSave(true)});
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);try{snapSoon()}catch(e){}return r}})();

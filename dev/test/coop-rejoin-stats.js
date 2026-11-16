@@ -9,8 +9,13 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
   await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
-  const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
-    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
+  const o={ctx,name,errs:[],asleep:false};
+  /* o.asleep (case W): the device sleeps like a locked phone: frames dropped both ways, the socket never closed by the server side,
+     and new sockets fail until it wakes (coop-sleep.js pattern) */
+  await ctx.routeWebSocket(/\/api\/room\/[A-Za-z0-9]{4}\/ws/,ws=>{if(o.asleep){ws.close({code:1011,reason:'asleep'});return}const srv=ws.connectToServer();
+    ws.onMessage(m=>{if(!o.asleep)try{srv.send(m)}catch(e){}});srv.onMessage(m=>{if(!o.asleep)try{ws.send(m)}catch(e){}});
+    let pc=false;ws.onClose((c,r)=>{pc=true;try{srv.close({code:c,reason:r})}catch(e){}});srv.onClose((c,r)=>{if(pc||!o.asleep)try{ws.close({code:c,reason:r})}catch(e){}})});o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
+    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate|WebSocket/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
@@ -33,7 +38,8 @@ const past=(o,k,ms)=>until(o,k=>COOPW.tm.myKey()!==k||COOPW.pend||COOPW.sent===(
 async function bothPast(A,B,k,ms){const t0=Date.now();while(Date.now()-t0<ms){const a=await A.p.evaluate(k=>COOPW.tm.myKey()!==k,k),b=await B.p.evaluate(k=>COOPW.tm.myKey()!==k,k);if(a&&b)return Date.now()-t0;await sleep(250)}return -1}
 async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,4000)}
 
-(async()=>{const b=await chromium.launch();
+(async()=>{/* a local Worker (wrangler dev on 127.0.0.1) needs Chromium's private-network block off: the test page is http://ctm.local */
+ const b=await chromium.launch(/\/\/(127\.0\.0\.1|localhost)[:/]/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,LocalNetworkAccessChecks']}:{});
  let A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,1]);const ALL=[A,B];
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A: Cùng hảo hữu');await A.p.waitForTimeout(600);
@@ -137,6 +143,33 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const a=await D(A),c=await D(B);ok(a.date===c.date&&a.w===c.w,tag+': same date + week',[a,c])}
  await xdev(false,'X guest on another device');
  await xdev(true,'X host on another device');
+ /* review/coop-rejoin-xdev-r1: the OLD device was only ASLEEP (socket gone, page still open, e.g. the Fold locked) while she played on
+    the new device; when it wakes it reconnects by itself and takes the seat back. It must not go on with its stale in-memory week:
+    the room's seat copy (newer version, written by the other device) replaces it, and its own copies are accepted again (no "seatold"). */
+ async function wake(isHost,tag){await toDay();for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  const X=isHost?A:B,Y=isHost?B:A,seat=isHost?'a':'b';
+  await X.p.evaluate(()=>{spend(1);S.tai+=4;render()});await sleep(1500);ok(await seatSent(X),tag+': her week copy is on the server');await sleep(4500);
+  const x1=await ST(X),cr=await carry(X);
+  X.asleep=true;ok(await until(X,()=>COOP.state.status!=='open',null,70000),tag+': the sleeping device lost its socket',await X.p.evaluate(()=>COOP.state.status));
+  const N=await fresh(X.name+'-wake',isHost?[1180,820,2]:[755,1000,2],cr);
+  ok(await backOn(N,seat),tag+': in the same seat on the other device');
+  {const x2=await ST(N);ok(x2.tai===x1.tai&&x2.u===x1.u,tag+': other device has her week',[x1,x2])}
+  const sv0=await N.p.evaluate(()=>COOPW.seatVer().ssv);
+  await N.p.evaluate(()=>{spend(1);S.tai+=3;S.danh=(S.danh||0)+2;render()});await sleep(1500);ok(await until(N,v=>COOPW.seatVer().ssv>v,sv0,15000),tag+': other device sends its copy');await sleep(4500);
+  const x3=await ST(N);
+  X.asleep=false;
+  ok(await until(X,()=>COOP.state.status==='open',null,40000),tag+': the old device wakes and reconnects');
+  ok(await until(N,()=>COOP.state.status==='moved',null,20000),tag+': the other device now shows "moved"');
+  for(let i=0;i<4;i++){await clear(X);await clear(Y);await sleep(300)}
+  const x4=await ST(X);
+  ok(x4.tai===x3.tai&&x4.u===x3.u&&x4.danh===x3.danh,tag+': the woken device takes the newer week from the room (not its stale one)',[x3,x4]);
+  const sv1=await X.p.evaluate(()=>COOPW.seatVer().ssv);
+  await X.p.evaluate(()=>{S.tai+=1;render()});await sleep(1500);
+  ok(await until(X,v=>{const s=COOPW.seatVer();return s.ssv>v&&!s.old},sv1,15000),tag+': the woken device writes its copy again (no seatold)',await X.p.evaluate(()=>COOPW.seatVer()));
+  await N.ctx.close();
+  const w0=(await D(A)).w;ok(await nextWeek(w0),tag+': next week reached');await sleep(1500);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  const x5=await ST(X);ok(x5.w===x1.w+1&&x5.tai>x3.tai-3,tag+': after the merge she keeps the other device gains',[x3,x5])}
+ await wake(false,'W guest wakes after playing elsewhere');
  for(const o of ALL)ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

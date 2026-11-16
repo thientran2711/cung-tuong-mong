@@ -32,4 +32,9 @@ await msg(B, { t: "end", week: 0, state: { v: 1, W: { S: {} }, P: { a: { S: { ta
 assert(R.meta.week === 1 && !(await R.seatCopy("a")) && !(await R.seatCopy("b")) && !mem.has("seat-a") && !mem.has("seat-b"), "new week: copies dropped (the merged base holds the week)");
 assert(JSON.stringify(R.meta.sv) === "{}", "versions start again each week");
 await msg(B, { t: "seat", sv: 0, o: snap("b", 31, 1) }); assert(last(B, "seatok").sv === 1, "week 1 copy accepted from version 0");
+/* 3 M char cap (review/coop-rejoin-xdev-r1): just under is stored in chunks and read back whole; over is refused, the old copy kept */
+{ const big = snap("b", 40, 1); big.d.pad = "x".repeat(2990000); await msg(B, { t: "seat", sv: 1, o: big }); assert(last(B, "seatok").sv === 2, "copy just under 3 M stored");
+  const rb = await R.seatCopy("b"); assert(rb && rb.d.pad.length === 2990000 && rb.d.S.tai === 40, "big copy read back whole from its chunks");
+  const over = snap("b", 41, 1); over.d.pad = "x".repeat(3000001); B.got = []; await msg(B, { t: "seat", sv: 2, o: over });
+  assert(last(B, "error").code === "seatbig" && !last(B, "seatok") && (await R.seatCopy("b")).d.S.tai === 40, "over 3 M refused, older copy kept"); }
 console.log("seat ALL OK");
