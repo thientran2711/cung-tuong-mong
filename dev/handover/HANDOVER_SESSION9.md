@@ -450,3 +450,4 @@ OWNER WAITING: open new main · kit-size #3 verdict + narrator 1/2 · flip hand 
 - (18:34Z s21) chonso-tabs-r1 PASS c4f80b7f → PASS QUEUE (chonso-cloud builds on it — push chonso-tabs first or together).
 - (18:35Z s21) map-labels-2 b36d5f26 SẴN SÀNG (A ca sở moved to the NE princes' court; 29 labels audited) — needs SMALL reviewer; same worker now doing grey far places on review/map-labels-3 (= dudo-lock + map-labels-2).
 - (18:36Z s22) MAIN SESSION 22 = session_01UV1SzjhT28XQmRt2EHNffg; START_CTX ≈ 8 % of 1M window (estimate; get_session reads 0) → roll over at ≈ 33 %, ceiling 60 %.
+- (18:37Z s21) fest-fx worker session_01UV1Szk4mBQYLcS8DPSeeBv (add to the S22 running list).
