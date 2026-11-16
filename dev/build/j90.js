@@ -18,7 +18,12 @@ KP_SEAL.honor="VINH DANH";
 const KPOD_WORD=["Nhất","Nhì","Tam"];
 function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){const r=personRoleRank(p);return KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}
  if(typeof allKids==="function"&&allKids().some(([k])=>k===p))return typeof kidFigSrc==="function"?kidFigSrc(p):"";
- if(typeof figFor!=="function")return"";return figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||""}catch(e){return""}}
+ if(typeof figFor!=="function")return"";const f=figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||"";return f||kitSilFig(p)}catch(e){return""}}
+/* D50 review/dlg-fig-ph: a person with no full-body art (story NPC, deposed consort, staff record, child without a ref ...) never leaves an empty frame:
+   the kit silhouette unknown-fig-f|m|k by role/sex (same fallback chain as the week book j87 and the §59 placeholder rules). Art still missing is listed by dev/test/dlg-fig-scan.js. */
+function kitSilFig(p){try{if(!p||typeof p!=="object")return"";let r;try{r=personRoleRank(p)}catch(e){r=null}let g=r&&r.kid?"k":r&&r.sex==="m"?"m":"f";
+ if(!r||r.role==="other"){const sx=p.sex||(p.ref&&p.ref.sex);if(sx==="m")g="m";if(typeof p.age==="number"&&p.age<14)g="k"}return KIT_DIR+`unknown-fig-${g}.webp`}catch(e){return""}}
+window.kitSilFig=kitSilFig;
 function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.assign({},x));
  if(L.every(x=>x.place))L.sort((a,b)=>a.place-b.place);else{L.sort((a,b)=>(parseFloat(b.score)||0)-(parseFloat(a.score)||0));L.forEach((x,i)=>x.place=i+1)}return L}
 function kpodPrize(pz){if(!pz)return"";if(typeof pz==="string")return `<span class="kpod-pz">${pz}</span>`;
@@ -29,7 +34,7 @@ function kpodCol(x){const p=x.who,i=x.place-1,known=kitIsKnown(p),src=kitFigOf(p
  const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" style="--kf:${kf}" src="${src}" alt="" draggable="false" onerror="kitImgErr(this,{sel:'.kpod-fig',cls:'kpod-nofig'})">`:"";
  const fb=`<span class="kpod-fb">${kitPortrait(p,{size:"lg"})}</span>`;
  const sc=x.score==null||x.score===""?"":typeof x.score==="number"?`${x.score} phần`:x.score;
- return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
+ return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]*BAL.pace}s">`+
   `<div class="kpod-fig${src?"":" kpod-nofig"}"><span class="kpod-pool" aria-hidden="true"></span>${fig}${fb}<span class="kpod-beam" aria-hidden="true"></span><span class="kpod-motes" aria-hidden="true">${"<i></i>".repeat([5,4,3][i])}</span>${p===S||x.mine?`<span class="kpod-you">${p===S?"Ngươi":"Con ngươi"}</span>`:""}</div>`+
   `<div class="kpod-step"><span class="kpod-medal"><img src="${KIT_DIR}medal-${i+1}.webp" alt="" onerror="this.remove()"><b>${KPOD_WORD[i]}</b></span>`+
   `<span class="kpod-plq">${kpodName(p)}${x.sub?`<small class="kpod-sub">${x.sub}</small>`:""}${sc?`<small class="kpod-sc">${sc}</small>`:""}${kpodPrize(x.prize)}</span></div></div>`}
@@ -72,7 +77,7 @@ function kitPodiumShow(list,o){o=o||{};const L=kpodNorm(list);if(L.length<2)retu
  [...root.querySelectorAll("img")].forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});try{document.fonts.ready.then(fit)}catch(e){}setTimeout(fit,400);
  const onR=()=>fit();addEventListener("resize",onR);ov.__off=()=>removeEventListener("resize",onR);
  const timers=[];const me=L.find(x=>x.who===S||x.mine);const mp=me&&me.place<=3?me.place:0;
- if(!red&&mp){const t=[0,2.4,1.6,.9][mp]*1000;timers.push(setTimeout(()=>kpodBurst(root,mp,mp===1?96:mp===2?72:60,mp===1),t));if(mp===1)timers.push(setTimeout(()=>kpodBurst(root,1,56,true),t+850));timers.push(setTimeout(()=>kpodRain(root,mp,mp===1?6500:4500),t+300))}
+ if(!red&&mp){const t=kitPace([0,2.4,1.6,.9][mp]*1000);timers.push(setTimeout(()=>kpodBurst(root,mp,mp===1?96:mp===2?72:60,mp===1),t));if(mp===1)timers.push(setTimeout(()=>kpodBurst(root,1,56,true),t+kitPace(850)));timers.push(setTimeout(()=>kpodRain(root,mp,mp===1?6500:4500),t+300))}
  const skip=()=>{if(root.classList.contains("kpod-skip"))return;root.classList.add("kpod-skip");timers.forEach(clearTimeout);root.querySelectorAll(".kpc").forEach(e=>{try{e.getAnimations().forEach(a=>a.cancel())}catch(x){}e.remove()})};
  ov.__skip=skip;const next=()=>{kitPodiumClose();try{if(o.onNext)o.onNext()}catch(e){console.error(e)}};
  root.addEventListener("click",e=>{if(e.target.closest(".kpod-next"))return next();skip()});
@@ -124,10 +129,10 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpseal.kp-honor{background:linear-gradient(#c9952a,#a8781c);border-color:#6e4d0e}
 .kpod-stage{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:clamp(4px,1.6vw,22px);padding:8px clamp(8px,2.5vw,32px) 0;min-height:0}
 .kpod-col{position:relative;flex:1 1 0;min-width:0;max-width:300px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
- animation:kpodRise .7s cubic-bezier(.2,.9,.3,1.25) var(--d) both}
+ animation:kpodRise calc(.7s*var(--pace)) cubic-bezier(.2,.9,.3,1.25) var(--d) both}
 .kpod-p1{max-width:330px;z-index:2}.kpod-p2,.kpod-p3{z-index:1}
 .kpod-fig{position:relative;width:100%;height:var(--kfh,300px);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
- animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
+ animation:kpodFig calc(.8s*var(--pace)) ease-out calc(var(--d) + calc(.25s*var(--pace))) both}
 .kpod-img{height:calc(100% * var(--kf,1));width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
 .kpod-img.kpod-unk{opacity:.92}
@@ -136,7 +141,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-you{position:absolute;left:50%;bottom:calc(clamp(56px,11vw,100px) * .62);transform:translateX(-50%);font-family:var(--display);font-weight:700;font-size:.72rem;color:#5a3a10;background:#fff3c4;border:1px solid #a8740c;border-radius:10px;padding:1px 9px;white-space:nowrap;box-shadow:0 0 0 3px #fff3c466}
 .kpod-step{position:relative;width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 6px 10px;
  border:solid transparent;border-width:14px 8px 8px;border-image:url(img/kit/podium-step.webp) 34 14 14 fill / 14px 8px 8px stretch;background:#a8301f;background-clip:padding-box;
- box-shadow:0 10px 18px #3a1a1050;animation:kpodStep .55s ease-out var(--d) both}
+ box-shadow:0 10px 18px #3a1a1050;animation:kpodStep calc(.55s*var(--pace)) ease-out var(--d) both}
 .kpod-medal{position:relative;z-index:4;width:clamp(48px,9vw,84px);margin-top:calc(clamp(48px,9vw,84px) * -.55);flex:none;filter:drop-shadow(0 3px 4px #3a1a1070)}
 .kpod-p1 .kpod-medal{width:clamp(56px,11vw,100px);margin-top:calc(clamp(56px,11vw,100px) * -.55)}
 .kpod-medal img{display:block;width:100%;height:auto}
@@ -153,13 +158,13 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-beam{position:absolute;left:50%;bottom:4%;width:150%;height:calc(var(--kfh,300px) * 1.25);transform:translateX(-50%);z-index:3;pointer-events:none;mix-blend-mode:screen;
  background:linear-gradient(to bottom,rgba(var(--kl),0) 0%,rgba(var(--kl),calc(var(--ka) * .55)) 35%,rgba(var(--kl),var(--ka)) 100%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(6px);
  -webkit-mask-image:linear-gradient(to right,transparent,#000 25%,#000 75%,transparent);mask-image:linear-gradient(to right,transparent,#000 25%,#000 75%,transparent);
- animation:kpodFade 1s ease-out calc(var(--d) + .5s) both}
+ animation:kpodFade calc(1s*var(--pace)) ease-out calc(var(--d) + calc(.5s*var(--pace))) both}
 .kpod-pool{position:absolute;left:50%;bottom:-4px;width:110%;height:clamp(22px,5.5vh,44px);transform:translate(-50%,50%);z-index:-1;pointer-events:none;border-radius:50%;
- background:radial-gradient(ellipse at center,rgba(var(--kl),var(--kpa)) 0,rgba(var(--kl),calc(var(--kpa) * .45)) 45%,rgba(var(--kl),0) 72%);animation:kpodFade .9s ease-out calc(var(--d) + .5s) both}
+ background:radial-gradient(ellipse at center,rgba(var(--kl),var(--kpa)) 0,rgba(var(--kl),calc(var(--kpa) * .45)) 45%,rgba(var(--kl),0) 72%);animation:kpodFade calc(.9s*var(--pace)) ease-out calc(var(--d) + calc(.5s*var(--pace))) both}
 .kpod-motes{position:absolute;inset:0 10%;z-index:3;pointer-events:none}
 .kpod-motes i{position:absolute;width:5px;height:5px;border-radius:50%;background:rgb(var(--kl));box-shadow:0 0 6px 2px rgba(var(--kl),.8);opacity:0;animation:kpodMote 4.2s ease-in-out infinite}
-.kpod-motes i:nth-child(1){left:20%;top:18%;animation-delay:calc(var(--d) + .8s)}.kpod-motes i:nth-child(2){left:72%;top:30%;animation-delay:calc(var(--d) + 1.6s)}
-.kpod-motes i:nth-child(3){left:38%;top:52%;animation-delay:calc(var(--d) + 2.3s)}.kpod-motes i:nth-child(4){left:82%;top:62%;animation-delay:calc(var(--d) + 1.1s)}.kpod-motes i:nth-child(5){left:12%;top:70%;animation-delay:calc(var(--d) + 2.9s)}
+.kpod-motes i:nth-child(1){left:20%;top:18%;animation-delay:calc(var(--d) + calc(.8s*var(--pace)))}.kpod-motes i:nth-child(2){left:72%;top:30%;animation-delay:calc(var(--d) + calc(1.6s*var(--pace)))}
+.kpod-motes i:nth-child(3){left:38%;top:52%;animation-delay:calc(var(--d) + calc(2.3s*var(--pace)))}.kpod-motes i:nth-child(4){left:82%;top:62%;animation-delay:calc(var(--d) + calc(1.1s*var(--pace)))}.kpod-motes i:nth-child(5){left:12%;top:70%;animation-delay:calc(var(--d) + calc(2.9s*var(--pace)))}
 .kpod-skip .kpod-beam,.kpod-skip .kpod-pool{animation:none!important}.kpod-skip .kpod-motes i{animation-delay:0s}
 .kpod-red .kpod-motes{display:none}
 @keyframes kpodMote{0%{opacity:0;transform:translateY(10px) scale(.6)}30%{opacity:1}70%{opacity:.8}100%{opacity:0;transform:translateY(-26px) scale(1)}}
@@ -174,6 +179,6 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 @keyframes kpodFig{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes kpodFade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kpod-col,.kpod-fig,.kpod-step,.kpod-beam,.kpod-pool{animation:none!important}.kpod-motes{display:none}}
-@media (max-width:599px){.kpod-hd{padding:8px 8px 0}.kpod-hd .kptitle{font-size:.95rem}.kpod-step{padding:0 3px 8px;border-width:12px 6px 6px}.kpod-plq{padding:4px 3px}.kpod-plq .kname{font-size:.72rem}}
-@media (orientation:landscape) and (max-height:820px){.kpod-hd{padding-top:8px}.kpod-ft{padding:6px 12px 10px}}
+/* kv3:.kv1 */:where(.kv1) .kpod-hd{padding:8px 8px 0}:where(.kv1) .kpod-hd .kptitle{font-size:.95rem}:where(.kv1) .kpod-step{padding:0 3px 8px;border-width:12px 6px 6px}:where(.kv1) .kpod-plq{padding:4px 3px}:where(.kv1) .kpod-plq .kname{font-size:.72rem}
+/* kv3:.kv2 */:where(.kv2) .kpod-hd{padding-top:8px}:where(.kv2) .kpod-ft{padding:6px 12px 10px}
 `;document.head.appendChild(st)})();

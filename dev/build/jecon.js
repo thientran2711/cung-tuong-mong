@@ -14,8 +14,8 @@
       Trâm / y phục: j92 bán lén through a ma ma or eunuch. ================= */
 Object.assign(BAL,{
  pay:[40,55,70,95,125,165,215,280],payCold:5,payConfined:.5,payCut:.7,wage:3,
- duty:[0,4,10,18,30,48,72,100],banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:1},
- home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
+ duty:[0,4,10,18,30,48,72,100],banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:0},
+ home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
  sellPct:50,noivuPct:70,craftSell:[8,14,24,40],craftLv:3,craftGift:[2,3,5,7],
  giftLeak:{emp:35,th:25,hh:25},giftHit:{emp:{sung:-6,danh:-4},th:{th:-6,danh:-2},hh:{hh:-6,danh:-2}},
  priceTier:{sonphan:8,huongtram:10,tuithom:6,demgam:12,thuocanthai:15,yensao:25,agiao:35,luahang:30,tramngoc:30,vongngoc:50,botngua:30,nhansam:60,nghien:60,xahuong:50,
@@ -31,7 +31,7 @@ function econBan(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.b
 function econBanTo(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)<rkOf(p)).sort((a,b)=>rel(p,b)-rel(p,a)).slice(0,2)}
 function econDoDuty(p,pay){const d=econDuty(p),b=econBan(p);const r=Math.min(7,rkOf(p));
  if(pay&&(p.bac||0)>=d+b){if(d)ap(p,{bac:-d});if(b){ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{relAdd(v,p,2)}catch(e){}})}return{paid:1,d,b}}
- const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){ap(p,{danh:-dn});if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}return{paid:0,d,b,dn,du}}
+ const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){ap(p,{danh:-dn});if(du){if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}}return{paid:0,d,b,dn,du}}
 /* nhà mẹ đẻ (by origin, every BAL.homeEvery months), patron errands */
 function econHome(p){try{if(p!==S||!S.origin||S.out||(S.month%BAL.homeEvery)!==1)return 0;return S.homeCut?0:(BAL.home[S.origin.k]||0)}catch(e){return 0}}
 function econPatron(p){if(p.out)return null;const r=rkOf(p);const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>=r+2&&rel(v,p)>=BAL.patronRel&&(v.bac||0)>=40);
@@ -55,13 +55,15 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    const card={ev:1,t:`Bổng lộc tháng ${econMonthName()}`,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
    if(d||bt){const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
     card.h+=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;
-    card.opts=[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}, Đức -${x.du}.`)}},
-     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}, Đức -${BAL.dutySkip.duc} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}, Đức -${BAL.dutySkip.duc}.`)}}]}
+    card.opts=[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
+     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
    Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
-/* a good night: Hoàng thượng's thưởng also brings silver (same for every consort) */
-(function(){const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(why==="night"&&p&&(p===S||p.alive)){ap(p,{bac:BAL.nightBac});if(p===S)log(`Kèm theo ${BAL.nightBac} bạc thưởng. Bạc +${BAL.nightBac}.`)}}catch(e){}return r}})();
+/* a good night: Hoàng thượng's thưởng also brings silver (same for every consort). It is the night entry of j20's reward silver (BBAC), so it
+   goes through the ONE ân thưởng path: inside bestow, before the tray (j93 kitReward) counts its coins, in the awards ledger (S.awards), the
+   "Ân thưởng …: <món>, Bạc +N" log line and the award card chip — no second silver wrapper, no stray Bạc line of its own. */
+try{Object.defineProperty(BBAC,"night",{get:()=>BAL.nightBac|0,enumerable:true,configurable:true})}catch(e){console.error("nightBac",e)}
 /* ---------- works on the item grade scale + price by grade and skill ---------- */
 function econWkGrade(w){return Math.max(0,Math.min(3,w.ti|0))}
 wkSellVal=function(w){return Math.round((BAL.craftSell[econWkGrade(w)]+BAL.craftLv*(w.lv|0))*Math.sqrt((WK[w.kind]?WK[w.kind].need:2)/2))};
@@ -129,10 +131,10 @@ addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[dat
        "Sai cung nữ thân tín lấy lòng" (bribel): no bạc, her cung nữ's loyalty −BAL.loyalCost, odds −BAL.selfMinus;
        "Nhờ ơn người quen ở Kính sự phòng" (blockf): no bạc, an ally with thiện cảm ≥ BAL.favorRel spends it: thiện cảm −BAL.favorCost.
    - Watched more at high rank: when a scheme of hers is caught at rank ≥ BAL.watchRank, Danh −(rank − BAL.watchRank + 1) more. */
-Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,schemeRkNpc:.06,schemeGuardNpc:.04,selfMinus:12,loyalCost:10,favorRel:60,favorCost:12,watchRank:5});
+Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,selfMinus:8,loyalCost:25,favorRel:60,favorCost:30,watchRank:5});
 const ECON_FREE=["ally","gift"];
 function econGuards(t){return Math.min(3,[t.maid].concat(t.staff||[]).filter(s=>s&&(s.loyal||0)>=70).length)}
-function econSchemeMul(a,t){if(!a||!t)return 1;const me=a===S;return 1+(me?BAL.schemeRk:BAL.schemeRkNpc)*Math.max(0,rkOf(t)-rkOf(a))+(me?BAL.schemeGuard:BAL.schemeGuardNpc)*econGuards(t)}
+function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21): one price for everyone, no NPC discount (was .06/.04 for NPCs) */return 1+BAL.schemeRk*Math.max(0,rkOf(t)-rkOf(a))+BAL.schemeGuard*econGuards(t)}
 let ECON_AT=[null,null];
 function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.bac<0?-A0.__c0.bac:0;return Math.round(base*econSchemeMul(a,t))}
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;

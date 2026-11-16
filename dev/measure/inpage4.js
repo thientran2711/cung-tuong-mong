@@ -44,7 +44,7 @@ function randomStep(){
   window.__turnActs++;rpick(cand)()}
 // ---- SENSIBLE
 function needs(){const nx=S.rank<7?RANKS[S.rank+1]:{s:70,d:70};return{ws:1+Math.max(0,nx.s-S.sung)/12,wd:1+Math.max(0,nx.d-S.danh)/8}}
-const BAD=/Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc/i;
+const BAD=/Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc|Đẩy con nàng xuống hồ|Đẩy nàng xuống hồ sen|Ngáng chân/i;
 function valW(w,N){w=w||{};return (w.sung?sg(w.sung):0)*N.ws+(w.danh||0)*N.wd+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3+(w.tai||0)*.2+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)+(w.suc||0)*(S.suc<50?.3:.05)}
 function costW(c){c=c||{};return (c.suc||0)*(S.suc<50?.35:.08)+(c.bac||0)*(S.bac<60?.09:.035)+(c.duc?c.duc*3:0)+(c.sung||0)+(c.danh||0)}
 function scoreAct(a,N,cost){
@@ -55,7 +55,7 @@ function scoreAct(a,N,cost){
   let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
   if(a.x){if(/chứng cứ/.test(a.x))v+=1.5;if(/Hoàng thượng thương/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=(S.preg?0:1.5);if(/thị tẩm/.test(a.x))v+=3*o;if(/nguy cơ sảy thai/.test(a.x))v+=3}
   try{const SA=STORY[S.origin.k];if(SA&&SA.acts&&SA.acts().some(x=>x.n===a.n))v+=6}catch(e){}
-  if(a.n==="Báo tin có thai")v+=50;
+  if(a.n==="Báo tin có thai")v+=50;if(a.toil)v+=6;/* balance-pass: a sensible player makes up each morning (jtoil: else "Thái hậu chê dung nhan", Đức/Danh) */
   if(/An thai|Tự bào chế thuốc an thai/.test(a.n)&&!S.anthai)v+=40;
   if(a.n==="Nghỉ ngơi dưỡng sức"&&S.suc<35)v+=60;
   if(a.n==="Tranh sủng")v+=2;
@@ -72,6 +72,8 @@ function talkScore(t,N){const{p,a}=t;
   if(p.kind==="emp")v+=1;
   return v/Math.sqrt(a.act?2:1)}
 function sensibleStep(){
+  /* balance-pass: sit the promotion exam when its window opens, played at her own level (as inpage6; jexam window.__exAuto) */
+  window.__exAuto=1;{const ei=deck.findIndex(a=>a&&a.exam&&cardOK(a));if(ei>=0){note("exam");act(ei);return}}
   const N=needs();
   // accuse
   if(can(2)){const accs=[];rivals.forEach((v,i)=>{if(v.alive&&!v.out&&rvBtns(i).includes("accuse")){const o=ACT.accuse.o?ACT.accuse.o(S,v):70;accs.push({v,i,o})}});

@@ -97,7 +97,7 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
  if(it.w)D.push(...eff(it.w));
  if(it.use){const u=Object.entries(it.use).filter(([x,v])=>v).map(([x,v])=>`${N[x]||x} ${v>0?"+":""}${v}`);if(u.length)D.push((it.kd==="Thư từ"?"đọc: ":"dùng: ")+u.join(", "))}
  if(it.ant)D.push("an thai");if(it.fert)D.push(`${it.fert} tháng dễ thụ thai`);if(it.anti)D.push("cứu một lần trúng độc");if(it.evi)D.push(`chứng cứ +${it.evi}`);
- if(it.keep)D.push("Sủng không dưới 15");if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
+ if(k==="ngocboi")D.push("Sủng không dưới 15");/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
  if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
  const lux=it.sl||it.dr?luxVal(k):0;if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
@@ -250,9 +250,9 @@ function luxWorn(p){const L=(p.inv||[]).filter(e=>e.w&&!e.h&&IT[e.k]&&IT[e.k].sl
 function luxGrade(k){const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}
 const LUX_V=[8,16,28,44,64];
 function luxVal(k){const it=IT[k];if(!it)return 0;return LUX_V[luxGrade(k)]+Math.round((it.pr||0)/10)}
-function luxAllow(p){return 36+16*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>=60?10:0)}
+function luxAllow(p){const A=BAL.lux.allow;return A.base+A.perRank*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>=A.sungAt?A.sungAdd:0)}
 function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);const bud=luxAllow(p);
- const lv=sc===0?0:sc<=bud?1:sc<=bud*1.5?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
+ const lv=sc===0?0:sc<=bud?1:sc<=bud*BAL.lux.lv3?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
 /* kit chip: total worn luxury vs allowance; over the allowance = red */
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
@@ -423,6 +423,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 (function(){const st=document.createElement("style");st.id="kshop-css";st.textContent=`
 .dlg.kshopd #mr{display:none!important}
 .dlg.kshopd.kdper>#mb>.kpb>.kpmain{grid-row:1/-1;min-height:0;display:flex;flex-direction:column;position:static}
+/* review/care-overlap: a shop / care dialog (kshopd) with the KIT 50 banner (kdpban, row 1 of the right column): the body starts UNDER the picture, never beside it in the same row (it spanned rows 1 to -1 and the picture covered the bars / first tiles); the banner is part of #mb's grid, so every kshopd dialog (pet shop, errand shop, pet care) gets the same rows */
+.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:2/-1;overflow-y:auto;overscroll-behavior:contain}
 .kshop{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1 1 auto}
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
@@ -462,9 +464,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshds{font-size:.8rem;color:var(--ink2,#6a5040)}
 /* kv:(min-width:1000px) */.kshg{--kshsz:124px}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
-@media (max-height:500px){.kshop{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:10px}
- .kshl{grid-row:1;grid-column:1;align-self:center}.kshl p{display:none}.kshtabs{grid-row:1;grid-column:2}.kshg,.kshempty{grid-column:1/-1;grid-row:2}
- .kshg{gap:6px 4px;padding:6px}.kshpic{max-width:64px}}
+
 `;document.head.appendChild(st)})();
 /* Nội vụ phủ: "Nhờ thái giám mua đồ" (j8 PEND.shop items S.shop, price IT[k].pr) through kitShop */
 function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `may áo: Sắc +${it.dr}, 3 tháng`;

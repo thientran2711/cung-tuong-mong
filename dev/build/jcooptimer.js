@@ -187,7 +187,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
 .kctmf .kctmf-sh{display:none}
-@media (max-width:599px),(max-height:430px){.kctmf .kctmf-n{max-width:6.5em}.kctmf .kctmf-s{font-size:.68rem}.kctmf .kctmf-l{display:none}.kctmf .kctmf-sh{display:inline}}
+/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:6.5em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}:where(.kv1) .kctmf .kctmf-l{display:none}:where(.kv1) .kctmf .kctmf-sh{display:inline}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
@@ -233,12 +233,22 @@ function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const n
   o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì bấm Sẵn sàng (hay hết khắc) là sang buổi cho cả hai.":
   "Cứ làm việc của ngươi. Hết khắc hay bấm Sẵn sàng là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",nm,"Hảo hữu cùng chơi").replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-ctm="frx"',"Đóng"):"")+"</div>"):`<b>${esc(nm)}</b>`}<div class="body" id="kctmpb">${typeof kitRows==="function"?kitRows(rows):""}<p class="kpnote">${note}</p></div>${o.canHold?`<div class="row" id="kctmpr"><button class="kbtn alt" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button></div>`:""}</div>`}
+/* §69.3 kitCoopSteps(o) (owner 16/11 "Rồi sao nữa", review/coop-invite-ux): the 1-2-3 guide of the invite screen as ONE kitRows table.
+   o = {sent:bool (she has sent / copied the invite), joined:bool (the friend is in the room), wait:"0:42" (live elapsed, optional), you:"a"|"b"}.
+   Row tones: g done (✓) · w now (…) · n next. Row 2's value is `<span class="ef w" data-kcw="t">` so the lobby can tick the time in place. */
+function kitCoopSteps(o){o=o||{};const guest=o.you==="b";
+ const r1=guest?["1 · Nhận lời mời","✓ đã nhận","g"]:o.sent||o.joined?["1 · Gửi lời mời","✓ đã gửi cho hảo hữu","g"]:["1 · Gửi lời mời","… chạm Gửi đường dẫn bên dưới","w"];
+ const r2=o.joined?["2 · Hảo hữu vào phòng","✓ đã vào phòng","g"]:["2 · Hảo hữu vào phòng",`<span class="ef w" data-kcw="t">… đang đợi${o.wait?" · "+o.wait:""}</span>`,"w"];
+ const r3=o.joined?["3 · Cùng chơi","… đang vào cuộc","w"]:["3 · Cùng chơi","tự bắt đầu khi hảo hữu vào, không phải chạm gì","n"];
+ return kitRows([r1,r2,r3])}
+window.kitCoopSteps=kitCoopSteps;
 window.kitCoopFriend=kitCoopFriend;window.kitCoopFriendPanel=kitCoopFriendPanel;
 window.kitCoopClock=kitCoopClock;window.kitCoopHold=kitCoopHold;window.kitCoopLenRow=kitCoopLenRow;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§69",title:"kitCoopClock · kitCoopHold · đồng hồ buổi khi chơi cùng hảo hữu",
  html:()=>[{left:102000,len:120000,state:"run",btn:true,name:"Lan"},{left:15000,len:120000,state:"run",fr:"ready",name:"Lan"},{left:64000,len:120000,state:"pz",fr:"busy",name:"Lan"},{left:80000,len:120000,state:"run",me:true,name:"Lan"},{left:50000,len:120000,state:"stop",fr:"away",name:"Lan"},{left:0,len:120000,state:"up"}].map(o=>`<div class="kitpg-row">${kitCoopClock(o)}</div>`).join("")+
   `<div class="kitpg-row" style="position:relative">${kitCoopHold(false)}</div>`+
   ["work","busy","ready","hold","away"].map((st,i)=>`<div class="kitpg-row">${kitCoopFriend({st,name:i%2?"Lan":"",face:"",left:194000-i*40000,clock:i===4?"pz":"run"})}</div>`).join("")+
+  [{sent:false},{sent:true,wait:"0:42"},{sent:true,joined:true},{you:"b",joined:true}].map(o=>`<div class="kitpg-row">${kitCoopSteps(o)}</div>`).join("")+
   `<div class="kitpg-row" style="position:relative">${kitCoopFriendPanel({st:"work",name:"",left:194000,clock:"run",kh:2,myKh:1})}</div>`})}catch(e){}
 /* ---------- the chip over #next ---------- */
 let EL=null,lastH="",waitKey="",FE=null,lastF="",FP=null;
