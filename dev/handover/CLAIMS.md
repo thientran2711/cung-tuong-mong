@@ -315,3 +315,4 @@
 | dress-offence review r1 (sonnet, BIG) of f47c7fd3 (allowance must stay hidden, OD L187) | review/dress-offence-r1 | main s21 | session_01UV1Szi3HKYg7eh4LPkWhsT | RUNNING | 16/11 18:23Z |
 | map-labels-2 (sonnet; owner bug A ca sở placement + every Dư đồ label on its building; history check) | review/map-labels-2 | main s21 | session_01UV1Szi9inSFXF1GWG2dSP8 | RUNNING | 16/11 18:24Z |
 | kit-fit (opus kit keeper; owner bugs: figure top gap = bottom gap in every frame; option card → square picture when text short, no empty space) | review/kit-fit | main s21 | session_01UV1SzmGsieSbMBkycipcQk | RUNNING | 16/11 18:24Z |
+| chonso-tabs review r1 (sonnet, SMALL) of 5099b51cf | review/chonso-tabs-r1 | main s21 | session_01UV1SzgxM8tPohv4gezbNgu | RUNNING | 16/11 18:26Z |
