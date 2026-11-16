@@ -177,7 +177,7 @@
 | D13 spread-events fix pass (opus): Q-length gates inside the buổi change (j70/j68/j72/jpet/jkc) | review/spread-events-r2 | B | session_01N1tNP2tutKGRiVqfsdERwB (opus) | DONE SẴN SÀNG KIỂM ee684b8d (archived) | 16/11 12:55Z |
 | mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | session_01N1tNP4L7Uvc92DNAw2B9G7 (opus) | DONE SẴN SÀNG KIỂM b011cf71 (archived) | 16/11 12:55Z |
 | owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | session_01N1tNP3XJQSsGp1Vgi9GXaP (sonnet) | DONE SẴN SÀNG KIỂM 011beb29 (archived) | 16/11 12:55Z |
-| coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | session_01DgYSWn4KTZXiGjQcE6uwsQ | RUNNING | 16/11 12:58Z |
+| coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | session_01DgYSWn4KTZXiGjQcE6uwsQ | DONE (PASS 287a7010) | 16/11 12:58Z |
 | D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | session_01DgYSWoy8UWVPrve6HEjZfR | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 12:58Z |
 | D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 12:58Z |
 | Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | RUNNING | 16/11 12:58Z |
