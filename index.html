@@ -14592,10 +14592,10 @@ window.kg82NpcRaw=kg82NpcRaw;window.kg82LvFor=kg82LvFor;
    tier 1 (lv 2–3) Vừa; tier 2 (lv 4+) Khó = more to fill, aids only on the Gợi ý button. Every tier keeps the Gợi ý button (costs a little, never blocks). */
 const KG82_KNOW={tho:1,doi:1,doden:1,co:1,le:1,tc:1,xa:1,thq:1};
 function kg82Know(kind){return !!KG82_KNOW[kind]}
-function kg82Tier(lv){lv=+lv||0;return lv<=1?0:lv<=3?1:2}
+function kg82Tier(e){/* mg-balance 16/11: env.lv is the board EASE from mgTier (jmgt), higher = easier; aid tier 0 Dễ · 1 Vừa · 2 Khó (BAL.mgTier.aid) */const A=BAL.mgTier.aid;e=+e||0;return e>=A[0]?0:e>=A[1]?1:2}
 /* "first time" flag per game kind: the 1-screen demo shows once (S.mgSeen, old saves start empty) */
 function kg82Seen(kind,set){try{if(KG82.noDemo)return true;if(typeof S==="undefined"||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m[kind]=1;return true}return !!m[kind]}catch(e){return true}}
-function kg82DiffWord(lv,kind){if(kind&&kg82Know(kind))return["Dễ · có gợi ý ngay trên bàn","Vừa · gợi ý bớt đi","Khó · gợi ý ở nút Gợi ý"][kg82Tier(lv)];return["Khó (chưa học)","Khó","Vừa","Vừa","Dễ hơn","Dễ hơn"][cl(lv,0,5)]}
+function kg82DiffWord(lv,kind){return mgDiffTxt(KG82.tier||mgTier(kind,{lv}),kind)}
 function kg82StatV(p,s){if(s==="sac"){try{return effSac(p)}catch(e){return p.sac||0}}return p[s]||0}
 /* the talent parts of a person for a kind: [[label, points]] (rounded so they add up to the rounded total) */
 function kg82Parts(p,kind){const F=kg82FormulaOf(kind);const raw=[];F.forEach(([s,c])=>{if(s==="help"){raw.push([`Người hầu đắc lực`,kg82Help(p)*c]);return}
@@ -14884,12 +14884,12 @@ function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.r
  const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
-function kg82Word(raw){return raw>=9?"Xuất sắc":raw>=7?"Giỏi":raw>=5?"Khá":raw>=3?"Tạm được":"Vụng"}
+function kg82Word(raw){return mgWord(raw)}/* thresholds in BAL.mgTier.word (jmgt) */
 function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x&&x[1]);return Object.entries(st).filter(([k,v])=>v&&typeof v==="number").map(([k,v])=>[(typeof NAMES!=="undefined"&&NAMES[k])||k,v])}
 
 /* =============== startContest =============== */
 function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.onDone(null);return}
- const kind=kg82Kind(o.art,o.artName,false),K=KG82_KIND[kind];KG82.ctx="thi";kg82Preload(kind);const luck=o.luck||30,prep=Math.round(o.prep||0);KG82.lv=kg82LvFor(S,kind);
+ const kind=kg82Kind(o.art,o.artName,false),K=KG82_KIND[kind];KG82.ctx="thi";kg82Preload(kind);const luck=o.luck||30,prep=Math.round(o.prep||0);mgSet(kind,{occ:o.occ||"hoi",big:!!o.big});/* mg-balance: board ease from the tier (jmgt) */
  const me=kg82Parts(S,kind);const talent=o.talent!=null?Math.round(o.talent):me.total;const partsOk=me.total===talent;
  /* rivals: j71 rows, persons, or 3 present consorts */
  let R=o.rivals;if(!R){try{R=kg82Shuf(liveRivals(true).filter(v=>!v.confined)).slice(0,3)}catch(e){R=[]}}
@@ -14898,8 +14898,8 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  const title=o.title||"Hội thi";const artLabel=o.artName?o.artName[0].toUpperCase()+o.artName.slice(1):K.n;
  const d=kg82Open({art:artLabel,title:`${title} · ${K.t}`,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(null);return}
  const box=kg82Box();const tRows=partsOk?me.parts.map(([l,v])=>[l,kg82Chip("cộng",v,"g")]):[["Tài nghệ",kg82Chip(`cộng${o.talentBy?` (${o.talentBy})`:""}`,talent,"g")]];
- const SK=R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.lv));
- const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",`${kg82DiffWord(KG82.lv,kind)} · theo bậc tài nghệ ${KG82.lv}`,"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
+ const SK=R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.tier.lv));
+ const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
   (rows.length?`<h4 class="kpst">Đối thủ</h4><div class="kgrv">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(kind,raw=>finish(raw,false));$("kg82skip").onclick=()=>finish(SK,true)};
@@ -14932,7 +14932,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  intro()}
 
 /* =============== playArt: the same mini-game for works / lessons, no rivals =============== */
-function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{KG82.lv=kg82LvFor(S,kind)}catch(e){KG82.lv=0}
+function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc"})}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const done=(raw,skipped)=>{KG82.phase="result";const html=kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
   kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
@@ -14953,7 +14953,7 @@ window.startContest=startContest;window.playArt=playArt;
 
 /* lesson games (Tài nghệ tab, openMG) for the j85 arts: Thêu = the stitch-pattern game, Nấu nướng = the cooking quiz; same engines, 1–3 lesson points */
 const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: chọn món","banh"]};
-function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const env={kind,lv,hud:()=>{},end:raw=>{KG82.peek=()=>null;end(raw>=8?3:raw>=5?2:1)}};
+function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const T=mgSet(kind,{occ:"hoc",lv}),L=BAL.mgTier.lesson;const env={kind,lv:T.ease,hud:()=>{},end:raw=>{KG82.peek=()=>null;end(raw>=L[1]?3:raw>=L[0]?2:1)}};
  kg82Preload(kind).then(()=>{if(dead)return;try{stop=KG82_ENG[KG82_KIND[kind].e](b,env)}catch(e){console.error(e);end(1)}});return()=>{dead=true;if(stop)stop()}}]}
 (function(){if(typeof openMG!=="function"||typeof MG==="undefined")return;const o0=openMG;openMG=function(k){try{if(KG82_MGL[k])MG[k]=kg82Lesson(k)}catch(e){}return o0.apply(this,arguments)}})();
 /* ================= j91 MỖI MÔN MỘT TRÒ (owner 11/14: "5 câu hỏi chọn đáp án không phải minigame") =================
@@ -15459,6 +15459,44 @@ KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đ
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
 window.K91={engines:Object.keys(KG82_ENG),kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
+/* ================= jmgt: MINIGAME DIFFICULTY TIERS (owner 16/11 07:10Z "lên chơi càng cao thì nó khó hơn", 07:25Z "mức vừa", ONE CORE) =================
+   ONE function for every minigame family (j82 / j91 / jts / jwkg engines and the no-word replacements of review/nw-*):
+     mgTier(kind, o) -> {occ, stake, lv, d, tier 0|1|2, word "Dễ"|"Vừa"|"Khó", ease 0..5, occName}
+       kind : the KG82_KIND key (dan, co, tho, le, …)
+       o    : {occ, rank?, lv?, p?, big?}
+         occ  : the occasion — "hoc" (lessons, self-practice, works), "hoi" (festival contests j71), "trieu" (the Emperor's private summons jts),
+                "exam" (khảo hạch tấn phong jexam; rank = the TARGET rank), "tuyen" (tuyển tú / Phúc tuyển jkc). Unknown → "hoc".
+         rank : her rank 0..7 (default: S's rank; exam: the target rank). big: a big contest (+BAL.mgTier.big).
+         lv   : her skill level in that art 0..5 (default kg82LvFor(p||S, kind)).
+     stake = BAL.mgTier.occ[occ] = [base, perRank]  →  base + perRank·rank (+ big), clamped 0..BAL.mgTier.stakeMax
+     d     = stake − lv  (how far the occasion is above her skill; 0 = "matching level")
+     ease  = clamp(BAL.mgTier.mid − BAL.mgTier.slope·d + BAL.mgTier.kAdj[kind], 0, 5)   ← what the engines read as env.lv (higher = easier)
+     tier  = d ≤ −band → Dễ · d ≥ band → Khó · else Vừa (the word on the intro row "Độ khó").
+   The engines already scale with env.lv (wider hit windows, slower notes, more time, fewer pieces); until 16/11 env.lv was her own art level,
+   so the better she got the EASIER every game became (the cause of "Tuyệt phẩm almost every time"). Now the board eases only when her skill
+   is ABOVE the occasion, and gets harder as she climbs in rank (the stakes rise with rank).
+   Result words: mgWord(raw) reads BAL.mgTier.word (Vụng/Tạm được/Khá/Giỏi/Xuất sắc); works (j83) read BAL.mgTier.wk.
+   For review/nw-*: call  const t=mgTier(kind,{occ:KG82.occ}); env.lv already equals t.ease inside kg82Play — just read env.lv as the ease.
+   Measured with dev/measure/mg-bots.js (skilled + random bots); table in dev/PROGRESS_mg-balance.md. ============================== */
+const MGT_OCCN={hoc:"luyện tập",hoi:"hội thi",trieu:"hầu Hoàng thượng",exam:"khảo hạch",tuyen:"tuyển tú"};
+function mgRankOf(p){try{p=p||S;if(typeof rkOf==="function")return cl(+rkOf(p)||0,0,7);return cl(+(p.queen?7:p.rank)||0,0,7)}catch(e){return 0}}
+function mgTier(kind,o){o=o||{};const B=BAL.mgTier;const occ=B.occ[o.occ]?o.occ:"hoc";const [b0,pr]=B.occ[occ];
+ const rank=o.rank!=null?cl(+o.rank||0,0,7):mgRankOf(o.p);
+ let lv=o.lv;if(lv==null){try{lv=kg82LvFor(o.p||S,kind)}catch(e){lv=0}}lv=cl(+lv||0,0,5);
+ const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);const d=stake-lv;
+ const ease=cl(B.mid-B.slope*d+((B.kAdj||{})[kind]||0),0,5);
+ const tier=d<=-B.band?0:d>=B.band?2:1;
+ return{occ,occName:MGT_OCCN[occ],rank,stake,lv,d,tier,word:["Dễ","Vừa","Khó"][tier],ease:Math.round(ease*10)/10}}
+/* set the board ease for the next kg82Play (callers: startContest, playArt, jexam, jts, kg82Lesson) */
+function mgSet(kind,o){const t=mgTier(kind,o);KG82.occ=t.occ;KG82.tier=t;KG82.lv=t.ease;return t}
+/* the intro row "Độ khó" (player text, VANPHONG: no numbers of odds) */
+function mgDiffTxt(t,kind){const hint=kind&&typeof kg82Know==="function"&&kg82Know(kind)?[" · có gợi ý ngay trên bàn"," · gợi ý bớt đi"," · gợi ý ở nút Gợi ý"][t.tier]:"";
+ return `${t.word}${hint} · ${t.occName}, tài nghệ bậc ${t.lv}`}
+function mgWord(raw){const W=BAL.mgTier.word;return raw>=W[3]?"Xuất sắc":raw>=W[2]?"Giỏi":raw>=W[1]?"Khá":raw>=W[0]?"Tạm được":"Vụng"}
+window.mgTier=mgTier;window.mgSet=mgSet;window.mgWord=mgWord;
+/* wiring (edited in place, 16/11): j82 startContest (occ "hoi" / o.occ, o.big), playArt (occ "hoc" / o.occ), kg82Lesson (lessons), kg82Word → mgWord,
+   jexam exRun (occ "exam", rank = target), jts tsGame (occ "trieu" / o.occ), jkc Phúc tuyển (playArt occ "tuyen"). Skip / "để tài nghệ quyết định"
+   values keep using her real art level (KG82.tier.lv) through kg82NpcMean. */
 /* ================= j90 KIT PODIUM: bục vinh danh (owner 11/14, kit owner) =================
    Screen 1 of every ranking result: a stand-alone honour stage. The top three stand on a lacquered three-step dais as FULL-BODY
    figures (fig-*.webp for the right dress tier and age; kids from FIGURES-kids; strangers as the kit's grey silhouette):
@@ -15644,7 +15682,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
    Bought treasures stay worth more; handmade earns "chân tình" with sincere people and "hợp ý" with matching tastes.
    Every consort uses the same rules. Folds the old j2 acts "Dâng canh", "Cắm hoa dâng Hoàng thượng", "Thêu khăn bán ra ngoài",
    "Làm thơ dâng lên" into the study sessions. ================= */
-const WTIER=["Thường","Khá","Tinh xảo","Tuyệt phẩm"],WTH=[0,6,10,14],WAVG=5;
+const WTIER=["Thường","Khá","Tinh xảo","Tuyệt phẩm"],WAVG=5/* tier thresholds: BAL.mgTier.wk.th (wkTier) */;
 /* gift value per tier; a bought gift's value is IT.gv or pr/12+2 (Đệm gấm 4, Vòng ngọc 6, Nghiên mực 8, Tranh cổ / Đàn cổ 10) */
 const WVAL=[2,3,5,7],WCAP=8,WSELL=[6,10,16,24],WSHOW=[1,2,3,5];
 const WK={
@@ -15664,16 +15702,17 @@ function wkHasArt(k){return ARTS.some(x=>x.k===k)}
 Object.defineProperty(WK.theu,"a",{get:()=>wkHasArt("theu")?"theu":"hoa"});Object.defineProperty(WK.ao,"a",{get:()=>wkHasArt("theu")?"theu":"vu"});Object.defineProperty(WK.mon,"a",{get:()=>wkHasArt("nau")?"nau":"y"});
 const WMAT=BAL.wk.matQ;/* material bonus to the score (BAL.wk) */
 function wkLv(p,a){return typeof artLv==="function"?(artLv(p,a)||0):((p&&p.arts)||{})[a]||0}
-function wkTier(q){return q>=14?3:q>=10?2:q>=6?1:0}
+function wkTier(q){const T=BAL.mgTier.wk.th;return q>=T[2]?3:q>=T[1]?2:q>=T[0]?1:0}/* mg-balance: thresholds in BAL.mgTier.wk.th */
 /* score = mini-game raw 0..10 + grade + material; shown plainly */
 /* Công (Tứ đức, j85): its quality bonus (0..100 scale, 10 per phần here) and +1 tier from Công bậc 3 */
 function wkCong(p){if(typeof virtueBonus!=="function")return{lv:0,q:0};let v;try{v=virtueBonus(p,"cong")}catch(e){return{lv:0,q:0}}if(v==null)return{lv:0,q:0};if(typeof v==="number")return{lv:v,q:0};return{lv:+(v.lv!=null?v.lv:v.level!=null?v.level:0)||0,q:+(v.q||0)||0}}
 function wkCongPh(p){return Math.round(wkCong(p).q/10)}
-function wkScore(p,kind,mat,raw){return raw+wkLv(p,WK[kind].a)+WMAT[mat]+wkCongPh(p)}
+function wkLvQ(p,a){const L=BAL.mgTier.wk.lvQ;return L[cl(Math.round(wkLv(p,a)),0,L.length-1)]}/* mg-balance: her art level adds a little (BAL), the play decides */
+function wkScore(p,kind,mat,raw){return raw+wkLvQ(p,WK[kind].a)+WMAT[mat]+wkCongPh(p)}
 function wkTierP(p,q,mat){const t=Math.min(3,wkTier(q)+(wkCong(p).lv>=3?1:0));return mat==null?t:Math.min(t,BAL.wk.cap[mat])}
 /* lowest play score (0..10) that reaches tier t with this material, or -1 (out of reach) */
 function wkNeedRaw(p,kind,mat,t){for(let r=0;r<=10;r++)if(wkTierP(p,wkScore(p,kind,mat,r),mat)>=t)return r;return -1}
-function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw} + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLv(p,K.a)}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${c.lv>=3?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
+function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw}${wkLvQ(p,K.a)?` + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLvQ(p,K.a)}`:""}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${c.lv>=3?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
 function wkOddsTxt(p,kind,mat){const lo=wkTierP(p,wkScore(p,kind,mat,WAVG),mat),N=[1,2,3].filter(t=>t>lo).map(t=>{const r=wkNeedRaw(p,kind,mat,t);return r<0?(t===3&&BAL.wk.cap[mat]<3?`${WTIER[t]}: chỉ vật liệu quý`:`${WTIER[t]}: chưa với tới`):`${WTIER[t]}: cần chơi ${r} phần`});
  const g=[];if(BAL.wk.val[mat])g.push(`quà giá trị +${BAL.wk.val[mat]}`);if(BAL.wk.sell[mat]&&WK[kind].mat[mat])g.push(`bán thêm ${Math.round(WK[kind].mat[mat]*BAL.wk.sell[mat])} bạc`);
  return `chơi ${WAVG} phần: ${WTIER[lo]}${N.length?" · "+N.join(" · "):""}${g.length?" · "+g.join(", "):""}`}
@@ -15765,7 +15804,7 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
  if(!m.wk)m.wk=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const pick=m.wk;let skip=false;const ms=S.master?2:1;
  const cb2=g=>{const raw=wkRawOfPts(Math.round(g/ms));if(m.mode==="prac"){S.mg=null;if(skip)log("Tự luyện nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự luyện");render();return}if(skip)return cb(g);
   const r=cb(g);try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học cùng Thái hậu":"học");render()}catch(x){}return r};
- if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự luyện":"Học"} ${an}`,onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(roll(od(35))?1:0):raw>=8?3:raw>=5?2:raw>=2?1:0;
+ if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự luyện":"Học"} ${an}`,onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(roll(od(35))?1:0):(P=>raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0)(BAL.mgTier.lessonPts);
    if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự luyện nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự luyện");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học cùng Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
  try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Học nhanh<small>${kitParse(`${m.mode==="prac"?"Chắc chắn":word(od(35))} · thành: ${m.mode==="prac"?"":"tiến bộ +1 · "}không ra thành phẩm`)}</small>`;
@@ -15777,7 +15816,7 @@ function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${mode==="prac"?"Tự luyện":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (0..10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`${mode==="prac"?"Tự luyện":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (0..10) + ${a.n} bậc ${l}: +${BAL.mgTier.wk.lvQ[cl(Math.round(l),0,5)]} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
@@ -15824,7 +15863,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wk]");if
  if(k==="give"||k==="sell"||k==="show")wkAct(k,+b.dataset.ix);else if(k==="prac")wkPractice(b.dataset.art)},true);
 /* ---- the Tài nghệ tab: what each art's sessions produce; practice once mastered ---- */
 function wkTabHTML(){const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
- let h=`<div class="ph"><span>Mỗi buổi học, tự luyện mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ 0..10 + bậc tài nghệ + vật liệu.</span><span>Đồ mua bằng bạc vẫn quý hơn</span></div><div class="arts">`;
+ let h=`<div class="ph"><span>Mỗi buổi học, tự luyện mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ 0..10 + chút bậc tài nghệ + vật liệu.</span><span>Đồ mua bằng bạc vẫn quý hơn</span></div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return"";const B=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự luyện, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${l}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkOddsTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
  return h}
@@ -16957,6 +16996,26 @@ Object.assign(BAL,{itd:{allow:false}});
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* MINIGAME DIFFICULTY TIERS (mg-balance, owner 16/11 07:10Z / 07:25Z "mức vừa"; read by jmgt mgTier, j82, j83 works, jexam, jts, review/nw-*):
+   occ = [base, perRank] stake of each occasion (stake = base + perRank × rank 0..7, + big for a big contest; exam: rank = the target rank);
+   mid/slope = board ease at the matching level and its change per level of gap (ease 0..5, engines: higher = easier); band = gap that turns Vừa
+   into Dễ / Khó; kAdj = per-engine ease trim from the bot calibration (dev/PROGRESS_mg-balance.md); word = raw thresholds Tạm được/Khá/Giỏi/Xuất sắc;
+   aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
+   wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
+Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,kAdj:{},
+ word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,14]}}});
+/* ENTRY SELECTION EXAM (review/entry-exam, owner OD:L1244 / L1250 / 07:20Z no word games / 07:25Z medium; read by jentry entScore, jkc2):
+   ONE score rule for every entry road (dir = "Vào cung ngay", dan = cung nữ home road, nc = hòa thân home road):
+   score = Σ w[stat]·stat + w.raw·(mini-game 0..10) + w.art·(her level in that art) + road extras + base + noise (−noise..+noise, even).
+   cut = [one step under the ceiling, the ceiling]: below cut[0] = two steps under (never below Đáp ứng; cung nữ: Tân Giả khố first).
+   fx[tier] = what the result itself gives or takes on top of the rank (gain and loss on every path, also when the ceiling is Đáp ứng);
+   stepSung = Sủng lost per step under the ceiling. word = mini-game kinds that are word games (never offered; drop a key when its
+   non-word replacement lands, review/nw-*). The tier of the board is mgTier occ "tuyen" (BAL.mgTier). Measured: dev/measure/entry-bots.js. */
+Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
+ w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
+  dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
+  nc:{sac:.15,tai:.15,duc:.1,raw:3,art:2,th:1/5,le:2.5,kgt:1/6,sx:3,base:0}},
+ fx:[{danh:-3,sung:-2},{},{danh:3,sung:4}]}});
 /* ================= j92: VẬT PHẨM · TRANG PHỤC · MẠNG CHE MẶT (logic + data only; UI through kit components) ================= */
 /* ---- KIT_VEIL: pearl-strand face veils by rank (hủy dung, j70 scarOf(p).veil / p.scar.veil) ----
    img/veil-t1..t8.png (480x445, transparent, gpt-2-6): one per consort rank 0..7 (Đáp ứng → Hoàng hậu), richer each step:
@@ -28673,7 +28732,7 @@ function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")re
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
   return{kind:"wk",k:a.k,name:a.n,level:l,prog:S.artp[a.k],need:l+2,desc:`${kinds} <span class="kchip g">phẩm +${l}</span><br>${wkOddsTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(acts.length&&!why)}}).filter(Boolean);
  L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
-KIT_GLOSS["Tác phẩm"]="Mỗi buổi học, tự luyện mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ 0..10 + bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đã tinh thông (bậc 5) thì tự luyện ra tác phẩm ngay.";
+KIT_GLOSS["Tác phẩm"]="Mỗi buổi học, tự luyện mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ 0..10 + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đã tinh thông (bậc 5) thì tự luyện ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
 /* ---------- MỆNH TRUYỆN ---------- */
 function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||{t:""};
@@ -28933,10 +28992,10 @@ function exAbort(){const e=exS(S),pd=e.pend;if(!pd)return;exDone(S,exFinish(exPl
 function exStart(){const P=exPlan(S);P.rk=exRk(P.to);P.passTxt=P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${P.rk}.`;P.cdN=exCd(P.to);
  if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}exRun(P,exS(S),r=>exDone(S,r))}
 function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
- const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);KG82.lv=lv;try{kg82Preload(k)}catch(x){}
+ const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);mgSet(k,{occ:"exam",rank:P.to,lv});/* mg-balance: board ease from the tier; skip keeps her level */try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`,pic:kg82Pic(k)});if(!d){e.pend=null;done(exFinish(P,{raws}));return}
   const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
-  box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv,k)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
+  box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
@@ -32157,7 +32216,7 @@ Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */
 function tsGame(o){const odds=cl(Math.round(o.odds||50),5,95);const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
  if(tsBot()||typeof kg82Open!=="function"){const r=skipRes();setTimeout(()=>o.onDone(r),0);return}
- const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{KG82.lv=kg82LvFor(S,o.kind)}catch(e){KG82.lv=0}kg82Preload(o.kind);
+ const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{mgSet(o.kind,{occ:o.occ||"trieu"})}catch(e){KG82.lv=0}kg82Preload(o.kind);
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(o.kind):""});if(!d){o.onDone(skipRes());return}const box=kg82Box();
  const fin=(r)=>{KG82.phase="result";KG82.tsRisk=null;const rows=[["Màn chơi",r.skipped?`Bỏ qua: tính theo cơ may (${word(odds)}) → ${r.ok?"thuận":"không thuận"}`:`${r.raw}/10 · ${kg82Word(r.raw)}`,"t"]];
   if(o.risk)rows.push(["Hộ giá",r.guard?"kịp lúc":"không kịp, cấm quân lo liệu",r.guard?"g":"n"]);if(o.note)rows.push(["Ghi chú",o.note,"n"]);
@@ -36901,7 +36960,7 @@ function kcBestArt(){let b="cam",v=-1;for(const a of ARTS){if(a.k==="y")continue
 function kcPhucD(){const k=kcBestArt();const A=ARTS.find(a=>a.k===k);return{who:pMe(),t:`<p>Trữ Tú cung. Các tú nữ lần lượt dâng tài nghệ trước các ma ma và nữ quan. Ngươi chọn môn ${A.n} (bậc ${(S.arts||{})[k]||0}).</p>`,o:[
  kcO(`Dâng ${A.n}`,{suc:-10},()=>kcPhucPlay(k,false)),kcO("Để tài nghệ quyết định",{suc:-10},()=>kcPhucPlay(k,true))]}}
 function kcPhucPlay(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;/* r2-r1: a stale Phúc tuyển card answered after the round never opens the mini-game */S.kc.tt.play=1;const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
- if(skip||window.__bot||typeof playArt!=="function"){fin(skip?5:cl(3+R(6),0,10));return}try{playArt({art:k,title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
+ if(skip||window.__bot||typeof playArt!=="function"){fin(skip?5:cl(3+R(6),0,10));return}try{playArt({art:k,occ:"tuyen",title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
 function kcScore(st){/* st: {sac,tai,duc,danh,arts?} — the same rule for her and for the other girls */
  const arts=st.arts?Math.max(0,...Object.values(st.arts)):0;return st.sac*.28+st.tai*.16+st.duc*.12+Math.min(40,st.danh)*.45+arts*3+(st.raw||5)*1.6+(st.le||0)*2+(st.pow||40)/8+(st.th||0)/6-(st.ld||0)/3+(st.bonus||0)}
 function kcMyScore(way){const t=S.kc.tt;return kcScore({sac:S.sac,tai:S.tai+(way==="tai"?6:0),duc:S.duc+(way==="duc"?6:0),danh:S.danh,arts:S.arts,raw:t.raw,le:S.kc.le,pow:kcPow(),th:(S.th||0)+(S.origin.k==="ch"?15:0),ld:S.kld,bonus:(S.kc.vh?6:0)+(S.kc.tdFall?-6:0)+((S.origin&&S.origin.r)||0)*4})+R(9)-4}
@@ -37491,26 +37550,24 @@ Object.assign(KCE,{
    kc2H(kcO("Vào trình diện",{},()=>pushDil(mkP("kcE",{e:"d_thi"}),"Ngày tuyển cung nữ")),"ma ma xem dung mạo, khéo tay, lễ nghi; tiếng trong xóm và lời lý trưởng cũng được hỏi","có rủi ro")]}}},
  d_thi:{t:"Ngày tuyển cung nữ",b:()=>({who:pMe(),t:`<p>Ma ma Nội vụ phủ nhìn ngươi từ đầu đến chân, rồi chỉ vào một rổ kim chỉ và một chiếc ghế: ngươi chọn cách nào để tỏ mình?</p>`,o:[
    kc2H(kcO("Làm bài khéo tay",{suc:-5},()=>kc2Exam("kim")),`chơi màn Khéo tay; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),
-   kc2H(kcO("Đáp lời ma ma về lễ nghi",{suc:-5},()=>kc2Exam("le")),`chơi màn Vấn lễ; lễ nghi học ở nhà (${S.kc.le}/5) cộng thêm`,"có rủi ro"),
-   kc2H(kcO("Cúi đầu chờ ma ma xét",{suc:-5},()=>kc2Exam("")),"lấy phần giữa của màn chơi","an toàn")]})},
+   kc2H(kcO("Thêu một mảnh khăn",{suc:-5},()=>kc2Exam("theu")),`chơi màn Thêu; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),
+   kc2H(kcO("Cúi đầu chờ ma ma xét",{suc:-5},()=>kc2Exam("")),"không thi; tính như người cùng bậc tài nghệ","an toàn")]})},
  n_send:{t:"Hòa ước ký xong",b:()=>{const L=kc2L();const c=kcR("cha");return{who:kcFace(c||S.kc.fam[0]),t:`<p>Hòa ước đã ký. Sáng nay kiệu hoa đỏ dừng trước cổng ${L.court}; ${kc2Br()==="bd"?"ba trăm con ngựa":"xe lễ vật"} xếp hàng sau sứ đoàn Đại Hy. ${L.mom} đứng ở bậc thềm, không khóc trước mặt ai.</p>`+
    kitRows([[NAMES.kgt,S.kgt,"t"],["Lễ nghi Đại Hy",`${S.kc.le}/5`,"t"],[NAMES.khm,kitChip("Bạc",S.khm,"n"),"t"]]),o:[
    kc2H(kcO("Lên kiệu hoa",{},()=>pushDil(mkP("kcE",{e:"n_ramat"}),"Lễ ra mắt")),"sang Đại Hy; Lễ ra mắt định phẩm vị","an toàn")]}}},
  n_ramat:{t:"Lễ ra mắt",b:()=>{const r0=RANKS[(S.origin&&S.origin.r)||0].n;return{who:pEmp(),t:`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng. Công chúa ${kc2L().land} dâng lễ ra mắt. Lễ hôm nay quyết định ngươi được phong tới đâu (cao nhất ${r0}).</p>`,o:[
    kc2H(kcO(kc2Br()==="bd"?"Dâng điệu múa thảo nguyên":"Dâng điệu múa cố quốc",{suc:-10},()=>kc2Exam("mua")),"chơi màn Múa; tài múa và dung mạo cộng thêm","có rủi ro"),
-   kc2H(kcO("Hành lễ theo phép Đại Hy",{suc:-10},()=>kc2Exam("le")),`chơi màn Vấn lễ; lễ nghi Đại Hy học ở nhà (${S.kc.le}/5) cộng thêm`,"có rủi ro"),
-   kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:-5},()=>kc2Exam("")),"lấy phần giữa của màn chơi","an toàn")]}}}});
+   kc2Br()==="bd"?kc2H(kcO("Bắn cung trước điện",{suc:-10},()=>kc2Exam("ban")),"chơi màn Bắn cung; dung mạo và lễ nghi học ở nhà cộng thêm","có rủi ro"):kc2H(kcO("Dâng khúc đàn cố quốc",{suc:-10},()=>kc2Exam("cam")),"chơi màn Đàn; tài đàn và lễ nghi học ở nhà cộng thêm","có rủi ro"),
+   kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:-5},()=>kc2Exam("")),"không thi; tính như người cùng bậc tài nghệ","an toàn")]}}}});
 function kc2Exam(art){const K=S.kc;if(!isKc()||K.ex&&K.ex.done)return;K.ex={art,play:1};
  const fin=raw=>{if(!S.kc||K.ex.done)return;K.ex.done=1;K.ex.raw=raw;try{kc2Enter(raw)}catch(e){console.error("kc2Enter",e)}try{showModal();render()}catch(e){}};
- if(!art){fin(5);return}const dan=K.kd==="dan";
+ if(!art){fin(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */const dan=K.kd==="dan";
  kc2Play(art,dan?"Tuyển cung nữ":"Lễ ra mắt",dan?"Điểm màn chơi cộng vào kết quả tuyển":"Điểm màn chơi cộng vào phẩm vị",fin)}
 /* a stale card (the exam already done) never opens the game twice: jkc's own "Phúc tuyển left without a result" rule, for this round */
 (function(){const e0=kcEndTurn;kcEndTurn=function(){try{if(S&&S.kc&&S.kc.kd&&isKc()&&S.kc.ex&&S.kc.ex.play&&!S.kc.ex.done&&!Q.length){S.kc.ex.done=1;kc2Enter(5)}}catch(e){console.error(e)}return e0.apply(this,arguments)}})();
 /* the score: one rule, the people of this life inside it (lý trưởng's word, the envoy's report, Thái hậu's dislike) */
-function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";
- if(K.kd==="dan"){const ly=kcR("ly");return S.sac*.15+S.duc*.15+S.suc*.05+raw*3+K.kim*(g==="kim"?3.5:1.5)+K.le*(g==="le"?3.5:1.5)+S.kgt/8-S.kld/3+(ly&&ly.af>=40?3:0)-(K.self?3:0)+R(9)-4}
- const sx=kcR("sx");return S.sac*.15+S.tai*.15+S.duc*.1+raw*3+K.le*(g==="le"?3.5:1.5)+(g==="mua"?((S.arts||{}).vu||0)*2:0)+S.kgt/6+(S.th||0)/5+(sx&&sx.af>=40?3:0)+R(9)-4}
-const KC2CUT=[40,55];/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
+function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";return entScore(K.kd==="dan"?"dan":"nc",raw,g)}/* ONE CORE: jentry entScore, weights BAL.entry.w */
+const KC2CUT=BAL.entry.cut;/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
 function kc2Enter(raw){const K=S.kc;const sc=Math.round(kc2Score(raw));K.ex.sc=sc;const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;K.ex.tier=tier;
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE")Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
  K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;S.pal=null;
@@ -37620,23 +37677,25 @@ const KC2ART={d_benh:"https://ctm-img.victoria-tntt.workers.dev/img/ev-benh-tat.
    A consort start: the rank (origin rank = ceiling; an origin whose ceiling is Đáp ứng has nothing to lose and skips it). A cung nữ start
    (cnv): the placement (palace head's maid / low consort's maid / Tân Giả khố first). The "Nhập cung" card is corrected to the real result.
    New lives only (S.selx); every save made before this build is untouched. */
-const KC2DART={cnv:[["kim","Làm bài khéo tay"],["le","Đáp lời ma ma về lễ nghi"]],nc:[["mua","Dâng điệu múa cố quốc"],["le","Hành lễ theo phép Đại Hy"]],bd:[["mua","Dâng điệu múa thảo nguyên"],["le","Hành lễ theo phép Đại Hy"]],
- cn:[["le","Đáp lời ma ma về lễ nghi"],["","Dâng một chén trà"]]};
-function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const a=kcBestArt();const A=ARTS.find(x=>x.k===a);return [[a,`Dâng ${A?A.n:"tài nghệ"}`],["le","Đáp lời về lễ nghi"]]}
-function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:(S.origin.r||0)>0))}
+/* entry-exam: no word games (owner 16/11 07:20Z): the old "lễ nghi" quiz options are replaced by a second non-word art */
+const KC2DART={cnv:[["kim","Làm bài khéo tay"],["theu","Thêu một mảnh khăn"]],nc:[["mua","Dâng điệu múa cố quốc"],["cam","Dâng khúc đàn cố quốc"]],bd:[["mua","Dâng điệu múa thảo nguyên"],["ban","Bắn cung trước điện"]],
+ cn:[["huong","Pha một chén trà dâng lên"]]};
+function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const L=entArts().slice(0,2);return (L.length?L:[["cam",0,"Cầm"]]).map(([a,,n])=>[a,`Dâng ${n}`])}
+function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:true))}/* entry-exam: every origin meets the selection (ceiling Đáp ứng: gain / loss only, BAL.entry.fx) */
 PEND.kc2Sel=pp=>{if(!S||S.dead||!S.selx||S.selx.done)return null;const srv=S.origin.k==="cnv";const top=RANKS[S.origin.r||0].n;
- const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:-5},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":"lấy phần giữa của màn chơi","có rủi ro"));
- o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:-5},()=>kc2SelPlay("")),"lấy phần giữa của màn chơi","an toàn"));
+ const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:-5},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":"không thi; tính như người cùng bậc tài nghệ","có rủi ro"));
+ o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:-5},()=>kc2SelPlay("")),"không thi; tính như người cùng bậc tài nghệ","an toàn"));
  return{who:srv?pMe():pEmp(),t:srv?`<p>Nội vụ phủ chọn cung nữ. Ma ma xem dung mạo, khéo tay, lễ nghi; người tốt được chia về hầu các vị nương nương bậc cao, người kém phải giặt đồ ở Tân Giả khố trước.</p>`
-  :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`,o}};
+  :(S.origin.r||0)>0?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`
+  :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Ngươi sẽ được phong <b>${top}</b>; buổi hôm nay định Hoàng thượng và Thái hậu nhìn ngươi thế nào.</p>`,o}};
 function kc2SelPlay(art){if(!S.selx||S.selx.done)return;S.selx.art=art;const fin=raw=>{if(!S.selx||S.selx.done)return;S.selx.done=1;S.selx.raw=raw;try{kc2SelDo(raw)}catch(e){console.error("kc2Sel",e)}try{showModal();render()}catch(e){}};
- if(!art){fin(5);return}kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",fin)}
-function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(S.sac*.15+S.duc*.15+S.tai*.1+raw*3+((S.arts||{})[g]||0)*1.5+8+(S.th||0)/6+R(9)-4);const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
+ if(!art){fin(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",fin)}
+function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(entScore("dir",raw,g));/* ONE CORE: jentry entScore */const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
  const note=`kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10`;
  if(S.origin.k==="cnv"){const st=[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac];kc2Place(tier,true);[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac]=st;if(S.srv){if(tier===2)S.tin=cl((S.tin||40)+8,0,100);if(tier===0){S.srv.lau=4;S.place="tgk";try{S.visit=srvVisitOf("tgk")}catch(e){}}}
   const c=Q.find(m=>m.t==="Nhập cung làm cung nữ");if(c){c.h=String(c.h).replace(/\.\s*<\/p>/,`${tier===0?" (trước hết phải giặt đồ ở Tân Giả khố bốn tuần)":""}. Kết quả ${note}.</p>`)}
   log(`Tuyển cung nữ (${KC2SW[tier]}): ${tier===0?"Tân Giả khố, rồi ":""}hầu ${kc2RkN(srvM())}.`)}
- else{const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));const was=S.rank;S.rank=rank;if(rank<was){S.sung=Math.max(0,(S.sung||0)-(was-rank)*5)}S.lastPromo=S.turn;try{palFix()}catch(e){}kc2R0();
+ else{const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));const was=S.rank;S.rank=rank;if(rank<was){S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung)}S.lastPromo=S.turn;try{palFix()}catch(e){}kc2R0();
   const c=Q.find(m=>m.t==="Nhập cung");if(c){const h0=String(c.h),nw=`${RANKS[rank].n} (${note}${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""})`;/* reviewer r1: main (j2, review/newgame-ui) now shows the rank in a kitRows "Phong" row; the old sentence form is kept for safety */
    c.h=h0.includes(`phong <b>${RANKS[was].n}</b>`)?h0.replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${nw}</b>`):h0.replace(new RegExp(`(Phong[\\s\\S]*?>)${RANKS[was].n}(<)`),`$1${nw}$2`)}
   log(`Tuyển chọn (${KC2SW[tier]}): phong ${RANKS[rank].n}${rank<top?`, thân phận cho tới ${RANKS[top].n}`:""}.`)}
@@ -37664,6 +37723,118 @@ function kc2Carry(kind,tier){const B=BAL.kcv[kind];if(!B||!S||S.dead||(S.kc&&S.k
 (function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S&&S.kc&&S.kc.inPal&&!S.kc.kd)kc2Carry("kc",Math.max(0,Math.min(2,S.rank)))}catch(e){console.error("kc2Carry kc",e)}return r}})();
 /* the tiểu thư card says the same (jkc text, one line added) */
 (function(){const p0=kcPathHTML;kcPathHTML=function(){const h=p0.apply(this,arguments);try{if(!kc2D())return h.replace("Phúc duyên khi qua tuyển tú","Phúc duyên khi qua tuyển tú; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết)")}catch(e){}return h}})();
+/* ================= jentry: ENTRY SELECTION EXAM · ORIGIN INTRO · ENTRY SCENE (review/entry-exam, Foreman D, 16/11) =================
+   Owner lines (verbatim in dev/rules/topic/story-roads.md, balance-economy.md, art-animations.md): OD:L1244 (narrated intro with
+   illustrations + entry animation + a minigame exam, high score → the top rank of that selection, fail → lower), OD:L1250 (the origin's
+   rank is only the CEILING, earned by tài, đức, abilities; patronage opens the ceiling), OD:L1251, OD 07:20Z (no word games),
+   OD 07:25Z (medium difficulty), OD:L1261 (every animation scene ends with ONE short button), OD:L1267 (ONE CORE: numbers in BAL.entry).
+   Plugs into the hooks left by review/kc-roads-cn-nc (jkc2): window.kcEntryExam({art,title,note}, done(raw 0..10)) and the "Nhập cung" cards.
+   1. entExam(o, fin): ONE selection round in the shared mini-game frame (kg82Open, the jexam pattern: judges / subject / difficulty /
+      what else counts / the odds words, "Bắt đầu thi" or "Để tài nghệ quyết định"). The subject is an art she chose on the card; a word
+      game (BAL.entry.word) is never played: it is swapped for her best non-word art. Board difficulty = mgTier occ "tuyen" (review/mg-balance).
+      Used by every road: "Vào cung ngay" (kc2Sel), the cung nữ / hòa thân home roads (kc2Exam), and the
+      tiểu thư Phúc tuyển (jkc kcPhucPlay: same frame, same no-word rule; its Điện tuyển rule stays jkc's own).
+   2. entScore(road, raw, art): the ONE score rule (BAL.entry.w[road]) that jkc2 kc2Score / kc2SelDo now call; entTier → ceiling / −1 / −2.
+      BAL.entry.fx[tier]: gain or loss of the result itself on every path (also when the ceiling is Đáp ứng: muoi, td, thd now meet the exam too).
+   3. entIntro: a narrated "Tiền truyện" event card with the origin's own painting (https://ctm-img.victoria-tntt.workers.dev/img/origin-wide-<k>) at the start of every new life
+      (before the selection on the direct road, before the home road's own first card).
+   4. entReveal: the entry scene after the "Nhập cung" card = KIT §65.2 kitPersonReveal (her full figure, kit name, one line, ONE kit button
+      that alone closes it: counts as the §81 scene-end button). KIT REQUEST in dev/handover/reports/entry-intro.md for a dedicated entry animation.
+   New lives only (S.entV); every older save is untouched. Co-op: everything here is her own state (no sync, no waiting on the friend). */
+const ENT_V=1;
+function entWordy(k){return (BAL.entry.word||[]).includes(k)}
+function entKind(a){if(!a)return"";if(typeof KG82_PLAIN!=="undefined"&&KG82_PLAIN[a])return KG82_PLAIN[a];return (typeof KG82_KIND!=="undefined"&&KG82_KIND[a])?a:""}
+function entArtLv(k){try{return k?kg82LvFor(S,k):0}catch(e){return 0}}
+/* her best arts that are NOT word games (Y thuật only for the tea maid of Càn Thanh) */
+function entArts(){const L=[];for(const a of (typeof ARTS!=="undefined"?ARTS:[])){if(a.k==="y"&&!(S&&S.origin&&S.origin.k==="cn"))continue;const k=entKind(a.k);if(!k||entWordy(k))continue;L.push([a.k,(S.arts||{})[a.k]||0,a.n])}
+ return L.sort((x,y)=>y[1]-x[1])}
+function entBest(not){const L=entArts().filter(x=>!(not||[]).includes(x[0]));return L.length?L[0][0]:"cam"}
+function entRoad(){const K=S&&S.kc;if(K&&K.kd==="dan")return"dan";if(K&&K.kd==="nc")return"nc";return"dir"}
+/* ---------- the ONE score rule ---------- */
+function entBase(road,raw,art){const W=BAL.entry.w[road]||BAL.entry.w.dir;const K=(S&&S.kc)||{};const k=entKind(art);
+ let s=(W.base||0)+(W.sac||0)*(S.sac||0)+(W.duc||0)*(S.duc||0)+(W.tai||0)*(S.tai||0)+(W.suc||0)*(S.suc||0)+(W.raw||0)*raw+(W.art||0)*entArtLv(k)+(W.th||0)*(S.th||0);
+ if(W.le)s+=W.le*(K.le||0);if(W.kim)s+=(K.kim||0)*W.kim[(k==="kim"||k==="theu")?0:1];if(W.kgt)s+=W.kgt*(S.kgt||0);if(W.kld)s+=W.kld*(S.kld||0);
+ try{if(road==="dan"){const ly=kcR("ly");if(ly&&ly.af>=40)s+=W.ly||0;if(K.self)s+=W.self||0}if(road==="nc"){const sx=kcR("sx");if(sx&&sx.af>=40)s+=W.sx||0}}catch(e){}
+ return s}
+function entScore(road,raw,art){const n=BAL.entry.noise;return entBase(road,raw,art)+R(2*n+1)-n}
+function entTier(sc){const C=BAL.entry.cut;return sc>=C[1]?2:sc>=C[0]?1:0}
+/* chance (0..100) that the result reaches tier t with this mini-game mark (the noise is the only unknown) → shown as ladder words only */
+function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise;let c=0;for(let i=-n;i<=n;i++)if(entTier(Math.round(b+i))>=t)c++;return Math.round(c*100/(2*n+1))}
+function entWord(p){const L=typeof LADW!=="undefined"?LADW:["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
+ return p>=91?L[6]:p>=81?L[5]:p>=66?L[4]:p>=56?L[3]:p>=46?L[2]:p>=31?L[1]:L[0]}
+/* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
+function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest()))))}catch(e){return 4}}
+function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
+/* who judges, what the top result is called, per road */
+function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";
+ if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Trữ Tú cung",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
+ if(srv)return{road,head:"Tuyển cung nữ",judge:"Ma ma Nội vụ phủ",also:`Sắc, Đức${road==="dan"?", khéo tay và lễ nghi học ở nhà, tiếng trong xóm, lời lý trưởng":""}`,topN:"phi tần bậc cao",srv:1};
+ if(road==="nc")return{road,head:"Lễ ra mắt",judge:"Hoàng thượng, Thái hậu, bá quan",also:"Sắc, Tài, Đức, lễ nghi Đại Hy, lòng Thái hậu, lời sứ thần",topN:RANKS[top].n};
+ return{road,head:"Tuyển chọn trước ngày phong",judge:"Hoàng thượng, Thái hậu",also:`Sắc, Tài, Đức, tài nghệ${(S.th||0)>=20?", lòng Thái hậu":""}`,topN:RANKS[top].n,flat:top<=0}}
+/* ---------- 1. the exam round ---------- */
+function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entWordy(k)){art=entBest();k=entKind(art)}
+ const K=KG82_KIND[k];const lv=entArtLv(k);let t=null;try{t=mgSet(k,{occ:"tuyen",lv})}catch(e){KG82.lv=lv}KG82.ctx="thi";try{kg82Preload(k)}catch(e){}
+ const SK=Math.round(kg82NpcMean(lv));let over=false;const end=raw=>{if(over)return;over=true;try{fin(raw,{art,kind:k})}catch(e){console.error(e)}};
+ const X=entCtx(o);
+ const d=kg82Open({art:"Tuyển chọn",title:`Môn thi · ${K.n}`,how:K.how,round:"Vòng",roundV:"1/1",pic:kg82Pic(k)});if(!d){end(SK);return}
+ const rows=[["Giám khảo",X.judge,"t"],["Môn thi",`${K.n} · ${K.t}`,"t"],["Độ khó",t?mgDiffTxt(t,k):`bậc ${lv}`,"n"],["Xét thêm",X.also,"n"]];
+ if(X.road&&X.topN){const pS=entOdds(X.road,SK,art,2),pG=entOdds(X.road,8,art,2);
+  rows.push([X.flat?"Được để mắt":X.srv?"Về hầu phi tần bậc cao":`Lên tới ${X.topN}`,`để tài nghệ quyết định: ${entWord(pS)} · chơi giỏi: ${entWord(pG)}`,"n"])}
+ const box=kg82Box();KG82.phase="intro";
+ box.innerHTML=`<h4 class="kpst">${X.head}</h4>`+kg82Rows(rows)+
+  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>tính ${SK}/10, như người cùng bậc</small></button></div>`;
+ const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
+  kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
+  $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
+ $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
+/* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
+window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
+window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
+/* tiểu thư road (jkc): Phúc tuyển offers her best NON-word art and plays it in the same exam frame */
+kcBestArt=function(){return entBest()};
+kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
+ const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
+ if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?5:cl(3+R(6),0,10));return}
+ try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(5)}};
+/* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
+function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
+(function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();
+(function(){const e0=kc2Enter;kc2Enter=function(raw){const r=e0.apply(this,arguments);try{const X=S&&S.kc&&S.kc.ex;if(X&&X.tier!=null&&!X.fx){X.fx=1;entFx(X.tier)}}catch(e){console.error(e)}entSnap();return r}})();
+
+/* ---------- 3. the narrated intro (Tiền truyện), one per origin, with the origin's painting ---------- */
+const ENT_INTRO={
+ tt:["Phủ Tể tướng đèn đuốc suốt đêm. Cha ngươi đứng đầu bá quan; một lời của ông, nửa triều đình nghiêng theo.","Chiếu chỉ gọi con gái nhà quyền thần vào cung. Ai cũng biết: Hoàng hậu sẽ nhìn ngươi như nhìn cái bóng của cha ngươi."],
+ dtq:["Cha ngươi giữ binh quyền biên ải. Ngươi lớn lên giữa tiếng trống trận và bãi tập ngựa, chân cứng đá mềm.","Hoàng thượng cần lòng trung của Đại tướng quân; ngươi là sợi chỉ buộc lòng trung ấy vào cung cấm."],
+ muoi:["Nhà ngươi giàu nhờ muối: thuyền muối của cha ngươi đi khắp các bến sông phương nam.","Bạc mua được lụa gấm, mua được một chỗ trong sổ tuyển; nhưng trong cung, người ta vẫn gọi sau lưng ngươi là con nhà buôn."],
+ cn:["Ba năm nay ngươi hầu trà ở Càn Thanh cung. Ngươi biết Hoàng thượng thích nước trà thứ hai, biết thái giám nào nói thật, ma ma nào ăn bạc.","Một đêm mưa, Hoàng thượng giữ ngươi lại. Từ cung nữ thành chủ tử chỉ cách một lời khẩu dụ, và bao nhiêu ánh mắt."],
+ nc:["Nam Chiếu ở xa về phương nam, nơi hồ Nhĩ Hải phẳng như gương, sơn trà nở quanh năm.","Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người ngoại tộc."],
+ bd:["Thảo nguyên Bắc Địch mênh mông, gió thổi rạp cỏ tới chân trời. Ngươi cưỡi ngựa trước khi biết đi giày thêu.","Ba trăm con ngựa theo ngươi làm của hồi môn, đổi lấy hòa ước mười năm với Đại Hy."],
+ td:["Cả nhà ngươi bị xử trảm vì một bản sớ vu cáo. Người thế giao đổi tên ngươi trong sổ tuyển để giữ một đường sống.","Ngươi vào cung với cái tên không phải của mình, mang theo mối thù chưa ai hay."],
+ ch:["Thái hậu là cô ruột của ngươi; từ nhỏ ngươi đã quen từng lối đi trong Từ Ninh cung.","Thái hậu muốn một người nhà mình đứng cạnh Hoàng thượng. Có người chống lưng là may, nhưng phẩm vị vẫn phải tự mình giành lấy."],
+ thd:["Cha ngươi là thầy đồ nghèo; nhà chỉ có mấy giá sách cũ và một mái tranh dột.","Văn chương của ngươi lọt tai quan huyện, tên ngươi vào sổ tuyển. Ngoài chữ nghĩa, ngươi không có gì mang theo."],
+ cnv:["Lệnh tuyển cung nữ về tới làng. Nhà ngươi nghèo, nợ chồng lên nợ; tên ngươi được ghi vào sổ.","Một bọc áo, một lời mẹ dặn: vào cung thì cúi đầu mà sống."]};
+function entIntroCard(){const k=S.origin&&S.origin.k;const T=ENT_INTRO[k];if(!T)return null;
+ const road="Kiếp này ngươi vào cung ngay.";
+ return{t:`Tiền truyện · ${S.origin.n}`,who:pMe(),art:(typeof kitOriginWide==="function"?kitOriginWide(k):`https://ctm-img.victoria-tntt.workers.dev/img/origin-wide-${k}.webp`),btn:"Tiếp theo",entI:1,
+  h:T.map(x=>`<p>${x}</p>`).join("")+`<p>${road}</p>`}}
+/* a home road (jkc Khuê các, jkc2 thôn quê / cố quốc) already opens with its own narrated card (the family is still alive there, the draft
+   or the treaty still to come), so it only gets the origin painting when its card has none; the direct road and the co-op wait get Tiền truyện */
+(function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
+ try{if(was&&S&&!S.dead&&!S.entV){S.entV=ENT_V;const k=S.origin&&S.origin.k;
+  if(S.kc){const c=Q.find(m=>!m.nl&&!m.opts&&!m.art&&(m.t==="Khuê các"||m.who));if(c&&k){c.art=typeof kitOriginWide==="function"?kitOriginWide(k):`https://ctm-img.victoria-tntt.workers.dev/img/origin-wide-${k}.webp`;c.entI=1}}
+  else{const c=entIntroCard();if(c&&!Q.some(m=>m.entI)){Q.unshift(c)}}showModal();render()}}catch(e){console.error("entIntro",e)}return r}})();
+
+/* ---------- 4. the entry scene after the "Nhập cung" card (her own button closes it) ---------- */
+const ENT_LINE={tt:"Cửa cung khép lại sau lưng; từ nay tiếng của cha chỉ vọng tới qua người khác.",dtq:"Tiếng trống biên ải ở lại phía sau; trong cung chỉ có tiếng chuông giờ.",
+ muoi:"Rương bạc theo ngươi qua cửa cung; ánh mắt người ta theo rương bạc.",cn:"Lối hành lang Càn Thanh cung vẫn thế; chỉ có người đi trên đó là đã khác.",
+ nc:"Kiệu hoa qua Ngọ môn; tiếng nhạc cố quốc tắt ở bên kia cửa.",bd:"Ba trăm con ngựa dừng ngoài cửa thành; ngươi đi tiếp một mình.",
+ td:"Ngươi bước qua cửa cung, đầu cúi thấp, tên mới trên môi.",ch:"Từ Ninh cung ở ngay bên kia vườn; nhưng con đường của ngươi phải tự mình đi.",
+ thd:"Một bọc sách, một bộ áo sạch: ngươi bước vào nơi chữ nghĩa cũng là gươm.",cnv:"Ma ma đi trước, ngươi theo sau, qua những cánh cửa đỏ không đếm xuể."};
+function entReveal(){if(!S||S.dead||S.entIn||!S.entV)return;S.entIn=1;const srv=!!S.srv;const k=S.origin&&S.origin.k;
+ const sub=`${S.origin?S.origin.n:""} · ${srv?"Cung nữ":RANKS[S.rank]?RANKS[S.rank].n:""}`;
+ try{if(typeof kitPersonReveal==="function")kitPersonReveal({who:S,title:srv?"Nhập cung làm cung nữ":"Nhập cung",sub,line:ENT_LINE[k]||"",btn:srv?"Theo ma ma":"Tạ ơn"})}catch(e){console.error("entReveal",e)}}
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&S&&S.entV&&!S.entIn&&!m.opts&&!m.entR&&/^Nhập cung/.test(m.t||"")){m.entR=1;if(!m.btn)m.btn="Tiếp theo";const c0=m.onClose;m.onClose=function(){try{if(c0)c0.apply(this,arguments)}catch(e){console.error(e)}entReveal()}}}catch(e){console.error(e)}
+ return s0.apply(this,arguments)}})();
 /* ================= HER HOUSEHOLD ON HER ROOM STAGE (review/servant-system, owner 16/11) =================
    Owner: her eunuchs and other household servants live in her room too. Before, the room stage (homePeople, j2) held only her
    trusted maid (S.maid) and her children; S.staff (every other maid / eunuch, j10) was reachable only from the Cung nhân tab.
@@ -37756,7 +37927,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="877c550f18fd";window.CTM_BUILD=BUILD;
+const BUILD="d47183262b16";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
