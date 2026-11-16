@@ -19,7 +19,6 @@ Credits so far: 6 images x 40 + 3 cutouts x 3 = 249.
 | img/kit/mo-edict-closed.webp | rail "Mục tiêu chương" (700x244) | wide scroll, tiny in a square | NEW compact edict (sample); the wide original stays for non-square uses |
 | img/kit/ico-chat.webp | rail chat (co-op) | speech bubble on round plate | NEW lacquer letter box (sample) |
 | img/kit/ico-map.webp, ico-room.webp | place icons (KIT group 5.6: ABOVE the name) | map scroll / gate, already square-ish, painted, no round plate | keep; re-check only after owner verdict |
-| 4 buổi icons (sáng/trưa/chiều/tối) | OD 15:10Z 7.5 | do not exist | NEW 4 icons (sun-rise over eaves, sun at zenith, sunset, moon+lantern) — in Foreman C item (a), after sample |
 Scan to run before drawing (LUẬT SỬA CẢ NHÓM): grep every `<img src="img/kit/…">` inside a button/.krailb/.kbtn/kit-x in main + review/square-icons + review/kit-size; list any other icon whose art is round-cropped or Western. Found so far: only the 4 above (mo-coin-silver / mo-ingot / mo-seal-* are objects, not buttons).
 ### B. Placeholder list (OD 15:10Z 7.3; sizes = kit-size table; export at 2x display, webp, ≤ ~40 KB small / ≤ ~120 KB large)
 Masters (4 compositions x 2 tones = 8 generations, tone light = bright calm palace, dark = rainy/grey scheming mood, same room style, no people, no text):
@@ -31,3 +30,5 @@ Masters (4 compositions x 2 tones = 8 generations, tone light = bright calm pala
 | square | 1:1 | 112, 128, 144 (56/64/72 buttons) | S/LS buttons (square picture) |
 = 8 masters, ~20 files. Keys (new, KIT REQUEST for wiring): img/ph-{p,l,w,s}-{light,dark}-{size}.webp; old img/ph-act-*/ph-event-* stay until jph/KIT §59 is rewired by the kit keeper.
 Sample already made: portrait + banner light masters (768x1024, 1536x768).
+
+NOTE (Foreman C 15:55Z): the 4 buổi icons are NOT mine — they belong to the buoi-art worker (review/buoi-art).
