@@ -72,4 +72,18 @@ Never past the Hoàng hậu rules: exDirectUp returns "" at rank ≥ 6 (Hoàng q
 - dev/test/promo-skip.js: 11/11 PASS. Thái hậu errand probe: promoMonth offers a «Việc nhờ» from the Thái hậu; when j72's monthly limit is full it retries.
 - e67srvUp in-page probe: rank 0→1 with mp reset; at the cap → Công lao +6; risen consort → nothing.
 
-## Balance (see below; filled after the bot runs)
+## Balance
+Harness: dev/measure/reign.js (full inpage6 "sens" bot, side policy, 80 months, seeds 0..N−1, same seeds before/after). BEFORE = origin/main
+0a311183 (emp win = exam grace; th/quyen no rank). AFTER = this branch (final code, full-seat compensation). Machine quiet, 4 cores, PAR 4.
+| side bot | build | n | dead | her side won / lost | rank at end (all) | rank at end (her side won) | Hoàng hậu | Thái hậu | Sủng | Danh |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Hoàng thượng | before | 40 | 6 | 22 / 12 | 4.22 | 4.86 | 8 (20 %) | 81 | 89 | 84 |
+| Hoàng thượng | after | 40 | 8 | 26 / 6 | 4.28 | 5.31 | 8 (20 %) | 74 | 84 | 79 |
+| Thái hậu | before | 20 | 6 | 8 / 5 | 2.60 | 3.62 | 2 | 67 | 78 | 76 |
+| Thái hậu | after | 20 | 3 | 5 / 11 | 4.40 | 4.60 | 0 | 83 | 94 | 87 |
+| quyền thần | before | 20 | 5 | 13 / 2 | 3.90 | 5.15 | 2 | 73 | 85 | 79 |
+| quyền thần | after | 20 | 4 | 16 / 0 | 4.00 | 4.75 | 3 | 80 | 85 | 82 |
+Reading: 0 page errors in 160 lives. The court outcome (who wins) is the same rule before/after; its spread between runs is sample noise
+(n 20 → ±11 points per share). Hoàng thượng side (n 40): winners end ≈ +0.45 rank higher, the Hoàng hậu rate is unchanged (20 %), Thái hậu
+favour −7 on average (the loss works). Thái hậu / quyền thần sides: n 20 is too small to separate a +1 rank from noise; no sign of a jump to
+Hoàng hậu (rankCap 6; the seat keeps its own rules). Per-origin Hoàng hậu rate (run5b, 9-origin rotation, HHSTOP, 30 lives each): below.
