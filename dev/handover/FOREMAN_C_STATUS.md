@@ -33,7 +33,7 @@ Base main at start: 900ace7fb.
 | C9 huadian-size + motif fix | review/huadian-size @78ea3d32d (5562 files on CDN: 2153 por shrunk to 8.5%, 2204 fig, 612 hd, 542 tn; 9 non-allowed motif styles swapped to donor flowers incl. player-look4; 22 por skipped) → review/huadian-size-r1 | sonnet | REVIEWING |
 | D1 result-sfx | review/result-sfx-r1 | sonnet | PASS 18926abcc |
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
-| D49 collection milestones (Sổ luân hồi titles at 20/50/100/200 items + Phúc duyên once per life; replace jearn stand-in) | review/collect-ms | sonnet | RUNNING (worker) |
+| D49 collection milestones | review/collect-ms @73f56aec3 (jcol.js; BAL.col 20/50/100/200 → Phúc duyên +5/+10/+20/+35, titles Tích bảo / Tàng bảo / Bách bảo / Vạn bảo các chủ; ledger localStorage cung-colms) → review/collect-ms-r1 | sonnet | REVIEWING |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
 | D-list rest (D3, D6, D9, D11–D15, D17, D19, D20, D22, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
@@ -91,6 +91,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Art gap (A7): the 2 new Hành sự cards 'Xem sổ nguyệt sự' / 'Xem lén sổ nguyệt sự' use the §59 placeholder → Foreman C art slot later.
 - NOTE for session 8 (D50 audit, C17 stage-fig-size area): the dialog placeholder frame is NOT missing art. Likely the FIGS manifest/figure loads async and a cold CDN shows the placeholder before the figure arrives → show the placeholder only after FIGS loaded + figure had a chance to load. Second code bug: S.fidUsed is never released for dead/departed rivals; pool = 32 consort + 52 maid identities → from the ~73rd rival ever created no figure. Fix: release fids of dead/departed rivals or fall back to the nearest identity.
 - NOTE for session 8 face-sharp HD batch (C1): C9 changed 612 files under img/hd/ (forehead huadian only; list in dev/art/huadian-size/log_por.jsonl on review/huadian-size). If face-sharp regenerates HD from older sources it would bring the big/grape huadian back — please re-apply C9's forehead delta (runpatch.py) or regenerate from the current CDN files.
+- Q7 (owner, D49): what counts as an 'item' for the Sổ luân hồi collection milestones — every distinct kind she has held or worn incl. consumables (current build), or only wardrobe pieces + ornaments (trâm, y phục, trang sức)?
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
