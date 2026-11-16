@@ -6,3 +6,4 @@ Owner (16/11, dev/handover/refs/owner-chonso-tabs.jpg): split title "Chọn sổ
 - [x] Group scan: only j74 Chọn sổ mixed solo + co-op lists (jcloud Sổ mây only syncs; jcooplobby is actions, not lists). No other panel changed.
 - [x] dev/test/save-slots.js: old "6 cards in one list" assertion replaced by tab asserts (tabs, 3+3 cards, subtitle, Phúc duyên reachable, last-mode open, old save/rooms still show).
 - [x] site rebuilt (dev/site/build_site.sh).
+SẴN SÀNG KIỂM 023aca83d
