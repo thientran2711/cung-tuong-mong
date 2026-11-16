@@ -961,6 +961,14 @@ so stage blocks may stand beside a head or between figures, never over the paint
   fallback when the face has no landmarks).
 - Entries: `ill` (ốm / Sức < 25, CSS), `doc` (trúng độc, CSS), `rash` (jrash, img/rash-1..3.png), `tat` (img/fx-slap.png,
   approved), `phat` (phạt quỳ / trượng: chip only). Postponed, plug in the same way: dưỡng nhan glow, tóc bạc sớm, đậu mùa marks.
+- EVERYONE (review/facefx-all, owner 16/11): ONE rule for every person with a face: her, consorts, her maids / eunuchs / ma ma, other cung's servants, court staff, children, men, Hoàng thượng, Thái hậu.
+  `KIT_FACEFX.person(ref)` = the one lookup (person object, face object `__kp`, place record `{kind,ref}`, consort id, `"sv:<sid>"`, or name) used by the pcard hook, `kitFxLayers`, the room stage and the podium;
+  `KIT_FACEFX.everyone()` lists all (sources plug in with `KIT_FACEFX.group({id,list})`, a source carries no rule); `KIT_FACEFX.owner(p)` (household) drives the single "seen" rule `KIT_FACEFX.seen(p)`
+  (herself, or not a stranger and her own people / a cung she knows). The only exception: `KIT_FACEFX.deny` = no tát / phạt on Hoàng thượng and Thái hậu.
+  State API for other branches (mortality, elder-staff): `KIT_FACEFX.api.{ill(p,k,st), cure(p), poison(p,sev,how,by,weeks), rash, slap, pen}`; Thái hậu's illness is `S.thIll`, Hoàng thượng's `S.emp.ill`.
+  A picture shows only when `img/veil-fit.json` + `scar-fit.json` have rows for that por-/fig- file (women's files have them). Rows for eunuch / emperor / child / men / physician files: KIT REQUEST (code needs no change).
+  `kitFxPut(img,p,host)` (jk2b) lays the layers over any drawn figure (room stage, podium). Causes: j13 monthly illness for servants and children (jface `fxIllMonth`), epidemic reaches servants, taster poisoned, Phạt servant,
+  servants with a grudge harm each other, hostile consorts reach servants (`fxServMonth`).
 ### 28.8c FACE EXPRESSIONS — removed (owner 11/14 22:50Z): no code-reshaped faces; feelings are shown by the small mood icons (emotion kit).
 ### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
