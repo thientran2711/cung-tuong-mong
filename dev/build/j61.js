@@ -47,6 +47,9 @@ function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.em
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
+/* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -
+   never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
+function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(`${K.length?"thêm ":""}${U.length} vị chưa quen biết`);return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
 function k61PortEnt(p){if(!p)return null;if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}

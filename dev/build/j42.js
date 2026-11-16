@@ -446,7 +446,7 @@ PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return n
  L.push(row("Nam nhân",H.length?H.map(m=>`${m.role} ${m.name.split(" ").slice(-2).join(" ")}: ${tinhW(m.tinh)}${S.srv.vow===m.id?" · đã hẹn ước":""}${S.srv.lover===m.id?" · tư tình":""}`).join("; "):"chưa quen ai (gặp ở vườn, điện, Thái y viện)"));
  if(S.srv.rumor||S.srv.leak)L.push(row("Lời đồn",`${S.srv.rumor||0}${S.srv.leak&&RV(S.srv.leak)?" · "+RV(S.srv.leak).name+" biết chuyện":""}`));
  if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · tháng thứ 3 thì lộ: bị đánh chết: ${chanceW(50)}, không thì bị đuổi khỏi cung`));
- if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",S.srv.knowAff.map(RV).filter(Boolean).map(v=>v.name).join(", ")))}catch(e){}return L}})();
+ if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",kitNameList(S.srv.knowAff.map(RV).filter(Boolean))))}catch(e){}return L}})();
 /* a pregnancy she cannot show: the same hard road, priced */
 (function(){const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{if(isSrv()&&S.srv.preg&&!srvOnce("abort"))X.unshift({n:"Uống thuốc phá thai",t:"Mua thuốc của tiểu thái giám, uống lén trong đêm.",k:1,c:{bac:-20},o:od(60),w:{},l:{suc:-30},x:`hết thai, Sức -15 · hỏng: băng huyết Sức -30 · kèm khi hỏng: băng huyết mà chết: ${chanceW(20)}`,once:"abort",dom:"",go:()=>{S.srv.preg=0;apply({suc:-15})},fail:()=>{S.srv.preg=0;if(roll(20))die("Uống thuốc phá thai, băng huyết mà chết")}})}catch(e){}return X}})();
 /* a friend's tip may be a consort's affair */
