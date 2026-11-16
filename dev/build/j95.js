@@ -71,6 +71,8 @@ function j95likely(p,c){/* where p is LIKELY at c by habit (what another person 
 const H95=new Set(["rumor","spy","trip","frame","plant","block","bribe","accuse","vp","ksab","takeaway","steal","road","poison","kpoison","pond","pushp","musk","catswap","kframe",
  "huydung","slowpoison","lygian","tocao","trinhth","trinhhh","uyhiep","banphe","expose","xinhh","harm","plot","ambush","provoke","giahoa"]);
 const F95=new Set(["ally","gift","tieuhuy","visit"]);
+/* port 16/11, whole family: every act the game groups as harm (RVGRP, j9 + jecon/jtsb/jpoison/jpet…) passes the gate; "Giao thiệp" acts are friendly */
+try{if(typeof RVGRP!=="undefined")for(const [g,L] of RVGRP)for(const k of L){if(g==="Giao thiệp"||k==="tieuhuy")F95.add(k);else H95.add(k)}}catch(e){}
 function j95except(a,t){/* a recorded reason to act against her own affection */try{
  for(const h of liveRivals(true)){if(h===a||h===t)continue;if(evG(h,a)>=2&&hostility(h,t)>=50)return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
  const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=60&&aff(a,L)>=30)return `vâng lệnh chủ phe ${L.name}`;
@@ -238,7 +240,7 @@ function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th
    palace her maid and children are (homePeople), consorts living in her palace are not, visitors are. */
 function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id[0];
  if(c==="v"){const v=RV(+id.slice(1));return !!(v&&v.alive&&!(k==="home"&&sameHouse(S,v)))}
- if(id==="emp")return !(k==="dtd"&&(S.sung||0)<50);if(id==="th")return true;
+ if(id==="emp")return k!=="home"&&!(k==="dtd"&&(S.sung||0)<50);if(id==="th")return true;
  if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(id==="c:ty"||id==="c:ksp")return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 const J95OUT_="ngoai";
@@ -454,6 +456,9 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  /* her palace: visitors the record puts there are on the home stage too, so the map count of "home" (homePeople, j59) = the record (port 16/11) */
  if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const P=hp0.apply(this,arguments);try{if(j95on()&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&S.roster&&S.roster.key===j95key()&&Array.isArray(P)){const kh=j95kh();
    for(const v of liveRivals(true)){if(v===S)continue;const e=S.roster.P["v"+v.id];if(!e||e[kh][0]!=="home"||sameHouse(S,v)||P.some(p=>p.ref===v))continue;P.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v))}}}catch(e){j95err("home",e)}return P}}
+ /* her palace while she is away: j59 counts "home" from homePeople() (the stage she would see on coming back); her maid may be out with her,
+    so while she is not at home the record answers (registered after j59's own late wrap, so it is the outer one) */
+ setTimeout(()=>{try{const c1=countAt;countAt=function(k){try{if(k==="home"&&j95on()&&S&&!S.dead&&S.place!=="home"&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&S.roster&&S.roster.key===j95key()){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]==="home"&&j95vis(id,"home"))n++;return n}}catch(e){}return c1.apply(this,arguments)}}catch(e){}},0);
  /* old saves / a fresh life: build the record on the first render */
  const r0=render;render=function(){try{if(j95on()&&!S.dead&&S.where&&(!S.roster||S.roster.key!==j95key()||S.roster.kh!==j95kh()))j95sync(false,true)}catch(e){}return r0.apply(this,arguments)};
 })();

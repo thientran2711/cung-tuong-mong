@@ -19,7 +19,7 @@ function j95cCur(){return j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()
 function j95cSig(){try{return rivals.map(v=>v.alive?(v.out?"o":palaceOf(v)+":"+v.rank+(v.queen?"q":"")):"x").join(",")+"|"+(S.out?1:0)+":"+S.rank}catch(e){return""}}
 /* servant names: unique among every servant and every cung nữ thân tín */
 function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
- for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){const base=s.name.replace(/ \d+$/,"");let i=2;while(seen.has(base+" "+i))i++;s.name=base+" "+i;n++}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
+ for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){/* port 16/11: names carry no numbers (main jaudit aaNamesFix): take an unused name from the same pool */const used=new Set(allServ().map(x=>x&&x.name).concat([...seen]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(x=>!used.has(x));if(pool.length){s.name=pool[Math.floor(Math.random()*pool.length)];n++}}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
  if(n)J95C.stat.dedupe+=n;return n}
 (function(){
  /* ---- 1. giá họa: the gate, the record, the reason kept ---- */
