@@ -16326,7 +16326,12 @@ function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mg
  const cls=kg82Shuf(["up","peer","down","up","peer"]),Q=cls.map(c=>{const L=TD_SPK.filter(s=>s[1]===c);const s=L[Math.floor(Math.random()*L.length)];const m=kg82Shuf(Object.keys(TD_MOOD))[0];return{who:s[0],c,m,talk:1200+Math.random()*1300}});
  const bt=k91Btns(box,[["tdsay","Thưa","giữ để nói, buông khi vào dải xanh"]]);const sb=bt.querySelector("#tdsay");
  let r=-1,pts=0,phase="",t0=0,lvl=0,held=false,cut=false,done=false,res=null;const pops=[];const good=K91C.good(),red=K91C.red(),gold=K91C.gold();
- const dm=k91DemoCard(box,"td_ngon-demo",{title:"Nói đúng lúc, vừa tiếng",lines:["Chờ người nói dứt lời; người đang giận, buồn hay lo cần một lúc nguôi (vòng xám).","Vòng sáng xanh là tới lúc thưa: giữ nút Thưa, tiếng nói dâng lên trong thanh.","Buông tay khi tiếng nói nằm trong dải xanh: bề trên thì nhỏ nhẹ, kẻ dưới thì ôn tồn, ngang hàng thì vui vẻ."],done:()=>{bt.hidden=false;next()}});
+ const dm=k91DemoCard(box,"td_ngon-demo",{title:"Nói đúng lúc, vừa tiếng",lines:["Chờ người nói dứt lời; người đang giận, buồn hay lo cần một lúc nguôi (vòng xám).","Vòng sáng xanh là tới lúc thưa: giữ nút Thưa, tiếng nói dâng lên trong thanh.","Buông tay khi tiếng nói nằm trong dải xanh: bề trên thì nhỏ nhẹ, kẻ dưới thì ôn tồn, ngang hàng thì vui vẻ."],art:(g,W,H,now)=>{/* a small moving example: dots → green ring → the voice rises into the band */const y0=44,h=Math.min(H*.36,150),cx=W*.38,k=(now%4200)/4200;
+  g.save();k91RR(g,cx-70,y0+h*.2,140,h*.5,14);g.fillStyle="#fffdf6";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
+  if(k<.35){for(let i=0;i<3;i++){g.globalAlpha=.35+.65*Math.max(0,Math.sin(now/170-i*.9));g.fillStyle=K91C.ink;g.beginPath();g.arc(cx-20+i*20,y0+h*.45,5,0,Math.PI*2);g.fill()}g.globalAlpha=1}
+  else{g.strokeStyle=K91C.good();g.lineWidth=5;g.beginPath();g.arc(cx+80,y0+h*.2,16,-Math.PI/2,-Math.PI/2+Math.PI*2*(1-Math.min(1,(k-.35)/.65)));g.stroke()}
+  const vx=W*.68,vw=24,lv=k<.45?0:Math.min(.4,(k-.45)*1.2);g.fillStyle="#fffdf6";g.fillRect(vx,y0,vw,h);g.strokeStyle=K91C.hair;g.strokeRect(vx,y0,vw,h);g.fillStyle="rgba(45,122,82,.42)";g.fillRect(vx,y0+h*(1-.38),vw,h*.16);
+  g.fillStyle="#c23b22";g.fillRect(vx+3,y0+h*(1-lv),vw-6,h*lv);g.restore();return y0+h+22},done:()=>{bt.hidden=false;next()}});
  if(dm)bt.hidden=true;
  function next(){r++;if(r>=Q.length){done=true;return setTimeout(()=>env.end(pts),400)}const q=Q[r];lvl=0;held=false;cut=false;res=null;phase="talk";t0=performance.now();
 }
@@ -40206,7 +40211,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8fa256c03cdf";window.CTM_BUILD=BUILD;
+const BUILD="79cfa5acbd3b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
