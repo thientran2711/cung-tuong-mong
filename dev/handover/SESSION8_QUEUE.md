@@ -78,7 +78,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C20 | review/act-text @ 593e66b3a (PAUSED for slot; left: full after-scan 6 states, 755 panel scan fix, long rows) | QUEUED (resume) |
 | C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
-| C22 | review/boot-flash | RUNNING |
+| C22 | review/boot-flash @ 6b1d6855d (boot cover + watchdog + kRx lookbehind fix for old Safari) | REVIEWING (boot-flash-r1, opus) |
 | C23 [→ FOREMAN B] | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
 | C24 [→ FOREMAN B] | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
 | C25 | review/press-fx @ bf4f654e3 | REVIEWING (press-fx-r1, URGENT + close-button fix) |
