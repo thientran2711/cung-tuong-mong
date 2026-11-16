@@ -19,8 +19,18 @@ function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).l
 /* over(h,t,fate[,alive]): the end card. "Chết vì" only when she died; a living ending (thoái vị, xuất cung, xuất gia…) says "Kết cục".
    Callers may pass alive=true/false; otherwise it is read from the fate wording (kit owner #2, group fix for every ending). */
 function overAlive(fate,a){if(a===true||a===false)return a;return /thoái vị|xuất cung|ra khỏi cung|xuất gia|về quê|ẩn cư|an hưởng|còn sống|trốn khỏi cung|tự do|nhường ngôi/i.test(String(fate||""))&&!/chết|qua đời|tự vẫn|băng hà|ban chết|xử tử/i.test(String(fate||""))}
+/* owner 16/11 (Q12, D32): every ending card shows the fitting ALREADY-APPROVED event picture (no new art); ev-quoc-tang ONLY when the Emperor's death is what ends the life.
+   First match wins; h = card title, fate = the record line. Crowning endings (Hoàng thái hậu / Mẫu hậu) = the edict, not the mourning. */
+const END_ART=[[/^(Hoàng thái hậu|Mẫu hậu|Mẫu nghi)/,"tan-phong"],[/^Thái phi|tuẫn táng|Tiên đế băng|Hoàng thượng băng hà|Quốc tang|băng hà/,"quoc-tang"],
+ [/độc/,"dau-doc"],[/hỏa hoạn|cháy|lửa/,"hoa-hoan"],[/ban chết|tư thông|đánh đòn|xử trảm|thắt cổ|bạch lăng/,"hinh-phat"],
+ [/^Phế|đuổi|lãnh cung|Lãnh cung|điên dại|Tuổi xuân/,"lanh-cung"],[/^(Xuất giá|Được ban hôn|Thành thân|Vào vương phủ|Được Vương gia)/,"hoa-than"],[/xuất gia|Xuất gia/,"te-le"],
+ [/^Cao chạy/,"nhap-cung"],[/^(Xuất cung|Ma ma|Một đời an nhiên)/,"le-xuan"]];
+function endArt(h,t,fate,live){const s=String(h||""),f=String(fate||""),x=String(t||"");let k="";
+ for(const [re,id] of END_ART){if(re.test(s)||re.test(f)||(id==="quoc-tang"&&re.test(x))){k=id;break}}
+ if(!k)k=live?"le-xuan":"tang-le";return `img/ev-${k}.webp`}
+window.endArt=endArt;
 function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive);S.dead=true;S.fate=fate;record(fate);lifeSave(fate);const ms=mySons().length,md=myDaus().length;const ch=deathChain(fate);
- Q=[{t:"Kiếp này",cls:"end",who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${ch.length?`<div class="pcb rows">${ch.map(x=>`<div class="pcrow"><span>${x}</span></div>`).join("")}</div>`:""}
+ Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${ch.length?`<div class="pcb rows">${ch.map(x=>`<div class="pcrow"><span>${x}</span></div>`).join("")}</div>`:""}
   ${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",Math.max(S.rank,S.maxRank||0)>=7?"Hoàng hậu":RANKS[Math.max(S.rank,S.maxRank||0)].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
