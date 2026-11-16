@@ -37,6 +37,8 @@ echo "quickcheck ${SHA:0:8} vs live ${OLDREF:0:8}"
 # 1. the sha holds its own build
 DIRTY=$(git -C "$WT" status --porcelain -- index.html sw.js assets.json)
 norm(){ grep -v '^window\.CTM_BI=' ; }
+# 0. no image in git outside the allow-list (checked on the sha tree itself with this kit's script)
+if ! IMGOUT=$(python3 "$KIT/dev/test/img-allowlist.py" --ref "$SHA" 2>&1); then echo "$IMGOUT" | head -12; echo "QUICKCHECK FAIL · images in git outside dev/site/img-allowlist.txt (git rm them; pictures go to the CDN, shots to scratch)"; exit 1; fi
 TB=$(date +%s)
 if ! (cd "$WT" && bash dev/site/build_site.sh > "$OUT/build.log" 2>&1); then tail -5 "$OUT/build.log"; echo "QUICKCHECK FAIL · build failed ($OUT/build.log)"; exit 1; fi
 BUILD_S=$(( $(date +%s)-TB ))
