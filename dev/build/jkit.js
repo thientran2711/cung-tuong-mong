@@ -78,6 +78,18 @@ function kitSlotNeed(vis){const k=vis.length,m=Math.max(0,...vis);return k>1?m*(
 /* KIT 33.7b (owner 16/11 18:35Z, own-room stage): N fixed spots = N equal columns of the free width (centre of column i); people NEVER overlap (art ≤ column), pets may overlap a person's legs only */
 function kitSlotSwE(k,avail){return avail/Math.max(1,k)}
 function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
+/* KIT 33.12 · FIXED SLOT TABLE (owner 16/11 19:54Z + ~20:04Z, review/stage-pets-r7) — THE one table for every stage / place / room view that shows people (j59: her room,
+   the full-screen place painting, lãnh cung, servant road, co-op). Like puzzle pieces: a view has a FIXED number of slots, slot i of a view always sits at the same
+   x (centre of equal column i of the free width between the side columns, kitSlotCxE) and the same floor line y (kitSlotFloor), whoever stands there and however
+   many people there are (1 person = slot 1, not the centre); nobody is shrunk or moved to make room — wide skirts / sleeves may overlap (clothing only).
+   page = one page wide view (Fold room, Fold place, iPad room page — the Fold page IS the iPad page scaled, KIT §0) → 2 slots;
+   spread = the iPad full-screen place painting over the whole spread → 4 slots (2 per page). Others are reached by swiping (33.9).
+   band = px under the feet reserved for the two-line name chip. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
+const KIT_SLOTS={page:2,spread:4,band:50,pet:{sx:.3}};
+function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}
+function kitSlotFloor(sH){return Math.max(sH*.03,KIT_SLOTS.band)}
+function kitPetSpot(cx,sw){return cx+KIT_SLOTS.pet.sx*sw}
+window.KIT_SLOTS=KIT_SLOTS;window.kitSlotsN=kitSlotsN;window.kitSlotFloor=kitSlotFloor;window.kitPetSpot=kitPetSpot;
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
