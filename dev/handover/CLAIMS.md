@@ -167,7 +167,7 @@
 | promo-reveal-fix: LIVE regression rank-up chest + servant reveal no longer show (bisect + whole-group fix) | review/promo-reveal-fix | main s16 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus, ex promo-skip reviewer) | RUNNING | 16/11 12:17Z |
 | emperor-visit review (opus) | review/emperor-visit-r1 | D | session_01DgYSWoamKdMf5ewt8WHax6 | RUNNING | 16/11 12:18Z |
 | cardflip-glow2 REVIEW (sonnet; owner-bug fast lane) | review/cardflip-glow2-r1 | main s16 | session_01UV1Szk2fgA2KyKg3zrmLgn | RUNNING | 16/11 12:19Z |
-| kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | RUNNING | 16/11 12:20Z |
+| kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | FAIL 1 BLOCKING (Chờ value) @3dba018d | 16/11 13:46Z |
 | weather-fx2 | review/weather-fx2 | main s16 | session_01UV1SzhWSw7EETVzp3xX5hi→worker weather-fx2 (this session) | RUNNING | 16/11 12:26Z |
 | name-mask review (sonnet) | review/name-mask-r1 | D | session_01DgYSWmyLaHvXUgNsFAkrBH | PASS 571dc15e | 16/11 13:15Z |
 | skin-norosy: owner verdict B (12:45Z) — remove rosy-skin layer from ALL pictures, keep later edits; no kitFigLight | review/skin-norosy | main s16 | session_01UV1SzjQcW4S8GoPGj8rDyk (opus) | RUNNING | 16/11 12:43Z |
@@ -209,3 +209,4 @@
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | session_011xDdVQyUUHebsanYuwk4gH | RUNNING | 16/11 13:45Z |
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | session_011xDdVSCHRnD3ox6Afg4tHa | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | session_011xDdVP5yaxTpEx8BoJ4t2i | RUNNING | 16/11 13:45Z |
+| kc-roads Chờ-value fix (r1 FAIL item 1, OD:L1288) | review/kc-roads-cn-nc-fix2 | D | (worker opening) | RUNNING | 16/11 13:46Z |
