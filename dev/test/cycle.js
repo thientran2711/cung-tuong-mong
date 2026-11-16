@@ -3,7 +3,8 @@
    / from age 50; during her cycle tuần nightCh = 0, never flipped in 300 flips, steal acts closed, late-visit / ksp night options locked;
    cycleLate counts missed cycles; the book (both roads) lists every woman, a rival's hidden pregnancy shows "không báo" and opens musk;
    pregMismatch → chứng cứ; NPC forge → rumour → correction option; her forgery deck cards (both roads); NPC foe guesses her pregnancy;
-   a save without any cycle field loads (deser) and the functions work. UI per size: the book panel opens, no page / panel h-overflow,
+   a save without any cycle field loads (deser) and the functions work. r2: the book as two Hành sự deck cards (costs, opens the book);
+   the monthly report pop-up (4 options, flip deferred, đúng / sớm / giấu / lùi effects, mama check, forgery evidence, mừng hụt, default). UI per size: the book panel opens, no page / panel h-overflow,
    no clipped text; 390x844 = rotate prompt.
    usage: node dev/test/cycle.js <index.html> [outdir] [WxH@dpr ...] */
 const {chromium}=require('playwright');const fs=require('fs');
@@ -66,6 +67,43 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
     S.preg=1;S.fake=0;S.hidden=true;S.pregWk=wk()-4;S.cyb={};const nr=BAL.cyc.npcRead;BAL.cyc.npcRead=100;monthPay();BAL.cyc.npcRead=nr;
     if(!liveRivals(true).some(x=>x.cyKnowMe===S.pregWk))f.push('foe did not read the book');
     S.preg=0;S.hidden=false;S.tuan=t0;
+    /* 9 (r2) the book as HÀNH SỰ deck cards: both roads, same numbers as the place cards; the bạc card opens the book */
+    S.tuan=t0;S.cyb={};S.out=false;S.dead=false;deal();const d1=deck.find(x=>x.n==='Xem sổ nguyệt sự'),d2=deck.find(x=>x.n==='Xem lén sổ nguyệt sự');
+    if(!d1||!d2)f.push('book deck cards missing');else{const r=Math.min(7,S.rank||0);
+     if(!d1.c||d1.c.bac!==-BAL.cyc.read[r]||cardCost(d1)!==1)f.push('bạc card cost '+JSON.stringify(d1.c)+' k'+cardCost(d1));
+     if(!d2.c||d2.c.suc!==-BAL.cyc.peekSuc||cardCost(d2)!==2||!(d2.o<100))f.push('peek card cost '+JSON.stringify(d2.c)+' k'+cardCost(d2)+' o'+d2.o);
+     info.deckCards=[d1.n+' '+JSON.stringify(d1.c)+' k'+cardCost(d1),d2.n+' '+JSON.stringify(d2.c)+' k'+cardCost(d2)+' o'+d2.o];
+     clear();used=0;S.bac=500;S.suc=80;const b0=S.bac;act(deck.indexOf(d1));const M=document.getElementById('modal');
+     if(S.bac!==b0-BAL.cyc.read[r])f.push('bạc not paid '+b0+'→'+S.bac);if(!(Q.length&&/Sổ nguyệt sự/.test(M.innerText||'')))f.push('deck card did not open the book');clear();
+     const af0=(S.court.ksp.af.me||0),dn0=S.danh;d2.fail();if(S.court.ksp.af.me!==af0-BAL.cyc.peekAfLoss)f.push('peek fail no thiện cảm loss')}
+    /* 10 (r2) the monthly report pop-up */
+    const pop=()=>{clear();S.cyb={};S.tuan=myT;S.preg=0;S.fake=0;S.hidden=false;S.out=false;S.tonight=null;flip();const m=Q.find(x=>x.pid==='cyrep');return m};
+    let m=pop();if(!m)f.push('no monthly pop-up in her cycle tuần');else{
+     const N=m.opts.map(o=>o.n);info.popup=m.opts.map(o=>o.n+' :: '+String(o.x).replace(/<[^>]+>/g,''));if(N.length!==4)f.push('pop-up options '+N.length);
+     if(S.tonight)f.push('flip not deferred');if(m.opts.some(o=>/%/.test(o.x)))f.push('% in option');
+     if(!/Khó|Liều|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc/.test(m.opts[1].x))f.push('lùi: no odds word');if(!/khả năng/.test(m.opts[2].x)||!/khả năng/.test(m.opts[3].x))f.push('lies: no risk chance');
+     /* a: báo đúng → card off this tuần, the deferred flip ran */
+     clear();m.opts[0].go();if(S.cyb.rk!==wk()||S.cyb.rv!=='dung')f.push('đúng not stored');if(nightCh(S)!==0)f.push('đúng: card on tray');if(S.tonight==='me')f.push('đúng: flipped');
+     if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up again after answer');clear();flip();if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up twice same tuần');clear()}
+    /* b: báo sớm → card on the tray, can be flipped, mama check on the night, forgery evidence at month end */
+    m=pop();if(m){m.opts[2].go();if(!(nightCh(S)>0))f.push('sớm: card off');if(S.cyb.lie!==wk())f.push('sớm: lie not stored');if(ACT.steal&&LACK.steal&&LACK.steal()==="Đang kỳ nguyệt sự, thẻ bài tạm cất, không tiện hầu giá")f.push('sớm: steal still locked');
+     let n=0;for(let i=0;i<300;i++){S.tonight=null;S.ntk=null;S.ntTry=null;flip();if(S.tonight==='me')n++}Q.length=0;info.flipLie=n;if(!n)f.push('sớm: never flipped');
+     const rn2=Math.random;Math.random=()=>0.999;S.sung=60;S.danh=40;S.ksKnows=0;S.tonight='me';delete S.cyb.lck;try{nightScene()}finally{Math.random=rn2}clear();
+     if(!(S.sung<60&&S.danh<40&&S.ksKnows))f.push('sớm: caught at the night did not cost '+S.sung+'/'+S.danh+'/'+S.ksKnows);
+     const fo=liveRivals(false).find(x=>hostility(x,S)>=BAL.cyc.foeHost);if(!fo)f.push('no foe for evidence');else{const ek=key(S),e0=(fo.evm&&fo.evm[ek])||0;S.cyb.lieM=S.turn-1;S.cyb.lieEv=0;const nr2=BAL.cyc.npcRead;BAL.cyc.npcRead=100;monthPay();BAL.cyc.npcRead=nr2;if(!(((fo.evm&&fo.evm[ek])||0)>e0))f.push('no forgery evidence for foe')}}
+    /* c: giấu → card on the tray, the book says "không báo" (no correction option for her own lie), mừng hụt at the month's end */
+    m=pop();if(m){m.opts[3].go();if(!(nightCh(S)>0))f.push('giấu: card off');clear();cyBook('thử');const MM=document.getElementById('modal');const mt=MM.innerText||'';
+     if(!/không báo/.test(mt))f.push('giấu: book does not say không báo');if(Q[0]&&Q[0].opts&&Q[0].opts.some(o=>/chép lại/.test(o.n)))f.push('giấu: correction offered for her own lie');clear();
+     S.turn++;const sg0=S.sung,dn1=S.danh;monthPay();S.turn--;if(!(S.sung<sg0&&S.danh<dn1))f.push('giấu: no mừng hụt '+sg0+'→'+S.sung)}
+    /* d: báo lùi (forced success) → card off now, next tuần's flip halved, a pregnancy begun after it reads one cycle later */
+    m=pop();if(m){const rnd=Math.random;Math.random=()=>0;try{m.opts[1].go()}finally{Math.random=rnd}clear();const W0=wk();
+     if(S.cyb.back!==W0)f.push('lùi: not stored');if(nightCh(S)!==0)f.push('lùi: card on tray');
+     S.tuan=(myT+1)%3;const tb=S.turn;if(myT===2)S.turn++;const hv=nightCh(S);const bk=S.cyb.back;delete S.cyb.back;const full=nightCh(S);S.cyb.back=bk;info.luiNext=[hv,full];if(!(hv<full))f.push('lùi: next tuần not harder '+hv+'/'+full);
+     S.turn=tb;S.tuan=myT;S.preg=1;S.fake=0;S.hidden=true;S.pregWk=W0+1;const tt=S.turn;S.turn+=2;const tl=cycleLateTrue(S),sl=cycleLate(S);info.luiLate=[tl,sl];if(!(tl>=1&&sl===tl-1))f.push('lùi: lateness not delayed '+tl+'/'+sl);
+     S.pregMismatch=true;S.nightLog=[S.pregWk-3];deal();if(S.pregMismatch)f.push('lùi: mismatch not covered');S.turn=tt;S.preg=0;S.hidden=false;S.pregMismatch=false}
+    /* e: unanswered → the week ends with the true report */
+    m=pop();if(m){clear();const c=S.cyb;endTurn();if(c.rv!=='dung')f.push('unanswered not defaulted '+c.rv);const dw=document.getElementById('dawn');if(dw)dw.remove();document.body.classList.remove('kbk-open')}
+    S.cyb={};S.tuan=t0;clear();
     /* 8 old save */
     const s=ser();delete s.cyb;delete s.cyKnow;const js=JSON.stringify(s).replace(/,"cyKnowMe":-?\d+/g,'').replace(/,"cyKnow":\{[^}]*\}/g,'').replace(/,"cyEvi":"?f?-?\d+"?/g,'');
     try{deser(JSON.parse(js));render();const dd=cycleDaysOf(S,S.month);if(!dd.length&&!S.preg&&cyAge(S)<50)f.push('old save: no days');nightCh(S);cyBook('thử');clear()}catch(e){f.push('old save: '+e.message)}
@@ -79,6 +117,22 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    const clip=[];M.querySelectorAll('.kfact,.kchip,.kptitle,.kpsub').forEach(e=>{if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflowX!=='auto')clip.push(e.textContent.slice(0,20))});if(clip.length)f.push('clipped '+clip.slice(0,4).join('|'));
    if(document.documentElement.scrollWidth>innerWidth+1)f.push('page h-overflow');return{f,rows:M.querySelectorAll('.kfact').length}});
   if(OUT)await p.screenshot({path:`${OUT}/cycle-${SZ}.jpg`,type:'jpeg',quality:60});
+  /* (r2) the monthly pop-up at this size: kit dialog + 4 option cards, nothing clipped / off screen */
+  const pu=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;
+   S.cyb={};S.preg=0;S.fake=0;S.out=false;S.tuan=cyBase(S).t;flip();render();showModal();await sleep(2500);const M=document.getElementById('modal');
+   if(M.hidden||!/Kính sự phòng báo thế nào/.test(M.innerText))f.push('pop-up not shown');const cards=M.querySelectorAll('button.ka,.kopt,.opt');if(cards.length<4)f.push('pop-up cards '+cards.length);
+   const dl=M.querySelector('.dlg');if(dl){const r=dl.getBoundingClientRect();if(r.left<-1||r.right>innerWidth+1)f.push('pop-up off screen')}
+   const clip=[];M.querySelectorAll('button.ka .kan,.kfact,.kchip').forEach(e=>{if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflowX!=='auto')clip.push(e.textContent.slice(0,20))});if(clip.length)f.push('pop-up clipped '+clip.slice(0,3).join('|'));
+   const ov=[];cards.forEach(b=>{const r=b.getBoundingClientRect();let bot=0;b.querySelectorAll('.krv .ef,.krv span,.kan').forEach(e=>{bot=Math.max(bot,e.getBoundingClientRect().bottom)});if(bot>r.bottom+2)ov.push((b.querySelector('.kan')||b).textContent.slice(0,14)+' '+Math.round(bot-r.bottom)+'px h'+Math.round(r.height)+' '+getComputedStyle(b).height+'/'+getComputedStyle(b).maxHeight+'/'+getComputedStyle(b.parentElement).gridAutoRows)});if(ov.length)f.push('pop-up card content overflows: '+ov.join(' | '));
+   if(document.documentElement.scrollWidth>innerWidth+1)f.push('page h-overflow (pop-up)');return{f,n:cards.length}});
+  if(OUT)await p.screenshot({path:`${OUT}/cycle-pop-${SZ}.jpg`,type:'jpeg',quality:60});
+  if(OUT){await p.evaluate(()=>{const M=document.querySelector('#modal .dlg');const sc=[...(M?M.querySelectorAll('*'):[])].find(e=>e.scrollHeight>e.clientHeight+20&&/auto|scroll/.test(getComputedStyle(e).overflowY));if(sc)sc.scrollTop=sc.scrollHeight});await p.waitForTimeout(600);await p.screenshot({path:`${OUT}/cycle-pop2-${SZ}.jpg`,type:'jpeg',quality:60})}
+  const hs=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));const c=S.cyb;if(c){c.rk=wk();c.rv='dung'}Q.length=0;document.getElementById('modal').hidden=true;
+   S.tuan=(cyBase(S).t+1)%3;used=0;S.bac=Math.max(S.bac,300);tab='act';try{localStorage.removeItem('hclh-kcat-act-0')}catch(e){}deal();render();await sleep(800);
+   const B=[...document.querySelectorAll('#panel button.ka')].filter(b=>/sổ nguyệt sự/.test(b.textContent));if(B.length<2)f.push('Hành sự: book cards shown '+B.length);
+   B.forEach(b=>{const r=b.getBoundingClientRect();if(r.right>innerWidth+1)f.push('card off screen')});if(document.documentElement.scrollWidth>innerWidth+1)f.push('page h-overflow (Hành sự)');return{f}});
+  if(OUT){await p.evaluate(()=>{const b=[...document.querySelectorAll('#panel button.ka')].find(b=>/sổ nguyệt sự/.test(b.textContent));if(b)b.scrollIntoView({block:'center'})});await p.waitForTimeout(1200);await p.screenshot({path:`${OUT}/cycle-hs-${SZ}.jpg`,type:'jpeg',quality:60})}
+  u.f.push(...pu.f,...hs.f);
   /* the two roads at Kính sự phòng (Tổng quản's talk cards) */
   const k=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;used=0;S.bac=Math.max(S.bac,200);
    S.confined=0;S.out=false;goTo('ksp');Q.length=0;document.getElementById('modal').hidden=true;const i=curPeople().findIndex(x=>x.kind==='ksp');if(i<0){f.push('no Tổng quản at ksp '+JSON.stringify({pl:S.place,v:!!S.visit,used,ppl:curPeople().map(x=>x.kind)}));return{f}}popIdx=i;popMsg='';render();await sleep(300);for(let g=0;g<2;g++){const o=talkOpts(curPeople()[i]);if(o[0]&&o[0].k61){talk(0);popIdx=i;render();await sleep(200)}}
