@@ -847,6 +847,9 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
+ /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
+    width left from an earlier layout keeps the 900 px file and the browser upscales her face */
+ try{if(typeof kitFigHD==="function")kitFigHD(im)}catch(e){}
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
@@ -1194,8 +1197,9 @@ function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapT
 window.kitRankText=kitRankText;
 function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
  if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP))return NodeFilter.FILTER_REJECT;
-  re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: the cheap name test first; the ancestor walk (closest) only for the few text nodes that hold a name */
+  re.lastIndex=0;if(!re.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;
+  return !p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
  for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
   while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
@@ -1227,7 +1231,7 @@ window.kitMarkPaint=kitMarkPaint;
 function kitNameTone(root){try{if(!root||root.nodeType!==1)return;const L=root.matches&&root.matches(".kname")?[root]:[];root.querySelectorAll&&L.push(...root.querySelectorAll(".kname"));
  for(const n of L){if(n.style.getPropertyValue("--rtn")||n.classList.contains("kmy")||n.classList.contains("kme"))continue;const t=n.querySelector(":scope>.kti");const v=t&&t.style.getPropertyValue("--rt");if(v)n.style.setProperty("--rtn",v)}}catch(e){}}
 window.kitNameTone=kitNameTone;
-(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R].filter(n=>n&&n.isConnected);R.clear();/* review/lag-play-2: a root inside another queued root is walked once */for(const r of L)if(!L.some(m=>m!==r&&m.contains(r))){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
  const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
   if(!q&&R.size)q=requestAnimationFrame(run)});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body);kitNameTone(document.body);kitMarkPaint(document.body)};

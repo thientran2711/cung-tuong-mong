@@ -154,12 +154,13 @@ function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)ret
  bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
+/* review/lag-play-2: inside a render (window.__rdep, jlag2) the fit runs once at the end of render (next line), not mid-render */
 /* KIT §0 one page (design-scale p2): the time block (one wrapping row of whole items, CSS above) must not be taller than her name block, else
    the top bar — and so the page box under it — would be taller than the spread's. When a long day (state chips, a long weather or quẻ)
    still overflows, the whole block is scaled down together (zoom steps of 5 %, never below 80 %), like the tab bar's one font size. */
 function kitTcFit(hd){try{const tc=document.getElementById("k3tc"),me=hd.querySelector(":scope>.me");if(!tc||!me||!tc.offsetParent)return;
  tc.style.zoom="";const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
-if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);if(!window.__rdep)kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
 try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
