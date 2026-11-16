@@ -19,7 +19,7 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
       Put it inside a position:relative picture box. */
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
 (function(){const st=document.createElement("style");st.textContent=`
-.ktam{position:absolute;bottom:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
+.ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
 `;document.head.appendChild(st)})();
 function kitOffBac(c,fee){if(typeof S!=="undefined"&&S&&S.bac<fee)kitOff(c,kitWhyBac(fee),kitWhenBac());return c}
 /* kit sample page entries */
