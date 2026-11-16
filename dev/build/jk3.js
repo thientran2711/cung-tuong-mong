@@ -157,11 +157,11 @@ const css=document.createElement("style");css.id="k3-layout";css.textContent=`
 /* stage frame (KIT 31.3): portrait screens get a FIXED aspect — Fold/tablets 600–999 px wide: 2:1 (width:height); phones < 600 px: 3:2.
    The panel below takes the rest and scrolls. Landscape: the left column (unchanged). */
 :root{--kstH:calc((100vw - 16px) / 2)}
-@media (max-width:599px){:root{--kstH:calc((100vw - 12px) / 1.5)}}
+/* kv3:.kv1 */:root:where(.kv1){--kstH:calc((100vw - 12px) / 1.5)}
 /* 3 · ONE STAGE SIZE (portrait): same on every tab; the panel scrolls */
-@media (max-aspect-ratio:1/1){
- html body .game#game:not(.maptab),html body .game#game.cardtab:not(.maptab){grid-template-rows:auto var(--kstH) minmax(0,1fr) auto!important}
-}
+/* kv3:.kv1 */
+ html:where(.kv1) body .game#game:not(.maptab),html:where(.kv1) body .game#game.cardtab:not(.maptab){grid-template-rows:auto var(--kstH) minmax(0,1fr) auto!important}
+
 /* 1 · TOP BAR: one slim row */
 html body header.hud{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me stats"!important;align-items:center!important;gap:0 10px!important;padding:4px 8px!important;min-height:0!important;flex-wrap:nowrap!important}
 html body header.hud>#menu{grid-area:menu;min-height:40px!important;min-width:40px!important;padding:0 8px!important;align-self:center}
@@ -299,12 +299,12 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 .kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .kbackb:active .kbi{transform:scale(.94)}
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
-@media (max-width:599px){html body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
- html body header.hud>#k3room.kbackb .kbl{display:none}
+/* kv3:.kv1 */html:where(.kv1) body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
+ html:where(.kv1) body header.hud>#k3room.kbackb .kbl{display:none}
  /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
- html body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
- html body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
- html body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
+ html:where(.kv1) body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
 html body header.hud>#k3room[hidden]{display:none!important}

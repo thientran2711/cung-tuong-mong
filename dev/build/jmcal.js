@@ -275,7 +275,7 @@ button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transpar
 .kmc-pre{display:flex;flex-wrap:wrap;gap:5px}.kmc-pre .kbtn{font-size:.78rem;padding:4px 9px;min-height:34px}
 .kmc-save{justify-self:start;min-height:38px}
 .kmc-del{font-size:.72rem;padding:1px 7px;min-height:26px;margin-left:4px;vertical-align:middle}
-@media (max-height:520px){.kmc-tabs{flex-wrap:nowrap!important;overflow-x:auto!important}.kmc-d{aspect-ratio:auto;height:50px;min-height:50px}}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§47) ---------- */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(

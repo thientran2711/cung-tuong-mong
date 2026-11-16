@@ -105,9 +105,9 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 /* reviewer r1: with the §70 strip the confirm stays in view — strip | card + confirm side by side on landscape screens, and the confirm
    sticks to the bottom of the scrolling option box everywhere */
 .kipd>.kipgo{position:sticky;bottom:0;z-index:2}
-@media (orientation:landscape) and (min-width:900px) and (min-height:501px){.kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}.kipd2>.kidet{grid-column:1;grid-row:1/span 2}.kipd2>.kipcard,.kipd2>.kipgo{grid-column:2}.kipd2>.kipgo{align-self:start;max-height:48px}}
-@media (max-height:500px) and (orientation:landscape){.kipw{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,42%);grid-template-areas:"g d";align-items:start}.kipw>.kipg{grid-area:g;max-height:calc(100dvh - 150px);--kshsz:84px}.kipw>.kipd{grid-area:d}}
-@media (max-width:600px){.kipg{--kshsz:84px}}
+/* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard,:where(.kv2) .kipd2>.kipgo{grid-column:2}:where(.kv2) .kipd2>.kipgo{align-self:start;max-height:48px}
+
+/* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
 `;document.head.appendChild(st)})();
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected",html:()=>{try{
  const L=Object.keys(IT).filter(k=>!IT[k].story).slice(0,4);return `<div class="kipw kshop has"><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});

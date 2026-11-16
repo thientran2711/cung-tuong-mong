@@ -55,5 +55,5 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdt .ktut-do{color:var(--gold);font-weight:600}
 .kpdlg>.kpopts{flex:none;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:6px 14px 12px;margin:0;position:static;min-height:0}
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
-@media (max-width:599px){.kpdlg>.kpdb{grid-template-columns:clamp(84px,32%,140px) minmax(0,1fr);gap:9px;padding:8px 10px 2px}.kpdlg .kpdt{font-size:.84rem}.kpdlg>.kpopts{padding:6px 10px 10px}}
+/* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:clamp(84px,32%,140px) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();

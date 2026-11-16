@@ -127,17 +127,15 @@ function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBou
 
 /* ---------- 3. PHONE PORTRAIT: the stage takes ~40 % of the screen (was 27 %); the panel keeps the rest ---------- */
 (function(){const st=document.createElement("style");st.id="k2b-phone";st.textContent=`
-@media (max-width:599px) and (orientation:portrait){
- .game:not(.maptab):not(.cardtab){grid-template-rows:auto minmax(0,40dvh) minmax(0,1fr) auto!important}
- .game.cardtab{grid-template-rows:auto minmax(0,24dvh) minmax(0,1fr) auto!important}
- header.hud>.me .dt{font-size:.66rem!important;line-height:1.2}
- header.hud>.hud2.khud.col{flex-wrap:nowrap!important;gap:3px!important}
- header.hud>.hud2.khud>.h2t{min-height:26px!important;height:26px;padding:0 6px!important;font-size:.7rem!important}
- header.hud>.hud2.khud .hc{padding:1px 5px!important;font-size:.66rem!important}
-}
-@media (min-width:600px) and (max-width:999px) and (orientation:portrait){
- .game.cardtab{grid-template-rows:auto minmax(0,22dvh) minmax(0,1fr) auto!important}
-}`;document.head.appendChild(st)})();
+/* kv3:.kv1 */
+ :where(.kv1) .game:not(.maptab):not(.cardtab){grid-template-rows:auto minmax(0,40dvh) minmax(0,1fr) auto!important}
+ :where(.kv1) .game.cardtab{grid-template-rows:auto minmax(0,24dvh) minmax(0,1fr) auto!important}
+ :where(.kv1) header.hud>.me .dt{font-size:.66rem!important;line-height:1.2}
+ :where(.kv1) header.hud>.hud2.khud.col{flex-wrap:nowrap!important;gap:3px!important}
+ :where(.kv1) header.hud>.hud2.khud>.h2t{min-height:26px!important;height:26px;padding:0 6px!important;font-size:.7rem!important}
+ :where(.kv1) header.hud>.hud2.khud .hc{padding:1px 5px!important;font-size:.66rem!important}
+
+`;document.head.appendChild(st)})();
 
 /* ---------- 4. TRONG CUNG block (owner 11/14): Hoàng thượng · Thái hậu · Hoàng hậu — mood + attitude toward her; "chưa rõ" when unknown;
    tap = that person's card. Landscape (iPad): on the stage under the Tư chất block (#kstat), same side, ONLY when it covers no figure.
@@ -705,7 +703,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
 .kroul .krhead{display:flex;flex-direction:column;align-items:center;color:#5a2e12;text-shadow:0 1px 6px #fff8;text-align:center}
 .kroul .krhead b{font-family:var(--display);font-size:1.5rem;color:var(--gold)}.kroul .krhead small{font-size:.9rem;min-height:1.3em}
 .kroul .krgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;align-items:stretch}
-@media (min-aspect-ratio:1/1){.kroul .krgrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+/* kv3:.kv2 */:where(.kv2) .kroul .krgrid{grid-template-columns:repeat(5,minmax(0,1fr))}
 /* one origin card: outer .krt moves (shuffle / centre), inner .krc flips; front in flow (gives the size), back laid over it */
 .kroul .krt{position:relative;width:clamp(96px,min(26vw,17dvh),150px);perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
 .kroul .krc{position:relative;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.1,.2,1)}
@@ -880,10 +878,8 @@ document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closes
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
  let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");
- /* KIT 6.3b (review/kit-keeper-2, main s11 item 4): SHORT LANDSCAPE (phone sideways, 844x390: the card's room is ~180 px high) — the two-column card whatever
-    the width: picture + name + info LEFT (narrow column, sticky), acts RIGHT, so the first act is on the first screen instead of 500 px down the page */
- if(pc&&innerHeight<=520&&innerWidth>innerHeight){pc.style.setProperty("--kpcw","92px");return true}
- return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
+ /* KIT §0: no short-landscape card any more — every screen shows the 1180x820 spread or the 590x820 page (design-scale p3) */
+ return w?w>=440:true}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);

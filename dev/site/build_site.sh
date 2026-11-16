@@ -2,6 +2,8 @@
 # Build the PWA site at the repo root from dev/build (no scratchpad). usage: bash dev/site/build_site.sh  (does not commit)
 set -e
 R=$(cd "$(dirname "$0")/../.." && pwd); D=$R/dev
+# KIT §0 build check: no width/height/orientation breakpoint inside the design canvas (html.kv1 / html.kv2 only)
+node $D/measure/media-check.js
 python3 $D/build/assemble.py
 # picture CDN base (dev/build/jcdn.js; CTM_IMG_BASE overrides, empty = local img/): the boot cover (kboot.js) and sw.js use it
 IMG_BASE=${CTM_IMG_BASE-$(sed -n 's/^const IMG_BASE="\([^"]*\)";.*/\1/p' $D/build/jcdn.js)}

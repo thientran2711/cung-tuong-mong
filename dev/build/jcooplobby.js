@@ -18,7 +18,7 @@ st.textContent=`
 .kcol-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 4px}
 .kcol-act .kbtn{min-height:46px;white-space:normal}
 .kcol-act .kbtn.k1{grid-column:1/-1}
-@media (max-width:420px){.kcol-act{grid-template-columns:minmax(0,1fr)}}
+
 .kcol-act .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.74rem;opacity:.9}
 #coopfz{z-index:9500}
 #next.kcwait{white-space:normal!important;line-height:1.12!important;font-size:.9em;overflow:hidden}

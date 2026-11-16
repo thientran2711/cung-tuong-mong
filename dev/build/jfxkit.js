@@ -54,7 +54,7 @@ function kfkLoad(names){names=(Array.isArray(names)?names:[names]).filter(n=>KFK
    for(let i=0;i<K.n;i++)fr.push(new P.Texture({source:base.source,frame:new P.Rectangle(i*K.s,0,K.s,K.s)}));KFK.tex[n]=fr;KFX.tex[n]=fr;KFK.loaded.add(n);return fr})
    .catch(e=>{delete kfkTexP[n];throw e});return kfkTexP[n]})))}
 /* the ONE particle maker (jfx kfSp calls this): pooled Pixi sprite with a painted frame */
-const KFK_CAP=()=>innerWidth<700?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
+const KFK_CAP=()=>kitView().pages===1?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
 function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;if(KFX.parts.length>=KFK_CAP())return null;
  let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
  s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.rotation=Math.random()*6.28;s.visible=true;

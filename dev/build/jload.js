@@ -39,7 +39,7 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 .kprog-s{font-size:.76rem;color:var(--dim);min-height:1.2em}
 .kload .kpopts{display:flex;justify-content:flex-end;gap:8px;padding:2px 14px 12px;margin:0}
 .kload .kpopts:empty{display:none}
-@media (max-width:599px){.kload .klb{padding:8px 10px 2px}.kload .kpopts{padding:2px 10px 10px}}
+/* kv3:.kv1 */:where(.kv1) .kload .klb{padding:8px 10px 2px}:where(.kv1) .kload .kpopts{padding:2px 10px 10px}
 .kloadchip{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700;max-width:calc(100vw - 16px);opacity:.92}
 .kloadchip .kchip{display:inline-flex;align-items:center;gap:7px;margin:0;font-size:.72rem;padding:3px 10px;border-color:var(--gold);background:#fffaf0f0;box-shadow:0 2px 8px #0003;cursor:pointer;font-family:inherit}
 .kloadchip .kprog-t{width:64px;flex:none;height:6px}

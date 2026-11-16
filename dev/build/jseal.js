@@ -63,12 +63,8 @@ header.hud.kseal-pad>.kseal-hud{top:calc(50% - var(--kseal) / 2)}
 /* one-row bar 1000–1179 px (iPad landscape small): the quẻ line ran into the stat cells even before the seal (−58 px with "Quẻ Thượng
    thượng (Giao thiệp)" at 1000 px); the stat cells take the phone's label form (icon only, name in the tooltip) so time + quẻ, cells and
    seal all fit */
-@media (min-width:1000px) and (max-width:1179px){
- html body header.hud.kseal-pad #kstrow{gap:0 6px}html body header.hud.kseal-pad #kstrow>.kstg+.kstg{padding-left:6px}
- html body header.hud.kseal-pad #kstrow>.kstg{grid-auto-columns:minmax(34px,auto);column-gap:4px}
- html body header.hud.kseal-pad{--kseal:34px;--ksealR:6px}html body header.hud.kseal-pad .k3tt>*>*{margin-right:7px}
- html body header.hud.kseal-pad #kstrow .kst>.kstl{font-size:0;gap:0}html body header.hud.kseal-pad #kstrow .kst>.kstl img.ic{width:16px;height:16px}}
-@media (max-height:500px){header.hud.has-kseal{--kseal:30px;--ksealT:4px;--ksealR:6px}}`;document.head.appendChild(st)})();
+
+`;document.head.appendChild(st)})();
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{kitSealHud()}catch(e){}return r}}
 try{kitSealHud()}catch(e){}
 /* ================= §39.1 THE SEAL ON EVERY EVENT FRAME (owner 15/11 ~20:15Z, review/cal-plus) =================
@@ -105,7 +101,7 @@ function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&
  const put=(x,y,z,c)=>{s.style.setProperty("--kseal",z+"px");const R=c==="br"||c==="tr"||c==="room",B=c==="br"||c==="bl"||c==="room";
   s.style.left=R?"auto":x+"px";s.style.right=R?P+"px":"auto";s.style.top=B?"auto":y+"px";s.style.bottom=B?P+"px":"auto";s.dataset.c=c;s.dataset.sz=z;
   try{if(window.__ksRO&&dlg.__ksRO!==1){dlg.__ksRO=1;window.__ksRO.observe(dlg)}}catch(e){}};
- const big=innerHeight<=500?KSEAL_EV.sz.slice(1):KSEAL_EV.sz;
+ const big=KSEAL_EV.sz;
  if(!dlg.classList.contains("kseal-room"))for(const z of big){const C=[["br",iw-z-P,ih-z-P],["bl",P,ih-z-P],["tr",iw-z-P,P],["tl",P,P]];for(const [c,x,y] of C)if(free(x,y,z)){put(x,y,z,c);return}}
  const z=big[big.length-1];if(!dlg.classList.contains("kseal-room")){dlg.style.setProperty("--ksealroom",(z+P*2)+"px");dlg.classList.add("kseal-room")}
  const ih2=dlg.clientHeight;put(iw-z-P,ih2-z-P,z,"room")}

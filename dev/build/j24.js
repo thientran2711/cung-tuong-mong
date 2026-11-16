@@ -96,4 +96,4 @@ wrapR("scout",()=>"Sai tai mắt dò nơi ở");wrapR("invite",()=>"Mời đến
 (function(){const p0=pushDil;pushDil=function(){try{if(S&&!S.dead)stat().un++}catch(e){}return p0.apply(this,arguments)}})();
 (function(){const n0=nightScene;nightScene=function(){try{if(S&&!S.dead)stat().un++}catch(e){}return n0.apply(this,arguments)}})();
 /* the status drawer closes on a tap outside it (narrow screens) */
-document.addEventListener("click",e=>{const el=$("hud2");if(!el||el.classList.contains("col")||e.target.closest("#hud2")||matchMedia("(min-width:1200px)").matches)return;window.__h2c=true;try{localStorage.setItem("hclh-h2c","1")}catch(x){}renderHud2()});
+document.addEventListener("click",e=>{const el=$("hud2");if(!el||el.classList.contains("col")||e.target.closest("#hud2"))return;window.__h2c=true;try{localStorage.setItem("hclh-h2c","1")}catch(x){}renderHud2()});
