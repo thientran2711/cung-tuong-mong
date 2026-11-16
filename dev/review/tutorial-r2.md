@@ -1,6 +1,6 @@
 # Review: review/tutorial-r2 @ 10a37960b9 (reviewer branch review/tutorial-r2-r6)
 
-Verdict: PASS (after one reviewer fix, wording).
+Verdict: PASS (after one reviewer fix, wording). Re-merged onto origin/main a3dbdc19f (elder-staff now in main: guide = "Tống ma ma, Giáo tập ma ma" with her face, verified at 755x1000).
 
 ## Fix made by the reviewer (jtut.js)
 Real time model (j3.js advance, jtime4.js, HX.date in j84.js, j2.js map help): a month = 3 tuần, a tuần = 4 buổi (sáng, trưa, chiều, tối),
