@@ -36,3 +36,14 @@ Moved to Foreman D: slap-mg (§79), coop-chat (§80), act waves 2–3, HD upscal
 
 - (16/11) OWNER RULE (claim before work): a foreman (or the main chat) CLAIMS an item BEFORE opening the worker session: write "<item> | <branch> | <session id> | RUNNING | <UTC>" in its STATUS and in the shared dev/handover/CLAIMS.md, then pull --rebase and push at once. If the item is already claimed in CLAIMS.md by anyone, do not take it. The main chat checks CLAIMS.md against every foreman slice on each hourly wake; it fixes duplicates, re-opens stale claims (no push for 3 h) and reports conflicts to the foreman.
 - (16/11 s9 05:30Z) main = a363cc14a (goal-strip-fix-r1 fast-forwarded). merge-train-4 told to merge it. TODO next wake: weather-fx-one finishing worker session (reports/weather-fx-one.md); kit-keeper sign-off for scheme-games-port-r1 (jopic.js grid-auto-rows); tuduc-pic reviewer is Foreman B's.
+
+## S9 STATE 16/11 05:41Z
+main = 0a311183f (goal-strip-fix-r1 a363cc14a, then reign-road-r1). Hourly self-wake trig_01TB5oP2dRRJ6rDRMZvp9Z85 (:20).
+Main-s9 sessions running (all told to merge newest main before final push; each writes reports/<name>.md):
+- merge-train-4 session_01UV1SzkP9E6Y2WTYPMnL4C9 (12 PASSes)
+- merge-hot-1 session_01UV1Szkb26qWiEe1bacAQvL (modal-scroll-r1 LIVE BUG Học Cầm swipe, log-sync-r2 LIVE BUG Ân tình 0→N, book-fig-r1) → ff FIRST when ready
+- coop-night-sync-r1 reviewer session_01UV1SzhQrqEEYDtLXNUvhdo (opus, URGENT) → on PASS ff + push-notify owner (co-op fixes live)
+- kit-sweep-r1 reviewer session_01UV1SziYTkPQjJKnWcb8GoX
+Still to do: weather-fx-one finishing worker (reports/weather-fx-one.md); kit-keeper sign-off scheme-games-port-r1 (jopic.js grid-auto-rows); pcard-actrow-r1 verdict pending from s8.
+Owner answers this session (all in OWNER_DECISIONS): pregnancy 1+3 → Foreman D D57; D art → Foreman C; Thái hậu archetypes keep; thiếu lễ keep −2.8; robbed-clothes re-issue random 1–3 wk; foreign princess (nc Nam Chiếu, bd Bắc Địch): own home-costume sets by rank below Quý phi, court robes from Quý phi; home maids home dress at low rank, palace uniform at high rank; SAMPLES FIRST (Foreman C → reports/foreign-princess-samples/) → send to owner.
+Open owner question: how many home maids follow each foreign princess (1 proposed / 2 / none) — the home-maid feature does not exist yet. Remaining old questions: Q12/Q13 cycle lies, Q22 scheme minigame on bribery/eavesdrop, Q20 leaderboard login (B), Q15/Q17 (B).
