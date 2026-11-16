@@ -1,6 +1,6 @@
 # PROGRESS review/coop-night-sync-r1 (reviewer, coordinator session 9, 16/11)
 
-Target: review/coop-night-sync @ 22e7932d. Branch r1 = that sha + merge of origin/main a363cc14, then 0a311183 (reign-road), then 02a0d3f1 (act-dedupe), then c4e89f89 and 0c23da40 (kit-sweep: co-op clock strip removed) (outside-r2-r2: jkc home road; jcoopworld begin() conflict resolved = branch snapshot restore + main's CW.fWasHome); sw.js/index.html/assets.json rebuilt each time, never hand-merged (one conflict in
+Target: review/coop-night-sync @ 22e7932d. Branch r1 = that sha + merge of origin/main a363cc14, then 0a311183 (reign-road), then 02a0d3f1 (act-dedupe), then c4e89f89, 0c23da40 (kit-sweep: co-op clock strip removed), a942395b (cloud save Sổ mây, per-room pid) (outside-r2-r2: jkc home road; jcoopworld begin() conflict resolved = branch snapshot restore + main's CW.fWasHome); sw.js/index.html/assets.json rebuilt each time, never hand-merged (one conflict in
 dev/build/jcoopworld.js fromCanon buổi clamp: kept the branch's `LASTB()` = B4L (3), main had literal 3; same value). Site rebuilt
 with dev/site/build_site.sh (index.html, sw.js, assets.json not hand-merged).
 
@@ -18,6 +18,7 @@ with dev/site/build_site.sh (index.html, sw.js, assets.json not hand-merged).
 | coop-night run 7 (after case-3 fix) / run 8 (after isRd for all night presses) | 104/105 (guest already ready, same flake) · 105/105 |
 | FINAL on main c4e89f89: coop-night / coop-rejoin-stats / coop-e2e / coop-timer | 105/105 · 31/31 · 59/59 · 43/43 |
 | FINAL on main 0c23da40: coop-night / coop-timer / coop-e2e / coop-rejoin-stats | 105/105 (run 12; run 11 104/105 = same night-ready flake in case 4, test fixed) · 43/43 · 59/59 · 31/31 |
+| FINAL on main a942395b: coop-night / coop-e2e / coop-timer / coop-rejoin-stats | 105/105 · 59/59 · 43/43 · 31/31 (rs8 29/31: host drew the jkc home road, guest has no palace friend entry by design; assertion now accepts COOPW.friendHome) |
 | solo boot at 755x1000, 1180x820, 844x390 | game starts, no co-op clock, no overflow; "Sang buổi" steps |
 
 coop-rejoin-stats.js (new): host rejoins mid-buổi, then guest rejoins mid-buổi, after both did acts (+tài/+sắc, khắc spent):
