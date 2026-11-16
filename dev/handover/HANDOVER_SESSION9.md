@@ -29,3 +29,4 @@ Moved to Foreman D: slap-mg (§79), coop-chat (§80), act waves 2–3, HD upscal
 ## Known follow-ups
 - The #kload first-run panel is wider than 560 (kpanel-compact note).
 - The disk on this box is tight; git prune + old worktrees removed (owner allowed cleanup).
+- (16/11 05:12Z) Main session 9 created (session_01UV1SziGvry1bKMUgXYLvuE). Session 8 = relay only (writes reports/), its hourly watch cron removed; it archives itself when its agents are done.
