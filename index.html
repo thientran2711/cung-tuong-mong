@@ -16786,12 +16786,17 @@ function faceChoose(id){if(!faceOn()||!id||id===S.pid||!f88List(id).length)retur
    no role. She is now ONE persistent person (S.lyF, saved; same face every visit) drawn from the cold-palace consort art (tier cold:
    plain clothes, no jewellery, no forehead mark), with the matching round portrait in the talk panel.
    Loaded right after j88 (its tier-aware picker gives consort-rank dress only to the player and rivals: f88Wear). */
+/* B-answers art (D50): Phế phi họ Lý, Quản sự Tân Giả khố and Thầy dạy Thượng thư phòng have their OWN identities (FIGURES-others.json roles
+   fallen/steward/tutor, 4 age bands each, same manifest format). Until the manifest lists them, Lý keeps the cold-palace consort art. */
+const NPCFIX={tgk:{name:"Quản sự Tân Giả khố",age:36,role:"steward"},ttp:{name:"Thầy dạy Thượng thư phòng",age:36,role:"tutor"}};
+function lyArt(){try{return !!(FIGIX&&FIGIX.fallen)}catch(e){return false}}
+function npcFixOf(p){if(!p||p.kind!=="npc"||p.sid)return null;const k=Object.keys(NPCFIX).find(k=>NPCFIX[k].name===p.name);if(!k||!(FIGIX&&FIGIX[NPCFIX[k].role]))return null;S.npcFix=S.npcFix||{};if(!S.npcFix[k])S.npcFix[k]={name:NPCFIX[k].name,age:NPCFIX[k].age,npcFix:k};return S.npcFix[k]}
 function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:34,lyF:1};return S.lyF}
-(function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref)return lyFallen()}catch(e){}return w0.apply(this,arguments)};
- const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return["consort"];return r0.apply(this,arguments)};
+(function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
+ const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
  const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF)return -1;return t0.apply(this,arguments)};
- if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&who.lyF)return true;return e0.apply(this,arguments)}}
- if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){const r=f0.apply(this,arguments);try{if(p&&p.kind==="fallen"&&!p.ref){const src=figFor(p,"por");if(src)return Object.assign({},r,{src,hue:0})}}catch(e){}return r}}})();
+ if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&(who.lyF||who.npcFix))return true;return e0.apply(this,arguments)}}
+ if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){const r=f0.apply(this,arguments);try{if(p&&((p.kind==="fallen"&&!p.ref)||npcFixOf(p))){const src=figFor(p,"por");if(src)return Object.assign({},r,{src,hue:0})}}catch(e){}return r}}})();
 /* ================= j89 TRANH SỰ KIỆN (data only: no CSS, no HTML, no UI) =================
    img/EVENTS.json = {default, categories:{cat:{title,files:[...]}}, events:{eventId:cat}}; art = img/ev-<cat>[-n].webp, 3:4, no faces.
    evArtOf(eventId, salt) -> image path ("" before the manifest loads). The kit owner wires it into news / week-book pages.
@@ -43425,7 +43430,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="13bc24c234f1";window.CTM_BUILD=BUILD;
+const BUILD="117a09e7df82";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
