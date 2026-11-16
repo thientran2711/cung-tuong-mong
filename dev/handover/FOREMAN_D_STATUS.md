@@ -50,6 +50,8 @@ main at start = eba64ead4.
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
+| MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade | opus | worker (opening) RUNNING 13:45Z |
+| ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger | opus | worker (opening) RUNNING 13:45Z |
 
 ## PASS (for the main coordinator to fast-forward)
 - READY review/preg-rate-r1 1c31bd7957367b7f27c550e60f7668d3a09cefc5 (D57: conception ×2 + fertile-window peak; reviewer unified tryst/NPC-affair/Tư thông rolls into trystCh (BAL.trystC); sims NPC births/consort-yr .06→.10, palace kids 10y 6.2→9.5, peak kept; ancestor main e9c6021d; report reports/preg-rate-r1.md). Follow-ups (non-blocking): j42 servant-mode tryst typed roll(10); VANPHONG doc gap for side-chance ladder Rất thấp…Rất cao (OD:L221) → kit keeper.
