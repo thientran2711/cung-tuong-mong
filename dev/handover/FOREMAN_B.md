@@ -89,3 +89,4 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
   Q24: moot now — D11 READY, D13 running at B; D19 stays B (start when econ is on main); D14 + D44 = art → Foreman C.
   Q25: YES add Thái hậu dislikes; YES show a 'thích' row for consorts (known likes) next to 'ghét'.
   D31 / Q6: balance-pass-r1 rides merge-train-6 (main s16 GO given 12:17Z) → start the re-measure + HH ~32 % tuning as soon as it is on main.
+- (13:04Z s16) balance-pass-r1 is LIVE (main e9c6021d, merge-train-6) → start the D31 difficulty re-measure + HH ~32 % tuning now.
