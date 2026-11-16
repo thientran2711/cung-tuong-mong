@@ -84,3 +84,7 @@ Method: each NC rank = edit of the v15 figure (same body/face/pose), c01 face (K
 Caveat: Quý phi B skin looks a little more tan/warm than the new Đáp ứng/Tần/Phi; BD Tần is warm-pink. Not unified yet; one more pass if she says so.
 Credits: 10 x 40 = 400 (v8-v16 total 2,960).
 STATUS: WAIT for the owner's verdict on v16; then STEP 2.
+
+## v16b SAMPLE READY (Foreman C: put the skin-fixed BD Tần + Quý phi B on the sheet). v16 sheet deleted.
+File: `foreign-princess-art/sample-v16b.jpg`. BD Tần (YMsdzwNWeC) and NC Quý phi B (aFA5hMifSh) = skin-only edits (c01 skin ref), outfit unchanged, labelled "da đã chỉnh, đồ giữ nguyên"; NC Đáp ứng/Tần/Phi as v16. Skin-fixed BD Tần differs slightly from the approved one (hair/headband re-rendered a little). Credits already counted (v8-v16 total 2,960); v16b 0.
+STATUS: WAIT for the owner's verdict.
