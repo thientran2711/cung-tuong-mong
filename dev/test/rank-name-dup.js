@@ -1,6 +1,6 @@
 /* usage: NODE_PATH=$(npm root -g) node dev/test/rank-name-dup.js <url> [WxH] — exit data {R:{}} = no doubled titles */
 /* doubled title scan: a painted .kname whose title also stands in a short sibling label (card rank line) — every tab, every Hậu cung person + sub-tab, mood, spy, dialogs */
-const {chromium}=require('playwright');const [,,URL,SZ]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);
+const {chromium}=require('./lib/pw-roulette');const [,,URL,SZ]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});p.setDefaultTimeout(900000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,150)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:300000});await p.waitForTimeout(2000);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
