@@ -75,3 +75,7 @@ Owner questions OPEN: (1) story roads 14-chapter plan (my recommendation in chat
 Decided this session (all in OD): faction win → every side direct rank with its own loss; first prince direct rank, later sons/princess exam waived; full seat → large one-off compensation, no seat claim; every reward has a gain and a loss; related items to one foreman (D41 → C, D51 wiring → main art); C's non-art D-list → B; art samples main / mass C.
 Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opus only rules/numbers/structure. Never haiku.
 - (06:25Z) MAIN SESSION 11 = session_01UV1SziSAVAzqFNXUuCHUm7 (opened by s10). Session 10 stops; messages from workers should go to session 11.
+## S11 (session_01UV1SziSAVAzqFNXUuCHUm7) 16/11 06:25Z
+- Hourly self-wake trig_018KeLcdXKabaXpFYzAiCYxf (:25, human_request). s10 trigger trig_01RTZd5kBXL9txgwZ14BG1ux DISABLED.
+- Read PRIORITY_RULES.md in full. OWNER_ART_RULES.md: read in full BEFORE the first art action (art paused until the owner's morning).
+- ff check vs main c4e89f89: merge-hot-1 aa3a4863 / merge-hot-2 9fed4864 / coop-night-sync-r1 73b582f9 / kit-sweep-r1 3b9c6976 / merge-train-4 6678be46 — none descend from main. merge-hot-1 is re-merging c4e89f89 itself; the other four were messaged to merge origin/main, re-test, report the sha to s11.
