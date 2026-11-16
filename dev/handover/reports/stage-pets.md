@@ -43,3 +43,11 @@ The number per page does not drop (2 per page as before, so "3 people" is still 
 
 ## Handover (worker context)
 START_CTX ≈ 10 %; ended ≈ 35 %. Nothing pending except the items above.
+
+## ROUND 2 HANDOVER (worker at 29 % context, START ≈ 3 %: rollover band reached; coordinator opens the successor)
+s21 asked: (1) 3 people + 3 pets on the stage at once (iPad, Fold if it fits), (2) n3LLL shot lacks the place painting, (3) S pet too tiny on Fold, show px per class/device, (4) mark the Hoàng hậu silhouette as placeholder on the sheet. Findings so far:
+- (1) The 2-per-page limit is NOT caused by pets: with NO pets the baseline already shows 2 people + "+N" chip (dbg: iPad free width 374 px beside the right plaque column + 46 px page-chip gutters, N=2, body H 230; Fold N=2, H 311). MAXN=3 only happens when 3 art widths fit one slot spacing (sw = free/(N+1)). 3 on one page needs sw ≈ 93 px → H ≈ 130 px (−45 % vs baseline), too small with art ≈ .54 H wide. Real levers (owner decision, KIT 33.7 area): (a) hide/narrow the right plaque column (kshR, ~140 px) on stages with 3 people, (b) drop the page-chip gutters when 3 fit, (c) let neighbours' sleeves overlap (rejected by OD:L1049 never overlapping), (d) pets overlap neighbour hems. Measure each with `dev/test/stage-pets.js` (`dbg` = N / H / slot spacing / widest art / pet extra). Recommend asking the owner: accept 2+“+N” per page (as today), or free the right column.
+- (2) Cause not found yet; the test waits for pets, not for the backdrop. Fix: in stage-pets.js wait for `#scimg` natural size > 0 (and `.complete`) before the shot, and re-shoot n3LLL both sizes.
+- (3) Pet visible heights = class × H: iPad 2 people H≈200 → S 36 px, M 52, L 68; Fold H≈260 → S 47, M 68, L 88; 1 person 542 → S 98, M 141, L 184. If S reads too small, raise `KIT_PET.h.S` (.18 → .24) — costs width (re-measure).
+- (4) Placeholder labels: Hoàng hậu = unknown-silhouette (stranger art), pets = placeholder pictures (data-ph).
+Code state: review/stage-pets fdaba9cae unchanged; worktree /home/user/wt/sp (sparse), servers on 8955/8960 can be killed.
