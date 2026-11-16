@@ -94,3 +94,15 @@ thỉnh an no longer flat +8 (depends on the target's personality/virtues, her s
 1. Run baseline on main (sens + rand, ~40 lives) with inpers.js; record table.
 2. Code jtrong.js + BAL.trong, migration in deser, Thái hậu archetypes, thỉnh an function.
 3. Re-measure, compare (th avg/max, hhTurn rate, consort rel), tests at 5 viewports, PROGRESS update, push.
+
+## Reviewer r1 (16/11, branch review/personality-r1)
+- Merged latest origin/main (assemble.py: main list kept, jtrong.js right after jaudit.js); site rebuilt.
+- Fixes: (1) co-op friend (id/sid 901/902, `.coop`) now gets the same nết/trọng on both seats (`trTraits` uses P_TR[hash("me:"+name)], key `me:name`);
+  before, the friend object carried trait "Nhu mì" so the other seat computed different virtues. (2) jpcf "Sở trọng" showed Thái hậu's PERS trait
+  to strangers and disagreed with the card chip → now archetype name once met at thỉnh an, else "chưa rõ".
+- Tests: trong-check.js (old main save loads, migration, curves, neglect −3, cards at 6 viewports, 0 errors); host mode (device.js from review/ua-test):
+  fold / ipadAir / iphone14Land cards ok, no overflow, no cut chips, iphone14 portrait = rotate prompt; coop-e2e 59/59.
+- Bot (sens, 8 lives, CAP 2700 s, box load ~25): Thái hậu max ≥84 in 8/8 lives, end ≥55 in 6/8; year-1 regard negative in 3/8 (Đa nghi / Quyền uy
+  + thiếu lễ −5 > greeting +4 while under-dressed; the card shows it). No HH in 8 lives (worker: 6/28). 1 CRASH in j91 minigame `finish` (not this branch).
+- Notes for follow-up: jaudit `aaHostStrict` counts Đa nghi/Kiêu ngạo as strict but not Nghiêm khắc ("Thẳng thắn"); same-name co-op players share
+  nết/trọng and the friend's card is read as hers (kitPersonByName/pcard by name — family issue); Trọng is not yet listed in jpcf "Sở trọng".
