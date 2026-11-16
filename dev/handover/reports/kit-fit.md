@@ -109,3 +109,11 @@ fest (owner's VIỆC Tiết Thanh minh), choice, many, court0 (person-card act r
 - Week book (Tuần lục) person page (j87 kitStageFig + kitBookFigClamp) and the identity card (kpIdFig) have no header-rule/frame-bottom pair of their own
   (book page / full card); not changed — tell me if the owner wants the same equal-gap rule there.
 - review/kit-size v3 (unapproved sample) not wired; its measured "figure gap ≤ 1 px" is consistent with this rule.
+
+## HANDOVER (rollover at ~START_CTX+25 %, 16/11 19:15Z) — two KIT REQUESTS from MAIN s21 NOT started; successor (opened by MAIN s22) does them on review/kit-fit
+1. Save-slot row `.kslot` (j74 "Chọn sổ"): 3 full rows (Kiếp/Tuổi/Ngày + buttons) make the iPad 1180x820 panel scroll. Make the ONE kit slot row compact
+   (info left, buttons right in 2 columns on wide panels) so 3 rows + Phúc duyên fit on iPad without scrolling; Fold may scroll. review/chonso-tabs 5099b51cf
+   adds tabs to that panel (under review): base on it or keep the change inside .kslot only.
+2. Card flip §67 (jflip): Fold 755x1000 row labels overlap under the raised card; iPad 1180x820 a faded label shows through the result chip. Fix in the kit
+   card-flip layout; before/after shots (labelled, full screen). Probe hint: kit-conform.js hides `.kcf` — the flip overlay is #kroul/.kcf.
+Recipe: worktree + `bash dev/site/build_site.sh` + `python3 -m http.server`; restore index.html/sw.js/assets.json before commit; re-run dev/test/kit-fit.js (must stay 0).
