@@ -53,4 +53,13 @@ Keep each kind's key (`tho`, `doi`, `doden`, `le`, `tc`, `xa`, `thq`) so every c
 
 All seven call `mgTier(kind, occ)` (below, STEP 2) for their difficulty and finish through the normal `env.end(raw0to10)`.
 
-## STEP 2 — difficulty tiers (in progress; API section will be filled in here before workers need it)
+## STEP 2 — difficulty tiers: API for review/nw-* (11/16/2026, code on review/mg-balance, numbers being calibrated)
+File `dev/build/jmgt.js` (assembled right after j91), numbers in `BAL.mgTier` (`dev/build/jbal2.js`, end of file).
+- `mgTier(kind, {occ, rank?, lv?, p?, big?})` → `{occ, occName, rank, stake, lv, d, tier 0|1|2, word Dễ|Vừa|Khó, ease 0..5}`.
+  occ: `hoc` lessons/self-practice/works · `hoi` festival contests (j71) · `trieu` Emperor's summons (jts) · `exam` khảo hạch (rank = TARGET rank) · `tuyen` Phúc tuyển (jkc).
+  stake = BAL.mgTier.occ[occ][0] + [1]×rank (+big); d = stake − her art level; ease = mid − slope×d + kAdj[kind] (clamped 0..5).
+- `mgSet(kind, o)` sets `KG82.tier` and `KG82.lv = ease` before `kg82Play`; startContest / playArt / kg82Lesson / jexam / jts already call it.
+- **Inside an engine: `env.lv` IS the ease (0 = hardest, 5 = easiest).** Scale your windows/time/pieces with it like j91 does. Aid tiers: `kg82Tier(env.lv)` → 0 Dễ (aids on board) / 1 Vừa / 2 Khó (aids on Gợi ý only), thresholds BAL.mgTier.aid. NOTE: kg82Tier was "low lv = easy" before; it is now ease-based (high = easy).
+- Intro row "Độ khó": `mgDiffTxt(KG82.tier, kind)`. Result word: `kg82Word(raw)` = `mgWord(raw)` (BAL.mgTier.word).
+- Keep the kind key (`tho`, `doi`, `doden`, `le`, `tc`, `xa`, `thq`) and expose `KG82.peek()` (the right move: `{x,y}` tap, `{drag:[[x,y],…]}`, `{sel:"css"}`, `{hold:bool,x,y}`) — the balance bot `dev/measure/mg-bots.js` plays every engine through it.
+- Measure your engine: `node dev/measure/mg-bots.js <url>/index.html <kind> e1,e2,e3 skilled,random 30 3 out.json` (virtual clock, fast). Target at the matching level (ease = mid): skilled raw ≥ BAL.mgTier.word[3] ("Xuất sắc" ≈ Tuyệt phẩm) in 20–30 % of plays, random ≈ 0 %; if off, add a trim in `BAL.mgTier.kAdj[kind]` (not in your engine).
