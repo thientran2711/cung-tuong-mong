@@ -29,7 +29,7 @@ main at start = eba64ead4.
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance-r1 @9a1133f0 | opus | PASS (value-neutral ONE-CORE fixes; P1–P3 proposals wait for owner, see QUESTIONS; reviewer archived) |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
-| kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | worker session_01DgYSWng42neb9J7kedxhVp RUNNING (10:55Z) |
+| kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix @de331af6 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer kc-roads-cn-nc-fix-r1 session_01DgYSWkvGFpv3Z1xMBG8TJC RUNNING (merges entry-exam-r1 too) |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid-r1 @3a875687 | opus | PASS (see ## PASS; reviewer archived) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
@@ -143,6 +143,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 12:20Z: kc-roads-cn-nc-fix SẴN SÀNG KIỂM de331af6 (Chờ gap cnv +47→−7, nc +94→+17) → opus reviewer, tests it merged with entry-exam-r1; worker archived.
 - 12:18Z: emperor-visit SẴN SÀNG KIỂM 16a2d41e → opus reviewer (also: fix j8 nx() shown ≠ applied night numbers; morning card → KIT §81 end button). ART NEEDED (for main/C): 'Sáng hôm sau' morning banner for the visit night.
 - 11:53Z (hourly): no new D inbox orders. 5 D sessions alive: kc-roads fix (running, 8/8 home-route tests), coop-b1b5 fix, emperor-visit (visit half, bot run), name-mask (final scans), seatcap (sim lives 9–20). jmort.js still not on main 695934d1 → D4 + D57 keep waiting. No free real D items → no new spawns.
 - 11:51Z: entry-exam-r1 PASS d7364cb2 → READY (ship after kc-roads fix + mg-balance); reviewer archived; kc-roads fix worker told to build on top of it.

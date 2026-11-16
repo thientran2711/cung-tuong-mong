@@ -146,7 +146,7 @@
 | coop-guest-maid review (opus) | review/coop-guest-maid-r1 | D | session_01DgYSWm8Dq4FhHzrbnuCRGL | PASS 3a875687 | 16/11 10:34Z |
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
 | entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | PASS d7364cb2 | 16/11 10:48Z |
-| kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | RUNNING | 16/11 10:55Z |
+| kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | DONE SẴN SÀNG KIỂM de331af6 | 16/11 10:55Z |
 | danh-balance review (opus) | review/danh-balance-r1 | D | session_01DgYSWncjcb6DFsEZJo6AvA (opus) | PASS 9a1133f0 | 16/11 10:58Z |
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | PASS ebc85f78 | 16/11 11:06Z |
@@ -167,3 +167,4 @@
 | promo-reveal-fix: LIVE regression rank-up chest + servant reveal no longer show (bisect + whole-group fix) | review/promo-reveal-fix | main s16 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus, ex promo-skip reviewer) | RUNNING | 16/11 12:17Z |
 | emperor-visit review (opus) | review/emperor-visit-r1 | D | session_01DgYSWoamKdMf5ewt8WHax6 | RUNNING | 16/11 12:18Z |
 | cardflip-glow2 REVIEW (sonnet; owner-bug fast lane) | review/cardflip-glow2-r1 | main s16 | session_01UV1Szk2fgA2KyKg3zrmLgn | RUNNING | 16/11 12:19Z |
+| kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | RUNNING | 16/11 12:20Z |
