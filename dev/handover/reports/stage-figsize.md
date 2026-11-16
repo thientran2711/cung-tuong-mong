@@ -1,6 +1,6 @@
 # stage-figsize HOTFIX — report (worker session_01UV1SziFt6yExRxFGSGFA24, 11/16/2026)
 
-Branch **review/stage-figsize @ 91250714** = review/stage-pets-r7-r1 (r7 6aaca31a + r1 cea021e3) + origin/main b53ba8b9 + this fix. SẴN SÀNG KIỂM 91250714 (header/tab-bar item: see 5).
+Branch **review/stage-figsize @ 2f071fe8** = review/stage-pets-r7-r1 (r7 6aaca31a + r1 cea021e3) + origin/main b53ba8b9 + this fix. SẴN SÀNG KIỂM 2f071fe8 (all items incl. 5).
 
 ## 1. Root cause (owner photos refs/owner-figsmall-ipad-1116.jpg, owner-figsmall-fold-1116.jpg, owner-eunuch-clip-fold-1116.jpg)
 Measured in-frame (host mode, rot.js design canvas), 392fff60 vs 1aa0edb2, her + 1 maid (2 slots):
@@ -44,11 +44,11 @@ Other figure places touched by --kvh (dialogs kesimg, kidfig2, zoom): unchanged 
 - kit-conform 755x1000: 89 CONFORMS / 14 MISSING; r7-r1 base 88–89 / 13–14 (same noise).
 - build_site OK, img-allowlist OK, node --check OK.
 
-## 5. iPad header right cut + tab-bar gap (s24 add, owner ~21:15Z) — NOT reproduced, photo missing
-- refs/owner-ipad-header-tabs-1116.jpg is not on the handover branch nor main.
-- Design canvas 1180x820 old vs new: header 132 → 129 px, nothing clipped (scrollHeight = clientHeight, 3 heroines; buổi dots + 'Chưa điểm trang' shown); tab bar flush 814/820 in both.
-- Host geometry for landscape is unchanged by page-scale (rot.js changed only the portrait page.h). 1366x1024 (4:3) letterboxes the 1180x820 canvas: 37 px paper bar top AND bottom, same in 392fff60 — a candidate for 'dư một khúc ở dưới' on iPad Pro.
-- Next: with her photo, measure that exact viewport (Safari bars / PWA safe areas) and fix in rot.js geo (KIT §0).
+## 5. iPad header top cut + strip under the tab bar (owner photo CDN img/_review/owner-refs-1116/owner-ipad-header-tabs-1116.jpg, 4:3 iPad, home-screen app)
+- Photo: the iOS status bar band covered the top ~36 design px of the frame (buổi dots + 'Chưa điểm trang' row gone, top of her name and the seal cut, Bạc/Sức values pushed under the stage edge) and a paper strip sat under the tab bar.
+- Not page-scale: in the 1180x820 design canvas the header (132 → 129 px) is never clipped. Cause = rot.js host geometry ignored env(safe-area-inset-*) and centred the 1180x820 canvas on the 4:3 screen (1366x1024: 37 px strip top and bottom); same in 392fff60.
+- Fix (rot.js, KIT §0 host): the frame is fitted into the screen minus the safe-area insets (top / left / right; status bar never covers the game) and, in landscape, stands flush on the SCREEN bottom (tab bar flush, the 4:3 spare strip goes to the top beside the status bar; the home-indicator line may sit over the lowest px of the 44 px tabs). Narrow rotated phones unchanged.
+- dev/test/host-safe-area.js (insets injected via window.__kinsetsTest): 1366x1024 (24/20 and 0) frame 0,75..1366,1024; 1180x820 with 24/20 → 17,24..1163,820 (s .97); 1180x820 plain 0,0..1180,820; 1024x768; 755x1000; 412x1058 rotated — PASS. quickcheck PASS after the change.
 
 ## Handover
 Context ~16 % at stop. Worktrees: /home/user/wt/stage-figsize (branch), fs-old (392fff60), fs-r7, fs-r7r1, fsz (scripts + shots) — delete after review.
