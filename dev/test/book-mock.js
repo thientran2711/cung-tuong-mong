@@ -3,7 +3,7 @@
    kitBookPic illustration (real scene + real full-body figure). iPad = spread; phone/Fold = the right page only.
    usage: node dev/test/book-mock.js <baseURL> <W>x<H>@dpr <outdir> <tag>
    Writes <outdir>/<tag>-{phitan,dudo,tutrang,cungnhan}.jpg + <tag>-turn-{30,55,80}.jpg (tab switch Phi tần → Cung nhân, frozen mid-curl). */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));

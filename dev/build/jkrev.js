@@ -83,8 +83,8 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
 .krev>.kitem>.kitg{display:none}
-.krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp .4s calc(var(--krise)*.6) ease-out both}
-.krev>.kgchip{position:relative;animation:krevUp .4s calc(var(--krise)*.8) ease-out both}
+.krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
+.krev>.kgchip{position:relative;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
 .krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
 .krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
 .krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
@@ -105,6 +105,6 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 `;document.head.appendChild(st)})();
 /* kit sample page (#kit, jkitpage): §54.1 grade chips + one reveal spotlight, §54.2 the lose card picture */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
- {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} ${kitGradeChip(1,{size:"sm"})}</div>`+
+ {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",where:"<b>ONE chip part</b> <code>kitGradeChip(grade,{size,name,extra})</code> in two sizes, never two parts: <b>normal</b> = under the item name on the reveal card (kitGain / kitReward), item detail, lists; <b>sm</b> (<code>size:\"sm\"</code>) = the grade tag laid over an item picture / inside a tight row (kitItem tile, Tư trang, week-book rows). Rows below: normal chips, a normal chip with a maker note, then the sm chip.",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} <span class="kitpg-w" style="margin:0 0 0 14px;padding-left:12px;border-left:1px solid var(--k-hair)">chip cỡ NHỎ (<code>size:"sm"</code>, cùng một chip, dùng làm nhãn đề trên ảnh vật phẩm) →</span>${kitGradeChip(1,{size:"sm"})}</div>`+
   `<div class="kitpg-row" style="background:#1a0f0acc;padding:14px;border-radius:8px">${kitRevealHTML(kitItemInfo("nhansam"),{from:"Thái hậu ban"})}</div>`},
  {id:"§54.2",title:"kitLose: thẻ mất đồ (món mờ dần, rơi)",html:()=>`<div class="kitpg-row"><span class="klspic">${["vongngoc","tramngoc"].map((k,i)=>{const I=kitItemInfo(k);return kitItem({src:I.src,name:I.name,grade:I.grade,size:"lg"}).replace('class="kitem ','class="kitem klsfall ')}).join("")}</span></div>`})}catch(e){}

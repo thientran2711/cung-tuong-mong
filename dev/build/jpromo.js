@@ -116,12 +116,11 @@ function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="
 .kprev-n{font-weight:700;color:#3a1f10;text-align:center}
 .kprev-l{margin:0;font-size:.9rem;line-height:1.45;color:#3a2a1e;text-align:center}
 @keyframes kprevIn{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%)}}
-@media (max-height:560px){.kprev{flex-direction:row;flex-wrap:wrap;align-content:center;justify-content:center;height:calc(100dvh - 16px);max-width:900px;gap:4px 14px}
- .kprev-h{width:100%}.kprev-fig{flex:0 0 min(40vw,300px);height:calc(100dvh - 70px)}.kprev-card{flex:0 1 380px}}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§65 + §66) ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
  {id:"§65.2",title:"kitPersonReveal: Nội vụ phủ phụ cấp người hầu",html:()=>{const s=(S&&S.staff&&S.staff[0])||null;if(!s)return"<em>cần một người hầu</em>";
   return `<div class="kitpg-row" style="background:#1a0f0acc;padding:10px;border-radius:8px;height:420px">${kitPersonRevealHTML({who:s,title:"Nội vụ phủ phụ cấp người hầu",sub:prServSub(s),line:prServLine(s,1)}).replace('class="kprev"','class="kprev" style="height:400px"')}</div>`}},
- {id:"§66.2",title:"kitGloom rank down: chip nứt rơi, khung xám",html:()=>`<div class="kitpg-row" style="background:#1a1418;padding:14px;border-radius:8px">${(()=>{const live=typeof S!=="undefined"&&S&&S.name,r=live?Math.max(1,S.rank|0):2;/* #kit opens before any game: no S → chips only */return kmRankDownHTML(live?S:null,r,r-1)})()}</div>`})}catch(e){}
+ {id:"§66.2",title:"kitGloom rank down: chip nứt rơi, khung xám",where:"<b>Demotion scene</b> (kitGloom, panels \"Bị giáng xuống …\" / \"Vào lãnh cung\"): the OLD rank chip cracks and falls, the new lower chip comes up dim, the frame turns grey. Not a status chip — only shown once, in the rank-down screen.",html:()=>`<div class="kitpg-row" style="background:#1a1418;padding:14px;border-radius:8px">${(()=>{const live=typeof S!=="undefined"&&S&&S.name,r=live?Math.max(1,S.rank|0):2;/* #kit opens before any game: no S → chips only */return kmRankDownHTML(live?S:null,r,r-1)})()}</div>`})}catch(e){}
 window.prSetFor=prSetFor;window.prSrvSetFor=prSrvSetFor;window.prGive=prGive;window.prStaff=prStaff;window.prCheck=prCheck;window.prNpcScan=prNpcScan;window.kitPersonReveal=kitPersonReveal;window.kitPersonRevealHTML=kitPersonRevealHTML;
