@@ -12,3 +12,6 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 | 16/11 | sếp (coop-chat) | Bong bóng thư + danh sách thư (kitChatBubble / kitChatList) + nút biểu tượng có huy hiệu chưa đọc (kitChatBtn) + khung Thư từ (kitChatPanel) | chơi cùng bạn: phòng của nàng | coop-chat | xong, KIT §76, chờ duyệt |
 
 ## 16/11 s19 — closed by review/kit-marks: "KIT REQUEST — cloud-del" items 1–2 built as KIT §83.9 (`.kbtn.kdanger`, `kitConfirm`); KIT number clash §72 verified resolved (KIT_NUMBERS.md).
+
+## 16/11 — npc-agent r1-fix (Foreman C worker): dialog option LOCKED state (register, no new look)
+| 16/11 | npc-agent r1 (fault 2a) | A Q-dialog option with `lock:true` + `why:"<reason>"` renders as the EXISTING kit locked-option form of `pbtn` (j15): `disabled` + `<span class="kwhy">reason</span>` in `<small>` → j63 kaNorm turns it into the §6 `.kdis` card with its Cần ✗ row. One line in j3 showModal (before: only "poor" options were disabled). Used by the AG1b reactions "Nghe lén" / join when no khắc is left (BAL.ag.kh). Kit keeper: please record it in KIT.md §6.2 (dialog options) / §8 | AG1b witness card (jagent agReact); any dialog option with a lock | npc-agent r1 | built (j3), chờ kit keeper ghi KIT.md |
