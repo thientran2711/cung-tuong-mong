@@ -14,7 +14,7 @@ Context: session B1 started small (~30k tokens); now far past start+25% → ROLL
 - Tools on the box: /home/user/wt/{PREAMBLE.txt, REVIEWER.txt, WORKER_B.txt, REPORT_B.txt, RESUME_B.txt, stpush.sh}. New session has its own container: copy the briefs from dev/handover/ (PREAMBLE.txt, REVIEWER.txt) + this file's rules; workers now run as separate sessions writing dev/handover/reports/<branch>.md.
 - Cloudflare: works on account B's environment (token re-saved 11/16).
 
-Updated: 11/16/2026 04:53Z — 20 of 21 Foreman B PASSes are LIVE (trains 1–3). Waiting for fast-forward: routes-port-r1 (conditional: loi-rieng category). Running: worker D31 difficulty-port + reviewers C24 chapter-detail, D34 scheme-games-port, C41 tuduc-mg. Blocked: D36 (KIT REQUEST podium), D41 (Foreman C D29). Free slots: 8 — coordinator may add items.
+Updated: 11/16/2026 05:25Z (session 2) — Running as separate sessions: C41b reviewer (session_01N1tNP4dwJ1QEvs8oHcaKvZ), C35b worker (session_01N1tNP6oudZkvfTX5H98ZMF). PASS waiting for fast-forward: D31, D33, D34, C24, C41. Blocked: D36 (kit podium), D41 (Foreman C D29), C32b curl speed (KIT REQUEST to keeper). Free slots: 10 — coordinator may add items.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
@@ -23,7 +23,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C41 tuduc-mg | review/tuduc-mg-r1 | sonnet | PASS 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 |
 | C41b tuduc-pic | review/tuduc-pic (on tuduc-mg-r1) | sonnet | REVIEWING — worker done 2954ff9f (contains main eba64ead); reviewer session session_01N1tNP4dwJ1QEvs8oHcaKvZ on review/tuduc-pic-r1 (05:24Z) |
 | C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
-| C35b pcard-dislikes | review/pcard-dislikes | sonnet | RUNNING — worker session (id follows), claimed 05:27Z (coordinator answer Q9) |
+| C35b pcard-dislikes | review/pcard-dislikes | sonnet | RUNNING — worker session session_01N1tNP6oudZkvfTX5H98ZMF (05:24Z; coordinator answer Q9) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS d8b54d0970ac8591d07163650058485f4bceb818 |

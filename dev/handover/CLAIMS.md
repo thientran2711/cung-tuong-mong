@@ -27,4 +27,4 @@
 | D50 dialog fig placeholder | review/dlg-fig-ph | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | balance-after-truth re-run | review/balance-after-truth | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | reign-road review | review/reign-road-r1 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
-| C35b pcard-dislikes | review/pcard-dislikes | B | (worker session, id follows) | RUNNING | 16/11 05:27Z |
+| C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | RUNNING | 16/11 05:27Z |
