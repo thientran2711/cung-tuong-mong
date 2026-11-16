@@ -71,3 +71,43 @@ Successor steps:
 5. Shots 755x1000 + 1180x820 of the tối flip + the night at "Sang ngày mới" (scratch only, never in git).
 6. Report SẴN SÀNG KIỂM <sha> to MAIN s22 (session_01UV1SzjhT28XQmRt2EHNffg), BIG (owner rule + co-op).
 
+
+## 5. SUCCESSOR (worker session_01UV1Szj7YLUcLKMH5ncGTcL, coordinator MAIN s23 session_01UV1SziE5Dau1pVrytppq81)
+START_CTX ≈ 5 % of 1M (get_session reads 0; own estimate). Rules read: START_CORE, START_WORKER, OD "(16/11 19:45Z, s22 chat) OWNER (night result timing" and "(16/11 ~20:32Z real, s23 chat) OWNER RULE (CO-OP FIRST" verbatim.
+
+### 5.0 STEP 0 — merge origin/main 392fff60
+Conflicts: assemble.py (= main's list + 'jnf.js' last), jbal2.js (main's BAL.led block kept; BAL.steal from main = night-steal-r2), night-steal-unit.js (main's r2 reset kept), generated index.html / sw.js / assets.json (rebuilt with dev/site/build_site.sh). jsteal.js on main = night-steal-r2; its flip wrapper still skips the palace flip when nfOn() (jsteal.js:59, the only line this branch changes there).
+
+### 5.1 STEP 1 — MULTI-STEAL (jnf.js §2b)
+| rule | how |
+|---|---|
+| every try of the evening is RECORDED, cost paid at the act | her deck cards (runOpt wrapper: cost via runOpt, odds = the card's shown odds incl. lotB, no roll), ACT steal/road of the social menu and any NPC agent act (stealNight wrapper: ntCan + cycle tray checks, one try each (S.ntTry mark, same format as j75 ntTry), cost = stealCost(mode)). List S.nfA {d, L:[{w, mode, o, q}]} |
+| resolved ONCE at the commit | `steals()` → `window.stealPass(holder,{live:true})` = stealPassNF: the evening list + the NPCs' own last tries (jsteal stealWant / stealEligible, at most BAL.steal.maxTry NPC tries) → nfResolve |
+| winner | every try rolls its own odds (r = 0..100); success = r < o; winner = success with the largest margin o − r; tie → higher Sủng, then the earlier try |
+| others | failure result of stealNight: Sủng −BAL.steal.failSung, line "X định giành đêm của Y nhưng Hoàng thượng không động lòng. Sủng -n." |
+| winner effects | stealWin (BAL.steal.rel oán / BAL.steal.ghen vs the holder), j75 ntTake, nightWhy.cause = "stolen"; her night lost → Kính sự phòng notice |
+| two-way | NPC vs NPC uses the same resolve; ledger nights call stealPass(holder,{live:false}) → lines only, the evening list untouched |
+| numbers | only BAL.steal + oSteal; no new constants |
+Found on main (not fixed here, outside scope): j75's deck wrapper only decorates steal cards with `a.b===2`, but j2 now deals them with `b:B4L` → j75's card lock / reason text never applies. jnf's runOpt wrapper detects the cards by name + b===B4L and refuses a 2nd try (no second cost), so the rule holds; the card is not greyed out.
+
+### 5.2 STEP 2 — co-op
+- Host gate stays ONE function `host()` (jnf §0). review/coop-one-world (worldOn()) is NOT on origin; asked worker session_01UV1Szj18sSZbfw4DZWoqJh for the name/semantics. Swap = one line.
+- Guest's try: recorded locally (cost, one-try mark) and sent to the host on `act` {k:"ctm-nf", mode:"g", att:{mode,o}}; the host records it for the friend entry (never takes the guest's hold from that message). The host resolves; the fin message carries `gres` {won, mode} for the friend; the guest applies its own Sủng loss / win line once (S.nfR).
+- FIX (coop-night case 3 regression vs main): the room's night `go` runs nextBuoi once; when the commit held (a notice, her night dialogs) the seat sat in tối forever (jnight nightEnd → nightReady only). jnf now keeps RR = the day still to commit and re-runs the night step through COOPW.allowN once no dialog is open (guest: after the host's fin).
+
+### 5.3 Tests (build of the last commit)
+| test | result |
+|---|---|
+| night-multi.js NEW (records at the act · largest margin · tie → Sủng · full tie → earlier · NPC vs NPC · ledger pass) | 6/6 PASS, 0 page errors |
+| night-final.js | 6/6 PASS (case 1 now stubs NPC wants: timing only). Rare FAIL of case 5 (1 in ~12): her cycle (jcycle "khai man") takes the night — game rule, not this code |
+| night-day.js | ok:true 3/4 runs; ksp fixed (test now marks today's tablet turned). "road" misses ~1 in 5 on the base build too (pre-existing) |
+| night-steal-unit.js | 29/29 ×3 (her steal case adapted to record + commit) |
+| log-sync-night.js | PASS |
+| night-steal-oldsave.js (old = origin/main) | loads, same name, 6 steal tries, 0 errors; the script prints FAIL only because it still expects the OLD build to have no BAL.steal (main has it since night-steal-r2) |
+| cardflip.js 755x1000, 412x1058, 1180x820, 1366x1024 @2 | 0 page errors, no h-scroll, old save ok |
+| coop-e2e.js (live Worker) | 57/59 — the 2 misses = known "A frozen when B left" flake (reports coop-name-mask, review-schedules3-r5: same on plain main) |
+| coop-night.js (live Worker) | 101/105 after the RR fix = exactly main's own result (baseline run on origin/main 392fff60: 101/105, the same 4 "host sees the wait" misses in cases 7/9/10/13). Before the fix: case 3 FAILED once (both seats stuck in tối after the host's held commit); main passes case 3 |
+
+### 5.4 Not done
+- STEP 4 (10-night ledger V3-B hooks the same commit) NOT started — context budget. stealPassNF already takes {live:false} (lines only), so the ledger wrapper only has to call window.stealPass(holder,{live:false}) per non-played night.
+- A dedicated two-seat test of a guest Tranh sủng resolved on the host (att → gres) is not written; covered by code reading only.

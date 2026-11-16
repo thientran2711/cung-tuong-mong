@@ -126,8 +126,15 @@ if(typeof runOpt==="function"){const ro1=runOpt;runOpt=function(a){const t=S&&to
 function steals(){try{const t=tonightOf();if(t||(S.nfA&&S.nfA.d===day()&&S.nfA.L.length))return window.stealPass(t||null,{live:true})}catch(e){console.error(e)}return null}
 /* the modal is shown once the caller's own steps (nextBuoi wrappers, curtain) are done */
 const showSoon=()=>{if(window.__bot)return;setTimeout(()=>{try{if(S&&Q.length&&$("modal").hidden)showModal()}catch(e){}},0)};
-function hold(){S.buoi=B4();try{render()}catch(e){}showSoon()}
-function herNight(){S.buoi=B4();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
+/* co-op: the room's night `go` (jcoopworld nCheck) runs nextBuoi ONCE; when the commit holds (a notice to read, her night dialogs) the
+   seat would sit in tối for good (nightEnd sees "already ready"). RR = the day whose commit still has to run: once no dialog is open
+   (and the guest has the host's fin) the seat runs its night step again, through the same allowN gate. */
+let RR=null;
+function rerun(){if(RR!==day()||!CO()||!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4()||(guest()&&S.nfFin!==day()))return;RR=null;
+ setTimeout(()=>{try{if(CO()&&S&&!S.dead&&!Q.length&&!S.mg&&(S.buoi||0)>=B4()&&!COOPW.pend){COOPW.allowN=true;try{nextBuoi()}finally{COOPW.allowN=false}}}catch(e){console.error(e)}},300)}
+const rd0=render;render=function(){const r=rd0.apply(this,arguments);try{rerun()}catch(e){}return r};
+function hold(){S.buoi=B4();if(CO())RR=day();try{render()}catch(e){}showSoon()}
+function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
