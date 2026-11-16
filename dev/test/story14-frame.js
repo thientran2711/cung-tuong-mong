@@ -40,14 +40,15 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   const md0=msDone67;window.__md0=md0;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)};
   window.__fast=(k,pick,maxCh)=>{quiet=true;try{localStorage.removeItem('ctm-arcs')}catch(e){}window.__forceOrigin=k;start();quiet=false;Q.length=0;
    if(S.origin.k!==k)return {k:S.origin.k,want:k,err:'asked '+k+', got '+S.origin.k,seq:[],ends:[],ctx:[],host:[]};/* r1 item 8: every origin really runs */
-   const seq=[],ends=[],ctx=[],host=[];let lastN=0,stuck=0,err=null,mon=0;
+   window.__stall=0;const seq=[],ends=[],ctx=[],host=[];let lastN=0,stuck=0,err=null,mon=0;
    for(;mon<900&&!S.st.ch.all&&S.st.ch.n<=maxCh;mon++){const c=S.st.ch;if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?')+(c.n<=3?'/T':c.n<=11?'/R':'/E'));lastN=c.n;stuck=0}
     if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
     const A=S.st.M;try{if(A&&A.host14)for(const kk in A.host14){const v=RV(A.host14[kk]);if(v&&!host.some(h=>h.id===v.id))host.push({id:v.id,a:A.a,me:aff(S,v),her:aff(v,S),oan:oan(v,S)})}
      if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const b=beatDef67(A,A.cur);const O=opts67(A,b);const i=pick==='rand'?Math.floor(Math.random()*O.length):0;
       const o=O[i];if(o&&o.o!=null)ctx.push(A.a+':'+A.cur+':'+oOf67(A,o,b));res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,b):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message)}
-    if(S.st.ms&&++stuck>30){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}/* cnv: the consort chapters open when she is really raised */
-    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
+    if(S.st.ms&&++stuck>30){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}if(S.st.ms&&S.st.ms.force14){S.dead=false;try{msCheck67()}catch(e){err=err||('close '+e.message)}}/* a life that keeps dying skips a67Month: the test closes its stuck chapter itself *//* cnv: the consort chapters open when she is really raised */
+    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}if((S.age||0)>40)S.age=40;/* the story bot keeps her alive: a dead month skips a67Month, so a long life (Thanh mai chapters) never closed its last chapter */try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
+    if(S.turn===t){if(++window.__stall>5){err=err||('time stopped at month '+S.turn+' buổi '+S.buoi+' '+JSON.stringify({mg:!!S.mg,out:S.out,dead:S.dead,place:S.place,exam:!!S.exam,kc:!!S.kc,wait:S.wait,night:S.night,ms:S.st.ms&&S.st.ms.id,M:S.st.M&&S.st.M.a}).slice(0,300));break}}else window.__stall=0}
    return {k:S.origin.k,want:k,road:S.st.f14&&S.st.f14.road,seq,ends,ctx,host,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}});
  const FB=[];for(const k of ['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'])FB.push(await p.evaluate(k=>window.__fast(k,'rand',99),k));
  for(const r of FB)console.log(r.k,'(asked '+r.want+')',r.road,'host:'+JSON.stringify(r.host),'n='+r.n,r.all?'ALL':'',r.months+'m',r.fin,'|',r.seq.join(' '),r.err||'');
@@ -127,8 +128,12 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  chk('r1 item 5: neutral context leans neither way (BAL.st14.shift.base both ways)',await p.evaluate(()=>{const Z=BAL.st14.shift;return Z.base-0*Z.slope===Z.base+0*Z.slope}),null);
  await p.context().close();
  /* ---- 2) old saves ---- */
- const mk=async(url,pre,tries)=>{const q=await boot(url,pre);const s=await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start();
-   for(let i=0;i<8;i++){Q.length=0;used=0;nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S){return{retry:1}}/* the life ended inside the 8 buổi (rebirth screen): build the save again */return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();if(s.retry&&(tries||0)<3)return mk(url,pre,(tries||0)+1);return s};
+ const mk=async(url,pre,tries)=>{const q=await boot(url,pre);
+   await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start()});
+   /* the first start() of a page finishes after the Luân hồi roulette (S is set a moment later) */
+   await q.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin&&S.st,null,{timeout:60000});
+   const s=await q.evaluate(()=>{for(let i=0;i<8;i++){Q.length=0;used=0;if(S.dead){S.dead=false;S.suc=60}nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S)return{retry:1};
+    return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();if(s.retry&&(tries||0)<3)return mk(url,pre,(tries||0)+1);return s};
  const olds=[];if(MAIN)olds.push(['main build',await mk(MAIN)]);olds.push(['frame off',await mk(URL,()=>{window.F14_ON=false})]);
  const q=await boot(URL);
  for(const [nm,o] of olds){const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));const plan=S.st.ch&&S.st.ch.plan.join(',');
