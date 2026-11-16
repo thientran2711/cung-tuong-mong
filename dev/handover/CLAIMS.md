@@ -1,1 +1,2 @@
 | FOREIGN PRINCESS art (sonnet art; OD:L1345 drawing → C; continues main s16 v7 on review/foreign-princess-samples): v8 lighter high-rank costumes → then full set 3+3 princesses × ranks + maids | review/foreign-princess-art | C | session_011xDdVQLEsBhwiabQcVkHJN | RUNNING | 16/11 19:22Z |
+| fig-proportion SUCCESSOR (sonnet art): 27 Thái hậu scene pictures + ~100 flagged adult figures (owner 19:05Z/19:12Z), narrow Thái hậu figs to A | review/fig-proportion | C | session_011xDdVQqAAT57kvK187xHXt | RUNNING | 16/11 19:21Z |
