@@ -22,13 +22,13 @@ const [,,BASE,OUT,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');
    for(const q of drawn){if((q.kind==="rival"||q.kind==="hh")&&q.ref&&!here.has("v"+q.ref.id))out.bad.push("sân khấu vẽ "+q.ref.name+" nhưng sổ không ở đây");if(q.kind==="emp"&&!here.has("emp"))out.bad.push("sân khấu vẽ Hoàng thượng nhưng sổ không ở đây");if(q.kind==="th"&&!here.has("th"))out.bad.push("sân khấu vẽ Thái hậu nhưng sổ không ở đây")}
    if(S.visit&&S.visit.k===S.place&&S.place!=="lc")for(const v of liveRivals(true)){if(here.has("v"+v.id)&&!(S.place==="home"&&sameHouse(S,v))&&!drawn.some(q=>q.ref===v))out.bad.push("sổ có "+v.name+" ở đây mà sân khấu không vẽ")}
    out.place=S.place;out.drawn=drawn.length;out.ov=document.documentElement.scrollWidth>innerWidth+1;return out});
-  if(i%5===0)await p.screenshot({path:`${OUT}/stage-${i}.png`});
+  if(i%5===0&&!process.env.NOSHOT)await p.screenshot({path:`${OUT}/stage-${i}.png`});
   /* map */
   const mp=await p.evaluate(()=>{tab="go";render();const R=window.__roster();const C={};const RP=S.roster.P;for(const id in RP)for(const k of new Set(RP[id].map(e=>e[0])))if(k&&RP[id][j95arrKh(k)][0]===k&&j95vis(id,k))C[k]=(C[k]||0)+1;/* arrival khắc (port 16/11) */const bad=[];let n=0;
    for(const el of document.querySelectorAll('[data-go]')){const k=el.dataset.go;const s=el.querySelector('.msil');const shown=s?+(s.getAttribute('aria-label')||'0').split(' ')[0]:0;if(!el.closest('#panel,#stage,body'))continue;n++;
     if(shown!==(C[k]||0))bad.push(`${k}: bản đồ ${shown}, sổ ${C[k]||0}`)}
    return{n,bad,ov:document.documentElement.scrollWidth>innerWidth+1}});
-  if(i%5===0)await p.screenshot({path:`${OUT}/map-${i}.png`});
+  if(i%5===0&&!process.env.NOSHOT)await p.screenshot({path:`${OUT}/map-${i}.png`});
   /* the same moment through the dev tool: export the save, run dev/tools/roster.js, compare its counts with the map on screen */
   const sv=await p.evaluate(()=>{tab="go";render();const shown={};for(const el of document.querySelectorAll('[data-go]')){const s=el.querySelector('.msil');shown[el.dataset.go]=s?+(s.getAttribute('aria-label')||'0').split(' ')[0]:0}return{save:JSON.stringify(ser()),shown,place:S.place}});
   const f=path.join(OUT,`save-${i}.json`);fs.writeFileSync(f,sv.save);const t=spawnSync('node',[path.join(__dirname,'..','tools','roster.js'),f,'--json'],{encoding:'utf8'});let tool=null;try{tool=JSON.parse(t.stdout)}catch(e){mp.bad.push('roster.js không đọc được: '+(t.stderr||t.stdout).slice(0,120))}

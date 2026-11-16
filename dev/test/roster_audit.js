@@ -25,6 +25,7 @@ const HOOK=`(function(){const A=window.__aud={checks:0,lives:0,khac:0,err:{a:0,b
   for(const v of rivals)if(v.alive)ids.add("v"+v.id);
   for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const pk=p===S?"me":p.id;if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))ids.add("mm:"+pk);for(const s of p.staff||[])if(s&&s.sid!=null)ids.add("s"+s.sid)}
   for(const c in (S.court||{}))if(S.court[c]&&S.court[c].name)ids.add("c:"+c);
+  try{for(const x of (S.thO&&S.thO.staff)||[])if(x&&x.sid!=null)ids.add("s"+x.sid)}catch(e){}
   const jm=typeof menRoad==="function"&&menRoad();for(const m of S.men||[]){if(!m.alive)continue;if(jm?((S.menWhy||{})[m.id]&&!(typeof menBanned==="function"&&menBanned(m))):(m.rw==="thái y"||m.rw==="thị vệ"||(S.menW&&S.menW[m.id])))ids.add(m.id)}
   if(jm)try{const H=trS().H||{};for(const c in (S.minW||{}))if(H[c])ids.add("q:"+c)}catch(e){}
   for(const [k,mo] of allKids())if(k&&k.alive)ids.add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k));return ids}
@@ -92,7 +93,7 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
   /* (h) places in words */
   const R=S.roster;if(!R||R.key!==j95key())return;const kh=ent&&ent.key===j95key()?ent.kh:j95kh();
   if(ent)for(const p of ent.places){if(p.res!=="ok"){A.placeSkip++;continue}A.placeChk++;const rid=p.id;const e=R.P[rid];let k=p.k;if(k==="here")k=S.place;if(k==="own"){const v=rid[0]==="v"?RV(+rid.slice(1)):null;k=v?(v.out?"lc":palaceOf(v)):rid==="th"?"tn":"dtd"}
-   if(!e||e[kh][0]!==k)bad("h","câu chữ đặt "+rid+" ở "+k+" mà sổ ghi "+(e?e[kh][0]:"không có")+" ("+pid+") ent="+ent.key+"/"+ent.kh+" now="+j95key()+"/"+kh+" rec="+JSON.stringify(e&&e[kh]));if(rid[0]==="v"&&kh===j95kh()){const v=RV(+rid.slice(1));if(v&&v.alive&&whereOf(v)!==k)bad("h","whereOf lệch sau khi dời: "+v.name);if(countAt(k)<1)bad("h","bản đồ không đếm người được dời tới "+k)}}
+   if(!e||e[kh][0]!==k)bad("h","câu chữ đặt "+rid+" ở "+k+" mà sổ ghi "+(e?e[kh][0]:"không có")+" ("+pid+") ent="+ent.key+"/"+ent.kh+" now="+j95key()+"/"+kh+" rec="+JSON.stringify(e&&e[kh]));if(rid[0]==="v"&&kh===j95kh()){const v=RV(+rid.slice(1));if(v&&v.alive&&whereOf(v)!==k)bad("h","whereOf lệch sau khi dời: "+v.name);if(j95arrKh(k)===kh&&j95vis(rid,k)&&countAt(k)<1)bad("h","bản đồ không đếm người được dời tới "+k)/* port 16/11: the map counts at the arrival khắc and only people drawn there */}}
   if(pid&&(pid.indexOf("e68")===0||P95B[pid]))return;
   const txt=strip(m.h||"");const sents=txt.split(/(?<=[.!?…][)"”']?)\\s+|\\s*;\\s*/);const RVL=rivals.filter(v=>v.alive).sort((a,b)=>b.name.length-a.name.length);
   for(const s0 of sents){const s=s0.trim().replace(/sổ (sách )?kính sự phòng/gi,"sổ");if(!s||HEAR.test(s))continue;for(const [code,re] of PL()){if(!AT(s,re))continue;

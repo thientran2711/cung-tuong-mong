@@ -50,7 +50,7 @@ const E95B={/* j68 templates: r = roles by slot (same order as spec.a), at = pla
  droughtPrayer:{r:[{n:"việc triều chính"}]},envoyGift:{r:[{n:"việc triều chính"}]}};
 const P95B={/* other saveable cards (mkP id): params → role; at = place per param */
  /* port 16/11: cards added on main since schedules2 (the act behind each already passed the gate in runAct) */
- tsbBul:{p:{a:{h:"$k"}}},menEnc:{p:{v:{n:"đi cùng nam nhân trong hậu cung (jmen: việc có thật, đã có lý do)"},lv:{n:"người nam nhân để ý"},hv:{n:"bóng phi tần thoáng thấy"}}},tsbOmen:{p:{a:{h:"$k",key:1}}},pgin:{p:{f:{n:"gửi quà ăn (việc tặng đã qua cổng động cơ)",key:1}}},
+ tsbBul:{p:{a:{h:"$k"}}},vuoan:{p:{a:{h:"frame",key:1}}},menEnc:{p:{v:{n:"đi cùng nam nhân trong hậu cung (jmen: việc có thật, đã có lý do)"},lv:{n:"người nam nhân để ý"},hv:{n:"bóng phi tần thoáng thấy"}}},tsbOmen:{p:{a:{h:"$k",key:1}}},pgin:{p:{f:{n:"gửi quà ăn (việc tặng đã qua cổng động cơ)",key:1}}},
  doll:{p:{v:{h:"frame",w:v=>1+(v.ghen||0)}}},guardrumour:{p:{v:{h:"rumor",opt:1}}},ghost:{p:{v:{h:"rumor",opt:1}}},
  pact:{p:{v:{f:"ally"}},q:{h:"plot"},at:{v:"vuon"}},maidhostage:{p:{v:{h:"uyhiep"}}},taster:{p:{v:{h:"poison",w:v=>1+(v.malice||0)}}},
  rvframe:{p:{a:{h:"frame",to:"b"},b:{n:"bị nhắm vu oan"}},at:{a:"vuon"}},rvquarrel:{p:{a:{h:"provoke",to:"b"},b:{n:"bị gây sự"}},at:{a:"vuon",b:"vuon"}},

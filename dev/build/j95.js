@@ -103,6 +103,9 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const hk=p===S?(S.out?"lc":"home"):p.out?"lc":palaceOf(p);const pk=p===S?"me":p.id;const ow=p===S?"ngươi":p.name;
   if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,"Cung nữ thân tín của "+ow,"mm",hk,p);
   for(const s of p.staff||[])if(s&&s.sid!=null)add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":"Cung nữ")+" của "+ow,"st",hk,p)}
+ /* named palace staff (jstaff, main 16/11): the elders stand at their post (the stage draws them there); the rest of Thái hậu's household serves at Đức Thọ cung */
+ J95.eld={};const eh=x=>{if(!x||x.sid==null)return;const k=j95elderK(x);if(x.eid)J95.eld["s"+x.sid]=1;if(seen["s"+x.sid]){const q=L.find(z=>z.id==="s"+x.sid);if(q&&x.eid){q.kind="el";q.home=k}return}add("s"+x.sid,x.name,x.call||"Người hầu của Thái hậu","el",k,x)};
+ try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
  if(S.court)for(const c in S.court){const o=S.court[c];if(o&&o.name)add("c:"+c,o.name,o.n||c,"court",{tq:"dtd",ksp:"ksp",ped:"ksp",ty:"tyv"}[c]||"ksp")}
  const present=id=>(R&&R.P&&R.P[id])||j95z().sec.some(x=>x.b===id&&x.key===j95key());
  const jm=j95men();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
@@ -209,6 +212,7 @@ function j95planOther(p,c,P){const kh=[0,1,2,3];
   const Lp=["vuon","ksp","tyv"];return kh.map(()=>{const k=Lp[Math.floor(Math.random()*Lp.length)];return[k,"sell",null,"đi bán hàng rong kiếm lời"]})}
  if(p.kind==="man"){const m=p.ref;const w=null;const k=p.home||"vuon";const a=m.rw==="thái y"?"heal":m.rw==="thị vệ"?"guard":m.rw==="nhạc sư"?"music":m.rw==="họa sư"?"paint":m.rw==="sứ thần"&&k==="thu"?"audience":"walk";
   return kh.map(()=>[k,a,null,w?"nơi hắn hay lui tới":"phận sự"])}
+ if(p.kind==="el")return kh.map(()=>[p.home,"serve",p.home==="home"?"me":"th",p.ref&&p.ref.eid?"giữ chức trong cung":"hầu Thái hậu"]);
  if(p.kind==="min")return kh.map(()=>[p.home,p.home==="thu"?"audience":"feast",null,p.home==="thu"?"vào chầu buổi sáng":"dự yến lễ tết"]);
  if(p.kind==="kid"){const k=p.ref;const age=k.age||0;return kh.map(()=>[p.home,age<3?(c===1||c===3?"sleep":"nurse"):["study","nap","play","sleep"][c],null,age<3?"còn nhỏ, nhũ mẫu trông":"việc thường ngày của hoàng tự"])}
  return kh.map(()=>[p.home||"home","rest",null,""])}
@@ -241,13 +245,14 @@ function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th
 function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id[0];
  if(c==="v"){const v=RV(+id.slice(1));return !!(v&&v.alive&&!(k==="home"&&sameHouse(S,v)))}
  if(id==="emp")return k!=="home"&&!(k==="dtd"&&(S.sung||0)<50);if(id==="th")return true;
- if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(id==="c:ty"||id==="c:ksp")return true;
+ if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id])return true;if(id==="c:ty"||id==="c:ksp")return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 const J95OUT_="ngoai";
 /* the khắc she would ARRIVE at k (walking costs travel(): the map number is the number she meets on arrival, main rule review/stage-slots) */
 function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;let from=S.place||"home";
  if(typeof isSrv==="function"&&isSrv()){const m=srvM();if(m&&k===palaceOf(m))return kh;if(from==="home"&&m)from=palaceOf(m)}/* j42 srvGoTo walks from her mistress's palace */
  return Math.min(J95.KH-1,kh+Math.max(0,travel(from,k)||0))}catch(e){return kh}}
+function j95elderK(x){if(x.eid==="kn")return"kn";if(x.eid==="gt"&&(S.turn||0)<=4&&!S.out)return"home";return"tn"}
 function j95counts(R,kh){const C={};for(const id in R.P){const k=R.P[id][kh][0];if(k&&j95vis(id,k))C[k]=(C[k]||0)+1}return C}
 function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j95key()){if(!plan)return;if(R)j95log(R);R=j95plan();j95secApply(R)}
  const kh=j95kh();const ppl=j95ppl(R);const ids={};
