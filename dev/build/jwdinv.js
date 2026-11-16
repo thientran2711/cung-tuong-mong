@@ -117,7 +117,7 @@ function wdStatusChip(){try{const lab=wdKnownStatus(S);if(lab)return kitChip(`Đ
    x.mini=fx.length?fx.map(([a,v])=>kitChip(a,v)).join(""):`<span class="keqm">giản dị</span>`}
   const wb=wearBonus(S),C=[];if(wb.sac)C.push(["Sắc",wb.sac]);if(wb.danh)C.push(["Danh",wb.danh]);const vp=wdVpSeen();
   const sum=(C.length?kitChips(C):`<span class="past">chưa mang gì: không thêm</span>`)+kitLuxChip(luxOf(S))+wdStatusChip()+(vp?kitChip(`${vp} món vượt phẩm: dễ bị tố`,"no"):"");
-  return kitEquipSlots({key:"tutrang",title:"Đang mang",slots:o.slots,sum,onPick:keqPick})}catch(e){console.error("keqTT wd",e);return html}}})();
+  return kitEquipSlots({key:"tutrang",title:"Đang mang",slots:o.slots,sum,onPick:keqPick,col:true})}catch(e){console.error("keqTT wd",e);return html}}})();
 function wdSlotOpen(x){const sl=x.wd;const s=wdSlotItem(sl);const seen=new Set();
  const T=(S.inv||[]).map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&wdItem(e)&&wdItem(e).sl===sl&&!seen.has(e.k)&&seen.add(e.k)).map(([e,i])=>{const w=wdItem(e);
   return kitItem({src:w.icon,name:w.n,grade:w.g,size:"md",label:[wdKnowsE(e)?"đồ phẩm "+wdPName(wdP(e,S)):(plainFx(w.w)||"giản dị"),"n"],data:`data-kid="${e.k}" data-kix="${i}" data-kidpick="wear" role="button" tabindex="0"`,

@@ -93,7 +93,7 @@ function kipRecv(i){try{const m=Q[0],M=$("modal");if(!m||!/^(giftin|pgin)$/.test
 #modal .opts.kiphas{display:block!important;grid-template-columns:none!important}
 #modal .opts.kiphas>.opt{display:none!important}
 html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-width:none!important}
-.kipg{--kshsz:96px;flex:none;max-height:min(46vh,420px)}
+.kipg{--kshsz:96px;flex:none;max-height:min(calc(46*var(--kvh,1vh)),420px)}
 .kshc.kshpick.kipc{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8);cursor:pointer}
 .kshc.kipc>.kshpic{cursor:pointer;transition:transform .15s}
 .kipw.has .kshc.kipc:not(.on){opacity:.75}

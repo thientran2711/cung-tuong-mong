@@ -38,7 +38,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function unseat(it){const s=slotOf(it);if(s){s.list=s.list.filter(x=>x!==it);relayout(s)}it.slot=-1}
  function home(it,fly){if(fly)it.bk={x:it.x,y:it.y,a:performance.now()};unseat(it);it.x=it.hx;it.y=it.hy;it.sc=1}
  function seat(it,s){unseat(it);if(!s.multi)s.list.slice().forEach(o=>home(o,true));s.list.push(it);it.slot=P.slots.indexOf(s);relayout(s)}
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(10*pts/Math.max(1,tot))),300)}
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}/* float: graded once by kg82 mgGrade */
   P=cfg.build(r,tier,W,H);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
   phase="play";t0=tAct=performance.now();drag=null;const d=hb.querySelector("#nwqdone");if(d)d.disabled=false;hb.querySelector("#nwqhint").disabled=false}
  const itemAt=(x,y)=>{for(let i=P.items.length-1;i>=0;i--){const it=P.items[i];if(it.locked)continue;const h=it.size*it.sc/2+4;if(Math.abs(x-it.x)<=h&&Math.abs(y-it.y)<=h)return it}return null};
@@ -53,7 +53,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=wrongOnes();if(!w.length)return;const it=w.find(i=>i.slot<0)||w[0];const si=P.slots.findIndex(s=>s.ok(it)&&(s.multi||imm||!s.list.length||s.list[0]===it));const now=performance.now();
   P.glow={it,si,until:now+(auto?5000:6500)};P.cost+=auto?B.auto:B.hint;tAct=now;if(P.peekAt!=null)P.peekAt=now;tip(cfg.hint(it,P.slots[si],P),K91C.gold())}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost);tot+=n;P.glow=null;
+ function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost)*mgPace(env,kind,performance.now()-t0,LIM);/* review/mg-tune: time part */tot+=n;P.glow=null;
   P.say=[ok===n?(P.miss||P.cost?cfg.fine:cfg.perfect):`Đúng ${ok}/${n}`,ok===n?K91C.good():K91C.gold()];hb.querySelector("#nwqhint").disabled=true;const d=hb.querySelector("#nwqdone");if(d)d.disabled=true;setTimeout(next,1800)}
  const dn=hb.querySelector("#nwqdone");if(dn)dn.onclick=()=>{if(phase==="play")judge()};
  const pos=(it,now)=>{if(!it.bk)return[it.x,it.y];const k=Math.min(1,(now-it.bk.a)/300),e=1-Math.pow(1-k,3);if(k>=1){delete it.bk;return[it.x,it.y]}return[it.bk.x+(it.x-it.bk.x)*e,it.bk.y+(it.y-it.bk.y)*e]};
@@ -76,7 +76,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on)||drag)return null;const w=wrongOnes();
   if(!w.length)return imm?null:{sel:"#nwqdone"};const it=w.find(i=>i.slot<0&&!i.bk)||w.find(i=>!i.bk);if(!it||it.bk)return null;
   const si=P.slots.findIndex(s=>s.ok(it)&&(s.multi||imm||!s.list.length||s.list[0]===it));if(si<0)return null;const s=P.slots[si];
-  const a=C.client(it.x,it.y),b=C.client(s.multi?s.ax+s.aw/2:s.x,s.multi?s.ay+s.ah/2:s.y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
+  const a=C.client(it.x,it.y),b=C.client(s.multi?s.ax+s.aw/2:s.x,s.multi?s.ay+s.ah/2:s.y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],cands:P.slots.length/* review/mg-tune, bots: places to look through */}};
  next();return()=>{done=true;stop()}}
 
 /* ---- shared paints ---- */
@@ -175,7 +175,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
    [[cx-60,0],[cx+60,1]].forEach(([x,j])=>{nwqRobe(g,x-30,112,60,66,NWQ_COL[j===0?0:1][1]);nwqFit(g,j===0?"ve-brush":"mua-fan",x+22,150,28)});
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});
  if(dm)hb.hidden=true;
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(pts)),300)}
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),300)}
   const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);const att=["c","t","e"].slice(0,NC);
   const cul={c:cols[0],t:thg[0],e:emb[0]};const S=[{cul:true,c:cols[0],t:thg[0],e:emb[0]}];
   for(let i=1;i<NS;i++){const m=Math.floor(Math.random()*(NC));const keep=kg82Shuf(att).slice(0,Math.min(m,NC-1));const q={cul:false};
@@ -187,7 +187,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=live().filter(q=>!q.cul);if(!w.length)return;const q=w[Math.floor(Math.random()*w.length)];q.gone=true;P.cost+=auto?B.auto:B.hint;tAct=performance.now();
   P.tip={t:auto?"Ma ma khẽ nhắc: người này chưa khớp.":"Người này chưa khớp vật chứng, bỏ đi.",c:K91C.gold(),until:performance.now()+2600};if(!live().filter(q=>!q.cul).length)hb.querySelector("#nwqhint").disabled=true}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss);
+ function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss)*mgPace(env,"xa",performance.now()-t0,LIM);/* review/mg-tune: time part */
   P.say=[ok?(P.miss||P.cost?"Đúng người rồi!":"Khớp vật chứng, đúng người!"):"Hết giờ, người khớp vật chứng đã hiện",ok?K91C.good():K91C.red()];hb.querySelector("#nwqhint").disabled=true;setTimeout(next,1700)}
  function accuse(q){if(phase!=="play"||q.gone)return;tAct=performance.now();if(q.cul){kg82Pluck(3,true);end(true)}else{q.gone=true;q.res="bad";P.miss++;kg82Pluck(0,false);P.tip={t:"Người này chưa khớp, thử người khác.",c:K91C.red(),until:performance.now()+2200};if(live().length<=1&&live()[0]&&live()[0].cul){P.tip={t:"Chỉ còn một người, chạm người ấy.",c:K91C.gold(),until:performance.now()+2600}}}}
  const lab=(c)=>c[0],thN=t=>t[1];
@@ -209,7 +209,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
   else if(P.tip){g.fillStyle="rgba(255,250,236,.92)";g.fillRect(8,H*.36-3,W-16,26);g.textAlign="center";g.textBaseline="alphabetic";g.font=k91F(700,Math.min(13,W/26),1);g.fillStyle=P.tip.c;kg82Lbl(g,P.tip.t,W/2,H*.36+15,W-24)}
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Vụ ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;const q=P.S.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);if(q)accuse(q)}});
- KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y}};
+ KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y,cands:live().length*P.att.length/* review/mg-tune, bots: suspects × clues to compare */}};
  next();return()=>{done=true;stop()}}
 Object.assign(KG82_ENG,{lay:nwqLay,sort:nwqSort,seat:nwqSeat,clue:nwqClue});
 window.NWQ={tier:nwqTier,engines:["lay","sort","seat","clue"],kinds:["le","tc","xa","thq"]};
