@@ -35,5 +35,5 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  /* kit page palette sample */
  await p.goto(URL+'#kit',{waitUntil:'domcontentloaded'});await sleep(6000);
  R.kit=await p.evaluate(()=>{const e=document.querySelector('[data-kit="§1.3"]')||document.querySelector('[data-kit="§48.1"]');if(!e)return'no sample';e.scrollIntoView({block:'start'});return e.getAttribute('data-kit')});await sleep(800);
- await p.screenshot({path:`${OUT}/${TAG}-kit.png`});
+ await p.screenshot({path:`${OUT}/${TAG}-kit.png`});await clip('[data-kit="§48.1"] .kitpg-row','kit-paper',{px:6,py:6,first:1});
  console.log(JSON.stringify(R,null,1));await b.close()})();
