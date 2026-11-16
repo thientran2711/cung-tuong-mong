@@ -155,7 +155,7 @@
 | D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | DONE PASS ce43d3b5 (archived) | 16/11 11:38Z |
 | nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | DONE PASS 9696bc72 (archived) | 16/11 11:38Z |
 | nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | DONE PASS 33730518 (archived) | 16/11 11:38Z |
-| D36 rank-port reviewer | review/rank-port-r1 | B | session_01N1tNP3gJ9boCKEYKaNSuEG (sonnet) | RUNNING | 16/11 11:38Z |
+| D36 rank-port reviewer | review/rank-port-r1 | B | session_01N1tNP3gJ9boCKEYKaNSuEG (sonnet) | DONE FAIL 5 (private krk-* parts) → rank-port-r2 (archived) | 16/11 11:38Z |
 | D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | DONE PASS 9ec1852a (archived) | 16/11 11:38Z |
 | D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | DONE FAIL 1+2 → spread-events-r2 (archived) | 16/11 11:38Z |
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
@@ -210,3 +210,7 @@
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | session_011xDdVSCHRnD3ox6Afg4tHa | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | session_011xDdVP5yaxTpEx8BoJ4t2i | RUNNING | 16/11 13:45Z |
 | kc-roads Chờ-value fix (r1 FAIL item 1, OD:L1288) | review/kc-roads-cn-nc-fix2 | D | session_01DgYSWoQg78D5zyhdSa6uoH | RUNNING | 16/11 13:46Z |
+| D31 difficulty re-measure + HH ~32 % on Vừa + Q14 rain gear wears out (opus) | review/diff-remeasure | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
+| EMOTION ACTIONS + extreme-mood consequences + FORCED emotion events, player + all NPCs (OD 13:08Z, 13:25Z(B), 13:50Z) (opus) | review/emotion-acts | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
+| D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
+| D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
