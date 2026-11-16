@@ -11,7 +11,8 @@
      kbootDone() (called by the last <script> of the page, dev/build/assemble.py) waits two frames (title built; on a device with no picture
      cache yet, until jload's #kload loading screen is up, at most 1.5 s), then fades the cover out (.35 s) and removes it.
    - WATCHDOG (owner iPad 15/11 "Bị gì đây mới vào game": stuck on the skeleton): if the game script did not run to its end
-     (window.__ctmBuilt, set by assemble.py) or the game is not ready after 15 s, the panel turns into a failure card: "Cửa cung chưa mở
+     (window.__ctmBuilt, set by assemble.py; data-why=broken) or the game is not ready after 30 s (15 s: a "still building" note; data-why=slow,
+     lifted as soon as the game gets ready), the panel turns into a failure card: "Cửa cung chưa mở
      được", buttons "Tải lại" and "Xóa bộ nhớ đệm rồi tải lại" (drops the shell caches + service worker, keeps pictures and saves), and the
      last error text, small. Errors before the game is ready are kept in localStorage "ctm-boot-err" (last 8) for the coordinator.
    - automated direct mode (navigator.webdriver, no host, no ?kboot=1): removed at once, no fade, so old tests see the game as before.
@@ -52,17 +53,25 @@
  window.addEventListener("error",function(e){if(!window.__kbootDone)keep((e.message||"error")+(e.filename?" @"+String(e.filename).split("/").pop().split("?")[0]+":"+e.lineno+":"+e.colno:""))});
  window.addEventListener("unhandledrejection",function(e){if(!window.__kbootDone){var r=e.reason;keep("promise: "+(r&&(r.message||r.name)||r))}});
  /* WATCHDOG: never leave the player on the cover (or the bare skeleton): the game script did not finish, or 15 s passed → a failure card */
- function fail(why){if(window.__kbootDone||c.classList.contains("fail"))return;c.classList.add("fail");c.setAttribute("aria-busy","false");
-  var p=c.querySelector(".kbtp");p.innerHTML='<b>Cửa cung chưa mở được</b><small>'+(why==="slow"?"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc tải lại.":"Máy này chưa mở được bản game. Xin tải lại; nếu vẫn vậy, xóa bộ nhớ đệm rồi tải lại (sổ đã ghi vẫn giữ nguyên).")+'</small>'+
+ var MSG_BROKEN="Máy này chưa mở được bản game. Xin tải lại; nếu vẫn vậy, xóa bộ nhớ đệm rồi tải lại (sổ đã ghi vẫn giữ nguyên).";
+ function fail(why){if(window.__kbootDone)return;if(c.classList.contains("fail")){if(why==="broken"&&c.getAttribute("data-why")!=="broken"){c.setAttribute("data-why","broken");var sm=c.querySelector(".kbtp small");if(sm)sm.textContent=MSG_BROKEN}return}c.classList.add("fail");c.setAttribute("data-why",why);c.setAttribute("aria-busy","false");
+  var p=c.querySelector(".kbtp");p.innerHTML='<b>Cửa cung chưa mở được</b><small>'+(why==="slow"?"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc tải lại.":MSG_BROKEN)+'</small>'+
    '<div class="kbtx"><button type="button" data-kb="re">Tải lại</button><button type="button" class="alt" data-kb="clr">Xóa bộ nhớ đệm rồi tải lại</button></div>'+
    (ERR.length?'<div class="kbte"></div>':"");var e=p.querySelector(".kbte");if(e)e.textContent=ERR.slice(-2).join(" · ");
   p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;b.disabled=true;
-   if(b.getAttribute("data-kb")==="re")return location.reload();
+   if(b.getAttribute("data-kb")==="re"){try{return window.top.location.reload()}catch(x){return location.reload()}}
    /* the stale-shell risk: drop the app-shell caches and the service worker; pictures (ctm-assets, content-keyed) and saves stay */
-   var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"}).map(function(k){return caches.delete(k)}))}))}catch(x){}
+   var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"&&!/^ctm-\d+$/.test(k)}).map(function(k){return caches.delete(k)}))}))}catch(x){}
    try{if(navigator.serviceWorker)jobs.push(navigator.serviceWorker.getRegistrations().then(function(R){return Promise.all(R.map(function(r){return r.unregister()}))}))}catch(x){}
-   Promise.all(jobs).then(null,function(){}).then(function(){var u=location.href.replace(/([?&])kfresh=\d+&?/,"$1").replace(/[?&]$/,"");location.replace(u+(u.indexOf("?")<0?"?":"&")+"kfresh="+Date.now())})})}
- var dog=setTimeout(function(){fail("slow")},15000);
+   Promise.all(jobs).then(null,function(){}).then(function(){
+    /* the whole page (host too, it may be the stale copy), query kept (?room= joins), new kfresh before the #hash (a hash-only change does not reload) */
+    var L=location;try{if(window.top.location.href)L=window.top.location}catch(x){}var s=L.search.replace(/([?&])kfresh=\d+&?/,"$1").replace(/[?&]$/,"");
+    L.replace(L.origin+L.pathname+s+(s?"&":"?")+"kfresh="+Date.now()+L.hash)})})}
+ /* review r1: a SLOW but working first open (the 4 MB page still downloading/parsing) is not a failure. 15 s: the cover keeps its moving bar
+    and says "Đường xa, cung đang dựng dần…"; 30 s: the card with the two buttons (data-why=slow). Either way the moment the game is ready
+    the cover/card lets go (kbootDone below) — only a game script that did not finish (data-why=broken) keeps the card. */
+ var dog=setTimeout(function(){if(window.__kbootDone||c.classList.contains("fail"))return;var s=c.querySelector(".kbtp small");if(s)s.textContent="Đường xa, cung đang dựng dần…";
+  dog=setTimeout(function(){fail("slow")},15000)},15000);
  /* the host may drop its copy once this one has painted */
  /* ...after its backdrop picture is decoded here too (else the swap shows a bare paper for a moment); at most 3 s */
  if(inFrame){var o=c.getAttribute("data-o"),pic=new Image(),hd=false,hdrop=function(){if(hd)return;hd=true;requestAnimationFrame(function(){requestAnimationFrame(function(){try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}})})};
@@ -77,5 +86,5 @@
   try{var K0=window.KLOAD;if(!seen&&K0&&K0.phase==="check"&&window.caches){asked=true;caches.has("ctm-assets").then(function(h){first=!h;asked=false},function(){asked=false})}}catch(e){asked=false}
   (function wait(){var K=window.KLOAD;
    if((asked||first&&K&&K.phase==="check")&&!d.getElementById("kload")&&Date.now()-t0<1500)return requestAnimationFrame(wait);
-   requestAnimationFrame(function(){requestAnimationFrame(function(){if(c.classList.contains("fail"))return;window.__kbootDone=1;try{localStorage.setItem("ctm-booted","1")}catch(e){}clearTimeout(dog);c.classList.add("out");
+   requestAnimationFrame(function(){requestAnimationFrame(function(){if(c.getAttribute("data-why")==="broken")return;window.__kbootDone=1;try{localStorage.setItem("ctm-booted","1")}catch(e){}clearTimeout(dog);c.classList.add("out");
     try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},450)})})})()}})();
