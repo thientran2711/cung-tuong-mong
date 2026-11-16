@@ -93,3 +93,18 @@ weekly intentions (`S.j95.it`, `j95intent`); to draw a palace map read `S.roster
 
 ## Tests
 (filled below)
+- Merged origin/main eba64ea mid-task (337 new commits): j95 files now load just before jkpc (kept last). Adapted: jstaff named staff +
+  Thái hậu household in the record at their posts (stage draws them); jtruth `vuoan` card declared; maid road counts the named staff.
+- Bot audit (dev/test/roster_audit.js + roster_audit_c.js, 2 game years/life, all 9 origins, smart + random):
+  build c.ca22ede (before the main merge): 36 lives (18 sens all reached 2 years, 18 rand), 23 155 checks: (b)–(g),(i)–(r) 0;
+  (a) 2 (one khắc when a maid is raised to consort mid-buổi: jmen's last S.menWhy is stale until the next buổi — known, minor);
+  (h) 27 = a test artefact fixed after (check now uses the arrival khắc and visible people). Page errors 0, J95/J95B/J95C errors 0.
+  Earlier rounds 36 lives: all 0 except maid-road stage rule (fixed: srvWhere/j95srvStage).
+  Final re-run on the merged build a1f5628 (36 lives + roster_dom 5 viewports) was still running at hand-off: RE-RUN BEFORE MERGE:
+  `CAP=3300 node dev/test/roster_audit.js sens 18 out.json 0; ... rand 18 out.json 4`.
+- dev/test/stage-counts.js (main test): this branch thd 0 / cnv 0 mismatches; main eba64ea itself: 9 (named staff not counted).
+- dev/test/roster_dom.js (map / stage / roster.js vs record, 20 moments): 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 @2: 0 bad, 0 page errors (pre-merge build).
+- Person card "Thói quen" (jk95) verified in the card's facts column at 755x1000.
+- kit_dupes.js OK. Old-save test dev/test/roster_oldsave.js written, NOT yet run (uismoke.js timed out on the PWA root page).
+- Known main issues found (not fixed, outside j95): jmen assumes 3 buổi (night = buổi 2 = Chiều now; tryst plans b:2; guard roster w*3+b);
+  jstaff draws the Thái hậu elder at both Đức Thọ cung and Tân Giả khố on the maid road (one person, two places).
