@@ -66,7 +66,25 @@ function rdK(){try{const r=S.st.f14.re;return r?r.k:0}catch(e){return 0}}
 window.rdK=rdK;
 /* rare endings of road finales (j97 loads after the road files): RD97L entries take the j97 catalogue shape (R97L) */
 window.RD97L=window.RD97L||[];
-setTimeout(()=>{try{if(window.RARE97)for(const d of RD97L)if(!RARE97.defs[d.a])RARE97.defs[d.a]=d}catch(e){console.error(e)}},0);
+/* review road-b1-r1 item 1 (whole family, every RD97L entry): (a) j97 builds ARC67[id].E.r97 once at load for R97L only, so a road finale
+   needs its own E.r97 here — without it end67(A,"r97") fell back to the first ending (a plain win: no rare text, fx, go, Ngự tứ, title, book);
+   (b) a road's rare path names options of the whole road (.4–.10), but j97 counts path/bad hits on the .11 thread only (A.q97) → the road
+   keeps one tally S.st.f14.q97 fed by every chapter of the road, and the .11 thread starts from it (rdQ97 below). */
+function rdR97(){try{if(!window.RARE97)return;for(const d of RD97L){if(!RARE97.defs[d.a])RARE97.defs[d.a]=d;const a=ARC67[d.a];
+ if(a&&a.E&&!a.E.r97)a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}}}catch(e){console.error(e)}}
+/* the road's rare-ending definition (its .11) when this life runs a full road, else null */
+function rdQdef(){try{if(!rdOn())return null;const R=ROAD14[S.st.f14.rd];const id=R&&R[BAL.road.last];return id&&window.RARE97&&RARE97.defs[id]||null}catch(e){return null}}
+/* a choice made in any chapter of this road (the .4 premise and .5–.10) counts for the road's rare finale; the .11 itself is counted by j97 */
+function rdQ97(A,o){const d=rdQdef();if(!d||!A||!o)return;const a=ARC67[A.a],rd=S.st.f14.rd;if(!a||!(A.a===rd||a.road===rd)||a.rn===BAL.road.last)return;
+ const q=S.st.f14.q97||(S.st.f14.q97={p:0,b:0});const s=String(o.n||"");if((d.bad||[]).some(x=>s.includes(x)))q.b=1;else if((d.path||[]).some(x=>s.includes(x)))q.p++}
+setTimeout(()=>{rdR97();
+ /* res67 is wrapped after j97 (outer): read the option before the original clears A.cur */
+ try{const r0=res67;res67=function(tk,bid,i,odds){let A=null,o=null;try{A=th67(tk);if(A&&A.cur===bid&&rdOn())o=opts67(A,beatDef67(A,bid))[i]}catch(e){}
+  const r=r0.apply(this,arguments);try{if(o)rdQ97(A,o)}catch(e){console.error(e)}return r}}catch(e){console.error(e)}
+ /* the .11 thread starts with the road's tally (j97 r97Cond reads A.q97 at the climax) */
+ try{const n0=newThread67;newThread67=function(id){const A=n0.apply(this,arguments);try{const a=ARC67[id];
+  if(A&&rdOn()&&a&&a.o==="rd"&&a.road===S.st.f14.rd&&a.rn===BAL.road.last){const q=S.st.f14.q97||{p:0,b:0};A.q97={p:q.p||0,b:q.b||0}}}catch(e){console.error(e)}return A}}catch(e){console.error(e)}},0);
+window.rdR97=rdR97;
 /* Thanh mai trúc mã (j96 tm96a/b/c) in a full-road life: the 14 numbered chapters are the tutorial, the road and the endgame, so the three
    love chapters run as a SIDE story (phụ tuyến, j67 S.st.X thread, kind "tm": no reward pool, no random shared arcs reopened), opened one at
    a time once the main story reaches chapter BAL.road.tm[i] (ROAD_MAP §2 side line, §8.1). Lives without a full road keep j96's splice. */
