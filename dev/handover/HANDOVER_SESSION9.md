@@ -295,3 +295,4 @@ Self-wake: s16 trigger trig_01P3xyyt8UbJBytM4MJuPd8o DELETED at handover → s17
 - (14:02Z) skin-norosy-r1 SMOKE PASS live 0ee35a63 (73/73 new hashes, 0 stale) → reviewer archived.
 - (14:12Z) LIVE: main = 73c06812 (cardflip-glow2-r2, owner bug whole-frame glow). Smoke asked. History expert report reports/history-thitam.md (archived); owner asked D1 (1st/15th vs 3 nights/month). Kit catalogue (8 groups) sent to owner.
 - (14:15Z) test-drift-roulette-r2 FAIL: tests fixed (70cae6bd) but GAME BUG: tour step 5 card covers its tap target on Fold → tut-place worker session_01UV1SzkUFJmikqECkuFxtPn; reviewer session_01UV1Szjoc74qzY1ffJ45Mrv kept idle to re-review review/tut-place. title-tag-r1 reviewer session_01UV1SzmFFVNQ3K1RGgtZK3p.
+- (14:19Z) cardflip-glow2-r2 SMOKE PASS live 73c06812 → archived. Night-time analyst (opus) session_01UV1SzhuYF9iVGubAH5xsE6 → owner 14:20Z (3 flips/month too few); D1 (1st/15th) parked until then.
