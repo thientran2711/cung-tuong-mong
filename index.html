@@ -2458,7 +2458,7 @@ function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot
   const s=d.S;return `<div class="slot"><b>Ô ${n}: ${s.name}</b><span class="past">${RANKS[s.rank].n} · năm ${s.year}, tháng ${s.month}, ${TUAN[s.tuan]}</span><div class="srow"><button class="main" data-load="${n}">Tiếp tục kiếp này</button><button class="btn" data-new="${n}" data-ask="1">Kiếp mới</button></div></div>`}).join("");
  $("slots").innerHTML=L;T.hidden=false;const f=T.querySelector("button");if(f)f.focus({preventScroll:true})}
 $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
- if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;quiet=true;deser(d);quiet=false;$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
+ if(b.dataset.load){const d=loadSlot(+b.dataset.load);if(!d)return;SLOT=+b.dataset.load;quiet=true;d.tab="act";/* owner 16/11: entering the game always opens her room (Hành sự), never the last tab */deser(d);quiet=false;$("title").hidden=true;deal();showModal();render();if(S.mg)resumeMG();return}
  if(b.dataset.new){if(b.dataset.ask==="1"){b.dataset.ask="2";b.innerHTML="Chắc chắn?<small>Kiếp đang chơi sẽ mất</small>";return}SLOT=+b.dataset.new;$("title").hidden=true;start()}};
 
 /* wiring */
@@ -6538,13 +6538,15 @@ st.textContent=`
 .kpmenu.n4{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* Chọn sổ: one kit section per sổ (h4.kpst label + kitRows + .kbtn) */
 #modal .kpt-mount #slots{display:flex;flex-direction:column;gap:6px;margin:0 0 6px}
-.kslot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:2px 0 6px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
-.kslot>.kpst{grid-column:1/-1;margin:0}
-.kslot .kb{margin:0}
-.kslot-a{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.kslot-a .kbtn{min-height:40px;padding:6px 14px;font-size:.84rem}
+/* KIT slot card (owner 16/11 "info on top, buttons below"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, any similar list):
+   h4.kpst, the kit info rows FULL WIDTH on top, the kit buttons in ONE row below (equal width); short values never wrap word by word */
+.kslot{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:2px 0 8px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kslot>.kpst{margin:0}
+.kslot .kb{margin:0;width:100%}
+.kslot .kb .krv{overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.kslot-a{display:flex;gap:8px;flex-wrap:nowrap;justify-content:stretch}
+.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:40px;padding:6px 10px;font-size:.84rem;white-space:normal}
 .kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
-@media (max-width:599px),(max-height:500px){.kslot{grid-template-columns:1fr}.kslot-a{justify-content:stretch}.kslot-a .kbtn{flex:1 1 0}}
 /* Thiết lập: kit controls (KIT.md 28) */
 .optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}
 .optwrap .optbox.kctls label{display:grid}
@@ -23819,7 +23821,7 @@ CW.forceBend=()=>{if(!CW.on||!S||S.dead||CW.inLife||CW.bend||waiting()||frozen()
 CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base)return null;let d;try{d=ser()}catch(e){return null}
  return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||""}}};
 CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
- quiet=true;try{deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
+ quiet=true;try{if(o.d)o.d.tab="act";/* owner 16/11: rejoin opens her room (Hành sự) */deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  try{keepFriendPos();refreshHere()}catch(e){}syncRoom(CW.roomMsg);try{$("title").hidden=true}catch(e){}
  if(Q.length)showModal();render();lockNext();return true};
@@ -31120,9 +31122,17 @@ function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);i
 function kitPhEvTone(m){let fam="";try{const pid=String(m.pid||"");if(/^e68[A-Za-z]/.test(pid)&&typeof E68I!=="undefined"&&E68I[pid.slice(3)])fam=E68I[pid.slice(3)].fam||""}catch(e){}
  /* id + title + the FIRST sentence only (the rest of the body holds option hints such as "phi tần ghen" that are not the event's tone) */
  const first=(kitPhPlain(m.h).split(kRx("(?<=[.!?…])\\s",""))[0]||"").slice(0,200);const txt=kitPhEvId(m)+" "+kitPhPlain(m.t)+" "+first;return kitPhTone(txt,{fam})}
+/* KIT §8.1 (review/kpanel-compact): ONE structural test, never load timing. Only a real EVENT (event id / pid / pp / news / event choice) gets a placeholder picture
+   (event banner or option card); a confirm, a picker or a short notice without event identity stays picture-free so it can be compact. */
+function kitPhEventLike(m){try{if(!m)return false;if(/\bkptitle\b/.test(String(m.cls||""))||(m.kit&&(m.kit.scene||m.kit.menu)))return false;
+ return !!(m.pid||m.pp||m.evId||m.ev||m.act||m.kind==="news"||/^Tin trong cung/.test(String(m.t||""))||(typeof kitIsEventChoice==="function"&&kitIsEventChoice(m))||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}catch(e){return true}}
+window.kitPhEventLike=kitPhEventLike;
 function kitPhEvent(m){const tone=kitPhEvTone(m);kitPhNote("event",kitPhEvId(m),tone,kitPhPlain(m.t));return{src:KIT_PH.ev[tone],lab:"",ph:tone}}
 (function(){if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){const r=a0.apply(this,arguments);try{
   if(!m||m.art||m.stArt||!kitPhEvReady())return r;
+  /* KIT §8.1 (review/kpanel-compact): a menu panel (title menu, scene menus) never gets an event placeholder: its layout must not depend on when EVART loaded */
+  if(/\bkptitle\b/.test(String(m.cls||""))||(m.kit&&(m.kit.scene||m.kit.menu)))return r;
+  if(!kitPhEventLike(m))return r;
   if(m.kit&&(m.kit.shop||m.kit.pick||m.kit.look))return r;  /* look-up panels (Tâm trạng / Đã biết / Chứng cứ về X) are not events: their own headArt or nothing (review/mood-dialog) */if(typeof giftIxOf==="function"&&giftIxOf(m)!=null)return r;if(m.pid==="giftin")return r;
   let room="";try{room=typeof evArt==="function"?evArt():""}catch(e){room=""}
   if(r&&r.src&&!(room&&r.src===room)&&r.src!==KIT_PH.act.light&&r.src!==KIT_PH.act.dark)return r;
@@ -31255,7 +31265,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* a picture the option already carries: that picture, in the slot */
  if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-act-/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
- if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
+ if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
@@ -31753,6 +31763,38 @@ function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;
 if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(Q&&Q[0])eventLines(Q[0])}catch(e){}return s0.apply(this,arguments)}}
 if(typeof log==="function"){const l0=log;log=function(h){return l0.call(this,tx(h))}}
 })();
+/* ================= jkpc: COMPACT KIT PANEL — KIT §8.1 amendment (owner 16/11, iPad title menu in a near-full-screen frame; review/kpanel-compact) =================
+   ONE rule, decided by the panel's CONTENT (never by place): a #modal .dlg.kpanel with little content (no section / row table / subject / picture /
+   faces / person card / long text; a menu, a confirm, a short notice, a picker with a few options) gets `.kpcompact`: the §8.1 width, height fitted to
+   its content up to the §8.1 height (--kph), centred (the title menu: bottom). Information panels keep the one big §8.1 size.
+   kitPanelCompact(dlg) is the classifier (structure after every module built the panel); kitCompactFit() runs after every showModal and on every
+   change of #mb (j74 mounts the title sub-screens after showModal). Deterministic: it reads structure, never load timing. ================= */
+function kitPanelCompact(dlg){try{if(!dlg||!dlg.classList.contains("kpanel")||dlg.classList.contains("kp-person"))return false;
+ const mb=dlg.querySelector(":scope > #mb");if(!mb)return false;
+ if(mb.querySelector(".kpmenu,.kpt-mount"))return true;  /* title menu and its sub-screens (Chọn sổ, Thiết lập, Sổ luân hồi): forms / short lists, fitted up to --kph */
+ /* panels built around a stage / big picture / person keep the one big size */
+ if(mb.querySelector(".kpid,.kpfaces,.kdlgart,.kpev,.kmlist")||dlg.querySelector(":scope > .kdper,:scope > .kdlgart"))return false;
+ /* the rest is decided by CONTENT: fitted height (class on) is at most KPC_MAX of the big frame height (class off) -> short content fits itself, long content keeps the one big size */
+ const had=dlg.classList.contains("kpcompact");dlg.classList.remove("kpcompact");const big=dlg.offsetHeight;dlg.classList.add("kpcompact");const nat=dlg.offsetHeight;
+ if(!had)dlg.classList.remove("kpcompact");
+ return big>0&&nat<=big*KPC_MAX}catch(e){return false}}
+const KPC_MAX=.62;
+function kitCompactFit(){try{const M=document.getElementById("modal");if(!M)return;const d=M.querySelector(".dlg.kpanel");if(!d)return;
+ const on=!M.hidden&&kitPanelCompact(d);if(d.classList.contains("kpcompact")!==on){d.classList.toggle("kpcompact",on);try{if(typeof kitSealEvPlace==="function")kitSealEvPlace()}catch(e){}}  /* the corner seal (jseal) reads the frame size: place it again after the fit */
+ M.classList.toggle("kpcompactm",on)}catch(e){}}
+window.kitPanelCompact=kitPanelCompact;try{document.getElementById('mb').addEventListener('load',()=>kitCompactFit(),true)}catch(e){}window.kitCompactFit=kitCompactFit;
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitCompactFit();return r};window.showModal=showModal;
+ try{const mb=document.getElementById("mb");let t=0;if(mb)new MutationObserver(()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;kitCompactFit()})}).observe(mb,{childList:true,subtree:true});
+  const M=document.getElementById("modal");if(M)new MutationObserver(()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;kitCompactFit()})}).observe(M,{attributes:true,attributeFilter:["hidden","class"]})}catch(e){}
+ const st=document.createElement("style");st.id="kpc-css";st.textContent=`
+/* KIT §8.1 compact: same width, height = content (up to --kph) */
+html body #modal:not(.pcm) .dlg.kpanel.kpcompact{height:auto!important;min-height:0!important;max-height:var(--kph)!important}
+html body #modal:not(.pcm) .dlg.kpanel.kpcompact>#mb{flex:0 1 auto;padding-bottom:6px}
+html body #modal:not(.pcm) .dlg.kpanel.kpcompact .kpb.kpshort{margin:0}
+/* title menu: small, at the bottom, the room behind it stays visible */
+.modal.kpthome.kpscene{align-items:flex-end!important;justify-content:center!important;padding:8px 8px 14px!important}
+.modal.kpthome .dlg.kpsc .kpmenu{margin:6px 0 4px}
+`;document.head.appendChild(st)})();
 
 window.__ctmBuilt=1;
 </script>
@@ -31781,7 +31823,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="08f413da05e6";window.CTM_BUILD=BUILD;
+const BUILD="ae48bb89d820";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -26,13 +26,15 @@ st.textContent=`
 .kpmenu.n4{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* Chọn sổ: one kit section per sổ (h4.kpst label + kitRows + .kbtn) */
 #modal .kpt-mount #slots{display:flex;flex-direction:column;gap:6px;margin:0 0 6px}
-.kslot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:2px 0 6px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
-.kslot>.kpst{grid-column:1/-1;margin:0}
-.kslot .kb{margin:0}
-.kslot-a{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.kslot-a .kbtn{min-height:40px;padding:6px 14px;font-size:.84rem}
+/* KIT slot card (owner 16/11 "info on top, buttons below"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, any similar list):
+   h4.kpst, the kit info rows FULL WIDTH on top, the kit buttons in ONE row below (equal width); short values never wrap word by word */
+.kslot{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:2px 0 8px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kslot>.kpst{margin:0}
+.kslot .kb{margin:0;width:100%}
+.kslot .kb .krv{overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.kslot-a{display:flex;gap:8px;flex-wrap:nowrap;justify-content:stretch}
+.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:40px;padding:6px 10px;font-size:.84rem;white-space:normal}
 .kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
-@media (max-width:599px),(max-height:500px){.kslot{grid-template-columns:1fr}.kslot-a{justify-content:stretch}.kslot-a .kbtn{flex:1 1 0}}
 /* Thiết lập: kit controls (KIT.md 28) */
 .optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}
 .optwrap .optbox.kctls label{display:grid}
