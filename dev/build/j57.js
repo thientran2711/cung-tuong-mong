@@ -24,7 +24,7 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 /* audit j54: the round face in the princess / suitor rows is a block (display:grid) and sat on a line of its own; inline like j53's rows */
 (function(){const st=document.createElement("style");st.textContent=".h54r>span>.md,.h54box .h54r .md{display:inline-grid;vertical-align:middle}.h54r>span{line-height:1.5}";document.head.appendChild(st)})();
 /* bottom tabs, no truncated text and one treatment for all: every label on ONE line at every width. Below 1280px every tab shows
-   its short label (data-s: Việc, Bản đồ, Phi tần, Quan hệ, Phe, Kẻ hầu, Con, Rương, Tài nghệ, Truyện, Nhật ký; servant mode sets
+   its short label (data-s: Hành sự, Dư đồ, Phi tần, Ân oán, Phe, Cung nhân, Hoàng tự, Tư trang, Tài nghệ, Mệnh, Sổ ghi (j84 TABS); servant mode sets
    its own), at full width the long label. One font size for the whole bar: shrunk together (never per tab) until the widest label
    fits its column (columns = number of visible tabs, two rows on phones), re-measured on resize and whenever the labels change. */
 (function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=

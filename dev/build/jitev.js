@@ -49,12 +49,13 @@ const IEV_NOUN=[
  [/tập chứng cứ|xấp chứng cứ|cuốn sổ|sổ sách|sổ nợ|giấy nợ|văn tự/i,"chungcu"],
  [/(đốt|giữ|dâng|xé|trả|nhận|cất|đọc|mở|gửi|trình|nộp) (lại |hết |cả )?(bức |lá |phong )?thư|thư từ/i,"thu"],[/(đốt|giữ|cất|trả|ném|giặt) (lại |chiếc )?khăn|chiếc khăn/i,"khantay"],[/túi bạc|nén bạc|thỏi bạc|hộp vàng bạc|đút lót|hối lộ/i,"vangbac"]];
 /* ---------- option name → what it does to the item (earliest verb in the name wins) ---------- */
-const IEV_VERB=[["burn",/(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)/i],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
+const IEV_VERB=[["burn",kRx("(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)","i")],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
  ["pour",/đổ (đi|bỏ|xuống|ra)|hắt (đi|bỏ)/i],["well",/giếng|(ném|thả|vứt) (xuống|vào) (hồ|sông|ao)|xuống hồ|xuống sông/i],["bury",/chôn(?! chặt)/i],
  ["back",/trả (lại|về)(?! cho)|gửi trả|đưa trả|hoàn trả/i],["refuse",/từ chối|khước từ|không nhận|chối từ/i],
  ["give",/dâng|trình (lên|với)?|(^|\s)nộp|giao (cho|nộp|lại|ra)|đưa (cho|lên|tới|đến)|chuyển (cho|tới)|tặng lại|đem (đến|tới|cho|lên)|mang (đến|tới|lên|cho)|chia cho|trả (\S+ ){0,2}cho/i],
  ["use",/(^|\s)uống|ăn (ngay|hết|thử|luôn)|nếm|thoa lên|dùng ngay/i],
- ["keep",/(^|\s)(?<!vờ )nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))|(^|\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên/i]];
+ ["keep",kRx("(?<!vờ)(?:^|\\s)nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))","i")],/* lookbehind leading (kRx, Safari < 16.4) */
+ ["keep",kRx("(^|\\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên","i")]];
 /* option names whose first verb is not what happens to the item shown (the token is kept away, only the note burns) */
 const IEV_OPT=[[/đốt mảnh giấy, cất tín vật/i,"give"]];
 const IEV_DESTROY=["burn","tear","smash","pour","well","bury"];
@@ -116,14 +117,14 @@ function ievCenter(r){return{x:r.left+r.width/2,y:r.top+r.height/2}}
 function kitItemFx(act,I,o){o=o||{};if(!ievOn())return 0;if(typeof I==="string"||(I&&!I.name&&I.k))I=kitItemInfo(I);
  IEV.log.push({act,name:I&&I.name});if(IEV.log.length>80)IEV.log.shift();
  const RB=(typeof BAL==="object"&&BAL.itev)||{};
- if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700)}}return 0}
+ if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700)}}return 0}
  let r=o.from&&o.from.width?o.from:null;if(!r){const s=Math.min(110,innerWidth*.22);r={left:innerWidth/2-s/2,top:innerHeight*.4-s/2,width:s,height:s}}
  const w=ievClone(I,r),c=ievCenter(r);ievCatch();let d=RB[act]||1200;const end=()=>{w.remove();setTimeout(ievUncatch,0)};
  try{try{const KS={keep:"itemFly",back:"giftBack",give:"give",burn:"mgFire",well:"mgThrow",use:"heal"};/* jsfx moments (dev/audio/SFX_PLAN.md) */if(typeof kitSfx==="function")kitSfx(KS[act]||"itemLose");else if(typeof sfx==="function")sfx(act==="keep"?"sfx-coin":"sfx-open")}catch(e){}
  if(act==="keep"){const tb=ievBag();const b=tb?tb.getBoundingClientRect():{left:innerWidth/2,top:innerHeight-40,width:0,height:0};const t=ievCenter(b);
   const dx=t.x-c.x,dy=t.y-c.y,sc=Math.max(.15,Math.min(b.width||40,b.height||40)/Math.max(1,r.width));d=RB.keep||900;
   ievAnim(w,[{transform:ievT(0,0,1),opacity:1},{transform:ievT(0,-18,1.12),opacity:1,offset:.2},{transform:ievT(dx*.5,dy*.5-70,.7),opacity:1,offset:.6},{transform:ievT(dx,dy,sc),opacity:.25}],{duration:d}).finished.then(()=>{end();
-   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
+   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
  else if(act==="back"||act==="give"){let t=null;const to=o.to&&o.to.getBoundingClientRect?o.to.getBoundingClientRect():o.to;
   if(to&&to.width)t={x:to.left+to.width/2,y:to.top+to.height*.42};else t={x:act==="back"?-r.width:innerWidth/2,y:act==="back"?c.y-40:-r.height};
   const dx=t.x-c.x,dy=t.y-c.y;d=RB.back||1000;
