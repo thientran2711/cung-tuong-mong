@@ -85,18 +85,28 @@ function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
    page = one page wide view (Fold room, Fold place, iPad room page — the Fold page IS the iPad page scaled, KIT §0) → 2 slots;
    spread = the iPad full-screen place painting over the whole spread → 4 slots (2 per page). Others are reached by swiping (33.9).
    band = px under the feet reserved for the two-line name chip. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
-const KIT_SLOTS={page:2,spread:4,band:50,pet:{sx:.3}};
+/* stage-figsize (owner 16/11 ~21:20Z "người phải cao hơn và to hơn" + s24: Fold slots a little to the RIGHT, nobody clipped): rail = px kept free on the
+   LEFT of every stage view for the left rail (#krail: 44 px buttons at 17 px + 5 px air), always, so the slots never move when the rail appears a moment later
+   and no head stands under a rail button; edge = px the visible art (kitFigBody l..r, sleeves included) keeps from the stage edge / side column — a slot
+   whose figure would be cut there is pulled in by just that much (kitSlotIn), its pet follows it. */
+const KIT_SLOTS={page:2,spread:4,band:50,rail:66,edge:4,pet:{sx:.3}};
+function kitSlotIn(cx,l,r,lo,hi){/* l,r = visible art left/right edge relative to the body centre (l<0<r); returns the centre that keeps [cx+l,cx+r] inside [lo,hi] */
+ if(r-l>=hi-lo)return (lo+hi)/2-(l+r)/2;if(cx+l<lo)return lo-l;if(cx+r>hi)return hi-r;return cx}
 function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}
 function kitSlotFloor(sH){return Math.max(sH*.03,KIT_SLOTS.band)}
 function kitPetSpot(cx,sw){return cx+KIT_SLOTS.pet.sx*sw}
-window.KIT_SLOTS=KIT_SLOTS;window.kitSlotsN=kitSlotsN;window.kitSlotFloor=kitSlotFloor;window.kitPetSpot=kitPetSpot;
+window.KIT_SLOTS=KIT_SLOTS;window.kitSlotIn=kitSlotIn;window.kitSlotsN=kitSlotsN;window.kitSlotFloor=kitSlotFloor;window.kitPetSpot=kitPetSpot;
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
    o.text: put img.dataset.i as the parent's text; o.swap: replace the img by img.dataset.i. */
-function kitImgErr(im,o){try{o=o||{};if(!im||!im.isConnected)return;const t=o.sel?im.closest(o.sel):im.parentNode;if(!t)return;
+function kitImgErr(im,o){try{o=o||{};if(!im||!im.isConnected)return;
+ /* stage-figsize (owner Fold shot 16/11: blank portrait frames on the side cards right after a new build): the first load of a new build pulls hundreds of
+    pictures from the CDN at once and a few fail for a moment; a failed portrait is retried twice (1.5 s, 4 s) before it falls back to the initials */
+ const n=+(im.dataset.kretry||0);if(n<2&&!o.noretry){im.dataset.kretry=n+1;const src=im.getAttribute("src");setTimeout(()=>{try{if(im.isConnected&&src){im.removeAttribute("src");im.setAttribute("src",src)}}catch(e){}},n?4000:1500);return}
+ const t=o.sel?im.closest(o.sel):im.parentNode;if(!t)return;
  if(o.cls)t.classList.add(o.cls);if(o.text){t.textContent=im.dataset.i||"";return}if(o.swap)im.replaceWith(im.dataset.i||"")}catch(e){}}
 window.kitImgErr=kitImgErr;try{document.documentElement.style.setProperty("--kfig",String(KIT_FIG.h))}catch(e){}
 /* ================= ONE ACT CARD SIZE: every act card the same width and height at each breakpoint; long text clamps, ⓘ opens the full card ================= */

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"92ddac8c","t":"2026-11-16T20:46Z","c":"stage-pets r7: KIT 33.12 fixed slot table (one page = 2 slots incl. Fold, iPad spread place = 4), body centre on slot, one floor line, pet …","b":"fd184a2e460e","h":[{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."}]};
+window.CTM_BI={"s":"b349f50e+","t":"2026-11-16T20:46Z","c":"build: rebuilt after merging r7 + r1 onto main 1aa0edb2; worker shots removed from git","b":"50b5ebba9516","h":[{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -4438,18 +4438,28 @@ function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
    page = one page wide view (Fold room, Fold place, iPad room page — the Fold page IS the iPad page scaled, KIT §0) → 2 slots;
    spread = the iPad full-screen place painting over the whole spread → 4 slots (2 per page). Others are reached by swiping (33.9).
    band = px under the feet reserved for the two-line name chip. pet = the following pet's fixed spot: its visible bottom-centre at slot centre + pet.sx × slot width. */
-const KIT_SLOTS={page:2,spread:4,band:50,pet:{sx:.3}};
+/* stage-figsize (owner 16/11 ~21:20Z "người phải cao hơn và to hơn" + s24: Fold slots a little to the RIGHT, nobody clipped): rail = px kept free on the
+   LEFT of every stage view for the left rail (#krail: 44 px buttons at 17 px + 5 px air), always, so the slots never move when the rail appears a moment later
+   and no head stands under a rail button; edge = px the visible art (kitFigBody l..r, sleeves included) keeps from the stage edge / side column — a slot
+   whose figure would be cut there is pulled in by just that much (kitSlotIn), its pet follows it. */
+const KIT_SLOTS={page:2,spread:4,band:50,rail:66,edge:4,pet:{sx:.3}};
+function kitSlotIn(cx,l,r,lo,hi){/* l,r = visible art left/right edge relative to the body centre (l<0<r); returns the centre that keeps [cx+l,cx+r] inside [lo,hi] */
+ if(r-l>=hi-lo)return (lo+hi)/2-(l+r)/2;if(cx+l<lo)return lo-l;if(cx+r>hi)return hi-r;return cx}
 function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}
 function kitSlotFloor(sH){return Math.max(sH*.03,KIT_SLOTS.band)}
 function kitPetSpot(cx,sw){return cx+KIT_SLOTS.pet.sx*sw}
-window.KIT_SLOTS=KIT_SLOTS;window.kitSlotsN=kitSlotsN;window.kitSlotFloor=kitSlotFloor;window.kitPetSpot=kitPetSpot;
+window.KIT_SLOTS=KIT_SLOTS;window.kitSlotIn=kitSlotIn;window.kitSlotsN=kitSlotsN;window.kitSlotFloor=kitSlotFloor;window.kitPetSpot=kitPetSpot;
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
    o.text: put img.dataset.i as the parent's text; o.swap: replace the img by img.dataset.i. */
-function kitImgErr(im,o){try{o=o||{};if(!im||!im.isConnected)return;const t=o.sel?im.closest(o.sel):im.parentNode;if(!t)return;
+function kitImgErr(im,o){try{o=o||{};if(!im||!im.isConnected)return;
+ /* stage-figsize (owner Fold shot 16/11: blank portrait frames on the side cards right after a new build): the first load of a new build pulls hundreds of
+    pictures from the CDN at once and a few fail for a moment; a failed portrait is retried twice (1.5 s, 4 s) before it falls back to the initials */
+ const n=+(im.dataset.kretry||0);if(n<2&&!o.noretry){im.dataset.kretry=n+1;const src=im.getAttribute("src");setTimeout(()=>{try{if(im.isConnected&&src){im.removeAttribute("src");im.setAttribute("src",src)}}catch(e){}},n?4000:1500);return}
+ const t=o.sel?im.closest(o.sel):im.parentNode;if(!t)return;
  if(o.cls)t.classList.add(o.cls);if(o.text){t.textContent=im.dataset.i||"";return}if(o.swap)im.replaceWith(im.dataset.i||"")}catch(e){}}
 window.kitImgErr=kitImgErr;try{document.documentElement.style.setProperty("--kfig",String(KIT_FIG.h))}catch(e){}
 /* ================= ONE ACT CARD SIZE: every act card the same width and height at each breakpoint; long text clamps, ⓘ opens the full card ================= */
@@ -6294,7 +6304,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const imgs=toks.map(t=>t.classList.contains("fig")?t.querySelector(".figimg"):null).filter(Boolean);
  let wait=false;
  for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");if(!im.complete||!im.naturalWidth){wait=true;if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}}if(s&&!j59bb(s,j59sched))wait=true}
- {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<6000)}/* a picture that never loads stops hiding the others after 6 s *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
+ {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<15000)}/* a picture that never loads stops hiding the others after 15 s (stage-figsize: the first load after a new build can take 6 s+ on the CDN; an unplaced pile is what the owner saw) *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
  if(wait)return;
  const R=st.getBoundingClientRect(),sH=R.height,sW=R.width;if(sH<60||sW<60)return;
  const ppl=typeof curPeople==="function"?curPeople():[];
@@ -6303,7 +6313,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   return{tok,p,tag:tok.querySelector(".tag"),nf:1}});
  const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
  /* KIT 33.8 STAGE PET: the ONE following pet of each person (kitPetOf: p.pets / p.petOn, already synced in co-op) stands in a fixed spot on that person's right */
- const j59pr=who=>{try{if(who&&who!==S&&typeof kitKnown==="function"&&!kitKnown(who))return null;const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
+ const j59pr=who=>{try{if(who&&who!==S&&!j59known(who))return null;/* r7-r1 review 1: a stranger ("Người lạ" silhouette) never shows a pet — the same known test as the figure (figWho first) */const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
  const mePet=me?j59pr(S):null;E.forEach(x=>{x.pet=x.im?j59pr(x.p):null});
  const pVH=(r,h)=>r?h*KIT_PET.h[r.a.cls]*r.a.sc:0,pVW=(r,h)=>r?pVH(r,h)*r.b.ar*(r.b.r-r.b.l)/Math.max(.05,r.b.b-r.b.t):0,pEx=(r,h)=>r?pVW(r,h)*(1-KIT_PET.ov):0;
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
@@ -6336,7 +6346,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
  const NS=kitSlotsN(st)/* KIT 33.12 FIXED SLOT TABLE (owner 16/11 19:54Z + ~20:04Z): the slot count of a view comes from the kit table only (one page = 2: Fold room / Fold place / iPad room page; iPad spread-wide place = 4), never from who stands there */,M=E.length,nAll=M+(me?1:0);
  {}
- const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
+ const leftFor=(z)=>{let ll=Math.max(8+gL,KIT_SLOTS.rail||0);/* KIT 33.12 rail: the left rail's strip is never a slot (r6 FAIL 1: heads under #krail); fixed, so slots do not move when the rail paints */try{const kr=document.getElementById("krail");if(kr&&kr.parentNode===st&&kr.offsetHeight){const q=kr.getBoundingClientRect();ll=Math.max(ll,q.right-R.left+5)}}catch(e){}try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
  const FS=st.classList.contains("kplfs");/* KIT 33.10 full-screen place painting (no plaque column) */
  const geo=(N,z)=>{const paged=nAll>N;const CW=0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSwE(N,avail);/* KIT 33.7b fixed spots: N equal columns (jkit) — people never overlap, pets may overlap legs */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
@@ -6378,13 +6388,14 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     neighbour allowance, never under a panel — review/small-bugs-2) */
  const inLim=cx=>cx;/* KIT 33.12: a slot never moves (the slots already lie inside the free width between the side columns) */
  const cMid=b=>b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(kCL(b)+kCR(b))/2;/* the BODY (core column) centre stands on the slot centre, not the sleeve-to-sleeve box (owner: bodies at their own slot centres) */
- if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=inLim(cxOf(slot++));centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
+ const loX=KIT_SLOTS.edge||4,hiX=Math.min(sW-(KIT_SLOTS.edge||4),G.x0+G.avail+6-(KIT_SLOTS.edge||4));/* stage-figsize: visible art never cut by the stage edge nor under the side column (kitSlotIn) */
+ if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=kitSlotIn(inLim(cxOf(slot++)),meW*(mb.l-cMid(mb)),meW*(mb.r-cMid(mb)),loX,hiX);centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
   me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
    const d=R.top+st.clientTop+floorY+3-g.getBoundingClientRect().top;if(Math.abs(d)>.3)mt.style.top=(floorY+3+d).toFixed(1)+"px"}}
-  for(const x of vis){const cx=cxOf(slot++);centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
+  for(const x of vis){let cx=cxOf(slot++);if(!x.nf){const w0=boxW(x,H);cx=kitSlotIn(cx,w0*(kCL(x.b)-cMid(x.b)),w0*(kCR(x.b)-cMid(x.b)),loX,hiX)}centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
   x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
@@ -44777,7 +44788,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fd184a2e460e";window.CTM_BUILD=BUILD;
+const BUILD="50b5ebba9516";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

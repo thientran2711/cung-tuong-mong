@@ -140,7 +140,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const imgs=toks.map(t=>t.classList.contains("fig")?t.querySelector(".figimg"):null).filter(Boolean);
  let wait=false;
  for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");if(!im.complete||!im.naturalWidth){wait=true;if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}}if(s&&!j59bb(s,j59sched))wait=true}
- {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<6000)}/* a picture that never loads stops hiding the others after 6 s *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
+ {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<15000)}/* a picture that never loads stops hiding the others after 15 s (stage-figsize: the first load after a new build can take 6 s+ on the CDN; an unplaced pile is what the owner saw) *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
  if(wait)return;
  const R=st.getBoundingClientRect(),sH=R.height,sW=R.width;if(sH<60||sW<60)return;
  const ppl=typeof curPeople==="function"?curPeople():[];
@@ -149,7 +149,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   return{tok,p,tag:tok.querySelector(".tag"),nf:1}});
  const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
  /* KIT 33.8 STAGE PET: the ONE following pet of each person (kitPetOf: p.pets / p.petOn, already synced in co-op) stands in a fixed spot on that person's right */
- const j59pr=who=>{try{if(who&&who!==S&&typeof kitKnown==="function"&&!kitKnown(who))return null;const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
+ const j59pr=who=>{try{if(who&&who!==S&&!j59known(who))return null;/* r7-r1 review 1: a stranger ("Người lạ" silhouette) never shows a pet — the same known test as the figure (figWho first) */const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
  const mePet=me?j59pr(S):null;E.forEach(x=>{x.pet=x.im?j59pr(x.p):null});
  const pVH=(r,h)=>r?h*KIT_PET.h[r.a.cls]*r.a.sc:0,pVW=(r,h)=>r?pVH(r,h)*r.b.ar*(r.b.r-r.b.l)/Math.max(.05,r.b.b-r.b.t):0,pEx=(r,h)=>r?pVW(r,h)*(1-KIT_PET.ov):0;
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
@@ -182,7 +182,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
  const NS=kitSlotsN(st)/* KIT 33.12 FIXED SLOT TABLE (owner 16/11 19:54Z + ~20:04Z): the slot count of a view comes from the kit table only (one page = 2: Fold room / Fold place / iPad room page; iPad spread-wide place = 4), never from who stands there */,M=E.length,nAll=M+(me?1:0);
  {}
- const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
+ const leftFor=(z)=>{let ll=Math.max(8+gL,KIT_SLOTS.rail||0);/* KIT 33.12 rail: the left rail's strip is never a slot (r6 FAIL 1: heads under #krail); fixed, so slots do not move when the rail paints */try{const kr=document.getElementById("krail");if(kr&&kr.parentNode===st&&kr.offsetHeight){const q=kr.getBoundingClientRect();ll=Math.max(ll,q.right-R.left+5)}}catch(e){}try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
  const FS=st.classList.contains("kplfs");/* KIT 33.10 full-screen place painting (no plaque column) */
  const geo=(N,z)=>{const paged=nAll>N;const CW=0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSwE(N,avail);/* KIT 33.7b fixed spots: N equal columns (jkit) — people never overlap, pets may overlap legs */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
@@ -224,13 +224,14 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     neighbour allowance, never under a panel — review/small-bugs-2) */
  const inLim=cx=>cx;/* KIT 33.12: a slot never moves (the slots already lie inside the free width between the side columns) */
  const cMid=b=>b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(kCL(b)+kCR(b))/2;/* the BODY (core column) centre stands on the slot centre, not the sleeve-to-sleeve box (owner: bodies at their own slot centres) */
- if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=inLim(cxOf(slot++));centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
+ const loX=KIT_SLOTS.edge||4,hiX=Math.min(sW-(KIT_SLOTS.edge||4),G.x0+G.avail+6-(KIT_SLOTS.edge||4));/* stage-figsize: visible art never cut by the stage edge nor under the side column (kitSlotIn) */
+ if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=kitSlotIn(inLim(cxOf(slot++)),meW*(mb.l-cMid(mb)),meW*(mb.r-cMid(mb)),loX,hiX);centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
   me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
    const d=R.top+st.clientTop+floorY+3-g.getBoundingClientRect().top;if(Math.abs(d)>.3)mt.style.top=(floorY+3+d).toFixed(1)+"px"}}
-  for(const x of vis){const cx=cxOf(slot++);centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
+  for(const x of vis){let cx=cxOf(slot++);if(!x.nf){const w0=boxW(x,H);cx=kitSlotIn(cx,w0*(kCL(x.b)-cMid(x.b)),w0*(kCR(x.b)-cMid(x.b)),loX,hiX)}centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
   x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
