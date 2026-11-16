@@ -293,3 +293,4 @@ Self-wake: s16 trigger trig_01P3xyyt8UbJBytM4MJuPd8o DELETED at handover → s17
 - (13:45Z) merge-train-7 SMOKE PASS live ee5d33de (build 7b316a41e66c) → worker archived.
 - (13:57Z real) LIVE: main = 0ee35a63 (skin-norosy-r1, owner option B, 2432 pictures no-rosy). Smoke asked. cardflip-glow2-r2 PASS abbd0389 → re-merge main asked; videos sent to owner. MT8 told to merge 0ee35a63. Owner 13:55Z: painting glow option 1 + title bonus types → OD + C inbox + rank-bright worker.
 - (14:02Z) skin-norosy-r1 SMOKE PASS live 0ee35a63 (73/73 new hashes, 0 stale) → reviewer archived.
+- (14:02Z) skin-norosy-r1 SMOKE PASS live 0ee35a63 (73/73 new hashes, 0 stale) → reviewer archived.
