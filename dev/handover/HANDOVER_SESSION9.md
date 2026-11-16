@@ -415,3 +415,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (17:58Z s21) OWNER FEATURE FREEZE OD:L1402 → dev/PARKING_LOT.md created, rule in START_FOREMAN.md, B/C/D inbox. Open question to owner: the 18:45Z–19:25Z health/pregnancy bundle (report done, not built) — build or park?
 - (18:00Z s21) Owner two-way law → two-way-acts worker; AG1→AG3 sent to Foreman C inbox (treated her message as the go for AG).
 - (18:05Z s21) Owner: Sức khỏe = Sức max ceiling only (falls with age), regen unchanged — recorded in OD; suc-khoe report §4.2 superseded on that point. Bundle build vs park still open.
+- (18:08Z s21) Owner: build health+pregnancy bundle now (+ induced-birth drug) → Foreman D inbox; asking owner Q2–Q4 one at a time.
