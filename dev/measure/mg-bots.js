@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
 const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den,td_cong,td_dung,td_ngon,td_hanh';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
-const BOT={rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:40};
+const BOT={rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:40,seek:[+(process.env.MGBOT_SEEK0||600),+(process.env.MGBOT_SEEK1||350)]};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
@@ -74,6 +74,9 @@ const BOTS_SRC=(BOT)=>{
     /* pk.think (≥1) = how much longer a person needs to SEE the right move on this board (more groups on the Cờ board, a short-portion round of Làm phúc) */
     const th=pk.think>0?pk.think:1;
     /* pk.thinkMs = the time a person needs to WORK OUT this move (Làm phúc: the share of a short round), spread ×0.6–1.4 */
+    /* pk.cands (review/mg-tune) = how many pictures a person must LOOK THROUGH to find this move (tray tiles, places, suspects × clues, lanterns):
+       a person scans BOT.seek[1] ms per picture, on average a share U(.3,1) of them, after BOT.seek[0] ms to take in the board (the oracle itself knows at once) */
+    if(pk.cands>0&&!(pk.thinkMs>0))pk.thinkMs=BOT.seek[0]+BOT.seek[1]*pk.cands*(.3+.7*Math.random());
     setTimeout(go,pk.thinkMs>0?pk.thinkMs*(.6+.8*Math.random()):((pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):timing?Math.abs(G())*BOT.rt:BOT.thinkD*(.5+Math.random()))*(timing?1:th))}
    setTimeout(tick,16)};tick()});};
 (async()=>{const b=await chromium.launch();const jobs=[];for(const kind of KINDS)for(const tier of TIERS)for(const bot of BOTS)for(let i=0;i<N;i++)jobs.push({kind,tier,bot});
@@ -83,6 +86,8 @@ const BOTS_SRC=(BOT)=>{
   const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:60000,polling:200});
   await p.evaluate(()=>{try{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
+   /* review/mg-tune: log the time share u = el/lim of every round scored by the ONE time part (jmgt mgPace), for the calibration table */
+   if(typeof mgPace==='function'){const m0=mgPace;window.mgPace=function(env,kind,el,lim){(window.__pl=window.__pl||[]).push(+(cl((+el||0)/Math.max(1,+lim||1),0,1)).toFixed(3));return m0.apply(this,arguments)}}
    /* measuring only: freeze the rest of the game (whole-UI render loops) — the minigame engines do not use them */window.__mgQuiet=1;for(const f of ['render','kmmAll','k3CatTabs','kitBdBox','kitRankPaint','kmmSweep'])try{if(typeof window[f]==='function')window[f]=function(){}}catch(e){}
    const st=document.createElement('style');st.textContent='#kroul,#title{display:none!important} *,*::before,*::after{animation:none!important;transition:none!important} body *{visibility:hidden!important} #ov,#ov *{visibility:visible!important}';document.head.appendChild(st)});
   await p.waitForTimeout(800);return{ctx,p}};
@@ -92,10 +97,10 @@ const BOTS_SRC=(BOT)=>{
      const K=KG82_KIND[J.kind];if(!K)return{err:'no kind '+J.kind};
      let lv=0,tw='';KG82.tier=null;if(/^e-?[\d.]/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word;KG82.tier=t}
      KG82.mgBot=1;KG82.noDemo=1;const d=kg82Open({art:K.n,title:'đo',how:K.how||''});if(!d)return{err:'no frame'};
-     KG82.lv=lv;KG82.ctx='hoc';const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot,J.kind);else setTimeout(w,16)};w()});
-     kg82Close(true);return{raw:r,lv,tw}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
+     KG82.lv=lv;KG82.ctx='hoc';window.__pl=[];const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot,J.kind);else setTimeout(w,16)};w()});
+     kg82Close(true);return{raw:r,lv,tw,u:window.__pl||[]}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
    const key=`${J.kind}|${J.tier}|${J.bot}`;(out[key]=out[key]||[]).push(raw.err?null:raw.raw);if(raw.err)errs.push(key+' '+raw.err);
-   if(OUT)fs.appendFileSync(OUT+'.jsonl',JSON.stringify({kind:J.kind,tier:J.tier,bot:J.bot,raw:raw.err?null:raw.raw})+'\n');
+   if(OUT)fs.appendFileSync(OUT+'.jsonl',JSON.stringify({kind:J.kind,tier:J.tier,bot:J.bot,raw:raw.err?null:raw.raw,u:raw.u})+'\n');
    if(++done%20===0)process.stderr.write(`${done} plays, ${((Date.now()-t0)/1000)|0}s\n`)}
   await ctx.close()};
  await Promise.all([...Array(PAGES)].map((_,i)=>worker(i)));await b.close();

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7b5e5e49+","t":"2026-11-16T19:44Z","c":"s22: merge origin/main into review/chonso-cloud-r1; site rebuilt","b":"47b0ec686041","h":[{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
+window.CTM_BI={"s":"73eec76f+","t":"2026-11-16T20:16Z","c":"coop-contest: one shared contest per room, host-ranked","b":"f8a8ac542f8b","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1013,8 +1013,8 @@ function artActs(){const A=[],r=S.arts;
  return A}
 function deal(){
  const X=[];const v=S.tonight&&S.tonight!=="me"?S.tonight:null;
- if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:{duc:-4},o:oSteal(S),w:{},l:{sung:-3},b:B4L,x:stealX(v),go:()=>{log(stealWin(S,v,"feign"))}});
-  X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:{suc:-5},o:oSteal(S,"road"),w:{},l:{sung:-3},b:B4L,x:stealX(v,1),go:()=>{log(stealWin(S,v,"road"))}})}
+ if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:stealCost("feign"),o:oSteal(S),w:{},l:{sung:-BAL.steal.failSung},b:B4L,x:stealX(v),go:()=>{log(stealWin(S,v,"feign"))}});
+  X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:stealCost("road"),o:oSteal(S,"road"),w:{},l:{sung:-BAL.steal.failSung},b:B4L,x:stealX(v,1),go:()=>{log(stealWin(S,v,"road"))}})}
  const ua=artActs();if(ua.length)X.push(pick(ua));
  const live=S.kids.filter(k=>k.alive);
  const ed=live.filter(k=>k.age>=3).sort((a,b)=>a.tal-b.tal);
@@ -1136,8 +1136,8 @@ function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);op
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
-function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3 đến +8 · Ân tình +2 đến +7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}
-function stealKem(v){let o=9;try{o=Math.round(9*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +25, quý ngươi -15, oán ngươi +${o}`}
+function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3 đến +8 · Ân tình +2 đến +7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}
+function stealKem(v){const B=BAL.steal;const h=BAL.relOan.hurt;let o=Math.round(B.rel*h);try{o=Math.round(B.rel*h*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${B.ghen}, quý ngươi -${B.rel}, oán ngươi +${o}`}
 
 /* portraits */
 const AV=window.AVATARS||{women:[],emperor:[],maids:[]};
@@ -1794,17 +1794,18 @@ A("takeaway","Xin bế con nàng về nuôi",{c:{},kid:1,ok:(a,t)=>rkOf(a)>rkOf(
   return `<span class="${t===S?"r":"g"}">${a===S?"Ngươi":(a.queen?"Hoàng hậu":a.name)} được chuẩn bế ${k.name} về nuôi, vì phẩm vị ${NM(t)} còn thấp.</span> `}});
 A("vp","Tố vượt phẩm",{c:{},ok:(a,t)=>vpItems(t).length>0,o:a=>oVP(a),x:"nàng mặc đồ quá phẩm vị",f:(a,t)=>vpAccuse(a,t)});
 A("plant","Cài đồ vào rương",{c:{},ok:(a,t)=>a.inv.some(e=>!e.h),o:(a,t)=>oPlant(a,t),x:"chọn món đồ",npcOnly:0,f:(a,t,ix)=>plantItem(a,t,ix)});
-A("steal","Tranh sủng",{c:{duc:-4},ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a),f:(a,t)=>stealNight(a,t,"feign")});
-A("road","Chặn ngự giá",{c:{suc:-5},ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a,"road"),f:(a,t)=>stealNight(a,t,"road")});
+A("steal","Tranh sủng",{c:{}/* cost = BAL.steal.cost via jsteal getter */,ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a),f:(a,t)=>stealNight(a,t,"feign")});
+A("road","Chặn ngự giá",{c:{}/* cost = BAL.steal.cost via jsteal getter */,ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a,"road"),f:(a,t)=>stealNight(a,t,"road")});
 A("gift","Tặng quà",{c:{},ok:(a,t)=>a.inv.some(e=>!e.h),o:()=>null,f:(a,t,ix)=>giveTo(a,t,ix)});
-function stealWin(a,t,mode){relAdd(a,t,-15);if(t!==S)t.ghen=cl(t.ghen+25,0,100);if(a===S){S.tonight="me";nightScene()}else S.tonight=a;
+function stealWin(a,t,mode){relAdd(a,t,-BAL.steal.rel);if(t!==S)t.ghen=cl(t.ghen+BAL.steal.ghen,0,100);if(a===S){S.tonight="me";nightScene()}else S.tonight=a;
  return `${NMc(a)} ${mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}, Hoàng thượng sang cung ${NM(a)} thay vì ${NM(t)}. `}
 function tKid(t){const L=kidsOf(t).filter(k=>k.age>=3||k.heir);return L.sort((a,b)=>((+b.heir)-(+a.heir))||((b.sex==="m")-(a.sex==="m"))||(b.fond-a.fond))[0]||null}
 function targetKid(v){return tKid(v)}
 function tonightOf(){return S.tonight==="me"?S:S.tonight||null}
-function stealNight(a,t,mode){ap(a,mode==="road"?{suc:-5}:{duc:-4});const o=oSteal(a,mode);
+function stealCost(mode){const c=BAL.steal.cost[mode==="road"?"road":"feign"],r={};for(const k in c)r[k]=-c[k];return r}
+function stealNight(a,t,mode){ap(a,stealCost(mode));const o=oSteal(a,mode);
  if(roll(o))return stealWin(a,t,mode);
- ap(a,{sung:-3});return `${NMc(a)} định giành đêm của ${NM(t)} nhưng Hoàng thượng không động lòng. Sủng -3. `}
+ ap(a,{sung:-BAL.steal.failSung});return `${NMc(a)} định giành đêm của ${NM(t)} nhưng Hoàng thượng không động lòng. Sủng -${BAL.steal.failSung}. `}
 
 /* ---------- judging by standing ---------- */
 function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,-99);relAdd(q,p,-10);punish(p,"bị Hoàng hậu xử tội",n>=3?2:1);return r}
@@ -2156,11 +2157,11 @@ function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)
   if(Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(`<button data-it="taint" data-ix="${i}">Tẩm<small>mưu kế</small></button>`);
   if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<10?"disabled":""}>Xét nghiệm<small>Bạc -10</small></button>`);
   return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · Đang mặc":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
-/* the tablet: every consort weighted by the same night formula; others may steal it by the same act */
+/* the tablet: every consort weighted by the same night formula; others may steal it by the same act (the try is chosen in jsteal.js) */
 function flip(){S.tonight=null;if(S.dead)return;if(!roll(has("chamchinh")?65:90))return;
  const C=consorts().filter(p=>nightCh(p)>0);if(!C.length)return;const w=C.map(p=>nightCh(p));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}let t=C[i];
  if(t===S)S.tonight="me";else S.tonight=t;
- for(const v of liveRivals(true)){if(v===t)continue;if(hostility(v,t)>=50&&roll(6)){const s=stealNight(v,t,roll(50)?"feign":"road");if(S.tonight===v){if(t===S)Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng ${s}</p>`});else if(S.mat>=2)log(s);t=v;break}}}
+ /* NPC night stealing: agent choice by self-interest, personality, mood and relation (jsteal.js, owner 16/11 14:10Z/14:45Z, OD:L1386); the old hostility ≥ 50 + flat roll is gone */
  if(t===S)pushDil(mkP("ksp"),"Kính sự phòng báo tin")}
 function resolveTonight(){const t=S.tonight;S.tonight=null;if(!t||t==="me"||!t.alive||t.out)return"";return rivalNight(t)}
 /* ================= RELATION WEB, PALACE MAP, PRESENCE, TALK ================= */
@@ -2171,7 +2172,7 @@ function oan(x,y){if(!x||!y||x===y)return 0;if(x===S)return S.ro[y.id]||0;if(y==
 function oanAdd(x,y,n){if(!x||!y||x===y)return;const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
 function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
-function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);if(n<0){oanAdd(y,x,-n*.6);oanAdd(x,y,-n*.2)}else{oanAdd(y,x,-n*.3)}}
+function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
 function oanMonth(){for(const v of rivals){v.oan=Math.max(0,(v.oan||0)-2);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-2)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
 
@@ -3683,22 +3684,22 @@ function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p
 /* each trait = weights over the act menu + reaction rules; a person's behaviour = product of both traits' weights */
 const PERS={
  "Hiểm độc":{tend:"nhẫn nại giăng bẫy, ngoài mặt thân thiện",w:{poison:3,kpoison:3,frame:2.5,kframe:2.5,plant:2.5,musk:3,catswap:2.5,pushp:2,feign:3,warn:.2,help:.4,mediate:.2,provoke:.5},dang:10,slight:1,forgive:.6,trust:.8,gift:1},
- "Kiêu ngạo":{tend:"khiêu khích, hạ nhục trước mặt người, khoe ân sủng, không chịu xin lỗi",w:{provoke:3,humiliate:3,flaunt:3,rumor:1.5,trip:1.5,help:.5,mediate:.3,apologise:.1},dang:0,slight:1.6,forgive:.6,trust:1,gift:.5,lavish:60},
- "Hiền lành":{tend:"giúp người, can ngăn, thăm người ốm, dễ bỏ qua",w:{help:3,warn:2.5,mediate:3,visit:3,apologise:2,poison:.15,kpoison:.15,frame:.2,plant:.2,musk:.15,pushp:.15,provoke:.2,humiliate:.1},dang:-15,slight:.6,forgive:2,trust:1.3,gift:1.2,harmGate:70},
+ "Kiêu ngạo":{tend:"khiêu khích, hạ nhục trước mặt người, khoe ân sủng, không chịu xin lỗi",w:{steal:1.5,provoke:3,humiliate:3,flaunt:3,rumor:1.5,trip:1.5,help:.5,mediate:.3,apologise:.1},dang:0,slight:1.6,forgive:.6,trust:1,gift:.5,lavish:60},
+ "Hiền lành":{tend:"giúp người, can ngăn, thăm người ốm, dễ bỏ qua",w:{steal:.5,help:3,warn:2.5,mediate:3,visit:3,apologise:2,poison:.15,kpoison:.15,frame:.2,plant:.2,musk:.15,pushp:.15,provoke:.2,humiliate:.1},dang:-15,slight:.6,forgive:2,trust:1.3,gift:1.2,harmGate:70},
  "Đa nghi":{tend:"dò xét, thử lòng, soát quà, chậm tin, nhanh ngờ",w:{spy:3,test:3,check:3,help:.6,ally:.6},dang:0,slight:1.2,forgive:.8,trust:.5,gift:.6,suspectWarn:1},
  "Tham vọng":{tend:"bám người mạnh, cướp đêm thị tẩm, bỏ đồng minh sa cơ, đút lót Kính sự phòng",w:{ally:2.5,steal:3,bribeksp:3,drop:3,block:2,accuse:1.5,bribe:1.5},dang:0,slight:1,forgive:1,trust:1,gift:1,riseGift:2},
- "Nhu mì":{tend:"tránh va chạm, theo người cầm đầu phe, dễ bị bạn mạnh xui làm",w:{follow:3,help:1.2,provoke:.2,humiliate:.1,poison:.3,frame:.4,pushed:3},dang:-10,slight:.8,forgive:1.4,trust:1.1,gift:1.1},
+ "Nhu mì":{tend:"tránh va chạm, theo người cầm đầu phe, dễ bị bạn mạnh xui làm",w:{steal:.5,follow:3,help:1.2,provoke:.2,humiliate:.1,poison:.3,frame:.4,pushed:3},dang:-10,slight:.8,forgive:1.4,trust:1.1,gift:1.1},
  /* second traits */
  "Hiếu thảo":{tend:"kính Thái hậu, giữ nề nếp",w:{serveTH:3,provoke:.7},dang:-3,slight:1,forgive:1.1,trust:1,gift:1},
  "Ghen tuông":{tend:"ghen ngay khi người khác được sủng",w:{steal:1.6,trip:1.5,rumor:1.4,block:1.5},dang:5,slight:1.2,forgive:.8,trust:1,gift:1,ghen:1.6},
  "Tham tiền":{tend:"mê bạc vàng, dễ mua chuộc",w:{bribe:1.5,flaunt:1.3},dang:0,slight:1,forgive:1,trust:1,gift:1.6},
- "Trọng nghĩa":{tend:"giữ lời, không bỏ bạn lúc hoạn nạn",w:{help:1.6,warn:1.6,drop:.1},dang:-5,slight:1,forgive:1.2,trust:1.2,gift:1},
+ "Trọng nghĩa":{tend:"giữ lời, không bỏ bạn lúc hoạn nạn",w:{steal:.8,help:1.6,warn:1.6,drop:.1},dang:-5,slight:1,forgive:1.2,trust:1.2,gift:1},
  "Nhiều chuyện":{tend:"buôn chuyện, tin gì cũng lan",w:{rumor:2,gossip:3,spy:1.3},dang:0,slight:1,forgive:1,trust:1,gift:1},
  "Thù dai":{tend:"nhớ oán rất lâu",w:{provoke:1.2},dang:5,slight:1.4,forgive:.3,trust:.9,gift:.8},
  "Cả nể":{tend:"khó từ chối ai, dễ bị nhờ vả",w:{help:1.3,pushed:1.8,follow:1.5},dang:-3,slight:.8,forgive:1.3,trust:1.2,gift:1.1},
- "Thẳng thắn":{tend:"nói thẳng, ghét mưu ngầm",w:{feign:.2,plant:.5,frame:.6,warn:1.5,provoke:1.3},dang:0,slight:1.1,forgive:1.1,trust:1,gift:1},
+ "Thẳng thắn":{tend:"nói thẳng, ghét mưu ngầm",w:{steal:.7,feign:.2,plant:.5,frame:.6,warn:1.5,provoke:1.3},dang:0,slight:1.1,forgive:1.1,trust:1,gift:1},
  "Mê tín":{tend:"tin điềm báo, sợ bùa ngải",w:{check:1.5,pray:3},dang:0,slight:1,forgive:1,trust:1,gift:1},
- "Khéo léo":{tend:"khéo lấy lòng người trên",w:{ally:1.5,serveTH:1.5,gift:1.5},dang:0,slight:.9,forgive:1.1,trust:1,gift:1},
+ "Khéo léo":{tend:"khéo lấy lòng người trên",w:{steal:1.4,ally:1.5,serveTH:1.5,gift:1.5},dang:0,slight:.9,forgive:1.1,trust:1,gift:1},
  /* servants */
  trung:{tend:"che chắn cho chủ, báo trước nguy",w:{warn:3,blame:3,dirty:.4},dang:-10,slight:1,forgive:1.2,trust:1.3,gift:1},
  tham:{tend:"ăn cắp, bán tin, làm việc bẩn vì bạc",w:{steal:3,sell:3,dirty:2,black:3},dang:0,slight:1,forgive:1,trust:.9,gift:1.6},
@@ -6411,7 +6412,10 @@ window.j59CourtNames=j59CourtNames;
    Dư đồ counts other people only (her own place wears her own mark). ---------- */
 function kitHereCount(){try{const V=S&&S.visit;if(!V||V.k!==S.place)return 0;return (V.people||[]).filter(j59person).length}catch(e){return 0}}
 window.kitHereCount=kitHereCount;
-function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||"").trim();if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m))return;const n=kitHereCount();
+function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||"").trim();const n=kitHereCount();
+ /* a longer stage line that starts with the count ("Ở đây còn N người. Càn Ninh cung: …") keeps its text, its count follows the stage (people ledger:
+    the record can bring people in after the line was written) */
+ if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
 const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */
@@ -10523,7 +10527,7 @@ const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||!Array
  deck=deck.filter(a=>!(S.pregUnk&&a&&a.n==="Báo tin có thai"));
  for(const a of deck){if(!a||a.__steal||!(a.n==="Tranh sủng"||a.n==="Chặn ngự giá")||a.b!==2)continue;const road=a.n==="Chặn ngự giá";const desc=a.t;const v=tonightOf();if(!v||v===S)continue;
   a.__steal=1;Object.defineProperty(a,"lock",{get:()=>!ntCan(S),set:()=>{},enumerable:true,configurable:true});Object.defineProperty(a,"t",{get:()=>ntCan(S)?desc:ntReason(S),set:()=>{},enumerable:true,configurable:true});
-  a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"} · mỗi đêm chỉ thử một lần`;
+  a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${stealKem(v)} · mỗi đêm chỉ thử một lần`;
   a.go=()=>{ntTry(S);const n=ntTaken();if(n){log(`${ntReason(S)}.`);return}const t=tonightOf();if(!t||t===S)return;log(`${stealWin(S,t,road?"road":"feign")}Đêm thị tẩm đang chờ; Sủng, Ân tình tính sau đêm.`)};
   a.fail=()=>{ntTry(S);log("Đêm nay ngươi không còn dịp giành lại.")}}}catch(e){console.error(e)}return r};
 /* results never echo the pre-act line of a steal card (that line was the source of '+3..8', 'có thể') */
@@ -10681,6 +10685,66 @@ const fl0=flip;flip=function(){let rows=null;try{rows=whyRows()}catch(e){}const 
 window.nightWhy=function(){const d=S&&S.nightWhy;if(!d||d.wk!==wk())return null;const row=d.rows.find(x=>x.id===d.pick)||null;const tot=d.rows.reduce((a,x)=>a+x.w,0);
  const text=!d.pick?"Đêm nay Hoàng thượng không lật thẻ bài nào.":d.cause==="custom"?`Hôm nay là ${d.day}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.`:d.cause==="stolen"?"Hoàng thượng bị mời sang cung khác giữa đường.":row?`${row.name}: Sủng ${row.sung} · dịp được lật thẻ: ${typeof chanceLvl==="function"?chanceLvl(row.share):word(row.share)} · ${row.n6} đêm trong sáu tuần gần đây · Hoàng thượng đang ${d.mood}`:"";
  return Object.assign({},d,{row,text})};
+})();
+/* ================= jsteal: NIGHT STEALING BY AGENT CHOICE (owner 16/11 14:10Z + 14:45Z, NPC AGENT LAW OD:L1386) =================
+   Replaces the flip-time rule "hostility ≥ 50 → flat roll → 50/50 feign/road" (j8 flip).
+   Every consort (not the co-op friend, who plays herself) may try to take tonight's visit from whoever holds it — the player OR another
+   NPC — with the player's OWN acts Tranh sủng / Chặn ngự giá (j8 ACT steal/road): same cost (BAL.steal.cost), same odds (oSteal), same
+   win/lose effects (stealWin / stealNight). Symmetric: the player keeps her deck cards against any NPC holder.
+   Whether an NPC tries is HER choice (agent): want = need × personality × relation × fear × odds, all from data she already has:
+     need        favour gap (Sủng), rank gap (to Hoàng hậu), heir gap (no living son) — self-interest, weighted by BAL.steal.need
+     personality persW(v,"steal"): her traits (PERS, j28) × her current mood (jemo emoMul); jmind mindW when that module is present
+     relation    thiện cảm toward the holder lowers it (friends rarely rob friends); oán adds only a little (hatred → harm schemes)
+     fear        a holder far above her in rank, or the Empress's custom night, lowers it
+     odds        oSteal of the mode she picks (modes weighted by their odds, never argmax; OD:L1248 no smartest pick)
+   try chance = 1 − e^(−k·want) ≤ pMax; at most maxTry tries a night, in random order; first win ends it (j75: one try each, a won
+   visit is closed for everyone). Runs at the flip, after the custom (mùng một / rằm) decision, inside the card-flip scene (jflip
+   reads the try through its stealNight hook).
+   10-NIGHT LEDGER (owner 16/11 18:10Z/18:40Z): only the night she PLAYS is stolen live (this flip). Ledger nights that are not played
+   call window.stealPass(holder,{live:false}) and print the returned lines as notices; nothing else changes.
+   CO-OP: host decides the world; on the guest seat only tries against the guest herself are decided (her own night; world-agency on
+   the guest stays muted like rivalsTurn), never NPC-vs-NPC.
+   ======================================================================================================================== */
+(function(){
+const B=()=>BAL.steal;
+const ST=window.__stealSt=window.__stealSt||[];   /* measuring only (bot); never saved */
+function stEligible(v,t){return !!(v&&v!==S&&v!==t&&v.alive&&!v.out&&!v.coop&&!v.confined&&nightCh(v)>0&&(typeof ntCan!=="function"||ntCan(v)))}
+function stNeed(v){const N=B().need;const fav=cl(1-(v.sung||0)/100,0,1),rank=rkOf(v)>=7?0:(7-rkOf(v))/7;
+ const heir=kidsOf(v).some(k=>k.sex==="m")?B().heirHas:1;return (N.fav*fav+N.rank*rank+N.heir*heir)/(N.fav+N.rank+N.heir)}
+function stRel(v,t){const b=B();const a=aff(v,t);let r=a>0?Math.max(b.friendMin,1-a/b.friend):1;return r*(1+b.oanW*Math.min(100,Math.max(0,oan(v,t)))/100)}
+function stFear(v,t){const b=B();let f=rkOf(t)-rkOf(v)>=b.fear.gap?b.fear.f:1;const d=S.nightWhy;if(d&&d.cause==="custom"&&t&&rkOf(t)>=7)f*=b.custom;return f}
+function stModes(v){const b=B(),c=b.cost;const M=[];if(ducOf(v)>=c.feign.duc)M.push(["feign",oSteal(v,"feign")]);
+ if((v.suc||0)>=b.sucMin+c.road.suc)M.push(["road",oSteal(v,"road")]);return M}
+/* her wish to try tonight against holder t; mode is drawn now (weighted by its odds) */
+function stealWant(v,t){const M=stModes(v);if(!M.length)return{u:0,p:0,mode:null};let r=Math.random()*M.reduce((a,m)=>a+m[1],0),i=0;while(r>M[i][1]&&i<M.length-1){r-=M[i][1];i++}
+ const mode=M[i][0],o=M[i][1];let mind=1;try{if(typeof mindW==="function")mind=mindW(v,"scheme")||1}catch(e){}
+ const need=stNeed(v),pers=persW(v,"steal")*mind,rel=stRel(v,t),fear=stFear(v,t);const u=need*pers*rel*fear*o/100;
+ return{u,p:Math.min(B().pMax,1-Math.exp(-B().k*u)),mode,o,need,pers,rel,fear}}
+function guestSeat(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}catch(e){return false}}
+function trName(v){try{return (traitsOf(v)[0])||"?"}catch(e){return "?"}}
+/* one night: who tries, who wins. live = the played night (dialogs/log); else notice lines only */
+function stealPass(t,opt){opt=opt||{};const live=opt.live!==false;const out={holder:t,lines:[],tries:0};if(!t||S.dead)return out;
+ if(guestSeat()&&t!==S)return out;
+ const L=liveRivals(true).filter(v=>stEligible(v,t));for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}
+ for(const v of L){if(out.tries>=B().maxTry)break;const w=stealWant(v,t);if(!w.mode||!(Math.random()<w.p))continue;
+  const s=stealNight(v,t,w.mode);if(!s)continue;out.tries++;const won=tonightOf()===v;
+  ST.push({w:wk(),me:t===S,tr:trName(v),mode:w.mode,ok:won,live});if(ST.length>5000)ST.splice(0,1000);
+  const txt=String(s).trim();try{if(typeof newsAdd==="function")newsAdd(v,"steal",txt.replace(/\.\s*$/,""),t===S)}catch(e){}
+  if(!live){out.lines.push(txt);if(won){out.holder=v;break}continue}
+  if(won){out.holder=v;
+   if(t===S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng ${txt}</p>`})}
+   else if(S.mat>=2)log(txt);
+   try{const d=S.nightWhy;if(d&&d.wk===wk()){d.pick=v.id;d.cause="stolen"}}catch(e){}
+   break}
+  if(t===S)log(txt)}
+ return out}
+window.stealPass=stealPass;window.stealWant=stealWant;window.stealNeed=stNeed;window.stealEligible=stEligible;
+/* the act's cost on the shared act list (ACT, j8) reads the same BAL as the deck cards (j2) and stealNight */
+for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(A0)Object.defineProperty(A0,"c",{get:()=>stealCost(k==="road"?"road":"feign"),set:()=>{},enumerable:true,configurable:true})}
+/* the weekly social menu's old "steal" (j28 SOC, made a real act by j75) is folded into this one choice: one path, not two */
+if(typeof SOC==="object"&&SOC.steal)SOC.steal.ok=()=>false;
+/* the flip: after the tablet and the custom night are decided (j8 → j75), the consorts choose */
+const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead&&S.tonight)stealPass(tonightOf(),{live:true})}catch(e){console.error(e)}return r};
 })();
 
 /* ================= j76: THE DAY IS CONTINUOUS TIME (owner 11/14) =================
@@ -12741,7 +12805,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
 (function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
-if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `thị tẩm đêm nay: Sủng +3, Ân tình +2 trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(22)} · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}}
+if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `thị tẩm đêm nay: Sủng +3, Ân tình +2 trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(22)} · kèm: ${stealKem(v)}`}}
 /* wording guide fixes in merged copies */
 (function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
@@ -15051,7 +15115,7 @@ const KG82_KIND={
  ban:{e:"aim",n:"Bắn cung",t:"Bắn hồng tâm",how:"Ngắm đưa qua đưa lại trên bia. Chạm khi ngắm ở giữa hồng tâm. 6 phát tên."},
  tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
  doi:{e:"doiline"},/* filled by jnwp */
- doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý."},
+ doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý. Làm nhanh thì được trọn phần."},
  ve:{e:"pattern",m:"ink",n:"Vẽ",t:"Nhớ nét bút",how:"Nét mực hiện trên ô giấy rồi tan. Chạm lại đúng những ô có nét mực. 5 hồi."},
  hoa:{e:"pattern",m:"flower",n:"Cắm hoa",t:"Nhớ thế hoa",how:"Hoa hiện trên các ô bình rồi khuất. Chạm lại đúng những ô có hoa. 5 hồi."},
  theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
@@ -15255,7 +15319,7 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
  /* mg-easy: tier 0/1 draw a gold ring round the white group in danger (it has ONE empty neighbour left); a quiet glow shows that last empty spot when she stalls or presses Gợi ý (a little score) */
  const tier=kg82Tier(env.lv),IDLE=[6000,10000,0][tier];
  /* mg-balance-2: time per position, the time a capture still earns full marks, extra stones: BAL.mgTier.lev.co by ease */
- const LIM=Math.round(mgLev(env,"co","lim")),FAST=Math.round(mgLev(env,"co","fast")),MORE=Math.round(mgLev(env,"co","extra"));let hintAt=0,hinted=false,tAct=0;
+ const LIM=Math.round(mgLev(env,"co","lim")),MORE=Math.round(mgLev(env,"co","extra"));let hintAt=0,hinted=false,tAct=0;
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=`<button class="kgbtn" id="kg82gohint">Gợi ý<small>chỉ chỗ ăn, bớt một ít phần</small></button>`;box.appendChild(hb);
  const doHint=()=>{if(phase!=="play"||stop||!P)return;if(!hinted){hinted=true;kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Quân trắng chỉ còn một khí ở đây",kg82Col("--gold","#8f5f0c"))}hintAt=performance.now()};hb.querySelector("button").onclick=doHint;
  function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}P=kg82GoGen(n,R0[round],MORE)||kg82GoGen(n,R0[round])||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
@@ -15276,7 +15340,7 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
    env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}else env.hud({score:`${Math.round(pts)}/10`,time:"–"});
   draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play"||stop)return;tAct=performance.now();const [x,y]=C.at(e);let bi=-1,bd=1e9;for(let i=0;i<n*n;i++){const d=Math.hypot(px(i)-x,py(i)-y);if(d<bd){bd=d;bi=i}}
-  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const el=performance.now()-t0,sp=el<=FAST?1:1-.4*Math.min(1,(el-FAST)/Math.max(1,LIM-FAST));pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (down to 60 %) */mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
+  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const sp=mgPace(env,"co",performance.now()-t0,LIM);pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (review/mg-tune: the ONE time part jmgt mgPace) */mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
   else{mark={i:bi,ok:false};kg82Pop(pops,px(bi),py(bi)-s*.6,"Chưa ăn được",kg82Col("--red","#c23b22"));kg82Pluck(0,false)}round++;setTimeout(next,950)});
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
@@ -15653,7 +15717,7 @@ function k91Untangle(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=e
   const E=[...Array(n).keys()].map(i=>[i,(i+1)%n]).concat(kg82Shuf(tri([...Array(n).keys()])).slice(0,Math.ceil(n/2)));let N;
   for(let t=0;t<200;t++){N=[];for(let i=0;i<n;i++){let p,k=0;do{p={x:HR+Math.random()*(W-2*HR),y:HR+Math.random()*(H-2*HR)};k++}while(k<50&&N.some(q=>k91Dist(p.x,p.y,q.x,q.y)<HR*2.2));N.push(p)}if(cross(N,E).c>=n-2)break}
   P={n,E,N,home,c0:Math.max(1,cross(N,E).c)};LIM=(30000+lv*2500)*mgTol(env);phase="play";t0=performance.now();drag=null}
- function finish(ok,t){phase="judge";const left=Math.max(0,LIM-(t-t0));const per=10/NR;let got;if(ok)got=per*(.6+.4*left/LIM);else got=per*.5*(1-cross(P.N,P.E).c/P.c0);pts+=Math.max(0,got);
+ function finish(ok,t){phase="judge";const per=10/NR;let got;if(ok)got=per*mgPace(env,"kim",t-t0,LIM);/* review/mg-tune-r1: the ONE time part (was its own typed .6+.4·left/LIM) */else got=per*.5*(1-cross(P.N,P.E).c/P.c0);pts+=Math.max(0,got);
   kg82Pop(pops,W/2,H*.08+10,ok?"Gỡ xong mối rối!":"Hết giờ",ok?K91C.good():K91C.red());setTimeout(next,1200)}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)finish(false,now);kg82Bg(g,W,H,"kim",.06,.7);
   kg82Spr(g,"kim-spool",W-Math.min(W,H)*.07,Math.min(W,H)*.09,Math.min(W,H)*.1,null,{alpha:.95});
@@ -15760,7 +15824,7 @@ Object.assign(KG82_KIND,{
  dauho:{e:"fling",n:"Đầu hồ",t:"Ném tên vào bình",how:"Đặt ngón tay, kéo ngược về sau rồi buông để ném tên vào miệng bình. Kéo dài thì ném xa; gió đổi mỗi lần. 6 lần ném."},
  ve:{e:"trace",n:"Vẽ",t:"Đồ nét bút",how:"Đặt ngón tay ở chấm xanh rồi đưa theo nét mờ cho kín và đều tay. 4 bức."},
  hoa:{e:"arrange",n:"Cắm hoa",t:"Cắm thế thiên – nhân – địa",how:"Kéo từng cành vào bình, đặt đóa hoa vào vòng của nó: cành dài nhất là Thiên, cành vừa là Nhân, cành ngắn là Địa. Giữ thế hoa cân. 3 bình."},
- kim:{e:"untangle",n:"Khéo tay",t:"Gỡ rối chỉ",how:"Kéo các nút chỉ cho đến khi không còn sợi nào chéo nhau (sợi đỏ là chỗ chéo). 3 mối rối."},
+ kim:{e:"untangle",n:"Khéo tay",t:"Gỡ rối chỉ",how:"Kéo các nút chỉ cho đến khi không còn sợi nào chéo nhau (sợi đỏ là chỗ chéo). 3 mối rối. Làm nhanh thì được trọn phần."},
  banh:{e:"cook",n:"Nấu ăn",t:"Canh lửa nấu món",how:"Giữ nút Quạt lửa cho lửa nằm trong vùng xanh của từng bước, kéo nguyên liệu vào nồi đúng thứ tự công thức và chờ ninh xong. Lửa lên xuống chậm sau tay quạt, lại có gió lùa: buông tay sớm một chút."},
  huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm Dâng hương. 3 lư hương."}});
 KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi.";
@@ -15818,7 +15882,14 @@ function mgMore(env){const e=env&&env.lv!=null?+env.lv:5;return Math.max(0,Math.
 /* a board lever that moves with the ease (mg-balance-2): BAL.mgTier.lev[kind][name] = [value at ease 0, value at ease 5], linear between, held at the
    ease-0 value below 0 (heat lag / gusts of Nấu ăn, time + decoys of Cờ, beat window of Múa, time + shortage of Làm phúc, aim aid of Đầu hồ, sway of Đi đứng, voice band of Ngôn) */
 function mgLev(env,kind,name){const L=((BAL.mgTier.lev||{})[kind]||{})[name];if(!L)return null;const e=cl(env&&env.lv!=null?+env.lv:5,0,5)/5;return L[0]+(L[1]-L[0])*e}
-window.mgTier=mgTier;window.mgLev=mgLev;window.mgFull=mgFull;window.mgTol=mgTol;window.mgMore=mgMore;window.mgGrade=mgGrade;window.mgSet=mgSet;window.mgWord=mgWord;window.mgTierOf=mgTierOf;
+/* the TIME PART of a round (review/mg-tune, owner 16/11 07:25Z "mức vừa", ONE CORE for the whole family): the share of the round's score she keeps
+   for the time she took. el = ms from the round's start to its finish, lim = the round's time limit. Kept whole while el ≤ fast·lim, then falls
+   linearly to keep at el = lim (time out). fast / keep = BAL.mgTier.lev[kind].fast / .keep through mgLev (by the board ease) when the engine has
+   them, else BAL.mgTier.pace.fast / .keep. Read by every engine that scores correctness (jnwp calli / doiline, jnwq lay / sort / seat / clue,
+   jlant lamp, j82 go): a right answer found quickly is Tuyệt phẩm, a right answer found slowly is Tinh xảo. */
+function mgPace(env,kind,el,lim){const P=BAL.mgTier.pace,e=cl(env&&env.lv!=null?+env.lv:5,0,5)/5,at=(n)=>{const v=mgLev(env,kind,n);return v!=null?v:P[n][0]+(P[n][1]-P[n][0])*e};
+ const f=cl(at("fast"),0,.99),k=cl(at("keep"),0,1),u=cl((+el||0)/Math.max(1,+lim||1),0,1);return u<=f?1:1-(1-k)*(u-f)/(1-f)}
+window.mgTier=mgTier;window.mgPace=mgPace;window.mgLev=mgLev;window.mgFull=mgFull;window.mgTol=mgTol;window.mgMore=mgMore;window.mgGrade=mgGrade;window.mgSet=mgSet;window.mgWord=mgWord;window.mgTierOf=mgTierOf;
 /* wiring (edited in place, 16/11): j82 startContest (occ "hoi" / o.occ, o.big), playArt (occ "hoc" / o.occ), kg82Lesson (lessons), kg82Word → mgWord,
    jexam exRun (occ "exam", rank = target), jts tsGame (occ "trieu" / o.occ), jkc Phúc tuyển (playArt occ "tuyen"). Skip / "để tài nghệ quyết định"
    values keep using her real art level (KG82.tier.lv) through kg82NpcMean. */
@@ -15884,7 +15955,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
   for(const q of U){let bj=-1,bd=tol*tol;for(let j=Math.max(0,idx);j<Math.min(G.length,Math.max(idx,0)+look);j++){const d=(G[j][0]-q[0])**2+(G[j][1]-q[1])**2;if(d<=bd){bd=d;bj=j}}
    if(bj>=0){hit++;if(bj>idx)idx=bj}else miss++}
   const first=k91Dist(U[0][0],U[0][1],G[0][0],G[0][1])<=tol*2.6;const prog=(idx+1)/G.length,acc=hit/Math.max(1,hit+miss);return Math.max(0,Math.min(1,prog*Math.pow(acc,T.accPow)*(first?1:.7)))}
- function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost);sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
+ function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);/* review/mg-tune: × the time part (jmgt mgPace, ONE CORE) */const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost)*mgPace(env,"tho",performance.now()-t0,LIM);sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
   F.say=[`${F.n}: ${w}`,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
  function hint(auto){if(phase!=="play"||(dm&&dm.on)||si>=F.ns)return;const now=performance.now();glow=now+(auto?5000:6500);tAct=now;if(!auto){cost+=T.hintCost;tip={t:`Nét ${si+1}: bắt đầu ở chấm xanh, đi theo nét mờ`,c:K91C.gold(),until:now+3200}}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
@@ -15950,7 +16021,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
   t.at=i;t.locked=true;P.fill[i]=t;t.x=P.slots[i].x;t.y=P.slots[i].y;P.glow=null;kg82Pluck(i,true);if(P.rows.every((_,k)=>P.fill[k]))setTimeout(()=>{if(phase==="play")judge()},350)}
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const i=P.rows.findIndex((_,k)=>!P.fill[k]);if(i<0)return;const now=performance.now();P.glow={i,until:now+(auto?5000:6500)};tAct=now;if(!auto){P.cost+=T.hintCost;tip={t:"Nét đang sáng là hình lật gương của nét bên trái",c:K91C.gold(),until:now+3200}}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
- function judge(){phase="judge";const ok=P.rows.filter((_,k)=>P.fill[k]).length,nb=P.n;pts+=Math.max(0,ok-P.miss*T.miss-P.cost);tot+=nb;
+ function judge(){phase="judge";const ok=P.rows.filter((_,k)=>P.fill[k]).length,nb=P.n;pts+=Math.max(0,ok-P.miss*T.miss-P.cost)*mgPace(env,"doi",performance.now()-t0,R[r]*nwP(T.sec,tier)*1000);/* review/mg-tune: time part */tot+=nb;
   P.say=[ok===nb?(P.miss||P.cost?"Đối chỉnh!":"Đối chỉnh, không sai nét!"):`Đối được ${ok}/${nb} nét`,ok===nb?K91C.good():K91C.gold()];setTimeout(next,1500)}
  function frame(g,x,y,w,h,st){k91Tile(g,x,y,w,h,"",st,14,"tho-slip")}
  const stop=k91Loop(now=>{if(!P)return;kg82Bg(g,W,H,"doi",.14,1);
@@ -15979,7 +16050,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
    if(t){sel=sel===t?null:t;return}
    const i=slotAt(x,y);if(i>=0&&sel){place(sel,i);sel=null}}});
  KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const i=P.rows.findIndex((_,k)=>!P.fill[k]);if(i<0)return null;const t=P.tiles.find(t=>!t.locked&&!t.bk&&okFor(t,i));if(!t)return null;
-  const a=C.client(t.x+t.w0/2,t.y+t.h0/2),b=C.client(P.slots[i].x+P.slots[i].w/2,P.slots[i].y+P.slots[i].h/2);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
+  const a=C.client(t.x+t.w0/2,t.y+t.h0/2),b=C.client(P.slots[i].x+P.slots[i].w/2,P.slots[i].y+P.slots[i].h/2);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],cands:P.tiles.filter(t=>!t.locked).length/* review/mg-tune, bots: tray marks to compare */}};
  KG82.st=()=>({r,n:P&&P.n,miss:P&&P.miss,cost:P&&P.cost,pts,tot,phase,left:R[Math.min(r,R.length-1)]*nwP(T.sec,tier)*1000-(performance.now()-t0)});
  /* test oracle for the bots: every tray tile (ok = the right mirror of an empty row) and every empty slot, in client px */
  KG82.peekX=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const e=P.rows.findIndex((_,k)=>!P.fill[k]);return{tiles:P.tiles.filter(t=>!t.locked&&!t.bk).map(t=>{const c=C.client(t.x+t.w0/2,t.y+t.h0/2);return{x:c.x,y:c.y,ok:e>=0&&okFor(t,e)}}),
@@ -15988,8 +16059,8 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
 
 /* ================= registry: the word games are unhooked everywhere ================= */
 KG82_ENG.calli=nwCalli;KG82_ENG.doiline=nwDoi;/* the old verse / pair engines are gone from j91 (review/mg-train) */
-KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay; làm đủ các nét theo thứ tự số. Giữ bút trong vệt mờ thì nét đẹp. Có nút Gợi ý. 3 chữ."};
-KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối."};
+KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay; làm đủ các nét theo thứ tự số. Giữ bút trong vệt mờ thì nét đẹp. Có nút Gợi ý. 3 chữ. Làm nhanh thì được trọn phần."};
+KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối. Làm nhanh thì được trọn phần."};
 KG82_SPR.tho=["tho-slip","ve-brush","ve-inkstone"];KG82_SPR.doi=["tho-slip"];
 KG82_MGL.thi=["Thi: thư pháp đồ nét","tho"];
 try{if(window.K91)window.K91.engines=Object.keys(KG82_ENG)}catch(e){}
@@ -17454,7 +17525,7 @@ BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:1
    clues = evidence pictures per case by tier; peek = seconds the model stays when it hides (tier 2). Raw score stays 0..10 like every j82 game. */
 BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,peek:8,idle:[9,14,0],clues:[2,2,3],
  n:{le:[3,4,5],tc:[5,6,8],thq:[4,5,6],xa:[3,4,5]},rounds:{le:3,tc:2,thq:3,xa:5},
- lim:{le:[30,30,28],tc:[45,45,42],thq:[30,30,28],xa:[18,17,15]}};
+ lim:{le:[30,30,28],tc:[45,45,42],thq:[30,30,28],xa:[14,10,8]}};/* xa 18/17/15 → 14/10/8 (review/mg-tune: a case is seen in ~3 s; the time part needs a limit near the play) */
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);
  try{if(!p||p.dead||p.alive===false||(p===S&&S.dead))return ev;const i=illOf(p);
@@ -17646,14 +17717,20 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
    into Dễ / Khó; kAdj = per-engine ease trim from the bot calibration (dev/PROGRESS_mg-balance.md); word = raw thresholds Tạm được/Khá/Giỏi/Xuất sắc;
    npc = [base, per art level] mean play score of a rival / of "Để tài nghệ quyết định" (j82 kg82NpcMean);
    aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
-   lev[kind][name] = [at ease 0, at ease 5] board levers read by mgLev (mg-balance-2: Nấu ăn fire lag s / gusts heat-per-s / gust gap s; Cờ time ms / full-speed ms / extra stones;
+   lev[kind][name] = [at ease 0, at ease 5] board levers read by mgLev (mg-balance-2: Nấu ăn fire lag s / gusts heat-per-s / gust gap s; Cờ time ms / full-speed share of it (mg-tune) / share kept at time out / extra stones;
+   pace = the TIME PART of correctness games (jmgt mgPace, review/mg-tune): fast = share of the round time that still keeps the whole score, keep = share kept at time out,
+     each [at ease 0, at ease 5]; an engine's own lev[kind].fast / .keep win (co, doden, and the no-word engines tho / doi / le / tc / xa / thq);
    wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds, cong = [Công level that adds +1 tier, highest tier that lift can reach (2 Tinh xảo: Tuyệt phẩm needs the score)] (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
 Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:0,theu:0,co:-1,banh:-.1,dauho:1.2,td_hanh:-1.4,td_dung:-1.2,td_ngon:-.9},
- lev:{banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[1800,7000],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
+ lev:{/* review/mg-tune time part (mgPace) of the correctness games, calibrated with dev/measure/mg-bots.js (skilled ≈ 25 % Xuất sắc at the matching level) */
+  tho:{fast:[.05,.175],keep:[.5,.5]},doi:{fast:[.05,.425],keep:[.3,.3]},doden:{fast:[.05,.175],keep:[.3,.3]},le:{fast:[.075,.25],keep:[.3,.3]},
+  tc:{fast:[.05,.175],keep:[.3,.3]},xa:{fast:[.05,.1],keep:[.1,.1]},thq:{fast:[.075,.45],keep:[.5,.5]},
+  kim:{fast:[0,0],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
+  banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
   td_hanh:{lim:[8000,20000],short:[2,0]},dauho:{aid:[.14,.6],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.6,td_ngon:2,ban:.8,dan:2.8,den:1.05,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.7,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2 */
- word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+ pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
@@ -17718,10 +17795,31 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
+   led.court = khắc of buổi sáng that are the morning court (thượng triều): Hoàng thượng + the officials on the court roster (jmen menMinW) are
+   at Cần Chính điện (thu) every one of those khắc, no dice, no surprise.
+   led.cnt = which moment the Dư đồ shadows of the OTHER places are counted at (QUESTION FOR MAIN, review-people-ledger report):
+   "now" (owner 13:50Z wording: every place's count at ONE moment, the counts add up to the record, nobody twice / missing) or "arrive"
+   (main's dev/test/stage-counts.js: a place's count = the people she meets on arrival, after the walk's khắc). One switch, read by j95. */
+Object.assign(BAL,{led:{court:2,cnt:"now"}});
 
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
+/* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
+   act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
+   (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
+   agent (owner 16/11 14:10Z + 14:45Z + OD:L1386): an NPC tries out of SELF-INTEREST, not hatred. want = need × personality (persW "steal",
+   traits + mood, jemo) × relation to the holder × fear × odds (oSteal, the player's own formula). need = weighted gaps of favour (Sủng),
+   rank (to Hoàng hậu) and an heir (no living son; with a son the heir gap is heirHas). relation: thiện cảm toward the holder ≥ friend → only friendMin of the wish is left;
+   oán toward her adds oanW at oán 100 (a little: hatred drives harm schemes, not this). fear: holder ≥ gap ranks higher → × f; the
+   Empress's custom night (mùng một / rằm) → × custom. try chance = 1 − e^(−k × want), at most pMax; at most maxTry tries per night
+   (first win ends it, j75 one-try-each still holds). A road try needs Sức ≥ sucMin + its cost; a feign try needs Đức ≥ its cost. */
+/* relAdd (j9): oán that a change of thiện cảm n leaves — on a hurt (n<0) the hurt one gains |n|×hurt, the doer |n|×doer; a kindness (n>0) melts |n|×mend.
+   One number for the act and the card text (stealKem: oán ngươi +rel×hurt). */
+BAL.relOan={hurt:.6,doer:.2,mend:.3};
+BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
+ need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
@@ -17819,7 +17917,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function unseat(it){const s=slotOf(it);if(s){s.list=s.list.filter(x=>x!==it);relayout(s)}it.slot=-1}
  function home(it,fly){if(fly)it.bk={x:it.x,y:it.y,a:performance.now()};unseat(it);it.x=it.hx;it.y=it.hy;it.sc=1}
  function seat(it,s){unseat(it);if(!s.multi)s.list.slice().forEach(o=>home(o,true));s.list.push(it);it.slot=P.slots.indexOf(s);relayout(s)}
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(10*pts/Math.max(1,tot))),300)}
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}/* float: graded once by kg82 mgGrade */
   P=cfg.build(r,tier,W,H);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
   phase="play";t0=tAct=performance.now();drag=null;const d=hb.querySelector("#nwqdone");if(d)d.disabled=false;hb.querySelector("#nwqhint").disabled=false}
  const itemAt=(x,y)=>{for(let i=P.items.length-1;i>=0;i--){const it=P.items[i];if(it.locked)continue;const h=it.size*it.sc/2+4;if(Math.abs(x-it.x)<=h&&Math.abs(y-it.y)<=h)return it}return null};
@@ -17834,7 +17932,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=wrongOnes();if(!w.length)return;const it=w.find(i=>i.slot<0)||w[0];const si=P.slots.findIndex(s=>s.ok(it)&&(s.multi||imm||!s.list.length||s.list[0]===it));const now=performance.now();
   P.glow={it,si,until:now+(auto?5000:6500)};P.cost+=auto?B.auto:B.hint;tAct=now;if(P.peekAt!=null)P.peekAt=now;tip(cfg.hint(it,P.slots[si],P),K91C.gold())}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost);tot+=n;P.glow=null;
+ function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost)*mgPace(env,kind,performance.now()-t0,LIM);/* review/mg-tune: time part */tot+=n;P.glow=null;
   P.say=[ok===n?(P.miss||P.cost?cfg.fine:cfg.perfect):`Đúng ${ok}/${n}`,ok===n?K91C.good():K91C.gold()];hb.querySelector("#nwqhint").disabled=true;const d=hb.querySelector("#nwqdone");if(d)d.disabled=true;setTimeout(next,1800)}
  const dn=hb.querySelector("#nwqdone");if(dn)dn.onclick=()=>{if(phase==="play")judge()};
  const pos=(it,now)=>{if(!it.bk)return[it.x,it.y];const k=Math.min(1,(now-it.bk.a)/300),e=1-Math.pow(1-k,3);if(k>=1){delete it.bk;return[it.x,it.y]}return[it.bk.x+(it.x-it.bk.x)*e,it.bk.y+(it.y-it.bk.y)*e]};
@@ -17857,7 +17955,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on)||drag)return null;const w=wrongOnes();
   if(!w.length)return imm?null:{sel:"#nwqdone"};const it=w.find(i=>i.slot<0&&!i.bk)||w.find(i=>!i.bk);if(!it||it.bk)return null;
   const si=P.slots.findIndex(s=>s.ok(it)&&(s.multi||imm||!s.list.length||s.list[0]===it));if(si<0)return null;const s=P.slots[si];
-  const a=C.client(it.x,it.y),b=C.client(s.multi?s.ax+s.aw/2:s.x,s.multi?s.ay+s.ah/2:s.y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
+  const a=C.client(it.x,it.y),b=C.client(s.multi?s.ax+s.aw/2:s.x,s.multi?s.ay+s.ah/2:s.y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],cands:P.slots.length/* review/mg-tune, bots: places to look through */}};
  next();return()=>{done=true;stop()}}
 
 /* ---- shared paints ---- */
@@ -17956,7 +18054,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
    [[cx-60,0],[cx+60,1]].forEach(([x,j])=>{nwqRobe(g,x-30,112,60,66,NWQ_COL[j===0?0:1][1]);nwqFit(g,j===0?"ve-brush":"mua-fan",x+22,150,28)});
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});
  if(dm)hb.hidden=true;
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(pts)),300)}
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),300)}
   const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);const att=["c","t","e"].slice(0,NC);
   const cul={c:cols[0],t:thg[0],e:emb[0]};const S=[{cul:true,c:cols[0],t:thg[0],e:emb[0]}];
   for(let i=1;i<NS;i++){const m=Math.floor(Math.random()*(NC));const keep=kg82Shuf(att).slice(0,Math.min(m,NC-1));const q={cul:false};
@@ -17968,7 +18066,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=live().filter(q=>!q.cul);if(!w.length)return;const q=w[Math.floor(Math.random()*w.length)];q.gone=true;P.cost+=auto?B.auto:B.hint;tAct=performance.now();
   P.tip={t:auto?"Ma ma khẽ nhắc: người này chưa khớp.":"Người này chưa khớp vật chứng, bỏ đi.",c:K91C.gold(),until:performance.now()+2600};if(!live().filter(q=>!q.cul).length)hb.querySelector("#nwqhint").disabled=true}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss);
+ function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss)*mgPace(env,"xa",performance.now()-t0,LIM);/* review/mg-tune: time part */
   P.say=[ok?(P.miss||P.cost?"Đúng người rồi!":"Khớp vật chứng, đúng người!"):"Hết giờ, người khớp vật chứng đã hiện",ok?K91C.good():K91C.red()];hb.querySelector("#nwqhint").disabled=true;setTimeout(next,1700)}
  function accuse(q){if(phase!=="play"||q.gone)return;tAct=performance.now();if(q.cul){kg82Pluck(3,true);end(true)}else{q.gone=true;q.res="bad";P.miss++;kg82Pluck(0,false);P.tip={t:"Người này chưa khớp, thử người khác.",c:K91C.red(),until:performance.now()+2200};if(live().length<=1&&live()[0]&&live()[0].cul){P.tip={t:"Chỉ còn một người, chạm người ấy.",c:K91C.gold(),until:performance.now()+2600}}}}
  const lab=(c)=>c[0],thN=t=>t[1];
@@ -17990,7 +18088,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
   else if(P.tip){g.fillStyle="rgba(255,250,236,.92)";g.fillRect(8,H*.36-3,W-16,26);g.textAlign="center";g.textBaseline="alphabetic";g.font=k91F(700,Math.min(13,W/26),1);g.fillStyle=P.tip.c;kg82Lbl(g,P.tip.t,W/2,H*.36+15,W-24)}
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Vụ ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;const q=P.S.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);if(q)accuse(q)}});
- KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y}};
+ KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y,cands:live().length*P.att.length/* review/mg-tune, bots: suspects × clues to compare */}};
  next();return()=>{done=true;stop()}}
 Object.assign(KG82_ENG,{lay:nwqLay,sort:nwqSort,seat:nwqSeat,clue:nwqClue});
 window.NWQ={tier:nwqTier,engines:["lay","sort","seat","clue"],kinds:["le","tc","xa","thq"]};
@@ -18005,7 +18103,7 @@ try{if(typeof KG82_MGL!=="undefined")KG82_MGL.y=["Y thuật & điều hương: p
    Uses only existing kit parts: j82 game frame + canvas, k91Btns / k91DemoCard / k91Pointer / k91Loop, the doden-bg painting. KIT REQUEST: none.
    Registers KG82_ENG.lamp; KG82_KIND.doden (j82) points at it. Old saves: key "doden" unchanged; the demo flag is the new key "doden2". */
 BAL.lantern={field:[8,10,12],same:[3,3,4],lit:[3,4,5],rows:[2,3,3],seq:[3,4,5],lim:[32000,28000,24000],idle:[9000,14000,0],
- pts:[3,3.5,3.5],miss:.18,speed:.3,hint:.3,tier:null,
+ pts:[3,3.5,3.5],miss:.18,hint:.3,/* time part: jmgt mgPace (BAL.mgTier.lev.doden) */tier:null,
  timeout:.6,autoHint:.5,bad:[1300,1300,500],glow:3500,pause:[900,1100],short:{h:520,min:240}};
 const LM_COL=[["#c23b22","#ff8a6a","#6e1608"],["#d99a1b","#ffe08a","#7a5206"],["#2f9d78","#8ff0c8","#0f5a40"]];
 function lmTier(env){const T=BAL.lantern.tier;if(T!=null)return cl(+T||0,0,2);
@@ -18046,10 +18144,10 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    o.T=Array(n).fill(0);idx.forEach(i=>o.T[i]=1);o.P=Array(n).fill(0);o.cols=cols;o.rows=rows;o.need=lit;o.sc=lmShuf([0,1,2,3]).slice(0,1)[0]}
   else{const m=B.seq[tier];const pairs=lmShuf([0,1,2,3].flatMap(s=>[0,1,2].map(c=>({s,c})))).slice(0,m);o.S=pairs;o.tray=lmShuf(pairs.map((p,i)=>({...p,i,used:0,bad:0})));o.k=0;o.need=m}
   return o}
- function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(Math.round(cl(pts,0,10))),400)}R=mk(rd);t0=tAct=performance.now()}
- function fin(timeout){if(R.fin)return;const now=performance.now(),sp=cl(1-(now-t0)/LIM,0,1),base=B.pts[R.type];let p;
+ function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}R=mk(rd);t0=tAct=performance.now()}
+ function fin(timeout){if(R.fin)return;const now=performance.now(),sp=mgPace(env,"doden",now-t0,LIM)/* review/mg-tune: the ONE time part (was its own speed share) */,base=B.pts[R.type];let p;
   const frac=R.type===0?R.found/R.need:R.type===1?R.P.filter((v,i)=>v===R.T[i]).length/R.P.length:R.k/R.need;
-  p=timeout?base*frac*B.timeout:base*(1-B.speed+B.speed*sp);p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
+  p=timeout?base*frac*B.timeout:base*sp;p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
   kg82Pop(pops,W/2,H*.5,timeout?"Hết giờ":"Đèn đã sáng!",timeout?K91C.gold():K91C.good());kg82Pluck(3,!timeout);setTimeout(next,B.pause[timeout?1:0])}
  function nextTarget(){if(!R||R.fin)return null;
   if(R.type===0){const i=R.L.findIndex(x=>x.ok&&!x.on);return i<0?null:{i}}
@@ -18095,7 +18193,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    if(R.glow===i&&now-R.glowAt<B.glow&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
  k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
- KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];return C.client(c.x+c.w/2,c.y+c.h/2)};
+ KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];/* cands (review/mg-tune, bots only): the lanterns a person looks through for this tap */const n=R.type===0?R.L.filter(x=>!x.on).length:R.type===1?R.P.length:R.tray.filter(x=>!x.used).length;return Object.assign(C.client(c.x+c.w/2,c.y+c.h/2),{cands:n})};
  /* test oracle for the random-play measure: every cell centre of the round */
  KG82.cells=()=>{if(!R||R.fin)return[];return geo().f.map(c=>C.client(c.x+c.w/2,c.y+c.h/2))};
  /* short screens (844x390): the dialog scrolls, so bring the board to the top of the scroll area where it fits whole above the Gợi ý button */
@@ -22432,6 +22530,9 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{emoMonth()}catch(e){}return r}})();
 /* motive gate (j95): feelings are a recorded motive. Wrapped lazily so it works whatever the load order. */
+/* one answer per question (people ledger, owner 16/11 13:40Z: every act has ONE recorded reason): "sad, wants to be alone" holds for half
+   of the friendly acts, chosen by the calendar (life seed + buổi + who + whom + what), not a fresh roll — asking the gate again gives the same answer */
+function emoHalf(a,t,kind){try{if(typeof j95hash==="function"&&typeof j95key==="function"&&S&&S.roster)return j95hash((S.j95seed||0)+"|"+j95key()+"|emo|"+emoKey(a)+"|"+emoKey(t)+"|"+kind)%100<50}catch(x){}return roll(50)}
 function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;window.__emoGate=1;const g0=motiveOK;
  motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!emoOn()||!a||!t||a===S||a===t||typeof a!=="object")return g;const e=emoGet(a);if(e.k==="binh")return g;
   const at=e.t!=null&&e.t===emoKey(t);const H=typeof H95!=="undefined"&&H95.has(kind),F=typeof F95!=="undefined"&&F95.has(kind);
@@ -22439,7 +22540,7 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
    if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=50&&emoBrake(a,t)>=1){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
   if(H&&g.ok&&(e.k==="so"||e.k==="dau")&&e.v>=60){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
   if(F&&!g.ok&&e.k==="vui"&&e.v>=60&&aff(a,t)>-30){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
-  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&roll(50)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
+  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&emoHalf(a,t,kind)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
@@ -25067,6 +25168,8 @@ function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=t
 (function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
 #modal .dlg:has(>.kit-x.kxabs){position:relative}
 #modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+/* the ✕ of a card without a .kph header owns a reserved strip (36 px + 2x6): content and scrollers start under it, so it never overlaps text or a scrolled option list (fold-popw, whole group: every dialog / overlay panel) */
+#modal .dlg:has(>.kit-x.kxabs),#ov .kpanel:has(>.kit-x.kxabs){padding-top:48px!important;box-sizing:border-box}
 #modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
 #modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
 #modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}
@@ -25706,7 +25809,11 @@ function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((
 function menOrder(m,w){if(m.rw!=="nhạc sư"&&m.rw!=="họa sư")return null;const i=+m.id.slice(1)||0;if((w+i)%2)return null;
  const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?2:(w>>1)%2?2:0,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
 function menFestOn(){try{return festToday()}catch(e){return null}}
-function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
+/* the fixed schedule (duty rosters, work orders, festivals, visits, the morning audience): the same on BOTH roads (people ledger, owner 16/11
+   13:40Z: "people outside the palace leave only at their set hours", no random presence); the maid road takes this instead of j22's dice.
+   Four buổi a tuần (jtime4): night = the last buổi (B4L), the afternoon (old buổi 1) = 2. */
+function menSchedRoad(){try{return menRoad()||(!!S&&!S.dead&&typeof isSrv==="function"&&isSrv())}catch(e){return false}}
+function menSched(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,ww="";const i=+m.id.slice(1)||0;
   if(rw==="thị vệ"){k=menDuty(m,w,b);ww=k?"duty":""}
   else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b===2){k=menHcPal(sick[w%sick.length]);ww="summons"}else if(!night){k="tyv";ww="duty"}}
@@ -25714,7 +25821,10 @@ function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=
   else if(rw==="nhạc sư"||rw==="họa sư"){const o=menOrder(m,w);if(o&&o.b===b){k=o.k;ww="order"}}
   else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}else if(f&&!night){k="vuon";ww="fest"}}
   if(k){W[m.id]=k;Y[m.id]={w:ww,k}}}
- S.menW=W;S.menWhy=Y;menPlanWeek();
+ S.menW=W;S.menWhy=Y;menMinW(b,w,f)}
+/* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
+function menMinW(b,w,f){S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+function menPlace(){menSched();const W=S.menW,Y=S.menWhy;const b=S.buoi||0,w=wk();menPlanWeek();
  /* today's plans come true where they were planned */
  for(const P of (S.menPlans||[])){if(P.w!==w||P.done)continue;const m=manById(P.m);if(!m||menBanned(m)){P.done=1;continue}const v=P.v!=null?RV(P.v):null;
   if(P.v!=null&&(!v||!v.alive||v.out)){P.done=1;continue}
@@ -25723,8 +25833,7 @@ function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=
   else if(P.b!==b)continue;
   P.done=1;W[m.id]=P.k;Y[m.id]={w:"stray",k:P.k,r:P.r,v:P.opp?null:P.v,why:P.why,likeV:P.r==="seek"?P.v:null,plan:P.id,h:P.h,from:P.from,hide:P.hide};
   if(v&&!P.opp)S.where[v.id]=P.k;menStat("stray");menStat("c_"+P.r);menNpcSee(m,Y[m.id])}
- /* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
- S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+}
 /* PLANS, made at the start of each tuần for the next one (and the current one when a life has none yet) */
 function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)return;const first=S.menPW==null;S.menPW=w;
  S.menPlans=S.menPlans.filter(P=>P.w>=w-1);for(const t of first?[w,w+1]:[w+1])menMakePlans(t)}
@@ -25747,7 +25856,10 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
 function menEye(p){return p===S?(S.mat||0)*8+(S.tamco||0)/3:(p.mat||0)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
  log(`<span class="g">Tai mắt báo: nghe nói ${when}, có nam nhân sẽ lẻn vào ${placeName(P.k)}${menEye(S)>=P.hide+30&&P.v!=null&&RV(P.v)?`, gặp ${menVT(RV(P.v))}`:""}. Muốn thấy tận mắt thì có mặt ở đó lúc ấy.</span>`);menStat("tip")}catch(e){}}
-(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace()}catch(e){console.error("menPlace",e)}return r}})();
+/* she becomes a maid after the consort start ran (j42 srvInit): this buổi's schedule is read again for her road (the consort start's court
+   roster must not linger for a buổi) */
+(function(){if(typeof srvInit!=="function")return;const s0=srvInit;srvInit=function(){const r=s0.apply(this,arguments);try{if(menSchedRoad()&&!menRoad())menSched()}catch(e){console.error("menSched",e)}return r}})();
+(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace();else if(menSchedRoad())menSched()}catch(e){console.error("menPlace",e)}return r}})();
 (function(){const c0=countAt;countAt=function(k){let n=c0(k);try{if(menRoad())for(const c in (S.minW||{}))if(S.minW[c]===k)n++}catch(e){}return n}})();
 
 /* ---------- 2. zones on the map data and the place cards ---------- */
@@ -31001,10 +31113,10 @@ document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)ret
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý."},
- tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý."},
- xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý."},
- thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý."}};
+ le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."}};
 /* family C (owner 16/11 07:20Z, no word games): the exam games are skill games of jnwq (lay / sort / clue / seat); no question banks remain.
    The kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
 (function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k]})();
@@ -39421,13 +39533,17 @@ const BTR_FEST={newyear:{tint:"#ee8f80",fx:[["petal-peach",16],["lantern",3]]},n
  thanhminh:{tint:"#cfe3c6",fx:[["petal-plum",10],["paper",6]]},doanngo:{tint:"#bfe0a8",fx:[["leaf",10],["jade",4]]},
  phoenix:{tint:"#f2cb8a",fx:[["petal-peach",12],["streak",3]]},thattich:{tint:"#b9b4ee",fx:[["orb",4],["spark",10]]},
  trungthu:{tint:"#f6dc92",fx:[["lantern",4],["osmanthus",10]]},trungcuu:{tint:"#f0b868",fx:[["osmanthus",12],["leaf",6]]},
- dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]}};
+ dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]},
+ vulan:{tint:"#9fb4d8",fx:[["orb",5],["incense",3]]},vantho:{tint:"#f6b070",fx:[["petal-peach",10],["spark",8]]},lapbat:{tint:"#f0dcc0",fx:[["snow",10],["incense",3]]}};
 /* painted band skins that exist on the CDN (sample pictures made before the 15:35Z rule "all drawing → Foreman C"; the rest of the art list is in dev/handover/reports/anim-pace.md → Foreman C) */
-const BTR_ART={thu:1,trungthu:1};
+const BTR_ART={xuan:1,ha:1,thu:1,dong:1,newyear:1,nguyentieu:1,thanhminh:1,doanngo:1,phoenix:1,thattich:1,trungthu:1,trungcuu:1,dongchi:1,giaothua:1,vulan:1,vantho:1,lapbat:1};
 /* painted palace-style buổi icons img/fx/buoi-ico-<0 sáng|1 trưa|2 chiều|3 tối>.webp (owner 16/11 KIT review 7.5; art by Foreman C): set the flag to 1 when the file is on the CDN; 0 = no icon (today's look) */
-const BTR_ICON=[0,0,0,0];
+const BTR_ICON=[1,1,1,1];
 /* sun / moon on a 0..1 arc: t = place along the band, v = visible (0..1) per buổi */
 const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:.86,v:1},m:{t:-.1,v:0}},{s:{t:1.08,v:0},m:{t:.5,v:1}}];
+/* MOON on the tối band by the game's lunar tuần (month = 3 tuần: S.tuan 0 thượng tuần, 1 rằm, 2 hạ tuần; owner 16/11 ~18:58Z). Painted phase sprites img/fx/buoi-moon-<crescent|full|halfL>.webp replace the orb moon; bands that paint their own moon (trungthu, nguyentieu, vulan) or have none (giaothua) show no sprite and hide the orb moon (never two moons) */
+const BTR_MOONBAND={trungthu:1,nguyentieu:1,vulan:1,giaothua:1},BTR_PHASE=["crescent","full","halfL"];
+function btrMoon(b,V,tuan){if(b!==3)return{ph:"",none:0};if(V.fest&&BTR_MOONBAND[V.fest.k])return{ph:"",none:1};const t=Math.max(0,Math.min(2,tuan|0));return{ph:BTR_PHASE[t],none:0}}
 let btrPrev=null,btrEl=null,btrEnd=null;
 /* the 4 painted pieces (~130 KB, SW-cached after the first fetch) are warmed once the game has been running a while, so the FIRST buổi change already shows them (on demand = not at boot) */
 const BTR_KEEP=[];function btrWarm(){try{if(typeof S==="undefined"||!S){setTimeout(btrWarm,7000);return}if(btrStill())return;["wash","mist","hills","orb"].forEach(n=>{const i=new Image();BTR_KEEP.push(i);i.src=BTR_BASE+"buoi-"+n+".webp"})}catch(e){}}
@@ -39447,10 +39563,11 @@ function buoiShift(){
   /* the variant tint is mixed into the buổi tint (night keeps its dark; a festival colours it more than a season) */
   const mix=VF?34:22;d.style.cssText=`--bt-tint:color-mix(in srgb,${VT} ${mix}%,${C.tint});--bt-wash:color-mix(in srgb,#2a1c10 ${b===3?0:16}%,color-mix(in srgb,${VT} ${Math.round(mix*.6)}%,${C.wash}));--bt-ink:${C.ink};--bt-s0:${C.sky[0]};--bt-s1:${C.sky[1]}`;
   const artKey=V.fest&&BTR_ART[V.fest.k]?V.fest.k:BTR_ART[V.sea]?V.sea:"";
+  const MN=btrMoon(b,V,(window.__btrVar&&window.__btrVar.tuan!=null)?window.__btrVar.tuan:(S.tuan||0));
   const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?260:kitPace(dawn?2000:1700);
   d.innerHTML=still?`<i class="btr-tint"></i>`:
    `<i class="btr-tint"></i><i class="btr-wash"></i>${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}<i class="btr-vig"></i>`+
-   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon"></i></div>`+
+   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
   document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
@@ -39491,7 +39608,7 @@ function buoiShift(){
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
-.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}
+.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}.btr-moon.btr-mph{background-size:contain;background-position:center;filter:drop-shadow(0 0 2px rgba(90,52,20,.85)) drop-shadow(0 0 7px rgba(60,40,90,.5))}.btr-moon.btr-nomoon{display:none}
 .btr-title{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
 .btr-plate{inset:0;background:var(--bt-tint);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;opacity:.96}
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
@@ -40351,6 +40468,8 @@ function j95gate(){return !!(typeof S!=="undefined"&&S&&!window.__j95off)}
 /* jmen (main, owner 11/15 "no dice for men in the hậu cung") decides where every man is each buổi and his reason (S.menW / S.menWhy) and makes
    the lovers' trysts; the record takes those in and never places men on its own while jmen runs */
 function j95men(){try{return typeof menRoad==="function"&&menRoad()}catch(e){return false}}
+/* the fixed men's schedule on any road (jmen menSched: the maid road too) */
+function j95ms(){try{return typeof menSchedRoad==="function"&&menSchedRoad()}catch(e){return false}}
 function j95err(w,e){try{if(J95.errs.length<20)J95.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
 function j95dice(p){return Math.random()*100<p}
 function j95pw(L){/* [[x,w],...] → x */const T=L.reduce((s,x)=>s+Math.max(0,x[1]),0);if(!(T>0))return L.length?L[0][0]:null;let r=Math.random()*T;for(const x of L){r-=Math.max(0,x[1]);if(r<=0)return x[0]}return L[L.length-1][0]}
@@ -40413,6 +40532,12 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
 function j95actLog(a,t,k,g){try{if(!S.roster)return;const L=S.roster.acts=S.roster.acts||[];L.push({id:j95id(a),kh:j95kh(),k,t:j95id(t),why:g.why||"",ok:g.ok?1:0,ex:g.ex?1:0});if(L.length>60)L.shift();
  if(!g.ok){J95.stat.gate++;J95.stat.gateBy[k]=(J95.stat.gateBy[k]||0)+1}else J95.stat.pass++}catch(e){}}
 function j95id(p){if(!p)return null;if(p===S)return"me";if(p.id!=null&&p.rel!=null)return"v"+p.id;return null}
+/* ONE id style for every ledger (people S.roster, causes jmem, items jil — owner 16/11 13:40Z one ledger): the record id of a person object
+   or a record id string: "me" · "v<id>" consort · "s<sid>" servant / elder · "m<n>" man · "emp" · "th" · "k:<mother>:<i>" child · "c:<post>" */
+function ledgerId(p){try{if(p==null)return null;if(typeof p==="string")return p==="S"?"me":/^rv:/.test(p)?"v"+p.slice(3):p;if(p===S)return"me";if(S.emp&&p===S.emp)return"emp";if(S.thO&&p===S.thO)return"th";
+ if(p.id!=null&&p.rel!=null)return"v"+p.id;if(typeof p.id==="string"&&/^m\d+$/.test(p.id))return p.id;if(p.sid!=null)return"s"+p.sid;
+ for(const [k,mo] of (typeof allKids==="function"?allKids():[]))if(k===p)return"k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k)}catch(e){}return null}
+window.ledgerId=ledgerId;
 
 /* ---------------- 3. THE REGISTRY: everyone alive in the palace now ---------------- */
 function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{if(seen[id])return;seen[id]=1;L.push({id,name,role,kind,home,ref})};
@@ -40431,9 +40556,9 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
  if(S.court)for(const c in S.court){const o=S.court[c];if(o&&o.name)add("c:"+c,o.name,o.n||c,"court",{tq:"dtd",ksp:"ksp",ped:"ksp",ty:"tyv"}[c]||"ksp")}
  const present=id=>(R&&R.P&&R.P[id])||j95z().sec.some(x=>x.b===id&&x.key===j95key());
- const jm=j95men();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
+ const jm=j95men()||j95ms();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
  /* officials (j55) inside for the morning audience / a festival banquet this buổi (jmen S.minW) */
- if(j95men())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
+ if(j95men()||j95ms())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
  try{for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const hk=!mo?(S.out?(qOn()?"kn":"tn"):"home"):mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn");const kp=PXT&&typeof plxKidPlace==="function"?plxKidPlace(k):null;add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k),k.name,k.sex==="m"?"Hoàng tử":"Công chúa","kid",kp||hk,k)}}catch(e){}
  if(PXT){add("c:tgk","Quản sự Tân Giả khố","Quản sự Tân Giả khố","fix","tgk");let tt=false;try{tt=plxKids("ttp").length>0}catch(e){}add("c:ttp","Thầy dạy Thượng thư phòng","Thầy dạy Thượng thư phòng","fix",tt?"ttp":J95OUT_)}
  return L}
@@ -40798,7 +40923,7 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
      if(cm&&k===cm.y.k){const a=cm.y.r==="tryst"?"tryst":cm.y.r==="letter"?"letter":"here";for(let i=0;i<4;i++)R.P[id][i]=[k,a,cm.id,cm.y.r==="tryst"?`tư tình với ${mn?mn.name:"một nam nhân"}`:cm.y.r==="letter"?"lén gửi thư ra ngoài cung":`${mn?mn.name:"một nam nhân"} nán lại cung nàng`];continue}
      const why=k==="home"?"được mời / sang thăm cung ngươi":k===palaceOf(v)?"không được vào chỗ định đến, quay về":"đổi chỗ theo lệ";for(let i=0;i<4;i++)R.P[id][i]=[k,k==="home"?"visit":"back",k==="home"?"me":null,why]}}
    for(const m of S.men||[]){if(!m.alive)continue;const k=(S.menW||{})[m.id];if(k){R.who[m.id]=[m.name,m.role];const y=MY[m.id]||{};const ae=j95menAct(m,k,y);R.P[m.id]=[0,1,2,3].map(()=>ae.slice())}}
-   for(const m of S.men||[]){if(!m.alive||(S.menW||{})[m.id]||(!jm&&(m.rw==="thái y"||m.rw==="thị vệ")))continue;if(!j95z().sec.some(x=>x.b===m.id&&x.wk===wk()&&x.c===R.c))delete R.P[m.id]}
+   for(const m of S.men||[]){if(!m.alive||(S.menW||{})[m.id]||(!jm&&!j95ms()&&(m.rw==="thái y"||m.rw==="thị vệ")))continue;if(!j95z().sec.some(x=>x.b===m.id&&x.wk===wk()&&x.c===R.c))delete R.P[m.id]}
    for(const id in R.P)if(id.indexOf("q:")===0)delete R.P[id];/* officials: re-read from this buổi's S.minW by j95sync */
    delete R.__w0;j95secApply(R);j95sync(true,true)}catch(e){j95err("wrap",e)}return r};
  const sp0=spend;spend=function(){const r=sp0.apply(this,arguments);try{if(j95on()&&S.roster)j95sync()}catch(e){j95err("spend",e)}return r};
@@ -40869,6 +40994,84 @@ setTimeout(()=>{try{
  for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95final()&&typeof renderStage==="function")renderStage()}catch(e){j95err("final:"+n,e)}return r}}
  if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const L=hp0.apply(this,arguments);try{if(j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(L))j95elderFix(L,"home",S.roster,j95kh())}catch(e){j95err("home",e)}return L}}
 }catch(e){j95err("finalwrap",e)}},0);
+/* ================= PEOPLE LEDGER (owner core law 16/11 13:40Z + 13:50Z s17; review/people-ledger) =================
+   EVERY person in the record is really somewhere and seen there: Dư đồ counts, at every place, everyone the record puts there at the CURRENT
+   khắc (nobody hidden, nobody counted from another khắc), so the places' counts add up to the record (her own self is not a shadow); the
+   stage draws every one of them (j59 pages a crowd). One rule, read from the one record (S.roster), on the consort road AND the maid road
+   (her "home" = the servants' room of her mistress's palace, j95lk; no caps of 4 consorts / only the mistress at home any more). Switch for measuring: J95.led=false gives back the old "only who the stage drew" rule. */
+J95.led=true;
+function j95led(){return J95.led!==false&&j95on()}
+/* the maid road (j42): her "home" is the servants' room of her mistress's palace, one place on the map (srvGoTo sends that palace to "home") */
+function j95srvR(){return typeof isSrv==="function"&&isSrv()}
+function j95lk(k){if(k==="home"&&j95srvR()){const m=srvM();return m?palaceOf(m):k}return k}
+function j95at(w,k){return w===k||(j95srvR()&&j95lk(w)===j95lk(k))}
+/* her party: she is not a shadow ("bóng: người khác đang ở đó, không tính ta"), nor is her trusted maid walking with her away from home */
+function j95party(id,k){return id==="me"||(id==="mm:me"&&k===S.place&&k!=="home")}
+(function(){const v0=j95vis;j95vis=function(id,k){if(j95led())return !!(id&&k&&k!==J95OUT_&&!j95party(id,k));return v0.apply(this,arguments)};
+ const a0=j95arrKh;j95arrKh=function(k){if(j95led()&&j95cntNow())return j95kh();return a0.apply(this,arguments)}})();
+/* the one switch for the Dư đồ moment (BAL.led.cnt): "now" = one moment for every place (owner 13:50Z); "arrive" = each place at her arrival */
+function j95cntNow(){try{return !(BAL.led&&BAL.led.cnt==="arrive")}catch(e){return true}}
+function j95sv(id){const sid=+String(id).slice(1);try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&s.sid===sid)return s}catch(e){}return null}
+/* the record id of a stage entry (the same mapping j95stage uses, plus children, maids, elders, other people's servants) */
+function j95ledId(p){if(!p)return null;if(p.lid)return p.lid;const k=p.kind;try{
+ if(k==="srv"){const s=p.sk;if((s==="rv"||s==="hh"||s==="mis")&&p.ref&&p.ref.id!=null)return"v"+p.ref.id;if(s==="sv"&&p.sid!=null)return"s"+p.sid;if(s==="emp")return"emp";if(s==="ty")return"c:ty";if(s==="man"&&(p.mid||p.ref))return p.mid||p.ref.id;return null}
+ if((k==="rival"||k==="hh"||k==="fallen")&&p.ref)return"v"+p.ref.id;if(k==="emp")return"emp";if(k==="th")return"th";if(k==="maid")return"mm:me";
+ if(k==="man"&&p.ref)return p.ref.id;if(k==="ty")return"c:ty";if(k==="ksp")return"c:ksp";if(k==="peddler")return"c:ped";if(k==="min"&&p.ref&&p.ref.c!=null)return"q:"+p.ref.c;
+ if(k==="elder"&&p.ref&&p.ref.sid!=null)return"s"+p.ref.sid;if((k==="serv"||k==="npc")&&p.sid!=null)return"s"+p.sid;
+ if(k==="npc"&&/^Quản sự Tân Giả khố/.test(p.name||""))return"c:tgk";if(k==="npc"&&/^Thầy dạy/.test(p.name||""))return"c:ttp";
+ if(k==="kid"&&p.ref){const i=(S.kids||[]).indexOf(p.ref);if(i>=0)return"k:me:"+i;for(const v of rivals){const j=(v.kids||[]).indexOf(p.ref);if(j>=0)return"k:"+v.id+":"+j}}}catch(e){}return null}
+/* a stage entry for a record id (kit stage figure kinds only: rival/hh/fallen/emp/th/maid/serv/npc/kid/ty/ksp/peddler/elder) */
+function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
+ if(j95srvR()){const m=srvM();
+  if(c==="v"){const v=RV(+id.slice(1));if(v&&v.alive&&!v.out)return{kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`}}
+  else if(id==="emp")return{kind:"srv",sk:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng"};
+  else if(id==="c:ty")return{kind:"srv",sk:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"};
+  else if(c==="s"){const s=j95sv(id);if(s&&!s.eid){let o=null;try{o=rivals.find(v=>(v.staff||[]).includes(s))||null}catch(e){}if(o&&o!==m&&!S.srv.met.includes(s.sid))S.srv.met.push(s.sid);
+   return{kind:"srv",sk:"sv",ref:s,sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):(s.role==="maid"?"Cung nữ":"Thái giám")} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`}}}
+  else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${x.trait} · ${tinhW(x.tinh)}`}}return null}
+  else if(id.indexOf("q:")===0){const h=(trS().H||{})[id.slice(2)];return h?{kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.roster.P[id][j95kh()][0]==="thu"?"vào chầu":"dự yến"}`}:null}}
+ if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
+ if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
+ if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
+ if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}`}:null;
+ if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));const m=v&&v.maid;if(!m||!m.name)return null;return{kind:"npc",lid:id,name:m.name,ini:m.name.split(" ").pop()[0],col:"#b9a48a",info:who[1]||"Cung nữ thân tín"}}
+ if(c==="s"){const s=j95sv(id);if(!s)return null;if(s.eid)return j95elderEntry(s);if((S.staff||[]).includes(s)&&typeof hsvPerson==="function"&&typeof hsvOn==="function"&&hsvOn())return hsvPerson(s);
+  return{kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:who[1]||(s.role==="maid"?"Cung nữ":"Thái giám")}}
+ if(c==="k"){const P=id.split(":");const mo=P[1]==="me"?null:RV(+P[1]);const L=mo?mo.kids:S.kids;const k=L&&L[+P[2]];if(!k||!k.alive)return null;return{kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#f0d070":k.sex==="m"?"#9ab0d0":"#c9a0e0",info:who[1]||""}}
+ if(id==="c:ty"){const o=S.court&&S.court.ty;return{kind:"ty",name:o&&o.name||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"}}
+ if(id==="c:ksp"){const o=S.court&&S.court.ksp;return{kind:"ksp",name:o&&o.name||"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Kính sự phòng · Giữ thẻ bài các phi tần"}}
+ if(id==="c:ped"){const o=S.court&&S.court.ped;return{kind:"peddler",name:o&&o.name||"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"}}
+ if(id.indexOf("c:")===0)return{kind:"npc",lid:id,name:who[0]||"Thái giám",ini:String(who[0]||"Hoạn").split(" ").pop()[0],col:"#8a8aa0",info:who[1]||""}}catch(e){j95err("ledObj",e)}return null}
+/* the stage = the record at her place now: add everyone missing, drop people this pass added who left */
+function j95ledStage(){if(!j95led())return false;const V=S.visit;if(!V||!Array.isArray(V.people)||V.k!==S.place||S.dead)return false;if(typeof isKc==="function"&&isKc())return false;
+ const R=S.roster;if(!R||R.key!==j95key())return false;const k=S.place,kh=j95kh(),srv=j95srvR();let ch=false;const here=id=>R.P[id]&&j95at(R.P[id][kh][0],k);
+ /* anyone drawn whom the record puts elsewhere now leaves; one figure per person */const seen=new Set();
+ for(let i=0;i<V.people.length;i++){const p=V.people[i];const id=j95ledId(p);if(!id)continue;if((R.P[id]||p.j95led)&&!here(id)||seen.has(id)){V.people.splice(i,1);i--;ch=true;continue}seen.add(id)}
+ const have=seen;
+ for(const id in R.P){if(j95party(id,k)||have.has(id)||!here(id))continue;if(!srv&&id[0]==="m"&&id[1]!=="m")continue;/* men: j95stage draws them (the maid road: here) */if(!srv&&id.indexOf("q:")===0)continue;/* officials: j95stage */
+  const o=j95ledObj(id);if(!o)continue;o.j95led=1;if(!o.lid&&!j95ledId(o))o.lid=id;V.people.push(o);have.add(id);ch=true}
+ if(ch)popIdx=null;return ch}
+(function(){const f0=j95final;j95final=function(){let ch=f0.apply(this,arguments);try{if(j95ledStage())ch=true}catch(e){j95err("led",e)}return ch}})();
+/* other people's servants / maids / children on her stage: no orders to them (their acts are for HER household and HER children) */
+(function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){try{if(p&&p.j95led&&(p.kind==="npc"||(p.kind==="kid"&&!(S.kids||[]).includes(p.ref))||(j95srvR()&&p.kind!=="srv")))return[]}catch(e){}return t0.apply(this,arguments)}})();
+/* the map count = the record, at every place (jplx's own list count at Dãy nhà cung nhân / Tân Giả khố / schools and jact's Nội vụ phủ +1
+   are other sources of the same people): registered last, so it is the outermost countAt */
+setTimeout(()=>{try{const c2=countAt;countAt=function(k){try{if(j95led()&&S&&!S.dead&&!S.out&&S.roster&&S.roster.key===j95key()&&!(typeof isKc==="function"&&isKc())){const R=S.roster;const kh=j95cntNow()||j95at(S.place,k)?j95kh():j95arrKh(j95lk(k));let n=0;for(const id in R.P){const w=R.P[id][kh][0];if(j95at(w,k)&&j95vis(id,w))n++}return n}}catch(e){}return c2.apply(this,arguments)}}catch(e){j95err("ledcount",e)}},0);
+/* FIXED SCHEDULE (owner 16/11 13:40Z: "giống như là một cái lịch … ai ở đâu làm gì là phải có hết", no random presence): the record's plan
+   for a buổi is a calendar, not a fresh roll. Every planning step draws from a generator seeded by the life (S.j95seed, saved) and the buổi
+   key (plus the person for a single plan), so the same buổi always has the same schedule however often or late it is computed (a newcomer,
+   a reload, the dev tool). Habits, weekly intentions and surprises keep their reasons; only the dice became the calendar's. */
+function j95hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function j95rng(seed){let a=seed>>>0;return function(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function j95seed(){if(!S.j95seed)S.j95seed=1+Math.floor(Math.random()*2147483646);return S.j95seed}
+function j95cal(tag,f){return function(){if(J95.cal===false||!S)return f.apply(this,arguments);const r0=Math.random;Math.random=j95rng(j95hash(j95seed()+"|"+j95key()+"|"+tag(...arguments)));try{return f.apply(this,arguments)}finally{Math.random=r0}}}
+J95.cal=true;
+j95week=j95cal(()=>"wk"+wk(),j95week);j95plan=j95cal(()=>"plan",j95plan);
+/* the morning court is not a habit but a duty (owner 16/11 13:40Z, mandatory times): the first BAL.led.court khắc of buổi sáng, Hoàng thượng
+   holds court at Cần Chính điện; his own plan (and a surprise) only shapes the khắc after it */
+(function(){const e0=j95planEmp;j95planEmp=function(c){const P=e0.apply(this,arguments);try{if(c===0&&J95.court!==false&&Array.isArray(P)){const n=Math.min(4,(BAL.led&&BAL.led.court)||0);for(let i=0;i<n;i++)P[i]=["thu","court",null,"lệ thượng triều buổi sáng"]}}catch(e){j95err("court",e)}return P}})();
+J95.court=true;
+j95planRival=j95cal(v=>"v"+(v&&v.id),j95planRival);j95planOther=j95cal(p=>"o"+(p&&p.id),j95planOther);j95planEmp=j95cal(()=>"emp",j95planEmp);j95planTH=j95cal(()=>"th",j95planTH);
 /* ================= j95b: CỔNG ĐỘNG CƠ CHO SỰ KIỆN + NƠI CHỐN TRONG CÂU CHỮ + HIỂU LẦM DO TIN ĐỒN =================
    Adds three things to j95 (wraps only; edits no file):
    1) EVENT ACTOR GATE. Every event that names a real person (j68 weekly templates, j7 ev(), stock dilemmas, j4/j42 story cards,
@@ -44213,7 +44416,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="47b0ec686041";window.CTM_BUILD=BUILD;
+const BUILD="f8a8ac542f8b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

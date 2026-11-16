@@ -4,6 +4,8 @@ set -e
 R=$(cd "$(dirname "$0")/../.." && pwd); D=$R/dev
 # KIT §0 build check: no width/height/orientation breakpoint inside the design canvas (html.kv1 / html.kv2 only)
 node $D/measure/media-check.js
+# no image/video in git outside dev/site/img-allowlist.txt (owner OD:L203: pictures live on the CDN; shots never in git)
+python3 $D/test/img-allowlist.py
 python3 $D/build/assemble.py
 # picture CDN base (dev/build/jcdn.js; CTM_IMG_BASE overrides, empty = local img/): the boot cover (kboot.js) and sw.js use it
 IMG_BASE=${CTM_IMG_BASE-$(sed -n 's/^const IMG_BASE="\([^"]*\)";.*/\1/p' $D/build/jcdn.js)}

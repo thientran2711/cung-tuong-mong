@@ -18,10 +18,10 @@
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý."},
- tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý."},
- xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý."},
- thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý."}};
+ le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."}};
 /* family C (owner 16/11 07:20Z, no word games): the exam games are skill games of jnwq (lay / sort / clue / seat); no question banks remain.
    The kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
 (function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k]})();
