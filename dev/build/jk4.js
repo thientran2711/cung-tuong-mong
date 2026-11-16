@@ -402,7 +402,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
     height) the people are drawn bigger and cut at the column floor instead of shrinking the face: at least head → KIT_DP_CROP.minVis of
     the body stays in view (owner: cutting the skirt is fine); the face is never cut or squashed (aspect kept). A person shorter than the
     column stands on the floor with the name chip right above the head. */
- const dwAt=narrow?col.clientWidth:(d.clientWidth||Math.min(innerWidth-24,KIT_DP_COL.max+470));/* review/panel-size: the real dialog width (dw=d.clientWidth) first */
+ const dwAt=narrow?col.clientWidth:(d.clientWidth||Math.min(innerWidth-24,KIT_DP_COL.max+470));/* KIT 8.1: the frame has ONE size (--kpw); the column is cut to fit inside it (merge review/newgame-ui-r1) */
  const Wmax=narrow?col.clientWidth:Math.max(120,Math.min(KIT_DP_COL.max,KIT_DP_COL.pct*dwAt,dwAt-250-44));
  const prof=(b,f)=>{if(!b.wl)return[b.l,b.r];const k=Math.max(0,Math.min(20,Math.ceil(f*20-1e-6)));return[b.wl[k],b.wr[k]]};
  const lay=(top,rows)=>{const Hu=floor-top;if(Hu<40)return false;

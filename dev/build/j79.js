@@ -516,7 +516,8 @@ function kitGameResult(r){r=r||{};const rows=[];
    fits ONE screen with no scrolling, background art stays visible, each fact once, buttons always visible ---------- */
 /* kitTiles: a grid of kit stat cells, tile size (kitStatCell, jk4 KIT 32) */
 function kitTiles(list){return `<div class="kstgrid">${list.map(([l,v,c])=>kitStatCell(null,kitGloss(l),v,{cls:"kst-tile",vcls:c,nobar:true})).join("")}</div>`}
-function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||/^Nhập cung/.test(String(m.t||""))||(m.kit&&m.kit.scene)))}
+/* review/newgame-ui: the opening "Nhập cung" card that names its stage (j2: stage + headArt) is an EVENT panel (KIT 32.2 frame), not a scene panel */
+function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||(/^Nhập cung/.test(String(m.t||""))&&!m.stage)||(m.kit&&m.kit.scene)))}
 function kpIdentity(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb");const o=S.origin,srv=typeof isSrv==="function"&&isSrv();
  const pos=srv||o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;const pts=typeof pdGet==="function"?pdGet():0;
  const opts=mb.querySelector(".nlopts");if(opts)opts.remove();
@@ -716,7 +717,13 @@ kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope 
    Re-run after ACTS.json arrives: the title then sits inside .kabody (was missed, the card kept its first, pre-manifest picture).
    New category sung-ai "Tranh sủng" (Chặn ngự giá, Tranh sủng, lật thẻ…): winning the Emperor's night is not "Hại người". */
 try{KIT_CAT["sung-ai"]=["Tranh sủng","#b03a7a"];KIT_ACT_CATS.unshift(["sung-ai",/chặn ngự giá|tranh sủng|lật thẻ|rút thẻ|giữ thẻ|liếc mắt đưa tình/i])}catch(e){}
-function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpPlain(c.textContent)}
+/* review/placeholder-pics3 (LUẬT SỬA CẢ NHÓM): the Tài nghệ / Tứ đức buttons say only "Tự rèn" / "Tự học" — the course sits in the button's data-vlearn / data-learn.
+   Without it "Tự rèn" resolved to the FIRST key of its prefix (Công's embroidery for Dung, Ngôn, Hạnh) and "Tự học" to the generic book for every art.
+   The act name used for the picture now carries the course: "Tự rèn Dung", "Theo ma ma giáo tập học Ngôn", "Tự học Cầm" (the keys ACTS.json already has). */
+function kpActCtx(kan,n){try{const b=kan.closest&&kan.closest("button[data-vlearn],button[data-learn]");if(!b)return n;const md=b.dataset.mode;
+  if(b.dataset.vlearn&&typeof VIR!=="undefined"){const V=VIR.find(x=>x.k===b.dataset.vlearn);if(V){if(md==="self"&&n==="Tự rèn")return"Tự rèn "+V.n;if(md==="master"&&n==="Theo ma ma giáo tập")return"Theo ma ma giáo tập học "+V.n}}
+  if(b.dataset.learn&&typeof ARTS!=="undefined"){const a=ARTS.find(x=>x.k===b.dataset.learn);if(a&&md==="self"&&n==="Tự học")return"Tự học "+a.n}}catch(e){}return n}
+function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpActCtx(kan,kpPlain(c.textContent))}
 const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
 function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
  let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
@@ -757,18 +764,58 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
    the figure follows her current look, so a face picked in the panel (j86) shows on the standing figure at the next build */
 function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S):""}catch(e){}let im=M.querySelector(":scope > img.kidfig2");
  /* review/stage-fig-size (owner 15/11: the identity card showed NO figure): the figure list (FIGURES.json, CDN) can arrive seconds after the
-    card opens — 6 × 400 ms gave up. Now: the kit's unknown-lady silhouette stands in her place while it loads, retried every 400 ms for
-    up to 30 s; a picture that fails to load is retried once, then the silhouette stays. */
- if(!src){const ph=(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+"unknown-fig-f.webp";if((tries||0)<75){src=ph;setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
-  else{if(im)im.remove();M.classList.remove("kpfig");return}}
- if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";M.prepend(im)}
-if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{if(im.dataset.kerr==="1"){im.dataset.kerr="2";const s0=im.getAttribute("src");setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
- if(im.getAttribute("src")!==src)im.src=src;M.classList.add("kpfig");
- const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
- const fit=()=>{try{const d=M.querySelector(".dlg");if(!d)return;const r=d.getBoundingClientRect();if(innerWidth<600&&innerHeight>innerWidth){M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px")}else M.style.removeProperty("--kidh")}catch(e){}};
- requestAnimationFrame(fit);setTimeout(fit,300)}
-(function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}return r}})();
-(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
+    card opens. The kit's unknown-lady silhouette stands in her place while it loads, retried every 400 ms for up to 30 s; a picture that
+    fails to load is retried once. review/newgame-ui: the silhouette STAYS after 30 s (the card never loses its layout / kpfig class). */
+ const ph=(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+"unknown-fig-f.webp";
+ if(!src){src=ph;if((tries||0)<75)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
+ if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";im.decoding="async";M.prepend(im)}
+ if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{const s0=im.getAttribute("src")||"";if(/\/tn\//.test(s0))return;if(im.dataset.kerr==="1"){im.dataset.kerr="2";setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
+ M.classList.add("kpfig");const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
+ /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
+    1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
+       line, whatever the picture's margins or width (was object-fit:contain in a fixed box: wide robes came out shorter);
+    2) a FIXED column left of the panel, the panel a fixed width per viewport (kpIdLay); robe / sleeve wider than the column is cut with a
+       soft fade at the column edge, so the panel never covers her;
+    3) the low-res copy (kitTn, ~4 KB, prefetched with the page of faces) shows at once, the crisp figure swaps in once decoded. */
+ const lo=kitTn(src);const crisp=src;M.__kidWant=crisp;
+ const show=s1=>{if(M.__kidWant!==crisp)return;if(im.getAttribute("src")!==s1){im.src=s1}im.classList.toggle("kidlo",s1!==crisp);kpIdLay(M)};
+ if(KPID_OK[crisp]||!lo)show(crisp);
+ else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
+ if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
+const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
+/* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
+function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
+ const phone=W<600&&H>W;if(phone){["left","top","width","height","bottom","-webkit-mask-image","mask-image"].forEach(k=>im.style.removeProperty(k));d.style.removeProperty("width");d.style.removeProperty("max-width");
+  const r=d.getBoundingClientRect();M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px");return}
+ M.style.removeProperty("--kidh");
+ /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
+    left of it (its left edge minus 8 px), so a tab with more cells can never widen it over her */
+ d.style.removeProperty("width");d.style.removeProperty("max-width");
+ const port=H>W;const mr=M.getBoundingClientRect(),dr=d.getBoundingClientRect();const colR=Math.round(dr.left-mr.left)-8,colL=port?0:Math.round(W*.01);const colW=colR-colL;
+ const want=M.__kidWant||im.getAttribute("src")||"";const s1=kitTn(want)||want;/* measured on the small copy (same fractions, tiny canvas) */
+ const fb0=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
+ /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
+ const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
+ const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
+ /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
+    game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
+    column whole; every face, consort and maid, gets that same body height and floor — no robe cut, no spill, no per-face shrink */
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);Hs=Math.min(Hs,colW*.98/KPID_WR);let ih=Hs/bf,iw=ih*ar;
+ const pw=(fb.r-fb.l)*iw;let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
+ Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
+ im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
+ M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
+/* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
+   opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
+   (its 60 fps WebGL redraw competed with the face picker's decodes: one page turn waited ~470 ms on the GPU read-back); it restarts when
+   the stage shows again. */
+function kitStageCovered(){try{const M=$("modal");if($("kroul"))return true;if(!M||M.hidden||!M.classList.contains("kpscene"))return false;const bg=getComputedStyle(M).backgroundImage;return !!bg&&bg!=="none"}catch(e){return false}}
+function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const cov=kitStageCovered();const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
+ try{if(typeof KFX!=="undefined"&&KFX.app){const t=KFX.app.ticker;if(kitStageCovered()){if(t.started){t.stop();KFX.__kpause=1}}else if(KFX.__kpause){KFX.__kpause=0;if(typeof kfWake==="function")kfWake()}}}catch(e){}}
+(function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitStagePause()})};const go=()=>{const M=$("modal");if(!M||!document.body)return setTimeout(go,300);
+ new MutationObserver(kick).observe(M,{attributes:true,attributeFilter:["class","hidden"]});new MutationObserver(kick).observe(document.body,{childList:true});setInterval(kitStagePause,1500)};go()})();
+(function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig");const d=M.querySelector(".dlg");if(d&&!(Q[0]&&Q[0].nl)){d.style.removeProperty("width");d.style.removeProperty("max-width")}}}catch(e){}return r}})();
+(function(){const b0=kpBuild;kpBuild=function(M,m){try{if(!(m&&m.nl)){const d=M.querySelector(".dlg");if(d){d.style.removeProperty("width");d.style.removeProperty("max-width")}M.__kidWant=""}}catch(e){}b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(kpIsScene(m)){const t=$("rtoast");if(t)t.classList.remove("on")}}catch(e){}}})();
 /* ---- 4. status grouped by purpose ---- */
 const KH_GRP=[["Tư chất",["sac","tai","tamco","duc","mat","srk","merit"]],["Nhân tâm",["th","hh","maid","tin","chu"]],["Ân sủng",["con","dem","an","aw","nt"]],["Thời gian",["buoi","lot","bl","wage","date"]]];
@@ -969,11 +1016,26 @@ function kitPicker(o){o=o||{};KIT_PICK[o.id]=o;const items=o.items||[];
 function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid");const B=[...g.querySelectorAll(".kpki")];if(!B.length)return;B.forEach(b=>b.hidden=false);
  const cs=getComputedStyle(g);const gap=parseFloat(cs.columnGap)||6;const iw=B[0].getBoundingClientRect().width||58;const cols=Math.max(3,Math.floor((g.clientWidth+gap)/(iw+gap)));const rows=+root.dataset.rows||2;const per=cols*rows;
  const pages=Math.max(1,Math.ceil(B.length/per));let pg=keepPage&&root.dataset.pg!=null?+root.dataset.pg:Math.floor(Math.max(0,B.findIndex(b=>b.classList.contains("on")))/per);pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
- g.style.setProperty("--kpcols",cols);B.forEach((b,i)=>b.hidden=!(i>=pg*per&&i<(pg+1)*per));
- const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";}catch(e){}}
+ g.style.setProperty("--kpcols",cols);root.__kpc={cols,per,pages,B};kitPickerShow(root,pg)}catch(e){}}
+/* review/newgame-ui (owner 15/11 "bấm nút trái phải … lag cực kỳ"): paging never measures the layout again (cols/per kept from the last
+   kitPickerLayout); the next page's pictures are decoded BEFORE the swap (≤ 80 ms wait, then swap anyway), and the pages either side are
+   decoded in idle time, so a page turn is one class toggle on already-decoded thumbnails (small WebP, kitTn). */
+function kitPickerShow(root,pg){const c=root.__kpc;if(!c)return;const {per,pages,B}=c;pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
+ B.forEach((b,i)=>{const on=i>=pg*per&&i<(pg+1)*per;if(b.hidden===on)b.hidden=!on});
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";
+ const idle=window.requestIdleCallback||(f=>setTimeout(f,60));idle(()=>{[pg+1,pg-1].forEach(q=>kitPickerDecode(root,q))});try{const o=KIT_PICK[root.dataset.pick];o&&o.onPage&&o.onPage(kitPickerPage(root,pg))}catch(e){}}
+function kitPickerPage(root,pg){const c=root.__kpc;if(!c||pg<0||pg>=c.pages)return[];return c.B.slice(pg*c.per,(pg+1)*c.per)}
+function kitPickerDecode(root,pg){return Promise.all(kitPickerPage(root,pg).flatMap(b=>[...b.querySelectorAll("img")]).map(im=>im.decode?im.decode().catch(()=>0):0))}
+function kitPickerGo(root,pg){const c=root.__kpc;if(!c){root.dataset.pg=pg;kitPickerLayout(root,true);return}pg=Math.min(Math.max(0,pg),c.pages-1);if(pg===+root.dataset.pg)return;
+ root.dataset.want=pg;let done=false;const go=()=>{if(done||+root.dataset.want!==pg)return;done=true;kitPickerShow(root,pg)};kitPickerDecode(root,pg).then(go);setTimeout(go,80)}
+/* KIT 28.11a kitTn(src): the small pre-sized copy of a face picture (img/tn/<por|fig>-….webp, dev/art/tn_make.py) when img/TN.json lists it,
+   else "" — pickers show the thumbnail, the identity card shows the low-res figure at once and swaps in the crisp one when decoded */
+let KIT_TN=null;try{fetch("img/TN.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.have){KIT_TN=new Set(j.have);try{window.dispatchEvent(new Event("kittn"))}catch(e){}}}).catch(()=>{})}catch(e){}
+function kitTn(src){try{if(!KIT_TN||!src)return"";const m=/^(.*\/)(por|fig)-([^/]+)\.webp$/.exec(src);if(!m||!KIT_TN.has(m[3]))return"";return m[1]+"tn/"+m[2]+"-"+m[3]+".webp"}catch(e){return""}}
+window.kitTn=kitTn;
 function kitPickerInit(scope){(scope||document).querySelectorAll(".kpick").forEach(r=>kitPickerLayout(r,false))}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest(".kpick [data-pk],.kpick [data-pkpg],.kpick [data-pkf]");if(!t)return;const root=t.closest(".kpick");const o=KIT_PICK[root.dataset.pick]||{};e.preventDefault();e.stopPropagation();
- if(t.dataset.pkpg){root.dataset.pg=(+root.dataset.pg||0)+(+t.dataset.pkpg);kitPickerLayout(root,true);return}
+ if(t.dataset.pkpg){kitPickerGo(root,(+root.dataset.pg||0)+(+t.dataset.pkpg));return}
  if(t.dataset.pkf){if(o.onFilter)o.onFilter(t.dataset.pkf);return}
  if(t.dataset.pk&&o.onPick)o.onPick(t.dataset.pk)},true);
 document.addEventListener("keydown",e=>{const b=e.target.closest&&e.target.closest(".kpick .kpki");if(!b)return;const V=[...b.parentNode.querySelectorAll(".kpki:not([hidden])")];const i=V.indexOf(b);const cols=+getComputedStyle(b.parentNode).getPropertyValue("--kpcols")||4;
