@@ -5,11 +5,11 @@
 const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),path=require('path');
 const OUT=process.argv[2]||'/tmp/phone-bars';fs.mkdirSync(OUT,{recursive:true});
 const SIZES=(process.argv.slice(3).length?process.argv.slice(3):['755x1000@2','412x1058@2','390x844@3','1180x820@2','1366x1024@2']).map(s=>{const m=/(\d+)x(\d+)@(\d+)/.exec(s);return[+m[1],+m[2],+m[3]]});
-const ROOT=path.resolve(__dirname,'../..');const BASE=(/const IMG_BASE="([^"]*)"/.exec(fs.readFileSync(path.join(ROOT,'dev/build/jcdn.js'),'utf8'))||[])[1];
+const REPO=path.resolve(__dirname,'../..'),ROOT=process.env.PB_ROOT||REPO;/* PB_ROOT = a dir with another build's index.html/sw.js/assets.json (e.g. live main) for the before shots */const BASE=(/const IMG_BASE="([^"]*)"/.exec(fs.readFileSync(path.join(REPO,'dev/build/jcdn.js'),'utf8'))||[])[1];
 const T={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.webp':'image/webp','.png':'image/png','.mp3':'audio/mpeg','.webmanifest':'application/manifest+json'};
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname).replace(/^\/+/,'');if(!p)p='index.html';if(p.includes('..')){r.statusCode=400;return r.end()}
  if(p.startsWith('img/')){r.statusCode=302;r.setHeader('Location',BASE+p);r.setHeader('Access-Control-Allow-Origin','*');return r.end()}
- fs.readFile(path.join(ROOT,p),(e,b)=>{if(e){r.statusCode=404;return r.end('404')}r.setHeader('Content-Type',T[path.extname(p)]||'application/octet-stream');r.setHeader('Cache-Control','no-cache');r.end(b)})});
+ fs.readFile(path.join(ROOT,p),(e,b)=>{if(e&&ROOT!==REPO)return fs.readFile(path.join(REPO,p),(e2,b2)=>{if(e2){r.statusCode=404;return r.end('404')}r.setHeader('Content-Type',T[path.extname(p)]||'application/octet-stream');r.end(b2)});if(e){r.statusCode=404;return r.end('404')}r.setHeader('Content-Type',T[path.extname(p)]||'application/octet-stream');r.setHeader('Cache-Control','no-cache');r.end(b)})});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const SEED=()=>{let a=20261116;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
 const CLEAN=()=>{document.querySelectorAll('[id^=kroul],#dawn,#kload,#kpodov,.kmov').forEach(e=>e.remove());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()};
@@ -33,7 +33,7 @@ const MEASURE=()=>{const R=e=>{if(!e)return null;const r=e.getBoundingClientRect
   await fr.evaluate(()=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
   for(let i=0;i<5;i++){await sleep(900);await fr.evaluate(CLEAN)}
   const out={home:await fr.evaluate(MEASURE)};await p.screenshot({path:`${OUT}/${tag}-home.png`});
-  await fr.evaluate(()=>{CLEAN();const b=document.querySelector('#tabs [data-kg="hc"]')||document.querySelector('#tabs [data-tab="rv"]');b&&b.click()});await sleep(1500);
+  await fr.evaluate(CLEAN);await fr.evaluate(()=>{const b=document.querySelector('#tabs [data-kg="hc"]')||document.querySelector('#tabs [data-tab="rv"]');b&&b.click()});await sleep(1500);
   out.tab=await fr.evaluate(MEASURE);await p.screenshot({path:`${OUT}/${tag}-tab.png`});out.errs=errs;all[tag]=out;
   const probs=[...out.home.tabOverlap,...out.home.cellOverlap,...out.home.blockOverlap,...out.tab.tabOverlap,...out.home.tabs.filter(t=>t.clip>0.5).map(t=>'clip '+t.t+' '+t.clip),...errs];if(probs.length){bad=1;console.log(tag,'PROBLEMS',probs)}
   console.log(tag,'pages',out.home.pages,'hud',out.home.hud,'nav',out.home.nav,'next',out.home.next,'panel(tab)',out.tab.panel,'tfs',out.home.tfs,'tabs',out.home.tabs.map(t=>t.t+':'+t.r.join(',')+'@'+t.fs).join(' | '));
