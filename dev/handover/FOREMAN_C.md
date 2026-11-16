@@ -154,3 +154,7 @@ Claim each in CLAIMS.md before opening its worker session.
 - m22-t2: wrong hand (left arm ends in a right hand) + back-turned looking-back pose → repaint (both owner rules).
 - m47-t2: back-turned looking-back pose → repaint.
 All with transparent background, full body incl. feet, rim light only (owner OD 20:37Z–21:25Z). These 5 first, then the whole-group scan sheet. Report the CDN keys + before/after to main.
+
+## INBOX from main s25 (16/11 21:58Z) — ART REQUESTS
+- por-vacant-hh (kit-size #7): 3:4 kit portrait, same framing as por-*, of an EMPTY Empress seat (empty throne chair, phoenix screen, no person); used for Hoàng hậu rows while the seat is vacant.
+- minigame-frame: "hands on the instrument" poses for her figure in the đàn mini-game (left column, iPad); figure only breathes until then.
