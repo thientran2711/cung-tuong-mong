@@ -256,7 +256,7 @@
 | ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | DONE (PASS 81f86655) | 16/11 15:57Z |
 | kit-size #2 (opus, kit keeper; OD 16:00Z (1)–(9)) | review/kit-size | main s19 | session_01UV1SzhfEWsjainSgb3FHP9 | RUNNING | 16/11 15:57Z |
 | emotion-acts review (opus; e9bd51ee) | review/emotion-acts-r1 | B | session_01N1tNP36vT978Q89SfwTmPC | DONE FAIL 2 items (archived) | 16/11 16:04Z |
-| D29 review (opus) of schedules3-r4 @f388b4de | review/schedules3-r5 | C | session_011xDdVPgkrf4Nx6Fu4w3gr5 | RUNNING | 16/11 16:06Z |
+| D29 review (opus) of schedules3-r4 @f388b4de | review/schedules3-r5 | C | session_011xDdVPgkrf4Nx6Fu4w3gr5 (archived) | PASS 12f52db7 | 16/11 16:06Z |
 | PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | session_011xDdVQ9uFz3dWEEUrZZp9W | RUNNING | 16/11 16:06Z |
 | tutrang-layout (sonnet; owner-bug fast lane; OD 16/11 16:20Z): Tư trang › Túi đồ — wear slots one vertical column left, bigger bag grid right, small pet strip below; whole group (every wear-slot/bag place); samples 755x1000 + 1180x820 to owner first | review/tutrang-layout | main s20 | session_01UV1SzkjW5zkFL55LvUPgkv (#2; #1 rolled over) | RUNNING | 16/11 16:22Z |
 | status-icons (sonnet; owner-bug fast lane; OD 16/11 16:25Z): 'Thỉnh tranh' download chip → small kit square download icon in a corner + downloading animation + tap → detail panel; whole group: every status chip that fits in an icon | review/status-icons | main s20 | session_01UV1Szh7JPiQw9nJJ8XwPbe | RUNNING | 16/11 16:24Z |
