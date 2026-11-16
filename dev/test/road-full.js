@@ -15,17 +15,17 @@ const [,,URL,NL]=process.argv;const NLIV=+NL||3;
  await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;
   window.__run=(k,road,pick)=>{quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
-   try{localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}))}catch(e){}window.__forceOrigin=k;start();quiet=false;Q.length=0;
+   try{localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1')}catch(e){}window.__forceOrigin=k;start();quiet=false;Q.length=0;
    if(S.origin.k!==k||!S.st.f14)return{err:'origin '+S.origin.k};
    const seq=[],vs=[],ends=[];let lastN=0,stuck=0,err=null,mon=0;
-   for(;mon<1200&&!S.st.ch.all;mon++){const c=S.st.ch;if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?'));lastN=c.n;stuck=0}
+   for(;mon<400&&!S.st.ch.all;mon++){const c=S.st.ch;if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?'));lastN=c.n;stuck=0}
     if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
     const A=S.st.M;try{if(A&&A.act&&A.act.v!=null){const v=RV(A.act.v);vs.push({a:A.a,v:A.act.v,alive:!!(v&&v.alive&&!v.out)})}
      if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);const i=pick==='rand'?Math.floor(Math.random()*O.length):0;
       const o=O[i];res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message+' '+(e.stack||'').split('\n')[1])}
-    if(S.st.ms&&++stuck>30){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}
+    if(S.st.ms&&++stuck>2){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}
     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
-   return{k,road:S.st.f14.road,rd:S.st.f14.rd||'',plan:S.st.ch.plan.join(','),seq,vs,ends,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}};
+   return{k,road:S.st.f14.road,rd:S.st.f14.rd||'',plan:S.st.ch.plan.join(','),seq,vs,ends,tm:(S.st.X||[]).filter(t=>ARC67[t.a]&&ARC67[t.a].o==='tm').map(t=>t.a+(t.done?'=done':'')).join(' '),tmq:(S.st.f14.tmq||[]).join(' '),all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}};
   const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)}});
  const roads=await p.evaluate(()=>Object.keys(ROAD14).filter(r=>rdFull(r)));console.log('full roads:',roads.join(' ')||'(none)');
  chk('at least one full road registered',roads.length>0,roads);
@@ -38,6 +38,8 @@ const [,,URL,NL]=process.argv;const NLIV=+NL||3;
    chk(`${rd} L${L+1}: chapters 1..14 in order`,R.all&&R.n===14&&ns.every((n,i)=>n===i+1),R.seq);
    const want=[rd].concat([5,6,7,8,9,10,11].map(n=>rd+'_'+n));const got=R.seq.filter(x=>{const n=+x.split(':')[0];return n>=4&&n<=11}).map(x=>x.split(':')[1]);
    chk(`${rd} L${L+1}: chapters 4..11 are the road in order`,JSON.stringify(got)===JSON.stringify(want),{got,want});
+   chk(`${rd} L${L+1}: Thanh mai trúc mã never takes a numbered chapter`,!R.seq.some(x=>/tm96/.test(x)),R.seq);
+   if(R.tm||R.tmq)console.log('  side tm96:',R.tm,'| queued:',R.tmq);
    chk(`${rd} L${L+1}: origin ending told by the road finale`,!!R.fin&&R.ends.some(e=>e.startsWith(rd+'_11=')),[R.fin,R.ends.slice(-2)]);
    /* one rival per road while she lives */
    const byId={};let lastAlive=null,recastBad=[];for(const x of R.vs){if(!x.a.startsWith(rd))continue;if(lastAlive!=null&&x.v!==lastAlive.v&&lastAlive.alive){recastBad.push([lastAlive.a,lastAlive.v,x.a,x.v])}lastAlive=x}

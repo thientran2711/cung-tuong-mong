@@ -53,3 +53,14 @@ window.rdK=rdK;
 /* rare endings of road finales (j97 loads after the road files): RD97L entries take the j97 catalogue shape (R97L) */
 window.RD97L=window.RD97L||[];
 setTimeout(()=>{try{if(window.RARE97)for(const d of RD97L)if(!RARE97.defs[d.a])RARE97.defs[d.a]=d}catch(e){console.error(e)}},0);
+/* Thanh mai trúc mã (j96 tm96a/b/c) in a full-road life: the 14 numbered chapters are the tutorial, the road and the endgame, so the three
+   love chapters run as a SIDE story (phụ tuyến, j67 S.st.X thread, kind "tm": no reward pool, no random shared arcs reopened), opened one at
+   a time once the main story reaches chapter BAL.road.tm[i] (ROAD_MAP §2 side line, §8.1). Lives without a full road keep j96's splice. */
+(function(){const a0=chAdvance67;chAdvance67=function(E){try{if(rdOn()){const c=S.st.ch,P=c.plan,q=S.st.f14.tmq||(S.st.f14.tmq=[]);
+  for(let i=P.length-1;i>c.i;i--)if(/^st:tm96[abc]$/.test(P[i])){q.unshift(P[i].slice(3));P.splice(i,1)}q.sort()}}catch(e){console.error(e)}
+ return a0.apply(this,arguments)}})();
+(function(){if(typeof a67Month!=="function")return;const m0=a67Month;a67Month=function(){try{if(rdOn()&&!S.dead){const f=S.st.f14,q=f.tmq||[];
+  const X=S.st.X||(S.st.X=[]);const busy=X.some(t=>!t.done&&ARC67[t.a]&&ARC67[t.a].o==="tm");const i=3-q.length;
+  if(q.length&&!busy&&S.st.ch.n>=BAL.road.tm[Math.min(i,BAL.road.tm.length-1)]){const id=q[0];if(ARC67[id]&&arcOk67(ARC67[id])){const A=newThread67(id,"tm");
+    if(A){q.shift();A.due=S.turn+1;pickNext67(A);X.push(A)}}else q.shift()}}}catch(e){console.error(e)}
+ return m0.apply(this,arguments)}})();

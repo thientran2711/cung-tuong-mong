@@ -51,7 +51,8 @@ P0  intro (C) → [home road (D) if chosen «Ở nhà chờ tuyển tú»] → s
 12  ch12: st_dong Ngôi Đông cung (has a son) | st_con Con đường của con (child, no son) | ch12x Người nối dõi (childless, to build)   (B)
 13  hau  Tranh ngôi Trung cung (hồi form to build)   (B)
 14  ke   Mẫu nghi thiên hạ (hồi form to build)       (B)
-side: tm96a/b/c Thanh mai trúc mã run as a SIDE thread (phụ tuyến, S.st.X) once full roads exist (they replaced shared fillers in phase 1);
+side: tm96a/b/c Thanh mai trúc mã run as a SIDE story (phụ tuyến, S.st.X thread kind "tm") in a full-road life, opened at chapters
+      BAL.road.tm (built, jroad.js); lives without a full road keep j96's phase-1 splice;
       j72 Việc nhờ, jreign lines, NPC road requests (D) = side quests; each says MAIN STORY / SIDE STORY + name + step (OD:L499).
 ```
 A road chapter that cannot run (its cast is dead/out and no recast fits, already Hoàng hậu, son already Thái tử) is replaced by a shared
@@ -59,7 +60,8 @@ arc, so numbers stay 1..14 (plan §1). A lost chapter never closes the Hoàng h�
 
 ## 3. Chapter ids and data shape (all foremen)
 - Chapter id: `<road>.<n>` (e.g. `tt_co.6`). `.4` IS the existing j67 premise arc `ARC67[road]` (main) — reused, not rewritten.
-- `.5`–`.11` are registered as j67 arcs `ARC67["<road>_<n>"]` with `o:"rd"` (outside every pool), same shape as today's arcs
+- `.5`–`.11` are registered with `rdDef(road,n,def)` (jroad.js) as j67 arcs `ARC67["<road>_<n>"]` with `o:"rd"` (outside every pool), one data
+  file per origin `dev/build/jrd_<origin>.js` (listed after jroad.js in assemble.py), same shape as today's arcs
   (t, w, sj, g, cast, hồi seq 3–5, ≥3 endings at .11 + 1 rare ending per road via j97 RARE97), so the j67 engine, kitGoalDetail (§72)
   and Sổ ghi work unchanged. Data file: `dev/build/jroad.js` (after jst14.js); numbers in `BAL.road` (jbal2.js) — ONE CORE.
 - f14Plan reads `ROAD14[road]`: if the road has all 8 chapters it queues `st:<road>_5 … st:<road>_11`; if not, it keeps the phase-1
@@ -75,43 +77,48 @@ Kính sự phòng / her own), doc = thái y, man = a man of S.men, kid = her chi
 Story-only NPC (OD:L1234) only where listed in §5.4. Status of every `.4` = **exists (main, j67)**; every `.5`–`.11` = **to build (B)**.
 Each line: chapter · title (player text) — what happens [cast].
 
-### 4.1 tt — Con gái Tể tướng
+Lines for 4.2–4.9 are DRAFTS: each helper first reads the `.4` arc (its endings) in j67.js and rewrites its road's `.5`–`.11` lines here so
+`.5` opens on the aftermath of `.4` (pilot rule in 4.1), then builds. Pattern: dev/build/jrd_tt.js (rdDef, rdCast, RDW openings, RD97L rare).
+
+### 4.1 tt — Con gái Tể tướng — BUILT (review/road-map, dev/build/jrd_tt.js; all .5–.11 + one rare finale per road)
+Rule learnt from the pilot: `.4` already closes its own first conflict (its 3–4 endings), so `.5` opens on the AFTERMATH of how `.4` ended
+(2–3 openings filtered by rdK()/rdPrev()) and the road grows to a bigger conflict; never retell `.4`.
 **tt_co · Quân cờ trong tay cha**
-- .4 Quân cờ trong tay cha — father's letters are orders: spy on the bedchamber or keep her own counsel [dad, emp]
-- .5 Thư nhà mật lệnh — dad orders her to report what the Emperor said at night; she chooses what to pass on [dad, emp]
-- .6 Kẻ đọc trộm thư — one of her maids copies the letters for a rival; root out the leak without losing face [maid, v]
-- .7 Quân cờ thứ hai — dad sends a niece into the selection as a spare piece; she learns she is replaceable [dad, v]
-- .8 Lời đàn hặc — censors impeach dad for meddling in the harem; her own letters are the evidence [off, emp, dad]
-- .9 Tự cầm quân cờ — she builds her own people at court, outside dad's network (cost: dad's trust) [off, eun]
-- .10 Đêm trước triều hội — dad and the Emperor clash over a ministry post; she decides whose side the harem sees her on [emp, dad]
-- .11 Kết ván cờ — endings: dad serves her line / she cuts the house off (free, alone) / dad wins and drops her (loss, rank kept); rare: dad retires and hands her his network [dad, emp]
+- .4 Quân cờ trong tay cha — father's letters are orders; win/mid/lose [dad, emp]
+- .5 Môn sinh của cha — dad's protégés court her or ignore her; who is hers, who is dad's; Lại bộ seat [dad, v, emp]
+- .6 Kẻ đọc trộm thư — a maid copies the home letters, paid with silver from the rival's palace; the payer is a court house [maid, v]
+- .7 Lời đàn hặc — censors impeach dad with her letters as evidence; the Emperor asks her [emp, dad, v]
+- .8 Ái phi hay con gái Tể tướng — the Emperor tests whether bedside words reach dad (a sealed memorial to keep 3 days) [emp, dad, v]
+- .9 Tự cầm quân cờ — her own people at court (a young Hàn lâm, a Thượng thư's house, the seal eunuch) [dad, v]
+- .10 Đêm trước triều hội — the Emperor splits the Tể tướng's power; she sits behind the screen [emp, dad, th]
+- .11 Kết ván cờ — dad retires; who gets the house's seat. Endings: Người cầm quân cờ / Cha về quê, nhà yên / Phủ Tể tướng sa sút; rare: Cha truyền ấn, vua trao lòng tin [dad, emp]
 **tt_oan · Phủ Tể tướng mắc oan**
-- .4 Phủ Tể tướng mắc oan — forged ledger, dad under house arrest; save him or save herself [dad, off]
-- .5 Sổ sách giả — find who wrote the ledger in the Hộ bộ (deadline before the audit) [off, eun]
-- .6 Nhân chứng ngân khố — a treasury clerk can clear dad; keep him alive and unbought (silver + deadline) [off, gd]
-- .7 Ai được lợi — the house that gains from dad's fall is a rival consort's family; the hatred turns real [v, off]
-- .8 Cha vào ngục — dad moved to prison; she keeps the family fed and safe with silver or favours [dad, eun]
-- .9 Tam ty hội thẩm — the joint trial; she can feed evidence only through proper hands [off, emp] (HISTORY CHECK)
-- .10 Ngày phán án — the verdict day: the witness, the ledger and the Emperor's mood decide [emp, off, v]
-- .11 Rửa oan — endings: cleared and restored / cleared but stripped of office / exiled (she keeps her rank); rare: she exposes the real embezzler above the rival house [dad, v, emp]
+- .4 Phủ Tể tướng mắc oan — forged ledger; first round of the case [dad, off]
+- .5 Sau cơn oan — the forger is still free; find the clerk who wrote it [dad, v]
+- .6 Nhân chứng ngân khố — keep treasury keeper Triệu alive and unbought (deadline: the ministry closes its books) [maid, v]
+- .7 Ai được lợi — the rival's house gained dad's salt depot; the hatred turns real [v, hh, emp]
+- .8 Cha vào ngục — a second charge (seized land), dad in the Hình bộ prison; silver for the jail, the land seller as witness [dad, v]
+- .9 Tam ty hội thẩm — the joint trial; evidence only through outside hands (HISTORY CHECK) [emp, v]
+- .10 Ngày phán án — the verdict; a late proof names a prince above the rival house [emp, dad, v]
+- .11 Rửa sạch tiếng nhà — the house's name. Endings: Tiếng nhà trong sạch / Nhà yên, quyền mất / Nhà tan; rare: Ngự bút đề biển Thanh liêm [dad, emp]
 **tt_tranh · Phủ Tể tướng chia đôi**
-- .4 Phủ Tể tướng chia đôi — brother backs another consort and her child; dad backs her; she is the judge [bro, dad, v]
-- .5 Người huynh trưởng chọn — why brother chose the rival: a debt, a promise, a marriage deal [bro, v]
-- .6 Phủ chia hai — household stewards and retainers pick sides; she wins people or silver [dad, bro]
-- .7 Đứa trẻ ốm — the rival's child falls ill; suspicion points at her house [v, doc, kid of v]
-- .8 Cha ngã bệnh — dad is ill; who holds the house seal while he lies abed [dad, bro, doc]
-- .9 Ấn phủ Tể tướng — the seal struggle reaches the court; the Emperor watches which way the house leans [bro, emp]
-- .10 Gia yến đoàn viên — the family feast where the split ends one way or another [dad, bro, v]
-- .11 Một nhà một lòng — endings: house united behind her / brother sent to a far post / house split for good; rare: brother turns and brings his faction to her [bro, dad]
+- .4 Phủ Tể tướng chia đôi — brother backs the rival; she judges [bro, dad, v]
+- .5 Người huynh trưởng chọn — the debt of the sister-in-law's family that binds brother to the rival [dad, v]
+- .6 Phủ chia hai — steward, servants, retainers choose sides; ancestor rite decides who stands first [dad, v]
+- .7 Lời đồn trúng độc — the rival falls ill after a dish from the house; it was self-poisoning to frame her [v, doc, hh]
+- .8 Cha ngã bệnh — dad's illness and the house seal [dad, doc, v]
+- .9 Ấn phủ Tể tướng — the seal question reaches the Emperor [emp, v, dad]
+- .10 Gia yến đoàn viên — the family banquet in the palace [dad, v]
+- .11 Một nhà một lòng — dad retires; the genealogy line. Endings: Một nhà một lòng / Mỗi người một ngả / Phủ đứng sau {v}; rare: Huynh muội đồng lòng [dad, v, emp]
 **tt_mat · Mật ước với Hoàng hậu**
-- .4 Mật ước với Hoàng hậu — dad's secret pact with the Hoàng hậu; the price may be her [dad, hh]
-- .5 Mật ước viết gì — find the pact's terms through the Hoàng hậu's servant [hh, maid of hh]
-- .6 Cái giá là ngươi — the term: she must never rise above a set rank (BAL); accept, bend or fight it [hh, dad]
-- .7 Hoàng hậu thử lòng — the Hoàng hậu gives her a task to prove she keeps the pact [hh, v]
-- .8 Mật ước rạn — someone leaks a hint of the pact toward the Emperor [v, eun, emp]
-- .9 Ba mặt một lời — she, dad and the Hoàng hậu meet; each lies a little [dad, hh]
-- .10 Giữ hay phá — the last chance to keep, rewrite or break the pact [hh, emp]
-- .11 Kết mật ước — endings: pact kept (safe, capped) / pact broken and exposed (risk, the road open) / pact rewritten as equals; rare: she tells the Emperor first and is trusted [hh, dad, emp]
+- .4 Mật ước với Hoàng hậu — dad's secret pact; endings win / win2 / mid / lose [dad, hh]
+- .5 Ân nợ Trung cung — three openings (Hoàng hậu owes her / Trung cung shaken / pact sunk); find the pact's text [hh, dad, v]
+- .6 Cái giá là ngươi — the clause holds her under rank RANKS[BAL.road.cap.tt_mat]; keep, bend or break [hh, emp, v]
+- .7 Hoàng hậu thử lòng — she runs the silkworm rite for the Hoàng hậu; do well without outshining [hh, th, v]
+- .8 Mật ước mới — the rival wants into the pact and her house out [v, hh, dad]
+- .9 Ba mặt một lời — she, dad and the Hoàng hậu at the Thái hậu's birthday; each tells half the truth [hh, dad, th]
+- .10 Giữ hay phá — the Hoàng hậu is impeached; the pact can save or bury her [hh, emp, dad, v]
+- .11 Kết mật ước — what she and the Hoàng hậu are to each other. Endings: Trung cung là chỗ dựa / Mật ước khép lại / Trung cung thành đối thủ; rare: Hoàng hậu tiến cử ngươi [hh, dad]
 
 ### 4.2 dtq — Con gái Đại tướng quân
 **dtq_bien · Khói lửa Nhạn Môn**
@@ -471,9 +478,12 @@ Each helper builds on the engine branch, one origin per review branch `review/ro
 
 ## 7. Change log
 - 11/16/2026 created (opus lead of Foreman B): 288-chapter catalogue, code-key fix (cn/cnv), data shape, canon rules, split.
+- 11/16/2026 tt built (28 chapters); §4.1 rewritten to the built chapters (the .4 arcs already close their first conflict); tm96 = side story.
 
 ## 8. Open questions for Foreman B / main (not for the owner unless main decides so)
-1. Thanh mai trúc mã (tm96a/b/c) become a SIDE thread once full roads exist (they no longer replace numbered chapters). Map assumes yes.
+1. DONE: Thanh mai trúc mã is a side story in full-road lives (jroad.js; BAL.road.tm).
+4. cnv full roads: ms:len14 «Từ kẻ hầu thành tiểu chủ» does not fit an 8-chapter road; the cnv helper must decide (proposal: the rise
+   happens inside the road, e.g. cnv_mat .7–.8, and len14 is dropped for full-road cnv lives). jroad.js today drops it with the phase-1 middle.
 2. tt_mat .6 rank cap value goes in BAL.road (not typed); reversible.
 3. HISTORY CHECK items (tt_oan .9, dtq_vu .9, dtq_binh .7, muoi_lau .7, td_an .10, thd_sach .9) → one history/drama expert pass (OD:L1327)
    before those chapters' text is final; structure can be built first.

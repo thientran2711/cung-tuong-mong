@@ -449,3 +449,452 @@ RD97L.push({a:"tt_oan_11",tag:"Ngự bút đề biển Thanh liêm",w:"emp",p:.1
  path:["Đưa vợ con hắn","Không ép, chỉ ghi lời","Trình lên Hoàng thượng","Đưa văn tự và nhân chứng","Xin chiếu nói rõ","Xin chiếu ban thưởng"],np:2,bad:["Biếu Ngự sử","Lặng lẽ dàn xếp","Rải tin ngược"],sc:2,x:[()=>S.duc>=45,"Đức từ 45"],
  t:"Hoàng thượng tự tay viết bốn chữ “Thanh liêm chính trực”, sai treo trước cổng phủ Tể tướng. Kẻ từng vu cha ngươi phải đi qua tấm biển ấy mỗi ngày lên triều.",
  fx:{danh:12,duc:4},go:()=>e67dad(8),rw:"nt_haiduong",ti:"Con gái nhà thanh liêm"});
+
+/* ---------- tt_tranh · Phủ Tể tướng chia đôi ---------- */
+rdDef("tt_tranh",5,{t:"Người huynh trưởng chọn",w:"dad",sj:"vì sao huynh trưởng ngả về phía {v}",cast(A){return rdCast(A,["v"])},
+ g:"Huynh trưởng của ngươi đứng sau {v} không phải vô cớ. Tìm ra món nợ, lời hứa hay mối hôn sự đã buộc huynh vào phe ấy.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Huynh trưởng đến thỉnh an",w:"dad",if:RDW(1),t:"Cả họ đã một lòng, nhưng huynh trưởng vẫn lui tới cung {v}. Hắn nói chỉ là giữ lễ.",o:[
+  {n:"Hỏi thẳng huynh",c:{},o:()=>40+S.duc/4,sc:1,w:{duc:2},wx:"huynh nói thật",l:{danh:-1},lx:"huynh giận",rt:"Huynh thở dài: nhà vợ huynh nợ nhà {v} một ân lớn.",rf:"Huynh bảo: “Muội đừng tra hỏi ta.”"},
+  {n:"Cho người theo huynh",c:{bac:-20},o:()=>45+S.mat*5,sc:1,w:{mat:1},wx:"biết huynh gặp ai",l:{danh:-2},lx:"huynh phát hiện",rt:"Huynh gặp phụ thân {v} ở một quán trà.",rf:"Huynh bắt được người theo dõi."},
+  {n:"Tin huynh",c:{},w:{duc:2},wx:"giữ tình huynh muội",lx:"có thể bị lừa",rt:"Ngươi không hỏi thêm."}]},
+ s2:{h:"Huynh trưởng tránh mặt",w:"dad",if:RDW(0),t:"Huynh trưởng không vào thỉnh an ngươi nữa. Mỗi lần vào cung, hắn đi thẳng đến cung {v}.",o:[
+  {n:"Viết thư cho chị dâu",c:{},o:()=>40+S.tai/4,sc:1,wx:"nghe chuyện từ phía khác",l:{danh:-1},lx:"chị dâu kể với huynh",rt:"Chị dâu viết: nhà mẹ đẻ nàng mắc nợ nhà {v}.",rf:"Chị dâu không hồi âm."},
+  {n:"Đến cung {v} cùng lúc huynh đến",c:{suc:-2},o:()=>35+S.danh/4,sc:1,w:{danh:2},wx:"cho huynh thấy ngươi không sợ",l:{danh:-2},lx:"thành cảnh khó coi",go:A=>{rdOan(A,"v",5)},rt:"Huynh đỏ mặt cúi chào ngươi trước.",rf:"{v} mời trà, ngươi uống trong im lặng."},
+  {n:"Để mặc",c:{},w:{duc:1},wx:"không ép",lx:"huynh xa thêm",rt:"Ngươi để huynh đi đường huynh."}]},
+ c1:{h:"Món nợ của nhà chị dâu",w:"maid",t:"Nhà mẹ chị dâu từng được nhà {v} cứu khỏi một vụ án. Ơn ấy buộc huynh trưởng.",o:[
+  {n:"Trả ơn thay huynh",c:{bac:-60},o:()=>45+S.danh/5,sc:1,w:{duc:2},wx:"huynh không còn nợ",l:{bac:-20},lx:"nhà {v} không nhận",go:A=>{rdOan(A,"v",4)},rt:"Nhà {v} nhận lễ trả ơn. Món nợ khép lại.",rf:"Nhà {v} trả lại lễ: “Ơn không bán.”"},
+  {n:"Tìm ra vụ án ấy có thật không",c:{suc:-3},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"biết ơn thật hay giả",l:{danh:-2},lx:"bị biết",rt:"Vụ án do chính nhà {v} dựng lên rồi tự gỡ.",rf:"Hồ sơ đã bị đốt."},
+  {n:"Để huynh tự trả",c:{},w:{},wx:"không dính",lx:"huynh vẫn bị buộc",rt:"Ngươi không động."}]},
+ c2:{h:"{v} giữ huynh",w:"v",need:["v"],t:"{v} hứa với huynh trưởng: nếu con nàng sau này được trọng, huynh sẽ là thầy dạy.",o:[
+  {n:"Hứa với huynh một điều lớn hơn",c:{suc:-3},o:()=>40+S.danh/4,sc:1,w:{danh:2},wx:"huynh nghiêng về ngươi",l:{danh:-2},lx:"lời hứa nặng",go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Huynh im lặng rất lâu, rồi gật đầu.",rf:"Huynh không tin."},
+  {n:"Cho huynh thấy lời hứa của {v} rỗng",c:{},o:()=>40+S.tamco/3,sc:1,w:{tamco:2},wx:"huynh tỉnh",l:{danh:-1},lx:"huynh cho là ngươi ghen",go:A=>{rdOan(A,"v",6)},rt:"Huynh biết {v} cũng hứa điều ấy với hai người khác.",rf:"Huynh giận ngươi."},
+  {n:"Không tranh",c:{},w:{duc:2},wx:"giữ tình",lx:"huynh ở lại phe {v}",rt:"Ngươi để vậy."}]},
+ t1:{h:"Cha hỏi ý ngươi",w:"dad",t:"{dad} viết: “Huynh con đi sai đường. Con bảo cha nên làm gì với nó.”",o:[
+  {n:"Xin cha khoan dung",c:{},w:{duc:3},wx:"nhà còn giữ được",lx:"huynh không đổi ngay",rt:"Cha gật đầu."},
+  {n:"Xin cha răn huynh",c:{},o:()=>40+S.danh/4,sc:1,wx:"huynh biết sợ",l:{},lx:"huynh oán",rt:"Cha gọi huynh về, nói chuyện suốt đêm.",rf:"Huynh bỏ nhà ra ở riêng."},
+  {n:"Đáp: để con lo",c:{suc:-2},w:{tamco:2},sc:1,wx:"việc trong tay ngươi",lx:"gánh thêm",rt:"Cha để ngươi lo."}]},
+ x1:{h:"Huynh muội gặp nhau",w:"dad",t:"Huynh trưởng xin gặp ngươi ở Ngự hoa viên. Lần này hắn nói thật hết.",o:[
+  {n:"Kéo huynh về phía mình",c:{suc:-4},o:A=>35+A.sc*8+S.duc/5,e:["win","lose"],rt:"Huynh nắm tay ngươi: “Từ nay huynh theo muội.”",rf:"Huynh nói: “Ta đã hứa với người ta rồi.”"},
+  {n:"Để huynh giữ lời hứa, chỉ xin huynh đừng hại ngươi",c:{},o:A=>50+S.duc/5,e:["mid","lose"],rt:"Huynh hứa không hại ngươi.",rf:"Huynh không hứa gì."},
+  {n:"Cắt đứt",c:{},w:{tamco:2},e:"lose",lx:"mất huynh",rt:"Ngươi quay đi trước."}]}},
+ E:{win:{k:1,tag:"Huynh trưởng quay về",w:"dad",t:"Huynh trưởng thôi đứng sau {v}. Nhà ngươi một lòng.",fx:{danh:4},go:A=>{rdOan(A,"v",8);return e67dad(3)}},
+  mid:{k:0,tag:"Huynh đứng giữa",t:"Huynh không hại ngươi, nhưng cũng không giúp. Phủ vẫn chia đôi.",fx:{duc:2}},
+  lose:{k:-1,tag:"Huynh vẫn theo {v}",t:"Huynh vẫn đứng sau {v}. Phủ Tể tướng hai phe, mỗi phe một người con.",fx:{danh:-3},go:()=>e67dad(-3)}}});
+
+rdDef("tt_tranh",6,{t:"Phủ chia hai",w:"dad",sj:"người trong phủ Tể tướng",cast(A){return rdCast(A,["v"])},
+ g:"Quản gia, gia nhân, môn khách của phủ đang chọn phe giữa ngươi và huynh trưởng. Ai giữ được người, người ấy giữ được phủ.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Quản gia già",w:"dad",if:RDW(1),t:"Lão quản gia hầu phủ ba mươi năm gửi thư: “Tiểu thư cần gì, lão có.”",o:[
+  {n:"Nhờ lão giữ sổ phủ",c:{},w:{mat:1},sc:1,wx:"nắm sổ phủ",lx:"lão già yếu",rt:"Lão quản gia nhận lời."},
+  {n:"Gửi quà tạ lão",c:{bac:-30},w:{duc:2},wx:"lão trung thành",lx:"tốn bạc",rt:"Lão khóc khi nhận quà."},
+  {n:"Bảo lão đứng ngoài",c:{},w:{},wx:"không kéo lão vào",lx:"mất người",rt:"Lão vâng lời."}]},
+ s2:{h:"Gia nhân bỏ đi",w:"dad",if:RDW(0),t:"Mấy gia nhân thân của ngươi trong phủ bị huynh trưởng đuổi đi.",o:[
+  {n:"Đón họ vào làm ở trang trại riêng",c:{bac:-40},w:{duc:2},sc:1,wx:"họ mang ơn",lx:"tốn bạc",rt:"Họ quỳ tạ."},
+  {n:"Xin cha giữ họ lại",c:{},o:()=>40+S.danh/4,sc:1,wx:"cha đứng về ngươi",l:{},lx:"cha không muốn làm lớn",rt:"Cha giữ họ lại.",rf:"Cha nói việc phủ để huynh lo."},
+  {n:"Bỏ qua",c:{},w:{},wx:"không tốn",lx:"phủ mất người của ngươi",rt:"Ngươi không làm gì."}]},
+ c1:{h:"Môn khách",w:"dad",t:"Ba môn khách giỏi nhất phủ đang lưỡng lự. Một người cần bạc, một người cần danh, một người cần tri kỷ.",o:[
+  {n:"Cho bạc người cần bạc",c:{bac:-50},o:()=>50,sc:1,wx:"có một người",l:{},lx:"người theo bạc thì đi theo bạc",rt:"Môn khách nhận bạc, theo ngươi.",rf:"Hắn nhận bạc của cả hai."},
+  {n:"Tiến cử người cần danh",c:{suc:-3},o:()=>40+S.sung/5,sc:1,w:{danh:2},wx:"có người giỏi",l:{sung:-2},lx:"bị nói là cài người",rt:"Môn khách được bổ chức nhỏ.",rf:"Tiến cử không thành."},
+  {n:"Viết thư đàm đạo với người cần tri kỷ",c:{},o:()=>35+S.tai/3,sc:1,w:{tai:1},wx:"có người thật lòng",l:{},lx:"thư không đến",rt:"Hắn hồi thư dài: “Tiểu thư hiểu ta.”",rf:"Hắn thấy thư ngươi khách sáo."}]},
+ c2:{h:"{v} gửi người vào phủ",w:"v",need:["v"],t:"{v} gửi một nữ quan vào phủ Tể tướng “giúp việc” cho chị dâu.",o:[
+  {n:"Xin cha trả người về",c:{},o:()=>40+S.danh/4,sc:1,wx:"phủ kín",l:{},lx:"{v} giận",go:A=>{rdOan(A,"v",6)},rt:"Nữ quan bị trả về.",rf:"Cha nể {v}, giữ lại."},
+  {n:"Mua chuộc nữ quan",c:{bac:-40},o:()=>40+S.tamco/3,sc:1,w:{mat:1},wx:"tai mắt của {v} thành của ngươi",l:{danh:-2},lx:"nàng báo {v}",rt:"Nữ quan nhận bạc.",rf:"Nữ quan báo lại {v}."},
+  {n:"Để đó",c:{},w:{},wx:"không động",lx:"{v} có tai mắt trong phủ",rt:"Ngươi để nữ quan ở lại."}]},
+ t1:{h:"Đếm người",w:"dad",t:"Lão quản gia đếm: trong phủ, người theo ngươi và người theo huynh gần ngang nhau.",o:[
+  {n:"Giữ người đã có",c:{bac:-30},w:{duc:1},sc:1,wx:"vững",lx:"không thêm",rt:"Người của ngươi ở lại."},
+  {n:"Kéo thêm người",c:{bac:-60},o:()=>45+S.danh/5,sc:1,wx:"hơn huynh",l:{bac:-20},lx:"tiền mất",rt:"Thêm năm gia nhân theo ngươi.",rf:"Bạc đi mà người không đến."},
+  {n:"Đề nghị huynh chia phủ êm",c:{},o:()=>40+S.duc/4,sc:1,w:{duc:2},wx:"không ầm ĩ",l:{},lx:"huynh không nhận",rt:"Huynh đồng ý chia êm.",rf:"Huynh không đáp."}]},
+ x1:{h:"Ngày giỗ tổ",w:"dad",t:"Ngày giỗ tổ, cả phủ tụ về. Ai đứng hàng đầu thắp hương sau cha, người ấy được coi là người nối phủ.",o:[
+  {n:"Xin cha cho ngươi đứng hàng đầu",c:{suc:-4},o:A=>35+A.sc*8+S.danh/5,e:["win","lose"],rt:"Cha đưa nén hương cho ngươi trước.",rf:"Cha đưa nén hương cho huynh trưởng."},
+  {n:"Nhường huynh, đứng cạnh",c:{},o:A=>50+S.duc/5,e:["mid","lose"],rt:"Hai huynh muội cùng thắp hương.",rf:"Huynh không chịu đứng cạnh."},
+  {n:"Không về giỗ",c:{},w:{},e:"lose",lx:"vắng mặt là nhường",rt:"Ngươi gửi lễ, không về."}]}},
+ E:{win:{k:1,tag:"Phủ nghiêng về ngươi",w:"dad",t:"Cả phủ biết: người nối phủ là ngươi, dù ngươi ở trong cung.",fx:{danh:4},go:()=>e67dad(2)},
+  mid:{k:0,tag:"Phủ hai người giữ",t:"Phủ không chia mà cũng không một. Hai huynh muội cùng giữ, mỗi người một nửa.",fx:{duc:2}},
+  lose:{k:-1,tag:"Huynh nối phủ",t:"Huynh trưởng nối phủ. Phủ Tể tướng giờ đứng sau {v}.",fx:{danh:-3},go:()=>e67dad(-3)}}});
+
+rdDef("tt_tranh",7,{t:"Lời đồn trúng độc",w:"v",sj:"cơn bệnh lạ của {v}",cast(A){return rdCast(A,["v"])},
+ g:"{v} lâm bệnh lạ sau một bữa tiệc có món điểm tâm từ phủ Tể tướng. Cả cung xì xào: nhà ngươi muốn trừ người huynh trưởng chọn.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Thái y đến",w:"doc",if:RDW(1),t:"Thái y nói {v} bị ngộ độc nhẹ. Hoàng hậu cho tra mọi món ăn ở bữa tiệc.",o:[
+  {n:"Tự nộp món điểm tâm cho tra",c:{},w:{duc:3},sc:1,wx:"tỏ ra trong sạch",lx:"nếu món ấy có độc thì khó gỡ",rt:"Món điểm tâm được đưa đi tra."},
+  {n:"Cho người dò ai động vào món ăn",c:{bac:-30},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"có manh mối",l:{danh:-2},lx:"bị cho là phi tang",rt:"Một cung nữ của {v} đã cầm món ấy trước khi dâng.",rf:"Không ai nói."},
+  {n:"Đến thăm {v}",c:{bac:-20},o:()=>35+S.duc/4,sc:1,w:{duc:2},wx:"tỏ lòng",l:{danh:-2},lx:"bị đuổi",go:(A,ok)=>{rdRel(A,"v",ok?6:-4)},rt:"{v} nằm, nhìn ngươi không nói.",rf:"Cung nữ của {v} chặn cửa."}]},
+ s2:{h:"Ai cũng nhìn ngươi",w:"v",if:RDW(0),t:"Huynh trưởng nối phủ và đứng sau {v}. Nay {v} bệnh, ai cũng nhìn về cung ngươi.",o:[
+  {n:"Xin Hoàng hậu tra rõ",c:{suc:-3},o:()=>40+S.hh/4,sc:1,w:{danh:2},wx:"Hoàng hậu tra công bằng",l:{hh:-2},lx:"Hoàng hậu thấy phiền",rt:"Hoàng hậu cho tra.",rf:"Hoàng hậu chỉ bảo ngươi ở yên trong cung."},
+  {n:"Đóng cửa cung",c:{},w:{duc:2},wx:"không thêm lời",lx:"im lặng như nhận",rt:"Ngươi đóng cửa."},
+  {n:"Viết thư cho huynh",c:{},o:()=>40+S.duc/4,sc:1,wx:"huynh tin ngươi",l:{},lx:"huynh nghi",rt:"Huynh hồi: “Ta biết không phải muội.”",rf:"Huynh không hồi âm."}]},
+ c1:{h:"Món điểm tâm",w:"doc",t:"Thái y tra thấy trong món điểm tâm có một vị thuốc lạ, không phải độc chết người, chỉ gây đau bụng.",o:[
+  {n:"Tra xem ai mua vị thuốc ấy",c:{bac:-30},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"lần ra",l:{danh:-2},lx:"đường đứt",rt:"Vị thuốc được mua ở hiệu thuốc gần phủ nhà {v}.",rf:"Hiệu thuốc không nhớ."},
+  {n:"Nói rõ: độc nhẹ thế này là tự hại để vu",c:{},o:()=>35+S.tai/4,sc:1,w:{tamco:2},wx:"cả cung nghĩ lại",l:{danh:-3},lx:"bị cho là đổ ngược",go:A=>{rdOan(A,"v",8)},rt:"Hoàng hậu nhíu mày nhìn về phía {v}.",rf:"Ai cũng cho là ngươi đổ lỗi."},
+  {n:"Im lặng chờ tra",c:{},w:{duc:1},wx:"không nói bừa",lx:"chậm",rt:"Ngươi chờ."}]},
+ c2:{h:"Huynh trưởng giận",w:"dad",t:"Huynh trưởng tin lời đồn, dâng thư lên cha đòi xử ngươi theo gia pháp.",o:[
+  {n:"Gặp huynh giải thích",c:{suc:-3},o:()=>40+S.duc/4,sc:1,w:{duc:2},wx:"huynh nguôi",l:{danh:-2},lx:"huynh không nghe",rt:"Huynh nghe, rồi ngồi xuống.",rf:"Huynh bỏ đi giữa chừng."},
+  {n:"Nhờ cha phân xử",c:{},o:()=>40+S.danh/4,sc:1,wx:"cha đứng về ngươi",l:{},lx:"cha khó xử",rt:"Cha mắng huynh nóng vội.",rf:"Cha im lặng."},
+  {n:"Mặc huynh",c:{},w:{},wx:"không tốn công",lx:"huynh càng giận",rt:"Ngươi không đáp."}]},
+ t1:{h:"Cung nữ của {v}",w:"maid",t:"Cung nữ từng cầm món điểm tâm bỗng xin ra cung về quê.",o:[
+  {n:"Giữ nàng lại",c:{suc:-3},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"có nhân chứng",l:{danh:-2},lx:"bị nói là ép người",rt:"Nàng bị giữ lại chờ tra.",rf:"Nàng đã đi."},
+  {n:"Cho người theo nàng về quê",c:{bac:-30},w:{mat:1},wx:"không mất dấu",lx:"tốn",rt:"Người của ngươi đi theo."},
+  {n:"Để nàng đi",c:{},w:{duc:1},wx:"không ép",lx:"mất nhân chứng",rt:"Nàng đi."}]},
+ x1:{h:"Hoàng hậu phán",w:"hh",t:"Hoàng hậu gọi ngươi và {v} đến. Tra xét đã xong, chỉ chờ một lời.",o:[
+  {n:"Đưa nhân chứng ra",c:{suc:-4},o:A=>35+A.sc*8+S.mat*3,e:["win","lose"],rt:"Cung nữ khai: {v} sai nàng bỏ thuốc để vu cho nhà ngươi.",rf:"Cung nữ khai không biết gì."},
+  {n:"Xin Hoàng hậu bỏ qua cho cả hai",c:{},o:A=>50+S.duc/5,e:["mid","lose"],rt:"Hoàng hậu khép vụ, không ai bị phạt.",rf:"Hoàng hậu phạt ngươi vì món ăn từ nhà ngươi."},
+  {n:"Nhận lỗi về phần nhà mình",c:{danh:-2},w:{duc:3},e:"mid",lx:"mang tiếng",rt:"Hoàng hậu khen ngươi biết điều."}]}},
+ E:{win:{k:1,tag:"Lời đồn bị lật",w:"hh",t:"Cả cung biết {v} tự hại để vu ngươi. Huynh trưởng xấu hổ.",fx:{danh:5},go:A=>{rdOan(A,"v",12);return e67dad(2)}},
+  mid:{k:0,tag:"Vụ việc khép lại",t:"Không ai bị phạt, nhưng lời đồn còn đó.",fx:{}},
+  lose:{k:-1,tag:"Mang tiếng hại người",t:"Ngươi bị phạt chép kinh. Huynh trưởng tin ngươi hại {v}.",fx:{danh:-4,sung:-3},go:()=>e67dad(-2)}}});
+
+rdDef("tt_tranh",8,{t:"Cha ngã bệnh",w:"dad",sj:"bệnh của cha và ấn phủ",cast(A){return rdCast(A,["v"])},
+ g:"{dad} ngã bệnh nặng. Ấn phủ Tể tướng chưa trao cho ai. Huynh trưởng ở bên giường cha, ngươi ở trong cung.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Tin cha bệnh",w:"dad",if:RDW(1),t:"Lão quản gia báo tin cha bệnh trước cả huynh trưởng.",o:[
+  {n:"Xin thái y giỏi nhất đến phủ",c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{duc:2},wx:"cha được chữa tốt",l:{sung:-2},lx:"phiền Hoàng thượng",rt:"Viện phán Thái y viện đến phủ.",rf:"Hoàng thượng chỉ ban thuốc."},
+  {n:"Gửi sâm quý",c:{bac:-50},w:{duc:2},wx:"cha biết con thương",lx:"tốn",rt:"Cha uống sâm, tỉnh lại một chút."},
+  {n:"Nhờ quản gia giữ ấn",c:{},o:()=>45+S.mat*4,sc:1,w:{mat:1},wx:"ấn không vào tay huynh",l:{danh:-2},lx:"huynh biết",rt:"Lão quản gia cất ấn vào chỗ chỉ lão biết.",rf:"Huynh đã giữ ấn."}]},
+ s2:{h:"Biết tin muộn",w:"dad",if:RDW(0),t:"Ba ngày sau ngươi mới biết cha bệnh. Huynh trưởng không báo.",o:[
+  {n:"Xin về thăm",c:{suc:-3},o:()=>35+S.sung/4,sc:1,w:{duc:2},wx:"gặp cha",l:{sung:-2},lx:"không được về",rt:"Hoàng thượng cho về nửa ngày.",rf:"Không được về."},
+  {n:"Viết thư trách huynh",c:{},w:{},wx:"nói được",lx:"huynh càng xa",rt:"Huynh không đáp."},
+  {n:"Gửi thuốc, không nói gì",c:{bac:-30},w:{duc:2},wx:"tròn đạo hiếu",lx:"im lặng",rt:"Thuốc đến tay mẹ."}]},
+ c1:{h:"Mẹ ngươi đứng đâu",w:"dad",t:"Mẹ ngươi, người giữ chìa khóa kho phủ, chưa nói theo ai.",o:[
+  {n:"Viết thư cho mẹ",c:{},o:()=>45+S.duc/4,sc:1,w:{duc:1},wx:"mẹ về phía ngươi",l:{},lx:"mẹ khó xử",rt:"Mẹ hồi: “Mẹ theo cha. Cha theo con.”",rf:"Mẹ chỉ khóc."},
+  {n:"Gửi quà cho mẹ",c:{bac:-30},w:{duc:2},wx:"mẹ vui",lx:"không hỏi được gì",rt:"Mẹ nhận quà."},
+  {n:"Để mẹ yên",c:{},w:{duc:1},wx:"thương mẹ",lx:"mẹ có thể nghiêng về huynh",rt:"Ngươi không hỏi."}]},
+ c2:{h:"{v} nhắn huynh",w:"v",need:["v"],t:"{v} nhắn huynh trưởng: nếu cha mất, nhà nàng sẽ đứng sau huynh giữ ghế.",o:[
+  {n:"Cho huynh thấy cái giá",c:{},o:()=>40+S.tamco/3,sc:1,w:{tamco:2},wx:"huynh dè chừng",l:{},lx:"huynh không tin",go:A=>{rdOan(A,"v",6)},rt:"Huynh hiểu: ghế giữ nhờ người khác là ghế của người khác.",rf:"Huynh vẫn tin {v}."},
+  {n:"Tự tìm nhà khác đứng sau ngươi",c:{bac:-40},o:()=>40+S.danh/4,sc:1,wx:"cân lại",l:{danh:-2},lx:"tốn",rt:"Một nhà Thượng thư hứa ủng hộ ngươi.",rf:"Không nhà nào dám."},
+  {n:"Để mặc",c:{},w:{},wx:"không tranh",lx:"huynh có thêm người",rt:"Ngươi không làm gì."}]},
+ t1:{h:"Cha tỉnh",w:"dad",t:"Cha tỉnh lại một đêm, gọi cả hai con. Ông hỏi: “Ấn này, hai con muốn cha trao ai?”",o:[
+  {n:"Xin cha trao cho huynh, ngươi chỉ cần một lời hứa",c:{},w:{duc:3},sc:1,wx:"huynh cảm động",lx:"ấn không về tay ngươi",rt:"Huynh nhìn ngươi, mắt đỏ hoe."},
+  {n:"Xin cha trao cho ngươi",c:{},o:()=>35+S.danh/4,sc:1,w:{danh:2},wx:"ấn về tay ngươi",l:{},lx:"huynh oán",rt:"Cha nắm tay ngươi.",rf:"Cha nhắm mắt không đáp."},
+  {n:"Xin cha đừng trao ai",c:{},w:{duc:2},wx:"không ai tranh",lx:"không ai giữ",rt:"Cha cười yếu ớt."}]},
+ x1:{h:"Cha qua cơn",w:"doc",t:"Cơn bệnh của cha đến hồi quyết.",o:[
+  {n:"Ở bên cha",c:{suc:-4},o:A=>40+A.sc*8+S.duc/5,e:["win","lose"],rt:"Cha qua cơn, tỉnh dậy thấy ngươi đầu tiên.",rf:"Cha qua cơn, nhưng yếu hẳn, giao việc phủ cho huynh."},
+  {n:"Lo việc phủ trong lúc cha bệnh",c:{},o:A=>45+S.tamco/4,e:["win","mid"],rt:"Phủ không loạn. Cha tỉnh dậy thấy mọi việc yên.",rf:"Phủ không loạn, nhưng huynh nói ngươi chỉ lo việc."},
+  {n:"Cầu cho cha",c:{},w:{duc:3},e:"mid",lx:"không làm gì khác",rt:"Ngươi quỳ trước tượng Phật suốt đêm."}]}},
+ E:{win:{k:1,tag:"Cha tin ngươi",w:"dad",t:"Cha qua cơn bệnh và từ đó việc lớn đều hỏi ngươi.",fx:{danh:4,duc:2},go:()=>e67dad(2)},
+  mid:{k:0,tag:"Cha yếu đi",t:"Cha qua cơn nhưng yếu. Ấn phủ vẫn chưa trao.",fx:{duc:1}},
+  lose:{k:-1,tag:"Huynh giữ việc phủ",t:"Huynh trưởng giữ việc phủ thay cha. {v} có thêm chỗ dựa.",fx:{danh:-3},go:()=>e67dad(-2)}}});
+
+rdDef("tt_tranh",9,{t:"Ấn phủ Tể tướng",w:"emp",sj:"cuộc tranh ấn phủ Tể tướng",cast(A){return rdCast(A,["v"])},
+ g:"Chuyện ai giữ ấn phủ Tể tướng lọt ra triều. Hoàng thượng để ý: phủ Tể tướng nghiêng về ai, triều nghiêng theo đó.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Hoàng thượng hỏi",w:"emp",if:RDW(1),t:"Hoàng thượng hỏi như đùa: “Nghe nói nàng sắp làm Tể tướng?”",o:[
+  {n:"Đáp đùa lại",c:{},o:()=>40+S.tai/4,sc:1,w:{sung:2},wx:"ngài cười",l:{sung:-2},lx:"ngài không cười",rt:"Ngài cười: “Nàng mà làm Tể tướng thì trẫm khỏi lo.”",rf:"Ngài im lặng."},
+  {n:"Thưa thật mọi chuyện",c:{},o:()=>40+S.duc/4,sc:1,w:{sung:2},wx:"ngài tin",l:{},lx:"ngài lo",rt:"Ngài nghe, gật đầu.",rf:"Ngài nhíu mày."},
+  {n:"Lảng đi",c:{},w:{},wx:"không lộ",lx:"ngài nghi",rt:"Ngươi nói sang chuyện khác."}]},
+ s2:{h:"Hoàng thượng không hỏi",w:"emp",if:RDW(0),t:"Hoàng thượng không hỏi gì, nhưng ngài ghé cung {v} nhiều hơn.",o:[
+  {n:"Gửi canh",c:{bac:-10},o:()=>35+S.sung/3,sc:1,w:{sung:2},wx:"ngài nhớ",l:{},lx:"canh nguội",rt:"Ngài ghé.",rf:"Ngài không ghé."},
+  {n:"Chờ",c:{},w:{duc:1},wx:"giữ mình",lx:"xa",rt:"Ngươi chờ."},
+  {n:"Tìm cách gặp ở Ngự hoa viên",c:{suc:-2},o:()=>40+S.sac/4,sc:1,w:{sung:3},wx:"được gặp",l:{},lx:"bị nói là đón đường",rt:"Hoàng thượng dừng lại nói chuyện.",rf:"Ngài đi qua."}]},
+ c1:{h:"Triều thần bàn",w:"emp",t:"Ngự sử nói: ấn phủ Tể tướng là việc nhà, nhưng nhà ấy dính đến hậu cung thì là việc nước.",o:[
+  {n:"Lùi lại, nói không tranh",c:{},w:{duc:3},sc:1,wx:"triều yên",lx:"lùi là mất",rt:"Ngươi nhắn ra ngoài: “Thiếp không tranh ấn.”"},
+  {n:"Nhờ người nói giúp ở triều",c:{bac:-40},o:()=>40+S.danh/4,sc:1,wx:"có tiếng nói",l:{danh:-2},lx:"lộ ngươi có người",rt:"Một Thị lang nói đỡ.",rf:"Thị lang bị hặc."},
+  {n:"Im lặng",c:{},w:{},wx:"không động",lx:"triều tự bàn",rt:"Ngươi im."}]},
+ c2:{h:"{v} tâu",w:"v",need:["v"],t:"{v} tâu với Hoàng thượng: con gái Tể tướng muốn nắm cả phủ cha lẫn hậu cung.",o:[
+  {n:"Đáp lại trước mặt vua",c:{suc:-3},o:()=>40+S.tai/4,sc:1,w:{danh:2},wx:"vua thấy ngươi thẳng",l:{sung:-2},lx:"cãi trước vua",go:A=>{rdOan(A,"v",8)},rt:"Ngươi nói một câu, {v} cứng họng.",rf:"Hoàng thượng phẩy tay cho cả hai lui."},
+  {n:"Không đáp",c:{},w:{duc:2},wx:"giữ thể diện",lx:"lời tâu ở lại",rt:"Ngươi cúi đầu."},
+  {n:"Cho vua thấy {v} cũng đứng sau huynh ngươi",c:{},o:()=>40+S.tamco/3,sc:1,w:{tamco:2},wx:"vua thấy cả hai",l:{danh:-2},lx:"vua chán cả hai",go:A=>{rdOan(A,"v",8)},rt:"Hoàng thượng nhìn {v} rất lâu.",rf:"Vua nói: “Hai nàng đều như nhau.”"}]},
+ t1:{h:"Huynh trưởng tìm đến",w:"dad",t:"Huynh trưởng tìm đến: “Muội nhường ấn cho ta, ta hứa không để {v} dùng phủ.”",o:[
+  {n:"Tin huynh, nhường",c:{},w:{duc:3},sc:1,wx:"huynh muội hòa",lx:"ấn không về ngươi",rt:"Huynh nắm tay ngươi."},
+  {n:"Đòi huynh viết giấy",c:{},o:()=>40+S.tamco/3,sc:1,w:{tamco:2},wx:"có giấy làm bằng",l:{},lx:"huynh tự ái",rt:"Huynh viết giấy.",rf:"Huynh bỏ đi."},
+  {n:"Không nhường",c:{},w:{},wx:"giữ ấn",lx:"huynh oán",rt:"Ngươi lắc đầu."}]},
+ x1:{h:"Hoàng thượng định",w:"emp",t:"Hoàng thượng định giao việc phủ Tể tướng cho ai thay cha đang bệnh.",o:[
+  {n:"Xin giao cho người ngươi chọn",c:{suc:-4},o:A=>35+A.sc*8+S.sung/6,e:["win","lose"],rt:"Hoàng thượng giao cho người ngươi chọn.",rf:"Hoàng thượng giao cho huynh trưởng."},
+  {n:"Xin giao cho huynh",c:{},o:A=>50+S.duc/5,e:["mid","lose"],rt:"Huynh nhận việc phủ, biết ơn ngươi.",rf:"Huynh nhận việc phủ, không biết ơn ai."},
+  {n:"Không xin gì",c:{},w:{duc:2},e:"mid",lx:"để vua tự định",rt:"Ngươi không nói."}]}},
+ E:{win:{k:1,tag:"Ấn về tay ngươi",w:"emp",t:"Phủ Tể tướng do người ngươi chọn giữ. Huynh trưởng phải nghe.",fx:{danh:5},go:()=>e67dad(2)},
+  mid:{k:0,tag:"Huynh giữ ấn, nhớ ơn",t:"Huynh giữ ấn. Hắn nhớ ngươi đã nhường.",fx:{duc:3}},
+  lose:{k:-1,tag:"Ấn về phe {v}",t:"Huynh giữ ấn, và đứng sau {v}.",fx:{danh:-4},go:A=>{rdOan(A,"v",6);return e67dad(-3)}}}});
+
+rdDef("tt_tranh",10,{t:"Gia yến đoàn viên",w:"dad",sj:"bữa gia yến cuối năm",cast(A){return rdCast(A,["v"])},
+ g:"Cuối năm, Hoàng thượng cho phép phủ Tể tướng vào cung dự gia yến. Huynh trưởng, chị dâu, {v} và ngươi ngồi chung một mâm.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Sắp chỗ ngồi",w:"dad",if:RDW(1),t:"Nội vụ phủ hỏi ngươi sắp chỗ ngồi thế nào.",o:[
+  {n:"Cho huynh ngồi cạnh cha",c:{},w:{duc:3},sc:1,wx:"huynh được nể",lx:"ngươi ngồi xa",rt:"Huynh ngồi cạnh cha, nhìn ngươi cảm kích."},
+  {n:"Ngồi cạnh cha",c:{},o:()=>40+S.danh/4,sc:1,w:{danh:2},wx:"cả nhà thấy ai là chủ",l:{},lx:"huynh tự ái",rt:"Ngươi ngồi cạnh cha.",rf:"Huynh kiếm cớ ngồi chen."},
+  {n:"Để Nội vụ phủ sắp theo lệ",c:{},w:{},wx:"không ai trách",lx:"không ai nể",rt:"Nội vụ phủ sắp theo lệ."}]},
+ s2:{h:"Ngươi ngồi cuối mâm",w:"dad",if:RDW(0),t:"Nội vụ phủ đã sắp: huynh trưởng ngồi đầu, ngươi ngồi gần cuối.",o:[
+  {n:"Vui vẻ ngồi",c:{},w:{duc:3},wx:"giữ hòa khí",lx:"nuốt giận",rt:"Ngươi cười, ngồi xuống."},
+  {n:"Xin đổi chỗ",c:{suc:-2},o:()=>35+S.danh/4,sc:1,w:{danh:1},wx:"giữ thể diện",l:{danh:-2},lx:"lộ bất bình",rt:"Nội vụ phủ đổi chỗ.",rf:"Nội vụ phủ nói lệnh đã ban."},
+  {n:"Cáo bệnh không dự",c:{},w:{},wx:"khỏi ngượng",lx:"vắng mặt",rt:"Ngươi cáo bệnh."}]},
+ c1:{h:"Chén rượu của huynh",w:"dad",t:"Huynh trưởng nâng chén mời ngươi. Cả bàn im lặng chờ.",o:[
+  {n:"Uống cạn",c:{},w:{duc:2},sc:1,wx:"huynh muội hòa",lx:"",rt:"Huynh cũng uống cạn."},
+  {n:"Mời lại huynh một chén",c:{},o:()=>40+S.tai/4,sc:1,w:{danh:2},wx:"ngươi là người mời",l:{},lx:"huynh tự ái",rt:"Cả bàn vỗ tay.",rf:"Huynh đặt chén xuống."},
+  {n:"Xin dùng trà thay rượu",c:{},w:{},wx:"giữ mình",lx:"huynh thấy bị từ chối",rt:"Huynh cười gượng."}]},
+ c2:{h:"{v} kể chuyện cũ",w:"v",need:["v"],t:"{v} kể chuyện món điểm tâm năm trước, như vô tình.",o:[
+  {n:"Đáp nhẹ nhàng",c:{},o:()=>40+S.tai/4,sc:1,w:{danh:2},wx:"{v} mất mặt",l:{},lx:"",go:A=>{rdOan(A,"v",6)},rt:"Ngươi nói: “Chuyện cũ, tỷ còn nhớ kỹ thật.” Cả bàn cười.",rf:"Không ai cười."},
+  {n:"Im lặng",c:{},w:{duc:2},wx:"giữ hòa khí",lx:"{v} đắc ý",rt:"Ngươi gắp thức ăn cho mẹ."},
+  {n:"Nhờ cha lên tiếng",c:{},o:()=>40+S.danh/4,sc:1,wx:"cha bênh",l:{},lx:"cha khó xử",rt:"Cha nói: “Chuyện ấy đã xong.”",rf:"Cha giả như không nghe."}]},
+ t1:{h:"Mẹ khóc",w:"dad",t:"Cuối bữa, mẹ ngươi khóc: “Nhà mình lại ngồi chung một mâm.”",o:[
+  {n:"Ôm mẹ",c:{},w:{duc:3},sc:1,wx:"cả nhà lặng đi",lx:"",rt:"Huynh trưởng quay mặt đi lau mắt."},
+  {n:"Hứa với mẹ nhà sẽ hòa",c:{},w:{duc:2},wx:"mẹ yên lòng",lx:"lời hứa nặng",rt:"Mẹ cười qua nước mắt."},
+  {n:"Nhìn huynh",c:{},o:()=>40+S.duc/4,sc:1,wx:"huynh hiểu",l:{},lx:"huynh tránh mắt",rt:"Huynh gật đầu với ngươi.",rf:"Huynh nhìn xuống."}]},
+ x1:{h:"Lời chúc cuối",w:"dad",t:"Cha nâng chén cuối: “Ai nói lời chúc, người ấy nói thay cả nhà.”",o:[
+  {n:"Đứng lên chúc cho cả nhà",c:{suc:-3},o:A=>35+A.sc*8+S.tai/5,e:["win","lose"],rt:"Lời chúc của ngươi làm cả bàn đứng dậy nâng chén.",rf:"Lời chúc vụng, huynh tiếp lời."},
+  {n:"Mời huynh chúc",c:{},o:A=>50+S.duc/5,e:["win","mid"],rt:"Huynh chúc, rồi nói thêm: “Và cho muội ta.”",rf:"Huynh chúc cho nhà {v} trước."},
+  {n:"Để cha chúc",c:{},w:{duc:1},e:"mid",lx:"không ai nói thay",rt:"Cha chúc."}]}},
+ E:{win:{k:1,tag:"Một mâm một lòng",w:"dad",t:"Sau gia yến, huynh trưởng thôi lui tới cung {v}. Nhà ngươi lại một lòng.",fx:{danh:3,duc:2},go:A=>{rdOan(A,"v",6);return e67dad(3)}},
+  mid:{k:0,tag:"Bữa yến êm",t:"Bữa yến êm, nhưng sau đó mỗi người về một ngả.",fx:{duc:1}},
+  lose:{k:-1,tag:"Mâm vẫn chia",t:"Bữa yến kết thúc. Huynh trưởng đi cùng người nhà {v} ra cổng.",fx:{danh:-2},go:()=>e67dad(-2)}}});
+
+rdDef("tt_tranh",11,{t:"Một nhà một lòng",w:"dad",sj:"phủ Tể tướng sau cùng",cast(A){return rdCast(A,["v"])},
+ g:"Cha già yếu, sắp từ quan. Phủ Tể tướng sẽ đi về đâu: theo ngươi, theo huynh, hay chia đôi mãi. Đây là kết cục truyện xuất thân của ngươi.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Huynh xin gặp",w:"dad",if:RDW(1),t:"Huynh trưởng xin gặp riêng. Hắn mang theo cuốn gia phả.",o:[
+  {n:"Gặp",c:{},w:{duc:2},sc:1,wx:"nghe huynh nói",lx:"",rt:"Huynh mở gia phả, chỉ vào tên ngươi."},
+  {n:"Gặp cùng cha",c:{},o:()=>40+S.danh/4,sc:1,w:{danh:1},wx:"có cha làm chứng",l:{},lx:"huynh không nói được hết",rt:"Ba người ngồi với nhau.",rf:"Huynh im lặng."},
+  {n:"Hẹn hôm khác",c:{},w:{},wx:"có thời gian",lx:"huynh nghĩ ngươi tránh",rt:"Huynh về."}]},
+ s2:{h:"Huynh không đến",w:"dad",if:RDW(0),t:"Cha sắp từ quan mà huynh trưởng không vào cung một lần.",o:[
+  {n:"Viết thư cho huynh",c:{},o:()=>40+S.duc/4,sc:1,w:{duc:2},wx:"huynh hồi đáp",l:{},lx:"huynh không đáp",rt:"Huynh hồi một bức thư dài.",rf:"Thư không có hồi âm."},
+  {n:"Nhờ chị dâu",c:{bac:-20},o:()=>40+S.tai/4,sc:1,wx:"có người hòa giải",l:{},lx:"chị dâu không dám",rt:"Chị dâu nói giúp.",rf:"Chị dâu từ chối."},
+  {n:"Thôi",c:{},w:{},wx:"",lx:"xa thêm",rt:"Ngươi không làm gì."}]},
+ c1:{h:"Nhà {v} ra giá",w:"v",need:["v"],t:"Nhà {v} ra giá cuối: họ sẽ thôi đứng sau huynh nếu ngươi thôi tranh sủng với {v}.",o:[
+  {n:"Nhận",c:{sung:-3},w:{duc:2},wx:"huynh được tự do",lx:"nhường sủng",go:A=>{rdRel(A,"v",10)},rt:"Nhà {v} rút khỏi phủ ngươi."},
+  {n:"Từ chối",c:{},w:{tamco:2},sc:1,wx:"không bị ép",lx:"nhà {v} còn đó",go:A=>{rdOan(A,"v",6)},rt:"Ngươi từ chối."},
+  {n:"Đề nghị điều khác",c:{bac:-40},o:()=>40+S.tamco/3,sc:1,wx:"không mất sủng",l:{bac:-20},lx:"nhà {v} không nhận",rt:"Nhà {v} nhận bạc, rút lui.",rf:"Nhà {v} cười."}]},
+ c2:{h:"Gia phả",w:"dad",t:"Cha muốn ghi trong gia phả người nối phủ. Theo lệ là con trai trưởng.",o:[
+  {n:"Ủng hộ lệ: ghi huynh",c:{},w:{duc:3},sc:1,wx:"huynh biết ơn",lx:"ngươi không có tên",rt:"Cha ghi tên huynh."},
+  {n:"Xin cha ghi cả hai",c:{},o:()=>40+S.danh/4,sc:1,w:{danh:2},wx:"có tên",l:{},lx:"phá lệ",rt:"Cha ghi thêm: “Con gái giữ đạo, nhà nhờ ân.”",rf:"Cha nói: lệ là lệ."},
+  {n:"Không bàn",c:{},w:{},wx:"",lx:"",rt:"Ngươi không nói."}]},
+ t1:{h:"Huynh hỏi",w:"dad",t:"Huynh trưởng hỏi: “Nếu ta theo muội, muội có để ta làm người nối phủ không?”",o:[
+  {n:"Có",c:{},w:{duc:3},sc:1,wx:"huynh theo ngươi",lx:"ngươi chỉ đứng sau",rt:"Huynh quỳ một gối: “Vậy ta theo muội.”"},
+  {n:"Huynh phải tự giành",c:{},w:{tamco:2},wx:"rõ ràng",lx:"huynh tự ái",rt:"Huynh đứng dậy."},
+  {n:"Ta không cần phủ",c:{},w:{duc:2},wx:"nhẹ lòng",lx:"buông phủ",rt:"Huynh nhìn ngươi rất lâu."}]},
+ x1:{h:"Ngày cha từ quan",w:"dad",t:"Ngày cha dâng sớ từ quan. Cả phủ chờ xem hai người con đứng thế nào.",o:[
+  {n:"Đứng cạnh huynh tiễn cha",c:{},o:A=>35+A.sc*8+S.duc/5,e:["win","mid"],rt:"Cả triều thấy hai huynh muội Tể tướng đứng cạnh nhau.",rf:"Huynh đứng cạnh, nhưng không nhìn ngươi."},
+  {n:"Để huynh đứng một mình, tự giữ phần mình",c:{},o:A=>45+S.tamco/4,e:["mid","lose"],rt:"Mỗi người một phần, không ai giẫm lên ai.",rf:"Huynh đứng một mình, và đứng về phía {v}."},
+  {n:"Xin Hoàng thượng giao phủ cho ngươi",c:{suc:-5},o:A=>30+A.sc*6+S.sung/5,e:["win","lose"],rt:"Hoàng thượng ban: con gái Tể tướng giữ gia nghiệp.",rf:"Hoàng thượng nói việc nhà để nhà tự lo."}]}},
+ E:{win:{k:1,tag:"Một nhà một lòng",w:"dad",t:"Phủ Tể tướng một lòng đứng sau ngươi. Huynh trưởng giữ phủ, ngươi giữ lòng nhà.",fx:{danh:8,duc:3},go:()=>e67dad(6)},
+  mid:{k:0,tag:"Mỗi người một ngả",t:"Phủ không còn chia phe, nhưng cũng không còn là chỗ dựa lớn. Ngươi tự đi đường mình.",fx:{duc:3,danh:1}},
+  lose:{k:-1,tag:"Phủ đứng sau {v}",t:"Huynh trưởng nối phủ và đứng sau {v}. Phủ Tể tướng từ nay là đối thủ của ngươi.",fx:{danh:-6},go:A=>{rdOan(A,"v",8);return e67dad(-6)}}}});
+RD97L.push({a:"tt_tranh_11",tag:"Huynh muội đồng lòng, phủ dâng cả phe cánh",w:"dad",p:.12,n:"Mời huynh cùng quỳ dâng sổ phủ lên Hoàng thượng",c:{suc:-4},
+ path:["Hỏi thẳng huynh","Trả ơn thay huynh","Cho huynh thấy cái giá","Xin cha trao cho huynh","Tin huynh, nhường","Đứng cạnh huynh"],np:2,bad:["Cắt đứt","Không nhường","Cáo bệnh không dự"],sc:2,x:[()=>S.duc>=40,"Đức từ 40"],
+ t:"Hai huynh muội cùng quỳ trước Hoàng thượng, dâng sổ người của phủ. Ngài cười: “Một nhà như thế, trẫm dùng cả.” Huynh trưởng được bổ chức lớn, và mọi người của phe {v} trong phủ quay về theo hai người.",
+ fx:{danh:12,duc:3},go:A=>{rdOan(A,"v",8);return e67dad(8)},rw:"nt_haiduong",ti:"Huynh muội đồng tâm"});
+
+/* ---------- tt_mat · Mật ước với Hoàng hậu ---------- */
+const MATCAP=()=>BAL.road.cap.tt_mat,MATRK=()=>RANKS[MATCAP()].n;
+rdDef("tt_mat",5,{t:"Ân nợ Trung cung",w:"hh",sj:"điều Hoàng hậu và cha đã hứa",cast(A){return rdCast(A,["v"])},
+ g:"Sau chuyện mật ước, giữa ngươi và Hoàng hậu {hh} không còn như trước. Tìm cho ra mật ước viết những gì, trước khi người khác tìm ra.",
+ p:[["s1","s2","s3"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Hoàng hậu gọi",w:"hh",need:["hh"],if:()=>rdPrev()==="win",t:"Hoàng hậu {hh} gọi ngươi đến, ban trà, nói: “Bản cung nhớ ơn muội. Nhưng ơn thì có hạn.”",o:[
+  {n:"Hỏi thẳng mật ước viết gì",c:{},o:()=>40+S.hh/4,sc:1,w:{mat:1},wx:"nghe từ chính miệng nàng",l:{hh:-3},lx:"Hoàng hậu không vui",rt:"Hoàng hậu nói một nửa: “Cha muội hứa nhà muội không dựng ai lên ghế của bản cung.”",rf:"Hoàng hậu cười: “Muội hỏi nhiều quá.”"},
+  {n:"Tạ ơn, không hỏi",c:{},w:{hh:4},wx:"Hoàng hậu yên tâm",lx:"không biết thêm",rt:"Hoàng hậu gật đầu hài lòng."},
+  {n:"Dò qua cung nữ của Hoàng hậu",c:{bac:-30},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"có tin",l:{hh:-4},lx:"bị biết",rt:"Cung nữ kể có một bức thư trong hộp gỗ trầm.",rf:"Cung nữ báo lại Hoàng hậu."}]},
+ s2:{h:"Trung cung lung lay",w:"hh",need:["hh"],if:()=>rdPrev()==="win2",t:"Từ khi mật ước bị lật, Hoàng hậu {hh} như ngồi trên lửa. Nàng nhìn ngươi như nhìn kẻ thù.",o:[
+  {n:"Gửi lễ xin hòa",c:{bac:-40},o:()=>35+S.duc/4,sc:1,w:{hh:5},wx:"Hoàng hậu bớt giận",l:{hh:-2},lx:"bị trả lễ",rt:"Hoàng hậu nhận lễ.",rf:"Lễ bị trả về nguyên."},
+  {n:"Giữ khoảng cách",c:{},w:{tamco:2},wx:"không thêm vướng",lx:"thù còn đó",rt:"Ngươi tránh đi qua Khôn Ninh cung."},
+  {n:"Tìm bản mật ước còn lại",c:{suc:-3},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"nắm thêm bài",l:{danh:-2},lx:"bị biết",rt:"Có một bản sao ở phủ cha.",rf:"Không tìm ra."}]},
+ s3:{h:"Mật ước chìm",w:"dad",if:()=>rdPrev()!=="win"&&rdPrev()!=="win2",t:"Chuyện mật ước chìm xuống. Nhưng cha vẫn giữ một bản, và ngươi biết có người khác cũng biết.",o:[
+  {n:"Xin cha bản mật ước",c:{},o:()=>40+S.danh/4,sc:1,w:{mat:1},wx:"có bản trong tay",l:{},lx:"cha không đưa",rt:"Cha gửi bản sao, dặn đọc xong đốt.",rf:"Cha nói: “Con không cần biết.”"},
+  {n:"Dò ai khác biết",c:{bac:-20},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"biết kẻ nguy hiểm",l:{danh:-1},lx:"kẻ ấy biết ngươi dò",rt:"Một nữ quan cũ của Khôn Ninh cung biết.",rf:"Không ra."},
+  {n:"Quên đi",c:{},w:{duc:2},wx:"lòng yên",lx:"việc không tự mất",rt:"Ngươi không nghĩ nữa."}]},
+ c1:{h:"Hộp gỗ trầm",w:"hh",need:["hh"],t:"Bức thư mật ước nằm trong một hộp gỗ trầm ở Khôn Ninh cung.",o:[
+  {n:"Cho người lẻn vào xem",c:{bac:-40,duc:-3},o:()=>35+S.mat*5,sc:1,w:{mat:2},wx:"đọc được",l:{hh:-6},lx:"bị bắt là trọng tội",rt:"Người của ngươi chép được thư.",rf:"Người của ngươi bị bắt, khai ra ngươi."},
+  {n:"Chờ Hoàng hậu tự cho xem",c:{},w:{hh:2},wx:"giữ lễ",lx:"chờ mãi",rt:"Ngươi chờ."},
+  {n:"Hỏi cha",c:{},o:()=>40+S.danh/4,sc:1,w:{mat:1},wx:"nghe từ phía cha",l:{},lx:"cha giấu",rt:()=>`Cha kể một điều: nhà ngươi hứa con gái sẽ không lên quá bậc ${MATRK()}.`,rf:"Cha không kể."}]},
+ c2:{h:"{v} nghe phong thanh",w:"v",need:["v"],t:"{v} nghe phong thanh chuyện mật ước. Nàng muốn biết để dùng.",o:[
+  {n:"Bịt miệng người kể",c:{bac:-30},o:()=>45+S.mat*4,sc:1,wx:"tin dừng",l:{danh:-2},lx:"người kể nói thêm",go:A=>{rdOan(A,"v",4)},rt:"Người kể im.",rf:"Người kể đã nói xong."},
+  {n:"Cho {v} một tin sai",c:{},o:()=>40+S.tamco/3,sc:1,w:{tamco:2},wx:"{v} đi lạc",l:{danh:-2},lx:"{v} biết",go:A=>{rdOan(A,"v",6)},rt:"{v} đi dò một mật ước không có thật.",rf:"{v} cười: “Muội tưởng ta ngốc?”"},
+  {n:"Mặc",c:{},w:{},wx:"",lx:"{v} biết thêm",rt:"Ngươi không động."}]},
+ t1:{h:"Mật ước viết gì",w:"dad",t:()=>`Ngươi biết được: phủ Tể tướng ủng hộ Hoàng hậu giữ ngôi; đổi lại, Hoàng hậu bảo vệ cha trên triều, và con gái Tể tướng không được lên quá bậc ${MATRK()}.`,o:[
+  {n:"Giận cha",c:{},w:{tamco:2},wx:"biết mình bị bán",lx:"cha con xa",go:()=>e67dad(-2),rt:"Ngươi gấp thư, tay run."},
+  {n:"Hiểu cho cha",c:{},w:{duc:3},sc:1,wx:"cha con còn tình",lx:"chấp nhận bị bán",rt:"Ngươi thở dài."},
+  {n:"Nghĩ cách dùng nó",c:{},w:{tamco:3},sc:1,wx:"mật ước thành bài",lx:"lòng lạnh",rt:"Ngươi cất thư vào tay áo."}]},
+ x1:{h:"Nói với ai",w:"hh",t:"Ngươi đã biết đủ. Nói với Hoàng hậu rằng ngươi biết, với cha, hay giữ riêng.",o:[
+  {n:"Nói với Hoàng hậu",c:{suc:-4},o:A=>35+A.sc*8+S.hh/5,e:["win","lose"],rt:"Hoàng hậu im lặng, rồi nói: “Vậy muội và ta nói chuyện như người lớn.”",rf:"Hoàng hậu cho là ngươi dọa."},
+  {n:"Nói với cha",c:{},o:A=>45+S.danh/5,e:["mid","lose"],rt:"Cha xin lỗi ngươi, lần đầu tiên.",rf:"Cha nói: “Vì nhà cả.”"},
+  {n:"Giữ riêng",c:{},w:{tamco:2},e:"mid",lx:"không ai biết ngươi biết",rt:"Ngươi giữ kín."}]}},
+ E:{win:{k:1,tag:"Ngang hàng với Trung cung",w:"hh",t:"Hoàng hậu biết ngươi biết. Từ nay hai người nói chuyện như hai người ngồi cùng bàn cờ.",fx:{danh:4,tamco:2}},
+  mid:{k:0,tag:"Biết mà im",t:"Ngươi biết mật ước. Chưa ai biết ngươi biết.",fx:{tamco:2}},
+  lose:{k:-1,tag:"Hoàng hậu đề phòng",t:"Hoàng hậu cho người canh cung ngươi.",fx:{hh:-6}}}});
+
+rdDef("tt_mat",6,{t:"Cái giá là ngươi",w:"hh",sj:"điều khoản giữ ngươi dưới một bậc",cast(A){return rdCast(A,["v"])},
+ g:()=>`Mật ước giữ ngươi không lên quá bậc ${MATRK()}. Chấp nhận, lách, hay phá — mỗi đường một cái giá.`,
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Một lần tấn phong bị gác",w:"emp",if:RDW(1),t:"Hoàng thượng định tấn phong ngươi, nhưng Hoàng hậu {hh} khéo léo nói “chờ thêm một mùa”. Ngươi biết vì sao.",o:[
+  {n:"Chờ, giữ ước",c:{},w:{hh:4},sc:1,f:"keep",wx:"Hoàng hậu thấy ngươi giữ lời",lx:"mất một lần tấn phong",rt:"Ngươi cúi đầu tạ ơn Hoàng hậu đã nghĩ cho ngươi."},
+  {n:"Nhắc khéo Hoàng thượng",c:{suc:-3},o:()=>35+S.sung/4,sc:1,f:"break",wx:"Hoàng thượng nhớ",l:{hh:-6},lx:"Hoàng hậu biết ngươi lách",rt:"Hoàng thượng cười: “Trẫm nhớ.”",rf:"Hoàng thượng quên."},
+  {n:"Gặp Hoàng hậu nói thẳng",c:{},o:()=>40+S.hh/4,sc:1,w:{tamco:2},wx:"rõ ràng",l:{hh:-4},lx:"Hoàng hậu giận",rt:"Hoàng hậu nói: “Muội muốn lên thì phải cho ta thứ khác.”",rf:"Hoàng hậu lạnh mặt."}]},
+ s2:{h:"Bị giữ dưới",w:"hh",if:RDW(0),t:"Đã hai mùa Hoàng thượng không nhắc đến chuyện tấn phong ngươi. Có người đang giữ.",o:[
+  {n:"Chấp nhận",c:{},w:{duc:3},f:"keep",wx:"lòng yên",lx:"đứng yên",rt:"Ngươi không nghĩ đến bậc nữa."},
+  {n:"Lập công để không ai giữ được",c:{suc:-4},o:()=>35+S.tai/4,sc:1,w:{danh:3},f:"break",wx:"công rõ ràng",l:{},lx:"công không ai thấy",rt:"Ngươi chép xong bộ kinh mừng thọ Thái hậu. Cả cung nhắc.",rf:"Công của ngươi bị người khác nhận."},
+  {n:"Hỏi cha",c:{},o:()=>40+S.danh/4,sc:1,wx:"cha nói thật",l:{},lx:"cha né",rt:"Cha nói: “Đó là giá của nhà mình.”",rf:"Cha né."}]},
+ c1:{h:"Ngươi đã ở sát bậc",w:"hh",need:["hh"],if:()=>S.rank>=MATCAP()-1,t:()=>`Ngươi đã ở sát bậc ${MATRK()}. Một bước nữa là phá ước.`,o:[
+  {n:"Từ chối tấn phong",c:{sung:-3},w:{hh:6,duc:2},f:"keep",wx:"Hoàng hậu tin",lx:"Hoàng thượng ngạc nhiên",rt:"Ngươi xin Hoàng thượng chờ."},
+  {n:"Nhận tấn phong",c:{hh:-8},w:{danh:3},f:"break",wx:"lên bậc",lx:"Hoàng hậu thù",rt:"Ngươi nhận."},
+  {n:"Đổi bằng thứ khác",c:{bac:-60},o:()=>40+S.tamco/3,sc:1,wx:"Hoàng hậu nới ước",l:{hh:-3},lx:"bạc mất, ước còn",rt:"Hoàng hậu nhận lễ, gật đầu.",rf:"Hoàng hậu nhận lễ, không gật."}]},
+ c2:{h:"{v} được tấn phong",w:"v",need:["v"],t:"{v} được tấn phong vượt qua ngươi. Nàng ghé cung ngươi khoe áo mới.",o:[
+  {n:"Chúc mừng",c:{},w:{duc:2},wx:"giữ lễ",lx:"nuốt giận",go:A=>{rdRel(A,"v",4)},rt:"{v} cười, nụ cười đắc thắng."},
+  {n:"Nhắc {v}: ghế cao thì gió lớn",c:{},o:()=>40+S.tai/4,sc:1,w:{danh:1},wx:"{v} chột dạ",l:{},lx:"bị cho là ghen",go:A=>{rdOan(A,"v",5)},rt:"{v} cười gượng.",rf:"{v} cười to hơn."},
+  {n:"Không tiếp",c:{},w:{},wx:"khỏi ngượng",lx:"{v} kể khắp nơi",rt:"Ngươi cáo bệnh."}]},
+ t1:{h:"Cha nhắn",w:"dad",t:"Cha nhắn: “Ước là ước. Con nhịn một chút, nhà mình được cả.”",o:[
+  {n:"Vâng lời cha",c:{},w:{duc:2},f:"keep",wx:"cha yên",lx:"ngươi không yên",go:()=>e67dad(2),rt:"Ngươi hồi: “Con biết.”"},
+  {n:"Đáp: con không phải món hàng",c:{},w:{tamco:2},sc:1,f:"break",wx:"rõ lòng",lx:"cha giận",go:()=>e67dad(-3),rt:"Cha không hồi âm."},
+  {n:"Đáp: con sẽ tìm cách khác",c:{},w:{tamco:1,duc:1},wx:"giữ cả hai",lx:"lời hứa nặng",rt:"Cha hồi: “Cẩn thận.”"}]},
+ x1:{h:"Giữ hay phá",w:"hh",t:()=>`Cơ hội tấn phong đến. Nhận là vượt bậc ${MATRK()} trong lòng Hoàng hậu.`,o:[
+  {n:"Giữ ước, chờ",c:{},o:A=>50+(A.f.keep?15:0)+S.hh/6,e:["win","mid"],rt:"Hoàng hậu nợ ngươi thêm một lần. Nàng hứa sẽ trả.",rf:"Ngươi giữ ước, mà Hoàng hậu không cảm ơn."},
+  {n:"Phá ước, nhận",c:{hh:-10},o:A=>35+(A.f.break?15:0)+S.sung/5,e:["win","lose"],rt:"Ngươi lên bậc, và Hoàng hậu không làm gì được.",rf:"Ngươi lên bậc, Hoàng hậu bắt đầu trả đũa."},
+  {n:"Xin Hoàng hậu tự đề cử ngươi",c:{suc:-4},o:A=>35+A.sc*8+S.hh/5,e:["win","lose"],rt:"Hoàng hậu tự tay đề cử ngươi. Ước được viết lại.",rf:"Hoàng hậu cười: “Muội đòi nhiều quá.”"}]}},
+ E:{win:{k:1,tag:"Ước được nới",w:"hh",t:"Hoàng hậu và ngươi tìm được một chỗ đứng chung. Bậc của ngươi không còn bị giữ.",fx:{danh:4,hh:4}},
+  mid:{k:0,tag:"Giữ ước",t:"Ngươi giữ ước. Hoàng hậu yên tâm. Ngươi đứng yên.",fx:{hh:3,duc:2}},
+  lose:{k:-1,tag:"Hoàng hậu trả đũa",t:"Hoàng hậu bắt đầu gạt ngươi ra khỏi những việc của Trung cung.",fx:{hh:-8,danh:-2}}}});
+
+rdDef("tt_mat",7,{t:"Hoàng hậu thử lòng",w:"hh",sj:"việc Hoàng hậu giao",cast(A){return rdCast(A,["v"])},
+ g:"Hoàng hậu {hh} giao ngươi một việc: lo lễ thân tằm mùa xuân. Làm tốt là trung với ước; làm quá tốt là lấn Trung cung.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Nhận việc",w:"hh",if:RDW(1),t:"Hoàng hậu giao việc trước mặt cả lục cung, khen ngươi chu đáo.",o:[
+  {n:"Nhận, xin Hoàng hậu chỉ bảo",c:{},w:{hh:3},sc:1,wx:"Hoàng hậu vui",lx:"làm dưới tay nàng",rt:"Hoàng hậu gật đầu."},
+  {n:"Nhận, tự lo trọn",c:{suc:-3},w:{danh:2},wx:"tỏ tài",lx:"Hoàng hậu thấy bị qua mặt",rt:"Ngươi nhận và tự lo."},
+  {n:"Xin cùng {v} lo",c:{},o:()=>40+S.duc/4,sc:1,wx:"chia gánh",l:{},lx:"chia công",rt:"Hoàng hậu cho {v} giúp ngươi.",rf:"Hoàng hậu nói: một người lo là đủ."}]},
+ s2:{h:"Việc khó",w:"hh",if:RDW(0),t:"Hoàng hậu giao việc lễ thân tằm — năm trước người lo việc này bị phạt vì trời mưa.",o:[
+  {n:"Nhận, chuẩn bị kỹ",c:{bac:-30},w:{duc:2},sc:1,wx:"lo trước",lx:"tốn",rt:"Ngươi cho dựng lều che mưa sẵn."},
+  {n:"Xin Khâm thiên giám xem ngày",c:{suc:-2},o:()=>45+S.tai/4,sc:1,wx:"chọn ngày nắng",l:{},lx:"Khâm thiên giám không chắc",rt:"Khâm thiên giám chọn ngày.",rf:"Khâm thiên giám không dám nói."},
+  {n:"Nhận, không lo xa",c:{},w:{},wx:"",lx:"rủi ro",rt:"Ngươi nhận."}]},
+ c1:{h:"Tơ tằm",w:"maid",t:"Nội vụ phủ đưa tơ tằm kém. Phải đổi, nhưng đổi thì phải qua tay Hoàng hậu.",o:[
+  {n:"Xin Hoàng hậu cho đổi",c:{},o:()=>45+S.hh/4,sc:1,w:{hh:2},wx:"đúng lệ",l:{},lx:"Hoàng hậu chậm",rt:"Hoàng hậu cho đổi.",rf:"Hoàng hậu bảo dùng tạm."},
+  {n:"Tự bỏ bạc mua tơ tốt",c:{bac:-50},w:{danh:2},wx:"lễ đẹp",lx:"vượt quyền",rt:"Tơ tốt về kịp."},
+  {n:"Dùng tạm",c:{},w:{},wx:"giữ lệ",lx:"lễ kém",rt:"Ngươi dùng tơ cũ."}]},
+ c2:{h:"{v} phá đám",w:"v",need:["v"],t:"Người của {v} làm đổ giỏ dâu trước giờ lễ.",o:[
+  {n:"Có sẵn giỏ thay",c:{bac:-20},w:{danh:2},sc:1,wx:"lễ không gián đoạn",lx:"",go:A=>{rdOan(A,"v",4)},rt:"Giỏ dâu mới được mang ra."},
+  {n:"Bắt người làm đổ",c:{suc:-2},o:()=>45+S.mat*4,sc:1,wx:"có người chịu tội",l:{},lx:"ầm ĩ",go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Người làm đổ khai là người của {v}.",rf:"Người ấy chạy mất."},
+  {n:"Bỏ qua",c:{},w:{duc:1},wx:"không gây chuyện",lx:"lễ thiếu",rt:"Lễ dùng nửa giỏ."}]},
+ t1:{h:"Thái hậu đến xem",w:"th",t:"Thái hậu bất ngờ đến xem lễ, khen ngươi trước mặt Hoàng hậu.",o:[
+  {n:"Tạ ơn, nói công là của Hoàng hậu",c:{},w:{hh:4,th:2},sc:1,wx:"Hoàng hậu được thể diện",lx:"",rt:"Hoàng hậu nhìn ngươi, gật đầu nhẹ."},
+  {n:"Nhận lời khen",c:{},w:{th:3,danh:2},wx:"Thái hậu nhớ ngươi",lx:"Hoàng hậu mất mặt",go:()=>{},rt:"Thái hậu cười."},
+  {n:"Cúi đầu im",c:{},w:{duc:1},wx:"không lấn",lx:"",rt:"Ngươi chỉ cúi đầu."}]},
+ x1:{h:"Lễ thân tằm",w:"hh",t:"Ngày lễ. Hoàng hậu dẫn lễ, ngươi lo việc. Một sơ suất là của ngươi; một thành công là của ai?",o:[
+  {n:"Lo trọn, để Hoàng hậu nổi bật",c:{suc:-3},o:A=>45+A.sc*7+S.tai/6,e:["win","mid"],rt:"Lễ trọn vẹn. Hoàng hậu được khen. Hoàng hậu biết nhờ ai.",rf:"Lễ ổn, không ai để ý ngươi."},
+  {n:"Lo trọn, để mình nổi bật",c:{suc:-3},o:A=>40+S.tai/4,e:["win","lose"],rt:"Cả cung nhắc tên ngươi. Hoàng hậu cười nhạt.",rf:"Ngươi nổi bật, Hoàng hậu thấy bị lấn."},
+  {n:"Lo vừa đủ",c:{},w:{},e:"mid",lx:"",rt:"Lễ qua đi."}]}},
+ E:{win:{k:1,tag:"Qua phép thử",w:"hh",t:"Hoàng hậu tin ngươi giữ ước mà vẫn có tài. Nàng bắt đầu giao việc thật.",fx:{hh:6,danh:3}},
+  mid:{k:0,tag:"Lễ qua đi",t:"Lễ qua đi. Hoàng hậu vẫn chưa tin hẳn.",fx:{hh:2}},
+  lose:{k:-1,tag:"Lấn Trung cung",t:"Hoàng hậu thấy ngươi muốn nổi hơn nàng.",fx:{hh:-8}}}});
+
+rdDef("tt_mat",8,{t:"Mật ước mới",w:"v",sj:"kẻ muốn chen vào mật ước",cast(A){return rdCast(A,["v"])},
+ g:"{v} đã biết đủ về mật ước để đòi một chỗ. Nàng muốn cùng Hoàng hậu viết một mật ước mới, và gạt nhà ngươi ra.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"{v} lui tới Khôn Ninh cung",w:"v",need:["v"],if:RDW(1),t:"{v} lui tới Khôn Ninh cung mỗi ngày. Hoàng hậu bắt đầu gọi nàng là “muội muội”.",o:[
+  {n:"Cũng lui tới",c:{bac:-20},o:()=>40+S.hh/4,sc:1,w:{hh:3},wx:"giữ chỗ",l:{},lx:"Hoàng hậu thấy hai người tranh",rt:"Hoàng hậu cũng gọi ngươi là muội muội.",rf:"Hoàng hậu lạnh nhạt."},
+  {n:"Dò {v} mang gì đến",c:{suc:-2},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"biết giá {v} trả",l:{},lx:"bị biết",go:A=>{rdOan(A,"v",4)},rt:"{v} hứa nhà nàng giữ ghế cho con Hoàng hậu.",rf:"Không ra."},
+  {n:"Để mặc",c:{},w:{},wx:"",lx:"{v} chiếm chỗ",rt:"Ngươi không động."}]},
+ s2:{h:"Ngươi bị gạt ra",w:"v",need:["v"],if:RDW(0),t:"Hoàng hậu bắt đầu giao việc cho {v} thay ngươi.",o:[
+  {n:"Tìm việc khác để giữ thể diện",c:{},w:{duc:2},wx:"không mất mặt",lx:"xa Trung cung",rt:"Ngươi lo việc ở Thái hậu."},
+  {n:"Gặp Hoàng hậu",c:{suc:-3},o:()=>35+S.hh/4,sc:1,w:{hh:3},wx:"lấy lại chỗ",l:{hh:-3},lx:"bị coi là ghen",rt:"Hoàng hậu nói: “Muội nghĩ nhiều rồi.”",rf:"Hoàng hậu không tiếp."},
+  {n:"Nắm thóp {v}",c:{bac:-30},o:()=>40+S.mat*5,sc:1,w:{mat:1},wx:"có bài",l:{},lx:"",go:A=>{rdOan(A,"v",6)},rt:"Nhà {v} từng nhận hối lộ.",rf:"Không có gì."}]},
+ c1:{h:"Cha bị bỏ rơi",w:"dad",t:"Hoàng hậu thôi bảo vệ cha trên triều. Một tờ sớ hặc cha lọt qua.",o:[
+  {n:"Xin Hoàng hậu giữ ước",c:{},o:()=>40+S.hh/4,sc:1,w:{hh:2},wx:"ước còn",l:{},lx:"Hoàng hậu lạnh",rt:"Hoàng hậu cho người rút sớ.",rf:"Hoàng hậu nói ước đã hết."},
+  {n:"Tự lo cho cha",c:{bac:-40},o:()=>40+S.danh/4,sc:1,wx:"cha thoát",l:{},lx:"tốn",go:()=>e67dad(1),rt:"Sớ bị gác.",rf:"Sớ vẫn lên."},
+  {n:"Để cha tự lo",c:{},w:{},wx:"",lx:"cha bị phạt",go:()=>e67dad(-2),rt:"Cha bị phạt bổng."}]},
+ c2:{h:"Bản mật ước cũ",w:"hh",t:"Ngươi vẫn giữ bản sao mật ước cũ. Nếu lộ, cả Hoàng hậu lẫn cha đều mang tiếng.",o:[
+  {n:"Giữ làm bài cuối",c:{},w:{tamco:2},sc:1,wx:"có bài",lx:"giữ lửa",rt:"Ngươi cất kỹ."},
+  {n:"Đốt",c:{},w:{duc:3},wx:"sạch",lx:"mất bài",rt:"Bản sao cháy."},
+  {n:"Cho Hoàng hậu biết ngươi giữ",c:{},o:()=>35+S.tamco/3,sc:1,w:{hh:2},wx:"Hoàng hậu dè chừng",l:{hh:-5},lx:"Hoàng hậu thấy bị dọa",rt:"Hoàng hậu im lặng, rồi gạt {v} sang một bên.",rf:"Hoàng hậu giận."}]},
+ t1:{h:"Ba người một bàn",w:"hh",t:"Hoàng hậu mời cả ngươi và {v} dùng trà. Nàng muốn xem ai nhường ai.",o:[
+  {n:"Nhường {v}",c:{},w:{duc:3},wx:"Hoàng hậu thấy ngươi rộng lượng",lx:"{v} được thế",go:A=>{rdRel(A,"v",6)},rt:"{v} ngạc nhiên."},
+  {n:"Không nhường",c:{},o:()=>40+S.danh/4,sc:1,w:{danh:2},wx:"giữ chỗ",l:{},lx:"cãi nhau trước Hoàng hậu",go:A=>{rdOan(A,"v",6)},rt:"{v} cúi đầu trước.",rf:"Hoàng hậu cho cả hai lui."},
+  {n:"Đề nghị ba người cùng ước",c:{suc:-3},o:()=>35+S.tamco/3,sc:1,w:{tamco:2},wx:"không ai bị gạt",l:{},lx:"",rt:"Hoàng hậu cười: “Muội khéo thật.”",rf:"{v} phản đối."}]},
+ x1:{h:"Ai ở lại",w:"hh",t:"Hoàng hậu quyết: mật ước mới sẽ viết với nhà nào.",o:[
+  {n:"Giành lại chỗ",c:{suc:-4},o:A=>35+A.sc*8+S.hh/5,e:["win","lose"],rt:"Hoàng hậu giữ nhà ngươi, gạt {v}.",rf:"Hoàng hậu chọn {v}."},
+  {n:"Để {v} vào, giữ phần nhỏ",c:{},o:A=>50+S.duc/5,e:["mid","lose"],rt:"Ba nhà chung ước, nhà ngươi phần nhỏ.",rf:"Nhà ngươi bị gạt hẳn."},
+  {n:"Rút khỏi ước",c:{},w:{duc:3},e:"mid",lx:"mất chỗ dựa Trung cung",rt:"Ngươi xin rút."}]}},
+ E:{win:{k:1,tag:"Giữ chỗ trong ước",w:"hh",t:"Hoàng hậu giữ nhà ngươi. {v} ra về tay trắng, và nhớ mặt ngươi.",fx:{hh:4,danh:3},go:A=>{rdOan(A,"v",10);return""}},
+  mid:{k:0,tag:"Chia ước",t:"Mật ước có thêm người. Nhà ngươi vẫn ở trong, nhưng không còn là duy nhất.",fx:{}},
+  lose:{k:-1,tag:"Bị gạt khỏi ước",t:"Hoàng hậu viết ước mới với nhà {v}. Cha ngươi mất chỗ dựa.",fx:{hh:-4,danh:-3},go:()=>e67dad(-4)}}});
+
+rdDef("tt_mat",9,{t:"Ba mặt một lời",w:"hh",sj:"cuộc gặp giữa ngươi, cha và Hoàng hậu",cast(A){return rdCast(A,["v"])},
+ g:"Nhân thọ yến của Thái hậu, ngươi, {dad} và Hoàng hậu {hh} có một khắc ngồi riêng. Ai cũng nói thật một nửa.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Thọ yến",w:"th",if:RDW(1),t:"Thái hậu cho ngươi ngồi gần. Hoàng hậu và cha đều nhìn thấy.",o:[
+  {n:"Mời cha và Hoàng hậu ra Noãn các",c:{},o:()=>40+S.danh/4,sc:1,w:{danh:1},wx:"ngươi là người mời",l:{},lx:"họ không đến",rt:"Cả hai đến.",rf:"Chỉ cha đến."},
+  {n:"Chờ họ tìm ngươi",c:{},w:{tamco:1},sc:1,wx:"giữ thế",lx:"chậm",rt:"Hoàng hậu tìm ngươi trước."},
+  {n:"Nhờ Thái hậu sắp chỗ",c:{},o:()=>35+S.th/4,sc:1,w:{th:2},wx:"có Thái hậu che",l:{},lx:"Thái hậu biết chuyện",rt:"Thái hậu cười, sai người dẫn cả ba ra Noãn các.",rf:"Thái hậu không để ý."}]},
+ s2:{h:"Bị gọi đến",w:"hh",if:RDW(0),t:"Hoàng hậu gọi ngươi và cha ra Noãn các giữa thọ yến. Ngươi đến muộn một bước.",o:[
+  {n:"Xin lỗi, ngồi xuống",c:{},w:{hh:2},wx:"giữ lễ",lx:"họ đã nói trước",rt:"Họ ngừng nói khi ngươi đến."},
+  {n:"Hỏi họ đã nói gì",c:{},o:()=>35+S.danh/4,sc:1,wx:"không bị gạt",l:{},lx:"bị cho là hỗn",rt:"Cha kể lại.",rf:"Hoàng hậu cười."},
+  {n:"Đứng nghe",c:{},w:{tamco:1},wx:"nghe trọn",lx:"",rt:"Ngươi đứng nghe."}]},
+ c1:{h:"Cha nói dối",w:"dad",t:"Cha nói với Hoàng hậu rằng ngươi không biết gì về mật ước.",o:[
+  {n:"Im lặng giữ lời cha",c:{},w:{duc:1},sc:1,wx:"cha được việc",lx:"Hoàng hậu biết ngươi biết",rt:"Hoàng hậu nhìn ngươi, không nói."},
+  {n:"Nói thật ngươi biết",c:{},o:()=>40+S.duc/4,sc:1,w:{hh:3},wx:"Hoàng hậu thấy ngươi thật",l:{},lx:"cha mất mặt",go:()=>e67dad(-1),rt:"Hoàng hậu gật đầu.",rf:"Cha đỏ mặt."},
+  {n:"Đổi chủ đề",c:{},w:{},wx:"",lx:"",rt:"Ngươi nói chuyện thọ yến."}]},
+ c2:{h:"Hoàng hậu nói dối",w:"hh",t:"Hoàng hậu nói nàng chưa từng gặp {v} bàn chuyện ước.",o:[
+  {n:"Nhắc khéo",c:{},o:()=>40+S.tai/4,sc:1,w:{tamco:2},wx:"Hoàng hậu biết ngươi biết",l:{hh:-3},lx:"Hoàng hậu thấy bị bắt bài",rt:"Hoàng hậu cười: “Muội tinh thật.”",rf:"Hoàng hậu lạnh mặt."},
+  {n:"Để vậy",c:{},w:{hh:1},wx:"giữ hòa khí",lx:"",rt:"Ngươi không nói."},
+  {n:"Hỏi thẳng",c:{suc:-2},o:()=>30+S.danh/4,sc:1,wx:"rõ ràng",l:{hh:-5},lx:"phạm thượng",rt:"Hoàng hậu thừa nhận.",rf:"Hoàng hậu đứng dậy."}]},
+ t1:{h:"Một nửa sự thật của ngươi",w:"hh",t:"Đến lượt ngươi. Ngươi giữ bài gì, lộ bài gì.",o:[
+  {n:"Lộ ra ngươi giữ bản sao",c:{},o:()=>35+S.tamco/3,sc:1,w:{tamco:2},wx:"cả hai phải nể",l:{hh:-5},lx:"Hoàng hậu thấy bị dọa",rt:"Cả hai im lặng rất lâu.",rf:"Hoàng hậu nói: “Muội đang dọa ta?”"},
+  {n:"Nói ngươi chỉ muốn yên",c:{},w:{duc:2,hh:2},sc:1,wx:"họ yên tâm",lx:"không giành gì",rt:"Cha thở ra."},
+  {n:"Nói ngươi muốn ước mới, ngươi là một bên",c:{},o:()=>35+S.danh/4,sc:1,w:{danh:2},wx:"được nhìn như người ngang hàng",l:{},lx:"cả hai không vui",rt:"Hoàng hậu gật đầu chậm.",rf:"Cha mắng ngươi hỗn."}]},
+ x1:{h:"Ba bên",w:"hh",t:"Thọ yến sắp tàn. Một lời cuối quyết định ba bên đứng đâu.",o:[
+  {n:"Đề nghị ba bên viết lại ước",c:{suc:-4},o:A=>35+A.sc*8+S.tamco/5,e:["win","lose"],rt:"Ba người cùng gật đầu. Ước mới có tên ngươi.",rf:"Hoàng hậu bỏ ra trước."},
+  {n:"Để cha và Hoàng hậu quyết",c:{},o:A=>50,e:["mid","lose"],rt:"Ước cũ giữ nguyên.",rf:"Họ quyết gạt ngươi ra."},
+  {n:"Rút lui",c:{},w:{duc:2},e:"mid",lx:"",rt:"Ngươi xin về chỗ."}]}},
+ E:{win:{k:1,tag:"Ngươi có tên trong ước",w:"hh",t:"Từ nay ngươi là một bên của mật ước, không còn là món hàng.",fx:{danh:4,tamco:2}},
+  mid:{k:0,tag:"Ước cũ giữ nguyên",t:"Mọi thứ như cũ.",fx:{}},
+  lose:{k:-1,tag:"Bị gạt ra",t:"Cha và Hoàng hậu quyết mà không có ngươi.",fx:{hh:-4},go:()=>e67dad(-2)}}});
+
+rdDef("tt_mat",10,{t:"Giữ hay phá",w:"hh",sj:"số phận của mật ước",cast(A){return rdCast(A,["v"])},
+ g:"Ngôi Trung cung lung lay vì một chuyện khác. Mật ước giờ có thể cứu Hoàng hậu, hoặc chôn nàng. Ngươi cầm nửa con dao.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Hoàng hậu cần ngươi",w:"hh",if:RDW(1),t:"Hoàng hậu bị hặc là không hiền. Nàng nhắn: “Theo ước, nhà muội phải đứng sau bản cung.”",o:[
+  {n:"Giữ ước, đứng sau",c:{},w:{hh:6},sc:1,f:"keep",wx:"Hoàng hậu nợ lớn",lx:"cùng thuyền",rt:"Ngươi nhắn cha đứng sau Hoàng hậu."},
+  {n:"Đòi thêm",c:{},o:()=>40+S.tamco/3,sc:1,w:{tamco:2},f:"break",wx:"được giá",l:{hh:-4},lx:"Hoàng hậu thấy bị ép",rt:"Hoàng hậu hứa nới bậc cho ngươi.",rf:"Hoàng hậu giận."},
+  {n:"Chờ xem",c:{},w:{},wx:"",lx:"Hoàng hậu thấy bị bỏ",rt:"Ngươi chưa trả lời."}]},
+ s2:{h:"Hoàng hậu sa cơ",w:"hh",if:RDW(0),t:"Hoàng hậu bị hặc. Nhà {v} — bên mới trong ước — đã rút lui.",o:[
+  {n:"Đứng ra giữ nàng",c:{},o:()=>40+S.danh/4,sc:1,w:{hh:6},f:"keep",wx:"Hoàng hậu nhớ ơn",l:{},lx:"đứng chung chỗ đổ",rt:"Hoàng hậu cầm tay ngươi."},
+  {n:"Đứng ngoài",c:{},w:{duc:1},wx:"an toàn",lx:"",rt:"Ngươi đứng ngoài."},
+  {n:"Đẩy thêm",c:{duc:-3},o:()=>35+S.tamco/3,sc:1,w:{tamco:2},f:"break",wx:"Trung cung trống",l:{danh:-3},lx:"mang tiếng",rt:"Ngươi để lọt một chuyện cũ.",rf:"Bị lần ra."}]},
+ c1:{h:"Cha muốn bán ước",w:"dad",t:"Cha thấy Hoàng hậu sắp đổ, muốn đem mật ước dâng Hoàng thượng để lấy công.",o:[
+  {n:"Ngăn cha",c:{},o:()=>40+S.danh/4,sc:1,w:{duc:2},f:"keep",wx:"giữ chữ tín",l:{},lx:"cha giận",go:(A,ok)=>{if(!ok)e67dad(-2)},rt:"Cha gác lại.",rf:"Cha không nghe."},
+  {n:"Để cha làm",c:{},w:{},f:"break",wx:"",lx:"bội ước",go:()=>e67dad(2),rt:"Cha chuẩn bị tấu."},
+  {n:"Tự mình quyết thay cha",c:{suc:-3},w:{tamco:2},sc:1,wx:"việc trong tay ngươi",lx:"gánh nặng",rt:"Cha giao bản ước cho ngươi."}]},
+ c2:{h:"{v} cũng cầm dao",w:"v",need:["v"],t:"{v} cũng có một bản ước. Nàng chờ ai ra tay trước.",o:[
+  {n:"Giành lấy bản của {v}",c:{bac:-40},o:()=>35+S.mat*5,sc:1,w:{mat:1},wx:"chỉ còn ngươi cầm",l:{},lx:"",go:A=>{rdOan(A,"v",8)},rt:"Bản ước của {v} vào tay ngươi.",rf:"{v} giấu kỹ."},
+  {n:"Bắt tay {v}",c:{},o:()=>35+S.duc/4,sc:1,wx:"cùng cầm",l:{},lx:"",go:(A,ok)=>{rdRel(A,"v",ok?10:-4)},rt:"{v} nhận.",rf:"{v} từ chối."},
+  {n:"Mặc",c:{},w:{},wx:"",lx:"{v} có thể ra tay",rt:"Ngươi để vậy."}]},
+ t1:{h:"Đêm cuối",w:"emp",t:"Hoàng thượng hỏi: “Nàng có biết gì về Hoàng hậu mà trẫm nên biết?”",o:[
+  {n:"Không, thưa Hoàng thượng",c:{},w:{hh:4},sc:1,f:"keep",wx:"giữ ước",lx:"giấu vua",rt:"Hoàng thượng gật đầu."},
+  {n:"Có, và kể",c:{},w:{sung:3},f:"break",wx:"vua tin",lx:"bội ước",go:A=>{A.f.told=1},rt:"Hoàng thượng nghe đến hết."},
+  {n:"Thiếp không nên nói",c:{},w:{duc:2},wx:"",lx:"vua đoán",rt:"Hoàng thượng nhìn ngươi."}]},
+ x1:{h:"Giữ hay phá",w:"hh",t:"Ngày triều đình định chuyện Trung cung. Mật ước nằm trong tay ngươi.",o:[
+  {n:"Giữ ước, cứu Hoàng hậu",c:{suc:-4},o:A=>35+A.sc*8+(A.f.keep?15:0),e:["win","lose"],rt:"Hoàng hậu giữ được ngôi. Nàng nợ ngươi cả đời.",rf:"Ngươi giữ ước mà Hoàng hậu vẫn bị phạt."},
+  {n:"Phá ước, dâng vua",c:{hh:-10},o:A=>35+(A.f.break?15:0)+S.sung/5,e:["win","lose"],rt:"Hoàng thượng thấy ngươi trung. Trung cung lung lay.",rf:"Hoàng thượng thấy ngươi là kẻ bán bạn."},
+  {n:"Đốt ước",c:{},w:{duc:4},e:"mid",lx:"không ai được gì",rt:"Ngươi đốt mật ước."}]}},
+ E:{win:{k:1,tag:"Cầm số phận Trung cung",w:"hh",t:"Dù giữ hay phá, từ nay Trung cung biết ai đã quyết.",fx:{danh:6}},
+  mid:{k:0,tag:"Ước thành tro",t:"Mật ước không còn. Không ai nợ ai.",fx:{duc:3}},
+  lose:{k:-1,tag:"Mất cả hai phía",t:"Hoàng hậu không tin, Hoàng thượng không trọng.",fx:{hh:-6,sung:-4}}}});
+
+rdDef("tt_mat",11,{t:"Kết mật ước",w:"hh",sj:"mật ước sau cùng",cast(A){return rdCast(A,["v"])},
+ g:"Mật ước đi đến hồi kết. Hoàng hậu {hh}, {dad} và ngươi: ai giữ được gì. Đây là kết cục truyện xuất thân của ngươi.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Hoàng hậu mời",w:"hh",if:RDW(1),t:"Hoàng hậu mời ngươi đến Khôn Ninh cung. Lần đầu tiên nàng tự rót trà cho ngươi.",o:[
+  {n:"Nhận trà",c:{},w:{hh:4},sc:1,wx:"hòa",lx:"",rt:"Hai người uống trà trong im lặng."},
+  {n:"Rót lại cho nàng",c:{},o:()=>40+S.tai/4,sc:1,w:{hh:3,danh:1},wx:"ngang hàng",l:{},lx:"",rt:"Hoàng hậu cười.",rf:"Hoàng hậu nhìn tay ngươi."},
+  {n:"Hỏi nàng muốn gì",c:{},w:{tamco:1},wx:"rõ",lx:"",rt:"Hoàng hậu nói: “Một người bạn trong cung.”"}]},
+ s2:{h:"Hoàng hậu không mời",w:"hh",if:RDW(0),t:"Đã nửa năm Hoàng hậu không nhìn ngươi.",o:[
+  {n:"Đến thỉnh an như thường",c:{},w:{duc:2},sc:1,wx:"giữ lễ",lx:"",rt:"Hoàng hậu nhận lễ."},
+  {n:"Gửi thư",c:{},o:()=>35+S.tai/4,sc:1,w:{hh:3},wx:"nàng đọc",l:{},lx:"",rt:"Hoàng hậu hồi một chữ.",rf:"Thư không có hồi âm."},
+  {n:"Thôi",c:{},w:{},wx:"",lx:"",rt:"Ngươi không tìm nữa."}]},
+ c1:{h:"Cha già",w:"dad",t:"Cha xin cáo lão. Mật ước sẽ theo ông về quê, hoặc ở lại với ngươi.",o:[
+  {n:"Giữ lại",c:{},w:{tamco:2},sc:1,wx:"có bài",lx:"giữ lửa",rt:"Cha đưa ngươi bản ước."},
+  {n:"Để cha mang về",c:{},w:{duc:2},wx:"nhẹ",lx:"",rt:"Cha mang về."},
+  {n:"Đốt trước mặt cha",c:{},w:{duc:3},wx:"sạch",lx:"",rt:"Cha nhìn lửa, gật đầu."}]},
+ c2:{h:"{v} hỏi",w:"v",need:["v"],t:"{v} hỏi: “Rốt cuộc ngươi được gì từ cái ước ấy?”",o:[
+  {n:"Đáp thật",c:{},w:{duc:2},wx:"",lx:"",go:A=>{rdRel(A,"v",6)},rt:"{v} lặng đi."},
+  {n:"Cười không đáp",c:{},w:{tamco:1},wx:"",lx:"",rt:"{v} bỏ đi."},
+  {n:"Hỏi lại {v}",c:{},w:{},wx:"",lx:"",go:A=>{rdOan(A,"v",3)},rt:"{v} không đáp được."}]},
+ t1:{h:"Bậc của ngươi",w:"emp",t:()=>`Ngươi đang ở bậc ${RANKS[Math.min(S.rank,7)].n}. Ước từng giữ ngươi dưới bậc ${MATRK()}.`,o:[
+  {n:"Xin Hoàng hậu xóa điều khoản",c:{},o:()=>40+S.hh/4,sc:1,w:{hh:2},wx:"tự do",l:{},lx:"",rt:"Hoàng hậu gật đầu.",rf:"Hoàng hậu nói: “Ước là ước.”"},
+  {n:"Không cần ai cho phép",c:{},w:{tamco:2},sc:1,wx:"",lx:"Hoàng hậu không vui",rt:"Ngươi không nhắc."},
+  {n:"Giữ bậc như ước",c:{},w:{hh:3,duc:2},wx:"chữ tín",lx:"",rt:"Ngươi giữ."}]},
+ x1:{h:"Hồi kết",w:"hh",t:"Hoàng hậu hỏi: “Từ nay muội và ta là gì của nhau?”",o:[
+  {n:"Là tri kỷ",c:{},o:A=>35+A.sc*8+S.duc/5,e:["win","mid"],rt:"Hoàng hậu nắm tay ngươi. Từ nay Trung cung là chỗ dựa của ngươi.",rf:"Hoàng hậu cười buồn: “Tri kỷ trong cung, khó lắm.”"},
+  {n:"Là hai người ngồi cùng bàn cờ",c:{},o:A=>40+S.tamco/4,e:["win","lose"],rt:"Hoàng hậu cười: “Vậy thì ta chơi với muội.”",rf:"Hoàng hậu nói: “Bàn cờ chỉ có một người thắng.”"},
+  {n:"Là người dưng",c:{},w:{},e:"lose",lx:"",rt:"Hoàng hậu gật đầu."}]}},
+ E:{win:{k:1,tag:"Trung cung là chỗ dựa",w:"hh",t:"Mật ước khép lại. Hoàng hậu và ngươi đứng chung. Cha về quê yên lòng.",fx:{danh:8,hh:6},go:()=>e67dad(4)},
+  mid:{k:0,tag:"Mật ước khép lại",t:"Mật ước không còn ràng buộc ai. Ngươi tự đi đường mình.",fx:{duc:3,danh:2}},
+  lose:{k:-1,tag:"Trung cung thành đối thủ",t:"Hoàng hậu coi ngươi là đối thủ. Cha mất chỗ dựa trên triều.",fx:{hh:-8,danh:-3},go:()=>e67dad(-6)}}});
+RD97L.push({a:"tt_mat_11",tag:"Hoàng hậu tiến cử ngươi làm người kế vị Trung cung",w:"hh",p:.1,n:"Xin Hoàng hậu cùng dâng sớ xóa mật ước trước Hoàng thượng",c:{suc:-4},
+ path:["Giữ ước","Tạ ơn, không hỏi","Lo trọn, để Hoàng hậu nổi bật","Giữ ước, cứu Hoàng hậu","Là tri kỷ","Đề nghị ba bên"],np:2,bad:["Phá ước","Đẩy thêm","Cho người lẻn vào"],sc:2,x:[()=>S.hh>=40,"Hoàng hậu quý ngươi từ 40"],
+ t:"Hoàng hậu cùng ngươi quỳ trước Hoàng thượng, dâng mật ước và xin xóa. Ngài đọc rồi cười: “Hai nàng giấu trẫm lâu thế.” Hoàng hậu tâu: nếu một ngày nàng không còn, người nên ngồi ghế ấy là ngươi.",
+ fx:{danh:12,hh:10},go:()=>e67dad(4),rw:"nt_dongchau",ti:"Người Trung cung tiến cử"});
