@@ -185,7 +185,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
   if(o.who===S){eaHitMine(p,o.m);h=`${Nm(p)} mắng cung nữ ${o.m.name} của cung ngươi.`;break}
   if(hi){if(me){eaS().hoi.push({id:o.who.id,m:o.m.name,w:W()});add(`${nm(o.who)} sẽ đến hỏi tội`)}else{oanAdd(o.who,p,F.oan*2);if(o.who.queen||rkOf(o.who)>=rkOf(p)+2)punish(p,`mắng cung nữ của ${o.who.name}`,1)}}
   else{oanAdd(o.who,p,F.oan);if(me)add(`${nm(o.who)} oán ngươi`)}
-  h=me?`Gặp cung nữ ${o.m.name} của ${nm(o.who)} ở hành lang, ngươi trút cơn giận lên nàng, mắng một trận nặng lời.${hi?` Chủ nhân nàng phẩm vị cao hơn ngươi: “đánh chó phải nhìn mặt chủ”.`:""}`:`${Nm(p)} mắng cung nữ ${o.m.name} của ${o.who.name}.`;break}
+  h=me?`Gặp một cung nữ của ${nm(o.who)} ở hành lang, ngươi trút cơn giận lên nàng, mắng một trận nặng lời.${hi?` Chủ nhân nàng phẩm vị cao hơn ngươi: “đánh chó phải nhìn mặt chủ”.`:""}`:`${Nm(p)} mắng cung nữ ${o.m.name} của ${o.who.name}.`;break}
  case"pham":{const t=eaSuperior(p);if(!t)return null;target=t;relAdd(p,t,-F.rel);pay({danh:-F.danh});punish(p,`phạm thượng với ${t.queen?"Hoàng hậu":t.name}`,1);if(me)add(`${t.queen?"Hoàng hậu":nm(t)} thiện cảm −${F.rel}`);
   h=me?`Lúc thỉnh an, ${t.queen?"Hoàng hậu":nm(t)} nói một câu, ngươi không nhịn nổi mà cãi lại trước mặt mọi người. Cả điện lặng ngắt.`:`${Nm(p)} cãi lại ${t.queen?"Hoàng hậu":t.name} trước mặt mọi người.`;break}
  case"khoc":case"tui":pay({suc:-F.suc});h=me?(r.g==="ghen"?"Nghĩ đến người kia được sủng, ngươi tủi thân, đóng cửa khóc một mình.":r.g==="gian"?"Uất ức mà chẳng dám nói ra, ngươi chỉ biết khóc.":"Đêm ấy ngươi khóc suốt, gối ướt đẫm."):`${Nm(p)} ${r.n.toLowerCase()}.`;break;
@@ -234,10 +234,10 @@ function eaMeOut(g){const P=eaPick(S,g);if(!P)return false;const r=P.r;const o=e
 /* hỏi tội: the higher-rank mistress whose maid she scolded comes the next tuần (a real choice, gain and loss each) */
 function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;const H=E().hoi;EA_N.hoi++;
  const o=clp(H.try+(S.rank-rkOf(v))*H.rk+Math.round((S.danh||0)/H.dn),5,95);const ttl=v.queen?"Hoàng hậu":nm(v);
- const opts=S.bac<H.bac?[]:[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`Chắc chắn · tốn: Bạc −${H.bac} · thành: ${ttl} thiện cảm +${H.aff} · kèm: Danh −${H.danh}`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ ${x.m}.`)}}];
+ const opts=S.bac<H.bac?[]:[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`Chắc chắn · tốn: Bạc −${H.bac} · thành: ${ttl} thiện cảm +${H.aff} · kèm: Danh −${H.danh}`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
  if(S.maid)opts.push({n:"Đổ lỗi cho cung nữ hỗn hào",risk:"an toàn",hint:"giữ thể diện, cung nữ chịu tội thay",x:`Chắc chắn · thành: giữ thể diện · kèm: lòng ${S.maid.name} −${H.loy}`,fx:{},go:()=>{loyAdd(S.maid,-H.loy);log(`Ngươi đổ cho ${S.maid.name} hỗn hào; ${S.maid.name} quỳ chịu tội thay.`)}});
  opts.push({n:"Cãi lý",risk:"liều",hint:"có thể giữ được thể diện, có thể chuốc họa",x:`${word(o)} · thành: Danh +${H.win} · hỏng: Danh −${H.lose}, ${ttl} oán +${H.oan}`,fx:{},go:()=>{if(roll(o)){apply({danh:H.win});log(`Ngươi cãi lý với ${ttl}: cung nữ kia hỗn trước. ${ttl} đành bỏ qua.`)}else{apply({danh:-H.lose});oanAdd(v,S,H.oan);log(`<span class="r">Ngươi cãi lý với ${ttl}, không ai bênh; chuyện lan khắp hậu cung.</span>`)}}});
- Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${ttl} dẫn cung nữ ${x.m} đến cung ngươi: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”</p><p>Cung nữ ${x.m} đứng sau, mắt còn đỏ.</p>`,opts})}
+ Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${ttl} dẫn theo cung nữ hôm trước đến cung ngươi: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
 window.eaHoi=eaHoi;
 /* ======================= (2) EXTREME MOOD ======================= */
 function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2?M.g:null;
