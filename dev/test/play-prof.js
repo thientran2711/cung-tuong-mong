@@ -12,9 +12,11 @@ function agg(prof){const N={};for(const n of prof.nodes)N[n.id]=n;const dt={};co
  const key=n=>{const c=n.callFrame;return (c.functionName||'(anon)')+' @'+(c.url||'').split('/').pop().replace(/\?.*/,'?')+':'+(c.lineNumber+1)+':'+(c.columnNumber+1)};
  const self={},tot={};for(const id in dt){const n=N[id];const k=key(n);self[k]=(self[k]||0)+dt[id];const seen=new Set();let x=+id;while(x!=null){const kk=key(N[x]);if(!seen.has(kk)){seen.add(kk);tot[kk]=(tot[kk]||0)+dt[id]}x=parent[x]}}
  const all=Object.values(dt).reduce((a,b)=>a+b,0);const idle=Object.entries(self).filter(([k])=>/^\((idle|program|garbage collector)\)/.test(k));
+ /* callers of the functions matching --callers (native getters that force a layout: who calls them) */
+ const callers={};const CRX=opt('callers',null)?new RegExp(opt('callers')):null;if(CRX)for(const id in dt){const n=N[id];if(!CRX.test(key(n)))continue;const p=parent[id]!=null?N[parent[id]]:null;const pk=key(n).split(' ')[0]+' <- '+(p?key(p):'?');callers[pk]=(callers[pk]||0)+dt[id]}
  /* top-down tree, merged by key along the path, pruned below --min ms */
  const tree={k:'root',t:0,c:{}};for(const id in dt){const path=[];let x=+id;while(x!=null){path.push(key(N[x]));x=parent[x]}path.reverse();let nd=tree;nd.t+=dt[id];for(const k of path.slice(1)){nd=nd.c[k]=nd.c[k]||{k,t:0,c:{}};nd.t+=dt[id]}}
- return{tree,all,self:Object.entries(self).sort((a,b)=>b[1]-a[1]),tot:Object.entries(tot).sort((a,b)=>b[1]-a[1]),idle}}
+ return{callers,tree,all,self:Object.entries(self).sort((a,b)=>b[1]-a[1]),tot:Object.entries(tot).sort((a,b)=>b[1]-a[1]),idle}}
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch({args:require('./lib/playperf').LAUNCH_ARGS});
  const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot={pre:1}});const p=await ctx.newPage();
  const cdp=await ctx.newCDPSession(p);const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);
@@ -32,6 +34,7 @@ function agg(prof){const N={};for(const n of prof.nodes)N[n.id]=n;const dt={};co
  for(const a of ACTS){await cdp.send('Profiler.start');const t0=Date.now();for(let i=0;i<REPS;i++)await DO[a]();const {profile}=await cdp.send('Profiler.stop');const g=agg(profile);
   console.log(`\n=== ${a} x${REPS}  wall ${Date.now()-t0} ms  sampled ${Math.round(g.all)} ms  idle/program/gc ${g.idle.map(([k,v])=>k.split(' ')[0]+' '+Math.round(v)).join(', ')}`);
   if(A.includes('--tree')){const MINT=+opt('min',150);const pr=(nd,d)=>{for(const c of Object.values(nd.c).sort((a,b)=>b.t-a.t)){if(c.t<MINT)continue;/* collapse the long render wrapper chain */const chain=/^render @|^call @|^\(anon\) @\?:(35073|31419)/.test(c.k)&&Object.keys(c.c).length===1&&Object.values(c.c)[0].t>c.t*0.9;if(!chain)console.log(' '.repeat(d)+String(Math.round(c.t)).padStart(6)+' '+c.k);pr(c,chain?d:d+1)}};pr(g.tree,0)}
+  if(opt('callers',null)){console.log('-- callers');Object.entries(g.callers).sort((a,b)=>b[1]-a[1]).slice(0,40).forEach(([k,v])=>console.log(String(Math.round(v)).padStart(7),k))}
   console.log('-- self'),g.self.filter(([k])=>!/^\((idle|program)\)/.test(k)).slice(0,TOP).forEach(([k,v])=>console.log(String(Math.round(v)).padStart(7),k));
   console.log('-- total'),g.tot.filter(([k])=>!/^\((root|idle|program)\)/.test(k)).slice(0,TOP).forEach(([k,v])=>console.log(String(Math.round(v)).padStart(7),k))}
  await b.close();srv.close()})().catch(e=>{console.error(e);process.exit(2)});

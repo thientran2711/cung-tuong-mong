@@ -68,7 +68,7 @@ async function findTap(f,fn,arg){const h=await f.evaluateHandle(fn,arg);const el
   await f.evaluate(CLEAR);await sleep(1500);await cdp.send('HeapProfiler.collectGarbage');const m1=await PP.metrics(cdp);const s1=await PP.snap(f);
   const buoi=(await f.evaluate(()=>window.__buoiN||0))-buoi0;
   r.soak={steps,buoi,errStep,heap:[m0.heapMB,m1.heapMB],nodes:[m0.nodes,m1.nodes],listeners:[m0.listeners,m1.listeners],dom:[s0.dom,s1.dom],intervals:[s0.ivN,s1.ivN],
-   intervalSrc:s1.iv.map(x=>x.ms+'ms '+x.src).slice(0,12),timeoutsLive:[s0.toLive,s1.toLive],lt50:ltSoak.length,ltMax:ltSoak.length?Math.max(...ltSoak):0,ltPerMin:Math.round(ltSoak.length/MIN*10)/10};
+   intervalSrc:Object.entries(s1.iv.reduce((o,x)=>{const k=x.ms+'ms '+x.src.replace(/https?:\/\/[^ )]*?:(\d+:\d+)/g,'$1');o[k]=(o[k]||0)+1;return o},{})).sort((a,b)=>b[1]-a[1]).slice(0,15).map(([k,n])=>n+'x '+k),timeoutsLive:[s0.toLive,s1.toLive],lt50:ltSoak.length,ltMax:ltSoak.length?Math.max(...ltSoak):0,ltPerMin:Math.round(ltSoak.length/MIN*10)/10};
   r.errs=errs.slice(0,8);
   /* summary metrics */
   const lat=[].concat(...Object.values(r.acts).filter(x=>x.lat).map(x=>x.lat));const ltA=[].concat(...Object.values(r.acts).filter(x=>x.lt).map(x=>x.lt));
