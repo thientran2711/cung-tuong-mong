@@ -19,7 +19,7 @@ Object.assign(BAL,{nightEnd:{
  /* his mood after the night (S.emp.mood 0 vui … 3 giận dữ): warm → one step better; cold → one step worse (never to giận dữ) */
  mood:{warm:-1,normal:0,cold:1},moodCap:2,
  /* lonely beat + dawn picture timings (ms); night card list shows after `list` */
- lonelyMs:2200,dawnMs:2400,list:900,
+ lonelyMs:Math.round(2200*BAL.pace),dawnMs:Math.round(2400*BAL.pace),list:Math.round(900*BAL.pace),  /* x the ONE kit pace (BAL.pace, KIT §83) */
  /* longest wait for a picture before the card / beat shows anyway (its painted 32x24 thumbnail shows blurred meanwhile) */
  wait:700}});
 (function(){
@@ -233,8 +233,8 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
 .kne-pic{position:relative;width:100%;aspect-ratio:4/3;max-height:min(62dvh,450px);border-radius:var(--k-rad,8px);overflow:hidden;border:1px solid var(--gold);box-shadow:0 0 0 3px #f6ead6,0 12px 30px #000a;background:#f6ead6;container-type:size}
 .kne-lq,.kne-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--fx,50%) var(--fy,50%)}
 .kne-lq{filter:blur(10px);transform:scale(1.08)}
-.kne-img{opacity:0;transition:opacity .5s ease}.kne-img.ld{opacity:1;animation:kneZoom 6s ease-out both}
-.kne-cap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;animation:kmFade .45s ease .25s both}
+.kne-img{opacity:0;transition:opacity .5s ease}.kne-img.ld{opacity:1;animation:kneZoom calc(6s*var(--pace)) ease-out both}
+.kne-cap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;animation:kmFade calc(.45s*var(--pace)) ease calc(.25s*var(--pace)) both}
 .kne-cap b{font-family:var(--display);font-size:1.3rem;color:#f6e3b4;letter-spacing:.05em}
 .kne-cap small{color:#e9d6b0;font-size:.86rem;max-width:34rem;line-height:1.35}
 .kne-side{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:460px;min-height:0}
@@ -260,7 +260,7 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
 .dawn.kne-day.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
 .dawn.kne-day.km-endon .kne-beat .kne-pic{max-height:calc(100dvh - 200px)}
 .kne-beat{position:relative;width:100%;max-width:820px;display:grid;place-items:center}
-.kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity calc(0.6s*var(--pace,1)) ease;pointer-events:none}
 .kne-b.on{opacity:1}
 .kne-beat .kne-pic{max-height:calc(100dvh - 130px)}
 .kne-beat .kmhint{position:static;margin-top:8px}
