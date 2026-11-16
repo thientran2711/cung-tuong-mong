@@ -26,11 +26,13 @@ IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
   `innerWidth/innerHeight` compare (design-scale phase 3: 0 left; 31 dead blocks deleted, 3 unwrapped, 46 rewritten by `dev/measure/kv-phase3.js`).
 - BUILD CHECK: `dev/site/build_site.sh` runs `node dev/measure/media-check.js` first and fails on any such breakpoint in p1.html / j*.js
   (allowed: prefers-reduced-motion, hover, pointer, display-mode, print).
+- FALLBACK: `dev/site/kvfallback.js` (first in all.js via assemble.py) defines `kitView()`, `KIT_FRAME` and html.kv1/kv2 when rot.js is absent (dev/index.html: coop-e2e, direct tests); a no-op under rot.js. Call `kitView()` freely in game code.
 - TOP BAR on the one page (jk4, design-scale p2): the time block flows as ONE wrapping row of whole items (18 px lines) and `kitTcFit` scales it
   down together (zoom 5 % steps, min 80 %) when it would be taller than her name block — so the bar has the spread's height and the page box
   under it is the spread's (582x623 both modes).
 - TAB MODE (j6 `KIT_TABMODE` = maptab, cardtab): every tab-dependent class of `.game` is reset before EVERY panel render; the open tab's renderer
   sets its own. Test: `dev/test/tab-pairs.js` (every tab→tab pair, real taps, 1180x820 + 755x1000).
+- OPEN (design-scale-p2 review, phase 4): kit modals / page content still carry per-mode `:where(.kv1/.kv2)` rules carried over by the phase-3 codemod, which this RULE forbids: jpdlg `.kpdlg` grid, j79 dawn `.kpanel` paddings + `.kpsc` scene-person card (kpid grid, kstgrid, kpfaces, modal placement), j93 kitReward `.kmtabs/.kmbloom/.kmbox`, jpm `.kpm-list`, jgpick `.kipd2` two-column, p1 `.art .pcb` (kv2), jtoil `.toilw` (KIT REQUEST: one-page toilette), jcooptimer chip. Each must become ONE rule for both modes (the spread's); `grep -n 'kv3:.kv' dev/build` lists them.
 - Audit: `node dev/measure/media-audit.js 590` (must list ENV only). Test: `dev/test/design-scale.js` (right/left page rects equal within 1 px).
 
 The game is laid out at exactly TWO design sizes and never reflows on a device: the picture is scaled uniformly, like resizing a window.
