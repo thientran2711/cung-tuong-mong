@@ -425,10 +425,12 @@ BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
    artMul per choice. win/lose = extra effects on the doer (beside the night itself / beside losing), rel = thiện cảm the holder loses toward
    the winner, hh = Hoàng hậu → winner, ghen = holder's jealousy.
    ea (Emperor's month art, picked by the game each month, host in co-op): she knows it at the month start when Tai mắt ≥ mat, else each week
-   rumour % = r0 + Tai mắt × rMat; NPCs the same; the shown 'known likes' (discover) can also name it (disc %). */
+   rumour % = r0 + Tai mắt × rMat; NPCs the same; the shown 'known likes' (discover) can also name it (disc %).
+   Measured (dev/test/balance-night.js, real consort population, value of a night = 8 Sủng): best choice Tranh sủng ≈ 58 %, Chặn ngự giá ≈ 37 %, Thôi ≈ 5 %;
+   Chặn ngự giá is best for ≈ 67 % when her best art is his favoured art, ≈ 20 % when it is the disfavoured one. */
 Object.assign(BAL.steal,{cost:{feign:{duc:0},road:{suc:0}},
- m:{feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-2,duc:-1},rel:10,hh:0,ghen:15},
-    road:{b:20,w:{sac:.35,sung:.05},art:1.5,win:{sung:4},lose:{sung:-6,danh:-3},rel:25,hh:6,ghen:30},
+ m:{feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-3,duc:-1},rel:10,hh:0,ghen:15},
+    road:{b:14,w:{sac:.35,sung:.05},art:1.5,win:{sung:6,danh:2},lose:{sung:-5,danh:-2},rel:25,hh:4,ghen:30},
     keep:{b:35,w:{sung:.3,sac:.1},art:1}},
  art:{fav:1,dis:.75,neu:0},keep:{rung:1,keepSung:2,oanX:1.5},
  ea:{mat:5,r0:5,rMat:4,disc:35}});
