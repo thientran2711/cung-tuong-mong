@@ -17,7 +17,9 @@ function kitStatGlow(c,dv){if(!c||!dv)return;const cls=dv>0?"ksf-g":"ksf-r",stil
  KSF.glow.set(c,setTimeout(()=>{c.classList.remove("ksf-g","ksf-r","ksf-s");KSF.glow.delete(c)},KSF.PULSE+(still?-600:80)))}
 function ksfLabel(txt,dv){const sp=document.createElement("span");sp.className="ksfl "+(dv>0?"g":"r");sp.textContent=txt;sp.setAttribute("aria-hidden","true");document.body.appendChild(sp);KSF.labels.add(sp);return sp}
 function ksfDone(sp){try{sp.remove()}catch(e){}KSF.labels.delete(sp)}
-function ksfRun(it){const dv=it.dv,k=it.k,cell=ksfCell(k),txt=`${ksfName(k,it.name)} ${dv>0?"+":"−"}${Math.abs(dv)}`;
+function ksfCellName(c){try{const l=c&&c.querySelector(".kstl");return l?l.textContent.replace(/\s+/g," ").trim():""}catch(e){return""}}
+/* the label names the stat as the TOP BAR shows it (the servant road's Sủng cell reads "Chủ tin") */
+function ksfRun(it){const dv=it.dv,k=it.k,cell=ksfCell(k),txt=`${ksfCellName(cell)||ksfName(k,it.name)} ${dv>0?"+":"−"}${Math.abs(dv)}`;
  if(ksfStill()||ksfReduce()){if(cell)kitStatGlow(cell,dv);return}  /* Gọn / reduced motion: glow only */
  const sp=ksfLabel(txt,dv),w=sp.offsetWidth,h=sp.offsetHeight,vw=innerWidth;const cl=x=>Math.max(4,Math.min(vw-w-4,x));
  let cr=cell&&cell.getBoundingClientRect(),f=it.from;
