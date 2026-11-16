@@ -1,6 +1,7 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 12:58Z (s4 handing over → s5 = session_01DgYSWow5x77Z2u52vVJQ9f; s4 wake deleted, s5 creates its own)
+last wake: 16/11 13:05Z (s5 = session_01DgYSWow5x77Z2u52vVJQ9f; Foreman D is s5 — workers send result lines here) · s5 wake trig_01F8KntmXAMD8Qv2nmzjZDMf (hourly :58)
+s5 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
@@ -165,6 +166,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
   reviewers: emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 (built on mortality-r1; also fixes j8 nx() shown≠applied + morning card → KIT §81) · kc-roads-cn-nc-fix-r1 session_01DgYSWkvGFpv3Z1xMBG8TJC (merges entry-exam-r1; ship kc-roads fix → entry-exam-r1 → after B's mg-balance) · name-mask-r1 session_01DgYSWmyLaHvXUgNsFAkrBH (sonnet) · coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ
   workers: seatcap session_01DgYSWpxkS6i8grXTbHQnPF (long sims) · npc-death (D4) session_01DgYSWoy8UWVPrve6HEjZfR · preg-rate (D57) session_01DgYSWnxBe741HPgNbrkYjF · danh-p1 session_01DgYSWmtmVG7yFfTVZxCumE · cloud-del session_01DgYSWnuoGnBrzpLuCRGnpy (sonnet)
 - s5 FIRST: send_message each of these 9: "Foreman D is now s5 = <id>; send your result line there".
+- (13:05Z s5) DONE: all 9 messaged with the s5 id; hourly wake trig_01F8KntmXAMD8Qv2nmzjZDMf created.
 - On SẴN SÀNG KIỂM: claim + open a reviewer (opus rules/numbers/co-op; sonnet UI), archive the worker. On PASS: READY line under ## PASS + CLAIMS PASS + archive. On FAIL: fix worker from the reviewer branch.
 - READY for main this session (all under ## PASS): coop-guest-maid-r1 3a875687, danh-balance-r1 9a1133f0, close-maid-r1 ebc85f78, entry-exam-r1 d7364cb2 (ship order note).
 - PARKED: D8 poison roads (s16: do not work around the classifier). ART NEEDED (for C): 'Sáng hôm sau' banner for the Emperor-visit morning.
