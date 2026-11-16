@@ -45,3 +45,17 @@ New save field: S.neMorn {d,tier} (old saves: absent → nothing).
 - Dark panel scan: 4 → 0. Kit page: §62 renders; the only sample error is §28.1 PCPORT ("reading 'out'"), pre-existing (not this branch).
 - 390x844: loads, 0 page errors (first-run download screen).
 - Slow pictures under load show the blurred painted thumbnail, then fade in (seen at 844x390).
+
+## Review r2 (reviewer, 16/11) — branch review/night-end-r2 — PASS
+- Merged onto origin/main 3ef079f61 → 2d038139e → 583858942 (assemble = main list + jne after jevb; KIT §62 + §70 kept). fxkit: jfxkit.js
+  identical to main (no duplicate, no regression); only jne/j79/jk4/p1 differ from main.
+- Fix: her name after a rank in story text doubled the rank ("Thường tại Thường tại X": kpPeopleIn draws her rank via kitName(named)).
+  Family scan: 2 sites (j27 Ban cung, jne Kính sự phòng ghi sổ) → 0 (fixed once in j79 kpPeopleIn).
+- KIT §62.5 added (rằm/festival pictures, music line, S.neMorn morning after); test blocks the SW (CDN pictures were bypassing the route).
+- Art looked at (15 ne-* 1536x1152 + ev-night2-warm/tender/apart + reused ksp/rival-tease): all on tone, no faces in ne-*, no bedding act.
+  Dawn/rằm/fest 290–325 KB accepted: re-encoding a lossy source saves only ~10% (q40) with generation loss.
+- Tests: night-end.js 5 viewports 0 errors, card button on screen, painted only, night panel light (bg #fffaf0), dark-panel scan 0
+  (one hit = `.modal` scrim #2a1a1288, not a panel); co-op e2e 59/59 (twice); old save (main build → this build, 12 tuần) OK, S.neMorn absent;
+  bot path (window.__bot): no card, mood step + morning Danh applied, 0 page errors; 390x844 rotate prompt OK.
+- Note: some night-end.js runs miss the card at a viewport when the test force-removes a playing .kmov (kmBusy waits the 30 s safety);
+  re-run passes. Follow-up (not blocking): the pregnancy FX (KFX "preg" lotus) can play over the night card picture.
