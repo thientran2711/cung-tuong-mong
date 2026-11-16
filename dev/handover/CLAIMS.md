@@ -434,3 +434,5 @@
 | stage-figsize review r1 (sonnet, stage every device + co-op) of 91250714 | review/stage-figsize-r1 | main s25 | session_01UV1SzktUqL7R8YDa6RioXb | RUNNING | 16/11 21:54Z |
 | opt-greyed + pl-courtyards-r3 review r1 (sonnet, SMALL, one reviewer, in order) of 68acf6d1 then 5425e4c1 | review/opt-greyed-r1, review/pl-courtyards-r3-r1 | main s25 | session_01UV1SziEeCRZLBrZtUTMGPw | RUNNING | 16/11 21:54Z |
 | DƯ ĐỒ STYLE C kit wiring (Foreman C KIT REQUEST 21:30Z: mapslip 9-slice + cartouche, remove .msil chip everywhere, one row 'N bóng · K khắc', .mlab+.mmeta overlap test; spec review/map-frame-c @8a767040) | review/map-frame-kit | main s25 | session_01UV1SzjgvGrBcSGqJv7jQTH (opt-greyed keeper, free while its review runs) | RUNNING | 16/11 21:55Z |
+| WHOLE FIGURE REPAINT lead #3 (sonnet art; owner 21:16Z–21:53Z; incl. main s25 5 urgent files + C9 ty huadian) | review/fig-cutout-clean | C | session_011xDdVSheHFnhXPEAMEEfZT | RUNNING | 16/11 21:58Z |
+| makeup-reveal desat + courtyard cac/home paintings (sonnet art; main s23 21:02Z + pl-courtyards r3 21:45Z) | review/pl-courtyards-cac | C | session_011xDdVQYXHozUcGDzx2ZoV3 | RUNNING | 16/11 21:58Z |
