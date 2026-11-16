@@ -82,8 +82,26 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
   /* menu: Chọn sổ shows both sets */
   await p.reload({waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.COOPW&&document.querySelector('#modal.kpthome [data-tgo="slots"]'),null,{timeout:90000});await p.waitForTimeout(800);
   await p.evaluate(()=>{document.querySelector('#modal [data-tgo="slots"]').click()});await p.waitForTimeout(800);
-  const menu=await p.evaluate(()=>[...document.querySelectorAll('#modal #slots .kslot')].map(x=>x.innerText.replace(/\s+/g,' ').trim()));
-  ok(menu.length===6&&/^Sổ một/i.test(menu[0])&&/Tuổi/i.test(menu[0])&&menu.slice(3).every(x=>/^Phòng hảo hữu/i.test(x)&&/Ám hiệu/i.test(x)&&/Trở lại phòng/i.test(x)),`${tag} Chọn sổ shows 3 sổ + 3 rooms`,menu);
+  const rd=()=>p.evaluate(()=>({tabs:[...document.querySelectorAll('#modal #slots .kcstabs .pct')].map(x=>x.innerText.trim()+(x.classList.contains('on')?'*':'')),cards:[...document.querySelectorAll('#modal #slots .kslot')].map(x=>x.innerText.replace(/\s+/g,' ').trim()),sub:(document.querySelector('#modal .kph .kpsub')||{}).textContent,pd:!!document.querySelector('#modal #pdwrap'),pdVis:(()=>{const e=document.querySelector('#modal #pdwrap');return !!e&&e.getBoundingClientRect().height>0})(),scroll:(()=>{const m=document.querySelector('#modal');return m?m.scrollHeight>m.clientHeight+2:null})()}));
+  const m1=await rd();
+  ok(m1.tabs.length===2&&/^Một mình\*$/.test(m1.tabs[0])&&/^Cùng hảo hữu$/.test(m1.tabs[1])&&m1.cards.length===3&&m1.cards.every(x=>/^Sổ /i.test(x))&&/Tuổi/i.test(m1.cards[0])&&m1.pd,`${tag} Chọn sổ opens on "Một mình" (last played solo): 3 sổ, Phúc duyên present`,m1);
+  await p.screenshot({path:`${OUTD}/chonso-solo-${tag}.png`});
+  await p.evaluate(()=>{document.querySelector('#slots [data-kcs="coop"]').click()});await p.waitForTimeout(500);
+  const m2=await rd();
+  ok(m2.tabs.length===2&&/^Cùng hảo hữu\*$/.test(m2.tabs[1])&&m2.cards.length===3&&m2.cards.every(x=>/^Phòng hảo hữu/i.test(x)&&/Ám hiệu/i.test(x)&&/Trở lại phòng/i.test(x))&&m2.sub!==m1.sub&&m2.pd,`${tag} tab "Cùng hảo hữu": 3 phòng, own subtitle, Phúc duyên present`,m2);
+  await p.screenshot({path:`${OUTD}/chonso-coop-${tag}.png`});
+  /* Phúc duyên reachable (scroll to it if needed) */
+  const pr=await p.evaluate(()=>{const e=document.querySelector('#modal #pdwrap');if(!e)return null;e.scrollIntoView({block:'end'});const r=e.getBoundingClientRect();return {top:r.top,bot:r.bottom,h:innerHeight,txt:e.innerText.slice(0,40)}});
+  ok(pr&&pr.bot<=pr.h+2&&pr.top>=0,`${tag} Phúc duyên reachable on the co-op tab`,pr);
+  /* last-played mode decides the tab: start a solo life -> solo, co-op start -> co-op (storage + fresh open) */
+  await p.evaluate(()=>{try{localStorage.setItem('ctm-chonso-tab','coop')}catch(e){}});
+  await p.reload({waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.COOPW&&document.querySelector('#modal.kpthome [data-tgo="slots"]'),null,{timeout:90000});await p.waitForTimeout(800);
+  await p.evaluate(()=>{document.querySelector('#modal [data-tgo="slots"]').click()});await p.waitForTimeout(600);
+  const m3=await rd();ok(/\*$/.test(m3.tabs[1])&&/^Phòng/i.test(m3.cards[0]),`${tag} opens on "Cùng hảo hữu" when that was the last mode`,m3.tabs);
+  await p.evaluate(()=>{document.querySelector('#slots [data-kcs="solo"]').click()});await p.waitForTimeout(300);
+  await p.evaluate(()=>{const b=document.querySelector('#slots [data-load="1"]');if(b)b.click()});await p.waitForTimeout(800);
+  const st3=await p.evaluate(()=>localStorage.getItem('ctm-chonso-tab'));ok(st3==='solo',`${tag} loading a sổ makes "Một mình" the next tab`,st3);
+  await p.evaluate(()=>{$("title").hidden=false;showTitle()});await p.waitForTimeout(900);await p.evaluate(()=>{const b=document.querySelector('#modal [data-tgo="slots"]');if(b)b.click()});await p.waitForTimeout(500);
   const ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${tag} no horizontal overflow`);
   await p.screenshot({path:`${OUTD}/slots-${tag}.png`});
   /* co-op screen lists the rooms; "Trở lại phòng" asks to rejoin that room's code */

@@ -138,7 +138,8 @@ function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn
 function bk6(){return wk()*B4N+(S.buoi||0)}
 let EVHOLD=[],EVLAST=null;
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
-function evGate(){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
+/* dry=1 (D13 jspread, during a buổi change): hold / drop the optional cards exactly as at a real show, but mark nothing as shown */
+function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
  const now=wk();let keepOpt=Q[0]&&Q[0]===EVLAST&&evOptional(Q[0]);const hasMust=Q.some(m=>!evOptional(m)&&!m.__seen);
  for(let i=0;i<Q.length;i++){const m=Q[i];if(m===EVLAST&&i===0)continue;if(!evOptional(m))continue;
   const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
@@ -148,6 +149,7 @@ function evGate(){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS(
   const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
   if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
   keepOpt=true}
+ if(dry)return;
  const m=Q[0];if(m&&m!==EVLAST&&evOptional(m)){const K=evKeys(m);sc.tpl[K.tpl]=now;sc.key[K.key]=now;sc.last=evActorKey(m);sc.bk=b;sc.dn++;try{evHistMark(K.tpl)}catch(e){}}
  if(m)m.__seen=1;EVLAST=m||null}
 /* release one held event at a later buổi, at random, if nothing else is up */
