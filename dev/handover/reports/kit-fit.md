@@ -1,4 +1,4 @@
-SẴN SÀNG KIỂM __SHA__ (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
+SẴN SÀNG KIỂM 6b9ca17da (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
 
 # ROUND 2 — kit keeper successor for MAIN s22 (16/11)
 START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 + round-2 kit changes + merge origin/main 7b5e5e49 (KIT.md: kept both slot paragraphs, dropped a duplicate §77.1 main had moved) + merge origin/main 23595c37 (fold-popw-r1; only built files conflicted); site rebuilt + committed. Tests re-run after the last merge: kit-fit2 / kit-fit same results.

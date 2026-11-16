@@ -11,7 +11,8 @@ Resume: server = `python3 -m http.server <port>` in the worktree after `bash dev
 `git checkout index.html sw.js assets.json`). Test: `node dev/test/kit-fit.js http://127.0.0.1:<port>/index.html <out> <tag> 755x1000,1180x820 [shots]` (ONLY=a,b env limits cases).
 Open: week book person page + identity card not changed (no header/frame-bottom pair) — ask MAIN if the owner wants the rule there.
 HANDOVER: none needed (finished in one session; START_CTX ≈ 5 %, end ≈ 25 %).
-SẴN SÀNG KIỂM e383a4dd7 (code + tests + report; this line added after)
+SẴN SÀNG KIỂM e383a4dd7 (round 1)
+SẴN SÀNG KIỂM 6b9ca17da (round 2, see dev/handover/reports/kit-fit.md)
 
 ## ROUND 2 (kit keeper successor, for MAIN s22) — base review/kit-fit 28828f29 + merge origin/main 86229158
 - [x] (1) §32.2b whole group: week-book person page (kitBookFigClamp, jsl: raise by half the difference between rule→head and feet→.kbk-in bottom)
