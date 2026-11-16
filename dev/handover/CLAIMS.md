@@ -364,4 +364,4 @@
 | palace-voice (opus): expert brief, one address function, repetition pools, literary gain/loss | review/palace-voice | main s22 | session_01UV1SzgzYMEz8LE25rzybvi | RUNNING | 16/11 19:38Z |
 | lag-play-2 review r1 (opus, BIG perf+co-op) of d006dfdd | review/lag-play-2-r1 | main s22 | session_01UV1SzjyH2iaj5P368p1TBN | RUNNING | 16/11 19:40Z |
 | 10-night ledger BUILD (V3-B, reports/night-time.md; no player-only knob) | review/night-ledger | D | (D opens) | INBOX | 16/11 19:41Z |
-| img-cleanup review r1 (opus, BIG: build/quickcheck gate + 6.1k file removal): review/img-cleanup a2e99bd0 | review/img-cleanup-r1 | B | (opening) | RUNNING | 16/11 19:42Z |
+| img-cleanup review r1 (opus, BIG: build/quickcheck gate + 6.1k file removal): review/img-cleanup a2e99bd0 | review/img-cleanup-r1 | B | session_01N1tNP5L4nZgzCiWcpjcHmx | RUNNING | 16/11 19:42Z |
