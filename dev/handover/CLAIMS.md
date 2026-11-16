@@ -151,3 +151,4 @@
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | RUNNING | 16/11 11:06Z |
 | D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | RUNNING | 16/11 11:16Z |
+| design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
