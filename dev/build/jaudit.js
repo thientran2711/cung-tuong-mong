@@ -310,3 +310,48 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
  if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự luyện":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học cùng Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
   if(ttl&&!window.__aaTitle)window.__aaTitle=ttl;const cb2=typeof cb==="function"?function(g){window.aaPayMG({title:ttl,g});return cb.apply(this,arguments)}:cb;return o0.call(this,k,lv,cb2)}}
  if(typeof resultShow==="function"){const r0=resultShow;window.__aaR0=r0;resultShow=function(){if(window.__aaPend||fin||(ovOpen()&&S&&S.mg))return;if(window.__aaIn){window.__aaRS={t:this,a:arguments};return}return r0.apply(this,arguments)}}})();
+
+/* 17. RANK + NAME TOGETHER (owner 15/11 "phẩm và tên người lúc nào cũng phải đi chung", review/pick-hint): a person's name on screen
+   always comes with her/his title (rank / post) in the kit name colours. Producers mostly use kitName / kitFacts (kpPeopleIn) already;
+   the rest (dialog titles such as "Tâm trạng · X", kit row values, logs, toasts, lists, option lines) wrote the bare name. kitRankNamePaint
+   (root) finds every known full name in a text node that is not already inside a .kname and not already after its title (same text,
+   the text just before it, or earlier in the same block), and puts kitName(p) (title + name, rank colour) in its place. Names already
+   written as "title name" in plain text are left to the rank-colour pass. Short names (roster strip under portraits: "Thục Nghi") are
+   not full names and are never touched. Opt out: [data-krn-skip]. dry=true returns the bare sites instead (dev/test/rank-name-scan.js). */
+const KRN_SKIP=".kname,.kti,[data-vp-skip],[data-krn-skip],script,style,textarea,input,option,select";
+const KRN_BLK=".kft,.krv,.kitem,.logs > div,p,li,button,.kptitle,.kpsub,figcaption,td,.kpnote,.tag";
+let KRN_C={k:"",rx:null,m:null};
+function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&kitTitle(p))}catch(e){return null}if(!L.length)return null;
+ const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+ KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
+function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
+function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitleTail(b,t)||kpTitleTail(b.trimEnd()+" ",t)))return true;
+ if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
+ return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
+function kitRankNamePaint(root,dry){const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const L=[];while(W.nextNode())L.push(W.currentNode);
+ for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
+  try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
+  const pv=krnPrevText(n);T.rx.lastIndex=0;let m,last=0,hit=false;const f=document.createDocumentFragment();
+  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=kitTitle(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
+   if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index)))continue;
+   /* a name label on its own (card heading, portrait caption) whose title sits in a sibling element of the same card: titled */
+   if(v.trim()===nm){let up=n.parentElement,ok=false;/* r1: a short sibling label of the name (person card .pcrk "Hoàng hậu" beside .pcname) holds its title */
+    for(let e=n.parentElement,i=0;i<3&&e&&e.parentElement&&!ok;i++,e=e.parentElement)for(const c of e.parentElement.children){if(c===e||c.contains(e)||c.querySelector(".klab,img")||c.matches(".md,.klab"))continue;/* a portrait fallback label is no title */const ct=(c.textContent||"").replace(/\s+/g," ").trim();if(ct&&ct.length<60&&t&&ct.toLowerCase().includes(t.toLowerCase())){ok=true;break}}
+    for(let i=0;i<3&&up&&!ok;i++,up=up.parentElement){const tx=(up.textContent||"").replace(/\s+/g," ");if(tx.length<160&&kpTitleTail(tx.slice(0,Math.max(0,tx.indexOf(nm)))+"",t)||tx.length<160&&t&&tx.toLowerCase().includes(t.toLowerCase()))ok=true}if(ok)continue}
+   if(dry){out.push({name:nm,title:t,where:(n.parentElement.closest("[id],[class]")||{}).className||"",id:(n.parentElement.closest("[id]")||{}).id||"",text:(blk.textContent||"").replace(/\s+/g," ").trim().slice(0,140)});continue}
+   hit=true;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.innerHTML=kitName(p);f.appendChild(sp.firstChild||document.createTextNode(nm));last=m.index+nm.length}
+  if(hit){if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
+ return out}
+window.kitRankNamePaint=kitRankNamePaint;
+/* review/pick-hint-r1: the observer repaints only the subtrees that changed in this frame (added nodes, edited text), not the whole body
+   (a full-body pass costs 2-8 % of a render on the big tabs and ran on every mutating frame: count-ups, toasts, timers). Its own
+   replacements are skipped (they hold no bare name), so it never loops; too many roots in one frame → one full pass. */
+(function(){let q=false,full=true;const R=new Set();
+ const run=()=>{q=false;const all=full,L=[...R];full=false;R.clear();if(window.__krnOff)return;
+  try{if(all||L.length>120){kitRankNamePaint(document.body);return}
+   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}};
+ const add=n=>{const e=n&&(n.nodeType===1?n:n.parentElement);if(e&&!(e.matches&&e.matches(".kname,.kname *")))R.add(e)};
+ const mo=new MutationObserver(M=>{for(const m of M){if(m.type==="characterData")add(m.target);else m.addedNodes.forEach(add)}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}full=true;run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();

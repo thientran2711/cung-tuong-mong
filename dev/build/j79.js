@@ -100,7 +100,10 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
       always drawn with her CURRENT title, the old one is dropped */
    else if(t&&KP_CONS_RX.test(pre)&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p))))pre=pre.replace(KP_CONS_RX,"");
    const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":RANKS[S.rank].n):t;/* her own rank is drawn by kitName(named) */
-   const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);return pre+kitName(p,{named:p===S,noTitle:own,pre:own||KP_TITLE_RX.test(pre)?pre:""})/* review r6: a name that carries its own title (kitTitle "") after a title in the text: "Tổng quản thái giám Tổng quản X" */+s.slice(i+n.length)})}
+   const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);/* KIT 48.3 (owner 15/11 s8): the text's own title before the name goes INSIDE the name block, in its rank tone (it stayed plain ink) */
+   const tm=KP_TITLE_RX.exec(pre);if(tm&&p!==S){const k=kitName(p,{noTitle:true,pre});const j=k.indexOf(">");if(j>0&&/^<b class="kname/.test(k)){const tt=tm[1];const col=typeof kitPersonCol==="function"?kitPersonCol(p):"";
+    return pre.slice(0,pre.length-tm[0].length)+k.slice(0,j+1)+`<span class="kti" style="--rt:${typeof kitRankTone==="function"?kitRankTone(tt,col):""}">${tt}</span> `+k.slice(j+1)+s.slice(i+n.length)}}
+   return pre+kitName(p,{named:p===S,noTitle:own,pre:own||KP_TITLE_RX.test(pre)?pre:""})/* review r6: a name that carries its own title (kitTitle "") after a title in the text: "Tổng quản thái giám Tổng quản X" */+s.slice(i+n.length)})}
  /* owner 11/15 (news rows showed the wrong person): the row's face = the person named FIRST in the sentence (the subject), not the one
     with the longest name — names are matched longest-first (no partial overlaps), then ordered by where they stand in the text */
  if(who.length>1){const at=p=>{const e=people.find(x=>x[1]===p);const i=e?plain.indexOf(e[0]):-1;return i<0?1e9:i};who.sort((a,b)=>at(a)-at(b))}
@@ -120,12 +123,18 @@ window.kitDedupTitle=kitDedupTitle;
 /* owner 11/15 ("Sủng nàng ta 30 → 30"): a number that did not move says nothing — every "label N → N" clause is dropped from a fact row
    (all producers, old logs too); a row left with no words is not drawn (kitFacts) */
 const KIT_NOCH=/(^|[.;·,:]\s*|\s)((?:[^\s.;·,:<>]+ ){0,5}?)(−?-?\d+(?:[.,]\d+)?)\s*→\s*\3(?=\s*(?:[.;·,]|$))\s*[;·,]?\s*/g;
-function kitNoChange(h){try{return kpMapText(String(h||""),s=>s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1"))}catch(e){return h}}
+/* review/pick-hint: the tidy-up runs only on a text piece where a "N → N" clause was really dropped — before, every piece that ended in ", "
+   just before a name/chip tag lost its comma ("thái giám canh cung, <name>" → "canh cungCung nữ …") */
+/* review/pick-hint-r1: the harmless tidies (double space, space before a full stop) still run on every piece as before; only the
+   separator strip at the end of a piece waits for a dropped clause */
+function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastIndex=0;const hit=KIT_NOCH.test(s);KIT_NOCH.lastIndex=0;
+ if(!hit)return s.replace(/ {2,}/g," ").replace(/\s+\./g,".");
+ return s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1")})}catch(e){return h}}
 window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
 function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitCapFirst(kitNoChange(kitDedupTitle(f.text||""))),who=f.who?[].concat(f.who):null;
- if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(text).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1").replace(/(<b>[^<]*<\/b><\/span>)\s*[,;·]\s*(?=<span class="kchip)/g,"$1 ")/* review r6: no lone "." after a row-end chip */}
+ if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(kitRankText(text)).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1").replace(/(<b>[^<]*<\/b><\/span>)\s*[,;·]\s*(?=<span class="kchip)/g,"$1 ")/* review r6: no lone "." after a row-end chip */}
  const p=who&&who[0];const world=f.kind==="world"||!p;const face=p&&p!==SKIP?kitFaceH(p,"sm"):`<span class="kfdot" aria-hidden="true"></span>`;
  const chips=f.chips&&f.chips.length?kitChips(f.chips):"";
  return `<div class="kfact${world?" kfworld":""}${p===S?" kfme":""}">${face}<span class="kft">${f.when?`<small class="kfwhen">${f.when}</small>`:""}${text}${f.why?`<small class="kfwhy">Vì: ${f.why}</small>`:""}${chips}</span></div>`}
@@ -1028,3 +1037,49 @@ function kitVeiled(p){if(!(window.KIT_VEIL&&(KIT_VEIL.por||KIT_VEIL.fig)))return
 .pcp.kit .kin>img.kveil{position:absolute!important;inset:auto!important;left:14.655%!important;top:20.289%!important;width:70.691%!important;height:49.373%!important;object-fit:fill!important;z-index:1;pointer-events:none;border-radius:0!important}
 span.md.kmini.kmini>img.kveil{left:9.66%!important;top:11.75%!important;width:80.67%!important;height:80.3%!important;object-fit:fill!important;z-index:1}
 `;document.head.appendChild(st)})();
+/* ================= KIT 48.3 · kitRankPaint — rank title + name in RANK COLOUR everywhere (owner 15/11, session 8: "Phẩm bậc trong mấy ô
+   chọn này chưa theo màu phẩm, màu phẩm xuất hiện mới nơi có tên và phẩm của người.") ==========
+   ONE rule: wherever a person's rank / role title stands right before that person's name ("Quý phi Tần Kiều Nguyệt", "Cung nữ thân tín
+   Ngọc Lan", "Thường tại <her name>"), the pair is drawn as kitName (§28 / 48.1): title in its rank tone (`kitRankTone`, plain text in framed
+   UI, lightened on .modal.night), the name in the person's colour (hers black, .kmy). New code writes `kitName(p)`; text already written as
+   plain words by ANY builder (picker rows of every act, cards, dialogs, lists, logs, toasts, popups, co-op) is painted here by one
+   MutationObserver pass, the same way kitRelPaint (§11.2) paints relation labels. The words are never changed (textContent stays equal):
+   only the matched "title name" run is wrapped. Skipped: anything already a kit name block (.kname .knr .krt .krn .kpsn .pcrk .pcname,
+   stage tags .j59t/.j59n, podium plates), [data-vp-skip], [data-norank], form fields, script/style. */
+const KIT_RP_TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phế phi|Phi|Tần|Thái tử|Hoàng tử|Công chúa|Thái y|Thị vệ|Ma ma|Chưởng sự cô cô|Cô cô|[Cc]ung nữ thân tín|[Cc]ung nữ thô sử|[Đđ]ại cung nữ|[Cc]ung nữ|[Tt]iểu thái giám|[Tt]ổng quản thái giám|[Tt]ổng quản|[Tt]hái giám|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử";
+const KIT_RP_SKIP=".kname,.knr,.krt,.krn,.kpsn,.pcrk,.pcname,.j59t,.j59n,.kpod-plq,.kbk-pname,[data-vp-skip],[data-norank],[contenteditable]";
+let kitRpKey="",kitRpRe=null,kitRpMap=null;
+function kitRpRx(){const L=typeof kpPeople==="function"?kpPeople():[];const key=L.map(x=>x[0]).join("|");kitRpMap=new Map(L);if(key!==kitRpKey||!kitRpRe){kitRpKey=key;
+  const N=L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
+  /* "title name" (m[1], m[2]) or "name (title, …)" (m[3], m[4]: lists such as "Mạnh Bích Dao (Tần, chủ vị)") */
+  kitRpRe=L.length?new RegExp(`(?<![\\p{L}])(?:(${KIT_RP_TITLES}) (${N})|(${N}) \\((${KIT_RP_TITLES})(?=[,;)·]))(?![\\p{L}])`,"gu"):null}
+ return kitRpRe}
+/* the kit markup for one "title name" pair (= kitName with the text's own title) */
+function kitRankNameH(p,title,name){const col=typeof kitPersonCol==="function"?kitPersonCol(p):"#8a7350";const me=typeof S!=="undefined"&&p===S;
+ const rt=typeof kitRankTone==="function"?kitRankTone(title,col):"";const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ return `<b class="kname${me?" kmy":""}" style="--rc:${col}"><span class="kti" style="--rt:${rt}">${esc(title)}</span> ${esc(name)}</b>`}
+window.kitRankNameH=kitRankNameH;
+/* one match → kit html: "title name" = kitRankNameH; "name (title" = the name block + " (" + the title in its tone */
+function kitRpOne(t,n,n2,t2){if(n){const p=kitRpMap&&kitRpMap.get(n);return p?kitRankNameH(p,t,n):""}const p=kitRpMap&&kitRpMap.get(n2);if(!p)return"";
+ const col=typeof kitPersonCol==="function"?kitPersonCol(p):"#8a7350";const me=typeof S!=="undefined"&&p===S;
+ return `<b class="kname${me?" kmy":""}" style="--rc:${col}">${n2}</b> (<b class="kname" style="--rc:${col}"><span class="kti" style="--rt:${typeof kitRankTone==="function"?kitRankTone(t2,col):""}">${t2}</span></b>`}
+/* the same on an HTML string (text segments only): every later mention too, BEFORE kpChipify, so a delta chip never eats the end of a name
+   ("(Thường tại Bạch Thục Nghi thiện cảm +8)" made the chip "Thục Nghi thiện cảm +8" and left the title plain) */
+function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapText(h,s=>s.replace(re,(m,t,n,n2,t2)=>kitRpOne(t,n,n2,t2)||m))}catch(e){return h}}
+window.kitRankText=kitRankText;
+function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
+ if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP))return NodeFilter.FILTER_REJECT;
+  re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
+ for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
+  while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
+   const t=document.createElement("template");t.innerHTML=h;f.appendChild(t.content);last=m.index+m[0].length;k++}
+  if(!last)continue;if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}
+ return k}catch(e){return 0}}
+window.kitRankPaint=kitRankPaint;
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L)kitRankPaint(r)};
+ const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
+  if(!q&&R.size)q=requestAnimationFrame(run)});
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body)};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();

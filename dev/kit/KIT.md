@@ -381,6 +381,13 @@ at a given viewport; only the seal word and the content differ. Nothing sizes th
   ("(Chứng cứ X +1.)" = what that act gave) stay on the row BEFORE them; a reason repeated inside a row is kept once.
 - No-change: `kitNoChange(html)` drops every "label N → N" clause from a fact row (all producers, old saved logs); a row left without
   words is not drawn. Producers name whose number it is ("Sủng của X a → b"), never "Sủng nàng".
+- RANK + NAME TOGETHER (owner 15/11 "phẩm và tên người lúc nào cũng phải đi chung", review/pick-hint, jaudit §17): every full person name
+  on screen comes with its title. `kitRankNamePaint(root, dry)` (MutationObserver on body, like kitRelPaint) replaces a bare known full
+  name (kpPeople, not S, with a kitTitle) in any text node outside `.kname` by `kitName(p)` (title + name, kit colours); a name already
+  after its title (same text, text just before, a title in the same small card, a short sibling label holding the title such as the
+  person card rank line `.pcrk`, or "title name" earlier in the same block) is left as is. Doubled-title scan: `dev/test/rank-name-dup.js`.
+  Short names (Hậu cung roster strip under portraits) are not full names and are never touched. Opt out: `[data-krn-skip]`.
+  Scan: `dev/test/rank-name-scan.js` → dev/review/rank-name-scan.md.
 - Titles: `kitTitled(title, name)` / `kitTitledName(title, name)` — the one title + name rule: name words the title already says are
   dropped ("Tổng quản thái giám" + "Tổng quản Lý Liên Anh" → "Tổng quản thái giám Lý Liên Anh"); only title words, never a surname
   that is also a rank (Tần Khinh Vũ). `kpPeopleIn` keeps the text's own title when the text already has ANY title before the name
@@ -2557,6 +2564,20 @@ The rank / role line above every name is a TITLE, the name under it is plain ink
 | Hoàng hậu | gold #8c5f00 | | Hoàng tử · Công chúa · Người lạ | sky #1a6fb8 · coral #bf412b · grey #666666 |
 
 Men are never pink/purple. Unknown title → the caller's colour darkened (80 % + black).
+**48.1d RANK HALO ON A PAINTING (owner 15/11 "Phẩm của tôi cũng viền sáng như tên", review/pick-hint)**: on a painting (stage tag `.j59t`,
+`.kesov` caption title, `.krs`) the RANK line gets the same light paper halo as the name line under it (text-shadow #fff8ee 1/2/5/9px) and
+keeps its full rank tone (`--rt`, KIT_RT); every KIT_RT tone is >= 4.7:1 against the halo. Replaces the old dark outline + tinted glow.
+ON THE STAGE this halo is HERS ONLY (48.1e below).
+**48.1e STAGE: ONLY HER TAG GLOWS (owner 15/11 session 8, overrides 48.1d for the stage)**: on the stage only HER tag (rank line + name
+line) glows: rank line = the 48.1d paper halo, name = the 48.1b light-gold glow. Her tag = `#j59metag` or any stage tag of S (`.tag.j59mine`,
+set by j59tags); co-op: each player sees only her OWN tag glowing, the friend's tag is plain. Every other person's stage tag (`.stage .tok
+.tag:not(.j59mine)`): plain rank colour + plain ink name, no blurred halo; only a 0.6px hairline paper edge with zero blur (#fff8ee)
+so the plain words stay readable on dark carpets / night scenes (scan `dev/test/stage-tag-contrast.js` + `.py`: 14 places x sáng/tối,
+plain lines with NO edge fell to 1.0–1.7:1 against the painting; with the edge every glyph sits on its own paper rim, >= 4.7:1 for every
+KIT_RT tone and the name ink).
+Captions over event pictures (`.kesov`) and the kit scene row (`.krs`) keep 48.1d (not the stage).
+**Stage side cards** (`.ksh .k3c`, the people column beside the stage): a person's title + name stack as rank line over the name (title
+`.kti` display:block), so a long "Cung nữ thân tín Hồng Ngọc" never widens the column (755) or squeezes the card (844).
 **48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
 `.kesov>.kpsn`) have no box / frame / plate: rank + name sit straight on the dialog background (title colour + outline as above, name plain
 ink, hers gold-glow). Over a picture (`.kesov`) the name keeps the paper halo of scene words for readability.
@@ -2569,11 +2590,32 @@ her person card `.pcname` (pcard `o.me`, or o.name === S.name) + its sticky stri
 Where it applies (one CSS block `#kit-rt`, nobody styles a title over a name on their own): `kitNameRank` (sets `.krt`/`.krn`), stage name
 tags `.j59t`/`.j59n` (j59 sets `--rt`), 32.7 / kitEventDp captions `.kpsn .kname .kti` (kitName sets `--rt` on `.kti`), person cards
 `.pcrk` over `.pcname` (j15 sets `--rt`) and the sticky strip `.kpstrip`, Tuần lục person heading `.kbk-pname`, honour podium name plates `.kpod-plq` (j90). Dialog face captions (`.faces figcaption`, j3: "Nhập cung", "Thân phận kiếp này") are built with `kitNameRank` (rank over name). A title INSIDE a sentence
-(kitName in prose rows) keeps the plain inline look. Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
+(kitName in prose rows) keeps the plain inline look (no glow, no outline, the line's own font) BUT in its rank tone (48.3). Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
 Test: `node dev/test/rank-title.js <url> <outdir> <tag> [sizes] [day,night,rain,cold,dp,kit,old]` (colours, serif, title above name,
 no tag overlap / cut; OLDURL=<old build> for the old-save case).
 
 ### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4) — CAPPED by 32.2a (15/11): the column never grows for the people; wide figures are cut below the waist or scaled to fit
+
+### 48.3 RANK TITLE + NAME IN RANK COLOUR EVERYWHERE · `kitRankPaint` (owner 15/11 s8: "Phẩm bậc trong mấy ô chọn này chưa theo màu phẩm, màu phẩm xuất hiện mới nơi có tên và phẩm của người.") — `dev/build/j79.js`
+ONE rule: wherever a person's rank / role title stands right before that person's name — picker rows of every act ("Sai … đi dò la"
+targets, gift / plant / visit pickers), cards, dialogs, lists, logs, Tuần lục, toasts, popups, co-op — the title is in its rank tone
+(`kitRankTone`, plain text in framed UI, lightened 55 % on `.modal.night`), the name in the person's colour (hers black `.kmy`).
+- New code writes `kitName(p)` (or `kitRankNameH(p, title, name)` = the kitName block with the text's own title).
+- Plain words "title name" already written by any builder are painted by `kitRankPaint(root)`: one MutationObserver pass (same model as
+  kitRelPaint §11.2) wraps each visible "title name" run of a KNOWN person (`kpPeople()`) into `<b class="kname"><span class="kti"
+  style="--rt">title</span> name</b>`; the list form "name (title, …)" ("Mạnh Bích Dao (Tần, chủ vị)") gets the name block and the
+  title in its tone. Words never change (textContent equal). `kitRankText(html)` does the same on an HTML string (kpFactRow runs it before
+  kpChipify, so a delta chip never eats the end of a name). Works beside review/pick-hint's `kitRankNamePaint` (jaudit §17: a BARE name gets
+  its title via kitName; "title name" written as text is left to this pass). Titles: consort ranks, Phế phi, Thái tử / Hoàng tử / Công chúa,
+  servants (Cung nữ [thân tín / thô sử], Đại cung nữ, Chưởng sự cô cô, Ma ma, Thái giám, Tổng quản, Nữ quan, Nhũ mẫu), Thái y, Thị vệ,
+  officials, Công tử. Skipped: existing kit name blocks (.kname .knr .krt .krn .kpsn .pcrk .pcname .j59t/.j59n .kpod-plq .kbk-pname),
+  `[data-vp-skip]`, `[data-norank]` (opt-out), form fields.
+- `kpPeopleIn` (Tuần lục / news rows): a title the text itself writes before the name now goes INSIDE the name block in its tone (it stayed ink).
+- CSS: `html body .kname .kti{color:var(--rt)}` in `#kit-rt` (jk4); the Tuần lục rule no longer forces the title to the name colour (j87).
+Scan: `node dev/test/rank-colour.js <url> <out.json> [WxH] [tuần] [shots]` (every place × person × picker, every tab, bot play; each visible
+pair OK/PLAIN) + `python3 dev/test/rank-colour-sites.py` (source sites: KIT / TEXT painted / SPLIT must be 0).
+
+### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
 In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
 hat) under the chips, feet on the floor, aspect kept. Man and woman alike (no ×1.07 here); children keep their age factor
 (KIT_FIG.fac < 1, feet on the same floor). Two people: packed by core with ≤ 20 % overlap; the right column keeps ≥ 250 px (was 280),
