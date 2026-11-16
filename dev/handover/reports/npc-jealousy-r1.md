@@ -54,3 +54,21 @@ No player-visible text changed → no shots taken (none uploaded, nothing to wip
 
 ## For r2
 Fix 1–5, add unit cases for 2–5, re-run the unit test 5× (all PASS), bot 40 lives, coop-e2e on an idle box. Then re-review.
+
+---
+# r2 re-review — PASS → READY 7389d8ec (review/npc-jealousy-r1)
+Reviewed review/npc-jealousy @ 7ba04507 (r2 fixes 2450e40d + 7ba04507 on main merge 60eb3d93). Re-merged current origin/main f1509d7c
+(lag-play-2-r1 + coop-one-world-r1): only generated index.html / sw.js conflicted (theirs, rebuilt); main's co-op changes touch no ghen/gp code.
+| r1 item | r2 | check |
+|---|---|---|
+| 1 unit test non-deterministic | stubbed + night state reset, +5 cases | 20/20 in 13 runs (10 before, 3 after the main merge), 0 page errors |
+| 2 start jealousy her-only | newRival ghen 0, gp empty; co-op join gp[pid] 0 | probe 4 lives: start ghen of her 0 for all; co-op "start" pid swap now equal host/guest |
+| 3 j20 queenRewards | ghenAdd(w,q,-BAL.ghenW.qReward) | ok (number in BAL) |
+| 4 jexam NPC grace oán to her only | ghenAt only, both ways | ok; BAL.psk.seat.oan is now unread (dead constant, harmless; drop when touching jbal2) |
+| 5 stale gp keys | ghenGone prunes dead NPC keys weekly (pid ≥ 900 kept), ghenMax skips them | probe 4 lives × 3 y seed 7: 536 keys, 0 stale (r1: 38) |
+| extra: her row as a cung nữ | ghenWeek adds S when she is not in consorts() | ok |
+Other runs: bot 20 lives × 3 y × seeds 13000/37000 (main c1e1bbd1 vs branch): her stolen vs same-rank control main 31.3 % / 23.7 % (+7.6) →
+branch 19.9 % / 18.4 % (+1.5); all tries/10 nights 3.62 → 3.66. Old save main → branch 40 weeks 0 errors. coop-e2e reviewer gp copy 69/69 before the
+merge (NPC↔NPC gp maps and pid swap equal on host and guest at start, weeks 1–3, rejoin); coop-e2e 59/59 after the merge. night-steal-unit 29/29.
+Fold 755x1000 / iPad 1180x820: 24 weeks + render, 0 page errors, no overflow. quickcheck.sh PASS (render 317/340 ms, buổi 1118/1144 ms new/live).
+Not this branch: jmood boosts ghenAll only (NPCs have no mood bar) — for the coordinator.
