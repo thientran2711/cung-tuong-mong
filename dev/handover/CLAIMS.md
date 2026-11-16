@@ -249,7 +249,7 @@
 | (b) transition/night pictures BACKS ONLY, 3 'Gối đầu' repaint (OD 15:00Z 1.7; 1 sample first) (sonnet art) | review/night-backs | C | session_011xDdVQNx5VgxetorvVUQPh | RUNNING | 16/11 15:48Z |
 | (c) buổi-transition band art: 3 seasons + 9 festivals (anim-pace list) + 4 buổi icons sáng/trưa/chiều/tối (OD 15:10Z 7.5) (sonnet art) | review/buoi-art | C | session_011xDdVP32VLjcS6HX97wHgD | RUNNING | 16/11 15:48Z |
 | (d) calendar icon cổ trang + square-icons art + placeholder picture sets per orientation/size (OD 15:10Z 7.3 / group 8) (sonnet art) | review/icon-art | C | session_011xDdVRMa18LU3fiFyq7ksS | RUNNING | 16/11 15:48Z |
-| ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | session_011xDdVSMZ3apRHJfX25BwAb | RUNNING | 16/11 15:48Z |
+| ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | session_011xDdVSMZ3apRHJfX25BwAb (rolled over @ef815769, archived) | successor RUNNING | 16/11 15:48Z |
 | kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
 | TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 (archived) | SẴN SÀNG KIỂM 21b9df01 | 16/11 15:52Z |
 | STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | SẴN SÀNG KIỂM 240c68a7 (lead rolled over, archived) | 16/11 15:58Z |
@@ -273,3 +273,5 @@
 | road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | RUNNING | 16/11 16:47Z |
 | page-scale (opus; OD 17:00Z + OD:L345/L1278): phone portrait page = iPad right page scaled uniformly — root cause + whole-group fix for every tab panel (bag 7 vs 4 rows first) + comparison test | review/page-scale | main s20 | session_01UV1SzibwMrHrCm5SBrYNJR | RUNNING | 16/11 17:00Z |
 | C GO-LIVE prep (sonnet; OD:L1370): re-merge C PASS branches not on main (title-sys-r1 ced2edc6, b-answers-art-r1 82756a80) onto latest main, quick check, READY sha each → Foreman C fast-forwards | review/title-sys-live, review/b-answers-art-live | C | session_011xDdVSCv8mDYUgLi7Fk1U6 | RUNNING | 16/11 16:57Z |
+| ORIGIN INTROS successor (sonnet: final re-runs + coop tests + SẴN SÀNG KIỂM) from review/origin-intros @ef815769 | review/origin-intros | C | (opening) | RUNNING | 16/11 16:55Z |
+| ORIGIN INTRO ART (sonnet art; 51 panels img/intro/<k>-<n>.webp 1280x720 + 7 gate pictures; ART LIST in origin-intros report; sample = one origin set first) | review/intro-art | C | (opening) | RUNNING | 16/11 16:55Z |
