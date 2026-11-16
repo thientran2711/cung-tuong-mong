@@ -107,12 +107,12 @@ function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="
 (function(){const st=document.createElement("style");st.textContent=`
 .kprev{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:560px;height:min(100dvh - 24px,920px);padding:0 16px;box-sizing:border-box}
 .kprev-h{flex:none}
-.kprev-fig{position:relative;flex:1 1 auto;min-height:180px;width:100%;overflow:visible;animation:kmFade .5s ease .1s both}
+.kprev-fig{position:relative;flex:1 1 auto;min-height:180px;width:100%;overflow:visible;animation:kmFade calc(.5s*var(--pace)) ease calc(.1s*var(--pace)) both}
 /* soft light BEHIND the figure = painted KIT §68 "orb" (frame 3), warmed; never over the face (a screen-blend clip on top would wash the figure) */
 .kprev-fig::before{content:"";position:absolute;left:50%;top:40%;width:min(120%,520px);aspect-ratio:1;translate:-50% -50%;pointer-events:none;
- background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade .8s ease .3s both}
-.kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn .7s var(--km-ease,ease) .15s both}
-.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 .35s var(--km-ease,ease) .5s both} /* frame = j93 .kmlist card (one rule) */
+ background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade calc(.8s*var(--pace)) ease calc(.3s*var(--pace)) both}
+.kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn calc(.7s*var(--pace)) var(--km-ease,ease) calc(.15s*var(--pace)) both}
+.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 calc(.35s*var(--pace)) var(--km-ease,ease) calc(.5s*var(--pace)) both} /* frame = j93 .kmlist card (one rule) */
 .kprev-n{font-weight:700;color:#3a1f10;text-align:center}
 .kprev-l{margin:0;font-size:.9rem;line-height:1.45;color:#3a2a1e;text-align:center}
 @keyframes kprevIn{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%)}}
