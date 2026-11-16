@@ -252,7 +252,7 @@
 | ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | session_011xDdVSMZ3apRHJfX25BwAb | RUNNING | 16/11 15:48Z |
 | kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
 | TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 (archived) | SẴN SÀNG KIỂM 21b9df01 | 16/11 15:52Z |
-| STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 15:58Z |
+| STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | SẴN SÀNG KIỂM 240c68a7 | 16/11 15:58Z |
 | ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | DONE (PASS 81f86655) | 16/11 15:57Z |
 | kit-size #2 (opus, kit keeper; OD 16:00Z (1)–(9)) | review/kit-size | main s19 | session_01UV1SzhfEWsjainSgb3FHP9 | RUNNING | 16/11 15:57Z |
 | emotion-acts review (opus; e9bd51ee) | review/emotion-acts-r1 | B | session_01N1tNP36vT978Q89SfwTmPC | DONE FAIL 2 items (archived) | 16/11 16:04Z |
@@ -267,3 +267,7 @@
 | mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | session_01N1tNP2d8sR5Vo1a5Lh9UV9 | RUNNING | 16/11 16:44Z |
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
 | kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | session_01UV1Szjj42P74XsFm4trr8J | RUNNING | 16/11 16:50Z |
+| road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | (opening) | RUNNING | 16/11 16:47Z |
+| road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 16:47Z |
+| road B2 chapters nc(+bd)+td+ch .5–.11 (opus helper) | review/road-b2 | B | (opening) | RUNNING | 16/11 16:47Z |
+| road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | (opening) | RUNNING | 16/11 16:47Z |
