@@ -15,13 +15,13 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED (C33 done; next free slot; D37 drag-curl is the coordinator's — coordinate) |
 | C33 weekbook-entries | review/weekbook-entries @1ddfdda7 | sonnet | REVIEWING (review/weekbook-entries-r1, sonnet) |
-| C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
+| C34 contest-ui | review/contest-ui @290129bd | sonnet | REVIEWING (review/contest-ui-r1, sonnet); new podium backdrop on CDN |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | RUNNING |
 | D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
-| D38 lost-items-port | review/lost-items-port | opus | RUNNING |
+| D38 lost-items-port | review/lost-items-port @92ed78f6 | opus | REVIEWING (review/lost-items-port-r1, sonnet) |
 | D30 palace-map-port | review/palace-map-port @e1e15a4b | sonnet | REVIEWING (review/palace-map-port-r1, sonnet); 675 images uploaded to CDN; D42 must build on this branch |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
@@ -57,6 +57,8 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - panel-size (reviewing): KIT §8.1 one-size kpanel frame tokens
 - palace-map-port (reviewing): kitPalaceMap (worker labelled it §71 — clashes; needs a number)
 - appearance-port-r1 (PASS): KIT 28.8b kitFaceFx/KIT_FACEFX registry + kitFxLayers as the single face-layer hook; 28.8b text stale (still lists expr z5 + .kfxf transform copy — expressions removed 22:50Z); shared overlays rash-1..3.png, fx-slap.png (on CDN) for the keeper's art list
+- contest-ui (reviewing): kitGameFrame({pic}) picture-left/info-right (.kgbody/.kgpic/.kginfo, CSS in jcui.js #kcu-css), kg82Open/kg82Pic, #kg82.kg-idle, .kgrv self-scrolling list, podium equal figure heights + kpodPrize chips, KIT_BD.podium → new shared art img/kit/podium-bg2(-p).webp. KIT REQUEST: pet-care game box (jpetcare) needs a board painting (e.g. mg-chamthu-bg) + pic in petcGameBox.
+- lost-items-port (reviewing): no new kit parts. Note: live j92 Giá họa hearing choices say "an toàn · không được mất gì" though the hearing can go against her — kit-wide wording fix for the keeper.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -74,3 +76,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q12 (D32 succession-port): the 12 dedicated epilogue pictures in SUCCESSION_PLAN §7 were never approved; chapters reuse approved event art. Owner wants dedicated pictures? And ending cards show ev-quoc-tang (from main's code) — the right picture for succession endings?
 - Q13 (C33 weekbook): week-book entry wording is generic per person and direction ("Hoàng thượng để tâm đến ta hơn", "nàng bớt ghen"); per-act sentences would need act data — owner want that later? Also many "Mấy việc vặt…" lines until review/log-sync lands on main (missing log lines; honest, not a bug).
 - Q14 (D40 weather): rain gear (dù/áo tơi/giày) is a one-time purchase that halves one risk; the kiệu costs Bạc −6 per outing. Should gear wear out?
+- Q15 (C34 contest-ui): her contest titles (e.g. "Hoa khôi · Tết Thất tịch") show only in Sổ ân thưởng — enough? The cắm hoa board painting is an empty stage with pink curtains (no flowers) — want contest-specific paintings? Only one podium backdrop set was made (owner asked for variants by contest kind/season).
