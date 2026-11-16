@@ -98,3 +98,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (06:58Z s11) LIVE: main = 11100a99 (9 place glyphs on Dư đồ + lists; Trường Môn viện chip fix). NVP scene unwired (glossy-floor question to owner).
 - (06:59Z s11) Owner 07:00Z (OD:L1251-1253): cn+nc pre-palace roads → kc-roads-cn-nc (opus); NPC roads APPROVED (varied requests per life) → story14 plan phase after frame; same choice ≠ same result → story14 frame + bot spread check; D5 cancelled at B.
 - (07:00Z s11) LIVE: main = a942395b (postmerge-fix-1: CSS buổi tint removed, every place has its painted 16-set; kpshort test). Sổ mây post-deploy smoke PASS.
+- (07:05Z s11) Owner: place glyphs not in game style → v2 sample (3 glyphs, ≤~200 cr) by the place-glyphs worker; live v1 stays until v2 approved.
