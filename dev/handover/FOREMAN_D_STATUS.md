@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:35Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:49Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -33,7 +33,7 @@ main at start = eba64ead4.
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
-| ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
+| ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam @ab50be5c | opus | SẴN SÀNG KIỂM (contains kc-roads-cn-nc-r1 ef6e7a05 + mg-balance 96736fff; worker archived) → reviewer session_01DgYSWp7SJ7frNoZUnBtM7q RUNNING (review/entry-exam-r1) |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
@@ -62,6 +62,9 @@ main at start = eba64ead4.
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- KIT REQUEST (for the main kit keeper, from entry-exam): a dedicated "nhập cung" entry scene on kmStage (Ngọ môn gate opens, sedan/procession crosses, gate closes, then the rank chip, ending with the §81 button); variants by origin group (consort sedan / bridal sedan + envoy (+horses for bd) / maids behind a mama (cnv) / Càn Thanh corridor at night (cn)). Until then the entry uses kitPersonReveal. Full text + art list (13 rows) in dev/handover/reports/entry-intro.md → ART NEEDED for main samples / C.
+- FOR FOREMAN B (mg-balance), from entry-exam: the 'tuyen' occasion tier reads "Khó" at art level 0 — suggest [1,0].
+- FOR MAIN s15 / kc-roads fixer (BAL.kcv, kc-roads r1 FAIL 1): entry-exam bots show home roads give a better selection than 'Vào cung ngay' (cnv skilled top 94 % vs 77 %, nc 93 % vs 80 %) — count it when retuning.
 - FOR MAIN s14 (08:42Z order: FAIL list goes to you, you open a fresh kc-roads worker): review/kc-roads-cn-nc round 3 793cd37 = FAIL, 4 items, full list dev/handover/reports/review-kc-roads-cn-nc-r1.md; start the fixer FROM review/kc-roads-cn-nc-r1 @ef6e7a05 (main 18fb8252 + reviewer fixes: direct-entry ceiling vs real rank, name case, doubled rank, 'Vào cung ngay' cards promising the ceiling). (1) BLOCKING OD:L1288: 'Chờ' worth more than 'Vào cung ngay' (fresh palace arm 8 lives V 225, 3/8 'kém' → Tân Giả khố, vs home 309) → re-measure ≥8 lives/arm, retune BAL.kcv; (2) losses listed under ĐƯỢC (x: family, jkc+jkc2, OD:L908); (3) her own family shown as strangers in the Gia đình pager, all 9 home roads; (4) exam hook one seam: tiểu thư Phúc tuyển must call window.kcEntryExam(kind, done, info{art,origin,title,note}). D's entry-exam worker was told the contract. D can run the fixer if you prefer: write 'kc-roads fix → D' in FOREMAN_D.md.
 - BALANCE (for main chat, from balance-after-truth 14fdce0c, measures only): HH 34% (target ~32 ✔); early death 38% (target 40–45, low edge); childbirth death 5%/birth (target 8–12; worker shows the mechanism is exact at 11% and calls the gap chance); median weeks to HH ~285 vs target ~188 (too slow on both builds). Next: re-measure after review/mortality merges, then consider seeMaxP 70→65. The slow pace depends on review/balance-pass (ex.bar), not merged; after it merges check HH does not overshoot (ex.bar[2] 28→30). Numbers change needs owner OK.
 - ART NEEDED (for Foreman C, art owner since Q-D1; from D50): full-body figures for Phế phi họ Lý, Quản sự Tân Giả khố, Thầy dạy Thượng thư phòng — 4 age bands each (they now show the kit silhouette).
