@@ -2921,6 +2921,32 @@ No new kit part: the exam is built only from existing parts.
 - Mệnh truyện › Sắc phong: the exam row is one more `kitChecks` row; status = `kitChip(text,"g"|"r"|"n")` in the `.ktop` row (as §46 header
   numbers) next to `kitInfo("Khảo hạch tấn phong")`; cold palace shows `kitEmpty` (no promotion card).
 - Test: `node dev/test/promo-exam.js <url> [oldBuildUrl] [outdir|-] [sizes]`; next-rank scan: `node dev/test/promo-next-rank.js <url>`.
+- Rules 15/11 20:05Z (review/promo-rules): son's birth = decree at once (`exSonUp`); daughter's birth = exam at once, conditions waived
+  (`exGrace(p,"f")`); servant / ma ma road = the same exam run (`exRun`, card «Khảo hạch Nội vụ phủ», `BAL.ex.srvBar/srvCd`), NPC servants seeded roll.
+
+## 65. PROMOTION REWARD · rank chest + kitPersonReveal (owner 15/11 20:05Z #9, review/promo-rules · `dev/build/jpromo.js`, after jitev)
+Every rank-up, on every road, gives the new rank's FULL SET as real items (consort ranks: y phục + trâm of phẩm rank+1 via `wdGain(nvp)`,
+Đeo tay, Túi thơm, extras `BAL.promo.extra[rank]`; servant road `BAL.promo.srv[rank]`), then two screens, queued after the j93 edict (kmPush):
+- **65.1 the chest** = j93 `kitReward` (KIT "Chuyển động" #7) — consort ranks kind `chest`, title «Phẩm phục <rank>» (jmark adds the head mark
+  «Dấu ấn»), servant road kind `pouch` «Đồ thưởng <rank>». Rows merge duplicates («Lụa Hàng Châu ×2»). No new CSS.
+- **65.2 `kitPersonReveal({who, title, sub, line, btn})`** — one person presented: the full-body transparent figure (`kitFigOf`) big in the
+  centre, body-fitted by `kitFigBody` (body = 90 % of the figure box, feet on its bottom line, KIT 33), the kit name (`kitName`), one cổ trang line,
+  the kit button (`.kbtn.kmtake`, "Nhận"). Card = the SAME frame rule as the kitReward list (`.kmlist,.kprev-card` in j93, one rule). Short landscape (≤560 px): figure left, card right.
+  Light behind the figure: the painted KIT §68 `orb` light (atlas frame 3, warmed by filter) under the figure, never over the face. HTML: `kitPersonRevealHTML(o)`.
+  Used for «Nội vụ phủ phụ cấp người hầu» (the servant assigned at the rank-up: `prStaff`); reusable for any "a person is presented" moment.
+- Sample page: §65.2. Test: `node dev/test/promo-rules.js <url> [oldBuildUrl|-] [outdir|-] [sizes]`.
+
+## 66. RANK-CHANGE FX (owner 15/11 20:05Z #13) — `dev/build/j93.js` kitEdict / kitGloom
+- **66.1 rank up** = `kitEdict` (edict, frame swap, chip old → new); the light gold glow on the new frame is PAINTED (KIT §68):
+  `kitFxBurst("glowburst", frame)` + `kitFxLight("glow-gold", frame)` (screen blend on the dark stage); the sparks at the new chip are painted
+  `spark` + `petal-gold` (j93 `kmSpark` now calls kitFxBurst for every caller: edict, tablet, reward chest). The old CSS gradient sweep and the
+  code-drawn dots are removed (reviewer r1: owner rule "effects painted, code only animates"). The chest's inner light (`.kmlight`), the bloom
+  glow (`.kmglow`) and the incense ember / smoke of the day shift are the painted `orb` / `ember` / `smoke` atlases (CSS only scales / fades / warms them).
+- **66.2 rank down / cold palace** = `kitGloom({title, sub, who, from, to})` (to = -2 → cold palace): `kmRankDownHTML(p,from,to)` adds her portrait
+  in the OLD frame, which fades to grey (`filter` on the painted frame; demotion: crossfades to the lower rank's frame), and the old rank chip
+  splits along a cut (`clip-path` halves of the same chip) and its halves fall (transform/opacity); at the split painted cracked-jade
+  shards burst from the chip (KIT §68 `kitFxBurst("jade", chip, 8)`), on top of jfx's `demote` moment (dim + jade + ash). The new chip («<lower rank>» / «Lãnh cung») comes up dim. Called by j93 kmDiff.
+  Reduced motion / Cảnh động off: final state (grey frame, new chip). Sample page: §66.2.
 
 ## 56. SCENE LIGHT · KIT_LIGHT + stage classes `.kown` / `.kwet` + kitBookFigClamp (owner 11/15, review/scene-light) — `dev/build/jsl.js` (after jk4)
 _(Renumbered by reviewer r7: this section was §41 on review/scene-light; main uses §41 for kitMeMark, §56 is scene-light's registry slot. Old refs "KIT §41.x" for scene light = §56.x.)_
