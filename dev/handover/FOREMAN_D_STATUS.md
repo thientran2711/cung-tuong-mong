@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 09:33Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 09:44Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -35,7 +35,8 @@ main at start = eba64ead4.
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | opus | worker session_01DgYSWnjWQExva4hE6H8RyB RUNNING |
-| reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | SẴN SÀNG KIỂM (kitNameList, 10 sites; overflow not on main) → reviewer session_01DgYSWoxLbnCcR7gE2i3QKu RUNNING |
+| reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
+| unmet-name leak residue (log lines, palName, ??? rows) | review/name-mask | sonnet | (opening) |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 | opus | reviewer session_01DgYSWnY5pFVmEYGWvruZFs RUNNING (FAIL list → main s14) |
@@ -43,6 +44,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/reign-road-fix-r1 90c5b9e50641edb94c2bcec465cc31e1c66bba49 (orphan #33: unmet consorts no longer shown as "Quý phi ???" in Triều cục + 11 other sites via kitNameList; main 18fb8252 ancestor; report reports/review-reign-road-fix-r1.md)
 - READY review/act-split-w2-r1 072687e2cd549536374db37fe393f1b077464c39 (act-split waves 2–3 + Emperor-stroll first "!" slot; main 399483e3 is an ancestor → ff OK; report reports/review-act-split-w2-r1.md)
 - READY review/balance-after-truth-r1 614138eb3eabd947efde7d9c5d9c23818b1e6e0f (measures/tools only, no BAL or game code; numbers on record; report reports/review-balance-after-truth-r1.md)
 - READY review/coop-chat-r1 24578406f31621373e65bded2d37a102a456f05a (coop-chat 47/47; NEEDS coop/worker DEPLOY — live Worker has no chat; reviewer did not deploy; report reports/review-coop-chat-r1.md)

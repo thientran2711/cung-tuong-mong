@@ -131,8 +131,9 @@
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
 | slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | RUNNING | 16/11 09:19Z |
 | item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | session_011xDdVP6DUKfEQP1er7RbtD (sonnet) | RUNNING | 16/11 09:27Z |
-| reign-road-fix review (sonnet) | review/reign-road-fix-r1 | D | session_01DgYSWoxLbnCcR7gE2i3QKu | RUNNING | 16/11 09:31Z |
+| reign-road-fix review (sonnet) | review/reign-road-fix-r1 | D | session_01DgYSWoxLbnCcR7gE2i3QKu | DONE PASS 90c5b9e5 | 16/11 09:31Z |
 | kc-roads-cn-nc round 3 review (opus; main s14 08:41Z) | review/kc-roads-cn-nc-r1 | D | session_01DgYSWnY5pFVmEYGWvruZFs | RUNNING | 16/11 09:31Z |
 | scene-end button SWEEP, whole game (KIT §81; main s14 09:10Z) | review/scene-end-sweep | D | session_01DgYSWmAiQTHkmu8eoKhvWT | DONE SẴN SÀNG KIỂM 67db47f6 | 16/11 09:31Z |
 | servant-mline-r2 review (opus) | review/servant-mline-r3 | D | session_01DgYSWkVHL3tGcMAWshbEUA | RUNNING | 16/11 09:32Z |
 | scene-end-sweep review (sonnet) | review/scene-end-sweep-r1 | D | session_01DgYSWog54ZBN61ZaY8nZCH | RUNNING | 16/11 09:41Z |
+| unmet-name leak family residue (bare-name log lines, palName, per-person ??? rows) | review/name-mask | D | (opening, s3) | RUNNING | 16/11 09:44Z |
