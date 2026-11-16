@@ -1164,8 +1164,10 @@ const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
 function pushDil(d,title){if(!d)return"";pushModal({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return""}
 function WHO(w){if(!w)return null;const v=w[0]==="r"?RV(w[1]):null;return w[0]==="r"?(v?pv(v):null):w[0]==="e"?pEmp():w[0]==="t"?pTH():w[0]==="m"?pMaid():w[0]==="me"?pMe():w[0]==="d"?pDoc():null}
-function serQ(){return Q.map(m=>m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.opts?null:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}).filter(Boolean)}
-function deserQ(L){const out=[];for(const e of L||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
+/* the ☰ title menu and its sub pages (cls kptitle, j74 HM/SM) are screens, not events: a save made while one is open must not keep it (loading that save over a live kiếp, e.g. "Tiếp tục" / "Xem lại lời dặn", brought an empty menu back ~1 in 4) */
+const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
+function serQ(){return Q.map(m=>isMenuCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.opts?null:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}).filter(Boolean)}
+function deserQ(L){const out=[];for(const e of L||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else if(!isMenuCard(e))out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
 /* KIT 32.10: a dialog option that only closes ("Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) is never drawn as a button: the dialog
    gets the kit ✕ instead (jk4 kitCloseSync), and ✕ / a tap outside / Esc run that option. A dialog with options and no such option is
    a forced choice: no ✕, no tap-outside, no Esc. */
@@ -6729,8 +6731,11 @@ function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg
  if(pg==="home")homeOpen();else subOpen(pg);
  const M=$("modal");if(M)M.scrollTop=0;
  if(focus!==false){const f=pg==="home"?document.querySelector("#modal.kptitle .kpmenu .kbtn"):document.querySelector("#modal.kptitle #mr .kbtn");if(f)f.focus({preventScroll:true})}}
+/* ONE close-then-open path for every ☰ entry that goes back to the game (Tiếp tục, Xem lại lời dặn on the home page AND inside Thiết lập): close the menu cards, load the sổ, nothing of the menu is left behind. window.kitMenuResume() */
+function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(!lb)return false;PG="home";dropAll();lb.click();return true}
+window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- if(g==="cont"){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(lb){PG="home";dropAll();lb.click()}return}
+ if(g==="cont"){resumeGame();return}
  go(g)},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="home"){e.preventDefault();go("home")}});
 /* re-renderers of the borrowed parts: give the parts back first, re-mount after */
@@ -36120,8 +36125,10 @@ function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- const c=document.querySelector('#modal.kpthome [data-tgo="cont"]');T.replay=true;try{if(S)S.tutOld=0}catch(x){}
- if(c)c.click();else{/* from Thiết lập in play: close the panel, the tour starts when the screen is free */const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()}},true);
+ T.replay=true;try{if(S)S.tutOld=0}catch(x){}
+ /* the shared ☰ "back to the game" path (j74 kitMenuResume) from the home page and from Thiết lập alike; the tour starts when the screen is free */
+ if(typeof kitMenuResume==="function"&&kitMenuResume())return;
+ const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()},true);
 }catch(e){console.error(e)}})();
 /* jgoal: MỤC TIÊU ĐỜI MÌNH (owner 16/11 "Khi mới chọn nhân vật, không thấy khung báo nhiệm vụ chính tuyến, hoặc mục tiêu đời mình? Chơi bị
    lạc lối." + "Không bấm xem được" on the Hành sự goal strip) — KIT.md §72. One data source, three kit pieces:
@@ -41522,7 +41529,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6bb8a54579ab";window.CTM_BUILD=BUILD;
+const BUILD="0aa47a8dfdc9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
