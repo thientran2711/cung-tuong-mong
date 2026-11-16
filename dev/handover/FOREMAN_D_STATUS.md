@@ -255,9 +255,9 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 | 10-night ledger (main s22 19:41Z) | — | — | MOVED to main's night-final successor (main s23 20:10Z, OD:L1229) |
 
 ## PASS FOR MAIN BATCH (D, 21:40Z; main merges, D does not push)
-- review/seatcap-r1 PASS 7d463838 — golive merge review/seatcap-r1-golive ce1538ba (on c1e1bbd1, golive.sh PASS 184 s; jseat.js must stay LAST in assemble.py).
+- review/seatcap-r1 PASS 7d463838 — golive merge review/seatcap-r1-golive ce1538ba (on c1e1bbd1, golive.sh PASS 184 s; jseat.js must stay LAST in assemble.py). seatcap-sim + seatcap-oldsave PASS; seatcap-active run lost to OOM — re-run in the batch.
 - review/mem-upgrade-r1 PASS 64b40270 — golive 60fb873f (on 1aa0edb2); test fix needed: window.__j95off around forced NPC acts in dev/test/mem-upgrade.js + memories.js (j95 motive gate), else 1 harness FAIL each.
 - review/preg-rate-r1 PASS 1c31bd79 — golive 3f2a92d8 (on c1e1bbd1, golive PASS). NOTE: doubles per-tryst odds; with suc-khoe (+50 % births) measure D57 births after both.
-- review/ghen-shown-r1 PASS 81f86655 (includes emperor-visit-r1).
+- review/ghen-shown-r1 PASS 81f86655 (includes emperor-visit-r1) — golive review/ghen-shown-r1-golive 7ee482e0 (on f1509d7c; real conflicts j2/j71/j79 resolved to main's BAL.tw.g + ghenN(); jvisit.js LAST; ghen-shown.js ALL OK, emperor-visit.js PASS; quickcheck PASS on --runs 5; BAL.ghen.kinhHong now dead key — cleanup later).
 - review/danh-p1-r1 PASS dd3363ff.
 - HOLD, not for batch: item-ledger-r1 7aba5de9 (double gift delivery vs live coop-b1b5 → review/item-ledger-coop worker), npc-death-r1 5f58a715 (j95 place record → review/npc-death-wire worker), npc-roads-r1 83d84225 (needs story14-p1-r2 f5305341 + road-map-next d69d6d24 first; U2–U4 on review/npc-roads-fx), entry-exam-r1 (after kc-roads-cn-nc-fix-r1).
