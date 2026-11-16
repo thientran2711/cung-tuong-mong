@@ -265,7 +265,7 @@
 | TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd (archived) | PASS 5f710161 | 16/11 16:34Z |
 | emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | DONE SẴN SÀNG 7b959216 (archived) | 16/11 16:41Z |
 | mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | session_01N1tNP2d8sR5Vo1a5Lh9UV9 | DONE PASS 8f476f6f (archived) | 16/11 16:44Z |
-| mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
+| mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | DONE SẴN SÀNG 96131b41 (archived) | 16/11 16:44Z |
 | kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | session_01UV1Szjj42P74XsFm4trr8J | RUNNING | 16/11 16:50Z |
 | road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | session_01N1tNP4jWtq6Qf3eWpQ7krw | DONE FAIL 5 (archived) | 16/11 16:47Z |
 | road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | RUNNING | 16/11 16:47Z |
@@ -339,3 +339,4 @@
 | road-b1 FAIL fix B (opus): items 2–9 + smaller in jrd_muoi + jrd_cn | review/road-b1-fixb | B | session_01N1tNP2czBg1KKfRHBThvj3 | RUNNING | 16/11 18:55Z |
 | PL COURTYARDS paint (sonnet art; OD:L1415 + 19:25Z; MISSING TSV in origin/review/pl-courtyards-r1:dev/handover/reports/pl-courtyards-r1.md, 6 multi-hall dirs incl. tang; 1 sample first → owner, then batch, CDN img/pl2 + pl2_sync.py) | review/pl-courtyards-art | C | session_011xDdVPpLX6EsrLyakadqwQ | RUNNING | 16/11 18:55Z |
 | DƯ ĐỒ MAP FRAME painted (sonnet art; FOREMAN_C 18:45Z s21; 3 style samples, 9-slice, mocked on iPad 1180x820 + Fold 755x1000 → owner; chosen one → KIT READY to main) | review/map-frame-art | C | session_011xDdVQTc7r6hnCLcZWWdgm | RUNNING | 16/11 18:55Z |
+| mg-tune review r1 (opus, BIG): review/mg-tune 96131b41 (mgPace time part, BAL.mgTier.pace) | review/mg-tune-r1 | B | (opening) | RUNNING | 16/11 19:03Z |
