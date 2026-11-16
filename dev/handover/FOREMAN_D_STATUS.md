@@ -39,7 +39,7 @@ main at start = eba64ead4.
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 | opus | reviewer session_01DgYSWnY5pFVmEYGWvruZFs RUNNING (FAIL list → main s14) |
-| scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep | sonnet | worker session_01DgYSWmAiQTHkmu8eoKhvWT RUNNING |
+| scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | SẴN SÀNG KIỂM (4 converted + exempt list; worker archived) → reviewer session_01DgYSWog54ZBN61ZaY8nZCH RUNNING (completeness check) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
@@ -77,6 +77,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 09:42Z: scene-end-sweep SẴN SÀNG KIỂM 67db47f6 → sonnet reviewer told to re-scan the whole game and judge every exemption. 12 D sessions.
 - 09:34Z: servant-mline-r2 SẴN SÀNG KIỂM c3e1cacd → opus reviewer (worker note C: co-op guest's own maid cannot rise — reviewer judges). Worker goes on with D58. 12 D sessions running (cap).
 - 09:33Z (hourly): PASS act-split-w2-r1 + balance-after-truth-r1 → READY. reign-road-fix SẴN SÀNG KIỂM → reviewer. kc-roads-cn-nc r3 review (s14 08:41Z) and scene-end sweep (KIT §81 live 09:10Z) opened. 3 finished sessions archived. danh-balance worker (session_01DgYSWoB9ztxCwmdBUbbxDS): no report yet. 11 D sessions running.
 - 09:29Z: coop-b1b5-r1 FAIL (6) → send_message to part-2 worker session_01DgYSWnjWQExva4hE6H8RyB: fixes first, then part 2, one reviewer for both. Reviewer archived.
