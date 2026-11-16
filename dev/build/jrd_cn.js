@@ -11,8 +11,8 @@ const CN_TH=()=>{try{return S.thDead?CN_Q():"Thái hậu"}catch(e){return"Thái 
 const CN_QI=c=>{const w=({hh:"bản cung",th:"ai gia",emp:"trẫm"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w},CN_QY=c=>{const w=({hh:"muội",th:"con",emp:"ái phi"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w};
 /* ---------- cn_chu · Chủ cũ ---------- */
 /* The rival {v} is her old mistress (cast in .4, marked v.oldmis). Rank comparisons read S.rank and the rival's own rank field, never a typed name. */
-const CNCHU_RN=i=>RANKS[Math.max(0,Math.min(i|0,7))].n;
-const CNCHU_VR=A=>{const v=A&&A.act?rv67(A,"v"):null;return v?(v.rank|0):Math.min((S.rank|0)+1,7)};
+const CNCHU_RN=i=>RANKS[Math.max(0,Math.min(i|0,RANKS.length-1))].n;
+const CNCHU_VR=A=>{const v=A&&A.act?rv67(A,"v"):null;return v?(v.rank|0):Math.min((S.rank|0)+1,RANKS.length-1)};
 const CNCHU_UP=A=>(S.rank|0)-CNCHU_VR(A);/* >0: she sits above her old mistress; 0: equal; <0: still below */
 const CNCHU_MARK=A=>{const v=rv67(A,"v");if(v)v.oldmis=true;return true};
 
@@ -473,8 +473,7 @@ RD97L.push({a:"cn_tinh_11",tag:"Hộ vệ thề trọn đời",w:"emp",p:.1,n:"X
 /* ---------- cn_ban · Tri kỷ ở Tân Giả khố ---------- */
 /* Road of «Cung nữ được sủng hạnh»: Tố Nga (story-only NPC, ROAD_MAP §5.4) knows the truth of the poisoned well (.4). From .5 the hand
    behind it is a consort {v} who borrowed Càn Ninh cung's name: she framed Tố Nga and the Hoàng hậu both. Cast once, carried. */
-const CNB_SO=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín","mười"];
-const CNB_ILL=()=>CNB_SO[BAL.road.cn_ban.ill]||"vài";
+const CNB_ILL=()=>kitNumVi(BAL.road.cn_ban.ill);
 
 rdDef("cn_ban",5,{t:"Kẻ muốn Tố Nga câm lặng",w:"maid",sj:"kẻ muốn Tố Nga câm lặng",cast(A){return rdCast(A,["v"])},
  g:"Chuyện cái giếng chưa ngủ yên. Có kẻ sợ Tố Nga còn nhớ quá nhiều. Giữ được mạng nàng, ngươi mới giữ được sự thật.",
@@ -708,8 +707,7 @@ RD97L.push({a:"cn_ban_11",tag:"Bí mật cái giếng hạ bệ kẻ vu",w:"maid
 /* Road of «Cung nữ được sủng hạnh»: the dying mama of .4 told her she is the daughter of Thẩm Thị lang, demoted under the late emperor.
    From .5: the mama's keepsake holds half a page of an old relief ledger; the man who impeached her father to bury it was the grandfather
    of the consort {v} (cast once, carried). The old Thẩm steward (unnamed walk-on) holds the other half outside the palace. */
-const CNT_SO=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín","mười"];
-const CNT_DL=()=>CNT_SO[BAL.road.cn_than.dl]||"vài";
+const CNT_DL=()=>kitNumVi(BAL.road.cn_than.dl);
 
 rdDef("cn_than",5,{t:"Di vật của ma ma",w:"maid",sj:"bọc di vật lão ma ma để lại",cast(A){return rdCast(A,["v"])},
  g:"Lão ma ma đã mất, để lại một bọc vải chưa ai mở. Trong đó có thể là lá thư của mẹ ruột ngươi, cũng có thể là thứ khiến kẻ khác mất ngủ.",

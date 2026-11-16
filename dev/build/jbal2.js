@@ -299,7 +299,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  muoi_tuoc:{rkSeat:4},        /* lowest rank index allowed to write a lantern poem at the Trung thu feast (.7) */
  muoi_lau:{rkSend:3},         /* lowest rank index allowed to send goods into a prison through Nội vụ phủ (.8) */
  muoi_doi:{han:3},            /* months to pay the relief contribution before Hộ bộ closes its books (.8) */
- muoi_no:{han:3},             /* months to raise the money (.5 / .6) */
+ muoi_no:{han:3,phat:12,cam:6}, /* han: months to raise the money (.5 / .6); phat: months of khất bổng the rival gets (.9 / .10); cam: months of cấm túc when she has no rank to lose (.10) */
  cn_chu:{gap:1},              /* ranks she must sit above the old mistress for the .9 climax bonus */
  cn_tinh:{danh:40},           /* Danh at which her own word weighs in the Kính sự phòng report (.9) */
  cn_ban:{ill:2},              /* months Tố Nga survives without the ginseng (.8) */
