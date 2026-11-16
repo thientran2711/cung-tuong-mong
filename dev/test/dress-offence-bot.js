@@ -9,6 +9,7 @@ const LIVES=+NL||4,MONTHS=+NM||12,seed=+SEED||1,FAST=process.env.FAST==='1',LAVI
 const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=1500']});
  const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+ if(process.env.DIFF)await ctx.addInitScript(d=>{window.__diffO=d},process.env.DIFF);
  await ctx.addInitScript(([sd])=>{let s=sd*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},[seed]);
  await ctx.route(u=>!/^file:/.test(String(u)),r=>r.abort());
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
