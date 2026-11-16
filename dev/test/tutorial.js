@@ -1,7 +1,7 @@
 /* Lời dặn tân thủ (jtut, KIT §36): the whole tour, skip midway, replay from ☰, an old sổ, bots.
    usage: node dev/test/tutorial.js <baseURL> <W>x<H>@dpr <outdir> <tag> [modes=tour,skip,replay,old,bot]
    Writes <tag>-NN-<step>.jpg for every step (tour) + a few shots of the other modes; prints one JSON line per check. */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG,MODES]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const modes=(MODES||'tour,skip,replay,old,bot').split(',');
 const fs=require('fs');fs.mkdirSync(OUT,{recursive:true});
@@ -12,7 +12,7 @@ const out=o=>console.log(JSON.stringify(o));
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:300000});await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'});await p.waitForTimeout(800);return p}
  async function newLife(p,slot){await p.evaluate(s=>{SLOT=s;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start();showModal()},slot||1);
-  let got=0;for(let i=0;i<45;i++){await p.waitForTimeout(900);const more=await p.evaluate(()=>{const ro=[...document.querySelectorAll('.kroul button')].filter(b=>b.offsetParent);if(ro.length){ro[ro.length-1].click();return true}if(!Q.length)return false;const b=[...document.querySelectorAll('#modal button.opt:not(.kdis), #modal #mclose, #modal #mr .kbtn, #modal .kph button')].find(b=>b.offsetParent);if(b)b.click();return true});if(more)got=1;if(!more&&got)break}}
+  await require('./lib/roulette').passNewLifePopups(p)}
  const shot=(p,n)=>p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:82});
  const metrics=p=>p.evaluate(()=>{const R=e=>{if(!e||e.hidden)return null;const r=e.getBoundingClientRect();return r.width?{x:Math.round(r.left),y:Math.round(r.top),w:Math.round(r.width),h:Math.round(r.height),b:Math.round(r.bottom),r:Math.round(r.right)}:null};
   const card=R(document.querySelector('#ktut .ktut-card')),hole=R(document.querySelector('#ktut .ktut-hole'));const s=KTUT_STEPS[KTUT.step]||{};
@@ -45,10 +45,10 @@ const out=o=>console.log(JSON.stringify(o));
   await p.waitForTimeout(1500);await p.evaluate(()=>document.querySelector('#ktut [data-ktut=skip]').click());await p.waitForTimeout(800);
   const r=await p.evaluate(()=>({tour:KTUT.rec.tour,hidden:document.getElementById('ktut').hidden}));out({TAG,skip:r});if(r.tour!=='skip'||!r.hidden)fail('skip');
   /* a first-open tip (Tài nghệ), non-blocking */
-  await p.evaluate(()=>document.querySelector('#tabs [data-tab=art]').click());const ok=await until(p,()=>KTUT.tip==='tab-art',12000);await p.waitForTimeout(600);await shot(p,'tip-tai-nghe');
+  await p.evaluate(()=>document.querySelector('#tabs [data-tab=art]').click());const ok=await until(p,()=>{if(KTUT.tip&&KTUT.tip!=='tab-art'){const b=document.querySelector('#ktip [data-ktut=tip]');if(b)b.click();return false}return KTUT.tip==='tab-art'},12000);/* a queued earlier tip (Hành sự) may show first: the player taps its Đã hiểu */await p.waitForTimeout(600);await shot(p,'tip-tai-nghe');
   const tb=await p.evaluate(()=>{const t=document.getElementById('ktip');if(!t)return null;const r=t.querySelector('.dlg').getBoundingClientRect(),tb=document.getElementById('tabs').getBoundingClientRect();return{above:r.bottom<=tb.top,pe:getComputedStyle(t).pointerEvents}});
   out({TAG,tip:ok,tb});if(!ok||!tb||!tb.above)fail('tip');
-  await p.evaluate(()=>document.querySelector('#ktip [data-ktip]').click());await p.waitForTimeout(500);
+  await p.evaluate(()=>document.querySelector('#ktip [data-ktut=tip]').click());await p.waitForTimeout(500);
   const again=await p.evaluate(async()=>{document.querySelector('#tabs [data-tab=act]').click();await new Promise(r=>setTimeout(r,1500));document.querySelector('#tabs [data-tab=art]').click();await new Promise(r=>setTimeout(r,2500));return KTUT.tip});
   if(again==='tab-art')fail('tip shown twice');
   out({TAG,mode:'skip',errs:p.errs});if(p.errs.length)fail('page errors');await p.context().close()}

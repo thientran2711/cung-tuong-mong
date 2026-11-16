@@ -35325,8 +35325,8 @@ Object.assign(BAL,{cardFlip:{
  /* two plate pairs (owner 21:45Z: landscape AND portrait screens): l = 1600x1200 (4:3), p = 1200x1600 (3:4). Per picture: the tray floor
     (yellow silk, measured from the pixels) and the tray's outer rim (the safe zone that must stay on screen); the plate box is fitted to the
     rim and the card slots are computed from the same box, so cards sit on the floor at every aspect. A ≠ B floor → the cards glide to B's. */
- plates:{l:{ar:4/3,a:"cf-plate-ksp",b:"cf-plate-emp",fa:{x0:.177,y0:.252,x1:.821,y1:.691},fb:{x0:.177,y0:.251,x1:.821,y1:.690},rim:{x0:.095,y0:.175,x1:.905,y1:.775}},
-         p:{ar:3/4,a:"cf-plate-ksp-p",b:"cf-plate-emp-p",fa:{x0:.126,y0:.322,x1:.872,y1:.639},fb:{x0:.122,y0:.309,x1:.877,y1:.646},rim:{x0:.023,y0:.262,x1:.977,y1:.71}}},
+ plates:{l:{ar:4/3,a:"cf-gplate-ksp",b:"cf-gplate-emp",fa:{x0:.125,y0:.235,x1:.875,y1:.700},fb:{x0:.125,y0:.235,x1:.875,y1:.700},rim:{x0:.055,y0:.150,x1:.945,y1:.790}},
+         p:{ar:3/4,a:"cf-gplate-ksp-p",b:"cf-gplate-emp-p",fa:{x0:.105,y0:.272,x1:.890,y1:.695},fb:{x0:.105,y0:.300,x1:.892,y1:.655},rim:{x0:.02,y0:.21,x1:.98,y1:.75}}},
  portraitBelow:.95, /* screen w/h below this uses the portrait pair */
  /* the painted hand: pinch point (fraction of the sprite), sprite height in card heights */
  hand:{px:.70,py:.905,h:2.7},
@@ -35346,6 +35346,8 @@ function cycleOf(p){try{if(typeof inCycle==="function")return !!inCycle(p);if(ty
 function known(p){try{return typeof kitKnownName==="function"?kitKnownName(p):true}catch(e){return true}}
 function rankName(p){const r=rk(p);return r>=7?"Hoàng hậu":(RANKS[Math.max(0,r)]||{}).n||""}
 function nameOf(p){return p===S?S.name:known(p)?p.name||"":"???"}
+function tagOf(p,w){try{const r=rk(p),col=typeof kitRankCol==='function'?kitRankCol(r):'#7a5530',rn=rankName(p),nm=nameOf(p),me=p===S;
+  return `<div class="kcf-tag">${kitNameRank(esc(rn),esc(nm),col,me,w<112)}</div><div class="kcf-tag kcf-tag-l">${kitNameRank(esc(rn),esc(nm),col,me,false)}</div>`}catch(e){return""}}
 function face(p){try{return mdH(p===S?pMe():pv(p),"big")}catch(e){return""}}
 
 /* ---------- the deck: what SHE sees tonight (j75 S.nightWhy rows; + the co-op friend) ---------- */
@@ -35355,10 +35357,13 @@ function deckOf(d){const rows=(d&&d.rows)||[];const L=[];
  L.sort((a,b)=>rk(b.p)-rk(a.p));return L}
 
 /* ---------- layout: n cards in the tray floor (px), the biggest card that fits in r rows ---------- */
-function grid(n,W,H){let best=null;for(let r=1;r<=Math.max(1,Math.min(5,n));r++){const c=Math.ceil(n/r);const g=Math.max(4,W*.018);
-  const cw=Math.min((W-g*(c+1))/c,((H-g*(r+1))/r)*AR*.98);if(!best||cw>best.cw)best={r,c,cw,g}}
- const {r,c,cw,g}=best;const ch=cw/AR;const P=[];const top=(H-(r*ch+(r-1)*g))/2;
- for(let i=0;i<n;i++){const row=Math.floor(i/c),inRow=row<r-1?c:n-c*(r-1),col=i-row*c;const rowW=inRow*cw+(inRow-1)*g;P.push({x:(W-rowW)/2+col*(cw+g),y:top+row*(ch+g),w:cw,h:ch})}
+const TAGH=30;  /* px under every card for the kit name tag (rank over name, KIT §48): the slot = card + tag */
+const TAGW=98;  /* px a name tag needs across: a column is never narrower, so two names never overlap (the kit small tag: rank .66rem over name .72rem) */
+function grid(n,W,H){let best=null,fb=null;for(let r=1;r<=Math.max(1,Math.min(6,n));r++){const c=Math.ceil(n/r);const g=Math.max(4,W*.018);const pitch=W/c;
+  const cw=Math.min(pitch-g,((H-g*(r+1))/r-TAGH)*AR*.98);const cand={r,c,cw,g,pitch};
+  if(pitch>=TAGW&&(!best||cw>best.cw))best=cand;if(!fb||pitch>fb.pitch)fb=cand}
+ const {r,c,cw,g,pitch}=best||fb;const ch=cw/AR+TAGH;const P=[];const top=(H-(r*ch+(r-1)*g))/2;
+ for(let i=0;i<n;i++){const row=Math.floor(i/c),inRow=row<r-1?c:n-c*(r-1),col=i-row*c;P.push({x:(W-inRow*pitch)/2+col*pitch+(pitch-cw)/2,y:top+row*(ch+g),w:cw,h:ch})}
  return P}
 /* the plate box: the tray rim fits the screen (picture may run past the screen edge; its edge fades into the dark) */
 function plateBox(){const vw=innerWidth,vh=innerHeight;const P=PL(),R=P.rim;const top=Math.min(64,vh*.12),bot=Math.min(56,vh*.1);
@@ -35373,7 +35378,7 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
  const cards=deck.map((c,i)=>{const p=all[i];const lab=`${esc(rankName(c.p))} ${esc(nameOf(c.p))}`;
-  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}">${face(c.p)}</div>`}).join("");
+  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}"><div class="kcf-f">${face(c.p)}${c.p===S?`<i class="kcf-mine"></i>`:""}</div>${tagOf(c.p,p.w)}</div>`}).join("");
  ov.innerHTML=`<div class="kcf-w" style="left:${B.x.toFixed(1)}px;top:${B.y.toFixed(1)}px;width:${B.W.toFixed(1)}px;height:${B.H.toFixed(1)}px">
   <img class="kcf-pl kcf-a" src="${ART.a}" alt="" draggable="false"><img class="kcf-pl kcf-b" src="${ART.b}" alt="" draggable="false">
   <div class="kcf-cards">${cards}</div><div class="kcf-lamp"></div><div class="kcf-vig"></div></div>
@@ -35413,7 +35418,10 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   Object.assign(h.style,{left:(r.left+r.width*P.x0)+"px",top:(r.top+r.height*P.y0)+"px",width:(r.width*(P.x1-P.x0))+"px",height:(r.height*(P.y1-P.y0))+"px",borderRadius:(r.width*E.rad)+"px"});
   for(const [k,v] of [["--hb",(r.width*E.blur).toFixed(1)+"px"],["--hs",(r.width*E.spread).toFixed(1)+"px"],["--ho",E.op],["--hl",E.lo],["--hd",(E.breath*SL)+"ms"]])h.style.setProperty(k,v);
   ov.appendChild(h);edgeH.push({stop(){try{h.remove()}catch(e){}}})}
- function showRes(now){if(shown)return;shown=true;edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");
+ /* the picked card is big and its tassel + tag stand over the row: hide the tag of any OTHER card the picked tag / tassel column would cross (its card is under the big one, the result chip names the pick) */
+ function coverTags(){if(!tel)return;try{const r=centreRect(),cx=r.x+r.w/2,half=Math.max(r.w*.3,40),y0=r.y+r.h*.9;
+  ov.querySelectorAll(".kcf-c:not(.kcf-pick) .kcf-tag:not(.kcf-tag-l)").forEach(t=>{const b=t.getBoundingClientRect();if(b.width&&b.right>cx-half&&b.left<cx+half&&b.bottom>y0)t.style.visibility="hidden"})}catch(e){}}
+ function showRes(now){if(shown)return;shown=true;coverTags();edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");
   if(me){ov.classList.add("kcf-mine");stamp();if(!still)petals();snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
   cap.textContent=o.cap2||"Hoàng thượng lật thẻ bài"}
  function petals(){try{if(typeof kitFxBurst==="function"){kitFxBurst("petal-peach",null,18);return}}catch(e){}
@@ -35494,7 +35502,7 @@ if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */
-window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];for(let i=0;i<n;i++){const p=L[i%L.length];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
+window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];n=Math.min(n,L.length);/* one card per person, never a duplicate or a fake extra */for(let i=0;i<n;i++){const p=L[i];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
  const tid=who==="me"?"me":who==null?null:"x"+who;if(tid&&tid!=="me")deck.forEach(c=>{if(c.id===tid)c.bar=false});
  const plan={pick:tid,turned:tid,cause:"tablet"};const tp=tid==="me"?S:tid?deck.find(c=>c.id===tid).p:null;
  const rh=!tp?`<div class="kmres"><div><b>Đêm nay Hoàng thượng không lật thẻ bài nào.</b></div></div>`:tid==="me"?`<div class="kmres">${face(S)}<div><b>Đêm nay ngươi được thị tẩm.</b><small>Thẻ bài của ngươi được lật.</small></div></div>`:`<div class="kmres">${face(tp)}<div><b>Tối nay: ${esc(rankName(tp))} ${esc(nameOf(tp))}</b><small>được chọn hầu đêm nay.</small></div></div>`;
@@ -35517,13 +35525,22 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-on-b .kcf-b{opacity:1}
 .kcf-cards{position:absolute;inset:0}
 /* every card state uses the SAME filter chain (grayscale sepia saturate brightness drop-shadow) so states interpolate smoothly and stay compositor-friendly */
-.kcf-c{position:absolute;z-index:2;filter:grayscale(0) sepia(.1) saturate(.96) brightness(.95) drop-shadow(3px 5px 3px #2a0d0480);transition:filter calc(.6s*var(--kcf-s,1)) ease-in-out,opacity calc(.45s*var(--kcf-s,1)) ease}
-.kcf-act .kcf-c{will-change:transform,filter}   /* promoted only while the scene runs (removed at the final still / close) */
+.kcf-c{container-type:inline-size}
+/* name tag under EVERY card (owner 16/11 14:00Z: rank + name, no title): the kit kitNameRank (KIT 48): rank in its jewel rank colour over the name, plain vivid text, no glow (the tray floor is a pale silk surface, = paper rule 48.1h) */
+.kcf-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);width:max-content;max-width:160cqw;margin-top:3px;pointer-events:none;text-align:center}
+.kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:79%;margin-top:0}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
+/* HER card on the tray (owner 16/11 14:05Z): a soft WHITE glow round the whole frame from the very start, so she knows her card at a glance; static (no running light, no motion), never over the portrait */
+.kcf-mine{position:absolute;left:8.5%;top:17.8%;width:83%;height:54.4%;border-radius:3cqw;pointer-events:none;box-shadow:0 0 3cqw .8cqw #ffffffd9,0 0 9cqw 2cqw #ffffff8c,0 0 18cqw 3cqw #ffffff40}
+.kcf-pick .kcf-mine{display:none}
+.kcf-c{position:absolute;z-index:2;transition:opacity calc(.45s*var(--kcf-s,1)) ease}
+/* the filter chain lives on the picture part only (.kcf-f), so the name tag under the card never gets the card's dark drop-shadow / dimming */
+.kcf-f{filter:grayscale(0) sepia(.1) saturate(.96) brightness(.95) drop-shadow(3px 5px 3px #2a0d0480);transition:filter calc(.6s*var(--kcf-s,1)) ease-in-out}
+.kcf-act .kcf-c{will-change:transform}.kcf-act .kcf-f{will-change:filter}   /* promoted only while the scene runs (removed at the final still / close) */
 .kcf-c span.md.kfc.kfc.kfc.kfc{width:100%!important;display:block}
-.kcf-c.kcf-grey{filter:grayscale(1) sepia(.1) saturate(.96) brightness(.62) drop-shadow(2px 3px 2px #0006)}
+.kcf-c.kcf-grey>.kcf-f{filter:grayscale(1) sepia(.1) saturate(.96) brightness(.62) drop-shadow(2px 3px 2px #0006)}
 .kcf-c.kcf-gone{display:none}
-.kcf-dim .kcf-c:not(.kcf-pick){filter:grayscale(0) sepia(.2) saturate(.96) brightness(.42) drop-shadow(2px 3px 2px #0006)}
-.kcf-c.kcf-pick{z-index:5;filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light = the whole frame glowing (.kcf-halo, edgeLight, KIT §67), never a running light and never over the portrait */
+.kcf-dim .kcf-c:not(.kcf-pick)>.kcf-f{filter:grayscale(0) sepia(.2) saturate(.96) brightness(.42) drop-shadow(2px 3px 2px #0006)}
+.kcf-c.kcf-pick{z-index:5}.kcf-c.kcf-pick>.kcf-f{filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light = the whole frame glowing (.kcf-halo, edgeLight, KIT §67), never a running light and never over the portrait */
 .kcf-halo{position:fixed;z-index:6;pointer-events:none;border:3px solid #fff0b8f0;box-shadow:0 0 calc(var(--hb)*.45) calc(var(--hs)*.7) #fff6cc,0 0 var(--hb) var(--hs) #ffd877f2,0 0 calc(var(--hb)*2.2) calc(var(--hs)*1.6) #ffb23fb0,0 0 calc(var(--hb)*4) calc(var(--hs)*2) #ff9a2e55;opacity:var(--ho,1)}
 .kcf-halo.kcf-breath{animation:kcfBreath var(--hd,3600ms) ease-in-out infinite}
 @keyframes kcfBreath{0%,100%{opacity:var(--hl,.62)}50%{opacity:var(--ho,.9)}}
@@ -35540,7 +35557,8 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-pts{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
 .kcf-pt{position:absolute;top:-8%;left:var(--x);width:calc(26px*var(--s));height:auto;opacity:0;animation:kcfFall calc(3.2s*var(--kcf-s,1)) linear var(--d) forwards}
 @keyframes kcfFall{0%{opacity:0;transform:translate(0,0) rotate(var(--r))}10%{opacity:.95}100%{opacity:0;transform:translate(var(--w),112vh) rotate(calc(var(--r) + 300deg))}}
-.kcf.kcf-fin .kcf-c{transition:none}
+.kcf.kcf-fin .kcf-c,.kcf.kcf-fin .kcf-f{transition:none}
+.kcf-grey .kcf-tag,.kcf-dim .kcf-c:not(.kcf-pick) .kcf-tag{opacity:.72}
 .kcf.km-red *{animation:none!important;transition:none!important}
 .kcf.km-red .kcf-res{opacity:1}
 
@@ -35737,6 +35755,15 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const marks=(s.marks||[]).map(m=>rectOf(m)).filter(Boolean).map(m=>clip(m,3));
  const key=[vw,vh,r?[r.left,r.top,r.width,r.height].map(Math.round).join(","):"-",marks.map(m=>[m.left,m.top,m.width].map(Math.round).join(",")).join(";"),card.offsetHeight].join("|");
  if(!force&&key===LAST)return;LAST=key;
+ /* the card keeps the ONE kit frame size (OD:L963); when it fits on no side of the target, the lit hole shrinks to the part of the target that still leaves the card a free side (the target stays tappable there: a card/row is tapped anywhere on it). Only a tap step does this: a look-at step keeps its whole hole (the card then lies where it covers least) */
+ if(r&&s.interact){const cw0=card.offsetWidth,ch0=card.offsetHeight,g0=12,M0=8;
+  const fits=r.bottom+g0+ch0<=vh-M0||r.top-g0-ch0>=M0||r.right+g0+cw0<=vw-M0||r.left-g0-cw0>=M0;
+  if(!fits){const O=[];const mk=(l,t,rr,b)=>{if(rr-l>=56&&b-t>=56)O.push({left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t})};
+   mk(r.left,r.top,r.right,Math.min(r.bottom,vh-M0-g0-ch0));/* card below */
+   mk(r.left,Math.max(r.top,M0+ch0+g0),r.right,r.bottom);/* card above */
+   mk(Math.max(r.left,M0+cw0+g0),r.top,r.right,r.bottom);/* card at the left */
+   mk(r.left,r.top,Math.min(r.right,vw-M0-g0-cw0),r.bottom);/* card at the right */
+   O.sort((a,b)=>b.width*b.height-a.width*a.height);if(O[0])r=O[0]}}
  const D=R0.querySelector(".ktut-dim");
  if(r){if(D)D.remove();hole.hidden=false;Object.assign(hole.style,{left:r.left+"px",top:r.top+"px",width:r.width+"px",height:r.height+"px"})}
  else{hole.hidden=true;if(!R0.querySelector(".ktut-dim"))R0.insertAdjacentHTML("afterbegin",`<div class="ktut-dim"></div>`)}
@@ -35744,19 +35771,20 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const B=R0.querySelector(".ktut-blks");
  B.innerHTML=s.interact&&r?blk(0,0,vw,r.top)+blk(0,r.bottom,vw,vh-r.bottom)+blk(0,r.top,r.left,r.height)+blk(r.right,r.top,vw-r.right,r.height):blk(0,0,vw,vh);
  R0.querySelector(".ktut-marks").innerHTML=marks.map(m=>`<div class="ktut-mark" style="left:${m.left}px;top:${m.top}px;width:${m.width}px;height:${m.height}px"></div>`).join("");
- /* card: below, above, right, left of the target; a target too big for any of these: the card lies at its lower edge (never for a tap step) */
+ /* card: ONE frame size per viewport (owner OD:L963), placed by POSITION only: below, above, right or left of the target where it fits whole (the step's preferred side first). When it fits on no side the card goes to the screen corner/edge that covers the LEAST of the hole (the frame is never shrunk); a step with no hole is centred */
+ card.style.removeProperty("--kph");card.style.removeProperty("--kpw");
  const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8;let L,Tp;
  if(!r){L=(vw-cw)/2;Tp=Math.max(M,(vh-ch)/2)}
- else{const cx=r.left+r.width/2,cy=r.top+r.height/2;const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
-  const C=[];if(r.bottom+g+ch<=vh-M)C.push([hx,r.bottom+g,vh-M-r.bottom-g-ch]);if(r.top-g-ch>=M)C.push([hx,r.top-g-ch,r.top-g-ch-M]);
-  if(r.right+g+cw<=vw-M)C.push([r.right+g,hy,1e3]);if(r.left-g-cw>=M)C.push([r.left-g-cw,hy,1e3]);
-  const pref=s.side==="above"?[1,0]:[0,1];
-  let c=null;if(C.length){/* the side the step prefers when it fits, else the roomiest */c=C.find(x=>x[1]===(s.side==="above"?r.top-g-ch:r.bottom+g))||C.sort((a,b)=>b[2]-a[2])[0]}
-  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): the card keeps its ONE frame size (owner 16/11, OD:L963) and lies at the free edge on the wider side; the rest of the target stays tappable */
-   const sl=r.left-g-M,sr=vw-r.right-g-M;L=sl>=sr?M:vw-cw-M;Tp=Math.min(Math.max(M,cy-ch/2),vh-ch-M);c=[L,Tp]}
-  if(c){L=c[0];Tp=c[1]}
-  else{/* too big: inside the target at its bottom (above the tab bar), or at the screen's free edge for a tap step */
-   L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}
+ else{const cx=r.left+r.width/2,cy=r.top+r.height/2;
+  const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
+  const C=[];if(r.bottom+g+ch<=vh-M)C.push(["below",hx,r.bottom+g]);if(r.top-g-ch>=M)C.push(["above",hx,r.top-g-ch]);
+  if(r.right+g+cw<=vw-M)C.push(["right",r.right+g,hy]);if(r.left-g-cw>=M)C.push(["left",r.left-g-cw,hy]);
+  const want=s.side==="above"?"above":"below";
+  const c=C.find(x=>x[0]===want)||C.find(x=>x[0]==="below"||x[0]==="above")||C[0];
+  if(c){L=c[1];Tp=c[2]}
+  else{/* no side fits the whole card: the position that covers the least of the hole */
+   const ov=(l,t)=>Math.max(0,Math.min(l+cw,r.right)-Math.max(l,r.left))*Math.max(0,Math.min(t+ch,r.bottom)-Math.max(t,r.top));
+   const P=[[M,M],[vw-cw-M,M],[M,vh-ch-M],[vw-cw-M,vh-ch-M],[hx,M],[hx,vh-ch-M],[M,hy],[vw-cw-M,hy]].map(x=>[x[0],x[1],ov(x[0],x[1])]).sort((a,b)=>a[2]-b[2]);L=P[0][0];Tp=P[0][1]}}
  card.style.left=Math.round(Math.max(M,Math.min(L,vw-cw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-ch-M)))+"px"}
 addEventListener("resize",()=>{LAST="";if(CUR){place(true);clearTimeout(T.rz);T.rz=setTimeout(()=>{try{if(T.on&&STEPS[T.step]&&STEPS[T.step].prep)STEPS[T.step].prep(true)}catch(e){}LAST="";place(true)},350)}if(T.tip)tipPlace()});
 addEventListener("orientationchange",()=>{LAST="";setTimeout(()=>{if(CUR)place(true);if(T.tip)tipPlace()},250)});
@@ -41441,7 +41469,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7af10c68a098";window.CTM_BUILD=BUILD;
+const BUILD="43d0bcff353e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
