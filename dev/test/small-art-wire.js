@@ -12,7 +12,7 @@ const boot=async(p,u,srv)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout
 const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});
 (async()=>{const b=await chromium.launch();const errs=[],T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slice(0,220)]);
  for(const [si,SZ] of SIZES.entries()){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(Number);
-  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();
+  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene now waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();
   p.on('pageerror',e=>errs.push(SZ+' '+e.message.slice(0,200)));p.setDefaultTimeout(0);await boot(p,URL);
   if(si===0){
    const keys=await p.evaluate(()=>{const K=['hoatai','hoataivang','giayhoa','giaygam'];for(let r=0;r<8;r++)K.push('ngocboi_r'+r);for(let r=1;r<5;r++)K.push('vongngoc_r'+r);for(let r=1;r<8;r++)K.push('tuithom_r'+r);

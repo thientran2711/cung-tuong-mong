@@ -2,7 +2,7 @@
    "Đi làm" goes to Hành sự. Three states: milestone (new life), arc chapter, old v1 save (Báo thù cho nhà).
    usage: NODE_PATH=$(npm root -g) node dev/test/chapter-detail.js <url> [WxH] [shot-prefix]   exit 1 on a failed check */
 const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(process.env.DPR||1),serviceWorkers:'block'});const p=await ctx.newPage();
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(process.env.DPR||1),serviceWorkers:'block'});await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene now waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
