@@ -84,6 +84,24 @@ Totals: before CONFORMS 43 · MIXED 8 · CUSTOM 1 · floats 2 (retired #kctm str
 - review/pcard-actrow owns the person-card act rows and the gift "Chí tôn" list.
 - review/coop-night-sync works in co-op sync logic; here only the display (jcooptimer paint / friend panel) changed.
 
-## Batch 2 queue
-Title menu (`#title .tbox`, p1.html), save / co-op slot cards (jslots, jcooplobby rooms column), the shop detail sheet `.kshdc` (jinv),
-mini-game frame and week book stay exempt (§13 / §27). Each: list → template → convert in the kit part only.
+
+## Batch 2 (on review/goal-strip-fix-r1 a363cc14a6 + main eba64ead4)
+Title menu and slot cards were dropped from this batch because review/kpanel-compact rebuilt them (coordinator 16/11).
+Scan additions (dev/test/kit-conform.js):
+- (b) PERSON OPTION rule: an option that names a person must show that person's portrait. A generic act or event picture there is flagged MIXED. KIT §8.2 has the note.
+- (c) New cases: outer court (menNtCard), Tranh ghế (contestOpen), lãnh cung, co-op lobby, place greeting and night cards with fallbacks, and up to 25 dialogs from a servant life.
+- A size whose page crashes is now reported as CRASH, and the scan moves on to the next size.
+
+| Size | CONFORMS | MIXED | CUSTOM | floats | MIXED cases (all "generic picture on a person option") |
+|---|---|---|---|---|---|
+| 755x1000 | 74 | 6 | 0 | 0 | PEND evpick, plantsv, j70thr, night2; SRV evpick, plantsv |
+| 1180x820 | 74 | 6 | 0 | 0 | PEND evpick, plantsv, j70thr; SRV evpick, plantsv, night2 |
+| 844x390 | 76 | 5 | 0 | 0 | PEND evpick, plantsv, j70thr; SRV evpick, plantsv |
+| 1000x755 | 76 | 5 | 0 | 0 | same as 844x390 |
+| 1366x1024 | 73 | 5 | 0 | 0 | same as 844x390 |
+
+- These cases pass at every size: outer court (T2), co-op lobby (T1), place greeting and night cards (T2), item card (T2), chapter detail (T2).
+- Every remaining MIXED case is a person option with a generic picture. That fix belongs to review/pcard-actrow (person pick rows and portraits), so it is not fixed here.
+- Not reached: contestOpen needs her to be a candidate, and the lãnh cung card needs a real banishment. Each run of the scan rolls a new random life, so neither state can be counted on. Reaching them needs a fixed save; that is still to do.
+- JSON results: dev/review/kit-conform-b2-<size>.json.
+- 1180x820 crashed once ("Target crashed"); a rerun passed. Over 100 other Chrome processes share this machine.
