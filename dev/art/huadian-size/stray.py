@@ -11,7 +11,7 @@ def run(win,fw,path):
     mask=np.zeros((H,W),np.uint8); mask[R[1]:R[3],R[0]:R[2]]=1
     # exclude the mark itself (its window, grown slightly)
     mask[max(y0-2,0):y1+2,max(x0-2,0):x1+2]=0
-    cand=((diff>9)&(mask>0)).astype(np.uint8)
+    cand=((diff>int(os.environ.get('THR','9')))&(mask>0)).astype(np.uint8)
     n,lab,st,_=cv2.connectedComponentsWithStats(cand,8); keep=np.zeros_like(cand)
     for i in range(1,n):
         x,y,w,h,ar=st[i]

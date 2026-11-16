@@ -17,3 +17,8 @@ Batch (after approval) would need: per-image box check (brows inside the box get
 ## Sample 2 (owner: 0.07 too small)
 huadian-sample-sheet-2.jpg (sheet2.py) = same 6 faces, BEFORE | 0.10 | 0.09 | 0.08, marks already <= the size left untouched.
 CDN: https://ctm-img.victoria-tntt.workers.dev/img/huadian-sample-sheet-2.jpg. Waiting for the owner to pick one size; no batch.
+
+## r6 (art worker #4, 16/11): aged por finish
+Tools: r6_sheet.py (before/after forehead sheet from a runswap/runpor log), r6_collateral.py (changes outside the mark window), rectfix.py (old light cover rectangle: pull box edges to the surrounding skin), inrect.py (inpaint explicit rects; the pendant dots at aged ages were removed with by-eye rects after stray.py), stray.py now has THR env (diff threshold).
+runpor.py/locate.py understand ty1-8 names via ty_boxes.json (a18 boxes from hmeas.detect; 87 are fallbacks). TYBOX=1 (tight window) was tried and is BAD (dark blobs/smears where the box is wrong): do not batch ty, check per file.
+ty_meas.json = hmeas ratio per a18 ty file (width/fw, h/fw, [x,y]); r6_names72.txt = the 72 por fixed; r6_skipped19.txt = the skipped por (all looked at: already small, left untouched).

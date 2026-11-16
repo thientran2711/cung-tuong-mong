@@ -6,6 +6,7 @@ sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from face import comp
 D=os.path.dirname(os.path.abspath(__file__))
 REF=json.load(open(D+'/ref.json')); BOX=json.load(open(D+'/a18_boxes.json'))
+if os.path.exists(D+'/ty_boxes.json'): BOX.update(json.load(open(D+'/ty_boxes.json')))
 def gray(p): return cv2.cvtColor(comp(Image.open(p)),cv2.COLOR_RGB2GRAY)
 def locate(a18path,tpath,name18):
     pid=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)',name18).group(1); cx0,ey0,fw0=REF[pid]; b=BOX[name18]
