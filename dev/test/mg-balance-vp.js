@@ -61,7 +61,8 @@ const BOTS_SRC=(BOT)=>{
  /* old save on the previous build */
  {const ctx=await b.newContext();const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(OLD,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:120000,polling:300});await p.waitForTimeout(2000);
-  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;S.arts.thi=3;S.arts.cam=2;S.mgSeen={dan:1};quiet=false;try{NLP=false}catch(e){}save()});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});/* review/mg-tune: start() can build S a moment later on a cold cache */await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.arts,null,{timeout:30000,polling:100});
+  await p.evaluate(()=>{Q.length=0;S.arts.thi=3;S.arts.cam=2;S.mgSeen={dan:1};quiet=false;try{NLP=false}catch(e){}save()});
   var oldSave=await p.evaluate(()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return o});
   out.push({old:true,keys:Object.keys(oldSave).length,errs});await ctx.close()}
  for(const SZ of SIZES){const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
