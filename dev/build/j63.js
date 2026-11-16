@@ -167,8 +167,8 @@ button.ka.kcard .kinfo{display:none}
 .opts:has(> button.ka){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));grid-auto-rows:1fr;gap:6px;align-items:stretch}
 .rbtn:has(> button.ka){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-auto-rows:1fr;gap:6px;align-items:stretch}
 .opts>button.ka,.pcb>button.ka,.cards>button.ka,.rbtn>button.ka{height:auto!important;min-height:100%!important}
-@media (max-width:1199px){.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media (max-width:599px){button.ka small.kb{grid-template-columns:3.3rem minmax(0,1fr)}.cards:has(> button.ka){grid-template-columns:1fr!important}.pcb:has(> button.ka){grid-template-columns:1fr!important}.opts:has(> button.ka),.rbtn:has(> button.ka){grid-template-columns:1fr!important}button.ka{padding:6px 8px 7px!important}}
+/* kv:(max-width:1199px) */.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/HỎNG | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đầy đủ ở Nhật ký" =================
    Built from REAL deltas (snapshot before → now), never from the option preview: no ranges, no "có thể"; two-way relations merged into one plain phrase. */
