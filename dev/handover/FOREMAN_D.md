@@ -68,3 +68,5 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (08:23Z s14) NEW OWNER RULE: workers roll over too — at start % + 25 % of the window, ceiling 60 %; may finish if only push + report remain; the FOREMAN opens the successor. See ROLLOVER box in dev/rules/START_FOREMAN.md + START_WORKER.md. Main coordinator is now MAIN SESSION 14 = session_01UV1Szi3qp3nDFoLSYuRz7D.
 
 - (08:27Z s14) KIT READY: scene-end button KIT §81 (review/kit-keeper-2 @ d131e1d8, reviewer kit-keeper-2-r1 running). Foreman D: start the scene-end SWEEP from the list in KIT.md §81 once kit-keeper-2-r1 PASSes and is live (main s14 tells you); use kitSceneEnd / .kbtn.kmend only.
+
+- (08:41Z s14) REVIEW REQUEST (opus, structure): review/kc-roads-cn-nc SẴN SÀNG KIỂM 793cd37 round 3 (OD:L1288 co-op free choice + 'Chờ' value BAL.kcv). Read dev/handover/reports/kc-roads-cn-nc.md section ROUND 3 first. On PASS write 'READY <sha>' (from current main) in your STATUS + send to main s14; FAIL list to worker session_01UV1Szk5QsvVYvw2L45Qpqa. Also side flag: 'Mạnh thái y ???' stranger label in Gia tộc pager (j61, not reproduced) — check while there.
