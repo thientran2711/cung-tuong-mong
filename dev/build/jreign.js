@@ -229,7 +229,7 @@ function rgCanSwitch(){const r=rgMe();if(!rgSideNow())return "chưa theo phe nà
  const left=(r.swT!=null?r.swT:(r.sideT||-99))+BAL.rg.swCd-S.turn;if(left>0)return `mới chọn phe, đợi ${left} tháng`;if(Q.length)return "đang có việc chờ";return ""}
 function rgSwitchOpen(){if(rgCanSwitch()||!rgOn())return;const s=rgSideNow();
  const O=rgJoinOpts(false).map(o=>({n:"Đổi phe: "+o.n.charAt(0).toLowerCase()+o.n.slice(1),fx:{},j67:`tốn: Danh -${BAL.rg.swDanh} · kèm: <span class="r">phe ${rgSideN(s)} thành kẻ thù, phe mới chưa tin ngươi</span>`,go:()=>{const t=rgJoin(o.join,false,1);log(`Phụ tuyến · ${RGT} · Đổi phe: ${t}`);render()}}));
- O.push({n:"Thôi",fx:{}});pushModal({t:`Phụ tuyến · ${RGT} · Đổi phe`,who:pMe(),h:`<p>Ngươi đang ${rgSideTag(s)}. Đổi phe thì phe cũ thành kẻ thù, Danh giảm, phe mới phải lấy lòng lại từ đầu.</p>`,opts:O,ev:1});showModal()}
+ O.push({n:"Thôi",fx:{}});pushModal({t:`Phụ tuyến · ${RGT} · Đổi phe`,who:pMe(),h:`<p>Ngươi đang ${rgSideTag(s)}. Đổi phe thì phe cũ thành kẻ thù, Danh giảm, phe mới phải lấy lòng lại từ đầu.</p>`,opts:O,act:1});showModal()}
 /* outcome effects on the court (host computes; personal effects per player) */
 function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,10);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
 function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=Math.max(0,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
@@ -397,7 +397,7 @@ function rgGoalHTML(){const L=rgL();const R=[];let n=0;
   rows67([["Cách đi","Mỗi người có một tâm nguyện. Họ sẽ tự tìm đến nhờ ngươi từng việc (mục Việc nhờ). Giúp trọn ba việc thì tâm nguyện thành."]])+rows67(R)}
 (function(){if(typeof ktStoryHTML!=="function"||typeof kitSubTabs!=="function")return;const k0=kitSubTabs;
  kitSubTabs=function(key,list){if(key==="story"&&S&&S.ps&&S.reign&&!list.some(x=>x.k==="rg")){list=list.concat([{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}])}return k0.call(this,key,list)};
- const h0=ktStoryHTML;ktStoryHTML=function(){if(S&&S.ps&&S.reign){const L=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:""},{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}];
+ const h0=ktStoryHTML;ktStoryHTML=function(){if(S&&S.ps&&S.reign){const L=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(((S.st&&S.st.ch&&S.st.ch.past)||[]).length+(S.r97||[]).length)},{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}];
    const cur=ktSubGet("story",L);if(cur==="rg"||cur==="rgl"){const sub=kitSubTabs("story",L.slice(0,3));return sub.html+(cur==="rg"?rgPaneHTML():rgGoalHTML())}}return h0.apply(this,arguments)}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rgsw]");if(!b||b.disabled)return;e.stopPropagation();try{rgSwitchOpen()}catch(x){console.error(x)}},true);
 /* co-op: the guest's own S.reign is personal; the court (S.trieu.rg) comes from the host's world */

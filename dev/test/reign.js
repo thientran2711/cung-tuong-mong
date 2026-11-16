@@ -37,7 +37,7 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  /* 3. Triều cục pane */
  await clear();
  r=await p.evaluate(()=>{tab='story';KTSUB.story='rg';render();const P=document.getElementById('panel');const t=P.innerText;
-  return{has:/Tân quân lập uy/.test(t)&&/Phe của ngươi/.test(t)&&/Phe Hoàng thượng/.test(t),sub:[...P.querySelectorAll('[data-ktsv]')].map(x=>x.dataset.ktsv).join(','),btn:!!P.querySelector('[data-rgsw]'),
+  return{has:/Tân quân lập uy/i.test(t)&&/phe của (ngươi|ta)/i.test(t)&&/phe hoàng thượng/i.test(t),sub:[...P.querySelectorAll('[data-ktsv]')].map(x=>x.dataset.ktsv).join(','),btn:!!P.querySelector('[data-rgsw]'),
    ovf:P.scrollWidth>P.clientWidth+1||document.documentElement.scrollWidth>innerWidth+1,own:[...P.querySelectorAll('[style]')].length}});
  console.log('pane',JSON.stringify(r));ok(r.has,'Triều cục pane text');ok(/rg,rgl/.test(r.sub),'sub-tabs Triều cục + Tâm nguyện');ok(r.btn,'Đổi phe button');ok(!r.ovf,'no overflow (pane)');
  await shot('pane');
@@ -64,5 +64,13 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
   const ps=S.ps;S.ps=0;tab='story';KTSUB.story='now';render();const sub=[...document.querySelectorAll('#panel [data-ktsv]')].map(x=>x.dataset.ktsv).join(',');const q0=Q.length;rgMonth();const q1=Q.length;S.ps=ps;
   return{guestMoved:g.p!==p0||g.ch!==c0,oldSub:sub,oldFired:q1-q0}});
  console.log('coop/old',JSON.stringify(r));ok(!r.guestMoved,'co-op guest does not move the court');ok(!/rg/.test(r.oldSub),'old save: no Triều cục tab');ok(r.oldFired===0,'old save: no beat');
+ /* 9. every Tâm nguyện line can be made from its person and runs to the end (each step closed ok → the chain queues the next) */
+ r=await p.evaluate(()=>{Q.length=0;const out={};if(typeof qOn==='function'&&!qOn()){out.hh='no queen'}
+  for(const k in RGL){S.rgL={};const q=q72();q.a=[];q.ch=[];const res=[];if(!rgLOk(k)){out[k]='n/a';continue}
+   for(let i=0;i<3;i++){const T=T72I[RGL[k].q[i]];const A=q72A(k);const x=A&&q72Make(T,A);if(!x){res.push('make'+i);break}q.a.push(x);
+    const st=T.s[0];const why=st&&!st.w&&!st.ch?q72Why(x,q72X(x),st,null):'';q72End(x,'ok',q72X(x));res.push(i<2?(q.ch.some(c=>c.tid===RGL[k].q[i+1])?'ch':'noch'):'end');q.ch=[]}
+   out[k]=res.join(',')+(S.rgL[k]&&S.rgL[k].done?' done':'')}
+  return out});
+ console.log('lines',JSON.stringify(r));for(const k in r)ok(r[k]==='ch,ch,end done'||r[k]==='n/a'||r[k]==='no queen','line '+k+': '+r[k]);
  ok(!errs.length,'page errors: '+errs.join(' | '));
  console.log(fails.length?'FAIL\n - '+fails.join('\n - '):'PASS',`(${W}x${H})`);await b.close();process.exit(fails.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

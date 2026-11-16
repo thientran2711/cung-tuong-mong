@@ -95,6 +95,6 @@ Object.assign(BAL,{itd:{allow:false}});
    winner emp Sủng +winSung×(.5+tr/100), Danh +winDanh, +1 rank below rankCap; th Thái hậu +winTh×k, che chở winShield months;
    quyen Bạc bacWin×rank price×k, Tai mắt +1; losers mirror (loseSung / loseTh / loseDanh). Houses: loseHouse / winHouse.
    Tâm nguyện lines: a line start every lnCd months, a failed step retried after lnRetry months. */
-Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,drift:.55,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:45,B:60,thK:.6,pk:1,pkQ:1,tr0:30,
- swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:45,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
+Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,drift:.48,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.38,pkQ:1.65,tr0:30,
+ swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
