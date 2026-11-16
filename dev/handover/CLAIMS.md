@@ -175,7 +175,7 @@
 | rank-bright: owner 13:00Z rank colours brighter, kit-wide one source | review/rank-bright | main s16 | session_01UV1Szjy1fRcDbAZ3q7jF9p (sonnet) | RUNNING | 16/11 12:53Z |
 | mg-balance reviewer (opus) | review/mg-balance-r1 | B | session_01N1tNP2U5AHvsMDtXGkvaLK (opus) | DONE PASS 288aa4f6 (archived) | 16/11 12:55Z |
 | D13 spread-events fix pass (opus): Q-length gates inside the buổi change (j70/j68/j72/jpet/jkc) | review/spread-events-r2 | B | session_01N1tNP2tutKGRiVqfsdERwB (opus) | DONE SẴN SÀNG KIỂM ee684b8d (archived) | 16/11 12:55Z |
-| mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | session_01N1tNP4L7Uvc92DNAw2B9G7 (opus) | RUNNING | 16/11 12:55Z |
+| mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | session_01N1tNP4L7Uvc92DNAw2B9G7 (opus) | DONE SẴN SÀNG KIỂM b011cf71 (archived) | 16/11 12:55Z |
 | owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | session_01N1tNP3XJQSsGp1Vgi9GXaP (sonnet) | DONE SẴN SÀNG KIỂM 011beb29 (archived) | 16/11 12:55Z |
 | coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | session_01DgYSWn4KTZXiGjQcE6uwsQ | RUNNING | 16/11 12:58Z |
 | D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | session_01DgYSWoy8UWVPrve6HEjZfR | RUNNING | 16/11 12:58Z |
@@ -217,3 +217,4 @@
 | tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | session_01UV1SzhYN2Ensucb2ZqjeRX (sonnet) | RUNNING | 16/11 14:02Z |
 | history-thitam expert (sonnet): lật thẻ bài / mùng 1 & rằm / ngự giá — history, dramas, games → rule proposal | (report only) | main s17 | session_01UV1Szgg8KB5ye6NWizPmHd | RUNNING | 16/11 14:03Z |
 | D13 spread-events-r2 reviewer (opus) | review/spread-events-r3 | B | session_01N1tNP3wvFLuxbHBhMw3hMx | RUNNING | 16/11 14:05Z |
+| mg-balance-2 reviewer (opus) | review/mg-balance-2-r1 | B | (opening, Foreman B s5) | RUNNING | 16/11 14:10Z |
