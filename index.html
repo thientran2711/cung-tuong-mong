@@ -16062,8 +16062,10 @@ Object.assign(BAL,{reveal:{shake:420,pause:700,rise:550,hold:1300,shelf:380,list
 /* TRUE EVIDENCE (jtruth, owner 15/11): a spy who finds no wrong learns her habits instead: +spyKnowB on the next scheme against her for
    spyKnowW weeks. Frame defence (the framed one clears herself): clearBase + Tai mắt × clearMat, + ksB with a Kính sự phòng night in the
    last ksW weeks, + wB a loyal (≥60) maid as witness, + tyB Thái y (own doctor or Y thuật ≥3), + evB per evidence (max 2) on the framer;
-   kept within clearMin..clearMax. An exposed framer loses fDanh Danh and fDuc Đức and is punished (sev 2), same for everyone. */
-Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ksB:25,wB:15,tyB:20,evB:10,clearMin:10,clearMax:85,fDuc:8,fDanh:15,frameW:1}});
+   kept within clearMin..clearMax. An exposed framer loses fDanh Danh and fDuc Đức and is punished (sev 2), same for everyone.
+   Frame rate (reviewer r1): frameW = Vu oan/Cài đồ weight × when she holds no proof to accuse; frameW1 = Vu oan weight added at grudge
+   band "nhỏ"; npcFrameP = % per tuần that a consort with malice ≥ npcFrameMal frames a more favoured rival (NPC-vs-NPC). */
+Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ksB:25,wB:15,tyB:20,evB:10,clearMin:10,clearMax:85,fDuc:8,fDanh:15,frameW:1.5,frameW1:1.5,npcFrameP:7,npcFrameMal:40}});
 /* CO-OP BUỔI CLOCK (KIT §69, dev/build/jcooptimer.js, owner 15/11 ~21:25Z), ms. buoiMs = the longest a co-op buổi lasts (owner 23:10Z: 5 phút; the host picks 3 / 5 / 8 = lens, minutes, in the lobby) (both "Sẵn sàng"
    ends it sooner) · pauseCapMs = the most the clock may stand still in one buổi while a player is in a mini game or a dialog ·
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
@@ -29500,12 +29502,14 @@ function spyFind(a,t,verb){verb=verb||"dò la";const d0=deedFor(a,t);const n=evA
  spyKnow(a,t);const h=harmTxt(t);return `${NMc(a)} ${verb} ${NM(t)}: không tìm ra điều gì sai trái; chỉ biết ${h}. `}
 
 /* ---------- 3. frames: the victim's defence ---------- */
-function frameDef(p,a){const T=BAL.truth;let o=T.clearBase+(p.mat||0)*T.clearMat;const L=[];
- if((p.nightLog||[]).some(w=>wk()-w<=T.ksW)){o+=T.ksB;L.push("sổ Kính sự phòng ghi đêm ấy nàng hầu Hoàng thượng")}
- if(p.maid&&(p.maid.loyal||0)>=60){o+=T.wB;L.push(`cung nữ ${p.maid.name} làm chứng nàng không rời cung`)}
- if(p.doctor||((p.arts&&p.arts.y)||0)>=3){o+=T.tyB;L.push("Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung nàng")}
- const e=evG(p,a);if(e>0){o+=Math.min(e,2)*T.evB;L.push(`nàng trình chứng cứ về ${a.name}`)}
- return {o:cl(Math.round(o),T.clearMin,T.clearMax),how:L[0]||"Cung Chính ti tra hỏi người ra vào"}}
+function frameDef(p,a){const T=BAL.truth;const base=T.clearBase+(p.mat||0)*T.clearMat;const C=[];const W=p===S?"ngươi":"nàng";
+ /* one road, the best she has: the player also picks ONE road in PEND.vuoan (reviewer r1: NPC bonuses used to stack to 85 every time) */
+ if((p.nightLog||[]).some(w=>wk()-w<=T.ksW))C.push({o:base+T.ksB,how:`sổ Kính sự phòng ghi đêm ấy ${W} hầu Hoàng thượng`});
+ else C.push({o:base-10,how:"Cung Chính ti tra hỏi người ra vào"});
+ if(p.maid&&(p.maid.loyal||0)>=60)C.push({o:base+T.wB,how:`cung nữ ${p.maid.name} làm chứng ${W} không rời cung`});
+ if(p.doctor||((p.arts&&p.arts.y)||0)>=3)C.push({o:base+T.tyB,how:`Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ${W}`});
+ if(evG(p,a)>0)C.push({o:base+T.evB*2+10,how:`${W} trình chứng cứ về ${a.name}`});
+ const D=C.sort((x,y)=>y.o-x.o)[0];return {o:cl(Math.round(D.o),T.clearMin,T.clearMax),how:D.how}}
 /* the framer exposed: same for everyone */
 function frameExpose(a,p,how){const T=BAL.truth;ap(a,{danh:-T.fDanh});if(typeof ducAdd==="function")ducAdd(a,-T.fDuc,"vu khống người khác");else ap(a,{duc:-T.fDuc});
  relAdd(a,p,-20);evA(p,a,2);punish(a,`vu khống ${p===S?"ngươi":p.name}`,2);
@@ -29516,7 +29520,8 @@ let FRAME_LAST="";
  const D=frameDef(p,a);try{window.__frames=(window.__frames||0)+1;if(p===S)window.__framesMe=(window.__framesMe||0)+1}catch(e){}
  if(roll(D.o)){FRAME_LAST=frameExpose(a,p,D.how);try{window.__framesClear=(window.__framesClear||0)+1;if(p===S)window.__framesMeClear=(window.__framesMeClear||0)+1}catch(e){}return 0}
  return f0.apply(this,arguments)}})();
-/* the player's side: she picks a defence; the card shows only its cost, the result card tells the truth (as PEND.wdframe) */
+/* the player's side: she picks a defence; each card shows its cost and its odds word (reviewer r1: the roads differ only in odds, so the
+   VANPHONG ladder word is what makes the choice readable); the result card tells the truth */
 PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;const why=pp.why||"bị vu dùng bùa ngải";const base=T.clearBase+(S.mat||0)*T.clearMat;
  const ks=(S.nightLog||[]).some(w=>wk()-w<=T.ksW);const wit=S.maid&&(S.maid.loyal||0)>=60;const ty=S.doctor||((S.arts&&S.arts.y)||0)>=3;const ev=evG(S,a);
  const clamp=x=>cl(Math.round(x),T.clearMin,T.clearMax);
@@ -29529,10 +29534,10 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  const go=(o,how)=>()=>{if(roll(clamp(o)))clear(how);else guilty(false)};
  const H="minh oan được thì kẻ vu oan bị lộ, bị phạt; hỏng thì ngươi mang tội: mất Danh, Sủng, bị phạt",RK="có rủi ro";
  const O=[];
- O.push({n:"Xin tra sổ Kính sự phòng",fx:{},hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
- if(wit)O.push({n:`Gọi ${S.maid.name} làm chứng`,fx:{},hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)});
- if(ty)O.push({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:H,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")});
- if(ev>=1)O.push({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:H,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}});
+ O.push({n:"Xin tra sổ Kính sự phòng",fx:{},hint:`${word(clamp(base+(ks?T.ksB:-10)))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
+ if(wit)O.push({n:`Gọi ${S.maid.name} làm chứng`,fx:{},hint:`${word(clamp(base+T.wB))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)});
+ if(ty)O.push({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:`${word(clamp(base+T.tyB))} · ${H}`,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")});
+ if(ev>=1)O.push({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:`${word(clamp(base+T.evB*2+10))} · ${H}`,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}});
  O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:`<p>Cung Chính ti khám tẩm cung ngươi, tìm thấy hình nhân bùa ngải. Có kẻ tố ngươi ${why.replace(/^bị vu /,"")}.</p><p class="past">Ngươi không làm việc ấy. Chọn cách minh oan.</p>`,o:O,who:pv(a)}};
 
@@ -29552,10 +29557,22 @@ function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.sto
 (function(){if(typeof wdFrameResolve!=="function")return;const w0=wdFrameResolve;wdFrameResolve=function(a,t){const r=w0.apply(this,arguments);try{if(r||t===S){window.__frames=(window.__frames||0)+1;if(t===S)window.__framesMe=(window.__framesMe||0)+1;
  if(/minh oan được|không thấy gì|không thành/.test(r||"")){window.__framesClear=(window.__framesClear||0)+1;if(t===S)window.__framesMeClear=(window.__framesMeClear||0)+1}}}catch(e){}return r}})();
 /* ---------- 5. frames are the schemer's road against a clean rival (reviewer r1, owner 16/11 "không lần nào cũng minh oan được thì chán chết") ----------
-   With true evidence only, a schemer who holds no proof on her target cannot Tố giác her (accOK); she fabricates instead: the weight of
-   Vu oan / Cài đồ in her scheme menu (j40 mindMenu) × BAL.truth.frameW. Same rule for every consort, the player as target or not. */
+   With true evidence only, a schemer who holds no proof on her target cannot Tố giác her (accOK); she fabricates instead. In her scheme
+   menu (j40 mindMenu): Vu oan already allowed (grudge band "nặng") weighs × BAL.truth.frameW; at band "nhỏ" (30–59) Vu oan is added with
+   weight frameW1 (it is a BIG scheme: planned first, so her people may catch the tell). Same rule for every consort and the player.
+   NPC-vs-NPC: consorts' grudges against each other seldom reach the bands, so each tuần with npcFrameP % a malicious consort (malice ≥
+   npcFrameMal, weighted by malice) frames the rival in her way (more favoured or higher rank, weighted by Sủng) through the normal
+   Vu oan act: caught / odds / defence / exposure exactly as for the player. */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const T=BAL.truth;
- if(O.length&&t&&T.frameW!==1&&!accOK(v,t))for(const x of O)if(x[0]==="frame"||x[0]==="plant")x[1]*=T.frameW}catch(e){}return O}})();
+ if(O.length&&t&&ACT.frame&&!accOK(v,t)){let has=false;for(const x of O)if(x[0]==="frame"||x[0]==="plant"){x[1]*=T.frameW;if(x[0]==="frame")has=true}
+  if(!has&&bandOf(danger(v,t))===1&&T.frameW1>0){let ok=false;try{ok=ACT.frame.ok(v,t)}catch(e){}const w=T.frameW1*(typeof persW==="function"?persW(v,"frame"):1);if(ok&&w>0)O.push(["frame",w])}}}catch(e){}return O}})();
+function npcFrame(){const T=BAL.truth;const L=liveRivals(false).filter(v=>v&&v.alive&&!v.out&&!v.coop&&!v.confined);if(L.length<2)return"";
+ const A=L.filter(v=>(v.malice||0)>=T.npcFrameMal&&!v.plan);if(!A.length)return"";const a=wpick(A.map(v=>[v,v.malice||1]));
+ const V=L.filter(t=>t!==a&&!(typeof sameHouse==="function"&&sameHouse(a,t))&&((t.sung||0)>(a.sung||0)||rkOf(t)>rkOf(a))&&!accOK(a,t));if(!V.length)return"";
+ const t=wpick(V.map(x=>[x,Math.max(1,x.sung||0)]));let r="";try{r=runAct(a,t,"frame")||""}catch(e){console.error("npcFrame",e)}
+ try{window.__npcFrameTry=(window.__npcFrameTry||0)+1}catch(e){}return typeof seenNPC==="function"?seenNPC(a,t,r):""}
+(function(){const e0=endTurn;endTurn=function(){const run=S&&!S.dead&&!Q.length&&!S.mg;const r=e0.apply(this,arguments);
+ try{if(run&&S&&!S.dead&&roll(BAL.truth.npcFrameP)){const x=npcFrame();if(x)log(x)}}catch(e){}return r}})();
 
 </script>
 
@@ -29582,7 +29599,7 @@ function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.sto
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="425cb4db9f56";window.CTM_BUILD=BUILD;
+const BUILD="3121724e9e72";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
