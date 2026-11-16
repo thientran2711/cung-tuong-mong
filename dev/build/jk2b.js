@@ -297,7 +297,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
  return{hint:parts.join("; "),risk}}
 /* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
 function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
- const odd=((b.querySelector(":scope > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
+ const odd=((b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
  const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
@@ -307,13 +307,13 @@ function kitRisk(word){const r=KIT_RISK[word]||KIT_RISK["có rủi ro"];return `
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint + risk chip, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
- const od=b.querySelector(":scope > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
+ const od=b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
  if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
-  const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
+  const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
    (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
