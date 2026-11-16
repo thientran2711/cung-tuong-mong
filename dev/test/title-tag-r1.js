@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
  // contrast: day+night stage, glow-aware
  const res=[];for(const bu of [0,3]){await p.evaluate(bu=>{S.place='home';S.buoi=bu;Q.length=0;document.getElementById('modal').hidden=true;render()},bu);await sleep(1800);
   const tags=await p.evaluate(()=>[...document.querySelectorAll('#stage .tag')].filter(g=>g.offsetParent).flatMap(g=>[...g.querySelectorAll('.j59t,.j59n')].map(e=>{const r=e.getBoundingClientRect();const cs=getComputedStyle(e);return{mine:g.classList.contains('j59mine'),line:e.classList.contains('j59t')?'rank':'name',txt:e.textContent,x:r.left,y:r.top,w:r.width,h:r.height,col:cs.color,ts:cs.textShadow.slice(0,60)}})));
-  await p.addStyleTag({content:'.j59t,.j59n{color:transparent!important}'}).then(h=>h.evaluate(e=>e.id='tr'+Date.now()));
-  await p.screenshot({path:`${OUT}/g${bu}.png`});await p.evaluate(()=>document.querySelectorAll('style').forEach(s=>{if(/color:transparent!important/.test(s.textContent)&&s.textContent.length<60)s.remove()}));
-  await p.screenshot({path:`${OUT}/v${bu}.jpg`,type:'jpeg',quality:70});res.push({bu,tags})}
+  await p.addStyleTag({content:'.stage .tag .j59t,.stage .tag .j59n{color:transparent!important;-webkit-text-fill-color:transparent!important}'}).then(h=>h.evaluate(e=>e.id='tr'+Date.now()));
+  await p.screenshot({path:`${OUT}/g${bu}.png`});await p.evaluate(()=>document.querySelectorAll('style').forEach(s=>{if(/color:transparent!important/.test(s.textContent)&&s.textContent.length<120)s.remove()}));
+  await p.screenshot({path:`${OUT}/t${bu}.png`});await p.screenshot({path:`${OUT}/v${bu}.jpg`,type:'jpeg',quality:70});res.push({bu,tags})}
  fs.writeFileSync(`${OUT}/r.json`,JSON.stringify({R,res,errs},null,1));console.log(JSON.stringify({errs}));console.log(JSON.stringify(R,null,0).slice(0,6000));await b.close()})().catch(e=>{console.error(e);process.exit(2)});
