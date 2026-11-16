@@ -123,3 +123,12 @@ main at start = eba64ead4.
 - Briefs must POINT TO dev/PRIORITY_RULES.md + dev/art/OWNER_ART_RULES.md and order them read in full (owner 07:45Z verbatim rule).
 - Not D's anymore: all art (main samples / C mass), D51 wiring (main), D52 (C). Nothing else waiting in slice D.
 - s1 (session_01DgYSWnmBMie8SxZvqc7aLy) is idle. s2 hourly wake trig_01GyzifNPR5nRN45YRj4LXdb is deleted at handover; s3 must create its own.
+
+## HANDOVER (Foreman D s3 → s4, 16/11 10:50Z; reason: context 30 % of 1M ≥ START_CTX 6 % + 25 % budget) — s4 = (see next line once opened); s3 hourly wake trig_01PRsThQpzLFrogWwG2N6DLK is DELETED, s4 creates its own
+- RUNNING D sessions (all separate cloud sessions; each writes dev/handover/reports/<name>.md and send_messages its first line to the foreman — s4 must send each one a short message "Foreman D is now s4 = <id>, send your result line there"):
+  workers: danh-balance session_01DgYSWoB9ztxCwmdBUbbxDS (audit+proposal, numbers need owner OK; alive 10:25Z) · emperor-visit (D8) session_01DgYSWnVJ8zy6Hr7QeM3HD1 (branch pushed 90f0fec6) · close-maid (D58, after servant-mline-r2) session_01DgYSWoCA2uzCCm4WDVxEAA · name-mask session_01DgYSWoDkH3BjgWkcd7Y4Cg · seatcap session_01DgYSWpxkS6i8grXTbHQnPF
+  reviewers: coop-b1b5-r2 (full D21) session_01DgYSWnmMmz35f4d6i6C3vQ · coop-guest-maid-r1 session_01DgYSWm8Dq4FhHzrbnuCRGL · entry-exam-r1 session_01DgYSWp7SJ7frNoZUnBtM7q
+- On SẴN SÀNG KIỂM (emperor-visit, close-maid, name-mask, seatcap, danh-balance): claim in CLAIMS.md + open a reviewer (opus for rules/co-op/numbers, sonnet for UI), archive the finished worker. On PASS: READY line under ## PASS + CLAIMS DONE + archive. On FAIL: fix worker from the reviewer branch.
+- WAITING: D4 (NPC death + new faces + Phế phi Lý) and D57 preg-rate → start when review/mortality-r1 (2d3428f8) and cycle-r3 are on main (check git log origin/main). kc-roads-cn-nc r3 FAIL → main s15 owns the fixer (QUESTIONS line), unless it writes "kc-roads fix → D".
+- Ship-order notes for main: slap-mg-r3 and entry-exam need mg-balance (B) first; entry-exam needs the kc-roads-cn-nc fix first; coop-chat-r1 needs the Worker deploy.
+- Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
