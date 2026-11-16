@@ -10,7 +10,7 @@ const [,,BASE,RURL,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [
 const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.push(m)};
 (async()=>{const b=await chromium.launch();const errs=[];process.on('unhandledRejection',e=>{console.log('ABORT',e.message.split('\n')[0],'errors:',JSON.stringify(errs.slice(0,6)));process.exit(2)});
  const mk=async(name)=>{const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
-  await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);const p=await ctx.newPage();p.setDefaultTimeout(150000);
+  await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kload{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();p.setDefaultTimeout(150000);
   p.on('pageerror',e=>errs.push(name+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::/.test(m.text()))errs.push(name+' console: '+m.text())});
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   for(let i=0;i<120;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':(window.KLOAD?'':'ok')});if(s==='ok')break;await p.waitForTimeout(500)}/* first-run download card (jload) skipped */
