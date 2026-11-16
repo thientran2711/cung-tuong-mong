@@ -105,3 +105,10 @@ Cut: connected components assigned to cells by centroid, 88 % fill, 512 + 256 we
 | sachchep | Tập sách chép tay | Thường |
 | canhhoa | Cành hoa ép | Thường |
 (hinhnhan already had its picture; it is now an IT item too.) On the CDN (cdn_sync), checked on cream and red.
+
+## 6. Summer ice (review/econ-items, 16/11) — gpt-2-6 (Magnific w4hkDcy7EI, EbzB4JRuuO; style ref If67SFwtvE), Magnific bg removal, cut 88 %
+| Key | Name | Grade |
+|---|---|---|
+| bangda | Băng đá (block of ice in a lacquered ice basin) | Thường |
+| bangvun | Băng vụn (hàng kém: melting shards in a clay basin) | Thường |
+256 + 512 webp on the CDN (cdn_sync), checked on cream and red. (jkc's ngocboikc / vongbackc, §5 of review/outside-r2-r2, are reused by the palace-road girlhood chest.)
