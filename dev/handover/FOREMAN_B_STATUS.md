@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 04:23Z — running 5/12: workers C41 finisher, D34 scheme-games-port, D33 routes-port (branch pushed, WIP), D31 difficulty-port (branch pushed, WIP, long bot measure) + reviewer C24 chapter-detail. No more assignable Slice B items: D36 BLOCKED (KIT REQUEST podium), D41 waits for Foreman C D29 (still RUNNING). 7 free slots — coordinator may add items here.
+Updated: 11/16/2026 04:53Z — 20 of 21 Foreman B PASSes are LIVE (trains 1–3). Waiting for fast-forward: routes-port-r1 (conditional: loi-rieng category). Running: worker D31 difficulty-port + reviewers C24 chapter-detail, D34 scheme-games-port, C41 tuduc-mg. Blocked: D36 (KIT REQUEST podium), D41 (Foreman C D29). Free slots: 8 — coordinator may add items.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
@@ -13,24 +13,24 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C40 actcard-small | review/actcard-small-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
 | C29 rel-picker | review/rel-picker-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS ce7c076a38d55c95901d19002832983f91560052 |
-| C32 page-curl2 | review/page-curl2-r1 | sonnet | PASS 3f95e00368db1e5acf3aca47889ce7cb42861a4b (CONDITIONAL on kit keeper §34 slide variant) |
-| C33 weekbook-entries | review/weekbook-entries-r1 | sonnet | PASS 1badc13c817d0d67971439fd6d2cbd944e47ad89 |
-| C34 contest-ui | review/contest-ui-r3 | sonnet | PASS 231ae9e93f271c2d3b3bb171dab55051ba7e2160 (CONDITIONAL on kit keeper: kitGameFrame pic etc.) |
+| C32 page-curl2 | review/page-curl2-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 3f95e00368db1e5acf3aca47889ce7cb42861a4b (CONDITIONAL on kit keeper §34 slide variant) |
+| C33 weekbook-entries | review/weekbook-entries-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 1badc13c817d0d67971439fd6d2cbd944e47ad89 |
+| C34 contest-ui | review/contest-ui-r3 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 231ae9e93f271c2d3b3bb171dab55051ba7e2160 (CONDITIONAL on kit keeper: kitGameFrame pic etc.) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
-| C26b stat-fx follow-up | review/stat-fx-2-r1 | sonnet | PASS 6d4540a7cf2b61de482fde24f9e3df36782fa61f |
-| C46 map-labels | review/map-labels-r1 | sonnet | PASS e23562007d7f431fce9fdbc95bf1f2799ad6a350 (KIT KEEPER: §34.1d re-skin) |
-| D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
-| D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
-| D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
+| C26b stat-fx follow-up | review/stat-fx-2-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 6d4540a7cf2b61de482fde24f9e3df36782fa61f |
+| C46 map-labels | review/map-labels-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS e23562007d7f431fce9fdbc95bf1f2799ad6a350 (KIT KEEPER: §34.1d re-skin) |
+| D32 succession-port | review/succession-port-r1 | opus | LIVE (main 63cf7b12a, train 3) — was PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
+| D38 lost-items-port | review/lost-items-port-r1 | opus | LIVE (main 63cf7b12a, train 3) — was PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
+| D30 palace-map-port | review/palace-map-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
 | D31 difficulty-port | review/difficulty-port | opus | RUNNING (port only; numbers within spec; bot table for C7 re-measure) |
 | D33 routes-port | review/routes-port-r1 | opus | PASS 332308a1961681e37e0e4de78e86adc9aac5524d (CONDITIONAL on kit keeper: loi-rieng category in §6.1) |
 | D34 scheme-games-port | review/scheme-games-port @7a581aed (contains mg-easy-r1) | sonnet | REVIEWING (review/scheme-games-port-r1, sonnet) |
 | D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
-| D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
+| D40 weather-risk-port | review/weather-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
-| D42 places-leftovers | review/places-port-r1 | sonnet | PASS add62a7e9283cd328ddd9a46951abf0210e7bb26 (includes D30 palace-map-port-r1; kitPalaceMap renumbered §71→§76) |
+| D42 places-leftovers | review/places-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS add62a7e9283cd328ddd9a46951abf0210e7bb26 (includes D30 palace-map-port-r1; kitPalaceMap renumbered §71→§76) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
