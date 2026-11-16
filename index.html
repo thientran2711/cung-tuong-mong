@@ -25633,7 +25633,7 @@ CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
-function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk())return;const C=toCanon();CW.sent=wk();CW.pend=false;CW.mine=snapStats();
+function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=toCanon();CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
 function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
@@ -25930,7 +25930,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
-function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
+function begin(d){T("begin");CW.on=true;CW.cyHold=null;CW.cyK="";CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
   /* rejoin / reload (owner 16/11: "khắc và việc đã làm bị mất"): her own week as it stood (snapLoad), never the week start again */
@@ -26028,7 +26028,11 @@ COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||m.from===CW.seat||!S||S.dead||m.week!
 (function(){if(typeof flip!=="function")return;const f=flip;flip=function(){if(!CW.on)return f.apply(this,arguments);
  if(!host()){/* the guest draws nothing: her night comes from the host's tn with the merged week */const r0=S.tonight;
   if(CW.inTurn){S.tonight=null;try{if(typeof pregFind==="function")pregFind()}catch(e){}return}return r0}
- /* host: the friend's entry is in the deck (endTurn took her out) */const L=CW.pulled;if(L&&L.length)pushFriend(L.slice());let r;
+ /* host: the friend's entry is in the deck (endTurn took her out) */const L=CW.pulled;
+ /* review/coop-b1b5-fix: her Kỳ nguyệt sự tuần and her maid's card (jcycle cyrep) not answered yet: the draw waits for her answer
+    (ctm-p2 "cyb", cyFree below runs this flip again), so her "báo sớm / giấu" really keeps her card on the tray */
+ {const fe=(L&&(L.find(x=>x[0]>=0)||[])[1])||friendEntry();if(cyWait(fe)){CW.cyHold=window.cyWk();S.tonight=null;T("cyHold "+CW.cyHold);return}}
+ if(L&&L.length)pushFriend(L.slice());let r;
  try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}
  /* reviewer r2: the week's flip can run AFTER endTurn (main's jcycle defers it behind her maid's Kỳ nguyệt sự card, cyrep → flip again):
     CW.pend = this week's end is still waiting to go out, so that night is next week's too (else tn.w = the old week and the guest never takes it) */
@@ -26041,7 +26045,7 @@ CW.tnShared=true;/* jcycle cyNoFriend: the host's flip deck holds the friend (B2
 CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
  const who=tn.who===fp()?fp():tn.who;const was=S.tonight==="me";tnSet(who);
  if(S.tonight==="me"&&!was){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}}};
-(function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on)tnRelay()}catch(e){}return r}})();
+(function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on)tnRelay()}catch(e){}try{if(CW.on)cySend()}catch(e){}return r}})();
 
 /* ---------- B5 (review/coop-b1b5): seat caps count BOTH players ----------
    (1) the week's promotions (monthTick → promote / fillSeats) run while endTurn has taken the friend out of the harem: the seat count
@@ -26209,6 +26213,25 @@ P2H.nbribe=m=>{if(S.dead||!isSrvMe())return;const v=RV(m.r);if(!v||!v.alive)retu
 (function(){if(typeof evA!=="function")return;const f=evA;evA=function(h,t,n){const d=f.apply(this,arguments);
  try{if(CW.on&&!CW.b4in&&d>0&&isF(h)&&t&&t!==S&&!isF(t)&&t.id!=null&&t.id<900)p2say("ev",{tg:t.id,n:d})}catch(e){}return d}})();
 P2H.ev=m=>{if(S.dead)return;const v=RV(m.tg);if(!v||!v.alive)return;const d=evA(S,v,+m.n||0);if(d>0){try{log(`Tai mắt ${esc(friendName())} lén báo tin: chứng cứ với ${esc(v.name)} +${d}.`)}catch(e){}render()}};
+/* ---------- B2 × jcycle (review/coop-b1b5-fix): her Kỳ nguyệt sự answers reach the other seat ----------
+   Before: with B2 the HOST draws the one night with the friend's entry in its deck, but jcycle read the lie / back / hide flags only from
+   its own S: the guest's maid card (báo lùi / báo sớm / giấu) cost her Đức / ghen and changed nothing on the host's tray, and both seats
+   end the week at once, so the host's draw came before her answer. Now: each seat relays its own S.cyb flags (jcycle cyRec: lie, back,
+   hide, rum …, + pend = the card is still open) on the free-form act channel whenever they change; the other seat keeps them as
+   CW.fcy and jcycle reads them for the friend's entry (cybOf → COOPW.fcyb; after a merge her blob holds the same). The host's week draw
+   WAITS (cyHold: no draw, no week end sent) while she is in her cycle tuần and her answer for this week is not in; her answer, or her
+   end of week (an old client that never relays: true report), frees it. Costs stay on her side only (she pays once, on her client). */
+CW.fcyb=()=>{const P=CW.base&&CW.base.P&&CW.base.P[fs()],r=CW.fcy;if(r&&(!P||r.life===(P.life||0)))return r.c||{};return (P&&P.S&&P.S.cyb)||{}};
+function cySend(){if(!CW.on||!S||S.dead||CW.inTurn/* mid-week-end: the new week's card is not asked yet */||typeof window.cyRec!=="function")return;const r=window.cyRec();r.life=CW.life||0;const k=JSON.stringify(r);if(k===CW.cyK)return;CW.cyK=k;p2say("cyb",r)}
+function cyWait(fe){if(!fe||fe.out||fe.alive===false||typeof window.cycOn!=="function"||typeof window.cyWk!=="function"||!window.cycOn(fe))return false;
+ const r=CW.fcy,g=window.cyWk();if(r&&r.w===g&&!r.pend)return false;const e=COOP.state.ended||{};return !e[fs()]}
+function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(friendEntry()))return;T("cyFree "+CW.cyHold);CW.cyHold=null;if(S.dead)return;
+ const c=S.cyb||{},g=window.cyWk();/* her own maid card still open: its answer runs the flip */if(!(c.df===g&&c.rk!==g))try{flip()}catch(e){console.error(e)}
+ try{render()}catch(e){}soonEnd()}
+P2H.cyb=m=>{if(typeof m.w!=="number")return;CW.fcy={w:m.w,c:m.c&&typeof m.c==="object"?m.c:{},pend:!!m.pend,life:m.life||0};cyFree()};
+COOP.on("presence",()=>{if(CW.on&&CW.cyHold!=null)cyFree()});
+COOP.on("stop",()=>{CW.cyHold=null;CW.fcy=null;CW.cyK=""});
+COOP.on("room",()=>{CW.cyK=""});/* a reconnect: a relay sent while the socket was down is lost; say it again on the next render */
 /* her monthly servant life (j42 srvMonth: wage, the spy's pay and the mistress catching her) runs inside the week while the friend's
    entry is out of the harem: put it back for that call, so her buyer (me) is still there and the spy line is not dropped */
 (function(){if(typeof srvMonth!=="function")return;const f=srvMonth;srvMonth=function(){const L=CW.on&&CW.pulled;if(!L||!L.length)return f.apply(this,arguments);
@@ -37541,9 +37564,19 @@ function cycleLate(p){try{p=p||S;if(!cyPreg(p)||cyAge(p)>=50||p.pregWk==null)ret
 /* calendar: month m (1..12) → days in its next occurrence (or `ahead` months ahead) */
 function cycleDaysOf(p,m,ahead){try{p=p||S;if(!S)return[];let o=ahead!=null?+ahead:((+m-(S.month||1))%12+12)%12;if(!(o>=0))o=0;const mi=cyCur()+o;return cyHas(p,mi)?cyDaysM(p,mi):[]}catch(e){return[]}}
 /* the TRAY (Kính sự phòng's view): her card is off while in her cycle tuần, unless she reported falsely this tuần (báo sớm / giấu) */
-function cyTray(p){if(!cycOn(p))return false;if(p===S){const c=S.cyb||{};if(c.lie===wk())return false}return true}
+function cyTray(p){if(!cycOn(p))return false;const c=cybOf(p);if(c&&c.lie===wk())return false;return true}
+/* co-op (review/coop-b1b5-fix): the OTHER player's entry carries her own report too — her S.cyb, relayed at once by jcoopworld (ctm-p2
+   "cyb", COOPW.fcyb) and in her blob after every merge — so the host's flip, nightCh, the book and the rivals read ONE fact (OD:L96):
+   her "báo sớm / giấu" keeps her card on the host's tray, her "báo lùi" halves her next flip and makes the book read late, her
+   "Sửa sổ" hides her pregnancy from the host's rivals, her "giấu" / a forged line shows as "không báo" in the other player's book.
+   null = an NPC (no report of her own; the book follows the truth / cyHideOf's clever-rival rule). */
+function cybOf(p){if(p===S)return S.cyb||{};if(p&&p.coop&&window.COOPW&&typeof COOPW.fcyb==="function")try{return COOPW.fcyb()||{}}catch(e){}return null}
+const CYK=["lie","lieM","back","rk","rv","df","hide","rum","giauM"];
+/* what jcoopworld relays: this week's flags + whether her maid's card is still waiting for her answer (the host's flip waits for it) */
+function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefined)o[k]=c[k];const w=wk();return{w,c:o,pend:c.df===w&&c.rk!==w}}
+window.cyRec=cyRec;window.cyWk=()=>wk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
-function cyLateSeen(p){p=p||S;const n=cycleLate(p);if(p!==S)return n;const c=S.cyb||{},R=(B().rep||{});if(c.back!=null&&S.pregWk!=null&&S.pregWk-c.back>=0&&S.pregWk-c.back<=(R.luiCover||3))return Math.max(0,n-1);return n}
+function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
 window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
@@ -37551,7 +37584,7 @@ function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a
 const RSN="Đang kỳ nguyệt sự, thẻ bài tạm cất, không tiện hầu giá";
 
 /* ---------- 2. the flip: off the tray during her cycle tuần ---------- */
-const nc0=nightCh;nightCh=function(p){const c=nc0.apply(this,arguments);try{if(c&&cyTray(p||S))return 0;const q=p||S,k=S.cyb||{};if(c&&q===S&&k.back!=null&&wk()-k.back===1)return c*((B().rep||{}).luiNext||.5)}catch(e){}return c};
+const nc0=nightCh;nightCh=function(p){const c=nc0.apply(this,arguments);try{if(c&&cyTray(p||S))return 0;const q=p||S,k=cybOf(q);if(c&&k&&k.back!=null&&wk()-k.back===1)return c*((B().rep||{}).luiNext||.5)}catch(e){}return c};
 const sn0=stealNight;stealNight=function(a){if(a&&cyTray(a))return "";return sn0.apply(this,arguments)};
 for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(!A0)continue;const ok0=A0.ok;A0.ok=function(a){if(a&&cyTray(a))return false;return ok0.apply(this,arguments)}}
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(){if(cyTray(S))return RSN;return l0?l0.apply(this,arguments):""}}
@@ -37620,19 +37653,19 @@ const fl1=flip;flip=function(){try{if(cyAsk()){S.tonight=null;return}}catch(e){c
 const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
 
 /* ---------- 3. the book ---------- */
-function cyHideOf(p){if(p===S){const h=cyb().hide;return !!(h&&S.preg&&h===S.pregWk)}
+function cyHideOf(p){const k=p===S?cyb():cybOf(p);if(k){const h=k.hide;return !!(h&&p.preg&&h===p.pregWk)}
  if(!p.preg||p.fake||p.pregWk==null)return false;return (p.tamco||0)>=B().rvHideTc&&cyH("cyh|"+p.id+"|"+p.pregWk)%100<B().rvHide}
 /* what the book says for p in month offset k (0 = this month, -1 = last month) */
 function cyRep(p,k){const mi=cyCur()+k,t=cyBase(p).t;if(cyAge(p)>=50)return{s:"old"};
- const rum=p===S&&cyb().rum;if(rum&&rum.m===mi&&k===0&&!rum.fixed)return{s:"miss",forged:1};
+ const k0=cybOf(p),rum=k0&&k0.rum;if(rum&&rum.m===mi&&k===0&&!rum.fixed)return{s:"miss",forged:1};
  if(k===0&&(S.tuan||0)<t)return{s:"wait",t};
  /* truly pregnant at that month's cycle week? */
  const cw=wk()-(S.tuan||0)+3*k+t;const preg=cyPreg(p)&&p.pregWk!=null&&cw>p.pregWk;
- if(preg&&p===S&&cyCover()&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
+ if(preg&&k0&&cyCover(p)&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
  if(preg&&!cyHideOf(p))return{s:"miss"};return{s:"ok",d:cyDaysM(p,mi),fake:!!(p.preg&&p.fake)}}
 /* evidence-truth (main, jtruth): evidence only for a real wrong in the ledger; write the deed first, announce what evA really gave */
 function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,1,x)}catch(e){}}
-function cyCover(){const c=S.cyb||{};return c.back!=null&&S.pregWk!=null&&S.pregWk-c.back>=0&&S.pregWk-c.back<=((B().rep||{}).luiCover||3)}
+function cyCover(p){p=p||S;const c=cybOf(p);return !!c&&c.back!=null&&p.pregWk!=null&&p.pregWk-c.back>=0&&p.pregWk-c.back<=((B().rep||{}).luiCover||3)}
 function cyRepText(r){if(r.s==="old")return kitChip("đã dứt kỳ","n");if(r.s==="wait")return `chưa tới kỳ (${TU[r.t]})`;if(r.s==="miss")return kitChip("không báo","r");return `đã báo, ${dName(r.d)}`}
 function cyNights(p){const m0=wk()-(S.tuan||0);return (p.nightLog||[]).filter(w=>w>=m0&&w<=wk()).length}
 function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().filter(p=>p===S||(p.alive&&!p.out));S.cyKnow=S.cyKnow||{};let found=[];
@@ -37702,7 +37735,7 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
  }catch(e){console.error(e)}return ev};
 /* rival vs rival (world; host only in co-op because rivalsMonth is muted on the guest) */
 const rm0=rivalsMonth;rivalsMonth=function(){let ev=rm0.apply(this,arguments)||"";try{const L=liveRivals(true).filter(v=>v.alive&&!v.out);
-  for(const t of L){if(!cyPreg(t)||!t.hidden||cycleLate(t)<1||cyHideOf(t))continue;const a=L.find(x=>x!==t&&!x.coop&&hostility(x,t)>=B().foeHost&&roll(B().rvRead));if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
+  for(const t of L){if(!cyPreg(t)||!t.hidden||cyLateSeen(t)<1||cyHideOf(t))continue;const a=L.find(x=>x!==t&&!x.coop&&hostility(x,t)>=B().foeHost&&roll(B().rvRead));if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
  }catch(e){console.error(e)}return ev};
 })();
 /* ================= jtds: TỨ ĐỨC SUB-STYLES + CDNH WORKS (item D16; owner 15/11 21:50Z, 23:05Z, 23:15Z; coordinator s7 decisions)
@@ -38877,7 +38910,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b445f5853f43";window.CTM_BUILD=BUILD;
+const BUILD="eca046bce3a0";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
