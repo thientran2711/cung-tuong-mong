@@ -17,14 +17,16 @@ function kitFrw(src){const m=/(frame-[a-z0-9-]+?)(?:-w)?\.webp/.exec(src||"");re
 /* the card's own portrait cell = the first .pcp right after <div class="pcl"> */
 function kitFrwCell(h){const i=h.indexOf('<div class="pcl">');if(i<0)return h;const j=i+17;if(h.slice(j,j+19)!=='<div class="pcp kit')return h;
  const k=h.indexOf('<span class="kin">',j);if(k<0)return h;const fm=/<img class="kfr" src="([^"]*)"/.exec(h.slice(k,k+4000));if(!fm)return h;
- const F=kitFrw(fm[1]);if(!F)return h;let [s,t,b]=F[1];
+ const F=kitFrw(fm[1]);if(!F||KFRW_BAD.has(F[0]))return h;let [s,t,b]=F[1];
  /* the rank crest (KIT_CREST, jk2b §9) stands on the top bar and may reach higher than the frame art: the cell starts at whichever is higher */
  try{const C=window.KIT_CREST,ck=C&&C.key(fm[1]);if(ck){const w=C.w[ck]||C.W,hh=w*C.ar[ck],by=C.bar[ck]!=null?C.bar[ck]:C.bar[ck.replace(/-\d$/,"")]!=null?C.bar[ck.replace(/-\d$/,"")]:C.BAR;t=Math.min(t,Math.max(0,Math.floor(by-C.base[ck]*hh)))}}catch(e){}
  let head=h.slice(j,k);head=head.replace('class="pcp kit',`class="pcp kit kfw${s>0?" kfx":""}`);
  head=/style="/.test(head)?head.replace('style="',`style="--kfs:${s};--kft:${t};--kfb:${b};`):head.replace(/^<div /,`<div style="--kfs:${s};--kft:${t};--kfb:${b}" `);
  let rest=h.slice(k);if(s>0)rest=rest.replace(fm[0],`<img class="kfr" src="${fm[1].replace(/\.webp$/,"-w.webp")}" data-kfn="${fm[1]}"`).replace(/(<img class="kfr"[^>]*?)onerror="this\.remove\(\)"/,'$1onerror="kitFrwErr(this)"');
  return h.slice(0,j)+head+rest}
-function kitFrwErr(im){try{const n=im.dataset.kfn;const p=im.closest(".pcp");if(p)p.classList.remove("kfw","kfx");if(n&&im.getAttribute("src")!==n){im.onerror=()=>im.remove();im.src=n}else im.remove()}catch(e){}}
+/* a -w file that failed once is not asked for again (the cell keeps the normal frame and its old layout) */
+const KFRW_BAD=new Set();
+function kitFrwErr(im){try{const F=kitFrw(im.getAttribute("src"));if(F)KFRW_BAD.add(F[0]);const n=im.dataset.kfn;const p=im.closest(".pcp");if(p)p.classList.remove("kfw","kfx");if(n&&im.getAttribute("src")!==n){im.onerror=()=>im.remove();im.src=n}else im.remove()}catch(e){}}
 window.kitFrwErr=kitFrwErr;
 (function(){if(typeof pcard!=="function")return;const c0=pcard;pcard=function(){const h=c0.apply(this,arguments);try{return kitFrwCell(h)}catch(e){return h}}})();
 /* the portrait's clip (kpor: inset() of the old opening) widens by s units each side inside a wide cell */
@@ -60,7 +62,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pca
        motion / Cảnh động off. */
 const KFRW_WARM=new Set();
 function kitFrwWarm(root){try{(root||document).querySelectorAll('img.kfr,img[src*="/kit/frame-"]').forEach(i=>{const F=kitFrw(i.getAttribute("src"));if(!F||!F[1][0])return;
- const u=i.getAttribute("src").replace(/frame-[a-z0-9-]+?(?:-w)?\.webp/,F[0]+"-w.webp");if(KFRW_WARM.has(u))return;KFRW_WARM.add(u);const im=new Image();im.decoding="async";im.src=u})}catch(e){}}
+ const u=i.getAttribute("src").replace(/frame-[a-z0-9-]+?(?:-w)?\.webp/,F[0]+"-w.webp");if(KFRW_WARM.has(u))return;KFRW_WARM.add(u);const im=new Image();im.decoding="async";im.onerror=()=>KFRW_BAD.add(F[0]);im.src=u})}catch(e){}}
 window.kitFrwWarm=kitFrwWarm;
 (function(){if(typeof renderPanel!=="function")return;const r0=renderPanel;
  const cell=P=>P&&P.querySelector(".pc>.pcl>.pcp.kit");
@@ -71,6 +73,8 @@ window.kitFrwWarm=kitFrwWarm;
   try{if(o)y0=rel(o)}catch(e){y0=null}
   const r=r0.apply(this,arguments);
   try{kitFrwWarm(P)}catch(e){}
+  /* a -w picture already known broken (from the cache, its error event came before this element existed) falls back at once */
+  try{P&&P.querySelectorAll(".pcp.kfw img.kfr[data-kfn]").forEach(i=>{if(i.complete&&!i.naturalWidth)kitFrwErr(i)})}catch(e){}
   try{const rm=(typeof reducedMotion==="function"&&reducedMotion())||(typeof kitCurlOff==="function"&&kitCurlOff());
    if(!rm&&y0!=null&&P.dataset.tab===t0)requestAnimationFrame(()=>{try{const n=cell(P);if(!n)return;const y1=rel(n),d=y0-y1;if(Math.abs(d)<=0.5||Math.abs(d)>=120)return;
     /* the cell and whatever sits under it in the left column (the name above stays put) */
