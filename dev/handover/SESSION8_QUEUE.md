@@ -112,4 +112,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C49 | review/palace-start (owner s8: ~4 small kids 1–4 y mixed, no đích tử, birth order not decisive, faction road Emperor/Thái hậu/quyền thần, princesses everywhere) | RUNNING (opus, session 8) |
 ## Ownership marks (16/11): items in dev/handover/FOREMAN_C.md Slice C are [→ FOREMAN C]; items in FOREMAN_B.md are [→ FOREMAN B]; everything else = session 8.
 | D53 | opt-pics leftovers: 25 options still on placeholder (dev/test/opt-pics-table.md r1) | QUEUED [→ FOREMAN C] |
-| C50 | review/hc-portrait-revert @ 1735afbf8 | REVIEWING (sonnet) |
+| C50 | hc-portrait-revert-r1 PASS 0001eaf49 → merge-train-1 | MERGING |
