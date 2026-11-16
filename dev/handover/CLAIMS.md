@@ -328,7 +328,7 @@
 | night-steal reviewer (BIG: odds/rules + co-op) | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled, 7 runs; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:40Z |
 | chonso-tabs reviewer r1 (SMALL) | review/chonso-tabs-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | PASS c4f80b7f98a45d5dced890f0c3e3b2f2995bcb01 | 16/11 |
 | road-b1 + road-map-next review r1 (opus, BIG): review/road-b1 5dbacee3 merged with road-map-next eeb80516 (pilot fix of road-map-r1 FAIL 1–5) | review/road-b1-r1 | B | session_01N1tNP3fSoLdBHWrbfv8fCH | DONE FAIL 9 (archived) | 16/11 18:36Z |
-| HEALTH + PREGNANCY BUNDLE (opus; main s21 18:08Z/18:10Z/18:17Z/19:00Z; suc-khoe.md §4.1–4.7) | review/suc-khoe | D | session_01DgYSWmn1SNsxewKAaDLZjN | RUNNING | 16/11 18:35Z |
+| HEALTH + PREGNANCY BUNDLE (opus; main s21 18:08Z/18:10Z/18:17Z/19:00Z; suc-khoe.md §4.1–4.7) | review/suc-khoe | D | session_01DgYSWmn1SNsxewKAaDLZjN | DONE SẴN SÀNG KIỂM 10cba645 (archived) | 16/11 18:35Z |
 | fest-fx (sonnet; owner bug: fireworks in her room on chiều): festival FX only tối + outdoor + fitting festivals; audit 3-buổi index leftovers | review/fest-fx | main s21 | session_01UV1Szk4mBQYLcS8DPSeeBv | RUNNING | 16/11 18:37Z |
 | pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
 | single-hall direct (sonnet): single-hotspot places skip the courtyard step (owner rule), on pl-courtyards-r1 | review/single-hall | main s21 | (see HANDOVER) | RUNNING | 16/11 18:40Z |
@@ -366,3 +366,4 @@
 | 10-night ledger BUILD (V3-B, reports/night-time.md; no player-only knob) | review/night-ledger | D | (D opens) | INBOX | 16/11 19:41Z |
 | img-cleanup review r1 (opus, BIG: build/quickcheck gate + 6.1k file removal): review/img-cleanup a2e99bd0 | review/img-cleanup-r1 | B | session_01N1tNP5L4nZgzCiWcpjcHmx | RUNNING | 16/11 19:42Z |
 | night-final (opus; owner bug: night committed once at end of day, one woman) | review/night-final | main s22 | session_01UV1SziCQkwUnKFA7eL1uRp | RUNNING | 16/11 19:46Z |
+| suc-khoe review r1 (opus, BIG) of 10cba645 | review/suc-khoe-r1 | D | (opening) | RUNNING | 16/11 19:48Z |
