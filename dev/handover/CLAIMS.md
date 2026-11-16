@@ -388,7 +388,7 @@
 | cut-out + hoa điền ROOT CAUSE (opus, URGENT owner bug 20:35–20:38Z): code vs image; code fixes on review/fig-cutout-code; image list → C | review/fig-cutout-code | main s23 | session_01UV1SziJ9niRHRJg3rL83SA | RUNNING | 16/11 20:30Z |
 | road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | session_01N1tNP2bUuTx3dm594CtR4n | RUNNING | 16/11 20:33Z |
 | coop-contest review r1 (opus, BIG co-op) of 73eec76f | review/coop-contest-r1 | main s23 | session_01UV1SzieyRmsLoEEWXsp3iw | RUNNING | 16/11 20:32Z |
-| kit-fit round 2b review r1 (sonnet, SMALL kit + consistency scan) of 7865ed13a | review/kit-fit-r1 | main s23 | session_01UV1SzgZnaUtF1u31GfAqQr | RUNNING | 16/11 20:32Z |
+| kit-fit round 2b review r1 (sonnet, SMALL kit + consistency scan) of 7865ed13a | review/kit-fit-r1 | main s23 | session_01UV1SzgZnaUtF1u31GfAqQr | PASS 59812a63 → LIVE b53ba8b9 (s24) | 16/11 20:32Z |
 | night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | session_01UV1Szj7YLUcLKMH5ncGTcL | RUNNING | 16/11 20:32Z |
 | kit-size #5 successor keeper (opus): reports/kit-size.md items 1-7 incl. owner TIN fixes | review/kit-size | main s23 | session_01UV1SzkzVyZp7J7XKbMkV7H | RUNNING | 16/11 20:32Z |
 | kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | session_01UV1SzkDzZdLkrtJC5W6o5T | RUNNING | 16/11 20:32Z |
