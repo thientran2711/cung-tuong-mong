@@ -16,6 +16,8 @@ const VPS=(SIZES||'755x1000').split(',');
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
   for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;tab='act';render()});await sleep(1000);
+  /* portrait phones are not a supported design screen (KIT §0: the game shows 'Xoay ngang điện thoại để chơi'); nothing to check there */
+  if(await p.evaluate(()=>/Xoay ngang/.test(document.body.innerText||'')&&innerWidth<innerHeight&&innerWidth<700)){R[sz]={unsupported:'rotate overlay (portrait phone)'};console.log(sz,'SKIP: unsupported portrait phone (rotate overlay)');await ctx.close();continue}
   /* inspect the dialog on screen: #modal .dlg, or #ktut .kpdlg, or #ktip .kpdlg */
   const look=async()=>{for(let i=0;i<50;i++){const w=await p.evaluate(()=>{const c=[...document.querySelectorAll('#modal:not([hidden]) .kpsubj.kes, #ktut .kpsubj.kes, #ktip .kpsubj.kes')];return c.some(x=>!x.dataset.kdpfit&&!x.dataset.kpdfit&&!x.querySelector('.kesf.kesno'))});if(!w)break;await sleep(400)}await sleep(250);return look0()};
   const look0=()=>p.evaluate(()=>{const vis=e=>e&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden';

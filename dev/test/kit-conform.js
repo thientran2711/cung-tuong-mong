@@ -37,7 +37,7 @@ const VPS=(SIZES||'755x1000').split(',');
     /* pictures outside the options: T2 = 1, T3 = figure + ≤ 1 banner, T4 = portrait + ≤ 1 band, T1 = ≤ 1 band */
     const pics=[...mb.querySelectorAll('.ksart')].filter(e=>!e.closest('.opts,.kpscopts,.kaart,.kpkgrid,.kshg,.kinv,.kip,.kmc,.kmlist,.kfacts,.kpl')&&e.getClientRects().length);
     const bands=mb.querySelectorAll(':scope > .kdlgart').length;
-    const seal0=(d.querySelector('.kpseal')||{}).textContent||'';if(tpl==='T3'&&/^(ĐIỀU|LUẬT)$/.test(seal0.trim()))why.push('loose figure column on an info panel');
+    const seal0=(d.querySelector('.kpseal')||{}).textContent||'';/* (16/11 07:35Z, OD:L448: an ĐIỀU / LUẬT panel about a person now HAS the figure column — the old 'loose figure column on an info panel' rule is retired) */
     if(tpl==='T2'&&pics.length>1)why.push('two pictures: band + left picture');
     if(tpl==='T1'&&bands&&body&&body.querySelector(':scope > .kpsubj'))why.push('band + subject picture');
     if(tpl!=='T5'&&tpl!=='T3'&&tpl!=='T4'&&bands>1)why.push('two bands');

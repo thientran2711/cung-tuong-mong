@@ -50,7 +50,7 @@ html body .dlg.kpanel.kpdlg.kpdcoach{height:var(--kpch);min-height:var(--kpch);m
 .kpdlg .kpdfig .kesf>.kpsn{display:none}
 .kpdlg .kpdr{min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
-.kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,22dvh,190px);aspect-ratio:auto}
+.kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,17dvh,150px);aspect-ratio:auto}
 .kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
 .kpdlg.kpdcoach .kdpban>.ksart{height:clamp(70px,16dvh,150px)}
 .kpdlg .kpdt{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;font-size:.9rem;line-height:1.45;color:var(--ink)}
