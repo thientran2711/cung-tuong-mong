@@ -19,16 +19,16 @@ const KG82_KIND={
  co:{e:"go",n:"Cờ",t:"Ăn quân",how:"Mỗi thế cờ có một nhóm quân trắng chỉ còn một chỗ trống bên cạnh (một khí). Chạm vào chỗ trống ấy, đặt quân đen để ăn nhóm. Bậc thấp có vòng vàng khoanh nhóm quân trắng; chưa thấy chỗ thì chạm Gợi ý."},
  dauho:{e:"aim",n:"Đầu hồ",t:"Ném tên vào bình",how:"Mũi tên đưa qua đưa lại trên miệng bình. Chạm khi mũi tên ở ngay giữa miệng bình. 6 lần ném."},
  ban:{e:"aim",n:"Bắn cung",t:"Bắn hồng tâm",how:"Ngắm đưa qua đưa lại trên bia. Chạm khi ngắm ở giữa hồng tâm. 6 phát tên."},
- tho:{e:"quiz",b:"doi",n:"Thơ",t:"Nối vần",how:"Chọn câu thơ đối chỉnh nhất với câu cho sẵn. 5 câu, mỗi câu 10 giây."},
- doi:{e:"quiz",b:"doi",n:"Câu đối",t:"Đối câu",how:"Chọn vế đối chỉnh nhất cho vế ra. 5 câu, mỗi câu 10 giây."},
+ tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
+ doi:{e:"doiline"},/* filled by jnwp */
  doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý."},
  ve:{e:"pattern",m:"ink",n:"Vẽ",t:"Nhớ nét bút",how:"Nét mực hiện trên ô giấy rồi tan. Chạm lại đúng những ô có nét mực. 5 hồi."},
  hoa:{e:"pattern",m:"flower",n:"Cắm hoa",t:"Nhớ thế hoa",how:"Hoa hiện trên các ô bình rồi khuất. Chạm lại đúng những ô có hoa. 5 hồi."},
  theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
  kim:{e:"pattern",m:"silk",n:"Khéo tay",t:"Nhớ mẫu kết",how:"Nút kết hiện trên khung rồi khuất. Chạm lại đúng những ô có nút kết. 5 hồi."},
  mua:{e:"steps",n:"Múa",t:"Theo bước múa",how:"Xem các bước sáng lên theo thứ tự rồi chạm lại đúng thứ tự. 5 hồi, hồi sau dài hơn."},
- banh:{e:"quiz",b:"bep",n:"Bếp núc",t:"Chọn món",how:"Chọn món hay vị đúng cho từng việc. 5 câu, mỗi câu 10 giây."},
- huong:{e:"quiz",b:"huong",n:"Điều hương",t:"Chọn hương",how:"Chọn vị hương đúng cho từng việc. 5 câu, mỗi câu 10 giây."}};
+ banh:{e:"cook"},/* filled by j91 */
+ huong:{e:"blend"}};/* filled by j91 */
 const KG82_PLAIN={cam:"dan",ky:"co",thi:"tho",hoa:"ve",vu:"mua",y:"huong",nau:"banh"};
 /* talent formula per kind: the same coefficients as j71 SC7 (so the parts add up to the j71 talent number) */
 const KG82_F={doden:[["tai",.55],["tamco",.3],["thi",4]],tho:[["tai",.5],["thi",8]],doi:[["tai",.55],["thi",6],["hoa",2]],dan:[["tai",.3],["cam",9]],
@@ -40,23 +40,6 @@ const KG82_F85={theu:[["tai",.3],["theu",7],["hoa",2],["help",1]],kim:[["tamco",
 function kg82Has85(k){try{return typeof artLv==="function"&&typeof S!=="undefined"&&S&&S.arts&&k in S.arts}catch(e){return false}}
 function kg82FormulaOf(kind){const f=KG82_F85[kind];if(f&&f.every(([s])=>!/^(theu|nau)$/.test(s)||kg82Has85(s)))return f;return KG82_F[kind]||[]}
 const KG82_STAT={tai:"Tài",tamco:"Tâm cơ",sac:"Sắc",suc:"Sức"};
-const KG82_HUONG=[{q:"Muốn hương thanh, an thần cho giấc ngủ, chọn vị nào?",a:"Trầm hương",w:["Xạ hương","Long não","Hùng hoàng"]},
- {q:"Người đang mang thai phải tránh xa thứ hương nào?",a:"Xạ hương",w:["Hoa nhài","Trầm hương","Đàn hương"]},
- {q:"Hương nào dùng ướp trà, thơm dịu và ngọt?",a:"Hoa nhài",w:["Long não","Ngải cứu","Hùng hoàng"]},
- {q:"Đốt lên để đuổi muỗi và côn trùng mùa hè?",a:"Ngải cứu",w:["Hoa hồng","Mộc lan","Quế hoa"]},
- {q:"Hương gỗ ấm, dùng trong chùa và lễ cúng?",a:"Đàn hương",w:["Bạc hà","Hoa sen","Vỏ quýt"]},
- {q:"Ngày hè oi bức, muốn mát đầu tỉnh táo?",a:"Bạc hà",w:["Xạ hương","Đàn hương","Trầm hương"]},
- {q:"Hoa nào thơm ngọt mùa thu, dùng làm nhân bánh?",a:"Quế hoa",w:["Ngải cứu","Long não","Hùng hoàng"]},
- {q:"Ướp áo xiêm cho thơm lâu và tránh mọt?",a:"Long não",w:["Hoa nhài","Bạc hà","Quế hoa"]}];
-const KG82_BEP=[{q:"Mùa hè oi bức, nấu món gì giải nhiệt?",a:"Chè đậu xanh",w:["Gà tần sâm","Lẩu dê","Rượu gừng"]},
- {q:"Bồi bổ cho người mới sinh nở?",a:"Gà ác tần thuốc bắc",w:["Chè đậu xanh","Canh khổ qua","Gỏi cá"]},
- {q:"Tết Trung thu dâng bánh gì?",a:"Bánh nướng nhân sen",w:["Bánh chưng","Bánh trôi","Bánh tro"]},
- {q:"Tết Đoan ngọ làm bánh gì?",a:"Bánh tro",w:["Bánh dẻo","Bánh chưng","Bánh trôi"]},
- {q:"Tết Hàn thực mùng ba tháng ba làm bánh gì?",a:"Bánh trôi",w:["Bánh nướng","Bánh tro","Bánh chưng"]},
- {q:"Chưng yến sào thêm gì cho thanh ngọt?",a:"Đường phèn",w:["Nước mắm","Ớt","Giấm"]},
- {q:"Người bị cảm lạnh, nấu bát canh với gì?",a:"Gừng và hành",w:["Khổ qua","Rau má","Đậu xanh"]},
- {q:"Món canh nào Hoàng thượng thường dùng cho mát gan?",a:"Canh hạt sen",w:["Canh ớt","Canh dê","Canh rượu"]}];
-
 /* ---------- small helpers ---------- */
 const kg82El=()=>document.getElementById("kg82");
 const kg82Kit=()=>typeof kitGameFrame==="function";
@@ -265,32 +248,6 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
   else{mark={i:bi,ok:false};kg82Pop(pops,px(bi),py(bi)-s*.6,"Chưa ăn được",kg82Col("--red","#c23b22"));kg82Pluck(0,false)}round++;setTimeout(next,950)});
  KG82.peek=()=>phase==="play"&&P?C.client(px(P.L),py(P.L)):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
 
-/* 3. QUIZ (bếp núc, điều hương) */
-function kg82Bank(b){const wc=s=>s.replace(/,/g,"").split(" ").length;
- if(b==="doi"){const D=typeof DOI!=="undefined"?DOI:[["Núi cao mây phủ","Sông rộng sóng xô"]];return kg82Shuf(D).slice(0,5).map(([x,y])=>{let w=D.filter(p=>p[1]!==y&&wc(p[1])===wc(y)).map(p=>p[1]);if(w.length<2)w=w.concat(D.filter(p=>p[1]!==y&&!w.includes(p[1])).map(p=>p[1]));return{l:"Vế ra",q:x,a:y,w:kg82Shuf(w).slice(0,3)}})}
- const B=b==="bep"?KG82_BEP:b==="y"&&typeof YQ!=="undefined"?YQ:KG82_HUONG;return kg82Shuf(B).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,3)}))}
-function kg82Quiz(box,env){const Qs=kg82Bank(KG82_KIND[env.kind].b);let r=0,pts=0,stop=false,tm=0,t0=0,lock=false,cur=null,cost=0,gone=[],tAct=0,auto=false;
- /* mg-easy: tier by the player's level: fewer wrong choices, more time, the Gợi ý button (drops one wrong answer; a little score) and, at tier 0/1, a quiet auto-hint when she stalls */
- const tier=kg82Tier(env.lv),NW=[1,2,3][tier],LIM=[20000,15000,10000][tier],IDLE=[8000,13000,0][tier],HC=.6,AC=.3;
- const wrap=document.createElement("div");wrap.className="kg82quiz";box.appendChild(wrap);
- function wrongs(){return cur.map((o,i)=>i).filter(i=>cur[i]!==Qs[r].a&&!gone.includes(i))}
- function show(){if(stop)return;if(r>=Qs.length){stop=true;return env.end(pts)}const q=Qs[r];cur=kg82Shuf([q.a].concat(kg82Shuf(q.w).slice(0,NW)));lock=false;gone=[];cost=0;auto=false;t0=tAct=performance.now();
-  wrap.innerHTML=kg82Rows([[q.l,`<span class="ef t"><b>${q.q}</b></span>`]])+`<div class="kg82opts">${cur.map((o,i)=>`<button class="kgbtn" data-i="${i}">${o}</button>`).join("")}</div>`+
-   `<div class="kg82act"><button class="kgbtn" data-hint="1" id="kg82hint">Gợi ý<small>bỏ một lời sai, bớt một ít phần</small></button></div><div class="kpnote" id="kg82tip" style="visibility:hidden">&nbsp;</div>`;
-  wrap.querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>pickA(+b.dataset.i));wrap.querySelector("#kg82hint").onclick=()=>hint(false);tip(IDLE?"Chưa rõ thì chạm Gợi ý, ma ma sẽ chỉ cho một lời không hợp.":"")}
- function tip(t){const e=wrap.querySelector("#kg82tip");if(e){e.textContent=t||"\u00a0";e.style.visibility=t?"":"hidden"}}
- function hint(isAuto){if(lock||stop)return;const w=wrongs();if(!w.length){tip("Chỉ còn lời đúng, cứ chọn.");return}const i=w[Math.floor(Math.random()*w.length)];gone.push(i);cost+=isAuto?AC:HC;tAct=performance.now();
-  const b=wrap.querySelector(`button[data-i="${i}"]`);if(b){b.disabled=true;b.innerHTML=kg82Chip(`✗ ${cur[i]}`,"r")}
-  tip(isAuto?"Ma ma khẽ nhắc: lời này chưa hợp.":"Lời này chưa hợp, bỏ đi."+(wrongs().length?"":" Còn một lời, chọn nó."));if(!wrongs().length){const h=wrap.querySelector("#kg82hint");if(h)h.disabled=true}}
- function pickA(i){if(lock||stop)return;lock=true;const q=Qs[r];const ok=i>=0&&cur[i]===q.a;if(ok)pts+=Math.max(.4,2-cost);kg82Pluck(ok?3:0,ok);
-  wrap.querySelectorAll("button[data-i]").forEach(b=>{const k=+b.dataset.i;b.disabled=true;if(cur[k]===q.a)b.innerHTML=kg82Chip(`✓ ${cur[k]}`,"g");else if(k===i)b.innerHTML=kg82Chip(`✗ ${cur[k]}`,"r")});
-  const h=wrap.querySelector("#kg82hint");if(h)h.disabled=true;
-  if(i<0)wrap.insertAdjacentHTML("beforeend",kg82Rows([["Hết giờ",`Lời đúng: ${q.a}`,"r"]]));r++;setTimeout(show,1000)}
- tm=setInterval(()=>{if(stop)return;const now=performance.now(),left=LIM-(now-t0);env.hud({score:`${Math.round(pts)}/10`,round:`Câu ${Math.min(r+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`});if(left<=0&&!lock)pickA(-1);
-  else if(IDLE&&!lock&&now-tAct>IDLE&&wrongs().length>1)hint(true)},150);
- KG82.peek=()=>{if(lock||stop||!cur)return null;const i=cur.indexOf(Qs[r].a);return{sel:`#${box.id||"kg82box"} button[data-i="${i}"]`}};
- show();return()=>{stop=true;clearInterval(tm)}}
-
 /* 4. PATTERN (vẽ, cắm hoa, thêu, khéo tay): remember which cells were painted */
 function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
  const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[];const LIM=9000,SHOW=2300+(env.lv||0)*160;
@@ -372,7 +329,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();shoot()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();shoot()}};document.addEventListener("keydown",kd);
  KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return Math.abs(x-cx)/A<.04?C.client(W/2,H*.8):null};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
-const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,quiz:kg82Quiz,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
+const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}

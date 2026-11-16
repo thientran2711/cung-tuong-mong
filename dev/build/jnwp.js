@@ -6,7 +6,7 @@
    Same rules as mg-easy / jtd Tứ đức games: first-time demo card, Gợi ý button (costs a little, never blocks), quiet auto-hint when she stalls (tier 0/1),
    a wrong try bounces back, same 0–10 score -> j83 work tiers (raw feeds wkScore) / j71 skill scale.
    Difficulty: ONE function nwTier(kind, env) = jmgt mgTierOf(env): the tier mgSet() put in KG82.tier, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó); the capped score reads mgFull(env,b) when it exists;
-   every number below lives in BAL.nw (one core). The old verse/pair engines (j91) and the doi quiz bank (j82) are unreachable after this file runs. */
+   every number below lives in BAL.nw (one core). The old verse/pair engines (j91) and the doi quiz bank (j82/j5) were deleted in review/mg-train. */
 BAL.nw=Object.assign(BAL.nw||{},{
  calli:{tol:[.04,.032,.026],      /* lane half-width as a share of the board side, by tier */
   rounds:[[2,3,3],[3,3,4],[3,4,5]],/* strokes of the 3 glyphs, by tier */
@@ -163,7 +163,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
  next();return()=>{done=true;stop()}}
 
 /* ================= registry: the word games are unhooked everywhere ================= */
-KG82_ENG.calli=nwCalli;KG82_ENG.doiline=nwDoi;delete KG82_ENG.verse;delete KG82_ENG.pair;
+KG82_ENG.calli=nwCalli;KG82_ENG.doiline=nwDoi;/* the old verse / pair engines are gone from j91 (review/mg-train) */
 KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay; làm đủ các nét theo thứ tự số. Giữ bút trong vệt mờ thì nét đẹp. Có nút Gợi ý. 3 chữ."};
 KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối."};
 KG82_SPR.tho=["tho-slip","ve-brush","ve-inkstone"];KG82_SPR.doi=["tho-slip"];

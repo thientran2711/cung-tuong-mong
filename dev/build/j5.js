@@ -1,22 +1,5 @@
 
 /* mini-games for art lessons */
-const DOI=[["Hoa nở đầu xuân, hương ngập viện","Trăng soi cuối hạ, bóng tràn sân"],["Núi cao mây phủ","Sông rộng sóng xô"],["Gió đưa cành trúc la đà","Mưa rắc nhành mai lác đác"],
- ["Một nét bút son, lòng tựa ngọc","Ba chung rượu cúc, dạ như vàng"],["Đèn khuya soi án sách","Trống sớm giục lều binh"],["Chim kêu bến cũ","Cá lội dòng xưa"],
- ["Lá thu rơi rụng đầy thềm ngọc","Tuyết đông phủ kín khắp lầu son"],["Ngựa hí ngoài thành, cờ phấp phới","Quân reo trên ải, trống dồn dồn"],["Trà thơm mời khách quý","Rượu nhạt tiễn người xa"],
- ["Phượng múa sân rồng","Hạc bay cửa Phật"],["Lòng son chẳng đổi theo năm tháng","Dạ sắt không mòn với nắng mưa"],["Đàn gảy khúc nam phong","Thơ ngâm bài bắc nhạn"],
- ["Sen hồ tây ngát","Cúc giậu đông vàng"],["Cung sâu khóa kín xuân xanh","Lầu vắng giam chìm tuổi ngọc"],["Giọt mưa đêm gõ ngói","Tiếng nhạn sớm qua trời"]];
-const YQ=[{q:"Cảm phong hàn, sợ lạnh, không ra mồ hôi. Dùng vị nào?",a:"Ma hoàng",w:["Thạch cao","Hoàng liên","Toan táo nhân"]},
- {q:"Mất ngủ, hồi hộp, tâm thần bất an. Dùng vị nào?",a:"Toan táo nhân",w:["Ma hoàng","Đại hoàng","Bán hạ"]},
- {q:"Thai động không yên, bụng đau âm ỉ. Vị nào an thai?",a:"Ngải cứu",w:["Xạ hương","Hồng hoa","Đào nhân"]},
- {q:"Sốt cao, khát nước, mồ hôi nhiều. Dùng vị nào?",a:"Thạch cao",w:["Nhân sâm","Ma hoàng","Quế chi"]},
- {q:"Khí hư, mệt mỏi, ăn ít. Dùng vị nào?",a:"Nhân sâm",w:["Đại hoàng","Thạch cao","Hoàng liên"]},
- {q:"Ho nhiều đờm, ngực đầy tức. Dùng vị nào?",a:"Bán hạ",w:["Toan táo nhân","Nhân sâm","Ngải cứu"]},
- {q:"Pha hương xông cho người có thai: an thần mà vô hại?",a:"Trầm hương",w:["Xạ hương","Long não","Hồng hoa"]},
- {q:"Ba bát canh dâng lên. Bát nào có độc?",a:"Canh gà: thìa bạc nhúng vào ngả đen",w:["Cháo yến: thìa bạc vẫn sáng","Chè sen: thơm mát, trong veo","Canh cá: mèo ăn ngon lành"]},
- {q:"Ba chén trà. Chén nào có độc?",a:"Chén có mùi hạnh nhân đắng",w:["Chén thơm mùi hoa nhài","Chén chát nhẹ vị trà mạn","Chén ngọt hậu vị cam thảo"]},
- {q:"Ba thang thuốc an thai. Thang nào bị bỏ xạ hương?",a:"Thang hắc nồng, mùi hương ngai ngái",w:["Thang đắng nhẹ mùi ngải cứu","Thang ngọt vị táo đỏ","Thang thơm mùi trần bì"]},
- {q:"Ba đĩa bánh. Đĩa nào bị hạ độc?",a:"Bánh hoa quế: mèo ngửi rồi bỏ đi",w:["Bánh đậu xanh: mèo ăn sạch","Bánh hạt sen: nếm thử không sao","Bánh táo: thái giám nếm vẫn khỏe"]},
- {q:"Hoàng tử lên đậu, sốt cao, nổi mụn khắp người. Phải làm gì?",a:"Kiêng gió, giữ ấm, cách ly",w:["Tắm nước lạnh cho hạ sốt","Cho ra vườn hóng gió","Cho chơi cùng các hoàng tử khác"]}];
 const HOA=[["Mai",""],["Lan",""],["Cúc",""],["Trúc",""],["Núi",""],["Sông",""],["Hạc",""],["Thuyền",""]];
 const VU=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
 const shuf=a=>a.slice().sort(()=>Math.random()-.5);
@@ -24,10 +7,9 @@ let mgStop=null,mgDone=true;
 const MG={
  cam:["Cầm: tấu khúc",`Nốt rơi xuống bốn dây Cung, Thương, Giốc, Chủy. Chạm đúng dây khi nốt chạm vạch đỏ${typeof matchMedia==="function"&&matchMedia("(pointer:coarse)").matches?"":" (phím D F J K)"}.`,gCam],
  ky:["Kỳ: đấu cờ","Bàn 7×7. Ngươi cầm quân đen đi trước; năm quân liền một hàng là thắng.",gKy],
- thi:["Thi: đối câu","Chọn vế đối chỉnh nhất cho vế ra. 5 câu.",(b,l,e)=>quiz(b,shuf(DOI).slice(0,5).map(([x,y])=>{const wc=s=>s.replace(/,/g,"").split(" ").length;let w=DOI.filter(p=>p[1]!==y&&wc(p[1])===wc(y)).map(p=>p[1]);if(w.length<3)w=w.concat(DOI.filter(p=>p[1]!==y&&!w.includes(p[1])).map(p=>p[1]));return{q:`Vế ra: <b>${x}</b>`,a:y,w:shuf(w)}}),l,e)],
  hoa:["Họa: nhớ nét bút","Lật hai ô một lượt, tìm đủ các cặp giống nhau trong số lượt cho phép.",gHoa],
- vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu],
- y:["Y thuật & điều hương","Chọn vị thuốc đúng, hoặc tìm thứ có độc. 5 câu.",(b,l,e)=>quiz(b,shuf(YQ).slice(0,5).map(x=>({q:x.q,a:x.a,w:shuf(x.w)})),l,e)]};
+ vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu]};
+/* review/mg-train (owner 16/11 07:20Z no word games): thi + y lessons and their banks (DOI, YQ) + quiz() removed; the openMG wrapper (j82) puts KG82_MGL thi / y (calli, blend) in MG before every open */
 function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").textContent=h;$("ov").hidden=false;mgDone=false;
  const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Để trời định<small>${word(od(35))} · thành: tiến bộ một phần</small>`;
  const fin=(pts,skip)=>{if(mgDone)return;mgDone=true;if(mgStop)mgStop();mgStop=null;sk.hidden=true;const g=pts*(S.master?2:1);
@@ -35,13 +17,6 @@ function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").te
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
  sk.onclick=()=>fin(roll(od(35))?1:0,true);
  mgStop=fn($("mgb"),lv,p=>fin(p,false))}
-function quiz(b,Qs,lv,end){let r=0,sc=0,stop=false;const nO=lv>=3?4:3;
- function show(){if(stop)return;if(r>=Qs.length)return end(sc>=5?3:sc>=3?2:1);const q=Qs[r];const opts=shuf(q.w.slice(0,nO-1).concat([q.a]));
-  b.innerHTML=`<p class="mgsc">Câu ${r+1}/${Qs.length} · đúng ${sc}</p><p class="mgq">${q.q}</p><div class="mgopts">${opts.map((o,i)=>`<button data-i="${i}">${o}</button>`).join("")}</div>`;
-  const bs=[...b.querySelectorAll(".mgopts button")];
-  bs.forEach(btn=>btn.onclick=()=>{const ok=opts[+btn.dataset.i]===q.a;if(ok)sc++;btn.classList.add(ok?"ok":"miss");bs.find(e=>opts[+e.dataset.i]===q.a).classList.add("ok");bs.forEach(e=>e.disabled=true);r++;setTimeout(show,900)});
-  bs[0].focus()}
- show();return()=>{stop=true}}
 function gCam(b,lv,end){const L=["Cung","Thương","Giốc","Chủy"],N=16,fall=Math.max(1100,2200-lv*220),gap=Math.max(450,800-lv*60);
  b.innerHTML=`<div class="lanes" id="lanes">${L.map((n,i)=>`<div class="lane" data-l="${i}"></div>`).join("")}<div class="hitline" id="hitl"></div></div><div class="lbtns">${L.map((n,i)=>`<button data-l="${i}">${n}</button>`).join("")}</div><p class="mgsc" id="mgsc">Trúng 0/${N}</p>`;
  const H=$("lanes").clientHeight,HIT=Math.round(H*.83);$("hitl").style.top=HIT+"px";
