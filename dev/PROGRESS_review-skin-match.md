@@ -71,3 +71,16 @@
   player: .ahcache/sm/venv/bin/python dev/art/skin-match/player.py .ahcache/sm/out .ahcache/sm/base/{por,fig}-player-look1-*.webp
   check:  python3 dev/figwork/cutcheck.py on out files; sheets; copy out/*.webp to img/ and python3 dev/site/cdn_sync.py img/<files>
 No generated (Magnific) art in this task.
+
+## D52 skin-audit (branch review/skin-audit, continues review/skin-match; step 4 DONE)
+- Setup note: this box needed `apt-get update && apt-get install -y libegl1 libgles2`; runm.sh (new, in dev/art/skin-match/) = chunked download(100) -> measure.py -> delete.
+- Measured: 7727 never-measured fig-* (CDN now has 8758 fig-*): consort 2520, maid 4451, eunuch 448, kid 186, man 119, mama 29, official 21, physician 13, thaihau 11, emperor 6, player 15 (appended to log/all.jsonl; 0 read/no-face errors).
+- Flagged by select.py (half-size audit): 322 (4.2%). Re-measured at full res by fixrun.py: 205 fig really mismatched and fixed (+35 por necks) = 240 files; 117 rejected (full-res shift = 0, borderline at half size, left untouched).
+  Fixed: consort 47, maid 125, eunuch 17, kid 3, man 9, physician 2, emperor 1, mama 1 (table: `table.py log/fix_audit2.jsonl base.json`; median excess hands 2.9-3.0 -> 0.3, necks 2.6-3.1 -> 0.5).
+- Sharpness (sharp.py vs original): q92 as made had 38 files < 0.98 (min 0.927); reenc.py re-encoded them (33 at q95, 5 at q98). Final: head Laplacian/Tenengrad ratios min 0.981, none rejected as soft. Bytes 14.1 MB -> 15.1 MB.
+- Contact sheets (crops.py around changed skin for 205 figs, sheet.py for 35 por) all LOOKED at: only hands/necks warmer, clothes/faces untouched, no blotches.
+- Coordination: every file was downloaded from the CURRENT CDN right before fixing; index md5 re-checked before upload: only fig-consort-c23-t6-a51 had changed (someone's newer edit) -> re-downloaded and re-fixed on that version. After upload all 240 live files are byte-identical to my outputs (cmp). No file of the C9 huadian / D23 mole workers was overwritten with an older version.
+- Uploaded: 240/240 with cdn_sync (6 batches of 40, after the sheets were checked). cutcheck not run (dev/figwork sparse-excluded; alpha untouched by fix.apply, same dimensions).
+- Files changed on CDN: log/uploaded_audit2.txt (the full list); fix records log/fix_audit2.jsonl, flagged list log/flag_audit2.txt, sharpness log/sharp_audit2.tsv, log/reenc_audit2.tsv.
+- Heads-up for C9/D23: a later full-res re-edit of these 240 files must start from the current CDN version (they now carry the skin fix).
+- Pending CDN upload: none.
