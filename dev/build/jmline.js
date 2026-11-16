@@ -28,7 +28,7 @@ function mlAgeOk(s){const B=mlB();const a=s.age||B.ageDef;return a>=B.eyeAge[0]&
 /* 1. the Emperor's eye */
 function mlEyeP(p,s){const B=mlB();if(!mlAgeOk(s))return 0;let c=B.eye[Math.max(0,Math.min(B.eye.length-1,srk(s)))]||0;
  c*=1+Math.max(0,p.sung||0)/100*B.eyeSung;if(s.seek&&s.seek.until>=(S.turn||0))c*=B.seekMul*(s.seek.used?B.useMul:1);return c}
-function mlEye(p,s){if(mlGuest())return false;/* co-op guest: rises are made on the host only (the week merge drops a new consort made on the guest, PROTOCOL §4.4) */if(!mlOn()){const O=BAL.mline;mlC("eyeTry");const ok=srk(s)>=O.offRank&&roll(O.offEye);if(ok)mlC("eyeHit");return ok}const c=mlEyeP(p,s);mlC("eyeTry");mlC("eyeP",c);const ok=roll(c);if(ok)mlC("eyeHit");return ok}
+function mlEye(p,s){/* co-op guest (review/coop-guest-maid): her maid rolls the eye like solo; the new consort reaches the world through the guest→host request (jcoopask, PROTOCOL §4.1) */if(!mlOn()){const O=BAL.mline;mlC("eyeTry");const ok=srk(s)>=O.offRank&&roll(O.offEye);if(ok)mlC("eyeHit");return ok}const c=mlEyeP(p,s);mlC("eyeTry");mlC("eyeP",c);const ok=roll(c);if(ok)mlC("eyeHit");return ok}
 function mlRose(p,s){mlC("rose");if(s.seek)mlC("roseSeek");if(s.seek&&s.seek.used&&roll(mlB().useTurn)){s.loyal=Math.min(s.loyal||0,mlB().riseLoy-1);mlC("useTurn")}}
 /* 2. seeking his notice */
 function mlSeek(p){const B=mlB();let ev="";for(const s of (p.staff||[]).slice()){if(s.role!=="maid"||!mlAgeOk(s))continue;const T=S.turn||0;
