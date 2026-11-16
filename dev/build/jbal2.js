@@ -108,13 +108,21 @@ Object.assign(BAL,{itd:{allow:false}});
    emp: yearly % plots ass (assassination) / poi (poison), ×(1+weak×(50−power)/50) when S.reign.power < 50; foil = % cấm quân / thử món stop it at power 50 (±(power−50)/2, 20–90)
    illAge = [from age, per years, % extra monthly illness at +per years]; dieAge = [from age, per years] → a critical illness gets 25×weight×(age−from)/per % extra death
    tired = sleep regen −1 per `per` years over `from` (never below min); griefMo / griefIll = months and monthly % tâm bệnh after losing her child
+   birth (owner 16/11 approved): misX = natural miscarriage × (j8 6/2/6 % a month → ≈20 % a whole pregnancy; an thai halving and the Sức<30 +8 kept);
+        hardX = a hard birth comes at birthRisk × hardX; of hard births choiceP % become the Emperor's choice "giữ mẹ hay giữ con", the rest kill
+        the mother hardDie % (else she survives: Sức −hardSuc, barrenP % never conceives again); stillP % (+stillAge per year over 35) stillbirth;
+        newbornP % of newborns die in the first month (part of the child curve: kid.risk counts the rest);
+        emp = his choice, % giữ mẹ = base + sung×(Sủng−50) + th×Thái hậu (×hieuthao if Hiếu thảo) − heirNeed (no living prince) − boy (the Thái y guesses
+        a boy: boyGuess % of hard births) + his traits (nhantu, datinh, mesac, lanhlung, chamchinh); 5–95
    fate (Emperor dies, her son not the heir): phiRank+ or a daughter → Thái phi; a son → theo con ra phủ; childless: rank ≤ homeRank, age < homeAge → về quê (homeP %),
         else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
 BAL.mort={on:1,playerFloorYears:0,
  life:{show:0,care:1,careAdd:1,careMax:3,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
   dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:"adult",
-        kid:{risk:15,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},
+        kid:{risk:12,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},
  oldFloor:0,thIllKeep:30,sudden:15,omen:[2,6],pre:{mo:12,ill:6,suc:2},acc:{me:.05,npc:.08,emp:.15},oddP:30,
  emp:{ass:.45,poi:.3,weak:1.2,foil:60},
  illAge:[35,25,1.5],dieAge:[45,15],tired:{from:35,per:5,min:4},griefMo:6,griefIll:12,
+ birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillAge:.5,newbornP:3,
+  emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
  fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40}};

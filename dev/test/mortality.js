@@ -22,6 +22,10 @@ const R=path.resolve(__dirname,'../..');const MONTHS=+process.argv[2]||240,LIVES
   for(const [n,f] of F){start();quiet();rivals.forEach(v=>v.kids=[]);S.heir=null;f();S.mort.empDue="Ngự thiện có độc";
    S.month=12;let ev="";try{ev=monthTick()}catch(e){res.errs.push(n+": "+String(e).slice(0,160))}
    const q=(Q[0]||{});res.fates.push({n,dead:S.dead,fate:S.fate,t:String(q.h||"").replace(/<[^>]+>/g,'').slice(0,260)});quiet();BAL.mort.fate.tuanP=25}
+  /* birth: force hard births → the Emperor's choice; stillbirth; plain hard birth survived */
+  const B=BAL.mort.birth,b0=JSON.stringify(B);res.birth=[];const tries=[["choice, low favour",()=>{B.stillP=0;B.hardX=99;B.choiceP=100;S.sung=5;S.th=-50}],["choice, high favour",()=>{B.stillP=0;B.hardX=99;B.choiceP=100;S.sung=100;S.th=80}],["hard survived",()=>{B.stillP=0;B.hardX=99;B.choiceP=0;B.hardDie=0}],["stillbirth",()=>{B.stillP=100}]];
+  for(const [n,f] of tries){for(let i=0;i<3;i++){start();quiet();S.suc=30;f();const k0=S.kids.length;let r="";try{r=birthP(S,false)}catch(e){res.errs.push(n+": "+e)}
+   res.birth.push({n,fate:S.fate||"",dead:!!S.dead,kids:S.kids.length-k0,suc:S.suc,q:(Q.find(x=>x.t==="Giữ mẹ hay giữ con")||{}).h?"event":"",t:String(r).replace(/<[^>]+>/g,'').slice(0,120)});Object.assign(B,JSON.parse(b0));quiet()}}
   /* old save: strip lifespans and S.mort, round-trip */
   start();quiet();const P2=[S,S.emp,...rivals];P2.forEach(p=>{delete p.tho;delete p.thoM;delete p.thoO});delete S.mort;S.turn=60;S.year=6;
   try{const d=JSON.parse(JSON.stringify(ser()));deser(d);res.old={ok:S.tho>0&&S.emp.tho>0&&S.mort&&S.mort.old===1,me:[S.age,S.tho]}}catch(e){res.old={err:String(e).slice(0,200)}}

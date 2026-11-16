@@ -40,7 +40,7 @@ function ageOf(p){return p===S?S.age:p===S.thO?S.thAge:p.age}
 function grpOf(p,K){return p===S?"me":p===S.emp?"emp":K.has(p)?"kid":"adult"}
 function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.name||"người hầu"}
 /* give p a lifespan once */
-function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
+function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
  let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
  p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
  if(p===S&&M.life.show){const w=p.tho<40?"yểu mệnh":p.tho<60?"trung thọ":p.tho<75?"thượng thọ":"hạc thọ";
@@ -61,7 +61,7 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
  if(p===S.emp){S.mort.empDue=why;return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
- if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.age<6?"mất vì đậu mùa":"lâm bệnh mà mất"),mine)}
+ if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<6?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(pick(MAIDS.filter(x=>x!==o)),40);return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
@@ -96,7 +96,7 @@ function empPlot(){if(cw())return "";const P=S.mort;let ev="";
   if(S.mat>=2||roll(50))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
  return ev}
 function monthMort(){if(!S||!M.on||S.dead)return "";initAll();let ev="";const K=kidSet();
- for(const p of people()){if(S.dead)break;if(!(p.tho>0))continue;if(p===S.emp&&cw())continue;if(p.alive===false)continue;
+ for(const p of people()){if(S.dead)break;if(!(p.tho>0||p.nb))continue;if(p===S.emp&&cw())continue;if(p.alive===false)continue;
   const ml=left(p);const show=p===S||p===S.emp||p===S.thO||rivals.includes(p);
   if(ml<=0){ev+=kill(p,p===S?`Tuổi trời đã tận, ${ILL[ageOf(p)>=55?"laobenh":"trongbenh"].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi`:"",K);continue}
   if(show&&p.thoO&&ml<=p.thoO)ev+=omen(p,ml);
@@ -140,6 +140,35 @@ function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p
 /* grief: losing her child weighs on her health (illness easier for griefMo months) */
 (function(){const k0=kidDie;kidDie=function(k,why,mine){if(mine&&S)S.mortGrief=M.griefMo;return k0.apply(this,arguments)}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(p===S&&S.mortGrief>0){S.mortGrief--;if(!illOf(S)&&roll(M.griefIll))return catchIll(S,"tambenh")+p0.apply(this,arguments)}return p0.apply(this,arguments)}})();
+/* ================= BIRTH (owner 16/11 approved: stillbirth, newborn death, hard birth survived, "giữ mẹ hay giữ con" = the Emperor's choice) =========
+   Same rule for her and every NPC consort. The old death roll of birthP (roll birthRisk) is taken over here: birthRisk is set to 0 inside birthP. */
+function sonsAlive(){try{return allKids().filter(([k])=>k.alive&&k.sex==="m").length}catch(e){return 1}}
+function keepMomOdds(p,boy){const E=M.birth.emp;const th=p===S?S.th:(p.th||0);let o=E.base+E.sung*((p.sung||0)-50)+E.th*th*(has("hieuthao")?E.hieuthao:1);
+ if(!sonsAlive())o-=E.heirNeed;if(boy)o-=E.boy;for(const k of ["nhantu","datinh","mesac","lanhlung","chamchinh"])if(has(k))o+=E[k];return cl(Math.round(o),5,95)}
+function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
+(function(){const b0=birthP;birthP=function(p,fake){if(!M.on||fake||!p)return b0.apply(this,arguments);const me=p===S,B=M.birth;
+ const r=birthRisk(p);const br0=birthRisk;let res;
+ /* stillbirth */
+ if(roll(B.stillP+Math.max(0,(p.age||20)-35)*B.stillAge)){ap(p,{suc:-20});p.stillN=(p.stillN||0)+1;if(me)S.mortGrief=M.griefMo;p.lastBirth=S.turn;
+  return me?`<span class="r">Ngươi trở dạ suốt một đêm, đứa bé sinh ra đã không còn hơi thở (thai chết lưu).</span> Sức -20. `:`<span class="r">${p.name} lâm bồn, thai chết lưu.</span> `}
+ if(!roll(r*B.hardX)){birthRisk=()=>0;try{return b0.apply(this,arguments)}finally{birthRisk=br0}}
+ p.hardN=(p.hardN||0)+1;
+ if(roll(B.choiceP)){const guess=roll(B.emp.boyGuess);const o=keepMomOdds(p,guess);const mom=roll(o);
+  const who=me?"ngươi":p.name;const head=`Bà đỡ quỳ ngoài điện: ${who} khó sinh, chỉ giữ được một. ${guess?"Thái y đoán là hoàng tử. ":""}Hoàng thượng lặng đi hồi lâu rồi phán: `;
+  if(mom){ap(p,{suc:-B.hardSuc});p.lastBirth=S.turn;if(roll(B.barrenP))p.barren=1;p.choiceN=(p.choiceN||0)+1;
+   const t=head+"“Giữ mẹ.” Đứa bé không giữ được."+(p.barren?" Thái y nói từ nay khó lòng có thai lại.":"");if(me){S.mortGrief=M.griefMo;birthEvent("Giữ mẹ hay giữ con",`<p>${t}</p><p class="past">Sức -${B.hardSuc}</p>`)}
+   return `<span class="r">${t}</span> `}
+  /* giữ con: the child is born, the mother dies */
+  p.choiceN=(p.choiceN||0)+1;birthRisk=()=>0;try{res=b0.apply(this,arguments)}finally{birthRisk=br0}
+  const t=head+"“Giữ con.”";if(me){die(`${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt`);return res}
+  p.alive=false;if(p.queen)p.queen=false;return res+`<span class="r">${t} ${p.name} sinh hạ hài nhi rồi qua đời.</span> `}
+ if(roll(B.hardDie)){if(me){die("Khó sinh, băng huyết mà chết");return ""}p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
+ birthRisk=()=>0;try{res=b0.apply(this,arguments)}finally{birthRisk=br0}ap(p,{suc:-B.hardSuc});if(roll(B.barrenP))p.barren=1;
+ return res+(me?`<span class="r">Ngươi khó sinh, vượt cạn suốt hai ngày mới qua khỏi.</span> Sức -${B.hardSuc}. ${p.barren?"Thái y nói từ nay khó lòng có thai lại. ":""}`:`${p.name} khó sinh nhưng qua khỏi. `)}})();
+/* a woman the Thái y says can never conceive again */
+(function(){const c0=conceiveCh;conceiveCh=function(p){if(M.on&&(p||S).barren)return 0;return c0.apply(this,arguments)}})();
+/* newborn death in the first month (part of the child curve) */
+(function(){const m0=mkKid;mkKid=function(sex,age){const k=m0.apply(this,arguments);try{if(M.on&&age===0&&roll(M.birth.newbornP)){k.tho=0;k.thoM=((S&&S.month)||1)%12+1;k.thoO=0;k.nb=1}}catch(e){}return k}})();
 /* the legacy roll in j3 asks here: the Emperor dies when his lifespan / a plot / an accident says so */
 window.mortEmpDue=function(){if(!M.on)return S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5);if(cw())return false;
  const w=S.mort&&S.mort.empDue;if(!w)return false;S.mort.empWhy=w;S.mort.empDue=null;return true};
