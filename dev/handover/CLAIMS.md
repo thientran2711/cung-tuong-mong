@@ -127,5 +127,5 @@
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
 | cardflip-glow REVIEW (owner bug; frame-ring light, slower, scene-end button) | review/cardflip-glow-r1 | main s14 | session_01UV1SzggxfoaRwYDvYoEu4Q (sonnet) | RUNNING | 16/11 08:36Z |
 | design-scale REVIEW (opus; one page 590x820, uniform scale) | review/design-scale-r1 | main s14 | session_01UV1SzkHA4ScRWkoirdEoSn (opus) | RUNNING | 16/11 08:40Z |
-| D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | (opening, s3) | RUNNING | 16/11 09:08Z |
-| D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | (opening, s3) | RUNNING | 16/11 09:08Z |
+| D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | RUNNING | 16/11 09:08Z |
+| D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
