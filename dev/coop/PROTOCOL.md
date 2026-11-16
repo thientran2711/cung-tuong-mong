@@ -93,6 +93,8 @@ the guest causes in the world goes through the host:
   into `R` as a stand-in on every rebuild until it is answered).
 - New servant she puts into an NPC's staff (her maid bought by a bigger consort, a planted servant): `{k:"srv", to:<npc id>, s}`.
   A child she took from an NPC: `{k:"kidout", from:<npc id>, name}`.
+  A servant she took out of an NPC household into hers (rank-up gift, a spy taken back): `{k:"srvout", from:<npc id>, sid, name}` (review r1).
+  An NPC household's refill (`fillStaff` / `staffInit`) does not run on the guest (host only), so her copy of the world never invents NPC servants (review r1).
 - New requests are also relayed once at once: `act {k:"ctm-ask", mode:"ask", id, L:[requests]}` (relay only; older clients ignore it).
 - Host: after every rebuild and on the relay (only while its own `end` for the week has not gone), each request is applied once with
   the solo rule (consort: `roomFor("consort")`, a world id `++rid`, `coopAsk=<request id>`, her links `rl/ro/gp/ep[902]` from v).

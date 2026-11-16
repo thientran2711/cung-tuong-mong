@@ -49,6 +49,9 @@ function collect(d){const B=CW.base&&CW.base.W&&CW.base.W.R||[];const bm=new Map
  const kidsMe=new Set((d.S.kids||[]).map(k=>k&&k.name));
  for(const r of d.R){if(!r||r.coop||isTmp(r.id)||r.id>=900)continue;const b=bm.get(r.id);if(!b)continue;
   const bs=new Set((b.staff||[]).map(s=>s.sid));for(const s of r.staff||[])if(s&&!s.coop&&!bs.has(s.sid))add({id:"s"+s.sid+">"+r.id,k:"srv",to:r.id,s:J(s)});
+  /* review r1: a servant she took OUT of an NPC household into her own (promotion gift prStaff, j72 a spy back to her) = the kidout case */
+  const cs=new Set((r.staff||[]).map(s=>s&&s.sid)),mine=new Set((d.S.staff||[]).map(s=>s&&s.sid));
+  for(const s of b.staff||[])if(s&&!s.coop&&!cs.has(s.sid)&&mine.has(s.sid))add({id:"o"+s.sid+"<"+r.id,k:"srvout",from:r.id,sid:s.sid,name:s.name});
   const rk=new Set((r.kids||[]).map(k=>k&&k.name));for(const k of b.kids||[])if(k&&!rk.has(k.name)&&kidsMe.has(k.name))add({id:"k"+k.name+"<"+r.id,k:"kidout",from:r.id,name:k.name})}
  d.S.coopAsk=J(L);
  if(fresh.length)setTimeout(()=>{try{if(COOP.state.status==="open")COOP.send({t:"act",k:"ctm-ask",mode:"ask",id:"ask:"+fresh.map(a=>a.id).join(","),L:J(fresh)})}catch(e){}},0)}
@@ -78,10 +81,10 @@ function fixRefs(o){if(!o||typeof o!=="object")return o;if(Array.isArray(o)){for
  for(const k of Object.keys(o))o[k]=fixRefs(o[k]);return o}
 const npcOf=id=>rivals.find(v=>v&&v.id===id&&!v.coop&&v.alive&&!v.out)||null;
 function hNp(a){const was=rivals.find(v=>v&&v.coopAsk===a.id);if(was)return was.id;if(!a.v||!roomFor("consort"))return 0;
- const g=a.v,n=fixRefs(toHost(J(g)));delete n.__maid;n.id=++rid;n.coopAsk=a.id;n.alive=true;n.out=false;
+ const g=a.v,n=fixRefs(toHost(J(g)));delete n.__maid;const z=newRival(n.rank||0,!!n.queen);/* review r1 (ONE CORE): the world id and the host's own links come from newRival, not typed copies */n.id=z.id;n.coopAsk=a.id;n.alive=true;n.out=false;
  for(const m of ["rl","ro","gp","ep"]){n[m]=n[m]&&typeof n[m]==="object"?n[m]:{};for(const k of Object.keys(n[m]))if(isTmp(+k)||k==="me")delete n[m][k]}
  /* her links to the newcomer (local v.rel… on the guest) are the newcomer's links to her pid in the world; the host's own start fresh */
- n.rl[GP]=g.rel||0;n.ro[GP]=g.oan||0;n.gp[GP]=g.ghen||0;n.ep[GP]=g.ev||0;n.rel=R(20)-10;n.oan=0;n.ghen=R(15);n.ev=0;if(n.evm)n.evm={};
+ n.rl[GP]=g.rel||0;n.ro[GP]=g.oan||0;n.gp[GP]=g.ghen||0;n.ep[GP]=g.ev||0;n.rel=z.rel;n.oan=0;n.ghen=z.ghen;n.ev=0;if(n.evm)n.evm={};
  if(rivals.some(v=>v&&v.name===n.name)||(S&&S.name===n.name))n.name=freshName();
  S.usedFaces=S.usedFaces||[];if(n.face>=0&&S.usedFaces.includes(n.face)&&!(n.fc))Object.assign(n,drawFace());else if(n.face>=0&&!S.usedFaces.includes(n.face))S.usedFaces.push(n.face);
  rivals.push(n);try{palFix()}catch(e){}try{log(`${n.name} vào cung, phong ${RANKS[n.rank]?RANKS[n.rank].n:""}.`)}catch(e){}return n.id}
@@ -89,7 +92,8 @@ function hSrv(a){const t=npcOf(a.to);if(!t||!a.s)return 0;t.staff=t.staff||[];if
  const s=toHost(J(a.s));try{if(allServ().some(x=>x&&x.sid===s.sid))s.sid=++sidN}catch(e){}t.staff.push(s);return 1}
 function hPet(a){const t=npcOf(a.to);if(!t||!a.P)return 0;t.pets=t.pets||[];if(!t.pets.some(P=>petKey(P)===petKey(a.P)))t.pets.push(toHost(J(a.P)));return 1}
 function hKid(a){const t=rivals.find(v=>v&&v.id===a.from&&!v.coop);if(!t||!t.kids)return 1;const i=t.kids.findIndex(k=>k&&k.name===a.name);if(i>=0)t.kids.splice(i,1);return 1}
-const H={np:hNp,srv:hSrv,pet:hPet,kidout:hKid};/* pet: kept for a later guest act that gives a pet to an NPC (none today: NPC pet gains still roll on both, see the report) */
+function hSrvOut(a){const t=rivals.find(v=>v&&v.id===a.from&&!v.coop);if(!t||!t.staff)return 1;const i=t.staff.findIndex(s=>s&&s.sid===a.sid&&s.name===a.name);if(i>=0)t.staff.splice(i,1);return 1}
+const H={np:hNp,srv:hSrv,pet:hPet,kidout:hKid,srvout:hSrvOut};/* pet: kept for a later guest act that gives a pet to an NPC (none today: NPC pet gains still roll on both, see the report) */
 function hostApply(L,why){if(!host()||!live()||!Array.isArray(L))return 0;S.askDone=S.askDone||{};let n=0;
  for(const a of L){if(!a||!a.id||S.askDone[a.id]||!H[a.k])continue;let r=0;try{r=H[a.k](a)}catch(e){console.error("ask apply",a.k,e)}
   S.askDone[a.id]=[r,wk()];n++;N.applied++;N.log=(N.log||[]).slice(-9).concat([why+' '+a.id+' w'+wk()+' r'+r]);if(r===0)N.refused++}
@@ -110,5 +114,8 @@ COOP.on("act",m=>{try{if(!host()||!m||m.from===CW.seat||m.k!=="ctm-ask"||!live()
 if(typeof tuyenTu==="function"){const f=tuyenTu;tuyenTu=function(){if(guest())return;return f.apply(this,arguments)}}
 if(typeof tdSoMonth==="function"){const f=tdSoMonth;tdSoMonth=function(){if(!guest())return f.apply(this,arguments);
  let T=null,y0;try{T=trS();y0=T.tyY;T.tyY=S.year}catch(e){}try{return f.apply(this,arguments)}finally{try{if(T&&T.tyY===S.year)T.tyY=y0}catch(e){}}}}
+/* review r1: an NPC household's refill (staffInit / fillStaff after a rise, an empty master) rolls on the host only (as servMonth's refill);
+   on the guest it made servants the merge does not hold, and they came back to the host as "srv" requests (household over its cap) */
+if(typeof fillStaff==="function"){const f=fillStaff;fillStaff=function(p){if(guest()&&p!==S)return;return f.apply(this,arguments)}}
 if(typeof sendMaid==="function"){const f=sendMaid;sendMaid=function(a){if(guest()&&a!==S)return"";return f.apply(this,arguments)}}
 }catch(e){console.error("jcoopask",e)}})();
