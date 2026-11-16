@@ -128,3 +128,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C61 | review/fig-hd-upscale (Magnific upscale HD for servants/eunuchs/men; owner approved credits) | RUNNING (sonnet) |
 | C62 | review/servant-system (room-stage household bug + servant audit/proposal) | RUNNING (opus) |
 | C63 | review/facefx-all-r1 (fit rows + merge main) | RUNNING (sonnet) |
+| C64 | review/slap-mg (slap + dodge minigame, 3 tiers) | RUNNING (sonnet) |

@@ -1161,3 +1161,8 @@ All must work in co-op.
 - (16/11) Owner: REMOVE the 2-year player floor. The roll decides; earlier deaths from poison, assassination etc. are accepted.
 - (16/11) Owner on servants: every servant must rise by their own effort (like her on the maid road), not only the one the reward lifts. Unnamed NPC servants must still act on their master's orders (spy, harm her). Her eunuchs are not visible anywhere in her room; they must be on the room stage (page 2 via the arrow). "Many holes" in the NPC servant system. → review/servant-system (opus): fix the room-stage household bug now + audit + proposal back to the owner.
 - Explained to the owner: Tát exists (jface 'tat': same place and her rank higher than the target, under Mưu kế). Slap minigame proposal (4 tiers) pending.
+- (16/11) APPROVED: the 4 pregnancy parts (stillbirth, newborn early death, survived hard birth, "giữ mẹ hay giữ con") + natural miscarriage lowered to ~20%. "Giữ mẹ hay giữ con" is the EMPEROR's choice, not hers (she can only plead beforehand). → review/mortality.
+- (16/11) APPROVED: the active NPC maid line; maids of ANY rank can catch the Emperor's eye (higher rank = more likely). → review/servant-system phase 2.
+- (16/11) Hủy dung (scar) must follow the same one-rule face system → facefx-all-r1.
+- (16/11) Slap: 3 tiers only (nhẹ/vừa/nặng; "nhạt" = "nhẹ"). APPROVED: the slap minigame + the dodge minigame. → review/slap-mg.
+- (16/11) Lifespan: no floor; the roll decides; care can still add 2–3 years (careMax 3) as already ruled.
