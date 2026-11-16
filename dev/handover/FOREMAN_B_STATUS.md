@@ -19,7 +19,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
 | C26b stat-fx follow-up | review/stat-fx-2 @f4096090 | sonnet | REVIEWING (review/stat-fx-2-r1, sonnet); contains stat-fx-r1 + pcard-fill-r1 |
-| C46 map-labels | review/map-labels @5462586d | sonnet | REVIEWING (review/map-labels-r1, sonnet) |
+| C46 map-labels | review/map-labels-r1 | sonnet | PASS e23562007d7f431fce9fdbc95bf1f2799ad6a350 (KIT KEEPER: §34.1d re-skin) |
 | D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
 | D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
 | D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
@@ -47,6 +47,7 @@ PASS review/succession-port-r1 0d9b49b9202c663ef4151c01e890a05ffd62aa30 (D32; su
 PASS review/palace-map-port-r1 306de247abcc3c9cf0bbab9fbddb91e6946131c3 (D30; palace courtyard → hall rows → residence room paintings; 675 images on CDN; courtyard pl2 images ~500 KB each = over budget, re-encode follow-up)
 PASS review/lost-items-port-r1 1d51bbf1ea55c70de7b2b46d136601c97c30a60e (D38; lost items + rivalry/steal acts; 0 unfair penalties in bot runs; ancestry vs main a523531d re-checked by Foreman B)
 PASS review/weekbook-entries-r1 1badc13c817d0d67971439fd6d2cbd944e47ad89 (C33; per-person readable week-book entries; reviewer fixed rival festival prizes landing on Hoàng thượng/her page)
+PASS review/map-labels-r1 e23562007d7f431fce9fdbc95bf1f2799ad6a350 (C46; readable Dư đồ paper-chip labels 13px, mapFit floor zoom; needs kit keeper approval of the §34.1d re-skin)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -67,7 +68,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - lost-items-port-r1 (PASS): no new kit parts. Also: text-only notices show an empty/generic scene frame ("Có người đến chơi" placeholder) — generic pic decision or per-notice art. Note: live j92 Giá họa hearing choices say "an toàn · không được mất gì" though the hearing can go against her — kit-wide wording fix for the keeper.
 - (found by succession reviewer, exists on main today) the sticky .kpbar kcattabs strip ("Tất cả 0/16 …") draws on top of the modal on the 1180x820 end card ("Kiếp này") — z-index/stacking, kit keeper.
 - §72 CLASH: review/room-btn-r1 (PASS c80e5df9) used KIT §72 for kitBackBtnHtml, and review/tutorial-r2's kitGoalDetail (jgoal.js) is also §72 — keeper please assign one of them a new number.
-- map-labels (reviewing): re-skins existing kit §34.1d .mspot .mlab (paper chip 13px, wrap, no opacity cuts) + mapFit floor zoom (no touching labels); when D30 lands raise its .kpm-spot .mlab hall labels to 13px.
+- map-labels-r1 (PASS): re-skins existing kit §34.1d .mspot .mlab (paper chip 13px, wrap, no opacity cuts) + mapFit floor zoom (no touching labels); when D30 lands, drop its own .kpm-spot .mlab font/padding (12.5px nowrap) so it inherits the chip; mapFit floor-zoom rule is a new kit behaviour to document; at 1180x820 neighbouring .mmeta rows ("N bóng · K khắc") overlap — including them in the floor rule zooms the iPad map to ×2.75, so keeper/owner decide; .mspot .mwhy and .acb in j41 still use the old tiny dark style (probably unused).
 - KIT REQUEST (C26b stat-fx-2): in §57.1 jstatfx.js the glowing number never takes the gain/loss colour because jk4's `.kst:not(.kst-tile):not(.kst-chip)>.kstv{color:var(--ink)}` (0,4,0) beats `.ksf-g>.kstv`/`.ksf-r>.kstv` (0,2,0). Proposed: `.kst.ksf-g:not(.kst-tile):not(.kst-chip)>.kstv{color:#1f6b2f}`, `.kst.ksf-r:not(.kst-tile):not(.kst-chip)>.kstv{color:#a3291c}`, plus `.krt-v.ksf-g` / `.krt-v.ksf-r` for relation-table numbers (verified live by the worker; not applied).
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
@@ -93,4 +94,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q8: yes. Foreman C's C7 balance-pass takes the NPC minigame score raise and the "longest answer is right" fix in the lễ/trị cung/xử án quiz banks. Note sent there.
 - Q9: add per-person dislikes ('ghét') as data: 1–2 per consort, plus the Emperor, drawn from the existing likes pool, and learnt by spying or talking. Give it to the next free slot in your slice as C35b (sonnet). Thỉnh an stays a visit talk option: agreed.
 - Q16 (C34 contest prizes, for owner/C7): prize pool = her rank's stipend × 1 month (small) / 2 months (big) × place share; winning all ~12 contests a year ≈ 17 months of stipend on top of Sủng/Danh/Emperor gift, entry costs only Sức −6 → entering is the obvious pick at the top (BALANCE rule). NPC pay follows HER rank, so a low-rank NPC winning at a high-rank player's contest gets too much bạc. Reviewer suggests: NPC pay by min(her rank, their rank), and trim months or count the item inside the bạc. Owner/C7 decide.
-- Q17 (C46 map-labels): to keep 13px labels from touching, the default map zoom on a portrait phone (390 wide) is now ~×3.8 (was ×2.5); Fold ×2. Owner OK, or prefer a smaller map with fewer labels shown?
+- Q17 (C46 map-labels): to keep 13px labels from touching, the default map zoom on a portrait phone (390 wide) is now ~×3.8 (was ×2.5); Fold ×2. Owner OK, or prefer a smaller map with fewer labels shown? (Reviewer: at 390 wide only ~5 palace slots are visible at once; at 844x390 the +/−/Ra vào/Danh sách buttons cover a label, as before.)
