@@ -16998,7 +16998,7 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
 Object.assign(BAL,{cmaid:{loy:{home:[65,85],land:[70,90],th:[55,75],pick:[35,50],palace:[40,60],room:[60,80],noi:[40,55],old:[100,100]},
  pickN:3,pickAlone:3,pickKeep:50,kinSave:50,talLoy:40,talBac:3,talSuc:3,talSpy:6,secTrust:70,secTell:8,secOut:3,secLoy:10,secDanh:3,secBac:15,secPay:30,dilCd:6,
  ttPress:6,ttDanh:3,ttSung:3,ttLoy:10,ttBac:30,dtqGuard:50,dtqBrawl:6,brLoy:8,brDanh:1,brOan:8,scorn:6,scLoy:6,scDanh:1,scDuc:1,scOan:8,muoiBack:40,
- landAsk:5,landGift:8,landBac:25,laLoy:12,laTh:2,laDanh:2,chTh:25,chThUp:2,chKnow:50,chThDown:4,thdMerit:1,cnSpy:10,cnTurn:8,cnvNet:8,
+ landAsk:8,landGift:4,landBac:25,laLoy:12,laTh:2,laDanh:2,chTh:15,chThUp:2,chKnow:50,chThDown:4,thdMerit:1,cnSpy:10,cnTurn:8,cnvNet:8,
  tdMeet:4,tdBac:30,tdCase:1,tdExpose:3,tdDanh:4,tdTh:3,seeMat:3}});
 /* ================= j92: VẬT PHẨM · TRANG PHỤC · MẠNG CHE MẶT (logic + data only; UI through kit components) ================= */
 /* ---- KIT_VEIL: pearl-strand face veils by rank (hủy dung, j70 scarOf(p).veil / p.scar.veil) ----
@@ -37232,7 +37232,7 @@ function cmTalOn(m){return m&&m.tal&&(m.src!=="pick"||(S.turn||0)-(m.at||0)>=cmB
 
 /* ---------- she picks one of several (thd at the start; cnv when she rises) ---------- */
 function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){let nm="";try{nm=mkServ("maid").name}catch(e){}if(!nm||L.some(c=>c.name===nm)||nm===(S.maid&&S.maid.name))nm=pick(MAIDS.filter(x=>!L.some(c=>c.name===x)))||pick(MAIDS);
- const tals=Object.keys(CM_TAL);L.push({name:nm,loy:cmRange(B.loy.pick),tal:tals[(i+R(tals.length))%tals.length],age:16+R(7)})}return L}
+ L.push({name:nm,loy:cmRange(B.loy.pick),age:16+R(7)})}const tals=Object.keys(CM_TAL).sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
 PEND.cmPick=pp=>{const L=pp.c||[];if(!L.length)return null;return{who:pMaid(),t:`Nội vụ phủ đưa ${L.length} cung nữ đến để ngươi chọn một người làm thân tín. Không ai theo ngươi từ nhà: người ngươi chọn sẽ gắn bó lâu, nhưng những tháng đầu còn lạ.`,
  o:L.map(c=>({n:`Chọn ${c.name}`,fx:{},x:`${CM_TAL[c.tal]} · thiện cảm ban đầu ${c.loy}`,go:()=>{const m=newMaid(c.name,c.loy,c.age);m.src="pick";m.tal=c.tal;m.sec=cmSecFor();m.secKn=0;m.at=S.turn||0;
   try{if(S.maid&&S.maid.fc)m.fc=S.maid.fc}catch(e){}S.maid=m;cmC("picked");log(`Ngươi chọn ${m.name} làm cung nữ thân tín.`)}}))}};
@@ -37350,7 +37350,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="17e7b8d4086e";window.CTM_BUILD=BUILD;
+const BUILD="c768604d34c3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

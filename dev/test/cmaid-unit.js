@@ -1,16 +1,16 @@
 /* review/close-maid (D58): unit checks of the close maid by origin + 2 screenshots (the pick card, her stage card).
    usage: node dev/test/cmaid-unit.js <url> <outdir> [WxH@dpr]. Prints JSON {checks}; exit 1 if a check fails or a page error. */
 const {chromium}=require('playwright');const [,,URL,OUT,VP='755x1000@2']=process.argv;const m=/^(\d+)x(\d+)@([\d.]+)$/.exec(VP);const sleep=t=>new Promise(r=>setTimeout(r,t));
-(async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:+m[3],serviceWorkers:'block'});
+(async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({viewport:{width:+m[1],height:+m[2]},deviceScaleFactor:+m[3],serviceWorkers:'block'});await ctx.route(/\.(mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(300000);await p.goto(URL,{waitUntil:'domcontentloaded'});
- for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
+ for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]')||document.querySelector('#kload [data-kl="skip"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}
  await sleep(800);
  const C=await p.evaluate(()=>{const C={};const go=o=>{window.__forceOrigin=o;SLOT=3;quiet=true;window.__nlInner=1;start();window.__nlInner=0;quiet=true};
   const forceRoll=(v,f)=>{const r0=roll;roll=()=>v;try{return f()}finally{roll=r0}};
   /* 1 thd: a pick card with BAL.cmaid.pickN options; picking sets the maid */
   go('thd');const q=Q.find(x=>x.pid==="cmPick");C.pickCard=!!q&&q.opts.length===BAL.cmaid.pickN;if(q){const o=q.opts[1];o.go();C.picked=S.maid.src==="pick"&&o.n.includes(S.maid.name)&&!!S.maid.tal&&!!S.maid.sec}
   /* 2 tt: a home maid with loyalty in range; the Nhập cung row names the source */
-  go('tt');const L=BAL.cmaid.loy.home;C.ttHome=S.maid.src==="home"&&S.maid.loyal>=L[0]&&S.maid.loyal<=L[1];C.ttRow=cmRow().includes("từ nhà");C.thdRow=(()=>{go('thd');return cmRow().startsWith("Chưa có ai")})();
+  go('tt');const L=BAL.cmaid.loy.home;C.ttHome=S.maid.src==="home"&&S.maid.loyal>=L[0]&&S.maid.loyal<=L[1];C.ttRow=cmRow().includes("từ nhà");C.thdRow=(()=>{go('thd');const n=Q.find(x=>x.t==="Nhập cung");return !!n&&/Chưa có ai theo từ nhà/.test(n.h)})();
   /* 3 old save: no S.cm, maid without src → kept, loyalty kept */
   go('dtq');delete S.cm;S.maid={name:"Tiểu Đào",loyal:57,fc:""};render=()=>{};servMonth();C.oldSave=S.maid.name==="Tiểu Đào"&&S.maid.loyal>=55&&S.maid.src==="home";
   /* 4 dtq guard: an NPC's hit on her household is stopped */
@@ -32,7 +32,7 @@ const {chromium}=require('playwright');const [,,URL,OUT,VP='755x1000@2']=process
   go('tt');C.secCards=["debt","family","spy"].every(k=>{S.maid.sec={k,by:v.id};const d=mkP("cmSec",{});return d&&d.o.length===2});
   return C});
  /* screenshots: the pick card, then her home stage card */
- await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;quiet=false;window.__nlInner=1;start();window.__nlInner=0;document.getElementById('title').hidden=true;Q.splice(0,Q.length,...Q.filter(x=>x.pid==="cmPick"));render();showModal()});await sleep(900);
+ await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;quiet=false;window.__nlInner=1;start();window.__nlInner=0;document.getElementById('title').hidden=true;Q.splice(0,Q.length,...Q.filter(x=>x.pid==="cmPick"));render();showModal();try{const k=document.getElementById('kload');if(k)k.remove()}catch(e){}});await sleep(1500);
  const ovf1=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);await p.screenshot({path:`${OUT}/cmaid-pick-${m[1]}x${m[2]}.jpg`,type:'jpeg',quality:70});
  await p.evaluate(()=>{const q=Q[0];if(q&&q.opts)q.opts[0].go();Q.length=0;showModal();render()});await sleep(600);
  const info=await p.evaluate(()=>{try{return homePeople()[0].info}catch(e){return String(e)}});
