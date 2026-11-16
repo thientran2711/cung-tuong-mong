@@ -6,7 +6,8 @@
      COOP.url                       worker base (https://…workers.dev), default window.COOP_URL
      COOP.pid / COOP.name           my player id (localStorage "ctm-coop-pid") / display name sent on connect
      COOP.state                     {status, room, you:"a"|"b", seats, week, ended, C, peerOnline, bothIn, playing}
-                                    status: "off" | "connecting" | "open" | "retry" (reconnecting with backoff) | "closed"
+                                    status: "off" | "connecting" | "open" | "retry" (reconnecting with backoff) | "closed" | "moved" (seat taken by another device)
+     mine / msv: the room's copy of MY week (server seat copy, review/coop-rejoin-xdev) and its version, from the "room" reply
      COOP.create()   → Promise {room}   new room (POST /api/room) + connect; resolves on the first "room" reply
      COOP.join(code) → Promise {room}   check (GET /api/room/<code>) + connect; rejects {code:"noroom"|"full"|"net"}
      COOP.resume()   → Promise|null     reconnect to the last room of this browser (localStorage "ctm-coop-room")
@@ -25,9 +26,9 @@
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const DEF_URL="https://ctm-coop.victoria-tntt.workers.dev";
-const BIG=200000,PING=20000,SILENT=50000,BACK=[1000,2000,4000,8000,10000];
+const BIG=200000,PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
 const H={};
-const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,peerOnline:false,bothIn:false,playing:false};
+const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,peerOnline:false,bothIn:false,playing:false};
 let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
 function pid(){let p=LS.get("ctm-coop-pid");if(!p){p=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,"").slice(0,24);LS.set("ctm-coop-pid",p)}return p}
 function emit(t,d){(H[t]||[]).slice().forEach(f=>{try{f(d)}catch(e){console.error("COOP",t,e)}})}
@@ -44,13 +45,15 @@ function live(){const C=window.COOP;if(!C)return;const s=st.seats||{},x=other(),
  C.frozen=!!(st.you&&st.status!=="off"&&!st.bothIn);  /* PROTOCOL 6: the world runs only while both seats are online */
  C.waiting=!st.you||st.status==="off"?false:!(s[x])?"room":(e[st.you]&&!e[x])?"week":false}
 function base(){return String(COOP.url||DEF_URL).replace(/\/+$/,"")}
-function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pid())}&name=${encodeURIComponent(COOP.name||"")}`}
+/* Sổ mây (jcloud): a room joined on another device keeps that device's pid here, so this device takes the same seat */
+function pidFor(code){try{const m=JSON.parse(LS.get("ctm-coop-pids")||"{}");const v=m&&m[code];if(typeof v==="string"&&/^[A-Za-z0-9]{8,32}$/.test(v))return v}catch(e){}return pid()}
+function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pidFor(code))}&name=${encodeURIComponent(COOP.name||"")}`}
 async function gz(s){const cs=new CompressionStream("gzip");const w=cs.writable.getWriter();w.write(new TextEncoder().encode(s));w.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer())}
 async function gunz(buf){const ds=new DecompressionStream("gzip");const w=ds.writable.getWriter();w.write(new Uint8Array(buf));w.close();return await new Response(ds.readable).text()}
 async function rx(ev){lastRx=Date.now();let m;
  try{const txt=typeof ev.data==="string"?ev.data:await gunz(ev.data instanceof Blob?await ev.data.arrayBuffer():ev.data);m=JSON.parse(txt)}catch(e){console.error("COOP bad frame",e);return}
  if(!m||!m.t)return;
- if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state});
+ if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0});
   if(pend){pend.res({room:st.room,you:st.you});pend=null}}
  else if(m.t==="presence")set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week});
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
@@ -63,7 +66,9 @@ function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}c
  s.binaryType="arraybuffer";ws=s;
  s.onopen=()=>{lastRx=Date.now()};
  s.onmessage=rx;
- s.onclose=()=>{if(ws===s){ws=null;drop()}};
+ /* 4001 "replaced": the same seat (same pid, Sổ mây) was opened on another device / tab. Do not take it back (the two would steal the
+    seat from each other and the stale one would write an old week copy): stop here; "Về màn đầu" › Trở lại phòng takes it back. */
+ s.onclose=e=>{if(ws===s){ws=null;if(e&&e.code===4001){want=false;clearInterval(pinger);pinger=0;both=false;set({status:"moved"});emit("moved",{});return}drop()}};
  s.onerror=()=>{}}
 function drop(){clearInterval(pinger);pinger=0;both=false;
  if(!want){set({status:"closed"});return}
@@ -82,20 +87,31 @@ async function join(code){code=String(code||"").trim().toUpperCase();
  if(r.status===404)throw {code:"noroom"};if(!r.ok)throw {code:"net"};
  const j=await r.json().catch(()=>({}));const me=pid();
  /* full = both seats taken; the server still lets a known pid back in, so only refuse early when we are sure */
- if(j.seats&&j.seats.a&&j.seats.b&&LS.get("ctm-coop-room")!==code)throw {code:"full"};
+ if(j.seats&&j.seats.a&&j.seats.b&&LS.get("ctm-coop-room")!==code&&pidFor(code)===pid())throw {code:"full"};
  return wait(code)}
 function resume(){const c=LS.get("ctm-coop-room");if(!c)return null;return wait(c)}
 function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep)LS.del("ctm-coop-room");
  if(pend){pend.rej({code:"left"});pend=null}
  if(ws){try{ws.onclose=null;ws.close(1000,"leave")}catch(e){}ws=null}
- const was=st.playing;both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,playing:false});
+ const was=st.playing;both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,playing:false});
  /* the co-op game is over on this device (Về màn đầu / ‹ Lui): the world module must hand save() etc. back to single-player */
  if(was)emit("stop",{})}
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
  const s=JSON.stringify(o);try{if(s.length>BIG&&typeof CompressionStream!=="undefined")ws.send(await gz(s));else ws.send(s);return true}catch(e){return false}}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
+/* owner 16/11 ("không thấy sang buổi"): a phone that slept keeps a socket that LOOKS open (readyState 1) but is dead — a `bend` sent on it
+   is lost and the server drops the seat after 45 s ("Hảo hữu đã rời cuộc"). On return: reconnect at once when the socket is closed, she was
+   away > 3 s or nothing came in for a while; otherwise ping and reconnect when no answer comes within 3 s. The room snapshot then resends
+   what was lost (jcoopworld syncRoom: rebend / re-end) and catches her buổi up with the room. */
+let hidAt=0;
+function wake(){if(!want)return;const away=hidAt?Date.now()-hidAt:0;hidAt=0;
+ if(!ws||ws.readyState>1||away>3000||Date.now()-lastRx>PING+5000){tries=0;connect(st.room);return}
+ if(ws.readyState!==1)return;const r0=lastRx;try{ws.send('{"t":"ping"}')}catch(e){}
+ setTimeout(()=>{if(want&&lastRx===r0&&ws&&ws.readyState===1){tries=0;connect(st.room)}},3000)}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"){hidAt=Date.now();return}wake()});
+addEventListener("pageshow",e=>{if(e.persisted)hidAt=hidAt||1;wake()});
+addEventListener("focus",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
 addEventListener("online",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
-window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},state:st,create,join,resume,leave,send,on,off,emit,other,
+window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},pidFor,state:st,create,join,resume,leave,send,on,off,emit,other,
  code:"",seat:null,week:0,online:{a:false,b:false},ended:{a:false,b:false},frozen:false,waiting:false,live};
 }catch(e){console.error(e)}})();

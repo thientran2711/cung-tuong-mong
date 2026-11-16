@@ -60,7 +60,9 @@ function kitMeMark(fig){try{
 /* drop markers whose figure is gone (scene change, dialog closed) */
 function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector(":scope>#mefig")||h.querySelector(":scope>img.kesimg")&&h.closest(".kesme")))m.remove()})}
 function kmmAll(){kmmSweep();const me=document.getElementById("mefig");if(me)kitMeMark(me);document.querySelectorAll(".kesme img.kesimg").forEach(kitMeMark)}
-let kmmT=0;function kmmSched(){clearTimeout(kmmT);requestAnimationFrame(kmmAll);kmmT=setTimeout(()=>{kmmAll();setTimeout(kmmAll,700)},250)}
+/* lag-play (owner 16/11 15:05Z): every DOM change queued ANOTHER frame callback + a 700 ms follow-up that was never cancelled (dozens of
+   full mark passes per buổi, each with layout reads). Now one pending frame pass and one timer chain, restarted by the last change. */
+let kmmT=0,kmmT2=0,kmmQ=0;function kmmSched(){clearTimeout(kmmT);clearTimeout(kmmT2);if(!kmmQ)kmmQ=requestAnimationFrame(()=>{kmmQ=0;kmmAll()});kmmT=setTimeout(()=>{kmmAll();kmmT2=setTimeout(kmmAll,700)},250)}
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{kmmSched()}catch(e){}return r}})();
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);if(q&&typeof S!=="undefined"&&q===S&&h)h=h.replace('<figure class="kesf"','<figure class="kesf kesme"')}catch(e){}return h}})();
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kmmSched()}catch(e){}return r}})();
@@ -69,11 +71,14 @@ document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&(
 try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(".kmemark")))return;if(document.getElementById("mefig")||document.querySelector(".kesme"))kmmSched();else kmmSweep()})
  .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
-.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1238)}
+.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1238) drop-shadow(0 0 3px #ffd77acc) drop-shadow(0 0 7px #f2b93b99)}
 .kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%}
 .kesme .kesfi{position:relative}
-@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 3.4s ease-in-out infinite}}
-@keyframes kmmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+/* owner 16/11 (review/face-sharp): the "this is me" mark bobs SLOWLY with a clearly visible travel (7 px / 2.4 s) and glows gold (static glow).
+   Only this small mark moves (its own layer, will-change) — never the figure image (KIT motion rule STILL PEOPLE). Reduced motion / Hiệu ứng
+   Gọn (OPT.fxon false): kmmMotion() drops .kmmove → still mark, same gold glow. */
+@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 2.4s ease-in-out infinite;will-change:transform}}
+@keyframes kmmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 `;document.head.appendChild(st)})();
 /* ---------- markers are items: promotion gives the new rank's marker; the rank chest shows it ---------- */
 let kmmLast=null;
@@ -88,7 +93,7 @@ function kmmCheck(){try{if(!S||S.dead)return;const r=kmmRankNow();if(r==null)ret
 /* ---------- Tư trang: "Dấu ấn" tab ---------- */
 try{if(typeof KINV_CATS!=="undefined"&&!KINV_CATS.some(c=>c[0]==="dau"))KINV_CATS.push(["dau","Dấu ấn",[]])}catch(e){}
 (function(){if(typeof kinvItems!=="function")return;const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments);try{const cur=kmmCur();
-  for(const r of kmmOwned())L.push({id:"mme"+r,cat:"dau",mme:r,src:kmmSrc(r),src512:kmmSrc(r),name:KMM_NAMES[r],grade:Math.min(4,r>>1),qty:1,on:r===cur,onText:"Đang dùng",lux:0,
+  for(const r of kmmOwned())L.push({id:"mme"+r,cat:"dau",mme:r,src:kmmSrc(r),src512:kmmSrc(r),name:KMM_NAMES[r],grade:Math.min(4,r>>1),qty:1,on:r===cur,onText:"Đang mặc",lux:0,
    tip:`Dấu ấn ${RANKS[r]?RANKS[r].n:""}${r===cur?" · đang dùng":""}`})}catch(e){}return L}})();
 (function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){if(!x||x.mme==null)return o0.apply(this,arguments);try{const r=x.mme,on=r===kmmCur();
   kitModal({kind:"info",title:KMM_NAMES[r],sub:`Dấu ấn · ${RANKS[r]?RANKS[r].n:""}`,itemPic:kitItem({src:x.src,name:"",grade:x.grade,size:"lg"}).replace('<span class="kitn"></span>',''),

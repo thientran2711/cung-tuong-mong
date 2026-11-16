@@ -37,18 +37,7 @@ window.kitPosBar=pbar;
 const KIT_REL={in:"#7a4fa0",out:"#3f62a8",x:"#6a5040"};window.KIT_REL=KIT_REL;
 const OANW=["Không oán","Chút oán","Oán","Oán sâu","Oán hận"];
 window.oanW=function(v){const L=(typeof BAL==="object"&&BAL.oanLv)||[5,20,45,75];let i=0;while(i<L.length&&(+v||0)>=L[i])i++;return OANW[i]};
-function kitRelRow(o){o=o||{};const kind=o.kind||"quy",v=o.v;const dir=o.dir||(/^ta$/i.test(o.b||"")?"in":/^ta$/i.test(o.a||"")?"out":"x");
- const what=o.what||(kind==="oan"?"oán":"thiện cảm");const lab=o.label||`${o.a} → ${o.b}: ${what}`;const gk=o.gloss!=null?o.gloss:(kind==="oan"?"Oán":kind==="quy"?"Thiện cảm":"");
- let val,bar;
- if(v==null){val=`<span class="ef n">chưa rõ</span>`;bar=`<span class="ksbar ksbp ksbn" aria-hidden="true"></span>`}
- else if(kind==="quy"){val=`<span class="ef ${v>10?"g":v<-10?"r":"n"}">${quyW(v)} · ${sg(v)}</span>`;bar=sbar(v)}
- else if(kind==="oan"){val=`<span class="ef ${v>=20?"r":"n"}">${oanW(v)} · ${Math.round(v)}</span>`;bar=pbar(v,100,false)}
- else{const w=o.word?o.word(v):"";val=`<span class="ef ${o.good===false?"r":"g"}">${w?w+" · ":""}${o.signed?sg(v):Math.round(v)}</span>`;bar=o.signed?sbar(v):pbar(v,o.max||100,o.good!==false)}
- return `<div class="krr krr-${dir}" style="--krc:${KIT_REL[dir]}"><span class="krrl">${gk?gl(gk,lab):lab}</span><span class="krr2"><span class="krrv">${val}</span><span class="krrbar">${bar}</span></span></div>`}
-window.kitRelRow=kitRelRow;
-/* old call shape (kind "quý"|"oán", subject, object, value) → kitRelRow; "Ngươi"/"ngươi" = ta */
-function relBar(kind,subj,obj,v){const t=x=>/^ngươi$/i.test(x)?"ta":x;const a=t(subj),b=t(obj);return kitRelRow({kind:kind==="oán"?"oan":"quy",a:a==="ta"?"Ta":a,b,v})}
-window.kitRelBar=relBar;
+/* kitRelRow (bars, mixed rows) is retired: every relation is drawn by kitRel2 (jkrel.js, KIT §52) */
 /* who "nàng" is, in words: the Empress by title, others "nàng" */
 const subjOf=v=>v&&v.queen?"Hoàng hậu":"Nàng";
 const objOf=v=>v&&v.queen?"Hoàng hậu":"nàng";
@@ -63,7 +52,7 @@ function knownList(v){const out=[],seen=new Set();if(!v||v===S)return out;
  try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when)}}catch(e){}
  try{kn();for(const n of (S.notes[v.id]||[])){let t=T(n),when="",src="";const m=t.match(/^(T\d+\/\d+ \S+ tuần):\s*/);if(m){when=m[1];t=t.slice(m[0].length)}
    const s2=t.match(/^([^:]{2,30}?) (dò được|kể|báo|nghe được):\s*/);if(s2){src=s2[1]+" "+s2[2];t=t.slice(s2[0].length)}
-   t.split(/(?<=\.)\s+/).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
+   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
  return out}
 window.kitKnownList=knownList;
 function knownCol(v,max){const L=knownList(v);if(!L.length)return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><p class="kr3none">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</p></div>`;
@@ -95,7 +84,8 @@ window.relPerson=relPerson;
 const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":"Phi tần";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id}))))}
-const stripItem=(x,q)=>({f:q.f,name:q.name,sep:x.sep,dim:q.met===false});
+/* KIT 49.2c: strip label = kitNameRank (rank in its rank colour over the short name); Ta keeps her kmy glow */
+const stripItem=(x,q)=>({small:true,f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
@@ -117,12 +107,14 @@ function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPers
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
- if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:S.sung})+kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"ân tình",gloss:"Ân tình",v:S.an||0});
-  const kf=S.kf&&S.kf[z.id];return kitRelRow({kind:"pos",a:"Hoàng thượng",b:whoL(z),what:"sủng",gloss:"Sủng",v:kf?kf.s:null})}
- if(a==="th"||b==="th"){const z=a==="th"?b:a;return kitRelRow({kind:"quy",a:"Thái hậu",b:whoL(z),v:z===S?(S.th||0):(met(z)?(z.th||0):null)})}
- const ok=(p,q)=>p===S||(met(p)&&met(q));
- return kitRelRow({kind:"quy",a:capL(whoL(a)),b:whoL(b),v:ok(a,b)?aff(a,b):null})+kitRelRow({kind:"oan",a:capL(whoL(a)),b:whoL(b),v:ok(a,b)?oan(a,b):null})+
-  kitRelRow({kind:"quy",a:capL(whoL(b)),b:whoL(a),v:ok(b,a)?aff(b,a):null})+kitRelRow({kind:"oan",a:capL(whoL(b)),b:whoL(a),v:ok(b,a)?oan(b,a):null})}
+ /* KIT §52 kitRel2 (owner 11/16 4.6): TWO columns — left = X → Y, right = Y → X; short words, number in its colour, no bars */
+ const R=(w,v,kind,gloss)=>v==null?{w,unk:"chưa rõ",kind,gloss}:{w,now:Math.round(v),kind,gloss};
+ if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRel2([{head:"Hoàng thượng → ta",dir:"them",rows:[R("Sủng",S.sung,"pos"),R("Ân tình",S.an||0,"pos")]}]);
+  const kf=S.kf&&S.kf[z.id];return kitRel2([{head:`Hoàng thượng → ${whoL(z)}`,dir:"x",rows:[R("Sủng",kf?kf.s:null,"pos")]}])}
+ if(a==="th"||b==="th"){const z=a==="th"?b:a;return kitRel2([{head:`Thái hậu → ${whoL(z)}`,dir:z===S?"them":"x",rows:[R("Thiện cảm",z===S?(S.th||0):(met(z)?(z.th||0):null),"good")]}])}
+ const ok=(p,q)=>p===S||(met(p)&&met(q));const dirOf=(p,q)=>q===S?"them":p===S?"me":"x";
+ const col=(p,q)=>({head:`${capL(whoL(p))} → ${whoL(q)}`,dir:dirOf(p,q),rows:[R("Thiện cảm",ok(p,q)?aff(p,q):null,"good"),R("Oán",ok(p,q)?oan(p,q):null,"bad")]});
+ return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
  const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
@@ -160,7 +152,7 @@ function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.k
  const acts=deckFor(/Thái hậu|Đức Thọ/);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);
- const likes=Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]);
+ const likes=Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]).concat(typeof disRow==="function"&&disRow("emp")?[disRow("emp")]:[]);
  return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
   note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),
   groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Hoàng thượng (việc đổi theo buổi và theo quẻ). Gặp ngài: Dư đồ → nơi ngài ngự buổi này; tối: chờ lật thẻ.</p>`]],["Điều ngài thích",likes.concat([`<p class="kr3note">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`])]],empty:""})}
@@ -248,6 +240,17 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar.ksbn{opacity:.45}
 /* KIT §49.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
 .krelst{margin:6px 0 2px;font-size:.78rem;color:var(--dim);font-weight:600}
+/* KIT §49.2c COMPACT RELATION PICKER (owner 15/11 "Khung này choáng space quá", review/rel-picker): each picker = ONE flex row, label + group chips on the first
+   line and the face strip beside them when the width allows (strip basis 300 px), else directly under them; no band behind the chips, no tall empty strip;
+   faces + labels small (kitNameRank: rank in its rank colour over the short name); ‹ › and N/M only when the faces overflow (kitStripFit .kpall) */
+html body :is(#panel,#kitpage) .krelpk{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;margin:0 0 2px;padding:0}
+html body :is(#panel,#kitpage) .krelpk>.krelst{margin:0;flex:0 0 auto;line-height:1.2}
+html body :is(#panel,#kitpage) .krelpk>.kcattabs.ktsub{margin:0!important;padding:2px 0!important;background:transparent!important;box-shadow:none!important;flex:0 1 auto;width:auto;min-width:0;overflow-x:auto}
+html body :is(#panel,#kitpage) .krelpk>.pstrip{flex:1 1 300px;margin:0!important;gap:3px!important}
+html body :is(#panel,#kitpage) .krelpk .pstrip>.parr{min-height:34px!important;min-width:26px!important;width:26px;font-size:1.1rem}
+html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
+html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
+html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
 .krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
@@ -274,4 +277,12 @@ html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,
 /* narrow card (phones): the box sits at the top of its cell, never centred against the info beside it (which differs per person) */
 .pc[data-k2]:not(.kpwide) .pcl>.pcp.kit,.pc[data-k2]:not(.kpwide) .pcl>.kwear{align-self:start!important}
 `;document.head.appendChild(st);
+/* KIT §49.2c sample (kit page #kit): the compact picker = label + kitSubTabs chips + face strip on ONE row (strip under them when too narrow);
+   ‹ › and N/M only when the faces overflow (kitStripFit .kpall). Row 1: few faces (no arrows). Row 2: the same faces, strip narrowed so they overflow (arrows). */
+window.kitRelPickerSample=()=>{
+ if(typeof S==="undefined"||!S||typeof relItems!=="function")return `<em>cần một ván đang chơi</em>`;
+ const L=relItems().map(x=>{const q=relPerson(x.k);return stripItem(Object.assign({},x,{sep:""}),q)}).slice(0,6);
+ const row=(lab,key,items,w)=>{const t=kitSubTabs(key,[{k:"a",label:"Nhóm",n:items.length}]);return `<div class="kpinline krelpk" style="max-width:${w}px"><p class="krelst">${lab}</p>${t.html}${pager("ks"+key,items,()=>"")}</div>`};
+ setTimeout(()=>{try{kitStripFit()}catch(e){}},60);
+ return row("Ít người","ksa",L.slice(0,2),520)+row("Nhiều người (tràn)","ksb",L.concat(L),340)};
 })();

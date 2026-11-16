@@ -24,7 +24,8 @@ const KFK_SP={
  lantern:{n:4,s:128,d:30},spark:{n:9,s:64,d:26,b:"add"},ember:{n:9,s:40,d:12,b:"add"},orb:{n:3,s:96,d:34,b:"add",t:1},
  streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},
  glowburst:{n:1,s:256,d:220}, /* the painted gold glow still with true alpha (luma): reads on light paper AND dark scenes */
- brush:{n:9,s:160,d:70},"petal-gold":{n:9,s:56,d:22},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
+ brush:{n:9,s:160,d:70},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
+ "gift-hands":{n:3,s:288,d:200}, /* review/gift-pick: a maid's hands (celadon sleeves) carrying 0 the lacquer box with its ribbon · 1 the box, ribbon untied · 2 the silk bundle */
  gift:{n:4,s:160,d:120},letter:{n:4,s:128,d:90}  /* gift: 0 closed lacquer box · 1 box open with light · 2 silk-wrapped bundle · 3 untied ribbon;
                                                     letter: 0 sealed letter · 1 open letter · 2 rolled note · 3 envelope */
 };
@@ -40,7 +41,7 @@ const KFK_SHEET={ /* dev/fxwork/sheet.sh: cols×rows frames of w×h (true alpha)
 };
 /* motion per kind for kitFxBurst (fall | burst | rise | bloom | rain) */
 const KFK_MOVE={"petal-plum":"fall","petal-peach":"fall","petal-lotus":"fall",osmanthus:"fall",leaf:"fall",snow:"fall",ash:"fall",paper:"burst",
- coin:"rain",glowburst:"flash",lotuslight:"flash","petal-gold":"fall",jade:"burst",incense:"rise",brush:"flash",gift:"flash",letter:"flash",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
+ coin:"rain",glowburst:"flash",lotuslight:"flash",jade:"burst",incense:"rise",brush:"flash",gift:"flash",letter:"flash",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
 const KFK=window.KFK={loaded:new Set(),tex:{},lights:0,sheets:0,pool:[],made:0,freed:0,log:[],live:new Set()};
 const kfkU=f=>KFK_BASE+f;
 function kfkLow(){try{const c=navigator.connection;return !!((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2))}catch(e){return false}}
@@ -53,7 +54,7 @@ function kfkLoad(names){names=(Array.isArray(names)?names:[names]).filter(n=>KFK
    for(let i=0;i<K.n;i++)fr.push(new P.Texture({source:base.source,frame:new P.Rectangle(i*K.s,0,K.s,K.s)}));KFK.tex[n]=fr;KFX.tex[n]=fr;KFK.loaded.add(n);return fr})
    .catch(e=>{delete kfkTexP[n];throw e});return kfkTexP[n]})))}
 /* the ONE particle maker (jfx kfSp calls this): pooled Pixi sprite with a painted frame */
-const KFK_CAP=()=>innerWidth<700?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
+const KFK_CAP=()=>kitView().pages===1?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
 function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;if(KFX.parts.length>=KFK_CAP())return null;
  let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
  s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.rotation=Math.random()*6.28;s.visible=true;
@@ -121,7 +122,7 @@ function kitFxSheet(name,target,o){o=Object.assign({},o||{});const Sd=KFK_SHEET[
 /* kitFxEdge(name, o) — the painted edge overlay bleeds in from outside the screen (scale 1.12 → 1 + fade), holds, fades.
    o {in:ms 450, hold:ms 700, out:ms 900, opacity}. Reduced motion / Gọn: shown still for hold+in, then gone. */
 function kitFxEdge(name,o){o=o||{};if(!KFK_EDGE[name]||!kfOn())return null;kfkLog("edge:"+name);
- const land=innerWidth>innerHeight,d=kfkLayer(o,"kfxk-e");d.style.backgroundImage=`url("${kfkU("edge-"+name+(land?"-l":"-p")+".webp")}")`;document.body.appendChild(d);
+ const land=kitView().pages===2,d=kfkLayer(o,"kfxk-e");d.style.backgroundImage=`url("${kfkU("edge-"+name+(land?"-l":"-p")+".webp")}")`;document.body.appendChild(d);
  const st=kfStill(),i=o.in||450,h=o.hold!=null?o.hold:700,u=o.out||900;let H;
  if(!st&&d.animate){d.style.transition="none";d.style.opacity="1";d.animate([{opacity:0,transform:"scale(1.12)"},{opacity:o.opacity||1,transform:"scale(1)"}],{duration:i,easing:"cubic-bezier(.2,.7,.3,1)",fill:"both"})}
  else requestAnimationFrame(()=>d.classList.add("on"));
@@ -144,13 +145,35 @@ function kitFxGift(act,target,o){o=o||{};if(!kfOn())return Promise.resolve(false
  const go=H.to(p.x,p.y,750,{r0:-4,r:0});
  if(act==="refuse")return go.then(()=>W(500)).then(()=>H.to(p.x,p.y+sz*.15,260,{s:.96})).then(()=>W(450)).then(()=>H.to(from.x,from.y,700,{r:6})).then(()=>{H.stop(200);return true});
  return go.then(()=>{if(!silk)return;const r=kitFxObj("gift",3,{x:p.x,y:p.y-sz*.35},{size:sz*.7});return r&&r.to(p.x+sz*.6,p.y-sz*.9,700,{r:40,s:.8}).then(()=>r.stop(300))}).then(()=>W(500)).then(()=>{H.stop(400);return true})}
+/* kitFxGiftCarry(target, o) — the whole gift moment of 22:45Z #4/#5 (review/gift-pick): the chosen item (o.item = its picture, from o.from)
+   drops into an open lacquer box at the bottom of the screen (o.wrap "silk": it is wrapped in silk instead), the box closes, a maid's hands
+   (gift-hands) carry it up to the person (target), the ribbon is untied on arrival; o.refuse → the box is set down and carried back down;
+   else the box opens with a soft light + painted sparkles (kitFxGift "open"). Tap anywhere = skip (a transparent catcher takes that tap).
+   Gọn / reduced motion (kfStill) and bots: nothing. Fire and forget, after the state is applied; returns a Promise. */
+function kitFxGiftCarry(target,o){o=o||{};if(!kfOn()||kfStill())return Promise.resolve(false);kfkLog("giftcarry:"+(o.refuse?"refuse":"give"));
+ const t=kfkAt(target),silk=o.wrap==="silk",bs=Math.min(130,innerWidth*.24),hs=Math.min(250,innerWidth*.42,innerHeight*.5),H=[];let cut=false;
+ const W=ms=>new Promise(r=>setTimeout(r,cut?0:ms));const keep=h=>{if(h)H.push(h);return h};
+ const ct=document.createElement("div");ct.className="kfxk-catch";ct.setAttribute("aria-hidden","true");document.body.appendChild(ct);
+ const end=()=>{cut=true;for(const h of H)try{h.stop(150)}catch(e){}ct.remove()};ct.addEventListener("pointerdown",e=>{e.stopPropagation();e.preventDefault();end()},true);
+ const s={x:innerWidth/2,y:innerHeight-bs*.75};const hy=y=>y+hs*.17;  /* the box sits ~17 % above the centre of the hands picture */
+ const it=()=>{if(!o.item)return Promise.resolve();const d=kfkLayer({},"kfxk-o");const z=Math.min(96,bs*.8),f=o.from||{x:s.x,y:s.y-bs};
+  d.style.cssText+=`;left:0;top:0;width:${z}px;height:${z}px;background-image:url("${o.item}");transform:translate(${f.x-z/2}px,${f.y-z/2}px)`;document.body.appendChild(d);requestAnimationFrame(()=>d.classList.add("on"));
+  const h=keep(kfkHandle(d,null,{fade:250},"sheets",null));if(!d.animate)return W(300).then(()=>h.stop(200));
+  return d.animate([{transform:`translate(${f.x-z/2}px,${f.y-z/2}px) scale(1)`},{transform:`translate(${s.x-z/2}px,${s.y-z*.7}px) scale(.85)`,offset:.7},{transform:`translate(${s.x-z/2}px,${s.y-z/2}px) scale(.35)`,opacity:0}],{duration:cut?0:750,easing:"cubic-bezier(.3,.7,.3,1)",fill:"forwards"}).finished.catch(()=>{}).then(()=>h.stop(0))};
+ let B=keep(kitFxObj("gift",silk?2:1,s,{size:bs}));let C=null;
+ return W(250).then(it).then(()=>{if(B&&!silk)B.frame(0);return W(cut?0:300)}).then(()=>{
+   C=keep(kitFxObj("gift-hands",silk?2:0,{x:s.x,y:hy(s.y)+hs*.25},{size:hs}));if(B)B.stop(250);if(!C)return;
+   return C.to(t.x,hy(t.y),cut?0:1000,{r0:-3,r:0,s0:.9,s:1})}).then(()=>W(250)).then(()=>{if(!C||silk)return;C.frame(1);
+   const R=keep(kitFxObj("gift",3,{x:t.x,y:t.y-hs*.12},{size:bs*.8}));return R&&R.to(t.x+hs*.45,t.y+hs*.2,cut?0:800,{r:55,s:.85}).then(()=>R.stop(300))}).then(()=>W(200)).then(()=>{
+   if(!C)return;if(o.refuse)return C.to(t.x,hy(t.y)+hs*.12,cut?0:350,{s:.97}).then(()=>W(600)).then(()=>C.to(t.x,innerHeight+hs,cut?0:900,{r:4})).then(()=>C.stop(200));
+   C.stop(350);if(!cut)return kitFxGift("open",{x:t.x,y:t.y},{size:bs})}).then(()=>{end();return true}).catch(()=>{end();return false})}
 /* kitFxLetter(target, o) — a secret letter arrives (rises, sealed), then opens (frame 1). o {kind:"seal"|"roll"|"envelope", open:true} */
 function kitFxLetter(target,o){o=o||{};if(!kfOn())return Promise.resolve(false);const p=kfkAt(target),sz=o.size||Math.min(140,innerWidth*.26),f={roll:2,envelope:3}[o.kind]||0;
  const H=kitFxObj("letter",f,{x:p.x,y:p.y+60},{size:sz});if(!H)return Promise.resolve(false);const W=ms=>new Promise(r=>setTimeout(r,kfStill()?0:ms));
  return H.to(p.x,p.y,600,{r0:-8,r:-2}).then(()=>W(500)).then(()=>{if(o.open!==false){H.frame(1);kitFxBurst("orb",p,3,{tint:0xfff3d0})}return W(1200)}).then(()=>{H.stop(400);return true})}
 function kitFxPreload(names){const L=[];for(const n of names||[]){
   if(KFK_SP[n])L.push(kfkLoad([n]).catch(()=>{}));
-  if(KFK_EDGE[n])L.push(new Promise(ok=>{const i=new Image();i.onload=i.onerror=()=>ok();i.src=kfkU("edge-"+n+(innerWidth>innerHeight?"-l":"-p")+".webp")}));
+  if(KFK_EDGE[n])L.push(new Promise(ok=>{const i=new Image();i.onload=i.onerror=()=>ok();i.src=kfkU("edge-"+n+(kitView().pages===2?"-l":"-p")+".webp")}));
   if(KFK_LIGHT[n]||KFK_SHEET[n]){const S=KFK_SHEET[n];const u=kfkU(S?S.src:(kfkLow()?n+"-sheet.webp":n+".webp"));L.push(new Promise(ok=>{const i=new Image();i.onload=i.onerror=()=>ok();i.src=u}))
    if(KFK_LIGHT[n]&&!kfkLow()&&!kfStill()&&!(KFK_VPOOL[n]&&KFK_VPOOL[n].length)){const v=document.createElement("video");v.muted=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto";
     v.poster=kfkU(n+".webp");v.innerHTML=`<source src="${kfkU(n+".webm")}" type="video/webm"><source src="${kfkU(n+".mp4")}" type="video/mp4">`;v.loop=true;(KFK_VPOOL[n]||(KFK_VPOOL[n]=[])).push(v)}}}
@@ -164,10 +187,11 @@ function kfkAuto(){try{if(typeof OPT==="undefined"||OPT.fxpick)return;if(kfkLow(
 kfkAuto();KFK.slowHits=0;
 setInterval(()=>{try{if(typeof OPT==="undefined"||OPT.fxpick||OPT.fxon===false||!KFX.app||document.hidden)return;
  if(KFX.q<=.31&&KFX.parts.length>8){if(++KFK.slowHits>=3){OPT.fxon=false;OPT.fxauto=1;KFK.auto="slow";kitFxClear()}}else KFK.slowHits=Math.max(0,KFK.slowHits-1)}catch(e){}},2000);
-Object.assign(window,{kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
+Object.assign(window,{kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxGiftCarry,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
 (function(){const st=document.createElement("style");st.textContent=`
 .kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
-.kfxk.on{opacity:var(--kfo,1)}.kfxk-in{position:absolute}
+.kfxk.on{opacity:var(--kfo,1)}
+.kfxk-catch{position:fixed;inset:0;z-index:9446;background:transparent;touch-action:none}.kfxk-in{position:absolute}
 .kfxk-l,.kfxk-scr{mix-blend-mode:screen}
 .kfxk-e{inset:0;width:100vw;height:100vh;background-size:100% 100%;z-index:9446;transform-origin:50% 50%}
 .kfxk-o{background-repeat:no-repeat;will-change:transform}

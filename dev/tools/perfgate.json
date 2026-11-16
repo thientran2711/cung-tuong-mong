@@ -1,0 +1,37 @@
+{
+ "_doc": "Perf gate thresholds for dev/tools/quickcheck.js (go-live kit, owner OD:L1370 (c)). ONE place for every perf number of the quick check. A metric FAILS when new > base + max(addMs, base*ratio), where new/base = MEDIAN of `runs` runs of the new / live build (runs alternate new, live, new, live... on the same box; a run whose open/playable time is > outlierX x the median of its build is dropped as a cold-start outlier before the median). render = the FASTEST of `renderReps` direct render() calls in one run; tab = per tab the faster of 2 visits (click -> 2 frames), then the median over the first `tabs` tabs. Noise on a shared box only adds time, so fastest-of-N is the stable measure; an injected or real regression raises it too. ceilings = absolute limits on the new build regardless of the baseline. Long tasks are counted over playable + the 8 tab visits + the buổi (not over the render() repeats); ceiling 40 (was 30 with 3 tab visits).",
+ "runs": 3,
+ "cpu": 4,
+ "renderReps": 12,
+ "outlierX": 2,
+ "gate": {
+  "renderMs": {
+   "addMs": 100,
+   "ratio": 0.3
+  },
+  "tabMs": {
+   "addMs": 120,
+   "ratio": 0.3
+  },
+  "buoiMs": {
+   "addMs": 1500,
+   "ratio": 0.5
+  },
+  "longTasks200": {
+   "add": 5,
+   "ratio": 0.5
+  },
+  "longTaskMaxMs": {
+   "addMs": 800,
+   "ratio": 0.6
+  }
+ },
+ "ceilings": {
+  "renderMs": 1500,
+  "tabMs": 3000,
+  "buoiMs": 45000,
+  "longTasks200": 40,
+  "longTaskMaxMs": 5000
+ },
+ "tabs": 4
+}

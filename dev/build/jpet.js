@@ -35,9 +35,9 @@ const PET={
  thienma:{n:"Thiên mã",tr:3,st:"danh",pr:0,up:8,dc:8,guard:18,beast:25,omen:[10,1],use:"ngựa trời giữ cung: kẻ lạ, thú dữ khó lọt vào; có khi Danh +1",bad:"ăn cỏ linh chi quý: Bạc -8 mỗi tháng",d:"ngựa trời non trắng tuyết, bờm như mây, vó tỏa mây sáng"},
  ngoctho:{n:"Ngọc thố",tr:3,st:"duc",pr:0,up:5,dc:10,sniff:88,soft:2,weak:1,use:"thỏ cung trăng biết mùi thuốc: đánh hơi độc cực tinh; ai thấy cũng mềm lòng (người oán nàng nhất bớt oán 2 mỗi tháng)",bad:"yếu rét: mùa đông dễ ốm",d:"thỏ ngọc trắng muốt, tỏa ánh trăng dịu"},
  phuong:{n:"Phượng hoàng non",tr:3,st:"sac",pr:0,up:8,dc:9,sungN:2,noise:1,use:"múa khi Hoàng thượng ngự: Sủng +2 mỗi đêm thị tẩm",bad:"kêu vang: người ở chung cung dễ oán · Bạc -8 mỗi tháng",d:"phượng non lông đỏ vàng, đuôi dài rực mà dịu"},
- bachloc:{n:"Bạch lộc",tr:4,st:"duc",pr:0,up:0,dc:6,omen:[15,2],rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; điềm lành Danh",bad:"ai cũng thèm muốn: rất dễ bị ghen, bị nhắm hại",d:"hươu thần trắng như ngọc, tỏa ánh bạc"},
- kylan:{n:"Kỳ lân",tr:4,st:"duc",pr:0,up:0,dc:6,th:1,rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; điềm nhân đức, Thái hậu quý nàng +1/tháng",bad:"Thái hậu ban: để mất thì Thái hậu quý nàng -8 · dễ bị ghen",d:"kỳ lân vảy ngọc lục, bờm vàng như mây"},
- thanhlong:{n:"Thanh long con",tr:4,st:"danh",pr:0,up:0,dc:7,sungN:2,rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; bay lượn khi Hoàng thượng ngự (Sủng +2)",bad:"rồng là tượng thiên tử: rất dễ bị ghen, bị nhắm hại",d:"rồng xanh nhỏ vảy lam ngọc, hào quang dịu"}};
+ bachloc:{n:"Bạch lộc",tr:4,st:"duc",pr:0,up:0,dc:6,omen:[15,2],rescue:1,use:"thần thú: khi đã thành Linh thú thì ĐỠ MỘT MẠNG lúc nàng gặp nạn chết người; điềm lành Danh",bad:"ai cũng thèm muốn: rất dễ bị ghen, bị nhắm hại",d:"hươu thần trắng như ngọc, tỏa ánh bạc"},
+ kylan:{n:"Kỳ lân",tr:4,st:"duc",pr:0,up:0,dc:6,th:1,rescue:1,use:"thần thú: khi đã thành Linh thú thì ĐỠ MỘT MẠNG lúc nàng gặp nạn chết người; điềm nhân đức, Thái hậu quý nàng +1/tháng",bad:"Thái hậu ban: để mất thì Thái hậu quý nàng -8 · dễ bị ghen",d:"kỳ lân vảy ngọc lục, bờm vàng như mây"},
+ thanhlong:{n:"Thanh long con",tr:4,st:"danh",pr:0,up:0,dc:7,sungN:2,rescue:1,use:"thần thú: khi đã thành Linh thú thì ĐỠ MỘT MẠNG lúc nàng gặp nạn chết người; bay lượn khi Hoàng thượng ngự (Sủng +2)",bad:"rồng là tượng thiên tử: rất dễ bị ghen, bị nhắm hại",d:"rồng xanh nhỏ vảy lam ngọc, hào quang dịu"}};
 /* sổ cũ: con đã bỏ khỏi danh sách → con gần nhất CÙNG PHẨM (vet, sutu giữ khóa, nay là Tinh phẩm) */
 const PET_OLD={batu:"linhmieu",tekhuyen:"camke",rua:"hac",bachquy:"hac",linhquy:"kylan",ngua:"lyngu",khongtuoc:"phuong",bachac:"thienma",caotuyet:"cuuvi",tuyetdieu:"ngoctho",bachkt:"thanhlong"};
 function petK(k){return PET[k]?k:PET_OLD[k]||k}
@@ -124,7 +124,9 @@ function petWorst(p){const L=tsbPets(p);let j=-1;L.forEach((P,i)=>{if(PET[P.t]&&
 function petGive(p,t,from,src){if(petHasFree(p))return petAdd(p,t,from,src);const j=petWorst(p);if(j>=0&&petT(tsbPets(p)[j]).tr<PET[t].tr){petLose(p,j,"gửi về Ngự thú viên");return petAdd(p,t,from,src)}return null}
 function petCardQ(pid){return Q.some(m=>m.pid===pid)}
 const PET_SRCN={emp:"Hoàng thượng ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",man:"",hunt:"Thu săn, Hoàng thượng ban",trib:"Cống phẩm, Hoàng thượng ban",buy:"Nhờ thái giám mua"};
-function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="function"&&isSrv())&&!S.out,me=[S].concat(liveRivals(true));
+/* co-op (review/coop-pets): NPC pets are part of the shared world, rolled once on the host; the guest runs only her own (else the merge adds the NPC decay / costs twice) */
+function petNpcs(){try{if(window.COOPW&&COOPW.on&&COOPW.seat!=="a")return []}catch(e){}return liveRivals(true)}
+function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="function"&&isSrv())&&!S.out,me=[S].concat(petNpcs());
  const empPick=sg=>sg>=80?pick(["phuong","ngoctho","thienma"]):sg>=65?pick(["linhmieu","lyngu","vet","meo"]):pick(["meo","sao","uyenuong","cachep","hoami"]);
  for(const p of me){if(p.out)continue;const card=p===S;if(card&&(!on||Q.length>2))continue;
   if((p.sung||0)>=55&&roll(4)){const t=empPick(p.sung||0);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"emp",t},"Ngự ban")}else petGive(p,t,PET_SRCN.emp,"emp");continue}
@@ -140,7 +142,7 @@ function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="fun
  if(S.month===1&&S.petTrib!==S.year){S.petTrib=S.year;if(roll(50)){const p=me.filter(p=>!p.out).sort((x,y)=>(y.sung||0)-(x.sung||0))[0];
   if(p){const t=(p.sung||0)>=75&&roll(7)?"thanhlong":pick(["linhmieu","lyngu","camke","cuuvi","thienma","phuong"]);if(p===S){if(on&&!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"trib",t},"Cống phẩm")}else petGive(p,t,PET_SRCN.trib,"trib")}}}
  /* NPC buys a common pet through the eunuchs when she has silver to spare */
- for(const v of liveRivals(true))if(!tsbPets(v).length&&(v.bac||0)>=150&&roll(3)){const t=pick(petPool(0,1).filter(k=>PET[k].pr));if(roll(70)){ap(v,{bac:-PET[t].pr});petAdd(v,t,PET_SRCN.buy,"buy")}}
+ for(const v of petNpcs())if(!tsbPets(v).length&&(v.bac||0)>=150&&roll(3)){const t=pick(petPool(0,1).filter(k=>PET[k].pr));if(roll(70)){ap(v,{bac:-PET[t].pr});petAdd(v,t,PET_SRCN.buy,"buy")}}
  /* monthly effects + upkeep, same rule for everyone */
  for(const p of me)petMonthOf(p)}
 function petMonthOf(p){const L=tsbPets(p);if(!L.length)return;const me=p===S;let up=0;
@@ -148,14 +150,14 @@ function petMonthOf(p){const L=tsbPets(p);if(!L.length)return;const me=p===S;let
   if(T.th){if(me)apply({th:T.th});else p.th=(p.th||0)+T.th}
   if(T.omen&&roll(T.omen[0])){if(me){apply({danh:T.omen[1]});if(T.tr>=3)apply({th:1});log(`<span class="g">${T.n} trong cung ngươi được xem là điềm lành (Danh +${T.omen[1]}).</span>`)}else ap(p,{danh:T.omen[1]})}
   if(T.soft){const v=liveRivals(true).filter(x=>x!==p&&oan(x,p)>0).sort((x,y)=>oan(y,p)-oan(x,p))[0];if(v)oanAdd(v,p,-T.soft)}
-  if(T.spy&&roll(T.spy)){const v=liveRivals(true).filter(x=>x!==p&&bandOf(danger(x,p))>=1).sort((x,y)=>danger(y,p)-danger(x,p))[0];if(v){evA(p,v,1);if(me)log(`<span class="g">${T.n} nhại lại câu ${v.name} lỡ nói khi ghé cung: ngươi nắm thêm 1 chứng cứ của nàng.</span>`)}}
-  if(T.leak&&roll(T.leak)){if(T.spy&&(p.schemes||0)>0){const v=liveRivals(true).filter(x=>x!==p&&bandOf(danger(x,p))>=1)[0];if(v){evA(v,p,1);if(me)log(`<span class="r">${T.n} nhại lời ngươi trước mặt người của ${v.name}: nàng nắm 1 chứng cứ của ngươi.</span>`)}}
+  if(T.spy&&roll(T.spy)){const v=liveRivals(true).filter(x=>x!==p&&bandOf(danger(x,p))>=1).sort((x,y)=>danger(y,p)-danger(x,p))[0];if(v&&evA(p,v,1)){if(me)log(`<span class="g">${T.n} nhại lại câu ${v.name} lỡ nói khi ghé cung: ngươi nắm thêm 1 chứng cứ của nàng.</span>`)}}
+  if(T.leak&&roll(T.leak)){if(T.spy&&(p.schemes||0)>0){const v=liveRivals(true).filter(x=>x!==p&&bandOf(danger(x,p))>=1)[0];if(v){/*evok: schemes>0*/evA(v,p,1);if(me)log(`<span class="r">${T.n} nhại lời ngươi trước mặt người của ${v.name}: nàng nắm 1 chứng cứ của ngươi.</span>`)}}
    else if(!T.spy){if(me){apply({danh:-1});log(`${T.n} nhại lời ngươi trước khách, thành chuyện cười (Danh -1).`)}else ap(p,{danh:-1})}}
   if(T.noise&&roll(40)){const hk=typeof houseOf==="function"?houseOf(p):null;const v=liveRivals(true).find(x=>x!==p&&hk&&houseOf(x)===hk);if(v)oanAdd(v,p,2)}
   if(T.bite&&roll(40)){if(me)tsbLoyal(-1);else if(p.maid)p.maid.loyal=cl((p.maid.loyal||0)-1,0,100)}
   if(T.fox){if(roll(40)){if(me)apply({th:-1});else p.th=(p.th||0)-1}if(roll(15)){if(me){apply({danh:-1});log(`Lời đồn ngươi nuôi hồ ly trong cung lan ra (Danh -1).`)}else ap(p,{danh:-1})}}});
- if(up){const has=me?S.bac:(p.bac||0);if(has>=up){if(me)apply({bac:-up});else ap(p,{bac:-up})}else{L.forEach(P=>P.care=(P.care||0)-25);if(me)log(`<span class="r">Không đủ bạc nuôi thú (cần ${up} lượng): thú nuôi đói kém.</span>`)}}}
-function petWeek(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
+ if(up){const has=me?S.bac:(p.bac||0);if(has>=up){if(me)apply({bac:-up});else ap(p,{bac:-up})}else{L.forEach(P=>{P.care=(P.care||0)-25;/* the care numbers (jpetcare) are the truth: hunger shows on No */if(P.full!=null){P.full=Math.max(0,P.full-25);P.joy=Math.max(0,(P.joy||0)-10);P.care=Math.round((P.full+(P.clean||0)+P.joy)/3)}});if(me)log(`<span class="r">Không đủ bạc nuôi thú (cần ${up} lượng): thú nuôi đói kém.</span>`)}}}
+function petWeek(){for(const p of [S].concat(petNpcs())){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
   if(p.out){for(let i=L.length-1;i>=0;i--)petLose(p,i,"Nội vụ phủ thu lại khi vào lãnh cung");if(me)log(`<span class="r">Vào lãnh cung, thú nuôi của ngươi bị Nội vụ phủ thu lại hết.</span>`);continue}
   const winter=S.month>=10;
   for(let i=L.length-1;i>=0;i--){const P=L[i],T=petT(P);let dc=T.dc||8;if(T.pond&&rkOf(p)<3)dc+=5;if(T.weak&&winter)dc+=6;
@@ -170,28 +172,31 @@ function tsbPetWeek(){return petWeek()}function tsbPetMonth(){return petMonth()}
 function petLine(t,acc){t=petK(t);const T=PET[t];const sw=petHasFree(S)?"":(()=>{const j=petWorst(S);return j>=0?` · Mất: ${petT(tsbPets(S)[j]).n} phải gửi về Ngự thú viên (đủ ô)`:""})();
  return `thành: có ${T.n} (${PET_TIER[T.tr]}) · ${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu · ${T.use}${sw} · kèm: Xa xỉ +${petLux(t)} · ${T.up?`Bạc -${T.up} mỗi tháng · `:""}${T.bad}${acc||""} · (mỗi tuần phải chăm)`}
 function petTake(t,from,src){if(!petHasFree(S)){const j=petWorst(S);if(j<0)return null;petLose(S,j,"gửi về Ngự thú viên")}return petAdd(S,t,from,src)}
-function petArtOf(t,label){try{return tsbPlaceArt()}catch(e){return undefined}}
+/* review/ev-art-fit (owner 15/11): pet events showed the ROOM she stands in; now the picture of what happens — a pet given (gift group),
+   the autumn hunt (Đi săn group), caring for a pet (act-cham-thu-nuoi) */
+function petArtOf(t,label,g){try{if(g){const id="cat:"+g;const src=typeof evArtOf==="function"?evArtOf(id,0):"";if(src)return{src,label:typeof evArtTitle==="function"?evArtTitle(id):""}}
+ return{src:"img/act-cham-thu-nuoi.webp",label:label||"Thú nuôi"}}catch(e){return undefined}}
 function petPicK(t,lead){t=petK(t);const T=PET[t];return{facts:lead?[String(lead).replace(/<[^>]+>/g,"")]:undefined,itemPic:kitItem({src:petSrc(t,1,typeof petcStageSrc==="function"?"-non":""),name:"",grade:T.tr,size:"lg",lux:petLux(t)}).replace('<span class="kitn"></span>','').replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`)}}
 function petCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;if(d.kit&&!d.kit.facts)d.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];Q.push({t:title||d.title,h:d.t,opts:d.o,headArt:d.headArt,kit:d.kit,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});tsbShow();return true}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsbPet/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.kit=d.kit;if(q.kit&&!q.kit.facts)q.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];q.stage=undefined}}})}catch(e){}return out}})();
 PEND.tsbPetGift=pp=>{if(!S)return null;pp.t=petK(pp.t);const T=PET[pp.t];if(!T)return null;const O=[];
  if(pp.src==="man"){const m=typeof manById==="function"?manById(pp.m):null;if(!m)return null;const risk=typeof lộRisk==="function"?lộRisk("home"):25;
-  O.push({n:"Nhận",fx:{},x:`${word(100-risk)} · ${petLine(pp.t)} · hắn vui, tình ý +5 · hỏng: có người dò ra nguồn quà, Danh -3, một phi tần nắm 1 chứng cứ của ngươi`,go:()=>{petTake(pp.t,`${m.name} gửi tặng`,"man");m.tinh=cl((m.tinh||0)+5,0,100);if(!roll(100-risk)){apply({danh:-3});const v=liveRivals(true).sort((x,y)=>(y.mat||0)-(x.mat||0))[0];if(v)evA(v,S,1);log(`<span class="r">Có người dò ra ${T.n.replace(/^./,c=>c.toLowerCase())} là quà ${m.name} gửi; lời ra tiếng vào.</span>`)}else log(`Ngươi lặng lẽ nhận ${T.n.replace(/^./,c=>c.toLowerCase())} ${m.name} gửi tặng.`)}});
+  O.push({n:"Nhận",fx:{},x:`${word(100-risk)} · ${petLine(pp.t)} · hắn vui, tình ý +5 · hỏng: có người dò ra nguồn quà, Danh -3, một phi tần nắm 1 chứng cứ của ngươi`,go:()=>{deedAdd(S,"mangift",null,1,`lén nhận quà của ${m.name}`);petTake(pp.t,`${m.name} gửi tặng`,"man");m.tinh=cl((m.tinh||0)+5,0,100);if(!roll(100-risk)){apply({danh:-3});const v=liveRivals(true).sort((x,y)=>(y.mat||0)-(x.mat||0))[0];if(v)/*evok: mangift deed*/evA(v,S,1);log(`<span class="r">Có người dò ra ${T.n.replace(/^./,c=>c.toLowerCase())} là quà ${m.name} gửi; lời ra tiếng vào.</span>`)}else log(`Ngươi lặng lẽ nhận ${T.n.replace(/^./,c=>c.toLowerCase())} ${m.name} gửi tặng.`)}});
   O.push({n:"Trả lại",fx:{},x:`thành: giữ mình trong sạch, không ai dò được gì · Mất: hắn buồn, tình ý -5`,go:()=>{m.tinh=cl((m.tinh||0)-5,0,100);log(`Ngươi trả lại món quà của ${m.name}.`)}});
-  return{t:`<p>Một thái giám quen việc lén đưa đến cung ngươi ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}); kèm mảnh giấy ghi tên ${m.name}.</p>`,o:O,headArt:petArtOf(pp.t),kit:petPicK(pp.t),title:"Quà gửi lén"}}
+  return{t:`<p>Một thái giám quen việc lén đưa đến cung ngươi ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}); kèm mảnh giấy ghi tên ${m.name}.</p>`,o:O,headArt:petArtOf(pp.t,"","qua-tang"),kit:petPicK(pp.t),title:"Quà gửi lén"}}
  const who={emp:"Hoàng thượng",th:"Thái hậu",hh:"Hoàng hậu",trib:"Hoàng thượng"}[pp.src]||"Hoàng thượng";
  const decl={emp:["Sủng -2",{sung:-2}],trib:["Sủng -2",{sung:-2}],th:["Thái hậu quý ngươi -3",{th:-3}],hh:["Hoàng hậu quý ngươi -3",{hh:-3}]}[pp.src]||["Sủng -2",{sung:-2}];
  const gain=pp.src==="trib"?" · Hoàng hậu quý ngươi +2 (không tranh cống phẩm)":pp.src==="emp"?"":"";
  O.push({n:"Tạ ơn, nhận nuôi",fx:{},x:`Chắc chắn · ${petLine(pp.t)}${pp.src==="emp"||pp.src==="trib"?" · ba phi tần ghen ngươi nhất ghen +3":""}`,go:()=>{petTake(pp.t,PET_SRCN[pp.src],pp.src);if(pp.src==="emp"||pp.src==="trib")liveRivals(true).sort((x,y)=>(y.ghen||0)-(x.ghen||0)).slice(0,3).forEach(v=>v.ghen=cl((v.ghen||0)+3,0,100));log(`<span class="g">Ngươi tạ ơn, nhận ${T.n} ${who} ban.</span>`)}});
  O.push({n:"Khiêm nhường xin gửi Ngự thú viên",fx:{},x:`Chắc chắn · thành: không thêm Xa xỉ, không ai ghen, không tốn bạc nuôi${gain} · Mất: ${who} hơi phật ý, ${decl[0]}`,go:()=>{apply(Object.assign({},decl[1],pp.src==="trib"?{hh:2}:{}));log(`Ngươi xin gửi ${T.n.replace(/^./,c=>c.toLowerCase())} lại Ngự thú viên; ${who} hơi phật ý.`)}});
  const lead={emp:`Hoàng thượng nhớ lời ngươi từng khen, sai thái giám đem đến ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}), ban cho ngươi nuôi.`,th:`Thái hậu thương ngươi hiếu thuận, ban cho ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}) để giữ điềm thọ.`,hh:`Hoàng hậu sai người đem đến ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}), nói là để ngươi có bạn khuây khỏa.`,trib:`Sứ thần nước ngoài dâng cống. Hoàng thượng chọn ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}) ban riêng cho ngươi.`}[pp.src]||"";
- return{t:`<p>${lead}</p>`,o:O,headArt:petArtOf(pp.t),kit:petPicK(pp.t),title:{emp:"Ngự ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",trib:"Cống phẩm"}[pp.src]}};
+ return{t:`<p>${lead}</p>`,o:O,headArt:petArtOf(pp.t,"","qua-tang"),kit:petPicK(pp.t),title:{emp:"Ngự ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",trib:"Cống phẩm"}[pp.src]}};
 PEND.tsbPetHunt=pp=>{if(!S||!pp.ts||!pp.ts.length)return null;pp.ts=pp.ts.map(petK);const O=pp.ts.map(t=>({n:`Xin ${PET[t].n}`,fx:{},x:"Chắc chắn · "+petLine(t),go:()=>{petTake(t,PET_SRCN.hunt,"hunt");log(`<span class="g">Hoàng thượng ban ngươi ${PET[t].n.replace(/^./,c=>c.toLowerCase())} săn được mùa thu.</span>`)}}));
  O.push({n:"Không xin gì, chỉ chúc mừng",fx:{},x:`thành: Hoàng thượng khen hiểu chuyện, Sủng +2 · không thêm Xa xỉ, không tốn bạc nuôi`,go:()=>{apply({sung:2});log("Ngươi chỉ chúc mừng Hoàng thượng thắng lợi trong cuộc săn.")}});
- const T=PET[pp.ts[0]];return{t:`<p>Thu săn ở bãi săn hoàng gia. Hoàng thượng thắng lớn, cho gọi các phi tần đi theo đến chọn thú săn được còn sống để nuôi.${T.rescue?" Trong đoàn có một con hươu trắng tỏa ánh bạc, ai cũng nói là thần thú.":""}</p>`,o:O,headArt:petArtOf(pp.ts[0]),kit:petPicK(pp.ts[0]),title:"Thu săn"}};
+ const T=PET[pp.ts[0]];return{t:`<p>Thu săn ở bãi săn hoàng gia. Hoàng thượng thắng lớn, cho gọi các phi tần đi theo đến chọn thú săn được còn sống để nuôi.${T.rescue?" Trong đoàn có một con hươu trắng tỏa ánh bạc, ai cũng nói là thần thú.":""}</p>`,o:O,headArt:petArtOf(pp.ts[0],"","di-san"),kit:petPicK(pp.ts[0]),title:"Thu săn"}};
 PEND.tsbPetW=pp=>{const P=tsbPets(S)[pp.i];if(!P)return null;const T=petT(P);const mm=tsbMaid(S);const O=[];
  O.push({n:"Tự tay chăm",fx:{},x:`tốn: 1 khắc · thành: ${T.n} khỏe lại · Sức +2 (khuây khỏa)`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);P.care=90;P.warn=0;apply({suc:2});log(`Ngươi tự tay chăm ${T.n.replace(/^./,c=>c.toLowerCase())}; nó khỏe lại.`)}});
- if(mm)O.push({n:`Giao ${mm.name} chăm`,fx:{},x:`${word(cl(mm.loyal,5,95))} · thành: ${T.n} khỏe lại · hỏng: kẻ hầu chăm qua loa, chỉ đỡ đôi chút · (cơ may theo Lòng của ${mm.name})`,go:()=>{if(roll(mm.loyal)){P.care=80;P.warn=0;log(`${mm.name} chăm ${T.n.replace(/^./,c=>c.toLowerCase())} chu đáo.`)}else{P.care+=15;log(`${mm.name} chăm qua loa.`)}}});
+ if(mm)O.push({n:`Giao ${mm.name} chăm`,fx:{},x:`${word(cl(mm.loyal,5,95))} · thành: ${T.n} khỏe lại · hỏng: kẻ hầu chăm qua loa, chỉ đỡ đôi chút · (thành hay bại tùy Lòng của ${mm.name})`,go:()=>{if(roll(mm.loyal)){P.care=80;P.warn=0;log(`${mm.name} chăm ${T.n.replace(/^./,c=>c.toLowerCase())} chu đáo.`)}else{P.care+=15;log(`${mm.name} chăm qua loa.`)}}});
  O.push({n:"Để sau",fx:{},x:`thành: giữ khắc buổi này · Mất: bỏ bê thêm vài tuần thì mất ${T.n.replace(/^./,c=>c.toLowerCase())}`});
  return{t:`<p>Mấy hôm nay ${T.n.replace(/^./,c=>c.toLowerCase())} của ngươi biếng ăn, ${/hoami|sao|vet|camke|phuong|hac/.test(P.t)?"không hót nữa":/cavang|cachep|lyngu/.test(P.t)?"nằm lờ đờ đáy bồn":/thanhlong/.test(P.t)?"vảy xỉn màu":"lông xơ xác"}.</p>`,o:O,headArt:petArtOf(P.t),kit:petPicK(P.t),title:"Thú nuôi biếng ăn"}};
 
@@ -200,7 +205,7 @@ function petTarget(t){const L=tsbPets(t);if(!L.length)return -1;let j=0;L.forEac
 function petHarmO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);return cl(Math.round(odA(a,50+(a.tamco||0)/5+(T.easy?15:0)-T.tr*4)-tsbGuard(t)),5,90)}
 A("thaopet","Hại thú nuôi của nàng",{c:{bac:-10},ok:(a,t)=>(a.bac||0)>=10&&tsbPets(t).length>0,o:(a,t)=>petHarmO(a,t),x:"nàng mất con thú quý nhất (thả đi hay làm hại)",
  f:(a,t)=>{ap(a,{bac:-10});const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);const c=caught(a,t,false,`sai người hại ${T.n.replace(/^./,c=>c.toLowerCase())} của ${NM(t)}`);if(c)return c;const o=petHarmO(a,t);
-  if(!roll(o)){const e=roll(40);if(e)evA(t,a,1);return `Kẻ lạ lảng vảng bên chuồng thú của ${NM(t)} bị kẻ hầu chặn lại${e?`; hắn khai là người của ${NM(a)} (chứng cứ +1)`:""}. `}
+  if(!roll(o)){const e=roll(40);if(e)/*evok: pet harm act (runAct deed)*/evA(t,a,1);return `Kẻ lạ lảng vảng bên chuồng thú của ${NM(t)} bị kẻ hầu chặn lại${e?`; hắn khai là người của ${NM(a)} (chứng cứ +1)`:""}. `}
   const fly=/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|bachloc|kylan|cuuvi|hac|thienma/.test(P.t);const n=petLose(t,j,fly?"bị thả đi (chưa rõ ai làm)":"bị hại (chưa rõ ai làm)");
   if(T.tr>=3&&roll(25)){/* a rare animal the court knows: the loss is noticed */if(t===S)apply({danh:-1})}
   return `<span class="r">${tsbCap(n)} của ${NM(t)} ${fly?"sổ lồng bay mất, tìm không thấy":"bỗng lăn ra bỏ ăn rồi chết, không rõ vì sao"}.</span> `}});
@@ -215,17 +220,27 @@ function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),na
  const h2=h.replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`);
  return h2}
 function petCareW(P){const c=P.care||0;return c>=70?["Khỏe","g"]:c>=30?["Cần chăm","n"]:["Biếng ăn","r"]}
-function petHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S),mx=Math.max(petMax(S),L.length);const slots=[];
- for(let i=0;i<mx;i++){const P=L[i];const lab=i===0?"Theo hầu":"Tẩm cung";
-  if(P){const T=petT(P),cw=petCareW(P);slots.push({k:"p"+i,label:lab,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]}`},
-   mini:(S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"")+`<span class="keql2"><span class="keqm">${S.petOn===i?"theo hầu":"ở tẩm cung"} · ${cw[0]}</span></span>`})}
-  else slots.push({k:"e"+i,label:lab,i,item:null,ghost:petSrc(i%2?"meomuop":"cho")})}
- const up=L.reduce((s,P)=>s+(petT(P).up||0),0);
- const sum=(L.length?`<span class="kchip n kluxc">Xa xỉ <b>+${petLuxOf(S)}</b></span>`+(up?kitChip("Bạc nuôi",-up):""):`<span class="past">chưa nuôi con nào</span>`);
- let h=kitEquipSlots({key:"pets",title:`Thú nuôi (${L.length}/${petMax(S)})`,slots,sum,onPick:petPick});
- /* empty slot = the kit's own empty square; the pet tile keeps its grade frame. Grade frames/colours/seal = the item kit (owner 10:10Z) */
- 
- return h}
+/* LEFT COLUMN pet box (owner 16/11 16:55Z): directly under Y phục, same column width, slot = wear-slot size; name / age / effect as small lines.
+   Shows the pet that follows her (else the first); 0 pets = one empty slot + "Chưa nuôi con nào". Tap = the Thú cưng sub-tab of Tư trang. */
+function petStageTxt(P){return typeof petStage==="function"&&BAL.pet&&BAL.pet.stages?BAL.pet.stages[petStage(P)]:""}
+function petAgeTxt(P){const w=Math.max(0,tsbWk()-(P.at||0));return (w>=48?Math.floor(w/48)+" tuổi":Math.floor(w/4)+" tháng tuổi")}
+function petSideHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S);const i=Math.max(0,L.findIndex((P,j)=>j===S.petOn)),P=L[i];let slot;
+ if(P){const T=petT(P),cw=petCareW(P);slot={k:"p"+i,label:T.n,lc:KIT_GRADE[T.tr].c,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]} · chạm để mở Thú cưng`},
+   info:`<span>${petAgeTxt(P)}</span>${S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"<span>ở tẩm cung</span>"}${L.length>1?`<span>+${L.length-1} con nữa</span>`:""}`}}
+ else slot={k:"e0",label:"Chưa nuôi con nào",i:0,item:null,ghost:petSrc("cho")};
+ return kitEquipSlots({key:"pets",title:"Thú cưng",slots:[slot],onPick:()=>{KINV_SUB="thu";try{localStorage.setItem("hclh-inv-sub","thu")}catch(e){}try{renderPanel()}catch(e){render()}},col:true})}
+/* Tư trang › Thú cưng sub-tab: every pet as a kit card (kitSkillCard) + Chăm (jpetcare) / Cho theo hầu / Gửi về, and the shop button */
+function petPanelHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S),free=petMax(S)-L.length;
+ const shop=pbtn(`data-petshop="1"`,"Nhờ thái giám tìm thú nuôi",free>0?`tốn: 1 khắc, Bạc · thành: một con thú nhỏ về tẩm cung (còn ${free} ô)`:"",free>0?(typeof whyTime==="function"?whyTime(1):""):"hết ô nuôi");
+ const cards=L.map((P,i)=>{const T=petT(P),cw=petCareW(P),cur=tsbPetOn(S),B=[];
+  B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,"thành: cho ăn, tắm chải, chơi (mỗi việc 1 khắc) · No, Sạch, Vui, Tình cảm tăng",""));
+  if(S.petOn!==i)B.push(pbtn(`data-pet="follow" data-i="${i}"`,"Cho theo hầu",`thành: ${PET_SN[T.st]} +${1+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${1+(petT(cur).sacX||0)}`:""}`,""));
+  const fromHi=/emp|hunt|trib/.test(P.src||"")||P.from==="Hoàng thượng ban",fromTh=P.src==="th";
+  B.push(pbtn(`data-pet="free" data-i="${i}"`,"Gửi về Ngự thú viên",`thành: bớt Xa xỉ ${S.petOn===i?petLux(P.t):Math.round(petLux(P.t)/2)}${T.up?` · thôi tốn Bạc ${T.up} mỗi tháng`:""} · Mất: ${T.n}${fromHi?" · Hoàng thượng phật ý, Sủng -3":fromTh?" · Thái hậu quý ngươi -8":P.src==="hh"?" · Hoàng hậu quý ngươi -3":""}`,""));
+  return kitSkillCard({kind:"pet",k:String(i),name:T.n,kicker:`${PET_TIER[T.tr]} · ${petStageTxt(P)} · ${petAgeTxt(P)} · ${S.petOn===i?"theo hầu":"ở tẩm cung"}`,max:0,img:petPSrc(P),
+   desc:`<span class="kchip ${cw[1]}">${cw[0]}</span> ${kitRows(petRowsL(P,i))}`,acts:B,can:true})}).join("");
+ return `<div class="kskills kpetcards">${cards||kitSkillCard({kind:"empty",name:"Chưa nuôi con nào",max:0,img:petSrc("cho"),desc:"Nhờ thái giám Nội vụ phủ tìm một con thú nhỏ về nuôi."})}${kitSkillCard({kind:"petshop",name:`Thú nuôi (${L.length}/${petMax(S)})`,max:0,img:"",desc:"Con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.",acts:[shop],can:true})}</div>`}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-petshop]");if(!b||b.disabled)return;ev.stopPropagation();petShop()},true);
 /* one kit table (KIT §51): petRowsL = the rows, wrappers (jpetcare) add rows to the SAME table, never a 2nd kitRows */
 function petRows(P,i){return kitRows(petRowsL(P,i))}
 function petRowsL(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
@@ -248,7 +263,7 @@ function petBuyOne(t){const T=PET[t];if(!T||!T.pr||!can(1)||S.bac<T.pr||!petHasF
  else log(`<span class="r">Thái giám mua phải con ốm, không nuôi được; mất ${T.pr} lượng.</span>`);return true}
 function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
  return PETK.filter(k=>PET[k].pr).map(k=>{const T=PET[k],o=petBuyO(k),t1=whyTime(1);
-  const rows=kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Cơ may",`${word(o)} (theo Tai mắt của ngươi${T.tr?", con càng quý càng khó tìm":""}) · tốn 1 khắc`],
+  const rows=kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Cơ may",`${word(o)} (tùy Tai mắt của ngươi${T.tr?"; con càng quý càng khó tìm":""}) · tốn 1 khắc`],
    ["Được",[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use],"g"],["Mất",[T.bad].concat(T.up?[`Bạc -${T.up} mỗi tháng`]:[],["hỏng: mua phải con ốm, mất bạc"]),"r"],["Ghi chú",[`Xa xỉ ${petLux(k)}`,`về tay còn Non, nuôi mới lớn`],"n"]]);
   return{k,src:petSrc(k,0,sfx),src512:petSrc(k,1,sfx),name:T.n,sub:`${PET_TIER[T.tr]} · Xa xỉ ${petLux(k)}`,grade:T.tr,lux:petLux(k),price:T.pr,
    eff:`${word(o)} · ${PET_SN[T.st]} +${1+(T.sacX||0)} · ${T.use}`,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),

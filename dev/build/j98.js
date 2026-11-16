@@ -16,7 +16,12 @@ const ITEM_ART_G={
  /* Tinh phẩm */ vongngoc:1,yensao:1,agiao:1,nhansam:1,xahuong:1,nghien:1,giaidoc:1,
  /* Trân phẩm */ gamto:2,boodieu:2,tranhco:2,dancoc:2,vongvang:2,hacdinh:2,vangbac:2,bienvang:2,
  /* Tuyệt phẩm */ tramphuong:3,gamvang:3,ngocdungcao:3,
- /* Ngự tứ */ ngocboi:4,bienngu:4};
+ /* Ngự tứ */ ngocboi:4,bienngu:4,
+ /* D45 small-art (review/small-art-wire): earrings + shoes (no wear slot yet: KIT REQUEST), per-rank Đeo eo / Đeo tay / Túi thơm of the promotion set (jinv RANKED) */
+ hoatai:1,hoataivang:2,giayhoa:0,giaygam:1,
+ ngocboi_r0:0,ngocboi_r1:0,ngocboi_r2:1,ngocboi_r3:1,ngocboi_r4:2,ngocboi_r5:2,ngocboi_r6:3,ngocboi_r7:4,
+ vongngoc_r1:1,vongngoc_r2:1,vongngoc_r3:2,vongngoc_r4:2,
+ tuithom_r1:0,tuithom_r2:0,tuithom_r3:1,tuithom_r4:1,tuithom_r5:2,tuithom_r6:2,tuithom_r7:3};
 const ITEM_ART_TP=["tranh","theu","bhoa","tho","kinh","khuc","the","mua","ao","mon","huong"];
 function itemArt(key,tier){try{
   let k=key,b=tier;

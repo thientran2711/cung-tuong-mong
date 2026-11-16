@@ -3,7 +3,14 @@ const RANKS=[
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
 /* palace heads (chủ vị): Tần, Phi, Quý phi, Hoàng quý phi (owner 11/14, OWNER_DECISIONS) — rank index ≥ PAL_HEAD */
 const PAL_HEAD=3;
-const RCOL=["#9c8f74","#a8946a","#6a8aa0","#7aa07a","#a07ab0","#c06a6a","#d98a3a","#f0d070"];
+/* KIT 1.3 · THE ONE RANK PALETTE (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn"; jewel tones): every rank colour in the game is read from here (ring, halo, chips, card colour, portrait ground
+   .rk-cN, text tone via kitToneOf in jk4). Vivid bases, same colour family per rank; text on paper is DERIVED (kitToneOf), never typed again. Nobody keeps a copy. */
+const RCOL=["#c4861a","#12b84a","#1f6cff","#ff3d8f","#a23cff","#ff1f3d","#ff6a00","#ffc400"];/* Đáp ứng champagne-bronze, Thường tại green, Quý nhân blue, Tần pink, Phi purple, Quý phi red, Hoàng quý phi orange, Hoàng hậu gold */
+const RCOL_COLD="#8fa3b8";/* Lãnh cung / Phế phi: cool steel grey */
+window.MRCOL=["#3aa38f","#00bf94","#2f6fff","#ff4a1c","#9b4dff"];/* maids: thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet */
+window.ERCOL=["#6fb03a","#12b35a","#1f8fe0","#d9601a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
+const KIT_IMP="#ffd400";/* ONE imperial yellow token (owner 11/16 16:10Z: "màu vàng của hoàng gia, màu vàng tươi") for Hoàng thượng AND Hoàng thái hậu; kitToneOf keeps it as is, the ink edge is in jk4 */
+const KIT_ROLE={emp:KIT_IMP,th:KIT_IMP,ty:"#12b5ac",prince:"#1f9be8",princess:"#f0543c",stranger:"#6e7681",official:"#3a6fe0",guard:"#5879a8",mama:"#b97a2a",slate:"#5a7a9a"};/* non-rank roles (never pink/purple for men) */
 const ORIGINS=[
  {k:"tt",n:"Con gái Tể tướng",r:2,o:{danh:25,bac:150},hh:-15,th:5,art:{cam:1},t:"Nhà quyền thế. Hoàng hậu coi ngươi là mối lo."},
  {k:"dtq",n:"Con gái Đại tướng quân",r:1,o:{danh:15,suc:100,bac:80},hh:0,th:0,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},
@@ -82,11 +89,9 @@ function apply(o){const pops=[];
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
-function popNum(k,v,i){const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
-  const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;
-  const hud=el.id!=="stage";s.style.left=Math.max(4,Math.min(innerWidth-120,r.left+r.width/2-40))+"px";
-  s.style.top=(hud?r.bottom+4+i*18:r.top+r.height*0.35+i*20)+"px";s.style.animationDelay=(i*.12)+"s";
-  document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
+function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */
+  const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
+  const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;s.style.left=Math.max(4,r.left)+"px";s.style.top=(r.bottom+4)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
 function log(h){S.logSeq=(S.logSeq||0)+1;S.logs.unshift(`<span class="ld">T${S.month}/${S.year} ${TUAN[S.tuan]}</span>${h}`);if(S.logs.length>150)S.logs.length=150}
 function when(){return `Năm ${S.year}, tháng ${S.month}, ${TUAN[S.tuan]} (${SEASON[S.month-1]})`}
 function fx(cls,el){const e=el||$("game");e.classList.remove(cls);void e.offsetWidth;e.classList.add(cls);setTimeout(()=>e.classList.remove(cls),950)}
@@ -95,6 +100,21 @@ function fx(cls,el){const e=el||$("game");e.classList.remove(cls);void e.offsetW
 function allKids(){const a=[];if(S&&S.kids)S.kids.forEach(k=>a.push([k,null]));(rivals||[]).forEach(v=>(v.kids||[]).forEach(k=>a.push([k,v])));return a}
 function mkKid(sex,age){const used=allKids().map(([k])=>k.name);const pre=sex==="m"?"Hoàng tử ":"Công chúa ";const pool=(sex==="m"?PRINCE:PRINCESS).filter(n=>!used.includes(pre+n));
   return {name:pre+(pool.length?pick(pool):pick(sex==="m"?PRINCE:PRINCESS)+" "+(R(9)+2)),sex,age,hp:80+R(21),tal:20+R(50),fond:30+R(30),alive:true,heir:false,fv:1+R(2)}}
+/* palace-start (owner 16/11 "game starts right after the accession", amended: "about 4 small children, close in age"): a new game seeds
+   BAL.ps.kidN-weighted 3–5 children in the whole palace, ages kidAge (1–4), princes and princesses mixed (sonP each, at least one of each),
+   mothers in BAL.ps rank ranges; the Hoàng hậu never has a son at the start (no đích tử) and nobody is grown, so the player can still compete.
+   A mother has at most two of them, born at least two years apart. New games only (S.ps). */
+function psSeedKids(){const P=BAL.ps;let n=0,r=Math.random()*P.kidN.reduce((a,b)=>a+b,0);while(n<P.kidN.length-1&&r>=P.kidN[n]){r-=P.kidN[n];n++}
+ const sx=[];for(let i=0;i<n;i++)sx.push(Math.random()<P.sonP?"m":"f");if(n>=2&&!sx.includes("m"))sx[0]="m";if(n>=2&&!sx.includes("f"))sx[n-1]="f";
+ for(const x of sx){const age=P.kidAge[0]+R(P.kidAge[1]-P.kidAge[0]+1);const rg=x==="m"?P.sonMom:P.dauMom;
+  const M=rivals.filter(v=>v.alive&&!(x==="m"&&v.queen)&&(v.queen?rg[1]>=7:v.rank>=rg[0]&&v.rank<=rg[1])&&(v.kids||[]).length<2&&(v.kids||[]).every(k=>Math.abs(k.age-age)>=2));if(!M.length)continue;
+  const v=pick(M);const k=mkKid(x,age);v.kids.push(k);v.lastBirth=Math.max(v.lastBirth==null?-999:v.lastBirth,-12*age-R(6));
+  v.age=Math.max(v.age,BAL.ps.momAge+age)}/* review r1: no mother (or Emperor) under momAge at a seeded child's birth */
+ if(S&&S.emp){const mx=Math.max(0,...allKids().map(([k])=>k.age||0));if(mx)S.emp.age=Math.max(S.emp.age,BAL.ps.momAge+mx)}}
+/* the opening line of a new game (Nhập cung): the Emperor has just taken the throne, the court is weak, the harem young, few children */
+function psOpenText(){const E=S.emp,K=allKids().filter(([k])=>k.alive);const ns=K.filter(([k])=>k.sex==="m").length,nd=K.length-ns;
+ const kl=!K.length?"Trong cung chưa có hoàng tự nào.":`Trong cung mới có ${[ns?ns+" hoàng tử":"",nd?nd+" công chúa":""].filter(Boolean).join(", ")}, đứa lớn nhất mới ${Math.max(...K.map(([k])=>k.age))} tuổi; Hoàng hậu chưa có con trai.`;
+ return `Ngài vừa đăng cơ, nay mới là ${E.era} năm thứ nhất. Triều chính còn non: việc lớn vẫn phải qua Thái hậu và các đại thần phụ chính. Hậu cung còn thưa, phi tần phần nhiều là người cũ từ tiềm để, tuổi còn xanh. ${kl} Ngôi Đông cung còn bỏ trống.`}
 function mySons(){return S.kids.filter(k=>k.alive&&k.sex==="m")}
 function myDaus(){return S.kids.filter(k=>k.alive&&k.sex==="f")}
 function liveRivals(q){return rivals.filter(v=>v.alive&&!v.out&&(q||!v.queen))}
@@ -111,10 +131,10 @@ function freshName(){const used=namesInUse();const sur=used.map(n=>SURN.find(x=>
   for(const a of SURN)for(const b of GIVEN){const n=a+" "+b;if(!used.includes(n))return n}return pick(SURN)+" "+pick(GIVEN)+" "+(R(90)+10)}
 function newRival(rank,isQueen){const t=pick(TRAITS);
   return rstats({id:++rid,name:freshName(),rank,queen:!!isQueen,trait:t[0],malice:t[1]+R(20)-10,sung:20+rank*9+R(10),rel:isQueen?-5:R(20)-10,ev:0,alive:true,out:false,
-    kids:rank>=3&&R(3)===0?[mkKid("m",1+R(4))]:[],ghen:R(15),pg:0,nights:0,age:(rank>=5||isQueen?23:18)+R(8)},rank)}
+    kids:[],/* palace-start (owner 16/11): nobody arrives with a child; the few children at a new game are seeded by psSeedKids() */ghen:R(15),pg:0,nights:0,age:(rank>=5||isQueen?23:18)+R(8)},rank)}
 function mkEmp(){const t=[];const ks=Object.keys(ETRAITS);
   while(t.length<2){const k=pick(ks);if(t.includes(k)||CLASH.some(([a,b])=>(a===k&&t.includes(b))||(b===k&&t.includes(a))))continue;t.push(k)}
-  return {era:pick(ERA),age:20+R(14),traits:t,mood:1,likes:{flower:pick(LIKES.flower),music:pick(LIKES.music),dish:pick(LIKES.dish)},known:{}}}
+  return {era:pick(ERA),age:BAL.ps.empAge[0]+R(BAL.ps.empAge[1]+1),reignY:1,traits:t,mood:1,likes:{flower:pick(LIKES.flower),music:pick(LIKES.music),dish:pick(LIKES.dish)},known:{}}}
 function empName(){return `Hoàng thượng niên hiệu ${S.emp.era}`}
 function discover(){const u=Object.keys(LIKES).filter(k=>!S.emp.known[k]);if(!u.length)return false;const k=pick(u);S.emp.known[k]=true;
   log(`<span class="g">Ngươi biết được: Hoàng thượng thích ${S.emp.likes[k]}.</span>`);return true}

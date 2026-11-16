@@ -1,13 +1,17 @@
 /* Cung Tường Mộng · Chơi cùng bạn — co-op backend (Cloudflare Worker + Durable Object).
    Protocol: dev/coop/PROTOCOL.md. One Durable Object per room code holds the canonical shared state C + both seats. */
 import { merge3 } from "./merge.js";
+import { vaultRoute, Vault } from "./vault.js";
+export { Vault };
 
-const V = "coop-1";
+const V = "coop-2";
+const CHAT_MAX = 50, CHAT_LEN = 300, CHAT_NAME = 24, CHAT_FRAME = 2400, CHAT_GAP = 350;   // chat: last 50 per room, 300 chars, 2.4 KB frame, 350 ms between two sends of one seat
 const ALPH = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const CHUNK = 40000;            // chars per storage value (<128 KiB even in 3-byte UTF-8)
 const BIG = 200000;             // send gzip binary above this many chars
 const STALE = 45000;            // ms of silence before a socket counts as gone
 const IDLE_DAYS = 30;
+const SEATMAX = 3000000;        // chars of one seat's week copy
 
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS", "Access-Control-Allow-Headers": "content-type" };
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", ...CORS } });
@@ -17,6 +21,7 @@ const okCode = c => typeof c === "string" && c.length === 4 && [...c].every(ch =
 export default {
   async fetch(req, env) {
     const u = new URL(req.url);
+    if (u.pathname.startsWith("/api/vault")) return vaultRoute(req, env);   // Sổ mây (vault.js): own CORS, game origin only
     if (req.method === "OPTIONS") return new Response(null, { headers: CORS });
     const p = u.pathname.replace(/\/+$/, "");
     if (p === "/api/health" || p === "" || p === "/") return json({ ok: true, v: V });
@@ -129,7 +134,8 @@ export class Room {
       this.ctx.acceptWebSocket(s2, ["seat-" + seat]);
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, ...this.buoiView() });
+      const mine = await this.seatCopy(seat);
+      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0 });
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
       return new Response(null, { status: 101, webSocket: c2 });
@@ -164,6 +170,19 @@ export class Room {
       await this.saveMeta(); return this.bcast({ t: "pos", from: seat, ...m.pos[seat] }, ws);
     }
     if (t === "act" || t === "actr" || t === "res" || t === "note") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }
+    if (t === "chat") return this.chatIn(ws, seat, msg, m);
+    /* per-seat copy of her week (review/coop-rejoin-xdev): the client's rolling snapshot (jcoopworld CW.snap), so a rejoin from ANOTHER
+       device (same pid via Sổ mây) or with cleared storage restores her exact week. Version = server counter m.sv[seat]; a write based on an
+       older version than the stored one is refused (a stale device must not overwrite a newer copy). */
+    if (t === "seat") {
+      const o = msg.o; if (!o || typeof o !== "object" || o.seat !== seat || o.week !== m.week) return this.send(ws, { t: "error", code: "badseat", msg: "tuần " + m.week });
+      m.sv = m.sv || {}; const cur = m.sv[seat] || 0;
+      if ((msg.sv | 0) < cur) return this.send(ws, { t: "error", code: "seatold", sv: cur });
+      if (JSON.stringify(o).length > SEATMAX) return this.send(ws, { t: "error", code: "seatbig" });
+      m.sv[seat] = cur + 1; o.sv = m.sv[seat]; o.sat = Date.now();
+      await this.putBig("seat-" + seat, o); await this.saveMeta();
+      return this.send(ws, { t: "seatok", sv: m.sv[seat] });
+    }
     if (t === "say") { const text = String(msg.text || "").slice(0, 200); return this.bcast({ t: "said", from: seat, text }, ws); }
     if (t === "init") {
       if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
@@ -178,7 +197,7 @@ export class Room {
       C.P = C.P || {}; C.P[seat] = msg.P;
       // her new character starts fresh in this week; drop a pending end of hers
       if (m.ended) delete m.ended[seat];
-      await this.delBig("sub-" + seat);
+      await this.delBig("sub-" + seat); await this.delBig("seat-" + seat);
       // the other seat may already have ended with a view of my OLD character: make her view of me the new blob,
       // so the merge sees "no change by her" there and keeps my new character as it is
       const other = seat === "a" ? "b" : "a"; const os = await this.getBig("sub-" + other);
@@ -201,6 +220,28 @@ export class Room {
     }
   }
 
+
+  /* ---- chat (PROTOCOL §10): room-scoped (this Durable Object only), last CHAT_MAX messages in DO storage, plain text ---- */
+  async chatLoad() { const a = await this.ctx.storage.get("chat"); return Array.isArray(a) ? a : []; }
+  async chatIn(ws, seat, msg, m) {
+    let raw = typeof msg.text === "string" ? msg.text : "";
+    if (JSON.stringify(msg).length > CHAT_FRAME) return this.send(ws, { t: "error", code: "toolarge", msg: "tin quá dài" });
+    const clean = s => [...String(s).replace(/[\u0000-\u001F\u007F-\u009F\u2028\u2029\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]+/g, " ").replace(/ {2,}/g, " ").trim()];
+    const text = clean(raw).slice(0, CHAT_LEN).join("");
+    if (!text) return;
+    const at = ws.deserializeAttachment() || {}; const now = Date.now();
+    if (at.cs && now - at.cs < CHAT_GAP) return this.send(ws, { t: "error", code: "slow", msg: "gửi chậm lại" });
+    at.cs = now; ws.serializeAttachment(at);
+    const nm = clean(msg.nm || (m.seats[seat] && m.seats[seat].name) || "").slice(0, CHAT_NAME).join("");
+    const g = msg.g && typeof msg.g === "object" ? msg.g : {};
+    const n = v => (Number.isFinite(+v) ? Math.max(0, Math.min(9999, Math.floor(+v))) : 0);
+    m.cn = (m.cn || 0) + 1;
+    const one = { i: m.cn, s: seat, n: nm, x: text, w: m.week | 0, g: { y: n(g.y), m: n(g.m), t: n(g.t), b: n(g.b) }, ts: now };
+    const list = await this.chatLoad(); list.push(one); while (list.length > CHAT_MAX) list.shift();
+    await this.ctx.storage.put("chat", list); await this.saveMeta();
+    return this.bcast({ t: "chat", m: one });          // to BOTH seats, the sender too: one order, one id
+  }
+
   async putBig(key, obj) {
     const s = JSON.stringify(obj); const put = {}; let n = 0;
     for (let i = 0; i < s.length; i += CHUNK) put[key + ":" + (n++)] = s.slice(i, i + CHUNK);
@@ -213,6 +254,7 @@ export class Room {
     const got = await this.ctx.storage.get(keys); let s = ""; for (const k of keys) s += got.get(k) || "";
     try { return JSON.parse(s); } catch (e) { return null; }
   }
+  async seatCopy(seat) { const o = await this.getBig("seat-" + seat); return o && typeof o === "object" && o.week === this.meta.week ? o : null; }
   async delBig(key) { const n = (await this.ctx.storage.get(key)) || 0; const keys = [key]; for (let i = 0; i < n; i++) keys.push(key + ":" + i); await this.ctx.storage.delete(keys); }
 
   async tick() {
@@ -220,8 +262,8 @@ export class Room {
     const A = await this.getBig("sub-a"), B = await this.getBig("sub-b");
     let F;
     if (!base) F = A || B; else if (A && B) F = merge3(base, A, B); else F = A || B || base;
-    m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {}; m.buoi = 0; m.bended = {};
-    await this.saveC(F); await this.delBig("sub-a"); await this.delBig("sub-b"); await this.saveMeta();
+    m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {}; m.buoi = 0; m.bended = {}; m.sv = {};
+    await this.saveC(F); await this.delBig("sub-a"); await this.delBig("sub-b"); await this.delBig("seat-a"); await this.delBig("seat-b"); await this.saveMeta();
     await this.bcast({ t: "week", week: m.week, state: F });
     await this.presence();
   }

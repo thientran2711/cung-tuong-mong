@@ -20,7 +20,7 @@ Object.assign(BAL,{stip:{
   [["luahang",2],["trahop",1],["sonphan",1]],[["gamto",1],["luahang",1],["trahop",1],["sonphan",1]],[["gamto",1],["luahang",1],["trahop",2],["sonphan",1],["yensao",1]],
   [["gamto",2],["trahop",2],["sonphan",1],["yensao",1],["nhansam",1]]],
  coal:[1,1,1,1,2,2,2,3],coldGoods:[["vaitho",1]],coldCoal:1,npcKeep:4,resell:40,
- down:{gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",sonphan:null,yensao:null,nhansam:null},
+ down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",sonphan:null,yensao:null,nhansam:null},
  w:{sung:30,fault:35,sup:40,eun:25,maid:20},cap:80,meekAdd:10,spiteAdd:15,
  lowSung:15,dropSung:10,faultM:2,supRank:4,oan:30,safeSung:55,tipM:3,allyLoyal:75,allyTips:3,maidLoyal:35,
  cutSmall:.15,cutBig:.25,tip:[8,10,12,15,18,22,26,30],greedy:50,punishM:6,
@@ -49,13 +49,16 @@ Object.assign(BAL,{stip:{
  const G={vaibong:0,vaitho:0,tragoi:0,trahop:1,tramoc:0,thanbac:0,thanden:0,banhtrai:0,ruoucuc:0,aolong:2,cocngoc:2,guong:1,thamba:2,cungbac:1,traicay:0,lanquy:1};
  try{Object.assign(ITEM_ART_G,G);for(const k in G)ITIMG[k]=k}catch(e){}
  try{if(BAL.priceTier)for(const k in N)if(BAL.priceTier[k]==null)BAL.priceTier[k]=N[k].pr}catch(e){}})();
-const STIP_UNIT={vaibong:"súc",vaitho:"súc",luahang:"súc",gamto:"súc",tragoi:"gói",tramoc:"gói",trahop:"hộp",thanbac:"giỏ",thanden:"giỏ",sonphan:"hộp",yensao:"hộp",nhansam:"củ"};
+const STIP_UNIT={vaibong:"súc",vaitho:"súc",luahang:"súc",gamto:"súc",tragoi:"gói",tramoc:"gói",trahop:"hộp",thanbac:"giỏ",thanden:"giỏ",bangda:"khối",bangvun:"chậu",sonphan:"hộp",yensao:"hộp",nhansam:"củ"};
 function stipNm(k,n){const it=IT[k];return `${n} ${STIP_UNIT[k]||"món"} ${it?it.n.replace(/ \(hàng kém\)$/,""):k}${it&&/hàng kém/.test(it.n)?" (hàng kém)":""}`}
 function stipWinter(){try{return SEASON[S.month-1]==="Đông"}catch(e){return false}}
-function stipList(r,out,winter){r=Math.max(0,Math.min(7,r|0));const L=(out?BAL.stip.coldGoods:BAL.stip.goods[r]).map(x=>x.slice());
- if(winter)L.push([out?"thanden":"thanbac",out?BAL.stip.coldCoal:BAL.stip.coal[r]]);return L}
-function stipRankTxt(i){return stipList(i,false,false).map(([k,n])=>stipNm(k,n)).join(" · ")+` · mùa đông ${stipNm("thanbac",BAL.stip.coal[Math.min(7,i)])}`}
-function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là vật phẩm thật trong rương (may áo, pha trà mời khách, đốt sưởi, tặng, bán lại cho Nội vụ phủ giá thấp). Nội vụ phủ có thể cắt xén (bớt bạc, đồ hàng kém, thiếu đồ) chỉ khi có cớ: thất sủng hay Sủng sa sút, vừa bị phạt hay bị giáng, bề trên có oán sai chèn ép, thái giám tham chưa được lót tay, cung nữ không một lòng. Không bị khi Sủng từ ${B.safeSung}, vừa lót tay trong ${B.tipM} tháng, hay có người quen trong đám thái giám. Hoàng hậu không bị.</p>`}
+function stipSummer(){try{return SEASON[S.month-1]==="Hạ"}catch(e){return false}}
+/* econ-items (owner 15/11 20:05Z #4, history ideas): charcoal in winter AND ice in summer, by rank (BAL.stip.coal / BAL.eit.ice; lãnh cung: none in summer) */
+function stipList(r,out,winter,summer){r=Math.max(0,Math.min(7,r|0));const L=(out?BAL.stip.coldGoods:BAL.stip.goods[r]).map(x=>x.slice());
+ if(winter)L.push([out?"thanden":"thanbac",out?BAL.stip.coldCoal:BAL.stip.coal[r]]);
+ if(summer&&!out&&IT.bangda){const n=(BAL.eit&&BAL.eit.ice||[])[r]|0;if(n>0)L.push(["bangda",n])}return L}
+function stipRankTxt(i){const ice=(BAL.eit&&BAL.eit.ice||[])[Math.min(7,i)]|0;return stipList(i,false,false).map(([k,n])=>stipNm(k,n)).join(" · ")+` · mùa đông ${stipNm("thanbac",BAL.stip.coal[Math.min(7,i)])}`+(ice&&IT.bangda?` · mùa hạ ${stipNm("bangda",ice)}`:"")}
+function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là vật phẩm thật trong rương (may áo, pha trà mời khách, mùa đông đốt than sưởi, mùa hạ dùng băng giải nhiệt, tặng, bán lại cho Nội vụ phủ giá thấp). Nội vụ phủ có thể cắt xén (bớt bạc, đồ hàng kém, thiếu đồ; thất sủng, phẩm thấp thì bị bớt nhiều món hơn) chỉ khi có cớ: thất sủng hay Sủng sa sút, vừa bị phạt hay bị giáng, bề trên có oán sai chèn ép, thái giám tham chưa được lót tay, cung nữ không một lòng. Không bị khi Sủng từ ${B.safeSung}, vừa lót tay trong ${B.tipM} tháng, hay có người quen trong đám thái giám. Hoàng hậu không bị. Kẻ hầu không một lòng cũng có thể lén ăn bớt đồ phát.</p>`}
 /* ---------- state (old saves: created on first use) ---------- */
 function stipSt(p){if(!p.stip||typeof p.stip!=="object")p.stip={};return p.stip}
 function stipW(){if(!S.stipW||typeof S.stipW!=="object")S.stipW={};const W=S.stipW;if(W.greedy==null)W.greedy=roll(BAL.stip.greedy)?1:0;return W}
@@ -83,12 +86,18 @@ function stipSkim(p,base,cut){try{if(!p||p.out||p.dead||rkOf(p)>=7||p.queen||(p=
  let ch=C.reduce((a,c)=>a+(B.w[c.k]||0),0)+(st.meek!=null&&S.turn-st.meek<=1?B.meekAdd:0)+(st.spite!=null&&S.turn-st.spite<=2?B.spiteAdd:0);
  if(!cut&&!roll(Math.min(B.cap,ch))){keep();return null}
  keep();const bac=cut?0:Math.round(base*(C.length>=2?B.cutBig:B.cutSmall));
- return{bac,items:1,C,sup,why:C.map(c=>c.txt).join("; "),cut:!!cut}}catch(e){console.error("stipSkim",e);return null}}
+ return{bac,items:stipItemN(p,C),C,sup,why:C.map(c=>c.txt).join("; "),cut:!!cut}}catch(e){console.error("stipSkim",e);return null}}
+/* econ-items (owner 15/11 20:05Z #4): HOW MANY of the goods are skimmed scales with her standing: more causes, low Sủng, a low rank → more lines
+   worse / missing; a high rank → fewer (BAL.eit.skimN). Seasonal charcoal / ice go first (the classic squeeze), then the dearest. */
+function stipItemN(p,C){const N=(BAL.eit&&BAL.eit.skimN)||{base:1,many:1,lowSung:1,lowRank:1,lowRankMax:1,highRank:5};const r=rkOf(p);
+ return Math.max(1,N.base+((C||[]).length>=2?N.many:0)+((p.sung||0)<BAL.stip.lowSung?N.lowSung:0)+(r<=N.lowRankMax?N.lowRank:0)-(r>=N.highRank?1:0))}
+function stipPickLines(L,n){const D=BAL.stip.down;const ix=L.map((x,i)=>i).filter(i=>L[i][0] in D);
+ const pr=k=>(k==="thanbac"||k==="bangda")?1e6:((IT[k]&&IT[k].pr)||0);ix.sort((a,b)=>pr(L[b][0])-pr(L[a][0]));return new Set(ix.slice(0,Math.max(0,n|0)))}
 /* the goods: one entry per piece in p.inv (from:"noivu"); skimmed → one step worse / missing */
 function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="function"&&isSrv()))return G;p.inv=p.inv||[];
- const L=stipList(rkOf(p),!!p.out,stipWinter());const D=BAL.stip.down;
+ const L=stipList(rkOf(p),!!p.out,stipWinter(),stipSummer());const D=BAL.stip.down;const hit=SK&&SK.items?stipPickLines(L,SK.items===true?99:SK.items):new Set();
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
-  if(SK&&SK.items&&k0 in D){kem=true;k=D[k0];if(k0==="thanbac")n=Math.max(1,n0-1);if(!k){lost=true}}
+  if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}G.push(g)}
  if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w);const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
  }catch(e){console.error("stipGoods",e)}return G}
@@ -135,7 +144,7 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
     else{apply({danh:-1});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,10);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh -1.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
  const om=cl(B.remember+(S.mat||0)*10,5,95);
  O.push({n:"Ghi nhớ để trả thù sau",fx:{},x:`${word(om)} · thành: Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt} (chứng cứ +1)`:`sổ sách ${eun} ăn bớt (lần tố sau dễ thành)`} · hỏng: không dò được gì`,
-  go:()=>{if(roll(om)){if(SK.sup)evA(S,SK.sup,1);else W.ev=(W.ev||0)+1;log(`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ +1`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});
+  go:()=>{if(roll(om)){const n=SK.sup?/*evok: checked (n)*/evA(S,SK.sup,1):0;if(!SK.sup)W.ev=(W.ev||0)+1;log(SK.sup&&!n?`Ngươi ghi nhớ. Tai mắt dò ra ${supTxt} không dính líu: chỉ ${eun} ăn bớt.`:`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ +1`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});
  return{ev:1,t:"Bổng lộc bị cắt xén",evId:"j3:embezzle",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h,opts:O}}
 /* NPCs: the same rule; their answer by purse and patron; news by Tai mắt */
 function stipNpc(p,SK,G){const B=BAL.stip,st=stipSt(p),tip=B.tip[Math.min(7,rkOf(p))];let how="";

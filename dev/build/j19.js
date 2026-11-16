@@ -1,7 +1,20 @@
 /* ================= ONE UI KIT: effect line, odds chip, act card; every card, choice and action button goes through it ================= */
-const KRED=/(tru di|ban chết|lộ:|bị lộ|bị phạt|phạt|giáng|sảy|chết|lật tẩy|mất |mất$|tội|nguy|hỏng|không ai tin|bị bắt|cấm túc|báo cho chủ|lạnh nhạt|bị đồn|đuổi|truy)/i;
-const KHOST=/(thù|oán|ghen|nàng nắm|nắm .*chứng cứ của ngươi|nhắm vào thai|nghi ngươi|bị đuổi)/i;
-const KGOOD=/(\+\s?\d|dễ |dễ$|được|biết|che chở|giữ|thân|thiện cảm|quý ngươi|chứng cứ|thăng|ban thưởng|bớt|tăng)/i;
+/* act-text (owner 15/11): the sentiment words match WHOLE words only — "nguy" no longer hits "Vọng nguyệt", "thù" no longer hits
+   "Thêu thùa", "giữ" no longer hits "giữa", "truy" no longer hits "Mệnh truyện" (gains were painted red / put in Kèm) */
+const kWB=re=>new RegExp("(?<![\\p{L}\\p{M}])(?:"+re.source+")(?![\\p{L}\\p{M}])",re.flags.replace("u","")+"u");
+const KRED=kWB(/(tru di|ban chết|lộ:|bị lộ|bị phạt|phạt|giáng|sảy|chết|lật tẩy|mất|tội|nguy|hỏng|không ai tin|bị bắt|cấm túc|báo cho chủ|lạnh nhạt|bị đồn|đuổi|truy)/i);
+const KHOST=kWB(/(thù|oán|ghen|nàng nắm|nắm .*chứng cứ của ngươi|nhắm vào thai|nghi ngươi|bị đuổi)/i);
+const KGOOD=kWB(/(\+\s?\d|dễ|được|biết|che chở|giữ|thân|thiện cảm|quý ngươi|chứng cứ|thăng|ban thưởng|bớt|tăng|tiến bộ)/i);
+/* split a value list at its top level only: never inside ( ) « » [ ] or a tag, so "(chơi 5 phần, …)" stays one item */
+function kSplitTop(str,sep){str=String(str==null?"":str);const out=[];let d=0,tag=false,cur="";const O="(«[“",C=")»]”";
+ for(let i=0;i<str.length;i++){const ch=str[i];if(ch==="<")tag=true;else if(ch===">")tag=false;else if(!tag){if(O.includes(ch))d++;else if(C.includes(ch)&&d>0)d--}
+  if(!tag&&d===0){sep.lastIndex=i;const m=sep.exec(str);if(m&&m.index===i&&m[0].length){out.push(cur);cur="";i+=m[0].length-1;continue}}cur+=ch}
+ out.push(cur);return out}
+/* ranges in player words (owner 15/11: "+1..2" is code): tiến bộ steps as words ("tiến bộ Thi một hai phần"), stat ranges "Sủng +3 đến +8" */
+const NUMW=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín","mười"];
+function kStepW(a,b){const w=n=>NUMW[n]||String(n);return b==null||a===b?`${w(a)} phần`:b===a+1?`${w(a)} ${w(b)} phần`:`${w(a)} đến ${w(b)} phần`}
+function kRangeW(t){return String(t==null?"":t).replace(/(tiến bộ(?: [^\s+<]+(?: [^\s+<]+)?)?) \+(\d+)(?:\.\.(\d+))?(?![\d.])/g,(m,p,a,b)=>`${p} ${kStepW(+a,b==null?null:+b)}`)
+ .replace(/([+\-−])(\d+)\.\.(\d+)/g,"$1$2 đến $1$3")}
 const KNEU=/^(không|không tốn|không mất gì|không được mất gì|chỉ |—|\d+ (khắc|việc)|2 khắc|tốn 2 khắc|chọn )/i;
 function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
  if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|sảy|chết|mất|phế|bị phạt|tịch thu|sa sút|không được lật thẻ|rơi/i.test(s)))return"g";
@@ -9,7 +22,7 @@ function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/b�
 /* one effect token -> coloured span; fmt() spans keep their colour */
 function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
-function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return parts.split(/ · |, (?![^<]*>)/).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
+function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
 function oddsChip(w){if(/^Chắc chắn\b/.test(String(w))||String(w)==="Chắc chắn")return"";const m=String(w).match(ODDW);const k=m?m[1]:w;const lv={"Liều":0,"Khó":1,"Năm ăn năm thua":2,"Khá chắc":3,"Chắc":4,"Rất chắc":5,"Nắm chắc":6,"Chắc chắn":7}[k];const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
 /* parse a 'word · tốn: … · thành: … · hỏng: … · note' line into kit HTML */
@@ -19,12 +32,14 @@ function kitParse(str){str=String(str||"").trim();if(!str)return oddsChip("Chắ
   if(/^Quẻ: /.test(plain)&&odds){odds+=" · "+plain;continue}
   const ml=s.match(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|Tốn|Thành|Hỏng|Kèm)\s*:\s*/);if(ml){cur={l:ml[1].toLowerCase(),v:[s.slice(ml[0].length)]};out.push(cur);continue}
   if(cur&&cur.l!=="tốn"&&!/^(<b|<br)/.test(s)){cur.v.push(s);continue}out.push({l:"",v:[s]})}
- return (odds?oddsChip(odds):oddsChip("Chắc chắn"))+out.map(o=>(o.l?`<span class="kl">${o.l}</span>`:"")+(o.l==="kèm"?effList(o.v,"r").replace(/class="ef [gn]"/g,'class="ef r"'):effList(o.v,o.l==="thành"?"g":o.l==="hỏng"||o.l==="tốn"?"r":""))).join(" ")}
+ return (odds?oddsChip(odds):oddsChip("Chắc chắn"))+out.map(o=>(o.l?`<span class="kl">${o.l}</span>`:"")+(o.l==="kèm"?kemCol(effList(o.v,"r")):effList(o.v,o.l==="thành"?"g":o.l==="hỏng"||o.l==="tốn"?"r":""))).join(" ")}
+/* KÈM side effects read red by default, but a value is coloured by its MEANING (owner 15/11 "Tại sao + mà màu đỏ"): an explicit gain ("tiến bộ Thêu thùa +1..2", "Danh +2") stays green, never red because of the row */
+function kemCol(h){return String(h).replace(/<span class="ef ([gn])">([\s\S]*?)<\/span>/g,(m,c,x)=>{const p=x.replace(/<[^>]+>/g,"");return /\+\s?\d/.test(p)&&kcls(p)==="g"?`<span class="ef g">${x}</span>`:`<span class="ef r">${x}</span>`})}
 /* the act card */
 function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o;const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
  const ow=rolled?word(cl(o+lotB(S,a.dom),5,95))+lotTag(a.dom,o):"Chắc chắn";
  return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
- <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${effList(String(a.x).split(/ · kèm: /)[1],"r").replace(/class="ef [gn]"/g,'class="ef r"')}</span>`:""}${rolled?`<span class="kl">Hỏng</span><span>${effList(fmt(a.l||{})||"không mất gì","r")}</span>`:""}</span></button>`}
+ <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Hỏng</span><span>${effList(fmt(a.l||{})||"không mất gì","r")}</span>`:""}</span></button>`}
 /* route the older line builders through the kit */
 function ducWarnTxt(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d,nd=hhNeed(S).duc;return after<nd?`Đức ${S.duc} → ${after}`:""}/* owner 07:05Z: the card shows only "Đức a → b"; the threshold lives in the top-bar Đức chip (jk3), read from BAL */
 let actLineRaw;(function(){const o1=optLine,o2=dilLine,o3=actLine;actLineRaw=o3;optLine=a=>kitParse(o1(a));dilLine=c=>kitParse(o2(c));actLine=(k,w,c)=>kitParse(o3(k,w,c))})();
@@ -59,7 +74,7 @@ function cardWhy(a){if(S.dead)return"";if(a.done)return"Đã làm trong buổi n
  if(a.c&&a.c.bac&&S.bac+a.c.bac<0)return `Thiếu bạc (cần ${-a.c.bac})`;if(a.lock)return a.t||"Chưa đủ điều kiện";const w=whyTime(cardCost(a));return w?(/khắc/.test(w)?"Hết khắc buổi này — chờ buổi sau":w):""}
 (function(){const ch=cardH;cardH=function(a,i){let h=ch(a,i);const txt=(a.t||"")+" "+(a.x||"");const vs=rivals.filter(v=>txt.includes(v.name));if(vs.length)h=h.replace("<h4>",`<h4>${vs.slice(0,2).map(v=>mdH(pv(v),"xs")).join("")}`);const w=cardWhy(a);return w?h.replace('<span class="krow">',`<span class="kwhy">${w}</span><span class="krow">`):h}})();
 /* ===== RANK GROUNDS for every portrait frame and avatar ===== */
-function rkOfFace(kind,o){if(kind==="consort"){if(o.out)return["cold","Phế phi · lãnh cung"];const r=o===S?S.rank:(o.queen?7:o.rank);return["c"+r,r>=7?"Hoàng hậu":RANKS[r].n]}
+function rkOfFace(kind,o){if(kind==="consort"){if(o.out)return["cold","Phế phi · lãnh cung"];const r=o===S?S.rank:(o.queen?7:o.rank);return["c"+r,typeof kitHieuJoin==="function"?kitHieuJoin(r>=7?"Hoàng hậu":RANKS[r].n,o):r>=7?"Hoàng hậu":RANKS[r].n]}
  if(kind==="serv"){const r=srk(o);return[(o.role==="maid"?"sv":"eu")+r,srkName(o)]}return[kind,""]}
 /* ===== the always-visible status row (was inside Hành động) ===== */
 const HX={buoi:"Mỗi buổi có 4 khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.",date:"Ngày tháng trong cung. Mỗi tuần có 4 buổi (sáng, trưa, chiều, tối), mỗi tháng 3 tuần.",lot:"Quẻ đầu tuần. Gieo lại tốn 10 bạc và 1 khắc.",sac:"Sắc: nhan sắc. Giúp múa, thị tẩm, được để ý.",tai:"Tài: tài học. Giúp đàn, thơ, nói chuyện với Hoàng thượng.",tamco:"Tâm cơ: mưu trí. Giúp dò la, mưu kế, nhìn thấu.",duc:"Đức: tiếng hiền. Cần để lên Hoàng hậu (ngưỡng: xem chú giải Đức).",mat:"Tai mắt: người của ngươi khắp cung. Giúp biết tin, phát giác mưu hại.",th:"Thái hậu quý ngươi: lòng thương của Thái hậu.",hh:"Hoàng hậu quý ngươi: lòng quý của Hoàng hậu (âm là ghét), một con số duy nhất.",maid:"Lòng cung nữ thân tín. Dưới 45 dễ bị mua chuộc.",con:"Khả năng có thai mỗi lần thị tẩm.",dem:"Khả năng được lật thẻ bài mỗi tuần.",an:"Ân tình: tình nghĩa với Hoàng thượng, tích qua các đêm."};
@@ -74,7 +89,7 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
   if(k==="lot"&&S.lot){const can1=!S.relot&&S.bac>=10&&can(1);Q.unshift({t:`Quẻ ${LV[S.lot.lv]} · ${S.lot.dom}`,h:lotHTML(S.lot)+`<p class="past">${HX.lot}</p>`+(can1?`<div class="opts"><button class="opt" id="relot2">Gieo lại<small>${kitParse("Chắc chắn · tốn: Bạc -10, 1 khắc")}</small></button></div>`:"")});showModal();const r=$("relot2");if(r)r.onclick=()=>{Q.shift();showModal();reLot(false)};return}
   if(k==="bl"){Q.unshift({t:"Bổng lộc",h:blCard()});showModal();return}if(k==="aw"){Q.unshift({t:"Ân thưởng",h:awCard()});showModal();return}const t=HX[k]||b.textContent;Q.unshift({t:b.textContent.replace(/[+-]\d+$/,"").trim(),h:`<p>${t}</p>`});showModal()}}
 /* keep the Pixi scene the size of the stage whenever the layout changes (not only on window resize) */
-(function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
+(function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}try{if(typeof kitStagePause==="function")kitStagePause()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
 /* every disabled button says why */
 function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=4?"hết khắc buổi này":"Sức dưới 20";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
 (function(){const kf=kitFix;kitFix=function(root){kf(root);(root||document).querySelectorAll(".rbtn button:disabled,.btn:disabled,.pcb button:disabled").forEach(b=>{if(b.querySelector(".kwhy"))return;const sm=b.querySelector("small");const w=guessWhy(b);if(!w)return;if(sm)sm.insertAdjacentHTML("afterbegin",`<span class="kwhy">${w}</span> `);else b.insertAdjacentHTML("beforeend",`<small><span class="kwhy">${w}</span></small>`)})}})();

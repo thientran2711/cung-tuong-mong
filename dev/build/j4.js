@@ -62,7 +62,7 @@ td:{t:"Báo thù cho nhà",n:5,goal:"Cả nhà ngươi bị vu mưu phản. Gom 
  calc:()=>Math.min(S.caseEv,3)+(S.st.wit?1:0)+(S.avenged?1:0),
  hint:()=>S.caseEv<3?`Chứng cứ ${S.caseEv}/3`:!S.st.wit?"Cần giữ được nhân chứng":S.rank<3?"Lên bậc Tần để dâng sớ":"Có thể dâng sớ lật án",
  month(){const st=S.st;
-  if(S.caseEv>=1&&roll(12)){const e=rivals.find(x=>x.enemy);if(roll(oSee(S,false))){if(e)e.ev+=2;return `Tai mắt báo: ${S.foeDad} sai người đốt kho hồ sơ Hình bộ. Ngươi chặn kịp và nắm 2 chứng cứ với ${S.foe}. `}S.caseEv--;return `<span class="r">Kho hồ sơ Hình bộ bốc cháy trong đêm. Một chứng cứ án cũ mất.</span> `}
+  if(S.caseEv>=1&&roll(12)){const e=rivals.find(x=>x.enemy);if(roll(oSee(S,false))){if(e)evStory(e,2,"có nhà mẹ đẻ sai người đốt kho hồ sơ Hình bộ");return `Tai mắt báo: ${S.foeDad} sai người đốt kho hồ sơ Hình bộ. Ngươi chặn kịp và nắm 2 chứng cứ với ${S.foe}. `}S.caseEv--;return `<span class="r">Kho hồ sơ Hình bộ bốc cháy trong đêm. Một chứng cứ án cũ mất.</span> `}
   if(S.caseEv>=2&&!st.wit&&roll(35))return setDil(mkP("td1"));
   return""},
  acts(){const A=[{n:"Điều tra án cũ",t:`Lục hồ sơ Hình bộ, tìm người làm chứng. Chứng cứ: ${S.caseEv}/3.`,c:{bac:-20,suc:-10},o:od(40+S.mat*6+S.tai/10+S.tamco/5),w:{},l:{danh:-3},x:"chứng cứ án cũ +1",go:()=>{S.caseEv++}}];
@@ -74,7 +74,7 @@ ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cu
  init(){S.st.tool=0},
  hint:()=>["Thái hậu sắp giao việc","Thái hậu sẽ đòi hỏi hơn","Thái hậu tuổi đã cao"][S.st.step]||"",
  month(){const st=S.st,q=rivals[0];
-  if(S.rank>=7){st.step=3;stEnd(1,st.tool>=2?"Thay cô tổ đoạt ngôi trung cung":"Tự mình lên ngôi trung cung");return""}
+  if(S.rank>=7){st.step=3;stEnd(1,st.tool>=2?"Thay cô mẫu đoạt ngôi trung cung":"Tự mình lên ngôi trung cung");return""}
   if(st.step<2&&!qOn())st.step=2;
   if(S.year>=8||(st.step>=1&&S.year>=5&&roll(4))){st.step=3;S.th=0;S.thDead=true;apply({hh:-20});
    if(S.rank>=5){stEnd(1,st.tool>=2?"Quân cờ đắc lực của Thái hậu":"Tự đứng vững khi Thái hậu mất");return `<b>Thái hậu băng hà.</b> Ngươi đã là ${RANKS[S.rank].n}, đứng vững được. Hoàng hậu hận ngươi hơn. Hoàng hậu -20. `}
@@ -92,7 +92,7 @@ thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Đ
   return""},
  acts(){const st=S.st;
   if(st.step===1){const ok=S.arts.thi>=3||S.tai>=70;return[{n:"Dự thi Tài nữ ở Hàn lâm viện",t:ok?"Cùng các khuê tú đối thơ trước Hoàng thượng.":"Cần Thi bậc 3 hoặc Tài 70.",c:{suc:-10},o:ok?od(35+S.tai/3+artW("thi",S.arts.thi)*6):0,w:{danh:8,sung:3},l:{danh:-3},lock:!ok,x:"danh hiệu Tài nữ",go:()=>{st.title=1;st.step=2}}]}
-  if(st.step===2){const ok=S.danh>=40;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng di cảo của cha lên Hoàng thượng.":`Cần Danh 40 (nay ${S.danh}).`,c:{suc:-5},o:ok?od(45+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
+  if(st.step===2){const ok=S.danh>=BAL.danhG.fatherBook;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng bản thảo của cha lên Hoàng thượng.":`Cần Danh ${BAL.danhG.fatherBook} (nay ${S.danh}).`,c:{suc:-5},o:ok?od(45+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
   return[]}}
 };
 
@@ -119,7 +119,7 @@ PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứ
    {n:"Giấu ông ở Tân Giả Khố",fx:{bac:-40},x:"giữ được nhân chứng",go:()=>{st.wit=1}},
    {n:"Mặc kệ",fx:{},x:"chứng cứ -1",go:()=>{S.caseEv=Math.max(0,S.caseEv-1);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
 PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. Ngươi phải thay nàng. Trước hết, dò xem Càn Ninh cung giấu gì.”',o:[
-   {n:"Vâng mệnh cô tổ",fx:{th:8},x:"chứng cứ Hoàng hậu +1",go:()=>{q.ev++;st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
+   {n:"Vâng mệnh cô mẫu",fx:{th:8},x:"chứng cứ Hoàng hậu +1",go:()=>{evStory(q,1,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[
    {n:"Vâng mệnh",fx:{duc:-10},x:`${word(o)} · thành: Hoàng hậu băng hà, Thái hậu +10 · hỏng: bị ban chết`,go:()=>{S.schemes++;st.tool++;st.step=2;if(roll(o)){q.alive=false;apply({th:10,tamco:2});log(`<span class="r">Hoàng hậu ${q.name} băng hà sau chén trà chiều.</span>`)}else{stEnd(-1,"Bị Thái hậu phủi tay");deathSentence("Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận")}}},
    {n:"Từ chối, tự gây thế lực",fx:{th:-25,danh:4},go:()=>{st.step=2}}]}};

@@ -489,7 +489,7 @@ Cột "tranh hiện tại" = tranh game đang chọn cho câu mẫu (Sổ tuần
 | 477 | `dang-ngoc-nhu-y` | Dâng ngọc Như Ý | act-cat-hau-ha | **MỚI** — Phi tần dâng ngọc Như Ý trên khay gấm lên Thái hậu mừng thọ |
 | 478 | `le-mon` | Lễ mọn cho phải phép | act-cat-le-nghi | **MỚI** — Cung nữ dâng một hộp quà nhỏ ở bàn lễ vật mừng thọ |
 | 479 | `dang-cau-doi` | Dâng câu đối chúc Tết | act-cat-hau-ha | **MỚI** — Phi tần dâng cuộn giấy đỏ chúc Tết (không chữ) lên Hoàng thượng |
-| 480 | `giai-cau-do-den` | Giải câu đố đèn | act-cat-giao-thiep | **MỚI** — Lễ Nguyên tiêu, phi tần đứng dưới dãy đèn lồng có treo câu đố (giấy trơn) |
+| 480 | `giai-cau-do-den` (rename → `thap-den-thi`) | Thắp đèn thi · Ra phố thắp đèn thi | act-cat-giao-thiep | **MỚI** — Lễ Nguyên tiêu, phi tần đứng dưới dãy đèn lồng nhiều dáng nhiều màu (no riddle slips; nw-lantern 11/16) |
 | 481 | `dao-den` | Dạo đèn cùng một phi tần | act-cat-di-lai | **MỚI** — Hai phi tần cầm đèn lồng dạo vườn đêm Nguyên tiêu |
 | 482 | `tha-den-cau-con` | Thả đèn cầu con | ev-con-tre-2 | **MỚI** — Phi tần thả đèn lồng giấy đỏ trôi trên hồ cầu con |
 | 483 | `tao-mo` | Xin về tảo mộ tổ tiên | act-cat-giao-thiep | **MỚI** — Phi tần quỳ xin Hoàng hậu cho về tảo mộ, cành liễu Thanh minh |

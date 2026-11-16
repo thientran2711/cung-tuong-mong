@@ -28,19 +28,22 @@ function bribeServ(a,s){const o=ownerOf(s);if(!o||o===a||a.bac<30)return"";ap(a,
 function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
 function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<40)return"";ap(a,{bac:-40});if(roll(odA(a,40+a.tamco/4+(s.tr==="lanh"?10:0)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,1);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
 function servMonth(){let ev="";for(const p of consorts()){if(!p.staff)p.staff=[];
+  /* co-op guest (review/servant-mline-r2): an NPC household's own month (loyalty, NPC-vs-NPC spies, refilling) rolls on the host;
+     the guest keeps only what concerns her: her spies' reports, her servants' friends, NPC acts aimed at her (pickTarget gives only her) */
+  const G=p!==S&&typeof mlGuest==="function"&&mlGuest();
   const d=(p.schemes||0)-(p.schLast||0);p.schLast=p.schemes||0;
-  for(const s of p.staff.slice()){if(s.tr!=="trung")s.loyal=cl(s.loyal-1,0,100);
-   if(s.spyFor){const m=byKey(s.spyFor);if(m&&(m===S||m.alive)){if(d>0&&roll(60)){evA(m,p,1);if(m===S)ev+=`Tai mắt ${s.name} trong cung ${p.name} báo: nàng đang bày mưu. Chứng cứ +1. `}}else s.spyFor=null}
-   if(d>0)for(const fid in s.af){if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&roll((s.tr==="chuyen"?25:10)+srk(s)*5)){evA(o,p,1);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: chứng cứ +1. `}}}
+  for(const s of p.staff.slice()){if(s.tr!=="trung"&&!G)s.loyal=cl(s.loyal-1,0,100);
+   if(s.spyFor&&!(G&&byKey(s.spyFor)!==S)){const m=byKey(s.spyFor);if(m&&(m===S||m.alive)){if(d>0&&roll(60)){/*evok: her schemes counter rose this week*/evA(m,p,1);if(m===S)ev+=`Tai mắt ${s.name} trong cung ${p.name} báo: nàng đang bày mưu. Chứng cứ +1. `}}else s.spyFor=null}
+   if(d>0)for(const fid in s.af){if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((s.tr==="chuyen"?25:10)+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,1);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: chứng cứ +1. `}}}
   if(p!==S&&roll(10)){const t=pickTarget(p);if(t&&t.staff&&t.staff.length&&p.bac>=60){const s=pick(t.staff);const r=bribeServ(p,s);if(t===S&&r&&s.spyFor===key(p)&&S.mat>=3)ev+=`Có tin: ${r}`}}
   if(p!==S&&roll(2)){const t=pickTarget(p);if(t)plantServ(p,t)}
-  if(p!==S)fillStaff(p,false)}
+  if(p!==S&&!G)fillStaff(p,false)}
  return ev}
 function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";
  if(o===S){if(a==="thuong"){if(S.bac<10)return;apply({bac:-10});s.loyal=cl(s.loyal+12,0,100);r=`Thưởng ${s.name}: lòng +12.`}
   else if(a==="phat"){s.loyal=cl(s.loyal-15,0,100);if(s.spyFor){const m=byKey(s.spyFor);r=`Tra khảo ${s.name}: khai là tai mắt của ${m?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;S.staff.splice(S.staff.indexOf(s),1);if(m&&m!==S)evA(S,m,1)}else r=`Phạt ${s.name}: lòng -15.`}
   else if(a==="hoi"){if(!can(2))return;spend(2);const f=Object.keys(s.af).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=20);const o2=f&&ownerOf(f);
-   if(o2&&o2!==S&&roll(s.tr==="chuyen"?70:40)){evA(S,o2,1);r=`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ +1.`}else r=`${s.name} không biết gì mới.`;
+   if(o2&&o2!==S&&roll(s.tr==="chuyen"?70:40)){r=evA(S,o2,1)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ +1.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
    const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt&&roll(30)){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}
   else if(a==="doi"){S.staff.splice(S.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
   else if(a==="che"){s.loyal=cl(s.loyal+20,0,100);apply({danh:-2});r=`Che chở ${s.name} trước Thận Hình ti: lòng +20, Danh -2.`}}
@@ -48,7 +51,7 @@ function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const
  if(r)log(r);render()}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
  if(a==="thuong"){if(S.bac<20)return;apply({bac:-20});c.af.me=(c.af.me||0)+10;r=`Biếu ${c.name} 20 lượng: người ấy quý ngươi +10.`}
- if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+1;if(k==="tq"&&roll(40+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+liveRivals(true).map(x=>`${x.name} ${x.nights}`).join(", ")+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
+ if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+1;if(k==="tq"&&roll(40+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
  if(r)log(r);render()}
 function tqAf(p){return S.court&&S.court.tq?(S.court.tq.af[key(p)]||0):0}
 function npcCourt(v){if(roll(10)&&v.bac>=40&&S.court){ap(v,{bac:-20});S.court.tq.af[v.id]=(S.court.tq.af[v.id]||0)+10}}
@@ -61,7 +64,7 @@ function staffHTML(){const row=(s,btns)=>`<div class="srow2">${mdH(pServ(s),"sm"
  h+=`<h3>Người trong cung</h3>`+Object.entries(S.court).map(([k,c])=>`<div class="srow2">${mdH(k==="ty"?pDoc():{src:`img/face-eunuch-${["tq","ksp","ped"].indexOf(k)%4+1}.webp`,ini:"Hoạn",col:"#8a8aa0"},"sm")}<div class="sinfo"><b>${c.name}</b><span>${c.n} · quý ngươi ${c.af.me||0}</span></div><div class="rbtn"><button data-cv="thuong" data-ck="${k}" ${S.bac<20?"disabled":""}>Biếu<small>Bạc -20</small></button><button data-cv="hoi" data-ck="${k}" ${!can(2)?"disabled":""}>Hỏi chuyện<small>2 khắc</small></button></div></div>`).join("");
  h+=`<h3>Kẻ hầu cung khác</h3>`+liveRivals(true).map(v=>`<div class="past" style="margin-top:4px"><b>${v.name}</b></div>`+(v.staff||[]).map(s=>row(s,s.spyFor==="me"?"":`<button data-sv="mua" data-sid="${s.sid}" ${!can(2)||S.bac<30?"disabled":""}>Mua chuộc<small>Bạc -30 · ${word(odA(S,35+(s.tr==="tham"?25:0)-s.loyal/3+S.tamco/5))}</small></button>${s.lover&&(S.knowDT||[]).includes(s.sid)?`<button data-sv="doa" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Dọa tố đối thực<small>2 khắc</small></button>`:""}`)).join("")).join("");
  return h}
-PEND.plantsv=()=>({t:"<p>Cài người hầu của ngươi vào cung ai?</p>",o:liveRivals(true).filter(v=>!sameHouse(S,v)).map(v=>({n:v.name,fx:{},x:"Bạc -40",go:()=>{spend(2);log(plantServ(S,v))}})).concat([{n:"Thôi",fx:{}}])});
+PEND.plantsv=()=>({t:"<p>Cài người hầu của ngươi vào cung ai?</p>",o:liveRivals(true).filter(v=>!sameHouse(S,v)).map(v=>({kgt:v,n:v.name,fx:{},x:"Bạc -40",go:()=>{spend(2);log(plantServ(S,v))}})).concat([{n:"Thôi",fx:{}}])});
 
 /* ================= FACTIONS ================= */
 const CLANS=["Tể tướng","Đại tướng quân","Lễ bộ","Hộ bộ","Hàn lâm"];

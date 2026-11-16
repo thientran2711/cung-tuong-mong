@@ -9,7 +9,7 @@ EV6("snowDay","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?2:0,
  v:["Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.","Mai nở trong tuyết ở góc vườn, Hoàng thượng truyền các cung làm thơ vịnh mai.","Ao sen đóng băng, các hoàng tử, công chúa đòi ra trượt băng.","Tuyết dày chặn lối sang Đức Thọ cung, lễ thỉnh an sáng nay khó đi."],
  o:X=>[c6("Phát áo bông cho cung nhân",{c:{bac:-25},w:{maid:8,duc:2}}),
   c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(30+S.tai/2+(S.arts.thi||0)*6),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
-  c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:5,duc:1}})]});
+  c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:typeof trSnowGreet==="function"?trSnowGreet():5,duc:1}})]});
 EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Thu"?2:0,
  v:["Trăng thu sáng vằng vặc, {A} mời các cung ra đình Thủy Tạ ngâm thơ.","Gió heo may, lá phong đỏ rụng đầy lối; {A} rủ ngươi đi nhặt lá ép vào sách.","Đêm thu nghe tiếng sáo từ cung {A} vọng sang, buồn da diết.","Mùa cua béo, {A} gửi sang một giỏ cua và rượu hoa cúc."],
  o:X=>[c6("Nhận lời, góp vui",{c:{suc:-4},r:[[X.A,7]],w:{danh:1}}),
@@ -62,7 +62,7 @@ EV6("kidGift","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=5);return a==null?
 EV6("bribedServ","serv",{a:["sv","rv"],pp:()=>{const a=sv6();const b=rv6(fo6)??rv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1.3,
  v:["{A} lén báo: người của {B} dúi cho hắn mười lượng, hỏi giờ ngươi đi ngủ.","{A} bị bắt gặp nói chuyện thì thầm với cung nữ bên {B} ở góc tường.","{A} tự khai: {B} hứa cho hắn sang hầu cung nàng, lương gấp đôi.","{A} mang về một gói hương lạ, nói người bên {B} tặng."],
  o:X=>[c6("Thưởng hắn vì thành thật",{c:{bac:-15},r:[[X.A,12]]}),
-  c6("Bảo hắn giả vờ nhận, làm phản gián",{p:od(40+(X.A.o.loyal||50)/2),w:{mat:1},wt:[G6(`chứng cứ ${X.B.n} +1`)],r:[[X.A,4]],lt:[R6("hắn hai lòng, lộ chuyện")],l:{danh:-1},ok:()=>{evA(S,X.B.o,1);return `${X.A.n} mang về bằng chứng ${X.B.n} mua chuộc người hầu. Chứng cứ +1.`}}),
+  c6("Bảo hắn giả vờ nhận, làm phản gián",{p:od(40+(X.A.o.loyal||50)/2),w:{mat:1},wt:[G6(`chứng cứ ${X.B.n} +1`)],r:[[X.A,4]],lt:[R6("hắn hai lòng, lộ chuyện")],l:{danh:-1},ok:()=>{evStory(X.B.o,1,"mua chuộc người hầu của ngươi");return `${X.A.n} mang về bằng chứng ${X.B.n} mua chuộc người hầu. Chứng cứ +1.`}}),
   c6("Đuổi hắn đi cho chắc",{w:{tamco:1},r:[[X.A,-30]],k:[R6("mất một người hầu quen việc")]})]});
 EV6("servRomance","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.role==="maid"&&(s.age||20)>=18);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} bị bắt gặp đứng nói chuyện với một thị vệ gác cửa lúc chập tối.","{A} giấu trong gối một chiếc khăn thêu tên một thị vệ.","{A} xin ngươi cho phép khi mãn hạn được gả cho người đồng hương làm lính ngự lâm.","Người ta đồn {A} có tình ý với tiểu thái giám bên Ngự thiện phòng."],

@@ -154,7 +154,7 @@ function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.de
  opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts});showModal()}
 function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name.split(" ").pop();const bf=typeof rsnap==="function"?rsnap():null;
  const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;
- if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`)}
+ if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`);/* bowing to her face to face = she sees her (j61: a greeting reveals the face, not the name) */try{if(typeof k61Meet==="function")k61Meet(h,"",1)}catch(e){}}
  else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, chủ vị quý ngươi ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
  accGrant(S,k);then();
  /* act audit: the change came after the dialog had closed, and the arrival card ("không đổi gì") covered it: show it after arriving */

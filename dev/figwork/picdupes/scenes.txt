@@ -1,0 +1,37 @@
+# KEY|dark(0/1)|English scene  — review/pic-dupes: acts that shared one picture (§59 placeholder or another act's key); hands/objects only
+nghi-ngoi-mot-lat|0|a consort's hand lifting a small celadon cup of lotus tea beside a daybed with a silk bolster in her bedchamber, a lotus floating in a bowl, restful
+doc-sach-giai-khuay|0|a consort's hands holding an open thread-bound book with blank pages on the sill of an open round lattice window, garden and willow outside
+xin-hau-co|0|a Go board seen from above with black and white stones; the Emperor's yellow sleeve rests on one side while a consort's pink sleeve and slender hand places a white stone
+xin-danh-dan-hau|0|a consort's hands plucking a guqin on a low lacquer table, the Emperor's yellow sleeve and hand resting on a carved armrest nearby, listening
+sang-duc-tho-thinh-an|0|a consort seen from behind walking up stone steps toward the quiet gate of the dowager's palace among old pines, incense smoke drifting, morning
+giup-cham-thu-nuoi|0|a consort's hands gently combing a small white palace cat sitting on an embroidered cushion, a bowl of food beside it
+tu-di-do-la|1|a consort seen from behind in a plain dark cloak peering around a red pillar along a shadowed corridor, listening
+ep-nop-cua|1|a hand with long nail guards pointing firmly at a small open chest of silver ingots which a servant's trembling hands push forward across a table
+hai-thu-nuoi|1|a hand tipping dark powder from a paper packet into a small pet's food bowl beside an empty embroidered cushion
+nho-rut-the-bai|0|a hand slipping a small silk pouch of silver into a eunuch's sleeve beside a tray of green jade name tablets
+sai-cung-nu-lay-long|0|a maid's hands carrying a wrapped gift box and a basket of fruit through a moon gate on an errand
+tha-thu-du|1|a hand lifting the latch of a wooden cage with the dark shadow of a snarling wild cat inside, a garden path beyond
+phong-hoa-kho-do|1|a hand holding a lit candle toward stacked silk bolts in a dim storeroom, thin smoke curling
+trom-thu-nuoi|1|hands lifting a small white rabbit out of a basket and hiding it inside a wide dark sleeve
+giao-viec-phong-bi|0|a consort's hand handing a bronze key and a small lantern to a guard's hand at a palace gate
+doi-viec-phong-bi|0|hands swapping two wooden duty tallies on a hanging duty board beside a palace gate
+de-bat-thai-giam|0|a consort's hand placing a jade belt plaque of office on a red tray held up by a kneeling eunuch's hands
+de-bat-dai-cung-nu|0|a consort's hand placing a gold hairpin of office into a kneeling maid's raised open hands
+phat-bac-cuu-giup|0|a consort's hands giving small silver pieces and a bag of rice into several outstretched hands of poor servants
+hoi-han-ai-can-giup|0|a consort seen from behind bending kindly toward kneeling maids in her courtyard, one maid's hands holding a small bundle, listening
+xem-con-muc-con|0|a consort's hand lifting a pair of tiny tiger-head shoes from a carved wooden cradle with a small quilt
+bo-viec-nho|0|a hand setting down a rolled request letter, unopened, on a table and pushing it gently away
+den-noi-lam-viec|0|a consort's feet and hem stepping across a palace threshold toward an open courtyard, a maid's hand holding a lantern ahead
+dang-tang-tac-pham|0|two hands offering a handmade work, a painted silk scroll tied with a ribbon, on a lacquer tray
+bay-tac-pham-yen-tiec|0|a handmade embroidered screen and a painted scroll set out on display at a festive banquet table with lanterns and wine cups
+tu-luyen-tac-pham|0|a consort's hands working at a desk with brush, inkstone, embroidery hoop and a half-finished painting, practising
+cham-thu-nuoi|0|a consort's hand feeding a small pet bird on a perch a pinch of seed, water dish beside it
+cho-thu-theo-hau|0|a consort's hem walking along a garden path with a small white cat on a red leash trotting beside her feet
+gui-ngu-thu-vien|0|a eunuch's hands carrying a woven pet basket toward the gate of the imperial menagerie with deer and cranes beyond
+giao-nguoi-cham-thu|0|a consort's hand passing a small cat's red leash into a maid's hands
+moi-dao-ngu-hoa-vien|0|the Emperor's yellow sleeve and a consort's pink sleeve walking side by side on a garden path in the imperial flower garden, peonies, rockery and a little bridge
+tang-qua-co-doc|1|a hand placing a pretty box of sweet cakes on a tray while the other hand hides a small poison vial in a sleeve
+hanh-le-v2|0|a court lady in side view from slightly behind (face hidden by her bun) making the standing van-phuc curtsy: head gently bowed, both hands lightly clasped at the right side of her hip, knees slightly bent; a higher-ranked lady's long hem and slippers on the garden path ahead; respectful, serene, not tired or in pain (reviewer FAIL r1: old hanh-le looked like a sore back)
+ban-noi-vu-phu|0|a consort's hand handing a handmade embroidered fan across a counter to an official's hands at the Imperial Household office, a small stack of silver beside it
+dang-qua-thai-hau|0|two hands offering a gift box on a tray toward an elder lady's dark plum brocade sleeve and prayer beads
+nghe-ngong-chung|0|a palace maid seen from behind by a well in a service courtyard, half hidden by hanging robes, listening to distant servants' chatter

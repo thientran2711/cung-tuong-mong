@@ -1,0 +1,117 @@
+{
+ "eventsChecked": 310,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Bạch Kiều Nguyệt",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Khánh Vân (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Lão Hạ Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Chu Mộng Điệp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Tô Lăng Vân",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Hoa Lan Chi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Thẩm Tú Uyển",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Lâm Băng Tâm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Diệp Họa Mi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Thượng Quan Diễm Thu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Ôn Mạn Châu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Lễ Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tử Đằng (cung nữ)",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 110,
+ "actsPh": [],
+ "errs": []
+}

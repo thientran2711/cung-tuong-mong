@@ -22,6 +22,8 @@ const VL={base:[6,10,15,22,35,50,75,110,160],gMul:[1,1.5,2.2,3.2],cover:[2/3,.6,
 const VL_NAME=["Mạng sa","Mạng chuỗi bạc lưu ly","Mạng dây lụa hồng kết trai","Mạng bạc chạm hoa","Mạng vàng nhạt kết mã não","Mạng kim hoa ngọc bích","Mạng kim vân trân châu","Mạng kim ty mẫu đơn","Mạng phượng điểm thúy"];
 const VL_COVER=["che được ít","che khá kín","che kín","che rất kín","che kín, lại là ân điển"];
 function vlKey(P,g){return g>=4?"mcnt":`mc${cl(P|0,0,8)}${cl(g|0,0,3)}`}
+/* a veil is worn over a wounded (j70 scar) or rashy (jrash) face */
+function vlNeed(p){return !!(p&&(p.scar||p.rash))}
 function vlIsK(k){return typeof k==="string"&&/^mc(nt|\d\d)$/.test(k)}
 function vlIs(e){return !!(e&&vlIsK(e.k))}
 function vlP(e,p){if(!vlIs(e))return 0;if(e.k==="mcnt")return Math.min(8,wdPOf(p||S));return +e.k[2]}
@@ -40,19 +42,19 @@ function vlSrc(k,p){const t=vlTier({k},p||S);return `img/veil-${t||"t5"}.png`}
 /* ---------- worn veil <-> p.scar.veil; old saves ---------- */
 function vlMig(p){try{if(!p||!p.scar)return;if(p.scar.veil&&!p.vl){const P=Math.min(8,wdPOf(p));p.vl={k:vlKey(P,0),src:"cu",d:typeof wdWhen==="function"?wdWhen():""};
   if(p===S){S.wdk=S.wdk||{};S.wdk[p.vl.k]=1}else{p.wdk=p.wdk||{};p.wdk[p.vl.k]=1}}p.scar.veil=p.vl?1:0}catch(e){}}
-function vlSync(p){if(!p)return;if(p.scar)vlMig(p);else if(p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
+function vlSync(p){if(!p)return;if(p.scar)vlMig(p);if(!vlNeed(p)&&p.vl){p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;
   if(p===S)try{log("Vết thương trên mặt đã lành, ngươi tháo mạng che, cất vào rương.")}catch(e){}}}
 function vlPeople(){const L=[S];try{for(const v of rivals)if(v&&v!==S)L.push(v)}catch(e){}return L}
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{for(const p of vlPeople())vlMig(p)}catch(e){}return r}})();
 const VL_TIER0=KIT_VEIL.tierOf.bind(KIT_VEIL);
-KIT_VEIL.on=function(p){try{if(!p||!p.scar)return false;vlMig(p);return !!p.vl}catch(e){return false}};
-KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&p.scar)return vlTier(p.vl,p)||VL_TIER0(p)}catch(e){}return VL_TIER0(p)};
+KIT_VEIL.on=function(p){try{if(!p||!vlNeed(p))return false;vlMig(p);return !!p.vl}catch(e){return false}};
+KIT_VEIL.tierOf=function(p){try{if(p&&p.vl&&vlNeed(p))return vlTier(p.vl,p)||VL_TIER0(p)}catch(e){}return VL_TIER0(p)};
 /* the grade decides how much of the wound the veil hides (Thường = the old 2/3) */
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar&&p.scar.veil&&p.vl){const d=p.scar.d;r=cl(r+Math.round(d*2/3)-Math.round(d*VL.cover[vlG(p.vl)]),0,130)}}catch(e){}return r}})();
 (function(){const s0=scarOf;scarOf=function(p){const r=s0.apply(this,arguments);try{const q=p||S;if(r&&q.vl&&q.scar&&q.scar.veil)r.sacLost=Math.round(q.scar.d*VL.cover[vlG(q.vl)])}catch(e){}return r};window.scarOf=scarOf})();
 
 /* ---------- wear / take off (same function for everyone) ---------- */
-function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!p.scar)return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;p.scar.veil=1;return IT[e.k].n}
+function vlWear(p,ix){const e=p&&p.inv&&p.inv[ix];if(!vlIs(e)||e.h||!vlNeed(p))return"";p.inv.splice(ix,1);if(e.from){e.src=e.src||e.from;delete e.from}if(p.vl){p.inv.push(p.vl)}p.vl=e;if(p.scar)p.scar.veil=1;return IT[e.k].n}
 function vlOff(p){if(!p||!p.vl)return"";const n=IT[p.vl.k].n;p.inv=p.inv||[];p.inv.push(p.vl);p.vl=null;if(p.scar)p.scar.veil=0;return n}
 function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)&&!x.e.h)}
 /* useItem on a veil = wear it (never consumed) */
@@ -68,13 +70,13 @@ function vlReveal(obs,k,how){if(!vlIsK(k)||k==="mcnt")return"";if(obs===S){S.wdk
 (function(){const p0=wdP;wdP=function(e,p){if(vlIs(e))return vlP(e,p);return p0.apply(this,arguments)}})();
 (function(){const b0=wdBelPE;wdBelPE=function(obs,e,owner){if(vlIs(e)){if(e.k==="mcnt")return vlP(e,owner);if(vlKnows(obs,e))return vlP(e,owner);
   const n=WD.autoErr[wdHash(wdKey(obs)+e.k)%WD.autoErr.length];return vlP(e,owner)+n}return b0.apply(this,arguments)}})();
-(function(){const s0=wdStatusBy;wdStatusBy=function(p,pf){const s=s0.apply(this,arguments);try{if(s!=="tang"&&p&&p.vl&&p.scar&&p.vl.k!=="mcnt"){if(pf(p.vl)-Math.min(8,wdPOf(p))>=1)return "over"}}catch(e){}return s}})();
-(function(){const k0=wdKnownStatus;wdKnownStatus=function(p){if(p&&p.vl&&p.scar&&!vlKnows(S,p.vl))return null;return k0.apply(this,arguments)}})();
-(function(){const k0=wdKnowAll;wdKnowAll=function(obs,p){const r=k0.apply(this,arguments);try{if(p&&p.vl&&p.scar)vlReveal(obs,p.vl.k,"")}catch(e){}return r}})();
-(function(){const c0=wdCur;wdCur=function(p){const r=c0.apply(this,arguments);return p&&p.vl&&p.scar?r+"|"+p.vl.k:r}})();
+(function(){const s0=wdStatusBy;wdStatusBy=function(p,pf){const s=s0.apply(this,arguments);try{if(s!=="tang"&&p&&p.vl&&vlNeed(p)&&p.vl.k!=="mcnt"){if(pf(p.vl)-Math.min(8,wdPOf(p))>=1)return "over"}}catch(e){}return s}})();
+(function(){const k0=wdKnownStatus;wdKnownStatus=function(p){if(p&&p.vl&&vlNeed(p)&&!vlKnows(S,p.vl))return null;return k0.apply(this,arguments)}})();
+(function(){const k0=wdKnowAll;wdKnowAll=function(obs,p){const r=k0.apply(this,arguments);try{if(p&&p.vl&&vlNeed(p))vlReveal(obs,p.vl.k,"")}catch(e){}return r}})();
+(function(){const c0=wdCur;wdCur=function(p){const r=c0.apply(this,arguments);return p&&p.vl&&vlNeed(p)?r+"|"+p.vl.k:r}})();
 /* a successful hặc vượt phẩm also takes an over-phẩm veil (not a ngự tứ) */
 (function(){const a0=wdAccuse;wdAccuse=function(a,t){const pre=(()=>{try{return wdStatus(t)}catch(e){return""}})();const r=a0.apply(this,arguments);
-  try{if(pre==="over"&&t&&t.vl&&t.scar&&t.vl.k!=="mcnt"&&vlP(t.vl,t)>Math.min(8,wdPOf(t))&&/vượt phẩm: <span[^>]*>thành/.test(r)){const n=IT[t.vl.k].n;t.vl=null;t.scar.veil=0;return r+`${n} bị tịch thu. `}}catch(e){}return r}})();
+  try{if(pre==="over"&&t&&t.vl&&vlNeed(t)&&t.vl.k!=="mcnt"&&vlP(t.vl,t)>Math.min(8,wdPOf(t))&&/vượt phẩm: <span[^>]*>thành/.test(r)){const n=IT[t.vl.k].n;t.vl=null;if(t.scar)t.scar.veil=0;return r+`${n} bị tịch thu. `}}catch(e){}return r}})();
 
 /* ---------- getting one: the same functions for her and for every consort ---------- */
 /* bought / crafted entries keep their source in .src (no .from): j93 shows a gift chest only for real gifts (.from) */
@@ -123,7 +125,7 @@ PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O
  O.push(vlOpt({n:"Sai người mua lén ngoài cung",fx:{},x:ag?`tốn: 1 khắc · thành: rẻ hơn, nhiều kiểu · kèm: chưa rõ phẩm, lộ ra thì Danh -${VL.outDanh}`:"chưa có ma ma, thái giám hay cung nữ tin cẩn để sai",go:()=>{if(!ag||!can(1))return;pushDil(mkP("vlout"),"Mua lén ngoài cung")}}));
  for(const G of vlGivers(S))O.push(vlOpt({n:`Xin ${G.n} ban mạng`,fx:{},x:`${word(G.o)} · tốn: 1 khắc · thành: ${G.n} ban mạng Tinh phẩm đúng phẩm · hỏng: ${G.n} với ngươi -${VL.askFail}`,go:()=>{if(!can(1))return;spend(1);log(vlAsk(S,G.k));render()}}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
- return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
+ return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}${S.rash&&typeof rshOf==="function"?`Mặt ngươi nổi mẩn (${rshOf(S).name}): Sắc đang mất ${rshOf(S).lost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
 PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>Tự tay kết mạng che mặt bằng trò thêu. Phẩm của mạng là phần chơi, cộng ${a?a.n:"Thêu thùa"} bậc ${lv}, cộng vật liệu: thường thêm 0, tốt thêm 1, quý thêm 2.</p><p class="past">Dưới 6 ra mạng Thường, từ 6 Tinh phẩm, từ 10 Trân phẩm, từ 14 Tuyệt phẩm. Vật liệu quý ra kiểu mạng phẩm cao. Chơi được 5 phần: vải sa ra ${WD_GRADE[vlG({k:vlCraftOut(S,0,5)})]}, dây bạc ra ${WD_GRADE[vlG({k:vlCraftOut(S,1,5)})]}, kim tuyến ra ${WD_GRADE[vlG({k:vlCraftOut(S,2,5)})]}.</p>`,o:O}};
@@ -150,9 +152,9 @@ if(typeof wrapR==="function"){wrapR("vlWearUI",()=>"Đeo mạng che mặt")}
   d.o[i]=o}catch(e){console.error(e)}return d}})();
 
 /* ---------- Tư trang: the veil block (kit parts: kpsec, kitItem, kitFacts, act cards) ---------- */
-function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!S.scar&&!L.length&&!S.vl)return"";const sc=S.scar?scarOf(S):null;const pick=window.__vlPick;
+function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!vlNeed(S)&&!L.length&&!S.vl)return"";const sc=S.scar?scarOf(S):null;const pick=window.__vlPick;
  let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Mạng che mặt</h4>`;
- const note=sc?(S.vl?[`Mặt bị thương (${sc.name}) · đang che, Sắc mất ${sc.sacLost}`,"n"]:[`Mặt bị thương (${sc.name}) · chưa che, Sắc mất ${sc.sacLost}`,"no"]):["Mặt lành, chưa cần đeo","ok"];
+ const note=sc?(S.vl?[`Mặt bị thương (${sc.name}) · đang che, Sắc mất ${sc.sacLost}`,"n"]:[`Mặt bị thương (${sc.name}) · chưa che, Sắc mất ${sc.sacLost}`,"no"]):(S.rash&&typeof rashNote==="function"?rashNote(S):["Mặt lành, chưa cần đeo","ok"]);
  const wornT=S.vl?kitItem({src:vlSrc(S.vl.k),name:IT[S.vl.k].n,grade:vlG(S.vl),size:"md",on:true,tip:IT[S.vl.k].d}):kitItem({empty:true,name:"Chưa đeo mạng",size:"md"});
  h+=`<div class="kwdnow"><div class="kwear kwbig">${wornT}</div><div class="kwdnote">${kitChip(note[0],note[1])}${sc?`<span class="past">Còn ${sc.weeksLeft} tuần nữa mới lành.${S.vl?` ${vlKnows(S,S.vl)?"Đồ phẩm "+wdPName(vlP(S.vl,S)):"Chưa rõ phẩm của mạng."}`:""}</span>`:""}</div></div>`;
  const B0=[];if(S.vl)B0.push(pbtn(`data-vl="off"`,"Tháo mạng",`tốn: không tốn gì · thành: cất vào rương · kèm: Sắc mất trở lại ${S.scar?S.scar.d:0}`,""));
@@ -160,7 +162,7 @@ function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!S.scar&&!L.le
  h+=`<div class="rbtn">${B0.join("")}</div>`;
  if(L.length){h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:vlSrc(x.e.k),name:IT[x.e.k].n,grade:vlG(x.e),size:"lg",sel:x.ix===pick,label:vlKnows(S,x.e)?["đồ phẩm "+wdPName(vlP(x.e,S)),"n"]:null,data:`data-vlpick="${x.ix}" role="button" tabindex="0"`,tip:IT[x.e.k].d})).join("")+`</div>`;
   const x=L.find(y=>y.ix===pick);if(x){const e=x.e,it=IT[e.k],g=vlG(e);const B=[];
-   B.push(pbtn(`data-vl="wear" data-ix="${x.ix}"`,"Đeo mạng",`tốn: không tốn gì · thành: ${S.scar?`Sắc mất còn ${Math.round(S.scar.d*VL.cover[g])}`:"che vết thương"}${vlKnows(S,e)?"":" · kèm: chưa rõ phẩm, có thể vượt phẩm"}`,S.scar?"":"mặt lành, chưa cần đeo"));
+   B.push(pbtn(`data-vl="wear" data-ix="${x.ix}"`,"Đeo mạng",`tốn: không tốn gì · thành: ${S.scar?`Sắc mất còn ${Math.round(S.scar.d*VL.cover[g])}`:S.rash?"che chỗ nổi mẩn":"che vết thương"}${vlKnows(S,e)?"":" · kèm: chưa rõ phẩm, có thể vượt phẩm"}`,vlNeed(S)?"":"mặt lành, chưa cần đeo"));
    B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,e.k==="mcnt"?"đồ ngự tứ: không được đem tặng":whyTime(2)));
    B.push(pbtn(`data-it="sell" data-ix="${x.ix}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,e.k==="mcnt"?"đồ ngự tứ: bán là bất kính":""));
    /* KIT §70: the picked veil = the shared item detail (picture, name, grade, Được, Lai lịch, Ghi chú) with its acts */
@@ -171,7 +173,7 @@ function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}
 (function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const W=(S.inv||[]).filter(e=>vlIs(e)&&!e.h);W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
  let x="";try{x=vlInvHTML()}catch(e){console.error(e)}if(!x)return h;if(W.length)h=h.replace(/<p class="past">Rương trống\.[^<]*<\/p>/,"");
- if(S.scar)return x+h;const j=h.indexOf('<div class="ph"><span>Đang đeo');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
+ if(vlNeed(S))return x+h;const j=h.indexOf('<div class="ph"><span>Đang mặc');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-vl],[data-vlpick]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.vlpick!=null){window.__vlPick=+b.dataset.vlpick;try{render()}catch(e){}return}
  const a=b.dataset.vl;if(a==="get")vlGetUI();else if(a==="off")vlOffUI();else if(a==="wear")vlWearUI(+b.dataset.ix)},true);
@@ -179,7 +181,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- NPCs: the same ways, by trait and purse (monthly) ---------- */
 function vlNpcBestIx(v){const L=vlChest(v);if(!L.length)return -1;const P=Math.min(8,wdPOf(v));const bold=/Kiêu ngạo|Tham vọng/.test((typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" "));
  const ok=L.filter(x=>wdBelPE(v,x.e,v)<=P+(bold?1:0));const C=(ok.length?ok:L).sort((a,b)=>vlG(b.e)-vlG(a.e));return C[0].ix}
-function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!v.scar){if(v&&v!==S)vlSync(v);return}vlMig(v);if(v.vl)return;
+function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!vlNeed(v)){if(v&&v!==S)vlSync(v);return}vlMig(v);if(v.vl)return;
  let i=vlNpcBestIx(v);if(i<0){const P=Math.min(8,wdPOf(v));const k0=vlKey(P,0);
   if((v.bac||0)>=IT[k0].pr+10&&roll(VL.npcBuy)){const k=(v.bac||0)>=IT[vlKey(P,1)].pr+30&&roll(50)?vlKey(P,1):k0;vlBuyNvp(v,k)}
   else if(vlLv(v)>=1&&roll(VL.npcCraft)){const m=(v.bac||0)>=VL.mat[1]+20&&roll(50)?1:0;vlCraft(v,m,R(11))}
@@ -187,13 +189,13 @@ function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!v.scar){if(v&&v!==S)vlSyn
   i=vlNpcBestIx(v)}
  if(i>=0){vlWear(v,i);try{if(typeof knows!=="function"||knows(v))log(`${rkName(v)} ${v.name} đeo mạng che mặt.`)}catch(e){}}}
 /* friends send one to whoever is scarred and unveiled (her too: the gift arrives as the usual gift card) */
-function vlFriendGift(t){if(!t||!t.scar||t.vl||vlChest(t).length)return;const P=Math.min(8,wdPOf(t));const k=vlKey(P,0);
+function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const P=Math.min(8,wdPOf(t));const k=vlKey(P,0);
  const F=liveRivals(true).filter(v=>v!==t&&v.alive&&!v.out&&aff(v,t)>=50&&(v.bac||0)>=IT[k].pr+20);if(!F.length||!roll(VL.giftP))return;const v=pick(F);
  ap(v,{bac:-IT[k].pr});v.inv=v.inv||[];v.inv.push({k,from:"nvp"});const r=giveTo(v,t,v.inv.length-1);if(r&&t!==S&&(typeof knows!=="function"||knows(t)))try{log(r)}catch(e){}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){vlSync(S);for(const v of rivals)if(v)vlNpcMonth(v);vlFriendGift(S);for(const v of liveRivals(true))vlFriendGift(v)}}catch(e){console.error(e)}return r}})();
 /* healed faces put the veil back in the chest (weekly, after j70 heal70) */
-(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of vlPeople())if(p&&p.vl&&!p.scar)vlSync(p)}catch(e){}return r}})();
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of vlPeople())if(p&&p.vl&&!vlNeed(p))vlSync(p)}catch(e){}return r}})();
 /* the Emperor's bestowal on a scarred, unveiled consort may add a veil of her phẩm (Trân phẩm) */
-(function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&p.scar&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
+(function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(p&&vlNeed(p)&&!p.vl&&!vlChest(p).length&&roll(VL.empP)){const k=vlKey(Math.min(8,wdPOf(p)),2);vlGain(p,k,{from:"emp",giver:"Hoàng thượng",known:"Hoàng thượng ban theo phẩm"});
   if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${kitItem({src:vlSrc(k),name:IT[k].n,grade:2,size:"lg"})}</p><p>Hoàng thượng thương ngươi bị thương trên mặt, ban thêm <b>${IT[k].n}</b> (Trân phẩm).</p>`,btn:"Tạ ơn"});log(`Được Hoàng thượng ban ${IT[k].n}.`)}}}catch(e){console.error(e)}return r}})();
 window.vlWear=vlWear;window.vlOff=vlOff;window.vlCraft=vlCraft;window.vlBuyNvp=vlBuyNvp;window.vlBuyOut=vlBuyOut;window.vlAsk=vlAsk;window.VL=VL;

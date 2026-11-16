@@ -170,7 +170,7 @@ function ktQuiet(e){const E=KTE[e];S.kt53t=S.turn;const L=ktList(E).filter(([k])
 function ktHeirW(k){return Math.max(0,ktHien(k)*1.1-12)}
 /* cài sau khi mọi mô-đun đã nạp (j51 đứng trước hay sau j53 đều được) */
 function ktHeirInstall(){if(window.__ktHeirOn)return;window.__ktHeirOn=1;
-if(typeof kvW==="function"){const w0=kvW;kvW=function(k,v,dich,truong){const w=w0.apply(this,arguments);try{ktSync(k);if(!hienShown(k))return 5+(dich?60:0)+(truong?25:0)+(k.fond||0)/2;return w-k.tal/2+ktHeirW(k)}catch(e){return w}}} 
+if(typeof kvW==="function"){const w0=kvW;kvW=function(k,v,dich,truong){const w=w0.apply(this,arguments);try{ktSync(k);if(!hienShown(k))return 5+(dich?60:0)+(truong?(S&&S.ps?BAL.ps.truongW:25):0)+(k.fond||0)/2;/* palace-start r1: same first-born edge as j51 kvW */return w-k.tal/2+ktHeirW(k)}catch(e){return w}}} 
 else{const h0=heirMonth;heirMonth=function(){const L=allKids().map(([k])=>[k,k.tal]);try{L.forEach(([k])=>{ktSync(k);k.tal=2*ktHeirW(k)})}catch(e){}let r;try{r=h0.apply(this,arguments)}finally{L.forEach(([k,t])=>{k.tal=t})}return r}} 
 if(typeof kvWhy==="function"){const y0=kvWhy;kvWhy=function(x){return String(y0.apply(this,arguments)).replace(/^Tài \d+ · được thương \d+/,!hienShown(x.k)?"còn nhỏ: chỉ xét đích, trưởng, lòng thương":x.v?`Hiền tài ${hienWord(x.k)} (lời đồn)`:`Hiền tài ${ktHien(x.k)} · được thương ${x.k.fond}`)}} 
 (function(){const h0=heirMonth;heirMonth=function(){const r=h0.apply(this,arguments);try{if(r&&S.heir&&S.heir.k)return String(r).replace(/lập hiền: Tài \d+, được ngài thương \d+/,S.heir.v?`lập hiền: tiếng học hành ${hienWord(S.heir.k)}, được ngài thương`:`lập hiền: Văn ${ktR(S.heir.k.tv)}, Đức ${ktR(S.heir.k.td)}, Võ ${ktR(S.heir.k.tw)}, được ngài thương ${S.heir.k.fond}`)}catch(e){}return r}})();}

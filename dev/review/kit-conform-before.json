@@ -1,0 +1,443 @@
+{
+ "755x1000": {
+  "count": {
+   "CONFORMS": 43,
+   "MIXED": 8,
+   "CUSTOM": 1,
+   "MISSING": 14
+  },
+  "floats": [
+   "retired float in code: EL.id=\"kctm\"",
+   "retired float in code: el.id=\"kgoalst\""
+  ],
+  "res": {
+   "info": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "ĐIỀU",
+    "title": "Điều ngắn"
+   },
+   "rule": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "LUẬT",
+    "title": "Luật nhỏ"
+   },
+   "news": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "TIN",
+    "title": "Tin trong cung"
+   },
+   "notice": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "BÁO",
+    "title": "Một báo"
+   },
+   "result": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "KẾT QUẢ",
+    "title": "Kết quả: thử"
+   },
+   "night": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "ĐÊM",
+    "title": "Đêm"
+   },
+   "choice": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "Việc khó"
+   },
+   "headart-notice": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture"
+    ],
+    "seal": "BÁO",
+    "title": "Hỏa hoạn"
+   },
+   "headart-choice": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture"
+    ],
+    "seal": "VIỆC",
+    "title": "Điềm lạ quanh cung"
+   },
+   "intel": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "MẬT BÁO",
+    "title": "Đã biết về Hoàng hậu Cố Tố Tâm"
+   },
+   "evidence": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "CHỨNG CỨ",
+    "title": "Chứng cứ về Hoàng hậu Cố Tố Tâm"
+   },
+   "item": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "ĐIỀU",
+    "title": "Thoa bạc song điệp"
+   },
+   "item-card": {
+    "v": "CUSTOM",
+    "why": [
+     "no .dlg"
+    ]
+   },
+   "calendar": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "LỊCH",
+    "title": "Lịch tháng"
+   },
+   "goal-detail": {
+    "v": "MIXED",
+    "tpl": "T3",
+    "why": [
+     "loose figure column on an info panel"
+    ],
+    "seal": "ĐIỀU",
+    "title": "Chương 1 · Nhập cung, đứng vững"
+   },
+   "place:vuon": {
+    "v": "MISSING"
+   },
+   "place:thu": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture",
+     "hand-made block .kplinfo"
+    ],
+    "seal": "VIỆC",
+    "title": "Cần Chính điện"
+   },
+   "place:dtd": {
+    "v": "MISSING"
+   },
+   "place:tn": {
+    "v": "MISSING"
+   },
+   "place:kn": {
+    "v": "MISSING"
+   },
+   "place:r2": {
+    "v": "MISSING"
+   },
+   "place:r3": {
+    "v": "MISSING"
+   },
+   "place:r4": {
+    "v": "MISSING"
+   },
+   "place:r5": {
+    "v": "MISSING"
+   },
+   "place:tyv": {
+    "v": "MISSING"
+   },
+   "place:ksp": {
+    "v": "MISSING"
+   },
+   "place:lc": {
+    "v": "MISSING"
+   },
+   "place:cnh": {
+    "v": "MISSING"
+   },
+   "place:tgk": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture",
+     "hand-made block .kplinfo"
+    ],
+    "seal": "VIỆC",
+    "title": "Tân Giả khố"
+   },
+   "place:ttp": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture",
+     "hand-made block .kplinfo"
+    ],
+    "seal": "VIỆC",
+    "title": "Thượng thư phòng"
+   },
+   "place:acs": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture",
+     "hand-made block .kplinfo"
+    ],
+    "seal": "VIỆC",
+    "title": "A ca sở"
+   },
+   "place:dc": {
+    "v": "MIXED",
+    "tpl": "T2",
+    "why": [
+     "two pictures: band + left picture",
+     "hand-made block .kplinfo"
+    ],
+    "seal": "VIỆC",
+    "title": "Đông cung"
+   },
+   "place:etq": {
+    "v": "MISSING"
+   },
+   "place:night": {
+    "v": "MISSING"
+   },
+   "PEND:vase": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "vase"
+   },
+   "PEND:tt1": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "tt1"
+   },
+   "PEND:tt2": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "tt2"
+   },
+   "PEND:tt3": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "tt3"
+   },
+   "PEND:nc1": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "nc1"
+   },
+   "PEND:td1": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "td1"
+   },
+   "PEND:ch1": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "ch1"
+   },
+   "PEND:ch2": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "ch2"
+   },
+   "PEND:thd1": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "thd1"
+   },
+   "PEND:phoenix": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "phoenix"
+   },
+   "PEND:doanngo": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "doanngo"
+   },
+   "PEND:trungcuu": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "trungcuu"
+   },
+   "PEND:vulan": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "vulan"
+   },
+   "PEND:dongchi": {
+    "v": "CONFORMS",
+    "tpl": "T2",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "dongchi"
+   },
+   "PEND:thbirthday": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "thbirthday"
+   },
+   "PEND:ksp": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "ksp"
+   },
+   "PEND:prep": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "prep"
+   },
+   "PEND:night1": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "night1"
+   },
+   "PEND:night2": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "night2"
+   },
+   "PEND:giu": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "giu"
+   },
+   "PEND:giftpick": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "giftpick"
+   },
+   "PEND:plantpick": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "plantpick"
+   },
+   "PEND:taintpick": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "taintpick"
+   },
+   "PEND:evpick": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "evpick"
+   },
+   "PEND:shop": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "shop"
+   },
+   "PEND:plantsv": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "plantsv"
+   },
+   "PEND:j70thr": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "j70thr"
+   },
+   "PEND:vlget": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "vlget"
+   },
+   "PEND:vlcraft": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "vlcraft"
+   },
+   "PEND:vlnvp": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "vlnvp"
+   },
+   "PEND:vlout": {
+    "v": "CONFORMS",
+    "tpl": "T3",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "vlout"
+   },
+   "PEND:runner": {
+    "v": "CONFORMS",
+    "tpl": "T1",
+    "why": [],
+    "seal": "VIỆC",
+    "title": "runner"
+   }
+  },
+  "errs": []
+ }
+}

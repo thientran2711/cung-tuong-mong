@@ -105,3 +105,17 @@ Cut: connected components assigned to cells by centroid, 88 % fill, 512 + 256 we
 | sachchep | Tập sách chép tay | Thường |
 | canhhoa | Cành hoa ép | Thường |
 (hinhnhan already had its picture; it is now an IT item too.) On the CDN (cdn_sync), checked on cream and red.
+
+## 5. Girlhood chest (review/outside-r2-r1, OWNER #8 15/11 20:05Z) — gpt-2-6 single icons, style ref If67SFwtvE, Magnific bg removal, cut 88 %
+| Key | Name | Slot | Grade |
+|---|---|---|---|
+| ngocboikc | Ngọc bội khuê các (white jade lotus disc, pink cord + tassel) | Đeo eo | Thường |
+| vongbackc | Vòng bạc hoa mai (pair of plain silver bangles, plum blossoms) | Đeo tay | Thường |
+Defined in dev/build/jkc.js (IT + ITEM_ART_G). On the CDN (cdn_sync), checked on cream and red. With Trâm ngọc bích, a Thường garment and Túi thơm thêu they fill her slots at the start of the home road; the set stays inside a Đáp ứng's luxury allowance.
+
+## 6. Summer ice (review/econ-items, 16/11) — gpt-2-6 (Magnific w4hkDcy7EI, EbzB4JRuuO; style ref If67SFwtvE), Magnific bg removal, cut 88 %
+| Key | Name | Grade |
+|---|---|---|
+| bangda | Băng đá (block of ice in a lacquered ice basin) | Thường |
+| bangvun | Băng vụn (hàng kém: melting shards in a clay basin) | Thường |
+256 + 512 webp on the CDN (cdn_sync), checked on cream and red. (jkc's ngocboikc / vongbackc, §5 above, are reused by the palace-road girlhood chest.)

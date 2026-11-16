@@ -1,0 +1,375 @@
+{
+ "eventsChecked": 309,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Bánh bột hấp lá chuối (Khá)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Bắt tay với nàng",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Bỏ bạc may thêm cho cả hai",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Bỏ bạc xin xem một quẻ",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Bỏ tiền mua bù",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Bớt nước cung mình chia cho người hầu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Can Thái hậu chớ tin",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Cáo bận việc cung",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Chỉ bảo, không nhận quà",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Cho người mang đi xa",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Cùng làm, dâng lên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Đi cùng nàng",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Gắng chịu, che mặt the",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Giữ lễ, không nói nhiều",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Giữ phần mình, mặc trước",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Góp chút ít cho phải lễ",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hẹn hôm khác",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Tống Tịnh Nghi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hỏi thái giám Kính sự phòng",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hỏi Tiểu Kiệt Tử, người coi việc",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Khắc dấu 'ngự ban' giả",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Làm như không nghe",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Làm thơ vịnh mai dâng ngài",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Lặng lẽ báo cho Khương Mộng Điệp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Mang canh khuya hầu ngài",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Nằm yên trong cung",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Ngắt hoa dâng Thái hậu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Nhường Trịnh Tú Uyển phần đẹp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Ở nhà đọc sách",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phát áo bông cho cung nhân",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Chu Thanh Ca",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Thượng Quan Hải Đường",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phương Thảo (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Hoa Họa Mi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Trịnh Tú Uyển",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Kiều Dao Cầm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Ra hồ hầu Hoàng thượng",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Ra lệnh phòng bị",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Ra tay trước",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Rủ Tống Tịnh Nghi thêu chung",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Sang hầu ngài giữa đêm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Sang thân thiết với nàng",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Đoan Mộc Hàm Hương",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Phùng Tử Yên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tận tình chỉ bảo",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thay hết nước, đồ ăn",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thề thốt minh oan",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Theo hầu trọn buổi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thêu cờ, may áo gửi quân",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thêu thật kỹ, thức khuya",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thử tài trước sứ thần",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Khương Mộng Điệp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiếp chuyện cả buổi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Kiệt Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tránh mặt Tống Tịnh Nghi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Treo bùa cho cung nhân yên tâm",
+   "tone": "dark",
+   "title": ""
+  }
+ ],
+ "actsChecked": 95,
+ "actsPh": [],
+ "errs": []
+}

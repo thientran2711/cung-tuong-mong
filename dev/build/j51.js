@@ -9,7 +9,7 @@ function kvStamp(){allKids().forEach(([k])=>{if(k.bt==null)k.bt=S.turn-(k.age||0
 function kvQueenMom(v){return v?!!(v.alive&&!v.out&&v.queen):S.rank>=7}
 function kvMomName(v){return v?v.name:"ngươi"}
 /* trọng số chọn Thái tử (dùng cho cả xét lập lẫn thứ tự hiển thị) */
-function kvW(k,v,dich,truong){return 5+momRank(v)*10+k.tal/2+k.fond/2+Math.max(0,(v?v.th:S.th)||0)/2+(dich?60:0)+(truong?25:0)}
+function kvW(k,v,dich,truong){return 5+momRank(v)*10+k.tal/2+k.fond/2+Math.max(0,(v?v.th:S.th)||0)/2+(dich?60:0)+(truong?(S&&S.ps?BAL.ps.truongW:25):0)}/* palace-start (owner 16/11): in a new game being first-born is a small edge, not a lock */
 function kvOrder(){if(!S)return[];kvStamp();const L=allKids().filter(([k])=>k.alive&&k.sex==="m");if(!L.length)return[];
  const eld=L.slice().sort((a,b)=>a[0].bt-b[0].bt)[0][0];
  return L.map(([k,v])=>{const dich=kvQueenMom(v),truong=k===eld;return{k,v,dich,truong,w:kvW(k,v,dich,truong)}})
@@ -70,10 +70,10 @@ heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.hei
  const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
  if(!roll(wait?5:15))return"";
  let r=Math.random()*c.reduce((a,b)=>a+b.w,0),i=0;while(r>c[i].w&&i<c.length-1){r-=c[i].w;i++}const x=c[i];setHeir(x.k,x.v);fx("gold");
- const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
+ const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}; mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}${x.truong?", lại là con trưởng":""}`/* r1: keeps the "lập hiền: Tài N, được ngài thương N" form so j53 swaps the raw talent for the Văn/Đức/Võ words (rival: rumour word) */:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
  return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};
-/* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử */
-(function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();
+/* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử (ván mới S.ps: người nặng ký nhất, trưởng tử chỉ là một phần) */
+(function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>S.ps?b.w-a.w:a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();
 /* ---- hiển thị: nhãn trên thẻ con, chip con của phi tần, bảng thứ tự kế vị ---- */
 function kvLabels(k,o){o=o||kvOrder();const i=kvPos(o,k);if(i<0)return[];const x=o[i];const L=[];if(x.dich)L.push("Đích tử");if(x.truong)L.push("Trưởng tử");L.push(`Kế vị thứ ${i+1}`);return L}
 (function(){const p0=pcard;pcard=function(o){const k=window.__kvKid;if(k&&o){window.__kvKid=null;try{const L=kvLabels(k);o=Object.assign({},o,{chips:(o.chips||[]).concat(L.map(t=>chip(t,/Đích|Trưởng/.test(t)?"ok":"")))})}catch(e){}}return p0.call(this,o)}})();

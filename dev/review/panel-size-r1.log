@@ -1,0 +1,417 @@
+  755x1000 TABLE  case | compact | frame h | content h | empty%
+   info-short                   COMPACT  303  297 2% art
+   info-long                    big      700  729 0% art
+   rule                         COMPACT  303  297 2% art
+   news                         big      700  697 0% art
+   notice                       COMPACT   84   78 7% 
+   notice-long                  big      700  814 0% 
+   result                       COMPACT   84   78 7% 
+   reward                       COMPACT   84   78 7% 
+   night                        COMPACT   84   78 7% 
+   end                          COMPACT   84   78 7% 
+   choice-2                     COMPACT  194  188 3% 
+   choice-6                     COMPACT  227  221 3% 
+   intel                        COMPACT  157   70 55% art
+   evidence                     big      700   70 90% art
+   mood                         COMPACT  336  330 2% art
+   item                         COMPACT  314  308 2% art
+   place                        big      700  281 60% art
+   calendar                     big      700  445 36% 
+   confirm                      COMPACT  200  194 3% 
+   picker-3                     COMPACT  200  194 3% 
+   title-menu                   COMPACT  250  246 2% 
+   title-opt                    COMPACT  508  505 1% 
+   title-slots                  COMPACT  508  505 1% 
+   title-past                   COMPACT  508  505 1% 
+   identity                     big      700  920 0% art
+   PEND:vase                    big      700  623 11% art
+   PEND:tt1                     big      700  697 0% art
+   PEND:tt2                     big      700  697 0% art
+   PEND:tt3                     big      700  697 0% art
+   PEND:nc1                     big      700  697 0% art
+   PEND:td1                     big      700  697 0% art
+   PEND:ch1                     big      700  629 10% art
+   PEND:ch2                     big      700  648 7% art
+   PEND:thd1                    big      700  647 8% art
+   PEND:phoenix                 big      700  697 0% art
+   PEND:doanngo                 big      700  697 0% art
+   PEND:trungcuu                big      700  648 7% art
+   PEND:vulan                   big      700  697 0% art
+   PEND:dongchi                 big      700  697 0% art
+   PEND:thbirthday              big      700  623 11% art
+   PEND:ksp                     big      700  666 5% art
+   PEND:prep                    big      700  567 19% art
+   PEND:night1                  big      700  571 18% art
+   PEND:night2                  big      700  614 12% art
+   PEND:giu                     big      700  595 15% art
+   PEND:giftpick                big      700  696 1% art
+   PEND:plantpick               big      700  619 12% art
+   PEND:taintpick               COMPACT  234  228 3% art
+   PEND:evpick                  big      700  696 1% art
+   PEND:shop                    big      700  611 13% art
+   PEND:plantsv                 big      700  696 1% art
+   PEND:j70thr                  big      700  640 9% art
+   PEND:vlget                   big      700  574 18% art
+   PEND:vlcraft                 big      700  547 22% art
+   PEND:vlnvp                   big      700  648 7% art
+   PEND:vlout                   big      700  629 10% art
+   PEND:runner                  COMPACT  283  277 2% art
+  WASTE>60px in compact: intel
+755x1000 cases 57 widths 560 heights 84/157/194/200/227/234/250/283/303/314/336/508/700 | missing:  | nofit:  | xOut:  | btnOut:  | errs 0
+  1000x755 TABLE  case | compact | frame h | content h | empty%
+   info-short                   COMPACT  303  297 2% art
+   info-long                    big      529  729 0% art
+   rule                         COMPACT  303  297 2% art
+   news                         big      529  525 1% art
+   notice                       COMPACT   84   78 7% 
+   notice-long                  big      529  814 0% 
+   result                       COMPACT   84   78 7% 
+   reward                       COMPACT   84   78 7% 
+   night                        COMPACT   84   78 7% 
+   end                          COMPACT   84   78 7% 
+   choice-2                     COMPACT  194  188 3% 
+   choice-6                     COMPACT  194  188 3% 
+   intel                        COMPACT  157   70 55% art
+   evidence                     big      529   70 87% art
+   mood                         big      529  330 38% art
+   item                         COMPACT  314  308 2% art
+   place                        big      529  281 47% art
+   calendar                     big      529  465 12% 
+   confirm                      COMPACT  200  194 3% 
+   picker-3                     COMPACT  200  194 3% 
+   title-menu                   COMPACT  250  246 2% 
+   title-opt                    COMPACT  508  505 1% 
+   title-slots                  COMPACT  508  505 1% 
+   title-past                   COMPACT  508  505 1% 
+   identity                     big      529  873 0% art
+   PEND:vase                    big      529  451 15% art
+   PEND:tt1                     big      529  525 1% art
+   PEND:tt2                     big      529  525 1% art
+   PEND:tt3                     big      529  525 1% art
+   PEND:nc1                     big      529  525 1% art
+   PEND:td1                     big      529  525 1% art
+   PEND:ch1                     big      529  458 13% art
+   PEND:ch2                     big      529  476 10% art
+   PEND:thd1                    big      529  476 10% art
+   PEND:phoenix                 big      529  525 1% art
+   PEND:doanngo                 big      529  525 1% art
+   PEND:trungcuu                big      529  476 10% art
+   PEND:vulan                   big      529  525 1% art
+   PEND:dongchi                 big      529  525 1% art
+   PEND:thbirthday              big      529  452 15% art
+   PEND:ksp                     big      529  494 7% art
+   PEND:prep                    big      529  395 25% art
+   PEND:night1                  big      529  399 25% art
+   PEND:night2                  big      529  442 16% art
+   PEND:giu                     big      529  423 20% art
+   PEND:giftpick                big      529  525 1% art
+   PEND:plantpick               big      529  447 16% art
+   PEND:taintpick               COMPACT  234  228 3% art
+   PEND:evpick                  big      529  525 1% art
+   PEND:shop                    big      529  439 17% art
+   PEND:plantsv                 big      529  525 1% art
+   PEND:j70thr                  big      529  485 8% art
+   PEND:vlget                   big      529  386 27% art
+   PEND:vlcraft                 big      529  375 29% art
+   PEND:vlnvp                   big      529  476 10% art
+   PEND:vlout                   big      529  457 14% art
+   PEND:runner                  COMPACT  283  277 2% art
+  WASTE>60px in compact: intel
+1000x755 cases 57 widths 560 heights 84/157/194/200/234/250/283/303/314/508/529 | missing:  | nofit:  | xOut:  | btnOut: PEND:plantpick | errs 0
+  1180x820 TABLE  case | compact | frame h | content h | empty%
+   info-short                   COMPACT  303  297 2% art
+   info-long                    big      574  729 0% art
+   rule                         COMPACT  303  297 2% art
+   news                         big      574  571 1% art
+   notice                       COMPACT   84   78 7% 
+   notice-long                  big      574  814 0% 
+   result                       COMPACT   84   78 7% 
+   reward                       COMPACT   84   78 7% 
+   night                        COMPACT   84   78 7% 
+   end                          COMPACT   84   78 7% 
+   choice-2                     COMPACT  194  188 3% 
+   choice-6                     COMPACT  194  188 3% 
+   intel                        COMPACT  157   70 55% art
+   evidence                     big      574   70 88% art
+   mood                         COMPACT  352  346 2% art
+   item                         COMPACT  314  308 2% art
+   place                        big      574  281 51% art
+   calendar                     big      574  445 22% 
+   confirm                      COMPACT  200  194 3% 
+   picker-3                     COMPACT  200  194 3% 
+   title-menu                   COMPACT  250  246 2% 
+   title-opt                    COMPACT  508  505 1% 
+   title-slots                  COMPACT  508  505 1% 
+   title-past                   COMPACT  508  505 1% 
+   identity                     big      574  886 0% art
+   PEND:vase                    big      574  497 13% art
+   PEND:tt1                     big      574  571 1% art
+   PEND:tt2                     big      574  571 1% art
+   PEND:tt3                     big      574  571 1% art
+   PEND:nc1                     big      574  571 1% art
+   PEND:td1                     big      574  571 1% art
+   PEND:ch1                     big      574  503 12% art
+   PEND:ch2                     big      574  522 9% art
+   PEND:thd1                    big      574  521 9% art
+   PEND:phoenix                 big      574  571 1% art
+   PEND:doanngo                 big      574  571 1% art
+   PEND:trungcuu                big      574  522 9% art
+   PEND:vulan                   big      574  571 1% art
+   PEND:dongchi                 big      574  571 1% art
+   PEND:thbirthday              big      574  497 13% art
+   PEND:ksp                     big      574  540 6% art
+   PEND:prep                    big      574  441 23% art
+   PEND:night1                  big      574  445 22% art
+   PEND:night2                  big      574  488 15% art
+   PEND:giu                     big      574  469 18% art
+   PEND:giftpick                big      574  570 1% art
+   PEND:plantpick               big      574  493 14% art
+   PEND:taintpick               COMPACT  234  228 3% art
+   PEND:evpick                  big      574  570 1% art
+   PEND:shop                    big      574  485 16% art
+   PEND:plantsv                 big      574  570 1% art
+   PEND:j70thr                  big      574  514 10% art
+   PEND:vlget                   big      574  448 22% art
+   PEND:vlcraft                 big      574  421 27% art
+   PEND:vlnvp                   big      574  522 9% art
+   PEND:vlout                   big      574  503 12% art
+   PEND:runner                  COMPACT  283  277 2% art
+  WASTE>60px in compact: intel
+1180x820 cases 57 widths 560 heights 84/157/194/200/234/250/283/303/314/352/508/574 | missing:  | nofit:  | xOut:  | btnOut: PEND:plantpick | errs 0
+  1366x1024 TABLE  case | compact | frame h | content h | empty%
+   info-short                   COMPACT  303  297 2% art
+   info-long                    big      717  729 0% art
+   rule                         COMPACT  303  297 2% art
+   news                         big      717  714 0% art
+   notice                       COMPACT   84   78 7% 
+   notice-long                  big      717  814 0% 
+   result                       COMPACT   84   78 7% 
+   reward                       COMPACT   84   78 7% 
+   night                        COMPACT   84   78 7% 
+   end                          COMPACT   84   78 7% 
+   choice-2                     COMPACT  194  188 3% 
+   choice-6                     COMPACT  194  188 3% 
+   intel                        COMPACT  100   70 30% art
+   evidence                     big      717   70 90% art
+   mood                         COMPACT  336  330 2% art
+   item                         COMPACT  314  308 2% art
+   place                        big      717  281 61% art
+   calendar                     big      717  458 36% 
+   confirm                      COMPACT  200  194 3% 
+   picker-3                     COMPACT  200  194 3% 
+   title-menu                   COMPACT  250  246 2% 
+   title-opt                    COMPACT  508  505 1% 
+   title-slots                  COMPACT  508  505 1% 
+   title-past                   COMPACT  508  505 1% 
+   identity                     big      717  920 0% art
+   PEND:vase                    big      717  640 11% art
+   PEND:tt1                     big      717  714 0% art
+   PEND:tt2                     big      717  714 0% art
+   PEND:tt3                     big      717  714 0% art
+   PEND:nc1                     big      717  714 0% art
+   PEND:td1                     big      717  714 0% art
+   PEND:ch1                     big      717  646 10% art
+   PEND:ch2                     big      717  665 7% art
+   PEND:thd1                    big      717  664 7% art
+   PEND:phoenix                 big      717  714 0% art
+   PEND:doanngo                 big      717  714 0% art
+   PEND:trungcuu                big      717  665 7% art
+   PEND:vulan                   big      717  714 0% art
+   PEND:dongchi                 big      717  714 0% art
+   PEND:thbirthday              big      717  640 11% art
+   PEND:ksp                     big      717  683 5% art
+   PEND:prep                    big      717  584 19% art
+   PEND:night1                  big      717  587 18% art
+   PEND:night2                  big      717  630 12% art
+   PEND:giu                     big      717  612 15% art
+   PEND:giftpick                big      717  713 1% art
+   PEND:plantpick               big      717  636 11% art
+   PEND:taintpick               COMPACT  234  228 3% art
+   PEND:evpick                  big      717  713 1% art
+   PEND:shop                    big      717  646 10% art
+   PEND:plantsv                 big      717  713 1% art
+   PEND:j70thr                  big      717  657 8% art
+   PEND:vlget                   big      717  606 15% art
+   PEND:vlcraft                 big      717  580 19% art
+   PEND:vlnvp                   big      717  665 7% art
+   PEND:vlout                   big      717  664 7% art
+   PEND:runner                  big      717  713 1% art
+1366x1024 cases 57 widths 620 heights 84/100/194/200/234/250/303/314/336/508/717 | missing:  | nofit:  | xOut:  | btnOut:  | errs 0
+  844x390 TABLE  case | compact | frame h | content h | empty%
+   info-short                   big      358  354 1% art
+   info-long                    big      358  729 0% art
+   rule                         big      358  297 17% art
+   news                         big      358  355 1% art
+   notice                       COMPACT   84   78 7% 
+   notice-long                  big      358  814 0% 
+   result                       COMPACT   84   78 7% 
+   reward                       COMPACT   84   78 7% 
+   night                        COMPACT   84   78 7% 
+   end                          COMPACT   84   78 7% 
+   choice-2                     COMPACT  194  188 3% 
+   choice-6                     big      358  354 1% 
+   intel                        COMPACT  157   70 55% art
+   evidence                     big      358   70 80% art
+   mood                         big      358  330 8% art
+   item                         big      358  308 14% art
+   place                        big      358  281 22% art
+   calendar                     big      358  434 0% 
+   confirm                      COMPACT  200  194 3% 
+   picker-3                     COMPACT  200  194 3% 
+   title-menu                   COMPACT  250  246 2% 
+   title-opt                    COMPACT  358  505 0% 
+   title-slots                  COMPACT  358  505 0% 
+   title-past                   COMPACT  358  505 0% 
+   identity                     big      358  814 0% art
+   PEND:vase                    big      358  281 22% art
+   PEND:tt1                     big      358  391 0% art
+   PEND:tt2                     big      358  391 0% art
+   PEND:tt3                     big      358  391 0% art
+   PEND:nc1                     big      358  391 0% art
+   PEND:td1                     big      358  391 0% art
+   PEND:ch1                     big      358  287 20% art
+   PEND:ch2                     big      358  306 15% art
+   PEND:thd1                    big      358  305 15% art
+   PEND:phoenix                 big      358  391 0% art
+   PEND:doanngo                 big      358  391 0% art
+   PEND:trungcuu                big      358  306 15% art
+   PEND:vulan                   big      358  391 0% art
+   PEND:dongchi                 big      358  391 0% art
+   PEND:thbirthday              big      358  281 22% art
+   PEND:ksp                     big      358  324 9% art
+   PEND:prep                    big      358  225 37% art
+   PEND:night1                  big      358  229 36% art
+   PEND:night2                  big      358  272 24% art
+   PEND:giu                     big      358  253 29% art
+   PEND:giftpick                big      358  354 1% art
+   PEND:plantpick               big      358  277 23% art
+   PEND:taintpick               big      358  354 1% art
+   PEND:evpick                  big      358  354 1% art
+   PEND:shop                    big      358  269 25% art
+   PEND:plantsv                 big      358  354 1% art
+   PEND:j70thr                  big      358  298 17% art
+   PEND:vlget                   big      358  215 40% art
+   PEND:vlcraft                 big      358  187 48% art
+   PEND:vlnvp                   big      358  306 15% art
+   PEND:vlout                   big      358  287 20% art
+   PEND:runner                  big      358  354 1% art
+  WASTE>60px in compact: intel
+844x390 cases 57 widths 560 heights 84/157/194/200/250/358 | missing:  | nofit:  | xOut:  | btnOut:  | errs 0
+  390x844 TABLE  case | compact | frame h | content h | empty%
+   info-short                   COMPACT  213  209 2% art
+   info-long                    big      591 1185 0% art
+   rule                         COMPACT  213  209 2% art
+   news                         big      591  591 0% art
+   notice                       COMPACT   79   75 5% 
+   notice-long                  big      591 1363 0% 
+   result                       COMPACT   79   75 5% 
+   reward                       COMPACT   79   75 5% 
+   night                        COMPACT   79   75 5% 
+   end                          COMPACT   79   75 5% 
+   choice-2                     COMPACT  189  185 2% 
+   choice-6                     COMPACT  222  218 2% 
+   intel                        big      591   89 85% art
+   evidence                     big      591   89 85% art
+   mood                         COMPACT  290  286 1% art
+   item                         COMPACT  309  305 1% art
+   place                        big      591  193 67% art
+   calendar                     big      591  530 10% 
+   confirm                      COMPACT  195  191 2% 
+   picker-3                     COMPACT  195  191 2% 
+   title-menu                   COMPACT  264  260 2% 
+   title-opt                    COMPACT  591  628 0% 
+   title-slots                  COMPACT  591  628 0% 
+   title-past                   COMPACT  591  628 0% 
+   identity                     big      591  872 0% art
+   PEND:vase                    big      591  518 12% art
+   PEND:tt1                     big      591  591 0% art
+   PEND:tt2                     big      591  591 0% art
+   PEND:tt3                     big      591  591 0% art
+   PEND:nc1                     big      591  591 0% art
+   PEND:td1                     big      591  591 0% art
+   PEND:ch1                     big      591  524 11% art
+   PEND:ch2                     big      591  542 8% art
+   PEND:thd1                    big      591  542 8% art
+   PEND:phoenix                 big      591  591 0% art
+   PEND:doanngo                 big      591  591 0% art
+   PEND:trungcuu                big      591  542 8% art
+   PEND:vulan                   big      591  591 0% art
+   PEND:dongchi                 big      591  591 0% art
+   PEND:thbirthday              big      591  518 12% art
+   PEND:ksp                     big      591  561 5% art
+   PEND:prep                    big      591  470 20% art
+   PEND:night1                  big      591  470 20% art
+   PEND:night2                  big      591  508 14% art
+   PEND:giu                     big      591  490 17% art
+   PEND:giftpick                big      591  591 0% art
+   PEND:plantpick               big      591  514 13% art
+   PEND:taintpick               COMPACT  229  225 2% art
+   PEND:evpick                  big      591  591 0% art
+   PEND:shop                    big      591  524 11% art
+   PEND:plantsv                 big      591  591 0% art
+   PEND:j70thr                  big      591  535 9% art
+   PEND:vlget                   big      591  470 20% art
+   PEND:vlcraft                 big      591  470 20% art
+   PEND:vlnvp                   big      591  542 8% art
+   PEND:vlout                   big      591  524 11% art
+   PEND:runner                  COMPACT  278  274 1% art
+390x844 cases 57 widths 362/359 heights 79/189/195/213/222/229/264/278/290/309/591 | missing:  | nofit:  | xOut:  | btnOut: PEND:plantpick | errs 0
+  412x1058 TABLE  case | compact | frame h | content h | empty%
+   info-short                   COMPACT  213  209 2% art
+   info-long                    big      720  726 0% art
+   rule                         COMPACT  213  209 2% art
+   news                         big      720  721 0% art
+   notice                       COMPACT   79   75 5% 
+   notice-long                  big      720 1363 0% 
+   result                       COMPACT   79   75 5% 
+   reward                       COMPACT   79   75 5% 
+   night                        COMPACT   79   75 5% 
+   end                          COMPACT   79   75 5% 
+   choice-2                     COMPACT  189  185 2% 
+   choice-6                     COMPACT  222  218 2% 
+   intel                        big      720   89 88% art
+   evidence                     big      720   89 88% art
+   mood                         COMPACT  290  286 1% art
+   item                         COMPACT  309  305 1% art
+   place                        big      720  193 73% art
+   calendar                     big      720  530 26% 
+   confirm                      COMPACT  195  191 2% 
+   picker-3                     COMPACT  195  191 2% 
+   title-menu                   COMPACT  264  260 2% 
+   title-opt                    COMPACT  655  613 6% 
+   title-slots                  COMPACT  655  613 6% 
+   title-past                   COMPACT  655  613 6% 
+   identity                     big      720  901 0% art
+   PEND:vase                    big      720  647 10% art
+   PEND:tt1                     big      720  721 0% art
+   PEND:tt2                     big      720  721 0% art
+   PEND:tt3                     big      720  721 0% art
+   PEND:nc1                     big      720  720 0% art
+   PEND:td1                     big      720  721 0% art
+   PEND:ch1                     big      720  653 9% art
+   PEND:ch2                     big      720  672 7% art
+   PEND:thd1                    big      720  671 7% art
+   PEND:phoenix                 big      720  721 0% art
+   PEND:doanngo                 big      720  721 0% art
+   PEND:trungcuu                big      720  672 7% art
+   PEND:vulan                   big      720  721 0% art
+   PEND:dongchi                 big      720  721 0% art
+   PEND:thbirthday              big      720  647 10% art
+   PEND:ksp                     big      720  690 4% art
+   PEND:prep                    big      720  591 18% art
+   PEND:night1                  big      720  595 17% art
+   PEND:night2                  big      720  638 11% art
+   PEND:giu                     big      720  619 14% art
+   PEND:giftpick                big      720  720 0% art
+   PEND:plantpick               big      720  643 11% art
+   PEND:taintpick               COMPACT  229  225 2% art
+   PEND:evpick                  big      720  720 0% art
+   PEND:shop                    big      720  653 9% art
+   PEND:plantsv                 big      720  720 0% art
+   PEND:j70thr                  big      720  664 8% art
+   PEND:vlget                   big      720  598 17% art
+   PEND:vlcraft                 big      720  571 21% art
+   PEND:vlnvp                   big      720  672 7% art
+   PEND:vlout                   big      720  653 9% art
+   PEND:runner                  big      720  720 0% art
+412x1058 cases 57 widths 384/379 heights 79/189/195/213/222/229/264/290/309/655/720 | missing:  | nofit:  | xOut:  | btnOut: PEND:plantpick | errs 0

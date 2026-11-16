@@ -84,6 +84,26 @@ Recursive on plain JSON:
 5. Anything else (strings, booleans, other arrays, type change) both changed → `A` (host wins).
 Server then sets `C.week = k+1`.
 
+### 4.1 Guest → host requests (client only; review/coop-guest-maid, `dev/build/jcoopask.js`)
+Rule 4 drops a new id made only by seat b under `W`, and rule 5 lets the host win a non-id array (NPC `staff`, `kids`). So anything NEW
+the guest causes in the world goes through the host:
+- New person (her maid catches the Emperor's eye, "Tiến cử … hầu thay", her petition "tuyển nhiều", the new-girl event, the kin who
+  enter with a tiểu thư): on the guest `newRival` gives a TEMP id ≥ 1000. Her `ser()` moves the person out of `R` into a request
+  `{id:"<life>:<temp>", k:"np", t:<temp>, v:<the rival, guest-local ser form>, maid?}` in her own `P.b.S.coopAsk` (and puts it back
+  into `R` as a stand-in on every rebuild until it is answered).
+- New servant she puts into an NPC's staff (her maid bought by a bigger consort, a planted servant): `{k:"srv", to:<npc id>, s}`.
+  A child she took from an NPC: `{k:"kidout", from:<npc id>, name}`.
+  A servant she took out of an NPC household into hers (rank-up gift, a spy taken back): `{k:"srvout", from:<npc id>, sid, name}` (review r1).
+  An NPC household's refill (`fillStaff` / `staffInit`) does not run on the guest (host only), so her copy of the world never invents NPC servants (review r1).
+- New requests are also relayed once at once: `act {k:"ctm-ask", mode:"ask", id, L:[requests]}` (relay only; older clients ignore it).
+- Host: after every rebuild and on the relay (only while its own `end` for the week has not gone), each request is applied once with
+  the solo rule (consort: `roomFor("consort")`, a world id `++rid`, `coopAsk=<request id>`, her links `rl/ro/gp/ep[902]` from v).
+  Answer in its own blob: `P.a.S.askDone[<request id>] = [result, week]` (result 0 = refused), pruned 3 weeks after she closed it.
+- Guest, next rebuild: the rival with `coopAsk` = her request → her links under the temp id (S.rl / S.ro / known "r<id>" / {$r:id}
+  refs / kin .pal) move to the world id, request closed. Refused → her maid comes back to her household.
+- World events that must roll once are muted on the guest (tuyển tú, the triều đình "tuyển" petition, an NPC's maid serving in
+  her place); the host's result reaches her through the merge.
+
 ## 5. Week sync rule
 - Room week `k` starts at 0 when `init` arrives. A client may only `end` week `k`.
 - After sending `end` the client shows the kit waiting panel "Đợi bạn xong tuần" (no acts) until `week` arrives.
@@ -146,3 +166,14 @@ Order per buổi: both play → both `bend` → server `buoi` → each client ru
   and leaves its local friend entry for display.
 - Bot check: bots try harm acts on each other when in the same place. After each buổi both clients' views must agree:
   the victim's own S vs the actor's friend entry (sung, danh, suc, rank, alive).
+
+## 10. Chat (owner 16/11, review/coop-chat; server LIVE `coop-2`)
+Room-scoped (this Durable Object only; no endpoint reads another room), plain text.
+| t | direction | fields |
+|---|---|---|
+| `chat` | client → server | `text` (cut at 300 chars after stripping control / bidi characters, blank ignored), `nm` (sender name, ≤ 24), `g:{y,m,t,b}` (game year, month, tuần, buổi, for the game-style time). Whole frame ≤ 2.4 KB else `error toolarge`; one seat may send once per 350 ms else `error slow`. |
+| `chat` | server → BOTH seats (sender too) | `m:{i,s:"a"|"b",n,x,w,g,ts}` — `i` = per-room increasing id. |
+| `room` | server → client | now also `chat:[m…]` = the last 50 messages (history after reconnect / rejoin). |
+Storage: DO key `chat` (array, last 50). Deleted with the room (30 days idle). Clients escape the text when drawing it; the server stores it raw. Old clients ignore `chat` / `room.chat`.
+Client: `dev/build/jcoopchat.js` (KIT §80). Tests: `coop/worker/test/chat.test.mjs`, `dev/test/coop-chat.js`.
+

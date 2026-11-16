@@ -15,6 +15,28 @@
    A key whose file is not on the CDN (img/_index.json) is skipped (next rule).
    Tap / click on the picture = kitPicZoom(src) (does not choose the option). ============================================================ */
 const KIT_OPT_RULES=[
+ /* review/cycle-art (owner 16/11): the monthly report options (jcycle PEND.cyrep) — before the generic "báo" (tố giác) / "giấu" rules */
+ [/^báo đúng ngày/i,"opt-bao-ky-dung"],[/^báo lùi/i,"opt-bao-ky-lui"],[/^báo sớm/i,"opt-bao-ky-som"],[/^giấu, không báo/i,"opt-bao-ky-giau"],
+ /* review/placeholder-pics3 (D46b): new main content. "thuê thợ thêu" first so it no longer falls to the padlock rule (opt-canh-giu) further down */
+ [/^thuê thợ thêu/i,"opt-thue-tho-theu"],[/^hòa giải/i,"opt-hoa-giai"],[/^răn dạy/i,"opt-ran-day"],[/^xử nghiêng về/i,"opt-xu-nghieng"],
+ [/^bảo hắn giả vờ nhận/i,"opt-phan-gian"],[/^thăng làm người thân cận/i,"opt-than-can"],[/^thử lòng bằng một tin giả/i,"opt-tin-gia"],
+ [/^tin hắn, thưởng/i,"opt-tin-thuong"],[/^tra xem có kẻ/i,"opt-tra-xem"],[/^khéo để ngài thắng/i,"opt-de-thang"],[/^khéo nói xấu/i,"opt-noi-xau"],
+ [/^nói thật, không thêm bớt/i,"opt-thua-trinh"],[/^nói tốt cho/i,"khen-mot-cau-h"],
+ /* review/opt-pics2 (D53): meaning groups that had no picture (hands-only gpt-2-6 paintings, ids dev/figwork/optpics2/gens.txt) + reuse of existing act pictures */
+ [/^(thêu thật kỹ|thêu cờ)/i,"opt-theu-khuya"],[/(thêu chung|^cùng làm)/i,"opt-lam-chung"],
+ [/^(mang canh khuya|sang hầu ngài giữa đêm)/i,"opt-hau-dem"],[/^(ra hồ hầu|theo hầu trọn|tiếp chuyện cả buổi)/i,"opt-hau-ben"],
+ [/^(ngắt hoa dâng|làm thơ vịnh)/i,"opt-dang-hoa-tho"],[/^(chỉ bảo|tận tình chỉ bảo|nghiêm túc góp ý)/i,"opt-chi-bao"],
+ [/^(bỏ tiền mua bù|bỏ bạc may thêm|góp chút ít)/i,"opt-bo-bac"],[/^(bỏ bạc xin xem một quẻ|treo bùa)/i,"opt-bua-que"],
+ [/^(bớt nước cung|phát áo bông)/i,"opt-chia-cung-nhan"],[/^thay hết nước/i,"opt-thay-do"],
+ [/^(ra lệnh phòng bị)/i,"opt-canh-giu"],
+ [/^(cáo bận việc|hẹn hôm khác)/i,"opt-cao-ban"],[/^tránh mặt/i,"opt-tranh-mat"],[/^(giữ lễ, không|giữ phần mình)/i,"opt-giu-le"],
+ [/^(bắt tay với|sang thân thiết)/i,"opt-bat-tay"],[/^đi cùng nàng/i,"opt-di-cung"],[/^lặng lẽ báo cho/i,"opt-thi-tham"],
+ [/^can thái hậu/i,"opt-can-ngan"],[/^khắc dấu/i,"opt-gia-mao"],[/^ra tay trước/i,"opt-ra-tay"],[/^cho người mang đi xa/i,"opt-mang-di-xa"],
+ [/^bánh bột hấp/i,"opt-banh-la"],[/^thử tài trước sứ thần/i,"opt-trinh-dien"],
+ [/^hỏi .*(thái giám|người coi)/i,"do-la-h"],[/^thề thốt/i,"minh-oan-h"],[/^làm như không nghe/i,"lam-nhu-khong-thay-h"],
+ [/^tự tay vào bếp/i,"opt-vao-bep"],[/^thuê đầu bếp/i,"opt-thue-dau-bep"],[/^nhường .* phần đẹp/i,"opt-nhuong-phan-dep"],[/^cho nghỉ/i,"opt-nghi-viec"],
+ [/^bắt làm tiếp/i,"opt-bat-lam-tiep"],[/^nói thật món ăn/i,"opt-noi-that-mon"],[/^[^()]{4,40} \((liều|khó|năm ăn năm thua|khá|chắc|rất chắc|nắm chắc)\)$/i,"opt-mon-an"],
+ [/^nằm yên/i,"o-yen-nghi-h"],[/^ở nhà đọc sách/i,"doc-sach-giai-khuay"],[/^gắng chịu, che mặt/i,"deo-mang-che-h"],
  /* (meaning group → picture key; "opt-*" = painted for this group by review/opt-pics, every other key = an existing act / choice picture reused) */
  /* — leave it / not now — */
  [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|cảm ơn, không cần)/i,"opt-thoi"],
@@ -100,7 +122,13 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
   let src="";if(String(k).startsWith("ev:")||String(k).startsWith("scene:")){try{src=(kbkKeySrc(k,"",t,"")||[])[0]||""}catch(e){}}else src=`img/act-${k}.webp`;
   return src&&kitOptOnCdn(src)?{src,key:k,how}:null};
  let r=null;
+ /* an option that NAMES its person target (Q option field `kgt` = a rival object / "emp" / "th" / "maid") shows that person's kit portrait, whatever its title says (masked "Phi ???" too) */
+ try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];if(o&&o.kgt){const g=o.kgt;const f=g==="emp"?pEmp():g==="th"?pTH():g==="maid"?kitFace(S.maid):pv(g);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}}catch(e){}
  if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
+  /* review/pcard-actrow (owner 16/11 "Hình nhân vật đâu?"): an option that is a PERSON (spy target, gift recipient, invite, accuse, visit … any "chọn người"
+     — it carries that person's kit portrait chip in its title) shows THAT person's portrait (a stranger: the kit silhouette pv gives), never a meaning-group
+     scene picture. Beats the `log` / `rule` groups; a specific act picture (above) still wins. */
+  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-act-/.test(fs))return{src:fs,key:"",how:"face",face:true}}catch(e){}
   try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
   for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
  /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
@@ -111,7 +139,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* a picture the option already carries: that picture, in the slot */
  if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-act-/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
- if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
+ if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
@@ -122,7 +150,7 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
  const p=kitOptPic(name,b);
  /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
- kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());
+ kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());b.querySelectorAll(":scope > .md").forEach(e=>e.remove());
  if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
  let cat="";try{cat=typeof kitActCat==="function"?kitActCat(name):""}catch(e){}const col=(typeof KIT_CAT!=="undefined"&&KIT_CAT[cat]||[])[1]||"";
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
@@ -144,7 +172,7 @@ document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
 #kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
-#kpzoom .kpzf{width:min(78vw,calc(82vh * 3 / 4),506px)}
+#kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
 ${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):""}
@@ -152,12 +180,16 @@ ${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):
    rows a thin column). Overrides jk3 31.16 k3grid and the person-dialog 2-column rules (jk4 32.7 / KIT 50 kdpo2, jplace): :is(#mb,*) +
    the repeated class only lift the specificity above theirs (2 ids, 5 classes). */
 html body #modal :is(#mb,*)>.opts.opts.opts>button.ka.kopt.kart{grid-column:1/-1!important;order:0!important}
-html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body #modal :is(#mb,*)>.kpscopts.kpscopts.kpscopts:has(> button.ka.kopt.kart),.kitpg-opts:has(> button.ka.kopt.kart){display:grid!important;flex-direction:unset!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;align-items:stretch!important;align-content:start!important}
+html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body #modal :is(#mb,*)>.kpscopts.kpscopts.kpscopts:has(> button.ka.kopt.kart),.kitpg-opts:has(> button.ka.kopt.kart){display:grid!important;flex-direction:unset!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:max-content!important;align-items:stretch!important;align-content:start!important}
 /* equal sizes: a row is never lower than the picture + padding (the options area scrolls, KIT 32.5: a "1fr" row would be squeezed into
    its height), so cards with the usual rows are all the same height; a card with more text grows, never clips */
 html body button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important;box-sizing:border-box}
 /* review/opt-pics r1: the person dialog (jk4 32.7 .kdper) sets min-height:max-content on every option (2 ids, 3 classes); in its short
    scrolling grid at 844x390 that let the rows shrink to 41 px and the 130 px cards OVERLAPPED. The picture floor must win there too. */
+/* review/pcard-actrow: a person dialog (kdper, picture/figure column left) lists its option rows as a FLEX COLUMN: in the grid form above the auto rows stayed at the 130 px floor
+   while a long row (Cần / Được / Mất) overflowed its box and was cut (spy-target picker, 755 px) */
+html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts:has(> button.ka.kopt.kart){display:flex!important;flex-direction:column!important;grid-template-columns:none!important;gap:8px!important}
+html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts>button.ka.kopt.kart{flex:0 0 auto!important;height:auto!important}
 html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
 `;document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
@@ -165,3 +197,8 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
+ `<div class="pc"><div class="pcr"><div class="pcb">`+
+ [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, chứng cứ +1 · mất: thiện cảm -5"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+  .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}

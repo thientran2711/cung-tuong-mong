@@ -48,7 +48,7 @@ function kitCoins(dir,n,from){if(!krOn()||krStill()||!(n>0))return;const R=(type
   if(dir==="out"){const ex=c.x+sx*3+(i%2?40:-40),ey=c.y+90+(i%3)*30;K=[{transform:`translate(${c.x-12}px,${c.y-12}px) scale(.7)`,opacity:1},{transform:`translate(${(c.x+ex)/2-12}px,${c.y-30}px) scale(1)`,opacity:1,offset:.35},{transform:`translate(${ex-12}px,${ey}px) scale(.8) rotate(${i%2?90:-90}deg)`,opacity:0}]}
   else K=[{transform:`translate(${f.x+sx-12}px,${f.y-12}px) scale(.8)`,opacity:0},{transform:`translate(${f.x+sx-12}px,${f.y-40}px) scale(1)`,opacity:1,offset:.25},{transform:`translate(${c.x-12}px,${c.y-12}px) scale(.6)`,opacity:.9}];
   const an=im.animate(K,{duration:d,delay:dl,easing:"cubic-bezier(.45,.05,.4,1)",fill:"both"});an.onfinish=()=>im.remove()}
- if(cell){const cls=dir==="out"?"kfhit-r":"kfhit";setTimeout(()=>{cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(cls);setTimeout(()=>cell.classList.remove(cls),700)},dir==="out"?120:(R.coins||900)+cnt*70-120)}
+ if(cell){const cls=dir==="out"?"kfhit-r":"kfhit";setTimeout(()=>{cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(cls);setTimeout(()=>cell.classList.remove(cls),2700)},dir==="out"?120:(R.coins||900)+cnt*70-120)}
  try{if(typeof sfx==="function")sfx("sfx-coin")}catch(e){}}
 /* one item tile leaving from the Tư trang tab: "away" (sold), "give" (given), "fall" (faded away) */
 function krFly(I,mode,i){if(krStill())return null;const R=(typeof BAL==="object"&&BAL.reveal)||{};const p=krBagPt();const w=document.createElement("div");w.className="klsfly";
@@ -83,11 +83,11 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
 .krev>.kitem>.kitg{display:none}
-.krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp .4s calc(var(--krise)*.6) ease-out both}
-.krev>.kgchip{position:relative;animation:krevUp .4s calc(var(--krise)*.8) ease-out both}
+.krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
+.krev>.kgchip{position:relative;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
 .krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
-.krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp .4s var(--kok,900ms) ease-out both}
-.krev.krev-out{animation:krevOut var(--kshelf,380ms) ease-in forwards}
+.krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
+.krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
 @keyframes krevBurst{0%{transform:scale(.2);opacity:0}35%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:.85}}
 @keyframes krevBreath{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 @keyframes krevRise{from{transform:translateY(60px) scale(.35);opacity:0}to{transform:none;opacity:1}}
@@ -98,13 +98,13 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .kcoinfly{position:fixed;left:0;top:0;width:24px;height:auto;z-index:9470;pointer-events:none;will-change:transform,opacity}
 /* §54.2 lose card: the item(s) fade, grey and fall a little inside the notice card */
 .klspic{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.klsfall{animation:klsFall var(--klfall,1.3s) ease-in .35s both}
+.klsfall{animation:klsFall var(--klfall,calc(1.3s*var(--pace))) ease-in calc(.35s*var(--pace)) both}
 @keyframes klsFall{0%{transform:none;opacity:1;filter:none}100%{transform:translateY(16px) rotate(7deg);opacity:.42;filter:grayscale(1)}}
 @media (prefers-reduced-motion:reduce){.krev *,.krev,.klsfall,.krevok{animation:none!important}.klsfall{opacity:.5;filter:grayscale(1)}.krevfly,.klsfly,.kcoinfly{display:none!important}}
 .kf-still .krev *,.kf-still .krev,.kf-still .klsfall,.kf-still .krevok{animation:none!important}
 `;document.head.appendChild(st)})();
 /* kit sample page (#kit, jkitpage): §54.1 grade chips + one reveal spotlight, §54.2 the lose card picture */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
- {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} ${kitGradeChip(1,{size:"sm"})}</div>`+
+ {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",where:"<b>ONE chip part</b> <code>kitGradeChip(grade,{size,name,extra})</code> in two sizes, never two parts: <b>normal</b> = under the item name on the reveal card (kitGain / kitReward), item detail, lists; <b>sm</b> (<code>size:\"sm\"</code>) = the grade tag laid over an item picture / inside a tight row (kitItem tile, Tư trang, week-book rows). Rows below: normal chips, a normal chip with a maker note, then the sm chip.",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} <span class="kitpg-w" style="margin:0 0 0 14px;padding-left:12px;border-left:1px solid var(--k-hair)">chip cỡ NHỎ (<code>size:"sm"</code>, cùng một chip, dùng làm nhãn đề trên ảnh vật phẩm) →</span>${kitGradeChip(1,{size:"sm"})}</div>`+
   `<div class="kitpg-row" style="background:#1a0f0acc;padding:14px;border-radius:8px">${kitRevealHTML(kitItemInfo("nhansam"),{from:"Thái hậu ban"})}</div>`},
  {id:"§54.2",title:"kitLose: thẻ mất đồ (món mờ dần, rơi)",html:()=>`<div class="kitpg-row"><span class="klspic">${["vongngoc","tramngoc"].map((k,i)=>{const I=kitItemInfo(k);return kitItem({src:I.src,name:I.name,grade:I.grade,size:"lg"}).replace('class="kitem ','class="kitem klsfall ')}).join("")}</span></div>`})}catch(e){}

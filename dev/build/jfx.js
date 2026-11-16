@@ -42,11 +42,20 @@ const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi s
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
- festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ festival:{                                   px:"lanterns",light:"fireworks"}, // Tết / Giao thừa tối: sky lanterns + fireworks (only via FESTFX)
  letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
+/* festival / night effects: ONE table, effect -> which festivals (FEST keys, j31) and which buổi it may play in (null = any buổi). Owner 11/16: every effect must match the CURRENT buổi and the CURRENT event;
+   fireworks ONLY on Tết and Giao thừa evenings (owner: an ordinary evening with fireworks feels wrong; Tết/Giao thừa with them is normal); indoor/outdoor does not matter. A festival or buổi not listed gets nothing. B4L = tối (named constant, never a raw index). */
+const FESTFX={
+ festival:{fest:["newyear","giaothua"],buoi:[B4L]},                 /* one-shot sky lanterns + fireworks (kitFx "festival") */
+ lantern:{fest:["nguyentieu","trungthu"],buoi:[B4L]},                /* one-shot sky lanterns (kitFx "lantern"), once per night */
+ gold:{fest:["newyear","giaothua","nguyentieu"],buoi:null},          /* gold/red sparks (j33 pxKind) */
+ fly:{fest:["thattich","trungthu"],buoi:[B4L]}};                     /* fireflies (j33 pxKind) */
+function kfFestFx(e){try{if(typeof S==="undefined"||!S||S.dead||typeof festToday!=="function")return false;const T=FESTFX[e],f=festToday();return !!(T&&f&&T.fest.includes(f.k)&&(!T.buoi||T.buoi.includes(S.buoi||0)))}catch(x){return false}}
+window.FESTFX=FESTFX;window.kfFestFx=kfFestFx;
 function kfOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
 function kfStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.getBoundingClientRect?o.el:null;if(el){const r=el.getBoundingClientRect();if(r.width)return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
@@ -85,7 +94,7 @@ function kfTex(){}
 const KF_ALIAS={glow:"orb",star:"spark",blob:"smoke",petal:"petal-plum"};
 function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
 const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?["petal-peach","petal-plum"]:m<=6?["petal-lotus"]:m<=9?["leaf","osmanthus"]:["snow","snow","petal-plum"]};
-function kfBudget(n){const w=innerWidth<700?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
+function kfBudget(n){const w=kitView().pages===1?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
 const R01=()=>Math.random(),RS=(a,b)=>a+Math.random()*(b-a);
 const KF_SPAWN={
  rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
@@ -102,27 +111,27 @@ const KF_SPAWN={
    const gl=kfSp("orb",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.5,sway:.25,lant:1},0xffa040,sc*1.4);const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.rotation=RS(-.12,.12);l.v.ph=gl.v.ph}},
  pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("spark",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},null,RS(.35,.6)).rotation=0}},
  brush(p){const n=Math.min(2,kfBudget(2));for(let i=0;i<n;i++){const s=kfSp("brush",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(34,44),fade:"out",a0:.92,grow:.004},null,RS(3.2,4.2));s.rotation=RS(-.5,.2)}},
- goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-gold",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
  golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
  jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
  incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
  lotus(p){kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
  peach(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.5,.3),vy:RS(1.1,2),life:RS(150,210),spin:RS(-.05,.05),sway:.9,fade:"inout"},null,RS(.8,1.3))},
- letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]},
- season(){const K=KF_SEASON(),k=K[Math.floor(R01()*K.length)];kfSp(k,RS(0,innerWidth),-12,{vx:RS(-.35,.25),vy:RS(.55,1),life:Math.round(innerHeight/.6)+60,spin:RS(-.03,.03),sway:.9,fade:"inout",a0:.9,amb:1},null,RS(.7,1.15))}
+ letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]}
 };
 /* painted kinds each spawner needs (loaded before it runs); other modules adding KF_SPAWN kinds add their row here */
 const KF_PET=()=>{const s=KF_SEASON();return s[0]==="snow"?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s};
 const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:["ink"],flowers:["petal-peach","petal-plum","osmanthus"],petals:()=>KF_PET(),
- motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],season:()=>KF_SEASON(),
- brush:["brush"],goldpetals:["petal-gold"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
+ motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],
+ brush:["brush"],goldpetals:["petal-peach"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
 function kfKinds(name){const k=KF_KINDS[name];return typeof k==="function"?k():(k||[])}
 function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
 function kfWake(){const a=KFX.app;if(!a)return;if(a.canvas.style.display==="none")a.canvas.style.display="";if(!a.ticker.started)a.ticker.start()}
-function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,L=KFX.parts;let amb=0;
+function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,L=KFX.parts;let amb=0;KFX.gt=(KFX.gt||0)+d/60;KFX.gust=Math.max(0,Math.sin(KFX.gt*.7))*1.6;
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
-  if(v.life<=0||(v.amb&&s.y>H+20)){kfkFree(s);L.splice(i,1);continue}
-  v.ph+=.03*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
+  if(v.life<=0||(v.amb&&(v.lay==="wx"&&KFX.sr?(s.y>KFX.sr.y+KFX.sr.h+20||s.y<KFX.sr.y-90||s.x<KFX.sr.x-90||s.x>KFX.sr.x+KFX.sr.w+90):(s.y>H+20||s.y<-90||s.x<-90||s.x>W+90)))){kfkFree(s);L.splice(i,1);continue}
+  if(v.fx!=null){if(KFX.sr){s.x=KFX.sr.x+v.fx*KFX.sr.w;s.y=KFX.sr.y+v.fy*KFX.sr.h}v.ph+=.03*d;s.alpha=v.a0*(.7+.3*Math.sin(v.ph*3));continue}
+  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);s.alpha=Math.max(0,a);
   if(v.amb)amb++}
@@ -130,25 +139,87 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
  /* quality: frames slower than ~48 fps for half a second → fewer particles; steady 58+ for 4 s → back up */
  const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<48){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>58){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
  if(!L.length&&!KFX.ambOn){KFX.app.ticker.stop();KFX.app.renderer.render(KFX.app.stage);KFX.app.canvas.style.display="none"}}
-/* ambient: seasonal petals / leaves drift over HER palace (home), sparse, only while nothing covers the screen */
-function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&S.place==="home"&&!kfStill()&&!document.hidden&&kfOn()&&(!document.getElementById("modal")||document.getElementById("modal").hidden)&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
-let kfAmbT=0;function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfAmbT);kfAmbT=0;return}
- if(kfAmbT)return;kfApp().then(()=>kfkLoad(kfKinds("season"))).then(()=>{if(kfAmbT||!kfAmbWant())return;kfWake();const cap=()=>Math.max(3,Math.round((innerWidth<700?6:10)*KFX.q));
-  KF_SPAWN.season();kfAmbT=setInterval(()=>{if(!kfAmbWant()){KFX.ambOn=false;clearInterval(kfAmbT);kfAmbT=0;return}if(KFX.amb<cap()){KF_SPAWN.season();kfWake()}},1400)}).catch(()=>{})}
+/* TWO kit layers on the ONE jfx Pixi canvas (#kfxcv: painted sprites only, pointer-events none; owner 16/11):
+   (1) WEATHER ("wx"): today's weather S.wx (j12 WX) — rain, snow, mist, weather petals / leaves, night fireflies — clipped to the STAGE rectangle (Pixi mask),
+       its own bolder look (bigger, denser, wind gusts). j11's stage layer no longer makes weather particles.
+   (2) SEASON ("se"): the month's petals / lotus / leaves / snow (KF_SEASON) over the WHOLE screen, sparse + translucent so text stays readable. Over the
+       stage rectangle it hides itself while the weather is the same kind of falling thing (never two copies of petals at once).
+   Night = a slight dim only (colour kept). Gọn / reduced motion (kfStill) = none. Both capped (KF_WX cap x phone x adaptive KFX.q, plus KFK_CAP). */
+const KF_WX={
+ petal:{k:["petal-peach","petal-plum"],cap:22,vx:[.2,1],vy:[1.2,2.2],sway:1,spin:.07,sc:[1.5,2.3],a0:.88,gust:1,fall:1},
+ leaf:{k:["leaf"],cap:16,vx:[0,.8],vy:[1.2,2],sway:1.1,spin:.05,sc:[1.4,2],a0:.9,gust:.8,fall:1},
+ wind:{k:["leaf"],cap:20,vx:[2,3.4],vy:[.6,1.3],sway:.5,spin:.09,sc:[1.2,1.9],a0:.9,gust:1.3,fall:1,fromLeft:1},
+ snow:{k:["snow"],cap:28,vx:[-.3,.3],vy:[.7,1.3],sway:.6,spin:.02,sc:[1,1.8],a0:.9,gust:.3,fall:1},
+ snowh:{k:["snow"],cap:48,vx:[-1,.2],vy:[1.2,2.2],sway:.7,spin:.02,sc:[1,1.9],a0:.9,gust:.6,fall:1},
+ frost:{k:["snow"],cap:10,vx:[-.2,.2],vy:[.4,.8],sway:.4,spin:.01,sc:[.8,1.2],a0:.75,fall:1},
+ snowp:{k:["snow","snow","petal-plum"],cap:26,vx:[-.3,.5],vy:[.7,1.4],sway:.7,spin:.03,sc:[1.1,1.9],a0:.9,gust:.5,fall:1},
+ drizzle:{k:["streak"],cap:38,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
+ storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
+ mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
+ fly:{k:["orb"],cap:10,vx:[-.3,.3],vy:[-.3,.3],sway:.6,a0:.8,float:1,tint:0xfff07a,sc:[.3,.5],life:[240,420]},
+ gold:{k:["petal-peach"],cap:20,vx:[-.3,.3],vy:[.8,1.5],sway:.8,spin:.05,sc:[1,1.6],a0:.85,gust:.4}
+};
+function kfWxCfg(){try{if(typeof S==="undefined"||!S)return null;const w=S.wx?S.wx.k:"dust",night=(S.buoi||0)===B4L,nm=S.wx?S.wx.n:"";let id=null;
+ if(w==="petal"||w==="leaf"||w==="wind"||w==="snow"||w==="snowh"||w==="frost"||w==="snowp"||w==="storm")id=w;else if(w==="rain")id="drizzle";else if(w==="mist")id="mist";
+ else if(night&&(w==="dust"||nm==="đom đóm"))id="fly";
+ /* festival days (was code-drawn in j33 via pxKind): which festival and which buổi come ONLY from the FESTFX table (gold / fly rows); indoor/outdoor does not matter; replaces the weather as before */
+ try{if(kfFestFx("gold"))id="gold";else if(kfFestFx("fly"))id="fly"}catch(e){}
+ if(!id)return null;const c=Object.assign({lay:"wx"},KF_WX[id]);c.id=id;c.night=night;return c}catch(e){return null}}
+function kfSeCfg(){return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.5,.9],sway:.9,spin:.03,sc:[.7,1.05],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
+function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
+function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
+ if(!KFX.wroot){KFX.wroot=new P.Container();KFX.wmask=new P.Sprite(P.Texture.WHITE);KFX.wroot.mask=KFX.wmask;KFX.app.stage.addChild(KFX.wroot,KFX.wmask)}  /* clip = a plain white rectangle sprite, not art */
+ if(r){KFX.wmask.x=r.x;KFX.wmask.y=r.y;KFX.wmask.width=r.w;KFX.wmask.height=r.h}else{KFX.wmask.width=0;KFX.wmask.height=0}}
+function kfWxCap(c){const q=KFX.q,m=(kitView().pages===1?.65:1),box=c.lay==="wx"&&KFX.sr?Math.min(1,KFX.sr.w*KFX.sr.h/(innerWidth*innerHeight*.5)):1;return Math.max(2,Math.round(c.cap*m*q*Math.max(c.rain?.75:.4,box)))}
+function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth,h:innerHeight};if(!sr)return;const k=c.k[Math.floor(R01()*c.k.length)],vx=RS(c.vx[0],c.vx[1]),vy=RS(c.vy[0],c.vy[1]),sc=RS(c.sc[0],c.sc[1]),a0=c.a0*(c.night?.82:1);let x,y,v;
+ if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1}}
+ else{x=c.fromLeft?sr.x+RS(-60,sr.w*.7):sr.x+RS(-.04,1.04)*sr.w;y=scatter?sr.y+RS(0,sr.h):sr.y+RS(-30,-8);v={vx,vy,life:Math.ceil((sr.h+140)/vy)+60,sway:c.sway||0,spin:c.rain?0:RS(-c.spin,c.spin),fade:"none",a0,amb:1}}
+ v.lay=c.lay;if(c.gust)v.gust=c.gust;if(c.fall&&c.lay==="wx")v.fam=1;
+ const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;
+ if(c.rain){const z=Math.max(.7,Math.min(1,sr.h/520));/* streak length follows the stage height (short stage on a phone in landscape) */s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*2.6*z,s.v.sc*3*z);s.blendMode="normal"}else if(c.float)s.rotation=0;
+ if(c.lay==="wx"&&KFX.wroot)KFX.wroot.addChild(s)}
+function kfWxClear(lay,ms){for(const s of KFX.parts)if(s.v&&s.v.amb&&(!lay||s.v.lay===lay)){s.v.fade="out";s.v.max=ms||40;s.v.life=Math.min(s.v.life,ms||40)}}
+function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&!kfStill()&&!document.hidden&&kfOn()&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
+let kfAmbT=0;
+function kfAmbLive(lay){let n=0;for(const s of KFX.parts)if(s.v&&s.v.amb&&s.v.lay===lay&&s.v.fade!=="out")n++;return n}
+/* night decoration on the stage (moved from j11's code-drawn dots): warm lantern glows + stars, PAINTED orb / spark sprites */
+function kfDecoClear(){for(const s of KFX.parts)if(s.v&&s.v.deco)s.v.life=0}
+function kfDeco(){let key="";try{if(typeof S!=="undefined"&&S&&(S.buoi||0)===B4L&&KFX.sr){const P=placeOf(S.place);key=P.sc+"|"+(["vuon","lc","home"].includes(P.sc)?1:0)}}catch(e){}
+ if(KFX.decoK===key)return;KFX.decoK=key;kfDecoClear();if(!key)return;const out=key.endsWith("|1");
+ kfkLoad(["orb","spark"]).then(()=>{if(KFX.decoK!==key)return;[[.12,.3],[.88,.3],[.3,.18],[.7,.18]].forEach(([x,y],i)=>{const s=kfSp("orb",0,0,{life:1e9,max:1e9,a0:.5,fade:"none",deco:1,fx:x,fy:y,lay:"wx"},0xffb050,2.2);if(s&&s.v&&s.v.max)KFX.wroot&&KFX.wroot.addChild(s)});
+  if(out)for(let i=0;i<14;i++){const s=kfSp("spark",0,0,{life:1e9,max:1e9,a0:.8,fade:"none",deco:1,fx:Math.random(),fy:Math.random()*.25,lay:"wx"},null,.3);if(s&&s.v&&s.v.max)KFX.wroot&&KFX.wroot.addChild(s)}kfWake()}).catch(()=>{})}
+function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfAmbT);kfAmbT=0;if(KFX.amb)kfWxClear();kfDecoClear();KFX.decoK="";return}
+ if(kfAmbT)return;kfAmbT=-1;kfApp().then(()=>kfkLoad(kfSeCfg().k)).then(()=>{if(kfAmbT!==-1)return;if(!kfAmbWant()){kfAmbT=0;return}kfWake();KFX.keys={};
+  kfAmbT=setInterval(()=>{if(!kfAmbWant()){KFX.ambOn=false;clearInterval(kfAmbT);kfAmbT=0;kfWxClear();kfDecoClear();KFX.decoK="";return}kfWxSync();
+   let se=kfSeCfg();const w=kfWxCfg();const L=[];
+   /* ONE petal effect: falling weather of the SAME kind as the season (peach/plum in spring, leaves in autumn, snow in winter) IS the season layer, full screen, in the weather's bolder motion but gentler count/size */
+   if(w&&w.fall&&w.k.some(k=>se.k.includes(k))){se=Object.assign({},w,{lay:"se",cap:Math.round(w.cap*.55),sc:[w.sc[0]*.7,w.sc[1]*.7],a0:Math.min(.8,w.a0)});L.push(se)}
+   else{L.push(se);if(w&&KFX.sr)L.push(w)}
+   if(!L.some(c=>c.lay==="wx")&&KFX.keys.wx){KFX.keys.wx="";kfWxClear("wx",60)}
+   kfDeco();
+   for(const c of L){const key=c.id+"|"+c.night+"|"+c.k.join();
+    if(key!==KFX.keys[c.lay]){const first=!KFX.keys[c.lay];KFX.keys[c.lay]=key;if(!first)kfWxClear(c.lay,90);kfkLoad(c.k).then(()=>{const n=Math.round(kfWxCap(c)*(c.float?.5:.7));if(!c.float)for(let i=0;i<n;i++)kfWxSpawn(c,true);kfWake()}).catch(()=>{});continue}
+    let cap=kfWxCap(c);
+    const n=Math.min(c.rain?12:1,cap-kfAmbLive(c.lay));for(let i=0;i<n;i++)kfWxSpawn(c,false);if(n>0)kfWake()}},250)}).catch(()=>{kfAmbT=0})}
 /* ---------- numbers fly from the result card into their top-bar cell ---------- */
 const KF_CELL={sung:"hud-sung",danh:"hud-danh",suc:"hud-suc",bac:"hud-bac",duc:"hud-duc",sac:"hud-sac",tai:"hud-tai",tamco:"hud-tamco"};
-function kfNumbers(card,before){if(!card||!before||kfStill()||typeof S==="undefined"||!S)return;const keys=typeof RKEYS!=="undefined"?RKEYS:[];const L=[];
+function kfNumbers(card,before){if(!card||!before||typeof S==="undefined"||!S)return;const keys=typeof RKEYS!=="undefined"?RKEYS:[];const L=[];
  for(const [k,n] of keys){const dv=(S[k]||0)-(before[k]||0);if(dv)L.push([k,n.replace(/ với ngươi$/,""),dv])}if(!L.length)return;
- document.querySelectorAll(".kmfls").forEach(e=>e.remove());const r=card.getBoundingClientRect();if(!r.width)return;
- L.slice(0,7).forEach(([k,n,dv],i)=>{const sp=document.createElement("span");sp.className="kfnum "+(dv>0?"g":"r");sp.textContent=`${n} ${dv>0?"+":"−"}${Math.abs(dv)}`;document.body.appendChild(sp);
-  const w=sp.offsetWidth,h=sp.offsetHeight,x0=r.left+r.width/2-w/2+(i-(Math.min(L.length,7)-1)/2)*Math.min(90,r.width/Math.min(L.length,7)),y0=Math.max(4,r.top-h-6);
-  const cell=KF_CELL[k]&&document.getElementById(KF_CELL[k]);const cr=cell&&cell.getBoundingClientRect();const ok=cr&&cr.width&&cr.bottom>0&&cr.top<innerHeight;
-  const x1=ok?cr.left+cr.width/2-w/2:x0,y1=ok?cr.top+cr.height/2-h/2:y0-60;const delay=200+i*130;
-  const an=sp.animate([{transform:`translate(${x0}px,${y0+14}px) scale(.6)`,opacity:0},{transform:`translate(${x0}px,${y0-8}px) scale(1.08)`,opacity:1,offset:.22},{transform:`translate(${x0}px,${y0-12}px) scale(1)`,opacity:1,offset:.4},{transform:`translate(${x1}px,${y1}px) scale(${ok?.72:1})`,opacity:ok?1:0,offset:.94},{transform:`translate(${x1}px,${y1}px) scale(.6)`,opacity:0}],{duration:ok?1300:1500,delay,easing:"cubic-bezier(.45,.05,.4,1)",fill:"both"});
-  an.onfinish=()=>{sp.remove();if(ok){cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(dv>0?"kfhit":"kfhit-r");setTimeout(()=>cell.classList.remove("kfhit","kfhit-r"),700);if(KFX.app)KF_SPAWN.pop&&kfPx("pop",{x:cr.left+cr.width/2,y:cr.top+cr.height/2})}}})}
+ document.querySelectorAll(".kmfls").forEach(e=>e.remove());const r=card.getBoundingClientRect();if(!r.width||typeof kitStatFx!=="function")return;
+ /* KIT §57.1 kitStatFx: name + delta label flies slowly (queued, tap skips) to its top-bar cell, which glows green / red and pulses */
+ const n=Math.min(L.length,7);kitStatFx(L.slice(0,7).map(([k,nm,dv],i)=>({k,name:nm,dv,from:{x:r.left+r.width/2,y:r.top}})),{src:"card"})}
 /* ---------- touch kit ---------- */
-const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]';
+/* no bare [data-tab]: the tab PANEL #panel carries data-tab="<tab>" too (that matched the whole pane: owner 15/11); the tab buttons are <button> */
+const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"]';
 const KF_FIG="#me,#emp,.tok";
+/* the REAL tappable element under the finger (owner 15/11 "Whole tab panel bounces on any tap"): a .card / .pct / anything in KF_TAP that is
+   only a container (no button, role, onclick or pointer cursor) is never pressed — the search goes on to a real tappable ancestor;
+   and nothing bigger than KF_BIG of the screen is ever pressed (a pane, a tab panel, a whole-screen catcher). null = no press at all. */
+/* KF_BIGR (r1): a REAL button may be big — an act card on a phone in landscape (844x390) is ~45% of the screen and must still press */
+const KF_REAL='button,a[href],.btn,.kbtn,.opt,[role="button"],[role="tab"],[onclick]',KF_BIG=.3,KF_BIGR=.7;
+function kfTapOf(t){let el=t&&t.closest?t.closest(KF_TAP):null;
+ while(el&&!(el.matches(KF_REAL)||typeof el.onclick==="function"||getComputedStyle(el).cursor==="pointer"))el=el.parentElement?el.parentElement.closest(KF_TAP):null;
+ if(!el)return null;const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*(el.matches(KF_REAL)?KF_BIGR:KF_BIG))return null;return el}
 function kfDis(el){return el.disabled||el.classList.contains("kdis")||el.getAttribute("aria-disabled")==="true"}
 function kfWhy(el){const w=[...el.querySelectorAll(".kwhy:not(.kok)")].map(x=>x.textContent.replace(/^[✗✓]\s*/,"").trim()).filter(Boolean);return w[0]||el.getAttribute("title")||el.dataset.why||""}
 function kfRipple(el,e){const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*.45)return;const cs=getComputedStyle(el);
@@ -164,22 +235,24 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
  const onDown=e=>{if(e.button>0)return;const t=e.target;if(!t||!t.closest)return;
   /* locked: the event target can be the disabled button itself (Chrome, Safari pointer events) */
   const lk=t.closest('button:disabled,.kdis,[aria-disabled="true"]');if(lk&&lk.closest(KF_TAP)){kfLocked(lk,e);return}
-  const el=t.closest(KF_TAP);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
+  const el=kfTapOf(t);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
  const onUp=()=>{const el=down;down=null;if(!el)return;el.classList.remove("kfdown");if(kfStill()||!el.isConnected||!el.animate||el.classList.contains("tok"))return;
   try{el.animate([{scale:".96"},{scale:"1.025",offset:.55},{scale:"1"}],{duration:240,easing:"ease-out"})}catch(x){}};
  document.addEventListener("pointerdown",onDown,{capture:true,passive:true});document.addEventListener("pointerup",onUp,{capture:true,passive:true});document.addEventListener("pointercancel",onUp,{capture:true,passive:true});
  /* browsers that swallow pointer events on disabled buttons still deliver the click/touch to the parent: hit-test the locked buttons there */
  document.addEventListener("click",e=>{const t=e.target;if(!t||!t.querySelectorAll||t.closest(KF_TAP))return;for(const b of t.querySelectorAll('button:disabled')){const r=b.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){kfLocked(b,e);break}}},true)})();
 /* sliding underline under the selected tab (main tabs, person-card tabs, sub-tabs) */
-const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]'],[".pctabs",".pct.on"],[".ksubs",".ksubb.on"]];const KF_TPOS={};
-function kfTabs(){for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).forEach(c=>{const a=c.querySelector(as);let ln=c.querySelector(":scope>.kftl");
+/* tab-underline (C39): ONLY the main nav gets the sliding line. Chip rows (.pctabs/.kcattabs, scroll sideways) and .ksub rows mark the selected chip themselves (filled chip / inset underline), so a JS-positioned line drawn over a scrolling row went stale and struck through the chips */
+const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]']];const KF_TPOS={};
+function kfTabsClean(){document.querySelectorAll(".kftl").forEach(l=>{if(!l.parentElement||!l.parentElement.matches("#tabs"))l.remove()})}
+function kfTabs(){kfTabsClean();for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).forEach(c=>{const a=c.querySelector(as);let ln=c.querySelector(":scope>.kftl");
   if(!a||!a.offsetWidth){if(ln)ln.style.opacity="0";return}
   if(getComputedStyle(c).position==="static")c.style.position="relative";
   const cr=c.getBoundingClientRect(),ar=a.getBoundingClientRect(),x=ar.left-cr.left-c.clientLeft+c.scrollLeft,w=ar.width,y=ar.bottom-cr.top-c.clientTop+c.scrollTop-3;const key=cs+"|"+(c.id||"");
   if(!ln){ln=document.createElement("i");ln.className="kftl";c.appendChild(ln);const p=KF_TPOS[key];if(p){ln.style.transition="none";ln.style.transform=`translate(${p[0]}px,${y}px)`;ln.style.width=p[1]+"px";void ln.offsetWidth;ln.style.transition=""}}
   ln.style.opacity="1";ln.style.transform=`translate(${x}px,${y}px)`;ln.style.width=w+"px";KF_TPOS[key]=[x,w]})}}
 let kfTabQ=0;function kfTabsSoon(){if(kfTabQ)return;kfTabQ=requestAnimationFrame(()=>{kfTabQ=0;try{kfTabs()}catch(e){}})}
-document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.closest("[data-tab],.pct,.ksubb"))setTimeout(kfTabsSoon,30)},true);addEventListener("resize",kfTabsSoon);
+document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.closest("button[data-tab],.pct,.ksubb"))setTimeout(kfTabsSoon,30)},true);addEventListener("resize",kfTabsSoon);
 /* ---------- wiring into the game ---------- */
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
  const MAP={good:"mgwin",bad:"mglose"};
@@ -200,24 +273,25 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  W("kitSheetTurn",o=>function(){try{if(kfOn())vib("tap")}catch(e){}return o.apply(this,arguments)});
  /* render: tabs underline, ambient petals at home, festival-night lanterns once per night */
  W("render",o=>function(){const r=o.apply(this,arguments);try{KFX.ambOK=true;kfTabsSoon();kfAmbient();
-   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("festival"),600)}}}catch(e){console.error(e)}return r});
+   const fe=kfOn()?["festival","lantern"].find(kfFestFx):null;if(fe){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx(fe),600)}}}catch(e){console.error(e)}return r});
  document.addEventListener("visibilitychange",()=>{try{if(KFX.app){if(document.hidden)KFX.app.ticker.stop();else if(KFX.parts.length)KFX.app.ticker.start()}kfAmbient()}catch(e){}});
  /* a modal closing / overlay leaving lets the ambient petals back */
  setInterval(()=>{try{if(KFX.ambOK&&!kfAmbT&&kfAmbWant())kfAmbient()}catch(e){}},2500)})();
 /* ---------- CSS ---------- */
 (function(){const st=document.createElement("style");st.id="kfx";st.textContent=`
 :root{--kf-gold:#f0d070;--kf-rim:0 0 0 1px #f0d070b0,0 0 12px #f0d07055}
-/* press: scale .96 (the individual 'scale' property, so an element's own transform is kept), shadow pulls in, gold rim light */
-:is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
-:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):is(:active,.kfdown){scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
-.kbtn:not(:disabled):is(:active,.kfdown){scale:.96;box-shadow:inset 0 0 0 1px #f0d07099,var(--kf-rim)}
-@media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct,[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
+/* press: ONLY the .kfdown class that kfTapOf puts on the real tappable element (never CSS :active, which also matches every ancestor of
+   the finger, e.g. the whole tab panel); scale .96 (the individual 'scale' property, so an element's own transform is kept), shadow pulls in, gold rim light */
+:is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
+:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok).kfdown{scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
+.kbtn:not(:disabled).kfdown{scale:.96;box-shadow:inset 0 0 0 1px #f0d07099,var(--kf-rim)}
+@media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
  .kbtn:not(:disabled):hover{box-shadow:inset 0 0 0 1px #f0d07066,0 0 0 1px #f0d07070,0 0 8px #f0d07033}}
 /* people on the stage (her #me, stage figures .tok, Hoàng thượng #emp): no box press / rim / ripple / tap highlight — a rectangle over a
    figure is wrong (owner 16:40Z); they answer with j59's own figure animation */
 :is(#me,#emp,.tok){-webkit-tap-highlight-color:transparent}
 .kfrip{position:fixed;z-index:9460;pointer-events:none;overflow:hidden}
-.kfrip i{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff3c4aa 0,#f0d07055 40%,#f0d07000 70%);transform:scale(0);opacity:.9;animation:kfRip .6s ease-out forwards}
+.kfrip i{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff3c4aa 0,#f0d07055 40%,#f0d07000 70%);transform:scale(0);opacity:.9;animation:kfRip calc(0.6s*var(--pace,1)) ease-out forwards}
 @keyframes kfRip{to{transform:scale(1);opacity:0}}
 /* primary buttons: a slow sheen every ~7 s */
 .kbtn:not(.alt):not(.kdone):not(.ksel):not(:disabled){background-image:linear-gradient(105deg,#fff0 38%,#fff2c870 50%,#fff0 62%),linear-gradient(#b0402c,#8a2a1e);background-size:260% 100%,100% 100%;background-repeat:no-repeat;background-position:100% 0,0 0;animation:kfSheen 7s ease-in-out 1.5s infinite}
@@ -231,16 +305,16 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  transition:transform .32s cubic-bezier(.3,.8,.3,1.1),width .32s cubic-bezier(.3,.8,.3,1.1),opacity .2s;box-shadow:0 0 6px #f0d07088}
 /* flashes */
 .kfx-fl{position:fixed;inset:0;z-index:9440;pointer-events:none}
-.kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed .9s ease-out forwards}
-.kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl 2.2s ease-in-out forwards}
-.kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark 2.2s ease-in-out forwards}
+.kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed calc(.9s*var(--pace)) ease-out forwards}
+.kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl calc(2.2s*var(--pace)) ease-in-out forwards}
+.kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark calc(2.2s*var(--pace)) ease-in-out forwards}
 @keyframes kfFl{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
 @keyframes kfRed{0%,40%,80%{opacity:0}15%,58%{opacity:1}100%{opacity:0}}
 @keyframes kfDark{0%{opacity:0}45%{opacity:1}100%{opacity:0}}
 /* numbers flying to the top bar + the cell catching them */
 .kfnum{position:fixed;left:0;top:0;z-index:9470;pointer-events:none;padding:2px 9px;border-radius:999px;font-weight:700;font-size:.86rem;white-space:nowrap;box-shadow:0 2px 6px #0003;will-change:transform,opacity}
 .kfnum.g{background:#e6f3e4;color:#2e6b3a;border:1px solid #9cc79a}.kfnum.r{background:#f7e3df;color:#a3291c;border:1px solid #d9a197}
-.kfhit{animation:kfHit .6s ease-out}.kfhit-r{animation:kfHitR .6s ease-out}
+.kfhit{animation:kfHit calc(0.6s*var(--pace,1)) ease-out}.kfhit-r{animation:kfHitR calc(0.6s*var(--pace,1)) ease-out}
 @keyframes kfHit{0%{box-shadow:0 0 0 0 #f0d07000}30%{box-shadow:0 0 0 2px #f0d070,0 0 14px #f0d070aa}100%{box-shadow:0 0 0 0 #f0d07000}}
 @keyframes kfHitR{0%{box-shadow:0 0 0 0 #c0302000}30%{box-shadow:0 0 0 2px #c03020aa,0 0 12px #c0302066}100%{box-shadow:0 0 0 0 #c0302000}}
 #kfxcv{position:fixed;inset:0;width:100vw;height:100vh;z-index:9450;pointer-events:none}
@@ -270,9 +344,10 @@ function kitGain(x,o){o=o||{};if(!kfOn())return;const I=kgInfo(x);KFX.gains=KFX.
    if(im&&tb&&!still&&im.animate){const a=im.getBoundingClientRect(),b=tb.getBoundingClientRect();const fl=im.cloneNode();fl.className="krevfly";fl.style.cssText=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(fl);
     const dx=b.left+b.width/2-(a.left+a.width/2),dy=b.top+b.height/2-(a.top+a.height/2),sc=Math.max(.12,Math.min(b.width,b.height)/Math.max(1,a.width));
     const an=fl.animate([{transform:"none",opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(.6)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(${sc})`,opacity:.2}],{duration:620,easing:"cubic-bezier(.5,0,.6,1)"});
-    an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
+    an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
    KFX.gainClosed=(KFX.gainClosed||0)+1;ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);done()};
-  ov.addEventListener("click",close)};
+  /* KIT 81 (owner OD:L1261): only the "Nhận" button closes the gain scene; a tap anywhere else does nothing */
+  ov.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.closest(".krevok"))close(e);else e.stopPropagation()})};
  if(typeof kmPush==="function")kmPush(run);else run(()=>{})}
 window.kitGain=kitGain;
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};

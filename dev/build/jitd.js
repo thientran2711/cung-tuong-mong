@@ -82,7 +82,13 @@ const KIDC={card:null};
 function kitItemCardClose(){const f=document.getElementById("kidfl");if(f)f.remove();KIDC.card=null}
 function kitItemCard(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return null;kitItemCardClose();const acts=o.acts||[];
  const f=document.createElement("div");f.id="kidfl";f.className="kidfl";
- f.innerHTML=`<div class="kidc" role="dialog" aria-modal="true" aria-label="${kidEsc(R.I.name)}">${typeof kitXHTML==="function"?kitXHTML('data-kidx="1"'):'<button type="button" class="kit-x" data-kidx="1" aria-label="Lui">✕</button>'}${kitItemDetail(R,Object.assign({},o,{acts,size:o.size||"lg"}))}</div>`;
+ /* KIT §8.2 T2 (review/kit-sweep, owner 16/11 "kit chung đâu"): the item card is the kit PANEL frame (kpHeader seal ĐIỀU + name + kind,
+    kit ✕ in the header) with the item picture LEFT (.kpsubj.kpiart) and its kit rows + acts RIGHT; no private card frame. */
+ const I=R.I,acts2=acts.map(a=>typeof a==="string"?a:pbtn(`data-kidact="${a.id}"`,a.n,a.sub||"",a.why||"")).join("");
+ const pic=kitItem({src:I.src512||I.src,name:"",grade:I.grade,size:"lg",qty:R.qty>1?R.qty:0,tip:I.name}).replace('<span class="kitn"></span>','');
+ const chip=typeof kitGradeChip==="function"?kitGradeChip(I.grade,{name:I.gname,size:"sm"}):"";const worn=R.worn&&typeof kitChip==="function"?kitChip("Đang mặc","g"):"";
+ const head=(typeof kpHeader==="function"?kpHeader("info",`<span style="color:${I.col}">${kidEsc(I.name)}</span>`,kidEsc(kidKind(R))):`<div class="kph"><b>${kidEsc(I.name)}</b></div>`).replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-kidx="1"'):'<button type="button" class="kit-x" data-kidx="1" aria-label="Lui">✕</button>')+"</div>");
+ f.innerHTML=`<div class="dlg kpanel kidc" data-kind="info" role="dialog" aria-modal="true" aria-label="${kidEsc(I.name)}">${head}<div class="body kidb"><div class="kpb kphas kpinfo kidet" data-kidk="${kidEsc(R.k)}"><div class="kpsubj kpiart kidpic">${pic}</div><div class="kpmain">${worn?`<div class="kpsec">${worn}</div>`:""}<div class="kinvrows kidrows">${kitItemDetailRows(R,o)}</div>${acts2?`<div class="rbtn kidacts">${acts2}</div>`:""}</div></div></div></div>`;
  document.body.appendChild(f);KIDC.card={R,o};try{if(typeof kitFix==="function")kitFix(f)}catch(e){}try{const x=f.querySelector(".kit-x");x&&x.focus({preventScroll:true})}catch(e){}
  try{if(typeof sfx==="function")sfx("tap")}catch(e){}return f}
 function kitItemTap(ref){const R=kitItemRef(ref);if(!R)return"";const e=R.e,inv=(typeof S!=="undefined"&&S&&S.inv)||[];const ix=e?inv.indexOf(e):-1;
@@ -119,12 +125,11 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 .kidet .kidacts>button{height:auto!important;min-height:44px;align-self:start}
 .kidet.kidet-strip{padding:8px 10px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:var(--k-card,#fffaf0)}
 .kidfl{position:fixed;inset:0;z-index:9470;display:grid;place-items:center;padding:16px;background:#2a1a1255}
-.kidc{position:relative;width:min(400px,100%);max-height:min(calc(100dvh - 32px),640px);overflow:auto;overscroll-behavior:contain;padding:14px 14px 12px;
- border:1px solid var(--gold,#c9a46a);border-radius:12px;background:var(--k-card,#fffaf0);box-shadow:0 10px 30px #2a1a1250}
-.kidc>.kit-x{position:absolute;top:8px;right:8px;z-index:1}
+#kidfl>.dlg.kpanel{width:var(--kpw,min(560px,calc(100vw - 28px)));max-height:var(--kph,calc(100dvh - 32px));display:flex;flex-direction:column;overflow:hidden}
+#kidfl>.dlg.kpanel>.kidb{overflow:auto;overscroll-behavior:contain;padding:10px 14px 12px}
 .kidc .kidhd,.kshdc .kidet .kidhd{padding-right:40px}
 .kmrow[data-kid],.kmsh[data-kid],.kiev [data-kid],[data-kid].kitem{cursor:pointer}
-@media (max-height:500px){.kidc{width:min(560px,100%)}.kidc .kidet-lg .kidpic>.kitem{--isz:72px}}
+
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§70",title:"kitItemDetail · kitItemCard (chạm món đồ: thông tin món đồ)",
  html:()=>`<div class="kitpg-row" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">${["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).map(k=>kitItemDetail(k,{cls:"kidet-strip"})).join("")}</div>`+

@@ -137,8 +137,8 @@ const R97L=[
  t:"{foe} thắp hương trước bài vị cha mẹ ngươi, rồi về khuyên cha tự thú. {foed} dâng sớ nhận tội, xin minh oan cho nhà ngươi trước khi chịu phạt. Hai người con gái của hai nhà thù kết làm tỷ muội. Hoàng thượng nói: “Trẫm chưa thấy ai trả thù đẹp như thế.”",
  fx:{duc:8,danh:10,sung:4},go:()=>{const v=foe67();if(v){v.enemy=false;return e67ally(v,50)}return""},rw:"bienngu",ti:"Người cởi oan nghiệt"},
 /* ===== Cháu Thái hậu ===== */
-{a:"ch_co",tag:"Nghĩa nữ của Thái hậu",w:"th",need:"th",p:.15,n:"Quỳ thưa với cô tổ: con không muốn làm quân cờ, con muốn làm con",c:{suc:-3},
- path:["Thưa khéo: con còn non","Lấy lòng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ","Khéo xin tự lo","Ngầm bắt tay Hoàng hậu","con muốn tự đứng được"],np:2,bad:["Uống thuốc của cô tổ"],sc:2,x:[()=>!S.thDead&&(S.th||0)>=50,"Thái hậu còn sống, với ngươi từ 50"],
+{a:"ch_co",tag:"Nghĩa nữ của Thái hậu",w:"th",need:"th",p:.15,n:"Quỳ thưa với cô mẫu: con không muốn làm quân cờ, con muốn làm con",c:{suc:-3},
+ path:["Thưa khéo: con còn non","Lấy lòng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ","Khéo xin tự lo","Ngầm bắt tay Hoàng hậu","con muốn tự đứng được"],np:2,bad:["Uống thuốc của cô mẫu"],sc:2,x:[()=>!S.thDead&&(S.th||0)>=50,"Thái hậu còn sống, với ngươi từ 50"],
  t:"Thái hậu lặng đi, rồi kéo ngươi vào lòng như ngày ngươi còn bé. Hôm sau bà ra ý chỉ: nhận ngươi làm nghĩa nữ, ghi vào ngọc điệp, đổi theo họ của bà. Từ đó ngươi gọi bà là mẫu hậu, và cả hậu cung hiểu Đức Thọ cung chỉ có một người con gái.",
  fx:{th:30,danh:12},rw:"nt_dongchau",ti:"Nghĩa nữ của Thái hậu"},
 {a:"ch_benh",tag:"Tạm cầm phượng ấn",w:"th",need:"th",p:.15,n:"Dâng chén thuốc đã cho lương y thử trước mặt cả cung",c:{suc:-5},
@@ -163,7 +163,7 @@ const R97L=[
  t:"Hoàng thượng đọc bộ sách ba đêm liền. Kẻ quyền thế bị chỉ mặt bị cách chức tra xét; sách cha ngươi được khắc in, đem dạy ở Quốc Tử Giám, cha được truy tặng Thái phó. Trên trang đầu, cạnh tên cha, có thêm một dòng: “Con gái chú giải.”",
  fx:{danh:14,tai:3,duc:3},rw:"bienngu",ti:"Người chú giải sách Thái phó"},
 {a:"thd_tro",tag:"Học trò đỗ Trạng nguyên ân khoa",w:"emp",p:.15,n:"Xin Hoàng thượng mở một kỳ ân khoa, tự ngài ra đề",c:{suc:-4},
- path:["Gửi bạc giúp hắn","Dò xem lời hắn có thật","Khuyên Hoàng thượng phúc khảo","Giữ kín, gom chứng cứ","Mua chuộc người giữ kho","Nhờ học sĩ Hàn lâm","Mời thầy thuốc, giấu hắn","Gửi lời động viên"],np:2,bad:["Khuyên hắn về quê","Không xen vào"],sc:2,x:[()=>S.danh>=40,"Danh từ 40"],
+ path:["Gửi bạc giúp hắn","Dò xem lời hắn có thật","Khuyên Hoàng thượng phúc khảo","Giữ kín, gom chứng cứ","Mua chuộc người giữ kho","Nhờ học sĩ Hàn lâm","Mời thầy thuốc, giấu hắn","Gửi lời động viên"],np:2,bad:["Khuyên hắn về quê","Không xen vào"],sc:2,x:[()=>S.danh>=BAL.danhG.thdBook,`Danh từ ${BAL.danhG.thdBook}`],
  t:"Kỳ ân khoa do chính Hoàng thượng ra đề. {n1} đỗ Trạng nguyên, cưỡi ngựa dạo phố ba ngày. Ngày vào triều, hắn quỳ hướng về hậu cung mà lạy, và cả triều biết vị Trạng nguyên mới là người của ai. Kẻ mua đề năm trước bị lưu đày.",
  fx:{danh:12,mat:2,sung:4},rw:"nt_haiduong",ti:"Ân sư của Trạng nguyên"},
 {a:"thd_hoc",tag:"Nữ sư của Đông cung",w:"emp",p:.15,n:"Dẫn bọn trẻ ra Ngự hoa viên, học bằng những gì chúng thấy",c:{suc:-4},
@@ -270,7 +270,7 @@ function r97After(A,d){let ex=[];try{if(d.go){const g=d.go(A);if(g)ex.push(g)}}c
 /* leaving the palace when the rare ending allows it (nữ vương…) */
 PEND.j97x=p=>{const d=R97[p.a];if(!d||!d.exit||S.dead)return null;const A={act:{},a:p.a};
  return {who:who67(d.w,A),t:`<b>${ARC67[p.a].t}</b><br>${fill67(d.t,A)}`,o:[
-  {n:d.exit[0],fx:{},x:"kết thúc kiếp này",go:()=>over(d.exit[2],fill67(d.exit[3],A),d.exit[4])},
+  {n:d.exit[0],fx:{},x:"kết thúc kiếp này",go:()=>over(d.exit[2],fill67(d.exit[3],A),d.exit[4],true)},
   {n:d.exit[1],fx:{},x:"ở lại cung",go:()=>{apply({sung:5});log(`Ngươi ở lại. ${fill67(d.ti,A)}: Hoàng thượng thương ngươi hơn. Sủng +5.`)}}]}};
 /* ---------- Sổ luân hồi: rare endings met across lives (memory only, no carry-over) ---------- */
 function r97Book(){try{return JSON.parse(localStorage.getItem("ctm-rare97")||"{}")||{}}catch(e){return {}}}

@@ -15,7 +15,7 @@ const MCAL={
  days:{newyear:[1,2,3],nguyentieu:[15],thanhminh:[5],doanngo:[5],thattich:[7],vulan:[15],trungthu:[15],vantho:[25],trungcuu:[9],thanhtho:[15],dongchi:[15],lapbat:[8],giaothua:[30]},
  short:{newyear:"Nguyên đán",nguyentieu:"Nguyên tiêu",thanhminh:"Thanh minh",doanngo:"Đoan ngọ",phoenix:"Hội Phượng",thattich:"Thất tịch",vulan:"Vu Lan",trungthu:"Trung thu",vantho:"Vạn thọ",trungcuu:"Trùng cửu",thanhtho:"Thánh thọ",dongchi:"Đông chí",lapbat:"Lạp bát",giaothua:"Giao thừa"},
  line:{newyear:"Lục cung vào chúc Tết Hoàng thượng và Thái hậu, mở yến xuân.",
-  nguyentieu:"Đêm rằm tháng giêng, đèn lồng treo khắp ngự hoa viên, cả cung đố đèn.",
+  nguyentieu:"Đêm rằm tháng giêng, đèn lồng treo khắp ngự hoa viên, cả cung thắp đèn thi.",
   thanhminh:"Các cung theo Thái hậu cúng tế tiên đế, đạp thanh, thả diều.",
   doanngo:"Đua thuyền rồng trên Thái Dịch trì, đeo túi thơm, gói bánh ú.",
   phoenix:"Hội thi cưỡi ngựa bắn cung ở sân tàu ngựa phía tây, kéo dài cả tháng.",
@@ -50,37 +50,161 @@ function mcPrize(k){try{if(typeof prize7==="function"&&typeof NAMES!=="undefined
 /* tuần from now to (offset o months ahead, tuần t); <0 = already past */
 function mcLeft(o,t){const n=mcNow();return o*3+t-n.t}
 function mcLeftText(o,f){const L=f.t.map(t=>mcLeft(o,t));const nx=L.find(x=>x>=0);if(nx==null)return"đã qua";if(nx===0)return"tuần này";return `còn ${nx} tuần`}
-/* ---------- the calendar (pure HTML; o = months ahead of the current month, 0..11) ---------- */
-function kitMonthCal(opt){opt=opt||{};const n=mcNow();const o=Math.max(0,Math.min(11,opt.o|0));const m=(n.m-1+o)%12+1,y=n.y+((n.m-1+o)>=12?1:0);const F=mcFests(m);
+/* ---------- §58.3+ (owner 15/11 ~20:15Z, review/cal-plus): what else she KNOWS goes on the calendar — short entries, nothing private ----------
+   One source per entry, read-only from the game state (old saves: the few lazy fields below are made on first read):
+   bong   day 1 of every month: bổng lộc + Nội vụ phủ issue (j20 / jstip pay on the first day; not while she serves as a cung nữ)
+   thaiy  the monthly thái y visit, only if review/thaiy's thaiyNextVisit() exists (nothing is invented here)
+   sinh   her birthday (S.bmonth, j20 sinhthan) · hh Thiên thu of the Empress (her rival entry's bmonth, made once) · friend (co-op)
+   prep   Vạn thọ / Thánh thọ: "sửa lễ vật" the tuần before (gift reminder) · due: the month of the birth (S.preg once she knows it, j75)
+   exam   her promotion exam window (jexam p.ex.w0/w1, cooldown cd) · tuyen tuyển tú (j27: tháng hai, every third year)
+   kexam  her children's yearly tests (j53 KTE, not the surprise "Khảo bài") · kid birthdays (k.bmo, made once) · pet: next growth stage (jpetcare)
+   note   SỔ HẸN: what she wrote down for a tuần (S.calNotes) + reminder the tuần before and on the tuần
+   wx     next tuần's weather, only with a servant who reads the sky (age ≥ 40 or lanh lợi); weather is drawn from a world seed so the
+          forecast is true (and the same for both co-op players)
+   cy     her monthly days, only if review/cycle's cycleDaysOf() exists (a faint mark, "Nguyệt tín")
+   quẻ    the tuần row shows the quẻ she drew (current from S.lot, earlier tuần from her log) · moon phases on days 1 / 8 / 15 / 23
+   Tap any day → the day box under the grid: that day's entries, the festival check list, what happened that tuần (her log), the sổ hẹn form. */
+const MCX={tag:{note:"Hẹn",due:"Lâm bồn",exam:"Khảo hạch",sinh:"Sinh thần",hh:"Thiên thu",friend:"Hảo hữu",kid:"Sinh nhật",tuyen:"Tuyển tú",kexam:"Con thi",prep:"Sửa lễ",pet:"Thú lớn",thaiy:"Thái y",bong:"Bổng lộc",wx:"Trời"},
+ ord:["note","due","exam","sinh","hh","friend","kid","tuyen","kexam","prep","pet","thaiy","bong","wx","moon","cy"],
+ moon:{1:["sóc","Mồng một, trăng non: thắp hương lễ Phật"],8:["thượng huyền","Trăng thượng huyền"],15:["vọng","Rằm, trăng tròn: thắp hương lễ Phật"],23:["hạ huyền","Trăng hạ huyền"]},
+ preset:["Dâng quà Thái hậu","Đến thăm Hoàng hậu","Lễ Phật","Luyện đàn"],noteMax:40,noteLen:48};
+function mcHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function mcWkNow(){try{return wk()}catch(e){const n=mcNow();return 0*n.m+n.t}}
+/* month offset o (may be -1) → {m, y} */
+function mcMY(o){const n=mcNow(),i=n.m-1+o;return{m:((i%12)+12)%12+1,y:n.y+Math.floor(i/12)}}
+/* an absolute week W (wk() units) → {o, t} on the calendar */
+function mcAt(W){const n=mcNow(),i=n.t+(W-mcWkNow());return{o:Math.floor(i/3),t:((i%3)+3)%3}}
+function mcW(o,t){return mcWkNow()+o*3+t-mcNow().t}
+function mcSrv(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
+function mcCap(s){s=String(s||"");return s.charAt(0).toUpperCase()+s.slice(1)}
+/* lazy, once-made facts (old saves) */
+function mcBm(o,key){if(!o)return 0;if(o[key]==null)o[key]=1+(mcHash((o.name||"")+"|"+key)%12);return +o[key]}
+function mcBd(name){return 1+(mcHash(name+"|day")%30)}
+/* weather: next tuần's draw from the world seed (Hoàng thượng's name + the date) — rollWx uses the same index, so the forecast holds */
+function mcWxIdx(y,m,t,n){return mcHash(`${(S&&S.emp&&S.emp.name)||""}|${y}|${m}|${t}|wx`)%n}
+function mcWxNext(){try{const n=mcNow();let m=n.m,y=n.y,t=n.t+1;if(t>2){t=0;m++;if(m>12){m=1;y++}}const L=WX[SEASON[m-1]];return L[mcWxIdx(y,m,t,L.length)]}catch(e){return null}}
+(function(){if(typeof rollWx!=="function")return;const r0=rollWx;rollWx=function(){let L=null;try{L=WX[SEASON[S.month-1]]}catch(e){}if(!L)return r0.apply(this,arguments);
+ const i=mcWxIdx(S.year,S.month,S.tuan,L.length),mr=Math.random;let once=false;Math.random=function(){if(!once){once=true;return (i+.5)/L.length}return mr.apply(Math,arguments)};
+ try{return r0.apply(this,arguments)}finally{Math.random=mr}}})();
+function mcWxSeer(){if(mcSrv()||(S&&S.out))return null;const L=(S&&S.staff)||[];return L.find(s=>s&&!s.coop&&(+s.age||0)>=40)||L.find(s=>s&&!s.coop&&s.tr==="lanh")||null}
+/* quẻ of a tuần: current = S.lot; earlier = her log line "Xin xăm: quẻ X · dom" (the last re-draw wins) */
+function mcLogsOf(m,y,t){const pre=`T${m}/${y} ${TUAN[t]}`;const out=[];try{for(const h of S.logs||[]){const p=String(h);const k=p.indexOf("</span>");const head=p.slice(0,k).replace(/<[^>]+>/g,"");if(head.trim()!==pre)continue;out.push(p.slice(k+7).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim())}}catch(e){}return out}
+function mcQue(o,t){const n=mcNow();if(o>0||(o===0&&t>n.t))return null;if(o===0&&t===n.t&&S.lot)return{lv:+S.lot.lv,dom:S.lot.dom};
+ const {m,y}=mcMY(o);for(const x of mcLogsOf(m,y,t)){const r=x.match(/^(?:Xin xăm|Gieo lại): quẻ ([^·.]+?)\s*·\s*([^.]+)\./);if(r){const lv=LV.indexOf(r[1].trim());if(lv>=0)return{lv,dom:r[2].trim()}}}return null}
+function mcQueChip(q){if(!q)return"";const b=LVB[q.lv];return `<span class="kchip ${b>0?"g":b<0?"r":""} kmc-que" title="Quẻ ${LV[q.lv]} · ${mcEsc(q.dom)}">${b>0?"Cát":b<0?"Hung":"Bình"}</span>`}
+/* the festival check list: what can be contested + gifts + wagers, ready ✓ / ✗ from HER stats, arts, bạc and Tư trang */
+function mcPrep(k){const P=(typeof FV7!=="undefined"&&FV7[k])||[];const thD=S&&S.thDead;const L=[],seen=new Set(),C1=[],C0=[];
+ for(const v of P){if(thD&&(v[1]==="th"||/Thái hậu/.test(v[2])))continue;const id=v[0]+v[1];if(seen.has(id))continue;seen.add(id);
+  if(v[0]==="C"&&typeof SC7!=="undefined"&&SC7[v[1]]){let s=0;try{s=SC7[v[1]].f(S)}catch(e){}(s>=50?C1:C0).push(SC7[v[1]].n)}
+  else if(v[0]==="P"){const r=v[1]==="th"?"th":"emp";const inv=(S.inv||[]).filter(e=>e&&!e.h&&(e.wk||(typeof IT!=="undefined"&&IT[e.k])));
+   const like=inv.some(e=>{const it=typeof IT!=="undefined"&&IT[e.k];return it&&Array.isArray(it.tg)&&it.tg.includes(r)});
+   L.push([like,`Lễ vật dâng ${r==="th"?"Thái hậu":"Hoàng thượng"}: ${like?"có món hợp ý":inv.length?"chưa có món hợp ý":"chưa có"}`])}
+  else if(v[0]==="W"&&!seen.has("Wbac")){seen.add("Wbac");L.push([(S.bac||0)>=20,"Bạc đặt cược (20)"])}}
+ /* contests in ONE or two lines (owner: short): in good form ✓ / not yet ✗ */
+ if(C0.length)L.unshift([false,`Thi chưa sẵn: ${C0.join(", ")}`]);if(C1.length)L.unshift([true,`Thi đã sẵn: ${C1.join(", ")}`]);
+ return L.sort((a,b)=>(a[0]?1:0)-(b[0]?1:0))}
+/* every short entry of month offset o: {d: [{k, txt}]} (festivals are drawn by kitMonthCal itself) */
+function mcExtra(o){const out={};const n=mcNow();const {m,y}=mcMY(o);const add=(d,k,txt,x)=>{d=Math.max(1,Math.min(30,d|0));(out[d]=out[d]||[]).push(Object.assign({k,txt},x||{}))};
+ const atW=(W,k,txt,d0)=>{const a=mcAt(W);if(a.o===o)add(a.t*10+(d0||1),k,txt)};
+ const run=f=>{try{f()}catch(e){}};
+ run(()=>{if(!mcSrv())add(1,"bong",S.out?"Lĩnh bổng lộc (lãnh cung)":"Lĩnh bổng lộc · Nội vụ phủ phát đồ")});
+ run(()=>{if(typeof thaiyNextVisit!=="function")return;const r=thaiyNextVisit(S);if(r==null||r===false)return;let W=null,d=1;
+  if(typeof r==="number")W=r;else if(typeof r==="object"){if(r.w!=null)W=+r.w;else{const mm=+(r.m||r.month),tt=+(r.t!=null?r.t:r.tuan||0),yy=+(r.y||r.year||0);if(mm){let off=(mm-n.m+12)%12;if(yy)off=(yy-n.y)*12+(mm-n.m);W=mcW(off,tt)}}if(r.d)d=((+r.d-1)%10)+1}
+  if(W!=null)atW(W,"thaiy","Thái y đến bắt mạch",Math.max(1,Math.min(10,d)))});
+ run(()=>{if(S.bmonth==null&&!S.dead)S.bmonth=1+R(12);if(+S.bmonth===m)add(1+mcHash((S.name||"")+"|day")%10,"sinh",S.rank>=7?"Thiên thu, sinh thần của ngươi":"Sinh thần của ngươi")});
+ run(()=>{if(S.rank>=7||typeof qOn!=="function"||!qOn())return;const q=rivals[0];if(mcBm(q,"bmonth")===m)add(mcBd(q.name||""),"hh",`Thiên thu ${q.name}: nên dâng lễ`)});
+ run(()=>{for(const k of ["vantho","thanhtho"]){const f=typeof FEST!=="undefined"&&FEST[k];if(!f||(k==="thanhtho"&&S.thDead))continue;const T=(Array.isArray(f.t)&&f.t.length?f.t:[0]).slice().sort()[0];
+  for(const oo of [o,o+1]){const my=mcMY(oo);if(my.m!==+f.m)continue;const W=mcW(oo,T)-1;if(W>=mcWkNow())atW(W,"prep",`Sửa lễ vật dâng ${k==="vantho"?"Hoàng thượng":"Thái hậu"} (${MCAL.short[k]})`)}}});
+ run(()=>{if(!S.preg||S.pregUnk)return;const od=10-S.preg;if(od===o)add(1,"due",S.fake?"Hạn “lâm bồn” (thai giả)":"Tháng lâm bồn (dự tính)")});
+ run(()=>{const e=S.ex;if(!e||typeof e!=="object")return;const w=mcWkNow();if(e.w0!=null&&e.w0>w)atW(e.w0,"exam","Được khảo hạch tấn phong");if(e.w1!=null&&e.w1>=w)atW(e.w1,"exam","Hết hạn khảo hạch tấn phong",10);
+  if(e.w1==null&&e.cd!=null&&e.cd>S.turn)atW(e.cd*3,"exam","Lại được xét khảo hạch")});
+ run(()=>{if(m===2&&y%3===0&&!(o===0&&n.t>0)&&!(o<0))add(1,"tuyen","Tuyển tú: tú nữ mới vào cung")});
+ run(()=>{if(typeof KTE==="undefined"||typeof ktEl!=="function")return;const ks=(S.kids||[]).filter(k=>k&&k.alive);if(!ks.length)return;
+  for(const e in KTE){if(e==="khao")continue;const E=KTE[e];if(!E.m.includes(m))continue;if(ks.some(k=>ktEl(k,E)))add(1,"kexam",`${E.n}: các con dự thi (${E.dom})`)}});
+ run(()=>{for(const k of (S.kids||[])){if(!k||!k.alive)continue;if(mcBm(k,"bmo")===m)add(mcBd(k.name||""),"kid",`Sinh nhật ${k.name}`)}});
+ run(()=>{if(typeof petcNext!=="function")return;for(const P of (S.pets||[])){if(!P)continue;const nx=petcNext(P);if(!nx)continue;const W=(P.at||0)+nx.age;const T=petT(P);
+  const st=BAL.pet.stages[nx.s];const aff=(P.aff||0)<nx.aff?" · cần thêm tình cảm":"";if(W>mcWkNow())atW(W,"pet",`${T.n} đủ ngày thành ${st}${aff}`);else if(o===0&&aff)add(n.t*10+1,"pet",`${T.n} đủ ngày thành ${st}${aff}`)}});
+ run(()=>{for(const x of (S.calNotes||[]))if(x&&x.w!=null){const a=mcAt(x.w);if(a.o===o)add(x.d&&mcTuanOf(x.d)===a.t?x.d:a.t*10+1,"note",x.txt,{id:x.id})}});
+ run(()=>{const sr=mcWxSeer();if(!sr)return;const w=mcWxNext();if(w)atW(mcWkNow()+1,"wx",`Thời tiết: ${w[0]} (${sr.name} xem trời)`)});
+ run(()=>{const C=window.COOPW;if(!C||!C.on||!C.base||!C.base.P)return;const F=C.base.P[C.seat==="a"?"b":"a"];if(!F||!F.S||F.dead)return;const nm=F.name||F.S.name||"Hảo hữu";
+  if(F.S.bmonth!=null&&+F.S.bmonth===m)add(1+mcHash((F.S.name||nm)+"|day")%10,"friend",`Sinh thần ${nm}`);
+  if(F.S.preg&&!F.S.pregUnk&&!F.S.hidden&&10-F.S.preg===o)add(1,"friend",`${nm} lâm bồn (dự tính)`);
+  for(const x of (F.S.calNotes||[]))if(x&&x.share&&x.w!=null){const a=mcAt(x.w);if(a.o===o)add(x.d&&mcTuanOf(x.d)===a.t?x.d:a.t*10+1,"friend",`${nm}: ${x.txt}`)}});
+ run(()=>{if(typeof cycleDaysOf!=="function")return;const L=cycleDaysOf(S,m);(Array.isArray(L)?L:[]).forEach(d=>{if(+d>=1&&+d<=30)add(+d,"cy","Nguyệt tín")})});
+ for(const d in out)out[d].sort((a,b)=>MCX.ord.indexOf(a.k)-MCX.ord.indexOf(b.k));
+ return out}
+/* SỔ HẸN: a note on a tuần (+ the day she tapped), reminded the tuần before and on the tuần (once each), then kept in her log */
+function mcNoteAdd(o,d,txt){txt=String(txt||"").replace(/\s+/g," ").trim().slice(0,MCX.noteLen);if(!txt)return false;const t=mcTuanOf(d);const W=mcW(o,t);if(W<mcWkNow())return false;
+ S.calNotes=S.calNotes||[];S.calNoteN=(S.calNoteN||0)+1;S.calNotes.push({id:S.calNoteN,w:W,d,txt});if(S.calNotes.length>MCX.noteMax)S.calNotes.splice(0,S.calNotes.length-MCX.noteMax);return true}
+function mcNoteDel(id){if(!S.calNotes)return;S.calNotes=S.calNotes.filter(x=>x.id!==+id)}
+function mcNoteTick(){try{if(!S||S.dead||!S.calNotes||!S.calNotes.length)return;const w=mcWkNow();const due=[],soon=[];
+ for(const x of S.calNotes){if(x.w===w+1&&!x.r1){x.r1=1;soon.push(x.txt)}if(x.w===w&&!x.r0){x.r0=1;x.r1=1;due.push(x.txt);try{log(`Sổ hẹn: ${mcEsc(x.txt)}.`)}catch(e){}}}
+ S.calNotes=S.calNotes.filter(x=>x.w>=w-2);
+ if((due.length||soon.length)&&typeof kitPanel==="function"&&!(typeof tsbBot==="function"&&tsbBot())){const rows=[];if(due.length)rows.push(["Tuần này",due.map(mcEsc)]);if(soon.length)rows.push(["Tuần sau",soon.map(mcEsc)]);
+  kitPanel({kind:"notice",title:"Sổ hẹn",rows,btn:"Đã hiểu"})}}catch(e){console.error(e)}}
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w=mcWkNow();const r=e0.apply(this,arguments);try{if(mcWkNow()!==w){mcNoteTick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){}return r}})();
+/* the day box (tap a day) */
+function mcDayBox(o,d){const n=mcNow();const {m,y}=mcMY(o);const t=mcTuanOf(d);const past=o<0||(o===0&&t<n.t),now=o===0&&t===n.t;
+ const F=mcFests(m).filter(f=>f.days.includes(d));const X=(mcExtra(o)[d]||[]);const rows=[];
+ F.forEach(f=>rows.push(["Lễ hội",`<span class="kmc-lk" role="button" tabindex="0" data-kmcf="${f.k}" data-kmco="${o}">${mcEsc(f.name)}</span> · ${mcLeftText(o,f)}`]));
+ const mo=MCX.moon[d];if(mo)rows.push(["Trăng",mo[1]]);
+ X.forEach(x=>{if(x.k!=="moon")rows.push([MCX.tag[x.k]||(x.k==="cy"?"Riêng":""),mcEsc(x.txt)+(x.k==="note"&&!past?` <button type="button" class="kbtn alt kmc-del" data-kmcdel="${x.id}" aria-label="Bỏ hẹn">Bỏ</button>`:"")])});
+ const q=mcQue(o,t);if(q)rows.push(["Quẻ tuần",`${LV[q.lv]} · ${mcEsc(q.dom)}`]);
+ let h=`<div class="kmc-day" data-kmcday="${d}"><h4 class="kpst">${mcCap(mcDayName(d))} ${mcMonName(m)} · ${TUAN[t]}${now?" · tuần này":""}</h4>`;
+ h+=rows.length?kitRows(rows):`<div class="kmc-none">Ngày thường, không có việc gì đã biết.</div>`;
+ F.forEach(f=>{if(past)return;const L=mcPrep(f.k);if(L.length&&typeof kitChecks==="function")h+=`<div class="kmc-sub">Sửa soạn cho ${mcEsc(f.short)}</div>`+kitChecks(L)});
+ if(past||now){const L=mcLogsOf(m,y,t).filter(x=>!/^(Xin xăm|Gieo lại)/.test(x)).slice(0,6).map(x=>x.length>96?x.slice(0,94).replace(/\s\S*$/,"")+"…":x);
+  h+=`<div class="kmc-sub">${now?"Tuần này, sổ đã ghi":"Tuần ấy, sổ đã ghi"}</div>`+(L.length?kitRows(L.map(x=>["",mcEsc(x)])):`<div class="kmc-none">Sổ không ghi lại việc gì.</div>`)}
+ if(!past){h+=`<div class="kmc-sub">Sổ hẹn</div><div class="kmc-form">`+(typeof kitInput==="function"?kitInput({id:"kmc-note",label:`Hẹn việc ${TUAN[t]} ${mcMonName(m)}`,placeholder:"Việc cần làm…"}):`<input id="kmc-note" class="kinput">`)+
+  `<div class="kmc-pre">${MCX.preset.map(p=>`<button type="button" class="kbtn alt" data-kmcpre="${mcEsc(p)}">${mcEsc(p)}</button>`).join("")}</div>`+
+  (window.COOPW&&window.COOPW.on&&typeof kitToggle==="function"?kitToggle({id:"kmc-share",label:"Cho hảo hữu cùng thấy",on:false}):"")+
+  `<button type="button" class="kbtn kmc-save" data-kmcsave="${d}" data-kmco="${o}">Ghi vào sổ</button></div>`}
+ return h+`</div>`}
+/* ---------- the calendar (pure HTML; o = months from the current month, -1 = last month (her log), 0..11 ahead; sel = the tapped day) ---------- */
+function kitMonthCal(opt){opt=opt||{};const n=mcNow();const o=Math.max(-1,Math.min(11,opt.o|0));const {m,y}=mcMY(o);const F=mcFests(m);const X=mcExtra(o);const sel=+opt.sel||0;
  const at={};F.forEach(f=>f.days.forEach(d=>{(at[d]=at[d]||[]).push(f)}));
- const tabs=[];for(let i=0;i<12;i++){const mm=(n.m-1+i)%12+1;const c=mcFests(mm).length;tabs.push({k:String(i),label:`Tháng ${typeof KP_MON!=="undefined"?KP_MON[mm-1]:mm}`,n:c||null,tip:c?`${c} lễ hội`:""})}
+ const tabs=[];for(let i=-1;i<12;i++){const mm=mcMY(i).m;const c=i<0?0:mcFests(mm).length;tabs.push({k:String(i),label:i<0?"Tháng trước":`Tháng ${typeof KP_MON!=="undefined"?KP_MON[mm-1]:mm}`,n:c||null,tip:c?`${c} lễ hội`:""})}
  const tabRow=typeof kitTabRowHTML==="function"?kitTabRowHTML(tabs,String(o),"data-kmcm"):"";
- let g="";for(let t=0;t<3;t++){const now=o===0&&t===n.t;const T=(typeof TUAN!=="undefined"?TUAN[t]:["thượng tuần","trung tuần","hạ tuần"][t]).split(" ");
-  g+=`<div class="kmc-row${now?" on":""}"><div class="kmc-tl"><span>${T[0][0].toUpperCase()+T[0].slice(1)}</span><span>${T[1]}</span>${now?`<span class="kchip g kmc-now">Tuần này</span>`:""}</div>`;
-  for(let d=t*10+1;d<=t*10+10;d++){const past=o===0&&t<n.t;const L=at[d];
-   if(L){const f=L[0];g+=`<button type="button" class="kmc-d f${past?" past":""}" data-kmcf="${f.k}" data-kmco="${o}" aria-label="${mcEsc(mcDayName(d)+": "+L.map(x=>x.name).join(", "))}"><img src="img/ev-fest-${f.k}.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="kmc-n">${d}</span><span class="kmc-fn">${mcEsc(f.short)}</span></button>`}
-   else g+=`<div class="kmc-d${past?" past":""}"><span class="kmc-n">${d}</span></div>`}
+ let g="";for(let t=0;t<3;t++){const now=o===0&&t===n.t;const T=(typeof TUAN!=="undefined"?TUAN[t]:["thượng tuần","trung tuần","hạ tuần"][t]).split(" ");const q=mcQue(o,t);
+  g+=`<div class="kmc-row${now?" on":""}"><div class="kmc-tl"><span>${T[0][0].toUpperCase()+T[0].slice(1)}</span><span>${T[1]}</span>${now?`<span class="kchip g kmc-now">Tuần này</span>`:""}${mcQueChip(q)}</div>`;
+  for(let d=t*10+1;d<=t*10+10;d++){const past=o<0||(o===0&&t<n.t);const L=at[d];const E=(X[d]||[]).filter(x=>x.k!=="cy");const cy=(X[d]||[]).some(x=>x.k==="cy");
+   const mo=MCX.moon[d]?`<span class="kmc-mo p${d}" aria-hidden="true"></span>`:"";const cnt=(L?L.length-1:0)+E.length-(L?0:1);
+   const badge=cnt>0?`<span class="kmc-c">+${cnt}</span>`:"";const cls=`kmc-d${L?" f":""}${E.length?" x":""}${cy?" cy":""}${past?" past":""}${sel===d?" sel":""}`;
+   const lab=[mcDayName(d)].concat((L||[]).map(x=>x.name),E.map(x=>x.txt),cy?["Nguyệt tín"]:[]).join(": ");
+   if(L){const f=L[0];g+=`<button type="button" class="${cls}" data-kmcd="${d}" data-kmcf="${f.k}" data-kmco="${o}" aria-label="${mcEsc(lab)}"><img src="img/ev-fest-${f.k}.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="kmc-n">${d}</span>${badge}${mo}<span class="kmc-fn">${mcEsc(f.short)}</span></button>`}
+   else g+=`<button type="button" class="${cls}" data-kmcd="${d}" data-kmco="${o}" aria-label="${mcEsc(lab)}"><span class="kmc-n">${d}</span>${badge}${mo}${E.length?`<span class="kmc-tg t-${E[0].k}">${MCX.tag[E[0].k]||""}</span>`:""}</button>`}
   g+=`</div>`}
- const rows=F.map(f=>[mcDaysName(f.days),`<span class="kmc-lk" role="button" tabindex="0" data-kmcf="${f.k}" data-kmco="${o}">${mcEsc(f.name)}</span> · ${mcLeftText(o,f)}`]);
- const list=F.length?(typeof kitRows==="function"?kitRows(rows):rows.map(r=>`<div>${r[0]} · ${r[1]}</div>`).join("")):`<div class="kmc-none">Tháng này không có lễ hội lớn.</div>`;
+ const rows=[];for(let d=1;d<=30;d++){(at[d]||[]).forEach(f=>{if(f.days[0]===d)rows.push([d,mcDaysName(f.days),`<span class="kmc-lk" role="button" tabindex="0" data-kmcf="${f.k}" data-kmco="${o}">${mcEsc(f.name)}</span> · ${mcLeftText(o,f)}`])});
+  (X[d]||[]).forEach(x=>{if(x.k!=="cy"&&x.k!=="bong")rows.push([d,mcDayName(d),mcEsc(x.txt)])})}
+ const rr=rows.map(r=>[r[1],r[2]]);
+ const list=rr.length?(typeof kitRows==="function"?kitRows(rr):rr.map(r=>`<div>${r[0]} · ${r[1]}</div>`).join("")):`<div class="kmc-none">${o<0?"Tháng trước không có lễ hội lớn.":"Tháng này không có lễ hội lớn."}</div>`;
  return `<div class="kmc" data-kmc="${o}"><div class="pctabs kcattabs kmc-tabs" role="tablist">${tabRow}</div>`+
-  `<div class="kmc-head"><b>${mcMonName(m).replace(/^t/,"T")}</b> · ${mcYearName(y)}${o===0?"":` <span class="kmc-ahead">(${o===1?"tháng sau":`${o} tháng nữa`})</span>`}</div>`+
-  `<div class="kmc-grid">${g}</div><div class="kmc-list">${list}</div></div>`}
+  `<div class="kmc-head"><b>${mcMonName(m).replace(/^t/,"T")}</b> · ${mcYearName(y)}${o===0?"":` <span class="kmc-ahead">(${o<0?"đã qua":o===1?"tháng sau":`${o} tháng nữa`})</span>`}</div>`+
+  `<div class="kmc-grid">${g}</div>${sel?mcDayBox(o,sel):`<div class="kmc-hint">Chạm vào một ngày để xem việc ngày ấy, ghi sổ hẹn.</div>`}<div class="kmc-list">${list}</div></div>`}
 /* the popover of one festival (kit kpPop) */
-function mcPopHTML(k,o){const f=mcFests((mcNow().m-1+o)%12+1).find(x=>x.k===k);if(!f)return"";const A=mcActs(k),pz=mcPrize(k);
- const T=f.t.map(t=>typeof TUAN!=="undefined"?TUAN[t]:"").filter(Boolean).join(", ");
- return `<div class="kpopt">${mcEsc(f.name)}</div><div class="kpopx kmc-px"><div class="kmc-pw">${mcDaysName(f.days)} ${mcMonName((mcNow().m-1+o)%12+1)} · ${T} · <b>${mcLeftText(o,f)}</b></div>`+
+function mcPopHTML(k,o){const mm=mcMY(o).m;const f=mcFests(mm).find(x=>x.k===k);if(!f)return"";const A=mcActs(k),pz=mcPrize(k);
+ const T=f.t.map(t=>typeof TUAN!=="undefined"?TUAN[t]:"").filter(Boolean).join(", ");const P=o<0?[]:mcPrep(k);const ok=P.filter(x=>x[0]).length;
+ return `<div class="kpopt">${mcEsc(f.name)}</div><div class="kpopx kmc-px"><div class="kmc-pw">${mcDaysName(f.days)} ${mcMonName(mm)} · ${T} · <b>${mcLeftText(o,f)}</b></div>`+
   `<div>${MCAL.line[k]||""}</div>`+(A.C.length?`<div><b>Có thể thi:</b> ${A.C.join(", ")}</div>`:"")+(A.O.length?`<div><b>Còn có:</b> ${A.O.join(", ")}</div>`:"")+
-  (A.C.length&&pz?`<div><b>Thắng thi:</b> ${pz}</div>`:"")+`</div>`}
-function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({kind:"cal",title:"Lịch tháng",sub:`Nay là ${typeof k3Date==="function"?k3Date():""}. Lịch chỉ ghi lễ hội lớn hằng năm, sửa soạn trước cho kịp.`,html:kitMonthCal({o:0}),cls:"kmc-modal"})}catch(e){console.error(e)}}
+  (A.C.length&&pz?`<div><b>Thắng thi:</b> ${pz}</div>`:"")+(P.length?`<div><b>Sửa soạn:</b> ${ok}/${P.length} đã sẵn</div>`:"")+`</div>`}
+function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({kind:"cal",title:"Lịch tháng",sub:`Nay là ${typeof k3Date==="function"?k3Date():""}. Lịch ghi lễ hội hằng năm và những ngày ngươi đã biết.`,html:kitMonthCal({o:0}),cls:"kmc-modal"})}catch(e){console.error(e)}}
 try{KP_SEAL.cal="LỊCH"}catch(e){}
 window.kitMonthCal=kitMonthCal;window.kitMonthCalOpen=kitMonthCalOpen;
-/* month tabs + festival taps (delegated; the capture-phase kit popover closer runs first, so a tap on another square re-opens it) */
-document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kmcm]");if(t){const c=t.closest(".kmc");if(!c)return;e.stopPropagation();e.preventDefault();
-  const sx=(c.querySelector(".kmc-tabs")||{}).scrollLeft||0;const w=document.createElement("div");w.innerHTML=kitMonthCal({o:+t.dataset.kmcm});const nc=w.firstElementChild;c.replaceWith(nc);
-  const tr=nc.querySelector(".kmc-tabs");if(tr){tr.scrollLeft=sx;const on=tr.querySelector(".pct.on");if(on&&on.scrollIntoView)on.scrollIntoView({block:"nearest",inline:"nearest"})}return}
- const f=e.target.closest&&e.target.closest("[data-kmcf]");if(f&&typeof kpPop==="function"){e.stopPropagation();e.preventDefault();const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h)}});
-document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const f=e.target.closest&&e.target.closest(".kmc-lk[data-kmcf]");if(f){e.preventDefault();f.click()}});
+/* re-draw the calendar in place (month tab, tapped day, a note saved), keeping the tab row's scroll */
+function mcRedraw(c,o,sel,focusDay){const sx=(c.querySelector(".kmc-tabs")||{}).scrollLeft||0;const w=document.createElement("div");w.innerHTML=kitMonthCal({o,sel});const nc=w.firstElementChild;c.replaceWith(nc);
+ const tr=nc.querySelector(".kmc-tabs");if(tr){tr.scrollLeft=sx;const on=tr.querySelector(".pct.on");if(on&&on.scrollIntoView&&!sel)on.scrollIntoView({block:"nearest",inline:"nearest"})}
+ if(sel&&focusDay!==false){const b=nc.querySelector(".kmc-day");if(b&&b.scrollIntoView)b.scrollIntoView({block:"nearest"})}return nc}
+/* month tabs, day taps, festival popover, sổ hẹn (delegated; the capture-phase kit popover closer runs first, so a tap on another square re-opens it) */
+document.addEventListener("click",e=>{const T=e.target.closest&&e.target;if(!T)return;const c=T.closest(".kmc");
+ const tb=T.closest("[data-kmcm]");if(tb&&c){e.stopPropagation();e.preventDefault();mcRedraw(c,+tb.dataset.kmcm,0);return}
+ const pre=T.closest("[data-kmcpre]");if(pre&&c){e.preventDefault();const i=c.querySelector("#kmc-note");if(i){i.value=pre.dataset.kmcpre;i.focus()}return}
+ const sv=T.closest("[data-kmcsave]");if(sv&&c){e.preventDefault();const i=c.querySelector("#kmc-note");const d=+sv.dataset.kmcsave,o=+sv.dataset.kmco;if(i&&mcNoteAdd(o,d,i.value)){const sh=c.querySelector("#kmc-share");if(sh&&sh.checked){const x=S.calNotes[S.calNotes.length-1];if(x)x.share=1}try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,o,d)}return}
+ const dl=T.closest("[data-kmcdel]");if(dl&&c){e.preventDefault();e.stopPropagation();mcNoteDel(dl.dataset.kmcdel);const b=c.querySelector(".kmc-day");try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,+c.dataset.kmc,b?+b.dataset.kmcday:0);return}
+ const dd=T.closest(".kmc-d[data-kmcd]");if(dd&&c){e.stopPropagation();e.preventDefault();const o=+dd.dataset.kmco||0,d=+dd.dataset.kmcd;const nc=mcRedraw(c,o,d,!dd.dataset.kmcf);
+  if(dd.dataset.kmcf&&typeof kpPop==="function"){const h=mcPopHTML(dd.dataset.kmcf,o);const a=nc.querySelector(`.kmc-d[data-kmcd="${d}"]`);if(h&&a)kpPop(a,h)}return}
+ const f=T.closest("[data-kmcf]");if(f&&typeof kpPop==="function"){e.stopPropagation();e.preventDefault();const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h)}});
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const f=e.target.closest&&e.target.closest(".kmc-lk[data-kmcf]");if(f){e.preventDefault();f.click()}
+ if(e.key==="Enter"&&e.target&&e.target.id==="kmc-note"){const c=e.target.closest(".kmc");const b=c&&c.querySelector("[data-kmcsave]");if(b){e.preventDefault();b.click()}}});
 /* hover (mouse) shows the same popover */
 document.addEventListener("mouseover",e=>{try{if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;const f=e.target.closest&&e.target.closest(".kmc-d[data-kmcf]");if(!f||f.__kmh)return;f.__kmh=1;
  const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h);f.addEventListener("mouseleave",()=>{f.__kmh=0;const p=document.getElementById("kpop");if(p)p.hidden=true},{once:true})}catch(x){}});
@@ -109,7 +233,6 @@ window.kitDeskCal=kitDeskCal;
 addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTimeout(kdcPlace,150)});
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`
 .kmc{display:grid;gap:8px;min-width:0}
-#modal.kmc-modal .dlg.kpanel{max-width:min(780px,calc(100vw - 24px))!important;width:100%}
 .kmc-tabs{display:flex!important;flex-wrap:wrap!important;gap:5px;overflow:visible!important}
 .kmc-head{font-family:var(--display);color:var(--ink);font-size:.95rem}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
 .kmc-grid{display:grid;grid-template-columns:auto repeat(10,minmax(0,1fr));gap:3px;min-width:0}
@@ -132,10 +255,31 @@ addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTime
 .kmcdesk img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .kmcdesk.kmc-st{position:relative}.kmc-strow{display:flex;gap:16px}
 .kmcdesk:active{transform:scale(.94)}
-@media (max-height:520px){.kmc-tabs{flex-wrap:nowrap!important;overflow-x:auto!important}.kmc-d{aspect-ratio:auto;height:50px;min-height:50px}}
+/* §58.3+ entries, moon, quẻ, day box, sổ hẹn */
+button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent}
+.kmc-d.x:not(.f){background:var(--k-card2,#f3e7cf)}
+.kmc-d.sel{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e) drop-shadow(0 0 2px #be8c1ee6));z-index:1;transform:scale(1.06);border-color:var(--gold)}
+.kmc-c{position:absolute;top:2px;right:15px;font-size:.6rem;font-weight:700;line-height:1.1;color:var(--gold);background:#fffaf0e0;border-radius:4px;padding:0 2px}
+.kmc-mo{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;box-sizing:border-box;border:1px solid #8a7350;background:#fff6d8}
+.kmc-mo.p1{background:#3a2e24}.kmc-mo.p15{box-shadow:0 0 3px #f0d070}
+.kmc-mo.p8{background:linear-gradient(90deg,#3a2e24 50%,#fff6d8 50%)}.kmc-mo.p23{background:linear-gradient(90deg,#fff6d8 50%,#3a2e24 50%)}
+.kmc-d.cy::after{content:"";position:absolute;left:4px;top:18px;width:5px;height:5px;border-radius:50%;background:#c98a96;opacity:.75}
+.kmc-tg{position:relative;display:block;margin:0 2px 2px;border-radius:4px;background:#fffaf0;border:1px solid var(--k-hair);color:var(--ink);font-size:.62rem;font-weight:700;line-height:1.1;padding:1px;text-align:center;overflow-wrap:normal;word-break:keep-all}
+.kmc-tg.t-note{border-color:var(--gold);color:var(--gold)}.kmc-tg.t-due,.kmc-tg.t-exam{border-color:#e3a497;color:var(--bad)}
+.kmc-que{font-size:.6rem!important;white-space:nowrap}
+.kmc-hint{color:var(--dim);font-size:.78rem}
+.kmc-day{display:grid;gap:5px;border:1px solid var(--k-hair);border-radius:8px;padding:8px 10px;background:var(--k-card);min-width:0}
+.kmc-day .kpst{margin:0}
+.kmc-sub{font-family:var(--display);color:var(--gold);font-size:.84rem;margin-top:4px}
+.kmc-form{display:grid;gap:6px;min-width:0}
+.kmc-pre{display:flex;flex-wrap:wrap;gap:5px}.kmc-pre .kbtn{font-size:.78rem;padding:4px 9px;min-height:34px}
+.kmc-save{justify-self:start;min-height:38px}
+.kmc-del{font-size:.72rem;padding:1px 7px;min-height:26px;margin-left:4px;vertical-align:middle}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§47) ---------- */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
  {id:"§58",title:"kitMonthCal: lịch tháng (3 tuần × 10 ngày, lễ hội cố định)",html:()=>kitMonthCal({o:0})},
  {id:"§58.1",title:"kitMonthCal: tháng có lễ hội (tháng giêng)",html:()=>{const n=mcNow();return kitMonthCal({o:(13-n.m)%12})}},
+ {id:"§58.3",title:"kitMonthCal: những ngày ngươi biết (bổng lộc, sinh thần, sổ hẹn, quẻ, trăng) và ô ngày đã chọn",html:()=>{const n=mcNow();return kitMonthCal({o:0,sel:n.t*10+1})}},
  {id:"§58.2",title:"kitDeskCal: lịch để bàn ở góc phòng (thường · lãnh cung)",html:()=>`<div class="kmc-strow"><button type="button" class="kmcdesk kmc-st" aria-label="Lịch tháng"><img src="img/kit/desk-cal.webp" alt=""></button><button type="button" class="kmcdesk kmc-st" aria-label="Lịch tháng"><img src="img/kit/desk-cal-plain.webp" alt=""></button></div>`});

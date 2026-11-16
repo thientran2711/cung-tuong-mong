@@ -8,8 +8,8 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
 const FIGS=(process.env.FIGS||'fig-thaihau-h1-a51.webp,fig-thaihau-h3-a51.webp,fig-thaihau-h2-a51.webp,fig-maid-m33-t7-a18.webp,fig-consort-c10-t8-a18.webp').split(',');
 const N=+(process.env.N||14);const NORMAL='fig-consort-c01-t1-a18.webp';   /* reference: a normal standing figure — text may never be narrower than on its page */const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,820],[1366,1024]];
 const isFile=!/^https?:/.test(SRC);
-(async()=>{const b=await chromium.launch();let bad=0;
- for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});
   await ctx.addInitScript(()=>{window.__bot=1});
   if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
@@ -41,11 +41,11 @@ const isFile=!/^https?:/.test(SRC);
     const im=[...document.querySelectorAll('#dawn .kbk-person.kbk-full .kesimg')].find(e=>e.offsetParent&&getComputedStyle(e.closest('.kbk-sheet')).visibility!=='hidden'&&e.closest('.kbk-sheet').style.transform==='');
     if(im){const box=im.closest('.kbk-person'),fl=box.querySelector('.kbk-flow'),hd=box.querySelector('.kbk-phead'),rr=im.getBoundingClientRect(),bb=box.getBoundingClientRect();
      const hx=(window.__figHX||{})[im.getAttribute('src')];res.hx=hx;const bx=rr.left+(hx!=null?hx:.5)*rr.width;
-     res.torsoClear=Math.round(Math.min(fl.getBoundingClientRect().left,hd.getBoundingClientRect().left)-(bx+.12*rr.height));res.trainPastLeft=Math.round(Math.max(0,bb.left-rr.left));res.cutL=Math.round(Math.max(0,bb.left-(bx-.12*rr.height)))}
+     res.torsoClear=Math.round(Math.min(fl.getBoundingClientRect().left,hd.getBoundingClientRect().left)-(bx+.12*rr.height));res.trainPastLeft=Math.round(Math.max(0,bb.left-rr.left));res.cutL=Math.round(Math.max(0,bb.left-(bx-.12*rr.height)));const pr=box.querySelector('.kbk-por').getBoundingClientRect(),clip=getComputedStyle(box.querySelector('.kbk-por')).overflow!=='visible';const visR=clip?Math.min(rr.right,pr.right):rr.right;res.overText=Math.round(Math.max(0,visR-Math.min(fl.getBoundingClientRect().left,hd.getBoundingClientRect().left)));res.faceIn=bx-.06*rr.height>=pr.left-1&&bx+.06*rr.height<=pr.right+1}
     res.minH=+res.minH.toFixed(3);const lb=document.querySelector('#dawn .kbk-person');res.col=lb&&lb.style.gridTemplateColumns||'';res.kfr=lb&&lb.style.getPropertyValue('--kfr')||'';return res},[FIG,N]);
    if(FIG===NORMAL&&!NORMW[`${W}x${H}`])NORMW[`${W}x${H}`]=r.minTextW;const fail=[];if(r.textCut>1)fail.push('text cut '+r.textCut);const norm=NORMW[`${W}x${H}`];if(r.minTextW<Math.min(220,norm||220)-2)fail.push('text '+r.minTextW+'px (normal figure '+norm+')');if(r.broken)fail.push(r.broken+' broken words');
    if(r.pages>1&&r.minFacts<2)fail.push('1 fact/page');if(r.minH<0.849)fail.push('height '+r.minH);if(r.scaled)fail.push('scaled');if(!r.name1)fail.push('no name p1');
-   if(r.torsoClear!=null&&r.torsoClear<0)fail.push('torso '+r.torsoClear);if(r.cutL)fail.push('body cut on the left '+r.cutL);
+   if(r.torsoClear!=null&&r.torsoClear<0)fail.push('torso '+r.torsoClear);if(r.cutL)fail.push('body cut on the left '+r.cutL);if(r.overText>2)fail.push('figure under the text '+r.overText);if(r.faceIn===false)fail.push('face cut');
    if(fail.length)bad++;console.log(`${W}x${H} ${FIG.padEnd(30)} ${fail.length?'FAIL '+fail.join(', '):'ok'}  ${JSON.stringify(r)}`);
    if(process.env.SHOTS){await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=c.id==='dawn'?'visible':'hidden'});await p.screenshot({path:`${OUT}/${W}x${H}-${FIG.replace('.webp','')}.jpg`,type:'jpeg',quality:60});await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=''})}}
   if(errs.length){bad++;console.log(`${W}x${H} page errors`,errs.slice(0,3))}await ctx.close()}

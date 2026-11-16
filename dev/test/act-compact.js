@@ -1,7 +1,7 @@
 /* review/kit-fig2: KIT 43 kitActCompact — act cards inside a person card's right pane (Hậu cung › Thánh thượng "Việc hôm nay").
    usage: node dev/test/act-compact.js <build url> <outdir> <tag> [WxH@dpr,...]
    Injects two Emperor acts into today's deck (one locked to the evening so it shows "Buổi tối (đang …)"), opens the Thánh thượng card and
-   measures every act card in the pane: thumbnail square 72–96 px, text column ≥ 60 % of the card, title + odds on one line, description one
+   measures every act card in the pane: thumbnail PORTRAIT 3:4 (72x96 or 84x112 px, ratio field ~0.75; was a square before review/actcard-small), text column ≥ 60 % of the card, title + odds on one line, description one
    line, every value chip on one line (no chip split), cards stacked (one per row). */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,TAG,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -22,7 +22,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const pane=P.querySelector('.pc>.pcr');const cards=[...P.querySelectorAll('.pc>.pcr button.ka.kart')].filter(c=>c.offsetParent);
    const rows=cards.map(c=>{const cr=R(c),a=R(c.querySelector('.kaart')),bd=R(c.querySelector('.kabody'));const kat=c.querySelector('.kat'),kan=c.querySelector('.kan'),od=[...kat.children].find(x=>x!==kan);
     const lead=c.querySelector('.klead');const chips=[...c.querySelectorAll('small.kb>.kr>.krv>*:not(.ksep)')].filter(x=>x.offsetParent);
-    return{title:kan.textContent.trim().slice(0,30),cardW:Math.round(cr.width),thumb:[Math.round(a.width),Math.round(a.height)],textShare:+(bd.width/cr.width).toFixed(2),
+    return{title:kan.textContent.trim().slice(0,30),cardW:Math.round(cr.width),thumb:[Math.round(a.width),Math.round(a.height)],ratio:+(a.width/a.height).toFixed(2),textShare:+(bd.width/cr.width).toFixed(2),
      oddsSameLine:od?Math.abs(R(od).top-R(kan).top)<=4:true,leadOneLine:lead?R(lead).height<=lh(lead)*1.3:true,
      chipsSplit:chips.filter(x=>R(x).height>lh(x)*1.5&&R(x).width<R(x.parentElement).width*.9).map(x=>x.textContent.trim().slice(0,24)),left:Math.round(cr.left)}});
    const lefts=[...new Set(rows.map(r=>r.left))];

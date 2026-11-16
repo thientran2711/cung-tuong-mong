@@ -11,3 +11,18 @@ dev/site/.cdn-state.json
 /dev/fxwork/cut/
 /dev/fxwork/vid/
 /dev/fxwork/*.jpg
+dev/test/_out/
+.quickcheck/
+# test/review shots and scratch: never in git (owner 16/11 18:50Z; dev/test/img-allowlist.py rejects images outside dev/site/img-allowlist.txt)
+/.ahcache/
+/.out/
+/.t/
+/.tmp/
+/dev/shots/
+/dev/shots-td/
+/dev/owner-shots/
+/dev/figwork/sheets/
+/dev/handover/reports/**/*.png
+/dev/handover/reports/**/*.jpg
+/dev/handover/reports/**/*.webp
+/.quickcheck/

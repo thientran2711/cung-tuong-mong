@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node test/merge.test.mjs
+      - run: node test/merge.test.mjs && node test/vault.test.mjs && node test/seat.test.mjs
       - run: npx --yes wrangler@4 deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

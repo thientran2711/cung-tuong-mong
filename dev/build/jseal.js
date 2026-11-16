@@ -63,11 +63,57 @@ header.hud.kseal-pad>.kseal-hud{top:calc(50% - var(--kseal) / 2)}
 /* one-row bar 1000–1179 px (iPad landscape small): the quẻ line ran into the stat cells even before the seal (−58 px with "Quẻ Thượng
    thượng (Giao thiệp)" at 1000 px); the stat cells take the phone's label form (icon only, name in the tooltip) so time + quẻ, cells and
    seal all fit */
-@media (min-width:1000px) and (max-width:1179px){
- html body header.hud.kseal-pad #kstrow{gap:0 6px}html body header.hud.kseal-pad #kstrow>.kstg+.kstg{padding-left:6px}
- html body header.hud.kseal-pad #kstrow>.kstg{grid-auto-columns:minmax(34px,auto);column-gap:4px}
- html body header.hud.kseal-pad{--kseal:34px;--ksealR:6px}html body header.hud.kseal-pad .k3tt>*>*{margin-right:7px}
- html body header.hud.kseal-pad #kstrow .kst>.kstl{font-size:0;gap:0}html body header.hud.kseal-pad #kstrow .kst>.kstl img.ic{width:16px;height:16px}}
-@media (max-height:500px){header.hud.has-kseal{--kseal:30px;--ksealT:4px;--ksealR:6px}}`;document.head.appendChild(st)})();
+
+`;document.head.appendChild(st)})();
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{kitSealHud()}catch(e){}return r}}
 try{kitSealHud()}catch(e){}
+/* ================= §39.1 THE SEAL ON EVERY EVENT FRAME (owner 15/11 ~20:15Z, review/cal-plus) =================
+   Every event dialog (#modal showing an event of the queue: kitEventDp person dialogs, the 32.7 person dialog, place-event frames, event stages,
+   plain event cards, news / intel / result / night / end / reward cards — kpKind in KSEAL_EV.kinds; tool panels such as rules, info, the person
+   card, shop, act pickers, the calendar are not events) wears ONE kitSeal in a corner of its frame. A mark only (aria-hidden, no tap).
+   Placement is MEASURED every time the dialog renders, resizes or its content changes: the first corner (bottom-right, bottom-left, top-right,
+   top-left) at the first size (KSEAL_EV.sz) whose box touches no text line, button, picture, chip or scrolling area of the dialog; if no corner
+   is free at any size, the frame grows a bottom strip (.kseal-room) and the seal sits in it — it never covers text or buttons. */
+const KSEAL_EV={sz:[40,34,28,24],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
+function kitSealEvIs(m,dlg){try{if(!m||!dlg)return false;if(/pcm/.test(m.cls||"")||m.act||m.shop)return false;
+ if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;
+ const k=dlg.dataset.kind||(typeof kpKind==="function"?kpKind(m):"");const own=m.kit&&m.kit.kind;
+ if(own)return KSEAL_EV.kinds.has(k);
+ /* a queue item without its own kind is something that HAPPENED (event, news, pay day …); only the HUD help cards are tools */
+ if(k==="rule"&&(/^(Thang|Ra vào|Quẻ)/.test(String(m.t||""))||(typeof HXN==="object"&&Object.keys(HXN||{}).some(x=>HXN[x]===m.t))))return false;return true}catch(e){return false}}
+/* the parts of the dialog the seal must never touch (screen rects) */
+function kitSealOcc(dlg,seal){const L=[];const add=r=>{if(r.width>0.5&&r.height>0.5)L.push(r)};const vis=e=>{const c=getComputedStyle(e);return c.visibility!=="hidden"&&c.display!=="none"&&+c.opacity>0.05};
+ const tw=document.createTreeWalker(dlg,NodeFilter.SHOW_TEXT,{acceptNode:n=>/\S/.test(n.nodeValue)&&!(seal&&seal.contains(n))?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});
+ const rg=document.createRange();let n;while((n=tw.nextNode())){const p=n.parentElement;if(!p||!p.offsetParent&&getComputedStyle(p).position!=="fixed")continue;rg.selectNodeContents(n);for(const r of rg.getClientRects())add(r)}
+ dlg.querySelectorAll("button,a,input,textarea,select,img,svg,canvas,video,[role=button],.kchip,.ksart,.kit-x,.pframe,.kmood,.kemo").forEach(e=>{if(seal&&(seal===e||seal.contains(e)))return;if(e.closest("svg")&&e.tagName.toLowerCase()!=="svg")return;if(!e.getClientRects().length||!vis(e))return;add(e.getBoundingClientRect())});
+ dlg.querySelectorAll("*").forEach(e=>{if(seal&&seal.contains(e))return;if(e.scrollHeight>e.clientHeight+2||e.scrollWidth>e.clientWidth+2){const c=getComputedStyle(e);if(/(auto|scroll)/.test(c.overflowY+c.overflowX))add(e.getBoundingClientRect())}});
+ return L}
+function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&!M.hidden?M.querySelector(".dlg"):null;
+ document.querySelectorAll("#modal .kseal-ev").forEach(x=>{if(!dlg||x.parentNode!==dlg)x.remove()});if(!dlg)return;const m=Q[0];
+ let s=dlg.querySelector(":scope > .kseal-ev");if(!kitSealEvIs(m,dlg)){if(s)s.remove();dlg.classList.remove("kseal-room");dlg.__ksM=null;return}
+ if(dlg.__ksM!==m){dlg.__ksM=m;dlg.classList.remove("kseal-room")}
+ if(!s){dlg.insertAdjacentHTML("beforeend",kitSeal({cls:"kseal-ev"}));s=dlg.querySelector(":scope > .kseal-ev")}
+ if(getComputedStyle(dlg).position==="static")dlg.style.position="relative";
+ const D=dlg.getBoundingClientRect(),bl=dlg.clientLeft,bt=dlg.clientTop,iw=dlg.clientWidth,ih=dlg.clientHeight;const occ=kitSealOcc(dlg,s);const P=KSEAL_EV.pad,G=KSEAL_EV.gap;
+ const free=(x,y,z)=>{const a={l:D.left+bl+x-G,t:D.top+bt+y-G,r:D.left+bl+x+z+G,b:D.top+bt+y+z+G};if(a.l<0||a.t<0||a.r>innerWidth||a.b>innerHeight)return false;
+  for(const r of occ)if(Math.min(a.r,r.right)>Math.max(a.l,r.left)&&Math.min(a.b,r.bottom)>Math.max(a.t,r.top))return false;return true};
+ /* anchored to its corner (right / bottom), so a frame that later grows or shrinks keeps the seal in the same corner */
+ const put=(x,y,z,c)=>{s.style.setProperty("--kseal",z+"px");const R=c==="br"||c==="tr"||c==="room",B=c==="br"||c==="bl"||c==="room";
+  s.style.left=R?"auto":x+"px";s.style.right=R?P+"px":"auto";s.style.top=B?"auto":y+"px";s.style.bottom=B?P+"px":"auto";s.dataset.c=c;s.dataset.sz=z;
+  try{if(window.__ksRO&&dlg.__ksRO!==1){dlg.__ksRO=1;window.__ksRO.observe(dlg)}}catch(e){}};
+ const big=KSEAL_EV.sz;
+ if(!dlg.classList.contains("kseal-room"))for(const z of big){const C=[["br",iw-z-P,ih-z-P],["bl",P,ih-z-P],["tr",iw-z-P,P],["tl",P,P]];for(const [c,x,y] of C)if(free(x,y,z)){put(x,y,z,c);return}}
+ const z=big[big.length-1];if(!dlg.classList.contains("kseal-room")){dlg.style.setProperty("--ksealroom",(z+P*2)+"px");dlg.classList.add("kseal-room")}
+ const ih2=dlg.clientHeight;put(iw-z-P,ih2-z-P,z,"room")}
+window.kitSealEvPlace=kitSealEvPlace;
+(function(){let tm=0;const later=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;try{kitSealEvPlace()}catch(e){}},90)};window.__ksealLater=later;
+ if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitSealEvPlace()}catch(e){}});setTimeout(later,400);setTimeout(later,1200)}catch(e){}return r}}
+ addEventListener("resize",later);document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG"&&e.target.closest&&e.target.closest("#modal"))later()},true);
+ const hook=()=>{const M=document.getElementById("modal");if(!M||M.__ksObs)return;M.__ksObs=1;
+  try{const mine=n=>n&&n.nodeType===1&&n.closest&&n.closest(".kseal-ev");
+  new MutationObserver(ms=>{if(ms.some(x=>x.type==="attributes"?!mine(x.target):![...x.addedNodes,...x.removedNodes].every(mine)))later()}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden","class","style"]})}catch(e){}
+  try{window.__ksRO=new ResizeObserver(later);const d=M.querySelector(".dlg");if(d){d.__ksRO=1;window.__ksRO.observe(d)}}catch(e){}};
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();
+(function(){const st=document.createElement("style");st.id="kseal-ev-css";st.textContent=`
+#modal .dlg>.kseal-ev{position:absolute;width:var(--kseal,36px);height:var(--kseal,36px);z-index:3;pointer-events:none;opacity:.9;mix-blend-mode:multiply}
+#modal .dlg.kseal-room{padding-bottom:calc(var(--ksealroom,36px) + 2px)!important}`;document.head.appendChild(st)})();

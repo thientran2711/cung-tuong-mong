@@ -25,8 +25,10 @@ const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
 function pushDil(d,title){if(!d)return"";pushModal({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return""}
 function WHO(w){if(!w)return null;const v=w[0]==="r"?RV(w[1]):null;return w[0]==="r"?(v?pv(v):null):w[0]==="e"?pEmp():w[0]==="t"?pTH():w[0]==="m"?pMaid():w[0]==="me"?pMe():w[0]==="d"?pDoc():null}
-function serQ(){return Q.map(m=>m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.opts?null:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}).filter(Boolean)}
-function deserQ(L){const out=[];for(const e of L||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
+/* the ☰ title menu and its sub pages (cls kptitle, j74 HM/SM) are screens, not events: a save made while one is open must not keep it (loading that save over a live kiếp, e.g. "Tiếp tục" / "Xem lại lời dặn", brought an empty menu back ~1 in 4) */
+const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
+function serQ(){return Q.map(m=>isMenuCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.opts?null:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}).filter(Boolean)}
+function deserQ(L){const out=[];for(const e of L||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else if(!isMenuCard(e))out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
 /* KIT 32.10: a dialog option that only closes ("Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) is never drawn as a button: the dialog
    gets the kit ✕ instead (jk4 kitCloseSync), and ✕ / a tap outside / Esc run that option. A dialog with options and no such option is
    a forced choice: no ✕, no tap-outside, no Esc. */
@@ -44,8 +46,8 @@ function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.fx
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
- const d=logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
- log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" → "+res:"."}`)}
+ const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
+ log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" — "+res:"."}`)}/* "—", not "→": the result itself has "Sủng a → b" (log-sync r1) */
 
 /* nights */
 /* rivals */
@@ -65,14 +67,14 @@ PEND.vase=()=>({who:pMaid(),t:`${S.maid.name} lỡ tay đánh vỡ chén ngọc 
 PEND.coldletter=p=>{const f=RV(p.f),v=p.v==null?null:RV(p.v);if(!f)return null;return{who:pv(f),t:`${f.name} từ lãnh cung lén gửi thư, xin chút bạc chạy thuốc.`,o:[
     {n:"Giúp nàng",fx:{bac:-30,duc:5},x:v?`${v.name} nghe chuyện, mến ngươi hơn`:"",go:()=>{if(v)v.rel+=20}},{n:"Làm ngơ",fx:{duc:-2}}]}};
 PEND.embezzle=()=>{const q=rivals[0];return{who:pEunOf(q),t:`Một thái giám lén mang đến sổ sách chứng Hoàng hậu ${q.name} biển thủ bạc nội khố, đòi 80 lượng.`,o:[
-    {n:"Mua lấy",fx:{bac:-80},x:"chứng cứ Hoàng hậu +2",go:()=>{q.ev+=2}},{n:"Đuổi hắn đi",fx:{}}]}};
+    {n:"Mua lấy",fx:{bac:-80},x:"chứng cứ Hoàng hậu +2",go:()=>{evStory(q,2,"biển thủ bạc nội khố")}},{n:"Đuổi hắn đi",fx:{}}]}};
 PEND.tuyen=()=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên tuyển thêm tú nữ hay không.",o:[
     {n:"Tâu nên tuyển ít",fx:{danh:4,sung:-3}},{n:"Tâu nên tuyển nhiều",fx:{sung:5,duc:-3},x:"tháng sau thêm một tú nữ",go:()=>{S.moreRivals=1}}]});
 PEND.thbenh=()=>({who:pTH(),t:"Thái hậu lâm bệnh, Đức Thọ cung đóng cửa không tiếp khách.",o:[
     {n:"Hầu bệnh cả tháng",fx:{suc:-25,th:15,duc:4}},{n:"Gửi lễ vật vấn an",fx:{bac:-30,th:4}}]});
 PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho một thị vệ.`,o:[
     {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh -8`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:-8});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh -8.`)}}},
-    {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} +2`,go:()=>{v.ev+=2}}]}};
+    {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} +2`,go:()=>{evStory(v,2,"viết thư tình cho một thị vệ")}}]}};
 function makeDil(){const pool=liveRivals(false),L=[];
   if(qOn())L.push(()=>mkP("vase"));
   if(rivals.some(v=>v.alive&&v.out))L.push(()=>{const f=pick(rivals.filter(v=>v.alive&&v.out));const v=pool.length?pick(pool):null;return mkP("coldletter",{f:f.id,v:v?v.id:null})});
@@ -85,9 +87,10 @@ function makeDil(){const pool=liveRivals(false),L=[];
 
 /* the turn */
 function endTurn(){
-  if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();
+  if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
   S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
-  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;
+  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});
+  if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
@@ -95,25 +98,25 @@ function endTurn(){
   rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
   flip();if(!S.dead)newLots();
   if(ev)Q.splice(qStart,0,{t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${ev}</p>`});
-  if(S.justCrowned){S.justCrowned=0;record("Lên ngôi Hoàng hậu");Q.unshift({t:"Mẫu nghi thiên hạ",cls:"end",who:pMe(),h:`<p>Sau ${S.year} năm trong cung, ${S.name} nhận kim sách kim ấn, lên ngôi Hoàng hậu.</p><p>Con đường còn lại: đưa một hoàng tử lên ngôi, thành Hoàng thái hậu.</p>`,btn:"Tiếp tục"})}
+  if(S.justCrowned){S.justCrowned=0;record("Lên ngôi Hoàng hậu");Q.unshift({t:"Mẫu nghi thiên hạ",cls:"end",art:"img/ev-tan-phong.webp",who:pMe(),h:`<p>Sau ${S.year} năm trong cung, ${S.name} nhận kim sách kim ấn, lên ngôi Hoàng hậu.</p><p>Con đường còn lại: đưa một hoàng tử lên ngôi, thành Hoàng thái hậu.</p>`,btn:"Tiếp tục"})}
   if(ev)log(ev);
   curtain();deal();render()}
 function monthTick(){let ev="";
   S.turn++;ev+=monthPay();
   if(S.pray)S.pray--;if(S.fert)S.fert--;if(S.master)S.master--;if(S.confined)S.confined--;if(S.shield)S.shield--;
-  if(S.arts.thi>=3)S.sung=cl(S.sung+(S.arts.thi>=5?2:1),0,100);
+  {const b=typeof lsSnap==="function"?lsSnap():null;if(S.arts.thi>=3)S.sung=cl(S.sung+(S.arts.thi>=5?2:1),0,100);if(b)lsNote(b,{sung:"thơ hay được truyền tụng"},true)}
   ev+=maidMonth();ev+=pregMonth();if(S.dead)return ev;S.anthai=0;ev+=itemMonth(S);anMonth(S);restock();oanMonth();assignHouses();S.chat={};ev+=illMonth();ev+=coldMonth();if(S.dead)return ev;ev+=servRanks();ev+=servMonth();ev+=facMonth();
-  const dd=has("nhantu")?2:1;if(S.duc>=60)S.th=cl(S.th+dd,-100,100);else if(S.duc<20)S.th=cl(S.th-dd,-100,100);
+  {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=60)S.th=cl(S.th+dd,-100,100);else if(S.duc<20)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
-  if(!S.out&&S.sung<=0&&S.danh<=5&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
+  if(!S.out&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
   const wasQ=S.rank>=7;ev+=promote();if(!wasQ&&S.rank>=7)S.justCrowned=1;
   S.month++;S.tuan=0;
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
     if(S.heir&&!S.heir.v&&S.heir.k.alive){apply({danh:5});ev+="Ngươi là mẹ Thái tử, danh vọng thêm cao. Danh +5. "}
     if(S.age>25){S.sac=Math.max(10,S.sac-2);ev+=`Năm mới, ngươi ${S.age} tuổi; nhan sắc phai dần (Sắc ${S.sac}). `}}
-  if(S.age>=40&&S.rank<7&&!mySons().length){over("Lãnh cung","Tuổi xuân qua đi, sống cô quạnh nơi thâm cung.","Tuổi xuân qua đi");return ev}
-  if(S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5)){emperorDies(ev);return ev}
+  if(S.age>=40&&S.rank<7&&!mySons().length){over("Lãnh cung","Tuổi xuân qua đi, sống cô quạnh nơi thâm cung.","Tuổi xuân qua đi",true);return ev}
+  if(typeof mortEmpDue==="function"?mortEmpDue():S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5)){emperorDies(ev);return ev}
   ev+=moodMonth();
   if(S.month===1)ev+=festival("Yến tiệc đầu xuân","sac","Sắc và điệu múa");
   if(S.month===7)ev+=festival("Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ");
@@ -124,13 +127,13 @@ function curtain(){const c=$("curtain");c.textContent=`${TUAN[S.tuan][0].toUpper
 function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
   if(!h){const c=allKids().filter(([k])=>k.alive&&k.sex==="m").sort((a,b)=>b[0].age-a[0].age);if(c.length)h={k:c[0][0],v:c[0][1]}}
   const pre=`Năm ${S.year}, ${empName()} băng hà, thọ ${S.emp.age} tuổi. `;
-  if(!h)return over("Thái phi",pre+"Tiên đế không có hoàng tử nối ngôi, thân vương vào kế vị. Ngươi được tôn làm Thái phi, sống nốt đời ở Thọ Khang cung.","Thành Thái phi");
-  if(!h.v)return over("Hoàng thái hậu",pre+`${h.k.name}, con ngươi, lên ngôi. Ngươi được tôn làm Hoàng thái hậu, buông rèm nghe chính.`,"Lên ngôi Thái hậu");
+  if(!h)return over("Thái phi",pre+"Tiên đế không có hoàng tử nối ngôi, thân vương vào kế vị. Ngươi được tôn làm Thái phi, sống nốt đời ở Thọ Khang cung.","Thành Thái phi",true);
+  if(!h.v)return over("Hoàng thái hậu",pre+`${h.k.name}, con ngươi, lên ngôi. Ngươi được tôn làm Hoàng thái hậu, buông rèm nghe chính.`,"Lên ngôi Thái hậu",true);
   const v=h.v,live=v.alive&&!v.out;
-  if(S.rank>=7)return over("Mẫu hậu Hoàng thái hậu",pre+`${h.k.name}, con của ${v.name}, lên ngôi. Ngươi là đích mẫu, được tôn làm Mẫu hậu Hoàng thái hậu${live?`; nhưng ${v.name} cũng được tôn Thánh mẫu, cùng ngươi chia đôi hậu cung`:""}.`,"Thành Thái hậu (đích mẫu)");
-  if(!live)return over("Thái phi",pre+`${h.k.name} lên ngôi. Mẹ ruột tân đế đã không còn, không ai truy cứu chuyện cũ. Ngươi thành Thái phi.`,"Thành Thái phi");
+  if(S.rank>=7)return over("Mẫu hậu Hoàng thái hậu",pre+`${h.k.name}, con của ${v.name}, lên ngôi. Ngươi là đích mẫu, được tôn làm Mẫu hậu Hoàng thái hậu${live?`; nhưng ${v.name} cũng được tôn Thánh mẫu, cùng ngươi chia đôi hậu cung`:""}.`,"Thành Thái hậu (đích mẫu)",true);
+  if(!live)return over("Thái phi",pre+`${h.k.name} lên ngôi. Mẹ ruột tân đế đã không còn, không ai truy cứu chuyện cũ. Ngươi thành Thái phi.`,"Thành Thái phi",true);
   const o=od(30+S.duc/2+v.rel/2);
-  if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}) rồi tha cho ngươi, cho dời đến Thọ Khang cung.`,"Thành Thái phi");
+  if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}) rồi tha cho ngươi, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
   return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
 function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.origin.n,r:RANKS[S.rank].n,age:S.age,f:fate+(S.st.tag?" · "+S.st.tag:"")};
   if(S.recorded&&p.length)p[0]=e;else p.unshift(e);S.recorded=true;store.set("cung-kiep",p.slice(0,12))}

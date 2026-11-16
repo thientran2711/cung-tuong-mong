@@ -33,14 +33,14 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
 function treatO(p,way){return cl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p)),5,95)}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p));
- const bribed=liveRivals(true).find(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40);
+ const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):liveRivals(true).find(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40);
  if(way==="ty"&&bribed&&roll(25)){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(cl(o,5,95))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(50)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
 function illCards(){const A=[];const i=illOf(S);
  if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(50)}`,go:()=>log(treat(S,"ty"))});
   if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
   A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(50)}`,go:()=>log(treat(S,"rest"))})}
- else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:{duc:-3},o:100,k:1,w:{sung:3},x:`2 tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra, Danh -6, bị phạt: ${chanceW(28)}`,go:()=>{S.fakeIll=2}});
+ else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,k:1,w:{sung:BAL.tw.g.ill},x:`2 tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra, Danh -6, bị phạt: ${chanceW(28)}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
  return A}
 
 /* ================= THE TUẦN'S FORTUNE: xin xăm ================= */

@@ -40,10 +40,11 @@ const elig=`(()=>{const nx=RANKS[S.rank+1];S.sung=nx.s+5;S.danh=nx.d+5;S.duc=Mat
     v.ex.cd=0;BAL.ex.bar=[0,0,0];const t=promoteP(v);BAL.ex.bar=window.__bar0;return{r1,free,failed,passRank:v.rank,t,turn:S.turn}});
    ok(n.failed.rank===n.r1&&n.failed.cd>n.turn&&n.failed.news.some(x=>/trượt khảo hạch/.test(x)),'NPC fails the exam → no rank, cooldown, news line',n.failed.news[0]);
    ok(!n.free||n.passRank===n.r1+1,'NPC passes → promoted by the same decree',`${n.r1}→${n.passRank} ${n.t}`);
-   /* 6. son's birth: an exam, not a rank on the spot */
+   /* 6. son's birth: a rank on the spot (owner 20:05Z) */
    const g=await p.evaluate(()=>{S.ex={to:S.rank+1};const rk=S.rank;S.preg=9;S.fake=0;S.sung=0;S.danh=0;let t="";try{const k0=Math.random;Math.random=()=>0.99;try{t=birthP(S)}finally{Math.random=k0}}catch(e){t='ERR '+e.message}
     return{rk,after:S.rank,grace:S.ex.grace,to:S.ex.to,t:String(t).replace(/<[^>]+>/g,'')}});
-   ok(g.after===g.rk&&(g.grace===g.to||!/hoàng tử/i.test(g.t)),'son birth grants an exam (no rank on the spot)',g.t.slice(0,160));
+   /* owner 15/11 20:05Z (review/promo-rules): a son = promoted at once, no exam; a daughter = an exam (dev/test/promo-rules.js) */
+   ok(/hoàng tử/i.test(g.t)?g.after===g.rk+1:g.after===g.rk,'son birth → rank at once (owner 20:05Z), daughter → no rank on the spot',g.t.slice(0,160));
    /* 7. old save from the published build loads and migrates */
    if(OLD){const p2=await ctx.newPage();p2.on('pageerror',e=>errs.push('old '+e.message.slice(0,200)));await boot(p2,OLD);
     const sv=await p2.evaluate(elig+`;JSON.stringify(ser())`);await p2.close();

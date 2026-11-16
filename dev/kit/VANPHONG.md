@@ -36,6 +36,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab con cái | Hoàng tự | Con cái (tên tab) |
 | Tab rương | Tư trang (chữ ngắn cũng "Tư trang") | Rương đồ, Rương |
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
+| Việc học một môn (Tài nghệ, Tứ đức) (sếp 15/11) | Tự học · Học với thầy · Học với ma ma · Học với Thái hậu (tên thật người dạy giữ trong lời, vd. "ma ma giáo tập") | Tự rèn, Tự luyện, Theo ma ma giáo tập, Xin Thái hậu cho học cùng |
+| Khoảng số trên thẻ việc (sếp 15/11) | "tiến bộ Thi một hai phần", "Sủng +3 đến +8" | "+1..2", "0..10" |
 | Tab ở chế độ cung nữ | Phận sự · Dư đồ · Đồng liêu · Thân phận · Sổ ghi; lời dặn "Mục Phận sự" | Việc |
 | Nút thu bảng trên cùng | Tư chất | Chỉ số |
 | Nút dưới (8 nút + Sang buổi) | Hành sự, Dư đồ, Hậu cung, Giao tình, Hoàng tự, Tư trang, Tài nghệ, Mệnh truyện | — |
@@ -54,6 +56,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Món đang mang (Tư trang, mọi ô) | **Đang mặc** (một chữ cho trâm, áo, vòng…) | Đang cài, Đang đeo, Đang dùng |
 | Tên món đồ trong câu (review/small-bugs-3) | danh từ chung: giữa câu viết thường ("Khương Lạc Anh tặng trâm gỗ đào cho …", "Phần thưởng: vòng ngọc Hòa Điền vào rương."); đứng một mình (ô đồ, tên thẻ, chip, đầu câu / đầu dòng) viết hoa chữ đầu; tên riêng trong tên món giữ hoa (Hòa Điền, Hàng Châu). VP làm trên màn hình: `VP.itemLow` (j84, tên từ IT + WD_ITEMS) | "tặng Trâm gỗ đào cho" |
 | Thay đổi thiện cảm (review/small-bugs-3) | "thiện cảm +20", "<tên> thiện cảm +25" | "thân +20", "nàng thân +20" (VP đổi cả dòng sổ cũ) |
+| Việc cung nữ làm hộ (chọn đồ ra mắt, review/small-bugs-4) | gọi tên cung nữ, nói rõ cái gì quyết định: "<tên> chọn giúp (có hợp ý hay không tùy thiện cảm của <tên> với ngươi: Chắc)"; bất kỳ "thiện cảm" nào cũng phải nói của ai với ai | "theo lòng nàng" (nàng là ai?), "Lòng" |
+| Món đang mang, mọi câu (review/small-bugs-4) | **Đang mặc** / "Ngươi đang mặc." cho trâm, áo, vòng, mọi món | Đang cài, Đang đeo, Đang dùng, "Ngươi đang cài" (cả trong câu) |
 | Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |

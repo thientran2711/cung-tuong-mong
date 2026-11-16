@@ -9,7 +9,7 @@
 ORIGINS.push({k:"cnv",n:"Cung nữ tuyển vào cung",r:0,o:{},hh:0,th:0,t:"Con nhà thường dân, qua kỳ tuyển cung nữ của Nội vụ phủ. Ngươi vào cung làm kẻ hầu, dưới cả Đáp ứng."});
 NAMES.tin="Chủ tin";NAMES.nt="Hoàng thượng để ý";
 RKEYS.push(["tin","Chủ tin"],["nt","Hoàng thượng để ý"]);
-Object.assign(HX,{tin:"Chủ tin: lòng tin của chủ nhân với ngươi (0-100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",nt:"Hoàng thượng để ý: ngài có nhớ mặt ngươi không. Từ 45 trở lên, mỗi lần để ý ngươi ngài hỏi tên và phong Đáp ứng (càng cao càng dễ).",srk:"Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô. Bậc cao nhất tùy phẩm của chủ.",merit:"Công lao: làm việc, được chủ tiến cử. Đủ thì cuối tháng Nội vụ phủ thăng bậc (cần Chủ tin 35).",wage:"Lương tháng theo bậc cung nữ.",age:"Cung nữ được xuất cung năm 25 tuổi. Chưởng sự được ở lại làm ma ma.",lau:"Tân Giả khố: giặt đồ chịu phạt. Hết hạn thì Nội vụ phủ chia về hầu chủ mới.",sec:"Số chuyện mờ ám của chủ mà ngươi biết. Có thể mật báo để lấy thưởng, nhưng chủ biết thì nguy.",spy:"Ngươi nhận bạc làm tai mắt cho người khác."});
+Object.assign(HX,{tin:"Chủ tin: lòng tin của chủ nhân với ngươi (0-100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",nt:`Hoàng thượng để ý: ngài có nhớ mặt ngươi không. Từ ${BAL.ntRise.at} trở lên, mỗi lần để ý ngươi ngài hỏi tên và phong Đáp ứng (càng cao càng dễ).`,srk:"Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô. Bậc cao nhất tùy phẩm của chủ.",merit:"Công lao: làm việc, được chủ tiến cử. Đủ thì cuối tháng Nội vụ phủ thăng bậc (cần Chủ tin 35).",wage:"Lương tháng theo bậc cung nữ.",age:"Cung nữ được xuất cung năm 25 tuổi. Chưởng sự được ở lại làm ma ma.",lau:"Tân Giả khố: giặt đồ chịu phạt. Hết hạn thì Nội vụ phủ chia về hầu chủ mới.",sec:"Số chuyện mờ ám của chủ mà ngươi biết. Có thể mật báo để lấy thưởng, nhưng chủ biết thì nguy.",spy:"Ngươi nhận bạc làm tai mắt cho người khác."});
 Object.assign(HXN,{tin:"Chủ tin",nt:"Để ý"});
 STORY.cnv={t:"Từ cung nữ lên phi tần",n:3,goal:"Ngươi vào cung làm cung nữ. Được Hoàng thượng để mắt mà phong Đáp ứng, rồi leo lên Tần.",init(){},
  hint:()=>["Được Hoàng thượng để mắt, phong Đáp ứng","Lên Thường tại","Lên Tần"][S.st.step]||"",
@@ -33,7 +33,7 @@ function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();for(con
 function srvFriendList(){return srvColleagues().filter(s=>(S.srv.af[s.sid]||0)>=30)}
 function srvMax(){const m=srvM();return m?srkMax(m,{role:"maid"}):2}
 function srvToast(msg){if(window.__bot)return;let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}t.onclick=()=>t.classList.remove("on");
- t.className="rtoast bad";t.innerHTML=`<b class="seal">CẤM</b><div class="rt"><b>${msg}</b></div>`;void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),2600)}
+ t.className="rtoast bad";t.innerHTML=`<b class="seal">CẤM</b><div class="rt"><b>${msg}</b></div>`;void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),kitPace(2600))}
 
 /* ---------- start: the consort start runs, then she is turned into a maid of a random rival ---------- */
 function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.filter(v=>v.rank>=1).length?L.filter(v=>v.rank>=1):L);
@@ -43,9 +43,9 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
  for(const s of m.staff)S.srv.af[s.sid]=R(21)-5;
  for(const s of allServ().filter(x=>ownerOf(x)!==m&&ownerOf(x)!==S).sort(()=>Math.random()-.5).slice(0,3)){S.srv.met.push(s.sid);S.srv.af[s.sid]=R(41)-20}
  S.place="home";S.visit=srvVisitOf("home");tab="act";
- Q=[{t:"Nhập cung làm cung nữ",faces:[[pMe(),S.name],[pv(m),m.name]],h:`<p>${S.name}, ${S.age} tuổi, con nhà thường dân. Qua kỳ tuyển cung nữ, Nội vụ phủ chia ngươi về hầu <b>${rkName(m)} ${m.name}</b> ở ${palName(palaceOf(m))}.</p>
-  <p>Tính chủ: <b>${m.trait}${m.trait2?", "+m.trait2:""}</b>. Chủ tin ngươi: <b>${S.tin}</b>. Lương tháng ${CNV_WAGE[1]} bạc.</p>
-  <p><b>Đường lên:</b> được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả. <b>Đường xuống:</b> bị phạt, đày Tân Giả khố, chết trong mưu của người khác.</p>
+ /* review/newgame-ui: event frame — palace-maid entering picture + her figure (KIT 32.2) */Q=[{t:"Nhập cung làm cung nữ",stage:[S],headArt:{src:"img/ev-nhap-cung-cn.webp",label:"Nhập cung"},h:`<p>${S.name}, ${S.age} tuổi, con nhà thường dân. Qua kỳ tuyển cung nữ, Nội vụ phủ chia ngươi về hầu <b>${rkName(m)} ${m.name}</b> ở ${palName(palaceOf(m))}.</p>
+  ${kitRows([["Tính chủ",`${m.trait}${m.trait2?", "+m.trait2:""}`,"t"],["Chủ tin ngươi",S.tin,"t"],["Lương tháng",`${CNV_WAGE[1]} bạc`,"t"],
+   ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
   <p class="past">Mỗi buổi 4 khắc. Mục Việc: việc nặng và việc chủ sai. Bản đồ: chỉ nơi cung nữ được đến. Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
  log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
@@ -108,13 +108,13 @@ function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
  if(p.sk==="mis"){T("Đấm lưng, hầu chuyện",od(45+S.sac/10+S.tai/10+misAdj(m)),{tin:3},{tin:-1},"công lao +0.25",ok=>{srvMerit(.25);return ok?`${m.name} dịu nét mặt.`:`${m.name} gắt: “Lui ra!”`});
   T("Xin chủ ban thưởng",od(40+S.tin/2),{bac:3+rkOf(m)},{tin:-4},"",null,{lock:S.tin<60,t:"Cần Chủ tin 60"});
   const iv=(S.srv.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];
-  T("Bẩm tin dò được",100,{tin:5},{},iv?`chủ nắm 1 chứng cứ của ${iv.name}`:"",()=>{if(iv){evA(m,iv,1);S.srv.intel.splice(S.srv.intel.indexOf(iv.id),1)}},{lock:!iv,t:"Chưa dò được tin gì"});
+  T("Bẩm tin dò được",100,{tin:5},{},iv?`chủ nắm 1 chứng cứ của ${iv.name}`:"",()=>{if(iv){/*evok: servant-mode intel; capped, preview only*/evA(m,iv,1);S.srv.intel.splice(S.srv.intel.indexOf(iv.id),1)}},{lock:!iv,t:"Chưa dò được tin gì"});
   T("Xin chủ tiến cử lên Nội vụ phủ",od(30+S.tin/2),{},{tin:-3},"công lao +3",ok=>{if(ok)srvMerit(3)},{lock:S.tin<50||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":"Cần Chủ tin 50"})}
  if(p.sk==="emp"){T("Quỳ dâng trà",od(25+S.sac/2.5+S.tai/10+mm()),{},{tin:-1},`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4}: ${chanceW(cl(30+(m.malice||40)/3,0,100))}`,ok=>{if(ok)srvNotice("meet",8);return ok?"Ngài nhận chén trà, liếc nhìn ngươi.":"Tay run, trà sóng ra khay."});
   T("Cúi đầu lui tránh",100,{duc:1},{},"giữ phận",null)}
- if(p.sk==="rv"||p.sk==="hh"){const v=p.ref&&RV(p.ref.id);if(v&&v!==m){T("Hành lễ thỉnh an",100,{danh:1},{},`${v.name} quý ngươi +2`,()=>{affAdd(v,S,2)});
+ if(p.sk==="rv"||p.sk==="hh"){const v=p.ref&&RV(p.ref.id);if(v&&v!==m){{const gN=typeof trSrvGreet==="function"?trSrvGreet(v):2;T("Hành lễ thỉnh an",100,{danh:1},{},gN?`${v.name} quý ngươi +${gN}`:`${v.name} không để tâm`,()=>{if(gN)affAdd(v,S,gN)})}
    const hostile=p.sk==="hh"||hostility(v,m)>=20;
-   T(`Mật báo chuyện của ${m.name}`,100,{bac:15,danh:1},{},`${v.name} nắm 2 chứng cứ của ${m.name} · kèm: mỗi tháng chủ phát hiện: ${chanceW(m.trait==="Đa nghi"?25:10)}; khi ấy bị giết: ${chanceW(30)}, không thì Tân Giả khố 12 tuần`,()=>{evA(v,m,2);S.srv.sec=Math.max(0,S.srv.sec-1);S.srv.betray={by:v.id};return `${v.name} lặng nghe, dúi vào tay ngươi một túi bạc.`},{lock:!(S.srv.sec>0&&hostile),t:S.srv.sec>0?"Nàng không thù chủ ngươi":"Chưa biết chuyện gì của chủ"});
+   T(`Mật báo chuyện của ${m.name}`,100,{bac:15,danh:1},{},`${v.name} nắm 2 chứng cứ của ${m.name} · kèm: mỗi tháng chủ phát hiện: ${chanceW(m.trait==="Đa nghi"?25:10)}; khi ấy bị giết: ${chanceW(30)}, không thì Tân Giả khố 12 tuần`,()=>{/*evok: mistress schemed (sec>0)*/evA(v,m,2);S.srv.sec=Math.max(0,S.srv.sec-1);S.srv.betray={by:v.id};return `${v.name} lặng nghe, dúi vào tay ngươi một túi bạc.`},{lock:!(S.srv.sec>0&&hostile),t:S.srv.sec>0?"Nàng không thù chủ ngươi":"Chưa biết chuyện gì của chủ"});
    if(p.sk==="hh")T(`Tố cáo ${m.name} trước Hoàng hậu`,od(30+S.srv.sec*15+S.danh/5),{danh:3,bac:30},{suc:-20},`${m.name} bị xét tội · ngươi về hầu Hoàng hậu`,ok=>{if(ok){S.srv.sec=0;const a0=ACTX.a;ACTX.a=v;try{fall(m,"bị cung nữ tố giác, chứng cứ rành rành")}finally{ACTX.a=a0}srvReassign("Hoàng hậu giữ ngươi lại làm chứng.",v);return `${m.name} bị xét tội.`}S.srv.betray={by:v.id};return "Hoàng hậu không tin lời một cung nữ."},{lock:S.srv.sec<2,t:"Cần biết ít nhất 2 chuyện của chủ",act:1})}
   else if(v===m)T("Hầu bên cạnh chủ",od(55+misAdj(m)),{tin:2},{tin:-1},"",null)}
  if(p.sk==="sv"){const s=servById(p.sid);if(s){T("Trò chuyện",od(55+S.duc/5+S.sac/10),{},{},"người ấy quý ngươi +10",ok=>{srvAf(s,ok?10:-3);if(roll(35))S.srv.know[s.sid]=1;return ok?`${s.name} cười nói vui vẻ.`:`${s.name} lạnh nhạt.`});
@@ -130,7 +130,7 @@ function srvErrandDone(){const sn=S.srv.sent;if(!sn||sn.done)return"";sn.done=1;
  return r}
 function srvNotice(src,gain){if(!S||(S.age||0)<18)return;const g=gain||(6+Math.round(S.sac/12));S.nt=cl(S.nt+g+Math.round(S.sac/20),0,100);const m=srvM();
  if(m&&roll(30+(m.malice||40)/3)){const d=m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4;apply({tin:-d});log(`<span class="r">${m.name} thấy Hoàng thượng nhìn ngươi, sa sầm nét mặt.</span> Chủ tin -${d}.`)}
- if(S.nt>=45&&roll(S.nt/2-10))pushDil(mkP("cnvName",{src}),"Hoàng thượng hỏi tên")}
+ if(S.nt>=BAL.ntRise.at&&roll(ntRiseOdds()))pushDil(mkP("cnvName",{src}),"Hoàng thượng hỏi tên")}
 
 /* ---------- the day's cards (Việc) ---------- */
 function srvErrPick(){const m=srvM();const L=[{k:"tyv",n:"Sang Thái y viện lấy thuốc cho chủ"},{k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"},{k:"thu",n:`Mang canh sang Cần Chính điện dâng thay ${m.name}`}];
@@ -162,7 +162,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  if(S.tonight&&S.tonight!=="me"&&S.tonight.id===m.id&&!srvOnce("tea")){
   X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:B4L,k:1,c:{},o:od(25+S.sac/2.5+S.tai/10+S.nt/5),w:{},l:{tin:-1},x:`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4}: ${chanceW(cl(30+(m.malice||40)/3,0,100))}`,once:"tea",go:()=>srvNotice("tea",8)});
   X.push({n:"Lui sau bình phong",t:"Để chủ nhân một mình hầu ngài.",b:B4L,k:1,c:{},o:100,w:{tin:2},once:"tea"})}
- if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:1,c:{},o:od(70+S.tamco/5),w:{bac:8},l:{tin:-15},x:`${v.name} nắm 1 chứng cứ của ${m.name}`,once:"spy",go:()=>evA(v,m,1),fail:()=>{if(roll(40))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
+ if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:1,c:{},o:od(70+S.tamco/5),w:{bac:8},l:{tin:-15},x:`${v.name} nắm 1 chứng cứ của ${m.name}`,once:"spy",go:()=>/*evok: capped; preview only*/evA(v,m,1),fail:()=>{if(roll(40))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
  X.forEach(a=>a.dom="");return X}
 function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid));
  if(roll(25)){apply({suc:-5});log("Tiểu thái giám Nội vụ phủ bắt nạt, bắt ngươi xách thêm hai gánh nước. Sức -5.");return}
@@ -177,8 +177,9 @@ function srvMeet(){const m=srvM();const L=allServ().filter(s=>ownerOf(s)!==m&&!S
 function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.length;let ev="";
  srvMisCheck();
  ev+=srvW(()=>resolveTonight()||"");ev+=srvW(()=>rivalsTurn()||"");if(S.dead)return;
- if(S.srv.lau>0){S.suc=cl(S.suc+5,0,100);S.srv.lau--;if(S.srv.lau<=0)srvFromLaundry()}
- else{S.suc=cl(S.suc+10,0,100);try{srvWeek()}catch(e){console.error(e)}}
+ {const lb=typeof lsSnap==="function"?lsSnap():null;/* log-sync r1: the weekly rest gets its reason in the morning line */
+ if(S.srv.lau>0){S.suc=cl(S.suc+5,0,100);if(lb)lsNote(lb,{suc:"nghỉ qua tuần (giặt đồ)"},true);S.srv.lau--;if(S.srv.lau<=0)srvFromLaundry()}
+ else{S.suc=cl(S.suc+10,0,100);if(lb)lsNote(lb,{suc:"nghỉ qua tuần"},true);try{srvWeek()}catch(e){console.error(e)}}}
  if(S.dead)return;
  if(S.suc<=0)return die(S.srv.lau>0?"Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố":"Lao lực kiệt sức mà chết");
  if(S.tuan===2){ev+=srvMonth();if(S.dead)return}else S.tuan++;
@@ -189,11 +190,12 @@ function srvEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;const q0=Q.lengt
  curtain();deal();render();if(Q.length&&$("modal").hidden)showModal()}
 function srvWeek(){srvMisCheck();const m=srvM();if(!m||!isSrv())return;
  if(roll(32))srvMoodEvent();else if(roll(Math.max(2,(m.malice||40)/8)))srvOrder();else if(roll(7))srvBribeOffer();else if(roll(8))srvFramedEvent();else if(roll(12))srvFriendTip()}
-function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]});log(`Lĩnh lương tháng: ${CNV_WAGE[rk]} bạc.`);
+function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]});log(`Lĩnh lương tháng: Bạc +${CNV_WAGE[rk]}.`)/* log-sync r1: the Sổ ghi reads "Bạc +N" */;
  ev+=srvW(()=>{let e="";for(const v of liveRivals(true))stipend(v);e+=rivalsMonth()||"";e+=servRanks()||"";e+=servMonth()||"";oanMonth();restock();e+=heirMonth()||"";e+=moodMonth()||"";return e})||"";
  if(S.dead)return ev;srvMisCheck();const m=srvM();
  if(isSrv()&&S.srv.lau<=0&&m){S.srv.mp+=1+Math.floor(rkOf(m)/3);const need=(S.srv.rk+1)*5,mx=srvMax();
-  if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+5,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
+  if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
+  else if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+5,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
   else if(S.srv.mp>need)S.srv.mp=need;
   if(S.srv.rk>=2&&S.age>=18&&roll(1.2+S.nt/25))pushDil(mkP("cnvName",{src:"month"}),"Hoàng thượng để mắt");
   else if(S.srv.rk>=2&&roll(1.5)){const big=liveRivals(true).find(x=>x!==m&&rkOf(x)>rkOf(m)+1&&(x.bac||0)>=60);if(big){ap(big,{bac:-40});srvReassign(`${big.name} bỏ bạc mua ngươi về cung mình.`,big)}}
@@ -201,12 +203,12 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
   if(S.srv.spyFor!=null){const v=RV(S.srv.spyFor);if(!v||!v.alive||v.out)S.srv.spyFor=null;else{apply({bac:8});if(d>0)evA(v,mm2,1);
    if(roll(mm2.trait==="Đa nghi"?25:8)){S.srv.spyFor=null;if(roll(30)){die(`Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết`);return ev}srvLaundry(`${mm2.name} phát hiện ngươi làm tai mắt cho ${v.name}.`,10);S.tin=10}}}
   if(isSrv()&&S.srv.betray&&roll(mm2.trait==="Đa nghi"?25:10)){S.srv.betray=null;if(roll(30)){die(`${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên`);return ev}srvLaundry(`${mm2.name} biết ngươi mật báo chuyện của nàng.`,12);S.tin=10}
-  if(isSrv()&&!S.srv.lau&&S.srv.rk>=2&&S.age>=18&&S.danh>=20&&roll(2+S.danh/15))pushDil(mkP("cnvWed",{w:R(WEDW.length)}),"Ban gả")}
+  if(isSrv()&&!S.srv.lau&&S.srv.rk>=2&&S.age>=18&&S.danh>=BAL.danhG.srvWed&&roll(2+S.danh/15))pushDil(mkP("cnvWed",{w:R(WEDW.length)}),"Ban gả")}
  S.nt=Math.max(0,S.nt-2);
  S.month++;S.tuan=0;
  if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;try{ageYear()}catch(e){}allKids().forEach(([k])=>{if(k.alive)k.age++});if(S.age>25)S.sac=Math.max(10,S.sac-2)}
  if(!isSrv())return ev;
- if(S.srv.mama&&S.age>=45){over("Ma ma",`${S.name} làm ma ma trong cung đến năm 45 tuổi, được ban bạc về dưỡng già. Đám cung nữ trẻ gọi bà là cô cô suốt đời.`,"Làm ma ma đến già");return ev}
+ if(S.srv.mama&&S.age>=45){over("Ma ma",`${S.name} làm ma ma trong cung đến năm 45 tuổi, được ban bạc về dưỡng già. Đám cung nữ trẻ gọi bà là cô cô suốt đời.`,"Làm ma ma đến già",true);return ev}
  if(!S.srv.mama&&S.age>=30){over("Xuất cung",`${S.name} 30 tuổi, Nội vụ phủ cho xuất cung theo lệ. Ngươi rời cung với ${S.bac} lạng bạc dành dụm.`,"Xuất cung tuổi 30");return ev}
  if(!S.srv.mama&&S.age>=25&&!S.srv.ageAsked&&S.srv.lau<=0){S.srv.ageAsked=1;pushDil(mkP("cnvAge",{}),"Đến tuổi xuất cung")}
  if((S.month===1||S.month===7)&&S.srv.lau<=0)pushDil(mkP("cnvFest",{m:S.month}),S.month===1?"Yến tiệc đầu xuân":"Tiệc Thất tịch");
@@ -233,13 +235,13 @@ function ordOdds(k){return od(k==="spy"?45+S.tamco/5+S.tai/10:k==="plant"?30+S.t
 function srvOrder(){const m=srvM();const t=srvW(()=>pickTarget(m));if(!t||t===S||!t.alive)return;const mal=m.malice||40;
  const k=mal>=70&&roll(35)?"poison":mal>=45&&roll(50)?"plant":"spy";pushDil(mkP("cnvOrd",{k,t:t.id}),`Lệnh của ${m.name}`)}
 function srvDoOrder(k,t){const m=srvM();if(!m||!t)return;m.schemes=(m.schemes||0)+1;S.srv.msch=m.schemes;const o=ordOdds(k);
- if(roll(o)){if(k==="spy"){evA(m,t,1);apply({tin:4,bac:3,tamco:1});log(`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm 1 chứng cứ.`)}
-  else if(k==="plant"){const a0=ACTX.a;ACTX.a=m;try{framed(t,"bị vu dùng bùa ngải")}finally{ACTX.a=a0}apply({tin:8,bac:10,duc:-5});log(`Hình nhân bùa ngải được tìm thấy trong tẩm cung ${t.name}.`)}
+ if(roll(o)){if(k==="spy"){const n=evA(m,t,1);apply({tin:4,bac:3,tamco:1});log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm 1 chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái; về bẩm ${m.name} ${harmTxt(t)}.`)}
+  else if(k==="plant"){const a0=ACTX.a;ACTX.a=m;let d=1;try{d=framed(t,"bị vu dùng bùa ngải")}finally{ACTX.a=a0}apply({tin:8,bac:10,duc:-5});log(`Hình nhân bùa ngải được tìm thấy trong tẩm cung ${t.name}.${d===0?" "+FRAME_LAST:""}`)}
   else{const d=35+R(30);ap(t,{suc:-d});const dd=dieIf(t,"chết sau một bát canh");apply({tin:12,bac:20,duc:-10});log(dd||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span>`)}
   srvMerit(1);return}
  apply({tin:-2});if(!roll(50)){log("Việc không thành, may chưa ai thấy.");return}
  if(roll(30)){die(`Bị bắt quả tang khi ${k==="poison"?"bỏ độc":k==="plant"?"cài bùa ngải":"dò la"} ${t.name}, bị đánh chết ở Thận Hình ti`);return}
- if(roll(confessRisk({tr:S.tamco>=60?"lanh":"",loyal:S.tin}))){evA(t,m,2);relAdd(m,t,-10);srvLaundry(`Bị bắt, ngươi khai ra ${m.name}. ${t.name} nắm 2 chứng cứ; chủ hận ngươi.`,10);S.tin=5;return}
+ if(roll(confessRisk({tr:S.tamco>=60?"lanh":"",loyal:S.tin}))){/*evok: ordered scheme (schemes++)*/evA(t,m,2);relAdd(m,t,-10);srvLaundry(`Bị bắt, ngươi khai ra ${m.name}. ${t.name} nắm 2 chứng cứ; chủ hận ngươi.`,10);S.tin=5;return}
  apply({suc:-20,tin:3});log("Bị bắt và tra khảo, ngươi cắn răng không khai. Sức -20. Chủ nhân nhớ ơn.");if(S.suc<=0)die("Chết dưới đòn tra khảo ở Thận Hình ti")}
 function srvBribeOffer(){const m=srvM();const L=liveRivals(true).filter(v=>v!==m&&hostility(v,m)>=25&&(v.bac||0)>=40);if(!L.length)return;pushDil(mkP("cnvBribe",{r:pick(L).id}),"Bạc lạ")}
 function srvFramedEvent(){const m=srvM();const L=srvColleagues().filter(s=>(S.srv.af[s.sid]||0)<0);if(!L.length)return;pushDil(mkP("cnvFrame",{sid:pick(L).sid}),"Bị vu oan")}
@@ -259,11 +261,13 @@ PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)
  return{t:`<p>${m.name} gọi ngươi vào phòng trong, đóng cửa: “Ngươi đi ${desc}.”</p><p class="past">Kẻ hầu nào làm cũng một luật: hỏng thì nửa phần bị bắt; bị bắt thì 3 phần bị đánh chết ở Thận Hình ti, hoặc phải khai ra chủ.</p>`,who:pv(m),o:[
   {n:"Vâng lệnh",fx:{},x:`${word(o)} · thành: ${gain} · hỏng: Chủ tin -2, nửa phần bị bắt`,go:()=>srvDoOrder(k,t)},
   {n:"Từ chối",fx:{tin:mal>=60?-15:-10},x:`kèm: bị phạt quỳ đá vụn, Sức -20: ${chanceW(mal/2)}`,go:()=>{if(roll(mal/2)){apply({suc:-20});log(`${m.name} sai người phạt ngươi quỳ trên đá vụn. Sức -20.`);if(S.suc<=0)die("Quỳ phạt đến kiệt sức mà chết")}}},
-  {n:`Mật báo cho ${who.queen?"Hoàng hậu":who.name}`,fx:{bac:20,danh:2},x:`${who.name} nắm 2 chứng cứ của ${m.name} · chủ biết thì ngươi bị đánh chết hoặc đày Tân Giả khố`,go:()=>{evA(who,m,2);S.srv.betray={by:who.id};log(`Ngươi lén báo cho ${who.name} mưu của ${m.name}.`)}}]}};
+  {n:`Mật báo cho ${who.queen?"Hoàng hậu":who.name}`,fx:{bac:20,danh:2},x:`${who.name} nắm 2 chứng cứ của ${m.name} · chủ biết thì ngươi bị đánh chết hoặc đày Tân Giả khố`,go:()=>{/*evok: mistress schemed (sec>0)*/evA(who,m,2);S.srv.betray={by:who.id};log(`Ngươi lén báo cho ${who.name} mưu của ${m.name}.`)}}]}};
+/* reviewer r2 (review/coop-b1b5-r2, ONE CORE OD:L1267): the tai mắt terms, one text for every bribe card (solo j42 + co-op jcoopworld); pay / Chủ tin from BAL.coopBribe */
+function cnvSpyX(m,noPay){return `${noPay?"":"mỗi tháng Bạc +8 · kèm: "}mỗi tháng chủ phát hiện: ${chanceW(m&&m.trait==="Đa nghi"?25:8)}; khi ấy bị đánh chết: ${chanceW(30)}, không thì Tân Giả khố 10 tuần`}
 PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)return null;
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:20},x:`mỗi tháng Bạc +8 · kèm: mỗi tháng chủ phát hiện: ${chanceW(m.trait==="Đa nghi"?25:8)}; khi ấy bị đánh chết: ${chanceW(30)}, không thì Tân Giả khố 10 tuần`,go:()=>{ap(v,{bac:-20});S.srv.spyFor=v.id}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:5},x:`${m.name} nắm 1 chứng cứ của ${v.name}`,go:()=>{evA(m,v,1);relAdd(m,v,-5)}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:BAL.coopBribe.pay},x:cnvSpyX(m),go:()=>{ap(v,{bac:-BAL.coopBribe.pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}},
+  {n:"Từ chối, bẩm chủ",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm 1 chứng cứ của ${v.name}`,go:()=>{deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before*/evA(m,v,1);relAdd(m,v,-5)}},
   {n:"Từ chối, im lặng",fx:{},x:""}]}};
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const o=od(30+S.tamco/2+S.duc/5+fr*8);const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
  return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:[
@@ -276,11 +280,11 @@ PEND.cnvName=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const o=
   {n:"Lui về sau chủ",fx:{tin:5},x:"Hoàng thượng để ý -10",go:()=>{S.nt=Math.max(0,S.nt-10)}}]}};
 PEND.cnvWed=pp=>{if(!isSrv()||(S.age||0)<18)return null;const w=WEDW[pp.w||0];
  return{t:`<p>${w} dâng sớ xin Hoàng thượng ban gả một cung nữ hiền thục. Nội vụ phủ dâng tên ngươi.</p>`,who:pEmp(),o:[
-  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: làm vợ ngoài cung",go:()=>over("Xuất giá",`${S.name} được ban gả cho ${w}, rời cung bằng kiệu hoa. Từ thân cung nữ, ngươi thành chính thất một nhà, sống nốt đời ngoài bức tường son.`,`Được ban gả cho ${w}`)},
+  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: làm vợ ngoài cung",go:()=>over("Xuất giá",`${S.name} được ban gả cho ${w}, rời cung bằng kiệu hoa. Từ thân cung nữ, ngươi thành chính thất một nhà, sống nốt đời ngoài bức tường son.`,`Được ban gả cho ${w}`,true)},
   {n:"Xin ở lại hầu chủ",fx:{tin:5},x:""}]}};
 PEND.cnvAge=()=>{if(!isSrv())return null;const hi=S.srv.rk>=3;const fate=hi?"Chưởng sự xuất cung, an hưởng tuổi già":S.bac>=100?"Xuất cung, mở tiệm nhỏ ở kinh thành":"Xuất cung về quê";
- const o=[{n:"Xuất cung về quê",fx:{},x:"kết thúc kiếp này",go:()=>over("Xuất cung",`${S.name} ${S.age} tuổi, rời cung theo lệ với ${S.bac} lạng bạc. ${hi?"Là chưởng sự cô cô, ngươi được ban thêm bạc và một mảnh ruộng.":S.bac>=100?"Ngươi mở một tiệm thêu nhỏ ở kinh thành.":"Ngươi về quê, sống đời bình dị."}`,fate)}];
- if(hi)o.push({n:"Ở lại làm ma ma",fx:{danh:3},x:"ở lại đến già, dạy cung nữ mới",go:()=>{S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.")}});
+ const o=[{n:"Xuất cung về quê",fx:{},x:"kết thúc kiếp này",go:()=>over("Xuất cung",`${S.name} ${S.age} tuổi, rời cung theo lệ với ${S.bac} lạng bạc. ${hi?"Là chưởng sự cô cô, ngươi được ban thêm bạc và một mảnh ruộng.":S.bac>=100?"Ngươi mở một tiệm thêu nhỏ ở kinh thành.":"Ngươi về quê, sống đời bình dị."}`,fate,true)}];
+ if(hi)o.push({n:"Ở lại làm ma ma",fx:{danh:3},x:typeof exSrvMama==="function"?"dự khảo hạch Nội vụ phủ; đỗ thì ở lại đến già, dạy cung nữ mới":"ở lại đến già, dạy cung nữ mới",go:()=>{if(typeof exSrvMama==="function")exSrvMama();else{S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.")}}});
  else if(S.tin>=60)o.push({n:"Xin chủ giữ lại",fx:{tin:2},x:"ở thêm đến 30 tuổi",go:()=>log(`${srvM()?srvM().name:"Chủ"} xin Nội vụ phủ giữ ngươi lại.`)});
  else o.push({n:"Xin ở lại",fx:{},x:"Chủ tin dưới 60: chủ không giữ · ở thêm đến 30 tuổi, Chủ tin -5",go:()=>apply({tin:-5})});
  return{t:`<p>Năm nay ngươi ${S.age} tuổi, đến tuổi cung nữ được xuất cung.</p>`,who:pMe(),o}};
@@ -315,7 +319,7 @@ function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("s
 function srvHud2(){const el=$("hud2");if(!el)return;const col=el.classList.contains("col");const m=srvM();
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date","srk"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
  el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở rộng":"Thu gọn"}">${col?"▾":"▴"}</button>`+c("date",`T${S.month}/${S.year} · ${TUAN[S.tuan]}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${4-used} khắc`)+c("srk",srvRkN(),"",S.srv.lau>0?"hot":"")
-  +c("tin","Chủ tin",S.tin,S.tin<30?"hot":S.tin>=60?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=45?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
+  +c("tin","Chủ tin",S.tin,S.tin<30?"hot":S.tin>=60?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=BAL.ntRise.at?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
   +c("merit","Công lao",`${Math.floor(S.srv.mp)}/${(S.srv.rk+1)*5}`)+c("wage","Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc`)+c("age","Tuổi",`${S.age} · xuất cung ${S.srv.mama?45:25}`)
   +(S.srv.lau>0?c("lau","Tân Giả khố",`${S.srv.lau} tuần`,"hot"):"")+(S.srv.sec?c("sec","Biết chuyện của chủ",S.srv.sec,"hot"):"")+(S.srv.spyFor!=null?c("spy","Tai mắt cho người khác","","hot"):"")+(m?c("mis",`Chủ: ${m.name}`,m.trait):"")}
 (function(){const r0=render;render=function(){if(isSrv()&&!(tab in SRVTABS))tab="act";const r=r0.apply(this,arguments);try{srvTabs();if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
@@ -330,7 +334,7 @@ function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf
  return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<30?"r":S.tin>=60?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
 function srvRows(){const m=srvM();const need=(S.srv.rk+1)*5,mx=srvMax();const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
-  row("Hoàng thượng để ý",`${S.nt}/100 · từ 45, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(Math.max(0,S.nt/2-10))}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
+  row("Hoàng thượng để ý",`${S.nt}/100 · từ ${BAL.ntRise.at}, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(ntRiseOdds())}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
   row("Xuất cung",S.srv.mama?"ma ma: ở đến 45 tuổi":`${S.age}/25 tuổi${S.srv.rk>=3?" · chưởng sự được ở lại làm ma ma":""}`),
   row("Đường xuống",`Chủ tin ${S.tin}: dưới 10 dễ bị đày Tân Giả khố`),row("Biết chuyện của chủ",`${S.srv.sec}${S.srv.betray?" · đã mật báo, chủ biết thì nguy":""}`),
   row("Bạn trong cung",`${srvFriendList().length} người (quý ngươi từ 30)`)].concat(S.srv.spyFor!=null&&RV(S.srv.spyFor)?[row("Tai mắt cho",RV(S.srv.spyFor).name)]:[])}
@@ -353,13 +357,13 @@ function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cnv]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled||!isSrv()||S.dead||Q.length)return;
  const s=servById(+b.dataset.sid);if(!s)return;const bf=rsnap();const r=srvStaffAct(b.dataset.cnv,s);if(r!=null)resultShow(b.firstChild.textContent,bf,r);render()},true);
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();
- return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${m.trait}${m.trait2?", "+m.trait2:""}.`:"",groups:[["Đường đi",srvRows()]],empty:""})}})();
+ return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${m.trait}${m.trait2?", "+m.trait2:""}.`:"",groups:[["Đường đi",srvRows()]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[]),empty:""})}})();
 (function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
  if(d&&d.S&&d.S.srv&&!d.S.srv.risen){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,(d.S.srv.lau>0?"Cung nữ Tân Giả khố":SRK.maid[d.S.srv.rk]||"Cung nữ")+" ")}})}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}
 .srvrow{display:flex;gap:8px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}.srvrow .srvi{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 160px;font-size:.85rem}
 .srvrow .srvb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;flex:1 1 100%}.srvrow .srvb .opt{min-width:0}
-.mspot.srvno .mlab{opacity:.6}.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
+.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
 (function(){const h0=hudTween;hudTween=function(){if(!isSrv())return h0.apply(this,arguments);const s=S.sung;S.sung=S.tin;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();
 
 /* ================= CUNG NỮ II: the palace men (j22), forbidden love and marriage roads for a maid =================
@@ -376,9 +380,9 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
  const pre=`${how} Cung nữ thuộc về cung cấm: tư tình là tội.`;
  if(m){if(m.rw==="vương gia"){m.tinh=Math.max(0,m.tinh-20);log(`${m.name} là vương gia, chỉ bị Hoàng thượng quở trách.`)}else if(roll(35)){m.alive=false;log(`<span class="r">${m.name} bị cách chức, đày ra biên ải.</span>`)}else{m.tinh=Math.max(0,m.tinh-25);m.loyal=Math.max(0,(m.loyal||50)-20);log(`<span class="r">${m.name} bị đánh bốn mươi trượng.</span>`)}}
  S.srv.lover=null;S.srv.vow=null;S.srv.rumor=0;S.srv.leak=null;if(mis)S.tin=Math.max(0,S.tin-20);
- if(S.srv.preg){S.srv.preg=0;if(roll(50)){die(`${pre} Bụng mang dạ chửa, ngươi bị đánh chết ở Thận Hình ti`);return}over("Bị đuổi khỏi cung",`${pre} Mang thai hoang, ngươi bị đánh đòn rồi đuổi ra khỏi cửa Thần Vũ, không một đồng.`,"Bị đuổi khỏi cung vì mang thai");return}
+ if(S.srv.preg){S.srv.preg=0;if(roll(50)){die(`${pre} Bụng mang dạ chửa, ngươi bị đánh chết ở Thận Hình ti`);return}over("Bị đuổi khỏi cung",`${pre} Mang thai hoang, ngươi bị đánh đòn rồi đuổi ra khỏi cửa Thần Vũ, không một đồng.`,"Bị đuổi khỏi cung vì mang thai",true);return}
  if(scheme&&roll(40)){die(`${pre} Chuyện dính vào mưu của phi tần, ngươi bị diệt khẩu`);return}
- const r=Math.random();if(r<.25){over("Bị đuổi khỏi cung",`${pre} Ngươi bị tước tên khỏi sổ cung nữ, đuổi về quê.`,"Bị đuổi khỏi cung vì tư tình");return}
+ const r=Math.random();if(r<.25){over("Bị đuổi khỏi cung",`${pre} Ngươi bị tước tên khỏi sổ cung nữ, đuổi về quê.`,"Bị đuổi khỏi cung vì tư tình",true);return}
  const d=20+R(10);apply({suc:-d});if(S.suc<=0){die(`${pre} Ngươi chết dưới đòn roi`);return}srvLaundry(`${pre} Ngươi bị đánh ${d>25?"ba mươi":"hai mươi"} roi.`,r<.6?8:12)}
 /* the men stand where j22 put them; a maid meets them on her own roads */
 (function(){const v0=srvVisitOf;srvVisitOf=function(k){const V=v0.apply(this,arguments);try{if(k!=="tgk"&&k!=="home"){const W=S.menW||{};for(const m of srvMen())if(W[m.id]===k){V.people.push({kind:"srv",sk:"man",ref:m,mid:m.id,name:m.name.split(" ").slice(-2).join(" "),ini:m.name.split(" ").pop()[0],col:"#6a8aa0",info:`${m.role} · ${m.trait} · ${tinhW(m.tinh)}`});m.seen=bkey()}
@@ -389,7 +393,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
  const T=(n,o,x,run,more)=>A.push(Object.assign({n,o,w:{},l:{},x,run(){const ok=o>=100||roll(o);const r=run(ok)||"";return `${o<100?(ok?'<span class="g">thành</span>. ':'<span class="r">hỏng</span>. '):""}${r}`}},more||{}));
  if(p.sk==="man"){const m=manById(p.mid);if(!m||!srvAdult(m))return A;const risk=srvRisk(S.place);
   T("Chào hỏi đúng lễ",100,"hắn quý ngươi +5",()=>{m.af+=5;return `${m.name} gật đầu đáp lễ.`});
-  T("Liếc mắt đưa tình",od(55+S.sac/5),`tình ý của hắn +12 · kèm: bị người thấy: ${chanceW(Math.round(risk/3))}`,ok=>{if(ok)m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
+  T("Liếc mắt đưa tình",od(55+S.sac/5),`tình ý của hắn +12 · có thể bị người thấy: ${chanceW(Math.round(risk/3))}`,ok=>{if(ok)m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
   if(m.tinh>=30)T("Trao khăn tay, thư",od(60+S.tamco/5),"tình ý +15 · khăn thư là tang vật nếu bị lục",ok=>{if(ok){m.tinh+=15;m.letters++}if(roll(risk/4))srvSeen(m,1);return ok?"Hắn giấu vội vào tay áo.":"Hắn chần chừ không nhận."});
   if(m.tinh>=50){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?cl(100-risk,5,95):0,`cần bạn canh cửa · đêm kín đáo: Sức +8, tình ý +10 · có thai: ${chanceW(10)} · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
     m.trysts++;m.tinh+=10;apply({suc:8});S.srv.lover=m.id;let r=`Đêm ấy rèm buông, đèn tắt; ${fr[0].name} canh ngoài hiên. Trời chưa sáng ngươi đã lẻn về.`;if(!S.srv.preg&&roll(10)){S.srv.preg=1;S.srv.pregM=0;r+=` <b class="r">Mấy hôm sau ngươi biết mình có thai.</b>`}return r},{lock:!fr.length,t:"cần một người bạn (quý ngươi từ 30) canh cửa",act:1});
@@ -397,7 +401,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
   if(m.tinh>=30)T("Cắt đứt",100,"hắn thôi tơ tưởng; bớt hẳn rủi ro",()=>{m.tinh=0;if(S.srv.lover===m.id)S.srv.lover=null;if(S.srv.vow===m.id)S.srv.vow=null;return "Ngươi trả lại khăn tay."})}
  if((p.sk==="rv"||p.sk==="hh")&&p.ref){const v=RV(p.ref.id);if(v&&v!==mis&&(S.srv.knowAff||[]).includes(v.id)&&v.affair){const lm=manById(v.affair);
   T(`Dọa tố chuyện tư tình`,od(45+S.tamco/3),`Bạc +30 · nàng phải che chở ngươi · hỏng: nàng oán ngươi, tìm cách hại ngươi`,ok=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);if(ok){apply({bac:30});affAdd(v,S,15);S.srv.hold=v.id;return `${v.name} tái mặt, dúi bạc vào tay ngươi: “Câm miệng.”`}oanAdd(v,S,40);if(roll(35))srvLaundry(`${v.name} ra tay trước, vu cho ngươi ăn cắp.`,8);return `${v.name} cười lạnh.`},{act:1});
-  if(mis)T(`Bẩm chủ chuyện của ${v.name}`,100,`Chủ tin +6 · ${mis.name} nắm 2 chứng cứ của ${v.name}`,()=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);evA(mis,v,2);apply({tin:6});return `${mis.name} ghi nhớ.${lm?" Chuyện "+v.name+" với "+lm.name+" thành thanh gươm trong tay chủ.":""}`})}}}catch(e){console.error(e)}return A}})();
+  if(mis)T(`Bẩm chủ chuyện của ${v.name}`,100,`Chủ tin +6 · ${mis.name} nắm 2 chứng cứ của ${v.name}`,()=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);/*evok: affair*/evA(mis,v,2);apply({tin:6});return `${mis.name} ghi nhớ.${lm?" Chuyện "+v.name+" với "+lm.name+" thành thanh gươm trong tay chủ.":""}`})}}}catch(e){console.error(e)}return A}})();
 /* the week: talk spreads, rivals use it; a token may be found */
 (function(){const w0=srvWeek;srvWeek=function(){w0.apply(this,arguments);try{if(!isSrv()||S.dead||Q.length)return;const mis=srvM();const lover=S.srv.lover&&manById(S.srv.lover);
  const hot=srvMen().filter(m=>m.tinh>=30);if(!hot.length&&!S.srv.rumor)return;
@@ -425,26 +429,26 @@ function maidLoveMonth(){let ev="";try{const M=srvMen();if(!M.length)return"";co
 /* the choice cards */
 PEND.cnvBlack=pp=>{const v=RV(pp.r),mis=srvM();if(!isSrv()||!v||!v.alive)return null;
  return{t:`<p>Thái giám của ${v.name} chặn ngươi sau hòn non bộ: “Chuyện ngươi với nam nhân bên ngoài, chủ tử nhà ta biết cả. Muốn giữ mạng thì nghe lời.”</p>`,who:pv(v),o:[
-  {n:"Nghe lời, làm tai mắt",fx:{},x:`thành tai mắt của ${v.name} (không bạc) · kèm: mỗi tháng chủ phát hiện: ${chanceW((srvM()||{}).trait==="Đa nghi"?25:8)}; khi ấy bị đánh chết: ${chanceW(30)}, không thì Tân Giả khố 10 tuần`,go:()=>{S.srv.spyFor=v.id;S.srv.leak=null}},
+  {n:"Nghe lời, làm tai mắt",fx:{},x:`thành tai mắt của ${v.name} (không bạc) · kèm: ${cnvSpyX(srvM()||{},1)}`,go:()=>{S.srv.spyFor=v.id;S.srv.leak=null}},
   {n:"Đút bạc bịt miệng",fx:{bac:-20},x:"lần này thôi; tin đồn bớt",go:()=>{S.srv.leak=null;S.srv.rumor=0}},
   {n:"Mặc kệ",fx:{},x:`${word(40)} · thành: nàng không nói · hỏng: nàng mách ${mis?mis.name:"quản sự"}, bị lục rương`,go:()=>{if(!roll(40)){const m=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=30)[0];if(m)srvAffairCaught(m,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null}}]}};
 PEND.cnvGrant=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=pp.m&&manById(pp.m);const w=m?m.name:WEDW[pp.w||0];const by=pp.by==="th"&&!S.thDead?"Thái hậu":(srvM()?srvM().name:"Chủ nhân");
  return{t:`<p>${by} khen ngươi hầu hạ chu đáo, muốn ban gả ngươi cho <b>${w}</b>${m?`, người ngươi ${tinhW(m.tinh).replace("ngươi","")}`:""}.</p>`,who:pp.by==="th"?pTH():(srvM()?pv(srvM()):pMe()),o:[
-  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: được ban hôn",go:()=>over("Được ban hôn",`${by} ban gả ${S.name} cho ${w}. Ngươi rời cung có của hồi môn${m?", về với người mình thương":""}.`,`Được ${by} ban hôn cho ${w}`)},
+  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: được ban hôn",go:()=>over("Được ban hôn",`${by} ban gả ${S.name} cho ${w}. Ngươi rời cung có của hồi môn${m?", về với người mình thương":""}.`,`Được ${by} ban hôn cho ${w}`,true)},
   {n:"Xin ở lại",fx:{tin:pp.by==="th"?0:-5},x:"từ chối khéo"}]}};
 PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return null;
  return{t:`<p>${m.name} dâng sớ xin Hoàng thượng ban cung nữ ${S.name} về phủ làm thiếp.</p>`,who:pMan(m),o:[
-  {n:"Theo về vương phủ",fx:{},x:"kết thúc kiếp này: làm thiếp vương gia",go:()=>over("Vào vương phủ",`${S.name} được ban về phủ ${m.name} làm thiếp. Từ phòng cung nữ, ngươi bước vào một hậu viện khác.`,`Làm thiếp của ${m.name}`)},
+  {n:"Theo về vương phủ",fx:{},x:"kết thúc kiếp này: làm thiếp vương gia",go:()=>over("Vào vương phủ",`${S.name} được ban về phủ ${m.name} làm thiếp. Từ phòng cung nữ, ngươi bước vào một hậu viện khác.`,`Làm thiếp của ${m.name}`,true)},
   {n:"Xin ở lại hầu chủ",fx:{tin:3},x:"vương gia phật ý: tình ý -15",go:()=>{m.tinh=Math.max(0,m.tinh-15)}}]}};
 /* release age: marry the man she is bound to */
 (function(){const a0=PEND.cnvAge;PEND.cnvAge=pp=>{const d=a0(pp);try{const b=srvBond();if(d&&b)d.o.unshift({n:`Xuất cung thành thân với ${b.name}`,fx:{},x:`kết thúc kiếp này · ${b.name} ${tinhW(b.tinh)}`,go:()=>over("Thành thân",`${S.name} ${S.age} tuổi, rời cung theo lệ. Ngoài cửa Thần Vũ, ${b.name} đã đứng chờ. Hai người thành thân, sống nốt đời bên nhau.`,`Xuất cung thành thân với ${b.name}`)})}catch(e){}return d}})();
-(function(){const o0=over;over=function(h,t,fate){if(isSrv()&&h==="Xuất cung"&&/30 tuổi/.test(t)){const b=srvBond();if(b){h="Thành thân";t+=` ${b.name} chờ ngươi ngoài cửa cung; hai người thành thân.`;fate=`Xuất cung thành thân với ${b.name}`}}return o0.call(this,h,t,fate)}})();
+(function(){const o0=over;over=function(h,t,fate,alive){if(isSrv()&&h==="Xuất cung"&&/30 tuổi/.test(t)){const b=srvBond();if(b){h="Thành thân";t+=` ${b.name} chờ ngươi ngoài cửa cung; hai người thành thân.`;fate=`Xuất cung thành thân với ${b.name}`}}return o0.call(this,h,t,fate,alive)}})();
 /* her road page shows her bonds */
 (function(){const r0=srvRows;srvRows=function(){const L=r0.apply(this,arguments);try{const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */const H=srvMen().filter(m=>m.tinh>=10||m.af>=10);
  L.push(row("Nam nhân",H.length?H.map(m=>`${m.role} ${m.name.split(" ").slice(-2).join(" ")}: ${tinhW(m.tinh)}${S.srv.vow===m.id?" · đã hẹn ước":""}${S.srv.lover===m.id?" · tư tình":""}`).join("; "):"chưa quen ai (gặp ở vườn, điện, Thái y viện)"));
  if(S.srv.rumor||S.srv.leak)L.push(row("Lời đồn",`${S.srv.rumor||0}${S.srv.leak&&RV(S.srv.leak)?" · "+RV(S.srv.leak).name+" biết chuyện":""}`));
  if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · tháng thứ 3 thì lộ: bị đánh chết: ${chanceW(50)}, không thì bị đuổi khỏi cung`));
- if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",S.srv.knowAff.map(RV).filter(Boolean).map(v=>v.name).join(", ")))}catch(e){}return L}})();
+ if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",kitNameList(S.srv.knowAff.map(RV).filter(Boolean))))}catch(e){}return L}})();
 /* a pregnancy she cannot show: the same hard road, priced */
 (function(){const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{if(isSrv()&&S.srv.preg&&!srvOnce("abort"))X.unshift({n:"Uống thuốc phá thai",t:"Mua thuốc của tiểu thái giám, uống lén trong đêm.",k:1,c:{bac:-20},o:od(60),w:{},l:{suc:-30},x:`hết thai, Sức -15 · hỏng: băng huyết Sức -30 · kèm khi hỏng: băng huyết mà chết: ${chanceW(20)}`,once:"abort",dom:"",go:()=>{S.srv.preg=0;apply({suc:-15})},fail:()=>{S.srv.preg=0;if(roll(20))die("Uống thuốc phá thai, băng huyết mà chết")}})}catch(e){}return X}})();
 /* a friend's tip may be a consort's affair */

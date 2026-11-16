@@ -65,7 +65,7 @@ try{const t=KINV_CATS.find(c=>c[0]==="trang");if(t&&!t[2].includes("Trâm cài")
 function wdBagItem(k,extra){const w=WD_ITEMS[k];return Object.assign({cat:w.sl==="tram"?"trang":"y",src:w.icon,src512:w.icon,name:w.n,grade:w.g|0,qty:1,lux:wdLux(k),
  tip:`${w.n} · ${w.sl==="tram"?"Trâm cài":"Y phục"}`},extra)}
 (function(){const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments).map(x=>WD_ITEMS[x.g.k]?Object.assign(x,wdBagItem(x.g.k,{qty:x.qty,tip:`${WD_ITEMS[x.g.k].n}${x.qty>1?" ×"+x.qty:""} · ${WD_ITEMS[x.g.k].sl==="tram"?"Trâm cài":"Y phục"}`})):x);
-  try{const w=wdOf(S);const W=["tram","y"].filter(sl=>w[sl]&&WD_ITEMS[w[sl].k]).map(sl=>wdBagItem(w[sl].k,{id:-1,g:{k:w[sl].k,i:-1,n:1,w:1,wdSlot:sl},on:true,onText:sl==="tram"?"Đang cài":"Đang mặc"}));
+  try{const w=wdOf(S);const W=["tram","y"].filter(sl=>w[sl]&&WD_ITEMS[w[sl].k]).map(sl=>wdBagItem(w[sl].k,{id:-1,g:{k:w[sl].k,i:-1,n:1,w:1,wdSlot:sl},on:true,onText:"Đang mặc"}));
    const P=(S.wdPawn||[]).map((x,i)=>x&&x.e&&WD_ITEMS[x.e.k]?wdBagItem(x.e.k,{id:-1,g:{k:x.e.k,i:-1,n:1,wdPawn:i},mark:["đang cầm","n"]}):null).filter(Boolean);
    return W.concat(L,P)}catch(e){console.error(e);return L}}})();
 /* the item panel of a WD item / a fabric */
@@ -91,7 +91,7 @@ function wdActBtns(e,g){const w=wdItem(e);if(!w)return[];const B=[];const ag=wdA
  B.push(pbtn(`data-wd="pawn" data-ix="${ix}"`,"Cầm cố",`${word(100-wdLeak(S,ag,true))} · tốn: 1 khắc · thành: Bạc +${Math.round(pr*WD.pawnPct/100)}, chuộc lại ${Math.round(pr*WD.redeemPct/100)} bạc trong ${WD.pawnWeeks} tuần · kèm: lộ ra thì Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
  return B}
 function wdOpen(x){const g=x.g,e=wdEntryOf(g),w=wdItem(e);if(!w)return;const B=wdActBtns(e,g);const pawn=g.wdPawn!=null?S.wdPawn[g.wdPawn]:null;
- const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.wdSlot)F.push(g.wdSlot==="tram"?"Ngươi đang cài.":"Ngươi đang mặc.");if(g.wdSlot==="y")F.push("Muốn thay, chạm ô Y phục ở Đang mang rồi chọn bộ khác.");
+ const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.wdSlot)F.push("Ngươi đang mặc.");if(g.wdSlot==="y")F.push("Muốn thay, chạm ô Y phục ở Đang mang rồi chọn bộ khác.");
  kitModal({kind:"info",title:w.n,sub:`${w.sl==="tram"?"Trâm cài":"Y phục"} · ${KIT_GRADE[w.g|0].n}`,
   itemPic:kitItem({src:w.icon,name:"",grade:w.g,size:"lg",qty:g.n,lux:wdLux(w.k)}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${wdItemRowsE(e,{pawn})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
@@ -117,7 +117,7 @@ function wdStatusChip(){try{const lab=wdKnownStatus(S);if(lab)return kitChip(`Đ
    x.mini=fx.length?fx.map(([a,v])=>kitChip(a,v)).join(""):`<span class="keqm">giản dị</span>`}
   const wb=wearBonus(S),C=[];if(wb.sac)C.push(["Sắc",wb.sac]);if(wb.danh)C.push(["Danh",wb.danh]);const vp=wdVpSeen();
   const sum=(C.length?kitChips(C):`<span class="past">chưa mang gì: không thêm</span>`)+kitLuxChip(luxOf(S))+wdStatusChip()+(vp?kitChip(`${vp} món vượt phẩm: dễ bị tố`,"no"):"");
-  return kitEquipSlots({key:"tutrang",title:"Đang mang",slots:o.slots,sum,onPick:keqPick})}catch(e){console.error("keqTT wd",e);return html}}})();
+  return kitEquipSlots({key:"tutrang",title:"Đang mang",slots:o.slots,sum,onPick:keqPick,col:true})}catch(e){console.error("keqTT wd",e);return html}}})();
 function wdSlotOpen(x){const sl=x.wd;const s=wdSlotItem(sl);const seen=new Set();
  const T=(S.inv||[]).map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&wdItem(e)&&wdItem(e).sl===sl&&!seen.has(e.k)&&seen.add(e.k)).map(([e,i])=>{const w=wdItem(e);
   return kitItem({src:w.icon,name:w.n,grade:w.g,size:"md",label:[wdKnowsE(e)?"đồ phẩm "+wdPName(wdP(e,S)):(plainFx(w.w)||"giản dị"),"n"],data:`data-kid="${e.k}" data-kix="${i}" data-kidpick="wear" role="button" tabindex="0"`,

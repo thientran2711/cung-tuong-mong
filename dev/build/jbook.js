@@ -18,10 +18,12 @@ function kitCurlOff(){try{return typeof reducedMotion==="function"?reducedMotion
 function kitCurlEase(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 /* a quick lift then a slower settle (a flick of the page): the next page shows under the corner from the first frames (owner 11/15) */
 function kitCurlLift(t){return 1-Math.pow(1-t,1.6)}
-/* KIT_TURN_MS: the ONE page-turn duration (owner 11/15 01:50Z "cho animation lật trang chậm lại": ~2× the old 680–760 ms).
+/* KIT_TURN_MS: the ONE page-turn duration (owner 11/15 01:50Z "cho animation lật trang chậm lại": ~2× the old 680–760 ms; 16/11 Foreman B
+   KIT REQUEST C32b: 1300 → 800 ms, the landscape curl was felt stiff/slow — buttons, tabs, book, cover, drag release all read this one constant).
    KIT.md §34.0. kitTurnEase: slow lift, even swing, a long gentle settle as the sheet lands. */
-const KIT_TURN_MS=1300;
+const KIT_TURN_MS=800;
 function kitTurnEase(t){const u=1-Math.pow(1-t,1.45);return (1-Math.cos(Math.PI*u))/2}
+function kitSlideEase(t){return 1-Math.pow(1-t,3)}
 function kitCurlFade(el,mid,done,ms){ms=ms||170;if(!el){mid&&mid();done&&done();return}el.classList.add("kcl-fade");
  setTimeout(()=>{try{mid&&mid()}catch(e){console.error(e)}el.classList.remove("kcl-fade");setTimeout(()=>done&&done(),ms)},ms)}
 function kitCurlSfx(){try{if(typeof kbkSfx==="function")kbkSfx()}catch(e){}}
@@ -58,17 +60,27 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
+/* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
+   layout per scroller per frame during a page turn).
+   Reading scrollTop forces a layout every frame of the turn, so it is read only after a scroll happened somewhere (or a face changed). */
+let KCL_SCROLLN=0;try{document.addEventListener("scroll",()=>{KCL_SCROLLN++},{capture:true,passive:true})}catch(e){}
+function kclLkSync(faces){let need=false;for(const Fc of faces)if(Fc.__kln!==KCL_SCROLLN||Fc.__klk!==Fc.lk)need=true;if(!need)return;for(const Fc of faces){Fc.__kln=KCL_SCROLLN;Fc.__klk=Fc.lk}
+ const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+  /* lag-play: the copy is a still picture clipped to the page: a box that starts below the visible bottom cannot show and (in flow,
+     after everything above it) cannot move what shows, so it keeps its class styles only (no per-property freeze). */
+  const rb=Math.min(src.getBoundingClientRect().bottom,innerHeight)+2;
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
-   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){const c0=getComputedStyle(a);for(const k of KCL_FREEZE){const v=c0[k];if(v)b.style[k]=v}}
-   else if(i&&b.style&&getComputedStyle(a).display==="none")b.style.display="none";
-   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
-   const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
+   let ra=null;if(i){ra=a.getBoundingClientRect();if(ra.top>rb&&(ra.width||ra.height))continue}
+   const ca=getComputedStyle(a);/* lag-play: ONE computed style object per element (was read 2-3 times) */
+   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){for(const k of KCL_FREEZE){const v=ca[k];if(v)b.style[k]=v}}
+   else if(i&&b.style&&ca.display==="none")b.style.display="none";
+   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);if(i&&ca.position==="sticky")b.style.position="relative";
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
    if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
-   if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
+   if(i&&a.firstElementChild){const r=ra||a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
@@ -153,7 +165,7 @@ function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=per
    vanish: the sheet lands off this page (phone / single page: beyond the spine): it is CLIPPED at the spine, never faded.
    The sheet is ALWAYS opaque paper on both faces (owner 11/15 02:40Z: "tờ lật luôn đục, không trong suốt"): no opacity, no blend.
    Per frame only transform/opacity change (compositor). */
-function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
+function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
  const root=document.createElement("div");root.className="ksht"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;perspective:${Math.round(Math.max(1900,w*3.6))}px;perspective-origin:0px 42%`;
  if(o.vanish)root.style.clipPath="inset(-400px -6000px -400px 0)";
@@ -174,7 +186,7 @@ function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.m
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;const s=Math.sin(Math.PI*p),c=Math.cos(Math.PI*p);
   /* a live face follows its page's scroll (the new page may still settle while the sheet turns) */
-  for(const Fc of [F,B])for(const [a,b] of Fc.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   const ang=-180*p,tilt=4.2*s,skew=-2.4*s,lift=-0.014*h*s;
   sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
   /* the face turning away from the light darkens, the one landing brightens */
@@ -186,6 +198,40 @@ function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.m
  set(o.p||0);
  return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1,
   /* the copies' pictures: pending() = one is not decoded yet; ready(ms) resolves once all are (capped at ms) */
+  pending(){return kitImgPending(root)},ready(ms){return kitImgSync(root,ms)}}}
+
+/* ---------- kitSlideSheet: the PORTRAIT page turn (owner 15/11, review/page-curl2; OWNER_DECISIONS "Page turn only on landscape") ----------
+   Portrait (phones, Fold folded) shows ONE page, no book, so there is no curl: the page is a sheet of paper that SLIDES sideways with the
+   finger / a tap; the next sheet lies underneath, moving a little slower (parallax) and brightening as it is uncovered; a soft paper-edge shadow
+   follows the sliding edge. Same call shape and return value as kitSheetTurn (p 0 = flat, 1 = slid off to the left; p 1→0 slides it back in),
+   so every caller (j87 kitBook, kitCurlSwap) uses it unchanged: kitSheetTurn({...,slide:true}). Reuses the kitSheetTurn CSS classes (no new CSS);
+   per frame only transform / opacity change (compositor). kitIsPortrait() decides; KIT_SLIDE_MS is the one slide duration (button / tab tap). */
+const KIT_SLIDE_MS=300;
+function kitIsPortrait(){return kitView().pages===1}
+function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
+ const root=document.createElement("div");root.className="ksht ksht-slide"+(o.cls?" "+o.cls:"");
+ root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;overflow:hidden`;
+ const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
+ const mkBox=cls=>{const b=document.createElement("div");b.className=cls;b.sc=[];b.lk=[];return b};
+ const put=(box,src)=>{[...box.children].forEach(c=>c.remove());const p=src&&src.nodeType===1?kclPrep(src,!!o.ctx):null;
+  if(p){box.appendChild(ctxWrap(p.m));box.sc=p.sc;box.lk=p.lk;return}
+  const d=document.createElement("div");d.className="kpaper kcl-blank";if(typeof src==="string"&&src)d.innerHTML=src;box.appendChild(d);box.sc=[];box.lk=[]};
+ const U=o.under?mkBox("ksht-under"):null;if(U)put(U,o.under);
+ const B=mkBox("ksht-under");B.style.willChange="transform";put(B,o.back||null);
+ const dim=document.createElement("i");dim.style.cssText="position:absolute;inset:0;background:#2a1406;pointer-events:none;opacity:0";
+ const sheet=document.createElement("div");sheet.className="ksht-sheet";sheet.style.cssText=`width:${w}px;height:${h}px;transform-style:flat`;
+ const F=mkBox("ksht-face ksht-front");put(F,o.front||null);
+ const edge=document.createElement("i");edge.style.cssText="position:absolute;left:100%;top:0;bottom:0;width:30px;pointer-events:none;background:linear-gradient(90deg,#2a140666,#2a140626 45%,#2a140600)";
+ sheet.append(F,edge);if(U)root.appendChild(U);root.append(B,dim,sheet);host.appendChild(root);
+ const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
+ let last=0;
+ function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;
+  kclLkSync([F,B]);
+  sheet.style.transform=`translate3d(${(-p*w).toFixed(2)}px,0,0)`;
+  B.style.transform=`translate3d(${((1-p)*w*.2).toFixed(2)}px,0,0)`;
+  dim.style.opacity=(.26*(1-p)).toFixed(3);edge.style.opacity=Math.min(1,(1-p)*8).toFixed(3)}
+ set(o.p||0);
+ return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1,slide:1,
   pending(){return kitImgPending(root)},ready(ms){return kitImgSync(root,ms)}}}
 
 /* kitCurl = the kit's page turn for every book (week book j87, kitBookSpread): since the owner's 11/15 10:00Z rule it is the WHOLE-SHEET
@@ -212,8 +258,9 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
  /* The sheet is opaque paper on both faces and is CLIPPED at the spine (vanish): it lifts off the page, stands up at the spine and is
     gone there — it never lies over the picture page (iPad) or off the screen (phone) and never fades (owner 11/15 02:40Z). */
- let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0})
-                    :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1})}catch(e){console.error(e)}
+ const sl=kitIsPortrait(),MS=opt.ms||(sl?KIT_SLIDE_MS:KIT_TURN_MS),EZ=sl?kitSlideEase:kitTurnEase;   /* portrait: the paper slide (no book to turn), landscape: the sheet turn */
+ let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0,slide:sl})
+                    :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1,slide:sl})}catch(e){console.error(e)}
  run();try{kitImgSync(el)}catch(e){}
  const r1=el.getBoundingClientRect();
  /* the page row may differ a little per tab (iPad 1366: the panel box moves a few px): still a page turn; only another layout
@@ -225,15 +272,19 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  try{take()}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
  /* the new page finishes its layout a moment later (person card sizing, chips): print it again once it has settled */
- let alive=true;const reback=()=>{if(!alive)return;try{take()}catch(e){}};
+ let alive=true,dirty=false;const reback=()=>{if(!alive)return;dirty=false;try{take()}catch(e){}};
+ /* lag-play (owner 16/11 15:05Z): a re-print copies the whole page with its computed styles (~100-400 ms on a slow phone); it ran
+    unconditionally at 90 ms. Now only when the page changed since the last print: a DOM change, a picture still loading, or a new sig. */
+ const kmo=new MutationObserver(()=>{dirty=true});try{kmo.observe(el,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){}
+ const loading=()=>{try{return [...el.querySelectorAll("img")].some(im=>im.getAttribute("src")&&!im.complete)}catch(e){return true}};
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
- let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
- const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
- let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ let s0=sig(),ld=loading();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(()=>{if(dirty||ld)reback()},90);
+ const fin=()=>{alive=false;clearInterval(iv);kmo.disconnect();host.remove();if(kclLive===end)kclLive=null};
+ let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);
  /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
     copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */
  if(c.pending&&c.pending()){host.style.visibility="hidden";stop();c.set(fwd?0:1);
-  c.ready(350).then(()=>{if(!alive)return;if(c.pending()){end();return}host.style.visibility="";stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);kitCurlSwap.t0=stop.t0})}
+  c.ready(sl?220:350).then(()=>{if(!alive)return;if(c.pending()){end();return}host.style.visibility="";stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);kitCurlSwap.t0=stop.t0})}
  const end=()=>{stop();fin()};kclLive=end;
  /* test hook: hold the running turn at p (kitCurlSwap.hold(.45)) */
  kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p);host.style.visibility=""};kitCurlSwap.end=end;return true}
@@ -315,9 +366,21 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
      cap  : small caption plaque under the plate (place / name, illustration caption only). slots: try-on slots beside the figure. */
 kitBookSpread.wantsPic=host=>{const W=(host&&host.clientWidth)||innerWidth,H=(host&&host.clientHeight)||innerHeight;return W>=900&&W/H>=1.15};
 function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.feet:.94;
- const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="sync" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||(window.KIT_FIG?KIT_FIG.h:.86)};--fz:${f.z||i+2}">`).join("");
+ /* KIT 34.6: every figure (real or silhouette) is sized by kitBookPicFit — the one body rule; f.h is ignored (kept only so old callers do not break); f.age = child factor */
+ const figs=(o.figs||[]).map((f,i)=>{let fac=1;try{fac=KIT_FIG.fac(f.src,f.age)}catch(e){}return `<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="sync" data-fac="${fac}" style="--fx:${f.x!=null?f.x:.5};--fz:${f.z||i+2};visibility:hidden">`}).join("");
  const slots=o.slots&&o.slots.length?`<div class="kbp-slots">${o.slots.map(s=>`<div class="kbp-slot${s.img?"":" empty"}"><span class="kbp-sim">${s.img?`<img src="${s.img}" alt="">`:""}</span><b>${s.label}</b>${s.n?`<small>${s.n}</small>`:""}</div>`).join("")}</div>`:"";
  return `<div class="kbp${o.plate===false?" bleed":""}" style="--ax:${ax};--feet:${feet}"><div class="kbp-plate"><div class="kbp-scene" style="background-image:url('${o.scene||""}')"></div><div class="kbp-figs">${figs}</div>${slots}</div>${o.cap?`<div class="kbp-cap">${o.cap}</div>`:""}</div>`}
+
+/* kitBookPicFit(scope): sizes every .kbp-fig by its BODY (kitBookFig, KIT 34.6): the same body height for every figure of the plate (real or "unknown" silhouette),
+   feet on the --feet line, true aspect; a figure not measured yet stays hidden. Runs on load, on plate resize and when a page is built (observer below). */
+function kitBookPicFit(scope){try{(scope||document).querySelectorAll(".kbp-fig").forEach(im=>{const pl=im.closest(".kbp-plate");if(!pl)return;const H=pl.clientHeight;if(H<40)return;
+  const b=kitFigBody(im.getAttribute("src"),()=>requestAnimationFrame(()=>kitBookPicFit()));if(!b)return;
+  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:b.ar,g=kitBookFig(Object.assign({},b,{ar}),(parseFloat(im.dataset.fac)||1),H,{stage:1});
+  im.style.height=g.ih.toFixed(1)+"px";im.style.width=g.iw.toFixed(1)+"px";im.style.transform=`translate(-50%,${g.dy.toFixed(1)}px)`;im.style.visibility="";im.dataset.kbody=g.body.toFixed(1)})}catch(e){}}
+window.kitBookPicFit=kitBookPicFit;
+(function(){let q=0;const soon=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitBookPicFit()})};
+ try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbp,.kbp-fig")||n.querySelector&&n.querySelector(".kbp-fig")))))soon()}).observe(document.body||document.documentElement,{childList:true,subtree:true})}catch(e){}
+ addEventListener("resize",soon);document.addEventListener("load",e=>{if(e.target&&e.target.classList&&e.target.classList.contains("kbp-fig"))soon()},true)})();
 
 (function(){const st=document.createElement("style");st.id="jbook-css";st.textContent=`
 /* paper skin (KIT §34.1): warm paper, faint fibres, edge tint */
@@ -346,7 +409,7 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 /* shadow the lifted page casts along the fold on the page being uncovered */
 .kcl-gs{position:absolute;left:0;top:0;width:100px;transform-origin:0 0;will-change:transform,opacity;
  background:linear-gradient(90deg,#1e0f058c,#1e0f053a 30%,#1e0f0510 65%,transparent)}
-.kcl-fade{transition:opacity .17s!important;opacity:0!important}
+.kcl-fade{transition:opacity .12s!important;opacity:0!important}
 /* two-page book */
 .kbs{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:var(--kbs-pad,10px 14px 12px)}
 .kbs-book{position:relative;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;transition:opacity .17s}
@@ -384,8 +447,8 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 .kbp-scene{position:absolute;inset:0;background-size:cover;background-position:calc(var(--ax) * 100%) 100%;filter:saturate(.92)}
 .kbp-plate::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 45%,transparent 55%,#2a160840);mix-blend-mode:multiply}
 .kbp-figs{position:absolute;inset:0;z-index:2}
-.kbp-fig{position:absolute;bottom:calc((1 - var(--feet)) * 100%);left:calc(var(--fx) * 100%);height:calc(var(--fh) * 100%);width:auto;max-width:none;transform:translateX(-50%);z-index:var(--fz);filter:drop-shadow(0 6px 6px #0005)}
-.kbp-fig.dim{filter:brightness(.92) drop-shadow(0 4px 4px #0004);opacity:.92}
+.kbp-fig{position:absolute;bottom:calc((1 - var(--feet)) * 100%);left:calc(var(--fx) * 100%);height:calc(var(--kfig,.79) * 100%);width:auto;max-width:none;transform:translateX(-50%);z-index:var(--fz);filter:url(#kfa) drop-shadow(0 6px 6px #0005)}
+.kbp-fig.dim{filter:url(#kfa) brightness(.92) drop-shadow(0 4px 4px #0004);opacity:.92}
 .kbp-cap{flex:0 0 auto;align-self:center;font-family:var(--display);font-size:clamp(.82rem,1.6vw,1rem);color:var(--rule,#9a2c1c);background:#fffaf0d9;border:1px solid #9a2c1c66;border-radius:4px;padding:.2em .9em;margin-bottom:2px;letter-spacing:.03em;max-width:92%;text-align:center}
 .kbp-slots{position:absolute;z-index:4;right:3%;top:4%;display:flex;flex-direction:column;gap:8px}
 .kbp-slot{display:flex;flex-direction:column;align-items:center;gap:2px;width:clamp(64px,13vw,92px);background:#fffaf0e6;border:1px solid #9a2c1c88;border-radius:6px;padding:6px 4px 5px;box-shadow:0 3px 8px #0005;text-align:center}
@@ -419,7 +482,7 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 html .game .kleather>.maptools{inset:22px 34px}
 html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{display:none!important}
 .panel:has(>.kleather){background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
-@media (max-width:760px){.kleather{padding:15px 23px}.kleather::before{inset:6px 17px}.kleather>.kl-tone,html .game .kleather>.maptools{inset:15px 23px}.kl-roll{width:15px}}
+/* kv3:.kv1 */:where(.kv1) .kleather{padding:15px 23px}:where(.kv1) .kleather::before{inset:6px 17px}:where(.kv1) .kleather>.kl-tone,html:where(.kv1) .game .kleather>.maptools{inset:15px 23px}:where(.kv1) .kl-roll{width:15px}
 /* unrolling (going to the map) */
 .kleather.kl-unroll{animation:kl-un var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
 .kl-unroll>.kl-l{animation:kl-rl var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}.kl-unroll>.kl-r{animation:kl-rr var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
@@ -459,20 +522,19 @@ html body .ksht .kcl-ctx>*{position:absolute!important;inset:0!important;width:a
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
   linear-gradient(#f8efdb,#f1e4c6);
  box-shadow:inset 0 0 30px #8a5a2426}
-@media (min-aspect-ratio:1/1) and (min-width:900px){
- .game.kbook{column-gap:0!important}
+/* the spread (KIT §0 html.kv2) */
+ html.kv2 .game.kbook{column-gap:0!important}
  /* right page: gutter shadow on its inner (left) edge */
- .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
+ html.kv2 .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
   background:linear-gradient(90deg,#2a160870 0 1.5px,transparent 1.5px),linear-gradient(90deg,#4a2c1270,#4a2c1229 16px,transparent 40px),linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
    radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#ecd9b0 0,transparent 70%),
    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
    linear-gradient(#f8efdb,#f1e4c6)}
  /* left page: the room picture printed on the page (paper margin + thin red rule), stacked leaves outside, gutter shadow inside */
- .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
- .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
+ html.kv2 .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
+ html.kv2 .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
   box-shadow:inset 0 0 0 6px #f3e6c9,inset 0 0 0 7px #9a2c1c80,inset 0 0 0 9px #f3e6c900,inset 3px 0 0 6px #f3e6c9;
   background:linear-gradient(270deg,#3a1e0a80,#3a1e0a33 18px,transparent 46px),linear-gradient(90deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px)}
-}
 `;document.head.appendChild(st)})();
 
 /* ---------- kitBookLive: the live layout dressed as the open book (every tab, both roads) ----------
@@ -489,34 +551,19 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
   const order=t=>{const B=[...document.querySelectorAll("#tabs [data-tab]")].map(b=>b.dataset.tab);const i=B.indexOf(t);return i<0?99:i};
   render=function(){const self=this,args=arguments;let out,done=false;const t1=typeof tab!=="undefined"?tab:null,t0=last;
    const pn=document.getElementById("panel");const call=()=>{done=true;out=r0.apply(self,args)};
-   try{if(pn&&t0!=null&&t1!==t0&&t0!=="go"&&t1!=="go"&&typeof S!=="undefined"&&S&&!S.dead)kitCurlSwap(pn,call,{dir:order(t1)>=order(t0)?1:-1});else call()}
+   /* owner OD 16/11 15:45Z + 15:55Z: a TAB change has NO animation on any device (no curl, no paper slide, no fade): instant swap.
+      The page turn lives only inside the Tuần lục book (kitBook). kitCurlSwap stays in the kit, unused by tabs. */
+   try{call()}
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
-    else if(t0==="go"&&t1!=="go"&&pn){if(!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}
+    if(mv){kitLeather(mv);/* reviewer lag-play-r1: portrait tab change = no effect at all (owner 15:45Z) → the map unrolls in landscape only */if(t0!=null&&t0!=="go"&&t1==="go"&&!kitIsPortrait())kitUnroll(mv);else kitUnrollKeep(mv)}
+    else if(t0==="go"&&t1!=="go"&&pn){/* map → page: instant too (owner 15:45Z, no fade on tab changes) */
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
    return out};
   window.render=render},0)})();
 
-/* ---------- swipe the page to turn it (like the week book and the owner's binder app): on #panel a quick horizontal swipe = the next /
-   previous tab in the tab bar (left swipe → forward, the sheet swings over the spine; right swipe → back). Not on the map, not in a
-   dialog, not when the swipe starts in something that scrolls sideways (person strip, chips) or in a form control. ---------- */
-(function(){let sw=null;
- const sideScroll=t=>{for(let e=t;e&&e.id!=="panel"&&e!==document.body;e=e.parentElement){if(e.scrollWidth>e.clientWidth+4){const ox=getComputedStyle(e).overflowX;if(ox==="auto"||ox==="scroll")return true}}return false};
- const down=(t,x,y)=>{sw=null;if(!(t&&t.closest))return;
-  if(!t.closest("#panel")||t.closest("input,textarea,select,canvas,[data-noswipe],.kgl,.mapv")||document.querySelector(".game.maptab"))return;
-  const m=document.getElementById("modal");if(m&&!m.hidden)return;if(sideScroll(t))return;sw={x,y,t:performance.now()}};
- const up=(x,y)=>{const s=sw;sw=null;if(!s)return;const dx=x-s.x,dy=y-s.y,dt=performance.now()-s.t;
-  if(Math.abs(dx)<64||Math.abs(dx)<Math.abs(dy)*1.8||dt>900)return;
-  const B=[...document.querySelectorAll("#tabs [data-tab]")].filter(b=>b.offsetParent&&!b.disabled);const cur=B.findIndex(b=>typeof tab!=="undefined"&&b.dataset.tab===tab);if(cur<0)return;
-  const nb=B[cur+(dx<0?1:-1)];if(!nb)return;nb.click();
-  /* the swipe was a page turn, not a tap: swallow a click that may follow on the panel */
-  const kill=ev=>{ev.stopPropagation();ev.preventDefault()};document.addEventListener("click",kill,{capture:true,once:true});setTimeout(()=>document.removeEventListener("click",kill,{capture:true}),350)};
- /* touch: touch events (a pointer stream is cancelled once the browser starts panning); mouse / pen: pointer events */
- document.addEventListener("touchstart",e=>{if(e.touches.length!==1){sw=null;return}const q=e.touches[0];down(e.target,q.clientX,q.clientY)},{passive:true,capture:true});
- document.addEventListener("touchend",e=>{const q=e.changedTouches[0];if(q)up(q.clientX,q.clientY)},{passive:true,capture:true});
- document.addEventListener("touchcancel",()=>{sw=null},{passive:true,capture:true});
- document.addEventListener("pointerdown",e=>{if(e.pointerType==="touch")return;if(e.button>0||!e.isPrimary){sw=null;return}down(e.target,e.clientX,e.clientY)},{passive:true,capture:true});
- document.addEventListener("pointerup",e=>{if(e.pointerType==="touch")return;up(e.clientX,e.clientY)},{passive:true,capture:true})})();
+/* ---------- NO swipe on the game page (owner 15/11, review/page-curl2): horizontal swipe exists ONLY inside the Tuần lục book (j87 kitBook:
+   landscape = page curl, portrait = paper slide). Everywhere else a tab changes only by TAPPING its button, and only then the short tab-change
+   animation plays (kitCurlSwap: landscape = sheet turn, portrait = paper slide). The old "swipe the panel = next / previous tab" handler is gone. ---------- */

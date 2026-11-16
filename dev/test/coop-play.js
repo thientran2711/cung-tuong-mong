@@ -43,7 +43,7 @@ async function clear(o,n=30){for(let i=0;i<n;i++){const v=await vis(o);if(v.fz)r
   if(/^(Đợi bạn|Mời bạn|Nhập mã|Chơi cùng bạn)$/.test(v.modal.trim()))return'wait';
   const key=v.modal.trim();if(!seenT.has(o.name+key)){seenT.add(o.name+key);await shot(o,'dlg-'+key.replace(/[^\p{L}\d]+/gu,'_').slice(0,24))}
   const ok=await o.p.evaluate(()=>{const m=document.getElementById('modal');const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null&&!x.dataset.coop);
-   const b=all.find(x=>/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('.opts button:not([disabled])')||m.querySelector('#mr button:not([disabled])');if(b){b.click();return true}return false});
+   const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('#mr button:not([disabled])');if(b){b.click();return true}return false});
   if(!ok)return'stuck';await sleep(300)}return'many'}
 const friend=o=>o.p.evaluate(()=>{const f=(rivals||[]).find(v=>v.coop)||(rivals||[]).flatMap(v=>v.staff||[]).find(x=>x.coop);if(!f)return null;
  return{name:f.name,id:f.id,st:typeof k61St==='function'?k61St(f):null,at:S.where&&S.where[f.id],me:S.place||'home'}});

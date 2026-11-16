@@ -132,13 +132,14 @@ function fixToast(){const t=document.getElementById("rtoast");if(!t||t.dataset.n
   const sw={"THÀNH":"Thành.","HỎNG":"Hỏng.","XONG":"Xong."}[seal];if(sw&&w.startsWith(sw))w=w.slice(sw.length).trim();
   t.querySelectorAll(".rd .ef").forEach(e=>{const m=T(e.textContent).match(/^(.+?) (-?\d+) → (-?\d+)$/);if(!m)return;const d=+m[3]-+m[2];if(!d)return;
    const labs=[m[1]];if(typeof S!=="undefined"&&S&&S.maid&&m[1]==="Lòng "+S.maid.name)labs.push("Lòng cung nữ");
-   for(const lb of labs){const tok=`${lb} ${d>0?"+":"-"}${Math.abs(d)}`;const esc=tok.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${esc}(?: \\((?:đã đầy|chạm đáy) -?\\d+\\))?(?=\\s|·|$|\\.|,|;)`),"$1")}});
+   for(const lb of labs){const tok=`${lb} ${d>0?"+":"-"}${Math.abs(d)}`;const esc=tok.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${esc}(?: \\((?:đã đầy|chạm đáy) -?\\d+\\))?(?=\\s|·|$|\\.|,|;)`),"$1");const e2=`${lb} ${m[2]} → ${m[3]}`.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${e2}(?: \\((?:đã đầy|chạm đáy)\\))?(?=\\s|·|$|\\.|,|;)`),"$1")}});
   w=w.replace(/^[\s·.]+/,"").replace(/(\s*·\s*)+$/,"").replace(/·\s*·/g,"·").trim();
   if(w)sm.textContent=w;else sm.remove()}
  t.dataset.nr=t.innerHTML.length+""}
 try{const rs0=resultShow;resultShow=function(){const r=rs0.apply(this,arguments);try{fixToast()}catch(e){console.error(e)}return r}}catch(e){}
 /* tooltips that only repeat the visible text (kept where the text is cut off) */
-function fixTitles(){document.querySelectorAll("[title]").forEach(e=>{const a=T(e.getAttribute("title")).replace(/^·\s*/,""),b=T(e.textContent).replace(/^·\s*/,"");if(a&&a===b&&e.scrollWidth<=e.clientWidth+1&&e.clientWidth>0)e.removeAttribute("title")})}
+/* lag-play: all measurements first, then the removals (a removal between two reads forced one layout per titled element) */
+function fixTitles(){const R=[];document.querySelectorAll("[title]").forEach(e=>{const a=T(e.getAttribute("title")).replace(/^·\s*/,""),b=T(e.textContent).replace(/^·\s*/,"");if(a&&a===b&&e.scrollWidth<=e.clientWidth+1&&e.clientWidth>0)R.push(e)});R.forEach(e=>e.removeAttribute("title"))}
 
 /* ===== stated deltas = real deltas (owner 11/14: "Lòng cung nữ +6" when only +3 fitted under 100) ===== */
 const BOUNDS={th:[-100,100],hh:[-100,100]};
@@ -147,7 +148,7 @@ function trueText(h,R){if(!h)return h;for(const L in R){const {k,d,now}=R[L];con
   const esc=L.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   h=h.replace(new RegExp(`${esc} ([+-])(\\d+)(?![\\d.,]| \\((?:đã đầy|chạm đáy))`,"g"),(m,sg,n)=>{const st=(sg==="-"?-1:1)*+n;if(st===d)return m;
    if(d!==0&&Math.sign(d)!==Math.sign(st))return m;if(Math.abs(d)>Math.abs(st))return m;if(!at)return m;
-   const full=st>0?"đã đầy":"chạm đáy";return d===0?`${L} ${full} ${now}`:`${L} ${d>0?"+":""}${d} (${full} ${now})`})}return h}
+   const full=st>0?"đã đầy":"chạm đáy";/* owner 15/11: "Tài +1 (đã đầy 100)" read unclear → "Tài 99 → 100 (đã đầy)" (jlogsync) */return d===0?`${L} ${full} ${now}`:`${L} ${now-d} → ${now} (${full})`})}return h}
 function fixTrue(b){if(!b||!S)return;const R=realD(b);const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(b.seq||0)));
  for(let i=0;i<n;i++)S.logs[i]=trueText(S.logs[i],R);if(popMsg)popMsg=trueText(popMsg,R)}
 let nrTalk=null;
@@ -192,7 +193,7 @@ const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim(
 function kitNames(h){try{if(typeof kpPeopleIn!=="function"||typeof kpPeople!=="function"||!h)return h;if(typeof kitDedupTitle==="function")h=kitDedupTitle(h);/* KIT 9: old stored log lines */return kpPeopleIn(h,kpPeople())[0]}catch(e){return h}}
 /* --- 3. week card: true deltas, no leftover choice labels, each fact once, faces beside their lines --- */
 const LONE=/^[^\s.·:]+(?: [^\s.·:]+)?\.$/;          /* "Thôi." — a choice label with nothing after it */
-const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;
+const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|-?\d+ → -?\d+(?: \((?:đã đầy|chạm đáy)\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;
 try{const ws0=wkSnap;wkSnap=function(){const r=ws0.apply(this,arguments);try{r.maid=S.maid?S.maid.loyal:null}catch(e){}return r}}catch(e){}
 try{const wk0=wkSummary;wkSummary=function(){const s=S.wkSnap;const r=wk0.apply(this,arguments);try{if(r&&r.groups){
   if(s&&s.maid!=null&&S.maid&&S.maid.loyal!==s.maid)r.D.push([`Lòng ${S.maid.name}`,S.maid.loyal-s.maid]);

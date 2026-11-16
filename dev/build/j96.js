@@ -46,7 +46,7 @@ function V96(){const t=T96();return t?TM96V[t.k]:null}
 function man96(){const t=T96();if(!t)return null;return (S.men||[]).find(m=>m.id===t.mid)||null}
 function live96(){const m=man96();return !!(m&&m.alive)}
 function adj96(d){const t=T96(),m=man96();if(!t)return;if(d.h)t.h=cl((t.h||0)+d.h,0,100);if(d.t&&m)m.tinh=cl((m.tinh||0)+d.t,0,100);if(d.sus)t.sus=cl((t.sus||0)+d.sus,0,100);
- if(d.ev)t.ev=Math.max(0,(t.ev||0)+d.ev);if(d.rise)t.rise=(t.rise||0)+d.rise;if(d.lt&&m){m.letters=(m.letters||0)+d.lt;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+d.lt}}
+ /*evok: affair-case store (j96), not consort evidence*/if(d.ev)t.ev=Math.max(0,(t.ev||0)+d.ev);if(d.rise)t.rise=(t.rise||0)+d.rise;if(d.lt&&m){m.letters=(m.letters||0)+d.lt;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+d.lt}}
 function hasEv96(){const m=man96(),t=T96();return !!(t&&((t.ev||0)>0||(m&&(m.letters||0)>0)||t.tok))}
 function tinh96(){const m=man96();return m?m.tinh||0:0}
 /* where he is: the one location ledger (j95 if present, else j22 S.menW). If the ledger has him nowhere this buổi, he goes to his first haunt now
@@ -73,7 +73,7 @@ function tmRoll96(k){if(!window.TM96_ON)return false;let f=null;try{f=localStora
  const os=P.map((x,i)=>x==="o"?i:-1).filter(i=>i>=0);P.splice(os.length>=2?os[1]+1:P.indexOf("st:tm96a")+1,0,"st:tm96b");
  const fi=P.indexOf("fin");P.splice(fi>=0?fi+1:P.length-2,0,"st:tm96c");
  for(let n=0;n<2;n++){const j=P.lastIndexOf("s");if(j>=0)P.splice(j,1)}
- c.max=P.filter(x=>x!=="fin").length;histAdd67("tm","tm96a")}catch(e){console.error(e)}return r}})();
+ c.max=P.filter(x=>x!=="fin").length;if(typeof f14Norm==="function")f14Norm();/* a 14-chapter life (jst14) keeps 14 */histAdd67("tm","tm96a")}catch(e){console.error(e)}return r}})();
 /* ---------- faces: a man's figure already drawn, the preferred identity if free (never reused), frame by his real role ---------- */
 MANSUB["thống lĩnh cấm quân"]=["guard","thive"];MANSUB["phó sứ nam chiếu"]=["envoy","suthan"];MANSUB["vương gia"]=MANSUB["vương gia"]||["prince","royal","vuonggia"];
 (function(){const r0=figRoles;figRoles=function(who){try{if(who&&who.tm96){const V=TM96V[who.tm96];if(V.fr==="official")return["official","man"];if(V.fr==="physician")return["man","physician"];return["man"]}}catch(e){}return r0.apply(this,arguments)}})();
@@ -95,7 +95,7 @@ Object.assign(TOK67,{lv:()=>{const m=man96();return m?m.name:"người xưa"},lv
  d.o.forEach((x,i)=>{const o=O[i]||{},c=fmt(o.c||{});x.j67=o.rare?[c?"tốn: "+c:"","(Cơ duyên hiếm)"].filter(Boolean).join(" · "):(c?"tốn: "+c:"tốn: không");x.x="";if(o.rare){x.r97=1;rareReg96()}})}}catch(e){console.error(e)}return d}})();
 /* the rare ending leaves the palace for good: the life closes after the chapter card */
 (function(){const e0=end67;end67=function(A,k,ign){const r=e0.apply(this,arguments);try{if(A&&A.tron96&&!S.dead){const m=man96();A.tron96=0;
- over("Cao chạy xa bay",`${S.name} uống thuốc giả chết, được khiêng ra khỏi cung trong cỗ quan tài nhẹ bẫng. Ba ngày sau, trên con thuyền xuôi phương Nam, ${m?m.name.split(" ").slice(-2).join(" "):"người xưa"} nắm tay ngươi. Trong cung, người ta lập bài vị cho một phi tần bạc mệnh.`,`Giả chết, rời cung cùng ${m?m.name:"người xưa"}`)}}catch(e){console.error(e)}return r}})();
+ over("Cao chạy xa bay",`${S.name} uống thuốc giả chết, được khiêng ra khỏi cung trong cỗ quan tài nhẹ bẫng. Ba ngày sau, trên con thuyền xuôi phương Nam, ${m?m.name.split(" ").slice(-2).join(" "):"người xưa"} nắm tay ngươi. Trong cung, người ta lập bài vị cho một phi tần bạc mệnh.`,`Giả chết, rời cung cùng ${m?m.name:"người xưa"}`,true)}}catch(e){console.error(e)}return r}})();
 (function(){const c0=chEnd67;chEnd67=function(A,E,ign){if(S&&S.dead){const c=S.st&&S.st.ch;if(c)c.past.push({a:A.a,tag:A.tag,k:ign?-1:E.k,n:c.n,ign:!!ign});return}return c0.apply(this,arguments)}})();
 RPOOL67.love=["thunha","huongtram","nghien","tranhco"];RTHEME67.tm96a="love";RTHEME67.tm96b="emp";RTHEME67.tm96c="family";
 const ok96=()=>!!(T96()&&live96());

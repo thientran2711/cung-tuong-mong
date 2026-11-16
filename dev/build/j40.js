@@ -25,9 +25,9 @@ function wpick(O){let r=Math.random()*O.reduce((a,b)=>a+b[1],0),i=0;while(r>O[i]
 const FAILRX=/bị lộ|bị bắt|phát giác|bị phát hiện|không thành|không ai tin|từ chối|chưa chuẩn|bị thử ra|lần ra|tra ra|báo cho chủ|đem chuyện kể/;
 function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]&&IT[e.k].il))):runAct(v,t,k)}finally{v.__err=0}
  v.fails=v.fails||{};const failed=FAILRX.test(r);if(failed)v.fails[k]=(v.fails[k]||0)+1;else if(r)v.fails[k]=0;
- if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp")mindBelief(t,v,k);
+ if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp"&&k!=="xx")mindBelief(t,v,k);
  /* Hiểm độc over-plots: a success may leave a clue behind */
- if(r&&!failed&&traitsOf(v).includes("Hiểm độc")&&BIG.includes(k)&&roll(20)){evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
+ if(r&&!failed&&traitsOf(v).includes("Hiểm độc")&&BIG.includes(k)&&roll(20)){/*evok: after a BIG act (runAct deed)*/evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
  return r}
 /* knowledge: a victim of a hidden blow only guesses who did it; wit and evidence help; a wrong guess turns her hatred on someone else (the player too) */
 function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[key(v)])||0;const p=cl(35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4,10,90);mindLog(t,"_belief");
@@ -47,7 +47,7 @@ npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v
   const rash=rashOf(v);if(rash){err+=10;mindLog(v,"_rash");mindLog(v,"_mistake")}
   /* low wit: clumsy */
   if(!rash&&tc<30&&roll(15)){err+=10;mindLog(v,"_mistake")}
-  const O=mindMenu(v,t);if(!O.length)return"";let k;if(rash){const ov=O.filter(x=>["accuse","rumor","trip","vp","frame"].includes(x[0]));k=wpick(ov.length?ov:O)}else k=wpick(O);persCount(v,k);
+  const O=mindMenu(v,t);if(!O.length)return"";let k;if(rash){const ov=O.filter(x=>["accuse","rumor","trip","vp","xx","frame"].includes(x[0]));k=wpick(ov.length?ov:O)}else k=wpick(O);persCount(v,k);
   /* a big scheme is prepared first: it leaves a tell her people may catch */
   if(BIG.includes(k)&&!v.plan){const pat=tc>=60?2:tc>=35?1:0;v.plan={k,t:key(t),due:bq()+1+R(2)+pat,err};mindTell(v,t,k);return""}
   return mindRun(v,t,k,err)}catch(e){return""}};

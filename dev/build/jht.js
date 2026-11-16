@@ -113,7 +113,7 @@ PEND.htban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&pkHome(x));if(!k||k.pB)ret
  const rows=C.map(q=>`<div class="h54c">${mdH(qnFace(q),"sm")}<span>${qLine(q)}</span></div>`).join("");const O=[];
  for(const q of C){const d=HT.dow[q.tier],b=pkBack(k,q),o=pkO(S,k,q),R2=q.tier<=1?pkRivals(S,k):[];const hi=R2.filter(m=>rkOf(m)>rkOf(S));
   O.push({n:`Xin chỉ ban hôn: ${q.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{bac:-d},x:[word(o),`thành: hứa hôn; nhà ${q.off} chống lưng ngươi và con +${b} (thế lực phe, tranh ghế, thứ tự kế vị của con), các phi tần phe ${q.house} thiện cảm +${HT.clanRel}`,
-   `hỏng: Hoàng thượng chưa chuẩn, Sủng ${HT.fail.sung}, lễ vật mất`,hi.length?`kèm: ${hi.map(m=>m.name).join(", ")} cũng nhắm mối này cho con mình (khó hơn)`:"",R2.length?`kèm: ${R2.length} phi tần có con trai đến tuổi ghen (thiện cảm ${HT.envy})`:""].filter(Boolean).join(" · "),
+   `hỏng: Hoàng thượng chưa chuẩn, Sủng ${HT.fail.sung}, lễ vật mất`,hi.length?`kèm: ${kitNameList(hi)} cũng nhắm mối này cho con mình (khó hơn)`:"",R2.length?`kèm: ${R2.length} phi tần có con trai đến tuổi ghen (thiện cảm ${HT.envy})`:""].filter(Boolean).join(" · "),
    go:()=>{if(roll(o))log(pkBetroth(k,S,q));else{apply(HT.fail);log(`Hoàng thượng chưa chuẩn mối ${q.name} cho ${k.name}.`)}}})}
  O.push({n:"Chưa bàn vội",fx:{},x:`con ở cạnh ngươi thêm · kèm: phi tần khác có thể hỏi trước các mối tốt`,go:()=>log(`Ngươi chưa vội bàn hôn sự cho ${k.name}.`)});
  return{who:kidFace(k),t:`Bàn hôn sự cho ${k.name}, ${k.age} tuổi${k.age<18?" (hứa hôn trước, cưới khi tròn 18)":""}. Các mối hỏi được (tùy phẩm vị ngươi, lòng thương của Hoàng thượng, tài của con${k.heir?", ngôi Thái tử":""}):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>`,o:O}};
@@ -161,13 +161,13 @@ function mkTab(k,after){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="
 try{KG.ht={keys:HTK.slice(),l:"Hoàng tự",s:"Hoàng tự"}}catch(e){}
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{kvo:["Kế vị","Kế vị"],kin:["Hoàng tự trong cung","Trong cung"],hon:["Hôn sự","Hôn sự"],qt:["Quý tộc kén rể · kén dâu","Quý tộc"]})}catch(e){}
 /* sub-tab labels: long when they fit, short otherwise (measured: never cut) */
-function htFitSub(){try{const P=$("panel");const nav=P&&P.querySelector(":scope > .ksub");if(!nav||!nav.querySelector('[data-ksub="kvo"]'))return;
+function htFitSub(){try{const P=$("panel");const nav=P&&P.querySelector(":scope > .ksub, :scope > .kpbar > .ksub");if(!nav||!nav.querySelector('[data-ksub="kvo"]'))return;
  const bs=[...nav.querySelectorAll(".ksubb")];bs.forEach(b=>{const L=HTL[b.dataset.ksub];if(L){b.textContent=L[0];b.title=L[0]}});
  if(nav.scrollWidth>nav.clientWidth+1||bs.some(b=>b.scrollWidth>b.clientWidth+1))bs.forEach(b=>{const L=HTL[b.dataset.ksub];if(L)b.textContent=L[1]})}catch(e){}}
 /* measured now and again after layout (the first render can measure a panel that is not laid out yet), and on resize */
 const HTRO=typeof ResizeObserver==="function"?new ResizeObserver(()=>htFitSub()):null;
 (function(){const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);htFitSub();requestAnimationFrame(htFitSub);
- try{const nav=$("panel").querySelector(":scope > .ksub");if(HTRO&&nav&&!nav.__htro){nav.__htro=1;HTRO.observe(nav)}}catch(e){}return r}})();
+ try{const nav=$("panel").querySelector(":scope > .ksub, :scope > .kpbar > .ksub");if(HTRO&&nav&&!nav.__htro){nav.__htro=1;HTRO.observe(nav)}}catch(e){}return r}})();
 addEventListener("resize",()=>requestAnimationFrame(htFitSub));
 /* servant road / after death: the extra keys are not tabs */
 (function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=(typeof isSrv==="function"&&isSrv())||!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});

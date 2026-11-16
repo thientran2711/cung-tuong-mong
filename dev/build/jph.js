@@ -27,16 +27,27 @@ function kitPhNote(kind,id,tone,title){try{const k=kind+"|"+id;if(KIT_PH_SEEN[k]
 const kitPhPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
 /* manifests ready? (before they arrive every id looks unmapped: no placeholder, no record) */
 function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
-function kitPhActReady(){try{return typeof KIT_ACTS!=="undefined"&&!!KIT_ACTS&&!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}catch(e){return false}}
+/* cached per KIT_ACTS object (Object.keys of the whole act table ran per act card per DOM change) */
+var KPHAR_SRC=null,KPHAR_V=false;
+function kitPhActReady(){try{if(typeof KIT_ACTS==="undefined"||!KIT_ACTS)return false;if(KPHAR_SRC!==KIT_ACTS||KPHAR_SRC.acts!==KPHAR_A){KPHAR_SRC=KIT_ACTS;KPHAR_A=KIT_ACTS.acts;KPHAR_V=!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}return KPHAR_V}catch(e){return false}}
+var KPHAR_A=null;
 const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
 /* ---- events ---- */
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
 function kitPhEvTone(m){let fam="";try{const pid=String(m.pid||"");if(/^e68[A-Za-z]/.test(pid)&&typeof E68I!=="undefined"&&E68I[pid.slice(3)])fam=E68I[pid.slice(3)].fam||""}catch(e){}
  /* id + title + the FIRST sentence only (the rest of the body holds option hints such as "phi tần ghen" that are not the event's tone) */
- const first=(kitPhPlain(m.h).split(/(?<=[.!?…])\s/)[0]||"").slice(0,200);const txt=kitPhEvId(m)+" "+kitPhPlain(m.t)+" "+first;return kitPhTone(txt,{fam})}
+ const first=(kitPhPlain(m.h).split(kRx("(?<=[.!?…])\\s",""))[0]||"").slice(0,200);const txt=kitPhEvId(m)+" "+kitPhPlain(m.t)+" "+first;return kitPhTone(txt,{fam})}
+/* KIT §8.1 (review/kpanel-compact): ONE structural test, never load timing. Only a real EVENT (event id / pid / pp / news / event choice) gets a placeholder picture
+   (event banner or option card); a confirm, a picker or a short notice without event identity stays picture-free so it can be compact. */
+function kitPhEventLike(m){try{if(!m)return false;if(/\bkptitle\b/.test(String(m.cls||""))||(m.kit&&(m.kit.scene||m.kit.menu)))return false;
+ return !!(m.pid||m.pp||m.evId||m.ev||m.act||m.kind==="news"||/^Tin trong cung/.test(String(m.t||""))||(typeof kitIsEventChoice==="function"&&kitIsEventChoice(m))||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}catch(e){return true}}
+window.kitPhEventLike=kitPhEventLike;
 function kitPhEvent(m){const tone=kitPhEvTone(m);kitPhNote("event",kitPhEvId(m),tone,kitPhPlain(m.t));return{src:KIT_PH.ev[tone],lab:"",ph:tone}}
 (function(){if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){const r=a0.apply(this,arguments);try{
   if(!m||m.art||m.stArt||!kitPhEvReady())return r;
+  /* KIT §8.1 (review/kpanel-compact): a menu panel (title menu, scene menus) never gets an event placeholder: its layout must not depend on when EVART loaded */
+  if(/\bkptitle\b/.test(String(m.cls||""))||(m.kit&&(m.kit.scene||m.kit.menu)))return r;
+  if(!kitPhEventLike(m))return r;
   if(m.kit&&(m.kit.shop||m.kit.pick||m.kit.look))return r;  /* look-up panels (Tâm trạng / Đã biết / Chứng cứ về X) are not events: their own headArt or nothing (review/mood-dialog) */if(typeof giftIxOf==="function"&&giftIxOf(m)!=null)return r;if(m.pid==="giftin")return r;
   let room="";try{room=typeof evArt==="function"?evArt():""}catch(e){room=""}
   if(r&&r.src&&!(room&&r.src===room)&&r.src!==KIT_PH.act.light&&r.src!==KIT_PH.act.dark)return r;

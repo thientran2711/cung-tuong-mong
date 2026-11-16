@@ -10,30 +10,26 @@ function kitPlaceArt(k){try{if(typeof scnSync==="function")scnSync();
  const P=placeOf(k);const f=SCIMG[P.sc]||SCIMG.rv;return f?{src:`img/${f}.webp`,label:P.n}:null}catch(e){return null}}
 function kitPlaceHours(k){if(typeof ACC_DAY!=="undefined"&&ACC_DAY[k])return"mở cửa sáng, chiều";if(k==="tn")return"tiếp lúc sáng thỉnh an";
  if(k==="kn")return"sáng thỉnh an, lúc khác phải được mời";if(k==="dtd"||k==="thu")return"chỉ vào khi được triệu";return""}
-/* the info box: one row of facts, then the card's own lines (reason, rule, why a way in is closed) without the people / hours lines */
-function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}catch(e){}try{n=countAt(k)}catch(e){}const left=Math.max(0,4-used);
- const F=[];if(tc)F.push(`Đường đi <b>${tc}</b> khắc`);F.push(`Còn <b>${left}</b> khắc`);if(n)F.push(`<b>${n}</b> bóng người`);const hr=kitPlaceHours(k);
+/* the info (review/kit-sweep 16/11, owner "Má nó, kit chung đâu"): the place card is the EVENT FRAME (KIT §8.2) — ONE place picture LEFT
+   (headArt → kitOnePic moves it into the .kpsubj.kpiart slot), RIGHT = kit rows (kitRows §51: Chủ vị · Đường đi · Còn · Bóng người · Giờ)
+   + the card's own lines as kit fact rows; options below as kit option rows (32.9), scrolling inside the frame. No hand-built columns,
+   no second picture, no portrait cell, no silhouettes drawn on the picture (the count is a row). */
+function kitPlaceHostName(q){try{if(!q)return"";if(q.p&&typeof q.p==="object")return kitName(q.p);if(q.p==="th"&&S&&S.thO)return kitName(S.thO);return q.name||""}catch(e){return q&&q.name||""}}
+function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}catch(e){}try{n=countAt(k)}catch(e){}const left=Math.max(0,4-used);const hr=kitPlaceHours(k);
+ const q=kitPlaceHost(k);const R=[];if(q)R.push(["Chủ vị",kitPlaceHostName(q)]);if(tc)R.push(["Đường đi",`${tc} khắc`]);R.push(["Còn",`${left} khắc`,left?"n":"r"]);
+ if(n)R.push(["Bóng người",`${n}`]);if(hr)R.push(["Giờ",hr[0].toUpperCase()+hr.slice(1)]);
  const t=document.createElement("template");t.innerHTML=String(h||"");const L=[];
- t.content.querySelectorAll("p").forEach(p=>{const s=p.textContent.trim();if(!s||/bóng người ở đó\.?$/.test(s)||/^Mở cửa buổi sáng/.test(s))return;L.push(`<p class="kplr${p.classList.contains("past")?" kplsm":""}">${p.innerHTML}</p>`)});
- const info=`<div class="kplinfo"><div class="kplf">${F.map(x=>`<span>${x}</span>`).join("")}</div>${hr?`<div class="kplh">${hr[0].toUpperCase()+hr.slice(1)}</div>`:""}${L.join("")}</div>`;
- const q=kitPlaceHost(k);if(!q)return info;
- return `<div class="kplhost" data-pid="${q.pid}"><div class="kplhp">${kitNameRank(q.rank,q.name,q.col)}<div class="kplhf">${pcPort(q.f,q.col)}</div></div>${info}</div>`}
-/* KIT 32.8b (owner 11/15 15:45Z, "VIỆC · Chung Tú cung"): a place card of a palace whose HEAD is at home shows her under the picture:
-   LEFT her portrait with name + rank above (KIT 48 kitNameRank; not met = the grey kit silhouette, stranger rule 49.3, via relPerson),
-   RIGHT the info box (she is in, the greeting rule, khắc needed / left). Consort palaces + Càn Ninh (Hoàng hậu) + Đức Thọ (Thái hậu). */
+ t.content.querySelectorAll("p").forEach(p=>{const s=p.textContent.trim();if(!s||/bóng người ở đó\.?$/.test(s)||/^Mở cửa buổi sáng/.test(s))return;L.push(`<p${p.classList.contains("past")?' class="past"':""}>${p.innerHTML}</p>`)});
+ return kitRows(R)+L.join("")}
+/* KIT 32.8b (owner 11/15 15:45Z): the head of the palace when she is at home — now a kit row "Chủ vị" (rank + name, stranger rule via relPerson / j61). */
 function kitPlaceHost(k){try{if(!S||!k||k==="home"||typeof relPerson!=="function")return null;
  if(k==="tn"){if(S.thDead)return null;return relPerson("th")}
  if(k!=="kn"&&k[0]!=="r")return null;const h=typeof accHost==="function"?accHost(k):null;
  if(!h||h===S||!h.alive||h.out||(typeof whereOf==="function"&&whereOf(h)!==k))return null;return relPerson(h.id)}catch(e){return null}}
 window.kitPlaceHost=kitPlaceHost;
 function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
-/* the people on the picture: grey kit silhouettes (f / m / k by who is really there), feet on the floor line, no faces */
-function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(!d)return;d.classList.toggle("kplace",!!(m&&m.placeK));if(!m||!m.placeK)return;
- const o=d.querySelector("#mb > .opts");if(o){o.style.minHeight="0px";const h=o.scrollHeight;o.style.minHeight=Math.min(96,h)+"px"} /* a short option group keeps no empty band under it */
- const fr=document.querySelector("#mb > .kdlgart .ksart");if(!fr||fr.querySelector(".kplsil"))return;let n=0;try{n=countAt(m.placeK)}catch(e){}if(!n)return;
- let L=[];try{L=k61SexAt(m.placeK)}catch(e){}while(L.length<n)L.push("f");L=L.slice(0,Math.min(n,5));
- const w=document.createElement("div");w.className="kplsil";w.setAttribute("aria-label",`${n} bóng người`);
- w.innerHTML=L.map((g,i)=>`<img src="img/kit/unknown-fig-${g}.webp" alt="" class="kpls-${g}" style="--i:${i}">`).join("")+(n>5?`<b>+${n-5}</b>`:"");fr.appendChild(w)}catch(e){console.error("kitPlaceSil",e)}}
+/* KIT §8.2: the place card carries .kplace only as a tag for tests; it has no layout of its own */
+function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(d)d.classList.toggle("kplace",!!(m&&m.placeK))}catch(e){}}
 /* tag the cards: each builder's own card (after all its wrappers) is dressed once, then shown again */
 (function(){function wrap(name){const f0=window[name];if(typeof f0!=="function")return;
   window[name]=function(k){const n0=Q.length;const r=f0.apply(this,arguments);try{if(k&&Q.length>n0){const m=Q[Q.length-1];if(m&&!m.placeK&&m.t===accName(k)){kitPlaceDress(m,k);showModal()}}}catch(e){console.error("kitPlace",name,e)}return r}}
@@ -72,28 +68,5 @@ html body #modal .opts.k3grid>button.ka.kback .kat{min-height:100%;align-items:c
 html body #modal .dlg.kdper>#mb>.opts.k3grid:has(> button.ka){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
 html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.k3long,html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.k3odd{grid-column:1/-1!important}
 html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.k3long{order:1!important}html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.kback{order:3!important}
-/* 32.8 place card */
-#modal .dlg.kplace .kplinfo{border:1px solid var(--gold,#8f5f0c);border-radius:6px;background:#fffaf0;box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #efe2c4;padding:8px 12px;margin:2px 0 0}
-#modal .dlg.kplace .kplf{display:flex;flex-wrap:wrap;gap:2px 0;font-size:.82rem;line-height:1.5;color:var(--ink,#3b2412)}
-#modal .dlg.kplace .kplf>span{white-space:nowrap}#modal .dlg.kplace .kplf>span+span:before{content:"·";margin:0 .45em;color:var(--gold,#8f5f0c)}
-#modal .dlg.kplace .kplf b{font-variant-numeric:tabular-nums}
-#modal .dlg.kplace .kplh{font-size:.8rem;color:var(--ink2,#6b4a2a);margin-top:1px}
-#modal .dlg.kplace .kplf>span+span:before{content:"";margin:0}#modal .dlg.kplace .kplf>span:not(:last-child):after{content:"·";margin:0 .45em;color:var(--gold,#8f5f0c)}
-html body #modal .dlg.kplace>#mb>.opts{flex:0 1 auto!important}
 html body #modal .opts>button.ka.kback .kan{text-align:center;width:100%}
-#modal .dlg.kplace .kplh+p.kplr,#modal .dlg.kplace .kplf+p.kplr{border-top:1px solid #ead9b4;padding-top:6px}
-#modal .dlg.kplace .kplinfo p.kplr{margin:6px 0 0;padding:0;border:0;font-size:.88rem;line-height:1.45}
-#modal .dlg.kplace .kplinfo p.kplr.kplsm{font-size:.8rem;color:var(--ink2,#6b4a2a);margin-top:3px}
-#modal .dlg.kplace .kplf+p.kplr{border-top:1px solid #ead9b4;padding-top:6px}
-#modal .dlg.kplace #mb>.kdlgart{margin-bottom:6px}
-#modal .dlg.kplace .kplhost{display:grid;grid-template-columns:clamp(84px,22%,124px) minmax(0,1fr);gap:10px;align-items:start;margin:2px 0 0}
-#modal .dlg.kplace .kplhost>.kplinfo{margin:0}
-@media (max-height:560px){#modal .dlg.kplace .kplhost{grid-template-columns:76px minmax(0,1fr)}}
-#modal .dlg.kplace .kplhp{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0}
-#modal .dlg.kplace .kplhp>.knr{text-align:center}
-#modal .dlg.kplace .kplhf .pcp{width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;margin:0!important;float:none!important}
-#modal .dlg.kplace .ksart .kplsil{position:absolute;left:0;right:0;bottom:12%;height:58%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;z-index:2}
-#modal .dlg.kplace .ksart .kplsil img{height:100%;width:auto;max-width:none;margin:0 -1%;opacity:.78;filter:grayscale(1) brightness(.42) blur(.3px);transform:translateY(calc(var(--i) * 2%))}
-#modal .dlg.kplace .ksart .kplsil img.kpls-k{height:62%}
-#modal .dlg.kplace .ksart .kplsil b{align-self:flex-end;margin-left:6px;font-size:.8rem;color:#fffaf0;background:rgba(40,24,12,.55);border-radius:9px;padding:0 6px}
 `;document.head.appendChild(st)})();

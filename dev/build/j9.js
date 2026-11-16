@@ -6,7 +6,7 @@ function oan(x,y){if(!x||!y||x===y)return 0;if(x===S)return S.ro[y.id]||0;if(y==
 function oanAdd(x,y,n){if(!x||!y||x===y)return;const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
 function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
-function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);if(n<0){oanAdd(y,x,-n*.6);oanAdd(x,y,-n*.2)}else{oanAdd(y,x,-n*.3)}}
+function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
 function oanMonth(){for(const v of rivals){v.oan=Math.max(0,(v.oan||0)-2);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-2)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
 
@@ -36,14 +36,14 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
-function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","xx","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
- const sv=sent?bestSent(a):null;ACTX={a,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const sv=sent?bestSent(a):null;ACTX={a,t,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
- if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){evA(t,a,1);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ: ${NM(t)} nắm thêm 1 chứng cứ. `+servCaught(a,sv)}
+ if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,1);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm 1 chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
  return r?(r.trim()+(sent?` (sai ${sv?sv.name:"người"} đi)`:where?` (tại ${where})`:"")+" "):""}
-function odA(a,b){return cl(Math.round(b+(a.suc<30?-15:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)),5,95)}
+function odA(a,b){return cl(Math.round(b+(a.suc<30?-15:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)+(ACTX.a===a&&ACTX.t&&typeof spyKnowB==="function"?spyKnowB(a,ACTX.t):0)),5,95)}
 
 /* the talk system: topics, by traits and bars; the same chat repeated in a month gives less */
 function chatF(v){S.chat=S.chat||{};const n=S.chat[v.id]||0;return 1/(1+n)}
@@ -54,7 +54,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  const praise=v.trait==="Kiêu ngạo"||v.trait==="Tham vọng"?8:4;A.push({n:"Khen tài nghệ nàng",o:od(60+S.tai/5),x:`nàng quý ngươi +${g(praise)}`,run:()=>{chatMark(v);if(roll(od(60+S.tai/5))){affAdd(v,S,g(praise));return `${v.name} tươi cười. Nàng quý ngươi +${g(praise)}.`}affAdd(v,S,-2);return `${v.name} cho là ngươi giả lả. Nàng quý ngươi -2.`}});
  if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${g(8)}`:"kèm: nàng quý ngươi -3 · nàng có thể mách lại",run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(8));oanAdd(v,third,5);return `Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${g(8)}.`}affAdd(v,S,-3);if(roll(50)){oanAdd(third,S,10);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +10.`}return `${v.name} lảng sang chuyện khác. Nàng quý ngươi -3.`}});
  A.push({n:"Chia sẻ bí mật",o:100,x:`nàng quý ngươi +${g(10)}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,run:()=>{chatMark(v);affAdd(v,S,g(10));if(v.malice>50&&roll(50)){evA(v,S,1);return `${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${g(10)}.`}return `${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${g(10)}.`}});
- A.push({n:"Nhờ giúp đỡ",o:100,x:aff(v,S)>=30?"nàng thân với ngươi":"nàng chưa đủ quý ngươi (cần 30): nàng quý ngươi -3",run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=30){ap(v,{bac:-30});apply({bac:30});return `${v.name} cho ngươi mượn 30 lượng.`}const x=liveRivals(true).filter(y=>y!==v)[0];if(x){evA(S,x,1);return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`}}affAdd(v,S,-3);return `${v.name} khéo từ chối. Nàng quý ngươi -3.`}});
+ A.push({n:"Nhờ giúp đỡ",o:100,x:aff(v,S)>=30?"nàng thân với ngươi":"nàng chưa đủ quý ngươi (cần 30): nàng quý ngươi -3",run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=30){ap(v,{bac:-30});apply({bac:30});return `${v.name} cho ngươi mượn 30 lượng.`}const x=evGuilty(S,liveRivals(true).filter(y=>y!==v));if(x&&evA(S,x,1))return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`;}affAdd(v,S,-3);return `${v.name} khéo từ chối. Nàng quý ngươi -3.`}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=30)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(10)}`:"không có căn cứ: nàng quý ngươi -2",run:()=>{chatMark(v);if(foe){affAdd(v,S,g(10));oanAdd(v,foe,10);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(10)}.`}affAdd(v,S,-2);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -2.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:"oán -15",run:()=>{oanAdd(v,S,-15);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán -15.`}});
@@ -70,14 +70,14 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
  if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
  H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,x:v.preg&&!v.hidden?"nàng đang có thai":"nàng bẽ mặt",run:()=>trip(S,v)});
- act("frame","Vu oan");act("vp","Tố vượt phẩm");
+ act("frame","Vu oan");act("vp","Tố vượt phẩm");act("xx","Tố xa xỉ");
  return H}
 function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
  if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,-10);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức -25${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
  ap(a,{danh:-8});relAdd(a,t,-25);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
 function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,-6);return r}
  relAdd(a,t,-12);evA(t,a,1);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
-function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(40+S.mat*6))){evA(S,v,1);return `Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`}return "Không nghe được gì."}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(40+S.mat*6))){return evA(S,v,1)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
@@ -115,12 +115,22 @@ function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k=
  return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}
 function walkSpillGo(k){const P=walkSpill(k);if(!P||!P.ok||Q.length)return;window.__walkSpill={k,from:S.place,rest:P.rest,b:P.b,tries:0};
  spend(P.now);nextBuoi();walkSpillTick()}
+/* ONE "go there" rule for every button that walks her to a place (map, list, person cards, generic data-go) — owner-bug 16/11 18:30Z
+   "chỗ nào cũng khóa hết" (review/dudo-lock): a walk longer than the khắc left is never a lock while walk spill can take her there.
+   walkBlock(k,tc) = the reason a go-button is disabled ("" = may go now, or arrives next buổi); walkLate(k,tc) = true when she arrives
+   next buổi; walkGo(k) = go now, or spill into the next buổi. */
+function walkBlock(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return"";const P=walkSpill(k);return P&&P.ok?"":walkWhy(tc)}
+function walkLate(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return false;const P=walkSpill(k);return !!(P&&P.ok)}
+function walkGo(k){if(!S||S.dead||Q.length)return;if(k==="home"||k===S.place||S.confined||S.out){goTo(k);return}const tc=travel(S.place,k);if(walkOk(tc)){goTo(k);return}if(walkLate(k,tc))walkSpillGo(k)}
 function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){window.__walkSpill=null;return}
  const md=document.getElementById("modal");if(Q.length||(md&&!md.hidden)||S.mg){setTimeout(walkSpillTick,300);return}
  const b=S.buoi||0;
  if(b===W.b-1&&S.place===W.from&&W.tries<3){W.tries++;nextBuoi();setTimeout(walkSpillTick,300);return} /* the buổi did not turn yet (an event card came first) */
  if(b!==W.b||S.place!==W.from){window.__walkSpill=null;return}
- goTo(W.k);if(S.place===W.k)window.__walkSpill=null}
+ goTo(W.k);if(S.place===W.k)window.__walkSpill=null;
+ /* review/dudo-lock: the place shut while she walked (the rule read the new buổi before NPCs moved, e.g. a maid's mistress left): never a
+    silent stop at home — the place card says why, the walk spent is not refunded (she did walk) */
+ else if(!Q.length){window.__walkSpill=null;try{if(typeof j77Card==="function")j77Card(W.k)}catch(e){}}}
 function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?(wet()?3:2):1}
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;

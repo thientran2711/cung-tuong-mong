@@ -27,7 +27,7 @@ function kaModel(html){const t=document.createElement("template");t.innerHTML=St
   if(!M.odds&&KA_ODDS.test(p)){M.odds=p;return}
   M.items.push({h,old,l:l==null?lab:l})};
  const walk=nodes=>{for(const n of nodes){
-  if(n.nodeType===3){const s=n.textContent;if(s.trim()&&s.trim()!=="·"){s.split(/\s·\s/).forEach(x=>push(x.trim(),"n"))}continue}
+  if(n.nodeType===3){const s=n.textContent;if(s.trim()&&s.trim()!=="·"){kSplitTop(s,/\s·\s/y).forEach(x=>push(x.trim(),"n"))}continue}
   if(n.nodeType!==1)continue;const cl=n.classList;
   if(cl.contains("oc")){M.odds=n.textContent.trim();afterOdds=true;continue}
   if(cl.contains("ksep"))continue;
@@ -40,7 +40,7 @@ function kaModel(html){const t=document.createElement("template");t.innerHTML=St
  walk(t.content.childNodes);return M}
 /* read a raw line 'word · tốn: … · thành: … · hỏng: … · note' (segments keep whether they continue a label) */
 function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").trim();
- const M={odds:"",oddsX:"",items:[]};let lab="";const segs=str.split(/ · (?![^<]*>)/);
+ const M={odds:"",oddsX:"",items:[]};let lab="";const segs=kSplitTop(str,/ · /y);
  for(const s0 of segs){const plain=kaPlain(s0);if(!plain)continue;
   if(!M.odds&&KA_ODDS.test(plain)){M.odds=plain;continue}
   if(/^Quẻ: /.test(plain)&&M.odds){const r=plain.slice(5);M.oddsX+=`<span class="ef ${/khó hơn/.test(r)?"r":/dễ hơn/.test(r)?"g":"n"}">Quẻ: ${r}</span>`;continue}
@@ -48,13 +48,13 @@ function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";cont=false;s=s.slice(ml[0].length);
    const open=(ml[0].match(/<(span|b)[^>]*>/g)||[]).length;if(open&&/^\s*</.test(ml[0])){const tg=ml[0].match(/<(span|b)( class="(g|r)")?[^>]*>/);s=(tg?tg[0]:"")+s}}
   else{const m2=plain.match(/^tốn (\d+ khắc)$/);if(m2){M.items.push({h:m2[1],old:"n",l:"tốn",cont:false});continue}}
-  for(let v of [].concat(...s.split(/; (?![^<(]*[>)])/).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:q.split(/, (?![^<(]*[>)])/)))){const vp=kaPlain(v);if(!vp)continue;const om=v.match(/^\s*<(?:span|b) class="(g|r)"/);M.items.push({h:/^\s*<(span|b) class="[gr]">[^<]*<\/\1>\s*$/.test(v)?vp:v.trim(),old:om?om[1]:"n",l:lab,cont})}}
+  for(let v of [].concat(...kSplitTop(s,/; /y).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:kSplitTop(q,/, /y)))){const vp=kaPlain(v);if(!vp)continue;const om=v.match(/^\s*<(?:span|b) class="(g|r)"/);M.items.push({h:/^\s*<(span|b) class="[gr]">[^<]*<\/\1>\s*$/.test(v)?vp:v.trim(),old:om?om[1]:"n",l:lab,cont})}}
  return M}
 const KA_RISK=/^(có thể bị|bị người của nàng phát giác|bị lộ|bị khám|Đức \d+ → \d+|dễ lộ|có khi bị)/i;
 /* place every value in its row by meaning */
 function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[]};const add=(r,h,c)=>{if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)))R[r].push({h,c})};
  const sure=!M.odds||/^Chắc chắn/.test(M.odds);
- for(const it of M.items){let [h,nt]=kaSplitNote(it.h);if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(/^(chắc chắn · )?không được mất gì$/i.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
+ for(const it of M.items){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(/^(chắc chắn · )?không được mất gì$/i.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
   if(/[+−-]\s?0(?![\d.,])/.test(p)&&!/[+−-]\s?(0[.,]\d*[1-9]|[1-9])/.test(p)){add("note",p.replace(/\s?[+−-]\s?0(?![\d.,])/g," không đổi"),"n");continue}
   if(l==="why"){add("why",h,"r");continue}
   if(/^\(.*\)$/.test(p)){add("note",h,"n");continue}
@@ -167,8 +167,8 @@ button.ka.kcard .kinfo{display:none}
 .opts:has(> button.ka){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));grid-auto-rows:1fr;gap:6px;align-items:stretch}
 .rbtn:has(> button.ka){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-auto-rows:1fr;gap:6px;align-items:stretch}
 .opts>button.ka,.pcb>button.ka,.cards>button.ka,.rbtn>button.ka{height:auto!important;min-height:100%!important}
-@media (max-width:1199px){.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media (max-width:599px){button.ka small.kb{grid-template-columns:3.3rem minmax(0,1fr)}.cards:has(> button.ka){grid-template-columns:1fr!important}.pcb:has(> button.ka){grid-template-columns:1fr!important}.opts:has(> button.ka),.rbtn:has(> button.ka){grid-template-columns:1fr!important}button.ka{padding:6px 8px 7px!important}}
+/* kv:(max-width:1199px) */.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/HỎNG | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đầy đủ ở Nhật ký" =================
    Built from REAL deltas (snapshot before → now), never from the option preview: no ranges, no "có thể"; two-way relations merged into one plain phrase. */
@@ -178,13 +178,13 @@ function kaTitled(s){for(const v of (typeof rivals!=="undefined"?rivals:[])){if(
 const kaN=n=>(n>0?"+":"−")+Math.abs(n);
 function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,"")));
  const ok=L.filter(t=>t&&!/→/.test(t)&&!/(thành|hỏng|kèm|tốn|được ngay)\s*:/i.test(t)&&!/\+\d+\.\.\d/.test(t)&&!/^\[/.test(t)&&!/\b(Thành|Hỏng)\.\s*·/.test(t)&&!/(^|\s)có thể\s/.test(t));
- if(!ok.length)return"";const P=ok[0].split(/(?<=[.!?…])\s+(?=[A-ZÀ-Ỹ"“])/);let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
+ if(!ok.length)return"";const P=ok[0].split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""));let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
    collapsed ("12 phi tần ghen thêm 8"), tap to see who; a person she has not met is "người chưa quen" (no name) */
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
 function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
- const per=[];/* [who, goodParts, badParts] */
+ const per=[];const U={g:[],b:[]};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
   let da=a-b.a,lo=b.a,hi=a;if(v===q&&q!==S&&before.hh!=null){const dh=(S.hh||0)-before.hh;if(dh){skip.add("hh");if(!da){da=dh;lo=before.hh;hi=S.hh||0}}}
   /* hotfix 11/15: the real before→after, never the bare word "thiện cảm" */
@@ -192,7 +192,8 @@ function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length)per.push([kaWho(v),gp,bp])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
+ {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[]]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"]])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[]]);continue}
   (d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`)}
