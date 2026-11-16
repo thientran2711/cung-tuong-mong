@@ -49,13 +49,13 @@ function artLv(p,k){return ((p&&p.arts)||{})[k]||0}
 function virLv(p,k){return ((p&&p.vir)||{})[k]||0}
 function virtueBonus(p,k){const lv=virLv(p,k);const b={lv};
  if(k==="cong"){b.q=lv*4;b.tier=lv>=5?2:lv>=3?1:0;b.prog=lv>=2?1:0}
- if(k==="dung"){b.odds=lv*3;b.sac=(lv>=1?2:0)+(lv>=3?2:0)+(lv>=5?2:0)}
- if(k==="ngon"){b.odds=lv*3;b.slip=lv>=4?2:lv>=2?1:0}
+ if(k==="dung"){b.odds=virO(p,k);b.sac=(lv>=1?2:0)+(lv>=3?2:0)+(lv>=5?2:0)}
+ if(k==="ngon"){b.odds=virO(p,k);b.slip=lv>=4?2:lv>=2?1:0}
  if(k==="hanh"){b.duc=lv*3;b.month=lv>=3?1:0}
  return b}
 function artBonus(p,k){const lv=artLv(p,k),cg=virtueBonus(p,"cong");const q=cl(Math.round(lv*14+((p&&p.tai)||0)/10+cg.q),0,100);
  let tier=q<25?1:q<45?2:q<65?3:q<85?4:5;tier=Math.min(5,tier+cg.tier);
- return{lv,q,tier,odds:lv*4,gift:k==="hoa"?lv*10:k==="theu"?lv*8:0,scheme:k==="ky"?lv*2:0,detect:k==="y"&&lv>=2?20:0,night:k==="vu"?lv*2:k==="y"?lv*1.5:0}}
+ return{lv,q,tier,odds:artO(p,k),gift:k==="hoa"?lv*10:k==="theu"?lv*8:0,scheme:k==="ky"?artSide(p,k):0,detect:k==="y"&&lv>=2?20:0,night:k==="vu"||k==="y"?artSide(p,k):0}}
 function productTier(p,k){return artBonus(p,k).tier}
 function ducOf(p){if(!p)return 50;if(p===S)return S.duc||0;return p.duc==null?50:p.duc}
 function ducOdds(p){return Math.round((ducOf(p)-50)/5)}          /* credibility of an accuser: Đức 20 → -6, Đức 80 → +6 */
@@ -104,11 +104,11 @@ function vOddsFor(a,p){p=p||S;let b=0;if(!a||a.o==null||a.o>=100)return 0;if(DUN
  for(let l=l0+1;l<=S.arts[k];l++){const b=k==="theu"?ARTB85.theu:null;if(b&&b[l]){apply(b[l]);log(`${ARTS.find(a=>a.k===k).n} bậc ${l}: ${fmt(b[l])}.`)}}return r}})();
 /* Tứ đức teacher fee = the palace teacher fee: 8% of the learner's bổng (coordinator s7 decision c; jrcp tchFeeOf); was a flat 5+5×bậc */
 function virCost(l,p){return typeof tchFeeOf==="function"?tchFeeOf(p||S):5+l*5}
-function addVir(p,k,g){vNorm(p);const V=VIR.find(x=>x.k===k);if(!V)return;p.virp[k]+=g;
- while(p.vir[k]<5&&p.virp[k]>=p.vir[k]+2){p.virp[k]-=p.vir[k]+2;p.vir[k]++;const l=p.vir[k],f=(VIRB[k]||{})[l];
+function addVir(p,k,g){vNorm(p);const V=VIR.find(x=>x.k===k);if(!V)return;
+/* points go through the one course ladder (jbalcore crsPush, BAL.art) */
+ crsPush(p.vir,p.virp,k,g,l=>{const f=(VIRB[k]||{})[l];
   if(f)withDeed(`${V.n} lên bậc ${l}`,()=>{if(p===S)apply(f);else ap(p,f)});
-  if(p===S)log(`<span class="g">${V.n} (${V.full}) lên bậc ${l}.</span> ${VIRFX[k][l-1]}`)}
- if(p.vir[k]>=5)p.virp[k]=0}
+  if(p===S)log(`<span class="g">${V.n} (${V.full}) lên bậc ${l} · ${artNm(l)}.</span> ${VIRFX[k][l-1]}`)})}
 function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(2)||S.suc<25)return;apply({suc:-15});spend(2);addVir(S,k,1);log(`Tự học ${V.n}. Tiến bộ +1.`)}
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
@@ -120,12 +120,12 @@ try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>
 document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[data-charity],[data-v85tab]");if(!b||b.disabled)return;e.stopPropagation();
  if(b.dataset.vlearn)lessonVir(b.dataset.vlearn,b.dataset.mode);else if(b.dataset.charity)charity();else v85Table(b.dataset.v85tab)},true);
 /* ---- the same rules for every NPC: study by trait, a teacher when the purse allows ---- */
-function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x=>x.k===k);if(!a)return;if((k==="theu"||k==="nau")&&virtueBonus(p,"cong").prog)g+=1;p.artp[k]+=g;
- while(p.arts[k]<5&&p.artp[k]>=p.arts[k]+2){p.artp[k]-=p.arts[k]+2;p.arts[k]++;const l=p.arts[k];const f={[a.st]:2};if(l===3)f.danh=3;if(l===5)f.danh=6;const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)}
- if(p.arts[k]>=5)p.artp[k]=0}
-function npcStudy(v){if(!v||!v.alive||v.out||!roll(40))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
+function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x=>x.k===k);if(!a)return;if((k==="theu"||k==="nau")&&virtueBonus(p,"cong").prog)g+=1;
+/* the one course ladder (jbalcore crsPush): same points, same bậc effects as hers (j2 addArt + j23/j85 extras) */
+ crsPush(p.arts,p.artp,k,g,l=>{const f={[a.st]:BAL.art.stUp};if(BAL.art.danh[l])f.danh=BAL.art.danh[l];const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)})}
+function npcStudy(v){if(!v||!v.alive||v.out||!roll(BAL.orig.npc.study))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
  const w=k=>{let x=1;if(/Hiền lành|Nhu mì/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Hiểm độc"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
- ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
+ const bk=(typeof bestArt==="function"&&bestArt(v)||{}).k;/* like a player she keeps at her best art (BAL.orig.npc.focus) */ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)*(a.k===bk?BAL.orig.npc.focus:1)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
  let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
  let g=1;if((v.bac||0)>=cost+40&&roll(50)){ap(v,{bac:-cost});g=2+R(2)}if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}
 /* ---- monthly effects (every consort alike) ---- */
@@ -153,7 +153,7 @@ function fxItems(s,cls){return String(s).split(" · ").map(x=>`<span class="ef $
 function lvRows(fx,l,nm){const rows=[];fx.slice(0,l).forEach((s,i)=>rows.push([`Bậc ${i+1}`,fxItems(s,"g"),"g"]));if(l<5)rows.push([`Bậc ${l+1} mở`,fxItems(fx[l],"n"),"n"]);return kitRows(rows)}
 function v85Table(k){const V=VIR.find(x=>x.k===k),A=ARTS.find(x=>x.k===k);
  if(k==="duc")return v85DucPanel();const fx=V?VIRFX[k]:ARTFX[k],l=V?virLv(S,k):artLv(S,k);if(!fx)return;
- kitModal({kind:"rule",title:V?`${V.n} · ${V.full}`:`${A.n}`,sub:V?V.d:(ARTDO[k]||""),sections:[{h:"Năm bậc",tiers:fx.map((s,i)=>({k:`Bậc ${i+1}`,n:s,c:i<l?"g":"",on:i+1===l}))}].concat(V?[]:[{h:"Ghi chú",rows:[["Lên bậc",`${A.st==="sac"?"Sắc":"Tài"} +2 mỗi bậc; bậc 3 Danh +3, bậc 5 Danh +6`,"t"]].concat(["cam","ky","thi","hoa"].includes(k)?[["Hoàng thượng trọng tài","thi tài, phô tài tính bậc này gấp đôi","t"]]:k==="vu"?[["Hoàng thượng mê sắc","múa, lật thẻ tính bậc này gấp đôi","t"]]:[])}]),btn:"Đã hiểu"})}
+ kitModal({kind:"rule",title:V?`${V.n} · ${V.full}`:`${A.n}`,sub:V?V.d:(ARTDO[k]||""),sections:[{h:"Năm bậc",tiers:fx.map((s,i)=>({k:`Bậc ${i+1} · ${artNm(i+1)} · ${BAL.art.tier[i+1]} điểm`,n:s,c:i<l?"g":"",on:i+1===l}))}].concat(V?[]:[{h:"Ghi chú",rows:[["Điểm",`${artPts(S,k)}/100 · ${artNm(l)}; Tông sư (100) là cả đời khổ luyện`,"t"],["Lên bậc",`${A.st==="sac"?"Sắc":"Tài"} +${BAL.art.stUp} mỗi bậc; bậc 3 Danh +${BAL.art.danh[3]}, bậc 5 Danh +${BAL.art.danh[5]}`,"t"],["Phần thắng",`việc dùng ${A.n} dễ thành hơn: ${BAL.art.odds.slice(1).map((x,i)=>`bậc ${i+1} +${x}`).join(", ")}`,"t"],["Đêm lật thẻ",`Tranh sủng, Chặn ngự giá, Giữ chân Hoàng thượng dùng môn giỏi nhất: trúng môn Hoàng thượng chuộng tháng này thì dễ thành hơn theo bậc, trúng môn ngài không ưa thì khó hơn`,"t"]].concat(["cam","ky","thi","hoa"].includes(k)?[["Hoàng thượng trọng tài","thi tài, phô tài tính bậc này gấp đôi","t"]]:k==="vu"?[["Hoàng thượng mê sắc","múa, lật thẻ tính bậc này gấp đôi","t"]]:[])}]),btn:"Đã hiểu"})}
 function ducDeedList(){const L=[];for(const k in ACT){const A2=ACT[k];if(A2&&A2.c&&A2.c.duc<0)L.push([A2.n,A2.c.duc])}L.sort((a,b)=>a[1]-b[1]);return L}
 function v85DucPanel(){const d=S.duc,bad=ducDeedList();
  kitModal({kind:"rule",title:"Đức",sub:"Ai cũng có Đức; việc làm thật mới làm Đức lên xuống",

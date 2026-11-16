@@ -320,7 +320,7 @@ ARC67.tt_oan={o:"tt",t:"Phủ Tể tướng mắc oan",w:"dad",sj:"vụ án tham
   {n:"Ép hắn viết lời khai ngay",c:{suc:-3},o:()=>40+S.tamco/3,sc:1,wx:"có lời khai trên giấy",l:{danh:-3},lx:"hắn sợ quá trốn mất",rt:"Hắn run tay viết lời khai.",rf:"Đêm đó hắn trốn khỏi kinh thành."},
   {n:"Không tin hắn",c:{},w:{tamco:1},wx:"không mắc bẫy",lx:"lỡ một nhân chứng",rt:"Ngươi cho hắn về."}]},
  c2:{h:"Nét chữ trong sổ",w:"maid",need:["nsrv"],t:"Ngươi xin được bản chép sổ sách. Nét chữ ở mấy trang cuối lạ hẳn những trang đầu.",o:[
-  {n:"Tự đối chiếu nét chữ",c:{suc:-6},o:()=>30+S.tai/2+S.arts.thi*5,sc:2,wx:"chứng minh sổ bị sửa",l:{suc:-4},rt:"Nét chữ mấy trang cuối là của quản gia nhà {v}.",rf:"Ngươi đọc mỏi mắt mà không chắc được gì."},
+  {n:"Tự đối chiếu nét chữ",c:{suc:-6},o:()=>30+S.tai/2+artO(S,"thi"),sc:2,wx:"chứng minh sổ bị sửa",l:{suc:-4},rt:"Nét chữ mấy trang cuối là của quản gia nhà {v}.",rf:"Ngươi đọc mỏi mắt mà không chắc được gì."},
   {n:"Nhờ Hàn lâm viện giám định",c:{bac:-40},o:()=>55,sc:1,wx:"lời giám định của Hàn lâm",l:{},lx:"tin lọt ra ngoài",rt:"Hàn lâm viện xác nhận có hai nét chữ.",rf:"Hàn lâm viện ngại dính vào, trả lại bản chép."},
   {n:"Giữ bản chép, chờ thời",c:{},w:{tamco:2},wx:"không lộ bài",lx:"cha chờ thêm",rt:"Ngươi cất bản chép thật kỹ."}]},
  c3:{h:"{v} giễu cợt",w:"v",need:["v"],t:"{v} ngồi giữa các phi tần, giọng ngọt như mật: “Tham ô ba vạn lượng, chẳng trách tỷ tỷ ăn mặc lộng lẫy thế.”",o:[
@@ -852,7 +852,7 @@ ARC67.nc_tuc={o:"nc",t:"Người ngoại tộc",w:"th",sj:"phong tục Nam Chi�
   {n:"Dâng một phần lên Thái hậu",c:{bac:-10},o:50,w:{th:6},sc:1,f:"keep",wx:"Thái hậu nếm thử",l:{th:-4},rt:"Thái hậu ăn hết.",rf:"Thái hậu chê tanh."},
   {n:"Thôi nấu, cho đỡ điều tiếng",c:{},w:{duc:2},f:"bend",wx:"yên chuyện",lx:"nhớ nhà",rt:"Bếp nhỏ tắt lửa."}]},
  c1:{h:"Thái hậu đau lưng",w:"th",need:["th"],t:"Thái hậu đau lưng, thái y bó tay. Ngươi biết một bài thuốc đắp của Nam Chiếu.",o:[
-  {n:"Xin dâng thuốc quê nhà",c:{suc:-3},o:()=>45+S.arts.y*6,w:{th:12},sc:2,f:"keep",wx:"Thái hậu đỡ đau",l:{th:-8},lx:"thuốc không hợp",rt:"Thái hậu ngủ được một giấc ngon.",rf:"Thuốc làm Thái hậu nổi mẩn."},
+  {n:"Xin dâng thuốc quê nhà",c:{suc:-3},o:()=>45+artO(S,"y"),w:{th:12},sc:2,f:"keep",wx:"Thái hậu đỡ đau",l:{th:-8},lx:"thuốc không hợp",rt:"Thái hậu ngủ được một giấc ngon.",rf:"Thuốc làm Thái hậu nổi mẩn."},
   {n:"Không dám, sợ mang họa",c:{},w:{tamco:2},wx:"không rủi ro",lx:"bỏ lỡ cơ duyên",rt:"Ngươi im lặng."}]},
  c2:{h:"Lễ hội té nước",w:"maid",t:"Tết Nam Chiếu đến. Ngươi muốn làm lễ té nước nhỏ trong cung.",o:[
   {n:"Mời các phi tần cùng chơi",c:{bac:-30},o:50,w:{danh:5},sc:1,f:"keep",wx:"thêm người quen",l:{th:-6},lx:"Thái hậu chê ồn",rt:"Cả hậu cung cười vui.",rf:"Thái hậu sai người dẹp."},
@@ -864,7 +864,7 @@ ARC67.nc_tuc={o:"nc",t:"Người ngoại tộc",w:"th",sj:"phong tục Nam Chi�
   {n:"Kể chuyện Phật giáo Nam Chiếu",c:{},o:A=>45+(A.f.keep?10:0),sc:1,wx:"Thái hậu tò mò",l:{th:-4},rt:"Thái hậu nghe say mê.",rf:"Thái hậu bảo ngươi im lặng mà chép."},
   {n:"Chép kinh cẩn thận, không nói",c:{suc:-4},w:{th:6},f:"bend",wx:"Thái hậu khen nết na",rt:"Thái hậu gật đầu."}]},
  x1:{h:"Đại thọ Thái hậu",w:"th",t:"Đại thọ Thái hậu. Mỗi phi tần dâng một lễ. Lễ của ngươi sẽ nói ngươi là ai.",o:[
-  {n:"Dâng điệu múa chim công cầu thọ",c:{suc:-5},o:A=>35+(A.f.keep?20:0)+S.arts.vu*6,e:["win","lose"],rt:"Thái hậu đứng dậy vỗ tay, gọi ngươi là ‘con chim công của ai gia’.",rf:"Thái hậu cau mày, cả yến im bặt."},
+  {n:"Dâng điệu múa chim công cầu thọ",c:{suc:-5},o:A=>35+(A.f.keep?20:0)+artO(S,"vu"),e:["win","lose"],rt:"Thái hậu đứng dậy vỗ tay, gọi ngươi là ‘con chim công của ai gia’.",rf:"Thái hậu cau mày, cả yến im bặt."},
   {n:"Dâng bộ kinh chép tay",c:{suc:-4},o:A=>50+(A.f.bend?20:0),e:["win2","mid"],rt:"Thái hậu khen ngươi nay đã là con dâu Đại Hy.",rf:"Thái hậu nhận kinh, không nói gì."},
   {n:"Dâng lễ vật quý, đứng sau",c:{bac:-60},w:{th:3},e:"mid",lx:"không ai nhớ lễ của ngươi",rt:"Lễ vật đặt lẫn trong trăm lễ."}]}},
  E:{win:{k:1,tag:"Chim công của Thái hậu",w:"th",t:"Thái hậu thương ngươi như con. Giữ được mình mà vẫn được chấp nhận, ngươi là người ngoại tộc đầu tiên làm được thế.",fx:{th:20,danh:6}},
@@ -1058,7 +1058,7 @@ ARC67.ch_benh={o:"ch",t:"Thái hậu lâm bệnh",w:"th",sj:"bệnh tình của 
   {n:"Nhịn",c:{bac:-30},w:{duc:3},wx:"không gây chuyện",rt:"Bạc cung ngươi bị cắt bớt."},
   {n:"Xin Hoàng thượng phân xử",c:{},o:45,w:{sung:3},sc:1,wx:"ngài đứng ra",l:{hh:-8},rt:"Hoàng thượng trả lại phần bạc của ngươi.",rf:"Hoàng thượng bảo việc hậu cung để Hoàng hậu lo."}]},
  c1:{h:"Thuốc của Thái y viện",w:"doc",t:"Ngươi để ý: bệnh Thái hậu cứ uống thuốc của Thái y viện là nặng thêm.",o:[
-  {n:"Lén đổi thuốc, nhờ lương y xem",c:{bac:-30},o:()=>45+S.arts.y*5,sc:2,f:"poison",wx:"biết thuốc có vấn đề",l:{},lx:"bị bắt gặp đổi thuốc",rt:"Trong thuốc có một vị gây hại cho người già.",rf:"Cung nữ của Đức Thọ cung bắt gặp ngươi."},
+  {n:"Lén đổi thuốc, nhờ lương y xem",c:{bac:-30},o:()=>45+artO(S,"y"),sc:2,f:"poison",wx:"biết thuốc có vấn đề",l:{},lx:"bị bắt gặp đổi thuốc",rt:"Trong thuốc có một vị gây hại cho người già.",rf:"Cung nữ của Đức Thọ cung bắt gặp ngươi."},
   {n:"Tự tay sắc thuốc",c:{suc:-6},w:{th:5},sc:1,wx:"bà an toàn hơn",rt:"Thái hậu chỉ uống thuốc ngươi sắc."}]},
  c2:{h:"Các phi tần xoay chiều",w:"v",need:["v"],t:"{v}, trước nay nịnh Thái hậu, giờ ngày nào cũng sang Càn Ninh cung.",o:[
   {n:"Ghi nhớ, không nói",lx:"Thái hậu không biết ai hai lòng",c:{},w:{tamco:2},sc:1,wx:"biết ai là người hai lòng",rt:"Ngươi ghi tên {v} vào lòng."},
@@ -1148,7 +1148,7 @@ ARC67.thd_tho={o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi"
   {n:"Thức đêm luyện thơ",c:{suc:-8},w:{tai:4},sc:1,wx:"thơ sắc hơn",rt:"Giấy viết chất cao bằng gối."},
   {n:"Mời thầy Hàn lâm dạy",c:{bac:-50},w:{tai:6},sc:1,wx:"học được luật thơ cung đình",rt:"Thầy khen ngươi có cốt cách."}]},
  c1:{h:"{v} tố ngươi đạo thơ",w:"v",need:["v"],t:"{v} tố trước mặt mọi người: bài thơ trên quạt là của một thi nhân đời trước.",o:[
-  {n:"Ứng tác ngay một bài khác",c:{suc:-3},o:()=>30+S.tai/2+S.arts.thi*6,w:{danh:5},sc:1,wx:"rửa tiếng oan",l:{danh:-8},lx:"bị tin là đạo thơ",rt:"Bài thơ mới khiến cả phòng lặng người.",rf:"Ngươi run tay, thơ vụng, ai cũng tin lời {v}."},
+  {n:"Ứng tác ngay một bài khác",c:{suc:-3},o:()=>30+S.tai/2+artO(S,"thi"),w:{danh:5},sc:1,wx:"rửa tiếng oan",l:{danh:-8},lx:"bị tin là đạo thơ",rt:"Bài thơ mới khiến cả phòng lặng người.",rf:"Ngươi run tay, thơ vụng, ai cũng tin lời {v}."},
   {n:"Nhờ {n1} minh oan",c:{bac:-30},o:A=>45+(A.f.ally?20:0),w:{danh:3},sc:1,wx:"Hàn lâm làm chứng",l:{danh:-6},rt:"{n1} đem bản nháp có ngày tháng ra làm chứng.",rf:"{n1} không dám dính vào."}]},
  c2:{h:"Đề thi bị lộ",w:"maid",t:"Có kẻ gạ bán đề thi Tài nữ.",o:[
   {n:"Từ chối, báo Hàn lâm viện",c:{},w:{duc:4,danh:3},sc:1,f:"clean",wx:"tiếng thanh bạch",lx:"kẻ khác có thể mua",rt:"Hàn lâm viện đổi đề."},
@@ -1160,7 +1160,7 @@ ARC67.thd_tho={o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi"
   {n:"Đem nộp Hàn lâm viện ngay",c:{},o:55,sc:2,wx:"lật được bẫy",l:{danh:-3},rt:"Hàn lâm viện tra ra người gài.",rf:"Không tra ra ai."},
   {n:"Đốt đi",c:{},w:{tamco:2},wx:"bẫy vô dụng",lx:"kẻ gài còn đó",rt:"Tập thơ cháy thành tro."}]},
  x1:{h:"Kỳ thi Tài nữ",w:"emp",t:"Kỳ thi Tài nữ ở Hàn lâm viện. Đề: ‘Vịnh tuyết’.",o:[
-  {n:"Viết thơ chân thật về tuyết quê nghèo",c:{suc:-5},o:A=>30+S.tai/3+S.arts.thi*5+(A.f.clean?5:0),e:["win","mid"],rt:"Bài thơ đứng đầu, Hoàng thượng phong ngươi Tài nữ.",rf:"Bài thơ hay, nhưng giám khảo chuộng lời hoa mỹ."},
+  {n:"Viết thơ chân thật về tuyết quê nghèo",c:{suc:-5},o:A=>30+S.tai/3+artO(S,"thi")+(A.f.clean?5:0),e:["win","mid"],rt:"Bài thơ đứng đầu, Hoàng thượng phong ngươi Tài nữ.",rf:"Bài thơ hay, nhưng giám khảo chuộng lời hoa mỹ."},
   {n:"Viết thơ hoa mỹ theo lối cung đình",c:{suc:-5},o:A=>35+S.tai/4+(A.f.cheat?15:0),e:["win2","lose"],rt:"Thơ đúng ý giám khảo, đứng nhì.",rf:"Thơ bị chê sáo rỗng, {v} cười to nhất."},
   {n:"Cáo bệnh không thi",c:{danh:-3},w:{suc:5},e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi nằm nhà."}]}},
  E:{win:{k:1,tag:"Tài nữ số một",w:"emp",t:"Ngươi được phong Tài nữ. Thơ ngươi được khắc vào bia Hàn lâm, sách của cha được in kèm. Hoàng thượng thường gọi ngươi đến đối thơ.",fx:{danh:12,sung:6},go:()=>{S.arts.thi=Math.min(5,(S.arts.thi||0)+1);return "Thi +1 bậc."}},

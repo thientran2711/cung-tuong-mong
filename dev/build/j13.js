@@ -7,7 +7,7 @@ function illOf(p){return p&&p.ill&&ILL[p.ill.k]?p.ill:null}
 function illName(p){const i=illOf(p);return i?`${ILL[i.k].n} · ${STG[i.st]}`:""}
 function illKnown(p){const i=illOf(p);if(!i)return false;return p===S||i.known||ILL[i.k].cont&&i.st>=2||S.mat>=3}
 function catchIll(p,k){if(illOf(p)||p.dead||p.alive===false)return"";p.ill={k,st:1,known:p===S};return p===S?`<span class="r">Ngươi mắc ${ILL[k].n.toLowerCase()}.</span> `:""}
-function careOdds(p){return (p.doctor?15:0)+(p.arts?p.arts.y*5:0)+(p.anthai?5:0)}
+function careOdds(p){return (p.doctor?15:0)+(p.arts?artO(p,"y"):0)+(p.anthai?5:0)}
 function illMonthP(p){const me=p===S;let ev="";const i=illOf(p);
  if(!i){const sea=SEASON[S.month-1];let base=1.5+(p.suc<40?4:0)+(S.storms||0)*1.5;const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));
   if(roll(base+(L.length?3:0))){const k=L.length&&roll(70)?pick(L)[0]:pick(["lao","matngu","phonghan"]);ev+=catchIll(p,k)}
@@ -32,8 +32,8 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
  return ev}
 /* the Emperor avoids the sick; quarantine blocks nights */
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
-function treatO(p,way){return cl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p)),5,95)}
-function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p));
+function treatO(p,way){return cl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+artO(p,"y"):20+careOdds(p)),5,95)}
+function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+artO(p,"y"):20+careOdds(p));
  const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):liveRivals(true).find(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40);
  if(way==="ty"&&bribed&&roll(25)){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(cl(o,5,95))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(50)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}

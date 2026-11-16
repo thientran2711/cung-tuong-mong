@@ -12,7 +12,7 @@ const FACE=FACE0||'consort-c05',TIER=TIER0||'t1',AGE=AGE0||'a18';
  const n=await p.evaluate(([face,tier,age,mode])=>{document.body.innerHTML='';document.body.style.cssText='margin:0;background:#f4ead8;font:14px serif;color:#3a2414';
   if(mode==='presets'){const por=`por-${face}-${tier}-${age}.webp`,B=IMG_U('img/');const W=document.createElement('div');W.style.cssText='display:grid;grid-template-columns:repeat(8,180px);gap:6px;padding:8px';let cnt=0;
    const cell=(t,lk,col)=>{const c=document.createElement('div');const v=TOIL_FIT.fit[por];const asp=v[8];const zw=180/(v[6]/100*1.45);let fx='';
-    if(lk){const k=toilColFix(col);const mk=toilMkLayer(por,lk,k);const sv=toilMakeupSvg(por,lk,k,!!mk);fx=(sv?`<img class="kmk" src="${sv}" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:'')+mk;if(mk)cnt++}
+    if(lk){const k=toilColFix(col);const mk=toilMkLayer(por,lk,k);const sv=toilMakeupSvg(por,lk,k,!!mk);fx=(sv?`<img class="kmkl" src="${sv}" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:'')+mk;if(mk)cnt++}
     c.innerHTML=`<div style="position:relative;width:180px;height:180px;overflow:hidden;border:1px solid #c9a227;background:#fffaf0"><div style="position:absolute;left:${90-v[0]/100*zw}px;top:${112-v[1]/100*zw*asp}px;width:${zw}px;height:${zw*asp}px"><img src="${B}${por}" style="position:absolute;left:0;top:0;width:100%;height:100%"><span class="kfxf" style="position:absolute;left:0;top:0;width:100%;height:100%">${fx}</span></div></div><div style="font-size:13px;line-height:1.25;padding:2px 0 6px">${t}</div>`;return c};
    for(const lk of ['dep','diem']){W.appendChild(cell(lk==='dep'?'<b>Mặt mộc</b>':'<b>Mặt mộc</b>',null,null));
     TOIL_PRE.filter(x=>x[2]===lk).forEach(x=>{const n=['mat','ma','son','may'].map(k=>toilColE(k,x[4][k])[2]).join(' · ');W.appendChild(cell(`<b>${lk==='dep'?'Thanh nhã':'Diêm dúa'} · ${x[1]}</b> (${x[3]==='cool'?'sắc lạnh':'sắc ấm'})<br><small>${n}</small>`,lk,x[4]))})}
@@ -30,7 +30,7 @@ const FACE=FACE0||'consort-c05',TIER=TIER0||'t1',AGE=AGE0||'a18';
    const v=TOIL_FIT.fit[file];const asp=v?v[8]:1.3;let zw,left,top;
    if(zoom){zw=cw/(v[6]/100*1.45);const ih=zw*asp;left=cw/2-v[0]/100*zw;top=chh*.62-v[1]/100*ih}else if(/^fig/.test(file)){zw=cw*1.25;left=(cw-zw)/2;top=chh*.40-v[1]/100*zw*asp}else{zw=cw;left=0;top=0}
    const inner=document.createElement('div');inner.style.cssText=`position:absolute;left:${left}px;top:${top}px;width:${zw}px;height:${zw*asp}px`;
-   let fx='';if(lk){const c=toilColFix(col);const mk=toilMkLayer(file,lk,c);fx=toilMakeupSvg(file,lk,c,!!mk)?`<img class="kmk" src="${toilMakeupSvg(file,lk,c,!!mk)}" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:'';fx+=mk;if(mk)cnt++}
+   let fx='';if(lk){const c=toilColFix(col);const mk=toilMkLayer(file,lk,c);fx=toilMakeupSvg(file,lk,c,!!mk)?`<img class="kmkl" src="${toilMakeupSvg(file,lk,c,!!mk)}" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:'';fx+=mk;if(mk)cnt++}
    inner.innerHTML=`<img src="${B}${file}" style="position:absolute;left:0;top:0;width:100%;height:100%"><span class="kfxf" style="position:absolute;left:0;top:0;width:100%;height:100%">${fx}</span>`;
    box.appendChild(inner);return box};
   for(const [t,lk,col] of combos){W.appendChild(hd(t));W.appendChild(cell(por,lk,col,200,264,0));W.appendChild(cell(por,lk,col,230,230,1));W.appendChild(cell(fig,lk,col,200,264,0));W.appendChild(cell(fig,lk,col,230,230,1))}

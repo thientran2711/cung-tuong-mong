@@ -7,15 +7,16 @@
    2. THE CHOICE, right after the flip result (jflip scene ends): EVERY player gets a forced choice with a 10-second countdown (BAL.steal.choice.ms,
       kit §69 clock chip; timeout = Thôi): attackers 'Tranh sủng' / 'Chặn ngự giá' / 'Thôi'; the FLIPPED consort 'Giữ chân Hoàng thượng' / 'Thôi'
       (OD 22:50Z). No khắc, no Sức, no cost — only gain and loss. NPCs choose at the SAME moment (jsteal stealWant for attacks; BAL.steal.keep.npcP
-      for a flipped NPC), never earlier, never seen by her (OD 22:10Z: no rule rewards reacting faster; order of choosing never matters).
-   3. RESOLVE ONCE when everyone has chosen: the defence rolls first (nfOdds keep): success → every attack that night drops ONE odds rung (the
-      VANPHONG ladder of word()); then each attack rolls once vs its own odds; one success → she takes the night; several → higher Sủng; equal →
-      a fair seeded roll (seedPick; host in co-op); none → the flipped consort keeps it. Defended + kept → Sủng +keep.gain; defended + robbed →
-      oán toward the winner +keep.oan. A failed attack: Sủng −failSung (stealNight failure line). Winner: stealWin (oán / ghen vs the holder).
+      for a flipped NPC, which never costs anything), never earlier, never seen by her (OD 22:10Z: no rule rewards reacting faster; order of choosing never matters).
+   3. RESOLVE ONCE when everyone has chosen: the defence rolls first (nfOdds keep): success → every attack that night drops BAL.steal.keep.rung odds rung(s)
+      (jbalcore rungDown on the BAL.lad ladder); then each attack rolls once vs its own odds; one success → she takes the night; several → higher Sủng; equal →
+      a fair seeded roll (seedPick; host in co-op); none → the flipped consort keeps it. Defended + kept → keepNoSteal (Sủng +keep.keepSung); defended + robbed →
+      keepRobbed (oán toward the winner × keep.oanX). A failed attack: jbalcore stealFail (the mode's own loss, BAL.steal.m[mode].lose). Winner: stealWin (oán / ghen vs the holder).
    4. Then the night: HER win → herWin (summons → bath → makeup → Emperor → talk → curtain, jnight ends the day); she kept her own flipped night →
       the Kính sự phòng summons "Tắm gội chờ giá" (ksp) plays; an NPC holder → resolveTonight / rivalNight at endTurn. Exactly ONE night record.
-   ONE odds function: window.nfOdds(who, mode, ctx) — mode "feign" (Tranh sủng) / "road" (Chặn ngự giá) = oSteal; "keep" = BAL.steal.keep;
-   ctx.down = rungs to drop; ctx.adj = a hook for later odds terms. Numbers: BAL.steal.* only (tuned on review/balance-core).
+   ONE odds function: window.nfOdds(who, mode, ctx) — mode "feign" (Tranh sủng) / "road" (Chặn ngự giá) = oSteal; "keep" = oKeep (jbalcore: stats,
+   her best art vs the Emperor's month art OD 23:05Z, trait fit, mood); ctx.down = keep successes (× BAL.steal.keep.rung rungs, jbalcore
+   rungDown); ctx.adj = a hook for later odds terms. Numbers: BAL.steal.* only (balance-core).
    CO-OP (host-authoritative, owner OD:L96 one world): only the HOST's Emperor turns a card (friend included). The host sends {open} (holder +
    nightWhy) → the guest plays the same scene and its own choice → sends {ch} → the host resolves once (both seats' choices + NPCs) → {fin} with
    the friend's own result (gres / gdef) → each seat plays its own night. Each seat commits only ITS OWN night.
@@ -49,16 +50,10 @@ try{for(const k of ["steal","road"])if(typeof ACT==="object"&&ACT[k])ACT[k].ok=(
 try{if(typeof SOC==="object"&&SOC.steal)SOC.steal.ok=()=>false}catch(e){}
 
 /* ---------- ONE odds function (owner 22:45Z (4) + 22:50Z: Giữ chân also rolls) ---------- */
-/* the VANPHONG ladder edges, read from word() itself (one source): RUNG[i] = the lowest odds of rung i */
-const RUNG=(()=>{const e=[0];try{let w=word(0);for(let o=1;o<=100;o++){const x=word(o);if(x!==w){e.push(o);w=x}}}catch(err){return [0,31,46,56,66,81,91]}return e})();
-function rungDown(o,n){for(let k=0;k<(n||0);k++){let i=0;while(i+1<RUNG.length&&o>=RUNG[i+1])i++;
-  if(i===0){o=Math.max(1,Math.round(o/2));continue}
-  const lo=RUNG[i],hi=(i+1<RUNG.length?RUNG[i+1]:101)-1,plo=RUNG[i-1],phi=lo-1;o=Math.round(plo+(o-lo)/Math.max(1,hi-lo)*(phi-plo))}return o}
 function nfOdds(a,mode,ctx){ctx=ctx||{};let o;
- if(mode==="keep"){const k=B().keep;o=odA(a,k.base+sungOf(a)*k.sung+effSac(a)*k.sac+mm())}
- else o=oSteal(a,mode==="road"?"road":"feign");
- if(ctx.adj)o+=ctx.adj;            /* later odds terms (e.g. the monthly favoured art, OD 23:05Z) plug in here */
- o=Math.max(1,Math.min(99,Math.round(o)));if(ctx.down)o=rungDown(o,ctx.down);return o}
+ o=mode==="keep"?oKeep(a):oSteal(a,mode==="road"?"road":"feign");
+ if(ctx.adj)o+=ctx.adj;            /* later odds terms plug in here (the month art is already inside oSteal / oKeep) */
+ o=Math.max(1,Math.min(99,Math.round(o)));if(ctx.down)o=rungDown(o,ctx.down*(B().keep.rung||1));return o}
 window.nfOdds=nfOdds;window.nfRungDown=rungDown;
 
 /* ---------- 1. the flip waits for the end of tối ---------- */
@@ -86,7 +81,8 @@ if(typeof chooseM==="function"){const cm0=chooseM;chooseM=function(){const b=S&&
 
 /* one try a night each: the same mark j75 ntTry writes (S.ntTry {w: wk(), ids}) */
 function tryMark(a){if(!S)return;const w=wk();if(!S.ntTry||S.ntTry.w!==w)S.ntTry={w,ids:[]};const k=keyOf(a);if(k!=null&&!S.ntTry.ids.includes(k))S.ntTry.ids.push(k)}
-function failTxt(a,t){return `${NMc(a)} định giành đêm${t?" của "+NM(t):""} nhưng Hoàng thượng không động lòng. Sủng -${B().failSung}. `}
+/* the failure line of a try whose loss is applied on another seat (co-op friend): same words and numbers as jbalcore stealFail, no ap */
+function failTxt(a,t,mode){return `${NMc(a)} định giành đêm${t?" của "+NM(t):""} nhưng Hoàng thượng không động lòng. ${fmt(stealLose(mode))}. `}
 /* a fair seeded roll among equals (same seed on any seat: the day, the batch, the ids) */
 function seedPick(L,k){const id=x=>String(x.a===S?"me":x.a.id);const M=L.slice().sort((a,b)=>id(a)<id(b)?-1:id(a)>id(b)?1:0);
  const s=`${day()}|${k}|`+M.map(id).join(",");let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return M[h%M.length]}
@@ -103,7 +99,7 @@ function nfResolve(t,L,live,k){const out={holder:t,lines:[],tries:L.length,res:[
    try{const d=S.nightWhy;if(d&&d.wk===day()){d.pick=a===S?"me":a.id;d.cause="stolen"}}catch(e){}}
   else if(taken||!t)txt=`${NMc(a)} định giành đêm nhưng ${typeof ntReason==="function"?ntReason(a).replace(/^Đ/,"đ"):"đêm nay đã có người"}.`;
   else if(x.ok)txt=`${NMc(a)} cũng mời được Hoàng thượng, nhưng ngài chọn sang cung ${NM(best.a)}.`;
-  else{if(!x.remote)ap(a,{sung:-B().failSung});txt=failTxt(a,t).trim()}
+  else txt=(x.remote?failTxt(a,t,x.mode):stealFail(a,t,x.mode)).trim()
   out.res.push({w:a===S?"me":a.id,won:x===best,mode:x.mode,txt,lost:!x.ok&&!taken&&!!t});
   try{ST.push({w:day(),me:t===S,mode:x.mode,ok:x===best,live,n:L.length});if(ST.length>5000)ST.splice(0,1000)}catch(e){}
   try{if(typeof newsAdd==="function"&&a!==S&&t)newsAdd(a,"steal",txt.replace(/\.\s*$/,""),t===S)}catch(e){}
@@ -176,12 +172,12 @@ function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t)
  let h,o;
  if(x.role==="def"){const ok=nfOdds(S,"keep");
   h=`<p>Thẻ bài của ngươi được lật. Kẻ khác có thể tranh mất đêm nay; ngươi có giữ chân Hoàng thượng không?</p>${clk()}`;
-  o=[{n:"Giữ chân Hoàng thượng",fx:{},x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm một bậc; không ai giành được thì Sủng +${B().keep.gain} · hỏng: không mất gì`,go:()=>mine("keep")},
+  o=[{n:"Giữ chân Hoàng thượng",fx:{},x:`${word(ok)} · thành: ai tranh đêm của ngươi cũng khó thêm ${B().keep.rung} bậc; không ai giành được thì Sủng +${B().keep.keepSung} · hỏng: không mất gì`,go:()=>mine("keep")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
- else{const o1=nfOdds(S,"feign"),o2=nfOdds(S,"road");let gx="";try{gx=stealX(t)}catch(e){}
+ else{const o1=nfOdds(S,"feign"),o2=nfOdds(S,"road");const gx=r=>{try{return stealX(t,r)}catch(e){return ""}};
   h=`<p>Tối nay thẻ bài của ${NM(t)} được lật. Ngươi có ra tay giành đêm nay không?</p>${clk()}`;
-  o=[{n:"Tranh sủng",fx:{},x:`${word(o1)} · thành: ${gx||"Hoàng thượng sang cung ngươi"} · hỏng: Sủng -${B().failSung}`,go:()=>mine("feign")},
-     {n:"Chặn ngự giá",fx:{},x:`${word(o2)} · thành: ${gx||"Hoàng thượng sang cung ngươi"} · hỏng: Sủng -${B().failSung}`,go:()=>mine("road")},
+  o=[{n:"Tranh sủng",fx:{},x:`${word(o1)} · thành: ${gx(0)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("feign"))}`,go:()=>mine("feign")},
+     {n:"Chặn ngự giá",fx:{},x:`${word(o2)} · thành: ${gx(1)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("road"))}`,go:()=>mine("road")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
  Q.push({t:"Kính sự phòng",h,opts:o,who:typeof pEunCourt==="function"?pEunCourt("ksp"):undefined,pid:"nfch",pp:{d:day()}});
  try{render()}catch(e){}if(!window.__bot&&Q[0]&&Q[0].pid==="nfch")try{showModal()}catch(e){}else showSoon()}
@@ -207,11 +203,11 @@ function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep(
  for(const n of x.npc||[]){const v=entOf(n.w);if(v&&v!==t&&canAtt(v,t))L.push({a:v,mode:n.mode})}
  for(const y of L){y.o=nfOdds(y.a,y.mode,{down:defOk?1:0});tryMark(y.a)}
  x.def={keep:keep?1:0,ok:defOk?1:0,n:L.length};
- if(keep&&t===S)log(defOk?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm một bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
+ if(keep&&t===S)log(defOk?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
  const out=nfResolve(t,L,true,"flip");const won=out.res.find(r=>r.won);
  if(keep&&L.length){
-  if(!won){if(t!==f){ap(t,{sung:B().keep.gain});if(t===S)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${B().keep.gain}.`)}x.def.gain=B().keep.gain}
-  else{const w=entOf(won.w);if(w)oanAdd(t,w,B().keep.oan);x.def.oan=B().keep.oan}}
+  if(!won){const n=t!==f?keepNoSteal(t):B().keep.keepSung;if(t===S&&n)log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${n}.`);x.def.gain=n}
+  else{const w=entOf(won.w);if(w)keepRobbed(t,w,won.mode);x.def.oanX=B().keep.oanX}}
  gres(out,t===f?x.def:null);
  if(S.tonight==="me"&&!won&&x.ksp&&S.nfN!==day()&&!Q.some(m=>m.pid==="ksp")){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){console.error(e)}}
  finish()}
@@ -283,11 +279,11 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
   if(!S.nfR||S.nfR.d!==day())S.nfR={d:day(),k:[]};
   if(Array.isArray(m.gres))for(const g of m.gres){if(S.nfR.k.includes(g.k))continue;S.nfR.k.push(g.k);
    if(g.won){won=true;log(`Ngươi ${g.mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}: Hoàng thượng sang cung ngươi.`);herWin()}
-   else if(g.lost){ap(S,{sung:-B().failSung});log(failTxt(S,null).trim())}
+   else if(g.lost)log(stealFail(S,null,g.mode).trim())
    else if(g.txt)log(String(g.txt).replace(/^[^ ]+ [^ ]+ /,"Ngươi "))}
   const gd=m.gdef;if(gd&&gd.keep&&!S.nfR.k.includes("def")){S.nfR.k.push("def");
-   log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm một bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
-   if(gd.gain){ap(S,{sung:gd.gain});log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
+   log(gd.ok?"Ngươi khéo giữ chân Hoàng thượng: ai tranh đêm của ngươi cũng khó thêm "+B().keep.rung+" bậc.":"Ngươi cố giữ chân Hoàng thượng, nhưng ngài chẳng để tâm.");
+   if(gd.gain){keepNoSteal(S);log(`Đêm nay không ai giành được Hoàng thượng khỏi ngươi. Sủng +${gd.gain}.`)}}
   if(hadMe&&t!=="me"&&!won){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
    Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng giữa đường, Hoàng thượng bị mời sang cung khác.</p>`})}
   else if(t==="me"&&!won&&!m.ntk&&S.nfN!==day()&&!Q.some(z=>z.pid==="ksp")&&typeof pushDil==="function"&&typeof mkP==="function")pushDil(mkP("ksp"),"Kính sự phòng báo tin");
