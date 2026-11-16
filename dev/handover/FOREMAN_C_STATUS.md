@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 02:25Z — 12 agents running (cap 12). ONE KIT KEEPER rule (owner 16/11) sent to all 12 agents + PREAMBLE/REVIEWER refreshed.
+Updated: 11/16/2026 02:55Z — 12 agents running (cap 12). Load ~38 on 4 CPUs → free slots go to art/API-bound work first.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
@@ -9,7 +9,8 @@ Base main at start: 900ace7fb.
 | A7 cycle review | review/cycle-r1 (contains thaiy-r1) | opus | PASS 7ea3ec447 — kit keeper OK needed for 1-word j19 fix (K6) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | PASS a151b4939 |
 | A9 promo-rules review | review/promo-rules-r1 | opus | PASS 0d425b5a8 — CONDITIONAL on kit keeper sign-off (K4) |
-| D46 placeholder pictures | review/placeholder-pics2 @ea2a1777b → -r1 | sonnet | REVIEWING (short; only e68 flowerBloom was missing → drawn + CDN; acts 0/98 placeholder; Bổng lộc + Đoan ngọ already fine on main) |
+| D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
+| D47 small-bugs-4 (jaudit 'Vì sao' trung y wording; 'Phi ???' greet/arc tab; VP 'theo lòng nàng'; one kit sample page; 'Đang cài' leftover; servant-road header '!') | review/small-bugs-4 | sonnet | RUNNING (worker) |
 | D53 opt-pics leftovers (option cards on act placeholder, 62–68 per life; meaning-group choices e.g. 'Ngắt hoa dâng Thái hậu', 'Hẹn hôm khác', 'Cáo bận việc cung'; list in dev/art/MISSING_PICS.md on placeholder-pics2) | review/opt-pics2 | sonnet | RUNNING (art worker; check review/opt-pics (session 8) first) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | PASS 6452171fc — CONDITIONAL on kit keeper sign-off (K5) |
 | D45 small art (earrings + embroidered shoes, guard 4 indigo, c02-t1-a18 grey skin, Emperor costume audit no Qing hat; + A9 follow-ups: per-rank Đeo eo pendants, mid-rank bangles, per-rank Túi thơm, maid robes per maid rank) | review/small-art | sonnet | RUNNING (art worker) |
@@ -22,11 +23,11 @@ Base main at start: 900ace7fb.
 | C6 mk-colour + D28 reveal | review/mk-colour @5025e811b → review/mk-colour-r1 | sonnet | REVIEWING (worker SẴN SÀNG KIỂM; KIT §60.5 toilReveal; mirror-room plate on CDN) |
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
 | C8 fig-bg step 2 | review/fig-bg @acc254846 | sonnet | BUILT, BLOCKED on KIT KEEPER (K1): 14 painted scrolls on CDN, jfigbg.js, KIT §61; tests 6 viewports (390x844 rival dialog img height 0 not investigated; 2-person dialog shows one scroll) |
-| C9 huadian-size | review/huadian-size @230e3cf25 | sonnet | RUNNING (worker #2: det2.py ~85% boxes; hand-fix ~100 a18 boxes → mask shrink to 8.5% → sheets per tier/age → CDN; ~5700 files) |
+| C9 huadian-size | review/huadian-size @230e3cf25 | sonnet | RUNNING (worker #2; + URGENT owner: replace every fruit/grape/object huadian motif → flowers/leaves/butterfly/phoenix only, sent 02:55Z; det2.py ~85% boxes; hand-fix ~100 a18 boxes → mask shrink to 8.5% → sheets per tier/age → CDN; ~5700 files) |
 | D1 result-sfx | review/result-sfx @41899d048 | sonnet | RUNNING (resumed worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D6, D9, D11–D20, D22–D27, D44–D53) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D6, D9, D11–D20, D22–D27, D44, D48–D52) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -36,6 +37,7 @@ PASS review/thaiy-r1 f7c61f829ce0a2cc3653143685e4280977c819e2 (A6; descends from
 PASS review/cal-plus-r1 a151b4939fe4713fe10c80f09a3333dd4be5f25b (A8; descends from main 6298d2f55; month-cal.js 5 viewports + seal-events.js pass; note: month-cal 844x390 'desk overlaps' flake also on plain main 1/5 runs; seal once covered 280px2 at 844x390 in one run, 41 later dialogs clean)
 PASS review/promo-rules-r1 0d425b5a8665d3891981e4de246c590c1bc2feb3 (A9; descends from main 2afdafc39; CONDITIONAL: kit keeper signs off K4 first; promo-rules 29/29 at 5 viewports, effects now real §68 painted sprites — the branch's calls had wrong signatures so nothing painted ever played; promo-exam 17/18 old-save step fails on main too)
 PASS review/cardflip-r1 6452171fce1da8d0cf7f8acca2bee99ed80dff75 (A11; descends from main c36a06321; CONDITIONAL: kit keeper signs off K5; reviewer replaced CSS gold glow with §68 glow-gold; dev/test/cardflip.js timed out (CPU-starved box) → reduced real-browser test at 5 viewports, no errors/overflow; final merge not re-run in browser)
+PASS review/placeholder-pics2-r1 81af8e41264c4012c9f3744534db3fa3f0b28341 (D46; descends from main a523531da; e68 flowerBloom picture drawn + CDN + KIT_DLGMAP; 0/304 events and 0/98 acts on placeholder; missing_pics.js now lists 64 option cards → D53)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 PASS review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
