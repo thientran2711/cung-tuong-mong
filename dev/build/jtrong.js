@@ -13,7 +13,7 @@
    5. Display only through existing parts: person-card lines (→ kitPcGrid chips "Trọng", "Tính nết"), the act card's Được/Mất numbers
       and its Kèm row (optLine / kitParse). No new UI part. ================= */
 Object.assign(BAL,{trong:{up:.5,off:.6,/* per matched / offended virtue */
- hhBase:3,hhO:70,hhRep:.15,hhScold:3,hhCap:55,repMin:.35,capSpan:15,srvBase:2,npcBase:1.4,learn:60}});
+ hhBase:3,hhO:70,hhRep:.15,hhScold:3,hhCap:55,repMin:.5,capSpan:15,srvBase:2,npcBase:1.4,learn:60}});
 const VIRT=["Hiếu","Đễ","Trung","Tín","Lễ","Nghĩa","Liêm","Sỉ","Nhân","Trí","Cần","Kiệm","Khiêm"];
 const VIRT_GL={"Hiếu":"hiếu thảo với bề trên","Đễ":"kính nhường người trên","Trung":"trung thành","Tín":"giữ chữ tín, ghét dối trá","Lễ":"giữ lễ nghi phép tắc",
  "Nghĩa":"trọng nghĩa, không bỏ người hoạn nạn","Liêm":"trong sạch, ghét đút lót","Sỉ":"biết liêm sỉ, ghét điều nhục","Nhân":"thương người",
@@ -30,15 +30,19 @@ const DEED={greet:{"Hiếu":1,"Lễ":1},greetHH:{"Lễ":1,"Khiêm":1},snow:{"Hi�
  bribeksp:{"Liêm":-1},gossip:{"Tín":-1},feign:{"Tín":-1},steal:{"Nghĩa":-1}};
 /* Thái hậu archetypes: trait (PERS) · trọng · greeting base · odds · repetition fade · ceiling · scolding · monthly neglect loss · rank weight */
 const TH_ARCH={
- tuai:{n:"Từ ái",trait:"Hiền lành",tr:["Nhân","Hiếu"],base:4,o:80,rep:.12,cap:58,scold:1,neg:0,rk:0},
- nghiem:{n:"Nghiêm khắc",trait:"Thẳng thắn",tr:["Lễ","Cần"],base:3,o:65,rep:.2,cap:48,scold:3,neg:3,rk:.04},
- danghi:{n:"Đa nghi",trait:"Đa nghi",tr:["Tín","Trung"],base:3,o:65,rep:.3,cap:45,scold:2,neg:2,rk:0},
- quyen:{n:"Quyền uy",trait:"Kiêu ngạo",tr:["Lễ","Trung"],base:3,o:70,rep:.15,cap:52,scold:2,neg:2,rk:.08},
+ tuai:{n:"Từ ái",trait:"Hiền lành",tr:["Nhân","Hiếu"],base:5,o:80,rep:.12,cap:58,scold:1,neg:0,rk:0},
+ nghiem:{n:"Nghiêm khắc",trait:"Thẳng thắn",tr:["Lễ","Cần"],base:4,o:65,rep:.2,cap:48,scold:2,neg:3,rk:.04},
+ danghi:{n:"Đa nghi",trait:"Đa nghi",tr:["Tín","Trung"],base:4,o:65,rep:.3,cap:45,scold:2,neg:2,rk:0},
+ quyen:{n:"Quyền uy",trait:"Kiêu ngạo",tr:["Lễ","Trung"],base:4,o:70,rep:.15,cap:52,scold:1,neg:2,rk:.08},
  phat:{n:"Sùng Phật",trait:"Mê tín",tr:["Nhân","Kiệm"],base:4,o:75,rep:.1,cap:55,scold:1,neg:1,rk:0}};
 const TH_FROM={"Hiền lành":"tuai","Đa nghi":"danghi","Kiêu ngạo":"quyen","Hiếu thảo":"tuai"};
+/* per-life seed: the co-op room (both seats agree; thO is a world key) else her name (random per life) */
+function trLifeSeed(){try{if(window.COOPW&&COOPW.on&&typeof COOP==="object"&&COOP.state&&COOP.state.room)return "room:"+COOP.state.room}catch(e){}return "me:"+(S.name||"")+":"+((S.year||0)-Math.floor((S.turn||0)/12))}
 function trHash(s){let h=7;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h}
 function thArch(){S.thO=S.thO||{};const O=S.thO;if(!O.arch||!TH_ARCH[O.arch]){const k=Object.keys(TH_ARCH);
-  O.arch=TH_FROM[S.thTrait]||k[trHash("th:"+(S.thAge||0)+":"+((S.year||0)-Math.floor((S.turn||0)/12)))%k.length]}
+  /* during start() her name / Thái hậu age are not set yet: answer without fixing the archetype */
+  if(!S.name||!S.thAge)return TH_ARCH[TH_FROM[S.thTrait]||"tuai"];
+  O.arch=TH_FROM[S.thTrait]||k[trHash("th:"+(S.thAge||0)+":"+trLifeSeed())%k.length]}
  const A=TH_ARCH[O.arch];S.thTrait=A.trait;return A}
 /* who is this? → S / "th" / Emperor / the consort object / the servant */
 function trRes(p){if(!p)return null;if(p===S||p==="me")return S;if(p==="th"||p===S.thO||(p.kind==="th"&&!p.name))return"th";if(p.kind==="th")return"th";
@@ -126,7 +130,7 @@ function trSnowGreet(){try{return Math.max(1,trGreet(S,"th",{base:5,tags:DEED.sn
 /* LUẬT SỬA CẢ NHÓM: every other deck act that raises Thái hậu regard (gifts, portrait, sutra…) follows the same family rule:
    × her trọng (DEED.thGift) × repetition of THAT act (last 6 mornings) × saturation (ceiling + thGiftCap, fading over thGiftSpan).
    The card shows the result (measured 16/11: "Vẽ chân dung tặng Thái hậu" +10 spammed was the main reason she sat at 100). */
-Object.assign(BAL.trong,{thGiftCap:15,thGiftSpan:20,thGiftRep:.25,thGiftMin:.3});
+Object.assign(BAL.trong,{thGiftCap:20,thGiftSpan:20,thGiftRep:.2,thGiftMin:.4});
 DEED.thGift={"Hiếu":1,"Lễ":1};
 function trThDeedN(n){const L=(S.thDeed||{})[n]||[],now=wk();return L.filter(w=>w<now&&w>=now-6).length}
 function trThDeed(a){const B=BAL.trong,A=thArch(),g=a.w.th;const vm=trongMul("th",DEED.thGift);const n=trThDeedN(a.n);const rep=Math.max(B.thGiftMin,1-B.thGiftRep*n);
