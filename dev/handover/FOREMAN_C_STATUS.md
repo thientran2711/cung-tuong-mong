@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 03:22Z — 12 agents running (cap 12); load ~45 on 4 CPUs; disk 11 GB free.
+Updated: 11/16/2026 03:52Z — 13 agents running (one over cap by a counting slip; next free slot is NOT refilled). Load ~46 on 4 CPUs. Disk 8.3 GB free (shared .git packs 13.6 GB; watch — repack only if <5 GB and no fetches running).
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
