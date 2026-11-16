@@ -55,6 +55,36 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   if(!S.dh.w_kim||S.dh.w_kim.i!==0)F.push('old save win not seeded');if(Q.length)F.push('old save popped notices');
   /* JSON round trip */
   dhWear(S,'w_kim');const J=JSON.parse(JSON.stringify(S));if(J.titleWorn!=='dh-w_kim'||!J.dh.w_kim)F.push('save round trip');
+  /* BONUSES (owner 13:55Z/14:10Z s17): each type on/off at its ONE hook; ONE title worn, ONE bonus picked */
+  const W=(key,n,pick)=>{S.dh[key]={n,pick};S.dh[key].i=undefined;dhSync(S,true);S.dh[key].pick=pick;dhWear(S,key,true)};const off=()=>dhWear(S,null,true);
+  const B={};const two=(key,n,pick,f)=>{off();const a=f();W(key,n,pick);const c=f();off();B[pick]=[a,c];return [a,c]};
+  const R0=Math.random;Math.random=()=>0.5;
+  try{
+  S.dead=false;
+  two('nights',30,'gSung',()=>sg(100));if(!(B.gSung[1]>B.gSung[0]))F.push('gSung');
+  two('meta',10,'gDanh',()=>{S.danh=0;apply({danh:60});return S.danh});if(!(B.gDanh[1]>B.gDanh[0]))F.push('gDanh');
+  two('w_theu',1,'gBac',()=>{S.bac=0;apply({bac:120});return S.bac});if(B.gBac[1]-B.gBac[0]!==10)F.push('gBac');
+  two('w_hat',1,'gTren',()=>{S.th=0;apply({th:48});return S.th});if(!(B.gTren[1]>B.gTren[0]))F.push('gTren');
+  const v0=liveRivals(true).filter(v=>!v.queen)[0];two('w_hoa',1,'gHau',()=>{v0.rel=0;affAdd(v0,S,48);return v0.rel});if(!(B.gHau[1]>B.gHau[0]))F.push('gHau');
+  two('m_mon',1,'gTrung',()=>{S.maid.loyal=0;apply({maid:40});return S.maid.loyal});if(!(B.gTrung[1]>B.gTrung[0]))F.push('gTrung');
+  two('w_kim',1,'phuc',()=>lotB(S,'Thi'));if(B.phuc[1]-B.phuc[0]!==BAL.dh.B.phuc.v[0])F.push('phuc');
+  two('w_kim',1,'phuc',()=>lotB(S,'Con cái'));if(B.phuc[1]!==B.phuc[0])F.push('luck touched conception');
+  S.preg=null;S.lastBirth=null;two('kids',3,'thai',()=>conceiveCh(S));if(B.thai[0]>0&&B.thai[1]-B.thai[0]!==BAL.dh.B.thai.v[1])F.push('thai '+B.thai);
+  if(dhObj(S,'kids')&&(BAL.dh.T.kids.ch||[]).includes('thai')&&dhB(S,'thai'))F.push('thai at step 1');
+  two('a_doc',50,'nghe',()=>{const k='thi',a=S.artp[k];Math.random=()=>0;try{addArt(k,1)}finally{Math.random=()=>0.5}return S.artp[k]-a});if(!(B.nghe[1]>B.nghe[0]))F.push('nghe');
+  two('w_tho',1,'thi',()=>SC7.tho.f(S));if(B.thi[1]-B.thi[0]!==BAL.dh.B.thi.v[0])F.push('thi');
+  two('a_nhan',5,'suc',()=>j76sleep(S));if(B.suc[1]-B.suc[0]!==BAL.dh.B.suc.v[0])F.push('suc');
+  {const r0=window.roll;const rec=[];window.roll=o=>{rec.push(o);return false};try{two('m_kinh',1,'don',()=>{rec.length=0;try{ACT.rumor.f(v0,S)}catch(e){}return rec.join(',')})}finally{window.roll=r0}
+   if(B.don[0]===B.don[1])F.push('don '+B.don)}
+  two('w_tho',1,'tai',()=>S.tai);const t0=S.tai;if(B.tai[1]-B.tai[0]!==1&&B.tai[0]<100)F.push('flat tai');if(S.tai!==B.tai[0])F.push('tai not given back');
+  /* NPC by the same rules */
+  {const v=v0;v.dh={nights:{n:30,i:undefined}};dhSync(v);v.dh.nights.pick='gSung';const a=()=>{v.sung=0;ap(v,{sung:60});return v.sung};const w0=v.titleWorn;v.titleWorn=null;const x=a();v.titleWorn='dh-nights';const y=a();B.npc=[x,y];if(!(y>x))F.push('NPC gSung')}
+  /* the picker */
+  Q.length=0;S.dh.w_kim={n:1};dhSync(S,true);dhPick('w_kim');B.pick=(Q[0]&&Q[0].opts||[]).map(o=>o.n);if(B.pick.length!==4)F.push('picker '+B.pick);Q[0].opts[1].go();if(dhB(S,'phuc')!==BAL.dh.B.phuc.v[0])F.push('pick phuc not worn');Q.length=0;
+  /* one bonus only: wearing another title drops the first */
+  dhWear(S,'w_tho',true);if(dhB(S,'phuc'))F.push('two bonuses');off();
+  }finally{Math.random=R0}
+  o.B=B;
   o.F=F;return o});
  R.fail.push(...R.logic.F);delete R.logic.F;
  /* 2. stage: her worn title in the 3-line tag */
@@ -74,6 +104,9 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
  if(!R.panel||R.panel.title!=='Danh hiệu')R.fail.push('Danh hiệu tab did not open');else if(R.panel.over)R.fail.push('panel overflow');
  await p.screenshot({path:`${OUT}/dh-panel-${wh}.jpg`,type:'jpeg',quality:75});
  await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opt')].find(x=>/^Đeo/.test(x.innerText));b&&b.click()});await sleep(1500);
+ R.picker=await p.evaluate(()=>({title:(document.querySelector('#modal .kptitle')||{}).innerText,opts:[...document.querySelectorAll('#modal .opt')].map(b=>b.innerText.replace(/\n/g,' / '))}));if(!/^Đeo «/.test(R.picker.title||''))R.fail.push('no picker '+JSON.stringify(R.picker));
+ await p.screenshot({path:`${OUT}/dh-pick-${wh}.jpg`,type:'jpeg',quality:75});
+ await p.evaluate(()=>{const b=document.querySelector('#modal .opt');b&&b.click()});await sleep(1500);
  R.afterWear=await p.evaluate(()=>({worn:S.titleWorn,title:(document.querySelector('#modal .kptitle')||{}).innerText}));if(R.afterWear.worn==='dh-w_kim'||R.afterWear.title!=='Danh hiệu')R.fail.push('wear option '+JSON.stringify(R.afterWear));
  await p.evaluate(()=>{const x=document.querySelector('#modal .kpb .kdh[data-kdh]');x&&x.click()});await sleep(1200);R.card=await p.evaluate(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText.slice(0,220).replace(/\n/g,' | '):'no card'});
  if(!/Đạt được/.test(R.card))R.fail.push('info card');await p.screenshot({path:`${OUT}/dh-card-${wh}.jpg`,type:'jpeg',quality:75});
