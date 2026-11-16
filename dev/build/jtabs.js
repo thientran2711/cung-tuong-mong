@@ -69,7 +69,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  if(sub.cur==="now"){let card="";/* KIT §51.1: "Kết cục xuất thân" joins the chapter rows (one block = one label column), not a 2nd table under the checklist */
   const fin=c&&c.done?["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]:null;let finIn=false;
   if(m&&c){const d=MS67[m.id],st=d.steps(m);const done=st.filter(x=>x[1]).length;const nx=st.find(x=>!x[1]);
-   card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art})+(finIn=!!fin,rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],["Hạn","không có hạn"],fin]))+kitChecks(st.map(x=>[x[1],x[0]]))}
+   card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art})+(finIn=!!fin,rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],msHan67(m),fin]))+kitChecks(st.map(x=>[x[1],x[0]]))}
   else if(M){const a=ARC67[M.a],P=pos67(M)||{c:M.chap||1,i:0,n:M.seq.length};/* kicker Chương N, steps "Hồi i/n" = the act she is on, as in the story dialog title (lab67) */
    card=kitSkillCard({kind:"story",k:M.a,kicker:`Chương ${P.c}`,name:a.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",fill67(a.g,M)],["Hồi kế tiếp",hint67(M)],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],fin]);finIn=!!fin}
   else if(c&&c.all)card=kitEmpty("Mệnh truyện","Đã đi hết các chương của kiếp này.");

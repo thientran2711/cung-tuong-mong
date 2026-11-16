@@ -79,7 +79,9 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  else{
  if(C.kind==="arc"){const R=[["Hồi",`${C.act}/${C.acts}`],["Kế tiếp",esc(plain(C.next)),C.wait?"g":""],["Lợi thế",`${C.sc} · mỗi phần thêm cơ may ở hồi cao trào`]];
   if(C.dl!=null)R.push(["Hạn",`còn ${Math.max(0,C.dl-S.turn)} tháng`,C.dl-S.turn<=1?"r":""]);if(C.hist.length)R.push(["Đã qua",C.hist.map(esc).join("<br>")]);sec.push({h:"Tiến độ",rows:R})}
- if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]})}
+ if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]});
+ /* a milestone chapter: its HẠN row, the same words as the card, the Mệnh truyện tab and the panel (msHan67, j67; review/story14-p1-r2 item 7) */
+ if(C.kind==="ms"&&S.st&&S.st.ms&&typeof msHan67==="function")sec.push({h:"Cần lưu ý",rows:[msHan67(S.st.ms,2)]})}
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
  kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
