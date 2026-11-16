@@ -182,7 +182,7 @@
 | D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | RUNNING | 16/11 12:58Z |
 | Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | RUNNING | 16/11 12:58Z |
 | C44 'Xóa sổ trên mây' button (kit danger button + confirm) | review/cloud-del | D | session_01DgYSWnuoGnBrzpLuCRGnpy | BLOCKED KIT REQUEST (danger button + confirm dialog; worker archived, base review/cloud-save-r1 @7e187abe, plan in reports/cloud-del.md) | 16/11 13:10Z |
-| seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | RUNNING | 16/11 13:08Z |
+| seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | PASS 7d463838 | 16/11 14:06Z |
 | foreign-princess v7 (BD hair Đáp ứng/Phi/Quý phi ×2 options, NC back to v5 slight slim) | review/foreign-princess-samples | main s16 | session_01UV1SzhXgLn4WHG9rL1BT7L (sonnet) | RUNNING | 16/11 13:10Z |
 | D57 preg-rate review | review/preg-rate-r1 | D | session_01DgYSWobwX8ehBC7umUckXK | PASS 1c31bd79 | 16/11 13:40Z |
 | merge-train-8 successor (loads .claude/settings.json) | review/merge-train-8 | main s16 | session_01UV1Sziaz47NKuNr1wC1DBx (sonnet) | RUNNING | 16/11 13:17Z |
