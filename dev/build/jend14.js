@@ -117,7 +117,7 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
  s2:{h:"Ngôi Đông cung còn ngỏ",w:"emp",if:()=>!egHeirMine()&&mySons().length>0,t:"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, cũng nhắc đến con của {v}.",o:[
   {n:"Mời thầy giỏi dạy {k}",c:{bac:-50},w:{},wx:"con tiến bộ, Hoàng thượng để ý",lx:"tốn bạc",go:()=>e67heir(6),rt:"Thầy mới khen {k} sáng dạ."},
   {n:"Cho {k} theo Hoàng thượng đi săn",c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:2},wx:"con được ngài để mắt",l:{sung:-3},lx:"con ngã ngựa thì ngươi mang tiếng",go:(A,ok)=>ok?e67heir(8):"",rt:"{k} bắn trúng một con nai, Hoàng thượng cười lớn.",rf:"{k} sợ ngựa, Hoàng thượng nhíu mày."},
-  {n:"Dặn con giữ mình, chưa tranh",c:{},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"{k} gật đầu, lặng lẽ học bài."}]},
+  {n:"Dặn con giữ mình, chưa tranh",c:{danh:-2},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"{k} gật đầu, lặng lẽ học bài."}]},
  s3:{h:"Mẹ của lục cung",w:"th",if:()=>!mySons().length&&allKids().some(([k,v])=>v&&k.alive),t:"Mùa đông năm ấy rét đậm, mấy hoàng tự nhỏ ốm liền. Thái hậu hỏi: ai trong lục cung đứng ra lo cho bọn trẻ?",o:[
   {n:"Đứng ra lo cho các hoàng tự",c:{suc:-5,bac:-30},w:{th:5,danh:3},wx:"lục cung gọi ngươi là mẹ hiền",lx:"mệt và tốn",rt:"Bọn trẻ khỏi bệnh, mẹ chúng tạ ơn ngươi."},
   {n:"Mời thái y giỏi nhất",c:{bac:-50},w:{danh:3},wx:"việc chu toàn",lx:"tốn bạc",rt:"Thái y túc trực, không đứa nào nặng thêm."},

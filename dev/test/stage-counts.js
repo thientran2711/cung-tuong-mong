@@ -1,7 +1,7 @@
 /* review/stage-slots: the Dư đồ count of a place (countAt, "N bóng") must equal the people she meets there (kitHereCount, the stage
    title "Ở đây còn N người", the page chips). Walks every place for 12 reshuffles (placeWhere) on the consort road and the maid road (cnv).
    usage: node dev/test/stage-counts.js <page URL>   → JSON {thd:{n,mism}, cnv:{n,mism}, errs} ; mism must be {} */
-const {chromium}=require('playwright');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/pw-roulette');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const out={};const errs=[];
  for(const o of ["thd","cnv"]){const p=await b.newPage({viewport:{width:1180,height:820}});p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});

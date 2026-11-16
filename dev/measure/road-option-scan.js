@@ -1,4 +1,4 @@
-/* road-option-scan (reviewer road-map-r1): every option of every road chapter (dev/build/jrd_*.js) must have a real loss (cost c, failure loss l with odds, or an ending) — lists FREE GAIN and NO-EFFECT options, digits in text, and road completeness. usage: node dev/measure/road-option-scan.js [files…] (from the repo root; default every dev/build/jrd_*.js; B3 added the file args). Note: options with go (relation/oan) are listed with "go" — check by hand. */
+/* road-option-scan (reviewer road-map-r1): every option of every road chapter (dev/build/jrd_*.js) must have a real loss (cost c, failure loss l with odds, or an ending) — lists FREE GAIN and NO-EFFECT options, digits in text, and road completeness. usage: node dev/measure/road-option-scan.js (from the repo root). Note: options with go (relation/oan) are listed with "go" — check by hand. */
 const fs=require('fs');global.ARC67={};global.RTHEME67={};global.BAL={road:{first:5,last:11}};
 global.rdK=()=>0;global.rdPrev=()=>"";global.window=global;global.RD97L=[];
 const J=fs.readFileSync('dev/build/jroad.js','utf8');const src=J.slice(J.indexOf('const ROAD14'),J.indexOf('function rdOn'));
