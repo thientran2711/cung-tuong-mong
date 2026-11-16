@@ -101,3 +101,10 @@ Prompt in words only (no numbers): tall slender elegant adult woman, small head,
 By eye next to c01: NC head is clearly smaller than c01's; she may now read a little tall/small-headed the other way (fashion-plate). Light smile on all four (c01 also smiles gently).
 Credits: 6 x 40 = 240 (v8-v18 total 3,520).
 STATUS: WAIT for the owner's verdict.
+
+## OWNER on v17 (via Foreman C, not sent): proportion wrong; Quý phi tacky ("sến": pearls, jewels); hair of ranks 1 and 2 identical. v18 never sent, deleted.
+## v19 SAMPLE READY (file sample-v19.jpg; v18 deleted)
+ONE generation (s784iuul8e = z2, uncropped) + c01 size check at left. Prompt (words): tall slender, small head, compact hair; DIFFERENT hairstyle per rank (low knot + hairpin / coiled bun + small comb / tall sleek updo + slim silver crown band / high coiled updo + modest gold crown); restrained costumes, no pearl ropes, no dripping jewels, no sheer glitter; Quý phi = solid deep teal court robe with one gold phoenix, no pearls. 6 lineups (yiEAY1DPW9 s784iuul8e ovNuqYm829 1le7Pazr4r Sym6ZqfUb8 IfiF5cXtvE), picked s784iuul8e.
+Honest: restrained, tall, small heads, 4 different hairstyles; but the silver Nam Chiếu collar/bells/pleated skirt of earlier rounds is largely gone (looks more generic hanfu blue), Đáp ứng is plain, rank steps are subtle. Her hairstyles are different but similar in family (all buns/knots).
+Credits: 6 x 40 = 240 (v8-v19 total 3,760).
+STATUS: WAIT.
