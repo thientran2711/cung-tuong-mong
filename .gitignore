@@ -1,4 +1,7 @@
-dev/index.html
-dev/build/all.js
-__pycache__/
-__pycache__/
+
+# images never in git (owner 16/11 18:50Z; dev/test/img-allowlist.py)
+/img/
+/dev/shots/
+/dev/owner-shots/
+/dev/handover/refs/*.jpg
+/dev/handover/refs/*.png
