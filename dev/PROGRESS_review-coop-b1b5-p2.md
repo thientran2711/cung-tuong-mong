@@ -23,10 +23,37 @@ Numbers: BAL.coopBribe {pay, tin} (jbal2.js); J71.cost (festival Sức, j71 — 
 - coop-b1 41/41 (after fix 5), coop-b2b5 30/30, coop-e2e 59/59 (E2E_TO=120000), coop-pets 46/48 (FAIL: 'B ended the week (end sent)' + 'merged week keeps the late help' — the harness's week end predates the night gate (nightReady/go); update its toLast/press flow to coop-b2b5's week()).
 - Reviewer branch review/coop-b1b5-r1 @8dd1626a merged (oldroom-r1 / oldsave-r1 tests: not re-run here).
 
-## r1 fix list status
-1. pos > 4000 chars dropped by the Worker (BLOCKING): NOT DONE.
-2. NPC acts on her entry (gain without loss): DONE for rivalsTurn / rivalsMonth / festival (items, kids, pregnancy, pets via res ops). Needs its own per-act test (NPC takeaway / petsteal / musk / kpoison with forced dice).
-3. B5 seat card = banned waiting claim (OD:L1228): NOT DONE (needs the large compensation, numbers in BAL).
-4. B2 in-week night relay not host-authoritative (crossing relays): NOT DONE.
-5. coop-b1.js determinism: DONE (runner refusal roll neutralised for forced acts: no trung runner during the act) → 41/41. Vacuous check in case 5 not yet tightened.
-6. coop-pets harness: setup fixed (46/48); week-end flow still old (see Tests).
+## r1 fix list status (successor session, all DONE)
+1. **pos > 4000 chars (BLOCKING): DONE.** pos now carries only place / khắc / week / buổi / stats / name / `fh` (hash of her bag + kids +
+   pregnancy + festival entries + pets). Those ride their own act relay k "ctm-fam" (mode "fam", sent when the hash changes; no cap but
+   the Worker's 9e6 message limit); the friend asks again (mode "ask", throttled 4 s) when the pos hash differs from what she holds (relay
+   missed while away, rejoin from the room's stored pos). famIn is compared with her entry on every pos, so a rebuilt entry (merged week)
+   gets the live bag back. Old clients: an inline pos.fam / pos.pets is still read (liveStats → famIn). No Worker change.
+   Measured (coop-r2): 152-item bag + 6 kids + pet: bag JSON 22 293 chars, every pos ≤ ~600 chars (< 4000).
+2. **NPC acts on her: DONE (whole family).** Besides the diffs around rivalsTurn / rivalsMonth / festival, a runAct wrapper catches ANY NPC
+   act on her entry outside those (npcAct, mindRun, j70 exec70 plots, kv jealousy acts, due plans): the host snapshots her entry around
+   that one act and sends the same res.fam / res.pet ops; the guest never runs an NPC act on the host's entry (returns ""). Log CW.npcOn.
+3. **B5 seat card: DONE (OD:L1228).** No "đợi khi có ghế trống". A full seat = the promo-skip compensation: jexam promoFullSeat when that
+   branch is in, else coopFullSeat (same rule): Bạc = BAL.psk.seat.bacM × BAL.pay[seat rank] (+hieuBac if she already has a phong hiệu),
+   Danh +6, a phong hiệu (TITLES), 2 ngự ban (bestow "promo"), her house power +8 / father +5; loss: every consort ghen +10. Rank stays one
+   lower; the next rank via the normal exam. BAL.psk.seat added to jbal2.js ONLY if absent (same key + values as review/promo-skip: when
+   promo-skip merges, its BAL.psk wins and this guarded line can be deleted). No "Bị giáng" scene (j93 KMSNAP rank moved with it).
+4. **In-week night host-authoritative: DONE.** Host change → final word (mode "tn", version v per week, also S.tn = {w, who}); guest change
+   → CLAIM (mode "claim", v = last host version she saw). The host takes a claim only if it has not changed the night since (v equal),
+   else keeps its own; it always broadcasts the final; the guest applies only that. Old guest's plain "tn" = an accepted claim.
+5. **coop-b1 vacuous checks: DONE.** Loss checks of cases 1, 5, 8 depend on the gain check.
+6. **coop-pets: DONE 48/48.** Case 5 (late res after B ended): A holds a dialog and the host forces the night (COOPW.forceNight) so only
+   B ends; press() counts a seat that already pressed (bend / night-ready / end out) as pressed.
+
+## Tests (successor, LIVE Worker, host 755x1000@2 + guest 1180x820@2, one at a time)
+| Test | Result |
+|---|---|
+| coop-r2.js (NEW) | 47/47: big chest (152 items + 6 kids + pet) pos < 4000, place + Sủng update, lost relay re-asked, laydo on the big chest; NPC takeaway / petsteal / musk / kpoison via mindRun (gain on the NPC, loss on HER S, no copy on her entry, guest never runs NPC acts on the host); night: lone guest claim taken, crossing claims → one night = host's, S.tn; full seat compensation numbers + no waiting claim + jealousy; merged week: entry == own, taken child exists once |
+| coop-p2 | 45/45 (one earlier run 42/45: an NPC's j42 bribe card arrived before the player's offer — test race, rerun green) |
+| coop-b1 | 41/41 |
+| coop-b2b5 | 30/30 |
+| coop-e2e (E2E_TO=120000) | 59/59 |
+| coop-pets | 48/48 |
+| oldroom-r1 / oldsave-r1 (old = current origin/main build) | 16/16, 16/16 |
+Screenshots looked at: seat card 1180x820 (guest) + 755x1000 (host): kit BÁO dialog, gains green, jealousy red, no overflow.
+Known limits: Dọa tố đối thực is never offered on the friend-servant; the j99succ epilogue is her personal ending.

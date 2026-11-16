@@ -87,12 +87,14 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
   ok(g&&await waitFr(B,n=>(S.inv||[]).filter(e=>loOk(e)).length===n-1,b0),'1 laydo: loss on B');await clear(B);await clear(A)}
  /* ================= (2) NPC acts on her, the real mindRun path ================= */
  const npc=(k,pre)=>A.p.evaluate(([k,pre])=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const r0=roll,c0=caught;
-   const v=liveRivals(true).filter(r=>!r.coop&&r.alive&&!r.out&&!r.confined).sort((a,b)=>rkOf(b)-rkOf(a))[0];if(!v)return {err:'no npc'};
-   if(pre==='rank'){v.rank=Math.max(v.rank||0,6)}if(pre==='pet'){v.pets=[]}
-   const ok=!!(ACT[k]&&ACT[k].ok(v,f));const kids0=(v.kids||[]).length,pets0=(v.pets||[]).length,inv0=(v.inv||[]).length;
-   roll=()=>true;caught=()=>"";let r="";try{if(ok)r=mindRun(v,f,k,0)}finally{roll=r0;caught=c0}
-   return {ok,v:v.id,vn:v.name,r:String(r).replace(/<[^>]+>/g,'').slice(0,200),kids:(v.kids||[]).length-kids0,pets:(v.pets||[]).length-pets0,inv:(v.inv||[]).length-inv0,
-     kidN:(v.kids||[]).length>kids0?v.kids[v.kids.length-1].name:null,on:(COOPW.npcOn||[]).slice(-1)[0]||null}},[k,pre]);
+   /* deterministic (r1 fix 5): every roll forced; a fresh NPC per act whose runners are not loyal (a trung runner refuses dirty work), the next one if the act did not run */
+   window.__usedN=window.__usedN||[];const L=liveRivals(true).filter(r=>!r.coop&&r.alive&&!r.out&&!r.confined&&!window.__usedN.includes(r.id)).sort((a,b)=>rkOf(b)-rkOf(a));let last={err:'no npc'};
+   for(const v of L.slice(0,6)){if(pre==='rank'){v.rank=Math.max(v.rank||0,6)}if(pre==='pet'){v.pets=[]}(v.staff||[]).forEach(x=>{if(x.tr==='trung')x.tr='lanh'});
+    const ok=!!(ACT[k]&&ACT[k].ok(v,f));if(!ok){last={ok,v:v.id};continue}const kids0=(v.kids||[]).length,pets0=(v.pets||[]).length,inv0=(v.inv||[]).length;
+    roll=()=>true;caught=()=>"";let r="";try{r=mindRun(v,f,k,0)}finally{roll=r0;caught=c0}window.__usedN.push(v.id);
+    last={ok,v:v.id,vn:v.name,r:String(r).replace(/<[^>]+>/g,'').slice(0,200),kids:(v.kids||[]).length-kids0,pets:(v.pets||[]).length-pets0,inv:(v.inv||[]).length-inv0,
+     kidN:(v.kids||[]).length>kids0?v.kids[v.kids.length-1].name:null,on:(COOPW.npcOn||[]).slice(-1)[0]||null};if(last.r)return last}
+   return last},[k,pre]);
  /* takeaway: a child under 6 goes to the NPC's house */
  {await sleep(1200);const b0=await B.p.evaluate(()=>S.kids.filter(k=>k.alive!==false).length);const x=await npc('takeaway','rank');ok(x.ok,'2 NPC takeaway offered on her',x);
   ok(x.kids===1&&!!x.kidN,'2 takeaway: the child is in the NPC\'s house (gain)',x);
@@ -127,7 +129,12 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
   ok(x.bac>=x.exp,'4 large silver = BAL.psk.seat.bacM × the seat rank\'s stipend',[x.bac,x.exp]);ok(x.danh>0,'4 Danh up',x.danh);
   ok(!!x.hieu||x.bac>=x.exp+x.B.hieuBac,'4 a phong hiệu (or its silver)',x.hieu);ok(/khảo hạch/.test(x.txt),'4 she must pass the normal exam later',x.txt);
   ok(x.ghen>0,'4 loss: the consorts\' jealousy',[x.ghen,x.n]);console.log('seat card:',x.txt.slice(0,400));
-  for(let i=0;i<4;i++){await clear(B);await sleep(200)}}
+  /* look at the card on both priority sizes: the seat card alone (the rank-outfit / gift dialogs the forced rank brings are cleared first) */
+  const seatH=await B.p.evaluate(()=>{const q=Q.find(q=>q.t==='Ghế đã có người');return q?q.h:''});ok(!!seatH,'4 the seat card is queued');
+  for(let i=0;i<6;i++){await clear(B);await clear(A);await sleep(200)}await sleep(5000);for(const o of [A,B])await o.p.evaluate(()=>{document.querySelectorAll('.kmstage,[class*=km-edict]').forEach(e=>e.click())});await sleep(800);
+  for(const [o,n] of [[B,'r2-seat-guest-1180x820'],[A,'r2-seat-host-755x1000']]){for(let i=0;i<12;i++){const c=await o.p.evaluate(()=>{const m=document.getElementById('modal');const b=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!(m&&m.contains(x))&&/^Nhận$/.test(x.textContent.trim()));if(b){b.click();return true}return false});if(!c)break;await sleep(500)}
+   await o.p.evaluate(h=>{pushModal({t:'Ghế đã có người',h});showModal()},seatH);await sleep(700);await shot(o,n)}
+  for(let i=0;i<4;i++){await clear(B);await clear(A);await sleep(200)}}
  /* ================= merged week: no second copy anywhere ================= */
  {for(let i=0;i<3;i++){await clear(A);await clear(B)}const w0=await A.p.evaluate(()=>COOP.state.week);
   for(let g=0;g<8;g++){const a=await A.p.evaluate(()=>S.buoi||0),c=await B.p.evaluate(()=>S.buoi||0);await press(A);await press(B);
