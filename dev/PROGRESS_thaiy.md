@@ -53,3 +53,6 @@ Optional (not required): an event banner for "Thỉnh bình an mạch" (physicia
 - Resume: `cd <worktree> && python3 dev/build/assemble.py && node dev/test/thaiy.js tmp/thaiy 755x1000x2`.
 - For cal-plus: `thaiyNextVisit()` / `thaiyVisits(n)` (window globals, null/[] in lãnh cung or maid mode).
 - For the cycle worker: jthaiy reads `cycleLate(S)` if defined; j75 untouched.
+
+## Review r1 (reviewer)
+Merged origin/main (assemble.py conflict: main list kept, jthaiy.js placed right after jty.js; jcycle can be appended LAST). Tests: thaiy.js 49/49 (755x1000, 1000x755, 1180x820, 1366x1024, 844x390), coop-e2e 59/59, 0 FAIL. Balance: bạc 6..35 = 12.5-15% of BAL.pay vs her road 3 khắc + Sức 5 + exposure: accepted. Site rebuilt.
