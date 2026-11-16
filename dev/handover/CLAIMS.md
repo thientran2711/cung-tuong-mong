@@ -332,7 +332,7 @@
 | fest-fx (sonnet; owner bug: fireworks in her room on chiều): festival FX only tối + outdoor + fitting festivals; audit 3-buổi index leftovers | review/fest-fx | main s21 | session_01UV1Szk4mBQYLcS8DPSeeBv | RUNNING | 16/11 18:37Z |
 | pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
 | single-hall direct (sonnet): single-hotspot places skip the courtyard step (owner rule), on pl-courtyards-r1 | review/single-hall | main s21 | (see HANDOVER) | RUNNING | 16/11 18:40Z |
-| road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | RUNNING | 16/11 18:42Z |
+| road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | DONE FAIL 9+coop (archived) | 16/11 18:42Z |
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
 | emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | RUNNING | 16/11 18:50Z |
@@ -349,3 +349,4 @@
 | stage-pets r6: Hành sự = her room only; Dư đồ → courtyard → full-screen place (reuse palace-map*) | review/stage-pets | main s22 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 19:06Z |
 | pl-courtyards-r2 review (r1 8b4a2160f + single-hall ff05f03d) | review/pl-courtyards-r2 @ 9e1e99f4 | reviewer s22 | FAIL (festival/mourning fallback, iPad back-button overlap) | 16/11 |
 | buoi-art review r1 (sonnet, SMALL: art + band/moon wiring) of 70fcddac | review/buoi-art-r1 | C | session_011xDdVP1UyUGDme7dK1Zmpy | RUNNING | 16/11 19:24Z |
+| road-b3 FAIL fix (opus): items 1–9 of review-road-b3-r1 in jrd_thd/jrd_cnv/jend14 (engine items → fix A) | review/road-b3-fix | B | (opening) | RUNNING | 16/11 19:28Z |
