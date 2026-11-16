@@ -1687,7 +1687,7 @@ function byKey(k){return k==="me"?S:k==="emp"||k==="th"||k==null?null:RV(k)}
 function NM(p){return p===S?"ngươi":p.name}
 function NMc(p){return p===S?"Ngươi":p.name}
 function rkOf(p){return p===S?S.rank:(p.queen?7:p.rank)}
-function rkName(p){const r=rkOf(p);return r>=7?"Hoàng hậu":RANKS[r].n}
+function rkName(p){const r=rkOf(p);const n=r>=7?"Hoàng hậu":RANKS[r].n;return typeof kitHieuJoin==="function"?kitHieuJoin(n,p):n}
 function consorts(){const L=[S].concat(liveRivals(true));for(const p of L){if(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:50};if(!p.staff)p.staff=[]}return L}
 function others(p){return consorts().filter(x=>x!==p)}
 function kidsOf(p){return (p.kids||[]).filter(k=>k.alive)}
@@ -2432,7 +2432,7 @@ function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o
 function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Sang ngày mới":"Sang buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=4&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=4&&!Q.length&&!S.dead)nextBuoi()},350)}
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
  if(Q.length&&$("modal").hidden)showModal();save()}
-function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n)+(S.hieu?` · hiệu ${S.hieu}`:"");$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
+function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+rkName(S);$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
  $("me-p").innerHTML=mdH(pMe(),"sm");
  for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=S[k];const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
  $("emp-p").innerHTML=mdH(pEmp(),"sm");$("emp-n").textContent=S.emp.era;const m=MOODS[S.emp.mood];$("emp-m").innerHTML=`<span class="${m[1]}">${m[0]}</span>`}
@@ -3103,7 +3103,7 @@ function cardWhy(a){if(S.dead)return"";if(a.done)return"Đã làm trong buổi n
  if(a.c&&a.c.bac&&S.bac+a.c.bac<0)return `Thiếu bạc (cần ${-a.c.bac})`;if(a.lock)return a.t||"Chưa đủ điều kiện";const w=whyTime(cardCost(a));return w?(/khắc/.test(w)?"Hết khắc buổi này — chờ buổi sau":w):""}
 (function(){const ch=cardH;cardH=function(a,i){let h=ch(a,i);const txt=(a.t||"")+" "+(a.x||"");const vs=rivals.filter(v=>txt.includes(v.name));if(vs.length)h=h.replace("<h4>",`<h4>${vs.slice(0,2).map(v=>mdH(pv(v),"xs")).join("")}`);const w=cardWhy(a);return w?h.replace('<span class="krow">',`<span class="kwhy">${w}</span><span class="krow">`):h}})();
 /* ===== RANK GROUNDS for every portrait frame and avatar ===== */
-function rkOfFace(kind,o){if(kind==="consort"){if(o.out)return["cold","Phế phi · lãnh cung"];const r=o===S?S.rank:(o.queen?7:o.rank);return["c"+r,r>=7?"Hoàng hậu":RANKS[r].n]}
+function rkOfFace(kind,o){if(kind==="consort"){if(o.out)return["cold","Phế phi · lãnh cung"];const r=o===S?S.rank:(o.queen?7:o.rank);return["c"+r,typeof kitHieuJoin==="function"?kitHieuJoin(r>=7?"Hoàng hậu":RANKS[r].n,o):r>=7?"Hoàng hậu":RANKS[r].n]}
  if(kind==="serv"){const r=srk(o);return[(o.role==="maid"?"sv":"eu")+r,srkName(o)]}return[kind,""]}
 /* ===== the always-visible status row (was inside Hành động) ===== */
 const HX={buoi:"Mỗi buổi có 4 khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.",date:"Ngày tháng trong cung. Mỗi tuần có 4 buổi (sáng, trưa, chiều, tối), mỗi tháng 3 tuần.",lot:"Quẻ đầu tuần. Gieo lại tốn 10 bạc và 1 khắc.",sac:"Sắc: nhan sắc. Giúp múa, thị tẩm, được để ý.",tai:"Tài: tài học. Giúp đàn, thơ, nói chuyện với Hoàng thượng.",tamco:"Tâm cơ: mưu trí. Giúp dò la, mưu kế, nhìn thấu.",duc:"Đức: tiếng hiền. Cần để lên Hoàng hậu (ngưỡng: xem chú giải Đức).",mat:"Tai mắt: người của ngươi khắp cung. Giúp biết tin, phát giác mưu hại.",th:"Thái hậu quý ngươi: lòng thương của Thái hậu.",hh:"Hoàng hậu quý ngươi: lòng quý của Hoàng hậu (âm là ghét), một con số duy nhất.",maid:"Lòng cung nữ thân tín. Dưới 45 dễ bị mua chuộc.",con:"Khả năng có thai mỗi lần thị tẩm.",dem:"Khả năng được lật thẻ bài mỗi tuần.",an:"Ân tình: tình nghĩa với Hoàng thượng, tích qua các đêm."};
@@ -6095,7 +6095,7 @@ function j59col(p){try{if(p===S)return haloColor();const k=p&&p.kind;if(k==="emp
 function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);const T=x=>`<span class="j59t" style="--tc:${c};--rt:${typeof kitRankTone==="function"?kitRankTone(x,c):c}">${j59esc(x)}</span>`;
  name=String(name==null?"":name);if(t&&name!==t&&name.indexOf(t+" ")===0)name=name.slice(t.length+1);
  if(!kn)return T(t||"Người lạ")+`<span class="j59n" style="--tc:${c}">???</span>`;
- if(t&&t===name)return T(t).replace('class="j59t"','class="j59t j59only"');return(t?T(t):"")+`<span class="j59n${p===S?" kmy":""}" style="--tc:${c}">${j59esc(name)}</span>`}
+ if(t&&t===name)return T(t).replace('class="j59t"','class="j59t j59only"');return(typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(p),{id:false}):"")+(t?T(t):"")+`<span class="j59n${p===S?" kmy":""}" style="--tc:${c}">${j59esc(name)}</span>`}
 /* strangers: grey full-body silhouette from the kit when the asset exists, else a grey blur of their own figure */
 const J59U={};function j59unkSrc(g){const u=`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-${g}.webp`;if(J59U[g]===undefined){J59U[g]=null;const im=new Image();im.onload=()=>{J59U[g]=u;j59sched()};im.onerror=()=>{J59U[g]=false};im.src=u}return J59U[g]}
 function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
@@ -23342,7 +23342,7 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true,named:typeof S!=="undefined"&&q===S}):(q.name||"")/* owner 15/11: rank + name always together — her own figure too (was "Ngươi") */}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ const dh=o.plate&&typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(q)):"";return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${dh}${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
@@ -23354,7 +23354,7 @@ window.kitDefaultBanner=kitDefaultBanner;
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
  /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
- const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
+ const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p,{plate:true})).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
@@ -30196,6 +30196,70 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* §50.2 kitPersonDlg (owner 16/11 07:35Z, OD:L448): the person pop-up outside #modal — figure left, picture right top, info, buttons; one frame size per event */
 KIT_SAMPLES.push({id:"§50.2",title:"kitPersonDlg: hộp thoại có người ngoài #modal (lời dặn, mẹo)",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" data-kpd2="tip">Mở lời dặn mẫu (cỡ coach)</button><button type="button" class="kbtn alt" data-kpd2="tour">Mở lời dặn tân thủ (4 trang cùng cỡ)</button></div>`});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpd2]");if(!b)return;e.stopPropagation();e.preventDefault();try{if(b.dataset.kpd2==="tip")kitTip({id:"kitpg",title:"Lời dặn mẫu",html:"<p>Một lời dặn ngắn của ma ma.</p>"});else window.kitTour()}catch(x){console.error(x)}},true);
+/* ================= jtitle: KIT 82 · TITLE SYSTEM PARTS (owner 11/16 13:00Z / 13:15Z / 13:20Z; review/title-tag) =================
+   Two different things (owner 13:20Z): RANK (Tần, Phi, Quý phi…) vs DANH HIỆU (a worn title plate, line 1) — plus the EMPEROR'S HIỆU (Thục, Hiền, Đức…) that JOINS THE RANK everywhere ("Thục phi").
+   - kitHieuJoin(rankName,p)  → "Thục phi" when p.hieu is set (S.hieu for her / v.hieu, granted by j8 giveReward "ban hiệu"; any rank except Hoàng hậu and lãnh cung). Called by rkOfFace / rkName (j19 / j8), so every rank word in the game carries it.
+   - kitTitleWorn(p)          → the worn title object or null: p.titleWorn (S.titleWorn for her) = an id of KIT_TITLES / a title object. Game logic owns who has what; the kit only draws.
+   - kitTitlePlate(t,o)       → ONE plate (line 1 of the name tag): a transparent painted plate image slot (https://ctm-img.victoria-tntt.workers.dev/img/kit/title-plate-<tier>.webp, art from Foreman C; until then a CSS placeholder plate), bright tier colour = the rank palette RCOL[tier-1], sparkle strength rises with the tier.
+   - kitTitleTag3(p,rank,name)→ the 3-line tag (plate / rank / name); kitTitleOpen(t) → the title info card (name, when earned, how, what it gives while worn).
+   Where the plate shows (owner): ONLY the painted stage (tag under the feet, j59tagHTML) and the left full-body figure of a person pop-up / event frame (above the head, kitEventDp); everywhere else rank + name only. */
+const KIT_TIER_NAME=["Sơ","Nhất","Nhị","Tam","Tứ","Ngũ","Lục","Thất"];
+/* sample titles, one per tier (placeholders for the kit page; real titles belong to the game logic, each with its OWN short evocative name, owner 13:15Z) */
+const KIT_TITLES=[
+ {id:"s1",name:"Bếp nhỏ xinh",tier:1,when:"Tháng 2, năm thứ nhất",how:"Nấu ăn 1 lần cho Hoàng thượng",fx:""},
+ {id:"s2",name:"Khéo tay",tier:2,when:"Tháng 4, năm thứ nhất",how:"Nấu ăn 5 lần",fx:"+1 Sắc khi đeo"},
+ {id:"s3",name:"Đệ nhất trù nương",tier:3,when:"Tháng 9, năm thứ hai",how:"Nấu ăn 10 lần",fx:"+2 Danh khi đeo"},
+ {id:"s4",name:"Thi tài hạng ba",tier:4,when:"Tết Trung thu",how:"Đứng thứ ba hội thi",fx:""},
+ {id:"s5",name:"Ngọc nữ Thất tịch",tier:5,when:"Tết Thất tịch",how:"Đạt được khi trở thành hoa khôi Tết Thất tịch",fx:"+2 Sắc khi đeo"},
+ {id:"s6",name:"Bạch liên thơ phú",tier:6,when:"Thượng nguyên",how:"Đứng nhất hội thơ 3 lần",fx:"+3 Danh khi đeo"},
+ {id:"s7",name:"Đệ nhất tài nữ",tier:7,when:"Mùa thu, năm thứ ba",how:"Đứng nhất mọi hội tài nghệ",fx:"+3 Sủng khi đeo"},
+ {id:"s8",name:"Phượng minh thiên hạ",tier:8,when:"Cuối năm thứ ba",how:"Hoàn thành mọi danh hiệu",fx:"+4 Danh, +3 Sủng khi đeo"}];
+window.KIT_TITLES=KIT_TITLES;
+function kitTitleDef(id){return id&&typeof id==="object"?id:KIT_TITLES.find(t=>t.id===id)||null}
+function kitTitleWorn(p){try{if(!p)return null;const w=p===S?S.titleWorn:(p.titleWorn!==undefined?p.titleWorn:p.ref&&p.ref.titleWorn);return kitTitleDef(w)}catch(e){return null}}
+function kitHieuJoin(r,p){try{const h=p===S?S.hieu:p&&p.hieu;if(!h||!r||/^Hoàng hậu/.test(r)||/Phế|lãnh/i.test(r))return r;return h+" "+String(r).toLowerCase()}catch(e){return r}}
+window.kitHieuJoin=kitHieuJoin;
+const KDH_ART={};
+function kdhArt(t){if(KDH_ART[t]===undefined){KDH_ART[t]=false;const im=new Image();im.onload=()=>{KDH_ART[t]=true};im.onerror=()=>{};im.src="https://ctm-img.victoria-tntt.workers.dev/img/kit/title-plate-"+t+".webp"}return KDH_ART[t]===true}
+function kitTitlePlate(t,o){o=o||{};t=kitTitleDef(t);if(!t)return"";const tier=Math.max(1,Math.min(8,t.tier|0||1)),col=RCOL[tier-1],still=typeof kfStill==="function"&&kfStill();
+ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ return `<span class="kdh kdh-t${tier}${kdhArt(tier)?" kdh-art":""}${still?" kdh-still":""}${o.cls?" "+o.cls:""}" style="--dh:${col}${kdhArt(tier)?`;--kdh-art:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/title-plate-${tier}.webp)`:""}"${o.id!==false?` data-kdh="${esc(t.id)}"`:""}><i class="kdh-s" aria-hidden="true"></i><b>${esc(t.name)}</b></span>`}
+window.kitTitlePlate=kitTitlePlate;
+function kitTitleTag3(p,rank,name,col,me){const pl=kitTitlePlate(kitTitleWorn(p),{cls:"kdh-cap"});return `<div class="kt3">${pl}${typeof kitNameRank==="function"?kitNameRank(rank,name,col,me):""}</div>`}
+function kitTitleOpen(t){t=kitTitleDef(t);if(!t||typeof kitModal!=="function")return;const worn=kitTitleWorn(S)&&kitTitleWorn(S).id===t.id;
+ kitModal({kind:"info",title:t.name,sub:"Danh hiệu · bậc "+KIT_TIER_NAME[Math.max(0,Math.min(7,(t.tier|0)))],sections:[{h:"",rows:[["Đạt được",t.when||"—",""],["Cách có",t.how||"—",""],["Khi đeo",t.fx||"chỉ để làm đẹp",""],["Đang",worn?"đang đeo":"chưa đeo",""]]}],btn:"Đã hiểu"})}
+window.kitTitleOpen=kitTitleOpen;window.kitTitleTag3=kitTitleTag3;
+document.addEventListener("click",e=>{const x=e.target&&e.target.closest&&e.target.closest(".kdh[data-kdh]");if(x&&!x.closest(".stage"))kitTitleOpen(x.dataset.kdh)},true);
+(function(){const st=document.createElement("style");st.id="kit-dh";
+ const m=(a,p,b)=>`color-mix(in srgb,${a} ${p}%,${b})`;
+ st.textContent=`
+.kdh{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;box-sizing:border-box;padding:1px 12px 2px;border-radius:999px;font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;font-size:.74rem;letter-spacing:.03em;line-height:1.25;white-space:nowrap;color:#fffdf4;
+ background:linear-gradient(135deg,${m("var(--dh)",55,"#fff")},var(--dh) 45%,${m("var(--dh)",70,"#000")});border:1.5px solid ${m("var(--dh)",55,"#fff")};box-shadow:0 0 0 1px #00000033,0 1px 4px #0006;overflow:visible;isolation:isolate}
+.kdh>b{position:relative;z-index:1;font-weight:700;text-shadow:0 1px 1.5px #000a,0 0 3px #0008}
+.kdh.kdh-art{background:var(--kdh-art,none) center/100% 100% no-repeat;border:0;box-shadow:none;padding:4px 18px}
+.kdh-s{position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;z-index:0}
+.kdh-t3,.kdh-t4{box-shadow:0 0 0 1px #00000033,0 0 6px ${m("var(--dh)",70,"transparent")}}
+.kdh-t5,.kdh-t6,.kdh-t7,.kdh-t8{box-shadow:0 0 0 1px #00000033,0 0 8px var(--dh),0 0 14px ${m("var(--dh)",60,"transparent")}}
+.kdh-t5 .kdh-s,.kdh-t6 .kdh-s,.kdh-t7 .kdh-s,.kdh-t8 .kdh-s{background:linear-gradient(100deg,transparent 35%,#fff9 50%,transparent 65%) -150% 0/60% 100% no-repeat;animation:kdhsw 3.2s ease-in-out infinite;mix-blend-mode:screen;overflow:hidden}
+.kdh-t7 .kdh-s,.kdh-t8 .kdh-s{animation-duration:2.2s}
+.kdh-t7::before,.kdh-t8::before,.kdh-t8::after{content:"✦";position:absolute;color:#fff6c8;font-size:.7rem;text-shadow:0 0 4px #ffe07a,0 0 8px var(--dh);pointer-events:none;animation:kdhst 1.8s ease-in-out infinite;z-index:2}
+.kdh-t7::before,.kdh-t8::before{left:-5px;top:-6px}.kdh-t8::after{right:-5px;bottom:-6px;animation-delay:.9s}
+.kdh-t8{animation:kdhpl 2.6s ease-in-out infinite}
+.kdh-still,.kdh-still .kdh-s,.kdh-still::before,.kdh-still::after{animation:none!important}
+@keyframes kdhsw{0%{background-position:-150% 0}60%,100%{background-position:250% 0}}
+@keyframes kdhst{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes kdhpl{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}
+@media(prefers-reduced-motion:reduce){.kdh,.kdh .kdh-s,.kdh::before,.kdh::after{animation:none!important}}
+/* stage tag line 1: centred above the rank line, tight; pop-up caption line 1 above the rank */
+html body .stage .tok .tag .kdh,html body .stage #j59metag .tag .kdh{display:flex;width:max-content;max-width:100%;margin:0 auto 2px;font-size:.7rem}
+html body .kdpcap .kdh,html body .kesf>.kpsn .kdh{display:flex;width:max-content;max-width:100%;margin:0 auto 3px}
+.kdh[data-kdh]{cursor:pointer}.stage .kdh[data-kdh]{cursor:inherit}
+.kt3{display:flex;flex-direction:column;align-items:center}`;document.head.appendChild(st)})();
+/* kit-page sample */
+KIT_SAMPLES.push({id:"§82",title:"Danh hiệu: bảng 3 dòng (hiệu · phẩm · tên), tấm danh hiệu 8 bậc, hiệu phong ghép vào phẩm, thẻ thông tin",html:()=>{
+ const P=KIT_TITLES.map(t=>kitTitlePlate(t)).join(" ");
+ const row=(cls,bg)=>`<div class="kitpg-row ${cls}" style="padding:12px;border-radius:8px;gap:18px;align-items:flex-start;background:${bg}">${kitTitleTag3({titleWorn:KIT_TITLES[7]},"Quý phi","Hàn Hồng Diệp",kitRankCol(5))}${kitTitleTag3({titleWorn:KIT_TITLES[4]},kitHieuJoin("Phi",{hieu:"Thục"}),"Mộ Dung Yên",kitRankCol(4))}${kitTitleTag3({titleWorn:KIT_TITLES[1]},"Tần","Tô Vân",kitRankCol(3))}${kitNameRank("Đáp ứng","Lâm Uyển (không đeo danh hiệu)",kitRankCol(0))}</div>`;
+ return `<div style="padding:10px;border-radius:8px;background:#2a1c18;display:flex;flex-wrap:wrap;gap:12px 14px;align-items:center">${P}</div><div style="height:8px"></div>`+row("","#fbf3e2")+`<div style="height:8px"></div>`+row("krs","linear-gradient(#26304a,#121624)")+`<p style="margin:8px 0 0;font-size:.8rem">Bấm một tấm danh hiệu để xem thẻ thông tin: <button type="button" class="kbtn" onclick="kitTitleOpen('s5')">Ngọc nữ Thất tịch</button></p>`}});
 /* ================= jcooptimer: CO-OP BUỔI CLOCK (owner 15/11 ~21:25Z + ~22:55Z, review/coop-timer) — KIT §69 =================
    Co-op only (COOPW.on); single-player never starts the tick. Rules (coordinator, dev/OWNER_DECISIONS.md 15/11 ~21:25Z / ~22:55Z):
    - One shared clock per room buổi (key "week:buổi" of the ROOM, CW.rweek/rbuoi), BAL.coopTm.buoiMs long = the most a buổi lasts.
@@ -39139,7 +39203,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3f184441c536";window.CTM_BUILD=BUILD;
+const BUILD="359a0d524b3d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

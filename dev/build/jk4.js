@@ -176,7 +176,7 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true,named:typeof S!=="undefined"&&q===S}):(q.name||"")/* owner 15/11: rank + name always together — her own figure too (was "Ngươi") */}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ const dh=o.plate&&typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(q)):"";return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${dh}${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
@@ -188,7 +188,7 @@ window.kitDefaultBanner=kitDefaultBanner;
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
  /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
- const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
+ const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p,{plate:true})).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}

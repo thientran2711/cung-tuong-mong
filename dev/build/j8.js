@@ -5,7 +5,7 @@ function byKey(k){return k==="me"?S:k==="emp"||k==="th"||k==null?null:RV(k)}
 function NM(p){return p===S?"ngươi":p.name}
 function NMc(p){return p===S?"Ngươi":p.name}
 function rkOf(p){return p===S?S.rank:(p.queen?7:p.rank)}
-function rkName(p){const r=rkOf(p);return r>=7?"Hoàng hậu":RANKS[r].n}
+function rkName(p){const r=rkOf(p);const n=r>=7?"Hoàng hậu":RANKS[r].n;return typeof kitHieuJoin==="function"?kitHieuJoin(n,p):n}
 function consorts(){const L=[S].concat(liveRivals(true));for(const p of L){if(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:50};if(!p.staff)p.staff=[]}return L}
 function others(p){return consorts().filter(x=>x!==p)}
 function kidsOf(p){return (p.kids||[]).filter(k=>k.alive)}
