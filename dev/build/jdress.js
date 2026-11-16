@@ -98,7 +98,7 @@ A("xx","Tố xa xỉ",{c:{},ok:(a,t)=>!!xxCause(a,t),o:a=>oVP(a),x:"cần đã t
  V.f=function(a,t){if(cd(a,"xxA",BAL.lux.xx.cdA)||cd(t,"xxT",BAL.lux.xx.cdT))return"";try{a.xxA=wk();t.xxT=wk()}catch(e){}return vf.apply(this,arguments)}})();
 /* NPCs choose it like any scheme, with the same motive gate and weight as Tố vượt phẩm (jwd92b) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);
- try{if(Array.isArray(O)&&v&&v!==S&&t&&ACT.xx.ok(v,t)){const h=hostility(v,t),g=v.ghen||0;if(h>=BAL.lux.xx.hostMin||g>=BAL.lux.xx.ghenMin)O.push(["xx",(.4+h/100+g/150)*persW(v,"vp")])}}catch(e){}return O}})();
+ try{if(Array.isArray(O)&&v&&v!==S&&t&&ACT.xx.ok(v,t)){const h=hostility(v,t),g=ghenOf(v,t);if(h>=BAL.lux.xx.hostMin||g>=BAL.lux.xx.ghenMin)O.push(["xx",(.4+h/100+g/150)*persW(v,"vp")])}}catch(e){}return O}})();
 /* every list that names Tố vượt phẩm names Tố xa xỉ too (person card group, danger band, sent-by-servant, public in co-op, quiet-life vow, emotions, defence orders) */
 try{AOUT.xx=[`nàng bị quở: Đức ${BAL.lux.xx.ducT}, Danh ${BAL.lux.xx.danhT}, tháo món xa xỉ nhất; ngươi Danh +${BAL.lux.xx.danhA}`,`nàng không quá mức: Danh ${BAL.lux.xx.falseDanhA}, thù ${BAL.lux.xx.falseRel} · hoặc bị bỏ qua: Danh ${BAL.lux.xx.waveDanhA}`]}catch(e){}
 try{LACK.xx=t=>{if(xxCause(S,t))return"";const r=dressSeen(S,t);if(r&&r.sig!==dsSig(t))return"nàng đã thay đồ khác từ lúc ngươi thấy";if(r)return"lần ngươi thấy, nàng không ăn mặc quá mức";return"chưa thấy nàng ăn mặc thế nào: gặp nàng cùng chỗ, hoặc dò la"}}catch(e){}

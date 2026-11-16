@@ -379,3 +379,7 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+/* npc-jealousy (owner OD:L1386 / HANDOVER:L46, one formula for every pair): the weekly drift each consort v feels toward each other consort t
+   (was toward her only). sungGap/sungP: t's Sủng above v's − sungGap → v's liking of t −1 at sungP %; qRank/qP: the Hoàng hậu cools on anyone at
+   rank ≥ qRank at qP %; sac: t's Sắc above it → v's jealousy of t +1; decay: jealousy −decayHi when v likes t above relHi, else −decay. */
+BAL.ghenW={sungGap:10,sungP:33,qRank:4,qP:50,sac:75,relHi:20,decayHi:3,decay:1};

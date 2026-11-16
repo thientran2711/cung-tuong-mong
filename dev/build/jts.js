@@ -154,7 +154,7 @@ function tsFestPre(){const m=S.month%12+1;const F=TS_FEST[m];if(!F)return;const 
 
 /* =============== Ý 4 · LỄ TẤN PHONG: khách đến chúc, nàng phát lì xì (ân thưởng); phi tần khác tấn phong thì mời ngươi =============== */
 function tsGuests(host){return consorts().filter(p=>p!==host&&p.alive!==false&&!p.out&&!p.confined&&(p!==S||!S.out))}
-function tsWish(p,host){const a=aff(p,host),g=p===S?0:(host===S?(p.ghen||0):Math.max(0,((host.sung||0)-(p.sung||0))/2));
+function tsWish(p,host){const a=aff(p,host),g=ghenOf(p,host);
  if(a>=25)return["thân","chúc tỷ muội phúc lộc dồi dào, mãi được thánh ân"];if(g>=50||a<=-25)return["gượng","nói đôi câu chúc lấy lệ, ánh mắt không vui"];return["lễ","chúc theo lễ, lời lẽ chừng mực"]}
 function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==S);if(!G.length)return;
   /* review ts-a FAIL 3: the guests come into her palace — she sees each face (k61Meet), so a named guest is never a grey "Người lạ" */

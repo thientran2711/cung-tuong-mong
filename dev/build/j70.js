@@ -139,7 +139,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
 
 /* ---------- motive -> plot ---------- */
 function motives70(v){const out=[];const z=j70();const sh=z.sh;const rise=sh.length>=4?S.sung-sh[sh.length-4]:0;
- if(rise>=8&&(v.ghen||0)>=35)out.push([S,"ghen"]);
+ if(rise>=8&&ghenOf(v,S)>=35)out.push([S,"ghen"]);for(const t of others(v)){if(t===S||!alive70(t))continue;const h=(z.shv||{})[t.id]||[];if(h.length>=4&&(t.sung||0)-h[h.length-4]>=8&&ghenOf(v,t)>=35)out.push([t,"ghen"])}
  if(v.slightAt!=null&&bq()-v.slightAt<=6){const L=others(v).filter(x=>x===S||alive70(x));const t=L.sort((a,b)=>oan(v,b)-oan(v,a))[0];if(t&&oan(v,t)>=20)out.push([t,"nhuc"])}
  try{if(sonsOf(v).length&&mySons().length&&(mySons().some(k=>k.heir)||rkOf(S)>=rkOf(v)))out.push([S,"ngoi"])}catch(e){}
  return out}
@@ -150,7 +150,7 @@ function motiveTick70(){const z=j70();for(const v of liveRivals(true)){if(v.conf
   let O=[];try{O=mindMenu(v,t)}catch(e){O=[]}O=O.filter(x=>methFor70(x[0])&&M70[methFor70(x[0])].band<=b);if(!O.length)continue;const k=wpick(O);const m=methFor70(k);if(!m||!okAct70(v,t,k))continue;
   const p=newPlot70(v,t,m,null,mo);if(p&&!p.end){v.plan={k:M70[m].k,t:key(t),due:1e9,err:0,j70:p.id};try{mindLog(v,"_tell")}catch(e){}}}}
 /* j40's big-scheme plan becomes a chain (the plan stays as the 'one scheme at a time' lock) */
-(function(){if(typeof mindTell!=="function")return;const m0=mindTell;mindTell=function(v,t,k){try{if(j70On()&&v&&v.plan&&t&&!v.plan.j70&&canNew70(v.id,key(t))){const m=methFor70(k);if(m){const mo=t===S&&(v.ghen||0)>=Math.max(oan(v,S),-aff(v,S))?"ghen":"band";const p=newPlot70(v,t,m,null,mo,{err:v.plan.err||0});if(p){if(p.end)v.plan=null;else{v.plan.due=1e9;v.plan.j70=p.id}try{mindLog(v,"_tell")}catch(e){}return}}}}catch(e){console.error(e)}return m0.apply(this,arguments)}})();
+(function(){if(typeof mindTell!=="function")return;const m0=mindTell;mindTell=function(v,t,k){try{if(j70On()&&v&&v.plan&&t&&!v.plan.j70&&canNew70(v.id,key(t))){const m=methFor70(k);if(m){const mo=ghenOf(v,t)>0&&ghenOf(v,t)>=Math.max(oan(v,t),-aff(v,t))?"ghen":"band";const p=newPlot70(v,t,m,null,mo,{err:v.plan.err||0});if(p){if(p.end)v.plan=null;else{v.plan.due=1e9;v.plan.j70=p.id}try{mindLog(v,"_tell")}catch(e){}return}}}}catch(e){console.error(e)}return m0.apply(this,arguments)}})();
 /* a consort preparing a chain still lives her normal life: small acts (rumour, spying, tripping, accusing) go on; only a second big scheme waits */
 (function(){const n0=npcAct;npcAct=function(v,t){if(!v||!v.plan||!v.plan.j70||window.__j70off)return n0.apply(this,arguments);const P=v.plan;v.plan=null;let r="";
   try{r=n0.apply(this,arguments)}finally{if(v.plan&&v.plan!==P){v.plan=P;r=""}else v.plan=P}return r}})();
@@ -219,7 +219,7 @@ function intro70(p,stage){const a=pa70(p),t=pt70(p),M=pm70(p),r=pr70(p);const W=
  return `<p>${p.forced&&S.maid?`${S.maid.name} hớt hải chạy vào: `:"Tai mắt báo: "}người của ${a.name} ${tl}${W?` (ở ${W})`:""}.</p>`}
 /* the motive as it really stands now (real values of the plotter toward the target) */
 function mot70(p){const a=pa70(p),t=pt70(p);if(p.mo==="fac"||p.mo==="ngoi"||p.mo==="nhuc"||!a||!t||a===S)return MOT70[p.mo]||MOT70.band;
- const g=t===S?(a.ghen||0):0,o=Math.round(oan(a,t)),h=Math.max(0,-aff(a,t));if(g>=o&&g>=h)return `ghen với ${nm70(t)} (Ghen ${g})`;if(o>=h)return `oán ${nm70(t)} (Oán ${o})`;return `ghét ${nm70(t)} (thiện cảm ${aff(a,t)})`}
+ const g=ghenOf(a,t),o=Math.round(oan(a,t)),h=Math.max(0,-aff(a,t));if(g>=o&&g>=h)return `ghen với ${nm70(t)} (Ghen ${g})`;if(o>=h)return `oán ${nm70(t)} (Oán ${o})`;return `ghét ${nm70(t)} (thiện cảm ${aff(a,t)})`}
 function know70(p){const M=pm70(p),r=pr70(p);const a=pa70(p);const ev=a?evG(S,a):0;
  return `<p class="past">Từ dấu vết ấy: mưu <b>${M.n.toLowerCase()}</b>${p.dig?` (cách: ${r.n.toLowerCase()}; nàng sẽ chờ ${M.opp.map(k=>OPP70[k].n).slice(0,2).join(" hoặc ")})`:""}, vì ${mot70(p)}. Đã chuẩn bị ${Math.min(p.pg,p.need)}/${p.need} bước. Chứng cứ về ${a?a.name:"nàng"}: ${ev}${ev>=2?"":" (cần 2 để tố giác)"}.</p>`}
 function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc=S.tamco||0;const o=[];const A={o:a,n:a.name,k:"rv"};
@@ -265,7 +265,7 @@ function show70(){const z=j70();if(!z)return;const L=z.pl.filter(p=>p.pend&&!inQ
  const urgent=L[0].pend==="aft"||(L[0].forced);if(Q.length>2&&!urgent)return;if(busy70()&&!urgent)return;
  const p=L[0];if(p.pend==="npc"){if(typeof evCooldown==="function"&&!evCooldown("j70npc",3)){p.pend=0;return}}
  if(push70(p))mark70()}
-function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length>8)z.sh.shift();
+function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length>8)z.sh.shift();z.shv=z.shv||{};const sv={};for(const v of liveRivals(true)){const h=(z.shv[v.id]||[]).concat([v.sung||0]);if(h.length>8)h.shift();sv[v.id]=h}z.shv=sv;
  try{motiveTick70()}catch(e){console.error(e)}
  for(const p of z.pl.slice()){if(p.end)continue;try{step70(p)}catch(e){console.error(e);p.end="err"}if(S.dead)return}
  z.pl=z.pl.filter(p=>!p.end||p.pend||wk()-p.born<36).slice(-30);
@@ -480,7 +480,7 @@ function scarOf(p){p=p||S;const s=p&&p.scar;if(!s)return null;const left=Math.ma
 window.scarOf=scarOf;
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar)r=cl(r-Math.round(p.scar.d*(p.scar.veil?2/3:1)),0,130)}catch(e){}return r}})();
 function scar70(t,sev,a,how){const L=SCAR70[sev];t.scar={sev,d:L.d,need:L.need,pg:0,veil:0,tr:0,cure:0,by:a?key(a):null,at:wk(),how:how||""};ap(t,{sung:-L.sung,danh:-L.danh});
- if(t===S){for(const v of liveRivals(true))v.ghen=cl((v.ghen||0)-Math.round(6*sev),0,100)}return L}
+ for(const v of liveRivals(true))if(v!==t)ghenAdd(v,t,-Math.round(6*sev));return L}
 A("huydung","Hủy dung",{c:{bac:-30,duc:-8},ok:(a,t)=>(a.bac||0)>=30&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+(a.mat||0)*4),x:"Sắc nàng giảm mạnh, ân sủng giảm",f:(a,t)=>{
  ap(a,{bac:-30});if(typeof ducAdd==="function")ducAdd(a,-8,"hủy dung");else ap(a,{duc:-8});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
  const c=caught(a,t,how==="phan"||how==="son","hủy dung "+NM(t)+(how==="canh"?" bằng bát canh nóng":how==="meo"?" bằng cách dụ mèo dữ":" bằng phấn trộn độc"));if(c)return c;

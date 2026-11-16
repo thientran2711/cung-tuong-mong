@@ -1,7 +1,7 @@
 /* ================= HARM BANDS, PEOPLE COME TO HER, AFFAIR ROAD WHEN THE THRONE ROAD IS BLOCKED ================= */
 /* C. danger of one person toward another, in plain bands (same for every NPC toward every NPC, and toward her) */
 const BANDS=[[0,"không",[]],[30,"nhỏ",["rumor","spy","trip"]],[60,"nặng",["frame","plant","block","bribe","accuse","vp","ksab","takeaway","steal","road"]],[80,"sát hại",["poison","kpoison","pond","pushp","musk","catswap","kframe"]]];
-function danger(v,t){const tr=v.trait==="Hiểm độc"?10:v.trait==="Hiền lành"?-15:v.trait==="Nhu mì"?-10:0;return Math.round(Math.max(t===S?(v.ghen||0):0,oan(v,t),Math.max(0,-aff(v,t)))+tr)}
+function danger(v,t){const tr=v.trait==="Hiểm độc"?10:v.trait==="Hiền lành"?-15:v.trait==="Nhu mì"?-10:0;return Math.round(Math.max(ghenOf(v,t),oan(v,t),Math.max(0,-aff(v,t)))+tr)}
 function bandOf(d){let b=0;for(let i=0;i<BANDS.length;i++)if(d>=BANDS[i][0])b=i;return b}
 function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&allow.includes(k)&&a.ok(v,t)&&w>0)O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);

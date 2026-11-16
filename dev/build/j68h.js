@@ -53,7 +53,7 @@ G6set("nightSteps",{pp:()=>(S.maid&&(planOnMe6()||(S.staff||[]).some(spyOther6))
   c6("Thuê thêm người gác",{c:{bac:-25},w:{tamco:1},wt:[G6("tuần tới kẻ hại ngươi khó ra tay hơn")],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,1);return "Cung ngươi có thêm người canh."}}),
   c6(`Bảo ${S.maid?S.maid.name:"cung nữ"} im lặng`,{w:{suc:1},r:[[X.A,-3]],k:[R6("không biết thật hư")]})]});
 /* --- rumours: a named source with a motive; true or that source's lie; checking reveals the truth --- */
-G6set("rumorPreg",{a:["rv","rv"],pp:()=>{const a=rv6(v=>v.rank>=1);if(a==null)return null;const b=rv6(v=>v.id!==a&&(aff(v,RV(a))<0||(v.ghen||0)>=40))??rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},
+G6set("rumorPreg",{a:["rv","rv"],pp:()=>{const a=rv6(v=>v.rank>=1);if(a==null)return null;const b=rv6(v=>v.id!==a&&(aff(v,RV(a))<0||ghenOf(v,RV(a))>=40))??rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},
  v:["Người bên cung {B} rỉ tai: {A} có mang đã hai tháng, đang giấu. <i>(Lời đồn; thật hư chưa rõ.)</i>","Cung nữ của {B} kể khắp nơi: {A} lén mời bà đỡ ngoài cung vào. <i>(Lời đồn.)</i>","{B} bóng gió với các cung: dạo này {A} hay nôn, chỉ ăn đồ chua. <i>(Lời đồn.)</i>","Người bên {B} bảo {A} xin Thái y viện thuốc an thai. <i>(Lời đồn.)</i>","Người của {B} đồn {A} đã giả có mang để giữ sủng. <i>(Lời đồn.)</i>"]});
 G6set("rumorEvidence",{pp:()=>{const a=rv6(v=>evG(v,S)>0||band6(v)>=1);return a==null?null:{a0:a}},v:E68I.rumorEvidence.v.map(t=>t+" <i>(Lời đồn.)</i>")});
 G6set("rumorEmpLove",{a:["rv","rv"],pp:()=>{const a=rv6();if(a==null)return null;const b=rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},

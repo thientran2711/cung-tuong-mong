@@ -4,10 +4,21 @@ function aff(x,y){if(x===y)return 0;if(x===S)return S.rl[y.id]||0;if(y===S)retur
 function affAdd(x,y,n){if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,-100,100);return}if(y===S){x.rel=cl(x.rel+n,-100,100);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,-100,100)}
 function oan(x,y){if(!x||!y||x===y)return 0;if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
 function oanAdd(x,y,n){if(!x||!y||x===y)return;const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+/* jealousy, one formula for every pair (owner OD:L1386, HANDOVER:L46; npc-jealousy): v.ghen = v's jealousy of HER (UI, saves, co-op swap ghen<->gp[pid]);
+   v.gp[id] = v's jealousy of anyone else (another consort, or the co-op friend's pid, as jcoopworld already keeps it). Old saves: missing gp = 0 (lazy). */
+function ghenOf(v,t){if(!v||!t||v===t||v===S||v.coop)return 0;if(t===S)return v.ghen||0;return (v.gp&&v.gp[t.id])||0}
+function ghenAdd(v,t,n){if(!v||!t||v===t||v===S||v.coop||!n)return;if(t===S){v.ghen=cl(Math.round((v.ghen||0)+n),0,100);return}v.gp=v.gp||{};const x=cl(Math.round((v.gp[t.id]||0)+n),0,100);if(x)v.gp[t.id]=x;else delete v.gp[t.id]}
+/* everyone else's jealousy of p rises by n (her: ghenAll, the same rule incl. the Emperor's Đa tình) */
+function ghenAt(p,n){if(!p)return;if(p===S)return ghenAll(n);const m=has("datinh")?1.5:1;liveRivals(true).forEach(v=>{if(v!==p)ghenAdd(v,p,Math.round(n*m))})}
+function ghenMax(v){let g=ghenOf(v,S);for(const k in (v&&v.gp)||{})g=Math.max(g,v.gp[k]||0);return g}
+/* weekly drift, the same for every pair (was: toward her only) */
+function ghenWeek(v){const B=BAL.ghenW;for(const t of others(v)){if(t!==S&&(!t.alive||t.out))continue;
+ if((t.sung||0)>(v.sung||0)-B.sungGap&&!v.queen&&roll(B.sungP))affAdd(v,t,-1);if(v.queen&&rkOf(t)>=B.qRank&&roll(B.qP))affAdd(v,t,-1);
+ if((t.sac||0)>B.sac)ghenAdd(v,t,1);ghenAdd(v,t,-(aff(v,t)>B.relHi?B.decayHi:B.decay))}}
 function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
 function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}
-function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
+function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+ghenOf(v,t)/2+(rkOf(t)>=rkOf(v)?8:0)}
 function oanMonth(){for(const v of rivals){v.oan=Math.max(0,(v.oan||0)-2);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-2)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
 
 /* houses: Phi and above head a palace; lower consorts live under a head. Same house: cannot harm or win over each other */
@@ -32,7 +43,7 @@ function countAt(k){const W=S.where||{};let n=0;for(const v of rivals)if(v.alive
 /* NPCs who share a place meet: small talk or friction, by the same bars */
 function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.where[v.id];(by[k]=by[k]||[]).push(v)}
  for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];if(!roll(30))continue;
-  if(oan(a,b)+oan(b,a)>40||a.ghen+b.ghen>110){oanAdd(a,b,3);oanAdd(b,a,3);affAdd(a,b,-2);affAdd(b,a,-2)}else{affAdd(a,b,2);affAdd(b,a,2)}}}}
+  if(oan(a,b)+oan(b,a)>40||ghenOf(a,b)+ghenOf(b,a)>110){oanAdd(a,b,3);oanAdd(b,a,3);affAdd(a,b,-2);affAdd(b,a,-2)}else{affAdd(a,b,2);affAdd(b,a,2)}}}}
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
@@ -133,7 +144,7 @@ function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){
  else if(!Q.length){window.__walkSpill=null;try{if(typeof j77Card==="function")j77Card(W.k)}catch(e){}}}
 function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?(wet()?3:2):1}
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
-  let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
+  let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||ghenOf(v,t)>=60?1:.4);if(t.shield)want*=.5;
   if(t===S&&S.lot&&S.lot.dom==="Hung")want*=1.5;if(Math.random()<want*.04){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}
 function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.buoi=0;endTurn();return}
  S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
