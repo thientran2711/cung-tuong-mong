@@ -21,3 +21,11 @@ Owner: "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy th
 - KIT.md 32.2a + table row + 32.7b note. Tests: dev/test/stage-fig-size.js (dialogs + distortion + identity + info), dev/test/book-figwide.js (+ overText / faceIn, proxy).
 
 ## Results: see the final report table (worker report to coordinator).
+
+## Review r1 (session 8 reviewer, review/stage-fig-size-r1)
+- Merged origin/main d34b5116a (index.html / sw.js rebuilt).
+- FOUND: kitFigBody (jkit) and jk3 topOf read CDN pictures through a canvas WITHOUT crossOrigin → canvas tainted → getImageData threw →
+  measure fell back to the whole-picture box: no core, no wl/wr profile. So the 32.2a crop never ran on the live CDN build: Thái hậu was
+  shrunk to her full robe width (310–351 px tall in a 437–495 px column, ~125–178 px empty above). Fixed: crossOrigin="anonymous" on both
+  (CDN sends ACAO *, SW fetches CDN in CORS mode). After: Thái hậu fills the column height (~451 px in 477), sleeves cut at the column edge,
+  face whole, aspect true. Also: a not-yet-measured figure is hidden instead of drawn at raw picture size.
