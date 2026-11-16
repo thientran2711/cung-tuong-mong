@@ -34,3 +34,11 @@
  d.setAttribute("aria-hidden","true");d.style.cssText="position:absolute;width:0;height:0;overflow:hidden";
  d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.07" intercept="-0.065"/></feComponentTransfer></filter></defs>';
  (document.body||document.documentElement).appendChild(d)}catch(e){}})();
+/* kit page sample (§71): one figure drawn large (HD twin when drawn above 900 px) with the static rank halo and the static selection glow */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitFigHD · #kfa (người sắc nét, viền sáng theo dáng)",
+ html:()=>{const f="img/fig-consort-c30-t2-a18.webp";const st=h=>`height:${h}px;width:auto;display:inline-block;vertical-align:bottom;margin:0 10px`;
+  return `<div class="kitpg-row" style="align-items:flex-end;background:#3a2a22;padding:10px;border-radius:6px">`+
+   `<img src="${f}" alt="" style="${st(220)};filter:url(#kfa) drop-shadow(0 8px 8px #0006)">`+
+   `<img src="${f}" alt="" style="${st(360)};filter:url(#kfa) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 5px rgba(255,236,170,.5))">`+
+   `<img src="${f}" alt="" style="${st(520)};filter:url(#kfa) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 9px rgba(255,236,170,.95))">`+
+   `</div><p class="past">Trái → phải: thường · vầng phẩm (tĩnh) · đang chọn (tĩnh). Cao hơn 900 px ảnh gốc thì tự nạp bản HD; viền sáng ôm dáng người, không thành ô chữ nhật.</p>`}})}catch(e){}

@@ -2736,3 +2736,18 @@ owner recognises "this one still lacks its picture" in play. They are deliberate
 - **Dev list**: `window.CTM_MISSING_PICS` = `[{kind:"event"|"act", id, tone, title}]`, each logged once (`console.info("[CTM missing pic]",…)`).
   Whole-game list: `node dev/tools/missing_pics.js <build url> <out.json> dev/art/MISSING_PICS.md`.
 - Kit sample page: §59 (four pictures).
+
+## 71. SHARP PEOPLE · kitFigHD + #kfa alpha-clean (owner 15/11 "mặt mất nét" / "ô chữ nhật vàng khi chọn", review/face-sharp) — `dev/build/jfighd.js` (last module)
+- **kitFigHD(img)** — every `<img>` of a `fig-*.webp` anywhere (stage #mefig / .figimg, dialogs .kesimg, identity .kidfig2, podium, cards) gets
+  `srcset="<900 file> <w900>w, img/hd/<name> <wHd>w"` and `sizes=<drawn width>px`; the browser loads the HD twin ONLY when the figure is
+  drawn larger than its 900 px file (width × devicePixelRatio). `src` never changes (code that keys on src is untouched). Automatic for every
+  figure image (MutationObserver + resize); `kitFigHDAll()` re-fits all. Manifest `img/FIGURES-hd.json` = `{"files":{"fig-x.webp":[w900,wHd]}}`.
+  HD twins: `dev/figwork/hdcut.py` (same gpt-2-6 painting cut from its ~1800 px sheet; later fixes kept by detail transfer), checked by
+  `dev/figwork/hdqa.py` (down(hd) == the approved 900 file; head detail ≥ 1; face sheets looked at) before `cdn_sync`.
+- **#kfa** — SVG filter (alpha' = 1.07·alpha − 0.065) that clears the faint alpha haze of cut-out figures. It comes FIRST in every
+  people-picture filter (`filter:url(#kfa) var(--klf) drop-shadow(…)`), so halo / selection glow / ground shadow trace the silhouette and never
+  draw a rectangle. Never animate these filters (§ motion rule STILL PEOPLE).
+- Never display a figure above its file without an HD twin: new figure art ships its `img/hd/` twin (≥ 1.5× the largest drawn size).
+- Tests: `dev/test/face-sharp.js` + `face-sharp-cmp.py` (face detail on screen vs file), `dev/test/face-sharp-scan.js` (animated = 0).
+- Kit page sample §71.
+
