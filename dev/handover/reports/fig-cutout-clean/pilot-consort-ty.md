@@ -30,3 +30,10 @@ Height: figure = old height exactly (fit_fig), canvas 374-419 x 900 (L/R never t
 - Time: ~10 min wall for 10 files in parallel.
 
 ## Contact sheets (pilot-consort-ty/): <cNN>-ty3-a18-{light,dark}.jpg = old fig (900 upscaled to 1800 only for the side-by-side) | new fig fitted at 1800 | new face+bust crop at NATIVE master resolution.
+
+## KEPT UNTIL GO (lead 23:24Z) — all 2k (1024x2048) masters/ids; pilot predates the 4k switch
+Scratch (this session container): masters /tmp/claude-0/-home-user/7f569815-7656-59ee-9525-810af0a337d5/scratchpad/m/<cNN>.png ; finished twins /tmp/claude-0/-home-user/7f569815-7656-59ee-9525-810af0a337d5/scratchpad/out/img/{fig,por}-consort-<cNN>-ty3-a18.webp ; old CDN copies /tmp/claude-0/-home-user/7f569815-7656-59ee-9525-810af0a337d5/scratchpad/old/ ; 1800 views /tmp/claude-0/-home-user/7f569815-7656-59ee-9525-810af0a337d5/scratchpad/hd/.
+Magnific output ids (re-downloadable): c01 ksp73V016B, c02 rgdOZpBxtc, c05 Xm4E14OBfo, c08 eIyfKPPdqL, c11 cpg8uwq0eP, c14 TdUtFO6VNR, c20 rgdOZtaxtc, c26 rgdOZhUxtc, c28 UPh3cHAwny, c32 IfiHLWTtvE.
+Uploaded old-figure refs (Magnific): c01 bxVS9IT5Y2, c02 bxVS9EB5Y2, c05 YMsBf27WeC, c08 SymiYLQUb8, c11 gOt6nLXSXO, c14 lJINzLtgv9, c20 fHG1UaYCDY, c26 huZ5lhpvqL, c28 Lwo4GglswO, c32 Bh9urI2oQR. Face refs N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL (worked as-is).
+QA rule from now: pinholes <400 px in hair ignored (c02 then passes).
+NOT done: 4k redo (the lead's 4k message reached me only after the 2k pilot was finished). 10 files at 4k = 800 cr, ~5 min; waiting for the lead to say whether to redo the pilot at 4k or only use 4k in the batch.
