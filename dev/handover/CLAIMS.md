@@ -171,3 +171,4 @@
 | weather-fx2 | review/weather-fx2 | main s16 | session_01UV1SzhWSw7EETVzp3xX5hi→worker weather-fx2 (this session) | RUNNING | 16/11 12:26Z |
 | name-mask review (sonnet) | review/name-mask-r1 | D | session_01DgYSWmyLaHvXUgNsFAkrBH | RUNNING | 16/11 12:40Z |
 | skin-norosy: owner verdict B (12:45Z) — remove rosy-skin layer from ALL pictures, keep later edits; no kitFigLight | review/skin-norosy | main s16 | session_01UV1SzjQcW4S8GoPGj8rDyk (opus) | RUNNING | 16/11 12:43Z |
+| merge-train-8 (B+C+D READY not on main/train6/7) | review/merge-train-8 | main s16 | session_01UV1SzmEkyjvqBxvgjLzice (sonnet) | RUNNING | 16/11 12:47Z |
