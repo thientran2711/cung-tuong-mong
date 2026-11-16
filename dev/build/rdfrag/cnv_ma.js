@@ -29,7 +29,7 @@ rdDef("cnv_ma",5,{t:"Bài học thứ nhất",w:"maid",sj:"việc đầu tiên L
   {n:"Tự tay kiểm từng tấm",need:["srv"],c:{suc:-6},w:{tin:4},f:"hard",wx:"ma ma gật đầu",lx:"thức trắng mấy đêm, kiệt sức",rt:"Ngươi đếm đến tấm áo cuối cùng khi gà gáy."},
   {n:"Chia việc cho các cung nữ khác",need:["srv"],c:{},o:()=>45+S.tamco/4,w:{tamco:2},sc:1,f:"lead",wx:"việc nhanh",l:{tin:-5},lx:"có đứa làm ẩu, ma ma trách, Chủ tin sút",rt:"Ba ngày đã xong hai cung.",rf:"Một đứa đếm nhầm, áo cung Hoàng hậu thiếu hai tấm."},
   {n:"Xin ma ma dạy phép đòi lệ",need:["nsrv"],c:{suc:-2},w:{duc:2,tamco:1},f:"hard",wx:"biết luật của Nội vụ phủ",lx:"phải học như học trò đến mệt rã",rt:"Ma ma giở sổ lệ: phần than của ngươi ghi rõ từng cân."},
-  {n:"Sai người đến thẳng Nội vụ phủ đòi",need:["nsrv"],c:{},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"lead",wx:"than về đủ",l:{danh:-2},lx:"Nội vụ phủ ghi thù, đồn cung ngươi hống hách, tiếng sút",rt:"Than về trước giờ ngọ.",rf:"Người của ngươi bị đuổi về tay không."}]},
+  {n:"Sai người đến thẳng Nội vụ phủ đòi",need:["nsrv"],c:{},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"lead",wx:"than về đủ",l:{danh:-2},lx:"Nội vụ phủ ghi oán, đồn cung ngươi hống hách, tiếng sút",rt:"Than về trước giờ ngọ.",rf:"Người của ngươi bị đuổi về tay không."}]},
  s2:{h:"Cơ hội thứ hai",w:"maid",if:RDW(0),t:LMMT("Ngươi chưa đỗ, vẫn về giặt áo. Nhưng một sáng, Lưu ma ma đứng ở cửa giặt: “Còn một việc. Làm được, ta xin cho ngươi khảo lại.” Việc là chia áo rét sáu cung trước sương giá.",
    "Ngươi đã lên làm tiểu chủ mà chưa từng đỗ kỳ khảo của ma ma. Bà vẫn đến, giọng vẫn nghiêm: “Than cung tiểu chủ bị cắt. Làm chủ mà không giữ nổi phần mình, thì cũng như năm xưa trượt khảo.”"),o:[
   {n:"Nhận việc, không hỏi điều kiện",need:["srv"],c:{suc:-5},w:{tin:5},f:"hard",wx:"ma ma thấy ngươi chịu khó",lx:"vừa giặt vừa làm, sức cạn",rt:"Ngươi giặt ban ngày, đếm áo ban đêm."},
@@ -41,7 +41,7 @@ rdDef("cnv_ma",5,{t:"Bài học thứ nhất",w:"maid",sj:"việc đầu tiên L
   {n:"Nhận sổ, lén đối chiếu",c:{suc:-2},o:()=>45+S.tamco/4,w:{tamco:2},sc:1,f:"know",wx:"thấy sổ mới thiếu hai mươi tấm gấm",l:{danh:-2},lx:"Phùng cô cô biết ngươi soi, đồn ngươi đa nghi, tiếng sút; ngươi mệt rã",rt:"Sổ mới ít hơn sổ cũ đúng hai mươi tấm gấm Tô Châu.",rf:"Phùng cô cô lấy lại sổ trước khi ngươi so xong."},
   {n:"Chép theo sổ mới",c:{duc:-2},w:{suc:3},wx:"nhẹ việc",lx:"che một chỗ thiếu mà không biết, lòng ngươi áy náy về sau",rt:"Việc xong sớm hai ngày."}]},
  c2:{h:"Cung {v} đòi thêm",w:"v",t:"Người của cung {v} đến đòi thêm than và áo bông: “Chủ ta sợ lạnh.” Phần ấy không có trong lệ, và nếu đưa, cung khác sẽ thiếu.",o:[
-  {n:"Đưa đúng lệ, không thêm",c:{danh:-1},w:{duc:3},f:"honest",wx:"sổ khớp",lx:"{v} ghi thù; mất lòng người, tiếng sút",go:A=>{rdOan(A,"v",4)},rt:"Người của {v} bỏ về, đá đổ một sọt than."},
+  {n:"Đưa đúng lệ, không thêm",c:{danh:-1},w:{duc:3},f:"honest",wx:"sổ khớp",lx:"{v} ghi oán; mất lòng người, tiếng sút",go:A=>{rdOan(A,"v",4)},rt:"Người của {v} bỏ về, đá đổ một sọt than."},
   {n:"Đưa thêm, ghi vào sổ là “hao hụt”",c:{duc:-3},o:()=>45+S.tamco/4,w:{tamco:1},sc:1,wx:"{v} hài lòng",l:{danh:-3},lx:"làm sổ gian, lòng ngươi áy náy; hỏng thì sổ có vết, tiếng sút",go:(A,ok)=>{rdRel(A,"v",ok?6:2)},rt:"{v} sai người mang sang một hộp mứt cảm ơn.",rf:"Ma ma thấy chữ “hao hụt”, nhíu mày."},
   {n:"Bảo người của {v} đến gặp ma ma",c:{},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"không phải mình gánh",l:{danh:-2},lx:"bị cho là đùn đẩy, tiếng sút",go:(A,ok)=>{if(ok)rdOan(A,"v",3)},rt:"Ma ma chỉ nói một câu, người kia cúi đầu lui.",rf:"Người kia về kể {v} là ngươi khinh nàng."}]},
  t1:{h:"Thiếu hai mươi tấm",w:"maid",t:"Đếm lại lần cuối: kho thiếu hai mươi tấm gấm Tô Châu, đúng phần của cung Hoàng hậu. Sương giá còn ba ngày.",o:[
@@ -78,7 +78,7 @@ rdDef("cnv_ma",6,{t:"Sổ sách Nội vụ phủ",w:"eun",sj:"khoản thiếu tr
  c2:{h:"Phùng cô cô thăm dò",w:"maid",t:LMMT("Phùng cô cô gọi ngươi vào phòng riêng, rót trà: “Ngươi thông minh. Bà già ấy sắp về quê rồi. Theo ta, năm sau ngươi có ghế.”",
    "Phùng cô cô xin vào thỉnh an cung ngươi, mang lễ hậu: “Tiểu chủ mới lên, cần người trong Nội vụ phủ. Bà Lưu già rồi. Có nô tỳ, cung tiểu chủ không bao giờ thiếu than.”"),o:[
   {n:"Nhận lời ngoài mặt",c:{duc:-3},o:()=>45+S.tamco/4,w:{tamco:3},sc:1,f:"two",wx:"được vào sâu hơn",l:{danh:-3},lx:"lòng ngươi áy náy vì nói dối; hỏng thì ma ma nghe được, tiếng sút",rt:"Phùng cô cô tin ngươi, cho ngươi xem sổ riêng của bà ta.",rf:"Lưu ma ma thấy ngươi ra khỏi phòng Phùng cô cô."},
-  {n:"Từ chối thẳng",c:{danh:-2},w:{duc:3},f:"safe",wx:"giữ nghĩa thầy trò",lx:"kẻ bị từ chối ghi thù, mất lòng người, tiếng sút",rt:"Phùng cô cô đặt chén trà xuống: “Tiếc.”"},
+  {n:"Từ chối thẳng",c:{danh:-2},w:{duc:3},f:"safe",wx:"giữ nghĩa thầy trò",lx:"kẻ bị từ chối ghi oán, mất lòng người, tiếng sút",rt:"Phùng cô cô đặt chén trà xuống: “Tiếc.”"},
   {n:"Nhận lễ, kể lại cho ma ma",need:["nsrv"],c:{duc:-2},w:{bac:30},wx:"có thêm bạc",lx:"nhận lễ rồi phản, lòng ngươi áy náy; Phùng cô cô sẽ đòi",rt:"Ma ma nghe xong, cười khan: “Nó vẫn thế.”"},
   {n:"Hỏi Phùng cô cô sao lại phản thầy",need:["srv"],c:{},o:()=>40+S.duc/4,w:{duc:2},sc:1,wx:"nghe được một nửa sự thật",l:{tin:-4},lx:"Phùng cô cô giận, mách ma ma ngươi hỗn, Chủ tin sút",rt:"Phùng cô cô im lâu: “Bà ấy chưa từng tiến cử ta.”",rf:"Phùng cô cô quát ngươi ra ngoài."}]},
  t1:{h:"Kỳ khóa sổ còn năm ngày",w:"eun",t:"Còn năm ngày đến kỳ khóa sổ. Một tiểu thái giám kho thì thầm: Phùng cô cô đang cho người chép lại sổ ba năm, “cho sạch”.",o:[
@@ -178,7 +178,7 @@ rdDef("cnv_ma",9,{t:"Kỳ sát hạch",w:"eun",sj:"kỳ sát hạch của Nội 
  c1:{h:"Hoàng thượng đi qua",w:"emp",t:LMMT("Giữa bài bày yến, có tiếng hô giá. Hoàng thượng đi tắt qua sân Nội vụ phủ, dừng lại nhìn bàn yến của ngươi.",
    "Hoàng thượng ghé qua kỳ tuyển, ngồi cạnh ngươi xem một lúc: “Nàng chọn người kiểu gì?”"),o:[
   {n:"Cúi đầu làm tiếp",need:["srv"],c:{tai:-1},w:{nt:5,duc:2},wx:"ngài thấy ngươi chăm chú",lx:"không dám ngẩng lên, tài mọn không được thấy",rt:"Ngài nhìn lâu rồi đi, không nói gì."},
-  {n:"Dâng ngài một chén trà",need:["srv"],c:{suc:-2},o:()=>40+S.sac/4,w:{nt:12},sc:1,wx:"ngài nhớ mặt ngươi",l:{tin:-5},lx:"Phùng cô cô ghi là rời bài, ma ma trách, Chủ tin sút",rt:"Ngài uống, hỏi: “Học ai?” Ngươi thưa: Lưu ma ma.",rf:"Phùng cô cô trừ điểm vì rời bàn."},
+  {n:"Dâng ngài một chén trà",need:["srv"],c:{suc:-2},o:()=>40+S.sac/4,w:{nt:12},sc:1,wx:"ngài nhớ mặt ngươi",l:{tin:-5},lx:"Phùng cô cô ghi là rời bài, ma ma trách, Chủ tin sút",rt:"Ngài uống, hỏi: “Học ai?” Ngươi thưa: Lưu ma ma.",rf:"Phùng cô cô bị chấm hạ vì rời bàn."},
   {n:"Thưa: chọn người như ma ma đã dạy",need:["nsrv"],c:{},o:()=>40+S.tai/4,w:{sung:2},sc:1,wx:"ngài nhớ tên Lưu ma ma",l:{danh:-2},lx:"Phùng cô cô nghe, đồn ngươi kết bè, tiếng sút",rt:"Ngài gật đầu: “Bà ấy dạy được người.”",rf:"Ngài chỉ ừ một tiếng."},
   {n:"Mời ngài cùng chọn",need:["nsrv"],c:{suc:-2},w:{sung:2},wx:"ngài vui",lx:"chọn đến mệt rã; người ngài chọn có thể là tai mắt",rt:"Ngài chỉ một cung nữ đứng cuối hàng."}]},
  c2:{h:"Tai mắt của {v}",w:"v",t:LMMT("Một thí sinh cùng kỳ là người cung {v}: nàng ta được báo bài trước, và được dặn làm ngươi trượt bài bày yến.",
@@ -200,7 +200,7 @@ rdDef("cnv_ma",9,{t:"Kỳ sát hạch",w:"eun",sj:"kỳ sát hạch của Nội 
    "Cung ngươi nhận đúng những người ngươi muốn. Bảy học trò của Lưu ma ma về các cung, và cả bảy đều biết ai đã đứng ra."),fx:{danh:5},go:A=>{rdOan(A,"v",4);return [lmmSrv({tin:4}),e67merit(6),lmmCon({mat:2})].join(" ")}},
   mid:{k:0,tag:"Qua mà chưa có ghế",t:LMMT("Ngươi qua, nhưng xếp cuối. Năm nay chưa có ghế cho ngươi.","Ngươi nhận được người, nhưng cũng nhận một tai mắt. Phùng cô cô vẫn giữ danh sách."),fx:{duc:2},go:()=>e67merit(3)},
   lose:{k:-1,tag:"Bị đánh trượt",t:LMMT("Phùng cô cô chấm ngươi trượt bài giữ sổ “vì sửa sổ cũ”. Ngươi chờ thêm một năm.",
-   "Phùng cô cô đổi danh sách vào phút cuối: ba người về cung ngươi đều là người của {v}."),fx:{danh:-3},go:()=>[lmmSrv({tin:-4}),lmmCon({mat:-1})].join(" ")}}});
+   "Phùng cô cô đổi danh sách vào giờ chót: ba người về cung ngươi đều là người của {v}."),fx:{danh:-3},go:()=>[lmmSrv({tin:-4}),lmmCon({mat:-1})].join(" ")}}});
 
 rdDef("cnv_ma",10,{t:"Ma ma lâm bệnh",w:"doc",sj:"bệnh của Lưu ma ma",cast(A){return rdCast(A,["v"])},
  g:LMMT("Sau bao năm và một trận tra, Lưu ma ma ngã bệnh. Bà gọi ngươi đến, chỉ vào một chiếc hộp gỗ dưới giường: trong đó là tên mọi cung nữ, thái giám bà từng dạy, ở khắp các cung. Phùng cô cô cũng biết chiếc hộp ấy có thật.",
@@ -219,7 +219,7 @@ rdDef("cnv_ma",10,{t:"Ma ma lâm bệnh",w:"doc",sj:"bệnh của Lưu ma ma",ca
   {n:"Mời bà ta ra, nói thẳng",c:{},o:()=>35+S.danh/4,w:{danh:2},sc:1,wx:"bà ta biết đã bị nhìn thấu",l:{danh:-2},lx:"bà ta liều hơn, đồn ngươi gây sự, tiếng sút",rt:"Phùng cô cô bỏ về, để quên cả hộp bánh.",rf:"Phùng cô cô bảo: “Ta thăm thầy ta, ngươi là gì?”"},
   {n:"Để hai thầy trò cũ nói chuyện",c:{},o:()=>35+S.duc/4,w:{duc:3},sc:1,f:"peace",wx:"có thể hòa",l:{mat:-1},lx:"hộp gỗ có thể mất, mất một đầu mối",rt:"Ngươi nghe tiếng Phùng cô cô khóc sau cửa.",rf:"Sáng ra, hộp gỗ đã bị lục."}]},
  c2:{h:"{v} muốn chiếc hộp",w:"v",t:"{v} sai người đến hỏi mua chiếc hộp gỗ, trả một giá rất cao. Có tên trong hộp, nàng sẽ biết ai trong các cung có thể mua chuộc.",o:[
-  {n:"Từ chối thẳng",c:{danh:-2},w:{duc:3},f:"guard",wx:"giữ được mạng lưới",lx:"kẻ bị từ chối ghi thù, mất lòng người, tiếng sút",go:A=>{rdOan(A,"v",6)},rt:"Người của {v} về, mặt hằm hằm."},
+  {n:"Từ chối thẳng",c:{danh:-2},w:{duc:3},f:"guard",wx:"giữ được mạng lưới",lx:"kẻ bị từ chối ghi oán, mất lòng người, tiếng sút",go:A=>{rdOan(A,"v",6)},rt:"Người của {v} về, mặt hằm hằm."},
   {n:"Bán một bản chép giả",c:{duc:-3},o:()=>40+S.tamco/3,w:{bac:40},sc:1,wx:"bạc vào, {v} mua phải tên sai",l:{danh:-3},lx:"lừa người, lòng ngươi áy náy; lộ thì thành thù sống chết, tiếng sút",go:(A,ok)=>{rdOan(A,"v",ok?4:12)},rt:"{v} trả bạc cho một danh sách toàn người đã xuất cung.",rf:"{v} nhận ra, sai người đến đòi bạc lại."},
   {n:"Báo Hoàng hậu {v} dòm ngó người các cung",c:{},o:()=>35+S.hh/4+S.danh/5,w:{hh:2},sc:1,wx:"{v} bị nhắc",l:{hh:-2},lx:"Hoàng hậu hỏi chiếc hộp có gì, không vui",go:(A,ok)=>{rdOan(A,"v",ok?8:4)},rt:"Hoàng hậu nhắc {v} “đừng nhúng tay vào việc Nội vụ phủ”.",rf:"Hoàng hậu hỏi ngược: “Hộp gì?”"}]},
  t1:{h:"Ma ma kể chuyện cũ",w:"maid",t:"Đêm ấy ma ma tỉnh, kể: năm xưa bà từng che cho một chưởng sự ăn bớt, vì người ấy có mẹ già. Người ấy là Phùng cô cô. Bà chưa từng tiến cử nàng, vì sợ nàng lại tham.",o:[
@@ -281,7 +281,7 @@ RD97L.push({a:"cnv_ma_11",tag:"Lưu ma ma trao lại cả Nội vụ phủ",w:"m
    Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
 var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
  const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
- const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu và Thái hậu chuẩn/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bổn cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu và Thái hậu chuẩn/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
  const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
  const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
   if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}

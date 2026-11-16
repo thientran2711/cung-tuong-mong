@@ -132,7 +132,7 @@ rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về 
   {n:"Xin vào thỉnh an cùng lúc, đối mặt",c:{suc:-3},o:()=>35+S.danh/4,w:{danh:2},sc:1,wx:"lời {v} bị chặn ngay",l:{danh:-2},lx:"bị cho là hỗn, tiếng ngươi sút; {v} thêm oán",go:(A,ok)=>{rdOan(A,"v",ok?8:5)},rt:"Ngươi thưa đúng một câu, {v} không đáp được.",rf:"Ngươi bị cho lui ra ngoài cửa."},
   {n:"Nhờ người nói đỡ",c:{bac:-30},o:()=>45+S.mat*4,w:{mat:1},sc:1,wx:"có người đỡ lời",l:{danh:-1},lx:"người nói đỡ cũng bị nghi, đồn ngược về ngươi, tiếng sút; bạc mất trắng",rt:"Một nữ quan cũ nói: người trực đêm đâu biết gì.",rf:"Không ai dám mở miệng."},
   {n:"Để mặc {v} nói",c:{danh:-2},w:{duc:1},wx:"không bị kéo vào cãi",lx:"lời {v} ở lại trong tai Trung cung, {v} thêm oán; tiếng ngươi sút",go:A=>{rdOan(A,"v",3)},rt:"Ngươi không làm gì."}]},
- t1:{h:"Trung cung cho gọi",w:"hh",t:"Hoàng hậu cho gọi ngươi riêng: “Bản cung chỉ hỏi một câu: xạ hương trong cung {mis} là để hại ai?”",o:[
+ t1:{h:"Trung cung cho gọi",w:"hh",t:"Hoàng hậu cho gọi ngươi riêng: “Bổn cung chỉ hỏi một câu: xạ hương trong cung {mis} là để hại ai?”",o:[
   {n:"Thưa: không để hại ai",c:{},o:()=>40+S.hh/4,w:{hh:3},sc:1,wx:"Hoàng hậu ngờ có ẩn tình",l:{hh:-3},lx:"Hoàng hậu cho là ngươi bao che, không vui",rt:"Hoàng hậu nhìn ngươi rất lâu: “Vậy là để giữ.”",rf:"Hoàng hậu nói: “Ai giấu xạ hương cũng nói thế.”"},
   {n:"Thưa: không biết",c:{hh:-2},w:{tamco:1},wx:"không lộ thêm một chữ",lx:"Hoàng hậu không vui",rt:"Hoàng hậu cho lui."},
   {n:"Xin Hoàng hậu cho thêm thời gian",c:{suc:-2},o:()=>35+S.duc/4,w:{hh:2},sc:1,wx:"có thời gian tìm chứng",l:{hh:-2},lx:"bị cho là trì hoãn, Hoàng hậu không vui; ngươi mệt rã",rt:"Hoàng hậu cho ba ngày.",rf:"Hoàng hậu nói: “Trời sáng là khám.”"}]},
@@ -248,7 +248,7 @@ RD97L.push({a:"cnv_chu_11",tag:"Việc thiện trong bóng tối",w:"emp",p:.12,
    Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
 var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
  const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
- const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu và Thái hậu chuẩn/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bổn cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu và Thái hậu chuẩn/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
  const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
  const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
   if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}
