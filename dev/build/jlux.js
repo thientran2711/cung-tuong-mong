@@ -12,6 +12,8 @@
    reputation p.luxRep is per person. Display only through existing parts: act-card Kèm/risk line + "Vì sao" (jtoil/jaudit), event cards
    (Q), Hội phối đồ rows (kitRows via tsRows), result card / log. ================= */
 Object.assign(BAL,{lux:{
+ /* rank allowance (jinv luxAllow): base + perRank × rank (+ sungAdd from Sủng sungAt), + jwdinv wdBaseLux; above lv3 × allowance = jinv level 3 (Quá xa xỉ) */
+ allow:{base:36,perRank:16,sungAt:60,sungAdd:10},lv3:1.5,
  /* occasion ranges, as fractions r = worn luxury / her allowance: below lo = quá giản dị, [fit0,fit1] = hợp dịp, above hi = quá phô trương
     (above 1 = beyond her rank's allowance: always phô trương, jinv lv 2+). F = formality used by jtoil reactions (0 thường, 1 thỉnh an, 2 yến/lễ). */
  occ:{thuong:{n:"ngày thường",F:0,lo:0,fit:[0,.62],hi:.9},

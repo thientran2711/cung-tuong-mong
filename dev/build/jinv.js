@@ -250,9 +250,9 @@ function luxWorn(p){const L=(p.inv||[]).filter(e=>e.w&&!e.h&&IT[e.k]&&IT[e.k].sl
 function luxGrade(k){const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}
 const LUX_V=[8,16,28,44,64];
 function luxVal(k){const it=IT[k];if(!it)return 0;return LUX_V[luxGrade(k)]+Math.round((it.pr||0)/10)}
-function luxAllow(p){return 36+16*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>=60?10:0)}
+function luxAllow(p){const A=BAL.lux.allow;return A.base+A.perRank*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>=A.sungAt?A.sungAdd:0)}
 function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);const bud=luxAllow(p);
- const lv=sc===0?0:sc<=bud?1:sc<=bud*1.5?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
+ const lv=sc===0?0:sc<=bud?1:sc<=bud*BAL.lux.lv3?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
 /* kit chip: total worn luxury vs allowance; over the allowance = red */
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
