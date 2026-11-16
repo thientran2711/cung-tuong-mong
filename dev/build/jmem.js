@@ -76,7 +76,10 @@ function isP(k){return k==="me"||k==="emp"||k==="th"||!!mp(k)}
 function memS(){if(!S.mem||typeof S.mem!=="object")S.mem={};return S.mem}
 function hObj(hk){if(hk==="me"||hk==null)return null;if(hk==="emp")return S.emp&&typeof S.emp==="object"?S.emp:null;
  if(hk==="th"){if(!S.thO||typeof S.thO!=="object")S.thO={};return S.thO}const p=mp(hk);return p&&typeof p==="object"&&p!==S&&!p.coop?p:null}
-function memMig(){const M=memS();if(M._v===2)return;M._v=2;for(const k of Object.keys(M)){if(k[0]==="_"||/^me\|/.test(k))continue;const i=k.indexOf("|");const L=M[k];delete M[k];
+function memMig(){const M=memS();if(M._v===2)return;M._v=2;
+ /* r1: records of an old save whose deed / weight is lifelong now get m.L, so they stop fading after the upgrade */
+ for(const k of Object.keys(M)){const L=M[k];if(k[0]==="_"||!Array.isArray(L))continue;for(const m of L)if(m&&!m.L&&isLife(m.d,m.g0||m.g))m.L=1}
+ for(const k of Object.keys(M)){if(k[0]==="_"||/^me\|/.test(k))continue;const i=k.indexOf("|");const L=M[k];delete M[k];
   if(i<0||!Array.isArray(L))continue;const o=hObj(k.slice(0,i));if(!o)continue;const H=hMem(o,1);const a=k.slice(i+1);H[a]=(H[a]||[]).concat(L)}}
 function hMem(o,c){if(!o.mem||typeof o.mem!=="object"||Array.isArray(o.mem)){if(!c)return null;o.mem={}}return o.mem}
 function memArr(hk,ak,c){memMig();if(hk==="me"){const M=memS(),id="me|"+ak;if(!Array.isArray(M[id])){if(!c)return null;M[id]=[]}return M[id]}
@@ -137,7 +140,12 @@ function memFadeOne(hk,L){const C=B();const kg=memFadeK(hk,1),kb=memFadeK(hk,-1)
  return L.filter(m=>m.g>0)}
 /* fade once a month (every holder; deterministic, so host and guest of a co-op room fade the same) */
 function memFade(){if(off())return;memMig();const M=memS();if(M._mo===S.turn)return;M._mo=S.turn;
+ memDead();
  for(const [hk,H] of memHolders())for(const [a,L] of memPairs(hk,H)){if(!Array.isArray(L)){memSet(hk,a,[]);continue}memSet(hk,a,memFadeOne(hk,L))}}
+/* r1 (save stays bounded over a long life): a dead consort remembers nothing more (her .mem goes); the causes kept on her (what was done TO her,
+   evidence for later inquiries) shrink to the newest BAL.hook.czDeadMax */
+function memDead(){try{const C=BH();for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||v.coop||v.alive!==false)continue;if(v.mem)delete v.mem;
+  if(v.cz&&typeof v.cz==="object"){const ks=Object.keys(v.cz);if(ks.length>C.czDeadMax){ks.sort((a,b)=>(v.cz[b].w-v.cz[a].w)||((v.cz[b].q||0)-(v.cz[a].q||0)));for(const k of ks.slice(C.czDeadMax))delete v.cz[k]}}}}catch(e){}}
 /* "Nhắc lại ân xưa": spend a good memory → the person owes her one ân (j72 ledger) */
 function memInvoke(v){const C=B();const m=memTop(v,S,1);if(!m||m.g<C.invokeMin)return"";m.g=Math.max(0,m.g-C.invokeCost);
  let owe=false;try{if(typeof q72A==="function"&&typeof q72DebtAdd==="function"){const A=q72A("rv",v.id);if(A){q72DebtAdd(A,1);owe=true}}}catch(e){}
@@ -225,7 +233,7 @@ function causeWhy(b,t,s){b=mk(b);t=mk(t);s=s>0?1:-1;try{
  if(s>0)return tObj&&aff(v,T)>=BH().czClose?{k:"than"}:{k:"net",x:tr};
  if(v.slightAt!=null&&typeof bq==="function"&&bq()-v.slightAt<=BH().czRash)return{k:"nong"};
  if(!tObj)return{k:"net",x:tr};
- const g=T===S?(v.ghen||0):Math.max(0,((T.sung||0)-(v.sung||0))/3),oa=oan(v,T),ha=Math.max(0,-aff(v,T));const mx=Math.max(g,oa,ha);
+ const g=T===S?(v.ghen||0):Math.max(0,((T.sung||0)-(v.sung||0))/BH().czGhenDiv),oa=oan(v,T),ha=Math.max(0,-aff(v,T));const mx=Math.max(g,oa,ha);
  if(v.blamed&&v.blamed[key(T)]&&oa>=mx)return{k:"ngo"};
  if(traitsOf(v).includes("Tham vọng")&&rkOf(T)>rkOf(v)&&mx<BH().czTv)return{k:"tv"};
  if(mx<=0)return{k:"net",x:tr};return mx===g?{k:"ghen"}:mx===oa?{k:"oan"}:{k:"ghet"}}catch(e){return{k:"net",x:""}}}
