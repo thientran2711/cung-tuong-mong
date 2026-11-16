@@ -1,5 +1,5 @@
 /* night-steal frequency bot (review/night-steal). Real weekly loop (endTurn → resolveTonight → rivalsTurn → flip(+steal pass)).
- usage: node dev/test/night-steal-bot.js <index.html> <lives> <years> <out.json>   env SEED0, SUNG (her Sủng floor, default 25), K (BAL.steal.k override), CYASK=1 keeps the cycle question (default: off, so every flip resolves)
+ usage: node dev/test/night-steal-bot.js <index.html> <lives> <years> <out.json>   env SEED0, SUNG (her Sủng floor, default 25), K (BAL.steal.k override), CYASK=1 keeps the cycle question (default: off, so every flip resolves), DIFF=de|vua|kho sets the life difficulty (jdiff)
  Counts every Tranh sủng / Chặn ngự giá try made by an NPC (stealNight called by anyone but her), per flip night, split by target (her / NPC)
  and by the doer's first trait. Works on old builds too (flip-time steals counted the same way). */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
@@ -13,7 +13,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto('file://'+path.resolve(PAGE),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   if(process.env.K)await p.evaluate(`BAL.steal.k=${+process.env.K}`);
-  const part=await p.evaluate(([n,Y,SUNG,NOCY0])=>{const out=[];try{document.getElementById('title').hidden=true}catch(e){}window.render=function(){};if(!NOCY0&&typeof cyAsk==="function")cyAsk=function(){return false};
+  const part=await p.evaluate(([n,Y,SUNG,NOCY0,DIFF])=>{const out=[];try{document.getElementById('title').hidden=true}catch(e){}window.render=function(){};if(!NOCY0&&typeof cyAsk==="function")cyAsk=function(){return false};
    let L=null,inF=false;const T=(k,v=1)=>L[k]=(L[k]||0)+v;
    const sn=stealNight;stealNight=function(v,t,mode){const before=tonightOf();const r=sn.apply(this,arguments);
      if(v!==S&&inF&&r){const ok=tonightOf()===v&&before!==v;const tg=t===S?"me":"npc";const tr=(traitsOf(v)[0])||"?";
@@ -21,12 +21,12 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    const fl=flip;flip=function(){inF=true;let r;try{r=fl.apply(this,arguments)}finally{inF=false}try{if(!S.dead){T("weeks");const h=tonightOf();const d=S.nightWhy;
      const first=d&&d.wk===wk()?(d.flip0||d.pick):null;if(first||h){T("nights");for(const v of liveRivals(true)){const tr=(traitsOf(v)[0])||"?";L.ex=L.ex||{};L.ex[tr]=(L.ex[tr]||0)+1}if(first==="me"||(d&&d.pick==="me")||h===S)T("meNights")}}}catch(e){}return r};
    for(let l=0;l<n;l++){L={tr:{}};try{localStorage.clear()}catch(e){}
-    for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}Q.length=0;S.mg=0;
+    for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}if(DIFF&&typeof diffApply==="function"){S.diff=DIFF;diffApply()}Q.length=0;S.mg=0;
     for(let w=0;w<Y*36&&!S.dead;w++){
      S.sung=Math.max(S.sung,SUNG);S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,60);S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
      if(S.tonight==="me"){S.tonight=null;try{night(S)}catch(e){}}
      Q.length=0;S.mg=0;try{endTurn()}catch(e){out.push({err:String(e).slice(0,160)});break}Q.length=0;S.mg=0;T("rivN",liveRivals(true).length)}
     out.push(L)}
-   return out},[Math.min(CH,LIVES-done),YEARS,+process.env.SUNG||25,+process.env.CYASK||0]);
+   return out},[Math.min(CH,LIVES-done),YEARS,+process.env.SUNG||25,+process.env.CYASK||0,process.env.DIFF||""]);
   lives.push(...part);await ctx.close();console.error("lives",lives.length,Math.round((Date.now()-t0)/1000)+"s")}
  await b.close();fs.writeFileSync(OUT,JSON.stringify({env:{K:process.env.K,SUNG:process.env.SUNG},lives,errs:errs.slice(0,10)}))})().catch(e=>{console.error(e);process.exit(1)});
