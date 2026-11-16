@@ -98,7 +98,7 @@ function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m
     Bắt đầu = Chọn sổ), only its words say which way of playing it is; "Kiếp mới" stays beside it. */
  const k=m.querySelector(".kbtn.k1");if(k&&!k.dataset.solo){k.dataset.solo="1";const sm=k.querySelector("small");const was=k.firstChild&&k.firstChild.nodeType===3?k.firstChild.textContent.trim():"";
   const info=sm?sm.textContent:"";k.innerHTML=`Chơi một mình<small>${was==="Tiếp tục"?"Tiếp tục: "+esc(info):esc(info)}</small>`}
- const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.coop="co";b.innerHTML="Cùng hảo hữu<small>Mời hảo hữu · Nhập ám hiệu</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
+ const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.tgo="slots";b.dataset.cstab="coop";b.innerHTML="Cùng hảo hữu<small>Mời hảo hữu · Nhập ám hiệu</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
 new MutationObserver(addBtn).observe($("modal"),{childList:true,subtree:true});
 /* live updates while a lobby screen is up */
 COOP.on("status",s=>{if(!LM||Q[0]!==LM||T.hidden)return;if(PG==="wait"){const a=document.activeElement;open("wait");if(a&&a.dataset&&a.dataset.coop){const n=document.querySelector(`#modal [data-coop="${a.dataset.coop}"]`);if(n)n.focus({preventScroll:true})}}});

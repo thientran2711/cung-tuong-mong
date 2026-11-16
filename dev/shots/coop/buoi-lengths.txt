@@ -1,0 +1,1 @@
+buổi lengths (s): n=16 median=2 p90=15.6 max=23.8 timeouts=0

@@ -9,7 +9,7 @@
 ORIGINS.push({k:"cnv",n:"Cung nữ tuyển vào cung",r:0,o:{},hh:0,th:0,t:"Con nhà thường dân, qua kỳ tuyển cung nữ của Nội vụ phủ. Ngươi vào cung làm kẻ hầu, dưới cả Đáp ứng."});
 NAMES.tin="Chủ tin";NAMES.nt="Hoàng thượng để ý";
 RKEYS.push(["tin","Chủ tin"],["nt","Hoàng thượng để ý"]);
-Object.assign(HX,{tin:"Chủ tin: lòng tin của chủ nhân với ngươi (0-100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",nt:"Hoàng thượng để ý: ngài có nhớ mặt ngươi không. Từ 45 trở lên, mỗi lần để ý ngươi ngài hỏi tên và phong Đáp ứng (càng cao càng dễ).",srk:"Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô. Bậc cao nhất tùy phẩm của chủ.",merit:"Công lao: làm việc, được chủ tiến cử. Đủ thì cuối tháng Nội vụ phủ thăng bậc (cần Chủ tin 35).",wage:"Lương tháng theo bậc cung nữ.",age:"Cung nữ được xuất cung năm 25 tuổi. Chưởng sự được ở lại làm ma ma.",lau:"Tân Giả khố: giặt đồ chịu phạt. Hết hạn thì Nội vụ phủ chia về hầu chủ mới.",sec:"Số chuyện mờ ám của chủ mà ngươi biết. Có thể mật báo để lấy thưởng, nhưng chủ biết thì nguy.",spy:"Ngươi nhận bạc làm tai mắt cho người khác."});
+Object.assign(HX,{tin:"Chủ tin: lòng tin của chủ nhân với ngươi (0-100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",nt:`Hoàng thượng để ý: ngài có nhớ mặt ngươi không. Từ ${BAL.ntRise.at} trở lên, mỗi lần để ý ngươi ngài hỏi tên và phong Đáp ứng (càng cao càng dễ).`,srk:"Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô. Bậc cao nhất tùy phẩm của chủ.",merit:"Công lao: làm việc, được chủ tiến cử. Đủ thì cuối tháng Nội vụ phủ thăng bậc (cần Chủ tin 35).",wage:"Lương tháng theo bậc cung nữ.",age:"Cung nữ được xuất cung năm 25 tuổi. Chưởng sự được ở lại làm ma ma.",lau:"Tân Giả khố: giặt đồ chịu phạt. Hết hạn thì Nội vụ phủ chia về hầu chủ mới.",sec:"Số chuyện mờ ám của chủ mà ngươi biết. Có thể mật báo để lấy thưởng, nhưng chủ biết thì nguy.",spy:"Ngươi nhận bạc làm tai mắt cho người khác."});
 Object.assign(HXN,{tin:"Chủ tin",nt:"Để ý"});
 STORY.cnv={t:"Từ cung nữ lên phi tần",n:3,goal:"Ngươi vào cung làm cung nữ. Được Hoàng thượng để mắt mà phong Đáp ứng, rồi leo lên Tần.",init(){},
  hint:()=>["Được Hoàng thượng để mắt, phong Đáp ứng","Lên Thường tại","Lên Tần"][S.st.step]||"",
@@ -130,7 +130,7 @@ function srvErrandDone(){const sn=S.srv.sent;if(!sn||sn.done)return"";sn.done=1;
  return r}
 function srvNotice(src,gain){if(!S||(S.age||0)<18)return;const g=gain||(6+Math.round(S.sac/12));S.nt=cl(S.nt+g+Math.round(S.sac/20),0,100);const m=srvM();
  if(m&&roll(30+(m.malice||40)/3)){const d=m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4;apply({tin:-d});log(`<span class="r">${m.name} thấy Hoàng thượng nhìn ngươi, sa sầm nét mặt.</span> Chủ tin -${d}.`)}
- if(S.nt>=45&&roll(S.nt/2-10))pushDil(mkP("cnvName",{src}),"Hoàng thượng hỏi tên")}
+ if(S.nt>=BAL.ntRise.at&&roll(ntRiseOdds()))pushDil(mkP("cnvName",{src}),"Hoàng thượng hỏi tên")}
 
 /* ---------- the day's cards (Việc) ---------- */
 function srvErrPick(){const m=srvM();const L=[{k:"tyv",n:"Sang Thái y viện lấy thuốc cho chủ"},{k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"},{k:"thu",n:`Mang canh sang Cần Chính điện dâng thay ${m.name}`}];
@@ -319,7 +319,7 @@ function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("s
 function srvHud2(){const el=$("hud2");if(!el)return;const col=el.classList.contains("col");const m=srvM();
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date","srk"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
  el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở rộng":"Thu gọn"}">${col?"▾":"▴"}</button>`+c("date",`T${S.month}/${S.year} · ${TUAN[S.tuan]}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${4-used} khắc`)+c("srk",srvRkN(),"",S.srv.lau>0?"hot":"")
-  +c("tin","Chủ tin",S.tin,S.tin<30?"hot":S.tin>=60?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=45?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
+  +c("tin","Chủ tin",S.tin,S.tin<30?"hot":S.tin>=60?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=BAL.ntRise.at?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
   +c("merit","Công lao",`${Math.floor(S.srv.mp)}/${(S.srv.rk+1)*5}`)+c("wage","Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc`)+c("age","Tuổi",`${S.age} · xuất cung ${S.srv.mama?45:25}`)
   +(S.srv.lau>0?c("lau","Tân Giả khố",`${S.srv.lau} tuần`,"hot"):"")+(S.srv.sec?c("sec","Biết chuyện của chủ",S.srv.sec,"hot"):"")+(S.srv.spyFor!=null?c("spy","Tai mắt cho người khác","","hot"):"")+(m?c("mis",`Chủ: ${m.name}`,m.trait):"")}
 (function(){const r0=render;render=function(){if(isSrv()&&!(tab in SRVTABS))tab="act";const r=r0.apply(this,arguments);try{srvTabs();if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
@@ -334,7 +334,7 @@ function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf
  return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<30?"r":S.tin>=60?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
 function srvRows(){const m=srvM();const need=(S.srv.rk+1)*5,mx=srvMax();const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
-  row("Hoàng thượng để ý",`${S.nt}/100 · từ 45, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(Math.max(0,S.nt/2-10))}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
+  row("Hoàng thượng để ý",`${S.nt}/100 · từ ${BAL.ntRise.at}, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(ntRiseOdds())}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
   row("Xuất cung",S.srv.mama?"ma ma: ở đến 45 tuổi":`${S.age}/25 tuổi${S.srv.rk>=3?" · chưởng sự được ở lại làm ma ma":""}`),
   row("Đường xuống",`Chủ tin ${S.tin}: dưới 10 dễ bị đày Tân Giả khố`),row("Biết chuyện của chủ",`${S.srv.sec}${S.srv.betray?" · đã mật báo, chủ biết thì nguy":""}`),
   row("Bạn trong cung",`${srvFriendList().length} người (quý ngươi từ 30)`)].concat(S.srv.spyFor!=null&&RV(S.srv.spyFor)?[row("Tai mắt cho",RV(S.srv.spyFor).name)]:[])}
