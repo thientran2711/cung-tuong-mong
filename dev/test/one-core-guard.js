@@ -92,7 +92,18 @@ for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');let m;con
  while((m=re.exec(src))){const ln=src.slice(0,m.index).split('\n').length;for(const k of objKeys(src,m.index+m[0].length-1))(sets[k]=sets[k]||[]).push(f+':'+ln)}
  for(const t of lex(src))if(t.t==='code'){const r2=/(?<![\w$.])BAL\.([A-Za-z_$][\w$]*)\s*=(?!=)/g;while((m=r2.exec(t.s))){(sets[m[1]]=sets[m[1]]||[]).push(f+':'+(t.line+t.s.slice(0,m.index).split('\n').length-1))}}}
 for(const k in sets)if(sets[k].length>1)fail.push(`BAL.${k} is set ${sets[k].length} times (${sets[k].join(', ')}): one rule, one value`);
+/* the same for every other knob table (const NAME={…} in one module, Object.assign(NAME,{…}) in another: J70CFG, FAIRN, WD …) */
+const tset={};
+for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');let m;const re=/(?:const ([A-Z][A-Z0-9_]{1,})\s*=\s*(?:window\.[A-Z0-9_]+\s*=\s*)?\{|Object\.assign\(([A-Z][A-Z0-9_]{1,}),\s*\{)/g;
+ while((m=re.exec(src))){const name=m[1]||m[2];if(name==='BAL'||/^(KIT_GLOSS|HX|HXN|TELLS|ITIMG|FPOOL|PORK|TOK67|KG82_KIND|KG82_ENG|PCOL|ITEM_ART_G|WILL|PD_END|CW|VIB|ARC67|STORY|GB67|FEST)$/.test(name))continue;
+  const ln=src.slice(0,m.index).split('\n').length;const body=src.slice(m.index+m[0].length-1,m.index+m[0].length+4000);
+  for(const k of objKeys(src,m.index+m[0].length-1)){const v=(body.match(new RegExp('[{,]\\s*'+k.replace('$','\\$')+'\\s*:\\s*([^,}]{1,40})'))||[])[1]||'';
+   if(!/^\s*(?:[-+.]?\d|\[\s*[-+.\d])/.test(v))continue;/* only numbers (a rule), not labels or state */const id=name+'.'+k;(tset[id]=tset[id]||[]).push(f+':'+ln)}}}
+for(const id in tset)if(tset[id].length>1&&new Set(tset[id]).size>1)fail.push(`${id} is set ${tset[id].length} times (${tset[id].join(', ')}): one rule, one value`);
 
+/* item prices: BAL.priceTier (jecon) is written over IT[k].pr at load; the item table must not type a different price */
+try{const tier=Function('return '+fs.readFileSync(path.join(B,'jecon.js'),'utf8').match(/priceTier:(\{[^}]*\})/)[1])();const s8=fs.readFileSync(path.join(B,'j8.js'),'utf8');
+ for(const k in tier){const m=s8.match(new RegExp('\\b'+k+'\\s*:\\s*\\{[^}]{0,400}?\\bpr\\s*:\\s*(\\d+)'));if(m&&+m[1]!==tier[k])fail.push(`IT.${k}.pr typed ${m[1]} in j8 but BAL.priceTier.${k} = ${tier[k]}: one price`)}}catch(e){fail.push('priceTier check: '+e.message)}
 /* 4. ratchet against the frozen list */
 const base=fs.existsSync(BASE)?JSON.parse(fs.readFileSync(BASE,'utf8')):null;
 const total=o=>{let n=0;for(const f in o)for(const k in o[f])for(const s in o[f][k])n+=o[f][k][s];return n};

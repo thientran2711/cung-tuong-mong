@@ -128,7 +128,8 @@ PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jb
 /* knobs for the balance pass: eff = how often NPCs work for Sủng (×), custom = % mùng 1 / rằm to the Hoàng hậu, fav = nights in 6 that make độc sủng */
 /* sat = the Emperor wants a change of face: each night a consort already had in the last 6 tuần beyond the first lowers her chance of the tablet by sat (×, floor satMin) and
    her chance to lure him away (Tranh sủng / Chặn ngự giá) by satO points; the same for every consort, shown as a reason in nightWhy */
-const FAIRN=window.FAIRN={eff:1,custom:[40,20],fav:4,sat:0,satMin:.35,satO:0};
+/* sat .2 / satO 8 = the measured balance values (BALANCE_REPORT 11/14); one-core: they were 0 / 0 here and set again in jbal2 */
+const FAIRN=window.FAIRN={eff:1,custom:[40,20],fav:4,sat:.2,satMin:.35,satO:8};
 const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */

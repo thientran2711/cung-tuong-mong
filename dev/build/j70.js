@@ -7,7 +7,8 @@
    detection; execution reuses the existing acts (ACT/runAct/mindRun), evidence (evA/evG), caught/punish/accuse.
    Wraps only (mindTell, jointScheme, doAct, goTo, endTurn); edits no other module. Off switch: window.__j70off=1.
    True information only reaches her: what she is told is what really happens (NPCs may still blame the wrong person). */
-const J70CFG={cap:4,capMe:2,capOwn:2,mot:1.5,prep:0,npcSeen:.55,cool:2,waitMax:3};
+/* mot 3 / prep 10 = the measured balance values (BALANCE_REPORT 11/14); one-core: they were 1.5 / 0 here and set again in jbal2 */
+const J70CFG={cap:4,capMe:2,capOwn:2,mot:3,prep:10,npcSeen:.55,cool:2,waitMax:3};
 const G70=t=>`<span class="g">${t}</span>`,R70=t=>`<span class="r">${t}</span>`;
 function j70(){if(!S)return null;const z=S.j70=S.j70||{};z.pl=z.pl||[];z.n=z.n||0;z.sh=z.sh||[];z.done=z.done||0;z.types=z.types||{};return z}
 function j70On(){return !!(S&&!S.dead&&!S.out&&!window.__j70off&&!(typeof isSrv==="function"&&isSrv()))}

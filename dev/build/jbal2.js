@@ -38,9 +38,8 @@ Object.assign(BAL,{accCdT:36});
  A.ok=function(a,t){if(cd(t))return false;return ok0.apply(this,arguments)};
  A.f=function(a,t){if(a!==S&&cd(t))return "";try{if(t)t.accT=wk()}catch(e){}return f0.apply(this,arguments)}}catch(e){}})();
 /* measured knobs of other modules (balance pass 11/14, see dev/measure/BALANCE_REPORT.md): scheme motive x3 and a prepared blow +10 (j70),
-   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort. */
-try{Object.assign(J70CFG,{mot:3,prep:10})}catch(e){}
-try{Object.assign(FAIRN,{sat:.2,satO:8})}catch(e){}
+   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort.
+   One-core: those values now sit once in J70CFG (j70) and FAIRN (j75); nothing sets them a second time here. */
 /* 8 bottom tabs (owner's choice): j72's "Việc nhờ" tab (data-tab q72) is a sub-tab of Mệnh truyện, not a 9th tab */
 try{if(typeof KG==="object"&&KG.mt&&!KG.mt.keys.includes("q72"))KG.mt.keys.splice(1,0,"q72");if(typeof kgBar==="function")kgBar()}catch(e){}
 /* balance 11/14 (late): death stays a real risk for a careful player too. Same rules for every woman in the palace, her and every NPC.
