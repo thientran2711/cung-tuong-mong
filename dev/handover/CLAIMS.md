@@ -219,7 +219,7 @@
 | D13 spread-events-r2 reviewer (opus) | review/spread-events-r3 | B | session_01N1tNP3wvFLuxbHBhMw3hMx | RUNNING | 16/11 14:05Z |
 | mg-balance-2 reviewer (opus) | review/mg-balance-2-r1 | B | session_01N1tNP6z6YihnVHKFcdrurC | RUNNING | 16/11 14:10Z |
 | title-tag-r1 review (rank-bright 9043c173 + title-tag 0dc3afa8) | review/title-tag-r1 | main s17 | session_01UV1SzmFFVNQ3K1RGgtZK3p | RUNNING | 16/11 14:12Z |
-| mem-upgrade review | review/mem-upgrade-r1 | D | session_01DgYSWot4sNs4TrG8fUm2of | RUNNING | 16/11 14:15Z |
+| mem-upgrade review | review/mem-upgrade-r1 | D | session_01DgYSWot4sNs4TrG8fUm2of | PASS 64b40270 | 16/11 14:29Z |
 | tut-place: UI bug tour step 5 card covers tap target on Fold + 1180 Tài nghệ tip (from test-drift-r2 FAIL) | review/tut-place | main s17 | session_01UV1SzkUFJmikqECkuFxtPn (sonnet) | RUNNING | 16/11 14:14Z |
 | D25 veil-zoom-r2 reviewer (sonnet) | review/veil-zoom-r3 | B | session_01N1tNP3cFohaMXQ97kod8mh | RUNNING | 16/11 14:16Z |
 | night-time analysis (opus): 3 flips/month vs 12 consorts — options + numbers + impact (report only) | (report only) | main s17 | session_01UV1SzhuYF9iVGubAH5xsE6 (opus) | RUNNING | 16/11 14:20Z |
