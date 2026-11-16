@@ -715,7 +715,7 @@ window.kitDialogOpen=kitDialogOpen;
    Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
    child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
    takes the compact form — ONE CSS rule set, no other markup:
-   - LEFT: the same act picture as a SMALL SQUARE thumbnail (84 px; 72 px under 420 px), cover-cropped, 2 px border in its category colour
+   - LEFT: the same act picture as a SMALL PORTRAIT RECTANGLE 3:4 (84x112 px; 72x96 under 420 px; owner 16/11, was a square), cover-cropped, 2 px border in its category colour
      (`--kcc0`); the frame ornaments / category ribbon of the big slot are hidden (the card keeps its 4 px category edge).
    - RIGHT (≥ 60 % of the card): title row = title + odds ladder on ONE line (the title may wrap, the odds never); a ONE-line description
      (full text on hover / long-press title); the Cần / Tốn / Được / Mất / Kèm rows as compact label + value chips that wrap as WHOLE chips.
@@ -736,14 +736,39 @@ window.kitActCompactOn=kitActCompactOn;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
   const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+/* ================= KIT 43.1 · small act card: tap the picture = big picture + more info; "!" on cards without an odds label (owner 16/11, review/actcard-small) =================
+   Owner: keep the big Hành sự card; the SMALL card (kpane form above) has a 3:4 portrait picture. Tap the picture (or the "!" mark of a card
+   that has no odds label) → kitActZoom: the picture large + full description + the Cần/Tốn/Được rows (+ "Vì sao <bậc>?" when the card has odds).
+   Tapping the odds label itself keeps opening the why popover (jwhy). Option cards (.kopt, review/opt-pics) are not touched here. */
+function kitActZoom(b){try{const im=b.querySelector(":scope > .kaart img");const src=im?im.getAttribute("src"):"";const kan=b.querySelector(".kan");const ttl=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
+ const lead=b.querySelector(".klead");const kb=b.querySelector("small.kb");const od=b.querySelector(".kodm");let why="";
+ if(od&&typeof kitWhyHtml==="function"){try{why=kitWhyHtml(b,+od.dataset.kodds)||""}catch(e){}}
+ let z=document.getElementById("kazoom");if(!z){z=document.createElement("div");z.id="kazoom";z.setAttribute("role","dialog");document.body.appendChild(z);z.addEventListener("click",()=>{z.hidden=true})}
+ z.innerHTML=`<div class="kazbox">${src?`<img class="kazimg" src="${src}" alt="">`:""}<div class="kazinfo"><div class="kazt">${ttl}</div>${od?`<div class="kazo">${od.outerHTML}</div>`:""}${lead?`<div class="kazd">${lead.textContent}</div>`:""}${kb?`<div class="kazb">${kb.outerHTML}</div>`:""}${why?`<div class="kazw">${why}</div>`:""}</div></div>`;
+ z.hidden=false}catch(e){console.error(e)}}
+window.kitActZoom=kitActZoom;
+function kitActInfoMark(root){try{(root||document).querySelectorAll(".pc>.pcr button.ka.kart:not(.kopt), .kpanec button.ka.kart:not(.kopt)").forEach(b=>{const kat=b.querySelector(".kat");if(!kat)return;
+  const has=!!b.querySelector(".kodm");let m=kat.querySelector(":scope > .kainfo");if(has){if(m)m.remove();return}if(!m){m=document.createElement("span");m.className="kainfo";m.textContent="!";m.title="Xem thêm";m.setAttribute("role","button");kat.appendChild(m)}})}catch(e){}}
+window.kitActInfoMark=kitActInfoMark;
+window.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;const hit=t.closest(".pc>.pcr button.ka.kart:not(.kopt) > .kaart, .kpanec button.ka.kart:not(.kopt) > .kaart, button.ka.kart:not(.kopt) .kainfo");if(!hit)return;
+ const b=hit.closest("button.ka");if(!b||!b.closest(".pc>.pcr, .kpanec"))return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitActZoom(b)}catch(x){}},true);
+(function(){const k0=kitActCompactOn;kitActCompactOn=function(root){const r=k0.apply(this,arguments);try{kitActInfoMark(root)}catch(e){}return r};window.kitActCompactOn=kitActCompactOn})();
+(function(){const st=document.createElement("style");st.id="kit-act-zoom";st.textContent=`
+#kazoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;padding:14px;cursor:zoom-out}#kazoom[hidden]{display:none}
+.kazbox{display:flex;gap:14px;max-width:min(94vw,760px);max-height:92vh;overflow:auto;background:#f6ecd6;border:2px solid #8a6a32;border-radius:10px;padding:12px;align-items:flex-start}
+.kazimg{background:#efe4cc;flex:0 0 auto;height:min(78vh,520px);max-width:46vw;aspect-ratio:3/4;object-fit:cover;border-radius:6px;box-shadow:0 0 0 2px #b08a4a}
+.kazinfo{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:8px;color:#3a2412}.kazt{font:700 1.05rem/1.25 var(--display,serif)}.kazd{font-size:.9rem;line-height:1.45}
+@media (max-width:520px){.kazbox{flex-direction:column;align-items:center}.kazimg{height:auto;width:min(70vw,300px);max-width:none}}
+button.ka.kart .kainfo{flex:0 0 auto;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#8a6a32;color:#fff8e6;font:700 .78rem/1 var(--display,serif);cursor:pointer}
+`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
  .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
- button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
- button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ button.ka.kart{--kaw:84px!important;--kah:112px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:112px!important;aspect-ratio:3/4!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
  button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
  button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
  button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
@@ -761,7 +786,7 @@ button.ka.kanoart>.kaart{display:none!important}
  button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
 }
 @container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:72px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+ button.ka.kart{--kaw:72px!important;--kah:96px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
