@@ -11,3 +11,9 @@ Preconditions checked: mortality-r1 live (main b85cdb1e, jmort), cycle-r3 live (
 - Bot dev/measure/preg-bots.js (real weekly endTurn loop, seeded), test dev/test/preg-rate.js.
 
 ## Results: see dev/handover/reports/preg-rate.md (handover branch). Peak NOT trimmed (NPC births ≈ 0.10 per consort-year).
+
+## Review r1 (review/preg-rate-r1, reviewer session_01DgYSWobwX8ehBC7umUckXK) — PASS
+- Merged onto main e9c6021d (jbal conflict: kept main's birthAdd:2 from balance-pass-r1 + conc:.5).
+- Fix: three conception rolls bypassed conceiveCh — her "Hẹn gặp riêng" tryst (card showed conceiveCh, rolled a typed 15), an NPC consort's affair month (typed roll 5), and jroute Tư thông (typed clamp 5..60). Now one function trystCh(p) (jbal; jcycle applies BAL.trystC bounds to the raw chance, then the cycle factor). Check added to dev/test/preg-rate.js.
+- Left alone (not a consort night, no cycle): servant-mode tryst j42 roll(10)/chanceW(10) — typed number, pre-existing; follow-up for the BAL one-core audit.
+- Sims re-run (30 lives Sủng≥25, 15 lives Sủng≥60, 10 years): NPC births/consort-year 0.06→0.10 and 0.07→0.08; palace children after 10 y 6.2→9.5, 8.3→8.9; NPC-son heir 21/30→25/30. Peak not trimmed.
