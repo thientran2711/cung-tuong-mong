@@ -887,11 +887,16 @@ addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
  const sub=P.querySelector(".ksub");const subOn=!!(sub&&sub.offsetParent);
+ /* KIT 45.2 (owner 16/11 "Mất chữ", review/hc-portrait-r1): since KIT §45 the sub-tabs sit INSIDE the pane bar (.kpbar: + its bottom padding,
+    hair line and the kit gap under it), so the sticky edge is the BAR's bottom + its gap, not the .ksub row's bottom — measuring the row
+    scrolled the face strip 17 px under the bar (palace labels cut in half under Chí tôn / Phi tần / Nam nhân / Cung nhân) */
+ const kbar=P.querySelector(":scope>.kpbar"),kbarOn=!!(kbar&&kbar.offsetParent);const kbarGap=()=>kbarOn?parseFloat(getComputedStyle(kbar).marginBottom)||0:0;
+ const subH=kbarOn?kbar.offsetHeight+kbarGap():subOn?sub.offsetHeight:0;
  P.querySelectorAll(".pc[data-k2]").forEach(pc=>{const pr=P.getBoundingClientRect();const bt=parseFloat(cs.borderTopWidth||0),bb=parseFloat(cs.borderBottomWidth||0);
   /* the sub-tab bar is sticky at the same place it rests (first child): the card's room is from its bottom to the panel's inner bottom */
   /* T = whatever follows the card inside the panel (wrapper padding): the card's room shrinks by it so the card can sit flush under the bar */
   let T=0;{let e=pc;while(e&&e!==P){let n=e.nextElementSibling;while(n){if(n.offsetParent)T+=n.getBoundingClientRect().height;n=n.nextElementSibling}const ps=e.parentElement;if(ps&&ps!==P){const c2=getComputedStyle(ps);T+=parseFloat(c2.paddingBottom||0)+parseFloat(c2.borderBottomWidth||0)}e=ps}}
-  const full=Math.floor((pr.bottom-bb)-(subOn?(pr.top+bt+pt+sub.offsetHeight):(pr.top+bt+pt))-T);
+  const full=Math.floor((pr.bottom-bb)-(pr.top+bt+pt+subH)-T);
   /* portrait screens under 1000 px (Fold, phones): the card takes the WHOLE panel under the sticky sub-tabs and the panel scrolls the
      face strip up out of the way, so the header + at least one whole act card are in view; wide screens keep strip + card together */
   const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;
@@ -901,7 +906,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
   pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);
   const nm=(pc.querySelector(".pcname")||{}).textContent||"";if(P.__kpcN!==nm||narrow||!P.__kpcUser){const fresh=P.__kpcN!==nm;P.__kpcN=nm;if(!fresh&&P.__kpcUser)return;const fit=()=>{try{const q=P.querySelector(".pc[data-k2]");if(!q)return;const a=P.getBoundingClientRect(),c=q.getBoundingClientRect();const sub2=P.querySelector(".ksub");
-   const sb=sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
+   const kb2=P.querySelector(":scope>.kpbar");const sb=kb2&&kb2.offsetParent?kb2.getBoundingClientRect().bottom+(parseFloat(getComputedStyle(kb2).marginBottom)||0):sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
    if(narrow){const st2=P.querySelector(".pstrip");const tgt=st2&&st2.offsetParent?st2.getBoundingClientRect().top:c.top;const d=tgt-sb;if(Math.abs(d)>1)P.scrollTop+=d}
    else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb;
    /* KIT 45.1 (review/small-bugs-3): a face strip is never left HALF under the pane bar (its palace labels clipped, frames cut): when the scroll
