@@ -47,7 +47,8 @@ Base main at start: 900ace7fb.
 | D29 schedules/roster re-port | review/schedules3 @10517412e (85%: ported, merged-build re-runs left) | opus | RUNNING (finishing session session_011xDdVRcAbEJXh2PekTYPF4) |
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |
 | D20 weather redo with §68 | — | — | NOT TAKEN: session 8 runs review/weather-fx-one (claimed) — D20 folded into it unless the coordinator says otherwise |
-| D-list rest (D3, D9, D11–D14, D19, D25, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D25 veil/scar box follows the jkpor portrait zoom | review/veil-zoom | sonnet | RUNNING (separate session) |
+| D-list rest (D3, D9, D11–D14, D19, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -179,6 +180,6 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 
 - (16/11 06:36Z) INBOX from main s10: act-dedupe live; reports/act-dedupe.md item (4): place glyphs missing for 12 places (Kính sự phòng, Lãnh cung, consort palaces, Dãy nhà cung nhân, Tân Giả khố, Thượng thư phòng, A ca sở, Đông cung) + Nội vụ phủ scene (D56 art, moved to C).
 
-- (16/11 06:50Z) ORDER from main s10 (owner asked why no art yet): START THE ART NOW, each as its own session, claim first: (1) foreign-princess SAMPLE sheet (owner waiting, OD L1209–1212), (2) C3 art-complete part 2, (3) D51 fxkit sprites, (4) D54 buổi paintings, (5) D56 icons + Nội vụ phủ art + the 12 missing place glyphs (act-dedupe), (6) fig-hd-upscale + face-sharp-hd2. Run as many in parallel as Magnific credit allows; then the queued D-list rest (D3, D9, D11–D14, D19, D25, D44). C8 fig-bg kit sign-off: main opened a kit-keeper session.
+- (16/11 06:50Z) ORDER from main s10 (owner asked why no art yet): START THE ART NOW, each as its own session, claim first: (1) foreign-princess SAMPLE sheet (owner waiting, OD L1209–1212), (2) C3 art-complete part 2, (3) D51 fxkit sprites, (4) D54 buổi paintings, (5) D56 icons + Nội vụ phủ art + the 12 missing place glyphs (act-dedupe), (6) fig-hd-upscale + face-sharp-hd2. Run as many in parallel as Magnific credit allows; then the queued D-list rest (D3, D9, D11–D14, D19, D44). C8 fig-bg kit sign-off: main opened a kit-keeper session.
 
-- (16/11 06:55Z) ORDER from main s10 — CANCELS the 06:50Z art order: owner rule, ALL picture-making (foreign-princess samples, C3, D51, D54, D56, place glyphs, fig-hd-upscale, face-sharp-hd2) is now run by the MAIN chat. Do NOT open art sessions. Keep the non-art D-list (D3, D9, D11–D14, D19, D25, D44) and reviews.
+- (16/11 06:55Z) ORDER from main s10 — CANCELS the 06:50Z art order: owner rule, ALL picture-making (foreign-princess samples, C3, D51, D54, D56, place glyphs, fig-hd-upscale, face-sharp-hd2) is now run by the MAIN chat. Do NOT open art sessions. Keep the non-art D-list (D3, D9, D11–D14, D19, D44) and reviews.

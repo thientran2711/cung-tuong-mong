@@ -49,3 +49,4 @@
 | kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | session_01UV1Szj1bf6YFPCryaDjdEi | RUNNING | 16/11 06:50Z |
 | ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | RUNNING | 16/11 06:55Z |
 | ART D56 icons + Nội vụ phủ scene + 12 missing place glyphs | review/place-glyphs | main s10 | session_01UV1SzmEsuu42GCFecC9HGf | RUNNING | 16/11 06:55Z |
+| D25 veil/scar box follows zoom | review/veil-zoom | C | (session id below) | RUNNING | 06:08Z 16/11 |
