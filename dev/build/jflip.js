@@ -31,8 +31,8 @@ Object.assign(BAL,{cardFlip:{
  /* two plate pairs (owner 21:45Z: landscape AND portrait screens): l = 1600x1200 (4:3), p = 1200x1600 (3:4). Per picture: the tray floor
     (yellow silk, measured from the pixels) and the tray's outer rim (the safe zone that must stay on screen); the plate box is fitted to the
     rim and the card slots are computed from the same box, so cards sit on the floor at every aspect. A ≠ B floor → the cards glide to B's. */
- plates:{l:{ar:4/3,a:"cf-plate-ksp",b:"cf-plate-emp",fa:{x0:.177,y0:.252,x1:.821,y1:.691},fb:{x0:.177,y0:.251,x1:.821,y1:.690},rim:{x0:.095,y0:.175,x1:.905,y1:.775}},
-         p:{ar:3/4,a:"cf-plate-ksp-p",b:"cf-plate-emp-p",fa:{x0:.126,y0:.322,x1:.872,y1:.639},fb:{x0:.122,y0:.309,x1:.877,y1:.646},rim:{x0:.023,y0:.262,x1:.977,y1:.71}}},
+ plates:{l:{ar:4/3,a:"cf-gplate-ksp",b:"cf-gplate-emp",fa:{x0:.125,y0:.235,x1:.875,y1:.700},fb:{x0:.125,y0:.235,x1:.875,y1:.700},rim:{x0:.055,y0:.150,x1:.945,y1:.790}},
+         p:{ar:3/4,a:"cf-gplate-ksp-p",b:"cf-gplate-emp-p",fa:{x0:.105,y0:.272,x1:.890,y1:.695},fb:{x0:.105,y0:.300,x1:.892,y1:.655},rim:{x0:.02,y0:.21,x1:.98,y1:.75}}},
  portraitBelow:.95, /* screen w/h below this uses the portrait pair */
  /* the painted hand: pinch point (fraction of the sprite), sprite height in card heights */
  hand:{px:.70,py:.905,h:2.7},
@@ -53,7 +53,7 @@ function known(p){try{return typeof kitKnownName==="function"?kitKnownName(p):tr
 function rankName(p){const r=rk(p);return r>=7?"Hoàng hậu":(RANKS[Math.max(0,r)]||{}).n||""}
 function nameOf(p){return p===S?S.name:known(p)?p.name||"":"???"}
 function tagOf(p,w){try{const r=rk(p),col=typeof kitRankCol==='function'?kitRankCol(r):'#7a5530',rn=rankName(p),nm=nameOf(p),me=p===S;
-  return `<div class="krs kcf-tag">${kitNameRank(esc(rn),esc(nm),col,me,w<112)}</div><div class="krs kcf-tag kcf-tag-l">${kitNameRank(esc(rn),esc(nm),col,me,false)}</div>`}catch(e){return""}}
+  return `<div class="kcf-tag">${kitNameRank(esc(rn),esc(nm),col,me,w<112)}</div><div class="kcf-tag kcf-tag-l">${kitNameRank(esc(rn),esc(nm),col,me,false)}</div>`}catch(e){return""}}
 function face(p){try{return mdH(p===S?pMe():pv(p),"big")}catch(e){return""}}
 
 /* ---------- the deck: what SHE sees tonight (j75 S.nightWhy rows; + the co-op friend) ---------- */
@@ -205,7 +205,7 @@ if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */
-window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];for(let i=0;i<n;i++){const p=L[i%L.length];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
+window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];n=Math.min(n,L.length);/* one card per person, never a duplicate or a fake extra */for(let i=0;i<n;i++){const p=L[i];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
  const tid=who==="me"?"me":who==null?null:"x"+who;if(tid&&tid!=="me")deck.forEach(c=>{if(c.id===tid)c.bar=false});
  const plan={pick:tid,turned:tid,cause:"tablet"};const tp=tid==="me"?S:tid?deck.find(c=>c.id===tid).p:null;
  const rh=!tp?`<div class="kmres"><div><b>Đêm nay Hoàng thượng không lật thẻ bài nào.</b></div></div>`:tid==="me"?`<div class="kmres">${face(S)}<div><b>Đêm nay ngươi được thị tẩm.</b><small>Thẻ bài của ngươi được lật.</small></div></div>`:`<div class="kmres">${face(tp)}<div><b>Tối nay: ${esc(rankName(tp))} ${esc(nameOf(tp))}</b><small>được chọn hầu đêm nay.</small></div></div>`;
@@ -229,7 +229,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-cards{position:absolute;inset:0}
 /* every card state uses the SAME filter chain (grayscale sepia saturate brightness drop-shadow) so states interpolate smoothly and stay compositor-friendly */
 .kcf-c{container-type:inline-size}
-/* name tag under EVERY card (owner 16/11 14:00Z: rank + name, no title): the kit kitNameRank on the painted tray (.krs = the kit's painting hook: rank in its rank colour, name with the light halo, HER name the gold glow, KIT 48.1) */
+/* name tag under EVERY card (owner 16/11 14:00Z: rank + name, no title): the kit kitNameRank (KIT 48): rank in its jewel rank colour over the name, plain vivid text, no glow (the tray floor is a pale silk surface, = paper rule 48.1h) */
 .kcf-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);width:max-content;max-width:160cqw;margin-top:3px;pointer-events:none;text-align:center}
 .kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:74%;margin-top:0}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
 /* HER card on the tray (owner 16/11 14:05Z): a soft WHITE glow round the whole frame from the very start, so she knows her card at a glance; static (no running light, no motion), never over the portrait */
@@ -262,7 +262,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-pt{position:absolute;top:-8%;left:var(--x);width:calc(26px*var(--s));height:auto;opacity:0;animation:kcfFall calc(3.2s*var(--kcf-s,1)) linear var(--d) forwards}
 @keyframes kcfFall{0%{opacity:0;transform:translate(0,0) rotate(var(--r))}10%{opacity:.95}100%{opacity:0;transform:translate(var(--w),112vh) rotate(calc(var(--r) + 300deg))}}
 .kcf.kcf-fin .kcf-c,.kcf.kcf-fin .kcf-f{transition:none}
-.kcf-grey .kcf-tag,.kcf-dim .kcf-c:not(.kcf-pick) .kcf-tag{opacity:.45}
+.kcf-grey .kcf-tag,.kcf-dim .kcf-c:not(.kcf-pick) .kcf-tag{opacity:.72}
 .kcf.km-red *{animation:none!important;transition:none!important}
 .kcf.km-red .kcf-res{opacity:1}
 @media (max-height:500px){.kcf-cap{font-size:.92rem}.kcf-res{bottom:calc(max(6px,env(safe-area-inset-bottom)) + 16px)}.kcf-res .kmres{padding:4px 10px}}
