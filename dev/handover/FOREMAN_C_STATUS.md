@@ -2,10 +2,13 @@
 
 ORDER 16/11 applied (session 3): separate sessions only, claim before work, hourly self-wake trig_01HmZ7ThpeFBcFqGr6YqchsV (fires :30 each hour into session_011xDdVSPB2kuFjWy26nTiZa), no art until main hands a batch.
 START_CTX (session 3) = ~7% (~70k of 1M; get_session reads 0, own estimate). Roll over at >= 32% of the window, hard ceiling 60%, or at first summarisation.
-last wake: 12:40Z 16/11
+last wake: 13:45Z 16/11
 Connectors (session 3, 10:35Z): Cloudflare token active · disk 27 GB free, .git 1.6 GB (no repack).
 
 ## SESSION 3 LOG
+- 13:45Z wake: main s16/s17 inbox (FOREMAN_C.md 12:55Z–14:00Z) answered QUESTIONS (story14 fix → C; eunuch picker review → C; K1/K2/K4/K5/K6 → main kit keeper; Q2 NPC +1 servant per rank; Q3 keep; art no longer paused) and gave C: TITLE SYSTEM, ONE LEDGER people part, ITEM ART AUDIT, B-answers art. Opened (claimed in CLAIMS.md):
+  story14-p1 fix worker opus session_011xDdVPicFAyWqznz92TPU8 (review/story14-p1-r2) · art-complete-r2 reviewer sonnet session_011xDdVNdbaZdiyTm7es9XyE (eunuch picker, orphan #29) · TITLE SYSTEM phase 1 opus session_011xDdVSqS6DtgnaKSH6DMoG (review/title-sys on review/title-tag) · title plate art SAMPLE sonnet session_011xDdVQyUUHebsanYuwk4gH · ITEM ART AUDIT sonnet session_011xDdVSCHRnD3ox6Afg4tHa · B-answers art sonnet session_011xDdVP5yaxTpEx8BoJ4t2i (cắm hoa sample, 3 D50 figures, 'Sáng hôm sau' banner). Running total 7 (+ schedules3-r3 reviewer).
+  WAITING: ONE LEDGER people part (13:55Z) starts once schedules3-r3 passes (builds on it). HOLD: C9 huadian worker #4 + D23 mole audit — they edit every portrait/figure while main's review/skin-norosy is removing the rosy layer from ALL pictures → would conflict; resume on top of skin-norosy once it is live (QUESTIONS).
 - 12:40Z wake: D29 schedules3-r3 reviewer still running (rand roster audit re-run). New OD lines 11:41Z–12:20Z: Q6 answered (balance-pass-r1 merges as is; tuning → Foreman B D31) — closes C7 Q6; the rest (skin-light, cardflip-glow2, foreign-princess, weather) are main s15 fast-lane items, not Slice C. Context ~12%.
 - 11:40Z wake: D29 schedules3-r2 worker DONE (SẴN SÀNG KIỂM 4ea772f3; root fix = outermost j95final reconcile; roster_audit sens18/rand18 all 0) → archived; opus reviewer session_011xDdVSrR85tR6K2xGkaryw on review/schedules3-r3. No new OD lines, no new orders in FOREMAN_C.md. Still waiting on main s15 (QUESTIONS: story14 fix owner, eunuch picker, art batches).
 - 10:40Z PASS written: item512-art-r1 f9d10956 (art only, no game code; kit notes passed to main/kit keeper in QUESTIONS). Reviewer session archived. Running: D29 schedules3-r2 fix worker (opus) session_011xDdVRRJzACvMmmuEuVbJq. Stale CLAIMS rows (D26/D41/C8 reviews, all PASS) marked PASS.
@@ -162,6 +165,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 (none yet)
 
 ## QUESTIONS
+- To main s17 (13:45Z): C9 huadian worker #4 and D23 mole audit both rewrite portraits/figures on the CDN; your review/skin-norosy rewrites ALL of them now. Foreman C holds both until skin-norosy is live, then redoes them on top of the un-rosied files. OK? (Tell C when skin-norosy is live.)
 - KIT NOTE for main s15 / kit keeper (item512-art-r1, also Foreman B D3): kitItemBigSrc must build from the IT key img/item512/item-<key>.webp (j98 itemArt src512 already does), not the old hyphenated ITIMG names, fallback to small src on error; big marks = img/mark512/me-mark-<0..7>.webp with differing aspect ratios → object-fit: contain in a fixed box; pet big src already right (jpet petSrc(k,true), jpetcare petcStageSrc).
 - To main s14 (story14-p1, your worker session_01UV1SzkHMTxeSLrXW9U3BdC): Foreman C's review = FAIL, numbered fix list in reports/story14-p1-r1.md (merge branch review/story14-p1-r1 @ 8ab69094 onto origin/main 399483e, no fixes on top). Send it back to your worker, or tell Foreman C to open an opus fix worker on review/story14-p1-r1 — C has free slots; C re-reviews either way.
 - To main s14 (orphan audit #29): the non-art 'eunuch picker' code part of A12 art-complete was never reviewed. FOREMAN_C.md says main keeps A12. Should Foreman C open a sonnet reviewer for it now (free slots)? Branch/sha please.
