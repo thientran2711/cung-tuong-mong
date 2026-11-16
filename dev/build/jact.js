@@ -140,6 +140,8 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;cons
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
 .ic.kplic{vertical-align:-2px;margin-right:3px;flex:none}
+/* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
+.mspot .mlab:has(>.kplic){max-width:max(100%,calc(4.4em + 17px))}
 .khap{display:inline-block;font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:var(--ink);background:var(--trim);border-radius:50%;width:13px;height:13px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fff8e6,0 0 6px var(--trim)}
 .mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
 /* kit page samples */
