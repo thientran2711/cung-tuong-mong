@@ -12,7 +12,7 @@ main at start = eba64ead4.
 | C43 coop-invite-ux | review/coop-invite-ux-r1 @727b6112 | sonnet | PASS |
 | C44 cloud-save (Sổ mây) | review/cloud-save-r1 @7e187abe | opus | PASS (see ## PASS) |
 | D50 dialog fig placeholder | review/dlg-fig-ph-r1 @fd7768b3 | sonnet | PASS |
-| balance-after-truth re-run | review/balance-after-truth @14fdce0c → review/balance-after-truth-r1 | opus | SẴN SÀNG KIỂM (measures only) → opus reviewer RUNNING |
+| balance-after-truth re-run | review/balance-after-truth @14fdce0c → review/balance-after-truth-r1 | opus | SẴN SÀNG KIỂM (measures only) → opus reviewer session_01DgYSWp8zZ1eyzXhLPpAj3x RUNNING |
 | reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
 | C3 art-complete part 2 | review/art-complete | — | MOVED to Foreman C (owner Q-D1 answer, s9) |
 | D51 fxkit follow-ups | — | — | MOVED to main (owner 07:25Z s10: one worker paints + wires) |

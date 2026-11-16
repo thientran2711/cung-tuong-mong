@@ -77,4 +77,4 @@
 | D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | RUNNING | 07:06Z 16/11 |
 | cardflip-glow: reveal light on frame border, not over face; slower (owner bug) | review/cardflip-glow | main s11 | session_01UV1Szki5WiXQ1nthXM98EG (sonnet) | RUNNING | 16/11 07:12Z |
 | percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | RUNNING | 16/11 07:20Z |
-| balance-after-truth review | review/balance-after-truth-r1 | D | (opus reviewer session, id follows) | RUNNING | 16/11 07:17Z |
+| balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
