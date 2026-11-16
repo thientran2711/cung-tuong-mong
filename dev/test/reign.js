@@ -67,7 +67,7 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  /* 9. every Tâm nguyện line can be made from its person and runs to the end (each step closed ok → the chain queues the next) */
  r=await p.evaluate(()=>{Q.length=0;const out={};if(typeof qOn==='function'&&!qOn()){out.hh='no queen'}
   for(const k in RGL){S.rgL={};const q=q72();q.a=[];q.ch=[];const res=[];if(!rgLOk(k)){out[k]='n/a';continue}
-   for(let i=0;i<3;i++){const T=T72I[RGL[k].q[i]];const A=q72A(k);const x=A&&q72Make(T,A);if(!x){res.push('make'+i);break}q.a.push(x);
+   for(let i=0;i<3;i++){const T=T72I[RGL[k].q[i]];const A=rgLA(k);const x=A&&q72Make(T,A);if(!x){res.push('make'+i);break}q.a.push(x);
     const st=T.s[0];const why=st&&!st.w&&!st.ch?q72Why(x,q72X(x),st,null):'';q72End(x,'ok',q72X(x));res.push(i<2?(q.ch.some(c=>c.tid===RGL[k].q[i+1])?'ch':'noch'):'end');q.ch=[]}
    out[k]=res.join(',')+(S.rgL[k]&&S.rgL[k].done?' done':'')}
   return out});

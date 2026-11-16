@@ -32,10 +32,32 @@ consequences), every named character gets a side quest line (D5). Reuse: j55 cou
    No new kit part, no private CSS.
 
 ## Tests / measures
-- dev/test/reign.js <page> <WxH> [shots]: beat × side build audit (Bạc road audit), dialog title, kit hide, join, switch, panes,
-  line offer, outcome bands, save/load, old save, co-op guest. PASS 755x1000 and 1180x820.
+- dev/test/reign.js <page> <WxH> [shots]: beat × side build audit (300 dialogs, 48 Bạc options all with a non-Bạc road), dialog title,
+  kit hide, join, switch, panes, line offer, every Tâm nguyện line driven to the end, outcome bands, save/load, old save, co-op guest.
+  PASS 755x1000 and 1180x820.
 - dev/measure/reign.js <page> emp,th,quyen,ngoai,sw <seeds> [months]: full inpage6 bots, side policy.
-- dev/measure/rgfast.js <page> <sides> <lives> [months]: fast month-only Monte Carlo for BAL.rg tuning.
+- dev/measure/rgpure.js <page> <sides> <lives> [months] (MT=1 real monthTick) + rgsweep.sh: Monte Carlo for BAL.rg tuning;
+  rgsum.py summarises reign.js output.
+
+## Numbers (balance of the three sides; bots answer every rg dialog for their side, random option of that side, never a decline)
+- dev/measure/rgpure.js MT=1 (the game's real monthTick: court, Quốc sự, NPC months; her stats ramp to mid-game), 42 months:
+  | run | neutral outcome (emp/th/quyen) | Hoàng thượng side win | Thái hậu side win | quyền thần side win |
+  |---|---|---|---|---|
+  | MT3 (pk .38, pkQ 1.65, drift .65, catch-up) | 4 / 8 / 3 of 15 | 9/19 = 47 % | 11/18 = 61 % | 16/19 = 84 % |
+  | MT4 (pk .44, pkQ 1) | — | 12/23 = 52 % | — | 7/19 = 37 % |
+  | MT5 final (pk .46, pkQ 1.25) | — | (≈55 % by MT3+MT4) | (MT3) 61 % | 14/21 = 67 % |
+  Final BAL.rg: drift .65, A 48, B 60, pk .46, pkQ 1.25, thK .1, erP 30, catch-up 2 beats/month when ≥3 behind, outcome waits ≤3 months
+  for her Chương 6 Hồi 1. Neutral with these numbers (MT2/MT3, 32 lives with an outcome): emp 9 · th 15 · quyen 8.
+  Sample error at n≈20 is ±10 points: the three sides sit at ~55 / 61 / 67 % for a bot that always takes its side's option; the win
+  payoffs differ in kind (tấn phong / Thái hậu che chở + favour / Bạc + house), the risks too (Hoàng thượng side holds the most proof
+  against her: evOnMe 0.8–2.7 vs 0.3–0.7).
+  Lives with no outcome by month 42 (dead / lãnh cung) are left out of the shares.
+- Pure jreign-only model (no NPC months), 80 lives per side, before the real-month calibration: Hoàng thượng 55 %, Thái hậu 64 %,
+  quyền thần 59 %; neutral 31 / 45 / 24 %.
+- Quốc sự (Biên cương or Kho lúa < 40) costs the throne in ~17–22 of 42 months; sided consorts push +4…+9 net (the Emperor's side).
+- Full inpage6 bots (dev/measure/reign.js, 44 months, ~10 min a life on the loaded machine): 3 Hoàng thượng lives before the catch-up fix:
+  0 errors, 0 deaths, outcome th 2 / quyen 1 (her side lost: Sủng −8, Thái hậu −12), rank 5.3, 14.7 beats. Earlier build (1 life each):
+  all three sides won (rank 2 / 5 / 5). The bot never plays Việc nhờ steps, so Tâm nguyện completion is checked by dev/test/reign.js.
 
 ## Follow-ups
 - Tâm nguyện for the other named people: every consort (goal by trait: rise / protect child / revenge / love), the five house heads,

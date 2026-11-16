@@ -256,24 +256,26 @@ function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W
 /* ---------- month (host: the world; everyone: her next beat) ---------- */
 function rgWorldMonth(){const W=rgW();if(!W||W.out)return"";const Bg=BAL.rg;let ev="";
  W.p=cl(W.p+Bg.drift,0,100);if(roll(Bg.noise[0]))W.p=cl(W.p+(R(2*Bg.noise[1]+1)-Bg.noise[1]),0,100);
- try{const T=trS();if(T.bien<40||T.kho<40)W.p=cl(W.p-Bg.qs,0,100)}catch(e){}
+ const D=window.__rgDbg,p0=W.p;try{const T=trS();if(T.bien<40||T.kho<40){W.p=cl(W.p-Bg.qs,0,100);if(D)D.qs=(D.qs||0)+1}}catch(e){}const p1=W.p;
  for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s||(v.sung||0)<Bg.npcS)continue;if(s==="emp")W.p+=Bg.npcP;else if(s==="quyen")W.p-=Bg.npcP;else{const m=(Bg.A+Bg.B)/2;W.p+=Math.sign(m-W.p)*Math.min(Math.abs(m-W.p),Bg.npcP)}}
- W.p=cl(W.p,0,100);S.reign.power=Math.round(W.p);
+ W.p=cl(W.p,0,100);S.reign.power=Math.round(W.p);if(D)D.npc=(D.npc||0)+(W.p-p1);
  const mo=rgMo();while(W.ch<RGC.length&&mo>=Bg.at[W.ch]){W.ch++;if(W.ch>=1)W.n.unshift(`T${S.month}/${S.year}: ${RGT} · Chương ${W.ch} «${RGC[W.ch-1].t}»`)}
- if(W.ch>=RGC.length&&!W.out&&mo>=Bg.at[RGC.length-1]+Bg.decideAfter)rgDecide();
+ if(W.ch>=RGC.length&&!W.out&&mo>=Bg.at[RGC.length-1]+Bg.decideAfter&&((S.reign.done||{}).c6a||mo>=Bg.at[RGC.length-1]+Bg.decideAfter+Bg.decideWait))rgDecide();
  if(W.n.length>8)W.n.length=8;return ev}
 /* her next beat: the earliest unplayed beat of a chapter the court has reached; c6b waits for the outcome; errands fill the gaps */
-function rgNext(){const W=rgW(),r=rgMe();if(!W)return null;
- for(let c=0;c<Math.min(W.ch,RGC.length);c++){for(const id of RGC[c].b){if(r.done[id])continue;const b=RGBT[id];
+function rgNext(second){const W=rgW(),r=rgMe();if(!W)return null;const queued=new Set(Q.filter(m=>m.pid==="rg").map(m=>m.pp&&m.pp.b));
+ for(let c=0;c<Math.min(W.ch,RGC.length);c++){for(const id of RGC[c].b){if(r.done[id]||queued.has(id))continue;const b=RGBT[id];
   if(b.if&&!b.if()){r.done[id]=-1;continue}if(b.fin&&!W.out)return null;return id}}
- const s=rgSideNow();if(s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2&&roll(BAL.rg.erP)){
+ const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2&&roll(BAL.rg.erP)){
   const L=RGE[s].filter(e=>(!e.if||e.if())&&(r.done[s+":"+e.id]||0)<1);const e=L.length?pick(L):pick(RGE[s].filter(e=>!e.if||e.if()));if(e){r.erT=S.turn;return s+":"+e.id}}
  return null}
 function rgMonth(){if(!rgOn())return"";let ev="";if(!rgGuest())ev+=rgWorldMonth();
  const W=rgW(),r=rgMe();if(S.thDead&&r.side==="th"&&!(W&&W.out)){r.side="ngoai";log(`<b>${RGT}</b>: Thái hậu băng hà, phe Thái hậu tan rã. Ngươi thành người đứng ngoài.`)}if(W&&W.out&&!r.res){const t=rgMine();if(t)log(`<b>${RGT}</b>: ${t}`)}
  if(S.out||S.confined&&S.confined>1)return ev;if(r.bm===S.turn)return ev;
- if(typeof storyBusy==="function"&&storyBusy()&&!rgW().out)return ev;
- const id=rgNext();if(id&&rgFire(id))r.bm=S.turn;return ev}
+ const late=rgLate();if(typeof storyBusy==="function"&&storyBusy()&&!rgW().out&&late<2)return ev;
+ /* behind (beats of chapters the court has passed are still waiting: busy months, cấm túc): up to BAL.rg.catchUp beats this month */
+ let n=0;const max=late>=3?BAL.rg.catchUp:1;while(n<max){const id=rgNext(n>0);if(!id||!rgFire(id))break;n++}if(n)r.bm=S.turn;return ev}
+function rgLate(){const W=rgW(),r=rgMe();if(!W)return 0;let n=0;for(let c=0;c<Math.min(W.ch,RGC.length);c++)for(const id of RGC[c].b)if(!r.done[id]&&!(RGBT[id].fin&&!W.out))n++;return n}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=rgMonth()}catch(e){console.error(e)}return ev}})();
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.ps&&S.reign){S.reign.t0=S.turn;rgW();rgMe()}}catch(e){console.error(e)}return r}})();
 
@@ -364,13 +366,14 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
 (function(){if(typeof q72End!=="function")return;const e0=q72End;q72End=function(x,res,X,late){const T=T72I[x&&x.tid];const r=e0.apply(this,arguments);
  try{if(T&&T.line&&S){const L=rgL();const l=L[T.line]=L[T.line]||{st:0};if(res==="ok")l.st=Math.max(l.st,T.li);else{l.cd=S.turn+BAL.rg.lnRetry;l.fail=(l.fail||0)+1}l.w=wk()}}catch(e){console.error(e)}return r}})();
 /* a line is offered by its person (one line start / retry at a time, BAL.rg.lnCd months apart) */
+function rgLA(k){try{if(k==="hh"){const q=typeof queenP==="function"?queenP():null;return q&&q!==S?q72A("hh",q.id):null}return q72A(k)}catch(e){return null}}
 function rgLNext(){if(!rgOn()||typeof q72CanOffer!=="function"||!q72CanOffer())return null;const q=q72();const L=rgL();
  if(S.turn-(L._t==null?-99:L._t)<BAL.rg.lnCd)return null;
  const act=new Set(q.a.map(x=>x.tid).concat(q.ch.map(c=>c.tid)));
  const C=Object.keys(RGL).filter(k=>{const l=L[k]||{st:0};if(l.done||!rgLOk(k))return false;if(l.cd!=null&&S.turn<l.cd)return false;if((l.fail||0)>=3)return false;
   const tid=RGL[k].q[Math.min(l.st,2)];return !act.has(tid)&&!RGL[k].q.some(t=>act.has(t))});
  if(!C.length)return null;const k=pick(C);const l=L[k]||{st:0};const T=T72I[RGL[k].q[Math.min(l.st,2)]];if(!T)return null;
- const A=q72A(k==="ly"?"ly":k);if(!A)return null;const x=q72Make(T,A);if(!x)return null;L._t=S.turn;return x}
+ const A=rgLA(k);if(!A)return null;const x=q72Make(T,A);if(!x)return null;L._t=S.turn;return x}
 (function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){const r=t0.apply(this,arguments);try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return r}})();
 
 /* ---------- Mệnh truyện › Triều cục / Tâm nguyện (kit: kitSubTabs, kitSkillCard, rows67/kitRows, kitChecks, kchip, pbtn) ---------- */

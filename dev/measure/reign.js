@@ -24,8 +24,9 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
       pick=(act.length?act[Math.floor(Math.random()*act.length)]:null)||L.find(([c])=>!/Đổi phe|Khéo từ chối|Từ chối|không dám|Không dám|Lui/.test(c.n))||L[0]}
      window.__rgb.beats.push(m.pp.b+':'+pick[1]);if(/Đổi phe/.test(pick[0].n))window.__rgb.sw++;chooseM(pick[1]);return true}
     return false}},SIDE);
-  const t0=Date.now();let dead=false;
-  while(true){const st=await p.evaluate(([m])=>{const n0=window.__res.length;window.__bot.step(m,200);return{t:S.turn,dead:window.__res.length>n0}},['sens']);
+  const t0=Date.now();let dead=false;const pT={};
+  while(true){const st=await p.evaluate(([m])=>{const n0=window.__res.length;window.__bot.step(m,200);const W=S.trieu&&S.trieu.rg;return{t:S.turn,dead:window.__res.length>n0,p:W?Math.round(W.p):null,bien:S.trieu?S.trieu.bien:null,kho:S.trieu?S.trieu.kho:null}},['sens']);
+   if(st.t%6===0&&!pT[st.t])pT[st.t]=[st.p,st.bien,st.kho];
    if(st.dead){dead=true;break}if(st.t>=MONTHS)break;if(Date.now()-t0>(+process.env.CAP||900)*1e3){console.error('time cap seed',si);break}}
   const r=await p.evaluate(()=>{const W=S.trieu&&S.trieu.rg,R=S.reign||{};const ev=liveRivals(true).reduce((a,v)=>a+((v.evm&&v.evm.me)||0),0);
    const L=S.rgL||{};return{turn:S.turn,origin:S.origin.k,side:R.side,tr:R.tr,res:R.res||'',out:W?W.out:'',p:W?Math.round(W.p):null,ch:W?W.ch:0,beats:window.__rgb.beats.length,sw:R.sw||0,
@@ -33,7 +34,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
     linesStep:Object.keys(L).filter(k=>k!=='_t').map(k=>k+':'+(L[k].st||0)).join(' '),famSide:(typeof rgFam==='function'?rgFam():null),
     members:{emp:rgMembers('emp').length,th:rgMembers('th').length,quyen:rgMembers('quyen').length},
     rgLogs:S.logs.filter(x=>/Tân quân lập uy|Tâm nguyện/.test(x)).length}});
-  console.log(JSON.stringify({seed:si,sideBot:SIDE,dead,...r,errs:errs.slice(0,3),sec:Math.round((Date.now()-t0)/1000)}));
+  console.log(JSON.stringify({seed:si,sideBot:SIDE,dead,...r,pT,errs:errs.slice(0,3),sec:Math.round((Date.now()-t0)/1000)}));
   await ctx.close()};
  const W=[];for(let k=0;k<PAR;k++)W.push((async()=>{while(jobs.length)await run(jobs.shift())})());await Promise.all(W);
  await b.close()})().catch(e=>{console.error(e);process.exit(1)});
