@@ -71,7 +71,7 @@ main at start = eba64ead4.
 
 - (16/11 07:25Z) ORDER from main s10: D51 fxkit call-site wiring is MOVED to main (the main-run art worker paints the sprites AND wires them). Drop it from your queue.
 
-## HANDOVER (Foreman D s2 → s3, 16/11 07:30Z; reason: s2 context past start+25% budget)
+## HANDOVER (Foreman D s2 → s3, 16/11 07:30Z; reason: s2 context past start+25% budget) — s3 = session_01DgYSWmJqZEbu2bHw5WQjne (opened 07:27Z); s2 wake deleted, s3 owns the watch
 - All D workers/reviewers are SEPARATE sessions (they survive the rollover); results land in dev/handover/reports/<name>.md. RUNNING now:
   coop-chat review (review-coop-chat-r1.md, session_01DgYSWnc7QSik7k9buMTQwK), balance-after-truth review (review-balance-after-truth-r1.md, session_01DgYSWp8zZ1eyzXhLPpAj3x),
   servant part C review (review-servant-mline-r1.md, session_01DgYSWnPWsFwg4R6LHZTKjr), slap-mg review (review-slap-mg-r1.md, session_01DgYSWpbGcGGy33MK9zBq4u),
