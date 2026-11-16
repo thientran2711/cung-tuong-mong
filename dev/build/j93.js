@@ -39,17 +39,37 @@ function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
 function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
- kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,30000);
+ kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
+
+/* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
+   kitSceneEndLabel(cls, o): o.end (the caller's own words, e.g. "Chuẩn bị thị tẩm" when the card flip lands on HER) wins; else the scene class decides;
+   else "Tiếp theo". Words are short and fit the event (never "OK"); VANPHONG register. */
+const KM_END={"km-edict":"Đã hiểu","km-gloom":"Đã hiểu","km-bloom":"Tiếp theo","km-inkov":"Tiếp theo","km-tablet":"Tiếp theo","km-soft":"Ta biết rồi"};
+function kitSceneEndLabel(cls,o){if(o&&o.end)return String(o.end);for(const k in KM_END)if(new RegExp("(^|\\s)"+k+"(\\s|$)").test(cls||""))return KM_END[k];return "Tiếp theo"}
+window.kitSceneEndLabel=kitSceneEndLabel;
+/* kitSceneFit(ov): a scene taller than the room left above the button (short landscape, 844x390) is scaled down (CSS zoom on .kmst, never below .55) so nothing
+   runs under the button; room = overlay height minus the button row (css .km-endon padding). Runs when the button appears and on resize. */
+function kitSceneFit(ov){try{const st=ov&&ov.querySelector(".kmst");if(!st)return;st.style.zoom="";const cs=getComputedStyle(ov);const avail=ov.clientHeight-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.paddingTop)||0);
+ const els=[...st.children].flatMap(c=>[c,...c.children]).filter(e=>!/kmdark|kmleaves|kmglow|kmfls|kmleaf/.test(e.className||"")&&e.getBoundingClientRect().width>0);
+ const h=els.length?Math.max(...els.map(e=>e.getBoundingClientRect().bottom))-Math.min(...els.map(e=>e.getBoundingClientRect().top)):st.scrollHeight;if(avail>0&&h>avail+2)st.style.zoom=String(Math.max(.55,Math.floor(avail/h*100)/100))}catch(e){}}
+window.kitSceneFit=kitSceneFit;addEventListener("resize",()=>document.querySelectorAll(".kmov.km-endon").forEach(kitSceneFit));
+/* kitSceneEnd(ov, label, onClick): the ONE button that ends an animation scene (also for scenes NOT built on kmStage: card flip jflip, toil reveal jtoil, …).
+   Appends `.kbtn.kmend` to the overlay `ov` (removes the "Chạm để …" hint), returns the button; onClick (optional) closes the scene. Calling it twice = one button. */
+function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".kmhint").forEach(h=>h.remove());let b=ov.querySelector(":scope > .kmend");
+ if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
+window.kitSceneEnd=kitSceneEnd;
 
 /* ---------- stage overlay ---------- */
 function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.createElement("div");ov.className="kmov "+cls+(red?" km-red km-skip":"");
  ov.setAttribute("role","dialog");ov.innerHTML=`<div class="kmst">${html}</div>${o.manual?"":`<div class="kmhint">${o.hint||"Chạm để bỏ qua"}</div>`}`;document.body.appendChild(ov);
  let phase=0;const T=[];const later=(ms,f)=>{T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
  const close=()=>{if(phase===2)return;phase=2;T.forEach(clearTimeout);ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}};
+ /* KIT 81 SCENE-END BUTTON (owner OD:L1261): a scene never closes by itself. When its animation has played (or was skipped by a tap) the hint is replaced by ONE kit
+    button (.kbtn.kmend) whose words fit the event (kitSceneEndLabel); only that button closes the scene. manual scenes carry their own button (Nhận, Chọn…). */
  const finish=()=>{if(phase>0)return;phase=1;T.forEach(clearTimeout);T.length=0;ov.classList.add("km-skip");try{o.onFinal&&o.onFinal()}catch(e){console.error(e)}
-  const h=ov.querySelector(".kmhint");if(h)h.textContent="Chạm để đóng";if(!o.manual)later(o.hold||1200,close)};
- ov.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("[data-km-close]")){close();return}if(o.manual)return;if(phase===0)finish();else close()});
+  if(!o.manual){const b=kitSceneEnd(ov,kitSceneEndLabel(cls,o));if(b)b.setAttribute("data-km-close","")}};
+ ov.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("[data-km-close]")){close();return}if(o.manual)return;if(phase===0)finish()});
  if(red)setTimeout(finish,0);else if(!o.manual)later(o.dur||1600,finish);
  return{ov,later,finish,close,get phase(){return phase}}}
 /* small sparkle burst at (x,y): PAINTED sparks of KIT §68 (kitFxBurst "spark"; a gold burst of 26+ adds gold-leaf petals). Owner 15/11 20:55Z /
@@ -67,7 +87,7 @@ function kitFlipTablet(p,o){o=o||{};if(!p)return;const me=p===S||o.me;const nm=p
  const side=n=>`<div class="kmtab kmtab-s" style="--i:${n}">${back}</div>`;
  const html=`<div class="kmflip${me?" kmflip-me":""}"><div class="kmcap">Hoàng thượng lật thẻ bài</div><div class="kmtabs">${side(-2)}${side(-1)}<div class="kmtab kmtab-c"><div class="kmcard"><div class="kmface kmback">${back}</div><div class="kmface kmfront"><img src="${KM_DIR}mo-tablet-front.webp" alt="" draggable="false"><div class="kmname"><small>${kmEsc(rk)}</small>${words}</div></div></div></div>${side(1)}${side(2)}</div>
   <div class="kmres">${kmFace(p,"big")}<div><b>${me?"Thẻ bài của ngươi được lật":"Tối nay: "+kmEsc(nm)}</b><small>${me?"Tối nay ngươi hầu giá.":`${kmEsc(rk)} được chọn hầu đêm nay.`}</small></div></div></div>`;
- kmPush(done=>{const st=kmStage("km-tablet"+(me?"":" km-soft"),html,{dur:1900,hold:me?1800:1100,onEnd:done,onFinal:()=>{}});
+ kmPush(done=>{const st=kmStage("km-tablet"+(me?"":" km-soft"),html,{dur:1900,end:me?"Chuẩn bị thị tẩm":"Ta biết rồi",onEnd:done,onFinal:()=>{}});
   if(me)st.later(1250,()=>{const c=st.ov.querySelector(".kmtab-c");if(c){const r=c.getBoundingClientRect();kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,26,["#f0d070","#fff3c4","#e0a526"],170)}})})}
 
 /* someone else's tablet: one short line under the top bar (kit chip), no backdrop, never takes a tap, fades by itself */
@@ -272,6 +292,10 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.kmov.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+.kmend{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:9;min-width:140px;animation:kmendin .35s ease-out both}
+@keyframes kmendin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.kmend{animation:none}}
 .kmhint{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:.74rem;color:#f6ead6c0;letter-spacing:.04em}
 .km-skip *:not(.km-loop),.km-skip.kmseal,.km-skip.kmxam *{animation-delay:0s!important;animation-duration:.01s!important;transition-duration:.01s!important}
 @keyframes kmFade{from{opacity:0}to{opacity:1}}@keyframes kmFadeOut{to{opacity:0}}
