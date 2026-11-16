@@ -1,4 +1,4 @@
-SAMPLE READY — dev/handover/reports/icon-art/sample-contact.jpg
+SAMPLE READY v2 — dev/handover/reports/icon-art/sample-contact-v2.jpg (v1: sample-contact.jpg)
 
 # review-icon-art (Foreman C art worker)
 Sample (all Magnific gpt-2-6, folder ba4aecfe…, background cut with images_remove_background; viewed by me, all kept on first draw):
@@ -32,3 +32,11 @@ Masters (4 compositions x 2 tones = 8 generations, tone light = bright calm pala
 Sample already made: portrait + banner light masters (768x1024, 1536x768).
 
 NOTE (Foreman C 15:55Z): the 4 buổi icons are NOT mine — they belong to the buoi-art worker (review/buoi-art).
+
+## v2 (16:50Z, Foreman C request, OD 16/11 16:25Z kitStatusIcon §77.1)
+New status glyphs (square 256x256 alpha webp, checked at 28/36/64 px on the sheet: the arrow stays readable at 28):
+- img/kit/ico-download.webp — gold brush-stroke arrow ↓ into a red lacquer tray (16 KB)
+- img/kit/ico-update.webp — "Có bản mới": lacquer scroll box with a fresh golden scroll + sparkle (21 KB)
+Names for main s20: img/kit/ico-download.webp, img/kit/ico-update.webp (+ replaced keys mo-calendar, mo-edict-closed, ico-chat). NOT yet on the CDN (waiting for the owner verdict; will upload with cdn_sync.py).
+Magnific creation ids (re-download without redrawing): cal LwoShm4swO (cut jUBgvDZLD0), edict ovNmZAg829 (s78UfBWl8e), chat s78UvQ6l8e (u5YqDYfQLD), download LwoUreSswO (Ifia8HOtvE), update dtPIDyVXSL (O6CNJzeynm), ph portrait eIyo6nkdqL, ph banner yiENqSUPW9. Rejected alternates: cal 6AqZ1KPiJO, download SymOso8Ub8, update CqzHvzUEEy.
+Credits: 249 + 4x40 + 2x3 = 415.
