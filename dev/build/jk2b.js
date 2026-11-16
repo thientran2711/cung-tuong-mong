@@ -616,6 +616,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
 /* origin picture = a wide band across the top of the card (kitSceneArt), height capped so the choices stay on screen */
 .dlg.kpsc .kpid>.kpidart{width:100%;position:relative}
 .dlg.kpsc .kpid>.kpidart>.ksart{aspect-ratio:auto;height:clamp(84px,19dvh,190px)}
+/* kv3:.kv1 */:where(.kv1) .dlg.kpsc .kpid>.kpidart>.ksart{height:clamp(84px,14dvh,190px)}/* r3: the one-page card scrolls in a short area (the pinned choices take most of it): the picture leaves room for the name + age line above the sticky strip */
 .dlg.kpsc .kpid>.kpidart>.ksart>img{object-position:center 45%}
 /* the two choices never leave the screen (owner 11/14: "Đổi thân phận (−100…" was cut at 686x880): the body scrolls under them */
 .modal.kpscene .dlg.kpsc.kfpon>#mb{overflow-y:auto!important;overscroll-behavior:contain}
