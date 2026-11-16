@@ -204,7 +204,7 @@ function kmEmpLine(kind){const o=kmEmpO(S,kind);if(kind==="walk"){const n0=night
 /* the act itself — the same function for her and for every consort */
 function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpDay=wk();if(a===S)spend(2);ap(a,{suc:-BAL.empDay.suc});const ok=roll(kmEmpO(a,kind));const me=a===S;const nm=me?"Ngươi":`${rkName(a)} ${a.name}`;
  if(kind==="walk"){if(ok){ap(a,{sung:2});a.kmWalk=wk();const seen=liveRivals(true).filter(v=>v!==a&&(S.where||{})[v.id]==="vuon");seen.forEach(v=>{v.ghen=cl((v.ghen||0)+3,0,100)});
-   if(!me)newsAdd(a,"emp",`${nm} cùng Hoàng thượng dạo ngự hoa viên.`);return{ok,txt:`${nm} cùng Hoàng thượng dạo ngự hoa viên. Sủng +2${seen.length?` · ${seen.map(v=>v.name).join(", ")} thấy cả, ghen +3`:""}.`}}
+   if(!me)newsAdd(a,"emp",`${nm} cùng Hoàng thượng dạo ngự hoa viên.`);return{ok,txt:`${nm} cùng Hoàng thượng dạo ngự hoa viên. Sủng +2${seen.length?` · ${kitNameList(seen)} thấy cả, ghen +3`:""}.`}}
   return{ok,txt:`Hoàng thượng cười, bảo hôm nay còn bận, hẹn dịp khác.`}}
  if(ok){const g=2+Math.min(2,Math.floor(((a.arts&&a.arts[kind])||0)/2));ap(a,{sung:g,an:1});if(!me)newsAdd(a,"emp",`${nm} ${kind==="ky"?"hầu cờ":"đánh đàn hầu"} Hoàng thượng.`);
   return{ok,g,txt:`${nm} ${kind==="ky"?"hầu Hoàng thượng một ván cờ":"gảy đàn cho Hoàng thượng nghe"}; ngài vui. Sủng +${g} · Ân tình +1.`}}

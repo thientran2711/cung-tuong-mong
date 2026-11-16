@@ -149,13 +149,8 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
 /* the girlhood chest: Cài tóc · Y phục (j92 WD slots) · Đeo tay · Đeo eo · Túi thơm (jinv slots), all worn, all ordinary (Thường; the jade
    bangle is silver, not jade: the whole set stays inside a Đáp ứng's allowance, jinv luxury law). Khăn che mặt stays empty: in this game the veil is the hủy dung cover (jinv veil rule: worn without need = gossip); instead an un-worn
    Khăn tay lụa (embroidered handkerchief, jitev story item) goes into her bag. */
-function kcChest(){const L=[];const who=(kcR("me")||kcR("to")||{}).t||"Mẫu thân";
- try{const w=wdOf(S);const tr=WD_ITEMS.tramngoc?"tramngoc":null;if(tr){const e={k:tr,from:"kc",giver:who,d:wdWhen()};wdWearEntry(S,e);L.push(e)}
-  const yk=wdDefault(S,"y")||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",giver:who,d:wdWhen()};wdWearEntry(S,e);L.push(e)}void w}catch(e){console.error("kcChest wd",e)}
- for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=IT[k].sl;S.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&IT[x.k].sl===sl)delete x.w});const e={k,from:"kc",giver:who,w:1};S.inv.push(e);L.push(e)}
- /* coordinator 16/11: the 6th thing is not the veil (hủy dung cover) but an embroidered handkerchief kept in her bag, un-worn (jitev IT.khantay) */
- if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};S.inv.push(e);L.push(e)}
- S.kc.chest=L.map(e=>e.k);return{who,L}}
+/* ONE chest function (review/econ-items-r1): the same 6 things as the palace-road chest, all worn (jeitem girlChest wear:true) */
+function kcChest(){const who=(kcR("me")||kcR("to")||{}).t||"Mẫu thân";const c=girlChest(S,{wear:true,who});S.kc.chest=c.L.map(e=>e.k);return c}
 function kcChestShow(c){if(!c||!c.L.length)return;try{if(typeof kitReward!=="function")return;
  const it=e=>{if(WD_ITEMS[e.k]&&!IT[e.k]){const w=WD_ITEMS[e.k];return{n:w.n,d:w.sl==="y"?"Y phục · đang mặc":"Cài tóc · đang cài",img:w.icon,tier:w.g|0}}
   try{if(typeof kgItem==="function")return kgItem(e)}catch(x){}const a=itemArt(e.k);return{n:IT[e.k].n,d:IT[e.k].d,img:a?a.src:"",tier:a?a.grade:0}};

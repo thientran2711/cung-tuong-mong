@@ -273,6 +273,18 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
 function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  if(front)Q.unshift(m);else Q.push(m);return m}
+/* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
+   are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
+   (a) a kit table right after another kit table; (b) a section with no heading whose first child is a kit table, right after a section
+   (or table) that ends with a kit table; (c) a bare kit table right after such a section. A heading (h4.kpst) always starts a new block.
+   Runs on every kit panel (kpBuild), for spec sections and legacy html alike. */
+function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(".kb.kpkb")?e:null;
+ const tail=e=>KB(e)||(e&&e.matches&&e.matches(".kpsec")?KB(e.lastElementChild):null);
+ const head=e=>KB(e)||(e&&e.matches&&e.matches(".kpsec")&&!e.querySelector(":scope>.kpst,:scope>h1,:scope>h2,:scope>h3,:scope>h4,:scope>h5,:scope>h6")?KB(e.firstElementChild):null);
+ [...root.querySelectorAll(".kpkb")].map(k=>k.parentElement).filter((p,i,a)=>p&&a.indexOf(p)===i).concat([root]).forEach(par=>{
+  let prev=null;for(const e of [...par.children]){const h=head(e),t0=prev&&tail(prev);
+   if(h&&t0&&t0!==h){while(h.firstChild)t0.appendChild(h.firstChild);h.remove();if(e!==h&&!e.children.length&&!e.textContent.trim()){e.remove();continue}}
+   if(e.parentElement===par)prev=e}})}
 function kitModal(spec){const m=kitPanel(spec,true);showModal();return m}
 function kpKind(m){if(m.kit&&m.kit.kind)return m.kit.kind;const t=String(m.t||""),c=String(m.cls||"");
  if(/night/.test(c))return"night";if(/\bend\b/.test(c))return"end";if(/^Tin trong cung/.test(t))return"news";if(/^Tai mắt|báo tin/.test(t))return"intel";
@@ -320,6 +332,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  if(faces){faces.classList.add("kpfaces");main.appendChild(faces)}
  for(const b of blocks){if(typeof b==="string")main.insertAdjacentHTML("beforeend",b);else main.appendChild(b)}
  body.appendChild(main);mb.innerHTML="";mb.appendChild(body);
+ try{kitRowsAlign(main)}catch(e){}
  /* KIT §8.1 SHORT NOTICE (kit keeper): only facts (≤ 3), ≤ 220 characters, no sections / rows / opts / subject → .kpshort, centred in the frame (CSS below) */
  try{if(!showSubj&&!opts&&!faces&&!main.querySelector(".kpsec,.kpkb,.kpfaces,.kmlist,table")&&main.querySelectorAll(".kfacts>*").length<=3&&main.textContent.trim().length<=220)body.classList.add("kpshort")}catch(e){}
  if(opts){opts.classList.add("kpopts");mb.appendChild(opts)}
@@ -455,7 +468,7 @@ KP_SEAL.week="TUẦN";
  if(!G.length&&!me.length)secs.push(`<div class="kpsec">${kitFacts([{text:"Một tuần yên ả.",kind:"world",auto:false}])}</div>`);
  w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",kitDate(S.month,S.year,S.tuan),`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
  w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:1400);
- const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest(".kodm,.kgl"))return;close()};const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
+ const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest("#dawn-go"))close()};/* KIT 81 (owner OD:L1261): only the button closes the week-change scene */const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
 (function(){const st=document.createElement("style");st.id="kp-dawn-css";st.textContent=`
 .dawn .dbox.kpanel{position:relative;z-index:1;width:var(--kpw);max-width:var(--kpw);height:var(--kph);max-height:var(--kph);overflow:auto;background:var(--k-card);border:1px solid var(--gold);border-radius:10px;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #000a;padding:0;text-align:left;color:var(--ink)}
 .dawn .dbox.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line)}

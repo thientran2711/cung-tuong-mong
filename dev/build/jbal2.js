@@ -1,10 +1,18 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
+   hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
+   Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
+   Night (the last buổi): nightSneak = odds added to "Lẻn vào" (fewer guards), nightCaught = extra Danh lost when caught (a gain and a loss). */
+Object.assign(BAL,{ad:{hapP:65,hap2:35,strollP:80,rareMinGrade:3,nightSneak:10,nightCaught:-4}});
 /* KHẢO HẠCH TẤN PHONG (jexam, owner 15/11 17:20Z): win = tuần she has to sit it once eligible; cd[to] = months before a retry after a fail or a
    missed window, by the target rank (1 Thường tại … 7 Hoàng hậu); bar[tier] = pass mark out of ~90 (tier 0 low = to 1–3, 1 middle = to 4–5,
    2 high = to 6–7); score = mean round (0–10) × wPlay + two Tứ đức courses × wVir + one art level (high: Đức/20) × wArt; the examiner's
    attitude (Hoàng hậu / Thái hậu, −100..100) / attDiv moves the bar by at most attMax; k khắc + suc Sức to sit; mc = draws for the odds word. */
-BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,27,31],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
+/* balance-pass 15/11: bar [22,27,31] -> [22,25,28]: at a sensible player's level (arts 1-2, Đức 45-60) the mid exam passed 52-56 % and the
+   high one 27-40 % (cooldown 3 months), so Quý phi -> Hoàng hậu took years; now mid ~75-93 %, high ~64-72 % (the odds the exam was designed
+   for, PROGRESS_promo-exam). dev/tmp probe: exChance at ranks 0/3/5. */
+BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
  /* servant / ma ma road (review/promo-rules): bar and wait by target, index 1..4 = SRK.maid rank, 5 = ma ma */
  srvBar:[0,18,20,22,24,24],srvCd:[1,1,1,2,2,3]};
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
@@ -102,6 +110,11 @@ Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:80
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
    Reviewer r1 (coordinator ruling 15/11): owner rule 08:10Z wins -> false (no allowance, no "quá hạn mức"). */
 Object.assign(BAL,{itd:{allow:false}});
+
+/* per-person dislikes (jdis, review/pcard-dislikes): n = how many each person has [min,max]; aff = her thiện cảm lost after a wrong gift; sung = Emperor's Sủng lost;
+   refuse = chance (0-100) a wrong gift is refused and stays in the chest (then refAff / refSung are lost instead); talk = chance a talk reveals one;
+   spyPri = weight of the 'dislike' fact among what a spy can learn. Modest on purpose: the gift's own gain is +4..+10. */
+Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:20,spyPri:55}});
 /* MORTALITY + THỌ SỐ (jmort, owner 16/11, review/mortality). ONE source for every number of the model.
    life.show   SWITCH 1 (owner 16/11: HIDDEN, never shown): 0 hidden · 1 a fortune-teller word at the start · 2 word + number
    life.dice   SWITCH 2 (owner 16/11 update: lives were too long): adult {mean,sd,lo,hi} = 45 / 15 / 15–85 (≈16 % under 30, ≈50 % under 45, ≈5 % over 70); me / emp alias "adult"; kid = children born in game:
@@ -155,6 +168,46 @@ BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
+   (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
+   seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
+   seeNotice = master notices; harsh master: punish → lòng -punLoy, punOut = sent away; master Sủng ≥ useGap under the harem median (r2; was Sủng < 30): use → seekMul × useMul, lòng +useLoy;
+   feud = a maid starts a quarrel with a maid of a palace her master's hostility ≥ feudHost (feudPoison of them poison, half the rest frame);
+   frameLoy / frameOut (an NPC master throws the framed maid out), poisonDie, hitEv = proof of a beating to the victim's mistress (r2: feudEv replaced by the caught keys below);
+   hit = a consort targets a maid of her target's palace; seeMat = Tai mắt that lets her hear of other palaces' maid affairs. */
+Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekStart:4,seekMonths:3,seekAge:25,seekMul:3,seeNotice:50,punish:60,punLoy:20,punOut:25,useGap:20,use:50,useMul:1.5,useLoy:10,
+ feud:3,feudHost:25,feudPoison:10,frameLoy:15,frameOut:20,poisonDie:25,hit:4,hitEv:30,seeMat:3,
+ /* review/servant-mline-r1 (ONE CORE): the literals that sat in jmline.js, same values: seekTr = seekStart × by nết; feudFrame = % of the
+    non-poison feuds that are a frame (else a fight), fightLoy = lòng +N to both fighters; poisonLv = pzGive level; evN = chứng cứ per piece;
+    hitBribeBac / hitBribe = a consort with Bạc ≥ N bribes (%), else a cruel one beats (hitBeat %), else frames; beatLoy = the beaten maid lòng +N;
+    ageDef = age when unknown; offRank / offEye = the old rule behind the off switch (rank ≥ offRank at offEye %). */
+ seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3},feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:2,offEye:1.2,
+ /* review/servant-mline-r2 (gain and loss, measured: dev/measure/sim_maidline_r2.js): ONE caught key per harmful act, % per act:
+    frameCatch = a maid's frame of another palace's maid is traced; poisonCatch = Thái y traces a maid's poison (the poisoner goes to
+    Thận hình ti); hitCatch = a consort's frame of another palace's maid is traced (a beating is always seen: deed + hitEv % proof).
+    Caught → deed on the master (w = 1 frame / beat, 2 poison), the victim's mistress gets evN×w proof and oán +caughtOan×w,
+    the master Đức −caughtDuc×w, Danh −caughtDanh (her own maid acting: Danh only, no deed, no proof on her).
+    use: the master pays useBac bạc (dress, rouge); a used maid who rises turns her back at useTurn % (loyalty set under riseLoy).
+    riseLoy / riseRel = a risen maid with lòng ≥ riseLoy stays her old master's friend (relation ±riseRel; j14, was 60 / 25).
+    seekCd = months before the same maid seeks his notice again (after her seek ends or she is punished). */
+ frameCatch:30,poisonCatch:40,hitCatch:30,caughtDuc:3,caughtDanh:2,caughtOan:10,useBac:20,useTurn:35,riseLoy:60,riseRel:25,seekCd:6,
+ /* review/servant-mline-r3 (ONE CORE, same values): fightLose = % that the scuffle loser is the maid who started it; poisonW = deed weight of a caught poisoning (frame / beat = 1) */
+ fightLose:50,poisonW:2}});
+/* MEMORIES + HOOK LEDGER (D26, review/memories, dev/build/jmem.js; spec dev/ideas/DESIGN_IDEAS_1115.md #1 + #3).
+   mem: cap records per pair · fadeMo weight lost a month · keepFloor share of the first weight a "keep" deed (betrayal, poison, rescue) never fades below ·
+   memMod = Σ sign·weight / modDiv, capped ±modMax (added to talk / Kết giao odds with that person, taken off NPC hostility) · recallMin weight for the
+   person to bring it up, once per recallCd tuần · invokeMin / invokeCost: "Nhắc lại ân xưa" (good memory → she is owed one ân; the non-bạc road) ·
+   logMin: a memory this strong writes a Sổ ghi line · relMin: relation swing inside an event that makes a generic memory · pairCap pairs kept (NPC↔NPC pruned first) ·
+   reinforce share of the base weight a repeated deed adds; a repeated deed never grows past reinforceMax × its base weight (r1: small talk cannot be farmed into an ân) ·
+   strong / faint: weight words "nhớ rõ" / "còn nhớ" (below faint "đã phai"), strong = grateful quote tail; hate: a keep-deed this strong gets the lifelong-grudge tail ·
+   seenAf: an unseen scheme that drops thiện cảm this much is still remembered · taintAf: a gift that drops thiện cảm this much (tainted item) = "gifttaint" ·
+   relCap: max weight of a generic event memory · invokeAff: thiện cảm when the nợ-ân ledger cannot take the ân · w: base weight per deed (jmem MEM_DEEDS).
+   hook: useOan Oán added each time a strong secret is used · strikeCh / lostCh base chance (+useStep a use) the target strikes back (gets proof on her) /
+   destroys the secret · failRel: thiện cảm lost when the press fails · fadeCh monthly chance a strong secret fades · pressBase odds base of "Lấy chuyện riêng ép nàng" (+ Tâm cơ/tcDiv) · max own hooks kept. */
+Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMin:15,recallCd:3,invokeMin:20,invokeCost:15,logMin:25,relMin:15,pairCap:300,reinforce:.6,reinforceMax:2,
+ strong:40,faint:15,hate:30,seenAf:8,taintAf:10,relCap:40,invokeAff:6,
+ w:{ally:12,gift:8,giftbad:8,gifttaint:50,secret:8,care:6,apology:6,humble:6,provoke:10,vent:15,spy:12,rumor:25,frame:45,poison:70,accuse:40,bribe:15,block:15,plant:35,steal:15,musk:80,kidharm:80,takeaway:40,reward:15,pardon:45,conf:20,cutpay:15,judge:40,helped:20,failed:8,exposed:25,kept:25,broken:35,pressed:20,scheme:20,good:0,bad:0}},
+ hook:{useOan:15,strikeCh:25,lostCh:20,fadeCh:4,pressBase:50,max:40,useStep:5,failRel:10,tcDiv:4}});
 /* BAL.psk = PROMO-SKIP (jexam promoReward, owner 16/11 06:20Z/06:45Z/07:15Z): long-road rewards = direct rank; every reward has a gain AND a loss.
    son1 (first prince): Hoàng hậu oán +hhOan, every other mother of a prince oán +momOan.
    emp (Hoàng thượng side wins): Thái hậu quý −th; every consort of a losing side oán +oan.

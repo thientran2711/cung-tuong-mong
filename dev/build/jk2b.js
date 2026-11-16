@@ -633,7 +633,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
    4) "Tiếp" → the revealed picture flies into the identity card's art frame while the card slides in. "Bỏ qua" (always there) ends at once.
    prefers-reduced-motion / Cảnh động off: same steps, no motion (instant flips, no shuffle travel). API:
    kitRoulette({items:[{k,src,wide,name,rare}], target:k, toEl:()=>element, done:fn}). Test state: window.__kroulStep (0 up · 1 shuffling · 2 pick · 3 shown). ---------- */
-const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
+const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
 const KIT_CARDBACK="img/kit/card-back.webp";
 function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
@@ -672,7 +672,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
   T(()=>{const r=t.getBoundingClientRect(),g=grid.getBoundingClientRect();const s=Math.max(1,Math.min(2.3,innerWidth*.62/r.width,g.height*.94/r.height));
    t.style.zIndex=50;t.style.transform=`translate(${g.left+g.width/2-(r.left+r.width/2)}px,${g.top+g.height/2-(r.top+r.height/2)}px) scale(${s})`;t.classList.add("win")},420);
   T(()=>{t.classList.remove("down");snd("sfx-promote")},780);
-  T(()=>{setStep(3);sub.textContent=items[Math.max(0,ti)].name;go.hidden=false;go.focus&&go.focus({preventScroll:true})},1500)};
+  T(()=>{setStep(3);sub.textContent=items[Math.max(0,ti)].name;go.textContent="Nhận thân phận";go.hidden=false;go.focus&&go.focus({preventScroll:true})},1500)};
  grid.addEventListener("click",e=>{const t=e.target.closest(".krt");if(t)pick(t)});
  grid.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("krt")){e.preventDefault();pick(e.target)}});
  /* step 4: the revealed picture flies into the identity card */

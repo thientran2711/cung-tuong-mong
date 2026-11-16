@@ -2964,6 +2964,21 @@ label ("Sinh hoàng tử" wrapped to 3 lines, one word per line).
   rule panels, item dialogs, the shop, Sổ luân hồi and the end card; per list it prints the value-x spread, labels standing one word per
   line, and any legacy two-cell `.pcrow` or flex space-between row list. Exit 1 on any fail.
 
+### 51.1 ONE BLOCK = ONE LABEL COLUMN · `kitRowsAlign(root)` (owner 15/11 "Hàng trên hàng dưới chưa alignment", review/row-align) — j79
+Owner bug: mood dialog "Tâm trạng · …", block ĐANG TÁC ĐỘNG: "LO ÂU | …" and "ẢNH HƯỞNG | …" started their values at different x, because
+the 2nd row was a kitPanel section with no heading = a 2nd kitRows grid sizing its own label column.
+- **Rule:** inside one block every label | value row shares ONE label column (the widest label of the block, capped as in §51), so all
+  values start on one vertical line, like TỐN / ĐƯỢC / MẤT / GHI CHÚ in action cards. A heading (`h4.kpst`) starts a new block.
+- **How:** `kpBuild` (every kit panel, spec sections and legacy html) runs `kitRowsAlign(main)`, which joins kit tables (`.kb.kpkb`)
+  that read as one block into ONE grid: (a) a table right after a table; (b) a section with no heading whose first child is a table,
+  after a section / table that ends with a table; (c) a bare table right after such a section (e.g. Xét phẩm "Ghi chú" under
+  "Điều kiện lên …"). Content after the joined rows keeps its order. Callers write nothing special: just don't hand-build rows.
+- Narrow screens: unchanged §51 column cap (`fit-content(max(34%,7rem))`), long labels wrap inside the column.
+- Migrated in the same pass (scan): Bổng lộc (jecon `blCard` override still wrote legacy `.pcrow` rows) → `kitRows` (rank | N bạc · goods).
+- Sample on the kit page: "§51.1". Test: `node dev/test/kit-table.js <url> <W>x<H>@dpr [shots] [steps]` now also measures `kit-block`
+  (kit tables with the same left edge, ≤22 px apart, no heading between = one block; value-x spread must be ≤1 px) and has a `mood`
+  step (emoBox for the player + 3 women).
+
 > Numbering note (review r6, 15/11): review/fix-float first wrote these as §51 (relation table, §51.1 kitImgSync) and §52 (number delta). The coordinator's registry reserves §51 for kit-table, so they were renumbered: relation table = §52, kitImgSync = §52.1, number delta = §57.
 
 ## 52. RELATION TABLE · kitRelTable / kitRelRows / kitRelDelta (owner 11/15 15:30Z + 16:50Z "LUẬT KIT TRƯỚC", review/fix-float) — `dev/build/jkrel.js` (after jaudit, before jint)
@@ -3419,7 +3434,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   mutation for the many body MutationObservers while it moves); (7) reduced motion / Gọn (`kmReduced`) = final still only (unchanged).
   Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
   before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
-- REVEAL LIGHT ALONG THE FRAME + SLOWER (owner 16/11, review/cardflip-glow): the old reveal (`kitFxLight("glow-gold")` on the card + `kitFxBurst("glowburst"/"spark")` at 38% height) sat on the portrait and hid the face. Now `edgeLight()` (only caller: `showRes`) puts `BAL.cardFlip.edge.n` (14) painted gold glows (§68 `kitFxObj("glowburst")`, true alpha) on the frame ring's centre line (`edge.path`, fractions of the card) and circles them along it (`edge.lap` 4200 ms/lap, linear, until the scene closes); sparks (`kitFxSprite("spark")`) leave the frame edge going OUTWARD. Nothing is drawn over the portrait window. Gọn / reduced motion: the glows stand still on the ring. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
+- REVEAL LIGHT = THE WHOLE FRAME GLOWS + SLOWER (owner 16/11 12:00Z, review/cardflip-glow2; replaces the running ring light of cardflip-glow): the old reveal sat on the portrait and hid the face, the next one ran painted glows round the ring ("như chơi casino"). Now `edgeLight()` (only caller: `showRes`) adds ONE `.kcf-halo` div hugging the frame ring's rectangle (`BAL.cardFlip.edge.path`, fractions of the card; `rad` corner, `blur`/`spread` glow size, `op` / `lo` opacity range): a soft warm gold box-shadow glow + thin bright rim around the WHOLE frame at once, nothing moving along it, no sparks. It breathes slowly (`edge.breath` 3600 ms ×`slow`, opacity only, until the scene closes). Nothing is drawn over the portrait window. Gọn / reduced motion: the same glow stands still. RULE for the whole game: a frame light is always the whole frame glowing, never a light that runs / chases / orbits a frame. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
@@ -3582,6 +3597,14 @@ Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sam
   Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
   waiting notice only. Samples on the kit page "§69".
 
+- §69.3 INVITE GUIDE · kitCoopSteps({sent, joined, wait, you}) (owner 16/11 "Rồi sao nữa", C43 review/coop-invite-ux) — `jcooptimer.js`: the 1-2-3
+  guide of the lobby's "Mời hảo hữu" screen as `kitRows` rows (joined to the Ám hiệu / Hảo hữu rows with `kitRowsJoin`): "1 · Gửi lời mời" (`.w`
+  "… chạm Gửi đường dẫn bên dưới" → `.g` "✓ đã gửi cho hảo hữu" once Gửi / Chép đường dẫn / Chép mã is tapped), "2 · Hảo hữu vào phòng" (`.w`
+  "… đang đợi hảo hữu vào phòng · m:ss", the time ticks each second in place, text only; `.g` "✓ đã vào phòng"), "3 · Cùng chơi" (`.n` "tự bắt đầu khi
+  hảo hữu vào, không phải chạm gì"). Guest (`you:"b"`) row 1 reads "Nhận lời mời ✓". The kpnote under the buttons adds "Muốn thử một mình: mở đường
+  dẫn trên máy khác". When the friend joins the lobby plays `sfx-join` + `kitLine("Hảo hữu đã vào phòng. Cuộc chơi bắt đầu.")` and hands over to the
+  shared game at once (existing COOP "both" → "start"). Sample on the kit page "§69". Test: `node dev/test/coop-invite-ux.js`.
+
 ## 78. PLACE ICON · kitPlaceIcon + HAPPENING MARK · kitHapMark (owner 16/11 Dư đồ split, review/act-dedupe) — `dev/build/jact.js`
 - `kitPlaceIcon(k, size=14)` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE
   the place name on every place-name site: Dư đồ map label (`.mspot .mlab`), Danh sách tile (`.mtile b`), stage place title (`#sc-t h2`).
@@ -3616,6 +3639,7 @@ Composition only: NO new component or CSS. The right side of every person card (
 5. **Dạo này** `kitRows` (week | line): this month's log lines that name the person; empty = one `.kpnote` line.
 6. **Việc nhanh** act cards (`pbtn` in `.kskacts`): Sai tai mắt dò nơi ở / Đến cung nàng / Kết giao / Tặng quà — the same buttons and costs as the Hậu cung card — shown only when the card has no live act of its own (the stage pop-up after the visit's one talk).
 Placement: a card with 2+ act groups gets one more kit tab "Lòng người" (count chip dropped); a card with one group or none (stage pop-up, Thái hậu) shows the blocks under its acts. Not filled: her own card, children, "Người lạ".
+Dislikes (review/pcard-dislikes, `jdis.js`): the Sở trọng block also carries one row "Nàng ghét" / "Ngài ghét" (same `kitRows` row as likes; known dislikes only, else "chưa rõ"). No new part.
 `pcfBlocks(person, o, quick)` returns the HTML (kit sample §73). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
 
 ## 76. kitPalaceMap — palace DETAIL map (Chính điện · Đông / Tây phối điện) — `dev/build/jpm.js` (last module) — review/palace-map → re-ported as review/palace-map-port (number 71: main's §33 is the figure scale)
