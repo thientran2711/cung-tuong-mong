@@ -42,11 +42,13 @@ function fire(f){f()}
 function randomStep(){
   const cand=[];
   deck.forEach((a,i)=>{if(cardOK(a))cand.push(()=>{note("card",a.n);act(i)})});
+  if(!window.__hsOnly){/* danh-balance: Hành-sự-only random player */
   places().forEach(p=>{if(placeOK(p))cand.push(()=>{note("go");goTo(p.k)})});
   rivals.forEach((v,i)=>{if(v.alive&&!v.out&&can(2))rvBtns(i).forEach(k=>cand.push(()=>{note("scheme_"+k);doAct(i,k)}))});
   lessonCands().forEach(a=>cand.push(()=>{note("lesson");lesson(a.k)}));
   if(S.bac>=60&&!S.master)cand.push(()=>{note("master");hireMaster()});
   talkCands().forEach(t=>cand.push(()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}));
+  }
   if(!cand.length||window.__turnActs>=40){window.__buoi++;if(!cand.length&&used<=1)window.__idle++;window.__turnActs=0;nextBuoi();return}
   window.__turnActs++;{const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used;if(window.__rtk!==tk){window.__rtk=tk;window.__rn=0}if(++window.__rn>30){window.__rn=0;window.__buoi++;nextBuoi();return}}rpick(cand)()}
 // ---- SENSIBLE
@@ -87,19 +89,22 @@ function sensibleStep(){
   if(window.__aff)for(const x of (S.staff||[]).concat(S.maid?[S.maid]:[]))if((x.loyal||0)>=60&&tinOf(x)<60)x.tin=60;
   const N=needs();
   // accuse
-  if(can(2)){const accs=[];rivals.forEach((v,i)=>{if(v.alive&&!v.out&&rvBtns(i).includes("accuse")){const o=ACT.accuse.o?ACT.accuse.o(S,v):70;accs.push({v,i,o})}});
+  const HS=!!window.__hsOnly;/* danh-balance: Hành-sự-only player (indanh.js) */
+  if(!HS&&can(2)){const accs=[];rivals.forEach((v,i)=>{if(v.alive&&!v.out&&rvBtns(i).includes("accuse")){const o=ACT.accuse.o?ACT.accuse.o(S,v):70;accs.push({v,i,o})}});
     accs.sort((a,b)=>(b.v.queen-a.v.queen)||b.v.rank-a.v.rank);
     if(accs.length&&accs[0].o>=60){note("accuse");doAct(accs[0].i,"accuse");return}}
   const opts=[];
-  if(qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
+  if(!HS&&qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
   /* diff-remeasure: the one charity act (act-dedupe moved it to Tài nghệ Tứ đức, once a month) — a sensible player uses it */
-  try{const C=BAL.charity;if(C&&typeof charity==="function"&&!S.srv&&!S.out&&S.charM!==S.turn&&can(1)&&S.bac>=C.bac+20)opts.push({L:"charity",s:3.2,f:()=>{note("charity");charity()}})}catch(e){}
+  try{const C=BAL.charity;if(!HS&&C&&typeof charity==="function"&&!S.srv&&!S.out&&S.charM!==S.turn&&can(C.khac||1)&&S.bac>=C.bac+20)opts.push({L:"charity",s:3.2,f:()=>{note("charity");charity()}})}catch(e){}
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
-  talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
+  if(!HS)talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
-  if(L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
+  if(!HS&&L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
   /* diff-remeasure: free self-study in the Tài nghệ tab (act-dedupe w1 moved the Hành sự "Tự học X" card there); off with window.__noSelf */
-  if(!window.__noSelf&&typeof lessonMode==="function"&&!S.mg&&can(2)&&S.suc>=60){const A=ARTS.filter(a=>S.arts[a.k]<5).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);if(A.length)opts.push({L:"self",s:1.3-(S.suc<70?.5:0),f:()=>{note("selfStudy");lessonMode(A[0].k,"self")}})}
+  if(!HS&&!window.__noSelf&&typeof lessonMode==="function"&&!S.mg&&can(2)&&S.suc>=60){const A=ARTS.filter(a=>S.arts[a.k]<5).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);if(A.length)opts.push({L:"self",s:1.3-(S.suc<70?.5:0),f:()=>{note("selfStudy");lessonMode(A[0].k,"self")}})}
+  /* diff-remeasure: free Tứ đức self-study (Tài nghệ tab, j85 lessonVir "self"; exam rows read two virtues, BAL.ex.wVir); off with window.__noSelf */
+  if(!HS&&!window.__noSelf&&typeof lessonVir==="function"&&typeof VIR!=="undefined"&&S.vir&&!S.mg&&can(2)&&S.suc>=60){const V=VIR.filter(v=>(S.vir[v.k]||0)<5).sort((a,b)=>(S.vir[a.k]||0)-(S.vir[b.k]||0));if(V.length)opts.push({L:"vself",s:1.1-(S.suc<70?.5:0),f:()=>{note("virStudy");lessonVir(V[0].k,"self")}})}
   const sea=SEASON[S.month-1];const W=S.where||{};
   const pls=[];
   const place=(k,s)=>{const p=places().find(x=>x.k===k);if(p&&placeOK(p))pls.push({k,s:s/Math.sqrt(travel(S.place,k)||1)})};
@@ -111,7 +116,7 @@ function sensibleStep(){
   if(!S.preg&&S.sung<35)place("ksp",.8);
   if(S.arts.y<2)place("tyv",.6);
   if(window.__aff)for(const id in (S.menW||{})){place(S.menW[id],2.5)}
-  pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
+  if(!HS)pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
   const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
   const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
   if(op2.length&&op2[0].s>0.35){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}

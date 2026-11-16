@@ -129,7 +129,7 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 #kidfl>.dlg.kpanel>.kidb{overflow:auto;overscroll-behavior:contain;padding:10px 14px 12px}
 .kidc .kidhd,.kshdc .kidet .kidhd{padding-right:40px}
 .kmrow[data-kid],.kmsh[data-kid],.kiev [data-kid],[data-kid].kitem{cursor:pointer}
-@media (max-height:500px){#kidfl .kidpic>.kitem{--isz:72px}}
+
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§70",title:"kitItemDetail · kitItemCard (chạm món đồ: thông tin món đồ)",
  html:()=>`<div class="kitpg-row" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">${["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).map(k=>kitItemDetail(k,{cls:"kidet-strip"})).join("")}</div>`+

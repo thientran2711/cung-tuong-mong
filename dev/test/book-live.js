@@ -1,7 +1,7 @@
 /* Live book UI shots: every tab of the consort road (or the cung nữ road with "srv") on the real layout.
    usage: node dev/test/book-live.js <baseURL> <W>x<H>@dpr <outdir> <tag> [srv] [tabs,comma]
    Writes <tag>-<tab>.jpg; prints per tab: overflowX, stage backdrops (count of painted backdrop layers), errors. */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG,ROAD,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const SRV=ROAD==='srv';
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
  const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>errs.push(e.message));

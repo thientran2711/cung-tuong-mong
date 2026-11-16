@@ -22,12 +22,12 @@ function start(){
      entering-the-palace band (consort / palace-maid road) + her full-body figure in the person column, the text beside */
   pushModal({t:"Nhập cung",stage:[S],headArt:{src:(o.k==="cnv"||(typeof isSrv==="function"&&isSrv()))?"img/ev-nhap-cung-cn.webp":"img/ev-nhap-cung.webp",label:"Nhập cung"},
    h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung.</p>
-   ${kitRows([["Phong",RANKS[S.rank].n,"t"],["Theo hầu",`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`${empName()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
+   ${kitRows([["Phong",RANKS[S.rank].n,"t"],["Theo hầu",typeof cmRow==="function"?cmRow():`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`${empName()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
     ...(S.ps?[["Hậu cung",psOpenText(),"t"]]:[]),["Tuyến truyện",`${s.t}. ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}`,"t"]])}
    <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi 4 khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
 }
-function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · lòng ${S.maid.loyal}`}];
+function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}${typeof cmInfo==="function"?cmInfo(S.maid):""}`}];
   S.kids.filter(k=>k.alive).forEach(k=>p.push({kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#f0d070":"#c9a0e0",info:`${k.age} tuổi · Sức khỏe ${k.hp} · Tài ${k.tal} · Hoàng thượng thương ${k.fond}${k.heir?" · Thái tử":""}`}));return p}
 
 function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
