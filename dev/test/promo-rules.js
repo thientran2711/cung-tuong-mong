@@ -5,7 +5,7 @@
    NPC promotion → set + data only; servant road: merit opens an exam window + card «Khảo hạch Nội vụ phủ», pass → rank +1 + pouch, fail →
    cooldown; NPC servants roll the exam (seeded); ma ma choice = exam; demotion / cold palace → kitGloom with the cracking chip (.kmdown);
    old save loads silently (no chest for the past). Every size: chest list, person reveal, rank-down stage — no overflow, button in view. */
-const {chromium}=require('playwright');const args=process.argv.slice(2);const URL=args[0],OLD=args[1]&&args[1]!=='-'?args[1]:null,OUT=args[2]&&args[2]!=='-'?args[2]:null;
+const {chromium}=require('playwright');const KM=require('./lib/kmscene');const args=process.argv.slice(2);const URL=args[0],OLD=args[1]&&args[1]!=='-'?args[1]:null,OUT=args[2]&&args[2]!=='-'?args[2]:null;
 let SIZES=args.slice(3);if(!SIZES.length)SIZES=['755x1000@2','1000x755@2','1180x820@2','1366x1024@2','844x390@3'];
 const boot=async(p,u,srv)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(srv=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
@@ -13,7 +13,7 @@ const boot=async(p,u,srv)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout
 const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});
 (async()=>{const b=await chromium.launch();const errs=[];const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slice(0,180)]);
  for(const [si,SZ] of SIZES.entries()){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(Number);
-  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();
+  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});await KM.use(ctx);/* KIT §81: scenes wait for their end button */const p=await ctx.newPage();
   p.on('pageerror',e=>errs.push(SZ+' '+e.message.slice(0,200)));p.setDefaultTimeout(0);await boot(p,URL);
   if(si===0){
    /* 1. son birth: decree at once */
@@ -36,7 +36,7 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
    ok(r.now===r.rk+1&&r.wdP.includes(r.P+':y')&&r.wdP.includes(r.P+':tram')&&r.wrist&&r.scent&&r.keys.length>=6&&r.nvp,'promotion → full rank set as real items (y phục + trâm of the new phẩm, Đeo tay, Túi thơm, extras), from Nội vụ phủ',r.keys.join(','));
    ok(r.st===1&&r.rev===1,'promotion → one new servant assigned + person reveal queued',`staff +${r.st}, cap ${r.cap0}→${r.cap1}`);
    const ch=await p.evaluate(async()=>{for(let i=0;i<40&&!document.querySelector('.km-reward .km-done');i++){const o=document.querySelector('.kmov.km-reward:not(.km-prev)');if(o)o.click();
-     const e=document.querySelector('.kmov.km-edict');if(e)e.click();await new Promise(r=>setTimeout(r,250))}const L=document.querySelector('.km-reward .kmlist');return{t:L?L.innerText:'',ttl:(document.querySelector('.km-reward .kmrew-h')||{}).innerText||''}});
+     const e=document.querySelector('.kmov.km-edict');if(e)e.click();__kmNext();await new Promise(r=>setTimeout(r,250))}const L=document.querySelector('.km-reward .kmlist');return{t:L?L.innerText:'',ttl:(document.querySelector('.km-reward .kmrew-h')||{}).innerText||''}});
    ok(/Phẩm phục/.test(ch.ttl)&&/Dấu ấn/.test(ch.t),'chest «Phẩm phục …» lists the set and the head mark',ch.ttl.replace(/\s+/g,' ')+' | '+ch.t.replace(/\s+/g,' ').slice(0,120));
    const pv=await p.evaluate(async()=>{const c=document.querySelector('.km-reward [data-km-close]');if(c)c.click();for(let i=0;i<30&&!document.getElementById('kprevov');i++)await new Promise(r=>setTimeout(r,200));
     const o=document.getElementById('kprevov');const im=o&&o.querySelector('.kprev-img');await new Promise(r=>setTimeout(r,800));return{on:!!o,src:im&&im.getAttribute('src'),t:o?o.innerText:''}});
@@ -81,7 +81,7 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
     const im=o.querySelector('.kprev-img');const fig=o.querySelector('.kprev-fig');const fr=fig&&fig.getBoundingClientRect(),ir=im&&im.getBoundingClientRect();
     return{sw,btn:bt?(br.bottom<=innerHeight+1&&br.top>=0):null,clip,fig:fr?Math.round(fr.height):null,img:ir?Math.round(ir.height):null}});
    ok(m.sw<=0&&m.btn!==false&&!m.clip.length,`${SZ} ${n}: no overflow / clipping, button in view`,JSON.stringify(m));if(OUT)await p.screenshot({path:`${OUT}/${n}-${wh}.jpg`,type:'jpeg',quality:55})};
-  await p.evaluate(async()=>{S.rank=Math.min(5,S.rank+1);render();for(let i=0;i<40&&!document.querySelector('.km-reward .km-done');i++){const o=document.querySelector('.kmov.km-reward');if(o)o.click();const e=document.querySelector('.kmov.km-edict');if(e)e.click();await new Promise(r=>setTimeout(r,250))}});
+  await p.evaluate(async()=>{S.rank=Math.min(5,S.rank+1);render();for(let i=0;i<40&&!document.querySelector('.km-reward .km-done');i++){const o=document.querySelector('.kmov.km-reward');if(o)o.click();const e=document.querySelector('.kmov.km-edict');if(e)e.click();__kmNext();await new Promise(r=>setTimeout(r,250))}});
   await p.waitForTimeout(400);await shot('chest');
   await p.evaluate(async()=>{const c=document.querySelector('.km-reward [data-km-close]');if(c)c.click();for(let i=0;i<30&&!document.getElementById('kprevov');i++)await new Promise(r=>setTimeout(r,200))});await p.waitForTimeout(900);
   if(await p.evaluate(()=>!!document.getElementById('kprevov')))await shot('reveal');else ok(false,`${SZ} reveal shown`);

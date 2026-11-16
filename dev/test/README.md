@@ -53,3 +53,5 @@ Rule: a fix that touches one of these needs one run of the matching profile (`ip
   file seen must come from the cache and the saved life's rooms must show. Exit 1 on a broken picture or a seen file not served offline.
 - `node dev/test/upgrade-sw.js --old <root of an older built checkout>`: returning install, old SW + old ctm-assets -> this build (pictures stubbed,
   keys real): new worker in control, no stale index, one shell cache, still-valid asset keys kept, core complete, offline reload on the new build.
+## KIT §81 scene end in tests (`dev/test/lib/kmscene.js`)
+A kit scene (card flip, edict, bloom, gloom, ink…) waits for its end button `.kmov.km-endon > .kmend`. A test that clicks through the motion queue (edict → reward chest → person reveal) must press it: `const KM=require('./lib/kmscene'); await KM.use(ctx)` before goto, then `__kmNext()` in page code. Without it the queue stays on the first scene (e.g. the Kính sự phòng flip at life start).
