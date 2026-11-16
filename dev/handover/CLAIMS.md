@@ -272,3 +272,4 @@
 | road B2 chapters nc(+bd)+td+ch .5–.11 (opus helper) | review/road-b2 | B | session_01N1tNP4zDh6M8kQNxdcYKvM | RUNNING | 16/11 16:47Z |
 | road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | RUNNING | 16/11 16:47Z |
 | page-scale (opus; OD 17:00Z + OD:L345/L1278): phone portrait page = iPad right page scaled uniformly — root cause + whole-group fix for every tab panel (bag 7 vs 4 rows first) + comparison test | review/page-scale | main s20 | session_01UV1SzibwMrHrCm5SBrYNJR | RUNNING | 16/11 17:00Z |
+| C GO-LIVE prep (sonnet; OD:L1370): re-merge C PASS branches not on main (title-sys-r1 ced2edc6, b-answers-art-r1 82756a80) onto latest main, quick check, READY sha each → Foreman C fast-forwards | review/title-sys-live, review/b-answers-art-live | C | (opening) | RUNNING | 16/11 16:57Z |
