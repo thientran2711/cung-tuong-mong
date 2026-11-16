@@ -3110,6 +3110,14 @@ Art (Magnific gpt-2-6, recipes `dev/fxwork/buoi/slice_buoi.py`, CDN `img/fx/`, o
 Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §71 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
 
 
+## 72. kitBackBtnHtml · painted "back to a place" button (owner 15/11, review/room-btn) — `dev/build/jk3.js`
+- Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
+  → `<img.kbi>` (img/kit/ico-<kind>.webp, 30 px, gpt-2-6 gouache, transparent, 128 px WebP ~7 KB: ico-room = red-lacquered door under green tiles with a lantern,
+  ico-map = palace scroll map) + `<span.kbl>` label; the button class is `.kbackb` (no border / ground in the header; a soft paper pill over the stage art for #tomap).
+- Header `#k3room` (phone shell only, as before): label "Về phòng", or "Về <place>" when she is elsewhere (tooltip + aria-label the same). >= 600 px: icon + label in the
+  right column under the time block, right-aligned, no bar. < 600 px: icon only (label in tooltip, same rule as the stat cells), under the menu button next to the time block.
+- New back buttons to a place MUST use this part (`node dev/test/room-btn-scan.py` fails on a text "‹ <place>" bar). New icon kinds: add `img/kit/ico-<kind>.webp` in the same style.
+- Tests: `node dev/test/room-btn.js <url> <outdir>` (6 viewports). Kit page: sample §72. Number §72 is provisional (coordinator to confirm).
 ## 69. CO-OP BUỔI CLOCK · kitCoopClock (owner 15/11 ~21:25Z, review/coop-timer) — `dev/build/jcooptimer.js` (after jkitpage)
 - `kitCoopClock({left, len, state, fr})` → one row of kit chips (`.kchips.kctm`, `kitChip` look): clock chip with a small ring
   (`.kctm-r`, share of time left) + words, and the friend's chip. state `run` → `.kchip.n` "Còn 1 phút 42 giây" (`.r` under 20 giây);

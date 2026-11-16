@@ -91,7 +91,7 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
   grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
  html body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
  html body header.hud:not(:has(#k3room:not([hidden])))>#k3tc{align-self:center!important}
- html body .game#game header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:stretch!important;align-self:start!important;margin-top:4px;min-height:32px;padding:0 10px}
+ html body .game#game header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:end!important;align-self:start!important;margin-top:2px;min-height:34px;padding:0 6px}
  html body header.hud>#kstrow{margin-top:3px!important}
  html body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
  html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
@@ -106,7 +106,7 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
 /* phones < 600 px: the same row, label line = icon only (name in the tooltip), number line below */
 @media (max-width:599px){
  html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important}
- html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me room" "tc tc tc" "stats stats stats"!important}
+ html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "room tc" "stats stats"!important;align-items:center}
  html body header.hud>#k3tc{justify-self:stretch}
  .k3tc .k3tt{grid-template-rows:auto!important;grid-auto-flow:column;justify-content:start;gap:0 12px!important}
  /* KIT 31.2a (review/small-bugs-3): the state row never runs past the edge — under 600 px both lines flow as ONE wrapping row of whole
