@@ -119,7 +119,7 @@
 | story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | RUNNING | 16/11 08:26Z |
 | act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | RUNNING | 16/11 08:40Z |
 | servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
-| slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | RUNNING | 16/11 08:40Z |
+| slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | DONE SẴN SÀNG KIỂM dd0b618f | 16/11 08:40Z |
 | ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | RUNNING | 16/11 08:40Z |
 | D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | DONE SẴN SÀNG KIỂM d0f2260a | 16/11 08:40Z |
@@ -129,3 +129,4 @@
 | design-scale REVIEW (opus; one page 590x820, uniform scale) | review/design-scale-r1 | main s14 | session_01UV1SzkHA4ScRWkoirdEoSn (opus) | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | RUNNING | 16/11 09:08Z |
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
+| slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | (opening, s3) | RUNNING | 16/11 09:19Z |
