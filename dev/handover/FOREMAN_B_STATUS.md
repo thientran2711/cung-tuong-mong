@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 03:53Z — running 6/12: workers C24, C41 finisher, D34, D33, D31 + reviewer D42 places-port. No more assignable Slice B items: D36 BLOCKED (KIT REQUEST podium), D41 waits for Foreman C D29. 6 free slots — coordinator may add items here.
+Updated: 11/16/2026 04:23Z — running 5/12: workers C41 finisher, D34 scheme-games-port, D33 routes-port (branch pushed, WIP), D31 difficulty-port (branch pushed, WIP, long bot measure) + reviewer C24 chapter-detail. No more assignable Slice B items: D36 BLOCKED (KIT REQUEST podium), D41 waits for Foreman C D29 (still RUNNING). 7 free slots — coordinator may add items here.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
