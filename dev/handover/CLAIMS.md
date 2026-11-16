@@ -367,4 +367,4 @@
 | img-cleanup review r1 (opus, BIG: build/quickcheck gate + 6.1k file removal): review/img-cleanup a2e99bd0 | review/img-cleanup-r1 | B | session_01N1tNP5L4nZgzCiWcpjcHmx | RUNNING | 16/11 19:42Z |
 | night-final (opus; owner bug: night committed once at end of day, one woman) | review/night-final | main s22 | session_01UV1SziCQkwUnKFA7eL1uRp | RUNNING | 16/11 19:46Z |
 | suc-khoe review r1 (opus, BIG) of 10cba645 | review/suc-khoe-r1 | D | session_01DgYSWnQ5MJS6ViDgFmBeGV | RUNNING | 16/11 19:48Z |
-| coop-name-mask review r1 (sonnet, SMALL) of 48a942b2 | review/coop-name-mask-r1 | D | (opening) | RUNNING | 16/11 19:50Z |
+| coop-name-mask review r1 (sonnet, SMALL) of 48a942b2 | review/coop-name-mask-r1 | D | session_01DgYSWmQ9JPMfwpdYSLALUt | RUNNING | 16/11 19:50Z |
