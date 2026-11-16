@@ -260,4 +260,4 @@
 | PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | session_011xDdVQ9uFz3dWEEUrZZp9W | RUNNING | 16/11 16:06Z |
 | tutrang-layout (sonnet; owner-bug fast lane; OD 16/11 16:20Z): Tư trang › Túi đồ — wear slots one vertical column left, bigger bag grid right, small pet strip below; whole group (every wear-slot/bag place); samples 755x1000 + 1180x820 to owner first | review/tutrang-layout | main s20 | session_01UV1SzkXdhk3ejaZYACftuT | RUNNING | 16/11 16:22Z |
 | status-icons (sonnet; owner-bug fast lane; OD 16/11 16:25Z): 'Thỉnh tranh' download chip → small kit square download icon in a corner + downloading animation + tap → detail panel; whole group: every status chip that fits in an icon | review/status-icons | main s20 | session_01UV1Szh7JPiQw9nJJ8XwPbe | RUNNING | 16/11 16:24Z |
-| story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | (opening) | RUNNING | 16/11 16:22Z |
+| story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | session_011xDdVSfRLPar78kg13jMBC | RUNNING | 16/11 16:22Z |

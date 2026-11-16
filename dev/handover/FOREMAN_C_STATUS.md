@@ -11,7 +11,8 @@ Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 ·
 - 15:56Z buoi-art SAMPLE v2 (square buổi icons) looked at → SENT to the owner. icon-art: 4 buổi icons removed from its list (belong to buoi-art).
 - 15:57Z night-backs SAMPLE READY (ev-night2-tender backs-only; list: ~16 FAIL pictures incl. 3 Gối đầu, night1, ksp, prep, 6 night acts) → looked at, SENT to the owner.
 - 16:05Z D29 r4 SẴN SÀNG KIỂM f388b4de (report on branch review/schedules3-r4) → opus reviewer session_011xDdVPgkrf4Nx6Fu4w3gr5 (review/schedules3-r5); PEOPLE LEDGER opus successor session_011xDdVQ9uFz3dWEEUrZZp9W (review/people-ledger @afcac6cb, continue from handover); old worker session_011xDdVNZkQ6SnAs8Rttsbwj ARCHIVED. Running C: 9.
-- PENDING for next wake: story14-p1-r2 report → opus reviewer review/story14-p1-r3; owner verdicts on the 15:45Z samples (title plates, item art audit, cắm hoa) → mass-production workers.
+- 16:22Z story14-p1-r2 SẴN SÀNG KIỂM f5305341 (8 r1 items fixed; story14-frame 27/27, host, coop 59/59) → opus reviewer session_011xDdVSfRLPar78kg13jMBC (review/story14-p1-r3); worker ARCHIVED. Running C: 9.
+- PENDING for next wake: owner verdicts on the 15:45Z samples (title plates, item art audit, cắm hoa) → mass-production workers.
 
 ## HANDOVER (Foreman C session 3 → session 4, 15:50Z 16/11)
 Why: session 3 context ~29% (START_CTX ~7% → limit 32%), and a large new ART load arrived (owner 15:35Z: ALL drawing is Foreman C's). Session 4: read this block, SESSION 3 LOG, ## PASS, ## QUESTIONS, CLAIMS.md rows with C, dev/handover/reports/ (new), FOREMAN_C.md lines from '(15:25Z s18)' on, OWNER_DECISIONS from 16/11 14:45Z on. Push helper used by s3: /home/user/wt/push.sh (union-resolves CLAIMS/STATUS) — recreate it (fetch --depth=30 under flock, rebase, union conflict markers, push).
