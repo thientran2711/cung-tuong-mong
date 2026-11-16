@@ -10,7 +10,7 @@ Base main at start: 900ace7fb.
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
-| D47 small-bugs-4 (jaudit 'Vì sao' trung y wording; 'Phi ???' greet/arc tab; VP 'theo lòng nàng'; one kit sample page; 'Đang cài' leftover; servant-road header '!') | review/small-bugs-4 | sonnet | RUNNING (worker) |
+| D47 small-bugs-4 | review/small-bugs-4 @74e2d3730 → review/small-bugs-4-r1 | sonnet | REVIEWING (4 fixed: thiếu lễ 'Vì sao', stranger greet/arc reveal, 'theo lòng nàng', 'Đang cài'→'Đang mặc' 10→0; 2 already done on main; canonical kit page = #kit) |
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
 | D46b new placeholders from new main content (23 option cards e.g. 'Hòa giải…', 'Răn dạy…', 'Xử nghiêng về…'; events q72 dong_tam, dt_hen, dt_thu; acts 'Bỏ phấn lạ', 'Mời thái y bắt mạch', 'Sang Thái y viện xin bắt mạch', 'Tát'; + 'Thuê thợ thêu ngoài cung' wrong padlock picture) | review/placeholder-pics3 | sonnet | RUNNING (art worker) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
@@ -71,6 +71,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q5 (owner, C7): silver options that only buy information (rumour checks, fortune) lose to free options that give Đức even at half price. Give them a hard gain (e.g. Tai mắt +1) so they compete?
 - Q6 (owner, C7): bots now reach Hoàng hậu 45% (n=22, target ~32% on Vừa). Tune Vừa now (first knob BAL.ex.bar[2] 28→30) or leave it to the difficulty-modes re-measure (D31, Foreman B)?
 - KIT REQUEST K8 (C20 act-text, details dev/PROGRESS_review-act-text.md on review/act-text): (1) j63 kaModel: an item with coloured tags starting 'kèm:'/'thành:' keeps its label and lands in Được (labels read only when no tags) — affects every card through kaModel with coloured spans; (2) kaRows add(): generic split-and-route of a pure-gain clause inside a Kèm item to Được; (3) 41 long Kèm/Mất rows with many numbers (Tung tin đồn, Khiêu khích, Thỉnh an, Vu oan, Bỏ độc, Lục rương…) need a layout decision — row layout for >2-line values or sub-rows. Also FYI: act-text's earlier commits (before the rule) touched kit helpers kSplitTop and other j19/j63 bits — kit keeper please look at them in the review.
+- KIT REQUEST K9 (D47): kitRelDelta rows in the result toast print real before→after numbers for a stranger (stage<2), e.g. 'Quý phi ???: có thiện cảm với ta hơn (8→1, +2)' — should print only the sign / 'chưa rõ' when kitKnownName is false, like kitRelRows (jkrel.js:30). Please log in KIT_REQUESTS.md. (D47 also changed one wording line in KIT.md ~1106 'Đang cài'→'Đang mặc' — kit keeper please confirm.)
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
