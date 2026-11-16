@@ -145,7 +145,7 @@
 | D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | DONE FAIL 1 → coop-b1b5-fix | 16/11 10:32Z |
 | coop-guest-maid review (opus) | review/coop-guest-maid-r1 | D | session_01DgYSWm8Dq4FhHzrbnuCRGL | PASS 3a875687 | 16/11 10:34Z |
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
-| entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | RUNNING | 16/11 10:48Z |
+| entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | PASS d7364cb2 | 16/11 10:48Z |
 | kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | RUNNING | 16/11 10:55Z |
 | danh-balance review (opus) | review/danh-balance-r1 | D | session_01DgYSWncjcb6DFsEZJo6AvA (opus) | PASS 9a1133f0 | 16/11 10:58Z |
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |

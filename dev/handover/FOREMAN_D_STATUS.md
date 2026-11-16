@@ -35,7 +35,7 @@ main at start = eba64ead4.
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
 | D58 close-maid-by-origin v2 | review/close-maid-r1 @ebc85f78 | opus | PASS (see ## PASS; reviewer archived) |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
-| ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam @ab50be5c | opus | SẴN SÀNG KIỂM (contains kc-roads-cn-nc-r1 ef6e7a05 + mg-balance 96736fff; worker archived) → reviewer session_01DgYSWp7SJ7frNoZUnBtM7q RUNNING (review/entry-exam-r1) |
+| ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam-r1 @d7364cb2 | opus | PASS (see ## PASS; ships AFTER kc-roads-cn-nc-fix + mg-balance; reviewer archived) |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING — VISIT half only (extends existing j7 'empnight'); POISON half PARKED (worker's reply blocked by a safety classifier) → QUESTIONS |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
@@ -49,6 +49,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+READY review/entry-exam-r1 d7364cb2e21d6d19451bae2f98458e1a8e170bb6 (entry selection exam + origin intros; SHIP ORDER: after review/kc-roads-cn-nc-fix (D, running) and B's mg-balance; BAL.mgTier.occ.tuyen 1.5→1; tests entry-exam 9/9+5/5+3/3, kc-roads direct 9/9, coop-together 26/26, coop-e2e 59/59; report reports/review-entry-exam-r1.md)
 READY review/close-maid-r1 ebc85f78446186a4a990024b17c73091c700f218 (D58 close maid by origin v2, BAL.cmaid; also carries READY servant-mline-r3; reviewer fixed S.cm clash with jcmood → S.cmaid (monthly crash), ONE CORE newLoy/spyDanh; main 9ddb3f6c ancestor; report reports/review-close-maid-r1.md)
 READY review/danh-balance-r1 9a1133f0bdeb1c649e5fb9d1546d779f59154b80 (Danh gates/succession/charity numbers now read BAL.danhG/succN/charity — value-neutral, proven by literal-vs-BAL table + runtime probe; no BAL value changed; report reports/review-danh-balance-r1.md)
 READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op guest maid can rise via guest→host request; reviewer fixed NPC over-cap on host + srvout request; trial merge with coop-b1b5-p2: only jbal2 conflict, keep both; report reports/review-coop-guest-maid-r1.md)
@@ -142,6 +143,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:51Z: entry-exam-r1 PASS d7364cb2 → READY (ship after kc-roads fix + mg-balance); reviewer archived; kc-roads fix worker told to build on top of it.
 - 11:47Z: close-maid-r1 PASS ebc85f78 → READY; reviewer archived.
 - 11:16Z: coop-b1b5-r2 FAIL 1 BLOCKING (jcycle × co-op guest) → opus fix worker from r2 @d5879537; reviewer archived.
 - 11:13Z: danh-balance-r1 PASS 9a1133f0 → READY; reviewer archived. Reviewer note for the P1 proposal: '+55 Danh' is arithmetic; measured +12.5 (1 seed, overlapping CIs; run_par.js not reproducible per seed).
