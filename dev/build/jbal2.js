@@ -277,5 +277,18 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
  /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
  cap:{tt_mat:4},
+ /* B1 roads (jrd_dtq/jrd_muoi/jrd_cn): deadlines in months (printed as words), rank indexes (RANKS[i].n printed), thresholds */
+ dtq_bien:{grain:3,speak:4},  /* grain: months before Hộ bộ closes the spring books (.5); speak: lowest rank index whose memorial reaches the desk (.9) */
+ dtq_vu:{lim:2},              /* months before Đại Lý tự opens the đối chất (.9) */
+ dtq_binh:{mon:3},            /* months for the camp half of the tiger tally to reach the capital (.5) */
+ dtq_huynh:{mon:3},           /* months before the Hắc Thủy freezes and the ransom road closes (.5) */
+ muoi_tuoc:{rkSeat:4},        /* lowest rank index allowed to write a lantern poem at the Trung thu feast (.7) */
+ muoi_lau:{rkSend:3},         /* lowest rank index allowed to send goods into a prison through Nội vụ phủ (.8) */
+ muoi_doi:{han:3},            /* months to pay the relief contribution before Hộ bộ closes its books (.8) */
+ muoi_no:{han:3},             /* months to raise the money (.5 / .6) */
+ cn_chu:{gap:1},              /* ranks she must sit above the old mistress for the .9 climax bonus */
+ cn_tinh:{danh:40},           /* Danh at which her own word weighs in the Kính sự phòng report (.9) */
+ cn_ban:{ill:2},              /* months Tố Nga survives without the ginseng (.8) */
+ cn_than:{dl:3},              /* months the old Thẩm steward can hold out (.7) */
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
