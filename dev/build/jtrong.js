@@ -13,7 +13,7 @@
    5. Display only through existing parts: person-card lines (→ kitPcGrid chips "Trọng", "Tính nết"), the act card's Được/Mất numbers
       and its Kèm row (optLine / kitParse). No new UI part. ================= */
 Object.assign(BAL,{trong:{up:.5,off:.6,/* per matched / offended virtue */
- hhBase:3,hhO:70,hhRep:.15,hhScold:3,hhCap:55,repMin:.35,capSpan:15,srvBase:2,npcBase:2,learn:60}});
+ hhBase:3,hhO:70,hhRep:.15,hhScold:3,hhCap:55,repMin:.35,capSpan:15,srvBase:2,npcBase:1.4,learn:60}});
 const VIRT=["Hiếu","Đễ","Trung","Tín","Lễ","Nghĩa","Liêm","Sỉ","Nhân","Trí","Cần","Kiệm","Khiêm"];
 const VIRT_GL={"Hiếu":"hiếu thảo với bề trên","Đễ":"kính nhường người trên","Trung":"trung thành","Tín":"giữ chữ tín, ghét dối trá","Lễ":"giữ lễ nghi phép tắc",
  "Nghĩa":"trọng nghĩa, không bỏ người hoạn nạn","Liêm":"trong sạch, ghét đút lót","Sỉ":"biết liêm sỉ, ghét điều nhục","Nhân":"thương người",
