@@ -76,8 +76,9 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
    card=kitSkillCard({kind:"story",k:"v1",kicker:`Chương ${P.c}`,name:s.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",s.goal],
     S.st.done?["Kết cục",S.st.tag||(S.st.done>0?"Thành":"Hỏng"),S.st.done>0?"g":"r"]:["Kế tiếp",hn||"chờ hồi kế tiếp"]])}
   else card=kitEmpty("Mệnh truyện","Chưa mở chương nào. Mở bằng thẻ «Mệnh truyện» ở Hành sự.");
-  const nx=c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
-  h+=`<div class="ktop"><span class="kchip n">${ktEsc(Q0.t)}</span>${nx?` <span class="kchip n">còn khoảng ${nx} chương</span>`:""} ${kitInfo("Luật chương")}</div>`+card;
+  const F=typeof f14Info==="function"?f14Info():null;/* the 14-chapter frame (jst14): part chip + exact chapters left */
+  const nx=F?F.left:c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
+  h+=`<div class="ktop"><span class="kchip n">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n">còn ${F?"":"khoảng "}${nx} chương</span>`:""} ${kitInfo("Luật chương")}</div>`+card;
   if(c&&c.done)h+=rows67([["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]])}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Sắc phong","Ngươi là Hoàng hậu. Đưa con mình lên ngôi để thành Hoàng thái hậu.");

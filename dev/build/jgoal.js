@@ -63,6 +63,8 @@ function nextRows(N){return N.map((x,i)=>[`Việc ${i+1}`,`<b>${esc(x.t)}</b><br
 function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
 function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  const sec=[{h:"Mục tiêu chương",rows:[["Chương",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]]}];
+ /* the 14-chapter frame of a new life (jst14): which part she is in, chapters left */
+ try{const F=typeof f14Info==="function"?f14Info():null;if(F)sec.push({h:`Đời người · ${F.max} chương`,rows:F.rows.concat([["Còn lại",F.left?`${F.left} chương`:"đã đi hết các chương"]])})}catch(e){}
  if(C.kind==="ms")sec.push({h:C.any?"Tiến độ · xong một điều là đủ":"Tiến độ",html:typeof kitChecks==="function"?kitChecks(C.steps.map(x=>[x.ok,esc(x.t)])):""});
  if(C.kind==="ms"&&C.id==="nhap"&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
   sec.push({h:`Muốn lên ${RANKS[S.rank+1].n}`,html:typeof kitReqRows==="function"?kitReqRows(R):""})}catch(e){}}
