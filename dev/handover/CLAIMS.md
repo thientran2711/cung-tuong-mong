@@ -349,4 +349,4 @@
 | stage-pets r6: Hành sự = her room only; Dư đồ → courtyard → full-screen place (reuse palace-map*) | review/stage-pets | main s22 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 19:06Z |
 | pl-courtyards-r2 review (r1 8b4a2160f + single-hall ff05f03d) | review/pl-courtyards-r2 @ 9e1e99f4 | reviewer s22 | FAIL (festival/mourning fallback, iPad back-button overlap) | 16/11 |
 | buoi-art review r1 (sonnet, SMALL: art + band/moon wiring) of 70fcddac | review/buoi-art-r1 | C | session_011xDdVP1UyUGDme7dK1Zmpy | RUNNING | 16/11 19:24Z |
-| road-b3 FAIL fix (opus): items 1–9 of review-road-b3-r1 in jrd_thd/jrd_cnv/jend14 (engine items → fix A) | review/road-b3-fix | B | (opening) | RUNNING | 16/11 19:28Z |
+| road-b3 FAIL fix (opus): items 1–9 of review-road-b3-r1 in jrd_thd/jrd_cnv/jend14 (engine items → fix A) | review/road-b3-fix | B | session_01N1tNP3QtT2AK9LY7dLU2E4 | RUNNING | 16/11 19:28Z |
