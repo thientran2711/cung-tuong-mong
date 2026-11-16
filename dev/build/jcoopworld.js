@@ -200,20 +200,39 @@ function bagOf(L){return (L||[]).map((e,i)=>e&&typeof e==="object"?Object.assign
 const KIDX=["mom","v","by"];
 function kidsCopy(L){return (L||[]).filter(k=>k&&k.alive!==false).map(k=>{const o={};for(const x in k){const y=k[x];if(KIDX.includes(x))continue;if(y==null||typeof y!=="object")o[x]=y}o.alive=true;return o})}
 function famLive(){return {bag:bagOf(S.inv),kids:kidsCopy(S.kids),preg:S.preg&&!S.hidden?S.preg:0,fake:S.preg&&!S.hidden&&S.fake?1:0,fx7:J((S.j71&&S.j71.fx)||null)/* p2 B4: her festival entries */}}
+/* r1 fix 1: the LIVE Worker drops a whole pos over 4000 chars (coop/worker index.js:168). Her bag / kids / pregnancy / festival entries
+   and pets ride their OWN act relay (k "ctm-fam", no cap but the 9e6 message limit), sent when they change; pos carries only their
+   hash `fh` (place, khắc, stats stay small and always update). The friend asks again ("ask") when the hash she holds differs (a relay
+   missed while she was away, a rejoin from the room's stored pos). Old clients still send / read an inline pos.fam / pos.pets. */
+const FK="ctm-fam";
+function hstr(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36)+"."+s.length}
+function famPack(){const pl=petLive(),fm=famLive();return {pl,fm,h:hstr(JSON.stringify([pl,fm]))}}
+function sendFam(P){if(!CW.on||!S||S.dead)return;P=P||famPack();CW.famSentH=P.h;COOP.send({t:"act",k:FK,mode:"fam",h:P.h,pets:P.pl,fam:P.fm,name:S.name,id:FK+":"+newId()})}
+CW.famPack=famPack;
 function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
- const pl=petLive(),fm=famLive();const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,JSON.stringify(pl),JSON.stringify(fm)].join(":");if(k===CW.posKey)return;CW.posKey=k;
- COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,pets:pl,fam:fm,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
+ const P=famPack();if(P.h!==CW.famSentH)sendFam(P);
+ const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
  if(f.__b)f.__b.rank=f.rank;
- if(m.fam&&Array.isArray(m.fam.bag)){const fm=m.fam;if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>Object.assign({},o));ch=true}
+ if(famIn(f,m.fam,m.pets))ch=true;
+ return ch}
+/* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
+function famIn(f,fm,pets){let ch=false;
+ if(fm&&Array.isArray(fm.bag)){if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>Object.assign({},o));ch=true}
   if(JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])){f.kids=(fm.kids||[]).map(o=>Object.assign({},o));ch=true}
   if((fm.preg||0)!==(f.preg||0)){f.preg=fm.preg||0;f.fake=fm.fake||0;ch=true}f.fx7=fm.fx7||null}
- if(m.pets&&Array.isArray(m.pets.L)){const L=m.pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=m.pets.on;f.petB=m.pets.b;f.petBn=m.pets.bn;ch=true}}
+ if(pets&&Array.isArray(pets.L)){const L=pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=pets.on;f.petB=pets.b;f.petBn=pets.bn;ch=true}}
  return ch}
+function famTake(){const m=CW.famLast,f=friendEntry();if(!m||!f||(m.name&&m.name!==f.name))return false;CW.famGotH=m.h;/* compared with her entry each time: a rebuilt entry (merged week) gets the live bag back */return famIn(f,m.fam,m.pets)}
+function famAsk(h){const t=Date.now();if(CW.famAsk&&CW.famAsk.h===h&&t-CW.famAsk.t<4000)return;CW.famAsk={h,t};COOP.send({t:"act",k:FK,mode:"ask",h,id:FK+":"+newId()})}
+COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
+ if(m.mode==="ask"){if(!S.dead)sendFam();return}
+ if(m.mode!=="fam"||typeof m.h!=="string")return;CW.famLast=m;if(famTake()){refreshHere();if(!Q.length)render()}});
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(m.place);const f=friendEntry();if(!f)return;
- const sc=liveStats(m);S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
+ let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
 function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;const pl=CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S)return;CW.bend=false;
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
@@ -496,12 +515,29 @@ const TK="ctm-tn";
 const tnWho=()=>{const t=S&&S.tonight;if(!t)return null;if(t==="me")return me();return t.id!=null?t.id:null};
 function tnSet(who){if(!S)return;if(who==null){S.tonight=null}else if(who===me()){S.tonight="me"}else{const v=who===fp()?friendEntry():RV(who);S.tonight=v&&v.alive&&!v.out?v:null}
  try{if(S.tonight&&typeof ntTake==="function")ntTake(S.tonight==="me"?S:S.tonight)}catch(e){}CW.tnLast=JSON.stringify([wk(),tnWho()])}
+/* r1 fix 4: host-authoritative in-week night. The host's change goes out as the final word (mode "tn", also written to the world key S.tn);
+   the guest's own change is only a CLAIM (mode "claim", with the version of the host's word she last saw): the host takes it when it has not changed the
+   night since the guest last heard its word, else (both changed it in the same buổi: the relays crossed) it keeps its own; either way it broadcasts the final {w, who} and the
+   guest applies only that. who on the wire is relative to the sender: "p" = the sender, "f" = the receiver, else an NPC id. */
+const tnEnc=w=>w==null?null:w===me()?"p":w===fp()?"f":w;
+const tnDec=w=>w==null?null:w==="p"?fp():w==="f"?me():w;
+/* the host's word has a version per week (tnV); a claim names the last version the guest had seen: an older one = the host changed the
+   night meanwhile (crossing), the host's word stands */
+const tnVer=()=>CW.tnV&&CW.tnV.w===wk()?CW.tnV.n:0;
+function tnFinal(re){S.tn={w:wk(),who:tnWho()};CW.tnLast=JSON.stringify([wk(),tnWho()]);CW.tnV={w:wk(),n:tnVer()+1};COOP.send({t:"act",k:TK,mode:"tn",fin:1,v:CW.tnV.n,re:re||null,week:wk(),who:tnEnc(tnWho()),id:TK+wk()+":"+newId()})}
 function tnRelay(){if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
- CW.tnLast=k;COOP.send({t:"act",k:TK,mode:"tn",week:wk(),who:tnWho()==null?null:(tnWho()===me()?"p":tnWho()===fp()?"f":tnWho()),id:TK+wk()+":"+newId()})}
-COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||m.from===CW.seat||!S||S.dead||m.week!==wk())return;
- const who=m.who==null?null:m.who==="p"?fp():m.who==="f"?me():m.who;const had=S.tonight==="me";tnSet(who);
+ if(host()){tnFinal();return}
+ CW.tnLast=k;const id=TK+wk()+":"+newId();CW.tnClaim=id;COOP.send({t:"act",k:TK,mode:"claim",week:wk(),who:tnEnc(tnWho()),v:CW.tnSeen&&CW.tnSeen.w===wk()?CW.tnSeen.n:0,id})}
+/* her night changed by the other side's word: the notice she would get from any other cause */
+function tnTake(who){const had=S.tonight==="me";tnSet(who);
  if(had&&S.tonight!=="me"){const v=S.tonight&&S.tonight!=="me"?S.tonight:null;pushModal({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng đêm nay Hoàng thượng ${v?`ngự ở cung ${esc(v===friendEntry()?friendName():v.name)}`:"không vời ai"}.</p>`});showModal()}
- else if(!had&&S.tonight==="me"){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}showModal()}
+ else if(!had&&S.tonight==="me"){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}showModal()}}
+COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||m.from===CW.seat||!S||S.dead||m.week!==wk())return;
+ if(host()){/* the guest's claim (an old guest's plain "tn" counts as a claim on the night it replaced) */
+  if(m.mode!=="claim"&&m.mode!=="tn")return;const cur=tnWho(),fresh=typeof m.v!=="number"||m.v===tnVer();
+  if(fresh&&tnDec(m.who)!==cur)tnTake(tnDec(m.who));tnFinal(m.id);render();return}
+ if(m.mode!=="tn")return;if(CW.tnClaim&&m.re===CW.tnClaim)CW.tnClaim=null;if(typeof m.v==="number")CW.tnSeen={w:wk(),n:m.v};
+ const who=tnDec(m.who);if(who!==tnWho())tnTake(who);else CW.tnLast=JSON.stringify([wk(),tnWho()]);
  render()});
 (function(){if(typeof flip!=="function")return;const f=flip;flip=function(){if(!CW.on)return f.apply(this,arguments);
  if(!host()){/* the guest draws nothing: her night comes from the host's tn with the merged week */const r0=S.tonight;
@@ -528,7 +564,20 @@ CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||
 CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"||!CW.mine)return;const r=S.rank||0,r0=CW.mine.rank||0;
  const f=friendEntry();if(r<=r0||!f||rkOf(f)!==r||SEATCAP[r]==null)return;if(holders(r).length<=SEATCAP[r])return;
  const nr=Math.max(r0,r-1);S.rank=nr;if(S.justCrowned)S.justCrowned=0;
- pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p><p>Hoàng thượng giữ ngươi ở phẩm ${esc(RANKS[nr].n)}, đợi khi có ghế trống.</p>`})};
+ /* r1 fix 3 (OD:L1228): no waiting claim on the seat. A full seat gives the LARGE one-off compensation of the promo-skip rule (jexam
+    promoFullSeat when that branch is in, else the same rule here; numbers BAL.psk.seat): big silver, rare gifts, a phong hiệu without a
+    rank change, favour for her family; loss: the consorts' jealousy. Her rank stays; the next one goes through the normal exam. */
+ let t="";if(nr===r-1){try{t=typeof promoFullSeat==="function"?promoFullSeat(S,"coop",{}):coopFullSeat()}catch(e){console.error(e)}}
+ pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p>${t?`<p>${t}</p>`:""}`})};
+function coopFullSeat(){const B=BAL.psk.seat,to=(S.rank||0)+1,rk=RANKS[to].n,parts=[];
+ let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100)),hieu="";
+ if(!S.hieu){const used=rivals.map(v=>v.hieu);const L=TITLES.filter(x=>!used.includes(x));if(L.length){hieu=pick(L);S.hieu=hieu}}
+ if(!hieu)bac+=B.hieuBac;apply({bac,danh:B.danh});parts.push(`<span class="g">Bạc +${bac}</span>`,`<span class="g">Danh +${B.danh}</span>`);if(hieu)parts.push(`<span class="g">phong hiệu «${esc(hieu)}»</span>`);
+ for(let i=0;i<B.gifts;i++)try{bestow(S,"promo")}catch(e){}if(B.gifts)parts.push(`<span class="g">${B.gifts} món ngự ban</span>`);
+ try{const c=clanOf(S);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push(`<span class="g">nhà ngoại được ân</span>`);
+ ghenAll(B.ghen);
+ return `Hoàng thượng ban hậu thưởng thay cho tấn phong: ${parts.join(", ")}. Muốn lên ${esc(rk)} vẫn phải qua khảo hạch như mọi người. <span class="r">Lục cung ghen với ngươi (ghen +${B.ghen}).</span>`}
+CW.fullSeat=coopFullSeat;
 
 /* ---------- hooks ---------- */
 const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(CW.on&&!host())return "";return f.apply(this,arguments)}};
@@ -732,6 +781,15 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
  try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
+/* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
+   a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /
+   res.pet ops, so the NPC gains AND she loses (never a copy). The guest never lets an NPC act on the host's entry (NPCs roll on the host).
+   Numbers stay with toCanon / her live pos as before. */
+(function(){const f=runAct;runAct=function(a,t,k){if(!CW.on||!S||a===S||!t||!isF(t)||CW.b4in)return f.apply(this,arguments);
+ if(!host())return "";let P0=null;try{P0=tsbPets(t).map(P=>[P,Object.assign({},P)])}catch(e){}
+ const b={v:t,inv0:(t.inv||[]).slice(),K0:famSnap(t),P0};CW.b4in=true;let r;try{r=f.apply(this,arguments)}finally{CW.b4in=false}
+ try{const pet=b4Pet(b),ops=b4Ops(b,"");(CW.npcOn=CW.npcOn||[]).push({a:a&&a.id,k,ops:ops.map(x=>x.op),pet:pet.map(x=>x.op)});if(CW.npcOn.length>20)CW.npcOn.shift();
+  b4Send(ops,{pet,force:pet.length})}catch(e){console.error(e)}return r}})();
 /* test hooks (dev/test/coop-p2.js): run fn as an NPC turn of the host's week (friend out of the harem as in endTurn, back in for fn) */
 CW.b4Run=fn=>{const L=pullFriend();CW.pulled=L;try{return b4Wrap("rivalsTurn",()=>{pushFriend(L.slice());try{return fn()}finally{pullFriend()}})()}finally{CW.pulled=null;pushFriend(L)}};
 CW.b4Fest=(t,kk)=>{const L=pullFriend();CW.pulled=L;try{return festival(t,kk)}finally{CW.pulled=null;pushFriend(L)}};

@@ -35,7 +35,8 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()
    const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
-async function press(o){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});if(r)return true;await sleep(250)}
+/* r1 fix 6: a seat that already pressed for this step (buổi ended = bend, night-ready by the night gate or its night with the Emperor, week end out) counts as pressed */
+async function press(o){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(()=>{if(window.COOPW&&COOPW.on&&((COOPW.nReady&&COOPW.nReady())||COOPW.bend||COOPW.pend||COOPW.sent===(COOP.state.week||0)))return true;const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});if(r)return true;await sleep(250)}
   ok(false,o.name+' #next enabled');return false}
 async function buoiBoth(A,B){const k0=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0));await press(A);await press(B);
   for(let t=0;t<80;t++){const a=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0)),b=await B.p.evaluate(()=>__co().week+':'+(S.buoi||0));if(a!==k0&&b!==k0&&a===b)return true;await clear(A);await clear(B);await sleep(250)}
@@ -119,6 +120,8 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  /* 5 late res: B ends the week first, THEN A helps her; the help must be in the merged week */
  {await B.p.evaluate(()=>{for(const P of S.pets||[]){P.full=30;petcSync(P)}render()});await sleep(1500);
   const wk=await A.p.evaluate(()=>__co().week);await toLast(A,B);await press(B);
+  /* r1 fix 6: the night gate (both ready, or the host forces the night) — A holds a dialog open so only B runs the night and ends */
+  await A.p.evaluate(()=>{pushModal({t:"Chờ",h:"<p>Chờ</p>"});showModal();COOPW.forceNight()});
   {const t0=Date.now();while(Date.now()-t0<30000&&!await B.p.evaluate(()=>COOPW.sent===__co().week)){await clear(B);await sleep(300)}}
   ok(await B.p.evaluate(()=>COOPW.sent===__co().week),'B ended the week (end sent)');
   ok(await waitFr(A,()=>{const f=COOPW.friend();return f&&(f.pets||[]).length>0}),'A still sees B\'s pets');

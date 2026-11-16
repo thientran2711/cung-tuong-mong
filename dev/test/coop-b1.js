@@ -71,8 +71,8 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  const own0=await own(B);
  /* 1 laydo: thất lạc case on her side, the item in my chest */
  {const a0=await A.p.evaluate(()=>(S.inv||[]).length),b0=await nOk(B);const r=await act(A,'laydo');ok(r.okk,'1 laydo offered on the friend',r);
-  ok(await A.p.evaluate(n=>(S.inv||[]).length===n+1,a0),'1 laydo: the item is in A\'s chest (gain)');
-  ok(await waitFr(B,n=>(S.inv||[]).filter(e=>loOk(e)).length===n-1,b0),'1 laydo: one left B\'s chest (loss)');
+  const g1=await A.p.evaluate(n=>(S.inv||[]).length===n+1,a0);ok(g1,'1 laydo: the item is in A\'s chest (gain)');
+  ok(g1&&await waitFr(B,n=>(S.inv||[]).filter(e=>loOk(e)).length===n-1,b0),'1 laydo: one left B\'s chest (loss)');
   ok(await B.p.evaluate(k=>(S.lost||[]).some(c=>c.cause==='riv'&&c.st==='held')),'1 laydo: B has a Đồ thất lạc case (held by the thief)',await B.p.evaluate(()=>(S.lost||[]).slice(-1)));
   ok(/thất lạc/.test(await seenTxt(B))&&!/ngấm ngầm/.test(await seenTxt(B)),'1 laydo: B sees only "thất lạc" (as from an NPC thief)');await clear(B)}
  /* 2 phonghoa: burnt on her side */
@@ -87,7 +87,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  /* 5 takeaway: a child under 6 moves to A */
  {await sleep(1200);const nA=await A.p.evaluate(()=>(S.kids||[]).length);const r=await act(A,'takeaway');ok(r.okk,'5 takeaway offered (A higher rank)',r);
   const nm=await A.p.evaluate(n=>(S.kids||[]).length>n?S.kids[S.kids.length-1].name:null,nA);ok(!!nm,'5 takeaway: the child is in A\'s house (gain)',nm);
-  ok(await waitFr(B,n=>!(S.kids||[]).some(k=>k.name===n),nm),'5 takeaway: the child left B\'s house (loss)');await clear(B)}
+  ok(!!nm&&await waitFr(B,n=>!(S.kids||[]).some(k=>k.name===n),nm),'5 takeaway: the child left B\'s house (loss)');await clear(B)}
  /* 6 pond (forced: drowns): her child dies on her side */
  {await sleep(1200);const r=await act(A,'pond');ok(r.okk,'6 pond offered',r);
   ok(await waitFr(B,()=>(S.kids||[]).some(k=>k.alive===false)),'6 pond: a child of B died on HER side',await B.p.evaluate(()=>(S.kids||[]).map(k=>k.name+':'+k.alive)));
@@ -105,8 +105,8 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
  /* 8 guest → host: B steals from A */
  {await sleep(1200);await give(A,kSteal);await give(A,kSteal);await sleep(1500);const a0=await cnt(A,kSteal),b0=await cnt(B,kSteal);
   ok(await waitFr(B,k=>{const f=COOPW.friend();return f&&(f.inv||[]).some(e=>e.k===k)},kSteal),'8 B sees A\'s bag');
-  const a1=await nOk(A),b1=await B.p.evaluate(()=>(S.inv||[]).length);const r=await act(B,'laydo');ok(r.okk,'8 B: laydo on the host',r);ok(await B.p.evaluate(n=>(S.inv||[]).length===n+1,b1),'8 B gained it');
-  ok(await waitFr(A,n=>(S.inv||[]).filter(e=>loOk(e)).length===n-1,a1),'8 A lost it',[a1,await nOk(A)]);await clear(A)}
+  const a1=await nOk(A),b1=await B.p.evaluate(()=>(S.inv||[]).length);const r=await act(B,'laydo');ok(r.okk,'8 B: laydo on the host',r);const g8=await B.p.evaluate(n=>(S.inv||[]).length===n+1,b1);ok(g8,'8 B gained it');
+  ok(g8&&await waitFr(A,n=>(S.inv||[]).filter(e=>loOk(e)).length===n-1,a1),'8 A lost it',[a1,await nOk(A)]);await clear(A)}
  await A.p.screenshot({path:OUT+'/b1-host-755x1000.png'});
  /* 9 week merge: each entry == the other's own */
  {for(let i=0;i<3;i++){await clear(A);await clear(B)}const w0=await A.p.evaluate(()=>COOP.state.week);
