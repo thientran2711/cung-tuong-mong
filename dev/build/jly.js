@@ -2,7 +2,11 @@
    no role. She is now ONE persistent person (S.lyF, saved; same face every visit) drawn from the cold-palace consort art (tier cold:
    plain clothes, no jewellery, no forehead mark), with the matching round portrait in the talk panel.
    Loaded right after j88 (its tier-aware picker gives consort-rank dress only to the player and rivals: f88Wear). */
-function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:34,lyF:1};return S.lyF}
+function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Lý",age:(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.age)||34,lyF:1};return S.lyF}
+/* D4 (owner OD:L641–642): who is in Trường Môn viện = the fallen rivals (up to BAL.mort.ly.lcShow) AND Phế phi họ Lý while she lives;
+   after her death (or her release in an old save) nobody stands in for her: the place is empty until a real person is sent there. */
+function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info}));
+ const y=lyFallen();if(y&&!y.dead&&!y.freed)L.push({kind:"fallen",name:y.name,ini:"Lý",col:"#6a7a8a",info:"Phế phi"});return L}
 (function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref)return lyFallen()}catch(e){}return w0.apply(this,arguments)};
  const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return["consort"];return r0.apply(this,arguments)};
  const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF)return -1;return t0.apply(this,arguments)};
