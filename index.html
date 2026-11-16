@@ -27249,22 +27249,25 @@ function dbCost(s){return BAL.dbCost[Math.min(BAL.dbCost.length-1,srk(s)+1)]||10
 function dbOdds(o,s){return cl(Math.round(BAL.dbBase+((s.loyal||0)-50)/5+((s.mp||0)-BAL.dbMerit)*2-(srk(s)-1)*8),5,95)}
 function dbNeed(o,s){const L=[];const mx=srkMax(o,s);L.push({ok:srk(s)<mx,t:srk(s)<mx?`Phẩm ngươi cho phép đến ${SRK[s.role][mx]}`:`Phẩm ngươi chỉ cho phép đến ${SRK[s.role][mx]}`});
  L.push({ok:(s.loyal||0)>=BAL.dbLoyal,t:`Lòng ${s.loyal} (cần ${BAL.dbLoyal})`});L.push({ok:(s.mp||0)>=BAL.dbMerit,t:`Công lao ${s.mp||0} (cần ${BAL.dbMerit})`});return L}
-function dbDo(o,s){const c=dbCost(s);if((o.bac||0)<c||!dbNeed(o,s).every(x=>x.ok))return null;ap(o,{bac:-c});const ok=roll(dbOdds(o,s));const nm=s.name;
+function dbDo(o,s,road,paid){const c=dbCost(s);const fav=road==="fav";/* D41: two roads of equal worth — bạc (lót tay) or favour (spFav, jpromsv) */
+ const fv=fav&&typeof spFav==="function"?spFav(o,s):null;if(!paid&&(fav?!fv||!fv.ok:(o.bac||0)<c))return null;if(!dbNeed(o,s).every(x=>x.ok))return null;
+ if(!paid){if(fav)spPayFav(o,fv);else ap(o,{bac:-c})}const ok=roll(dbOdds(o,s));const nm=s.name;const r0=srk(s);
  const others=(o.staff||[]).filter(x=>x!==s);
  if(ok){s.rk=srk(s)+1;s.mp=0;s.loyal=cl(s.loyal+BAL.dbGain,0,100);others.forEach(x=>x.loyal=cl(x.loyal-BAL.dbEnvy,0,100));
-  if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);return true}
- s.loyal=cl(s.loyal-2,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: tiền lót tay mất, ${nm} hơi thất vọng (lòng -2).`);return false}
+  if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}${fav&&fv?` (${fv.how})`:""}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);try{if(typeof spAfter==="function")spAfter(o,s,r0)}catch(e){console.error(e)}return true}
+ s.loyal=cl(s.loyal-2,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: ${fav?"lời xin đã mất":"tiền lót tay mất"}, ${nm} hơi thất vọng (lòng -2).`);return false}
 (function(){if(typeof servJudgeBtns!=="function")return;const j0=servJudgeBtns;servJudgeBtns=function(s){const B=j0.apply(this,arguments);try{if(ownerOf(s)!==S)return B;
  const mx=srkMax(S,s),nx=SRK[s.role][srk(s)+1];if(!nx)return B;const c=dbCost(s);const N=dbNeed(S,s);const t2=whyTime(1);
- const un=N.filter(x=>!x.ok).map(x=>x.t);const why=t2||(un.length?un[0]:"")||(S.bac<c?`thiếu bạc (cần ${c})`:"");
+ const un=N.filter(x=>!x.ok).map(x=>x.t);const fv=typeof spFav==="function"?spFav(S,s):null;const why=t2||(un.length?un[0]:"")||(S.bac<c&&!(fv&&fv.ok)?`thiếu bạc (cần ${c})${fv?` hoặc ${fv.lbl} ${fv.n}`:""}`:"");
  const eff=s.role==="maid"?(srk(s)+1>=3?"mở việc Chưởng sự tra xét cung nữ":"sai việc dễ hơn"):(srk(s)+1>=3?"đêm được chọn dễ hơn chút, sai việc dễ hơn":"sai việc dễ hơn");
- const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: Bạc -${c} (lót tay Nội vụ phủ), 1 khắc · thành: ${s.name} lên ${nx}, lòng +${BAL.dbGain}, ${eff} · hỏng: mất bạc, lòng -2 · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${srk(s)+1>=2?` · (từ bậc này: tiền thưởng hằng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
+ const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: 1 khắc, chọn một đường: Bạc -${c} (lót tay Nội vụ phủ)${fv?` hoặc ${fv.lbl} -${fv.n} (${fv.how})`:""} · thành: ${s.name} lên ${nx}, lòng +${BAL.dbGain}, ${eff} · hỏng: mất bạc, lòng -2 · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${typeof spKemTxt==="function"?spKemTxt(S,s):""}${srk(s)+1>=2?` · (từ bậc này: tiền thưởng hằng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
  return B.concat([btn.replace("<button ",`<button data-kneed="${encodeURIComponent(JSON.stringify(N))}" `)])}catch(e){console.error(e);return B}}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();const s=servById(+b.dataset.dbsv);if(!s||!can(1))return;
+ if(typeof spOpen==="function"){spOpen(s);return}/* D41: the two-road card (jpromsv) */
  const bf=rsnap();spend(1);const r=dbDo(S,s);if(r==null)return;try{resultShow(`Đề bạt ${s.name}`,bf,r)}catch(x){}render()},true);
 /* NPC mistresses: the same act, by motive — a loyal, deserving servant, a purse that can pay, once in a while */
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);try{for(const p of liveRivals(true)){for(const s of (p.staff||[])){
- if(dbNeed(p,s).every(x=>x.ok)&&(p.bac||0)>=dbCost(s)*2&&s.loyal>=70&&roll(15))dbDo(p,s)}}}catch(e){console.error(e)}return ev}})();
+ if(!dbNeed(p,s).every(x=>x.ok)||s.loyal<70||!roll(15))continue;if((p.bac||0)>=dbCost(s)*2)dbDo(p,s);else if(typeof spFav==="function"&&spFav(p,s).ok)dbDo(p,s,"fav")}}}catch(e){console.error(e)}return ev}})();
 
 /* 5. RELATION NUMBERS ON CARDS = THE REAL CHANGE (owner: "a card must show what will really happen").
    The real change goes through affAdd/oanAdd, which scale a rise by the target's nết (persF "trust" for quý ta, "slight" for oán ta;
@@ -36247,6 +36250,64 @@ window.kitGoalAlt=function(){try{if(typeof S==="undefined"||!S||S.dead||!isKc())
   todo:[{t:"Học một môn tài nghệ",why:"tuyển tú xét tài lẫn sắc; tài cao thì Điện tuyển dễ lọt mắt",tab:"art",tl:KCTABS.art},
    {t:"Giữ lòng cha mẹ",why:"cha mẹ thương thì được gửi đi tuyển, hồi môn hậu",tab:"rv",tl:KCTABS.rv},
    {t:"Giữ danh tiếng trong sạch",why:"tiếng xấu ngoài phố thì Sơ tuyển đã bị gạt",tab:"go",tl:KCTABS.go}]}}catch(e){console.error("kitGoalAlt",e);return null}};
+/* ================= jpromsv: D41 — she promotes her OWN servants (owner 15/11 05:00Z OD:L302; gain-and-loss rule 16/11 07:15Z;
+   BALANCE rule 15/11 20:30Z). Builds on the existing ĐỀ BẠT act (jaudit §4: srkMax cap by her rank, Bạc cost BAL.dbCost, odds dbOdds,
+   loyalty +dbGain, envy −dbEnvy, NPC mistresses the same) — nothing rebuilt. Adds:
+   1. a SECOND road of equal worth: ask the Hoàng hậu (or, for the Hoàng hậu herself / no queen, the Thái hậu) to approve = her
+      favour −spFav. Bạc-equivalence: the favour price = the Bạc price × (stipend at the reference rank / stipend at HER rank) × favPerBac,
+      so a Bạc price that is dear for a low rank costs as dear in favour; 1 point of favour ≈ 5 bạc at Tần (one morning Thỉnh an ≈ +4).
+   2. the LOSS side of a head post (Chưởng sự cô cô / Nữ quan; Thủ lĩnh / Tổng quản thái giám):
+      - the senior servant passed over resents it (lòng −envySenior);
+      - the promoted one may grow PROUD (chance by nature, less if loyal): for proudMo months her loyalty drops each month
+        (→ easier to bribe through the existing bribeServ formula, which reads loyalty), she lords it over the others (lòng −bully),
+        and when loyalty is under leaveLoyal she may ask to serve a higher palace (card: raise her pay / demote her / let her go).
+   3. NPC mistresses: same rules — the favour road when their purse is short; proud NPC servants leave for a higher palace with room.
+   Co-op: s.coop servants skip pride/leave. Old saves: new fields (s.proud) are optional. Numbers in BAL.sp (one source). ================= */
+Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:3,eunuch:2},
+ proud:{tham:45,lanh:30,chuyen:30,nhat:10,trung:5},proudAvg:24,proudMo:6,proudLoy:3,bully:1,leaveCh:15,leaveLoyal:60,envySenior:5,
+ keepMul:.5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2}});
+function spQ(o){const q=typeof queenP==="function"?queenP():null;return q&&q!==o?q:null}
+/* the favour road for mistress o and servant s: {ok,n,k,lbl,how,val} */
+function spFav(o,s){const B=BAL.sp,pay=BAL.pay||[40,55,70,95,125,165,215,280];const r=Math.min(7,Math.max(0,rkOf(o)));
+ const n=cl(Math.round(dbCost(s)*pay[B.favRef]/pay[r]*B.favPerBac),B.favMin,B.favMax);const q=spQ(o);const k=q?"hh":"th";
+ const lbl=k==="hh"?"Hoàng hậu quý ngươi":"Thái hậu quý ngươi",how=k==="hh"?"xin Hoàng hậu chuẩn":"xin Thái hậu chuẩn";
+ let val;if(o===S)val=S[k]||0;else val=q?aff(q,o):(o.th||0);
+ const ok=o===S?val>=n:val>=n+B.favKeep;return{ok,n,k,lbl,how,val,q}}
+function spPayFav(o,fv){if(o===S){apply({[fv.k]:-fv.n});return}if(fv.q)affAdd(fv.q,o,-fv.n);else o.th=cl((o.th||0)-fv.n,-100,100)}
+function spHead(s){return srk(s)>=BAL.sp.head[s.role]}
+function spProudCh(s,shown){const B=BAL.sp;const b=shown&&!s.kn?B.proudAvg:(B.proud[s.tr]||B.proudAvg);return cl(Math.round(b-((s.loyal||50)-50)/5),3,70)}
+function spProud(s){return !!(s&&s.proud&&s.proud>S.turn)}
+function spSenior(o,s,r0){const L=(o.staff||[]).filter(x=>x!==s&&x.role===s.role&&srk(x)>=r0);L.sort((a,b)=>srk(b)-srk(a)||(b.age||0)-(a.age||0));return L[0]||null}
+/* the Kèm part of the Đề bạt card (jaudit button) */
+function spKemTxt(o,s){try{const B=BAL.sp;let t="";const sn=spSenior(o,s,srk(s));if(sn)t+=` · kèm: ${sn.name} bị vượt mặt: lòng -${B.envySenior}`;
+ if(srk(s)+1>=B.head[s.role])t+=` · kèm: có thể sinh kiêu (${chanceW(spProudCh(s,true))}): ${B.proudMo} tháng lòng -${B.proudLoy} mỗi tháng, có khi xin đi`;return t}catch(e){return""}}
+function spAfter(o,s,r0){const B=BAL.sp;const me=o===S;const sn=spSenior(o,s,r0);
+ if(sn){sn.loyal=cl(sn.loyal-B.envySenior,0,100);if(me)log(`${sn.name} hầu lâu hơn mà bị ${s.name} vượt mặt, trong lòng không phục (lòng -${B.envySenior}).`)}
+ if(spHead(s)&&!s.coop&&roll(spProudCh(s))){s.proud=S.turn+B.proudMo;if(me)log(`${s.name} từ khi lên ${srkName(s)} ra vẻ bề trên với kẻ hầu khác.`)}}
+/* the two-road card (KIT: tsPanel + tsOpt option cards with Cần / Tốn / Được / Mất / Kèm, the same as every dialog choice) */
+function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+1];if(!nx)return;const c=dbCost(s),fv=spFav(S,s),od=dbOdds(S,s);
+ const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
+ const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(1);dbDo(S,s,road,true)};
+ tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
+  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,"lòng -2"],kem,go:go("bac")}),
+   tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất","lòng -2"],kem,go:go("fav")})]});
+ showModal()}
+/* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
+function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const [cm,ce]=capOf(v);const n=(v.staff||[]).filter(x=>x.role===s.role).length+(s.role==="maid"?1:0);return n<(s.role==="maid"?cm:ce)})());
+ return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
+function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
+function spLeaveCard(s){const B=BAL.sp,v=spGoTo(S,s);const keep=Math.max(5,Math.round(dbCost({role:s.role,rk:srk(s)-1})*B.keepMul));const others=S.staff.filter(x=>x!==s);
+ tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
+  opts:[tsOpt({n:"Tăng tiền thưởng, giữ lại",fx:{bac:-keep},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{s.loyal=cl(s.loyal+B.keepGain,0,100);s.proud=Math.max(s.proud||0,S.turn)+B.keepMo;log(`Ngươi tăng tiền thưởng giữ ${s.name} lại.`)}}),
+   tsOpt({n:"Giáng một bậc, giữ kỷ cương",duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:["lòng dưới 30 thì có khi bán mình cho cung khác"],go:()=>{s.rk=srk(s)-1;s.proud=0;s.loyal=cl(s.loyal-B.demoteLoy,0,100);others.forEach(x=>x.loyal=cl(x.loyal+B.demoteOthers,0,100));log(`Ngươi giáng ${s.name} xuống ${srkName(s)}.`)}}),
+   tsOpt({n:"Cho đi",duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm 1 chứng cứ)`]:[],go:()=>{spMove(S,s,v);others.forEach(x=>x.loyal=cl(x.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,S,1);log(`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}.`)}})]})}
+/* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
+function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
+ if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
+ s.loyal=cl(s.loyal-B.proudLoy,0,100);(o.staff||[]).forEach(x=>{if(x!==s)x.loyal=cl(x.loyal-B.bully,0,100)});
+ if(s.loyal<B.leaveLoyal&&roll(B.leaveCh)){if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s)}else{const v=spGoTo(o,s);if(v)spMove(o,s,v)}}}}return ev}
+(function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);let e2="";try{e2=spMonth()}catch(e){console.error(e)}return (ev||"")+e2}})();
+window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;
 
 window.__ctmBuilt=1;
 </script>
@@ -36275,7 +36336,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b6f29305696c";window.CTM_BUILD=BUILD;
+const BUILD="639004154b0a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
