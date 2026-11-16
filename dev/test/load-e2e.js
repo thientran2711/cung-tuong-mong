@@ -26,7 +26,7 @@ async function midShot(p,name){for(let i=0;i<600;i++){const s=await state(p);if(
   R.shellMs=Date.now()-t0;R.mid=await midShot(p,'1-loading-mid-fold-755x1000');
   await p.waitForFunction(()=>window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload'),null,{timeout:600000});
   R.enterMs=Date.now()-t0;const s=await state(p);R.coreMB=+(s.core.total/1e6).toFixed(1);R.figMB=+(s.fig.total/1e6).toFixed(1);
-  await sleep(4000);await p.screenshot({path:`${OUT}/2-title-bg-chip-fold.png`});R.chip=await p.evaluate(()=>{const c=document.querySelector('.kloadchip');return c?c.innerText:null});
+  await sleep(4000);await p.screenshot({path:`${OUT}/2-title-bg-chip-fold.png`});R.chip=await p.evaluate(()=>{const c=document.querySelector('#krail [data-rail="st-dl"]');return c?(c.title||'icon'):null});
   await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});
   const t1=Date.now();await p.waitForFunction(()=>KLOAD.phase==='all',null,{timeout:1800000});R.bgMsUnthrottled=Date.now()-t1;
   R.storage=await p.evaluate(async()=>{const e=await navigator.storage.estimate();const c=await caches.open('ctm-assets');return{usageMB:Math.round(e.usage/1e6),keys:(await c.keys()).length,cacheNames:await caches.keys(),ctl:!!navigator.serviceWorker.controller}});
@@ -50,8 +50,8 @@ async function midShot(p,name){for(let i=0;i<600;i++){const s=await state(p);if(
    await sleep(4000);await p.screenshot({path:`${OUT}/2-title-chip-${W}x${H}.png`});if(process.env.PAUSE)await p.evaluate(()=>{KLOAD.paused=true});
    await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);render()});
    await sleep(3500);await p.screenshot({path:`${OUT}/2-game-chip-${W}x${H}.png`,animations:'disabled',timeout:90000});
-   R['chip'+W]=await p.evaluate(()=>{const c=document.querySelector('.kloadchip .kchip');if(!c)return null;const r=c.getBoundingClientRect(),hit=[];
-    document.querySelectorAll('button,.kbtn,[data-tab]').forEach(e=>{if(c.contains(e)||e.closest('.kloadchip'))return;const q=e.getBoundingClientRect();if(q.width&&q.left<r.right&&q.right>r.left&&q.top<r.bottom&&q.bottom>r.top)hit.push(e.textContent.trim().slice(0,20))});return{hit,overflowX:document.documentElement.scrollWidth>innerWidth}});R['errs'+W]=errs;await ctx.close()}}
+   R['chip'+W]=await p.evaluate(()=>{const c=document.querySelector('#krail [data-rail="st-dl"]');if(!c)return null;const r=c.getBoundingClientRect(),hit=[];
+    document.querySelectorAll('button,.kbtn,[data-tab]').forEach(e=>{if(c.contains(e)||e.closest('#krail'))return;const q=e.getBoundingClientRect();if(q.width&&q.left<r.right&&q.right>r.left&&q.top<r.bottom&&q.bottom>r.top)hit.push(e.textContent.trim().slice(0,20))});return{hit,overflowX:document.documentElement.scrollWidth>innerWidth}});R['errs'+W]=errs;await ctx.close()}}
  if(PHASE==='update'){const ctx=await ctxFor(b,755,1000,2,(process.env.PROF||OUT+'/prof'));const p=ctx.pages()[0]||await ctx.newPage();const errs=[];watch(p,errs);
   const got=[];p.on('request',q=>{if(q.headers()['x-ctm-load'])got.push(q.url().replace(BASE,''))});
   const sw=[];ctx.on('request',q=>{if(/\/img\/|\/audio\//.test(q.url())&&!q.headers()['x-ctm-load'])sw.push(q.url().replace(BASE,''))});

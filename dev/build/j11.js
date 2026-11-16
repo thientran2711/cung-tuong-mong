@@ -79,7 +79,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,g=>{feedback(g>=2?"good":"bad");cb(g)})});
  const P=ACT.poison.f;ACT.poison.f=function(a,t){const r=P.apply(this,arguments);if(t===S||a===S)feedback(t===S?"poison":"ink");return r};
  for(const k of ["frame","kframe","kpoison","musk"]){const F=ACT[k].f;ACT[k].f=function(a,t){const r=F.apply(this,arguments);if(a===S&&/thành|tìm thấy|sảy|trúng|đào được/.test(r)&&!/bị lộ|phát giác|chặn kịp/.test(r))feedback("ink");if(t===S&&!/chặn kịp/.test(r))feedback("hit");return r}}
- W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim()}catch(e){}return r})})();
+ W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim();if(S&&!S.dead&&!pxPreload.done)pxPreload()}catch(e){}return r})})();
 function inkWipe(){if(!OPT.fxon||RM)return;fxOver("inkwipe")}
 function nightFade(){if(!OPT.fxon||RM)return;fxOver("nightf")}
 /* HUD numbers count smoothly */
@@ -96,13 +96,25 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
+  app.ticker.maxFPS=15;/* PERF (owner 16/11 lag): the backdrop only breathes ±0.3 %, so 15 fps is invisible; every frame of this canvas costs a full-stage WebGL composite, double with the weather canvas */
+  /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
+     buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
+  {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
+  const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
+/* review/lag-play-2: the first Pixi load (script parse + WebGL init, ~1-4 s on a slow phone) used to land inside her first tab / act tap.
+   Once a life is in play, at the first idle moment (~2.5 s after), fetch + run the library, then open the stage layer if the stage is on
+   screen. Same loader (kitPixi), same layer (pxLoad); nothing new is drawn. Skipped when effects are off / reduced motion. */
+function pxPreload(){if(pxPreload.done||RM||typeof OPT!=="object"||!OPT.fxon)return;pxPreload.done=1;
+ const ric=window.requestIdleCallback||(f=>setTimeout(f,1));
+ setTimeout(()=>ric(()=>{kitPixi().then(()=>ric(()=>{try{const st=$("stage");if(S&&!S.dead&&st&&st.clientWidth>0&&st.clientHeight>0)pxLoad()}catch(e){}
+  /* the FX overlay app (jfx kfApp: hidden canvas, ticker stopped until an effect plays) */
+  ric(()=>{try{if(typeof kfApp==="function"&&!(typeof kfStill==="function"&&kfStill()))kfApp().catch(()=>{})}catch(e){}},{timeout:3000})},{timeout:3000})).catch(()=>{})},{timeout:4000}),2500)}
 function pxCap(){return kitView().pages===1?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
-async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
+async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";pxWake();
  lightTick();const P=placeOf(S.place),k=P.sc+"|"+pxKind()+"|"+(S.wx?S.wx.k:"")+"|"+(S.buoi||0);if(PX.key===k)return;PX.key=k;
  for(const p of PX.parts)p.destroy();PX.parts=[];if(PX.bg){PX.bg.destroy({texture:false});PX.bg=null}
  /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
@@ -123,10 +135,14 @@ function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.h
   const need=Math.max(W/tw,H/th);if(sc<need)sc=need;const hw=tw*sc/2,hh=th*sc/2;cx=Math.min(hw,Math.max(W-hw,cx));cy=Math.min(hh,Math.max(H-hh,cy));
   PX.bg.scale.set(sc*(1.003+.003*Math.sin(PX.t/9)));PX.bg.x=cx;PX.bg.y=cy}
  else{const sc=Math.max(W/PX.bg.texture.width,H/PX.bg.texture.height)*1.08;PX.bg.scale.set(sc*(1+.03*Math.sin(PX.t/9)));PX.bg.x=W/2+Math.sin(PX.t/13)*W*.02;PX.bg.y=H/2+Math.cos(PX.t/17)*H*.015}}
- PX.flash=(PX.flash||0)*.9;if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d){PX.flash=1;sfx("sfx-thunder")}$("stage").style.setProperty("--fl",PX.flash.toFixed(2));
+ if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d){sfx("sfx-thunder");if(typeof kfBolt==="function")kfBolt()}  /* lightning = kit weather layer kfBolt (jfx): flashes the WHOLE stage frame */
  for(const p of PX.parts){const v=p.v;if(v.kind==="lamp"){if(v.on>0){v.on-=d}else p.alpha=Math.min(.55,p.alpha+.01*d)*(RM?1:.85+.15*Math.sin(PX.t*9+v.ph));p.x=v.fx*W;p.y=v.fy*H;continue}if(v.kind==="star"){p.y=v.fy*H;p.alpha=.5+.4*Math.sin(PX.t*2+v.ph);continue}v.ph+=.02*d;if(S&&S.wx&&S.wx.k==="wind")p.x+=1.2*d;p.x+=(v.vx+Math.sin(v.ph)*.3)*d;p.y+=v.vy*d;if(v.kind==="fly"){p.alpha=.4+.5*Math.sin(v.ph*3);p.x+=Math.sin(v.ph*1.3)*.4*d;p.y+=Math.cos(v.ph)*.4*d}if(v.kind==="petal"||v.kind==="leaf")p.rotation+=.02*d;
   if(p.y>H+12){p.y=-10;p.x=Math.random()*W}if(p.y<-20){p.y=H+10;p.x=Math.random()*W}if(p.x<-20)p.x=W+10;if(p.x>W+20)p.x=-10}
- for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}}
+ for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}
+ /* PERF (owner 16/11 lag): the backdrop is a still painting; nothing moves on this canvas (weather is the jfx canvas). Once laid out, draw it ONCE and stop the ticker; pxWake() draws again on scene change / resize. Two live full-stage WebGL canvases made weather scenes lag. */
+ if(PX.bg&&!PX.parts.length&&!PX.fxl.children.length){PX.idle=(PX.idle||0)+1;if(PX.idle>3){PX.idle=0;PX.app.ticker.stop()}}else PX.idle=0}
+function pxWake(){try{if(PX.app&&!PX.app.ticker.started&&!(typeof kitStageCovered==="function"&&kitStageCovered()))PX.app.ticker.start()}catch(e){}}
+window.addEventListener("resize",()=>{pxWake();setTimeout(pxWake,300)});
 /* ---- settings pop-over on the title screen ---- */
 function optHTML(){return `<div class="optbox"><button class="btn" id="o-snd">${OPT.snd?"Tắt âm thanh":"Bật âm thanh"}</button>
  <label>Nhạc <input type="range" id="o-mus" min="0" max="1" step=".05" value="${OPT.mus}"></label><label>Hiệu ứng âm <input type="range" id="o-sfx" min="0" max="1" step=".05" value="${OPT.sfx}"></label><label>Giọng <input type="range" id="o-vo" min="0" max="1" step=".05" value="${OPT.vo==null?.7:OPT.vo}"></label>

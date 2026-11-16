@@ -27,7 +27,11 @@
  addEventListener("resize",()=>{clearTimeout(window.__kfhdT);window.__kfhdT=setTimeout(all,150)});
  document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&RE.test(t.src||"")&&!t.dataset.kfhdw){t.dataset.kfhdw=1;fit(t)}},true);
 })();
-/* ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
+/* review/fig-cutout-code (owner 16/11 "vệt đen trên cổ", "tách nền … hư hết"): #kfa now HARDENS the cut-out edge (alpha 3a-1.2:
+   a<0.40 -> 0, a>0.73 -> 1). Many cut-outs carry a wide feathered edge and translucent smoke/veil residue (scan dev/handover/reports/
+   fig-cutout-root.md); every figure's drop-shadow showed THROUGH those translucent pixels as a grey band along the robe and a dark streak
+   at the neck. The old 1.07/-0.065 only cut alpha<0.06. Sheer sleeves painted opaque are untouched; whole group = every url(#kfa) user.
+   ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
    The cut-out figures keep a faint alpha haze (alpha 1–12) over much of their box (background removal + lossy WebP alpha). Every
    drop-shadow (her rank halo, the selection glow, the ground shadow) also shadows that haze, so the glow showed as a yellow / grey
    RECTANGLE. url(#kfa) comes FIRST in every people-picture filter (p1 #mefig / .tok.fig .figimg, j59 HG/SG, jk4 .kesimg, j79 .kidfig2,
@@ -35,7 +39,7 @@
    Static (no animation: KIT motion rule STILL PEOPLE). */
 (function(){try{if(document.getElementById("kfa"))return;const d=document.createElementNS("http://www.w3.org/2000/svg","svg");d.setAttribute("width","0");d.setAttribute("height","0");
  d.setAttribute("aria-hidden","true");d.style.cssText="position:absolute;width:0;height:0;overflow:hidden";
- d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.07" intercept="-0.065"/></feComponentTransfer></filter></defs>';
+ d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="3" intercept="-1.2"/></feComponentTransfer></filter></defs>';
  (document.body||document.documentElement).appendChild(d)}catch(e){}})();
 /* kit page sample (§71): one figure drawn large (HD twin when drawn above 900 px) with the static rank halo and the static selection glow */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitFigHD · #kfa (người sắc nét, viền sáng theo dáng)",
