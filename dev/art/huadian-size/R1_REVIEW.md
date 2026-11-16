@@ -1,0 +1,9 @@
+# R1 review of review/huadian-size @78ea3d32d (art reviewer, 16/11) - result FAIL
+Method: live CDN por for 84 styles (+player-look4) x t1-t8 (+tcold) x a18,a26,a36,a51 downloaded; contact sheets a18+a51 (r1_sheets.py) all looked at; mark width re-measured (r1_measure.py); skipped files viewed wide (r1_wide.py); fig twins montage (r1_twins.py).
+Cold palace (tcold, c01-c32): no huadian anywhere (OK). Fig twins match por forehead (template score 0.99-1.0, same motif); fig forehead sharpness equals pre-CDN git copy within ~10%.
+Not-allowed motifs still on CDN (fruit/bead/ring/dot/object): c23 t1-t7 (4 red dots), c24 t1 (red ball) t2-t4,t7 (mushroom/umbrella), c28 t1,t4-t7 (disc/pearl rings), c25 t1 (round bud), m12 t1-t7 (dot arrays), m14 t1-t5 (rings), m15 t1-t6 (oval coins), m22 t1-t7 (ring/bead/ball), m24 t1-t7 (rings), m26 t1-t7 (red seed), m40 t1-t7 (lantern/lozenge), m49 t1,t5 (red blobs/ball), c09 t6-t7 (hanging pearl, 3 beads), c13 t2/t7 and c18 t1-t2 lozenge/drop (borderline).
+Outside the 4-motif list (moon/flame/blade; owner call): c05, c26 (crescent), c06, m06, c15, c29 t1, c09 t1 (flame/drop). m33 (bud) and m17/m39 (leaves) = allowed.
+Damaged: por-maid-m28-t8-a18 (mark smeared, hair-coloured blotch on forehead; original had gold phoenix + red gem; fig/hd/tn twins follow).
+Still oversize (left unchanged, phoenix/gem wings 0.16-0.25 face width): c08-t8-a51, c14-t8-a26, m28-t8-a26/36/51, c02-t7-a26/36/51 (wings), m51-t3-a26/36/51 (gem cluster), c08-t8-a26 (shrunk but gold leaf still ~0.16), m25-t3-a26/36/51 (~0.11), m38-t3-a36, m45-t6-a36 (~0.10).
+Fine as left: c07-t1-a51, c20-t5-a51 (small faint). c20-t3-a51: no visible mark at all (check original).
+Note: pre-CDN git copies are NOT a valid pre-change baseline for most files (art regenerated later); only suspect/unchanged ones match.
