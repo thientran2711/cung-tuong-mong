@@ -1,6 +1,6 @@
 # Review buoi-art-r1 (SMALL tier, reviewer Sonnet)
 
-**PASS be25de29fe0126d56c1bd30234804d1c2f6937c0** (branch review/buoi-art-r1; ancestor = origin/main 0188d595 at merge time; main moved again to 098fecf3 right after the push, so the coordinator re-merges main and rebuilds with `bash dev/site/build_site.sh`; only generated index.html/sw.js conflict).
+**PASS 42ff535b676cf469c035566f0e213f81038418c3** = NEW READY sha (review/buoi-art-r1, merged with origin/main f03886af, ancestor-ok; rebuilt, buoi-art.js + buoi-moon.js FAIL 0, 0 page errors, Fold + iPad). Earlier PASS be25de29 superseded. Details below are from the first review pass.
 
 Reviewed: review/buoi-art 70fcddac (bands 4 seasons + 13 festivals, 4 buổi icons, moon on tối by tuần). Merged onto latest main (3 times, main kept moving); conflicts only in generated index.html + sw.js, resolved by rebuild. Diff vs main = jbuoi.js, 2 tests, PROGRESS, assets.json, index.html, sw.js. No deletions.
 
