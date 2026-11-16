@@ -1,0 +1,149 @@
+{
+"consort-c23": {
+"donor": "maid-m31",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"consort-c24": {
+"donor": "maid-m05",
+"tiers": [
+1,
+2,
+3,
+4,
+7
+]
+},
+"consort-c28": {
+"donor": "consort-c01",
+"tiers": [
+1,
+4,
+5,
+6,
+7
+]
+},
+"consort-c25": {
+"donor": "maid-m05",
+"tiers": [
+1
+]
+},
+"maid-m12": {
+"donor": "maid-m07",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m14": {
+"donor": "maid-m05",
+"tiers": [
+1,
+2,
+3,
+4,
+5
+]
+},
+"maid-m15": {
+"donor": "maid-m31",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6
+]
+},
+"maid-m22": {
+"donor": "maid-m21",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m24": {
+"donor": "maid-m32",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m26": {
+"donor": "maid-m46",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m40": {
+"donor": "maid-m02",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m49": {
+"donor": "maid-m01",
+"tiers": [
+1,
+5
+]
+},
+"consort-c09": {
+"donor": "consort-c19",
+"tiers": [
+6,
+7
+]
+},
+"consort-c13": {
+"donor": "maid-m05",
+"tiers": [
+2,
+7
+]
+},
+"consort-c18": {
+"donor": "consort-c19",
+"tiers": [
+1,
+2
+]
+}
+}

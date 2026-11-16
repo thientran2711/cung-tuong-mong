@@ -11,6 +11,7 @@ D=os.path.dirname(os.path.abspath(__file__))
 REF=json.load(open(D+'/ref.json')); BOX=json.load(open(D+'/a18_boxes.json'))
 MAN_AGED=json.load(open(D+'/manual_aged.json')) if os.path.exists(D+'/manual_aged.json') else {}
 TARGET=0.085; KEEP=0.088
+EXT=float(os.environ.get('HD_EX',0)); EXB=float(os.environ.get('HD_EXB',0))  # extra window margin (x fw): sides/top, bottom
 def window(name,cx,ey,fw):
     m=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)-t(\d)-a(\d+)',name); pid,t,a=m.groups()
     cx0,ey0,fw0=REF[pid]; b=BOX[f'por-{pid}-t{t}-a18']
@@ -41,6 +42,7 @@ def process(path,name,srcdir=None):
         inner=(w[0]+mx+0.1*(bw-2*mx),w[1]+0.04*fw+0.1*(bh-0.055*fw),w[2]-mx-0.1*(bw-2*mx),w[3]-0.015*fw-0.1*(bh-0.055*fw))
     else:
         iw=inner[2]-inner[0]; ih=inner[3]-inner[1]; inner=(inner[0]+0.1*iw,inner[1]+0.1*ih,inner[2]-0.1*iw,inner[3]-0.1*ih)
+    if EXT or EXB: win=(win[0]-EXT*fw,win[1]-EXT*fw,win[2]+EXT*fw,win[3]+EXB*fw)
     an=analyze(rgb,win,fw,inner=inner)
     info=dict(name=name,cx=cx,ey=ey,fw=fw,win=[round(float(v),1) for v in win]); info.update(info0)
     if an is None: info['status']='nomark'; return info,None,None

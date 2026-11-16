@@ -1,0 +1,251 @@
+{
+"consort-c23": {
+"donor": "maid-m31",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "consort-c03",
+"2": "consort-c03",
+"3": "consort-c03",
+"4": "maid-m45",
+"5": "consort-c03",
+"6": "consort-c03",
+"7": "consort-c03"
+}
+},
+"consort-c24": {
+"donor": "maid-m05",
+"tiers": [
+1,
+2,
+3,
+4,
+7
+],
+"by_tier": {
+"1": "maid-m31",
+"2": "maid-m39",
+"3": "maid-m07",
+"4": "maid-m05",
+"7": "maid-m01"
+}
+},
+"consort-c28": {
+"donor": "consort-c01",
+"tiers": [
+1,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "maid-m01",
+"4": "maid-m01",
+"5": "consort-c04",
+"6": "maid-m45",
+"7": "consort-c04"
+}
+},
+"consort-c25": {
+"donor": "maid-m05",
+"tiers": [
+1
+],
+"by_tier": {
+"1": "maid-m08"
+}
+},
+"maid-m12": {
+"donor": "maid-m07",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "maid-m21",
+"2": "consort-c16",
+"3": "maid-m36",
+"4": "maid-m46",
+"5": "consort-c07",
+"6": "maid-m10",
+"7": "maid-m16"
+}
+},
+"maid-m14": {
+"donor": "maid-m05",
+"tiers": [
+1,
+2,
+3,
+4,
+5
+],
+"by_tier": {
+"1": "maid-m46",
+"2": "consort-c16",
+"3": "consort-c07",
+"4": "maid-m01",
+"5": "consort-c32"
+}
+},
+"maid-m15": {
+"donor": "maid-m31",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6
+],
+"by_tier": {
+"1": "maid-m46",
+"2": "maid-m07",
+"3": "maid-m07",
+"4": "maid-m21",
+"5": "consort-c01",
+"6": "maid-m21"
+}
+},
+"maid-m22": {
+"donor": "maid-m21",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "maid-m10",
+"2": "consort-c01",
+"3": "consort-c07",
+"4": "consort-c19",
+"5": "maid-m21",
+"6": "maid-m21",
+"7": "maid-m02"
+}
+},
+"maid-m24": {
+"donor": "maid-m32",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "consort-c16",
+"2": "consort-c16",
+"3": "consort-c04",
+"4": "consort-c07",
+"5": "consort-c04",
+"6": "maid-m46",
+"7": "consort-c03"
+}
+},
+"maid-m26": {
+"donor": "maid-m46",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "consort-c03",
+"2": "consort-c19",
+"3": "maid-m39",
+"4": "maid-m32",
+"5": "maid-m03",
+"6": "consort-c03",
+"7": "maid-m21"
+}
+},
+"maid-m40": {
+"donor": "maid-m02",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"by_tier": {
+"1": "consort-c21",
+"2": "consort-c16",
+"3": "maid-m10",
+"4": "maid-m46",
+"5": "maid-m01",
+"6": "consort-c19",
+"7": "maid-m10"
+}
+},
+"maid-m49": {
+"donor": "maid-m01",
+"tiers": [
+1,
+5
+],
+"by_tier": {
+"1": "maid-m16",
+"5": "consort-c27"
+}
+},
+"consort-c09": {
+"donor": "consort-c19",
+"tiers": [
+6,
+7
+],
+"by_tier": {
+"6": "maid-m45",
+"7": "maid-m16"
+}
+},
+"consort-c13": {
+"donor": "maid-m05",
+"tiers": [
+2,
+7
+],
+"by_tier": {
+"2": "maid-m39",
+"7": "consort-c01"
+}
+},
+"consort-c18": {
+"donor": "consort-c19",
+"tiers": [
+1,
+2
+],
+"by_tier": {
+"1": "consort-c21",
+"2": "maid-m39"
+}
+}
+}
