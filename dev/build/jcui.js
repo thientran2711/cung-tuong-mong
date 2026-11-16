@@ -28,11 +28,13 @@ function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,h
  const title=o.title||"Hội thi";
  ord.slice(0,3).forEach((x,i)=>{const p=x.p||null;if(!p||typeof p!=="object"){res.places.push({prize:[]});return}
   const z=cuPrize(kind,i,p,big);const chips=[];
-  if(z.k){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"});chips.push(cuItemChip(z.k))}
-  if(z.bac){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac});chips.push(["Bạc",z.bac])}
+  /* co-op (jcoopcontest.js): each prize is paid once — her client pays her, the host pays NPCs, nobody pays the friend entry */
+  const pay=!(window.COOPW&&COOPW.on)||COOPW.pay(p);
+  if(z.k){if(pay){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"})}chips.push(cuItemChip(z.k))}
+  if(z.bac){if(pay){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac})}chips.push(["Bạc",z.bac])}
   const ent={prize:chips,k:z.k,bac:z.bac,place:i+1};
   if(i===0){/* the Emperor's own gift: guaranteed at the big festivals and the feasts he attends */
-   if(big&&typeof bestow==="function"){ent.emp=true;try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
+   if(big&&typeof bestow==="function"){ent.emp=true;if(pay)try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&pay&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
   if(p===S){S.honors=S.honors||[];const hn=(i===0&&CU_KHOI[kind]?CU_KHOI[kind]+" · ":CU_PLACE[i]+" · ")+title;S.honors.unshift({d:`T${S.month}/${S.year}`,t:hn,p:i+1});if(S.honors.length>40)S.honors.length=40;ent.title=hn;res.mine=ent}
   res.places.push(ent)});
  const m=res.mine;if(m){const rows=[];const ch=[];if(m.k)ch.push(cuItemChip(m.k));if(m.bac)ch.push(kitChip("Bạc",m.bac,"g"));rows.push(["Phần thưởng",ch,"t"]);

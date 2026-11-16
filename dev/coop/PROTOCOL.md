@@ -177,3 +177,39 @@ Room-scoped (this Durable Object only; no endpoint reads another room), plain te
 Storage: DO key `chat` (array, last 50). Deleted with the room (30 days idle). Clients escape the text when drawing it; the server stores it raw. Old clients ignore `chat` / `room.chat`.
 Client: `dev/build/jcoopchat.js` (KIT §80). Tests: `coop/worker/test/chat.test.mjs`, `dev/test/coop-chat.js`.
 
+
+## 11. Shared contests and single winners (review/coop-contest, owner 16/11 "cả hai đều được báo dự thi?"; client `dev/build/jcoopcontest.js`)
+No Worker change: everything rides on the shared world keys (merge rule 4/5, host wins) and the `act` relay (k `"ctm-cc"`).
+Law (OD:L96 one world + the two-way law): one contest for the room, decided once by the host, same formula for both players and NPCs.
+| W key (host writes, guest only reads) | holds |
+|---|---|
+| `cfp` | festival plans `{<fest>: {y, pp}}` rolled by the host's `fPlan7` (variant, NPC entrants, NPC who prepared, seed). The guest's `fPlan7` is muted. |
+| `cfa` | the guest's answers as the host received them `{<board id>: {y, me | a, pr}}` |
+| `cfb` | boards `{<id>: {id, ty:"f"(festival contest)|"x"(feast FX7)|"p"(gift contest), k, y, rows:[NPC rows], ent:{901,902}, sc:{901,902}, res, w}}` |
+| `ctc` / `ctcRes` | Tranh ghế: the host's `S.contest` in canonical keys ("me" → host pid) / the result `{id, r, win:<pid or NPC id>, c, tbl, txt}` |
+Relay `act {k:"ctm-cc", mode, ...}`:
+| mode | from → to | fields | meaning |
+|---|---|---|---|
+| `ans` | either → other | `b, y, me | a, pr, n` | her Enter / Skip answer; the host stores the guest's in `cfa`; the other side gets a log line. |
+| `sc` | guest → host | `b, row` (null = skipped) | her score after her own mini-game (or the formula). Re-sent on reconnect and at each rebuild until `res`. |
+| `res` | host → guest | `b, B` | the board with its ONE result list (`B.res`, both players + NPCs, sorted). Also reaches her by the merge. |
+| `tg` | guest → host | `cid, sc, pr, bk, sab, dq` | her Tranh ghế rounds / between-round choices on the mirror; sent just before her night "Sẵn sàng" and on reconnect. |
+Flow (festival contest): host endTurn rolls the plan → both see the same invitation (+ "Hảo hữu của ngươi cũng nhận được lời mời") →
+answers relayed → festival day: the host scores the NPCs once (the only NPC luck roll, NPC preparation silver paid once) into `cfb` →
+each player who entered plays her mini-game against those rows (`startContest({hold:true})`: no prize, provisional place) → scores to the
+host → the host ranks when every entered player is in, or at its next week end (missing player = the formula score, the NPC rule) →
+ONE list. Prize rule (`COOPW.pay`): her own client pays her; NPC prizes are paid by the host only; nobody pays the friend entry.
+The feast contests (FX7, festival() is muted on the guest) and the gift contest ("Dâng lễ", one best gift for the room) use the same board.
+The wager race (W variant) is drawn from the plan seed, so both see the same winner. Other variants (game with a consort, banquet, rite) are
+personal acts on the shared plan (NPC money moved by each player's own game adds by merge rule 2).
+Tranh ghế: host only (`contestOpen`, `contestWeek`, `fillSeats` muted on the guest; `npcContestAct` never acts for the friend). The guest's
+local `S.contest` is a mirror of `ctc`; she plays rounds 1-2 and the between-round card on it; `tg` overrides the host's NPC-style auto score
+for her rounds. `contestEnd` runs once (host): one winner; a crowned guest takes rank 7 from `ctcRes` (and from the friend-entry write-back:
+`queen` set by the host = rank 7).
+### 11.1 Single-winner rule (host decides)
+Whenever two people (players or NPCs) want the ONE thing the world has one of — a seat, a crown, a contest prize, a unique item, the
+Emperor's praise for the best gift, the Emperor's one night, the fate of an NPC both acted on — the HOST's run decides, by the same rule it
+uses for NPCs; the other player gets the normal "lost / not chosen" outcome of that rule. Implemented: contests, gift praise, Tranh ghế
+(this section); NPC deaths / confinement / rank (merge rule 5, host wins); world events (muted on the guest, section 4.1).
+Not yet wired (known gaps, see dev/handover/reports/coop-contest.md): the Emperor's night (`S.ntk` is personal: both clients can each
+take the same night) and unique shop items (no shared stock exists yet).
