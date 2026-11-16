@@ -81,6 +81,7 @@ const WD_LIST=[
  ["tramphuong","tram","Trâm phượng cửu vĩ",8,3,"vang",{sac:8,danh:4}],["phuongquan","tram","Phượng quan bán giá",8,3,"vang",{sac:8,danh:5}],
  ["nt_nhuy","tram","Trâm ngọc như ý ngự tứ",5,4,"xanh",{sac:5,danh:3}],["nt_haiduong","tram","Bộ diêu «Hải đường xuân thụy» ngự tứ",6,4,"hong",{sac:6,danh:4}],["nt_dongchau","tram","Trâm đông châu ngự tứ",7,4,"trang",{sac:7,danh:5}],
  ["y_cungnu","y","Áo vải xanh cung nhân",0,0,"xanh",{}],["y_luamoc","y","Áo lụa mộc hồng nhạt",0,0,"hong",{sac:1}],
+ ["y_chuongsu","y","Áo gấm lam chưởng sự cô cô",0,0,"xanh",{sac:1}],["y_nuquan","y","Áo lụa chàm nữ quan",0,1,"lam",{sac:1}],["y_mama","y","Áo gấm xanh rêu ma ma",0,1,"xanh",{sac:2}],
  ["y_hoanho","y","Áo lụa thêu hoa nhỏ",1,0,"hong",{sac:1}],["y_saxanh","y","Váy sa xanh ngọc",1,0,"xanh",{sac:2}],
  ["y_maimai","y","Áo gấm hoa mai",2,1,"hong",{sac:2}],["y_vanthuy","y","Áo lụa Hàng Châu vân thủy",2,1,"lam",{sac:2}],
  ["y_lan","y","Áo the thêu lan",3,1,"xanh",{sac:3}],["y_tramnep","y","Váy lụa bách điệp",3,1,"tim",{sac:3}],
@@ -108,7 +109,7 @@ function wdPOf(p){try{if(!p)return 1;const rr=typeof personRoleRank==="function"
   if(p.out)return 0;return (typeof rkOf==="function"&&(p===S||p.rank!=null)?rkOf(p):0)+1}catch(e){return 1}}
 function wdKey(p){return p===S?"me":p&&p.id!=null?String(p.id):p&&p.name?"n:"+p.name:"?"}
 function wdHash(s){let h=7;s=String(s);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h}
-function wdPool(sl,P,noNt){return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang").map(r=>r[0])}
+function wdPool(sl,P,noNt){return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])).map(r=>r[0])}
 function wdDefault(p,sl){const P=Math.min(8,wdPOf(p));const L=wdPool(sl,P,true);return L.length?L[wdHash(wdKey(p)+sl)%L.length]:null}
 /* lazily give everybody (old saves too) a default outfit at their own P: nobody starts wrong */
 function wdOf(p){if(!p)return null;if(!p.wd||typeof p.wd!=="object"){p.wd={tram:null,y:null};
@@ -211,8 +212,9 @@ function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&
 
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
 function wdNtFree(){S.wdNt=S.wdNt||[];return WD_LIST.filter(r=>r[4]===4&&!S.wdNt.includes(r[0])).map(r=>r[0])}
-function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
- if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&(!sl||r[1]===sl)&&r[3]===P);return L.length?pick(L)[0]:null}
+const WD_SRVONLY=["y_chuongsu","y_nuquan","y_mama"]; /* servant-road robes: given only by jpromo (BAL.promo.srv), never random/shop */
+function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
+ if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&(!sl||r[1]===sl)&&r[3]===P);return L.length?pick(L)[0]:null}
 function wdGain(p,k,src){src=src||{};const it=WD_ITEMS[k];if(!p||!it)return null;p.inv=p.inv||[];const e={k,from:src.from||"emp"};
  if(src.giver)e.giver=src.giver;e.d=wdWhen();if(it.nt){e.own=wdKey(p);S.wdNt=S.wdNt||[];if(!S.wdNt.includes(k))S.wdNt.push(k)}
  if(src.nvp){e.nvp=1;if(p===S)wdReveal(k,"y phục Nội vụ phủ đưa theo phẩm mới");else{p.wdk=p.wdk||{};p.wdk[k]=1}}
@@ -450,7 +452,7 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
  const d=kg82Open({art:"Chải chuốt",pic:"img/kit/mg-chai-bg.webp",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
  const done=zone=>{spend(1);wdGroomApply(S,zone);const t=wdItemsTxt(S);log(`Ngươi chải chuốt, ${zone==="ok"?"ăn vận vừa vặn":zone==="over"?"ăn vận lộng lẫy":"ăn vận giản dị"}: ${t}.`);
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html);$("kg92ok").onclick=()=>{kg82Close();render()}};
+  kg82ShowRes(html,zone==="ok");$("kg92ok").onclick=()=>{kg82Close();render()}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg92skip">Bỏ qua<small>tính như Tự chọn đồ</small></button></div>`;
  $("kg92go").onclick=()=>{box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
   let stop=null;try{stop=kg92Groom(box,env)}catch(e){console.error(e);env.end(5);return}KG82.run={stop:()=>{if(stop)stop()}}};
