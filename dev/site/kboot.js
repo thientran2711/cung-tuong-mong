@@ -71,8 +71,9 @@
   if(!window.__ctmBuilt){keep("bản game dừng giữa chừng (game script did not finish)");return fail("broken")}var t0=Date.now(),first=false,asked=false;
   /* a device with no picture cache yet gets the loading screen (jload #kload) right after its own caches.has(): wait for it (max 1.5 s)
      so the title never flashes in between; a returning player goes straight on */
-  try{var K0=window.KLOAD;if(K0&&K0.phase==="check"&&window.caches){asked=true;caches.has("ctm-assets").then(function(h){first=!h;asked=false},function(){asked=false})}}catch(e){asked=false}
+  var seen=false;try{seen=localStorage.getItem("ctm-booted")==="1"}catch(e){}  /* opened here before: no need to ask the cache */
+  try{var K0=window.KLOAD;if(!seen&&K0&&K0.phase==="check"&&window.caches){asked=true;caches.has("ctm-assets").then(function(h){first=!h;asked=false},function(){asked=false})}}catch(e){asked=false}
   (function wait(){var K=window.KLOAD;
    if((asked||first&&K&&K.phase==="check")&&!d.getElementById("kload")&&Date.now()-t0<1500)return requestAnimationFrame(wait);
-   requestAnimationFrame(function(){requestAnimationFrame(function(){if(c.classList.contains("fail"))return;window.__kbootDone=1;clearTimeout(dog);c.classList.add("out");
+   requestAnimationFrame(function(){requestAnimationFrame(function(){if(c.classList.contains("fail"))return;window.__kbootDone=1;try{localStorage.setItem("ctm-booted","1")}catch(e){}clearTimeout(dog);c.classList.add("out");
     try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},450)})})})()}})();
