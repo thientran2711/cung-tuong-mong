@@ -250,3 +250,4 @@
 | (c) buổi-transition band art: 3 seasons + 9 festivals (anim-pace list) + 4 buổi icons sáng/trưa/chiều/tối (OD 15:10Z 7.5) (sonnet art) | review/buoi-art | C | (opening) | RUNNING | 16/11 16:00Z |
 | (d) calendar icon cổ trang + square-icons art + placeholder picture sets per orientation/size (OD 15:10Z 7.3 / group 8) (sonnet art) | review/icon-art | C | (opening) | RUNNING | 16/11 16:00Z |
 | ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | (opening) | RUNNING | 16/11 16:00Z |
+| kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
