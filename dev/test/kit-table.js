@@ -26,6 +26,15 @@ const SCAN=()=>{const roots=[...document.querySelectorAll('#panel,#modal:not([hi
   /* two kit tables right after each other (no heading between) read as ONE list: their values must line up too */
   R.querySelectorAll('.kb').forEach(kb=>{const nx=kb.nextElementSibling;if(!nx||!nx.matches('.kb')||!vis(kb)||!vis(nx))return;
    const rs=[kb,nx].flatMap(k=>[...k.querySelectorAll(':scope>.kr')].map(r=>({l:r.querySelector(':scope>.krl'),v:r.querySelector(':scope>.krv')})).filter(r=>r.l&&r.v));add('kit-adjacent',kb,rs)});
+  /* KIT §51.1 (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables that read as ONE block (same left edge, no heading between,
+     a small vertical gap, e.g. two kitPanel sections where the 2nd has no heading) must share one label column: values on one line */
+  {const K=[...R.querySelectorAll('.kb')].filter(vis);const HD='h1,h2,h3,h4,h5,h6,.kpst,.kptitle,legend';const par=K.map((_,i)=>i);const f=i=>par[i]===i?i:(par[i]=f(par[i]));
+   for(let i=0;i+1<K.length;i++){const A=K[i],B=K[i+1];if(A.contains(B)||B.contains(A))continue;const a=A.getBoundingClientRect(),b=B.getBoundingClientRect();
+    if(Math.abs(a.left-b.left)>2||b.top-a.bottom>22||b.top<a.bottom-2)continue;if(A.closest('button')!==B.closest('button'))continue;
+    const rg=document.createRange();rg.setStartAfter(A);rg.setEndBefore(B);const fr=rg.cloneContents();if(fr.querySelector&&fr.querySelector(HD))continue;
+    let hd=false;R.querySelectorAll(HD).forEach(h=>{if(vis(h)&&(A.compareDocumentPosition(h)&4)&&(h.compareDocumentPosition(B)&4))hd=true});if(hd)continue;par[f(i+1)]=f(i)}
+   const G=new Map();K.forEach((k,i)=>{const r=f(i);if(!G.has(r))G.set(r,[]);G.get(r).push(k)});
+   G.forEach(ks=>{if(ks.length<2)return;add('kit-block',ks[0],ks.flatMap(k=>[...k.querySelectorAll(':scope>.kr')].map(r=>({l:r.querySelector(':scope>.krl'),v:r.querySelector(':scope>.krv')})).filter(r=>r.l&&r.v)))})}
   const pars=new Set([...R.querySelectorAll('.pcrow')].map(r=>r.parentElement));
   pars.forEach(par=>add('legacy',par,[...par.querySelectorAll(':scope>.pcrow')].map(r=>{const c=[...r.children].filter(vis);return c.length>=2?{l:c[0],v:c[1]}:null}).filter(Boolean)));
   const fl=new Map();R.querySelectorAll('div,li,p,label').forEach(e=>{if(e.classList.contains('pcrow')||!vis(e)||e.closest('.kb,button,.opts,#tabs,.pager,.kpkb'))return;const cs=getComputedStyle(e);if(!/flex/.test(cs.display)||cs.flexDirection!=='row'||cs.justifyContent!=='space-between')return;
@@ -51,7 +60,7 @@ const SCAN=()=>{const roots=[...document.querySelectorAll('#panel,#modal:not([hi
  await p.waitForTimeout(1200);await clean();
  const L=[];let shotN=0;const scan=async(tag,shot)=>{if(process.env.KT_DEBUG)console.error(tag);await p.waitForTimeout(350);const r=await p.evaluate(SCAN);r.forEach(x=>{x.step=tag;L.push(x)});
   if(OUT&&shot&&r.some(x=>x.kind!=='kit'||x.spread>1||x.oneWord.length))await p.screenshot({path:`${OUT}/${W}x${H}-${String(++shotN).padStart(2,'0')}-${tag.replace(/[^a-z0-9]+/gi,'_')}.jpg`,type:'jpeg',quality:60})};
- const steps=(ONLY||'tabs,hud,rules,items,shop,end').split(',');
+ const steps=(ONLY||'tabs,hud,rules,items,shop,mood,end').split(',');
  const modal=async(tag,fn,arg)=>{await clean();const ok=await p.evaluate(fn,arg).catch(e=>'ERR '+e.message.slice(0,80));await p.waitForTimeout(700);await scan(tag,true);return ok};
  if(steps.includes('tabs')){
   const tabs=await p.evaluate(()=>[...document.querySelectorAll('#tabs [data-tab]')].map(b=>b.dataset.tab));
@@ -94,6 +103,11 @@ const SCAN=()=>{const roots=[...document.querySelectorAll('#panel,#modal:not([hi
   await clean();await p.evaluate(()=>{const b=document.querySelector('#tabs [data-tab="inv"]');if(b)b.click()});await p.waitForTimeout(500);
   const ne=await p.evaluate(()=>document.querySelectorAll('#panel [data-keqi]').length);
   for(let i=0;i<Math.min(ne,3);i++){await p.evaluate(i=>{const e=document.querySelectorAll('#panel [data-keqi]')[i];if(e)e.click()},i);await p.waitForTimeout(600);await scan('wear.'+i,true)}}
+ if(steps.includes('mood')){
+  /* the mood dialog (jevb emoBox: Đang tác động rows + Ảnh hưởng) for the player and a few women, with causes */
+  await p.evaluate(()=>{try{const R=rivals.filter(v=>v.alive&&!v.out).slice(0,3);R.forEach((v,i)=>{emoSet(v,["lo","ghen","vui"][i],40,"Khương Lạc Anh được tấn phong");emoSet(v,"gian",30,"bị trái ý")});emoSet(S,"lo",30,"chuyện thử")}catch(e){}});
+  const ks=await p.evaluate(()=>[S].concat(rivals.filter(v=>v.alive&&!v.out).slice(0,3)).map(p=>{try{return emoKey(emoRes(p))}catch(e){return null}}).filter(Boolean));
+  for(const k of ks)await modal('mood.'+k,k=>{try{emoBox(k);return 1}catch(e){return 'x '+e.message}},k)}
  if(steps.includes('end')){
   await modal('end.past',()=>{const h=pastHTML();if(!h)return 0;Q.unshift({t:"Sổ luân hồi",h});showModal();return 1});
   await modal('end.card',()=>{try{const s0=start;start=()=>{};over("Kiếp này đã hết","Thử thẻ kết kiếp.","bệnh mà mất",false);window.__s0=s0;return 1}catch(e){return 'x '+e.message}})}

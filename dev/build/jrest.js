@@ -7,7 +7,7 @@
    - Nghỉ ngơi một lát = mọi buổi, BAL.restLatK khắc, Sức +BAL.restLatSuc, không tốn gì, và bớt nỗi buồn/lo/giận… BAL.restLatEmo
      (jemo, chỉ khi tâm trạng đang xấu; bình thường hay vui thì không đổi — thẻ nói rõ).
    The cards are refreshed from the live state each time they are drawn or played, so Cần/Tốn/Được always match what happens. */
-Object.assign(BAL,{restDsSuc:20,restDsBac:8,restDsMinK:2,restDsBuoi:"Buổi tối",restLatSuc:6,restLatK:1,restLatEmo:8});
+Object.assign(BAL,{restDsSuc:24,restDsBac:6,restDsMinK:2,restDsBuoi:"Buổi tối",restLatSuc:6,restLatK:1,restLatEmo:8});
 const REST_BAD=["buon","gian","so","lo","ghen","dau"];
 /* the cheapest tonic she owns (kind "Thuốc bổ"), or null */
 function restTonic(){if(!S||!Array.isArray(S.inv))return null;let best=-1,pr=1e9;
