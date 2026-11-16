@@ -183,3 +183,4 @@
 | Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | RUNNING | 16/11 12:58Z |
 | C44 'Xóa sổ trên mây' button (kit danger button + confirm) | review/cloud-del | D | session_01DgYSWnuoGnBrzpLuCRGnpy | BLOCKED KIT REQUEST (danger button + confirm dialog; worker archived, base review/cloud-save-r1 @7e187abe, plan in reports/cloud-del.md) | 16/11 13:10Z |
 | seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | RUNNING | 16/11 13:08Z |
+| foreign-princess v7 (BD hair Đáp ứng/Phi/Quý phi ×2 options, NC back to v5 slight slim) | review/foreign-princess-samples | main s16 | session_01UV1SzhXgLn4WHG9rL1BT7L (sonnet) | RUNNING | 16/11 13:10Z |
