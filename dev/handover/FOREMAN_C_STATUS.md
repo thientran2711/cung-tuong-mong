@@ -1,10 +1,11 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
-last wake: 16:00Z 16/11 (start)
+last wake: 15:50Z 16/11 (start)
 
 ## SESSION 4 LOG
-- 16:00Z start. Correction applied: story14-p1-r2 STAYS with C (FOREMAN_C.md 15:45Z s19 withdrew the hand-over) → worker session_011xDdVPicFAyWqznz92TPU8 told to finish + report SẴN SÀNG KIỂM. schedules3-r4 worker idle at 32% ctx (waiting on its rand18 shard audit; no report yet). Opening art (a)–(d) + ORIGIN INTROS (claims 16:00Z).
+- 15:45Z start. Correction applied: story14-p1-r2 STAYS with C (FOREMAN_C.md 15:45Z s19 withdrew the hand-over) → worker session_011xDdVPicFAyWqznz92TPU8 told to finish + report SẴN SÀNG KIỂM. schedules3-r4 worker idle at 32% ctx (waiting on its rand18 shard audit; no report yet). Opened 15:47Z (claimed): (a) fig-proportion sonnet session_011xDdVRcEKcovA92Ep6FWb4 · (b) night-backs sonnet session_011xDdVQNx5VgxetorvVUQPh · (c) buoi-art sonnet session_011xDdVP32VLjcS6HX97wHgD · (d) icon-art sonnet session_011xDdVRMa18LU3fiFyq7ksS · ORIGIN INTROS opus session_011xDdVSMZ3apRHJfX25BwAb (review/origin-intros; draws no art, writes ART LIST for C). Each art worker: SAMPLE READY → Foreman C sends it to the owner (SendUserFile) → her verdict → mass production. Running C total: 7.
+- PENDING for next wake: schedules3-r4 stage-1 report → opus reviewer review/schedules3-r5 + opus successor for PEOPLE LEDGER (review/people-ledger @afcac6cb); story14-p1-r2 report → opus reviewer review/story14-p1-r3; owner verdicts on the 15:45Z samples (title plates, item art audit, cắm hoa) → mass-production workers.
 
 ## HANDOVER (Foreman C session 3 → session 4, 15:50Z 16/11)
 Why: session 3 context ~29% (START_CTX ~7% → limit 32%), and a large new ART load arrived (owner 15:35Z: ALL drawing is Foreman C's). Session 4: read this block, SESSION 3 LOG, ## PASS, ## QUESTIONS, CLAIMS.md rows with C, dev/handover/reports/ (new), FOREMAN_C.md lines from '(15:25Z s18)' on, OWNER_DECISIONS from 16/11 14:45Z on. Push helper used by s3: /home/user/wt/push.sh (union-resolves CLAIMS/STATUS) — recreate it (fetch --depth=30 under flock, rebase, union conflict markers, push).
