@@ -1,3 +1,5 @@
+SAMPLE READY v2 (Thai hau redo after owner REJECTED v1 as too long/head too small) — dev/handover/reports/fig-proportion/thaihau-sample-v2.jpg: old | A | B | c01 | c05, same scale.
+v2 numbers (crown-top-to-neck share / chin-to-feet / width-height): old .207/.793/.811; A .160/.840/.329; B .162/.838/.343; c01 .151/.849/.319; c05 .173/.827/.363. Method v2: edit-from-consort (c01-t1-a51 as the body reference, old Thai hau as identity+costume), smaller crown, lighter layered robe. Colours came out paler than old (deepen on production). Cost 4x40 (2 failed thin v1b not used: 80) +... total this round 3x40+... see below.
 SAMPLE READY (Thai hau, PRIORITY 1, per Foreman C 16:50Z) — dev/handover/reports/fig-proportion/thaihau-sample.jpg  (old | new | 2 consorts, same scale; Thai hau a51 width/height .811 -> .34 = consorts .32-.36, heads 4.84 -> 6.52 vs consort 6.62)
 SAMPLE READY — dev/handover/reports/fig-proportion/sample-sheet.jpg  (113 KB, before | after, 3 worst incl. Thái hậu)
 
@@ -34,3 +36,5 @@ WAITING for the owner's verdict on the Thai hau sample.
 ## Thai hau complete picture list (Foreman C 16:55Z) — dev/handover/reports/fig-proportion/thaihau-all-pictures.txt
 Full-body figures (15, all redraw): fig-thaihau-1/2/3, fig-thaihau-h1/h2/h3-a18/a26/a36/a51 (+ hd/ tn/ variants if present). Portraits por-thaihau-* / face-thaihau-1..6 (faces; re-cut from the new figures so face and body match). Scene/act/event pictures naming her (act-*-thai-hau*, act-*-th-*, ev-q72-th-*, ev-toil-th-*, info-thai-hau, thai-hau): to be LOOKED AT one by one when generation starts; any that show her bulky get redrawn. 
 ## Head:height table for EVERY figure: dev/handover/reports/fig-proportion/heads-table.csv (file, verdict, heads = body/head crown-inclusive, width/height, canvas)
+
+v2 cost: 3 generations x 40 (1 thin-column try + 2 edit-from-consort) -> 2 used 'A/B' + 2x3 bg removal = ~ 246 credits incl. one discarded pair.
