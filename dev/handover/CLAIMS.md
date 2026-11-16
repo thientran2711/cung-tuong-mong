@@ -328,3 +328,4 @@
 | HEALTH + PREGNANCY BUNDLE (opus; main s21 18:08Z/18:10Z/18:17Z/19:00Z; suc-khoe.md §4.1–4.7) | review/suc-khoe | D | session_01DgYSWmn1SNsxewKAaDLZjN | RUNNING | 16/11 18:35Z |
 | fest-fx (sonnet; owner bug: fireworks in her room on chiều): festival FX only tối + outdoor + fitting festivals; audit 3-buổi index leftovers | review/fest-fx | main s21 | session_01UV1Szk4mBQYLcS8DPSeeBv | RUNNING | 16/11 18:37Z |
 | pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
+| map-labels-2-b review r1 (sonnet) of 1deaf9cb (on dudo-lock) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | RUNNING | 16/11 18:38Z |
