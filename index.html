@@ -421,12 +421,12 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .mapw{position:relative;min-width:100%}.mapimg{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
 .mspot{position:absolute;background:transparent;border:2px solid transparent;border-radius:8px;cursor:pointer;padding:0;display:flex;align-items:flex-start;justify-content:center}
 .mspot:hover:not(:disabled),.mspot:focus-visible{border-color:#ffe7b0;background:#ffe7b022}
-.mspot .mlab{margin-top:-2px;background:#1a0e08cc;color:#ffe7b0;font-family:var(--display);font-size:.72rem;padding:1px 6px;border-radius:8px;white-space:nowrap;text-shadow:0 1px 2px #000;display:inline-flex;align-items:center;gap:3px;pointer-events:none}
-.mspot .mlab i{font-style:normal;font-family:var(--body);font-size:.6rem;color:#f3e6cf;background:#ffffff22;border-radius:6px;padding:0 4px}.mspot .mlab em{font-style:normal;font-family:var(--body);font-size:.58rem;color:#ffb8a0}.mspot .mlab em.ok{color:#bfe8c5}
-.maptools .fest{background:linear-gradient(90deg,#b0302a,#d4a03a);color:#fff8e6;font-family:var(--display);padding:1px 10px;border-radius:10px;font-size:.75rem}.mspot{flex-direction:column;align-items:center}.mspot .mmeta{background:#1a0e08b0;color:#f3e6cf;font-size:.55rem;border-radius:6px;padding:0 4px;white-space:nowrap;pointer-events:none;margin-top:1px}.mspot .mmeta em{font-style:normal;color:#ffb8a0}.mspot .mmeta em.ok{color:#bfe8c5}.mspot.here .mlab{box-shadow:0 0 0 2px #f0c060}.mspot.sm .mmeta{font-size:.48rem;padding:0 2px}.mspot .mfaces{margin-top:1px;display:flex;gap:1px;pointer-events:none}.mspot .mres .md.xs{width:18px;height:18px;border-width:1px}.mspot .mres.more{font-size:.55rem;background:#1a0e08cc;color:#ffe7b0;border-radius:6px;padding:0 3px;align-self:center}.mspot.empty .mlab{opacity:.5;font-size:.5rem;background:#1a0e0899}.mspot.sm{z-index:2}.mspot.sm .mres .md.xs{width:14px;height:14px}.mspot.sm .mlab{font-size:.52rem;padding:0 3px;white-space:normal;text-align:center;justify-content:center;flex-wrap:wrap;max-width:110%;line-height:1.05}.mspot.empty{pointer-events:auto;cursor:default}
+.mspot .mlab{margin-top:-2px;background:#fffaf0f5;color:#2a1a12;border:1px solid #c9a35a;font-family:var(--display);font-weight:600;font-size:13px;line-height:1.25;padding:2px 8px;border-radius:8px;white-space:normal;text-align:center;width:max-content;max-width:max(100%,4.4em);text-shadow:none;box-shadow:0 1px 3px #3a2a1e73;display:inline-flex;align-items:center;justify-content:center;gap:4px;pointer-events:none}/* KIT 34.1d map label: ONE size + contrast for every place (owner 16/11): light paper chip, dark ink, 13 px, never faded */
+.mspot .mlab i{font-style:normal;font-family:var(--body);font-size:12px;font-weight:500;color:#5a4632;background:#f0e3c6;border-radius:6px;padding:0 4px}.mspot .mlab em{font-style:normal;font-family:var(--body);font-size:12px;color:#9a2c1c}.mspot .mlab em.ok{color:#1a6a35}
+.maptools .fest{background:linear-gradient(90deg,#b0302a,#d4a03a);color:#fff8e6;font-family:var(--display);padding:1px 10px;border-radius:10px;font-size:.75rem}.mspot{flex-direction:column;align-items:center}.mspot .mmeta{background:#f6ead6f2;color:#4a3a2a;border:1px solid #e6d3ac;font-size:12px;line-height:1.25;border-radius:8px;padding:0 6px;white-space:nowrap;pointer-events:none;margin-top:2px}.mspot .mmeta em{font-style:normal;color:#9a2c1c}.mspot .mmeta em.ok{color:#1a6a35}.mspot.here .mlab{box-shadow:0 0 0 2px #e0a93a,0 1px 3px #3a2a1e73}.mspot .mfaces{margin-top:1px;display:flex;gap:1px;pointer-events:none}.mspot .mres .md.xs{width:18px;height:18px;border-width:1px}.mspot .mres.more{font-size:12px;background:#f6ead6f2;color:#4a3a2a;border:1px solid #e6d3ac;border-radius:8px;padding:0 4px;align-self:center}.mspot.sm{z-index:2}.mspot.sm .mres .md.xs{width:14px;height:14px}.mspot.empty{pointer-events:auto;cursor:default}
 @media (max-width:600px){.mleg{display:none}.mspot .mres .md.xs,.mspot.sm .mres .md.xs{width:11px;height:11px}.mspot .mmeta{display:none}}
-.mspot.sm .mlab{font-size:.6rem;padding:0 4px}.mspot.off .mlab{opacity:.75}.mspot.off{cursor:default}
-@media (max-width:600px){.mspot .mlab{font-size:.6rem}.mspot.sm .mlab{font-size:.52rem}.mspot .mlab em{display:none}}
+.mspot.off{cursor:default}
+@media (max-width:600px){.mspot .mlab em{display:none}}
 /* ONE UI KIT */
 :root{--pfw:120px}@media (min-width:600px){:root{--pfw:150px}}@media (min-width:1100px){:root{--pfw:180px}}
 .pfr{width:var(--pfw);max-width:100%;min-height:0}.pcp.art{background:#d9c7a8 center/cover no-repeat}
@@ -3882,12 +3882,16 @@ function silChip(n){if(!n)return"";const k=Math.min(n,3);return `<span class="ms
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
  const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792;const fit=Math.max(1,(sc.clientHeight/Math.max(1,sc.clientWidth))*asp);
- const z=Math.max(fit,window.__mapZ||fit);w.style.width=(z*100)+"%";window.__mapFit=fit;
+ /* KIT 34.1d: the floor zoom is also the smallest at which no two place labels (13 px chips, owner 16/11) touch; the palace detail map (.kpmv) keeps its own layout */
+ let fit2=fit;if(!sc.closest(".kpmv")){const cap=fit+2.5;const touch=()=>{const R=[...w.querySelectorAll(".mspot .mlab")].map(l=>l.getBoundingClientRect()).filter(r=>r.width>0);for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)return true}return false};
+  for(let g=0;g<12;g++){w.style.width=(fit2*100)+"%";if(!touch()||fit2>=cap)break;fit2=Math.min(cap,fit2+.25)}}
+ const z=Math.max(fit2,window.__mapZ||fit2);w.style.width=(z*100)+"%";window.__mapFit=fit2;
  const key=S.place+"|"+z.toFixed(2)+"|"+sc.clientWidth;if(window.__mapKey2===key&&window.__mapPos2){sc.scrollLeft=window.__mapPos2[0];sc.scrollTop=window.__mapPos2[1]}
  else{const h=sc.querySelector(".mspot.here")||sc.querySelector('[data-go="home"]')||sc.querySelector('[data-go="'+(S.pal!=null?palaceOf(S):"home")+'"]');if(h){sc.scrollLeft=h.offsetLeft+h.offsetWidth/2-sc.clientWidth/2;sc.scrollTop=h.offsetTop+h.offsetHeight/2-sc.clientHeight/2}window.__mapKey2=key}
- if(!sc.dataset.sv){sc.dataset.sv=1;sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}
+ if(!sc.dataset.sv){sc.dataset.sv=1;try{if(window.ResizeObserver){let t=0,sz=sc.clientWidth+"x"+sc.clientHeight;new ResizeObserver(()=>{const n=sc.clientWidth+"x"+sc.clientHeight;if(n===sz)return;sz=n;clearTimeout(t);t=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList)mapFit()}catch(e){}},60)}).observe(sc)}}catch(e){}sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(tab==="go"&&!window.__mapList){mapFit();const img=document.querySelector(".mapsc .mapimg");if(img&&!img.complete)img.addEventListener("load",mapFit,{once:true})}}catch(e){}return r}})();
 addEventListener("resize",()=>{try{if(S&&tab==="go")mapFit()}catch(e){}});
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{try{if(S&&tab==="go"&&!window.__mapList)mapFit()}catch(e){}});if(document.fonts)document.fonts.addEventListener("loadingdone",()=>{try{if(S&&tab==="go"&&!window.__mapList)mapFit()}catch(e){}})}catch(e){}
 /* zoom buttons: the floor is the fitted size, not 1 */
 document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [data-mapz]");if(!z)return;e.stopImmediatePropagation();e.preventDefault();const f=window.__mapFit||1;window.__mapZ=cl((window.__mapZ||f)+(+z.dataset.mapz)*.5,f,f+2.5);render()},true);
 /* tapping a place opens the place screen; the floating 'Bản đồ' button there goes back to the full map */
@@ -4223,7 +4227,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 (function(){const st=document.createElement("style");st.textContent=`
 .mspot.agrey{cursor:pointer;pointer-events:auto}
 .mspot.agrey .mlab{opacity:1!important}
-.mspot .mlab .mlock{display:inline-block;vertical-align:-1px;margin-left:4px;opacity:.85}
+.mspot .mlab .mlock{flex:none;display:block;margin-left:0;opacity:1;color:#6b4a1c}.mspot .mlab .kmlock{flex:none}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
 .mspot .macts{display:flex;flex-direction:column;gap:2px;margin-top:2px;align-items:center;z-index:3}
@@ -4667,7 +4671,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 (function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}
 .srvrow{display:flex;gap:8px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}.srvrow .srvi{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 160px;font-size:.85rem}
 .srvrow .srvb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;flex:1 1 100%}.srvrow .srvb .opt{min-width:0}
-.mspot.srvno .mlab{opacity:.6}.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
+.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
 (function(){const h0=hudTween;hudTween=function(){if(!isSrv())return h0.apply(this,arguments);const s=S.sung;S.sung=S.tin;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();
 
 /* ================= CUNG NỮ II: the palace men (j22), forbidden love and marriage roads for a maid =================
@@ -29502,7 +29506,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="78c46f0e4d31";window.CTM_BUILD=BUILD;
+const BUILD="570bb13728ff";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
