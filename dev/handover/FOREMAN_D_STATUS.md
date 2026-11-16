@@ -1,6 +1,7 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 17:40Z (s6 = session_01DgYSWkUCM7ZUmRkGFwQvQu — Foreman D is now s6; send result lines here)
+last wake: 16/11 18:00Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
+s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 s6 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 s6 hourly wake = trig_01NSVCPThLJEaiZfkZzfES3w (xx:30). 5 running sessions told s6 id at 14:45Z. Free slots: 7, but no unclaimed real D item (cloud-del waits KIT READY; follow-ups not yet real) → none opened (OD:L1286).
 - 16:45Z (hourly): OD:L1370 go-live read (D fast-forwards its own PASS branches, FF-only, one per push). Live check vs main de239eca: LIVE = name-mask, scene-end-sweep, reign-road-fix, act-split-w2, balance-after-truth (+older). NOT LIVE, all held by main merge-train-9 (session_01UV1SzhR7Tb1NFJYg1HjaXd, claimed 15:30Z) → D does NOT push them (no double push): coop-b1b5-fix-r1 287a7010, mem-upgrade-r1, seatcap-r1, npc-death-r1, preg-rate-r1, entry-exam-r1, slap-mg-r3, coop-chat-r1, emperor-visit-r1 (now superseded by ghen-shown-r1). NEW after train-9 started: ghen-shown-r1 81f86655 (BIG: numbers) and danh-p1-r1 dd3363ff (BIG: BAL) — both behind main now (not FF). → asked main s20: does train-9 take them, or does D re-merge + push them alone after train-9 lands? Running: item-ledger-r1, kc-roads fix2.
