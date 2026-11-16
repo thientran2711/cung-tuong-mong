@@ -105,3 +105,4 @@
 | D36 rank-port resume (kit-keeper-1 done) | review/rank-port | B | session_01N1tNP3A9vkZJnwyZJw3fL1 (sonnet) | RUNNING | 16/11 07:58Z |
 | D11 presentation (code wiring only; art paused; D51 at main) | review/presentation | B | session_01N1tNP3mhLhWrJukZWoGvAQ (sonnet) | RUNNING | 16/11 07:58Z |
 | D13 spread events across buổi (on top of D29 schedules3 @9b1d82fa) | review/spread-events | B | session_01N1tNP4LQMHt6zowrVAmxXG (opus) | RUNNING | 16/11 07:58Z |
+| coop-rejoin-xdev REVIEW (opus) | review/coop-rejoin-xdev-r1 | main s13 | session_01UV1SzjVyTZhydVYEDmAGJV | RUNNING | 16/11 08:06Z |
