@@ -24,8 +24,8 @@ function stEligible(v,t){return !!(v&&v!==S&&v!==t&&v.alive&&!v.out&&!v.coop&&!v
 function stNeed(v){const N=B().need;const fav=cl(1-(v.sung||0)/100,0,1),rank=rkOf(v)>=7?0:(7-rkOf(v))/7;
  const heir=kidsOf(v).some(k=>k.sex==="m")?B().heirHas:1;return (N.fav*fav+N.rank*rank+N.heir*heir)/(N.fav+N.rank+N.heir)}
 function stRel(v,t){const b=B();const a=aff(v,t);let r=a>0?Math.max(b.friendMin,1-a/b.friend):1;return r*(1+b.oanW*Math.min(100,Math.max(0,oan(v,t)))/100)}
-function stFear(v,t){const b=B();let f=rkOf(t)-rkOf(v)>=b.fear.gap?b.fear.f:1;const d=S.nightWhy;if(d&&d.cause==="custom"&&t&&t!==S&&t.queen)f*=b.custom;return f}
-function stModes(v){const b=B(),c=b.cost;const M=[];if((v.duc==null?50:v.duc)>=c.feign.duc)M.push(["feign",oSteal(v,"feign")]);
+function stFear(v,t){const b=B();let f=rkOf(t)-rkOf(v)>=b.fear.gap?b.fear.f:1;const d=S.nightWhy;if(d&&d.cause==="custom"&&t&&rkOf(t)>=7)f*=b.custom;return f}
+function stModes(v){const b=B(),c=b.cost;const M=[];if(ducOf(v)>=c.feign.duc)M.push(["feign",oSteal(v,"feign")]);
  if((v.suc||0)>=b.sucMin+c.road.suc)M.push(["road",oSteal(v,"road")]);return M}
 /* her wish to try tonight against holder t; mode is drawn now (weighted by its odds) */
 function stealWant(v,t){const M=stModes(v);if(!M.length)return{u:0,p:0,mode:null};let r=Math.random()*M.reduce((a,m)=>a+m[1],0),i=0;while(r>M[i][1]&&i<M.length-1){r-=M[i][1];i++}

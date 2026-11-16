@@ -123,8 +123,8 @@ A("takeaway","Xin bế con nàng về nuôi",{c:{},kid:1,ok:(a,t)=>rkOf(a)>rkOf(
   return `<span class="${t===S?"r":"g"}">${a===S?"Ngươi":(a.queen?"Hoàng hậu":a.name)} được chuẩn bế ${k.name} về nuôi, vì phẩm vị ${NM(t)} còn thấp.</span> `}});
 A("vp","Tố vượt phẩm",{c:{},ok:(a,t)=>vpItems(t).length>0,o:a=>oVP(a),x:"nàng mặc đồ quá phẩm vị",f:(a,t)=>vpAccuse(a,t)});
 A("plant","Cài đồ vào rương",{c:{},ok:(a,t)=>a.inv.some(e=>!e.h),o:(a,t)=>oPlant(a,t),x:"chọn món đồ",npcOnly:0,f:(a,t,ix)=>plantItem(a,t,ix)});
-A("steal","Tranh sủng",{c:{duc:-4},ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a),f:(a,t)=>stealNight(a,t,"feign")});
-A("road","Chặn ngự giá",{c:{suc:-5},ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a,"road"),f:(a,t)=>stealNight(a,t,"road")});
+A("steal","Tranh sủng",{c:{}/* cost = BAL.steal.cost via jsteal getter */,ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a),f:(a,t)=>stealNight(a,t,"feign")});
+A("road","Chặn ngự giá",{c:{}/* cost = BAL.steal.cost via jsteal getter */,ok:(a,t)=>tonightOf()===t,o:a=>oSteal(a,"road"),f:(a,t)=>stealNight(a,t,"road")});
 A("gift","Tặng quà",{c:{},ok:(a,t)=>a.inv.some(e=>!e.h),o:()=>null,f:(a,t,ix)=>giveTo(a,t,ix)});
 function stealWin(a,t,mode){relAdd(a,t,-BAL.steal.rel);if(t!==S)t.ghen=cl(t.ghen+BAL.steal.ghen,0,100);if(a===S){S.tonight="me";nightScene()}else S.tonight=a;
  return `${NMc(a)} ${mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}, Hoàng thượng sang cung ${NM(a)} thay vì ${NM(t)}. `}

@@ -181,4 +181,4 @@ function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.ma
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
 function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3 đến +8 · Ân tình +2 đến +7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}
-function stealKem(v){const B=BAL.steal;let o=Math.round(B.rel*.6);try{o=Math.round(B.rel*.6*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${B.ghen}, quý ngươi -${B.rel}, oán ngươi +${o}`}
+function stealKem(v){const B=BAL.steal;const h=BAL.relOan.hurt;let o=Math.round(B.rel*h);try{o=Math.round(B.rel*h*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${B.ghen}, quý ngươi -${B.rel}, oán ngươi +${o}`}

@@ -60,6 +60,16 @@ const {chromium}=require('playwright');const path=require('path');
   ok("flip() → steal pass → nightWhy.cause 'stolen' (card-flip reads it)",st>0,{st});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   ok("SOC 'steal' folded into the one choice",SOC.steal.ok(R0[0],S)===false);
+  /* 12 · symmetry (night-steal-2): an NPC weighs HER exactly like an NPC holder in her position (same rank, thiện cảm, oán; custom night as Empress) */
+  {reset();const v=R0[0],t=R0[1];const M=Math.random;const sv={rank:S.rank,rel:v.rel,oan:v.oan,rl:Object.assign({},v.rl),ro:Object.assign({},v.ro),tr:t.rank,tq:t.queen,nw:S.nightWhy,duc:v.duc};
+   const cmp=(nm)=>{Math.random=()=>0.3;const a=stealWant(v,S);Math.random=()=>0.3;const b=stealWant(v,t);Math.random=M;
+    ok("symmetry: "+nm,a.mode===b.mode&&Math.abs(a.u-b.u)<1e-9&&a.rel===b.rel&&a.fear===b.fear,{her:[a.rel,a.fear,a.u],npc:[b.rel,b.fear,b.u]})};
+   for(const [rk,af,oa] of [[2,0,0],[2,70,0],[4,-30,60],[6,10,20]]){S.rank=rk;t.rank=rk;t.queen=false;v.rank=1;v.rel=af;v.rl[t.id]=af;v.oan=oa;v.ro[t.id]=oa;cmp(`rank ${rk} · thiện cảm ${af} · oán ${oa}`)}
+   S.rank=7;t.rank=7;t.queen=true;v.rel=0;v.rl[t.id]=0;v.oan=0;v.ro[t.id]=0;S.nightWhy={wk:wk(),cause:"custom"};cmp("custom night held by the Empress (her or an NPC)");
+   delete v.duc;ok("feign mode without a stored Đức uses ducOf (one core)",stealWant(v,t).mode!=null||ducOf(v)<BAL.steal.cost.feign.duc,{duc:ducOf(v)});
+   Object.assign(S,{rank:sv.rank,nightWhy:sv.nw});Object.assign(v,{rel:sv.rel,oan:sv.oan,rl:sv.rl,ro:sv.ro,duc:sv.duc});t.rank=sv.tr;t.queen=sv.tq}
+  ok("ACT steal/road: no stale typed cost (the getter reads BAL.steal)",/BAL|stealCost/.test(String(Object.getOwnPropertyDescriptor(ACT.steal,"c").get||"")));
+  ok("stealKem oán = BAL.steal.rel × BAL.relOan.hurt (same number relAdd uses)",typeof BAL.relOan==="object"&&BAL.relOan.hurt>0);
   return out});
  let bad=0;for(const r of R){console.log(r.join(" | "));if(r[0]!=="PASS")bad++}
  console.log("page errors:",errs.length?errs.slice(0,5):0);await b.close();process.exit(bad||errs.length?1:0)})();
