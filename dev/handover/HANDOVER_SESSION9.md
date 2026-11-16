@@ -228,3 +228,4 @@ Follow-ups: canon overwrite OD:L1141 → L1151 (mortality); "plead beforehand" a
 - (11:39Z real s15) OWNER AWAKE (asked Q6 = C7 balance-pass-r1 HH 45 % vs 32 %; s15 asked with 3 options, rec 1 = merge + ex.bar[2] 28→30 + re-measure n≥30). LIVE: main = 802fe821 (design-scale-r1: one page 590x820, uniform scale). Smoke asked. GO → kit-keeper-2-r2. Pre-existing: scene-end 'bloom' early=true FAIL.
 - (11:41Z real s15) OWNER Q6 = 2 → balance-pass-r1 added to merge-train-6 as is; HH tuning → B (D31 re-measure after live).
 - (11:50Z real s15) LIVE: main = 695934d1 (kit-keeper-2-r2 item-big; scene-end bloom FAIL = test timing, fixed in test). Smoke asked. GO → mortality-r1.
+- (11:53Z real s15) OWNER BUG skin/light mismatch (refs/owner-skin-light-mismatch.jpg) → worker skin-light (opus) session_01UV1SzinoxqBjmDnBtQQBku, fast lane. Weather videos: owner OK. fp: BD hair redo → ART fp session (v5).
