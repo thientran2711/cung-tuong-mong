@@ -42,3 +42,6 @@ of these only ve-hau and tranh-ghe-xong are live (one log rule each) and both ar
   Exact scan command (from the worktree root, local build served on a free port):
     node dev/test/pic-dupes.js http://127.0.0.1:<port>/ dev/figwork/picdupes/out.json dev/figwork/picdupes/extra.txt
   Test a manifest patch before pushing it: ACTS_FILE=<patched ACTS.json> node dev/test/pic-dupes.js <same args>.
+- r1 scan run (local build of this branch + live CDN manifests + extra.txt): acts 137, pictures 125, placeholder 0, page errors 0;
+  "Hành lễ" -> act-hanh-le-v2.webp; shared pictures 5, all same-meaning groups (Đến <place> x9, Tụng/Chép kinh, Thưởng cung nữ/Ban thưởng,
+  Xin yết kiến ở <điện> x2, Mua chuộc cung nữ/Mua chuộc).
