@@ -8,6 +8,9 @@
    - SHELL  'ctm-shell-<v>'  index.html, manifest, assets.json, the JSON data files, icons. Small; replaced on every build that changes them.
    - ASSETS 'ctm-assets'     every image and sound, keyed by content: '<path>?h=<sha256/16>'. Long-lived, NEVER wiped by a build:
                              a changed file gets a new key (only it downloads), a removed/changed file's old key is pruned on activate.
+   PERFORMANCE BUDGET (dev/PROGRESS_perf.md): assets.json groups = core (first hour, blocks entry), fig (background, capped), lazy + fx (on use only):
+   this worker caches any of them under the same content key the first time the game shows it, so nothing needs listing here and a new build only
+   changes keys of changed files. The shell cache (PRE) stays small: index.html, manifest, JSON data (~1.6 MB) — never pictures or sounds.
    Filling ASSETS with progress is the page's job (dev/build/jload.js); this worker only serves it and caches what the game asks for.
    Only same-origin GETs and the picture CDN IMG are handled: the co-op worker (ctm-coop…workers.dev, fetch + WebSocket) and any other origin go
    straight to the network.
@@ -18,6 +21,7 @@ const V='__V__';
 const SHELL='ctm-shell-'+V, ASSETS='ctm-assets';
 const PRE=__PRE__;
 const IMG='__IMG__';
+let HOSTR=null;  /* {t, r}: the index.html response last given to a top-level host page (network or saved copy) (see the iframe branch in the fetch handler) */
 let MAN=null;
 function man(){if(MAN)return MAN;MAN=caches.open(SHELL).then(c=>c.match('assets.json')).then(r=>r?r:fetch('assets.json',{cache:'no-store'})).then(r=>r.json()).then(j=>{const m=new Map();for(const f of j.files)m.set(f[0],f[1]);return m}).catch(e=>{MAN=null;return new Map()});return MAN}
 self.addEventListener('install',e=>{e.waitUntil(caches.open(SHELL).then(c=>c.addAll(PRE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
@@ -53,12 +57,19 @@ self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;c
  const p=relPath(u);if(p===null)return;
  if(!pruned&&p!==''&&p!=='index.html'&&q.mode!=='navigate')e.waitUntil(prune());
  if(q.headers.get('x-ctm-load')||u.searchParams.has('ctmload'))return;  /* jload.js fills the cache itself */
+ /* the design-canvas iframe (rot.js, ?krot=1) is the same ~5 MB index.html the host page was just served: answer it with that very response
+    (one download instead of two, always the same build as its host); only within 30 s and once, else the normal network-first path below.
+    A worker restart drops HOSTR: the iframe then simply takes the normal path. */
+ if(!cdn&&q.destination==='iframe'&&u.searchParams.has('krot')&&HOSTR&&Date.now()-HOSTR.t<30000){const h=HOSTR;HOSTR=null;e.respondWith(Promise.resolve(h.r));return}
  if(!cdn&&(q.mode==='navigate'||p===''||p==='index.html')){e.respondWith((async()=>{const c=await caches.open(SHELL);
    /* network first (fresh build), but after 4 s on a slow line the saved copy answers; with no saved copy keep waiting */
    const net=fetch(q,{cache:'no-cache'}).then(r=>{if(r.ok&&!u.search)e.waitUntil(c.put('index.html',r.clone()));return r});
    const old=c.match('index.html');
    const slow=new Promise(ok=>setTimeout(ok,4000)).then(()=>old).then(r=>r||net);
-   try{return await Promise.race([net,slow])}catch(err){return (await old)||Response.error()}})());return}
+   /* HOSTR = the response this host page is actually given (network OR the saved copy after 4 s), never a later network answer:
+      the iframe then always runs the same build as its host (review/perf-r1) */
+   const give=r=>{if(q.mode==='navigate'&&q.destination==='document'&&!u.searchParams.has('krot')){HOSTR=r&&r.ok?{t:Date.now(),r:r.clone()}:null}return r};
+   try{return give(await Promise.race([net,slow]))}catch(err){return give((await old)||Response.error())}})());return}
  if(/\.json$/.test(p)||p==='manifest.webmanifest'){const jk=new URL(p,baseOf(p)).href;e.respondWith(fetch(cdn?new Request(jk,{...CORS,cache:'no-cache'}):q,{cache:'no-cache'}).then(r=>{if(r.ok&&!/^assets\.json$/.test(p)){const cp=r.clone();e.waitUntil(caches.open(SHELL).then(c=>c.put(jk,cp)))}return r}).catch(()=>caches.match(jk,{ignoreSearch:true})));return}
  e.respondWith((async()=>{const m=await man(),h=m.get(p);
   if(h){try{return await asset(e,p,h)}catch(err){const c=await caches.open(ASSETS);const any=await c.match(new URL(p,baseOf(p)).href,{ignoreSearch:true});return any?ranged(q,any):Response.error()}}
