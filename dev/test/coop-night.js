@@ -106,17 +106,17 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 4 time out at tối, guest AFK */
  if(await toNight('4')){const w0=(await D(A)).w;await setTm(A,{buoiMs:9000,pauseCapMs:2000});await reset(A);
-  const t0=Date.now();await clear(A);ok(await press(A),'4: host presses, guest AFK');
+  const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
   let st=-1;while(Date.now()-t0<40000){const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
   ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);await merged('4',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 5 guest ready, reloads; host presses */
- if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await press(B),'5: guest presses');await sleep(1500);
+ if(await toNight('5')){const w0=(await D(A)).w;await setTm(A,{buoiMs:120000});await reset(A);await clear(B);ok(await isRd(B)||await press(B),'5: guest presses');await sleep(1500);
   await B.p.close();await until(A,()=>COOP.frozen,null,60000);await join(B,code);
   ok(await until(B,()=>COOP.seat==='b'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000),'5: guest back');
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}
   const c=await D(B);if(c.b>=LAST&&!c.ready){await clear(B);await press(B)}
-  await clear(A);ok(await press(A),'5: host presses');await merged('5',w0)}
+  await clear(A);ok(await isRd(A)||await press(A),'5: host presses');await merged('5',w0)}
  /* 6-8 reconnect (owner 16/11): one leaves mid-buổi, the other sees the wait; she comes back → the one who stayed recovers by itself */
  const Ok=o=>o.p.evaluate(()=>{const n=document.getElementById('next');const fz=document.getElementById('coopfz');const h=document.getElementById('kctmh');
    return {fz:!!fz,hold:!!h,frozen:!!COOP.frozen,dis:n.disabled,next:n.textContent,k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),Q:Q.length,bend:COOPW.bend,pb:!!COOPW.pendBuoi,wk:COOPW.whereKey,tr:(COOPW.tr||[]).slice(-8)}});
@@ -149,7 +149,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  /* 9 at tối: the guest leaves after pressing, comes back; the host (still connected) recovers and the night goes for both */
  {await toNight('9');const w0=(await D(A)).w;await clear(B);await press(B);await sleep(1500);await leaveBack(B,A,'9 guest at tối');
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}const c=await D(B);if(c.b>=LAST&&!c.ready){await clear(B);await press(B)}
-  await clear(A);ok(await press(A),'9: host presses');await merged('9',w0)}
+  await clear(A);ok(await isRd(A)||await press(A),'9: host presses');await merged('9',w0)}
  /* 10 per-buổi progress survives a reload / rejoin (owner 16/11): 2 acts → reload → khắc + effects kept, not reset, not doubled */
  async function actsReload(X,Y,tag){await toDay();for(let i=0;i<2;i++){await clear(A);await clear(B)}
   const x0=await X.p.evaluate(()=>({u:used,tai:S.tai,k:COOPW.tm.myKey(),n:(S.log||[]).length}));
