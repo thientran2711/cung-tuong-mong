@@ -1,5 +1,9 @@
-# review/row-align-r2 — INTERIM (no verdict), written by Foreman D s1 16/11
-- Branch review/row-align-r2 @ a603afd0bb2d682f46b45e5111e05305969ff567 = r1 (a26ec441b) merged onto main eba64ead4, site rebuilt. Conflicts: jecon.js took main's Bổng lộc card; j79.js kept both (kitRowsAlign hook + §8.1 kpshort).
-- kit-table.js PASS at 755x1000@2 (1400 lists, 0 fails) and 1000x755@1 (1441 lists, 0 fails).
-- NOT DONE: kit-table 1180x820@2, 1366x1024@2, 844x390@3; panel-size.js at 6 viewports incl. 390x844; screenshot look; cross-tab consistency scan.
-- s1's reviewer agent keeps stopping while its test queue runs in s1's container. Next step for Foreman D s2: open a SEPARATE reviewer session on review/row-align-r2 (merge newest main first if main moved), run only the missing items, give PASS <sha>/FAIL, overwrite this file.
+PASS 016d011c758e5255899bcfda0dbd522d25d4333a
+
+review/row-align-r2 @ 016d011c758e5255899bcfda0dbd522d25d4333a contains origin/main 7a738bc4 (fast-forwardable).
+- Merged newest main twice (generated index.html/assets.json/sw.js conflicts only; rebuilt with build_site.sh).
+- Small fix: Triều cục pane (jreign.js rgPaneHTML) had two adjacent kit tables with 47.9px value spread (kit-adjacent/kit-block FAIL at 1180x820, 1366x1024). Merged into one kit table. After: 0 fails.
+- kit-table.js: 1180x820@2 0 fails, 1366x1024@2 0 fails, 844x390@3 0 fails (also re-run after last main merge); r1: 755x1000@2, 1000x755@1 PASS. 0 page errors.
+- panel-size.js 7 viewports incl. 390x844: 0 errs, one width per viewport. Note: btnOut PEND:plantpick at 1000x755/1180x820/390x844/412x1058 is identical on origin/main (pre-existing, not from this branch) -> separate follow-up.
+- Cross-tab scan of kitRowsAlign: all lists in every tab/dialog (incl. adjacent/block kinds) align (spread <=1px, no one-word labels).
+- Screenshots: could only inspect court skill cards at 1366 (fine); other shots were blocked by random-event modals/rebirth screen, so visual check relied on measured scan.
