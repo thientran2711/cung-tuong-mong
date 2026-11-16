@@ -46,12 +46,14 @@ async function boot(b,W,H){const ctx=await b.newContext({viewport:{width:W,heigh
     return {t,ovf:document.documentElement.scrollWidth>innerWidth+1,o:[...M.querySelectorAll('.opts:not(.nlopts) > button.ka')].map(b=>{const a=b.querySelector(':scope > .kaart'),bd=b.querySelector(':scope > .kabody');
      const ra=a&&a.getBoundingClientRect(),rb=bd&&bd.getBoundingClientRect(),rr=b.getBoundingClientRect(),box=b.parentElement.getBoundingClientRect();const im=a&&a.querySelector('img');
      return{n:((b.querySelector('.kan')||b).textContent||"").trim().slice(0,40),how:b.dataset.kopic||"",art:ra?[Math.round(ra.width),Math.round(ra.height)]:null,left:!!(ra&&rb&&ra.right<=rb.left+1),
-      img:!!(im&&im.naturalWidth),wide:rr.right>box.right+1||b.scrollWidth>b.clientWidth+2,mini:!!b.querySelector('.kan .md, .kan > img')}})}},[open]);
+      img:!!(im&&im.naturalWidth),tb:[rr.left,rr.top,rr.right,rr.bottom],artOut:!!(ra&&ra.bottom>rr.bottom+1),wide:rr.right>box.right+1||b.scrollWidth>b.clientWidth+2,mini:!!b.querySelector('.kan .md, .kan > img')}})}},[open]);
    if(!r)return;if(r.err){R.fails.push([sz,kind,"ERR",r.err]);return}out.push(Object.assign({kind},r));
    if(r.ovf)R.fails.push([sz,kind,"page overflow"]);
    for(const o of r.o){if(/^(Thôi|Lui|Đóng)$/.test(o.n)&&!o.art)continue;
     if(!o.art)R.fails.push([sz,kind,o.n,"no picture slot"]);else{if(Math.abs(o.art[0]-84)>1||Math.abs(o.art[1]-112)>1)R.fails.push([sz,kind,o.n,"picture box not 84x112",o.art.join("x")]);if(!o.left)R.fails.push([sz,kind,o.n,"picture not left of the info"])}
-    if(o.wide)R.fails.push([sz,kind,o.n,"wider than its box"]);if(o.mini)R.fails.push([sz,kind,o.n,"tiny portrait still in the title"])}
+    if(o.wide&&W>H)R.fails.push([sz,kind,o.n,"wider than its box"]);if(o.artOut)R.fails.push([sz,kind,o.n,"picture sticks out below its card"]);
+    /* r1: two cards must never overlap (the person-dialog min-height:max-content squeezed the rows at 844x390 / 755x1000) */
+    for(const q of r.o)if(q!==o&&q.tb&&o.tb&&q.tb[1]>o.tb[1]&&q.tb[1]<o.tb[3]-1&&q.tb[0]<o.tb[2]-1&&q.tb[2]>o.tb[0]+1)R.fails.push([sz,kind,o.n,"overlaps the next card",q.n]);if(o.mini)R.fails.push([sz,kind,o.n,"tiny portrait still in the title"])}
    await p.screenshot({path:path.join(OUT,`optpic-${kind.replace(/[^a-z0-9]+/gi,'-')}-${sz}.jpg`),quality:55,type:'jpeg'})};
   const seen=new Set();for(let i=0;i<60&&seen.size<4;i++){const t=await p.evaluate(()=>{const m=approachOne();if(!m||!m.t)return"";window.__m=m;return String(m.t).replace(/<[^>]+>/g,"").split("·")[0].trim()});if(!t||seen.has(t))continue;seen.add(t);await audit("visit "+t,"__m")}
   const FK=await p.evaluate(()=>Object.keys(FESTEV));for(const k of FK.slice(0,SIZES.length>2?3:FK.length))await audit("fest "+k,`Object.assign({who:pEmp(),ev:"fest"},FESTEV["${k}"]())`);

@@ -28779,7 +28779,10 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
 const KIT_OPT_RULES=[
  /* (meaning group → picture key; "opt-*" = painted for this group by review/opt-pics, every other key = an existing act / choice picture reused) */
  /* — leave it / not now — */
- [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|ở lại|vẫn đi|đi$|đi \(|cảm ơn, không cần)/i,"opt-thoi"],
+ [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|cảm ơn, không cần)/i,"opt-thoi"],
+ /* r1: "Đi / Vẫn đi" = going, "Ở lại" = staying put — not the turning-away picture */
+ [/^(vẫn đi|đi$|đi \()/i,"den-ngay-h"],[/^ở lại/i,"o-yen-nghi-h"],
+ [/(che phần lớn)/i,"giau-trong-ruong-h"],
  [/^(im lặng|làm thinh|lặng thinh|nín lặng|cười trừ|giả vờ không hiểu|nghe và giữ kín)/i,"im-lang-h"],
  [/^(không dự|không đến|không dâng lễ|không phát|không bày tiệc|cáo mệt|khéo cáo mệt|bỏ thi|đóng cửa giữ mình|ở yên|ở cung|sống thật thanh tĩnh|để mặc, giữ mình|bình thản chờ|đứng ngoài|mặc kệ|làm ngơ|bỏ mặc|bỏ ngoài tai|mặc họ|không dính vào)/i,"o-yen-nghi-h"],
  [/(ngồi xem|chỉ xem|đứng xem|đứng nhìn|cổ vũ)/i,"dung-xem-h"],
@@ -28825,12 +28828,12 @@ const KIT_OPT_RULES=[
  [/(đốt|xóa mọi dấu|xóa dấu|tiêu hủy)/i,"dot-tho-h"],
  [/(giấu|giữ kín|giữ lại|giữ thư|giữ tín vật|ép cành hoa|cất)/i,"giau-trong-ruong-h"],
  [/(buông tay|quên ta|quên mình|đừng tìm ta|đừng chờ ta|cắt hẳn|ngừng mọi liên lạc|tránh hẳn|giữ khoảng cách|ta còn gia tộc)/i,"opt-buong-tay"],
- [/(chàng|lời hẹn|nắm tay|như năm ấy|giả sơn)/i,"hen-gap"],
+ [/(lời hẹn|nắm tay|như năm ấy|giả sơn)/i,"hen-gap"],
  /* — harm / timing — */
  [/(thử bằng kim bạc|thử trước|nếm trước|kim bạc)/i,"nghiem-doc-h"],
  [/(vu oan|vu cho|phao tin|tung tin|đồn)/i,"vu-oan-h"],
  [/^(ngày hội đông người|lúc nàng|khi nàng|sau cơn mưa|một đêm vắng)/i,"opt-rinh-cho"],
- [/(phạt|trách|đánh|quở|đuổi)/i,"phat-vi-h"],
+ [/(phạt|trách|đánh(?! lạc hướng)|quở|đuổi)/i,"phat-vi-h"],
  /* — guard the palace — */
  [/(canh giữ|soát|chuyển đồ quý|đồ quý|giữ đèn nến|che chắn|sửa gấp|thuê thợ|cho người sửa|chắp lại)/i,"opt-canh-giu"],
  [/(hoảng sợ|hô thị vệ|lao vào cứu)/i,"opt-hoang-so"],
@@ -28845,8 +28848,14 @@ const KIT_OPT_RULES=[
  [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
  [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
  [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
+ /* r1: "chàng" alone (any line about him) is the LAST resort — petitions / help for him hit their own group first */
+ [/(chàng)/i,"hen-gap"],
 ];
 const kitOptPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/[\s ]+/g," ").trim();
+/* r1 (LUẬT SỬA CẢ NHÓM): a meaning-group hit must be whole words — JS \b does not know Vietnamese letters, so "dò" hit "Viết một dòng",
+   "sớ" hit "sớm", "đồn" hit "đồng minh". A match counts only when no letter touches it on either side. */
+function kitOptHit(re,t){try{const g=new RegExp(re.source,re.flags.replace("g","")+"g");let m;while((m=g.exec(t))){const a=t[m.index-1]||"",z=t[m.index+m[0].length]||"";
+  const L=c=>/\p{L}/u.test(c),s=m[0];if(!(L(a)&&L(s[0]||""))&&!(L(z)&&L(s[s.length-1]||"")))return true;if(!m[0].length)g.lastIndex++}return false}catch(e){return re.test(t)}}
 function kitOptOnCdn(src){try{return typeof kitPhOnCdn!=="function"||kitPhOnCdn(src)}catch(e){return true}}
 /* the picture of an option title: {src, key, how} — how = rule | act | log | own | ph */
 function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if(!k||k==="-")return null;
@@ -28855,7 +28864,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  let r=null;
  if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
   try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
-  for(const [re,k] of KIT_OPT_RULES)if(re.test(t)){r=tryKey(k,"rule");if(r)return r;break}}
+  for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
  /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
  if(t){try{const v=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name&&t.startsWith(r.name)):null;
    const f=v&&typeof pv==="function"?pv(v):/^Hoàng thượng$/.test(t)&&typeof pEmp==="function"?pEmp():/^Thái hậu$/.test(t)&&typeof pTH==="function"?pTH():null;
@@ -28869,7 +28878,7 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  return{src:"",key:"",how:"none"}}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
 /* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
-const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts > button.ka, .kitpg-opts > button.ka";
+const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
@@ -28909,6 +28918,9 @@ html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body
 /* equal sizes: a row is never lower than the picture + padding (the options area scrolls, KIT 32.5: a "1fr" row would be squeezed into
    its height), so cards with the usual rows are all the same height; a card with more text grows, never clips */
 html body button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important;box-sizing:border-box}
+/* review/opt-pics r1: the person dialog (jk4 32.7 .kdper) sets min-height:max-content on every option (2 ids, 3 classes); in its short
+   scrolling grid at 844x390 that let the rows shrink to 41 px and the 130 px cards OVERLAPPED. The picture floor must win there too. */
+html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
 `;document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
@@ -28941,7 +28953,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="feaa2d425641";window.CTM_BUILD=BUILD;
+const BUILD="6d7a6b66eac7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
