@@ -2457,6 +2457,13 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
   `kitActKey(name)` (ACTS.json lookup) — every name lookup threw, so acts matched by prefix / wildcard lost their own picture across the game
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
 
+### 43.1 SMALL ACT CARD: PORTRAIT PICTURE, TAP = DETAIL, "!" MARK (owner 16/11, review/actcard-small; `dev/build/jk4.js`)
+The big Hành sự card is unchanged. The small card (§43 compact form) shows the act picture as a 3:4 PORTRAIT rectangle (84x112 px; 72x96 under 420 px), no longer a square.
+Tapping the picture, or the "!" mark (`span.kainfo`, shown only on a small card WITHOUT an odds label `.kodm`), calls `kitActZoom(btn)` = ONE kit pop-up
+`kitModal({kind:"info"})` (section 8 frame, `.kbtn` "Đã rõ"): the act picture in `kitArtFrame` (the 3:4 kit picture frame, 28.19), the odds label, the full description,
+the Cần/Tốn/Được rows, and the "why" text of `kitWhyHtml` when there is an odds label. Tapping the odds label itself still opens the why popover (jwhy). No private overlay frame.
+Option cards (`.kopt`) and the big Hành sự card are not touched. Sample: kit page §43.1.
+
 ## 45. PANE = FIXED BAR + SCROLL BODY (owner 11/15, review/tabs-kit · `dev/build/jpane.js`)
 **45.1 A face strip is never half under the pane bar (review/small-bugs-3; 844x390 Hậu cung › Phi tần showed the palace labels "Càn Ninh cung…"
 cut off above the frames).** `kitPcSize` fit (jk2b) scrolls a newly opened person card flush under the sub-tab bar; when the scroll cannot carry the
