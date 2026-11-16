@@ -473,17 +473,24 @@ OD:L1327 history/drama questions → expert check (marked "HISTORY CHECK" in §4
 | 5 | endgame ch12x (childless) + hồi form of hau/ke | B | 2 |
 | — | intros ×10, tutorial ch1–3 quests (P2) | C | frame (has it) |
 | — | home roads cnv/nc (review), NPC roads women (reuse §4 roads as data) + men templates | D | NPC roads need 2 (ROAD14 data shape) |
+| D1 | NPC roads U0 core jnroad.js (state p.nr, origin/road roll, monthly off-screen chapter, help hồi = j72 follow-up, news) | D (review/npc-roads) | 2 (reads ROAD14/ARC67 at runtime, never copies) |
+| D2 | U1 consorts: 36 women roads (§4, 0 new chapters; .4–.11 titles/cast/endings read from B data) | D | 2, 3–4 as they land |
+| D3 | U2 maids: cnv roads (4) for every maid; maid raised to consort continues as cn | D | §4.9 / §4.4 data |
+| D4 | U3 men: ~20 men templates × .4–.11 (≈160 short off-screen chapter lines + endings; new §4.10 written by D, reviewed by B for canon) + ~12 help kinds | D | — |
+| D5 | U4 tests: npc-roads.js long sims, old saves, vp/kit scans, ON/OFF bot balance | D | D1–D4 |
 Proposed B split (OD:L1237, same item): helper B1 = dtq + muoi + cn; helper B2 = nc(+bd) + td + ch; helper B3 = thd + cnv + endgame (item 5).
 Each helper builds on the engine branch, one origin per review branch `review/road-<origin>`.
 
 ## 7. Change log
 - 11/16/2026 created (opus lead of Foreman B): 288-chapter catalogue, code-key fix (cn/cnv), data shape, canon rules, split.
 - 11/16/2026 tt built (28 chapters); §4.1 rewritten to the built chapters (the .4 arcs already close their first conflict); tm96 = side story.
+- 11/16/2026 Foreman D npc-roads: §6 rows D1–D5 (NPC roads plan, reports/npc-roads.md); §8.5 engine needs. No chapter id/order/cast changed.
 
 ## 8. Open questions for Foreman B / main (not for the owner unless main decides so)
 1. DONE: Thanh mai trúc mã is a side story in full-road lives (jroad.js; BAL.road.tm).
 4. cnv full roads: ms:len14 «Từ kẻ hầu thành tiểu chủ» does not fit an 8-chapter road; the cnv helper must decide (proposal: the rise
    happens inside the road, e.g. cnv_mat .7–.8, and len14 is dropped for full-road cnv lives). jroad.js today drops it with the phase-1 middle.
 2. tt_mat .6 rank cap value goes in BAL.road (not typed); reversible.
+5. (Foreman D, npc-roads) ENGINE NEEDS: E1 rdCast/castRv67 preference hook (e.g. `RD_CASTPREF` weights) so that when her road casts rival `v` it prefers a consort whose NPC road already has the player as rival (`v.nr.c.v==="me"`) — one rivalry, not two; not blocking. E2 keep `w` (main cast key) and the climax pool `p[3]` options with reward keys `w:{…}` in every `.5`–`.11` chapter (NPC roads read them). NPC road state lives in `p.nr` (Foreman C AG1 npc-agent should read `p.nr.o`/`p.nr.r`, not a new `p.road`). Report: dev/handover/reports/npc-roads.md.
 3. HISTORY CHECK items (tt_oan .9, dtq_vu .9, dtq_binh .7, muoi_lau .7, td_an .10, thd_sach .9) → one history/drama expert pass (OD:L1327)
    before those chapters' text is final; structure can be built first.
