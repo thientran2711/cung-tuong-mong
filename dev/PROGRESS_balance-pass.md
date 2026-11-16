@@ -125,6 +125,28 @@ at every rank. Recommend instead fair ≈ (own road − 1) × bacTuan/16: [4,5,6
 Sensitive input: the price of "a rival hears" — if a guessed hidden pregnancy is worth ~10 khắc (not 3), the own road is ~7.8 khắc and fair
 becomes [7,8,11,17,19,22,26,30] ≈ the CURRENT table. Either way the proposal is too dear.
 
+### C7 measures (16/11 ~02:50Z) — raw lives dev/measure/pass/data/c7_m1.json
+Merged build (main 900ace7fb + this branch before jbac), sensible bot v4 via run_par (3 pages, seed 501), stopped at 22 lives (load ~40):
+### C7 merged build (sensible bot v4) (sensible bot, n=22, timeout/crash 0)
+| target | measured (95% CI) |
+|---|---|
+| Hoàng hậu ~32% | 45% (10/22; 27–65) |
+| early death ~40–45% | 27% (6/22; 13–48) |
+| childbirth death 8–12% per birth | 0% (0/34; 0–10); mean risk shown 9.7 |
+| pace: HH after ~188 tuần | median 220 tuần (p25 133, p75 295, n=10) |
+- early-death causes: {'poison': 6}
+- poison aimed at her per life 19.5, landed 1.68
+- per origin (n/HH/died): ch 4/3/0, cn 3/0/2, dtq 4/3/1, muoi 3/1/1, nc 4/2/1, td 3/1/0, thd 1/0/1
+- max rank: HH 10, rank 6 9 (6 of them "Thành Thái phi": stuck at rank 6 until the Emperor died — the Hoàng hậu SEAT, not the exam,
+  is the top-rank block now), 3–5: 3. No TIMEOUT lives (the "HH 0 %" stall is gone).
+- vs targets (Vừa): HH 45 % (27–65) is above 32 %, early death 27 % (13–48) below 40–45 %, childbirth 0/34 (shown risk 9.7) — CIs still
+  touch the targets at n=22. Not tuned further here: D31 (difficulty) re-measures with these runners; if Vừa must sit at 32 % the first
+  knob is BAL.ex.bar[2] back up 28 → 30, then early death via poison (BAL.seeMaxP).
+- Tests on the final build (jbac + j72 + rest): opt-render.js fails [] / errs [] at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390
+  (warn only: Ban cung repeated hint, pre-existing); story-deadline 12/12; event-context 9/9; promo-exam 17/17 (1180x820, no page errors);
+  rest-cards: Dưỡng sức Bạc −3 at rank 0 (rank-priced), its "ok" stays false as before (pre-existing lookup issue).
+- Not run: evbot hint/rand/same on the branch (CPU), hint-dedup, old-save load (no new saved state: jbac/alt72 compute at display).
+
 ## NEXT (resume here)
 1. Rerun both arms longer (≥40 lives each): `bash dev/measure/pass/mkinp.sh` then
    `node dev/measure/run_par.js http://127.0.0.1:<port>/<main build>.html sens 80 out_main.json ../tmp/sensall.js 5 <seed>` and the same
