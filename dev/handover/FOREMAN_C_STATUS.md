@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 ~02:20Z — 12 agents running (cap 12). Owner (16/11, FOREMAN_C.md 65f316ff): max 12 agents, each ≤2 browsers; art workers fill free slots. Went to 15 briefly → paused D1, D7 (WIP pushed), D10 stopped at start.
+Updated: 11/16/2026 02:25Z — 12 agents running (cap 12). ONE KIT KEEPER rule (owner 16/11) sent to all 12 agents + PREAMBLE/REVIEWER refreshed.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
@@ -17,7 +17,7 @@ Base main at start: 900ace7fb.
 | C20 act-text resume | review/act-text @593e66b3a | sonnet | RUNNING (worker) — also takes Foreman B Q2 (KÈM gain → ĐƯỢC) |
 | C6 mk-colour + D28 reveal | review/mk-colour @5025e811b → review/mk-colour-r1 | sonnet | REVIEWING (worker SẴN SÀNG KIỂM; KIT §60.5 toilReveal; mirror-room plate on CDN) |
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
-| C8 fig-bg step 2 | review/fig-bg @21eb452d3 | sonnet | RUNNING (worker, silk scroll A) |
+| C8 fig-bg step 2 | review/fig-bg @21eb452d3 | sonnet | STOPPING → KIT REQUEST (fig-bg = KIT §61 kit part; ONE KIT KEEPER rule) |
 | C9 huadian-size | review/huadian-size @230e3cf25 | sonnet | RUNNING (worker #2: det2.py ~85% boxes; hand-fix ~100 a18 boxes → mask shrink to 8.5% → sheets per tier/age → CDN; ~5700 files) |
 | D1 result-sfx | review/result-sfx @41899d048 | sonnet | RUNNING (resumed worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
@@ -41,4 +41,7 @@ NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 firs
 (none yet)
 
 ## QUESTIONS
+- KIT REQUEST K1 (C8 fig-bg step 2, silk hanging scroll A, KIT §61): this IS a kit part (status background layer behind every figure). Under ONE KIT KEEPER, Foreman C stopped building it; worker's spec + art so far will be in review/fig-bg dev/PROGRESS. Session 8: please give it to the kit keeper (or tell Foreman C the kit keeper approves Foreman C finishing it).
+- KIT REQUEST K2 (C6 mk-colour + D28): the makeup reveal adds NEW kit section §60.5 toilReveal (mirror-frame zoom + close card built from kitFaceZoom/kitRows + painted mirror-room plate). Built before the rule; reviewer is checking consistency. Needs kit-keeper approval before fast-forward.
+- K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
