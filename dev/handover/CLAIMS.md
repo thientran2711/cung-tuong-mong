@@ -205,7 +205,7 @@
 | mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | session_01N1tNP2JhbsLfaydyiNBr2T | RUNNING | 16/11 13:45Z |
 | story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | session_011xDdVPicFAyWqznz92TPU8 | RUNNING | 16/11 13:45Z |
 | A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | session_011xDdVNdbaZdiyTm7es9XyE | PASS d5ca28a8 | 16/11 13:45Z |
-| TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | session_011xDdVSqS6DtgnaKSH6DMoG | RUNNING | 16/11 13:45Z |
+| TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | session_011xDdVQBTWm3Y9JWADY4izD (successor 2; #1 session_011xDdVSqS6DtgnaKSH6DMoG rolled over @e464c0f0) | RUNNING | 16/11 13:45Z |
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | session_011xDdVQyUUHebsanYuwk4gH | SAMPLE READY (waits owner) | 16/11 13:45Z |
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | session_011xDdVSCHRnD3ox6Afg4tHa | SAMPLE READY (waits owner) | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | session_011xDdVP5yaxTpEx8BoJ4t2i | SẴN SÀNG KIỂM f46f826e (cắm hoa SAMPLE waits owner) | 16/11 13:45Z |
