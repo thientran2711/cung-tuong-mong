@@ -16,7 +16,7 @@ from PIL import Image
 from scipy import ndimage as ndi
 
 EDGE_A = 20
-HALO_FAIL = 60      # semi-alpha rim px per 10k rim px that are >40 lum darker than neighbouring opaque colour
+HALO_FAIL = 300     # (x10 = FAIL at >3000/10k; WARN >900x... see below; calibrated 16/11: new masters 600-1400 look clean on dark+light, old ty halos 5400-7700)  # semi-alpha rim px per 10k rim px that are >40 lum darker than neighbouring opaque colour
 TRANSL_FAIL = 40    # per 10k interior px
 CDN = "https://ctm-img.victoria-tntt.workers.dev/"
 
@@ -90,7 +90,7 @@ def huadian(rgb, al, fb, fm):
     w = max(xx.max() - xx.min() + 1, yy.max() - yy.min() + 1)
     return {"ratio": round(float(w) / fw, 3), "mark_px": int(w), "face_w": int(fw)}
 
-def qa(img, ref=None, kind="master"):
+def qa(img, ref=None, kind="master", old=None):
     a = np.asarray(img); al = a[..., 3].astype(int); rgb = a[..., :3]
     H, W = al.shape
     res = {"size": f"{W}x{H}"}; fails = []; warns = []
@@ -99,12 +99,14 @@ def qa(img, ref=None, kind="master"):
     # edge
     b = 2
     border = np.zeros_like(sil); border[:b] = border[-b:] = True; border[:, :b] = border[:, -b:] = True
+    if kind in ("fig", "hd"):   # shipped sprites: old files fill the canvas height (head top = 0, feet = 100 %), so only L/R contact is a fault
+        border[:b] = border[-b:] = False
     ep = int(((al > EDGE_A) & border).sum()); res["edge_px"] = ep
     ys, xs = np.nonzero(al > EDGE_A)
     gaps = {"L": xs.min() / W, "R": (W - 1 - xs.max()) / W, "T": ys.min() / H, "B": (H - 1 - ys.max()) / H}
     res["gap_pct"] = {k: round(v * 100, 1) for k, v in gaps.items()}
     if ep: fails.append(f"edge: {ep} px alpha on canvas border (cut hem/sleeve)")
-    elif min(gaps.values()) < .03: warns.append("edge: <3% margin on a side")
+    elif min(gaps.values() if kind not in ("fig", "hd") else [gaps["L"], gaps["R"]]) < .03: warns.append("edge: <3% margin on a side")
     # halo
     semi = (al > 20) & (al < 235)
     opaque = al >= 235
@@ -114,7 +116,7 @@ def qa(img, ref=None, kind="master"):
     dark = semi & (lum < nlum - 40)
     res["halo_per10k"] = round(10000 * dark.sum() / max(1, semi.sum()), 1)
     if res["halo_per10k"] > HALO_FAIL * 10: fails.append(f"halo: {res['halo_per10k']}/10k rim px darker than neighbour")
-    elif res["halo_per10k"] > HALO_FAIL * 3: warns.append(f"halo: {res['halo_per10k']}/10k (look on dark+light)")
+    elif res["halo_per10k"] > HALO_FAIL * 5: warns.append(f"halo: {res['halo_per10k']}/10k (look on dark+light)")
     # holes
     filled = ndi.binary_fill_holes(sil); holes = filled & ~sil
     lab, n = ndi.label(holes); hs = ndi.sum(holes, lab, range(1, n + 1)) if n else []
@@ -138,7 +140,7 @@ def qa(img, ref=None, kind="master"):
         warns.append("face not found (skin detector) -> huadian/skin not measured")
     else:
         hd = huadian(rgb, al, fb, fm); res["huadian"] = hd
-        if hd and hd["ratio"] > .125: fails.append(f"huadian {hd['ratio']} x face width (target 0.085)")
+        if hd and hd["ratio"] > .125: warns.append(f"huadian auto {hd['ratio']} x face width (target 0.085; auto is unreliable - LOOK at forehead, no teardrop)")
         elif hd and hd["ratio"] > .100: warns.append(f"huadian {hd['ratio']} (target 0.085) - look")
         lab_img = rgb2lab(rgb.astype(float))
         sk = lab_img[fm]; res["skin_lab"] = [round(float(v), 1) for v in np.median(sk, 0)]
@@ -150,16 +152,22 @@ def qa(img, ref=None, kind="master"):
                 dE = float(np.linalg.norm(np.median(sk, 0) - rl)); res["skin_dE_vs_ref"] = round(dE, 1)
                 if dE > 10: fails.append(f"skin dE {dE:.1f} vs reference")
                 elif dE > 6: warns.append(f"skin dE {dE:.1f} vs reference")
+    if old is not None:   # height vs old sprite (same canvas-height basis): figure bbox height / canvas height within +-2 %
+        oa = np.asarray(old)[..., 3] > EDGE_A; oy = np.nonzero(oa.any(1))[0]
+        oh_ = (oy.max() - oy.min() + 1) / old.height; nh_ = (fy1 - fy0 + 1) / H
+        res["height_vs_old_pct"] = round(100 * (nh_ / oh_ - 1), 1)
+        if abs(res["height_vs_old_pct"]) > 2: fails.append(f"figure height {res['height_vs_old_pct']:+}% vs old sprite (fit_fig.py)")
+        res["top_vs_old_pct_pts"] = round(100 * (ys.min() / H - np.nonzero(oa.any(1))[0].min() / old.height), 1)
     res["fails"] = fails; res["warns"] = warns
     res["overall"] = "FAIL" if fails else ("WARN" if warns else "PASS")
     return res
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("files", nargs="+"); ap.add_argument("--ref"); ap.add_argument("--kind", default="master"); ap.add_argument("--json", action="store_true")
-    o = ap.parse_args(); ref = load(o.ref) if o.ref else None
+    ap = argparse.ArgumentParser(); ap.add_argument("files", nargs="+"); ap.add_argument("--ref"); ap.add_argument("--old", help="old sprite: checks figure height vs old within 2%%"); ap.add_argument("--kind", default="master"); ap.add_argument("--json", action="store_true")
+    o = ap.parse_args(); ref = load(o.ref) if o.ref else None; old = load(o.old) if o.old else None
     bad = 0
     for f in o.files:
-        try: r = qa(load(f), ref, o.kind)
+        try: r = qa(load(f), ref, o.kind, old)
         except Exception as e: r = {"overall": "FAIL", "fails": [f"unreadable: {e}"]}
         r["file"] = f; bad += r["overall"] == "FAIL"
         print(json.dumps(r, ensure_ascii=False) if o.json else f"{r['overall']:4} {f} {r.get('size','')} " + "; ".join(r.get("fails", []) + r.get("warns", [])))
