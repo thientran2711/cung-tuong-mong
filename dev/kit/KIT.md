@@ -2959,8 +2959,8 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
   `Mệnh truyện · Chương N «chapter»` (`.kgoal-k`, `--k-lab`), the current step in bold (`.kgoal-t`, ≤2 lines), "Việc kế: …" (`.kgoal-n`),
   and a round seal-red "›" (`.kgoal-go`) so it reads as tappable; card `--k-card`, hairline `--k-hair`, 4 px `--k-seal` left edge, ≥44 px tall.
 - Where: (a) top of Hành sự / Phận sự — it REPLACES the old plain line `.srvhead.obj67` (j67 keeps `.obj67` as the wrapper; there is no
-  second strip); (b) the main stage `#stage > #kgoalst` (one line, no "Việc kế", centred under the scene title, `--kgoal-top`, never over a
-  figure's face), hidden when the Hành sự strip is on screen at the same time (no double strip).
+  second strip); (b) the main stage `#stage > #kgoalst` (one line, no "Việc kế", under the scene title at the left, `--kgoal-top`, width = the free
+  space left of the stage chips `.k3cs/.k3c` (≤440 px), never over a chip or a figure's face), hidden when the Hành sự strip is on screen at the same time (no double strip).
 - Tap anywhere on it → `kitGoalDetail()` (71.3). The chapter card on Mệnh truyện › Chương này opens the same detail (no dead tap).
 - Data: `kitGoalNow()` → `{road, C:{kind ms|arc|all|v1, n, max, t, g, steps[{t,ok}], act, acts, next, wait}, kicker, title, goal, step,
   next:[{t, why, tab, act?, card?, where}]}` — the ONE source for strip, detail, goal card and the tutorial step (old saves: v1 story too).

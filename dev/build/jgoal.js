@@ -95,7 +95,10 @@ function stageStrip(){try{const st=document.getElementById("stage");if(!st)retur
  const ps=document.querySelector("#panel .kgoal");const both=!!(ps&&ps.getClientRects().length&&!document.querySelector(".game.k3home"));
  const G=(typeof S!=="undefined"&&S&&!S.dead&&!both)?kitGoalNow():null;
  if(!G){if(el)el.remove();return}const h=kitGoalStrip({G,cls:"kgoal-st",next:false});
- if(!el){el=document.createElement("div");el.id="kgoalst";el.className="kgoalst";st.appendChild(el)}if(el.__h!==h){el.innerHTML=h;el.__h=h}}catch(e){console.error("goal strip",e)}}
+ if(!el){el=document.createElement("div");el.id="kgoalst";el.className="kgoalst";st.appendChild(el)}if(el.__h!==h){el.innerHTML=h;el.__h=h}
+ /* KIT §15: never over the stage chips (Hoàng thượng / Thái hậu / … column, .k3cs/.k3c): the strip takes the free width left of them */
+ const sr=st.getBoundingClientRect();let R=sr.right-8;st.querySelectorAll(".k3cs,.k3c").forEach(c=>{const r=c.getBoundingClientRect();if(r.width&&r.left>sr.left+sr.width*.4)R=Math.min(R,r.left-8)});
+ const L=12,W=Math.max(200,Math.min(440,R-sr.left-L));el.style.left=L+"px";el.style.width=W+"px";el.style.translate="0 0"}catch(e){console.error("goal strip",e)}}
 try{const r0=render;render=function(){const r=r0.apply(this,arguments);stageStrip();return r};window.render=render}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kgoal]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitGoalDetail()},true);
@@ -111,7 +114,7 @@ const css=document.createElement("style");css.id="kit-goal";css.textContent=`
 .kgoal-t{grid-area:t;font-size:.88rem;font-weight:600;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .kgoal-n{grid-area:n;font-size:.76rem;color:var(--k-lab,#8a7350)}
 .kgoal-go{grid-area:go;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--k-seal,#9a2c1c);color:#fff6e0;font-size:1.15rem;line-height:1;font-weight:700}
-.kgoalst{position:absolute;left:50%;translate:-50% 0;top:var(--kgoal-top,46px);z-index:6;width:min(420px,calc(100% - 24px));pointer-events:none}
+.kgoalst{position:absolute;left:12px;top:var(--kgoal-top,46px);z-index:6;width:min(420px,calc(100% - 24px));pointer-events:none}
 .kgoalst .kgoal{pointer-events:auto;margin:0;padding:3px 6px 4px 10px;min-height:40px;background:color-mix(in srgb,var(--k-card,#fffaf0) 92%,transparent);box-shadow:0 2px 8px #0003}
 .kgoalst .kgoal-t{-webkit-line-clamp:1;font-size:.82rem}
 .kgoalst .kgoal-go{width:24px;height:24px}

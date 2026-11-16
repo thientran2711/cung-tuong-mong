@@ -43,6 +43,8 @@ function busy(){try{
  const t=$q("#title");if(t&&!t.hidden)return true;
  for(const id of ["modal","ov","dawn","kload","coopfz","kpodov","kupd"])if(vis(document.getElementById(id)))return true;
  for(const m of document.querySelectorAll(".modal,.kmov,.kbk,.kroul"))if(vis(m))return true;
+ /* any other kit panel on screen (a mini game frame such as Điểm trang, a shop, a picker) */
+ for(const m of document.querySelectorAll(".dlg.kpanel"))if(!m.closest("#ktut,.ktip")&&vis(m))return true;
  if(document.visibilityState!=="visible")return true}catch(e){return true}return false}
 T.busy=busy;
 
@@ -158,15 +160,16 @@ function goRoom(){try{if($q(".game.k3ph")&&!$q(".game.k3home")&&typeof k3Home===
 function shown(k){const b=tabBtn(k);return !!b&&vis(b)}
 /* the group button that holds a hidden member tab (Sổ ghi is inside Mệnh truyện) */
 function groupBtn(k){const b=tabBtn(k);if(b&&vis(b))return b;try{for(const g in KG)if(KG[g].keys.includes(k)){const gb=KG[g].keys.map(tabBtn).find(x=>x&&vis(x));if(gb)return gb}}catch(e){}return null}
-function goalEl(){const L=[...document.querySelectorAll("#kgoalst .kgoal, #panel .kgoal")].filter(vis);return L[0]||null}
+function goalEl(){const L=[...document.querySelectorAll("#kgoalst .kgoal, #panel .kgoal")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>40&&r.height>20&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
 function panelBox(){const p=$q("#panel");return p&&vis(p)?p:null}
 /* the act card for the "đọc thẻ / làm thử" steps: a quiet act she can do now (no harm, no scheme) */
 let PICK=null;
 function pickAct(){if(PICK&&document.contains(PICK)&&vis(PICK)&&!PICK.disabled&&!PICK.classList.contains("kdis"))return PICK;
  const L=[...document.querySelectorAll("#panel .cards button.ka.kcard, #panel .cards button.ka")].filter(b=>vis(b)&&!b.disabled&&!b.classList.contains("kdis"));
  const cat=b=>{try{return kitActCat((b.querySelector(".kan")||b).textContent.trim())}catch(e){return""}};
- const good=["le-nghi","nghi-ngoi","hoc-tap","hau-ha","giao-thiep"];
- PICK=L.find(b=>good.includes(cat(b))&&!/Liều|Khó/.test((b.querySelector(".kodds")||{}).textContent||""))||L.find(b=>!["muu-ke","hai-nguoi"].includes(cat(b)))||null;return PICK}
+ const good=["nghi-ngoi","le-nghi","hoc-tap","hau-ha","giao-thiep"];/* quiet first; never a card that opens a mini game (Điểm trang, lessons) */
+ const plain=b=>!/Điểm trang|Tự học|Học |luyện/i.test((b.querySelector(".kan")||b).textContent||"");
+ PICK=good.map(g=>L.find(b=>cat(b)===g&&plain(b)&&!/Liều|Khó/.test((b.querySelector(".kodds")||{}).textContent||""))).find(Boolean)||L.find(b=>good.includes(cat(b))&&!/Liều|Khó/.test((b.querySelector(".kodds")||{}).textContent||""))||L.find(b=>!["muu-ke","hai-nguoi"].includes(cat(b)))||null;return PICK}
 function allCat(){const t=$q("#panel .kcattabs .pct, #panel .kcattabs button");if(t&&!t.classList.contains("on")&&/^Tất cả/.test(t.textContent.trim()))t.click()}
 function scrollTo(el){try{let p=el.parentElement;while(p&&p!==document.body){const cs=getComputedStyle(p);if(/(auto|scroll)/.test(cs.overflowY)&&p.scrollHeight>p.clientHeight+4)break;p=p.parentElement}
  if(!p||p===document.body){el.scrollIntoView({block:"start"});return}
@@ -251,7 +254,7 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
  if(T.waitRes){if(resOn()||Date.now()-T.waitRes>3000){T.waitRes=0;next()}return true}
  if(window.kaLastResult!==T.res0||resOn()){T.res0=window.kaLastResult;coachOff();T.waitRes=Date.now();return true}
- if(Q&&Q.length){coachOff();T.paused=true;T.tryDone=true;return true}}
+ if(busy()){coachOff();T.paused=true;T.tryDone=true;return true}}
 window.kitTour=function(){tourStart()};
 
 /* ---------- LỜI DẶN LẦN ĐẦU (contextual tips) ---------- */

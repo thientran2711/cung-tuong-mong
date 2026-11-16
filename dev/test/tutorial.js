@@ -6,13 +6,13 @@ const [,,BASE,SZ,OUT,TAG,MODES]=process.argv;const [WH,DPR]=SZ.split('@');const 
 const modes=(MODES||'tour,skip,replay,old,bot').split(',');
 const fs=require('fs');fs.mkdirSync(OUT,{recursive:true});
 const out=o=>console.log(JSON.stringify(o));
-(async()=>{const b=await chromium.launch();let fails=0;const fail=(m,o)=>{fails++;out({FAIL:m,...(o||{})})};
- async function page(flag){const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
+(async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let fails=0;const fail=(m,o)=>{fails++;out({FAIL:m,...(o||{})})};
+ async function page(flag){const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block',reducedMotion:process.env.MOTION?'no-preference':'reduce'});
   await ctx.addInitScript(f=>{try{localStorage.setItem('ctm-bgpause','1');if(f)localStorage.setItem('hclh-tut-test','1')}catch(e){}},flag);
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));
-  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!document.getElementById('kload')&&typeof start==='function',null,{timeout:300000});await p.waitForTimeout(800);return p}
- async function newLife(p,slot){await p.evaluate(s=>{SLOT=s;document.getElementById('title').hidden=true;start();showModal()},slot||1);
-  for(let i=0;i<12;i++){await p.waitForTimeout(900);const more=await p.evaluate(()=>{const ro=[...document.querySelectorAll('.kroul button')].filter(b=>b.offsetParent);if(ro.length){ro[ro.length-1].click();return true}if(!Q.length)return false;const b=[...document.querySelectorAll('#modal button.opt:not(.kdis), #modal #mclose, #modal #mr .kbtn')].find(b=>b.offsetParent);if(b)b.click();return true});if(!more)break}}
+  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:300000});await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'});await p.waitForTimeout(800);return p}
+ async function newLife(p,slot){await p.evaluate(s=>{SLOT=s;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start();showModal()},slot||1);
+  let got=0;for(let i=0;i<45;i++){await p.waitForTimeout(900);const more=await p.evaluate(()=>{const ro=[...document.querySelectorAll('.kroul button')].filter(b=>b.offsetParent);if(ro.length){ro[ro.length-1].click();return true}if(!Q.length)return false;const b=[...document.querySelectorAll('#modal button.opt:not(.kdis), #modal #mclose, #modal #mr .kbtn, #modal .kph button')].find(b=>b.offsetParent);if(b)b.click();return true});if(more)got=1;if(!more&&got)break}}
  const shot=(p,n)=>p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:82});
  const metrics=p=>p.evaluate(()=>{const R=e=>{if(!e||e.hidden)return null;const r=e.getBoundingClientRect();return r.width?{x:Math.round(r.left),y:Math.round(r.top),w:Math.round(r.width),h:Math.round(r.height),b:Math.round(r.bottom),r:Math.round(r.right)}:null};
   const card=R(document.querySelector('#ktut .ktut-card')),hole=R(document.querySelector('#ktut .ktut-hole'));const s=KTUT_STEPS[KTUT.step]||{};
@@ -63,11 +63,11 @@ const out=o=>console.log(JSON.stringify(o));
   out({TAG,mode:'replay',errs:p.errs});if(p.errs.length)fail('page errors');await p.context().close()}
 
  if(modes.includes('old')){/* an old player: a sổ in play + a past life, nothing recorded on this device */
-  const p=await page(true);await newLife(p,2);await p.evaluate(()=>{S.turn=9;S.tuan=2;save();localStorage.removeItem('hclh-tut');localStorage.setItem('cung-luanhoi',JSON.stringify([{n:'Cũ',o:'x',r:'Quý nhân',age:30,y:3,kids:0,f:'bệnh'}]))});
-  await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&!document.getElementById('kload'),null,{timeout:300000});await p.waitForTimeout(1200);
-  await p.evaluate(()=>{const b=document.querySelector('#modal [data-tgo="cont"]');if(b)b.click()});
+  const p=await page(true);await newLife(p,2);await p.evaluate(()=>{S.turn=0;S.tuan=1;save();/* inside its first 2 weeks: asked once (past week 2: nothing, checked in goal.js) */localStorage.removeItem('hclh-tut');localStorage.setItem('cung-luanhoi',JSON.stringify([{n:'Cũ',o:'x',r:'Quý nhân',age:30,y:3,kids:0,f:'bệnh'}]))});
+  await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:300000});await p.waitForTimeout(1500);
+  await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove();localStorage.setItem('hclh-tut-test','1');const b=document.querySelector('#modal [data-tgo="cont"]');if(b)b.click();else{SLOT=2;const s=loadSlot(2);if(s){deser(s);document.getElementById('title').hidden=true;render()}}});
   const asked=await until(p,()=>!document.getElementById('ktut').hidden&&!!document.querySelector('#ktut [data-ktut=yes]'),15000);await p.waitForTimeout(800);await shot(p,'so-cu-hoi');
-  const st=await p.evaluate(()=>({loaded:!!S&&S.tuan===2,name:S&&S.name,on:KTUT.on}));out({TAG,old:st,asked});if(!asked||!st.loaded||st.on)fail('old sổ');
+  const st=await p.evaluate(()=>({loaded:!!S&&S.tuan===1,name:S&&S.name,on:KTUT.on}));out({TAG,old:st,asked});if(!asked||!st.loaded||st.on)fail('old sổ');
   await p.evaluate(()=>document.querySelector('#ktut [data-ktut=no]').click());await p.waitForTimeout(1500);
   const r=await p.evaluate(()=>({tut:OPT.tut,hidden:document.getElementById('ktut').hidden,asked:KTUT.rec.asked}));out({TAG,oldNo:r});if(r.tut!==false||!r.hidden)fail('old no');
   out({TAG,mode:'old',errs:p.errs});if(p.errs.length)fail('page errors');await p.context().close()}
