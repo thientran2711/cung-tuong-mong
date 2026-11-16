@@ -37,7 +37,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C10 | OWNER_LEDGER sweep (docs) | DONE (dev/handover/OWNER_LEDGER.md; D29–D49 added) |
 | C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
 | C12 | review/hc-portrait → r1 PASS 583858942 (+ roster labels fix KIT 45.2) | LIVE |
-| C13 | review/gift-pick @ 6158af34f | REVIEWING (gift-pick-r1) |
+| C13 | gift-pick-r1 PASS ff5f42b77 → merge-train-1 | MERGING |
 | C14 | review/row-align @ 0886f329b | reviewer stopped (stuck) → re-review QUEUED-NEXT |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
 | C16 | review/item-info → r1 PASS 3ef079f61 | LIVE |
@@ -97,7 +97,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C36 | review/opt-pics → r1 PASS 900ace7fb | LIVE |
 | C37 [→ FOREMAN B] | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
 | D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
-| C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
+| C38 | ev-art-fit-r1 PASS 10d770744 → merge-train-1 | MERGING |
 | C39 [→ FOREMAN B] | review/tab-underline (owner s8: stray bar through selected chip + grey scroll track under chip rows, all tab rows) | QUEUED-NEXT |
 | D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
 | C40 [→ FOREMAN B] | review/actcard-small (owner OVERRIDE: keep big + small cards; small card picture square → portrait rectangle 3:4; equal sizes per grid; tap picture → big + info; odds label or "!" → why-detail) | QUEUED-NEXT |
@@ -108,7 +108,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C45 | review/newgame-ui @ f4ddeefeb (lag fixes, same heights, Nhập cung event frame) | REVIEWING (opus) |
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
 | C47 | review/stage-side → r1 PASS 6298d2f55 | LIVE (note: 755x1000 3 people shows 2 + page chip) |
-| C48 review/save-slots @ 0bfc455c6 (jslots.js) | REVIEWING (save-slots-r1, opus) |
+| C48 review/save-slots → r1 PASS c36a06321 | LIVE |
 | C49 | review/palace-start @ 3ac727833 (3–5 small kids, 50/50, no đích tử, accession setting; faction road = hook only → D5) | REVIEWING (opus) |
 ## Ownership marks (16/11): items in dev/handover/FOREMAN_C.md Slice C are [→ FOREMAN C]; items in FOREMAN_B.md are [→ FOREMAN B]; everything else = session 8.
 | D53 | opt-pics leftovers: 25 options still on placeholder (dev/test/opt-pics-table.md r1) | QUEUED [→ FOREMAN C] |
