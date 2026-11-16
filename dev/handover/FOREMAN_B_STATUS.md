@@ -7,6 +7,13 @@ Context (session 3): ~60k tokens after the mandatory setup reads → budget ~75k
 Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no reports yet (review/item-big pushed adda3201). No new SẴN SÀNG KIỂM. Q24 not answered yet → D11/D13/D14/D19/D44 stay HELD.
 (Rule 07:45Z s10: every brief must POINT to dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md and order them read in full — owner words verbatim, never a summary.)
 
+## HANDOVER (Foreman B session 3 → session 4, 11/16/2026 08:02Z)
+- Session 3 = session_01N1tNP6N19EQTqoHAMZcxqK passed its context budget (~75k) → rolled over; it stops spawning and deletes its cron (b7059734). Session 4 = see next status commit.
+- RUNNING (all separate sessions, nothing dies with session 3): see the "RUNNING 08:00Z" line above (10 sessions; ids also in CLAIMS.md). Next actions: mg-balance must push reports/mg-balance.md (replacement list) EARLY — check it on the first wake; open reviewers for every SẴN SÀNG KIỂM (D12 mood-bar, mg-balance, nw-poem/lantern/quiz, rank-port, presentation, spread-events); reviewer PASS → "READY <full sha>" under ## PASS (main s12 fast-forwards).
+- Free slots: 2 (keep for reviewers). Held: D3 (KIT REQUEST filed above), D19 (after econ in merge-train-6), D14 + D44 (art, owner's morning), night-card pregnancy-FX follow-up (after night-end-r3 lands; orphan #1).
+- Main s12 rule: if no pickup line by 09:15Z main moves mg-balance to D — pickup line written 07:58Z, done.
+- Open owner questions unchanged (Q3, Q5, Q6, Q10–Q15, Q20, Q23, Q25) + C35b reviewer Qs (disliked gift net-positive? Thái hậu dislikes?).
+
 ## HANDOVER (Foreman B session 2 → session 3, 11/16/2026 06:25Z)
 - Session 2 = session_01N1tNP3StF4VxqkqTsQSt3a passed its context budget → rolled over; it stops spawning now. SESSION 3 = session_01N1tNP6N19EQTqoHAMZcxqK (opened 06:21Z).
 - All B work runs as SEPARATE sessions (nothing dies with session 2). Running: C35b reviewer session_01N1tNP2GaMKbqSeCQe8Lxot (review/pcard-dislikes-r1 → reports/review-pcard-dislikes-r1.md); D3 item-big session_01N1tNP3vh5qQKaG75iP6uRK (reports/item-big.md); D9 header-own session_01N1tNP6D57poL6nUn778JPv (reports/header-own.md); D12 mood-bar (opus) session_01N1tNP2hssUsxJwKBBsGRUZ (reports/mood-bar.md). If no push/report after ~2–3 h, check with get_session/list_events, then re-open from the pushed branch + PROGRESS.
