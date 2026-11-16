@@ -86,3 +86,43 @@ L65, L80, L117, L126, L139, L311, L366, L375, L395, L398, L401, L687, L924, L115
 - Older pose/hand/proportion rules checked, all present in the art file: OD:L11 (poses calm, HANDS varied with props), OD:L143, OD:L237/L417/L427 (vạn phúc hands), OD:L383/L838 (hand anatomy audit), OD:L542-543, OD:L949 (squashed figure), OD:L1179 (standard proportions).
 - Removed (invented "one shared maid uniform" note, not her rule): [HO/HANDOVER_SESSION9.md:L66] and [HO/HANDOVER_SESSION9.md:L73] in both rule files (status lines). Kept: OD:L1210, OD:L1212, [HO/HANDOVER_SESSION9.md:L48] — they say a home maid switches to the palace maid dress at high rank, which is her own ruling (OD:L1210 verbatim) and matches L1239.
 - Re-check: 0 text mismatches against OWNER_DECISIONS.md, 0 duplicate tags.
+
+## Canon split (owner OD:L1241 low context, s11 request, 11/16/2026)
+
+Every one of the 1005 tagged lines from the old PRIORITY_RULES.md (~200 KB) + OWNER_ART_RULES.md (~192 KB) now lives in exactly ONE file under dev/rules/ (script check: 1005 found, 0 missing, 0 duplicated, 0 text changes, 0 mismatches vs OWNER_DECISIONS.md). The 214 lines that sat in both old files are now stored once. PRIORITY_RULES.md and OWNER_ART_RULES.md are short indexes.
+Design: shared start lines are not copied into several START files (that would break overwrite-in-place); instead each role reads a START SET: Main = CORE + FOREMAN + MAIN; Foreman = CORE + FOREMAN; Worker = CORE + WORKER; Reviewer = CORE + WORKER + REVIEWER; Art = CORE + WORKER + ART. Foreman-file lines (HO/FOREMAN_*) went to topic/handover-restatements, since each foreman reads its own FOREMAN_X.md anyway.
+
+| file | KB |
+|---|---|
+| dev/PRIORITY_RULES.md | 3.6 |
+| dev/art/OWNER_ART_RULES.md | 3.6 |
+| dev/rules/START_ART.md | 13.2 |
+| dev/rules/START_CORE.md | 10.5 |
+| dev/rules/START_FOREMAN.md | 6.8 |
+| dev/rules/START_MAIN.md | 6.8 |
+| dev/rules/START_REVIEWER.md | 2.9 |
+| dev/rules/START_WORKER.md | 10.7 |
+| dev/rules/topic/art-animations.md | 13.2 |
+| dev/rules/topic/art-costumes.md | 15.7 |
+| dev/rules/topic/art-events-effects.md | 26.3 |
+| dev/rules/topic/art-faces-figures.md | 21.4 |
+| dev/rules/topic/art-frames-kit.md | 8.8 |
+| dev/rules/topic/art-items-pets.md | 8.3 |
+| dev/rules/topic/art-other.md | 18.4 |
+| dev/rules/topic/art-scenes.md | 17.3 |
+| dev/rules/topic/balance-economy.md | 19.7 |
+| dev/rules/topic/coop.md | 3.6 |
+| dev/rules/topic/handover-restatements.md | 68.4 |
+| dev/rules/topic/kit-ui.md | 20.3 |
+| dev/rules/topic/people-life.md | 5.1 |
+| dev/rules/topic/process-history.md | 12.1 |
+| dev/rules/topic/story-roads.md | 5.7 |
+| dev/rules/topic/systems-other.md | 4.4 |
+| dev/rules/topic/time-calendar.md | 3.7 |
+| dev/rules/topic/wording.md | 8.3 |
+
+Start-set totals: Main 24.1 KB; Foreman 17.3 KB; Worker 21.1 KB; Reviewer 24.0 KB; Art 34.4 KB.
+
+MANDATORY read lines updated (line 1) in WORKER_BRIEF.md, REVIEWER.txt, FOREMAN_B/C/D.md; PREAMBLE.txt got the MANDATORY line as new line 1 (its [HO/PREAMBLE.txt:Lnn] tags in dev/rules shifted +1 and re-checked). The copies of those line-1 texts inside dev/rules were updated to the new text.
+NOT done: CLAUDE.md lives on main only (workers never push main) — coordinator to add: 'Main chat: read dev/rules/START_CORE.md + START_FOREMAN.md + START_MAIN.md in full, then only the dev/rules/topic files the task touches; never the whole canon (OD:L1241).' Also dev/handover/HANDOVER_SESSION9.md:80 still says 'Read PRIORITY_RULES.md in full' (old handover, left as is).
+Topic routing was by old section + keywords; a few lines may sit in a near topic (e.g. a UI line in an art topic). Nothing is lost: grep the tag.

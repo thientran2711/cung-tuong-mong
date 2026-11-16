@@ -1,0 +1,14 @@
+# START_REVIEWER — verbatim owner rules
+
+Holds: reviewers only.
+
+Read in full at start by: REVIEWER. Reading sets: MAIN = START_CORE + START_FOREMAN + START_MAIN; FOREMAN = START_CORE + START_FOREMAN; WORKER = START_CORE + START_WORKER; REVIEWER = START_CORE + START_WORKER + START_REVIEWER; ART = START_CORE + START_WORKER + START_ART. Then read ONLY the dev/rules/topic/*.md files your task touches (list in dev/PRIORITY_RULES.md).
+
+Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on the docs branch); the text after the tag is the owner's line, copied unchanged by script. Every rule line lives in exactly ONE file under dev/rules/ (find a tag: grep -rn '\[OD:L123\]' dev/rules). CANON OVERWRITE (owner OD:L1232): when a rule changes, delete the old line and write the new one IN ITS PLACE in the same file; never keep the old one with a 'changed to' note. Headings '### OD:Lnn' are the OD section headings the lines sit under. Generated 11/16/2026 from dev/PRIORITY_RULES.md + dev/art/OWNER_ART_RULES.md (owner rule OD:L1241, low context).
+
+### HO/REVIEWER.txt
+[HO/REVIEWER.txt:L1] MANDATORY (owner OD:L1241, low context): read dev/rules/START_CORE.md + dev/rules/START_WORKER.md + dev/rules/START_REVIEWER.md (art review: + dev/rules/START_ART.md) in full, then ONLY the dev/rules/topic/*.md files your task touches (list: dev/PRIORITY_RULES.md, art: dev/art/OWNER_ART_RULES.md). Do NOT read the whole canon. Never summarise the owner's rules in a brief — point to these files.
+[HO/REVIEWER.txt:L3] HARD RULE (owner 16:50Z): FAIL any custom/private chip, stat row, relation line or card not built from the shared kit (dev/kit/KIT.md).
+[HO/REVIEWER.txt:L4] REVIEWER ROLE (one branch only): fetch the branch + origin/main, merge the branch onto the LATEST origin/main in your worktree on a new branch review/<topic>-r6 (resolve conflicts carefully; check for existing reviewer WIP merges named in HANDOVER_1115_PM.md and reuse them). Run the repo test suite / e2e scripts relevant to the change (look in dev/test*, tests/, package.json, dev/review/*-queue.md for how earlier reviewers tested; coop-e2e if co-op touched) plus Playwright screenshots at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844 (rotate prompt). Check: no page errors, no horizontal overflow, no cut text, old saves load, kit-only UI (no private CSS/frames), VANPHONG wording, owner rules in OWNER_DECISIONS. Look at your screenshots yourself.
+[HO/REVIEWER.txt:L5] Small fixes you may make yourself on review/<topic>-r6. Push it. Result: "PASS <sha>" where <sha> is a commit whose ancestor is the current origin/main (so the coordinator can fast-forward main), or "FAIL" with a precise numbered list for the worker. Do NOT push main.
+[HO/REVIEWER.txt:L7] KIT CONSISTENCY (owner 16/11): for any UI change, scan every place that uses the same kind of element (all portrait frames, all cards, all chips…) and FAIL if any differ in shape/style.

@@ -1,4 +1,4 @@
-MANDATORY: read dev/PRIORITY_RULES.md in full (and dev/art/OWNER_ART_RULES.md in full for any art work) before anything else. Never summarise the owner's rules in a brief — point to these files.
+MANDATORY (owner OD:L1241, low context): read dev/rules/START_CORE.md + dev/rules/START_WORKER.md (art work: + dev/rules/START_ART.md) in full, then ONLY the dev/rules/topic/*.md files your task touches (list: dev/PRIORITY_RULES.md, art: dev/art/OWNER_ART_RULES.md). Do NOT read the whole canon. Never summarise the owner's rules in a brief — point to these files.
 
 > **LANGUAGE (owner, 15/11 ~18:30Z):** all repo work files, PROGRESS, reviews, KIT.md, commit messages and reports are written in ENGLISH (saves credits). Player-visible game text stays Vietnamese (VANPHONG.md).
 

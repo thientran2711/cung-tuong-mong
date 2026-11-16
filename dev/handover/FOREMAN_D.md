@@ -1,4 +1,4 @@
-MANDATORY: read dev/PRIORITY_RULES.md in full (and dev/art/OWNER_ART_RULES.md in full for any art work) before anything else. Never summarise the owner's rules in a brief — point to these files.
+MANDATORY (owner OD:L1241, low context): read dev/rules/START_CORE.md + dev/rules/START_FOREMAN.md (art work: + dev/rules/START_ART.md) in full, then ONLY the dev/rules/topic/*.md files your task touches (list: dev/PRIORITY_RULES.md, art: dev/art/OWNER_ART_RULES.md). Do NOT read the whole canon. Never summarise the owner's rules in a brief — point to these files.
 
 # FOREMAN D (fourth account) — rules + assigned slice
 Owner (16/11, session 8): a fourth account runs Foreman D, to drain the unassigned queue. The rules are the same as dev/handover/FOREMAN_B.md; read it first: roles, how it works, the model rule (NEVER haiku; sonnet = default; opus = game rules/numbers, structure/core systems, hard root cause), the review gate, and the status file.

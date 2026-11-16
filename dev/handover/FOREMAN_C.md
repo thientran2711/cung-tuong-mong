@@ -1,4 +1,4 @@
-MANDATORY: read dev/PRIORITY_RULES.md in full (and dev/art/OWNER_ART_RULES.md in full for any art work) before anything else. Never summarise the owner's rules in a brief — point to these files.
+MANDATORY (owner OD:L1241, low context): read dev/rules/START_CORE.md + dev/rules/START_FOREMAN.md (art work: + dev/rules/START_ART.md) in full, then ONLY the dev/rules/topic/*.md files your task touches (list: dev/PRIORITY_RULES.md, art: dev/art/OWNER_ART_RULES.md). Do NOT read the whole canon. Never summarise the owner's rules in a brief — point to these files.
 
 # FOREMAN C (quản đốc thứ ba, third account) — rules + assigned slice
 Owner (16/11, session 8): a third account runs Foreman C for the rest of the queue. Same rules as dev/handover/FOREMAN_B.md (read it: roles, how it works, model rule NO haiku / sonnet default / opus for rules-numbers-structure, max 12 agents, each ≤2 browsers; art workers fill free slots (owner 16/11), report ONLY in dev/handover/FOREMAN_C_STATUS.md, never push main, never edit OWNER_DECISIONS/SESSION8_QUEUE/FOREMAN_B files, never talk to the owner — questions go under QUESTIONS).
