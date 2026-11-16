@@ -263,11 +263,11 @@ KIT_SIZE.v3={
         reward:"emp",night:"emp",end:"me",result:"me"},
  pres:{S:"one",M:"fig",L:"fig",XL:"fig"},
  /* S = small content: body up to bodyS, body + its button rows up to capS */
- bodyS:200,capS:{kv1:400,kv2:400},
+ bodyS:200,capS:{kv1:340,kv2:340},
  colS:104,porS:88,picMinS:139,evMin:{one:46,fig:56},
  btn:{cellS:140,cellLong:280,gap:6}};
 /* v3 figure sizes (measured BODY px, × KIT_FIG.fac) of the "fig" presentations: big enough that M holds more than S, L more than M, XL more than L */
-KIT_SIZE.fig3={M:{h:290,cw:140},L:{h:370,cw:176},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
+KIT_SIZE.fig3={M:{h:300,cw:140},L:{h:370,cw:162},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
 Object.assign(KIT_SIZE.lay,{M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
 /* subject boxes of event pictures [x0,y0,x1,y1] (0..1). One registry; a picture added later gets its box here (else centred). */
 const KIT_PIC_SUBJ={"ev-hh-viec":[.42,.22,.79,.5],"ev-thinh-an":[.28,.3,.78,.97],"info-thai-hau":[.18,.08,.95,.72],"ev-news-tin-trong-cung":[0,.2,1,.9],
@@ -294,7 +294,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
 .ksz3[data-pres="one"]>.k3btns{padding:0 12px 12px}
 .ksz3 .k3btns>.kszb{grid-column:span var(--k3s,1);width:auto;min-width:0}
-.ksz3 .kszb[data-kbs="S"] .kszr{flex-wrap:wrap;row-gap:0;white-space:nowrap}.ksz3 .k3meas{display:block}.ksz3 .k3meas .kszbt{min-width:7em}
+.ksz3 .kszb[data-kbs="S"] .kszr{flex-wrap:wrap;row-gap:0;white-space:nowrap}.ksz3 .kszb .kchip{white-space:nowrap}.ksz3 .k3btns .kszb[data-kbs="S"] .kszbt{min-width:6.5em}.ksz3 .k3btns>.kszb{padding:5px}.ksz3 .k3btns>.kszb>.kszbr{gap:6px}.ksz3 .k3meas{display:block}
 .ksz3 .kszfig>.kt3{max-width:calc(var(--kszcw) + 24px)}
 .ksz3.kszf{max-height:none}`);
  const st=document.createElement("style");st.id="k-size3";st.textContent=css.join("\n");document.head.appendChild(st)})();
@@ -320,9 +320,12 @@ function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[s
  let head=kpHeader(sp.kind,sp.title,sp.sub);if(!(sp.opts&&sp.opts.length))head=head.replace(/<\/div>$/,kitXHTML('data-kszx="1"',"Đóng")+"</div>");
  return `<div class="dlg kszf ksz3 kpanel" data-kind="${sp.kind}" data-ksz="${K}" data-pres="${pres}" data-focus="${foc}" data-lay="${K}">${head}<div class="k3body">${left}<div class="k3right">${R.join("")}</div></div>${pres==="one"?btns:""}</div>`}
 /* crop every event picture around its subject; strips never shorter than the subject (returns nothing; sets min-height + object-position) */
-function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(!im||!im.naturalWidth)return;const W=im.naturalWidth,H=im.naturalHeight;
+const KSZ_NAT={};/* natural sizes of event pictures seen, so a frame built later (picker) knows its subject's height before the picture decodes */
+function kszEvMin3(c){const im=c.querySelector("img"),src=im&&im.getAttribute("src")||"";if(im&&im.naturalWidth)KSZ_NAT[src]=[im.naturalWidth,im.naturalHeight];const n=KSZ_NAT[src];
+ const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
+ const w=c.clientWidth;return Math.max(base,Math.min(Math.ceil(w*.45),Math.ceil((sj[3]-sj[1])*n[1]*(w/n[0])*1.06)))/* never taller than a 2.2:1 strip: a tall subject is centred, not shown whole */}
+function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(c.classList.contains("k3ev"))c.style.minHeight=kszEvMin3(c)+"px";if(!im||!im.naturalWidth)return;const W=im.naturalWidth,H=im.naturalHeight;
  const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;const w=c.clientWidth;
- if(sj&&c.classList.contains("k3ev")){const need=Math.min(Math.ceil(w*.45),Math.ceil((sj[3]-sj[1])*H*(w/W)*1.06));/* never taller than a 2.2:1 strip: a tall subject is centred, not shown whole */const base=KIT_SIZE.v3.evMin[c.closest(".ksz3").dataset.pres]||56;c.style.minHeight=Math.max(base,need)+"px"}
  const h=c.clientHeight||1,s=Math.max(w/W,h/H),vw=w/s,vh=h/s;const b=sj||[.15,.15,.85,.85];const cx=(b[0]+b[2])/2*W,cy=(b[1]+b[3])/2*H;
  const px=W-vw>1?Math.min(1,Math.max(0,(cx-vw/2)/(W-vw))):.5,py=H-vh>1?Math.min(1,Math.max(0,(cy-vh/2)/(H-vh))):.5;im.style.objectPosition=`${(px*100).toFixed(1)}% ${(py*100).toFixed(1)}%`})}
 /* (4) button grid: cols from the area width, short buttons one cell, long ones the cells they need */
@@ -336,7 +339,7 @@ function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const
  if(R){R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");/* XL: the body stays the figure's height, more text scrolls inside the info column */if(dlg.dataset.ksz==="XL"&&L){R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}kszPicFit3(dlg);kszPicFit3(dlg);return dlg.dataset.ksz}
 /* does the content fit this size? (info column measured with the event picture at its smallest) */
 function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
- const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=(parseFloat(ev.style.minHeight)||KIT_SIZE.v3.evMin[dlg.dataset.pres])+"px"}
+ const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  if(dlg.dataset.pres==="fig")return need<=lh+2;const btn=dlg.querySelector(":scope>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[m]}
@@ -416,7 +419,7 @@ function kszPick3Report(kind){const kk=window.kitKnown;window.kitKnown=()=>true;
 /* sample content per size = the MOST of this kind's content that the picker puts in that size (so every sample is full, none spills) */
 function kszLevels3(sp){const F=sp.facts||[],R=sp.rows||[],O=sp.opts||[],T=F.length+R.length+O.length,L=[];for(let n=1;n<=T;n++){const nf=Math.min(F.length,Math.max(1,Math.round(n*F.length/T))),no=Math.min(O.length,Math.round(n*O.length/T)),nr=Math.max(0,Math.min(R.length,n-nf-no));
  if(O.length&&!no)continue;L.push(Object.assign({},sp,{facts:F.slice(0,nf),rows:R.slice(0,nr),opts:O.length?O.slice(0,no):undefined}))}return L}
-function kszFill3(pool,host){const out={},L=kszLevels3(pool);for(const sp of L){const K=kitFramePick3(sp,host);let ok=true;if(K==="XL"){host.innerHTML=kszFrame3(sp,"XL");const d=host.firstElementChild;kitFrameApply3(d);ok=kitFrameFits3(d,true)}if(ok)out[K]=sp}return out}
+function kszFill3(pool,host){const out={},L=kszLevels3(pool);let xl0=null;for(const sp of L){const K=kitFramePick3(sp,host);let ok=true;if(K==="XL"){xl0=xl0||sp;host.innerHTML=kszFrame3(sp,"XL");const d=host.firstElementChild;kitFrameApply3(d);ok=kitFrameFits3(d,true)}if(ok)out[K]=sp}if(!out.XL&&xl0)out.XL=xl0;return out}
 Object.assign(window,{kszSheet3,kszPick3Report,kszFill3,kszLevels3});
 /* ---- v3 ITEMS (owner 16/11 17:20Z, OD, overrides the corner-badge idea): ONE MASTER = the XL item (frame + picture + Xa xỉ square box),
    SCALED UNIFORMLY to L and M (and the bag slot): the Xa xỉ box scales WITH the frame, so it sits in exactly the same place at every size and
