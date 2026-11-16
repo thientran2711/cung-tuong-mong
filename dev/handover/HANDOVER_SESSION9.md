@@ -116,3 +116,4 @@ ART (main samples): foreign-princess v3 sent 07:12Z (955 cr total) — waiting o
 Foremen inbox written: B (Q24 answered, D5 cancelled → NPC roads, mg-balance HIGH, D36 unblocked, model audit), C (D13/D19/D14/D44, fig-bg-k1 review, festival art), D (GO act waves, C44 live, Xóa sổ trên mây button).
 Owner questions OPEN: NVP glossy floor (superseded by her 07:15Z redo order); fp v3 verdict; glyph v2 verdict. Percent "xong / chơi được" never measured in s11 — measure (bot/feature checklist) and report real numbers.
 - (07:12Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB (opened by s11). Workers report there from now on.
+- (07:13Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB took over. Hourly self-wake trig_01HGkAgurzHcaQzWo7uFLLfT (:12, human_request); s11 trigger trig_018KeLcdXKabaXpFYzAiCYxf DISABLED. All running main-s9/s11 workers messaged to report to s12.
