@@ -677,7 +677,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
 (function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
-if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `được thị tẩm đêm nay: ít nhất Sủng +3, Ân tình +2 (thêm nếu đêm vui)${S.preg?"":` · có thai: ${chanceW(c)}`} · được ban thưởng: ${chanceW(22)} · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}}
+if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `thị tẩm đêm nay: Sủng +3, Ân tình +2 trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(22)} · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}}
 /* wording guide fixes in merged copies */
 (function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
@@ -721,8 +721,10 @@ try{KIT_CAT["sung-ai"]=["Tranh sủng","#b03a7a"];KIT_ACT_CATS.unshift(["sung-ai
    Without it "Tự rèn" resolved to the FIRST key of its prefix (Công's embroidery for Dung, Ngôn, Hạnh) and "Tự học" to the generic book for every art.
    The act name used for the picture now carries the course: "Tự rèn Dung", "Theo ma ma giáo tập học Ngôn", "Tự học Cầm" (the keys ACTS.json already has). */
 function kpActCtx(kan,n){try{const b=kan.closest&&kan.closest("button[data-vlearn],button[data-learn]");if(!b)return n;const md=b.dataset.mode;
-  if(b.dataset.vlearn&&typeof VIR!=="undefined"){const V=VIR.find(x=>x.k===b.dataset.vlearn);if(V){if(md==="self"&&n==="Tự rèn")return"Tự rèn "+V.n;if(md==="master"&&n==="Theo ma ma giáo tập")return"Theo ma ma giáo tập học "+V.n}}
-  if(b.dataset.learn&&typeof ARTS!=="undefined"){const a=ARTS.find(x=>x.k===b.dataset.learn);if(a&&md==="self"&&n==="Tự học")return"Tự học "+a.n}}catch(e){}return n}
+  if(b.dataset.vlearn&&typeof VIR!=="undefined"){const V=VIR.find(x=>x.k===b.dataset.vlearn);if(V){if(md==="self"&&(n==="Tự rèn"||n==="Tự học"))return"Tự rèn "+V.n;if(md==="master"&&(n==="Theo ma ma giáo tập"||n==="Học với ma ma"))return"Theo ma ma giáo tập học "+V.n}}
+  if(b.dataset.learn&&typeof ARTS!=="undefined"){const a=ARTS.find(x=>x.k===b.dataset.learn);if(a&&md==="self"&&n==="Tự học")return"Tự học "+a.n}}catch(e){}
+  /* merge-train-4: act-text-r1 renamed the labels (one word "Tự học", "Học với Thái hậu"); the pictures keep their ACTS.json keys */
+  if(n==="Học với Thái hậu")return"Xin Thái hậu cho học cùng";if(n==="Tự học, làm tác phẩm")return"Tự luyện, làm tác phẩm";return n}
 function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpActCtx(kan,kpPlain(c.textContent))}
 const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
 function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
