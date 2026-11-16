@@ -447,3 +447,4 @@ RUNNING NOW (all report to main; s22 must send_message each "main is now s22 = <
 PASS QUEUE (cannot push from s21): care-overlap-r1 0c745272 (incl. pet-lifespan) · flip-hand-r1 673dafc09 · status-icons-r1 e47bba8a.
 FOREMAN inboxes sent: D (coop-chat first, coop-b1b5, health+pregnancy bundle with owner answers Q1–Q4: Sức max ceiling only / ở cữ 1 month no ×0.7 / innocent lệch sổ → blood test / KEEP childbirth death, no shields), C (AG1→AG3, map frame paint 3 samples, missing courtyard states paint from pl-courtyards MISSING table, pet Già art), all (feature freeze).
 OWNER WAITING: open new main · kit-size #3 verdict + narrator 1/2 · flip hand 1/2/3.
+- (18:34Z s21) chonso-tabs-r1 PASS c4f80b7f → PASS QUEUE (chonso-cloud builds on it — push chonso-tabs first or together).
