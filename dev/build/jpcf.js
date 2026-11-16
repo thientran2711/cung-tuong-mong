@@ -32,10 +32,12 @@ function pcfRel(e){try{if(typeof kitRelRows!=="function"||typeof kitRelTable!=="
 function pcfTaste(e){try{const rows=[];
  if(isEmp(e)){const E=S.emp,K=E.known||{},L=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${L[k]}`);
   rows.push(["Ngài thích",like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",like.length?"":"n"]);
+  try{const d=typeof disRow==="function"&&disRow("emp");if(d)rows.push(d)}catch(x){}
   const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push(["Ngài hay",T.join("; ")])}
  else if(isTh(e)){rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])}
  else if(typeof trKnown==="function"&&e.id!=null){const K=trKnown(e),T=typeof traitsOf==="function"?traitsOf(e):[];const un=T.filter(t=>!K.includes(t)).length;
   rows.push(["Tính nết",K.length?K.join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
+  try{const d=typeof disRow==="function"&&disRow(e);if(d)rows.push(d)}catch(x){}
   const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push(["Hay",tend.join("; ")])}
  if(!rows.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitRows(rows)}</div>`}catch(x){return""}}
 function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=typeof intelOf==="function"?intelOf(e):[];const old=(S.notes&&S.notes[e.id])||[];
