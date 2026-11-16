@@ -102,7 +102,7 @@
 | mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | session_01UV1SzkBzFb19bZRxsyptRX (opus) | PASS 2d3428f8 (reports/mortality-r1.md) | 16/11 08:00Z |
 | promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | DONE PASS 7453911c3 (report dev/handover/reports/promo-skip-r1.md) | 16/11 08:00Z |
 | merge-train-6: 9 PASS branches (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | READY 7d6d3514 | 16/11 08:00Z |
-| mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | session_01N1tNP4yBvmQ6Gd69aHoWJR (opus) | RUNNING | 16/11 07:58Z |
+| mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | session_01N1tNP4yBvmQ6Gd69aHoWJR (opus) | DONE SẴN SÀNG KIỂM 26ff48ac | 16/11 07:58Z |
 | no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | session_01N1tNP6akcFFA3AcqEfs5hk (sonnet) | DONE SẴN SÀNG KIỂM eb5f2239 | 16/11 07:58Z |
 | no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | session_01N1tNP3ykt4KbnfNeocJZ3W (sonnet) | RUNNING | 16/11 07:58Z |
 | no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | session_01N1tNP2boFYsfpf9ZAuvbwW (sonnet) | RUNNING | 16/11 07:58Z |
@@ -154,10 +154,10 @@
 | design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
 | D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | DONE PASS ce43d3b5 (archived) | 16/11 11:38Z |
 | nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | DONE PASS 9696bc72 (archived) | 16/11 11:38Z |
-| nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | RUNNING | 16/11 11:38Z |
+| nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | DONE PASS 33730518 (archived) | 16/11 11:38Z |
 | D36 rank-port reviewer | review/rank-port-r1 | B | session_01N1tNP3gJ9boCKEYKaNSuEG (sonnet) | RUNNING | 16/11 11:38Z |
 | D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | DONE PASS 9ec1852a (archived) | 16/11 11:38Z |
-| D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | RUNNING | 16/11 11:38Z |
+| D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | DONE FAIL 1+2 → spread-events-r2 (archived) | 16/11 11:38Z |
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
 | nw-poem reviewer | review/nw-poem-r1 | B | session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) | DONE PASS 5d200041 (archived) | 16/11 11:47Z |
 | skin-light: owner bug player vs maid skin/light mismatch on stage (whole figure group, one kit light) | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku (opus) | RUNNING | 16/11 11:53Z |
@@ -173,3 +173,7 @@
 | skin-norosy: owner verdict B (12:45Z) — remove rosy-skin layer from ALL pictures, keep later edits; no kitFigLight | review/skin-norosy | main s16 | session_01UV1SzjQcW4S8GoPGj8rDyk (opus) | RUNNING | 16/11 12:43Z |
 | merge-train-8 (B+C+D READY not on main/train6/7) | review/merge-train-8 | main s16 | session_01UV1SzmEkyjvqBxvgjLzice (sonnet) | RUNNING | 16/11 12:47Z |
 | rank-bright: owner 13:00Z rank colours brighter, kit-wide one source | review/rank-bright | main s16 | session_01UV1Szjy1fRcDbAZ3q7jF9p (sonnet) | RUNNING | 16/11 12:53Z |
+| mg-balance reviewer (opus) | review/mg-balance-r1 | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
+| D13 spread-events fix pass (opus): Q-length gates inside the buổi change (j70/j68/j72/jpet/jkc) | review/spread-events-r2 | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
+| mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
+| owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | (opening, Foreman B s5) | RUNNING | 16/11 12:55Z |
