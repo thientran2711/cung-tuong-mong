@@ -304,6 +304,34 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
    "now" (owner 13:50Z wording: every place's count at ONE moment, the counts add up to the record, nobody twice / missing) or "arrive"
    (main's dev/test/stage-counts.js: a place's count = the people she meets on arrival, after the walk's khắc). One switch, read by j95. */
 Object.assign(BAL,{led:{court:2,cnt:"now"}});
+/* ONE CORE (OD:L1267) for the full origin roads (jroad.js, ROAD_MAP.md): chapter .first … .last of a road are Phần giữa after the premise
+   chapter (.first−1); finTier = the family reward tier of the road finale by its ending (win / mid / lose; −1 = none), as j67 chFinale67. */
+Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
+ /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
+ cap:{tt_mat:4},
+ /* B2 roads (jrd_td.js, jrd_ch.js): td_an rank = the rank index (RANKS[i]) from which her own petition is read; ch_co trust = Thái hậu favour (S.th) from which she treats her as a partner; ch_benh heir = S.th from which the dying
+    Thái hậu hands her people to her; ch_bi shield = months of shelter (S.shield) won by the .11 win */
+ td_an:{rank:3},
+ /* nc roads: months of cấm túc (S.confined) a lost nc_gian / nc_tuc / nc_vuong beat puts her under */
+ ncConf:{gian:3,tuc:1,vuong:1},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3},
+ /* B1 roads (jrd_dtq/jrd_muoi/jrd_cn): deadlines in months (printed as words), rank indexes (RANKS[i].n printed), thresholds */
+ dtq_bien:{grain:3,speak:4},  /* grain: months before Hộ bộ closes the spring books (.5); speak: lowest rank index whose memorial reaches the desk (.9) */
+ dtq_vu:{lim:2},              /* months before Đại Lý tự opens the đối chất (.9) */
+ dtq_binh:{mon:3},            /* months for the camp half of the tiger tally to reach the capital (.5) */
+ dtq_huynh:{mon:3,owe:100},   /* mon: months before the Hắc Thủy freezes and the ransom road closes (.5); owe: bạc the Tổng quản takes back (loan + interest) when .5 ends after «Mượn bạc» (c1, w bạc 80) */
+ muoi_tuoc:{rkSeat:4},        /* lowest rank index allowed to write a lantern poem at the Trung thu feast (.7) */
+ muoi_lau:{rkSend:3},         /* lowest rank index allowed to send goods into a prison through Nội vụ phủ (.8) */
+ muoi_doi:{han:3},            /* months to pay the relief contribution before Hộ bộ closes its books (.8) */
+ muoi_no:{han:3},             /* months to raise the money (.5 / .6) */
+ cn_chu:{gap:1},              /* ranks she must sit above the old mistress for the .9 climax bonus */
+ cn_tinh:{danh:40},           /* Danh at which her own word weighs in the Kính sự phòng report (.9) */
+ cn_ban:{ill:2},              /* months Tố Nga survives without the ginseng (.8) */
+ cn_than:{dl:3},              /* months the old Thẩm steward can hold out (.7) */
+ /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
+    read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */
+ tienSc:2,
+ /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
+ tm:[2,6,10]}});
 
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
