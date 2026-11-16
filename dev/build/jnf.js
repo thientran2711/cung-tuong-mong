@@ -27,7 +27,7 @@ const B4=()=>typeof B4L==="number"?B4L:2;
 function nfOn(){try{return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
 window.nfOn=nfOn;
 const CO=()=>{try{return window.COOPW&&COOPW.on&&typeof COOP==="object"?COOPW:null}catch(e){return null}};
-const host=()=>{const c=CO();return !c||c.seat==="a"};
+const host=()=>{if(typeof window.worldOn==="function")return !!window.worldOn();const c=CO();return !c||c.seat==="a"};
 const guest=()=>!!CO()&&!host();
 const myPid=()=>{const c=CO();return c?(c.seat==="a"?901:902):0};
 const friend=()=>(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.coop)||null;

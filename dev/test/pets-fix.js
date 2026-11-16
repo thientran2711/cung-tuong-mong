@@ -43,12 +43,12 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
  await p.evaluate(()=>{S.inv=S.inv.filter(e=>e.w||e.h);S.pets=[];S.petTip=1;S.rank=3;S.bac=900;S.mat=4;petAdd(S,'meo','Nhờ thái giám mua','buy');petAdd(S,'vet','Nhờ thái giám mua','buy');S.petOn=0;S.pets[1].stg=2;tab='inv';render()});
  await sleep(600);await p.evaluate(()=>{const e=document.querySelector('#panel .keq[data-keq="pets"]');if(e)e.scrollIntoView({block:'center'})});
  R.row=await p.evaluate(()=>{const out={};const R=e=>e.getBoundingClientRect();const sp=a=>a.length?+(Math.max(...a)-Math.min(...a)).toFixed(2):0;
-  for(const k of ['pets','tutrang']){const q=document.querySelector(`#panel .keq[data-keq="${k}"]`);if(!q)continue;const C=[...q.querySelectorAll('.keqc')];const rows={};C.forEach(c=>{const y=Math.round(R(c).top);(rows[y]=rows[y]||[]).push(c)});
+  for(const k of ['pets','tutrang']){const q=document.querySelector(`#panel .keq[data-keq="${k}"]`);if(!q)continue;const C=[...q.querySelectorAll('.keqc,.keqrc')];const rows={};C.forEach(c=>{const y=Math.round(R(c).top);(rows[y]=rows[y]||[]).push(c)});
    out[k]=Object.values(rows).map(cs=>{const part=s=>cs.map(c=>c.querySelector(s)).filter(Boolean).map(e=>R(e).top);return{n:cs.length,pic:sp(part('.kitem')),name:sp(cs.map(c=>c.querySelector('.keqnm,.keql')).filter(Boolean).map(e=>R(e).top)),
     chips:sp(cs.map(c=>c.querySelector('.keqfx')).filter(e=>e&&e.children.length).map(e=>R(e).top)),note:sp(part('.keqnote')),noteTxt:cs.map(c=>(c.querySelector('.keqnote')||{}).textContent||'')}})}return out});
  await shot('01-inv-pets');A.push(await audit('inv-pets'));
  /* --- 2. the pet shop (empty slot) --- */
- await p.evaluate(()=>{S.pets=[];S.petOn=-1;render()});await sleep(300);await p.click('#panel [data-keqk="pets"][data-keqi="0"]');await sleep(1500);await imgs();
+ await p.evaluate(()=>{S.pets=[];S.petOn=-1;render()});await sleep(300);await p.evaluate(()=>{KINV_SUB='thu';render()});await sleep(400);await p.click('#panel [data-petshop]',{force:true});await sleep(1500);await imgs();
  R.shop=await p.evaluate(()=>{const M=document.getElementById('modal'),R=e=>e.getBoundingClientRect();const tiles=[...M.querySelectorAll('.kshc')];const rows={};tiles.forEach(t=>{const y=Math.round(R(t).top);(rows[y]=rows[y]||[]).push(t)});
   const part=(t,s,edge)=>{const e=t.querySelector(s);return e?R(e)[edge]:NaN};const sp=a=>a.length?+(Math.max(...a)-Math.min(...a)).toFixed(2):0;
   const rr=Object.values(rows).map(ts=>({n:ts.length,pic:sp(ts.map(t=>part(t,'.kshpic','top'))),name:sp(ts.map(t=>part(t,'.kshn','top'))),use:sp(ts.map(t=>part(t,'.kshe','top'))),price:sp(ts.map(t=>part(t,'.kshp','bottom'))),
@@ -65,15 +65,14 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
  await p.evaluate(()=>{Q.length=0;closeModal()}).catch(()=>{});
  /* --- 3. the pet card picture per stage --- */
  R.stagePics=[];for(const [k,s] of [['kylan',0],['kylan',1],['kylan',2],['kylan',3],['meo',3],['thienma',2],['hac',1]]){
-  const r=await p.evaluate(async([k,s])=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;try{closeModal()}catch(e){}S.pets=[];S.petTip=1;petAdd(S,k,'Hoàng thượng ban','emp');S.pets[0].stg=s;S.petOn=0;tab='inv';render();await W(200);
-   document.querySelector('#panel [data-keqk="pets"][data-keqi="0"]').click();await W(600);const im=document.querySelector('#modal .kpsubj.kpitem img');if(im&&!im.complete)await new Promise(r=>{im.onload=im.onerror=r;setTimeout(r,8000)});
-   const T=petT(S.pets[0]);return{k,s,tier:PET_TIER[T.tr],src:im&&im.src.replace(/^.*\//,''),ok:!!(im&&im.naturalWidth),rescue:!!T.rescue,rows:(document.querySelector('#modal .kinvrows')||{innerText:''}).innerText.replace(/\s+/g,' ').slice(0,140)}},[k,s]);
+  const r=await p.evaluate(async([k,s])=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;try{closeModal()}catch(e){}S.pets=[];S.petTip=1;petAdd(S,k,'Hoàng thượng ban','emp');S.pets[0].stg=s;S.petOn=0;tab='inv';KINV_SUB='thu';render();await W(400);
+   const im=document.querySelector('#panel [data-skill="pet-0"] img');if(im&&!im.complete)await new Promise(r=>{im.onload=im.onerror=r;setTimeout(r,8000)});
+   const T=petT(S.pets[0]);return{k,s,tier:PET_TIER[T.tr],src:im&&im.src.replace(/^.*\//,''),ok:!!(im&&im.naturalWidth),rescue:!!T.rescue,rows:(document.querySelector('#panel [data-skill="pet-0"] .kpkb')||{innerText:''}).innerText.replace(/\s+/g,' ').slice(0,140)}},[k,s]);
   R.stagePics.push(r);if(k==='kylan'&&s===3)await shot('03-card-kylan-linhthu');if(k==='kylan'&&s===0)await shot('03-card-kylan-non')}
  A.push(await audit('card'));await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}});
  /* --- 4. the care screen + the three games, played --- */
- await p.evaluate(()=>{S.pets=[];petAdd(S,'meo','Nhờ thái giám mua','buy');S.petOn=0;S.pets[0].full=40;S.pets[0].clean=40;S.pets[0].joy=40;S.khac=4;tab='inv';render()});
- await p.evaluate(()=>{document.querySelector('#panel [data-keqk="pets"][data-keqi="0"]').click()});await sleep(600);
- R.careBtn=await p.evaluate(()=>{const b=document.querySelector('#modal [data-pet="care"]');if(!b)return'no care act';b.click();return'ok'});await sleep(1500);
+ await p.evaluate(()=>{S.pets=[];petAdd(S,'meo','Nhờ thái giám mua','buy');S.petOn=0;S.pets[0].full=40;S.pets[0].clean=40;S.pets[0].joy=40;S.khac=4;tab='inv';KINV_SUB='thu';render()});await sleep(600);
+ R.careBtn=await p.evaluate(()=>{const b=document.querySelector('#panel [data-pet="care"]');if(!b)return'no care act';b.click();return'ok'});await sleep(1500);
  const careGeo=()=>p.evaluate(()=>{const M=document.getElementById('modal'),d=M.querySelector('.dlg'),R=e=>e.getBoundingClientRect();const fig=M.querySelector('.kpsubj.kes img');const fr=fig&&R(fig),dr=R(d);
   return{open:!M.hidden,title:(M.querySelector('.kptitle')||{}).textContent,fig:fig&&fig.src.replace(/^.*\//,''),figH:fr&&Math.round(fr.height),dlg:[Math.round(dr.width),Math.round(dr.height)],
    cells:[...M.querySelectorAll('#kpcare .kst')].map(c=>c.innerText.replace(/\s+/g,' ')),x:!!M.querySelector('.kph > .kit-x'),band:!!M.querySelector('.kdlgart'),inside:dr.bottom<=innerHeight+1&&dr.right<=innerWidth+1,
@@ -82,13 +81,14 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
  R.feed=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const P=S.pets[0];const f0=P.full;document.querySelector('#modal [data-petc="feed"]').click();await W(300);
   const ok=PETC_FOOD[petcKind(P.t)];const b=document.querySelector(`#modal [data-food="${ok}"]`);if(!b)return'no food';const r=b.getBoundingClientRect();
   b.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,clientX:r.left+5,clientY:r.top+5,pointerId:1}));const fig=document.querySelector('#modal .kpsubj.kes').getBoundingClientRect();
-  dispatchEvent(new PointerEvent('pointermove',{clientX:fig.left+fig.width/2,clientY:fig.top+fig.height/2,pointerId:1}));dispatchEvent(new PointerEvent('pointerup',{clientX:fig.left+fig.width/2,clientY:fig.top+fig.height/2,pointerId:1}));await W(400);
+  /* drag onto the .kesimg rect only works with the picture loaded; the kit's own "touch the food, then touch the pet" path is exercised here (images are not reachable from the sandbox) */
+  dispatchEvent(new PointerEvent('pointerup',{clientX:-5,clientY:-5,pointerId:1}));document.querySelector('#modal .kpsubj.kes').click();await W(400);
   return{full:[f0,P.full],aff:P.aff,msg:(document.querySelector('#kpcare .kinvrows, #kpcare')||{innerText:''}).innerText.match(/Vừa rồi[^\n]*\n?[^\n]*/)?.[0]||''}});
  await shot('05-care-after-feed');
  R.bath=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const P=S.pets[0];const c0=P.clean;document.querySelector('#modal [data-petc="bath"]').click();await W(300);const st=document.querySelector('#modal .kpsubj.kes');const r=st.getBoundingClientRect();
   for(let i=0;i<5;i++){st.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,clientX:r.left+20,clientY:r.top+40,pointerId:2}));st.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,clientX:r.left+20,clientY:r.top+160,pointerId:2}));await W(60)}await W(300);return{clean:[c0,P.clean]}});
  R.play=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const P=S.pets[0];const j0=P.joy;document.querySelector('#modal [data-petc="play"]').click();await W(300);const shot1=document.querySelectorAll('#modal [data-ball].on').length;
-  for(let i=0;i<3;i++){const l=PETC.peek();document.querySelector(`#modal [data-ball="${l}"]`).click();await W(120)}await W(300);return{joy:[j0,P.joy],litOne:shot1}});
+  if(typeof PETC.peek!=='function')return{err:'no peek',game:PETC.game,btn:!!document.querySelector('#modal [data-petc="play"]'),dis:(document.querySelector('#modal [data-petc="play"]')||{}).disabled,khac:S.khac,box:!!document.querySelector('#modal [data-ball]')};for(let i=0;i<3;i++){const l=PETC.peek();document.querySelector(`#modal [data-ball="${l}"]`).click();await W(120)}await W(300);return{joy:[j0,P.joy],litOne:shot1}});
  await p.evaluate(()=>{document.querySelector('#modal [data-petc="play"]')&&0});R.closeX=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const x=document.querySelector('#modal .kph > .kit-x');if(x)x.click();await W(400);return document.getElementById('modal').hidden&&PETC.i===-1});
  /* --- 5. growth: time + Tình cảm → the "đã lớn" card, Linh thú picture --- */
  R.grow=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.pets=[];petAdd(S,'kylan','Thái hậu ban','th');const P=S.pets[0];P.at=tsbWk()-60;P.aff=95;const st=[];
