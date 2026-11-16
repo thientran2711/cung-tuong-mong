@@ -226,5 +226,5 @@
 | item-ledger review | review/item-ledger-r1 | D | session_01DgYSWmMK8v6NhgpHp4fg8k | RUNNING | 16/11 14:22Z |
 | phone-bars review (sonnet; 3a022369 incl. design-scale-p2-r1 d8950434) | review/phone-bars-r1 | main s18 | session_01UV1SzivoRHdnDUDwc6UZKt | RUNNING | 16/11 14:30Z |
 | promo-rules.js 755 'reveal shown' FAIL — pre-existing on main ee5d33de (found by mt8), fix owed | (to assign) | main s18 | — | OPEN | 16/11 14:30Z |
-| D29 fix r4 (jroute ledger bypass) THEN PEOPLE LEDGER (OD 13:40Z/13:50Z, inbox 13:55Z/14:15Z/14:25Z) — one opus worker, same files | review/schedules3-r4 → review/people-ledger | C | (opening) | RUNNING | 16/11 14:45Z |
-| b-answers-art review (sonnet) | review/b-answers-art-r1 | C | (opening) | RUNNING | 16/11 14:45Z |
+| D29 fix r4 (jroute ledger bypass) THEN PEOPLE LEDGER (OD 13:40Z/13:50Z, inbox 13:55Z/14:15Z/14:25Z) — one opus worker, same files | review/schedules3-r4 → review/people-ledger | C | session_011xDdVNZkQ6SnAs8Rttsbwj | RUNNING | 16/11 14:45Z |
+| b-answers-art review (sonnet) | review/b-answers-art-r1 | C | session_011xDdVNJ5KnQBuvmjYW1icF | RUNNING | 16/11 14:45Z |

@@ -2,10 +2,11 @@
 
 ORDER 16/11 applied (session 3): separate sessions only, claim before work, hourly self-wake trig_01HmZ7ThpeFBcFqGr6YqchsV (fires :30 each hour into session_011xDdVSPB2kuFjWy26nTiZa), no art until main hands a batch.
 START_CTX (session 3) = ~7% (~70k of 1M; get_session reads 0, own estimate). Roll over at >= 32% of the window, hard ceiling 60%, or at first summarisation.
-last wake: 13:45Z 16/11
+last wake: 14:45Z 16/11
 Connectors (session 3, 10:35Z): Cloudflare token active · disk 27 GB free, .git 1.6 GB (no repack).
 
 ## SESSION 3 LOG
+- 14:45Z wake: PASS art-complete-r2 d5ca28a8 (eunuch picker). schedules3-r3 = FAIL (jroute rtBm/rtNpcEsc bypass motive gate + record; witnesses outside the record; family scan) → ONE opus worker session_011xDdVNZkQ6SnAs8Rttsbwj: stage 1 review/schedules3-r4 fix, stage 2 PEOPLE LEDGER on review/people-ledger (same files, owner related-items rule). b-answers-art SẴN SÀNG KIỂM f46f826e → sonnet reviewer session_011xDdVNJ5KnQBuvmjYW1icF. SAMPLE READY (sent to main s17 session_01UV1SziLYuBSdn5wE1TLZte for the owner): title plates, item art audit (16 missing + 46 low-res, batch ~2,700 cr), cắm hoa board+podium. Title-bonus inbox lines (14:15Z/14:35Z/14:45Z) sent to the title-sys worker. Archived: art-complete-r2, schedules3-r3, item-art-audit, title-plate-art, b-answers-art sessions. Running: story14-p1-r2, title-sys, schedules3-r4/people-ledger, b-answers-art-r1 (4). Worker rollover check: all under limit. Own context ~19%.
 - 13:55Z owner asked whether sessions roll over by her context rule. Foreman C: yes (s2 opened s3 itself). Gap found: wakes did not check WORKER context. Fixed: hourly wake now runs a WORKER ROLLOVER CHECK (get_session per running C session; at START_CTX+25% / ceiling 60% or a HANDOVER in its report → Foreman C opens the successor with the full brief + 3 verbatim lines, archives the old one).
 - 13:45Z wake: main s16/s17 inbox (FOREMAN_C.md 12:55Z–14:00Z) answered QUESTIONS (story14 fix → C; eunuch picker review → C; K1/K2/K4/K5/K6 → main kit keeper; Q2 NPC +1 servant per rank; Q3 keep; art no longer paused) and gave C: TITLE SYSTEM, ONE LEDGER people part, ITEM ART AUDIT, B-answers art. Opened (claimed in CLAIMS.md):
   story14-p1 fix worker opus session_011xDdVPicFAyWqznz92TPU8 (review/story14-p1-r2) · art-complete-r2 reviewer sonnet session_011xDdVNdbaZdiyTm7es9XyE (eunuch picker, orphan #29) · TITLE SYSTEM phase 1 opus session_011xDdVSqS6DtgnaKSH6DMoG (review/title-sys on review/title-tag) · title plate art SAMPLE sonnet session_011xDdVQyUUHebsanYuwk4gH · ITEM ART AUDIT sonnet session_011xDdVSCHRnD3ox6Afg4tHa · B-answers art sonnet session_011xDdVP5yaxTpEx8BoJ4t2i (cắm hoa sample, 3 D50 figures, 'Sáng hôm sau' banner). Running total 7 (+ schedules3-r3 reviewer).
@@ -119,6 +120,7 @@ Base main at start: 900ace7fb.
 | D-list rest (D3, D9, D11–D14, D19, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
+PASS review/art-complete-r2 d5ca28a8a8f803ed4f4302c3b4bfb34a83853bb0 (orphan #29: A12 eunuch picker + grown kids; descends from origin/main 0ee35a63; code delta jartc.js +15 lines only; 3780 picks 0 empty; 1152 CDN files 200; no rosy layer; follow-ups in reports/review-art-complete-r2.md)
 PASS review/item512-art-r1 f9d1095615598d34d697fd569deb6c20ae0f571f (item512 art: 22 items needed no new art (IT-key mapping), 8 marks redrawn → img/mark512/, pets 88/88 OK; parent chain contains origin/main 18fb8252; only PROGRESS + 2 contact sheets, no game code; report reports/review-item512-art-r1.md)
 PASS review/perf-r1 d2221602f32c24270fe5d50b36ac78be3775edf6 (D15 download-size + perf; descends from origin/main 399483e3; reviewer fixed first-hour list missing the cung nữ life + SW iframe mismatch; HOST mode + SW + cold profile measured; report reports/review-perf-r1.md; K16 (index.html fetched 3×) still a kit-keeper request)
 PASS review/memories-r1 99c06957882f5a74b9cd5e2ba59d7c55439a9927 (D26 Kỷ niệm + hook ledger; ancestor origin/main bad941b4; jmem.js last; BAL.mem/BAL.hook in jbal2; memories.js 31/31 at 6 viewports; report reports/review-memories-r1.md)
