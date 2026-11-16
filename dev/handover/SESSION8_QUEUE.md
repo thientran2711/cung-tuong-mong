@@ -82,7 +82,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C22 | boot-flash-r1 PASS 20f4d7c9e → merge-train-1 | MERGING |
 | C23 [→ FOREMAN B] | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
 | C24 [→ FOREMAN B] | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
-| C25 | review/press-fx @ bf4f654e3 | REVIEWING (press-fx-r1, URGENT + close-button fix) |
+| C25 | review/press-fx → r1 PASS 2afdafc39 (+ close ✕ never covered) | LIVE |
 | C26 [→ FOREMAN B] | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow GREEN for +, red for −, pulse/scale) | QUEUED-NEXT |
 | C27 [→ FOREMAN B] | review/buoi-transition (owner s8: page-flip on buổi change looks odd → ink-wash time-of-day transition; needs A2 fxkit) | QUEUED-NEXT |
 | D50 | consorts without full-body figure art show a placeholder frame in the dialog person column (seen 755x1000, mood-dialog worker) → art-complete follow-up | QUEUED |
