@@ -265,3 +265,4 @@ Self-wake: s15 trigger trig_01QtP4CohaEq6uN3d5auPm7Q is DELETED at handover → 
 - (13:08Z s16) Owner: emotion actions + extreme-mood consequences for player AND all NPCs → FOREMAN_B inbox (QB3 overwritten).
 - (13:12Z s16) Owner rejected fp v6: BD redo hair Đáp ứng + Phi + Quý phi (no bun), keep Tần; NC v6 too tall → back toward v5. New ART worker fp7.
 - (13:11Z s16) merge-train-6 SMOKE PASS live e9c6021d → archived.
+- (13:20Z s16) Owner: allowed repo .claude/settings.json (http.server + node dev/test) → added on handover branch; title system corrections (OD 13:20Z) → FOREMAN_C inbox; kit parts → rank-bright worker phase 2.
