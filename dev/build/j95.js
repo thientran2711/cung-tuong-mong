@@ -31,6 +31,8 @@ function j95gate(){return !!(typeof S!=="undefined"&&S&&!window.__j95off)}
 /* jmen (main, owner 11/15 "no dice for men in the hậu cung") decides where every man is each buổi and his reason (S.menW / S.menWhy) and makes
    the lovers' trysts; the record takes those in and never places men on its own while jmen runs */
 function j95men(){try{return typeof menRoad==="function"&&menRoad()}catch(e){return false}}
+/* the fixed men's schedule on any road (jmen menSched: the maid road too) */
+function j95ms(){try{return typeof menSchedRoad==="function"&&menSchedRoad()}catch(e){return false}}
 function j95err(w,e){try{if(J95.errs.length<20)J95.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
 function j95dice(p){return Math.random()*100<p}
 function j95pw(L){/* [[x,w],...] → x */const T=L.reduce((s,x)=>s+Math.max(0,x[1]),0);if(!(T>0))return L.length?L[0][0]:null;let r=Math.random()*T;for(const x of L){r-=Math.max(0,x[1]);if(r<=0)return x[0]}return L[L.length-1][0]}
@@ -111,9 +113,9 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
  try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
  if(S.court)for(const c in S.court){const o=S.court[c];if(o&&o.name)add("c:"+c,o.name,o.n||c,"court",{tq:"dtd",ksp:"ksp",ped:"ksp",ty:"tyv"}[c]||"ksp")}
  const present=id=>(R&&R.P&&R.P[id])||j95z().sec.some(x=>x.b===id&&x.key===j95key());
- const jm=j95men();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
+ const jm=j95men()||j95ms();for(const m of S.men||[]){if(!m.alive)continue;const h=jm?null:m.rw==="thái y"?"tyv":m.rw==="thị vệ"?"thu":null;if(h||present(m.id))add(m.id,m.name,m.role,"man",h||((S.menW||{})[m.id])||null,m)}
  /* officials (j55) inside for the morning audience / a festival banquet this buổi (jmen S.minW) */
- if(j95men())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
+ if(j95men()||j95ms())try{const H=(typeof trS==="function"&&trS().H)||{};for(const c in (S.minW||{})){const h=H[c];if(h)add("q:"+c,h.name,(typeof TDOFF!=="undefined"&&TDOFF[c])||"Quan","min",S.minW[c],h)}}catch(e){}
  try{for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const hk=!mo?(S.out?(qOn()?"kn":"tn"):"home"):mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn");const kp=PXT&&typeof plxKidPlace==="function"?plxKidPlace(k):null;add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k),k.name,k.sex==="m"?"Hoàng tử":"Công chúa","kid",kp||hk,k)}}catch(e){}
  if(PXT){add("c:tgk","Quản sự Tân Giả khố","Quản sự Tân Giả khố","fix","tgk");let tt=false;try{tt=plxKids("ttp").length>0}catch(e){}add("c:ttp","Thầy dạy Thượng thư phòng","Thầy dạy Thượng thư phòng","fix",tt?"ttp":J95OUT_)}
  return L}
@@ -478,7 +480,7 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
      if(cm&&k===cm.y.k){const a=cm.y.r==="tryst"?"tryst":cm.y.r==="letter"?"letter":"here";for(let i=0;i<4;i++)R.P[id][i]=[k,a,cm.id,cm.y.r==="tryst"?`tư tình với ${mn?mn.name:"một nam nhân"}`:cm.y.r==="letter"?"lén gửi thư ra ngoài cung":`${mn?mn.name:"một nam nhân"} nán lại cung nàng`];continue}
      const why=k==="home"?"được mời / sang thăm cung ngươi":k===palaceOf(v)?"không được vào chỗ định đến, quay về":"đổi chỗ theo lệ";for(let i=0;i<4;i++)R.P[id][i]=[k,k==="home"?"visit":"back",k==="home"?"me":null,why]}}
    for(const m of S.men||[]){if(!m.alive)continue;const k=(S.menW||{})[m.id];if(k){R.who[m.id]=[m.name,m.role];const y=MY[m.id]||{};const ae=j95menAct(m,k,y);R.P[m.id]=[0,1,2,3].map(()=>ae.slice())}}
-   for(const m of S.men||[]){if(!m.alive||(S.menW||{})[m.id]||(!jm&&(m.rw==="thái y"||m.rw==="thị vệ")))continue;if(!j95z().sec.some(x=>x.b===m.id&&x.wk===wk()&&x.c===R.c))delete R.P[m.id]}
+   for(const m of S.men||[]){if(!m.alive||(S.menW||{})[m.id]||(!jm&&!j95ms()&&(m.rw==="thái y"||m.rw==="thị vệ")))continue;if(!j95z().sec.some(x=>x.b===m.id&&x.wk===wk()&&x.c===R.c))delete R.P[m.id]}
    for(const id in R.P)if(id.indexOf("q:")===0)delete R.P[id];/* officials: re-read from this buổi's S.minW by j95sync */
    delete R.__w0;j95secApply(R);j95sync(true,true)}catch(e){j95err("wrap",e)}return r};
  const sp0=spend;spend=function(){const r=sp0.apply(this,arguments);try{if(j95on()&&S.roster)j95sync()}catch(e){j95err("spend",e)}return r};
@@ -620,4 +622,8 @@ function j95seed(){if(!S.j95seed)S.j95seed=1+Math.floor(Math.random()*2147483646
 function j95cal(tag,f){return function(){if(J95.cal===false||!S)return f.apply(this,arguments);const r0=Math.random;Math.random=j95rng(j95hash(j95seed()+"|"+j95key()+"|"+tag(...arguments)));try{return f.apply(this,arguments)}finally{Math.random=r0}}}
 J95.cal=true;
 j95week=j95cal(()=>"wk"+wk(),j95week);j95plan=j95cal(()=>"plan",j95plan);
+/* the morning court is not a habit but a duty (owner 16/11 13:40Z, mandatory times): the first BAL.led.court khắc of buổi sáng, Hoàng thượng
+   holds court at Cần Chính điện; his own plan (and a surprise) only shapes the khắc after it */
+(function(){const e0=j95planEmp;j95planEmp=function(c){const P=e0.apply(this,arguments);try{if(c===0&&J95.court!==false&&Array.isArray(P)){const n=Math.min(4,(BAL.led&&BAL.led.court)||0);for(let i=0;i<n;i++)P[i]=["thu","court",null,"lệ thượng triều buổi sáng"]}}catch(e){j95err("court",e)}return P}})();
+J95.court=true;
 j95planRival=j95cal(v=>"v"+(v&&v.id),j95planRival);j95planOther=j95cal(p=>"o"+(p&&p.id),j95planOther);j95planEmp=j95cal(()=>"emp",j95planEmp);j95planTH=j95cal(()=>"th",j95planTH);
