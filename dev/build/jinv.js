@@ -381,7 +381,7 @@ function kitShopTile(o,x,i){const key=o.key||"shop",u=x.unit||"bạc";const g=KI
  const why=kitShopWhyQ(o,x,q),tot=q*x.price,verb=x.sell?"Bán":"Mua";const lab=why?kitShopWhyShort(why):(q>1?`${verb} · ${tot} ${u}`:verb);
  const A=`data-kshop="${key}" data-kshi="${i}"`;
  return `<div class="kshc${mx<1?" kshno":""}" ${A}>`+
-  `<button type="button" class="kshpic" ${A} data-kshdet="1" aria-label="Xem ${x.name}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,qty:q,size:"slot",tip:`${x.name} · chạm để xem`})}</button>`+
+  `<button type="button" class="kshpic" ${A} data-kshdet="1" aria-label="Xem ${x.name}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,qty:q,size:"slot",mark:x.mark,tip:`${x.name} · chạm để xem`})}</button>`+
   `<span class="kshn" style="color:${g.c}" title="${x.name}">${x.name}</span><span class="kshe"${x.eff?` title="${x.eff}"`:""}>${x.eff||""}</span>`+
   `<span class="kshp">${x.sell?"bán ":""}${x.price} ${u}${x.sell&&x.have?` · có ${x.have()}`:""}</span>`+
   `<span class="kshst"><button type="button" class="kbtn alt kshqb" ${A} data-kshq="-" aria-label="Bớt một"${q<=1?" disabled":""}>−</button><b class="kshqn" aria-live="polite">${q}</b>`+

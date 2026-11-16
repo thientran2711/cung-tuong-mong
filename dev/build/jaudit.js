@@ -143,8 +143,11 @@ function kitRelPaint(root){if(!root||!root.querySelectorAll)return;const W=docum
   while((m=KREL_RE.exec(v))){const t=m[0];const me=/^(Ta|ta)\b|^tin cậy/.test(t)||/^(Ta|ta) /.test(t);if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.className="krel krel-"+(me?"me":"them");/* the subject stays inside the label (owner 15:30Z: a lone "Nàng " node became "Nàng ta oán ta") */sp.textContent=t.replace(/^([Nn])àng ta (?=(?:bớt )?oán|ghen)/,"$1àng ");sp.setAttribute("data-vp-skip","");f.appendChild(sp);last=m.index+t.length}
   if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
 (function(){const st=document.createElement("style");st.id="krel-css";st.textContent=".krel-them{color:var(--rel-them,#7a4fa0)!important;font-weight:600}.krel-me{color:var(--rel-me,#2f6f9f)!important;font-weight:600}";document.head.appendChild(st);
- let q=false;const run=()=>{q=false;try{kitRelPaint(document.body)}catch(e){}};const mo=new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(run)}});
- const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
+ /* review/newgame-ui (perf): only the CHANGED parts are walked (was the whole body after every DOM change: ~25 ms per change on a tablet,
+    a face pick or a picture swap paid it again) */
+ let q=false;const R=new Set();const run=()=>{q=false;const L=[...R].filter(n=>n&&n.isConnected);R.clear();try{L.filter(n=>!L.some(o=>o!==n&&o.contains(n))).forEach(n=>kitRelPaint(n))}catch(e){}};
+ const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData"){const p=m.target.parentElement;if(p)R.add(p)}else for(const n of m.addedNodes){const e=n.nodeType===1?n:n.parentElement;if(e&&!(e.classList&&e.classList.contains("krel")))R.add(e)}}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}R.add(document.body);run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
 
 /* 12. kitThey(p): the third person for another person (owner 11/15): a woman "nàng ta", a man "y" ("hắn" only when hostile),
    Hoàng thượng "bệ hạ", Thái hậu "Thái hậu", unknown "vị ấy". "ta" is always the player. On-screen text that still says a bare
