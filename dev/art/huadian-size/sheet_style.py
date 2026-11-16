@@ -10,7 +10,7 @@ L={}
 for l in open(logf):
     x=json.loads(l); L[x['name']]=x
 styles=sorted({re.match(r'(?:por|fig)-(.*)-t\d-a\d+',n).group(1) for n in L if flt in n})
-W,H=150,130
+W,H=130,120
 def tile(n,Z):
     x=L.get(n,{}); changed=x.get('status')=='shrunk'
     if kind!='por' and not x.get('crop'): return Image.new('RGB',(W,H),(225,225,225)),changed

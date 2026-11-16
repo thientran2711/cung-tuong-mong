@@ -8,7 +8,7 @@ D=os.path.dirname(os.path.abspath(__file__))
 REF=json.load(open(D+'/ref.json')); BOX=json.load(open(D+'/a18_boxes.json'))
 def gray(p): return cv2.cvtColor(comp(Image.open(p)),cv2.COLOR_RGB2GRAY)
 def locate(a18path,tpath,name18):
-    pid=re.match(r'por-((?:consort|maid)-[cm]\d\d)',name18).group(1); cx0,ey0,fw0=REF[pid]; b=BOX[name18]
+    pid=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)',name18).group(1); cx0,ey0,fw0=REF[pid]; b=BOX[name18]
     g18=gray(a18path); gt=gray(tpath); m=int(0.05*fw0)
     x0,y0,x1,y1=int(b[0])-m,int(b[1])-m,int(b[2])+m,int(b[3])+m
     P=g18[y0:y1,x0:x1]
@@ -33,7 +33,7 @@ if __name__=='__main__':
 
 def locate_face(a18path,tpath,name18):
     """match the a18 forehead/brow structure (mark box blanked) in the aged image -> (score,k,box_mapped)"""
-    pid=re.match(r'por-((?:consort|maid)-[cm]\d\d)',name18).group(1); cx0,ey0,fw0=REF[pid]; b=BOX[name18]
+    pid=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)',name18).group(1); cx0,ey0,fw0=REF[pid]; b=BOX[name18]
     g18=gray(a18path); gt=gray(tpath)
     X0,Y0,X1,Y1=int(cx0-0.55*fw0),int(ey0-0.80*fw0),int(cx0+0.55*fw0),int(ey0+0.10*fw0)
     P=g18[Y0:Y1,X0:X1].copy()

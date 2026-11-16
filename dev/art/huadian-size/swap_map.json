@@ -1,0 +1,99 @@
+{
+"consort-c11": {
+"donor": "consort-c03",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"consort-c17": {
+"donor": "consort-c19",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m04": {
+"donor": "maid-m02",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m11": {
+"donor": "maid-m31",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m47": {
+"donor": "maid-m16",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m35": {
+"donor": "maid-m05",
+"tiers": [
+1
+]
+},
+"maid-m18": {
+"donor": "maid-m32",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"maid-m20": {
+"donor": "maid-m34",
+"tiers": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
+"player-look4": {
+"donor": "consort-c03",
+"tiers": [
+1,
+3
+]
+}
+}

@@ -9,9 +9,10 @@ from shrink2 import analyze,apply
 from locate import locate
 D=os.path.dirname(os.path.abspath(__file__))
 REF=json.load(open(D+'/ref.json')); BOX=json.load(open(D+'/a18_boxes.json'))
+MAN_AGED=json.load(open(D+'/manual_aged.json')) if os.path.exists(D+'/manual_aged.json') else {}
 TARGET=0.085; KEEP=0.088
 def window(name,cx,ey,fw):
-    m=re.match(r'por-((?:consort|maid)-[cm]\d\d)-t(\d)-a(\d+)',name); pid,t,a=m.groups()
+    m=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)-t(\d)-a(\d+)',name); pid,t,a=m.groups()
     cx0,ey0,fw0=REF[pid]; b=BOX[f'por-{pid}-t{t}-a18']
     r=[(b[0]-cx0)/fw0,(b[1]-ey0)/fw0,(b[2]-cx0)/fw0,(b[3]-ey0)/fw0]
     return (cx+(r[0]-0.04)*fw,ey+(r[1]-0.04)*fw,cx+(r[2]+0.04)*fw,ey+(r[3]+0.015)*fw),pid
@@ -22,10 +23,12 @@ def faceparams(path,pid,age):
     if abs(fw-fw0)>0.08*fw0 or abs(cx-cx0)>0.06*fw0 or abs(ey-ey0)>0.06*fw0: return cx0,ey0,fw0
     return cx,ey,fw
 def process(path,name,srcdir=None):
-    pid=re.match(r'por-((?:consort|maid)-[cm]\d\d)',name).group(1); age=int(name.rsplit('-a',1)[1])
+    pid=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)',name).group(1); age=int(name.rsplit('-a',1)[1])
     cx,ey,fw=REF[pid]; info0={}
     if age==18:
         win,_=window(name,cx,ey,fw); inner=None
+    elif name in MAN_AGED:
+        bx=MAN_AGED[name]; win=(bx[0]-0.12*fw,bx[1]-0.12*fw,bx[2]+0.12*fw,bx[3]+0.10*fw); inner=bx; info0=dict(match=1.0,manual=1)
     else:
         n18=re.sub(r'-a\d+$','-a18',name); sc,k,bx=locate(f'{srcdir}/{n18}.webp',path,n18); info0=dict(match=round(sc,3),mk=round(k,3))
         if sc>=0.50:
@@ -42,7 +45,7 @@ def process(path,name,srcdir=None):
     info=dict(name=name,cx=cx,ey=ey,fw=fw,win=[round(float(v),1) for v in win]); info.update(info0)
     if an is None: info['status']='nomark'; return info,None,None
     info['ratio']=round(an['width']/fw,4); info['leak']=an['leak']; info['winx']=[int(v) for v in an['win']]; info['inner']=[round(float(v),1) for v in inner]; info['bbox']=[int(an['bbox'][0]),int(an['bbox'][1])]
-    if age!=18 and info0.get('match',0)>=0.5:
+    if age!=18 and info0.get('match',0)>=0.5 and not info0.get('manual'):
         bw0=bx[2]-bx[0]; cxb=(bx[0]+bx[2])/2; cyb=(bx[1]+bx[3])/2
         mb=an['bbox']; cm=(mb[0]+mb[1])/2
         if abs(cm-cxb)>0.10*fw or an['width']<0.30*bw0 or an['width']>1.5*bw0+0.05*fw: info['status']='suspect'; return info,None,an

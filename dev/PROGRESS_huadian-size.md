@@ -1,8 +1,17 @@
-# PROGRESS huadian-size (resume notes)
-Owner size: 8.5% of face width, all tiers, consorts incl. promoted maids only (por/fig-{consort-c01..32,maid-m01..52}-t1..t8-a18/26/36/51 = 2688 por + 2688 fig; also img/tn (a18 t1-4, 336 files) and img/hd/fig (340)).
-Status 16/11: NOT batched, nothing uploaded to CDN. Merged origin/main (tree = main + dev/art/huadian-size).
-Done: all 5376 por/fig downloaded locally (work/, not committed); detector v2 `det2.py` (brow/hair-safe, anchored on ref.json cx/ey/fw);
-run18.py -> det18.json on 672 a18 por: 13 None, roughly 10-15% visibly wrong boxes (faint/dark-ring marks pick hairline: e.g. c05-t2, c01-t1, c01-t7, c05 t1/t2, c06-t4, c07-t1 NONE) when eyeballed on sheets18.py contact sheets.
-Old shrink.py with auto boxes EATS brows (tested c05 t5 a18/a51) - do not run batch.py (draft, uses old detect) unmodified.
-Plan: (1) fix a18 por boxes: det2 + manual_boxes.json for the wrong ones (eyeball sheets, ~100); (2) for other ages/fig, restrict det2 to the a18 box (relative to cx,ey,fw) expanded 0.04fw; fig needs face scale ~0.52 of por (haar on 1.92x upscale);
-(3) change shrink.py to take an explicit mask (not rectangle dE) so dark mark parts are scaled, brow pixels never; (4) target 0.085, leave marks <=0.088; (5) review sheets per tier x age; (6) cdn_sync of changed files.
+# PROGRESS huadian-size (worker #2, 16/11)
+Owner size: 8.5% of face width (shrink to 0.085, marks <= 0.088 untouched). Consorts + promoted maids only (por/fig-{consort-c01..32,maid-m01..52}-t1..t8-a18/26/36/51) + player-look4 (only look with a huadian, t1/t3).
+Pipeline (all scripts in dev/art/huadian-size/, images NOT committed, work dir dev worktree ./work ignored):
+1. a18_boxes.json = det2 + HAND-FIXED boxes for all 672 a18 por (137 corrected from contact sheets; manual_disp.txt = the hand reads, mk_manual.py converts).
+2. runpor.py: window = a18 box mapped to the aged face; aged ages locate the mark by template match (locate.py) of the a18 forehead; shrink2.py analyze() = exact mark mask (dE vs poly skin fit, dark parts that leave the window = brow/hair are protected) -> apply() inpaints skin under the mark and re-pastes the mark scaled to 0.085.
+3. runpatch.py fig/hd/tn: the fixed por forehead delta is carried to fig (template match, scale ~0.6), hd (x2 fig) and tn thumbnails; everything outside the changed forehead stays bit-identical (tn = patch on the live thumb, not a re-render).
+4. runswap.py + swap_map.json: non-allowed motifs (see below) replaced by a donor flower of the same colour family, same tier/age (donor mark pasted at 0.085).
+Scripts: det2/shrink2/locate/runpor/runswap/runfig/runpatch/runtn/dbg/sheet_style/sheets_a18/sheet_list.
+Result por (2688 files): shrunk 2153 (of which 205 motif swaps, see below), kept (<=0.088) 513, skipped 22 (21 "suspect" + 1 no mark; 15 of them have a mark that det2 locates only partly: c07-t1-a51, c08-t8-a51, c14-t8-a26, c20-t5-a51, m25-t3-a26/36, m28-t3-a36, m28-t8-a26/36/51, m38-t3-a36, m38-t5-a26/36, m51-t3-a26/51 -> left untouched on purpose, redo by hand; 7 more are c02-t7-a26/36/51 (faint wings + gem), c20-t3-a51 (mark invisible)).
+Fig/hd/tn follow por 1:1 (fig 2204 changed, tn 542, hd see log).
+## MOTIF FIX (owner 16/11: only flowers/leaves/butterfly/phoenix)
+Reviewed per-tier/age sheets of all 84 styles (t3,t5 + the swap results). Non-allowed motifs found (8 styles) and replaced by a donor flower of the same colour:
+c11 (3 red berries, t1-t7) <- c03; c17 (heart/fruit-like red, t1-t7) <- c19; m04 (3 vertical beads t1-t7) <- m02; m11 (dot row t1-t7) <- m31; m47 (4 red berries/cherries t1-t7) <- m16; m35 t1 (grape-like cluster) <- m05; m18 (triangle t1-t7) <- m32; m20 (eyes/three drops t1-t7) <- m34; player-look4 t1/t3 (4 berry dots) <- c03. t8 (gold phoenix) kept for all. Before: 9 styles x tiers = 205 por files; after: 0 (all 205 + fig twins swapped). Removed hd files changed by the motif swap are listed in work/ (hd list below).
+Other styles that may still read as object/fruit (owner decides, not changed): m26 (leaf-shaped red drop), m40 (lozenge), m33 (bud), m22/m24 (ring) - flat dots/ring/drop marks are classic.
+HD files changed (coordinate with session 8 face-sharp hd batch): 612 img/hd/fig-<style>-t<T>-a<A>.webp (list = names in dev/art/huadian-size/log_por.jsonl with status shrunk that have an img/hd twin; hd/ twin of fig = x2 scale). Player-look HD twins: none of look4 has hd/t1/t3 beyond what was swapped.
+CDN uploaded (cdn_sync, 16/11): 5562 files = por+fig 4408 incl. 205+205 motif swaps, tn 542, hd 612 (batch1 = motif swaps first, then rest). Nothing else touched; no kit part or frame touched.
+Resume: runpor.py/runpatch.py need work/ downloads (cdn); log_por.jsonl (status per por) is WINLOG for runpatch. Remaining by hand: the 22 skipped por (+ their fig/hd/tn) listed above.

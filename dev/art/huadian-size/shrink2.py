@@ -113,3 +113,42 @@ def apply(rgba,an,target,seed=1,s_override=None):
     out=clean*(1-aw[...,None])+Pw
     A[Y0:Y1,X0:X1,:3]=np.clip(out,0,255)
     return Image.fromarray(A.astype(np.uint8),'RGBA'),s
+
+def layer(an):
+    """mark layer of an analysis: (alpha, premultiplied colour P, bbox of strong mark, centroid) in region coords"""
+    reg,dE,good,mark,inbox=an['reg'],an['dE'],an['strong'],an['mark'],an['inbox']; h,w=reg.shape[:2]
+    near=cv2.dilate(good.astype(np.uint8),np.ones((9,9),np.uint8)).astype(bool)
+    rm=(cv2.dilate(good.astype(np.uint8),np.ones((5,5),np.uint8)).astype(bool)|(mark&near))&inbox&~an['prot']
+    rmd=cv2.dilate(rm.astype(np.uint8),np.ones((3,3),np.uint8))
+    bg=cv2.inpaint(np.clip(reg,0,255).astype(np.uint8),rmd,3,cv2.INPAINT_TELEA).astype(np.float32)
+    a=np.clip((dE-4)/20.0,0,1)*rm
+    P=(reg-bg*(1-a[...,None]))*rm[...,None]
+    ys,xs=np.nonzero(good); return a,P,(xs.min(),ys.min(),xs.max()+1,ys.max()+1),rm
+def swap(rgba,an,donor_an,target,seed=1):
+    """replace the recipient mark by the donor mark (scaled to width<=target*fw, centred on the recipient mark centre)"""
+    A=np.asarray(rgba.convert('RGBA')).astype(np.float32); X0,Y0,X1,Y1=an['org']
+    reg,inbox,good=an['reg'],an['inbox'],an['strong']; h,w=reg.shape[:2]
+    near=cv2.dilate(good.astype(np.uint8),np.ones((9,9),np.uint8)).astype(bool)
+    rm=(cv2.dilate(good.astype(np.uint8),np.ones((5,5),np.uint8)).astype(bool)|(an['mark']&near))&inbox&~an['prot']
+    rmd=cv2.dilate(rm.astype(np.uint8),np.ones((3,3),np.uint8))
+    bg=cv2.inpaint(np.clip(reg,0,255).astype(np.uint8),rmd,3,cv2.INPAINT_TELEA).astype(np.float32)
+    bg=cv2.GaussianBlur(bg,(0,0),1.2)*rmd[...,None]+bg*(1-rmd[...,None])
+    rng=np.random.default_rng(seed); nz=rng.normal(0,1,reg.shape).astype(np.float32)*an['noise']; nz=cv2.GaussianBlur(nz,(3,3),0.7)
+    bg=bg+nz*rmd[...,None]
+    fe=(np.clip(cv2.GaussianBlur(rmd.astype(np.float32),(5,5),1.0),0,1)*inbox)[...,None]; clean=reg*(1-fe)+bg*fe
+    da,dP,db,_=layer(donor_an)
+    dx0,dy0,dx1,dy1=db; dwid=dx1-dx0; s=min(1.0,target*an['fw']/dwid) if dwid>0 else 1.0
+    # donor centre -> recipient centre
+    ys,xs=np.nonzero(good); rcx=(xs.min()+xs.max()+1)/2; rcy=(ys.min()+ys.max()+1)/2
+    dcx=(dx0+dx1)/2; dcy=(dy0+dy1)/2
+    U=4; M=np.float32([[s,0,rcx-s*dcx],[0,s,rcy-s*dcy]]); Mu=M.copy(); Mu[:,2]*=U
+    dh,dw=da.shape; Wc,Hc=w,h
+    def warp(z):
+        zb=cv2.resize(z,(dw*U,dh*U),interpolation=cv2.INTER_CUBIC)
+        Mb=np.float32([[s,0,(rcx-s*dcx)*U],[0,s,(rcy-s*dcy)*U]])
+        o=cv2.warpAffine(zb,Mb,(Wc*U,Hc*U),flags=cv2.INTER_AREA)
+        return cv2.resize(o,(Wc,Hc),interpolation=cv2.INTER_AREA)
+    aw=np.clip(warp(da),0,1)*inbox; Pw=warp(dP)*inbox[...,None]
+    out=clean*(1-aw[...,None])+Pw
+    A[Y0:Y1,X0:X1,:3]=np.clip(out,0,255)
+    return Image.fromarray(A.astype(np.uint8),'RGBA'),s
