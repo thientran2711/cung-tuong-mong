@@ -29,7 +29,7 @@ START_CTX ~6 % of 1M window (get_session read 0; own estimate). Rollover at ~31 
   | measure | origin/main | branch |
   |---|---|---|
   | per-situation sim, 59 situations × 30 tuần (dev/test/voice-pool-sim.js): lines identical to one said in the same situation within 5 tuần | 96.7 % (45 situations; toilette lines were one fixed line per look) | 0 % |
-  | bot play, quotes repeated in the same dialog within the window (dev/test/voice-rep.js, sensible bot; noisy, sample depends on the life) | 22.7 % (40 steps, 36 tuần) · 35.7 % (60 steps, 8 tuần) | 13.3 % → 12.9 % (before the rebuild fix) · final run in the SẴN SÀNG report |
+  | bot play, quotes repeated in the same dialog within the window (dev/test/voice-rep.js, sensible bot; noisy, sample depends on the life) | 22.7 % (40 steps, 36 tuần) · 35.7 % (60 steps, 8 tuần) | 13.3 % (40 steps) · final build 6.7 % (60 steps, 11 tuần, 15 quotes) |
 - Old save: main save → branch deser OK, S.vl created lazily and survives ser/deser; no page errors (dev/test/voice-core.js PASS).
 - Shots (scratch, uploaded to CDN review folder img/_review/palace-voice/, 32 webp: before|after × 755|1180 × th-praise, hh-scold, emp-like, rival-jealous, cycle, shop, minister, th-ch1). Looked at each: text fits the kit event frame at both sizes. ("Undefined"/empty picture in shop/minister/ch1/cycle shots is the shot harness pushing a raw PEND object; same on main.) Verdict giver wipes the folder.
 
