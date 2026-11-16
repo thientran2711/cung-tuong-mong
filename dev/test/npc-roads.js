@@ -21,8 +21,9 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
     try{const q=q72();for(const c of q.ch.concat(q.a))if(/^nr_/.test(c.tid)){const id=c.ri;(offers[id]=offers[id]||new Set()).add(c.tid+':'+(c.p&&c.p.nn))}}catch(e){}
     for(const v of rivals){if(!v.nr)continue;const N=v.nr,s=seen[v.id]||(seen[v.id]={o:N.o,r:N.r,l:0,dead:0,x:0});
-     if(N.l.length>s.l){const nl=N.l.slice(s.l);s.l=N.l.length;if(s.dead)bad.push([v.id,'played after death',nl]);if(s.x)bad.push([v.id,'played after close',nl])}
-     if(!v.alive||v.out)s.dead=1;if(N.x)s.x=1}}
+     if(N.l.length>s.l){const nl=N.l.slice(s.l);s.l=N.l.length;if(s.dead)bad.push([v.id,'played after death',nl]);if(s.x)bad.push([v.id,'played after close',nl]);if(s.out&&v.out)bad.push([v.id,'played in lãnh cung',nl])}
+     /* fix: death closes her road, lãnh cung pauses it (a pardoned consort goes on) */
+     if(!v.alive)s.dead=1;s.out=v.alive&&v.out?1:0;if(N.x)s.x=1}}
    const R=[];for(const v of rivals)if(v.nr)R.push({id:v.id,name:v.name,o:v.nr.o,r:v.nr.r,l:v.nr.l,x:v.nr.x,alive:v.alive&&!v.out,h:v.nr.h,hs:v.nr.hs,c:v.nr.c,
      valid:!!ARC67[v.nr.r]&&ARC67[v.nr.r].o===v.nr.o,chs:[4,5,6,7,8,9,10,11].filter(n=>nrCh(v.nr.r,n)),off:offers[v.id]?[...offers[v.id]]:[]});
    const logs=S.logs.filter(l=>/Tin trong cung/.test(l)).length;
@@ -37,7 +38,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
   chk(`life ${L+1}: one father = one record (tt/dtq not shared with the player)`,!R.R.some(x=>['tt','dtq'].includes(x.o)&&x.o===R.me),R.R.map(x=>x.o));
   chk(`life ${L+1}: chapters played in order, each a registered chapter`,R.R.every(x=>x.l.every((z,i)=>x.chs.includes(z[0])&&(i===0||z[0]>x.l[i-1][0]))),R.R.map(x=>[x.r,x.l]));
   chk(`life ${L+1}: a road closes after its last chapter`,R.R.every(x=>!x.x||!x.alive||x.l.length&&x.l[x.l.length-1][0]===x.chs[x.chs.length-1]),R.R.filter(x=>x.x).map(x=>[x.r,x.l,x.chs]));
-  chk(`life ${L+1}: no road plays after death/close`,!R.bad.length,R.bad);
+  chk(`life ${L+1}: no road plays after death/close or in lãnh cung`,!R.bad.length,R.bad);
   chk(`life ${L+1}: at most one help hồi per NPC`,R.R.every(x=>x.off.length<=1),R.R.filter(x=>x.off.length>1));
   chk(`life ${L+1}: long life walks some NPC road to its end`,MON<200||R.R.some(x=>x.x&&x.alive),R.R.map(x=>[x.r,x.l.length]))}
  await open();
