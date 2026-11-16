@@ -1,3 +1,4 @@
+SAMPLE READY (Thai hau, PRIORITY 1, per Foreman C 16:50Z) — dev/handover/reports/fig-proportion/thaihau-sample.jpg  (old | new | 2 consorts, same scale; Thai hau a51 width/height .811 -> .34 = consorts .32-.36, heads 4.84 -> 6.52 vs consort 6.62)
 SAMPLE READY — dev/handover/reports/fig-proportion/sample-sheet.jpg  (113 KB, before | after, 3 worst incl. Thái hậu)
 
 # review-fig-proportion (art worker, Foreman C) — STEP 1+2 done, WAITING for owner verdict
@@ -25,3 +26,7 @@ Honest notes: Thái hậu robe is now slimmer (not spreading) — that is the fi
 
 ## After owner OK (not started): redraw the ~100 listed files (about 4,000 credits), keep file names/manifest keys, upload with cdn_sync.py, re-run the audit, before/after table.
 WAITING.
+
+## Scope update (Foreman C 16:50Z, OD 16/11 16:45Z (4))
+Priority 1 = redraw ALL Thai hau pictures (fig-thaihau-1/2/3, h1/h2/h3 x a18/a26/a36/a51 + any scene/event pictures showing her) with less bulky robes at consort proportion. Code scale: Thai hau is not in KIT_FIG.men so fac=1 like consorts, no code-side enlargement found. Then the rest of the list. Head:height numbers for every figure: audit-list.txt + dev/measure/fig_proportion.py output (to be attached in final report).
+WAITING for the owner's verdict on the Thai hau sample.
