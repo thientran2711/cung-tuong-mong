@@ -1,4 +1,4 @@
-# place-glyphs — STATE: PAUSED until the owner's morning (owner order via main s10, 11/16 ~06:17Z). NOT ready for review.
+# place-glyphs — SẴN SÀNG KIỂM 4ddddde3 (review/place-glyphs, includes origin/main ba07c65e). Glyphs owner-approved; Nội vụ phủ scene NOT wired (owner approves art first).
 Branch review/place-glyphs (commit pushed; code only). Session session_01UV1SzmEsuu42GCFecC9HGf. No new generation after the pause order.
 
 ## Audit: places without a glyph (before)
@@ -23,3 +23,12 @@ Tests, Playwright shots of Dư đồ (1180x820@2, 755x1000@2, 844x390), looking 
 Glyphs 18 x 40 = 720; scene base 2 x 65 + 15 x 65 = 1105; stray estimate call 65. Total ~1890.
 ## Next (owner's morning)
 Owner reviews the sheet (samples). If approved: mass production/wiring goes to Foreman C per main s10.
+
+## Update (coordinator s11 order, after owner approved the 9 glyphs)
+- Merged origin/main ba07c65e, rebuilt with build_site.sh, committed index.html + sw.js. SHA 4ddddde3.
+- node dev/test/act-dedupe-vp.js at 1180x820, 755x1000, 844x390 (also run at @2 for shots): all ok, FAIL 0, no page errors, no clipping/h-scroll; map icons 19 (was 7), list icons 23.
+  Looked at @2 shots of map/list: new glyphs read at 14 px (Kính sự phòng, Dãy nhà cung nhân, Tân Giả khố, A ca sở, Đông cung, Thượng thư phòng, Trường Môn viện, consort palaces, Ngọc Thanh các). Dãy nhà cung nhân (cnh) is the busiest at 14 px but still recognisable.
+  Labels with no icon on the map are the unoccupied rival-slot names (Vĩnh Thọ, Dực Khôn, Trữ Tú, Hàm Phúc, Thái Cực điện, Vĩnh Hòa, Thừa Minh, Diên Huy): not places the player can enter (no data-go); unchanged.
+- Nội vụ phủ scene: 15 paid edits downloaded and looked at (all 16 incl. base on one sheet). All consistent (same room/camera, correct season + buổi, no people, no text). Nothing redone. Observation for the owner: the floor is fairly glossy/reflective (owner rule OD:L86 "no glossy floors") — her call. NOT wired.
+  Sheet (1560x1040, base + 15): CDN https://ctm-img.victoria-tntt.workers.dev/img/nvp-scene-contact-sheet.png ; also dev/handover/reports/place-glyphs-nvp-scene-sheet.png.
+  Full-size scene PNGs are only in the Magnific folder (ids above); not uploaded to the CDN as game files yet (waiting for approval).
