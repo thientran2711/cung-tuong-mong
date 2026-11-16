@@ -130,7 +130,8 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
    if(P&&!P.includes("st:tm96a")){const iS=P.indexOf("ms:sung"),pA=iS>=0?iS+1:P.indexOf("ms:nhap")+1;P.splice(Math.max(S.st.ch.i+1,pA),0,"st:tm96a");const fi=P.indexOf("fin");P.splice(fi>=0?fi+1:P.length-2,0,"st:tm96c")}}}
   if(S.tm96){S.tm96.h=Math.min(S.tm96.h,60);S.tm96.tok=0;S.kc.tm=1;try{k61Know(manById(S.tm96.mid),"thanh mai",true,3)}catch(e){}}}catch(e){console.error(e)}
  const chest=kcChest();
- kcWhere();Q=Q.filter(m=>m.nl);/* r2: every palace dialog the start queued (Nhập cung, a Kính sự phòng summons for tonight …) belongs to the palace road */
+ kcWhere();Q=Q.filter(m=>m.nl);S.nightWhy=null;/* r2-r2: the start's card-flip scene (jflip, KIT §67) waits in kmPush for its turn: no plan → it drops itself */
+ /* r2: every palace dialog the start queued (Nhập cung, a Kính sự phòng summons for tonight …) belongs to the palace road */
  const d=kcR("cha"),di=kcR("di");
  Q.push({t:"Khuê các",who:pMe(),h:`<p>Ngươi mười tám tuổi, con gái ${KCDAD[k][1]}. Chiếu tuyển tú ba năm một lần; kỳ tới vào mùa xuân năm thứ ba.</p>`+
   `<p>Từ nay đến đó còn hơn hai năm: học tài nghệ, giữ lòng cha mẹ, coi chừng ${di.t.toLowerCase()}, và giữ cho danh tiếng trong sạch. Nhà cũng có thể gả ngươi đi trước kỳ tuyển.</p>`+
@@ -289,7 +290,7 @@ function kcEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;let ev="";
  if(!S.dead&&isKc()&&S.kc.tt&&S.kc.tt.play&&!S.kc.tt.done&&!Q.some(m=>m.pp&&m.pp.e==="dien")){S.kc.tt.done=1;S.kc.tt.raw=5;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển")}
  if(!S.dead&&isKc()&&!S.kc.tt&&(S.year>KC.ty||S.year===KC.ty&&S.month>=KC.tm)){if(S.kc.soOk)kcTuyen();else if(!S.kc.so)kcSoTuyen()}
  if(!isKc()){render();if(Q.length&&$("modal").hidden)showModal();return}
- rollWx();if(kcCity(S.place))S.place="kc_khue";used=0;popIdx=null;popMsg="";kcW(()=>flip());kcW(()=>palFix());if(kcCoopOn())kcW(()=>placeWhere());/* co-op: the host sends the palace whereabouts of the new week */kcWhere();S.visit=kcVisit(S.place);kcFix();
+ rollWx();if(kcCity(S.place))S.place="kc_khue";used=0;popIdx=null;popMsg="";kcW(()=>{const q=quiet;quiet=true;try{flip()}finally{quiet=q}});/* r2-r2: the palace night runs silently at home (no jflip card-flip scene, no j93 flip note) */kcW(()=>palFix());if(kcCoopOn())kcW(()=>placeWhere());/* co-op: the host sends the palace whereabouts of the new week */kcWhere();S.visit=kcVisit(S.place);kcFix();
  try{curtain()}catch(e){}deal();render();if(Q.length&&$("modal").hidden)showModal()}
 function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.push([e,w])};const di=kcR("di"),mu=kcR("muoi"),cha=kcR("cha"),to=kcR("to"),hu=kcR("huynh");
  const mal=m=>m?({"Hiểm độc":3,"Tham vọng":2,"Kiêu ngạo":1.4,"Đa nghi":1,"Nhu mì":.4,"Hiền lành":.2}[m.tr]||1)*(1+(m.oan||0)/40)*(m.af<10?1.4:.7):0;
@@ -724,3 +725,10 @@ const KCO_H=[["cha hài lòng, thế lực nhà thêm chút ít","an toàn"],["c
 (function(){if(typeof k61St!=="function")return;const s0=k61St;k61St=function(e){if(kcIsFam(e))return 3;return s0.apply(this,arguments)}})();
 /* in the palace the home numbers (Gia thanh, Áp lực hôn sự, Hồi môn, Lời đồn) are history: never a delta on a palace result card */
 (function(){const r0=resultShow;resultShow=function(t,b){try{if(b&&S&&S.kc&&!isKc())for(const k of ["kgt","kap","khm","kld"])b[k]=S[k]||0}catch(e){}return r0.apply(this,arguments)}})();
+
+/* r2-r2: the goal strip / chapter detail (jgoal, KIT §72) at home shows the home chapter (tuyển tú), never the palace chapter of S.st */
+window.kitGoalAlt=function(){try{if(typeof S==="undefined"||!S||S.dead||!isKc())return null;const n=kcMonthsLeft();
+ return{kind:"v1",home:1,n:1,max:1,t:"Chờ kỳ tuyển tú",road:"Khuê các",g:"Qua Sơ tuyển, Phúc tuyển, Điện tuyển thì vào cung",next:`Kỳ tuyển tú còn ${n} tháng`,
+  todo:[{t:"Học một môn tài nghệ",why:"tuyển tú xét tài lẫn sắc; tài cao thì Điện tuyển dễ lọt mắt",tab:"art"},
+   {t:"Giữ lòng cha mẹ",why:"cha mẹ thương thì được gửi đi tuyển, hồi môn hậu",tab:"rv"},
+   {t:"Giữ danh tiếng trong sạch",why:"tiếng xấu ngoài phố thì Sơ tuyển đã bị gạt",tab:"go"}]}}catch(e){console.error("kitGoalAlt",e);return null}};
