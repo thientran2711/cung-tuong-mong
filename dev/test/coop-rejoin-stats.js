@@ -58,7 +58,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  ok(await until(A,()=>!!COOPW.tm.view(),null,20000)&&await until(B,()=>!!COOPW.tm.view(),null,20000),'both see the clock');
  const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);
  const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,date:[S.year,S.month,S.tuan,S.turn].join('/'),pend:!!COOPW.pend,ready:!!(COOPW.nReady&&COOPW.nReady())}));
- const ST=o=>o.p.evaluate(()=>{const f=COOPW.friend&&COOPW.friend();return {u:used,tai:S.tai,sac:S.sac,danh:S.danh,k:COOPW.tm.myKey(),w:COOP.state.week,ftai:f?f.tai:null,fsac:f?f.sac:null,fhome:!!(COOPW.friendHome&&COOPW.base&&COOPW.base.P&&COOPW.friendHome(COOPW.base.P[COOPW.seat==='a'?'b':'a']))}});
+ const ST=o=>o.p.evaluate(()=>{const f=COOPW.friend&&COOPW.friend();return {u:used,tai:S.tai,sac:S.sac,danh:S.danh,k:COOPW.tm.myKey(),w:COOP.state.week,ftai:f?f.tai:null,fsac:f?f.sac:null,fhome:!!(COOPW.friendHome&&COOPW.base&&COOPW.base.P&&COOPW.friendHome(COOPW.base.P[COOPW.seat==='a'?'b':'a'])),fP:(()=>{const P=COOPW.base&&COOPW.base.P&&COOPW.base.P[COOPW.seat==='a'?'b':'a'];return P?{srv:!!(P.S&&P.S.srv),dead:!!P.dead,rank:P.rank,home:P.S&&P.S.home,lc:!!(P.S&&(P.S.lc||P.S.cold))}:null})()}});
  async function rejoinHost(){await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(600);await tapText(A,/^Trở lại phòng/);
    return until(A,()=>COOP.seat==='a'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000)}
  async function leaveBack(X,Y,tag){await X.p.close();ok(await until(Y,()=>COOP.frozen,null,60000),tag+': '+Y.name+' sees the wait');
