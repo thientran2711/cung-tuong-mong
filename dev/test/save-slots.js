@@ -53,6 +53,32 @@ const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs'
   await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
   const ld2=await p.evaluate(()=>{$("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();try{render()}catch(e){}return {name:S.name,on:COOPW.on,st:COOP.state.status,slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name}});
   ok(ld2.name===solo.name&&!ld2.on&&ld2.st==='off'&&ld2.slot1===solo.name,`${tag} solo sổ picked while in a room: room left, solo life loaded`,ld2);
+  /* review r1: co-op death (in the room, then after leaving) never removes the solo sổ; Kiếp mới in the room stays a room life */
+  await p.evaluate(()=>{window.__solo=S;COOP.state.room='Q9ZT';COOP.state.you='a';COOP.state.status='open';COOP.emit('start',{room:'Q9ZT',you:'a',host:true,week:0,state:null})});
+  await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
+  const dth=await p.evaluate(()=>{try{over("Qua đời","Thử chết trong phòng.","chết")}catch(e){}try{render()}catch(e){}try{save()}catch(e){}const a=localStorage.getItem('hclh-save-v2-1');
+    window.__dead=S;try{start()}catch(e){}return {dead:window.__dead.dead,slot1:a&&JSON.parse(a).S.name}});
+  ok(dth.dead&&dth.slot1===solo.name,`${tag} co-op death in the room: Sổ 1 kept`,dth);
+  await p.waitForFunction(()=>S!==window.__dead&&S&&S.name,null,{timeout:60000});await life();
+  const kn=await p.evaluate(()=>({tag:S.coopRoom,slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name}));
+  ok(kn.tag==='Q9ZT'&&kn.slot1===solo.name,`${tag} Kiếp mới after a co-op death belongs to the room`,kn);
+  const dth2=await p.evaluate(()=>{COOP.leave(true);try{showTitle()}catch(e){}try{over("Qua đời","Thử chết sau khi rời phòng.","chết")}catch(e){}try{render()}catch(e){}try{save()}catch(e){}
+    const a=localStorage.getItem('hclh-save-v2-1');return a&&JSON.parse(a).S.name});
+  ok(dth2===solo.name,`${tag} co-op life dying after the room is left: Sổ 1 kept`,dth2);
+  /* guest waiting for the host's world with a solo sổ loaded, then back to the title: the solo life is never marked nor listed as the room's */
+  const gw=await p.evaluate(()=>{window.__rl=localStorage.getItem('ctm-coop-rooms');$("title").hidden=false;showTitle();document.querySelector('#slots [data-load="1"]').click();
+    COOP.state.room='W4IT';COOP.state.you='b';COOP.state.status='open';COOP.emit('room',{t:'room',code:'W4IT',you:'b'});COOP.emit('start',{room:'W4IT',you:'b',host:false,week:0,state:null});
+    try{render()}catch(e){}try{save()}catch(e){}const tg=S.coopRoom||'';$("title").hidden=false;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();
+    const w=CTM_ROOMS.list().find(x=>x.room==='W4IT');return {tag:tg,on:COOPW.on,name:S.name,listed:w&&w.name||'',slot1:JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name}});
+  ok(!gw.tag&&!gw.on&&gw.name===solo.name&&!gw.listed&&gw.slot1===solo.name,`${tag} guest waiting with a solo sổ open: solo life unmarked, not listed as the room's`,gw);
+  await p.evaluate(()=>{localStorage.setItem('ctm-coop-rooms',window.__rl)});/* a 4th room pushes the oldest out (max 3): put the three back */
+  /* reload in the middle of a co-op life: Sổ 1 intact, the title continues the solo life, the rooms are still listed */
+  await p.evaluate(()=>{window.__solo=S;COOP.state.room='M2PX';COOP.state.you='a';COOP.state.status='open';COOP.emit('start',{room:'M2PX',you:'a',host:true,week:0,state:null})});
+  await p.waitForFunction(()=>S!==window.__solo&&S&&S.name&&S.coopRoom,null,{timeout:60000});await life();
+  await p.reload({waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.COOPW&&document.querySelector('#modal.kpthome'),null,{timeout:90000});await p.waitForTimeout(1500);
+  const rl=await p.evaluate(()=>{try{render()}catch(e){}const a=JSON.parse(localStorage.getItem('hclh-save-v2-1')).S.name;showTitle();const b=document.querySelector('#slots [data-load="1"]');if(b)b.click();
+    return {slot1:a,name:S&&S.name,tag:!!(S&&S.coopRoom),rooms:CTM_ROOMS.list().map(x=>x.room)}});
+  ok(rl.slot1===solo.name&&rl.name===solo.name&&!rl.tag&&rl.rooms.length===3,`${tag} reload mid co-op: Sổ 1 intact, solo life continues, 3 rooms listed`,rl);
   /* menu: Chọn sổ shows both sets */
   await p.reload({waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.COOPW&&document.querySelector('#modal.kpthome [data-tgo="slots"]'),null,{timeout:90000});await p.waitForTimeout(800);
   await p.evaluate(()=>{document.querySelector('#modal [data-tgo="slots"]').click()});await p.waitForTimeout(800);

@@ -31,19 +31,23 @@ let lastRec="";
 function record(){const c=room();if(!c||!CW.on)return;const o={seat:COOP.state.you||"",fr:friendTxt()};
  if(S&&S.coopRoom===c&&!S.dead){o.name=S.name;o.who=who(S);o.age=S.age;o.date=when(S)}else if(S&&S.dead&&S.coopRoom===c){o.name="";o.who="";o.date=""}
  const k=JSON.stringify(o);if(k===lastRec)return;lastRec=k;upd(c,o)}
-function mark(){if(CW.on&&S&&typeof S==="object"&&!S.coopRoom&&room())S.coopRoom=room()}
+/* SOLO = life objects built outside a room (a sổ loaded, a solo start): never marked, even while a room is open around them
+   (guest waiting for the host's world, Luân hồi card still open, CW.newLife left over from an earlier room) */
+const SOLO=new WeakSet();
+function mark(){if(CW.on&&S&&typeof S==="object"&&!S.coopRoom&&!SOLO.has(S)&&room())S.coopRoom=room()}
+function solo(){try{if(S&&typeof S==="object"){delete S.coopRoom;SOLO.add(S)}}catch(e){}}
 /* a life built in a room belongs to the room */
-["start","nlRun"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){const s0=S;const r=f.apply(this,arguments);try{if(S!==s0)mark()}catch(e){}return r}});
-(function(){const f=deser;deser=function(){const r=f.apply(this,arguments);try{if(CW.on)mark();else if(S&&S.coopRoom)delete S.coopRoom}catch(e){}return r}})();
+["start","nlRun"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){const s0=S;const r=f.apply(this,arguments);try{if(S!==s0){if(CW.on)mark();else solo()}}catch(e){}return r}});
+(function(){const f=deser;deser=function(){const r=f.apply(this,arguments);try{if(CW.on)mark();else solo()}catch(e){}return r}})();
 /* save(): a co-op life never goes into a solo sổ; in a room, remember the room's line for the menu */
-(function(){const f=save;save=function(){try{if(CW.on&&(CW.base||CW.inLife||CW.newLife))mark()}catch(e){}
+(function(){const f=save;save=function(){try{if(CW.on&&(CW.base||CW.inLife))mark()}catch(e){}
  if(S&&S.coopRoom){if(CW.on){const r=f.apply(this,arguments);try{record()}catch(e){}return r}return}
  return f.apply(this,arguments)}})();
 COOP.on("room",m=>{try{const c=m&&m.code||room();if(c)upd(c,{seat:m.you||COOP.state.you||""})}catch(e){}});
 COOP.on("start",()=>{lastRec="";try{record()}catch(e){}});
 COOP.on("error",m=>{try{if(m&&(m.code==="noroom")){const c=room()||LS.get("ctm-coop-room");if(c)forget(c)}}catch(e){}});
 COOP.on("stop",()=>{lastRec=""});
-function leaveRoom(){try{if(CW.on){mark();record()}}catch(e){}try{if(COOP.state.status!=="off"||CW.on)COOP.leave(true)}catch(e){console.error(e)}}
+function leaveRoom(){try{if(CW.on){if(CW.base)mark();record()}}catch(e){}try{if(COOP.state.status!=="off"||CW.on)COOP.leave(true)}catch(e){console.error(e)}}
 /* solo sổ picked on the title (Tiếp tục kiếp này / Kiếp mới / the home "Chơi một mình" that clicks it): leave the room first */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots button[data-load],#slots button[data-new]");if(!b)return;
  if(b.dataset.ask==="1")return;leaveRoom()},true);

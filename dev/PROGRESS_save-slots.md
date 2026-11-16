@@ -23,3 +23,16 @@
 ## Tests
 - node dev/test/save-slots.js [755x1000 1180x820 844x390]: ALL OK (17 checks each).
 - coop-e2e plain (live Worker): 59/59 passed.
+
+## Review r1 (review/save-slots-r1, merged onto origin/main 2d038139e)
+- Save paths checked: j6 render()/endTurn → save(); death over() → save() (S.dead → removeItem); Kiếp mới (start / nlRun);
+  deser on room messages (fromCanon, CW.restore); freeze panel "Về màn đầu" and lobby ‹ Lui (COOP.leave(true) + showTitle);
+  in-game title button; no pagehide/beforeunload save exists. Only j6 save() and j16 import (user-driven) write hclh-save-v2-*.
+- FIX (jslots): a life built OUTSIDE a room (sổ loaded, solo start/nlRun) is kept in a WeakSet and is never marked S.coopRoom.
+  Before: a guest waiting for the host's world (or any save while CW.newLife was left over from an earlier room) marked the
+  SOLO life with the room code, listed it as the room's character, and after leaving the room that solo life was never
+  saved again (marked lives skip the sổ). save() now marks only with CW.base or CW.inLife; leaveRoom marks only with CW.base.
+- Test additions (dev/test/save-slots.js): co-op death in the room and after leaving keeps Sổ 1; Kiếp mới after a co-op death
+  stays a room life; guest waiting with a solo sổ open (before fix: FAIL, after: ok); reload mid co-op.
+- Overlap with review/coop-timer-r1: jcooplobby.js auto-merges (different lines); assemble.py conflicts only on the file list
+  (keep both jslots.js and jcooptimer.js); index.html/sw.js rebuild.
