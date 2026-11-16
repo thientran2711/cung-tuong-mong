@@ -161,13 +161,13 @@ function mkTab(k,after){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="
 try{KG.ht={keys:HTK.slice(),l:"Hoàng tự",s:"Hoàng tự"}}catch(e){}
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{kvo:["Kế vị","Kế vị"],kin:["Hoàng tự trong cung","Trong cung"],hon:["Hôn sự","Hôn sự"],qt:["Quý tộc kén rể · kén dâu","Quý tộc"]})}catch(e){}
 /* sub-tab labels: long when they fit, short otherwise (measured: never cut) */
-function htFitSub(){try{const P=$("panel");const nav=P&&P.querySelector(":scope > .ksub");if(!nav||!nav.querySelector('[data-ksub="kvo"]'))return;
+function htFitSub(){try{const P=$("panel");const nav=P&&P.querySelector(":scope > .ksub, :scope > .kpbar > .ksub");if(!nav||!nav.querySelector('[data-ksub="kvo"]'))return;
  const bs=[...nav.querySelectorAll(".ksubb")];bs.forEach(b=>{const L=HTL[b.dataset.ksub];if(L){b.textContent=L[0];b.title=L[0]}});
  if(nav.scrollWidth>nav.clientWidth+1||bs.some(b=>b.scrollWidth>b.clientWidth+1))bs.forEach(b=>{const L=HTL[b.dataset.ksub];if(L)b.textContent=L[1]})}catch(e){}}
 /* measured now and again after layout (the first render can measure a panel that is not laid out yet), and on resize */
 const HTRO=typeof ResizeObserver==="function"?new ResizeObserver(()=>htFitSub()):null;
 (function(){const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);htFitSub();requestAnimationFrame(htFitSub);
- try{const nav=$("panel").querySelector(":scope > .ksub");if(HTRO&&nav&&!nav.__htro){nav.__htro=1;HTRO.observe(nav)}}catch(e){}return r}})();
+ try{const nav=$("panel").querySelector(":scope > .ksub, :scope > .kpbar > .ksub");if(HTRO&&nav&&!nav.__htro){nav.__htro=1;HTRO.observe(nav)}}catch(e){}return r}})();
 addEventListener("resize",()=>requestAnimationFrame(htFitSub));
 /* servant road / after death: the extra keys are not tabs */
 (function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=(typeof isSrv==="function"&&isSrv())||!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
