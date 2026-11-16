@@ -11,7 +11,8 @@ ORDER=[('frames','f0','TIN — (2) no "Đã rõ": tap outside / ✕'),('frames',
  ('frames','figrow','(6) ONE figure scale: same measured body for everyone'),
  ('buttons','S','(4)(8) button S in one frame: same width, class tag'),('buttons','LS','(8) button LS'),('buttons','LR','(5)(8) button LR + GỢI Ý box'),
  ('buttons','3.4','(8) 3.4 event option = the kit button'),('buttons','3.1','(8) 3.1/3.2 Hành sự compact card = the kit button'),('buttons','3.7','3.7 skill cards (OK)'),
- ('buttons','pics','pictures (OK)'),('buttons','narrow','(9) NEW narrow landscape strips'),('long','f0','VIỆC DÀI (OK)')]
+ ('buttons','pics','pictures (OK)'),('buttons','narrow','(9) NEW narrow landscape strips'),('long','f0','VIỆC DÀI (OK)'),
+ ('items','Item','items 16:10Z: grade chip ON the bottom edge, chip grows with the item, Xa xỉ square, Ngự = one chip'),('items','6.2','6.2 detail card: Xa xỉ row removed (square box on the frame)'),('items','6.3','6.3 pick grid'),('items','6.5','6.5 event tag')]
 try:F=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',22)
 except Exception:F=ImageFont.load_default()
 def load(p):return Image.open(p).convert('RGB') if p and os.path.exists(p) else None

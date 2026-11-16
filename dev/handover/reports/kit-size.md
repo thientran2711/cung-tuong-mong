@@ -53,3 +53,21 @@ Planned redesign for (1)–(9) (my analysis, not yet coded):
 - (8) 3.4 options = kszBtn (same kit button) with a printed label of the kit size used; 3.1/3.2 = Hành sự compact card before|after (kitActCompact §43).
 - (9) add narrow long pictures, e.g. LN 300x76 (≈4:1) and LN2 192x48, for info-frame banners.
 Thái hậu file: the sheet uses kitFigOf({kind:"th"}) = the live game's file for that save (S.thF variant, e.g. img/fig-thaihau-h3-a51.webp in one run; h1-a51 only as fallback when unknown) — same as the live game. Her "lùn"/bigger look in the sheet came from sizing by the whole picture box (crown + margins), not by the body: fix = (6) body-height scale.
+
+## kit-size #2 (opus, 16/11 ~16:05Z–) — owner 16:00Z (1)–(9) + items 16:10Z/16:15Z, CODED in the kit sample (jksize.js)
+START_CTX ≈ 7 % (estimate). Rolled over at ≈ 33 % after push + report (worker rule: coordinator opens the successor).
+Done (all in dev/build/jksize.js, sheet scope; NOT wired into the game — mass change waits for the owner's OK via main):
+- (1) kszFigHtml → kitTitleTag3 (title plate when worn, rank line 1, name line 2); kszRankName fallbacks (Thái hậu / Hoàng thượng rank only, gold kitRankCol(7); queen; RANKS for rivals).
+- (2) KIT_SIZE.infoKinds: no "Đã hiểu"/"Đã rõ" footer; kitXHTML ✕ in the header (data-kszx). Outside-tap close = the live modal's rule (OD:L418) — wire in phase 2.
+- (3) .kszbody align-items:center, .kszright justify-content:center.
+- (4) .kszopts = one column, every button width 100 %; kitBtnUnify = one class per frame (largest needed).
+- (5) kszBtn: row 1 picture + name/TỐN/ĐƯỢC/MẤT, row 2 .kszhint GỢI Ý full-width box; GỢI Ý not counted by kitBtnSize.
+- (6)(7) KIT_SIZE.lay/kindLay: big (VIỆC ĐIỀU LUẬT BÁO ĐÊM) = figure L body 310 px, column 176; small (KẾT QUẢ TIN) = figure M 230 / 140. kszFigFit sizes by measured body (kitFigBody b−ht) × KIT_FIG.fac. Frame size changes only the info area.
+- (8) sheet tags each button with its class ("nút S/LS/LR"); 3.1/3.2 before = crop of the owner's group-3 shot.
+- (9) narrow strips NS 192x56 · NM 300x84 · NL full x 110/140; frame `ban` uses them.
+- Items: grade chip centred ON the bottom edge, chip grows S→XL; Xa xỉ = kitItem lux tab as a SQUARE box (word / number; S number only), text row removed from 6.2; Ngự: .kits corner mark hidden, only the "Ngự tứ" chip.
+- Item sizes measured (live, both devices): bag = slot 63–96; wear row sm 52 (fits md 72 in one row: wear-row-M-*.jpg); gift shelf/jitd sm 52; panels lg; reveal xl → proposal drop S.
+ART REQUEST (→ Foreman C via main): Thái hậu figures fig-thaihau-h1/h2/h3-a51 are out of the standard proportion: head ≈ 1/6.5 of the body (consorts ≈ 1/8) and robe core width 0.40–0.42 of body height (consorts 0.18–0.25) → she reads short / big. Code cannot fix it without distortion; redraw at the standard female proportion.
+Known / open: kitFigBody head-top detection (ht) returns ht = t for these figures (pink/gold ornaments pass the skin test) → crowns counted as body; same for every person so the scale is still equal, but a stricter skin test would size bodies more exactly (kit-wide family change, not done). XL portrait VIỆC with 4 long options scrolls inside the info column (cap 732).
+Sheets: dev/handover/reports/kit-size/ba-755x1000-*.jpg, ba-1180x820-*.jpg (BEFORE | AFTER, 1600 px wide, ≤ 2000 px tall). Tools: dev/test/kit-size-ba.js (before/after blocks) + dev/test/kit-size-compose.py.
+Next (successor): wait for the owner's verdict via main; then phase 2 (wire kszFrame/kszBtn/kitFrameApply into kpBuild / kitEventStage / kitDpFit / compact cards; move the item CSS into jk2b kitItem; audit the 67 "Đã hiểu" literals: info frames only).

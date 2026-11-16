@@ -105,7 +105,7 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
 #kszsheet .kszn{font-size:.72rem;color:#6b5643;margin:0 0 6px}
 #kszsheet .kszrow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
 #kszsheet .kszlab{font:600 .72rem var(--body);color:#7a1f1a;margin-bottom:4px}
-#kszsheet .kszb{position:relative}#kszsheet .kszb::after{content:"nút " attr(data-kbs);position:absolute;top:3px;right:4px;font:700 .58rem/1 var(--body);color:#fff;background:#7a1f1a;padding:2px 4px;border-radius:3px}
+#kszsheet .kszb{position:relative}#kszsheet .kszbt{padding-right:40px}#kszsheet .kszb::after{content:"nút " attr(data-kbs);position:absolute;top:3px;right:4px;font:700 .58rem/1 var(--body);color:#fff;background:#7a1f1a;padding:2px 4px;border-radius:3px}
 #kszsheet .kszgrid{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.74rem;max-width:760px}
 #kszsheet .kszgrid b{color:#7a1f1a}`);
  const st=document.createElement("style");st.id="k-size";st.textContent=css.join("\n");document.head.appendChild(st)})();
@@ -118,7 +118,7 @@ function kszBtn(o){const R=o.rows||[],hint=R.filter(r=>/^gợi ý$/i.test(r[0]))
  const info={rows:main.length,chars:(o.t+main.map(r=>String(r[1]).replace(/<[^>]+>/g,"")).join(" ")).length};
  const k=o.size||kitBtnSize(info);return `<button type="button" class="kszb" data-kbs="${k}"><span class="kszbr"><span class="kszbp">${kitSceneArt(kszImg(o.pic||""),"",{shape:"tall",cap:false})}</span><span class="kszbi"><span class="kszbt">${o.t}</span>${rows}</span></span>${hint.map(([l,v])=>`<span class="kszhint"><i>${l}</i><span>${v}</span></span>`).join("")}</button>`}
 /* rank + name of a person for the tag (kitTitle = the one rank / role word; Thái hậu / Hoàng thượng carry no own name) */
-function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)return[S.out?"Phế phi":RANKS[S.rank].n,S.name];let r="";try{r=kitTitle(p)}catch(e){}if(!r&&(p.kind==="th"||(S&&p===S.thO)))r="Thái hậu";if(!r&&S&&p===S.emp)r="Hoàng thượng";
+function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)return[S.out?"Phế phi":RANKS[S.rank].n,S.name];let r="";try{r=kitTitle(p)}catch(e){}if(!r&&(p.kind==="th"||(S&&p===S.thO)))r="Thái hậu";if(!r&&S&&p===S.emp)r="Hoàng thượng";if(!r&&p.queen)r="Hoàng hậu";if(!r&&typeof p.rank==="number"&&typeof RANKS!=="undefined"&&RANKS[p.rank]&&rivals&&rivals.includes(p))r=RANKS[p.rank].n;
  let n=(S&&(p===S.emp||p===S.thO||p.kind==="th"))?"":(p.name||"");try{if(r&&n)n=kitTitledName(r,n)}catch(e){}return[r,n]}
 function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|sil/.test(src)))src=kszImg("img/fig-thaihau-h1-a51.webp");
  const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
@@ -169,7 +169,7 @@ function kszSheet(area){const old=document.getElementById("kszsheet");if(old)old
   h+=`<h2>KIT SIZE 2 · THE action button + pictures</h2><p class="kszn">ONE button (kszBtn) everywhere: row 1 = picture LEFT + name, TỐN / ĐƯỢC / MẤT RIGHT; row 2 = GỢI Ý in one full-width box. Inside one frame every button is the SAME width and the same class (the largest one needed). The class (kitBtnSize) only sets the picture: S square 56 (≤ 2 rows, ≤ 70 characters) · LS square 72 (≤ 3 rows, ≤ 160) · LR 3:4 84x112 (more). The red tag on each sample = the kit class used.</p>`;
   h+=`<h3>S · in one frame (3.3 / 3.5): same width, square 56</h3><div class="kszopts" style="max-width:380px">${[op("Cúi đầu nhận lỗi",[["Tốn","1 khắc"]]),op("Thưa rằng do Hoàng thượng định",[["Tốn","1 khắc"]]),op("Dâng lễ vật xin bỏ qua",[["Tốn",ch("Bạc",-20)+" 1 khắc"]]),op("Im lặng",[])].map(kszBtn).join("")}</div>`;
   h+=`<h3>LS · square 72 (moderate info)</h3><div class="kszopts" style="max-width:470px">${[op("Tâm sự",[["Tốn","1 khắc"],["Được",ch("Thiện cảm",6)],["Mất",ch("Sức",-5)]]),op("Sai đi dò la",[["Tốn","2 khắc"],["Được","biết 2 điều thật về nàng ta, chứng cứ +1"],["Mất",ch("Thiện cảm",-5)]])].map(kszBtn).join("")}</div>`;
-  h+=`<h3>LR · 3:4 picture (a lot of info) + GỢI Ý box under</h3><div class="kszopts" style="max-width:470px">${[op("Quỳ xuống nhận lỗi, xin Thái hậu dạy bảo",[["Tốn","1 khắc"],["Được",ch("Thiện cảm",6)+ch("Đức",1)],["Mất",ch("Danh",-1)],["Gợi ý","Thái hậu ưa người biết phận, nhận lỗi trước mặt mọi người thì bà nguôi giận nhanh"]])].map(kszBtn).join("")}</div>`;
+  h+=`<h3>LR · 3:4 picture (a lot of info) + GỢI Ý box under</h3><div class="kszopts" style="max-width:470px">${[op("Quỳ xuống nhận lỗi, xin Thái hậu dạy bảo",[["Cần","Lễ nghi ≥ 2"],["Tốn","1 khắc"],["Được",ch("Thiện cảm",6)+ch("Đức",1)],["Mất",ch("Danh",-1)],["Gợi ý","Thái hậu ưa người biết phận, nhận lỗi trước mặt mọi người thì bà nguôi giận nhanh"]])].map(kszBtn).join("")}</div>`;
   h+=`<h3>3.4 event option in cost mode = THE kit button (was: no picture, hand-drawn chips): picture + GỢI Ý box</h3><div class="kszopts" style="max-width:470px">${[op("Gọi bản cung Thái hậu",[["Gợi ý","an toàn"]]),op("Xin ân cho gia đình",[["Gợi ý","thêm thể diện, có thêm bạc"]]),op("Theo cha mưu đại sự",[["Gợi ý","Hoàng hậu bị phế, thêm thể diện; hỏng thì mất mạng"]])].map(kszBtn).join("")}</div>`;
   h+=`<h3>3.1 / 3.2 Hành sự compact card (§43, narrow Hành sự column, landscape) = THE kit button</h3><div class="kszopts" style="max-width:300px">${[op("Hỏi han ở tẩm cung ta: ai cần giúp?",[["Tốn","1 khắc"],["Được","người ở đây có việc thì ngỏ lời nhờ"]])].map(kszBtn).join("")}</div>`;
   h+=`<h3>3.7 skill cards: square picture, TWO columns</h3><div class="kszskills" style="max-width:560px">${[op("Tự học",[["Tốn","2 khắc · Sức -15"],["Được","tiến bộ một hai phần"]]),op("Học với thầy",[["Tốn","2 khắc · Bạc -15"],["Được","tiến bộ một đến ba phần"]])].map(o=>kszBtn(Object.assign(o,{size:"LS"}))).join("")}</div>`;
@@ -194,8 +194,17 @@ window.kitSizeSheet=kitSizeSheet;
 const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 (function(){const st=document.createElement("style");st.id="k-size-items";st.textContent=`
 .kszit{position:relative;display:inline-block;line-height:0}
-.kszit>.kszgc{position:absolute;left:50%;translate:-50% 0;bottom:3px;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none;letter-spacing:.02em}
+.kszit>.kszgc{position:absolute;left:50%;translate:-50% 50%;bottom:0;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none;letter-spacing:.02em}
 .kszit[data-s="S"]>.kszgc{font-size:.5rem;padding:1px 3px}
+/* (owner 16:10Z) grade chip size follows the item size: S small · M · L · XL LARGE */
+.kszit[data-s="L"]>.kszgc{font-size:.7rem;padding:3px 6px}.kszit[data-s="XL"]>.kszgc{font-size:.86rem;padding:4px 8px;border-radius:4px}
+.kszit{margin-bottom:.6em}
+/* (owner 16:10Z / 16:15Z) Ngự: ONE mark only = the "Ngự tứ" grade chip; the red "Ngự" corner mark is dropped */
+.kszit .kits{display:none}
+/* (owner 16:15Z) XA XỈ = the game's corner tab (kitItem lux) made a SQUARE box: the word on line 1, the number on line 2; number only when the tile is too small (S) */
+.kszit .kitx{position:absolute;top:3px;right:3px;left:auto;box-sizing:border-box;aspect-ratio:1;width:auto;min-width:2.5em;height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:2px;white-space:nowrap;text-align:center;line-height:1;font-size:.5rem;border-radius:3px}
+.kszit .kitx>b{font-size:1.25em}.kszit[data-s="S"] .kitx{min-width:1.9em}.kszit[data-s="S"] .kitx>.kxw{display:none}
+.kszit[data-s="L"] .kitx{font-size:.62rem}.kszit[data-s="XL"] .kitx{font-size:.78rem}
 .kszit .kitn,.kszit .kitg{display:none}
 .kszidc{box-sizing:border-box;border:1px solid var(--line,#d2b071);border-radius:8px;background:var(--panel,#fffaf0);padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:.8rem}
 .kszidh{display:flex;gap:10px;align-items:flex-start}
@@ -208,17 +217,19 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
 function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
- return `<span class="kszit" data-s="${size}">${kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true})}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
+ let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}const it=kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true,lux:lux||0}).replace(/>Xa xỉ (\d+)<\/i>/,'><span class="kxw">Xa xỉ</span><b>$1</b></i>');
+ return `<span class="kszit" data-s="${size}">${it}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
 function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
  const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],loss=[],keep=[];let kind="";
  for(const r of rows){const l=(r.querySelector(".krl")||{}).textContent||"";const v=r.querySelector(".krv");
-  if(/^(Được|dùng)/i.test(l))fx.push(v.innerHTML);else if(/^(Mất|Kèm)/i.test(l))loss.push(v.innerHTML);else if(/^Loại/.test(l))kind=v.textContent;else if(/^Phẩm/.test(l)){}else keep.push(r.outerHTML)}
- if(!rows.some(r=>/^Xa xỉ/.test(r.textContent))){let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}if(lux)keep.unshift(`<span class="kr"><span class="krl">Xa xỉ</span><span class="krv"><span class="ef n">món này ${lux}</span></span></span>`)}
+  if(/^(Được|dùng)/i.test(l))fx.push(v.innerHTML);else if(/^(Mất|Kèm)/i.test(l))loss.push(v.innerHTML);else if(/^Loại/.test(l))kind=v.textContent;else if(/^(Phẩm|Xa xỉ)/.test(l)){}else keep.push(r.outerHTML)}
+
  return `<div class="kszidc"><div class="kszidh">${kszItemTile(k,"M")}<div class="kszidt"><b style="color:${I.col||"inherit"}">${I.name}</b><span class="kszk">${kind||tmp.querySelector(".kidkind")?.textContent||""}</span><span class="kszfx">${fx.join('<span class="ksep">·</span>')}</span>${loss.length?`<span class="kszfx kszloss">${loss.join('<span class="ksep">·</span>')}</span>`:""}</div></div>${keep.length?`<span class="kb kpkb">${keep.join("")}</span>`:""}</div>`}
 function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).filter(k=>{try{return kitItemInfo(k)}catch(e){return false}});
  let h=`<h2>KIT SIZE 4 · Items (owner part 2: 6.2 · 6.3 · 6.5) + thumbnails (7.1) + placeholder sets (7.3)</h2>`;
- h+=`<h3>Item sizes = the 4 kit sizes · GRADE as a chip ON the frame (no grade line under it)</h3><div class="kszrow" style="align-items:flex-end">${["S","M","L","XL"].map(s=>`<div><div class="kszlab">${s} · ${{S:52,M:72,L:104,XL:150}[s]} px</div>${kszItemTile(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
- h+=`<h3>6.2 item detail card: kind on the upper row, gains / losses on the row below; Xa xỉ on every item with a luxury value</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:1120px">${ks.map(kszItemDetail).join("")}</div>`;
+ h+=`<h3>Item sizes · GRADE chip centred ON the frame\'s bottom edge, chip size follows the item size (XL = large chip) · Xa xỉ square box (word / number; S: number only) · Ngự: only the "Ngự tứ" chip</h3><div class="kszrow" style="align-items:flex-end">${["S","M","L","XL"].map(s=>`<div><div class="kszlab">${s}${s==="S"?" (proposal: drop)":""}</div>${kszItemTile(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
+ const ng=Object.keys(IT).find(k=>{try{return kitItemInfo(k).grade===4}catch(e){return false}});if(ng)h+=`<div class="kszrow" style="align-items:flex-end;margin-top:8px">${["S","M","L","XL"].map(s=>`<div><div class="kszlab">Ngự · ${s}</div>${kszItemTile(ng,s)}</div>`).join("")}</div>`;
+ h+=`<h3>6.2 item detail card: kind on the upper row, gains / losses below; Xa xỉ = the square box ON the item frame (no text row)</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:1120px">${ks.map(kszItemDetail).join("")}</div>`;
  const pk=Object.keys(IT).filter(k=>!IT[k].story&&IT[k].sl).slice(0,6);
  h+=`<h3>6.3 pick grid (Tặng quà · Dâng quà · Cài đồ): picture + name + effects only; full info on tap</h3><div class="kszpick" style="max-width:640px">${pk.map(k=>{const I=kipItem({k});const use=String(I.use||"").replace(/^[^:]*:\s*/,"");return `<div>${kszItemTile(k,"M")}<b style="color:${I.col}">${I.name}</b><small>${use}</small></div>`}).join("")}</div>`;
  h+=`<h3>6.5 item tag in events: tile with grade chip, name only</h3><div class="kszrow">${pk.slice(0,6).map(k=>`<div style="text-align:center;width:64px">${kszItemTile(k,"S")}<div style="font-size:.68rem">${kitItemInfo(k).name}</div></div>`).join("")}</div>`;
