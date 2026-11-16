@@ -132,3 +132,9 @@ KEY FACTS FOR THE NEXT WORKER:
 - Credits so far: v8-v20 = 4,000 (all gpt-2-6). Skin sheet decision pending (owner).
 - Rules: no pixel squeezing; delete rejected sheets (owner: rejected images stored nowhere); English in repo files; Vietnamese to owner.
 - STEP 2 (full set: 3 princesses x 2 countries, all ranks x age bands, maid pairs, game-ready files) not started.
+
+## v21 (art worker #2, START_CTX ~1%) — QP sash + in-room test
+Quý phi redrawn with a clear waist sash. ONE gpt-2-6 generation, one face ref only (EbnrrdZuuO), words only. Round 1 (6 lineups, 5jMSpnwKxe picked) kept v20 look + sash; in the real room NC Tần read narrow next to the game figure (same total height, shoulders clearly narrower). Round 2 (4 lineups) added "tall, broad square shoulders, wide full sleeves": chosen mERqDV2hJQ (Tần = short jacket + pleated skirt + belt, Quý phi crossed-collar court robe + wide sash). Credits 10 x 40 = 400 (v8-v21 4,400).
+Files (this folder): sample-v21-lineup.jpg (full 1344x752 sheet); v21-inroom-ipad-1180x820@2-before/after.jpg (real build, Playwright, sprite override, 2360x1640); v21-inroom-crop-before-after.jpg (large crop at device res); v21-native-900px-before-after-game.jpg (sprites at the game's native 900 px: NC before | NC after | game c05-t4).
+Method: real index.html (CDN images) via file://, Playwright iPad 1180x820 @2; NC Tần cut by flood-fill (no resize distortion, uniform LANCZOS x1.22 to 900 px total height = same as game sprites) and routed over the player's figure; the maid slot shows game consort sprite c05-t4 (maid slot overridden, so a game consort stands next to her). Probe: /tmp scratch probe2-4 derived from tools/ingame_probe.js.
+Honest: heights equal by total height; shoulders now read close; NC upscale ~1.22x so slightly softer than game sprites; shoulder pads on Tần read slightly stiff. Not unified skin check done. STEP 2 not started (waits for her OK).
