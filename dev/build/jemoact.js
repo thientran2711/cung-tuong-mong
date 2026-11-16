@@ -67,9 +67,9 @@ Object.assign(BAL,{ea:{
         this in the tuần he vents (acts) / 0 after drinking alone;
     t = Thái hậu: th = the consorts' Thái hậu regard, ill = % she falls ill after a night of chanting, suc / thUp = the favourite she calls
         to chant with her (Sức −, Thái hậu +);
-    act = share of the outburst numbers an emotion ACT costs (a calmer vent the person chooses); sick = % a sad / anxious outburst ends in
+    act = share of the outburst numbers an emotion ACT costs (a calmer vent the person chooses); one = the small step of a light price (ministers / court / children); sick = % a sad / anxious outburst ends in
     illness (the everyone-illness of jface: heals / worsens by the same monthly rule). */
- nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15},
+ nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15,one:1},
  /* (6) QUỞ TRÁCH BY TEMPER + MOOD (audit row built): the Emperor's own feeling when he punishes (cấm túc): angry AT THIS PERSON or at no one (emo gian ≥ v; bot at v 60 with any
     target: +1 on 95 % of all cấm túc, far too many) → +mo month,
     joyful (vui ≥ v) → −mo (never under 1); his words follow his nết. Thái hậu's scolding (outburst quo) hits ×hot / ×timid by her nết;
@@ -288,7 +288,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"quo":{const t=eaTargetET(p);if(!t)return null;target=t;const Tq=eaTemper(p),Qm=Tq.k==="hot"?Q6().hot:Tq.k==="timid"?Q6().timid:1,th=Math.max(1,Math.round(F.th*Qm)),dn=Math.max(1,Math.round(F.danh*Qm));
   if(t===S){apply({th:-th});eaHitMe(p,"quo",{n:th,tk:Tq.k})}else if((rivals||[]).includes(t))ap(t,{danh:-dn});h=`Thái hậu ${QUO_W[Tq.k]} ${t===S?"ngươi":t.name}.`;break}
  /* ---- the Emperor ---- */
- case"eruou":{const E=S.emp,N=NK().e;E.eaQ=W();E.eaQx=0;E.mood=Math.max(E.mood||0,2);let ill="";if(!illOf(E)&&roll(N.ill)){E.ill={k:"phonghan",st:1,known:true};ill=", nhiễm phong hàn"}
+ case"eruou":{const E=S.emp,N=NK().e;E.eaQ=W();E.eaQx=0;E.mood=Math.max(E.mood||0,2);let ill="";if(!illOf(E)&&roll(N.ill)&&eaIll(E,"phonghan"))ill=", nhiễm phong hàn"
   h=`Hoàng thượng một mình uống rượu đến khuya; đêm ấy không lật thẻ bài${ill}.`;break}
  case"emat":{const E=S.emp;E.mood=Math.max(E.mood||0,2);E.eaQ=W();E.eaQx=NK().e.away;h=`Hoàng thượng mất ngủ, thức phê tấu chương; tuần này long nhan mệt mỏi, ít vào hậu cung.`;break}
  case"nghi":{const t=eaTargetET(p);if(!t)return null;target=t;const n=NK().e.sung;if(t===S){apply({sung:-n});eaHitMe(p,"nghi",{n})}else ap(t,{sung:-n});h=`Hoàng thượng sinh lòng nghi kỵ ${t===S?"ngươi":t.name} (Sủng −${n}).`;break}
@@ -307,15 +307,15 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
   h=`${p.name} vui, mở tiệc đãi bằng hữu, mải vui lơ là việc (Lòng −${half})${kn?`; gặp ngươi thì niềm nở hơn (quý ngươi +${N.tinh})`:""}.`;break}
  /* ---- court eunuchs / Thái y viện ---- */
  case"okho":{const n=NK().o.af;eaAfAll(p,-n);h=`${p.name} ${r.n.toLowerCase()} (các cung mất lòng y −${n}).`;break}
- case"okhoc":{const s=eaSick(p,r.g==="so"?"matngu":"phonghan");h=`${p.name} ${r.n.toLowerCase()}${s?", sinh bệnh":", mấy hôm phờ phạc"}.`;if(!s)eaAfAll(p,-1);break}
+ case"okhoc":{const s=eaSick(p,r.g==="so"?"matngu":"phonghan");h=`${p.name} ${r.n.toLowerCase()}${s?", sinh bệnh":", mấy hôm phờ phạc"}.`;if(!s)eaAfAll(p,-NK().one);break}
  case"ole":{const n=Math.ceil(NK().o.af/2);eaAfAll(p,-n);h=`${p.name} ${r.n.toLowerCase()}; việc các cung chậm trễ (các cung mất lòng y −${n}).`;break}
  case"ohoi":{const t=eaTopSung();if(!t)return null;target=t;const n=NK().o.af*2;eaAfOne(p,t,-n);h=`${p.name} ${r.n.toLowerCase()}: ${t===S?"ngươi":t.name} mất lòng y (−${n}).`;break}
  case"ovui":{const n=NK().o.af,half=Math.ceil(n/2),f=eaAfFav(p);eaAfAll(p,-half);if(f)eaAfOne(p,f,n+half);h=`${p.name} vui, nâng đỡ ${f?(f===S?"ngươi":f.name):"người quen"} (+${n}); các cung khác thấy y thiên vị (−${half}).`;break}
  /* ---- ministers (news of the court) ---- */
  case"qgian":{const N=NK().q;p.pow=clp((p.pow||0)-N.pow,0,100);const c=eaClan(p,-1);if(c)tdRelAdd(p.c,c,-N.rel);h=`${p.name} (${p.c}) ${r.n.toLowerCase()}${c?`, đắc tội phe ${c}`:""}: bị Hoàng thượng khiển trách (thế ở triều −${N.pow}).`;break}
  case"qbo":{const N=NK().q;p.pow=clp((p.pow||0)-N.pow,0,100);h=`${p.name} (${p.c}) ${r.n.toLowerCase()}; việc bộ bỏ trễ (thế ở triều −${N.pow}).`;break}
- case"qhac":{const N=NK().q;const c=eaClan(p,-1);if(!c)return null;tdRelAdd(p.c,c,-N.rel);p.pow=clp((p.pow||0)+1,0,100);h=`${p.name} (${p.c}) dâng sớ hặc phe ${c}: hai nhà càng thêm hiềm khích, y được thêm tiếng (thế ở triều +1).`;break}
- case"qvui":{const N=NK().q;const c=eaClan(p,1);if(c)tdRelAdd(p.c,c,N.rel);p.pow=clp((p.pow||0)-1,0,100);h=`${p.name} (${p.c}) ${r.n.toLowerCase()}${c?`, thân thêm với phe ${c}`:""}; bị dèm là kết bè (thế ở triều −1).`;break}
+ case"qhac":{const N=NK().q;const c=eaClan(p,-1);if(!c)return null;tdRelAdd(p.c,c,-N.rel);p.pow=clp((p.pow||0)+NK().one,0,100);h=`${p.name} (${p.c}) dâng sớ hặc phe ${c}: hai nhà càng thêm hiềm khích, y được thêm tiếng (thế ở triều +${NK().one}).`;break}
+ case"qvui":{const N=NK().q;const c=eaClan(p,1);if(c)tdRelAdd(p.c,c,N.rel);p.pow=clp((p.pow||0)-NK().one,0,100);h=`${p.name} (${p.c}) ${r.n.toLowerCase()}${c?`, thân thêm với phe ${c}`:""}; bị dèm là kết bè (thế ở triều −${NK().one}).`;break}
  /* ---- children ---- */
  case"kquay":{const n=NK().k.fond;p.fond=clp((p.fond||0)-n,0,100);h=`${p.name} ${r.n.toLowerCase()}; Hoàng thượng nghe mà phiền (được thương −${n}).`;break}
  case"kbo":{const n=NK().k.hp;p.hp=clp((p.hp||0)-n,1,100);h=`${p.name} ${r.n.toLowerCase()} (sức khỏe −${n}).`;break}
@@ -325,9 +325,9 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"act":{const kd=eaKind(p),N=NK(),a=N.act;let cost="";
   if(kd==="s"){const n=Math.max(1,Math.round(BAL.ea.fx.sk.loy*a));loyAdd(p,-n);cost=`Lòng −${n}`}
   else if(kd==="m"){const n=Math.max(1,Math.round(N.m.loy*a));loyAdd(p,-n);cost=`bỏ một phiên trực, Lòng −${n}`}
-  else if(kd==="o"){eaAfAll(p,-1);cost="việc các cung chậm một buổi, các cung mất lòng y −1"}
-  else if(kd==="q"){p.pow=clp((p.pow||0)-1,0,100);cost="nghỉ triều một buổi, thế ở triều −1"}
-  else if(kd==="k"){p.tal=clp((p.tal||0)-1,0,100);cost="bỏ một buổi học, Tài −1"}
+  else if(kd==="o"){eaAfAll(p,-N.one);cost=`việc các cung chậm một buổi, các cung mất lòng y −${N.one}`}
+  else if(kd==="q"){p.pow=clp((p.pow||0)-N.one,0,100);cost=`nghỉ triều một buổi, thế ở triều −${N.one}`}
+  else if(kd==="k"){p.tal=clp((p.tal||0)-N.one,0,100);cost=`bỏ một buổi học, Tài −${N.one}`}
   else if(kd==="e"){p.eaQ=W();p.eaQx=N.e.away;cost="tuần này ít vào hậu cung"}
   else if(kd==="t"){if(!S.thIll&&roll(Math.round(N.t.ill*a))){eaIll(p,"phonghan");cost="nhiễm phong hàn"}else cost="miễn thỉnh an một buổi"}
   h=`${Nm(p)} ${r.n.toLowerCase()} cho nguôi lòng${cost?` (${cost})`:""}.`;break}
