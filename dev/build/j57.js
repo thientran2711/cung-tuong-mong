@@ -30,11 +30,11 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 (function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
  X+"{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;font-size:var(--tfs,.85rem)!important;padding-left:1px!important;padding-right:1px!important}"+
  "/* kv3:unwrap */"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}"+
- "/* kv3:.kv1 */:where(.kv1) "+X+"::after{font-size:var(--tfs,.72rem)!important}";document.head.appendChild(st)})();
+ "/* kv3:.kv1 */:where(.kv1) "+X+"::after{font-size:var(--tfs,.86rem)!important}";document.head.appendChild(st)})();
 let TFS_CV=null;
-function tabsFit(){try{const T=$("tabs");if(!T)return;const short=true;const base=kitView().pages===1?.72:.8;
+function tabsFit(){try{const T=$("tabs");if(!T)return;const short=true;const one=kitView().pages===1,base=one?.86:.8;
  T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
- const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ const n=B.length,cols=one?Math.ceil(n/2):n;/* KIT §0: the spread = ONE row of tabs; the one page = TWO rows of ceil(n/2) big buttons (8 tabs → 4+4; phone-bars) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
