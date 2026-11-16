@@ -14,6 +14,8 @@
   python3 dev/site/cdn_sync.py --pull [globs]  download from the CDN into img/ audio/ (default: the *.json manifests only;
                                                --pull 'img/fig-maid-*' or --pull all) — files that differ locally are replaced
   python3 dev/site/cdn_sync.py --index         only rebuild img/_index.json (the list of every object with hash and size)
+  --wipe-review TOPIC                          DELETE every object under img/_review/TOPIC/ (review shots live there while a verdict is
+                                               pending, never in git; wipe them with the verdict) and rebuild the index; --dry-run lists only
   --prune                                      also DELETE objects under the synced folders that are not in the source (careful)
   --force                                      push a *.json manifest even if someone else changed it on the CDN since your last pull
 
@@ -231,6 +233,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--prune", action="store_true")
+    ap.add_argument("--wipe-review", metavar="TOPIC")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--pull", action="store_true")
     ap.add_argument("--index", action="store_true")
@@ -242,6 +245,19 @@ def main():
             p = os.path.relpath(os.path.abspath(p), R)
         p = p.replace(os.sep, "/")
         sel.append(p[2:] if p.startswith("./") else p)
+    if a.wipe_review:
+        topic = a.wipe_review.strip("/")
+        if not topic or ".." in topic or "/" in topic:
+            raise SystemExit("--wipe-review takes one topic name (a folder directly under img/_review/)")
+        pre = f"img/_review/{topic}/"
+        gone = sorted(k for k in remote_list() if k.startswith(pre))
+        print(f"wipe-review: {len(gone)} object(s) under {pre}" + (" (dry run, nothing deleted)" if a.dry_run else ""))
+        if a.dry_run or not gone:
+            return
+        for k in gone:
+            req("DELETE", API + "/objects/" + keyurl(k))
+        write_index()
+        return
     if a.pull:
         return pull(sel)
     if a.index:

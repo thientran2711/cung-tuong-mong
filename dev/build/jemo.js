@@ -145,6 +145,9 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{emoMonth()}catch(e){}return r}})();
 /* motive gate (j95): feelings are a recorded motive. Wrapped lazily so it works whatever the load order. */
+/* one answer per question (people ledger, owner 16/11 13:40Z: every act has ONE recorded reason): "sad, wants to be alone" holds for half
+   of the friendly acts, chosen by the calendar (life seed + buổi + who + whom + what), not a fresh roll — asking the gate again gives the same answer */
+function emoHalf(a,t,kind){try{if(typeof j95hash==="function"&&typeof j95key==="function"&&S&&S.roster)return j95hash((S.j95seed||0)+"|"+j95key()+"|emo|"+emoKey(a)+"|"+emoKey(t)+"|"+kind)%100<50}catch(x){}return roll(50)}
 function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;window.__emoGate=1;const g0=motiveOK;
  motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!emoOn()||!a||!t||a===S||a===t||typeof a!=="object")return g;const e=emoGet(a);if(e.k==="binh")return g;
   const at=e.t!=null&&e.t===emoKey(t);const H=typeof H95!=="undefined"&&H95.has(kind),F=typeof F95!=="undefined"&&F95.has(kind);
@@ -152,7 +155,7 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
    if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=50&&emoBrake(a,t)>=1){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
   if(H&&g.ok&&(e.k==="so"||e.k==="dau")&&e.v>=60){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
   if(F&&!g.ok&&e.k==="vui"&&e.v>=60&&aff(a,t)>-30){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
-  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&roll(50)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
+  if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&emoHalf(a,t,kind)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
