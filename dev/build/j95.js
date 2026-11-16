@@ -215,6 +215,8 @@ function j95planOther(p,c,P){const kh=[0,1,2,3];
   if(c2==="ksp")return kh.map(()=>["ksp","book",null,"phận sự Kính sự phòng"]);
   if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);const v=sick.length&&j95dice(25)?sick[Math.floor(Math.random()*sick.length)]:null;const s=1+Math.floor(Math.random()*3);
    return kh.map(i=>v&&i===s?[palaceOf(v),"heal","v"+v.id,v.preg?"bắt mạch an thai":"bắt mạch cho người yếu sức"]:["tyv","brew",null,"trực Thái y viện"])}
+  /* main jact (Dư đồ Nội vụ phủ, 16/11): the Nội vụ phủ eunuch stands at Nội vụ phủ every khắc (jact draws him there) — one place (r1) */
+  if(j95nvp())return kh.map(()=>["nvp","sell",null,"bày hàng mua từ ngoài cung ở Nội vụ phủ"]);
   const Lp=["vuon","ksp","tyv"];return kh.map(()=>{const k=Lp[Math.floor(Math.random()*Lp.length)];return[k,"sell",null,"đi bán hàng rong kiếm lời"]})}
  if(p.kind==="man"){const m=p.ref;const w=null;const k=p.home||"vuon";const a=m.rw==="thái y"?"heal":m.rw==="thị vệ"?"guard":m.rw==="nhạc sư"?"music":m.rw==="họa sư"?"paint":m.rw==="sứ thần"&&k==="thu"?"audience":"walk";
   return kh.map(()=>[k,a,null,w?"nơi hắn hay lui tới":"phận sự"])}
@@ -251,8 +253,16 @@ function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th
 function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id[0];
  if(c==="v"){const v=RV(+id.slice(1));return !!(v&&v.alive&&!(k==="home"&&sameHouse(S,v)))}
  if(id==="emp")return k!=="home"&&!(k==="dtd"&&(S.sung||0)<50);if(id==="th")return true;
- if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&(S.turn||0)<=4&&!S.out:false}if(id==="c:ty"||id==="c:ksp")return true;/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
+ if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&(S.turn||0)<=4&&!S.out:false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ped")return k==="nvp";/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
+ /* her own household servants: jhouse (main, servant-system) draws them on her room / lãnh cung stage (r1 16/11) */if(c==="s"&&(k==="home"||k==="lc")&&j95hsv(id))return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
+function j95nvp(){try{return typeof adSrv==="function"&&!adSrv()&&!!(S&&S.court&&S.court.ped&&S.court.ped.name)}catch(e){return false}}
+function j95hsv(id){try{return typeof hsvOn==="function"&&hsvOn()&&(S.staff||[]).some(s=>s&&s.sid!=null&&"s"+s.sid===id)}catch(e){return false}}
+/* one person, one place (review/schedules3-r1): jhouse draws EVERY household servant at her room; the record may have one on an errand or
+   resting at Dãy nhà cung nhân (jplx) — the stage draws only those the record puts at her room / lãnh cung now (function declarations are
+   hoisted in the assembled file, so this wraps jhouse's hsvList though jhouse loads later) */
+if(typeof hsvList==="function"){const hl0=hsvList;hsvList=function(){const L=hl0.apply(this,arguments);try{if(!j95on()||!S||!S.roster||S.roster.key!==j95key()||!Array.isArray(L))return L;
+ const R=S.roster,kh=j95kh(),k=S.out?"lc":"home";return L.filter(s=>{const e=R.P["s"+s.sid];return !e||!e[kh]||e[kh][0]===k})}catch(e){return L}}}
 const J95OUT_="ngoai";
 /* the khắc she would ARRIVE at k (walking costs travel(): the map number is the number she meets on arrival, main rule review/stage-slots) */
 function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;let from=S.place||"home";
@@ -319,7 +329,7 @@ function j95dedupe(V){if(!V||!V.people)return;const seen=new Set();for(let i=0;i
 function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)return false;j95dedupe(V);/* the maid road fills its stage by its own rules (j42 srvVisitOf reads whereOf = the record; j59srvCount) */if(typeof isSrv==="function"&&isSrv())return j95srvStage(R,kh,V);const k=S.place;let ch=false;
  const here=id=>R.P[id]&&R.P[id][kh][0]===k;
  for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];let id=null;
-  if((p.kind==="rival"||p.kind==="hh")&&p.ref)id="v"+p.ref.id;else if(p.kind==="emp")id="emp";else if(p.kind==="th")id="th";else if(p.kind==="man"&&p.ref)id=p.ref.id;else if(p.kind==="ty")id="c:ty";else if(p.kind==="ksp")id="c:ksp";else if(p.kind==="min"&&p.ref&&p.ref.c!=null)id="q:"+p.ref.c;
+  if((p.kind==="rival"||p.kind==="hh")&&p.ref)id="v"+p.ref.id;else if(p.kind==="emp")id="emp";else if(p.kind==="th")id="th";else if(p.kind==="man"&&p.ref)id=p.ref.id;else if(p.kind==="ty")id="c:ty";else if(p.kind==="ksp")id="c:ksp";else if(p.kind==="min"&&p.ref&&p.ref.c!=null)id="q:"+p.ref.c;else if(p.kind==="serv"&&p.sid!=null)id="s"+p.sid;else if(p.kind==="peddler"&&R.P["c:ped"])id="c:ped";
   else if(p.kind==="fallen"){if(!p.ref||!here("v"+p.ref.id)){V.people.splice(i,1);popIdx=null;ch=true}continue}
   if(id&&R.P[id]&&!here(id)){V.people.splice(i,1);popIdx=null;ch=true}}
  for(const v of liveRivals(true)){const id="v"+v.id;if(!here(id))continue;if(V.people.some(p=>p.ref===v&&(p.kind==="rival"||p.kind==="hh")))continue;
@@ -333,6 +343,10 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
  for(const id in R.P){if(!here(id))continue;
   if(id[0]==="m"&&id[1]!=="m"){const m=manById(id);if(!m||!m.alive||V.people.some(p=>p.kind==="man"&&p.ref&&(p.ref===m||p.ref.id===m.id)))continue;V.people.push({kind:"man",ref:m,name:m.name.split(" ").slice(0,1).concat(m.name.split(" ").slice(-1)).join(" "),ini:m.name.split(" ").pop()[0],col:"#6a8aa0",info:`${m.role} · ${m.trait}`});ch=true}
   else if(id.indexOf("q:")===0){try{const c=id.slice(2);const h=(trS().H||{})[c];if(!h||V.people.some(p=>p.kind==="min"&&p.ref&&(p.ref===h||p.ref.c===c||p.ref.name===h.name)))continue;V.people.push({kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${R.P[id][kh][0]==="thu"?"vào chầu":"dự yến"}`});ch=true}catch(e){}}
+  /* r1: jact draws the Nội vụ phủ eunuch only on goTo; any other arrival (a walk into the next buổi, a new buổi) draws him from the record */
+  else if(id==="c:ped"&&k==="nvp"&&!V.people.some(p=>p.kind==="peddler")){const c=S.court&&S.court.ped;V.people.push({kind:"peddler",name:c&&c.name?c.name:"Thái giám Nội vụ phủ",ini:"Hoạn",col:"#b9a48a",info:"Thái giám Nội vụ phủ"});ch=true}
+  /* r1: her household servants the record puts here now (jhouse rebuilds its list only on renderStage) */
+  else if(id[0]==="s"&&(k==="home"||k==="lc")&&j95hsv(id)&&!V.people.some(p=>p.kind==="serv"&&"s"+p.sid===id)){try{const s=(S.staff||[]).find(x=>x&&"s"+x.sid===id);if(s&&typeof hsvPerson==="function"){V.people.push(hsvPerson(s));ch=true}}catch(e){}}
   else if(id==="c:ty"&&!V.people.some(p=>p.kind==="ty")){const o=S.court&&S.court.ty;V.people.push({kind:"ty",name:o&&o.name||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"});ch=true}
   else if(id==="c:ksp"&&!V.people.some(p=>p.kind==="ksp")){V.people.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});ch=true}}
  /* lãnh cung: every fallen consort the record puts here (no limit), nobody invented */
@@ -469,7 +483,7 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  const wo0=whereOf;whereOf=function(p){try{if(j95on()&&p&&p!==S&&p.rel!=null&&S.roster&&S.roster.key===j95key()){const e=S.roster.P["v"+p.id];if(e)return e[j95kh()][0]}}catch(e){}return wo0.apply(this,arguments)};
  const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(j95on()&&S&&!S.dead){if(S.place===k&&k&&k!=="home"&&k!==palaceOf(S)){const z=j95z();const key=j95c()+":"+k;const bk=j95key();if(z.meLast!==bk+key){z.meLast=bk+key;z.me[key]=(z.me[key]||0)+1}}
    if(S.roster){j95sync(true);if(S.visit){const n0=S.visit.people&&S.visit.people.length;j95dedupe(S.visit);if(S.visit.people&&S.visit.people.length!==n0)J95.stageCh=1}if(J95.stageCh&&S.visit&&S.visit.k===S.place)render()}}}catch(e){j95err("wrap",e)}return r};
- const c0=countAt;countAt=function(k){if(!j95on()||!S.roster||S.roster.key!==j95key())return c0.apply(this,arguments);const R=S.roster,kh=j95arrKh(k);let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;return n};
+ const c0=countAt;countAt=function(k){if(!j95on()||!S.roster||S.roster.key!==j95key())return c0.apply(this,arguments);const R=S.roster,kh=j95arrKh(k);let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;/* jact (loaded later) adds its Nội vụ phủ eunuch +1 on top: the record counts him itself (r1) */if(k==="nvp"&&j95nvp()&&n>0&&R.P["c:ped"]&&R.P["c:ped"][kh][0]==="nvp")n--;return n};
  const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(j95on()){const sg=j95mapSigns();for(const x of L)if(sg[x.k]&&!(x.d||"").includes(sg[x.k]))x.d=(x.d||"")+` Có ${sg[x.k]}.`}}catch(e){}return L};
  if(typeof tryst==="function"){const t0=tryst;tryst=function(m,risk){const r=t0.apply(this,arguments);try{/* jmen catches her talking with a man in the hậu cung (its talk wrapper) */if(j95on()&&!j95men()&&!S.dead&&!S.out&&m&&m.alive)j95npcCatch(m)}catch(e){}return r}}
  /* the motive gate on every NPC act aimed at someone */
