@@ -217,4 +217,4 @@
 | tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | session_01UV1SzhYN2Ensucb2ZqjeRX (sonnet) | RUNNING | 16/11 14:02Z |
 | history-thitam expert (sonnet): lật thẻ bài / mùng 1 & rằm / ngự giá — history, dramas, games → rule proposal | (report only) | main s17 | session_01UV1Szgg8KB5ye6NWizPmHd | RUNNING | 16/11 14:03Z |
 | D13 spread-events-r2 reviewer (opus) | review/spread-events-r3 | B | session_01N1tNP3wvFLuxbHBhMw3hMx | RUNNING | 16/11 14:05Z |
-| mg-balance-2 reviewer (opus) | review/mg-balance-2-r1 | B | (opening, Foreman B s5) | RUNNING | 16/11 14:10Z |
+| mg-balance-2 reviewer (opus) | review/mg-balance-2-r1 | B | session_01N1tNP6z6YihnVHKFcdrurC | RUNNING | 16/11 14:10Z |
