@@ -2705,6 +2705,18 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   755×1000 12 / 12 / 332 · 1000×755 15.9 / 334.6 / 426 · 1180×820 23 / 497.5 / 513 · 1366×1024 23 / 589.3 / 940 · 844×390 12 / 12 / 431;
   time block → stat cells (one-row): 17.6 (1000), 18.7 (1180), 110.5 (1366); 0 overlaps, 0 page errors, no horizontal overflow.
 
+### 39.1 THE SEAL ON EVERY EVENT FRAME (owner 15/11 ~20:15Z, review/cal-plus) — `kitSealEvPlace` in jseal.js
+- Every EVENT dialog wears one kitSeal (`.kseal-ev`) in a corner of its frame: kitEventDp, 32.7 person dialogs, place-event frames, event stages,
+  plain event cards, news / intel / result / night / end / threat / evidence / reward cards. Event = `kitSealEvIs(m, dlg)`: a panel with its own
+  kind (kitPanel / kitModal) only when that kind is in `KSEAL_EV.kinds`; a queue item without its own kind is something that happened
+  (event, festival, contest, pay day, news …) except the HUD help cards (Thang / Ra vào / Quẻ / HXN titles). Tool panels (rules, info, person
+  card, calendar, shop, act pickers `KIT_ACT_PIDS`, `act` / `shop`) never get one.
+- Placement is measured on every render, resize and content change (rAF + 400 / 1200 ms after showModal, ResizeObserver, MutationObserver):
+  corners bottom-right → bottom-left → top-right → top-left at 40 / 34 / 28 / 24 px (no 40 when height ≤ 500), inset 6 px; a corner is free when
+  its box (+3 px) touches no text line, button, link, input, picture, svg, chip, art box, ✕ or scrolling area of the dialog (`kitSealOcc`) and
+  stays on screen. None free → the frame grows a bottom strip (`.kseal-room`, padding = seal + 12 px) and the seal sits there. Never covers text.
+- A mark only: aria-hidden, pointer-events none, multiply, opacity .9. Test: `node dev/test/seal-events.js <index.html> [outdir] [sizes]`.
+
 ## 40. APP ICON (owner 11/15, review/brand) — `dev/art/make_icons.py`
 - From the title/first-load key art (img/title-key.webp, backdrop 'title'): the lady in the red/gold phoenix headdress, face + ornaments +
   shoulders, in a gold band on cinnabar #8a2a1e. icons/icon-192.png, icon-512.png (purpose any, rounded tile), icon-maskable-192/512.png
@@ -2984,6 +2996,44 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
 - Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (desk present, ≥ 44 px, inside the stage, 0 overlap; 12 tabs; no clipped
   text / overflow in any month; only FEST keys; popover on screen; Thánh thọ hides after Thái hậu dies; lãnh cung = plain; none away from home;
   390x844 = rotate prompt).
+
+### 58.3 What she KNOWS on the calendar (owner 15/11 ~20:15Z, review/cal-plus) — `mcExtra(o)` in jmcal.js
+Still NO private contests, tea parties, private banquets or surprise events. Each entry is one short line; ONE source per entry (read-only):
+| key | tag in the square | where it comes from |
+|---|---|---|
+| bong | Bổng lộc | day 1 of every month (j20/jstip pay on the first day; "Nội vụ phủ phát đồ"); not on the servant road |
+| thaiy | Thái y | only if `thaiyNextVisit()` exists (review/thaiy; number = wk, or {w} / {m,t[,y][,d]}) — nothing invented here |
+| sinh / hh | Sinh thần / Thiên thu | her `S.bmonth` (j20 sinhthan, made at first read like j20 does); the Empress's rival entry `bmonth` (made once); she as Empress = "Thiên thu" |
+| prep | Sửa lễ | the tuần before Vạn thọ / Thánh thọ: "Sửa lễ vật dâng …" (gift reminder) |
+| due | Lâm bồn | `S.preg` once she knows (`!S.pregUnk`, j75): day 1 of month +(10 − preg); fake pregnancy says so |
+| exam | Khảo hạch | jexam `S.ex.w0 / w1` (window open / last tuần), `cd` (may be considered again) |
+| tuyen | Tuyển tú | j27: tháng hai thượng tuần of every third year |
+| kexam | Con thi | j53 `KTE` yearly tests her children can sit (not the surprise "Khảo bài") |
+| kid | Sinh nhật | each child's `bmo` (made once) |
+| pet | Thú lớn | jpetcare `petcNext`: the tuần a pet is old enough for its next stage (+ "cần thêm tình cảm") |
+| note | Hẹn | SỔ HẸN `S.calNotes` (58.5) |
+| wx | Trời | next tuần's weather, only with a servant who reads the sky (age ≥ 40, else lanh lợi) — see 58.4 |
+| friend | Hảo hữu | co-op: the friend's birthday, her known due month, her notes she chose to share |
+| cy | (faint dot) | only if `cycleDaysOf(S, month)` exists (review/cycle): "Nguyệt tín", no tag, not in the list |
+- Square: day number, moon mark (CSS circle: 1 sóc dark, 8 thượng huyền, 15 vọng full, 23 hạ huyền) top-right, "+N" when more than one thing,
+  the first entry's tag at the bottom (`.kmc-tg`, order `MCX.ord`), festival squares unchanged (painting + name). Every square is a button.
+- Tuần label: the quẻ she drew that tuần — `kchip` Cát (g) / Bình / Hung (r) (current from `S.lot`, earlier tuần from her log line "Xin xăm: quẻ …").
+- 13 tabs: "Tháng trước" (o = −1, for her log) + this month + 11 ahead. The list under the grid = festivals + every entry but bổng / cycle.
+### 58.4 Weather from the world seed
+`rollWx` (j12) draws its entry by `mcWxIdx(year, month, tuần)` = hash(Hoàng thượng's name + date) instead of Math.random, so a forecast is
+true and both co-op players see the same weather (S.wx is a world key). Distribution stays uniform per season.
+### 58.5 Day box + SỔ HẸN
+- Tap a day → `.kmc-day` under the grid (re-drawn in place, scrolled into view; a festival square also opens the 58 popover): kit rows of the
+  day (festival, moon rite, entries, quẻ), the festival check list `kitChecks` (58.6), "Tuần ấy, sổ đã ghi" = her log lines of that tuần (≤ 6,
+  past and current tuần), and on today / future days the SỔ HẸN form: `kitInput` + 4 preset `.kbtn.alt` + `.kbtn` "Ghi vào sổ" (+ co-op
+  `kitToggle` "Cho hảo hữu cùng thấy"). Notes: ≤ 48 characters, ≤ 40 kept, "Bỏ" removes one.
+- Reminder: at the start of the tuần before → kit notice "Sổ hẹn · Tuần sau"; on the tuần → "Tuần này" + a log line "Sổ hẹn: …" (once each).
+### 58.6 Festival check list `mcPrep(k)`
+From its FV7 pool (Thái hậu variants dropped after her death): contests in two lines: ✓ "Thi đã sẵn: …" (her SC7 score ≥ 50, "phong độ tốt") and ✗ "Thi chưa sẵn: …";
+gifts (P) → ✓ when Tư trang holds an item the receiver likes (IT tg), wagers → ✓ with ≥ 20 bạc. Unmet first. The popover adds "Sửa soạn: N/M đã sẵn".
+- Old saves: new fields are lazy (`S.calNotes`, `S.calNoteN`, rival / kid `bmonth` / `bmo`, `S.bmonth` as j20). Samples: §58.3 (this month, a day picked).
+- Test: `node dev/test/month-cal.js …` checks 13 tabs, every square a button, the day box on every size (no overflow / clipping), a note saved
+  → listed → reminded, the forecast equals the next roll, entries of a pregnancy / exam / pet / kid, and the cycle / thái y hooks when stubbed.
 
 ## 64. ITEMS IN EVENTS · kitItemTag · kitItemFx (owner 15/11 ~18:10Z, review/item-events) — `dev/build/jitev.js` (after jfx) (registry: coordinator)
 Owner rule: every event where an item could come into her hands shows the ITEM'S ICON in the dialog, and each choice acts on it with an animation.
