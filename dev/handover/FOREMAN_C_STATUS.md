@@ -96,6 +96,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:27Z cut-out sample v2 (c20/c02/c08/c14 new + c01 skin ref; 1024x2048, 0 px edge touch, one skin tone) looked at → SENT to owner (also explained to her: 'tách nền' = repaint on transparent background, no cutting).
 - 21:28Z cf-tray E-bright r3 looked at → SENT to owner. FP v16 (NC ranks step up: Đáp ứng consort silver, Tần richer, Phi crown + long coat) HELD by C: BD Tần + Quý phi B skin warmer than NC → v16b with their skin-only fixes on the sheet.
 - 21:29Z C9 #3: 72 FAIL por fixed at ~0.085 + uploaded (md5 checked), specks/m22-t6 rect gone (code review/huadian-size f931416e, report §r6). OPEN: ty1-8 por median 0.095 (clusters 0.10–0.13), twins, m45-t1 patch → folded into fig-cutout-clean regen (those ty files are repainted anyway; huadian painted small + measured in QA). C9 worker ARCHIVED.
+- 21:30Z FP v16b (ranks step up; all 5 one skin; BD Tần + QP B skin-only fixed) looked at → SENT to owner. npc-jealousy r1 FAIL (5 families, reports/npc-jealousy-r1.md) → worker session_011xDdVNFb12V5k5VFx1eX1m fixing; same reviewer re-checks.
 
 =======
 >>>>>>> a1438803 (Foreman C s7: handover to s8)
