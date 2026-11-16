@@ -72,13 +72,13 @@ const BOTS_SRC=(BOT)=>{
   const kinds=await p.evaluate(()=>Object.keys(KG82_KIND).filter(k=>KG82_ENG[KG82_KIND[k].e]));const R=[];
   for(const kind of kinds){const r=await p.evaluate(async kind=>{const K=KG82_KIND[kind];const viaC=['dan','co','tho','doi','doden','ban','mua'].includes(kind);let intro='';
     const res=await new Promise(res=>{let got=null;
-     if(viaC){startContest({art:kind,title:'Hội thử',rivals:[],onDone:x=>{got=x;res(x)}})}
+     if(viaC){startContest({art:kind,title:'Hội thử',onDone:x=>{got=x;res(x)}})}
      else{const d=kg82Open({art:K.n,title:'Thử',how:K.how||''});if(!d){res('noframe');return}mgSet(kind,{occ:'hoc'});kg82Play(kind,raw=>{kg82ShowRes(`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`);document.getElementById('kg82ok').onclick=()=>{kg82Close();res({raw})}})}
      const goW=()=>{const go=document.getElementById('kg82go');if(go){intro=(document.getElementById('kg82box')||{}).innerText||'';go.click();w()}else if(KG82.phase==='play')w();else setTimeout(goW,30)};
      const w=()=>{if(KG82.phase==='play')__mgBot('skilled').then(fin);else setTimeout(w,30)};
      const fin=()=>{let n=0;const t=()=>{const nx=document.querySelector('.kpod-next');if(nx){nx.click();n++;setTimeout(t,200);return}const ok=document.getElementById('kg82ok');if(ok){ok.click();return}if(n++<80)setTimeout(t,100);else res('stuck')};setTimeout(t,300)};
      if(viaC)goW();else w()});
-    const ov=document.documentElement.scrollWidth>innerWidth+1;return{kind,res:typeof res==='object'?(res.raw!=null?res.raw:res.score):res,tierRow:viaC?/Độ khó/.test(intro):null,ov}},kind);
+    const ov=document.documentElement.scrollWidth>innerWidth+1;return{kind,res:res&&typeof res==='object'?(res.raw!=null?res.raw:res.score):String(res),tierRow:viaC?/Độ khó/.test(intro):null,ov}},kind);
    R.push(r)}
   out.push({SZ,load,plays:R.length,bad:R.filter(x=>typeof x.res!=='number'||x.ov||x.tierRow===false),errs:[...new Set(errs)]});await ctx.close()}
  console.log(JSON.stringify(out,null,1));await b.close()})();
