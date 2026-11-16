@@ -54,10 +54,10 @@ function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k o
    if(n===BAL.road.last)rdFinale(A,E)}}}catch(e){console.error(e)}
  return e0.apply(this,arguments)}})();
 /* the road's finale = the origin's ending of this life (j67 chFinale67 is not run for a full road: its last chapter tells it) */
-function rdFinale(A,E){const c=S.st.ch,rd=S.st.f14.rd,Q0=QUEST67[c.k]||QUEST67.tt;c.done=1;c.fin=A.tag;S.st.tag=A.tag;
+function rdFinale(A,E,fb){const c=S.st.ch,rd=S.st.f14.rd,Q0=QUEST67[c.k]||QUEST67.tt;c.done=1;c.fin=A.tag;S.st.tag=A.tag;
  const T=BAL.road.finTier,t=E.k>0?T.win:E.k<0?T.lose:T.mid;const R=reward67("family",t);
  const L=Object.keys(S.st.f14.ends).map(Number).sort((x,y)=>x-y).map(n=>{const id=n===BAL.road.first-1?rd:ROAD14[rd][n];const p=c.past.find(x=>x.a===id);return p?`Chương ${p.n}: ${ARC67[id].t} · <span class="${p.k>0?"g":p.k<0?"r":""}">${p.tag}</span>`:""}).filter(Boolean);
- L.push(`Chương ${c.n}: ${ARC67[A.a].t} · <span class="${E.k>0?"g":E.k<0?"r":""}">${A.tag}</span>`);
+ if(!fb)L.push(`Chương ${c.n}: ${ARC67[A.a].t} · <span class="${E.k>0?"g":E.k<0?"r":""}">${A.tag}</span>`);
  log(`<b class="${E.k>0?"g":E.k<0?"r":""}">Kết cục xuất thân «${Q0.t}»: ${A.tag}.</b>${R?` Phần thưởng: ${IT[R.k].n}.`:""}`);
  card67("result",`Kết cục xuất thân: ${Q0.t}`,[["Tuyến",ARC67[rd].t],["Kết cục",A.tag,E.k>0?"g":E.k<0?"r":""],["Các chương",L.join("<br>")],R&&R.row,["Về sau","Mệnh truyện còn tiếp: con cái, ngôi Trung cung"]],pMe())}
 window.rdPrev=rdPrev;window.rdEnd=rdEnd;window.rdFull=rdFull;
@@ -81,3 +81,9 @@ setTimeout(()=>{try{if(window.RARE97)for(const d of RD97L)if(!RARE97.defs[d.a])R
 /* origins whose STORY slot is created after j67 loads (jorigins.js STORY.bd, Bắc Địch branch of hòa thân) get the same chapter frame:
    without it a bd life never runs a67init (no 14-chapter frame, no road). Runs once every script has loaded (B2 finding). */
 setTimeout(()=>{try{if(typeof wrap67==="function")Object.keys(STORY).forEach(wrap67)}catch(e){console.error(e)}},0);
+/* the road's .11 could not run (its cast is gone and jst14 put a shared arc in its slot, or the road was cut short): once the main story has
+   passed chapter BAL.road.last, the origin ending is still told — from the last road chapter that ran (its ending and sign → finTier), so every
+   full-road life gets its «Kết cục xuất thân» (B3 finding, every origin) */
+(function(){const a0=chAdvance67;chAdvance67=function(E){const r=a0.apply(this,arguments);try{if(rdOn()){const c=S.st.ch,f=S.st.f14,rd=f.rd;
+  if(c&&!c.fin&&c.n>BAL.road.last&&f.re){const n=f.re.n,id=n===BAL.road.first-1?rd:ROAD14[rd][n],p=c.past.slice().reverse().find(x=>x.a===id);
+   if(p)rdFinale({a:id,tag:p.tag},{k:p.k},1)}}}catch(e){console.error(e)}return r}})();

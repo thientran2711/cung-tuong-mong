@@ -14,8 +14,9 @@ const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (defaul
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;
-  window.__run=(k,road,pick)=>{quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
-   try{localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1')}catch(e){}window.__forceOrigin=k;start();quiet=false;Q.length=0;
+  window.__run=async(k,road,pick)=>{quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
+   try{localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1')}catch(e){}window.__forceOrigin=k;start();quiet=false;await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin)||++n>150)r();else setTimeout(t,100)};t()});/* start() can set S a tick later (fresh storage) */Q.length=0;
+   if(typeof S==='undefined'||!S||!S.origin)return{err:'boot'};/* the boot screen can reset S after a slow load (parallel runs): retried */
    if(S.origin.k!==k||!S.st.f14)return{err:'origin '+S.origin.k};
    const seq=[],vs=[],ends=[];let lastN=0,stuck=0,err=null,mon=0;
    for(;mon<400&&!S.st.ch.all;mon++){const c=S.st.ch;if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?'));lastN=c.n;stuck=0}
@@ -30,7 +31,7 @@ const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (defaul
  const roads=(await p.evaluate(()=>Object.keys(ROAD14).filter(r=>rdFull(r)))).filter(r=>!ONLY||ONLY.split(',').includes(r));console.log('full roads:',roads.join(' ')||'(none)');
  chk('at least one full road registered',roads.length>0,roads);
  for(const rd of roads){const k=rd.split('_')[0];
-  for(let L=0;L<NLIV;L++){const R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand']);
+  for(let L=0;L<NLIV;L++){let R;for(let t=0;t<4;t++){R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand']);if(R&&R.err==='boot'){await p.waitForTimeout(5000);continue}break}
    if(!R.seq){chk(`${rd} L${L+1}: no error`,false,R.err||R);continue}/* __run returned {err} (B2 finding) */
    console.log(rd,'life',L+1,R.n,R.all?'ALL':'',R.months+'m','fin='+R.fin,'|',R.seq.join(' '),R.err||'');
    const ns=R.seq.map(x=>+x.split(':')[0]);
