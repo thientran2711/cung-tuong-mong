@@ -54,4 +54,4 @@
 | D3 item-big | review/item-big | B | session_01N1tNP3vh5qQKaG75iP6uRK | RUNNING | 16/11 06:20Z |
 | D9 header-own | review/header-own | B | session_01N1tNP6D57poL6nUn778JPv | RUNNING | 16/11 06:20Z |
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
-| verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzkA992D8a1WtiJdtWw | RUNNING | 16/11 07:45Z |
+| verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | RUNNING | 16/11 07:45Z |
