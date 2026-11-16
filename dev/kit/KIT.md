@@ -716,6 +716,18 @@ kitFigOf(person)             // full-body src (figure, kid figure, or stranger s
 ```
 Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no faces. medal-1..3 (240 px, keyed), podium-step (512x384), podium-bg (1344x752).
 
+### 20.1 PODIUM v3 (review/contest-ui, C34, owner 15/11 s8)
+- Backdrop redrawn (the pink curtain + peony one is gone): a painted palace honours hall (red lacquer dragon pillars, gilded coffered ceiling, lanterns, pale marble floor), `img/kit/podium-bg2.webp` (1344x752) + `podium-bg2-p.webp` (portrait), registered in `KIT_BD.podium` (jbd.js).
+- ONE figure scale: the three `.kpod-fig` boxes are the same height (only the steps differ); each image is scaled by `KIT_FIG.fac / KIT_FIG.man` (men x1.07 reach the box top, women and kids by KIT_FIG), never by place.
+- Everyone on the dais is KNOWN: `kitPodiumShow` calls `cuMeet(list)` (k61Meet: face + name, "đã gặp"), so no grey silhouettes for people who competed with her.
+- Every place has a prize chip row under its plate (Sủng / Danh from the stakes + item chip + Bạc from `CU.last.places[i].prize`); `kpodPrize` accepts ready chip HTML strings.
+
+## 13.4 GAME FRAME: PICTURE LEFT, INFO RIGHT (review/contest-ui, jcui.js + j79 `kitGameFrame({pic})`)
+`.kgame > .kgbody.kgpic-on > .kgpic (painted board, `mg-<kind>-bg(-hoc)`) + .kginfo (cách chơi, HUD, .kgbox, .kgres)`. Wide (>=700 px): picture column left (~36%), info right, the same in the result panel. Phones: a 104 px picture band on top; hidden while the game runs. `#kg82.kg-idle` hides the PHẦN/HỒI/CÒN counters (intro + result); they show only while a game runs. The ĐỐI THỦ / Bảng định thứ list is `.kgrv`: its own box, fixed max height, scrolls by itself; the act buttons stay sticky at the bottom. `kg82Open({pic})` / `kitGameFrame({pic})`: pass `kg82Pic(kind)` (or a painting path); no `pic` = old single column (jpetcare only: no board painting yet).
+
+## 13.5 CONTEST PRIZES (jcui.js, BAL.cp; ITEMS_EARNED source "thi tài")
+Pool of a place = stipend `BL[her rank]` x months (small contest 1, big festival / feast with the Emperor 2) x share [Nhất 1, Nhì .5, Tam .25]; the item (themed pool per art kind `CU_POOL`, shop price pr, <= share .6/.4/.6 of the pool, rank-allowed) is part of the pool, the rest is paid in bạc. Nhất also: chest reveal (kitReward) after the podium, a title in `S.honors` ("Hoa khôi · <contest>", shown in Sổ ân thưởng), the Emperor's own gift (`bestow(p,"contest")`) guaranteed when he attends. NPC winners are paid the same (inv + bạc). Prize items carry `from:"thi"` ("Thưởng hội thi" in the bag).
+
 ## 27. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
 The week summary (dawn) is an old ledger she turns page by page. j87 replaces the j79 week panel; "Vào ngày mới" on the closing page
 (button id `dawn-go`) closes the book and the day goes on as before. The ✕ at the top right (kit-x, 32.10), a tap on the ground around the book or Esc closes it at any page.
