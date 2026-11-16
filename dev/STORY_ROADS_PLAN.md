@@ -136,6 +136,21 @@ Build sketch: NPC road = light state on the person {road, ch, h, flags}, advance
 grudge, debt, faction, event), no dialogs; the hồi that names the player becomes a j72-style Việc nhờ card with gain and loss; at most one
 open NPC request at a time. Starts after phase 1 is on main (needs the frame), can run beside phases 2–4.
 
+### 3.1 Men's roads (OD:L1264)
+Every named male character gets an identity + road on the same frame, same rule: her help = ONE hồi of his road, a different request at
+a different hồi each life, never his last request again. Groups and road templates (identity = role + family + trait; a template is a
+road shape of 4–8 chapters × 2–4 hồi, cast from real people):
+| Group | Who (existing data) | Road templates | Reuse |
+|---|---|---|---|
+| Emperor | the Hoàng thượng (one per life) | 4: tân quân lập uy (reign), biên ải chiến sự, cải cách triều chính, kế vị / lập Thái tử | jreign "Tân quân lập uy" = template 1 as is; her faction road stays hers |
+| Princes / vương gia | sons (S.kids), Emperor's brothers (j96 vương gia) | 3 per kind: học hành thành tài, tranh ngôi, phong vương ra trấn | st_con / st_dong arcs give the hồi shapes |
+| Court officials | tdHead posts (Tể tướng, Đại tướng quân, Thượng thư…), her father / brothers (jkc fam) | 4: thăng quan, bị đàn hặc, bè phái, cáo lão hồi hương | j72 Việc nhờ cards for "her help"; jreign rgL lines for the 6 key people become their road's hồi |
+| Guards / thị vệ | cấm quân, thống lĩnh (S.men roles) | 3: lập công, phạm cấm, tình riêng | j96 Thanh mai trúc mã = template "tình riêng" |
+| Eunuchs | Tổng quản (S.court.tq), Kính sự phòng, her servants (S.staff) | 3: leo chức Tổng quản, giữ của / tham ô, trung với chủ cũ | jstaff / promote-servants data |
+| Outer court men / suitors | S.men (physicians, envoys, scholars, merchants) | 3 per role group: công danh, nợ nần, tình duyên | j96 men pool, j82 physician |
+Totals to write in phase 6: ~20 templates for men + the women's origin roads reused for consorts/maids. Build order: Emperor (reuse jreign)
+→ officials (reuse j72/rgL) → eunuchs/guards → outer court men. Same light state per person {road, ch, h, flags, lastAsk}.
+
 ## Appendix — owner decisions, copied verbatim from dev/OWNER_DECISIONS.md
 [OD:L1223] - (16/11 06:30Z, s10) OWNER STANDING RULING (from her s9 words 05:51–05:52Z; original ruling lost, history search reports/owner-history-chapters.md): EVERY origin has 4 DIFFERENT story roads (tuyến truyện) for variety; she recalls 12–14 chapters per origin. Today main has ONE road per origin with n:3 steps (td n:5). Meaning of "12–14 chương" (per road vs total over the 4 roads) asked to the owner 06:30Z — do not build until answered. Scope later: content plan per origin → Foreman (content), not main.
 [OD:L1226] - (16/11 07:05Z, s10) OWNER (verbatim summary, story roads; she had to re-state it because earlier chats lost it): 9 origins × only 1 road = 9 roads = boring, players learn them by heart. On đầu thai: roll the origin, THEN roll one of MANY different roads, every road fully different. A life spans 14 CHAPTERS in total (not 3). The first chapters work as a NEW-PLAYER TUTORIAL: quests that make her use each game feature, with rewards. Each chapter has several hồi. LIVING WORLD: replaying the same road can end differently; the people in a road are REAL characters of this life (not always the same NPC A), and when they come to her it must be for a REAL in-game reason (their goals, grudges, debts, faction, events), never a dice roll that day. Coordinator found on main: j67 (owner 11/14) already has 4 premises per origin (36 + court/scholar/st), 3–6 hồi each, casts real rivals (castRv67), >=3 endings, avoids the last 10 played. Recommendation sent 07:05Z; plan in dev/STORY_ROADS_PLAN.md after she approves.
@@ -151,3 +166,4 @@ open NPC request at a time. Starts after phase 1 is on main (needs the frame), c
 [OD:L1253] - (16/11 07:00Z, s11) OWNER RULE (no memorised outcomes, main story too): the same identity + same road + same option chosen must NOT always give the same result across lives. Outcomes depend on the context of that life (people's traits, relations, abilities, who is watching, earlier choices), so players cannot learn the story by heart and always pick "the best". Reaffirms OD:L478 for EVERY story choice (main road, NPC requests, events).
 
 [OD:L1259] - (16/11 07:15Z, s11) OWNER RULE (tutorial chapters 1–3): the new-player tutorial must still be PART OF THE STORY — narration and plot thread tie each tutorial task to what is happening in her life/road; not a detached feature tour.
+[OD:L1264] - (16/11 07:25Z, s11) OWNER RULE (NPC roads for men too): NPC roads (OD:L1252) exist so far only in concept for women (consorts, maids, by identity). MEN need them too — every named male character (Emperor, princes, officials, guards, eunuchs, suitors/men of the outer court…) gets his own identity + road, with the same "her help = one hồi, varied per life" rule.
