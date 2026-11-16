@@ -37,7 +37,7 @@ rdDef("thd_tro",5,{t:"Đề thi bị bán",w:"maid",sj:"kẻ bán đề thi tron
  x1:{h:"Ba ngày trước khi thư lại bị đưa đi",w:"maid",t:"Lễ bộ bất ngờ điều tên thư lại khắc đề đi Vân Nam. Ba ngày nữa hắn lên đường. Lời khai của hắn chỉ còn lấy được trước hôm ấy.",o:[
   {n:"Giữ hắn lại, lấy lời khai",c:{suc:-5},o:A=>35+S.mat*4,e:["win","lose"],rt:"Hắn khai trước mặt Ngự sử: đề được chép ra theo lệnh Thị lang bộ Lễ, bán qua nhà ngoại {v}.",rf:"Đêm trước hôm khai, hắn đã bị đưa đi sớm."},
   {n:"Mua bản sao sổ khắc đề",c:{bac:-60},o:A=>40+(A.f.paper?15:0)+S.tamco/5,e:["win","mid"],rt:"Sổ khắc đề ghi rõ ai đã mượn bản khắc đêm trước ngày thi.",rf:"Bản sao thiếu đúng trang cần."},
-  {n:"Để hắn đi, chỉ ghi lại tên",c:{},w:{duc:2},e:"mid",lx:"lời khai đi theo hắn",rt:"Ngươi ghi tên hắn vào sổ riêng."}]}},
+  {n:"Để hắn đi, chỉ ghi lại tên",c:{danh:-2},w:{duc:2},e:"mid",lx:"lời khai đi theo hắn, sĩ lâm bảo ngươi buông tay, tiếng tăm sứt mẻ",rt:"Ngươi ghi tên hắn vào sổ riêng."}]}},
  E:{win:{k:1,tag:"Lần ra kẻ bán đề",w:"v",t:"Đầu mối đã rõ: Thị lang bộ Lễ cho chép đề, nhà ngoại {v} bán ra. Từ hôm nay, cả hai nhà ấy biết tên ngươi.",fx:{danh:5,mat:1},go:A=>{rdOan(A,"v",8);return""}},
   mid:{k:0,tag:"Biết tên mà chưa có chứng",t:"Ngươi biết ai bán đề, nhưng trong tay chỉ có vài tờ giấy. Kẻ bán vẫn ngồi ghế cũ.",fx:{tamco:1}},
   lose:{k:-1,tag:"Manh mối đứt",t:"Thư lại đi Vân Nam, sổ khắc đã bị thay. Nhà ngoại {v} cười, và {n1} thấy mình bị người lạ theo dõi.",fx:{danh:-3},go:A=>{rdOan(A,"v",4);return""}}}});
@@ -59,16 +59,16 @@ rdDef("thd_tro",6,{t:"Bảng vàng",w:"v",sj:"bảng vàng khoa trước",cast:t
   {n:"Để mặc kho đốt quyển",c:{danh:-2},w:{duc:1},wx:"không phạm phép",lx:"chứng cứ thành tro, sĩ lâm bảo ngươi bỏ cuộc, tiếng tăm sứt mẻ",rt:"Khói kho Lễ bộ bay suốt một buổi chiều."}]},
  c2:{h:"{v} mời ngươi dự tiệc",w:"v",need:["v"],t:"{v} mời ngươi dự tiệc mừng nhà ngoại nàng được ban biển. Ở tiệc, nàng nói khẽ: “Biểu huynh ta là người hiếu nghĩa. Ai làm hại huynh ấy, ta không quên.”",o:[
   {n:"Dự tiệc, nói lời mừng",c:{bac:-20},w:{duc:2},wx:"giữ hòa khí",lx:"tốn bạc sắm lễ mừng, nuốt giận cười",go:A=>{rdRel(A,"v",4)},rt:"{v} rót cho ngươi một chén, mắt không cười."},
-  {n:"Đáp: người hiếu nghĩa thì không sợ bảng vàng bị xem lại",c:{},o:()=>40+S.tai/4,w:{danh:2},sc:1,wx:"cả tiệc nể ngươi",l:{sung:-2},lx:"thành ra cãi nhau giữa tiệc, Hoàng thượng nghe, phật ý; {v} thêm oán",go:A=>{rdOan(A,"v",8)},rt:"Cả tiệc lặng đi. {v} tái mặt.",rf:"{v} tâu với Hoàng hậu là ngươi phá tiệc."},
+  {n:"Đáp: người hiếu nghĩa thì không sợ bảng vàng bị xem lại",c:{},o:()=>40+S.tai/4,w:{danh:2},sc:1,wx:"cả tiệc nể ngươi",l:{sung:-2},lx:"thành ra cãi nhau giữa tiệc, Hoàng thượng nghe, phật ý; {v} thêm oán",go:A=>{rdOan(A,"v",8)},rt:"Cả tiệc lặng đi. {v} tái mặt.",rf:()=>qOn()?"{v} tâu với Hoàng hậu là ngươi phá tiệc.":"{v} khóc với Hoàng thượng là ngươi phá tiệc."},
   {n:"Cáo bệnh không dự",c:{duc:-1},w:{tamco:1},wx:"không để lộ ý",lx:"khinh lễ người ta, tổn đức; {v} thêm oán",go:A=>{rdOan(A,"v",3)},rt:"Ngươi gửi một bình hoa thay mình."}]},
  t1:{h:"{n2} xin bái sư",w:"dad",t:"{n2} gửi lễ hậu về quê, xin bái {dad} làm thầy. Ai cũng hiểu: có danh là học trò của cha ngươi, hắn sẽ khó bị lật.",o:[
   {n:"Khuyên cha nhận, giữ hắn gần",c:{duc:-2},w:{bac:30},f:"near",wx:"biết hắn tính gì",lx:"để cha nhận lễ kẻ gian, tổn đức; danh cha bị hắn mượn",rt:"Cha nhận lễ, giao hắn chép một trang Luận ngữ. Chữ hắn vụng như trẻ lên mười."},
   {n:"Khuyên cha từ chối",c:{danh:-1},w:{duc:3},wx:"tay cha sạch",lx:"người ta bảo nhà thầy đồ kiêu, tiếng tăm sứt mẻ; nhà {v} thêm một mối hận",go:A=>{rdOan(A,"v",4)},rt:"Cha trả lễ: “Thầy đồ nghèo không dạy nổi quan Tri huyện.”"},
   {n:"Để cha thử tài hắn trước mặt người làng",c:{suc:-2},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,f:"witness",wx:"cả làng thấy hắn không viết nổi",l:{danh:-2},lx:"hắn biết bị thử, kể khắp huyện rằng thầy đồ làm nhục quan, tiếng tăm sứt mẻ",rt:"{n2} cầm bút run tay, viết sai hai chữ.",rf:"Hắn cáo bận, không đến."}]},
- x1:{h:"Thơ mừng thọ ở Hàn lâm viện",w:"emp",t:"Hoàng thượng triệu các Tiến sĩ khoa trước về Hàn lâm viện làm thơ mừng thọ Thái hậu; {n2} cũng có tên. Ngài hỏi ngươi: “Đề nên ra thế nào cho thú?”",o:[
-  {n:"Xin ra đề làm thơ ngay tại chỗ",c:{suc:-4},o:A=>35+S.tai/5,e:["win","lose"],rt:"{n2} cầm bút cả canh giờ, nộp tờ giấy chỉ có bốn câu sai luật. Hoàng thượng nhíu mày.",rf:"{n2} đã được nhắc bài trước, thơ trơn tru. Hoàng thượng khen hắn, còn nhìn ngươi lạ lùng."},
+ x1:{h:"Thơ mừng thọ ở Hàn lâm viện",w:"emp",t:()=>`Hoàng thượng triệu các Tiến sĩ khoa trước về Hàn lâm viện làm thơ ${S.thDead?"mừng tiết Vạn thọ":"mừng thọ Thái hậu"}; {n2} cũng có tên. Tối trước buổi thơ, ở Ngự thư phòng, ngài hỏi ngươi: “Đề nên ra thế nào cho thú?”`,o:[
+  {n:"Xin ra đề làm thơ ngay tại chỗ",c:{suc:-4},o:A=>45+S.tai/4,e:["win","lose"],rt:"{n2} cầm bút cả canh giờ, nộp tờ giấy chỉ có bốn câu sai luật. Hoàng thượng nhíu mày.",rf:"{n2} đã được nhắc bài trước, thơ trơn tru. Hoàng thượng khen hắn, còn nhìn ngươi lạ lùng."},
   {n:"Lặng lẽ trao quyển mực cũ cho Hàn lâm viện",c:{bac:-20},o:A=>40+(A.f.paper?15:0)+S.mat*3,e:["win","mid"],rt:"Học sĩ Hàn lâm so chữ, thấy chữ trong quyển cũ không phải chữ {n2}.",rf:"Học sĩ nhận quyển nhưng không dám nói."},
-  {n:"Thưa: đề do Hoàng thượng ra mới quý",c:{},w:{sung:2},e:"mid",lx:"bỏ lỡ dịp vạch mặt",rt:"Hoàng thượng ra đề về hoa cúc, {n2} làm bài tầm thường mà qua."}]}},
+  {n:"Thưa: đề do Hoàng thượng ra mới quý",c:{danh:-2},w:{sung:2},e:"mid",lx:"bỏ lỡ dịp vạch mặt, sĩ lâm chê ngươi nịnh, tiếng tăm sứt mẻ",rt:"Hoàng thượng ra đề về hoa cúc, {n2} làm bài tầm thường mà qua."}]}},
  E:{win:{k:1,tag:"Bảng vàng lộ vết",w:"emp",t:"Hoàng thượng sai giữ {n2} ở kinh chờ xét. Nhà ngoại {v} rối loạn, và lần đầu tiên nàng không cười khi gặp ngươi.",fx:{danh:5,sung:2},go:A=>{rdOan(A,"v",10);return""}},
   mid:{k:0,tag:"Nghi mà chưa lật",t:"Trong Hàn lâm viện người ta thì thầm về chữ của {n2}, nhưng hắn vẫn về huyện làm quan.",fx:{danh:1}},
   lose:{k:-1,tag:"Nhà ngoại {v} đứng vững",t:"{n2} được khen trước điện. Nhà ngoại {v} biết ai đã muốn hại hắn, và họ bắt đầu ra tay trước.",fx:{sung:-3,danh:-2},go:A=>{rdOan(A,"v",6);return""}}}});
@@ -128,15 +128,15 @@ rdDef("thd_tro",8,{t:"Đơn kêu oan",w:"emp",sj:"lá đơn kêu oan của sĩ t
   {n:"Để họ đánh trống",c:{},o:()=>40+S.danh/4,w:{danh:3},sc:1,f:"drum",wx:"cả kinh thành nghe tiếng",l:{duc:-2},lx:"người đánh trống chịu đòn, ngươi day dứt, tổn đức",rt:"Ba hồi trống vang qua Ngọ Môn. Cả triều biết có oan khoa cử.",rf:"Thị vệ bắt người trước khi trống kịp vang."},
   {n:"Xin cha đứng ra đánh trống",c:{suc:-3},o:()=>45+S.duc/4,w:{duc:3},sc:1,f:"drum",wx:"một thầy đồ già, ai nỡ đánh",l:{danh:-2},lx:"cha già chịu nhục trước Ngọ Môn, tiếng tăm sứt mẻ",rt:"Thị vệ thấy ông lão tóc bạc, không ai dám vung roi.",rf:"Cha bị đánh mười roi trước khi đơn được nhận."}]},
  x1:{h:"Đến ngự án",w:"emp",t:"Đêm ấy Hoàng thượng đến cung ngươi. Lá đơn nằm trong ống tay áo. Đưa hay không, đưa thế nào, chỉ trong một đêm.",o:[
-  {n:"Dâng cả đơn và chứng",c:{suc:-5},o:A=>35+(A.f.paper?15:0),e:["win","lose"],rt:"Hoàng thượng đọc đến canh ba, rồi phê: “Giao Tam pháp ty tra xét.”",rf:"Hoàng thượng gấp đơn lại: “Hậu cung lại dính vào khoa cử?”"},
-  {n:"Chỉ thưa có lá đơn, xin ngài tự đọc",c:{},o:A=>45+(A.f.drum?15:0)+S.sung/6,e:["win","mid"],lx:"không nói thì không ai biết ngươi tin gì",rt:"Ngài đọc đơn ở Dưỡng Tâm điện, sáng hôm sau giao Tam pháp ty.",rf:"Đơn được nhận, nhưng nằm trong chồng tấu."},
-  {n:"Không đưa, để sĩ tử tự lo",c:{},w:{sung:2},e:"mid",lx:"sĩ tử thấy ngươi bỏ họ",rt:"Ngươi giữ ống tay áo im lặng cả đêm."}]}},
+  {n:"Dâng cả đơn và chứng",c:{suc:-5},o:A=>42+(A.f.paper?15:0),e:["win","lose"],rt:"Hoàng thượng đọc đến canh ba, rồi phê: “Giao Tam pháp ty tra xét.”",rf:"Hoàng thượng gấp đơn lại: “Hậu cung lại dính vào khoa cử?”"},
+  {n:"Chỉ thưa có lá đơn, xin ngài tự đọc",c:{danh:-2},o:A=>36+(A.f.drum?15:0)+S.sung/6,e:["win","mid"],lx:"không nói thì không ai biết ngươi tin gì; sĩ tử thấy ngươi không dám đứng ra, tiếng tăm sứt mẻ",rt:"Ngài đọc đơn ở Dưỡng Tâm điện, sáng hôm sau giao Tam pháp ty.",rf:"Đơn được nhận, nhưng nằm trong chồng tấu."},
+  {n:"Không đưa, để sĩ tử tự lo",c:{danh:-3},w:{sung:2},e:"mid",lx:"sĩ tử thấy ngươi bỏ họ, tiếng tăm sứt mẻ",rt:"Ngươi giữ ống tay áo im lặng cả đêm."}]}},
  E:{win:{k:1,tag:"Lá đơn đến ngự án",w:"emp",t:"Hoàng thượng giao Tam pháp ty tra án khoa cử. Sĩ tử khắp kinh quỳ trước Quốc Tử Giám tạ ơn, và ai cũng biết lá đơn đi qua tay ai.",fx:{danh:7,duc:2},go:A=>{rdOan(A,"v",8);return""}},
   mid:{k:0,tag:"Đơn được nhận, chưa phê",t:"Lá đơn nằm trên ngự án, chưa có lời phê. Mỗi ngày chờ, nhà ngoại {v} lại có thêm thời gian xóa dấu.",fx:{danh:2}},
   lose:{k:-1,tag:"Lá đơn bị trả về",t:"Hoàng thượng trả đơn, trách ngươi để sĩ tử dựa vào hậu cung. Nhà ngoại {v} mở tiệc.",fx:{sung:-6,danh:-2},go:A=>{rdOan(A,"v",4);return""}}}});
 
 rdDef("thd_tro",9,{t:"Triều đình chấn động",w:"emp",sj:"khoa án rung chuyển Lễ bộ",cast:thdTroCast,
- g:"Án khoa cử lan ra ngoài triều. Lễ bộ run sợ, Thị lang tìm người gánh tội thay, nhà ngoại {v} chạy khắp các cửa quan. Có chỉ của Hoàng thượng thì án về Tam pháp ty — Hình bộ, Ngự sử đài, Đại Lý tự cùng xét. Chuyện không còn là của một học trò nữa.",
+ g:"Án khoa cử lan ra ngoài triều. Lễ bộ run sợ, Thị lang tìm người gánh tội thay, nhà ngoại {v} chạy khắp các cửa quan. Có chỉ của Hoàng thượng thì án về Tam pháp ty. Chuyện không còn là của một học trò nữa.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Thư lại treo cổ",w:"maid",if:RDW(1),t:"Chỉ vừa ban, Tam pháp ty vừa mở án thì tin đến: một thư lại phòng khắc in treo cổ trong nhà, để lại thư nhận hết tội. Ai cũng hiểu đó là con dê thế tội.",o:[
   {n:"Cho người khám lá thư tuyệt mệnh",c:{bac:-30},o:()=>45+S.mat*4,w:{mat:2},sc:1,f:"paper",wx:"thấy chữ trong thư không phải của hắn",l:{danh:-2},lx:"bị nói là tò mò việc ma chay, tiếng tăm sứt mẻ",rt:"Chữ trong thư tuyệt mệnh giống chữ một môn khách của Thị lang.",rf:"Thư đã nộp lên Tam pháp ty, không ai được xem."},
@@ -160,8 +160,8 @@ rdDef("thd_tro",9,{t:"Triều đình chấn động",w:"emp",sj:"khoa án rung c
   {n:"Lặng im nghe",c:{duc:-2},w:{tamco:2},wx:"không để lộ ý",lx:"im lặng trước người hỏi thật lòng, tổn đức; Thái hậu không biết ngươi nghĩ gì",rt:"Ngươi cúi đầu đến khi Thái hậu cho lui."}]},
  x1:{h:"Hoàng thượng hỏi đến đâu",w:"emp",t:"Đêm khuya ở Ngự thư phòng, Hoàng thượng đặt trước mặt ngươi bản tấu án khoa cử — Tam pháp ty đã theo chỉ ngài mà xét: “Xử đến đâu là việc của trẫm. Nàng nghĩ sao, nói thử.”",o:[
   {n:"Xử kẻ đầu sỏ, tha kẻ bị lôi theo",c:{suc:-4},o:A=>40+(A.f.narrow?15:0),e:["win","mid"],rt:"Thị lang bộ Lễ bị cách chức tra xét. Hai mươi nhà kia thở phào và nhớ ơn ngươi.",rf:"Thị lang thoát, chỉ vài thư lại bị xử."},
-  {n:"Xử tất cả, khoa trường mới sạch",c:{suc:-4},o:A=>35+(A.f.wide?15:0)+S.danh/6,e:["win","lose"],rt:"Thị lang bị cách, ba khoa thi được xét lại. Cả triều run.",rf:"Nửa triều dâng sớ nói hậu cung khuấy triều chính."},
-  {n:"Thưa: việc triều, thiếp không dám bàn",c:{},w:{duc:3},e:"mid",lx:"để người khác quyết thay",rt:"Hoàng thượng thở dài, tự phê."}]}},
+  {n:"Xử tất cả, khoa trường mới sạch",c:{suc:-4},o:A=>40+(A.f.wide?15:0)+S.danh/6,e:["win","lose"],rt:"Thị lang bị cách, ba khoa thi được xét lại. Cả triều run.",rf:"Nửa triều dâng sớ nói hậu cung khuấy triều chính."},
+  {n:"Thưa: việc triều, thiếp không dám bàn",c:{danh:-2},w:{duc:3},e:"mid",lx:"để người khác quyết thay, sĩ lâm bảo ngươi bỏ dở, tiếng tăm sứt mẻ",rt:"Hoàng thượng thở dài, tự phê."}]}},
  E:{win:{k:1,tag:"Thị lang bộ Lễ bị cách chức",w:"emp",t:"Thị lang bị cách chức chờ xét, nhà ngoại {v} bị niêm phong sổ sách. Sĩ lâm khắp nơi biết tên ngươi.",fx:{danh:7,sung:2},go:A=>{rdOan(A,"v",10);return""}},
   mid:{k:0,tag:"Chỉ kẻ nhỏ bị xử",t:"Vài thư lại bị xử, Thị lang được giữ ghế. Án chưa khép, ai cũng chờ nước sau.",fx:{danh:1}},
   lose:{k:-1,tag:"Ngươi bị nghi khuấy triều",t:"Triều thần dâng sớ nói hậu cung khuấy triều chính. Hoàng thượng thôi bàn chuyện khoa cử với ngươi.",fx:{sung:-6,danh:-3},go:A=>{rdOan(A,"v",4);return""}}}});
@@ -190,9 +190,9 @@ rdDef("thd_tro",10,{t:"Thi lại",w:"emp",sj:"kỳ thi lại trong điện",cast
   {n:"Thưa: đề là việc của vua",c:{danh:-2},w:{duc:2},wx:"giữ phận",lx:"mất dịp chọn đề công bằng, sĩ lâm bảo ngươi lùi, tiếng tăm sứt mẻ",rt:"Hoàng thượng gật đầu."},
   {n:"Xin ngài ra đề ngay trước giờ thi",c:{duc:-2},w:{tamco:2},f:"theme",wx:"không ai kịp mua đề",lx:"nghi cả Lễ bộ, tổn đức; Lễ bộ thấy ngươi nghi họ",rt:"Ngài cười: “Ý hay. Trẫm cũng chẳng tin ai.”"}]},
  x1:{h:"Điện Bảo Hòa",w:"emp",t:"Ngày thi lại. Ba mươi thí sinh quỳ trong điện Bảo Hòa, Hoàng thượng ngồi trên. Phi tần không được bước vào; ngươi ngồi ở cung, chỉ có thái giám chạy tin qua lại. Mọi điều chuẩn bị đều dồn vào một buổi.",o:[
-  {n:"Gửi ra một mảnh giấy xin ngài ra đề tại chỗ",c:{suc:-4},o:A=>35+(A.f.theme?15:0),e:["win","lose"],rt:"Đề ra tại chỗ. {n1} viết kín giấy; {n2} nộp giấy trắng.",rf:"Thái giám thấy mảnh giấy, tâu ngươi xen vào kỳ thi."},
-  {n:"Ngồi yên, tin vào {n1}",c:{},o:A=>45+(A.f.guard?15:0)+(A.f.trap?5:0),e:["win","mid"],lx:"không làm gì nếu có biến",rt:"{n1} làm bài trôi chảy, {n2} viết lủng củng.",rf:"Cả hai đều đỗ, bảng chưa rõ ai hơn ai."},
-  {n:"Ở cung chờ tin, không gửi gì",c:{},w:{duc:2},e:"mid",lx:"không ai che chở nếu có biến",rt:"Ngươi ở cung, chờ tin."}]}},
+  {n:"Gửi ra một mảnh giấy xin ngài ra đề tại chỗ",c:{suc:-4},o:A=>46+(A.f.theme?15:0),e:["win","lose"],rt:"Đề ra tại chỗ. {n1} viết kín giấy; {n2} nộp giấy trắng.",rf:"Thái giám thấy mảnh giấy, tâu ngươi xen vào kỳ thi."},
+  {n:"Ngồi yên, tin vào {n1}",c:{},o:A=>36+(A.f.guard?15:0)+(A.f.trap?5:0),e:["win","mid"],lx:"không làm gì nếu có biến",rt:"{n1} làm bài trôi chảy, {n2} viết lủng củng.",rf:"Cả hai đều đỗ, bảng chưa rõ ai hơn ai."},
+  {n:"Ở cung chờ tin, không gửi gì",c:{danh:-2},w:{duc:2},e:"mid",lx:"không ai che chở nếu có biến; sĩ lâm bảo ngươi buông {n1} lúc cần, tiếng tăm sứt mẻ",rt:"Ngươi ở cung, chờ tin."}]}},
  E:{win:{k:1,tag:"{n1} đứng đầu kỳ thi lại",w:"emp",t:"{n1} đứng đầu kỳ thi lại, {n2} bị tước danh Tiến sĩ. Tin về đến cung ngươi trước cả bảng.",fx:{danh:7,sung:3},go:A=>{rdOan(A,"v",10);return""}},
   mid:{k:0,tag:"Cả hai cùng đỗ",t:"{n1} và {n2} đều đỗ. Bảng mới vẫn có tên kẻ mua đề, nhưng giờ cũng có tên người bị oan.",fx:{danh:2}},
   lose:{k:-1,tag:"Kỳ thi lại hỏng",t:"Mảnh giấy của ngươi bị bắt. Kỳ thi bị nói là có hậu cung nhúng tay, kết quả treo lại.",fx:{sung:-5,danh:-4},go:A=>{rdOan(A,"v",4);return""}}}});
@@ -208,7 +208,7 @@ rdDef("thd_tro",11,{t:"Công bằng khoa cử",w:"emp",sj:"công bằng cho khoa
   {n:"Xin Hoàng thượng định án trước Tết",c:{suc:-3},o:()=>40+S.sung/4,w:{danh:2},sc:1,wx:"án có hạn chót",l:{sung:-3},lx:"ngài thấy ngươi giục, Hoàng thượng phật ý",rt:"Hoàng thượng gật đầu: “Trước Tết.”",rf:"Ngài không đáp."},
   {n:"Gửi thư an ủi cha",c:{danh:-2},w:{duc:2},wx:"cha yên lòng",lx:"ngồi viết thư mà án vẫn treo, sĩ lâm bảo ngươi buông, tiếng tăm sứt mẻ",rt:"Cha hồi: “Có con là đủ.”"},
   {n:"Gom lại mọi chứng cứ còn lại",c:{bac:-30},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"paper",wx:"chứng đủ để định án",l:{danh:-2},lx:"nhà {v} biết ngươi chưa dừng, đồn ngươi làm án thay quan, tiếng tăm sứt mẻ",rt:"Ngươi xếp lại tờ khai, quyển mực, tờ phao — đủ cả.",rf:"Vài tờ chứng đã bị đánh tráo."}]},
- c1:{h:"Số phận {n2}",w:"v",t:"Tam pháp ty — Hình bộ, Ngự sử đài, Đại Lý tự — nghị theo luật: mua đề thì chém. Hoàng thượng chưa phê; {n2} sẽ bị xử theo luật, trừ khi ngài gia ân.",o:[
+ c1:{h:"Số phận {n2}",w:"v",t:"Tam pháp ty nghị theo luật: mua đề thì chém. Hoàng thượng chưa phê; {n2} sẽ bị xử theo luật, trừ khi ngài gia ân.",o:[
   {n:"Xin tha chết, đày đi biên ải",c:{suc:-2},w:{duc:4},f:"mercy",wx:"giữ đức cho mình",lx:"quỳ xin mà hao sức; kẻ có tội còn sống",go:A=>{rdRel(A,"v",10)},rt:"Hoàng thượng giảm tội: {n2} được tha chết, bị đày đi Quỳnh Châu. {v} khóc, không biết nên hận hay nên cảm ơn."},
   {n:"Để luật xử",c:{sung:-1},w:{danh:3},f:"law",wx:"phép nước nghiêm",lx:"để luật xử mà không xin một lời, Hoàng thượng thấy ngươi lạnh, ân sủng nhạt đi; nhà {v} hận đến chết",go:A=>{rdOan(A,"v",12)},rt:"Ngươi không nói một lời nào cho {n2}."},
   {n:"Đổi mạng {n2} lấy lời khai về Thị lang",c:{suc:-3},o:()=>40+S.tamco/3,w:{mat:2},sc:1,f:"law",wx:"kẻ đứng đầu không thoát",l:{duc:-2},lx:"mặc cả mạng người, tổn đức",go:(A,ok)=>{rdRel(A,"v",ok?4:-6)},rt:"{n2} khai hết trước Tam pháp ty, được Hoàng thượng giảm tội, tha chết.",rf:"{n2} không dám khai, vẫn bị xử."}]},
@@ -223,7 +223,7 @@ rdDef("thd_tro",11,{t:"Công bằng khoa cử",w:"emp",sj:"công bằng cho khoa
  x1:{h:"Định án khoa cử",w:"emp",t:"Sau buổi chầu, ở Ngự thư phòng, Hoàng thượng đặt bút: định tội Thị lang, định danh {n1}, định phép thi về sau. Ngài nhìn ngươi: “Nàng còn điều gì muốn tâu?”",o:[
   {n:"Tâu: xin rọc phách, chép lại bài để quan chấm không thấy tên",c:{suc:-5},o:A=>35+(A.f.reform?15:0)+S.danh/8,e:["win","lose"],rt:"Chiếu ban phép thi mới. Kẻ mua đề bị xử, {n1} được trả bảng vàng.",rf:"Lễ bộ cùng dâng sớ phản đối, Hoàng thượng gác cả án lẫn phép mới."},
   {n:"Tâu: chỉ xin trả tên cho người bị oan",c:{},o:A=>50+(A.f.paper?10:0)+(A.f.narrow?10:0),e:["mid","lose"],lx:"phép thi cũ còn nguyên",rt:"{n1} được trả tên, án khép lặng lẽ.",rf:"Án bị gác lại, không ai được trả tên."},
-  {n:"Tâu: thiếp không dám bàn, xin ngài tự định",c:{},w:{duc:3},e:"mid",lx:"để người khác quyết",rt:"Hoàng thượng tự phê: {n1} được trả tên, Thị lang về hưu."}]}},
+  {n:"Tâu: thiếp không dám bàn, xin ngài tự định",c:{danh:-3},w:{duc:3},e:"mid",lx:"để người khác quyết, sĩ lâm thôi trông vào ngươi, tiếng tăm sứt mẻ",rt:"Hoàng thượng tự phê: {n1} được trả tên, Thị lang về hưu."}]}},
  E:{win:{k:1,tag:"Khoa trường trong sạch",w:"emp",t:"Thị lang bộ Lễ bị xử, nhà ngoại {v} mất hết bảng vàng mua được. {n1} được trả danh, phép thi mới được ban khắp thiên hạ. Ở quê, {dad} đọc chiếu rồi khóc.",fx:{danh:12,sung:4,duc:3},go:A=>{rdOan(A,"v",6);return""}},
   mid:{k:0,tag:"Học trò được trả tên",t:"{n1} được trả tên, làm quan. Kẻ mua đề phần lớn lặng lẽ về hưu. Chuyện khép lại mà không ai hô to.",fx:{danh:4,duc:3}},
   lose:{k:-1,tag:"Khoa án bị chôn vùi",t:"Án khoa cử bị gác mãi. {n1} về quê dạy học cạnh {dad}. Ngươi vẫn giữ ngôi vị trong cung, nhưng sĩ lâm thôi nhắc tên ngươi.",fx:{danh:-6,sung:-2},go:A=>{rdOan(A,"v",4);return""}}}});

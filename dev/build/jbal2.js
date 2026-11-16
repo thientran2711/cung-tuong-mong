@@ -311,6 +311,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  cn_chu:{gap:1,cam:1,phat:3}, /* gap: ranks she must sit above the old mistress for the .9 climax bonus; cam: months of cấm túc for the old mistress (.7 win); phat: months of khất bổng (.8 x1, .9, .11 win2) */
  cn_tinh:{danh:40,cam:3,phat:3}, /* danh: Danh at which her own word weighs in the Kính sự phòng report (.9); cam: months of her cấm túc (.9 lose / self-confinement, .11 lose); phat: months of khất bổng (.11 lose) */
  cn_ban:{ill:2,cam:2,phat:1}, /* ill: months Tố Nga survives without the ginseng (.8); cam: months of cấm túc for the framer (.6 win, .10 win); phat: months of khất bổng on her (.7 lose) */
+ thd_tho:{cam:3},            /* months of cấm túc Hoàng thượng gives {v} when thd_tho .10 x1 «Xin xử đúng luật» wins (jrd_thd, applied with jrd_cn CN_CAM, printed with kitNumVi) */
  cn_than:{dl:3,phat:2},      /* dl: months the old Thẩm steward can hold out (.7); phat: months of khất bổng the Thượng thư house gets her (.6 s2 fail, .9 c3 refuse) */
  /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
     read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */

@@ -1,5 +1,6 @@
 /* ---------- thd_tho · Danh hiệu Tài nữ ---------- */
-/* BAL.road keys needed: none (deadlines are event-bound: "trước khi danh sách niêm yết", "trước ngày yết bảng").
+/* BAL.road keys: thd_tho.cam = months of cấm túc the Emperor gives {v} when .10 x1 «Xin xử đúng luật» wins (applied with jrd_cn CN_CAM,
+   printed with kitNumVi). Deadlines are event-bound: "trước khi danh sách niêm yết", "trước ngày yết bảng".
    Cast: v = the rival from .4 (carried), {n1} = the Hàn lâm, dad's old student (.4 A.n1 is carried by the engine in S.st.f14.n1; fallback is the role
    "Hàn lâm học trò của cha"). Story-only role: the uncle of {v},
    a Thị độc of the Hàn lâm viện (never named, register as ROAD_MAP §5.4 row). .7 is a normal hồi (no j67 arc calls playArt). */
@@ -27,7 +28,7 @@ rdDef("thd_tho",5,{t:"Lời thơ vượt tường cung",w:"emp",sj:"kỳ Xuân t
   {n:"Gửi thơ mới cho trò làng chép",c:{suc:-2},w:{tai:1,danh:1},wx:"thơ ngươi có người đọc thật lòng",lx:"chép thơ suốt đêm, hao sức; mái trường vẫn dột",rt:"Cha chép thơ con lên vách lớp."},
   {n:"Xin Hoàng thượng ban chữ cho trường làng",c:{suc:-2},o:()=>35+S.sung/4,sc:1,w:{danh:4},wx:"trường làng có biển ngự ban",l:{sung:-3},lx:"ngài cho là ngươi mượn ân riêng, Hoàng thượng phật ý",rt:"Hoàng thượng viết bốn chữ “Hữu giáo vô loại”.",rf:"Hoàng thượng bảo: “Việc nhỏ, để sau.”"}]},
  x1:{h:"Đề Xuân thí",w:"emp",t:"Trước khi danh sách niêm yết, ngươi phải quyết: chuyện đề bị lộ, để yên hay làm lớn.",o:[
-  {n:"Tâu Hoàng thượng đề đã lộ",c:{suc:-4},o:A=>35+(A.f.clean?10:0)+S.danh/6,e:["win","lose"],rt:"Hoàng thượng sai đổi đề trong đêm. Tên ngươi đứng thứ năm trên bảng.",rf:"Hoàng thượng hỏi: “Sao nàng biết đề?” Câu hỏi treo lơ lửng."},
+  {n:"Tâu Hoàng thượng đề đã lộ",c:{suc:-4},o:A=>45+(A.f.clean?10:0)+S.danh/6,e:["win","lose"],rt:"Hoàng thượng sai đổi đề trong đêm. Tên ngươi đứng thứ năm trên bảng.",rf:"Hoàng thượng hỏi: “Sao nàng biết đề?” Câu hỏi treo lơ lửng."},
   {n:"Nhờ {n1} lặng lẽ xin đổi đề",c:{bac:-20},o:A=>40+(A.f.ally?15:0)+S.tamco/5,e:["win","mid"],rt:"Đề được đổi mà không ai biết vì sao.",rf:"{n1} không dám, đề vẫn giữ nguyên."},
   {n:"Giữ kín, luyện đúng đề ấy",c:{duc:-2},o:A=>45+(A.f.know?10:0),e:["mid","lose"],lx:"ngươi thi trên một đề bẩn",rt:"Ngươi vào thi với mười bài vịnh mai trong đầu.",rf:"Có kẻ đồn chính ngươi mua đề."}]}},
  E:{win:{k:1,tag:"Đề đổi, tên ngươi trên bảng",w:"emp",t:"Đề Xuân thí được đổi thành “Vịnh trúc”. Tên ngươi đứng trên bảng dự thí, và cung {v} có người đập vỡ một chén trà.",fx:{danh:4,tai:1},go:A=>{rdOan(A,"v",8);return ""}},
@@ -38,7 +39,7 @@ rdDef("thd_tho",6,{t:"Tập nháp bị trộm",w:"maid",sj:"tập thơ nháp c�
  g:"Tập thơ nháp ngươi chép từ thuở ở quê, có cả những câu chưa đưa ai xem, biến mất khỏi án thư. Không có nó, ngươi không chứng được bài nào là của mình. Tìm lại trước kỳ Xuân thí.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Đề đổi, có kẻ tức",w:"maid",if:RDW(1),t:"Ba ngày sau khi đề đổi thành “Vịnh trúc”, tập nháp của ngươi biến mất. Trong đó có hai mươi bài vịnh trúc ngươi viết từ hồi ở quê.",o:[
-  {n:"Khóa cửa, tra từng người hầu",c:{suc:-3},o:()=>45+S.mat*5,w:{mat:1},sc:1,wx:"biết ai vào phòng hôm ấy",l:{danh:-2},lx:"người hầu oán ngươi nghi oan, tiếng tăm sứt mẻ",rt:"Một cung nữ mới đổi đến đã xin nghỉ về quê từ hôm qua.",rf:"Ai cũng khai không biết."},
+  {n:"Khóa cửa, tra từng người hầu",c:{suc:-3},o:()=>45+S.mat*5,w:{mat:1},sc:1,wx:"biết ai vào phòng hôm ấy",l:{danh:-2},lx:"người hầu bất bình vì bị nghi oan, tiếng tăm sứt mẻ",rt:"Một cung nữ mới đổi đến đã xin nghỉ về quê từ hôm qua.",rf:"Ai cũng khai không biết."},
   {n:"Lặng lẽ cho người dò ngoài cung",c:{bac:-20},w:{tamco:2},wx:"kẻ trộm không biết đã bị dò",lx:"tốn bạc thuê người dò, mà chậm hơn",rt:"Người của ngươi ra phố sách ngồi nghe ngóng."},
   {n:"Viết ngay bài mới, mặc tập cũ",c:{suc:-5},w:{tai:3},wx:"thơ mới không ai có",lx:"viết suốt đêm đến kiệt sức, thơ cũ trôi đi mất",rt:"Ngươi viết thâu đêm."}]},
  s2:{h:"Kẻ gian giấu đồ gian",w:"maid",if:RDW(0),t:"Chuyện đề thi chưa yên thì tập nháp biến mất. Ngoài hành lang có tiếng xì xào: “Mất thật hay tự giấu đi cho khỏi bị khám?”",o:[
@@ -58,12 +59,14 @@ rdDef("thd_tho",6,{t:"Tập nháp bị trộm",w:"maid",sj:"tập thơ nháp c�
   {n:"Nhờ {n1} giữ hắn lại",c:{suc:-2},o:()=>40+S.danh/5,w:{tamco:1},sc:1,f:"ally",wx:"có Hàn lâm làm chứng",l:{danh:-2},lx:"{n1} bị kéo vào vòng, người ta bảo ngươi dùng người quen, tiếng tăm sứt mẻ",rt:"{n1} giữ hắn làm người chép sách trong viện.",rf:"{n1} ngại, không dám nhận."},
   {n:"Để hắn đi, chỉ ghi lại tên",c:{suc:-2},w:{duc:1},wx:"không dây dưa",lx:"chạy theo dò tên hắn, hao sức; bản chép đề ngày giả vẫn còn đâu đó",rt:"Ngươi chép tên hắn vào sổ riêng."}]},
  x1:{h:"Lấy lại tập nháp",w:"v",t:"Tập nháp đang ở đâu đó trong cung {v}. Trước kỳ Xuân thí, ngươi chỉ còn một nước để đi.",o:[
-  {n:"Xin Cung chính ty khám cung {v}",c:{suc:-5},o:A=>35+(A.f.chase?10:0)+S.danh/6,e:["win","lose"],rt:"Tập nháp được tìm thấy dưới đáy rương đồ của một cung nữ bên {v}.",rf:"Khám không ra gì. {v} khóc trước Hoàng hậu vì bị làm nhục."},
+  {n:"Xin Cung chính ty khám cung {v}",c:{suc:-5},o:A=>40+(A.f.chase?10:0)+S.danh/4,e:["win","lose"],rt:"Tập nháp được tìm thấy dưới đáy rương đồ của một cung nữ bên {v}.",rf:()=>qOn()?"Khám không ra gì. {v} khóc trước Hoàng hậu vì bị làm nhục.":"Khám không ra gì. {v} khóc trước Hoàng thượng vì bị làm nhục."},
   {n:"Bỏ bạc chuộc lại qua tay người chép",c:{bac:-60},o:A=>40+(A.f.wit?15:0)+S.tamco/5,e:["win","mid"],rt:"Tập nháp về tay, gói trong vải dầu.",rf:"Chỉ chuộc được nửa tập, nửa kia đã chép xong."},
   {n:"Viết lại từ trí nhớ, mặc nó",c:{suc:-4},w:{tai:2},e:"mid",lx:"viết lại đến kiệt sức; thơ cũ của ngươi nằm trong tay kẻ khác",rt:"Ngươi viết lại được mười hai bài."}]}},
  E:{win:{k:1,tag:"Tập nháp về tay",w:"maid",t:"Tập nháp về lại án thư ngươi, từng trang còn nguyên. Nhưng ngươi biết: kẻ lấy đã có đủ thời gian để chép.",fx:{danh:3,tai:1},go:A=>{rdOan(A,"v",8);return ""}},
   mid:{k:0,tag:"Viết lại từ trí nhớ",t:"Ngươi có lại một phần thơ, phần kia trôi đi đâu không biết.",fx:{tai:1}},
-  lose:{k:-1,tag:"Tập nháp nằm trong tay {v}",t:"Khám không ra. {v} được Hoàng hậu an ủi, còn ngươi bị nhắc nhở. Thơ ngươi giờ nằm trong tay người ghét ngươi nhất.",fx:{danh:-4,hh:-3},go:A=>{rdOan(A,"v",6);return ""}}}});
+  lose:{k:-1,tag:"Tập nháp nằm trong tay {v}",t:()=>`Khám không ra. {v} được ${qOn()?"Hoàng hậu":"Hoàng thượng"} an ủi, còn ngươi bị nhắc nhở. Thơ ngươi giờ nằm trong tay người ghét ngươi nhất.`,fx:{danh:-4},
+   /* the comforter's displeasure falls on Hoàng hậu favour only while she sits, else on Sủng (review road-b3-r1 item 5) */
+   go:A=>{rdOan(A,"v",6);const d=qOn()?{hh:-3}:{sung:-2};ap67(d);return fmt(d)}}}});
 
 rdDef("thd_tho",7,{t:"Vòng thi Ngự hoa viên",w:"emp",sj:"vòng thi Xuân thí",cast(A){A.n1=A.n1||(S.st.f14&&S.st.f14.n1)||"Hàn lâm học trò của cha";return rdCast(A,["v"])},
  g:"Xuân thí mở ở Ngự hoa viên. Hoàng thượng ngồi trên, Hàn lâm viện chấm thơ dưới, một nén hương cho một bài. {v} ngồi cách ngươi ba chỗ.",
@@ -77,7 +80,7 @@ rdDef("thd_tho",7,{t:"Vòng thi Ngự hoa viên",w:"emp",sj:"vòng thi Xuân th�
   {n:"Viết bài cũ hay nhất, mặc ai chép",c:{suc:-2},w:{duc:2},f:"old",wx:"thơ của mình thì mình viết",lx:"viết vội trước giờ thi, hao sức; có thể đụng bài của kẻ khác",rt:"Ngươi nhớ lại từng chữ."},
   {n:"Báo trước với {n1}",c:{suc:-2},o:()=>40+S.danh/5,w:{tamco:1},sc:1,f:"ally",wx:"giám khảo biết mà đề phòng",l:{danh:-2},lx:"lời báo lọt ra thành lời gièm, tiếng tăm sứt mẻ",rt:"{n1} gật nhẹ.",rf:"Có người nghe thấy, bảo ngươi đi đêm giám khảo."}]},
  c1:{h:"{v} ngâm một bài quen",w:"v",need:["v"],if:()=>rdPrev()!=="win",t:"Hương mới cháy nửa, {v} đã nộp bài. Học sĩ đọc to: từng câu là câu trong tập nháp của ngươi, chỉ đổi vài chữ.",o:[
-  {n:"Đứng dậy nói đó là thơ của ngươi",c:{suc:-3},o:()=>30+S.danh/4+S.tai/5,sc:1,w:{danh:3},wx:"lời ngươi được ghi vào biên bản",l:{danh:-4},lx:"bị cho là làm loạn vườn thi, tiếng tăm sứt mẻ",go:A=>{rdOan(A,"v",8)},rt:"Chưởng viện cho ghi lại, giữ bài {v} riêng.",rf:"Thái hậu cau mày: “Không có chứng thì im.”"},
+  {n:"Đứng dậy nói đó là thơ của ngươi",c:{suc:-3},o:()=>30+S.danh/4+S.tai/5,sc:1,w:{danh:3},wx:"lời ngươi được ghi vào biên bản",l:{danh:-4},lx:"bị cho là làm loạn vườn thi, tiếng tăm sứt mẻ",go:A=>{rdOan(A,"v",8)},rt:"Chưởng viện cho ghi lại, giữ bài {v} riêng.",rf:()=>S.thDead?"Chưởng viện cau mày: “Không có chứng thì im.”":"Thái hậu cau mày: “Không có chứng thì im.”"},
   {n:"Ngồi yên, viết bài khác hay hơn",c:{suc:-4},w:{tai:2},wx:"thắng bằng chữ, không bằng lời",lx:"viết lại cả bài trong nửa nén hương, kiệt sức; bài của {v} được chấm như thường",rt:"Ngươi cắn môi, cầm bút lại."},
   {n:"Ghi lại từng chữ nàng đổi",c:{danh:-2},w:{tamco:2},wx:"có chứng về sau",lx:"im lặng nuốt nhục trước cả vườn, mất mặt",rt:"Ngươi chép vào tay áo những chữ nàng sửa."}]},
  c2:{h:"Nghiên mực bị tráo",w:"maid",t:"Nghiên mực trên án của ngươi bị pha nước, mực loang như khóc. Còn non nửa nén hương.",o:[
@@ -88,14 +91,14 @@ rdDef("thd_tho",7,{t:"Vòng thi Ngự hoa viên",w:"emp",sj:"vòng thi Xuân th�
   {n:"Kể thật bài thơ đầu cha dạy",c:{danh:-2},w:{th:3,duc:2},wx:"Thái hậu cảm động",lx:"lộ cái nghèo trước cả vườn, mất mặt",rt:"Thái hậu khẽ đọc theo câu ngươi kể."},
   {n:"Đọc một câu kinh điển cho trang trọng",c:{},o:()=>45+S.tai/4,sc:1,w:{danh:2},wx:"cả vườn nể học vấn",l:{th:-2},lx:"Thái hậu thấy ngươi giấu quê, phật lòng",rt:"Học sĩ Hàn lâm gật gù.",rf:"Thái hậu nói: “Ta hỏi thơ của cha con kia mà.”"},
   {n:"Xin Thái hậu cho viết xong rồi thưa",c:{th:-2},w:{tai:1},wx:"không phân tâm",lx:"Thái hậu thấy ngươi khô khan, phật lòng",rt:"Thái hậu phẩy tay cho viết tiếp."}]},
- t1:{h:"{n1} trong hàng giám khảo",w:"emp",t:"{n1} ngồi trong hàng giám khảo. Ánh mắt y lướt qua ngươi một lần rồi thôi. Chú của {v} ngồi ngay bên cạnh y.",o:[
-  {n:"Không nhìn {n1} lấy một lần",c:{suc:-2},w:{duc:3},wx:"không ai nói được ngươi đi đêm",lx:"ngồi căng người cả buổi, hao sức; y không biết ngươi cần gì",rt:"Ngươi cúi xuống trang giấy."},
+ t1:{h:"{n1} trong hàng giám khảo",w:"emp",t:"{n1} ngồi trong hàng giám khảo, chú của {v} ngồi ngay bên cạnh y. Theo lệ hồi tị, giám khảo có người thân dự thi phải lui: {n1} là học trò của cha ngươi, chú của {v} là người nhà nàng. Chưởng viện chưa nhắc lệ ấy.",o:[
+  {n:"Xin Chưởng viện cho cả hai hồi tị",c:{suc:-2},o:()=>40+S.danh/4,sc:1,w:{duc:3},f:"recuse",wx:"{n1} và chú của {v} cùng rời hàng giám khảo",l:{danh:-2},lx:"Chưởng viện cho là ngươi dạy viện làm việc, tiếng tăm sứt mẻ",rt:"Chưởng viện y lệ: {n1} và chú của {v} cùng lui khỏi hàng giám khảo.",rf:"Chưởng viện chỉ cho {n1} lui; chú của {v} vẫn ngồi."},
   {n:"Ra hiệu nhờ y để mắt bài {v}",c:{duc:-2},o:()=>40+S.tamco/4,sc:1,w:{tamco:2},f:"sign",wx:"y đọc kỹ bài {v}",l:{danh:-3},lx:"chú của {v} thấy, người ta bảo ngươi gian lận, tiếng tăm sứt mẻ",rt:"{n1} giữ bài {v} lâu hơn mọi bài.",rf:"Chú của {v} hừ một tiếng."},
   {n:"Xin Hoàng thượng cho chấm tên che",c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:3},f:"blind",wx:"bài nào cũng che tên",l:{sung:-3},lx:"ngài thấy ngươi lắm chuyện, Hoàng thượng phật ý",rt:"Hoàng thượng cười: “Ý hay.” Bài nào cũng dán giấy che tên.",rf:"Hoàng thượng bảo Hàn lâm viện có phép của Hàn lâm viện."}]},
  x1:{h:"Nén hương cuối",w:"emp",t:"Hương còn một đốt tay. Bài của ngươi phải nộp lên án.",o:[
-  {n:"Viết về tuyết trên mái trường làng",c:{suc:-5},o:A=>30+S.tai/4+(S.arts&&S.arts.thi||0)*4+(A.f.new?8:0),e:["win","mid"],rt:"Hoàng thượng đọc xong, đặt bài ngươi lên trên cùng.",rf:"Bài hay, nhưng Hàn lâm viện chê lời quê."},
+  {n:"Viết về tuyết trên mái trường làng",c:{suc:-5},o:A=>30+S.tai/4+(S.arts&&S.arts.thi||0)*4+(A.f.new?8:0)+(A.f.recuse?6:0),e:["win","mid"],rt:"Hoàng thượng đọc xong, đặt bài ngươi lên trên cùng.",rf:"Bài hay, nhưng Hàn lâm viện chê lời quê."},
   {n:"Viết theo lối cung đình cho chắc",c:{suc:-4},o:A=>40+S.tai/5+(A.f.blind?10:0),e:["mid","lose"],lx:"chắc mà nhạt",rt:"Bài ngươi đứng ngang bài {v}.",rf:"Bài ngươi chìm giữa những bài giống nhau."},
-  {n:"Viết một bài đáp thẳng bài {v}",c:{suc:-5,duc:-2},o:A=>30+(A.f.sign?10:0)+S.tamco/5,e:["win","lose"],rt:"Cả vườn nhận ra bài {v} chỉ là cái bóng của bài ngươi.",rf:"Hoàng thượng thấy ngươi đem thơ ra đấu khẩu."}]}},
+  {n:"Viết một bài đáp thẳng bài {v}",c:{suc:-5,duc:-2},o:A=>35+(A.f.sign?10:0)+S.tamco/4,e:["win","lose"],rt:"Cả vườn nhận ra bài {v} chỉ là cái bóng của bài ngươi.",rf:"Hoàng thượng thấy ngươi đem thơ ra đấu khẩu."}]}},
  E:{win:{k:1,tag:"Đứng đầu vòng thi",w:"emp",t:"Bài ngươi đứng đầu vòng Xuân thí. Hoàng thượng cho chép lại treo ở Ngự thư phòng. {v} rời vườn trước khi tan.",fx:{danh:6,sung:3,tai:1},go:A=>{rdOan(A,"v",8);return ""}},
   mid:{k:0,tag:"Đồng hạng với {v}",t:"Bài ngươi và bài {v} cùng hạng. Hàn lâm viện hẹn chấm lại khi yết bảng.",fx:{danh:2}},
   lose:{k:-1,tag:"{v} đứng đầu",t:"{v} đứng đầu vòng Xuân thí, bằng những câu ngươi biết rõ là của mình.",fx:{danh:-3},go:A=>{rdOan(A,"v",6);return ""}}}});
@@ -130,7 +133,7 @@ rdDef("thd_tho",8,{t:"Lời vu đạo thơ",w:"v",sj:"lời tố ngươi đạo 
  x1:{h:"Tờ đáp gửi Chưởng viện",w:"v",t:"Buổi xét đầu ở Hàn lâm viện. Chú của {v} đứng trình tờ trình; phi tần không được vào viện, lời ngươi chỉ đến bằng tờ đáp do thái giám Ngự thư phòng mang sang. Chưởng viện chờ tờ đáp ấy.",o:[
   {n:"Xin so nét chữ và thử giấy",c:{suc:-4},o:A=>35+(A.f.paper?12:0),e:["win","lose"],rt:"Giấy chứng lõi trắng, nét chữ chép vụng. Tờ trình lung lay.",rf:"Viện bảo giấy cũ hay mới không làm chứng được."},
   {n:"Tố ngược {v} lấy trộm tập nháp",c:{suc:-5},o:A=>30+S.mat*4,e:["win","lose"],go:A=>{rdOan(A,"v",10)},rt:"Chưởng viện tâu lên, Hoàng thượng cho Nội vụ phủ tra cung {v}.",rf:"Không có chứng, lời tố ngược thành lời vu."},
-  {n:"Xin hoãn để gom chứng",c:{},w:{duc:2},e:"mid",lx:"tên ngươi vẫn bị treo",rt:"Viện cho hoãn đến trước ngày yết bảng."}]}},
+  {n:"Xin hoãn để gom chứng",c:{danh:-2},w:{duc:2},e:"mid",lx:"tên ngươi vẫn bị treo, người ta bảo ngươi chưa dám đối chứng, tiếng tăm sứt mẻ",rt:"Viện cho hoãn đến trước ngày yết bảng."}]}},
  E:{win:{k:1,tag:"Lời vu lung lay",w:"emp",t:"Tờ trình của chú {v} có chỗ hở. Viện chưa xử, nhưng ai cũng thấy cán cân đã lệch về phía ngươi.",fx:{danh:4},go:A=>{rdOan(A,"v",6);return ""}},
   mid:{k:0,tag:"Cả hai bên cùng bị xét",t:"Viện treo việc lại. Thơ ngươi và thơ {v} cùng nằm trên án chờ chứng.",fx:{danh:-1}},
   lose:{k:-1,tag:"Tên ngươi bị gạch tạm",t:"Tên ngươi bị gạch khỏi bảng chờ xét. Trong cung, người ta gọi ngươi là “Tài nữ chép thơ”.",fx:{danh:-6,sung:-2}}}});
@@ -159,7 +162,7 @@ rdDef("thd_tho",9,{t:"Chứng minh",w:"emp",sj:"chứng cứ thơ là của ngư
   {n:"Từ chối, xét đến cùng",c:{suc:-2},w:{tamco:2},sc:1,f:"firm",wx:"không ai mặc cả được thơ ngươi",lx:"thức đêm chờ đòn sau, hao sức; {v} càng hận",go:A=>{rdOan(A,"v",8)},rt:"Ngươi trả lời: “Thơ không đem đổi.”"},
   {n:"Đem lời đề nghị lên viện",c:{suc:-2},o:()=>40+S.danh/4,sc:1,w:{danh:3},wx:"lời mặc cả thành chứng",l:{danh:-2},lx:"người đưa tin chối, ngươi mang tiếng bịa chuyện, tiếng tăm sứt mẻ",go:A=>{rdOan(A,"v",10)},rt:"Chưởng viện ghi lời đề nghị vào hồ sơ.",rf:"Người đưa tin khai là tự ý."}]},
  x1:{h:"Ứng tác ở Ngự thư phòng",w:"emp",t:"Hoàng thượng cho gọi ngươi vào Ngự thư phòng, tự tay trải giấy ra đề: “Thơ bị nghi, ai viết thì viết tiếp được. Nàng viết tiếp bốn câu; trẫm sẽ gửi sang viện.”",o:[
-  {n:"Viết tiếp bằng giọng của bài cũ",c:{suc:-5},o:A=>30+S.tai/4+(S.arts&&S.arts.thi||0)*4+(A.f.dzo?6:0)+(A.f.letter?6:0),e:["win","lose"],rt:"Bốn câu nối liền mạch như cùng một hơi. Hoàng thượng gật đầu.",rf:"Bốn câu hay, nhưng khác giọng bài cũ."},
+  {n:"Viết tiếp bằng giọng của bài cũ",c:{suc:-5},o:A=>40+S.tai/4+(S.arts&&S.arts.thi||0)*4+(A.f.dzo?6:0)+(A.f.letter?6:0),e:["win","lose"],rt:"Bốn câu nối liền mạch như cùng một hơi. Hoàng thượng gật đầu.",rf:"Bốn câu hay, nhưng khác giọng bài cũ."},
   {n:"Dâng chứng giấy và thư, xin không phải thử",c:{suc:-3},o:A=>40+(A.f.dzo?12:0)+(A.f.letter?10:0)+(A.f.dad?8:0),e:["win","mid"],rt:"Chứng đủ, Hoàng thượng phẩy tay: “Khỏi thử.”",rf:"Chứng có, nhưng ngài vẫn muốn nghe thơ."},
   {n:"Xin cả {v} cùng viết tiếp",c:{suc:-4},o:A=>35+S.tamco/5,e:["win","lose"],go:A=>{rdOan(A,"v",8)},rt:"{v} cầm bút run, không viết nổi một câu.",rf:"{v} viết được, dù vụng. Hai bên ngang nhau."}]}},
  E:{win:{k:1,tag:"Thơ là của ngươi",w:"emp",t:"Viện công nhận thơ là của ngươi. Tờ trình của chú {v} bị trả về, kèm một dòng phê đỏ.",fx:{danh:6,sung:2},go:A=>{rdOan(A,"v",8);return ""}},
@@ -182,7 +185,7 @@ rdDef("thd_tho",10,{t:"Ngày yết bảng",w:"emp",sj:"bảng Xuân thí",cast(A
   {n:"Giữ bản sao sổ điểm",c:{bac:-30},w:{tamco:2},wx:"cầm chứng gian lận trong tay",lx:"tốn bạc cho {n1} chép sổ, y chịu tiếng chép trộm",rt:"{n1} chép cho ngươi một bản."},
   {n:"Để {n1} tự tâu",c:{},o:()=>40+S.danh/5,w:{danh:2},sc:1,f:"ally",wx:"người ngoài cung lên tiếng",l:{danh:-2},lx:"{n1} bị trù dập, người ta bảo ngươi đẩy người khác ra chịu, tiếng tăm sứt mẻ",rt:"{n1} dâng sớ, chú của {v} bị gọi hỏi.",rf:"{n1} bị điều đi chép sử ở phủ xa."}]},
  c2:{h:"{v} đến cửa",w:"v",need:["v"],t:"{v} đến cung ngươi một mình, không mang cung nữ. Nàng nói chú nàng ép nàng làm, nàng chỉ muốn yên thân.",o:[
-  {n:"Tin nàng, cho nàng một lối lui",c:{},o:()=>40+S.duc/4,sc:1,w:{duc:3},f:"mercy",wx:"có thể bớt một kẻ thù",l:{danh:-2},lx:"bị lừa lần nữa thì cả cung cười, tiếng tăm sứt mẻ",go:(A,ok)=>{rdRel(A,"v",ok?15:-6)},rt:"{v} cúi đầu thật sâu.",rf:"{v} ra về, kể khác đi với Hoàng hậu."},
+  {n:"Tin nàng, cho nàng một lối lui",c:{},o:()=>40+S.duc/4,sc:1,w:{duc:3},f:"mercy",wx:"có thể bớt một kẻ thù",l:{danh:-2},lx:"bị lừa lần nữa thì cả cung cười, tiếng tăm sứt mẻ",go:(A,ok)=>{rdRel(A,"v",ok?15:-6)},rt:"{v} cúi đầu thật sâu.",rf:()=>qOn()?"{v} ra về, kể khác đi với Hoàng hậu.":"{v} ra về, kể khác đi khắp các cung."},
   {n:"Bắt nàng viết lời khai",c:{suc:-3},o:()=>40+S.tamco/4,sc:1,w:{tamco:3},wx:"có lời khai của chính {v}",l:{danh:-2},lx:"nàng xé giấy bỏ đi kể khắp cung, tiếng tăm sứt mẻ; nàng hận ngươi suốt đời",go:A=>{rdOan(A,"v",10)},rt:"{v} run tay viết, ký tên.",rf:"{v} xé giấy, bỏ đi."},
   {n:"Không tiếp",c:{suc:-2},w:{mat:1},wx:"không sa bẫy",lx:"đứng sau cửa nghe nàng khóc, lòng mỏi, hao sức; nàng càng cùng đường",go:A=>{rdOan(A,"v",4)},rt:"Cửa cung không mở."}]},
  t1:{h:"Cha lên kinh",w:"maid",t:"Tin báo: cha ngươi đã lên kinh, trọ ở một quán trọ gần cửa Hàn lâm viện, nói chỉ muốn tận mắt thấy bảng.",o:[
@@ -190,9 +193,11 @@ rdDef("thd_tho",10,{t:"Ngày yết bảng",w:"emp",sj:"bảng Xuân thí",cast(A
   {n:"Xin cho cha vào xem lễ yết bảng",c:{suc:-3},o:()=>35+S.danh/4,sc:1,w:{danh:3},f:"dadin",wx:"thầy đồ quê đứng trước cửa Hàn lâm",l:{danh:-2},lx:"người ta cười áo vải của cha, tiếng tăm sứt mẻ",rt:"Viện cho cha đứng hàng đầu.",rf:"Thị vệ đuổi cha ra khỏi cửa viện."},
   {n:"Khuyên cha về quê, tránh sóng",c:{duc:-1},w:{mat:1},wx:"cha không bị kéo vào",lx:"cha buồn lòng vì con đẩy cha đi, tổn đức",rt:"Cha gật đầu, lặng lẽ lên đường."}]},
  x1:{h:"Trước bảng vàng",w:"emp",t:"Bảng dán ở cửa Hàn lâm viện. Tối ấy, ở Ngự thư phòng, Hoàng thượng hỏi ngươi: “Kẻ vu nàng, trẫm sẽ xử. Nàng có điều gì muốn xin?”",o:[
-  {n:"Xin xử đúng luật",c:{suc:-4},o:A=>35+(A.f.open?10:0)+(A.f.hard?5:0),e:["win","lose"],go:A=>{rdOan(A,"v",10)},rt:"Hoàng thượng phê: chú của {v} bị cách chức, {v} bị cấm túc một mùa.",rf:"Viện xin tha vì chứng còn mỏng. Ngài cau mày với cả hai bên."},
-  {n:"Xin tha cho {v}, chỉ cần trả tên",c:{},o:A=>45+(A.f.mercy?15:0)+S.duc/5,e:["win","mid"],lx:"kẻ vu không trả giá",go:A=>{rdRel(A,"v",8)},rt:"Hoàng thượng khen ngươi độ lượng, tên ngươi đứng đầu bảng.",rf:"Tên ngươi về bảng, nhưng ở hàng thứ ba."},
-  {n:"Thưa: thiếp chỉ xin giữ chữ",c:{},w:{duc:3},e:"mid",lx:"bảng thế nào cũng nhận",rt:"Hoàng thượng nhìn ngươi lâu, rồi phẩy tay."}]}},
+  {n:"Xin xử đúng luật",c:{suc:-4},o:A=>42+(A.f.open?10:0)+(A.f.hard?5:0),e:["win","lose"],
+   /* the cấm túc the verdict names is applied (jrd_cn CN_CAM: p.confined months, BAL.road.thd_tho.cam) */
+   go:(A,ok)=>{rdOan(A,"v",10);if(ok)return CN_CAM(rv67(A,"v"),BAL.road.thd_tho.cam)},rt:()=>`Hoàng thượng phê: chú của {v} bị cách chức, {v} bị cấm túc ${kitNumVi(BAL.road.thd_tho.cam)} tháng.`,rf:"Viện xin tha vì chứng còn mỏng. Ngài cau mày với cả hai bên."},
+  {n:"Xin tha cho {v}, chỉ cần trả tên",c:{danh:-2},o:A=>35+(A.f.mercy?15:0)+S.duc/5,e:["win","mid"],lx:"kẻ vu không trả giá, người ta bảo ngươi mềm tay",go:A=>{rdRel(A,"v",8)},rt:"Hoàng thượng khen ngươi độ lượng, tên ngươi đứng đầu bảng.",rf:"Tên ngươi về bảng, nhưng ở hàng thứ ba."},
+  {n:"Thưa: thiếp chỉ xin giữ chữ",c:{sung:-2},w:{duc:3},e:"mid",lx:"bảng thế nào cũng nhận; Hoàng thượng thấy ngươi chối ân, phật ý",rt:"Hoàng thượng nhìn ngươi lâu, rồi phẩy tay."}]}},
  E:{win:{k:1,tag:"Đứng đầu bảng Xuân thí",w:"emp",t:"Tên ngươi đứng đầu bảng, thơ ngươi sẽ mở trang thứ nhất tập Ngự tuyển. Cả kinh thành bàn về con gái thầy đồ.",fx:{danh:8,sung:3}},
   mid:{k:0,tag:"Bảng yết, chuyện khép hờ",t:"Tên ngươi có trên bảng, không cao nhất. Lời vu được bỏ qua, không ai bị phạt.",fx:{danh:2}},
   lose:{k:-1,tag:"Tên ngươi xuống cuối bảng",t:"Bảng yết, tên ngươi ở hàng cuối, kèm dòng chú “còn nghi”. {v} được chọn mở tập Ngự tuyển.",fx:{danh:-5},go:A=>{rdOan(A,"v",6);return ""}}}});
@@ -223,7 +228,7 @@ rdDef("thd_tho",11,{t:"Tài nữ",w:"emp",sj:"danh hiệu Tài nữ sau cùng",c
  x1:{h:"Chiếu Ngự tuyển",w:"emp",t:"Hoàng thượng cầm chiếu, hỏi ngươi lần cuối: “Danh Tài nữ, nàng muốn gì đi kèm?”",o:[
   {n:"Xin chỉ danh, không xin gì thêm",c:{suc:-4},o:A=>35+S.tai/5+(A.f.pref?8:0),e:["win","mid"],rt:"Chiếu ban: ngươi là Tài nữ của Đại Hy.",rf:"Chiếu ban danh hiệu cho người khác, ngươi được một dòng khen."},
   {n:"Xin ban chữ cho trường làng của cha",c:{suc:-3},o:A=>40+(A.f.dad?12:0)+(A.f.meet?8:0)+S.duc/6,e:["win","mid"],lx:"danh của ngươi nhường chỗ cho tên cha",rt:"Chiếu ban danh Tài nữ, kèm biển ngự bút cho trường làng.",rf:"Ngài ban biển cho trường, danh hiệu để sau."},
-  {n:"Xin xóa hẳn tiếng đạo thơ cho cả {v}",c:{duc:-1},o:A=>30+(A.f.peace?15:0),e:["win","lose"],rt:"Hoàng thượng khen: “Tài mà độ lượng.” Chiếu ban danh Tài nữ.",rf:"Ngài thấy ngươi bao che kẻ vu. Chiếu gác lại."}]}},
+  {n:"Xin xóa hẳn tiếng đạo thơ cho cả {v}",c:{suc:-2,duc:-1},o:A=>40+(A.f.peace?15:0)+S.duc/5,e:["win","lose"],rt:"Hoàng thượng khen: “Tài mà độ lượng.” Chiếu ban danh Tài nữ.",rf:"Ngài thấy ngươi bao che kẻ vu. Chiếu gác lại."}]}},
  E:{win:{k:1,tag:"Tài nữ của Đại Hy",w:"emp",gi:["nghien","emp"],t:"Chiếu ban: ngươi là Tài nữ của Đại Hy. Tập Ngự tuyển in tên ngươi và tên người thầy đồ đã dạy ngươi chữ. Ở trường làng, trò nhỏ đọc thơ ngươi mỗi sáng.",fx:{danh:12,sung:5,tai:2}},
   mid:{k:0,tag:"Thơ có tên, danh hiệu không",t:"Thơ ngươi có trong tập Ngự tuyển, người đọc nhớ. Danh Tài nữ về tay người khác, nhưng không ai còn gọi ngươi là kẻ chép thơ.",fx:{danh:4,duc:2}},
   lose:{k:-1,tag:"Gác bút",t:"Chiếu gác lại, tiếng đạo thơ không rửa hết. Ngươi vẫn là phi tần của Hoàng thượng, nhưng từ đó không còn đề thơ trên quạt.",fx:{danh:-6,sung:-2}}}});
