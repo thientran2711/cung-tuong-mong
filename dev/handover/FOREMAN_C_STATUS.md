@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 03:58Z — 12 agents running (back at cap).
+Updated: 11/16/2026 04:25Z — 12 agents running (cap 12). Load down to ~16. Disk 8.8 GB free.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
@@ -13,7 +13,8 @@ Base main at start: 900ace7fb.
 | D47 small-bugs-4 | review/small-bugs-4 @74e2d3730 → review/small-bugs-4-r1 | sonnet | REVIEWING (4 fixed: thiếu lễ 'Vì sao', stranger greet/arc reveal, 'theo lòng nàng', 'Đang cài'→'Đang mặc' 10→0; 2 already done on main; canonical kit page = #kit) |
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
 | D46b new placeholders + Tứ đức/arts self-study pictures | review/placeholder-pics3-r1 | sonnet | PASS 696127b32 (contains opt-pics2-r1 + placeholder-pics2-r1) |
-| D50 consort full-body placeholders (consorts without full-body figure art show a placeholder frame in the dialog person column) | review/consort-figs | sonnet | RUNNING (art worker; check session 8 art-complete A12/C3 first) |
+| D50 consort full-body placeholders | — | sonnet | DONE — NO ART NEEDED: audit of 8744 manifest entries vs CDN = 0 missing; 400-turn soak 0 empty figFor. Cause is code (see NOTE) |
+| D52 skin-match audit of ~7347 never-measured figures (plan in PROGRESS_review-skin-match.md) | review/skin-audit | sonnet | RUNNING (art worker) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
 | D45 small art + wiring | review/small-art-wire-r1 | sonnet | PASS 6bce72fa6 — CONDITIONAL on kit keeper (K10: kitReward CSS for >6-row chest lists) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
@@ -33,7 +34,7 @@ Base main at start: 900ace7fb.
 | D49 collection milestones (Sổ luân hồi titles at 20/50/100/200 items + Phúc duyên once per life; replace jearn stand-in) | review/collect-ms | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D6, D9, D11–D15, D17–D20, D22, D25–D27, D44, D51, D52) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D6, D9, D11–D15, D17–D20, D22, D25–D27, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -84,6 +85,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Test debt (FYI): dev/test/inv-grade.js is stale vs the current pick-list UI (fails on main too: roulette overlay blocks Đeo tay slot, then waits for #modal [data-kinvact="wear"]).
 - KIT REQUEST K11 (A7 cycle-r2): option cards in a scrolling person dialog can't grow taller than ~130px at 755x1000 — jopic.js:161 sets min-height: calc(var(--kah)+18px) !important on button.ka.kart.kopt, overriding jk4's min-height:max-content; when the list scrolls, grid rows collapse and a tall card's rows spill over the next. Suggested: min-height:max(calc(var(--kah)+18px),max-content) or grid-auto-rows:max-content on that list. (cycle-r2 worked around it with the hint style.)
 - Art gap (A7): the 2 new Hành sự cards 'Xem sổ nguyệt sự' / 'Xem lén sổ nguyệt sự' use the §59 placeholder → Foreman C art slot later.
+- NOTE for session 8 (D50 audit, C17 stage-fig-size area): the dialog placeholder frame is NOT missing art. Likely the FIGS manifest/figure loads async and a cold CDN shows the placeholder before the figure arrives → show the placeholder only after FIGS loaded + figure had a chance to load. Second code bug: S.fidUsed is never released for dead/departed rivals; pool = 32 consort + 52 maid identities → from the ~73rd rival ever created no figure. Fix: release fids of dead/departed rivals or fall back to the nearest identity.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
