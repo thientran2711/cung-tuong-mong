@@ -127,3 +127,6 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
 function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.story);return evA(S,t,n)}
 /* caught in the act (j8 caught): the attempt itself is the wrong; written once if the act did not already write it this week */
 (function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.wrongs||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,2,desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();
+/* test counters for the other frame road (Giá họa, j92): every resolved frame-up, and the ones the victim cleared */
+(function(){if(typeof wdFrameResolve!=="function")return;const w0=wdFrameResolve;wdFrameResolve=function(a,t){const r=w0.apply(this,arguments);try{if(r||t===S){window.__frames=(window.__frames||0)+1;if(t===S)window.__framesMe=(window.__framesMe||0)+1;
+ if(/minh oan được|không thấy gì|không thành/.test(r||"")){window.__framesClear=(window.__framesClear||0)+1;if(t===S)window.__framesMeClear=(window.__framesMeClear||0)+1}}}catch(e){}return r}})();
