@@ -26,11 +26,27 @@ Base: review/title-tag @ 8b21c97d (KIT §82 jtitle.js, on review/rank-bright). M
 - Flaky in this environment (also in the kit's own dev/test/title-tag.js on the base): the person pop-up sometimes does not open right after a new life (opening cards); title-sys.js retries 3×.
 - wearBonus().danh is display-only in the game (jewellery "Danh +1" never reaches any rule) — pre-existing; titles therefore apply Danh/Sủng/Đức as real reversible deltas instead.
 
-## PHASE 2 PLAN (not built; owner 13:20Z (2)(4)(5), 13:30Z (3), FOREMAN_C 13:50Z)
-1. Emperor-granted HIỆU (Thục, Hiền, Đức…; j8 TITLES, kitHieuJoin already joins it to the rank everywhere): today j8 bestow() rolls it 30 % on son/promo/contest. Phase 2: grant by thresholds in BAL (`BAL.dh.hieu = {sung:X, danh:Y, minRank:Tần, gap:months}`), checked monthly for her and NPCs (same rule), decree event + kit reward. The roll in bestow() becomes the threshold check (one core).
-2. SẮC PHONG BOOK + SEAL: two chest items created with the grant (IT keys `sacphong`, `ngocan`; `nosell:1`; `owner` = pid; `dh:{hieu}`), shown in Tư trang, worn in an equip slot only if the kit keeper adds the slot (KIT REQUEST then). Cannot be sold (sell list filters `nosell`).
-3. CONFISCATION: punishment events (cấm túc, giáng phẩm, lãnh cung, phạt bổng) may strip the hiệu and/or the worn achievement title: `p.dhConf = {hieu, title:key, at:turn, why}`; the hiệu leaves the rank, the book + seal move to Nội vụ phủ's store (an item location, never deleted); Danh −BAL, Sủng −BAL.
-4. ATONEMENT: a dedicated quest (chép kinh sám hối / lập công) opens after `BAL.dh.conf.wait` months; finishing it returns the hiệu + items (`dhConf` cleared). NPCs follow the same rule.
-5. LOSS / THEFT: book or seal lost/stolen → an investigation event (evidence from real game evidence: maids, ledger); whatever the outcome the item STAYS somewhere in the game (OD 13:30Z (3) item conservation) — use Foreman D's shared item-location rule from review/item-ledger when it lands (not on origin yet at 16/11 14:20Z); lost for good → Danh −BAL.
-6. Achievement titles themselves are never sold/stolen (they are not items); only confiscated (3).
-Data hooks already in phase 1: title objects carry `src:"play"` (phase 2 adds `src:"emp"`); `p.dh[key]` entries can take a `conf` flag; dhApplyFx / dhWear already take a worn title off cleanly.
+## PHASE 2 — BUILT (review/title-sys2, on ced2edc6 = phase 1 PASS; origin/main 5682ce6f already inside)
+Owner: OD 16/11 13:00Z, 13:20Z (2)(4)(5), 13:30Z (3), 13:40Z. Code: `dev/build/jdh2.js` (assembled right after jdh.js). Numbers: `BAL.dh.hieu / .conf / .it` (jbal2.js).
+1. HIỆU (Emperor-granted, joins the rank via kitHieuJoin): ONE check `dhHieuOK(p)` = rank ≥ Tần (minRank 3), Sủng ≥ RANKS[r].s + 10, Danh ≥ RANKS[r].d + 8,
+   2 months at the rank, not lãnh cung / cấm túc, nothing confiscated, not Hoàng hậu, a free name. ONE grant `dhHieuGrant(p)`: hiệu + Sắc phong + Ngọc ấn, Danh +5.
+   Monthly: eligible → 25 %. j8 bestow (son/promo/contest): the old `roll(30)` is gone → grants at once when eligible. jexam full seat → the same grant
+   (now with its book/seal and Danh +5; still no threshold: the owner-approved seat compensation; bạc instead when her hiệu is confiscated).
+   Player view: Nhiệm vụ › Danh hiệu › "Hiệu Hoàng thượng ban" (has / how to get + what is missing / where the book + seal are).
+2. ITEMS: IT `sacphong` "Sắc phong", `ngocan` "Ngọc ấn" (j8, kd Kỷ vật, keep:1 → econ "kỷ vật: không bán", nt:1). Entries {k, from:"emp", own, hieu, dhid}.
+   Never sold (sellItem refuses keep), never given (giveTo / giftBagFor refuse). Old saves: anyone with a hiệu gets the two pieces once, quietly.
+3. CONFISCATION: ONE weekly state check per person (p.dhSn = [rank, out, confined]) catches every punishment route (punish, fall, demote, cold, deathSentence
+   mercy, inline rank drops in j4/j67/jreign); the reason is stamped by wrappers on the punishers. Odds BAL.dh.conf.p: lãnh cung [hiệu 100, title 100],
+   giáng phẩm [50, 35], cấm túc [0, 40]. Hiệu → p.dhConf.hieu (reserved), pieces → Nội vụ phủ store (S.il.box, the item ledger's record shape,
+   rel never), worn title → p.dh[key].conf (not wearable, not in earned()). Danh −5, Sủng −3. Her: kit notice panel "Bị thu hiệu ban".
+4. ATONEMENT: opens 3 months after (out of lãnh cung, no cấm túc): road A Chép kinh sám hối = 3 copies made after opening (counted by jdh m_kinh),
+   road B lập công = Danh +12 over the value at opening. Done → her: PEND dialog "Dâng biểu sám hối" (or later); NPC: at once. Everything comes back.
+5. LOSS / THEFT: 2 % a month per piece held → a jlost case for THAT piece (loLose with the piece forced; cause from loCause: rival only when her motive
+   allows; rival may keep it, LO.keepP). jlost's own random loss and the laydo theft never pick these pieces (loOk). Her: investigation dialog
+   "Ấn tín thất lạc" (Báo Cung Chính ti tra xét / Lặng lẽ hỏi cung nhân = jlost loDo, real evidence; Để sau). Case closed, piece not back → Danh −8 once.
+6. CONSERVATION (census, weekly): one book + one seal per hiệu (held or confiscated) somewhere (chest, store, case, dialog); none → recreated in the store
+   ("Nội vụ phủ nhặt được", back home after 4–10 weeks); duplicates dropped. Works with or without Foreman D's jil.js (review/item-ledger, not on main):
+   uses ilLog when present, writes the same S.il.box records itself otherwise; store records carry rel 1e9 + dh:1 so jil's own ilconf never returns them.
+Family fixes on the way: jinv showed "Sủng không dưới 15" on every keep / ngự tứ item (it is ngocboi's own rule) → ngocboi only; j8 giftVal / NPC monthly gift
+threw on items without a tg list (jeitem home pieces) → tolerant.
+Tests: `dev/test/title-sys2.js <url> <out> [WxH@dpr]` (logic her + NPC + UI panels). Serve with a UTF-8 server (dev/test/lib/device.js serveRoot), not python http.server.

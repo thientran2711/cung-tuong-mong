@@ -13,7 +13,7 @@
      (the same rule as rivalsMonth / festival); the friend entry carries her dh / titleWorn / hieu (jcoopworld LOOK).
    BONUSES (owner 13:55Z/14:10Z s17, FOREMAN_C 14:15Z/14:35Z/14:45Z): ONE title worn, it gives ONE bonus, the PLAYER picks it from the title's list
      (BAL.dh.T[id].ch, catalogue BAL.dh.B); stored per title p.dh[key].pick. Each bonus type is hooked at the ONE place that computes that gain (see BAL.dh note).
-   Phase 2 (planned in dev/PROGRESS_title-sys.md, NOT built): emperor hiệu by Sủng/Danh thresholds, sắc phong book + seal, confiscation, atonement. */
+   Phase 2 = jdh2.js (review/title-sys2): emperor hiệu by BAL thresholds, sắc phong book + seal, confiscation (p.dh[key].conf), atonement, loss/theft. */
 (function(){try{
 const T=()=>(BAL.dh&&BAL.dh.T)||{};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -92,14 +92,14 @@ function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;
  dhApplyFx(p);return got}
 function dhInc(p,key,d){if(!p||!DH[key]||(DH[key].me&&p!==S))return;const D=bag(p);const e=D[key]||(D[key]={n:0});e.n=(e.n||0)+(d||1);return dhSync(p)}
 window.dhSync=dhSync;window.dhInc=dhInc;
-function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&D[k].i!=null&&D[k].i>=0)}
+function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&D[k].i!=null&&D[k].i>=0&&!D[k].conf)}/* conf = confiscated (jdh2): not wearable until atonement */
 /* NPCs: wear the highest title, pick the bonus by need (no heir yet → conception; low Sủng / Danh → that; else the first) */
 function npcPick(p,key){const e=p.dh[key],L=choices(key,e.i);const pr=[];if(!p.preg&&(p.kids||[]).length<2)pr.push("thai");if((p.sung||0)<50)pr.push("gSung","sung");
  if((p.danh||0)<50)pr.push("gDanh","danh");if(p.maid&&(p.maid.loyal||0)<50)pr.push("gTrung");e.pick=pr.find(t=>L.includes(t))||L[0]}
 function dhAutoWear(p){const L=earned(p).map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier);if(L.length){npcPick(p,L[0].key);dhWear(p,L[0].key,true)}}
 /* ---------- wearing: one title at a time; its stat only while worn ---------- */
 function wornKey(p){return keyOfWorn(p===S?S.titleWorn:p.titleWorn)}
-function dhWear(p,key,quiet){if(!p)return;if(key&&!dhObj(p,key))return;const v=key?"dh-"+key:null;if(p===S)S.titleWorn=v;else p.titleWorn=v;dhApplyFx(p);
+function dhWear(p,key,quiet){if(!p)return;if(key&&(!dhObj(p,key)||(p.dh[key]||{}).conf))return;const v=key?"dh-"+key:null;if(p===S)S.titleWorn=v;else p.titleWorn=v;dhApplyFx(p);
  if(p===S&&!quiet&&typeof log==="function")log(key?`Ngươi đeo danh hiệu «${DH[key].n}».`:"Ngươi tháo danh hiệu xuống.")}
 window.dhWear=dhWear;
 function wornFx(p){const k=p&&wornKey(p);if(!k)return null;const e=(p.dh||{})[k];return e&&e.i>=0?fxOf(k,e.i,p):null}
@@ -175,6 +175,7 @@ function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow=
  return L.length>1&&typeof kitTabRowHTML==="function"?`<div class="pctabs kcattabs kdhtabs" role="tablist">${kitTabRowHTML(L,cur,"data-kdhtab")}</div>`:""}
 function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=earned(S);const sec=[];const tb=tabsHTML("dh");if(tb)sec.push({h:"",html:tb});
  const wo=wk&&dhObj(S,wk);sec.push({h:"Danh hiệu trên đầu",rows:[wo?[kitTitlePlate(wo),[esc(wo.fx||"chỉ để làm đẹp")],"t"]:["Trên đầu","chưa mang danh hiệu nào"]]});
+ try{if(typeof window.dh2Secs==="function")for(const x of window.dh2Secs())sec.push(x)}catch(e){console.error("dh2Secs",e)}/* phase 2 (jdh2): hiệu ban + đường sám hối */
  for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g);const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
   const rest=keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
   rest.forEach(k=>{const N=need(k),c=count(S,k);rows.push([esc(DH[k].n),[esc(DH[k].how(N[0])),`đã ${Math.min(c,N[0])}/${N[0]}`],"n"])});

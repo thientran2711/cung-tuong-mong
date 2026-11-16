@@ -1860,6 +1860,8 @@ const IT={
  dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:100,gv:12,tg:["emp","rv"]},
  demgam:{n:"Đệm gấm",kd:"Lễ vật",d:"Tặng: êm ấm, ai cũng nhận",pr:20,gv:4,tg:["th","rv","hh"]},
  ngocboi:{n:"Ngọc bội ngự ban",kd:"Kỷ vật",d:"Còn giữ: Sủng không dưới 15 · mất là đại họa",pr:0,keep:1,tg:[]},
+ sacphong:{n:"Sắc phong",kd:"Kỷ vật",d:"Chiếu sắc phong hiệu của Hoàng thượng · không bán, không tặng · mất là bị trách",pr:0,keep:1,nt:1,tg:[]},
+ ngocan:{n:"Ngọc ấn",kd:"Kỷ vật",d:"Ấn ngọc khắc hiệu được ban · không bán, không tặng · mất là bị trách",pr:0,keep:1,nt:1,tg:[]},
  thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức +10, Đức +2",pr:0,use:{suc:10,duc:2},tg:[]},
  chungcu:{n:"Tập chứng cứ",kd:"Thư từ",d:"Dùng với một phi tần: chứng cứ +2",pr:0,evi:2,tg:[]}};
 /* hidden taints on innocent items (two-way scheme tools) */
@@ -1894,7 +1896,7 @@ function sellItem(p,ix){const e=p.inv[ix],it=e&&IT[e.k];if(!it||e.h)return"";p.i
 function taintItem(p,ix,tk){const e=p.inv[ix],T=TAINT[tk];if(!e||!T||!T.on.includes(e.k)||e.t)return"";if(T.need&&!takeItem(p,T.need))return"";
  const e2=p.inv.find(x=>x===e);if(!e2)return"";if(T.c)ap(p,{bac:-T.c,duc:-3});else ap(p,{duc:-3});e2.t=tk;e2.by=key(p);p.schemes=(p.schemes||0)+1;return `${NMc(p)} lén ${T.n} vào ${iname(e2)}. `}
 /* receiving: people's tastes */
-function giftVal(it,r){const base=it.gv||Math.round(it.pr/12)+2;const like=r==="emp"?(it.tg.includes("emp")||((it.k==="nghien"||it.k==="dancoc")&&(has("trongtai")||has("chamchinh")))):r==="th"?it.tg.includes("th"):r&&r.queen?it.tg.includes("hh"):it.tg.includes("rv");return like?base:Math.round(base/3)}
+function giftVal(it,r){const base=it.gv||Math.round(it.pr/12)+2;/* items without a tg list (jeitem home pieces) like no one (title-sys2 fix: the gift bag threw) */if(!Array.isArray(it.tg))it=Object.assign({},it,{tg:[]});const like=r==="emp"?(it.tg.includes("emp")||((it.k==="nghien"||it.k==="dancoc")&&(has("trongtai")||has("chamchinh")))):r==="th"?it.tg.includes("th"):r&&r.queen?it.tg.includes("hh"):it.tg.includes("rv");return like?base:Math.round(base/3)}
 function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=IT[e.k];a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
  if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2)}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. Sủng +${Math.max(1,Math.round(g/2))}. `}
  if(r==="th"){ap(a,{th:g});return `${NMc(a)} dâng ${it.n} lên Thái hậu. Thái hậu +${g}. `}
@@ -1934,8 +1936,9 @@ const TITLES=["Thục","Hiền","Đức","Thuần","Uyển","Trinh","Gia","Ý","
 const BEST={night:["tramngoc","vongngoc","luahang","yensao","sonphan","huongtram"],contest:["dancoc","gamto","vongngoc","tranhco"],son:["ngocboi","nhansam","vongvang","gamto"],promo:["boodieu","gamto","vongvang","tranhco"],accuse:["vongngoc","nghien","luahang"],story:["tranhco","vongngoc","nhansam","chungcu"],birthday:["dancoc","tramngoc","gamto"]};
 const BWHY={night:"sau đêm thị tẩm",contest:"vì tài nghệ hơn người",son:"mừng hoàng tử ra đời",promo:"nhân dịp tấn phong",accuse:"vì tố giác kẻ gian",story:"",birthday:"nhân tiết Vạn thọ"};
 function bestow(p,why){if(!p||p.dead||(p!==S&&!p.alive))return;let L=BEST[why]||BEST.night;L=L.filter(k=>!IT[k].rk||IT[k].rk<=rkOf(p)||why==="son");const k=pick(L.length?L:["tramngoc"]);p.inv.push({k,from:"emp"});
- let tt="";if(["son","promo","contest"].includes(why)&&!p.hieu&&roll(30)){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=TITLES.filter(x=>!used.includes(x));if(f.length){p.hieu=pick(f);ap(p,{danh:5});tt=p.hieu}}
- if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${iic(k,48)}</p><p>Thái giám tuyên khẩu dụ ${BWHY[why]||""}: ban cho ngươi <b>${IT[k].n}</b>.</p><p class="past">${IT[k].d}</p>${tt?`<p>Lại ban hiệu <b>${tt}</b>, gọi là ${tt} ${RANKS[Math.min(6,S.rank)].n}. Danh +5.</p>`:""}`});log(`Được ban ${IT[k].n}${tt?`, ban hiệu ${tt}`:""}.`)}
+ /* hiệu (title-sys2): granted by the ONE threshold rule dhHieuOK / dhHieuGrant (jdh2, BAL.dh.hieu), no roll; book + seal come with it */
+ let tt="";if(["son","promo","contest"].includes(why)&&typeof dhHieuOK==="function"&&dhHieuOK(p).ok)tt=dhHieuGrant(p,why,{quiet:1});
+ if(p===S){Q.push({t:"Thánh thượng ban thưởng",who:pEmp(),h:`<p style="text-align:center">${iic(k,48)}</p><p>Thái giám tuyên khẩu dụ ${BWHY[why]||""}: ban cho ngươi <b>${IT[k].n}</b>.</p><p class="past">${IT[k].d}</p>${tt?`<p>Lại ban hiệu <b>${tt}</b>, gọi là ${tt} ${RANKS[Math.min(6,S.rank)].n.toLowerCase()}, kèm Sắc phong và Ngọc ấn. Danh +${BAL.dh.hieu.danhG}.</p>`:""}`});log(`Được ban ${IT[k].n}${tt?`, ban hiệu ${tt}`:""}.`)}
  else log(`${p.name} được Hoàng thượng ban ${IT[k].n}${tt?`, ban hiệu ${tt}`:""}.`)}
 
 /* ================= NIGHTS ================= */
@@ -2073,7 +2076,7 @@ function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
  if(!S.thDead&&roll(25)&&roll(odA(v,75)))ap(v,{th:4,danh:1});
  if(qOn()&&!v.queen&&roll(20)&&roll(odA(v,70)))ap(v,{hh:4,danh:1});
  if(roll(10)){const fr=others(v).filter(t=>rel(v,t)>10&&(t===S||t.alive));if(fr.length&&v.bac>=30){const t=pick(fr);const s=ACT.ally.f(v,t);if(t===S)ev+=s}}
- if(roll(10)&&v.inv.some(e=>!e.h&&IT[e.k].tg.includes("rv"))){const t=pick(others(v));const i=v.inv.findIndex(e=>!e.h&&IT[e.k].tg.includes("rv"));if(rel(v,t)>0||t===S&&v.rel>5)ev+=seenNPC(v,t,giveTo(v,t,i))}
+ if(roll(10)&&v.inv.some(e=>!e.h&&(IT[e.k].tg||[]).includes("rv"))){const t=pick(others(v));const i=v.inv.findIndex(e=>!e.h&&(IT[e.k].tg||[]).includes("rv"));if(rel(v,t)>0||t===S&&v.rel>5)ev+=seenNPC(v,t,giveTo(v,t,i))}
  v.inv.forEach((e,i)=>{const it=IT[e.k];if(it.sl&&!e.w&&!e.h&&(it.rk<=rkOf(v)||v.trait==="Kiêu ngạo"))wear(v,i)});
  const ui=v.inv.findIndex(e=>!e.h&&IT[e.k].use&&!e.t&&(v.suc<60||(IT[e.k].ant&&v.preg)));if(ui>=0)useItem(v,ui);
  const ci=v.inv.findIndex(e=>!e.h&&IT[e.k].dr&&IT[e.k].rk<=rkOf(v));if(ci>=0&&!(v.dress&&v.dress.until>S.turn))useItem(v,ci);
@@ -17342,7 +17345,17 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
   a_thinh:{b:1,n:[5,20,50],ch:["duc","gTren"]},a_doc:{b:1,n:[5,20,50],ch:["tai","nghe"]},a_nhan:{b:1,n:[5,20,50],ch:["sac","suc"]},
   l_cam:{b:2,st:1,ch:["suc","nghe"]},l_ky:{b:2,st:1,ch:["tamco","nghe","don"]},l_thi:{b:2,st:1,ch:["tai","nghe"]},l_hoa:{b:2,st:1,ch:["danh","nghe"]},
   l_vu:{b:2,st:1,ch:["sac","nghe"]},l_y:{b:2,st:1,ch:["suc","nghe"]},l_theu:{b:2,st:1,ch:["gBac","nghe"]},l_nau:{b:2,st:1,ch:["gTrung","nghe"]},
-  m_mon:{b:1,ch:["sung","gTrung"]},m_kinh:{b:1,ch:["duc","don"]},m_theu:{b:1,ch:["gBac","sac"]},m_tranh:{b:1,ch:["tai","danh"]},m_khuc:{b:1,ch:["sac","gHau"]}}};
+  m_mon:{b:1,ch:["sung","gTrung"]},m_kinh:{b:1,ch:["duc","don"]},m_theu:{b:1,ch:["gBac","sac"]},m_tranh:{b:1,ch:["tai","danh"]},m_khuc:{b:1,ch:["sac","gHau"]}},
+/* PHASE 2 (jdh2, review/title-sys2; owner 16/11 13:00Z / 13:20Z (2)(4)(5) / 13:30Z (3)):
+   hieu  the Emperor's hiệu (Thục, Hiền… TITLES): rank ≥ minRank (3 = Tần), Sủng ≥ RANKS[rank].s + sung, Danh ≥ RANKS[rank].d + danh, gapM months
+         at the rank; eligible → p % each month (bestow on son / promo / contest: at once); Danh +danhG on the grant. Book + seal come with it.
+   conf  punishment → confiscation: p[kind] = [% the hiệu (+ book + seal) is taken, % the worn achievement title is taken]; Danh −danh, Sủng −sung.
+         Atonement opens wait months later (out of lãnh cung, no cấm túc): kinh copies of Chép kinh, or Danh +cong (lập công).
+   it    the book / seal: lose = % per month per piece held (a jlost case); lostDanh = Danh lost when the case closes and it is not back;
+         backW = weeks before a piece the Nội vụ phủ found (census) goes home. */
+ hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
+ conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12},
+ it:{lose:2,lostDanh:8,backW:[4,10]}};
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -22739,7 +22752,7 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
  if(it.w)D.push(...eff(it.w));
  if(it.use){const u=Object.entries(it.use).filter(([x,v])=>v).map(([x,v])=>`${N[x]||x} ${v>0?"+":""}${v}`);if(u.length)D.push((it.kd==="Thư từ"?"đọc: ":"dùng: ")+u.join(", "))}
  if(it.ant)D.push("an thai");if(it.fert)D.push(`${it.fert} tháng dễ thụ thai`);if(it.anti)D.push("cứu một lần trúng độc");if(it.evi)D.push(`chứng cứ +${it.evi}`);
- if(it.keep)D.push("Sủng không dưới 15");if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
+ if(k==="ngocboi")D.push("Sủng không dưới 15");/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
  if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
  const lux=it.sl||it.dr?luxVal(k):0;if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
@@ -30471,7 +30484,7 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
    thượng's bestow), an honorific name character (phong hiệu, no rank change; silver instead if she already has one), an office / favour for her
    family (house power). Loss: the other consorts' jealousy. Her rank stays; the next one goes through the normal exam. Numbers BAL.psk.seat. */
 function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RANKS[to].n;const parts=[];
- let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=(typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used.includes(x));if(f.length){hieu=pick(f);p.hieu=hieu}}
+ let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu&&typeof dhHieuGrant==="function")hieu=dhHieuGrant(p,"seat",{quiet:1});/* the ONE grant (jdh2): book + seal, Danh +BAL.dh.hieu.danhG; none if her hiệu is confiscated */
  if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
  for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
  try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
@@ -37660,7 +37673,7 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
      (the same rule as rivalsMonth / festival); the friend entry carries her dh / titleWorn / hieu (jcoopworld LOOK).
    BONUSES (owner 13:55Z/14:10Z s17, FOREMAN_C 14:15Z/14:35Z/14:45Z): ONE title worn, it gives ONE bonus, the PLAYER picks it from the title's list
      (BAL.dh.T[id].ch, catalogue BAL.dh.B); stored per title p.dh[key].pick. Each bonus type is hooked at the ONE place that computes that gain (see BAL.dh note).
-   Phase 2 (planned in dev/PROGRESS_title-sys.md, NOT built): emperor hiệu by Sủng/Danh thresholds, sắc phong book + seal, confiscation, atonement. */
+   Phase 2 = jdh2.js (review/title-sys2): emperor hiệu by BAL thresholds, sắc phong book + seal, confiscation (p.dh[key].conf), atonement, loss/theft. */
 (function(){try{
 const T=()=>(BAL.dh&&BAL.dh.T)||{};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -37739,14 +37752,14 @@ function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;
  dhApplyFx(p);return got}
 function dhInc(p,key,d){if(!p||!DH[key]||(DH[key].me&&p!==S))return;const D=bag(p);const e=D[key]||(D[key]={n:0});e.n=(e.n||0)+(d||1);return dhSync(p)}
 window.dhSync=dhSync;window.dhInc=dhInc;
-function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&D[k].i!=null&&D[k].i>=0)}
+function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&D[k].i!=null&&D[k].i>=0&&!D[k].conf)}/* conf = confiscated (jdh2): not wearable until atonement */
 /* NPCs: wear the highest title, pick the bonus by need (no heir yet → conception; low Sủng / Danh → that; else the first) */
 function npcPick(p,key){const e=p.dh[key],L=choices(key,e.i);const pr=[];if(!p.preg&&(p.kids||[]).length<2)pr.push("thai");if((p.sung||0)<50)pr.push("gSung","sung");
  if((p.danh||0)<50)pr.push("gDanh","danh");if(p.maid&&(p.maid.loyal||0)<50)pr.push("gTrung");e.pick=pr.find(t=>L.includes(t))||L[0]}
 function dhAutoWear(p){const L=earned(p).map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier);if(L.length){npcPick(p,L[0].key);dhWear(p,L[0].key,true)}}
 /* ---------- wearing: one title at a time; its stat only while worn ---------- */
 function wornKey(p){return keyOfWorn(p===S?S.titleWorn:p.titleWorn)}
-function dhWear(p,key,quiet){if(!p)return;if(key&&!dhObj(p,key))return;const v=key?"dh-"+key:null;if(p===S)S.titleWorn=v;else p.titleWorn=v;dhApplyFx(p);
+function dhWear(p,key,quiet){if(!p)return;if(key&&(!dhObj(p,key)||(p.dh[key]||{}).conf))return;const v=key?"dh-"+key:null;if(p===S)S.titleWorn=v;else p.titleWorn=v;dhApplyFx(p);
  if(p===S&&!quiet&&typeof log==="function")log(key?`Ngươi đeo danh hiệu «${DH[key].n}».`:"Ngươi tháo danh hiệu xuống.")}
 window.dhWear=dhWear;
 function wornFx(p){const k=p&&wornKey(p);if(!k)return null;const e=(p.dh||{})[k];return e&&e.i>=0?fxOf(k,e.i,p):null}
@@ -37822,6 +37835,7 @@ function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow=
  return L.length>1&&typeof kitTabRowHTML==="function"?`<div class="pctabs kcattabs kdhtabs" role="tablist">${kitTabRowHTML(L,cur,"data-kdhtab")}</div>`:""}
 function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=earned(S);const sec=[];const tb=tabsHTML("dh");if(tb)sec.push({h:"",html:tb});
  const wo=wk&&dhObj(S,wk);sec.push({h:"Danh hiệu trên đầu",rows:[wo?[kitTitlePlate(wo),[esc(wo.fx||"chỉ để làm đẹp")],"t"]:["Trên đầu","chưa mang danh hiệu nào"]]});
+ try{if(typeof window.dh2Secs==="function")for(const x of window.dh2Secs())sec.push(x)}catch(e){console.error("dh2Secs",e)}/* phase 2 (jdh2): hiệu ban + đường sám hối */
  for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g);const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
   const rest=keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
   rest.forEach(k=>{const N=need(k),c=count(S,k);rows.push([esc(DH[k].n),[esc(DH[k].how(N[0])),`đã ${Math.min(c,N[0])}/${N[0]}`],"n"])});
@@ -37839,6 +37853,208 @@ window.dhPanel=dhPanel;
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kdhtab]");if(!b)return;e.stopPropagation();e.preventDefault();const t=b.dataset.kdhtab;
  if(t===DHTAB&&b.classList.contains("on"))return;Q.shift();if(t==="dh")dhPanel();else{DHTAB="goal";window.kitGoalDetail(true)}},true);
 }catch(e){console.error("jdh",e)}})();
+/* ================= jdh2: HIỆU BAN + SẮC PHONG + TỊCH THU + SÁM HỐI + THẤT LẠC — TITLE SYSTEM phase 2 (review/title-sys2, Foreman C)
+   Owner: OWNER_DECISIONS 16/11 13:00Z (sắc phong book + seal, confiscation, lost/stolen), 13:20Z (2)(4)(5) (hiệu by Sủng/Danh, joins the rank;
+   book + seal never sold; stolen → investigation, lost for good → Danh penalty; back only through a dedicated atonement quest with a minimum wait),
+   13:30Z (3) ITEM CONSERVATION (an item never vanishes; it is always somewhere and can come back), 13:40Z (one ledger). Plan: dev/PROGRESS_title-sys.md.
+   ONE rule for her and every NPC consort; every number in BAL.dh.hieu / .conf / .it (jbal2.js); kit parts only (kitPanel reward / notice,
+   kit rows, kitItemTag §64, PEND dialogs with act-card options).
+   1. HIỆU: dhHieuOK(p) = the ONE threshold check (rank ≥ minRank, Sủng ≥ the rank's Sủng + sung, Danh ≥ the rank's Danh + danh, gapM months at the
+      rank, not in lãnh cung / cấm túc, nothing confiscated, not Hoàng hậu). Monthly: eligible → BAL.dh.hieu.p chance; bestow(son/promo/contest)
+      grants at once when eligible (the old 30 % roll is gone). dhHieuGrant(p) = the ONE grant (also used by the full-seat compensation, jexam).
+   2. Items: sacphong (Sắc phong) + ngocan (Ngọc ấn), IT keep:1 (not sold, j-econ "kỷ vật: không bán"), nt:1; never given (giveTo / gift bag
+      refuse them). Entry fields: {k, from:"emp", own:<key of the person>, hieu, dhid}. Old saves: anyone with a hiệu and no book/seal gets them
+      quietly once.
+   3. CONFISCATION: every punishment route (punish, fall, demote, cold, deathSentence mercy, any rank drop / lãnh cung / cấm túc) is caught by ONE
+      weekly state check per person (p.dhSn = [rank, out, confined]); the reason comes from the wrapped punishers. Odds per kind BAL.dh.conf.p
+      [hiệu, worn title]. Hiệu → p.dhConf.hieu (still reserved, so it comes back the same), book + seal → Nội vụ phủ store (S.il.box, the item
+      ledger's own record shape: at "nvp", why "conf", rel never — only atonement returns them), worn title → p.dh[key].conf (cannot be worn).
+      Danh −conf.danh, Sủng −conf.sung (her: logged, notice panel).
+   4. ATONEMENT: after conf.wait months (out of lãnh cung, not under cấm túc) the quest opens: road A "Chép kinh sám hối" = conf.kinh copies of
+      Chép kinh made after it opened; road B "Lập công" = Danh ≥ Danh at opening + conf.cong. Done → her: a dialog to offer the penitence;
+      NPC: at once. Everything comes back (hiệu, the pieces still in the store, the title).
+   5. LOSS / THEFT: monthly BAL.dh.it.lose % per piece held → a jlost case for THAT piece (loLose with the piece forced; cause from loCause:
+      a rival only when her motive allows, else a servant / misplaced) → jlost's tra xét acts, hearing, recognition, higher-rank decree (item
+      ledger) apply. Her: an investigation dialog at once. Case closed and the piece not back → Danh −it.lostDanh once. The piece stays where
+      it is; a piece found nowhere (old jlost expiry) is put in the Nội vụ phủ store by the census below and handed back after it.backW weeks.
+      jlost's random loss / "laydo" theft never pick these pieces (loOk), only this rule does.
+   6. CENSUS (conservation, weekly): every person with a hiệu (held or confiscated) has exactly one book and one seal somewhere (a chest, the store,
+      a case, a dialog); missing → recreated in the store ("Nội vụ phủ tìm thấy"); a duplicate copy → dropped.
+   Item ledger (Foreman D, review/item-ledger, not on main yet): when jil.js is present its ilGone / ilTake / ilLog are used (same records);
+   without it this file writes the same S.il.box records itself (thin adapter; no other behaviour of jil is needed here).
+   Co-op: S.hieu / S.dhConf / her pieces are personal (jcoopworld: everything not world is personal); NPC rules run on the host only (npcOK). */
+(function(){try{
+const H=()=>BAL.dh.hieu,C=()=>BAL.dh.conf,I=()=>BAL.dh.it;
+const DK=["sacphong","ngocan"];
+const isDh=e=>!!(e&&typeof e==="object"&&DK.includes(e.k)&&e.dhid);
+window.dhIsItem=isDh;
+const npcOK=()=>!(window.COOPW&&COOPW.on&&COOPW.seat!=="a");
+const pk=p=>p===S?"me":String(p&&p.id);
+function people(){const L=[S];try{for(const v of rivals||[])if(v&&!v.coop&&L.indexOf(v)<0)L.push(v)}catch(e){}return L}
+function alive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
+function byK(k){if(k==="me")return S;try{return (rivals||[]).find(v=>String(v.id)===String(k))||null}catch(e){return null}}
+const nmc=p=>p===S?"Ngươi":p.name;
+const rkNm=p=>{try{return rkName(p)}catch(e){return ""}};
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* ---------- the item ledger (jil) or its record shape ---------- */
+function box(){if(!S.il||typeof S.il!=="object")S.il={};const L=S.il;L.box=L.box||[];L.log=L.log||[];return L.box}
+function lgr(e,f,t,how){try{if(typeof ilLog==="function")return ilLog(e,f,t,how)}catch(x){}try{const L=S.il;L.log.push([wk(),e.dhid||0,e.k,f||"",t||"",how||""]);if(L.log.length>600)L.log.splice(0,L.log.length-600)}catch(x){}}
+function toStore(p,e,why,o){o=o||{};const x={e,at:"nvp",why,own:o.own||pk(p),w:wk(),by:"",rel:1e9,dh:1};if(o.back)x.back=o.back;box().push(x);lgr(e,o.from||pk(p),"nvp",why==="conf"?"bị tịch thu":"Nội vụ phủ nhặt được");return x}
+function fromStore(x,p,how){const L=box(),i=L.indexOf(x);if(i<0||!p)return false;L.splice(i,1);p.inv=p.inv||[];p.inv.push(x.e);lgr(x.e,"nvp",pk(p),how||"về");return true}
+/* ---------- where a piece is ---------- */
+function slots(p){const o=[];if(!p)return o;for(const e of p.inv||[])if(e&&typeof e==="object")o.push(e);return o}
+function cases(){try{return (S.lost||[]).filter(c=>c&&c.st!=="done"&&c.e)}catch(e){return []}}
+function findAll(own,k){const out=[];for(const p of people())for(const e of slots(p))if(isDh(e)&&e.k===k&&e.own===own)out.push({e,p});
+ for(const x of box())if(isDh(x.e)&&x.e.k===k&&x.e.own===own)out.push({e:x.e,x});
+ for(const c of cases())if(isDh(c.e)&&c.e.k===k&&c.e.own===own&&!out.some(y=>y.e.dhid===c.e.dhid))out.push({e:c.e,c});
+ try{for(const m of Q||[]){const e=m&&m.pp&&m.pp.e;if(isDh(e)&&e.k===k&&e.own===own&&!out.some(y=>y.e.dhid===e.dhid))out.push({e,q:1})}}catch(z){}return out}
+function mk(p,k,hieu){S.dhSeq=(S.dhSeq||0)+1;return{k,from:"emp",own:pk(p),hieu,dhid:pk(p)+"-"+k+"-"+S.dhSeq}}
+/* ---------- 1. HIỆU: the ONE threshold check and the ONE grant ---------- */
+function used(){const L=[S.hieu,S.dhConf&&S.dhConf.hieu];try{for(const v of rivals||[])if(v)L.push(v.hieu,v.dhConf&&v.dhConf.hieu)}catch(e){}return L.filter(Boolean)}
+function freeHieu(){return (typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used().includes(x))}
+function dhHieuNeed(p){const B=H(),r=Math.min(6,Math.max(0,typeof rkOf==="function"?rkOf(p):p.rank|0));const R0=RANKS[Math.max(B.minRank,r)]||RANKS[B.minRank];
+ return{rk:RANKS[B.minRank].n,sung:R0.s+B.sung,danh:R0.d+B.danh,gap:B.gapM}}
+function dhHieuOK(p){const B=H(),W=[];if(!p||!alive(p))return{ok:false,why:["không còn"]};const r=typeof rkOf==="function"?rkOf(p):p.rank|0,N=dhHieuNeed(p);
+ if(p.hieu)W.push("đã có hiệu");if(p.dhConf&&p.dhConf.hieu)W.push("hiệu đang bị thu");if(r>=7)W.push("Hoàng hậu không mang hiệu");
+ if(r<B.minRank)W.push(`từ ${N.rk} trở lên`);if(p.out)W.push("đang ở lãnh cung");if((p.confined||0)>0)W.push("đang bị cấm túc");
+ if((p.sung||0)<N.sung)W.push(`Sủng ${p.sung|0}/${N.sung}`);if((p.danh||0)<N.danh)W.push(`Danh ${p.danh|0}/${N.danh}`);
+ const lp=p.lastPromo==null?-99:p.lastPromo;if(S.turn-lp<N.gap)W.push(`giữ phẩm đủ ${N.gap} tháng`);if(!freeHieu().length)W.push("hết hiệu để ban");
+ return{ok:!W.length,why:W,need:N}}
+window.dhHieuOK=dhHieuOK;window.dhHieuNeed=dhHieuNeed;
+function giveItems(p,hieu,quiet){p.inv=p.inv||[];const got=[];for(const k of DK){if(findAll(pk(p),k).length)continue;const e=mk(p,k,hieu);p.inv.push(e);lgr(e,"emp",pk(p),quiet?"cấp lại sổ cũ":"ban");got.push(e)}return got}
+/* the ONE grant: p gets a free hiệu (or `h`), the book and the seal; Danh +hieu.danhG; returns the hiệu ("" if none left) */
+function dhHieuGrant(p,why,o){o=o||{};if(!p||!alive(p)||p.hieu||(p.dhConf&&p.dhConf.hieu))return"";const f=freeHieu();if(!f.length)return"";const h=pick(f);
+ p.hieu=h;const it=giveItems(p,h);const d=H().danhG;if(d)ap(p,{danh:d});
+ if(o.quiet)return h;/* the caller (bestow, the full seat) reports it in its own notice */
+ if(p===S)dhHieuNotice(h,it,why);else{const t=`${p.name} được Hoàng thượng ban hiệu «${h}».`;try{newsAdd(p,"hieu",t)}catch(e){}}return h}
+window.dhHieuGrant=dhHieuGrant;
+function itTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return""}
+const WHYW={son:"mừng hoàng tử ra đời",promo:"nhân dịp tấn phong",contest:"vì tài nghệ hơn người",month:"vì ân sủng, thanh danh đều đủ",seat:"thay cho ghế chưa trống"};
+function dhHieuNotice(h,it,why){const d=H().danhG;log(`Hoàng thượng ban hiệu ${h}: từ nay gọi là ${rkNm(S)}. Danh +${d}.`);
+ if(typeof kitPanel!=="function")return;kitPanel({kind:"reward",title:"Sắc phong ban hiệu",sub:typeof VP==="object"&&VP.date?VP.date(S.month,S.year):"",subject:typeof pEmp==="function"?pEmp():null,
+  sections:[{h:"",html:it.map(itTag).join("")},{h:"",rows:[["Hiệu ban",`«${esc(h)}» · gọi là ${esc(rkNm(S))}`],["Vì sao",esc(WHYW[why]||WHYW.month)],["Được",`Danh +${d} · Sắc phong và Ngọc ấn cất trong rương`],
+   ["Giữ gìn","không bán, không tặng; mất là bị trách, có lỗi lớn thì bị thu"]]}],btn:"Tạ ơn"})}
+/* ---------- 3. CONFISCATION ---------- */
+const KIND={cold:"vào lãnh cung",giang:"bị giáng phẩm",cam:"bị cấm túc"};
+function wornK(p){const w=p===S?S.titleWorn:p.titleWorn;return typeof w==="string"&&/^dh-/.test(w)?w.slice(3).split("@")[0]:null}
+function dhConfiscate(p,kind,why){if(!p||!alive(p))return null;const P=(C().p||{})[kind];if(!P)return null;const out={hieu:"",title:"",items:[]};
+ if(p.hieu&&roll(P[0])){out.hieu=p.hieu;p.hieu="";for(const k of DK)for(const y of findAll(pk(p),k))if(y.p===p){const i=p.inv.indexOf(y.e);if(i>=0){p.inv.splice(i,1);toStore(p,y.e,"conf");out.items.push(y.e)}}}
+ const wk0=wornK(p);if(wk0&&p.dh&&p.dh[wk0]&&roll(P[1])){p.dh[wk0].conf=1;if(typeof dhWear==="function")dhWear(p,null,true);out.title=wk0}
+ if(!out.hieu&&!out.title)return null;
+ const c=p.dhConf||(p.dhConf={});if(out.hieu)c.hieu=out.hieu;if(out.title){c.titles=c.titles||[];if(!c.titles.includes(out.title))c.titles.push(out.title)}
+ c.at=S.turn;c.kind=kind;c.why=why||KIND[kind];delete c.open;delete c.kn;delete c.d0;delete c.ask;
+ const fx={danh:-C().danh,sung:-C().sung};ap(p,fx);
+ const tn=out.title&&window.DH_CAT&&DH_CAT[out.title]?DH_CAT[out.title].n:"";
+ const what=[out.hieu?`hiệu «${out.hieu}»`:"",out.items.length?out.items.map(e=>IT[e.k].n).join(", "):"",tn?`danh hiệu «${tn}»`:""].filter(Boolean).join(", ");
+ if(p===S){log(`<span class="r">Ngươi ${c.why}: bị thu ${what}. Danh -${C().danh}, Sủng -${C().sung}.</span>`);
+  if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Bị thu hiệu ban",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
+   sections:[{h:"",html:out.items.map(itTag).join("")},{h:"",rows:[["Vì sao",esc(c.why)],["Bị thu",esc(what)],["Mất",`Danh -${C().danh} · Sủng -${C().sung}`],
+    ["Lấy lại",`sau ${C().wait} tháng, khi không còn bị phạt: chép kinh sám hối hoặc lập công (Nhiệm vụ › Danh hiệu)`]]}],btn:"Đã hiểu"})}
+ else{const t=`${p.name} ${c.why}, bị thu ${what}.`;try{newsAdd(p,"conf",t)}catch(e){}}
+ return out}
+window.dhConfiscate=dhConfiscate;
+/* the reason: the punishers stamp it, the weekly state check reads it (every route caught, even inline rank drops) */
+function stamp(p,why){try{if(p&&typeof p==="object")p.dhWhy=String(why||"").replace(/<[^>]+>/g,"").replace(/^(Ngươi|Bị) /,"").slice(0,80)}catch(e){}}
+for(const [nm,fn] of [["punish",(p,why)=>{if(typeof p==="string")stamp(S,p);else stamp(p,why)}],["fall",(p,why)=>stamp(p,why)],["demote",(p,why)=>stamp(p,why)],
+ ["cold",why=>stamp(S,why)],["deathSentence",(p,why)=>{if(typeof p==="string")stamp(S,p);else stamp(p,why)}]]){const f0=window[nm];if(typeof f0!=="function"||f0.__dh2)continue;
+ const g=function(){try{fn.apply(null,arguments)}catch(e){}return f0.apply(this,arguments)};g.__dh2=1;window[nm]=g}
+function snap(p){return[typeof rkOf==="function"?rkOf(p):p.rank|0,p.out?1:0,(p.confined||0)>0?1:0]}
+function dhCheck(p){if(!p||!alive(p))return;const n=snap(p),o=p.dhSn;p.dhSn=n;if(!Array.isArray(o))return;
+ const why=p.dhWhy;delete p.dhWhy;let kind=null;if(n[1]&&!o[1])kind="cold";else if(!n[1]&&!o[1]&&n[0]<o[0])kind="giang";else if(n[2]&&!o[2])kind="cam";
+ if(kind)dhConfiscate(p,kind,why?`${KIND[kind]} (${why})`:KIND[kind])}
+window.dhCheck=dhCheck;
+/* ---------- 4. ATONEMENT ---------- */
+function kinhN(p){const e=p&&p.dh&&p.dh.m_kinh;return e?(e.n|0):0}
+function confOpenOK(p){const c=p&&p.dhConf;return !!c&&(c.hieu||(c.titles||[]).length)&&!p.out&&!((p.confined||0)>0)&&S.turn-(c.at|0)>=C().wait}
+function confState(p){const c=p.dhConf;if(!c)return null;const B=C();if(!c.open)return{open:0,left:Math.max(0,B.wait-(S.turn-(c.at|0))),blocked:p.out?"đang ở lãnh cung":(p.confined||0)>0?"đang bị cấm túc":""};
+ const kn=kinhN(p)-(c.kn|0),dn=(p.danh|0)-(c.d0|0);return{open:1,kn:Math.max(0,kn),kNeed:B.kinh,dn:Math.max(0,dn),dNeed:B.cong,done:kn>=B.kinh||dn>=B.cong}}
+window.dhConfState=confState;
+function confOpen(p){const c=p.dhConf;c.open=1;c.kn=kinhN(p);c.d0=p.danh|0;
+ if(p===S){log(`Thái giám Nội vụ phủ ngầm báo: chép kinh sám hối hoặc lập công thì có thể xin lại hiệu ban.`);
+  if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Đường sám hối",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
+   sections:[{h:"",rows:[["Chép kinh sám hối",`chép đủ ${C().kinh} quyển kinh từ nay (Tài nghệ › Chép kinh)`],["Hoặc lập công",`Danh thêm ${C().cong} so với hôm nay (đang ${S.danh|0})`],
+    ["Xem tiến độ","Nhiệm vụ › Danh hiệu"]]}],btn:"Đã hiểu"})}}
+function dhRestore(p,how){const c=p.dhConf;if(!c)return null;const got=[];
+ if(c.hieu){if(!p.hieu&&!(rivals||[]).some(v=>v&&v!==p&&v.hieu===c.hieu)&&!(p!==S&&S.hieu===c.hieu))p.hieu=c.hieu;got.push(`hiệu «${c.hieu}»`)
+  for(const x of box().slice())if(isDh(x.e)&&x.e.own===pk(p)&&x.why==="conf"){fromStore(x,p,"sám hối xin lại");got.push(IT[x.e.k].n)}
+  if(p.hieu)giveItems(p,p.hieu,true)}
+ for(const k of c.titles||[])if(p.dh&&p.dh[k]){delete p.dh[k].conf;if(window.DH_CAT&&DH_CAT[k])got.push(`danh hiệu «${DH_CAT[k].n}»`)}
+ delete p.dhConf;
+ if(p===S)log(`Ngươi ${how||"dâng kinh sám hối"}, Hoàng thượng nguôi giận: được trả lại ${got.join(", ")}.`);else{const t=`${p.name} sám hối, được trả lại ${got.join(", ")}.`;try{newsAdd(p,"conf",t)}catch(e){}}
+ if(p!==S&&typeof window.dhAutoWear0==="function")window.dhAutoWear0(p);return got}
+window.dhRestore=dhRestore;
+PEND.dhatone=pp=>{const st=confState(S);if(!st||!st.open||!st.done)return null;const c=S.dhConf;const road=st.kn>=st.kNeed?"kinh":"cong";
+ const what=[c.hieu?`hiệu «${c.hieu}», Sắc phong, Ngọc ấn`:"",(c.titles||[]).map(k=>window.DH_CAT&&DH_CAT[k]?`«${DH_CAT[k].n}»`:"").filter(Boolean).join(", ")].filter(Boolean).join(" · ");
+ return{who:typeof pEunCourt==="function"?pEunCourt("ped"):null,t:`<p>${road==="kinh"?`Ngươi đã chép đủ ${st.kNeed} quyển kinh sám hối.`:`Thanh danh của ngươi đã khá lên (Danh thêm ${st.dn}).`} Thái giám Nội vụ phủ khuyên dâng biểu tạ tội, xin lại ${what}.</p>`,o:[
+  {n:"Dâng biểu sám hối",fx:{},j67:`thành: ${what} về lại`,go:()=>{dhRestore(S,road==="kinh"?"dâng kinh sám hối":"dâng biểu tạ tội nhờ có công")}},
+  {n:"Để sau",fx:{},j67:"kèm: còn ở Nội vụ phủ, lần sau lại xin được",go:()=>{c.ask=wk()+3}}]}};
+function confTick(p){const c=p.dhConf;if(!c)return;if(!c.open){if(confOpenOK(p))confOpen(p);return}
+ if(p.out||(p.confined||0)>0)return;const st=confState(p);if(!st.done)return;
+ if(p===S){if((c.ask|0)>wk()||Q.length)return;c.ask=wk()+3;pushDil(mkP("dhatone"),"Dâng biểu sám hối")}else dhRestore(p)}
+/* ---------- 5. LOSS / THEFT (jlost case for that piece) ---------- */
+let FORCE=null;
+(function(){if(typeof loOk!=="function")return;const o0=loOk;loOk=function(e){if(FORCE)return e===FORCE;if(isDh(e))return false;return o0.apply(this,arguments)}})();
+function dhLose(p,e){if(typeof loLose!=="function"||!p||!e)return null;let c=null;FORCE=e;const cd=p.loCd;
+ const q0=Q.length;try{const cause=Object.assign({},typeof loCause==="function"?loCause(p):{cause:"mis"});if(cause.cause==="riv"&&roll(LO.keepP))cause.keep=1;c=loLose(p,cause)}finally{FORCE=null}
+ if(c){p.loCd=cd;c.dh=1;lgr(e,pk(p),"lo"+c.id,c.cause==="riv"?"bị trộm":"thất lạc");
+  if(p===S){if(Q.length>q0&&Q[Q.length-1]&&Q[Q.length-1].t==="Đồ thất lạc")Q.pop();pushDil(mkP("dhlost",{id:c.id}),"Ấn tín thất lạc")}}return c}
+window.dhLose=dhLose;
+PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st==="done"||c.own!=="me")return null;const nm=IT[c.k]?IT[c.k].n:"món đồ";const L=LO.cost;
+ const O=[];const add=(kind,n,x)=>{const C0=L[kind]||{};if((C0.k&&typeof can==="function"&&!can(C0.k))||(C0.bac&&S.bac<C0.bac))return;O.push({n,fx:{},j67:`${typeof loCostTxt==="function"?loCostTxt(kind):""} · ${x}`,
+  go:()=>{try{if(typeof spend==="function"&&C0.k)spend(C0.k);const r=loDo(kind,S,c);if(r){log(r);Q.push({t:"Tra xét",who:typeof pMe==="function"?pMe():null,h:`<p>${r}</p>`,btn:"Đã hiểu"})}}catch(e){console.error(e)}}})};
+ add("cct","Báo Cung Chính ti tra xét","chứng cứ thật mới thành án; báo lên thì ai cũng biết");add("ask","Lặng lẽ hỏi cung nhân","kín đáo, có khi dò ra dấu vết");
+ O.push({n:"Để sau",fx:{},j67:`kèm: tra xét sau ở Tư trang › Việc › Đồ thất lạc; không tìm lại được thì Danh -${I().lostDanh}`,go:()=>{}});
+ return{who:typeof pMe==="function"?pMe():null,t:`<p><b>${nm}</b> ngự ban của ngươi không còn trong rương.</p><p>Mất ấn tín Hoàng thượng ban là tội không nhỏ. Tra xét ngay, hay âm thầm tìm?</p>`,o:O}};
+function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;for(const e of slots(p))if(isDh(e)&&e.own===pk(p)&&!e.lo&&roll(I().lose)){dhLose(p,e);break}}}
+/* a case closed and the piece not back with its owner → Danh −lostDanh once (the piece still sits somewhere: conservation) */
+function lostPenalty(){for(const c of S.lost||[]){if(!c||!c.dh||c.st!=="done"||c.dhPen)continue;const o=byK(c.own);c.dhPen=1;if(!o||!alive(o))continue;
+ const back=slots(o).some(e=>isDh(e)&&e.dhid===c.e.dhid);if(back)continue;const d=I().lostDanh;ap(o,{danh:-d});
+ if(o===S)log(`<span class="r">${IT[c.k].n} ngự ban thất lạc không tìm lại được: bị trách giữ gìn không cẩn thận. Danh -${d}.</span>`);
+ else{const t=`${o.name} làm mất ${IT[c.k].n} ngự ban, bị trách.`;try{newsAdd(o,"lo",t)}catch(e){}}}}
+/* ---------- 6. CENSUS: one book + one seal for every hiệu (held or confiscated), never two, never none ---------- */
+function census(){/* never two: one piece per owner and kind, wherever they sit (a copied entry, an old duplicate) */
+ const seen={};const drop=(q,e)=>{const i=(q.inv||[]).indexOf(e);if(i>=0)q.inv.splice(i,1)};
+ for(const q of people())for(const e of slots(q).slice()){if(!isDh(e))continue;const id=e.own+"|"+e.k;if(seen[id])drop(q,e);else seen[id]=1}
+ for(const x of box().slice()){if(!isDh(x.e))continue;const id=x.e.own+"|"+x.e.k;if(seen[id]){const b=box();b.splice(b.indexOf(x),1)}else seen[id]=1}
+ for(const p of people()){const h=p.hieu||(p.dhConf&&p.dhConf.hieu);if(!h)continue;if(p!==S&&!npcOK())continue;const own=pk(p);
+ for(const k of DK){const L=findAll(own,k);if(!L.length){if(!alive(p))continue;const e=mk(p,k,h);toStore(p,e,p.dhConf&&p.dhConf.hieu?"conf":"net",{back:p.dhConf&&p.dhConf.hieu?0:wk()+I().backW[0]+R(I().backW[1]-I().backW[0]+1)});continue}
+  for(const y of L.slice(1)){if(y.p){const i=y.p.inv.indexOf(y.e);if(i>=0)y.p.inv.splice(i,1)}else if(y.x){const b=box(),i=b.indexOf(y.x);if(i>=0)b.splice(i,1)}}}}
+ /* a piece the Nội vụ phủ found goes home after it.backW weeks (owner alive, nothing confiscated) */
+ for(const x of box().slice()){if(!isDh(x.e)||x.why!=="net"||!x.back||wk()<x.back)continue;const o=byK(x.e.own);if(!o||!alive(o)||o.dhConf||o.out)continue;
+  if(fromStore(x,o,"Nội vụ phủ trả về")&&o===S){Q.push({t:"Ấn tín trở về",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h:`${itTag(x.e)}<p>Nội vụ phủ tìm thấy <b>${IT[x.e.k].n}</b> của ngươi, sai người đem trả về rương.</p>`,btn:"Đã hiểu"});log(`Nội vụ phủ trả lại ${IT[x.e.k].n}.`)}}}
+window.dhCensus=census;
+/* ---------- old saves: a hiệu from before phase 2 gets its book + seal once; snapshots start quietly ---------- */
+function seed(){for(const p of people()){if(p.hieu&&!p.dhSeed){p.dhSeed=1;giveItems(p,p.hieu,true)}if(!Array.isArray(p.dhSn))p.dhSn=snap(p)}}
+/* ---------- the turn: weekly state check + census; monthly grant / atonement / loss ---------- */
+function dhMonth(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;
+ if(dhHieuOK(p).ok&&roll(H().p))dhHieuGrant(p,"month");confTick(p)}lostTick()}
+function dhWeek(){seed();for(const p of people()){if(p!==S&&!npcOK())continue;dhCheck(p)}lostPenalty();census()}
+window.dhMonth=dhMonth;window.dhWeek=dhWeek;
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn,w0=S&&wk();const r=e0.apply(this,arguments);
+ try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;dhWeek();if(S.turn!==t0)dhMonth();if(Q.length>q&&typeof showModal==="function"){showModal();render()}}}catch(e){console.error("dh2",e)}return r}})();
+setTimeout(()=>{try{if(typeof S!=="undefined"&&S&&!S.dead)seed()}catch(e){}},0);
+/* ---------- never given away (sale: IT keep → econNo "kỷ vật: không bán"; NPC sellItem refuses too) ---------- */
+(function(){if(typeof giveTo==="function"){const g0=giveTo;giveTo=function(a,r,ix){try{if(a&&a.inv&&isDh(a.inv[ix]))return""}catch(e){}return g0.apply(this,arguments)}}
+ if(typeof sellItem==="function"){const s0=sellItem;sellItem=function(p,ix){try{const e=p&&p.inv&&p.inv[ix];if(e&&IT[e.k]&&IT[e.k].keep)return""}catch(x){}return s0.apply(this,arguments)}}
+ if(typeof giftBagFor==="function"){const b0=giftBagFor;giftBagFor=function(){const L=b0.apply(this,arguments);try{return (L||[]).filter(x=>!isDh(x&&x.e))}catch(e){return L}}}})();
+/* ---------- NHIỆM VỤ › Danh hiệu: the hiệu section + the atonement quest (kit rows; jdh calls dh2Secs) ---------- */
+window.dh2Secs=function(){if(!S)return[];const out=[],ok=dhHieuOK(S);const rows=[];
+ if(S.hieu)rows.push(["Hiệu ban",`«${esc(S.hieu)}» · gọi là ${esc(rkNm(S))}`]);
+ else if(!(S.dhConf&&S.dhConf.hieu)){const N=ok.need||dhHieuNeed(S);rows.push(["Hiệu ban","chưa có"],["Cách có",`từ ${N.rk} trở lên, Sủng ${N.sung}, Danh ${N.danh}, giữ phẩm ${N.gap} tháng; Hoàng thượng để ý thì ban`]);
+  if(ok.why.length)rows.push(["Còn thiếu",esc(ok.why.join(" · "))])}
+ const mine=DK.map(k=>findAll("me",k)[0]).filter(Boolean);
+ for(const y of mine){const at=y.p===S?"trong rương":y.x?"Nội vụ phủ giữ":y.c?"thất lạc, đang tra xét":"ở nơi khác";rows.push([IT[y.e.k].n,at])}
+ if(rows.length)out.push({h:"Hiệu Hoàng thượng ban",rows});
+ const c=S.dhConf;if(c){const st=confState(S);const R2=[["Vì sao",esc(c.why||"")],["Bị thu",esc([c.hieu?`hiệu «${c.hieu}», Sắc phong, Ngọc ấn`:"",(c.titles||[]).map(k=>window.DH_CAT&&DH_CAT[k]?`«${DH_CAT[k].n}»`:"").filter(Boolean).join(", ")].filter(Boolean).join(" · "))]];
+  if(!st.open)R2.push(["Chờ",st.blocked?`${st.blocked}: hết phạt mới tính`:st.left?`còn ${st.left} tháng mới được sám hối`:"tháng sau mở đường sám hối"]);
+  else{R2.push(["Chép kinh sám hối",`đã ${Math.min(st.kn,st.kNeed)}/${st.kNeed} quyển`],["Hoặc lập công",`Danh thêm ${Math.min(st.dn,st.dNeed)}/${st.dNeed}`]);if(st.done)R2.push(["Đã đủ","chờ dịp dâng biểu sám hối"])}
+  out.push({h:"Bị thu · đường sám hối",rows:R2})}
+ return out};
+/* NPC wear after restore: jdh's own rule (earned + highest tier) */
+window.dhAutoWear0=function(p){try{if(typeof dhSync==="function")dhSync(p,true);const L=Object.keys(window.DH_CAT||{}).filter(k=>p.dh&&p.dh[k]&&p.dh[k].i>=0&&!p.dh[k].conf);if(!wornK(p)&&L.length&&typeof dhObj==="function"){const o=L.map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier)[0];if(o)dhWear(p,o.key,true)}}catch(e){}};
+/* §64: the dialogs show the piece in the kit item frame */
+setTimeout(()=>{try{if(typeof IEV_PID==="object"){IEV_PID.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp&&pp.id):null;return c&&c.e?{e:c.e,acts:[null,null,null]}:false};IEV_PID.dhatone=()=>false}}catch(e){}},0);
+}catch(e){console.error("jdh2",e)}})();
 /* ---- jpm: kitPalaceMap — BẢN ĐỒ CHI TIẾT MỘT CUNG (owner 11/15, KIT.md §33) ----
    Dư đồ → chạm một trong 8 cung phi tần (MAPH.rivalSlots) hoặc Càn Ninh → bản đồ chi tiết sân cung (tranh L2 của Phượng Lệnh,
    img/pl2/<dir>-<mùa>-<buổi>.webp, lễ: <dir>-<lễ>-<buổi>.webp) với 3 điểm chạm: Chính điện · Đông phối điện · Tây phối điện.
@@ -41600,7 +41816,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="24c65a75c85e";window.CTM_BUILD=BUILD;
+const BUILD="e8c744f90728";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

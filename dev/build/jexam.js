@@ -122,7 +122,7 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
    thượng's bestow), an honorific name character (phong hiệu, no rank change; silver instead if she already has one), an office / favour for her
    family (house power). Loss: the other consorts' jealousy. Her rank stays; the next one goes through the normal exam. Numbers BAL.psk.seat. */
 function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RANKS[to].n;const parts=[];
- let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=(typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used.includes(x));if(f.length){hieu=pick(f);p.hieu=hieu}}
+ let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu&&typeof dhHieuGrant==="function")hieu=dhHieuGrant(p,"seat",{quiet:1});/* the ONE grant (jdh2): book + seal, Danh +BAL.dh.hieu.danhG; none if her hiệu is confiscated */
  if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
  for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
  try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
