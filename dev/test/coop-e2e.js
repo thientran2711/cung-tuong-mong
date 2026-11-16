@@ -106,8 +106,10 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
   await clear(A);await clear(B);await same('after week '+(w+1))}
  await shot(A,'07-after3');await shot(B,'07-after3');
  /* 4 B leaves → A freezes; B returns */
+ await A.p.evaluate(()=>{window.__prLog=[];const t0=Date.now();COOP.on('presence',m=>__prLog.push([Date.now()-t0,'p',JSON.stringify(m.seats)]));COOP.on('room',m=>__prLog.push([Date.now()-t0,'room',JSON.stringify(m.seats)]));COOP.on('lost',m=>__prLog.push([Date.now()-t0,'lost']))});
  await B.p.close();
- ok(await until(A,()=>__co().frozen,null,60000),'A frozen when B left');await shot(A,'08-frozen');
+ /* a closed page whose socket close never reaches the Worker (proxy keeps the upstream open) is dropped by the Worker's STALE rule: 45 s silence, checked by a 20 s alarm → up to 65 s */
+ {const fz=await until(A,()=>__co().frozen,null,90000);ok(fz,'A frozen when B left',fz?undefined:await A.p.evaluate(()=>({co:__co(),st:{status:COOP.state.status,peer:COOP.state.peerOnline,seats:COOP.state.seats},pr:window.__prLog||null})))}await shot(A,'08-frozen');
  ok(await A.p.evaluate(()=>document.getElementById('next').disabled||!!__co().frozen),'A cannot advance while frozen');
  const wkF=(await C(A)).week;
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
@@ -145,6 +147,10 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  if(!await D.p.evaluate(()=>typeof S!=='undefined'&&!!S&&!!S.name))await tapText(D,/^Tiếp tục kiếp này/,4000);await D.p.waitForTimeout(1500);
  const ld=await D.p.evaluate(()=>({n:typeof S!=='undefined'&&S&&S.name,coop:!!__co().on,fr:typeof rivals!=='undefined'&&(rivals||[]).some(v=>v.coop)}));ok(ld.n===oldName&&!ld.coop&&!ld.fr,'solo: old save loads, no co-op',ld);
  await clear(D);await shot(D,'14-solo-game');
+ /* real buổi lengths (co-op clock, jcooptimer): wall time from a buổi's clock start to the room's step, as the host measured them */
+ try{const L=await A.p.evaluate(()=>window.COOPW&&COOPW.tm&&COOPW.tm.lens?COOPW.tm.lens():[]);const ms=L.map(x=>x.ms).sort((a,b)=>a-b);
+  const q=f=>ms.length?Math.round(ms[Math.min(ms.length-1,Math.floor(f*ms.length))]/100)/10:0;
+  const line=`buổi lengths (s): n=${ms.length} median=${q(.5)} p90=${q(.9)} max=${q(1)} timeouts=${L.filter(x=>x.up).length}`;console.log(line);fs.appendFileSync(OUT+'/buoi-lengths.txt',line+'\n')}catch(e){console.log('buổi lengths: n/a',e.message)}
  for(const o of [A,B,D])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);if(NIGHTS)console.log('forced nights',COOPW_n);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
