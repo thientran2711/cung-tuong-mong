@@ -129,7 +129,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 .mspot .acb .oc,.mtile .acb .oc{font-size:.5rem;padding:0 4px;line-height:1.2}
 .mspot .acb i,.mtile .acb i{font-style:normal;color:#f3e6cf;font-weight:400}
 .mspot .acb:disabled,.mtile .acb:disabled{opacity:.5;cursor:default;filter:grayscale(1)}
-@media (max-width:600px){.mspot .mwhy{font-size:.5rem}.mspot .acb,.mtile .acb{font-size:.5rem;min-height:18px}}
+/* kv3:.kv1 */:where(.kv1) .mspot .mwhy{font-size:.5rem}:where(.kv1) .mspot .acb,:where(.kv1) .mtile .acb{font-size:.5rem;min-height:18px}
 .mtile.agrey{background-color:#6d6d68!important;background-blend-mode:luminosity;cursor:default;border-color:#77776f}
 .mtile.agrey .mband{filter:grayscale(1);opacity:.8}
 .mtile .mchip.agw{background:#3a3a36;color:#d8d8cf;border:1px solid #77776f}

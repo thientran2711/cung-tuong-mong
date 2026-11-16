@@ -449,10 +449,9 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmsh{display:inline-block;animation:kmPop .32s var(--km-ease) both}.km-fast .kmsh{animation-delay:calc(var(--i) * 40ms)}
 .kmbox{transition:width .3s ease,opacity .3s}.km-done .kmbox{width:min(30vw,150px);opacity:.6}
 .km-done .kmlist{max-height:calc(100dvh - 120px);overflow:auto}
-@media (max-height:560px){.km-done .kmbox,.km-done .kmshelf{display:none}.km-done .kmlist{max-height:calc(100dvh - 70px)}}
+
 /* review/promo-rules: a long list (rank set, >6 rows) — once open, the box gives its room to the list; the list scrolls and its Nhận stays in view */
 .km-long.km-done .kmbox{display:none}.km-long.km-done .kmlist{max-height:calc(100dvh - 150px)}.km-done .kmlist>.kmtake{position:sticky;bottom:0;flex:none}
-@media (max-height:560px){.km-long.km-done .kmlist{max-height:calc(100dvh - 70px)}}
 /* review/small-art-wire-r1: >9 rows (rank set + Đeo eo piece) wraps the icon shelf to a 2nd row; the card then fits the screen by shrinking the list (scrolls, Nhận sticky) instead of a fixed reserve */
 .kmrew.km-long.km-done{max-height:calc(100dvh - 12px)}.km-long.km-done .kmlist{flex:0 1 auto;min-height:0;max-height:none}
 .km-fast .kmcoins img{animation-delay:0s!important;animation-duration:.15s!important}
@@ -492,6 +491,6 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @media (prefers-reduced-motion:reduce){.kmcard{transform:rotateY(180deg)}.kmtab-c{transform:translateY(-4%) scale(1.06)}.kmsc-c,.kmfr-old{display:none}.kmsc-o{clip-path:none}
  .km-open .kmlight{opacity:1;scale:1}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfls,.kmalarm,.kmcal{display:none}}
-@media (max-width:599px){.kmtabs{height:min(46vh,360px)}.kmcap{font-size:.95rem}}
-@media (orientation:landscape) and (max-height:860px){.kmtabs{height:min(50vh,380px)}.kmbloom{height:min(74vh,520px)}.kmbox{width:min(40vw,320px)}}
+/* kv3:.kv1 */:where(.kv1) .kmtabs{height:min(46vh,360px)}:where(.kv1) .kmcap{font-size:.95rem}
+/* kv3:.kv2 */:where(.kv2) .kmtabs{height:min(50vh,380px)}:where(.kv2) .kmbloom{height:min(74vh,520px)}:where(.kv2) .kmbox{width:min(40vw,320px)}
 `;document.head.appendChild(st)})();

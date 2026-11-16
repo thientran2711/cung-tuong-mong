@@ -21,9 +21,19 @@ home is the main screen, a tab opens the RIGHT page full screen, the active tab 
 IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
 - RULE: page CONTENT (panels, person card, act cards, chips, kit panels/modals, stage plaques and figures) has NO width/orientation breakpoint;
   the same CSS lays it out in both modes. Only CHROME (top bar, tab bar, page grid, back-to-room) and full-canvas SCREENS (title, roulette, map,
-  scene panel, mini-game overlay, podium, load) may differ per mode, written once per mode (phase 3: `:where(.kv1/.kv2)` selectors only).
-- Audit: `node dev/measure/media-audit.js 590` (every breakpoint, class PAGE/LAND/ALWAYS/DEAD/ENV); `node dev/measure/kv-codemod.js` must report
-  no `drop`/`unwrap` action left (a content rule with a breakpoint = FAIL). Test: `dev/test/design-scale.js` (right/left page rects equal within 1 px).
+  scene panel, mini-game overlay, podium, load) may differ per mode, written once per mode with `:where(.kv1)` / `:where(.kv2)` selectors
+  (specificity unchanged) or, in JS, `kitView().pages` — NEVER a width/height/aspect/orientation `@media`, `matchMedia(...)` or
+  `innerWidth/innerHeight` compare (design-scale phase 3: 0 left; 31 dead blocks deleted, 3 unwrapped, 46 rewritten by `dev/measure/kv-phase3.js`).
+- BUILD CHECK: `dev/site/build_site.sh` runs `node dev/measure/media-check.js` first and fails on any such breakpoint in p1.html / j*.js
+  (allowed: prefers-reduced-motion, hover, pointer, display-mode, print).
+- FALLBACK: `dev/site/kvfallback.js` (first in all.js via assemble.py) defines `kitView()`, `KIT_FRAME` and html.kv1/kv2 when rot.js is absent (dev/index.html: coop-e2e, direct tests); a no-op under rot.js. Call `kitView()` freely in game code.
+- TOP BAR on the one page (jk4, design-scale p2): the time block flows as ONE wrapping row of whole items (18 px lines) and `kitTcFit` scales it
+  down together (zoom 5 % steps, min 80 %) when it would be taller than her name block — so the bar has the spread's height and the page box
+  under it is the spread's (582x623 both modes).
+- TAB MODE (j6 `KIT_TABMODE` = maptab, cardtab): every tab-dependent class of `.game` is reset before EVERY panel render; the open tab's renderer
+  sets its own. Test: `dev/test/tab-pairs.js` (every tab→tab pair, real taps, 1180x820 + 755x1000).
+- OPEN (design-scale-p2 review, phase 4): kit modals / page content still carry per-mode `:where(.kv1/.kv2)` rules carried over by the phase-3 codemod, which this RULE forbids: jpdlg `.kpdlg` grid, j79 dawn `.kpanel` paddings + `.kpsc` scene-person card (kpid grid, kstgrid, kpfaces, modal placement), j93 kitReward `.kmtabs/.kmbloom/.kmbox`, jpm `.kpm-list`, jgpick `.kipd2` two-column, p1 `.art .pcb` (kv2), jtoil `.toilw` (KIT REQUEST: one-page toilette), jcooptimer chip. Each must become ONE rule for both modes (the spread's); `grep -n 'kv3:.kv' dev/build` lists them.
+- Audit: `node dev/measure/media-audit.js 590` (must list ENV only). Test: `dev/test/design-scale.js` (right/left page rects equal within 1 px).
 
 The game is laid out at exactly TWO design sizes and never reflows on a device: the picture is scaled uniformly, like resizing a window.
 
@@ -76,29 +86,32 @@ Kit core: `j15` (person card, pager, buttons), `j17` (effect lines), `j19` (act 
 - risks are on their own red line labelled `kèm` (`.kl` label + `.ef.r`), never mixed into the gain line.
 - result toast deltas use the same `.ef g/r` spans (`resultShow`).
 
-### 1.3 ONE rank palette (harem) = global `RCOL` (j1; j59 sets the owner's values at load)
-Used by: frame gems/badges, brocade grounds, the round-avatar ring, the player's stage halo, rank chips.
-Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kitRankCol(rank|'cold')` (j60, a live view of RCOL; it never copies it).
+### 1.3 ONE rank palette (harem + servants + roles) — `dev/build/j1.js` (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn")
+The values are typed ONLY in j1: `RCOL` (8 ranks), `RCOL_COLD` (lãnh cung), `MRCOL` (maids), `ERCOL` (eunuchs), `KIT_ROLE` (non-rank roles). Nobody keeps a copy:
+read live `RCOL[rank]` / `KIT_RANK_COL[rank]` / `kitRankCol(rank|'cold')` (j60) / `kitServCol(role,rank)`. Used by: halo, ring, chips, card colour `--c`, portrait ground `.rk-c0..c7`,
+text tone. The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 3.6:1
+on parchment #fbf3e2 (jewel tones; plain text, no edge); `kitRankTone(title)` looks the title up in `KIT_RT` (title words → base colour read from j1) and applies `kitToneOf`.
+Portrait grounds `.rk-c0..c7` are generated from `RCOL` by the `kit-rk` style (jk4), not typed in CSS.
 
-| rank | name | colour | gem (`img/kit/gem-N`) | brocade (`img/kit/bg-consort-N`) | frame (`frame-consort-N`) |
-|---|---|---|---|---|---|
-| 0 | Đáp ứng | `#9c8f74` (owner 11/15; chip/text code, champagne-taupe so the 75 % ink mix reads 4.5:1) | lustrous ivory pearl / moonstone cabochon, thin silver bezel, seed pearls | warm ivory pearl silk (never pure white), tone-on-tone jasmine + faint plum | owner 11/15 option A: the ORIGINAL carved wood stained brown-grey, brass caps, plum crest (`frame-consort-0` + `crest-consort-0` unchanged) — only the ground and gem turned ivory/pearl |
-| 1 | Thường tại | `#7aa07a` xanh lục | jade, brass bezel | celadon green, plum blossom | dark green lacquer wood, silver/jade inlay, orchid |
-| 2 | Quý nhân | `#6a8aa0` xanh lam | aquamarine, silver bezel | sky blue, orchid | silver filigree, seed pearls, chrysanthemum, small tassel |
-| 3 | Tần | `#d48fa6` hồng phấn | rose quartz, silver-gold bezel | rose pink, orchid | silver + pale gold, lotus, jade insets, pearl drop |
-| 4 | Phi | `#a07ab0` tím | amethyst, silver bezel, pearls | lavender, chrysanthemum | gold filigree, peonies, coral beads |
-| 5 | Quý phi | `#c06a6a` đỏ | ruby, gold bezel | crimson, peony + clouds (gold thread) | gold, red enamel, rubies, red tassel |
-| 6 | Hoàng quý phi | `#d98a3a` cam | amber, gold bezel with phoenix wings | amber gold, phoenix feathers | (owner 11/15: clearly grander than Quý phi; NEW frame drawn on review/rank0-ivory, NOT approved/uploaded yet — live art is still the old twin-phoenix frame) two large gold phoenixes with spread wings at the top corners, wide openwork gold filigree, amber enamel + amber cabochons, pearl strings, amber peonies, large white-amber jade bi with phoenix, full orange-gold tassel |
-| 7 | Hoàng hậu | `#f0d070` vàng | imperial gold + ruby heart, phoenix crown | imperial bright yellow-gold, phoenix + peony (no red) | all-gold phoenix crest, yellow-gold enamel, gold gems, white jade bi, gold tassel (Quý phi keeps the red frame) |
-| cold | Lãnh cung | `#cfd3d8` | (none) | `bg-cold` pale grey worn silk, withered plum | `frame-cold` (owner 11/15; NEW frame drawn on review/rank0-ivory, NOT approved/uploaded yet — live art is still the old weathered grey wood) ash-grey cracked, peeling lacquer, tarnished pewter caps, BARE plum branch, cracked grey jade, dull pewter tassel |
+| rank | name | base colour (RCOL) | family |
+|---|---|---|---|
+| 0 | Đáp ứng | `#b8862f` | champagne-bronze |
+| 1 | Thường tại | `#27b04c` | green |
+| 2 | Quý nhân | `#2d7ef0` | blue |
+| 3 | Tần | `#f0489a` | pink |
+| 4 | Phi | `#9b4ee6` | purple |
+| 5 | Quý phi | `#ee2a3f` | red |
+| 6 | Hoàng quý phi | `#ff7a10` | orange |
+| 7 | Hoàng hậu | `#ffc20a` | gold |
+| cold | Lãnh cung | `#8fa3b8` | cool steel grey |
 
-(`RCOL` values on main before j59: index 1 is still the old `#a8946a`; the frame/gem/brocade art already follows the table above.)
+Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) are painted pictures per rank (see §3); they keep their painted look (re-painting them brighter is an art task, not a palette change).
 
-### 1.4 Servant rank palettes (owner 11/14)
-- maids `MRCOL` = `["#9aa3a8","#5fa39a","#4f74a8","#a0584a","#6a5a8e"]` (thô sử, cung nữ, đại cung nữ, chưởng sự cô cô, nữ quan)
-- eunuchs `ERCOL` = `["#8f9a8a","#5f8a6a","#3f6a8a","#7a4a3a"]` (tiểu thái giám, thái giám, thủ lĩnh, tổng quản)
-- j60 reads a global `MRCOL` / `ERCOL` when one exists, else its fallback `window.KIT_MRCOL` / `KIT_ERCOL` (same values); `kitServCol(role,rank)`.
-- used for: servant token badge `img/kit/tok-mN.webp` / `tok-eN.webp` (enamelled plum-blossom token tinted with the palette), a 22 % tint over the servant brocade, the round-avatar ring.
+### 1.4 Servant rank palettes (owner 11/14, brightened 11/16)
+- maids `MRCOL` = `["#2fa08a","#12b58c","#3a78e0","#e4552b","#8d5ee6"]` (thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet)
+- eunuchs `ERCOL` = `["#7fa850","#20a860","#2f8ac8","#c4642a"]` (tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze)
+- j60 `KIT_MRCOL` / `KIT_ERCOL` are aliases of the j1 globals, not copies; `kitServCol(role,rank)`.
+- used for: servant token badge `img/kit/tok-mN.webp` / `tok-eN.webp`, a 22 % tint over the servant brocade, the round-avatar ring, the title tone.
 
 ### 1.5 Role colours (non-harem) keep the existing `f.col` of each face constructor (emperor `#f0d070`, Thái hậu `#c9a0e0`, eunuch `#8a8aa0`, official/men `#6a8aa0`, physician `#8fc38a`, kids `#d9b25f` heir / `#c98aa0`).
 
@@ -2698,10 +2711,12 @@ the top edge (KIT 33: figures fill the stage), where the scene title (top left) 
 a label over the head would cover either. Pets: no pet card exists on main yet.
 Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-fill.js` (chip bottom ≤ painted top).
 
+**48.1h THE ONE RULE: glow on paintings, plain on paper (owner 11/16 13:50Z + 13:55Z; 15/11 22:25Z)**: on paper / frame backgrounds (pop-up captions, cards, lists, name boxes, Tuần lục, dialogs) rank text = the vivid tone as PLAIN text, no stroke, no shadow, no glow; on paintings everybody glows (48.1d/e). The stage tag and the 3-line title tag (§82) use this one rule. Legibility on paper = tone floor ≥ 3.6:1 (`kitToneOf`).
+
 ### 48.1 RANK TITLE · `kitRankTone` + `.krt` / `.krn` (owner, ref. shot of another game: a title floating above the name) — `dev/build/jk4.js`
 The rank / role line above every name is a TITLE, the name under it is plain ink. One look everywhere a rank sits over a name:
 - TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), VIVID
-  (owner 15/11 22:25Z: every tone ≥ 4.4:1 on parchment #fbf3e2), no chip, no background.
+  (owner 11/16: jewel tones derived by `kitToneOf`, ≥ 3.6:1 on parchment #fbf3e2, plain text, no edge), no chip, no background.
 - FRAMED UI (dialogs incl. kitEventDp captions, person cards, Tuần lục, lists, podium plates, kit page): PLAIN text in the vivid tone — no glow,
   no outline. On a dark `.modal.night` panel the tone is lightened (55 % + white), still plain.
 - ON A PAINTING (stage name tags `.j59t` over the scene, captions over a picture `.kesov`, the kit sample's scene row `.krs`): the tone
@@ -2709,32 +2724,10 @@ The rank / role line above every name is a TITLE, the name under it is plain ink
 - NAME: `--krt-ink` #2a1a12, bold, no colour; on a painting it keeps the paper halo of scene words (KIT 33.5); on `.modal.night` parchment #f3e6cf.
 - Sizes: title .84rem (a title that IS the name, e.g. "Hoàng thượng", `.j59only`: .92rem); name as before (stage 1rem, knr .98rem).
   Tuần lục heading: title .62em of the 1.4em heading, on its own line above the name.
-`kitRankTone(title, col)` → colour, ONE table `KIT_RT` keyed by the title's words (so every builder agrees whatever `--rc` it passes):
-
-| title | colour | | title | colour |
-|---|---|---|---|---|
-| Đáp ứng | champagne-bronze #876638 | | Phế phi · lãnh cung | ash slate #5d6b7a |
-| Thường tại | green #1a7f37 | | Thái hậu | bronze #9c4f12 |
-| Quý nhân | blue #1f5fcc | | Hoàng thượng | imperial gold #8f6800 |
-| Tần | pink #c42a78 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | grey-jade #52746a / jade #0a7d68 / blue #2f5db0 (MRCOL family) |
-| Phi (any "… phi") | purple #7e3cc8 | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #b4441e / violet #6a46b8 / sand-brown #8f5a24 |
-| Quý phi | crimson #c8102e | | Tiểu thái giám / Thái giám / Thủ lĩnh / Tổng quản | sage #59743a / green #1f7a48 / steel #2a5f92 / bronze #934414 |
-| Hoàng quý phi | amber #b04a00 | | Thái y · officials · Thị vệ | teal #0a7d76 · blue #2f55a4 · steel #465f80 |
-| Hoàng hậu | gold #8c5f00 | | Hoàng tử · Công chúa · Người lạ | sky #1a6fb8 · coral #bf412b · grey #666666 |
+`kitRankTone(title, col)` → colour = `kitToneOf(base)` where the base comes from the ONE palette in §1.3/§1.4 (`KIT_RT` maps title words to a j1 base: Đáp ứng..Hoàng hậu → `RCOL`, Phế phi/lãnh cung → `RCOL_COLD`, maids → `MRCOL`, eunuchs → `ERCOL`, Thái hậu / Hoàng thượng / Thái y / Hoàng tử / Công chúa / Người lạ / officials / guards / ma ma → `KIT_ROLE`). No hexes live here any more; on `.modal.night` the tone is lightened in oklch (64 % + white) so it stays vivid.
 
 Men are never pink/purple. Unknown title → the caller's colour darkened (80 % + black).
-**48.1d RANK HALO ON A PAINTING (owner 15/11 "Phẩm của tôi cũng viền sáng như tên", review/pick-hint)**: on a painting (stage tag `.j59t`,
-`.kesov` caption title, `.krs`) the RANK line gets the same light paper halo as the name line under it (text-shadow #fff8ee 1/2/5/9px) and
-keeps its full rank tone (`--rt`, KIT_RT); every KIT_RT tone is >= 4.7:1 against the halo. Replaces the old dark outline + tinted glow.
-ON THE STAGE this halo is HERS ONLY (48.1e below).
-**48.1e STAGE: ONLY HER TAG GLOWS (owner 15/11 session 8, overrides 48.1d for the stage)**: on the stage only HER tag (rank line + name
-line) glows: rank line = the 48.1d paper halo, name = the 48.1b light-gold glow. Her tag = `#j59metag` or any stage tag of S (`.tag.j59mine`,
-set by j59tags); co-op: each player sees only her OWN tag glowing, the friend's tag is plain. Every other person's stage tag (`.stage .tok
-.tag:not(.j59mine)`): plain rank colour + plain ink name, no blurred halo; only a 0.6px hairline paper edge with zero blur (#fff8ee)
-so the plain words stay readable on dark carpets / night scenes (scan `dev/test/stage-tag-contrast.js` + `.py`: 14 places x sáng/tối,
-plain lines with NO edge fell to 1.0–1.7:1 against the painting; with the edge every glyph sits on its own paper rim, >= 4.7:1 for every
-KIT_RT tone and the name ink).
-Captions over event pictures (`.kesov`) and the kit scene row (`.krs`) keep 48.1d (not the stage).
+**48.1d/e GLOW ON PAINTINGS ONLY (owner 11/16 13:55Z, option 1; replaces the 15/11 "only her tag glows" and "paper halo" rules)**: on a PAINTED background (stage name tags `.tok .tag` and `#j59metag`, `.kesov` captions over an event picture, the kit scene row `.krs`, figure / scroll art) the NAME, RANK and TITLE of EVERY person glow so they read clearly: RANK line = its rank tone (`--rt`) with, right around the letters, a LIGHT tint of its own rank colour (stacked 3/3/5/5/8 px, 14–30 % colour + white, over a 1 px paper rim; NO dark hairline, it darkens the halo behind the letters) and the saturated rank colour further out as the neon (11 px; her tag +16 px) — letter vs halo ≥ 3:1, measured by `dev/test/stage-tag-contrast.py` (glow-aware: letters made transparent, mask of the letters); NAME line = ink + the light-gold glow (1/3/7/11 px, gold); TITLE plate (`kitTitlePlate`, §82, rule in jtitle.js) = glow in its tier colour. HER tag glows brighter than the others: rank glow +14 px +20 px layers, name = the 48.1b strong gold glow (`.kmy`). Co-op: each player's own S is "her". Scan `dev/test/stage-tag-contrast.js` guards legibility on dark carpets / night scenes.
 **Stage side cards** (`.ksh .k3c`, the people column beside the stage): a person's title + name stack as rank line over the name (title
 `.kti` display:block), so a long "Cung nữ thân tín Hồng Ngọc" never widens the column (755) or squeezes the card (844).
 **48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
@@ -3451,7 +3444,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   mutation for the many body MutationObservers while it moves); (7) reduced motion / Gọn (`kmReduced`) = final still only (unchanged).
   Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
   before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
-- REVEAL LIGHT ALONG THE FRAME + SLOWER (owner 16/11, review/cardflip-glow): the old reveal (`kitFxLight("glow-gold")` on the card + `kitFxBurst("glowburst"/"spark")` at 38% height) sat on the portrait and hid the face. Now `edgeLight()` (only caller: `showRes`) puts `BAL.cardFlip.edge.n` (14) painted gold glows (§68 `kitFxObj("glowburst")`, true alpha) on the frame ring's centre line (`edge.path`, fractions of the card) and circles them along it (`edge.lap` 4200 ms/lap, linear, until the scene closes); sparks (`kitFxSprite("spark")`) leave the frame edge going OUTWARD. Nothing is drawn over the portrait window. Gọn / reduced motion: the glows stand still on the ring. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
+- REVEAL LIGHT = THE WHOLE FRAME GLOWS + SLOWER (owner 16/11 12:00Z, review/cardflip-glow2; replaces the running ring light of cardflip-glow): the old reveal sat on the portrait and hid the face, the next one ran painted glows round the ring ("như chơi casino"). Now `edgeLight()` (only caller: `showRes`) adds ONE `.kcf-halo` div hugging the frame ring's rectangle (`BAL.cardFlip.edge.path`, fractions of the card; `rad` corner, `blur`/`spread` glow size, `op` / `lo` opacity range): a soft warm gold box-shadow glow + thin bright rim around the WHOLE frame at once, nothing moving along it, no sparks. It breathes slowly (`edge.breath` 3600 ms ×`slow`, opacity only, until the scene closes). Nothing is drawn over the portrait window. Gọn / reduced motion: the same glow stands still. RULE for the whole game: a frame light is always the whole frame glowing, never a light that runs / chases / orbits a frame. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
@@ -3841,3 +3834,14 @@ Sample: kit page §28.13b. Test: `dev/test/item-big.js` (also the real "Mất đ
   `kg82Pic` (whole family): a kind whose painting is not on the CDN (`KIT_CDNHAVE`) gets no picture column at all (was: a broken picture for ~2 s until the CDN retry gave up).
 - **r3 (reviewer, review/slap-mg-r3)**: the game no longer closes by itself (OD:L1261): the result row ("Kết quả: Tay nặng / Né kịp…") stays with the j82 end button `#kg82ok` "Đã hiểu" (the kit turns it into the frame ✕, OD:L331, same as every j82 game / playArt); only it closes and the act card follows. Game length words printed from `BAL.slap.bar.ms` / `dodge.ms` (`kitNumVi`, ONE CORE). Intro rows coloured by meaning (every tier costs Đức → loss colour, OD:L908). Hint line "Giữa thước đang sáng" = the glow ring. The NPC-slap result card carries the slapper (`who`, full-body person pop-up, OD 07:35Z).
 - Test: `node dev/test/slap-mg.js <url> <WxH[@scale]> <outdir> [N]` (met face + kslap s1/s2/s3 + kswell asserts, demo, glow, Gọn, tier vs rank, costs per tier, dodge flow, screenshots). Rates: `node dev/measure/mg-bots.js <url> tat,ne e0,e2,e5 skilled,casual,random 200` (anticipation bot).
+
+## 82. TITLE SYSTEM PARTS · name tag in 3 lines, title plate, hiệu joined to the rank, title info card (owner 16/11 13:00Z / 13:15Z / 13:20Z; review/title-tag) — `dev/build/jtitle.js`
+RANK (Tần, Phi, Quý phi…) is NOT a title. Three things, three parts:
+- **Danh hiệu (title, line 1)** — a worn plate over the head, chosen by her. `kitTitleWorn(p)` → title object or null (`S.titleWorn` / `p.titleWorn` = id in `KIT_TITLES` or an object `{id,name,tier 1..8,when,how,fx}`; game logic owns the data, the kit draws it). Every title has its OWN short evocative name (never "<place> · <festival>"). A worn title may give a stat only while worn (`fx` text on the card).
+- **Hiệu (emperor-granted: Thục, Hiền, Đức…)** — the game's existing `p.hieu` / `S.hieu` (j8 "ban hiệu"). It JOINS THE RANK everywhere: `kitHieuJoin(rank,p)` → "Thục phi", "Đức quý phi" (not Hoàng hậu, not lãnh cung); called by `rkOfFace` (j19) and `rkName` (j8), so stage tags, pop-up captions, lists, log, HUD all carry it; `kitRankTone` colours it by its last word.
+- **3-line tag** — line 1 plate, line 2 rank (+hiệu), line 3 name. ONLY on the painted stage (tag UNDER the feet, `j59tagHTML`) and on the left full-body figure of person pop-ups / event frames (ABOVE the head, `kitStageFig(p,{plate:true})` from `kitEventDp`); everywhere else rank + name only (`kitNameRank`). `kitTitleTag3(p,rank,name,col,me)` builds it for samples.
+`kitTitlePlate(t,o)`: pill with the tier colour = `RCOL[tier-1]` (the one palette, §1.3), name in `var(--display)` bold white with a dark edge. ART SLOT: when `img/kit/title-plate-<tier>.webp` exists (transparent painted plate, Foreman C) it replaces the CSS plate (`.kdh-art`, background image 100 % x 100 %); until then the CSS placeholder is shown. Effects rise with the tier: 1–2 flat; 3–4 soft glow; 5–6 glow + light sweep; 7 + sparkle star; 8 two stars + gentle pulse. Still (no motion) when `kfStill()` / reduced motion. Tap a plate (not on the stage) → `kitTitleOpen(t)` = kit info panel: Đạt được (when), Cách có (how), Khi đeo (effect), Đang (worn or not).
+Sample: kit page §82. Test: `dev/test/title-tag.js` (stage 3 lines in order, pop-up plate above rank, no plate in lists/cards, "Thục phi" on stage, info card opens, 0 page errors).
+
+## 61. FIG-BG · NOT SHIPPED (owner 16/11 13:30Z, OD:L1314)
+The C8 painted-scroll background behind full-body figures is switched off everywhere: figures stand directly on the frame's own background. The art stays in storage (img/), unused; no jfigbg module in the build.

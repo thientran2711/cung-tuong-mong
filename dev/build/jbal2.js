@@ -212,6 +212,45 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:-2,theu:0,co:-2,banh:-2,dauho:0},
  kG:{td_cong:1.6,ban:.8,dan:2.8,den:1.05,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.7,mua:8,theu:5.5,co:4},
  word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+/* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
+   condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
+   lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
+   kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
+   support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
+Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+ charity:{khac:1,bac:20,duc:3,danh:1},/* Tài nghệ · Tứ đức "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; jtabs/j85 card text) */
+ succN:{bAge:16,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
+/* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
+   arrival by source; pickN candidates, the picked one's talent works after pickAlone months, pickKeep % a month her decay is undone;
+   kinSave % a "kín miệng" maid refuses a buyer; talents: talBac bạc, talSuc Sức, talSpy % a true fact, while her loyalty ≥ talLoy;
+   secret: she confides at secTell % once loyalty ≥ secTrust; until then secOut % a month it costs (lover Danh −secDanh, debt bạc −secBac,
+   family lòng −secLoy/2, spy proof to the buyer, true-capped); known: help secPay bạc (lòng +2×secLoy) or not (lòng −secLoy).
+   dilCd = months between two close-maid dilemmas. tt press (ttPress %): Danh +ttDanh / Sủng −ttSung, or lòng −ttLoy and bạc −ttBac;
+   dtq: guards (dtqGuard % of the NPC harms aimed at her household fail), brawls (dtqBrawl %): lòng ∓brLoy, Danh ±brDanh, oán ∓brOan;
+   muoi / cnv scorned (scorn %): lòng −scLoy Danh −scDanh, or Danh +scDanh Đức −scDuc oán +scOan; muoiBack % of her bribe money back;
+   land: gift landGift % (bạc +landBac), questioned landAsk %: lòng −laLoy Thái hậu +laTh, or Danh −laDanh Thái hậu −2×laTh lòng +laLoy/2;
+   ch: Thái hậu thiện cảm +chThUp at chTh %, every wrong she does: chKnow % Thái hậu −chThDown; thd: her maids' merit +thdMerit a month;
+   cn: cnSpy % a true fact, turned: Danh −cnTurn; cnv: cnvNet % a true fact; td: meets the old servant at tdMeet % (once, costs tdBac),
+   chứng cứ vụ án +tdCase, exposure tdExpose %: Danh −tdDanh, Thái hậu −tdTh. seeMat = Tai mắt to hear of other consorts' maids. */
+Object.assign(BAL,{cmaid:{loy:{home:[65,85],land:[70,90],th:[55,75],pick:[35,50],palace:[40,60],room:[60,80],noi:[40,55],old:[100,100]},
+ pickN:3,pickAlone:3,pickKeep:50,kinSave:50,talLoy:40,talBac:3,talSuc:3,talSpy:6,secTrust:70,secTell:8,secOut:3,secLoy:10,secDanh:3,secBac:15,secPay:30,dilCd:6,
+ ttPress:6,ttDanh:3,ttSung:3,ttLoy:10,ttBac:30,dtqGuard:50,dtqBrawl:6,brLoy:8,brDanh:1,brOan:8,scorn:6,scLoy:6,scDanh:1,scDuc:1,scOan:8,muoiBack:40,
+ landAsk:8,landGift:4,landBac:25,laLoy:12,laTh:2,laDanh:2,chTh:15,chThUp:2,chKnow:50,chThDown:4,thdMerit:1,cnSpy:10,cnTurn:8,cnvNet:8,
+ tdMeet:4,tdBac:30,tdCase:1,tdExpose:3,tdDanh:4,tdTh:3,seeMat:3,
+ /* review/close-maid-r1 (ONE CORE): newLoy = loyalty of the maid Nội vụ phủ sends when she gives one back (cmReplace); spyDanh = Danh lost for sending a confessed spy back */
+ newLoy:40,spyDanh:1}});
+
+/* jmood (D12, owner OD:L600): her Sims-like mood bar S.mood.v −100…100. band = [U uất|, Phiền muộn|, Bình thản, Vui vẻ|, Hân hoan] cut points.
+   emo[k] × strength of every feeling that lands on her; sat = saturation (a push the same way as v is ×(1 − |v|/sat), ≥ .2); ok / fail = her act with a real roll; rest / restDs up to restCap; decay = share of
+   |v| lost each tuần (≥1); keep = tuần a cause stays listed; need / fr / foe / maid / wx = weekly pushes. Effects: od = odds points at ±100
+   beyond odFrom (≤ one ladder step); aff = thiện cảm gains toward her ×(1±aff) beyond affFrom (angry low mood: affAngry); ghen = rivals'
+   jealousy ×(1+ghen) at Hân hoan; lock = acts locked at the lowest band; comfort = the visit of someone who loves her (ch % a tuần at the
+   lowest band, chLow at the low band, cooldown cd tuần, thiện cảm ≥ aff or her maid ≥ maid; answers: big / small mood, affUp / affDown, k khắc). */
+Object.assign(BAL,{mood:{band:[-60,-25,25,60],emo:{vui:.35,buon:-.25,gian:-.2,so:-.25,ghen:-.2,lo:-.2,dau:-.4,muu:0},sat:320,satMin:.2,ok:3,fail:-3,rest:5,restDs:8,restCap:25,
+ decay:.2,keep:6,logMax:12,need:{sucLo:30,sucLoD:-6,sucHi:80,sucHiD:1,ill:-4,bacLo:15,bacD:-1,conf:-2,out:-5},fr:{aff:30,d:1,cap:3},foe:{oan:60,d:1,cap:1},maidHi:70,maidD:1,
+ wx:{nice:["hoa đào bay","trăng rằm","mai nở trong tuyết","nắng vàng","đom đóm","lá phong rơi"],niceD:2,harshD:-3,wetD:-1},
+ od:6,odFrom:30,aff:.15,affAngry:.25,affFrom:25,ghen:.2,lock:["Múa trong yến tiệc","Kinh hồng vũ","Đánh đàn ở ngự hoa viên","Đàn khúc Phượng cầu hoàng"],
+ comfort:{ch:35,chLow:15,cd:4,aff:40,maid:60,big:22,small:8,affUp:4,affDown:2,danh:1,k:1}}});
 /* MEMORIES + HOOK LEDGER (D26, review/memories, dev/build/jmem.js; spec dev/ideas/DESIGN_IDEAS_1115.md #1 + #3).
    mem: cap records per pair · fadeMo weight lost a month · keepFloor share of the first weight a "keep" deed (betrayal, poison, rescue) never fades below ·
    memMod = Σ sign·weight / modDiv, capped ±modMax (added to talk / Kết giao odds with that person, taken off NPC hostility) · recallMin weight for the

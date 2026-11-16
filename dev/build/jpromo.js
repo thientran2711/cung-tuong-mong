@@ -116,8 +116,7 @@ function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="
 .kprev-n{font-weight:700;color:#3a1f10;text-align:center}
 .kprev-l{margin:0;font-size:.9rem;line-height:1.45;color:#3a2a1e;text-align:center}
 @keyframes kprevIn{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%)}}
-@media (max-height:560px){.kprev{flex-direction:row;flex-wrap:wrap;align-content:center;justify-content:center;height:calc(100dvh - 16px);max-width:900px;gap:4px 14px}
- .kprev-h{width:100%}.kprev-fig{flex:0 0 min(40vw,300px);height:calc(100dvh - 70px)}.kprev-card{flex:0 1 380px}}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§65 + §66) ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(

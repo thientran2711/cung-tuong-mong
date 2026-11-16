@@ -462,9 +462,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshds{font-size:.8rem;color:var(--ink2,#6a5040)}
 /* kv:(min-width:1000px) */.kshg{--kshsz:124px}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
-@media (max-height:500px){.kshop{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:10px}
- .kshl{grid-row:1;grid-column:1;align-self:center}.kshl p{display:none}.kshtabs{grid-row:1;grid-column:2}.kshg,.kshempty{grid-column:1/-1;grid-row:2}
- .kshg{gap:6px 4px;padding:6px}.kshpic{max-width:64px}}
+
 `;document.head.appendChild(st)})();
 /* Nội vụ phủ: "Nhờ thái giám mua đồ" (j8 PEND.shop items S.shop, price IT[k].pr) through kitShop */
 function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `may áo: Sắc +${it.dr}, 3 tháng`;
