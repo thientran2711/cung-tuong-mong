@@ -9,6 +9,7 @@
    Entry: p / l = portrait / wide-landscape art; m = 4:3 art (optional, else l); pos / posl = background-position; grad / gradl = soft veil over the art (optional); col = ground colour.
    posm / gradm = the 4:3 tier's own position / veil (else those of l). Nobody else writes `background:url(...)` for a backdrop: add an entry here. */
 const KIT_BD={
+ /* title: the boot cover dev/site/kboot.js (KIT §14.1, painted before any script) mirrors these values: change both together */
  title:{sel:"#title.title",p:"img/title-key.webp",l:"img/title-key-l.webp",m:"img/title-key-m.webp",pos:"center top",posl:"left 25%",posm:"left center",col:"#f3e6d6",
   grad:"linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72))",gradl:"linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18))"},
  reborn:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",

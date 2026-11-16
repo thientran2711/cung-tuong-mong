@@ -28,7 +28,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    const L=kdcRects(st);let ov=0;for(const q of L){const w=Math.min(r.right,q.right)-Math.max(r.left,q.left),h=Math.min(r.bottom,q.bottom)-Math.max(r.top,q.top);if(w>0&&h>0)ov+=w*h}if(ov>0)f.push('desk overlaps '+Math.round(ov)+'px2');
    const desk=[Math.round(r.left-R.left),Math.round(r.top-R.top),Math.round(r.width)];
    bt.click();await sleep(900);const M=document.getElementById('modal');if(M.hidden||!M.querySelector('.kmc')){f.push('calendar did not open');return{f}}
-   const tabs=M.querySelectorAll('[data-kmcm]').length;if(tabs!==12)f.push('tabs '+tabs);
+   const tabs=M.querySelectorAll('[data-kmcm]').length;if(tabs!==13)f.push('tabs '+tabs);
    const clip=[];let marked=0;const keys=new Set();
    for(let o=0;o<12;o++){const t=M.querySelector(`[data-kmcm="${o}"]`);t.click();await sleep(120);const c=M.querySelector('.kmc');
     c.querySelectorAll('.kmc-fn,.kmc-n,.kmc-tl span,.kmc-head,.kp,.kmc-lk,.pct').forEach(e=>{if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflowX!=='auto')clip.push(o+':'+e.textContent.slice(0,16))});
@@ -45,6 +45,42 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    const dl=M.querySelector('.dlg').getBoundingClientRect();if(dl.right>innerWidth+1||dl.left<-1)f.push('dialog off screen');
    window.__o1=o1;return{f,desk,tabs,marked,keys:[...keys].sort().join(','),pop,ov:Math.round(ov)}});
   if(OUT){await p.screenshot({path:`${OUT}/mcal-${SZ}-pop.jpg`,type:'jpeg',quality:60})}
+  /* §58.3+ (review/cal-plus): day box, sổ hẹn + reminders, forecast = next roll, known entries, hooks, quẻ chip */
+  const m3=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));const pp=document.getElementById('kpop');if(pp)pp.hidden=true;
+   const M=document.getElementById('modal');const q=s=>M.querySelector(s);
+   q('[data-kmcm="0"]').click();await sleep(200);const btns=M.querySelectorAll('.kmc-grid button.kmc-d').length;if(btns!==30)f.push('day buttons '+btns);
+   if(!q('.kmc-row.on .kmc-que'))f.push('no quẻ chip on this tuần');
+   const n=mcNow();const o=n.t<2?0:1,d=n.t<2?(n.t+1)*10+3:3;q(`[data-kmcm="${o}"]`).click();await sleep(150);q(`.kmc-d[data-kmcd="${d}"]`).click();await sleep(400);
+   const box=q('.kmc-day');if(!box)f.push('no day box');else{const c=q('.kmc');if(c.scrollWidth>c.clientWidth+1)f.push('day box h-overflow');
+    box.querySelectorAll('.kpkb,.kmc-sub,.kbtn,.kctl-l').forEach(e=>{if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflowX!=='auto')f.push('day box clipped '+e.textContent.slice(0,14))});
+    const i=q('#kmc-note');if(!i)f.push('no note box');else{i.value='Thử hẹn lịch';q('[data-kmcsave]').click();await sleep(300);
+     if(!(S.calNotes||[]).some(x=>x.txt==='Thử hẹn lịch'))f.push('note not saved');if(!/Thử hẹn lịch/.test(q('.kmc').innerText))f.push('note not shown')}}
+   /* past tuần log: the current day box shows "sổ đã ghi" */
+   q('[data-kmcm="0"]').click();await sleep(150);q(`.kmc-d[data-kmcd="${n.t*10+1}"]`).click();await sleep(300);if(!/sổ đã ghi/.test(q('.kmc-day').innerText))f.push('no log in day box');
+   /* known entries + hooks */
+   const has=(k)=>{for(let x=-1;x<12;x++){const E=mcExtra(x);for(const dd in E)if(E[dd].some(e=>e.k===k))return true}return false};
+   S.preg=3;S.pregUnk=0;S.fake=0;if(!has('due'))f.push('no due month');S.preg=0;
+   S.ex={to:(S.rank||0)+1,w0:wk()+1,w1:wk()+4};if(!has('exam'))f.push('no exam');S.ex=null;
+   S.kids=S.kids||[];const kk=mkKid('m',8);kk.name='Hoàng tử Thử';S.kids.push(kk);if(!has('kid'))f.push('no kid birthday');if(!has('kexam'))f.push('no child test');S.kids.pop();
+   window.thaiyNextVisit=()=>wk()+2;if(!has('thaiy'))f.push('thaiy hook unused');delete window.thaiyNextVisit;
+   window.cycleDaysOf=()=>[4,5,6];const h=kitMonthCal({o:0});if((h.match(/kmc-d[^"]* cy/g)||[]).length!==3)f.push('cycle days not marked');delete window.cycleDaysOf;
+   if(!has('bong')&&!isSrv())f.push('no stipend day');
+   /* co-op: the friend's days (her blob in the canonical world) + the share switch in the day box */
+   const cw0=window.COOPW;window.COOPW={on:true,seat:'a',base:{P:{b:{name:'Hảo hữu Thử',S:{name:'Hảo hữu Thử',bmonth:mcNow().m,preg:5,calNotes:[{w:wk()+1,d:1,txt:'Hẹn chung',share:1}]}}}}};
+   const fr=[];for(let x=0;x<12;x++){const E=mcExtra(x);for(const dd in E)E[dd].forEach(e=>{if(e.k==='friend')fr.push(e.txt)})}
+   if(!fr.some(t=>/Sinh thần Hảo hữu Thử/.test(t)))f.push('co-op: no friend birthday');if(!fr.some(t=>/lâm bồn/.test(t)))f.push('co-op: no friend due month');if(!fr.some(t=>/Hẹn chung/.test(t)))f.push('co-op: no shared note');
+   if(!/kmc-share/.test(kitMonthCal({o:0,sel:mcNow().t*10+1})))f.push('co-op: no share switch');window.COOPW=cw0;
+   kitModalClose&&kitModalClose();Q.length=0;M.hidden=true;
+   /* forecast + reminders across two real tuần */
+   S.staff=S.staff||[];if(!S.staff.length)S.staff.push({sid:9901,name:'Lão Thử',role:'eunuch',fc:0,fk:0,face:0,hue:0,age:52,tr:'trung',loyal:60,spyFor:null,lover:null,af:{},kn:1,imp:'',org:''});else S.staff[0].age=52;
+   S.calNotes=[{id:99,w:wk()+2,d:1,txt:'Hẹn hai tuần'}];const fc=mcWxNext();if(!fc)f.push('no forecast');
+   const seen=[];for(let i=0;i<2;i++){Q.length=0;M.hidden=true;S.mg=0;const before=wk();try{endTurn()}catch(e){f.push('endTurn '+e.message)}
+    if(i===0&&fc&&S.wx&&(S.wx.b||S.wx.n)!==fc[0])f.push(`forecast ${fc[0]} but ${S.wx.b||S.wx.n}`);
+    seen.push(Q.filter(m=>m.t==='Sổ hẹn').map(m=>JSON.stringify(m.kit&&m.kit.rows||'')).join('|'))}
+   if(!/Tuần sau/.test(seen[0]))f.push('no reminder the tuần before');if(!/Tuần này/.test(seen[1]))f.push('no reminder on the tuần');
+   if(!(S.logs||[]).some(x=>/Sổ hẹn: Hẹn hai tuần/.test(x)))f.push('reminder not in log');
+   Q.length=0;M.hidden=true;{const dw=document.getElementById('dawn');if(dw){dw.hidden=true;dw.innerHTML='';document.body.classList.remove('kbk-open')}}render();kitMonthCalOpen();await sleep(600);const n2=mcNow();const sq=document.querySelector(`#modal .kmc-d[data-kmcd="${n2.t*10+2}"]`);if(sq)sq.click();await sleep(500);return{f}});
+  if(OUT){await p.screenshot({path:`${OUT}/mcal-${SZ}-day.jpg`,type:'jpeg',quality:60})}
   const m2=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));const pp=document.getElementById('kpop');if(pp)pp.hidden=true;
    document.querySelector('#modal [data-kmcm="0"]').click();await sleep(300);const on=document.querySelector('#modal .kmc-row.on .kmc-now');if(!on)f.push('no Tuần này');
    /* Thánh thọ hides after Thái hậu dies */
@@ -58,5 +94,5 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    try{restore(true,'thử');}catch(e){}S.place='vuon';Q.length=0;render();await sleep(300);if(document.getElementById('kmcdesk'))f.push('desk calendar away from home');
    return{f,cold:!!bt,cp}});
   if(OUT){await p.screenshot({path:`${OUT}/mcal-${SZ}-cold.jpg`,type:'jpeg',quality:60})}
-  const F=[...(m.f||[]),...(m2.f||[])];bad+=F.length;R[SZ]=F.length?F:`ok desk ${JSON.stringify(m.desk)} · ${m.marked} festival squares (${m.keys}) · pop "${m.pop}"`;await ctx.close()}
+  const F=[...(m.f||[]),...(m3.f||[]),...(m2.f||[])];bad+=F.length;R[SZ]=F.length?F:`ok desk ${JSON.stringify(m.desk)} · ${m.marked} festival squares (${m.keys}) · pop "${m.pop}"`;await ctx.close()}
  console.log(JSON.stringify({bad,R,errs},null,1));await b.close();process.exit(bad||errs.length?1:0)})();
