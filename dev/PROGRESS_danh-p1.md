@@ -17,7 +17,7 @@ only conflicts: generated index.html/sw.js/assets.json (rebuilt) and jbal2.js (t
 3. Tài-nghệ bot: dev/measure/intn.js (+ hooks `__xOpts` / `__xModal` in inpage6.js), counters x.ix.exl; summary dev/measure/antn.py.
 4. Test: dev/test/danh-p1.js (17 checks) PASS at 755x1000 and 1180x820.
 
-## Runs
+## Runs (DONE 18/18; results dev/review/danh-p1.md)
 dev/measure/pass/p1arms.sh (6 arms × seeds 501/777/913 × 16 lives, cap 144 tuần); outputs copied to dev/measure/pass/data/danh-p1/.
 Analysis: `python3 dev/measure/andanh.py …` (Danh) and `python3 dev/measure/antn.py …` (exam, Tài nghệ, charity uses).
 
