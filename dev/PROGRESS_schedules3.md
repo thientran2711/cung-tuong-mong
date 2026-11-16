@@ -188,3 +188,6 @@ Ledger API changes in r2 (additive only; nothing removed or renamed):
 - record: elders' and c:ped's now/later khắc are resynced each sync (no change to the shape `[place, act, target, reason]`).
 
 Results (r2 build = main 18fb8252 + r1 + r2): see dev/handover/reports/review-schedules3-r2.md (docs branch).
+
+## Fix pass 4 (review/schedules3-r4, 16/11)
+Reviewer r3 FAIL items fixed: jroute NPC acts gated + recorded (rtBm uyhiep, report tocao, frame-child accuse, bowl-oil frame), witnesses from the record (whereOf; no fallback pool; jmen/jgift witness readers too), P95B rtBm/rtNpcEsc/cmBrawl/cmScorn, jcmaid spy pick gated; card family scan dev/test/pend_consort_scan.py. Merged main 2232ea32. Tests all clean: see dev/handover/reports/review-schedules3-r4.md (code sha f388b4de).
