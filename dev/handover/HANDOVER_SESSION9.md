@@ -248,3 +248,4 @@ Self-wake: s15 trigger trig_01QtP4CohaEq6uN3d5auPm7Q is DELETED at handover → 
 - (12:09Z s16) mortality-r1 SMOKE PASS → archived; design-scale-r1 SMOKE PASS → archived. LIVE night-end-r3 a5d9d2bc (main cab4a766..a5d9d2bc), smoke asked. GO promo-skip-r1. ART fp v5 (bd-v5 + nc-v5, maids in in-game cut) sent to owner, verdict pending; fp chat near its cap → fresh worker from reports/foreign-princess-samples.md if another pass is needed.
 - (12:12Z s16) night-end-r3 SMOKE PASS live → archived.
 - (12:17Z s16) LIVE promo-skip-r1 b85cdb1e (main a5d9d2bc..b85cdb1e). Regression found on main: rank-up chest + servant reveal screens no longer show → promo-reveal-fix (same session). GO merge-train-6 next.
+- (12:19Z s16) cardflip-glow2 SẴN SÀNG KIỂM ab6cf3e0 → reviewer session_01UV1Szk2fgA2KyKg3zrmLgn; videos sent to owner.
