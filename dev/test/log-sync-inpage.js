@@ -27,10 +27,13 @@ function resync(){for(const k in K)sh[k]=val(k);seq=S.logSeq||0;chg={}}
 function check(tag){if(!S){cur=null;return}if(S!==cur){hook();return}A.checks++;
  const n=Math.max(0,Math.min((S.logSeq||0)-seq,S.logs.length));const L=S.logs.slice(0,n).reverse().map(strip);A.lines+=L.length;
  const ment={};
- for(const t of L)for(const k in K){RX[k].lastIndex=0;let m;while((m=RX[k].exec(t))){if(/\p{L}\s$/u.test(t.slice(Math.max(0,m.index-2),m.index))&&!/(?:^|\s)(?:ta|ngươi)\s$/u.test(t.slice(Math.max(0,m.index-7),m.index)))continue;ment[k]=1;
+ /* bookkeeping lines (jlogsync marker): how many, and catch-all ones without a reason */
+ for(const h of S.logs.slice(0,n)){const x=String(h);if(/class="kls"/.test(x)){A.book=(A.book||0)+1;const c=/data-ls="c"/.test(x);if(c){A.bookC=(A.bookC||0)+1;{const key=strip(x).replace(/-?\d+/g,"#").replace(/\s+/g," ").trim().slice(0,110);A.bookK=A.bookK||{};A.bookK[key]=(A.bookK[key]||0)+1}if(!/\(/.test(strip(x))){A.noWhy=(A.noWhy||0)+1;if((A.noWhyEx=A.noWhyEx||[]).length<20)A.noWhyEx.push(strip(x).slice(0,160))}}}}
+ for(const t of L){{const re=/=\s*([+\-−])(\d+)\s*bạc/gu;let m;while((m=re.exec(t)))sh.bac+=(m[1]==="+"?1:-1)*+m[2]}for(const k in K){RX[k].lastIndex=0;let m;while((m=RX[k].exec(t))){if(/\p{L}\s$/u.test(t.slice(Math.max(0,m.index-2),m.index))&&!/(?:^|\s)(?:ta|ngươi)\s$/u.test(t.slice(Math.max(0,m.index-7),m.index)))continue;ment[k]=1;
    if(m[1]!=null){const a=+m[1],b=+m[2];if(a!==sh[k]&&A.stale.length<300)A.stale.push({k,line:t.slice(0,220),replayed:sh[k],said:a,live:val(k),date:`T${S.month}/${S.year} t${S.tuan}`});sh[k]=b}
    else if(m[3]!=null){const d=(m[3]==="+"?1:-1)*+m[4];sh[k]=m[5]!=null?+m[5]:sh[k]+d}
-   else if(m[6]!=null)sh[k]=+m[6]}}
+   else if(m[6]!=null)sh[k]=+m[6]}}}
+
  for(const k in K){const live=val(k);if(sh[k]!==live){
    const c=chg[k]||[];if(!c.length){A.drift=(A.drift||0)+1;if((A.driftEx=A.driftEx||[]).length<20)A.driftEx.push({k,replayed:sh[k],live,lines:L.slice(-3).map(x=>x.slice(0,200))});continue}const key=k+" | "+(c.length?c.map(x=>x.st.slice(0,9).join(" < ")).join(" || "):"(no setter: replay drift)");
    const p=A.paths[key]=A.paths[key]||{k,n:0,ex:[]};p.n++;
