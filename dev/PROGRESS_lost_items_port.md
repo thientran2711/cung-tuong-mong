@@ -46,3 +46,12 @@ Only existing parts: kitItemTag (§64.1), kitItem, kitChip, kitFacts, pbtn act c
 ## Open
 - j92's wdframe dialog options carry `j67:"tốn: không tốn gì"` so the kit shows them as "an toàn" though the hearing can go against her
   (same as the live Giá họa dialog; family-wide, not changed here).
+
+## Bot numbers (lostfreq.js, 2 lives × 400 weeks = 192 months, dialogs dropped: she never lies/steals/wears others' items)
+- Her cases 7 (0.44/yr), NPC cases 134 (8.4/yr across ~12 consorts). Causes: mis 98 · srv 23 · riv 20 (keep 6, plant on someone 14).
+- Hearings: quiet-clear 2 (her 0), keep hearings 2 (1 won), j92 owner-field hearings 5 (on her 4 = a rival's real plant scheme → dialog).
+- FAIRNESS: penalties to her from a lost-item hearing without a deed = **0**.
+- NPCs did not pick the explicit `laydo` act in these 2 lives (their rival thefts come through the approved hidden rival cause); the act is in
+  BANDS "nặng", so motive-heavy rivals can still choose it.
+
+SẴN SÀNG KIỂM
