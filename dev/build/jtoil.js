@@ -111,7 +111,7 @@ if(typeof leAttire==="function"){const la0=leAttire;
   /* thỉnh an Thái hậu / Hoàng hậu, Hoàng thượng: jaudit's hook put the line on the card; give "Vì sao" the real reasons */
   if(p.kind==="th"||p.kind==="hh"||p.kind==="emp"){const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.ref;const L=leAttire(S,"",host);
    return A.map(a=>{if(!a||!L.toil||typeof a.why!=="function"||(p.kind!=="emp"&&!/^Thỉnh an/.test(a.n)))return a;const w0=a.why;
-    const o=Object.assign({},a,{why:()=>{const F=w0().filter(x=>!/^Y phục dưới phẩm: thiếu lễ/.test(x[0]));const hk=TOIL_HK[L.toil.hk];
+    const o=Object.assign({},a,{why:()=>{const F=w0().filter(x=>!/^(Y phục dưới phẩm: thiếu lễ|Y phục giản dị hợp ý)/.test(x[0]));const hk=TOIL_HK[L.toil.hk];
      L.toil.why.forEach(([t,n])=>F.push([`${t[0].toUpperCase()+t.slice(1)}: ${toilWho(host)}${hk?" "+hk:""} ${n>0?"ưng ý":"phật ý"} (thiện cảm ${n>0?"+":""}${n}; không đổi cơ may)`,0]));return F}});
     /* everyone at Thỉnh an Hoàng hậu sees her: a showy dress / a perfect face makes the jealous ones jealous */
     if(p.kind==="hh"){const g=toilCrowd(false);if(g.n){o.risk=[o.risk,`phi tần thấy ta ${g.why}: ghen +${g.n}`].filter(Boolean).join(" · ");const r0=o.run,g0=o.go;

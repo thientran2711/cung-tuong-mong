@@ -193,9 +193,16 @@ function aaThieuLeApply(host,f0){if(!f0&&!aaThieuLe(S))return;const f=f0||aaThie
  log(`<span class="r">Thiếu lễ: y phục của ngươi dưới phẩm ${RANKS[S.rank]?RANKS[S.rank].n:""}. ${aaThieuLeTxt(host).replace(/^thiếu lễ \(y phục dưới phẩm\): /,"")}.</span>`)}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p)return A;const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.kind==="hh"?p.ref:null;if(!host)return A;const LA=leAttire(S,"thỉnh an",host);if(!LA.delta.danh&&!LA.delta.duc&&!LA.delta.aff)return A;
  return A.map(a=>{if(!a||(p.kind!=="emp"&&!/^Thỉnh an/.test(a.n)))return a;const w0=a.why,go0=a.go,run0=a.run;const FX=aaThieuLeFx(host);const add=aaThieuLeTxt(host,FX);
-  const o=Object.assign({},a,{risk:[a.risk,add].filter(Boolean).join(" · "),why:()=>{const F=w0?w0():[];F.push(["Y phục dưới phẩm: thiếu lễ (không đổi cơ may, mất Danh/Đức)",0]);return F}});
+  const o=Object.assign({},a,{risk:[a.risk,add].filter(Boolean).join(" · "),why:()=>{const F=w0?w0():[];F.push([aaThieuLeWhy(host),0]);return F}});
   const fail0=a.fail;if(run0)o.run=function(){aaThieuLeApply(host,FX);return run0.apply(this,arguments)};
   else{o.go=function(){aaThieuLeApply(host,FX);return go0?go0.apply(this,arguments):undefined};o.fail=function(){aaThieuLeApply(host,FX);return fail0?fail0.apply(this,arguments):undefined}}return o})}catch(e){console.error(e);return A}}})();
+/* the "Vì sao" line of the thiếu lễ rider is read from leAttire's real verdict (D47): in trung y the Danh/Đức price is the robe rule's (charged when she
+   leaves her palace), so the line never claims "mất Danh/Đức" there; a frugal host pleased by plain dress is not "thiếu lễ" either */
+function aaThieuLeWhy(host){try{const L=leAttire(S,"thỉnh an",host),who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà",d=L.delta;
+ if(d.aff>0)return`Y phục giản dị hợp ý ${who} (không đổi cơ may)`;
+ if(L.ty)return`Đang mặc trung y trước bề trên: thiếu lễ, ${who} phật ý (không đổi cơ may; Danh/Đức đã tính theo lệ mặc trung y ra khỏi tẩm cung)`;
+ const lose=[d.danh?"Danh":"",d.duc?"Đức":""].filter(Boolean).join("/");
+ return`Y phục dưới phẩm: thiếu lễ, ${who} phật ý (không đổi cơ may${lose?`, mất ${lose}`:""})`}catch(e){return"Y phục dưới phẩm: thiếu lễ (không đổi cơ may)"}}
 /* NPCs: the same rule when they wait on Thái hậu */
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});v.th=cl((v.th||0)+f.aff,-100,100)}}catch(e){}return r}}}catch(e){}})();
 
