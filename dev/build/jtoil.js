@@ -600,32 +600,42 @@ function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e)
 function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
   const ff=kitFile(fig),pf=kitFile(por.src),v=TOIL_FIT.fit[ff];if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
+  /* the close-up is HER PORTRAIT laid exactly over her face in the figure (same mouth point, same face width from img/toil-fit.json): the figure picture is too soft at 5x, the portrait has the pixels */
+  let porH="";try{const pv=TOIL_FIT.fit[pf];if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);
+   porH=`<span class="ktrv-pw" style="left:${(v[0]-pv[0]*wp/100).toFixed(2)}%;top:${(v[1]-pv[1]*hp/100).toFixed(2)}%;width:${wp.toFixed(2)}%;height:${hp.toFixed(2)}%"><img src="${IMG_U("img/"+pf)}" alt=""><span class="kfxf">${pfx}</span></span>`}}catch(e){}
   const fx=(()=>{try{return kitFxLayers(S,ff)}catch(e){return""}})();
   const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}${o.made?` · ${o.score} phần`:""}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Hôm nay",TOIL_HINT[look]]);
-  const html=`<div class="ktrv ktrv-${look}" style="--ktpx:${v[0]}%;--ktpy:${(v[1]-v[6]*.25/A).toFixed(2)}%"><i class="ktrv-plate" style="background-image:url(${IMG_U("img/toil-mirror-room.webp")})"></i><i class="ktrv-lt"></i>`+
-   `<div class="ktrv-fig"><span class="ktrv-fw"><img src="${IMG_U("img/"+ff)}" alt=""><span class="kfxf">${fx}</span></span></div>`+
-   `<div class="ktrv-zoom">${kitFaceZoom(S,pf)}</div><div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;
-  const rt=kmStage("ktrv-ov",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),zm=ov.querySelector(".ktrv-zoom"),im=fw.querySelector("img");
+  const html=`<div class="ktrv ktrv-${look}" style="--ktpx:${v[0]}%;--ktpy:${(v[1]-v[6]*.25/A).toFixed(2)}%"><div class="ktrv-cam"><i class="ktrv-plate" style="background-image:url(${IMG_U("img/toil-mirror-room.webp")})"></i><i class="ktrv-lt"></i>`+
+   `<div class="ktrv-fig"><span class="ktrv-fw"><img src="${IMG_U("img/"+ff)}" alt=""><span class="kfxf">${fx}</span>${porH}</span></div></div>`+
+   `<div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;
+  const rt=kmStage("ktrv-ov",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),im=fw.querySelector("img");
   const hint=document.createElement("div");hint.className="kmhint";hint.textContent="Chạm để bỏ qua";ov.appendChild(hint);
+  fw.style.setProperty("--kta",(1/A).toFixed(5));/* the box = the picture box from the fit aspect (no wait for the picture), so the % layers (makeup, portrait) and the camera always sit on the picture */
   let ph=0;const T=[];const later=(ms,f)=>{if(!o.manual)T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
   const closeAll=()=>{if(ph===3)return;ph=3;T.forEach(clearTimeout);try{kitFxClear&&kitFxClear()}catch(e){}ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);end()};
   /* KIT 81 scene-end button (owner OD:L1261): the zoomed face ends with ONE kit button; no tap anywhere closes it */
-  const showCard=()=>{R.classList.add("ktrv-zoomed");kitSceneEnd(ov,"Tiếp theo",closeAll)};
-  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;R.classList.add("ktrv-zin");showCard()};
+  const showCard=()=>{R.classList.add("ktrv-zoomed");kitSceneEnd(ov,"Tiếp theo",closeAll);/* the scene-end bar re-lays the overlay: aim the camera again on the settled layout */requestAnimationFrame(()=>{try{camSet()}catch(e){}})};
+  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;if(!R.style.getPropertyValue("--ktsc"))camSet();R.classList.add("ktrv-zin");if(porH)R.classList.add("ktrv-hasp");showCard()};
   ov.addEventListener("click",e=>{e.stopPropagation();if(ph<2)toZoom()});
-  R.style.setProperty("--ktpx",v[0]+"%");
-  const goZoom=()=>{if(ph>=2)return;ph=1.5;/* face scale: face width fills ~46 % of the short side */const wpx=im.getBoundingClientRect().width||1,fwpx=v[6]/100*wpx;
-   const sc=Math.max(1.5,Math.min(7,.46*Math.min(innerWidth,innerHeight)/Math.max(8,fwpx)));R.style.setProperty("--ktsc",sc.toFixed(2));R.classList.add("ktrv-go");later(1100,toZoom)};
-  if(red){toZoom();return}
+  /* THE CAMERA (owner 16/11 21:25Z): no round frame. Plate + figure sit in ONE .ktrv-cam; the camera zooms into HER FACE (clothes still in shot) on the same room painting */
+  const camSet=()=>{/* layout metrics (offset*), never rects: rects carry the design-canvas scale and the step-in transform */
+   let ox=0,oy=0,el=fw;while(el&&el!==R){ox+=el.offsetLeft;oy+=el.offsetTop;el=el.offsetParent}
+   const RW=R.offsetWidth||innerWidth,RH=R.offsetHeight||innerHeight,w0=fw.offsetWidth||1,h0=fw.offsetHeight||1,fwpx=v[6]/100*w0;/* her face centre in R's CSS px (the figure at rest) */
+   const fx0=ox+v[0]/100*w0,fy0=oy+(v[1]-v[6]*.25/A)/100*h0;
+   const sc=Math.max(1.5,Math.min(6,.34*Math.min(RW,RH)/Math.max(8,fwpx)));/* face width ≈ 34 % of the short side */
+   R.style.setProperty("--kto",`${fx0.toFixed(1)}px ${fy0.toFixed(1)}px`);R.style.setProperty("--ktx",`${(RW/2-fx0).toFixed(1)}px`);R.style.setProperty("--kty",`${(RH*.36-fy0).toFixed(1)}px`);R.style.setProperty("--ktsc",sc.toFixed(2))};
+  const goZoom=()=>{if(ph>=2)return;ph=1.5;camSet();R.classList.add("ktrv-go");later(1500,toZoom)};
+  if(red){camSet();R.classList.add("ktrv-red");toZoom();return}
   /* step in, effect, zoom */
   requestAnimationFrame(()=>R.classList.add("ktrv-in"));
   try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-peach"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
-  const runFx=()=>{if(ph>=2)return;const tg=fw,SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
-   const rc=fw.getBoundingClientRect(),fp={x:rc.left+v[0]/100*rc.width,y:rc.top+(v[1]-v[6]*.2/A)/100*rc.height};
-   try{if(look==="dep"||look==="tuyet"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxLight("glow-gold",fw,{opacity:.4,dur:3200,scale:1.5})}
-    else if(look==="diem"){kitFxLight("glow-gold",fw,{opacity:.55,dur:3200,scale:1.6});kitFxBurst("spark",fp,24,{});kitFxBurst("petal-peach",null,14,{})}
-    else if(look==="vung"){kitFxBurst("ink",fp,3,{scale:.8});R.classList.add("ktrv-wob")}
-    else if(look==="vua"){kitFxLight("glow-gold",fw,{opacity:.25,dur:2400,scale:1.3})}}catch(e){}};later(900,runFx);
+  const runFx=()=>{if(ph>=2)return;const SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
+   /* KIT §68.7: light is a RIM only (starts at her outline, radiates outward, never over her face); sparks and petals leave from her silhouette's edges */
+   const rc=im.getBoundingClientRect(),eL={x:rc.left+rc.width*.3,y:rc.top+rc.height*.42},eR={x:rc.right-rc.width*.3,y:rc.top+rc.height*.42};
+   try{if(look==="dep"||look==="tuyet"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxRim(im,{tone:"glow-gold",a:.65,r:16,dur:3200})}
+    else if(look==="diem"){kitFxRim(im,{tone:"glow-gold",a:.95,r:24,dur:3200});kitFxBurst("spark",eL,12,{});kitFxBurst("spark",eR,12,{});kitFxBurst("petal-peach",null,14,{})}
+    else if(look==="vung"){kitFxBurst("ink",eR,3,{scale:.8});R.classList.add("ktrv-wob")}
+    else if(look==="vua"){kitFxRim(im,{tone:"glow-gold",a:.45,r:12,dur:2400})}}catch(e){}};later(900,runFx);
   later(red?0:3300,goZoom);if(o.manual)window.TOIL_REV={fx:runFx,go:goZoom,zoom:toZoom,close:closeAll,get ph(){return ph}};
  }catch(e){console.error(e);end()}}
 window.toilReveal=toilReveal;
@@ -640,17 +650,17 @@ window.toilReveal=toilReveal;
 .ktrv-diem .ktrv-lt{background:radial-gradient(ellipse at 50% 50%,#ffd27a99,#ffb03a00 70%)}
 .ktrv-in .ktrv-lt{opacity:1}
 .ktrv-fig{position:absolute;left:0;right:0;bottom:3%;height:88%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none}
-.ktrv-fw{position:relative;display:block;height:100%;aspect-ratio:var(--kta,auto);transform-origin:var(--ktpx) var(--ktpy);opacity:0;transform:translateY(5%) scale(.97);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
-.ktrv-fw img{display:block;height:100%;width:auto;max-width:none}
-.ktrv-fw .kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.ktrv-in .ktrv-fw{opacity:1;transform:none}
-.ktrv-go .ktrv-fw{transform:scale(var(--ktsc,3));transition:transform 1.1s cubic-bezier(.55,0,.25,1),opacity .4s ease .8s;opacity:0}
+.ktrv-cam{position:absolute;inset:0;transform-origin:var(--kto,50% 40%);transition:transform 1.5s cubic-bezier(.55,0,.25,1);will-change:transform}
+.ktrv-go .ktrv-cam,.ktrv-zin .ktrv-cam{transform:translate(var(--ktx,0px),var(--kty,0px)) scale(var(--ktsc,3))}
+.ktrv-zin .ktrv-cam{transition-duration:.6s}.ktrv-red .ktrv-cam{transition:none}
+.ktrv-fw{position:relative;display:block;flex:none;height:100%;aspect-ratio:var(--kta,auto);opacity:0;transform:translateY(5%) scale(.97);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.ktrv-fw>img{display:block;height:100%;width:auto;max-width:none;transition:opacity .6s ease}
+.ktrv-fw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s ease}
+.ktrv-pw{position:absolute;opacity:0;transition:opacity .6s ease;pointer-events:none}.ktrv-pw>img{display:block;width:100%;height:100%;max-width:none}.ktrv-pw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.ktrv-zin .ktrv-pw{opacity:1}.ktrv-zin.ktrv-hasp .ktrv-fw>img,.ktrv-zin.ktrv-hasp .ktrv-fw>.kfxf{opacity:0}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
+.ktrv-in .ktrv-fw,.ktrv-zin .ktrv-fw{opacity:1;transform:none}
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}
-.ktrv-zoom{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) scale(.55);opacity:0;transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-.ktrv-zoom .kfzoom{width:min(74vw,calc(46*var(--kvh,1vh)),340px);margin:0}
-.ktrv-zin .ktrv-zoom{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.ktrv-zin .ktrv-fw{opacity:0;transition:none}
 .ktrv-card{position:absolute;left:50%;bottom:max(34px,env(safe-area-inset-bottom));transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
 .ktrv-zoomed .ktrv-card{opacity:1;transform:translate(-50%,0)}
 
