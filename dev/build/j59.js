@@ -155,7 +155,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
       no figure is ever placed under a stage panel, at any size, in any place */
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
  const MAXN=3,M=E.length,nAll=M+(me?1:0);
- {const S3=window.KIT_STAGE3,ico=!!(S3&&S3.v==="A"&&nAll>=3);if(st.classList.contains("k3ico")!==ico){st.classList.toggle("k3ico",ico);if(ico)st.style.setProperty("--kcola",S3.colA+"px");void st.offsetWidth}}
+ {const S3=window.KIT_STAGE3,ico=nAll>=3;if(st.classList.contains("k3ico")!==ico){st.classList.toggle("k3ico",ico);if(ico)st.style.setProperty("--kcola",S3.colA+"px");void st.offsetWidth}}
  const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
  const geo=(N,z)=>{const paged=nAll>N;const CW=paged?46:0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSw(N,avail);/* KIT 33.7 slot function (jkit) */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
@@ -164,7 +164,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     the page holds fewer people instead of squeezing two into the gap with overlapping names */
  const J59SWMIN=68;
  const mxW=h=>Math.max(me?coreW(meX,h):0,...F.map(x=>coreW(x,h)));/* a pet on the right must end before the right neighbour's art begins: w/2 + pet + widest/2 <= spacing */
- const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw&&(!mePet||coreW(meX,h)/2+pEx(mePet,h)+mxW(h)/2<=g.sw)&&F.every(x=>!x.pet||coreW(x,h)/2+pEx(x.pet,h)+mxW(h)/2<=g.sw);
+ /* KIT 33.9: up to 3 people ALWAYS stand at the kit figure height (never shrunk); width is made by the group-photo overlap below */const STG=nAll<=3;
+ const fits=(g,h,nomin)=>(STG&&g.N>=nAll)||(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw&&(!mePet||coreW(meX,h)/2+pEx(mePet,h)+mxW(h)/2<=g.sw)&&F.every(x=>!x.pet||coreW(x,h)/2+pEx(x.pet,h)+mxW(h)/2<=g.sw);
  /* measure EVERY name chip (all pages), not only the page on screen: a hidden chip reads 0 px and the floor band (fo) would shift between pages (reviewer, 844x390 page 3) */
   E.forEach(x=>{x.tok.style.display=""});if(mt)mt.classList.remove("j59off");
   let tagH=Math.max(14,mt&&mt.firstChild?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag?x.tag.offsetHeight:0));
@@ -172,13 +173,18 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     when they do not fit at full height, EVERYONE is scaled down together (same scale, J59HMIN at least) before the page drops a slot */
  let Z=size(tagH),N=Math.max(1,Math.min(MAXN,nAll)),G=geo(N,Z);
  if(!fits(G,Z.H)&&!capOn&&KF.maxPx){capOn=true;Z=size(tagH);G=geo(N,Z)}
- const J59HMIN=()=>N<=2?.32:(window.KIT_STAGE3&&KIT_STAGE3.v?KIT_STAGE3.hmin:.62);/* two slots are kept (owner: phone shows 2) by scaling everyone down together further than for 3 */
+ const J59HMIN=()=>N<=2?.32:.62;/* only reached when MORE than 3 people are on the stage (paged); up to 3 never shrink (STG) *//* two slots are kept (owner: phone shows 2) by scaling everyone down together further than for 3 */
 
  while(N>1&&!fits(G,Z.H)){if(fits(G,Z.H*J59HMIN())){let lo=Z.H*J59HMIN(),hi=Z.H;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(fits(G,m))lo=m;else hi=m}Z.H=lo;break}N--;G=geo(N,Z)}
  if(!fits(G,Z.H,1)){/* a stage narrower than ONE whole person: that one person scales down to fit */
   let lo=sH*.15,hi=Z.H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(fits(G,m,1))lo=m;else hi=m}Z.H=lo}
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */
- st.style.setProperty("--j59sw",Math.max(60,G.sw-8).toFixed(0)+"px");
+ /* group-photo stagger (KIT 33.9): the centres of the people when the 33.7 slots do not hold the art (null = fixed slots); chips are one centre gap wide */
+ const stagCs=(ws,pe,x0,av)=>{const k=ws.length;if(!STG||k<2)return null;let need=false;for(let i=0;i<k-1;i++)if(kitSlotSw(k,av)<(ws[i]+ws[i+1])/2+pe[i])need=true;if(!need)return null;
+  const c0=x0+ws[0]/2,cl=x0+av-ws[k-1]/2-pe[k-1];return ws.map((w,i)=>c0+(cl-c0)*i/(k-1))};
+ let chipW=G.sw;if(STG&&N>1&&nAll===N){const ws0=[],pe0=[];if(me){ws0.push(coreW(meX,Z.H));pe0.push(pEx(mePet,Z.H))}for(const x of E){ws0.push(x.nf?x.tok.offsetWidth:coreW(x,Z.H));pe0.push(x.nf?0:pEx(x.pet,Z.H))}
+  const cc=stagCs(ws0,pe0,G.x0,G.avail);if(cc)chipW=Math.min(G.sw,Math.min(...cc.slice(1).map((c,i)=>c-cc[i])))}
+ st.style.setProperty("--j59sw",Math.max(60,chipW-8).toFixed(0)+"px");
  tagH=Math.max(14,mt&&mt.firstChild?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag?x.tag.offsetHeight:0));
  {const H0=Z.H;Z=size(tagH);Z.H=Math.min(Z.H,H0);G=geo(N,Z)}
  const {fo,H}=Z;CAP=sH-fo-topR;
@@ -194,7 +200,9 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=(showMe?0:1)+E.slice(0,s0).filter(x=>j59person(x.p)).length;
  if(pages>1)st.dataset.j59pg=[pg,pages,s0,s1,M].join(",");else delete st.dataset.j59pg;
  /* fixed slots (owner 16/11): 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4 of the free width (stage minus the side column) */
- const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCx(i,kOn,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
+ const kOn=(showMe?1:0)+vis.length;const wsA=[],peA=[];if(showMe){wsA.push(coreW(meX,H));peA.push(pEx(mePet,H))}for(const x of vis){wsA.push(x.nf?x.tok.offsetWidth:coreW(x,H));peA.push(x.nf?0:pEx(x.pet,H))}
+ const cs=stagCs(wsA,peA,G.x0,G.avail)||[];const stag=cs.length>0;
+ const cxOf=i=>stag?cs[i]:kitSlotCx(i,kOn,G.x0,G.avail);const maxH=Math.max(H*maxF,H);const LIFT=stag?Math.max(0,Math.min(Math.round(sH*KIT_STAGE3.lift),CAP-maxH)):0;const lifts=i=>stag&&i%2===1?LIFT:0;st.dataset.j59stag=stag?LIFT:"";st.dataset.j59cap=[fo.toFixed(0),(sH-fo-topR).toFixed(0),sH.toFixed(0)].join(",");st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
  const centres=[];let slot=0;const usedPets=[];
@@ -203,17 +211,17 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const inLim=(cx,cw,ex)=>{ex=ex||0;if(G.pR&&cx+cw/2+ex>G.limR)cx=G.limR-cw/2-ex;if(G.pL&&cx-cw/2<G.limL)cx=G.limL+cw/2;return cx};
  if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=((kCL(mb)+kCR(mb))/2-.5)*meW;const cx=inLim(cxOf(slot++),coreW(meX,H),pEx(mePet,H));centres.push(cx);usedPets.push([mePet,cx,coreW(meX,H),"me"]);
   me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
-  me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
+  me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo+lifts(0)-(1-mb.b)*meH).toFixed(1)+"px";me.style.zIndex=lifts(0)?"1":stag?"2":"";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
    const d=R.top+st.clientTop+floorY+3-g.getBoundingClientRect().top;if(Math.abs(d)>.3)mt.style.top=(floorY+3+d).toFixed(1)+"px"}}
-  for(const x of vis){let cx=cxOf(slot++);if(!x.nf)cx=inLim(cx,coreW(x,H),pEx(x.pet,H));centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,coreW(x,H),"p"+(x.tok.dataset.p||"")]);
-  if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
+  for(const x of vis){const li=lifts(slot);const zi=li?"1":stag?"2":"";let cx=cxOf(slot++);if(!x.nf)cx=inLim(cx,coreW(x,H),pEx(x.pet,H));centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,coreW(x,H),"p"+(x.tok.dataset.p||"")]);
+  if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=(fo+li).toFixed(1)+"px";t.style.zIndex=zi;continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
   x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
   x.im.style.setProperty("margin-left",(-w*kCL(x.b)).toFixed(1)+"px","important");x.im.style.setProperty("margin-right",(-w*(1-kCR(x.b))).toFixed(1)+"px","important");
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
-  t.style.left=(cx-cw/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}
+  t.style.left=(cx-cw/2).toFixed(1)+"px";t.style.bottom=(fo+li).toFixed(1)+"px";t.style.zIndex="";x.im.style.zIndex=zi;if(x.tag){x.tag.style.translate="";if(li)x.tag.style.setProperty("margin-top",(3+li)+"px","important");else x.tag.style.removeProperty("margin-top");x.tag.style.zIndex=stag?"6":""}}
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
  j59petPut(st,usedPets,H,fo,pVH);
  j59chips(st,R,pages>1?{pg,pages,before,after,fo,CW:G.CW,x0L:G.xl,x0R:G.x0R}:null);

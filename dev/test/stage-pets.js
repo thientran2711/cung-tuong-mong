@@ -19,7 +19,7 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
  await sleep(1500);
  await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.buoi=0;deal();render();
   const kl=document.getElementById('kload');if(kl)kl.remove();document.querySelectorAll('.krbox,#kroul').forEach(e=>e.remove())});
- await p.evaluate(v=>{if(v)KIT_STAGE3.v=v},process.env.STAGE3||null);
+ 
  await sleep(1500);
  await p.addStyleTag({content:'img.figimg,#mefig,#tokens .tok,.kspet{animation:none!important}#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn{display:none!important}'});
  const OUTR={vp:VP,cases:{}};if(process.env.J59DBG){await p.evaluate(()=>{window.__j59dbg=1});p.on('console',m=>{if(/J59TRY/.test(m.text()))console.log(m.text())})}
@@ -42,8 +42,8 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
    const pets=[...st.querySelectorAll('.kspet')].filter(vis);
    for(const f of figs){const q=f.el.getBoundingClientRect(),b=kitFigBody(f.el.getAttribute('src'))||{l:0,r:1,t:0,b:1,ht:0,cl:.3,cr:.7};f.q=q;f.b=b;f.vis={l:q.left-R.left+q.width*b.l,r:q.left-R.left+q.width*b.r,t:q.top-R.top+q.height*b.t,b:q.top-R.top+q.height*b.b};f.core={l:q.left-R.left+q.width*b.cl,r:q.left-R.left+q.width*b.cr};f.ht=q.top-R.top+q.height*(b.ht>b.t?b.ht:b.t)}
    figs.sort((a,b)=>a.vis.l-b.vis.l);const kn=document.getElementById('kshR');const col=kn&&!kn.hidden&&kn.offsetHeight?kn.getBoundingClientRect().left-R.left:null;
-   const res={dbg:st.dataset.j59dbg,pages:st.dataset.j59pg||'1',stage:{w:R.width,h:R.height},col,n:figs.length,pets:pets.length,people:[]};
-   for(const f of figs){const fi=await ld(f.el.getAttribute('src'));const A=fi?cv(fi,f.q):null;const rec={who:f.who,vis:f.vis,body:+(f.vis.b-f.ht).toFixed(0)};
+   const res={cap:st.dataset.j59cap,stag:st.dataset.j59stag,dbg:st.dataset.j59dbg,pages:st.dataset.j59pg||'1',stage:{w:R.width,h:R.height},col,n:figs.length,pets:pets.length,people:[]};
+   for(const f of figs){const fi=await ld(f.el.getAttribute('src'));const A=fi?cv(fi,f.q):null;const rec={who:f.who,vis:f.vis,body:+(f.vis.b-f.ht).toFixed(0),bodyPct:+(100*(f.vis.b-f.ht)/R.height).toFixed(1),z:+(getComputedStyle(f.el).zIndex)||0};f.A=A;f.rec=rec;
     const best=pets.find(e=>e.dataset.pk===f.who);
     if(best&&A){const pim=await ld(best.getAttribute('src'));const q=best.getBoundingClientRect();const P=pim?cv(pim,q):null;
      if(P){let both=0,tot=0,face=0,faceTot=0,tor=0,torTot=0;const bodyH=f.vis.b-f.ht;
@@ -54,15 +54,23 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
       rec.pet={k:best.dataset.pet,cls:best.dataset.cls,ph:!!best.dataset.ph,vl:+(q.left-R.left+q.width*pb.l).toFixed(1),vr:+(q.left-R.left+q.width*pb.r).toFixed(1),vt:+(q.top-R.top+q.height*pb.t).toFixed(1),vb:+(q.top-R.top+q.height*pb.b).toFixed(1),
        h:+((q.height*(pb.b-pb.t))/bodyH).toFixed(3),cover:+(100*both/Math.max(1,tot)).toFixed(2),coverFace:+(100*face/Math.max(1,faceTot)).toFixed(2),coverTorso:+(100*tor/Math.max(1,torTot)).toFixed(2)}}}
     res.people.push(rec)}
+   for(const f of figs){const A=f.A;if(!A)continue;let face=0,ft=0;const bodyH=f.vis.b-f.ht;const front=figs.filter(g=>g!==f&&g.A&&(g.rec.z>f.rec.z||(g.rec.z===f.rec.z&&g.rec.z>0&&false)));
+    for(let y=0;y<A.h;y++){const gy=A.y+y;if(!(gy>=f.ht&&gy<f.ht+bodyH*.22))continue;for(let x=0;x<A.w;x++){const gx=A.x+x;if(A.d[(y*A.w+x)*4+3]<=40)continue;ft++;
+     for(const g of front){const px=Math.round(gx-g.A.x),py=Math.round(gy-g.A.y);if(px<0||py<0||px>=g.A.w||py>=g.A.h)continue;if(g.A.d[(py*g.A.w+px)*4+3]>40){face++;break}}}}
+    f.rec.faceCover=+(100*face/Math.max(1,ft)).toFixed(2)}
+   const chips=[...document.querySelectorAll('#tokens .tok .tag,#j59metag .tag')].filter(vis).map(e=>({e,q:e.getBoundingClientRect()}));
+   let ov=0;for(let i=0;i<chips.length;i++)for(let j=i+1;j<chips.length;j++){const a=chips[i].q,b=chips[j].q;if(a.left<b.right-1&&b.left<a.right-1&&a.top<b.bottom-1&&b.top<a.bottom-1)ov++}
+   res.names={rects:chips.map(c=>[c.e.textContent.slice(0,14),Math.round(c.q.left-R.left),Math.round(c.q.right-R.left),Math.round(c.q.top-R.top),Math.round(c.q.bottom-R.top)]),n:chips.length,overlap:ov,cut:chips.filter(c=>c.q.left<R.left-1||c.q.right>R.right+1||c.q.bottom>R.bottom+1||c.e.scrollWidth>c.e.clientWidth+1).length};
    return res});
   if(process.env.DBG)console.error(JSON.stringify(await p.evaluate(()=>({img:Object.keys(KIT_PET.img).length,ppl:curPeople().map(x=>x.kind+':'+(x.id||x.name)),vk:S.visit&&S.visit.k,L:liveRivals(true).slice(0,3).map(v=>v.id+'@'+S.where[v.id]),pet:(()=>{try{const P=kitPetOf(S);return P&&P.t}catch(e){return 'ERR '+e.message}})(),kids:[...document.getElementById('stage').children].map(e=>e.id||e.className).slice(0,12),pg:document.getElementById('stage').dataset.j59n,dbg:document.getElementById('stage').dataset.j59dbg,free:document.getElementById('stage').dataset.j59free,errs:window.__e}))));
   if(process.env.DUMPCOL)console.log('COL',await p.evaluate(()=>{const k=document.getElementById('kshR');return JSON.stringify(window.KIT_STAGE3)+document.getElementById('stage').className+' kgrw='+document.getElementById('stage').style.getPropertyValue('--kgrw')+' n='+curPeople().length+' '+(k?k.getBoundingClientRect().width+'x'+k.getBoundingClientRect().height+' '+k.innerHTML.slice(0,0):'none')}));
   const ck=[];if(base){OUTR.cases[name]={res:r,ck};console.log(name,'N/H/sw/maxW:',r.dbg);continue}const pk=r.people.filter(x=>x.pet);if(pk.length!==r.pets)ck.push(`pets drawn ${r.pets} vs people-with-pet ${pk.length}`);
   r.people.forEach((x,i)=>{if(!x.pet){ck.push(`${x.who} has no pet`);return}
    if(x.pet.coverFace>0.5)ck.push(`${x.who} pet covers FACE band ${x.pet.coverFace}%`);if(x.pet.coverTorso>8)ck.push(`${x.who} pet covers TORSO ${x.pet.coverTorso}%`);
-   if(Math.abs(x.pet.vb-x.vis.b)>3)ck.push(`${x.who} pet feet ${x.pet.vb} vs person feet ${x.vis.b.toFixed(1)}`);
-   const nx=r.people[i+1];if(nx&&x.pet.vr>nx.vis.l+0.5)ck.push(`${x.who} pet right ${x.pet.vr} reaches neighbour ${nx.vis.l.toFixed(1)}`);
+   
+   
    if(x.pet.vr>r.stage.w+0.5)ck.push(`${x.who} pet outside stage`);if(r.col!=null&&x.pet.vr>r.col+0.5)ck.push(`${x.who} pet under side column ${r.col}`)});
+  r.people.forEach(x=>{if(x.faceCover>0.5)ck.push(`${x.who} FACE covered by a person ${x.faceCover}%`);if(x.body<Math.min(.79*r.stage.h,542)*.985)ck.push(`${x.who} body ${x.body}px shrunk (kit ${Math.round(Math.min(.79*r.stage.h,542))})`)});if(r.names.cut||r.names.overlap)ck.push(`names cut ${r.names.cut} overlap ${r.names.overlap}`);
   OUTR.cases[name]={res:r,ck};
   if(process.env.SHOTS!=='0'){await p.evaluate(async()=>{const i=document.getElementById('scimg');if(!i)return;const m=/url\(["']?([^"')]+)["']?\)/.exec(i.style.backgroundImage||getComputedStyle(i).backgroundImage||'');if(m)await new Promise(r=>{const im=new Image();im.onload=im.onerror=r;im.src=m[1];if(im.complete)r()});for(let k=0;k<60&&!(window.PX&&PX.bg)&&getComputedStyle(i).opacity==='0';k++)await new Promise(r=>setTimeout(r,500))}).catch(()=>lg('scimg not loaded'));await sleep(800)}
   if(process.env.SHOTS!=='0')await p.screenshot({path:`${OUT}/${TAG||'sp'}-${W}x${H}-${name}.jpg`,type:'jpeg',quality:70,timeout:240000})}
