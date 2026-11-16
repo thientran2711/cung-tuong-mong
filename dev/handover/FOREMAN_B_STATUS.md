@@ -13,11 +13,11 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn-r1 | sonnet | PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
 | C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
-| C32 page-curl2 | review/page-curl2 | sonnet | QUEUED (C33 done; next free slot; D37 drag-curl is the coordinator's — coordinate) |
+| C32 page-curl2 | review/page-curl2 | sonnet | RUNNING |
 | C33 weekbook-entries | review/weekbook-entries @1ddfdda7 | sonnet | REVIEWING (review/weekbook-entries-r1, sonnet) |
 | C34 contest-ui | review/contest-ui @290129bd | sonnet | REVIEWING (review/contest-ui-r1, sonnet); new podium backdrop on CDN |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
-| C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
+| C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | RUNNING |
 | D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
@@ -41,6 +41,7 @@ PASS review/room-btn-r1 c80e5df978eaffb29ce218b4431e17b415232750 (C28; KIT §72 
 PASS review/rel-picker-r1 ce7c076a38d55c95901d19002832983f91560052 (C29; compact Giao tình pickers, kitNameRank face labels, pager arrows only on overflow game-wide; KIT §49.2c + sample)
 PASS review/pcard-fill-r1 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (C35; person card right side filled from kit parts, KIT §73; includes review/actcard-small-r1)
 PASS review/appearance-port-r1 86234a24c53da664bd75f34b34444751cd7c0e9f (D39; illness/poison/slap/penalty/rash overlays + veil, weekly healing verified e2e; ancestry vs main 2afdafc3 re-checked by Foreman B)
+PASS review/panel-size-r1 a523531da8bbf3944c8f0afd2c122176405d4e88 (C37; one kpanel frame size per viewport, KIT §8.1 needs kit keeper; when review/stage-fig-size-r1 lands keep both its kitDpFit cap/crop and this dw=d.clientWidth line)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -54,7 +55,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - stat-fx-r1: KIT §57.1 kitStatFx/kitStatGlow
 - rel-picker-r1: KIT §49.2c compact picker + kitStripFit (pager arrows only on overflow, game-wide)
 - tab-underline-r1: KIT §46 no-scrollbar + edge fade (kitTabFade), sliding line only on bottom nav
-- panel-size (reviewing): KIT §8.1 one-size kpanel frame tokens
+- panel-size-r1 (PASS): KIT §8.1 one-size kpanel frame tokens --kpw/--kph + fixed flex-column frame (j79), §8 frame rule changed, per-kind sizes removed (kesdlg, kdper/kdnarrow, kslot, kmc-modal 780), week panel .dawn .dbox.kpanel follows. Short one-line notices sit top-left in a big blank frame — keeper may centre them / bigger font
 - palace-map-port (reviewing): kitPalaceMap (worker labelled it §71 — clashes; needs a number)
 - appearance-port-r1 (PASS): KIT 28.8b kitFaceFx/KIT_FACEFX registry + kitFxLayers as the single face-layer hook; 28.8b text stale (still lists expr z5 + .kfxf transform copy — expressions removed 22:50Z); shared overlays rash-1..3.png, fx-slap.png (on CDN) for the keeper's art list
 - contest-ui (reviewing): kitGameFrame({pic}) picture-left/info-right (.kgbody/.kgpic/.kginfo, CSS in jcui.js #kcu-css), kg82Open/kg82Pic, #kg82.kg-idle, .kgrv self-scrolling list, podium equal figure heights + kpodPrize chips, KIT_BD.podium → new shared art img/kit/podium-bg2(-p).webp. KIT REQUEST: pet-care game box (jpetcare) needs a board painting (e.g. mg-chamthu-bg) + pic in petcGameBox.
