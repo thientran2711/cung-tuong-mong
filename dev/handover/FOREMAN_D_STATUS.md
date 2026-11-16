@@ -8,8 +8,8 @@ main at start = eba64ead4.
 | Item | Branch | Model | State |
 |---|---|---|---|
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r2 @70119a805 → review/newgame-ui-r3 | sonnet | RUNNING (reviewer) |
-| D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → separate reviewer session RUNNING |
-| C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session RUNNING |
+| D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV RUNNING |
+| C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWo9bFK5NRcy5Hrr3UX RUNNING |
 | C44 cloud-save (Sổ mây) | review/cloud-save | opus | RUNNING (client + Worker code + local tests; DEPLOY → Foreman C) |
 | D50 consort placeholder frame in dialog person column | review/dlg-fig-ph | sonnet | RUNNING |
 | balance-after-truth re-run | review/balance-after-truth | opus | RUNNING |
