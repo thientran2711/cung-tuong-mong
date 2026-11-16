@@ -26,3 +26,19 @@ MEASURED (pixel landmarks read on 3x zoom grids; crown = top of natural hair, he
 IDs (gpt-2-6): NC chosen = s78ybjAl8e (4 tries: s78ybjAl8e, 79aixUuJAL, aFAbXhefSh, 9ZFGS43NYZ; earlier too-stout set huZHDbPvqL/IfiuTFGtvE/aFAbekQfSh/WDld6ohcXe); BD Quý phi A KLDgaJFkqp, B 3z5WwD0REY (from p8Om8o4ehw).
 Credits v10: 12 x 40 = 480 (total v8-v10 = 160+240+480 = 880).
 STATUS: WAIT for the owner's verdict. STEP 2 not started.
+
+## v11 SAMPLE READY (owner 20:22Z: from Quý phi up = court consort robe, not home costume). v10 sheet deleted.
+File: `foreign-princess-art/sample-v11.jpg` (BD row + NC row; one baseline + one chin line per row).
+My error: v7-v10 drew Quý phi in the HOME costume. Fixed: Quý phi A/B (both countries) = palace court consort robe in the in-game Quý phi language (refs fig-consort-c05-t6 + c03-t6: crossed-collar gown, wide sleeves, long pearl-trimmed draped robe, gold embroidery, large gold crown with hanging strands), her OWN design (BD: deep crimson/gold falcon + cloud + peony; NC: peacock-teal/indigo gold phoenix + peony), her own face, body aligned to her lower ranks (chin>sole equal, uniform scale x1.00-1.04).
+Line check (OD):
+- L1207: Đáp ứng/Tần/Phi = home costume with colour+richness steps (BD terracotta/cream->rust; NC blue); Quý phi = court consort robe; faces stay own.
+- L1212(a): Quý phi robe is HER OWN unique set (not a copy of c05/c03; different colour, motifs). L1212(b) maid: not in this sample (step 2).
+- L1209: sample per origin: lowest/middle/just-below-Quý-phi in home costume + Quý phi in court robe (maid pair already approved v5).
+- L1238: right hand holds a prop, varied poses (kept from v4 lineups); proportions measured (head, chin>sole) vs approved BD Tần.
+- L1239: figures follow existing consort art (Quý phi refs = in-game t6 figures).
+- L1256: (1) each rank own hair; (3) faces differ BD/NC; (4) no fur; (5) Quý phi dress = current game Quý phi language (t6 refs). Colours: home ranks per country hue; Quý phi deep saturated like t6.
+- Owner 16/11 19:20Z+: Đáp ứng BD opt 1 + Tần BD kept; Phi BD = option-2 hair; Phi/Quý phi not heavy (opaque, no pile of layers).
+- Phi in home costume = Tần cut richer (v9 request): kept from v9.
+Credits v11: 4 x 40 = 160 (+2 ref uploads 0). Total v8-v11 = 1,040. Ids (gpt-2-6): BD Quý phi A LwoO1OfswO, B 9ZFGOzzNYZ (base p8Om8o4ehw); NC Quý phi A UPhNsZPwny, B xSX7K4MjfW (base s78ybjAl8e); refs vQ2q8dZa47 (c05-t6), JNf3gloOq4 (c03-t6).
+Caveat: BD Đáp ứng (approved opt 1) not on this sheet (approved earlier, v7 sheet crop); BD Phi/NC home figures unchanged from v10.
+STATUS: WAIT for the owner's verdict. STEP 2 not started.
