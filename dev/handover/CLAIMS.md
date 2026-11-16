@@ -316,3 +316,4 @@
 | map-labels-2 (sonnet; owner bug A ca sở placement + every Dư đồ label on its building; history check) | review/map-labels-2 | main s21 | session_01UV1Szi9inSFXF1GWG2dSP8 | RUNNING | 16/11 18:24Z |
 | kit-fit (opus kit keeper; owner bugs: figure top gap = bottom gap in every frame; option card → square picture when text short, no empty space) | review/kit-fit | main s21 | session_01UV1SzmGsieSbMBkycipcQk | RUNNING | 16/11 18:24Z |
 | chonso-tabs review r1 (sonnet, SMALL) of 5099b51cf | review/chonso-tabs-r1 | main s21 | session_01UV1SzgxM8tPohv4gezbNgu | RUNNING | 16/11 18:26Z |
+| night-steal reviewer (BIG: odds/rules + co-op) | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled, 7 runs; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:40Z |
