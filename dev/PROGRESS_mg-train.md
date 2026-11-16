@@ -26,8 +26,14 @@ Base: origin/main ee5d33de (11/16/2026). One branch so the main coordinator can 
   j5 DOI, YQ, MG.thi, MG.y, quiz(); j82 KG82_HUONG, KG82_BEP, kg82Bank, kg82Quiz, KG82_ENG.quiz (kind keys tho/doi/banh/huong kept as one-line
   placeholders so the kind order stays); j91 K91_LB, k91Verse, k91Pair, verse/pair registration + kinds. Kind list + order identical before/after.
 
-## Tests (final build)
-See dev/handover/reports/mg-train.md (docs branch) for the numbers.
+- Page error found by the bots: jnwp calli read F.S[ns] when a stroke ended in the 250 ms after the last one → same guard as mg-balance's j91 trace fix.
+
+## Tests (final build) — full numbers in dev/handover/reports/mg-train.md (docs branch)
+- mg-balance-vp.js: 30/30 kinds open + finish, old save loads, 0 page errors, 0 overflow at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390@2, 390x844@2.
+- slap-mg.js all sizes pass (844x390 demoShown = timing: tát paintings not on CDN, preload waits ≤2.5 s); promo-exam 23/24 (known pre-existing FAIL); coop-e2e 59/59 ×2.
+- Exam path: intro "Độ khó: Khó · … khảo hạch", nwqTier = exam tier.
+- mg-bots n=30 Vừa: slap tat 33 % ≥9 (target 20–30); nw-* engines 67–100 % ≥9 (FAR above target) → open item for Foreman B (engine scoring has no time component).
+- KIT REQUEST (pre-existing): j82 frame at 844x390 — board bottom under the screen / under Gợi ý for every engine; jlant has a private scroll fix.
 
 ## Open (not this branch)
 - review/mg-balance-2 (other B worker) tunes banh/co/td_hanh/mua + td_ngon on top.
