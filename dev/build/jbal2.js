@@ -216,7 +216,7 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
    aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
    lev[kind][name] = [at ease 0, at ease 5] board levers read by mgLev (mg-balance-2: Nấu ăn fire lag s / gusts heat-per-s / gust gap s; Cờ time ms / full-speed ms / extra stones;
    wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds, cong = [Công level that adds +1 tier, highest tier that lift can reach (2 Tinh xảo: Tuyệt phẩm needs the score)] (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
-Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
+Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:0,theu:0,co:-1,banh:-.1,dauho:1.2,td_hanh:-1.4,td_dung:-1.2,td_ngon:-.9},
  lev:{banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[1800,7000],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
   td_hanh:{lim:[8000,20000],short:[2,0]},dauho:{aid:[.14,.6],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
@@ -310,3 +310,17 @@ BAL.slap={nm:["","nhẹ","vừa","nặng"],def:1,sac:[0,2,3,5],wk:[0,2,4,7],wkX:
  npc:[[0,60,32,8],[0,45,38,17],[0,30,42,28]]};
 /* slap occasions in the ONE tier table (jmgt mgTier): tat = her slap, stakes by HER rank; ne = dodging, rank = the attacker's rank */
 Object.assign(BAL.mgTier.occ,{tat:[.5,.5],ne:[.5,.5]});
+/* reviewer entry-exam-r1 (OD 07:25Z "mức vừa"): mgTier occ tuyen 1.5 → 1, so a new girl (art level 0) reads "Vừa", not "Khó", at her
+   entry exam (ease 1.2 between the measured 0.8 / 1.6 boards; skilled marks 9.0–10 at both, so the rank table is unchanged). Applied to the mg-balance-2 block above on merge (review/origin-intros-r1). */
+/* ENTRY SELECTION EXAM (review/entry-exam, owner OD:L1244 / L1250 / 07:20Z no word games / 07:25Z medium; read by jentry entScore, jkc2):
+   ONE score rule for every entry road (dir = "Vào cung ngay", dan = cung nữ home road, nc = hòa thân home road):
+   score = Σ w[stat]·stat + w.raw·(mini-game 0..10) + w.art·(her level in that art) + road extras + base + noise (−noise..+noise, even).
+   cut = [one step under the ceiling, the ceiling]: below cut[0] = two steps under (never below Đáp ứng; cung nữ: Tân Giả khố first).
+   fx[tier] = what the result itself gives or takes on top of the rank (gain and loss on every path, also when the ceiling is Đáp ứng);
+   stepSung = Sủng lost per step under the ceiling. word = mini-game kinds that are word games (never offered; drop a key when its
+   non-word replacement lands, review/nw-*). The tier of the board is mgTier occ "tuyen" (BAL.mgTier). Measured: dev/measure/entry-bots.js. */
+Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
+ w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
+  dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
+  nc:{sac:.15,tai:.15,duc:.1,raw:3,art:2,th:1/5,le:2.5,kgt:1/6,sx:3,base:0}},
+ fx:[{danh:-3,sung:-2},{},{danh:3,sung:4}]}});

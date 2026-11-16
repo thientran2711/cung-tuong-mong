@@ -97,7 +97,7 @@ function npcSocial(v){const T=others(v);if(!T.length)return"";const t=pick(T);co
 /* the weekly news feed: deeds that show character; seen deeds may reveal a trait */
 function newsAdd(v,k,txt,toMe){S.news=S.news||[];const seen=toMe||roll(25+(S.mat||0)*8)||(S.staff||[]).some(s=>s.tr==="chuyen"&&roll(30));if(!seen)return;S.news.unshift({w:wk(),id:v.id,k,t:txt});if(S.news.length>40)S.news.length=40;
  S.trK=S.trK||{};const T=traitsOf(v);const which=T.find(t=>PERS[t]&&PERS[t].w&&PERS[t].w[k]>1.5);if(which){const K=S.trK[v.id]=S.trK[v.id]||[];if(!K.includes(which)&&roll(35)){K.push(which);noteAdd(v.id,`Qua việc ${txt.replace(v.name+" ","")}: lộ nết ${which}`)}}}
-function trKnown(v){S.trK=S.trK||{};return S.trK[v.id]||[]}
+function trKnown(v){S.trK=S.trK||{};if(typeof k61Kin==="function"&&k61Kin(v))return[v.tr,v.tr2].filter(Boolean).map(s=>s[0].toUpperCase()+s.slice(1));/* home family: she knows their nature */return S.trK[v.id]||[]}
 function learnTrait(v,why){const T=traitsOf(v).filter(t=>!trKnown(v).includes(t));if(!T.length)return"";const t=T[0];(S.trK[v.id]=S.trK[v.id]||[]).push(t);noteAdd(v.id,`${why}: biết nàng ${t}`);return t}
 (function(){const r0=rivalsTurn;rivalsTurn=function(){let ev=r0.apply(this,arguments);try{if(S.dead)return ev;for(const v of liveRivals(true)){if(v.confined)continue;if(roll(60)){const t=npcSocial(v);if(t)ev+=t}}}catch(e){}return ev}})();
 /* talking to someone, her servants' reports and watching them reveal traits */
