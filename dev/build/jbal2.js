@@ -114,3 +114,12 @@ Object.assign(BAL,{itd:{allow:false}});
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* BAL.psk = PROMO-SKIP (jexam promoReward, owner 16/11 06:20Z/06:45Z/07:15Z): long-road rewards = direct rank; every reward has a gain AND a loss.
+   son1 (first prince): Hoàng hậu oán +hhOan, every other mother of a prince oán +momOan.
+   emp (Hoàng thượng side wins): Thái hậu quý −th; every consort of a losing side oán +oan.
+   th (Thái hậu side): Sủng −sung; errN Thái hậu errands (any j72 Thái hậu template that can be built then), the first after errAt tuần, then every errGap tuần.
+   quyen (quyền thần side): Danh −danh; after `after` months, each month p % (once): the grown Emperor strikes back Sủng −hitSung, Danh −hitDanh.
+   wait («Ân chỉ chờ phong», full seat): the next rank's stipend gap every month, first claim on the seat (no exam); consorts of her rank oán +oan;
+   if the seat comes after ≥ bonusAt months: Danh +bonusDanh, Bạc +bonusBac. */
+Object.assign(BAL,{psk:{son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
+ quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},wait:{oan:8,bonusAt:12,bonusDanh:5,bonusBac:60}}});

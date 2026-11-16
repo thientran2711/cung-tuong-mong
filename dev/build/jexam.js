@@ -133,18 +133,56 @@ function exDirectUp(p,why,o){o=o||{};const me=p===S;if(!p||rkOf(p)>=6||p.out)ret
  if(me){exDrop();if(o.fx){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}}
  return me?`<b class="g">Thánh chỉ: ${why}, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (${why}). `}
 function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
-/* ONE hook for every long-road promotion reward (owner 16/11 06:45Z). PROMO_SRC = the switch per source: "direct" rank, "grace" = an exam at
-   once with the conditions waived, "none" = no rank. son1 = her FIRST prince; later sons and every princess = grace. Faction sides th / quyen
-   are "none" until the owner rules (one switch here). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat goes to
-   promoFullSeat (the owner is choosing the equivalent reward; placeholder, no payload invented). */
-const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"none",quyen:"none"};
-const PROMO_WHY={son1:"mừng hoàng tử",emp:"Bệ hạ nhớ công phò tá",th:"Thái hậu nhớ công",quyen:"nhà Tể tướng tiến cử"};
+/* ONE hook for every long-road promotion reward (owner 16/11 06:45Z + 07:15Z). PROMO_SRC = the switch per source: "direct" rank, "grace" =
+   an exam at once with the conditions waived, "none" = no rank. son1 = that mother's FIRST prince; later sons and every princess = grace.
+   Faction road: every winning side = direct (07:15Z). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat becomes
+   «Ân chỉ chờ phong» (promoFullSeat). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
+const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct"};
+const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử"};
 function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
  if(m==="grace")return typeof exGrace==="function"?exGrace(p,src==="dau"?"f":"m"):"";
- const nx=rkOf(p)+1;if(typeof seatFree==="function"&&!seatFree(nx))return promoFullSeat(p,src,o);
- return exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o)}
-/* placeholder (owner deciding the form of the equivalent reward): records the case only, gives nothing yet */
-function promoFullSeat(p,src,o){try{p.promoFull=(p.promoFull||[]).concat([{src,to:rkOf(p)+1,t:S.turn}]).slice(-8)}catch(e){}return""}
+ const nx=rkOf(p)+1;const r=(typeof seatFree==="function"&&!seatFree(nx))?promoFullSeat(p,src,o):exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o);
+ return r?r+promoCost(p,src):""}
+/* the loss that comes with each reward (owner 07:15Z); same rule for an NPC (her rivals feel it the same way) */
+function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
+ if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
+  let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
+  if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
+  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (oán ngươi +${B.son1.hhOan}${n?`, +${B.son1.momOan}`:""}). `}
+ else if(src==="emp"){if(me)apply({th:-B.emp.th});let n=0;
+  for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
+  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (oán +${B.emp.oan}). `}
+ else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
+  t=`Bệ hạ coi ngươi là người của Thái hậu (Sủng −${B.th.sung}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
+ else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
+  t=`Thiên hạ chê ngươi dựa thế nhà quyền thần (Danh −${B.quyen.danh}); bệ hạ lớn lên rồi, e có ngày tính sổ. `}}
+ }catch(e){console.error("promoCost",e)}return t}
+/* «Ân chỉ chờ phong» (owner 07:15Z): the seat is full → the next rank's stipend now, first claim on the next free seat with no exam, a bonus if
+   the wait lasts BAL.psk.wait.bonusAt months; loss: the consorts waiting for that seat resent her. */
+function promoFullSeat(p,src,o){const B=BAL.psk.wait,me=p===S,to=rkOf(p)+1;if(p.anChi&&p.anChi.to===to)return"";
+ p.anChi={to,t:S.turn,src};let n=0;for(const v of consorts())if(v!==p&&!v.out&&rkOf(v)===rkOf(p)){oanAdd(v,p,B.oan);n++}
+ const rk=RANKS[to].n;if(!me){try{newsAdd(p,"promo",`${p.name} được ân chỉ chờ phong ${rk}.`,true)}catch(e){}return `${p.name} được ân chỉ chờ phong ${rk}. `}
+ try{feedback("promote",{t:"Ân chỉ"})}catch(e){}
+ return `<b class="g">Ân chỉ chờ phong ${rk}</b>: ghế ${rk} đã đủ người. Từ nay ngươi hưởng bổng lộc bậc ${rk}; ghế ${rk} trống ra trước tiên thuộc về ngươi, không qua khảo hạch${B.bonusAt?`; chờ quá ${B.bonusAt} tháng thì được ban thêm`:""}. ${n?`${n} vị cùng bậc đang chờ ghế ấy oán ngươi (oán +${B.oan}). `:""}`}
+/* monthly: the ân chỉ (stipend gap, the seat when it frees) and the quyền thần strike-back; runs before the seat fill of the month */
+function promoClaim(pay){let ev="";const B=BAL.psk;for(const p of [S].concat(liveRivals(true))){const a=p&&p.anChi;if(!a)continue;
+  if(p.out||rkOf(p)!==a.to-1){p.anChi=null;continue}
+  if(typeof seatFree==="function"&&seatFree(a.to)){const late=S.turn-a.t>=B.wait.bonusAt;p.anChi=null;let x=exDirectUp(p,"ân chỉ chờ phong đã đến ngày",{fx:1});
+   if(late){ap(p,{danh:B.wait.bonusDanh,bac:B.wait.bonusBac});if(p===S)x+=`Chờ lâu không oán, bệ hạ ban thêm: Danh +${B.wait.bonusDanh}, Bạc +${B.wait.bonusBac}. `}
+   if(p===S)log(x);else{try{newsAdd(p,"promo",x,true)}catch(e){}ev+=x}continue}
+  if(pay){const d=(BAL.pay[Math.min(7,a.to)]||0)-(BAL.pay[Math.min(7,a.to-1)]||0);if(d>0)p.bonusPay=(p.bonusPay||0)+d}}return ev}
+function promoMonth(){let ev="";try{const B=BAL.psk;ev+=promoClaim(true);
+ const E=S.psErr;if(E&&!S.dead&&!S.out&&!S.thDead&&wk()>=E.at&&typeof q72CanOffer==="function"&&q72CanOffer()&&!(typeof evBusy==="function"&&evBusy())){
+  /* a Thái hậu errand (j72 việc nhờ, requester Thái hậu): the first template of hers that can be built now */
+  const A=typeof q72A==="function"?q72A("th"):null;const L=(typeof T72!=="undefined"?T72:[]).filter(T=>T.r==="th"&&!T.fu);let x=null;
+  for(const T of L.sort(()=>Math.random()-.5)){try{x=A&&q72Make(T,A)}catch(e){x=null}if(x)break}
+  if(x){q72Offer(x,"");E.n--;E.at=wk()+B.th.errGap;if(E.n<=0)S.psErr=null}}
+ const k=S.psStrike;if(k&&!S.dead&&S.turn>=k.at&&!S.empDead){if(k.n>=B.quyen.max){S.psStrike=null}else if(roll(k.p)){k.n++;S.psStrike=null;
+  apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: Sủng −${B.quyen.hitSung}, Danh −${B.quyen.hitDanh}.`)}}
+ }catch(e){console.error("promoMonth",e)}return ev}
+(function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
+/* the ân chỉ holder claims a freed seat before the seat fill picks anyone (j30 fillSeats after endTurn) */
+(function(){if(typeof fillSeats!=="function")return;const f0=fillSeats;fillSeats=function(){let a="";try{a=promoClaim(false)}catch(e){console.error(e)}return a+(f0.apply(this,arguments)||"")}})();
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
 function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}

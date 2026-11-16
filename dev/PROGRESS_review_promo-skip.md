@@ -3,7 +3,8 @@ Owner rule 16/11 06:20Z (OD last line): promotion rewards that END A LONG ROAD (
 DIRECTLY, no exam. Ordinary promotion by meeting conditions keeps the exam. A princess's birth = exam with the conditions waived.
 Update 16/11 06:45Z (OD, relayed by main s10): only the FIRST prince = direct rank; later sons and every princess = exam at once
 (conditions waived); seats (j30 SEATCAP) still apply — a direct reward meeting a full seat goes to ONE placeholder (owner choosing the
-equivalent reward); the faction sides Thái hậu / quyền thần go through the same hook (owner deciding). Supersedes OD:L525 for sons, the 15/11 17:20Z "reward = exam" note for quest rewards, and the 16/11 06:10Z coordinator line (faction win = exam).
+equivalent reward); the faction sides Thái hậu / quyền thần go through the same hook. Update 16/11 07:15Z (OD): EVERY reward has a gain AND a loss;
+every winning faction side = direct rank with its own cost; full seat = «Ân chỉ chờ phong» (below). Supersedes OD:L525 for sons, the 15/11 17:20Z "reward = exam" note for quest rewards, and the 16/11 06:10Z coordinator line (faction win = exam).
 
 ## Audit — every place that raises a rank or grants a promotion exam (dev/build/*.js on origin/main 0a311183)
 Scan: `git grep` for exGrace, exSonUp, promoteP(, promote(), `.rank++`, `.rank=`, `rank+1`, r97rise, r97srvRk, srvRise, exSrv*, srvMerit,
@@ -17,11 +18,11 @@ promotion (quests, origins, story-rare, story-love, reign-road-r1b) add no new r
 | 3 | j30.js:12 fillSeats `promoteP(w)` | a vacant seat filled from the eligible | EXAM (must have passed) | condition gate → EXAM | none |
 | 4 | j34.js:8/45 contestOpen / Tranh ghế, jbal.js:43 Hoàng hậu contest | seat contest among eligible consorts | EXAM + contest; Hoàng hậu seat its own conditions (hhNeed) | condition gate / Hoàng hậu rules | none (Hoàng hậu seat untouched) |
 | 5 | j8.js:409–410 Hoàng hậu pick on a vacancy | Hoàng thượng chooses | Hoàng hậu rules | Hoàng hậu rules | none |
-| 6 | j8.js:321 birthP son → jexam exSonUp | her / an NPC bears a PRINCE | DIRECT (owner 15/11 20:05Z) | FIRST prince → DIRECT; later prince → WAIVED EXAM (06:45Z) | `promoReward(p, first?"son1":"son")`: first son of that mother = direct (seat checked), later sons = exGrace(p,"m"); drops a stale exam card |
+| 6 | j8.js:321 birthP son → jexam exSonUp | her / an NPC bears a PRINCE | DIRECT (owner 15/11 20:05Z) | FIRST prince → DIRECT; later prince → WAIVED EXAM (06:45Z) | `promoReward(p, first?"son1":"son")`: first son of that mother = direct (seat checked), later sons = exGrace(p,"m"); drops a stale exam card. LOSS (07:15Z) for the first prince: Hoàng hậu oán +son1.hhOan 15, every other mother of a prince oán +son1.momOan 8 (danger = max(ghen, oán, −thiện cảm)) |
 | 7 | j8.js:322 birthP daughter → exGrace(p,"f") | bears a PRINCESS | WAIVED EXAM | princess → WAIVED EXAM | through `promoReward(p,"dau")` (same behaviour) |
 | 8 | jexam exGraceUp (promoteP wrapper) | passed a grace exam | rank on pass, IGNORED seats | follows #6/#7 | seats apply: a passed grace exam waits for a free seat (retried at every decree), then the decree |
-| 9 | jreign.js:247 rgMine, Hoàng thượng side WINS the reign road (Tân quân lập uy, 6 chapters ≈ 3–4 years) | court outcome "thân chính" and she backed the Emperor | WAIVED EXAM (exGrace, reign-road-r1 reviewer) | long quest → DIRECT | **promoReward(S,"emp",{fx:1})** → exDirectUp: +1 rank at once, edict feedback + jealousy, text «…hạ thánh chỉ tấn phong ngươi làm X, không qua khảo hạch.» Guards KEPT (impossible-jump guards): BAL.rg.rankCap 6 (the road never reaches the Hoàng hậu seat; exDirectUp itself stops at Hoàng quý phi) and the Sủng floor `sungFloor(rank+1)+rankSung` (below it: «ban thưởng hậu hĩnh», as before). Seat full → promoFullSeat placeholder (no rank, case recorded in S.promoFull). |
-| 10 | jreign rgMine, Thái hậu / quyền thần side wins | court outcome | no rank (che chở / Bạc + house) | owner deciding (direct rank per side proposed) | same hook: `promoReward(S,"th"|"quyen")`, PROMO_SRC = "none" today → flip to "direct" = one switch (texts ready, cap rankCap) |
+| 9 | jreign.js:247 rgMine, Hoàng thượng side WINS the reign road (Tân quân lập uy, 6 chapters ≈ 3–4 years) | court outcome "thân chính" and she backed the Emperor | WAIVED EXAM (exGrace, reign-road-r1 reviewer) | long quest → DIRECT | **promoReward(S,"emp",{fx:1})** → exDirectUp: +1 rank at once, edict feedback + jealousy, text «…hạ thánh chỉ tấn phong ngươi làm X, không qua khảo hạch.» Guards KEPT (impossible-jump guards): BAL.rg.rankCap 6 (the road never reaches the Hoàng hậu seat; exDirectUp itself stops at Hoàng quý phi) and the Sủng floor `sungFloor(rank+1)+rankSung` (below it: «ban thưởng hậu hĩnh», as before). Seat full → «Ân chỉ chờ phong». LOSS (07:15Z): Thái hậu quý −BAL.psk.emp.th 8; every consort of a losing side oán +emp.oan 10. |
+| 10 | jreign rgMine, Thái hậu / quyền thần side wins | court outcome | no rank (che chở / Bạc + house) | long quest → DIRECT (07:15Z) | `promoReward(S,"th"|"quyen")` (cap rankCap, seats apply). Thái hậu side: decree «Thái hậu tâu xin» + the old che chở; LOSS Sủng −th.sung 6 + th.errN 2 Thái hậu errands (j72 việc nhờ, first after 3 tuần, then every 6). Quyền thần side: «triều thần dâng sớ tiến cử» + the old Bạc / house power; LOSS Danh −quyen.danh 6 + strike-back armed: after 24 months, 6 % a month (once): Sủng −10, Danh −6 «Bệ hạ đã lớn, nhớ chuyện cũ…» |
 | 11 | j97.js:29–30/177–189 r97rise / r97srvRk (cnv servant story roads) | end of a servant story road | DIRECT decree (incl. «phá lệ» straight to Quý nhân, j97:185) | long quest → DIRECT | none |
 | 12 | j42.js:294 srvRise «Hoàng thượng để mắt» (maid → Đáp ứng) | imperial pick event | DIRECT decree | imperial pick (owner 15/11 20:05Z: decree) | none |
 | 13 | j42.js:196 srvMonth merit → servant rank | Công lao reaches the bar | EXAM (exSrvGate) | condition gate → EXAM | none |
@@ -36,25 +37,39 @@ promotion (quests, origins, story-rare, story-love, reign-road-r1b) add no new r
 Never past the Hoàng hậu rules: exDirectUp returns "" at rank ≥ 6 (Hoàng quý phi) and in lãnh cung; the seat (#4/#5) keeps hhNeed + its contest.
 
 ## The one hook (jexam)
-- `PROMO_SRC` = {son1:direct, son:grace, dau:grace, emp:direct, th:none, quyen:none}; `promoReward(p,src,o)`: none → ""; grace → exGrace;
-  direct → seatFree(next)? exDirectUp : promoFullSeat(p,src,o). `promoFullSeat` = placeholder: records {src,to,t} in p.promoFull, gives
-  NOTHING yet (owner choosing the equivalent reward; do not invent it). Servant ranks (#11, #16) have no seats and stay outside the hook.
+- `PROMO_SRC` = {son1:direct, son:grace, dau:grace, emp:direct, th:direct, quyen:direct}; `promoReward(p,src,o)`: none → ""; grace → exGrace;
+  direct → seatFree(next)? exDirectUp : promoFullSeat; then `promoCost(p,src)` (the loss). Same rule for NPC consorts. Servant ranks
+  (#11, #16) have no seats and stay outside the hook.
+- «Ân chỉ chờ phong» (promoFullSeat, owner 07:15Z): p.anChi={to,t,src}. GAIN: every month the stipend gap BAL.pay[to]−BAL.pay[to−1] (via
+  bonusPay); first claim on the seat when it frees — checked before the month's decrees (rivalsMonth) AND before the seat fill (j30 fillSeats),
+  no exam; if the wait was ≥ wait.bonusAt 12 months: Danh +5, Bạc +60. LOSS: every consort of her rank (those waiting for that seat) oán +wait.oan 8.
+  Lapses if she falls / is demoted / leaves.
+
+## Gain / loss table (BAL.psk, jbal2.js)
+| source | gain | loss |
+|---|---|---|
+| first prince (son1) | +1 rank, no exam | Hoàng hậu oán +15; each other mother of a prince oán +8 |
+| later prince / princess | exam at once, conditions waived | (the exam itself) |
+| Hoàng thượng side wins | +1 rank (Sủng floor + rankCap kept), Sủng +winSung×k, Danh +6 | Thái hậu quý −8; each consort of a losing side oán +10 |
+| Thái hậu side wins | +1 rank, Thái hậu +winTh×k, che chở 6 months | Sủng −6; 2 Thái hậu errands (việc nhờ) |
+| quyền thần side wins | +1 rank, Bạc, Tai mắt +1, house power | Danh −6; strike-back after 24 months, 6 %/month once: Sủng −10, Danh −6 |
+| full seat → Ân chỉ chờ phong | next rank's stipend now, first claim on the seat, no exam; +Danh 5 / Bạc 60 after ≥12 months | consorts of her rank oán +8 |
 
 ## Files
-- jexam.js: `exDirectUp(p,why,o)` (one helper for every long-road decree), exSonUp = exDirectUp(p,"mừng hoàng tử"); header note.
-- jreign.js: Hoàng thượng-side win = exDirectUp; header note. jbal2.js: BAL.rg comment.
+- jexam.js: `exDirectUp`, `promoReward`, `promoCost`, `promoFullSeat`, `promoClaim`, `promoMonth` (rivalsMonth + fillSeats wrappers); a passed grace exam waits for a free seat.
+- jreign.js: all three winning sides through promoReward; header note. jbal2.js: BAL.psk (every gain/loss number) + BAL.rg comment.
 - j67.js: `e67srvUp(n)` for the two servant-arc endings that promise a rank.
 - j8.js birthP: son / daughter through promoReward.
-- dev/test/promo-skip.js (new): first prince direct, later prince grace, princess grace, full seat → placeholder, th/quyen none, grace waits for a seat.
+- dev/test/promo-skip.js (new, 12 checks): first prince direct + mothers' oán; later prince / princess grace; each faction side direct + its loss; full seat → Ân chỉ + peers' oán; stipend gap; freed seat claimed first + long-wait bonus; grace waits for a seat; strike-back.
 - dev/test/reign.js: emp win = rank +1, no grace / window / card, text «không qua khảo hạch» (replaces the old "exam grace" check).
 
 ## Tests
-- dev/test/reign.js 755x1000 ×3 PASS, 1180x820 PASS.
+- dev/test/reign.js 755x1000 PASS, 1180x820 PASS (outcome texts carry the decree + its loss).
 - dev/test/promo-rules.js (755x1000@2, 844x390@3): all PASS (son direct, daughter waived exam, servant exams, chests).
 - dev/test/promo-exam.js 755x1000@2: all PASS except «old save loads: exam state created…» which FAILS identically on the BEFORE build
   (origin/main) — pre-existing, not from this branch (the test expects an old build without jexam as its 2nd arg).
 - dev/test/promo-next-rank.js: every rank ok, errors none.
-- dev/test/promo-skip.js: 7/7 PASS.
+- dev/test/promo-skip.js: 12/12 PASS. Thái hậu errand probe: promoMonth offers a «Việc nhờ» from the Thái hậu; when j72's monthly limit is full it retries.
 - e67srvUp in-page probe: rank 0→1 with mp reset; at the cap → Công lao +6; risen consort → nothing.
 
 ## Balance (see below; filled after the bot runs)
