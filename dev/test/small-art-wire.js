@@ -38,7 +38,7 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
    if(srvRoad)await boot(p,URL,true);else await boot(p,URL);
    await p.evaluate(async srvRoad=>{window.__chk=[];if(srvRoad){S.srv.lau=0;S.prSeen={r:null,s:2};S.srv.rk=3;render()}else{S.rank=Math.min(S.rank,2);S.prSeen={r:2,s:null};S.rank=3;render()}
     await new Promise(r=>setTimeout(r,500))},srvRoad);
-   for(let i=0;i<24&&!(await p.$('.km-reward .kmlist'));i++){await p.evaluate(()=>{const e=document.querySelector('.kmov.km-edict');if(e)e.click();const o=document.querySelector('.kmov.km-reward:not(.km-prev)');if(o)o.click()});await p.waitForTimeout(500)}
+   for(let i=0;i<24&&!(await p.$('.km-reward .kmlist'));i++){await p.evaluate(()=>{const e=document.querySelector('.kmov.km-edict');if(e)e.click();/* merge-train-4: KIT 81 scenes close only by their end button */const eb=document.querySelector('.kmov:not(.km-reward) .kmend');if(eb)eb.click();const o=document.querySelector('.kmov.km-reward:not(.km-prev)');if(o)o.click()});await p.waitForTimeout(500)}
    await p.waitForTimeout(1200);
    const keys=srvRoad?['wd-y-chuongsu']:['ngocboi_r3','vongngoc_r3','tuithom_r3'];const r={rows:[],pics:[]};
    r.t=await p.evaluate(()=>{const L=document.querySelector('.km-reward .kmlist');return L?L.innerText.replace(/\s+/g,' ').slice(0,200):''});
