@@ -1,5 +1,11 @@
 # START_MAIN — verbatim owner rules
 
+## ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context: at session start call get_session (no id) and write `START_CTX=<external_metadata.context_usage.used_tokens>` in your first handover line. On every hourly wake call get_session again; roll over only when used_tokens >= START_CTX × 1.25 (OD:L1217). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers do not roll over: one task, report, archive.
+
+
 Holds: main chat only (what the main chat does itself, how it talks to the owner).
 
 Read in full at start by: MAIN. Reading sets: MAIN = START_CORE + START_FOREMAN + START_MAIN; FOREMAN = START_CORE + START_FOREMAN; WORKER = START_CORE + START_WORKER; REVIEWER = START_CORE + START_WORKER + START_REVIEWER; ART = START_CORE + START_WORKER + START_ART. Then read ONLY the dev/rules/topic/*.md files your task touches (list in dev/PRIORITY_RULES.md).
