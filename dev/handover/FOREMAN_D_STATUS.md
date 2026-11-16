@@ -54,7 +54,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 | MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade @06e4179e | opus | PASS 64b40270 (review/mem-upgrade-r1; reviewer archived) |
 | ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger @fb67d4ad | opus | SẴN SÀNG KIỂM (worker archived) → reviewer item-ledger-r1 session_01DgYSWmMK8v6NhgpHp4fg8k RUNNING 14:22Z |
-| ghenAll ×1.5 (đa tình) shown ≠ applied, ~25 texts (emperor-visit-r1 follow-up; ONE CORE OD:L1267) | review/ghen-shown | opus | worker RUNNING 15:05Z (id in CLAIMS) |
+| ghenAll ×1.5 (đa tình) shown ≠ applied, ~25 texts (emperor-visit-r1 follow-up; ONE CORE OD:L1267) | review/ghen-shown | opus | worker session_01DgYSWoyzKbRUjGm9gW7pNW RUNNING 15:05Z |
 
 ## PASS (for the main coordinator to fast-forward)
 - READY review/emperor-visit-r1 b2e34df7b521f3bc63fc53b72af8c2df91e0ca60 (D8 VISIT half; ancestor main 73c06812; mortality-r1 already on main → ships alone; reviewer: one night-gain source nightGain/BAL.night (shown = applied), second 'Sáng hôm sau' modal removed → result in kitNightEnd, jcycle lock on Thắp đèn hầu rượu fixed; report reports/review-emperor-visit-r1.md). Non-blocking: reduced-motion jne rows need a tap; coop-e2e 'A frozen when B left' flaky on live Worker. ghenAll ×1.5 shown≠applied → worker ghen-shown (below).

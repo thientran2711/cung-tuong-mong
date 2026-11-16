@@ -232,4 +232,4 @@
 | square-icons: round icon buttons (room left column + every round icon button) → square kit button (OD 15:05Z (1)) | review/square-icons | main s18 | session_01UV1SzgoYoth94RALW92Jg4 | RUNNING | 16/11 15:08Z |
 | anim-pace: buổi transition full-screen in landscape, clearer, slower + whole-game animation pace audit + season/festival transition variants sample (OD 15:05Z (5)(6)) | review/anim-pace | main s18 | session_01UV1SzjsxJomT3ov3kXyta3 | RUNNING | 16/11 15:08Z |
 | lag-play (opus): play-time + co-op lag audit, fix top causes, play-time perf budget test (OD 15:05Z (4), first priority) | review/lag-play | main s18 | session_01UV1SzhF1ExMpqSUL9vigZu | RUNNING | 16/11 15:08Z |
-| ghenAll x1.5 shown≠applied family (emperor-visit-r1 follow-up) | review/ghen-shown | D | (opening) | RUNNING | 16/11 15:05Z |
+| ghenAll x1.5 shown≠applied family (emperor-visit-r1 follow-up) | review/ghen-shown | D | session_01DgYSWoyzKbRUjGm9gW7pNW | RUNNING | 16/11 15:05Z |
