@@ -23,7 +23,10 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) minmax(0,44%) auto;grid-template-areas:"hud" "stage" "panel" "bar";
   padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));
   background-image:radial-gradient(circle at 15% -10%,#fbe3e6 0,transparent 45%),radial-gradient(circle at 90% 0,#e3f1ea 0,transparent 40%)}
-@media (min-aspect-ratio:1/1){.game{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"hud hud" "stage panel" "bar bar"}}
+/* KIT §0 SPREAD (html.kv2, rot.js KIT_FRAME): two EQUAL pages (LEFT room/stage, RIGHT open tab) meeting at the book binding (jbook), so each
+   page box is 582 px = the one-page (kv1) page box (590 canvas, 4 px margins): the Fold page is the iPad right page scaled (owner 16/11 07:47Z/07:50Z) */
+html.kv1 .game{padding-left:max(4px,env(safe-area-inset-left));padding-right:max(4px,env(safe-area-inset-right))}
+html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"hud hud" "stage panel" "bar bar"}
 /* HUD */
 .hud{grid-area:hud;display:flex;align-items:center;gap:6px;padding:4px 6px;background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--line);border-radius:8px;min-width:0}
 .me{display:flex;align-items:center;gap:5px;min-width:0;max-width:38%;background:none;border:0;text-align:left;cursor:pointer;padding:2px 4px;min-height:40px;border-radius:6px}
@@ -284,7 +287,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .hud2 .hc .ic{width:12px;height:12px}.hud2 .hc.flash{animation:hflash 1.2s ease}.hud2 .hc i{font-style:normal;font-weight:700;margin-left:2px}
 .hud2 .h2t{position:absolute;right:3px;top:3px;width:22px;height:22px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;color:var(--gold);font-size:.8rem;line-height:1;cursor:pointer;padding:0}
 .hud2.col .hc:not(.keep){display:none}
-@media (max-width:600px){.hud2{gap:2px}.hud2 .hc{font-size:.62rem;padding:0 4px;min-height:19px}.hud2 .hc .ic{display:none}.stop .scene-t p{font-size:.78rem}}
+/* kv: dropped @media (max-width:600px) (one page = spread page, KIT §0) */
 @keyframes hflash{0%{background:#ffe9a8;transform:scale(1.08)}100%{background:#fffaf0}}
 @media (prefers-reduced-motion:reduce){.hud2 .hc.flash{animation:none}}
 /* tab bar: every tab visible, never hidden behind Sang buổi */
@@ -312,7 +315,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .relsel{display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:3px}.relsel button{display:inline-flex;align-items:center;gap:3px;font-size:.74rem;border:1px solid var(--line);border-radius:12px;padding:2px 7px 2px 3px;background:#fffaf0;cursor:pointer;min-height:30px}
 .relsel button[aria-pressed=true]{border-color:var(--gold);background:var(--panel2);font-weight:600}.rleg{margin:0 0 4px;font-size:.72rem}
 .rrow2{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:start;padding:4px 0;border-bottom:1px solid var(--line);font-size:.78rem}.rl{line-height:1.5}.rlab{color:var(--dim);font-size:.72rem;margin-right:3px}
-@media (max-aspect-ratio:1/1) and (max-height:1000px){.game.cardtab .hud2 .hc:not(.keep){display:none}.game.cardtab .stop .scene-t p{display:none}}
+/* kv: dropped @media (max-aspect-ratio:1/1) and (max-height:1000px) (one page = spread page, KIT §0) */
 .mfaces{display:flex;gap:2px;align-items:center;margin-bottom:2px}.mfaces i{font-style:normal;cursor:pointer}.mfaces .md.xs{width:20px;height:20px;margin:0;border-width:1px}.mq{font-size:.62rem;color:#f3e6cf;margin-left:2px}
 .seeb{border-color:var(--gold)!important;background:#fff4dc!important}.scene-t .btn{margin-left:6px;min-height:30px;padding:2px 8px}
 .stage.sc-home .scimg{filter:brightness(1.25) saturate(1.05)}.stage.sc-home.night .scimg{filter:none}
@@ -351,7 +354,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .mspot.off{cursor:default}
 @media (max-width:600px){.mspot .mlab em{display:none}}
 /* ONE UI KIT */
-:root{--pfw:120px}@media (min-width:600px){:root{--pfw:150px}}@media (min-width:1100px){:root{--pfw:180px}}
+:root{--pfw:120px}/* kv:(min-width:600px) */:root{--pfw:150px}/* kv:(min-width:1100px) */:root{--pfw:180px}
 .pfr{width:var(--pfw);max-width:100%;min-height:0}.pcp.art{background:#d9c7a8 center/cover no-repeat}
 .dlg .spk{display:flow-root}.dlg .spk>.pfr{float:left;margin:0 12px 6px 0;max-height:none}.spkt p:first-child{margin-top:0}
 .faces{display:flex;justify-content:center;gap:8px}.faces figure{flex:1 1 0;max-width:var(--pfw);min-width:0}.faces .pfr{width:100%}
@@ -442,7 +445,7 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) translateY(-2px) scale(1,1.012)}}
 @media (prefers-reduced-motion:reduce){.tok.fig .figimg,#mefig{animation:none}}
 
-@media (max-width:600px){.hud2 .hc[data-hx="date"]{display:none!important}.hud2.col{flex-wrap:wrap!important;overflow:visible}}
+/* kv: dropped @media (max-width:600px) (one page = spread page, KIT §0) */
 
 /* no truncated text: header, ribbon, status chips; pager groups labelled horizontally */
 .pgrp{display:flex;flex-direction:column;flex:0 0 auto;border-left:1px solid var(--line);padding-left:3px;min-width:0}.pgrp:first-child{border-left:0;padding-left:0}
@@ -465,8 +468,8 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 
 /* one act-card size per breakpoint */
 :root{--kh:232px;--kfs:.76rem}
-@media (min-width:700px){:root{--kh:250px;--kfs:.8rem}}
-@media (min-width:1000px){:root{--kh:268px;--kfs:.875rem}}
+/* kv:(min-width:700px) */:root{--kh:250px;--kfs:.8rem}
+/* kv:(min-width:1000px) */:root{--kh:268px;--kfs:.875rem}
 .cards{grid-auto-rows:var(--kh)!important}
 .kcard{height:var(--kh)!important;min-height:var(--kh)!important;max-height:var(--kh)!important;overflow:hidden;position:relative;padding-bottom:6px}
 .kcard h4{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto;padding-right:20px;font-size:calc(var(--kfs) + .18rem)}

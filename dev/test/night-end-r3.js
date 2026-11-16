@@ -34,5 +34,16 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;docu
      btn:take&&take.textContent,btnCls:take&&take.className}},tier);
    R3[tier]=r;await sleep(300);await SHOT(p,{path:`${OUT}/r3-${tier}-${v}.jpg`,type:'jpeg',quality:60});
   }
+  /* B (KIT §81): lonely + dawn beats close ONLY by the kit end button; default timings, no tap */
+  const B=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));if(typeof kmReset==='function')kmReset();Q.length=0;document.getElementById('modal').hidden=true;
+   const o={};let thenCalled=0;let h=document.getElementById('dawn');if(!h){h=document.createElement('div');h.id='dawn';document.body.appendChild(h)}
+   kitNewDay({host:h,night:{k:'lonely',line:'Đêm qua Hoàng thượng không lật thẻ bài nào.'},day:{k:'xuan',src:'img/kit/ne-dawn-xuan.webp',t:'Bình minh mùa xuân',sub:'Tháng 3'},wx:null,then:()=>{thenCalled++}});
+   await W(9000);o.afterAuto={then:thenCalled,btn:!!h.querySelector(':scope > .kmend'),cls:h.className};
+   const b=h.querySelector(':scope > .kmend');const r=b&&b.getBoundingClientRect();o.btn={txt:b&&b.textContent,cls:b&&b.className,inView:!!r&&r.bottom<=innerHeight&&r.top>=0&&r.left>=0&&r.right<=innerWidth};
+   const pic=h.querySelector('.kne-b.on .kne-pic');const pr=pic&&pic.getBoundingClientRect();o.picClearOfBtn=!!(pr&&r&&pr.bottom<=r.top+2);o.hint=!!h.querySelector('.kmhint');
+   window.__thenCalled=()=>thenCalled;return o});
+  await SHOT(p,{path:`${OUT}/r3-B-end-${v}.jpg`,type:'jpeg',quality:60});
+  Object.assign(B,await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const h=document.getElementById('dawn');const o={};h.click();await W(300);o.afterTap=__thenCalled();const b=h.querySelector(':scope > .kmend');b&&b.click();await W(300);o.afterBtn=__thenCalled();return o}));
+  R3.B=B;await sleep(200);
   console.log(v,JSON.stringify({R3,errs}));await c.close()}
  await b.close()})();

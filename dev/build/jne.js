@@ -98,7 +98,7 @@ function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Objec
  let LH=[];kmPush(done=>preload(DIR+T.pic+".webp",NE.wait).then(()=>{const st=kmStage("kne-ov",html,{manual:true,dur:60000,onEnd:()=>{LH.forEach(h=>{try{h.stop(200)}catch(e){}});keys.forEach((k,i)=>setTimeout(()=>{try{kitFlyItem(k)}catch(e){}},i*180));done()}});
   const root=st.ov.querySelector(".kne");st.ov.id="kneov";play(o.tier);LH=lights(st.ov.querySelector(".kne-pic"),T.pic);
   const fin=()=>{root.classList.add("km-done");st.finish()};st.later(red()?0:NE.list,fin);
-  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]"))return;if(!root.classList.contains("km-done"))fin();else if(!e.target.closest(".kmlist,.kne-pic"))st.close()})}))}
+  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]"))return;if(!root.classList.contains("km-done"))fin()})}))}
 
 /* the night's state, read at its real moments */
 let N=null;
@@ -166,9 +166,11 @@ function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow()
  let LH=[];const stopL=()=>{LH.forEach(h=>{try{h.stop(300)}catch(e){}});LH=[]};
  const show=j=>{host.querySelectorAll(".kne-b").forEach(e=>e.classList.toggle("on",+e.dataset.i===j));play(beats[j].snd||beats[j].k);stopL();
   const el=host.querySelector(`.kne-b[data-i="${j}"] .kne-pic`);LH=lights(el,nameOf(beats[j].src))};
- const finish=()=>{if(end)return;end=true;T.forEach(clearTimeout);stopL();host.onclick=null;host.classList.remove("kne-day");try{o.then&&o.then()}catch(e){console.error(e)}};
- const next=()=>{i++;if(i>=beats.length)return finish();show(i);T.push(setTimeout(next,beats[i].ms))};
- host.onclick=e=>{e.stopPropagation();finish()};
+ const finish=()=>{if(end)return;end=true;T.forEach(clearTimeout);stopL();host.onclick=null;host.classList.remove("kne-day","km-endon");host.querySelectorAll(":scope > .kmend").forEach(b=>b.remove());try{o.then&&o.then()}catch(e){console.error(e)}};
+ /* KIT §81: the beats never close by themselves or by a tap: a tap = skip to the last beat, then ONE kit button (kitSceneEnd) closes the scene */
+ const showEnd=()=>{if(end)return;T.forEach(clearTimeout);T.length=0;try{kitSceneEnd(host,"Tiếp theo",finish)}catch(e){console.error(e);finish()}};
+ const next=()=>{i++;if(i>=beats.length){i=beats.length-1;return showEnd()}show(i);T.push(setTimeout(next,beats[i].ms))};
+ host.onclick=e=>{e.stopPropagation();if(host.querySelector(":scope > .kmend"))return;T.forEach(clearTimeout);T.length=0;if(i<beats.length-1){i=beats.length-1;show(i)}showEnd()};
  Promise.all(beats.map(b=>preload(b.src,NE.wait))).then(()=>{if(end)return;show(0);T.push(setTimeout(next,beats[0].ms))});return{finish}}
 const dw0=dawn;dawn=function(){const p=PREV;PREV=null;const args=arguments,self=this;
  try{if(S&&!S.dead&&p&&!p.bedded&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
@@ -255,6 +257,8 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
 .kne-ov .kne:not(.km-done) :is(.kmlist,.kne-take){display:none}
 /* week panel beats */
 .dawn.kne-day{padding:12px;cursor:pointer;z-index:9200}
+.dawn.kne-day.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+.dawn.kne-day.km-endon .kne-beat .kne-pic{max-height:calc(100dvh - 200px)}
 .kne-beat{position:relative;width:100%;max-width:820px;display:grid;place-items:center}
 .kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity .6s ease;pointer-events:none}
 .kne-b.on{opacity:1}
