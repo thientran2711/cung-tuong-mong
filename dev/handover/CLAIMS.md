@@ -49,10 +49,10 @@
 | kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | session_01UV1Szj1bf6YFPCryaDjdEi | DONE: A KIT OK c2cbe401e (review/fig-bg-k1), B KIT OK 05bce5519 (review/kit-keeper-1); report reports/kit-keeper-1.md | 16/11 06:38Z |
 | ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s11 | session_01UV1SzhLiXwuRzRVVTE8AJr | RUNNING (redo per OD:L1238-1239) | 16/11 06:55Z |
 | ART D56 icons + Nội vụ phủ scene + place glyphs | review/place-glyphs | main s11 | session_01UV1SzmEsuu42GCFecC9HGf | RUNNING (v1 live 11100a99; owner: redraw in game style → v2 SAMPLE of 3) | 16/11 06:55Z |
-| D25 veil/scar box follows zoom | review/veil-zoom | C | session_011xDdVQH85mp5QLY8bMqh7D | RUNNING | 06:08Z 16/11 |
-| C35b review | review/pcard-dislikes-r1 | B | session_01N1tNP2GaMKbqSeCQe8Lxot | RUNNING | 16/11 06:20Z |
-| D3 item-big | review/item-big | B | session_01N1tNP3vh5qQKaG75iP6uRK | RUNNING | 16/11 06:20Z |
-| D9 header-own | review/header-own | B | session_01N1tNP6D57poL6nUn778JPv | RUNNING | 16/11 06:20Z |
+| D25 veil/scar box follows zoom | review/veil-zoom | C→B | session_011xDdVQH85mp5QLY8bMqh7D | DONE d3782535 (worker report; reviewer by B) | 06:08Z 16/11 |
+| C35b review | review/pcard-dislikes-r1 | B | session_01N1tNP2GaMKbqSeCQe8Lxot | PASS 3b2e15ef | 16/11 06:20Z |
+| D3 item-big | review/item-big | B | session_01N1tNP3vh5qQKaG75iP6uRK | BLOCKED (KIT REQUEST frameless big kitItem + kitItemBigSrc) | 16/11 06:20Z |
+| D9 header-own | review/header-own | B | session_01N1tNP6D57poL6nUn778JPv | DONE d6e1699c (SẴN SÀNG KIỂM) | 16/11 06:20Z |
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
 | D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | RUNNING | 06:23Z 16/11 |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
@@ -96,3 +96,12 @@
 | mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | session_01UV1SzkBzFb19bZRxsyptRX (opus) | RUNNING | 16/11 08:00Z |
 | promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | RUNNING | 16/11 08:00Z |
 | merge-train-6: 11 PASS branches without a slot (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | RUNNING | 16/11 08:00Z |
+| mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | (opening) (opus) | RUNNING | 16/11 07:58Z |
+| no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| D9 header-own reviewer | review/header-own-r1 | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| D25 veil-zoom reviewer (moved C→B 07:30Z; C session gone) | review/veil-zoom-r1 | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| D36 rank-port resume (kit-keeper-1 done) | review/rank-port | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| D11 presentation (code wiring only; art paused; D51 at main) | review/presentation | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
+| D13 spread events across buổi (on top of D29 schedules3 @9b1d82fa) | review/spread-events | B | (opening) (opus) | RUNNING | 16/11 07:58Z |

@@ -1,6 +1,7 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
-last wake: 11/16/2026 06:23Z (Foreman B session 3 = session_01N1tNP6N19EQTqoHAMZcxqK)
+last wake: 11/16/2026 07:58Z (Foreman B session 3 = session_01N1tNP6N19EQTqoHAMZcxqK)
+PICKUP 07:58Z (session 3): alive. Taking main s12 overnight order: opening mg-balance (opus) + no-word-games A/B/C (sonnet), reviewers D9 + D25, D36 resume, D11, D13. C35b PASS 3b2e15ef → READY. D3 BLOCKED on KIT REQUEST. Held: D14, D44 (art paused), D19 (after econ #8), night-card preg-FX follow-up (after night-end-r2).
 Context (session 3): ~60k tokens after the mandatory setup reads → budget ~75k (start +25%). Hourly self-wake: CronCreate job b7059734 at :43 every hour. Routine trig_01MqRpkkmxprHXt9EXHEjJ6q (woke session 2) DISABLED 06:22Z.
 Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no reports yet (review/item-big pushed adda3201). No new SẴN SÀNG KIỂM. Q24 not answered yet → D11/D13/D14/D19/D44 stay HELD.
 (Rule 07:45Z s10: every brief must POINT to dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md and order them read in full — owner words verbatim, never a summary.)
