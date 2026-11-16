@@ -223,7 +223,7 @@
 | tut-place: UI bug tour step 5 card covers tap target on Fold + 1180 Tài nghệ tip (from test-drift-r2 FAIL) | review/tut-place | main s17 | session_01UV1SzkUFJmikqECkuFxtPn (sonnet) | RUNNING | 16/11 14:14Z |
 | D25 veil-zoom-r2 reviewer (sonnet) | review/veil-zoom-r3 | B | session_01N1tNP3cFohaMXQ97kod8mh | DONE PASS d236f309 (archived) | 16/11 14:16Z |
 | night-time analysis (opus): 3 flips/month vs 12 consorts — options + numbers + impact (report only) | (report only) | main s17 | session_01UV1SzhuYF9iVGubAH5xsE6 (opus) | RUNNING | 16/11 14:20Z |
-| item-ledger review | review/item-ledger-r1 | D | session_01DgYSWmMK8v6NhgpHp4fg8k | RUNNING | 16/11 14:22Z |
+| item-ledger review | review/item-ledger-r1 | D | session_01DgYSWmMK8v6NhgpHp4fg8k | DONE (PASS 7aba5de9) | 16/11 14:22Z |
 | phone-bars review (sonnet; 3a022369 incl. design-scale-p2-r1 d8950434) | review/phone-bars-r1 | main s18 | session_01UV1SzivoRHdnDUDwc6UZKt | RUNNING | 16/11 14:30Z |
 | promo-rules.js 755 'reveal shown' FAIL — pre-existing on main ee5d33de (found by mt8), fix owed | (to assign) | main s18 | — | OPEN | 16/11 14:30Z |
 | D29 fix r4 (jroute ledger bypass) THEN PEOPLE LEDGER (OD 13:40Z/13:50Z, inbox 13:55Z/14:15Z/14:25Z) — one opus worker, same files | review/schedules3-r4 → review/people-ledger | C | session_011xDdVNZkQ6SnAs8Rttsbwj (archived) | stage 1 SẴN SÀNG KIỂM f388b4de; stage 2 handed to successor | 16/11 14:45Z |
@@ -290,3 +290,5 @@
 | flip-hand review r1 (sonnet, SMALL) of 745e1ab8 | review/flip-hand | main s21 | session_01UV1SzhQEsHLJz1pK4VbSsS | RUNNING | 16/11 17:32Z |
 | stage-pets r2 successor (sonnet): backdrop wait, S pet size, 3-people samples A (narrow right column) | B (shrink) for owner | review/stage-pets | main s21 | session_01UV1Szi6MsAMKHyAGi1WvNc | RUNNING | 16/11 17:35Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | RUNNING | 16/11 17:36Z |
+| D GO-LIVE: push every D PASS branch to main one by one (OD:L1370 recipe) | review/<each>-golive | D | (opening) | RUNNING | 16/11 17:45Z |
+| NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | (opening) | RUNNING | 16/11 17:45Z |
