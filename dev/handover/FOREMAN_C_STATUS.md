@@ -2,6 +2,7 @@
 
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
 last wake: 15:50Z 16/11 (start)
+Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 · Magnific Pro 1,327,514 credits · disk 24 GB free, .git 4.3 GB (no repack).
 
 ## SESSION 4 LOG
 - 15:45Z start. Correction applied: story14-p1-r2 STAYS with C (FOREMAN_C.md 15:45Z s19 withdrew the hand-over) → worker session_011xDdVPicFAyWqznz92TPU8 told to finish + report SẴN SÀNG KIỂM. schedules3-r4 worker idle at 32% ctx (waiting on its rand18 shard audit; no report yet). Opened 15:47Z (claimed): (a) fig-proportion sonnet session_011xDdVRcEKcovA92Ep6FWb4 · (b) night-backs sonnet session_011xDdVQNx5VgxetorvVUQPh · (c) buoi-art sonnet session_011xDdVP32VLjcS6HX97wHgD · (d) icon-art sonnet session_011xDdVRMa18LU3fiFyq7ksS · ORIGIN INTROS opus session_011xDdVSMZ3apRHJfX25BwAb (review/origin-intros; draws no art, writes ART LIST for C). Each art worker: SAMPLE READY → Foreman C sends it to the owner (SendUserFile) → her verdict → mass production. Running C total: 7.
