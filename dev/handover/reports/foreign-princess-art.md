@@ -93,3 +93,11 @@ Only ref = the approved consort face face-consort-01 (EbnrrdZuuO). Prompt: same 
 Honest: the girl is generated, not a pixel-copy, so her face differs slightly from lineup to lineup but is consistent within this sheet by eye. Heads look natural-sized.
 Credits: 8 x 40 = 320 (v8-v17 total 3,280).
 STATUS: WAIT for the owner's verdict.
+
+## v17 HELD by Foreman C (heads still read big, girl ~5.5 heads). v17 sheet deleted.
+## v18 SAMPLE READY
+File: `foreign-princess-art/sample-v18.jpg` = c01 at the left ("mẫu tỷ lệ game", scaled to the same figure height) + NC Đáp ứng | Tần | Phi | Quý phi from ONE generation (Sym... y2 = Xm4CQqkBfo), uncropped.
+Prompt in words only (no numbers): tall slender elegant adult woman, small head, long neck, long body and long legs, realistic fashion-illustration proportions, not doll-like/chibi; compact hair and headdress close to the head, no puffed buns; same face ref face-consort-01 only (EbnrrdZuuO), no text/labels. 6 lineups made (Sym6RAPUb8 Xm4CQqkBfo P3uGY0h42C jUBy9itLD0 1le7y9ur4r Bh9EF5moQR); all six read tall with small heads; picked Xm4CQqkBfo (cleanest, calmest expression).
+By eye next to c01: NC head is clearly smaller than c01's; she may now read a little tall/small-headed the other way (fashion-plate). Light smile on all four (c01 also smiles gently).
+Credits: 6 x 40 = 240 (v8-v18 total 3,520).
+STATUS: WAIT for the owner's verdict.
