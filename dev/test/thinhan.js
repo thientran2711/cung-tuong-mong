@@ -1,6 +1,6 @@
 /* hotfix review/hotfix-thinhan: "Thỉnh an Hoàng hậu" / "Thỉnh an Thái hậu" really move the attitude they promise.
    usage: node dev/test/thinhan.js <baseURL> <outdir>   (Fold 755x1000@2) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
