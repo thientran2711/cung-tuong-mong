@@ -88,10 +88,10 @@ function kitStageScale(){try{const st=$("stage");if(!st)return;const H=st.client
  let base=Math.max(H*.4,H-kfb-H*.025)*(st.__kk||1);const me=$("mefig");const toks=[...st.querySelectorAll("#tokens .tok.fig img.figimg")].filter(e=>e.offsetParent);
  const ar=e=>{if(e.naturalWidth&&e.naturalHeight)return e.naturalWidth/e.naturalHeight;if(!e.dataset.kwait){e.dataset.kwait=1;e.addEventListener("load",()=>kitStageScale(),{once:true})}return .36};
  const ks=e=>{if(e.dataset.ks)return+e.dataset.ks;let k=1;if(e.classList.contains("kidfig")){const m=/\*\s*([\d.]+)/.exec(e.style.height||"");if(m)k=+m[1]}e.dataset.ks=k;return k};
- const tokRow=$("tokens");const OV=.2;/* neighbours may overlap by 20 % of a figure's width (sleeves), like people standing in a group */
+ const tokRow=$("tokens");const OV=0;/* retired scaler (replaced by j59 + the kit slot function): no neighbour overlap, ever (OD:L1049) */
  const ws=toks.map(e=>base*ks(e)*ar(e)+4);const meW=me?base*ar(me):0;const wide=!!(me&&toks.length&&tokRow);
  const tot=ov=>ws.reduce((x,y)=>x+y,0)-ov*ws.slice(1).reduce((x,y)=>x+y,0)+(wide?meW*(1-ov):0);let OVu=OV,total=tot(OV);
- if(toks.length&&(W-16)/total<.85){OVu=.36;total=tot(OVu)}/* a crowd stands closer before anyone shrinks */
+ 
  let f=toks.length?Math.min(1,(W-16)/Math.max(1,total)):1;
  toks.forEach((e,i)=>{const b=e.closest(".tok");if(b)b.style.setProperty("margin-left",i?(-OVu*ws[i]*f).toFixed(0)+"px":"0px","important")});
  if(tokRow){if(wide){const mw=meW*f;me.style.setProperty("left",(8+mw/2).toFixed(0)+"px","important");tokRow.style.setProperty("left",(8+mw*(1-OVu)).toFixed(0)+"px","important");tokRow.style.setProperty("right","8px","important");tokRow.style.setProperty("justify-content",total*f<W-40?"center":"flex-start","important");tokRow.style.setProperty("padding","0","important");tokRow.style.setProperty("gap","0px","important")}

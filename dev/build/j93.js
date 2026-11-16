@@ -452,7 +452,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 
 /* review/promo-rules: a long list (rank set, >6 rows) — once open, the box gives its room to the list; the list scrolls and its Nhận stays in view */
 .km-long.km-done .kmbox{display:none}.km-long.km-done .kmlist{max-height:calc(100dvh - 150px)}.km-done .kmlist>.kmtake{position:sticky;bottom:0;flex:none}
-
+/* review/small-art-wire-r1: >9 rows (rank set + Đeo eo piece) wraps the icon shelf to a 2nd row; the card then fits the screen by shrinking the list (scrolls, Nhận sticky) instead of a fixed reserve */
+.kmrew.km-long.km-done{max-height:calc(100dvh - 12px)}.km-long.km-done .kmlist{flex:0 1 auto;min-height:0;max-height:none}
 .km-fast .kmcoins img{animation-delay:0s!important;animation-duration:.15s!important}
 .kmcoins{position:absolute;left:50%;top:55%;width:0;height:0;z-index:3;pointer-events:none}
 .kmcoins img{position:absolute;width:28px;height:auto;left:-14px;top:-14px;opacity:0}

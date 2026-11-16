@@ -69,7 +69,7 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
    - a screen has a fixed number of SLOTS: 3 on iPad-wide layouts (viewport ≥ 1000 px), 2 on Fold / phones; her included (KIT 33 rule 4).
    - slot i has a FIXED centre: the open floor (stage minus the plaque gutters, minus the page-chip gutters when there are pages)
      is cut into N equal slots, centre i = x0 + w·(i + ½), on every page.
-   - every figure stands with its BODY core column (kitFigBody cl..cr, not the transparent margin of the art) centred on its slot centre,
+   - every figure stands with its whole VISIBLE art (kitFigBody l..r, sleeves and hem included, not the transparent margin) centred on its slot centre and no wider than the slot spacing (never overlapping; the slot function is kitSlotSw/Cx/Scale in jkit),
      feet on ONE floor line (the transparent margin under the feet is pulled out), at the KIT_FIG scale (men ×1.07, children by age,
      never shrunk to fit — only a stage narrower than one whole person scales down).
    - the name chip (rank / role over the name, KIT 33.5) is centred on the slot, at most the slot width (it wraps, never cut), all chips on
@@ -78,7 +78,6 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      The next chip reads "+N" (N = people not shown yet), the back chip "‹"; both stand in their own gutters at the stage's bottom
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
-const OVX=.2;
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
 function j59chips(st,R,P){/* P: {pg, pages, before, after, fo, CW, x0L, x0R} */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const on=P&&P.pages>1&&(side==="r"?P.pg<P.pages-1:P.pg>0);
@@ -129,7 +128,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  /* KIT 33: women stand KIT_FIG.h; a taller figure (man ×KIT_FIG.man) is CAPPED under the place ribbon (CAP) — it never shrinks the others */
  let CAP=Infinity;const ef=(x,h)=>Math.min(h*x.f,CAP);
  const imgH=(x,h)=>ef(x,h)/(x.b.b-j59bt(x.b)),boxW=(x,h)=>imgH(x,h)*x.ar;
- const kCL=b=>b.cl!=null?b.cl:b.l,kCR=b=>b.cr!=null?b.cr:b.r;
+ const kCL=b=>b.l,kCR=b=>b.r;/* review/stage-slots-fix: the slot box is the figure's WHOLE visible art (kitFigBody l..r, wide sleeves included), centred on the slot; was the torso core, which let robes overlap */
  const coreW=(x,h)=>boxW(x,h)*Math.max(.2,kCR(x.b)-kCL(x.b));
  const meX=me?{f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar}:null;
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
@@ -147,12 +146,12 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const MAXN=3,M=E.length,nAll=M+(me?1:0);
  const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
- const geo=(N,z)=>{const paged=nAll>N;const CW=paged?46:0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);/* a figure core may be up to 1/(1−OVX) of its slot (rule 4): next to a reserved panel the slots keep that spill off the panel too */const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=N>1?avail/(N+1):avail;return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
- /* a figure fits its slot when its core, less the 20 % a neighbour may step over (KIT 33 rule 4), is within the slot width */
+ const geo=(N,z)=>{const paged=nAll>N;const CW=paged?46:0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSw(N,avail);/* KIT 33.7 slot function (jkit) */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
+ /* a figure fits its slot when its whole visible art (kitFigBody l..r) is within the slot spacing — no neighbour overlap, ever (OD:L1049, KIT 33.7 slot function in jkit) */
  /* review/j59-fix: a slot is never narrower than a name chip (min 60 px + 8): beside a reserved plaque column (844x390, 2-column plaques)
     the page holds fewer people instead of squeezing two into the gap with overlapping names */
  const J59SWMIN=68;
- const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)*(1-OVX)<=g.sw)&&F.every(x=>coreW(x,h)*(1-OVX)<=g.sw)&&nfW<=g.sw;
+ const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw;
  /* measure EVERY name chip (all pages), not only the page on screen: a hidden chip reads 0 px and the floor band (fo) would shift between pages (reviewer, 844x390 page 3) */
   E.forEach(x=>{x.tok.style.display=""});if(mt)mt.classList.remove("j59off");
   let tagH=Math.max(14,mt&&mt.firstChild?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag?x.tag.offsetHeight:0));
@@ -160,8 +159,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     when they do not fit at full height, EVERYONE is scaled down together (same scale, J59HMIN at least) before the page drops a slot */
  let Z=size(tagH),N=Math.max(1,Math.min(MAXN,nAll)),G=geo(N,Z);
  if(!fits(G,Z.H)&&!capOn&&KF.maxPx){capOn=true;Z=size(tagH);G=geo(N,Z)}
- const J59HMIN=.62;
- while(N>1&&!fits(G,Z.H)){if(fits(G,Z.H*J59HMIN)){let lo=Z.H*J59HMIN,hi=Z.H;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(fits(G,m))lo=m;else hi=m}Z.H=lo;break}N--;G=geo(N,Z)}
+ const J59HMIN=()=>N<=2?.32:.62;/* two slots are kept (owner: phone shows 2) by scaling everyone down together further than for 3 */
+ while(N>1&&!fits(G,Z.H)){if(fits(G,Z.H*J59HMIN())){let lo=Z.H*J59HMIN(),hi=Z.H;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(fits(G,m))lo=m;else hi=m}Z.H=lo;break}N--;G=geo(N,Z)}
  if(!fits(G,Z.H,1)){/* a stage narrower than ONE whole person: that one person scales down to fit */
   let lo=sH*.15,hi=Z.H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(fits(G,m,1))lo=m;else hi=m}Z.H=lo}
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */
@@ -180,7 +179,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=(showMe?0:1)+E.slice(0,s0).filter(x=>j59person(x.p)).length;
  if(pages>1)st.dataset.j59pg=[pg,pages,s0,s1,M].join(",");else delete st.dataset.j59pg;
  /* fixed slots (owner 16/11): 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4 of the free width (stage minus the side column) */
- const kOn=(showMe?1:0)+vis.length;const cxOf=i=>G.x0+G.avail*(i+1)/(kOn+1);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
+ const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCx(i,kOn,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
  const centres=[];let slot=0;
