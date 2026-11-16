@@ -42,4 +42,17 @@
   Pickers use framed portraits (.ksel ring on the frame, rectangular by design) — unchanged.
 
 ## CDN
-- img/FIGURES-hd.json + img/hd/fig-*.webp uploaded with cdn_sync after hdqa PASS + looking at the face sheets.
+- img/FIGURES-hd.json + img/hd/fig-*.webp uploaded with cdn_sync after hdqa PASS + looking at the face sheets (left 900 up, right HD).
+- Uploaded: chunk 1 (68, incl. all c30), chunk 2 (262), chunk 3 (395) = 725 HD twins, all PASS, all face sheets looked at. Rest of FIGURES.json
+  batch running (dev/figwork/hdcut.py, worker files in /home/user/wt/face-sharp/.work/hd; resume = rerun hdcut on hd/part0..3.tsv, it skips done).
+- 25 of the 200 missing sheet URLs fetched with Magnific creations_get (49 files, part3). The other 175 sheets (~330 files, mostly t5/t7/t8 and
+  tm*-a51 aged edits) still need creations_get (token-heavy: ~1 k tokens per id) — left for a helper with Magnific API access.
+
+## KIT
+- §71 kitFigHD + #kfa (registry: coordinator) in KIT.md + kit page sample.
+
+## Not covered (decision needed)
+- Maids / mama / servants (FIGURES-servants): their gpt-2-6 sheets are only 2048x1024 (figure ~950 px) — no higher-res source exists.
+  HD would need Magnific images_upscale (~90–270 credits per sheet x 947 sheets). Stage maids are drawn 1.2–1.4x.
+- FIGURES-ty (trung y, local isnet cut) and FIGURES-others (men, officials): not yet cut; same detail-transfer method works if their sheets have ≥1.5x.
+- por-* portraits: cut from the 900 figure (~1.6x upscaled inside); re-cut from HD twins is the next step (needs por box registration).
