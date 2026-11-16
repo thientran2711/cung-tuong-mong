@@ -5,7 +5,7 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.match(
 const [,,URL,OUT,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});
  const p=await ctx.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
- await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function');await p.waitForTimeout(1500);
+ await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(3000);
  await p.evaluate(LIB);const res=[];
  for(const sc of ['dau','cao','con','hau','hh']){await p.evaluate(n=>AA.scen(n),sc);
   const r=await p.evaluate(()=>{const out=[];

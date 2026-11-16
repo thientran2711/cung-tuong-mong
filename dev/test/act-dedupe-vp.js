@@ -8,8 +8,8 @@ const VPS=(SIZES||"755x1000,1000x755,1180x820,1366x1024,844x390,390x844").split(
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
-  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
-  await p.addStyleTag({content:'#kroul,.kroul,.krbox{display:none!important}'});
+  await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(3000);
+  await p.addStyleTag({content:'#kroul,.kroul,.krbox,.kcf-w,.kmov.kcf{display:none!important}'});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}});
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&rivals&&rivals.length>0,null,{timeout:60000});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();Q.length=0;document.getElementById('modal').hidden=true;S.buoi=1;used=0;S.bac=400;deal();tab="act";render()});await sleep(1200);

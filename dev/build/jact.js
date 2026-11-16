@@ -23,7 +23,7 @@ function adStamp(sc){try{return sc==="buoi"?bkey():String(wk())}catch(e){return"
 function adDoorUsed(n){const d=AD_DOOR[n];if(!d||!S)return false;const m=S.adDoor||{};return m[n]!=null&&m[n]===adStamp(d[2])}
 function adDoorMark(n){if(!S||!AD_DOOR[n])return;S.adDoor=S.adDoor||{};S.adDoor[n]=adStamp(AD_DOOR[n][2])}
 function adDoorOfPop(kind,on){for(const n in AD_DOOR){const d=AD_DOOR[n];if(d[0]===kind&&d[1]===on)return n}return null}
-const AD_DOOR_WHY={th:"đã thỉnh an hôm nay",hh:"đã thỉnh an hôm nay",ksp:"đã lo việc thẻ bài hôm nay",maid:"đã sai nàng việc này"};
+const AD_DOOR_WHY={th:"đã thỉnh an tuần này",hh:"đã thỉnh an tuần này",ksp:"đã lo việc thẻ bài tuần này",maid:"đã sai nàng việc này"};
 /* ---------- 2. what leaves Hành sự (and where it lives now) ---------- */
 const AD_OUT=/^(Tự học |Tự luyện |Phát chẩn cho cung nhân$|Tụng kinh, làm việc thiện$|Đánh đàn ở ngự hoa viên$|Chữa bệnh cho con$|Dạy (hoàng tử|công chúa)|Dạy dỗ|Đưa con đến thỉnh an Hoàng thượng$|Luyện cầm kỳ thi họa$|Thưởng cung nữ$)/;
 function adSrv(){try{return !!(S&&(S.out||S.srv||(typeof isSrv==="function"&&isSrv())))}catch(e){return false}}
@@ -41,8 +41,10 @@ function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=
   deck=deck.filter(a=>!(a&&AD_OUT.test(a.n||"")));
   for(const a of deck){if(!a||!AD_DOOR[a.n]||a.__adDoor)continue;a.__adDoor=1;const L0=a.lock,T0=a.t;
    Object.defineProperty(a,"lock",{get:()=>!!(typeof L0==="function"?L0():L0)||adDoorUsed(a.n),set:()=>{},enumerable:true,configurable:true});
-   Object.defineProperty(a,"t",{get:()=>adDoorUsed(a.n)?`Đã làm hôm nay (${AD_DOOR[a.n][0]==="maid"?"ở tẩm cung":"ở Dư đồ"})`:(a.lock&&a.adT?a.adT:T0),set:()=>{},enumerable:true,configurable:true})}
+   Object.defineProperty(a,"t",{get:()=>adDoorUsed(a.n)?(AD_DOOR[a.n][2]==="buoi"?"Đã làm buổi này":"Đã làm tuần này"):(a.lock&&a.adT?a.adT:T0),set:()=>{},enumerable:true,configurable:true})}
  }catch(e){console.error("jact deal",e)}return r}})();
+/* a shared-door card shows its twin's picture (same act, same art; reviewer r1): the Hành sự name → the pop-up option name */
+if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){try{const d=AD_DOOR[name];if(d&&d[1]!==name){const A=KIT_ACTS.acts||{};if(!A[name]&&A[d[1]])return k0.call(this,d[1])}}catch(e){}return k0.apply(this,arguments)}}
 /* cards that open a picker / run a text act (the pop-up's own code), and the door stamp on every shared card */
 (function(){const a0=act;act=function(i){const a=deck&&deck[i];
  if(a&&a.ad&&(a.adOpen||a.adRun)){if(a.done||S.dead||Q.length||a.lock||!can(cardCost(a)))return;const k=cardCost(a);
@@ -60,7 +62,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
   if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,w:{maid:3},x:"có khi nghe được tin",go:()=>{if(roll(15)){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}}}}
   if(p.kind==="peddler")A=[{n:"Xem hàng Nội vụ phủ",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
-  A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:AD_DOOR_WHY[p.kind]||"đã làm hôm nay"}):a})
+  A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
  }catch(e){console.error("jact talkOpts",e)}return A}})();
 (function(){const t0=talk;talk=function(oi){let p=null,a=null;try{p=S&&curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}
  if(a&&a.adShop){if(S.dead||Q.length)return;try{kitShopNvp()}catch(e){console.error(e)}render();return}
