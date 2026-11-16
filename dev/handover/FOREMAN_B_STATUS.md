@@ -17,7 +17,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING (resumed) |
 | C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
 | C35 pcard-fill | review/pcard-fill @85c2c933 | sonnet | REVIEWING (review/pcard-fill-r1, sonnet; renumber its KIT part §71→§73) |
-| C37 panel-size | review/panel-size | sonnet | RUNNING |
+| C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
 | D32 succession-port | review/succession-port | opus | RUNNING |
@@ -53,3 +53,4 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - Q7 (CDN): RESOLVED — token works, images upload directly.
 - Q8 (C23 follow-up, for Foreman C's C7 balance pass): rival NPC minigame scores (kg82NpcMean) unchanged, so low-level players now beat rivals far more easily; and in the lễ/trị cung/xử án quiz banks the right answer is often the longest option (guessable). Suggest C7 or a small worker rebalance/rewrite.
 - Q9 (C35 pcard-fill): the game has no per-person 'ghét' (dislike) data — the card shows only known traits/tendencies and the Emperor's known likes. Add dislike data as a design item? Also Thỉnh an stays a talk option of the visit (no free shortcut that would bypass one-talk-per-visit).
+- Q10 (C37 panel-size): with one frame size per viewport, short one-line notices now sit in a full-size frame with empty paper (as the rule asks). Owner may want to see it before it goes live.
