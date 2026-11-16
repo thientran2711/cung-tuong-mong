@@ -114,9 +114,9 @@ rdDef("cnv_chu",7,{t:"Chủ thử lòng",w:"mis",sj:"phép thử của {mis}",ca
   lose:{k:-1,tag:"Trượt phép thử",w:"mis",t:"{mis} cho là ngươi rắp tâm lấy gói thuốc. Nàng chuyển ngươi ra xa, và đổi người giữ chìa khóa.",fx:{danh:-2},go:()=>CHU_MIS(-12)}}});
 
 rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về xạ hương ở cung {mis}",cast(A){return rdCast(A,["v"])},
- g:"Lời đồn đến tai Trung cung: «cung {mis} có xạ hương». Chỉ một nửa sự thật lọt ra, nửa tệ nhất. Trước khi trời sáng, Nội vụ phủ sẽ khám cung, có ý chỉ Trung cung và Thái hậu chuẩn.",
+ g:"Lời đồn đến tai Trung cung: «cung {mis} có xạ hương». Chỉ một nửa sự thật lọt ra, nửa tệ nhất. Trước khi trời sáng, Nội vụ phủ sẽ khám cung theo ý chỉ Trung cung.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Tin báo nửa đêm",w:"eun",if:RDW(1),t:()=>`{mis} đã tin ngươi trọn. Nửa đêm, một tiểu thái giám chạy đến báo: sáng mai Nội vụ phủ khám cung {mis}, ${CHU_Q()==="Hoàng hậu"?"có ý chỉ Hoàng hậu, Thái hậu chuẩn":"theo lệnh Thái hậu"}. Gói thuốc vẫn ở chỗ cũ.`,o:[
+ B:{s1:{h:"Tin báo nửa đêm",w:"eun",if:RDW(1),t:()=>`{mis} đã tin ngươi trọn. Nửa đêm, một tiểu thái giám chạy đến báo: sáng mai Nội vụ phủ khám cung {mis}, ${CHU_Q()==="Hoàng hậu"?(S.thDead?"có ý chỉ Hoàng hậu, Hoàng thượng chuẩn":"có ý chỉ Hoàng hậu, Thái hậu chuẩn"):"theo lệnh Thái hậu"}. Gói thuốc vẫn ở chỗ cũ.`,o:[
   {n:"Mang gói thuốc ra khỏi cung",c:{suc:-3},o:()=>40+S.mat*5,w:{tamco:2},sc:1,f:"hide",wx:"gói thuốc không còn ở cung {mis}",l:{danh:-3},lx:"bị bắt đang mang xạ hương, tiếng ngươi sút nặng",rt:"Ngươi giấu gói thuốc trong giỏ đồ giặt, đưa ra khỏi cung trước canh tư.",rf:"Thị vệ gác cửa nhìn giỏ đồ rất lâu, nhớ mặt ngươi."},
   {n:"Giấu vào chỗ không ai khám",c:{},o:()=>45+S.tamco/4,w:{mat:1},sc:1,f:"hide",wx:"gói thuốc vẫn trong tầm tay",l:{danh:-2},lx:"chỗ giấu bị lộ, tiếng ngươi sút",rt:"Ngươi nhét gói thuốc vào ruột chiếc gối thêu của {mis}.",rf:"Chỗ giấu ngươi chọn, Nội vụ phủ nào cũng biết."},
   {n:"Khuyên {mis} tự đem nộp trước",c:{},o:()=>35+S.duc/4,w:{duc:3},sc:1,f:"clean",wx:"không còn gì để bị khám ra",l:{danh:-2},lx:"{mis} cho là ngươi bỏ nàng, bớt tin; tiếng ngươi sút",go:(A,ok)=>CHU_MIS(ok?2:-6),rt:"{mis} nghĩ rất lâu: “Nếu nộp, ta phải nói nó từ đâu.”",rf:"{mis} hất tay ngươi ra."}]},

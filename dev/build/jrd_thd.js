@@ -932,7 +932,7 @@ rdDef("thd_hoc",11,{t:"Người thầy",w:"emp",sj:"điều người thầy đ�
  g:"Các hoàng tự lớn dần, sắp sang học các Đại học sĩ Hàn lâm. Lớp của ngươi khép lại. Thầy để lại gì cho trò, và các mẹ nhớ ngươi thế nào — đây là kết cục truyện xuất thân của ngươi: con gái thầy đồ nghèo, làm thầy trong cung.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Thư của cha",w:"dad",if:RDW(1),t:"{dad} nghe tin con gái dạy hoàng tự, viết lên kinh: “Cả đời cha dạy trẻ làng. Con dạy con vua. Nhớ: thầy giỏi là thầy dạy trò hơn mình.”",o:[
-  {n:"Đọc thư cho bọn trẻ nghe",c:{danh:-2},w:{duc:2},f:"heart",wx:"bọn trẻ biết thầy cũng có thầy",lx:"các mẹ chê ngươi đem chuyện quê vào cung, tiếng tăm sứt mẻ",rt:"{n1} hỏi: “Ông ngoại của thầy có dạy con được không?”"},
+  {n:"Đọc thư cho bọn trẻ nghe",c:{danh:-2},w:{duc:2},f:"heart",wx:"bọn trẻ biết thầy cũng có thầy",lx:"các mẹ chê ngươi đem chuyện quê vào cung, tiếng tăm sứt mẻ",rt:"{n1} hỏi: “Cha của thầy có dạy con được không?”"},
   {n:"Gửi bạc về sửa trường làng cho cha",c:{bac:-40},w:{danh:2},wx:"trường làng có mái mới",lx:"tốn bạc sửa trường",rt:"Trường làng lợp lại ngói, học trò của cha có chỗ ngồi khô."},
   {n:"Cất thư, không nói với ai",c:{duc:-2},w:{tamco:1},wx:"giữ riêng điều quý",lx:"giấu lời dạy của cha, tổn đức; bọn trẻ không biết",rt:"Ngươi đặt thư dưới gối."}]},
  s2:{h:"Lớp cuối cùng",w:"emp",if:RDW(0),t:"Buổi học cuối, chỉ còn ít đứa đến. {n1} ngồi bàn đầu, lần đầu tiên đến sớm hơn thầy.",o:[
