@@ -126,29 +126,21 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const B=R0.querySelector(".ktut-blks");
  B.innerHTML=s.interact&&r?blk(0,0,vw,r.top)+blk(0,r.bottom,vw,vh-r.bottom)+blk(0,r.top,r.left,r.height)+blk(r.right,r.top,vw-r.right,r.height):blk(0,0,vw,vh);
  R0.querySelector(".ktut-marks").innerHTML=marks.map(m=>`<div class="ktut-mark" style="left:${m.left}px;top:${m.top}px;width:${m.width}px;height:${m.height}px"></div>`).join("");
- /* card: below, above, right, left of the target, NEVER over its hole. The kit card keeps its ONE look; when its full size (--kpw x --kph) fits on no side it shrinks on the roomiest side (the kit text scrolls inside, .kpdt). Only when even the minimum size fits nowhere (a hole that fills the screen): a step that asks for a tap puts the card at the screen part farthest from the hole, the others lie at the target's lower edge */
+ /* card: ONE frame size per viewport (owner OD:L963), placed by POSITION only: below, above, right or left of the target where it fits whole (the step's preferred side first). When it fits on no side the card goes to the screen corner/edge that covers the LEAST of the hole (the frame is never shrunk); a step with no hole is centred */
  card.style.removeProperty("--kph");card.style.removeProperty("--kpw");
- const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8,MINW=Math.min(cw,300),MINH=Math.min(ch,250);let L,Tp;
+ const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8;let L,Tp;
  if(!r){L=(vw-cw)/2;Tp=Math.max(M,(vh-ch)/2)}
  else{const cx=r.left+r.width/2,cy=r.top+r.height/2;
-  const reg=(side,aw,ah)=>({side,aw,ah,w:Math.min(cw,aw),h:Math.min(ch,ah)});
-  const C=[reg("below",vw-2*M,vh-M-r.bottom-g),reg("above",vw-2*M,r.top-g-M),reg("right",vw-M-r.right-g,vh-2*M),reg("left",r.left-g-M,vh-2*M)].filter(x=>x.aw>=MINW&&x.ah>=MINH);
+  const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
+  const C=[];if(r.bottom+g+ch<=vh-M)C.push(["below",hx,r.bottom+g]);if(r.top-g-ch>=M)C.push(["above",hx,r.top-g-ch]);
+  if(r.right+g+cw<=vw-M)C.push(["right",r.right+g,hy]);if(r.left-g-cw>=M)C.push(["left",r.left-g-cw,hy]);
   const want=s.side==="above"?"above":"below";
-  C.forEach(x=>{x.full=x.w>=cw&&x.h>=ch;x.sc=(x.full?1e6+(x.side===want?5e5:0)+(x.side==="below"||x.side==="above"?1e3:0):(x.w>=cw?1e5:0))+x.w*x.h/* a card that must shrink keeps its width when it can: only the height gives */});
-  C.sort((a,b)=>b.sc-a.sc);const c=C[0];
-  if(c){c.w=Math.round(c.w);c.h=Math.round(c.h);if(c.w<cw)card.style.setProperty("--kpw",c.w+"px");if(c.h<ch)card.style.setProperty("--kph",c.h+"px");if(c.w<cw||c.h<ch)try{kitPersonDlgFit(R0)}catch(e){}
-   if(c.side==="below"){L=Math.min(Math.max(M,cx-c.w/2),vw-c.w-M);Tp=r.bottom+g}
-   else if(c.side==="above"){L=Math.min(Math.max(M,cx-c.w/2),vw-c.w-M);Tp=r.top-g-c.h}
-   else if(c.side==="right"){L=r.right+g;Tp=Math.min(Math.max(M,cy-c.h/2),vh-c.h-M)}
-   else{L=r.left-g-c.w;Tp=Math.min(Math.max(M,cy-c.h/2),vh-c.h-M)}}
-  else if(s.interact){/* the hole fills the screen: the card goes to the corner farthest from the hole's centre, as small as it may be */
-   const w=Math.min(cw,Math.max(MINW,vw-2*M)),h=MINH;card.style.setProperty("--kpw",w+"px");card.style.setProperty("--kph",h+"px");try{kitPersonDlgFit(R0)}catch(e){}
-   L=cx>vw/2?M:vw-w-M;Tp=cy>vh/2?M:vh-h-M}
-  else{/* too big: inside the target at its bottom (above the tab bar) */
-   L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}
- const fw=card.offsetWidth,fh=card.offsetHeight;
- card.style.left=Math.round(Math.max(M,Math.min(L,vw-fw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-fh-M)))+"px";
- LAST=key.replace(/\|[^|]*$/,"|"+fh)}
+  const c=C.find(x=>x[0]===want)||C.find(x=>x[0]==="below"||x[0]==="above")||C[0];
+  if(c){L=c[1];Tp=c[2]}
+  else{/* no side fits the whole card: the position that covers the least of the hole */
+   const ov=(l,t)=>Math.max(0,Math.min(l+cw,r.right)-Math.max(l,r.left))*Math.max(0,Math.min(t+ch,r.bottom)-Math.max(t,r.top));
+   const P=[[M,M],[vw-cw-M,M],[M,vh-ch-M],[vw-cw-M,vh-ch-M],[hx,M],[hx,vh-ch-M],[M,hy],[vw-cw-M,hy]].map(x=>[x[0],x[1],ov(x[0],x[1])]).sort((a,b)=>a[2]-b[2]);L=P[0][0];Tp=P[0][1]}}
+ card.style.left=Math.round(Math.max(M,Math.min(L,vw-cw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-ch-M)))+"px"}
 addEventListener("resize",()=>{LAST="";if(CUR){place(true);clearTimeout(T.rz);T.rz=setTimeout(()=>{try{if(T.on&&STEPS[T.step]&&STEPS[T.step].prep)STEPS[T.step].prep(true)}catch(e){}LAST="";place(true)},350)}if(T.tip)tipPlace()});
 addEventListener("orientationchange",()=>{LAST="";setTimeout(()=>{if(CUR)place(true);if(T.tip)tipPlace()},250)});
 document.addEventListener("scroll",()=>{if(CUR)place(false)},true);

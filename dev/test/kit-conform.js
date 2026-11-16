@@ -104,7 +104,7 @@ const VPS=(SIZES||'755x1000').split(',');
     if(!o)break;(o.pg?pg:st).push([o.w,o.h]);if(!o.fig||o.small)tourFails.push('tutorial card without a full-body figure / with a small portrait: '+JSON.stringify(o));if(!o.next)break;
     await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());await sleep(1100)}
    const same=L=>L.every(x=>x[0]===L[0][0]&&x[1]===L[0][1]);if(pg.length<4)tourFails.push('tutorial: '+pg.length+' intro pages (want 4)');
-   if(!same(pg))tourFails.push('tutorial intro pages differ in frame size '+JSON.stringify(pg));/* a step card keeps the intro frame, or SHRINKS (height first) when that frame would cover the lit target (jtut place(), review/tut-place); it is never larger */if(st.length&&pg.length&&st.some(x=>x[0]>pg[0][0]||x[1]>pg[0][1]))tourFails.push('tutorial step card larger than the intro frame '+JSON.stringify(st)+' vs '+JSON.stringify(pg[0]));
+   if(!same(pg))tourFails.push('tutorial intro pages differ in frame size '+JSON.stringify(pg));if(st.length&&pg.length&&(st[0][0]!==pg[0][0]||st[0][1]!==pg[0][1]))tourFails.push('tutorial steps '+JSON.stringify(st[0])+' differ from the intro pages '+JSON.stringify(pg[0]));if(st.length&&!same(st))tourFails.push('tutorial steps differ in frame size '+JSON.stringify(st));
    await p.evaluate(()=>{try{kitCoachOff()}catch(e){}})}catch(e){errs.push('tour: '+String(e.message).slice(0,100))}
   /* loose floats over the tab bar (owner shot faa95830: co-op wait chips) */
   const floats=await p.evaluate(()=>{const t=document.getElementById('tabs');if(!t)return[];const T=t.getBoundingClientRect();
