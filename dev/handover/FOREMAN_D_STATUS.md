@@ -26,7 +26,7 @@ main at start = eba64ead4.
 | coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | PASS 24578406 (archived) |
 | servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | FAIL 3 items → servant-mline-r2 (archived) |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | SẴN SÀNG KIỂM 30c0931d (archived) → r1 reviewer |
-| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | SẴN SÀNG KIỂM 319dce59 (worker archived) → reviewer danh-balance-r1 |
+| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | SẴN SÀNG KIỂM 319dce59 (worker archived) → reviewer danh-balance-r1 session_01DgYSWncjcb6DFsEZJo6AvA RUNNING |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | worker session_01DgYSWng42neb9J7kedxhVp RUNNING (10:55Z) |
