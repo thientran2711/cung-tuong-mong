@@ -20,7 +20,7 @@ Base main at start: 900ace7fb.
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
-| D2 item-art | review/item-art-r2 @067a052b3 (docs only; 338 files replaced/added on CDN in place: 44 poem calligraphy, 44 incense colours, 25 rack-less dresses, 8 chubby teen pets, 121 img/hi 1024 masters) → review/item-art-r3 | sonnet | REVIEWING |
+| D2 item-art | review/item-art-r3 @58e26986f (game side OK) | sonnet | FAIL (art) → fix worker RUNNING on review/item-art-r4: redo tho-r06-b4 'Tông biệt', tho-r08-b1 garbled; + r01-b1, r03-b1, pet-cuuvi-tn / sutu-tn / linhmieu-tn poses |
 | C20 act-text resume | review/act-text @cef451ada → review/act-text-r1 | sonnet | REVIEWING text/scan/source fixes (brk 39→0, dots 8→0, kemgain→0, long 95→41); remaining 41 long rows + parser fixes BLOCKED on kit keeper (K8) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
 | D16 Tứ đức sub-styles + CDNH works (10 items × 4 tiers with art) + A13 teacher-fee notes | review/tuduc-sub | opus | RUNNING (worker; D17/D19 wait for it) |
