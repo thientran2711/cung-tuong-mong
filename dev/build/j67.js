@@ -51,7 +51,9 @@ const TOK67={
  eun:()=>eun67(),k:()=>{const s=son67();return s?s.name:"hoàng tử"},d:()=>{const d=dau67();return d?d.name:"công chúa"},
  mis:()=>{const m=srvMis67();return m?m.name:"chủ nhân"},foe:()=>S.foe||"kẻ thù",foed:()=>S.foeDad||"kẻ thù của cha",
  sj:A=>A.sj||"chuyện này",xung:()=>S.rank>=3?"nương nương":"tiểu chủ",Xung:()=>S.rank>=3?"Nương nương":"Tiểu chủ",n1:A=>A.n1||"",n2:A=>A.n2||"",emp:()=>"Hoàng thượng"};
-function fill67(s,A){return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
+/* a goal / step text that names the arc's people tells HER who they are (D47: the Mục tiêu row showed "Quý nhân ???" for the very woman the chapter says she found out): name + face known (j61 stage 2), nothing logged */
+function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="string")return;const L=[];for(const k of ["v","v2"])if(t.includes("{"+k+"}")){const v=rv67(A,k);if(v)L.push(v)}if(t.includes("{foe}")){const v=foe67();if(v)L.push(v)}if(L.length)k61Know(L,"",true,2)}catch(e){}}
+function fill67(s,A){if(typeof s==="string")arcReveal67(s,A);return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
 function who67(w,A){try{switch(w){
  case"v":case"v2":{const v=rv67(A,w);return v?pv(v):null}
  case"th":return S.thDead?null:pTH();case"emp":return pEmp();case"hh":return qOn()?pv(rivals[0]):null;case"maid":return S.maid?pMaid():null;case"me":return pMe();
@@ -275,7 +277,7 @@ ARC67.tt_co={o:"tt",t:"Quân cờ trong tay cha",w:"dad",sj:"thư từ giữa ng
   {n:"Nhận, rồi mua chuộc nàng",c:{bac:-40},o:()=>45+S.tamco/3,sc:1,f:"own",wx:"tai mắt của cha thành tai mắt của ngươi",l:{danh:-3},lx:"cha biết ngươi giở trò",rt:"Nàng thề trung với ngươi.",rf:"Nàng báo hết với cha."},
   {n:"Gửi trả về phủ",c:{},w:{duc:2,tamco:2},wx:"cung ngươi kín kẽ",f:"cold",lx:"cha giận",rt:"Cung nữ bị gửi trả về phủ."}]},
  c1:{h:"Cha muốn ngươi hạ một nhà đối đầu",w:"dad",need:["v"],t:"Cha viết: nhà của {v} cản đường ông ở triều. Ông muốn ngươi tìm lỗi của {v} trong cung.",o:[
-  {n:"Tìm lỗi của {v}",c:{suc:-5},o:()=>40+S.mat*5+S.tamco/4,sc:1,f:"obey",wx:"cha hài lòng",l:{danh:-4},lx:"{v} biết ngươi rình nàng",go:(A,ok)=>{const v=rv67(A,"v");if(v){if(ok)v.ev=(v.ev||0)+1;else oanAdd(v,S,12)}},rt:"Ngươi nắm được một lỗi của {v}.",rf:"{v} bắt gặp người của ngươi rình rập."},
+  {n:"Tìm lỗi của {v}",c:{suc:-5},o:()=>40+S.mat*5+S.tamco/4,sc:1,f:"obey",wx:"cha hài lòng",l:{danh:-4},lx:"{v} biết ngươi rình nàng",go:(A,ok)=>{const v=rv67(A,"v");if(v){if(ok)return evA(S,v,1)?`Nắm được một lỗi thật của ${v.name}: chứng cứ +1.`:`${v.name} không có lỗi gì; ngươi chỉ biết ${harmTxt(v)}.`;else oanAdd(v,S,12)}},rt:"Ngươi cho người rình {v}.",rf:"{v} bắt gặp người của ngươi rình rập."},
   {n:"Báo cho {v} đề phòng",c:{},w:{duc:4},wx:"{v} mang ơn ngươi",lx:"cha mà biết sẽ giận",f:"own",go:(A)=>{const v=rv67(A,"v");if(v)relAdd(S,v,20)},rt:"{v} lặng người, rồi khẽ cảm ơn."},
   {n:"Làm ngơ",c:{},w:{duc:1},wx:"không dính vào",lx:"cha thấy ngươi vô dụng",f:"cold",rt:"Ngươi để thư cha trong hộp, không hồi âm."}]},
  c2:{h:"Hoàng hậu hặc phủ Tể tướng",w:"hh",need:["hh"],t:"Họ ngoại của Hoàng hậu {hh} dâng sớ hặc cha ngươi kết bè. Cha nhắn: lo lót cho ông.",o:[
@@ -396,7 +398,7 @@ ARC67.tt_mat={o:"tt",t:"Mật ước với Hoàng hậu",w:"hh",sj:"mật ước
   {n:"Trình thư lên Hoàng thượng",c:{hh:-15},o:A=>30+(A.f.ev?20:0)+S.sung/6,e:["win2","lose"],rt:"Hoàng thượng nổi giận với họ ngoại của Hoàng hậu.",rf:"Hoàng thượng cho là ngươi vu cáo, cả cha cũng bị trách."},
   {n:"Đốt hết, đứng ngoài",c:{},w:{duc:4},e:"mid",lx:"bỏ lỡ thời cơ (thế lực nhà -8)",rt:"Lửa liếm sạch mấy bức thư."}]}},
  E:{win:{k:1,tag:"Hoàng hậu nợ ngươi",w:"hh",t:"Hoàng hậu {hh} buộc phải che chở ngươi. Nàng không còn cản bước ngươi, còn nói tốt cho ngươi trước Thái hậu.",fx:{hh:25,th:5,danh:4}},
-  win2:{k:1,tag:"Lật mật ước, Trung cung lung lay",w:"emp",t:"Hoàng thượng trách Hoàng hậu kết bè với ngoại thần, tước quyền quản lục cung của nàng một thời gian. Ngươi được ngài tin là người trung thực.",fx:{sung:6,danh:8,hh:-20},go:()=>{const q=rivals[0];if(q&&q.queen){q.ev=(q.ev||0)+2;return `Chứng cứ về Hoàng hậu ${q.name} +2.`}return""}},
+  win2:{k:1,tag:"Lật mật ước, Trung cung lung lay",w:"emp",t:"Hoàng thượng trách Hoàng hậu kết bè với ngoại thần, tước quyền quản lục cung của nàng một thời gian. Ngươi được ngài tin là người trung thực.",fx:{sung:6,danh:8,hh:-20},go:()=>{const q=rivals[0];if(q&&q.queen){evStory(q,2,"kết bè với ngoại thần");return `Chứng cứ về Hoàng hậu ${q.name} +2.`}return""}},
   mid:{k:0,tag:"Mật ước chìm xuống",t:"Không ai nhắc lại mật ước. Cha giữ được mình, Hoàng hậu thôi để ý ngươi.",fx:{duc:3,hh:5}},
   lose:{k:-1,tag:"Bị coi là vu cáo",w:"emp",t:"Hoàng thượng cho rằng ngươi vu cáo Trung cung. Cha bị trách, ngươi bị lạnh nhạt.",fx:{sung:-8,danh:-6,hh:-10},go:()=>e67dad(-8)}}};
 /* ================= ĐẠI TƯỚNG QUÂN ================= */
@@ -743,7 +745,7 @@ ARC67.cn_ban={o:"cn",t:"Tri kỷ ở Tân Giả khố",w:"maid",sj:"chuyện ng�
   {n:"Đưa Tố Nga ra làm chứng trước Thái hậu",c:{suc:-4},o:A=>30+(A.f.secret?20:0)+(A.f.saved?10:0),e:["win","lose"],rt:"Thái hậu nổi giận, cho tra đến cùng.",rf:"Lời một tội nô không ai tin, ngươi bị trách."},
   {n:"Giữ bí mật, dùng Tố Nga làm tai mắt",c:{},o:A=>50+(A.f.saved?20:0),e:["win2","mid"],rt:"Tố Nga thành tai mắt tin cẩn nhất của ngươi.",rf:"Tố Nga sợ hãi xin rời cung."},
   {n:"Xin cho Tố Nga xuất cung về quê",c:{bac:-40},w:{duc:4},e:"mid",lx:"mất một nhân chứng",rt:"Tố Nga ra cung, lạy ngươi ba lạy."}]}},
- E:{win:{k:1,tag:"Vạch tội ác cái giếng",w:"th",t:"Thái hậu tra ra kẻ bỏ thuốc. Ngươi được khen là người có nghĩa, Thái hậu tin ngươi hơn hẳn.",fx:{th:15,danh:8,hh:-10},go:()=>{const q=rivals[0];if(qOn()){q.ev=(q.ev||0)+1;return `Chứng cứ về Hoàng hậu ${q.name} +1.`}return""}},
+ E:{win:{k:1,tag:"Vạch tội ác cái giếng",w:"th",t:"Thái hậu tra ra kẻ bỏ thuốc. Ngươi được khen là người có nghĩa, Thái hậu tin ngươi hơn hẳn.",fx:{th:15,danh:8,hh:-10},go:()=>{const q=rivals[0];if(qOn()){evStory(q,1,"dính líu vụ bỏ thuốc ở giếng");return `Chứng cứ về Hoàng hậu ${q.name} +1.`}return""}},
   win2:{k:1,tag:"Tai mắt trong bóng tối",t:"Tố Nga hầu bên ngươi, biết hết đường đi lối lại của Càn Ninh cung. Ngươi nghe được những gì người khác không nghe.",fx:{mat:2,tamco:3}},
   mid:{k:0,tag:"Tình bạn giữ trọn",t:"Tố Nga thoát khổ. Bí mật ngủ yên, ngươi giữ được lòng mình.",fx:{duc:4}},
   lose:{k:-1,tag:"Bị cho là vu cáo",t:"Lời tố của Tố Nga bị bác. Ngươi mang tiếng vu cáo, Hoàng hậu càng ghét ngươi.",fx:{danh:-8,hh:-15}}}};
@@ -1567,7 +1569,7 @@ ARC67.s_thay={o:"*",ok:nsrv67,t:"Lão thái giám",w:"eun",sj:"lời dạy của
   {n:"Xin ông chỉ một bí mật lớn",c:{},o:A=>35+(A.f.book?25:0),e:["win2","lose"],rt:"Ông chỉ cho ngươi một bí mật đủ để nắm thóp một phi tần.",rf:"Ông giận vì ngươi tham, ra đi không lời từ biệt."},
   {n:"Chỉ xin ông giữ sức khỏe",c:{},w:{duc:3},e:"mid",lx:"không được gì thêm",rt:"Ông cười hiền."}]}},
  E:{win:{k:1,tag:"Có người trong Nội vụ phủ",w:"eun",t:"Tổng quản mới là người của ngươi. Mọi tin trong cung đến tai ngươi trước.",fx:{mat:2,danh:4}},
-  win2:{k:1,tag:"Bí mật của ba đời vua",t:"Ngươi nắm được một bí mật quý. Không ai biết ngươi có nó.",fx:{mat:1,tamco:4},go:()=>{const L=liveRivals(false).filter(v=>v.rank>S.rank);const v=L[0];if(v){v.ev=(v.ev||0)+2;return `Chứng cứ về ${v.name} +2.`}return""}},
+  win2:{k:1,tag:"Bí mật của ba đời vua",t:"Ngươi nắm được một bí mật quý. Không ai biết ngươi có nó.",fx:{mat:1,tamco:4},go:()=>{const L=liveRivals(false).filter(v=>v.rank>S.rank);const v=evGuilty(S,L);const n=v?evA(S,v,2):0;if(n)return `Chứng cứ về ${v.name} +${n}.`;return""}},
   mid:{k:0,tag:"Tiễn lão thái giám",t:"Lão thái giám về quê. Ngươi nhớ những lời ông dạy.",fx:{tamco:2,duc:2}},
   lose:{k:-1,tag:"Mất lòng lão thái giám",t:"Ông ra đi giận dỗi, đám thái giám cũ coi ngươi là kẻ tham.",fx:{mat:-1,danh:-4}}}};
 ARC67.s_ban={o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù với {v}",g:"{v} vẫn là cái gai trong mắt ngươi. Nhưng khi cả hai cùng bị một kẻ mạnh hơn nhắm vào, có lẽ kẻ thù của kẻ thù là tri kỷ.",
@@ -1606,7 +1608,7 @@ ARC67.s_ban={o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù v�
  const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);Object.values(ARC67).forEach(a=>Object.values(a.B).forEach(walk))})();
 
 /* one-line objective of the main quest on the Hành sự tab */
-(function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch){const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
+(function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
 const QUEST67={
  tt:{t:"Ván cờ phủ Tể tướng",e:[["Phủ Tể tướng đứng sau ngôi Trung cung",{danh:10,th:6,bac:80},"Qua ba chương, nhà Tể tướng thành chỗ dựa vững nhất của ngươi trong triều."],["Giữ được nhà, giữ được mình",{danh:4},"Ngươi đi qua sóng gió của phủ Tể tướng, không mất mà cũng không được bao nhiêu."],["Một mình giữa triều đình",{tamco:3},"Phủ Tể tướng không còn đỡ được ngươi; từ nay ngươi tự đi đường mình."]]},
  dtq:{t:"Vinh nhục nhà tướng",e:[["Nhà tướng môn vững như núi",{danh:10,sung:6,th:4},"Binh quyền, chiến công và lòng vua đều đứng về phía nhà ngươi."],["Nhà tướng còn đứng",{danh:4},"Nhà ngươi qua được bão tố, vinh có, nhục có."],["Tướng môn sa sút",{tamco:3},"Nhà tướng sa sút, ngươi phải tự gây dựng chỗ đứng."]]},
