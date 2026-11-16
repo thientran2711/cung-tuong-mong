@@ -293,7 +293,7 @@
 | flip-hand review r1 (sonnet, SMALL) of 745e1ab8 | review/flip-hand | main s21 | session_01UV1SzhQEsHLJz1pK4VbSsS | DONE PASS 673dafc09 (review/flip-hand-r1; flag: 1180x820 touch moment = mostly bare forearm) | 16/11 17:32Z |
 | stage-pets r2 successor (sonnet): backdrop wait, S pet size, 3-people samples A (narrow right column) | B (shrink) for owner | review/stage-pets | main s21 | session_01UV1Szi6MsAMKHyAGi1WvNc | RUNNING | 16/11 17:35Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | RUNNING | 16/11 17:36Z |
-| D GO-LIVE prep (worker merges+tests; Foreman D runs golive.sh --yes itself) | review/<each>-golive | D | session_01DgYSWnvC5ntuJ6oLspAoXu | RUNNING | 16/11 17:45Z |
+| D GO-LIVE prep (worker merges+tests; Foreman D runs golive.sh --yes itself) | review/<each>-golive | D | session_01DgYSWnvC5ntuJ6oLspAoXu | DONE at rollover (archived; successor below) | 16/11 17:45Z |
 | NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | session_01DgYSWmUVjZctWQWG8HUzdY | DONE SẴN SÀNG KIỂM f699bbf4 (archived) | 16/11 17:45Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan-r1 | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | DONE PASS 0e8e3684 | 16/11 |
 | status-icons r2 review (sonnet, SMALL) of 0613ec0a5 | review/status-icons-r1 | main s21 | session_01UV1Szkts9Mdx3Ydnpyf3No | DONE PASS e47bba8a | 16/11 |
@@ -381,3 +381,4 @@
 | coop-one-world FIX (opus, BIG co-op): world computed on host only — worldOn() guard on every world loop, merge3 host-wins for W numbers, thIll/cm/men → W_KEYS, CI probe guard (reports/coop-one-world.md plan b,c,d,f; flip = night-final, contests = coop-contest-fix) | review/coop-one-world | main s23 | session_01UV1Szj18sSZbfw4DZWoqJh | RUNNING | 16/11 20:06Z |
 | FIG-PROPORTION REDO (sonnet art; owner 20:12Z REJECTED fig-proportion: heads too small vs body — man in the middle + both old women of the 3 examples): match approved head size/shoulder ratio exactly, 3 examples first → owner, then all 85+scenes | review/fig-proportion-art | C | session_011xDdVRzEtFchdNQKaMfih7 | RUNNING | 16/11 20:14Z |
 | suc-khoe fix (opus): r1 FAIL F2 F4 F5 BLOCKING + F6–F10, from review/suc-khoe-r1 41716164 | review/suc-khoe-fix | D | session_01DgYSWmv4sq7YAmDVGXa2JD | RUNNING | 16/11 20:20Z |
+| D GO-LIVE prep successor (opus; handover reports/d-golive.md) | review/<each>-golive | D | session_01DgYSWnR8rVEcaej6KJZLQG | RUNNING | 16/11 20:27Z |
