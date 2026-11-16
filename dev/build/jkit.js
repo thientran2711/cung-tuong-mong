@@ -10,6 +10,26 @@ const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physi
  fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-m\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
   return((m&&this.men[m[1]])||un?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
+/* KIT 33.8 · STAGE PET (owner 16/11 18:00Z, review/stage-pets) — the ONE "theo hầu" pet of every person on a room / place stage (j59), player and NPCs:
+   it stands in ONE fixed spot, on the person's RIGHT, feet on the same floor line, its painted body overlapping the person's outer art by at most KIT_PET.ov of its own width
+   (never the torso / face: the class heights stay below the waist line). No fancy placement (no perch on a shoulder / hand), no outdoor-only rule, big pets appear anywhere.
+   Size = the shared kit CLASS per species (S small / M medium / L large) × the woman body height H of the stage: h = KIT_PET.h[class] (visible height / H).
+   Art: img/pet-stage/pet-<key>.webp (cut-out, Foreman C); while a species has none, PLACEHOLDER = the existing transparent pet picture of the pet's growth stage (marked data-ph="1" / class ph).
+   kitPetOf(person) reads the already-synced follow data (p.pets / p.petOn) — co-op sends nothing new. Static picture; the only motion is a 1.5 px idle bob under Hiệu ứng "Đầy đủ". */
+const KIT_PET={h:{S:.18,M:.26,L:.34},ov:.5,
+ cls:{meomuop:"S",hoami:"S",tho:"S",cavang:"S",meo:"S",sao:"S",uyenuong:"S",cachep:"S",vet:"S",lyngu:"S",ngoctho:"S",
+  cho:"M",sutu:"M",linhmieu:"M",camke:"M",cuuvi:"M",phuong:"M",
+  hac:"L",thienma:"L",bachloc:"L",kylan:"L",thanhlong:"L"},img:{}};
+window.KIT_PET=KIT_PET;
+function kitPetClass(k){try{k=typeof petK==="function"?petK(k):k}catch(e){}return KIT_PET.cls[k]||"M"}
+function kitPetOf(who){try{if(!who)return null;for(const w of [typeof figWho==="function"?figWho(who):null,who.ref,who,who.__kp]){if(w&&typeof w==="object"&&Array.isArray(w.pets)&&typeof tsbPetOn==="function"){const P=tsbPetOn(w);if(P)return P}}}catch(e){}return null}
+function kitPetLoad(src,cb){const c=KIT_PET.img;if(c[src]!==undefined)return c[src];c[src]=null;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{c[src]={ar:im.naturalWidth/Math.max(1,im.naturalHeight)};if(cb)cb()};im.onerror=()=>{c[src]=false;if(cb)cb()};im.src=src;return null}
+/* → {src, ph, cls, k} or null while the picture is still being looked for */
+function kitPetArt(P,cb){const k=petK(P.t),s=`img/pet-stage/pet-${k}.webp`;const r=kitPetLoad(s,cb);
+ const g=P.stg!=null?P.stg|0:2,sc=[.62,.8,1,1][Math.max(0,Math.min(3,g))];
+ if(r)return{src:s,ph:false,cls:kitPetClass(k),k,sc};if(r===null)return null;
+ const f=typeof petPSrc==="function"?petPSrc(P,false):petSrc(k,false);const q=kitPetLoad(f,cb);return q?{src:f,ph:true,cls:kitPetClass(k),k,sc}:null}
+window.kitPetClass=kitPetClass;window.kitPetOf=kitPetOf;window.kitPetArt=kitPetArt;
 /* KIT 33.6 · kitFigBody(src, cb) — the ONE body measurement for every full-body figure (room / place stages j59, event stages jk4,
    week book): alpha bbox (t,b,l,r) + ht = head top = first rows of fair forehead skin minus a hair allowance, so crowns, hairpins and
    phoenix headdresses above the head are NOT counted as height. Returns the result when ready, else null and calls cb once measured.

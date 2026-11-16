@@ -2423,6 +2423,15 @@ Tests (755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3 — portrait p
 person without art; slot centres, feet line, chip tops, overlaps, her count, counts, page errors, old save) and `dev/test/stage-counts.js`
 (map count = arrival count on every place, consort and maid roads). Shots: `dev/shots/stage-slots/` (before = main, after = this build).
 
+### 33.8 STAGE PET · thú theo hầu trên sân khấu (owner 16/11 17:30Z + 18:00Z, review/stage-pets) — `KIT_PET` / `kitPetOf` / `kitPetArt` (jkit.js) + `j59petPut` (j59.js) — awaiting kit review
+- WHAT: every person on a room / place stage (j59: her, every NPC, co-op friend) shows their ONE "theo hầu" pet (`p.pets[p.petOn]`, `tsbPetOn`; already synced in co-op, no new packet) in ONE fixed spot. A stranger (`kitKnown` false) shows no pet. No fancy placement (no shoulder / hand perch), no outdoor-only rule: big pets appear anywhere.
+- SPOT: on the person's RIGHT, feet on the person's floor line, in front of the person: the pet's visible left edge = person's visible right edge − `KIT_PET.ov` (.5) × the pet's visible width. Static `<img class="kspet">` (z 2, no pointer events); only motion = 1.5 px idle bob under Hiệu ứng "Đầy đủ" (`.stage.j59fx`), none under reduced motion.
+- SIZE = the kit CLASS per species × the woman body height H of the stage: `KIT_PET.h` S .18 · M .26 · L .34 (visible pet height / H), times the growth scale of the pet (Non .62, Thiếu niên .8, grown / Linh thú 1). `KIT_PET.cls`: S = meomuop hoami tho cavang meo sao uyenuong cachep vet lyngu ngoctho · M = cho sutu linhmieu camke cuuvi phuong · L = hac thienma bachloc kylan thanhlong. (Foreman C's art table decides the final classes: change ONLY `KIT_PET.cls`.)
+- LAYOUT: the slot rule (33.7) counts the pet: a person fits a slot when art/2 + pet×(1−ov) + widest art/2 ≤ slot spacing, so the pet never touches the right neighbour; everyone scales down together (same rule as before) and, when that is not enough, the page holds one person fewer.
+- ART: `img/pet-stage/pet-<key>.webp` (Foreman C, cut-out). Until a species has it: PLACEHOLDER = the existing transparent pet picture of the pet's growth stage (`petPSrc`), the `<img>` carries `data-ph="1"`. Dropping C's file on the CDN replaces it, no code change.
+- OCCLUSION (owner: "check that large pets do not cover the person's body"): measured from pixel alpha masks by `dev/test/stage-pets.js` (face band = head top → 22 % of body; torso = core columns, 25–75 % of body); numbers in dev/handover/reports/stage-pets.md.
+- Kit page sample §33.8 (jkitpage): S / M / L next to the kit woman silhouette.
+
 ## 35. LOADING SCREEN · NHẬP CUNG LẦN ĐẦU + kitProgress (review/loading, `dev/build/jload.js` before j84) — awaiting kit review
 Owner 11/14: images + sounds are downloaded to the device on first entry with a proper loading screen; afterwards the game runs offline.
 - Screen `#kload.modal.kpscene.kload` = the `title` backdrop (`kitBackdrop(el,"title")`, KIT_BD, no new art) + ONE kit scene panel

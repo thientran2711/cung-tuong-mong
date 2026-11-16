@@ -104,6 +104,10 @@ KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọ
 /* §28.19b corner mark (review/mood-dialog) */
 KIT_SAMPLES.push({id:"§28.19b",title:"kitSceneArt o.mark: dấu tâm trạng ở góc tranh",html:()=>`<div class="kitpg-row">${[["vui","img/ev-mood-vui.webp","Vui"],["lo","img/ev-tan-phong.webp","Khương Lạc Anh được tấn phong"],["m-gian","img/ev-mood-gian.webp","Giận"],["an","img/ev-mood-an.webp","Chưa rõ lòng người"]].map(([k,src,lab])=>`<div style="width:220px">${kitSceneArt(src,lab,{shape:"wide",mark:`img/kit/emo-${k}.webp`,markAlt:lab})}</div>`).join("")}</div>`});
 
+/* §33.8 STAGE PET (review/stage-pets): the ONE following pet beside a person, size class S / M / L per species (KIT_PET); shown to scale next to the kit woman silhouette */
+KIT_SAMPLES.push({id:"§33.8",title:"KIT_PET: thú theo hầu cạnh người (cỡ S / M / L)",html:()=>{const H=170,row=[["S","meomuop"],["M","cho"],["L","thanhlong"]];
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:18px">${row.map(([c,k])=>{const ph=Math.round(H*KIT_PET.h[c]/.78);return `<div title="${c} · ${k}" style="display:flex;align-items:flex-end"><img src="img/kit/unknown-fig-f.webp" alt="" style="height:${H}px;width:auto"><img src="${petSrc(k)}" alt="" data-ph="1" style="height:${ph}px;width:auto;margin-left:-${Math.round(ph*.15)}px"></div>`}).join("")}</div>`}});
+
 /* §8 PANEL KIT — the ONE pop-up frame (review/kit-popup-sample, owner 11/15 "cho xem kit pop-up"): the kit page cannot draw #modal inline
    (one modal, fixed, above the game), so this sample lists the variants and each button opens the REAL pop-up with kitModal (same data
    path as the game: kpBuild + kitEventStage + kitEvArt + kitDlgFit); the kit page hides while it is open and comes back on close.

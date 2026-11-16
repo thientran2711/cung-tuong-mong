@@ -95,8 +95,17 @@ function j59fill(tk){if(!tk)return;const ppl=typeof curPeople==="function"?curPe
   const im=document.createElement("img");im.className="figimg j59sil";im.alt="";im.src=`img/kit/unknown-fig-${g}.webp`;
   im.onerror=()=>{im.remove();b.classList.remove("fig","j59silt");const md=b.querySelector(".md");if(md)md.style.display=""};
   const md=b.querySelector(".md");if(md)md.style.display="none";b.insertBefore(im,b.firstChild);b.classList.add("fig","j59silt")})}
-function j59clear(tk){const st=document.getElementById("stage");try{if(st){delete st.dataset.j59pg;delete st.dataset.j59slots;st.querySelectorAll(".j59more").forEach(c=>c.remove())}}catch(e){}
+function j59clear(tk){const st=document.getElementById("stage");try{if(st){st.querySelectorAll(".kspet").forEach(e=>e.remove());delete st.dataset.j59pg;delete st.dataset.j59slots;st.querySelectorAll(".j59more").forEach(c=>c.remove())}}catch(e){}
  if(tk){["left","right","top","bottom","width","height"].forEach(k=>tk.style.removeProperty(k));tk.querySelectorAll(".tok").forEach(t=>{["left","bottom","display","width"].forEach(k=>t.style.removeProperty(k))})}}
+/* KIT 33.8: put the stage pets (one <img.kspet> each, static; reused between layouts) at their fixed spot: visible left edge = person's visible right edge - ov x pet width, feet on the floor line */
+function j59petPut(st,L,H,fo,pVH){const keep=new Set();
+ for(const [r,cx,cw,key] of L){if(!r)continue;const vh=pVH(r,H),ih=vh/Math.max(.05,r.b.b-r.b.t),iw=ih*r.b.ar,vw=iw*(r.b.r-r.b.l);
+  const left=cx+cw/2-KIT_PET.ov*vw-iw*r.b.l,bottom=fo-(1-r.b.b)*ih;
+  let im=st.querySelector('.kspet[data-pk="'+key+'"]');if(!im){im=document.createElement("img");im.className="kspet";im.alt="";im.decoding="async";im.draggable=false;im.dataset.pk=key;st.appendChild(im)}
+  if(im.getAttribute("src")!==r.a.src){im.setAttribute("src",r.a.src);im.crossOrigin="anonymous"}
+  im.dataset.pet=r.a.k;im.dataset.cls=r.a.cls;if(r.a.ph)im.dataset.ph="1";else delete im.dataset.ph;/* ph = PLACEHOLDER picture (no img/pet-stage art for this species yet) */
+  im.style.cssText=`left:${left.toFixed(1)}px;bottom:${bottom.toFixed(1)}px;height:${ih.toFixed(1)}px;width:${iw.toFixed(1)}px`;keep.add(im)}
+ st.querySelectorAll(".kspet").forEach(e=>{if(!keep.has(e))e.remove()})}
 function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;const tk=document.getElementById("tokens");const me=document.getElementById("mefig");
  st.classList.add("j59","j59slot");st.classList.toggle("j59fx",!!(typeof OPT!=="undefined"&&OPT&&OPT.fxon));st.style.setProperty("--halo",haloColor());
  {const au=document.getElementById("j59aura");if(au)au.remove()}j59sel(st,tk,me);
@@ -112,6 +121,10 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   if(im){const s=im.getAttribute("src");return{tok,im,p,tag:tok.querySelector(".tag"),b:J59BB[s],f:j59fac(s,p),ar:im.naturalWidth/im.naturalHeight}}
   return{tok,p,tag:tok.querySelector(".tag"),nf:1}});
  const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
+ /* KIT 33.8 STAGE PET: the ONE following pet of each person (kitPetOf: p.pets / p.petOn, already synced in co-op) stands in a fixed spot on that person's right */
+ const j59pr=who=>{try{if(who&&who!==S&&typeof kitKnown==="function"&&!kitKnown(who))return null;const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
+ const mePet=me?j59pr(S):null;E.forEach(x=>{x.pet=x.im?j59pr(x.p):null});
+ const pVH=(r,h)=>r?h*KIT_PET.h[r.a.cls]*r.a.sc:0,pVW=(r,h)=>r?pVH(r,h)*r.b.ar*(r.b.r-r.b.l)/Math.max(.05,r.b.b-r.b.t):0,pEx=(r,h)=>r?pVW(r,h)*(1-KIT_PET.ov):0;
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
  const KF=KIT_FIG;
  let topR=8;try{const t=document.getElementById("sc-t");if(t&&t.offsetHeight){const q=t.getBoundingClientRect();if(q.bottom>R.top)topR=Math.max(topR,q.bottom-R.top+4)}}catch(e){}
@@ -149,7 +162,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  /* review/j59-fix: a slot is never narrower than a name chip (min 60 px + 8): beside a reserved plaque column (844x390, 2-column plaques)
     the page holds fewer people instead of squeezing two into the gap with overlapping names */
  const J59SWMIN=68;
- const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw;
+ const mxW=h=>Math.max(me?coreW(meX,h):0,...F.map(x=>coreW(x,h)));/* a pet on the right must end before the right neighbour's art begins: w/2 + pet + widest/2 <= spacing */
+ const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw&&(!mePet||coreW(meX,h)/2+pEx(mePet,h)+mxW(h)/2<=g.sw)&&F.every(x=>!x.pet||coreW(x,h)/2+pEx(x.pet,h)+mxW(h)/2<=g.sw);
  /* measure EVERY name chip (all pages), not only the page on screen: a hidden chip reads 0 px and the floor band (fo) would shift between pages (reviewer, 844x390 page 3) */
   E.forEach(x=>{x.tok.style.display=""});if(mt)mt.classList.remove("j59off");
   let tagH=Math.max(14,mt&&mt.firstChild?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag?x.tag.offsetHeight:0));
@@ -166,6 +180,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  tagH=Math.max(14,mt&&mt.firstChild?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag?x.tag.offsetHeight:0));
  {const H0=Z.H;Z=size(tagH);Z.H=Math.min(Z.H,H0);G=geo(N,Z)}
  const {fo,H}=Z;CAP=sH-fo-topR;
+ st.dataset.j59dbg=[N,H.toFixed(0),G.sw.toFixed(0),mxW(H).toFixed(0),mePet?pEx(mePet,H).toFixed(0):0,...F.map(x=>(coreW(x,H)).toFixed(0)+"+"+(x.pet?pEx(x.pet,H).toFixed(0):0))].join(" ");
  /* pages: page 1 = her (slot 1) + N−1 others, then N others per page */
  const first=me?N-1:N;const pages=M<=first?1:1+Math.ceil((M-first)/N);
  const key=E.map(x=>x.im?x.im.getAttribute("src"):"t"+x.tok.dataset.p).join("|")+"#"+N;if(st.__j59k!==key){st.__j59k=key;st.__j59p=0}
@@ -180,17 +195,17 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCx(i,kOn,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
- const centres=[];let slot=0;
+ const centres=[];let slot=0;const usedPets=[];
 /* next to a reserved panel the edge figure's core is pulled in so it ends at the panel edge (a wide robe may step over its slot by the
     neighbour allowance, never under a panel — review/small-bugs-2) */
- const inLim=(cx,cw)=>{if(G.pR&&cx+cw/2>G.limR)cx=G.limR-cw/2;if(G.pL&&cx-cw/2<G.limL)cx=G.limL+cw/2;return cx};
- if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=((kCL(mb)+kCR(mb))/2-.5)*meW;const cx=inLim(cxOf(slot++),coreW(meX,H));centres.push(cx);
+ const inLim=(cx,cw,ex)=>{ex=ex||0;if(G.pR&&cx+cw/2+ex>G.limR)cx=G.limR-cw/2-ex;if(G.pL&&cx-cw/2<G.limL)cx=G.limL+cw/2;return cx};
+ if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=((kCL(mb)+kCR(mb))/2-.5)*meW;const cx=inLim(cxOf(slot++),coreW(meX,H),pEx(mePet,H));centres.push(cx);usedPets.push([mePet,cx,coreW(meX,H),"me"]);
   me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
    const d=R.top+st.clientTop+floorY+3-g.getBoundingClientRect().top;if(Math.abs(d)>.3)mt.style.top=(floorY+3+d).toFixed(1)+"px"}}
-  for(const x of vis){let cx=cxOf(slot++);if(!x.nf)cx=inLim(cx,coreW(x,H));centres.push(cx);const t=x.tok;
+  for(const x of vis){let cx=cxOf(slot++);if(!x.nf)cx=inLim(cx,coreW(x,H),pEx(x.pet,H));centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,coreW(x,H),"p"+(x.tok.dataset.p||"")]);
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
   x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
@@ -198,6 +213,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
   t.style.left=(cx-cw/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
+ j59petPut(st,usedPets,H,fo,pVH);
  j59chips(st,R,pages>1?{pg,pages,before,after,fo,CW:G.CW,x0L:G.xl,x0R:G.x0R}:null);
  st.__j59here=persons}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
@@ -229,6 +245,10 @@ const css=document.createElement("style");css.textContent=`
 /* the stage's bottom wash (::after, #fff6e866) must sit under the people, not over her figure */
 .stage.j59::after{z-index:0}
 .stage.j59 #mefig{z-index:1}
+.stage.j59 .kspet{position:absolute;z-index:2;max-width:none;max-height:none;pointer-events:none;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 4px 4px #0004)}
+.stage.j59.j59fx .kspet{animation:kspetbob 3.4s ease-in-out infinite}
+@keyframes kspetbob{0%,100%{translate:0 0}50%{translate:0 -1.5px}}
+@media (prefers-reduced-motion:reduce){.stage.j59 .kspet{animation:none!important}}
 .stage.j59 .tokens{z-index:1}
 .stage.j59 #mefig.j59sz{max-height:none!important}
 .stage.j59 #mefig{filter:${HG(5,45)};pointer-events:auto;cursor:pointer}
