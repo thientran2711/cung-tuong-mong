@@ -265,3 +265,6 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* ONE CORE (OD:L1267) for the full origin roads (jroad.js, ROAD_MAP.md): chapter .first … .last of a road are Phần giữa after the premise
+   chapter (.first−1); finTier = the family reward tier of the road finale by its ending (win / mid / lose; −1 = none), as j67 chFinale67. */
+Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1}}});
