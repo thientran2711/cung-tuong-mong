@@ -38,16 +38,8 @@ function chapGoBtn(M){return M&&M.go?`<p class="chapgo"><button type="button" cl
 function chapInline(M,skipSteps){if(!M||M.mode==="all")return"";if(M.mode==="ms")return chapGoBtn(M);const L=M.steps.map(x=>[x.ok,`${x.t}${x.d?`<small class="past"> · ${x.d}</small>`:""}`]);
  return (skipSteps||!L.length?"":kitChecks(L))+(M.risks.length?rows67(M.risks.map(r=>[r[0],r[1],r[2]||""])):"")+chapGoBtn(M)}
 function chapThumb(src,n){return src?kitSceneArt(src,n||"",{shape:"tall",size:"thumb",cap:false}):""}
-/* the detail panel */
-function chapOpen(){const M=chapModel();if(!M||Q.some(m=>m.kit&&m.kit.chap))return;
- const S1=[];
- S1.push({h:"Mục tiêu",rows:[["Chương",M.sub&&/Chương/.test(M.sub)?M.sub:`${M.kicker}${M.sub?" · "+M.sub:""}`],["Mục tiêu",M.goal],["Kế tiếp",M.next]]});
- if(M.steps.length)S1.push({h:M.mode==="arc"?"Các hồi":"Tiến độ",html:kitChecks(M.steps.map(x=>[x.ok,`${x.t}${x.d?`<small class="past"> · ${x.d}</small>`:""}`]))});
- if(M.past.length)S1.push({h:"Chuyện đã qua",html:M.past.map(x=>kitSkillCard({kind:"hoi",name:x.t,max:0,img:x.img,desc:x.d})).join("")});
- else if(M.mode!=="all")S1.push({h:"Chuyện đã qua",html:`<p class="kpnote">Chương này chưa có hồi nào khép lại.</p>`});
- if(M.risks.length)S1.push({h:"Cần lưu ý",rows:M.risks.map(r=>[r[0],r[1],r[2]||""])});
- if(M.go)S1.push({h:"",html:chapGoBtn(M)});
- kitModal({kind:"info",title:`${M.kicker} · ${M.title}`,sub:M.sub,sections:S1,btn:"Lui",chap:1})}
+/* the detail panel = kitGoalDetail (jgoal.js, KIT §72), grown with chapModel; no second panel */
+function chapOpen(){if(typeof kitGoalDetail==="function"){if(Q.some(m=>m.kit&&m.kit.chap))return;kitGoalDetail()}}
 /* the rank card: what is still needed for the next rank */
 function chapRankOpen(){if(Q.some(m=>m.kit&&m.kit.chap))return;if(S.rank>=7||S.out||typeof promoReq!=="function")return;const R=promoReq().slice().sort((a,b)=>a[0]-b[0]);const ok=R.filter(x=>x[0]).length;
  kitModal({kind:"info",title:`Sắc phong: ${chapRank(S.rank+1)}`,sub:`Đạt ${ok}/${R.length} điều`,sections:[{h:"Điều kiện",html:kitReqRows(R)},{h:"",html:`<p class="chapgo"><button type="button" class="kbtn alt" data-chapgo="1">Đi làm: Hành sự</button></p>`}],btn:"Lui",chap:1})}

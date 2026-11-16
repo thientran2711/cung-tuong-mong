@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
- await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
+ await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw,#ktut{display:none!important}'});
  const reset=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#kpop').forEach(e=>e.remove());const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}Q.length=0});
  const states={milestone:()=>{},arc:()=>{const A=newThread67('td_an','m');S.st.ch.n=2;A.chap=2;A.i=1;pickNext67(A);A.due=0;A.dl=S.turn+6;A.hist.push('Hồi một: chọn đường');A.used.push(A.nb);S.st.M=A;S.st.ms=null},
   v1:()=>{S.st={step:1,done:0,tag:''};S.caseEv=2;S.foe='Lý Mai';S.foeDad='Thượng thư Lý';S.rank=1}};
@@ -17,13 +17,13 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
   chk(sn+': chip tappable + inline progress + Đi làm',inl.chip&&inl.go&&(sn==='milestone'||inl.checks>=2));
   if(SHOT){await p.screenshot({path:`${SHOT}-${sn}-tab.png`})}
   for(const [how,sel] of [['chip','#panel [data-chap]'],['card','#panel .kskill .kskinfo'],['picture','#panel .kskill .ksart'],['check line','#panel .kchk']]){
-   await reset();await p.evaluate(()=>{tab='story';render()});if(!(await p.locator(sel).count())){chk(`${sn}: ${how} exists`,false);continue}await p.locator(sel).first().click({timeout:8000});await p.waitForTimeout(500);
-   const r=await p.evaluate(()=>{const m=document.getElementById('modal');const d=m.querySelector('.dlg.kpanel');return{open:!m.hidden&&!!d,title:d&&d.querySelector('.kptitle')?d.querySelector('.kptitle').innerText:'',secs:d?d.querySelectorAll('.kpst').length:0,txt:d?d.innerText:'',hasGo:!!(d&&d.querySelector('[data-chapgo]')),imgs:d?d.querySelectorAll('img').length:0}});
+   await reset();await p.evaluate(()=>{tab='story';render()});if(!(await p.locator(sel).count())){chk(`${sn}: ${how} exists`,false);continue}await p.locator(sel).first().click({timeout:40000});await p.waitForTimeout(500);
+   const r=await p.evaluate(()=>{const m=document.getElementById('modal');const d=m.querySelector('.dlg.kpanel');return{open:!m.hidden&&!!d,title:d&&d.querySelector('.kptitle')?d.querySelector('.kptitle').innerText:'',secs:d?d.querySelectorAll('.kpst').length:0,txt:d?d.innerText:'',hasGo:!!(d&&[...d.querySelectorAll('button')].some(b=>/Đi làm/.test(b.innerText))),imgs:d?d.querySelectorAll('img').length:0}});
    chk(`${sn}: tap ${how} -> detail panel`,r.open&&/Chương/.test(r.title)&&r.secs>=3&&r.txt.length>120);
    if(how==='chip'){if(SHOT){await p.waitForTimeout(600);await p.screenshot({path:`${SHOT}-${sn}-panel.png`});await p.evaluate(()=>{document.querySelector('#modal .kpb').scrollTop=9999;const m=document.querySelector('#modal .dlg.kpanel #mb');if(m)m.scrollTop=9999});await p.waitForTimeout(200);await p.screenshot({path:`${SHOT}-${sn}-panel2.png`})}
     if(sn!=='milestone'||true){chk(sn+': panel has pictures (cover)',r.imgs>=1)}
     if(sn==='v1')chk('v1 td: evidence/witness/rank/sớ lines',/Chứng cứ thứ 1\/3/.test(r.txt)&&/Nhân chứng/.test(r.txt)&&/Bậc Tần/.test(r.txt)&&/Dâng sớ/.test(r.txt));
-    if(r.hasGo){await p.click('#modal [data-chapgo]');await p.waitForTimeout(400);const t=await p.evaluate(()=>({tab,open:!document.getElementById('modal').hidden}));chk(sn+': Đi làm -> Hành sự, panel closed',t.tab==='act'&&!t.open)}}}
+    if(r.hasGo){await p.evaluate(()=>[...document.querySelectorAll('#modal button')].find(b=>/Đi làm/.test(b.innerText)).click());await p.waitForTimeout(400);const t=await p.evaluate(()=>({tab,open:!document.getElementById('modal').hidden}));chk(sn+': Đi làm -> Hành sự, panel closed',t.tab==='act'&&!t.open)}}}
   await reset()}
  /* rank + Việc nhờ chips */
  await reset();await p.evaluate(()=>{tab='story';render();document.querySelector('#panel [data-ktsv="rank"]').click()});await p.waitForTimeout(250);

@@ -2975,3 +2975,75 @@ Dress pick (jtoil Hồi 1: tap = select + strip, buttons Cài / Mặc / Đeo / T
 Bên mình pick tiles (card + act) · shop picture card (price row + detail) · reward box rows / shelf (j93) · event item tag (§64) · bully demand tile (jtsb) ·
 Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · veil picker (jveil) · other people's worn slots (jk2b kitWearSlots → card with who).
 Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.
+
+## 72. LỜI DẶN TÂN THỦ + MỤC TIÊU ĐỜI MÌNH (owner 11/15 03:55Z "hướng dẫn tân thủ"; 16/11 "không thấy ... mục tiêu đời mình? Chơi bị lạc lối" + "Không bấm xem được") — `dev/build/jtut.js` + `dev/build/jgoal.js` (after jnight, before j84) — awaiting kit review · §72 (coordinator registry; §71 = kitFigHD)
+
+### 72.1 kitCoach (spotlight) + kitTip (was §36 on review/tutorial)
+ONE look for every teaching moment: the kit panel (`.dlg.kpanel[data-kind=guide]`, `kpHeader("guide",…)`, seal **LỜI DẶN** `.kp-guide` in the
+ma ma token colour `#a0584a`), the guide's portrait in the kit frame (`pcPort`, role mama rank 3), body `.ktut-say` (kit text, `kitRows` for
+legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
+- **Guide** = a REAL palace elder (owner 16/11): name, title and face from `staffGuide()` of review/elder-staff ({id,name,title,office,face,kr};
+  intro line "<Tên> ma ma, <title>"; the same face as elsewhere). No hard-coded name in player text. Fallback while that module is absent = Quế ma ma: an existing ma ma painting (`img/FIGURES-servants.json` role mama, age band a51 → a36), the first mama identity nobody
+  in this kiếp wears (`S.fidUsed`, reserved as `S.tutFid`; one face per person). Speech per VANPHONG §2: "nô tỳ" + "tiểu chủ" (Tần and up
+  "nương nương"; cung nữ road "ta" + "ngươi"); "chạm", "mục"; no %, no chữ Hán, no foreign words.
+- `kitCoach({title, sub, html, target, pad, interact, marks:[el|fn], side, big, btns:[{k,t,alt}], on(k)})` → `#ktut` (fixed, z 9300):
+  the target stays bright inside a gold ring (`.ktut-hole`: 3 px `#f0d070` + soft glow, the rest of the screen `rgba(30,18,10,.58)`);
+  `marks` = extra gold rings with no hole (the tab button of the step). The card goes below / above / beside the target (the side with room);
+  a target too big for that (a whole panel) gets the card at its lower edge, above the tab bar. A step that asks for a tap (`interact`) lets
+  taps through the hole only and never puts the card over the target; every other step takes all taps outside the card. Re-measured on
+  resize, rotation, scroll and every 140 ms while open (the hole follows a target that moves: page turn, map unroll, re-render). No target =
+  centred card on a plain dim. Reduced motion / Cảnh động off (`kmReduced`): no slide of the hole, no card rise.
+- `kitTip({id, title, html})` → `.ktip` above the tab bar (`#tabs` / `#next` / `.kloadchip`, like the "Có bản mới" card): small portrait,
+  1–3 sentences, one `.kbtn` "Đã hiểu". Only the card takes taps; it never opens over a dialog, the menu, a motion moment, the week book or a
+  mini game (it waits), and a dialog that opens hides it until the dialog is gone. One at a time, 1.5 s apart, each id once per device.
+- **Lượt dẫn đầu kiếp** (`KTUT_STEPS`, "lời dặn n/12"): 1 **Game này chơi gì** (owner 16/11: "bạn tôi hỏi ủa game này chơi cái gì? Mục tiêu là gì?"):
+  4 short pages in the big centred card (`.ktut-big`, ≤580 px), each a painted picture (`kitSceneArt` wide, `.ktut-pic`) + `kitRows`: Game này là gì ·
+  Mục tiêu (sống sót, đi lên tới Hoàng hậu / Hoàng thái hậu, nhà và con, Mệnh truyện, kết cục) · Một ngày chơi thế nào (buổi/khắc, Hành sự,
+  Dư đồ, Hậu cung · Giao tình, Tài nghệ, Tư trang/điểm trang, sự việc, Sang buổi; cung nữ road: its own tabs) · Được · mất (chết, lãnh cung,
+  các ngôi, Phúc duyên, chơi cùng bạn); "Tiếp" turns the page (sub "trang i/4"), "Bỏ qua lời dặn" on every page. Replay: ☰ or Thiết lập →
+  **Xem lại lời dặn** (starts again from page 1) · 2 Thanh trên cùng `#kstrow` · 3 Buổi · khắc · quẻ tuần `#k3tt` ·
+  4 Đọc một thẻ việc (a quiet act card she can do now) · 5 Làm thử (tap the lit card; real act) → Thẻ kết quả `#rtoast` (kept open while
+  explained) · 6 Dư đồ (a reachable place label) · 7–8 one step per tab GROUP read live from `#tabs [data-tab]` + `KG` + `.ksub [data-ksub]` (today: Hậu cung =
+  Chí tôn · Phi tần · Nam nhân · Cung nhân; Giao tình = Ân oán · Phe phái) · 9 Tư trang · 10 Mục tiêu chương (the goal strip 72.2, ring on Mệnh truyện) ·
+  11 Ghi sổ · Nạp sổ `#menu` · 12 Sang buổi `#next` ("Đã hiểu"). Steps whose tab is not on screen (cung nữ road) are left out.
+  "Tiếp" / "Bỏ qua lời dặn" on every card; the tour pauses (hides) while a dialog, the menu or a moment is up and resumes after.
+- **When**: the first kiếp on the device starts it after "Nhập cung"; an old player (a Sổ luân hồi entry, another sổ, or a sổ already in play,
+  and nothing recorded on this device) gets ONE question card (only while the sổ is in its first 2 weeks; a sổ past week 2 gets no
+  tour, no question and no tips — `S.tutOld` — until she turns the switch on again or picks Xem lại lời dặn) "Lời dặn tân thủ" (Không cần / Nghe ma ma dặn). ☰ → **Xem lại lời dặn**
+  (`.kbtn.alt.ktutb`, only with a kiếp in play) replays it. Thiết lập → kit switch **Lời dặn tân thủ** (`OPT.tut`, `#o-tut`) turns the tour
+  and the tips on/off. State: device `localStorage hclh-tut` {tour, asked, seen{}} + `S.tutTour` in the sổ (an old sổ loads unchanged).
+- **Lời dặn lần đầu** (`KTUT_TIPS`): first open of Hành sự, Dư đồ, Phi tần, Giao tình, Phe phái, Cung nhân, Hoàng tự, Tư trang, Tài nghệ,
+  Mệnh truyện, Sổ ghi (tabs the tour showed count as seen); quẻ đầu tuần; trò nhỏ; mưu kế (category / person-card harm tabs); thị tẩm;
+  có thai; tuyển tú; tranh ghế; lãnh cung; luân hồi (a new kiếp after a past one); chơi cùng bạn. Facts only from the game (KIT_GLOSS, code).
+- Off for `window.__bot` / `quiet` and for automated browsers (`navigator.webdriver`) unless `localStorage hclh-tut-test = "1"` or `?tut=1`:
+  measure bots and screenshot scripts are never blocked. Co-op: all local to each machine; nothing in the shared world waits for it.
+- Test: `node dev/test/tutorial.js <url> WxH@dpr <outdir>` (whole tour, skip midway, replay from ☰, old sổ). Shots: `dev/shots/tutorial/`.
+
+
+### 72.2 kitGoalStrip — THE goal strip (owner 16/11 "Không bấm xem được") — `dev/build/jgoal.js`
+- ONE strip for "where am I in my life": `kitGoalStrip({G?, cls?, next?})` → `button.kgoal[data-kgoal]`: small label line
+  `Mệnh truyện · Chương N «chapter»` (`.kgoal-k`, `--k-lab`), the current step in bold (`.kgoal-t`, ≤2 lines), "Việc kế: …" (`.kgoal-n`),
+  and a round seal-red "›" (`.kgoal-go`) so it reads as tappable; card `--k-card`, hairline `--k-hair`, 4 px `--k-seal` left edge, ≥44 px tall.
+- Where: (a) top of Hành sự / Phận sự — it REPLACES the old plain line `.srvhead.obj67` (j67 keeps `.obj67` as the wrapper; there is no
+  second strip); (b) the main stage `#stage > #kgoalst` (one line, no "Việc kế", under the scene title at the left, `--kgoal-top`, width = the free
+  space left of the stage chips `.k3cs/.k3c` (≤440 px), never over a chip or a figure's face), hidden when the Hành sự strip is on screen at the same time (no double strip).
+- Tap anywhere on it → `kitGoalDetail()` (72.3). The chapter card on Mệnh truyện › Chương này opens the same detail (no dead tap).
+- Data: `kitGoalNow()` → `{road, C:{kind ms|arc|all|v1, n, max, t, g, steps[{t,ok}], act, acts, next, wait}, kicker, title, goal, step,
+  next:[{t, why, tab, act?, card?, where}]}` — the ONE source for strip, detail, goal card and the tutorial step (old saves: v1 story too).
+  Next things (2–3, plain words): thỉnh an Hoàng hậu (else Thái hậu) sáng nay / sáng mai · in Chương 1 "Làm Hoàng thượng để mắt tới" ·
+  học một môn tài nghệ · kết giao một người; cung nữ road: phận sự · làm quen các nơi (Dư đồ) · kết thân đồng liêu (tab names from
+  SRVTABS: Phận sự · Đồng liêu · Thân phận); a story act waiting → "Quyết hồi truyện".
+
+### 72.3 kitGoalDetail + kitGoalCard — chapter detail and "Mệnh truyện kiếp này" — `dev/build/jgoal.js`
+- Both are a kit panel in the event frame (§8 + §32.2): `headArt` = the wide origin painting (`kitOriginWide`), `subject` + `stage:[S]` = her (full-body figure on
+  the picture, §32.6), sections of `kitRows` / `kitChecks` / `kitReqRows` only.
+- `kitGoalDetail()` (seal ĐIỀU): Mục tiêu chương · Tiến độ (✓/✗ steps, "xong một điều là đủ" for an any-step chapter) · for Chương 1 the
+  tấn phong table (`promoReq` via `kitReqRows`) · for a story chapter Hồi i/n, Kế tiếp, Lợi thế, Hạn, Đã qua · Việc nên làm (what, why,
+  "chạm: <tab> › thẻ <act>") + one option "Đi làm: …" per thing: opens that tab and rings the act card with kitCoach (72.1), the ring goes
+  when she taps the card. MINIMAL view of review/chapter-detail (C24): C24 grows this panel (story so far by hồi with pictures, evidence /
+  witness steps), keeping kitGoalNow as data.
+- `kitGoalCard()` (seal BÁO "Mệnh truyện kiếp này"): queued right after the Nhập cung card of a NEW life only (`S.goalCard`), on each machine
+  for its own life (co-op guest too): Đường đời kiếp này (đường lớn, truyện riêng «…» · N chương, chương này, mục tiêu) · Việc nên làm trước ·
+  Xem lại (the strip, the Mệnh truyện tab). Never for an old save, bots or `quiet`. The 72.1 tour starts after it.
+- Test: `node dev/test/goal.js <url> WxH` (new life: goal card after Nhập cung; strip in Hành sự + on the stage; tap → detail; Đi làm → ring;
+  old save: no card, no tour). Shots `dev/shots/goal/` (few, small).
