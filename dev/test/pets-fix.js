@@ -43,12 +43,12 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
  await p.evaluate(()=>{S.inv=S.inv.filter(e=>e.w||e.h);S.pets=[];S.petTip=1;S.rank=3;S.bac=900;S.mat=4;petAdd(S,'meo','Nhờ thái giám mua','buy');petAdd(S,'vet','Nhờ thái giám mua','buy');S.petOn=0;S.pets[1].stg=2;tab='inv';render()});
  await sleep(600);await p.evaluate(()=>{const e=document.querySelector('#panel .keq[data-keq="pets"]');if(e)e.scrollIntoView({block:'center'})});
  R.row=await p.evaluate(()=>{const out={};const R=e=>e.getBoundingClientRect();const sp=a=>a.length?+(Math.max(...a)-Math.min(...a)).toFixed(2):0;
-  for(const k of ['pets','tutrang']){const q=document.querySelector(`#panel .keq[data-keq="${k}"]`);if(!q)continue;const C=[...q.querySelectorAll('.keqc')];const rows={};C.forEach(c=>{const y=Math.round(R(c).top);(rows[y]=rows[y]||[]).push(c)});
+  for(const k of ['pets','tutrang']){const q=document.querySelector(`#panel .keq[data-keq="${k}"]`);if(!q)continue;const C=[...q.querySelectorAll('.keqc,.keqrc')];const rows={};C.forEach(c=>{const y=Math.round(R(c).top);(rows[y]=rows[y]||[]).push(c)});
    out[k]=Object.values(rows).map(cs=>{const part=s=>cs.map(c=>c.querySelector(s)).filter(Boolean).map(e=>R(e).top);return{n:cs.length,pic:sp(part('.kitem')),name:sp(cs.map(c=>c.querySelector('.keqnm,.keql')).filter(Boolean).map(e=>R(e).top)),
     chips:sp(cs.map(c=>c.querySelector('.keqfx')).filter(e=>e&&e.children.length).map(e=>R(e).top)),note:sp(part('.keqnote')),noteTxt:cs.map(c=>(c.querySelector('.keqnote')||{}).textContent||'')}})}return out});
  await shot('01-inv-pets');A.push(await audit('inv-pets'));
  /* --- 2. the pet shop (empty slot) --- */
- await p.evaluate(()=>{S.pets=[];S.petOn=-1;render()});await sleep(300);await p.click('#panel [data-keqk="pets"][data-keqi="0"]');await sleep(1500);await imgs();
+ await p.evaluate(()=>{S.pets=[];S.petOn=-1;render()});await sleep(300);await p.click('#panel [data-keqk="pets"][data-keqi="0"]',{force:true});await sleep(1500);await imgs();
  R.shop=await p.evaluate(()=>{const M=document.getElementById('modal'),R=e=>e.getBoundingClientRect();const tiles=[...M.querySelectorAll('.kshc')];const rows={};tiles.forEach(t=>{const y=Math.round(R(t).top);(rows[y]=rows[y]||[]).push(t)});
   const part=(t,s,edge)=>{const e=t.querySelector(s);return e?R(e)[edge]:NaN};const sp=a=>a.length?+(Math.max(...a)-Math.min(...a)).toFixed(2):0;
   const rr=Object.values(rows).map(ts=>({n:ts.length,pic:sp(ts.map(t=>part(t,'.kshpic','top'))),name:sp(ts.map(t=>part(t,'.kshn','top'))),use:sp(ts.map(t=>part(t,'.kshe','top'))),price:sp(ts.map(t=>part(t,'.kshp','bottom'))),
