@@ -7,7 +7,7 @@ Base main at start: 900ace7fb.
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | LIVE (train-2) |
 | A7 cycle review | review/cycle-r3 | opus | PASS d9c47fad1 (owner fixes done: deck cards in Mưu kế tab (7-card family moved), monthly maid pop-up; reviewer fixed a co-op flip bug + new-game first-week pop-up + evidence-truth sites 3→0) |
-| A7b art: maid-question scene for the monthly pop-up (now shows 'Hoàng thượng ngự giá') + 2 deck card pictures (Xem sổ / Xem lén sổ nguyệt sự, now §59 placeholder) | review/cycle-art | sonnet | QUEUED (art slot) |
+| A7b art: maid-question scene for the monthly pop-up (now shows 'Hoàng thượng ngự giá') + 2 deck card pictures (Xem sổ / Xem lén sổ nguyệt sự, now §59 placeholder) | review/cycle-art | sonnet | RUNNING (art worker) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
@@ -25,7 +25,7 @@ Base main at start: 900ace7fb.
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
 | D2 item-art | review/item-art-r5 | sonnet | PASS aedcca1ed (all 44 poems read word by word; r08-b2/b3/b4 'triêu' + r02-b1, r07-b1 redone) |
-| D27 extra toilette reaction buttons (Ghi hận / Mách Hoàng hậu / Tặng lại / Hỏi bí quyết) | review/toil-react | sonnet | RUNNING (worker) |
+| D27 extra toilette reaction buttons | review/toil-react @d644bee7c (new jtoilr.js after jtoil.js; BAL.toil.rx) → review/toil-react-r1 | sonnet | REVIEWING |
 | C20 act-text resume | review/act-text-r1 | sonnet | PASS fe15a6d54 — CONDITIONAL on kit keeper (K8 kit-helper list); reviewer fixed 2 costs shown green in ĐƯỢC (Điểm trang, Liếc mắt) |
 | D6 econ-items (item skimming by servants + charcoal/ice allowance, stolen-clothes re-issue, girlhood chest 6 slots) | review/econ-items | opus | RUNNING (worker) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
