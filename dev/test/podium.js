@@ -6,6 +6,8 @@ const {chromium}=require('playwright');
 const [,,BASE,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const tag=SZ.replace('@','_');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
+ /* review/kit-keeper-2: the new-life roulette (#kroul / #kroulw, KIT 14) and the prize chest (#kmrew) cover the page after start() and used to eat the first tap — skip it and keep it hidden */
+ await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click());document.querySelectorAll(".kroul,#kmrew,#kprevov").forEach(e=>e.remove());const kl=document.getElementById("kload");if(kl)kl.remove()},250)});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
  const checks=[];
  const check=async(name)=>p.evaluate((name)=>{const r=document.querySelector('.kpod');if(!r)return{name,missing:true};const vw=innerWidth,vh=innerHeight;
@@ -18,7 +20,7 @@ const tag=SZ.replace('@','_');
   const p1=steps.find(s=>s.c==='kpod-p1');const order=steps.every(s=>s.c==='kpod-p1'||s.top>p1.top);
   const figs=[...r.querySelectorAll('.kpod-img')].map(i=>i.complete&&i.naturalWidth>0);
   return{name,overflowX:document.documentElement.scrollWidth>vw,bad,order,steps,figsLoaded:figs,ell:/…/.test(r.innerText),coThe:/có thể/.test(r.innerText),win:r.classList.contains('kpod-win')}},name);
- await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);await p.addStyleTag({content:'.kroul{display:none!important}'});
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
   setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);render()});
  await p.waitForTimeout(1500);
@@ -38,14 +40,14 @@ const tag=SZ.replace('@','_');
  await p.locator('.kpod-next').tap();await p.waitForTimeout(400);
  const scr2=await p.evaluate(()=>({pod:!!document.querySelector('#kpodov'),board:!!document.querySelector('#kg82 .kgr .kfacts'),ok:!!document.getElementById('kg82ok')}));checks.push({name:'screen2',...scr2});
  await p.screenshot({path:`${OUT}/4-screen2-board-${tag}.png`});
- await p.locator('#kg82ok').tap();await p.waitForTimeout(300);
+ await p.locator('#kg82ok').tap({timeout:4000}).catch(()=>{});await p.waitForTimeout(300);
  /* 2: she is 4th; one stranger on the dais; tap-to-skip */
  await p.evaluate(()=>{S.tai=5;Object.keys(S.arts).forEach(k=>S.arts[k]=0);const R=liveRivals(true).slice(0,4);R.forEach(v=>{v.tai=95;v.arts.thi=5;v.arts.cam=5});R[1].tai=200;window.__unk=R[1];window.kitKnown=x=>x!==window.__unk;
   startContest({art:'doi',title:'Thi câu đối',rivals:R,prep:0,onDone:r=>window.__res=r})});
  await p.waitForTimeout(400);await p.locator('#kg82skip').tap();await p.waitForTimeout(600);
  await p.locator('.kpod-stage').tap({force:true});await p.waitForTimeout(300);checks.push(await check('lose-4th-stranger'));
  await p.screenshot({path:`${OUT}/5-lose-stranger-${tag}.png`});
- await p.locator('.kpod-next').tap();await p.waitForTimeout(300);await p.locator('#kg82ok').tap();await p.waitForTimeout(300);
+ await p.locator('.kpod-next').tap();await p.waitForTimeout(300);await p.locator('#kg82ok').tap({timeout:4000}).catch(()=>{});await p.waitForTimeout(300);
  await p.evaluate(()=>{delete window.kitKnown;window.kitKnown=()=>true});
  /* 3: Tranh ghế result */
  await p.evaluate(()=>{Q.length=0;const C=liveRivals(true).filter(v=>v.rank===S.rank).slice(0,2);const L=[S].concat(C.length>=2?C:liveRivals(true).slice(0,2));L.forEach(v=>{if(v!==S)v.rank=S.rank});
