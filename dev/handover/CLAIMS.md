@@ -190,3 +190,5 @@
 | owner-answers-b reviewer (sonnet) | review/owner-answers-b-r1 | B | session_01N1tNP4wHpgLwCe8XoWsAXv | DONE PASS 07f84484 (archived) | 16/11 13:20Z |
 | phone-bars: owner 13:25Z (C) Fold portrait top bar + bottom 8 tabs = 2 rows x 4, one-page phone layout (kit, whole group) | review/phone-bars | main s17 | session_01UV1Szhj7vkq8TCucEUAPnU (sonnet kit) | RUNNING | 16/11 13:31Z |
 | skin-norosy-r1 review (sonnet, fast lane) | review/skin-norosy-r1 | main s17 | session_01UV1SzhbYGWHAmettjmU4Rc | RUNNING | 16/11 13:36Z |
+| cardflip-glow2-r2 review (sonnet, fast lane; r1 archived) | review/cardflip-glow2-r2 | main s17 | session_01UV1SzjxA4tS9pjHtfQwPxZ | RUNNING | 16/11 13:38Z |
+| test-drift-roulette-r2 review (sonnet) | review/test-drift-roulette-r1 | main s17 | session_01UV1Szjoc74qzY1ffJ45Mrv | RUNNING | 16/11 13:38Z |
