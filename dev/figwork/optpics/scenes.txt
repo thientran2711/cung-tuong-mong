@@ -1,0 +1,6 @@
+opt-thoi|0|a lady's hand gently closing a painted round silk fan and lowering it, her pink sleeve turning away from a half-open lacquered door toward a quiet inner chamber, the moment of letting a matter go
+opt-thua-trinh|0|two hands in pink and ivory wide sleeves folded respectfully at chest height in a polite court bow, standing on a red carpet before the hem of a phoenix-embroidered robe of a higher lady seated on a carved chair, a calm respectful explanation
+opt-buong-tay|0|a lady's hand slowly letting go of a jade pendant on a red silk cord, the pendant drifting from her open fingers, a willow-lined palace bridge and misty lake behind, gentle melancholy farewell
+opt-rinh-cho|1|a lady's hand resting on a carved window lattice, half hidden behind a gauze curtain, watching a distant lantern-lit corridor and waiting for the right moment; a small closed lacquer box beside her hand
+opt-canh-giu|0|hands of a palace maid in jade green sleeves sliding the wooden bar across a red palace door with brass studs and turning a heavy brass lock, a carried lantern on the step, a jewel casket being moved to safety beside it
+opt-hoang-so|0|a lady's hands raised in alarm, one sleeve flung up, a toppled tea cup and spilled tea on a lacquer table, startled motion, petals scattering, an urgent call for the guards
