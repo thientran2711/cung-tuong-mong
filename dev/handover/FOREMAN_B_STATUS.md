@@ -22,7 +22,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C46 map-labels | review/map-labels | sonnet | RUNNING |
 | D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 |
 | D38 lost-items-port | review/lost-items-port @92ed78f6 | opus | REVIEWING (review/lost-items-port-r1, sonnet) |
-| D30 palace-map-port | review/palace-map-port @e1e15a4b | sonnet | REVIEWING (review/palace-map-port-r1, sonnet); 675 images uploaded to CDN; D42 must build on this branch |
+| D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
 | D33 routes-port | review/routes-port | opus | RUNNING (route numbers within spec; bot table for C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
@@ -30,7 +30,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
-| D42 places-leftovers | review/places-port | sonnet | QUEUED (after D30) |
+| D42 places-leftovers | review/places-port (built on review/palace-map-port-r1) | sonnet | RUNNING |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
@@ -44,6 +44,7 @@ PASS review/appearance-port-r1 86234a24c53da664bd75f34b34444751cd7c0e9f (D39; il
 PASS review/panel-size-r1 a523531da8bbf3944c8f0afd2c122176405d4e88 (C37; one kpanel frame size per viewport, KIT §8.1 needs kit keeper; when review/stage-fig-size-r1 lands keep both its kitDpFit cap/crop and this dw=d.clientWidth line)
 PASS review/weather-port-r1 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f (D40; bad-weather outdoor risks + gear/servant/kiệu; reviewer fixed garbled risk line → kit kèm/Ghi chú rows, indoor exclusion)
 PASS review/succession-port-r1 0d9b49b9202c663ef4151c01e890a05ffd62aa30 (D32; succession choice + epilogues + 17 living endings no longer say "Chết vì")
+PASS review/palace-map-port-r1 306de247abcc3c9cf0bbab9fbddb91e6946131c3 (D30; palace courtyard → hall rows → residence room paintings; 675 images on CDN; courtyard pl2 images ~500 KB each = over budget, re-encode follow-up)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -58,7 +59,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - rel-picker-r1: KIT §49.2c compact picker + kitStripFit (pager arrows only on overflow, game-wide)
 - tab-underline-r1: KIT §46 no-scrollbar + edge fade (kitTabFade), sliding line only on bottom nav
 - panel-size-r1 (PASS): KIT §8.1 one-size kpanel frame tokens --kpw/--kph + fixed flex-column frame (j79), §8 frame rule changed, per-kind sizes removed (kesdlg, kdper/kdnarrow, kslot, kmc-modal 780), week panel .dawn .dbox.kpanel follows. Short one-line notices sit top-left in a big blank frame — keeper may centre them / bigger font
-- palace-map-port (reviewing): kitPalaceMap (worker labelled it §71 — clashes; needs a number)
+- palace-map-port-r1 (PASS): kitPalaceMap new kit part labelled "§71" (clash; renumber, incl. KIT_SAMPLES id in jpm.js + PROGRESS); pieces .kpm-* hall rows, .kpm-spot hotspots reusing .mspot/.mlab/.msil, .kpm-t, short-landscape fallback — CSS injected in jpm.js, absorb into kit; room back button "‹ <cung>" overrides label in jpm.js and overlaps the bottom-left name label at 1180/844 → should use KIT §72 back button once room-btn-r1 lands; note residence-room painting pipeline under stage in KIT.md
 - appearance-port-r1 (PASS): KIT 28.8b kitFaceFx/KIT_FACEFX registry + kitFxLayers as the single face-layer hook; 28.8b text stale (still lists expr z5 + .kfxf transform copy — expressions removed 22:50Z); shared overlays rash-1..3.png, fx-slap.png (on CDN) for the keeper's art list
 - contest-ui (reviewing): kitGameFrame({pic}) picture-left/info-right (.kgbody/.kgpic/.kginfo, CSS in jcui.js #kcu-css), kg82Open/kg82Pic, #kg82.kg-idle, .kgrv self-scrolling list, podium equal figure heights + kpodPrize chips, KIT_BD.podium → new shared art img/kit/podium-bg2(-p).webp. KIT REQUEST: pet-care game box (jpetcare) needs a board painting (e.g. mg-chamthu-bg) + pic in petcGameBox.
 - lost-items-port (reviewing): no new kit parts. Note: live j92 Giá họa hearing choices say "an toàn · không được mất gì" though the hearing can go against her — kit-wide wording fix for the keeper.
