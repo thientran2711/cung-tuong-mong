@@ -133,7 +133,9 @@ const rs0=resultShow;resultShow=function(title,before){if(title!=="Đêm thị t
   const V=variantOf(T.tier);
   const line=V.line||(T.tier==="warm"?"Nến đỏ cháy suốt canh khuya, tiếng đàn còn vương bên gối.":T.tier==="cold"?"Ngọn nến lụi dần, trăng lạnh soi qua song cửa.":"Côn trùng rỉ rả ngoài hiên, ngọn nến lặng lẽ cháy tới sáng.");
   window.kneLast.pic=V.pic;
-  N=null;window.__kneMute=1;setTimeout(()=>{window.__kneMute=0},600);kitNightEnd({tier:T.tier,m0,m1,before,items,line,pic:V.pic});return}catch(e){console.error(e)}}
+  /* the night's own caption may come from the road that led to it (jvisit: the Emperor stayed in HER palace) — one hook, same card */
+  let line2=line;try{if(typeof window.kneLineHook==="function"){const x=window.kneLineHook(T.tier);if(x)line2=String(x)}}catch(e){}
+  N=null;window.__kneMute=1;setTimeout(()=>{window.__kneMute=0},600);kitNightEnd({tier:T.tier,m0,m1,before,items,line:line2,pic:V.pic});return}catch(e){console.error(e)}}
  return rs0.apply(this,arguments)};
 const cm0=chooseM;chooseM=function(){const r=cm0.apply(this,arguments);if(window.__kneHold)release();return r};
 
