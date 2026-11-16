@@ -10,7 +10,7 @@
    full-body figure of that life + the player's name), the ranked list, and the player's own row always visible at the bottom.
    Opened from the title screen (and ☰, which opens the title screen), and from the end card ("Kiếp này đứng hạng N").
    Screen name in ONE place: RK_T (another worker is reviewing the cổ ngữ names). */
-const RK_T={screen:"Bảng vinh danh",lives:"Kiếp",players:"Người chơi",open:"Xem Bảng vinh danh",unit:"Công danh"};
+const RK_T={screen:"Bảng vàng",lives:"Kiếp",players:"Người chơi",open:"Xem Bảng vàng",unit:"Công danh",me:"Ta"};
 const RK_VER="rank-1",RK_ID="ctm-rank-id",RK_Q="ctm-rank-q",RK_RES="ctm-rank-res",RK_C="ctm-rank-cache-";
 function rkUrl(){return (window.RANK_URL||"https://ctm-rank.victoria-tntt.workers.dev").replace(/\/+$/,"")}
 function rkRand(n){const a="abcdefghijklmnopqrstuvwxyz0123456789";let s="";try{const b=new Uint8Array(n);crypto.getRandomValues(b);b.forEach(x=>s+=a[x%36])}catch(e){for(let i=0;i<n;i++)s+=a[Math.floor(Math.random()*36)]}return s}
@@ -66,14 +66,15 @@ async function rkFlush(){if(RK_FL){RK_FL=2;return}const q0=rkQ();if(!q0.length)r
 function rkPush(sum){const lid=rkRand(16);const q=rkQ();q.push({lid,life:sum,at:Date.now()});store.set(RK_Q,q.slice(-50));return lid}
 /* ---------- end card: "Kiếp này đứng hạng N" ---------- */
 function rkEndInner(lid){const it=rkQ().find(x=>x.lid===lid),res=rkRes(lid);let sc=null;try{const L=it?it.life:(RK.ends[lid]||null);if(L)sc=CTM_RANK.score(L).score}catch(e){}
- const s=res&&res.score!=null?res.score:sc;const head=s!=null?`<span class="krk-el">${RK_T.unit} kiếp này: <b>${s}</b></span>`:"";
- const line=res&&res.rank?`<span class="krk-el">Kiếp này đứng hạng <b>${res.rank}</b> trên ${res.of} kiếp.</span>`
-  :res&&res.refused?`<span class="krk-el">${RK_T.screen} không nhận kiếp này.</span>`
-  :navigator.onLine===false?`<span class="krk-el">Mạng đứt: kiếp này đã ghi lại, có mạng sẽ gửi lên ${RK_T.screen}.</span>`
-  :`<span class="krk-el">Đang ghi lên ${RK_T.screen}.</span>`;
- return `${head}${line}<button class="kbtn alt krk-eb" data-krk-open="lives" data-lid="${lid}">${RK_T.open}</button>`}
+ const s=res&&res.score!=null?res.score:sc;
+ const line=res&&res.rank?`Kiếp này đứng hạng <b>${res.rank}</b> trên ${res.of} kiếp.`
+  :res&&res.refused?`${RK_T.screen} không nhận kiếp này.`
+  :navigator.onLine===false?`Mạng đứt: kiếp này đã ghi lại, có mạng sẽ gửi lên ${RK_T.screen}.`
+  :`Đang ghi lên ${RK_T.screen}.`;
+ /* kit section header + kit rows (KIT 9), the same as the rows above it on the end card */
+ return `<h4 class="kpst">${RK_T.screen}</h4>${kitRows([[`${RK_T.unit} kiếp này`,s!=null?`<b>${s}</b>`:"",""],["Thứ hạng",line,"t"]])}<button class="kbtn alt krk-eb" data-krk-open="lives" data-lid="${lid}">${RK_T.open}</button>`}
 function rkEndPaint(lid){document.querySelectorAll(`.krk-end[data-lid="${lid}"]`).forEach(e=>e.innerHTML=rkEndInner(lid));
- try{const m=Q.find(x=>x&&x.cls==="end"&&x.rkLid===lid);if(m)m.h=m.h.replace(/<div class="krk-end"[\s\S]*?<\/button><\/div>/,`<div class="krk-end" data-lid="${lid}">${rkEndInner(lid)}</div>`)}catch(e){}}
+ try{const m=Q.find(x=>x&&x.cls==="end"&&x.rkLid===lid);if(m)m.h=m.h.replace(/<div class="krk-end kpsec"[\s\S]*?<\/button><\/div>/,`<div class="krk-end kpsec" data-lid="${lid}">${rkEndInner(lid)}</div>`)}catch(e){}}
 /* ---------- hooks into the game ---------- */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{rkTrack()}catch(e){}return r}})();
 if(typeof nlAccept==="function")(function(){const a0=nlAccept;nlAccept=function(){const sd=typeof NLP!=="undefined"&&NLP?NLP.seed:0;const r=a0.apply(this,arguments);
@@ -82,7 +83,7 @@ if(typeof nlAccept==="function")(function(){const a0=nlAccept;nlAccept=function(
  try{if(!S||!S.dead||(typeof NLP!=="undefined"&&NLP))return r;rkTrack();const m=Q.find(x=>x&&x.cls==="end"&&!x.rkLid)||null;
   const endk=(((m&&m.h||"").match(/<h3>([\s\S]*?)<\/h3>/)||[])[1]||h||"").replace(/<[^>]+>/g,"").trim();
   const sum=rkSummary(endk,S.fate||fate);const lid=rkPush(sum);RK.ends[lid]=sum;
-  if(m){m.rkLid=lid;m.h+=`<div class="krk-end" data-lid="${lid}">${rkEndInner(lid)}</div>`;if(!$("modal").hidden&&Q[0]===m)showModal()}
+  if(m){m.rkLid=lid;m.h+=`<div class="krk-end kpsec" data-lid="${lid}">${rkEndInner(lid)}</div>`;if(!$("modal").hidden&&Q[0]===m)showModal()}
   setTimeout(rkFlush,300)}catch(e){console.error(e)}return r}})();
 /* other players' characters are not people of this life: the stranger mask of j61 ("<tước> ???") never touches the board or its end-card line */
 if(typeof k61Node==="function")(function(){const n0=k61Node;k61Node=function(n){try{const el=n&&(n.nodeType===1?n:n.parentNode);if(el&&el.closest&&el.closest("#krkov,.krk-end"))return}catch(e){}return n0.apply(this,arguments)}})();
@@ -91,16 +92,20 @@ function rkBase(){try{if(S&&!S.dead){if(!S.rk)rkTrack();if(!S.rkT0)S.rkT0=Date.n
 rkBase();if(typeof deser==="function")(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);rkBase();return r}})();
 /* ---------- the screen ---------- */
 const RK={tab:"lives",data:{},busy:0,err:0,view:"list",lid:"",ends:{},msg:""};
-function rkFace(row){return{src:row.por||"",ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a"}}
+/* the kit frame of the highest standing of that life (KIT 4.3): consort rank 0–7 → frame-consort-N, servant title → frame-maid-N, Ma ma → frame-mama */
+function rkRole(ph){const R=CTM_RANK.RULES;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
+ if(ph==="Ma ma")return{role:"mama",rank:3};i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
+function rkFace(row){const r=rkRole(row.p);return{src:row.por||"",ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
+ __kr:Object.assign({origin:null,sex:"f",kid:false},r)}}
 function rkFig(row){return row.fig||KIT_DIR+"unknown-fig-f.webp"}
 function rkMine(row){const d=rkIdGet();return !!(d.pid&&row&&row.pid===d.pid)}
 function rkEnd(row){return row.e||""}
 function rkPodList(rows,tab){return rows.slice(0,3).map(x=>{const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x);
- return{who:{name:x.pn},place:x.r,fig:L.fig?L.fig:rkFig({}),face:rkFace(L),mine,you:"Ngươi",
+ return{who:{name:x.pn},place:x.r,fig:L.fig?L.fig:rkFig({}),face:rkFace(L),mine,you:RK_T.me,
   nameH:`<b class="kname" style="--rc:#8a5a12">${rkEsc(x.pn)}</b>`,
   sub:L.n?`${rkEsc(L.p)} ${rkEsc(L.n)}`:"Chưa có kiếp nào",score:`${RK_T.unit} ${x.s}`,prize:L.e?`<span class="kpod-fx2">${rkEsc(L.e)}</span>`:null}})}
 function rkRowH(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x)||o.mine;
- const who=`<span class="krk-who"><b class="krk-pn">${rkEsc(x.pn)}${mine?` <i class="krk-you">Ngươi</i>`:""}</b><small>${L.n?`${rkEsc(L.n)} · ${rkEsc(L.o)}`:"Chưa có kiếp nào được ghi"}</small></span>`;
+ const who=`<span class="krk-who"><b class="krk-pn">${rkEsc(x.pn)}${mine?` <i class="krk-you">${RK_T.me}</i>`:""}</b><small>${L.n?`${rkEsc(L.n)} · ${rkEsc(L.o)}`:"Chưa có kiếp nào được ghi"}</small></span>`;
  const c1=tab==="players"?[L.n?`${rkEsc(L.p)}`:"",`${x.k} kiếp`]:[rkEsc(L.p),rkEsc(rkEnd(L))];
  const pe=tab==="players"?`${L.n?rkEsc(L.p)+" · ":""}${x.k} kiếp · tổng ${x.t}`:`${rkEsc(L.p)} · ${rkEsc(rkEnd(L))}`;
  return `<div class="krk-row${mine?" krk-mine":""}${o.cls?" "+o.cls:""}"><b class="krk-rk">${x.r||""}</b><span class="krk-fc">${mdH(rkFace(L),"sm")}</span>${who}`+
@@ -108,21 +113,37 @@ function rkRowH(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mi
   `<span class="krk-s"><b>${x.s}</b><small>${RK_T.unit.toLowerCase()}</small></span></div>`}
 function rkHeadH(tab){const l=tab==="players"?["Kiếp tốt nhất","Số kiếp"]:["Phẩm cao nhất","Kết cục"];
  return `<div class="krk-row krk-hd" aria-hidden="true"><b class="krk-rk">Hạng</b><span class="krk-fc"></span><span class="krk-who">${tab==="players"?"Tên hiệu":"Tên hiệu · thân phận"}</span><span class="krk-c krk-c1">${l[0]}</span><span class="krk-c krk-c2">${l[1]}</span><span class="krk-pe"></span><span class="krk-s">${RK_T.unit}</span></div>`}
-function rkRulesH(){const R=CTM_RANK.RULES;const join=(N,V)=>N.map((n,i)=>`${n} ${V[i]}`).join(", ");
- const E=Object.entries(R.end).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${k} ${v}`).join(", ");
- return `<div class="krk-rules"><h4 class="kpst">Cách tính ${RK_T.unit}</h4>${kitRows([
-  ["Phẩm cao nhất",join(R.consortN,R.consort),"t"],["Cung nữ",join(R.servantN,R.servant)+`, Ma ma ${R.servant[3]}`,"t"],
-  ["Kết cục",E+`; kết cục khác (chết, lãnh cung, bị đuổi) không thêm`,"t"],["Cơ duyên hiếm",`thêm ${R.rare}`,"t"],
-  ["Năm trong cung",`${R.year} mỗi năm tròn, nhiều nhất ${R.yearCap} năm`,"t"],["Con cái",`hoàng tử ${R.son}, công chúa ${R.dau}, nhiều nhất ${R.kidCap} người con`,"t"],
+/* "Cách tính": a kit card over the board (owner 15/11) — what Công danh is, the points table read from the ONE rule table
+   (score.js RULES), and one worked life (her latest life when there is one, else a sample) scored by the same CTM_RANK.score */
+const RK_SAMPLE={n:"Tô Uyển Như",on:"Con gái thầy đồ nghèo",mr:4,sr:-1,y:6,sons:1,daus:1,tz:0,danh:40,duc:30,tg:1,endk:"Xuất gia",rare:false};
+function rkRulesH(){const R=CTM_RANK.RULES;const n=v=>`<b>${v}</b>`;
+ const own=(()=>{try{const k=Object.keys(RK.ends);if(k.length)return RK.ends[k[k.length-1]];const q=rkQ();return q.length?q[q.length-1].life:null}catch(e){return null}})();
+ const L=own||RK_SAMPLE;const sc=CTM_RANK.score(L);
+ const E=Object.entries(R.end).sort((a,b)=>b[1]-a[1]);
+ const who=`${rkEsc(CTM_RANK.phamName(L))} ${rkEsc(L.n)}`;
+ const lifeLine=[`${rkEsc(CTM_RANK.phamName(L))}`,`${L.y|0} năm trong cung`,(L.sons|0)||(L.daus|0)?`${L.sons|0} hoàng tử, ${L.daus|0} công chúa`:"không con",
+  `Danh ${Math.round(L.danh||0)}, Đức ${Math.round(L.duc||0)}`,(L.tg|0)?`thắng Tranh ghế ${L.tg} lần`:"",`kết cục ${rkEsc(L.endk||"—")}`].filter(Boolean).join(" · ");
+ return `<div class="krk-card krk-rules" role="dialog" aria-label="Cách tính ${RK_T.unit}">
+ <div class="kph krk-ch"><span class="kpht"><span class="kptitle">Cách tính ${RK_T.unit}</span><small class="kpsub">điểm của một kiếp, tính lúc kiếp khép lại</small></span>${kitXHTML('data-krk="list"',"Về bảng")}</div>
+ <div class="krk-cb">
+ <p class="krk-lead">Mỗi kiếp khép lại được chấm một số ${RK_T.unit}: cộng các phần dưới đây. ${RK_T.screen} tự tính lại từ sổ kiếp gửi lên, số tự khai không được nhận.</p>
+ <div class="kpsec"><h4 class="kpst">${own?"Kiếp vừa rồi của ta":"Ví dụ một kiếp"}: ${who}</h4><p class="krk-ex">${lifeLine}</p>
+  ${kitRows(sc.parts.map(([k,v])=>[k,`+${v}`,"g"]).concat(sc.partial?[["Kiếp dở dang","chỉ tính một nửa","r"]]:[]).concat([[RK_T.unit,n(sc.score),"t"]]))}</div>
+ <div class="kpsec"><h4 class="kpst">Phẩm cao nhất từng đạt</h4>${kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))}
+  <p class="past">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p></div>
+ <div class="kpsec"><h4 class="kpst">Kết cục</h4>${kitTiles(E.map(([k,v])=>[k,`${v}`]))}<p class="past">Kết cục khác (chết, lãnh cung, bị đuổi…) không thêm.</p></div>
+ <div class="kpsec"><h4 class="kpst">Cộng thêm</h4>${kitRows([
+  ["Năm trong cung",`${R.year} mỗi năm tròn, nhiều nhất ${R.yearCap} năm`,"t"],["Con cái",`hoàng tử ${R.son}, công chúa ${R.dau}; nhiều nhất ${R.kidCap} người con`,"t"],
   ["Thái tử",`${R.tz} mỗi con trai được lập Thái tử, nhiều nhất ${R.tzCap}`,"t"],["Danh, Đức",`lúc cuối kiếp, mỗi bậc được ${R.danh}, tính đến 100`,"t"],
-  ["Tranh ghế",`${R.tg} mỗi lần thắng, nhiều nhất ${R.tgCap} lần`,"t"],["Kiếp dở dang","chưa tròn một năm mà chưa lên Quý nhân (cung nữ: Chưởng sự cô cô): chỉ tính một nửa","t"],
-  ["Người chơi","xếp theo kiếp tốt nhất, bằng nhau thì theo tổng công danh mọi kiếp","t"]])}
-  <p class="past">Công danh do ${RK_T.screen} tự tính lại từ sổ kiếp gửi lên; số tự khai không được nhận.</p></div>`}
-function rkNameH(){return `<div class="krk-name"><h4 class="kpst">Đổi tên hiệu</h4>${kitInput({id:"krk-in",label:"Tên hiệu",value:rkIdGet().pn&&!/^Khách vô danh/.test(rkIdGet().pn)?rkIdGet().pn:"",placeholder:"Tên hiệu mới"})}
+  ["Tranh ghế",`${R.tg} mỗi lần thắng, nhiều nhất ${R.tgCap} lần`,"t"],["Cơ duyên hiếm",`${R.rare} khi kiếp gặp kết cục hiếm`,"t"]])}</div>
+ <div class="kpsec"><h4 class="kpst">Bớt đi</h4>${kitRows([["Kiếp dở dang","chưa tròn một năm mà chưa lên Quý nhân (cung nữ: Chưởng sự cô cô): cả kiếp chỉ tính một nửa","r"]])}</div>
+ <div class="kpsec"><h4 class="kpst">Xếp hạng</h4>${kitRows([["Kiếp","mỗi kiếp một dòng, công danh cao đứng trên"],["Người chơi","mỗi người một dòng, xếp theo kiếp tốt nhất; bằng nhau thì theo tổng công danh mọi kiếp"]])}</div>
+ </div></div>`}
+function rkNameH(){return `<div class="krk-name">${kitInput({id:"krk-in",label:"Tên hiệu",value:rkIdGet().pn&&!/^Khách vô danh/.test(rkIdGet().pn)?rkIdGet().pn:"",placeholder:"Tên hiệu mới"})}
  <p class="past">Từ hai đến hai mươi bốn chữ; không trùng tên người khác, không dùng lời tục.</p>${RK.msg?`<p class="krk-msg">${rkEsc(RK.msg)}</p>`:""}
- <div class="krk-nb"><button class="kbtn" data-krk="save">Ghi tên</button><button class="kbtn alt" data-krk="list">Lui</button></div></div>`}
+ <div class="krk-nb"><button class="kbtn" data-krk="save">Ghi tên</button></div></div>`}
 function rkBodyH(){const tab=RK.tab,d=RK.data[tab];
- if(RK.view==="name")return rkNameH();if(RK.view==="rules")return rkRulesH()+`<div class="krk-nb"><button class="kbtn alt" data-krk="list">Lui</button></div>`;
+ if(RK.view==="name")return rkNameH();
  if(!d)return `<p class="krk-note">${RK.err?`Mạng đứt, chưa mở được ${RK_T.screen}.`:"Đang mở bảng."}</p>`;
  const rows=d.rows||[];const note=RK.err?`<p class="krk-note">Mạng đứt: đây là bảng lần trước.</p>`:"";
  if(!rows.length)return note+`<p class="krk-note">Chưa có ${tab==="players"?"người chơi":"kiếp"} nào trên bảng.</p>`;
@@ -132,16 +153,22 @@ function rkMeH(){const tab=RK.tab,d=RK.data[tab]||{};const q=rkQ().length;const 
  let row=null;if(tab==="players")row=d.mine||null;else{const L=RK.lid&&d.last&&d.last.lid===RK.lid?d.last:d.mine;row=L||null}
  const me={r:"",pn:rkMyName(),s:0,k:0,t:0,best:null,n:"",p:"",e:""};
  const h=row?rkRowH(row,tab,{mine:true,cls:"krk-merow"}):rkRowH(me,tab,{mine:true,cls:"krk-merow"});
- const lab=tab==="players"?"Ngươi trên bảng":(RK.lid&&d.last&&d.last.lid===RK.lid?"Kiếp vừa rồi":"Kiếp tốt nhất của ngươi");
+ const lab=tab==="players"?"Ta trên bảng":(RK.lid&&d.last&&d.last.lid===RK.lid?"Kiếp vừa rồi":"Kiếp tốt nhất của ta");
  return `<div class="krk-me"><small class="krk-ml">${lab}${row&&row.r?` · hạng ${row.r} trên ${tab==="players"?d.of:d.of} ${tab==="players"?"người":"kiếp"}`:""}</small>${h}${qn}</div>`}
 function rkSub(){const d=RK.data[RK.tab];if(!d)return "Công danh của mọi người chơi";return RK.tab==="players"?`${d.of} người chơi đã vào cung`:`${d.of} kiếp đã ghi`}
 function rkPaint(){const ov=document.getElementById("krkov");if(!ov)return;const root=ov.firstElementChild;
- root.querySelector(".kpod-hd").innerHTML=kpHeader("honor",RK_T.screen,rkSub());
+ /* ONE title (owner 15/11: no seal chip + second title), the kit ✕ at its right end: closes the board, or goes back from Đổi tên hiệu */
+ root.querySelector(".kpod-hd").innerHTML=`<div class="kph krk-h"><span class="kpht"><span class="kptitle">${RK.view==="name"?"Đổi tên hiệu":RK_T.screen}</span><small class="kpsub">${RK.view==="name"?rkEsc(rkMyName()):rkSub()}</small></span>${kitXHTML('data-krk="'+(RK.view==="name"?"list":"close")+'"',RK.view==="name"?"Về bảng":"Đóng")}</div>`;
  root.querySelectorAll(".krk-tabs .ksubb").forEach(b=>{const on=b.dataset.krt===RK.tab;b.classList.toggle("on",on);b.setAttribute("aria-selected",on?"true":"false")});
- const body=root.querySelector(".krk-body");body.innerHTML=rkBodyH();root.querySelector(".krk-meb").innerHTML=RK.view==="list"?rkMeH():"";
- const nb=root.querySelector('[data-krk="name"]');if(nb)nb.hidden=RK.view!=="list";const rb=root.querySelector('[data-krk="rules"]');if(rb)rb.hidden=RK.view!=="list";
- const fit=()=>{try{kpodFit(root)}catch(e){}};fit();root.querySelectorAll(".krk-stage img").forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});setTimeout(fit,300);
+ const body=root.querySelector(".krk-body");const keep=RK.view==="rules"&&body.querySelector(".krk-list");if(!keep)body.innerHTML=rkBodyH();
+ root.querySelector(".krk-meb").innerHTML=RK.view!=="name"?rkMeH():"";
+ const pop=root.querySelector(".krk-pop");pop.innerHTML=RK.view==="rules"?rkRulesH():"";pop.hidden=RK.view!=="rules";
+ root.querySelector(".krk-tabs").hidden=RK.view==="name";
+ root.querySelector(".krk-btns").hidden=RK.view==="name";if(RK.view==="rules")try{pop.querySelector(".kit-x").focus({preventScroll:true})}catch(e){}
+ const fit=()=>rkFit(root);fit();root.querySelectorAll(".krk-stage img").forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});setTimeout(fit,300);
  const inp=root.querySelector("#krk-in");if(inp){inp.maxLength=24;setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},50)}}
+function rkFit(root){try{const st=root.querySelector(".krk-stage"),b=root.querySelector(".krk-body");
+ if(st&&b){st.style.height="";if(innerHeight<500&&innerWidth>innerHeight)st.style.height=Math.max(180,b.clientHeight-4)+"px"}kpodFit(root)}catch(e){}}
 async function rkLoad(tab,quiet){const d=rkIdGet();const c=store.get(RK_C+tab);if(c&&!RK.data[tab])RK.data[tab]=c;if(!quiet)rkPaint();
  const r=await rkReq("GET",`/top/${tab}?n=50&gid=${encodeURIComponent(d.gid)}`);
  if(r.st===200&&r.j.ok){RK.err=0;RK.data[tab]=r.j;store.set(RK_C+tab,r.j);if(r.j.me)rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn})}else RK.err=1;
@@ -150,15 +177,16 @@ function rkOpen(tab,o){o=o||{};RK.tab=tab==="players"?"players":"lives";RK.view=
  const ov=document.createElement("div");ov.id="krkov";
  ov.innerHTML=`<div class="kpod krk" role="dialog" aria-label="${RK_T.screen}"><div class="kpod-hd"></div>
   <div class="ksub krk-tabs" role="tablist"><button class="ksubb" role="tab" data-krt="lives">${RK_T.lives}</button><button class="ksubb" role="tab" data-krt="players">${RK_T.players}</button></div>
-  <div class="krk-body"></div><div class="krk-ft"><div class="krk-meb"></div><div class="krk-btns"><button class="kbtn alt" data-krk="name">Đổi tên hiệu</button><button class="kbtn alt" data-krk="rules">Cách tính</button><button class="kbtn" data-krk="close">Lui</button></div></div></div>`;
+  <div class="krk-body"></div><div class="krk-ft"><div class="krk-meb"></div><div class="krk-btns"><button class="kbtn alt" data-krk="name">Đổi tên hiệu</button><button class="kbtn alt" data-krk="rules">Cách tính</button></div></div>
+  <div class="krk-pop" hidden></div></div>`;
  document.body.appendChild(ov);const root=ov.firstElementChild;
  ov.__key=e=>{if(e.key==="Escape"){e.preventDefault();if(RK.view!=="list"){RK.view="list";rkPaint()}else rkClose()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-in"){e.preventDefault();rkSaveName()}};addEventListener("keydown",ov.__key);
- const onR=()=>{try{kpodFit(root)}catch(e){}};addEventListener("resize",onR);ov.__off=()=>removeEventListener("resize",onR);
- root.addEventListener("click",e=>{const t=e.target.closest("[data-krt],[data-krk]");if(!t)return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
+ const onR=()=>rkFit(root);addEventListener("resize",onR);ov.__off=()=>removeEventListener("resize",onR);
+ root.addEventListener("click",e=>{if(RK.view==="rules"&&e.target.classList&&e.target.classList.contains("krk-pop")){RK.view="list";rkPaint();return}const t=e.target.closest("[data-krt],[data-krk]");if(!t)return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
   if(t.dataset.krt){if(RK.tab!==t.dataset.krt){RK.tab=t.dataset.krt;RK.view="list";rkPaint();rkLoad(RK.tab,true)}return}
   const k=t.dataset.krk;if(k==="close")rkClose();else if(k==="name"){RK.view="name";RK.msg="";rkPaint()}else if(k==="rules"){RK.view="rules";rkPaint()}
   else if(k==="list"){RK.view="list";RK.msg="";rkPaint()}else if(k==="save")rkSaveName()});
- rkPaint();rkFlush();rkHello().then(()=>rkLoad(RK.tab,true));try{root.querySelector('[data-krk="close"]').focus({preventScroll:true})}catch(e){}return ov}
+ rkPaint();rkFlush();rkHello().then(()=>rkLoad(RK.tab,true));try{root.querySelector('.kpod-hd .kit-x').focus({preventScroll:true})}catch(e){}return ov}
 function rkClose(){const ov=document.getElementById("krkov");if(!ov)return;try{ov.__off&&ov.__off();removeEventListener("keydown",ov.__key)}catch(e){}ov.remove()}
 async function rkSaveName(){const inp=document.getElementById("krk-in");if(!inp)return;const v=inp.value.replace(/\s+/g," ").trim();
  if(!v){RK.msg="Xin viết tên hiệu.";rkPaint();return}RK.msg="Đang ghi tên.";rkPaint();const i2=document.getElementById("krk-in");if(i2)i2.value=v;
@@ -183,14 +211,26 @@ setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 (function(){const st=document.createElement("style");st.id="kitrank";st.textContent=`
 #krkov{position:fixed;inset:0;z-index:8990;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
 .kpod.krk{grid-template-rows:auto auto minmax(0,1fr) auto;cursor:auto;user-select:text;-webkit-user-select:text}
+.krk .kpod-hd{padding:10px clamp(8px,2.5vw,32px) 0;justify-content:stretch}
+.krk .kpod-hd .kph.krk-h{position:relative;display:flex;width:100%;box-sizing:border-box;justify-content:center;text-align:center;padding:8px 56px}
+.krk .kpod-hd .krk-h .kptitle{font-size:1.15rem}
 .krk-tabs{margin:8px clamp(8px,2.5vw,32px) 0;position:relative;top:auto}
+.krk-tabs[hidden],.krk-btns[hidden]{display:none!important}
+.krk-pop{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:max(10px,env(safe-area-inset-top)) clamp(8px,2.5vw,32px) 10px;background:#2a1a1260;cursor:pointer}
+.krk-pop[hidden]{display:none}
+.krk-card{cursor:auto;position:relative;width:min(640px,100%);max-height:100%;display:flex;flex-direction:column;background:var(--k-card,#fffaf0);border:1px solid #c9a46a;border-radius:var(--k-rad,8px);box-shadow:0 14px 40px #2a1a1270;overflow:hidden}
+.krk-card>.kph.krk-ch{position:relative;flex:none;display:flex;align-items:center;padding:10px 56px 8px 14px;border-bottom:1px solid var(--k-hair,#e6d3ac);background:linear-gradient(#f6ead6,#fffaf0)}
+.krk-card .kptitle{font-family:var(--display);font-weight:700;color:var(--gold);font-size:1.05rem}.krk-card .kpsub{display:block;font-size:.76rem;color:var(--dim)}
+.krk-cb{overflow-y:auto;min-height:0;padding:8px 14px 14px;-webkit-overflow-scrolling:touch}
+.krk-cb .kpsec{margin-top:10px}.krk-cb .kpst{margin:0 0 4px}.krk-lead,.krk-ex{margin:4px 0;font-size:.88rem;line-height:1.45;color:var(--ink)}.krk-ex{color:var(--dim);font-size:.82rem}
+.krk-cb .past{margin:4px 0 0;font-size:.8rem}
 .krk-tabs .ksubb.on{background:linear-gradient(#c9952a,#a8781c);color:#fff8e6}
 .krk-body{overflow-y:auto;overflow-x:hidden;min-height:0;-webkit-overflow-scrolling:touch;padding:0 0 8px}
-.krk .krk-stage{height:clamp(250px,44vh,440px);flex:none;cursor:default}
+.krk .krk-stage{height:clamp(270px,50vh,520px);flex:none;cursor:default;padding-top:4px}
 .krk .krk-stage .kpod-plq .kname{display:block}
-.krk-list,.krk-rules,.krk-name,.krk-note{margin:10px clamp(8px,2.5vw,32px) 0;background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
+.krk-list,.krk-name,.krk-note{margin:10px clamp(8px,2.5vw,32px) 0;background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
 .krk-note{padding:10px 12px;font-size:.88rem;color:var(--ink)}
-.krk-rules,.krk-name{padding:10px 12px}.krk-rules .kpst,.krk-name .kpst{margin:0 0 6px}
+.krk-name{padding:10px 12px}.krk-name .kpst{margin:0 0 6px}
 .krk-name .krk-msg{margin:6px 0 0;font-size:.84rem;font-weight:700;color:var(--bad,#a8301f)}
 .krk-nb{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin:10px clamp(8px,2.5vw,32px) 0}.krk-name .krk-nb{margin:10px 0 0}
 .krk-row{display:grid;grid-template-columns:2.4em 40px minmax(0,2.3fr) minmax(0,1.2fr) minmax(0,1.3fr) minmax(4.6em,auto);grid-template-areas:"rk fc who c1 c2 s";
@@ -213,13 +253,14 @@ setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 .krk-me .krk-ml{display:block;padding:4px 10px 0;font-size:.74rem;font-weight:700;color:var(--k-lab,#8a7350)}
 .krk-me .krk-row{border-bottom:0}.krk-me .krk-q{display:block;padding:0 10px 6px;font-size:.74rem;color:var(--dim)}
 .krk-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.krk-btns .kbtn{min-height:42px;padding:6px 14px}
-.krk-end{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:10px 0 0;padding:8px 10px;border:1px solid #a8740c;border-radius:var(--k-rad,8px);background:#fff3c4;font-size:.9rem}
-.krk-end .krk-el{flex:1 1 220px}.krk-end .kbtn{min-height:40px;padding:6px 14px;font-size:.84rem}
+.krk-end{margin:10px 0 0}.krk-end .kpst{margin:0 0 4px}.krk-end .krk-eb{margin-top:8px;min-height:40px;padding:6px 14px;font-size:.84rem}
 .kpmenu.krk-m{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:639px){
  .krk-row{grid-template-columns:2em 36px minmax(0,1fr) auto;grid-template-areas:"rk fc who s" "rk fc pe s";gap:2px 8px;padding:6px 8px;font-size:.84rem}
  .krk-row>.krk-c{display:none}.krk-row>.krk-pe{display:block;grid-area:pe;font-size:.76rem;color:var(--ink);min-width:0;overflow-wrap:anywhere}
  .krk-hd{display:none}.krk-btns .kbtn{flex:1 1 0;padding:6px 8px}
 }
-@media (orientation:landscape) and (max-height:820px){.krk .krk-stage{height:clamp(260px,60vh,500px)}.krk-ft{padding-bottom:8px}}
+@media (orientation:landscape) and (max-height:820px){.krk .krk-stage{height:clamp(240px,62vh,520px)}.krk-ft{padding-bottom:8px}}
+@media (orientation:landscape) and (max-height:500px){.krk .kpod-hd{padding-top:4px}.krk .kpod-hd .kph.krk-h{padding:4px 52px}.krk .kpod-hd .krk-h .kpsub{display:none}.krk-tabs{margin-top:4px}
+ .krk .krk-stage{height:230px}.krk-me .krk-ml{display:none}.krk .krk-stage .kpod-plq .kpod-fx2{display:none}.krk-ft{flex-direction:row;align-items:flex-end;padding:4px clamp(8px,2.5vw,32px) 6px}.krk-meb{flex:1 1 auto;min-width:0}.krk-btns{flex-direction:column}.krk-btns .kbtn{min-height:36px}}
 `;document.head.appendChild(st)})();

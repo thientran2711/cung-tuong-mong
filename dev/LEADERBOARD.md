@@ -86,15 +86,19 @@ cao nhất · `mama` · `endk` tiêu đề kết cục · `fate` lời kết · 
   Gửi lại cùng `lid` không tạo dòng thứ hai. Bảng mở khi mất mạng: hiện bảng lần trước (`ctm-rank-cache-*`) + "N kiếp chờ gửi".
 - Chơi cùng bạn: mỗi người chơi trên máy mình, mã khách riêng, mỗi người một dòng kiếp riêng (`mode:"coop"`).
 
-## Giao diện (kit)
-- Tên màn: **"Bảng vinh danh"** (khớp dấu triện VINH DANH của bục) — chữ ở MỘT chỗ: `RK_T` đầu `jrank.js` (thợ soát cổ ngữ đổi một dòng).
-- Mở từ: màn đầu (nút cạnh Sổ luân hồi; ☰ trong game mở màn đầu nên cũng có) và màn kết kiếp (khối dưới dòng Sổ luân hồi / Phúc duyên:
-  "Công danh kiếp này: N · Kiếp này đứng hạng N trên M kiếp." + nút "Xem Bảng vinh danh").
-- Màn: lớp toàn màn hình dùng khung bục `.kpod` (nền podium-bg, đầu `kpHeader("honor")` triện VINH DANH, phụ đề số kiếp / số người chơi),
-  thanh tab kit `.ksub` "Kiếp | Người chơi", sân khấu bục j90 (`kpodCol` + `kpodFit`: hình toàn thân của nhân vật kiếp đó, tấm biển = tên hiệu
-  người chơi, phẩm + tên nhân vật, "Công danh N", kết cục), danh sách có hạng (Hạng · chân dung · tên hiệu + nhân vật · thân phận ·
-  Phẩm cao nhất · Kết cục · Công danh; dưới 640 px gộp hai dòng), dòng của mình tô vàng + nhãn "Ngươi", và **dòng của mình luôn ở đáy**
-  (kiếp vừa rồi / kiếp tốt nhất / ngươi trên bảng, có hạng, kể cả ngoài top). Nút: Đổi tên hiệu · Cách tính · Lui (`.kbtn`).
+## Giao diện (kit) — sửa theo sếp 15/11 (nhánh review/rank-ui)
+- Tên màn: **"Bảng vàng"** (`RK_T.screen`, đầu `jrank.js`; chữ ở MỘT chỗ). Đầu màn chỉ MỘT tiêu đề (bỏ dấu triện VINH DANH + tiêu đề thứ hai),
+  phụ đề số kiếp / số người chơi, nút **✕** (kit-x, KIT 32.10) ở góc phải đóng bảng. Không còn nút "Lui".
+- Mở từ: màn đầu (nút "Bảng vàng" cạnh Sổ luân hồi) và thẻ kết kiếp (mục kit "Bảng vàng": Công danh kiếp này · Thứ hạng + nút "Xem Bảng vàng").
+- Màn: thanh tab kit `.ksub` "Kiếp | Người chơi"; sân khấu bục j90 (KIT §26 mới: NHÂN VẬT TOÀN THÂN là thứ to nhất, bục = ô bảng tên dưới chân,
+  Nhất giữa cao nhất, Nhì trái, Tam phải, huy chương ở góc trên phải ô tên, nhãn "Ta" ở góc trên trái); danh sách có hạng (Hạng · chân dung ·
+  tên hiệu + nhân vật · thân phận · Phẩm cao nhất · Kết cục · Công danh; dưới 640 px gộp hai dòng). **Ô chân dung mỗi dòng dùng khung kit theo
+  PHẨM CAO NHẤT của kiếp đó** (`rkRole`: Hoàng hậu → frame-consort-7 … Đáp ứng → frame-consort-0; cung nữ → frame-maid-N theo bậc; Ma ma →
+  frame-mama), qua `mdH` / `pframe` (j60 `kitDecor`, `__kr`). Dòng của mình tô vàng + nhãn "Ta", và luôn ở đáy (kiếp vừa rồi / kiếp tốt nhất của ta / ta trên bảng).
+- Nút dưới: Đổi tên hiệu · Cách tính (`.kbtn alt`). **Cách tính** = thẻ kit nổi trên bảng (tiêu đề + ✕, chạm ra ngoài / Esc đóng): lời dẫn,
+  **một kiếp làm ví dụ** (kiếp vừa rồi của ta nếu có, không thì "Ví dụ một kiếp": Phi Tô Uyển Như…) tính bằng chính `CTM_RANK.score` (từng phần +N,
+  tổng), rồi bảng điểm đọc từ `RULES` (Phẩm cao nhất: ô kit `kitTiles`; Kết cục: `kitTiles`; Cộng thêm, Bớt đi, Xếp hạng: `kitRows`).
+- Điện thoại ngang (≤ 500 px cao, vd 844x390): sân khấu cao đúng phần nhìn thấy (`rkFit`), ô tên gọn, danh sách cuộn bên dưới.
 - j90 thêm trường tùy chọn cho mỗi mục bục (không đổi gì cũ): `fig` ảnh toàn thân, `face` chân dung dự phòng, `nameH` tên trên biển,
   `you` nhãn của mình (KIT.md §26).
 
@@ -103,7 +107,9 @@ cao nhất · `mama` · `endk` tiêu đề kết cục · `fate` lời kết · 
   (34 kiểm: khách, tên mặc định, kiếp, hạng, gửi lại, tần suất, lid người khác, top + dòng của mình ngoài top, mã khách không lộ, người chơi,
   tổng, đổi tên, trùng, tục, /me).
 - E2E Playwright `dev/test/rank-e2e.js <game> <rank> <WxH@dpr> <outdir> [bản cũ]` với máy chủ giả `node rank/worker/test/local-server.mjs <port>`
-  (cùng board.js trên node:sqlite) — 3 khách giả, 5 kiếp, đổi tên, ngoại tuyến rồi gửi lại, sổ bản cũ.
+  (cùng board.js trên node:sqlite) — 3 khách giả, 5 kiếp, đổi tên, ngoại tuyến rồi gửi lại, sổ bản cũ; từ 15/11 kiểm thêm: một tiêu đề
+  "Bảng vàng" + ✕ không "Lui", nhân vật bục ≥ 55 % chiều cao sân khấu và > 2 lần ô tên, huy chương ở góc ô tên, khung theo phẩm từng dòng,
+  thẻ Cách tính (bảng điểm + ví dụ, đóng bằng ✕), thẻ kết kiếp (nhân vật + tên lấp ≥ 95 % cột, tên ở trên, không ô viền, "Xem Bảng vàng").
 
 ## PROGRESS
 - 15/11: Worker `ctm-rank` triển khai (wrangler qua proxy; bản 3f13e913, rồi d7bcca9b), `/health` 200, `/top/lives` rỗng; `ctm-coop` vẫn 200.
