@@ -123,3 +123,17 @@ function trSnowGreet(){try{return Math.max(1,trGreet(S,"th",{base:5,tags:DEED.sn
   if(who){if(who===S&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: <b>${traitsOf(S)[0]}</b>`);
    if(who==="th"&&!L.some(x=>/Tính nết/.test(x)))L.push(`Tính nết: ${S.thO&&S.thO.archK?`<b>${thArch().n}</b>`:"chưa rõ"}`);
    if(who==="th"||who===S||who===S.emp||who===S.maid||(typeof rivals!=="undefined"&&rivals.includes(who)))L.push(trongLine(who));o.lines=L}}}catch(e){console.error(e)}return p0.call(this,o)}})();
+/* LUẬT SỬA CẢ NHÓM: every other deck act that raises Thái hậu regard (gifts, portrait, sutra…) follows the same family rule:
+   × her trọng (DEED.thGift) × repetition of THAT act (last 6 mornings) × saturation (ceiling + thGiftCap, fading over thGiftSpan).
+   The card shows the result (measured 16/11: "Vẽ chân dung tặng Thái hậu" +10 spammed was the main reason she sat at 100). */
+Object.assign(BAL.trong,{thGiftCap:15,thGiftSpan:20,thGiftRep:.25,thGiftMin:.3});
+DEED.thGift={"Hiếu":1,"Lễ":1};
+function trThDeedN(n){const L=(S.thDeed||{})[n]||[],now=wk();return L.filter(w=>w<now&&w>=now-6).length}
+function trThDeed(a){const B=BAL.trong,A=thArch(),g=a.w.th;const vm=trongMul("th",DEED.thGift);const n=trThDeedN(a.n);const rep=Math.max(B.thGiftMin,1-B.thGiftRep*n);
+ const cap=A.cap+B.thGiftCap,capF=S.th>cap?Math.max(0,1-(S.th-cap)/B.thGiftSpan):1;const v=Math.round(g*vm*rep*capF);
+ const X=[];if(n>=1)X.push("mới làm gần đây: Thái hậu đỡ cảm động");if(capF<1)X.push("Thái hậu đã quý ngươi lắm: khó thêm");
+ const w=Object.assign({},a.w);if(v>0)w.th=v;else delete w.th;const o=Object.assign({},a,{w,risk:[a.risk,X.join(" · ")].filter(Boolean).join(" · ")});
+ const mark=()=>{S.thDeed=S.thDeed||{};const L=S.thDeed[a.n]=S.thDeed[a.n]||[];L.push(wk());if(L.length>8)L.splice(0,L.length-8)};
+ if(a.run){const r0=a.run;o.run=function(){mark();return r0.apply(this,arguments)}}else{const g0=a.go,f0=a.fail;o.go=function(){mark();return g0?g0.apply(this,arguments):undefined};o.fail=function(){mark();return f0?f0.apply(this,arguments):undefined}}
+ return o}
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.thDead&&Array.isArray(deck))deck=deck.map(a=>a&&a.w&&a.w.th>0&&!/^Thỉnh an/.test(a.n)&&!a.__trTh?Object.assign(trThDeed(a),{__trTh:1}):a)}catch(e){console.error(e)}return r}})();
