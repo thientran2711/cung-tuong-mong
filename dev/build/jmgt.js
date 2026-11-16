@@ -32,7 +32,12 @@ function mgSet(kind,o){const t=mgTier(kind,o);KG82.occ=t.occ;KG82.tier=t;KG82.lv
 function mgDiffTxt(t,kind){const hint=kind&&typeof kg82Know==="function"&&kg82Know(kind)?[" · có gợi ý ngay trên bàn"," · gợi ý bớt đi"," · gợi ý ở nút Gợi ý"][t.tier]:"";
  return `${t.word}${hint} · ${t.occName}, tài nghệ bậc ${t.lv}`}
 function mgWord(raw){const W=BAL.mgTier.word;return raw>=W[3]?"Xuất sắc":raw>=W[2]?"Giỏi":raw>=W[1]?"Khá":raw>=W[0]?"Tạm được":"Vụng"}
-window.mgTier=mgTier;window.mgSet=mgSet;window.mgWord=mgWord;
+/* full-marks generosity of an engine (the share of a perfect run that already counts as 10/10): the engine's old value b at ease ≥ BAL.mgTier.fullAt,
+   rising to 1 (a full run needed) at ease 0. Read by j91 trace / arrange / hold and jts pluck (whole family of capped scores). */
+function mgFull(env,b){const e=env&&env.lv!=null?+env.lv:BAL.mgTier.fullAt,M=BAL.mgTier.fullAt;return Math.min(1,b+(1-b)*cl((M-e)/M,0,1))}
+/* the grade of a finished play: engines pass a FLOAT 0..10; the curve BAL.mgTier.gamma (>1 = stricter near the top) turns it into the 0..10 shown */
+function mgGrade(raw){const g=BAL.mgTier.gamma;const x=cl(+raw||0,0,10)/10;return cl(Math.round(10*Math.pow(x,g)),0,10)}
+window.mgTier=mgTier;window.mgFull=mgFull;window.mgGrade=mgGrade;window.mgSet=mgSet;window.mgWord=mgWord;
 /* wiring (edited in place, 16/11): j82 startContest (occ "hoi" / o.occ, o.big), playArt (occ "hoc" / o.occ), kg82Lesson (lessons), kg82Word → mgWord,
    jexam exRun (occ "exam", rank = target), jts tsGame (occ "trieu" / o.occ), jkc Phúc tuyển (playArt occ "tuyen"). Skip / "để tài nghệ quyết định"
    values keep using her real art level (KG82.tier.lv) through kg82NpcMean. */

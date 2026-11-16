@@ -18,7 +18,7 @@ const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeo
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
   for(const [id,t] of due){if(!T.has(id))continue;if(t.iv){t.at+=Math.max(1,t.iv)}else T.delete(id);try{t.fn(...t.a)}catch(e){console.error(e)}}};
- const pump=()=>{for(let k=0;k<2;k++){vt+=1000/60;fire();const L=[...RAF.entries()];RAF.clear();for(const [,cb] of L){try{cb(vt)}catch(e){console.error(e)}}}ch.port2.postMessage(0)};
+ const pump=()=>{for(let k=0;k<6;k++){vt+=1000/60;fire();const L=[...RAF.entries()];RAF.clear();for(const [,cb] of L){try{cb(vt)}catch(e){console.error(e)}}}ch.port2.postMessage(0)};
  ch.port1.onmessage=pump;
  performance.now=()=>vt;
  window.setTimeout=(fn,d,...a)=>{if(typeof fn!=="function")return 0;const id=seq++;T.set(id,{fn,a,at:vt+Math.max(0,+d||0)});return id};
@@ -26,7 +26,7 @@ const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeo
  window.clearTimeout=window.clearInterval=id=>{T.delete(id)};
  window.requestAnimationFrame=cb=>{const id=seq++;RAF.set(id,cb);return id};window.cancelAnimationFrame=id=>{RAF.delete(id)};
  window.__vclock={now:()=>vt};
- /* measuring only: skip picture blits (the GPU cost); game logic never reads pixels */CanvasRenderingContext2D.prototype.drawImage=function(){};ch.port2.postMessage(0)};
+ /* measuring only: skip picture blits (the GPU cost); game logic never reads pixels */{const P=CanvasRenderingContext2D.prototype;for(const k of ['drawImage','fill','stroke','fillRect','strokeRect','fillText','strokeText','clearRect','putImageData'])P[k]=function(){};}ch.port2.postMessage(0)};
 /* in-page bots: start once the game is in phase "play"; return when it leaves it */
 const BOTS_SRC=(BOT)=>{
  const G=()=>{let s=0;for(let i=0;i<6;i++)s+=Math.random();return (s-3)/Math.sqrt(.5)};
@@ -51,7 +51,7 @@ const BOTS_SRC=(BOT)=>{
      if(holdWant!==pk.hold){holdWant=pk.hold;holdAt=now+Math.abs(G())*BOT.rt}
      if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):at(pk.x,pk.y),x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
       if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}else if(!holdWant&&hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}}
-     setTimeout(tick,16);return}
+     if(!pk.drag&&!pk.sel){setTimeout(tick,16);return}}
    if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<BOT.slip;const s=sc()*BOT.px;
     const go=()=>{if(KG82.phase!=='play'){busy=false;return}
      if(slip){randomMove(()=>{busy=false;nx=performance.now()+BOT.think*(.5+Math.random())});return}
@@ -65,26 +65,27 @@ const BOTS_SRC=(BOT)=>{
    setTimeout(tick,16)};tick()});};
 (async()=>{const b=await chromium.launch();const jobs=[];for(const kind of KINDS)for(const tier of TIERS)for(const bot of BOTS)for(let i=0;i<N;i++)jobs.push({kind,tier,bot});
  const out={};const errs=[];let done=0;const t0=Date.now();
- const worker=async(wi)=>{const ctx=await b.newContext({viewport:{width:900,height:700},hasTouch:true,deviceScaleFactor:1});
+ const open=async()=>{const ctx=await b.newContext({viewport:{width:900,height:700},hasTouch:true,deviceScaleFactor:1});
   await ctx.addInitScript(VCLOCK);await ctx.addInitScript(`(${BOTS_SRC})(${JSON.stringify(BOT)})`);
   const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:60000,polling:200});
   await p.evaluate(()=>{try{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
    const st=document.createElement('style');st.textContent='#kroul,#title{display:none!important} *,*::before,*::after{animation:none!important;transition:none!important} body *{visibility:hidden!important} #ov,#ov *{visibility:visible!important}';document.head.appendChild(st)});
-  await p.waitForTimeout(800);
+  await p.waitForTimeout(800);return{ctx,p}};
+ const worker=async(wi)=>{let {ctx,p}=await open();
   while(jobs.length){const J=jobs.shift();
-   const raw=await p.evaluate(async J=>{try{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
+   let raw;try{raw=await Promise.race([new Promise((_,rej)=>setTimeout(()=>rej(new Error('real timeout')),90000)),p.evaluate(async J=>{try{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
      const K=KG82_KIND[J.kind];if(!K)return{err:'no kind '+J.kind};
-     let lv=0,tw='';if(/^e\d/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word}
+     let lv=0,tw='';if(/^e-?[\d.]/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word}
      KG82.mgBot=1;const d=kg82Open({art:K.n,title:'đo',how:K.how||''});if(!d)return{err:'no frame'};
-     KG82.lv=lv;KG82.ctx='hoc';const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot);else setTimeout(w,16)};w()});
-     kg82Close(true);return{raw:r,lv,tw}},J);
+     KG82.lv=lv;KG82.ctx='hoc';const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot);else setTimeout(w,16)};w()});
+     kg82Close(true);return{raw:r,lv,tw}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
    const key=`${J.kind}|${J.tier}|${J.bot}`;(out[key]=out[key]||[]).push(raw.err?null:raw.raw);if(raw.err)errs.push(key+' '+raw.err);
    if(++done%20===0)process.stderr.write(`${done} plays, ${((Date.now()-t0)/1000)|0}s\n`)}
   await ctx.close()};
  await Promise.all([...Array(PAGES)].map((_,i)=>worker(i)));await b.close();
  const rows=Object.entries(out).map(([k,v])=>{const [kind,tier,bot]=k.split('|');const L=v.filter(x=>x!=null);const n=L.length,m=L.reduce((a,x)=>a+x,0)/Math.max(1,n);
-  const ge=t=>Math.round(100*L.filter(x=>x>=t).length/Math.max(1,n));return{kind,tier,bot,n,mean:+m.toFixed(2),ge7:ge(7),ge8:ge(8),ge9:ge(9),ge10:ge(10),hist:[...Array(11)].map((_,i)=>L.filter(x=>x===i).length)}});
+  const ge=t=>Math.round(100*L.filter(x=>Math.round(x)>=t).length/Math.max(1,n));return{kind,tier,bot,n,mean:+m.toFixed(2),ge7:ge(7),ge8:ge(8),ge9:ge(9),ge10:ge(10),hist:[...Array(11)].map((_,i)=>L.filter(x=>Math.round(x)===i).length),raw:L.map(x=>+x.toFixed(3))}});
  const res={bot:BOT,rows,errors:[...new Set(errs)].slice(0,30)};if(OUT)fs.writeFileSync(OUT,JSON.stringify(res,null,1));
  for(const r of rows)console.log([r.kind,r.tier,r.bot,'n='+r.n,'mean='+r.mean,'≥8:'+r.ge8+'%','≥9:'+r.ge9+'%','10:'+r.ge10+'%',r.hist.join(' ')].join('\t'));
  if(res.errors.length)console.log('ERRORS',res.errors)})();
