@@ -64,7 +64,7 @@
 | place-glyphs reviewer (glyphs only; NVP scene stays unwired) | review/place-glyphs-r1 | main s11 | session_01UV1SzknxC4i1bfnzo28AyP (sonnet) | RUNNING | 16/11 06:41Z |
 | postmerge-fix-1 reviewer (buổi tint removal + kpshort test) | review/postmerge-fix-1-r1 | main s11 | (see HANDOVER s11) sonnet | RUNNING | 16/11 06:44Z |
 | story-roads 14 chapters: plan + phase 1 (frame + j67 port) | review/story14-p1 | main s11 | session_01UV1SzkHMTxeSLrXW9U3BdC (opus, structure) | RUNNING | 16/11 06:46Z |
-| card-flip videos for owner (me picked / other picked) | (handover reports only) | main s11 | session_01UV1SzhNCLWgwR9ozmc9zcD (sonnet) | RUNNING | 16/11 06:46Z |
+| card-flip videos for owner (me picked / other picked) | (handover reports only) | main s11 | session_01UV1SzhNCLWgwR9ozmc9zcD (sonnet) | DONE (sent) | 16/11 06:46Z |
 | low-context canon split (OD:L1241) — same worker as canon-pairs | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus) | RUNNING | 16/11 06:46Z |
 | D6 review | review/econ-items-r1 | C | session_011xDdVQ5xcrYDf3N1snQ5L1 | RUNNING | 06:46Z 16/11 |
 | C44 cloud-save-r1 re-merge on main (auto-deploys coop Worker) | review/merge-hot-4 | main s11 | session_01UV1SzhS3WeMXFgk8CgeevX (sonnet) | RUNNING | 16/11 06:47Z |
