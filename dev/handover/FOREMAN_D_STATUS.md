@@ -44,7 +44,7 @@ main at start = eba64ead4.
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death | opus | worker session_01DgYSWoy8UWVPrve6HEjZfR RUNNING (12:58Z; mortality live) |
-| D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer preg-rate-r1 session_01DgYSWobwX8ehBC7umUckXK RUNNING (13:17Z) |
+| D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | PASS 1c31bd79 (review/preg-rate-r1; reviewer archived) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
 | C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
@@ -52,6 +52,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/preg-rate-r1 1c31bd7957367b7f27c550e60f7668d3a09cefc5 (D57: conception ×2 + fertile-window peak; reviewer unified tryst/NPC-affair/Tư thông rolls into trystCh (BAL.trystC); sims NPC births/consort-yr .06→.10, palace kids 10y 6.2→9.5, peak kept; ancestor main e9c6021d; report reports/preg-rate-r1.md). Follow-ups (non-blocking): j42 servant-mode tryst typed roll(10); VANPHONG doc gap for side-chance ladder Rất thấp…Rất cao (OD:L221) → kit keeper.
 - READY review/name-mask-r1 571dc15e5855bf529449086c03ee7b840784ff7a (unmet-name leak family residue; report reports/review-name-mask-r1.md; ancestor = origin/main at review time). Follow-up (not blocking, wording): "Một vị Thường tại chưa quen biết là người quen cũ" reads oddly.
 READY review/entry-exam-r1 d7364cb2e21d6d19451bae2f98458e1a8e170bb6 (entry selection exam + origin intros; SHIP ORDER: after review/kc-roads-cn-nc-fix (D, running) and B's mg-balance; BAL.mgTier.occ.tuyen 1.5→1; tests entry-exam 9/9+5/5+3/3, kc-roads direct 9/9, coop-together 26/26, coop-e2e 59/59; report reports/review-entry-exam-r1.md)
 READY review/close-maid-r1 ebc85f78446186a4a990024b17c73091c700f218 (D58 close maid by origin v2, BAL.cmaid; also carries READY servant-mline-r3; reviewer fixed S.cm clash with jcmood → S.cmaid (monthly crash), ONE CORE newLoy/spyDanh; main 9ddb3f6c ancestor; report reports/review-close-maid-r1.md)
