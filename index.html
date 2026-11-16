@@ -37906,11 +37906,12 @@ const BTR_FEST={newyear:{tint:"#ee8f80",fx:[["petal-peach",16],["lantern",3]]},n
  thanhminh:{tint:"#cfe3c6",fx:[["petal-plum",10],["paper",6]]},doanngo:{tint:"#bfe0a8",fx:[["leaf",10],["jade",4]]},
  phoenix:{tint:"#f2cb8a",fx:[["petal-peach",12],["streak",3]]},thattich:{tint:"#b9b4ee",fx:[["orb",4],["spark",10]]},
  trungthu:{tint:"#f6dc92",fx:[["lantern",4],["osmanthus",10]]},trungcuu:{tint:"#f0b868",fx:[["osmanthus",12],["leaf",6]]},
- dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]}};
+ dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]},
+ vulan:{tint:"#9fb4d8",fx:[["orb",5],["incense",3]]},vantho:{tint:"#f6b070",fx:[["petal-peach",10],["spark",8]]},lapbat:{tint:"#f0dcc0",fx:[["snow",10],["incense",3]]}};
 /* painted band skins that exist on the CDN (sample pictures made before the 15:35Z rule "all drawing → Foreman C"; the rest of the art list is in dev/handover/reports/anim-pace.md → Foreman C) */
-const BTR_ART={thu:1,trungthu:1};
+const BTR_ART={xuan:1,ha:1,thu:1,dong:1,newyear:1,nguyentieu:1,thanhminh:1,doanngo:1,phoenix:1,thattich:1,trungthu:1,trungcuu:1,dongchi:1,giaothua:1,vulan:1,vantho:1,lapbat:1};
 /* painted palace-style buổi icons img/fx/buoi-ico-<0 sáng|1 trưa|2 chiều|3 tối>.webp (owner 16/11 KIT review 7.5; art by Foreman C): set the flag to 1 when the file is on the CDN; 0 = no icon (today's look) */
-const BTR_ICON=[0,0,0,0];
+const BTR_ICON=[1,1,1,1];
 /* sun / moon on a 0..1 arc: t = place along the band, v = visible (0..1) per buổi */
 const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:.86,v:1},m:{t:-.1,v:0}},{s:{t:1.08,v:0},m:{t:.5,v:1}}];
 let btrPrev=null,btrEl=null,btrEnd=null;
@@ -41352,7 +41353,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="949bdb0e6c00";window.CTM_BUILD=BUILD;
+const BUILD="017449032556";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
