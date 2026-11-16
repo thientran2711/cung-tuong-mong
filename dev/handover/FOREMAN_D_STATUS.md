@@ -20,11 +20,11 @@ main at start = eba64ead4.
 | D54 buổi paintings | — | — | MOVED to Foreman C |
 | D56 icons + Nội vụ phủ art | — | — | MOVED to Foreman C |
 | fig-hd-upscale + face-sharp-hd2 | review/fig-hd-upscale | — | MOVED to Foreman C |
-| slap-mg review 3c4f1c81b | review/slap-mg-r1 | sonnet | facefx-all-r2 on main → reviewer RUNNING |
+| slap-mg review 3c4f1c81b | review/slap-mg-r1 | sonnet | facefx-all-r2 on main → reviewer session_01DgYSWpbGcGGy33MK9zBq4u RUNNING |
 | coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | kitStageRail (jrail.js §77) now on main → reviewer session_01DgYSWnc7QSik7k9buMTQwK RUNNING |
-| servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | reviewer RUNNING (main s10 inbox 06:00Z; part A PASS e82a9bcf by main) |
-| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | GO (main s10 06:50Z) → worker RUNNING |
-| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker RUNNING (audit + proposal; no number change without owner OK) |
+| servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | reviewer RUNNING (main s10 inbox 06:00Z; part A PASS e82a9bcf by main); session_01DgYSWnPWsFwg4R6LHZTKjr |
+| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | GO (main s10 06:50Z) → worker session_01DgYSWkZteXgU6WAkpJc2qr RUNNING |
+| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
 ## PASS (for the main coordinator to fast-forward)
 - PASS review/coop-invite-ux-r1 727b6112b330eb8b96e621b0368f5cacccd1788f (C43 invite waiting state + 1-2-3 steps + auto-continue; coop-e2e 59/59; ff when written — main has moved since (bd6342c7), re-merge needed)

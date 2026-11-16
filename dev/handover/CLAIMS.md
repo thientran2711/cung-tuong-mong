@@ -80,7 +80,7 @@
 | balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
 | one-core: every rule number from BAL + guard test (owner ONE CORE) | review/one-core | main s11→s12 | session_01UV1Szm1iPxyYyr6JpCfpnd (opus) | RUNNING | 16/11 07:21Z |
 | D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | RUNNING | 07:23Z 16/11 |
-| servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | (opus reviewer session, id follows) | RUNNING | 16/11 07:27Z |
-| slap-mg review (§79) | review/slap-mg-r1 | D | (reviewer session, id follows) | RUNNING | 16/11 07:27Z |
-| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | (opus worker session, id follows) | RUNNING | 16/11 07:27Z |
-| Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | (opus worker session, id follows) | RUNNING | 16/11 07:27Z |
+| servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | session_01DgYSWnPWsFwg4R6LHZTKjr | RUNNING | 16/11 07:27Z |
+| slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | RUNNING | 16/11 07:27Z |
+| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | RUNNING | 16/11 07:27Z |
+| Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | RUNNING | 16/11 07:27Z |
