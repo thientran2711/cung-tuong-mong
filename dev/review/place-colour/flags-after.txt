@@ -1,0 +1,9 @@
+states 968 flagged 6
+  night looks like day: 6
+
+vuon-dong-3-0: night looks like day L 52.9
+kn-ha-3-2: night looks like day L 52.7
+kn-dong-3-0: night looks like day L 52.3
+vuon-dong-3-1: night looks like day L 52.9
+kn-xuan-3-1: night looks like day L 53.1
+kn-dong-3-1: night looks like day L 52.3

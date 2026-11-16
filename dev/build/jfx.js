@@ -15,28 +15,35 @@ const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts
 /* buzz patterns added to j11's VIB (ms) */
 Object.assign(VIB,{win:[12,40,12],fail:[35],death:[45],lock:[14],demote:[60,50,60],preg:[15,30,15],harm:[30,30,70]});
 /* THE TABLE: kind → buzz · shake (1 light, 2 hard) · flash · particles (comma list) */
-const FX={
- decree :{vib:"decree", shake:1,flash:"gold", px:"rays"},          // thánh chỉ, ân thưởng
- promote:{vib:"promote",shake:1,flash:"gold", px:"rays,stars"},    // thăng phẩm, tấn phong
+const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi sprite kinds, flash gold/warm = glowburst sprite, flash blood/poison/
+               inkwisp = painted edge overlay (kitFxEdge), sheet = true-alpha sheet (kitFxSheet), light = screen-blend clip (kitFxLight) */
+ decree :{vib:"decree", shake:1,flash:"gold", px:"rays,golddust"}, // thánh chỉ, ân thưởng (gold dust off the edict)
+ promote:{vib:"promote",shake:1,flash:"gold", px:"rays,stars,goldpetals"}, // thăng phẩm, tấn phong
  coin   :{vib:"coin",                         px:"coins"},         // lĩnh bổng, được bạc
- hit    :{vib:"hit",    shake:2,flash:"red",  px:"inks"},          // bị tát, bị phạt, bị hại
- harm   :{vib:"harm",   shake:2,flash:"red",  px:"ink"},           // bị hãm hại nặng
- poison :{vib:"poison", shake:2,flash:"red",  px:"ink"},           // trúng độc
- expose :{vib:"expose", shake:2,flash:"red",  px:"ink"},           // bị phát giác, bị định tội
- verdict:{              shake:1},                                  // con dấu định tội (đi cùng expose)
+ hit    :{vib:"hit",    shake:2,              px:"brush"},         // bị tát, bị phạt: brush streak + paper shake
+ harm   :{vib:"harm",   shake:2,flash:"blood",px:"ink"},           // bị hãm hại nặng: ink-blood bleeds in from the edges
+ poison :{vib:"poison", shake:2,flash:"poison"},                   // trúng độc: green-black ink seeps in
+ expose :{vib:"expose", shake:2,flash:"blood",px:"ink"},           // bị phát giác, bị định tội
+ verdict:{              shake:1,              px:"inks"},          // con dấu định tội (đi cùng expose): seal slam + ink blot
+ seal   :{vib:"lock",   shake:1,              px:"inks"},          // con dấu thi tài / ấn định
  ink    :{                                    px:"inks"},          // kẻ khác sa cơ
+ rumour :{                      flash:"inkwisp"},                  // lời đồn: ink wisps curl in
  birth  :{vib:"birth",          flash:"warm", px:"flowers"},       // sinh con
- preg   :{vib:"preg",           flash:"warm", px:"petals"},        // có thai
+ preg   :{vib:"preg",           flash:"warm", px:"lotus"},         // có thai: lotus light + lotus petals
  favour :{                                    px:"petals"},        // được sủng
+ romance:{                                    px:"peach"},         // tình ý: peach blossom
+ betray :{vib:"harm",                         sheet:"thread"},     // phản bội / đoạn tuyệt: the red thread snaps
  night  :{vib:"night",          flash:"night",px:"motes"},         // đêm thị tẩm
- death  :{vib:"death",          flash:"dark"},                     // chết: tối dần, không rung mạnh
- demote :{vib:"demote",         flash:"dark", px:"ash"},           // giáng phẩm, lãnh cung
+ death  :{vib:"death",          flash:"dark", sheet:"silk",px:"incense"}, // chết: dims, white silk falls, incense rises
+ demote :{vib:"demote",         flash:"dark", px:"jade,ash"},      // giáng phẩm, lãnh cung: cracked jade + ash
  ash    :{                                    px:"ash"},           // vào lãnh cung
  win    :{vib:"win",                          px:"stars"},         // THÀNH
  fail   :{vib:"fail",                         px:"smoke"},         // HỎNG / BẤT LỢI
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
+ festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
@@ -47,58 +54,74 @@ function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.ge
 function kitFx(kind,o){const f=FX[kind];if(!f||!kfOn())return false;o=o||{};KFX.log.push(kind);if(KFX.log.length>60)KFX.log.shift();
  try{if(f.vib)vib(f.vib)}catch(e){}
  if(kfStill())return true;
- if(f.shake)kfShake(f.shake);if(f.flash)kfFlash(f.flash);
+ if(f.shake)kfShake(f.shake);if(f.flash)kfFlash(f.flash,kfPt(o));
  if(f.px){const pt=kfPt(o);for(const p of f.px.split(","))kfPx(p,pt)}
+ try{if(f.sheet&&typeof kitFxSheet==="function")kitFxSheet(f.sheet,o.el||null,f.sheet==="silk"?{scale:1.1}:{});
+  if(f.light&&typeof kitFxLight==="function")kitFxLight(f.light,null,{dur:o.dur||4000,scale:1})}catch(e){}
  return true}
 window.kitFx=kitFx;
 /* ---------- shake + flash (DOM, transform/opacity only) ---------- */
 function kfShake(lv){const g=document.querySelector(".game")||document.getElementById("game");if(!g||!g.animate)return;
  const a=lv>1?7:3.5,K=lv>1?[[0,0],[-a,1.5],[a,-2],[-a*.7,1],[a*.5,-1],[-a*.25,.5],[0,0]]:[[0,0],[-a,0],[a,.8],[-a*.5,0],[0,0]];
  try{g.animate(K.map(([x,y])=>({translate:`${x}px ${y}px`})),{duration:lv>1?360:260,easing:"ease-out"})}catch(e){}}
-function kfFlash(k){const d=document.createElement("div");d.className="kfx-fl kfx-"+k;document.body.appendChild(d);setTimeout(()=>d.remove(),k==="dark"||k==="night"?2300:1500)}
+/* gold / warm light = the PAINTED gold glow (KIT §68 sprite "glowburst", true alpha: shows on paper and on dark scenes); red / dark / night stay
+   plain screen washes (colour grading over the whole screen, not a drawn object) */
+function kfFlash(k,pt){if((k==="blood"||k==="poison"||k==="inkwisp")&&typeof kitFxEdge==="function"){kitFxEdge(k==="inkwisp"?"ink":k);return}
+ if(k==="red"&&typeof kitFxEdge==="function"){kitFxEdge("blood",{hold:300});return}  /* old callers of the flat red flash get the painted edge */
+ if((k==="gold"||k==="warm")&&typeof kitFxBurst==="function"){const r=pt&&pt.r,sz=r?Math.max(r.width,r.height):Math.min(innerWidth,innerHeight)*.55;
+  kitFxBurst("glowburst",pt||null,1,{scale:Math.max(.6,Math.min(2.4,sz/220)),a0:k==="warm"?.6:.95,life:k==="warm"?70:55});return}
+ const d=document.createElement("div");d.className="kfx-fl kfx-"+k;document.body.appendChild(d);setTimeout(()=>d.remove(),k==="dark"||k==="night"?2300:1500)}
 /* ---------- Pixi: one loader (also used by j11's stage layer) ---------- */
 function kfApp(){if(KFX.app)return Promise.resolve(KFX.app);if(KFX.loading)return KFX.loading;
  KFX.loading=kitPixi().then(async P=>{const app=new P.Application();await app.init({backgroundAlpha:0,resizeTo:window,antialias:false,autoDensity:true,resolution:1,powerPreference:"low-power"});
   const c=app.canvas;c.id="kfxcv";c.setAttribute("aria-hidden","true");document.body.appendChild(c);app.ticker.maxFPS=60;KFX.root=new P.Container();app.stage.addChild(KFX.root);
   kfTex(P,app);app.ticker.add(kfTick);app.ticker.stop();c.style.display="none";KFX.app=app;KFX.loaded=true;return app}).catch(e=>{KFX.loading=null;KFX.failed=(KFX.failed||0)+1;throw e});
  return KFX.loading}
-function kfTex(P,app){const T=KFX.tex,G=()=>new P.Graphics(),gen=g=>app.renderer.generateTexture({target:g,resolution:2});
- let g=G();for(let i=8;i>0;i--)g.circle(16,16,i*2).fill({color:0xffffff,alpha:.13});T.glow=gen(g);
- g=G();g.ellipse(9,5,9,5).fill(0xffffff);T.petal=gen(g);
- g=G();g.moveTo(0,6).bezierCurveTo(5,-1,14,-1,20,6).bezierCurveTo(14,13,5,13,0,6).fill(0xffffff);T.leaf=gen(g);
- g=G();g.poly([10,0,12.4,7.6,20,10,12.4,12.4,10,20,7.6,12.4,0,10,7.6,7.6]).fill(0xffffff);T.star=gen(g);
- g=G();g.circle(10,10,10).fill(0xe9e6dc).circle(10,10,10).stroke({width:1.6,color:0x9c978a});g.circle(10,10,6.6).stroke({width:1,color:0xb8b3a6});g.rect(7.4,7.4,5.2,5.2).fill(0x7d786c);T.coin=gen(g);
- g=G();g.ellipse(16,2,16,2).fill(0xffffff);T.streak=gen(g);
- g=G();g.circle(16,16,16).fill({color:0xffffff,alpha:.35}).circle(16,16,12).fill({color:0xffffff,alpha:.4}).circle(16,16,8).fill({color:0xffffff,alpha:.5});T.blob=gen(g);
- g=G();g.roundRect(0,0,14,18,4).fill(0xf08a3a).roundRect(2.5,2.5,9,11,3).fill(0xffd48a).rect(5,17,4,3).fill(0x8a3a1a);T.lantern=gen(g)}
-/* particle: sprite + v {vx,vy,g,drag,life,max,spin,grow,a0,fade,sway,tw} */
-function kfSp(tex,x,y,v,tint,sc,blend){const P=window.PIXI;const s=new P.Sprite(KFX.tex[tex]);s.anchor.set(.5);s.x=x;s.y=y;if(tint!=null)s.tint=tint;s.scale.set(sc||1);if(blend)s.blendMode=blend;
- s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:sc||1},v);s.v.max=s.v.life;s.alpha=s.v.fade==="in"||s.v.fade==="inout"?0:s.v.a0;
- KFX.root.addChild(s);KFX.parts.push(s);return s}
-const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?{tex:"petal",col:[0xf4b6c8,0xf9d3dc,0xffe8ee]}:m<=6?{tex:"petal",col:[0xf7c6d4,0xffffff,0xe9f2d0]}:m<=9?{tex:"leaf",col:[0xd9822b,0xc0502a,0xe0a83a]}:{tex:"petal",col:[0xc8283a,0xe05060,0xffffff]}};
+/* textures: PAINTED atlases only (KIT §68 painted-fx, jfxkit KFK_SP), loaded per kind on first use. The old code-drawn shapes
+   (glow, petal, leaf, star, coin, streak, blob, lantern — Pixi Graphics) are gone (owner 15/11 20:55Z: never code-drawn art). */
+function kfTex(){}
+/* particle: pooled painted sprite (jfxkit kfkSp) + v {vx,vy,g,drag,life,max,spin,grow,a0,fade,sway,tw}. tex = a KFK_SP kind; tint only
+   applies to neutral art (orb, streak, smoke). Old shape names map to their painted kind. */
+const KF_ALIAS={glow:"orb",star:"spark",blob:"smoke",petal:"petal-plum"};
+function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
+const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?["petal-peach","petal-plum"]:m<=6?["petal-lotus"]:m<=9?["leaf","osmanthus"]:["snow","snow","petal-plum"]};
 function kfBudget(n){const w=innerWidth<700?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
 const R01=()=>Math.random(),RS=(a,b)=>a+Math.random()*(b-a);
 const KF_SPAWN={
- rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2),"add");s.rotation=a}},
- stars(p){const n=kfBudget(14),r=p.r,w=r?Math.max(120,r.width):260,h=r?Math.max(80,r.height):200;for(let i=0;i<n;i++){kfSp("star",p.x+RS(-.55,.55)*w,p.y+RS(-.6,.5)*h,{life:RS(50,80),fade:"inout",tw:RS(.15,.3),vy:-.15},R01()<.6?0xffe9a0:0xffffff,RS(.5,1.1),"add")}},
- coins(p){const n=kfBudget(18);for(let i=0;i<n;i++){const s=kfSp("coin",RS(.08,.92)*innerWidth,RS(-120,-10),{vx:RS(-.6,.6),vy:RS(2,4),g:.22,life:RS(90,120),spin:RS(.08,.2),coin:1,a0:1},null,RS(.8,1.25));s.v.ph=R01()*6}},
- ink(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("blob",p.x+RS(-60,60),p.y+RS(-50,50),{life:RS(70,95),grow:RS(.05,.09),a0:RS(.55,.75)},0x1a1410,RS(.6,1.2))},
- inks(p){const n=kfBudget(3);for(let i=0;i<n;i++)kfSp("blob",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(55,70),grow:RS(.04,.06),a0:.45},0x1a1410,RS(.4,.8))},
- flowers(p){const n=kfBudget(26),c=[0xf4b6c8,0xf08aa8,0xffe0e8,0xffd48a];for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(3,8);kfSp("petal",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,g:.09,drag:.96,life:RS(80,110),spin:RS(-.12,.12),sway:.6},c[i%4],RS(.8,1.4))}},
- petals(p){const n=kfBudget(16),c=[0xf4b6c8,0xf9d3dc,0xffffff];for(let i=0;i<n;i++)kfSp("petal",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.4,.4),vy:RS(1.2,2.2),life:RS(140,200),spin:RS(-.05,.05),sway:.8,fade:"inout"},c[i%3],RS(.8,1.3))},
- motes(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("glow",RS(.1,.9)*innerWidth,RS(.45,1)*innerHeight,{vx:RS(-.2,.2),vy:RS(-1.1,-.4),life:RS(120,170),fade:"inout",a0:.7,sway:.4},R01()<.5?0xffb050:0xffd890,RS(.5,1),"add")},
- ash(p){const n=kfBudget(22);for(let i=0;i<n;i++)kfSp("petal",RS(0,innerWidth),RS(-60,-5),{vx:RS(-.5,.5),vy:RS(.8,1.6),life:RS(150,210),spin:RS(-.06,.06),sway:.7,fade:"inout",a0:.8},R01()<.5?0x6a6a6a:0x9a9a9a,RS(.4,.8))},
- smoke(p){const n=kfBudget(7);for(let i=0;i<n;i++)kfSp("blob",p.x+RS(-50,50),p.y+RS(-10,20),{vx:RS(-.3,.3),vy:RS(-1.2,-.6),life:RS(70,95),grow:RS(.02,.035),fade:"inout",a0:.5},0x8a8580,RS(.6,1))},
+ rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
+ stars(p){const n=kfBudget(14),r=p.r,w=r?Math.max(120,r.width):260,h=r?Math.max(80,r.height):200;for(let i=0;i<n;i++){kfSp("spark",p.x+RS(-.55,.55)*w,p.y+RS(-.6,.5)*h,{life:RS(50,80),fade:"inout",tw:RS(.15,.3),vy:-.15},null,RS(.5,1.1)).rotation=0}},
+ coins(p){const n=kfBudget(18);for(let i=0;i<n;i++){const s=kfSp("coin",RS(.08,.92)*innerWidth,RS(-120,-10),{vx:RS(-.6,.6),vy:RS(2,4),g:.22,life:RS(90,120),spin:RS(-.03,.03),coin:1,a0:1},null,RS(.8,1.25));s.v.ph=R01()*6}},
+ ink(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("ink",p.x+RS(-60,60),p.y+RS(-50,50),{life:RS(70,95),grow:RS(.01,.02),a0:RS(.55,.75)},null,RS(.6,1.2))},
+ inks(p){const n=kfBudget(3);for(let i=0;i<n;i++)kfSp("ink",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(55,70),grow:RS(.008,.012),a0:.45},null,RS(.4,.8))},
+ flowers(p){const n=kfBudget(26),K=["petal-peach","petal-peach","petal-plum","osmanthus"];for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(3,8);kfSp(K[i%4],p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,g:.09,drag:.96,life:RS(80,110),spin:RS(-.12,.12),sway:.6},null,RS(.8,1.4))}},
+ petals(p){const n=kfBudget(16),K=KF_PET();for(let i=0;i<n;i++)kfSp(K[i%K.length],RS(0,innerWidth),RS(-80,-10),{vx:RS(-.4,.4),vy:RS(1.2,2.2),life:RS(140,200),spin:RS(-.05,.05),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ motes(p){const n=kfBudget(16);for(let i=0;i<n;i++){const e=R01()<.6;kfSp(e?"ember":"orb",RS(.1,.9)*innerWidth,RS(.45,1)*innerHeight,{vx:RS(-.2,.2),vy:RS(-1.1,-.4),life:RS(120,170),fade:"inout",a0:.75,sway:.4},0xffc070,e?RS(.7,1.2):RS(.3,.55))}},
+ ash(p){const n=kfBudget(22);for(let i=0;i<n;i++)kfSp("ash",RS(0,innerWidth),RS(-60,-5),{vx:RS(-.5,.5),vy:RS(.8,1.6),life:RS(150,210),spin:RS(-.06,.06),sway:.7,fade:"inout",a0:.85},null,RS(.6,1.1))},
+ smoke(p){const n=kfBudget(7);for(let i=0;i<n;i++)kfSp("smoke",p.x+RS(-50,50),p.y+RS(-10,20),{vx:RS(-.3,.3),vy:RS(-1.2,-.6),life:RS(70,95),grow:RS(.004,.008),fade:"inout",a0:.55},0x8a8580,RS(.6,1))},
  lanterns(p){const n=kfBudget(9);for(let i=0;i<n;i++){const x=RS(.06,.94)*innerWidth,y=innerHeight+RS(10,260),sc=RS(.8,1.5);
-   const gl=kfSp("glow",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.55,sway:.25,lant:1},0xffa040,sc*2.2,"add");const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.v.ph=gl.v.ph}},
- pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("star",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},0xffe9a0,RS(.35,.6),"add")}},
- season(){const s=KF_SEASON();kfSp(s.tex,RS(0,innerWidth),-12,{vx:RS(-.35,.25),vy:RS(.55,1),life:Math.round(innerHeight/.6)+60,spin:RS(-.03,.03),sway:.9,fade:"inout",a0:.85,amb:1},s.col[Math.floor(R01()*s.col.length)],RS(.7,1.15))}
+   const gl=kfSp("orb",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.5,sway:.25,lant:1},0xffa040,sc*1.4);const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.rotation=RS(-.12,.12);l.v.ph=gl.v.ph}},
+ pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("spark",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},null,RS(.35,.6)).rotation=0}},
+ brush(p){const n=Math.min(2,kfBudget(2));for(let i=0;i<n;i++){const s=kfSp("brush",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(34,44),fade:"out",a0:.92,grow:.004},null,RS(3.2,4.2));s.rotation=RS(-.5,.2)}},
+ goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-gold",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
+ jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
+ incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
+ lotus(p){kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
+ peach(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.5,.3),vy:RS(1.1,2),life:RS(150,210),spin:RS(-.05,.05),sway:.9,fade:"inout"},null,RS(.8,1.3))},
+ letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]},
+ season(){const K=KF_SEASON(),k=K[Math.floor(R01()*K.length)];kfSp(k,RS(0,innerWidth),-12,{vx:RS(-.35,.25),vy:RS(.55,1),life:Math.round(innerHeight/.6)+60,spin:RS(-.03,.03),sway:.9,fade:"inout",a0:.9,amb:1},null,RS(.7,1.15))}
 };
-function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
+/* painted kinds each spawner needs (loaded before it runs); other modules adding KF_SPAWN kinds add their row here */
+const KF_PET=()=>{const s=KF_SEASON();return s[0]==="snow"?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s};
+const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:["ink"],flowers:["petal-peach","petal-plum","osmanthus"],petals:()=>KF_PET(),
+ motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],season:()=>KF_SEASON(),
+ brush:["brush"],goldpetals:["petal-gold"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
+function kfKinds(name){const k=KF_KINDS[name];return typeof k==="function"?k():(k||[])}
+function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
 function kfWake(){const a=KFX.app;if(!a)return;if(a.canvas.style.display==="none")a.canvas.style.display="";if(!a.ticker.started)a.ticker.start()}
 function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,L=KFX.parts;let amb=0;
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
-  if(v.life<=0||(v.amb&&s.y>H+20)){s.destroy();L.splice(i,1);continue}
+  if(v.life<=0||(v.amb&&s.y>H+20)){kfkFree(s);L.splice(i,1);continue}
   v.ph+=.03*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);s.alpha=Math.max(0,a);
@@ -110,7 +133,7 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
 /* ambient: seasonal petals / leaves drift over HER palace (home), sparse, only while nothing covers the screen */
 function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&S.place==="home"&&!kfStill()&&!document.hidden&&kfOn()&&(!document.getElementById("modal")||document.getElementById("modal").hidden)&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
 let kfAmbT=0;function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfAmbT);kfAmbT=0;return}
- if(kfAmbT)return;kfApp().then(()=>{if(kfAmbT||!kfAmbWant())return;kfWake();const cap=()=>Math.max(3,Math.round((innerWidth<700?6:10)*KFX.q));
+ if(kfAmbT)return;kfApp().then(()=>kfkLoad(kfKinds("season"))).then(()=>{if(kfAmbT||!kfAmbWant())return;kfWake();const cap=()=>Math.max(3,Math.round((innerWidth<700?6:10)*KFX.q));
   KF_SPAWN.season();kfAmbT=setInterval(()=>{if(!kfAmbWant()){KFX.ambOn=false;clearInterval(kfAmbT);kfAmbT=0;return}if(KFX.amb<cap()){KF_SPAWN.season();kfWake()}},1400)}).catch(()=>{})}
 /* ---------- numbers fly from the result card into their top-bar cell ---------- */
 const KF_CELL={sung:"hud-sung",danh:"hud-danh",suc:"hud-suc",bac:"hud-bac",duc:"hud-duc",sac:"hud-sac",tai:"hud-tai",tamco:"hud-tamco"};
@@ -177,7 +200,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  W("kitSheetTurn",o=>function(){try{if(kfOn())vib("tap")}catch(e){}return o.apply(this,arguments)});
  /* render: tabs underline, ambient petals at home, festival-night lanterns once per night */
  W("render",o=>function(){const r=o.apply(this,arguments);try{KFX.ambOK=true;kfTabsSoon();kfAmbient();
-   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("lantern"),600)}}}catch(e){console.error(e)}return r});
+   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("festival"),600)}}}catch(e){console.error(e)}return r});
  document.addEventListener("visibilitychange",()=>{try{if(KFX.app){if(document.hidden)KFX.app.ticker.stop();else if(KFX.parts.length)KFX.app.ticker.start()}kfAmbient()}catch(e){}});
  /* a modal closing / overlay leaving lets the ambient petals back */
  setInterval(()=>{try{if(KFX.ambOK&&!kfAmbT&&kfAmbWant())kfAmbient()}catch(e){}},2500)})();
@@ -208,9 +231,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  transition:transform .32s cubic-bezier(.3,.8,.3,1.1),width .32s cubic-bezier(.3,.8,.3,1.1),opacity .2s;box-shadow:0 0 6px #f0d07088}
 /* flashes */
 .kfx-fl{position:fixed;inset:0;z-index:9440;pointer-events:none}
-.kfx-gold{box-shadow:inset 0 0 90px 18px #f0d070cc;background:radial-gradient(ellipse at 50% 42%,#fff3c433 0,#fff3c400 60%);animation:kfFl 1.3s ease-out forwards}
 .kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed .9s ease-out forwards}
-.kfx-warm{background:radial-gradient(ellipse at 50% 45%,#ffd8a040 0,#ffb07022 50%,#ffb07000 75%);box-shadow:inset 0 0 70px 10px #ffc08066;animation:kfFl 1.4s ease-out forwards}
 .kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl 2.2s ease-in-out forwards}
 .kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark 2.2s ease-in-out forwards}
 @keyframes kfFl{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
@@ -242,10 +263,10 @@ function kgInfo(x){return kitItemInfo(x)}
 function kitGain(x,o){o=o||{};if(!kfOn())return;const I=kgInfo(x);KFX.gains=KFX.gains||[];KFX.gains.push({name:I.name,grade:I.gname,src:I.src});
  const run=done=>{const still=kfStill();const RV=(typeof BAL==="object"&&BAL.reveal)||{};const t0=Date.now();const ov=document.createElement("div");ov.className="kmov kfgain"+(still?" km-red":"");ov.setAttribute("role","dialog");ov.setAttribute("aria-label",I.name);
   ov.innerHTML=`<div class="kmst">${kitRevealHTML(I,{from:o.from})}<button type="button" class="kbtn krevok" style="--kok:${(RV.rise||550)+400}ms">Nhận</button></div>`;
-  document.body.appendChild(ov);try{sfx("sfx-open")}catch(e){}if(!still){const it=ov.querySelector(".krev>.kitem");const r=it&&it.getBoundingClientRect();if(r)setTimeout(()=>kfPx("stars",{x:r.left+r.width/2,y:r.top+r.height/2,r}),Math.round((RV.rise||550)*.6))}
+  document.body.appendChild(ov);try{typeof kitSfx==="function"?kitSfx(I.grade>=3?"itemRare":"itemPop"):sfx("sfx-open")}catch(e){}if(!still){const it=ov.querySelector(".krev>.kitem");const r=it&&it.getBoundingClientRect();if(r)setTimeout(()=>kfPx("stars",{x:r.left+r.width/2,y:r.top+r.height/2,r}),Math.round((RV.rise||550)*.6))}
   let closed=false;const close=e=>{if(e)e.stopPropagation();if(closed)return;if(!still&&Date.now()-t0<(RV.gainMin||900)&&!(e&&e.target&&e.target.closest&&e.target.closest(".krevok")))return;closed=true;const im=ov.querySelector(".krev .kitb img");
    const tb=[...document.querySelectorAll('#tabs [data-tab="inv"],#tabs [data-kg]')].find(t=>t.offsetWidth&&(t.dataset.tab==="inv"||/Tư trang/.test(t.textContent)))||document.querySelector('[data-tab="inv"]');
-   try{sfx("sfx-coin");vib("coin")}catch(err){}
+   try{typeof kitSfx==="function"?kitSfx("itemFly"):sfx("sfx-coin");vib("coin")}catch(err){}
    if(im&&tb&&!still&&im.animate){const a=im.getBoundingClientRect(),b=tb.getBoundingClientRect();const fl=im.cloneNode();fl.className="krevfly";fl.style.cssText=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(fl);
     const dx=b.left+b.width/2-(a.left+a.width/2),dy=b.top+b.height/2-(a.top+a.height/2),sc=Math.max(.12,Math.min(b.width,b.height)/Math.max(1,a.width));
     const an=fl.animate([{transform:"none",opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(.6)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(${sc})`,opacity:.2}],{duration:620,easing:"cubic-bezier(.5,0,.6,1)"});
@@ -292,7 +313,7 @@ const KF_LOSEW=[[/tịch thu|thu hồi|sung công/i,"Bị tịch thu"],[/cướp
 function kfTexts(lg){const L=[];try{const n=Math.max(0,Math.min(40,(S.logSeq||0)-lg));for(let i=0;i<n;i++)L.push(S.logs[i]);for(const q of (typeof Q!=="undefined"?Q:[]))if(q&&typeof q.h==="string")L.push(q.h);
   const t=document.getElementById("rtoast");if(t&&t.classList.contains("on"))L.push(t.innerHTML)}catch(e){}
  return L.map(h=>String(h||"").replace(/<span class="ld">[^<]*<\/span>/g,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()).filter(Boolean)}
-function kfWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
+function kfLoseWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
  let line="";for(const h of T){const ss=h.replace(/([.!?:])\s+/g,"$1\n").split("\n");const s=ss.find(x=>x.includes(nm)||x.includes(base));if(s){line=s.trim();break}}
  if(line.length>170)line=line.slice(0,167).replace(/\s+\S*$/,"")+"…";
  if(tag)return{why:tag.why,to:tag.to,title:tag.title||"",text:line};
@@ -304,14 +325,14 @@ function kfWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.na
  return{why:"fade",text:line}}
 function kfLoss(before,d,lg){const gone=before.filter(x=>x&&typeof x==="object"&&!x.h&&(IT[x.k]||(typeof WD_ITEMS==="object"&&WD_ITEMS[x.k]))&&!S.inv.includes(x));const worn=kfWorn();
  const T=gone.length?kfTexts(lg):[];const G={sell:[],give:[],fade:[],lose:new Map()};
- for(const e of gone){if(worn.includes(e))continue;const w=kfWhy(e,T);KFX.lt.delete(e);if(w.why==="use")continue;
+ for(const e of gone){if(worn.includes(e))continue;const w=kfLoseWhy(e,T);KFX.lt.delete(e);if(w.why==="use")continue;
   if(w.why==="lose"){const k=w.title||"Mất đồ";if(!G.lose.has(k))G.lose.set(k,{L:[],text:w.text});const g=G.lose.get(k);g.L.push(e);if(!g.text&&w.text)g.text=w.text}else G[w.why].push(e)}
  if(G.sell.length)kitLose(G.sell,{why:"sell",bac:Math.max(0,d)});else if(d<0)kitCoins("out",-d);
  if(G.give.length)kitLose(G.give,{why:"give"});if(G.fade.length)kitLose(G.fade,{why:"fade"});
  for(const [title,g] of G.lose)kitLose(g.L,{why:"lose",title,text:g.text})}
 
 /* one reward item for kitReward from an inventory entry: the same name / painting / grade as the Tư trang bag (kgInfo) */
-function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.sub:(it.d||I.sub||""),img:I.src,tier:I.grade,gn:x.wk?I.gname:""}}
+function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.sub:(it.d||I.sub||""),img:I.src,tier:I.grade,gn:x.wk?I.gname:"",k:x.wk?"":x.k}}
 function kgWho(f,x){if(x&&x.giver)return x.giver;if(f==="emp")return"Hoàng thượng";if(f==="th")return"Thái hậu";if(f==="hh")return"Hoàng hậu";if(f==="nvp")return"Nội vụ phủ";
  try{const v=typeof RV==="function"?RV(f):null;if(v&&v.name)return v.name}catch(e){}return""}
 function kgGroups(add){const G=new Map();
