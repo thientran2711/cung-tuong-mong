@@ -13446,7 +13446,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
+    if(mv){kitLeather(mv);/* reviewer lag-play-r1: portrait tab change = no effect at all (owner 15:45Z) → the map unrolls in landscape only */if(t0!=null&&t0!=="go"&&t1==="go"&&!kitIsPortrait())kitUnroll(mv);else kitUnrollKeep(mv)}
     else if(t0==="go"&&t1!=="go"&&pn){/* map → page: instant too (owner 15:45Z, no fade on tab changes) */
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
@@ -42703,7 +42703,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="baa299efb998";window.CTM_BUILD=BUILD;
+const BUILD="d7205d4d7495";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

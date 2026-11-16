@@ -557,7 +557,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
+    if(mv){kitLeather(mv);/* reviewer lag-play-r1: portrait tab change = no effect at all (owner 15:45Z) → the map unrolls in landscape only */if(t0!=null&&t0!=="go"&&t1==="go"&&!kitIsPortrait())kitUnroll(mv);else kitUnrollKeep(mv)}
     else if(t0==="go"&&t1!=="go"&&pn){/* map → page: instant too (owner 15:45Z, no fade on tab changes) */
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
