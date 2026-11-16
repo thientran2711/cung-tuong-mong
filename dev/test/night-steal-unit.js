@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const path=require('path');
   window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
   const R0=liveRivals(false).filter(v=>!v.coop);const keep=JSON.stringify(BAL.steal);
-  const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}if(S.cyb)S.cyb={}};
+  const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={lie:wk(),rk:wk(),rv:"lui"}}; /* night-final: never her cycle tuần (jcycle locks her steal: the old test was flaky ~1 in 3) */
   const force=()=>{BAL.steal.k=1e6;BAL.steal.pMax=1;BAL.steal.maxTry=1};const o0=oSteal;
   /* 1 · one core: the act costs read BAL.steal (ACT, deck cards, stealNight) */
   ok("ACT steal/road cost = BAL.steal.cost",JSON.stringify(ACT.steal.c)===JSON.stringify({duc:-BAL.steal.cost.feign.duc})&&JSON.stringify(ACT.road.c)===JSON.stringify({suc:-BAL.steal.cost.road.suc}),[ACT.steal.c,ACT.road.c]);
@@ -56,8 +56,8 @@ const {chromium}=require('playwright');const path=require('path');
   reset();A.coop=true;ok("the co-op friend (a human) is never an NPC stealer",!stealEligible(A,S));delete A.coop;
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 11 · the real flip runs the pass: with forced odds, a week's flip ends stolen on some week */
-  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();flip();const d=S.nightWhy;if(d&&d.cause==="stolen")st++}
-  ok("flip() → steal pass → nightWhy.cause 'stolen' (card-flip reads it)",st>0,{st});
+  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.nfC=null;S.buoi=B4L;used=4;flip();Q.length=0;const w0=wk();if(S.tonight)try{endTurn()}catch(e){}Q.length=0;const d=S.nightWhy;if(d&&d.wk===w0&&d.cause==="stolen")st++}/* night-final: the NPC tries run at the day-end commit, not at the flip */
+  ok("tối flip → day-end commit → steal pass → nightWhy.cause 'stolen'",st>0,{st});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   ok("SOC 'steal' folded into the one choice",SOC.steal.ok(R0[0],S)===false);
   /* 12 · symmetry (night-steal-2): an NPC weighs HER exactly like an NPC holder in her position (same rank, thiện cảm, oán; custom night as Empress) */

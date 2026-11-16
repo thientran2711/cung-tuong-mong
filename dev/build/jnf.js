@@ -63,7 +63,7 @@ const ns0=nightScene;nightScene=function(){if(IN||!S||!nfOn())return ns0.apply(t
 if(typeof chooseM==="function"){const cm0=chooseM;chooseM=function(){const b=S&&S.tonight,c0=CUR;CUR=(Q[0]&&Q[0].pid)||"";let r;try{r=cm0.apply(this,arguments)}finally{CUR=c0}try{if(CO()&&S&&S.tonight!==b)send()}catch(e){}return r}}
 
 /* ---------- 3. the commit at "Sang ngày mới" ---------- */
-function steals(){try{if(typeof stealPass==="function"&&S.tonight){const t=tonightOf();if(t&&!t.coop)stealPass(t,{live:true})}}catch(e){console.error(e)}}
+function steals(){try{if(typeof stealPass==="function"&&S.tonight){const t=tonightOf();if(t)stealPass(t,{live:true})}}catch(e){console.error(e)}}
 function hold(){S.buoi=B4();try{if(!window.__bot&&Q.length)showModal()}catch(e){}try{render()}catch(e){}}
 function herNight(){S.buoi=B4();try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{if(!window.__bot)showModal()}catch(e){}try{render()}catch(e){}}

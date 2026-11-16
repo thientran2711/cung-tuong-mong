@@ -35,4 +35,18 @@ Time model: one game "day" = one tuần turn with 4 buổi (jtime4.js:3, B4L = t
 ### 1.5 Overlap: review/night-steal-2 (609c1bdd, SẴN SÀNG KIỂM ed6fcd05)
 - Replaces j8 flip's `hostility>=50&&roll(6)` with `stealPass()` (jsteal.js) but still runs it INSIDE flip (instant at flip time). Same function as this fix → this branch is BASED ON review/night-steal-2 and moves stealPass to the evening / day end.
 
-## 2. FIX — see §3 (written after the build)
+## 2. FIX (jnf.js, new module, loaded last; jsteal.js one line)
+Base: origin/main 9fc1ac33 + review/night-steal-2 609c1bdd (merge c51bae6b: jbal2 both blocks, assemble = main list + jsteal after j75, site rebuilt).
+
+| # | rule (OD 19:45Z / 14:00Z (4)) | how | file |
+|---|---|---|---|
+| 1 | flip at the START of tối, names only the intended one | `flip()` called before tối (endTurn's new day, start(), cycle answer) only marks S.nfP; entering tối (nextBuoi → buổi 3) runs it; the jflip card scene plays then. Night already settled (his visit / a won steal, j75 ntTaken) = no flip. Evening never reached (old save, skipped buổi) = flips at the day end before the commit | jnf.js §1 |
+| 2 | evening open to everyone | the summons "Tắm gội chờ giá", a won Tranh sủng / Chặn ngự giá and his own visit "Thắp đèn hầu rượu" only make her the HOLDER (S.tonight="me"); a summons can still be stolen during the evening; a won steal / his visit settles it (S.ntk). Her steal cards appear only once a card is turned (tối) | jnf.js §2 |
+| 3 | ONE commit at 'Sang ngày mới', exactly ONE woman | first press of the day: (a) flip if the evening never ran; (b) NPC last tries = jsteal stealPass(live) — moved off the flip (jsteal.js:59 skips the palace flip now) so her khắc come first; (c) she holds → her night dialogs play NOW (prep → night1 → night2 → nightFx = Sổ ghi, nights/nightLog, Sủng/Ân, conception), jnight then ends the day; (d) else resolveTonight → rivalNight(holder). A notice (her night lost) is read first, then the press goes on | jnf.js §3 |
+| 4 | loser: no night record | nobody else's nights/nightLog is touched; the steal's oán / ghen / thiện cảm (stealWin + BAL.steal) is the only trace. Record line for a thief now reads "Đêm qua Hoàng thượng được mời sang cung X" (was "thẻ bài của X được lật") | jnf.js §3 |
+| 5 | co-op host-authoritative | the guest never flips; host's flip (friend included) + every holder change is relayed on `act` {k:"ctm-nf"}; guest's own changes (steal win, summons accepted / declined, given to the maid) go to the host; at the commit the host runs the NPC tries and sends `fin` first; the guest's commit waits for `fin`; each seat commits only ITS OWN night (host never rivalNight(friend), guest never rivalNight(NPC/host)) | jnf.js §4 |
+
+Not changed (one record already, decided by her at the moment): "Tiến cử <maid> hầu thay" (sendMaid: the maid serves at once). Servant route (j42) and the home route (jkc): their own week, flip unchanged (no player night there). Co-op guest: the cycle question of the flip is not asked on the guest seat (the host's tray has no cycle data of the friend) — follow-up.
+Save: new fields S.nfP / nfF / nfC / nfN / nfFin / nfW (small numbers); old saves: a morning-flipped pick of that day is kept (S.nightWhy of the day = flipped).
+
+## 3. Tests
