@@ -6,11 +6,11 @@ Spec: OWNER_DECISIONS L134-166 (Dư đồ -> palace detail map by chủ vị ran
 
 ## What was ported
 - `dev/build/jres.js` (residence rooms: residenceArt/residenceOf/roomResidents/roomPeople/resRoomName, stage rooms, visit rooms) — assemble: after jk4.
-- `dev/build/jpm.js` (kitPalaceMap, KIT §71 — number 71 because main's §33 is the figure scale; coordinator please confirm) — assemble: last module.
+- `dev/build/jpm.js` (kitPalaceMap, KIT §76 — number 71 because main's §33 is the figure scale; coordinator please confirm) — assemble: last module.
 - `dev/build/j11.js`: PX.src guard (a slow background load no longer overwrites a newer room picture).
 - `dev/art/{gen_res_var.py,residence_proc.py,residence_prompts.txt,residence_sheet.py,residence_season_sheet.py}`, `dev/tools/pl2_sync.py`.
 - Tests: `dev/test/palace-map.js` (now takes the page URL; waits for the game state), `palace-oldsave.js` (new).
-- Kit: KIT.md §71 + sample on the kit page (KIT_SAMPLES).
+- Kit: KIT.md §76 + sample on the kit page (KIT_SAMPLES).
 - Pictures: NOT in git. 675 missing files (400 residence paintings + 275 img/pl2 courtyards + hotspots.json) uploaded to the CDN from
   origin/review/palace-map with `cdn_sync.py --git origin/review/palace-map --missing-only` (231.7 MB). No Magnific credits used; nothing redrawn.
 
@@ -33,7 +33,7 @@ See bottom table.
 | 844x390@2 | 5 = 5 | yes | none | ok | 0 (first run); see note |
 
 Old save: `dev/test/palace-oldsave.js` (2 buổi on the previous main build, slot 3, load in the new build, Dư đồ -> palace detail) = ok, 0 errors.
-Kit sample (§71) added to the kit page.
+Kit sample (§76) added to the kit page.
 
 Found + fixed while testing: (1) doubled CDN prefix on room painting (see above); (2) at 844x390 the courtyard was a cropped strip with hidden
 hotspots -> in short landscape (max-height 520px) the picture is hidden and the three kit hall rows stand alone (same tap, same counts); the test
