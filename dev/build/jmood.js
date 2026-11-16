@@ -27,7 +27,7 @@ function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.
 function mbW(){try{return wk()}catch(e){return 0}}
 const cl2=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* push the bar; merge pushes of the same cause kind in the same tuần ("Việc thành ×3: Đánh đàn, Làm thơ") */
-function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();d=Math.round(d);if(!d)return 0;const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
+function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(.2,1-same/B().sat));if(!d)return 0;const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
  const W=mbW();kind=kind||why;MOOD_N.pushes[kind]=(MOOD_N.pushes[kind]||0)+real;
  const x=M.log.find(e=>e.w===W&&e.k===kind);if(x){x.d+=real;x.n=(x.n||1)+1;if(why&&x.why.indexOf(why)<0&&x.why.length<70)x.why+=", "+why}else M.log.unshift({w:W,k:kind,d:real,why:String(why||"").slice(0,80),n:1});
  M.log=M.log.filter(e=>W-e.w<=B().keep).slice(0,B().logMax);return real}
@@ -69,7 +69,8 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
 /* rest cards lift a low mood (up to restCap): the card says so in Được */
 function mbRestGain(a){const M=mbS();if(!M||!a)return 0;const g=a.rest==="ds"?B().restDs:B().rest;return Math.max(0,Math.min(g,B().restCap-M.v))}
 function mbRestFix(a){try{if(!a||!a.rest||!mbOn())return a;const g=mbRestGain(a);const x=String(a.x||"").replace(/(\s·\s)?tâm trạng \+\d+/,"");a.x=g?(x?x+" · ":"")+`tâm trạng +${g}`:x;
-  if(!a.__mbGo){const g0=a.go;a.__mbGo=1;a.go=function(){const r=g0?g0.apply(this,arguments):undefined;try{const n=mbRestGain(a);if(n)mbAdd(n,a.n,"rest")}catch(e){}return r}}}catch(e){}return a}
+  /* jrest rebuilds a.go on every refresh: wrap the current one unless it is already ours */
+  if(!(a.go&&a.go.__mb)){const g0=a.go;a.go=function(){const r=g0?g0.apply(this,arguments):undefined;try{const n=mbRestGain(a);if(n)mbAdd(n,a.n,"rest")}catch(e){}return r};a.go.__mb=1}}catch(e){}return a}
 (function(){if(typeof restFix!=="function")return;const f0=restFix;restFix=function(a){const r=f0.apply(this,arguments);return mbRestFix(r||a)}})();
 /* locks: the show-off acts at the lowest band */
 function mbLock(a){try{if(!a||!B().lock.includes(a.n))return a;const L=mbLocked(a);
