@@ -124,3 +124,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C58 | review/act-dedupe wave 1 (approved AI/VIỆC/ĐI ĐÂU split; dedupe, icons, '!', shop) | RUNNING (opus). Waves 2–3 QUEUED after |
 | LIVE 16/11 | main = 4f5e5f3b3 (merge-train-1 + 2). In: boot-flash, stage-fig-size, face-sharp-r1, hc-portrait-revert, gift-pick, ev-art-fit, tab-underline, actcard-small, pcard-fill, mg-easy, buoi-transition, room-btn, rel-picker, appearance-port, stat-fx, pic-dupes-r2, kit-popup-sample, thaiy, cal-plus, pick-hint+rank-colour, cardflip, promo-rules + kit keeper fixes. Post-merge regression worker running (review/postmerge-fix-1). |
 | C59 | elder-staff 06a008041 reviewer running |
+| C60 | review/coop-chat (owner-approved co-op chat) | RUNNING (sonnet) |
