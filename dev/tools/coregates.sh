@@ -8,6 +8,7 @@
 #   G3 kit-conform (browser, ~75 s, Fold): every dialog built from a kit frame template; no loose floats over the tabs.
 #   G4 hooks: every dev/tools/quickcheck.d/*.sh (sorted) runs with env QC_WT QC_URL QC_OLD_URL QC_OUT QC_KIT; exit != 0 = FAIL.
 #      The co-op one-world probe (review/coop-one-world) plugs in here as quickcheck.d/50-coop-one-world.sh.
+#   G5 co-op one world: if that hook is not here yet, dev/test/coop-one-world.js runs straight from the kit or the sha (when the file exists).
 # Skip (coordinator only, never for a go-live): QC_SKIP_GATES=G2,G3
 WT=$1; LIVE=$2; OUT=$3; KIT=$(cd "$(dirname "$0")/../.." && pwd); mkdir -p "$OUT"; FAILS=(); T0=$(date +%s)
 skip(){ [[ ",${QC_SKIP_GATES}," == *",$1,"* ]]; }
@@ -46,6 +47,13 @@ for h in $(ls "$KIT/dev/tools/quickcheck.d/"*.sh 2>/dev/null | sort); do
   n=$(basename "$h" .sh)
   QC_WT=$WT QC_URL=$U/_aa.html QC_OLD_URL=$OLDU QC_OUT=$OUT QC_KIT=$KIT timeout 600 bash "$h" > "$OUT/g4-$n.txt" 2>&1 || { tail -6 "$OUT/g4-$n.txt"; FAILS+=("G4 $n ($OUT/g4-$n.txt)"); }
 done
+# G5 co-op one world (owner CO-OP FIRST): until the 50-coop-one-world.sh hook is in this kit, run the probe straight from the sha if it has one
+if ! ls "$KIT/dev/tools/quickcheck.d/"*coop-one-world*.sh >/dev/null 2>&1 && ! skip G5; then
+  CT=""; for c in "$KIT/dev/test/coop-one-world.js" "$WT/dev/test/coop-one-world.js"; do [ -f "$c" ] && { CT=$c; break; }; done
+  if [ -n "$CT" ] && ! grep -q "COOP_ONE" "$WT/dev/index.html" "$WT/index.html" 2>/dev/null; then FAILS+=("G5 coop-one-world: the probe is here but the build has no one-world guards (jcoopone.js)"); CT=""; fi
+  if [ -n "$CT" ]; then for sd in 7 3; do QC_WT=$WT SEED=$sd timeout 120 node "$CT" > "$OUT/g5-coop-one-world-$sd.txt" 2>&1 || { tail -4 "$OUT/g5-coop-one-world-$sd.txt"; FAILS+=("G5 coop-one-world seed $sd ($OUT/g5-coop-one-world-$sd.txt)"); }; done
+  else echo "G5 coop-one-world: probe not in this kit or sha yet (review/coop-one-world) — skipped"; fi
+fi
 S=$(( $(date +%s)-T0 ))
 if [ ${#FAILS[@]} -gt 0 ]; then printf '  %s\n' "${FAILS[@]}"; echo "CORE GATES FAIL · ${FAILS[0]} · ${S} s"; exit 1; fi
-echo "CORE GATES PASS · one-core-guard · rules-one-source · kit-conform · hooks $(ls "$KIT/dev/tools/quickcheck.d/"*.sh 2>/dev/null | wc -l) · ${S} s"
+echo "CORE GATES PASS · one-core-guard · rules-one-source · kit-conform · coop-one-world (if present) · hooks $(ls "$KIT/dev/tools/quickcheck.d/"*.sh 2>/dev/null | wc -l) · ${S} s"
