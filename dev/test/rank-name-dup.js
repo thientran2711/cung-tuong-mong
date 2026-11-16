@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const [,,URL,SZ]=process.argv;const [W,H]
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:300000});
  const R=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const out={};rivals.forEach(v=>{S.met[v.id]=1});
   const chk=site=>{for(const k of document.querySelectorAll('.kname')){const t=k.querySelector('.kti');if(!t)continue;const tt=t.textContent.trim().toLowerCase();
-    for(let e=k,i=0;i<2&&e&&e.parentElement;i++,e=e.parentElement)for(const c of e.parentElement.children){if(c===e||c.contains(e)||c.querySelector('.kname'))continue;const ct=(c.textContent||'').trim().toLowerCase();if(ct&&ct.length<40&&ct===tt){(out[site]=out[site]||[]).push(k.textContent.trim()+' | '+ct);break}}}};
+    for(let e=k,i=0;i<2&&e&&e.parentElement;i++,e=e.parentElement)for(const c of e.parentElement.children){if(c===e||c.contains(e)||c.querySelector('.kname,.klab,img')||c.matches('.md,.klab'))continue;const ct=(c.textContent||'').trim().toLowerCase();if(ct&&ct.length<40&&ct===tt){(out[site]=out[site]||[]).push(k.textContent.trim()+' | '+ct);break}}}};
   const close=()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true};close();
   const tabs=[...document.querySelectorAll('#tabs [data-tab]')].map(b=>b.dataset.tab);
   for(const t of tabs){tab=t;try{render()}catch(e){}await W(250);chk('tab '+t);
