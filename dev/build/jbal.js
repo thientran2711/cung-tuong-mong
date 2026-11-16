@@ -1,5 +1,5 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */outQ:85,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:2,
+const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */outQ:85,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:55,birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
@@ -44,6 +44,7 @@ function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="functio
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
 /* fewer births per life: conception (after the ×0.7) scaled; a woman who has borne before is a little safer in labour (everyone alike) */
 (function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
+function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
 /* palace-start: NPC conception slowed in the first game years of a NEW game (S.ps), BAL.ps.npcConc; the player is never scaled here */
 (function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;const r=c0.apply(this,[p].concat([].slice.call(arguments,1)));try{if(p===S||!S||!S.ps)return r;const y=Math.floor((S.turn||0)/12),m=BAL.ps.npcConc[y];return m==null?r:Math.round(r*m*10)/10}catch(e){return r}}})();
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return cl(r-(n>0?BAL.later:0)+BAL.birthAdd,1.5,60)}})();

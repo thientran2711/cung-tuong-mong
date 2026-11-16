@@ -92,14 +92,14 @@ function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=60?"lương tâm c�
   if(tt.st>=3){const sp2=night&&sp&&(sp.k==="vuon"||sp.k==="lc"||sp.k==="home")?sp:null;const o=sp2?rtSeeO(sp2.k,8):25;
    A.push(rtCard({id:"tt3",n:`Đêm riêng với ${rtMnm(m)}`,t:"Đêm khuya, đèn tắt, cửa cài. Chuyện sau đó không ai được biết.",art:RT_ART.hen,c:{suc:-10,duc:-3},o,k:3,
     need:[["buổi tối",night],[sp2?`y ở chỗ hẹn được (${rtPlace(sp2.k)})`:"y lẻn đến được đêm nay",!!sp2],[`kẻ hầu ngươi tin cẩn canh cửa (lòng 60+, Chủ tin 60+)`,!!w]],
-    x:`Sức +12 · tình ý +10 · có thai: ${word(cl(conceiveCh(S),5,60))}`,lx:"bị bắt gặp giữa đêm · tội tư thông",kem:`con sinh ra có cha thật là y (lớn lên có thể giống y) · Lời ra tiếng vào +${Math.round(18*rtDf().h)}${ducK?" · "+ducK:""}`,
+    x:`Sức +12 · tình ý +10 · có thai: ${word(trystCh(S))}`,lx:"bị bắt gặp giữa đêm · tội tư thông",kem:`con sinh ra có cha thật là y (lớn lên có thể giống y) · Lời ra tiếng vào +${Math.round(18*rtDf().h)}${ducK?" · "+ducK:""}`,
     go:()=>rtNightOk(m,sp2.k),fail:()=>{rtStat("tt_nightseen");rtSeen(m,sp2?sp2.k:"vuon","dem")}}))}}
  if((m.rw==="họa sư"||m.rw==="nhạc sư")&&!rtNight()&&T.order!==wk())A.push(rtCard({id:"ttord",n:`Truyền ${m.rw} vào cung`,t:m.rw==="họa sư"?"Xin Nội vụ phủ cho họa sư vào vẽ một bức chân dung.":"Xin Nội vụ phủ cho nhạc sư vào dạy đàn.",art:RT_ART.ta,c:{bac:-30},k:1,x:"y vào cung ngươi suốt tuần này (có cớ gặp)",kem:"Lời ra tiếng vào +3",go:()=>{T.order=wk();rtHeat(3);log(`${rtMnm(m)} vào cung ngươi theo lệnh Nội vụ phủ.`)}}));
  A.push(rtCard({id:"ttcut",n:`Cắt đứt với ${rtMnm(m)}`,t:"Trả lại tín vật, coi như chưa từng quen.",art:RT_ART.tt,k:1,w:{duc:2},x:"lời ra tiếng vào lắng bớt · lối Tư tình khép lại",kem:"y đau lòng",go:()=>{m.tinh=0;T.tt=null;rtHeat(-10);rtEmo("buon",40,`cắt đứt với ${m.name}`);log(`Ngươi trả lại tín vật cho ${rtMnm(m)}. Từ nay mỗi người một ngả.`)}}));
  return A}
 function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m.tinh||0)+10;S.lastTryst=wk();apply({suc:12});rtHeat(18);tt.night=(tt.night||0)+1;rtEmo("vui",50,`đêm với ${m.name}`);rtStat("tt_night");
  let r=`Đêm ấy trôi qua kín đáo ở ${rtPlace(k)}.`;
- if(!S.preg&&roll(cl(conceiveCh(S),5,60))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(x=>Math.abs(x-wk())<=1);S.pregMismatch=!ok;rtStat("tt_preg");
+ if(!S.preg&&roll(trystCh(S))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(x=>Math.abs(x-wk())<=1);S.pregMismatch=!ok;rtStat("tt_preg");
   r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  log(r);if((m.tinh||0)>=80&&!tt.prom&&["thị vệ","vương gia","thái y"].includes(m.rw)){tt.prom=1;tt.st=4;rtPush("rtPromise",{m:m.id})}}
 /* seen while meeting: the witness decides by her nature (same rule as an NPC seeing an NPC) */
