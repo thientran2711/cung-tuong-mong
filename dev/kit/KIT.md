@@ -924,7 +924,7 @@ owner-picked render d4).
 - Height (owner A): the figures fill the stage — feet on the floor band near the bottom (KIT_FLOOR feet line 90 % of the way from the floor
   top to the picture bottom), head ~2.5 % under the top edge; room under the feet for the name tags.
 - Nobody is cut at the stage edges: a last check (`kitStageEdge`) shifts the group inside a 6 px margin, else shrinks everyone once more.
-- Crowded row: neighbours may overlap by 20 % (36 % for a crowd) of a figure's width (a group, sleeves overlap); beyond that everyone shrinks by ONE common factor.
+- Crowded row: figures never overlap (owner OD:L1049; review/stage-slots-fix-r1): the old row scaler `kitStageScale` is retired (j59 + the kit slot function, §33.7, lay the stage out); a crowd scales down by ONE common factor, then pages.
   When she is on stage with others she stands at the left and the row takes the rest of the width.
 - Name tags hang under the feet (absolute, one line, never cut). When neighbours would touch, tags drop to 2 or 3 staggered lines and the
   floor band grows to fit them.
@@ -1693,7 +1693,7 @@ Luân hồi panels with `.kpscopts`) are unchanged. Shots: dev/shots/book-releas
 ### 32.6 PEOPLE ON THE PICTURE — event stage (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) — `kitEsOvFit` (jk4)
 When an event dialog has a place / event picture band (headArt or the event picture), kitEventStage puts the people ON it (`.kesov`):
 feet on the picture's floor line (86 % of its height), body height = KIT_FIG.h × picture height (kitFigBody, forehead to feet; men
-×KIT_FIG.man, capped under the top edge; children by age), packed by core width with ≤ 25 % overlap, outer sleeves inside the picture,
+×KIT_FIG.man, capped under the top edge; children by age), standing in the kit's fixed slots (§33.7 slot function `kitSlotCx/kitSlotScale`: 1 → centre, 2 → 1/3 · 2/3 of the picture width, whole visible art, NEVER overlapping, one common scale-down),
 name chips inside the picture's bottom edge (neighbours that touch go to a second row; never cut). No separate figure column: the story
 text runs full width under the picture, then the options. With 32.5 the picture + people + text stay fixed and only the options scroll;
 the picture is 30vh (26vh under 1000 px), compressed by kitDlgFit on short screens, and the figures are re-laid to its height.
@@ -2094,7 +2094,7 @@ Every kitEventStage dialog that names one or two people (`who`, `who2`, `stage:[
 - (11/15: scale + chips now per 32.7b and 37 — people fill the column, name chips on TOP.) LEFT column = the people FULL-BODY, the full height of the dialog (under the title to the bottom). Scale = KIT_FIG of that column
   (woman body .79 × column height, forehead to feet via kitFigBody; men ×1.07; children by age; never shrunk to fit the text).
   Feet on one line just above the name chips (33.5 two-line chip: rank on top, name below, rank colour). Two people stand side by side,
-  packed by their CORE with ≤ 20 % overlap (KIT 33 rule 4); outer sleeves inside; a chip that would touch its neighbour goes up one row
+  in the kit's fixed slots (§33.7 `kitSlotCx/kitSlotNeed`: 1/3 · 2/3 of the column, whole visible art, NEVER overlapping; the column is as wide as the widest art × (k+1) up to its cap, then everyone scales down together); a chip that would touch its neighbour goes up one row
   (over the hem), chips are clamped inside the column, never cut. The column is as wide as the people (or the widest chip).
 - RIGHT column: TOP = the event text (a fact row keeps its small face if it has one; the empty "world" dot is dropped);
   BELOW = the options, one per row, full width, every line (Cần / Tốn / Được / Mất / Kèm, odds). ONLY the options list scrolls (32.5).
@@ -2322,6 +2322,7 @@ Every stage that shows full-body people (room, place, her palace, servant road, 
    (#kshR) is reserved on compact stages (844x390 `.j59c`) too, and a left plaque column (#kshL) that reaches the heads moves the first slot
    to its right edge + 6 px. A figure beside a reserved panel is pulled in (never needed now that the whole art fits its slot)
    so its art ends at the panel edge (j59 `inLim`; the slot count is unchanged). Test: `dev/test/small-bugs-2.js` check 4 (lãnh cung, home, vườn with 1–3 people).
+   **THE SLOT FUNCTION (review/stage-slots-fix-r1, jkit.js)**: `kitSlotSw(k,avail)` = spacing, `kitSlotCx(i,k,x0,avail)` = slot centre, `kitSlotScale(visWidths,avail)` = common scale-down, `kitSlotNeed(visWidths)` = width a group needs. The room / place stage (j59), the event picture band (`kitEsOvFit`) and the event person column (`kitDpFit`) ALL call it; no other part may place standing people with its own numbers. Test the event parts: `node dev/test/stage-slots-fix-r1-ev.js <page> <WxH@dpr> <outdir> <tag>`.
 3. **Never a mini portrait on the stage** (owner 08:00Z): a person without figure art stands as the kit's full-size soft silhouette
    (`img/kit/unknown-fig-f|m|k.webp`, `.j59sil`, man silhouette ×1.07) in a slot, with the real chip; a stranger is the grey silhouette
    with "Người lạ". Only things that are not people (a chest) keep their small token, still in a slot.
@@ -2709,8 +2710,8 @@ pair OK/PLAIN) + `python3 dev/test/rank-colour-sites.py` (source sites: KIT / TE
 ### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
 In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
 hat) under the chips, feet on the floor, aspect kept. Man and woman alike (no ×1.07 here); children keep their age factor
-(KIT_FIG.fac < 1, feet on the same floor). Two people: packed by core with ≤ 20 % overlap; the right column keeps ≥ 250 px (was 280),
-so two adults still fill the column on Fold 755; only a narrower screen gives them one common factor. Measured (fig-fill.js):
+(KIT_FIG.fac < 1, feet on the same floor). Two people: the §33.7 slots (1/3 · 2/3, never overlapping); the right column keeps ≥ 250 px (was 280),
+so two adults fit the column on Fold 755; a narrower screen gives them one common factor (the live game shows ONE main actor in an event pop-up, `kitStagePeople` slice(0,1); the 2-person layout stays in the kit). Measured (fig-fill.js):
 painted height ≈ 0.99 of the column under the chips; ≈ 0.93 of the whole column with a two-line chip on top (the chip itself takes the
 rest). Stage figures, 32.6 picture bands and week-book figures keep KIT_FIG (33).
 
