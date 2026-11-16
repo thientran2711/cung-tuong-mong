@@ -544,7 +544,10 @@ COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||m.from===CW.seat||!S||S.dead||m.week!
   if(CW.inTurn){S.tonight=null;try{if(typeof pregFind==="function")pregFind()}catch(e){}return}return r0}
  /* host: the friend's entry is in the deck (endTurn took her out) */const L=CW.pulled;if(L&&L.length)pushFriend(L.slice());let r;
  try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}
- S.tn={w:wk()+(CW.inTurn?1:0),who:tnWho()};CW.tnLast=JSON.stringify([wk()+(CW.inTurn?1:0),tnWho()]);return r}})();
+ /* reviewer r2: the week's flip can run AFTER endTurn (main's jcycle defers it behind her maid's Kỳ nguyệt sự card, cyrep → flip again):
+    CW.pend = this week's end is still waiting to go out, so that night is next week's too (else tn.w = the old week and the guest never takes it) */
+ const nx=CW.inTurn||CW.pend?1:0;S.tn={w:wk()+nx,who:tnWho()};CW.tnLast=JSON.stringify([wk()+nx,tnWho()]);return r}})();
+CW.tnShared=true;/* jcycle cyNoFriend: the host's flip deck holds the friend (B2), the guest's flip draws nothing: no need to take her out */
 (function(){if(typeof resolveTonight!=="function")return;const f=resolveTonight;resolveTonight=function(){if(!CW.on)return f.apply(this,arguments);const t=S.tonight;
  /* her friend's night is played on her friend's client; an NPC's night only on the host (its gains are world numbers) */
  if(t&&t!=="me"&&(isF(t)||!host())){S.tonight=null;return""}return f.apply(this,arguments)}})();
@@ -706,7 +709,7 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
  if(host()&&a&&a.id!=null&&a.alive&&(a.bac||0)>=B.pay)p2say("nbribe",{r:a.id});return ""}})();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:`mỗi tháng Bạc +8 · kèm: mỗi tháng chủ phát hiện: ${chanceW(mis&&mis.trait==="Đa nghi"?25:8)}; khi ấy bị đánh chết: ${chanceW(30)}, không thì Tân Giả khố 10 tuần`,go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm 1 chứng cứ của ${nm}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
   {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
 P2H.briber=m=>{const a=(CW.brb||{})[m.rid];if(!a)return;delete CW.brb[m.rid];if(S.dead)return;const s=fSrvE(),o=RV(a.o),B=BAL.coopBribe,nm=esc(friendName()),on=esc(o?o.name:"cung khác");let h="";
@@ -743,7 +746,7 @@ CW.hrSync=function(){if(!CW.on||!S||S.dead)return;S.hr=hrStr();if(!host())CW.hrP
  const L=CW.pulled;if(L&&L.length)pushFriend(L.slice());let r;try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}try{S.hr=hrStr()}catch(e){}return r}})();
 /* guest, merged week: the host named a new heir → her card (her own son: the j1 gain on her side) */
 CW.hrWeek=function(){if(!CW.on||!S||S.dead||host())return;const h=S.hr||null,was=CW.hrPrev;CW.hrPrev=h;if(was===undefined||h===was||!h)return;const x=hrFind(h);if(!x)return;
- if(!x.v){try{setHeir(x.k,null)}catch(e){console.error(e)}pushModal({t:"Lập Thái tử",h:`<p><b class="g">Hoàng thượng lập ${esc(x.k.name)}, con của ngươi, làm Thái tử.</b></p><p>${fmt({danh:10})}</p>`});return}
+ if(!x.v){const d0=S.danh||0;try{setHeir(x.k,null)}catch(e){console.error(e)}const dd=(S.danh||0)-d0;/* reviewer r2: print what setHeir gave (ONE CORE), not a typed 10 */pushModal({t:"Lập Thái tử",h:`<p><b class="g">Hoàng thượng lập ${esc(x.k.name)}, con của ngươi, làm Thái tử.</b></p>${dd?`<p>${fmt({danh:dd})}</p>`:""}`});return}
  pushModal({t:"Lập Thái tử",h:`<p>Hoàng thượng lập ${esc(x.k.name)}, con của ${esc(x.v===friendEntry()?friendName():x.v.name)}, làm Thái tử.</p>`})};
 (function(){const f=CW.seatWeek;CW.seatWeek=function(){try{CW.hrWeek()}catch(e){console.error(e)}return f.apply(this,arguments)}})();
 

@@ -134,7 +134,7 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
  return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: “Kỳ nguyệt sự của ${xg} đã tới (${dName(cyDaysM(S,cyCur()))}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
 /* co-op (review r3): the deferred flip runs outside endTurn's withoutFriend (jcoopworld), so take the friend entry out here too:
    otherwise the Emperor could "pick" the other player's card in MY world (rivalNight would then write Sủng/thai deltas into her row) */
-function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);
+function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||COOPW.tnShared/* reviewer r2: jcoopworld B2 (one host-drawn night, friend in the host deck, guest draws nothing) */||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);
  try{return f()}finally{for(const [i,v] of out.reverse())if(!rivals.includes(v))rivals.splice(Math.min(i,rivals.length),0,v)}}
 /* act-card tab (KIT_ACT_CATS data line, as jexam does): the cycle-book cards are intel / forgery = "Mưu kế", not the default "Giao thiệp" */
 try{if(typeof KIT_ACT_CATS!=="undefined"&&Array.isArray(KIT_ACT_CATS))KIT_ACT_CATS.unshift(["muu-ke",/nguyệt sự|báo ngày giả|xem sổ/i])}catch(e){}
