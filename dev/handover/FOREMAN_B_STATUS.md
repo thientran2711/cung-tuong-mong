@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 — 3 workers + 5 reviewers running (8/8).
+Updated: 11/16/2026 — 4 workers + 4 reviewers running (8/8). Box load high (~30): workers told to keep ≤2 browsers.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
@@ -7,21 +7,23 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C23 mg-easy | review/mg-easy @ede78f83 | sonnet | REVIEWING (review/mg-easy-r1, sonnet) |
 | C41 tuduc-mg | review/tuduc-mg | sonnet | RUNNING |
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (checks tutorial-r2 first) |
-| C26 stat-fx | review/stat-fx @ce35ee8c | sonnet | REVIEWING (review/stat-fx-r1, sonnet) |
+| C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition @7e80679c | sonnet | REVIEWING (review/buoi-transition-r1, sonnet) — images on CDN |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
 | C40 actcard-small | review/actcard-small @884e8846 | sonnet | REVIEWING (review/actcard-small-r1, sonnet) |
 | C28 room-btn | review/room-btn @11afc011 | sonnet | REVIEWING (review/room-btn-r1, sonnet) — icons on CDN |
 | C29 rel-picker | review/rel-picker | sonnet | RUNNING |
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
-| C33 weekbook-entries | review/weekbook-entries | sonnet | QUEUED |
+| C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING |
 | C34 contest-ui | review/contest-ui | sonnet | QUEUED |
 | C35 pcard-fill | review/pcard-fill | sonnet | QUEUED |
 | C37 panel-size | review/panel-size | sonnet | QUEUED |
+| C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
+PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
 All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills,orb}.webp (C27), img/kit/ico-room.webp + ico-map.webp (C28). Branch review/cdn-pending-b is obsolete (images only; never merge it; delete it — Foreman B's delete push was refused by the server).
