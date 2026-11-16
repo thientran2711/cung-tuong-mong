@@ -133,5 +133,5 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C66 | review/pcard-actrow (LIVE: person-card act boxes → kit long row) | RUNNING (sonnet) |
 | C57 | newgame-ui-r2 70119a805 reviewer | RUNNING |
 | C59 | elder-staff-r1 a3dbdc19f | LIVE |
-| UNASSIGNED (main slice) | C3 art-complete p2, C14 row-align re-review, C20 act-text resume, C43 coop-invite-ux, C44 cloud-save, D50 placeholder figure frame, D51 fxkit follow-ups, D52 skin-match audit, act-split waves 2–3 (after wave 1), D5+ side stories (after reign-road) → candidates for a 4th foreman |
+| MOVED TO FOREMAN D (16/11) | newgame-ui-r2 review, row-align re-review, C43, C44, C3, D50, D51, D52; act waves 2–3 on GO |
 | watch 16/11 #2 | merge-train-3 (12 PASSes: D40, D32, D30, D38, C33, C46, C34, mk-colour, opt-pics2, placeholder-pics2, recipes-r2, update-notes) RUNNING. Foreman B Q16–Q20 answered; Q21 sheets sent to the owner. newgame-ui-r2 reviewer still waiting for a slot. |

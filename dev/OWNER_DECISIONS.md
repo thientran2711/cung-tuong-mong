@@ -1172,3 +1172,4 @@ All must work in co-op.
 - (16/11) Owner: whenever she reopens the game, the title background must be HER current room/place (where she stands); the generic painting is used only without a save. The menu frame must be small and must not cover that background. → review/kpanel-compact.
 - (16/11) CORRECTION (owner): the title screen background stays as before (generic painting). On ENTERING the game (continue or reload), the first screen is always her room (Hành sự tab, room stage), never the last tab she used. Supersedes the 'title bg = current place' line. → review/kpanel-compact.
 - (16/11) Owner APPROVED the 3 new place paintings (Thượng thư phòng, A ca sở, Đông cung; 4 seasons × 4 buổi). They go live via merge-train-3.
+- (16/11) Owner asked to open a 4th account. → dev/handover/FOREMAN_D.md (slice: newgame-ui-r2 review, row-align re-review, C43 coop-invite-ux, C44 cloud-save, C3 art-complete p2, D50, D51, D52; act waves 2–3 on GO).
