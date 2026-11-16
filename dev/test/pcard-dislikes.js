@@ -34,9 +34,12 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    res.empOpt=talkOpts?true:false;return res});
   ok(l.hiddenBefore,"unknown hidden",out);ok(l.spy&&l.intel,"spy reveals + intel line "+JSON.stringify(l.row),out);ok(l.talk,"talk reveals",out);ok(l.emp,"Hỏi sở thích reveals emperor dislikes",out);
   /* 4. wrong gift */
-  const g=await p.evaluate(()=>{const res={};const v=rivals.find(x=>x.alive&&!x.out&&!x.queen);const k=disOf(v).find(x=>x.startsWith("art:")||x.startsWith("kd:"));res.key=k;
+  const g=await p.evaluate(()=>{const res={};const cand=rivals.filter(x=>x.alive&&!x.out&&!x.queen);let v=cand[0],k=null;
+   /* a proud (Kiêu ngạo) consort takes no handmade work at all (game rule) -> pick one who takes the work, or an item-kind dislike */
+   for(const c of cand){const kk=disOf(c).find(x=>x.startsWith("kd:")||(x.startsWith("art:")&&wkEval(S,{kind:"tranh",a:x.slice(4),n:"t",s:"Mai",q:5,ti:1,raw:5,lv:1,m:0,by:"me",bn:"ngươi",d:"x",p:null,from:"me"},c).ok));if(kk){v=c;k=kk;break}}
+   res.key=k;
    S.disK[String(v.id)]=[];S.inv=[];
-   const mk=()=>k.startsWith("kd:")?(()=>{const it=Object.keys(IT).find(i=>IT[i].kd===k.slice(3)&&!(IT[i].tg||[]).includes("rv")&&!IT[i].il&&!IT[i].mat&&IT[i].pr>0);return it?{k:it}:null})():{k:"tp",wk:{kind:"tranh",a:k.slice(4),n:"Bức tranh thử",s:"Mai",q:5,ti:1,raw:5,lv:1,m:0,by:"me",bn:"ngươi",d:"x",p:null,from:"me"}};
+   const mk=()=>k.startsWith("kd:")?(()=>{const it=Object.keys(IT).find(i=>IT[i].kd===k.slice(3)&&IT[i].tg&&!IT[i].tg.includes("rv")&&!IT[i].il&&!IT[i].mat&&IT[i].pr>0);return it?{k:it}:null})():{k:"tp",wk:{kind:"tranh",a:k.slice(4),n:"Bức tranh thử",s:"Mai",q:5,ti:1,raw:5,lv:1,m:0,by:"me",bn:"ngươi",d:"x",p:null,from:"me"}};
    const e=mk();res.item=!!e;if(!e)return res;
    let ref=0,pen=0,before;const A0=v.rel;
    for(let i=0;i<60;i++){S.inv.push(Object.assign({},e,e.wk?{wk:Object.assign({},e.wk)}:{}));v.rel=0;const ix=S.inv.length-1;const out=giveTo(S,v,ix);
@@ -48,7 +51,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    /* a liked item is never penalised */
    const likedIt=Object.keys(IT).find(i=>(IT[i].tg||[]).includes("rv")&&!IT[i].il&&!IT[i].t);S.disK[String(v.id)]=[];v.dis=["kd:"+IT[likedIt].kd];S.inv.push({k:likedIt});const o2=giveTo(S,v,0);res.liked=!/không ưa|không nhận/.test(o2);
    /* emperor */
-   const E=S.emp;E.dis=["kd:Trang sức"];S.disK.emp=[];const tk=Object.keys(IT).find(i=>IT[i].kd==="Trang sức"&&!(IT[i].tg||[]).includes("emp")&&!IT[i].il&&!IT[i].t);
+   const E=S.emp;E.dis=["kd:Trang sức"];S.disK.emp=[];const tk=Object.keys(IT).find(i=>IT[i].kd==="Trang sức"&&IT[i].tg&&!IT[i].tg.includes("emp")&&!IT[i].il&&!IT[i].t);
    if(tk){let s0=S.sung,en=0;for(let i=0;i<40;i++){S.inv=[{k:tk}];S.sung=50;const o3=giveTo(S,"emp",0);if(/không nhận/.test(o3)){en++}}res.empRef=en}
    return res});
   ok(g.item,"gift item for test",out);ok(g.ref>0&&g.pen>0,"wrong gift: refused "+g.ref+" / penalised "+g.pen+" of 60",out);ok(!g.badRefuse,"refused gift stays in chest",out);ok(g.hint,"known dislike shown in gift dialog",out);ok(g.liked,"liked item never penalised",out);ok(g.empRef===undefined||g.empRef>0,"emperor refuses sometimes "+g.empRef,out);
