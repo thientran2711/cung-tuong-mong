@@ -202,7 +202,7 @@
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | (opening) | RUNNING | 16/11 13:45Z |
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | (opening) | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | (opening) | RUNNING | 16/11 13:45Z |
-| mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | session_01N1tNP2JhbsLfaydyiNBr2T | RUNNING | 16/11 13:45Z |
+| mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | session_01N1tNP2JhbsLfaydyiNBr2T | DONE SẴN SÀNG KIỂM 7e52cb1c (archived) | 16/11 13:45Z |
 | story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C→B | session_011xDdVPicFAyWqznz92TPU8 | HANDING TO FOREMAN B (owner 15:35Z story roads → B) | 16/11 13:45Z |
 | A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | session_011xDdVNdbaZdiyTm7es9XyE | PASS d5ca28a8 | 16/11 13:45Z |
 | TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | session_011xDdVQBTWm3Y9JWADY4izD (successor 2; #1 session_011xDdVSqS6DtgnaKSH6DMoG rolled over @e464c0f0) | SẴN SÀNG KIỂM 06dd80ae | 16/11 13:45Z |
@@ -264,3 +264,5 @@
 | go-live-kit (opus; OD:L1370): tier classifier script, 5–10 min pre-push quick check, build number + 'what changed' line in game menu, one-step rollback, nightly full suite | review/go-live-kit | main s20 | session_01UV1SziX5AtFSgrnkfGWXgw | RUNNING | 16/11 16:36Z |
 | TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd | RUNNING | 16/11 16:34Z |
 | emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | RUNNING | 16/11 16:41Z |
+| mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | (opening) | RUNNING | 16/11 16:44Z |
+| mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | (opening) | RUNNING | 16/11 16:44Z |
