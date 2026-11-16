@@ -13,7 +13,7 @@ function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o
 function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Sang ngày mới":"Sang buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=4&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=4&&!Q.length&&!S.dead)nextBuoi()},350)}
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
  if(Q.length&&$("modal").hidden)showModal();save()}
-function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n)+(S.hieu?` · hiệu ${S.hieu}`:"");$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
+function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+rkName(S);$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
  $("me-p").innerHTML=mdH(pMe(),"sm");
  for(const k of ["bac","suc","sung","danh"]){const e=$("hud-"+k);e.querySelector("span").textContent=S[k];const u=e.querySelector("u");if(u)u.style.width=S[k]+"%"}
  $("emp-p").innerHTML=mdH(pEmp(),"sm");$("emp-n").textContent=S.emp.era;const m=MOODS[S.emp.mood];$("emp-m").innerHTML=`<span class="${m[1]}">${m[0]}</span>`}
@@ -28,7 +28,11 @@ function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,ex
  if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<2?"disabled":""}>Xử tội<small>${evG(S,v)>=2?"theo chứng cứ":"cần 2 chứng cứ"}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<30?"disabled":""}>Ban thưởng<small>Bạc -30 · thiện cảm +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
-function renderPanel(){try{renderPanel0()}catch(e){console.error(e);const el=$("panel");el.innerHTML=`<p class="past">Mục này đang lỗi, ngươi chọn mục khác.</p>`}}
+/* KIT TAB MODE (design-scale p2): every .game class that depends on the open tab. Reset before EVERY panel render; the renderer of the open
+   tab sets its own (j6 cardtab, j38 maptab, jhc/jht/j72 cardtab). Was: each renderer set only its class, so a renderer that short-circuits the
+   chain (jhc Hậu cung, jht, j72, j42, jkc) left the previous tab's class on — Dư đồ → Hậu cung kept .maptab (full-width panel, stage hidden). */
+const KIT_TABMODE=["maptab","cardtab"];
+function renderPanel(){try{const gm=document.querySelector(".game");if(gm)gm.classList.remove(...KIT_TABMODE);renderPanel0()}catch(e){console.error(e);const el=$("panel");el.innerHTML=`<p class="past">Mục này đang lỗi, ngươi chọn mục khác.</p>`}}
 function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.toggle("cardtab",["rv","kid","staff","court","men"].includes(tab));
  if(tab==="act"){const pr=S.preg?`${S.hidden?"Đang giấu thai":"Mang thai"} tháng ${S.preg}${S.preg<=3||S.preg>=7?" · tháng hiểm":""}`:`Có thai mỗi lần thị tẩm: <b>${chanceLvl(conceiveCh())}</b>`;
    h=`<div class="cards">${deck.map(cardH).join("")}</div>`}
@@ -79,7 +83,7 @@ $("slots").onclick=e=>{const b=e.target.closest("button");if(!b)return;
 /* wiring */
 $("panel").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const d=b.dataset;
  if(d.pg){PG[d.pg]=+d.pi;renderPanel();const on=$("panel").querySelector(".pface.on");if(on)on.scrollIntoView({block:"nearest",inline:"nearest"});return}
- if(d.i!==undefined)act(+d.i);else if(d.r!==undefined)doAct(+d.r,d.a);else if(d.e!==undefined)empAct(+d.e,d.k);else if(d.it)itemAct(d.it,+d.ix);else if(d.inv)invAct(d.inv);else if(d.go)goTo(d.go);else if(d.sv)servAct(d.sv,+d.sid);else if(d.cv)courtAct(d.cv,d.ck);else if(d.hire){if(S.bac>=20&&roomFor(d.hire)){apply({bac:-20});S.staff.push(mkServ(d.hire));render()}}else if(d.plantsv){pushDil(mkP("plantsv"),"Cài người");render()}else if(d.fa)facAct(d.fa,d);else if(d.rec)recommend(+d.rec);else if(d.smaid)searchMaids();else if(d.relot)reLot(false);else if(d.rel){relSel=isNaN(+d.rel)?d.rel:+d.rel;render()}else if(d.art)lesson(d.art);else if(b.id==="master")hireMaster()};
+ if(d.i!==undefined)act(+d.i);else if(d.r!==undefined)doAct(+d.r,d.a);else if(d.e!==undefined)empAct(+d.e,d.k);else if(d.it)itemAct(d.it,+d.ix);else if(d.inv)invAct(d.inv);else if(d.go)walkGo(d.go);else if(d.sv)servAct(d.sv,+d.sid);else if(d.cv)courtAct(d.cv,d.ck);else if(d.hire){if(S.bac>=20&&roomFor(d.hire)){apply({bac:-20});S.staff.push(mkServ(d.hire));render()}}else if(d.plantsv){pushDil(mkP("plantsv"),"Cài người");render()}else if(d.fa)facAct(d.fa,d);else if(d.rec)recommend(+d.rec);else if(d.smaid)searchMaids();else if(d.relot)reLot(false);else if(d.rel){relSel=isNaN(+d.rel)?d.rel:+d.rel;render()}else if(d.art)lesson(d.art);else if(b.id==="master")hireMaster()};
 $("stage").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.id==="popx"){popIdx=null;popMsg="";renderStage();return}
  if(b.dataset.p!==undefined){popIdx=+b.dataset.p;popMsg="";renderStage();return}

@@ -5,7 +5,7 @@
       no HUD count above its ceiling ("Phần 20/10": KG82.over + live HUD sampling);
       no text over text: every canvas fillText of one animation frame (pops, hints, labels) and every DOM text leaf in #kg82 must not overlap another.
    usage: node dev/test/minigames91.js <baseURL> <W>x<H>@<dpr> <outdir> [kinds,comma] [shots: all|play]  */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,KL,SH]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const ALL='dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong';const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const SHOTS=SH||'all';
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
@@ -65,6 +65,6 @@ const ALL='dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong';co
    return{last:KG82.last,overflowX:document.documentElement.scrollWidth>innerWidth,inner:d.scrollWidth>d.clientWidth+1,trunc,cut,coThe:(d.innerText||'').includes('có thể')}});
   dov.push(...await domOv());const cov=await p.evaluate(()=>({ov:window.__ov,over:KG82.over||0}));
   if(SHOTS==='all')await shot(`${kind}-${SZ}-3result`);
-  await p.locator('#kg82ok').tap();await p.waitForTimeout(200);const got=await p.evaluate(()=>window.__res);
+  await require('./lib/roulette').closeResult(p);await p.waitForTimeout(200);const got=await p.evaluate(()=>window.__res);
   res.push({kind,eng:await p.evaluate(k=>KG82_KIND[k].e,kind),real,trusted:rt,raw:info.last&&info.last.raw,score:got&&got.score,place:got&&got.place,of:got&&got.of,done:!!got,ox:info.overflowX,inner:info.inner,trunc:info.trunc,cut:info.cut,coThe:info.coThe,hudOver:hudOver+cov.over,hudMax,textOverText:cov.ov.map(o=>o.key),domOverlap:[...new Set(dov)]})}
  console.log(JSON.stringify({size:SZ,res,errors:errs}));await b.close()})();

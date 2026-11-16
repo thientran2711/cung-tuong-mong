@@ -56,10 +56,10 @@ function feedback(k,o){o=o||{};if(SFXN[k])sfx(SFXN[k]);vib(k);if(!OPT.fxon||RM)r
  else if(k==="coin"){coinPop(o.n)}
  else if(k==="ink"){fxOver("ink")}
  else if(k==="ash"){pxBurst("ash",40)}}
-function fxCls(c,el){if(!el)return;el.classList.remove(c);void el.offsetWidth;el.classList.add(c);setTimeout(()=>el.classList.remove(c),700)}
-function fxOver(c){const d=document.createElement("div");d.className="fxo "+c;document.body.appendChild(d);setTimeout(()=>d.remove(),1300)}
-function stamp(t,c){const d=document.createElement("div");d.className="stamp "+(c||"red");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1500)}
-function coinPop(n){if(typeof kitStatFx==="function"&&n)return kitStatFx([{k:"bac",dv:+n}],{src:"coin"});const e=$("hud-bac");if(!e)return;const r=e.getBoundingClientRect();const d=document.createElement("div");d.className="coinp";d.textContent="◉ +"+(n||"");d.style.left=r.left+"px";d.style.top=r.top+"px";document.body.appendChild(d);setTimeout(()=>d.remove(),900)}
+function fxCls(c,el){if(!el)return;el.classList.remove(c);void el.offsetWidth;el.classList.add(c);setTimeout(()=>el.classList.remove(c),kitPace(750))}
+function fxOver(c){const d=document.createElement("div");d.className="fxo "+c;document.body.appendChild(d);setTimeout(()=>d.remove(),kitPace(/night/.test(c)?2100:1300))}
+function stamp(t,c){const d=document.createElement("div");d.className="stamp "+(c||"red");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),kitPace(1500))}
+function coinPop(n){if(typeof kitStatFx==="function"&&n)return kitStatFx([{k:"bac",dv:+n}],{src:"coin"});const e=$("hud-bac");if(!e)return;const r=e.getBoundingClientRect();const d=document.createElement("div");d.className="coinp";d.textContent="◉ +"+(n||"");d.style.left=r.left+"px";d.style.top=r.top+"px";document.body.appendChild(d);setTimeout(()=>d.remove(),kitPace(900))}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button");if(b&&!b.disabled)feedback(b.closest("#tabs")?"page":"tap")},true);
 /* ---- hooks into the game (wrapping the shared functions, so NPC events show too when they touch the player) ---- */
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
@@ -96,9 +96,13 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
+  app.ticker.maxFPS=60;
+  /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
+     buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
+  {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
+  const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
-function pxCap(){return innerWidth<700?60:120}
+function pxCap(){return kitView().pages===1?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}

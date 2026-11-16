@@ -7,7 +7,7 @@
    5. runtime name families: FPOOL faces, map/scene for every season x buổi, kid faces … (keys written to <outdir>/keys-<tag>.txt)
    6. [offline] once the core set is cached and the service worker controls the page: offline reload, the save loads, pictures show
    Every response under /img/: status >= 400 or requestfailed is an error. Prints one JSON line. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,BASE,SZ,OUT,WEEKS,OFF]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ.replace('@','_');
 const CDN='ctm-img.victoria-tntt.workers.dev';const sleep=t=>new Promise(r=>setTimeout(r,t));fs.mkdirSync(OUT,{recursive:true});
 const opts={viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'};

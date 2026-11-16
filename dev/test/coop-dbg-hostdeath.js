@@ -1,7 +1,7 @@
 /* Repro: host dies in buổi tối (after or before Qua đêm) while the guest has ended the week; after rebirth the guest must see her. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const AFTER=process.argv[2]==='after';
-const clear=p=>p.evaluate(()=>{const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
+const clear=p=>p.evaluate(()=>{const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
  const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
  const m=document.getElementById('modal');if(!m||m.hidden)return'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/Nhận thân phận|Chuyển kiếp|Đầu thai/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return''});
 const tap=(p,re)=>p.evaluate(s=>{const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&new RegExp(s).test(b.textContent.trim()));if(b){b.click();return true}return false},re);

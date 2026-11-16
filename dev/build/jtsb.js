@@ -193,7 +193,7 @@ PEND.tsbFireW=()=>{const W=S&&S.tsbFW;if(!W)return null;const hau=W.cause==="hau
  return{t:`<p>${t}</p>`,o:O,headArt:tsbFitArt("hoa-hoan"),title:"Đèn nến trong cung"}};
 
 /* Tư trang: "Thú nuôi" (jpet petHTML) + "Sổ đồ mất" */
-function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";try{if(typeof petHTML==="function")h+=petHTML()}catch(e){console.error("petHTML",e)}
+function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";/* the pet strip now sits in the bag block (jinv kitInvGrid below:, review/tutrang-layout) */
  const D=(S.tsbLog||[]).slice(0,8);if(D.length)h+=`<div class="ph"><span>Sổ đồ mất</span><span>ghi đúng món và nguyên do</span></div><ul class="kbul">${D.map(x=>`<li>${x.when?x.when+": ":""}<b>${x.what}</b> ${x.how}${x.by?` (${x.by})`:""}${x.cause?` · ${x.cause}`:""}${x.back?' · <span class="g">đã lấy lại</span>':""}</li>`).join("")}</ul>`;
  return h}
 

@@ -29,7 +29,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
    and 3 times in 10 he is beaten to death in Thận Hình ti (servCaught) — her servant is lost. The card never said so. Now the
    card names him and that risk in Kèm (same formula as the roll). */
 (function(){if(typeof actLineRaw!=="function")return;const a0=actLineRaw;actLineRaw=function(k,w,c){let h=a0.apply(this,arguments);try{
- const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
+ const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","xx","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
  const tin=s=>s?String(h).replace(/thành: ([^·]+)/,(m,x)=>`thành: ${x.trim()} · Chủ tin với ${s.name} +3 `):h;/* runAct → servMerit(sv,2) → tinAdd 1.5×2 */
  if(["ally","spy"].includes(k))return tin(sv);
  h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${typeof chanceW==="function"?chanceW(r):word(r)}`}catch(e){}return h}})();
@@ -40,27 +40,30 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
    opens "Chưởng sự tra xét cung nữ"; a Thủ lĩnh/Tổng quản thái giám (eunuch tier ≥ 3) helps her be chosen at night (+4);
    tier ≥ 2 draws a monthly allowance from her purse (Bạc −tier/2 a month). No thị vệ servants exist: thị vệ are palace men (MROLES),
    not a household tier — nothing to promote there. */
-Object.assign(BAL,{dbLoyal:55,dbMerit:3,dbCost:[0,20,40,80,120],dbGain:8,dbEnvy:3,dbBase:70});
+Object.assign(BAL,{dbLoyal:55,dbMerit:3,dbCost:[0,20,40,80,120],dbGain:8,dbEnvy:3,dbBase:70,dbFail:2});
 function dbCost(s){return BAL.dbCost[Math.min(BAL.dbCost.length-1,srk(s)+1)]||100}
 function dbOdds(o,s){return cl(Math.round(BAL.dbBase+((s.loyal||0)-50)/5+((s.mp||0)-BAL.dbMerit)*2-(srk(s)-1)*8),5,95)}
 function dbNeed(o,s){const L=[];const mx=srkMax(o,s);L.push({ok:srk(s)<mx,t:srk(s)<mx?`Phẩm đủ đến ${SRK[s.role][mx]}`:`Phẩm chỉ đủ đến ${SRK[s.role][mx]}`});
  L.push({ok:(s.loyal||0)>=BAL.dbLoyal,t:`Lòng ${s.loyal} (cần ${BAL.dbLoyal})`});L.push({ok:(s.mp||0)>=BAL.dbMerit,t:`Công lao ${s.mp||0} (cần ${BAL.dbMerit})`});return L}
-function dbDo(o,s){const c=dbCost(s);if((o.bac||0)<c||!dbNeed(o,s).every(x=>x.ok))return null;ap(o,{bac:-c});const ok=roll(dbOdds(o,s));const nm=s.name;
+function dbDo(o,s,road,paid){const c=dbCost(s);const fav=road==="fav";/* D41: two roads of equal worth — bạc (lót tay) or favour (spFav, jpromsv) */
+ const fv=fav&&typeof spFav==="function"?spFav(o,s):null;if(!paid&&(fav?!fv||!fv.ok:(o.bac||0)<c))return null;if(!dbNeed(o,s).every(x=>x.ok))return null;
+ if(!paid){if(fav)spPayFav(o,fv);else ap(o,{bac:-c})}const ok=roll(dbOdds(o,s));const nm=s.name;const r0=srk(s);
  const others=(o.staff||[]).filter(x=>x!==s);
  if(ok){s.rk=srk(s)+1;s.mp=0;s.loyal=cl(s.loyal+BAL.dbGain,0,100);others.forEach(x=>x.loyal=cl(x.loyal-BAL.dbEnvy,0,100));
-  if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);return true}
- s.loyal=cl(s.loyal-2,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: tiền lót tay mất, ${nm} hơi thất vọng (lòng -2).`);return false}
+  if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}${fav&&fv?` (${fv.how})`:""}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);try{if(typeof spAfter==="function")spAfter(o,s,r0)}catch(e){console.error(e)}return true}
+ s.loyal=cl(s.loyal-BAL.dbFail,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: ${fav?"lời xin đã mất":"tiền lót tay mất"}, ${nm} hơi thất vọng (lòng -${BAL.dbFail}).`);return false}
 (function(){if(typeof servJudgeBtns!=="function")return;const j0=servJudgeBtns;servJudgeBtns=function(s){const B=j0.apply(this,arguments);try{if(ownerOf(s)!==S)return B;
  const mx=srkMax(S,s),nx=SRK[s.role][srk(s)+1];if(!nx)return B;const c=dbCost(s);const N=dbNeed(S,s);const t2=whyTime(1);
- const un=N.filter(x=>!x.ok).map(x=>x.t);const why=t2||(un.length?un[0]:"")||(S.bac<c?`thiếu bạc (cần ${c})`:"");
+ const un=N.filter(x=>!x.ok).map(x=>x.t);const fv=typeof spFav==="function"?spFav(S,s):null;const why=t2||(un.length?un[0]:"")||(S.bac<c&&!(fv&&fv.ok)?`thiếu bạc (cần ${c})${fv?` hoặc ${fv.lbl} ${fv.n}`:""}`:"");
  const eff=s.role==="maid"?(srk(s)+1>=3?"mở việc Chưởng sự tra xét cung nữ":"sai việc dễ hơn"):(srk(s)+1>=3?"đêm được chọn dễ hơn chút, sai việc dễ hơn":"sai việc dễ hơn");
- const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: Bạc -${c} (lót tay Nội vụ phủ), 1 khắc · thành: thăng bậc, lòng +${BAL.dbGain}, ${eff} · hỏng: mất bạc, lòng -2 · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${srk(s)+1>=2?` · (từ bậc này, thưởng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
+ const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: 1 khắc, chọn một đường: Bạc -${c} (lót tay Nội vụ phủ)${fv?` hoặc ${fv.lbl} -${fv.n} (${fv.how})`:""} · thành: thăng bậc, lòng +${BAL.dbGain}, ${eff} · hỏng: mất ${fv?"bạc hoặc lời xin":"bạc"}, lòng -${BAL.dbFail} · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${typeof spKemTxt==="function"?spKemTxt(S,s):""}${srk(s)+1>=2?` · (từ bậc này, thưởng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
  return B.concat([btn.replace("<button ",`<button data-kneed="${encodeURIComponent(JSON.stringify(N))}" `)])}catch(e){console.error(e);return B}}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();const s=servById(+b.dataset.dbsv);if(!s||!can(1))return;
+ if(typeof spOpen==="function"){spOpen(s);return}/* D41: the two-road card (jpromsv) */
  const bf=rsnap();spend(1);const r=dbDo(S,s);if(r==null)return;try{resultShow(`Đề bạt ${s.name}`,bf,r)}catch(x){}render()},true);
 /* NPC mistresses: the same act, by motive — a loyal, deserving servant, a purse that can pay, once in a while */
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);try{if(typeof mlGuest==="function"&&mlGuest())return ev;/* co-op guest: NPC promotions roll on the host */for(const p of liveRivals(true)){for(const s of (p.staff||[])){
- if(dbNeed(p,s).every(x=>x.ok)&&(p.bac||0)>=dbCost(s)*2&&s.loyal>=70&&roll(15))dbDo(p,s)}}}catch(e){console.error(e)}return ev}})();
+ if(!dbNeed(p,s).every(x=>x.ok)||s.loyal<70||!roll(15))continue;if((p.bac||0)>=dbCost(s)*2)dbDo(p,s);else if(typeof spFav==="function"&&spFav(p,s).ok)dbDo(p,s,"fav")}}}catch(e){console.error(e)}return ev}})();
 
 /* 5. RELATION NUMBERS ON CARDS = THE REAL CHANGE (owner: "a card must show what will really happen").
    The real change goes through affAdd/oanAdd, which scale a rise by the target's nết (persF "trust" for quý ta, "slight" for oán ta;
@@ -331,20 +334,25 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
 const KRN_SKIP=".kname,.kti,[data-vp-skip],[data-krn-skip],script,style,textarea,input,option,select";
 const KRN_BLK=".kft,.krv,.kitem,.logs > div,p,li,button,.kptitle,.kpsub,figcaption,td,.kpnote,.tag";
 let KRN_C={k:"",rx:null,m:null};
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&kitTitle(p))}catch(e){return null}if(!L.length)return null;
+/* lag-play (owner 16/11 15:05Z): one rank-name pass reads the title of every person (kitTitle -> kitFace -> portrait/figure lookups)
+   for the table AND again per match, per root: ~0.8 s per tab on a slow phone. Inside ONE pass (no game state changes there) each
+   person's title is read once. */
+let KRN_TM=null;
+function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
+function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
 function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitleTail(b,t)||kpTitleTail(b.trimEnd()+" ",t)))return true;
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
-function kitRankNamePaint(root,dry){const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
+function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
  const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
   const pv=krnPrevText(n);T.rx.lastIndex=0;let m,last=0,hit=false;const f=document.createDocumentFragment();
-  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=kitTitle(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
+  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=krnT(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
    if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index)))continue;
    /* a name label on its own (card heading, portrait caption) whose title sits in a sibling element of the same card: titled */
    if(v.trim()===nm){let up=n.parentElement,ok=false;/* r1: a short sibling label of the name (person card .pcrk "Hoàng hậu" beside .pcname) holds its title */
@@ -360,8 +368,8 @@ window.kitRankNamePaint=kitRankNamePaint;
    replacements are skipped (they hold no bare name), so it never loops; too many roots in one frame → one full pass. */
 (function(){let q=false,full=true;const R=new Set();
  const run=()=>{q=false;const all=full,L=[...R];full=false;R.clear();if(window.__krnOff)return;
-  try{if(all||L.length>120){kitRankNamePaint(document.body);return}
-   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}};
+  KRN_TM=new Map();try{if(all||L.length>120){kitRankNamePaint(document.body);return}
+   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}finally{KRN_TM=null}};
  const add=n=>{const e=n&&(n.nodeType===1?n:n.parentElement);if(e&&!(e.matches&&e.matches(".kname,.kname *")))R.add(e)};
  const mo=new MutationObserver(M=>{for(const m of M){if(m.type==="characterData")add(m.target);else m.addedNodes.forEach(add)}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}full=true;run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();

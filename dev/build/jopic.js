@@ -172,7 +172,7 @@ document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
 #kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
-#kpzoom .kpzf{width:min(78vw,calc(82vh * 3 / 4),506px)}
+#kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
 ${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):""}
