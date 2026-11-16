@@ -57,7 +57,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 (function(){const st=document.createElement("style");st.id="kinv-css";st.textContent=`
 .kinv{display:flex;flex-direction:column;gap:0;margin:0 0 10px}
 .kinv .kinvg{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--kinvsz,60px),1fr));gap:6px;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#f4ead8;box-shadow:inset 0 1px 3px #5a3a2018}
-@media (max-width:599px){.kinv .kinvg{--kinvsz:54px;gap:5px;padding:6px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .kinv .kinvg>.kitem-slot>.kitb{border-radius:7px}
 .kinv .kinvg>.kitem-slot[role=button]:hover>.kitb,.kinv .kinvg>.kitem-slot[role=button]:focus-visible>.kitb{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e));outline:none}
 .kinv .kinvg>.kitem-slot:focus{outline:none}
@@ -174,7 +174,7 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));grid-auto-flow:row dense;align-items:start;gap:6px;margin-top:8px}
 #modal .dlg.kitslot .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
 #modal .dlg.kitslot .kinvacts>button.ksllong{grid-column:1/-1}
-@media (min-width:1000px){#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+/* kv:(min-width:1000px) */#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kinvact]");if(!b)return;e.stopPropagation();if(b.disabled)return;
  const a=b.dataset.kinvact,ix=+b.dataset.ix;try{closeModal()}catch(x){}itemAct(a,ix)},true);
@@ -202,7 +202,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq .keqnm{font-size:.74rem;line-height:1.2;overflow-wrap:anywhere;margin-top:2px}
 .keq .keqfx{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px}.keq .keqfx .kchip{font-size:.68rem;margin:0;padding:0 5px}
 .keq .keql2{flex-basis:100%;display:flex;justify-content:center;align-items:center;gap:3px}.keq .keqm{font-size:.68rem;color:var(--ink2,#7a6a58)}.keq .keqw{color:#c23b22;font-size:.8rem;line-height:1;cursor:help}
-@media (max-width:899px){.keq{--keqsz:76px}.keq .keqs{gap:8px}}
+/* kv: dropped @media (max-width:899px) (one page = spread page, KIT §0) */
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
 @supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
@@ -458,7 +458,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshdt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .kshdn{font-family:var(--display);font-size:1.05rem}
 .kshds{font-size:.8rem;color:var(--ink2,#6a5040)}
-@media (min-width:1000px){.kshg{--kshsz:124px}}
+/* kv:(min-width:1000px) */.kshg{--kshsz:124px}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
 @media (max-height:500px){.kshop{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:10px}
  .kshl{grid-row:1;grid-column:1;align-self:center}.kshl p{display:none}.kshtabs{grid-row:1;grid-column:2}.kshg,.kshempty{grid-column:1/-1;grid-row:2}

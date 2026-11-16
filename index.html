@@ -103,12 +103,12 @@
    The page is a thin HOST: the game runs inside ONE frame (#krotf) whose size is the DESIGN size, scaled uniformly to the screen like a
    resized window, centred, with paper-coloured bars:
      landscape (and narrow portrait phones, pre-rotated)  1180 x 820  (the iPad layout)
-     portrait (Fold-size, width/height >= 0.62)          755 x 1000
+     portrait (Fold-size, width/height >= 0.62)          590 x 820   (ONE PAGE = the iPad half, KIT_FRAME)
      s = min(available width / design width, available height / design height)
    Narrow portrait phones (width/height < 0.62: 390x844, 412x915, 412x1058 …): the frame is also rotated 90° so the landscape layout appears
    sideways and the player turns the phone; turned to real landscape the rotation drops (no reload).
    Inside the frame the game sees ONLY the design size: innerWidth/innerHeight, every media query and every JS breakpoint read 1180x820 or
-   755x1000, so the layout never reflows on the device (kitView() = {w,h,s,rot}). The browser maps touches and drags through the frame's
+   590x820 (one page), so the layout never reflows on the device (kitView() = {w,h,s,rot}). The browser maps touches and drags through the frame's
    transform, so pointer coordinates (page curl, sliders, map pan) arrive already divided by s and rotated; fixed popovers stay inside the frame.
    screen.orientation.lock('landscape') is tried only for a narrow portrait screen in an installed PWA / fullscreen (never Fold, never iPad).
    ROTATE PROMPT (owner 15/11 05:50Z "390x844 shows the rotate prompt"; review/small-bugs-3): "Xoay ngang điện thoại để chơi" shows EVERY time
@@ -117,12 +117,20 @@
    The rest of index.html is swallowed by <plaintext> in the host (never executed), then dropped.
    Direct mode (no host, real viewport): ?khost=0, or automated browsers (navigator.webdriver) unless ?khost=1 — old tests keep working.
    Test hook: window.__krot {host, rotated, s, dw, dh}. */
+/* KIT_FRAME (KIT §0, owner 16/11 07:47Z + 07:50Z): ONE PAGE = half of the iPad spread. Landscape = SPREAD (2 pages side by side:
+   LEFT = room / stage, RIGHT = open tab); portrait = ONE PAGE at a time (room home, a tab opens the right page full screen). The only
+   design sizes: spread 1180x820, page 590x820. html.kv2 (spread) / html.kv1 (one page) = THE layout switch for chrome; never width queries. */
+window.KIT_FRAME={spread:{w:1180,h:820},page:{w:590,h:820},margin:8,pageMargin:4,gutter:0};
+function kvPages(){return innerWidth<innerHeight?1:2}
+function kvMark(){var r=document.documentElement,p=kvPages();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
+ r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px");
+ if(!kvMark.on){kvMark.on=1;addEventListener("resize",kvMark)}}
 (function(){var inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  if(inFrame){document.documentElement.classList.add("kview-in");
-  window.kitView=function(){var h=null;try{h=parent.__krot}catch(e){}return{w:innerWidth,h:innerHeight,s:h&&h.s||1,rot:!!(h&&h.rotated),design:true}};return}
+  window.kitView=function(){var h=null;try{h=parent.__krot}catch(e){}return{w:innerWidth,h:innerHeight,s:h&&h.s||1,rot:!!(h&&h.rotated),design:true,pages:kvPages()}};kvMark();return}
  var q=location.search||"";
  if(/[?&]khost=0/.test(q)||(navigator.webdriver&&!/[?&]khost=1/.test(q))){window.__krot={host:false,rotated:false,s:1};
-  window.kitView=function(){return{w:innerWidth,h:innerHeight,s:1,rot:false,design:false}};
+  window.kitView=function(){return{w:innerWidth,h:innerHeight,s:1,rot:false,design:false,pages:kvPages()}};kvMark();
   /* direct mode: the same rotate prompt on a narrow portrait screen (never catches taps, so automated runs keep working) */
   var dsync=function(){var w=innerWidth,h=innerHeight,on=w>0&&w<h&&w/h<0.62,t=document.getElementById("krottip");if(!document.body)return;
    if(on&&!t){t=document.createElement("div");t.id="krottip";t.setAttribute("style","position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2147483600;pointer-events:none;background:#2a1a12ee;color:#fff3dc;font:600 16px/1.35 system-ui,sans-serif;padding:14px 18px;border-radius:12px;box-shadow:0 4px 18px #0007;text-align:center;width:max-content;max-width:80vw");
@@ -132,7 +140,7 @@
     game never boots here and the host document still finishes parsing normally (window.stop() leaves a page Chromium never paints) */
  document.write('<plaintext id="krotx" hidden style="display:none">');document.title="Cung Tường Mộng";
  var K=window.__krot={host:true,rotated:false,s:1,dw:1180,dh:820};
- window.kitView=function(){return{w:K.dw,h:K.dh,s:K.s,rot:K.rotated,design:true}};
+ window.kitView=function(){return{w:K.dw,h:K.dh,s:K.s,rot:K.rotated,design:true,pages:K.dw<K.dh?1:2}};
  var d=document,st=d.createElement("style");
  st.textContent="html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#f6efe2 radial-gradient(ellipse at 50% 40%,#fbf5ea 0,#efe3cc 100%)}"+
   "#krotf{position:fixed;top:0;left:0;border:0;display:block;transform-origin:0 0;background:#f6efe2;box-shadow:0 0 24px #8a6a4033}"+
@@ -146,7 +154,7 @@
  /* boot cover (kboot.js, KIT §14.1) in the design box, from the first paint until the frame has painted its own copy */
  var cw=d.createElement("div");cw.id="kbootw";cw.style.cssText="position:fixed;top:0;left:0;transform-origin:0 0;overflow:hidden;z-index:4";
  function geo(){var w=window.innerWidth,h=window.innerHeight;if(!w||!h)return null;
-  var nr=narrow(w,h),land=nr||w>=h,DW=land?1180:755,DH=land?820:1000,AW=nr?h:w,AH=nr?w:h,s=Math.min(AW/DW,AH/DH),ox=(AW-DW*s)/2,oy=(AH-DH*s)/2;
+  var nr=narrow(w,h),land=nr||w>=h,DW=land?KIT_FRAME.spread.w:KIT_FRAME.page.w,DH=land?KIT_FRAME.spread.h:KIT_FRAME.page.h,AW=nr?h:w,AH=nr?w:h,s=Math.min(AW/DW,AH/DH),ox=(AW-DW*s)/2,oy=(AH-DH*s)/2;
   return{w:w,h:h,nr:nr,DW:DW,DH:DH,s:s,tf:(nr?"translateX("+w+"px) rotate(90deg) ":"")+"translate("+ox.toFixed(2)+"px,"+oy.toFixed(2)+"px) scale("+s.toFixed(4)+")"}}
  function place(el,g){if(el.style.width!==g.DW+"px")el.style.width=g.DW+"px";if(el.style.height!==g.DH+"px")el.style.height=g.DH+"px";el.style.transform=g.tf}
  (function(){var g=geo();if(!g||!window.__kbootHost)return;place(cw,g);d.documentElement.appendChild(cw);window.__kbootHost(cw,g.DW,g.DH);
@@ -197,7 +205,10 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) minmax(0,44%) auto;grid-template-areas:"hud" "stage" "panel" "bar";
   padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));
   background-image:radial-gradient(circle at 15% -10%,#fbe3e6 0,transparent 45%),radial-gradient(circle at 90% 0,#e3f1ea 0,transparent 40%)}
-@media (min-aspect-ratio:1/1){.game{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"hud hud" "stage panel" "bar bar"}}
+/* KIT §0 SPREAD (html.kv2, rot.js KIT_FRAME): two EQUAL pages (LEFT room/stage, RIGHT open tab) meeting at the book binding (jbook), so each
+   page box is 582 px = the one-page (kv1) page box (590 canvas, 4 px margins): the Fold page is the iPad right page scaled (owner 16/11 07:47Z/07:50Z) */
+html.kv1 .game{padding-left:max(4px,env(safe-area-inset-left));padding-right:max(4px,env(safe-area-inset-right))}
+html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"hud hud" "stage panel" "bar bar"}
 /* HUD */
 .hud{grid-area:hud;display:flex;align-items:center;gap:6px;padding:4px 6px;background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--line);border-radius:8px;min-width:0}
 .me{display:flex;align-items:center;gap:5px;min-width:0;max-width:38%;background:none;border:0;text-align:left;cursor:pointer;padding:2px 4px;min-height:40px;border-radius:6px}
@@ -458,7 +469,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .hud2 .hc .ic{width:12px;height:12px}.hud2 .hc.flash{animation:hflash 1.2s ease}.hud2 .hc i{font-style:normal;font-weight:700;margin-left:2px}
 .hud2 .h2t{position:absolute;right:3px;top:3px;width:22px;height:22px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;color:var(--gold);font-size:.8rem;line-height:1;cursor:pointer;padding:0}
 .hud2.col .hc:not(.keep){display:none}
-@media (max-width:600px){.hud2{gap:2px}.hud2 .hc{font-size:.62rem;padding:0 4px;min-height:19px}.hud2 .hc .ic{display:none}.stop .scene-t p{font-size:.78rem}}
+/* kv: dropped @media (max-width:600px) (one page = spread page, KIT §0) */
 @keyframes hflash{0%{background:#ffe9a8;transform:scale(1.08)}100%{background:#fffaf0}}
 @media (prefers-reduced-motion:reduce){.hud2 .hc.flash{animation:none}}
 /* tab bar: every tab visible, never hidden behind Sang buổi */
@@ -486,7 +497,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .relsel{display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:3px}.relsel button{display:inline-flex;align-items:center;gap:3px;font-size:.74rem;border:1px solid var(--line);border-radius:12px;padding:2px 7px 2px 3px;background:#fffaf0;cursor:pointer;min-height:30px}
 .relsel button[aria-pressed=true]{border-color:var(--gold);background:var(--panel2);font-weight:600}.rleg{margin:0 0 4px;font-size:.72rem}
 .rrow2{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:start;padding:4px 0;border-bottom:1px solid var(--line);font-size:.78rem}.rl{line-height:1.5}.rlab{color:var(--dim);font-size:.72rem;margin-right:3px}
-@media (max-aspect-ratio:1/1) and (max-height:1000px){.game.cardtab .hud2 .hc:not(.keep){display:none}.game.cardtab .stop .scene-t p{display:none}}
+/* kv: dropped @media (max-aspect-ratio:1/1) and (max-height:1000px) (one page = spread page, KIT §0) */
 .mfaces{display:flex;gap:2px;align-items:center;margin-bottom:2px}.mfaces i{font-style:normal;cursor:pointer}.mfaces .md.xs{width:20px;height:20px;margin:0;border-width:1px}.mq{font-size:.62rem;color:#f3e6cf;margin-left:2px}
 .seeb{border-color:var(--gold)!important;background:#fff4dc!important}.scene-t .btn{margin-left:6px;min-height:30px;padding:2px 8px}
 .stage.sc-home .scimg{filter:brightness(1.25) saturate(1.05)}.stage.sc-home.night .scimg{filter:none}
@@ -525,7 +536,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .mspot.off{cursor:default}
 @media (max-width:600px){.mspot .mlab em{display:none}}
 /* ONE UI KIT */
-:root{--pfw:120px}@media (min-width:600px){:root{--pfw:150px}}@media (min-width:1100px){:root{--pfw:180px}}
+:root{--pfw:120px}/* kv:(min-width:600px) */:root{--pfw:150px}/* kv:(min-width:1100px) */:root{--pfw:180px}
 .pfr{width:var(--pfw);max-width:100%;min-height:0}.pcp.art{background:#d9c7a8 center/cover no-repeat}
 .dlg .spk{display:flow-root}.dlg .spk>.pfr{float:left;margin:0 12px 6px 0;max-height:none}.spkt p:first-child{margin-top:0}
 .faces{display:flex;justify-content:center;gap:8px}.faces figure{flex:1 1 0;max-width:var(--pfw);min-width:0}.faces .pfr{width:100%}
@@ -616,7 +627,7 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) translateY(-2px) scale(1,1.012)}}
 @media (prefers-reduced-motion:reduce){.tok.fig .figimg,#mefig{animation:none}}
 
-@media (max-width:600px){.hud2 .hc[data-hx="date"]{display:none!important}.hud2.col{flex-wrap:wrap!important;overflow:visible}}
+/* kv: dropped @media (max-width:600px) (one page = spread page, KIT §0) */
 
 /* no truncated text: header, ribbon, status chips; pager groups labelled horizontally */
 .pgrp{display:flex;flex-direction:column;flex:0 0 auto;border-left:1px solid var(--line);padding-left:3px;min-width:0}.pgrp:first-child{border-left:0;padding-left:0}
@@ -639,8 +650,8 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 
 /* one act-card size per breakpoint */
 :root{--kh:232px;--kfs:.76rem}
-@media (min-width:700px){:root{--kh:250px;--kfs:.8rem}}
-@media (min-width:1000px){:root{--kh:268px;--kfs:.875rem}}
+/* kv:(min-width:700px) */:root{--kh:250px;--kfs:.8rem}
+/* kv:(min-width:1000px) */:root{--kh:268px;--kfs:.875rem}
 .cards{grid-auto-rows:var(--kh)!important}
 .kcard{height:var(--kh)!important;min-height:var(--kh)!important;max-height:var(--kh)!important;overflow:hidden;position:relative;padding-bottom:6px}
 .kcard h4{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto;padding-right:20px;font-size:calc(var(--kfs) + .18rem)}
@@ -5989,7 +6000,7 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 let TFS_CV=null;
 function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
  T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
- const n=B.length,cols=matchMedia("(max-width:700px)").matches&&n>6?Math.ceil(n/2):n;T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
@@ -6161,7 +6172,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  topR=Math.min(topR,sH*.12);
  /* phones (< 600 px, coordinator 11/15): the right chip column (court chips, maid, "Ân sủng ›") folds into ONE compact row along the
     top edge under the place title, and the heads stand under that row — so two slots keep their width and no chip sits on a head */
- const ph=innerWidth<600;st.classList.toggle("j59ph",ph);
+ const ph=false;st.classList.toggle("j59ph",ph);/* KIT §0: the one-page room = the spread's left page (no phone stage variant) */
  if(ph){try{const t=document.getElementById("sc-t");const tb=t&&t.offsetHeight?t.getBoundingClientRect().bottom-R.top+2:6;st.style.setProperty("--j59kt",Math.max(6,tb).toFixed(0)+"px");
   const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();topR=Math.max(topR,Math.min(q.bottom-R.top+4,sH*.3))}}catch(e){}}
  const gL=parseFloat(st.style.getPropertyValue("--kgl"))||0,gR=parseFloat(st.style.getPropertyValue("--kgr"))||0;let rightR=8;
@@ -6174,7 +6185,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const meX=me?{f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar}:null;
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
- let capOn=innerWidth>=1000;
+ let capOn=true;/* KIT §0: the left page in the spread and the one-page room are the same page */
  const size=(tagH)=>{const fo0=Math.max(sH*.03,tagH+8);const foA=KA&&KA.feet?sH-KA.feet:0;
   const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
@@ -6184,10 +6195,10 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
    /* review/small-bugs-2 (owner: a second person in lãnh cung hid behind the people panel at 844x390): compact stages reserve it too —
       no figure is ever placed under a stage panel, at any size, in any place */
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
- const MAXN=innerWidth>=1000?3:2,M=E.length,nAll=M+(me?1:0);
+ const MAXN=3,M=E.length,nAll=M+(me?1:0);
  const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
- const geo=(N,z)=>{const paged=nAll>N;const CW=paged?(innerWidth<600?34:46):0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSw(N,avail);/* KIT 33.7 slot function (jkit) */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
+ const geo=(N,z)=>{const paged=nAll>N;const CW=paged?46:0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSw(N,avail);/* KIT 33.7 slot function (jkit) */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
  /* a figure fits its slot when its whole visible art (kitFigBody l..r) is within the slot spacing — no neighbour overlap, ever (OD:L1049, KIT 33.7 slot function in jkit) */
  /* review/j59-fix: a slot is never narrower than a name chip (min 60 px + 8): beside a reserved plaque column (844x390, 2-column plaques)
     the page holds fewer people instead of squeezing two into the gap with overlapping names */
@@ -11325,8 +11336,8 @@ button.ka.kcard .kinfo{display:none}
 .opts:has(> button.ka){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));grid-auto-rows:1fr;gap:6px;align-items:stretch}
 .rbtn:has(> button.ka){display:grid!important;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-auto-rows:1fr;gap:6px;align-items:stretch}
 .opts>button.ka,.pcb>button.ka,.cards>button.ka,.rbtn>button.ka{height:auto!important;min-height:100%!important}
-@media (max-width:1199px){.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media (max-width:599px){button.ka small.kb{grid-template-columns:3.3rem minmax(0,1fr)}.cards:has(> button.ka){grid-template-columns:1fr!important}.pcb:has(> button.ka){grid-template-columns:1fr!important}.opts:has(> button.ka),.rbtn:has(> button.ka){grid-template-columns:1fr!important}button.ka{padding:6px 8px 7px!important}}
+/* kv:(max-width:1199px) */.cards:has(> button.ka){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ================= RESULT CARD (kit): after every act/choice — [seal THÀNH/HỎNG | act name] · one sentence · Được (green) · Mất (red, grouped per person) · "Xem đầy đủ ở Nhật ký" =================
    Built from REAL deltas (snapshot before → now), never from the option preview: no ranges, no "có thể"; two-way relations merged into one plain phrase. */
@@ -12064,7 +12075,7 @@ button.ka .kr-why .krv{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-star
 button.ka .kr-why .kwhy{display:inline-block!important;font-size:.7rem;line-height:1.3;font-weight:600;padding:0 6px;border-radius:10px;border:1px solid #e3a497;background:#fcefeb;color:var(--bad)!important;white-space:normal;overflow-wrap:anywhere}
 button.ka .kr-why .kwhy.kok{border-color:#8fbf9f;background:#eef7f0;color:var(--good)!important;font-weight:600}
 button.ka .kr-why .ksep{display:none}
-@media (max-width:599px){.dlg.kpanel{max-width:100%}.kpb.kphas{grid-template-columns:84px minmax(0,1fr);gap:9px}.dlg.kpanel .kph{padding:8px 10px}.dlg.kpanel #mb{padding:8px 10px 2px}.dlg.kpanel #mr{padding:4px 10px 10px}.kft{font-size:.84rem}.kpacts{grid-template-columns:1fr}.ktier{grid-template-columns:4.4rem minmax(0,1fr) auto}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 @media (min-width:1200px){.dlg.kpanel{max-width:620px}}
 `;document.head.appendChild(st)})();
 
@@ -12218,7 +12229,7 @@ function kpActArt(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope 
  art.innerHTML=`<span class="kaph">${a.label}</span>`+(a.src?`<img src="${a.src}" alt="" loading="lazy" onerror="this.remove()">`:"");b.classList.add("kart")}
 (function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){n0.apply(this,arguments);try{if(b.classList.contains("ka")&&b.classList.contains("kcard"))kpActArt(b)}catch(e){}}})();
 (function(){const st=document.createElement("style");st.id="kp-art-css";st.textContent=`
-:root{--kas:88px}@media (max-width:1199px){:root{--kas:76px}}@media (max-width:599px){:root{--kas:64px}}
+:root{--kas:88px}/* kv:(max-width:1199px) */:root{--kas:76px}/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 button.ka.kcard.kart{flex-direction:row!important;align-items:flex-start;gap:9px}
 button.ka.kcard.kart>.kabody{display:flex;flex-direction:column;gap:3px;flex:1 1 auto;min-width:0}
 .kaart{position:relative;flex:0 0 var(--kas);width:var(--kas);height:var(--kas);border-radius:6px;overflow:hidden;background:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-default.webp) center/cover;box-shadow:0 0 0 1px #8a6a32,0 0 0 3px #e9d29a,0 0 0 4px #b08a4a,inset 0 0 12px #5a3a1a40;margin:4px}
@@ -12229,7 +12240,7 @@ button.ka.kdis .kaart{filter:grayscale(.7);opacity:.8}
 .cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts{grid-auto-rows:auto!important;align-items:stretch!important}
 /* columns follow the space the grid really has (the panel is half the screen in landscape): at most 3, each at least 280px */
 .cards:has(> button.ka){grid-template-columns:repeat(auto-fill,minmax(max(280px,31%),1fr))!important}
-@media (max-width:599px){.cards:has(> button.ka){grid-template-columns:1fr!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ================= STAGE OVERLAYS (owner 11/14): nothing on the stage covers a figure =================
@@ -12486,16 +12497,16 @@ span.md.kmini.kmini>img{position:absolute!important;inset:auto!important;left:9.
 span.md.kmini.kmini>img[src*="face-"]{top:11.75%!important;height:80.3%!important}
 span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.4%/115.55% 164.6% no-repeat;pointer-events:none;z-index:1}
 /* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
-:root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
+:root{--kaw:150px;--kah:226px}/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
 .cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(min(100%,max(440px,31%)),1fr))!important}
-@media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
 button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 /* 2 · info art beside the body */
 .dlg.kpanel .kpb.kpinfo{grid-template-columns:var(--kaw) minmax(0,1fr)!important}
 .kpiart{height:var(--kah);align-self:start}
-@media (max-width:599px){.dlg.kpanel .kpb.kpinfo{grid-template-columns:96px minmax(0,1fr)!important}.kpiart{height:142px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .kpnow{display:flex;gap:6px;align-items:center;font-size:1rem}.kpnow .kodm{font-size:.9rem}
 /* 3 · identity card */
 .dlg.kpsc .kpb.kpid{grid-template-columns:clamp(104px,22%,156px) minmax(0,1fr)!important;gap:16px!important;align-items:center}
@@ -12529,15 +12540,15 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 .stop .scene-t,.stop .scene-t *{white-space:normal!important;overflow-wrap:anywhere}#hud2 .khc .hc>img{grid-column:1}
 /* stage name tags: one line, never cut, never three lines over a child figure (reviewer 11/14) */
 #tokens .tok .tag{white-space:nowrap!important;text-overflow:clip!important;max-width:none!important;width:max-content!important;overflow:visible!important}
-@media (max-width:599px){#tokens .tok .tag{font-size:.66rem!important;padding:0 5px!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .khh{font-family:var(--display);font-size:.72rem;color:var(--k-lab);letter-spacing:.04em;text-transform:uppercase;padding-bottom:2px;border-bottom:1px solid var(--k-hair)}
-@media (max-width:899px){#hud2 .khg{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:599px){#hud2 .khg{gap:4px 6px}#hud2 .khc .hc{font-size:.7rem}}
+/* kv: dropped @media (max-width:899px) (one page = spread page, KIT §0) *//* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 /* Tư chất block on the stage (only where it covers no figure) */
 .kstat{position:absolute;left:8px;top:calc(var(--kstt,52px));z-index:3;display:flex;flex-direction:column;gap:1px;padding:5px 8px;min-width:118px;border-radius:8px;background:rgba(255,250,240,.86);border:1px solid var(--k-hair);box-shadow:0 2px 8px #5a3a2030;backdrop-filter:blur(2px)}
 .kstat.kright{left:auto;right:8px}
 .kstat .kst{display:flex;justify-content:space-between;gap:10px;border:0;background:none;padding:1px 0;font:inherit;font-size:.76rem;color:var(--ink);cursor:pointer;text-align:left}
 .kstat .kst b{font-weight:700}
-@media (max-width:599px){.kstat{min-width:96px;padding:3px 6px}.kstat .kst{font-size:.68rem}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ---- true outcome words for harm acts (AOUT): death / miscarriage / heir loss computed for the card's target (J78.cardV, or the person being talked to) ---- */
 function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch(e){}try{if(typeof popIdx!=="undefined"&&popIdx!=null){const p=curPeople()[popIdx];return p&&(p.ref||null)}}catch(e){}return null}
@@ -12579,7 +12590,7 @@ html body #tabs.tabs button.kghide{display:none!important}
 .ksub{display:flex;gap:0;margin:0 0 8px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--k-card2,#f6ead6);position:sticky;top:0;z-index:5;flex:0 0 auto}
 .ksubb{flex:1 1 0;min-height:38px;border:0;border-right:1px solid var(--line);background:transparent;font:inherit;font-size:.86rem;font-weight:600;color:var(--dim);padding:6px 8px;cursor:pointer;white-space:nowrap}
 .ksubb:last-child{border-right:0}.ksubb.on{background:var(--k-card,#fffaf0);color:var(--gold);box-shadow:inset 0 -3px 0 var(--gold)}
-@media (max-width:599px){.ksubb{font-size:.78rem;min-height:34px;padding:4px 4px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ---- KIT §21 · SKILL CARD = THE ONE HEAD CARD (owner 11/14; one form since tabs-kit r7, owner 11/15 "tab như trang chữ"):
    every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…), every Tứ đức course, every Tác phẩm line, the Mệnh truyện chapter / Sắc phong head and
@@ -12688,7 +12699,7 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
 .kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
 .kpkpg:disabled{opacity:.35;cursor:default}.kpkpg[hidden]{visibility:hidden;display:block}
 .kpkpn{font-size:.72rem;color:var(--k-lab);text-align:center;min-height:1em}
-@media (max-width:599px){.kpkgrid{grid-template-columns:repeat(var(--kpcols,4),50px);gap:4px}.kpki{width:50px}.kpki span.md.kmini.kmini{width:44px!important}.kpkwrap{grid-template-columns:24px minmax(0,1fr) 24px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ---- compact header on phones (owner 11/14: the stage must keep room): menu · her · Hoàng thượng on one row, the four bars under, status row last ---- */
 (function(){const st=document.createElement("style");st.id="kit2-phonehud";st.textContent=`
@@ -13306,20 +13317,19 @@ html body .ksht .kcl-ctx>*{position:absolute!important;inset:0!important;width:a
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
   linear-gradient(#f8efdb,#f1e4c6);
  box-shadow:inset 0 0 30px #8a5a2426}
-@media (min-aspect-ratio:1/1) and (min-width:900px){
- .game.kbook{column-gap:0!important}
+/* the spread (KIT §0 html.kv2) */
+ html.kv2 .game.kbook{column-gap:0!important}
  /* right page: gutter shadow on its inner (left) edge */
- .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
+ html.kv2 .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
   background:linear-gradient(90deg,#2a160870 0 1.5px,transparent 1.5px),linear-gradient(90deg,#4a2c1270,#4a2c1229 16px,transparent 40px),linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
    radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#ecd9b0 0,transparent 70%),
    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
    linear-gradient(#f8efdb,#f1e4c6)}
  /* left page: the room picture printed on the page (paper margin + thin red rule), stacked leaves outside, gutter shadow inside */
- .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
- .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
+ html.kv2 .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
+ html.kv2 .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
   box-shadow:inset 0 0 0 6px #f3e6c9,inset 0 0 0 7px #9a2c1c80,inset 0 0 0 9px #f3e6c900,inset 3px 0 0 6px #f3e6c9;
   background:linear-gradient(270deg,#3a1e0a80,#3a1e0a33 18px,transparent 46px),linear-gradient(90deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px)}
-}
 `;document.head.appendChild(st)})();
 
 /* ---------- kitBookLive: the live layout dressed as the open book (every tab, both roads) ----------
@@ -19327,7 +19337,7 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  const face=pcp&&pcp.querySelector("img.kpor");strip.innerHTML=`<span class="kpsn"><b${(L.querySelector(".pcname")||{classList:{contains:()=>0}}).classList.contains("kmy")?' class="kmy"':""}>${name}</b>${nm&&nm.classList.contains("pcrk")?`<small style="${nm.getAttribute("style")||""}">${nm.innerHTML}</small>`:""}</span><span class="kpsb">${bars.innerHTML}</span>`;
  if(pcp){const mini=document.createElement("span");mini.className="kpsf";const kin=pcp.querySelector(".kin");if(kin){mini.innerHTML=`<span class="md kit kfc sm">${kin.outerHTML}</span>`}strip.prepend(mini)}
  pc.prepend(strip);const upd=()=>{pc.style.setProperty('--kpch',pc.clientHeight+'px');const pr=pc.getBoundingClientRect();const bb=bars.getBoundingClientRect();const vb=Math.min(pr.bottom,innerHeight);
-  const hidden=bars.offsetParent&&(bb.top<pr.top+4||bb.bottom>vb-2);strip.classList.toggle("on",innerWidth<1000&&!!hidden)};
+  const hidden=bars.offsetParent&&(bb.top<pr.top+4||bb.bottom>vb-2);strip.classList.toggle("on",false&&!!hidden)};/* KIT §0: the page = the spread page, which never shows the sticky strip */
  pc.addEventListener("scroll",upd,{passive:true});const L2=pc.querySelector(':scope > .pcl');if(L2)L2.addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd();setTimeout(upd,300)}catch(e){console.error("kitPcFix",e)}}
 (function(){const run=()=>document.querySelectorAll(".pc:not([data-k2])").forEach(kitPcFix);const mo=new MutationObserver(()=>run());
  const go=()=>{mo.observe(document.body,{childList:true,subtree:true});run()};if(document.readyState!=="loading")go();else addEventListener("DOMContentLoaded",go)})();
@@ -19347,12 +19357,7 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  .pc.kpwide[data-k2]>.pcr{margin-top:0}
  .pc.kpwide[data-k2]>.kpstrip{grid-column:1/-1}
 
-@media (max-width:999px){
- .pc[data-k2]>.kpstrip{display:flex;position:sticky;top:-8px;z-index:5;margin:-8px -8px 0;padding:4px 8px;gap:8px;align-items:center;background:var(--panel2);border-bottom:1px solid var(--k-hair);box-shadow:0 2px 6px #5a3a2022;visibility:hidden;height:0;overflow:hidden;opacity:0;transition:opacity .15s}
- .pc[data-k2]>.kpstrip.on{visibility:visible;height:auto;opacity:1}
- .kpstrip .kpsn{display:flex;flex-direction:column;line-height:1.15}.kpstrip .kpsn b{font-family:var(--display);font-size:.95rem}.kpstrip .kpsn small{font-size:.72rem;color:var(--gold);display:flex;align-items:center;gap:3px}
- .kpstrip .kpsb{display:flex;flex-wrap:wrap;gap:0 10px;font-size:.72rem;color:var(--dim);flex:1;min-width:0}.kpstrip .kpsb>*{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px}
-}
+/* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ---------- 11. DELTA CHIPS take the whole short clause (owner 11/14: "nhà Hộ bộ thế lực −2", not "bộ thế lực −2") ----------
@@ -19393,7 +19398,7 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 #rtoast.kevres>:not(.kpevr){grid-column:2}
 #rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
 #rtoast.kevres>.kpevr>.ksart,.kpsubj.kpev>.ksart{width:100%;height:100%;aspect-ratio:auto}
-@media (max-width:599px){#rtoast.kevres{grid-template-columns:64px minmax(0,1fr)}#rtoast.kevres>.kpevr{width:64px;height:95px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ---------- 13. IDENTITY CARD (owner 11/14 item 6): the origin picture is no longer the backdrop; it sits in an art frame like the event art
@@ -19431,7 +19436,7 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
 .ksart.ksart-thumb{width:var(--ksth,64px);height:var(--ksth,64px);aspect-ratio:1;flex:0 0 auto;box-shadow:inset 0 0 0 1px #fffaf0,inset 0 0 0 2px #e6d3ac}
 .ksart.ksart-thumb>img{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px)}
 .ksart.ksart-thumb>.ksart-ph{inset:2px;font-size:.6rem;padding:2px}
-@media (max-width:599px){.ksart.ksart-thumb{--ksth:56px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .ksart>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;display:block;border-radius:2px;max-width:none}
 .ksart-ph{position:absolute;inset:3px;display:grid;place-items:center;text-align:center;padding:6px;font:700 .8rem/1.25 var(--display,serif);color:#fff3d8;
  background:linear-gradient(#5a3a1acc,#2a1a12cc),url(https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-default.webp) center/cover;border-radius:2px}
@@ -19736,7 +19741,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
   /* portrait screens under 1000 px (Fold, phones): the card takes the WHOLE panel under the sticky sub-tabs and the panel scrolls the
      face strip up out of the way, so the header + at least one whole act card are in view; wide screens keep strip + card together */
   const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;
-  const narrow=innerWidth<1000&&innerHeight>=innerWidth*.9;/* the face strip (picker) ALWAYS stays in view above the card (owner 11/14): narrow screens get a compact strip, and the card takes
+  const narrow=false;/* KIT §0: one page = the spread page (was: narrow portrait width) *//* the face strip (picker) ALWAYS stays in view above the card (owner 11/14): narrow screens get a compact strip, and the card takes
      the room from the strip's bottom to the panel's bottom */
   const strip=P.querySelector(".pstrip");const stripH=strip&&strip.offsetParent?strip.getBoundingClientRect().height+6:0;
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
@@ -19799,12 +19804,7 @@ setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=nu
 .pc.kpnar[data-k2] .kpstick .pctabs>.pct{flex:0 0 auto;white-space:nowrap}
 .kpsheetb .kwear{margin:0 0 8px}.kpsheetb .kpfacts{display:flex;flex-direction:column;gap:6px}
 /* compact picker strip on portrait screens under 1000 px: one row of small faces + names, pager arrows */
-@media (max-width:999px) and (orientation:portrait){
- #panel .pstrip{margin:0 0 4px!important;gap:4px!important}#panel .pstrip .pface{min-height:0!important;padding:1px 2px!important}
- #panel .pstrip .pface .md.kfc,#panel .pstrip .pface span.md{width:28px!important}#panel .pstrip .pface>span:not(.md){font-size:.66rem!important}
- #panel .pstrip .psep{font-size:.6rem!important;line-height:1.1!important;margin:0 0 1px!important}#panel .pstrip .pgrp{border-left:1px solid var(--k-hair,#e6d3ac);padding-left:2px}#panel .pstrip .pgrp:first-child{border-left:0}
- #panel .pstrip>button,#panel .pstrip .pnav{min-height:40px!important;min-width:32px!important}
-}
+/* kv: dropped @media (max-width:999px) and (orientation:portrait) (one page = spread page, KIT §0) */
 
  .pc.kpnar[data-k2]{display:block!important}
  .pc.kpnar[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
@@ -19897,7 +19897,7 @@ document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest
 .pc.kpnar[data-k2]>.pcl>.kpfacts{display:flex!important;grid-area:fx;margin:4px 0 0;flex-direction:column;gap:4px}
 .pc.kpnar[data-k2]>.pcl>.kpfacts .chips{gap:4px}
 .pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kst-chip{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kst-chip>.kstl{font-size:.62rem}.pc.kpwide .kst-chip .fbar{width:22px!important}
-@media (max-width:599px){.kst-chip{font-size:.7rem;padding:1px 5px}.kst-chip>.kstl{font-size:.62rem}.kst-chip .fbar{width:24px!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ================= j98: TRANH VẬT PHẨM (data only; the kit component kitItem draws the frame + grade background) =================
    Every item has a painted transparent icon (gpt-2-6, dev/art/ITEM_ART.md):
@@ -21386,7 +21386,7 @@ html body #hud2 .khg .khsh{position:sticky;top:-8px;z-index:2;background:var(--k
 html body #hud2 .khg .khc .hc{white-space:normal!important}
 /* one fact, one place: Thái hậu / Hoàng hậu attitude is in the Trong cung column of the sheet (and on their stage chips) */
 html body #hud2 .khg .khc .hc[data-hx="th"],html body #hud2 .khg .khc .hc[data-hx="hh"]{display:none!important}
-@media (max-width:599px){html body #hud2 .khg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 /* 4 · STICKY HEADERS in the panel (sub-tabs .ksub and any later sticky bar): opaque, and the panel's 8 px top padding band above them is
    covered too, so rows scrolling up never show above the bar */
 html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040;overflow:visible!important}
@@ -21450,9 +21450,14 @@ const K3SH={home:true};
    (gpt-2-6), label beside it (short, one line, ellipsis); the button has no bar of its own (no border / ground), so nothing reads as an empty field. */
 function kitBackBtnHtml(kind,label){return `<img class="kbi" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-${kind}.webp" width="30" height="30" alt="" draggable="false" onerror="this.remove()"><span class="kbl">${label}</span>`}
 window.kitBackBtnHtml=kitBackBtnHtml;
+/* KIT §0 sample: ONE design frame — the spread (2 pages) and the one-page view, drawn to scale from KIT_FRAME */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0",title:"Khung thiết kế · một trang = nửa trang đôi iPad (co giãn đều)",
+ html:()=>{const F=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:820}},k=.2,v=(typeof kitView==="function"?kitView():{pages:2}),pg=(t,c)=>`<div style="width:${F.page.w*k}px;height:${F.page.h*k}px;border:1px solid var(--line);background:${c};display:grid;place-items:center;font-size:.7rem;color:var(--ink)">${t}</div>`;
+  return `<div class="kitpg-row" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap"><div><div style="display:flex">${pg("Phòng (trang trái)","#f3e6c9")}${pg("Thẻ đang mở (trang phải)","#fbf3dd")}</div><small>Ngang: ${F.spread.w}×${F.spread.h}</small></div><div>${pg("Phòng ⇄ thẻ","#fbf3dd")}<small>Dọc: ${F.page.w}×${F.page.h}</small></div><small>Đang xem: ${v.pages===1?"một trang":"trang đôi"}</small></div>`}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
-function k3Phone(){return innerWidth<1000&&innerHeight>innerWidth}
+/* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
+function k3Phone(){try{return kitView().pages===1}catch(e){return innerWidth<innerHeight}}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
@@ -21484,9 +21489,12 @@ if(typeof render==="function"){const r0=render;render=function(){const r=r0.appl
 /* any code path that switches tab on its own (rank chip, court chips, links "Xem đầy đủ ở Nhật ký") opens the panel view */
 (function(){let t0=typeof tab!=="undefined"?tab:null;setInterval(()=>{try{if(tab!==t0){t0=tab;if(k3Phone()&&K3SH.home&&!window.__k3quiet){K3SH.home=false;k3Shell()}}}catch(e){}},150)})();
 const cssS=document.createElement("style");cssS.id="k3-shell";cssS.textContent=`
-html body .game#game.k3ph.k3home:not(.maptab){grid-template-rows:auto minmax(0,1fr) 0 auto!important}
+html body .game#game.k3ph:not(.maptab)>#stage{grid-area:stage!important}html body .game#game.k3ph:not(.maptab)>#panel{grid-area:stage!important}
+html body .game#game.k3ph:not(.maptab){grid-template-areas:"hud" "stage" "bar"!important;grid-template-columns:minmax(0,1fr)!important}
+html body .game#game.k3ph.k3home:not(.maptab){grid-template-rows:auto minmax(0,1fr) auto!important}
 html body .game#game.k3ph.k3home:not(.maptab)>#panel{display:none!important}
-html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto 0 minmax(0,1fr) auto!important}
+/* KIT §0: one page shows ONE page box between the top bar and the tab bar (no empty row, no extra gap): same page box as the spread */
+html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto minmax(0,1fr) auto!important}
 html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!important;min-height:0!important;height:0!important;border:0!important;overflow:hidden!important}
 html body .game#game.k3ph.k3pop>#panel{display:none!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
@@ -21880,7 +21888,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 (function(){const st=document.createElement("style");st.id="kinv-css";st.textContent=`
 .kinv{display:flex;flex-direction:column;gap:0;margin:0 0 10px}
 .kinv .kinvg{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--kinvsz,60px),1fr));gap:6px;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#f4ead8;box-shadow:inset 0 1px 3px #5a3a2018}
-@media (max-width:599px){.kinv .kinvg{--kinvsz:54px;gap:5px;padding:6px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .kinv .kinvg>.kitem-slot>.kitb{border-radius:7px}
 .kinv .kinvg>.kitem-slot[role=button]:hover>.kitb,.kinv .kinvg>.kitem-slot[role=button]:focus-visible>.kitb{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e));outline:none}
 .kinv .kinvg>.kitem-slot:focus{outline:none}
@@ -21997,7 +22005,7 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));grid-auto-flow:row dense;align-items:start;gap:6px;margin-top:8px}
 #modal .dlg.kitslot .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
 #modal .dlg.kitslot .kinvacts>button.ksllong{grid-column:1/-1}
-@media (min-width:1000px){#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+/* kv:(min-width:1000px) */#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kinvact]");if(!b)return;e.stopPropagation();if(b.disabled)return;
  const a=b.dataset.kinvact,ix=+b.dataset.ix;try{closeModal()}catch(x){}itemAct(a,ix)},true);
@@ -22025,7 +22033,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq .keqnm{font-size:.74rem;line-height:1.2;overflow-wrap:anywhere;margin-top:2px}
 .keq .keqfx{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px}.keq .keqfx .kchip{font-size:.68rem;margin:0;padding:0 5px}
 .keq .keql2{flex-basis:100%;display:flex;justify-content:center;align-items:center;gap:3px}.keq .keqm{font-size:.68rem;color:var(--ink2,#7a6a58)}.keq .keqw{color:#c23b22;font-size:.8rem;line-height:1;cursor:help}
-@media (max-width:899px){.keq{--keqsz:76px}.keq .keqs{gap:8px}}
+/* kv: dropped @media (max-width:899px) (one page = spread page, KIT §0) */
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
 @supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
@@ -22281,7 +22289,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshdt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .kshdn{font-family:var(--display);font-size:1.05rem}
 .kshds{font-size:.8rem;color:var(--ink2,#6a5040)}
-@media (min-width:1000px){.kshg{--kshsz:124px}}
+/* kv:(min-width:1000px) */.kshg{--kshsz:124px}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
 @media (max-height:500px){.kshop{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:10px}
  .kshl{grid-row:1;grid-column:1;align-self:center}.kshl p{display:none}.kshtabs{grid-row:1;grid-column:2}.kshg,.kshempty{grid-column:1/-1;grid-row:2}
@@ -23022,7 +23030,8 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* KIT 32.12 TOP BAR GRID (header-fix, owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines).
    Her block never wraps and never shrinks (name 1 line · rank + age chips 1 line · date 1 line); the time block is the column that gives.
    ≥ 600 px only (phones < 600 keep their own rows below). */
-@media (min-width:600px){
+/* KIT §0: the one page uses the spread's top bar (same rows, same cells) */
+@media all{
  html body header.hud>.me,html body header.hud>.me .mi{min-width:max-content!important;flex-shrink:0!important}
  html body header.hud>.me .mi>b,html body header.hud>.me .k3rr,html body header.hud>.me .rk,html body header.hud #me-d{white-space:nowrap!important}
  html body header.hud{grid-template-columns:auto max-content minmax(0,1fr) auto!important}
@@ -23032,7 +23041,7 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 }
 /* two-row bar (600–999 px, and ≥ 1000 px when the one row does not fit: class .khd2 from kitHdFit) —
    row 1: menu · her block · RIGHT COLUMN (time block; "‹ Nơi" button under it, same left/right edges); row 2: the eight stat cells */
-@media (min-width:600px) and (max-width:999px){
+@media (max-width:999px){
  html body .game#game header.hud,html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;
   grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
  html body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
@@ -23042,6 +23051,12 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
  html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 }
+/* KIT §0 one page: "Về phòng" sits under the menu button (icon; label = tooltip), so the top bar keeps the spread's height */
+@media (max-width:999px){
+ html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
+ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
+ html body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
 html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
@@ -23050,7 +23065,7 @@ html body header.hud.khd2>#kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:m
 html body header.hud.khd2 .k3tc .k3tt{grid-template-rows:auto auto!important}
 html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 /* phones < 600 px: the same row, label line = icon only (name in the tooltip), number line below */
-@media (max-width:599px){
+@media (max-width:0px){/* KIT §0: retired — no phone top bar; the one page (590) uses the two-row bar above (phase 3 deletes this block) */
  html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important}
  html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "room tc" "stats stats"!important;align-items:center}
  html body header.hud>#k3tc{justify-self:stretch}
@@ -23069,7 +23084,7 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
    otherwise .khd2 = the two-row bar (same grid as 600–999 px). Measured in the one-row form, in one synchronous pass (no flicker).
    ≥ 600 px it also sets --kmeh = her name block's height: the frame keeps the width it had when its crest+window+band (550/795) was exactly that tall (owner 15/11 10:30Z);
    since tassel-fix (owner 15/11 06:35Z) the jade pendant + tassel hang below it whole (cell 550/1037), so the frame is 1037/795 of the name block. */
-function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("(min-width:600px)").matches?Math.round(mi.getBoundingClientRect().height):0;
+function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("all").matches?Math.round(mi.getBoundingClientRect().height):0;
  const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
 /* review/small-bugs-3 (1000x755: a long date "Tháng chạp · trung tuần · năm thứ hai mươi ba" ran under the weather icon): her block and the time
    block never touch — the right edge of her text + 8 px must stay left of the time block's first text/icon, else the two-row bar */
@@ -23218,7 +23233,7 @@ function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidde
  const o=mb&&mb.querySelector(":scope > .opts");if(!d||!o){if(d)d.classList.remove("kdscroll");return}
  d.classList.add("kdscroll");d.style.removeProperty("--kdpic");o.classList.remove("kdsh");
  const fixedH=()=>{let h=0;[...d.children].forEach(c=>{if(c!==mb&&c.offsetParent)h+=c.offsetHeight});[...mb.children].forEach(c=>{if(c!==o&&c.offsetParent)h+=c.offsetHeight});return h};
- const D=d.clientHeight||innerHeight;let vh=innerWidth<1000?24:28;
+ const D=d.clientHeight||innerHeight;let vh=28;/* KIT §0: same in the page and the spread */
  while(vh>14&&fixedH()>D*.55&&o.scrollHeight>o.clientHeight+2){vh-=2;d.style.setProperty("--kdpic",vh+"vh")}
  if(!o.dataset.kdsh){o.dataset.kdsh=1;o.addEventListener("scroll",()=>o.classList.toggle("kdsh",o.scrollTop>2),{passive:true})}
  kitDlgText(d,mb,o);
@@ -23255,7 +23270,7 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
 .modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,28vh)}
 .modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,28vh) + 40px)}
-@media (max-width:999px){.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,24vh)}}
+/* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ================= KIT 32.6 · PEOPLE ON THE PICTURE (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) =================
@@ -23306,7 +23321,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
 #mb>.kpb.kesfull{display:block!important;grid-template-columns:none!important}
 #mb>.kpb.kesfull>*{max-width:none!important;width:auto}
-@media (max-width:999px){#mb>.kdlgart.kesonpic>.ksart{height:var(--kdpic,26vh)!important;min-height:130px}}
+/* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ================= KIT 32.7 · ONE / TWO PEOPLE, NO SCENE PICTURE — person column left, text + options right (owner 11/15 04:45Z,
@@ -23336,7 +23351,7 @@ function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#mo
 /* KIT 50: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
 window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran.webp":"50% 55%","ev-hoang-de-gian.webp":"50% 15%","ev-di-san.webp":"50% 15%","ev-le-thu.webp":"50% 15%","ev-le-thu-2.webp":"50% 15%","ev-le-thu-3.webp":"50% 15%","ev-le-dong-2.webp":"50% 15%","ev-thoi-tiet-3.webp":"50% 15%","ev-dieu-troi.webp":"50% 15%","ev-dieu-lanh.webp":"50% 15%","ev-mat-uoc.webp":"50% 15%"},window.KIT_FOCUS||{});/* dev/review/event-banners.md */
 function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
- const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
+ const narrow=false;d.classList.toggle("kdnarrow",narrow);/* KIT §0: dialogs are the same in the page and the spread */
  const F=[...col.querySelectorAll(":scope > .kesf")].filter(f=>!f.classList.contains("kesno"));if(!F.length)return;let wait=false;
  const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");let b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;if(im&&!im.complete&&!im.dataset.kdpl){im.dataset.kdpl=1;im.addEventListener("load",()=>requestAnimationFrame(kitDpFit),{once:true})}
   if(!b){wait=true}else if(im&&im.naturalWidth&&im.naturalHeight&&Math.abs(b.ar-im.naturalWidth/im.naturalHeight)>.005)b=Object.assign({},b,{ar:im.naturalWidth/im.naturalHeight});/* the true aspect always (never squash a person) */const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
@@ -29419,7 +29434,7 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 .ktprow>.pcb.kpanec{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
 .ktpeople{display:flex;flex-direction:column;gap:6px;margin:0 0 10px}
 .ktprow{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding:8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
-@media (min-width:700px){.ktprow:has(.pcb){grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:center}}
+/* kv:(min-width:700px) */.ktprow:has(.pcb){grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:center}
 `;document.head.appendChild(st)})();
 /* compact acts (KIT §43) after every panel render: the sub-tab click and the Mệnh truyện pane render through renderPanel, not render */
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{if(typeof kitActCompactOn==="function")kitActCompactOn($("panel"))}catch(e){}return r}})();
@@ -38546,7 +38561,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c95c0a8f3b32";window.CTM_BUILD=BUILD;
+const BUILD="c1e76c6cb712";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

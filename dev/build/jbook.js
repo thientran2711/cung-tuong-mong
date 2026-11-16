@@ -508,20 +508,19 @@ html body .ksht .kcl-ctx>*{position:absolute!important;inset:0!important;width:a
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
   linear-gradient(#f8efdb,#f1e4c6);
  box-shadow:inset 0 0 30px #8a5a2426}
-@media (min-aspect-ratio:1/1) and (min-width:900px){
- .game.kbook{column-gap:0!important}
+/* the spread (KIT §0 html.kv2) */
+ html.kv2 .game.kbook{column-gap:0!important}
  /* right page: gutter shadow on its inner (left) edge */
- .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
+ html.kv2 .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
   background:linear-gradient(90deg,#2a160870 0 1.5px,transparent 1.5px),linear-gradient(90deg,#4a2c1270,#4a2c1229 16px,transparent 40px),linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
    radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#ecd9b0 0,transparent 70%),
    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
    linear-gradient(#f8efdb,#f1e4c6)}
  /* left page: the room picture printed on the page (paper margin + thin red rule), stacked leaves outside, gutter shadow inside */
- .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
- .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
+ html.kv2 .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
+ html.kv2 .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
   box-shadow:inset 0 0 0 6px #f3e6c9,inset 0 0 0 7px #9a2c1c80,inset 0 0 0 9px #f3e6c900,inset 3px 0 0 6px #f3e6c9;
   background:linear-gradient(270deg,#3a1e0a80,#3a1e0a33 18px,transparent 46px),linear-gradient(90deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px)}
-}
 `;document.head.appendChild(st)})();
 
 /* ---------- kitBookLive: the live layout dressed as the open book (every tab, both roads) ----------
