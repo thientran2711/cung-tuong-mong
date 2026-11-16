@@ -26,7 +26,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [HO/WORKER_BRIEF.md:L18] - Commit small and often on your branch with clear English messages; push with git push -u origin <branch> (retry network errors). Keep your PROGRESS file updated so another worker could resume.
 [HO/WORKER_BRIEF.md:L19] - Do not create pull requests. Do not message the owner. Report back to the coordinator: what you did, branch + commit, test results, anything blocked, and "SẴN SÀNG KIỂM" when ready for review. Keep report concise (English or Vietnamese).
 [HO/WORKER_BRIEF.md:L20] RULE (00:10Z): every owner screenshot must be on the approved layout (base origin/review/page-curl or later, which includes review/fold-layout). Never send shots from old main layout.
-[HO/WORKER_BRIEF.md:L21] RULE (03:55Z): ONE kit figure scale (kitFigScale/KIT_FIG): full-body figures ≈85–90% of picture height everywhere, never shrink to fit (+N), names never cut. Never set private figure sizes.
+[OD:L177] - (15/11 06:15Z; overwrites the old 03:55Z '85–90 %' worker-brief line, canon fix s21 16/11) Owner approved figure ratio of dev/owner-shots/1115-fig-ok.jpg (iPad 1180 Ngọc Thanh các, ≈.76–.80 of stage) as the standard → KIT_FIG women at that ratio everywhere. ONE kit figure scale (kitFigScale/KIT_FIG) for every place figures appear; never shrink to fit (+N), names never cut. Never set private figure sizes.
 ### HO/PREAMBLE.txt
 [HO/PREAMBLE.txt:L2] LANGUAGE (owner 15/11): write ALL repo work files (docs, PROGRESS, reviews, KIT.md, commit messages, reports to the coordinator) in ENGLISH to save credits. Player-visible game text stays Vietnamese per VANPHONG.md.
 [HO/PREAMBLE.txt:L3] VERBATIM OWNER RULE (top of dev/handover/WORKER_BRIEF.md line 1):
