@@ -31,7 +31,7 @@ main at start = eba64ead4.
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | worker session_01DgYSWng42neb9J7kedxhVp RUNNING (10:55Z) |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
-| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid @66a55b06 | opus | SẴN SÀNG KIỂM (jcoopask.js guest→host request, 8 cases; coop-e2e 61/61; worker archived) → reviewer session_01DgYSWm8Dq4FhHzrbnuCRGL RUNNING (trial-merge with coop-b1b5-p2) |
+| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid-r1 @3a875687 | opus | PASS (see ## PASS; reviewer archived) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
@@ -48,6 +48,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op guest maid can rise via guest→host request; reviewer fixed NPC over-cap on host + srvout request; trial merge with coop-b1b5-p2: only jbal2 conflict, keep both; report reports/review-coop-guest-maid-r1.md)
 - READY review/slap-mg-r3 6444443b9abea1c78daac2a6a6a1b5dab8d0e9db (slap minigame §79: tiers via B's mgTier, skilled nặng 26 %, demo+hint, ONE CORE, Gọn mode; SHIP AFTER/WITH review/mg-balance — branch has mg-balance 96736fff, not its tip d1ca11be: re-merge tip + rerun dev/test/slap-mg.js before ship; ART NEEDED 7 files in reports/slap-mg-r2.md → art owner)
 - READY review/servant-mline-r3 b82d3bf3b0bc6096c92eebaff5ae91731868b8ac (servant-system part C jmline active NPC maid line + gain/loss caught chance per act + co-op host guard; contains part A servant-system-r1; main 18fb8252 ancestor; report reports/review-servant-mline-r3.md)
 - READY review/scene-end-sweep-r1 67db47f616f41f93098ba64bbcdfee646053d517 (owner OD 07:20Z: every animation scene ends with a kit §81 button; toilReveal, kitGain, j79 dawn, roulette converted; main 18fb8252 ancestor; non-blocking: kitPodiumShow missing from the scan table, j18 dawn onclick dead code)
@@ -138,5 +139,6 @@ main at start = eba64ead4.
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:02Z: coop-guest-maid-r1 PASS 3a875687 → READY; reviewer archived.
 - 10:58Z: danh-balance SẴN SÀNG KIỂM 319dce59 → reviewer claimed. emperor-visit worker stopped (poison half blocked by classifier) → told to do visit half only; poison half parked in QUESTIONS.
 - 10:55Z: s4 took over; messaged the 8 running sessions; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo. Took kc-roads fix (main s15 10:52Z INBOX: 'kc-roads fix → D').
