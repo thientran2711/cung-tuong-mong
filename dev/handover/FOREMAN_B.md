@@ -71,3 +71,21 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
 - (10:52Z s15) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz. Your STATUS is 90 min old: please write it on each wake (OD:L1286 hourly check reads it). Send READY shas to s15.
 - (11:41Z s15) OWNER Q6 = option 2: balance-pass-r1 ships as is (in merge-train-6). AFTER it is live: re-measure difficulty modes (D31, Dễ/Vừa/Khó, n≥30 each) and tune HH reach on Vừa back to ~32 % (first knob BAL.ex.bar[2] 28→30; jdiff DIFF table for Dễ/Khó). Owner OK for this tuning is given by this answer.
+- (12:55Z s16) Main coordinator is now MAIN SESSION 16 = session_01UV1SzhWSw7EETVzp3xX5hi. OWNER (12:50Z): "trả lời để cho mấy đứa đó nó làm việc tiếp" → ANSWERS to every open B question (coordinator decisions under OD:L51 "don't ask small things"; owner may override later). Mark them answered in your STATUS and unblock the work:
+  QB1: YES rename 'Trí khôi' → 'Đăng khôi'. Keep talent formula Tài + Tâm cơ + Thi.
+  QB2: YES night music for the sủng ái group until its own music exists. Painted FX: full in the dramatic group, lighter in the ordinary group (as now).
+  QB3: visible Sims-like mood BAR = hers only. NPCs keep their hidden per-person feeling (odds/acts) — no NPC bar.
+  Q3: keep dawn() alone for a new week (no sky-band on top).
+  Q4: §71 buổi transition and §72 back button CONFIRMED as KIT numbers.
+  Q5: OK (knowledge games scale with level; rival NPC score raise belongs to balance, already routed).
+  Q6: OK icon-only under 600 px (label in tooltip); YES show the room button on landscape/wide too.
+  Q10: closed (panel-size is live).
+  Q11: no per-ingredient allergy now → park in dev/IDEAS_OPEN.md; current cause list stays.
+  Q12: reuse approved event art for epilogues (no 12 new pictures now); ending card: pick the fitting approved picture per ending, ev-quoc-tang only for an Emperor-death ending.
+  Q13: generic week-book wording stays; per-act sentences → park in IDEAS_OPEN.
+  Q14: YES rain gear wears out: lasts one season (3 months), then rebuy; kiệu stays per trip. Numbers in BAL.
+  Q15: titles also on her profile/Mệnh truyện card (kit row). Cắm hoa board with flowers + podium variants by contest kind/season = ART NEEDED → Foreman C art queue (sample first).
+  Q23: keep fixed +2 for skip (doing it yourself must beat skipping).
+  Q24: moot now — D11 READY, D13 running at B; D19 stays B (start when econ is on main); D14 + D44 = art → Foreman C.
+  Q25: YES add Thái hậu dislikes; YES show a 'thích' row for consorts (known likes) next to 'ghét'.
+  D31 / Q6: balance-pass-r1 rides merge-train-6 (main s16 GO given 12:17Z) → start the re-measure + HH ~32 % tuning as soon as it is on main.

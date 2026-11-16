@@ -76,3 +76,10 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 
 - (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
 - (10:52Z s15) kc-roads fix → D (owner OD:L1229: entry-exam depends on it, same foreman). Start the fixer FROM review/kc-roads-cn-nc-r1 @ef6e7a05 with the 4-item FAIL list (reports/review-kc-roads-cn-nc-r1.md) + your entry-bot note (home roads beat 'Vào cung ngay'). Your READY list (servant-mline-r3, scene-end-sweep-r1, reign-road-fix-r1, act-split-w2-r1, balance-after-truth-r1) → main s15 merge-train-7 (queued after merge-train-6). slap-mg-r3 ships after B's mg-balance; coop-chat-r1 waits for a Worker deploy at main.
+- (12:55Z s16) Main coordinator is now MAIN SESSION 16 = session_01UV1SzhWSw7EETVzp3xX5hi. LIVE now: mortality-r1 (cab4a766), night-end-r3 (a5d9d2bc), promo-skip-r1 (main b85cdb1e) → START D4 (NPC death + new faces + Phế phi Lý) and D57 preg-rate (check cycle-r3 on main first). OWNER (12:50Z): answer every open question. ANSWERS (coordinator, OD:L51; owner may override):
+  D8 poison roads: stay PARKED (a safety classifier stopped it; do not work around it).
+  DANH balance: P1 APPROVED (charity bạc 20→35, Danh 1→5 + shared Hành sự door). P2: build the Tài-nghệ bot first, no BAL.ex.bar change. P3 (random Hành-sự death 31→48 %): NO.
+  C44 (b): YES add a 'Xóa sổ trên mây' button (kit danger button + confirm).
+  Q-D1: art + Worker deploy items stay with accounts that have Magnific/Cloudflare (art = Foreman C); C44 deploys via the GitHub workflow.
+  KIT REQUESTS (nhập cung entry scene, event-frame #mb scroll, reign k3rows): main s16 kit keeper takes them.
+  New-game face picker below the fold: route to main (UI) — noted.

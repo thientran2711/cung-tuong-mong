@@ -65,3 +65,10 @@ Claim each in CLAIMS.md before opening its worker session.
 
 - (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
 - (11:41Z s15) Q6 ANSWERED by owner (option 2): balance-pass-r1 merges as is via main's merge-train-6; difficulty tuning → Foreman B D31.
+- (12:55Z s16) Main coordinator is now MAIN SESSION 16 = session_01UV1SzhWSw7EETVzp3xX5hi. OWNER (12:50Z): answer every open question so workers continue. ANSWERS (coordinator, OD:L51; owner may override):
+  Q2 (A9 servants): YES NPC households get the same +1 servant per rank (owner principle: what she has, they have), capped by the face pool; reuse faces across households never in the same scene.
+  Q3 (A9): keep rank-up reward ≈ one month's pay.
+  story14-p1 FAIL: Foreman C opens an opus fix worker on review/story14-p1-r1 (free slots), then re-reviews.
+  Eunuch picker (A12 non-art code): YES Foreman C opens a sonnet reviewer; branch = the A12 art-complete branch named in reports/orphan-audit.md #29.
+  KIT REQUESTS K1, K2, K4, K5, K6: main s16's kit keeper takes them (sign-off list); K5 §67 is already live and was reworked by cardflip-glow2.
+  ART: art is no longer paused. New art items from the B answers: cắm hoa board WITH flowers + podium variants by contest kind/season (sample first to main), full-body figures for Phế phi họ Lý / Quản sự Tân Giả khố / Thầy dạy Thượng thư phòng (D50 list), 'Sáng hôm sau' morning banner (emperor-visit). NOTE owner 12:45Z: the rosy-skin layer is being REMOVED from all pictures (worker skin-norosy, main) → no rosy pass on any new art.
