@@ -28,19 +28,28 @@ function rdEnd(n){try{return (S.st.f14.ends||{})[n]||""}catch(e){return""}}
 /* cast keeper: reuse the road's people; recast only the ones gone (castRv67 picks a new live consort; f = filter) */
 function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k of keys){const id=K[k];let old=null;
   if(id!=null){A.act[k]=id;if(rv67(A,k))continue;delete A.act[k];try{old=RV(id)}catch(e){}}
+  /* f.keep = identity-bound roles (fix B CN_NORECAST): cast once when the road first needs them (the .4 may not have cast them), never recast */
+  if(f&&(f.keep||[]).includes(k)){if(old)return false;if(!castRv67(A,k))return false;continue}
   if(!castRv67(A,k,f&&f[k]))return false;
   if(old)try{const nv=rv67(A,k);if(nv){const L=`${old.name} ${old.alive?"đã rời cung":"nay đã khuất"}, kẻ nối tay là ${nv.name}.`;(A.rc=A.rc||[]).push(L);log(`<i>${L}</i>`)}}catch(e){}}
  return true}
 /* a recast person is told to the player (ROAD_MAP §5.2, review road-map-r1 item 4): the line above goes to the log when the chapter opens
    and heads the chapter's first hồi card ("… nay đã khuất, kẻ nối tay là …") */
 (function(){const p0=PEND.j67;if(!p0)return;PEND.j67=function(p){const r=p0.apply(this,arguments);try{const A=r&&th67(p.t);
-  if(A&&A.rc&&A.rc.length&&!A.i&&typeof r.t==="string"){const i=r.t.indexOf("<br>");if(i>=0)r.t=r.t.slice(0,i+4)+`<i>${A.rc.join(" ")}</i><br>`+r.t.slice(i+4)}}catch(e){console.error(e)}return r}})();
+  const L=[];if(A&&A.rc&&A.rc.length&&!A.i)L.push(...A.rc);if(A&&A.rq&&A.rq.i===A.i)L.push(...A.rq.t);
+  if(L.length&&typeof r.t==="string"){const i=r.t.indexOf("<br>");if(i>=0)r.t=r.t.slice(0,i+4)+`<i>${L.join(" ")}</i><br>`+r.t.slice(i+4)}}catch(e){console.error(e)}return r}})();
+/* a recast in the MIDDLE of a road chapter (j67 beatOk67 need:["v"] → castRv67, review road-b1-r1 item 7) is told the same way: log + the
+   next hồi card (A.rq, kept for that hồi only). rdCast clears the old id before it casts, so it is not told twice. */
+(function(){const c0=castRv67;castRv67=function(A,k){const oid=A&&A.act?A.act[k]:null;const r=c0.apply(this,arguments);
+ try{if(r&&oid!=null&&rdOn()){const a=ARC67[A.a],rd=S.st.f14.rd;if(a&&(A.a===rd||a.road===rd)){const old=RV(oid),nv=rv67(A,k);
+  if(old&&nv&&old.id!==nv.id){const L=`${old.name} ${old.alive?"đã rời cung":"nay đã khuất"}, kẻ nối tay là ${nv.name}.`;log(`<i>${L}</i>`);
+   if(!A.rq||A.rq.i!==A.i)A.rq={i:A.i,t:[]};A.rq.t.push(L)}}}}catch(e){console.error(e)}return r}})();
 /* a new life: Phần giữa = the full road when it exists */
 (function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);
  try{if(!f14())return r;const c=S.st.ch,rd=S.st.f14.road;if(!rd||!rdFull(rd))return r;
   const P=c.plan,a=P.indexOf("o"),b=P.indexOf("st:st_the");if(a<0||b<a||c.i>=a)return r;
   const mid=["o"];for(let n=BAL.road.first;n<=BAL.road.last;n++)mid.push("st:"+ROAD14[rd][n]);
-  P.splice(a,b-a+1,...mid);S.st.f14.rd=rd;S.st.f14.act={};S.st.f14.ends={}}catch(e){console.error(e)}return r}})();
+  P.splice(a,b-a+1,...mid);S.st.f14.rd=rd;S.st.f14.act={};S.st.f14.ends={};S.st.f14.fb={};S.st.f14.q97={p:0,b:0}}catch(e){console.error(e)}return r}})();
 /* carry the road's people into the next chapter */
 (function(){const n0=newThread67;newThread67=function(id,kind){const a=ARC67[id];
  if(rdOn()&&a&&(a.o==="rd"||id===S.st.f14.rd)&&a.road!==undefined&&!a.cast){const A=n0.apply(this,arguments);if(A)Object.assign(A.act,S.st.f14.act);return A}
@@ -66,7 +75,25 @@ function rdK(){try{const r=S.st.f14.re;return r?r.k:0}catch(e){return 0}}
 window.rdK=rdK;
 /* rare endings of road finales (j97 loads after the road files): RD97L entries take the j97 catalogue shape (R97L) */
 window.RD97L=window.RD97L||[];
-setTimeout(()=>{try{if(window.RARE97)for(const d of RD97L)if(!RARE97.defs[d.a])RARE97.defs[d.a]=d}catch(e){console.error(e)}},0);
+/* review road-b1-r1 item 1 (whole family, every RD97L entry): (a) j97 builds ARC67[id].E.r97 once at load for R97L only, so a road finale
+   needs its own E.r97 here — without it end67(A,"r97") fell back to the first ending (a plain win: no rare text, fx, go, Ngự tứ, title, book);
+   (b) a road's rare path names options of the whole road (.4–.10), but j97 counts path/bad hits on the .11 thread only (A.q97) → the road
+   keeps one tally S.st.f14.q97 fed by every chapter of the road, and the .11 thread starts from it (rdQ97 below). */
+function rdR97(){try{if(!window.RARE97)return;for(const d of RD97L){if(!RARE97.defs[d.a])RARE97.defs[d.a]=d;const a=ARC67[d.a];
+ if(a&&a.E&&!a.E.r97)a.E.r97={k:1,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}}}catch(e){console.error(e)}}
+/* the road's rare-ending definition (its .11) when this life runs a full road, else null */
+function rdQdef(){try{if(!rdOn())return null;const R=ROAD14[S.st.f14.rd];const id=R&&R[BAL.road.last];return id&&window.RARE97&&RARE97.defs[id]||null}catch(e){return null}}
+/* a choice made in any chapter of this road (the .4 premise and .5–.10) counts for the road's rare finale; the .11 itself is counted by j97 */
+function rdQ97(A,o){const d=rdQdef();if(!d||!A||!o)return;const a=ARC67[A.a],rd=S.st.f14.rd;if(!a||!(A.a===rd||a.road===rd)||a.rn===BAL.road.last)return;
+ const q=S.st.f14.q97||(S.st.f14.q97={p:0,b:0});const s=String(o.n||"");if((d.bad||[]).some(x=>s.includes(x)))q.b=1;else if((d.path||[]).some(x=>s.includes(x)))q.p++}
+setTimeout(()=>{rdR97();
+ /* res67 is wrapped after j97 (outer): read the option before the original clears A.cur */
+ try{const r0=res67;res67=function(tk,bid,i,odds){let A=null,o=null;try{A=th67(tk);if(A&&A.cur===bid&&rdOn())o=opts67(A,beatDef67(A,bid))[i]}catch(e){}
+  const r=r0.apply(this,arguments);try{if(o)rdQ97(A,o)}catch(e){console.error(e)}return r}}catch(e){console.error(e)}
+ /* the .11 thread starts with the road's tally (j97 r97Cond reads A.q97 at the climax) */
+ try{const n0=newThread67;newThread67=function(id){const A=n0.apply(this,arguments);try{const a=ARC67[id];
+  if(A&&rdOn()&&a&&a.o==="rd"&&a.road===S.st.f14.rd&&a.rn===BAL.road.last){const q=S.st.f14.q97||{p:0,b:0};A.q97={p:q.p||0,b:q.b||0}}}catch(e){console.error(e)}return A}}catch(e){console.error(e)}},0);
+window.rdR97=rdR97;
 /* Thanh mai trúc mã (j96 tm96a/b/c) in a full-road life: the 14 numbered chapters are the tutorial, the road and the endgame, so the three
    love chapters run as a SIDE story (phụ tuyến, j67 S.st.X thread, kind "tm": no reward pool, no random shared arcs reopened), opened one at
    a time once the main story reaches chapter BAL.road.tm[i] (ROAD_MAP §2 side line, §8.1). Lives without a full road keep j96's splice. */
