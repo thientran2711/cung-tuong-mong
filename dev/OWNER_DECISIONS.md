@@ -1119,3 +1119,8 @@ All must work in co-op.
 ## 16/11 (session 8) — Real elderly palace staff; tutorial guide is a real NPC (owner)
 - Owner: all cung nữ in the game look young; there must be old ones too. The guide "Quế ma ma" must be a REAL maid in the game with a real name, not a made-up label. Her picture must be that NPC's in-game portrait, for realism. Such women hold real posts (cung nữ trưởng sự, ma ma, tổng quản ma ma…). Each works in a specific palace or office and does that office's work, or comes "phụng chỉ" of someone.
 - → worker review/elder-staff (opus): a named elderly staff roster (age 40–65, office, title, patron, fixed elderly portrait). They speak by name and office in events and reports. One of them, the Giáo tập ma ma of Trữ Tú cung, is the tutorial guide via staffGuide(). Tutorial-r2 told to use staffGuide() with a fallback.
+
+## 16/11 (session 8) — Hành sự vs Dư đồ vs Tài nghệ: owner approves the idea before any worker
+- Owner: if the map keeps only shortcuts it is useless; if everything moves to the map, Hành sự is useless. Each must have its own purpose. Tài nghệ study is duplicated between Hành sự and the Tài nghệ tab and still has no fix. Owner wants the IDEA shown to her first, before a worker builds it.
+- Owner asked what the frame-defence odds depend on (answered from BAL.truth: base 20 + Tai mắt×5 + Kính sự phòng night 25 + loyal maid witness 15 + Thái y 20 + evidence on the framer 10 each (max 2), within 10–85; failure = real punishment).
+- Coordinator: act-dedupe worker put on HOLD (bug fixes only) until the owner approves the split.
