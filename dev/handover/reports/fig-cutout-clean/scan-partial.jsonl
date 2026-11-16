@@ -352,6 +352,7 @@
 {"f": "img/fig-consort-c26-t7-a36.webp", "w": 444, "h": 900, "sil": 208315, "edgedark": 17, "ringdark": 181, "transl": 48, "nholes": 6, "holepx": 937, "edge": 7679}
 {"f": "img/fig-consort-c26-t7-a51.webp", "w": 472, "h": 900, "sil": 213667, "edgedark": 9, "ringdark": 138, "transl": 49, "nholes": 4, "holepx": 710, "edge": 7629}
 {"f": "img/fig-consort-c26-t8-a18.webp", "w": 440, "h": 900, "sil": 220921, "edgedark": 47, "ringdark": 45, "transl": 158, "nholes": 7, "holepx": 5144, "edge": 7993}
+<<<<<<< HEAD
 {"f": "img/fig-consort-c26-t8-a26.webp", "w": 423, "h": 900, "sil": 204915, "edgedark": 28, "ringdark": 42, "transl": 0, "nholes": 5, "holepx": 3125, "edge": 7962}
 {"f": "img/fig-consort-c26-t8-a36.webp", "w": 430, "h": 900, "sil": 204555, "edgedark": 40, "ringdark": 35, "transl": 50, "nholes": 6, "holepx": 3661, "edge": 8022}
 {"f": "img/fig-consort-c26-t8-a51.webp", "w": 447, "h": 900, "sil": 207502, "edgedark": 32, "ringdark": 68, "transl": 39, "nholes": 6, "holepx": 3852, "edge": 8007}
@@ -475,6 +476,8 @@
 {"f": "img/fig-consort-c27-ty1-a18.webp", "w": 288, "h": 900, "sil": 165749, "edgedark": 0, "ringdark": 1901, "transl": 0, "nholes": 1, "holepx": 3312, "edge": 4974}
 {"f": "img/fig-consort-c27-ty1-a26.webp", "w": 258, "h": 900, "sil": 158456, "edgedark": 0, "ringdark": 1599, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4201}
 {"f": "img/fig-consort-c27-ty1-a36.webp", "w": 260, "h": 900, "sil": 164886, "edgedark": 0, "ringdark": 1740, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4235}
+=======
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
 {"f": "img/fig-maid-m06-tm2-a18.webp", "w": 302, "h": 900, "sil": 167149, "edgedark": 5, "ringdark": 21, "transl": 0, "nholes": 2, "holepx": 622, "edge": 7040}
 {"f": "img/fig-maid-m06-tm2-a26.webp", "w": 357, "h": 900, "sil": 175557, "edgedark": 3, "ringdark": 28, "transl": 0, "nholes": 1, "holepx": 75, "edge": 5665}
 {"f": "img/fig-maid-m06-tm2-a36.webp", "w": 346, "h": 900, "sil": 175715, "edgedark": 0, "ringdark": 25, "transl": 32, "nholes": 0, "holepx": 0, "edge": 5187}
@@ -839,6 +842,7 @@
 {"f": "img/fig-maid-m10-t7-a26.webp", "w": 432, "h": 900, "sil": 200534, "edgedark": 0, "ringdark": 8, "transl": 0, "nholes": 4, "holepx": 537, "edge": 7819}
 {"f": "img/fig-maid-m10-t7-a36.webp", "w": 434, "h": 900, "sil": 213802, "edgedark": 0, "ringdark": 5, "transl": 0, "nholes": 5, "holepx": 637, "edge": 9374}
 {"f": "img/fig-maid-m10-t7-a51.webp", "w": 485, "h": 900, "sil": 203348, "edgedark": 1, "ringdark": 8, "transl": 0, "nholes": 4, "holepx": 618, "edge": 8280}
+<<<<<<< HEAD
 {"f": "img/fig-maid-m10-t8-a18.webp", "w": 423, "h": 900, "sil": 199497, "edgedark": 0, "ringdark": 1, "transl": 0, "nholes": 2, "holepx": 135, "edge": 8927}
 {"f": "img/fig-maid-m10-t8-a26.webp", "w": 428, "h": 900, "sil": 199571, "edgedark": 3, "ringdark": 7, "transl": 0, "nholes": 3, "holepx": 809, "edge": 9409}
 {"f": "img/fig-maid-m10-t8-a36.webp", "w": 456, "h": 900, "sil": 207564, "edgedark": 0, "ringdark": 0, "transl": 0, "nholes": 1, "holepx": 88, "edge": 9504}
@@ -964,6 +968,8 @@
 {"f": "img/fig-maid-m11-ty3-a26.webp", "w": 296, "h": 900, "sil": 156265, "edgedark": 0, "ringdark": 1524, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4504}
 {"f": "img/fig-maid-m11-ty3-a36.webp", "w": 264, "h": 900, "sil": 164570, "edgedark": 0, "ringdark": 1306, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4225}
 {"f": "img/fig-maid-m11-ty3-a51.webp", "w": 271, "h": 900, "sil": 168310, "edgedark": 0, "ringdark": 1352, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4247}
+=======
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
 {"f": "img/fig-emperor-a18-1.webp", "w": 345, "h": 900, "sil": 214999, "edgedark": 0, "ringdark": 7, "transl": 8, "nholes": 0, "holepx": 0, "edge": 4572}
 {"f": "img/fig-player-look1-t1-a18.webp", "w": 389, "h": 900, "sil": 191581, "edgedark": 3, "ringdark": 7, "transl": 24694, "nholes": 1, "holepx": 357, "edge": 5566}
 {"f": "img/fig-player-look2-t1-a18.webp", "w": 342, "h": 900, "sil": 196214, "edgedark": 17, "ringdark": 37, "transl": 1, "nholes": 4, "holepx": 374, "edge": 5496}
@@ -1314,6 +1320,7 @@
 {"f": "img/fig-consort-c04-t5-a51.webp", "w": 396, "h": 900, "sil": 210232, "edgedark": 0, "ringdark": 8, "transl": 0, "nholes": 3, "holepx": 293, "edge": 6454}
 {"f": "img/fig-consort-c04-t6-a18.webp", "w": 389, "h": 900, "sil": 222169, "edgedark": 15, "ringdark": 21, "transl": 22, "nholes": 5, "holepx": 3985, "edge": 6947}
 {"f": "img/fig-consort-c04-t6-a26.webp", "w": 390, "h": 900, "sil": 190797, "edgedark": 3, "ringdark": 7, "transl": 16, "nholes": 2, "holepx": 185, "edge": 6179}
+<<<<<<< HEAD
 {"f": "img/fig-consort-c04-t6-a36.webp", "w": 391, "h": 900, "sil": 206571, "edgedark": 8, "ringdark": 10, "transl": 7, "nholes": 0, "holepx": 0, "edge": 5847}
 {"f": "img/fig-consort-c04-t6-a51.webp", "w": 400, "h": 900, "sil": 224399, "edgedark": 9, "ringdark": 36, "transl": 1, "nholes": 1, "holepx": 97, "edge": 5960}
 {"f": "img/fig-consort-c04-t7-a18.webp", "w": 431, "h": 900, "sil": 213392, "edgedark": 3, "ringdark": 0, "transl": 0, "nholes": 1, "holepx": 192, "edge": 7708}
@@ -1436,6 +1443,8 @@
 {"f": "img/fig-consort-c05-tm3-a18.webp", "w": 310, "h": 900, "sil": 178271, "edgedark": 0, "ringdark": 6, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4766}
 {"f": "img/fig-consort-c05-tm3-a26.webp", "w": 305, "h": 900, "sil": 175105, "edgedark": 7, "ringdark": 57, "transl": 0, "nholes": 1, "holepx": 108, "edge": 5047}
 {"f": "img/fig-consort-c05-tm3-a36.webp", "w": 314, "h": 900, "sil": 170269, "edgedark": 16, "ringdark": 73, "transl": 0, "nholes": 1, "holepx": 62, "edge": 4799}
+=======
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
 {"f": "img/fig-maid-m30-ty6-a36.webp", "w": 280, "h": 900, "sil": 166913, "edgedark": 0, "ringdark": 1145, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4355}
 {"f": "img/fig-maid-m30-ty6-a51.webp", "w": 271, "h": 900, "sil": 162572, "edgedark": 2, "ringdark": 1172, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4229}
 {"f": "img/fig-maid-m30-ty7-a18.webp", "w": 275, "h": 900, "sil": 165712, "edgedark": 0, "ringdark": 1537, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4420}
@@ -1783,6 +1792,7 @@
 {"f": "img/fig-maid-m34-tm3-a36.webp", "w": 276, "h": 900, "sil": 165488, "edgedark": 1, "ringdark": 50, "transl": 0, "nholes": 1, "holepx": 97, "edge": 4808}
 {"f": "img/fig-maid-m34-tm3-a51.webp", "w": 277, "h": 900, "sil": 169680, "edgedark": 0, "ringdark": 13, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4701}
 {"f": "img/fig-maid-m34-tm4-a18.webp", "w": 280, "h": 900, "sil": 159366, "edgedark": 0, "ringdark": 15, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4667}
+<<<<<<< HEAD
 {"f": "img/fig-maid-m34-tm4-a26.webp", "w": 291, "h": 900, "sil": 170904, "edgedark": 4, "ringdark": 42, "transl": 12, "nholes": 0, "holepx": 0, "edge": 4736}
 {"f": "img/fig-maid-m34-tm4-a36.webp", "w": 281, "h": 900, "sil": 167507, "edgedark": 0, "ringdark": 7, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4664}
 {"f": "img/fig-maid-m34-tm4-a51.webp", "w": 276, "h": 900, "sil": 183073, "edgedark": 0, "ringdark": 7, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4642}
@@ -1913,3 +1923,6 @@
 {"f": "img/fig-maid-m35-ty8-a51.webp", "w": 272, "h": 900, "sil": 160135, "edgedark": 0, "ringdark": 1579, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4320}
 {"f": "img/fig-maid-m36-a18.webp", "w": 266, "h": 900, "sil": 171707, "edgedark": 2, "ringdark": 4, "transl": 0, "nholes": 0, "holepx": 0, "edge": 4462}
 {"f": "img/fig-maid-m36-a26.webp", "w": 275, "h": 900, "sil": 176370, "edgedark": 1, "ringdark": 2, "transl": 35, "nholes": 2, "holepx": 211, "edge": 4734}
+=======
+{"f": "img/fig-maid-m34-tm4-a26.webp", "w": 291, "h": 900, "sil": 170904, "edgedark": 4, "ringdark": 42, "transl": 12, "nholes": 0, "holepx": 0, "edge": 4736}
+>>>>>>> a1438803 (Foreman C s7: handover to s8)

@@ -306,7 +306,10 @@
 | night-steal review r1 (opus, BIG) of 4b5919af | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled over 7 runs, not 19-22 %; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:01Z |
 | lag-play review r1 (opus, BIG perf) of 7200e7d2 | review/lag-play-r1 | main s21 | session_01UV1Szh3qnjMBBhwLSJrxVX | PASS f89c5635 (on main a0d93ac8; report dev/handover/reports/lag-play-r1.md on that branch) | 16/11 19:45Z |
 | lag-play-2 (opus): render chain split, co-op seat delta, leak, Pixi preload | review/lag-play-2 | main s21 | session_01UV1Szkd2Q5KusFL1heLce8 | RUNNING | 16/11 18:02Z |
+<<<<<<< HEAD
 | lag-play-2 review r1 (opus, BIG perf + co-op) of d006dfdd | review/lag-play-2-r1 | main s22 | session_01UV1SzjyH2iaj5P368p1TBN | PASS 2418930c (code 6cba5143 on main b53ba8b9; reviewer fix a08a152b urgent seat copy; worker NOT deployed; report dev/handover/reports/lag-play-2-r1.md on that branch) | 16/11 21:18Z |
+=======
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
 | care-overlap review r1 (sonnet, SMALL) of 7c02ff56 | review/care-overlap-r1 | main s21 | session_01UV1SzhEkrfs7MvRDaDQHp8 | RUNNING | 16/11 18:04Z |
 | origin-intros review r1 (opus, BIG: entry flow) of 30b37ea0 on main + review/kc-roads-cn-nc-fix2 (D; ships after it) | review/origin-intros-r1 | C | session_011xDdVRKUzkmr3cK3M5QXvn | RUNNING | 16/11 18:06Z |
 | stage-pets r3 successor (sonnet): 3 people + pets at KIT figure scale 85–90 %, stagger/overlap, fold column | review/stage-pets | main s21 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 18:06Z |
@@ -376,19 +379,28 @@
 | coop-contest-fix (opus, BIG co-op; owner Q 19:52Z) | review/coop-contest | main s23 | session_01UV1SzhQgRNCuk7EHMhqYPi | SẴN SÀNG 73eec76f | 16/11 19:54Z |
 | emotion-acts-3 (opus): fix emotion-acts-2-r1 FAIL 2 (Tuần lục NPC line grammar/page filing; bots ON early death 66 % vs OFF 39 % + tuẫn táng cause) | review/emotion-acts-3 | B | session_01N1tNP6kQXZcxcwCXnwMTdP | RUNNING | 16/11 19:59Z |
 | co-op one-world audit analyst (opus; owner 19:57Z: any shared system computed separately / double-counted) | handover | main s23 (opened by s22) | session_01UV1Szk87bTSJicgPTiFX6E | DONE (reports/coop-one-world.md) | 16/11 19:57Z |
+<<<<<<< HEAD
 | weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | session_01UV1SziHY4wM9n3vdh5DZ81 | PASS ab12d6fc → LIVE 594415aa (s24) | 16/11 20:03Z |
+=======
+| weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | session_01UV1SziHY4wM9n3vdh5DZ81 | RUNNING | 16/11 20:03Z |
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
 | stage-pets r7 (opus): Fold = 2 people per view at FIXED slots (swipe for more), pets FIXED spot tied to owner slot on every stage/place (OD 19:54Z + 20:04Z) | review/stage-pets-r7 | main s23 | session_01UV1Szk2pMiNBA4H6RniQUP | RUNNING | 16/11 20:04Z |
 | NPC AGENT AG1 core + AG1b witness (opus; reports/npc-agent.md §5 + FOREMAN_C.md 18:00Z/19:28Z; base main caa73a87 with people-ledger + two-way-acts) | review/npc-agent | C | session_011xDdVQdAMNqfygpH41qGcQ | RUNNING | 16/11 20:08Z |
 | coop-one-world FIX (opus, BIG co-op): world computed on host only — worldOn() guard on every world loop, merge3 host-wins for W numbers, thIll/cm/men → W_KEYS, CI probe guard (reports/coop-one-world.md plan b,c,d,f; flip = night-final, contests = coop-contest-fix) | review/coop-one-world | main s23 | session_01UV1Szj18sSZbfw4DZWoqJh | RUNNING | 16/11 20:06Z |
 | FIG-PROPORTION REDO (sonnet art; owner 20:12Z REJECTED fig-proportion: heads too small vs body — man in the middle + both old women of the 3 examples): match approved head size/shoulder ratio exactly, 3 examples first → owner, then all 85+scenes | review/fig-proportion-art | C | session_011xDdVRzEtFchdNQKaMfih7 | RUNNING | 16/11 20:14Z |
 | suc-khoe fix (opus): r1 FAIL F2 F4 F5 BLOCKING + F6–F10, from review/suc-khoe-r1 41716164 | review/suc-khoe-fix | D | session_01DgYSWmv4sq7YAmDVGXa2JD | RUNNING | 16/11 20:20Z |
 | D GO-LIVE prep successor (opus; handover reports/d-golive.md) | review/<each>-golive | D | session_01DgYSWnR8rVEcaej6KJZLQG | RUNNING | 16/11 20:27Z |
+<<<<<<< HEAD
 | names-unique (opus): ONE name core, unique full names for everyone, ancient Chinese court names, no VN-style surnames; history expert first; old-save migration (OD 20:20Z) | review/names-unique | main s23 | session_01UV1Szgg373UqQQZzKsCM7H | SẴN SÀNG b250c5ea → review (s24) | 16/11 20:27Z |
+=======
+| names-unique (opus): ONE name core, unique full names for everyone, ancient Chinese court names, no VN-style surnames; history expert first; old-save migration (OD 20:20Z) | review/names-unique | main s23 | session_01UV1Szgg373UqQQZzKsCM7H | RUNNING | 16/11 20:27Z |
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
 | one-core LAND (opus, BIG): re-merge review/one-core 7b9d022f onto main, extend guard to code added since, wire one-core-guard + kit-conform into dev/tools/quickcheck.sh (go-live gate) (owner 20:32Z) | review/one-core-land | main s23 | session_01UV1Szk8AZeChPCcurAVa6F | RUNNING | 16/11 20:29Z |
 | figure cut-out clean + hi-res (URGENT owner bug 20:35Z; Luân hồi neck streak/warped face; resumes paused face-sharp/fig-hd-upscale) | review/fig-cutout-clean | C | (C opens) | INBOX | 16/11 20:29Z |
 | cut-out + hoa điền ROOT CAUSE (opus, URGENT owner bug 20:35–20:38Z): code vs image; code fixes on review/fig-cutout-code; image list → C | review/fig-cutout-code | main s23 | session_01UV1SziJ9niRHRJg3rL83SA | RUNNING | 16/11 20:30Z |
 | road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | session_01N1tNP2bUuTx3dm594CtR4n | RUNNING | 16/11 20:33Z |
 | coop-contest review r1 (opus, BIG co-op) of 73eec76f | review/coop-contest-r1 | main s23 | session_01UV1SzieyRmsLoEEWXsp3iw | RUNNING | 16/11 20:32Z |
+<<<<<<< HEAD
 | kit-fit round 2b review r1 (sonnet, SMALL kit + consistency scan) of 7865ed13a | review/kit-fit-r1 | main s23 | session_01UV1SzgZnaUtF1u31GfAqQr | PASS 59812a63 → LIVE b53ba8b9 (s24) | 16/11 20:32Z |
 | night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | session_01UV1Szj7YLUcLKMH5ncGTcL | RUNNING | 16/11 20:32Z |
 | kit-size #5 successor keeper (opus): reports/kit-size.md items 1-7 incl. owner TIN fixes | review/kit-size | main s23 | session_01UV1SzkzVyZp7J7XKbMkV7H | DONE #6b 25ae41e3 → successor (s24) | 16/11 20:32Z |
@@ -425,3 +437,23 @@
 | road-b1-fixa review r1 (opus, BIG engine+roads tt/dtq/muoi/cn) of f1f18496 | review/road-b1-fixa-r1 | B | session_01N1tNP4EyusTduAxd2FoWaL | RUNNING | 16/11 21:26Z |
 | npc-death re-wire (opus; golive HOLD 21:20Z): wire jnpcd/jly into main's j95 place-people record (Lý in Trường Môn viện OD:L641, place list after death, Thái y viện 'ty'), fix test fc | review/npc-death-wire | D | session_01DgYSWmnHZUiVyRMR9vMwku | RUNNING | 16/11 21:27Z |
 | kit-fit r3 review r1 (sonnet, SMALL kit + consistency + co-op) of 2d6a50e3 | review/kit-fit-r3-r1 | main s24 | session_01UV1SzmFpim4M3rHm45ksp9 | RUNNING | 16/11 22:35Z |
+=======
+| kit-fit round 2b review r1 (sonnet, SMALL kit + consistency scan) of 7865ed13a | review/kit-fit-r1 | main s23 | session_01UV1SzgZnaUtF1u31GfAqQr | RUNNING | 16/11 20:32Z |
+| night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | session_01UV1Szj7YLUcLKMH5ncGTcL | RUNNING | 16/11 20:32Z |
+| kit-size #5 successor keeper (opus): reports/kit-size.md items 1-7 incl. owner TIN fixes | review/kit-size | main s23 | session_01UV1SzkzVyZp7J7XKbMkV7H | RUNNING | 16/11 20:32Z |
+| kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | session_01UV1SzkDzZdLkrtJC5W6o5T | RUNNING | 16/11 20:32Z |
+| P2 tutorial quests ch1–3 (opus; main s23 20:10Z; ROAD_MAP Part 1; OD:L1233/L1242/L1259; story14 frame live) | review/tut-quests | B | session_01N1tNP3J9spJbci5SDSfsaU | RUNNING | 16/11 20:40Z |
+| npc-roads merge-fix (opus): merge r1 83d84225 into U2–U4 02405da5, apply the 6 r1 fault families to maids/eunuchs/men | review/npc-roads-fix | D | session_01DgYSWmVoMyem8RKtKb9T19 | RUNNING | 16/11 20:37Z |
+| P5 STORY BOT balance (opus; main s23 20:10Z): sens/D57 bots play whole lives through roads + chapters, balance per origin/difficulty, report only | review/story-bot + reports/story-bot.md | D | session_01DgYSWknF3zCGUsx9BmG3ub | RUNNING | 16/11 20:40Z |
+| ROAD_MAP §4.10 men-road canon check (opus; Foreman D 20:05Z, reports/npc-roads.md 'proposed ROAD_MAP §4.10') | review/road-map-410 | B | session_01N1tNP5MEELAspgvPEdzAdh | DONE fb84b698 (archived) | 16/11 20:40Z |
+| FIG CUT-OUT CLEAN (sonnet art, URGENT owner 20:29Z–21:02Z): transparent-gen test → Luân hồi large figures + whole group re-cut; anatomy audit; back-turned pose audit; huadian too big (C9) | review/fig-cutout-clean | C | session_011xDdVQi9izFkArmuejM2aM | RUNNING | 16/11 20:50Z |
+| art-complete part 2 resume (sonnet art): act-pics2 143 keys left + grown-kid a26/a36/a51 for 40 ids | review/art-complete-p2 | C | session_011xDdVQfAeMXrKX9oPJQyhe | RUNNING | 16/11 20:50Z |
+| NPC per-target jealousy for everyone, one formula (opus; main s23 20:27Z; reports/night-steal-r2.md) | review/npc-jealousy | C | session_011xDdVNFb12V5k5VFx1eX1m | RUNNING | 16/11 20:50Z |
+| stage-pets r7 review r1 (sonnet → NOW r7 FIX + owner 21:00Z slot shift; separate reviewer after, SMALL layout + co-op check) of review/stage-pets-r7 6aaca31af + r1 fixes cea021e3 (steps: reports/stage-pets-r1.md HANDOVER) | review/stage-pets-r7-r1 | main s24 | session_01UV1SzkfxGgQXRVrF7Dt2ii | RUNNING | 16/11 21:05Z |
+| pl-courtyards r3 fix (sonnet): r2 FAIL 1+2 → gate kpmArt (festival/mourning/missing exact file = skip courtyard level, never a stand-in), FAIL 4 iPad back-button gap via kit; on main + pl-courtyards-r1 8b4a2160 + single-hall ff05f03d | review/pl-courtyards-r3 | main s24 | session_01UV1SzmAYDhJDdaZQtVZTYu | RUNNING | 16/11 21:05Z |
+| flip-entry HOTFIX (opus, URGENT owner bug 20:58Z): card-flip opens right after identity pick on NEW game — must never fire on entry/new life/co-op entry/load; flip only at start of tối (night-final rule); hotfix for live | review/flip-entry | main s24 | session_01UV1SzgZumVkkN1moZ9qiiW | RUNNING | 16/11 21:12Z |
+| palace-voice successor (opus): owner 21:05Z rules (rank-band pools, Hoàng thượng 'nàng'/'ái phi' only, gain/loss SHORT toast + LONG panels) + trait pools, from review/palace-voice 3dbcda79 | review/palace-voice | main s24 | session_01UV1Szkk4oz7w3HZvDnHJf1 | RUNNING | 16/11 21:12Z |
+| C9 HUADIAN finish (sonnet art; owner 20:50Z '0.85'; r3 FAIL list + motifs + Luân hồi too big) | review/huadian-size | C | session_011xDdVRtVMfTs3c4LPGswkr | RUNNING | 16/11 20:52Z |
+| stage-figsize HOTFIX (opus, URGENT owner bug 21:20Z): people tiny on the stage after page-scale live 1aa0edb2; giant clipped eunuch + label overlap; blank side-card portraits | review/stage-figsize | main s24 | (s24 opening) | RUNNING | 16/11 21:20Z |
+| fig-cutout HELPER scan maid/eunuch/kid (sonnet art) | review/fig-cutout-clean | C | session_011xDdVNeDXtnshFoPTHBjHg | RUNNING | 16/11 20:56Z |
+>>>>>>> a1438803 (Foreman C s7: handover to s8)

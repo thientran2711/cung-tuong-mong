@@ -66,6 +66,7 @@ OPEN (proposal, not applied; Dễ knobs touch the owner's mortality rules → co
 Tests (merged build): dev/test/difficulty.js ALL OK at 755x1000, 1180x820, 1366x1024, 1000x755, 844x390 (one flaky FAIL under bot CPU load,
 re-run clean); dev/test/wx-gear.js ALL OK at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844. Site rebuilt.
 Data: dev/measure/pass/data/dr2/ on the branch; tools rankcurve.py, exr.py, inexam.js, indanhlog.js.
+<<<<<<< HEAD
 ### Update ~21:40Z — main moved to 0488c57a (danh hiệu jdh/jdh2, jspread, mg-balance …): merged, re-measured, Vừa tuned
 - Vừa on 0488c57a, hhTh 55: HH 53 % (16/30; 36–70); hhTh 65: 26 % (8/31; 14–43). APPLIED BAL.hhTh 55 → 60 (jbal.js, world rule, texts print BAL).
 - Final, hhTh 60, n=30 each (branch head 057243edeea3e3be5b977f7a481b38c42b7f0b75):
@@ -78,3 +79,5 @@ Data: dev/measure/pass/data/dr2/ on the branch; tools rankcurve.py, exr.py, inex
 - OPEN (not applied): the newest main lowered early death in every mode; Dễ and Khó need the jdiff DIFF layer tuned (Dễ hhTh −5 → 0,
   Khó hhTh +5..10; Dễ illDie / poisonNow are mortality knobs = owner rules). Suggest a follow-up item.
 - Tests: rules-one-source.js 755x1000@2 OK (old save loads, 0 page errors); difficulty.js ALL OK 5 sizes, wx-gear.js ALL OK 6 sizes (fb367740 merge).
+=======
+>>>>>>> a1438803 (Foreman C s7: handover to s8)
