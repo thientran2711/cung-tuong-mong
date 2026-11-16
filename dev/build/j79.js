@@ -823,18 +823,19 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
     left of it (its left edge minus 8 px), so a tab with more cells can never widen it over her */
  const port=H>W;const mr=M.getBoundingClientRect(),dr=d.getBoundingClientRect();
  const colR=one?W:Math.round(dr.left-mr.left)-8,colL=one?0:port?0:Math.round(W*.01);const colW=colR-colL;
- const lt=0,lb=one?Math.max(120,Math.round(dr.top-mr.top)-4):H;M.style.setProperty("--kidh",Math.max(120,Math.round(dr.top-mr.top-10))+"px");
+ const lt=0,lb=one?Math.max(120,Math.round(dr.top-mr.top)):H;M.style.setProperty("--kidh",Math.max(120,Math.round(dr.top-mr.top-10))+"px");
  const want=M.__kidWant||im.getAttribute("src")||"";const s1=kitTn(want)||want;/* measured on the small copy (same fractions, tiny canvas) */
  const fb0=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
  /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
- let Hs=Math.min(A-2*G,H*(port?.80:.84));/* the standard body height: same for every face on this screen (painted top → feet) */
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
+ let Hs=Math.min((A-2*G)*bf/pf,H*(port?.80:.84));/* the standard body height: same for every face on this screen */
  /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
     game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
     column whole; every face, consort and maid, gets that same body height — no robe cut, no spill, no per-face shrink */
- const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.t);Hs=Math.max(40,Math.min(Hs,colW*.98/KPID_WR));let ih=Hs/bf,iw=ih*ar;
- const floor=lb-(A-Hs)/2;/* 32.2b: centred between the two lines → gap above the head = gap under the feet */
+ Hs=Math.max(40,Math.min(Hs,colW*.98/KPID_WR));let ih=Hs/bf,iw=ih*ar;
+ const floor=lb-(A-ih*pf)/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
  let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");

@@ -1117,12 +1117,14 @@ so stage blocks may stand beside a head or between figures, never over the paint
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
 #### 28.11a IDENTITY CARD — one figure tier, fixed column, fast face picker (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … quá lag"; review/newgame-ui) — `kpIdFig` / `kpIdLay` / `kitTn` / `kitPickerGo` (j79), j86
 - ONE COMMON FIGURE TIER (coordinator 16/11, review/newgame-ui-r2): her standing figure is drawn with the same BODY height (head top → feet,
-  `kitFigBody` .ht → .b, as 33.6; crowns / hairpins above the head not counted) on the same floor line (1.2 % above the bottom) for EVERY
-  face, consort and maid, at every age. Body height per screen = min(portrait 80 % / landscape 84 % of the screen height,
+  `kitFigBody` .ht → .b, as 33.6; crowns / hairpins above the head not counted) for EVERY face, consort and maid, at every age, and the
+  painted figure (crown top → feet) stands CENTRED between the two frame lines of the scene (§32.2b, s22): spread = screen top and bottom
+  (column left of the panel); one page (`html.kv1`) = screen top and the panel's top edge (figure ABOVE the panel, `kitView().pages===1`,
+  never a pixel breakpoint). Gap above = gap below, each ≥ `KIT_DP_GAP`. Body height per screen = min(portrait 80 % / landscape 84 % of the screen height,
   column width x .98 / `KPID_WR`), `KPID_WR = .5` = the widest painted figure over the 420 faces a new game can show
   (widest painted width / body height, measured .496 on consort-c05-t4-a18). So every face fits the column WHOLE: no robe cut, no mask / fade,
-  no per-face shrink, no spill past the column (755x1000: column 164 px, body 321 px for all; 1180x820: 689; 844x390: 328).
-  Never object-fit:contain in a box. Phones (< 600 px portrait) keep the figure-on-top layout (--kidh).
+  no per-face shrink, no spill past the column (1180x820: painted 689 px, gaps 66/66; Fold 755x1000 one page: above the panel, gaps 14/17).
+  Never object-fit:contain in a box: kpIdLay places the picture in px on both layouts (--kidh is only the one-page area height).
 - FIXED COLUMN: the panel is the ONE frame size of KIT 8.1 (`--kpw` / `--kph`; kpIdLay never sets its width); the figure column is the
   space left of the panel (its left edge minus 8 px). The figure is centred in the column. The panel never covers her.
 - PINNED CHOICES (r2): "Nhận / Đổi thân phận" sit BELOW the card's scroll area (`#mb.kpmbw` = flex column: `.kpscroll` scrolls, `.kpscopts` is a
@@ -1423,6 +1425,12 @@ label.kctl.kinp     > span.kctl-l + textarea.kinput | input.kinput
 - `prefers-reduced-motion`: no knob animation. Tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (dev/shots/title-screen/).
 
 Chọn sổ (j74): one kit section per sổ: `h4.kpst` "Sổ một/hai/ba" + `kitRows` (Kiếp = rank title + name, Ngày = `kitDate`; empty: Kiếp "Chưa ghi")
+KIT SLOT ROW `.kslot` (owner 16/11 "info on top, buttons below"; COMPACT s22, kit request "3 sổ + Phúc duyên on iPad 1180x820 without scrolling,
+room for the Sổ mây card"): ONE part for every sổ / room / Sổ mây / Nhập ám hiệu slot. Grid of two columns: the slot name `h4.kpst` as a 6.4em
+label column on the left (rule on its right, words kept together); on the right the `kitRows` on top as label+value PAIRS that flow on a line
+(a pair never splits; a value wraps only when it alone is longer than the line) and the `.kslot-a` kit buttons in ONE row below (32 px, equal
+width). Same rule in both canvases (no breakpoint). Solo row 83 px (was 144), room row 102 px; iPad: Một mình panel 482 px of the 574 max
+(+ one Sổ mây card ≈ 87 px still fits), Cùng hảo hữu 542 px; Fold: no scroll. Test `dev/test/kit-fit2.js` slots / slotsco; kit page sample "§29 slot" (j74).
 + `.kbtn` "Tiếp tục kiếp này" / `.kbtn.alt` "Kiếp mới" (asks "Chắc chắn?" once). The list is redrawn on every visit, so a half-confirmed
 "Chắc chắn?" never survives leaving the screen; the Nạp sổ paste box closes when Thiết lập is left.
 
@@ -1740,6 +1748,14 @@ Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái
   width (32.2a cap) keeps shorter is CENTRED between the lines (equal larger gaps), never standing on the floor with the empty space above.
 - A figure cut at the floor (short column, 32.2a minVis) is not full-body: its chip stays one gap under the header rule.
 - Measured by `kitFrameGaps(dlg)` → {top, bot, full, h}; test `dev/test/kit-fit.js` (Fold 755x1000 + iPad 1180x820: |top − bot| ≤ 2, both ≥ 14).
+- WHOLE GROUP (s22): the same rule for every full figure in a frame outside #modal's person column —
+  · week book person page (`kitBookFigClamp`, jsl; §34.6 size unchanged): frame lines = the running-head rule (`.kbk-rh` bottom) and the
+    page frame's bottom line (art pages: the painted border's inner edge, `KBK_ART_LINE.b` = 2.44 % of the page height above its bottom,
+    measured on book-right/left.webp; plain pages: the drawn `.kbk-in` frame); the figure is raised by half the difference (never lowered
+    past its column floor = the page-number row, never above the column top); `data-kgap` on `.kesfi` = "top/bottom" px;
+  · identity card (`kpIdLay`, j79, §28.11a): centred between screen top/bottom (spread) or screen top/panel top (one page);
+  · coach / tip person dialog (`kitPersonDlgFit`, jpdlg): header rule ↔ bottom of the figure area (round 1).
+  Test `dev/test/kit-fit2.js` (book, id: |top − bot| ≤ 2 / 4 px).
 
 ### 32.3 Event / news pictures framed by TYPE (owner 23:20Z)
 `kitEvCat(m,{src})` maps the j89 event category (from the `ev-<cat>.webp` file or `evArtCat`) to a kit category frame (31.17: colour +
@@ -3444,6 +3460,13 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   week arrives. Each player's pick is still rolled locally (protocol unchanged).
 - **KIT PART `kitEmpHand(handEl, cardEl, {still,time})` (§67b, review/flip-hand; owner 16/11 17:40Z: "bị nhỏ, bị cắt, giống như dán vào" → "có một người thò tay vào").** The ONE Emperor's hand: painted `cf-hand-emp` (sleeve + hand, no face), used by every scene where his hand appears (today only the card flip; any new scene calls this part, never its own hand). Markup `<div class="kcf-hand"><img class="kcf-hs"><img class="kcf-hi"></div>`. Rules: (1) size comes from the SCREEN (`BAL.cardFlip.hand`: ≥ `h` card heights, ≥ `minH` of the screen height, ≤ `maxH`), never a small sticker; (2) the sprite is turned `rot`° about the pinch point so the forearm runs straight up, and its height is raised until the two sprite edges that carry the sleeve (left edge rows 0..`cutL`, top edge columns 0..`cutT`, measured from the pixels) lie ABOVE the top of the screen → the arm always enters from the screen edge, no cut edge is ever visible, no fade-in; (3) motion = slide in along the arm (ease-out `reach`), a small touch-down dip (`press` card heights), rest until the card is picked, lift WITH the card by the same pixels (`lift`), leave the way it came (ease-in); (4) a soft blurred shadow (the hand's own silhouette, `.kcf-hs`, offset `shadow.dx/dy` of the hand height, wider while it is high) lies on the tray, and the picked card throws `.kcf-cs` (soft dark pad, offset 5/9 cqw) while it is up; all transform/opacity only, no extra WebGL, no filter animation. A longer sleeve or a different pose is an ART REQUEST to Foreman C (`Emperor hand + sleeve, long, cut-out`), never drawn here.
 - API: `kitCardFlip({deck:[{id,p,bar}],pick,turned,resHTML,onEnd})`, `cfDemo(n,barred,who)` (kit page §67 "Xem lật thẻ"), `cfGrid(n,W,H)`.
+- LABELS UNDER THE RAISED CARD (s22 kit request: Fold 755x1000 row labels overlapping under the raised card; iPad 1180x820 a faded label through
+  the result chip): (1) `.kcf-mine` is TWO things — the white glow `<i>` on her card AND the overlay class of her night; the glow rule now targets
+  `i.kcf-mine` only (before, the overlay itself took left 8.5 % / top 17.8 % / 83 % × 54.4 % and the whole scene shrank into a box on her
+  nights: tray, cards and labels stacked under the raised card). (2) `coverTags` hides the name tag of EVERY other card whose box meets the
+  picked card's final centre rect (its open lower part: tassel + own tag) or the result chip (`.kmres`), measured after the chip is shown
+  (+ once more after the chip's pop). Test `dev/test/kit-fit2.js` flipme / flipother: visible tags overlapping each other / the picked card /
+  the chip = 0.
 - SMOOTHNESS + CALM (owner 16/11, review/cardflip-smooth; iPad "giựt" + "too fast"): (1) only transform / opacity / filter move; no `mask-image` on the moving
   box (edge fade = static `.kcf-vig` overlay), no soft-light blend of two full plates over the cards (= one static `.kcf-lamp` gradient); (2) plates + hand + seal are
   loaded AND `img.decode()`d before the scene starts (`preload`); (3) `will-change` only while the scene runs (`.kcf-act` on the overlay, removed at the final still /

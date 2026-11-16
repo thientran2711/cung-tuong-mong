@@ -12,3 +12,15 @@ Resume: server = `python3 -m http.server <port>` in the worktree after `bash dev
 Open: week book person page + identity card not changed (no header/frame-bottom pair) — ask MAIN if the owner wants the rule there.
 HANDOVER: none needed (finished in one session; START_CTX ≈ 5 %, end ≈ 25 %).
 SẴN SÀNG KIỂM e383a4dd7 (code + tests + report; this line added after)
+
+## ROUND 2 (kit keeper successor, for MAIN s22) — base review/kit-fit 28828f29 + merge origin/main 86229158
+- [x] (1) §32.2b whole group: week-book person page (kitBookFigClamp, jsl: raise by half the difference between rule→head and feet→.kbk-in bottom)
+      + identity card (kpIdLay, j79: centred between screen top/bottom on the spread, screen top/panel top on one page kv1; the old
+      `W<600` phone test mismatched html.kv1, so Fold 755 showed a 176 px figure in a 98 px strip at the bottom-left)
+- [x] (2) KIT SLOT ROW .kslot compact (j74): name column left, info pairs on top, buttons below (owner 16/11 rule kept); iPad Một mình 482/574 px
+- [x] (3) §67 card flip: `.kcf-mine` CSS hit the overlay on her nights (scene shrank into a box) → `i.kcf-mine`; coverTags hides every other
+      tag under the picked card's final rect or the result chip
+- [x] KIT.md (§28.11a overwrite, §32.2b whole group, Chọn sổ KIT SLOT ROW, §67 labels) + kit page sample "§29 slot" (j74)
+- [x] tests: dev/test/kit-fit2.js 0 violations (755x1000, 1180x820, + 412x1058, 1366x1024 for id/book); kit-fit.js 0 / 0 errors;
+      kit-conform MIXED 0 CUSTOM 0 (CONFORMS 87/86, MISSING 15/16 stale place taps); ts-oldsave OK 0 errors
+- Site rebuilt and committed (index.html, sw.js, assets.json) after the main merge.

@@ -99,6 +99,8 @@ window.KIT_LIGHT=KIT_LIGHT;
    · whatever is still wider (train / outer sleeve) runs BEHIND the text, which then sits on the kit's soft paper panel
      (.kbk-figover = the same panel phones use); the figure's left edge is moved inside the page so nothing is cut on the left;
    · phones (.kbk.narrow): same — figure moved inside the page, never scaled; the text already sits on the paper panel. */
+/* KIT 32.2b: the painted page border (book-right/left.webp 768x1024): inner edge of the bottom double line at y 999 → 2.44 % above the page bottom */
+var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
 (function(){let q=0;const TEXT_MIN=220,FIG_MIN=.85,TORSO=.12;   /* TORSO: half shoulder width ≈ 12 % of figure height (sleeves/train may go behind the text) */
  const AR=window.__figAR=window.__figAR||{},HX=window.__figHX=window.__figHX||{},R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
  const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}html body .kbk-person.kbk-full>.kbk-por{overflow:clip!important}`;document.head.appendChild(st);
@@ -131,11 +133,13 @@ window.KIT_LIGHT=KIT_LIGHT;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1,kk=parseFloat(getComputedStyle(box).getPropertyValue("--kfk"))||1;
      const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);dyF=g.dy*kk;
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
-     /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the page's two frame lines are the running-head rule (.kbk-rh) and the
-        page's inner edge (.kbk-in bottom; the drawn frame on plain pages, the painted border's margin on art pages). Gap above the painted
-        head = gap under the feet: the figure is raised by half the difference (never lowered past the column floor, never above its top). */
+     /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
+        and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
+        book-right/left.webp), the drawn .kbk-in frame on plain pages. Gap above the painted head = gap under the feet: the figure is raised
+        by half the difference (never lowered past its column floor — the page number row — never above the column top). */
      try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
-      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
+      const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
        const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
    const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
    if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}

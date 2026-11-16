@@ -26,7 +26,7 @@ st.textContent=`
 .kpmenu.n4{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* Chọn sổ: one kit section per sổ (h4.kpst label + kitRows + .kbtn) */
 #modal .kpt-mount #slots{display:flex;flex-direction:column;gap:4px;margin:0 0 6px}
-/* KIT slot card (owner 16/11 "info on top, buttons below"; KIT §8.3 COMPACT SLOT ROW, s22 kit request "3 sổ + Phúc duyên on iPad without
+/* KIT slot card (owner 16/11 "info on top, buttons below"; KIT.md "KIT SLOT ROW" under Chọn sổ, s22 kit request "3 sổ + Phúc duyên on iPad without
    scrolling"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, Sổ mây card, Nhập ám hiệu, any similar list). Two columns:
    the slot name (h4.kpst) as a narrow label column on the left; on the right the kit info rows on top — label + value PAIRS that flow
    on a line (each pair keeps its words together; a value wraps only when it alone is longer than the line, never word by word) — and the
@@ -149,3 +149,9 @@ setTimeout(()=>{try{
  window.showModal=showModal;
  T.dataset.pg="home";if(!T.hidden&&PG==="home"&&!HM)go("home",false)}catch(e){console.error(e)}},0);
 }catch(e){console.error(e)}})();
+/* kit page sample: KIT SLOT ROW (.kslot, KIT.md §29 Chọn sổ) — a used sổ, an empty sổ, a co-op room */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§29 slot",title:"KIT SLOT ROW · .kslot (Chọn sổ: tên sổ bên trái, thông tin trên, nút dưới)",html:()=>`<div style="max-width:560px">`+
+ `<div class="kslot"><h4 class="kpst">Sổ một</h4>${kitRows([["Kiếp","Quý nhân Lâm Uyển Nhi","t"],["Tuổi","19 tuổi","n"],["Ngày","Tháng ba, năm thứ nhất, thượng tuần","n"]])}<div class="kslot-a"><button class="kbtn" type="button">Tiếp tục kiếp này</button><button class="kbtn alt" type="button">Kiếp mới</button></div></div>`+
+ `<div class="kslot"><h4 class="kpst">Sổ hai</h4>${kitRows([["Kiếp","Chưa ghi","n"]])}<div class="kslot-a"><button class="kbtn" type="button">Bắt đầu kiếp mới</button></div></div>`+
+ `<div class="kslot"><h4 class="kpst">Phòng hảo hữu một</h4>${kitRows([["Ám hiệu","ABCD1","t"],["Hảo hữu","Tài nhân Tô Mộ","n"],["Kiếp","Đáp ứng Lâm Uyển Nhi","t"],["Tuổi","19 tuổi","n"],["Ngày","Tháng ba, năm thứ nhất","n"]])}<div class="kslot-a"><button class="kbtn" type="button">Trở lại phòng</button><button class="kbtn alt" type="button">Bỏ phòng</button></div></div></div>`})}catch(e){}
+
