@@ -27,7 +27,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  /* 2. A's card turned; SHE steals it in the evening: only she is recorded, A gets nothing */
  r=await p.evaluate(()=>{const L=T.fresh();const A=L[0];const un=T.only(A);T.toEvening();un();const a={pickA:S.tonight===A};const b=T.recs(L);
   stealWin(S,A,"feign");T.drain();a.held=S.tonight==="me";a.early=(S.nights||0)-b.me;T.endDay();const e=T.recs(L);a.me=e.me-b.me;a.A=e.r0-b.r0;a.others=L.slice(1).reduce((s,v,i)=>s+e["r"+(i+1)]-b["r"+(i+1)],0);return a});
- ok("2 her steal: one record (hers), A none",r.pickA&&r.held&&r.early===0&&r.me===1&&r.A===0&&r.others===0,r);
+ ok("2 her steal: played at once, one record (hers), A none",r.pickA&&r.held&&r.early===1&&r.me===1&&r.A===0&&r.others===0,r);
  /* 3. A's card turned; NPC B steals it: B recorded, A none, the Sổ ghi line says he was invited to B (not 'B's card turned') */
  r=await p.evaluate(()=>{const L=T.fresh();const A=L[0],B=L[1];const un=T.only(A);T.toEvening();un();const b=T.recs(L);const s0=S.logSeq||0;
   stealWin(B,A,"feign");T.endDay();const e=T.recs(L);const logs=S.logs.slice(0,(S.logSeq||0)-s0).join(" ");
