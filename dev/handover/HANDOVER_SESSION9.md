@@ -85,3 +85,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (06:40Z s11) LIVE: main = ba07c65e6 (merge-hot-2: facefx-all-r2 one face-mark rule + kitIsPortrait rename fixing the podium fallback; kit keeper sign-off). Owner rule OD:L1237 work sizing → canon-pairs adds it to PRIORITY_RULES; check foremen follow it on wakes.
 - (06:35Z s11) Owner awake (reviewing via s10). Art resumed for samples: foreign-princess REDO (OD:L1238-1239, ~340 cr) + place-glyphs finish (approved; NVP 15 edits already paid → contact sheet only). flip-newlife-r1 reviewer opened. merge-hot-3 asked to re-merge ba07c65e.
 - (06:37Z s11) LIVE: main = feba37e5 (merge-hot-3 = cardflip-smooth-r1: smoother, slower card flip). merge-hot-1 asked to re-merge.
+- (06:40Z s11) foreign-princess v2 samples (260 cr; total 600) looked at by s11 and sent to the owner. Waiting for her verdict; after approval mass production → Foreman C.
