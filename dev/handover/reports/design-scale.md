@@ -76,3 +76,22 @@ Files with most rules: p1.html 28, j79 26 (panel kit), jk2b 9, jk4 7, j93 6, jin
 5. Side-by-side sheet (iPad right page vs Fold page scaled to the same width) for the human reviewer.
 
 ~10% xong / ~90% chơi được (game unchanged until phase 1 lands)
+
+## 7. Phase 1 result (review/design-scale)
+
+`node dev/test/design-scale.js` (built site, host mode for devices):
+
+| size | canvas | pages | s | rotated | one-page flow | errors | overflow |
+|---|---|---|---|---|---|---|---|
+| Fold 755x1000@2 | 590x820 | 1 | 1.2195 | no | room → page → room | 0 | no |
+| iPad 1180x820@2 | 1180x820 | 2 | 1 | no | spread | 0 | no |
+| iPad Pro 1366x1024@2 | 1180x820 | 2 | 1.1576 | no | spread | 0 | no |
+| Fold cover 412x1058@2 | 1180x820 | 2 | 0.5024 | yes | spread | 0 | no |
+| phone 390x844@3 | 1180x820 | 2 | 0.4756 | yes | spread | 0 | no |
+| phone 844x390@3 | 1180x820 | 2 | 0.4756 | no | spread | 0 | no |
+
+Proportionality (same seeded game, Hậu cung → Chí tôn, every element relative to its page box): RIGHT page box 582x623 (spread) vs 582x620
+(page), x + width equal for 100 % of 109 elements, x/y/w/h equal within 1 px for 97 %; LEFT page (room) x + width 100 %, full 82 % — the only
+difference is the 3 px shorter page (one-page top bar 132 px vs 129: the time block wraps to 3 lines) which shifts the figures 3 px. Phase 2 item.
+Breakpoints 189 → 143; content breakpoints 0 (`kv-codemod.js` reports no drop/unwrap left). Before/after per rule: `node dev/measure/kv-codemod.js` on
+origin/main vs this branch.

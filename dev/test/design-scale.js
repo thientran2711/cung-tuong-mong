@@ -41,18 +41,18 @@ const openTab=k=>{CLEAN();const b=document.querySelector(`#tabs [data-kg="${k}"]
  L('A right',JSON.stringify({box:[R.layout.right.boxSpread,R.layout.right.boxPage],xw:R.layout.right.xw,full:R.layout.right.full}),'left',JSON.stringify({box:[R.layout.left.boxSpread,R.layout.left.boxPage],xw:R.layout.left.xw,full:R.layout.left.full}));
  /* B. devices */
  if(process.env.ONLY==='A'){fs.writeFileSync(OUT+'/design-scale.json',JSON.stringify(R,null,1));await b.close();return}
- for(const [W,H,D,tag] of [[755,1000,2,'fold'],[1180,820,2,'ipad'],[1366,1024,2,'ipad-pro'],[412,1058,2,'fold-cover'],[390,844,3,'phone'],[844,390,3,'phone-land']]){L('B',tag);
+ for(const [W,H,D,tag] of [[755,1000,2,'fold'],[1180,820,2,'ipad'],[1366,1024,2,'ipad-pro'],[412,1058,2,'fold-cover'],[390,844,3,'phone'],[844,390,3,'phone-land']].filter(x=>!process.env.SIZES||process.env.SIZES.split(',').includes(x[3]))){L('B',tag);
   const {c,p,errs}=await game(b,W,H,BASE+'?khost=1',D);await p.waitForSelector('#krotf',{timeout:60000});let f;for(let i=0;i<600&&!f;i++){f=p.frames().find(x=>/krot=1/.test(x.url()));if(!f)await sleep(300)}
   await ready(f);await f.evaluate(LIFE);await settle(f);
   const r={krot:await p.evaluate(()=>window.__krot),view:await f.evaluate(()=>({w:innerWidth,h:innerHeight,kv:kitView(),ovf:document.documentElement.scrollWidth>innerWidth+1}))};
   const click=async(sel)=>{const q=await f.evaluate(s=>{const t=document.querySelector(s);if(!t||!t.offsetWidth)return null;const r=t.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]},sel);if(!q)return false;
    const [x,y]=await p.evaluate(([lx,ly])=>{const m=new DOMMatrix(getComputedStyle(document.getElementById('krotf')).transform);const o=m.transformPoint(new DOMPoint(lx,ly));return[o.x,o.y]},q);await p.mouse.click(x,y);await sleep(1200);return true};
   const view=()=>f.evaluate(()=>{const g=document.querySelector('.game');const v=e=>!!(e&&e.offsetWidth&&getComputedStyle(e).visibility!=='hidden');return{stage:v(document.getElementById('stage')),panel:v(document.getElementById('panel')),home:g.classList.contains('k3home')}});
-  r.flow=[await view()];await click('#tabs [data-kg="rv"]');r.flow.push(await view());await click('#tabs [data-kg="rv"]');r.flow.push(await view());
+  r.flow=[await view()];await click('#tabs [data-tab="court"]');r.flow.push(await view());await click('#tabs [data-tab="court"]');r.flow.push(await view());
   r.panelSig=await f.evaluate(()=>{const p=document.getElementById('panel');return p&&p.offsetWidth?[p.offsetWidth,p.offsetHeight]:null});
   if(SHOTS)await p.screenshot({path:`${OUT}/B-${tag}-${W}x${H}.jpg`,type:'jpeg',quality:55});r.errs=errs;R.devices[tag]=r;
   L(tag,JSON.stringify({canvas:[r.view.w,r.view.h],pages:r.view.kv.pages,s:r.krot.s,rot:r.krot.rotated,flow:r.flow.map(x=>x.home?'room':x.panel?'page':'?').join('→'),errs:errs.length,ovf:r.view.ovf}));await c.close()}
  fs.writeFileSync(OUT+'/design-scale.json',JSON.stringify(R,null,1));
- const d=R.devices;R.ok={pageCanvas:d.fold.view.w===590&&d.fold.view.h===820&&d.fold.view.kv.pages===1,spread:['ipad','ipad-pro','phone-land','fold-cover','phone'].every(t=>d[t].view.w===1180&&d[t].view.kv.pages===2),
+ const d=R.devices;if(process.env.SIZES){console.log(JSON.stringify(Object.fromEntries(Object.entries(d).map(([k,v])=>[k,v.flow]))));await b.close();return}R.ok={pageCanvas:d.fold.view.w===590&&d.fold.view.h===820&&d.fold.view.kv.pages===1,spread:['ipad','ipad-pro','phone-land','fold-cover','phone'].every(t=>d[t].view.w===1180&&d[t].view.kv.pages===2),
   rotated:d['fold-cover'].krot.rotated&&d.phone.krot.rotated,oneAtATime:d.fold.flow.map(x=>x.home?'room':x.panel?'page':'?').join('→')==='room→page→room',noErrors:Object.values(d).every(x=>!x.errs.length)&&!R.layout.errs.length,rightPageMatch:R.layout.right.full};
  console.log(JSON.stringify(R.ok));await b.close()})();
