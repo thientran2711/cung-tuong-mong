@@ -1,27 +1,85 @@
-HANDOVER (NOT ready for review yet) — review/title-sys @ e464c0f0a7979bf1e4e7cc52f2264276591c190e
-## HANDOVER (worker rolled over at the context limit, 16/11 ~14:50Z; Foreman C opens the successor)
-Foreman C 14:45Z message: fold the NEW owner input into phase 1 BEFORE SẴN SÀNG KIỂM. Successor must read verbatim: OWNER_DECISIONS 16/11 13:55Z (s17 TITLE BONUSES) + 14:10Z (bonuses much more varied + HISTORY RULE: check real court honorifics + dramas + similar games' title systems first, notes in the report); FOREMAN_C.md '(14:15Z s17) OWNER CLARIFIES', '(14:35Z s17) TITLE BONUSES', '(14:45Z s17)'; 13:55Z option 1 names on paintings = main's kit keeper part (just use it).
-What must change in dev/build/jdh.js + BAL.dh (jbal2.js) — everything else of phase 1 stays:
-1. ONE title worn at a time (already so). It gives ONE stat and the PLAYER CHOOSES which stat (per 14:15Z): add S.titleStat (chosen from the title's allowed bonus list) — picker in the Danh hiệu tab (option cards "Đeo «X» · chọn: …"); NPCs pick by personality/need.
-2. Replace the current fx model (BAL.dh.T[id].fx = flat Sắc/Danh/Sủng/Đức ±1–3) by a bonus TYPE catalogue in BAL (modest constants): flat stat; % on gains (Emperor favour +5–10 % on Sủng gains); bạc (% chance / amount); LUCK (the canon's luck stat — find its definition first; j2 runOpt uses lotB(S,a.dom)); pregnancy chance +1–2 % max; khắc/energy; relation gains with a group; event odds; skill / mini-game bonus; maid loyalty; rumour resistance. High-value bonuses only on titles that are hard/long to earn (high steps). Hook each type at its ONE existing place (apply()/sg for Sủng gains, runOpt odds, lotB, fert/preg roll, wearBonus, maid.loyal, rumour code…) — never a private copy of a number.
-3. Report: a table "title → allowed bonus types" + the split by type, and HISTORY notes (real honorifics, dramas, game title systems) before proposing names/bonuses.
-Wear/remove must stay exactly reversible (dhApplyFx/p.dhOn pattern; % bonuses applied at use time, not stored). Tests: extend dev/test/title-sys.js (each bonus type on/off), 755x1000@2 + 1180x820@2.
-Server/worktree: removed; recreate per PREAMBLE (sparse worktree on review/title-sys).
-# review/title-sys — TITLE SYSTEM (danh hiệu) PHASE 1, game logic (Foreman C worker)
-Branch review/title-sys @ e464c0f0, based on review/title-tag 8b21c97d (on review/rank-bright) — merge those first. Details + PHASE 2 PLAN: dev/PROGRESS_title-sys.md on the branch.
-START_CTX ~4 % of 1M; finished ~25 % (under the +25 % limit).
+SẴN SÀNG KIỂM 06dd80aec79ca3251e0c4c43db6811b6bfbdbf2a
+# review/title-sys — TITLE SYSTEM phase 1 incl. the owner's BONUS model (Foreman C worker, successor 2)
+START_CTX ~3 % of 1M (worker successor 2); finished well under the +25 % limit.
+Branch review/title-sys, merged with origin/main 2232ea32 (title-tag / rank-bright are NOT on main yet; they come in through this branch, base 8b21c97d). Conflicts resolved: assemble.py (union of module lists), jk4.js kitStageFig (main's D50 silhouette fallback + the §82 plate), KIT.md (both sections kept), built files rebuilt. Details: dev/PROGRESS_title-sys.md.
 
-Done (only KIT §82 parts + kitPanel/kitRows/option cards/kitTabRowHTML; no private look):
-- dev/build/jdh.js (after jcui): 35 achievement titles, each its own name, 2–4 words mixed (Chức Nữ, Tuệ nhãn, Tiếng tơ đồng, Bách phát bách trúng, Trăng soi rèm ngọc …); steps 1/5/10 (some own counts) = same name, higher tier. All numbers in BAL.dh (jbal2.js).
-- Stat ONLY while worn (about half the titles): Sắc via the one wearBonus; Danh/Sủng/Đức added on wear and the exact amount taken back on removal.
-- Counting: contests (cFin7 hook: top 3 + win per kind, her + NPCs), works made (wkMake: Nấu món, Chép kinh, Thêu, Vẽ, Phổ khúc), her acts (Thỉnh an, Đọc sách, Điểm trang/Dưỡng nhan), derived nights / children / art bậc 3-4-5. NPC consorts by the same rules, they wear their best title.
-- Her new title/step: kit reward panel (Đeo ngay / Để sau) + log. NHIỆM VỤ (rail goal icon, OD L1186): kit tab row "Mục tiêu | Danh hiệu n/35"; Danh hiệu tab = worn, earned (plates), still-to-earn (progress), options Đeo / Tháo; plate tap = kit info card (date, "Đạt được khi …" + next step, gives while worn).
-- Shows in the 3-line tag (stage + pop-up left figure) via S.titleWorn / p.titleWorn = "dh-<key>" (kitTitleWorn/kitTitleDef wrapped to resolve ids; data only).
-- Old saves load (fields optional; quiet first sync seeds past contest wins from S.honors). Co-op: titles are personal keys per player; NPC counting host-only; jcoopworld LOOK += hieu, titleWorn, dh (friend's hiệu was missing — family fix).
-Tests: node dev/test/title-sys.js <url> <out> 755x1000@2 → 0 errs 0 fails; 1180x820@2 → 0 errs 0 fails (catalogue, steps, notice, wear/unwear exact, NPC, cFin7, old save, JSON round trip, stage tag, pop-up plate, Nhiệm vụ tabs + wear, info card, no overflow). Shots looked at: dev/test/title-sys-shots/. Kit test title-tag.js still passes (it flakes at @2 the same way on the base: the queued pop-up is dropped right after a new life; my test checks the pop-up on an own page at @1).
-For main / kit keeper (NOT changed, see PROGRESS "Notes"):
-- KIT note: kitTitleOpen prints KIT_TIER_NAME[tier] (tier 1 "Nhất", tiers 7 and 8 both "Thất") — off by one? jdh matches the kit card.
-- KIT REQUEST (optional): a picture for the Danh hiệu panel / title info card (today the generic tea-set fallback).
-- Foreman B review/owner-answers-b (Q15) kcuHonorRows heading "Danh hiệu thi tài" lists contest PLACES ("Quán quân · Hội thi…" = the style the owner rejected for titles): after both merge, rename it "Thứ hạng thi tài" (+ contest result row "Danh hiệu" → "Thứ hạng") in one place. collect-ms BAL.col.ms names can join DH_CAT as a "Sưu tầm" group.
-- wearBonus().danh is display-only in the game today (jewellery Danh +1 reaches no rule) — pre-existing.
-Phase 2 (emperor hiệu by Sủng/Danh thresholds, sắc phong book + seal items, confiscation + atonement quest + wait, theft → investigation with Foreman D's item-location rule — review/item-ledger not on origin yet) = planned only.
+## What changed in this round (owner OD 16/11 13:55Z + 14:10Z s17; FOREMAN_C 14:15Z / 14:35Z / 14:45Z)
+- ONE title worn; it gives ONE bonus; the PLAYER picks which, from that title's list (2–3 types). Picker = kit info panel + kit option cards ("Đeo «X»" → choose; "Đổi phần thưởng «X»" for the worn one). Choice kept per title (p.dh[key].pick). NPC consorts wear their best title and pick by need (no heir → conception, low Sủng → Sủng gain, low Danh → Danh, low maid loyalty → cung nữ).
+- Old flat Sắc/Danh/Sủng/Đức model replaced by the BAL catalogue BAL.dh.B (jbal2.js, all modest constants, values per step 1/2/3). Old saves: the stored p.dhOn delta is still given back exactly.
+- Each type hooked at the ONE place that computes that gain (no second formula):
+
+| type | player text (no %) | step 1/2/3 | hook |
+|---|---|---|---|
+| sac danh sung duc tai tamco | "Sắc +1" | +1/+1/+2 | wearBonus (Sắc) / dhApplyFx reversible delta |
+| gSung | Sủng được thêm một phần hai mươi… | 1/20, 1/14, 1/10 | sg (her), ap (NPC) |
+| gDanh | Danh được thêm … | 1/20, 1/14, 1/10 | apply (her), ap (NPC) |
+| gBac | Bạc thu vào thêm … | 1/12, 1/8, 1/6 | apply / ap |
+| gTren | Thái hậu, Hoàng hậu quý ta thêm … | 1/12, 1/8, 1/6 | apply th/hh |
+| gHau | Phi tần quý ta thêm … | 1/12, 1/8, 1/6 | affAdd (consort → wearer) |
+| gTrung | Lòng cung nữ thêm … | 1/10, 1/7, 1/5 | apply / ap "maid" |
+| phuc (LUCK, "Phúc khí") | Phúc khí +2: việc may rủi dễ thành hơn | +2/+3/+4 odds | lotB (every rolled act, hers + NPCs'; NOT conception; Quẻ tag unchanged) |
+| thai | Có thai: dễ hơn (một chút) | 0/+1/+2 | conceiveCh final chance; only 2 hard titles, steps 2–3 |
+| nghe | Tự học tài nghệ: đôi khi / khá thường / thường tiến thêm một phần | 15/25/35 in 100 | addArt / addArtP |
+| thi | Hội thi: thêm 2 phần tài nghệ | +2/+3/+5 | SC7[kind].f (shown odds = real score) |
+| suc | Ngủ dậy Sức +1 | +1/+2/+3 | j76sleep |
+| don | Tin đồn về ta khó lan hơn (một chút / hẳn) | −5/−8/−12 odds | oRumor inside ACT.rumor against the wearer |
+
+Gains add +1/d with the fraction rolled (expected value exact; small gains not lost to rounding). LUCK definition (for the canon — I may only touch my report on the docs branch, so Foreman C please write it into the balance canon): "Phúc khí = a title bonus of +2..+4 on the success odds of every rolled act of the wearer (the same modifier as the monthly Quẻ, lotB); it never touches conception or contest luck." It is written in the BAL.dh comment (jbal2.js).
+
+## Title → allowed bonus types (counts per step)
+| title key | counts for steps 1/2/3 | bonus types (player picks one) |
+|---|---|---|
+| w_doden | 1/5/10 | tamco, phuc, thi |
+| w_tho | 1/5/10 | tai, danh, thi |
+| w_doi | 1/5/10 | tai, gDanh, thi |
+| w_dan | 1/5/10 | sac, nghe, thi |
+| w_mua | 1/5/10 | sac, danh, thi |
+| w_hat | 1/5/10 | sac, gTren, thi |
+| w_theu | 1/5/10 | danh, gBac, thi |
+| w_kim | 1/5/10 | sac, phuc, thi |
+| w_hoa | 1/5/10 | sac, gHau, thi |
+| w_ve | 1/5/10 | tai, danh, thi |
+| w_co | 1/5/10 | tamco, phuc, thi |
+| w_banh | 1/5/10 | sung, gTren, thi |
+| w_ban | 1/5/10 | suc, danh, thi |
+| w_dauho | 1/5/10 | phuc, gHau, thi |
+| w_huong | 1/5/10 | sac, sung, thi |
+| meta | 3/6/10 | gSung, gDanh, phuc |
+| podium | 1/5/10 | danh, thi |
+| nights | 1/10/30 | sung, gSung, thai |
+| kids | 1/3/5 | danh, gTren, thai |
+| a_thinh | 5/20/50 | duc, gTren |
+| a_doc | 5/20/50 | tai, nghe |
+| a_nhan | 5/20/50 | sac, suc |
+| l_cam | 1/5/10 | suc, nghe |
+| l_ky | 1/5/10 | tamco, nghe, don |
+| l_thi | 1/5/10 | tai, nghe |
+| l_hoa | 1/5/10 | danh, nghe |
+| l_vu | 1/5/10 | sac, nghe |
+| l_y | 1/5/10 | suc, nghe |
+| l_theu | 1/5/10 | gBac, nghe |
+| l_nau | 1/5/10 | gTrung, nghe |
+| m_mon | 1/5/10 | sung, gTrung |
+| m_kinh | 1/5/10 | duc, don |
+| m_theu | 1/5/10 | gBac, sac |
+| m_tranh | 1/5/10 | tai, danh |
+| m_khuc | 1/5/10 | sac, gHau |
+Split by type (how many titles offer it): {"tamco":3,"phuc":5,"thi":16,"tai":6,"danh":9,"gDanh":2,"sac":10,"nghe":10,"gTren":4,"gBac":3,"gHau":3,"sung":4,"suc":4,"gSung":2,"thai":2,"duc":2,"don":2,"gTrung":2}. High-value ones are rare/hard: thai only on Trăng soi rèm ngọc (10 / 30 nights) and Phúc ấm đầy nhà (3 / 5 children); gSung only there and on Tài hoa vô song (first in 3 / 6 / 10 kinds).
+
+## HISTORY notes (OD 14:10Z history rule)
+- Real courts (Qing): an emperor-granted honorific (封號) is ONE character chosen for its meaning — e.g. 禧 "auspicious", 明 "bright", 慶 "glad", 慈安 "motherly and calming" — and it joins the rank ("Concubine Qing" → "Consort Qing"), kept through promotions or changed by decree; it is a mark of favour, not a stat (sources: en.wikipedia Consort Xi, Consort Qing (Xianfeng), Empress Dowager Ci'an). → matches phase 2 (hiệu joins the rank via kitHieuJoin; owner 13:20Z (2)).
+- Palace dramas (Chân Hoàn truyện, Diên Hi công lược): the hiệu is granted with a decree + sắc phong book and seal, and can be stripped as punishment (e.g. a consort demoted and her hiệu taken) and restored after penance → phase 2 plan (confiscation / atonement) unchanged.
+- Similar games: Chinese palace / MMO games (宮廷/熹妃傳-style mobile games, wuxia MMOs) use 稱號 "titles" earned from achievements; usually ONE active title shown over the head, giving a small attribute bonus while active, with rarer titles giving bigger or special bonuses; many achievement titles are purely cosmetic in Western games (WoW, Steam). Our design follows this: one active, small bonus, rarer = stronger, player chooses. (Game-system notes from general knowledge; the web search found no reliable page on in-game bonuses.)
+
+## Tests
+node dev/test/title-sys.js <url> <out> WxH@2 — 755x1000@2: 0 page errors, 0 fails · 1180x820@2: 0 page errors, 0 fails. Covers: every bonus type on/off at its hook (gSung 130→143, gDanh, gBac 120→130, gTren, gHau, gTrung, phuc +2 and NOT on conception, thai +1, nghe, thi +2, suc +1, don lowers rumour odds, flat Tài given back exactly), NPC gSung through ap, picker (3 choices + back), one bonus only after switching titles, plus all phase-1 checks (catalogue, steps, notice, wear/unwear exact, NPC, cFin7, old save, JSON round trip, stage 3-line tag, pop-up plate, Nhiệm vụ tabs, info card, no overflow). Shots looked at (dev/test/title-sys-shots/: dh-pick, dh-panel, dh-card, dh-stage, dh-popup at both sizes): picker and panel read cleanly, no overflow.
+Only kit parts used (kitPanel, kit option cards, kitTitlePlate, kitTabRowHTML); no new look.
+
+## Notes / requests (unchanged from round 1)
+- KIT note: kitTitleOpen prints KIT_TIER_NAME[tier] (tier 1 "Nhất", 7 and 8 both "Thất") — off by one? jdh follows the kit card.
+- KIT REQUEST (optional): a picture for the Danh hiệu panel / picker / info card (today the generic tea-set fallback).
+- After review/owner-answers-b lands: rename kcuHonorRows heading "Danh hiệu thi tài" → "Thứ hạng thi tài" (places are not titles).
+- Kit option rows split an option's note on ", " and " · " — the picker note uses " hay " to stay one line.
+Phase 2 (emperor hiệu by thresholds, sắc phong book + seal, confiscation + atonement, theft → investigation with Foreman D's item-location rule) = plan only (PROGRESS).
+
+- Kit test dev/test/title-tag.js: 'no dialog' / 'dp plate' fail in this env — its pop-up is Q.push'ed BEHIND the queued new-life opening cards (title-sys.js uses Q.unshift and its pop-up plate check passes: "Trăng soi rèm ngọc / Phi / <name>"). Kit keeper: switch that test to Q.unshift.
