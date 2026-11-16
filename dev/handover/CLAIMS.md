@@ -93,6 +93,6 @@
 | ONE design frame + uniform scale; Fold portrait = iPad half (OD 07:47Z, 07:50Z) — plan + phase 1 | review/design-scale | main s12 | session_01UV1SzjmR9rHoafmnuNS1KA (opus) | RUNNING | 16/11 07:30Z |
 | coop-rejoin-xdev: rejoin from ANOTHER device keeps personal stats (per-seat Worker copy) | review/coop-rejoin-xdev | main s12 | session_01UV1SzjMEc5viCb8vMx3A49 (opus) | RUNNING | 16/11 07:58Z |
 | night-end-r2 reviewer (stalled since s8) + end button when kit ready | review/night-end-r3 | main s12 | session_01UV1SzkTTgASxgc7UuFiJDs (sonnet) | RUNNING | 16/11 07:58Z |
-| mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | (opening, opus) | RUNNING | 16/11 08:00Z |
-| promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | (opening, opus) | RUNNING | 16/11 08:00Z |
-| merge-train-6: 11 PASS branches without a slot (orphan #8) | review/merge-train-6 | main s12 | (opening, sonnet) | RUNNING | 16/11 08:00Z |
+| mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | session_01UV1SzkBzFb19bZRxsyptRX (opus) | RUNNING | 16/11 08:00Z |
+| promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | RUNNING | 16/11 08:00Z |
+| merge-train-6: 11 PASS branches without a slot (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | RUNNING | 16/11 08:00Z |
