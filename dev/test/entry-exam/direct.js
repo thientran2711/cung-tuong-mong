@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const URL=process.argv[2];const [W,H]=(pr
 const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,thd,ch,td,cnv').split(',');const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{const b=await chromium.launch();const out=[];let bad=0;
  for(const o of OR){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});
-  await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});
+  await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click());/* card-flip scenes left over from rolling many lives (start() loop) */document.querySelectorAll('.kmov.kcf').forEach(o=>{const b=o.querySelector('.kmend,button');if(b)b.click();else o.click()})},300)});
   const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL);await sleep(2500);await p.evaluate(()=>localStorage.clear());await p.reload();await sleep(3000);
   const skip=async()=>{for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const k=document.getElementById('kload');if(k){k.remove();return 1}const r=document.getElementById('kroul');if(r&&r.isConnected){const x=[...r.querySelectorAll('button')].find(y=>/Bỏ qua/.test(y.textContent));if(x){x.click();return 1}}return 0});if(!n)break;await sleep(700)}};
@@ -40,7 +40,7 @@ const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,thd,ch,td,cnv').split(',');const s
    await p.evaluate(()=>{const m=Q[0];if(m.opts)chooseM(0);else document.getElementById('mclose').click()});await sleep(500)}
   for(let i=0;i<12&&!await p.evaluate(()=>!!document.getElementById('kprevov'));i++)await sleep(500);
   const rv=await p.evaluate(()=>{const o=document.getElementById('kprevov');if(!o)return {none:1,kmq:KMQ.length,busy:kmBusy,ov:[...document.querySelectorAll('.kmov')].map(x=>x.className),entIn:S.entIn,q:Q.map(m=>m.t)};const bs=[...o.querySelectorAll('button')].filter(x=>x.offsetParent);return{n:bs.length,b:bs.map(x=>x.textContent),t:o.innerText.slice(0,200)}});R.reveal=rv;
-  if(!rv||rv.none)f.push('no entry scene');else{if(rv.n!==1)f.push('scene buttons '+rv.n);if(SH)await p.screenshot({path:`${SH}/enter-${o}-${W}.jpg`,type:'jpeg',quality:55});
+  if(!rv||rv.none)f.push('no entry scene');else{if(rv.n!==1)f.push('scene buttons '+rv.n);await sleep(2500);if(SH)await p.screenshot({path:`${SH}/enter-${o}-${W}.jpg`,type:'jpeg',quality:55});
    await p.mouse.click(10,10);await sleep(500);if(!await p.evaluate(()=>!!document.getElementById('kprevov')))f.push('scene closed by outside tap');
    await p.evaluate(()=>document.querySelector('#kprevov button').click());await sleep(800);if(await p.evaluate(()=>!!document.getElementById('kprevov')))f.push('scene not closed by button')}
   if(errs.length)f.push('errors');R.fail=f;R.errs=errs.slice(0,3);if(f.length)bad++;out.push(R);await c.close()}
