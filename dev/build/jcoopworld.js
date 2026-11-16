@@ -576,7 +576,7 @@ CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"|
  /* r1 fix 3 (OD:L1228): no waiting claim on the seat. A full seat gives the LARGE one-off compensation of the promo-skip rule (jexam
     promoFullSeat, the ONE implementation since promo-skip is on main; numbers BAL.psk.seat): big silver, rare gifts, a phong hiệu without a
     rank change, favour for her family; loss: the consorts' jealousy. Her rank stays; the next one goes through the normal exam. */
- let t="";if(nr===r-1){try{t=promoFullSeat(S,"coop",{})}catch(e){console.error(e)}}
+ let t="";if(nr===r-1){try{t=promoFullSeat(S,"coop",{}).replace(/^<b class="g">[^<]*<\/b>:\s*/,"")/* the card already says the seat is full */}catch(e){console.error(e)}}
  pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p>${t?`<p>${t}</p>`:""}`})};
 
 /* ---------- hooks ---------- */

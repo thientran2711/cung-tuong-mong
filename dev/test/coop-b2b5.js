@@ -67,7 +67,11 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
  /* B4 spy: the host's rivalsTurn / rivalsMonth / festival run with the friend in the harem; the guest's never run */
  for(const o of [A,B])await o.p.evaluate(()=>{COOPW.b4=[];window.__dil=[];const d=pushDil;pushDil=function(x,t){window.__dil.push(t||'');return d.apply(this,arguments)}});
  /* ---- B2.1 the host's tablet turns the GUEST's card ---- */
- await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
+ /* reviewer fix-r1: the forced nightCh bypasses jcycle's tray rule, so a guest whose name falls in her Kỳ nguyệt sự tuần (≈1 run in 3) was
+   drawn although her card is off the tray (her client then cancels the night: tn 902 vs null, a test artifact). Pick a name out of her cycle. */
+{const n=await B.p.evaluate(()=>{if(typeof cyBase!=='function')return null;const t=S.tuan||0,bad=[t,(t+1)%3],base=S.name;for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(!bad.includes(cyBase(S).t))break}render();return S.name});
+ if(n)await A.p.evaluate(n=>{const f=COOPW.friend();if(f)f.name=n},n)}
+await forceFlip(A,'f');ok(await week(A,B,'B2.1'),'B2.1 week');
  {const a=await D(A),c=await D(B);ok(a.tn&&a.tn.who===902&&a.tonight===902,'B2.1 host: tn = the guest (902), her own night = the friend',a);
   ok(c.tonight==='me','B2.1 guest: tonight is HER night (from the host\'s tn)',c);
   ok(await B.p.evaluate(()=>window.__dil.includes('Kính sự phòng báo tin')),'B2.1 guest gets the Kính sự phòng card',await B.p.evaluate(()=>window.__dil));

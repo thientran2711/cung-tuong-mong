@@ -26337,7 +26337,7 @@ CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"|
  /* r1 fix 3 (OD:L1228): no waiting claim on the seat. A full seat gives the LARGE one-off compensation of the promo-skip rule (jexam
     promoFullSeat, the ONE implementation since promo-skip is on main; numbers BAL.psk.seat): big silver, rare gifts, a phong hiệu without a
     rank change, favour for her family; loss: the consorts' jealousy. Her rank stays; the next one goes through the normal exam. */
- let t="";if(nr===r-1){try{t=promoFullSeat(S,"coop",{})}catch(e){console.error(e)}}
+ let t="";if(nr===r-1){try{t=promoFullSeat(S,"coop",{}).replace(/^<b class="g">[^<]*<\/b>:\s*/,"")/* the card already says the seat is full */}catch(e){console.error(e)}}
  pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p>${t?`<p>${t}</p>`:""}`})};
 
 /* ---------- hooks ---------- */
@@ -39518,7 +39518,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f49c6631cf26";window.CTM_BUILD=BUILD;
+const BUILD="1ae1781e8311";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
