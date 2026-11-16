@@ -1,7 +1,0 @@
-SẴN SÀNG KIỂM f46f826e585582bebe7d3f7f3e4676ae838eff6d  (review/b-answers-art, base origin/main bad941b4)
-
-(1) SAMPLE READY dev/art/b-answers/SAMPLE_hoa_podium.jpg (on branch; old board | board with 5 flower vases | podium spring | podium autumn, podium in the real kit at 1180x820). Item 1 STOPPED here, nothing wired. CDN: img/kit/mg-hoa-bg-flowers.webp, podium-bg2-spring.webp, podium-bg2-autumn.webp. Note: the playable cắm hoa canvas draws its own stems, so the vase board suits a result/display view; per kind/season wiring = a KIT_BD.podium entry (kit keeper) after her OK.
-(2) DONE: Phế phi họ Lý (role fallen/ly1), Quản sự Tân Giả khố (steward/tgk1), Thầy dạy Thượng thư phòng (tutor/ttp1): 4 age bands each, fig 900px + por 384x512, FIGURES-others.json updated and on CDN. Wired via existing jly.js hooks (figWho/figRoles/pFaceOf). Verified in place at 755x1000 + 1180x820, 0 page errors (dev/test/b-answers-art.js).
-(3) DONE: img/ev-morning-after-b.webp (4:3). Slot exists only on review/emperor-visit (jvisit.js:81) — not on main; wiring = add headArt:{src:"img/ev-morning-after-b.webp",label:"Sáng hôm sau"} to that Q item. Shown as kit headArt card in test.
-Details, creation ids, credits (289 total): dev/PROGRESS_b-answers-art.md on the branch. Magnific gpt-2-6 only, no rosy pass, every image looked at.
-Not done / for main: no separate img/hd files for the 3 new people (sources ~900px like maid/mama); banner has light snow + blossom (season-neutral variants optional); build outputs index.html/sw.js/assets.json rebuilt on the branch.

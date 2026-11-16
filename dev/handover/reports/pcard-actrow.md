@@ -1,2 +1,0 @@
-# pcard-actrow — PASS db77f3f3ba (review/pcard-actrow-r1, base eba64ead4; re-merge onto current main). LIVE owner complaints: person-card acts as kit long rows; gift Chí tôn = 3 people with portraits; person pickers (spy, evpick, itarget, plantsv, gift, j55 probe/leak) show portraits; no nested tiny scroll.
-- Merge it together with kit-sweep (3e75a7f32e). kit-conform still flags unrelated: headart-choice, place cards .kplinfo (kit-sweep fixes), item-card, and a kmov/kfgain float.

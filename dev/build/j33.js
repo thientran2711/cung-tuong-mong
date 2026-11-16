@@ -1,5 +1,0 @@
-/* ================= SEASONAL THEME: tokens only on top of the kit; festivals override; effect colours unchanged ================= */
-function themeTick(){if(!S)return;const sea=SEAK[SEASON[S.month-1]]||"ha";const f=festToday();const b=document.body;if(b.dataset.sea!==sea)b.dataset.sea=sea;const fk=f&&["newyear","trungthu","thattich","giaothua","nguyentieu"].includes(f.k)?f.k:"";if((b.dataset.fest||"")!==fk){if(fk)b.dataset.fest=fk;else delete b.dataset.fest}}
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{themeTick()}catch(e){}return r}})();
-/* festival weather: gold and red sparks outdoors on Tết, Nguyên tiêu, Giao thừa; night-blue stars on Thất tịch use the fireflies */
-(function(){if(typeof pxKind!=="function")return;const k0=pxKind;pxKind=function(){const k=k0.apply(this,arguments);try{const f=festToday();const P=placeOf(S.place);if(f&&["vuon","lc","home"].includes(P.sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))return "gold";if(f.k==="thattich"||f.k==="trungthu")return "fly"}}catch(e){}return k}})();

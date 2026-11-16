@@ -1,0 +1,56 @@
+{
+ "mapframe-a-ipad.webp": {
+  "px": [
+   2381,
+   1191
+  ],
+  "slice": 250,
+  "band": 100,
+  "bytes": 203480
+ },
+ "mapframe-b-ipad.webp": {
+  "px": [
+   2381,
+   1191
+  ],
+  "slice": 128,
+  "band": 100,
+  "bytes": 245766
+ },
+ "mapframe-c-ipad.webp": {
+  "px": [
+   2048,
+   1024
+  ],
+  "slice": 160,
+  "band": 100,
+  "bytes": 272576
+ },
+ "mapframe-a-fold.webp": {
+  "px": [
+   1489,
+   1489
+  ],
+  "slice": 320,
+  "band": 128,
+  "bytes": 223008
+ },
+ "mapframe-b-fold.webp": {
+  "px": [
+   1498,
+   1498
+  ],
+  "slice": 139,
+  "band": 128,
+  "bytes": 309978
+ },
+ "mapframe-c-fold.webp": {
+  "px": [
+   1304,
+   1304
+  ],
+  "slice": 280,
+  "band": 128,
+  "bytes": 295772
+ }
+}
