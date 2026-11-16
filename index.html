@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7865ed13+","t":"2026-11-16T20:15Z","c":"kit-fit r2: SẴN SÀNG KIỂM 6b9ca17da","b":"ee65092c5c47","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
+window.CTM_BI={"s":"88168b7d+","t":"2026-11-16T20:35Z","c":"kit-fit r2: SẴN SÀNG KIỂM 6b9ca17da","b":"e88d182a2b83","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -17263,6 +17263,9 @@ function faceImg(id,who,kind){try{who=who||S;kind=kind||"por";const L=f88List(id
    → [{id:"maid:m05", src:"maid"|"consort", n:5, por:"https://ctm-img.victoria-tntt.workers.dev/img/…", fig:"https://ctm-img.victoria-tntt.workers.dev/img/…", mine:bool, tiers:[1,2,…]}] in c01..c32, m01..m52 order */
 function facePool(filter,who){who=who||S;return f88Keys(filter||"all").map(id=>({id,src:f88Src(id),n:f88Num(id),por:faceImg(id,who,"por"),fig:faceImg(id,who,"fig"),
  mine:!!(S&&S.pid===id),tiers:[...new Set(f88List(id).filter(f88IsCT).map(f88TNum))].sort((a,b)=>a-b)}))}
+/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = the 52 maid faces only;
+   every other life (phi tần) → "all" = 84 (32 consort + 52 maid; every maid identity has consort dress art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
+function kitFaceScope(){try{if((typeof isSrv==="function"&&isSrv())||(S&&S.origin&&S.origin.k==="cnv"))return"maid"}catch(e){}return"all"}
 /* she may choose now: the identity card is open (new life rolled, not yet accepted) */
 function faceOn(){try{return !!(typeof NLP!=="undefined"&&NLP&&S&&S.pid&&f88List(S.pid).length)}catch(e){return false}}
 /* she takes face id: a consort holding it gets her previous face (swap, both stay unique); a servant holding it is cleared and
@@ -17343,18 +17346,16 @@ function fpNum(k){return +String(k).replace(/\D/g,"")||0}
 /* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
 /* j88 (review/face-84) API when present: faceOn() · facePool(filter) -> [{id, src, n, por, fig, mine}] · faceChoose(id) */
 const FP88=()=>typeof facePool==="function"&&typeof faceChoose==="function";
-window.__fpF=window.__fpF||(String((typeof S!=="undefined"&&S&&S.pid)||"").startsWith("maid:")?"maid":"consort");
+/* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the 52 maid faces only, every phi tần life the whole 84 (32 consort + 52 maid, all have consort dress art) */
 /* review/newgame-ui (owner 15/11 "quá lag"): the item list is built ONCE per (pool, her tier, age, dress, roll) — facePool walked all 84
    identities twice (por + fig) on every pick and every tab (≈ 0.3–1.8 s on a tablet); the cells show the small pre-sized copy (kitTn) */
 const FP_C={};
-function fpKey(f){let t="",a="",v="";try{t=figTierOf(S);a=figAgeOf(S);v=(typeof isSrv==="function"&&isSrv())?"s":"c"}catch(e){}return [f,t,a,v,(NLP&&NLP.seed)||""].join("|")}
-function fpItems(){const key=fpKey(window.__fpF);if(FP_C[key])return FP_C[key];let L=null;
- try{if(FP88()){L=(facePool(window.__fpF)||[]).map(x=>{const f=Object.assign({},pMe());f.src=(typeof kitTn==="function"&&kitTn(x.por))||x.por||"";f.rw="";f.big=x.por||"";return{k:x.id,face:f,label:`${x.src==="maid"?"Dung mạo cung nữ":"Dung mạo"} ${x.n}`,fig:x.fig||""}})}}catch(e){L=null}
+function fpKey(){const f=kitFaceScope();let t="",a="",v="";try{t=figTierOf(S);a=figAgeOf(S);v=(typeof isSrv==="function"&&isSrv())?"s":"c"}catch(e){}return [f,t,a,v,(NLP&&NLP.seed)||""].join("|")}
+function fpItems(){const key=fpKey();if(FP_C[key])return FP_C[key];let L=null;
+ try{if(FP88()){L=(facePool(kitFaceScope())||[]).map(x=>{const f=Object.assign({},pMe());f.src=(typeof kitTn==="function"&&kitTn(x.por))||x.por||"";f.rw="";f.big=x.por||"";return{k:x.id,face:f,label:`${x.src==="maid"?"Dung mạo cung nữ":"Dung mạo"} ${x.n}`,fig:x.fig||""}})}}catch(e){L=null}
  L=L&&L.length?L:fpKeys().map(k=>({k,face:fpFace(k),label:`Dung mạo ${fpNum(k)}`}));if(KIT_TN)FP_C[key]=L;return L}
-function fpCount(f){try{return typeof f88Keys==="function"?f88Keys(f).length:facePool(f).length}catch(e){return 0}}
 function fpHTML(){return kitPicker({id:"face",title:"Dung mạo · chạm để chọn",items:fpItems(),cur:S.pid,rows:2,
-  filters:FP88()?[["consort",`Phi tần ${fpCount("consort")}`],["maid",`Cung nữ ${fpCount("maid")}`]]:null,filter:window.__fpF,
-  note:"Dung mạo chỉ để nhìn, không đổi tư chất.",onPick:fpPick,onFilter:f=>{window.__fpF=f;fpRedraw()},onPage:fpPrefetch})}
+    note:"Dung mạo chỉ để nhìn, không đổi tư chất.",onPick:fpPick,onPage:fpPrefetch})}
 /* the faces on the page in view: their low-res standing figures are fetched + decoded ahead, so a pick shows her at once */
 const FP_PF={};function fpPrefetch(btns){try{const M=Object.fromEntries(fpItems().map(x=>[x.k,x]));(btns||[]).forEach(b=>{const x=M[b.dataset.pk];const lo=x&&x.fig&&kitTn(x.fig);if(!lo||FP_PF[lo])return;
   const im=new Image();im.decoding="async";im.src=lo;FP_PF[lo]=im;im.decode&&im.decode().catch(()=>0);try{kitFigBody(lo)}catch(e){}})}catch(e){}}
@@ -17397,8 +17398,8 @@ function fpSel(k){const r=document.querySelector("#modal .kpick[data-pick=face]"
 function fpRefresh(){try{const m=Q[0];if(!(m&&m.nl))return;m.faces=[[pMe(),S.name]];const sj=document.querySelector("#modal .kpid .kpsubj");if(sj)sj.innerHTML=pframe(pMe());
   fpSel(S.pid);if(typeof kpIdFig==="function")kpIdFig($("modal"))}catch(e){console.error(e)}}
 function fpPick(k){if(!fpOn())return;fpSel(k);if(!(FP88()?faceChoose(k):fpSet(k)))return;window.__fpDirty=1;fpRefresh()}
-/* the other tab is ready before she taps it: its items built and its thumbnails fetched + decoded in idle time */
-function fpWarm(){try{if(!FP88()||!fpOn())return;const cur=window.__fpF;const oth=cur==="maid"?"consort":"maid";window.__fpF=oth;let L;try{L=fpItems()}finally{window.__fpF=cur}
+/* the one list is warmed in idle time: its thumbnails fetched + decoded before she scrolls to them */
+function fpWarm(){try{if(!FP88()||!fpOn())return;const L=fpItems();
  L.forEach(x=>{const s=x.face&&x.face.src;if(s&&!FP_PF[s]){const im=new Image();im.decoding="async";im.src=s;FP_PF[s]=im;im.decode&&im.decode().catch(()=>0)}})}catch(e){}}
 /* the crisp figure starts loading on touch-down, ~100 ms before the tap ends */
 document.addEventListener("pointerdown",e=>{try{const b=e.target.closest&&e.target.closest('#modal .kpick[data-pick=face] .kpki');if(!b)return;const x=fpItems().find(i=>i.k===b.dataset.pk);if(x&&x.fig&&!FP_PF[x.fig]){const im=new Image();im.src=x.fig;FP_PF[x.fig]=im}}catch(x){}},true);
@@ -20828,6 +20829,20 @@ const KIT_CARDBACK="https://ctm-img.victoria-tntt.workers.dev/img/kit/card-back.
 function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
 function kitOriginFace(it){return `<div class="kra">${kitSceneArt(it.wide||it.src,"",{shape:"wide",fb:it.src})}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span>`}
+/* ONE FIT for every origin / identity card grid (owner 16/11 s23: "to ra, trải dài hết cái màn nền"): the cards grow to span the background width
+   (side margin kept, title + moon wheel above, Tiếp / Bỏ qua below), picture + text scale with the card (--krw), ONE gap (--krgap) between cards,
+   rows and the title / buttons. Columns (2..5) and card width are found by measuring: the widest card for which title + rows + buttons fit the screen. */
+const KIT_ROU_MAXW=300,KIT_ROU_MINW=72;
+function kitRouFit(ov){try{const box=ov.querySelector(".krbox"),grid=ov.querySelector(".krgrid");if(!box||!grid)return;const tiles=[...grid.querySelectorAll(".krt")];if(!tiles.length)return;
+ const W=innerWidth,H=innerHeight,side=Math.round(Math.max(14,Math.min(72,W*.05))),G=Math.round(Math.max(10,Math.min(20,Math.min(W,H)*.016))),pad=Math.round(Math.max(8,Math.min(24,H*.02)));
+ ov.style.setProperty("--krside",side+"px");ov.style.setProperty("--krgap",G+"px");ov.style.setProperty("--krpad",pad+"px");
+ const availW=W-2*side,set=(c,w)=>{ov.style.setProperty("--krw",w+"px");grid.style.width=(c*w+(c-1)*G)+"px";tiles.forEach(t=>t.style.height="");const hh=Math.max(...tiles.map(t=>t.offsetHeight));tiles.forEach(t=>t.style.height=hh+"px");return box.offsetHeight};/* equal card heights count in the fit */
+ const opts=[];for(const c of [5,4,3,2]){if(c>2&&c>tiles.length)continue;let hi=Math.min(KIT_ROU_MAXW,Math.floor((availW-(c-1)*G)/c)),lo=KIT_ROU_MINW;if(hi<lo)continue;
+  if(set(c,hi)<=H){opts.push({c,w:hi});continue}
+  if(set(c,lo)>H)continue;while(hi-lo>1){const m=(hi+lo)>>1;if(set(c,m)<=H)lo=m;else hi=m}opts.push({c,w:lo})}
+ if(!opts.length){set(3,KIT_ROU_MINW);return}
+ const th=(typeof kitView==="function"&&kitView().pages===2)?.7:.85,mw=Math.max(...opts.map(x=>x.w)),pick=opts.filter(x=>x.w>=mw*th).reduce((x,y)=>y.c>x.c?y:x);/* fewest rows among the (almost) widest: the title + moon wheel stay visible */set(pick.c,pick.w);
+ ov.dataset.krc=pick.c;ov.dataset.krw=pick.w}catch(e){console.error("kitRouFit",e)}}
 function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||!o.items||!o.items.length){done();return}
  const rm=matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false);
  const old=$("kroul");if(old)old.remove();const ov=document.createElement("div");ov.id="kroul";ov.className="kroul"+(rm?" krrm":"");const land=kitView().pages===2;
@@ -20835,12 +20850,12 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Các thân phận trong vòng luân hồi</small></div>
   <div class="krgrid">${items.map((it,i)=>`<div class="krt" data-i="${i}" data-k="${it.k}"><div class="krc"><div class="krf">${kitOriginFace(it)}</div><div class="krb" aria-hidden="true"></div></div></div>`).join("")}</div>
   <div class="krbar"><button class="kbtn krgo" type="button">Tiếp</button><button class="kbtn alt krskip" type="button">Bỏ qua</button></div></div>`;
- kitBackdrop(ov,"roulette");document.body.appendChild(ov);
+ kitBackdrop(ov,"roulette");document.body.appendChild(ov);kitRouFit(ov);const rf=()=>{if(document.body.contains(ov)&&!picked)kitRouFit(ov)};addEventListener("resize",rf);try{document.fonts&&document.fonts.ready.then(rf)}catch(e){}
  const grid=ov.querySelector(".krgrid"),sub=ov.querySelector(".krsub"),go=ov.querySelector(".krgo");
  let tiles=[...ov.querySelectorAll(".krt")];let fin=false,timers=[],step=0,picked=null;const T=(f,ms)=>timers.push(setTimeout(f,rm?0:ms));
  const setStep=n=>{step=n;window.__kroulStep=n;ov.dataset.step=n};setStep(0);
  const snd=n=>{try{typeof sfx==="function"&&sfx(n)}catch(e){}};
- const end=()=>{if(fin)return;fin=true;timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),rm?0:360);window.__kroulStep=null;done()};
+ const end=()=>{if(fin)return;fin=true;removeEventListener("resize",rf);timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),rm?0:360);window.__kroulStep=null;done()};
  ov.querySelector(".krskip").addEventListener("click",e=>{e.stopPropagation();end()});
  /* step 2: face-down + shuffle (FLIP: cards gather to the deck centre, the grid order is re-dealt, cards travel to their new places) */
  const shuffle=()=>{setStep(1);go.hidden=true;sub.textContent="Xáo bài…";tiles.forEach(t=>t.classList.add("down"));snd("sfx-tap");
@@ -20886,26 +20901,30 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
   if(window.__kroulKey===key)return r;window.__kroulKey=key;
   const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.n,rare:kitRare(x.k)}));
   kitRoulette({items,target:o.k,toEl:()=>document.querySelector("#modal .kpidart .ksart")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
+/* kit sample page (§28.12b, review/kit-fit-r3): the origin card grid at a fixed card width (--krw); the live fit is kitRouFit */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.12b",title:"Thẻ thân phận (Luân hồi): thẻ to trải rộng theo màn nền, một khoảng cách đều giữa các thẻ",html:()=>
+ `<div class="kroul" style="position:relative;inset:auto;z-index:auto;background:none;overflow:visible;--krw:150px;--krgap:12px;--krside:0px;--krpad:6px"><div class="krbox"><div class="krgrid">`+
+ [["tt","Con gái Tể tướng"],["dtq","Con gái Đại tướng quân"],["muoi","Con gái nhà buôn muối"],["nc","Công chúa nước Nam Chiếu hòa thân"]].map(([k,n])=>`<div class="krt" data-k="${k}"><div class="krc"><div class="krf">${kitOriginFace({k,src:typeof kitOriginArt==="function"?kitOriginArt(k):"",wide:typeof kitOriginWide==="function"?kitOriginWide(k):"",name:n,rare:kitRare(k)})}</div></div></div>`).join("")+`</div></div></div>`})}catch(e){}
 (function(){const st=document.createElement("style");st.id="k2b-roulette";st.textContent=`
 .kroul{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#e9dcc8 center/cover no-repeat;transition:opacity .35s;overflow:hidden}
 .kroul.krfade .krt:not(.pick),.kroul.krfade .krhead,.kroul.krfade .krbar{opacity:0;transition:opacity .4s}
 .kroul.krfade .krt.pick{opacity:0;transition:opacity .3s .1s}
 .kroul.krout{opacity:0}
-.kroul .krbox{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;max-width:min(96vw,780px);max-height:100dvh;box-sizing:border-box}
+.kroul .krbox{display:flex;flex-direction:column;align-items:center;gap:var(--krgap,12px);padding:var(--krpad,14px) var(--krside,16px);width:100%;box-sizing:border-box}
 .kroul .krhead{display:flex;flex-direction:column;align-items:center;color:#5a2e12;text-shadow:0 1px 6px #fff8;text-align:center}
 .kroul .krhead b{font-family:var(--display);font-size:1.5rem;color:var(--gold)}.kroul .krhead small{font-size:.9rem;min-height:1.3em}
-.kroul .krgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;align-items:stretch}
-/* kv3:.kv2 */:where(.kv2) .kroul .krgrid{grid-template-columns:repeat(5,minmax(0,1fr))}
+/* ONE origin/identity card grid (kitRouFit): cards as wide as the background allows (side margins kept), columns chosen by the fit; ONE gap for columns and rows */
+.kroul .krgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--krgap,12px);align-items:stretch;max-width:100%}
 /* one origin card: outer .krt moves (shuffle / centre), inner .krc flips; front in flow (gives the size), back laid over it */
-.kroul .krt{position:relative;width:clamp(96px,min(26vw,17dvh),150px);perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
+.kroul .krt{position:relative;width:var(--krw,clamp(96px,min(26vw,17dvh),150px));flex:none;perspective:900px;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .3s;outline:none}
 .kroul .krc{position:relative;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.1,.2,1)}
 .kroul .krt.down .krc{transform:rotateY(180deg)}
 .kroul .krf,.kroul .krb{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;box-sizing:border-box}
-.kroul .krf{height:100%;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px 8px;background:rgba(255,250,240,.9);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 2px 8px #5a3a2022}
+.kroul .krf{height:100%;display:flex;flex-direction:column;align-items:center;gap:calc(var(--krw,120px)*.025);padding:calc(var(--krw,120px)*.045) calc(var(--krw,120px)*.045) calc(var(--krw,120px)*.055);background:rgba(255,250,240,.9);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 2px 8px #5a3a2022}
 .kroul .krb{position:absolute;inset:0;transform:rotateY(180deg);background:#8a3a3a url(${KIT_CARDBACK}) center/100% 100% no-repeat;border:1px solid #c9a46a;box-shadow:0 0 0 2px #fff4dccc inset,0 3px 10px #5a3a2040}
 .kroul .krt .kra{width:100%;position:relative}
-.kroul .krt .krn{font-size:.78rem;font-weight:600;color:var(--ink);text-align:center;line-height:1.2}
-.kroul .krt .krr{margin-top:auto;padding-top:2px}
+.kroul .krt .krn{font-size:min(1.2rem,max(.78rem,calc(var(--krw,120px)*.088)));font-weight:600;color:var(--ink);text-align:center;line-height:1.2}
+.kroul .krt .krr{margin-top:auto;padding-top:2px;font-size:min(1rem,max(.62rem,calc(var(--krw,120px)*.07)));white-space:nowrap}.kroul .krt .krr *{white-space:nowrap}
 .kroul.krpick .krt{cursor:pointer}
 .kroul.krpick .krt:hover,.kroul.krpick .krt:focus-visible{transform:translateY(-4px)}
 .kroul.krpick .krt:hover .krb,.kroul.krpick .krt:focus-visible .krb{box-shadow:0 0 0 2px #fff4dccc inset,0 0 14px 4px #f0d070aa}
@@ -44284,7 +44303,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ee65092c5c47";window.CTM_BUILD=BUILD;
+const BUILD="e88d182a2b83";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
