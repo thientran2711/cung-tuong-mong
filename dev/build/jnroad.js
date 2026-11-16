@@ -40,7 +40,7 @@ function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!
  if(N.c!=null){const p=N.c==="me"?S:RV(N.c);if(ok(p))return p;const old=N.c==="me"?null:p;N.c=null;N.rc=old?old.name:""}
  /* the player is her rival only for a real reason (she is cold to the player) and only for a few NPCs at once (BAL.nroad.meMax) */
  const meN=rivals.filter(x=>x!==v&&x.alive&&!x.out&&x.nr&&!x.nr.x&&x.nr.c==="me").length;const meOk=!isSrv()&&aff(v,S)<0&&meN<nrB().meMax;
- const L=liveRivals(true).filter(p=>p!==v).concat(meOk?[S]:[]);if(!L.length)return null;
+ const L=liveRivals(true).filter(p=>p!==v&&!p.coop).concat(meOk?[S]:[]);if(!L.length)return null;
  L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(nrB().rvTop,L.length)))];N.c=key(p);return p}
 /* the stat the chapter's climax rewards (tamco, danh, duc, tai, sac, sung …) — read from the chapter data */
 const NRSK={tamco:"tamco",mat:"tamco",danh:"danh",duc:"duc",an:"duc",tai:"tai",thi:"tai",cam:"tai",ky:"tai",hoa:"tai",vu:"sac",sac:"sac",sung:"sung"};
@@ -94,7 +94,9 @@ function nrHold(v){return nrHoldM(x=>nrIsV(x,v))}
 const nrSameA=(x,rk,ri)=>x.rk===rk&&(x.ri??null)===(ri??null);
 /* the month: every live NPC road whose chapter is due plays it (host only) */
 function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev="";
- for(const v of rivals.slice()){try{if(!v.alive||v.out){if(v.nr&&!v.nr.x)v.nr.x=1;continue}
+ for(const v of rivals.slice()){try{if(v.coop)continue;/* co-op: the friend is a player, never an NPC road (OD:L1447) */
+  /* fix: death closes her road; lãnh cung only pauses it (a pardon, j8/j14, brings her back to the same chapter) */
+  if(!v.alive){if(v.nr&&!v.nr.x)v.nr.x=1;continue}if(v.out)continue;
   const N=v.nr||nrInit(v);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrAsk(v)&&nrOffer(v))continue;
   /* r1: her help hồi decides THIS chapter — wait while the player works on it (j72 deadline ends it); a request j72 never got to show

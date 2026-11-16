@@ -103,7 +103,7 @@ function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
   L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(nrB().offTop,L.length)))];return N.c}
  if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.name;return q}
  /* court men: the consort he leans toward (patron pk) and the one he leans against (c), from his af (key "me" = the player) */
- const C=liveRivals(true).concat(S.out||S.dead?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
+ const C=liveRivals(true).filter(p=>!p.coop).concat(S.out||S.dead?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
  const ok=k=>{const p=k!=null&&nrCWho(k);return p&&(p===S||p.alive&&!p.out)};
  if(!ok(N.pk)||!ok(N.c)){if(N.c!=null&&!ok(N.c)){const o=RV(N.c);N.rc=o?o.name:""}if(C.length<2)return null;C.sort((a,b)=>af(b)-af(a));N.pk=nrCKey(C[0]);N.c=nrCKey(C[C.length-1])}
  return nrCWho(N.c)}
