@@ -42,11 +42,20 @@ const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi s
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
- festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ festival:{                                   px:"lanterns",light:"fireworks"}, // Tết / Giao thừa tối: sky lanterns + fireworks (only via FESTFX)
  letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
+/* festival / night effects: ONE table, effect -> which festivals (FEST keys, j31) and which buổi it may play in (null = any buổi). Owner 11/16: every effect must match the CURRENT buổi and the CURRENT event;
+   fireworks ONLY on Tết and Giao thừa evenings (owner: an ordinary evening with fireworks feels wrong; Tết/Giao thừa with them is normal); indoor/outdoor does not matter. A festival or buổi not listed gets nothing. B4L = tối (named constant, never a raw index). */
+const FESTFX={
+ festival:{fest:["newyear","giaothua"],buoi:[B4L]},                 /* one-shot sky lanterns + fireworks (kitFx "festival") */
+ lantern:{fest:["nguyentieu","trungthu"],buoi:[B4L]},                /* one-shot sky lanterns (kitFx "lantern"), once per night */
+ gold:{fest:["newyear","giaothua","nguyentieu"],buoi:null},          /* gold/red sparks (j33 pxKind) */
+ fly:{fest:["thattich","trungthu"],buoi:[B4L]}};                     /* fireflies (j33 pxKind) */
+function kfFestFx(e){try{if(typeof S==="undefined"||!S||S.dead||typeof festToday!=="function")return false;const T=FESTFX[e],f=festToday();return !!(T&&f&&T.fest.includes(f.k)&&(!T.buoi||T.buoi.includes(S.buoi||0)))}catch(x){return false}}
+window.FESTFX=FESTFX;window.kfFestFx=kfFestFx;
 function kfOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
 function kfStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.getBoundingClientRect?o.el:null;if(el){const r=el.getBoundingClientRect();if(r.width)return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
@@ -163,8 +172,8 @@ function kfBoltTick(d){const b=KFX.bolt;if(!b||KFX.bt==null)return;const t=KFX.b
 function kfWxCfg(){try{if(typeof S==="undefined"||!S)return null;const w=S.wx?S.wx.k:"dust",night=(S.buoi||0)===B4L,nm=S.wx?S.wx.n:"";let id=null;
  if(w==="petal"||w==="leaf"||w==="wind"||w==="snow"||w==="snowh"||w==="frost"||w==="snowp"||w==="storm")id=w;else if(w==="rain")id="drizzle";else if(w==="mist")id="mist";
  else if(night&&(w==="dust"||nm==="đom đóm"))id="fly";
- /* festival days outdoors (was code-drawn in j33 via pxKind): gold petals at New Year / eve / Nguyên tiêu, fireflies at Thất tịch / Trung thu; replaces the weather as before */
- try{const f=typeof festToday==="function"&&festToday();if(f&&["vuon","lc","home","tgk","maid"].includes(placeOf(S.place).sc)){if(f.k==="giaothua")id="gold";else if(f.k==="newyear"||f.k==="nguyentieu")id="petal";else if(f.k==="thattich"||f.k==="trungthu")id="fly"}}catch(e){}
+ /* festival days (was code-drawn in j33 via pxKind): which festival and which buổi come ONLY from the FESTFX table (gold / fly rows); indoor/outdoor does not matter; replaces the weather as before */
+ try{if(kfFestFx("gold"))id="gold";else if(kfFestFx("fly"))id="fly"}catch(e){}
  if(!id)return null;const c=Object.assign({lay:"wx"},KF_WX[id]);c.id=id;c.night=night;return c}catch(e){return null}}
 const KF_RAYS={lay:"se2",id:"rays",k:["streak","streak","streak","glowburst"],cap:9,float:1,ray:1,vx:[-.12,.12],vy:[0,.08],a0:.6,life:[320,520],sc:[1,1.2],tint:0xfff2b8};  /* summer light shafts: painted streak stretched into soft slanted beams */
 function kfSeCfg(){const m=(typeof S!=="undefined"&&S&&S.month)||1,night=typeof S!=="undefined"&&S&&(S.buoi||0)===B4L;
@@ -294,7 +303,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  W("kitSheetTurn",o=>function(){try{if(kfOn())vib("tap")}catch(e){}return o.apply(this,arguments)});
  /* render: tabs underline, ambient petals at home, festival-night lanterns once per night */
  W("render",o=>function(){const r=o.apply(this,arguments);try{KFX.ambOK=true;kfTabsSoon();kfAmbient();
-   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("festival"),600)}}}catch(e){console.error(e)}return r});
+   const fe=kfOn()?["festival","lantern"].find(kfFestFx):null;if(fe){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx(fe),600)}}}catch(e){console.error(e)}return r});
  document.addEventListener("visibilitychange",()=>{try{if(KFX.app){if(document.hidden)KFX.app.ticker.stop();else if(KFX.parts.length)KFX.app.ticker.start()}kfAmbient()}catch(e){}});
  /* a modal closing / overlay leaving lets the ambient petals back */
  setInterval(()=>{try{if(KFX.ambOK&&!kfAmbT&&kfAmbWant())kfAmbient()}catch(e){}},2500)})();
