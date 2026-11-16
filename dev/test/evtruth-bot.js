@@ -40,9 +40,10 @@ for(const h of ['function scoreAct(a,N,cost){','function talkScore(t,N){const{p,
    for(const v of L){evOn+=evG(v,S);rumOn+=rumG(v,S);for(const t of L){if(t!==v&&evG(v,t)>deedCap(t))npcBad++}if(evG(S,v)>deedCap(v))npcBad++}
    const dm=deedsOf(S);return{turn:S.turn,rank:S.rank,dead:!!S.dead,deedsMe:dm.length,deedKinds:dm.map(d=>d.k+":"+d.x).slice(0,6),evOnMe:evOn,rumOnMe:rumOn,
     missMe:window.__evMissMe||0,spyOnMe:window.__spyMe||0,spyOnMeFound:window.__spyMeFound||0,framesMe:window.__framesMe||0,framesMeClear:window.__framesMeClear||0,
-    frames:window.__frames||0,framesClear:window.__framesClear||0,swept:window.__evSwept||0,npcBad,npcDeeds:L.reduce((a,v)=>a+deedsOf(v).length,0),
+    frames:window.__frames||0,framesClear:window.__framesClear||0,swept:window.__evSwept||0,frTryMe:window.__frTryMe||0,frTryN:window.__frTryN||0,npcBad,npcDeeds:L.reduce((a,v)=>a+deedsOf(v).length,0),
     npcEvHeld:L.reduce((a,v)=>a+L.reduce((b,t)=>b+(t!==v?evG(v,t):0),0)+evG(S,v),0)}};
-  window.__lifeReset=function(){for(const k of ["__evMissMe","__evMiss","__spyMe","__spyMeFound","__framesMe","__framesMeClear","__frames","__framesClear","__evSwept"])window[k]=0};
+  window.__lifeReset=function(){for(const k of ["__evMissMe","__evMiss","__spyMe","__spyMeFound","__framesMe","__framesMeClear","__frames","__framesClear","__evSwept","__frTryMe","__frTryN"])window[k]=0};
+  {const r0=runAct;runAct=function(a,t,k){if(t===S&&a!==S&&(k==="frame"||k==="plant"))window.__frTryMe=(window.__frTryMe||0)+1;if(t!==S&&a!==S&&k==="frame")window.__frTryN=(window.__frTryN||0)+1;return r0.apply(this,arguments)}}
   const sf=spyFind;spyFind=function(a,t){const r=sf.apply(this,arguments);if(t===S){window.__spyMe=(window.__spyMe||0)+1;if(!/không tìm ra/.test(r))window.__spyMeFound=(window.__spyMeFound||0)+1}return r};
  });
  const out=[];const t0=Date.now();let guard=0;
@@ -53,5 +54,5 @@ for(const h of ['function scoreAct(a,N,cost){','function talkScore(t,N){const{p,
  const sum=k=>out.reduce((a,r)=>a+(r[k]||0),0);
  const clean=out.filter(r=>r.deedsMe===0);
  const T={lives:out.length,cleanLives:clean.length,months:sum('turn'),evOnMe_clean:clean.reduce((a,r)=>a+r.evOnMe,0),rumOnMe:sum('rumOnMe'),missMe:sum('missMe'),spyOnMe:sum('spyOnMe'),spyOnMeFound_clean:clean.reduce((a,r)=>a+r.spyOnMeFound,0),
-  framesMe:sum('framesMe'),framesMeClear:sum('framesMeClear'),frames:sum('frames'),framesClear:sum('framesClear'),swept:sum('swept'),npcBad:sum('npcBad'),npcDeeds:sum('npcDeeds'),npcEvHeld:sum('npcEvHeld'),errors:errs.length};
+  framesMe:sum('framesMe'),framesMeClear:sum('framesMeClear'),frames:sum('frames'),frTryMe:sum('frTryMe'),frTryN:sum('frTryN'),framesClear:sum('framesClear'),swept:sum('swept'),npcBad:sum('npcBad'),npcDeeds:sum('npcDeeds'),npcEvHeld:sum('npcEvHeld'),errors:errs.length};
  console.log(JSON.stringify({total:T,lives:out,errs:errs.slice(0,8)},null,1));await b.close()})();

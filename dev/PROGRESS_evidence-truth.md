@@ -42,3 +42,21 @@ evidence collected against her; fake evidence only through a frame scheme that c
 - Old save: 3 pieces held on a clean player → 0 evidence + 3 rumours (shown "chỉ nghe 3 tin đồn … không có bằng chứng thật");
   the player's 2 pieces on a clean consort → evidence card section "Tin đồn (2)".
 - Known: the frame dialog at 390x844 shows the generic event layout (framer name over the art) like other PEND dialogs — kit, not this branch.
+
+## Reviewer r1 (review/evidence-truth-r1, merged onto origin/main 2afdafc39)
+- Merge: assemble list = main's + jtruth.js last; j7 keeps the truth logic with main's "thiện cảm" wording; jbal2 BAL.truth + coopTm/itd.
+- Scan: the (file, line) allowlist broke on any edit above a line → each reviewed site now carries an in-code marker `/*evok: why*/`
+  (43 markers); the scan counts markers and flags any evidence write/announcement that has neither a checked return nor a marker.
+  Negative check: removing one marker → "unchecked 1".
+- Co-op fix: the friend entry (buildFriend, jcoopworld) had no wrongs ledger → deedCap(friend)=0 → every week my true evidence on a guilty
+  friend was swept into rumour and NPC spies could never find her real deeds. Her ledger (wrongs/dw/dws/dkeys/schemes) now travels with
+  her (read-only copy). Test: `node dev/test/evtruth-coop.js URL` (guilty friend keeps 2 evidence + NPC spy finds her deed; clean friend →
+  rumour, spy finds nothing) PASS.
+- Month search (j8 search) found a planted bùa with ACTX.a empty → no defence for the victim; the planter is now the framer.
+- NPC defence used to ADD every road (night + maid + Thái y + evidence → 85 almost always); now one best road, like the player.
+- Defence cards show the VANPHONG odds word (the roads differ only in odds).
+- Frame rate (owner 16/11 via coordinator: frames must happen and the defence must be able to fail): BAL.truth.frameW / frameW1 (Vu oan
+  weight when the schemer holds no proof to accuse; also offered at grudge band "nhỏ"), npcFrameP / npcFrameMal (NPC-vs-NPC frames:
+  before this, consorts' grudges against each other almost never reached a band → 0 NPC-vs-NPC frame acts in a year).
+- Measures: `dev/measure/evtruth-odds.js` (odds of each step over all pairs, fast) and `dev/measure/evtruth-frames.js` (idle clean player,
+  N years, counts attempts / planted / cleared by road).

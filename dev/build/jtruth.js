@@ -150,3 +150,6 @@ function npcFrame(){const T=BAL.truth;const L=liveRivals(false).filter(v=>v&&v.a
  try{window.__npcFrameTry=(window.__npcFrameTry||0)+1}catch(e){}return typeof seenNPC==="function"?seenNPC(a,t,r):""}
 (function(){const e0=endTurn;endTurn=function(){const run=S&&!S.dead&&!Q.length&&!S.mg;const r=e0.apply(this,arguments);
  try{if(run&&S&&!S.dead&&roll(BAL.truth.npcFrameP)){const x=npcFrame();if(x)log(x)}}catch(e){}return r}})();
+/* a frame is quiet work (a doll slipped into a chest, a whisper to Cung Chính ti): the victim's people see it less than a poisoning or a push.
+   oSee during Vu oan / Cài đồ − BAL.truth.frameHide (reviewer r1: the player's maid guard caught ~90% of frames, so a frame almost never landed). */
+(function(){const o0=oSee;oSee=function(t,p){const r=o0.apply(this,arguments);try{if(typeof ACTK!=="undefined"&&(ACTK==="frame"||ACTK==="plant")&&BAL.truth.frameHide)return cl(Math.round(r-BAL.truth.frameHide),5,95)}catch(e){}return r}})();
