@@ -347,10 +347,10 @@ const TOIL_SAY={
   vung:["“Phấn son lem nhem thế kia, cung nữ hầu {goi} không biết việc sao?”","“Son phấn chỗ đậm chỗ nhạt, nhìn như bức tranh vẽ dở. Về bảo người hầu học lại đi.”","“Trang điểm vụng về thế này, ra ngoài người ta cười cả cung của {goi}.”","“Lông mày kẻ lệch, phấn đánh chẳng đều. Người hầu bên {goi} nên đổi đi thôi.”","“Trang điểm thế này, ai gia nhìn còn mỏi mắt, huống hồ là Hoàng đế.”","“Vụng tay thì học, chứ đừng đem cái vụng ra trước mặt ai gia.”"],
   diem:["“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”","“Đỏ thắm thế này, {goi} định đi thỉnh an hay đi hát tuồng?”","“Hoa diễm quá thì mau tàn. Người trong cung nên biết giữ chừng mực.”","“Phấn dày như tường vôi. {Goi} vào cung để hầu hạ, đâu phải để lên sân khấu.”","“Ai gia già rồi, mắt kém, mà vẫn thấy chói vì son phấn của {goi}.”","“Người đoan trang không cần nhiều phấn. {Goi} nhớ lấy.”"],
   plain:["“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”","“Áo vải mộc mạc đến thỉnh an, người ngoài lại tưởng ai gia bạc đãi {goi}.”","“Giản dị là đức, sơ sài là thất lễ. {Goi} phân không ra hai chữ ấy sao?”","“Tiết kiệm là đức, nhưng thỉnh an ai gia mà mặc thế này thì là coi thường.”","“Phẩm phục để đâu mà không mặc? Hay Nội vụ phủ quên phần của {goi}?”","“Áo xống thế kia, người ngoài nhìn vào lại nói hậu cung thiếu thốn.”"],
-  showy:["“Lộng lẫy thế này, {goi} quên mất ai mới là chủ lục cung rồi chăng?”","“Châu ngọc đầy người, đi một bước kêu ba tiếng. Ai gia nghe mà nhức đầu.”","“Cây cao thì đón gió. {Goi} khoe ra như vậy, chẳng sợ gió to sao?”","“Ai gia còn chưa cài nhiều trâm như thế. {Goi} định so với ai?”","“Lộng lẫy quá hóa lố. Nhớ lấy phận mình.”","“Vàng bạc trên đầu nặng, chỉ e cái đầu chẳng gánh nổi.”"]},
+  showy:["[lo,mid,hi]“Lộng lẫy thế này, {goi} quên mất ai mới là chủ lục cung rồi chăng?”","“Châu ngọc đầy người, đi một bước kêu ba tiếng. Ai gia nghe mà nhức đầu.”","“Cây cao thì đón gió. {Goi} khoe ra như vậy, chẳng sợ gió to sao?”","“Ai gia còn chưa cài nhiều trâm như thế. {Goi} định so với ai?”","“Lộng lẫy quá hóa lố. Nhớ lấy phận mình.”","“Vàng bạc trên đầu nặng, chỉ e cái đầu chẳng gánh nổi.”"]},
  "th-praise":{
   plain:["“Giản dị thế này mới phải đạo, ai gia thích.”","“Không châu ngọc mà vẫn sáng sủa, ấy là biết giữ mình.”","“{Goi} ăn vận nhã nhặn, chẳng tranh chẳng giành, ai gia nhìn cũng thấy yên lòng.”","“Mộc mạc mà đoan chính, đúng là người hiểu phép tiết kiệm của tổ tông.”","“Mộc mạc mà sạch sẽ, nhìn {goi} ai gia lại nhớ những ngày còn ở nhà.”","“Biết tiết kiệm là biết giữ phúc. {Goi} cứ thế mà làm.”"],
-  neat:["“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”","“Đúng mực, đúng phẩm. Người trong cung nên như {goi} vậy.”","“Y phục chỉnh tề, dung nhan thanh tú. {Goi} có lòng, ai gia biết.”","“Đoan trang mà không phô trương, mới ra dáng người của hoàng gia.”","“Nhìn {goi} hôm nay, ai gia lại nhớ thời mình mới vào cung.”","“Phẩm phục chỉn chu, cử chỉ khoan thai. Tốt, tốt lắm.”"]},
+  neat:["“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”","“Đúng mực, đúng phẩm. Người trong cung nên như {goi} vậy.”","“Y phục chỉnh tề, dung nhan thanh tú. {Goi} có lòng, ai gia biết.”","“Đoan trang mà không phô trương, mới ra dáng người của hoàng gia.”","“Phẩm phục chỉn chu, cử chỉ khoan thai. Tốt, tốt lắm.”"]},
  "hh-scold":{
   moc:["“{Goi} đến thỉnh an {xung} mà mặt mộc thế này ư?”","“Lục cung đều trang điểm chỉnh tề, chỉ mình {goi} để mặt trơn. Là coi nhẹ lễ hay coi nhẹ {xung}?”","“Mặt mộc thì thanh, nhưng thỉnh an không phải chỗ để thanh.”","“Mặt mộc mà ra ngoài, người ta lại bảo Càn Ninh cung không có phép tắc.”","“{Goi} ốm sao? Nếu không thì lần sau chớ để {xung} thấy cảnh này.”","“Không trang điểm thì cũng phải chỉnh tề. Lễ không thể thiếu.”"],
   diem:["“Son phấn của {goi} hôm nay… có phần quá tay.”","“Đậm thế này, khéo người ta tưởng hôm nay có yến lớn.”","“Môi đỏ như son, {goi} định để ai ngắm đây?”","“Thỉnh an mà như dự yến, {goi} vội vàng muốn người ta nhìn thấy mình quá.”","“Son đỏ quá, người ta nhìn {goi} mà quên mất mình đang ở đâu.”","“Đậm đà thì hợp đêm hội. Sáng thỉnh an, {goi} nên nhã hơn.”"],
@@ -360,20 +360,74 @@ const TOIL_SAY={
   plain:["“Giản dị mà thanh nhã, {xung} rất thích.”","“Không phô trương mà vẫn có thần thái. {Goi} khéo lắm.”","“Lục cung mà ai cũng biết tiết kiệm như {goi} thì {xung} đỡ lo biết bao.”","“Thanh đạm thế này, mới thấy {goi} là người biết điều.”","“Không cần châu ngọc mà vẫn sáng sủa, {xung} khen thật lòng.”","“{Goi} giữ được sự giản dị giữa chốn phồn hoa, hiếm có lắm.”"],
   neat:["“{Goi} hôm nay thật chỉn chu, đúng là biết lễ.”","“Phẩm phục ngay ngắn, trang điểm vừa phải. Đáng làm gương cho các cung.”","“Thấy {goi} chu đáo thế này, {xung} cũng yên tâm.”","“Biết lễ thì người kính. {Goi} cứ giữ như vậy.”","“Y phục đúng phẩm, cử chỉ đúng lễ. {Xung} chẳng có gì phải nhắc.”","“Hôm nay {goi} thật ra dáng người trong cung.”"]},
  "emp-like":{
-  fair:["“Hôm nay {goi} trông thật tươi tắn, {xung} nhìn mãi không chán.”","“Người đẹp như hoa đầu xuân. {Xung} đến đúng lúc rồi.”","“Lục cung bao nhiêu sắc, hôm nay {xung} chỉ thấy một.”","“{Goi} hôm nay khác hẳn mọi ngày. {Xung} không nhận ra suýt nữa.”","“Hoa trong ngự uyển cũng chẳng bằng.”","“{Xung} cả ngày đọc tấu chương, giờ mới thấy mắt sáng lại.”"],
-  any:["“Ăn vận như vậy rất hợp ý {xung}.”","“Nhã nhặn mà có duyên. {Goi} hiểu {xung}.”","“Thế này là vừa, {xung} thích.”","“Không cầu kỳ mà dễ nhìn, {xung} ngồi thêm một lát.”","“{Goi} khéo chọn y phục, nhìn mà dễ chịu.”","“Giản dị mà tinh tế, đúng ý {xung}.”"]},
+  fair:["“Hôm nay {goi} tươi tắn quá.”","“Đẹp như hoa đầu xuân.”","“Hôm nay {xung} chỉ thấy {goi}.”","“{Goi} hôm nay khác hẳn.”","“Hoa trong ngự uyển cũng chẳng bằng.”","“Nhìn {goi}, {xung} hết mệt.”"],
+  any:["“Ăn vận như vậy rất hợp ý {xung}.”","“Nhã nhặn mà có duyên. {Goi} hiểu {xung}.”","“Thế này là vừa, {xung} thích.”","“Dễ nhìn. {Xung} ngồi thêm chút.”","“{Goi} khéo chọn y phục.”","“Giản dị mà tinh tế, đúng ý {xung}.”"]},
  "emp-dislike":{
-  moc:["“Sao hôm nay trông nhợt nhạt thế?”","“{Goi} ốm sao? Mặt mũi chẳng có chút sắc hồng.”","“Mộc mạc quá, {xung} nhìn chẳng ra người đang vui.”","“Sao chẳng điểm chút son? {Goi} không vui sao?”","“Mặt mộc thế này, {xung} tưởng {goi} vừa ốm dậy.”","“Thiếu chút sắc hồng, trông {goi} mệt mỏi quá.”"],
-  diem:["“Son phấn đậm quá, {xung} không quen.”","“Rửa bớt phấn đi rồi hãy nói chuyện với {xung}.”","“Hoa lệ quá, lại không giống {goi} nữa.”","“Đậm quá, chẳng thấy dung nhan thật của {goi} đâu.”","“Son phấn thế này, {xung} nhìn không quen mắt.”","“Phấn dày quá, khi cười e rơi mất.”"],
-  plain:["“Sao ăn vận sơ sài vậy?”","“Nội vụ phủ bớt xén của {goi} sao? Áo xống thế này.”","“Giản dị thì tốt, nhưng hôm nay {xung} đến cơ mà.”","“Áo xống sơ sài thế, người hầu của {goi} lơ là quá.”","“{Xung} đến mà {goi} chẳng chút chăm chút sao?”","“Mộc mạc quá, trông chẳng giống phi tần của {xung}.”"],
-  showy:["“Lộng lẫy quá, {xung} lại thích vẻ thanh nhã hơn.”","“Vàng ngọc đầy đầu, {xung} nhìn cũng thấy nặng thay.”","“Đẹp thì đẹp, mà phô trương quá.”","“Nhiều trâm quá, {xung} nhìn chẳng thấy mặt {goi} đâu.”","“Đeo cả kho báu lên người làm gì? {Xung} thích nhẹ nhàng hơn.”","“Lộng lẫy như vậy, {xung} lại thấy xa cách.”"]},
+  moc:["“Sao hôm nay trông nhợt nhạt thế?”","“{Goi} ốm sao? Mặt nhợt quá.”","“Trông {goi} chẳng vui chút nào.”","“Sao chẳng điểm chút son? {Goi} không vui sao?”","“Như vừa ốm dậy vậy.”","“Trông {goi} mệt quá.”"],
+  diem:["“Son phấn đậm quá, {xung} không quen.”","“Rửa bớt phấn đi.”","“Hoa lệ quá, lại không giống {goi} nữa.”","“Đậm quá, chẳng thấy {goi} đâu.”","“{Xung} nhìn không quen mắt.”","“Phấn dày quá, khi cười e rơi mất.”"],
+  plain:["“Sao ăn vận sơ sài vậy?”","“Nội vụ phủ bớt xén của {goi} sao?”","“Giản dị thì tốt, nhưng {xung} đến cơ mà.”","“Người hầu của {goi} lơ là quá.”","“{Xung} đến mà {goi} chẳng chút chăm chút sao?”","“Chẳng giống phi tần của {xung}.”"],
+  showy:["“{Xung} thích thanh nhã hơn.”","“Vàng ngọc đầy đầu, nặng lắm.”","“Đẹp thì đẹp, mà phô trương quá.”","“Nhiều trâm quá, chẳng thấy mặt {goi}.”","“Đeo cả kho báu làm gì?”","“Lộng lẫy như vậy, {xung} lại thấy xa cách.”"]},
  "rival-jealous":{
-  showy:["“Phô trương đến thế, {goi} không sợ người ta dị nghị sao?”","“{Goi} hôm nay châu ngọc đầy người, chắc là được ban thưởng nhiều lắm nhỉ?”","“Đẹp quá, đẹp đến mức đứng cạnh Hoàng hậu cũng chẳng kém. Thật đáng nể.”","“Trâm này đẹp thật, {xung} chưa thấy bao giờ. Ai ban cho {goi} vậy?”","“{Goi} rực rỡ thế, đứng cạnh {goi} ai cũng thành lá xanh mất.”","“Hôm nay {goi} tính đi yến ở đâu mà rực rỡ thế?”"],
+  showy:["“Phô trương đến thế, {goi} không sợ người ta dị nghị sao?”","“{Goi} hôm nay châu ngọc đầy người, chắc là được ban thưởng nhiều lắm nhỉ?”","[lo,mid,hi]“Đẹp quá, đẹp đến mức đứng cạnh Hoàng hậu cũng chẳng kém. Thật đáng nể.”","“Trâm này đẹp thật, {xung} chưa thấy bao giờ. Ai ban cho {goi} vậy?”","“{Goi} rực rỡ thế, đứng cạnh {goi} ai cũng thành lá xanh mất.”","“Hôm nay {goi} tính đi yến ở đâu mà rực rỡ thế?”"],
   any:["“{Goi} hôm nay đẹp quá, khéo Hoàng thượng chẳng rời mắt được.”","“Dung nhan thế này, chẳng trách có người ngày đêm nhắc đến {goi}.”","“{Xung} nhìn {goi} mà ghen tị. Phải chăng có bí quyết gì?”","“Hoa đẹp thì người hái nhiều, {goi} giữ mình cho khéo.”","“{Goi} dạo này càng lúc càng đẹp, chẳng trách được để mắt tới.”","“Nhan sắc của {goi}, {xung} có học cả đời cũng chẳng được.”"]},
- "rival-tease":{any:["“Ôi chao, phấn son của {goi} hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.","“{Goi} trang điểm thế này là để mừng lễ gì vậy?” Nàng ta liếc mắt cười nhạt.","“Đậm như thế, đứng xa trăm bước cũng nhận ra {goi}.” Mấy người quanh đó cười khẽ.","“Phấn dày thế, gió thổi qua chắc bay mất một lớp.” Nàng ta phẩy quạt, giọng mát mẻ.","“Hôm nay {goi} như hoa mẫu đơn vậy, đỏ rực cả sân.” Nàng ta cười, mắt chẳng hề cười.","“{Xung} cứ tưởng có đoàn hát vào cung.” Nàng ta nói rồi quay đi."]},
+ "rival-tease":{any:["[lo,mid,hi]“Ôi chao, phấn son của {goi} hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.","[lo,mid,hi]“{Goi} trang điểm thế này là để mừng lễ gì vậy?” Nàng ta liếc mắt cười nhạt.","[lo,mid,hi]“Đậm như thế, đứng xa trăm bước cũng nhận ra {goi}.” Mấy người quanh đó cười khẽ.","[lo,mid,hi]“Phấn dày thế, gió thổi qua chắc bay mất một lớp.” Nàng ta phẩy quạt, giọng mát mẻ.","[lo,mid,hi]“Hôm nay {goi} như hoa mẫu đơn vậy, đỏ rực cả sân.” Nàng ta cười, mắt chẳng hề cười.","[lo,mid,hi]“{Xung} cứ tưởng có đoàn hát vào cung.” Nàng ta nói rồi quay đi."]},
  "rival-praise":{any:["“{Goi} ăn vận nhã nhặn, {xung} thích.”","“Thanh đạm mà dễ nhìn, {goi} khéo chọn quá.”","“Giữa một sân son phấn, chỉ {goi} là thanh tao.”","“Không tranh không giành mà vẫn nổi bật, {xung} phục {goi}.”","“{Goi} chọn màu áo khéo quá, nhìn mà mát mắt.”","“Nhã nhặn thế này, {xung} cũng muốn học theo.”"]},
  "crowd-jealous":{showy:["Lúc thỉnh an, mấy phi tần cứ liếc nhìn y phục của ta rồi thì thầm với nhau.","Ta vừa bước vào, tiếng trò chuyện chợt ngưng; mấy đôi mắt dán lên trâm ngọc trên tóc ta.","Lúc cáo lui, sau lưng ta có tiếng cười khẽ: “Phô trương như thế, xem được mấy hôm.”","Mấy phi tần đứng gần ta khẽ dịch ra, như sợ đứng cạnh thì bị lu mờ.","Có người buột miệng khen trâm của ta, rồi vội im khi bị người bên cạnh huých tay.","Lúc thỉnh an, mấy chiếc quạt cùng che miệng; tiếng xì xào theo ta ra tận cửa."],
   any:["Lúc thỉnh an, ánh mắt các phi tần cứ dừng trên dung nhan của ta.","Suốt buổi thỉnh an, có người nhìn ta rồi nhìn xuống tay áo mình, khẽ thở dài.","Ra khỏi điện, ta nghe phía sau có người khẽ hỏi: “Nàng ta dùng phấn của cung nào vậy?”","Lúc ta ngồi xuống, mấy phi tần khẽ đưa mắt nhìn nhau.","Có người hỏi ta dùng phấn gì, giọng ngọt mà ánh mắt chẳng ngọt chút nào.","Sau buổi thỉnh an, có người cố ý đi chậm lại, để khỏi phải đi cạnh ta."]}};
+/* RANK BAND lines (owner 16/11 ~21:05Z: "lỡ như đây là một người quý phi cũng dùng cái câu chuẩn này luôn"): per reaction, lines that only fit
+   one band of the listener — lo = tiểu chủ (Đáp ứng … Quý nhân), mid = chủ một cung (Tần, Phi), hi = Quý phi / Hoàng quý phi, hq = Hoàng hậu.
+   Merged as tagged lines into every look-pool of the reaction; jvoice kLine says a tagged line only to its band (kBand). */
+const TOIL_BAND={
+ "th-scold":{lo:["“Mới vào cung được mấy hôm mà đã sơ suất thế này, sau này còn ra sao?”","“Phẩm còn thấp thì càng phải giữ lễ, {goi} hiểu chưa?”","“Muốn ai gia nhớ mặt thì đừng để ai gia nhớ vì cái sai.”"],
+  mid:["“Đã là chủ một cung mà dung nhan còn để người ta chê sao?”","“{Ten} có cung riêng, người dưới đều nhìn {goi} mà học. Thế này thì dạy ai?”","“Ngồi ghế chủ vị thì phải giữ được thể diện của chủ vị.”"],
+  hi:["“Ở vị trí {ten}, chỉ đứng sau Hoàng hậu, mà để ai gia phải nhắc chuyện này sao?”","“Lục cung đều nhìn {goi} mà theo. {Goi} sơ suất một, bọn họ sơ suất mười.”","“Phẩm cao thì lỗi cũng cao. Ai gia không muốn nói lần thứ hai.”"],
+  hq:["“Mẫu nghi thiên hạ mà thế này, lục cung lấy ai làm gương?”","“Người ngồi Trung cung phải đoan trang hơn tất cả. Hôm nay thì chưa.”","“Ai gia giao lục cung cho Hoàng hậu, không phải để người ta cười.”"]},
+ "th-praise":{lo:["“Mới vào cung mà đã hiểu lễ như vậy, {goi} có tiền đồ.”","“Nhìn {goi} hôm nay, ai gia lại nhớ thời mình mới vào cung.”","“Phận còn nhỏ mà biết giữ mình, ai gia ghi nhớ.”"],
+  mid:["“Đã là chủ một cung, ăn vận thế này mới xứng.”","“{Ten} biết giữ thể diện cho cung mình, ai gia vui lòng.”","“Người dưới nhìn chủ như {goi}, ắt cũng biết lễ.”"],
+  hi:["“Đứng đầu các phi mà vẫn giữ được chừng mực, khó có lắm.”","“{Ten} làm gương cho lục cung như vậy, ai gia yên tâm.”","“Phẩm cao mà không kiêu, {goi} giữ được phúc lâu dài.”"],
+  hq:["“Mẫu nghi thiên hạ phải như vậy. Ai gia không nhìn lầm người.”","“Trung cung đoan trang thì lục cung yên ổn. Tốt lắm.”","“Hoàng hậu như thế, ai gia có thể yên lòng lo việc Phật.”"]},
+ "hh-scold":{lo:["“Mới vào cung chưa lâu mà đã quên lời ma ma dạy rồi sao?”","“{Goi} phẩm vị còn thấp, càng phải cẩn thận từng chút.”"],
+  mid:["“{Ten} đã là chủ một cung, lẽ nào còn để {xung} phải nhắc?”","“Chủ vị mà sơ suất, người ngoài sẽ cười cả cung của {goi}.”"],
+  hi:["“{Ten} phẩm vị chỉ dưới {xung}, càng phải biết giữ lễ.”","“Vị trí cao thì gió lớn. {Goi} chớ để người ta có cớ.”"]},
+ "hh-praise":{lo:["“Mới vào cung mà chu toàn như vậy, {xung} rất mừng.”","“{Goi} phẩm vị còn nhỏ mà biết lễ, sau này ắt có phúc.”"],
+  mid:["“Chủ một cung mà chỉn chu thế này, người dưới cũng được nhờ.”","“Cung của {goi} nề nếp, nhìn chủ là biết.”"],
+  hi:["“Có {goi} làm gương, {xung} đỡ được bao lời răn.”","“{Ten} đoan trang như vậy, lục cung ai dám không theo.”"]},
+ "emp-like":{lo:["“{Xung} sao giờ mới thấy {goi}?”","“Lần sau {xung} đến sớm hơn.”"],mid:["“Cung của {goi}, {xung} sẽ ghé thường hơn.”","“{Goi} càng ngày càng hợp ý {xung}.”"],
+  hi:["“Lục cung, {xung} vẫn nhớ {goi} nhất.”","“Bao năm rồi, {goi} vẫn thế.”"],hq:["“Trung cung có {goi}, {xung} yên lòng.”","“{Goi} vẫn đẹp như ngày đại hôn.”"]},
+ "emp-dislike":{lo:["“Mới vào cung, chưa quen sao?”","“Người hầu chưa biết việc à?”"],mid:["“Chủ một cung mà thế này sao?”","“{Goi} dạo này lơ là quá.”"],
+  hi:["“{Goi} xưa nay đâu có thế.”","“Lục cung đang nhìn {goi} đấy.”"],hq:["“Trung cung mà thế này sao?”","“{Goi} dạo này mệt lắm à?”"]},
+ "rival-jealous":{lo:["“Mới vào cung đã được để mắt, {goi} thật có phúc.”","“Phẩm vị chưa cao mà khéo ăn vận thế, sau này {goi} còn hơn nữa.”"],
+  mid:["“Chủ một cung có khác, {xung} nhìn mà thèm.”","“{Ten} dạo này phong quang quá, cả cung ai cũng nói.”"],
+  hi:["“Phẩm cao thì đẹp cũng cao, {xung} sao dám sánh.”","“{Ten} chỉ đứng dưới một người, ăn vận thế này cũng phải.”"],
+  hq:["“{Goi} hôm nay rực rỡ quá, lục cung đều lu mờ.”","“Mẫu nghi thiên hạ có khác, {xung} chỉ biết cúi đầu.”","“Phượng quan trên đầu {goi}, ai nhìn mà chẳng ngước lên.”","“{Xung} đứng cạnh {goi} hôm nay, thấy mình như cành cỏ.”","“Châu ngọc ấy, cả hậu cung chỉ {goi} đeo mới hợp.”","“{Goi} đẹp thế này, Hoàng thượng chẳng muốn rời Trung cung mất.”"]},
+ "rival-tease":{hq:["“{Goi} hôm nay thật… khác thường.” Nàng ta cúi đầu, khóe miệng khẽ nhếch.","“Son của {goi} thắm quá, {xung} suýt không nhận ra.” Nàng ta cười, mắt nhìn đi chỗ khác.","“Trung cung hôm nay rực rỡ, chắc có tin vui?” Giọng nàng ta ngọt như mật pha giấm.","“{Xung} nào dám bàn dung nhan của {goi}.” Nàng ta nói, rồi khẽ liếc người bên cạnh.","“{Goi} trang điểm thế, hẳn là để Hoàng thượng nhìn cho rõ.” Nàng ta cúi chào, cười khẽ.","“Đậm đà thế này, cả điện đều thấy.” Nàng ta che quạt, giọng nhỏ mà ai cũng nghe."]},
+ "rival-praise":{lo:["“Mới vào cung mà đã biết chọn y phục, {xung} phục thật.”","“{Goi} ăn vận thế này, ma ma giáo tập ắt khen.”"],mid:["“Chủ một cung mà giản dị thế, {xung} kính phục.”","“Cung của {goi} hẳn ai cũng nề nếp.”"],
+  hi:["“Phẩm cao mà không phô trương, hiếm có lắm.”","“{Ten} thanh nhã thế này, lục cung nên học theo.”"],hq:["“Mẫu nghi thiên hạ mà giản dị thế này, là phúc của lục cung.”","“{Goi} tiết kiệm làm gương, {xung} xin học theo.”"]},
+ "crowd-jealous":{lo:["Mấy người cùng phẩm khẽ kéo nhau đứng xa ta, như sợ bị đem ra so.","Có người thì thầm sau lưng ta: “Mới vào cung mà đã diện thế, cây cao đón gió.”"],
+  mid:["Người các cung nhỏ đứng sau lưng ta xì xào: chủ vị có khác.","Mấy vị nương nương cùng phẩm liếc nhau, cười mà chẳng nói."],
+  hi:["Ta bước vào, cả điện dịu tiếng; ai cũng liếc nhìn rồi cúi xuống.","Phi tần phẩm thấp chẳng dám nhìn thẳng, chỉ len lén đưa mắt theo y phục của ta."],
+  hq:["Các phi tần vào thỉnh an ta, mắt cứ dừng trên mũ phượng.","Lúc các cung lui ra, có người khẽ nói: “Trung cung hôm nay rực rỡ quá.”"]}};
+/* PERSONALITY lines (phase D): a consort reacts in the voice of her trait (TRAITS j1); merged into her pool (key per trait) — the open
+   jabs never go to the Empress herself ([lo,mid,hi]) */
+const TOIL_TRAIT={
+ "rival-jealous":{"Hiểm độc":["[lo,mid,hi]“Đẹp thế này, giữ được bao lâu thì hay bấy lâu.”","“{Goi} cẩn thận, hoa đẹp hay bị người ta bẻ.”"],
+  "Kiêu ngạo":["[lo,mid,hi]“Chút châu ngọc ấy, cung {xung} chất đầy rương.”","[lo,mid,hi]“Được ban thưởng một lần đã tưởng mình là ai.”"],
+  "Hiền lành":["“{Goi} đẹp quá, {xung} nhìn mà vui lây.”","“Ước gì {xung} cũng khéo ăn vận như {goi}.”"],
+  "Đa nghi":["“Trâm ấy ở đâu ra vậy? {Xung} chưa thấy Nội vụ phủ phát.”","[lo,mid,hi]“{Goi} diện thế này, hẳn có hẹn với ai?”"],
+  "Tham vọng":["“Hôm nay {goi} đi trước một bước, ngày mai chưa biết ai hơn ai.”","“Hoàng thượng thích kiểu này sao? {Xung} ghi nhớ.”"],
+  "Nhu mì":["“{Xung}… {xung} chẳng bao giờ dám diện như {goi}.”","“{Goi} đẹp quá, {xung} đứng cạnh mà ngượng.”"]},
+ "rival-tease":{"Hiểm độc":["[lo,mid,hi]“Phấn son đậm thế, che được mặt chứ che sao được lòng.” Nàng ta cười rất dịu."],
+  "Kiêu ngạo":["[lo,mid,hi]“Trang điểm thế này, {xung} còn tưởng cung nữ nào đi lạc.” Nàng ta cười lớn."],
+  "Hiền lành":["[lo,mid,hi]“Phấn hơi đậm một chút thôi, {goi} đừng để bụng.” Nàng ta nói khẽ."],
+  "Đa nghi":["[lo,mid,hi]“Trang điểm kỹ thế, chắc biết trước có người đến?” Nàng ta nheo mắt."],
+  "Tham vọng":["[lo,mid,hi]“Đậm đà thế, chắc định giành chỗ đứng gần ngự giá?” Nàng ta cười nhạt."],
+  "Nhu mì":["[lo,mid,hi]“Son của {goi}… hơi thắm thì phải.” Nàng ta nói nhỏ rồi cúi đầu."]},
+ "rival-praise":{"Hiểm độc":["“{Goi} giản dị thế, ai nhìn cũng tưởng hiền lành.”"],"Kiêu ngạo":["“Cũng tạm được. Giản dị hợp với {goi}.”"],
+  "Hiền lành":["“{Goi} ăn vận thế này, {xung} nhìn cũng thấy lòng nhẹ.”"],"Đa nghi":["“Giản dị quá… {goi} đang tính điều gì chăng?”"],
+  "Tham vọng":["“Giản dị mà vẫn được để mắt, {xung} phải học {goi} mới được.”"],"Nhu mì":["“{Goi} chọn màu khéo quá, {xung} muốn học mà chẳng dám hỏi.”"]}};
+window.TOIL_TRAIT=TOIL_TRAIT;
+for(const [k,B] of Object.entries(TOIL_BAND)){const P=TOIL_SAY[k];if(!P)continue;const T=[];for(const [b,L] of Object.entries(B))for(const x of L)T.push(`[${b}]${x}`);for(const sub of Object.keys(P))P[sub]=P[sub].concat(T)}
+window.TOIL_SAY=TOIL_SAY;
 function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",showy=dv==="photruong"||dv==="vuot"||dv==="tang";
  const P=TOIL_SAY[k];if(!P)return"";const host=ctx.host;
  const sp=host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":host&&typeof host==="object"?host:null;
@@ -386,7 +440,10 @@ function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",s
   default:sub="any"}
  /* a scolding never uses the warm words (no "con" / "ái phi" while she is being told off); praise follows the real relation */
  const bad=/scold|dislike|jealous|tease/.test(k);let m;try{m=sp?kAddr(sp,S).m:"cool"}catch(e){m="cool"}if(bad&&m==="warm")m="cool";if(!bad&&m==="cold")m="cool";
- return kLine("toil:"+k+":"+sub,P[sub]||P.any,{sp,ls:S,m})}
+ let L=P[sub]||P.any,key="toil:"+k+":"+sub;const TT=TOIL_TRAIT[k]&&sp&&sp.trait&&TOIL_TRAIT[k][sp.trait];if(TT){L=L.concat(TT);key+=":"+sp.trait}
+ const said=kLine(key,L,{sp,ls:S,m});
+ /* her signature habit (jvoice kHabit), long form only, when the line has no gesture of its own */
+ const hb=sp&&typeof sp==="object"&&/”$/.test(said)?kHabit(sp):"";return hb?`${said} ${hb}.`:said}
 /* gain / loss line in the palace voice (VANPHONG §2.5): a gesture of the person (pool, no repeat) — then the plain why + numbers, unchanged */
 const TOIL_GEST={
  "th+":["Thái hậu khẽ gật đầu, tràng hạt trong tay lần chậm lại","Khóe môi Thái hậu thoáng một nét cười","Thái hậu cho ta ngồi gần hơn thường lệ","Ánh mắt Thái hậu dịu đi đôi phần","Thái hậu sai ma ma rót thêm cho ta chén trà nóng"],
@@ -397,10 +454,13 @@ const TOIL_GEST={
  "emp-":["Hoàng thượng khẽ nhíu mày rồi cầm tấu chương lên","Hoàng thượng ngồi chưa ấm chỗ đã gọi người hầu trà","Hoàng thượng chỉ ừ một tiếng, chẳng hỏi han gì thêm","Ánh mắt Hoàng thượng lướt qua ta rồi dừng ở nơi khác","Hoàng thượng đứng dậy sớm hơn thường lệ"],
  "v+":["Nàng ta nắm tay ta, giọng thân mật hẳn","Nàng ta ghé lại gần, cười như chị em lâu ngày","Nàng ta khen ta trước mặt mọi người","Nàng ta cười tươi, kéo ta đi cùng một đoạn","Nàng ta khẽ gật đầu với ta, vẻ thân thiện"],
  "v-":["Nàng ta cười, nhưng tay vò nát chiếc khăn lụa","Nàng ta liếc ta một cái, sắc như dao","Nàng ta quay sang thì thầm với người bên cạnh","Nàng ta phe phẩy quạt, giọng mát như nước giếng","Nàng ta cười khẩy, quay mặt đi"]};
-function toilLit(r){const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
- const g=TOIL_GEST[k]?kLine("toil-gest:"+k,TOIL_GEST[k]):"";return (g?g+" — ":"")+r.line+"."}
+function toilGest(r){if(r.g!=null)return r.g;const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
+ return r.g=TOIL_GEST[k]?kLine("toil-gest:"+k,TOIL_GEST[k]):""}
+function toilLit(r){const g=toilGest(r);return (g?g+" — ":"")+r.line+"."}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
-function toilReact(r){TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
+/* the gesture is drawn once: the event panel shows it (long form) and the Sổ ghi line of the reaction gets it too (jvoice kLitLog, long form);
+   the result card keeps the short facts (kShort) */
+function toilReact(r){try{toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
@@ -416,14 +476,14 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
   Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
  try{render()}catch(e){}}
 /* hook the three places that apply a reaction */
-(function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
+(function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const s0=S.logSeq||0;const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
   if(t&&n){const k=host==="th"?(n>0?"th-praise":"th-scold"):host==="emp"?(n>0?"emp-like":"emp-dislike"):host&&host.queen?(n>0?"hh-praise":"hh-scold"):null;
    if(k){const who=host==="th"?pTH():host==="emp"?pEmp():pv(host);const nm=host==="emp"?"Sủng":`${toilWho(host)} thiện cảm`;
-    toilReact({k,who,host,n,name:toilWho(host),line:`${t.why.map(w=>w[0]).join(", ")}: ${host==="emp"?(n>0?"Sủng +1":"Sủng -1"):`${nm} ${n>0?"+":""}${n}`}${f.danh?`, Danh ${f.danh}`:""}`,ctx:{mk:t.mk,dress:t.dress}})}}}catch(e){console.error(e)}return r}})();
-(function(){const r0=toilRival;toilRival=function(v,doIt){const e=r0.apply(this,arguments);try{if(doIt&&e){const L=toilLook();const k=L.mk==="diem"&&!e.aff&&!e.g?"rival-tease":e.g?"rival-jealous":e.aff>0?"rival-praise":"rival-jealous";
-  toilReact({k,who:pv(v),host:v,v,n:e.g?-e.g:(e.aff||-1),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
-(function(){const c0=toilCrowd;toilCrowd=function(doIt){const R0=doIt?liveRivals(false).filter(v=>!v.queen&&!v.out).map(v=>[v,v.ghen||0]):[];const e=c0.apply(this,arguments);try{if(doIt&&e&&e.n){
-  const top=R0.map(([v,g])=>[v,(v.ghen||0)-g]).sort((a,b)=>b[1]-a[1])[0];const L=toilLook();if(top)toilReact({k:"crowd-jealous",who:pv(top[0]),host:top[0],v:top[0],n:-e.n,name:top[0].name,line:`phi tần thấy ta ${e.why}: ghen +${e.n}`,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+    toilReact({k,who,host,n,s0,name:toilWho(host),line:`${t.why.map(w=>w[0]).join(", ")}: ${host==="emp"?(n>0?"Sủng +1":"Sủng -1"):`${nm} ${n>0?"+":""}${n}`}${f.danh?`, Danh ${f.danh}`:""}`,ctx:{mk:t.mk,dress:t.dress}})}}}catch(e){console.error(e)}return r}})();
+(function(){const r0=toilRival;toilRival=function(v,doIt){const s0=S&&S.logSeq||0;const e=r0.apply(this,arguments);try{if(doIt&&e){const L=toilLook();const k=L.mk==="diem"&&!e.aff&&!e.g?"rival-tease":e.g?"rival-jealous":e.aff>0?"rival-praise":"rival-jealous";
+  toilReact({k,who:pv(v),host:v,v,s0,n:e.g?-e.g:(e.aff||-1),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+(function(){const c0=toilCrowd;toilCrowd=function(doIt){const s0=S&&S.logSeq||0;const R0=doIt?liveRivals(false).filter(v=>!v.queen&&!v.out).map(v=>[v,v.ghen||0]):[];const e=c0.apply(this,arguments);try{if(doIt&&e&&e.n){
+  const top=R0.map(([v,g])=>[v,(v.ghen||0)-g]).sort((a,b)=>b[1]-a[1])[0];const L=toilLook();if(top)toilReact({k:"crowd-jealous",who:pv(top[0]),host:top[0],v:top[0],s0,n:-e.n,name:top[0].name,line:`phi tần thấy ta ${e.why}: ghen +${e.n}`,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
 
 window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.toilNpc=toilNpc;window.toilOcc=toilOcc;
 

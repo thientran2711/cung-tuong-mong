@@ -256,8 +256,10 @@ function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?s
  /* palace voice: each remark is a pool (jvoice kLine, no repeat), the speaker's self word from the one core (kSay r → p) */
  const sp=r.th?"th":r.v,RK=p===S?(isSrv&&isSrv()?"người hầu cận":rkName(S)):(p.alive!==undefined?rkName(p):"");
  const fill=x=>kSay(sp,p,x).replace(/\{P\}/g,wdNmC(p)).replace(/\{R\}/g,RK).replace(/\{I\}/g,nm);
- const said={ok:fill(kLine("wd:ok",WD_SAY.ok)).replace(/^/,`${R0} `).replace(/\{p\}/g,wdNm(p)),over:`${R0} nhìn ${nm} của ${wdNm(p)} mà nói: ${fill(kLine("wd:over",WD_SAY.over))}`,
-  under:`${R0} cười khẽ: ${fill(kLine("wd:under",WD_SAY.under))}`,
+ /* band = the listener's rank band (jvoice kBand); a remark on someone else (an NPC) is a shared world line: co-op seats show the same one (o.shared) */
+ const VO={band:kBand(p),shared:p===S?undefined:(p.id!=null?p.id:p.name)};
+ const said={ok:fill(kLine("wd:ok",WD_SAY.ok,VO)).replace(/^/,`${R0} `).replace(/\{p\}/g,wdNm(p)),over:`${R0} nhìn ${nm} của ${wdNm(p)} mà nói: ${fill(kLine("wd:over",WD_SAY.over,VO))}`,
+  under:`${R0} cười khẽ: ${fill(kLine("wd:under",WD_SAY.under,VO))}`,
   tang:`${R0} thấy ${wdNm(p)} mặc ${nm} giữa quốc tang.`}[view];
  /* who hears it: p always; others by chance; the player also through her tai mắt */
  for(const o of consorts()){if(o===p)continue;if(o===S?(roll(30+(S.mat||0)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}

@@ -241,7 +241,7 @@ th:{h:"Thái hậu để ý đến {sj}",w:"th",need:["th"],t:"Thái hậu gõ n
  {n:"Xin Thái hậu chỉ bảo",c:{danh:-2},w:{th:8},wx:"Thái hậu thấy ngươi biết điều",rt:"Thái hậu chỉ cho ngươi vài đường."},
  {n:"Thưa rằng đã có tính toán",c:{suc:-3},o:()=>40+S.tai/4+S.th/5,w:{th:4},sc:1,wx:"Thái hậu nể ngươi",l:{th:-8},rt:"Thái hậu khẽ cười: “Được, để ai gia xem.”",rf:"Thái hậu chau mày: “Tự cao.”"},
  {n:"Dâng lễ, khéo xin bà đừng nhúng tay",c:{bac:-40},w:{th:9},wx:"tự mình xoay xở",lx:"Thái hậu sẽ không đỡ ngươi chuyện này",rt:"Thái hậu nhận lễ, để ngươi tự lo."}]},
-emp:{h:"Hoàng thượng hỏi thẳng về {sj}",w:"emp",t:"Đêm ấy Hoàng thượng đặt chén trà xuống: “Trẫm nghe về {sj}. Nàng nói thật cho trẫm.”",o:[
+emp:{h:"Hoàng thượng hỏi thẳng về {sj}",w:"emp",t:"Đêm ấy Hoàng thượng đặt chén trà xuống: “Trẫm nghe về {sj}. {Goi} nói thật cho trẫm.”",o:[
  {n:"Nói thật hết",c:{sung:-3},w:{duc:3},sc:1,wx:"Hoàng thượng tin ngươi hơn",rt:"Hoàng thượng im lặng hồi lâu rồi nắm tay ngươi."},
  {n:"Nói nửa thật nửa che",c:{},o:()=>45+S.tamco/3+S.sung/6,w:{sung:4},wx:"qua được đêm nay",l:{sung:-6},lx:"ngài nghi ngươi",rt:"Hoàng thượng gật gù, không hỏi thêm.",rf:"Hoàng thượng nhíu mày: nàng có điều giấu trẫm."},
  {n:"Xin ngài đừng hỏi, để thiếp tự lo",c:{sung:-2},w:{tamco:2},wx:"giữ được thế chủ động",lx:"ngài phật ý đôi chút",rt:"Hoàng thượng thở dài, chiều theo ngươi."}]},
@@ -497,7 +497,7 @@ ARC67.dtq_binh={o:"dtq",t:"Binh phù và long ngai",w:"emp",sj:"chuyện binh qu
  t1:{h:"Đêm Vạn thọ",w:"emp",t:"Trong yến Vạn thọ, Hoàng thượng nâng chén mời cha ngươi, ánh mắt như dò hỏi.",o:[
   {n:"Đỡ lời cha, nói cha muốn về vườn",c:{},o:A=>45+(A.f.king?15:0),sc:1,wx:"mở đường cho cha",l:{danh:-3},rt:"Cha ngươi lặng người rồi nâng chén.",rf:"Cha trừng mắt nhìn ngươi."},
   {n:"Im lặng, để cha tự đáp",c:{},w:{tamco:2},wx:"không gánh trách nhiệm",lx:"cha đáp vụng",rt:"Cha chỉ nói ‘thần già rồi’."}]},
- x1:{h:"Binh phù",w:"emp",t:"Hoàng thượng triệu ngươi: “Trẫm muốn cha nàng giao binh phù. Nàng giúp trẫm, hay giúp cha?”",o:[
+ x1:{h:"Binh phù",w:"emp",t:"Hoàng thượng triệu ngươi: “Trẫm muốn cha {goi} giao binh phù. {Goi} giúp trẫm, hay giúp cha?”",o:[
   {n:"Thuyết phục cha giao binh phù, đổi lấy tước vị",c:{suc:-4},o:A=>40+(A.f.king?15:0)+S.danh/8,e:["win","mid"],rt:"Cha giao binh phù, được phong Quốc công.",rf:"Cha giao binh phù nhưng lòng không vui."},
   {n:"Xin ngài để cha giữ binh",c:{sung:-3},o:A=>30+(A.f.dad?15:0)+S.sung/6,e:["win2","lose"],rt:"Hoàng thượng ngẫm nghĩ, cho cha giữ quân thêm.",rf:"Hoàng thượng nổi giận, tước binh quyền của cha."},
   {n:"Thưa: việc nước, thiếp không dám bàn",c:{sung:-2},w:{duc:3},e:"mid",lx:"cả hai bên thất vọng",rt:"Hoàng thượng thở dài."}]}},

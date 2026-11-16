@@ -106,7 +106,7 @@ Nguồn đối chiếu (chuyên gia, sếp OD:L1327): bản lồng tiếng / ph�
 | Phi tần dưới Tần → phi tần thấp hơn | ta | muội muội / muội | chưa làm chủ vị thì không "bổn cung" |
 | Phi tần ngang phẩm, thân | muội / tỷ | tỷ tỷ / muội muội (theo tuổi) | "hai ta" được |
 | Phi tần ngang phẩm, ghét | ta | "‹phẩm› muội muội" giọng mát mẻ | lời ngọt mà gai, xem 2.4 |
-| Hoàng thượng → phi tần | trẫm | ái phi (sủng cao) · "‹phẩm›" / tên hiệu (bình thường) · ngươi (giận) | gọi Hoàng hậu: "Hoàng hậu"; gọi Thái hậu: "mẫu hậu" |
+| Hoàng thượng → phi tần (cả người chơi, kể cả khi nàng là Hoàng hậu) | trẫm | **chỉ hai chữ** (sếp 16/11 ~21:05Z): **nàng** (Sủng dưới `BAL.voice.aiPhi`) · **ái phi** (Sủng từ `BAL.voice.aiPhi`); không gọi phẩm, không "ngươi"; lời ngắn, không dài dòng | gọi Hoàng hậu (người khác): "Hoàng hậu"; gọi Thái hậu: "mẫu hậu" |
 | Thái hậu → phi tần | ai gia | con (thương, hiếm) · "‹phẩm›" (bình thường) · ngươi (giận, răn) | gọi Hoàng thượng: "Hoàng đế"; gọi Hoàng hậu: "Hoàng hậu" |
 | Hoàng hậu → phi tần | bổn cung | muội muội · "‹phẩm›" khi răn · ngươi khi trị tội | |
 | Kẻ hầu → chủ mình | nô tỳ (nữ) · nô tài (thái giám) | tiểu chủ (chủ dưới Tần) · nương nương (chủ từ Tần) · **chủ tử** (lúc thân, lo lắng, khuyên can) | |
@@ -119,6 +119,10 @@ Nguồn đối chiếu (chuyên gia, sếp OD:L1327): bản lồng tiếng / ph�
 | Chế độ cung nữ (người chơi là kẻ hầu) | nô tỳ | chủ gọi: tên / ngươi | |
 
 **Quy tắc phẩm:** Đáp ứng, Thường tại, Quý nhân = **tiểu chủ**; Tần, Phi, Quý phi, Hoàng quý phi = **nương nương**; Hoàng hậu = **Hoàng hậu nương nương**. Gọi bằng phẩm: có phong hiệu thì hiệu + phẩm ("Hy tần", "Uyển quý nhân"); phẩm một chữ không có hiệu thì họ + phẩm ("Từ phi", "Âu Dương tần"), không gọi trống "Phi", "Tần". Bị biếm vào lãnh cung: kẻ hầu vẫn gọi theo phẩm cũ nếu còn trung, kẻ bạc bẽo gọi trống "ngươi" (chỉ trong cảnh lãnh cung). Không bao giờ dùng: bạn, tôi, em, anh, chị (trừ "chị em" kết nghĩa), mình (trừ "một mình", phản thân trong lời kể).
+
+**Câu hợp phẩm người nghe (sếp 16/11 ~21:05Z):** mỗi chùm câu chia theo **bậc phẩm của người nghe** (`kBand`, jvoice): **lo** = tiểu chủ (Đáp ứng, Thường tại, Quý nhân) · **mid** = chủ một cung (Tần, Phi) · **hi** = Quý phi, Hoàng quý phi · **hq** = Hoàng hậu. Câu chỉ hợp một bậc mang thẻ đầu câu `[lo]`, `[mid,hi]`…; câu không thẻ phải hợp mọi bậc. Câu kiểu "nhớ thời mình mới vào cung" chỉ nói với tiểu chủ, không bao giờ với Quý phi; "chủ một cung", "mẫu nghi thiên hạ" không nói với Thường tại. Khi nàng là Hoàng hậu, mọi người gọi "Hoàng hậu nương nương", tự xưng "thần thiếp". Test: `dev/test/voice-band.js`.
+
+**Chơi chung:** câu của một sự việc chung (người khác nói về một phi tần khác…) truyền `o.shared` cho `kLine`: hai bên cùng thấy một câu (xoay theo tuần + buổi, không lấy ngẫu nhiên riêng).
 
 ### 2.3 Lời lễ (dùng trong thỉnh an, nhận chỉ, tạ tội)
 - Thỉnh an: "Thần thiếp thỉnh an Hoàng hậu nương nương, nương nương vạn phúc kim an." — đáp: "Đứng lên đi." / "Bình thân."
@@ -143,13 +147,15 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm 
 | Có rủi ro | Được ăn cả, ngã về không |
 | Không đổi gì | Gió lặng sóng yên, chẳng ai để tâm |
 
+**Hai dạng, một hàm (sếp 16/11 ~21:05Z):** cùng một dòng được / mất có **dạng NGẮN** — ô kết quả nhỏ dưới màn hình sau mỗi việc (`#rtoast`, chỉ thông tin) — và **dạng DÀI văn chương** — ô sự kiện, TIN, Sổ ghi, Tuần lục. Lõi: `kGL(ngắn, văn)` / `kLitLog(seq0, văn)` trong jvoice bọc phần văn trong `<span class="klit">`; ô kết quả gọi `kShort` (bỏ phần văn), mọi chỗ khác hiện đủ. Không viết hai câu riêng ở hai nơi.
+
 ### 2.6 Ví dụ trước / sau
 | Trước | Sau |
 |---|---|
 | (Thái hậu, ngày nào cũng vậy) “Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.” | chùm câu theo tình: “Quý nhân hôm nay ăn vận đúng mực, ai gia nhìn cũng thấy yên lòng.” · “Đoan trang mà không phô trương, mới ra dáng người trong cung.” · “Con biết giữ lễ, ai gia có lời khen.” … không lặp trong mấy ngày |
 | (Hoàng hậu) “Muội ăn vận lộng lẫy như vậy, định át cả bổn cung sao?” | “Muội muội hôm nay rực rỡ quá, hoa nở rộ thì e chẳng bền đâu.” |
 | (cung nữ, chủ là Thường tại) “Nương nương nghỉ sớm đi.” | “Tiểu chủ nghỉ sớm đi.” · lúc lo lắng: “Chủ tử, người phải giữ sức.” |
-| (Hoàng thượng giận) “Ái phi làm gì vậy?” | “Ngươi làm gì vậy?” |
+| (Hoàng thượng, Sủng thấp) “Quý nhân hôm nay khác hẳn mọi ngày, trẫm suýt không nhận ra.” | “Nàng hôm nay khác hẳn.” (Sủng cao: “Ái phi hôm nay khác hẳn.”) |
 | (phi tần Thường tại nói với Phi) “Ta không dám.” | “Tần thiếp không dám, Phi nương nương.” |
 
 ## 3. Không có trên màn hình

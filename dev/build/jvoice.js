@@ -20,7 +20,9 @@ function who(x){
   if(x==="emp"||(typeof S!=="undefined"&&S&&x===S.emp)||x.kind==="emp")return{k:"emp",r:9};
   if(x==="th"||x.kind==="th")return{k:"th",r:10};
   if(x==="hh")return{k:"hh",r:7};
-  if(typeof S!=="undefined"&&x===S){const srv=typeof isSrv==="function"&&isSrv();return srv?{k:"srv",f:1,me:1,name:S.name}:{k:"con",r:S.rank|0,me:1,o:S,out:!!S.cold}}
+  if(typeof S!=="undefined"&&x===S){const srv=typeof isSrv==="function"&&isSrv();if(srv)return{k:"srv",f:1,me:1,name:S.name};
+    /* she herself is Hoàng hậu: addressed as the Empress by everyone (Hoàng hậu nương nương, thần thiếp) — Hoàng thượng keeps nàng / ái phi */
+    if((S.rank|0)>=V().hq&&!S.cold)return{k:"hh",r:7,me:1,o:S};return{k:"con",r:S.rank|0,me:1,o:S,out:!!S.cold}}
   if(x.srv)return{k:x.srv==="m"?"eun":"srv",name:x.name};
   if(x.kid)return{k:"kid",name:x.name};
   if(x.role&&x.rw)return{k:x.rw==="thị vệ"?"guard":"off",name:x.name};
@@ -42,7 +44,9 @@ function kAddr(sp,ls,o){o=o||{};const s=who(sp),l=who(ls),m=mood(s,l,sp,ls,o),T=
   else if(l.k==="srv"||l.k==="eun"||l.k==="off"||l.k==="guard")goi=o.name||l.name||"ngươi";
   else{/* a consort (the player, a rival, the Empress heard by Emperor / Thái hậu) */
     const H=l.k==="hh";
-    if(s.k==="emp")goi=H?"Hoàng hậu":m==="cold"?"ngươi":m==="warm"?"ái phi":T;
+    /* owner 16/11 ~21:05Z (verbatim rule, OD): Hoàng thượng calls a consort ONLY "nàng" (low Sủng) or "ái phi" (Sủng >= BAL.voice.aiPhi) —
+       nothing longer, never a title, never "ngươi" (an NPC Hoàng hậu stays "Hoàng hậu") */
+    if(s.k==="emp")goi=H&&!l.me?"Hoàng hậu":sungOf(l)>=V().aiPhi?"ái phi":"nàng";
     else if(s.k==="th")goi=H?"Hoàng hậu":m==="cold"?"ngươi":m==="warm"?"con":T;
     else if(s.k==="hh")goi=m==="cold"?"ngươi":m==="warm"?"muội muội":T||"muội muội";
     else if(s.k==="con"){const d=(s.r|0)-(l.r|0);
@@ -69,6 +73,15 @@ function kSpk(a){if(!a)return null;const k=a.k,o=a.o;try{
   if(k==="maid"||k==="fam"||k==="mama")return{srv:"f",name:o&&o.name};if(k==="eun"||k==="ksp")return{srv:"m",name:o&&o.name};
   if(k==="doc"||k==="off")return{role:"x",rw:"quan",name:o&&o.name};if(k==="ak"||k==="kid")return{kid:1,name:o&&o.name};
   if(k==="man")return o;if(o&&(o.rank!=null||o.queen))return o}catch(e){}return null}
+function sungOf(w){try{return w.me?(S.sung||0):(w.o&&w.o.sung)||0}catch(e){return 0}}
+/* RANK BAND of a listener (owner 16/11 ~21:05Z: a line must fit the listener's rank; a "mới vào cung" line never goes to a Quý phi):
+   lo = below BAL.voice.nuong (tiểu chủ: Đáp ứng, Thường tại, Quý nhân) · mid = below BAL.voice.hi (Tần, Phi) · hi = the rest below Hoàng hậu
+   (Quý phi, Hoàng quý phi) · hq = Hoàng hậu. A pooled line may start with a tag "[lo]", "[mid,hi]", "[lo,mid,hi]"… : it is said only to
+   those bands; an untagged line fits every band. */
+function kBand(x){const w=who(x==null?S:x);if(w.k==="hh")return"hq";if(w.k!=="con")return"lo";const r=w.r|0;return r>=V().hq?"hq":r>=V().hi?"hi":r>=V().nuong?"mid":"lo"}
+const TAG=/^\[([a-z,]+)\]\s*/;
+function fits(line,band){const m=TAG.exec(line);return !m||m[1].split(",").includes(band)}
+const untag=x=>String(x).replace(TAG,"");
 function older(a,b){try{return (a&&a.age||0)>=(b&&b.age||0)}catch(e){return true}}
 function kSay(sp,ls,s,o){if(s==null)return s;s=String(s);if(!/\{(?:[Gg]oi|[Xx]ung|[Tt]en)\}/.test(s))return s;const a=kAddr(sp,ls,o);
   return s.replace(/\{goi\}/g,a.goi).replace(/\{Goi\}/g,cap(a.goi)).replace(/\{xung\}/g,a.xung).replace(/\{Xung\}/g,cap(a.xung)).replace(/\{ten\}/g,a.ten).replace(/\{Ten\}/g,cap(a.ten))}
@@ -76,16 +89,22 @@ function kSay(sp,ls,s,o){if(s==null)return s;s=String(s);if(!/\{(?:[Gg]oi|[Xx]un
 const REG={};
 function now(){try{return typeof wk==="function"?wk():0}catch(e){return 0}}
 function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
-  REG[key]=pool;if(!L.length)return"";let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
+  REG[key]=pool;if(!L.length)return"";
+  {const bd=o.band||kBand(o.ls!=null?o.ls:S);const F=L.filter(x=>fits(x,bd));L=F.length?F:L.filter(x=>!TAG.test(x));if(!L.length)return""}
+  /* co-op (owner CO-OP FIRST): a line of a SHARED event (o.shared = a seed both seats know) is not drawn at random from her own memory:
+     it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
+  if(o.shared!=null){let h=0;const sd=key+"|"+o.shared;for(let i=0;i<sd.length;i++)h=(h*31+sd.charCodeAt(i))|0;let t3=0;try{t3=now()*3+(S.buoi|0)}catch(e){}
+    const line=untag(L[((Math.abs(h)+t3)%L.length+L.length)%L.length]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
+  let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
   /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
      → the same line, so a rebuild does not use up the pool */
-  let bu="";try{bu=t+"."+(S.buoi||0)}catch(e){}if(mem.__b===bu&&mem.__l&&L.includes(mem.__l)){const l0=mem.__l;return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,l0,o):l0}
+  let bu="";try{bu=t+"."+(S.buoi||0)}catch(e){}if(mem.__b===bu&&mem.__l&&L.includes(mem.__l)){const l0=untag(mem.__l);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,l0,o):l0}
   const fresh=L.filter(x=>mem[x]==null||t-mem[x]>=gap||t<mem[x]);
   const pickFrom=fresh.length?fresh:L.slice().sort((a,b)=>(mem[a]==null?-1e9:mem[a])-(mem[b]==null?-1e9:mem[b])).slice(0,1);
   const line=pickFrom[Math.floor(Math.random()*pickFrom.length)];
   try{mem[line]=t;mem.__b=bu;mem.__l=line;const ks=Object.keys(mem);if(ks.length>40)for(const k of ks)if(k.slice(0,2)!=="__"&&t-mem[k]>gap*4)delete mem[k]}catch(e){}
-  return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
+  const said=untag(line);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,said,o):said}
 /* ---- outcome flavour (VANPHONG §2.5): one short court-voice sentence before the plain numbers of a talk / visit result ----
    kOutcome(kind, ok): kind = the person's kind on the stage (th, emp, hh, rival, fallen, maid, ksp, ty, elder, man, kid); pooled, no repeat */
 const OUT={
@@ -99,8 +118,39 @@ const OUT={
   no:["Nàng ta cười nhạt, tay mân mê chén trà","Nàng ta bảo đang mệt, chẳng tiện tiếp lâu","Lời qua tiếng lại, ai cũng giữ ý","Nàng ta phe phẩy quạt, giọng mát như nước giếng","Nàng ta nói chuyện thời tiết, khéo tránh mọi điều ta hỏi","Người hầu bên nàng ta cứ đứng sát, chẳng nói được gì riêng","Nàng ta cười khẽ, ánh mắt như dò xét"]},
  maid:{ok:["Người hầu cúi đầu vâng dạ, mắt sáng lên","Kẻ dưới thấy ta tử tế, làm việc càng chăm","Người hầu lui ra, bước chân nhẹ hẳn"],no:["Người hầu cúi gằm, chẳng dám nói thêm","Kẻ dưới vâng dạ cho qua, lòng chẳng phục","Người hầu lui ra, sắc mặt khó coi"]},
  any:{ok:["Mọi việc trôi chảy như ý","Người nghe gật gù, lòng đã xuôi","Lời ta nói ra, người kia nghe lọt tai"],no:["Việc chẳng thành, đành hẹn dịp khác","Người kia lắc đầu, chẳng chịu nghe","Ta về tay không, lòng chẳng vui"]}};
+/* rank-band lines (owner 16/11 ~21:05Z): said only to her band (jvoice kBand: lo / mid / hi / hq) */
+OUT.th.ok.push("[lo]Thái hậu dặn ta: mới vào cung, việc gì chưa rõ cứ sang hỏi","[mid]Thái hậu hỏi han việc trong cung ta, dặn trông nom người dưới cho khéo","[hi]Thái hậu giao ta chép kinh cho lễ Phật đản, ý rất tin cậy","[hq]Thái hậu bàn với ta việc lục cung, lời lẽ như mẹ con");
+OUT.th.no.push("[lo]Thái hậu chẳng nhớ tên ta, ma ma phải khẽ nhắc","[mid]Thái hậu nhắc: chủ một cung thì phải coi sóc người dưới cho nghiêm","[hi]Thái hậu nhắc: phẩm càng cao càng phải biết lùi","[hq]Thái hậu bảo: người ngồi Trung cung phải biết nhịn");
+OUT.hh.ok.push("[lo]Hoàng hậu dặn ta có gì chưa rõ thì cứ đến Càn Ninh cung","[mid]Hoàng hậu khen cung ta nề nếp, người dưới biết phép","[hi]Hoàng hậu bàn với ta đôi việc lục cung, như với cánh tay phải");
+OUT.hh.no.push("[lo]Hoàng hậu hỏi ma ma ta ở cung nào, rồi thôi chẳng nói","[mid]Hoàng hậu nhắc khéo: chủ một cung mà để người dưới lắm điều","[hi]Hoàng hậu ngoài mặt khách khí, lời nào cũng giữ khoảng cách");
+OUT.emp.ok.push("[lo]Hoàng thượng hỏi tên ta, rồi khẽ nhắc lại như để nhớ","[mid]Hoàng thượng hứa mai sẽ ghé cung ta","[hi]Hoàng thượng kể ta nghe chuyện triều chính, như với người tâm phúc","[hq]Hoàng thượng bàn với ta việc lục cung, giọng ôn hòa");
+OUT.emp.no.push("[lo]Hoàng thượng nhìn ta như nhìn người xa lạ","[mid]Hoàng thượng hỏi qua chuyện cung ta rồi thôi","[hi]Hoàng thượng chỉ bảo ta về nghỉ, giọng nhạt","[hq]Hoàng thượng bảo việc lục cung để mai hãy bàn");
 OUT.fallen=OUT.rival;OUT.ksp=OUT.maid;OUT.ty=OUT.any;OUT.elder=OUT.maid;OUT.man=OUT.any;OUT.kid=OUT.any;
 function kOutcome(kind,ok){const P=OUT[kind]||OUT.any;return kLine("out:"+(OUT[kind]?kind:"any")+":"+(ok?"ok":"no"),ok?P.ok:P.no)}
 window.kOutcome=kOutcome;
+/* ---- ONE gain / loss text, TWO forms (owner 16/11 ~21:05Z, verbatim in OD): SHORT = the small result card at the bottom after each act
+   (#rtoast: info only), LONG (literary) = event panels, TIN, Sổ ghi, Tuần lục. One string carries both: the literary part is wrapped in
+   <span class="klit">…</span>; kShort(h) drops it (the result card), every other place shows the whole line (kLong).
+     kGL(short, lit)       → the two-form line: "<span class=klit>lit. </span>short"
+     kLitLog(seq0, lit)    → adds the literary part to the newest Sổ ghi line written since S.logSeq was seq0 (the act's own line), so the
+                             log keeps the long form while the result card (built from the same line) shows the short one; returns lit */
+const KLIT=/<span class="klit">[\s\S]*?<\/span>/g;
+function kGL(sh,lit){lit=String(lit||"").trim().replace(/[.!…]+$/,"");return lit?`<span class="klit">${lit}. </span>${sh||""}`:String(sh||"")}
+function kShort(h){return String(h==null?"":h).replace(KLIT,"")}
+function kLitLog(seq0,lit){try{if(!lit||!S||!S.logs||!S.logs.length||(S.logSeq||0)<=seq0||/class="klit"/.test(S.logs[0]))return lit;
+  const h=S.logs[0],m=/^<span class="ld">[^<]*<\/span>/.exec(h),pre=m?m[0]:"";S.logs[0]=pre+kGL(h.slice(pre.length),lit)}catch(e){}return lit}
+/* ---- SIGNATURE HABIT of a consort (palace-voice phase D): each consort has one small habit by her trait (TRAITS j1), fixed for her life
+   (picked from her id, so both co-op seats see the same one, nothing stored); shown in the long form only (event panels), every other
+   occurrence (week parity) so it marks her without wearing out. kHabit(v) → sentence or "" */
+const HABIT={"Hiểm độc":["Nàng ta khẽ vuốt chiếc hộ giáp bạc trên ngón út","Nàng ta lần chuỗi ngọc trên cổ tay, mắt không rời ta","Nàng ta mỉm cười, tay mân mê túi hương bên hông","Nàng ta khẽ thổi chén trà, mà chẳng uống"],
+ "Kiêu ngạo":["Nàng ta phe phẩy chiếc quạt lông công, cằm hơi ngẩng","Nàng ta đưa tay chỉnh lại cây trâm phượng trên tóc","Nàng ta liếc ta một cái rồi nhìn đi chỗ khác","Nàng ta gõ nhẹ hộ giáp vàng lên tay ghế"],
+ "Hiền lành":["Nàng ta khẽ cười, hai má ửng hồng","Nàng ta vén lọn tóc mai, giọng nhỏ nhẹ","Nàng ta nắm chiếc khăn tay thêu hoa lan","Nàng ta cúi đầu, tay đặt ngay ngắn trước người"],
+ "Đa nghi":["Nàng ta liếc nhanh về phía người hầu của ta","Nàng ta khẽ nhíu mày, ngón tay gõ lên mép bàn","Nàng ta nhìn quanh một lượt rồi mới nói","Nàng ta nheo mắt, như cân từng chữ"],
+ "Tham vọng":["Nàng ta đưa mắt về phía Càn Thanh cung","Nàng ta mỉm cười, ánh mắt tính toán","Nàng ta vuốt thẳng tà áo, dáng đứng thẳng tắp","Nàng ta khẽ gật đầu, như đã ghi nhớ điều gì"],
+ "Nhu mì":["Nàng ta cúi đầu, giọng nhỏ như muỗi kêu","Nàng ta mân mê vạt áo, chẳng dám ngẩng lên","Nàng ta đỏ mặt, nép sau người hầu","Nàng ta nói xong vội lấy khăn che miệng"]};
+function hsh(x){let h=0;x=String(x);for(let i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return Math.abs(h)}
+function kHabit(v,always){try{if(!v||v===S||!HABIT[v.trait])return"";if(!always&&now()%2)return"";const L=HABIT[v.trait];return L[hsh(v.id!=null?v.id:v.name)%L.length]}catch(e){return""}}
+window.kHabit=kHabit;window.kHabits=()=>HABIT;
+window.kGL=kGL;window.kShort=kShort;window.kLong=h=>String(h==null?"":h);window.kLitLog=kLitLog;window.kBand=kBand;
 window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;
 })();
