@@ -237,4 +237,4 @@
 | kit-size (opus, kit keeper; OD 15:00Z s17 kit review): 4-size system for frames / figures / pictures / action buttons, button layouts (square pic left + info), VIỆC DÀI layout, empty space, catalogue WHERE+SIZE; sample sheet first | review/kit-size | main s18 | session_01UV1Szk9smUkxoioTZMD7KJ | RUNNING | 16/11 15:25Z |
 | kit-marks (sonnet; OD 15:00Z): gold Emperor/Thái hậu, text-line rank+name one colour, bare ink ✓/✗, relations two columns no bars, no ± boxes, KẾT QUẢ seal orange, place icon above name, fix empty samples 2.2/3.6, one 'Tinh phẩm' chip; sample sheet first | review/kit-marks | main s18 | session_01UV1SzjfpYasXCkBCSB3ais | RUNNING | 16/11 15:25Z |
 | figure-proportion audit + backs-only night/transition art (OD 15:00Z 1.1/1.7) | (Foreman C) | C | — | INBOX 15:25Z | 16/11 15:25Z |
-| tham-flip-ui review (sonnet; a27f525b2; merge main 5682ce6f; reviewer may fix) | review/tham-flip-ui-r1 | main s18 | (opening) | RUNNING | 16/11 15:28Z |
+| tham-flip-ui review (sonnet; a27f525b2; merge main 5682ce6f; reviewer may fix) | review/tham-flip-ui-r1 | main s18 | session_01UV1SzhgZtmqQ7d2jmf5wDs | RUNNING | 16/11 15:28Z |
