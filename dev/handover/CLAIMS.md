@@ -319,3 +319,4 @@
 | night-steal fix r1 (opus): her row 30 % vs NPC 16–23 % — find asymmetry, no player shield | review/night-steal-2 | main s21 | session_01UV1SzgwHdcVz2uVRLdV3SN | RUNNING | 16/11 18:27Z |
 | chonso-cloud (sonnet; owner UI): Sổ mây row in Chọn sổ (Một mình tab), same jcloud flows; base chonso-tabs | review/chonso-cloud | main s21 | session_01UV1SzhtbwfLqLoE2yRviHi | RUNNING | 16/11 18:28Z |
 | pl-courtyards review r1 (sonnet) of d98df6602 (+ exact MISSING table = C paint order) | review/pl-courtyards-r1 | main s21 | session_01UV1SzicVqzEzvngQp4ujo4 | RUNNING | 16/11 18:30Z |
+| go-live-kit review r2 (sonnet, BIG) of 35d6206c | review/go-live-kit-r2 | main s21 | session_01UV1Szh1sDq4htTKesRN96t | RUNNING | 16/11 18:31Z |
