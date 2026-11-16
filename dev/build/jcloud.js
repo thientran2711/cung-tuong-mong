@@ -1,5 +1,5 @@
 /* ================= jcloud: SỔ MÂY — one character on phone AND iPad (owner 15/11, C44, review/cloud-save) =================
-   Thiết lập › Sổ mây: "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
+   Chọn sổ › Một mình (top, above the 3 sổ; owner 16/11) AND Thiết lập › Sổ mây — the same part (miniHTML/sectionHTML + btnsHTML): "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
    8-letter ám hiệu sổ (owner design; Crockford base32, guessing stopped by the Worker's per-network miss guard); "Nối sổ" + that ám hiệu links another device. Local-first: the sổ stay in localStorage
    (j6 SK(n)), the cloud is a copy.
    SYNC (run): base = the cloud version this device last matched (C.rev + per-sổ hashes C.h). For each sổ one/hai/ba:
@@ -58,7 +58,7 @@ const playing=()=>T.hidden&&typeof S==="object"&&S&&!S.dead;
 let BUSY=null,AGAIN=false,STATE="";
 function sync(o){if(!C.k)return Promise.resolve("");if(BUSY){AGAIN=true;return BUSY}
  STATE="busy";wire();BUSY=(async()=>{let r="";try{for(let i=0;i<3;i++){r=await run(o||{});if(r!=="retry")break}}catch(e){console.error(e);r="err"}
-  BUSY=null;STATE="";if(r==="ok"||r==="same")C.err="";saveC();wire();if(AGAIN){AGAIN=false;setTimeout(()=>sync(o),50)}
+  BUSY=null;STATE="";if(r==="ok"||r==="same"){C.err="";C.sy=Date.now()}saveC();wire();if(AGAIN){AGAIN=false;setTimeout(()=>sync(o),50)}
   if(C.pend&&!T.hidden)setTimeout(()=>{if(!T.hidden&&PG!=="pick")open("pick")},30);return r})();return BUSY}
 async function run(o){
  if(C.pend&&!o.resolve)return "conflict";
@@ -115,21 +115,27 @@ const group=k=>String(k||"").replace(/(.{4})(?=.)/g,"$1-");
 function slotLine(s){return s?[`${s.w||""} ${s.n||""}`.trim(),s.d||""].filter(Boolean).join(" · "):"Chưa ghi"}
 
 /* ---------- Thiết lập section (.cloudwrap, borrowed by j74 like .optwrap / .xiowrap) ---------- */
+/* ONE button set for the two places that show Sổ mây (Chọn sổ › Một mình, Thiết lập): same words, same data-cl flows, no second implementation */
+function btnsHTML(){if(!C.k)return `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div>`;
+ return `<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Đồng bộ ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div>`}
+const mask=k=>{k=String(k||"");return k.length>=8?"••••-••"+esc(k.slice(-2)):"••••-••••"};
 function sectionHTML(){let h=`<div class="kslot"><h4 class="kpst">Sổ mây</h4>`;
- if(!C.k)return h+kitRows([["Sổ mây","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+
-  `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div></div>`;
+ if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+btnsHTML()+`</div>`;
  const w=stateWord();
- h+=kitRows([["Sổ mây",esc(w[0]),w[1]]].concat(C.at?[["Gửi sau cùng",esc(fmtAt(C.at)),"n"]]:[]));
- h+=`<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Gửi ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div></div>`;
- return h}
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]]].concat(C.at?[["Gửi sau cùng",esc(fmtAt(C.at)),"n"]]:[]))+btnsHTML()+`</div>`}
+/* Chọn sổ › Một mình, above the 3 sổ (j74 drawSlots): one compact card, the state + the same buttons */
+function miniHTML(){const h=`<div class="kslot cloudmini"><h4 class="kpst">Sổ mây</h4>`;
+ if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây · chơi tiếp trên máy khác","n"]])+btnsHTML()+`</div>`;
+ const w=stateWord();
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]],["Ám hiệu",mask(C.k)+(C.sy||C.at?" · đồng bộ lúc "+esc(fmtAt(C.sy||C.at)):""),"n"]])+btnsHTML()+`</div>`}
 function wire(){let w=document.querySelector("#modal .cloudwrap")||T.querySelector(".cloudwrap");
  if(!w){const box=T.querySelector(".tbox");if(!box)return;w=document.createElement("div");w.className="cloudwrap";box.appendChild(w)}
- w.innerHTML=sectionHTML();if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
+ w.innerHTML=sectionHTML();try{document.querySelectorAll("#slots .cloudmini").forEach(e=>{e.outerHTML=miniHTML()})}catch(e){}if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
 
 /* ---------- sub-panels: kit scene panels on the title backdrop (as the co-op lobby) ---------- */
 let LM=null,PG="",MSG="",PICK={},VERS=null,ASK=0;
 function drop(){if(!LM)return;const i=Q.indexOf(LM);if(i>=0)Q.splice(i,1);LM=null;const M=$("modal");if(M&&Q.length)showModal();else if(M){M.hidden=true;M.classList.remove("kptitle","kpscene")}}
-const HEAD={code:["Ám hiệu sổ mây","Gõ ám hiệu này ở máy kia: Thiết lập › Sổ mây › Nối sổ."],link:["Nối sổ","Gõ ám hiệu sổ mây của máy kia."],
+const HEAD={code:["Ám hiệu sổ mây","Gõ ám hiệu này ở máy kia: Chọn sổ › Một mình › Sổ mây › Nối sổ."],link:["Nối sổ","Gõ ám hiệu sổ mây của máy kia."],
  pick:["Hai bản sổ khác nhau","Sổ này đã được chơi trên cả hai máy. Chọn bản giữ lại."],vers:["Các bản đã giữ","Mười bản gần nhất trên mây."]};
 function body(pg){
  if(pg==="code")return kitInput({id:"cl-key",label:"Ám hiệu sổ mây",value:group(C.k),readonly:true})+
@@ -204,7 +210,7 @@ function buoiKey(){try{return S&&!S.dead?[S.year,S.month,S.tuan,S.buoi||0].join(
 {const f=save;save=function(){const r=f.apply(this,arguments);try{const k=buoiKey();if(k&&lastB&&k!==lastB&&C.k&&playing())setTimeout(()=>sync(),1500);if(k)lastB=k}catch(e){}return r}}
 document.addEventListener("visibilitychange",()=>{if(!C.k)return;if(document.visibilityState==="hidden"){try{if(playing())save()}catch(e){}sync({keep:1})}else if(!T.hidden)pull()});
 addEventListener("pagehide",()=>{if(C.k)sync({keep:1})});
-window.CTM_CLOUD={wire,sync,get state(){return C},open:pg=>pg==="vers"?vers():open(pg),hash,_reload(){loadC();wire()}};
+window.CTM_CLOUD={mini:miniHTML,wire,sync,get state(){return C},open:pg=>pg==="vers"?vers():open(pg),hash,_reload(){loadC();wire()}};
 wire();
 setTimeout(()=>{if(C.k&&!T.hidden)pull()},1500);
 }catch(e){console.error(e)}})();
