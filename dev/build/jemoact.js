@@ -58,10 +58,10 @@ Object.assign(BAL,{ea:{
  /* (4) EVERY OTHER KIND OF PERSON (review r1 FAIL #1: men, officials, children, the Emperor, Thái hậu — gain AND loss on that person + a
     line she can see). Each kind pays in its OWN real stat:
     m = men (thị vệ, thái y, vương gia, nhạc sư, sứ thần, họa sư): loy = Lòng (standing in his post), tinh = his regard for her (shown on his
-        card), away = tuần he is sent home (off the map, cannot be met), xAway = the same after an extreme;
+        card), away = tuần he is sent home (off the map, cannot be met), xAway = the same after an extreme; knT / knA = his regard / favour at which he counts as knowing her (a feast lifts his regard);
     o = court eunuchs + Thái y viện (S.court): af = their favour toward the consorts (Tổng quản's help, the Thái y's loyalty);
     q = ministers (Triều đình, S.trieu.H): pow = standing at court, rel = clan relation, dPow = a pow change in a tuần that stirs a
-        feeling (20 + 3 × change, at most vMax; bot r1 of this branch at dPow 4 with no fading: 12 extremes a 100 tuần, far too many);
+        feeling (v0 + vK × change, at most vMax; bot r1 of this branch at dPow 4 with no fading: 12 extremes a 100 tuần, far too many);
     k = children: hp = health, fond = the Emperor's fondness (heir choice), tal = learning;
     e = the Emperor: sung = Sủng of the consort(s) it lands on, kho = the realm treasury (j55 S.trieu.kho) a bestowal of his / Thái hậu's costs, ill = % a chill after drinking alone, away = his chance to turn a tablet ×
         this in the tuần he vents (acts) / 0 after drinking alone;
@@ -69,7 +69,7 @@ Object.assign(BAL,{ea:{
         to chant with her (Sức −, Thái hậu +);
     act = share of the outburst numbers an emotion ACT costs (a calmer vent the person chooses); one = the small step of a light price (ministers / court / children); sick = % a sad / anxious outburst ends in
     illness (the everyone-illness of jface: heals / worsens by the same monthly rule). */
- nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1,khoMin:50},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15,one:1},
+ nk:{m:{loy:6,tinh:5,away:1,xAway:3,knT:10,knA:5},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55,v0:20,vK:3},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1,khoMin:50},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15,one:1},
  /* (6) QUỞ TRÁCH BY TEMPER + MOOD (audit row built): the Emperor's own feeling when he punishes (cấm túc): angry AT THIS PERSON or at no one (emo gian ≥ v; bot at v 60 with any
     target: +1 on 95 % of all cấm túc, far too many) → +mo month,
     joyful (vui ≥ v) → −mo (never under 1); his words follow his nết. Thái hậu's scolding (outburst quo) hits ×hot / ×timid by her nết;
@@ -330,7 +330,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"mbo":{const N=NK().m;eaAway(p,N.away);h=`${p.name} ${lc1(r.n)} ${N.away} tuần, vắng mặt trong cung.`;break}
  case"mruou":{const N=NK().m;loyAdd(p,-N.loy);const s=eaSick(p,"phonghan");h=`${p.name} uống rượu giải sầu, lỡ phiên trực (Lòng −${N.loy})${s?", sinh bệnh":""}.`;break}
  case"mhoi":{const N=NK().m;if((p.tinh||0)>0){p.tinh=Math.max(0,(p.tinh||0)-N.tinh);add(eaN(p,"quý ngươi",-N.tinh));h=`${p.name} hậm hực ra mặt, lạnh nhạt với ngươi.`}else{loyAdd(p,-N.loy);h=`${p.name} hậm hực ra mặt, bị thượng quan trách (Lòng −${N.loy}).`}break}
- case"mvui":{const N=NK().m;const half=Math.ceil(N.loy/2);loyAdd(p,-half);const kn=(p.tinh||0)>=10||(p.af||0)>=5;if(kn){p.tinh=Math.min(100,(p.tinh||0)+N.tinh);add(eaN(p,"quý ngươi",N.tinh))}
+ case"mvui":{const N=NK().m;const half=Math.ceil(N.loy/2);loyAdd(p,-half);const kn=(p.tinh||0)>=N.knT||(p.af||0)>=N.knA;if(kn){p.tinh=Math.min(100,(p.tinh||0)+N.tinh);add(eaN(p,"quý ngươi",N.tinh))}
   h=`${p.name} vui, mở tiệc đãi bằng hữu, mải vui lơ là việc (Lòng −${half})${kn?`; gặp ngươi thì niềm nở hơn`:""}.`;break}
  /* ---- court eunuchs / Thái y viện ---- */
  case"okho":{const n=NK().o.af;eaAfAll(p,-n);h=`${p.name} ${lc1(r.n)} (các cung mất lòng y −${n}).`;break}
@@ -463,7 +463,7 @@ function eaPeople(){const L=[];try{const seen=new Set([S]);const add=p=>{if(p&&t
 function eaMinFeel(){const N=NK().q;for(const h of eaMins()){
  /* their feeling fades by the same jemo rule as everyone's (EMO_DECAY; jemo's own decay loop does not reach the ministers) */
  const e=h.emo;if(e&&typeof EMO!=="undefined"&&EMO[e.k]){e.v=Math.max(0,Math.round(e.v-((typeof EMO_DECAY!=="undefined"&&EMO_DECAY[e.k])||6)));if(e.v<15)h.emo=null}
- const o=h.eaPw;h.eaPw=h.pow||0;if(o==null||typeof emoSet!=="function")continue;const d=(h.pow||0)-o,v=Math.min(N.vMax,20+Math.abs(d)*3);
+ const o=h.eaPw;h.eaPw=h.pow||0;if(o==null||typeof emoSet!=="function")continue;const d=(h.pow||0)-o,v=Math.min(N.vMax,N.v0+Math.abs(d)*N.vK);
  if(d>=N.dPow)emoSet(h,"vui",v,"thế ở triều lên");else if(d<=-N.dPow){const T=eaTemper(h);emoSet(h,T.k==="hot"?"gian":T.k==="timid"?"so":"buon",v,"thế ở triều sa sút")}}}
 /* an emotion act of a non-consort: name per kind and feeling group */
 const EA_NACT={m:{gian:"Ra thao trường luyện võ",buon:"Viết thư về quê",so:"Lên chùa thắp hương",ghen:"Uống rượu một mình",vui:"Đàn ca cùng bằng hữu"},
