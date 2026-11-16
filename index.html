@@ -38904,6 +38904,9 @@ const BTR_ART={xuan:1,ha:1,thu:1,dong:1,newyear:1,nguyentieu:1,thanhminh:1,doann
 const BTR_ICON=[1,1,1,1];
 /* sun / moon on a 0..1 arc: t = place along the band, v = visible (0..1) per buổi */
 const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:.86,v:1},m:{t:-.1,v:0}},{s:{t:1.08,v:0},m:{t:.5,v:1}}];
+/* MOON on the tối band by the game's lunar tuần (month = 3 tuần: S.tuan 0 thượng tuần, 1 rằm, 2 hạ tuần; owner 16/11 ~18:58Z). Painted phase sprites img/fx/buoi-moon-<crescent|full|halfL>.webp replace the orb moon; bands that paint their own moon (trungthu, nguyentieu, vulan) or have none (giaothua) show no sprite and hide the orb moon (never two moons) */
+const BTR_MOONBAND={trungthu:1,nguyentieu:1,vulan:1,giaothua:1},BTR_PHASE=["crescent","full","halfL"];
+function btrMoon(b,V,tuan){if(b!==3)return{ph:"",none:0};if(V.fest&&BTR_MOONBAND[V.fest.k])return{ph:"",none:1};const t=Math.max(0,Math.min(2,tuan|0));return{ph:BTR_PHASE[t],none:0}}
 let btrPrev=null,btrEl=null,btrEnd=null;
 /* the 4 painted pieces (~130 KB, SW-cached after the first fetch) are warmed once the game has been running a while, so the FIRST buổi change already shows them (on demand = not at boot) */
 const BTR_KEEP=[];function btrWarm(){try{if(typeof S==="undefined"||!S){setTimeout(btrWarm,7000);return}if(btrStill())return;["wash","mist","hills","orb"].forEach(n=>{const i=new Image();BTR_KEEP.push(i);i.src=BTR_BASE+"buoi-"+n+".webp"})}catch(e){}}
@@ -38923,10 +38926,11 @@ function buoiShift(){
   /* the variant tint is mixed into the buổi tint (night keeps its dark; a festival colours it more than a season) */
   const mix=VF?34:22;d.style.cssText=`--bt-tint:color-mix(in srgb,${VT} ${mix}%,${C.tint});--bt-wash:color-mix(in srgb,#2a1c10 ${b===3?0:16}%,color-mix(in srgb,${VT} ${Math.round(mix*.6)}%,${C.wash}));--bt-ink:${C.ink};--bt-s0:${C.sky[0]};--bt-s1:${C.sky[1]}`;
   const artKey=V.fest&&BTR_ART[V.fest.k]?V.fest.k:BTR_ART[V.sea]?V.sea:"";
+  const MN=btrMoon(b,V,(window.__btrVar&&window.__btrVar.tuan!=null)?window.__btrVar.tuan:(S.tuan||0));
   const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?260:kitPace(dawn?2000:1700);
   d.innerHTML=still?`<i class="btr-tint"></i>`:
    `<i class="btr-tint"></i><i class="btr-wash"></i>${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}<i class="btr-vig"></i>`+
-   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon"></i></div>`+
+   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
   document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
@@ -38967,7 +38971,7 @@ function buoiShift(){
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
-.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}
+.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}.btr-moon.btr-mph{background-size:contain;background-position:center;filter:drop-shadow(0 0 2px rgba(90,52,20,.85)) drop-shadow(0 0 7px rgba(60,40,90,.5))}.btr-moon.btr-nomoon{display:none}
 .btr-title{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
 .btr-plate{inset:0;background:var(--bt-tint);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;opacity:.96}
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
@@ -43469,7 +43473,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fd0403a6210e";window.CTM_BUILD=BUILD;
+const BUILD="e26b20b08f6e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
