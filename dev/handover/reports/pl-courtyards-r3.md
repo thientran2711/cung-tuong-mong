@@ -1,4 +1,4 @@
-# pl-courtyards-r3 (worker, branch review/pl-courtyards-r3 @ 5425e4c1) — SẴN SÀNG KIỂM 5425e4c1
+# pl-courtyards-r3 (worker, branch review/pl-courtyards-r3) — latest: r3b (see "r3b" at the end); first ready sha 5425e4c1, latest f42dd31c
 
 Base: review/pl-courtyards-r2 9e1e99f4 (= r1 8b4a2160 + single-hall ff05f03d) + origin/main 1aa0edb2 merged; index/sw/assets rebuilt (build_site.sh). Only dev/build/jpm.js (+ tests, KIT.md §76 note) touched; no j59.
 
@@ -26,3 +26,9 @@ Base: review/pl-courtyards-r2 9e1e99f4 (= r1 8b4a2160 + single-hall ff05f03d) + 
 - TO PAINT: a 3-hall "cac" (Chính + Đông + Tây phối điện) for Tần-headed palaces, and a home courtyard with a visible Dãy nhà cung nhân building (home currently has no courtyard). After painting: replace the nhat-cac files / add a new dir + hotspots, update KPM_HALLS in jpm.js, python3 dev/tools/pl2_sync.py.
 - Screenshots: scratch only, none uploaded.
 - Handover: worker used ~35% context, no rollover needed.
+
+## r3b (owner rule 21:12Z: stand-ins allowed WITH the kit "tạm" chip; no label on an unpainted building)
+- Merged the kit part: dev/build/jgrey.js (kitTam/kitOff) taken from origin/review/opt-greyed e6d12523 (+10e1062b tweak), added to assemble.py; I did not redefine it.
+- kpmArt returns {src,dir,tam}: exact state -> tam:false; missing state (season x nearest buổi) or a picture that does not paint every hall (KPM_HALLS) -> stand-in with tam:true. kitPalaceMap draws kitTam(tam) and puts hotspots ONLY on halls painted in the picture; the other halls stay in the kit list rows. nhat-cac now: picture + one hotspot (Chính điện/Ngọc Thanh các) + rows for the rest + 'tạm' chip (top-right: the leather crops the picture's lower edge, `.kpmv .ktam{top:6px;bottom:auto}`; kit keeper please fold into kitTam if you prefer).
+- Tests: nostandin matrix 1728 cells: 0 unmarked stand-ins; 288 cac cells tam:true, all other 1440 exact tam:false. Label vs back button: 0 overlaps on 4 devices x 6 dirs (cac: 1 hotspot only). single-hall Fold + iPad 0 fails (checks hotspots only on painted halls, tạm chip matches art.tam). coop-e2e 59/59. quickcheck: see CLAIMS row for the final sha.
+- KIT.md §76 updated. TO PAINT list in FOREMAN_C.md INBOX.
