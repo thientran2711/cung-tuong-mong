@@ -38745,7 +38745,7 @@ for(const k in KC2CH)KCE[k]={get t(){try{return kc2ChT()}catch(x){return""}},b:K
 
 /* ---------- the sending event (kit event card) and the selection (OD:L1250: ceiling earned by the result) ---------- */
 /* EXAM HOOK: a dedicated selection mini-game (OD:L1244 "minigame exam") can replace the j82/j91 round: window.kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}).
-   kind = "dan" (cnv home), "nc" (nc/bd home) or the origin key (direct "Vào cung ngay"); info.art = the round she chose (kim / le / mua / an art key);
+   kind = "dan" (cnv home), "nc" (nc/bd home) or the origin key (direct "Vào cung ngay", and the six tiểu thư home roads' Phúc tuyển with info.phuc = 1, jkc kcPhucPlay); info.art = the round she chose (kim / le / mua / an art key);
    done must be called exactly once with 0..10; the "wait" choice never reaches the hook (it scores 5); bots (window.__bot) skip it. (reviewer r1)
    TODO(selection-minigame): when that worker ships, it sets window.kcEntryExam; until then the round is playArt (the same engine as Phúc tuyển). */
 function kc2Play(art,title,note,fin){if(window.__bot||typeof playArt!=="function"){fin(cl(3+R(6),0,10));return}
@@ -38923,7 +38923,7 @@ function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(S.sac*.1
 /* fix (r3 FAIL 1, OD:L1288): re-measured with 16 / 8 lives per arm, both arms on ONE build (dev/handover/reports/kc-roads-cn-nc-fix.md): the home road
    already wins the selection (home skills → khá / tốt, the palace arm meets kém → Tân Giả khố), so the carry was counted twice: dan (cnv) and nc lowered;
    kc (tiểu thư, muoi) was inside the spread and stays. */
-BAL.kcv={kc:{dn:35,sung:28,st:8,kn:6,art:1,bac:0,tin:0},nc:{dn:15,sung:20,st:6,kn:6,art:1,bac:10,tin:0},dan:{dn:50,sung:0,st:10,kn:10,art:1,bac:40,tin:25}};
+BAL.kcv={kc:{dn:35,sung:28,st:8,kn:6,art:1,bac:0,tin:0},nc:{dn:8,sung:10,st:3,kn:6,art:1,bac:10,tin:0},dan:{dn:50,sung:0,st:10,kn:10,art:1,bac:40,tin:25}};
 function kc2Carry(kind,tier){const B=BAL.kcv[kind];if(!B||!S||S.dead||(S.kc&&S.kc.carry))return null;const f=[.8,1,1.2][tier==null?1:tier]||1;const n=x=>Math.round(x*f);const was=rsnap();
  S.danh=Math.min(100,(S.danh||0)+n(B.dn));if(B.sung&&!(S.srv&&!S.srv.risen))S.sung=Math.min(100,(S.sung||0)+n(B.sung));for(const k of ["sac","tai","tamco","duc"])S[k]=Math.min(100,(S[k]||0)+n(B.st));
  if(B.art){const a=kcBestArt();try{addArt(a,n(B.art)*3)}catch(e){}}if(B.bac)S.bac=(S.bac||0)+n(B.bac);if(B.tin&&S.srv)S.tin=cl((S.tin||40)+n(B.tin),0,100);
@@ -39027,7 +39027,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bb07f2391b76";window.CTM_BUILD=BUILD;
+const BUILD="9fa0fac67b56";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
