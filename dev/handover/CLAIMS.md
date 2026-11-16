@@ -67,3 +67,4 @@
 | card-flip videos for owner (me picked / other picked) | (handover reports only) | main s11 | session_01UV1SzhNCLWgwR9ozmc9zcD (sonnet) | RUNNING | 16/11 06:46Z |
 | low-context canon split (OD:L1241) — same worker as canon-pairs | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus) | RUNNING | 16/11 06:46Z |
 | D6 review | review/econ-items-r1 | C | (session id below) | RUNNING | 06:46Z 16/11 |
+| C44 cloud-save-r1 re-merge on main (auto-deploys coop Worker) | review/merge-hot-4 | main s11 | session_01UV1SzhS3WeMXFgk8CgeevX (sonnet) | RUNNING | 16/11 06:47Z |
