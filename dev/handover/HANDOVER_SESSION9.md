@@ -453,3 +453,4 @@ OWNER WAITING: open new main · kit-size #3 verdict + narrator 1/2 · flip hand 
 - (18:37Z s21) fest-fx worker session_01UV1Szk4mBQYLcS8DPSeeBv (add to the S22 running list).
 - (18:38Z s21) map-labels-2-b 1deaf9cb (A ca sở + grey far places, on dudo-lock) → reviewer session_01UV1SzgbfBnvY6mdGxcr9VN; goes live after/with dudo-lock-r1. Owner: no fireworks at night → fest-fx.
 - (18:40Z s21) pl-courtyards-r1 PASS fae6bcbc (but single-hall places still show a courtyard step → follow-up worker review/single-hall on top; push both together). C got the paint order (673-row TSV, multi-hall only).
+- (18:41Z s21) single-hall worker = session_01UV1SzgsPFCBtSPyVtcpsHN. s21 saw MAIN s22 (session_01UV1SzjhT28XQmRt2EHNffg) is up → sent it the delta and STOPPED. s21 does no more coordination.
