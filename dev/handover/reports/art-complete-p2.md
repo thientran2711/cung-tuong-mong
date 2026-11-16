@@ -22,3 +22,12 @@ No code change was needed (jartc.js kidBandOf already maps 26/36/51; the 40 ids 
 
 ## Rollover note
 START_CTX not measured at start (session resumed from a task prompt). Handing over at heavy context after 17 sheets; coordinator opens the successor.
+
+## Successor #2 (art worker) 16/11: the 23 LEFT ids are DONE — 48/48 identities x a26/a36/a51 LIVE
+Done: p22 p23 p24 f05-f24 = 23 sheets (21:9, 4k, gpt-2-6, transparentBackground+quality high, ref = each child's own 4-age sheet), 69 fig + 69 por webp + img/FIGURES-kids.json (336 records) pushed with cdn_sync (139 files). CDN check: 48 ids x 3 bands x (fig+por) = 288/288 answer 200.
+Credits: 23 sheets x 270 = 6210 (no redo needed, 0 rejected sheets).
+LOOKED at every sheet on dark and on light, plus brow crops: full body head to feet with shoes, front facing (no back-turned pose), hands right, men not pink/purple (p22 pine green, p23 russet brown, p24 midnight blue), no moles.
+Hand fixes: por-kid-p23-a51, f11-a51, f21-a26, f23-a26, f23-a36 were mis-cropped by haar (cloth/robe) -> re-cropped by hand from the fig; f09-a26 had a tiny pale forehead dot (fig + por inpainted); f18-a26 one dark dot (demole_por).
+Tooling note: porcrop needs opencv 4.10 (pip --target .cache/pylib "opencv-python-headless==4.10.0.84"), not 5.x.
+Files here: kd_gensU.txt (gen ids), kd_bgU1.txt / kd_bgU2.txt (bg lines), kd_sheet_left23.jpg (contact sheet, dark bg, 23 ids x 3 ages).
+No code change needed. No successor needed for this job.
