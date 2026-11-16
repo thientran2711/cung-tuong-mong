@@ -57,8 +57,8 @@ main at start = eba64ead4.
 | MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade @06e4179e | opus | PASS 64b40270 (review/mem-upgrade-r1; reviewer archived) |
 | ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger @fb67d4ad | opus | SẴN SÀNG KIỂM (worker archived) → PASS 7aba5de9 (review/item-ledger-r1; reviewer archived) |
 | ghenAll ×1.5 (đa tình) shown ≠ applied, ~25 texts (emperor-visit-r1 follow-up; ONE CORE OD:L1267) | review/ghen-shown | opus | SẴN SÀNG KIỂM 7b97d64c (ghenN() one function; 27 texts + 34 calls on BAL.ghen; scan 27→0; base emperor-visit-r1; worker archived) → PASS 81f86655 (review/ghen-shown-r1, includes emperor-visit-r1; reviewer archived) |
-| D GO-LIVE (OD:L1370; train-9 told to STOP, owners push one by one) | each review/*-r* → main | opus | worker (id in CLAIMS) RUNNING 17:45Z |
-| NPC ROADS (s19 15:45Z, ROAD_MAP.md §0/§6: 1 unit = 1 NPC; women reuse §4 roads as data, men ~20 templates) | review/npc-roads | opus | worker (id in CLAIMS) RUNNING 17:45Z; depends on B's jroad engine (road-map 240c68a7, r1 FAIL 5 being fixed by B) |
+| D GO-LIVE (OD:L1370; train-9 told to STOP, owners push one by one) | each review/*-r* → main | opus | prep worker session_01DgYSWnvC5ntuJ6oLspAoXu RUNNING 17:45Z (prepares review/<topic>-golive + tests, sends GOLIVE-READY; Foreman D runs golive.sh --yes; a worker that pushes main itself was refused by the session guard) |
+| NPC ROADS (s19 15:45Z, ROAD_MAP.md §0/§6: 1 unit = 1 NPC; women reuse §4 roads as data, men ~20 templates) | review/npc-roads | opus | worker session_01DgYSWmUVjZctWQWG8HUzdY RUNNING 17:45Z; depends on B's jroad engine (road-map 240c68a7, r1 FAIL 5 being fixed by B) |
 
 - 17:40Z (hourly): main s20 notes say merge-train-9 told to STOP; owners push their PASS one by one → D GO-LIVE worker opened. D also owns NPC ROADS (FOREMAN_D.md 15:45Z line, missed by s5 handover) → worker opened. kc-roads fix2 still re-measuring (~50 min). item-ledger-r1 PASS 7aba5de9.
 

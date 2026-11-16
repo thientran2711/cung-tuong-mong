@@ -290,5 +290,5 @@
 | flip-hand review r1 (sonnet, SMALL) of 745e1ab8 | review/flip-hand | main s21 | session_01UV1SzhQEsHLJz1pK4VbSsS | RUNNING | 16/11 17:32Z |
 | stage-pets r2 successor (sonnet): backdrop wait, S pet size, 3-people samples A (narrow right column) | B (shrink) for owner | review/stage-pets | main s21 | session_01UV1Szi6MsAMKHyAGi1WvNc | RUNNING | 16/11 17:35Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | RUNNING | 16/11 17:36Z |
-| D GO-LIVE: push every D PASS branch to main one by one (OD:L1370 recipe) | review/<each>-golive | D | (opening) | RUNNING | 16/11 17:45Z |
-| NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | (opening) | RUNNING | 16/11 17:45Z |
+| D GO-LIVE prep (worker merges+tests; Foreman D runs golive.sh --yes itself) | review/<each>-golive | D | session_01DgYSWnvC5ntuJ6oLspAoXu | RUNNING | 16/11 17:45Z |
+| NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | session_01DgYSWmUVjZctWQWG8HUzdY | RUNNING | 16/11 17:45Z |
