@@ -56,7 +56,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    /* retaliation chain: she rumours v3; v3 sees it (caught) → v3's memory points to that record → v3's later act on her = "tra" */
    roll=()=>false;try{runAct(S,v3,"rumor")}finally{roll=R0}const mine=causeQuery({by:S,to:v3})[0];const mm=memTop(v3,S,-1);
    ok("cause_mem_link",mine&&mm&&mm.c===mine.id,{mine:mine&&mine.id,mem:mm});
-   roll=()=>false;try{runAct(v3,S,"spy")}finally{roll=R0}const back=causeQuery({by:v3,to:S})[0];
+   roll=()=>false;window.__j95off=1;/* a forced NPC act: the j95 motive gate would stop it (D note, mem-upgrade-r1) */try{runAct(v3,S,"spy")}finally{roll=R0;window.__j95off=0}const back=causeQuery({by:v3,to:S})[0];
    ok("cause_retaliation",back&&back.y.k==="tra"&&back.y.c===(mine&&mine.id),{y:back&&back.y,line:back&&causeLine(back)});
    ok("cause_her_choice",mine&&mine.y.k==="chon",mine&&mine.y);
    /* families: everyday act, punishment, servant */

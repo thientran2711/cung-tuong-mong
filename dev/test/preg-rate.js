@@ -19,7 +19,7 @@ const {chromium}=require('playwright');const path=require('path');
   /* trysts / affairs (reviewer r1): one function trystCh = BAL.trystC bounds on the raw chance, then the cycle factor; no typed roll left */
   {const T=BAL.trystC;const keep=Object.assign({},F);for(let tu=0;tu<3;tu++){S.tuan=tu;const h=cyPhase(S);BAL.cyc.fert={peak:1,low:1,cyc:1};const raw=conceiveCh(S);BAL.cyc.fert=keep;
     const want=Math.min(T[1],Math.round(Math.max(T[0],Math.min(T[1],raw))*F[h]));if(trystCh(S)!==want)f.push(`trystCh ${h}: ${trystCh(S)} vs ${want}`)}
-   const src=String(tryst)+String(affairMonth);if(/roll\((5|15)\)\)\{/.test(src)||!/trystCh/.test(src))f.push('tryst/affair roll not via trystCh')}
+   /* main's j24/j95 wrap tryst / affairMonth: read the j22 bodies from the page source, not the wrappers */const src=[...document.scripts].map(x=>x.text).join('\n').split(/\nfunction (?=tryst\(|affairMonth\()/).slice(1).map(x=>x.split('\nfunction ')[0]).join('\n');if(/roll\((5|15)\)\)\{/.test(src)||!/trystCh/.test(src))f.push('tryst/affair roll not via trystCh')}
   /* notice */
   S.preg=0;S.fake=0;S.tuan=(cyBase(S).t+1)%3;const nL=()=>(S.logs||[]).filter(x=>/dễ đậu thai/.test(x)).length;
   const L0=nL();S.cyb=S.cyb||{};S.cyb.ft=null;flip();Q.length=0;const L1=nL();flip();Q.length=0;const L2=nL();

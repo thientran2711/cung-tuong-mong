@@ -24,7 +24,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    ok("bad_deed",!memAdd(v0,S,"nope"),null);
    /* two-way through the existing acts: she befriends v2 (NPC remembers her); an NPC spies on her and is caught (she remembers the NPC) */
    roll=()=>true;try{runAct(S,v2,"ally")}finally{roll=R0}ok("runAct_ally",memList(v2,S).some(m=>m.d==="ally"),memList(v2,S).map(m=>m.d));
-   const sp=L[3]||v1;roll=()=>false;try{runAct(sp,S,"spy")}finally{roll=R0}ok("runAct_npc_on_me",memList(S,sp).some(m=>m.d==="spy"),memList(S,sp).map(m=>m.d));
+   const sp=L[3]||v1;roll=()=>false;window.__j95off=1;/* a forced NPC act: the j95 motive gate would stop it (D note, mem-upgrade-r1) */try{runAct(sp,S,"spy")}finally{roll=R0;window.__j95off=0}ok("runAct_npc_on_me",memList(S,sp).some(m=>m.d==="spy"),memList(S,sp).map(m=>m.d));
    /* the strong memory wrote a Sổ ghi line (→ Tuần lục) */
    ok("log_line",S.logs.slice(0,12).some(h=>/ghi lòng tạc dạ|để bụng/.test(h)),S.logs.slice(0,3).map(h=>h.replace(/<[^>]*>/g,"").slice(0,90)));
    /* RECALL */
