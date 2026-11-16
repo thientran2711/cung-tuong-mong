@@ -51,8 +51,7 @@ Note: poisonX base is now 1 (jbal2 v12), so ×0.67 / ×1.2 round back to 1 — o
 - Mini-games (review/mg-easy, `kg82Tier(lv)`: tier by HER art level): jdiff touches no j82/j91 knob, so a Khó life still gets the easy
   tier at art level 0–1 and vice versa. Owner rule for mini-games is "by level"; the life difficulty is about the palace, not the hands.
   The gloss "Độ khó" says so ("Độ khó của màn thi tài nghệ vẫn theo bậc tài nghệ của ngươi"). NB: at origin/main a523531d mg-easy is
-  NOT merged yet (no kg82Tier on main; j82 still has the old kg82DiffWord); nothing here depends on it, and both merge cleanly
-  (no shared file). The two "Độ khó" labels have different scopes (life on the identity card; one game on the mini-game intro row).
+  NOT merged yet (at the start of this port); merged in since (4f5e5f3b), no shared file. The two "Độ khó" labels have different scopes (life on the identity card; one game on the mini-game intro row).
 
 ## Tests (built site, local http server, Playwright, reducedMotion)
 `node dev/test/difficulty.js <url> [WxH …]` — 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+390x844 rotate prompt):
@@ -79,4 +78,25 @@ Harness: `OUT=<dir> dev/measure/rundiff.sh <game.html with meta charset> <de|vua
 HHSTOP, 9-origin rotation, inx + inpz counters; `indiff.js` tags each result with `diff`), then
 `python3 dev/measure/anx.py <label> <dir>/<mode>_*.json`. One life ≈ 10 min on this box (load ~39 on 4 CPUs), so the numbers below are
 a small-n smoke check that the layer still bites on main; the real table is C7's to take after merge.
-RESULTS: see "Measured on main" below.
+
+### Measured on main (build 5620ff28 = main a523531d + jdiff; 1 shard per mode, 100 min cap, ~1 life / 10–20 min)
+| | Dễ (n=10) | Vừa | Khó (n=4) | owner target Dễ / Khó |
+|---|---|---|---|---|
+| Hoàng hậu | 40 % (4) | C7 measures | 0 % (0) | ~50 % / 15–20 % |
+| early death | 50 % (5) | | 25 % (1) | ~20 % / ~55 % |
+| causes | childbirth 4, poisoned 1 | | poisoned 1 | |
+| childbirth death / labour | 19 % (2.1 labours/life, shown 7.1) | | 0 % (2.25/life, shown 12.2) | |
+| survived without HH (Thái phi) | 10 % | | 75 % | |
+| charges against her / life | 4.7 | | 17.0 | |
+| page errors | 0 | | 0 | |
+Per life — Dễ: cn childbirth · tt HH · dtq HH · muoi HH · cn HH · nc childbirth · td childbirth · ch Thái phi · thd childbirth · cnv caught poisoning (year 0).
+Khó: thd Thái phi · tt Thái phi · dtq poison · muoi Thái phi.
+Reading (n is far too small for a verdict; ±30 points): the layer bites in the right direction (Khó: 3.6× the charges, no HH;
+Dễ: HH in 4 of 10), but Dễ childbirth deaths (19 %/labour vs 6–10 % in v3/v7) look high on today's main — main's childbirth rules
+or birth count changed since v8 (2.1 labours/life vs 1.7). For C7: re-measure Vừa first, then Dễ/Khó with rundiff.sh (n ≥ 30 each);
+the only knobs to touch are in jdiff `DIFF` (do not retune BAL for a mode). Candidates if Dễ stays high on childbirth: Dễ birthAdd/birthMin
+further down; poisonX ×m is inert on base 1 (whole-number rounding) — if poison strength should differ by mode, make it an add (e.g. Khó +0.2).
+
+## Merge with main
+Merged origin/main 4f5e5f3b (mg-easy now on main: kg82Tier in j82/j91; nothing shared with jdiff) — assemble list = main's + jdiff after
+jbal2; site rebuilt. UI test re-run on the merged build: 71/71 ok (755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844 rotate).
