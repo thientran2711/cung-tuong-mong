@@ -1,6 +1,6 @@
 | FOREIGN PRINCESS art (sonnet art; OD:L1345 drawing → C; continues main s16 v7 on review/foreign-princess-samples): v8 lighter high-rank costumes → then full set 3+3 princesses × ranks + maids | review/foreign-princess-art | C | session_011xDdVQLEsBhwiabQcVkHJN | RUNNING | 16/11 19:22Z |
 | fig-proportion SUCCESSOR (sonnet art): 27 Thái hậu scene pictures + ~100 flagged adult figures (owner 19:05Z/19:12Z), narrow Thái hậu figs to A | review/fig-proportion | C | session_011xDdVQqAAT57kvK187xHXt | RUNNING | 16/11 19:21Z |
-| cardflip tray repaint in game style (owner 3rd time, OD 19:21Z) | review/cf-tray-style | C | (opening 20:50Z) | RUNNING | 16/11 19:21Z |
+| cardflip tray repaint in game style (owner 3rd time, OD 19:21Z) | review/cf-tray-style | C | session_011xDdVRQpDpbTu7wkBFFQMT | RUNNING | 16/11 19:21Z |
 # CLAIMS (one line per item; claim BEFORE opening a worker session; push at once)
 | item | branch | owner (main/B/C/D) | session id | state | UTC |
 |---|---|---|---|---|---|
@@ -396,8 +396,8 @@
 | npc-roads merge-fix (opus): merge r1 83d84225 into U2–U4 02405da5, apply the 6 r1 fault families to maids/eunuchs/men | review/npc-roads-fix | D | session_01DgYSWmVoMyem8RKtKb9T19 | RUNNING | 16/11 20:37Z |
 | P5 STORY BOT balance (opus; main s23 20:10Z): sens/D57 bots play whole lives through roads + chapters, balance per origin/difficulty, report only | review/story-bot + reports/story-bot.md | D | session_01DgYSWknF3zCGUsx9BmG3ub | RUNNING | 16/11 20:40Z |
 | ROAD_MAP §4.10 men-road canon check (opus; Foreman D 20:05Z, reports/npc-roads.md 'proposed ROAD_MAP §4.10') | review/road-map-410 | B | session_01N1tNP5MEELAspgvPEdzAdh | DONE fb84b698 (archived) | 16/11 20:40Z |
-| FIG CUT-OUT CLEAN (sonnet art, URGENT owner 20:29Z–21:02Z): transparent-gen test → Luân hồi large figures + whole group re-cut; anatomy audit; back-turned pose audit; huadian too big (C9) | review/fig-cutout-clean | C | (opening) | RUNNING | 16/11 20:50Z |
-| art-complete part 2 resume (sonnet art): act-pics2 143 keys left + grown-kid a26/a36/a51 for 40 ids | review/art-complete-p2 | C | (opening) | RUNNING | 16/11 20:50Z |
-| NPC per-target jealousy for everyone, one formula (opus; main s23 20:27Z; reports/night-steal-r2.md) | review/npc-jealousy | C | (opening) | RUNNING | 16/11 20:50Z |
+| FIG CUT-OUT CLEAN (sonnet art, URGENT owner 20:29Z–21:02Z): transparent-gen test → Luân hồi large figures + whole group re-cut; anatomy audit; back-turned pose audit; huadian too big (C9) | review/fig-cutout-clean | C | session_011xDdVQi9izFkArmuejM2aM | RUNNING | 16/11 20:50Z |
+| art-complete part 2 resume (sonnet art): act-pics2 143 keys left + grown-kid a26/a36/a51 for 40 ids | review/art-complete-p2 | C | session_011xDdVQfAeMXrKX9oPJQyhe | RUNNING | 16/11 20:50Z |
+| NPC per-target jealousy for everyone, one formula (opus; main s23 20:27Z; reports/night-steal-r2.md) | review/npc-jealousy | C | session_011xDdVNFb12V5k5VFx1eX1m | RUNNING | 16/11 20:50Z |
 | stage-pets r7 review r1 (sonnet, SMALL layout + co-op check) of review/stage-pets-r7 6aaca31af + r1 fixes cea021e3 (steps: reports/stage-pets-r1.md HANDOVER) | review/stage-pets-r7-r1 | main s24 | (s24 opening) | RUNNING | 16/11 21:05Z |
 | pl-courtyards r3 fix (sonnet): r2 FAIL 1+2 → gate kpmArt (festival/mourning/missing exact file = skip courtyard level, never a stand-in), FAIL 4 iPad back-button gap via kit; on main + pl-courtyards-r1 8b4a2160 + single-hall ff05f03d | review/pl-courtyards-r3 | main s24 | (s24 opening) | RUNNING | 16/11 21:05Z |
