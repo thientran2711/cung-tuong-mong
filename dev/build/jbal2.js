@@ -304,4 +304,9 @@ Object.assign(BAL,{nroad:{
  /* one father = one record: these origins are never given to an NPC when the player has them */
  uniq:["tt","dtq"],
  /* at most this many NPC roads have the player as their rival at one time */
- meMax:3}});
+ meMax:3,
+ /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
+    (mp = merit toward the next servant rank, j14; loyal = to her mistress: a maid who wins her own fight leans a little less on her
+    mistress), her mistress's share (Danh), the grudge (af) between her and the rival maid, the loyalty her own maid needs to ask */
+ m:{st:40,tr:{lanh:15,trung:8,tham:5,nhat:-5,chuyen:0},rk:5,
+  fx:{win:{mp:4,loyal:-2},mid:{mp:1,loyal:-1},lose:{mp:-2,loyal:-4}},mis:{win:{danh:1},lose:{danh:-1}},af:8,askLoy:60}}});
