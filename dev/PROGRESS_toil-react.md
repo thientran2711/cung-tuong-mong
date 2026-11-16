@@ -29,3 +29,8 @@ None blocking. Note for the kit keeper (optional): the item-cost road shows the 
 `node dev/test/toil-react.js <url> <WxH@dpr> <shotdir> [oldsave.json]`: builds each of the four buttons through the real dialog (bad rival with a better face, praise with an item in the bag, Thái hậu, Emperor = none),
 checks effects (Oán, Đức, Danh, Hoàng hậu quý, regard, bạc, item, tip), the odds-grudge link, modal on top, no truncated option, no horizontal overflow, no page errors.
 Run `python3 dev/build/assemble.py && bash dev/site/build_site.sh` first; serve the repo root.
+
+## Review r1 (reviewer fixes)
+- Hint wording: chance words now come from the ladder via word(odds) folded exactly like kitHint (Nắm chắc/Rất chắc/Chắc -> dễ thành; Khó/Liều -> khó thành; else thành bại khó đoán) instead of own thresholds; level 0 (vague) names no chance (KIT 28.6).
+- Tặng lại item road: worth = econPrice (what she would get selling it, the bạc-equivalent), window 0.8..1.6 x bạc cost; excludes worn / tainted / workshop / ngự tứ / keepsake / gifts from Hoàng thượng, Thái hậu, Hoàng hậu (econNo, econGiver). Hint has no number.
+- mk-colour-r1 is already on main (merged): the combined build is this build.

@@ -35,7 +35,7 @@ fs.mkdirSync(DIR,{recursive:true});const fails=[];const chk=(c,msg)=>{if(!c)fail
  await p.evaluate(()=>{S.toilTip=null;toilNpc=np0;S.toilette.score=99;react('rival-jealous',-1)});await p.waitForTimeout(250);
  chk(!await p.evaluate(()=>Q[0].opts.some(o=>o.n==='Hỏi bí quyết')),'no Hỏi bí quyết when her face is as good');
  /* 2. praise from a consort: Tặng lại with bạc and with an item of the same worth */
- await p.evaluate(()=>{const c=toilGiveCost();let best=null;for(const k in IT){const it=IT[k];if(it&&it.pr>0&&!it.sl&&(!best||Math.abs(it.pr-c)<Math.abs(IT[best].pr-c)))best=k}S.inv=(S.inv||[]).filter(e=>!(e&&e.k===best));S.inv.push({k:best});window.IK=best;react('rival-praise',1)});await p.waitForTimeout(300);
+ await p.evaluate(()=>{const c=toilGiveCost();let best=null;const sv=k=>Math.floor(IT[k].pr*BAL.sellPct/100);for(const k in IT){const it=IT[k];if(it&&it.pr>0&&!it.sl&&!it.keep&&!it.nt&&!it.il&&!econNo(S,{k})&&(!best||Math.abs(sv(k)-c)<Math.abs(sv(best)-c)))best=k}S.inv=(S.inv||[]).filter(e=>!(e&&e.k===best));S.inv.push({k:best});window.IK=best;react('rival-praise',1)});await p.waitForTimeout(300);
  out.good=await names();chk(out.good.includes('Tặng lại'),'praise has Tặng lại (bạc)');chk(out.good.some(n=>/^Tặng lại: /.test(n)),'praise has Tặng lại with an item');chk(!out.good.includes('Ghi hận')&&!out.good.includes('Mách Hoàng hậu'),'praise has no grudge/tell');
  await modalOk('good');
  const t0=await p.evaluate(()=>({bac:S.bac,a:aff(V,S),n:S.inv.length,c:toilGiveCost()}));await pick('Tặng lại');const t1=await p.evaluate(()=>({bac:S.bac,a:aff(V,S),n:S.inv.length}));out.giveBac={t0,t1};chk(t1.bac===t0.bac-t0.c,'bạc paid');chk(t1.a>t0.a,'Tặng lại raises regard');
