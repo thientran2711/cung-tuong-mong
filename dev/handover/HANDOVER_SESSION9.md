@@ -58,3 +58,4 @@ Open owner question: none on the maid count (owner: the close maid already comes
 - Hourly self-wake trig_01RTZd5kBXL9txgwZ14BG1ux (:51). s9 trigger trig_01TB5oP2dRRJ6rDRMZvp9Z85 DISABLED (delete refused by classifier).
 - Kit keeper: scheme-games-port-r1 jopic.js grid-auto-rows auto→max-content = OK (rows size to content; card min-height kept). Not ff-able (base eba64ead) → told merge-train-4 to fold it in.
 - Opened servant-system-r1 reviewer (A only) + weather-fx-one finisher. Servant C → Foreman D. Servant B (H1–H9) → owner, one question at a time, after the faction-win question.
+- (06:05Z) Owner: each origin should have 4 story roads, chapters 12–14 — says earlier chats lost it. History-search worker session_01UV1SzjEdjQ8f47FqGmmgP3 → reports/owner-history-chapters.md, messages s10. s10: on its report, write the found rulings into OWNER_DECISIONS and plan the work.
