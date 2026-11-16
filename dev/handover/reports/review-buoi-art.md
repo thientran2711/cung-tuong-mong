@@ -1,4 +1,4 @@
-SAMPLE READY — dev/handover/reports/buoi-art/sample-sheet.jpg
+SAMPLE READY v2 — dev/handover/reports/buoi-art/sample-sheet.jpg (icons redone as SQUARE tiles with thin gold-red border, 128 px, ~5 KB each; bands unchanged; +40 credits = 160 total)
 
 # review-buoi-art (Foreman C art worker, branch review/buoi-art)
 Sheet: top row = existing samples (thu, trungthu); middle row = NEW xuan (spring, pink blossom only, no gold petals) + NEW giaothua (festival); bottom = 4 buổi icons sáng / trưa / chiều / tối (round painted medallions on transparent, 160 px WebP ~9 KB each; shown big and at 64 px).
