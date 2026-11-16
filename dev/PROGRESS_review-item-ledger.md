@@ -28,3 +28,15 @@ Spec (owner verbatim, dev/OWNER_DECISIONS.md on the handover branch): "16/11 13:
 ## Open
 - 6 ids "missing" in the bot end check vs census (likely id re-number on duplicate copies; pieces are not lost: net catches them). Next: dbg on long runs.
 - Sắc phong book + seal do not exist as items yet; Foreman C calls `ilGone(p,e,"lost"|"conf")` / `ilRob` when they land.
+
+## Reviewer r1 (review/item-ledger-r1, Foreman D reviewer) — fixes on top of fb67d4ad (full report: dev/handover/reports/item-ledger-r1.md on the handover branch)
+- jil.js: identity check (ilAt) in ilGone; guards compare per-id object counts before/after (copy moves are fine, real removals routed even when a stale twin exists);
+  only a still-"lost" case holds its piece (found/held copies are routed when they leave); stale lost cases closed; case c.e and its chest copy share one id (old saves);
+  fresh ids given by a guard enter the census map at once; deser hook (old save loaded from the title → census at once).
+- Co-op: friend's proxy entry not in the ledger; no NPC nets in co-op; guest ids from 1e7; rebirth in the same world → her pieces become "di vật" in the store (ilInherit);
+  a gift arriving while she is dead still lands (jcoopworld onRes).
+- j92 wdFrame / wdFrameTake: the very piece is planted; found → back to its "owner" or tang vật (was: deleted).
+- wkGive to a maid → box "srv" (why maid), not "net". Ransom ceiling holds (due visit queued even with other dialogs waiting).
+- Save size bounded: census map not saved (non-enumerable S.il.at); BAL.il srvW / cctW / heldCap / mktCap keep the box moving. S.il ≈ 50 KB flat.
+- Tools: dev/measure/iltrace.js (removal tracer), dev/measure/ilscan.py (static scan of every removal), dev/measure/ilprobe.js; ilbot.js prints missing-id detail + life ends.
+- Tests: item-ledger.js 13 scenarios PASS at 755x1000, 1180x820, 1366x1024, 1000x755, 844x390; coop-e2e 59/59.

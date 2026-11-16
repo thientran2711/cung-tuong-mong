@@ -14,8 +14,8 @@ const {chromium}=require('playwright');const [,,URL,LIVES,WEEKS]=process.argv;
   const t0=ilTake;ilTake=function(x,pp,how){const own=x.own,at=x.at,w=x.w;const ok=t0.apply(this,arguments);if(ok&&at==="mkt"){if(own==="me"&&pp===S){T.meBack++;T.meWk.push(wk()-w);if(how==="mua lại")T.meBackTray++;else T.meBackRansom++}else if(own&&own!=="me"&&(pp.id===own))T.npcBackOwn++;else if(own&&own!=="me")T.npcBought++}if(ok&&at==="nvp"&&own==="me"&&how==="sám hối xin lại")T.confBack++;return ok};
   const pd0=pushDil;pushDil=function(d,t){if(d&&d.pid==="ilback"){T.ransomAsk++;const o=d.o[0];if(o&&o.n==="Chuộc về"&&Math.random()<.7){T.ransomPaid++;apply(o.fx);o.go()}return""}
    if(d&&d.pid==="ilconf"){const o=d.o[0];if(Math.random()<.6){apply(o.fx);o.go()}return""}return pd0.apply(this,arguments)};
-  const ever=new Set();const look=()=>{for(const pp of ilPeople())for(const e of ilSlots(pp))if(e.iu&&ilDur(e))ever.add(e.iu)};
-  for(let l=0;l<L;l++){for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();let ok=false;try{ok=!isSrv()}catch(e){}if(ok)break}T.lives++;ever.clear();S.bac=Math.max(S.bac,200);
+  const ever=new Set();const last=new Map();const look=()=>{for(const pp of ilPeople())for(const e of ilSlots(pp))if(e.iu&&ilDur(e)){ever.add(e.iu);last.set(e.iu,[e.k,ilKey(pp),wk(),pp!==S&&pp.alive===false?"dead":""])}};
+  for(let l=0;l<L;l++){for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();let ok=false;try{ok=!isSrv()}catch(e){}if(ok)break}T.lives++;ever.clear();last.clear();S.bac=Math.max(S.bac,200);
    for(let w=0;w<W&&!S.dead;w++){/* she answers gift dialogs ("Nhận"); every other dialog is dropped as in the other bots */
     for(const m of Q.slice())if(m&&(m.pid==="giftin"||m.pid==="pgin")&&m.opts&&m.opts[0]&&m.opts[0].go){try{m.opts[0].go()}catch(e){}}Q.length=0;try{
      if(w%6===3){const ix=S.inv.findIndex(e=>e&&!e.h&&!e.w&&ilDur(e)&&!e.nt&&!(IT[e.k]&&IT[e.k].keep));if(ix>=0){if(typeof econSell==="function"&&Math.random()<.5)econSell(S,ix);else sellItem(S,ix)}}
@@ -23,8 +23,8 @@ const {chromium}=require('playwright');const [,,URL,LIVES,WEEKS]=process.argv;
      for(const t of ilShopTiles())if(Math.random()<.5)t.onBuy();
      if(S.bac<60)S.bac+=60;
      endTurn()}catch(e){console.error(e)}look();T.weeks++}
-   ilCensus();const I=ilS();T.box.push(I.box.length);T.censusNet=(T.censusNet||0)+I.net;T.netLog=(T.netLog||[]).concat(I.log.filter(l=>l[5]==="net").map(l=>l[2]+"@"+l[3])).slice(0,30);
-   const at=I.at||{};T.seen+=ever.size;let loc=0;for(const id of ever){if(at[id])loc++;else T.missing.push(id)}T.located+=loc;
+   T.ends=(T.ends||[]).concat(wk()+(S.dead?"d":""));ilCensus();const I=ilS();T.box.push(I.box.length);T.censusNet=(T.censusNet||0)+I.net;T.netLog=(T.netLog||[]).concat(I.log.filter(l=>l[5]==="net").map(l=>l[2]+"@"+l[3])).slice(0,30);
+   const at=I.at||{};T.seen+=ever.size;let loc=0;for(const id of ever){if(at[id])loc++;else{T.missing.push(id);const L=last.get(id)||[];T.missDet=(T.missDet||[]).concat([[id].concat(L,[I.log.filter(l=>l[1]===id).slice(-3).map(l=>l.slice(3).join(">")).join(" | ")])]).slice(0,20)}}T.located+=loc;
    for(const x of I.box)if(x.at==="mkt"){if(x.own==="me")T.meOut++;else if(x.own)T.npcOut++}
    T.lostCases+=(S.lost||[]).length;Q.length=0}
   T.meWkMean=T.meWk.length?+(T.meWk.reduce((a,b)=>a+b,0)/T.meWk.length).toFixed(1):null;T.meWkMax=T.meWk.length?Math.max(...T.meWk):null;delete T.meWk;T.missing=T.missing.slice(0,20);return T},[+(LIVES||3),+(WEEKS||200)]);

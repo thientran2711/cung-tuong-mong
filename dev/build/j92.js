@@ -298,7 +298,7 @@ function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAd
  const F=wdFrameItem(a);if(!F.k)return"";const nm=IT[F.k]?IT[F.k].n:F.k;
  if(!roll(oPlant(a,t))){/*evok: giahoa act (runAct deed)*/evA(t,a,2);relAdd(a,t,-20);return `<span class="r">Người lén mang ${nm} vào phòng ${wdNm(t)} bị bắt, khai ra ${wdNm(a)}.</span> ${wdNmC(t)} nắm 2 chứng cứ. `}
  if(F.take){const i=a.inv.indexOf(F.take);if(i>=0)a.inv.splice(i,1)}
- t.inv=t.inv||[];t.inv.push({k:F.k,h:1,by:key(a),gh:key(a)});
+ /* item conservation (jil): the very piece is planted (same id) */t.inv=t.inv||[];const P0={k:F.k,h:1,by:key(a),gh:key(a)};if(F.take&&F.take.iu)P0.iu=F.take.iu;t.inv.push(P0);
  if(t===S){S.wdFrame={by:key(a),k:F.k,due:wk()+1+R(2)};
   if(roll(WD.warnBase+(S.mat||0)*6+(watcher()?15:0))){const w=watcher();const named=roll(WD.traceBase+(S.mat||0)*WD.traceMat);if(named){S.wdFrame.traced=1;evA(S,a,1)}
    Q.push({t:"Tai mắt báo tin",who:pMe(),h:`<p>${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi lúc vắng người.</p><p class="past">Nên kiểm tra đồ trong rương.${named?` Đã ghi vào Sổ ghi (chứng cứ về ${a.name} +1).`:""}</p>`});
@@ -312,7 +312,10 @@ function wdFrameIx(a,t){return (t.inv||[]).findIndex(e=>e&&e.gh===key(a)&&(e.h||
 function wdFrameNm(k){return (k&&(IT[k]||(typeof WD_ITEMS!=="undefined"&&WD_ITEMS[k])||{}).n)||"món đồ"}
 function wdFrameCulprit(a,e){if(e&&e.lo){const c=e.by?byKey(e.by):null;return c&&c!==a?c:null}return a}
 function wdFrameEv(t,a,e){const c=wdFrameCulprit(a,e);return (c?evG(t,c):0)+(e&&e.lo&&typeof lostEv==="function"?lostEv(e.lo):0)}
-function wdFrameTake(t,i){const e=t.inv.splice(i,1)[0];if(e&&e.lo&&typeof lostReturn==="function")lostReturn(e);return e}
+function wdFrameTake(t,i){const e=t.inv.splice(i,1)[0];if(e&&e.lo&&typeof lostReturn==="function")lostReturn(e);
+ /* item conservation (jil): a planted piece found in the room goes back to the one who "lost" it (e.gh), or to Cung Chính ti as tang vật */
+ else if(e&&typeof ilGone==="function"){const o=e.gh?byKey(e.gh):null;if(o&&o!==t&&o.alive!==false&&!(o===S&&S.dead)){for(const f of ["h","by","gh","w"])delete e[f];o.inv=o.inv||[];o.inv.push(e);if(typeof ilLog==="function")ilLog(e,key(t),key(o),"soát ra, trả về")}else ilGone(t,e,"evid")}
+ return e}
 function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);const i=wdFrameIx(a,t);const e=t.inv[i]||null;const nm=wdFrameNm((t===S&&S.wdFrame?S.wdFrame.k:null)||(e&&e.k));
  if(t===S)S.wdFrame=null;
  if(i<0){ap(a,{danh:-5});relAdd(a,t,-10);return `${wdNmC(a)} tố ${wdNm(t)} lấy trộm ${nm}; Cung Chính ti khám phòng ${wdNm(t)} không thấy gì. ${wdNmC(a)} bị quở vì tố bừa, Danh -5. `}

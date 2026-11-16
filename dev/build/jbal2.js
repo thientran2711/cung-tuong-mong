@@ -225,6 +225,9 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
    Broken / burnt → Nội vụ phủ mends it, back to the owner after fixW weeks. Ownerless pieces in the store (a dead person's effects, returned stock)
    go to market resaleP each week. NPCs: an NPC's sold piece is bought back by her (npcBackP) or by another consort (npcBuyP) when they have the bạc.
    Higher-rank room: searched only by the Emperor's decree, asked with at least empEv pieces of REAL evidence (case evidence + evidence on the holder).
-   logCap = ledger lines kept (oldest dropped; items themselves are never dropped). */
+   logCap = ledger lines kept (oldest dropped; items themselves are never dropped).
+   The box keeps moving (save size bounded, reviewer r1): a servant sells a pocketed piece outside after srvW weeks (then it returns like a sold piece);
+   tang vật goes to the Nội vụ phủ store after cctW weeks; Hoàng thượng / Thái hậu each keep at most heldCap offered pieces, older ones go down to the store;
+   ownerless pieces outside beyond mktCap are bought back by Nội vụ phủ and handed out to a consort as allotment. */
 Object.assign(BAL,{il:{shopP:12,retW:[6,12],ransomPct:120,againW:[4,8],confW:8,confSuc:8,npcConfP:30,fixW:[2,4],resaleP:15,
- npcBackP:20,npcBuyP:8,empEv:2,logCap:600}});
+ npcBackP:20,npcBuyP:8,empEv:2,logCap:600,srvW:12,cctW:48,heldCap:30,mktCap:60}});

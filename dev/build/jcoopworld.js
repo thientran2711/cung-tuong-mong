@@ -254,7 +254,7 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
  pushModal({act:1,t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
-function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;
+function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead){/* a gift on its way still lands (item conservation: her effects pass on at rebirth, jil ilInherit) */try{ilRecv(m)}catch(e){console.error(e)}return}
  const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
  if(Object.keys(fx).length)apply(fx);let ilH="";try{ilH=ilRecv(m)}catch(e){console.error(e)}S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
  if(g.rel)S.rl[fpid]=cl((S.rl[fpid]||0)+g.rel,-100,100);if(g.oan)S.ro[fpid]=cl((S.ro[fpid]||0)+g.oan,0,100);

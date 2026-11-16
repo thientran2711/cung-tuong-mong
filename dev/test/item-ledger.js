@@ -7,6 +7,8 @@
    5 a higher-rank holder: the search button is "Tâu Hoàng thượng xin soát cung", locked until BAL.il.empEv real evidence
    6 Tư trang › Việc shows "Đồ ở nơi khác"; 7 cướp y phục → the robe is in the plotter's chest (a case)
    8 old save (no S.il): census gives every piece an id, nothing moves, no errors; 9 a dead consort's effects go to the store
+   reviewer r1: 10 giá họa piece found → back to the framer; 11 a found-case copy sold by its holder → market (never hidden by the case);
+   12 a real old save (save() stripped of S.il + ids, page reloaded, loadSlot) loads and gets ids; 13 co-op proxy entry not in the ledger
    Checks: page errors, panel / document overflow, modal fits the viewport. */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'1180x820').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
@@ -57,7 +59,26 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,SH
  R.s8=await p.evaluate(()=>{const n=ilSlots(S).length;delete S.il;for(const pp of ilPeople())for(const e of ilSlots(pp))delete e.iu;const s=JSON.stringify(S);ilCensus();const ids=ilPeople().flatMap(ilSlots).every(e=>e.iu>0);
   Q.length=0;endTurn();Q.length=0;return{n,ids,net:ilS().net,saveKB:Math.round(s.length/1024),ilKB:Math.round(JSON.stringify(S.il).length/1024)}});
  /* 9 */
- R.s9=await p.evaluate(()=>{const v=liveRivals(true).find(v=>ilSlots(v).some(ilDur));if(!v)return{skip:1};const n=ilSlots(v).filter(ilDur).length;v.alive=false;ilCensus();const L=ilS().box.filter(x=>x.why==="dead"&&x.own===v.id).length;return{n,toStore:L}});
+ R.s9=await p.evaluate(()=>{const v=liveRivals(true).find(v=>ilSlots(v).some(ilDur)&&!ilSlots(v).some(e=>e.lo));if(!v)return{skip:1};const P=ilSlots(v).filter(ilDur);P.forEach(ilUid);const n=P.length;v.alive=false;ilCensus();const located=P.every(e=>ilWhere(e));const miss=P.filter(e=>!ilWhere(e)).map(e=>[e.k,e.iu,e.lo||0,e.gh||"",(S.lost||[]).filter(c=>c.id===e.lo).map(c=>c.st+":"+c.how+":"+c.own).join(),ilS().log.filter(l=>l[1]===e.iu).map(l=>l.slice(3).join(">")).join("|"),S.inv.filter(z=>z.k===e.k).map(z=>z.iu).join()]);const L=ilS().box.filter(x=>x.why==="dead"&&x.own===v.id).length;return{n,toStore:L,located,miss,left:ilSlots(v).filter(ilDur).length}});
+ /* 10 (reviewer r1) giá họa: the planted piece is the framer's own (same id); found in the room → back to the framer, never deleted */
+ R.s10=await p.evaluate(()=>{const L=liveRivals(true);const a=L[0],t=L[1];if(!a||!t)return{skip:1};const k=durK();a.inv.push({k});const e=a.inv[a.inv.length-1];ilUid(e);const u=e.iu;
+  force(.001);let r="";try{r=wdFrame(a,t)}finally{unforce()}const planted=(t.inv||[]).some(z=>z.iu===u&&z.h);const i=wdFrameIx(a,t);if(i>=0)wdFrameTake(t,i);
+  return{planted,back:(a.inv||[]).some(z=>z.iu===u),where:ilWhere({k,iu:u})}});
+ /* 11 (reviewer r1) a found lost piece (copy in a holder's chest) sold by that holder → routed to the market, the case never hides it */
+ R.s11=await p.evaluate(()=>{const v=liveRivals(true).find(v=>v.alive&&!v.out);const k=durK();S.inv.push({k});const e=S.inv[S.inv.length-1];const c=loLoseE(S,e,"srv");S.inv.splice(S.inv.indexOf(e),1);
+  const x=Object.assign({},e,{lo:c.id,gh:"me"});v.inv.push(x);c.st="found";c.at=key(v);const ix=v.inv.indexOf(x);sellItem(v,ix);const inMkt=ilS().box.some(b=>b.e===x&&b.at==="mkt");
+  const n0=ilS().net;ilCensus();return{inMkt,where:ilWhere(x),net:ilS().net-n0}});
+ /* 12 (reviewer r1) a REAL old save (no S.il, no ids) written with save(), page reloaded, loaded with loadSlot: no errors, ids given, nothing nets */
+ const sl=await p.evaluate(()=>{const key=SK(SLOT);const d=JSON.parse(JSON.stringify(ser()));delete d.S.il;const strip=o=>{if(Array.isArray(o))o.forEach(strip);else if(o&&typeof o==="object"){delete o.iu;for(const k in o)strip(o[k])}};strip(d);
+  localStorage.setItem(key,JSON.stringify(d));return{slot:SLOT,kb:Math.round(JSON.stringify(d).length/1024)}});
+ await p.reload({waitUntil:'domcontentloaded',timeout:0});await p.addStyleTag({content:'#kroul,#kroulw,#kload,.krbox,#dawn,#curtain,.fxo,.kmalarm,.kmnote{display:none!important}'});
+ await p.waitForFunction(()=>typeof loadSlot==='function'&&typeof ilAudit==='function',null,{timeout:0});await p.waitForTimeout(2500);
+ R.s12=await p.evaluate(sl=>{document.getElementById('title').hidden=true;const d=loadSlot(sl.slot);let ok=!!d;if(d){SLOT=sl.slot;deser(d)}window.__RND=Math.random;window.force=v=>{Math.random=()=>v};window.unforce=()=>{Math.random=window.__RND};
+  window.durK=()=>Object.keys(IT).find(k=>IT[k]&&IT[k].pr>=40&&ilDur({k})&&!IT[k].nt&&!IT[k].keep&&!IT[k].sl);
+  const had=!!S.il;for(let i=0;i<3&&!S.dead;i++){Q.length=0;endTurn()}Q.length=0;render();const ids=ilPeople().flatMap(ilSlots).every(e=>e.iu>0);
+  return{loaded:ok!==false&&!!S&&!S.dead,hadIl:had,ids,net:ilS().net,oldKB:sl.kb,ilKB:Math.round(JSON.stringify(S.il).length/1024)}},sl);
+ /* 13 (reviewer r1) co-op: the friend's proxy entry (coop:true) is not in this side's ledger (her own game keeps her chest) */
+ R.s13=await p.evaluate(()=>{const v=liveRivals(true)[0];v.coop=true;const inL=ilPeople().includes(v);delete v.coop;return{proxyOut:!inL}});
  /* weeks of play, conservation holds */
- R.play=await p.evaluate(()=>{for(let i=0;i<20&&!S.dead;i++){Q.length=0;try{endTurn()}catch(e){console.error(e)}}Q.length=0;return{net:ilS().net,box:ilS().box.length,log:ilS().log.length}});
+ R.play=await p.evaluate(()=>{for(let i=0;i<20&&!S.dead;i++){/* she answers gift dialogs (a player never drops a dialog) */for(const m of Q.slice())if(m&&(m.pid==="giftin"||m.pid==="pgin")&&m.opts&&m.opts[0]&&m.opts[0].go){try{m.opts[0].go()}catch(e){}}Q.length=0;try{endTurn()}catch(e){console.error(e)}}Q.length=0;return{net:ilS().net,netLines:ilS().log.filter(l=>l[5]==="net"),box:ilS().box.length,log:ilS().log.length}});
  R.errs=errs;console.log(JSON.stringify(R,null,1));await b.close()})();
