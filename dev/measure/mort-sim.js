@@ -16,7 +16,7 @@ function emp(age0,power,years){const c={life:0,plot:0,acc:0,alive:0},byDec=[0,0]
    if((t-age)*12+(tm-month)<=0){died="life";break}
    if(roll(M.acc.emp/12)){died="acc";break}
    if(plot){if(--plot.mo<=0){plot=null;if(!roll(mortFoil(power))){died="plot";break}}}
-   else for(const k of ["ass","poi"])if(roll(mortPlotY(k,power)/12)){plot={k,mo:1+R(2)};break}}
+   else for(const k of ["ass","poi"])if(roll(mortPlotY(k,power)/12)){plot={k,mo:M.emp.plotMo[0]+R(M.emp.plotMo[1])};break}}
   if(died){c[died]++;byDec[Math.min(1,Math.floor(mo/120))]++}else c.alive++}
  const f=x=>(100*x/N).toFixed(1)+"%";return {start:age0.join("+R"),power,years,dies:f(N-c.alive),lifespan:f(c.life),plot:f(c.plot),accident:f(c.acc),decade1:f(byDec[0]),decade2:f(byDec[1])}}
 function th(years){let a=0;for(let i=0;i<N;i++){const ea=20+R(14),lo=Math.max(51,ea+18),hi=Math.max(lo,62),ag=lo+R(hi-lo+1);if(mortRoll("adult",ag,0)>=ag+years)a++}return (100*a/N).toFixed(1)+"%"}

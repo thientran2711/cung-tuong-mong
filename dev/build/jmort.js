@@ -3,7 +3,7 @@
    1. LIFESPAN (owner 16/11 "thọ số"): every person rolls ONE lifespan (p.tho = age at death, p.thoM = month) the first time the model
       sees them: her at the start, NPCs / maids / eunuchs / officials / the Emperor / the Thái hậu at the start or when they appear,
       every child at birth. Saved on the person; an old save rolls once at load. No reroll. The roll is drawn from BAL.mort.life.dice[group]
-      (bands [lo,hi,weight]), conditioned on being above the present age. Children have a band 1–5 (they die young of smallpox or an epidemic).
+      (bell curve {mean,sd,lo,hi}), conditioned on being above the present age. Children: kid.risk % die young at an age from the kid.early bands (smallpox, an epidemic).
       Before most lifespan deaths an OMEN illness shows for thoO months (Thái y reports, the illness name on the person) — a share
       (BAL.mort.sudden) strike without warning. Events cut a life short: poison, assassination, accidents, illness, childbirth, punishment
       (the existing rules) — this file adds accidents (a few odd ones), Emperor assassination / poison plots with an omen, and age making illness
@@ -15,7 +15,7 @@
    4. Thái hậu death → court shift (Hoàng hậu holds lục cung; her backing gone). NPC deaths free their seats (tuyển tú refills; maid/staff refill).
    5. Co-op: world people (Emperor, Thái hậu, rivals, officials, men) roll and die on the host only; her own life and her household locally.
       The Emperor's death stays muted in co-op (existing jcoopworld rule) — his lifespan is not applied there.
-   SWITCHES (owner answers 16/11): life.show 0 = hidden, never shown · life.dice bell curve mean 55 sd 12.5 (18–90), children their own risk curve · life.care 1 = care adds up to +3 years. */
+   SWITCHES (owner answers 16/11, OD:L1141/L1151/L1168): life.show 0 = hidden, never shown · life.dice bell curve = BAL.mort.life.dice.adult (owner: mean 45 sd 15, 15–85), children their own risk curve · life.care 1 = care adds up to careMax (3) years. Every number here reads BAL.mort (one core, OD:L1267). */
 /*CORE{*/
 function mortBand(B){let t=0;for(const b of B)t+=b[2];let r=Math.random()*t;for(const b of B){if(r<b[2])return b[0]+Math.random()*(b[1]-b[0]);r-=b[2]}return B[B.length-1][1]}
 function mortGauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
@@ -29,7 +29,7 @@ function mortRoll(grp,age,floor){const min=age+Math.max(0,floor||0);
  for(let i=0;i<200;i++){const x=Math.floor(mortDraw(grp));if(x>=min)return x}return min+Math.floor(Math.random()*3)}
 /* yearly % of an Emperor plot (assassination k="ass" / poison k="poi"), higher when the throne is weak (S.reign.power 0–100, else 50) */
 function mortPlotY(k,power){const E=BAL.mort.emp;const w=power<50?1+E.weak*(50-power)/50:1;return (k==="ass"?E.ass:E.poi)*w}
-function mortFoil(power){return Math.max(20,Math.min(90,BAL.mort.emp.foil+(power-50)/2))}
+function mortFoil(power){const E=BAL.mort.emp;return Math.max(E.foilLo,Math.min(E.foilHi,E.foil+(power-50)/2))}
 /*}CORE*/
 (function(){if(typeof BAL!=="object"||!BAL.mort)return;const M=BAL.mort;
 const cw=()=>window.COOPW&&COOPW.on,host=()=>!cw()||COOPW.seat==="a";
@@ -63,14 +63,14 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<6?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
- if(p===S.maid){const o=S.maid.name;S.maid=newMaid(pick(MAIDS.filter(x=>x!==o)),40);return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
+ if(p===S.maid){const o=S.maid.name;S.maid=newMaid(pick(MAIDS.filter(x=>x!==o)),M.maidLoy);return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
- const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;p.name=`${OFFICIAL[k]||"Quan"} ${pick(HEIRN)}`;p.af={};p.age=k==="ped"?22+R(8):40+R(10);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
+ const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;p.name=`${OFFICIAL[k]||"Quan"} ${pick(HEIRN)}`;p.af={};p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
   return `${o} ${why||"qua đời"}; ${p.name} lên thay. `}
  if((S.men||[]).includes(p)){p.alive=false;return ""}
  return ev}
 /* the omen illness on people who show illness (her, consorts, the Thái hậu, the Emperor) */
-function omen(p,ml){const st=ml<=1?3:ml<=3?2:1,k=ageOf(p)>=55?"laobenh":"trongbenh";let ev="";
+function omen(p,ml){const st=ml<=M.omenSt[0]?3:ml<=M.omenSt[1]?2:1,k=ageOf(p)>=M.oldAge?"laobenh":"trongbenh";let ev="";
  if(p===S.emp){const i=S.emp.ill;if(!(i&&i.mort)){S.emp.ill={k:"longthe",st,known:true,mort:1};S.emp.mood=2;ev+="Thái y viện tâu: long thể suy nhược, mạch tượng không tốt. "}else if(i.st!==st){i.st=st;if(st===3)ev+="<b>Thái y viện quỳ ngoài Càn Thanh cung: long thể nguy kịch.</b> "}return ev}
  if(p===S.thO){const i=S.thIll;if(!(i&&i.mort)){S.thIll={k,st,known:true,mort:1};ev+="Thái y bắt mạch Từ Ninh cung, lắc đầu không nói. "}else if(i.st!==st){i.st=st;if(st===3)ev+="Thái hậu bệnh nguy kịch, các phi tần thay nhau hầu thuốc. "}return ev}
  if(p===S||rivals.includes(p)){const i=p.ill;if(!(i&&i.mort)){p.ill={k,st,known:p===S,mort:1};if(p===S)ev+=`<span class="r">Ngươi mắc ${ILL[k].n.toLowerCase()}; thái y bốc thuốc mà mạch vẫn yếu.</span> `}else if(i.st!==st){i.st=st;if(p===S&&st===3)ev+=`<span class="r">${ILL[k].n} trở nguy kịch.</span> `}}
@@ -92,13 +92,13 @@ function empPlot(){if(cw())return "";const P=S.mort;let ev="";
  if(P.plot){P.plot.mo--;if(P.plot.mo>0)return "";const k=P.plot.k;P.plot=null;
   if(roll(mortFoil(pw())))return k==="ass"?"Cấm quân bắt được thích khách nấp trong Ngự hoa viên; Hoàng thượng bình an. ":"Thái giám thử món phát hiện chén canh có độc; Ngự thiện phòng bị tra xét. ";
   P.empDue=k==="ass"?"Thích khách lẻn vào tẩm điện hành thích":"Ngự thiện bị kẻ gian bỏ độc";return ev}
- for(const k of ["ass","poi"])if(roll(mortPlotY(k,pw())/12)){P.plot={k,mo:1+R(2)};
-  if(S.mat>=2||roll(50))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
+ for(const k of ["ass","poi"])if(roll(mortPlotY(k,pw())/12)){P.plot={k,mo:M.emp.plotMo[0]+R(M.emp.plotMo[1])};
+  if(S.mat>=M.emp.rumourMat||roll(M.emp.rumour))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
  return ev}
 function monthMort(){if(!S||!M.on||S.dead)return "";initAll();let ev="";const K=kidSet();
  for(const p of people()){if(S.dead)break;if(!(p.tho>0||p.nb))continue;if(p===S.emp&&cw())continue;if(p.alive===false)continue;
   const ml=left(p);const show=p===S||p===S.emp||p===S.thO||rivals.includes(p);
-  if(ml<=0){ev+=kill(p,p===S?`Tuổi trời đã tận, ${ILL[ageOf(p)>=55?"laobenh":"trongbenh"].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi`:"",K);continue}
+  if(ml<=0){ev+=kill(p,p===S?`Tuổi trời đã tận, ${ILL[ageOf(p)>=M.oldAge?"laobenh":"trongbenh"].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi`:"",K);continue}
   if(show&&p.thoO&&ml<=p.thoO)ev+=omen(p,ml);
   else if(p.thoO&&ml<=M.pre.mo)ev+=weak(p);
   const a=accY(p,K);if(a&&roll(a/12)){const t=accText(p);ev+=p===S?(kill(p,`Ngươi ${t}`,K),""):kill(p,t,K)}}
@@ -107,7 +107,7 @@ function monthMort(){if(!S||!M.on||S.dead)return "";initAll();let ev="";const K=
  return ev}
 /* the Thái hậu is gone: lục cung passes to the Hoàng hậu; her backing (or her disfavour) ends */
 function thShift(){let ev="Quốc tang ba tháng. ";const q=typeof queenP==="function"?queenP():null;
- if(q&&q!==S){ap(q,{danh:5});ev+=`Hoàng hậu ${q.name} một mình nắm quyền lục cung. `}else if(S.rank>=7){apply({danh:5});ev+="Ngươi một mình nắm quyền lục cung. Danh +5. "}
+ if(q&&q!==S){ap(q,{danh:M.thDanh});ev+=`Hoàng hậu ${q.name} một mình nắm quyền lục cung. `}else if(S.rank>=7){apply({danh:M.thDanh});ev+=`Ngươi một mình nắm quyền lục cung. Danh +${M.thDanh}. `}
  if(S.emp)S.emp.mood=2;return ev}
 window.mortMonth=monthMort;
 /* hooks: the monthly pass runs inside illMonth (once a month, before rivals); the omen illnesses are kept away from the old cure rolls */
@@ -116,20 +116,20 @@ window.mortMonth=monthMort;
  /* the old Thái hậu illness (j13) killed on its own; her lifespan now carries most of that: a critical old illness keeps its death roll only thIllKeep % of months */
  if(!t&&S.thIll&&S.thIll.st>=3&&!roll(M.thIllKeep))S.thIll.st=2;
  let ev=i0.apply(this,arguments);if(e)S.emp.ill=e;if(t&&!S.thDead)S.thIll=t;if(S.dead)return ev;return ev+monthMort()}})();
-(function(){const p0=illMonthP;illMonthP=function(p){if(!M.on||!p)return p0.apply(this,arguments);if(p.ill&&p.ill.mort){ap(p,{suc:-3*p.ill.st});return ""}
+(function(){const p0=illMonthP;illMonthP=function(p){if(!M.on||!p)return p0.apply(this,arguments);if(p.ill&&p.ill.mort){ap(p,{suc:-M.pre.omenSuc*p.ill.st});return ""}
  const had=!!illOf(p);let ev=p0.apply(this,arguments);if(S.dead||p.alive===false)return ev;const a=ageOf(p)||20;
  if(!had&&!illOf(p)&&a>M.illAge[0]&&roll(M.illAge[2]*(a-M.illAge[0])/M.illAge[1])){const sea=SEASON[S.month-1];const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));ev+=catchIll(p,L.length?pick(L)[0]:"phonghan")}
- const i=illOf(p);if(i&&i.st===3&&!i.mort&&ILL[i.k].die&&a>M.dieAge[0]&&roll(25*ILL[i.k].die*(a-M.dieAge[0])/M.dieAge[1])){if(p===S){die(`${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${ILL[i.k].n.toLowerCase()}, tuổi cao sức yếu.</span> `}
+ const i=illOf(p);if(i&&i.st===3&&!i.mort&&ILL[i.k].die&&a>M.dieAge[0]&&roll(M.dieAge[2]*ILL[i.k].die*(a-M.dieAge[0])/M.dieAge[1])){if(p===S){die(`${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${ILL[i.k].n.toLowerCase()}, tuổi cao sức yếu.</span> `}
  return ev}})();
 /* treatment of the omen illness: switch 3 (care) — 0: the lifespan holds, thuốc chỉ đỡ đau; 1: a cure adds careAdd years once per careMax */
 (function(){const t0=treat;treat=function(p,way){const i=p&&p.ill;if(!M.on||!(i&&i.mort))return t0.apply(this,arguments);
- if(!M.life.care||(p.thoX||0)>=M.life.careMax){ap(p,{suc:5});return "Thái y lắc đầu: tuổi trời đã định, thang thuốc chỉ giúp bớt đau. "}
- if(roll(way==="ty"?40:20)){const add=Math.min(M.life.careAdd,M.life.careMax-(p.thoX||0));p.thoX=(p.thoX||0)+add;p.tho+=add;p.ill=null;return `${NMc(p)} qua cơn nguy, sức khỏe hồi lại. `}return "Bệnh chưa thuyên giảm. "}})();
+ if(!M.life.care||(p.thoX||0)>=M.life.careMax){ap(p,{suc:M.life.cureSuc});return "Thái y lắc đầu: tuổi trời đã định, thang thuốc chỉ giúp bớt đau. "}
+ if(roll(way==="ty"?M.life.cureTy:M.life.cureOther)){const add=Math.min(M.life.careAdd,M.life.careMax-(p.thoX||0));p.thoX=(p.thoX||0)+add;p.tho+=add;p.ill=null;return `${NMc(p)} qua cơn nguy, sức khỏe hồi lại. `}return "Bệnh chưa thuyên giảm. "}})();
 /* switch 3, care=1 (owner 16/11: care lengthens life only a little, HARD CEILING careMax years in all; số trời decides the rest; care counts
    only while kept up, and it lowers illness risk a bit). careN(p) = sources kept up now: Sức ≥ careSuc, a thái y of her own (doctor), Y thuật ≥ 2.
    Each new year: each source gives careP % for +1 year (total never above careMax); a year with no source and Sức < careLapse takes one
    gained year back. While a source is kept up, a newly caught illness is shaken off at once careIll % × sources. */
-function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p.arts.y>=2?1:0):0}
+function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p.arts.y>=M.life.careYt?1:0):0}
 (function(){const a0=ageYear;ageYear=function(){const r=a0.apply(this,arguments);try{if(M.on&&M.life.care)for(const p of consorts()){if(!(p.tho>0))continue;const n=careN(p),x=p.thoX||0;
  if(n&&x<M.life.careMax&&roll(M.life.careP*n)){p.thoX=x+1;p.tho+=1}
  else if(!n&&x>0&&(p.suc||0)<M.life.careLapse&&p.tho-1>ageOf(p)){p.thoX=x-1;p.tho-=1}}}catch(e){}return r}})();
@@ -149,8 +149,8 @@ function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
 (function(){const b0=birthP;birthP=function(p,fake){if(!M.on||fake||!p)return b0.apply(this,arguments);const me=p===S,B=M.birth;
  const r=birthRisk(p);const br0=birthRisk;let res;
  /* stillbirth */
- if(roll(B.stillP+Math.max(0,(p.age||20)-35)*B.stillAge)){ap(p,{suc:-20});p.stillN=(p.stillN||0)+1;if(me)S.mortGrief=M.griefMo;p.lastBirth=S.turn;
-  return me?`<span class="r">Ngươi trở dạ suốt một đêm, đứa bé sinh ra đã không còn hơi thở (thai chết lưu).</span> Sức -20. `:`<span class="r">${p.name} lâm bồn, thai chết lưu.</span> `}
+ if(roll(B.stillP+Math.max(0,(p.age||20)-35)*B.stillAge)){ap(p,{suc:-B.stillSuc});p.stillN=(p.stillN||0)+1;if(me)S.mortGrief=M.griefMo;p.lastBirth=S.turn;
+  return me?`<span class="r">Ngươi trở dạ suốt một đêm, đứa bé sinh ra đã không còn hơi thở (thai chết lưu).</span> Sức -${B.stillSuc}. `:`<span class="r">${p.name} lâm bồn, thai chết lưu.</span> `}
  if(!roll(r*B.hardX)){birthRisk=()=>0;try{return b0.apply(this,arguments)}finally{birthRisk=br0}}
  p.hardN=(p.hardN||0)+1;
  if(roll(B.choiceP)){const guess=roll(B.emp.boyGuess);const o=keepMomOdds(p,guess);const mom=roll(o);
@@ -160,7 +160,7 @@ function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
    return `<span class="r">${t}</span> `}
   /* giữ con: the child is born, the mother dies */
   p.choiceN=(p.choiceN||0)+1;birthRisk=()=>0;try{res=b0.apply(this,arguments)}finally{birthRisk=br0}
-  const t=head+"“Giữ con.”";if(me){die(`${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt`);return res}
+  const t=head+"“Giữ con.”";if(me){die(`${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt`);return ""}
   p.alive=false;if(p.queen)p.queen=false;return res+`<span class="r">${t} ${p.name} sinh hạ hài nhi rồi qua đời.</span> `}
  if(roll(B.hardDie)){if(me){die("Khó sinh, băng huyết mà chết");return ""}p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
  birthRisk=()=>0;try{res=b0.apply(this,arguments)}finally{birthRisk=br0}ap(p,{suc:-B.hardSuc});if(roll(B.barrenP))p.barren=1;
@@ -173,8 +173,11 @@ function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
 window.mortEmpDue=function(){if(!M.on)return S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5);if(cw())return false;
  const w=S.mort&&S.mort.empDue;if(!w)return false;S.mort.empWhy=w;S.mort.empDue=null;return true};
 /* her fate when the Emperor dies and her son is not the heir: Thái phi / theo con ra phủ / ni cô / về quê; tuẫn táng risk that can be averted */
-(function(){const e0=emperorDies;emperorDies=function(){if(!M.on||!S)return e0.apply(this,arguments);S._edF=1;try{return e0.apply(this,arguments)}finally{if(S)S._edF=0}}})();
-(function(){const o0=over;over=function(h,t,fate,alive){if(!M.on||!S||!S._edF||S.dead)return o0.apply(this,arguments);S._edF=0;
+/* r1 fix: the re-route is installed at call time around the CURRENT (outermost) over(), so every other over() wrapper (j93 ink title,
+   jkiep, jkc, j99succ, jcoopworld) sees the real fate, not the legacy "Thái phi" */
+(function(){const e0=emperorDies;emperorDies=function(){if(!M.on||!S)return e0.apply(this,arguments);const cur=over;
+ over=function(h,t,fate,alive){over=cur;return mortFate.call(this,cur,h,t,fate,alive)};try{return e0.apply(this,arguments)}finally{over=cur}}})();
+function mortFate(o0,h,t,fate,alive){if(!M.on||!S||S.dead)return o0.call(this,h,t,fate,alive);
  const why=S.mort&&S.mort.empWhy;if(why)t=String(t).replace(/(băng hà, thọ \d+ tuổi\.)/,`$1 ${why}.`);
  if(h!=="Thái phi")return o0.call(this,h,t,fate,alive);
  const sons=mySons(),daus=myDaus(),F=M.fate;const pre=String(t).match(why?/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.){0,2}/:/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.)?/);const P=pre?pre[0]+" ":"";
@@ -185,7 +188,7 @@ window.mortEmpDue=function(){if(!M.on)return S.year>12&&roll((S.year-12)*1.5+Mat
  if(sons.length)return o0.call(this,"Thái phi",Q+`${sons[0].name} được phong vương, đón mẹ về vương phủ phụng dưỡng. Ngươi thành Thái phi, an hưởng tuổi già bên con cháu.`,"Thái phi theo con ra phủ",true);
  if(daus.length||S.rank>=F.phiRank)return o0.call(this,h,t,fate,alive);
  if(S.rank<=F.homeRank&&S.age<F.homeAge&&roll(F.homeP))return o0.call(this,"Xuất cung",Q+"Tân đế ân xá, cho các cung tần chưa có con được về quê. Ngươi rời cung, sống nốt đời ở quê nhà.","Xuất cung về quê",true);
- return o0.call(this,"Xuất gia",Q+"Ngươi không con cái, phẩm vị thấp; theo lệ cũ, cùng các cung tần khác cạo tóc vào chùa Cảm Nghiệp làm ni cô, sớm hôm kinh kệ.","Xuất gia làm ni cô",true)}})();
+ return o0.call(this,"Xuất gia",Q+"Ngươi không con cái, phẩm vị thấp; theo lệ cũ, cùng các cung tần khác cạo tóc vào chùa Cảm Nghiệp làm ni cô, sớm hôm kinh kệ.","Xuất gia làm ni cô",true)}
 /* a new game: everyone rolls at the start; an old save rolls once at load */
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&M.on){S.mort=null;delete S.tho;initAll();S.mort.old=0}}catch(e){console.error(e)}return r}})();
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{initAll()}catch(e){console.error(e)}return r}})();

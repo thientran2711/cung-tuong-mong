@@ -4,9 +4,9 @@
    FAIL on page errors, horizontal overflow, text outside the screen, '%' in the card. One small JPEG per card per size. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const R=path.resolve(__dirname,'../..');
 const OUT=process.argv[2]||R+'/.tmp/ui';fs.mkdirSync(OUT,{recursive:true});
-const SIZES=[[755,1000],[1000,755],[1180,820],[1366,1024],[844,390],[390,844]];
+const SIZES=process.env.SIZES?JSON.parse(process.env.SIZES):[[755,1000],[1000,755],[1180,820],[1366,1024],[844,390],[390,844]];const DSF=+process.env.DSF||1;
 (async()=>{const b=await chromium.launch();let fails=0;
- for(const [w,h] of SIZES){const ctx=await b.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
+ for(const [w,h] of SIZES){const ctx=await b.newContext({viewport:{width:w,height:h},deviceScaleFactor:DSF,reducedMotion:'reduce'});
   await ctx.route('http://ts.local/**',r=>{const f=R+decodeURIComponent(new URL(r.request().url()).pathname);if(!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});
    r.fulfill({status:200,contentType:/\.html$/.test(f)?'text/html; charset=utf-8':/\.json$/.test(f)?'application/json':/\.js$/.test(f)?'text/javascript':/\.webp$/.test(f)?'image/webp':'application/octet-stream',body:fs.readFileSync(f)})});
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));

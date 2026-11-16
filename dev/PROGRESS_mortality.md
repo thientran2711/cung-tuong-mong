@@ -112,3 +112,13 @@ Old model (same bots): only consorts (illness 141 of 158), her (childbirth / ill
   stillbirth), old save without S.mort rolls once at load. PASS, 0 page errors.
 - `node dev/test/mortality-ui.js <outdir>` — the "Giữ mẹ hay giữ con" card and the "Xuất gia" end card at 755x1000, 1000x755, 1180x820,
   1366x1024, 844x390: open, no '%', no overflow, nothing off-screen, 0 page errors; 390x844 shows the rotate prompt. ALL PASS. Shots looked at.
+
+## Review r1 (16/11, review/mortality-r1, opus reviewer)
+- Merged origin/main cdad7109 (conflicts: assemble.py file list, j3 Lãnh cung `over(...,true)` + `mortEmpDue()` line, jbal2 BAL.mort + BAL.rg kept both; site rebuilt).
+- ONE CORE (OD:L1267): moved every hard-coded number left in jmort.js into BAL.mort (cureTy/cureOther/cureSuc/careYt, omenSt, oldAge, thDanh (text prints it),
+  repl, maidLoy, pre.omenSuc, emp.foilLo/foilHi/rumour/rumourMat/plotMo, dieAge[2], birth.stillSuc (text prints it)); mort-sim reads plotMo too.
+- Fate bug: the Thái phi → Xuất gia / về quê / tuẫn táng / theo con re-route wrapped over() INSIDE later wrappers, so j93's ink animation, jkiep and jkc
+  saw the legacy "Thái phi" (ink showed "Thái phi" over a Xuất gia card). Now installed at call time around the outermost over(); test asserts the ink title.
+- "Giữ con" (she dies): no longer returns the birth/promotion line after her death.
+- Stale header comment (mean 55 sd 12.5) corrected to the owner's L1151 curve.
+- Tests added: care ceiling (40 years all sources + 40 cures → +3 = careMax), ink title per fate; mortality-ui.js takes SIZES / DSF env.
