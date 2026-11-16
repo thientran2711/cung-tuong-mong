@@ -3,7 +3,7 @@
 ORDER 16/11 applied (session 2): separate sessions only, claim before work, hourly self-wake trig_01NcACiwuYDkpgFwjswQ2rd5 (fires :25 each hour into session_011xDdVRG4cue2p9fUsdAg68), no art until main hands a batch.
 last wake: 07:29Z 16/11 (session 2 start)
 Context (session 2): start ~45k tokens of a 1M window; budget = start + 25% of window = ~295k (session 1 read the 25% loosely too) — roll over at that size or at the first summarisation.
-Connectors (session 2): GitHub push OK.
+Connectors (session 2, 07:30Z): GitHub push OK · Cloudflare token active · Magnific OK (Pro, 1,332,001 credits left of 12.6M). Disk 27 GB free, .git 2.7 GB (no repack needed).
 
 ## SESSION 2 LOG
 - 07:27Z PASS written: A7b cycle-art-r1 74f96d6c1, D6 econ-items-r1 eed75e73f (reviewer fixed robe re-issue to owner option 3).
