@@ -21,7 +21,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
   if(narrow){await p.waitForTimeout(4000);const rot=await p.evaluate(()=>{const f=document.getElementById('krotf');if(!f)return false;const t=getComputedStyle(f).transform;const m=t.match(/matrix\(([^)]+)\)/);if(!m)return false;const v=m[1].split(',').map(Number);return Math.abs(v[0])<0.01&&Math.abs(v[1])>0.01});R[SZ]=rot?'ok rotate prompt':'NO rotate prompt';if(!rot)bad++;await ctx.close();continue}
   await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   window.__nlInner=1;for(let i=0;i<60;i++){start();if(!isSrv())break}window.__nlInner=0;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
+   window.__nlInner=1;for(let i=0;i<60;i++){start();if(!isSrv())break}window.__nlInner=0;Q.length=0;S.buoi=B4L;S.nfF=wk();/* flip-entry (jfe): the flip (and with it her cycle pop-up) runs at buổi tối; tests call flip() there */const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
   await p.waitForTimeout(1500);
   if(!logicDone){logicDone=true;
    const L=await p.evaluate(()=>{const f=[],info={};const clear=()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true};
@@ -104,7 +104,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
     /* e: unanswered → the week ends with the true report */
     m=pop();if(m){clear();const c=S.cyb;endTurn();if(c.rv!=='dung')f.push('unanswered not defaulted '+c.rv);const dw=document.getElementById('dawn');if(dw)dw.remove();document.body.classList.remove('kbk-open')}
     /* f (r3): no pop-up on the first screen of a new life (start() flips right after "Nhập cung"): that week reads as báo đúng */
-    {Q.length=0;S.cyb={};S.tuan=myT;Q.push({t:"Nhập cung",h:"<p>x</p>"});flip();if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up on a new life start');if(!(S.cyb.rv==='dung'&&S.cyb.rk===wk()))f.push('start: no default report');
+    {Q.length=0;S.cyb={};S.tuan=myT;Q.push({t:"Nhập cung",h:"<p>x</p>"});S.buoi=B4L;S.ntk=null;S.ntTry=null;flip();if(Q.some(x=>x.pid==='cyrep'))f.push('pop-up on a new life start');if(!(S.cyb.rv==='dung'&&S.cyb.rk===wk()))f.push('start: no default report');
      info.startQ=Q.map(x=>x.t);clear();S.cyb={}}
     {const fr=liveRivals(false).find(x=>!x.preg);if(fr&&window.COOPW){const on=COOPW.on;fr.coop=true;S.tuan=(myT+1)%3;let got=0;try{COOPW.on=true;for(let i=0;i<200;i++){S.tonight=null;S.ntk=null;S.ntTry=null;cyNoFriend(flip);if(S.tonight===fr)got++}}finally{COOPW.on=on;delete fr.coop}
       if(got)f.push('co-op: deferred flip picked the friend '+got);if(!rivals.includes(fr))f.push('co-op: friend entry lost');Q.length=0;S.tuan=myT}}
@@ -124,7 +124,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
   if(OUT)await p.screenshot({path:`${OUT}/cycle-${SZ}.jpg`,type:'jpeg',quality:60});
   /* (r2) the monthly pop-up at this size: kit dialog + 4 option cards, nothing clipped / off screen */
   const pu=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;
-   S.cyb={};S.preg=0;S.fake=0;S.out=false;S.tuan=cyBase(S).t;flip();render();showModal();await sleep(2500);const M=document.getElementById('modal');
+   S.cyb={};S.preg=0;S.fake=0;S.out=false;S.tuan=cyBase(S).t;S.buoi=B4L;flip();render();showModal();await sleep(2500);const M=document.getElementById('modal');
    if(M.hidden||!/Kính sự phòng báo thế nào/.test(M.innerText))f.push('pop-up not shown');const cards=M.querySelectorAll('button.ka,.kopt,.opt');if(cards.length<4)f.push('pop-up cards '+cards.length);
    const dl=M.querySelector('.dlg');if(dl){const r=dl.getBoundingClientRect();if(r.left<-1||r.right>innerWidth+1)f.push('pop-up off screen')}
    const clip=[];M.querySelectorAll('button.ka .kan,.kfact,.kchip').forEach(e=>{if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflowX!=='auto')clip.push(e.textContent.slice(0,20))});if(clip.length)f.push('pop-up clipped '+clip.slice(0,3).join('|'));
