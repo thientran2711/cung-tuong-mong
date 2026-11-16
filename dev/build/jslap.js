@@ -6,8 +6,10 @@
    that lowers the tier by one (a nhẹ slap misses altogether); "Chịu đòn" / closing = no dodge. Numbers: BAL.slap (jbal2). Effects: jface (slapGive, act tat, marks).
    Co-op: an act on the friend goes through the existing runAct path (jcoopworld sends the number deltas); the mark tier rides on the same "res" message. */
 const SLAPG={busy:0};window.SLAPG=SLAPG;
-KG82_KIND.tat={e:"slapbar",n:"Tát",t:"Giáng tay",how:"Kim chạy qua lại trên thước. Chạm đúng lúc kim lướt qua giữa vùng đỏ: càng trúng giữa, tay càng nặng. Chỉ một lần chạm, chừng ba giây."};
-KG82_KIND.ne={e:"slapbar",n:"Né",t:"Né đòn",how:"Kim chạy qua lại trên thước. Chạm khi kim vào vùng xanh để né kịp. Chỉ một lần chạm, chừng ba giây."};
+/* r3 (reviewer, ONE CORE OD:L1267): the game length in the words is printed from BAL.slap.bar.ms / dodge.ms (kitNumVi), never typed */
+const slapSec=ms=>(typeof kitNumVi==="function"?kitNumVi(Math.round(ms/1000)):Math.round(ms/1000))+" giây";
+KG82_KIND.tat={e:"slapbar",n:"Tát",t:"Giáng tay",how:`Kim chạy qua lại trên thước. Chạm đúng lúc kim lướt qua giữa vùng đỏ: càng trúng giữa, tay càng nặng. Chỉ một lần chạm, chừng ${slapSec(BAL.slap.bar.ms)}.`};
+KG82_KIND.ne={e:"slapbar",n:"Né",t:"Né đòn",how:`Kim chạy qua lại trên thước. Chạm khi kim vào vùng xanh để né kịp. Chỉ một lần chạm, chừng ${slapSec(BAL.slap.dodge.ms)}.`};
 /* skill + stakes (r2, owner OD:L1255 / L1266, ONE tier system = jmgt mgTier of review/mg-balance): the art that steadies a hand is Vũ (like Bắn cung, j82 "ban");
    occasion keys "tat" (her slap: stakes rise with HER rank, more eyes on her) and "ne" (a dodge: stakes = the ATTACKER's rank), numbers in BAL.mgTier.occ (jbal2). */
 KG82_F.tat=[["suc",.4],["vu",4]];KG82_F.ne=[["suc",.4],["vu",4]];
@@ -105,7 +107,7 @@ window.slapNpcTier=slapNpcTier;
  const show=r=>{if(r){log(r);pushModal({t:"Bị tát",h:`<p>${r}</p>`});showModal();render()}};
  const nm=a.name||"Nàng";
  pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
-  Object.assign(tsOpt({n:"Né đòn",odds:B.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:["một ván ngắn chừng ba giây"],go:()=>{
+  Object.assign(tsOpt({n:"Né đòn",odds:B.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:[`một ván ngắn chừng ${slapSec(B.dodge.ms)}`],go:()=>{
     slapGame({dodge:true,by:a,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"không né",rows:[["Né kịp","cái tát nhẹ đi một bậc; tát nhẹ thì hụt hẳn","g"],["Không né","nhận trọn cái tát","r"]],
      onDone:res=>show(fin(res.skipped||res.raw<B.raw[3]?sev:sev-1))})}}),{}),
   tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",h:`<p>${r}</p>`})}}})]});
