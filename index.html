@@ -703,6 +703,16 @@ window.AVATARS={"women": ["data:image/webp;base64,UklGRu4UAABXRUJQVlA4WAoAAAAQAA
 
 </script>
 <script>
+/* KIT §0 fallback (design-scale p2 review): the game reads kitView().pages / html.kv1 / html.kv2 / KIT_FRAME, which rot.js defines. The built
+   root index.html always has rot.js; dev/index.html (assemble.py, used by coop-e2e and direct-mode tests) does not — without this every
+   kitView() call threw "kitView is not defined" and no :where(.kv1/.kv2) chrome rule applied. Same definitions as rot.js direct mode;
+   never overrides rot.js when it is there. */
+if(typeof window.kitView!=="function")(function(){window.KIT_FRAME=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:820},margin:8,pageMargin:4,gutter:0};
+ var P=function(){return innerWidth<innerHeight?1:2};
+ var M=function(){var r=document.documentElement,p=P();r.classList.toggle("kv1",p===1);r.classList.toggle("kv2",p===2);
+  r.style.setProperty("--kpage-w",KIT_FRAME.page.w+"px");r.style.setProperty("--kpage-h",KIT_FRAME.page.h+"px")};
+ window.kitView=function(){return{w:innerWidth,h:innerHeight,s:1,rot:false,design:false,pages:P()}};M();addEventListener("resize",M)})();
+
 /* ================= jcdn: PICTURES FROM CLOUDFLARE (owner 11/15 01:30Z "toàn bộ ảnh đưa lên Cloudflare") — dev/art/CDN.md =================
    Every picture (img/…) lives in the R2 bucket ctm-img, served by the Worker below; nothing under img/ is in git any more.
    IMG_BASE is THE one constant: dev/build/assemble.py reads it from this line and rewrites every "img/…", 'img/…', `img/…`, url(img/…)
@@ -38496,7 +38506,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="046a006ae5c1";window.CTM_BUILD=BUILD;
+const BUILD="a6c2a699ac1a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
