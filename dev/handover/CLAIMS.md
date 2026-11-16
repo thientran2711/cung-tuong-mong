@@ -173,7 +173,7 @@
 | skin-norosy: owner verdict B (12:45Z) — remove rosy-skin layer from ALL pictures, keep later edits; no kitFigLight | review/skin-norosy | main s16 | session_01UV1SzjQcW4S8GoPGj8rDyk (opus) | RUNNING | 16/11 12:43Z |
 | merge-train-8 (B+C+D READY not on main/train6/7) | review/merge-train-8 | main s16 | session_01UV1SzmEkyjvqBxvgjLzice (sonnet) | RUNNING | 16/11 12:47Z |
 | rank-bright: owner 13:00Z rank colours brighter, kit-wide one source | review/rank-bright | main s16 | session_01UV1Szjy1fRcDbAZ3q7jF9p (sonnet) | RUNNING | 16/11 12:53Z |
-| mg-balance reviewer (opus) | review/mg-balance-r1 | B | session_01N1tNP2U5AHvsMDtXGkvaLK (opus) | RUNNING | 16/11 12:55Z |
+| mg-balance reviewer (opus) | review/mg-balance-r1 | B | session_01N1tNP2U5AHvsMDtXGkvaLK (opus) | DONE PASS 288aa4f6 (archived) | 16/11 12:55Z |
 | D13 spread-events fix pass (opus): Q-length gates inside the buổi change (j70/j68/j72/jpet/jkc) | review/spread-events-r2 | B | session_01N1tNP2tutKGRiVqfsdERwB (opus) | RUNNING | 16/11 12:55Z |
 | mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | session_01N1tNP4L7Uvc92DNAw2B9G7 (opus) | RUNNING | 16/11 12:55Z |
 | owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | session_01N1tNP3XJQSsGp1Vgi9GXaP (sonnet) | DONE SẴN SÀNG KIỂM 011beb29 (archived) | 16/11 12:55Z |
@@ -202,3 +202,4 @@
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | (opening) | RUNNING | 16/11 13:45Z |
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | (opening) | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | (opening) | RUNNING | 16/11 13:45Z |
+| mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | (opening, Foreman B s5) | RUNNING | 16/11 13:45Z |
