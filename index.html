@@ -28743,7 +28743,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
  return r}})();
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const R=r0.apply(this,arguments);
  try{if(who&&S&&who!==S.maid&&who.role==="maid"&&R[0]==="mama")return["maid","mama"]}catch(e){}return R}})();
-/* ================= jhcpor: KIT §36.5 person-card portrait cell — WIDE frame, no empty headroom (owner 15/11, review/hc-portrait) =================
+/* ================= jhcpor: KIT §36.5 person-card portrait cell — STANDARD frame, no empty headroom (owner 15/11; wide -w frames REVERTED 16/11, review/hc-portrait-revert) =================
    Owner: "Ảnh 1 phía trên này còn dư chỗ nhiều nè, ảnh 2, 2 bên trái phải còn dư kìa, kéo giãn cạnh trái và phải cho khung avatar to bề ngang xíu đi."
    ONE rule for the framed portrait in every person card (pcard: Hậu cung Chí tôn / Phi tần / Nam nhân / Cung nhân, the stage pop-up card,
    every other pcard), known people and "Người lạ" alike:
@@ -28762,7 +28762,7 @@ function kitFrw(src){const m=/(frame-[a-z0-9-]+?)(?:-w)?\.webp/.exec(src||"");re
 /* the card's own portrait cell = the first .pcp right after <div class="pcl"> */
 function kitFrwCell(h){const i=h.indexOf('<div class="pcl">');if(i<0)return h;const j=i+17;if(h.slice(j,j+19)!=='<div class="pcp kit')return h;
  const k=h.indexOf('<span class="kin">',j);if(k<0)return h;const fm=/<img class="kfr" src="([^"]*)"/.exec(h.slice(k,k+4000));if(!fm)return h;
- const F=kitFrw(fm[1]);if(!F||KFRW_BAD.has(F[0]))return h;let [s,t,b]=F[1];
+ const F=kitFrw(fm[1]);if(!F||KFRW_BAD.has(F[0]))return h;let [,t,b]=F[1];const s=0;/* owner 16/11: the card shows the SAME standard frame as everywhere (no -w variant); only the headroom rule stays */
  /* the rank crest (KIT_CREST, jk2b §9) stands on the top bar and may reach higher than the frame art: the cell starts at whichever is higher */
  try{const C=window.KIT_CREST,ck=C&&C.key(fm[1]);if(ck){const w=C.w[ck]||C.W,hh=w*C.ar[ck],by=C.bar[ck]!=null?C.bar[ck]:C.bar[ck.replace(/-\d$/,"")]!=null?C.bar[ck.replace(/-\d$/,"")]:C.BAR;t=Math.min(t,Math.max(0,Math.floor(by-C.base[ck]*hh)))}}catch(e){}
  let head=h.slice(j,k);head=head.replace('class="pcp kit',`class="pcp kit kfw${s>0?" kfx":""}`);
@@ -28774,26 +28774,12 @@ const KFRW_BAD=new Set();
 function kitFrwErr(im){try{const F=kitFrw(im.getAttribute("src"));if(F)KFRW_BAD.add(F[0]);const n=im.dataset.kfn;const p=im.closest(".pcp");if(p)p.classList.remove("kfw","kfx");if(n&&im.getAttribute("src")!==n){im.onerror=()=>im.remove();im.src=n}else im.remove()}catch(e){}}
 window.kitFrwErr=kitFrwErr;
 (function(){if(typeof pcard!=="function")return;const c0=pcard;pcard=function(){const h=c0.apply(this,arguments);try{return kitFrwCell(h)}catch(e){return h}}})();
-/* the portrait's clip (kpor: inset() of the old opening) widens by s units each side inside a wide cell */
-(function(){if(typeof kporApply!=="function")return;const a0=kporApply;
- function widen(img){try{const p=img.closest&&img.closest(".pcp.kfx");if(!p)return;const s=+getComputedStyle(p).getPropertyValue("--kfs")||0;const c=img.style.getPropertyValue("--kpc");if(!c||c===img.__kpcW)return;/* already widened (our own write) */
-  const m=/inset\(([-\d.]+)% ([-\d.]+)% ([-\d.]+)% ([-\d.]+)%\)/.exec(c);if(!m||!s)return;const z=+img.dataset.kpz||1;const e=s/(z*388.8)*100;/* box width = z × 70.691 % of 550 */
-  const v=`inset(${m[1]}% ${(+m[2]-e).toFixed(3)}% ${m[3]}% ${(+m[4]-e).toFixed(3)}%)`;img.__kpcW=v;img.style.setProperty("--kpc",v)}catch(e){}}
- kporApply=function(img){const r=a0.apply(this,arguments);widen(img);return r};
- /* kpor re-sets --kpc when its measurement arrives: re-widen on every style change of a portrait in a wide cell */
- try{new MutationObserver(ms=>{for(const m of ms){const t=m.target;if(t.classList&&t.classList.contains("kpor"))widen(t)}})
-  .observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:["style"]})}catch(e){}})();
 (function(){const st=document.createElement("style");st.id="kit-frw";st.textContent=`
 /* 2. headroom: the cell's top = the frame's first opaque row, 4 px under the name; bottom = under the tassel */
 html body .pc[class][class]>.pcl>.pcp.kit.kfw.kfw{margin-top:calc(4px - var(--kft) * 100% / 550)!important;margin-bottom:calc(4px - (1037 - var(--kfb)) * 100% / 550)!important}
 /* the name block above takes only its own lines (jhc kept 2.4em so the old fixed box started level; the cell now starts at its own art) */
 html body .pc[class][class]>.pcl:has(>.pcp.kfw)>.pcname{min-height:auto!important;flex-shrink:0!important}
 /* 1. wide opening: ground, badge and origin emblem move with the widened frame */
-html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>.kbg{left:calc(14.655% - var(--kfs) * 100% / 550);width:calc(70.691% + var(--kfs) * 200% / 550)}
-html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kgem{left:calc(73.564% + var(--kfs) * 100% / 550)!important}
-html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kemb{left:calc(62.218% + var(--kfs) * 100% / 550)!important}
-html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kpor:not(.kporz):not([src*="face-"]):not([src*="unknown"]){clip-path:inset(5% calc(6.14% - var(--kfs) * 100% / 443.2) 7.28% calc(6.14% - var(--kfs) * 100% / 443.2))!important}
-html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 `;document.head.appendChild(st)})();
 /* kit page sample (#kit): the card cell for a stranger, a maid and the Emperor (s = 0: frame already full width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pcard · ô chân dung khung rộng (khung -w, sát tên)",html:()=>{
@@ -28806,7 +28792,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pca
        column slide from the old place to the new one in 180 ms (FLIP; the old portrait fading out on top moves with it). None with reduced
        motion / Cảnh động off. */
 const KFRW_WARM=new Set();
-function kitFrwWarm(root){try{(root||document).querySelectorAll('img.kfr,img[src*="/kit/frame-"]').forEach(i=>{const F=kitFrw(i.getAttribute("src"));if(!F||!F[1][0])return;
+function kitFrwWarm(root){return;/* no -w files any more (owner 16/11): nothing to warm */try{(root||document).querySelectorAll('img.kfr,img[src*="/kit/frame-"]').forEach(i=>{const F=kitFrw(i.getAttribute("src"));if(!F||!F[1][0])return;
  const u=i.getAttribute("src").replace(/frame-[a-z0-9-]+?(?:-w)?\.webp/,F[0]+"-w.webp");if(KFRW_WARM.has(u))return;KFRW_WARM.add(u);const im=new Image();im.decoding="async";im.onerror=()=>KFRW_BAD.add(F[0]);im.src=u})}catch(e){}}
 window.kitFrwWarm=kitFrwWarm;
 (function(){if(typeof renderPanel!=="function")return;const r0=renderPanel;
@@ -29078,7 +29064,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c37d9c00a6f1";window.CTM_BUILD=BUILD;
+const BUILD="93c0bc1730a1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
