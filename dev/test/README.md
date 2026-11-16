@@ -24,14 +24,14 @@ ipadPro 1366x1024 · ipadProPort 1024x1366 · ipadOld 1024x768 (`iPad; CPU OS 15
 Options (2nd/3rd arg `extra`): any Playwright context option (default `serviceWorkers:'block'`), plus `standalone:true` (installed PWA: `navigator.standalone`), `vibrate:true|false`.
 
 ## Host mode vs direct mode (READ THIS)
-- Built root `index.html` = rot.js HOST: the game runs in ONE iframe `#krotf` at the DESIGN size (landscape 1180x820 / portrait 755x1000), scaled to the screen.
+- Built root `index.html` = rot.js HOST: the game runs in ONE iframe `#krotf` at the DESIGN size (landscape 1180x820 spread / portrait ONE PAGE 590x820 = iPad half, KIT §0), scaled to the screen.
   Narrow portrait (w/h < 0.62: 390x844, 412x915, 360x800) = frame rotated 90 deg + prompt "Xoay ngang điện thoại để chơi". Inside the frame
   `innerWidth/innerHeight` and every media query read the design size, so e.g. Fold landscape 1000x755 and iPad Pro 1366x1024 are really played at 1180x820.
 - `dev/index.html` (or any run with `navigator.webdriver`) = DIRECT mode: no host, the game sees the real viewport. Playwright is a webdriver, so rot.js picks
   direct mode unless the URL has `?khost=1`. That is why tests "found no rotate prompt" on dev/index.html (it has no rot.js; the built root index.html does, and in
   direct mode it shows the prompt but never rotates or scales).
 - `D.openHost(page,url)` adds `?khost=1`; `D.openDirect(page,url)` adds `?khost=0`. Use HOST for anything a player sees on a real device (layout at 1000x755,
-  1366x1024, 844x390, 390x844, touch/drag coordinates through the transform); DIRECT is fine for logic tests and the Fold 755x1000 / iPad 1180x820 where design size = viewport.
+  1366x1024, 844x390, 390x844, touch/drag coordinates through the transform); DIRECT is fine for logic tests and iPad 1180x820 where design size = viewport (Fold portrait: host canvas is 590x820, use HOST for layout).
 - Game globals (`start`, `S`, `render`, `kitView`) live in the frame: use `game.evaluate`, `game.waitForFunction`, `game.locator`. Screenshots/clicks use the page (`p.screenshot`, `p.touchscreen`).
 - The built index.html must be fresh: run `bash dev/site/build_site.sh` first (dev/index.html alone has no rot.js). A test that serves a different build: `D.serveRoot(dir)`.
 - SW: contexts block service workers by default (clean state). To test the SW pass `{serviceWorkers:'allow'}`.
