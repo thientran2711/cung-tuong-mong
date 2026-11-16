@@ -8,7 +8,7 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
 (async()=>{const srv=http.createServer((q,r)=>{let f=path.join(ROOT,decodeURIComponent(q.url.split('?')[0]));if(f.endsWith('/'))f+='index.html';fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);return r.end()}r.writeHead(200,{'content-type':MIME[path.extname(f)]||'application/octet-stream'});r.end(d)})});
  await new Promise(r=>srv.listen(0,r));const BASE=`http://localhost:${srv.address().port}/index.html`;
  const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();const errs=[];if(process.env.CPU_THROTTLE){const cs=await ctx.newCDPSession(p);await cs.send('Emulation.setCPUThrottlingRate',{rate:+process.env.CPU_THROTTLE})}p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);render()});await p.waitForTimeout(800);await p.evaluate(()=>{document.querySelectorAll('#kroul,.kroul').forEach(e=>e.remove())});await p.addStyleTag({content:'.kroul,.kload{display:none!important}'});
  const shot=async n=>{if(SH==='none')return;await p.locator('#kg82').screenshot({path:`${OUT}/${n}-${SZ}.jpg`,type:'jpeg',quality:70,timeout:60000})};

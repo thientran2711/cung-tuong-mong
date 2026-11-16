@@ -16,14 +16,14 @@ Object.assign(KG82_KIND,{
  td_cong:{e:"tdthread",n:"Công",t:"Thêu theo nét",how:"Chọn sợi chỉ đúng màu với chỉ mẫu. Rồi kéo kim theo nét chấm; chấm sáng là mũi kế tiếp. Ba mảnh thêu."},
  td_dung:{e:"tdwalk",n:"Dung",t:"Đi đứng giữ bát",how:"Bước đi làm bát trên đầu nghiêng. Giữ nửa trái hoặc nửa phải của khung để đỡ bát thẳng lại. Dấu trên sàn báo bước sau nghiêng về bên nào."},
  td_ngon:{e:"tdtalk",n:"Ngôn",t:"Ứng đối",how:"Xem người nói là ai và sắc mặt ra sao, rồi chọn lời có giọng mà phép ứng đối ghi sẵn. Mỗi lời đều có nhãn giọng. 5 câu."},
- td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Mỗi người chờ đều ghi cần mấy phần. Bấm + hoặc − để chia phần cho vừa đủ rồi bấm Phát xong. 3 lượt."}});
+ td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Mỗi người chờ đều ghi cần mấy phần. Chạm + hoặc − để chia phần cho vừa đủ rồi chạm Phát xong. 3 lượt."}});
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
 const TD_RULES={
  cong:[["1","Xem chỉ mẫu ở trên, chạm sợi chỉ cùng màu."],["2","Đặt ngón tay lên chấm xanh, kéo kim men theo nét chấm tới cờ đỏ."],["3","Lệch khỏi nét thì mũi chỉ không bám; kéo lại gần nét là thêu tiếp được."]],
  dung:[["1","Bước chân nào cũng làm bát nghiêng một chút. Dấu trên sàn có mũi tên chỉ bên nghiêng."],["2","Giữ nửa trái hoặc nửa phải của khung để đỡ bát về phía ngược lại."],["3","Giữ mũi tên xanh ở vùng sáng giữa thanh là được điểm; bát đổ thì đứng lại một nhịp."]],
  ngon:[["1","Xem người nói là bề trên, ngang hàng hay kẻ dưới, và sắc mặt người ấy."],["2","Dòng Phép ứng đối ghi sẵn nên nói giọng nào."],["3","Chọn lời có nhãn giọng ấy. Giọng thẳng thắn dễ làm mất lòng, đừng chọn."]],
- hanh:[["1","Mỗi người chờ ghi rõ cần mấy phần."],["2","Bấm + để thêm một phần cho người ấy, bấm − để bớt lại."],["3","Chia cho ai cũng đủ, đừng thừa cho người này mà thiếu người kia, rồi bấm Phát xong."]]};
+ hanh:[["1","Mỗi người chờ ghi rõ cần mấy phần."],["2","Chạm + để thêm một phần cho người ấy, chạm − để bớt lại."],["3","Chia cho ai cũng đủ, đừng thừa cho người này mà thiếu người kia, rồi chạm Phát xong."]]};
 const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát giữ thẳng trọn buổi",ngon:"Lời nói vừa lòng người nghe",hanh:"Ai cũng được đủ phần cần"};
 function tdEase(lv){return cl(Math.round(lv||0),0,5)}
 
@@ -159,8 +159,8 @@ function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createEle
  render();return()=>{stop=true}}
 function tdAlmsBestGive(R){let best=-1,bg=null;const give=R.need.map(()=>0);(function rec(i,left){if(i===R.need.length){const s=tdAlmsScore(R.need,give,R.pool);if(s>best){best=s;bg=give.slice()}return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,R.pool);return bg}
 /* ---------- easy-rules layer (same pattern as review/mg-easy): Gợi ý button, quiet idle hint, first-time example card ---------- */
-const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở lời có giọng hợp với phép ứng đối.",tdalms:"Viền vàng ở nút cần bấm tiếp (hoặc nút Phát xong)."};
-const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui, phép ghi “bề trên: cung kính” thì chọn lời mang nhãn cung kính.",hanh:"Người ghi cần 2 phần: bấm + hai lần cho người ấy, rồi làm vậy với mọi người, bấm Phát xong."};
+const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở lời có giọng hợp với phép ứng đối.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
+const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui, phép ghi “bề trên: cung kính” thì chọn lời mang nhãn cung kính.",hanh:"Người ghi cần 2 phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong."};
 function tdIdle(lv){lv=+lv||0;return lv<=1?6500:lv<=3?10500:0}
 function tdSeen(k,set){try{if(KG82.noDemo||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m["td_"+k]=1;return true}return !!m["td_"+k]}catch(e){return true}}
 function tdRing(pt,ms){const r=document.createElement("div");r.className="tdring ksel";r.style.cssText=`position:fixed;left:${pt.x-26}px;top:${pt.y-26}px;width:52px;height:52px;border-radius:50%;pointer-events:none;z-index:99999`;document.body.appendChild(r);setTimeout(()=>r.remove(),ms||2600);return r}
