@@ -125,4 +125,20 @@ Every new pick chooses only among options that already passed the old gate. Note
 - Probe: `dev/test/npcmind-probe.js`.
 
 ## Balance (sens bot, `EXTRA=inpers.js node dev/measure/runpers.js sens N out.json`, same CAP for both builds)
-RESULTS: see the section below (filled after the runs).
+Canonical harness: `INP=inpage6.js INP2=inx.js HHSTOP=1 node dev/measure/runb.js sens 40`.
+- Setup: 2 processes per build, CAP 3000 s, the same machine at the same time.
+- BASE = 44f9e10 (main + personality-r1 + pcard-dislikes, before npc-mind). NEW = this branch.
+
+| build | lives | Hoàng hậu (maxRank 7) | early death (died before HH) | Thái phi (outlived the Emperor) | crash / timeout / page errors |
+|---|---|---|---|---|---|
+| BASE | 28 | 1 (4%) | 14 (50%) | 13 | 0 / 0 / 0 |
+| NEW | 28 | 0 (0%) | 14 (50%) | 14 | 0 / 0 / 0 |
+
+- maxRank spread: BASE 1:3 2:5 3:6 4:4 5:5 6:4 7:1; NEW 1:1 2:3 3:5 4:9 5:8 6:2.
+- At n=28 one life is about 3.6 points (95% band about ±17).
+- **npc-mind does not move the numbers beyond noise.** Early death is identical. NEW lives climb at least as high (more lives end at ranks 4–5).
+- **OUT OF RANGE, but already in BASE:**
+  - Hoàng hậu is 0–4% against the ~32% target (OD:L20). It was already low after personality-r1 (that review measured 17%).
+  - Early death is 50% against the ~40–45% target.
+  - Most lives now end with the Emperor's death at about year 13–14 (Thái phi), before she reaches Hoàng hậu.
+- BAL was NOT tuned here. This is a main-level regression from earlier merges (personality greetings plus Emperor mortality, OD:L1116), not from this branch. A tuning that fits it belongs in a balance pass with bigger samples. **ESCALATED to the coordinator.**
