@@ -36,7 +36,7 @@ main at start = eba64ead4.
 | D58 close-maid-by-origin v2 | review/close-maid-r1 @ebc85f78 | opus | PASS (see ## PASS; reviewer archived) |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam-r1 @d7364cb2 | opus | PASS (see ## PASS; ships AFTER kc-roads-cn-nc-fix + mg-balance; reviewer archived) |
-| D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING — VISIT half only (extends existing j7 'empnight'); POISON half PARKED (worker's reply blocked by a safety classifier) → QUESTIONS |
+| D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit @16a2d41e | opus | VISIT half SẴN SÀNG KIỂM (worker archived; built on mortality-r1) → reviewer emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 RUNNING; POISON half PARKED → QUESTIONS |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
 | D21 full review r2 → fix | review/coop-b1b5-r2 @d5879537 FAIL 1 BLOCKING (guest's jcycle answer ignored by host) → review/coop-b1b5-fix | opus | worker session_01DgYSWnyGPZR3V86DPDjc32 RUNNING (11:16Z); r2 reviewer archived |
@@ -143,6 +143,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 12:18Z: emperor-visit SẴN SÀNG KIỂM 16a2d41e → opus reviewer (also: fix j8 nx() shown ≠ applied night numbers; morning card → KIT §81 end button). ART NEEDED (for main/C): 'Sáng hôm sau' morning banner for the visit night.
 - 11:53Z (hourly): no new D inbox orders. 5 D sessions alive: kc-roads fix (running, 8/8 home-route tests), coop-b1b5 fix, emperor-visit (visit half, bot run), name-mask (final scans), seatcap (sim lives 9–20). jmort.js still not on main 695934d1 → D4 + D57 keep waiting. No free real D items → no new spawns.
 - 11:51Z: entry-exam-r1 PASS d7364cb2 → READY (ship after kc-roads fix + mg-balance); reviewer archived; kc-roads fix worker told to build on top of it.
 - 11:47Z: close-maid-r1 PASS ebc85f78 → READY; reviewer archived.

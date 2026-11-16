@@ -121,7 +121,7 @@
 | servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | DONE SẴN SÀNG KIỂM 0aa7fdd9 | 16/11 08:40Z |
 | slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | DONE SẴN SÀNG KIỂM dd0b618f | 16/11 08:40Z |
 | ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | DONE SẴN SÀNG KIỂM ab50be5c | 16/11 08:40Z |
-| D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | RUNNING | 16/11 08:40Z |
+| D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | DONE visit half SẴN SÀNG KIỂM 16a2d41e (poison half parked) | 16/11 08:40Z |
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | DONE SẴN SÀNG KIỂM d0f2260a | 16/11 08:40Z |
 | reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | DONE SẴN SÀNG KIỂM 9f4e8bf9 | 16/11 08:40Z |
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
@@ -165,3 +165,4 @@
 | skin-light | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku | RUNNING | 16/11 11:57Z |
 | cardflip-glow2: owner bug whole-frame glow in thị tẩm card flip (not a running ring light; whole group) | review/cardflip-glow2 | main s15 (fast lane worker) | worker cardflip-glow2 (sonnet) | RUNNING | 16/11 12:10Z |
 | promo-reveal-fix: LIVE regression rank-up chest + servant reveal no longer show (bisect + whole-group fix) | review/promo-reveal-fix | main s16 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus, ex promo-skip reviewer) | RUNNING | 16/11 12:17Z |
+| emperor-visit review (opus) | review/emperor-visit-r1 | D | session_01DgYSWoamKdMf5ewt8WHax6 | RUNNING | 16/11 12:18Z |
