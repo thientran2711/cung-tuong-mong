@@ -18,7 +18,7 @@
 | mortality | review/mortality | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | outside-r2-r2 reviewer | review/outside-r2-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | DONE 2954ff9f | 16/11 05:20Z |
-| C41b review | review/tuduc-pic-r1 | B | session_01N1tNP4dwJ1QEvs8oHcaKvZ | RUNNING | 16/11 05:25Z |
+| C41b review | review/tuduc-pic-r1 | B | session_01N1tNP4dwJ1QEvs8oHcaKvZ | PASS 2954ff9f | 16/11 06:20Z |
 | D34 review | review/scheme-games-port-r1 | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | PASS e25486e0 | 16/11 05:19Z |
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r3 | D | in-session agent of Foreman D s1 | PASS f484d226 | 16/11 05:57Z |
 | D-R2 row-align re-review | review/row-align-r2 | D | s1 agent stopped (interim a603afd0); reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV | RUNNING | 16/11 05:41Z |
@@ -27,7 +27,7 @@
 | D50 dialog fig placeholder | review/dlg-fig-ph | D | in-session agent of Foreman D s1 | DONE 0bf17ac4 (SẴN SÀNG KIỂM) | 16/11 05:59Z |
 | balance-after-truth re-run | review/balance-after-truth | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | reign-road review | review/reign-road-r1b | D | in-session agent of Foreman D s1 | STOPPED (duplicate of main's r1; 2 extra findings in reports/reign-road-r1b.md) | 16/11 05:40Z |
-| C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | RUNNING | 16/11 05:27Z |
+| C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | DONE 6eaca058 | 16/11 05:27Z |
 | D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | RUNNING | 05:29Z 16/11 |
 | coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | session_01UV1SzhQrqEEYDtLXNUvhdo | RUNNING | 16/11 05:31Z |
 | modal-scroll-r1 + log-sync-r2 (an-tinh) + book-fig-r1 re-merge on main | review/merge-hot-1 | main s9 | session_01UV1Szkb26qWiEe1bacAQvL | RUNNING | 16/11 05:36Z |
@@ -50,3 +50,7 @@
 | ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | PAUSED (owner asleep) | 16/11 06:55Z |
 | ART D56 icons + Nội vụ phủ scene + 12 missing place glyphs | review/place-glyphs | main s10 | session_01UV1SzmEsuu42GCFecC9HGf | PAUSED (owner asleep) | 16/11 06:55Z |
 | D25 veil/scar box follows zoom | review/veil-zoom | C | session_011xDdVQH85mp5QLY8bMqh7D | RUNNING | 06:08Z 16/11 |
+| C35b review | review/pcard-dislikes-r1 | B | (id follows) | RUNNING | 16/11 06:20Z |
+| D3 item-big | review/item-big | B | (id follows) | RUNNING | 16/11 06:20Z |
+| D9 header-own | review/header-own | B | (id follows) | RUNNING | 16/11 06:20Z |
+| D12 mood-bar | review/mood-bar | B | (id follows) | RUNNING | 16/11 06:20Z |

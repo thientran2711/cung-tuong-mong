@@ -1,6 +1,6 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
-last wake: 11/16/2026 05:24Z (Foreman B session 2 = session_01N1tNP3StF4VxqkqTsQSt3a)
+last wake: 11/16/2026 06:20Z (Foreman B session 2 = session_01N1tNP3StF4VxqkqTsQSt3a)
 Context (session 2): system+brief ~40k tokens at start; ~55k after the mandatory setup reads → budget ~70k (start-after-setup +25%). Hourly self-wake: CronCreate job c564090d at :17 every hour.
 Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
 
@@ -14,16 +14,25 @@ Context: session B1 started small (~30k tokens); now far past start+25% → ROLL
 - Tools on the box: /home/user/wt/{PREAMBLE.txt, REVIEWER.txt, WORKER_B.txt, REPORT_B.txt, RESUME_B.txt, stpush.sh}. New session has its own container: copy the briefs from dev/handover/ (PREAMBLE.txt, REVIEWER.txt) + this file's rules; workers now run as separate sessions writing dev/handover/reports/<branch>.md.
 - Cloudflare: works on account B's environment (token re-saved 11/16).
 
-Updated: 11/16/2026 05:25Z (session 2) — Running as separate sessions: C41b reviewer (session_01N1tNP4dwJ1QEvs8oHcaKvZ), C35b worker (session_01N1tNP6oudZkvfTX5H98ZMF). PASS waiting for fast-forward: D31, D33, D34, C24, C41. Blocked: D36 (kit podium), D41 (Foreman C D29), C32b curl speed (KIT REQUEST to keeper). Free slots: 10 — coordinator may add items.
+Updated: 11/16/2026 06:20Z (session 2) — PASS new: C41b. Reviewing: C35b. Running: D3, D9, D12. Held (Q24): D11, D13, D14, D19, D44. Blocked: D36 (kit-keeper-1). D41 moved to C. Free slots: 7.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg-r1 | sonnet | PASS 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 |
-| C41b tuduc-pic | review/tuduc-pic (on tuduc-mg-r1) | sonnet | REVIEWING — worker done 2954ff9f (contains main eba64ead); reviewer session session_01N1tNP4dwJ1QEvs8oHcaKvZ on review/tuduc-pic-r1 (05:24Z) |
+| C41b tuduc-pic | review/tuduc-pic-r1 | sonnet | PASS 2954ff9fb9367940b62bb9b824645a14c60191e0 (reviewer session_01N1tNP4dwJ1QEvs8oHcaKvZ) |
 | C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
-| C35b pcard-dislikes | review/pcard-dislikes | sonnet | RUNNING — worker session session_01N1tNP6oudZkvfTX5H98ZMF (05:24Z; coordinator answer Q9) |
+| C35b pcard-dislikes | review/pcard-dislikes @6eaca058 | sonnet | REVIEWING — worker SẴN SÀNG KIỂM 06:1xZ; reviewer session on review/pcard-dislikes-r1 (id follows) |
+| D3 item-big | review/item-big | sonnet | RUNNING — claimed 06:20Z (moved from C, order 07:30Z); code/display only, art paused tonight |
+| D9 header-own | review/header-own | sonnet | RUNNING — claimed 06:20Z (moved from C) |
+| D12 mood-bar | review/mood-bar | opus | RUNNING — claimed 06:20Z (moved from C) |
+| D11 presentation | — | — | HELD — overlaps D51 fxkit wiring + fxkit sprite art (main) and art is paused; see QUESTIONS Q24 |
+| D13 spread events | — | opus | HELD — needs Foreman C's D29 roster (cross-foreman wait); Q24 |
+| D14 học thành tài scene | — | — | HELD — painted scene = art (paused tonight) + after fxkit; Q24 |
+| D19 Biếu quà làm lành | — | — | HELD — shares econ files with C's running D17 luxury (one worker at a time); Q24 |
+| D44 fig export ≥1100 px | — | — | HELD — figure art pipeline, 'check face-sharp HD first' (main's art); art paused; Q24 |
+| D25 veil-zoom | review/veil-zoom | — | NOT TAKEN — already RUNNING at Foreman C (CLAIMS, session_011xDdVQH85mp5QLY8bMqh7D) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS d8b54d0970ac8591d07163650058485f4bceb818 |
@@ -46,7 +55,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
-| D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
+| D41 promote-servants | — | opus | MOVED to Foreman C (order 16/11 07:25Z); never started by B, no branch — handoff reports/promote-servants-handoff.md |
 | D42 places-leftovers | review/places-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS add62a7e9283cd328ddd9a46951abf0210e7bb26 (includes D30 palace-map-port-r1; kitPalaceMap renumbered §71→§76) |
 
 ## PASS (for the main coordinator to fast-forward)
@@ -74,6 +83,7 @@ PASS review/chapter-detail-r1 936a2fe78b457ad3339c8554c46c6d674c4edf57 (C24; gro
 PASS review/tuduc-mg-r1 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 (C41; 4 Tứ đức minigames, Dung real-time clock; follow-up C41b adds the left picture)
 PASS review/difficulty-port-r1 cbb8ab2bf4b1c9efd2b7022c9ef87fe6b28b013c (D31; Dễ/Vừa/Khó per life as multipliers on BAL, Vừa = base exactly (verified); coop-e2e 59/59; when review/newgame-ui-r2 lands re-run dev/test/difficulty.js + idcard-pin-scan.js (picker already handles .kpscroll); numbers wait for C7 n≥30 re-measure)
 PASS review/scheme-games-port-r1 e25486e0df86f6779aa61aa289e3ba5236b99f40 (D34; 4 scheme minigames behind one choice dialog, odds ±1 step for her only, coop-timer 43/43; CONDITIONAL: kit keeper confirms reviewer's kit-wide jopic.js change `grid-auto-rows:max-content` (option cards were squeezed/clipped in kdper dialogs) — eyeball other kart option dialogs)
+PASS review/tuduc-pic-r1 2954ff9fb9367940b62bb9b824645a14c60191e0 (C41b; Tứ đức minigames get the study-room painting on the left via kitGameFrame({pic}), call site only; 6 viewports 8/8; CDN pics 200; contains main eba64ead and review/tuduc-mg-r1 (C41) — fast-forward this one and C41 comes with it)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -127,6 +137,9 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q13 (C33 weekbook): week-book entry wording is generic per person and direction ("Hoàng thượng để tâm đến ta hơn", "nàng bớt ghen"); per-act sentences would need act data — owner want that later? Also many "Mấy việc vặt…" lines until review/log-sync lands on main (missing log lines; honest, not a bug).
 - Q14 (D40 weather; reviewer: with one-off gear the per-trip kiệu is nearly pointless): rain gear (dù/áo tơi/giày) is a one-time purchase that halves one risk; the kiệu costs Bạc −6 per outing. Should gear wear out?
 - Q15 (C34 contest-ui): her contest titles (e.g. "Hoa khôi · Tết Thất tịch") show only in Sổ ân thưởng — enough? The cắm hoa board painting is an empty stage with pink curtains (no flowers) — want contest-specific paintings? Only one podium backdrop set was made (owner asked for variants by contest kind/season).
+
+- Q24 (for main s10, owner rule "related items to one foreman"): of the D-list moved to B, D11 (presentation: §68/animations into every event) overlaps D51 fxkit wiring + fxkit sprite art now at MAIN; D13 waits for C's D29 roster; D19 shares econ files with C's running D17; D14 + D44 are art (paused tonight; D44 needs main's face-sharp HD first); D25 already runs at C. Per the rule (move the dependent item to the owner of the blocking item) B suggests D11→main, D13+D19→C, D14+D44→art owner after the morning. B holds them until you answer; B took D3, D9, D12 now.
+- Q25 (C35b dislikes, from the worker): Thái hậu has no dislikes (task said consorts + Emperor) — add? Consorts still show no "likes" row (only derived best art) — only the "ghét" row was added.
 
 ## COORDINATOR ANSWERS (16/11, hourly watch)
 - panel-size-r1 a523531da FAST-FORWARDED to main. All other PASSes (C23, C26–C29, C35, C39, C40, D39) go through review/merge-train-2 (main session), with no action from you.
