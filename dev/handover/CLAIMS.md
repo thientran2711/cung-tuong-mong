@@ -210,7 +210,7 @@
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | session_011xDdVSCHRnD3ox6Afg4tHa | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | session_011xDdVP5yaxTpEx8BoJ4t2i | RUNNING | 16/11 13:45Z |
 | kc-roads Chờ-value fix (r1 FAIL item 1, OD:L1288) | review/kc-roads-cn-nc-fix2 | D | session_01DgYSWoQg78D5zyhdSa6uoH | RUNNING | 16/11 13:46Z |
-| D31 difficulty re-measure + HH ~32 % on Vừa + Q14 rain gear wears out (opus) | review/diff-remeasure | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
-| EMOTION ACTIONS + extreme-mood consequences + FORCED emotion events, player + all NPCs (OD 13:08Z, 13:25Z(B), 13:50Z) (opus) | review/emotion-acts | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
-| D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
-| D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | (opening, Foreman B s5) | RUNNING | 16/11 13:55Z |
+| D31 difficulty re-measure + HH ~32 % on Vừa + Q14 rain gear wears out (opus) | review/diff-remeasure | B | session_01N1tNP4CcXesvskQcWYTMwP | RUNNING | 16/11 13:55Z |
+| EMOTION ACTIONS + extreme-mood consequences + FORCED emotion events, player + all NPCs (OD 13:08Z, 13:25Z(B), 13:50Z) (opus) | review/emotion-acts | B | session_01N1tNP3dP2Jd2zhw72gV1uW | RUNNING | 16/11 13:55Z |
+| D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | session_01N1tNP5D4rJRWvpDvFV93Kf | RUNNING | 16/11 13:55Z |
+| D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | session_01N1tNP6zPQNzSmyMgNCuSPj | RUNNING | 16/11 13:55Z |
