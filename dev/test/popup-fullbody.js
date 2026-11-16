@@ -27,11 +27,11 @@ const VPS=(SIZES||'755x1000').split(',');
    const r=d.getBoundingClientRect();const seal=((d.querySelector('.kpseal')||{}).textContent||'').trim();
    const col=d.querySelector('.kpsubj.kes');const small=[...d.querySelectorAll('.kpsubj')].filter(e=>vis(e)&&!e.matches('.kes,.kpiart,.kpev,.kpitem')&&e.querySelector('.pframe,.pfwrap,.pcp,.pfr,img.kpor'));
    const fig=col&&col.querySelector('.kesimg');const fr=fig&&fig.getBoundingClientRect();const cr=col&&col.getBoundingClientRect();
-   const ban=d.querySelector('.kdlgart img, .kdlgart .ksart, .kdpban');const br=ban&&ban.getBoundingClientRect();
+   const ban=d.querySelector('.kdlgart img, .kdlgart .ksart, .kdpban');const br=ban&&ban.getBoundingClientRect();const hasBan=!!br&&br.width>40&&br.height>30;const figOut=fr&&cr?Math.round(Math.max(0,Math.min(fr.bottom,cr.bottom,r.bottom)-Math.max(fr.top,cr.top,r.top))):0;const colH=cr?Math.round(cr.height):0;
    const btn=d.querySelector('.kpopts button, .opts button');const btr=btn&&btn.getBoundingClientRect();
    const idc=d.querySelector('.kpid');const idfig=document.querySelector('#modal img.kidfig2');
    return{host,seal,title:((d.querySelector('.kptitle')||{}).textContent||'').slice(0,40),w:Math.round(r.width),h:Math.round(r.height),
-    hasCol:!!col&&!!fr&&fr.width>20&&fr.height>40,small:small.length,smallCls:small.map(e=>e.className).slice(0,2),
+    hasCol:!!col&&!!fr&&fr.width>20&&fr.height>40,hasBan,colH,figOut,small:small.length,smallCls:small.map(e=>e.className).slice(0,2),
     figLeftOfBanner:br&&cr?cr.right<=br.left+2:null,btnBelow:btr&&br?btr.top>=br.bottom-2:null,kid:!!idc,idFig:!!idfig&&vis(idfig),
     dbg:(!fr||fr.width<=20)?((col&&col.outerHTML)||d.innerHTML).slice(0,500):'',kpw:parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kpw'))||null,docOv:document.documentElement.scrollWidth>innerWidth+1}});
   const close=()=>p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{kitCoachOff&&kitCoachOff();kitTipOff&&kitTipOff()}catch(e){}});
@@ -40,6 +40,8 @@ const VPS=(SIZES||'755x1000').split(',');
    if(needPerson&&!o.hasCol&&!(o.kid&&o.idFig)&&/visibility: hidden/.test(o.dbg||'')){o.v='WARN';o.why=['figure still being measured (CDN load) — rerun'];res[name]=o;return}
    if(needPerson&&!o.hasCol&&!(o.kid&&o.idFig))why.push('person pop-up without the full-body figure column');
    if(o.hasCol&&o.figLeftOfBanner===false)why.push('figure not LEFT of the event picture');if(o.hasCol&&o.btnBelow===false)why.push('buttons not below the picture');
+   if(needPerson&&o.hasCol&&!o.hasBan)why.push('person pop-up without the event picture (.kdlgart / .kdpban) right top');
+   if(needPerson&&o.hasCol&&o.colH<150)why.push('figure column clipped (height '+o.colH+'px)');if(o.hasCol&&o.figOut<150)why.push('figure visible only '+o.figOut+'px tall (clipped / outside the frame)');
    if(o.docOv)why.push('horizontal overflow');o.v=why.length?'FAIL':'OK';o.why=why;res[name]=o;if(why.length)fails.push(name+': '+why.join('; '))};
   /* A. every PEND event with a person */
   const ids=await p.evaluate(()=>Object.keys(PEND));let n=0;
@@ -54,9 +56,12 @@ const VPS=(SIZES||'755x1000').split(',');
    ['result-person',()=>{Q.push({t:"Kết quả: thử",who:liveRivals(true)[0],h:"<p>Thành công.</p>"});showModal()}],
    ['notice-person',()=>{Q.push({t:"Một báo",who:liveRivals(true)[0],h:"<p>Ngắn.</p>"});showModal()}],
    ['night-person',()=>{Q.push({t:"Đêm",cls:"night",who:liveRivals(true)[0],h:"<p>Đêm xuống.</p>"});showModal()}],
+   ['contest',()=>{Q.push({t:"Tranh ghế",who:pEmp(),h:"<p>Ba vòng: Tài nghệ, Đức hạnh.</p>"});showModal()}],
+   ['cold-palace',()=>{Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:"<p>Ngươi bị đưa vào lãnh cung.</p>"});showModal()}],
+   ['contest-round',()=>{Q.push({ev:1,t:"Tranh ghế: giữa các vòng",who:pMe(),h:"<p>Còn 2 vòng.</p>",opts:[{n:"Luyện tập",fx:{}},{n:"Nghỉ",fx:{}}]});showModal()}],
    ['intel',()=>kitIntelPanel(liveRivals(true)[0])],['evidence',()=>kitEvidencePanel(liveRivals(true)[0])]];
   for(const [nm,fn] of info){try{await p.evaluate(fn)}catch(e){errs.push(nm+': '+String(e.message).slice(0,100))}await sleep(450);verdict(nm,await look(),true);await close()}
-  /* C. tutorial: 4 intro pages + every spotlight step = ONE frame size each (std for the pages, coach for the steps) */
+  /* C. tutorial: 4 intro pages + every spotlight step = ONE frame size each (the one std frame) */
   await p.evaluate(()=>{try{window.kitTour()}catch(e){}});await sleep(1200);
   const pages=[],steps=[];
   for(let i=0;i<40;i++){const o=await look();if(!o||o.host!=='coach')break;
@@ -71,9 +76,12 @@ const VPS=(SIZES||'755x1000').split(',');
   res['tour:sizes']={pages,steps,v:'INFO'};
   await close();await sleep(300);
   await p.evaluate(()=>{kitTip({id:"scan",title:"Lời dặn thử",html:"<p>Một lời dặn ngắn.</p>"})});await sleep(700);
-  const tp=await look();verdict('tip',tp,true);if(tp&&steps.length&&(tp.w!==steps[0][0]||tp.h!==steps[0][1]))fails.push('tip frame size '+tp.w+'x'+tp.h+' differs from the coach steps '+steps[0]);
+  const tp=await look();verdict('tip',tp,true);if(tp&&pages.length&&(tp.w!==pages[0][0]||tp.h!==pages[0][1]))fails.push('tip frame size '+tp.w+'x'+tp.h+' differs from the tutorial pages '+pages[0]);
   const std=pages[0];if(std&&std[0]>0){const kpw=(res['tour:0:'+Object.keys(res).find(k=>k.startsWith('tour:0:')).slice(7)]||{}).kpw}
   await close();
+  /* ONE frame size per viewport for every person pop-up (all kinds, tutorial pages / steps / tip; OD:L963) */
+  {const L=Object.entries(res).filter(([k,r])=>r&&r.w&&r.hasCol&&!r.kid);const f={};L.forEach(([k,r])=>{const s=r.w+'x'+r.h;f[s]=(f[s]||0)+1});const top=Object.entries(f).sort((a,b)=>b[1]-a[1])[0];
+   if(top){const odd=L.filter(([k,r])=>r.w+'x'+r.h!==top[0]).map(([k,r])=>k+' '+r.w+'x'+r.h);if(odd.length){fails.push('frame size differs from the viewport frame '+top[0]+': '+odd.slice(0,8).join(', '));odd.forEach(o=>{const k=o.split(' ')[0];if(res[k])res[k].v='FAIL'})}res['frame:std']={v:'INFO',std:top[0],kinds:f}}}
   const cnt={};Object.values(res).forEach(r=>cnt[r.v]=(cnt[r.v]||0)+1);
   R[sz]={count:cnt,fails,res,errs};if(fails.length)bad++;
   console.log(sz,JSON.stringify(cnt));fails.forEach(f=>console.log('  FAIL',f));errs.slice(0,5).forEach(e=>console.log('  ERR',e));

@@ -41,3 +41,9 @@ jpdlg.js (new kit part) · jtut.js (coach + tip use it; own card CSS removed) ·
 kit-conform.js 755x1000: 73 CONFORMS, 0 MIXED/CUSTOM, no floats, tutorial pages + steps one size.
 WARN = a figure still hidden because kitFigBody (CDN CORS measure) had not finished after 25 s in a long sequence (PEND:shop passes alone) — pre-existing latent flake in kitDpFit, not touched here.
 Interact tutorial step with no room (phone landscape): the card keeps its frame size and lies at the free edge (the old code narrowed the width = a second size).
+
+## Round 2 (reviewer popup-fullbody-r1 FAIL list, branch review/popup-fullbody-r2 on top of r1 0b1d3096)
+1. kept (reviewer's jkpc fix).
+2. default banner per kind (kitDefaultBanner, KIT §50.3) — person ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / intel now have the picture right top.
+3. tests hardened (popup-fullbody.js): FAIL no banner / figure < 150 px visible / frame size differs across kinds; new cases contest, cold-palace, contest-round (kit-conform MISSING place:* have no `who`, so no portrait form; contest + cold-palace (`who`) covered here). Coach size dropped: tutorial steps + tip = the std frame (same size as every pop-up).
+Extra bug found by the new check: evidence / intel panel (person, no options): figure column was the whole scroll height, figure 1100 px below the fold → column = visible #mb height, sticky.

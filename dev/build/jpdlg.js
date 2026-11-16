@@ -5,11 +5,10 @@
    #modal dialogs get this template from kitEventStage / kitDpApply (jk4). The tutorial coach (jtut kitCoach), the contextual tips (kitTip) and any
    other overlay that lives OUTSIDE #modal (co-op notices …) build it with this ONE function, so the template, the figure fit and the frame size
    are the same code for all of them. Nobody may write a second copy.
-   kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns:[{k,t,alt}],size:"std"|"coach",cls}) -> HTML of
+   kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns:[{k,t,alt}],cls}) -> HTML of
      <div class="dlg kpanel kpdlg"> .kph · .kpdb > (.kpsubj.kes > figure.kesf) + .kpdr > (.kdlgart.kdpban + .kpdt) · .kpopts </div>
-   size "std"   = the one pop-up frame (--kpw x --kph, KIT §8.1), the same as every #modal panel;
-   size "coach" = the SAME frame width, a shorter height (--kpch) used only while a spotlight must stay visible beside the card: ONE size for every
-                  step / tip of the tour, never per page. kitPersonDlgFit(root) lays the figure (feet on the column floor, head under the chip). */
+   The frame is ALWAYS the one pop-up frame (--kpw x --kph, KIT §8.1), the same as every #modal panel — no per-kind / per-step size (reviewer
+   popup-fullbody-r1 #3, OD:L963). kitPersonDlgFit(root) lays the figure (feet on the column floor, head under the chip). */
 function kitPersonDlg(o){o=o||{};try{
  const kind=o.kind||"guide";const q=o.p||{};
  const fig=kitStageFig(q,{src:o.fig,cap:false});
@@ -17,7 +16,7 @@ function kitPersonDlg(o){o=o||{};try{
  if(!nm&&q.rw)nm=`<b class="kname" style="--rc:${q.col||"#8a7350"}">${q.rw}</b>`;
  const pic=o.pic&&o.pic.src?`<div class="kdlgart kdpban">${kitSceneArt(o.pic.src,o.pic.lab||"",{shape:"wide",cap:!!o.pic.lab})}</div>`:"";
  const btns=(o.btns||[]).map(b=>`<button type="button" class="kbtn${b.alt?" alt":""}" data-ktut="${b.k}">${b.t}</button>`).join("");
- return `<div class="dlg kpanel kesdlg kpdlg${o.size==="coach"?" kpdcoach":""}${o.cls?" "+o.cls:""}" data-kind="${kind}" data-kpd="${o.size==="coach"?"coach":"std"}">${kpHeader(kind,o.title||"",o.sub||"")}`+
+ return `<div class="dlg kpanel kesdlg kpdlg${o.cls?" "+o.cls:""}" data-kind="${kind}" data-kpd="std">${kpHeader(kind,o.title||"",o.sub||"")}`+
   `<div class="kpdb"><div class="kpsubj kes kes1">${nm?`<div class="kpsn kpdcap knr">${nm}</div>`:""}<div class="kpdfig">${fig}</div></div>`+
   `<div class="kpdr">${pic}<div class="kpdt">${o.html||""}</div></div></div>${btns?`<div class="kpopts kpdo">${btns}</div>`:""}</div>`}catch(e){console.error("kitPersonDlg",e);return""}}
 function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".kpdlg .kpsubj.kes").forEach(col=>{
@@ -36,9 +35,7 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
 window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 (function(){let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>kitPersonDlgFit(),140)})})();
 (function(){const st=document.createElement("style");st.id="kit-pdlg";st.textContent=`
-:root{--kpch:min(var(--kph),max(300px,54dvh))}
 html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;max-width:var(--kpw);height:var(--kph);min-height:var(--kph);max-height:var(--kph);display:flex;flex-direction:column;overflow:hidden;margin:0}
-html body .dlg.kpanel.kpdlg.kpdcoach{height:var(--kpch);min-height:var(--kpch);max-height:var(--kpch)}
 .kpdlg>.kph{flex:none}
 .kpdlg>.kpdb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:clamp(110px,38%,248px) minmax(0,1fr);gap:12px;padding:8px 14px 4px}
 .kpdlg .kpsubj.kes{position:relative;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:hidden}
@@ -52,7 +49,6 @@ html body .dlg.kpanel.kpdlg.kpdcoach{height:var(--kpch);min-height:var(--kpch);m
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
 .kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,17dvh,150px);aspect-ratio:auto}
 .kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
-.kpdlg.kpdcoach .kdpban>.ksart{height:clamp(70px,16dvh,150px)}
 .kpdlg .kpdt{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;font-size:.9rem;line-height:1.45;color:var(--ink)}
 .kpdlg .kpdt p{margin:0 0 6px}
 .kpdlg .kpdt .kb{margin:4px 0 2px}

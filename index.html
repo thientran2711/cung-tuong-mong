@@ -22843,6 +22843,11 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
+/* KIT 50.3 default banner (OD:L448): the picture of a person pop-up whose event has none — the info picture of its title (kitInfoArt: info-*.webp / act-cat-*), else one per kind */
+const KIT_KIND_BANNER={info:"giao-thiep",rule:"hoc-tap",notice:"giao-thiep",result:"le-nghi",night:"sung-ai",intel:"muu-ke",end:"le-nghi",news:"giao-thiep",choice:"giao-thiep",reward:"ban-thuong",guide:"hoc-tap"};
+function kitDefaultBanner(m,kind){try{const ia=typeof kitInfoArt==="function"?kitInfoArt(m&&m.t||""):null;if(ia&&ia.src)return{src:ia.src,lab:""};
+ const have=(typeof KIT_ACTS==="object"&&KIT_ACTS.have)||[];const c=KIT_KIND_BANNER[kind]||"giao-thiep";const k=have.includes("act-cat-"+c)?c:(have.includes("act-cat-giao-thiep")?"giao-thiep":"");return k?{src:`https://ctm-img.victoria-tntt.workers.dev/img/act-cat-${k}.webp`,lab:""}:null}catch(e){return null}}
+window.kitDefaultBanner=kitDefaultBanner;
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
  /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
@@ -22851,6 +22856,8 @@ function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.query
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
   if(!a&&typeof kitEvArt==="function")a=kitEvArt(m);
+  /* owner 16/11 07:35Z (OD:L448) + reviewer popup-fullbody-r1 #2: EVERY person pop-up has the event picture RIGHT TOP — a kind without its own picture (ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / tai mắt) gets its default banner by kind */
+  if(!a||!a.src)a=kitDefaultBanner(m,dlg.dataset.kind||"");
   if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a),a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}}
  body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());
  const s=document.createElement("div");s.className="kpsubj kes kes"+figs.length;s.innerHTML=figs.join("");body.prepend(s);body.classList.add("kphas","kesb");dlg.classList.add("kesdlg");return true}catch(e){console.error("kitEventStage",e);return false}}
@@ -23054,6 +23061,8 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* review shop-fix (main): kitEsFit (33.6) may have left position:relative + a narrow max-width inline on a cached figure; clear them */
   x.cap.style.removeProperty("position");x.cap.style.removeProperty("z-index");x.cap.style.removeProperty("max-width")}});
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
+ /* reviewer popup-fullbody-r1 / evidence panel: a person panel WITHOUT an options group scrolls as a whole (#mb); the figure column must be the visible height of #mb (sticky at the top), never the whole scroll height (figure 1100 px below the fold) */
+ if(!narrow&&!mb.querySelector(":scope > .opts")){col.style.removeProperty("height");col.style.removeProperty("align-self");if(mb.scrollHeight>mb.clientHeight+2){col.style.alignSelf="start";col.style.height=Math.max(200,mb.clientHeight-20)+"px"}}
  const H=col.clientHeight;if(H<80)return;const floor=H-2;
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
  /* KIT 32.2 CAP + CROP (owner 15/11 "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà", review/stage-fig-size):
@@ -23570,11 +23579,10 @@ ${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
    #modal dialogs get this template from kitEventStage / kitDpApply (jk4). The tutorial coach (jtut kitCoach), the contextual tips (kitTip) and any
    other overlay that lives OUTSIDE #modal (co-op notices …) build it with this ONE function, so the template, the figure fit and the frame size
    are the same code for all of them. Nobody may write a second copy.
-   kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns:[{k,t,alt}],size:"std"|"coach",cls}) -> HTML of
+   kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns:[{k,t,alt}],cls}) -> HTML of
      <div class="dlg kpanel kpdlg"> .kph · .kpdb > (.kpsubj.kes > figure.kesf) + .kpdr > (.kdlgart.kdpban + .kpdt) · .kpopts </div>
-   size "std"   = the one pop-up frame (--kpw x --kph, KIT §8.1), the same as every #modal panel;
-   size "coach" = the SAME frame width, a shorter height (--kpch) used only while a spotlight must stay visible beside the card: ONE size for every
-                  step / tip of the tour, never per page. kitPersonDlgFit(root) lays the figure (feet on the column floor, head under the chip). */
+   The frame is ALWAYS the one pop-up frame (--kpw x --kph, KIT §8.1), the same as every #modal panel — no per-kind / per-step size (reviewer
+   popup-fullbody-r1 #3, OD:L963). kitPersonDlgFit(root) lays the figure (feet on the column floor, head under the chip). */
 function kitPersonDlg(o){o=o||{};try{
  const kind=o.kind||"guide";const q=o.p||{};
  const fig=kitStageFig(q,{src:o.fig,cap:false});
@@ -23582,7 +23590,7 @@ function kitPersonDlg(o){o=o||{};try{
  if(!nm&&q.rw)nm=`<b class="kname" style="--rc:${q.col||"#8a7350"}">${q.rw}</b>`;
  const pic=o.pic&&o.pic.src?`<div class="kdlgart kdpban">${kitSceneArt(o.pic.src,o.pic.lab||"",{shape:"wide",cap:!!o.pic.lab})}</div>`:"";
  const btns=(o.btns||[]).map(b=>`<button type="button" class="kbtn${b.alt?" alt":""}" data-ktut="${b.k}">${b.t}</button>`).join("");
- return `<div class="dlg kpanel kesdlg kpdlg${o.size==="coach"?" kpdcoach":""}${o.cls?" "+o.cls:""}" data-kind="${kind}" data-kpd="${o.size==="coach"?"coach":"std"}">${kpHeader(kind,o.title||"",o.sub||"")}`+
+ return `<div class="dlg kpanel kesdlg kpdlg${o.cls?" "+o.cls:""}" data-kind="${kind}" data-kpd="std">${kpHeader(kind,o.title||"",o.sub||"")}`+
   `<div class="kpdb"><div class="kpsubj kes kes1">${nm?`<div class="kpsn kpdcap knr">${nm}</div>`:""}<div class="kpdfig">${fig}</div></div>`+
   `<div class="kpdr">${pic}<div class="kpdt">${o.html||""}</div></div></div>${btns?`<div class="kpopts kpdo">${btns}</div>`:""}</div>`}catch(e){console.error("kitPersonDlg",e);return""}}
 function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".kpdlg .kpsubj.kes").forEach(col=>{
@@ -23601,9 +23609,7 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
 window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 (function(){let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>kitPersonDlgFit(),140)})})();
 (function(){const st=document.createElement("style");st.id="kit-pdlg";st.textContent=`
-:root{--kpch:min(var(--kph),max(300px,54dvh))}
 html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;max-width:var(--kpw);height:var(--kph);min-height:var(--kph);max-height:var(--kph);display:flex;flex-direction:column;overflow:hidden;margin:0}
-html body .dlg.kpanel.kpdlg.kpdcoach{height:var(--kpch);min-height:var(--kpch);max-height:var(--kpch)}
 .kpdlg>.kph{flex:none}
 .kpdlg>.kpdb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:clamp(110px,38%,248px) minmax(0,1fr);gap:12px;padding:8px 14px 4px}
 .kpdlg .kpsubj.kes{position:relative;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:hidden}
@@ -23617,7 +23623,6 @@ html body .dlg.kpanel.kpdlg.kpdcoach{height:var(--kpch);min-height:var(--kpch);m
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
 .kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,17dvh,150px);aspect-ratio:auto}
 .kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
-.kpdlg.kpdcoach .kdpban>.ksart{height:clamp(70px,16dvh,150px)}
 .kpdlg .kpdt{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;font-size:.9rem;line-height:1.45;color:var(--ink)}
 .kpdlg .kpdt p{margin:0 0 6px}
 .kpdlg .kpdt .kb{margin:4px 0 2px}
@@ -33227,7 +33232,7 @@ function rectOf(t){try{const el=typeof t==="function"?t():typeof t==="string"?$q
 function clip(r,pad){const vw=innerWidth,vh=innerHeight;const L=Math.max(4,r.left-pad),Tp=Math.max(4,r.top-pad),R=Math.min(vw-4,r.right+pad),B=Math.min(vh-4,r.bottom+pad);
  return{left:L,top:Tp,right:R,bottom:B,width:Math.max(0,R-L),height:Math.max(0,B-Tp)}}
 function kitCoach(spec){const R0=root();CUR=spec;R0.hidden=false;R0.classList.toggle("ktut-mv",!rm());
- const card=kitPersonDlg({kind:"guide",title:spec.title||MMN(),sub:spec.sub||"",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,size:spec.big?"std":"coach",cls:"ktut-card"});
+ const card=kitPersonDlg({kind:"guide",title:spec.title||MMN(),sub:spec.sub||"",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,cls:"ktut-card"});
  R0.innerHTML=`${spec.target?"":`<div class="ktut-dim"></div>`}<div class="ktut-hole"${spec.target?"":" hidden"}></div><div class="ktut-blks"></div><div class="ktut-marks"></div>${card}`;
  try{kitPersonDlgFit(R0)}catch(e){}
  R0.querySelectorAll("[data-ktut]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}const k=b.dataset.ktut;if(spec.on)spec.on(k)}));
@@ -33281,7 +33286,7 @@ let TIPEL=null;
 function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next,.kloadchip").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
- el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}],size:"coach"});
+ el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
  document.body.appendChild(el);TIPEL=el;T.tip=spec.id;tipPlace();try{kitPersonDlgFit(el)}catch(e){}
  el.querySelector("[data-ktut=tip]").addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}tipOff();T.tipGap=Date.now()+1500})}
 function tipOff(){if(TIPEL){TIPEL.remove();TIPEL=null}T.tip=null}
@@ -37129,7 +37134,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b98d8ee36756";window.CTM_BUILD=BUILD;
+const BUILD="eaa4ddfd4b9f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
