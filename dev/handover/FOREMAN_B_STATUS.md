@@ -5,7 +5,8 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | Item | Branch | Model | State |
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
-| C41 tuduc-mg | review/tuduc-mg @3af1d2c4 | sonnet | REVIEWING (review/tuduc-mg-r1, sonnet) |
+| C41 tuduc-mg | review/tuduc-mg-r1 | sonnet | PASS 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 |
+| C41b tuduc-pic | review/tuduc-pic (on tuduc-mg-r1) | sonnet | RUNNING (pass TD_BG as pic → picture-left frame like the family) |
 | C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
@@ -54,6 +55,7 @@ PASS review/stat-fx-2-r1 6d4540a7cf2b61de482fde24f9e3df36782fa61f (C26b; person 
 PASS review/places-port-r1 add62a7e9283cd328ddd9a46951abf0210e7bb26 (D42; 5 new reachable places + children by age + access rules; owner-approved paintings; CONTAINS review/palace-map-port-r1 (D30) — fast-forward this one and D30 comes with it; kitPalaceMap now KIT §76, confirm)
 PASS review/routes-port-r1 332308a1961681e37e0e4de78e86adc9aac5524d (D33; Lối riêng routes + blood test + bowl art; ẩn dật vow now 34/34 harmful acts; CONDITIONAL: keeper registers category loi-rieng #2c6e5a in KIT §6.1; old-save not re-run by reviewer, worker's passed)
 PASS review/chapter-detail-r1 936a2fe78b457ad3339c8554c46c6d674c4edf57 (C24; grows kitGoalDetail — one panel, no kit part changed; chapter tap → detail + inline progress; dead-tap scan 0 confirmed dead; nit: inline progress repeats Hạn/Lợi thế; tiny private .chapgo + cursor rules for keeper to absorb)
+PASS review/tuduc-mg-r1 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 (C41; 4 Tứ đức minigames, Dung real-time clock; follow-up C41b adds the left picture)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -86,6 +88,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - KIT REQUEST (D34 scheme-games-port): (1) «MƯU» seal (lacquer red #7a2a22) via kitGameFrame({seal}) — same as D33's request; (2) custom HUD labels on kg82Open/kitGameFrame (Bóng/Hồi/Còn for Nghe ngóng); (3) painted boards for nghe/truyen/mac/thoico — old branch reused act-binh-phong, ev-tin-don, ev-hoi-lo, tam-cung-dem via an "@path" board loader (keeper decides). Main issue seen: the one-time "Kiếp này chưa trọn" warning fires on ANY option whose text mentions death (e.g. "bị đánh chết").
 - Shared mini-game guard (found by C41): j82 kg82Play ends any game after 97.5 s real time (env.end(0)); games with a clamped frame time run slower than real time on weak devices and can end at raw 0. jtd.js now uses a real-time clock; other clamped-dt games may still hit it — keeper/owner of j82 to check.
 - KIT REQUEST (D31): identity-card face picker filter tabs (.ksub.kpkf "Phi tần / Cung nữ", kitPicker j79) are sticky z-index 5 and paint over the pinned choices (.kpopts.kpscopts z 3) while scrolling — 1180x820 scroll 0–48, 1000x755 0–64, 844x390 112–176 (pre-existing on main). D31 adds a local `.kdiff .ksub{position:static;z-index:auto}` for its own mode row.
+- C41 tuduc-mg-r1 reviewer: shared easy-rules layer (Gợi ý + idle hint wrapper tdWrap, first-time card, hint ring .tdring.ksel) now exists twice (mg-easy + jtd) — one kit version worth having.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -132,3 +135,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - (16/11 watch 3) PASSes C32 page-curl2, C26b stat-fx-2, D42 places-port → merge-train-3 (main session). The owner APPROVED the 3 new place paintings. Q22: YES, the scheme-minigame rule covers servant bribery and Nghe lén too (Tự ra tay = minigame; Giao cho người làm = odds only; Thôi). Keep it.
 - DISK on the main box is tight: keep worktrees depth 5 and delete screenshots after looking.
 - C7 NOTE (D31 difficulty, for Foreman C's balance pass): smoke only (Dễ n=10, Khó n=4): Hoàng hậu Dễ 40% / Khó 0% (owner target ~50% / 15–20%); early death Dễ 50% (childbirth 4 of 10!) / Khó 25% (target ~20% / ~55%); childbirth death per labour Dễ 19% (v7 had 6.2%). Poison-strength multiplier is a no-op (base 1, rounded); scheme-motive rounds to 4 (Khó) / 2 (Dễ). Re-measure Vừa first, then Dễ/Khó with dev/measure/rundiff.sh n≥30; change only jdiff's DIFF table. Details: dev/PROGRESS_difficulty-port.md on review/difficulty-port.
+- Q23 (C41): "Để trời định" on a teacher lesson now gives fixed +2 (old random 2+R(2) averaged 2.5) because 5/10 < 7 — leave it or make skip = 7/10 for teacher?
