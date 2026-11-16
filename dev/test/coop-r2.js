@@ -91,7 +91,7 @@ const seenTxt=o=>o.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t+' '+(q.h||'')))+((
    window.__usedN=window.__usedN||[];const L=liveRivals(true).filter(r=>!r.coop&&r.alive&&!r.out&&!r.confined&&!window.__usedN.includes(r.id)).sort((a,b)=>rkOf(b)-rkOf(a));let last={err:'no npc'};
    for(const v of L.slice(0,6)){if(pre==='rank'){v.rank=Math.max(v.rank||0,6)}if(pre==='pet'){v.pets=[]}(v.staff||[]).forEach(x=>{if(x.tr==='trung')x.tr='lanh'});
     const ok=!!(ACT[k]&&ACT[k].ok(v,f));if(!ok){last={ok,v:v.id};continue}const kids0=(v.kids||[]).length,pets0=(v.pets||[]).length,inv0=(v.inv||[]).length;
-    roll=()=>true;caught=()=>"";let r="";try{r=mindRun(v,f,k,0)}finally{roll=r0;caught=c0}window.__usedN.push(v.id);
+    roll=()=>true;caught=()=>"";const j0=window.__j95off;window.__j95off=1;/* main j95 motive gate (schedules3): a forced act by a random NPC has no motive; this suite checks the co-op relay, not motives */let r="";try{r=mindRun(v,f,k,0)}finally{roll=r0;caught=c0;window.__j95off=j0}window.__usedN.push(v.id);
     last={ok,v:v.id,vn:v.name,r:String(r).replace(/<[^>]+>/g,'').slice(0,200),kids:(v.kids||[]).length-kids0,pets:(v.pets||[]).length-pets0,inv:(v.inv||[]).length-inv0,
      kidN:(v.kids||[]).length>kids0?v.kids[v.kids.length-1].name:null,on:(COOPW.npcOn||[]).slice(-1)[0]||null};if(last.r)return last}
    return last},[k,pre]);
