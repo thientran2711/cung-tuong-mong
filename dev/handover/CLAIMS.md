@@ -115,7 +115,7 @@
 | stage-slots-fix REVIEW (sonnet) + jk4/jk2b popup column overlap (whole group) | review/stage-slots-fix-r1 | main s13→s14 | session_01UV1SziRAU7gAwVeXFiPNfo | RUNNING | 16/11 08:15Z |
 | test-drift-roulette (6+ tests vs #kroul) + tutorial first-run check | review/test-drift-roulette | main s14 | session_01UV1SzkFT88BKzJLdb7NFY6 (sonnet) | RUNNING | 16/11 08:20Z |
 | kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
-| D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | RUNNING | 16/11 08:26Z |
+| D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | FAIL f74f95d3 (6 fixes) | 16/11 08:26Z |
 | story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | FAIL → fix list in reports/story14-p1-r1.md | 16/11 08:26Z |
 | act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | DONE PASS 072687e2 | 16/11 08:40Z |
 | servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
@@ -130,7 +130,7 @@
 | D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | DONE FAIL 6 (2 blocking) → fixes in coop-b1b5-p2 | 16/11 09:08Z |
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWojcdi663Kf9L2DK1G (successor of …njWQ, rolled over 2740a299) | RUNNING | 16/11 09:08Z |
 | slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | DONE PASS 6444443b (ship with mg-balance) | 16/11 09:19Z |
-| item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | session_011xDdVP6DUKfEQP1er7RbtD (sonnet) | RUNNING | 16/11 09:27Z |
+| item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | session_011xDdVP6DUKfEQP1er7RbtD (sonnet) | DONE SẴN SÀNG KIỂM f9d10956 | 16/11 09:27Z |
 | reign-road-fix review (sonnet) | review/reign-road-fix-r1 | D | session_01DgYSWoxLbnCcR7gE2i3QKu | DONE PASS 90c5b9e5 | 16/11 09:31Z |
 | kc-roads-cn-nc round 3 review (opus; main s14 08:41Z) | review/kc-roads-cn-nc-r1 | D | session_01DgYSWnY5pFVmEYGWvruZFs | DONE FAIL 4 → main s14 opens fixer | 16/11 09:31Z |
 | scene-end button SWEEP, whole game (KIT §81; main s14 09:10Z) | review/scene-end-sweep | D | session_01DgYSWmAiQTHkmu8eoKhvWT | DONE SẴN SÀNG KIỂM 67db47f6 | 16/11 09:31Z |
@@ -140,3 +140,5 @@
 | design-scale phase 2/3 + maptab tab-mode reset bug (opus) | review/design-scale-p2 | main s14 | session_01UV1Szh2HXLUxv3oHmnezMy (opus) | RUNNING | 16/11 09:44Z |
 | co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | RUNNING | 16/11 10:05Z |
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
+| D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | (opening, C s2) | RUNNING | 16/11 10:26Z |
+| item512-art review (sonnet) | review/item512-art-r1 | C | (opening, C s2) | RUNNING | 16/11 10:26Z |
