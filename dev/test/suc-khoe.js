@@ -58,7 +58,30 @@ const IDX=process.argv[2];const LIVE='https://thientran2711.'+'github.io/cung-tu
   /* 8 old save */
   const d=ser();delete d.S.khScar;delete d.S.khTmp;(d.R||[]).forEach(r=>{delete r.khScar;delete r.khTmp});const js=JSON.parse(JSON.stringify(d));deser(js);
   if(S.khScar==null)f.push('old save: khScar not set');if(!(sucCap(S)>0))f.push('old save cap');if(S.suc>sucCap(S))f.push('old save Sức above cap');
-  render();const hc=document.getElementById('hud-suc');info.hudTitle=hc&&hc.title;if(hc&&!/tối đa/.test(hc.title))f.push('HUD title without ceiling');
-  info.thy=typeof verdict;return{f,info}});
+  render();const hc=document.getElementById('hud-suc');const hv=hc&&hc.querySelector('.kstv');info.hudSuc=hv&&hv.textContent;if(!hv||hv.textContent!==`${S.suc}/${sucCap(S)}`)f.push('F2 HUD Sức is not N/M: '+(hv&&hv.textContent));
+  /* ---- review r1 fixes (review/suc-khoe-fix) ---- */
+  /* F2: help panel rows + person card age line */
+  S.age=46;S.khScar=8;S.khSw={b:6,d:2};S.khTmp=0;const hr=HXNOW.suc();info.helpRows=hr;if(!hr||hr.length!==3||hr[1][1]!==String(sucCap(S)))f.push('F2 help rows '+JSON.stringify(hr));
+  const al=selfCardHTML().replace(/<[^>]+>/g,' ');info.selfCard=/Sức tối đa:\s*\d+/.test(al)&&/hao tổn sau sinh nở/.test(al);if(!info.selfCard)f.push('F2 her card has no ceiling / body line');
+  const rv=liveRivals(true).find(x=>x.alive&&!x.out);rv.khScar=4;rv.khSw={b:2,d:2};rv.kids=rv.kids||[];const alv=rvCard(rv,rivals.indexOf(rv)).replace(/<[^>]+>/g,' ');info.npcCard=/hao tổn sau sinh nở/.test(alv);if(/Sức tối đa/.test(alv)||/hao tổn sau sinh nở, trúng độc/.test(alv)||!info.npcCard)f.push('F2 NPC card body line '+[/Sức tối đa/.test(alv),/trúng độc/.test(alv),info.npcCard,alv.slice(0,300)].join(' | '));
+  /* F5: a CLEAN mother's lệch-sổ child can reach the accuse bar and the blood test (owner Q3) */
+  S.age=24;S.khScar=0;S.khSw={};S.out=false;S.dead=false;S.wrongs=[];S.dw=0;S.dws=0;S.dkeys=[];S.schemes=0;(S.men||[]).forEach(m=>m.trysts=0);S.inv=[];S.rt=S.rt||{};S.rt.ng=null;S.kids.forEach(x=>{x.dateOff=null});
+  const ck=mkKid("f",0);ck.dateOff="pre";ck.tf=null;ck.tfOk=0;S.kids.push(ck);const capC=deedCap(S);info.cleanCap=capC;if(capC<P.accEv)f.push('F5 clean mother cap '+capC+' < accEv');
+  const ac=liveRivals(true).find(x=>x.alive&&!x.out);ac.evm=ac.evm||{};ac.evm[key(S)]=0;ac.oan=90;const g1=evA(ac,S,P.evi),g2=evA(ac,S,9);info.cleanEv=[g1,g2,evG(ac,S)];if(evG(ac,S)<P.accEv)f.push('F5 accuser stops at '+evG(ac,S));
+  BAL.preT.accP=100;khWorld();if(!(S.rt.ng&&S.rt.ng.k===ck.name))f.push('F5 no blood test on a clean mother (motive '+khMotive(ac,S,ck)+' gate '+JSON.stringify(rtGateT(ac,S,'accuse'))+')');
+  S.rt.ng=null;ck.tfOk=1;const capA=deedCap(S);info.capAfterTest=capA;if(capA!==0)f.push('F5 fact stays in the ledger after the test '+capA);evTruthSweep();if(evG(ac,S)>capA)f.push('F5 held proof not swept '+evG(ac,S));restore();
+  /* F7: her card on an NPC's lệch-sổ child needs accEv chứng cứ, and she gets the fact as chứng cứ */
+  const nm=liveRivals(true).find(x=>x.alive&&!x.out&&x!==ac)||liveRivals(true)[1];const nk2=mkKid("m",0);nk2.tf=null;(nm.kids=nm.kids||[]).push(nk2);nm.ev=0;nm.wrongs=[];nm.dw=0;nm.dws=0;nm.dkeys=[];nm.schemes=0;nm.scandal=0;nm.affair=null;nm.plan=null;
+  khLech(nm,nk2,true);info.herEv=nm.ev;if(!(nm.ev>=P.evi))f.push('F7 she got no chứng cứ from an NPC lệch sổ: '+nm.ev);
+  S.rt.open=S.turn;const cards=()=>rtCards().filter(c=>c.rtId==="ngl_"+nm.id);let cc=cards();info.herCard=cc.map(c=>[c.lock,c.rtNeed]);if(!cc.length)f.push('F7 no card');else if(nm.ev<P.accEv&&!cc[0].lock)f.push('F7 card open below accEv');
+  evA(S,nm,9);cc=cards();if(cc.length&&cc[0].lock)f.push('F7 card locked at '+nm.ev);nk2.tfOk=1;
+  /* F9: the thái y record at birth + verdict thresholds */
+  S.thy={rec:[]};S.pregDisc=wk()-20;S.preg=9;S.khOd=0;S.trueFather=null;S.pregMismatch=false;BAL.preT.od=0;BAL.preT.m9=0;const n9=S.kids.length;pregMonthP(S);const k9=S.kids[n9];if(!k9||k9.thyRec==null)f.push('F9 no thái y record on the child');restore();
+  S.age=24;S.khScar=0;S.khTmp=0;S.suc=90;const v0=thyVerdict(false)[0];S.khScar=60;const v1=thyVerdict(false)[0];const v2=thyVerdict(true)[0];S.khScar=0;info.verdicts=[v0,v1,v2];if(v0!=="Khỏe mạnh"||v1!=="Có bệnh"||v2!=="Hơi yếu")f.push('F9 verdicts '+info.verdicts);
+  /* F8: thuốc bổ chosen in an event (j68e) heals like the deck tonic */
+  S.khTmp=10;S.khTon=null;S.khTonN=0;Q.length=0;Q.push({t:"Thái y",opts:[{n:"Để thái y kê thuốc bổ",fx:{}}]});chooseM(0);info.tonicTmp=S.khTmp;if(S.khTmp!==10-K.tonic)f.push('F8 event tonic: khTmp '+S.khTmp);Q.length=0;
+  /* F4: no blood-test number lives in jkh any more */
+  info.khNgNpc=String(khNgNpc).includes('rtNgNpcRes');if(!info.khNgNpc)f.push('F4 khNgNpc does not call rtNgNpcRes');
+  info.thy=typeof thyVerdict;return{f,info}});
  console.log(JSON.stringify(L,null,1));if(errs.length)console.log('PAGE ERRORS',errs);
  await b.close();process.exit(L.f.length||errs.length?1:0)})();

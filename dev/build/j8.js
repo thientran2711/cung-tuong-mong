@@ -307,8 +307,8 @@ function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
   if(p.preg>=10){p.preg=0;p.fake=0;if(roll(odA(p,30+p.tamco/2+p.mat*4)))return (me?"Đêm “lâm bồn”, bà đỡ lén đưa vào một hài nhi từ ngoài cung. ":"")+birthP(p,true);if(me){deathSentence("Tráo con bị bắt quả tang, tội khi quân");return""}deathSentence(p,"Tráo con bị bắt quả tang, tội khi quân");return""}
   return""}
  let ev="";if(p.preg===4&&p.hidden){p.hidden=false;if(me)ghenAll(6);ev+=me?"Bụng đã lộ, cả cung biết ngươi có thai. ":`${p.name} có thai đã lộ. `}
- if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<30?8:0);if(p.anthai)risk/=2;
-  if(roll(risk)){p.preg=0;p.hidden=false;ap(p,{suc:-20});p.misN=(p.misN||0)+1;ev+=me?`<span class="r">Ngươi động thai, sảy mất đứa bé.</span> Sức -20. `:`${p.name} động thai, sảy mất đứa bé. `}return ev}
+ if(p.preg<10){let risk=(p.preg<=3||p.preg>=7?6:2)*(typeof BAL==="object"&&BAL.mort&&BAL.mort.on?BAL.mort.birth.misX:1)+(p.suc<BAL.pgRisk.lowSucAt?BAL.pgRisk.lowSuc:0);if(p.anthai)risk/=2;
+  if(roll(risk)){p.preg=0;p.hidden=false;ap(p,{suc:-BAL.pgRisk.misSuc});p.misN=(p.misN||0)+1;ev+=me?`<span class="r">Ngươi động thai, sảy mất đứa bé.</span> Sức -${BAL.pgRisk.misSuc}. `:`${p.name} động thai, sảy mất đứa bé. `}return ev}
  p.preg=0;p.hidden=false;return ev+birthP(p,false)}
 /* childbirth risk: 1 base, +3 if Sức<40, +0.5 per year over 30; physician -2, Y thuật 2+ -1.5, an thai -1; floor 0.5 */
 function birthRisk(p){return cl(1+(p.suc<40?3:0)+Math.max(0,(p.age||20)-30)*.5-(p.doctor?2:0)-(p.arts&&p.arts.y>=2?1.5:0)-(p.anthai?1:0),.5,60)}

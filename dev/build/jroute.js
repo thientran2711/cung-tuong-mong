@@ -310,7 +310,9 @@ function rtBookHTML(){const b=rtBook();const ids=Object.keys(RT_END);const met=i
    S.rt.ng = {k: tên con, acc: "emp"|"th"|id phi tần, at: tuần nghiệm, oil: kẻ tố đã bỏ dầu, P:{alum,swap,bribe,spy}} */
 function rtAccN(a){if(a==="emp")return"Hoàng thượng";if(a==="th")return"Thái hậu";const v=RV(a);return v?rtVn(v):"kẻ tố"}
 function rtNgKid(){const T=S.rt;return T&&T.ng?(S.kids||[]).find(k=>k.name===T.ng.k&&k.alive)||null:null}
-function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=!!(v&&(/Hiểm|Tâm/.test(v.trait||"")||(v.tamco||0)>=60)&&roll(35));
+/* does this accuser drop oil into the bowl? (her own child's test and every NPC accuser: one rule, BAL.ngh) */
+function rtNgOil(v){const N=BAL.ngh;return !!(v&&v!==S&&(/Hiểm|Tâm/.test(v.trait||"")||(v.tamco||0)>=N.oilTc)&&roll(N.oilP))}
+function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=rtNgOil(v);
  T.ng={k:k.name,acc,at:wk()+1,oil:!!oil,P:{}};try{if(!window.__bot)rtMgBowl()}catch(e){}rtStat("ng_set");rtEmo("so",60,"sắp trích huyết nghiệm thân");
  log(`<span class="r">${rtAccN(acc)} truyền: tuần sau trích huyết nghiệm thân cho ${k.name} trước mặt lục cung.</span>`);rtRefresh()}
 function rtNgDue(){const T=S.rt;if(!T||!T.ng||T.ng.held)return;if(!rtNgKid()){T.ng=null;return}if(wk()>=T.ng.at){T.ng.held=1;rtPush("rtNg",{})}}
@@ -333,7 +335,7 @@ PEND.rtNg=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;co
   stage:[k].concat(v?[v]:[]),headArt:{src:RT_ART.con,label:"Nghiệm thân"},o:O}};
 /* her own estimate (what she knows: her preps, what her spies saw; a rival accuser may have tampered ~1 in 3) */
 function rtNgEst(){const T=S.rt,N=T.ng,P=N.P,k=rtNgKid();if(!k)return 50;const pc=((P.alum||P.swap)?rtMgO(rtNgN())/100:1)*(P.bribe?.85:1);
- let pm;if(P.bribe||P.alum)pm=1;else{const oil=N.saw?1:(P.spy?0:(RV(N.acc)?.35:0));pm=P.swap?(k.tf?0:1):(k.tf?0:1-oil)}return cl(Math.round(pc*pm*100),5,95)}
+ let pm;if(P.bribe||P.alum)pm=1;else{const oil=N.saw?1:(P.spy?0:(RV(N.acc)?BAL.ngh.oilP/100:0));pm=P.swap?(k.tf?0:1):(k.tf?0:1-oil)}return cl(Math.round(pc*pm*100),5,95)}
 function rtNgShown(fresh){const T=S.rt,N=T.ng,P=N.P,k=rtNgKid();const truth=!k.tf;if(fresh)return truth;if(P.bribe||P.alum)return true;if(N.oil&&!P.swap)return false;return truth}
 function rtAfter(){try{if(!S.dead){showModal();render()}}catch(e){}}
 function rtNgN(){const N=S.rt.ng;return 3+(RV(N.acc)?1:0)}
@@ -343,7 +345,7 @@ function rtNgRun(fresh){const T=S.rt,N=T&&T.ng;if(!N)return;const P=N.P,k=rtNgKi
  if(!fresh){const caught=((P.alum||P.swap)&&N.mg===0)||(P.bribe&&roll(15));if(caught){rtStat("ng_cheat");log(`<span class="r">Có người tâu: bát nước của ngươi đã bị động tay.</span>`);rtNgLose(false,!k.tf,"gian lận khi nghiệm thân");return}}
  const ok=rtNgShown(fresh);
  rtNgScene(ok,k.name,()=>{if(ok){if(k.tf)rtEnd("tt_hoa");rtNgWin(false)}else{log(`<span class="r">Hai giọt máu tách rời trong bát nước.</span>`);if(!fresh&&!N.re){N.re=1;rtPush("rtNg2",{})}else rtNgLose(false,!k.tf)}rtAfter()})}
-PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(38+(S.th||0)/3+(S.doctor?15:0)+(k.pre&&!k.tf&&typeof BAL==="object"&&BAL.preT?BAL.preT.recDefend:0));/* a real early birth: the thái y mạch án shows when the pregnancy was found (review/suc-khoe) */
+PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(38+(S.th||0)/3+(S.doctor?15:0)+(k.dateOff&&!k.tf&&k.thyRec&&typeof BAL==="object"&&BAL.preT?BAL.preT.recDefend:0));/* a real early / late birth AND the thái y mạch án holds the month the pregnancy was found (review/suc-khoe-fix F9) */
  return{ti:"Máu không hòa",t:`<p>Cả điện lặng ngắt. Hai giọt máu nằm riêng hai góc bát. Hoàng thượng chưa nói gì; mọi ánh mắt đổ dồn vào ngươi.</p>`,stage:[k],headArt:{src:RT_ART.bat,label:"Nghiệm thân"},o:[
   rtOpt("Xin thái y nghiệm lại bằng bát nước mới",{},rtX(oR,"nghiệm lại bằng bát sạch: kết quả theo cha thật","Hoàng thượng không cho nghiệm lại · bị xử tội",k.tf?"bát sạch thì máu vẫn không hòa":""),()=>{if(roll(oR))rtNgRun(true);else rtNgLose(false,!k.tf)}),
   rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(true,!k.tf)),
@@ -354,23 +356,28 @@ function rtNgWin(vach){const T=S.rt,N=T.ng,k=rtNgKid();const v=RV(N.acc);if(k)k.
 function rtNgLose(confess,innocent,why){const T=S.rt,N=T.ng,k=rtNgKid();const m=k&&k.tf&&(S.men||[]).find(x=>x.id===k.tf&&x.alive);T.ng=null;rtStat(innocent?"ng_oan":"ng_lose");
  rtEnd(innocent?"ng_oan":"tt_lo");if(!innocent)T.exposed=1;if(m){m.alive=false;log(`<span class="r">${m.name} bị xử trảm.</span>`)}
  if(k){k.alive=false;k.gone=1;log(`<span class="r">${k.name} bị tước danh phận hoàng tự, đưa ra khỏi cung giao người nuôi.</span>`)}T.tt=null;T.bm=null;
- if(confess)cold(innocent?"Nhận tội tư thông (oan)":"Nhận tội tư thông");else if(roll(50))deathSentence(why?`Bị ban chết vì ${why}`:"Bị ban chết vì con không phải cốt nhục hoàng gia");else cold(why||"Con không phải cốt nhục hoàng gia")}
+ if(confess)cold(innocent?"Nhận tội tư thông (oan)":"Nhận tội tư thông");else if(roll(BAL.ngh.die))deathSentence(why?`Bị ban chết vì ${why}`:"Bị ban chết vì con không phải cốt nhục hoàng gia");else cold(why||"Con không phải cốt nhục hoàng gia")}
 /* NPC mothers: the same bowl (alum by the mother, oil by a framer) */
-function rtNgNpcAuto(v,k){const truth=!k.tf;const alum=!truth&&((v.tamco||0)>=55||roll(25));const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<-30&&/Hiểm/.test(x.trait||""));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
- if(truth&&!foe)return"";const oil=!!foe&&roll(40);const shown=alum?true:oil?false:truth;k.tfOk=1;rtStat("npc_ng");const seen=(S.mat||0)>=2;
- if(shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
- k.alive=false;k.gone=1;rtStat(truth?"npc_ng_oan":"npc_ng_lo");const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(50))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;
- return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&(S.mat||0)>=4?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
+/* ONE blood test for an NPC mother's child (review/suc-khoe-fix F4): the truth decides; a guilty mother may slip alum in; oil = an accuser's or
+   a framer's drops (the blood never mixes); acc = the NPC who demanded it (backlash when the blood mixes). Read by rtNgNpcAuto and jkh khNgNpc. */
+function rtNgNpcRes(v,k,acc,oil){const N=BAL.ngh,truth=!k.tf;const alum=!truth&&((v.tamco||0)>=N.alumTc||roll(N.alumP));const shown=alum?true:oil?false:truth;k.tfOk=1;
+ if(shown){if(acc){ap(acc,{sung:N.accSung,danh:N.accDanh});oanAdd(v,acc,N.accOan);try{punish(acc,"vu cáo phi tần",N.accPun)}catch(e){}}return{shown,truth,alum}}
+ k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;if(roll(N.die))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true;return{shown,truth,alum}}
+function rtNgNpcAuto(v,k){const N=BAL.ngh,truth=!k.tf;const foe0=liveRivals(false).find(x=>x!==v&&aff(x,v)<N.frameAff&&/Hiểm/.test(x.trait||""));const foe=foe0&&rtGateT(foe0,v,"frame").ok?foe0:null;
+ if(truth&&!foe)return"";const oil=!!foe&&roll(N.frameOil);const r=rtNgNpcRes(v,k,null,oil);rtStat("npc_ng");const seen=(S.mat||0)>=N.seeMat;
+ if(r.shown){if(!truth)rtStat("npc_ng_hoa");return seen?`Nghe nói ${rtVn(v)} bị tâu xin nghiệm máu cho ${k.name}; máu hòa, nàng vô sự. `:""}
+ rtStat(truth?"npc_ng_oan":"npc_ng_lo");
+ return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&(S.mat||0)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
 /* she demands the test on another consort's child (honest, or with oil = a frame-up) */
-function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0;if(ev<2&&!v.kidRumor)continue;
-  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/2)`,ev>=2]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
+function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0,ne=BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
+  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:1,need:[[`chứng cứ về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
  return A}
 PEND.rtNgNpc=pp=>{const v=RV(pp.v);const k=v&&(v.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!v||!k)return null;const oF=rtMgO(4);
- const fin=(shown)=>{k.tfOk=1;if(shown){apply({sung:-10,danh:-8});oanAdd(v,S,40);punish(S,"vu cáo phi tần",1);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}
-  else{apply({danh:5,th:5});k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;log(`<span class="r">Máu ${k.name} không hòa. ${rtVn(v)} bị trị tội.</span>`);if(roll(50))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true}};
- const alum=!!k.tf&&((v.tamco||0)>=55||roll(25));
+ const N=BAL.ngh;const fin=(shown)=>{k.tfOk=1;if(shown){apply({sung:N.accSung,danh:N.accDanh});oanAdd(v,S,N.accOan);punish(S,"vu cáo phi tần",N.accPun);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}
+  else{apply({danh:5,th:5});k.alive=false;k.gone=1;const lov=k.tf&&manById(k.tf);if(lov)lov.alive=false;log(`<span class="r">Máu ${k.name} không hòa. ${rtVn(v)} bị trị tội.</span>`);if(roll(N.die))deathSentence(v,"con không phải cốt nhục hoàng gia");else v.out=true}};
+ const alum=!!k.tf&&((v.tamco||0)>=N.alumTc||roll(N.alumP));
  return{ti:"Tâu xin nghiệm thân",t:`<p>Ngươi quỳ trước Hoàng thượng, tâu rằng ${k.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</p>`,stage:[v,k],headArt:{src:RT_ART.con,label:"Nghiệm thân"},o:[
-  rtOpt("Nghiệm ngay thẳng",{},`${word(cl(35+(typeof evG==="function"?evG(S,v):0)*8,10,80))} · thành: Danh +5 · máu không hòa · ${v.name} rước họa vào thân · hỏng: máu hòa — ngươi mang tội vu cáo · kèm: nàng cũng có thể động tay vào bát`,()=>{rtStat("ng_demand");const sh=alum?true:!k.tf;rtNgScene(sh,k.name,()=>{fin(sh);rtAfter()})}),
+  rtOpt("Nghiệm ngay thẳng",{},`${word(cl(35+(typeof evG==="function"?evG(S,v):0)*8,10,80))} · thành: Danh +5 · máu không hòa · ${v.name} rước họa vào thân · hỏng: máu hòa — ngươi mang tội vu cáo (Sủng ${N.accSung}, Danh ${N.accDanh}) · kèm: nàng cũng có thể động tay vào bát`,()=>{rtStat("ng_demand");const sh=alum?true:!k.tf;rtNgScene(sh,k.name,()=>{fin(sh);rtAfter()})}),
   rtOpt("Sai người nhỏ dầu vào bát",{bac:-50,duc:-10},rtX(oF,`máu không hòa dù ${k.name} là con ai · ${v.name} rước họa vào thân`,"bị bắt quả tang gian lận · ngươi bị trị tội","vu oan người vô tội là ác nghiệp"),()=>{rtStat("ng_frame");rtNgSleight("oil",4,ok=>{if(ok){if(!k.tf)rtEnd("ng_vu");rtNgScene(false,k.name,()=>{fin(false);rtAfter()})}else{k.tfOk=1;oanAdd(v,S,50);fall(S,"gian lận khi trích huyết nghiệm thân");rtAfter()}})}),
   rtOpt("Thôi",{},rtX(100,"không tâu nữa","",""),()=>{})]}};
 RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
