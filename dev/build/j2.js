@@ -1,5 +1,6 @@
 
 function start(){
+  try{if(typeof kmReset==="function")kmReset()}catch(e){}/* a new life starts with no scene / overlay / queued job of the last one (j93 kmReset) */
   const o=(window.__forceOrigin&&ORIGINS.find(x=>x.k===window.__forceOrigin))||pick(ORIGINS);quiet=true;Q=[];popIdx=null;popMsg="";
   S={year:1,month:3,tuan:0,age:18+R(3),rank:o.r,sung:8,danh:8,bac:60,suc:80,mat:0,th:o.th,hh:o.hh,tai:30+R(50),sac:40+R(55),tamco:10+R(20),duc:30,thu:0,
      schemes:0,moreRivals:0,maid:newMaid(pick(MAIDS),50+R(31)),origin:o,name:"",
@@ -7,7 +8,9 @@ function start(){
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false};
   rivals=[];S.name=freshName();apply(o.o);if(o.art)Object.assign(S.arts,o.art);S.ally=o.ally?1:0;
-  for(const [r,q] of [[7,1],[5,0],[4,0],[4,0],[3,0],[3,0],[2,0],[2,0],[1,0],[1,0],[0,0],[0,0]])rivals.push(newRival(r,q));spreadTraits();
+  for(const [r,q] of BAL.ps.harem)rivals.push(newRival(r,q));
+  /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 3–5 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
+  rivals.forEach(v=>{v.age=BAL.ps.consAge[0]+R(BAL.ps.consAge[1]+1)+(v.queen||v.rank>=4?BAL.ps.consAge[2]:0)});psSeedKids();S.ps=1;S.reign={y0:S.year,power:BAL.ps.power0,ch:0,side:null};/* D5 hook: Emperor side story chapters (ch) and her side road: side = "emp" | "th" | "quyen" */spreadTraits();
   Object.assign(S,drawFace());rivals.forEach(v=>Object.assign(v,drawFace()));S.emp.face=R(Math.max(1,(AV.emperor||[]).length));
   normAll();
   if(S.ally){const v=pick(liveRivals(false));if(v){relAdd(S,v,35);v.ghen=0;log(`${v.name} là người quen cũ, sẵn lòng che chở ngươi.`)}}
@@ -16,7 +19,7 @@ function start(){
   quiet=false;used=0;tab="act";
   const E=S.emp;
   pushModal({t:"Nhập cung",faces:[[pMe(),S.name],[pEmp(),"Hoàng thượng"],[pMaid(),S.maid.name]],h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung, phong <b>${RANKS[S.rank].n}</b>. Cung nữ ${S.maid.name} theo hầu ngươi từ nhà.</p>
-   <p><b>${empName()}</b>, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}.</p>
+   <p><b>${empName()}</b>, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}. ${S.ps?psOpenText():""}</p>
    <p><b>Tuyến truyện: ${s.t}.</b> ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}</p>
    <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi 4 khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
@@ -76,11 +79,11 @@ function directActs(){const A=[],mk=(p,i,n,t)=>{const a=talkOpts(p)[i];if(a)A.pu
  mk({kind:"ksp"},0,"Hối lộ Kính sự phòng","Đút lót Tổng quản thái giám giữ thẻ bài.");
  return A}
 function canPay(a){return !(a.c&&a.c.bac&&S.bac+a.c.bac<0)&&!a.lock}
-function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
-function snapReal(){const b={};for(const k in NAMES)b[k]=S[k]||0;return b}
-function runOpt(a){if(!canPay(a))return null;const b0=snapReal();if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?100:cl(o0+lotB(S,a.dom),5,95);const ok=o>=100||roll(o);
+function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){if(!(k in b))continue;/* a key the snapshot did not take never shows as "0→N" */const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
+function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
+function runOpt(a){if(!canPay(a))return null;const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?100:cl(o0+lotB(S,a.dom),5,95);const ok=o>=100||roll(o);
   apply(ok?(a.w||{}):(a.l||{}));
-  {const d=logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
+  {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
   return ok}
 function cardCost(a){return a.k||(a.c&&a.c.suc<=-20?4:a.c&&(a.c.suc||a.c.bac||a.c.duc)?2:1)}
@@ -141,7 +144,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(40+S.mat*6),x:"chứng cứ +1",run:()=>overhear(S.place)})}
   return A}
  if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:cl(oPlant(S,v)+15,5,95),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
-  {n:"Lục rương tìm chứng cứ",o:od(45+S.mat*5),act:1,x:"chứng cứ +1 · lộ: bị phạt",run:()=>{if(roll(od(45+S.mat*5))){evA(S,v,1);return `Lục được thư từ của ${v.name}: chứng cứ +1.`}relAdd(S,v,-15);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
+  {n:"Lục rương tìm chứng cứ",o:od(45+S.mat*5),act:1,x:"chứng cứ +1 nếu nàng có làm điều sai · lộ: bị phạt",run:()=>{if(roll(od(45+S.mat*5))){return evA(S,v,1)?`Lục được thư từ của ${v.name}: chứng cứ +1.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-15);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
  if(p.kind==="ty"){const A=[];if(illOf(S))A.push({n:"Xin chữa bệnh",c:{bac:-30},o:100,x:illName(S),run:()=>treat(S,"ty")});A.push({n:"Bài thuốc dễ thụ thai",c:{bac:-40},o:100,x:"3 tháng dễ có thai hơn",go:()=>S.fert=3});
   if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{bac:-50},o:100,x:"dễ phát hiện xạ hương, độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});
   const k=S.kids.filter(x=>x.alive&&x.hp<80).sort((a,c)=>a.hp-c.hp)[0];if(k)A.push({n:`Xin thuốc cho ${k.name}`,c:{bac:-30},o:100,x:"Sức khỏe +25",go:()=>{k.hp=Math.min(100,k.hp+25)}});
@@ -152,10 +155,10 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${IT[k].n}`,c:{bac:-IT[k].pr},o:100,x:IT[k].d,go:()=>S.inv.push({k})}));
  if(p.kind==="fallen")return[
    {n:"Đưa cơm áo",c:{bac:-20},o:100,w:{duc:4}},
-   {n:"Hỏi chuyện cũ",o:od(50+S.tamco/5),x:"chứng cứ một phi tần +1",go:()=>{const t=liveRivals(true);if(t.length){const x=pick(t);x.ev++;log(`Phế phi kể chuyện xấu của ${x.name}: chứng cứ +1.`)}}}];
+   {n:"Hỏi chuyện cũ",o:od(50+S.tamco/5),x:"chứng cứ +1 về một phi tần từng làm điều sai",go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,1))log(`Phế phi kể chuyện xấu của ${x.name}: chứng cứ +1.`);else log("Phế phi chỉ kể chuyện cũ vô hại, không có gì làm chứng cứ.")}}];
  if(p.kind==="maid")return[
    {n:"Tâm sự",o:100,w:{maid:6}},
-   {n:"Sai đi dò la",o:od(40+S.maid.loyal/3),w:{},l:{maid:-5},x:"chứng cứ một phi tần +1",go:()=>{const t=liveRivals(true);if(t.length){const x=pick(t);x.ev++;log(`${S.maid.name} nghe lén được chuyện của ${x.name}.`)}}}];
+   {n:"Sai đi dò la",o:od(40+S.maid.loyal/3),w:{},l:{maid:-5},x:"chứng cứ +1 về một phi tần từng làm điều sai",go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,1))log(`${S.maid.name} nghe lén được chuyện của ${x.name}: chứng cứ +1.`);else{const y=pick(liveRivals(true));log(y?`${S.maid.name} nghe lén ${y.name}: không có gì sai trái, chỉ biết ${harmTxt(y)}.`:`${S.maid.name} không nghe được gì.`)}}}];
  return []}
 function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.length)return;S.visit.tk=S.visit.tk||{};if(S.visit.tk[popIdx])return;const p=curPeople()[popIdx];if(!p)return;const a=talkOpts(p)[oi];if(!a||!canPay(a))return;
  const tcost=a.act?2:1;if(!can(tcost))return;spend(tcost);
@@ -168,7 +171,7 @@ function addArt(k,g){const a=ARTS.find(x=>x.k===k);S.artp[k]+=g;
  while(S.arts[k]<5&&S.artp[k]>=S.arts[k]+2){S.artp[k]-=S.arts[k]+2;S.arts[k]++;const l=S.arts[k];const f={[a.st]:2};if(l===3)f.danh=3;if(l===5)f.danh=6;apply(f);
    log(`<span class="g">${a.n} lên bậc ${l}.</span> ${fmt(f)}${l===3?" Cả cung nghe danh.":l===5?" Tiếng tăm vang khắp kinh thành.":""}`)}
  if(S.arts[k]>=5)S.artp[k]=0}
-function lesson(k){const l=S.arts[k],cost=5+l*5;if(!can(2)||l>=5||S.bac<cost||S.dead||Q.length||S.mg)return;apply({suc:-10,bac:-cost});spend(2);render();
+function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):5+l*5;if(!can(2)||l>=5||S.bac<cost||S.dead||Q.length||S.mg)return;apply({suc:-10,bac:-cost});spend(2);render();
  S.mg={k,l};save();resumeMG()}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}

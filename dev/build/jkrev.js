@@ -48,7 +48,7 @@ function kitCoins(dir,n,from){if(!krOn()||krStill()||!(n>0))return;const R=(type
   if(dir==="out"){const ex=c.x+sx*3+(i%2?40:-40),ey=c.y+90+(i%3)*30;K=[{transform:`translate(${c.x-12}px,${c.y-12}px) scale(.7)`,opacity:1},{transform:`translate(${(c.x+ex)/2-12}px,${c.y-30}px) scale(1)`,opacity:1,offset:.35},{transform:`translate(${ex-12}px,${ey}px) scale(.8) rotate(${i%2?90:-90}deg)`,opacity:0}]}
   else K=[{transform:`translate(${f.x+sx-12}px,${f.y-12}px) scale(.8)`,opacity:0},{transform:`translate(${f.x+sx-12}px,${f.y-40}px) scale(1)`,opacity:1,offset:.25},{transform:`translate(${c.x-12}px,${c.y-12}px) scale(.6)`,opacity:.9}];
   const an=im.animate(K,{duration:d,delay:dl,easing:"cubic-bezier(.45,.05,.4,1)",fill:"both"});an.onfinish=()=>im.remove()}
- if(cell){const cls=dir==="out"?"kfhit-r":"kfhit";setTimeout(()=>{cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(cls);setTimeout(()=>cell.classList.remove(cls),700)},dir==="out"?120:(R.coins||900)+cnt*70-120)}
+ if(cell){const cls=dir==="out"?"kfhit-r":"kfhit";setTimeout(()=>{cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(cls);setTimeout(()=>cell.classList.remove(cls),2700)},dir==="out"?120:(R.coins||900)+cnt*70-120)}
  try{if(typeof sfx==="function")sfx("sfx-coin")}catch(e){}}
 /* one item tile leaving from the Tư trang tab: "away" (sold), "give" (given), "fall" (faded away) */
 function krFly(I,mode,i){if(krStill())return null;const R=(typeof BAL==="object"&&BAL.reveal)||{};const p=krBagPt();const w=document.createElement("div");w.className="klsfly";

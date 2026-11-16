@@ -54,6 +54,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .tok:hover .md{transform:translateY(-2px)} .tok .md{transition:transform .15s}
 .tok .tag{font-size:.78rem;background:#fffaf0;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:1px 6px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .empty{color:var(--dim);font-size:.85rem;margin:0;background:#fffaf0cc;border-radius:6px;padding:2px 8px}
+#tokens>.empty{display:none}/* an empty room already says so in the room's visit line (.rmsg: "Không gặp ai."); this second copy sat over the room title at 844x390 */
 .pop{position:absolute;left:8px;right:8px;bottom:8px;max-height:calc(100% - 16px);overflow:auto;background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:8px;padding:8px 10px;z-index:3;box-shadow:0 6px 20px #5a3a2055}
 .ptop{display:flex;justify-content:space-between;align-items:center;gap:6px}
 .ptop b{font-family:var(--display);color:var(--gold)}
@@ -343,12 +344,12 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .mapw{position:relative;min-width:100%}.mapimg{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
 .mspot{position:absolute;background:transparent;border:2px solid transparent;border-radius:8px;cursor:pointer;padding:0;display:flex;align-items:flex-start;justify-content:center}
 .mspot:hover:not(:disabled),.mspot:focus-visible{border-color:#ffe7b0;background:#ffe7b022}
-.mspot .mlab{margin-top:-2px;background:#1a0e08cc;color:#ffe7b0;font-family:var(--display);font-size:.72rem;padding:1px 6px;border-radius:8px;white-space:nowrap;text-shadow:0 1px 2px #000;display:inline-flex;align-items:center;gap:3px;pointer-events:none}
-.mspot .mlab i{font-style:normal;font-family:var(--body);font-size:.6rem;color:#f3e6cf;background:#ffffff22;border-radius:6px;padding:0 4px}.mspot .mlab em{font-style:normal;font-family:var(--body);font-size:.58rem;color:#ffb8a0}.mspot .mlab em.ok{color:#bfe8c5}
-.maptools .fest{background:linear-gradient(90deg,#b0302a,#d4a03a);color:#fff8e6;font-family:var(--display);padding:1px 10px;border-radius:10px;font-size:.75rem}.mspot{flex-direction:column;align-items:center}.mspot .mmeta{background:#1a0e08b0;color:#f3e6cf;font-size:.55rem;border-radius:6px;padding:0 4px;white-space:nowrap;pointer-events:none;margin-top:1px}.mspot .mmeta em{font-style:normal;color:#ffb8a0}.mspot .mmeta em.ok{color:#bfe8c5}.mspot.here .mlab{box-shadow:0 0 0 2px #f0c060}.mspot.sm .mmeta{font-size:.48rem;padding:0 2px}.mspot .mfaces{margin-top:1px;display:flex;gap:1px;pointer-events:none}.mspot .mres .md.xs{width:18px;height:18px;border-width:1px}.mspot .mres.more{font-size:.55rem;background:#1a0e08cc;color:#ffe7b0;border-radius:6px;padding:0 3px;align-self:center}.mspot.empty .mlab{opacity:.5;font-size:.5rem;background:#1a0e0899}.mspot.sm{z-index:2}.mspot.sm .mres .md.xs{width:14px;height:14px}.mspot.sm .mlab{font-size:.52rem;padding:0 3px;white-space:normal;text-align:center;justify-content:center;flex-wrap:wrap;max-width:110%;line-height:1.05}.mspot.empty{pointer-events:auto;cursor:default}
+.mspot .mlab{margin-top:-2px;background:#fffaf0f5;color:#2a1a12;border:1px solid #c9a35a;font-family:var(--display);font-weight:600;font-size:13px;line-height:1.25;padding:2px 8px;border-radius:8px;white-space:normal;text-align:center;width:max-content;max-width:max(100%,4.4em);text-shadow:none;box-shadow:0 1px 3px #3a2a1e73;display:inline-flex;align-items:center;justify-content:center;gap:4px;pointer-events:none}/* KIT 34.1d map label: ONE size + contrast for every place (owner 16/11): light paper chip, dark ink, 13 px, never faded */
+.mspot .mlab i{font-style:normal;font-family:var(--body);font-size:12px;font-weight:500;color:#5a4632;background:#f0e3c6;border-radius:6px;padding:0 4px}.mspot .mlab em{font-style:normal;font-family:var(--body);font-size:12px;color:#9a2c1c}.mspot .mlab em.ok{color:#1a6a35}
+.maptools .fest{background:linear-gradient(90deg,#b0302a,#d4a03a);color:#fff8e6;font-family:var(--display);padding:1px 10px;border-radius:10px;font-size:.75rem}.mspot{flex-direction:column;align-items:center}.mspot .mmeta{background:#f6ead6f2;color:#4a3a2a;border:1px solid #e6d3ac;font-size:12px;line-height:1.25;border-radius:8px;padding:0 6px;white-space:nowrap;pointer-events:none;margin-top:2px}.mspot .mmeta em{font-style:normal;color:#9a2c1c}.mspot .mmeta em.ok{color:#1a6a35}.mspot.here .mlab{box-shadow:0 0 0 2px #e0a93a,0 1px 3px #3a2a1e73}.mspot .mfaces{margin-top:1px;display:flex;gap:1px;pointer-events:none}.mspot .mres .md.xs{width:18px;height:18px;border-width:1px}.mspot .mres.more{font-size:12px;background:#f6ead6f2;color:#4a3a2a;border:1px solid #e6d3ac;border-radius:8px;padding:0 4px;align-self:center}.mspot.sm{z-index:2}.mspot.sm .mres .md.xs{width:14px;height:14px}.mspot.empty{pointer-events:auto;cursor:default}
 @media (max-width:600px){.mleg{display:none}.mspot .mres .md.xs,.mspot.sm .mres .md.xs{width:11px;height:11px}.mspot .mmeta{display:none}}
-.mspot.sm .mlab{font-size:.6rem;padding:0 4px}.mspot.off .mlab{opacity:.75}.mspot.off{cursor:default}
-@media (max-width:600px){.mspot .mlab{font-size:.6rem}.mspot.sm .mlab{font-size:.52rem}.mspot .mlab em{display:none}}
+.mspot.off{cursor:default}
+@media (max-width:600px){.mspot .mlab em{display:none}}
 /* ONE UI KIT */
 :root{--pfw:120px}@media (min-width:600px){:root{--pfw:150px}}@media (min-width:1100px){:root{--pfw:180px}}
 .pfr{width:var(--pfw);max-width:100%;min-height:0}.pcp.art{background:#d9c7a8 center/cover no-repeat}
@@ -432,10 +433,11 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 /* full-body figures */
 .stage{container-type:size}
 .tok.fig{min-width:0}
-.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%;animation:figidle 5s ease-in-out infinite}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
 .tok.fig:hover .figimg{transform:translateY(-3px)}
-#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);animation:meidle 4.6s ease-in-out infinite;pointer-events:none}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);pointer-events:none}
 .stage.hasme .tokens{justify-content:flex-end}
+/* review/face-sharp (owner 15/11): no idle sway on people pictures; an animated transform/filter re-samples the face every frame (hazy face) */
 @keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) translateY(-2px) scale(1,1.012)}}
 @media (prefers-reduced-motion:reduce){.tok.fig .figimg,#mefig{animation:none}}
@@ -500,7 +502,8 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
   <section class="panel" id="panel"></section>
   <nav class="bar">
     <div class="tabs" role="tablist" id="tabs">
-      <button data-tab="act" data-s="Việc" role="tab">Hành động</button><button data-tab="go" data-s="Bản đồ" role="tab">Bản đồ</button><button data-tab="rv" data-s="Phi tần" role="tab">Phi tần</button><button data-tab="rel" data-s="Quan hệ" role="tab">Quan hệ</button><button data-tab="fac" data-s="Phe" role="tab">Phe phái</button><button data-tab="staff" data-s="Kẻ hầu" role="tab">Kẻ hầu</button><button data-tab="kid" data-s="Con" role="tab">Con cái</button><button data-tab="inv" data-s="Rương" role="tab">Rương đồ</button><button data-tab="art" data-s="Tài nghệ" role="tab">Tài nghệ</button><button data-tab="story" data-s="Truyện" role="tab">Tuyến truyện</button><button data-tab="log" data-s="Nhật ký" role="tab">Nhật ký</button>
+      <!-- labels = the final names (j84 TABS); the boot cover (KIT §14.1) hides this markup until the kit has built the bar -->
+      <button data-tab="act" data-s="Hành sự" role="tab">Hành sự</button><button data-tab="go" data-s="Dư đồ" role="tab">Dư đồ</button><button data-tab="rv" data-s="Phi tần" role="tab">Phi tần</button><button data-tab="rel" data-s="Ân oán" role="tab">Ân oán</button><button data-tab="fac" data-s="Phe" role="tab">Phe phái</button><button data-tab="staff" data-s="Cung nhân" role="tab">Cung nhân</button><button data-tab="kid" data-s="Hoàng tự" role="tab">Hoàng tự</button><button data-tab="inv" data-s="Tư trang" role="tab">Tư trang</button><button data-tab="art" data-s="Tài nghệ" role="tab">Tài nghệ</button><button data-tab="story" data-s="Mệnh" role="tab">Mệnh truyện</button><button data-tab="log" data-s="Sổ ghi" role="tab">Sổ ghi</button>
     </div>
     <button class="main" id="next">Sang buổi</button>
   </nav>
