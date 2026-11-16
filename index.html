@@ -6377,8 +6377,8 @@ st.textContent=`
 document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
-const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi"};
-const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua."};
+const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:"Thông tin cập nhật"};
+const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
 const SONO=["một","hai","ba"];
 function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
@@ -6424,9 +6424,9 @@ function kitBtns(box){const s=box.querySelector("#slots");if(!s)return;s.querySe
  s.querySelectorAll("button.btn").forEach(b=>{b.classList.remove("btn");b.classList.add("kbtn","alt")})}
 function noSeal(M){const s=M.querySelector(".dlg > .kph .kpseal");if(s)s.remove()}
 function mount(){const M=$("modal");if(!SM||Q[0]!==SM||M.hidden)return;const box=M.querySelector(".kpt-mount");if(!box)return;
- if(PG==="past"){box.innerHTML=pastBody()}else partsOf(PG).forEach(n=>{if(n)box.appendChild(n)});
+ if(PG==="past"){box.innerHTML=pastBody()}else if(PG==="notes"){box.innerHTML=window.CTM_NOTES_UI?CTM_NOTES_UI.body():""}else partsOf(PG).forEach(n=>{if(n)box.appendChild(n)});
  kitBtns(box);
- noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="home">‹ Lui</button>`}
+ noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="${PG==="notes"?"opt":"home"}">‹ Lui</button>`}
 function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)});HM=SM=null;
  if(M&&M.classList.contains("kptitle")){M.classList.remove("kptitle","kpthome","kpscene");if(T.hidden&&Q.length)showModal();else M.hidden=true}}
 function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}
@@ -29476,6 +29476,55 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* ================= UPDATE NOTES (D10) — "Thông tin cập nhật" =================
+   ONE maintained list: CTM_NOTES below (newest FIRST). The coordinator adds ONE entry per release (or a line to today's entry):
+     {id:"2026-11-16", n:["Câu ngắn, cổ trang, không dấu %.", ...]}          // id = ISO date (+ letter b, c… for a second release the same day)
+   Nothing else to touch: the date line, the pop-up, the Settings list all derive from this list.
+   - Pop-up: once per release (the newest id is remembered in localStorage["ctm-notes-seen"]), shown ONLY in play when nothing else is up
+     (no dialog, mini game, loading, title, co-op room); never delays boot, a save load or a co-op sync (it is just a queued kit panel).
+     A brand-new player (no sổ yet) gets no pop-up; the id is only recorded. If several releases were missed, they are shown together (≤ 3).
+   - Settings: a row "Thông tin cập nhật" (kit .kctl row + .kbtn.alt) in Thiết lập; it opens the title's own sub-screen "notes" (j74 go('notes'), ‹ Lui back to Thiết lập) with the recent releases (≤ 8).
+   Only kit parts: kitModal kind "notice" (news/info/rule add a picture column) (sections + facts), kctl row, kbtn. No private CSS. */
+const CTM_NOTES=[
+ {id:"2026-11-16",n:[
+  "Thiết lập có mục «Thông tin cập nhật»: xem lại những điều mới của từng lần cập nhật.",
+  "Sổ chơi một mình và phòng chơi cùng hảo hữu ghi riêng, không đè lên nhau.",
+  "Chơi cùng hảo hữu: có đồng hồ chung; máy ngủ dậy vẫn vào lại được phòng.",
+  "Thẻ lựa chọn: tranh đặt bên trái, chữ bên phải; nút chạm vào có lún xuống."]},
+ {id:"2026-11-15",n:[
+  "Có bản mới khi đang chơi: không bị ngắt giữa chừng, chỉ hiện chip «Có bản mới»; sang buổi sau bản mới tự mở, vào lại đúng sổ."]}
+];
+(function(){try{
+const KEY="ctm-notes-seen",MON=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"];
+const $n=id=>document.getElementById(id);
+const ls={get(){try{return localStorage.getItem(KEY)}catch(e){return null}},set(v){try{localStorage.setItem(KEY,v)}catch(e){}}};
+function when(id){const m=/^(\d{4})-(\d\d)-(\d\d)/.exec(id||"");return m?`Ngày ${+m[3]} tháng ${MON[+m[2]-1]||m[2]}`:String(id||"")}
+const sec=e=>({h:when(e.id),facts:e.n.map(t=>({text:t,kind:"world"}))});
+function show(list,title,sub,btn){kitModal({kind:"notice",title,sub,sections:list.map(sec),btn})}
+function hasSave(){try{return [1,2,3].some(n=>loadSlot(n))}catch(e){return false}}
+function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"}
+function calm(){try{const s=typeof S!=="undefined"?S:null;if(!s||s.dead||s.mg)return false;const t=$n("title");if(!t||!t.hidden||$n("kload"))return false;
+ if(typeof Q!=="undefined"&&Q&&Q.length)return false;
+ const c=window.COOP;if(c&&c.state&&(c.state.status!=="off"||c.state.playing))return false;if(window.COOPW&&COOPW.on)return false;
+ if(vis($n("ov")))return false;
+ for(const m of document.querySelectorAll(".modal,.kmov,#kpodov,.kbk,.kcl-host"))if(m.id!=="kload"&&vis(m))return false;if($n("kupd"))return false}catch(e){return false}return true}
+function unseen(){const seen=ls.get();const i=CTM_NOTES.findIndex(e=>e.id===seen);return i<0?CTM_NOTES.slice(0,1):CTM_NOTES.slice(0,Math.min(i,3))}
+let ok=0;
+function tick(){try{if(!CTM_NOTES.length){clearInterval(T);return}
+ const top=CTM_NOTES[0].id,seen=ls.get();
+ if(seen===top){clearInterval(T);return}
+ if(seen==null&&!hasSave()){ls.set(top);clearInterval(T);return}   /* first visit ever: nothing "new" to tell */
+ if(!calm()){ok=0;return}if(++ok<2)return;
+ const u=unseen();ls.set(top);clearInterval(T);if(u.length)show(u,"Điều mới trong cung","Xem lại ở Thiết lập, mục «Thông tin cập nhật».","Đã hiểu")}catch(e){}}
+const T=setInterval(tick,1500);
+/* body() = the Thông tin cập nhật sub-screen of the title / Thiết lập (j74 page "notes"): kit sections, same markup kitPanel builds */
+const body=()=>CTM_NOTES.slice(0,8).map(e=>`<div class="kpsec"><h4 class="kpst">${when(e.id)}</h4>${kitFacts(e.n.map(t=>({text:t,kind:"world"})),{group:false})}</div>`).join("");
+window.CTM_NOTES_UI={list:CTM_NOTES,seen:ls.get,body,tick,calm,reset(){try{localStorage.removeItem(KEY)}catch(e){}}};
+/* Settings: one more kit row at the end of the Thiết lập grid (label + .kbtn.alt, same row part as the switches) */
+const o0=optHTML;
+optHTML=function(){let h=o0.apply(this,arguments);const row=`<div class="kctl"><span class="kctl-l">Thông tin cập nhật<small>những điều mới từng lần</small></span><span class="kctl-c"><button type="button" class="kbtn alt" data-tgo="notes">Xem</button></span></div>`;
+ return h.replace(/<\/div>\s*$/,row+"</div>")};
+}catch(e){console.error(e)}})();
 
 </script>
 
@@ -29502,7 +29551,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="78c46f0e4d31";window.CTM_BUILD=BUILD;
+const BUILD="73d2d78c5b60";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
