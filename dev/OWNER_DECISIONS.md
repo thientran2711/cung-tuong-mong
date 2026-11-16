@@ -1166,3 +1166,6 @@ All must work in co-op.
 - (16/11) Hủy dung (scar) must follow the same one-rule face system → facefx-all-r1.
 - (16/11) Slap: 3 tiers only (nhẹ/vừa/nặng; "nhạt" = "nhẹ"). APPROVED: the slap minigame + the dodge minigame. → review/slap-mg.
 - (16/11) Lifespan: no floor; the roll decides; care can still add 2–3 years (careMax 3) as already ruled.
+- (16/11) LIVE: elder-staff-r1 a3dbdc19f on main (Tống ma ma, Hà cô cô, Diệp ma ma in the masters' households).
+- (16/11) Owner bugs: (1) the title menu sits in a huge §8.1 frame, and its layout flips between buttons-only and picture-left (refs/owner-title-huge.jpg, owner-title-flip.jpg) → review/kpanel-compact. (2) Person-card act options are tall clipped boxes, not the kit long row (refs/owner-pcard-actbox.jpg) → review/pcard-actrow. (3) She asked (question only, no change) why her room looks brown: j12 lightTick puts a CSS tint over rooms with no per-buổi painting at full strength (1/4 strength on rooms with buổi paintings). Ngọc Thanh các has only one generic picture, so the trưa tint browns it.
+- (16/11) newgame-ui-r2 70119a805 → reviewer.

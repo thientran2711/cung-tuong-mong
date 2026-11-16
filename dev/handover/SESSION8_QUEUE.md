@@ -129,3 +129,8 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C62 | review/servant-system (room-stage household bug + servant audit/proposal) | RUNNING (opus) |
 | C63 | review/facefx-all-r1 (fit rows + merge main) | RUNNING (sonnet) |
 | C64 | review/slap-mg (slap + dodge minigame, 3 tiers) | RUNNING (sonnet) |
+| C65 | review/kpanel-compact (LIVE: title menu frame huge + layout flips) | RUNNING (sonnet) |
+| C66 | review/pcard-actrow (LIVE: person-card act boxes → kit long row) | RUNNING (sonnet) |
+| C57 | newgame-ui-r2 70119a805 reviewer | RUNNING |
+| C59 | elder-staff-r1 a3dbdc19f | LIVE |
+| UNASSIGNED (main slice) | C3 art-complete p2, C14 row-align re-review, C20 act-text resume, C43 coop-invite-ux, C44 cloud-save, D50 placeholder figure frame, D51 fxkit follow-ups, D52 skin-match audit, act-split waves 2–3 (after wave 1), D5+ side stories (after reign-road) → candidates for a 4th foreman |
