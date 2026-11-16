@@ -192,7 +192,7 @@
 | cardflip-glow2-r2 review (sonnet, fast lane; r1 archived) | review/cardflip-glow2-r2 | main s17 | session_01UV1SzjxA4tS9pjHtfQwPxZ | RUNNING | 16/11 13:38Z |
 | test-drift-roulette-r2 review (sonnet) | review/test-drift-roulette-r1 | main s17 | session_01UV1Szjoc74qzY1ffJ45Mrv | RUNNING | 16/11 13:38Z |
 | MEMORY UPGRADE + CAUSE ledger (s17 13:50Z/13:55Z; OD 13:25Z (A) + 13:40Z (b)) | review/mem-upgrade | D | session_01DgYSWnbZAx5XWMeN9VzwiE | SẴN SÀNG KIỂM 06e4179e | 16/11 14:15Z |
-| ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | session_01DgYSWoSdvBQtzpXxCDVUPh | RUNNING | 16/11 13:45Z |
+| ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | session_01DgYSWoSdvBQtzpXxCDVUPh | SẴN SÀNG KIỂM fb67d4ad | 16/11 14:22Z |
 | merge-train-8 successor c (sonnet) | review/merge-train-8 | main s17 | session_01UV1SzhTCE7SXbum6V4ghBh | RUNNING | 16/11 13:39Z |
 | D4 npc-death review | review/npc-death-r1 | D | session_01DgYSWocL5CmLHseB9i8sEn | PASS 5f58a715 | 16/11 14:03Z |
 | D4 npc-death review | review/npc-death-r1 | D | (reviewer opening) | RUNNING | 16/11 13:42Z |
@@ -223,3 +223,4 @@
 | tut-place: UI bug tour step 5 card covers tap target on Fold + 1180 Tài nghệ tip (from test-drift-r2 FAIL) | review/tut-place | main s17 | session_01UV1SzkUFJmikqECkuFxtPn (sonnet) | RUNNING | 16/11 14:14Z |
 | D25 veil-zoom-r2 reviewer (sonnet) | review/veil-zoom-r3 | B | session_01N1tNP3cFohaMXQ97kod8mh | RUNNING | 16/11 14:16Z |
 | night-time analysis (opus): 3 flips/month vs 12 consorts — options + numbers + impact (report only) | (report only) | main s17 | session_01UV1SzhuYF9iVGubAH5xsE6 (opus) | RUNNING | 16/11 14:20Z |
+| item-ledger review | review/item-ledger-r1 | D | (reviewer opening) | RUNNING | 16/11 14:22Z |
