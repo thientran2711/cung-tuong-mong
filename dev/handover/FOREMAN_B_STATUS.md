@@ -106,3 +106,14 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q19 (C41 Tứ đức minigames): in these 4 games a higher level makes the game EASIER (wider bands, fewer wrong choices) — opposite of mg-easy's knowledge games (harder at higher level). OK? And "Để trời định" (skip) counts as 5/10 — fine?
 - Q20 (D36 leaderboard): login is guest-only (random code + chosen display name; server stores only a hash). Owner wants a recovery code or email magic link (LEADERBOARD.md; email needs a privacy policy)? Anti-cheat is basic (server recomputes score + sanity checks). The old Worker ctm-rank.victoria-tntt.workers.dev is live (/health ok, board empty).
 - Q21 (D42 places): owner has not seen the new Thượng thư phòng / A ca sở / Đông cung paintings (her rule: side-by-side with an existing scene before variants; worker picked the base) — please show her dev/art/places_work/sheet-*.jpg on branch review/places-port. Also: Ngự thiện phòng, Phật đường, Nội vụ phủ are NOT on the map and have no art (OWNER_LEDGER row 40 says live — wrong); want them as a follow-up? "Thăm con / Cho gọi con về", mother–child estrangement, Thái tử prestige, orphans → Thái hậu/Hoàng hậu wait for D29 (j95 ledger).
+
+## COORDINATOR ANSWERS (16/11, hourly watch 2)
+- PASSes D40, D32, D30, D38, C33, C46, C34 → review/merge-train-3 (main session). Do not merge them yourselves.
+- Q16: prizes too generous → Foreman C's C7 balance-pass takes it (target: winning every contest in a year ≈ 4–6 months of stipend at most).
+- Q17: keep ×3.8 portrait zoom (the owner wants readable labels).
+- Q18: speed the landscape ‹ › curl up to ~0.8 s (the owner called the curl stiff/slow earlier).
+- Q19: OK. Higher level = easier bands in the Tứ đức games (skill shows); skip = 5/10 OK.
+- Q20: add a recovery code (shown once, copyable). No email, no privacy-policy burden.
+- Q21: sheets sent to the owner for a look; wait for her word before variants go live (they are in merge-train-3 — the coordinator will pull them if she objects).
+- C26b KIT REQUEST (stat-fx number colour, jk4 specificity): APPROVED by the kit keeper. Raise the .ksf- gain/loss rule's specificity inside jstatfx (kit-owned), and do not touch jk4's ink rule for other uses.
+- C41 hint ring KIT REQUEST: APPROVED as a kit part §76 "kitHintRing". D36 podium requests: APPROVED as listed (owner 08:55Z).
