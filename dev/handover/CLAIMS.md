@@ -212,7 +212,7 @@
 | kc-roads Chờ-value fix (r1 FAIL item 1, OD:L1288) | review/kc-roads-cn-nc-fix2 | D | session_01DgYSWoQg78D5zyhdSa6uoH | RUNNING | 16/11 13:46Z |
 | D31 difficulty re-measure + HH ~32 % on Vừa + Q14 rain gear wears out (opus) | review/diff-remeasure | B | session_01N1tNP4CcXesvskQcWYTMwP | RUNNING | 16/11 13:55Z |
 | EMOTION ACTIONS + extreme-mood consequences + FORCED emotion events, player + all NPCs (OD 13:08Z, 13:25Z(B), 13:50Z) (opus) | review/emotion-acts | B | session_01N1tNP3dP2Jd2zhw72gV1uW | RUNNING | 16/11 13:55Z |
-| D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | session_01N1tNP5D4rJRWvpDvFV93Kf | RUNNING | 16/11 13:55Z |
+| D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | session_01N1tNP5D4rJRWvpDvFV93Kf | DONE SẴN SÀNG KIỂM f88a191b (archived) | 16/11 13:55Z |
 | D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | session_01N1tNP6zPQNzSmyMgNCuSPj | RUNNING | 16/11 13:55Z |
 | tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | session_01UV1SzhYN2Ensucb2ZqjeRX (sonnet) | RUNNING | 16/11 14:02Z |
 | history-thitam expert (sonnet): lật thẻ bài / mùng 1 & rằm / ngự giá — history, dramas, games → rule proposal | (report only) | main s17 | session_01UV1Szgg8KB5ye6NWizPmHd | RUNNING | 16/11 14:03Z |
@@ -221,3 +221,4 @@
 | title-tag-r1 review (rank-bright 9043c173 + title-tag 0dc3afa8) | review/title-tag-r1 | main s17 | session_01UV1SzmFFVNQ3K1RGgtZK3p | RUNNING | 16/11 14:12Z |
 | mem-upgrade review | review/mem-upgrade-r1 | D | session_01DgYSWot4sNs4TrG8fUm2of | RUNNING | 16/11 14:15Z |
 | tut-place: UI bug tour step 5 card covers tap target on Fold + 1180 Tài nghệ tip (from test-drift-r2 FAIL) | review/tut-place | main s17 | session_01UV1SzkUFJmikqECkuFxtPn (sonnet) | RUNNING | 16/11 14:14Z |
+| D25 veil-zoom-r2 reviewer (sonnet) | review/veil-zoom-r3 | B | (opening, Foreman B s5) | RUNNING | 16/11 14:16Z |
