@@ -34,8 +34,9 @@ Object.assign(BAL,{ea:{
     consort toward the smug one, danh the same Danh loss; servants lose loy Lòng toward their master (a sulky / boastful servant). */
  ext:{wk:3,cd:8,danh:4,ghen:8,smugWk:4,smugK:1.5,oan:6,loy:5},
  /* (3) her outbursts: |mood v| ≥ v (inside band ±1 deep end and band ±2; measured r1: at 60 = 0.4 a 100 tuần, too rare to be felt),
-    chance ch % a tuần × temper (hot / even / timid), at most one a tuần, then cd tuần of quiet. */
- out:{v:45,ch:30,cd:2,t:{hot:1.6,even:1,timid:.6}},
+    chance ch % a tuần × temper (hot / even / timid), at most one a tuần, then cd tuần of quiet. phamW = weight of Phạm thượng among a
+    hot temper's angry reactions (never while cấm túc: no thỉnh an; r2 at .6: 5 in one hot life, each a cấm túc). */
+ out:{v:45,ch:30,cd:2,t:{hot:1.6,even:1,timid:.6},phamW:.35},
  /* NPCs: act band actV ≤ emo.v < outV (chance actCh % a tuần), outburst emo.v ≥ outV (chance outCh % × temper), extreme emo.v ≥ extV
     (r1 at 70: 25 extremes a 100 tuần across the harem, too common for "extreme");
     meWk = most events a tuần that other people's outbursts bring to her (the rest: log lines). */
@@ -136,7 +137,7 @@ const R_=[
  {k:"mang",g:"gian",who:"c",n:"Mắng cung nữ",art:"phat-vo-co-h",ok:p=>maidOf(p).length>0,w:T=>T.k==="timid"?.5:2},
  {k:"danh",g:"gian",who:"c",n:"Đánh cung nữ",art:"tat-h",ok:(p,T)=>T.k==="hot"&&maidOf(p).length>0,w:()=>1.2},
  {k:"khac",g:"gian",who:"c",n:"Mắng cung nữ cung khác",art:"phat-vo-co-h",ok:(p,T)=>T.k==="hot"&&!!eaOtherMaid(p),w:()=>1.2},
- {k:"pham",g:"gian",who:"c",n:"Phạm thượng",art:"dap-tra-mia-h",ok:(p,T)=>T.k==="hot"&&!!eaSuperior(p),w:()=>.6},
+ {k:"pham",g:"gian",who:"c",n:"Phạm thượng",art:"dap-tra-mia-h",ok:(p,T)=>T.k==="hot"&&!((p===S?S.confined:p.confined)>0)&&!!eaSuperior(p),w:()=>BAL.ea.out.phamW},
  {k:"khoc",g:"gian",who:"c",n:"Khóc vì uất ức",art:"nhin-loi-mia-h",ok:(p,T)=>T.k!=="hot",w:T=>T.k==="timid"?3:.6},
  {k:"khoc",g:"buon",who:"c",n:"Khóc suốt đêm",art:"nhin-loi-mia-h",ok:()=>true,w:T=>T.k==="timid"?3:1.5},
  {k:"boan",g:"buon",who:"c",n:"Bỏ bữa",art:"xa-huong",ok:()=>true,w:T=>T.k==="timid"?2:1},
