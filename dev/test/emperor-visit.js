@@ -17,7 +17,7 @@ const YEARS=+process.argv[2]||6,LIVES=+process.argv[3]||6,BEFORE=+process.env.BE
   const V=BAL.visit,N=BAL.night;const quiet=()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}};
   /* r1: her monthly days (jcycle cyTray) now also keep him away; the forced flow cases run outside them */
   const offCy=()=>{try{const b=cyBase(S);if(b&&S.tuan===b.t)S.tuan=(S.tuan+1)%3}catch(e){}};
-  const force=()=>{offCy();const k=["base","cap"].map(x=>V[x]);V.base=100;V.cap=100;S.visW=null;if(S.emp)S.emp.visit=null;const r=visRoll();V.base=k[0];V.cap=k[1];return r};
+  const force=()=>{offCy();const k=["base","cap"].map(x=>V[x]);V.base=1000;V.cap=100;S.visW=null;if(S.emp)S.emp.visit=null;const r=visRoll();V.base=k[0];V.cap=k[1];return r};
   const run=(o)=>{const it=Q.shift();(o.go||(()=>{}))();if(o.fx&&Object.keys(o.fx).length)apply(o.fx);return it};
   /* 1. flow */
   SLOT=3;start();quiet();S.sung=50;S.an=30;S.tonight=null;S.preg=0;S.out=0;S.th=30;S.hh=20;S.thDead=false;
@@ -40,14 +40,14 @@ const YEARS=+process.argv[2]||6,LIVES=+process.argv[3]||6,BEFORE=+process.env.BE
     const hi=nightGain(q+b+m+2),lo=nightGain(q+b+m);if(!mm||+mm[1]!==hi.sung||+mm[2]!==hi.an||+mm[3]!==lo.sung||+mm[4]!==lo.an)F(`nx shown≠applied mood${md} q${q} b${b}: ${x}`);
     /* applied: run the real nightFx at the two ends and read the true change */
     for(const [s,w] of [[q+b+m+2,hi],[q+b+m,lo]]){const s0=S.sung,a0=S.an;S.sung=40;S.an=40;const L0=log;log=()=>{};try{nightFx(s)}finally{log=L0}const got={sung:S.sung-40,an:S.an-40};S.sung=s0;S.an=a0;
-     if(got.sung<w.sung||got.an!==w.an)F(`nightFx s${s} gave ${JSON.stringify(got)} not ${JSON.stringify(w)}`)}
+     /* Sủng goes through sg() (his nature: nóng nảy ×1.3, lạnh lùng ×0.7) both when applied (j1 apply) and when drawn (jaudit #15 actLineRaw) */if(got.sung!==sg(w.sung)||got.an!==w.an)F(`nightFx s${s} gave ${JSON.stringify(got)} not sg(${JSON.stringify(w)})`)}
     if(md===1&&q===2)out.flow.nx.push(`b${b}: ${x.split(" · ").slice(0,3).join(" · ")}`)}S.emp.mood=mood0;Q.length=0}
   /* 2. safe road */
   quiet();S.visW=null;S.tonight=null;S.ntk=null;S.preg=0;force();const c2=Q.find(x=>x.pid==="empnight");if(c2){const o=c2.opts.find(o=>/^Khuyên/.test(o.n));const du=S.duc,th=S.th;Q.length=0;Q.push(c2);run(o);
    out.flow.advise={duc:S.duc-du,th:S.th-th};if(S.duc-du!==V.adviseDuc&&S.duc<100)F("advise Đức "+(S.duc-du))}else F("no 2nd card");
   /* 3. gates */
   quiet();S.ntk=null;S.tonight=null;S.preg=1;S.visW=null;if(force())F("visit while pregnant");S.preg=0;
-  S.visW=wk();S.ntk=null;{const k=V.base;V.base=100;V.cap=100;const r=visRoll();V.base=k;V.cap=6;if(r)F("visit inside the gap")}
+  S.visW=wk();S.ntk=null;{const k=V.base,kc=V.cap;V.base=100;V.cap=100;const r=visRoll();V.base=k;V.cap=kc;if(r)F("visit inside the gap")}
   out.flow.pool=freshEvents().some(e=>e.id==="empnight");if(out.flow.pool)F("empnight still in the generic pool");
   if(BEFORE)out.fail=[];/* the flow checks are for the new rule */
   /* 4. bot */
