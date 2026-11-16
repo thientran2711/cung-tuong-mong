@@ -5,6 +5,8 @@
    - SKILLED bot ("a good human who knows the game"): follows the test oracle KG82.peek() (the right move the game itself exposes) with
      ONE human error model for every engine: reaction delay |N(0, BOT.rt)| ms, tap scatter N(0, BOT.px * board) px, drag scatter,
      think time BOT.think ms between deliberate moves (drag / button), and a slip rate BOT.slip (a random move instead of the right one).
+   - ANTICIPATION (slap-mg-r2): when peek() also gives at = ms until the right moment (a needle she can see coming), the skilled bot taps at
+     at + N(0, BOT.aim) ms instead of reacting; bot "casual" = the same with 2× BOT.aim. The demo card is skipped (KG82.noDemo).
    - RANDOM bot: random taps / drags / holds on the board every 250–650 ms (never reads the oracle).
    - Each play: kg82Open + kg82Play(kind) with KG82.lv = the tier's ease (window.mgEase when present), raw 0..10 recorded.
    usage: node dev/measure/mg-bots.js <baseURL> <kinds,comma|all> <tiers e.g. occ:lv,…> <bots skilled,random> <n> [pages=3] [out.json]
@@ -13,7 +15,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
 const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
-const BOT={rt:70,px:.018,think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh'};
+const BOT={rt:70,px:.018,think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh',aim:40};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
@@ -45,8 +47,11 @@ const BOTS_SRC=(BOT)=>{
    if(kind==='random'){if(!busy&&now>nx){busy=true;
      if(Math.random()<.3){const r=boxR();const x=r.left+Math.random()*r.width,y=r.top+Math.random()*r.height,el=at(x,y);if(hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}else if(el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}busy=false}
      else randomMove(()=>{busy=false});nx=now+250+Math.random()*400}setTimeout(tick,16);return}
-   /* skilled */
+   /* skilled (casual = the same person with twice the timing error) */
    const pk=KG82.peek();
+   if(pk&&pk.at!=null){/* a predictable target (jslap needle): a person ANTICIPATES the crossing she sees coming and taps at at + N(0, BOT.aim) ms */
+     if(!busy){busy=true;const k=kind==='casual'?2:1;setTimeout(()=>{if(KG82.phase!=='play')return;const q=KG82.peek()||pk;tap(q.x,q.y)},Math.max(0,pk.at+G()*BOT.aim*k))}
+     setTimeout(tick,16);return}
    if(pk&&'hold' in pk){/* continuous hold: follow the wanted state after a reaction delay */
      if(holdWant!==pk.hold){holdWant=pk.hold;holdAt=now+Math.abs(G())*BOT.rt}
      if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):at(pk.x,pk.y),x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
@@ -79,8 +84,8 @@ const BOTS_SRC=(BOT)=>{
   while(jobs.length){const J=jobs.shift();
    let raw;try{raw=await Promise.race([new Promise((_,rej)=>setTimeout(()=>rej(new Error('real timeout')),90000)),p.evaluate(async J=>{try{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
      const K=KG82_KIND[J.kind];if(!K)return{err:'no kind '+J.kind};
-     let lv=0,tw='';if(/^e-?[\d.]/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word}
-     KG82.mgBot=1;const d=kg82Open({art:K.n,title:'đo',how:K.how||''});if(!d)return{err:'no frame'};
+     let lv=0,tw='';KG82.tier=null;if(/^e-?[\d.]/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word;KG82.tier=t}
+     KG82.mgBot=1;KG82.noDemo=1;const d=kg82Open({art:K.n,title:'đo',how:K.how||''});if(!d)return{err:'no frame'};
      KG82.lv=lv;KG82.ctx='hoc';const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot,J.kind);else setTimeout(w,16)};w()});
      kg82Close(true);return{raw:r,lv,tw}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
    const key=`${J.kind}|${J.tier}|${J.bot}`;(out[key]=out[key]||[]).push(raw.err?null:raw.raw);if(raw.err)errs.push(key+' '+raw.err);
