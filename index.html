@@ -35062,6 +35062,9 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
   if(id&&R.P[id]&&!here(id)){V.people.splice(i,1);popIdx=null;ch=true}}
  for(const v of liveRivals(true)){const id="v"+v.id;if(!here(id))continue;if(V.people.some(p=>p.ref===v&&(p.kind==="rival"||p.kind==="hh")))continue;
   if(k==="home"&&sameHouse(S,v))continue;try{V.people.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v));ch=true}catch(e){}}
+ /* jplx places: the people jplx's lists put here (servants, children, the fixtures) are on the stage (a walk that crosses into the next buổi
+    can leave an empty stage) */
+ if(typeof plxPeople==="function"&&/^(cnh|tgk|ttp|acs|dc)$/.test(k))try{for(const q of plxPeople(k)){if(!q||q.kind==="task")continue;if(V.people.some(p=>p.kind===q.kind&&(q.sid!=null?p.sid===q.sid:q.ref?p.ref===q.ref:p.name===q.name)))continue;V.people.push(q);popIdx=null;ch=true}}catch(e){}
  /* her palace: a child born while she is there joins the stage the record shows (the kid entries homePeople() draws) */
  if(k==="home"&&!S.out)try{const ks=Object.keys(R.P).filter(id=>id.indexOf("k:me:")===0&&here(id));if(ks.length>V.people.filter(p=>p.kind==="kid").length)for(const p of homePeople())if(p.kind==="kid"&&!V.people.some(q=>q.kind==="kid"&&q.ref===p.ref)){V.people.push(p);popIdx=null;ch=true}}catch(e){}
  /* men, officials, the court physician and the Kính sự phòng eunuch the record puts here (port 16/11: the map counts them, so the stage draws them) */
@@ -35213,7 +35216,8 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  /* jplx x jstaff overlap (main 16/11): the servants' rest list (Dãy nhà cung nhân) could pick a named elder whom jstaff draws at her post at
     the same time, and at night her trusted maid while the home stage draws her too; one person, one place: an elder stays at her post,
     the trusted maid with her mistress (the record puts them there), never in the rest list */
- if(typeof plxServants==="function"){const ps0=plxServants;plxServants=function(){const L=ps0.apply(this,arguments);try{if(!j95on()||!Array.isArray(L))return L;const E=new Set(allServ().filter(s=>s&&s.eid).map(s=>s.sid));return L.filter(q=>!(q&&q.sid!=null&&E.has(q.sid))&&!(q&&q.kind==="maid"))/* her trusted maid stays at her side (the home stage draws her) */}catch(e){return L}}}
+ if(typeof plxTgk==="function"){const pt0=plxTgk;plxTgk=function(){const L=pt0.apply(this,arguments);try{if(!j95on()||!Array.isArray(L))return L;const E=new Set(allServ().filter(s=>s&&s.eid).map(s=>s.sid));return L.filter(q=>!(q&&q.sid!=null&&E.has(q.sid)))}catch(e){return L}}}/* same for the punished list at Tân Giả khố */
+ if(typeof plxServants==="function"){const ps0=plxServants;plxServants=function(){const L=ps0.apply(this,arguments);try{if(!j95on()||!Array.isArray(L))return L;const E=new Set(allServ().filter(s=>s&&s.eid).map(s=>s.sid));let T=new Set();try{if(typeof plxTgk==="function")T=new Set(plxTgk().map(q=>q&&q.sid).filter(x=>x!=null))}catch(e){}/* a maid punished at Tân Giả khố is not resting at the same time */return L.filter(q=>!(q&&q.sid!=null&&(E.has(q.sid)||T.has(q.sid)))&&!(q&&q.kind==="maid"))/* her trusted maid stays at her side (the home stage draws her) */}catch(e){return L}}}
  const ra0=runAct;runAct=function(a,t,k){if(!j95gate()||!a||a===S||!t||!(H95.has(k)||F95.has(k)))return ra0.apply(this,arguments);const g=motiveOK(a,t,k);j95actLog(a,t,k,g);if(!g.ok)return"";return ra0.apply(this,arguments)};
  if(typeof newPlot70==="function"){const np0=newPlot70;newPlot70=function(a,t){if(j95gate()&&a&&a!==S&&t){const g=motiveOK(a,t,"plot");j95actLog(a,t,"plot",g);if(!g.ok)return null}return np0.apply(this,arguments)}}
  /* j24 "người tìm đến": the visitor passes the same gate, and the visit is in the record (she is in your palace that khắc) */
@@ -35730,7 +35734,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="91f57f2b67e6";window.CTM_BUILD=BUILD;
+const BUILD="1b14c466a26a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

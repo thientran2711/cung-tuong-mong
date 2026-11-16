@@ -108,3 +108,33 @@ weekly intentions (`S.j95.it`, `j95intent`); to draw a palace map read `S.roster
 - kit_dupes.js OK. Old-save test dev/test/roster_oldsave.js written, NOT yet run (uismoke.js timed out on the PWA root page).
 - Known main issues found (not fixed, outside j95): jmen assumes 3 buổi (night = buổi 2 = Chiều now; tryst plans b:2; guard roster w*3+b);
   jstaff draws the Thái hậu elder at both Đức Thọ cung and Tân Giả khố on the maid road (one person, two places).
+
+## Finishing pass (16/11, worker opened by Foreman C)
+Merged origin/main 0a311183 (9 commits: jreign, jrail, goal strip); assemble order kept (jk95 after jk2b; j95, j95b, j95c, jqsave just
+before jkpc, which stays last); site rebuilt. The merged-build audit then showed failures the pre-merge runs could not see (jstaff + jplx
+came in with the eba64ea merge). Fixed (all inside j95/j95b/jk95 files or tests; no main module edited):
+1. **Named elders (jstaff)**: `J95.eld[id]=eid`; `j95vis` counts an elder only where jstaff `addStage` draws her (tn elder at Đức Thọ cung
+   while Thái hậu lives, kn elder at Càn Ninh cung, gt elder at her home only in turns ≤4). The gt elder after turn 4 stood at Đức Thọ cung
+   in the record, counted, never drawn → map +1.
+2. **jplx places (one ledger)**: the record now takes jplx's own lists: servants resting at Dãy nhà cung nhân (`plxServants`) and punished
+   at Tân Giả khố (`plxTgk`) get kind `px` (acts `offduty` / `laundry`), children 6+ go where `plxKidPlace` says (Thượng thư phòng / A ca sở /
+   Đông cung), the two fixtures are ids `c:tgk` (Quản sự Tân Giả khố) and `c:ttp` (Thầy dạy, `ngoai` when no class). They are resynced every
+   khắc for now and later khắc (lists change inside a buổi). `j95stage` adds any missing jplx entry at those places. Not on the maid road
+   (jplx skips it; `j95vis` false there).
+3. **Overlaps between main modules, reconciled in j95 (one person, one place)**: jplx's rest list could take a named elder, a maid punished at
+   Tân Giả khố, or (at night) her trusted maid while the home stage draws her; jplx's punished list could take a named elder. j95 wraps
+   `plxServants` / `plxTgk` to drop those (they stay where the record and the other stage put them).
+4. **Newcomer mid-buổi** (a birth): khắc already shown get `[ngoai, away, "chưa có trong cung lúc ấy"]`; a child born while she is home
+   joins the home stage.
+5. **Motive gate, whole family**: j83 handmade works (`wkGive` gift, `wkPoison`) aimed at a person pass `motiveOK` like `runAct` (a sad
+   consort sent her a gift card through j83, ungated). Scan of PEND cards reading a consort from params: 26 cards, newly declared `tsbFirst`,
+   `rcpacc` (others are covered: e68 via E95B, player-chosen `itarget`, no consort in shop/thbenh/tuyen/vase).
+6. **Text scan**: `j95bNoTitles` drops jstaff titles ("Quản sự ma ma Càn Ninh cung", "<x> cô cô ở Đức Thọ cung") before reading place
+   words (the monthly report put a confined consort "at Càn Ninh cung").
+7. jk95 "Thói quen": checked on main's card layout (sticky act-tab bar `.kpstick`): with no facts block the section sits at the end of the
+   right column (putting it above the sticky bar is covered by the bar's negative margin/shadow, so left as is).
+Tests changed (test-side gaps, not game bugs): old-save + roster_dom start a life with `__nlInner=1` (main's start() opens the next-life
+flow otherwise, nothing was saved); roster_dom ORIGIN env; maid road: map checked by stage-counts.js, stage caps (4 consorts; at home only
+the mistress); audit knows elder / npc / fixture stage entries, elders' posts in (l), plxKidPlace in (k), jplx places in (c);
+roster.js tool knows elders + jplx places. **Known main bug kept visible, not hidden**: jstaff draws the Đức Thọ cung elder at Tân Giả khố
+too (consort road as well) → map at Tân Giả khố = record + 1; the audit counts it as `knownTgkElder`, roster_dom as `known`.
