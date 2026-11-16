@@ -159,4 +159,4 @@
 | D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | RUNNING | 16/11 11:38Z |
 | D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | RUNNING | 16/11 11:38Z |
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
-| nw-poem reviewer | review/nw-poem-r1 | B | (opening, Foreman B s5) (sonnet) | RUNNING | 16/11 11:47Z |
+| nw-poem reviewer | review/nw-poem-r1 | B | session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) | RUNNING | 16/11 11:47Z |
