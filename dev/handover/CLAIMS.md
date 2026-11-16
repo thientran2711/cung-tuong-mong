@@ -359,7 +359,7 @@
 | chonso-cloud review r1 | review/chonso-cloud-r1 | main s22 | session_01UV1SziaVHqyEHxYePwJK8N | DONE PASS 9523200b → LIVE f03886af | 16/11 19:40Z |
 | kit-fit r2 keeper (opus): equal gaps week-book+identity, .kslot compact, card-flip labels | review/kit-fit | main s22 | session_01UV1SzmCjS3uEujA4xhcCKD | RUNNING | 16/11 19:15Z |
 | kit-size #4 keeper (opus): S = avatar frame (owner final), narrator = palace officials (BAL.staff.narrator), then phase 2 | review/kit-size | main s22 | session_01UV1SzhCYv882hXXmEVyBNE | RUNNING | 16/11 19:22Z |
-| fold-popw review r1 (sonnet) of 13c46a8e | review/fold-popw-r1 | main s22 | session_01UV1SzjQzaXE8hTNhdkom55 | RUNNING | 16/11 19:33Z |
+| fold-popw review r1 (sonnet) of 13c46a8e | review/fold-popw-r1 | main s22 | session_01UV1SzjQzaXE8hTNhdkom55 | PASS 55d73a14 → LIVE 23595c37 (s23) | 16/11 19:33Z |
 | percent-measure re-run (sonnet) | handover | main s22 | session_01UV1SzjbPtX1ynyRZgs7MvS | DONE ~67 % xong | 16/11 19:35Z |
 | palace-voice (opus): expert brief, one address function, repetition pools, literary gain/loss | review/palace-voice | main s22 | session_01UV1SzgzYMEz8LE25rzybvi | RUNNING | 16/11 19:38Z |
 | lag-play-2 review r1 (opus, BIG perf+co-op) of d006dfdd | review/lag-play-2-r1 | main s22 | session_01UV1SzjyH2iaj5P368p1TBN | RUNNING | 16/11 19:40Z |
