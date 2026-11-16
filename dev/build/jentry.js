@@ -7,7 +7,7 @@
    1. entExam(o, fin): ONE selection round in the shared mini-game frame (kg82Open, the jexam pattern: judges / subject / difficulty /
       what else counts / the odds words, "Bắt đầu thi" or "Để tài nghệ quyết định"). The subject is an art she chose on the card; a word
       game (BAL.entry.word) is never played: it is swapped for her best non-word art. Board difficulty = mgTier occ "tuyen" (review/mg-balance).
-      Used by every road: "Vào cung ngay" (kc2Sel), the cung nữ / hòa thân home roads (kc2Exam), the co-op wait (kd "cho") and the
+      Used by every road: "Vào cung ngay" (kc2Sel), the cung nữ / hòa thân home roads (kc2Exam), and the
       tiểu thư Phúc tuyển (jkc kcPhucPlay: same frame, same no-word rule; its Điện tuyển rule stays jkc's own).
    2. entScore(road, raw, art): the ONE score rule (BAL.entry.w[road]) that jkc2 kc2Score / kc2SelDo now call; entTier → ceiling / −1 / −2.
       BAL.entry.fx[tier]: gain or loss of the result itself on every path (also when the ceiling is Đáp ứng: muoi, td, thd now meet the exam too).
@@ -24,7 +24,7 @@ function entArtLv(k){try{return k?kg82LvFor(S,k):0}catch(e){return 0}}
 function entArts(){const L=[];for(const a of (typeof ARTS!=="undefined"?ARTS:[])){if(a.k==="y"&&!(S&&S.origin&&S.origin.k==="cn"))continue;const k=entKind(a.k);if(!k||entWordy(k))continue;L.push([a.k,(S.arts||{})[a.k]||0,a.n])}
  return L.sort((x,y)=>y[1]-x[1])}
 function entBest(not){const L=entArts().filter(x=>!(not||[]).includes(x[0]));return L.length?L[0][0]:"cam"}
-function entRoad(){const K=S&&S.kc;if(K&&K.kd==="cho")return"cho";if(K&&K.kd==="dan")return"dan";if(K&&K.kd==="nc")return"nc";return"dir"}
+function entRoad(){const K=S&&S.kc;if(K&&K.kd==="dan")return"dan";if(K&&K.kd==="nc")return"nc";return"dir"}
 /* ---------- the ONE score rule ---------- */
 function entBase(road,raw,art){const W=BAL.entry.w[road]||BAL.entry.w.dir;const K=(S&&S.kc)||{};const k=entKind(art);
  let s=(W.base||0)+(W.sac||0)*(S.sac||0)+(W.duc||0)*(S.duc||0)+(W.tai||0)*(S.tai||0)+(W.suc||0)*(S.suc||0)+(W.raw||0)*raw+(W.art||0)*entArtLv(k)+(W.th||0)*(S.th||0);
@@ -62,14 +62,15 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
-window.kcEntryExam=function(o,fin){if(typeof o!=="object"||!o)o={art:""};entExam(o,fin)};
+/* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
+window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
 window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 /* tiểu thư road (jkc): Phúc tuyển offers her best NON-word art and plays it in the same exam frame */
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
  const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
  if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?5:cl(3+R(6),0,10));return}
- try{entExam({art:k,phuc:1,note:"điểm màn chơi cộng vào Điện tuyển"},raw=>fin(raw))}catch(e){console.error(e);fin(5)}};
+ try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(5)}};
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
 (function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();
@@ -88,14 +89,14 @@ const ENT_INTRO={
  thd:["Cha ngươi là thầy đồ nghèo; nhà chỉ có mấy giá sách cũ và một mái tranh dột.","Văn chương của ngươi lọt tai quan huyện, tên ngươi vào sổ tuyển. Ngoài chữ nghĩa, ngươi không có gì mang theo."],
  cnv:["Lệnh tuyển cung nữ về tới làng. Nhà ngươi nghèo, nợ chồng lên nợ; tên ngươi được ghi vào sổ.","Một bọc áo, một lời mẹ dặn: vào cung thì cúi đầu mà sống."]};
 function entIntroCard(){const k=S.origin&&S.origin.k;const T=ENT_INTRO[k];if(!T)return null;
- const road=S.kc&&S.kc.kd==="cho"?"Kiếp này ngươi chờ hảo hữu ở ngoài hậu cung.":"Kiếp này ngươi vào cung ngay.";
+ const road="Kiếp này ngươi vào cung ngay.";
  return{t:`Tiền truyện · ${S.origin.n}`,who:pMe(),art:(typeof kitOriginWide==="function"?kitOriginWide(k):`img/origin-wide-${k}.webp`),btn:"Tiếp theo",entI:1,
   h:T.map(x=>`<p>${x}</p>`).join("")+`<p>${road}</p>`}}
 /* a home road (jkc Khuê các, jkc2 thôn quê / cố quốc) already opens with its own narrated card (the family is still alive there, the draft
    or the treaty still to come), so it only gets the origin painting when its card has none; the direct road and the co-op wait get Tiền truyện */
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
  try{if(was&&S&&!S.dead&&!S.entV){S.entV=ENT_V;const k=S.origin&&S.origin.k;
-  if(S.kc&&S.kc.kd!=="cho"){const c=Q.find(m=>!m.nl&&!m.opts&&!m.art&&(m.t==="Khuê các"||m.who));if(c&&k){c.art=typeof kitOriginWide==="function"?kitOriginWide(k):`img/origin-wide-${k}.webp`;c.entI=1}}
+  if(S.kc){const c=Q.find(m=>!m.nl&&!m.opts&&!m.art&&(m.t==="Khuê các"||m.who));if(c&&k){c.art=typeof kitOriginWide==="function"?kitOriginWide(k):`img/origin-wide-${k}.webp`;c.entI=1}}
   else{const c=entIntroCard();if(c&&!Q.some(m=>m.entI)){Q.unshift(c)}}showModal();render()}}catch(e){console.error("entIntro",e)}return r}})();
 
 /* ---------- 4. the entry scene after the "Nhập cung" card (her own button closes it) ---------- */

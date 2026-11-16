@@ -1,8 +1,51 @@
+SẴN SÀNG KIỂM 793cd37
 # kc-roads-cn-nc report (branch review/kc-roads-cn-nc)
 
 Task (main s11, opus): a PRE-PALACE home road for "Cung nữ tuyển vào cung" and "Công chúa hòa thân" (every country branch), the td pattern
 (review/kc-lore): home life → sending event as a kit event card → selection (rank = ceiling only, earned) → today's palace road unchanged.
-Owner rules applied: OD:L1244, L1250, L1251, L1252, L1253, L478; co-op OD:L1263 (16/11 07:25Z, s11). Base: review/kc-lore + origin/main.
+Owner rules applied: OD:L1244, L1250, L1251, L1252, L1253, L478; co-op OD:L1288 (16/11 08:45Z, replaces L1263). Base: review/kc-lore + origin/main.
+
+
+## ROUND 3 (owner OD:L1288 via main s12/s13) — current state, read this first
+1. **Co-op: free choice, same time point, no forced link.** Removed everything of the old co-op rule (L1263): the card that followed the friend,
+   the closed "Vào cung ngay", the entry barrier S.kc.gate / "Chờ hảo hữu", the waiting life for an origin without a home road. Both players
+   get "Vào cung ngay / Chờ" on their identity cards at the room start; each chooses freely; time runs the same; one can live at home while the
+   other lives in the palace. **One calendar point for every home road**: the cnv / nc / bd roads now end at the tiểu thư tuyển tú month
+   (kc2Due = Sơ tuyển month of year KC.ty, ≈ 22–25 months, was 10), chapters at months 4 / 10 / 16 as jkc, weekly events with cool-downs
+   (KC2CD) so a two-year road does not repeat one event monthly. Two friends who both wait reach their selection in the same month, by the
+   calendar alone. Test coop-together.js (cnv home + nc "Vào cung ngay", live Worker): see the table below.
+2. **"Chờ" worth the palace years.** BAL.kcv (one core table in jkc2): what the home years carry into the palace, EARNED (×0.8 / ×1 / ×1.2 by
+   the selection result), in the home road's own currencies: Danh, the Emperor's curiosity for a new face (Sủng, consorts only), Tư chất
+   (each of Sắc/Tài/Tâm cơ/Đức), true knowledge of the harem (people known), tài nghệ, bạc, and for a cung nữ the first mistress's trust
+   (Chủ tin). Shown on a kit card "Hành trang những năm ở nhà" after "Nhập cung"; the identity cards say it. Applies to ALL nine home roads
+   (the six tiểu thư roads through a kcEnter wrapper: kc {dn 35, Sủng 28, st 8, kn 6, art 1}; nc/bd {dn 40, Sủng 30, st 12, kn 6, art 2, bạc 20};
+   cnv {dn 70, st 15, kn 12, art 1, bạc 40, Chủ tin 45}).
+   **Method (dev/measure/kc2val.js, kc2val-sum.py)**: two arms per origin on this build, pictures off. CUNG = new life, "Vào cung ngay" through
+   the selection card, then the inpage6 SENSIBLE palace bot for exactly the months the home road lasts. NHA = the home road (jkc: inkc.js
+   sensible policy; cnv/nc: a sensible home policy in kc2val.js: rest when tired, train khéo tay / lễ nghi / tài nghệ, keep the elders, pay
+   debts, avoid life-ending options) to the palace entry. Both snapshotted at that same calendar point. Value V = rank value (RANKS s+d; a cung
+   nữ: servant rank ×15 + Chủ tin/2) + Sủng + Danh + (Sắc+Tài+Tâm cơ+Đức)/2 + tài nghệ levels ×4 + Bạc/10 + harem people known ×3.
+   4 lives per arm per origin (palace arm reused, unchanged by the carry). Results (V, mean of lives alive at the point):
+   | origin | palace arm | home arm BEFORE | home arm AFTER (BAL.kcv) | gap after |
+   |---|---|---|---|---|
+   | cnv | 355 | 170 | 340 | −15 |
+   | nc | 413 | 276 | 405 | −8 |
+   | tt | 425 | 311 | 386 | −39 |
+   | muoi | 360 | 290 | 327 | −33 |
+   | thd | 366 | 280 | 367 | +1 |
+   | ch | 348 | 306 | 402 | +54 |
+   Mean gap after ≈ −7 (before ≈ −106); the palace arm's own spread is ±60 per life, so the remaining gaps are inside the noise of 4 lives.
+   Not in V: a tiểu thư road can end outside the palace (marriage / death, about 1 life in 4 here) — those lives get their own ending
+   (Phúc duyên per OUTSIDE_PLAN §10); bd measured only in the scratch merge earlier (same kind and table as nc).
+   Superseded: the old "Danh ≤ 30, Sủng 8+rank×5" entry carry of OUTSIDE_PLAN §9 is now plus this carry (the old route test line
+   "Danh carry-over ≤ 30" in dev/test/kc-lore/route-td.js and kc-roads/route.js is updated to ≤ 30 + carry).
+3. Kept from round 2: "Vào cung ngay" through the selection (exam hook window.kcEntryExam; fixed: the hook was called with S.kc.kd on the
+   direct road where S.kc does not exist), bd = dependency on review/origins-r1.
+4. Round 3 tests (this build): route.js cnv + nc at 755x1000@2 and 1180x820@2 PASS (selection + "Hành trang" card looked at, both sizes);
+   direct.js 9/9 origins PASS; coop-together.js cnv (home) + nc ("Vào cung ngay") live Worker 26/26 (both roads open on B's card, same date,
+   A home / B palace, A's end month = tiểu thư tuyển tú month, A enters alone, B then sees her); kc-lore route-td.js tt ×2 and td PASS.
+   One earlier tt run flagged "Mạnh thái y ???" in the Gia tộc tab (a stranger-name label of j61 inside the tiểu thư family pager); it did
+   not come back in 3 reruns and is not from this branch's code (likely the j96 thanh-mai man with a thái y role) — flagged for the jkc owner.
 
 ## KEY NAME NOTE (please check)
 The brief says `cn "Cung nữ tuyển vào cung"`. In the code the keys are the other way round: **cnv** = "Cung nữ tuyển vào cung" (j42, servant
@@ -41,10 +84,7 @@ goal strip): new games only (S.kc.v 3, S.kc.kd "dan" | "nc"); every older save i
   (Sức + khắc or a favour; BALANCE rule 15/11 20:30Z).
 - **kitName fix (whole group)**: at home the caption over HER figure in every dialog said "Đáp ứng" (RANKS[S.rank]) on all home roads
   (tiểu thư too). Now her home word (Tiểu thư / Thôn nữ / Công chúa), one wrapper on kitName.
-- **CO-OP (OD:L1263)**, every home road incl. the six tiểu thư roads: (1) identity card follows the friend: friend at home → "Vào cung ngay"
-  closed with the reason, home road preselected; friend already in the palace → home road closed. (2) a kd road's sending month moves to the
-  friend's selection month (tiểu thư: Sơ tuyển month). (3) entry barrier: passing the selection in co-op sets S.kc.gate ("Chờ hảo hữu" card,
-  life at home goes on); both enter when the MERGED week shows both gates → the same week for both.
+- CO-OP: see ROUND 3 (the L1263 forced joint entry was removed).
 
 ## Tests (all on this branch's build; shots looked at)
 | test | sizes | result |
@@ -52,8 +92,7 @@ goal strip): new games only (S.kc.v 3, S.kc.kd "dan" | "nc"); every older save i
 | dev/test/kc-roads/route.js --origin=cnv: card → home → 8 tabs → ~3 months random play → sending → selection (Vấn lễ / skip) → palace maid → 4 buổi → save/reload | 755x1000@2, 1180x820@2 | PASS, 0 page errors, no overflow / cut text / ??? |
 | same, --origin=nc | 755x1000@2, 1180x820@2 | PASS (ranks seen Thường tại … Tần) |
 | same, --origin=bd (scratch merge with review/origins-r1, NOT pushed) | 755x1000@2, 1180x820@2 | PASS |
-| dev/test/kc-roads/coop-together.js cnv + nc (live Worker) | Fold 755x1000 + iPad 1180x820 | 37/37 (card lock, same due, A waits at gate, both enter week 4) |
-| same, tt (tiểu thư) + cnv | same | 37/37 (cnv due moved 10 → 23 = tt Sơ tuyển month; both enter week 4) |
+| dev/test/kc-roads/coop-together.js (round 3 rule OD:L1288) | Fold 755x1000 + iPad 1180x820 | see ROUND 3 item 4 |
 | dev/test/kc-lore/route-td.js --origin=tt (regression) | 755x1000@2 | PASS |
 | dev/test/outside/oldsave.js (main save → this build; home save reload) | 755x1000 | PASS, 0 errors |
 
@@ -101,9 +140,7 @@ Event pictures (KIT §50.1: only a picture that means the event; these show none
    the rank she really enters with (all entries, tiểu thư roads too: S.st.ms.r0). New lives only (S.selx). Test dev/test/kc-roads/direct.js:
    all 9 origins PASS, 0 errors.
 3. Entry animation: hook left (kcHook("enter",…) at every entry), Foreman D builds it.
-4. **Co-op, origin without a home road while the friend is at home** (cn today): she does NOT enter. She waits outside the harem (kd "cho": cn =
-   still the tea maid of Càn Thanh cung; small deck: rest, pha trà, hầu cô cô, tập lễ nghi, chuyện cung nhân), her selection comes in the
-   friend's selection month, and the entry barrier makes both enter in the same week (rank under her ceiling by the selection).
+4. (removed in round 3: no waiting for the friend, OD:L1288)
 5. bd: DEPENDENCY on review/origins-r1 (jorigins.js: the bd origin). jkc2 carries all bd data and wakes when that branch merges; not merged
    here (it is another reviewed scope). Tested in a local scratch merge only.
 
@@ -120,3 +157,16 @@ bribed off the list: a legal ending, the test then saw the next life); kc-lore r
 4. Co-op edge: if the friend is at home and my rolled origin has NO home road (cn "Cung nữ được sủng hạnh"), I still enter at once (the rule
    cannot hold without a home road for cn). Same if both press "Nhận thân phận" in the same instant with different roads.
 5. bd lives on review/origins-r1 (not on main): jkc2 carries its data; it was tested in a local scratch merge only.
+
+## HANDOVER (worker rollover, context 67 % > 60 % ceiling, 16/11 08:42Z)
+For the next worker who takes Foreman D's FAIL list on this branch:
+- Worktree pattern: `git worktree add /home/user/wt/<name> -B review/kc-roads-cn-nc origin/review/kc-roads-cn-nc` (sparse as PREAMBLE). Code: dev/build/jkc2.js only
+  (+ one line in assemble.py, after jkc.js). Rebuild: `bash dev/site/build_site.sh`; commit index.html/sw.js/assets.json with it.
+- Map of jkc2.js: KC2K kinds (dan=cnv, nc=nc/bd) → places/words → kc2Init → cards (kc2CardsDan / kc2CardsNc) → kc2Week (KC2CD cool-downs) /
+  kc2Month (chapters 4/10/16, sending at S.kc.due = kc2Due()) → KCE events d_* / n_* → selection kc2Exam/kc2Play (hook window.kcEntryExam) →
+  kc2Enter → kc2EnterSrv / kc2EnterNc → kc2Carry (BAL.kcv) → panels (kcFamHTML, kcMapHTML, hud …) → "Vào cung ngay" selection (PEND.kc2Sel,
+  kc2SelDo, nlAccept wrapper) → kc2R0 (j67 chapter-1 base rank).
+- Tests: dev/test/kc-roads/route.js (--origin=cnv|nc|bd), direct.js, coop-together.js (live Worker, --a/--b), scan.js; dev/test/kc-lore/route-td.js
+  (tt/td regression). Balance: dev/measure/kc2val.js <n> <origins> <out> [arms] + kc2val-sum.py (palace arm files kc2val-a/b.json, home arm a3/b3).
+  bd needs a local scratch merge of origin/review/origins-r1 (assemble order: … 'jkc.js', 'jorigins.js', 'jkc2.js'); never push that merge.
+- Open: art list (above), entry animation (Foreman D), bd dependency, the tt "Mạnh thái y ???" flag.

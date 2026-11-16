@@ -62,7 +62,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   if(!R.after3.dead&&R.after3.kc){R.endedAt3=await p.evaluate(()=>{/* r2-r1 FAIL 4: never press an end card here (its close starts a NEW life without S.kc) */for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}return S.dead?(S.kc&&S.kc.end)||'NOEND':''});
    if(R.endedAt3){if(R.endedAt3==='NOEND')F('home life ended without S.kc.end');R.note='life ended at home while answering: '+R.endedAt3}}
   if(!R.after3.dead&&R.after3.kc&&!R.endedAt3){await p.evaluate(()=>{
-    S.turn=S.kc.t0+9;S.tuan=2;Object.assign(S,{suc:90,kap:Math.min(S.kap,60)});if(window.__exam!=='play')window.__bot=0;render()});
+    S.turn=S.kc.due-1;S.tuan=2;Object.assign(S,{suc:90,kap:Math.min(S.kap,60)});if(window.__exam!=='play')window.__bot=0;render()});
    R.play2=await play(300,()=>!isKc()||S.dead);await sleep(500)}
   R.titles=[...titles];R.foreign=R.titles.filter(t=>/^\[ngoài\]/.test(t));if(R.foreign.some(t=>/Kính sự phòng|thị tẩm|lật thẻ|Thái hậu triệu|Hoàng thượng đến/i.test(t)))F('palace event at home: '+R.foreign);R.errSteps=steps.filter(x=>/^ERR/.test(x)).slice(0,5);if(R.errSteps.length)F('step errors');
   /* KC LORE: the announcement cards waiting at the palace gate (td: the fall, then Nhập cung): look at each one */
@@ -74,7 +74,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
     intel:S.kc&&S.kc.intel.length,fig:figFor(S),srv:!!(S.srv&&!S.srv.risen),srvT:typeof srvTitle==='function'?srvTitle():'',ex:S.kc&&S.kc.ex,xd:S.kc&&S.kc.xdSid,tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()),title:(document.getElementById('me-r')||{}).textContent}});
   if(R.pal.dead||R.pal.end)R.note='life ended at home: '+(R.pal.end||'dead');
   else{if(R.pal.isKc||!R.pal.inPal)F('did not enter the palace');R.pal.top=await p.evaluate(()=>(S.origin&&S.origin.r)||0);if(ORG==='cnv'){if(!R.pal.srv)F('cnv: not a palace maid');}else{if(!(R.pal.rank>=R.pal.top-2&&R.pal.rank<=R.pal.top))F('entry rank '+R.pal.rank);if(!R.pal.inCons)F('not in consorts()')}
-   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30)F('Danh carry-over '+R.pal.danh);if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
+   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30+90)F('Danh carry-over '+R.pal.danh);/* old rule ≤30 + the home-years carry BAL.kcv (OD:L1288) */if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
    if(ORG!=='cnv'&&!R.pal.tabs.some(t=>/Hậu cung/.test(t)))F('palace tabs not back: '+R.pal.tabs);if(R.pal.tabs.some(t=>/Nhà tranh|Tẩm cung|Gia đình|Vương tộc/.test(t)))F('home tabs in the palace');
    for(let i=0;i<4;i++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}/* Tuần lục of the first palace week */
    await p.evaluate(()=>{tab='act';render()});await sleep(1500);
