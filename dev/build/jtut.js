@@ -114,7 +114,14 @@ function blk(L,Tp,W,H){return `<div class="ktut-blk" style="left:${L}px;top:${Tp
 let LAST="";
 function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;const vw=innerWidth,vh=innerHeight;
  const card=R0.querySelector(".ktut-card"),hole=R0.querySelector(".ktut-hole");if(!card)return;
- const r0=s.target?rectOf(s.target):null;const r=r0?clip(r0,s.pad==null?6:s.pad):null;
+ const r0=s.target?rectOf(s.target):null;let r=r0?clip(r0,s.pad==null?6:s.pad):null;
+ /* a target that runs under the bottom bar (a tall act card on a phone in landscape) is lit only above the bar */
+ try{const te=typeof s.target==="function"?s.target():typeof s.target==="string"?$q(s.target):s.target;const tb=$q("#tabs");
+  /* only the part that shows inside its scroll box (a card scrolled half under the pane's sticky tabs / the top bar) */
+  if(r&&te&&te.parentElement){let p=te.parentElement;while(p&&p!==document.body){const cs=getComputedStyle(p);if(/(auto|scroll|hidden)/.test(cs.overflowY)){const q=p.getBoundingClientRect();let top=q.top;
+     p.querySelectorAll(":scope > .ksub, :scope > .kcattabs, :scope .kpanebar").forEach(x=>{const xr=x.getBoundingClientRect();if(getComputedStyle(x).position==="sticky"&&xr.bottom>top&&xr.bottom<q.bottom)top=xr.bottom});
+     const T2=Math.max(r.top,top-2),B2=Math.min(r.bottom,q.bottom+2);if(B2-T2>30)r=Object.assign({},r,{top:T2,bottom:B2,height:B2-T2})}p=p.parentElement}}
+  if(r&&te&&tb&&vis(tb)&&!te.closest("#tabs")&&te.id!=="next"){const tt=tb.getBoundingClientRect().top-2;if(r.bottom>tt&&r.top<tt-40){r=Object.assign({},r,{bottom:tt,height:tt-r.top})}}}catch(e){}
  const marks=(s.marks||[]).map(m=>rectOf(m)).filter(Boolean).map(m=>clip(m,3));
  const key=[vw,vh,r?[r.left,r.top,r.width,r.height].map(Math.round).join(","):"-",marks.map(m=>[m.left,m.top,m.width].map(Math.round).join(",")).join(";"),card.offsetHeight].join("|");
  if(!force&&key===LAST)return;LAST=key;
@@ -133,6 +140,9 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
   if(r.right+g+cw<=vw-M)C.push([r.right+g,hy,1e3]);if(r.left-g-cw>=M)C.push([r.left-g-cw,hy,1e3]);
   const pref=s.side==="above"?[1,0]:[0,1];
   let c=null;if(C.length){/* the side the step prefers when it fits, else the roomiest */c=C.find(x=>x[1]===(s.side==="above"?r.top-g-ch:r.bottom+g))||C.sort((a,b)=>b[2]-a[2])[0]}
+  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): narrow the card
+     into the wider free side so it never lies over the target */const sl=r.left-g-M,sr=vw-r.right-g-M;const sp=Math.max(sl,sr);
+   if(sp>=240){card.style.width=Math.floor(sp)+"px";const ch2=card.offsetHeight;L=sl>=sr?M:r.right+g;Tp=Math.min(Math.max(M,cy-ch2/2),vh-ch2-M);c=[L,Tp]}}
   if(c){L=c[0];Tp=c[1]}
   else{/* too big: inside the target at its bottom (above the tab bar), or at the screen's free edge for a tap step */
    L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}
@@ -183,7 +193,7 @@ const R=(k,v,c)=>[k,v,c||"n"];
 /* ---------- tab groups, read live (data-tab, KG, .ksub .ksubb[data-ksub]) ---------- */
 const GROUP_ANCHORS=["rv","rel","staff"];
 const SUBSAY={rv:"thẻ từng phi tần: chạm mặt để xem, giao thiệp hay ra tay",rel:"ai thương, ai ghen, ai oán {x}",fac:"các phe trong cung và chỗ đứng của {x}",
- staff:"kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Chủ tin là {x} tin họ bao nhiêu; Lòng dưới 45 dễ bị mua chuộc",
+ staff:"kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Lòng dưới 45 dễ bị mua chuộc",
  court:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",emp:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",th:"Thái hậu: thỉnh an, xem lòng người",men:"nam nhân trong cung: thái y, thị vệ, quan viên",
  story:"truyện riêng của thân phận {x}",log:"mọi việc đã qua",kid:"con của {x}",art:"các môn tài nghệ",inv:"rương đồ của {x}"};
 function grpOf(k){try{for(const g in KG)if(KG[g].keys.includes(k))return g}catch(e){}return null}
@@ -266,7 +276,7 @@ const TIPS={
  "tab-fac":{t:"Phe phái",h:"Trong cung ai cũng có chỗ dựa. Theo một phe thì được che chở, nhưng phe đối nghịch sẽ để mắt tới {x}."},
  "tab-court":{t:"Chí tôn",h:"Hoàng thượng và Thái hậu: hầu hạ, thỉnh an, xem lòng người trên. Người trên thương thì đường tấn phong rộng mở."},
  "tab-men":{t:"Nam nhân",h:"Thái y, thị vệ, quan viên trong cung. Giao thiệp có ích, nhưng gần gũi quá dễ sinh lời ra tiếng vào."},
- "tab-staff":{t:"Cung nhân",h:"Lòng là kẻ hầu trung với {x} bao nhiêu, Chủ tin là {x} tin họ bao nhiêu. Lòng dưới 45 thì dễ bị người khác mua chuộc."},
+ "tab-staff":{t:"Cung nhân",h:"Lòng là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Lòng dưới 45 thì dễ bị người khác mua chuộc."},
  "tab-kid":{t:"Hoàng tự",h:"Con của {x} ở đây: Sức khỏe, Tài và lòng Hoàng thượng thương. Chăm dạy con chu đáo; con được trọng thì mẫu thân cũng được nể."},
  "tab-inv":{t:"Tư trang",h:"Rương đồ của {x}: trâm cài, y phục, quà được ban. Mặc vượt phẩm hay quá giản dị đều có người để ý; đồ ngự tứ không được bán."},
  "tab-art":{t:"Tài nghệ",h:"Mỗi môn có bậc; mỗi bài học là một trò nhỏ, chơi khéo thì lên bậc nhanh. Bậc cao mở việc mới và giúp thắng thi tài."},

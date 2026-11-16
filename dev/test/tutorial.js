@@ -27,7 +27,7 @@ const out=o=>console.log(JSON.stringify(o));
   for(let n=1;n<=14;n++){await p.waitForTimeout(1700);const m=await metrics(p);if(m.step<0)break;
    await shot(p,String(n).padStart(2,'0')+'-'+m.id);out({TAG,...m});
    if(!m.inView)fail('card out of view',{id:m.id});if(m.overflowX)fail('overflowX',{id:m.id});if(m.cut)fail('cut text',{id:m.id});if(m.interact&&m.overlap)fail('card over the tap target',{id:m.id});
-   if(m.id==='thu'){const h=m.hole;await p.mouse.click(h.x+h.w*.7,h.y+Math.min(h.h/2,60));await until(p,()=>KTUT_STEPS[KTUT.step].id!=='thu',20000);continue}
+   if(m.id==='thu'){const h=m.hole;await p.mouse.click(h.x+h.w*.7,h.y+h.h/2);await until(p,()=>KTUT_STEPS[KTUT.step].id!=='thu',20000);continue}
    const st=m.step;await p.evaluate(()=>{const b=document.querySelector('#ktut [data-ktut=next]');if(b)b.click()});
    await until(p,s=>KTUT.step!==s,8000,st)}
   const r=await p.evaluate(()=>({tour:KTUT.rec.tour,saved:S.tutTour,hidden:document.getElementById('ktut').hidden,used}));out({TAG,end:r});if(r.tour!=='done'||!r.hidden)fail('tour end');
@@ -55,7 +55,7 @@ const out=o=>console.log(JSON.stringify(o));
   if(await p.evaluate(()=>KTUT.on))fail('tour restarted after done');
   await p.evaluate(()=>document.getElementById('menu').click());await until(p,()=>!!document.querySelector('#modal .ktutb'),8000);await p.waitForTimeout(800);await shot(p,'menu-xem-lai');
   await p.evaluate(()=>document.querySelector('#modal .ktutb').click());const ok=await until(p,()=>KTUT.on&&!document.getElementById('ktut').hidden,15000);await p.waitForTimeout(1200);await shot(p,'replay-1');
-  out({TAG,replay:ok});if(!ok)fail('replay');
+  out({TAG,replay:ok});if(!ok){fail('replay',await p.evaluate(()=>({on:KTUT.on,replay:KTUT.replay,busy:KTUT.busy(),q:Q.map(m=>m.t||(m.kit&&m.kit.title)),title:!document.getElementById('title').hidden,modal:!document.getElementById('modal').hidden,mcls:document.getElementById('modal').className,S:!!S})));await shot(p,'replay-fail')}
   /* Thiết lập switch */
   await p.evaluate(()=>document.querySelector('#ktut [data-ktut=skip]').click());await p.evaluate(()=>document.getElementById('menu').click());await p.waitForTimeout(1200);
   await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .kbtn')].find(b=>/Thiết lập/.test(b.textContent));b.click()});await p.waitForTimeout(1200);await shot(p,'thiet-lap');

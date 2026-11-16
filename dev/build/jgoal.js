@@ -15,7 +15,7 @@ const bot=()=>{try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}ca
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const plain=s=>String(s==null?"":s).replace(/<[^>]+>/g,"");
 /* where a tab lives in today's bottom bar (Hành sự / Dư đồ / Hậu cung / Giao tình / Hoàng tự / Tư trang / Tài nghệ / Mệnh truyện) */
-function tabName(k){try{if(k==="act")return isS()?"Phận sự":"Hành sự";const b=document.querySelector(`#tabs [data-tab="${k}"]`);
+function tabName(k){try{if(k==="act")return isS()?"Phận sự":"Hành sự";if(isS()&&typeof SRVTABS==="object"&&SRVTABS&&SRVTABS[k])return SRVTABS[k];const b=document.querySelector(`#tabs [data-tab="${k}"]`);
   if(b&&b.offsetParent)return (b.dataset.l0||b.textContent).trim();if(typeof KG==="object")for(const g in KG)if(KG[g].keys.includes(k))return KG[g].l;
   return b?(b.dataset.l0||b.textContent).trim():k}catch(e){return k}}
 /* ---------- data ---------- */
@@ -34,7 +34,7 @@ function nextSteps(C){const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng m
  if(C&&C.kind==="arc"&&C.wait)L.push({t:"Quyết hồi truyện đang chờ",why:"hồi truyện chờ lựa chọn của ngươi",tab:"story"});
  if(isS()){
   L.push({t:"Làm tròn phận sự hầu chủ",why:"chủ tin thì được nâng đỡ, có ngày được phong Đáp ứng",tab:"act"});
-  L.push({t:"Học một môn tài nghệ",why:"tài nghệ giỏi thì được chủ và Hoàng thượng để mắt",tab:"art"});
+  L.push({t:"Đi làm quen các nơi được đến",why:"biết đường, biết người thì làm việc chủ sai mới khéo",tab:"go"});
   L.push({t:"Kết thân một người cùng làm",why:"có người đỡ đần thì bớt bị hãm hại",tab:"staff"})}
  else if(S.out)L.push({t:"Giữ Sức, chờ dịp xin phục vị",why:"còn sống là còn đường về",tab:"act"});
  else{
