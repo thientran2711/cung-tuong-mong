@@ -82,3 +82,5 @@ Active smart bot not re-run (worker: 2 lives / 281 months 0 over; ~29 min/life).
 ## Notes (non-blocking)
 1. Co-op: a friend Hoàng hậu enters as rank ≤6 (jcoopworld:77); if she and the friend both sit at a cap-1 rank the net cannot move either (only NPCs move). Already passed to the coop-b1b5-p2 worker as a co-op rule question.
 2. j8 son-birth fallback `rank++` (j8:321) runs only if promoReward is missing (it never is).
+Re-merge: origin/main moved to 0ee35a63 during the review (merge-train-7 + skin-norosy-r1, adds jmline.js/jact2.js). Re-merged (assemble list = main + jseat.js last),
+site rebuilt; scan unchanged (71 rank writes, no new road; maid → consort enters at rank 0 = no cap); idle sim 2 lives × 120 months 0 over, 0 errors.
