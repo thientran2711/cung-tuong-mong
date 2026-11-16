@@ -95,6 +95,12 @@ function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"ng
 function j95actLog(a,t,k,g){try{if(!S.roster)return;const L=S.roster.acts=S.roster.acts||[];L.push({id:j95id(a),kh:j95kh(),k,t:j95id(t),why:g.why||"",ok:g.ok?1:0,ex:g.ex?1:0});if(L.length>60)L.shift();
  if(!g.ok){J95.stat.gate++;J95.stat.gateBy[k]=(J95.stat.gateBy[k]||0)+1}else J95.stat.pass++}catch(e){}}
 function j95id(p){if(!p)return null;if(p===S)return"me";if(p.id!=null&&p.rel!=null)return"v"+p.id;return null}
+/* ONE id style for every ledger (people S.roster, causes jmem, items jil — owner 16/11 13:40Z one ledger): the record id of a person object
+   or a record id string: "me" · "v<id>" consort · "s<sid>" servant / elder · "m<n>" man · "emp" · "th" · "k:<mother>:<i>" child · "c:<post>" */
+function ledgerId(p){try{if(p==null)return null;if(typeof p==="string")return p==="S"?"me":/^rv:/.test(p)?"v"+p.slice(3):p;if(p===S)return"me";if(S.emp&&p===S.emp)return"emp";if(S.thO&&p===S.thO)return"th";
+ if(p.id!=null&&p.rel!=null)return"v"+p.id;if(typeof p.id==="string"&&/^m\d+$/.test(p.id))return p.id;if(p.sid!=null)return"s"+p.sid;
+ for(const [k,mo] of (typeof allKids==="function"?allKids():[]))if(k===p)return"k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k)}catch(e){}return null}
+window.ledgerId=ledgerId;
 
 /* ---------------- 3. THE REGISTRY: everyone alive in the palace now ---------------- */
 function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{if(seen[id])return;seen[id]=1;L.push({id,name,role,kind,home,ref})};
