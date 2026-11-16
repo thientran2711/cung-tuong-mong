@@ -55,3 +55,11 @@ act-text-scan: see dev/handover/reports/merge-train-4.md.
 ## Open (not merge breakage, for owners)
 - jroute rtHlCards: 'đợi qua cơn giận của Hoàng thượng (còn NaN tháng)' when no cooldown is set (routes-port-r1 itself).
 - act-text-scan (pre-main-merge build): kemgain 5, glue 1 (the NaN line), twice 7, long 164 (act-text K8 layout).
+
+## GO round (s14/s15): re-merged origin/main 399483e3 (merge-train-5) then 18fb8252 (coop-rejoin-xdev, kit-keeper-2, cardflip-glow, popup-fullbody)
+- Conflicts: assemble only (+ dev/test/tuduc-mg.js → main's copy). Tail: jtruth, jlogsync, jkpc, jcycle, jtds, jwkpics, jact, jkc, jhouse; jpdlg after jk4.
+- KIT 81 (scene ends only by its .kmend button; card flip no longer auto-closes) broke branch tests, not the game: schemewire, small-art-wire,
+  chapter-detail now hide .kcf / press .kmend / clear #kxcatch in reset() (same pattern as main's tests). chapter-detail 844x390 and 1000x755 now PASS.
+- Final round (62 jobs + re-runs alone): all PASS incl. coop-e2e 59/59, coop-night, coop-rejoin-stats, cloud-save, coop-home, newgame-ui x5,
+  flip-newlife x5, popup-fullbody, dlg-clip, scene-end, modal-swipe, act-text-scan (0 page errors; brk/dots/pct/sign 0), every branch test.
+  Flaky only under 3-way parallel load (pass alone): scene-end bloom 'early', flip-newlife 844 (also fails on main under load), coop-e2e one timing check.
