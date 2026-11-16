@@ -720,7 +720,7 @@ window.kitDialogOpen=kitDialogOpen;
    Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
    child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
    takes the compact form — ONE CSS rule set, no other markup:
-   - LEFT: the same act picture as a SMALL SQUARE thumbnail (84 px; 72 px under 420 px), cover-cropped, 2 px border in its category colour
+   - LEFT: the same act picture as a SMALL PORTRAIT RECTANGLE 3:4 (84x112 px; 72x96 under 420 px; owner 16/11, was a square), cover-cropped, 2 px border in its category colour
      (`--kcc0`); the frame ornaments / category ribbon of the big slot are hidden (the card keeps its 4 px category edge).
    - RIGHT (≥ 60 % of the card): title row = title + odds ladder on ONE line (the title may wrap, the odds never); a ONE-line description
      (full text on hover / long-press title); the Cần / Tốn / Được / Mất / Kèm rows as compact label + value chips that wrap as WHOLE chips.
@@ -741,6 +741,26 @@ window.kitActCompactOn=kitActCompactOn;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
   const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+/* ================= KIT 43.1 · small act card: tap the picture = big picture + more info; "!" on cards without an odds label (owner 16/11, review/actcard-small) =================
+   Owner: keep the big Hành sự card; the SMALL card (kpane form above) has a 3:4 portrait picture. Tap the picture (or the "!" mark of a card
+   that has no odds label) → kitActZoom: the picture large + full description + the Cần/Tốn/Được rows (+ "Vì sao <bậc>?" when the card has odds).
+   Tapping the odds label itself keeps opening the why popover (jwhy). Option cards (.kopt, review/opt-pics) are not touched here. */
+function kitActZoom(b){try{const im=b.querySelector(":scope > .kaart img");const src=im?im.getAttribute("src"):"";const kan=b.querySelector(".kan");const ttl=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
+ const lead=b.querySelector(".klead");const kb=b.querySelector("small.kb");const od=b.querySelector(".kodm");let why="";
+ if(od&&typeof kitWhyHtml==="function"){try{why=kitWhyHtml(b,+od.dataset.kodds)||""}catch(e){}}
+ const secs=[];if(od)secs.push({h:"",html:od.outerHTML});if(lead)secs.push({h:"",html:`<div class="kpnote">${lead.textContent}</div>`});if(kb)secs.push({h:"",html:kb.outerHTML});if(why)secs.push({h:"",html:why});
+ kitModal({kind:"info",title:ttl,sub:"",sections:secs,btn:"Đã rõ"});
+ if(src){const a=document.querySelector("#modal .kpiart");if(a)a.innerHTML=kitArtFrame(src,ttl)}}catch(e){console.error(e)}}
+window.kitActZoom=kitActZoom;
+function kitActInfoMark(root){try{(root||document).querySelectorAll(".pc>.pcr button.ka.kart:not(.kopt), .kpanec button.ka.kart:not(.kopt)").forEach(b=>{const kat=b.querySelector(".kat");if(!kat)return;
+  const has=!!b.querySelector(".kodm");let m=kat.querySelector(":scope > .kainfo");if(has){if(m)m.remove();return}if(!m){m=document.createElement("span");m.className="kainfo";m.textContent="!";m.title="Xem thêm";m.setAttribute("role","button");kat.appendChild(m)}})}catch(e){}}
+window.kitActInfoMark=kitActInfoMark;
+window.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;const hit=t.closest(".pc>.pcr button.ka.kart:not(.kopt) > .kaart, .kpanec button.ka.kart:not(.kopt) > .kaart, button.ka.kart:not(.kopt) .kainfo");if(!hit)return;
+ const b=hit.closest("button.ka");if(!b||!b.closest(".pc>.pcr, .kpanec"))return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitActZoom(b)}catch(x){}},true);
+(function(){const k0=kitActCompactOn;kitActCompactOn=function(root){const r=k0.apply(this,arguments);try{kitActInfoMark(root)}catch(e){}return r};window.kitActCompactOn=kitActCompactOn})();
+(function(){const st=document.createElement("style");st.id="kit-act-zoom";st.textContent=`
+button.ka.kart .kainfo{flex:0 0 auto;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#8a6a32;color:#fff8e6;font:700 .78rem/1 var(--display,serif);cursor:pointer}
+`;document.head.appendChild(st)})();
 /* KIT §43 + §6.2 (review/opt-pics): the compact card rules are ONE string (kitCompactCSS(B)) used twice: inside a narrow kpane, and ALWAYS for a
    dialog option card (B = button.ka.kart.kopt, jopic) — the one compact act-card form game-wide. w × h = picture box: owner override 15/11 — the small card's picture is a 3:4 PORTRAIT RECTANGLE (84x112;
    72x96 in a pane under 420 px), the act art's own aspect, never a square crop; the big Hành sự card is untouched. */

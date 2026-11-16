@@ -2365,6 +2365,13 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
   `kitActKey(name)` (ACTS.json lookup) — every name lookup threw, so acts matched by prefix / wildcard lost their own picture across the game
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
 
+### 43.1 SMALL ACT CARD: PORTRAIT PICTURE, TAP = DETAIL, "!" MARK (owner 16/11, review/actcard-small; `dev/build/jk4.js`)
+The big Hành sự card is unchanged. The small card (§43 compact form) shows the act picture as a 3:4 PORTRAIT rectangle (84x112 px; 72x96 under 420 px), no longer a square.
+Tapping the picture, or the "!" mark (`span.kainfo`, shown only on a small card WITHOUT an odds label `.kodm`), calls `kitActZoom(btn)` = ONE kit pop-up
+`kitModal({kind:"info"})` (section 8 frame, `.kbtn` "Đã rõ"): the act picture in `kitArtFrame` (the 3:4 kit picture frame, 28.19), the odds label, the full description,
+the Cần/Tốn/Được rows, and the "why" text of `kitWhyHtml` when there is an odds label. Tapping the odds label itself still opens the why popover (jwhy). No private overlay frame.
+Option cards (`.kopt`) and the big Hành sự card are not touched. Sample: kit page §43.1.
+
 ## 45. PANE = FIXED BAR + SCROLL BODY (owner 11/15, review/tabs-kit · `dev/build/jpane.js`)
 **45.1 A face strip is never half under the pane bar (review/small-bugs-3; 844x390 Hậu cung › Phi tần showed the palace labels "Càn Ninh cung…"
 cut off above the frames).** `kitPcSize` fit (jk2b) scrolls a newly opened person card flush under the sub-tab bar; when the scroll cannot carry the
@@ -3049,3 +3056,14 @@ Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §7
   seal), else just under the bar at the right edge. Tap → `#kctmp` kit panel (`kpHeader("notice",name,"Hảo hữu cùng chơi")` + kitRows Hảo hữu /
   Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
   waiting notice only. Samples on the kit page "§69".
+
+## 73. PERSON CARD FILL · pcfBlocks (owner 15/11 "khung bên phải nó đang bị trống", review/pcard-fill) — `dev/build/jpcf.js` (last module, after jopic)
+Composition only: NO new component or CSS. The right side of every person card (`pcard`) now carries the person's useful info, built from existing kit parts:
+1. **Tâm trạng** `kitSkillCard({max:0})` — picture of the event that caused the mood (`emoBoxArt`, KIT §38 / mood-dialog) + "Tâm trạng: <mood>" + cause line; tap opens `emoBox`. Unknown mood = "chưa rõ" card.
+2. **Lòng người với ta** `kitRelTable(kitRelRows(p),{head:false})` (§52): thiện cảm / oán / ghen / ta → nàng; Hoàng thượng sủng; Thái hậu thiện cảm; servants thiện cảm + ta tin cậy.
+3. **Sở trọng** `kitRows`: known tính nết + "Hay: …" (PERS tend); the Emperor: known likes (hoa / khúc nhạc / món ăn) + his habits. Only what she knows.
+4. **Đã biết** `kitRows` of the 3 newest intel / notes + the existing `.kchipb` chips opening "Đã biết về X" and "Chứng cứ về X".
+5. **Dạo này** `kitRows` (week | line): this month's log lines that name the person; empty = one `.kpnote` line.
+6. **Việc nhanh** act cards (`pbtn` in `.kskacts`): Sai tai mắt dò nơi ở / Đến cung nàng / Kết giao / Tặng quà — the same buttons and costs as the Hậu cung card — shown only when the card has no live act of its own (the stage pop-up after the visit's one talk).
+Placement: a card with 2+ act groups gets one more kit tab "Lòng người" (count chip dropped); a card with one group or none (stage pop-up, Thái hậu) shows the blocks under its acts. Not filled: her own card, children, "Người lạ".
+`pcfBlocks(person, o, quick)` returns the HTML (kit sample §73). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
