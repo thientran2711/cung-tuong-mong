@@ -24,3 +24,10 @@ Hậu cung roster strip short names (not full names); her own name S (header sho
 - kitNoChange: double-space / space-before-full-stop tidy kept for every piece (branch had dropped it: "Lụa Hàng Châu . Được" showed);
   separator strip only after a dropped clause. Old vs new over 1702 fact rows: only diffs are the restored ", " / "; " / "·" before tags.
 - j70: restored main's `Math.round(6*sev)` (the branch had reverted it by accident).
+- Merged origin/main 3ef079f61 + origin/review/rank-colour 99b8b6250 (coordinator scope add). j79 kpPeopleIn conflict: kept main's
+  fix-float stale-rank drop AND rank-colour's 48.3 title-inside-name. j59 court-officer naming renamed `j59CourtNames` (the second global
+  `kitNames` was shadowed by j65's; officers were never named). Both observers together: list form "X (Quý phi, chủ vị)", "Quý phi X",
+  bare "X", mood title all painted once, no nested .kname, no doubled title, idle mutations ~0.
+- Tests on the merged build: rank-colour.js 1180x820 4988 pairs, 4876 ok, 112 "plain" = all "Thủ lĩnh thái giám X" drawn in the thủ lĩnh
+  tone (correct KIT_RT; the scan expects the shorter "thái giám" tone — test-side); rank-name-scan after 0; hint-dedup exit 0; kit_dupes OK;
+  old save (main 3ef079f61) loads + 8 weeks, 0 errors; coop-e2e 57/59 (known start-timing flake) then 59/59.
