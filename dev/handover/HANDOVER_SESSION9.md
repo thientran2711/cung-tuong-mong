@@ -418,3 +418,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (18:08Z s21) Owner: build health+pregnancy bundle now (+ induced-birth drug) → Foreman D inbox; asking owner Q2–Q4 one at a time.
 - (18:01Z s21) night-steal DONE 4b5919af (her played nights lost 1 % → 19–22 %, tries/10 nights 0.03 → 3–4, by trait) → opus BIG reviewer; worker archived. stage-pets r2 A|B sheets sent to owner (pending her 1/2). Owner answers: Q2 ở cữ = 1 month, drop ×0.7 → D inbox.
 - (18:02Z s21) lag-play 7200e7d2 (instant tabs everywhere, freeze 16–21 s → 2.5 s) → opus BIG reviewer + lag-play-2 follow-up worker; lag-play worker archived. Open: Dư đồ leather unroll animation kept (ask owner only if she mentions it).
+- (18:04Z s21) care-overlap 7c02ff56 (one kit rule jinv.js; carries pet-lifespan-r1) → SMALL reviewer; worker archived.
