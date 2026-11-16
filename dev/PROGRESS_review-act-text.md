@@ -20,3 +20,31 @@ Owner: "Tài nghệ act card text broken and unclear" (dev/handover/refs/owner-a
 ## Scan
 `dev/test/act-text-scan.js <url> <out.json> [WxH] [scen]` — every act card + one dialog level, 6 states; flags brk/dots/pct/frag/
 word1/sp2/glue/sign/twice/long. Serve the build wrapped with `<meta charset=utf-8>` (see dev/test/bt.sh).
+
+## Also done (coordinator follow-ups 15/11)
+- "Tại sao + mà màu đỏ": root cause was KHOST "thù" inside "Thêu thùa" (and KRED "nguy" inside "nguyệt") → whole-word fix above;
+  scan column `sign` (+N shown red / −N shown green / anything green in Kèm).
+- One word "Tự học" (owner): Tự rèn / Tự luyện → Tự học everywhere (labels, logs, deck card, practice button); teacher titles
+  "Học với thầy" / "Học với ma ma" (was "Theo ma ma giáo tập") / "Học với Thái hậu" (was "Xin Thái hậu cho học cùng"); logs
+  "Học Dung với ma ma giáo tập", "Học với Thái hậu". VANPHONG.md rows added (main copy; coordinator to sync docs branch).
+- Torn one-word items fixed at source: Ly gián "hỏng: bị lộ", Kiểm tra đồ "đồ bị tẩm độc hay bị cài", thái y "xạ hương và độc";
+  j78 Bán cho phe khác split (no "nắm 0 chứng cứ"); jaudit Nhờ giúp đỡ gain labelled "thành: nàng cho mượn Bạc +30 …".
+- Variant labels table (before → after): Tự rèn → Tự học · Tự luyện → Tự học · Tự luyện, làm tác phẩm → Tự học, làm tác phẩm ·
+  Theo ma ma giáo tập → Học với ma ma · Xin Thái hậu cho học cùng → Học với Thái hậu · Học cùng Thái hậu (log) → Học với Thái hậu.
+
+## Scan results 755x1000, state "dau" (before main f53bdade → after this branch)
+brk 18→0 · dots 8→0 · word1 3→0 · sign 3→0 · frag/pct/sp2/glue/twice 0→0 · long 39→28. Full 6-state before run (main):
+3339 cards, brk 39, dots 8, word1 3, sign 4, long 95. The 6-state AFTER run was stopped (slot handed back) — LEFT TO DO.
+
+## Left (for whoever resumes)
+1. Run the full after scan: serve repo root (python3 -m http.server on a free port), wrap dev/index.html with
+   `<meta charset=utf-8>` (dev/test/bt.sh style), run `node dev/test/act-text-scan.js <url> out-<sc>.json 755x1000 <sc>` ONE PROCESS
+   PER STATE (dau,toi,cao,con,hau,hh; a single long run crashes Chromium), then `--sum out-*.json [-v]`.
+2. Phone portrait (755x1000): the panel is hidden by the jk3 phone shell (K3SH lives inside an IIFE, not reachable; people on the room
+   stage set .k3pop) so panel-card "long" rows are NOT measured there; landscape sizes are. Fix the scan's AT.panel() (e.g. click the
+   active bottom tab like a player) to measure them.
+3. "long" rows (>2 lines at 755) remain, mostly pre-existing person-card/dialog lines (Đề bạt, Sai đi dò la, Thỉnh an…); not shortened yet.
+4. Screens checked (Tự học Thi card): 1000x755, 1180x820, 1366x1024 rows ≤2 lines; 844x390 Được 2.1 / Ghi chú 3 lines (narrow column);
+   755x1000 not shot (panel hidden, see 2). 0 page errors.
+5. Picture note for picture workers: Tứ đức Dung and Ngôn "Tự học" cards show Công's embroidery picture (owner screenshot) — not painted here.
+6. Root index.html / sw.js not rebuilt (dev/site/build_site.sh) — coordinator rebuilds on merge.

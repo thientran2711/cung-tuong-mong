@@ -45,7 +45,9 @@ AT.surfaces=()=>{const L=[{id:"act",tab:"act"}];
  for(const t of ["inv","art","story","rel","fac"])L.push({id:t,tab:t});
  try{for(const p of places())L.push({id:"place:"+p.k,tab:"act",place:p.k})}catch(e){}
  return L};
-AT.show=(sf)=>{tab=sf.tab;/* phone shell (jk3): the panel shows only when not on the room stage */try{if(typeof K3SH!=="undefined")K3SH.home=!!sf.place}catch(e){}if(sf.pg)PG[sf.pg[0]]=sf.pg[1];if(sf.place){try{goTo(sf.place)}catch(e){}}AT.hide();render();if(sf.pop!=null){popIdx=sf.pop;render()}};
+AT.show=(sf)=>{tab=sf.tab;/* phone shell (jk3): the panel shows only when not on the room stage */try{if(typeof K3SH!=="undefined")K3SH.home=!!sf.place}catch(e){}if(sf.pg)PG[sf.pg[0]]=sf.pg[1];if(sf.place){try{goTo(sf.place)}catch(e){}}AT.hide();render();if(sf.pop!=null){popIdx=sf.pop;render()}else if(!sf.place)AT.panel()};
+/* phone shell: people on the room stage (#popw) also hide the panel; clear them so the panel is laid out and measurable */
+AT.panel=()=>{try{const pw=document.getElementById("popw");if(pw)pw.innerHTML="";if(typeof k3Shell==="function")k3Shell()}catch(e){}};
 AT.btns=(sf)=>{if(sf.pop!=null)return popBtns();if(sf.place)return[];return panelBtns()};
 /* every Tài nghệ deck card kind and many deals: the Hành sự deck is random, so the scan adds them all */
 AT.deckAll=()=>{const out=[];try{if(typeof wkDeckCard==="function"){const got=new Set();for(let s=1;s<=80&&got.size<12;s++){AT.reseed(500+s);const c=wkDeckCard();const k=c.n+"|"+(c.x||"").slice(0,40);if(!got.has(k)){got.add(k);out.push(c)}}}}catch(e){}
@@ -101,7 +103,7 @@ function signBad(t,c,r){if(r==='why'||r==='ton'&&c!=='g')return[];const s=t.repl
  const SCN=(SC||'dau,toi,cao,con,hau,hh').split(',');
  for(const sc of SCN){await p.evaluate(n=>AT.scen(n),sc);
   /* the whole deck: every Tài nghệ kind + 24 deals, rendered as the Hành sự tab renders them */
-  const dk=await p.evaluate(()=>{AT.restore();const A=AT.deckAll();AT.restore();deck.length=0;A.forEach(a=>deck.push(a));tab="act";try{if(typeof K3SH!=="undefined")K3SH.home=false}catch(e){}render();return AT.read({tab:"act"})});dk.forEach(c=>take(sc,'deck',c));lg(sc+' deck '+dk.length);
+  const dk=await p.evaluate(()=>{AT.restore();const A=AT.deckAll();AT.restore();deck.length=0;A.forEach(a=>deck.push(a));tab="act";try{if(typeof K3SH!=="undefined")K3SH.home=false}catch(e){}render();AT.panel();return AT.read({tab:"act"})});dk.forEach(c=>take(sc,'deck',c));lg(sc+' deck '+dk.length);
   const wm=await p.evaluate(()=>AT.wkMats());wm.forEach(m=>m.opts.forEach(c=>take(sc,'art > '+m.title,c)));
   const SF=await p.evaluate(()=>AT.surfaces());
   for(const sf of SF){let subs=[sf];if(sf.place){const n=await p.evaluate(s=>{AT.restore();AT.show(s);return S.visit&&S.visit.people?S.visit.people.length:0},sf);subs=[];for(let i=0;i<n;i++)subs.push(Object.assign({},sf,{pop:i,id:sf.id+'#'+i}))}
