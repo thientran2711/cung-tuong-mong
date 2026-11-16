@@ -33,7 +33,7 @@ Names are separate from Foreman B's minigame tiers (`BAL.mg.*` untouched).
 | Outsider queen | `BAL.outQ` 85 in jbal and 60 in jbal2 | one value 60 in jbal |
 | Scheme / favour knobs | `J70CFG.mot/prep` 1.5/0 in j70 and 3/10 in jbal2; `FAIRN.sat/satO` 0/0 in j75 and .2/8 in jbal2 | one value each (3/10, .2/8) where the table is defined |
 
-Inline rule numbers counted by the guard: **7058 on main → 6946** (112 moved here); the rest are frozen (section 3).
+Inline rule numbers counted by the guard: **7058 on main → 6945** (113 moved here); the rest are frozen (section 3).
 
 ## 2. Contradictions found and the value chosen
 
@@ -67,7 +67,7 @@ Nothing else was re-tuned: every value chosen is the one the game already ran wi
 - `dev/test/rules-one-source.js` §2b (browser): mirrors equal BAL, then every moved constant is set to an odd value and the texts and
   rules are read again (glossary, HX, night card, sneak penalty, walk, `can`, Sức floor) — they must show the new value. It found two
   more typed copies during the work (jclose's own `travel` and its Sức floor), both fixed.
-- Frozen debt (6946): gains/costs 4565, typed numbers in texts 876 + 282 + 48, stat bars 544, odds bases 438, khắc 193; most in j67
+- Frozen debt (6945): gains/costs 4565, typed numbers in texts 876 + 281 + 48, stat bars 544, odds bases 438, khắc 193; most in j67
   (story roads, 1533), j8, j72, j71, j42. These are act/story prices each typed next to their own effect; they need a per-act price table
   (next step, file by file), but none can grow now.
 
@@ -78,7 +78,14 @@ Nothing else was re-tuned: every value chosen is the one the game already ran wi
 - Bot balance (sensible bot, `inpage6.js` + `inx.js` + `inpz.js`, HHSTOP, 9-origin rotation, 4 shards × 5 lives; `.oc/run4.sh` = run5b.sh with 4 shards):
   see the table below.
 
-BOT_TABLE
+| run (n=20 each) | Hoàng hậu | early death | survived w/o HH | childbirth death / labour |
+|---|---|---|---|---|
+| before (origin/main build) | 5% (1) | 40% (8) | 55% | 12.5% |
+| after (this branch) | 5% (1) | 35% (7) | 60% | 16.7% |
+
+Same within noise (at n=20 one life = 5 points, 95% band about ±20 points). Every value chosen above is the one the game already ran
+with, so no outcome moved. NOTE for the coordinator: main itself is far below the targets (HH ~32%, early death ~40–45%) — HH 5% on
+both builds; that predates this branch and is a balance task of its own.
 
 ## 5. Notes for the coordinator / mg-balance
 
