@@ -1,5 +1,5 @@
 # skin-norosy-r1 review (reviewer session, 11/16/2026)
-Verdict: PASS review/skin-norosy-r1 @35082f7a (fast-forwardable onto origin/main e9c6021d). START_CTX ~5 % of window.
+Verdict: PASS review/skin-norosy-r1 @0ee35a63 (fast-forwardable onto origin/main ee5d33de; re-merged + rebuilt after main moved, figpages 755x1000@2 0 broken/0 errs and sw-norosy 87/87 re-run). START_CTX ~5 % of window.
 
 ## 1. Merge + rebuild
 - Merged origin/main e9c6021d into review/skin-norosy @95f8d7cd. Only conflict: sw.js (build hash) -> took main's, then `bash dev/site/build_site.sh` regenerated index.html (identical to main), assets.json, sw.js (shell 7627bb56362b). No hand-merged hashes.
