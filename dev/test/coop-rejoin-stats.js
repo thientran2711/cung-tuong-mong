@@ -34,7 +34,7 @@ async function bothPast(A,B,k,ms){const t0=Date.now();while(Date.now()-t0<ms){co
 async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,4000)}
 
 (async()=>{const b=await chromium.launch();
- const A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,1]);
+ let A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,1]);const ALL=[A,B];
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A: Cùng hảo hữu');await A.p.waitForTimeout(600);
  ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A: Mời hảo hữu');
@@ -91,6 +91,52 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   /* a friend on the jkc home road (tiểu thư, not yet in the palace) has no palace entry by design: no stats to compare */
   ok((y3.fhome||y3.ftai===x3.tai)&&(x3.fhome||x3.fsac===y3.sac),tag+': each sees the friend\'s real stats after the merge',[x3,y3]);
   const a=await D(A),c=await D(B);ok(a.date===c.date&&a.w===c.w,tag+': same date + week',[a,c])}
- for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
+ /* review/coop-rejoin-xdev: rejoin from ANOTHER device (separate browser storage). The new device knows only what Sổ mây carries:
+    the room list + the pid of her seat (jcloud mergeRooms → "ctm-coop-rooms" / "ctm-coop-pids"); her week comes from the server seat copy. */
+ const carry=async X=>X.p.evaluate(code=>{const p={};p[code]=COOP.pidFor(code);return {rooms:localStorage.getItem('ctm-coop-rooms')||'[]',pids:JSON.stringify(p)}},code);
+ const seatSent=X=>until(X,()=>{const v=COOPW.seatVer();return v.ssv>0&&!v.old},null,15000);
+ async function fresh(name,vp,cr){const N=await mk(b,name,vp);ALL.push(N);await N.ctx.addInitScript(c=>{if(!localStorage.getItem('ctm-coop-pids')){localStorage.setItem('ctm-coop-rooms',c.rooms);localStorage.setItem('ctm-coop-pids',c.pids)}},cr);return N}
+ async function backOn(N,seat){await N.page();await N.p.goto(BASE,DCL);await N.p.waitForTimeout(3000);await tapText(N,/^(Chơi cùng bạn|Cùng hảo hữu)/);await N.p.waitForTimeout(600);await tapText(N,/^Trở lại phòng/);
+   const r=await until(N,s=>COOP.seat===s&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),seat,60000);for(let i=0;i<4;i++){await clear(A);await clear(B);await sleep(300)}return r}
+ async function xdev(isHost,tag){await toDay();for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  const X=isHost?A:B,Y=isHost?B:A,seat=isHost?'a':'b';
+  await X.p.evaluate(()=>{spend(1);S.tai+=4;S.danh=(S.danh||0)+3;render()});await Y.p.evaluate(()=>{spend(1);S.sac+=2;render()});await sleep(1500);
+  ok(await seatSent(X),tag+': her week copy is on the server',await X.p.evaluate(()=>COOPW.seatVer()));await sleep(4500);
+  const x1=await ST(X),y1=await ST(Y);const cr=await carry(X);
+  /* the old device goes away for good (closed); a NEW device (own storage, other size) opens the same seat */
+  await X.p.close();ok(await until(Y,()=>COOP.frozen,null,60000),tag+': '+Y.name+' sees the wait');
+  const N=await fresh(X.name+'-new',isHost?[1180,820,2]:[755,1000,2],cr);
+  if(isHost)A=N;else B=N;
+  ok(await backOn(N,seat),tag+': back in the same seat from the new device');
+  const trS=o=>o.p.evaluate(()=>(COOPW.tr||[]).filter(x=>/^snap|^restored/.test(x)));
+  {const t=await trS(N);ok(t.some(x=>/^snap server/.test(x))&&t.some(x=>/^restored/.test(x)),tag+': new device restored from the server seat copy',t)}
+  const x2=await ST(N),y2=await ST(Y);
+  ok(x2.u===x1.u&&x2.tai===x1.tai&&x2.sac===x1.sac&&x2.danh===x1.danh&&x2.k===x1.k,tag+': new device restores her exact week (khắc, tài, sắc, danh, buổi)',[x1,x2]);
+  ok(y2.u===y1.u&&y2.tai===y1.tai&&y2.sac===y1.sac&&y2.k===y1.k,tag+': the friend keeps hers',[y1,y2]);
+  await clockRuns(tag);
+  /* CONFLICT: she plays on the new device, then the OLD device comes back with its older local copy: the newer server copy wins */
+  const sv0=await N.p.evaluate(()=>COOPW.seatVer().ssv);
+  await N.p.evaluate(()=>{S.tai+=2;render()});await sleep(1500);ok(await until(N,v=>COOPW.seatVer().ssv>v,sv0,15000),tag+': new device sends its newer copy');await sleep(4500);
+  const x3=await ST(N);
+  /* the OLD device (its own storage still holds its older week copy) opens the game again */
+  const O=X;const oldTai=x1.tai;
+  ok(await backOn(O,seat),tag+': the old device takes the seat back');
+  ok(await until(N,()=>COOP.state.status==='moved'&&!!document.getElementById('coopfz'),null,20000),tag+': the new device stops with "Cuộc chơi đã sang máy khác" (no seat fight)');
+  await shot(N,'xdev-moved-'+seat+'-'+(isHost?'1180x820':'755x1000'));
+  ok(await N.p.evaluate(()=>{const f=document.getElementById('coopfz');if(!f)return false;const r=f.querySelector('.dlg').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1&&document.documentElement.scrollWidth<=innerWidth+1&&/máy khác/.test(f.textContent)}),tag+': moved panel fits, no overflow');
+  await sleep(3000);ok(await N.p.evaluate(()=>COOP.state.status==='moved'),tag+': the new device does not grab the seat back');
+  {const t=await trS(O);ok(t.some(x=>/^snap server/.test(x)),tag+': old device chose the server copy over its own',t)}
+  const x4=await ST(O);
+  ok(x4.tai===x3.tai&&x4.tai!==oldTai&&x4.u===x3.u&&x4.danh===x3.danh,tag+': newest seat version wins (server copy, not the old device copy)',[x3,x4]);
+  if(isHost)A=O;else B=O;
+  {const k=x4.k;ok(await step1(k),tag+': buổi steps for both')}
+  const w0=(await D(A)).w;ok(await nextWeek(w0),tag+': next week reached');await sleep(1500);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  const x5=await ST(isHost?A:B),y5=await ST(Y);
+  ok(x5.w===x1.w+1&&x5.tai>x3.tai-4&&x5.danh>=x1.danh-2,tag+': after the week merge she keeps every gain (+6 tài, +3 danh)',[x3,x5]);
+  ok(y5.sac>y1.sac-2,tag+': the friend keeps hers after the merge (+2 sắc)',[y1,y5]);
+  const a=await D(A),c=await D(B);ok(a.date===c.date&&a.w===c.w,tag+': same date + week',[a,c])}
+ await xdev(false,'X guest on another device');
+ await xdev(true,'X host on another device');
+ for(const o of ALL)ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
