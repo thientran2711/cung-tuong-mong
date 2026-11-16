@@ -402,3 +402,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (17:16Z s21) pet lifespan APPROVED (OD 18:50Z) → pet-lifespan worker. Owner queue: npc-agent go → Q1–Q3; cycle half-tuần 1/2.
 - (17:18Z s21) night-steal build worker (owner angry: ruled 14:10Z/14:45Z, never built). LESSON: before presenting any finding, grep OD and say 'sếp đã chốt lúc …, chưa làm/đang làm'; 90 %/65 % flip = owner keep (OD 18:10Z), not a finding — AG2 must keep it.
 - (17:26Z s21) go-live-kit SẴN SÀNG 49f19f1c → BIG reviewer; nightly --quick on live found 16 Fold/15 iPad dialogs missing approved frame → kit-size #3 keeper; stale cloud-save test → go-live-kit worker. Night analyst got OD 18:40Z + 19:00Z. Nightly scheduling: create_trigger denied before — not retried.
+- (17:32Z s21) flip-hand DONE 745e1ab8 → video sent to owner (self-check: at touch the sleeve is off-screen → long bare forearm; flagged to her) + SMALL reviewer; worker archived.
