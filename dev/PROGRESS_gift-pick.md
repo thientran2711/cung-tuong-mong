@@ -63,4 +63,8 @@ OWNER_DECISIONS 22:45Z #4/#5 (painted gift animations), 22:35Z perf budget.
   Probe: tap skip removes the catcher at once and every fx node within 1.5 s (dialog stays closed); natural end leaves 0 nodes;
   tainted gift with detection forced → giftcarry:refuse; "Nhận" on giftin → gift:open; plantpick confirm reachable (hit-test) at 1000x755
   and 844x390. 390x844 direct mode (tests only; the real host rotates the 1180x820 frame) clips the plantpick confirm under #mb.
-- KIT §70 item detail (review/item-info 50a0f22) is NOT on main yet: not wired; hook point stays `kipDetail` (jgpick.js).
+- Re-merged origin/main 3ef079f6 + 2d038139e (item-info LIVE). KIT §70 wired: `kipDetail` puts `kitItemDetail({e},{cls:"kidet-strip kipdet",noLux:true})`
+  above the option card. To keep the confirm in view: landscape (≥900 wide, >500 tall) = §70 strip | card + confirm side by side; the confirm
+  is sticky at the bottom of the scrolling option box everywhere. KIT.md 28.13i updated.
+- Final run (after restart, 2d038139e merge): gift-pick.js all 6 sizes: confirm in view at all sizes, inv −1 + giftcarry:give, tap skip removes
+  the catcher at once (0 at 300 ms), Gọn 0 fx, 0 overflow / cut text, 0 page / HTTP errors. Skip check now waits 1.5 s for fades.

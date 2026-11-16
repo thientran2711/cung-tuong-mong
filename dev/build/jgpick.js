@@ -35,7 +35,7 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
  card.classList.add("kipcard");card.querySelectorAll(".kitem").forEach(x=>x.remove());card.disabled=false;
  /* KIT §70 item detail (review/item-info, landed on main): the chosen item's own detail strip above the option card (reviewer r1) */
  let det="";try{const e=S.inv[c.ik];if(e&&typeof kitItemDetail==="function")det=kitItemDetail({e},{cls:"kidet-strip kipdet",noLux:true})}catch(x){}
- d.innerHTML=det;
+ d.innerHTML=det;d.classList.toggle("kipd2",!!det);
  d.appendChild(card);
  d.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
 function kipSelect(M,m,i){KIP_SEL.set(m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
@@ -102,6 +102,10 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipd>.kipgo{align-self:stretch;min-height:40px}
 .kipd>.kipgo:disabled{filter:grayscale(1);opacity:.55}
+/* reviewer r1: with the §70 strip the confirm stays in view — strip | card + confirm side by side on landscape screens, and the confirm
+   sticks to the bottom of the scrolling option box everywhere */
+.kipd>.kipgo{position:sticky;bottom:0;z-index:2}
+@media (orientation:landscape) and (min-width:900px) and (min-height:501px){.kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}.kipd2>.kidet{grid-column:1;grid-row:1/span 2}.kipd2>.kipcard,.kipd2>.kipgo{grid-column:2}.kipd2>.kipgo{align-self:start;max-height:48px}}
 @media (max-height:500px) and (orientation:landscape){.kipw{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,42%);grid-template-areas:"g d";align-items:start}.kipw>.kipg{grid-area:g;max-height:calc(100dvh - 150px);--kshsz:84px}.kipw>.kipd{grid-area:d}}
 @media (max-width:600px){.kipg{--kshsz:84px}}
 `;document.head.appendChild(st)})();
