@@ -1,7 +1,7 @@
 /* road-saves (review/road-map): saves and the full origin roads (jroad.js).
    1) a save from the MAIN build (before the frame and the roads) loads, keeps its plan, has no S.st.f14.rd, plays 60 buổi;
    2) a save of this build in a life whose road is NOT full (phase-1 frame, an origin whose road is not full) loads, keeps its plan, plays on;
-   3) a full-road life (tt, dtq, muoi, cn) saved in the middle of the road (ser → deser) keeps the road, its cast and its plan, and plays on.
+   3) a full-road life (tt, dtq, muoi, cn; env ROADS=nc,bd,td,ch for other origins) saved in the middle of the road (ser → deser) keeps the road, its cast and its plan, and plays on.
    usage: node dev/test/road-saves.js <url> <main url> */
 const {chromium}=require('playwright');
 const [,,URL,MAIN]=process.argv;
@@ -19,7 +19,7 @@ const [,,URL,MAIN]=process.argv;
   await q.context().close();return s};
  const olds=[];if(MAIN)olds.push(['main build (dtq)',await mk(MAIN,'dtq',3),'old']);olds.push(['this build, phase-1 frame (thd: road not full on this branch)',await mk(URL,'thd',3),'p1']);
  try{localStorage}catch(e){}
- for(const k of ['tt','dtq','muoi','cn'])olds.push([`this build, full road (${k}) mid-road`,await mk(URL,k,40),'full']);
+ for(const k of (process.env.ROADS||'tt,dtq,muoi,cn').split(','))olds.push([`this build, full road (${k}) mid-road`,await mk(URL,k,40),'full']);
  const q=await boot(URL);
  for(const [nm,o,kind] of olds){if(o.retry){chk(`${nm}: save built`,false,o);continue}
   const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));
