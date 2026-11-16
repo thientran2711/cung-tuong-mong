@@ -1,5 +1,6 @@
 /* road-option-scan (reviewer road-map-r1): every option of every road chapter (dev/build/jrd_*.js) must have a real loss (cost c, failure loss l with odds, or an ending) — lists FREE GAIN and NO-EFFECT options, digits in text, and road completeness. usage: node dev/measure/road-option-scan.js (from the repo root). Note: options with go (relation/oan) are listed with "go" — check by hand. */
-const fs=require('fs');global.ARC67={};global.RTHEME67={};global.BAL={road:{first:5,last:11}};
+const fs=require('fs');global.ARC67={};global.RTHEME67={};/* the real rulebook (ONE CORE): jbal.js + jbal2.js; fallback stub when they cannot load alone */
+try{const vm=require('vm');const nop=new Proxy(function(){},{get:(f,k)=>k===Symbol.toPrimitive?()=>0:nop,apply:()=>nop,construct:()=>({})});const base={console,Math,JSON,Object,Array,Number,String,Symbol,isFinite,parseInt,setTimeout:()=>0};const ctx=vm.createContext(new Proxy(base,{has:()=>true,get:(o,k)=>k in o?o[k]:k==='window'||k==='globalThis'?ctx:nop,set:(o,k,v)=>(o[k]=v,true)}));vm.runInContext(fs.readFileSync('dev/build/jbal.js','utf8')+'\n'+fs.readFileSync('dev/build/jbal2.js','utf8')+'\n;this.BAL=BAL',ctx);global.BAL=base.BAL||ctx.BAL;if(!BAL.road)throw 0}catch(e){console.log('note: BAL not loaded ('+(e&&e.message||e)+'), stub used');global.BAL={road:{first:5,last:11}}}
 global.rdK=()=>0;global.rdPrev=()=>"";global.window=global;global.RD97L=[];
 const J=fs.readFileSync('dev/build/jroad.js','utf8');const src=J.slice(J.indexOf('const ROAD14'),J.indexOf('function rdOn'));
 eval(src+fs.readdirSync('dev/build').filter(f=>/^jrd_.*\.js$/.test(f)).map(f=>fs.readFileSync('dev/build/'+f,'utf8')).join('\n')+';global.ROAD14=ROAD14');
@@ -25,7 +26,7 @@ const R=ROAD14;for(const r in R)console.log(r,Object.keys(R[r]).join(','));
  console.log('DOUBLE LỢI THẾ (A.sc in a climax option):',d.length);d.forEach(x=>console.log('  '+x))}
 /* ---------- review road-b1-r1 additions (items 2, 3, 9 + RD97L) — guard every jrd_* file ----------
    base odds are read with a neutral life (every number 30, rank 3, no road flags, Lợi thế 0); a base that cannot be read is listed. */
-{const N=30;const S0={rank:3,st:{f14:{}},kids:[],thDead:false};
+{const N=30;/* neutral life: favour/fame stats 30, Tai mắt (0–10) 3, Lợi thế 0 */const S0={rank:3,mat:3,st:{f14:{}},kids:[],thDead:false};
  global.S=new Proxy(S0,{get:(t,k)=>k in t?t[k]:(typeof k==='string'?N:undefined)});
  for(const f of ['rv67','rdEnd','rdPrev','qOn','illOf','RV','f14'])if(!global[f])global[f]=()=>null;
  const A0=()=>({f:{},sc:0,act:{},n1:'',n2:'',q97:{p:0,b:0}});
