@@ -114,7 +114,7 @@ function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPers
  if(PG.relY==null||!Ys2[PG.relY])PG.relY=0;const Y=Ys2[PG.relY].q;
  const strip1=pager("rel",items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
  const strip2=pager("relY",Ys2.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
- return `<div class="pgwrap krelpg"><div class="kpinline krelpk${items.length<=3?" krelfew":""}"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk${Ys2.length<=3?" krelfew":""}"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
+ return `<div class="pgwrap krelpg"><div class="kpinline krelpk"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
@@ -252,17 +252,16 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 /* KIT §49.2c COMPACT RELATION PICKER (owner 15/11 "Khung này choáng space quá", review/rel-picker): each picker = ONE flex row, label + group chips on the first
    line and the face strip beside them when the width allows (strip basis 300 px), else directly under them; no band behind the chips, no tall empty strip;
    faces + labels small (kitNameRank: rank in its rank colour over the short name); ‹ › and N/M only when the faces overflow (kitStripFit .kpall) */
-html body #panel .krelpk{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;margin:0 0 2px;padding:0}
-html body #panel .krelpk>.krelst{margin:0;flex:0 0 auto;line-height:1.2}
-html body #panel .krelpk>.kcattabs.ktsub{margin:0!important;padding:2px 0!important;background:transparent!important;box-shadow:none!important;flex:0 1 auto;width:auto;min-width:0;overflow-x:auto}
-html body #panel .krelpk>.pstrip{flex:1 1 300px;margin:0!important;gap:3px!important}
-html body #panel .krelpk.krelfew>.pstrip{flex:0 1 auto}
-html body #panel .krelpk .pstrip>.parr{min-height:34px!important;min-width:26px!important;width:26px;font-size:1.1rem}
-html body #panel .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
-html body #panel .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
-html body #panel .krelpk .pface .knr>.knr-r{font-size:.58rem!important;margin:0!important;white-space:nowrap;font-weight:700}
-html body #panel .krelpk .pface .knr>.knr-n{font-size:.66rem;white-space:nowrap;font-weight:600}
-html body #panel .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
+html body :is(#panel,#kitpage) .krelpk{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;margin:0 0 2px;padding:0}
+html body :is(#panel,#kitpage) .krelpk>.krelst{margin:0;flex:0 0 auto;line-height:1.2}
+html body :is(#panel,#kitpage) .krelpk>.kcattabs.ktsub{margin:0!important;padding:2px 0!important;background:transparent!important;box-shadow:none!important;flex:0 1 auto;width:auto;min-width:0;overflow-x:auto}
+html body :is(#panel,#kitpage) .krelpk>.pstrip{flex:1 1 300px;margin:0!important;gap:3px!important}
+html body :is(#panel,#kitpage) .krelpk .pstrip>.parr{min-height:34px!important;min-width:26px!important;width:26px;font-size:1.1rem}
+html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
+html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
+html body :is(#panel,#kitpage) .krelpk .pface .knr>.knr-r{font-size:.58rem!important;margin:0!important;white-space:nowrap;font-weight:700}
+html body :is(#panel,#kitpage) .krelpk .pface .knr>.knr-n{font-size:.66rem;white-space:nowrap;font-weight:600}
+html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
 .krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
@@ -289,4 +288,12 @@ html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,
 /* narrow card (phones): the box sits at the top of its cell, never centred against the info beside it (which differs per person) */
 .pc[data-k2]:not(.kpwide) .pcl>.pcp.kit,.pc[data-k2]:not(.kpwide) .pcl>.kwear{align-self:start!important}
 `;document.head.appendChild(st);
+/* KIT §49.2c sample (kit page #kit): the compact picker = label + kitSubTabs chips + face strip on ONE row (strip under them when too narrow);
+   ‹ › and N/M only when the faces overflow (kitStripFit .kpall). Row 1: few faces (no arrows). Row 2: the same faces, strip narrowed so they overflow (arrows). */
+window.kitRelPickerSample=()=>{
+ if(typeof S==="undefined"||!S||typeof relItems!=="function")return `<em>cần một ván đang chơi</em>`;
+ const L=relItems().map(x=>{const q=relPerson(x.k);return stripItem(Object.assign({},x,{sep:""}),q)}).slice(0,6);
+ const row=(lab,key,items,w)=>{const t=kitSubTabs(key,[{k:"a",label:"Nhóm",n:items.length}]);return `<div class="kpinline krelpk" style="max-width:${w}px"><p class="krelst">${lab}</p>${t.html}${pager("ks"+key,items,()=>"")}</div>`};
+ setTimeout(()=>{try{kitStripFit()}catch(e){}},60);
+ return row("Ít người","ksa",L.slice(0,2),520)+row("Nhiều người (tràn)","ksb",L.concat(L),340)};
 })();
