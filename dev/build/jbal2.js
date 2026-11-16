@@ -292,7 +292,7 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
-   (relAdd: the robbed one also gains oán rel×.6); ghen = jealousy of the robbed consort.
+   (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
    agent (owner 16/11 14:10Z + 14:45Z + OD:L1386): an NPC tries out of SELF-INTEREST, not hatred. want = need × personality (persW "steal",
    traits + mood, jemo) × relation to the holder × fear × odds (oSteal, the player's own formula). need = weighted gaps of favour (Sủng),
    rank (to Hoàng hậu) and an heir (no living son; with a son the heir gap is heirHas). relation: thiện cảm toward the holder ≥ friend → only friendMin of the wish is left;
