@@ -497,7 +497,7 @@ rdDef("muoi_doi",6,{t:"Dân đói về kinh",w:"emp",sj:"đám dân đói ngoài
  g:"Mùa đông, dân Giang Nam mất ruộng kéo lên kinh. Triều đình cần một kẻ để đổ lỗi, và nhà buôn muối giàu nhất Giang Nam là cái tên dễ gọi nhất.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Tấm vải cầu cứu",w:"emp",if:RDW(1),t:"Dân các làng được chuộc ruộng nhắc tên nhà ngươi. Nhưng đoàn dân đói từ huyện khác vẫn kéo đến cửa Tây kinh thành, có người giương tấm vải viết tên nhà ngươi để cầu cứu.",o:[
-  {n:"Xin phép cho nhà dựng lều cháo ở cửa Tây",c:{bac:-50,suc:-2},w:{danh:4},sc:1,f:"good",wx:"dân nhớ ơn (Kho lúa +2)",lx:"thêm dân kéo đến vì nghe có cháo",go:()=>e67kho(2),rt:"Lều cháo dựng lên, khói bếp suốt ngày đêm."},
+  {n:"Xin phép cho nhà dựng lều cháo ở cửa Tây",c:{bac:-50,suc:-2},w:{danh:4},sc:1,f:"good",wx:"dân nhớ ơn",lx:"thêm dân kéo đến vì nghe có cháo",go:()=>e67kho(2),rt:"Lều cháo dựng lên, khói bếp suốt ngày đêm."},
   {n:"Bảo dân tìm đến quan phủ",c:{danh:-2},w:{sung:2},wx:"Hoàng thượng thấy ngươi không giành tiếng",lx:"dân thất vọng, đổi lời",rt:"Người của ngươi chỉ đường cho dân đến phủ Kinh triệu."},
   {n:"Nhờ huynh trưởng hỏi quê từng người",c:{suc:-3},o:()=>40+S.mat*5,w:{mat:1},sc:1,f:"truth",wx:"biết dân từ huyện nào, vì sao mất ruộng",l:{danh:-2},lx:"bị đồn là lôi kéo dân",rt:"Sổ ghi rõ: phần nhiều mất ruộng vì quan huyện thu thuế giữa năm đói.",rf:"Quan phủ thấy người nhà phi tần đi lại với dân, tâu là lôi kéo."}]},
  s2:{h:"Ruộng họ mất vào tay ai",w:"emp",if:RDW(0),t:"Đoàn dân đói đến cửa Tây kinh thành. Người ta kháo nhau: ruộng của họ mất vào tay nhà buôn muối.",o:[
@@ -540,7 +540,7 @@ rdDef("muoi_doi",7,{t:"Tiếng tích trữ",w:"v",sj:"lời đồn nhà ngươi 
   {n:"Để {v} dâng sổ giả rồi hãy vạch",c:{suc:-2},w:{tamco:3},sc:1,f:"trap",wx:"{v} tự đưa đầu vào",lx:"lời đồn lan thêm vài tháng",rt:"Ngươi để tờ sổ giả đi tiếp đường của nó."}]},
  c2:{h:"Kho thóc có thật",w:"maid",t:"Thư nhà: ở bến Giang Khẩu đúng là có một kho thóc của cha. Không phải để đầu cơ, ông để dành cho năm sau. Nhưng chẳng ai tin điều đó.",o:[
   {n:"Bảo cha khai kho với quan phủ",c:{bac:-20},w:{duc:3},f:"open",wx:"kho thành kho minh bạch",lx:"cha mất thế mặc cả với Hộ bộ",rt:"Quan phủ ghi kho vào sổ, đóng dấu."},
-  {n:"Bảo cha bán bớt cho dân giá cũ",c:{bac:-40},w:{danh:3},sc:1,wx:"dân thấy thóc ra (Kho lúa +2)",lx:"kho vơi, năm sau ít dự trữ",go:()=>e67kho(2),rt:"Thuyền thóc ra bến, giá gạo chợ huyện hạ."},
+  {n:"Bảo cha bán bớt cho dân giá cũ",c:{bac:-40},w:{danh:3},sc:1,wx:"dân thấy thóc ra",lx:"kho vơi, năm sau ít dự trữ",go:()=>e67kho(2),rt:"Thuyền thóc ra bến, giá gạo chợ huyện hạ."},
   {n:"Bảo cha dời kho đi nơi khác",c:{duc:-3},o:()=>50+S.tamco/4,w:{tamco:2},f:"hide",wx:"không ai tìm thấy",l:{danh:-5},lx:"bị bắt gặp khi dời, đúng như lời đồn",rt:"Thóc được dời đi trong ba đêm.",rf:"Thuyền dời thóc bị lính tuần sông chặn."}]},
  t1:{h:"Hoàng thượng hỏi bâng quơ",w:"emp",t:"Đêm ấy Hoàng thượng hỏi bâng quơ: “Nhà nàng còn bao nhiêu thóc?”",o:[
   {n:"Tâu thật cả kho bến Giang Khẩu",c:{},o:A=>45+(A.f.open?20:0)-(A.f.hide?20:0)+S.sung/6,w:{sung:3},sc:1,wx:"ngài tin lời nàng",l:{sung:-4},lx:"ngài nghĩ ngươi chỉ thật khi bị dồn",rt:"Hoàng thượng cười: “Nàng là người đầu tiên nói thật với trẫm chuyện này.”",rf:"Hoàng thượng im lặng, rồi nói: “Trẫm đã biết từ trước.”"},
