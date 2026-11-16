@@ -28,6 +28,8 @@ function rdEnd(n){try{return (S.st.f14.ends||{})[n]||""}catch(e){return""}}
 /* cast keeper: reuse the road's people; recast only the ones gone (castRv67 picks a new live consort; f = filter) */
 function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k of keys){const id=K[k];let old=null;
   if(id!=null){A.act[k]=id;if(rv67(A,k))continue;delete A.act[k];try{old=RV(id)}catch(e){}}
+  /* f.keep = identity-bound roles (fix B CN_NORECAST): cast once when the road first needs them (the .4 may not have cast them), never recast */
+  if(f&&(f.keep||[]).includes(k)){if(old)return false;if(!castRv67(A,k))return false;continue}
   if(!castRv67(A,k,f&&f[k]))return false;
   if(old)try{const nv=rv67(A,k);if(nv){const L=`${old.name} ${old.alive?"đã rời cung":"nay đã khuất"}, kẻ nối tay là ${nv.name}.`;(A.rc=A.rc||[]).push(L);log(`<i>${L}</i>`)}}catch(e){}}
  return true}

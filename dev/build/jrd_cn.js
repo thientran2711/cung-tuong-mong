@@ -25,7 +25,7 @@ const CNT4=()=>rdEnd(BAL.road.first-1);/* "r97" (rare: name restored + father tr
 const CNT4W=()=>["win","r97"].includes(CNT4()),CNT4F=()=>["mid","r97"].includes(CNT4());
 /* identity-bound roles (review road-b1-r1 item 7): the old mistress (cn_chu) and the Thượng thư house's daughter (cn_than) are one
    person; if she is gone the role is not handed to a random consort (rdCast recasts only through this filter, which allows nobody) */
-const CN_NORECAST={v:()=>false};
+const CN_NORECAST={keep:["v"]};/* jroad rdCast: cast once if the .4 never cast her (cn_than .4 casts v only in its c3 hồi), never recast */
 /* cn_ban .8: a jewellery item she owns and is not wearing in the hair slot (index in S.inv, −1 = none); selling it removes it */
 const CN_JEWEL=()=>{try{const w=typeof wdOf==="function"?wdOf(S):null;const wk=w&&w.tram?w.tram.k:null;return (S.inv||[]).findIndex(e=>e&&!e.h&&IT[e.k]&&IT[e.k].kd==="Trang sức"&&e.k!==wk)}catch(e){return -1}};
 const CN_QI=c=>{const w=({hh:"bản cung",th:"ai gia",emp:"trẫm"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w},CN_QY=c=>{const w=({hh:"muội",th:"con",emp:"ái phi"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w};

@@ -8784,6 +8784,8 @@ function rdEnd(n){try{return (S.st.f14.ends||{})[n]||""}catch(e){return""}}
 /* cast keeper: reuse the road's people; recast only the ones gone (castRv67 picks a new live consort; f = filter) */
 function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k of keys){const id=K[k];let old=null;
   if(id!=null){A.act[k]=id;if(rv67(A,k))continue;delete A.act[k];try{old=RV(id)}catch(e){}}
+  /* f.keep = identity-bound roles (fix B CN_NORECAST): cast once when the road first needs them (the .4 may not have cast them), never recast */
+  if(f&&(f.keep||[]).includes(k)){if(old)return false;if(!castRv67(A,k))return false;continue}
   if(!castRv67(A,k,f&&f[k]))return false;
   if(old)try{const nv=rv67(A,k);if(nv){const L=`${old.name} ${old.alive?"đã rời cung":"nay đã khuất"}, kẻ nối tay là ${nv.name}.`;(A.rc=A.rc||[]).push(L);log(`<i>${L}</i>`)}}catch(e){}}
  return true}
@@ -11879,7 +11881,7 @@ const CNT4=()=>rdEnd(BAL.road.first-1);/* "r97" (rare: name restored + father tr
 const CNT4W=()=>["win","r97"].includes(CNT4()),CNT4F=()=>["mid","r97"].includes(CNT4());
 /* identity-bound roles (review road-b1-r1 item 7): the old mistress (cn_chu) and the Thượng thư house's daughter (cn_than) are one
    person; if she is gone the role is not handed to a random consort (rdCast recasts only through this filter, which allows nobody) */
-const CN_NORECAST={v:()=>false};
+const CN_NORECAST={keep:["v"]};/* jroad rdCast: cast once if the .4 never cast her (cn_than .4 casts v only in its c3 hồi), never recast */
 /* cn_ban .8: a jewellery item she owns and is not wearing in the hair slot (index in S.inv, −1 = none); selling it removes it */
 const CN_JEWEL=()=>{try{const w=typeof wdOf==="function"?wdOf(S):null;const wk=w&&w.tram?w.tram.k:null;return (S.inv||[]).findIndex(e=>e&&!e.h&&IT[e.k]&&IT[e.k].kd==="Trang sức"&&e.k!==wk)}catch(e){return -1}};
 const CN_QI=c=>{const w=({hh:"bản cung",th:"ai gia",emp:"trẫm"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w},CN_QY=c=>{const w=({hh:"muội",th:"con",emp:"ái phi"})[CN_QK()];return c?w[0].toUpperCase()+w.slice(1):w};
@@ -47752,7 +47754,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4649148f52f2";window.CTM_BUILD=BUILD;
+const BUILD="fe3e50ff02db";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -17,15 +17,17 @@ const {chromium}=require('playwright');const [,,URL,ONLY]=process.argv;
    /* (b) a path option in a .5–.10 chapter */
    let hit=null;for(let n=BAL.road.first;n<BAL.road.last&&!hit;n++){const id=ROAD14[rd][n];for(const[bk,bb]of Object.entries(ARC67[id].B)){const O=typeof bb.o==='function'?[]:bb.o;
      const i=O.findIndex(o=>(d.path||[]).some(x=>String(o.n).includes(x))&&!(d.bad||[]).some(x=>String(o.n).includes(x)));if(i>=0){hit={id,bk,n:O[i].n};break}}}
-   out.hit=hit;if(hit){const X=S.st.X||(S.st.X=[]);const A=newThread67(hit.id,"s");X.push(A);A.cur=hit.bk;const O=opts67(A,beatDef67(A,hit.bk));const i=O.findIndex(o=>o.n===hit.n);
+   out.hit=hit;if(hit){const X=S.st.X||(S.st.X=[]);const A=newThread67(hit.id,"s");if(!A){out.nocast=hit.id;return out}X.push(A);A.cur=hit.bk;const O=opts67(A,beatDef67(A,hit.bk));const i=O.findIndex(o=>o.n===hit.n);
     out.iok=i>=0;if(i>=0)res67(X.length-1,hit.bk,i,100);out.q=JSON.stringify(S.st.f14.q97||null);X.pop()}
    /* (c) the .11 as the main thread, rare ending fired */
-   const A=newThread67(id11,"m");out.q11=JSON.stringify(A.q97||null);S.st.M=A;A.chap=S.st.ch.n;const it0=JSON.stringify(S.inv||S.items||[]).length;
+   /* identity-bound roles (fix B CN_NORECAST) need the .4 cast: seed it from a fresh .4 thread */
+   if(!S.st.f14.act||!Object.keys(S.st.f14.act).length){const A4=newThread67(rd,"s");if(A4)S.st.f14.act=Object.assign({},A4.act)}
+   const A=newThread67(id11,"m");if(!A){out.nocast=id11;return out}out.q11=JSON.stringify(A.q97||null);S.st.M=A;A.chap=S.st.ch.n;const it0=JSON.stringify(S.inv||S.items||[]).length;
    end67(A,"r97");out.tag=A.tag;out.end=A.end;out.r97=(S.r97||[]).map(x=>x.a+':'+x.ti).join('|');out.fin=S.st.ch.fin||'';out.rare=d.tag;
    /* (d) mid-chapter recast told */
    const B=newThread67(ROAD14[rd][BAL.road.first+1],"s");const v=rv67(B,"v");if(v){B.i=2;v.alive=false;const ok=castRv67(B,"v");out.rq=ok?JSON.stringify(B.rq||null):'nocast';v.alive=true}else out.rq='no v';
    quiet=false;return out},rd);
-  chk(`${rd}: life on the road`,R.rd===rd,R);chk(`${rd}: E.r97 = rare ending`,R.e97,R);
+  chk(`${rd}: life on the road`,R.rd===rd,R);chk(`${rd}: road threads open (cast)`,!R.nocast,R);if(R.nocast)continue;chk(`${rd}: E.r97 = rare ending`,R.e97,R);
   if(R.hit){chk(`${rd}: path choice in a road chapter counted (${R.hit.id} «${R.hit.n}»)`,R.iok&&/"p":1/.test(R.q),R);chk(`${rd}: .11 starts from the road tally`,R.q11===R.q,R)}
   else console.log(`note ${rd}: path names only .11 options (j97 counts them on the .11 itself)`);
   chk(`${rd}: rare fired → ✦ tag, title, finale`,R.end==='r97'&&R.tag==='✦ '+R.rare&&R.r97.includes(':')&&R.fin==='✦ '+R.rare,R);
