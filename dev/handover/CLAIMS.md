@@ -232,7 +232,7 @@
 | square-icons: round icon buttons (room left column + every round icon button) → square kit button (OD 15:05Z (1)) | review/square-icons | main s18 | session_01UV1SzgoYoth94RALW92Jg4 | RUNNING | 16/11 15:08Z |
 | anim-pace: buổi transition full-screen in landscape, clearer, slower + whole-game animation pace audit + season/festival transition variants sample (OD 15:05Z (5)(6)) | review/anim-pace | main s18 | session_01UV1SzjsxJomT3ov3kXyta3 | RUNNING | 16/11 15:08Z |
 | lag-play (opus): play-time + co-op lag audit, fix top causes, play-time perf budget test (OD 15:05Z (4), first priority) | review/lag-play | main s18 | session_01UV1SzhF1ExMpqSUL9vigZu | RUNNING | 16/11 15:08Z |
-| ghenAll x1.5 shown≠applied family (emperor-visit-r1 follow-up) | review/ghen-shown | D | session_01DgYSWoyzKbRUjGm9gW7pNW | RUNNING | 16/11 15:05Z |
+| ghenAll x1.5 shown≠applied family (emperor-visit-r1 follow-up) | review/ghen-shown | D | session_01DgYSWoyzKbRUjGm9gW7pNW | DONE (SẴN SÀNG KIỂM 7b97d64c) | 16/11 15:05Z |
 | TITLE SYSTEM phase 1 review (opus) | review/title-sys-r1 | C | session_011xDdVPyukDTYtkKKSrnDY8 | PASS ced2edc6 | 16/11 15:12Z |
 | kit-size (opus, kit keeper; OD 15:00Z s17 kit review): 4-size system for frames / figures / pictures / action buttons, button layouts (square pic left + info), VIỆC DÀI layout, empty space, catalogue WHERE+SIZE; sample sheet first | review/kit-size | main s18 | session_01UV1Szk9smUkxoioTZMD7KJ | RUNNING | 16/11 15:25Z |
 | kit-marks (sonnet; OD 15:00Z): gold Emperor/Thái hậu, text-line rank+name one colour, bare ink ✓/✗, relations two columns no bars, no ± boxes, KẾT QUẢ seal orange, place icon above name, fix empty samples 2.2/3.6, one 'Tinh phẩm' chip; sample sheet first | review/kit-marks | main s18 | session_01UV1SzjfpYasXCkBCSB3ais | RUNNING | 16/11 15:25Z |
@@ -253,3 +253,4 @@
 | kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
 | TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 | RUNNING | 16/11 15:52Z |
 | STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 15:58Z |
+| ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | RUNNING | 16/11 15:57Z |
