@@ -15,7 +15,7 @@ Base main at start: 900ace7fb.
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | PASS fa02fc656 |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | PASS bc0a1ba24 |
-| D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes | sonnet | RUNNING (worker) |
+| D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes @28e5f8dd5 → review/update-notes-r1 | sonnet | REVIEWING (worker SẴN SÀNG KIỂM; jnotes.js CTM_NOTES list — coordinator adds one entry per merge, see PROGRESS) |
 | C20 act-text resume | review/act-text @593e66b3a | sonnet | RUNNING (worker) — also takes Foreman B Q2 (KÈM gain → ĐƯỢC) |
 | C6 mk-colour + D28 reveal | review/mk-colour @5025e811b → review/mk-colour-r1 | sonnet | REVIEWING (worker SẴN SÀNG KIỂM; KIT §60.5 toilReveal; mirror-room plate on CDN) |
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
