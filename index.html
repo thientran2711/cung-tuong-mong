@@ -29642,6 +29642,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
 (function(){if(typeof MutationObserver!=="function"||typeof kitStatDelta!=="function")return;
  const SEL=".kst-tile,.kst-chip,.krt-v",MEM=new Map(),TTL=20000;
  const num=t=>{const m=/^\s*([−-]?)\s*(\d+(?:[.,]\d+)?)/.exec(String(t||"").replace(/ /g," "));return m?(m[1]?-1:1)*parseFloat(m[2].replace(",",".")):null};
+ const still=()=>{try{return typeof ksfStill==="function"&&ksfStill()}catch(e){return false}};
  const txt=e=>e?e.textContent.replace(/\s+/g," ").trim():"";
  function ckey(c){const h=c.closest(".pc,.kpsc,.kpstats,#modal,.dlg");if(!h)return null;
   const who=txt(h.querySelector(".pcname"))||txt(h.querySelector(".kpidn"))||(h.id||h.className);
@@ -29650,10 +29651,13 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
   return lab?who+"|"+lab:null}
  function scan(root){const L=root.matches&&root.matches(SEL)?[root]:[];if(root.querySelectorAll)root.querySelectorAll(SEL).forEach(x=>L.push(x));
   const now=Date.now();for(const c of L){if((c.id||"").startsWith("hud-")||c.closest("header.hud"))continue;const k=ckey(c);if(!k)continue;
-   const v=num(c.classList.contains("krt-v")?c.textContent:txt(c.querySelector(".kstv")));if(v==null)continue;const o=MEM.get(k);MEM.set(k,{v,t:now});
-   if(o&&now-o.t<TTL&&o.v!==v){const bad=/oán|ghen|hận|thù|ghét/i.test(k.split("|").pop());/* a rise in grudge / jealousy is a loss for her: colour by meaning */try{bad?kitStatDelta(c,v,o.v):kitStatDelta(c,o.v,v)}catch(e){}}}
+   const v=num(c.classList.contains("krt-v")?c.textContent:txt(c.querySelector(".kstv")));if(v==null)continue;const o=MEM.get(k),n={v,t:now};MEM.set(k,n);
+   if(o&&now-o.t<TTL&&o.v!==v){const bad=/oán|ghen|hận|thù|ghét/i.test(k.split("|").pop());/* a rise in grudge / jealousy is a loss for her: colour by meaning */const dv=bad?o.v-v:v-o.v;n.g=dv;n.gt=now;try{if(!still())kitStatGlow(c,dv)}catch(e){}}
+   /* the card is often drawn 2-3 times in a row (render + shell): the glow of the first draw must survive into the next one while its pulse is still running */
+   else if(o&&o.g&&o.v===v&&now-o.gt<KSF.PULSE){n.g=o.g;n.gt=o.gt;try{if(!still())kitStatGlow(c,o.g)}catch(e){}}}
   if(MEM.size>400)for(const[k,o]of MEM)if(now-o.t>TTL)MEM.delete(k)}
  let pend=new Set(),raf=0;new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1)pend.add(n);
+  if(document.hidden&&pend.size>300)pend.clear();/* hidden tab: rAF does not run, do not hold detached nodes */
   if(!raf&&pend.size)raf=requestAnimationFrame(()=>{raf=0;const P=[...pend];pend=new Set();for(const n of P)if(n.isConnected)try{scan(n)}catch(e){console.error(e)}})}).observe(document.body,{childList:true,subtree:true});
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
@@ -29686,7 +29690,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b9091acd2c6e";window.CTM_BUILD=BUILD;
+const BUILD="4179d44d814b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
