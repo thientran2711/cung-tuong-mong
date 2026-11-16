@@ -35,7 +35,7 @@ Base main at start: 900ace7fb.
 | D16 Tứ đức sub-styles + CDNH works | review/tuduc-sub-r1 | opus | PASS adeb7de66 (reviewer capped Đức from handmade works at 1/month shared with Chép kinh — BAL.wkFinCap) |
 | D17 luxury / xa xỉ system + dress-contest themes + luxury RANGE per occasion | review/luxury | opus | RUNNING (worker; D19 waits) |
 | C7 balance-pass | review/balance-pass-r1 | opus | PASS 89ea80f78 (jbac.js reprice; reviewer fixed negative fair target that over-priced 25/48 'dearer' rows) |
-| D53b material-choice dialog pictures (Tứ đức/arts material pickers show the generic Tài nghệ picture) + any new option-card placeholders | review/opt-pics3 | sonnet | RUNNING (art worker) |
+| D53b material-dialog pictures | review/opt-pics3 @b7053b9bb (jwkpics.js; 24 pictures + 1 banner + 3 acts) → review/opt-pics3-r1 | sonnet | REVIEWING (separate session) |
 | C8 fig-bg step 2 | review/fig-bg @acc254846 | sonnet | BUILT, BLOCKED on KIT KEEPER (K1): 14 painted scrolls on CDN, jfigbg.js, KIT §61; tests 6 viewports (390x844 rival dialog img height 0 not investigated; 2-person dialog shows one scroll) |
 | C9 huadian-size + motif fix | review/huadian-size-r2 @4011dc151 (805 more files on CDN) → review/huadian-size-r3 | sonnet | REVIEWING (separate session) |
 | D1 result-sfx | review/result-sfx-r1 | sonnet | PASS 18926abcc |
