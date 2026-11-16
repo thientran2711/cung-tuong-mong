@@ -154,7 +154,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ một phần",go:()=>addArt("y",1)});return A}
  if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
   if(Object.keys(LIKES).some(k=>!K[k])||(typeof disUnk==="function"&&disUnk("emp")))A.push({n:"Hỏi sở thích Hoàng thượng",c:{bac:-15},o:od(80),x:"biết thêm một điều ngài thích hay không ưa",go:()=>discover()});
-  A.push({n:"Xem sổ thị tẩm",o:100,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+liveRivals(true).map(x=>`${x.name} ${x.nights} lần`).join(", ")+`; ngươi ${S.nights} lần.`)});return A}
+  A.push({n:"Xem sổ thị tẩm",o:100,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights} lần`)+`; ngươi ${S.nights} lần.`)});return A}
  if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${IT[k].n}`,c:{bac:-IT[k].pr},o:100,x:IT[k].d,go:()=>S.inv.push({k})}));
  if(p.kind==="fallen")return[
    {n:"Đưa cơm áo",c:{bac:-20},o:100,w:{duc:4}},

@@ -7,7 +7,7 @@ function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkO
 /* a seat opens: decree and candidate list */
 function contestOpen(r){if(ct())return"";const C=consorts().filter(p=>candOK(p,r));if(!C.length)return"";if(C.length===1&&C[0]!==S){return promoteP(C[0])||""}
  const len=r===7?3:1;S.contest={r,c:C.map(key),t0:wk(),len,round:0,sc:{},bk:{},pr:{},sab:{},dq:[],hint:0};
- const t=`Khuyết ghế ${r>=7?"Hoàng hậu":RANKS[r].n}; trong ${r===7?"một tháng":"hai tuần"} sẽ chọn người.`;log(`<b>${t}</b> Ứng viên: ${C.map(p=>p===S?"ngươi":p.name).join(", ")}.`);
+ const t=`Khuyết ghế ${r>=7?"Hoàng hậu":RANKS[r].n}; trong ${r===7?"một tháng":"hai tuần"} sẽ chọn người.`;log(`<b>${t}</b> Ứng viên: ${kitNameList(C,p=>p===S?"ngươi":p.name)}.`);
  if(!quiet&&C.includes(S))Q.push({t:"Tranh ghế",who:pEmp(),h:`<p>${t}</p><p>Ba vòng: <b>Tài nghệ</b> trước Hoàng thượng, <b>Đức hạnh</b> trước Thái hậu, <b>Thế lực</b> (ai đứng sau ngươi).${has("trongtai")?" Ngài trọng tài nghệ (vòng 1 ×1,5).":""}${has("hieuthao")?" Ngài hiếu thảo (vòng 2 ×1,5).":""}${has("danghi")?" Ngài đa nghi (vòng 3 ×0,6).":""}</p>${kitRows(C.map(p=>[`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}`,p===S?RANKS[S.rank].n:RANKS[p.rank].n,"t"]))}<p class="past">Giữa các vòng: luyện tập, vận động, hoặc ra tay với đối thủ (bị lộ là bị loại và bị phạt).</p>`});return ""}
 /* scoring, one formula for all */
 function bestArtOf(p){const A=p.arts||{};return ["cam","ky","thi","hoa","vu"].sort((a,b)=>(A[b]||0)-(A[a]||0))[0]}
