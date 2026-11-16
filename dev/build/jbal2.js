@@ -399,7 +399,8 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
    kh      khắc a deed takes (the player's talk / deck act: 1)
    wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
            caught = thiện cảm lost toward the listener when a listener is caught; w = NPC reaction weights {hear, join, ignore}
-   perf    p95 budget in ms per buổi tick (Fold 755x1000), n = how many ticks the counter keeps */
+   perf    p95 budget in ms per slice of the buổi tick (one frame's work, Fold 755x1000), n = how many slices the counter keeps,
+           slice = ms of deciding in one frame before the other consorts wait for the next frame / resync of the same buổi */
 Object.assign(BAL,{ag:{on:1,
  own:["thTH","thHH","pray","ksp","fakeIll","fakePreg","announce","flaunt","check","help","apol","visit","mediate","follow","provoke","humil","warn","test","drop","gossip","effort"],
  routine:5,restW:1.5,needW:1,unit:10,
@@ -414,4 +415,4 @@ Object.assign(BAL,{ag:{on:1,
  val:{tablet:2,kid:10,check:4,drop:3},
  costW:1,kh:1,
  wit:{hear:40,mat:6,caught:5,w:{hear:1,join:1,ignore:3}},
- perf:{p95:8,n:200}}});
+ perf:{p95:8,n:200,slice:4}}});

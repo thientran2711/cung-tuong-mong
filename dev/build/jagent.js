@@ -22,7 +22,7 @@
    Perf: window.__agMs (last tick), __agN (agents), agPerf() → p95 over the last BAL.ag.perf.n ticks; budget BAL.ag.perf.p95 ms.
    Off switch for measuring: BAL.ag.on=0 or window.__agOff=1 (old drips). Loaded last (after j95/j95b/j95c, jtwoway, jmind, j75, jcoopworld).
    ===================================================================================================================== */
-const AG={inTick:0,errs:[],ms:[],tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
+const AG={inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
 function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
 function agOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff&&!agGuest())}catch(e){return false}}
@@ -88,6 +88,9 @@ function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some
 function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<4;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
   if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
  return L.length?L[Math.floor(Math.random()*L.length)]:null}
+/* the people a SOC deed could aim at: kept per tuần and per what she did since (perf §4 "cache SOC target lists"); the living are re-checked */
+function agSocT(v,s,so,T){const C=AG.sc=AG.sc||{};const w=wk(),na=(AG.na||{})[v.id]||0,k=v.id+":"+s,c=C[k];
+ if(c&&c.w===w&&c.n===na)return c.L.filter(x=>x.alive!==false&&!(x.out&&x!==S));const L=T().filter(x=>{try{return so.ok(v,x)}catch(e){return false}});C[k]={w,n:na,L};return L}
 function agOpts(v,N,need){const O=[];
  for(const k in AGSELF){const D=TW[k],A=AGSELF[k];if(!D)continue;if(need&&A.g(v).g[need]==null)continue;const t=A.t(v);if(D.req&&!D.req(v,t))continue;if(!twCanPay(v,k))continue;if(k==="thHH"&&!t)continue;
   const o=D.o?D.o(v,t):100;const u=agU(v,N,o,A.g(v),twCost(k),A.tag);if(u<=0)continue;O.push({k,t,u,tag:A.tag,at:A.at,act:A.act})}
@@ -95,8 +98,7 @@ function agOpts(v,N,need){const O=[];
  for(const s in AGSOC){const so=SOC[s];if(!so)continue;const [k,tag,nd,gf]=AGSOC[s];if(need&&gf(BAL.tw.g)[need]==null)continue;if(!TW[k]||!N[nd]||!twCanPay(v,k))continue;const host=AGHOST.has(k);
   /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
   if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
-  T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S));
-  const C=T.filter(x=>{try{return so.ok(v,x)}catch(e){return false}});if(!C.length)continue;
+  const C=agSocT(v,s,so,()=>T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)));if(!C.length)continue;
   const t=mindPickBy(C,x=>host?1+hostility(v,x):1+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
   const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
   const N2=Object.assign({},N);if(host)N2.spite=cl(hostility(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
@@ -108,29 +110,44 @@ function agOpts(v,N,need){const O=[];
  return O}
 
 /* ---------------- THE TICK (one per buổi, host only) ---------------- */
-function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===key)return;const t0=performance.now();z.key=key;AG.stat.tick++;AG.mwc={};
- /* acts of a buổi already over land first */
- const tl=performance.now();for(const p of z.pend.slice())if(p.key!==key)agLand(p);AG.tm.land+=performance.now()-tl;
- const R=agRec();let n=0,acts=0;AG.now=0;
- try{n=R?Object.keys(R.P).length:liveRivals(true).length+2;
-  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(e){agErr("needs",e);continue}AG.tm.needs+=performance.now()-tn0;
-   /* first WHAT she wants this buổi (one of her needs, or keeping her schedule), then HOW (the deeds that serve it) — a person, not a solver */
-   const rt=BAL.ag.routine*(1+BAL.ag.restW*N.rest);const NL=[[null,rt]];for(const n of AGNEED)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);
-   const need=agPw(NL);if(!need)continue;/* her slip (jmind) is in the second step, once */
-   const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)continue;
-   const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)continue;c.need=need;
-   const sl=agSlot(v,c.at,c.t);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);acts++}}
- catch(e){agErr("tick",e)}
- if(!R){for(const p of z.pend.slice())if(p.key===key)agLand(p)}/* no ledger (co-op host, record off): the act lands at once */
- else if(AG.now){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}/* the views of the khắc now change only when an act starts now */
- const ms=performance.now()-t0;if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:Object.assign({},AG.tm),tick:AG.stat.tick};window.__agMs=ms;window.__agN=n;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts}
-function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95}}
+/* perf (npc-agent §4, r1 fault 1): the consorts of a buổi decide in SLICES of at most BAL.ag.perf.slice ms each; the rest wait in AG.q and
+   decide in the next frames (setTimeout 0) or on the next resync of the record (a khắc spent), still inside the same buổi. One decision per
+   consort per buổi, as before; only WHEN in the buổi's first frames she decides changes. AG.ms = ms per slice (what blocks a frame). */
+/* her ONE deed of the buổi (two-way §1b, khắc rule): a planned act, or a reaction to the player's deed (agSeeHer hear / join) */
+function agUsed(v){const z=agZ(),key=agKey();return (z.did&&z.did[v.id]===key)||z.pend.some(p=>p.vid===v.id&&p.key===key)}
+function agUse(v){const z=agZ();z.did=z.did||{};z.did[v.id]=agKey();if(AG.q){const i=AG.q.L.indexOf(v.id);if(i>=0)AG.q.L.splice(i,1)}}
+function agDecide(v){if(agUsed(v))return 0;let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(e){agErr("needs",e);return 0}AG.tm.needs+=performance.now()-tn0;
+ /* first WHAT she wants this buổi (one of her needs, or keeping her schedule), then HOW (the deeds that serve it) — a person, not a solver */
+ const rt=BAL.ag.routine*(1+BAL.ag.restW*N.rest);const NL=[[null,rt]];for(const n of AGNEED)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);
+ const need=agPw(NL);if(!need)return 0;/* her slip (jmind) is in the second step, once */
+ const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)return 0;
+ const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)return 0;c.need=need;
+ const sl=agSlot(v,c.at,c.t);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
+function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();if(Q.key!==key){if(Q.L.length)AG.stat.qdrop+=Q.L.length;AG.q=null;return}
+ AG.inSlice=1;const t0=performance.now();const tm0=Object.assign({},AG.tm);const z=agZ();let acts=0;AG.now=0;AG.mwc={};
+ try{if(first){const tl=performance.now();for(const p of z.pend.slice())if(p.key!==key)agLand(p);AG.tm.land+=performance.now()-tl}/* acts of a buổi already over land first */
+  const R=agRec(),B=BAL.ag.perf.slice;
+  while(Q.L.length){if(performance.now()-t0>=B&&!Q.all)break;const v=RV(Q.L.shift());if(!v||!v.alive||v.out)continue;try{acts+=agDecide(v)}catch(e){agErr("tick",e)}}
+  if(!R){for(const p of z.pend.slice())if(p.key===key)agLand(p)}/* no ledger (co-op host, record off): the act lands at once */
+  else if(AG.now){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}/* the views of the khắc now change only when an act starts now */
+ }catch(e){agErr("tick",e)}finally{AG.inSlice=0}
+ const ms=performance.now()-t0;const d={};for(const k in AG.tm)d[k]=+(AG.tm[k]-(tm0[k]||0)).toFixed(2);
+ if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:d,tick:AG.stat.tick,left:Q.L.length};window.__agMs=ms;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts;AG.stat.slice++;
+ Q.ms+=ms;if(!Q.L.length){AG.bt.push(Q.ms);if(AG.bt.length>BAL.ag.perf.n)AG.bt.shift();AG.q=null}
+ else if(!Q.tm){Q.tm=1;setTimeout(()=>{if(AG.q===Q){Q.tm=0;agSlice()}},0)}}
+function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===key)return;z.key=key;AG.stat.tick++;
+ if(AG.q&&AG.q.L.length)AG.stat.qdrop+=AG.q.L.length;/* a buổi gone by before her turn came (only in a run with no frames between buổi): she kept her schedule */
+ const R=agRec();window.__agN=R?Object.keys(R.P).length:liveRivals(true).length+2;
+ AG.q={key,L:liveRivals(true).filter(v=>v.alive&&!v.out).map(v=>v.id),ms:0,tm:0,all:!!window.__agAll};agSlice(1)}
+/* finish the buổi's deciders now (tests / bot that need every decision before they read the record) */
+function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
+function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95,buoi:(()=>{const M=AG.bt.slice().sort((a,b)=>a-b);return M.length?{n:M.length,p50:+M[Math.floor(.5*M.length)].toFixed(2),p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2)}:null})()}}
 window.agPerf=agPerf;
 function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?{sung:1}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
  for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
  if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w} · ${o}`:w}
 function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(v,c,N);const tid=c.t?ledgerId(c.t):null;
- const p={key:agKey(),id,vid:v.id,k:c.k,kd:c.kd||"",t:tid,kh,pl:k,act:c.act,why};z.pend.push(p);
+ const p={key:agKey(),id,vid:v.id,k:c.k,kd:c.kd||"",t:tid,kh,pl:k,act:c.act,why};z.pend.push(p);z.did=z.did||{};z.did[v.id]=p.key;
  if(R&&R.P[id]){R.P[id][kh]=[k,"ag_"+c.k,tid,why];if(kh===agKh())AG.now=1}
  AG.stat.by[c.k]=(AG.stat.by[c.k]||0)+1;
  const L={w:wk(),b:S.buoi||0,kh,id,k:c.k,t:tid,pl:k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
@@ -150,7 +167,8 @@ function agLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.s
 
 /* ---------------- AG1b: SHE WITNESSES THE REAL ACT ---------------- */
 function agHereKh(){try{const R=agRec();if(!R)return null;const kh=agKh();return{R,kh,k:R.P.me?R.P.me[kh][0]:j95mePlace()}}catch(e){return null}}
-function agWatch(){if(!agOn()||S.out||(typeof isSrv==="function"&&isSrv()))return;const H=agHereKh();if(!H)return;const z=agZ();let n=0;
+/* every player witnesses, a consort or a servant-start (OD:L1386 one world): a servant stands in the same places; her reactions = the ones that fit her (agReact: no joining a consort's deed) */
+function agWatch(){if(!agOn()||S.out)return;const H=agHereKh();if(!H)return;const z=agZ();let n=0;
  for(const p of z.pend.slice()){if(p.key!==H.R.key)continue;{const e=H.R.P[p.id];p.gone=!e||!e[p.kh]||e[p.kh][1]!=="ag_"+p.k?1:0}/* a card / told deed moved her since: the act did not happen */
   if(p.kh<H.kh){agLand(p);continue}if(p.gone)continue;
   if(p.kh!==H.kh||p.pl!==H.k||p.seen)continue;const v=RV(p.vid);if(!v||!v.alive)continue;if(H.k==="home"&&sameHouse(S,v)&&p.t!=="me"){continue}
@@ -160,31 +178,38 @@ function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
 function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
  if(t===S){const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
  const tn=t?` ${t.name}`:"";Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)})}
-/* the deeds she may join where she sees them done (the same deed for her: her cost, her odds, her gains — BAL.tw, one source) */
-const AGJOIN={thTH:()=>{const g=BAL.tw.g.thTH;return `thành: Thái hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Thái hậu ${g[3]}`},
- thHH:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`},
- pray:()=>"thành: lòng thành cầu tự, dễ có thai hơn",ksp:()=>"thành: thẻ bài của ngươi dễ được lật hơn"};
+/* the deeds she may join where she sees them done (the same deed for her: her cost, her odds, her gains — BAL.tw, one source).
+   The option is named by the player's own act of that deed (its kit act picture, KIT §6.2 kitOptPic "act"), so every reaction row has a picture. */
+const AGJOIN={thTH:{n:"Thỉnh an Thái hậu",x:()=>{const g=BAL.tw.g.thTH;return `thành: Thái hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Thái hậu ${g[3]}`}},
+ thHH:{n:"Thỉnh an Hoàng hậu",x:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`}},
+ pray:{n:"Cầu tự",x:()=>"thành: lòng thành cầu tự, dễ có thai hơn"},ksp:{n:"Đút lót Kính sự phòng",x:()=>"thành: thẻ bài của ngươi dễ được lật hơn"}};
 function agHearO(){return od(BAL.ag.wit.hear+(S.mat||0)*BAL.ag.wit.mat)}
-function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();
- O.push({n:"Nghe lén",fx:{},x:`${word(o)} · tốn: 1 khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?" · chứng cứ về nàng +1":""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
-  go:()=>{if(typeof can==="function"&&can(1))spend(1);if(roll(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,1);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?" Chứng cứ về nàng +1.":""}`)}
+/* a reaction that takes her time costs BAL.ag.kh khắc, like the player's talk options (j15 pbtn): no khắc left → the kit locked option with its reason */
+function agKhLock(){const k=BAL.ag.kh;return typeof can==="function"&&!can(k)?(typeof whyTime==="function"&&whyTime(k)||"hết khắc buổi này"):""}
+function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return true}
+function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();const kh=BAL.ag.kh;const lock=agKhLock();
+ O.push({n:"Nghe lén",r:"hear",fx:{},lock:!!lock,why:lock,x:`${word(o)} · tốn: ${kh} khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?" · chứng cứ về nàng +1":""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
+  go:()=>{if(!agSpendKh()){agLand(p);return}if(roll(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,1);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?" Chứng cứ về nàng +1.":""}`)}
    else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
- const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
+ const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
-  O.push({n:"Tham gia",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}1 khắc · ${J()}`,go:()=>{if(typeof can==="function"&&can(1))spend(1);const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
- O.push({n:"Bỏ đi",fx:{},x:"Nắm chắc · thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
- O.push({n:"Mặc kệ",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
+  O.push({n:J.n,r:"join",fx:{},lock:!!lock,why:lock,x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
+ O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:"Nắm chắc · thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
+ O.push({n:"Mặc kệ",r:"ignore",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
  return O}
 function agTn(t){return t?` ${t===S?"ngươi":t.name}`:""}
 /* two-way: SHE did a shared deed; the consorts the ledger puts at her place this khắc saw it and react by the same choice */
 function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;const z=agZ();const B=BAL.ag.wit;
  for(const v of liveRivals(true)){if(!v.alive||v.out||v===t)continue;const e=H.R.P["v"+v.id];if(!e||!e[H.kh]||e[H.kh][0]!==H.k)continue;if(H.k==="home"&&sameHouse(S,v))continue;
-  let N;try{N=agNeeds(v)}catch(x){continue}const ho=hostility(v,S);const D=TW[k];
+  /* her one deed of the buổi is already spent (an act planned / done, or a reaction before): she only sees it go by */
+  if(agUsed(v))continue;
+  let N;try{N=agNeedsC(v)}catch(x){continue}const ho=hostility(v,S);const D=TW[k];
   const canJ=!joined&&D&&agOwn(k)&&!AGHOST.has(k)&&(!D.req||D.req(v,t))&&twCanPay(v,k);let ju=0;
   if(canJ){const A=AGSELF[k];const gl=A?A.g(v):(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===k);return s?{g:AGSOC[s][3](BAL.tw.g),l:{}}:{g:{},l:{}}})();ju=agU(v,N,D.o?D.o(v,t):100,gl,twCost(k),A?A.tag:"social")*BAL.ag.unit}
   const hu=motiveOK(v,S,"spy").ok?B.w.hear*(ho/50)*agMW(v,"spy"):0;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
+  if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */
   if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(roll(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else{affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
   else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}
   if(c!=="ignore"){const L={w:wk(),b:S.buoi||0,kh:H.kh,id:"v"+v.id,k:"see:"+c,t:"me",pl:H.k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
@@ -199,8 +224,8 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* the tick: right after the buổi is planned (placeWhere builds the record, j95) */
  const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{agTick();agReapply()}catch(e){agErr("pw",e)}return r};
  /* every resync of the record (a khắc spent, a walk): land the khắc already passed, show what she sees where she stands */
- const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{if(!AG.inSync){AG.inSync=1;try{agWatch()}finally{AG.inSync=0}}}catch(e){agErr("sync",e)}return r};
+ const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{if(!AG.inSync){AG.inSync=1;try{if(AG.q&&!AG.inSlice)agSlice();agWatch()}finally{AG.inSync=0}}}catch(e){agErr("sync",e)}return r};
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agTick,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
