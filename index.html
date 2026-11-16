@@ -35669,10 +35669,10 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const marks=(s.marks||[]).map(m=>rectOf(m)).filter(Boolean).map(m=>clip(m,3));
  const key=[vw,vh,r?[r.left,r.top,r.width,r.height].map(Math.round).join(","):"-",marks.map(m=>[m.left,m.top,m.width].map(Math.round).join(",")).join(";"),card.offsetHeight].join("|");
  if(!force&&key===LAST)return;LAST=key;
- /* the card keeps the ONE kit frame size (OD:L963); when it fits on no side of the target, the lit hole shrinks to the part of the target that still leaves the card a free side (the target stays tappable there: a card/row is tapped anywhere on it). A target that fills the screen and is not a tap step stays whole */
- if(r&&!(r.height>vh*.6&&!s.interact)){const cw0=card.offsetWidth,ch0=card.offsetHeight,g0=12,M0=8;
+ /* the card keeps the ONE kit frame size (OD:L963); when it fits on no side of the target, the lit hole shrinks to the part of the target that still leaves the card a free side (the target stays tappable there: a card/row is tapped anywhere on it). Only a tap step does this: a look-at step keeps its whole hole (the card then lies where it covers least) */
+ if(r&&s.interact){const cw0=card.offsetWidth,ch0=card.offsetHeight,g0=12,M0=8;
   const fits=r.bottom+g0+ch0<=vh-M0||r.top-g0-ch0>=M0||r.right+g0+cw0<=vw-M0||r.left-g0-cw0>=M0;
-  if(!fits){const O=[];const mk=(l,t,rr,b)=>{if(rr-l>=88&&b-t>=88)O.push({left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t})};
+  if(!fits){const O=[];const mk=(l,t,rr,b)=>{if(rr-l>=56&&b-t>=56)O.push({left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t})};
    mk(r.left,r.top,r.right,Math.min(r.bottom,vh-M0-g0-ch0));/* card below */
    mk(r.left,Math.max(r.top,M0+ch0+g0),r.right,r.bottom);/* card above */
    mk(Math.max(r.left,M0+cw0+g0),r.top,r.right,r.bottom);/* card at the left */
@@ -41319,7 +41319,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="114e20403801";window.CTM_BUILD=BUILD;
+const BUILD="7e241497b8f5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
