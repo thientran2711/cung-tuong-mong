@@ -47,6 +47,6 @@
 | D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | RUNNING | 06:01Z 16/11 |
 | cardflip-newlife bug (overlay stays after new life + flip scene during Luân hồi identity card) + act-dedupe UI (usable first, popover, hàng hiếm label) | review/flip-newlife | main s10 | session_01UV1SzhXJHY3uWDTJeQ1dYH | RUNNING | 16/11 06:36Z |
 | kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | session_01UV1Szj1bf6YFPCryaDjdEi | RUNNING | 16/11 06:50Z |
-| ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | RUNNING | 16/11 06:55Z |
-| ART D56 icons + Nội vụ phủ scene + 12 missing place glyphs | review/place-glyphs | main s10 | session_01UV1SzmEsuu42GCFecC9HGf | RUNNING | 16/11 06:55Z |
+| ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | PAUSED (owner asleep) | 16/11 06:55Z |
+| ART D56 icons + Nội vụ phủ scene + 12 missing place glyphs | review/place-glyphs | main s10 | session_01UV1SzmEsuu42GCFecC9HGf | PAUSED (owner asleep) | 16/11 06:55Z |
 | D25 veil/scar box follows zoom | review/veil-zoom | C | session_011xDdVQH85mp5QLY8bMqh7D | RUNNING | 06:08Z 16/11 |

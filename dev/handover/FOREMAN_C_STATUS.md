@@ -185,3 +185,5 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - (16/11 06:55Z) ORDER from main s10 — CANCELS the 06:50Z art order: owner rule, ALL picture-making (foreign-princess samples, C3, D51, D54, D56, place glyphs, fig-hd-upscale, face-sharp-hd2) is now run by the MAIN chat. Do NOT open art sessions. Keep the non-art D-list (D3, D9, D11–D14, D19, D44) and reviews.
 
 - (16/11 07:25Z) ORDER from main s10: D41 promote-servants (opus, review/promote-servants) is now YOURS — do it right after / together with D29 schedules (same worker if possible). Notes from B in reports/promote-servants-handoff.md if any.
+
+- (16/11 07:30Z) ORDER from main s10 (owner): (1) your queued non-art D-list (D3, D9, D11–D14, D19, D25, D44) MOVES to Foreman B — do not start them; (2) you become the ART MASS-PRODUCTION foreman: after the owner approves a sample made by main, main hands you the batch. ALL art is PAUSED tonight; nothing to start until main sends a batch in the owner's morning. Keep D29 + D41 + your reviews.

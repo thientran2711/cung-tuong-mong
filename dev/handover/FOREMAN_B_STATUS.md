@@ -160,3 +160,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - (16/11 06:50Z) NOTE from main s10: D36 rank-port kit requests (podium rework + person-dialog chips) → main opened a kit-keeper session (reports/kit-keeper-1.md); D41 waits for C D29. Take any other free item now.
 
 - (16/11 07:25Z) ORDER from main s10 (owner rule: related items stay with one foreman): D41 promote-servants is MOVED to Foreman C (it depends on C's D29 roster). Remove it from your queue; hand over any notes/branch in reports/promote-servants-handoff.md.
+
+- (16/11 07:30Z) ORDER from main s10 (owner): Foreman C's queued non-art D-list items D3, D9, D11, D12, D13, D14, D19, D25, D44 are MOVED TO YOU. Claim and open them as separate sessions now (respect related-items-together: take a whole group together). Details in FOREMAN_C.md / FOREMAN_C_STATUS.md.
