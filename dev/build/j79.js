@@ -309,6 +309,8 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  if(faces){faces.classList.add("kpfaces");main.appendChild(faces)}
  for(const b of blocks){if(typeof b==="string")main.insertAdjacentHTML("beforeend",b);else main.appendChild(b)}
  body.appendChild(main);mb.innerHTML="";mb.appendChild(body);
+ /* KIT §8.1 SHORT NOTICE (kit keeper): only facts (≤ 3), ≤ 220 characters, no sections / rows / opts / subject → .kpshort, centred in the frame (CSS below) */
+ try{if(!showSubj&&!opts&&!faces&&!main.querySelector(".kpsec,.kpkb,.kpfaces,.kmlist,table")&&main.querySelectorAll(".kfacts>*").length<=3&&main.textContent.trim().length<=220)body.classList.add("kpshort")}catch(e){}
  if(opts){opts.classList.add("kpopts");mb.appendChild(opts)}
  let ph=dlg.querySelector(":scope > .kph");if(ph)ph.remove();mt.hidden=true;dlg.insertAdjacentHTML("afterbegin",head);
  const mr=$("mr");const cb=mr&&mr.querySelector("#mclose");if(cb){cb.classList.add("kbtn");if(/^\s*(Đã rõ|OK|Xong)\s*$/.test(cb.textContent))cb.textContent="Đã hiểu"}}
@@ -330,6 +332,11 @@ html body #modal:not(.pcm) .dlg.kpanel{box-sizing:border-box;width:var(--kpw)!im
 html body #modal:not(.pcm) .dlg.kpanel>.kph{position:relative;flex:0 0 auto}
 html body #modal:not(.pcm) .dlg.kpanel>#mb{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 html body #modal:not(.pcm) .dlg.kpanel>#mr{flex:0 0 auto}
+/* KIT §8.1 short notice: centred in the one-size frame (margin:auto 0 centres when it fits, top-aligned + scroll when it does not — nothing is clipped) */
+html body #modal:not(.pcm) .dlg.kpanel>#mb{display:flex;flex-direction:column}
+html body #modal:not(.pcm) .dlg.kpanel>#mb>*{flex:0 0 auto}
+html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort{margin:auto 0;text-align:center;align-items:center}
+html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line);box-shadow:inset 0 -2px 0 #fffaf0,0 1px 0 #e6d3ac}
 .kpseal{flex:0 0 auto;font-family:var(--display);font-size:.7rem;letter-spacing:.06em;color:#fff8e6;background:var(--k-seal);border:1px solid #6e1d12;border-radius:5px;padding:4px 6px;line-height:1;box-shadow:inset 0 0 0 1px #ffffff30;white-space:nowrap}
 .kpseal.kp-news,.kpseal.kp-intel{background:#7a5a1e;border-color:#4d3810}.kpseal.kp-rule,.kpseal.kp-info{background:#3f5f6e;border-color:#253c47}

@@ -365,6 +365,7 @@ at a given viewport; only the seal word and the content differ. Nothing sizes th
   Exempt: the person card (`.modal.pcm`, `pcard` §3), the picture zoom lightbox, mini-game frame `#ov .mg` (§13), the week flip-book (§27).
 - Scan: `node dev/test/panel-size.js <url> <out.json> [WxH@dpr,...]` opens 51 panel cases (every kind + every PEND dialog) and reports width / height per viewport; FAIL when they differ.
 
+- **Short notice (kit keeper decision):** a panel body with only facts (≤ 3), ≤ 220 characters in all, no `sections` / `rows` / `opts` / `subject` gets `.kpb.kpshort` from `kpBuild` and is centred in the frame (`#mb` flex column, `margin:auto 0`, text-align centre); the frame size is unchanged; long panels, person panels and event dialogs are untouched.
 ## 9. FACTS, ROWS, CHIPS, PEOPLE (j79)
 - `kitFacts(facts,{group})`: `facts` = array of strings (split into sentences) or objects `{who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"}`.
   Row = small face (or a gold dot for court/world facts) + the fact, the first mention of each person drawn as **rank title + name in rank colour**
