@@ -8,7 +8,8 @@ Base main at start: 900ace7fb.
 | A6 thaiy review | review/thaiy-r1 | sonnet | PASS f7c61f829 |
 | A7 cycle review | review/cycle @578384ce9 merged onto review/thaiy-r1 → review/cycle-r1 (jcycle last) | opus | RUNNING (reviewer) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | PASS a151b4939 |
-| A9 promo-rules review | review/promo-rules @53b0084d0 → review/promo-rules-r1 (glow/crack → §68) | opus | RUNNING (reviewer) |
+| A9 promo-rules review | review/promo-rules-r1 | opus | PASS 0d425b5a8 — CONDITIONAL on kit keeper sign-off (K4) |
+| D46 placeholder pictures (acts/events on placeholder, e68 flowerBloom, LUẬT Bổng lộc, Đoan ngọ banner check) | review/placeholder-pics2 | sonnet | RUNNING (art worker) |
 | A11 cardflip review | review/cardflip @1daf0d9d4 → review/cardflip-r1 | sonnet | RUNNING (reviewer) |
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | PASS fa02fc656 |
@@ -30,6 +31,7 @@ PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends
 PASS review/kit-popup-sample-r1 fa02fc6565575e284ad7dc1e0c8553cdfcdf400d (C18; descends from main 583858942; 5 pop-up samples on real kitModal, KIT §8; jkitpage.js conflict kept both samples)
 PASS review/thaiy-r1 f7c61f829ce0a2cc3653143685e4280977c819e2 (A6; descends from main 583858942; thaiy.js 49/49 at 5 viewports, coop-e2e 59/59; jthaiy after jty in assemble). Note: at top ranks the bạc road (12.5–15% of pay) is cheaper in feel than the 3-khắc/Sức-5 road → handed to C7 balance-pass bạc-equivalence scan, not a blocker.
 PASS review/cal-plus-r1 a151b4939fe4713fe10c80f09a3333dd4be5f25b (A8; descends from main 6298d2f55; month-cal.js 5 viewports + seal-events.js pass; note: month-cal 844x390 'desk overlaps' flake also on plain main 1/5 runs; seal once covered 280px2 at 844x390 in one run, 41 later dialogs clean)
+PASS review/promo-rules-r1 0d425b5a8665d3891981e4de246c590c1bc2feb3 (A9; descends from main 2afdafc39; CONDITIONAL: kit keeper signs off K4 first; promo-rules 29/29 at 5 viewports, effects now real §68 painted sprites — the branch's calls had wrong signatures so nothing painted ever played; promo-exam 17/18 old-save step fails on main too)
 NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 first (or just cycle-r1 when it passes, it contains both).
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
@@ -43,5 +45,9 @@ NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 firs
 ## QUESTIONS
 - KIT REQUEST K1 (C8 fig-bg step 2, silk hanging scroll A, KIT §61): this IS a kit part (status background layer behind every figure). Under ONE KIT KEEPER, Foreman C stopped building it; worker's spec + art so far will be in review/fig-bg dev/PROGRESS. Built before the rule (no kit change after it): review/fig-bg @acc254846 — touched jfigbg.js (new), jk4.js kitStageFig/kitDpFit hooks, j87.js, jsl.js, KIT.md §61, img/kit/figbg-*.webp (14, on CDN). Session 8: kit keeper please review/own §61 (open: one scroll per person in 2-person dialogs?), then Foreman C gets an independent reviewer on it.
 - KIT REQUEST K2 (C6 mk-colour + D28): the makeup reveal adds NEW kit section §60.5 toilReveal (mirror-frame zoom + close card built from kitFaceZoom/kitRows + painted mirror-room plate). Built before the rule; reviewer is checking consistency. Needs kit-keeper approval before fast-forward.
+- KIT REQUEST K4 (A9 promo-rules-r1, built before the rule): §65 rank chest via kitReward + kitPersonReveal/.kprev; §66 kitGloom rank-down (kmRankDownHTML) + kitEdict glow; j93 shared motion kit: kmSpark → painted sprites, .kmlight/.kmglow/.kmember/.kmsmoke → painted atlases, .kmlist frame shared with .kprev-card, kitReward .km-long layout. Kit keeper please sign off before fast-forward.
+- Q2 (owner, A9): only HER household gains one free servant per rank (up to 5 maids + 4 eunuchs); NPC households stay 4+2 (face pool limited) — breaks 'whatever she has, they have'. Accept, or give NPCs the same?
+- Q3 (owner, A9): each rank-up reward set ≈ one month's pay (sold at 50%). Keep or trim?
+- Art follow-ups (A9, not blocking): per-rank Đeo eo pendants, middle-rank bangles (vongngoc repeats ranks 0–4), per-rank Túi thơm, maid robes per maid rank, servant-road edict animation → Foreman C will take under D45 small art.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
