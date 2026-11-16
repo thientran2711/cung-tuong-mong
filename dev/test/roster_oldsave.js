@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const [,,BASE,OLD,NEW]=process.argv;const
  const ctx=await b.newContext({viewport:{width:755,height:1000}});const p=await ctx.newPage();const e0=[];p.on('pageerror',e=>e0.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort());
  await p.goto(BASE+OLD);await sleep(2500);
- const save=await p.evaluate(async()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__forceOrigin='thd';start();Q.length=0;render();await new Promise(r=>setTimeout(r,400));
+ const save=await p.evaluate(async()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;render();await new Promise(r=>setTimeout(r,400));
   for(let i=0;i<8;i++){for(let k=0;k<30&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}nextBuoi()}for(let k=0;k<30&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}
   save();const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return{o,had:typeof j95on==="function",turn:S.turn+"/"+S.tuan+"/"+S.buoi}});
  out.old={hadJ95:save.had,turn:save.turn,errs:e0.slice(0,3)};await ctx.close();

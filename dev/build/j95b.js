@@ -129,11 +129,13 @@ const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|th�
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
 function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…][)"”']?)\s+|\s*;\s*/);
  const L=liveRivals(true).concat(rivals.filter(v=>v.alive&&v.out)).map(v=>[v,v.name]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);
- for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");if(NOW95B.test(lo))continue;const k=j95bLexNow(lo);if(!k)continue;
+ for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");const lo2=j95bNoTitles(lo);if(NOW95B.test(lo2))continue;const k=j95bLexNow(lo2);if(!k)continue;
   const used=[];for(const [v,nm] of L){let i=s.indexOf(nm);while(i>=0){if(!used.some(u=>i>=u[0]&&i<u[1])){used.push([i,i+nm.length]);const pre=s.slice(Math.max(0,i-18),i).toLowerCase();
      if(!AGENT95B.test(pre)&&!j95bPastHas("v"+v.id,k))out.push({id:"v"+v.id,k,why:s.slice(0,90)})}i=s.indexOf(nm,i+1)}}
   if(/^(hoàng thượng|ngài)\b/i.test(s))out.push({id:"emp",k,why:s.slice(0,90)});if(/^thái hậu\b/i.test(s)&&!S.thDead)out.push({id:"th",k,why:s.slice(0,90)})}
  const seen={};return out.filter(x=>{const kk=x.id;if(seen[kk])return false;seen[kk]=1;return true})}
+/* a named staff title ("Quản sự ma ma Càn Ninh cung", jstaff BAL.staff.posts) names her office, not where anyone stands now */
+function j95bNoTitles(lo){try{for(const p of ((typeof BAL!=="undefined"&&BAL.staff&&BAL.staff.posts)||[])){const pl=p.palace.toLowerCase();lo=lo.split((p.title+" "+p.palace).toLowerCase()).join(" ").replace(new RegExp("(ma ma|cô cô)\\s+((ở|bên|của)\\s+)?"+pl,"g"),"$1")}}catch(e){}return lo}
 /* put one person at a place for the current khắc (and say why) */
 function j95bPut(id,k,act,why,src){const R=S.roster;if(!R||R.key!==j95key())return"norec";const kh=j95kh();let e=R.P[id];
  if(k==="here")k=S.place||"home";

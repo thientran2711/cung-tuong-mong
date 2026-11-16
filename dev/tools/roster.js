@@ -12,7 +12,7 @@ const fs=require('fs'),path=require('path'),zlib=require('zlib');
 const JSONOUT=process.argv.includes('--json');const [,,FILE,T,B,K]=process.argv.filter(x=>x!=='--json');if(!FILE){console.log(fs.readFileSync(__filename,'utf8').split('\n').slice(1,9).join('\n'));process.exit(1)}
 const j95=fs.readFileSync(path.join(__dirname,'..','build','j95.js'),'utf8');
 const ACT=Function('return '+j95.match(/const ACT95=(\{[\s\S]*?\});/)[1])();
-const PLN={home:"Tẩm cung của ngươi",kn:"Càn Ninh cung (Hoàng hậu)",tn:"Đức Thọ cung (Thái hậu)",dtd:"Dưỡng Hòa điện",thu:"Cần Chính điện",lc:"Trường Môn viện (lãnh cung)",vuon:"Ngự hoa viên",tyv:"Thái y viện",ksp:"Kính sự phòng",tgk:"Tân Giả khố",ngoai:"Ngoài cung (chưa vào)"};
+const PLN={home:"Tẩm cung của ngươi",kn:"Càn Ninh cung (Hoàng hậu)",tn:"Đức Thọ cung (Thái hậu)",dtd:"Dưỡng Hòa điện",thu:"Cần Chính điện",lc:"Trường Môn viện (lãnh cung)",vuon:"Ngự hoa viên",tyv:"Thái y viện",ksp:"Kính sự phòng",tgk:"Tân Giả khố",cnh:"Dãy nhà cung nhân",ttp:"Thượng thư phòng",acs:"A ca sở",dc:"Đông cung",ngoai:"Ngoài cung (chưa vào)"};
 function readSave(txt){txt=txt.trim();let d=null;
  const m=/^CTM([12]):([A-Za-z0-9+/=\s]+)$/.exec(txt);if(m){let u=Buffer.from(m[2].replace(/\s+/g,''),'base64');if(m[1]==='2')u=zlib.inflateRawSync(u);d=JSON.parse(u.toString('utf8'))}
  else{d=JSON.parse(txt);if(!d.S){const slot=d['hclh-slot']||Object.keys(d).find(k=>/^hclh-save-v2-/.test(k)).split('-').pop();const v=d['hclh-save-v2-'+slot];d=typeof v==='string'?JSON.parse(v):v}}
@@ -29,7 +29,12 @@ else{const L=S.rlog&&S.rlog.e&&S.rlog.e[(t==null?wk:t)+'-'+(b||0)];if(!L){consol
  if(L.m[k2]){map={};L.m[k2].split(',').filter(Boolean).forEach(x=>{const [k,n]=x.split(':');map[k]=+n})}}
 /* the map counts only the people she would meet there (j95vis in the game, port 16/11): consorts (at her palace only visitors), the Emperor
    (not at Dưỡng Hòa điện when Sủng < 50), Thái hậu, men, officials, the court physician, the Kính sự phòng eunuch; at her palace also her maid and children */
-const vis=r=>{const id=r.id,k=r.place;if(!k||k==='ngoai'||id==='me')return false;if(id[0]==='v')return k!=='home'||r.tgt===S.name||/sang chơi|gây sự|hẹn hò/.test(r.act||'');
+/* named elders (jstaff): counted only where the stage draws them (j95vis) */
+const ELD={};for(const x of [].concat((S.thO&&S.thO.staff)||[],S.staff||[],...RV.map(v=>v.staff||[])))if(x&&x.eid&&x.sid!=null)ELD['s'+x.sid]=x.eid;
+const vis=r=>{const id=r.id,k=r.place;if(!k||k==='ngoai'||id==='me')return false;
+ if(ELD[id]){const e=ELD[id];return e==='kn'?k==='kn':e==='tn'?(k==='tn'&&!S.thDead)||k==='tgk':e==='gt'?k==='home'&&(S.turn||0)<=4&&!S.out:false}
+ /* jplx places (main): the fixtures, servants resting / punished there, children 6+ at the study and their halls */
+ if(id==='c:tgk'||id==='c:ttp')return true;if(id[0]==='s'&&(k==='cnh'||k==='tgk'))return /nghỉ tay|giặt giũ/.test(r.act||'');if(id[0]==='k'&&/^(ttp|acs|dc)$/.test(k))return true;if(id[0]==='v')return k!=='home'||r.tgt===S.name||/sang chơi|gây sự|hẹn hò/.test(r.act||'');
  if(id==='emp')return k!=='home'&&!(k==='dtd'&&(S.sung||0)<50);if(id==='th'||id[0]==='q'||id==='c:ty'||id==='c:ksp')return true;if(id[0]==='m'&&id[1]!=='m')return true;
  if(k==='home')return id==='mm:me'||id.indexOf('k:me:')===0;return false};
 if(JSONOUT){const err0=[];const ids0=new Set();for(const r of rows){if(ids0.has(r.id))err0.push('trùng '+r.id);ids0.add(r.id)}const C0={};for(const r of rows)if(r.place&&vis(r))C0[r.place]=(C0[r.place]||0)+1;console.log(JSON.stringify({at,total:rows.length,counts:C0,map,rows,err:err0}));process.exit(0)}
