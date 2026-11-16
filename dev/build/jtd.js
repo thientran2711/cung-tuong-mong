@@ -5,7 +5,7 @@
    | course            | game                | how (every rule is on screen before and during play)                                            |
    | Công · Nữ công    | Thêu theo nét       | match the sample thread colour, then drag the needle along the dotted pattern (glowing dot = next stitch) |
    | Dung · Dung nghi  | Đi đứng giữ bát     | hold LEFT / RIGHT half of the board to keep the bowl upright; each floor mark shows which way the next step leans it |
-   | Ngôn · Lời nói    | Ứng đối             | read who speaks + their face (mood) and pick the tone the rule line names; every reply shows its tone tag |
+   | Ngôn · Lời nói    | Nói đúng lúc        | (mg-balance-2, no words) wait for the speaker (and an upset one to calm), then HOLD «Thưa» and let go in the voice band of that listener |
    | Hạnh · Đức hạnh   | Làm phúc            | share the portions among the waiting people (+ / −) so that everyone gets enough of what they need  |
    Level (S.vir[k] 0..5) only makes it EASIER (wider band, fewer wrong choices, no shortage), never harder; "Để trời định" = 5/10 as everywhere.
    Progress: raw → lesson points (self: 1 or 2; teacher: 2 or 3, the same 1..3 span as before); Công practice also lifts the quality of handmade goods (0..2, S.vpf).
@@ -15,26 +15,26 @@ const TD_OF={cong:"td_cong",dung:"td_dung",ngon:"td_ngon",hanh:"td_hanh"};
 Object.assign(KG82_KIND,{
  td_cong:{e:"tdthread",n:"Công",t:"Thêu theo nét",how:"Chọn sợi chỉ đúng màu với chỉ mẫu. Rồi kéo kim theo nét chấm; chấm sáng là mũi kế tiếp. Ba mảnh thêu."},
  td_dung:{e:"tdwalk",n:"Dung",t:"Đi đứng giữ bát",how:"Bước đi làm bát trên đầu nghiêng. Giữ nửa trái hoặc nửa phải của khung để đỡ bát thẳng lại. Dấu trên sàn báo bước sau nghiêng về bên nào."},
- td_ngon:{e:"tdtalk",n:"Ngôn",t:"Ứng đối",how:"Xem người nói là ai và sắc mặt ra sao, rồi chọn lời có giọng mà phép ứng đối ghi sẵn. Mỗi lời đều có nhãn giọng. 5 câu."},
- td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Mỗi người chờ đều ghi cần mấy phần. Chạm + hoặc − để chia phần cho vừa đủ rồi chạm Phát xong. 3 lượt."}});
+ td_ngon:{e:"tdtalk",n:"Ngôn",t:"Nói đúng lúc, vừa tiếng",how:"Chờ người nói dứt lời; người đang giận, buồn hay lo thì chờ vòng xám nguôi. Vòng xanh sáng lên là tới lúc thưa: giữ nút Thưa cho tiếng nói dâng lên, buông tay khi vào dải xanh. Bề trên nhỏ nhẹ, kẻ dưới ôn tồn, ngang hàng vui vẻ. 5 lượt."},
+ td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Mỗi người chờ đều ghi cần mấy phần. Chạm + hoặc − để chia phần cho vừa đủ rồi chạm Phát xong trước khi hết giờ. 3 lượt."}});
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
 const TD_RULES={
  cong:[["1","Xem chỉ mẫu ở trên, chạm sợi chỉ cùng màu."],["2","Đặt ngón tay lên chấm xanh, kéo kim men theo nét chấm tới cờ đỏ."],["3","Lệch khỏi nét thì mũi chỉ không bám; kéo lại gần nét là thêu tiếp được."]],
  dung:[["1","Bước chân nào cũng làm bát nghiêng một chút. Dấu trên sàn có mũi tên chỉ bên nghiêng."],["2","Giữ nửa trái hoặc nửa phải của khung để đỡ bát về phía ngược lại."],["3","Giữ mũi tên xanh ở vùng sáng giữa thanh là được điểm; bát đổ thì đứng lại một nhịp."]],
- ngon:[["1","Xem người nói là bề trên, ngang hàng hay kẻ dưới, và sắc mặt người ấy."],["2","Dòng Phép ứng đối ghi sẵn nên nói giọng nào."],["3","Chọn lời có nhãn giọng ấy. Giọng thẳng thắn dễ làm mất lòng, đừng chọn."]],
- hanh:[["1","Mỗi người chờ ghi rõ cần mấy phần."],["2","Chạm + để thêm một phần cho người ấy, chạm − để bớt lại."],["3","Chia cho ai cũng đủ, đừng thừa cho người này mà thiếu người kia, rồi chạm Phát xong."]]};
-const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát giữ thẳng trọn buổi",ngon:"Lời nói vừa lòng người nghe",hanh:"Ai cũng được đủ phần cần"};
+ ngon:[["1","Người nói xong và vòng xám đầy (người đang giận, buồn, lo cần nguôi) thì vòng xanh sáng: tới lúc thưa. Nói chen vào là cướp lời."],["2","Giữ nút Thưa: tiếng nói dâng lên trong thanh bên phải."],["3","Buông tay khi tiếng nói nằm trong dải xanh: bề trên nhỏ nhẹ, kẻ dưới ôn tồn, ngang hàng vui vẻ. Giữ quá lâu là lớn tiếng."]],
+ hanh:[["1","Mỗi người chờ ghi rõ cần mấy phần. Họ không chờ lâu được: mỗi lượt có hạn giờ."],["2","Chạm + để thêm một phần cho người ấy, chạm − để bớt lại."],["3","Chia cho ai cũng đủ, đừng thừa cho người này mà thiếu người kia, rồi chạm Phát xong."]]};
+const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát giữ thẳng trọn buổi",ngon:"Nói đúng lúc, vừa tiếng người nghe",hanh:"Ai cũng được đủ phần cần"};
 function tdEase(lv){return cl(Math.round(lv||0),0,5)}
 
 /* ---------- 1. Công: Thêu theo nét ---------- */
 const TD_THREAD=[["đỏ son","#c23b22"],["lam ngọc","#2f6aa5"],["vàng nghệ","#e0a526"],["lục","#2f8a5a"],["tím","#7a4a9a"]];
 const TD_PATH=[t=>[.1+.8*t,.5+.2*Math.sin(Math.PI*4*t)],t=>{const a=Math.PI*(-.85+1.7*t);return[.5+.34*Math.sin(a)*1.0,.62-.34*Math.cos(a)]},t=>[.5+.27*Math.sin(Math.PI*2*t),.12+.76*t]];
-function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),N=44,TOL=W*(.055+.006*lv),LIM=26000;
+function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),N=44,TOL=W*(.055+.006*lv)*mgTol(env),LIM=26000;
  const order=kg82Shuf([0,1,2]);let piece=0,pts=0,phase="pick",stop=false,raf=0,t0=0,i=0,down=false,px=0,py=0,off=0,lastT=0,tgt=0,choice=[],P=[],colOk=false;const pops=[];
  const pc=kg82Col("--good","#2d7a52"),rc=kg82Col("--red","#c23b22");
  function samples(k){return Array.from({length:N},(_,j)=>{const [x,y]=TD_PATH[order[k]](j/(N-1));return[x*W,(.1+.8*y)*H]})}
- function begin(){if(stop)return;if(piece>=3){stop=true;return setTimeout(()=>env.end(Math.round(pts)),350)}P=samples(piece);i=0;off=0;down=false;colOk=false;phase="pick";
+ function begin(){if(stop)return;if(piece>=3){stop=true;return setTimeout(()=>env.end((pts)),350)}P=samples(piece);i=0;off=0;down=false;colOk=false;phase="pick";
   const ids=kg82Shuf([0,1,2,3,4]).slice(0,lv>=3?2:3);tgt=ids[Math.floor(Math.random()*ids.length)];choice=kg82Shuf(ids)}
  function endPiece(){if(phase!=="stitch")return;phase="judge";const p=i/(N-1),q=p*(1-Math.min(.4,off*.25));const got=((colOk?.2:0)+.8*q)*10/3;pts+=got;
   kg82Pop(pops,W/2,H*.5,p>=.98?"Thêu đẹp lắm!":p>=.6?"Đường kim khá đều":"Còn dang dở",p>=.6?pc:rc);piece++;setTimeout(begin,1100)}
@@ -62,8 +62,8 @@ function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=td
  begin();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
-function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=.45+.04*lv,DUR=20,STEP=1.6,KN=12;
- const kicks=Array.from({length:KN},(_,k)=>({t:2.4+k*STEP,d:k%3===2?(Math.random()<.5?-1:1):(k%2?-1:1)*(Math.random()<.35?-1:1),m:.9+.4*Math.random()}));
+function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
+ const kicks=Array.from({length:KN},(_,k)=>({t:2.4+k*STEP,d:k%3===2?(Math.random()<.5?-1:1):(k%2?-1:1)*(Math.random()<.35?-1:1),m:(.9+.4*Math.random())*KICK}));
  let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,pend=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
  const good=kg82Col("--good","#2d7a52"),red=kg82Col("--red","#c23b22");
  const FY=H*.8,TOPY=H*.3;
@@ -95,44 +95,74 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEa
  const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);dir=Math.max(-1,Math.min(1,d))};
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [px]=C.at(e);ptr.set(e.pointerId,px<W/2?-1:1);pend=px<W/2?-1:1;try{C.cv.setPointerCapture(e.pointerId)}catch(_){}setDir()});
  const up=e=>{ptr.delete(e.pointerId);setDir()};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
- KG82.dbg=()=>({x,v,t,dir,inB,spill,ki,stag,n:ptr.size});KG82.peek=()=>{const want=-Math.sign(x+.4*v)||1;const c=C.client(want<0?W*.25:W*.75,H*.5);return{hold:want,x:c.x,y:c.y}};
+ KG82.dbg=()=>({x,v,t,dir,inB,spill,ki,stag,n:ptr.size});KG82.peek=()=>{/* a player reads the floor mark: lean against the coming step just before it lands */const kk=kicks[ki],pre=kk&&kk.t-t<.3&&kk.t-t>0?kk.d*kk.m*1.1*.6:0;const f=x+.4*(v+pre);if(Math.abs(f)<BAND*.15)return{hold:false};const want=-Math.sign(f);const c=C.client(want<0?W*.25:W*.75,H*.5);return{hold:true,x:c.x,y:c.y}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 
-/* ---------- 3. Ngôn: Ứng đối ---------- */
-/* tones: kinh = cung kính · hoa = ôn hòa · than = thân mật · thang = thẳng thắn. Fit by the rule line: bề trên → kinh; ngang hàng → than if she is cheerful, else hoa; kẻ dưới → hoa. */
-const TD_TONE={kinh:"cung kính",hoa:"ôn hòa",than:"thân mật",thang:"thẳng thắn"};
+/* ---------- 3. Ngôn: Nói đúng lúc, vừa tiếng (mg-balance-2, owner 16/11 07:20Z "no word games": replaces the old Ứng đối reply-picking quiz) ----------
+   Five turns. Someone speaks (bubble with moving dots, no sentence to read). Wait until the talk ends; an upset speaker needs a moment to calm
+   (grey ring); when the ring turns GREEN it is her turn. She HOLDS «Thưa» to speak: her voice bar rises; she lets go inside the green band.
+   The band sits by who listens: bề trên → nhỏ nhẹ (low), kẻ dưới → ôn tồn (middle), ngang hàng → vui vẻ (higher). Everything is shown on the board.
+   Score per turn = BAL-free shape: 30 % timing (not cutting in, not too late) + 70 % voice (inside the band = full, fading outside).
+   Ease levers (BAL.mgTier.lev.td_ngon via mgLev): band half-width, reply window ms, voice rise per second. */
+const TD_SPK=[["Thái hậu","up"],["Hoàng thượng","up"],["Hoàng hậu","up"],["Lệ phi","peer"],["Hòa tần","peer"],["Cẩn quý nhân","peer"],["Dung thường tại","peer"],
+ ["Tiểu cung nữ","down"],["Ma ma","down"],["Cung nhân","down"],["Tiểu thái giám","down"]];
 const TD_CLS={up:"bề trên",peer:"ngang hàng",down:"kẻ dưới"};
-const TD_RULE={up:"Với bề trên: nói giọng cung kính.",peer_vui:"Với người ngang hàng đang vui: nói giọng thân mật.",peer_x:"Với người ngang hàng đang giận, buồn hay lo: nói giọng ôn hòa.",down:"Với kẻ dưới: nói giọng ôn hòa, không quát."};
-const TD_SC=[
- {who:"Thái hậu",c:"up",m:"vui",q:"Hôm nay trời đẹp, ai gia muốn nghe con nói vài lời.",p:"Thái hậu vui, muốn nghe ngươi trò chuyện.",r:{kinh:"Bẩm Thái hậu, được hầu chuyện người là phúc của thần thiếp.",hoa:"Dạ, thần thiếp xin nói chuyện nhẹ nhàng cho người nghe.",than:"Thái hậu ơi, hôm nay con kể người nghe chuyện vui nhé!",thang:"Con chẳng có gì hay để nói đâu."}},
- {who:"Hoàng thượng",c:"up",m:"giận",q:"Trẫm nghe trong cung có người to tiếng. Ngươi có biết chuyện gì không?",p:"Hoàng thượng đang giận, hỏi ngươi có biết ai gây ồn không.",r:{kinh:"Muôn tâu Hoàng thượng, thần thiếp không dám giấu, xin bẩm rõ đầu đuôi.",hoa:"Thần thiếp nghĩ chuyện nhỏ, xin Hoàng thượng đừng quá bận lòng.",than:"Ôi, chuyện vặt thôi mà, Hoàng thượng đừng nhăn mặt nữa.",thang:"Thần thiếp không biết, đừng hỏi thần thiếp."}},
- {who:"Hoàng hậu",c:"up",m:"lo",q:"Mấy hôm nay bổn cung mất ngủ, trong lòng không yên.",p:"Hoàng hậu lo âu, kể mình mất ngủ.",r:{kinh:"Thần thiếp xin Hoàng hậu bảo trọng, có việc gì cứ sai bảo thần thiếp.",hoa:"Nương nương nghỉ ngơi cho khỏe, mọi chuyện rồi sẽ yên.",than:"Chị ơi, đừng nghĩ nhiều, đi dạo với em cho vui!",thang:"Ngủ không được thì tại người nghĩ nhiều thôi."}},
- {who:"Thái hậu",c:"up",m:"buồn",q:"Ngày xưa ai gia cũng từng ở tuổi con, giờ nhìn lại thấy vắng vẻ quá.",p:"Thái hậu buồn vì thấy vắng vẻ, nhớ chuyện cũ.",r:{kinh:"Thần thiếp xin được ở bên Thái hậu, hầu người những ngày này.",hoa:"Người đừng buồn, để con pha trà ngồi cùng người.",than:"Ôi người cứ nhớ chuyện cũ hoài, kể nghe con đi!",thang:"Người nhớ làm gì, chuyện xưa qua lâu rồi."}},
- {who:"Lệ phi",c:"peer",m:"vui",q:"Muội muội xem, hôm nay ta được ban đóa hoa này, đẹp chưa?",p:"Lệ phi vui khoe hoa được ban, hỏi có đẹp không.",r:{kinh:"Bẩm nương nương, hoa này thật xứng với người.",hoa:"Hoa đẹp, tỷ giữ cẩn thận nhé.",than:"Đẹp quá tỷ ơi, đeo lên là sáng cả phòng luôn!",thang:"Ta thấy cũng thường, hoa nào mà chẳng thế."}},
- {who:"Hòa tần",c:"peer",m:"giận",q:"Có kẻ nói sau lưng ta! Muội có nghe thấy gì không?",p:"Hòa tần giận vì có người nói xấu, hỏi ngươi có nghe không.",r:{kinh:"Bẩm nương nương, thần thiếp xin dốc lòng điều tra giúp người.",hoa:"Tỷ bình tĩnh, ngồi xuống uống chén trà rồi chúng ta nói.",than:"Hì, tỷ giận trông cũng xinh, đừng chấp mấy lời đó!",thang:"Ai bảo tỷ làm chuyện để người ta nói."}},
- {who:"Cẩn quý nhân",c:"peer",m:"buồn",q:"Hôm qua quê nhà gửi thư, phụ thân ốm nặng mà ta không về được.",p:"Cẩn quý nhân buồn vì cha ốm mà không về thăm được.",r:{kinh:"Bẩm quý nhân, xin người nén đau thương giữ gìn thân thể.",hoa:"Tỷ đừng quá lo, ta sẽ cùng tỷ gửi thuốc về nhà.",than:"Tỷ ơi cười lên nào, thế nào phụ thân cũng khỏe!",thang:"Không về được thì đành chịu thôi."}},
- {who:"Dung thường tại",c:"peer",m:"lo",q:"Sáng mai ta phải ra mắt trước Hoàng thượng, sợ mình nói sai quá.",p:"Dung thường tại lo vì mai ra mắt Hoàng thượng.",r:{kinh:"Xin thường tại yên tâm, Hoàng thượng nhân từ sẽ không trách.",hoa:"Tỷ cứ hít thở sâu, nói chậm một chút là ổn.",than:"Có gì đâu mà sợ, em kèm tỷ luyện nè!",thang:"Nói sai thì chịu thôi, ai cũng sai."}},
- {who:"Tiểu cung nữ",c:"down",m:"lo",q:"Bẩm nương nương, nô tỳ lỡ làm vỡ chén, sợ bị phạt.",p:"Cung nữ lo sợ vì làm vỡ chén.",r:{kinh:"Xin ngươi đừng quỳ, chuyện này ta cũng có phần.",hoa:"Chén vỡ không sao, ngươi dọn đi, ta không trách.",than:"Ôi chén thôi mà, đừng sợ, kể ta nghe sao vỡ nào!",thang:"Làm vỡ thì phải chịu phạt, ai bảo vụng."}},
- {who:"Ma ma",c:"down",m:"vui",q:"Bẩm, hôm nay bếp làm món bánh mới, nô tỳ mang tới cho nương nương nếm thử.",p:"Ma ma vui, mang bánh mới đến cho ngươi nếm.",r:{kinh:"Tạ ơn ma ma đã dốc lòng, ta xin nhận trong niềm biết ơn.",hoa:"Ma ma có lòng, để đó ta nếm thử nhé.",than:"Ôi thơm quá, ma ma chu đáo y như mọi khi!",thang:"Ta ăn bánh nhiều rồi, bánh này chưa chắc ngon."}},
- {who:"Cung nhân",c:"down",m:"buồn",q:"Nô tỳ nhớ nhà, đã ba năm chưa gặp mẹ.",p:"Cung nhân buồn vì nhớ mẹ đã ba năm.",r:{kinh:"Ta xin ghi nhận nỗi nhớ nhà của ngươi, lòng ta cũng cảm động.",hoa:"Ta hiểu, rồi sẽ có dịp, ngươi cố giữ sức khỏe nhé.",than:"Ta cũng nhớ nhà lắm, hai ta cùng nhớ nhé!",thang:"Vào cung rồi thì phải quên nhà đi."}},
- {who:"Tiểu thái giám",c:"down",m:"giận",q:"Nô tài bị người trong bếp mắng oan, nô tài tức lắm.",p:"Tiểu thái giám giận vì bị mắng oan.",r:{kinh:"Ta xin ghi lòng điều ngươi nói và sẽ xét cho công bằng.",hoa:"Ngươi bình tĩnh, kể ta nghe, ta xem xử thế nào.",than:"Ừ, ta cũng ghét kiểu mắng oan lắm, tức thật!",thang:"Ngươi chắc cũng có lỗi, ta chưa tin đâu."}}];
-function tdBest(s){return s.c==="up"?"kinh":s.c==="peer"?(s.m==="vui"?"than":"hoa"):"hoa"}
-function tdFit(s,tone){const b=tdBest(s);if(tone===b)return 2;if(tone==="thang")return 0;if(b==="kinh")return tone==="hoa"?1:0;if(b==="than")return tone==="hoa"?1:0;return s.c==="down"&&s.m==="vui"&&tone==="than"?1:(s.c==="peer"&&tone==="kinh")?1:0}
-function tdRuleOf(s){return s.c==="up"?TD_RULE.up:s.c==="peer"?(s.m==="vui"?TD_RULE.peer_vui:TD_RULE.peer_x):TD_RULE.down}
-function kgTdTalk(box,env){const lv=tdEase(env.lv),NOPT=lv>=3?2:3,LIM=(12+lv)*1000;
- const pool=kg82Shuf(TD_SC),Qs=[];["up","peer","down","up","peer"].forEach(c=>{const k=pool.findIndex(s=>s.c===c);Qs.push(pool.splice(k,1)[0])});
- const wrap=document.createElement("div");wrap.className="kg82quiz";box.appendChild(wrap);let r=0,pts=0,stop=false,tm=0,t0=0,lock=false,cur=[];
- function show(){if(stop)return;if(r>=Qs.length){stop=true;return env.end(pts)}const s=Qs[r],b=tdBest(s);
-  const wrong=kg82Shuf(Object.keys(TD_TONE).filter(t=>t!==b)).sort((a,c)=>(a==="thang")-(c==="thang"));cur=kg82Shuf([b].concat(wrong.slice(0,NOPT-1)));lock=false;t0=performance.now();
-  wrap.innerHTML=kg82Rows([["Người nói",`<span class="ef t"><b>${s.who}</b> (${TD_CLS[s.c]})</span> · sắc mặt <span class="ef ${s.m==="vui"?"g":s.m==="giận"?"r":"n"}"><b>${s.m}</b></span>`],["Lời người ấy",`<span class="ef t"><b>“${s.q}”</b></span>`],["Hiểu là",s.p,"n"],["Phép ứng đối",`<b>${tdRuleOf(s)}</b>`,"t"]])+
-   `<div class="kg82opts">${cur.map((t,i)=>`<button class="kgbtn" data-i="${i}"><b>giọng ${TD_TONE[t]}</b><br>${s.r[t]}</button>`).join("")}</div>`;
-  wrap.querySelectorAll("button[data-i]").forEach(bt=>bt.onclick=()=>pickA(+bt.dataset.i))}
- function pickA(i){if(lock||stop)return;lock=true;const s=Qs[r],b=tdBest(s),got=i>=0?tdFit(s,cur[i]):0;pts+=got;kg82Pluck(got?3:0,!!got);
-  wrap.querySelectorAll("button[data-i]").forEach(bt=>{const k=+bt.dataset.i;bt.disabled=true;if(cur[k]===b)bt.insertAdjacentHTML("afterbegin",kg82Chip("✓ hợp nhất","ok")+" ");else if(k===i)bt.insertAdjacentHTML("afterbegin",kg82Chip(got?"tạm được":"lỡ lời","no")+" ")});
-  wrap.insertAdjacentHTML("beforeend",kg82Rows([[i<0?"Hết giờ":got===2?"Hợp ý":got?"Tạm được":"Lỡ lời",`Nên nói giọng ${TD_TONE[b]}: ${tdRuleOf(s).replace(/^Với /,"với ").replace(/:.*$/,"")}.`,got===2?"g":got?"n":"r"]]));r++;setTimeout(show,1500)}
- tm=setInterval(()=>{if(stop)return;const left=LIM-(performance.now()-t0);env.hud({score:`${pts}/10`,round:`Câu ${Math.min(r+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`});if(left<=0&&!lock)pickA(-1)},150);
- KG82.peek=()=>{if(lock||stop||!cur.length)return null;const i=cur.indexOf(tdBest(Qs[r]));return{sel:`#${box.id||"kg82box"} button[data-i="${i}"]`}};
- show();return()=>{stop=true;clearInterval(tm)}}
+/* voice band centre by listener (0 = khẽ, 1 = lớn) and its word; calm-down pause (s) by mood */
+const TD_VOICE={up:[.3,"nhỏ nhẹ"],down:[.48,"ôn tồn"],peer:[.64,"vui vẻ"]};const TD_MOOD={vui:0,lo:.6,"buồn":.9,"giận":1.3};
+function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mgLev(env,"td_ngon","band"),WIN=mgLev(env,"td_ngon","win"),RATE=mgLev(env,"td_ngon","rate"),FADE=mgLev(env,"td_ngon","fade");
+ const cls=kg82Shuf(["up","peer","down","up","peer"]),Q=cls.map(c=>{const L=TD_SPK.filter(s=>s[1]===c);const s=L[Math.floor(Math.random()*L.length)];const m=kg82Shuf(Object.keys(TD_MOOD))[0];return{who:s[0],c,m,talk:1200+Math.random()*1300}});
+ const bt=k91Btns(box,[["tdsay","Thưa","giữ để nói, buông khi vào dải xanh"]]);const sb=bt.querySelector("#tdsay");
+ let r=-1,pts=0,phase="",t0=0,lvl=0,held=false,cut=false,done=false,res=null;const pops=[];const good=K91C.good(),red=K91C.red(),gold=K91C.gold();
+ const dm=k91DemoCard(box,"td_ngon-demo",{title:"Nói đúng lúc, vừa tiếng",lines:["Chờ người nói dứt lời; người đang giận, buồn hay lo cần một lúc nguôi (vòng xám).","Vòng sáng xanh là tới lúc thưa: giữ nút Thưa, tiếng nói dâng lên trong thanh.","Buông tay khi tiếng nói nằm trong dải xanh: bề trên thì nhỏ nhẹ, kẻ dưới thì ôn tồn, ngang hàng thì vui vẻ."],art:(g,W,H,now)=>{/* a small moving example: dots → green ring → the voice rises into the band */const y0=44,h=Math.min(H*.36,150),cx=W*.38,k=(now%4200)/4200;
+  g.save();k91RR(g,cx-70,y0+h*.2,140,h*.5,14);g.fillStyle="#fffdf6";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
+  if(k<.35){for(let i=0;i<3;i++){g.globalAlpha=.35+.65*Math.max(0,Math.sin(now/170-i*.9));g.fillStyle=K91C.ink;g.beginPath();g.arc(cx-20+i*20,y0+h*.45,5,0,Math.PI*2);g.fill()}g.globalAlpha=1}
+  else{g.strokeStyle=K91C.good();g.lineWidth=5;g.beginPath();g.arc(cx+80,y0+h*.2,16,-Math.PI/2,-Math.PI/2+Math.PI*2*(1-Math.min(1,(k-.35)/.65)));g.stroke()}
+  const vx=W*.68,vw=24,lv=k<.45?0:Math.min(.4,(k-.45)*1.2);g.fillStyle="#fffdf6";g.fillRect(vx,y0,vw,h);g.strokeStyle=K91C.hair;g.strokeRect(vx,y0,vw,h);g.fillStyle="rgba(45,122,82,.42)";g.fillRect(vx,y0+h*(1-.38),vw,h*.16);
+  g.fillStyle="#c23b22";g.fillRect(vx+3,y0+h*(1-lv),vw-6,h*lv);g.restore();return y0+h+22},done:()=>{bt.hidden=false;next()}});
+ if(dm)bt.hidden=true;
+ function next(){r++;if(r>=Q.length){done=true;return setTimeout(()=>env.end(pts),400)}const q=Q[r];lvl=0;held=false;cut=false;res=null;phase="talk";t0=performance.now();
+}
+ const band=()=>{const c=TD_VOICE[Q[r].c][0];return[c-BH,c+BH]};
+ function judge(why){if(phase==="judge")return;const q=Q[r],[a,b]=band();let tm=why==="late"?0:cut?.4:1,vo=0;
+  if(why==="say"){const d=lvl<a?a-lvl:lvl>b?lvl-b:0;vo=d<=0?1:Math.max(0,1-d/FADE)}else if(why==="loud")vo=0;
+  const got=2*(.3*tm+.7*vo);pts+=got;phase="judge";held=false;sb.classList.remove("on");
+  res=why==="late"?["Im lặng lâu quá",red]:why==="loud"?["Lớn tiếng quá",red]:vo>=1?[cut?"Vừa tiếng, nhưng đã cướp lời":"Vừa tiếng, đúng lúc",cut?gold:good]:vo>0?[lvl<a?"Hơi khẽ":"Hơi to",gold]:[lvl<a?"Khẽ quá, không nghe rõ":"To quá",red];
+  kg82Pluck(vo>=1?3:0,vo>=1);kg82Pop(pops,W/2,H*.5,res[0],res[1]);setTimeout(next,1300)}
+ const down=e=>{e.preventDefault();if(done||(dm&&dm.on))return;if(phase==="talk"||phase==="calm"){if(!cut){cut=true;kg82Pop(pops,W/2,H*.5,"Đừng cướp lời, chờ vòng xanh",red);kg82Pluck(0,false)}return}
+  if(phase==="win"){phase="say";held=true;sb.classList.add("on")}};
+ const up=()=>{if(phase==="say"&&held){held=false;judge("say")}};
+ sb.addEventListener("pointerdown",down);["pointerup","pointercancel","pointerleave"].forEach(ev=>sb.addEventListener(ev,up));sb.addEventListener("contextmenu",e=>e.preventDefault());
+ let last=performance.now();
+ const stop=k91Loop(now=>{const dt=Math.min(50,now-last)/1000;last=now;kg82Bg(g,W,H,"td_ngon",.1,.6);
+  if(dm&&dm.on){dm.draw(g,W,H,now);return}
+  if(r<0||r>=Q.length){kg82DrawPops(g,pops,now);return}const q=Q[r],k=now-t0,calm=TD_MOOD[q.m]*1000;
+  if(phase==="talk"&&k>=q.talk){phase=calm?"calm":"win";t0=now}
+  else if(phase==="calm"&&k>=calm){phase="win";t0=now}
+  else if(phase==="win"&&k>=WIN)judge("late");
+  if(phase==="say"){lvl+=RATE*dt;if(lvl>=1){lvl=1;judge("loud")}}
+  /* who speaks (on the board, so a short landscape screen keeps it in view) */
+  g.textAlign="left";g.textBaseline="top";g.font=k91F(700,W<420?13:15,1);g.fillStyle=K91C.ink;kg82Lbl(g,`${q.who} · ${TD_CLS[q.c]}`,12,10,W*.62);
+  g.font=k91F(700,W<420?12:13,1);g.fillStyle=q.m==="vui"?good:q.m==="giận"?red:K91C.lab;kg82Lbl(g,`sắc mặt ${q.m} · cần giọng ${TD_VOICE[q.c][1]}`,12,32,W*.62);
+  /* the speaker's bubble and the turn ring */
+  const bx=W*.36,by=H*.46,bw=Math.min(W*.5,260),bh=H*.3;g.save();k91RR(g,bx-bw/2,by-bh/2,bw,bh,bh*.3);g.fillStyle="rgba(255,250,236,.95)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
+  g.beginPath();g.moveTo(bx-bw*.18,by+bh/2-2);g.lineTo(bx-bw*.3,by+bh/2+18);g.lineTo(bx-bw*.02,by+bh/2-2);g.fill();g.restore();
+  if(phase==="talk"){for(let i=0;i<3;i++){const a=.35+.65*Math.max(0,Math.sin(now/170-i*.9));g.globalAlpha=a;g.fillStyle=K91C.ink;g.beginPath();g.arc(bx-24+i*24,by,6,0,Math.PI*2);g.fill()}g.globalAlpha=1}
+  const rg=Math.min(bw,bh)*.62,rx=bx+bw/2+rg*.2,ry=by-bh/2+4;
+  const ring=(col,f)=>{g.save();g.lineWidth=7;g.strokeStyle="rgba(58,26,12,.15)";g.beginPath();g.arc(rx,ry,rg*.45,0,Math.PI*2);g.stroke();g.strokeStyle=col;g.beginPath();g.arc(rx,ry,rg*.45,-Math.PI/2,-Math.PI/2+Math.PI*2*f);g.stroke();g.restore()};
+  if(phase==="calm")ring("#8a7350",Math.min(1,k/calm));if(phase==="win"){ring(good,1-Math.min(1,k/WIN));g.save();g.globalAlpha=.5+.5*Math.sin(now/120);g.fillStyle=good;g.beginPath();g.arc(rx,ry,rg*.2,0,Math.PI*2);g.fill();g.restore()}
+  g.fillStyle=K91C.ink;g.font=k91F(700,W<420?12:13,1);g.textAlign="center";g.textBaseline="middle";
+  kg82Lbl(g,phase==="talk"?"đang nói…":phase==="calm"?"chờ người ấy nguôi":phase==="win"?"tới lúc thưa":phase==="say"?"đang thưa":"",bx,by+bh/2+30,bw);
+  /* her voice bar: green band by who listens */
+  const vx=W*.8,vw=Math.max(26,W*.07),vy=H*.1,vh=H*.74,[a,b]=band();g.fillStyle="#fffdf6";g.fillRect(vx,vy,vw,vh);g.strokeStyle=K91C.hair;g.lineWidth=2;g.strokeRect(vx,vy,vw,vh);
+  g.fillStyle="rgba(45,122,82,.42)";g.fillRect(vx,vy+vh*(1-b),vw,vh*(b-a));const ly=vy+vh*(1-lvl);const gr=g.createLinearGradient(0,vy+vh,0,vy);gr.addColorStop(0,"#e8c06a");gr.addColorStop(1,"#c23b22");g.fillStyle=gr;g.fillRect(vx+4,ly,vw-8,vy+vh-ly);
+  g.fillStyle=lvl>=a&&lvl<=b?good:K91C.ink;g.beginPath();g.moveTo(vx-3,ly);g.lineTo(vx-13,ly-6);g.lineTo(vx-13,ly+6);g.fill();
+  g.fillStyle=K91C.ink;g.font=k91F(700,11,1);kg82Lbl(g,"lớn",vx+vw/2,vy-9,70);kg82Lbl(g,"khẽ",vx+vw/2,vy+vh+10,70);g.textAlign="right";kg82Lbl(g,TD_VOICE[q.c][1],vx-16,vy+vh*(1-(a+b)/2),W*.3);
+  kg82DrawPops(g,pops,now);
+  env.hud({score:`${Math.round(pts)}/10`,round:`Lượt ${Math.min(r+1,5)}/5`,time:phase==="win"?`${Math.max(0,Math.ceil((WIN-k)/1000))} giây`:"–"})});
+ /* oracle: hold from the green ring until the voice is a little under the band centre (it keeps rising for a human's reaction time) */
+ KG82.peek=()=>{if(done)return null;if(dm&&dm.on)return{sel:"#k91demo"};if(r<0)return null;const p=C.client(0,0),rc=sb.getBoundingClientRect(),o={hsel:"#tdsay",x:rc.left+rc.width/2,y:rc.top+rc.height/2};
+  if(phase==="win")return Object.assign(o,{hold:true});if(phase==="say"){const [a,b]=band();return Object.assign(o,{hold:lvl<(a+b)/2-RATE*.04})}return Object.assign(o,{hold:false})};
+ if(!dm)next();return()=>{done=true;stop()}}
 
 /* ---------- 4. Hạnh: Làm phúc ---------- */
 const TD_ALMS=[
@@ -143,24 +173,29 @@ function tdAlmsScore(need,give,pool){const n=need.length,r=need.map((d,i)=>Math.
  return Math.max(0,.5*Math.min(...r)+.5*r.reduce((a,b)=>a+b,0)/n-.12*over-.1*Math.max(0,left))}
 function tdAlmsBest(need,pool){let best=0;const give=need.map(()=>0);(function rec(i,left){if(i===need.length){best=Math.max(best,tdAlmsScore(need,give,pool));return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,pool);return best||1}
 function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createElement("div");wrap.className="kg82quiz";box.appendChild(wrap);
- const rounds=TD_ALMS.map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:k===2&&lv<3?q.pool-1:q.pool}));let r=0,pts=0,stop=false,give=[],lock=false;
+ /* mg-balance-2: at low ease the portions run short in more rounds and each round has a time (the people cannot wait): BAL.mgTier.lev.td_hanh */
+ const SH=Math.round(mgLev(env,"td_hanh","short")),LIM=Math.round(mgLev(env,"td_hanh","lim"));
+ const rounds=TD_ALMS.map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:q.pool-(k===2&&lv<3?1:0)-(k<2?Math.min(SH,k+1):0)}));let r=0,pts=0,stop=false,give=[],lock=false,t0=performance.now(),tm=0;
  function left(){return rounds[r].pool-give.reduce((a,b)=>a+b,0)}
  function render(){if(stop)return;const R=rounds[r];
   wrap.innerHTML=kg82Rows([["Còn lại",`<span class="ef t"><b>${left()}</b> phần để chia</span>`],["Việc cần",R.pool<R.need.reduce((a,b)=>a+b,0)?`Phần không đủ cho mọi người. Chia sao cho ai cũng có ít nhất một ít, người cần nhiều được nhiều hơn.`:`Phần vừa đủ. Cho mỗi người đúng số họ cần.`,"n"]])+
    R.list.map((x,i)=>`<div class="kg82ar"><button class="kgbtn" data-p="${i}" data-d="-1" aria-label="Bớt một phần cho ${x[0]}">−</button><span><b>${x[0]}</b> · ${x[1]}<br>cần ${x[2]} phần · nhận <b>${give[i]}</b></span><button class="kgbtn" data-p="${i}" data-d="1" aria-label="Thêm một phần cho ${x[0]}">+</button></div>`).join("")+
    `<div class="kg82act"><button class="${kg82Btn()}" id="tdadone">Phát xong</button></div>`;
   wrap.querySelectorAll("button[data-p]").forEach(b=>b.onclick=()=>{if(lock)return;const i=+b.dataset.p,d=+b.dataset.d;if(d>0&&left()<=0)return;if(d<0&&give[i]<=0)return;give[i]+=d;kg82Pluck(1,true);render()});
-  wrap.querySelector("#tdadone").onclick=done;env.hud({score:`${Math.round(pts)}/10`,round:`Lượt ${r+1}/3`,time:"không hạn giờ"})}
+  wrap.querySelector("#tdadone").onclick=done;hud()}
+ const hud=()=>env.hud({score:`${Math.round(pts)}/10`,round:`Lượt ${r+1}/3`,time:`${Math.max(0,Math.ceil((LIM-(performance.now()-t0))/1000))} giây`});
+ tm=setInterval(()=>{if(stop||lock)return;hud();if(performance.now()-t0>=LIM)done()},250);
  function done(){if(lock||stop)return;lock=true;const R=rounds[r],s=tdAlmsScore(R.need,give,R.pool)/tdAlmsBest(R.need,R.pool),got=Math.min(1,s)*10/3;pts+=got;
   const ok=s>=.95;kg82Pluck(ok?3:0,ok);wrap.insertAdjacentHTML("beforeend",kg82Rows([[ok?"Chia khéo":s>=.6?"Khá ổn":"Còn lệch",ok?"Ai cũng được đủ phần cần.":"Có người thiếu hoặc có người thừa phần.",ok?"g":s>=.6?"n":"r"]]));
-  r++;setTimeout(()=>{if(r>=3){stop=true;env.end(Math.round(pts))}else{give=rounds[r].need.map(()=>0);lock=false;render()}},1400)}
+  r++;setTimeout(()=>{if(r>=3){stop=true;clearInterval(tm);env.end((pts))}else{give=rounds[r].need.map(()=>0);lock=false;t0=performance.now();render()}},1400)}
  give=rounds[0].need.map(()=>0);
- KG82.peek=()=>{if(lock||stop)return null;const R=rounds[r];let i=R.need.findIndex((d,k)=>give[k]<tdAlmsBestGive(R)[k]);if(i<0||left()<=0)return{sel:"#tdadone"};return{sel:`#${box.id||"kg82box"} button[data-p="${i}"][data-d="1"]`}};
- render();return()=>{stop=true}}
+ KG82.peek=()=>{if(lock||stop)return null;const R=rounds[r];let i=R.need.findIndex((d,k)=>give[k]<tdAlmsBestGive(R)[k]);/* think: the first share of a round is the decision (more people / short portions = longer to work out) */const th=give.every(x=>!x)?1000+500*R.need.length+(R.pool<R.need.reduce((a,b)=>a+b,0)?2500:0):0;
+  if(i<0||left()<=0)return{sel:"#tdadone",thinkMs:th};return{sel:`#${box.id||"kg82box"} button[data-p="${i}"][data-d="1"]`,thinkMs:th}};
+ render();return()=>{stop=true;clearInterval(tm)}}
 function tdAlmsBestGive(R){let best=-1,bg=null;const give=R.need.map(()=>0);(function rec(i,left){if(i===R.need.length){const s=tdAlmsScore(R.need,give,R.pool);if(s>best){best=s;bg=give.slice()}return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,R.pool);return bg}
 /* ---------- easy-rules layer (same pattern as review/mg-easy): Gợi ý button, quiet idle hint, first-time example card ---------- */
-const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở lời có giọng hợp với phép ứng đối.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
-const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui, phép ghi “bề trên: cung kính” thì chọn lời mang nhãn cung kính.",hanh:"Người ghi cần 2 phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong."};
+const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở nút Thưa: giữ khi vòng xanh sáng, buông khi tiếng nói vào dải xanh.",tdalms:"Viền vàng ở nút cần chạm tiếp (hoặc nút Phát xong)."};
+const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui (bề trên): chờ bà nói xong, vòng xanh sáng thì giữ Thưa, tiếng nói vừa tới dải xanh thấp (nhỏ nhẹ) thì buông.",hanh:"Người ghi cần 2 phần: chạm + hai lần cho người ấy, rồi làm vậy với mọi người, chạm Phát xong."};
 function tdIdle(lv){lv=+lv||0;return lv<=1?6500:lv<=3?10500:0}
 function tdSeen(k,set){try{if(KG82.noDemo||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m["td_"+k]=1;return true}return !!m["td_"+k]}catch(e){return true}}
 function tdRing(pt,ms){const r=document.createElement("div");r.className="tdring ksel";r.style.cssText=`position:fixed;left:${pt.x-26}px;top:${pt.y-26}px;width:52px;height:52px;border-radius:50%;pointer-events:none;z-index:99999`;document.body.appendChild(r);setTimeout(()=>r.remove(),ms||2600);return r}
@@ -192,7 +227,7 @@ const TDS={busy:false};window.TDS=TDS;
 function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(2)||S.suc<25)return}else if(!can(2)||S.bac<cost)return;
  const kind=TD_OF[k],K=KG82_KIND[kind];if(window.__bot||typeof kg82Open!=="function"){tdFinish(k,mode,5,true);return}
- TDS.busy=true;KG82.ctx="hoc";kg82Preload(kind);KG82.lv=l;
+ TDS.busy=true;KG82.ctx="hoc";kg82Preload(kind);mgSet(kind,{occ:"hoc",lv:l});/* mg-balance: board ease from the tier (jmgt) */
  const d=kg82Open({art:`${V.n} · ${V.full}`,title:`${TD_MODE[mode]||"Học"} · ${K.t}`,how:K.how,round:K.e==="tdthread"?"Hồi":K.e==="tdwalk"?"Bước":K.e==="tdalms"?"Lượt":"Câu",roundV:"–",pic:kg82Pic(kind)});
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
