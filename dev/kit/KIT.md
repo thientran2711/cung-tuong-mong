@@ -3225,6 +3225,14 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
 - Co-op: the friend's card is on the tray (her real eligibility); the scene waits while `COOPW.pend` so both players see it when the merged
   week arrives. Each player's pick is still rolled locally (protocol unchanged).
 - API: `kitCardFlip({deck:[{id,p,bar}],pick,turned,resHTML,onEnd})`, `cfDemo(n,barred,who)` (kit page §67 "Xem lật thẻ"), `cfGrid(n,W,H)`.
+- SMOOTHNESS + CALM (owner 16/11, review/cardflip-smooth; iPad "giựt" + "too fast"): (1) only transform / opacity / filter move; no `mask-image` on the moving
+  box (edge fade = static `.kcf-vig` overlay), no soft-light blend of two full plates over the cards (= one static `.kcf-lamp` gradient); (2) plates + hand + seal are
+  loaded AND `img.decode()`d before the scene starts (`preload`); (3) `will-change` only while the scene runs (`.kcf-act` on the overlay, removed at the final still /
+  close; the drifting plate box only during the carry); (4) every card state uses one filter chain (grayscale sepia saturate brightness drop-shadow) so states interpolate;
+  (5) card moves are batched FLIPs (`glide`: all reads, all writes, all reads = one layout, not one per card); (6) the turned card is NOT re-parented (no childList
+  mutation for the many body MutationObservers while it moves); (7) reduced motion / Gọn (`kmReduced`) = final still only (unchanged).
+  Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
+  before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
