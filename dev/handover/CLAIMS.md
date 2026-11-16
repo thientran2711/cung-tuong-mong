@@ -90,9 +90,9 @@
 | orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 07:40Z |
 | person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | READY-FOR-REVIEW 591bde42 | 16/11 08:50Z |
 | stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | DONE fddbbefe, awaiting review | 16/11 07:30Z |
-| D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | RUNNING | 07:26Z 16/11 |
-| D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
-| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
+| D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | PASS 99c06957 | 07:26Z 16/11 |
+| D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | PASS 81deb15f | 07:26Z 16/11 |
+| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | PASS c8734770 | 07:26Z 16/11 |
 | orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | RUNNING | 16/11 07:40Z |
 | person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | READY-FOR-REVIEW 591bde42 | 16/11 08:50Z |
 | stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | RUNNING | 16/11 07:30Z |
@@ -141,4 +141,4 @@
 | co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | RUNNING | 16/11 10:05Z |
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
 | D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | session_011xDdVRRJzACvMmmuEuVbJq | RUNNING | 16/11 10:26Z |
-| item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | RUNNING | 16/11 10:26Z |
+| item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | PASS f9d10956 | 16/11 10:26Z |

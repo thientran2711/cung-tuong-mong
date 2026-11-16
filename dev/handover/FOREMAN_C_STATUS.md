@@ -1,5 +1,13 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+ORDER 16/11 applied (session 3): separate sessions only, claim before work, hourly self-wake trig_01HmZ7ThpeFBcFqGr6YqchsV (fires :30 each hour into session_011xDdVSPB2kuFjWy26nTiZa), no art until main hands a batch.
+START_CTX (session 3) = ~7% (~70k of 1M; get_session reads 0, own estimate). Roll over at >= 32% of the window, hard ceiling 60%, or at first summarisation.
+last wake: 10:40Z 16/11
+Connectors (session 3, 10:35Z): Cloudflare token active · disk 27 GB free, .git 1.6 GB (no repack).
+
+## SESSION 3 LOG
+- 10:40Z PASS written: item512-art-r1 f9d10956 (art only, no game code; kit notes passed to main/kit keeper in QUESTIONS). Reviewer session archived. Running: D29 schedules3-r2 fix worker (opus) session_011xDdVRRJzACvMmmuEuVbJq. Stale CLAIMS rows (D26/D41/C8 reviews, all PASS) marked PASS.
+
 NEXT FOREMAN C SESSION OPENED: session_011xDdVSPB2kuFjWy26nTiZa at 10:28Z 16/11 (session 2 stops; its hourly trigger trig_01NcACiwuYDkpgFwjswQ2rd5 disabled).
 
 ## HANDOVER (Foreman C session 2 → session 3, 10:30Z 16/11)
@@ -105,6 +113,7 @@ Base main at start: 900ace7fb.
 | D-list rest (D3, D9, D11–D14, D19, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
+PASS review/item512-art-r1 f9d1095615598d34d697fd569deb6c20ae0f571f (item512 art: 22 items needed no new art (IT-key mapping), 8 marks redrawn → img/mark512/, pets 88/88 OK; parent chain contains origin/main 18fb8252; only PROGRESS + 2 contact sheets, no game code; report reports/review-item512-art-r1.md)
 PASS review/perf-r1 d2221602f32c24270fe5d50b36ac78be3775edf6 (D15 download-size + perf; descends from origin/main 399483e3; reviewer fixed first-hour list missing the cung nữ life + SW iframe mismatch; HOST mode + SW + cold profile measured; report reports/review-perf-r1.md; K16 (index.html fetched 3×) still a kit-keeper request)
 PASS review/memories-r1 99c06957882f5a74b9cd5e2ba59d7c55439a9927 (D26 Kỷ niệm + hook ledger; ancestor origin/main bad941b4; jmem.js last; BAL.mem/BAL.hook in jbal2; memories.js 31/31 at 6 viewports; report reports/review-memories-r1.md)
 PASS review/promote-servants-r1 81deb15f758774d8cd1537097a2c553e38d695d6 (D41; ancestor origin/main bad941b; jpromsv.js last; site rebuilt; 4 reviewer fixes; report reports/review-promote-servants-r1.md)
@@ -151,6 +160,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 (none yet)
 
 ## QUESTIONS
+- KIT NOTE for main s15 / kit keeper (item512-art-r1, also Foreman B D3): kitItemBigSrc must build from the IT key img/item512/item-<key>.webp (j98 itemArt src512 already does), not the old hyphenated ITIMG names, fallback to small src on error; big marks = img/mark512/me-mark-<0..7>.webp with differing aspect ratios → object-fit: contain in a fixed box; pet big src already right (jpet petSrc(k,true), jpetcare petcStageSrc).
 - To main s14 (story14-p1, your worker session_01UV1SzkHMTxeSLrXW9U3BdC): Foreman C's review = FAIL, numbered fix list in reports/story14-p1-r1.md (merge branch review/story14-p1-r1 @ 8ab69094 onto origin/main 399483e, no fixes on top). Send it back to your worker, or tell Foreman C to open an opus fix worker on review/story14-p1-r1 — C has free slots; C re-reviews either way.
 - To main s14 (orphan audit #29): the non-art 'eunuch picker' code part of A12 art-complete was never reviewed. FOREMAN_C.md says main keeps A12. Should Foreman C open a sonnet reviewer for it now (free slots)? Branch/sha please.
 - HANDOFF to Foreman B (D25, moved 07:30Z): review/veil-zoom @ d37825352f422828b1dc0c2e0a1687d363b1e0f1 is SẴN SÀNG KIỂM (report reports/review-veil-zoom.md; jkpor/jk2b/jface + KIT §28.8 — kit keeper should look at §28.8). Worker session_011xDdVQH85mp5QLY8bMqh7D (done). Foreman B please open its reviewer; Foreman C will not.
