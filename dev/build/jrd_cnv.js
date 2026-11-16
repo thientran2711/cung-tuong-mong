@@ -138,7 +138,7 @@ rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về 
   {n:"Xin vào thỉnh an cùng lúc, đối mặt",c:{suc:-3},o:()=>35+S.danh/4,w:{danh:2},sc:1,wx:"lời {v} bị chặn ngay",l:{danh:-2},lx:"bị cho là hỗn, tiếng ngươi sút; {v} thêm oán",go:(A,ok)=>{rdOan(A,"v",ok?8:5)},rt:"Ngươi thưa đúng một câu, {v} không đáp được.",rf:"Ngươi bị cho lui ra ngoài cửa."},
   {n:"Nhờ người nói đỡ",c:{bac:-30},o:()=>45+S.mat*4,w:{mat:1},sc:1,wx:"có người đỡ lời",l:{danh:-1},lx:"người nói đỡ cũng bị nghi, đồn ngược về ngươi, tiếng sút; bạc mất trắng",rt:"Một nữ quan cũ nói: người trực đêm đâu biết gì.",rf:"Không ai dám mở miệng."},
   {n:"Để mặc {v} nói",c:{danh:-2},w:{duc:1},wx:"không bị kéo vào cãi",lx:"lời {v} ở lại trong tai Trung cung, {v} thêm oán; tiếng ngươi sút",go:A=>{rdOan(A,"v",3)},rt:"Ngươi không làm gì."}]},
- t1:{h:"Trung cung cho gọi",w:"hh",need:["hh"],t:"Hoàng hậu {hh} cho gọi ngươi riêng: “Bản cung chỉ hỏi một câu: xạ hương trong cung {mis} là để hại ai?”",o:[
+ t1:{h:"Trung cung cho gọi",w:"hh",t:"Hoàng hậu cho gọi ngươi riêng: “Bản cung chỉ hỏi một câu: xạ hương trong cung {mis} là để hại ai?”",o:[
   {n:"Thưa: không để hại ai",c:{},o:()=>40+S.hh/4,w:{hh:3},sc:1,wx:"Hoàng hậu ngờ có ẩn tình",l:{hh:-3},lx:"Hoàng hậu cho là ngươi bao che, không vui",rt:"Hoàng hậu nhìn ngươi rất lâu: “Vậy là để giữ.”",rf:"Hoàng hậu nói: “Ai giấu xạ hương cũng nói thế.”"},
   {n:"Thưa: không biết",c:{hh:-2},w:{tamco:1},wx:"không lộ thêm một chữ",lx:"Hoàng hậu không vui",rt:"Hoàng hậu cho lui."},
   {n:"Xin Hoàng hậu cho thêm thời gian",c:{suc:-2},o:()=>35+S.duc/4,w:{hh:2},sc:1,wx:"có thời gian tìm chứng",l:{hh:-2},lx:"bị cho là trì hoãn, Hoàng hậu không vui; ngươi mệt rã",rt:"Hoàng hậu cho ba ngày.",rf:"Hoàng hậu nói: “Trời sáng là khám.”"}]},
@@ -249,6 +249,23 @@ RD97L.push({a:"cnv_chu_11",tag:"Việc thiện trong bóng tối",w:"emp",p:.12,
  path:["Kể cho nàng biết ai đã cứu con nàng","Xin nàng làm chứng","Đáp: là cả hai","Đáp: là chủ nhân","Từ chối, giữ đường cũ","Nhận lời đứng cạnh nàng","Nhận trâm, nghe việc"],np:2,bad:["Đáp: là chính mình","Nhận lời giảng hòa","Gửi trả trâm"],sc:2,x:[()=>S.duc>=40,"Đức từ 40"],
  t:"Người mẹ ở Tây cung bế con quỳ trong Ngự thư phòng: “Nếu không có nàng ấy, đứa trẻ này đã không được sinh ra.” Hoàng thượng lặng đi rất lâu. Ngài ban cho {mis} một chữ «Nhân» viết tay, và khi {mis} xin chia công, ngài cho gọi cả ngươi lên nhận thưởng. Từ đó trong cung ai cũng biết: hai người đã giữ một việc thiện suốt bao năm mà không đòi ai trả.",
  fx:{danh:12,duc:4},go:A=>{CHU_MIS(30);try{rdOan(A,"v",12)}catch(e){}return CHU_NT(20)},rw:"nt_dongchau",ti:"Người giữ việc thiện"});
+/* Empty Hoàng hậu seat (qOn() false): every text of this road that names the Hoàng hậu / Càn Ninh cung / Trung cung reads the Thái hậu /
+   Đức Thọ cung instead, Hoàng hậu favour (hh) in costs/gains/endings becomes Thái hậu favour (th), and the speaker portrait follows.
+   Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
+var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
+ const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
+ const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
+  if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}
+  if(typeof v==="string"){if(W.test(v))Object.defineProperty(ob,k,{get:()=>qn()?v:sub(v),enumerable:true,configurable:true})}
+  else if(typeof v==="function"){if(k!=="n")ob[k]=function(A){const s=v.apply(this,arguments);return qn()?s:sub(s)}}
+  else if(v&&typeof v==="object"&&"hh" in v){const t=th(v);Object.defineProperty(ob,k,{get:()=>qn()?v:t,enumerable:true,configurable:true})}}};
+ for(const id in ARC67){const a=ARC67[id];if(!a||a.road!==road)continue;fix(a,["g","t","w"]);
+  for(const bk in a.B||{}){const b=a.B[bk];fix(b,["t","h","l","w"]);if(Array.isArray(b.o))for(const o of b.o)fix(o,["n","rt","rf","lx","wx","c","w","l"])}
+  for(const ek in a.E||{})fix(a.E[ek],["t","tag","fx","w"])}
+ for(const r of (typeof RD97L!=="undefined"?RD97L:[]))if(r&&String(r.a).indexOf(road+"_")===0)fix(r,["t","tag","ti","n","fx","w"])};
+CNV_QFIX("cnv_chu");
 
 /* ---------- cnv_ban · Chị em đồng hương ---------- */
 /* BAL.road keys needed: none (deadlines are worded in the story: "trước phiên chợ rằm", "trước khi trời sáng", "trước Tết").
@@ -493,6 +510,23 @@ RD97L.push({a:"cnv_ban_11",tag:"Thu Cúc tự thú, hai chị em cùng lên",w:"
  path:["Đến gặp Thu Cúc","Gửi thuốc, không gặp","Ở lại cùng tỷ","Đọc thư cùng Xuân Đào","Ngồi khâu cùng nàng","Nhờ {mis} che chở nàng"],np:2,bad:["Không đến","Giữ thư lại, chờ xong việc","Tùy muội"],sc:2,x:[()=>S.duc>=35||S.mat>=2,"Đức từ 35 hoặc Tai mắt từ 2"],
  t:"Thu Cúc bước vào sân Nội vụ phủ, quỳ cạnh Xuân Đào, khai từng món đồ, từng nén bạc, từng lần cung {v} sai. Cả sân lặng đi. {eun} không ém được nữa. Xuân Đào được minh oan, còn được thưởng vì chịu oan mà không cắn ai; ngươi được ghi công vì đã không bỏ bạn. Từ ngày ấy, hai chị em cùng quê cùng bước lên, và trong cung người ta gọi hai người là «đôi hoa đào».",
  fx:{danh:10,duc:4},go:A=>{try{rdOan(A,"v",10)}catch(e){}return [BAN_NT(12),e67srvUp(8)].filter(Boolean).join(" ")},rw:"nt_nhuy",ti:"Đôi hoa đào cùng quê"});
+/* Empty Hoàng hậu seat (qOn() false): every text of this road that names the Hoàng hậu / Càn Ninh cung / Trung cung reads the Thái hậu /
+   Đức Thọ cung instead, Hoàng hậu favour (hh) in costs/gains/endings becomes Thái hậu favour (th), and the speaker portrait follows.
+   Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
+var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
+ const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
+ const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
+  if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}
+  if(typeof v==="string"){if(W.test(v))Object.defineProperty(ob,k,{get:()=>qn()?v:sub(v),enumerable:true,configurable:true})}
+  else if(typeof v==="function"){if(k!=="n")ob[k]=function(A){const s=v.apply(this,arguments);return qn()?s:sub(s)}}
+  else if(v&&typeof v==="object"&&"hh" in v){const t=th(v);Object.defineProperty(ob,k,{get:()=>qn()?v:t,enumerable:true,configurable:true})}}};
+ for(const id in ARC67){const a=ARC67[id];if(!a||a.road!==road)continue;fix(a,["g","t","w"]);
+  for(const bk in a.B||{}){const b=a.B[bk];fix(b,["t","h","l","w"]);if(Array.isArray(b.o))for(const o of b.o)fix(o,["n","rt","rf","lx","wx","c","w","l"])}
+  for(const ek in a.E||{})fix(a.E[ek],["t","tag","fx","w"])}
+ for(const r of (typeof RD97L!=="undefined"?RD97L:[]))if(r&&String(r.a).indexOf(road+"_")===0)fix(r,["t","tag","ti","n","fx","w"])};
+CNV_QFIX("cnv_ban");
 
 /* ---------- cnv_mat · Ánh mắt nơi hành lang ---------- */
 /* BAL.road keys needed: none (the .8 rise reads the game's own BAL.ntRise.at; everything else is inline per option like the pilot).
@@ -791,6 +825,23 @@ RD97L.push({a:"cnv_mat_11",tag:"Chủ cũ thành tỷ muội",w:"mis",p:.12,n:"X
  path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],np:2,bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],sc:2,x:[()=>{const m=srvMis67();return !!(m&&m.alive&&(m.rel||0)>=20)},"Chủ cũ thương ngươi (quan hệ từ 20)"],
  t:"Ngươi sai người mời {mis} ra mái hiên. Hoàng thượng thấy hai người đứng chung một chiếc ô, bật cười: “Hóa ra người trẫm nhìn năm ấy, là người nàng dạy ra.” Từ đó, cung {mis} và cung ngươi đi chung một đường, ai động đến người này là động đến cả hai.",
  fx:{danh:10,duc:4},go:()=>{matMis(20);return [matSrv({nt:15,tin:15}),matCon({sung:5})].join(" ")},rw:"nt_nhuy",ti:"Chủ tớ thành tỷ muội"});
+/* Empty Hoàng hậu seat (qOn() false): every text of this road that names the Hoàng hậu / Càn Ninh cung / Trung cung reads the Thái hậu /
+   Đức Thọ cung instead, Hoàng hậu favour (hh) in costs/gains/endings becomes Thái hậu favour (th), and the speaker portrait follows.
+   Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
+var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
+ const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
+ const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
+  if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}
+  if(typeof v==="string"){if(W.test(v))Object.defineProperty(ob,k,{get:()=>qn()?v:sub(v),enumerable:true,configurable:true})}
+  else if(typeof v==="function"){if(k!=="n")ob[k]=function(A){const s=v.apply(this,arguments);return qn()?s:sub(s)}}
+  else if(v&&typeof v==="object"&&"hh" in v){const t=th(v);Object.defineProperty(ob,k,{get:()=>qn()?v:t,enumerable:true,configurable:true})}}};
+ for(const id in ARC67){const a=ARC67[id];if(!a||a.road!==road)continue;fix(a,["g","t","w"]);
+  for(const bk in a.B||{}){const b=a.B[bk];fix(b,["t","h","l","w"]);if(Array.isArray(b.o))for(const o of b.o)fix(o,["n","rt","rf","lx","wx","c","w","l"])}
+  for(const ek in a.E||{})fix(a.E[ek],["t","tag","fx","w"])}
+ for(const r of (typeof RD97L!=="undefined"?RD97L:[]))if(r&&String(r.a).indexOf(road+"_")===0)fix(r,["t","tag","ti","n","fx","w"])};
+CNV_QFIX("cnv_mat");
 
 /* ---------- cnv_ma · Ma ma dạy việc ---------- */
 /* BAL.road keys needed:
@@ -1067,6 +1118,23 @@ rdDef("cnv_ma",11,{t:"Chưởng sự",w:"maid",sj:"ghế của Lưu ma ma",cast(
   lose:{k:-1,tag:"Nội vụ phủ về tay Phùng cô cô",t:LMMT("Phùng cô cô ngồi ghế. Việc đầu tiên bà ta làm là đẩy ngươi về giặt áo. Đường còn dài, chỉ là từ chỗ thấp nhất.",
    "Phùng cô cô ngồi ghế. Mùa đông năm ấy, than cung ngươi lại thiếu ba phần, và học trò của Lưu ma ma bị đổi đi từng người một."),fx:{danh:-4},go:A=>{rdOan(A,"v",4);return [lmmSrv({tin:-8}),lmmCon({mat:-1})].join(" ")}}}});
 RD97L.push({a:"cnv_ma_11",tag:"Lưu ma ma trao lại cả Nội vụ phủ",w:"maid",p:.12,n:"Mời Lưu ma ma và Phùng cô cô cùng ngồi một bàn",c:{suc:-4},
- path:["Bảo bà ta đi gặp ma ma","Ra cổng Thần Vũ tiễn bà","Xin họ cùng ký","Từ chối","Dâng lên Hoàng hậu chuyện tiệm lụa","Tự mang tờ tiến cử"],np:2,bad:["Nhận lời, giữ lại tờ lời khai","Gặp {v} chia phần"],sc:2,x:[()=>S.duc>=35&&rdEnd(10)!=="lose","Đức từ 35, chiếc hộp gỗ còn nguyên"],
+ path:["Bảo bà ta đi gặp ma ma","Ra cổng Thần Vũ tiễn bà","Xin họ cùng ký","Từ chối","chuyện tiệm lụa","Tự mang tờ tiến cử"],np:2,bad:["Nhận lời, giữ lại tờ lời khai","Gặp {v} chia phần"],sc:2,x:[()=>S.duc>=35&&rdEnd(10)!=="lose","Đức từ 35, chiếc hộp gỗ còn nguyên"],
  t:"Ngươi mời Lưu ma ma và Phùng cô cô ngồi chung một bàn, đặt chiếc hộp gỗ ở giữa. Ma ma mở hộp, nói với Phùng cô cô điều bà giấu ba mươi năm. Phùng cô cô khóc, tự dâng sổ riêng lên Tổng quản. Trước khi xuất cung, ma ma trao chiếc hộp cho ngươi: từ Càn Ninh cung đến Tân Giả khố, ở đâu cũng có người gọi ngươi là “học trò của Lưu ma ma”.",
  fx:{danh:10,mat:2,duc:3},go:()=>[lmmRk(BAL.road.cnvMaRk),lmmCon({tamco:3})].join(" "),rw:"nt_haiduong",ti:"Học trò của Lưu ma ma"});
+/* Empty Hoàng hậu seat (qOn() false): every text of this road that names the Hoàng hậu / Càn Ninh cung / Trung cung reads the Thái hậu /
+   Đức Thọ cung instead, Hoàng hậu favour (hh) in costs/gains/endings becomes Thái hậu favour (th), and the speaker portrait follows.
+   Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
+var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
+ const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
+ const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
+  if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}
+  if(typeof v==="string"){if(W.test(v))Object.defineProperty(ob,k,{get:()=>qn()?v:sub(v),enumerable:true,configurable:true})}
+  else if(typeof v==="function"){if(k!=="n")ob[k]=function(A){const s=v.apply(this,arguments);return qn()?s:sub(s)}}
+  else if(v&&typeof v==="object"&&"hh" in v){const t=th(v);Object.defineProperty(ob,k,{get:()=>qn()?v:t,enumerable:true,configurable:true})}}};
+ for(const id in ARC67){const a=ARC67[id];if(!a||a.road!==road)continue;fix(a,["g","t","w"]);
+  for(const bk in a.B||{}){const b=a.B[bk];fix(b,["t","h","l","w"]);if(Array.isArray(b.o))for(const o of b.o)fix(o,["n","rt","rf","lx","wx","c","w","l"])}
+  for(const ek in a.E||{})fix(a.E[ek],["t","tag","fx","w"])}
+ for(const r of (typeof RD97L!=="undefined"?RD97L:[]))if(r&&String(r.a).indexOf(road+"_")===0)fix(r,["t","tag","ti","n","fx","w"])};
+CNV_QFIX("cnv_ma");
