@@ -232,19 +232,22 @@ const PUB=["accuse","vp","gift","ally","steal","road","takeaway","tocao","trinht
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
-function sendRes(v,k,b0,txt,id){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+function sendRes(v,k,b0,txt,id,IL){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
  const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
  const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
- const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold;if(!any&&!PUB.includes(k))return;
+ const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold;if(!any&&!PUB.includes(k)&&!(IL&&IL.length))return;
  /* she notices what an NPC's act would show her: open acts and caught schemes name me, a hidden harm only shows its effect */
  const seen=PUB.includes(k)||caught?"named":any?"effect":"";
  if(v.__b){for(const x of STAT)v.__b[x]=v[x];v.__b.rel=v.rel;v.__b.oan=v.oan;v.__b.em=(v.evm&&v.evm.me)||0;v.__b.out=v.out;v.__b.rank=v.rank}
  if(flags.dead)v.alive=true;if(flags.cold)v.out=false;   /* her death / lãnh cung happen on her side; her entry follows from her `me` / week */
- COOP.send({t:"res",id:id||newId(),k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)})}
+ COOP.send({t:"res",id:id||newId(),k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400),items:(IL||[]).map(e=>JSON.parse(JSON.stringify(e)))})}
 (function(){const f=runAct;runAct=function(a,t,k,extra){if(!CW.on||a!==S||!isF(t))return f.apply(this,arguments);
  if(ASK.includes(k)&&!CW.inv){if(sameHouse(a,t))return f.apply(this,arguments);const id=newId();CW.acts[id]={k,extra,v:t.id};
   COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item:extra!=null&&S.inv&&S.inv[extra]?iname(S.inv[extra]):""});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
- const b0=fsnap(t);const r=f.apply(this,arguments);try{sendRes(t,k,b0,r,CW.inv)}catch(e){console.error(e)}return r}})();
+ const b0=fsnap(t);const inv0=(t.inv||[]).slice();const r=f.apply(this,arguments);
+ /* item conservation (jil): a piece handed to her entry really goes to her game, inside the same "res" (state only; her chest is hers) */
+ let IL=[];try{IL=(t.inv||[]).filter(e=>e&&inv0.indexOf(e)<0);if(IL.length){t.inv=t.inv.filter(e=>IL.indexOf(e)<0);for(const e of IL)if(typeof ilSent==="function")ilSent(e,t)}}catch(e){console.error(e)}
+ try{sendRes(t,k,b0,r,CW.inv,IL)}catch(e){console.error(e)}return r}})();
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
@@ -253,12 +256,12 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
 function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;
  const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
- if(Object.keys(fx).length)apply(fx);S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
+ if(Object.keys(fx).length)apply(fx);let ilH="";try{ilH=ilRecv(m)}catch(e){console.error(e)}S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
  if(g.rel)S.rl[fpid]=cl((S.rl[fpid]||0)+g.rel,-100,100);if(g.oan)S.ro[fpid]=cl((S.ro[fpid]||0)+g.oan,0,100);
  if(g.em)S.cev[fpid]=Math.max(0,(S.cev[fpid]||0)+g.em);if(g.conf)S.confined=Math.max(0,(S.confined||0)+g.conf);
  const f=friendEntry();if(f&&g.rel){f.rel=cl((f.rel||0)+g.rel,-100,100);if(f.__b)f.__b.rel=f.rel}
  const who=m.seen==="named"?`<b>${esc(m.who)}</b>: ${esc(m.n)}.`:"Có kẻ ngấm ngầm ra tay với ngươi.";
- const note=m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"";
+ const note=(m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"")+ilH;
  if(g.dead){if(note)pushModal({t:"Biến cố",h:note});try{die(m.seen==="named"?`Bị ${m.who} hại`:"Bị kẻ gian hãm hại")}catch(e){console.error(e)}return}
  if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
  if(note){pushModal({t:m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
@@ -266,6 +269,9 @@ function onActr(m){if(!CW.on||m.from===CW.seat||m.ack)return;const a=CW.acts[m.i
  if(!m.ok||!v||!v.alive){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
  CW.inv=m.id;let r="";try{r=runAct(S,v,a.k,a.extra)}finally{CW.inv=false}if(r)log(r);
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`});showModal();render()}
+function ilRecv(m){const L=(m.items||[]).filter(e=>e&&typeof e==="object"&&typeof e.k==="string");if(!L.length)return"";
+ S.inv=S.inv||[];const f=friendEntry();for(const e of L){delete e.iu;delete e.w;e.from=f?f.id:"coop";S.inv.push(e);if(typeof ilGot==="function")ilGot(e,f)}
+ return `<p>${L.map(e=>esc(typeof ilNm==="function"?ilNm(e):e.k)).join(", ")}: đã cất vào rương ngươi.</p>`}
 COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
 let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}

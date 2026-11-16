@@ -367,19 +367,20 @@ function wdPawnMonth(p){if(!p.wdPawn||!p.wdPawn.length)return"";let r="";p.wdPaw
 
 /* ---------- ngự tứ lost or broken = bất kính (the same risk for everyone holding one) ---------- */
 function wdNtHeld(p){const L=[];const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]&&wdIsNt(w[sl]))L.push({sl,e:w[sl]});(p.inv||[]).forEach(e=>{if(e&&!e.h&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)L.push({e})});return L}
-function wdNtRemove(p,e){const w=wdOf(p);for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;const k=wdDefault(p,sl);if(k)w[sl]={k,from:"base"};return}const i=(p.inv||[]).indexOf(e);if(i>=0)p.inv.splice(i,1)}
+function wdNtRemove(p,e,how){const w=wdOf(p);let done=false;for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;const k=wdDefault(p,sl);if(k)w[sl]={k,from:"base"};done=true;break}if(!done){const i=(p.inv||[]).indexOf(e);if(i>=0)p.inv.splice(i,1)}
+ /* item conservation (jil): never gone for good */if(typeof ilGone==="function")ilGone(p,e,how==="bị mất"?"lost":"fix",{cause:"srv"})}
 function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(s.tr==="nhat"||s.tr==="tham"));
  if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:-10});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. Sủng -10, bị phạt.</p>`})}}
  if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&clumsy.tr==="tham"?"bị mất":"bị làm vỡ";
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
- wdNtRemove(p,x.e);if(roll(55)){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}, mang tội bất kính.`)}catch(e){}}return""}
+ wdNtRemove(p,x.e,how);if(roll(55)){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}, mang tội bất kính.`)}catch(e){}}return""}
 PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHeld(S).find(x=>x.e.k===pp.k);
  const o=cl(50+(S.mat||0)*5,5,95);
  return{t:`<p><b>${it.n}</b>${/ngự tứ/.test(it.n)?"":" (ngự tứ)"} ${pp.how}${pp.by?`; ${pp.by} run rẩy quỳ xin tội`:""}.</p><p class="past">Làm mất hay làm hỏng đồ ngự tứ là tội bất kính.</p>`,who:pMe(),o:[
-  {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e);apply({sung:-6,danh:-3});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. Sủng -6, Danh -3.</p>`})}},
+  {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:-6,danh:-3});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. Sủng -6, Danh -3.</p>`})}},
   {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:-40},j67:"tốn: Bạc -40",go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}
-    else{const x=find();if(x)wdNtRemove(S,x.e);S.wdNtHide={n:it.n,how:pp.how,due:wk()+3+R(4)};Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p class="r">${pp.how==="bị mất"?"Lùng khắp nơi không thấy":"Thợ sửa hỏng hẳn"} ${it.n}. Chuyện này còn có thể lộ ra.</p>`})}}},
-  {n:"Giấu đi, im lặng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e);S.wdNtHide={n:it.n,how:pp.how,due:wk()+2+R(5)};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
+    else{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+3+R(4)};Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p class="r">${pp.how==="bị mất"?"Lùng khắp nơi không thấy":"Thợ sửa hỏng hẳn"} ${it.n}. Chuyện này còn có thể lộ ra.</p>`})}}},
+  {n:"Giấu đi, im lặng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+2+R(5)};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
 /* ngự tứ cannot be given away or used to frame anyone */
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return g0.apply(this,arguments)}})();
 (function(){const p0=plantItem;plantItem=function(a,t,ix){const e=a&&a.inv&&a.inv[ix];if(e&&wdIsNt(e))return"";return p0.apply(this,arguments)}})();

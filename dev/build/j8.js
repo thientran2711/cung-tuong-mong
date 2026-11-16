@@ -139,7 +139,7 @@ function stealNight(a,t,mode){ap(a,mode==="road"?{suc:-5}:{duc:-4});const o=oSte
 function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,-99);relAdd(q,p,-10);punish(p,"bị Hoàng hậu xử tội",n>=3?2:1);return r}
 function vpItems(p){const r=rkOf(p);const L=(p.inv||[]).filter(e=>e.w&&IT[e.k]&&IT[e.k].rk>r);if(p.dress&&p.dress.until>S.turn&&IT[p.dress.k].rk>r)L.push({k:p.dress.k,dress:1});return L}
 function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=>IT[e.k].n).join(", ");
- if(roll(oVP(a))){t.inv=t.inv.filter(e=>!(e.w&&IT[e.k].rk>rkOf(t)));if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:-8});punish(t,"vượt phẩm",1);relAdd(a,t,-10);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh -8. `}
+ if(roll(oVP(a))){ilFilter(t,e=>!(e.w&&IT[e.k].rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:-8});punish(t,"vượt phẩm",1);relAdd(a,t,-10);return `${NMc(a)} tố ${NM(t)} vượt phẩm (${n}): <span class="${t===S?"r":"g"}">thành</span>. Đồ bị tịch thu, Danh -8. `}
  ap(a,{danh:-3});relAdd(a,t,-10);return `${NMc(a)} tố ${NM(t)} vượt phẩm, ${judgeName(t)} bỏ qua. `}
 
 /* ================= ITEMS ================= */
@@ -207,14 +207,14 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint
  if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2)}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. Sủng +${Math.max(1,Math.round(g/2))}. `}
  if(r==="th"){ap(a,{th:g});return `${NMc(a)} dâng ${it.n} lên Thái hậu. Thái hậu +${g}. `}
  relAdd(a,r,g+3);if(r.queen||(r===S&&S.rank>=7))ap(a,{hh:g});
- const ent={k:e.k,from:key(a)};if(e.t){ent.t=e.t;ent.by=e.by}
+ const ent={k:e.k,from:key(a)};if(e.iu)ent.iu=e.iu;/* the same piece (item ledger jil) */if(e.t){ent.t=e.t;ent.by=e.by}
  if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
  r.inv.push(ent);if(e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,2);relAdd(a,r,-25);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm 2 chứng cứ. `}
  if(IT[e.k].sl&&IT[e.k].rk>rkOf(r)&&(r.trait==="Kiêu ngạo"||r.trait==="Tham vọng"||roll(25)))wear(r,r.inv.length-1);
  return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
-function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
- if(!roll(oPlant(a,t))){/*evok: plant act (runAct deed)*/evA(t,a,2);relAdd(a,t,-20);return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm 2 chứng cứ. `}
- t.inv.push({k:e.k,t:e.t,by:key(a),h:1});return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
+function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
+ if(!roll(oPlant(a,t))){/*evok: plant act (runAct deed)*/evA(t,a,2);relAdd(a,t,-20);if(typeof ilGone==="function")ilGone(a,e,"evid");return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm 2 chứng cứ. `}
+ t.inv.push({k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
 /* a taint working on its holder */
 function taintHit(p,e,used){const t=e.t;if(!t)return"";let r="";
  if(t==="xa"&&p.preg&&!p.fake&&(used||roll(35))){p.preg=0;p.hidden=false;ap(p,{suc:-20});r=`<span class="r">${NMc(p)} động thai, sảy mất đứa bé.</span> `}
@@ -260,7 +260,7 @@ PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{w
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`bậc ${b.l}`,go:()=>pushFront(mkP("night1",{q:1+b.l,vp:0}),"Đêm thị tẩm")},
  {n:"Để mộc, tự nhiên",fx:{},go:()=>pushFront(mkP("night1",{q:1,vp:0}),"Đêm thị tẩm")}]}};
 PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mood+R(3),ex="";
-  if(p.vp&&roll(40)){const n=vpItems(S).map(e=>IT[e.k].n).join(", ");S.inv=S.inv.filter(e=>!(e.w&&IT[e.k].rk>S.rank));if(vpItems(S).length)S.dress=null;apply({danh:-4});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh -4.`;log(ex)}
+  if(p.vp&&roll(40)){const n=vpItems(S).map(e=>IT[e.k].n).join(", ");ilFilter(S,e=>!(e.w&&IT[e.k].rk>S.rank),"conf");if(vpItems(S).length)S.dress=null;apply({danh:-4});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh -4.`;log(ex)}
   pushFront(mkP("night2",{s,ex}),"Đêm thị tẩm")};
  return{who:pEmp(),t:`<p>Canh một, thái giám Kính sự phòng cởi xiêm ngoài, cuộn ngươi trong tấm chăn gấm thêu phượng, khiêng vào Dưỡng Hòa điện theo lệ cũ.</p><p>Màn vàng rủ thấp. Hoàng thượng đặt quyển sách xuống${E.mood>=2?", vẻ mệt mỏi":""}, nhìn ngươi.</p>`,o:[
  {n:"Bàn thơ văn, cầm kỳ",fx:{},od:(has("trongtai")?3:S.tai>=60?1:0),x:nx(has("trongtai")?3:S.tai>=60?1:0,has("trongtai")?"ngài trọng tài, rất hợp":""),go:go(has("trongtai")?3:S.tai>=60?1:0)},
@@ -454,8 +454,8 @@ PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng v�
 PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=IT[e.k],hi=rkOf(f)>S.rank;
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
  {n:"Nhận",fx:{},x:"cất vào rương",go:()=>S.inv.push(Object.assign({},e))},
- {n:"Trả lại quà",fx:{},x:hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý",go:()=>{relAdd(S,f,hi?-12:-4);if(f.queen)apply({hh:-8})}},
- {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-10},x:`${word(cl(oSee(S,true)+25,5,95))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(cl(oSee(S,true)+25,5,95))){evA(S,f,2);log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} +2.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,-3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
+ {n:"Trả lại quà",fx:{},x:hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý",go:()=>{f.inv=f.inv||[];f.inv.push(Object.assign({},e));/* the gift goes back to her (item ledger jil) */relAdd(S,f,hi?-12:-4);if(f.queen)apply({hh:-8})}},
+ {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-10},x:`${word(cl(oSee(S,true)+25,5,95))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(cl(oSee(S,true)+25,5,95))){evA(S,f,2);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} +2.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,-3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
 function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it=IT[e.k];
  if(a==="use"){if(it.evi){pushDil(mkP("evpick",{ix}),"Tập chứng cứ");render();return}if(e.k==="botngua"){if(!can(2))return;pushDil(mkP("itarget",{ix,k:e.k}),it.n);render();return}const r=useItem(S,ix);if(r)log(r)}
  else if(a==="wear")wear(S,ix);
