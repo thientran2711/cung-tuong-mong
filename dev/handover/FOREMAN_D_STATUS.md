@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:33Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:35Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -29,7 +29,7 @@ main at start = eba64ead4.
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
-| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid | opus | worker session_01DgYSWoeRakcsjerKcBESWQ RUNNING |
+| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid @66a55b06 | opus | SẴN SÀNG KIỂM (jcoopask.js guest→host request, 8 cases; coop-e2e 61/61; worker archived) → reviewer session_01DgYSWm8Dq4FhHzrbnuCRGL RUNNING (trial-merge with coop-b1b5-p2) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
