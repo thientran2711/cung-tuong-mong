@@ -10,7 +10,7 @@ main at start = eba64ead4.
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r3 @f484d226 | sonnet | PASS (see ## PASS) |
 | D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV RUNNING |
 | C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWo9bFK5NRcy5Hrr3UX RUNNING |
-| C44 cloud-save (Sổ mây) | review/cloud-save | opus | RUNNING (client + Worker code + local tests; DEPLOY → Foreman C) |
+| C44 cloud-save (Sổ mây) | review/cloud-save @38bf315f → review/cloud-save-r1 | opus | SẴN SÀNG KIỂM → opus reviewer (normal + SECURITY) RUNNING |
 | D50 consort placeholder frame in dialog person column | review/dlg-fig-ph | sonnet | RUNNING |
 | balance-after-truth re-run | review/balance-after-truth | opus | RUNNING |
 | reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
@@ -31,6 +31,9 @@ main at start = eba64ead4.
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- C44 (a): the worker made the Sổ mây code 26 chars (130 bits) with Chép/Gửi buttons. OWNER_DECISIONS l.1016 (coordinator design, owner did not object) says 8 chars; the ≥128-bit rule came from D s1's brief, not the owner. Default = keep 8 chars + strong server-side rate limit/lockout, unless the main chat asks the owner once and she wants the long code. The reviewer is told to judge 8-char + lockout.
+- C44 (b): no "xóa sổ trên mây" button (the drop endpoint exists and is tested). Add one? (main chat / owner)
+- C44 deploy note: merging to main AUTO-DEPLOYS through .github/workflows/coop-worker.yml (migration v2 adds the Vault DO); no Cloudflare connector needed. If the account rejects the [[ratelimits]] blocks, remove them and redeploy. Smoke test in dev/PROGRESS_review-cloud-save.md.
 - KIT REQUEST (for the kit keeper, from D-R1 review): the event-frame body #mb is overflow:hidden, so long text is clipped (also on main: Nhập cung "Hậu cung" row at 1366x1024, any long event dialog) → the kit event-frame body needs a scroll area.
 - UX note (not blocking, for main chat): on the new-game screen the face picker starts below the fold (≈25 px visible at 755x1000, none at 1180x820 / 844x390).
 - (answered, see HANDOVER) Q-D1.
