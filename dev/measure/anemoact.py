@@ -1,6 +1,6 @@
 # usage: python3 dev/measure/anemoact.py <label>=<glob> [...]   (review/emotion-acts): outcome + emotion acts / outbursts / extremes per config
 import json,glob,sys,collections
-OLD=("Thái phi","Thái hậu","Hoàng thái hậu","Năm ","Xuất cung tuổi")
+OLD=("Thái phi","Thái hậu","Hoàng thái hậu","Năm ","Xuất cung tuổi","Tuổi xuân qua đi","Xuất gia")  # not a death: old age, leaving the palace, nunnery
 for arg in sys.argv[1:]:
     lab,g=arg.split("=",1);L=[]
     for f in sorted(glob.glob(g)):
@@ -13,7 +13,7 @@ for arg in sys.argv[1:]:
     hh=sum(1 for x in L if x["fate"]=="HH-STOP" or (x.get("maxRank") or 0)>=7)
     early=[x for x in L if x["fate"]!="HH-STOP" and not any(o in x["fate"] for o in OLD)]
     print(f"{lab}: lives {n}  HH {100*hh/n:.0f}%  early death {100*len(early)/n:.0f}%")
-    print("   fates:",dict(collections.Counter(x["fate"][:28] for x in L).most_common(8)))
+    print("   fates:",dict(collections.Counter(x["fate"][:28] for x in L).most_common(12)))
     E=[x["ea"] for x in L if x.get("ea")]
     if not E:continue
     wk=sum(e["wk"] for e in E) or 1

@@ -25,32 +25,35 @@
 Object.assign(BAL,{ea:{
  /* (1) her cards. mood = tâm trạng points the act moves (vent toward calm; vui: the joy settles), emo = points off the matching feeling seal,
     k = khắc; dapdo bạc + Danh; mang lòng of the scolded maid; khoc Sức; thu bạc (a eunuch carries the letter) + (gain) her family's answer
-    lifts her ánh a little more; dan Tài + and the rivals hear (Ghen); huong bạc and Đức (a pious deed). */
+    lifts her ánh a little more; dan Tài + and the rivals hear (Ghen; an NPC's playing: oan Oán of every other consort); huong bạc and Đức (a pious deed). */
  card:{dapdo:{g:"gian",k:1,mood:14,emo:20,bac:8,danh:1},mang:{g:"gian",k:1,mood:10,emo:15,loy:6},
   khoc:{g:"buon",k:1,mood:10,emo:15,suc:5},thu:{g:"buon",k:1,mood:13,emo:15,bac:5},
-  dan:{g:"vui",k:1,mood:-6,tai:1,ghen:2},huong:{g:"so",k:1,mood:12,emo:15,bac:6,duc:1}},
+  dan:{g:"vui",k:1,mood:-6,tai:1,ghen:2,oan:1},huong:{g:"so",k:1,mood:12,emo:15,bac:6,duc:1}},
  /* (2) extreme mood: wk tuần in a row, then cd tuần before the same person can be hit again. danh = lỡ lời Danh −; ghen = jealousy of
     every rival (ghenAll) at once + smugWk tuần of extra jealousy (×smugK on every ghenAll aimed at her); NPC: oan = Oán of every other
     consort toward the smug one, danh the same Danh loss; servants lose loy Lòng toward their master (a sulky / boastful servant). */
  ext:{wk:3,cd:8,danh:4,ghen:8,smugWk:4,smugK:1.5,oan:6,loy:5},
- /* (3) her outbursts: |mood v| ≥ v, chance ch % a tuần × temper (hot / even / timid), at most one a tuần, then cd tuần of quiet. */
- out:{v:60,ch:30,cd:2,t:{hot:1.6,even:1,timid:.6}},
- /* NPCs: act band actV ≤ emo.v < outV (chance actCh % a tuần), outburst emo.v ≥ outV (chance outCh % × temper), extreme emo.v ≥ extV;
+ /* (3) her outbursts: |mood v| ≥ v (inside band ±1 deep end and band ±2; measured r1: at 60 = 0.4 a 100 tuần, too rare to be felt),
+    chance ch % a tuần × temper (hot / even / timid), at most one a tuần, then cd tuần of quiet. */
+ out:{v:45,ch:30,cd:2,t:{hot:1.6,even:1,timid:.6}},
+ /* NPCs: act band actV ≤ emo.v < outV (chance actCh % a tuần), outburst emo.v ≥ outV (chance outCh % × temper), extreme emo.v ≥ extV
+    (r1 at 70: 25 extremes a 100 tuần across the harem, too common for "extreme");
     meWk = most events a tuần that other people's outbursts bring to her (the rest: log lines). */
- npc:{actV:40,actCh:25,outV:70,outCh:20,extV:70,meWk:1},
+ npc:{actV:40,actCh:25,outV:70,outCh:20,extV:80,meWk:1},
  /* what each reaction does (doer = her or the NPC). vent = mood points toward calm (hers) / feeling points off (NPC); bac, suc, danh, duc,
     loy (Lòng of the maid / every servant of the palace), oan (Oán of the wronged), rel (thiện cảm), ghen (ghenAll), aff (two friends' thiện cảm). */
- fx:{dapdo:{vent:20,bac:12,danh:1},mang:{vent:15,loy:8},danh:{vent:20,loy:20,duc:3,danh:2},khac:{vent:15,oan:10},pham:{vent:20,rel:15,danh:2},
+ fx:{dapdo:{vent:20,bac:12,danh:1},mang:{vent:15,loy:8},danh:{vent:20,loy:20,duc:3,danh:2},khac:{vent:15,oan:10,hiOan:20,punRk:2},pham:{vent:20,rel:15,danh:2},
   khoc:{vent:12,suc:8},boan:{vent:10,suc:12},thu:{vent:15,bac:6},matngu:{vent:8,suc:10},soat:{vent:12,loy:5},cau:{vent:15,bac:10},
   cham:{vent:12,rel:10,oan:8,danh:1},tui:{vent:10,suc:6},thuong:{vent:10,bac:15,loy:5},khoe:{vent:10,danh:2,ghen:6},tiec:{vent:10,bac:10,aff:4},hat:{vent:8,suc:6,tai:1},
-  /* the Emperor / Thái hậu: bestow = bạc to every consort (her too); rage = Sủng of the one he is angry with; scold = Thái hậu regard (th) */
-  ban:{vent:15,bac:5},noi:{vent:20,sung:4},quo:{vent:15,th:3},
+  /* the Emperor / Thái hậu: bestow = bạc to every consort (her too); rage = Sủng of the one he is angry with; scold = Thái hậu regard (th) / an NPC's Danh;
+     khac: hiOan = Oán of a higher-rank mistress whose maid an NPC scolded, punRk = ranks above the doer at which she has the doer punished */
+  ban:{vent:15,bac:5},noi:{vent:20,sung:4},quo:{vent:15,th:3,danh:1},
   /* servants: quarrel (Lòng both) / cry / work with a will (Lòng +) */
   cai:{vent:15,loy:3},sk:{vent:10,loy:2},hang:{vent:8,loy:2}},
- /* hỏi tội (a higher-rank mistress whose maid she scolded / beat): bac = the amends, danh = bowing her head, loy = her maid blamed, try =
+ /* hỏi tội: hitLoy = Lòng her maid loses when another consort scolds her; (a higher-rank mistress whose maid she scolded / beat): bac = the amends, danh = bowing her head, loy = her maid blamed, try =
     odds base of arguing back (+ (her rank − theirs) × rk + Danh / dn), win / lose Danh, oan = their Oán on a lost argument;
     her own maid beaten by a lower-rank consort: go = Danh + and maid Lòng +, their Oán +; let = Đức +, maid Lòng −. */
- hoi:{bac:20,danh:1,aff:3,loy:10,try:40,rk:8,dn:4,win:1,lose:3,oan:10,go:{danh:1,loy:5,oan:10},let:{duc:1,loy:5}}
+ hoi:{hitLoy:2,bac:20,danh:1,aff:3,loy:10,try:40,rk:8,dn:4,win:1,lose:3,oan:10,go:{danh:1,loy:5,oan:10},let:{duc:1,loy:5}}
 }});
 (function(){
 const E=()=>BAL.ea;
@@ -184,7 +187,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"danh":loyAdd(M,-F.loy);add(`lòng cung nữ −${F.loy}`);pay({duc:-F.duc,danh:-F.danh});h=me?`Cơn giận không kìm nổi, ngươi sai người đánh ${M.name} mấy roi vì một lỗi nhỏ. Chuyện lọt ra ngoài, cung nhân các cung bàn tán.`:`${Nm(p)} nổi giận, sai đánh cung nữ ${M.name}.`;try{emoEv(M,"punished","bị chủ nhân đánh")}catch(e){}break;
  case"khac":{const o=eaOtherMaid(p);if(!o)return null;target=o.who;const hi=rkOf(o.who)>rkOf(p);try{emoEv(o.m,"punished",`bị ${nm(p)} mắng`)}catch(e){}
   if(o.who===S){eaHitMine(p,o.m);h=`${Nm(p)} mắng cung nữ ${o.m.name} của cung ngươi.`;break}
-  if(hi){if(me){eaS().hoi.push({id:o.who.id,m:o.m.name,w:W()});add(`${nm(o.who)} sẽ đến hỏi tội`)}else{oanAdd(o.who,p,F.oan*2);if(o.who.queen||rkOf(o.who)>=rkOf(p)+2)punish(p,`mắng cung nữ của ${o.who.name}`,1)}}
+  if(hi){if(me){eaS().hoi.push({id:o.who.id,m:o.m.name,w:W()});add(`${nm(o.who)} sẽ đến hỏi tội`)}else{oanAdd(o.who,p,F.hiOan);if(o.who.queen||rkOf(o.who)>=rkOf(p)+F.punRk)punish(p,`mắng cung nữ của ${o.who.name}`,1)}}
   else{oanAdd(o.who,p,F.oan);if(me)add(`${nm(o.who)} oán ngươi`)}
   h=me?`Gặp một cung nữ của ${nm(o.who)} ở hành lang, ngươi trút cơn giận lên nàng, mắng một trận nặng lời.${hi?` Chủ nhân nàng phẩm vị cao hơn ngươi: “đánh chó phải nhìn mặt chủ”.`:""}`:`${Nm(p)} mắng cung nữ ${o.m.name} của ${o.who.name}.`;break}
  case"pham":{const t=eaSuperior(p);if(!t)return null;target=t;relAdd(p,t,-F.rel);pay({danh:-F.danh});punish(p,`phạm thượng với ${t.queen?"Hoàng hậu":t.name}`,1);if(me)add(`${t.queen?"Hoàng hậu":nm(t)} thiện cảm −${F.rel}`);
@@ -204,7 +207,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"hat":pay({suc:-F.suc,tai:F.tai});h=me?"Vui quá, ngươi ôm đàn ca hát đến tận khuya, sáng ra mệt rã rời.":`${Nm(p)} ca hát thâu đêm.`;break;
  case"ban":{const L=liveC();for(const x of L)ap(x,{bac:F.bac});if(!S.out){apply({bac:F.bac});eaHitMe(p,"ban")}h=`${Nm(p)} vui, ban thưởng khắp hậu cung.`;break}
  case"noi":{const t=eaTarget(p);if(!t)return null;target=t;if(t===S){apply({sung:-F.sung});eaHitMe(p,"noi")}else ap(t,{sung:-F.sung});h=`Hoàng thượng nổi giận với ${t===S?"ngươi":t.name}.`;break}
- case"quo":{const t=eaTarget(p);if(!t)return null;target=t;if(t===S){apply({th:-F.th});eaHitMe(p,"quo")}else if((rivals||[]).includes(t))ap(t,{danh:-1});h=`Thái hậu quở trách ${t===S?"ngươi":t.name}.`;break}
+ case"quo":{const t=eaTarget(p);if(!t)return null;target=t;if(t===S){apply({th:-F.th});eaHitMe(p,"quo")}else if((rivals||[]).includes(t))ap(t,{danh:-F.danh});h=`Thái hậu quở trách ${t===S?"ngươi":t.name}.`;break}
  case"cai":{const o=(eaOwner(p)?staffOf(eaOwner(p)):[]).filter(s=>s!==p);const q=o.length?pick(o):null;loyAdd(p,-F.loy);loyAdd(q,-F.loy);h=`${p.name} cãi nhau${q?` với ${q.name}`:""}.`;break}
  case"sk":loyAdd(p,-F.loy);h=`${p.name} ${r.n.toLowerCase()}.`;break;
  case"hang":loyAdd(p,F.loy);h=`${p.name} ${r.n.toLowerCase()}.`;break;
@@ -214,7 +217,7 @@ function eaOwner(s){if(s===S.maid||(S.staff||[]).includes(s))return S;for(const 
 /* an NPC's outburst lands on her (her maid, her standing): one event, kit frame */
 /* at most ONE event a tuần from other people's outbursts (BAL.ea.npc.meWk); the rest go to the log */
 function eaMeSlot(){const A=eaS(),w=W();if(A.hitW===w&&(A.hitN||0)>=E().npc.meWk)return false;if(A.hitW!==w){A.hitW=w;A.hitN=0}A.hitN++;return true}
-function eaHitMine(p,m){try{if(!m)return;const lower=rkOf(p)<S.rank&&!S.out;loyAdd(m,-2);EA_N.hoiMe++;
+function eaHitMine(p,m){try{if(!m)return;const lower=rkOf(p)<S.rank&&!S.out;loyAdd(m,-E().hoi.hitLoy);EA_N.hoiMe++;
   if(lower&&eaMeSlot()){Q.push({ev:1,t:"Cung nữ bị ức hiếp",who:eaWho(p),art:"img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
    opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`Chắc chắn · thành: Danh +${E().hoi.go.danh}, lòng ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
     {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`Chắc chắn · thành: Đức +${E().hoi.let.duc} · kèm: lòng ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]})}
@@ -269,7 +272,7 @@ function eaNpcWeek(){if(!eaHost())return;const N=E().npc;
   if(e.v>=N.outV){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,eaKind(p)+":"+P.r.k);cnt(EA_N.npcOutT,T.k);if(eaKind(p)==="c"&&typeof newsAdd==="function"&&p.id!=null)try{newsAdd(p,"emo",o.h)}catch(x){}}}}}
   else if(e.v>=N.actV&&roll(N.actCh)){/* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
    const C=E().card,kd=eaKind(p),cg=g==="ghen"?"buon":g;const L=Object.keys(C).filter(k=>C[k].g===cg);if(!L.length)continue;const k=pick(L),c=C[k];
-   if(kd==="c"){if(c.bac&&(p.bac||0)<c.bac)continue;const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);if(c.loy){const m=maidOf(p);if(m.length)loyAdd(pick(m),-c.loy)}if(c.ghen)for(const x of liveC())if(x!==p)oanAdd(x,p,1)}
+   if(kd==="c"){if(c.bac&&(p.bac||0)<c.bac)continue;const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);if(c.loy){const m=maidOf(p);if(m.length)loyAdd(pick(m),-c.loy)}if(c.oan)for(const x of liveC())if(x!==p)oanAdd(x,p,c.oan)}
    ventNpc(p,c.emo||Math.abs(c.mood));cnt(EA_N.npcAct,kd+":"+k)}}}
 function eaWeek(){if(!eaOn())return;EA_N.wk++;const A=eaS(),w=W();if(A.wk===w)return;A.wk=w;
  try{eaHoi()}catch(e){console.error(e)}
