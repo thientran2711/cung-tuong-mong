@@ -11,3 +11,16 @@ Owner 15/11: "Giải thích khó hiểu quá" (spy picker odds line) + scope ext
 
 ## Exceptions (rank+name)
 Hậu cung roster strip short names (not full names); her own name S (header shows her rank chip); kids whose name carries the title; strangers stay masked by j61.
+
+## Reviewer r1 (review/pick-hint-r1)
+- Owner ruling (session 8, newest): on the STAGE only HER tag glows. jk4 48.1e: her tag (`#j59metag`, any `.tag.j59mine` set by j59tags
+  for S; co-op = each player's own S) keeps the 48.1d paper halo on the rank line + the 48.1b gold glow on the name; every other stage tag is
+  plain rank colour + plain ink with only a 0.6px zero-blur paper hairline edge (no glow) — without it, plain lines measured 1.0–1.7:1
+  against the painting on carpets / night scenes (`dev/test/stage-tag-contrast.js` + `.py`, 14 places x sáng/tối). KIT.md 48.1d/48.1e.
+- Stage side cards (`.ksh .k3c`): kitRankNamePaint made "Cung nữ thân tín X" one long nowrap line → side column ~115px wider at 755 and a
+  squeezed card at 844. Title now stacks above the name (rank line over name, 48.1).
+- kitRankNamePaint observer: repaints only the changed subtrees per frame (full pass at start or >120 roots). Idle mutations 0, no nested
+  .kname, dry-run leftovers 0 on every tab.
+- kitNoChange: double-space / space-before-full-stop tidy kept for every piece (branch had dropped it: "Lụa Hàng Châu . Được" showed);
+  separator strip only after a dropped clause. Old vs new over 1702 fact rows: only diffs are the restored ", " / "; " / "·" before tags.
+- j70: restored main's `Math.round(6*sev)` (the branch had reverted it by accident).
