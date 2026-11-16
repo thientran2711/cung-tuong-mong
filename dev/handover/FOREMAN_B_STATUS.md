@@ -1,6 +1,7 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
-last wake: 11/16/2026 11:50Z (Foreman B session 5 = session_01N1tNP5KsNhWG9kerEMKRYg) — hourly wake = SERVER-SIDE scheduled task trig_01JD2zdJ5RhLkYjisreB4TBy at :47, fires into session 5.
+last wake: 11/16/2026 12:00Z (Foreman B session 5 = session_01N1tNP5KsNhWG9kerEMKRYg) — hourly wake = SERVER-SIDE scheduled task trig_01JD2zdJ5RhLkYjisreB4TBy at :47, fires into session 5.
+WAKE 12:00Z (s5): 3 PASS → READY (nw-poem-r1, mood-bar-r1, presentation-r1); reviewers archived. RUNNING: worker mg-balance (opus) + reviewers nw-quiz-r1, rank-port-r1, spread-events-r1. Free slots 8; waiting list unchanged (D19, night-card preg-FX, ONE-CORE follow-up, D3 KIT REQUEST, Q6 D31 re-measure after balance-pass-r1 lands). New owner Q QB3 below.
 WAKE 11:50Z (s5): nw-lantern-r1 PASS 9696bc72 → READY (reviewer archived). RUNNING: worker mg-balance + 6 reviewers (mood-bar, nw-quiz, rank-port, presentation, spread-events, nw-poem). Inbox 11:41Z (Q6 option 2: re-measure D31 difficulty modes + tune HH reach on Vừa to ~32 %) WAITS until review/balance-pass-r1 is on main (not yet at main 695934d1) — then open an opus worker. Free slots 5.
 WAKE 11:47Z (session 5): nw-poem worker SẴN SÀNG KIỂM eb5f223953b90ffd941dff109bd51fb93a0d8302 (report reports/nw-poem.md; session 4's 'no push' note was wrong) → reviewer nw-poem-r1 session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) opened on review/nw-poem-r1; nw-poem worker ARCHIVED. RUNNING now: worker mg-balance + 7 reviewers (mood-bar, nw-lantern, nw-quiz, rank-port, presentation, spread-events, nw-poem). Free slots 4.
 PICKUP 11:45Z (session 5): alive. START_CTX ~6 % of the 1M window (~60k tokens est.; get_session used_tokens reads 0) → rollover budget START_CTX + 25 % of the window = ~31 % (ceiling 60 %) per START_FOREMAN ROLLOVER box.
@@ -21,6 +22,7 @@ Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no r
 - Owner questions: QB1, QB2 (QUESTIONS above) + older Q3, Q5, Q6, Q10–Q15, Q20, Q23, Q25 + C35b Qs.
 
 ## QUESTIONS (new 11:40Z, for main → owner)
+- QB3 (D12 mood-bar reviewer): OD:L600 says the mood rule 'applies to NPCs too'. NPCs keep their per-person feeling (moves their odds/acts), but the visible Sims-like BAR is hers only. Also show a bar for NPCs, or keep it hers only?
 - QB1 (nw-lantern worker): rename the lantern title 'Trí khôi' → 'Đăng khôi'? Keep the talent formula Tài + Tâm cơ + Thi, or change it now the game has no words?
 - QB2 (D11 presentation worker): use the night music for the 'sủng ái' event group until new music exists? Painted FX only in the dramatic group, or also (lighter) in the ordinary group as now?
 
@@ -85,6 +87,9 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D42 places-leftovers | review/places-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS add62a7e9283cd328ddd9a46951abf0210e7bb26 (includes D30 palace-map-port-r1; kitPalaceMap renumbered §71→§76) |
 
 ## PASS (for the main coordinator to fast-forward)
+READY review/nw-poem-r1 5d2000414bedc4839f39b98d999606b00b020295 (no-word-games family A: Thơ → Thư pháp đồ nét, Câu đối → Đối nét bút; all entry points, 6 sizes 10/10; contains main 802fe821, not 695934d1 → merge on landing; when mg-balance lands: assemble.py conflict, keep both jmgt.js and jnwp.js; stale j71 festival labels noted in report)
+READY review/mood-bar-r1 ce43d3b58988203f4bec1f8f27421c85ea38042e (D12; Sims-like mood bar, hers only; jmood comfort-visit dialog now an ev choice (cost + hint only); contains main 695934d1; owner Q QB3)
+READY review/presentation-r1 9ec1852a090c9cd0eb03b31bd273e1738142693e (D11; per-group event presentation: sting/music/fx via jpres.js wrapping showModal + musicCtx, kit-only; 75/75 categories × 6 sizes; coop-e2e 59/59; contains main 695934d1; KIT REQUESTS K-A/K-B/K-C for the kit keeper; owner Q QB2)
 READY review/nw-lantern-r1 9696bc72f20e7a52a3ac6f3f351100d0c0ebe062 (no-word-games family B: Thắp đèn replaces Đố đèn riddles at every entry; kg82Canvas optional hMin (default unchanged) — kit keeper note; numbers in BAL.lantern; contains main 802fe821, not 695934d1 → merge on landing; Tuyệt phẩm 20–30 % re-measure after mg-balance lands; owner Q = QB1)
 READY review/veil-zoom-r1 622dffcb7ea2dc7a338adf93d9125853c0126cdc (D25; face overlays follow per-picture portrait zoom; veil-zoom.js 0 fail at 4 viewports; KIT KEEPER sign-off needed on KIT.md §28.8 + kporFx/.kfxz; merge latest main on landing)
 READY review/header-own-r1 0d48819bbfdf16a5294b19c21354af4e5c056e90 (D9; header already shows only her own info on main; adds dev/test/header-own.js probe, 6 viewports PASS; contains main cdad7109, not 409ad528 → merge on landing; reviewer session archived)

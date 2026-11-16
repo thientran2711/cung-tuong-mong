@@ -152,14 +152,14 @@
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | PASS ebc85f78 | 16/11 11:06Z |
 | D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | RUNNING | 16/11 11:16Z |
 | design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
-| D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | RUNNING | 16/11 11:38Z |
+| D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | DONE PASS ce43d3b5 (archived) | 16/11 11:38Z |
 | nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | DONE PASS 9696bc72 (archived) | 16/11 11:38Z |
 | nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | RUNNING | 16/11 11:38Z |
 | D36 rank-port reviewer | review/rank-port-r1 | B | session_01N1tNP3gJ9boCKEYKaNSuEG (sonnet) | RUNNING | 16/11 11:38Z |
-| D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | RUNNING | 16/11 11:38Z |
+| D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | DONE PASS 9ec1852a (archived) | 16/11 11:38Z |
 | D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | RUNNING | 16/11 11:38Z |
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
-| nw-poem reviewer | review/nw-poem-r1 | B | session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) | RUNNING | 16/11 11:47Z |
+| nw-poem reviewer | review/nw-poem-r1 | B | session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) | DONE PASS 5d200041 (archived) | 16/11 11:47Z |
 | skin-light: owner bug player vs maid skin/light mismatch on stage (whole figure group, one kit light) | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku (opus) | RUNNING | 16/11 11:53Z |
 | cardflip-glow2: owner bug thị tẩm frame = whole-frame glow, no chasing light (kit-wide) | review/cardflip-glow2 | main s15 | session_01UV1SzhKvfZJ5FbwZFnCStj (sonnet) | RUNNING | 16/11 11:55Z |
 | skin-light | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku | RUNNING | 16/11 11:57Z |
