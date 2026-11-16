@@ -176,3 +176,15 @@ Branch review/night-final @ fdc9297b — SẴN SÀNG KIỂM.
 Not done (context): STEP 5 10-night ledger — the hook is ready: per not-played night call `window.stealPass(holder,{live:false})` (one NPC batch, lines only, same tie rule).
 Watch in review: (1) a co-op host's own try waits ("chờ Hoàng thượng định đoạt") until the guest has passed that khắc — by design (no speed reward); (2) the co-op seat rule change (jcoopworld seatWeek) touches promotions, not nights.
 Save fields added: S.nfA now {d,L,K,gU,n}; S.nfR {d,k[]} (old saves: absent → rebuilt, harmless).
+
+## 7. HANDOVER (s25 worker rolled over at START_CTX ≈ 4 % + 25 %; coordinator MAIN s26 opens the successor)
+fdc9297b follows OD 22:25Z, which the owner REPLACED at 22:45Z (+ 22:50Z defence). Successor: read OD 22:45Z + 22:50Z lines VERBATIM, then rework review/night-final ON TOP of fdc9297b.
+KEEP from fdc9297b: STEP0 merge (worldOn host gate), no-speed audit fixes (jcoopworld seatWeek, jsteal window.stealPass), j75 B4L card lock, `nfResolve` tie rule (one roll each; several → higher Sủng → `seedPick` seeded, order-free), `herWin` sequence (summons nfsum → prep → night1 → night2 → night-end card → day ends), co-op relay (send/apply/gres, nfSend hook), tests coop-steal/night-multi as templates.
+CHANGE (jnf.js):
+1. Flip moves from START of tối to the END of tối's 4th khắc (§1 nextBuoi hook → run at the endTurn commit, before the night). Tối keeps all 4 khắc.
+2. Remove Tranh sủng / Chặn ngự giá from Hành sự / ACT lists (j2 deck cards b:B4L, ACT.steal/road, SOC) — they exist ONLY in the flip scene. Delete §2b khắc-tick path (`pump`, `npcTries`, `myTry`, stealNight/runOpt wrappers, render `tick`, spend LASTK) and the "held summons stolen later" path.
+3. In the flip scene (jflip kitCardFlip, after the result): forced choice for every player — attackers: Tranh sủng / Chặn ngự giá / Thôi; the FLIPPED consort: Giữ chân Hoàng thượng / Thôi; 10 s countdown (timeout = Thôi; reuse kit §69 coop-timer if it fits, else KIT REQUEST); no khắc, no Sức/cost. Order of choosing must not matter. NPCs choose at the same moment (jsteal stealWant).
+4. Resolve ONCE when all chose: defence roll first (success → every attacker drops one VANPHONG odds rung) → each attack rolls once → nfResolve tie rule → none = flipped keeps it. Held after attack → small Sủng gain; robbed → heavier oán (BAL).
+5. ONE odds function (e.g. window.nfOdds(who,mode,ctx)) reading BAL.steal.* placeholders — numbers are tuned by the separate numbers worker on review/balance-core.
+6. Co-op: host collects both seats' choices (guest sends {choice} on act ctm-nf), resolves, relays; each seat plays its own result in sync.
+Tests to update: night-multi, night-final, night-day, night-steal-unit, cardflip (choice UI at 755x1000/1180x820), coop-steal (both seats choose in the scene), coop-night/coop-e2e baseline (105/105, 59/59 now), old save, quickcheck.
