@@ -17,3 +17,12 @@ Screenshot: dev/handover/reports/tut-place-755x1000-step5.jpg (step 5/12, card b
 
 ## DECISION FOR MAIN / OWNER (conflict)
 OD:L963 + kit-conform required every tutorial step card to have the SAME frame size. A card that never covers its hole cannot do that on a 1000-px-high screen (700 px card + 250 px hole + tabs). I changed the kit-conform check (dev/test/kit-conform.js l.107) to: a step card may be smaller than the intro frame (height first), never larger. If the owner wants strictly one size, the alternative is a smaller intro/step card height for the whole tour at this viewport (~560 px); say so and I will change the one constant.
+
+## UPDATE (main s18: OD:L963 binding, no shrink) — e10e892d
+Reverted the shrink and the kit-conform relax. place() now moves the SAME-size card by position only; when no side fits it takes the screen spot covering the least of the hole.
+Numbers where a same-size card CANNOT avoid the tap hole (step "thu", card frame vs hole):
+- 755x1000: card 560x700, hole 737x250 at y145..394; free below 586, above 137 -> card at y292..992, overlap 102 px strip (57018 px²); top 147 px of the lit card stays tappable.
+- 412x1058: card 384x720, hole y148..398; overlap 26044 px².
+- 1000x755: card 560x529, overlap 11088 px².
+- 1180x820, 1366x1024: fits, overlap 0, green.
+Options for main/owner: (a) accept strip overlap (test: relax only for this); (b) lower the ONE kit frame height --kph for portrait viewports (e.g. 700 -> ~580 at 755x1000) for ALL pop-ups; (c) hole narrower on the act card (target the card's top row only). I did not do any without a decision.
