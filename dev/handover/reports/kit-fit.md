@@ -180,3 +180,15 @@ Recipe: worktree + `bash dev/site/build_site.sh` + `python3 -m http.server`; res
 3. (s22 19:15Z) YES: the equal-gap rule (§32.2b) also covers the week-book person page (j87 kitStageFig + jsl kitBookFigClamp) and the identity card
    (j79 kpIdFig) — whole group. Then merge latest origin/main, push ONE sha, before|after shots Fold 755x1000 + iPad 1180x820 for all items, report
    "SẴN SÀNG KIỂM <sha>" to MAIN s22 = session_01UV1SzjhT28XQmRt2EHNffg (one reviewer for all).
+
+## HANDOVER (kit keeper r2 → successor, 16/11 20:30Z) — rollover: context 38 % (START_CTX ≈ 6 %, limit START_CTX+25 %)
+Round 2 / 2b DONE: SẴN SÀNG KIỂM 7865ed13a (sent to MAIN s23). ROUND 3 NOT STARTED — successor (opened by MAIN s23 = session_01UV1SziE5Dau1pVrytppq81) does it on review/kit-fit:
+- OWNER ITEM (s23 relay, verbatim): Luân hồi screen "Các thân phận trong vòng luân hồi" (iPad landscape: 2 rows × 5 origin cards squeezed in the middle third):
+  "Tôi muốn mấy cái thẻ thân phận này nó to ra, trải dài hết cái màn nền luôn. Tức là không cần phải che full hết màn nền, nhưng mà tôi muốn nó to hơn nữa."
+  → cards span the background width (keep side margins, title + moon wheel visible, Tiếp / Bỏ qua buttons below), bigger picture + text, equal gaps.
+  ONE kit change for the whole group (every origin / identity picker grid: Luân hồi #kroul, Kiếp mới / new-life pick, co-op origin pick).
+  Check iPad 1180x820 + 1366x1024, Fold 755x1000, Fold cover 412x1058, phone 390x844; LOOK at every shot; send MAIN s23 the sha + iPad and Fold shot paths (scratch/CDN, not git).
+  OD line: last lines of dev/OWNER_DECISIONS.md (docs branch).
+Recipe (what worked here): sparse worktree /home/user/wt/<name>; merge latest origin/main (built files conflict → `git checkout --theirs index.html sw.js assets.json`, then
+`bash dev/site/build_site.sh` and commit them); `python3 -m http.server <random port> --bind 127.0.0.1` (kill by PID); new life + skip Luân hồi in tests:
+`start()` then click `#kroul .krskip` (see dev/test/kit-fit2.js case id / newgame-ui.js). Keep dev/test/kit-fit.js + kit-fit2.js at 0 after the change.
