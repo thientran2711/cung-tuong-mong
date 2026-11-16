@@ -81,3 +81,9 @@ tabName() read the palace label "Phi tần" for rv at home). Rail "Mục tiêu c
 assemble: main's list + jkc.js last (after jkpc). Results: route.js 755x1000@2 + 844x390@2 PASS · kc-end PASS · oldsave PASS ·
 coop-home 51/51 · coop-e2e 59/59 · coop-timer 43/43 · 2 home weeks: 0 card-flip scenes. Note (main, not this branch): the palace start's
 card-flip scene for week 0 plays during the Luân hồi identity card of every new life, before the road is chosen.
+### r2-r2 merges 4+5 (main 0a311183 reign-road, 02a0d3f1 act-dedupe): only assemble/built-file conflicts; jkc.js stays last (after jact).
+route.js 755x1000@2 + 844x390@2 PASS (no palace/reign event titles at home), kc-end PASS, oldsave PASS, coop-home 51/51, coop-e2e 59/59,
+coop-timer 43/43 (on 0a311183 merge; route re-run on 02a0d3f1 merge PASS).
+Main-side notes (also on origin/main, not this branch): (a) empty palace room at 844x390: j6 `.tokens .empty` "Không có ai ở đây." sits over
+the room title (stage); (b) kitRankNamePaint inserted a servant's title inside a compound-surname player name ("Đoan Cung nữ thân tín
+Mộc Lan Chi": her maid is Mộc Lan, her name Đoan Mộc Lan Chi) — the painter should match whole names only.
