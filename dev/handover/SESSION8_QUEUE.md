@@ -79,31 +79,31 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
 | C22 | review/boot-flash | RUNNING |
-| C23 | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
-| C24 | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
+| C23 [→ FOREMAN B] | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
+| C24 [→ FOREMAN B] | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
 | C25 | review/press-fx @ bf4f654e3 | REVIEWING (press-fx-r1, URGENT + close-button fix) |
-| C26 | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow GREEN for +, red for −, pulse/scale) | QUEUED-NEXT |
-| C27 | review/buoi-transition (owner s8: page-flip on buổi change looks odd → ink-wash time-of-day transition; needs A2 fxkit) | QUEUED-NEXT |
+| C26 [→ FOREMAN B] | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow GREEN for +, red for −, pulse/scale) | QUEUED-NEXT |
+| C27 [→ FOREMAN B] | review/buoi-transition (owner s8: page-flip on buổi change looks odd → ink-wash time-of-day transition; needs A2 fxkit) | QUEUED-NEXT |
 | D50 | consorts without full-body figure art show a placeholder frame in the dialog person column (seen 755x1000, mood-dialog worker) → art-complete follow-up | QUEUED |
-| C28 | review/room-btn (owner s8: header '‹ Phòng' bar → painted room icon button) | QUEUED-NEXT |
-| C29 | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
+| C28 [→ FOREMAN B] | review/room-btn (owner s8: header '‹ Phòng' bar → painted room icon button) | QUEUED-NEXT |
+| C29 [→ FOREMAN B] | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
 | C30 | night-panel → merged into B1 | MERGED |
 | C31 | review/log-sync @ e5189610 (jlogsync.js; night-talk unlogged effect = cause) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
-| C32 | review/page-curl2 (owner s8 APPROVED: Tuần lục only — landscape curl, portrait paper slide; no swipe elsewhere; tab change animation only on tap) | QUEUED-NEXT |
-| C33 | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
-| C34 | review/contest-ui (owner s8: ALL study/work/minigame frames picture LEFT info RIGHT incl. result panel; REAL PRIZES by place (themed item, bạc, chest, title, Emperor gift) + podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
-| C35 | review/pcard-fill (owner s8: person card right side empty → mood, relations, tastes, known facts, recent dealings, quick actions) | QUEUED-NEXT |
+| C32 [→ FOREMAN B] | review/page-curl2 (owner s8 APPROVED: Tuần lục only — landscape curl, portrait paper slide; no swipe elsewhere; tab change animation only on tap) | QUEUED-NEXT |
+| C33 [→ FOREMAN B] | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
+| C34 [→ FOREMAN B] | review/contest-ui (owner s8: ALL study/work/minigame frames picture LEFT info RIGHT incl. result panel; REAL PRIZES by place (themed item, bạc, chest, title, Emperor gift) + podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
+| C35 [→ FOREMAN B] | review/pcard-fill (owner s8: person card right side empty → mood, relations, tastes, known facts, recent dealings, quick actions) | QUEUED-NEXT |
 | C36 | review/opt-pics (option cards picture LEFT + info RIGHT) | RUNNING |
-| C37 | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
+| C37 [→ FOREMAN B] | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
 | D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
 | C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
-| C39 | review/tab-underline (owner s8: stray bar through selected chip + grey scroll track under chip rows, all tab rows) | QUEUED-NEXT |
+| C39 [→ FOREMAN B] | review/tab-underline (owner s8: stray bar through selected chip + grey scroll track under chip rows, all tab rows) | QUEUED-NEXT |
 | D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
-| C40 | review/actcard-small (owner OVERRIDE: keep big + small cards; small card picture square → portrait rectangle 3:4; equal sizes per grid; tap picture → big + info; odds label or "!" → why-detail) | QUEUED-NEXT |
-| C41 | review/tuduc-mg (owner s8: Tứ đức minigames missing → 4 games Công/Dung/Ngôn/Hạnh, easy rules) | QUEUED-NEXT |
+| C40 [→ FOREMAN B] | review/actcard-small (owner OVERRIDE: keep big + small cards; small card picture square → portrait rectangle 3:4; equal sizes per grid; tap picture → big + info; odds label or "!" → why-detail) | QUEUED-NEXT |
+| C41 [→ FOREMAN B] | review/tuduc-mg (owner s8: Tứ đức minigames missing → 4 games Công/Dung/Ngôn/Hạnh, easy rules) | QUEUED-NEXT |
 | C42 | review/evidence-truth (owner s8: evidence only for real deeds; clean player safe; frame scheme separate; news one fact per line) | QUEUED-NEXT (high) |
 | C43 | review/coop-invite-ux (owner s8 'Rồi sao nữa': waiting state, 1-2-3 steps, auto-continue on join) | QUEUED |
 | C44 | review/cloud-save (owner s8: same character on phone + iPad, solo + co-op; sync code, auto upload, conflict pick, 10 versions) | QUEUED-NEXT |
 | C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
-| C46 | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
+| C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
 | C47 | review/stage-side (owner s8: iPad stage side cards → one narrow vertical column like phone) | QUEUED-NEXT |
