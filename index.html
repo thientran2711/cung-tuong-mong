@@ -35839,6 +35839,15 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const marks=(s.marks||[]).map(m=>rectOf(m)).filter(Boolean).map(m=>clip(m,3));
  const key=[vw,vh,r?[r.left,r.top,r.width,r.height].map(Math.round).join(","):"-",marks.map(m=>[m.left,m.top,m.width].map(Math.round).join(",")).join(";"),card.offsetHeight].join("|");
  if(!force&&key===LAST)return;LAST=key;
+ /* the card keeps the ONE kit frame size (OD:L963); when it fits on no side of the target, the lit hole shrinks to the part of the target that still leaves the card a free side (the target stays tappable there: a card/row is tapped anywhere on it). Only a tap step does this: a look-at step keeps its whole hole (the card then lies where it covers least) */
+ if(r&&s.interact){const cw0=card.offsetWidth,ch0=card.offsetHeight,g0=12,M0=8;
+  const fits=r.bottom+g0+ch0<=vh-M0||r.top-g0-ch0>=M0||r.right+g0+cw0<=vw-M0||r.left-g0-cw0>=M0;
+  if(!fits){const O=[];const mk=(l,t,rr,b)=>{if(rr-l>=56&&b-t>=56)O.push({left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t})};
+   mk(r.left,r.top,r.right,Math.min(r.bottom,vh-M0-g0-ch0));/* card below */
+   mk(r.left,Math.max(r.top,M0+ch0+g0),r.right,r.bottom);/* card above */
+   mk(Math.max(r.left,M0+cw0+g0),r.top,r.right,r.bottom);/* card at the left */
+   mk(r.left,r.top,Math.min(r.right,vw-M0-g0-cw0),r.bottom);/* card at the right */
+   O.sort((a,b)=>b.width*b.height-a.width*a.height);if(O[0])r=O[0]}}
  const D=R0.querySelector(".ktut-dim");
  if(r){if(D)D.remove();hole.hidden=false;Object.assign(hole.style,{left:r.left+"px",top:r.top+"px",width:r.width+"px",height:r.height+"px"})}
  else{hole.hidden=true;if(!R0.querySelector(".ktut-dim"))R0.insertAdjacentHTML("afterbegin",`<div class="ktut-dim"></div>`)}
@@ -35846,19 +35855,20 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const B=R0.querySelector(".ktut-blks");
  B.innerHTML=s.interact&&r?blk(0,0,vw,r.top)+blk(0,r.bottom,vw,vh-r.bottom)+blk(0,r.top,r.left,r.height)+blk(r.right,r.top,vw-r.right,r.height):blk(0,0,vw,vh);
  R0.querySelector(".ktut-marks").innerHTML=marks.map(m=>`<div class="ktut-mark" style="left:${m.left}px;top:${m.top}px;width:${m.width}px;height:${m.height}px"></div>`).join("");
- /* card: below, above, right, left of the target; a target too big for any of these: the card lies at its lower edge (never for a tap step) */
+ /* card: ONE frame size per viewport (owner OD:L963), placed by POSITION only: below, above, right or left of the target where it fits whole (the step's preferred side first). When it fits on no side the card goes to the screen corner/edge that covers the LEAST of the hole (the frame is never shrunk); a step with no hole is centred */
+ card.style.removeProperty("--kph");card.style.removeProperty("--kpw");
  const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8;let L,Tp;
  if(!r){L=(vw-cw)/2;Tp=Math.max(M,(vh-ch)/2)}
- else{const cx=r.left+r.width/2,cy=r.top+r.height/2;const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
-  const C=[];if(r.bottom+g+ch<=vh-M)C.push([hx,r.bottom+g,vh-M-r.bottom-g-ch]);if(r.top-g-ch>=M)C.push([hx,r.top-g-ch,r.top-g-ch-M]);
-  if(r.right+g+cw<=vw-M)C.push([r.right+g,hy,1e3]);if(r.left-g-cw>=M)C.push([r.left-g-cw,hy,1e3]);
-  const pref=s.side==="above"?[1,0]:[0,1];
-  let c=null;if(C.length){/* the side the step prefers when it fits, else the roomiest */c=C.find(x=>x[1]===(s.side==="above"?r.top-g-ch:r.bottom+g))||C.sort((a,b)=>b[2]-a[2])[0]}
-  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): the card keeps its ONE frame size (owner 16/11, OD:L963) and lies at the free edge on the wider side; the rest of the target stays tappable */
-   const sl=r.left-g-M,sr=vw-r.right-g-M;L=sl>=sr?M:vw-cw-M;Tp=Math.min(Math.max(M,cy-ch/2),vh-ch-M);c=[L,Tp]}
-  if(c){L=c[0];Tp=c[1]}
-  else{/* too big: inside the target at its bottom (above the tab bar), or at the screen's free edge for a tap step */
-   L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}
+ else{const cx=r.left+r.width/2,cy=r.top+r.height/2;
+  const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
+  const C=[];if(r.bottom+g+ch<=vh-M)C.push(["below",hx,r.bottom+g]);if(r.top-g-ch>=M)C.push(["above",hx,r.top-g-ch]);
+  if(r.right+g+cw<=vw-M)C.push(["right",r.right+g,hy]);if(r.left-g-cw>=M)C.push(["left",r.left-g-cw,hy]);
+  const want=s.side==="above"?"above":"below";
+  const c=C.find(x=>x[0]===want)||C.find(x=>x[0]==="below"||x[0]==="above")||C[0];
+  if(c){L=c[1];Tp=c[2]}
+  else{/* no side fits the whole card: the position that covers the least of the hole */
+   const ov=(l,t)=>Math.max(0,Math.min(l+cw,r.right)-Math.max(l,r.left))*Math.max(0,Math.min(t+ch,r.bottom)-Math.max(t,r.top));
+   const P=[[M,M],[vw-cw-M,M],[M,vh-ch-M],[vw-cw-M,vh-ch-M],[hx,M],[hx,vh-ch-M],[M,hy],[vw-cw-M,hy]].map(x=>[x[0],x[1],ov(x[0],x[1])]).sort((a,b)=>a[2]-b[2]);L=P[0][0];Tp=P[0][1]}}
  card.style.left=Math.round(Math.max(M,Math.min(L,vw-cw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-ch-M)))+"px"}
 addEventListener("resize",()=>{LAST="";if(CUR){place(true);clearTimeout(T.rz);T.rz=setTimeout(()=>{try{if(T.on&&STEPS[T.step]&&STEPS[T.step].prep)STEPS[T.step].prep(true)}catch(e){}LAST="";place(true)},350)}if(T.tip)tipPlace()});
 addEventListener("orientationchange",()=>{LAST="";setTimeout(()=>{if(CUR)place(true);if(T.tip)tipPlace()},250)});
@@ -41512,7 +41522,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="276e2c940e24";window.CTM_BUILD=BUILD;
+const BUILD="6bb8a54579ab";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
