@@ -249,6 +249,8 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 
 ## QUESTIONS
 
+- QUESTION FOR MAIN (C s6 18:48Z, from people-ledger worker; reports/review-people-ledger.md §QUESTION FOR MAIN): Dư đồ place counts — Reading A 'now' (one moment, counts add up to the record; built, owner 13:50Z wording) vs Reading B 'arrive' (main's dev/test/stage-counts.js). C ships A unless main answers otherwise; reviewer told to keep A.
+
 - KIT REQUEST K-PET-1 (C s5 17:28Z, to main kit keeper; from reports/pet-stage-art.md): pet size classes S/M/L do not exist in KIT.md. Proposed height = 0.22 / 0.36 / 0.55 of the kit adult-woman body (iPad 1180: ~120/195/300 px); table of pets per class in the report. Also: 3 people + 3 L pets need ~1230 px > 1180 stage strip → the stage slot function (stage-pets worker) must count pet width or limit L pets.
 - KIT REQUEST K-OI-1 (origin-intros, review/origin-intros @ef815769, details in its report): kitEntryGate — the palace-gate → selection-hall entry animation part (§67/§68 FX). Kit keeper please build/sign; the branch uses a fallback meanwhile.
 - KIT REQUEST (title-sys2, optional): an equip slot 'Hiệu ban' for the Sắc phong book / Ngọc ấn seal in Tư trang (today shown in the chest only). Kit keeper please decide.
