@@ -26,7 +26,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D31 difficulty-port | review/difficulty-port | opus | RUNNING (port only; numbers within spec; bot table for C7 re-measure) |
 | D33 routes-port | review/routes-port | opus | RUNNING (route numbers within spec; bot table for C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
-| D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
+| D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
@@ -72,6 +72,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - KIT REQUEST (C26b stat-fx-2): in §57.1 jstatfx.js the glowing number never takes the gain/loss colour because jk4's `.kst:not(.kst-tile):not(.kst-chip)>.kstv{color:var(--ink)}` (0,4,0) beats `.ksf-g>.kstv`/`.ksf-r>.kstv` (0,2,0). Proposed: `.kst.ksf-g:not(.kst-tile):not(.kst-chip)>.kstv{color:#1f6b2f}`, `.kst.ksf-r:not(.kst-tile):not(.kst-chip)>.kstv{color:#a3291c}`, plus `.krt-v.ksf-g` / `.krt-v.ksf-r` for relation-table numbers (verified live by the worker; not applied).
 - page-curl2 (reviewing): portrait paper slide kitSlideSheet = new variant of the page-turn kit part (§34, reuses .ksht*); global swipe-to-change-tab removed; keeper may add a line to KIT.md §34.
 - KIT REQUEST (C41 tuduc-mg): a kit-owned "hint ring" part for canvas mini-games (Gợi ý marker is now a position-fixed div with .ksel); mini-game frame picture-left/info-right is a frame-level change (contest-ui's kitGameFrame({pic}) covers it once approved).
+- KIT REQUEST (D36 rank-port, blocks it): (1) podium j90 per owner 08:55Z — characters big/most prominent, podium shrunk to the name-plate under the feet, medal at the plate's top-right, "Ta" tag, optional entry fields fig/face/nameH/you; used by Bảng vàng and other podium users; must match C34 contest-ui podium + KIT_FIG (old implementation: origin/review/rank-ui 895c898ef j90 diff); (2) person dialog jk4: her own chip shows rank+name via kitName(q,{cap:true,named:q===S}) in kitStageFig; figure column sticky for dialogs without options so the full figure shows at 844x390 (895c898ef jk4 + CSS `#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))`); (3) KIT.md text podium §26 and 32.7b from that commit.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -100,3 +101,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - (16/11) LIVE on main 4f5e5f3b3: C23, C26, C27, C28, C29, C35, C37, C39, C40, D39. Rebase any open work on main.
 - Q18 (C32 page-curl2): in landscape the ‹ › buttons keep the slow 1.3 s curl (unchanged) — keep or speed up? Portrait slide is 300 ms.
 - Q19 (C41 Tứ đức minigames): in these 4 games a higher level makes the game EASIER (wider bands, fewer wrong choices) — opposite of mg-easy's knowledge games (harder at higher level). OK? And "Để trời định" (skip) counts as 5/10 — fine?
+- Q20 (D36 leaderboard): login is guest-only (random code + chosen display name; server stores only a hash). Owner wants a recovery code or email magic link (LEADERBOARD.md; email needs a privacy policy)? Anti-cheat is basic (server recomputes score + sanity checks). The old Worker ctm-rank.victoria-tntt.workers.dev is live (/health ok, board empty).
