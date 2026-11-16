@@ -18,3 +18,11 @@ The card flip the player really sees each week is `jflip.js` kitCardFlip (it rep
 ## NOT a FAIL, still open (sweep, listed in KIT.md §81)
 Scenes outside kmStage that still auto-close or say "Chạm để đóng": jtoil toilReveal, jpromo person reveal / chest, item fly, level-up, festival, night end / new day, week calendar, co-op scenes, card-flip videos. Owner rule OD:L1261 stays unmet for those until the sweep worker uses `kitSceneEnd`.
 Note: the test runs used file:// (local web server start was blocked in this session).
+
+## Re-review of review/kit-keeper-2 5837359e (adds KIT 28.13b item-big, KIT 45.4 kpbar z29)
+- kpbar-modal.js (8 tabs x pop-ups x 1180x820 / 844x390): PASS, 0 bar over a pop-up. z 29 harmless.
+- item-big.js at 755x1000, 1180x820, 1366x1024, 412x1058, 844x390: 5/5 PASS (synthetic xl 260 px / lg 150 px frameless, item512 source, md keeps frame, frame:true keeps frame). Real pop-ups with CDN pictures (curl-routed) looked at.
+### FAIL (item-big does not reach the screen)
+1. REAL pop-ups still show the item at 64-71 px, not "big": item info pop-up (`kinvOpen`, every item of the bag: 64 px; `jinv.js:164 .kitslot .kpitem>.kitem{--isz:64px!important}`) and the "Mất đồ" notice (`kitLose` via kitPanel notice, 71 px: `.kpsubj.kpitem>.kitem{--isz:100%}` in a ~70 px picture column). The frameless + item512 part works (nhansam loads img/item512, border 0, no shadow box); the size does not. Most bag items have no item512 file (they load img/wd-*.webp 256 px), so they stay small and unsharp. OD:L686 asks for big, sharp, item alone in the CENTRE display (receive / lose / reward); KIT 28.13b claims "info pop-up" and lg = 150 px, which the real pop-ups contradict.
+2. KIT 28.13b text vs 28.13f (compact slot card, owner 11/15 "far too big") contradict each other for the info pop-up: owner must say which wins; if centre-big wins, the picture column of kitPanel notice / info needs the lg size (not 100 % of a narrow column).
+Not changed by me (layout of every kit panel; belongs to the kit keeper).
