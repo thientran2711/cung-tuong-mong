@@ -12,7 +12,11 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);
+  /* owner 16/11 "Ân tình 0→1" on every act: a before→after diff must never list a stat its snapshot did not take (host and guest) */
+  await ctx.addInitScript(()=>{const t=setInterval(()=>{if(typeof logReal==='function'&&typeof RKEYS!=='undefined'){clearInterval(t);const l0=logReal;window.__lrN=0;window.__lrBad=[];
+    logReal=function(b){window.__lrN++;try{for(const [k] of RKEYS)if(b&&!(k in b)&&(S[k]||0)!==0&&window.__lrBad.length<5)window.__lrBad.push(k)}catch(e){}return l0.apply(this,arguments)}}},50)});
+  await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -126,6 +130,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
  {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);await clear(B);seen=await A.p.evaluate(n=>!!(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop))&&(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null).name===n,after.n);if(seen)break;await sleep(700)}
   ok(seen,'A sees the reborn friend by her new name',await A.p.evaluate(()=>((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name));}
+ for(const o of [A,B]){const lr=await o.p.evaluate(()=>({n:window.__lrN||0,bad:window.__lrBad||[]})).catch(e=>({n:-1,bad:[e.message]}));ok(!lr.bad.length,o.name+': act/choice diffs only list stats they snapshot (no "Ân tình 0→N")',lr)}
  {const r=await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return{ok:!!f&&k61St(f)===0,srv:f&&f.id==null,st:f&&k61St(f),here:f&&f.id!=null&&whereOf(f),me:S.place,tr:COOPW.tr.slice(-12)}});
   ok(r.ok,'reborn friend is a stranger again (Người lạ)',r.ok?undefined:r)}
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
