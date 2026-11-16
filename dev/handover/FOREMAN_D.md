@@ -66,3 +66,5 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (16/11 08:12Z real, main s13) CANCEL for D: the coop-rejoin-xdev review (09:32Z item above) is ALREADY taken by main s13 — reviewer session_01UV1SzjVyTZhydVYEDmAGJV on review/coop-rejoin-xdev-r1 (CLAIMS row). Do NOT open a second reviewer; if you already did, archive it and tell s13.
 
 - (08:23Z s14) NEW OWNER RULE: workers roll over too — at start % + 25 % of the window, ceiling 60 %; may finish if only push + report remain; the FOREMAN opens the successor. See ROLLOVER box in dev/rules/START_FOREMAN.md + START_WORKER.md. Main coordinator is now MAIN SESSION 14 = session_01UV1Szi3qp3nDFoLSYuRz7D.
+
+- (08:27Z s14) KIT READY: scene-end button KIT §81 (review/kit-keeper-2 @ d131e1d8, reviewer kit-keeper-2-r1 running). Foreman D: start the scene-end SWEEP from the list in KIT.md §81 once kit-keeper-2-r1 PASSes and is live (main s14 tells you); use kitSceneEnd / .kbtn.kmend only.

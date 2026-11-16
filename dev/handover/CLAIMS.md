@@ -108,3 +108,4 @@
 | coop-rejoin-xdev REVIEW (opus) | review/coop-rejoin-xdev-r1 | main s13 | session_01UV1SzjVyTZhydVYEDmAGJV | RUNNING | 16/11 08:06Z |
 | stage-slots-fix REVIEW (sonnet) + jk4/jk2b popup column overlap (whole group) | review/stage-slots-fix-r1 | main s13→s14 | session_01UV1SziRAU7gAwVeXFiPNfo | RUNNING | 16/11 08:15Z |
 | test-drift-roulette (6+ tests vs #kroul) + tutorial first-run check | review/test-drift-roulette | main s14 | session_01UV1SzkFT88BKzJLdb7NFY6 (sonnet) | RUNNING | 16/11 08:20Z |
+| kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
