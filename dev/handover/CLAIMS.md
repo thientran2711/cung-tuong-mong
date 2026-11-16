@@ -139,7 +139,7 @@
 | unmet-name leak family residue (bare-name log lines, palName, per-person ??? rows) | review/name-mask | D | session_01DgYSWoDkH3BjgWkcd7Y4Cg | DONE SẴN SÀNG KIỂM 8b911c73 | 16/11 09:44Z |
 | design-scale phase 2/3 + maptab tab-mode reset bug (opus) | review/design-scale-p2 | main s14 | session_01UV1Szh2HXLUxv3oHmnezMy (opus) | RUNNING | 16/11 09:44Z |
 | co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | DONE SẴN SÀNG KIỂM 66a55b06 | 16/11 10:05Z |
-| SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
+| SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 10:06Z |
 | D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | session_011xDdVRRJzACvMmmuEuVbJq | DONE SẴN SÀNG KIỂM 4ea772f3 | 16/11 10:26Z |
 | item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | PASS f9d10956 | 16/11 10:26Z |
 | D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | DONE FAIL 1 → coop-b1b5-fix | 16/11 10:32Z |
@@ -178,8 +178,8 @@
 | mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | session_01N1tNP4L7Uvc92DNAw2B9G7 (opus) | DONE SẴN SÀNG KIỂM b011cf71 (archived) | 16/11 12:55Z |
 | owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | session_01N1tNP3XJQSsGp1Vgi9GXaP (sonnet) | DONE SẴN SÀNG KIỂM 011beb29 (archived) | 16/11 12:55Z |
 | coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | session_01DgYSWn4KTZXiGjQcE6uwsQ | RUNNING | 16/11 12:58Z |
-| D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | session_01DgYSWoy8UWVPrve6HEjZfR | RUNNING | 16/11 12:58Z |
-| D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | RUNNING | 16/11 12:58Z |
+| D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | session_01DgYSWoy8UWVPrve6HEjZfR | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 12:58Z |
+| D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 12:58Z |
 | Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | RUNNING | 16/11 12:58Z |
 | C44 'Xóa sổ trên mây' button (kit danger button + confirm) | review/cloud-del | D | session_01DgYSWnuoGnBrzpLuCRGnpy | BLOCKED KIT REQUEST (danger button + confirm dialog; worker archived, base review/cloud-save-r1 @7e187abe, plan in reports/cloud-del.md) | 16/11 13:10Z |
 | seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | PASS 7d463838 | 16/11 14:06Z |
@@ -195,7 +195,7 @@
 | ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | session_01DgYSWoSdvBQtzpXxCDVUPh | SẴN SÀNG KIỂM fb67d4ad | 16/11 14:22Z |
 | merge-train-8 successor c (sonnet) | review/merge-train-8 | main s17 | session_01UV1SzhTCE7SXbum6V4ghBh | RUNNING | 16/11 13:39Z |
 | D4 npc-death review | review/npc-death-r1 | D | session_01DgYSWocL5CmLHseB9i8sEn | PASS 5f58a715 | 16/11 14:03Z |
-| D4 npc-death review | review/npc-death-r1 | D | (reviewer opening) | RUNNING | 16/11 13:42Z |
+| D4 npc-death review | review/npc-death-r1 | D | (reviewer opening) | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 13:42Z |
 | story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
 | A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
 | TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | (opening) | RUNNING | 16/11 13:45Z |
