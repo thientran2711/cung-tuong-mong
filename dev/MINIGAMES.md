@@ -46,3 +46,14 @@ kết quả `kitGameResult`. Không thêm CSS mới ở j91.
 Nền bàn chơi và mọi đồ vật là tranh gpt-2-6 (`img/kit/mg-*.webp`, 24 nền + 73 mảnh rời); canvas chỉ vẽ vạch nhịp, vệt ngắm, dải giai điệu, nét mực, sợi chỉ, vòng đích, thước lửa, màu khói và chữ.
 Thi dùng nền sân hội (khán đài, rèm, đèn lồng); học, tự luyện, tác phẩm dùng nền phòng học riêng. Bảng đủ các trò và tranh: `dev/kit/KIT.md` mục 13.1.
 
+
+## Exam games, no word games (family C, review/nw-quiz, owner 16/11 07:20Z)
+The four promotion-exam kinds that were question banks are now skill games of the same subject (`dev/build/jnwq.js`, numbers in `BAL.nwq`):
+| Kind | Game (engine) | Action | Scoring (raw 0–10) | Easier at low tier |
+|---|---|---|---|---|
+| le Lễ nghi | Bày lễ (`lay`) | drag each object to the place it has on the model altar | pieces placed right − misses·BAL.nwq.miss − hints·BAL.nwq.hint | 3 objects, model always shown, wrong drop bounces back |
+| tc Trị cung | Phân kho (`sort`) | drag each ware into the storeroom whose door shows the same kind of ware | same | 2 samples + label on each door |
+| xa Xử án | Khám vật chứng (`clue`) | tap the suspect whose robe and carried thing match the pictured evidence | 2 points a case, 5 cases | 3 suspects, 2 clues, colour/thing labels |
+| thq Thái hậu hỏi | Xếp chỗ ngồi yến (`seat`) | drag each guest to a seat: more jade pins = higher rank = nearer Thái hậu | same as lay | 4 guests, seats numbered |
+Tier 2 (free placement judged on «Xong», model hides after BAL.nwq.peek s) · every tier: Gợi ý button, first-time demo card, quiet auto-hint when she stalls (tier 0/1).
+Tier comes from `mgTier(kind, occasion)` (review/mg-balance) when it exists, else `kg82Tier(lv) + BAL.nwq.shift`. The old Tài nghệ lesson «Y thuật & điều hương» (j5 `MG.y` quiz) now plays the pha-hương game.
