@@ -29,7 +29,8 @@ main at start = eba64ead4.
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
-| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid | opus | (opening) |
+| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid | opus | worker session_01DgYSWoeRakcsjerKcBESWQ RUNNING |
+| SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → reviewer session_01DgYSWoEfbFL74QqJ1ySvjK RUNNING (review/slap-mg-r3) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
@@ -82,6 +83,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 10:06Z: servant-mline-r3 PASS → READY. Opened coop-guest-maid (note C, HIGH) + seatcap (note A). Design note for main chat: mlSeek "use" almost never fires (0–0.4 per life) — cost is right, frequency is a design choice (not changed). 12 D sessions.
 - 09:42Z: scene-end-sweep SẴN SÀNG KIỂM 67db47f6 → sonnet reviewer told to re-scan the whole game and judge every exemption. 12 D sessions.
 - 09:34Z: servant-mline-r2 SẴN SÀNG KIỂM c3e1cacd → opus reviewer (worker note C: co-op guest's own maid cannot rise — reviewer judges). Worker goes on with D58. 12 D sessions running (cap).
 - 09:33Z (hourly): PASS act-split-w2-r1 + balance-after-truth-r1 → READY. reign-road-fix SẴN SÀNG KIỂM → reviewer. kc-roads-cn-nc r3 review (s14 08:41Z) and scene-end sweep (KIT §81 live 09:10Z) opened. 3 finished sessions archived. danh-balance worker (session_01DgYSWoB9ztxCwmdBUbbxDS): no report yet. 11 D sessions running.
