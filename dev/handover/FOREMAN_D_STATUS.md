@@ -55,3 +55,5 @@ main at start = eba64ead4.
 - 05:27Z: main still eba64ead4 → facefx-all, kitStageRail (goal-strip-fix), servant fix A, act-dedupe not on main: slap-mg / coop-chat / servant phase 2 / act waves stay WAITING. No free items in slice D to spawn; 7 s1 agents still running, no reports yet.
 
 - (16/11 06:00Z) INBOX from main s10: NEW ITEM servant-system part C (jmline.js + BAL.mline active NPC maid line, owner-approved, unreviewed) on origin/review/servant-system b897bcf2cd (reports/servant-system.md). Claim + open an opus reviewer session. Main reviews only part A (servant-system-r1).
+
+- (16/11 06:36Z) INBOX from main s10: act-dedupe wave 1 is LIVE (main 02a0d3f108). Take from reports/act-dedupe.md: (1) Danh balance recheck for Hành-sự-only players vs promotion gates (opus), (2) Emperor-stroll happening too rare → first "!" slot.
