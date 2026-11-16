@@ -33,7 +33,7 @@ function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();for(con
 function srvFriendList(){return srvColleagues().filter(s=>(S.srv.af[s.sid]||0)>=30)}
 function srvMax(){const m=srvM();return m?srkMax(m,{role:"maid"}):2}
 function srvToast(msg){if(window.__bot)return;let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}t.onclick=()=>t.classList.remove("on");
- t.className="rtoast bad";t.innerHTML=`<b class="seal">CẤM</b><div class="rt"><b>${msg}</b></div>`;void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),2600)}
+ t.className="rtoast bad";t.innerHTML=`<b class="seal">CẤM</b><div class="rt"><b>${msg}</b></div>`;void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),kitPace(2600))}
 
 /* ---------- start: the consort start runs, then she is turned into a maid of a random rival ---------- */
 function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.filter(v=>v.rank>=1).length?L.filter(v=>v.rank>=1):L);
@@ -355,7 +355,7 @@ function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cnv]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled||!isSrv()||S.dead||Q.length)return;
  const s=servById(+b.dataset.sid);if(!s)return;const bf=rsnap();const r=srvStaffAct(b.dataset.cnv,s);if(r!=null)resultShow(b.firstChild.textContent,bf,r);render()},true);
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();
- return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${m.trait}${m.trait2?", "+m.trait2:""}.`:"",groups:[["Đường đi",srvRows()]],empty:""})}})();
+ return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${m.trait}${m.trait2?", "+m.trait2:""}.`:"",groups:[["Đường đi",srvRows()]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[]),empty:""})}})();
 (function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
  if(d&&d.S&&d.S.srv&&!d.S.srv.risen){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,(d.S.srv.lau>0?"Cung nữ Tân Giả khố":SRK.maid[d.S.srv.rk]||"Cung nữ")+" ")}})}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}

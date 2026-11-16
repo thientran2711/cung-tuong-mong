@@ -4,7 +4,7 @@
    Checks: (1) solo sổ intact after solo → co-op → back to solo (incl. renders after leaving, the in-game title button);
    (2) three co-op rooms with different friends listed, each with its own character; (3) old saves (v2-v6 sổ, old single
    ctm-coop-room) still load / show; (4) loading a sổ while still in a room leaves the room first. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/pw-roulette');const {serve,BASE}=require('./coop-serve.js');
 const VPS=(process.argv.slice(2).length?process.argv.slice(2):['755x1000','1180x820','844x390']).map(s=>s.split('x').map(Number));
 const OUTD=require('path').resolve(__dirname,'../shots/save-slots');require('fs').mkdirSync(OUTD,{recursive:true});const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch({args:['--no-sandbox']});

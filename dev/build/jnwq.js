@@ -7,7 +7,7 @@
      thq Thái hậu hỏi   → "seat" Xếp chỗ ngồi yến: more jade pins = higher rank = nearer Thái hậu; drag each guest to the seat.
    No sentence is read or chosen anywhere; the pictures are the existing kit paintings (img/kit/mg-*.webp, nothing new is painted: art is paused).
    Engines follow the j82/j91 contract: eng(box, env{kind, lv 0–5, hud(o), end(raw0to10)}) -> stop(); KG82.peek() is the test oracle.
-   Every number is read from BAL.nwq (jbal2). Difficulty tier: window.mgTier(kind, occasion) of review/mg-balance when it exists, else kg82Tier(lv) + BAL.nwq.shift.
+   Every number is read from BAL.nwq (jbal2). Difficulty tier: mgTierOf(env) (jmgt: KG82.tier set by mgSet, else kg82Tier(lv)) + BAL.nwq.shift.
    Pieces come from j82/j91 (kg82Canvas, kg82Bg, kg82Spr, k91Tile, k91DemoCard, k91Btns…): no CSS here, no private frame. */
 const NWQ_BG={le:"huong",tc:"banh",xa:"doi",thq:"mua"};
 const NWQ_SPR={le:["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-fan","ve-inkstone","mua-bell","banh-pot","tho-slip"],
@@ -15,8 +15,8 @@ const NWQ_SPR={le:["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-
  xa:["ve-brush","ve-inkstone","mua-fan","mua-bell","nghiem-bowl","kim-spool","theu-peony","theu-crane","theu-cloud","theu-butterfly","tho-slip"],thq:["tho-slip"]};
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return NWQ_BG[kind]?b0(NWQ_BG[kind]):b0(kind)};
  if(typeof KG82_SPR!=="undefined")for(const k in NWQ_SPR)KG82_SPR[k]=NWQ_SPR[k]})();
-function nwqTier(env){try{if(typeof mgTier==="function"){const t=mgTier(env.kind,KG82.ctx);const n=typeof t==="number"?t:t&&t.tier;if(typeof n==="number"&&isFinite(n))return cl(Math.round(n),0,2)}}catch(e){}
- return cl(kg82Tier(env.lv)+(BAL.nwq.shift||0),0,2)}
+function nwqTier(env){/* review/mg-train: the tier mgSet() set for this play (jexam: the exam stakes of the target rank), via jmgt mgTierOf */
+ return cl((typeof mgTierOf==="function"?mgTierOf(env):kg82Tier(env.lv))+(BAL.nwq.shift||0),0,2)}
 /* a painted sprite fitted inside a size×size box, centred at (x,y) */
 function nwqFit(g,n,x,y,s,o){const r=kg82SprR(n);return kg82Spr(g,n,x,y,s/Math.max(1,r),null,o)}
 const nwqKey=a=>"nwq-"+a;

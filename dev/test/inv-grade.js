@@ -1,7 +1,7 @@
 /* Tư trang: grade ground+frame on item slots, "Đang mang" equipment slots (kitEquipSlots), act-card rows never clipped (all panel tabs).
    usage: node dev/test/inv-grade.js <baseURL> <W>x<H>@dpr <outdir> <tag> [oldsave.json]
    Writes <tag>-inv-grades, inv-eqpick, inv-worn, inv-item, inv-scrolled (+ oldsave-inv). Prints JSON audit. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
@@ -24,6 +24,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
   await p.evaluate(()=>{Q.length=0;showModal();document.querySelector('#tabs [data-tab=inv]').click()});await p.waitForTimeout(1200);await shot('oldsave-inv');A.push(await audit('oldsave'));
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000)}
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForTimeout(2500);
+ await require('./lib/roulette').dismissRoulette(p);
  await p.evaluate(()=>{for(let i=0;i<20&&(S.origin.k==='cnv'||(typeof isSrv==='function'&&isSrv()));i++){try{store.set(NL_KEY,null)}catch(e){}start()}const k=document.getElementById('kroul');if(k)k.remove();Q.length=0;showModal();
   S.inv=[{k:'tramngoc',w:1},{k:'vongngoc'},{k:'nhansam'},{k:'nhansam'},{k:'nhansam'},{k:'yensao'},{k:'luahang'},{k:'huongtram'},{k:'tuithom',t:'xa',by:'me'},{k:'tranhco'},{k:'boodieu'},{k:'tramphuong'},{k:'gamvang'},{k:'dancoc'},{k:'ngocboi',from:'emp'},{k:'thunha'}];
   S.dress={k:'gamto',until:S.turn+2};S.scar={sev:2,known:1,veil:1};render();document.querySelector('#tabs [data-tab=inv]').click()});
@@ -35,7 +36,9 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
    frame:cs&&cs.borderImageSource.slice(-30),bg:kb&&getComputedStyle(kb).backgroundImage.slice(-30),pad:getComputedStyle(P).paddingTop}});
  /* empty wrist slot → pick list → wear the jade bangle */
  await p.click('.keq [data-keqi="1"]');await p.waitForTimeout(900);await shot('inv-eqpick');A.push(await audit('eqpick'));
- await p.click('#modal [data-kinvact="wear"]');await p.waitForTimeout(900);const worn=await p.evaluate(()=>S.inv.filter(e=>e.w).map(e=>e.k));
+  /* the pick list now shows the candidates: tap the bangle first (the detail card then has the wear button) */
+ await p.click('#modal .keqpick [data-kidpick="wear"]');await p.waitForTimeout(700);
+ await p.click('#kidfl [data-kinvact="wear"]');await p.waitForTimeout(900);const worn=await p.evaluate(()=>S.inv.filter(e=>e.w).map(e=>e.k));
  await shot('inv-worn');const gapWorn=await p.evaluate(()=>{const P=document.getElementById('panel');return Math.round(P.getBoundingClientRect().bottom-document.querySelector('.keq').getBoundingClientRect().bottom)+(P.scrollHeight>P.clientHeight+1?' SCROLL':'')});A.push(await audit('inv-worn'));
  await p.click('.keq [data-keqi="0"]');await p.waitForTimeout(900);await shot('inv-item');A.push(await audit('inv-item'));
  await p.evaluate(()=>{closeModal()});await p.waitForTimeout(300);
