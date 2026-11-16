@@ -1056,7 +1056,7 @@ function curPeople(){return S.visit?S.visit.people:[]}
 function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="emp"){const A=[
    {n:"Tâng bốc",o:od(55+S.sung/5+mm()),w:{sung:3},l:{sung:-1},go:()=>{if(roll(25))discover()}},
-   {n:"Nói thật lòng",o:od(45+S.duc/3+mm()+(has("nhantu")?10:0)),w:{sung:2,danh:2},l:{sung:-2},x:`biết thêm một sở thích của ngài: ${chanceW(50)}`,go:()=>{if(roll(50))discover()}},
+   {n:"Nói thật lòng",o:od(45+S.duc/3+mm()+(has("nhantu")?10:0)),w:{sung:2,danh:2},l:{sung:-2},x:`biết thêm một điều ngài thích hay không ưa: ${chanceW(50)}`,go:()=>{if(roll(50))discover()}},
    {n:`Phô tài: ${b.n}`,c:{suc:-5},o:od(30+b.w*10+mm()),w:{sung:4+b.l,danh:1},l:{danh:-2}},
    {n:K.flower?`Dâng ${L.flower}`:"Dâng một cành hoa",c:{bac:-5},o:K.flower?100:od(50),w:{sung:K.flower?6:2},l:{}}];
   if(S.sung>=30)A.push({n:"Xin ân điển",o:od(35+S.sung/3+mm()),w:{bac:60},l:{sung:-4},fail:()=>{if(E.mood===3&&roll(40))punish("làm phiền lúc thánh thượng nổi giận",1)}});
@@ -1083,7 +1083,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   const k=S.kids.filter(x=>x.alive&&x.hp<80).sort((a,c)=>a.hp-c.hp)[0];if(k)A.push({n:`Xin thuốc cho ${k.name}`,c:{bac:-30},o:100,x:"Sức khỏe +25",go:()=>{k.hp=Math.min(100,k.hp+25)}});
   A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ +1",go:()=>addArt("y",1)});return A}
  if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
-  if(Object.keys(LIKES).some(k=>!K[k]))A.push({n:"Hỏi sở thích Hoàng thượng",c:{bac:-15},o:od(80),x:"biết thêm một điều ngài thích",go:()=>discover()});
+  if(Object.keys(LIKES).some(k=>!K[k])||(typeof disUnk==="function"&&disUnk("emp")))A.push({n:"Hỏi sở thích Hoàng thượng",c:{bac:-15},o:od(80),x:"biết thêm một điều ngài thích hay không ưa",go:()=>discover()});
   A.push({n:"Xem sổ thị tẩm",o:100,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+liveRivals(true).map(x=>`${x.name} ${x.nights} lần`).join(", ")+`; ngươi ${S.nights} lần.`)});return A}
  if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${IT[k].n}`,c:{bac:-IT[k].pr},o:100,x:IT[k].d,go:()=>S.inv.push({k})}));
  if(p.kind==="fallen")return[
@@ -16610,6 +16610,11 @@ Object.assign(BAL,{itd:{allow:false}});
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+
+/* per-person dislikes (jdis, review/pcard-dislikes): n = how many each person has [min,max]; aff = her thiện cảm lost after a wrong gift; sung = Emperor's Sủng lost;
+   refuse = chance (0-100) a wrong gift is refused and stays in the chest (then refAff / refSung are lost instead); talk = chance a talk reveals one;
+   spyPri = weight of the 'dislike' fact among what a spy can learn. Modest on purpose: the gift's own gain is +4..+10. */
+Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:20,spyPri:55}});
 /* ================= j92: VẬT PHẨM · TRANG PHỤC · MẠNG CHE MẶT (logic + data only; UI through kit components) ================= */
 /* ---- KIT_VEIL: pearl-strand face veils by rank (hủy dung, j70 scarOf(p).veil / p.scar.veil) ----
    img/veil-t1..t8.png (480x445, transparent, gpt-2-6): one per consort rank 0..7 (Đáp ứng → Hoàng hậu), richer each step:
@@ -24978,7 +24983,7 @@ function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.k
  const acts=deckFor(/Thái hậu|Đức Thọ/);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);
- const likes=Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]);
+ const likes=Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]).concat(typeof disRow==="function"&&disRow("emp")?[disRow("emp")]:[]);
  return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
   note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),
   groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Hoàng thượng (việc đổi theo buổi và theo quẻ). Gặp ngài: Dư đồ → nơi ngài ngự buổi này; tối: chờ lật thẻ.</p>`]],["Điều ngài thích",likes.concat([`<p class="kr3note">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`])]],empty:""})}
@@ -34494,11 +34499,13 @@ function pcfRel(e){try{if(typeof kitRelRows!=="function"||typeof kitRelTable!=="
 function pcfTaste(e){try{const rows=[];
  if(isEmp(e)){const E=S.emp,K=E.known||{},L=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${L[k]}`);
   rows.push(["Ngài thích",like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",like.length?"":"n"]);
+  try{const d=typeof disRow==="function"&&disRow("emp");if(d)rows.push(d)}catch(x){}
   const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push(["Ngài hay",T.join("; ")])}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push(["Tính nết",k?thArch().n:"chưa rõ",k?"":"n"])}else rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])}
  else if(typeof trKnown==="function"&&e.id!=null){const K=trKnown(e),T=typeof traitsOf==="function"?traitsOf(e):[];const un=T.filter(t=>!K.includes(t)).length;
   rows.push(["Tính nết",K.length?K.join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
+  try{const d=typeof disRow==="function"&&disRow(e);if(d)rows.push(d)}catch(x){}
   const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push(["Hay",tend.join("; ")])}
  if(!rows.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitRows(rows)}</div>`}catch(x){return""}}
 function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=typeof intelOf==="function"?intelOf(e):[];const old=(S.notes&&S.notes[e.id])||[];
@@ -34555,6 +34562,77 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
  try{if(!S)return"";const v=(typeof rivals!=="undefined"&&rivals[0])||null;if(!v)return"";return `<div class="kitpg-row" style="width:min(100%,520px)">${pcfBlocks(v,{},true)}</div>`}catch(e){return""}}})}catch(e){}
+})();
+/* ================= jdis: PER-PERSON DISLIKES ("ghét") (review/pcard-dislikes, owner OD 15/11: "each person has likes and dislikes; a wrong gift may be
+   refused or make them angrier") =================
+   DATA: every consort (rivals) and the Emperor has 1-2 dislikes, stored in the save (v.dis / S.emp.dis = pool keys), drawn ONCE per life from
+   a seeded hash (S.ctxSeed x person x pool key, same seed as jevb tastes) so reloading never changes them. Old saves get them from normAll.
+   POOL (what the game already gives as gifts): "art:<k>" = a handmade work of that art (ARTS), "kd:<kind>" = a bought item of that kind (IT[].kd);
+   the Emperor also draws from his own likes pools (LIKES flower / music / dish) = "flower:<v>" etc.
+   NEVER OVERLAP LIKES: disLikeKeys(p) = the person's own likes in the same key space (Emperor: his 3 LIKES + the arts his traits favour;
+   consort: her best art + item kinds whose every item is tagged for her); those keys are removed from the draw. At gift time an item the
+   recipient's own tag likes (IT.tg) is never counted as a dislike.
+   LEARNT like the other hidden things: spying (j78facts adds a "dis" fact -> Đã biết), talking (chatMark 20), the Emperor's "Hỏi sở thích" /
+   "Nói thật lòng" (discover() now reveals a like OR a dislike), and by a wrong gift. Unknown ones stay hidden.
+   SHOWN: jpcf "Sở trọng" rows (kitRows, same row as likes). EFFECT: giveTo (player -> consort/Emperor): small thiện cảm / Sủng loss, sometimes refused
+   (the item stays in the chest). Numbers: BAL.dis (jbal2.js). Test: dev/test/pcard-dislikes.js */
+(function(){
+const KDS=["Trang sức","Hương liệu","Vải vóc","Lễ vật"];
+const hs=s=>typeof ctxHash==="function"?ctxHash(s):0;
+const isEmp=p=>!!S&&(p===S.emp||p==="emp");
+const pid=p=>isEmp(p)?"emp":String(p&&p.id);
+function pool(p){const P=[];ARTS.forEach(a=>P.push({k:"art:"+a.k,n:"tác phẩm "+a.n.split(" &")[0]}));KDS.forEach(k=>P.push({k:"kd:"+k,n:k.toLowerCase()}));
+ if(isEmp(p))for(const f in LIKES)LIKES[f].forEach(v=>P.push({k:f+":"+v,n:v}));return P}
+function entry(k){const P=pool("emp").concat(pool(null));return P.find(x=>x.k===k)||{k,n:k.split(":").slice(1).join(":")}}
+function kdAllTag(kd,tag){const L=Object.keys(IT).filter(k=>IT[k].kd===kd);return L.length>0&&L.every(k=>(IT[k].tg||[]).includes(tag))}
+/* the person's own likes, in the pool's key space */
+function likeKeys(p){const K=[];
+ if(isEmp(p)){const E=S.emp;for(const f in LIKES)if(E.likes&&E.likes[f])K.push(f+":"+E.likes[f]);
+  if(typeof has==="function"){if(has("trongtai"))["cam","ky","thi","hoa"].forEach(a=>K.push("art:"+a));if(has("chamchinh"))K.push("art:ky");if(has("mesac"))K.push("art:y")}
+  KDS.forEach(k=>{if(kdAllTag(k,"emp"))K.push("kd:"+k)})}
+ else if(p&&typeof p==="object"){try{const b=typeof wkBestArt==="function"?wkBestArt(p):null;if(b)K.push("art:"+b)}catch(e){}KDS.forEach(k=>{if(kdAllTag(k,p.queen?"hh":"rv"))K.push("kd:"+k)})}
+ return K}
+function disInitOne(p){if(!p||!S)return[];const o=isEmp(p)?S.emp:p;if(Array.isArray(o.dis))return o.dis;
+ const seed=typeof ctxSeed==="function"?ctxSeed():1,id=pid(p),lk=likeKeys(p);
+ const P=pool(p).filter(x=>!lk.includes(x.k)).map(x=>({k:x.k,h:hs(seed+"|dis|"+id+"|"+x.k)})).sort((a,b)=>a.h-b.h||(a.k<b.k?-1:1));
+ const n=BAL.dis.n[0]+hs(seed+"|disn|"+id)%(BAL.dis.n[1]-BAL.dis.n[0]+1);o.dis=P.slice(0,n).map(x=>x.k);return o.dis}
+function disOf(p){return disInitOne(p)}
+function disInit(){try{if(!S)return;S.disK=S.disK||{};disInitOne("emp");for(const v of rivals)disInitOne(v)}catch(e){console.error("jdis",e)}}
+function known(p){S.disK=S.disK||{};return S.disK[pid(p)]||(S.disK[pid(p)]=[])}
+function unk(p){const K=known(p);return disOf(p).filter(k=>!K.includes(k))}
+function learn(p,k,why){const K=known(p);if(!k)k=unk(p)[0];if(!k||K.includes(k)||!disOf(p).includes(k))return null;K.push(k);const e=entry(k);
+ try{if(isEmp(p))log(`<span class="g">Ngươi biết được: Hoàng thượng không ưa ${e.n}.</span>`);else if(typeof noteAdd==="function")noteAdd(p.id,`${why||"Dò được"}: nàng không ưa ${e.n}`)}catch(x){}return e}
+function row(p){if(!p||(!isEmp(p)&&typeof p!=="object"))return null;const K=known(p),N=disOf(p).length;
+ const txt=K.map(k=>entry(k).n).join(" · ");const un=N-K.length;
+ return [isEmp(p)?"Ngài ghét":"Nàng ghét",K.length?txt+(un?` (còn ${un} điều chưa rõ)`:""):"chưa rõ",K.length?"t":"n"]}
+/* what a gift (inventory entry) is, as pool keys the recipient might dislike */
+function giftKeys(e){const K=[];if(!e)return K;if(e.wk){const w=e.wk;K.push("art:"+w.a);if(w.kind==="bhoa")K.push("flower:"+w.s);if(w.kind==="mon")K.push("dish:"+w.s);if(w.kind==="khuc"&&/^theo /.test(w.s||""))K.push("music:"+String(w.s).slice(4))}
+ else if(IT[e.k]&&IT[e.k].kd)K.push("kd:"+IT[e.k].kd);return K}
+function hit(r,e){if(!r||!e)return null;const D=disOf(r);if(!D.length)return null;const L=likeKeys(r),G=giftKeys(e);
+ if(!e.wk&&IT[e.k]){const tag=isEmp(r)?"emp":r.queen?"hh":"rv";if((IT[e.k].tg||[]).includes(tag))return null}
+ const k=G.find(x=>D.includes(x)&&!L.includes(x));return k||null}
+window.disOf=disOf;window.disInit=disInit;window.disKnown=known;window.disUnk=p=>unk(p).length>0;window.disLearn=learn;window.disRow=row;window.disHit=hit;window.disEntry=entry;window.disLikeKeys=likeKeys;
+/* old saves + new lives */
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);disInit();return r}})();
+/* the Emperor's "Hỏi sở thích" / "Nói thật lòng": reveal a like or a dislike */
+(function(){const d0=discover;discover=function(){const u=Object.keys(LIKES).filter(k=>!S.emp.known[k]).length,d=unk("emp").length;if(!u&&!d)return false;
+ if(u&&(!d||R(u+d)<u))return d0.apply(this,arguments);return !!learn("emp")}})();
+/* spying: a "dis" fact joins the intel pool (Đã biết) */
+(function(){if(typeof j78facts!=="function")return;const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);try{const k=unk(v)[0];if(k)F.push({k:"dis:"+k,kind:"dis",pri:BAL.dis.spyPri,txt:`${j78Who(v)} không ưa ${entry(k).n}.`,go:()=>{const K=known(v);if(!K.includes(k))K.push(k);return""}})}catch(e){}return F}})();
+/* talking */
+(function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&S.chat[v.id]>=1&&unk(v).length&&roll(BAL.dis.talk))learn(v,null,"Chuyện trò")}catch(e){}return r}})();
+/* the gift: a wrong gift costs a little, and may be refused (it stays in the chest) */
+(function(){const g0=giveTo;giveTo=function(a,r,ix){let k=null;const e=a&&a.inv&&a.inv[ix];
+ try{if(a===S&&e&&!e.h&&r&&r!==S&&r!=="th"&&r!=="maid"&&(r==="emp"||typeof r==="object"))k=hit(r==="emp"?"emp":r,e)}catch(x){}
+ if(!k)return g0.apply(this,arguments);const emp=r==="emp",who=emp?"Hoàng thượng":`${rkName(r)} ${r.name}`,en=entry(k).n,nm=iname(e);
+ if(roll(BAL.dis.refuse)){learn(emp?"emp":r,k,"Bị từ chối quà");if(emp)ap(S,{sung:-BAL.dis.refSung});else affAdd(r,S,-BAL.dis.refAff);
+  return `<span class="r">${who} không nhận ${nm}: ${emp?"ngài":"nàng"} không ưa ${en}.</span> ${emp?`Sủng -${BAL.dis.refSung}`:`Thiện cảm của nàng -${BAL.dis.refAff}`}. Món quà vẫn còn trong rương. `}
+ const out=g0.apply(this,arguments);if(!out)return out;learn(emp?"emp":r,k,"Dâng quà sai ý");
+ if(emp)ap(S,{sung:-BAL.dis.sung});else affAdd(r,S,-BAL.dis.aff);
+ return out+`<span class="r">Nhưng ${emp?"ngài":"nàng"} không ưa ${en}: ${emp?`Sủng -${BAL.dis.sung}`:`thiện cảm của nàng -${BAL.dis.aff}`}.</span> `}})();
+/* the gift dialog tells her only what she already knows */
+(function(){if(typeof giftEval!=="function")return;const g0=giftEval;giftEval=function(e,t){const r=g0.apply(this,arguments);try{if(r&&r.ok&&t&&t!=="th"&&t!=="maid"&&e&&!e.h){const who=t==="emp"?"emp":t,k=hit(who,e);
+  if(k&&known(who).includes(k))r.x=(r.x||"")+` · kèm: ${t==="emp"?"ngài":"nàng"} không ưa ${entry(k).n}, ${t==="emp"?`Sủng -${BAL.dis.sung}`:`thiện cảm của nàng -${BAL.dis.aff}`}; có thể không nhận: ${chanceW(BAL.dis.refuse)}`}}catch(x){}return r}})();
 })();
 /* ================= jfighd: kitFigHD — HIGH-RES FIGURES WHERE A FIGURE IS SHOWN BIG (review/face-sharp, owner 15/11 "mặt vẫn bị mất nét") =================
    Every full-body figure file (fig-*.webp) is 900 px tall. The identity screen shows her at 94 dvh (~1.7-2.1x on a tablet), the stage at
@@ -35954,7 +36032,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4476395207f9";window.CTM_BUILD=BUILD;
+const BUILD="bdeed9277527";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
