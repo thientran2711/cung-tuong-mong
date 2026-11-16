@@ -10,6 +10,28 @@ const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physi
  fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-m\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
   return((m&&this.men[m[1]])||un?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
+/* KIT 33.8 · STAGE PET (owner 16/11 18:00Z, review/stage-pets) — the ONE "theo hầu" pet of every person on a room / place stage (j59), player and NPCs:
+   it stands in ONE fixed spot, on the person's RIGHT, feet on the same floor line, its painted body overlapping the person's outer art by at most KIT_PET.ov of its own width
+   (never the torso / face: the class heights stay below the waist line). No fancy placement (no perch on a shoulder / hand), no outdoor-only rule, big pets appear anywhere.
+   Size = the shared kit CLASS per species (S small / M medium / L large) × the woman body height H of the stage: h = KIT_PET.h[class] (visible height / H).
+   Art: img/pet-stage/pet-<key>.webp (cut-out, Foreman C); while a species has none, PLACEHOLDER = the existing transparent pet picture of the pet's growth stage (marked data-ph="1" / class ph).
+   kitPetOf(person) reads the already-synced follow data (p.pets / p.petOn) — co-op sends nothing new. Static picture; the only motion is a 1.5 px idle bob under Hiệu ứng "Đầy đủ". */
+const KIT_PET={h:{S:.24,M:.30,L:.34},ov:.5,
+ cls:{meomuop:"S",hoami:"S",tho:"S",cavang:"S",meo:"S",sao:"S",uyenuong:"S",cachep:"S",vet:"S",lyngu:"S",ngoctho:"S",
+  cho:"M",sutu:"M",linhmieu:"M",camke:"M",cuuvi:"M",phuong:"M",
+  hac:"L",thienma:"L",bachloc:"L",kylan:"L",thanhlong:"L"},img:{}};
+window.KIT_PET=KIT_PET;
+/* KIT 33.9 · SWIPE STAGE (owner 16/11 18:22Z, replaces "3 people on one stage"): people NEVER shrink (KIT_FIG). A view holds as many people (+ their pets) as fit side by side at the kit height (j59 `fits`, 33.7 slots; up to 6: Fold portrait ≈ 2, iPad more),
+   the others are reached by SWIPING the row left / right (no arrow buttons; the row follows the finger, then slides out / in, 220 ms, transform only). Two "+N" kit chips in the TOP corners of the backdrop, above the heads (left: under the title / rail buttons; right: under the side column or the back button): LEFT = people already passed, RIGHT = people still to come; hidden at 0. A drag never opens a pop-up; a tap does. 33.10: away from her residence the painting is the whole page (jplfs). */
+function kitPetClass(k){try{k=typeof petK==="function"?petK(k):k}catch(e){}return KIT_PET.cls[k]||"M"}
+function kitPetOf(who){try{if(!who)return null;for(const w of [typeof figWho==="function"?figWho(who):null,who.ref,who,who.__kp]){if(w&&typeof w==="object"&&Array.isArray(w.pets)&&typeof tsbPetOn==="function"){const P=tsbPetOn(w);if(P)return P}}}catch(e){}return null}
+function kitPetLoad(src,cb){const c=KIT_PET.img;if(c[src]!==undefined)return c[src];c[src]=null;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{c[src]={ar:im.naturalWidth/Math.max(1,im.naturalHeight)};if(cb)cb()};im.onerror=()=>{c[src]=false;if(cb)cb()};im.src=src;return null}
+/* → {src, ph, cls, k} or null while the picture is still being looked for */
+function kitPetArt(P,cb){const k=petK(P.t),s=`img/pet-stage/pet-${k}.webp`;const r=kitPetLoad(s,cb);
+ const g=P.stg!=null?P.stg|0:2,sc=[.62,.8,1,1][Math.max(0,Math.min(3,g))];
+ if(r)return{src:s,ph:false,cls:kitPetClass(k),k,sc};if(r===null)return null;
+ const f=typeof petPSrc==="function"?petPSrc(P,false):petSrc(k,false);const q=kitPetLoad(f,cb);return q?{src:f,ph:true,cls:kitPetClass(k),k,sc}:null}
+window.kitPetClass=kitPetClass;window.kitPetOf=kitPetOf;window.kitPetArt=kitPetArt;
 /* KIT 33.6 · kitFigBody(src, cb) — the ONE body measurement for every full-body figure (room / place stages j59, event stages jk4,
    week book): alpha bbox (t,b,l,r) + ht = head top = first rows of fair forehead skin minus a hair allowance, so crowns, hairpins and
    phoenix headdresses above the head are NOT counted as height. Returns the result when ready, else null and calls cb once measured.
@@ -53,7 +75,10 @@ function kitSlotSw(k,avail){return k>1?avail/(k+1):avail}
 function kitSlotCx(i,k,x0,avail){return x0+avail*(i+1)/(k+1)}
 function kitSlotScale(vis,avail){const k=vis.length,m=Math.max(0,...vis),sw=kitSlotSw(k,avail);return m>sw&&m>0?sw/m:1}
 function kitSlotNeed(vis){const k=vis.length,m=Math.max(0,...vis);return k>1?m*(k+1):m}
-window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
+/* KIT 33.7b (owner 16/11 18:35Z, own-room stage): N fixed spots = N equal columns of the free width (centre of column i); people NEVER overlap (art ≤ column), pets may overlap a person's legs only */
+function kitSlotSwE(k,avail){return avail/Math.max(1,k)}
+function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
+window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
