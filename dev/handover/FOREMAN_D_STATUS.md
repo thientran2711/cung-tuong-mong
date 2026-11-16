@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 09:48Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 09:53Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -40,10 +40,11 @@ main at start = eba64ead4.
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 | opus | reviewer session_01DgYSWnY5pFVmEYGWvruZFs RUNNING (FAIL list → main s14) |
-| scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | SẴN SÀNG KIỂM (4 converted + exempt list; worker archived) → reviewer session_01DgYSWog54ZBN61ZaY8nZCH RUNNING (completeness check) |
+| scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/scene-end-sweep-r1 67db47f616f41f93098ba64bbcdfee646053d517 (owner OD 07:20Z: every animation scene ends with a kit §81 button; toilReveal, kitGain, j79 dawn, roulette converted; main 18fb8252 ancestor; non-blocking: kitPodiumShow missing from the scan table, j18 dawn onclick dead code)
 - READY review/reign-road-fix-r1 90c5b9e50641edb94c2bcec465cc31e1c66bba49 (orphan #33: unmet consorts no longer shown as "Quý phi ???" in Triều cục + 11 other sites via kitNameList; main 18fb8252 ancestor; report reports/review-reign-road-fix-r1.md)
 - READY review/act-split-w2-r1 072687e2cd549536374db37fe393f1b077464c39 (act-split waves 2–3 + Emperor-stroll first "!" slot; main 399483e3 is an ancestor → ff OK; report reports/review-act-split-w2-r1.md)
 - READY review/balance-after-truth-r1 614138eb3eabd947efde7d9c5d9c23818b1e6e0f (measures/tools only, no BAL or game code; numbers on record; report reports/review-balance-after-truth-r1.md)

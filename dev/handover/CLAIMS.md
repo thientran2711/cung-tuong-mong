@@ -135,6 +135,6 @@
 | kc-roads-cn-nc round 3 review (opus; main s14 08:41Z) | review/kc-roads-cn-nc-r1 | D | session_01DgYSWnY5pFVmEYGWvruZFs | RUNNING | 16/11 09:31Z |
 | scene-end button SWEEP, whole game (KIT §81; main s14 09:10Z) | review/scene-end-sweep | D | session_01DgYSWmAiQTHkmu8eoKhvWT | DONE SẴN SÀNG KIỂM 67db47f6 | 16/11 09:31Z |
 | servant-mline-r2 review (opus) | review/servant-mline-r3 | D | session_01DgYSWkVHL3tGcMAWshbEUA | RUNNING | 16/11 09:32Z |
-| scene-end-sweep review (sonnet) | review/scene-end-sweep-r1 | D | session_01DgYSWog54ZBN61ZaY8nZCH | RUNNING | 16/11 09:41Z |
+| scene-end-sweep review (sonnet) | review/scene-end-sweep-r1 | D | session_01DgYSWog54ZBN61ZaY8nZCH | DONE PASS 67db47f6 | 16/11 09:41Z |
 | unmet-name leak family residue (bare-name log lines, palName, per-person ??? rows) | review/name-mask | D | session_01DgYSWoDkH3BjgWkcd7Y4Cg | RUNNING | 16/11 09:44Z |
 | design-scale phase 2/3 + maptab tab-mode reset bug (opus) | review/design-scale-p2 | main s14 | session_01UV1Szh2HXLUxv3oHmnezMy (opus) | RUNNING | 16/11 09:44Z |
