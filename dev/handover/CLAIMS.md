@@ -100,7 +100,7 @@
 | no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | session_01N1tNP6akcFFA3AcqEfs5hk (sonnet) | RUNNING | 16/11 07:58Z |
 | no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | session_01N1tNP3ykt4KbnfNeocJZ3W (sonnet) | RUNNING | 16/11 07:58Z |
 | no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | session_01N1tNP2boFYsfpf9ZAuvbwW (sonnet) | RUNNING | 16/11 07:58Z |
-| D9 header-own reviewer | review/header-own-r1 | B | session_01N1tNP4c1TN9m7n8JPAjyqC (sonnet) | RUNNING | 16/11 07:58Z |
+| D9 header-own reviewer | review/header-own-r1 | B | session_01N1tNP4c1TN9m7n8JPAjyqC (sonnet) | PASS 0d48819b (READY) | 16/11 08:12Z |
 | D25 veil-zoom reviewer (moved C→B 07:30Z; C session gone) | review/veil-zoom-r1 | B | session_01N1tNP2X1WermTjz7d2nn5d (sonnet) | RUNNING | 16/11 07:58Z |
 | D36 rank-port resume (kit-keeper-1 done) | review/rank-port | B | session_01N1tNP3A9vkZJnwyZJw3fL1 (sonnet) | RUNNING | 16/11 07:58Z |
 | D11 presentation (code wiring only; art paused; D51 at main) | review/presentation | B | session_01N1tNP3mhLhWrJukZWoGvAQ (sonnet) | RUNNING | 16/11 07:58Z |
