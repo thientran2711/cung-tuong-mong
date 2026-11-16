@@ -114,3 +114,10 @@ See the table appended below (before = origin/main build, after = this build).
   "Các lối, sách phổ" pbtn as jrcp's). No CSS added. Consistent.
 - Pre-existing on main (not this branch): material-choice option cards clip their last Được line vertically at 755x1000 (art kinds too:
   Cầm/Thi "Tuyệt phẩm: chỉ vật liệu quý", "quà giá trị +1"); ranges "+2..3", "(0..10)" in card text → review/act-text net covers them.
+- Second merge: origin/main eba64ead4 (recipes-r2 is now ON main, jrcp.js sits at main's place after jnotes) → assemble = main's list +
+  `jtds.js` last (after jtruth, jkpc). Diff vs main: assemble, j83, j85, jbal, jtds, jwkr (+ docs/art scripts/tests).
+- Tests on the final build: tuduc-sub.js 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390@3: 0 errors, no overflow/cut/dialog-out,
+  all checks right; 390x844 rotate prompt; recipes.js 755 clean; ts-oldsave (main → this) ok 12 weeks; coop-e2e 59/59. Đức cap unit
+  check: 1st Hạnh work of the month +1, 2nd/3rd 0 with the log line, next month +1 again.
+- Also seen (pre-existing family, main): teacher-picker option cards clip their last line vertically at 755x1000@1 (jrcp art version has
+  the same text length) → actcard-one / act-text family.
