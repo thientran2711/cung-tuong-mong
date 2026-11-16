@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:55Z (s4 = session_01DgYSWm6p1WwTsXL1c63Hiq; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo at :50)
+last wake: 16/11 11:53Z (s4 = session_01DgYSWm6p1WwTsXL1c63Hiq; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo at :50; context 21 % of 1M)
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
@@ -143,6 +143,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:53Z (hourly): no new D inbox orders. 5 D sessions alive: kc-roads fix (running, 8/8 home-route tests), coop-b1b5 fix, emperor-visit (visit half, bot run), name-mask (final scans), seatcap (sim lives 9–20). jmort.js still not on main 695934d1 → D4 + D57 keep waiting. No free real D items → no new spawns.
 - 11:51Z: entry-exam-r1 PASS d7364cb2 → READY (ship after kc-roads fix + mg-balance); reviewer archived; kc-roads fix worker told to build on top of it.
 - 11:47Z: close-maid-r1 PASS ebc85f78 → READY; reviewer archived.
 - 11:16Z: coop-b1b5-r2 FAIL 1 BLOCKING (jcycle × co-op guest) → opus fix worker from r2 @d5879537; reviewer archived.
