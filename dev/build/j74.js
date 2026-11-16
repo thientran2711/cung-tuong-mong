@@ -25,16 +25,22 @@ st.textContent=`
 .kpmenu .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.74rem;opacity:.9}
 .kpmenu.n4{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* Chọn sổ: one kit section per sổ (h4.kpst label + kitRows + .kbtn) */
-#modal .kpt-mount #slots{display:flex;flex-direction:column;gap:6px;margin:0 0 6px}
-/* KIT slot card (owner 16/11 "info on top, buttons below"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, any similar list):
-   h4.kpst, the kit info rows FULL WIDTH on top, the kit buttons in ONE row below (equal width); short values never wrap word by word */
-.kcstabs{margin:0 0 8px}
-.kslot{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:2px 0 8px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
-.kslot>.kpst{margin:0}
-.kslot .kb{margin:0;width:100%}
-.kslot .kb .krv{overflow-wrap:normal;word-break:normal;text-wrap:balance}
+#modal .kpt-mount #slots{display:flex;flex-direction:column;gap:4px;margin:0 0 6px}
+/* KIT slot card (owner 16/11 "info on top, buttons below"; KIT §8.3 COMPACT SLOT ROW, s22 kit request "3 sổ + Phúc duyên on iPad without
+   scrolling"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, Sổ mây card, Nhập ám hiệu, any similar list). Two columns:
+   the slot name (h4.kpst) as a narrow label column on the left; on the right the kit info rows on top — label + value PAIRS that flow
+   on a line (each pair keeps its words together; a value wraps only when it alone is longer than the line, never word by word) — and the
+   kit buttons in ONE row below (equal width). One rule in both canvases (kv1 / kv2), no breakpoint. */
+.kcstabs{margin:0 0 6px}
+.kslot{display:grid;grid-template-columns:6.4em minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;row-gap:4px;align-items:start;padding:2px 0 5px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kslot>.kpst{grid-column:1;grid-row:1/span 2;align-self:stretch;margin:0;border-bottom:0;border-right:1px solid var(--k-hair,#e6d3ac);padding:3px 8px 0 0;line-height:1.25;text-wrap:balance;overflow-wrap:normal;word-break:normal}
+.kslot>.kb,.kslot .kb{grid-column:2;margin:0;width:100%;display:flex;flex-wrap:wrap;align-items:baseline;gap:1px 16px}
+.kslot .kb>.kr{display:inline-flex;align-items:baseline;gap:6px;max-width:100%;min-width:0}
+.kslot .kb>.kr>.krl{flex:0 0 auto}
+.kslot .kb .krv{min-width:0;overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.kslot>.kslot-a{grid-column:2}
 .kslot-a{display:flex;gap:8px;flex-wrap:nowrap;justify-content:stretch}
-.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:40px;padding:6px 10px;font-size:.84rem;white-space:normal}
+.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:32px;padding:3px 10px;font-size:.84rem;white-space:normal}
 .kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
 /* Thiết lập: kit controls (KIT.md 28) */
 .optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}

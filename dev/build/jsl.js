@@ -130,7 +130,13 @@ window.KIT_LIGHT=KIT_LIGHT;
    let dyF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1,kk=parseFloat(getComputedStyle(box).getPropertyValue("--kfk"))||1;
      const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);dyF=g.dy*kk;
-     f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1)}}
+     f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
+     /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the page's two frame lines are the running-head rule (.kbk-rh) and the
+        page's inner edge (.kbk-in bottom; the drawn frame on plain pages, the painted border's margin on art pages). Gap above the painted
+        head = gap under the feet: the figure is raised by half the difference (never lowered past the column floor, never above its top). */
+     try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
+       const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
    const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
    if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
    const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
@@ -139,7 +145,7 @@ window.KIT_LIGHT=KIT_LIGHT;
       sleeve) is CUT at the column edge (the column clips), with a 24 px soft fade at a cut edge; the text never sits on the figure. */
    box.classList.remove("kbk-figover");const over=w0>pw+1;
    let L=(pw-w0)/2;if(over){L=pw/2-hx*w0;L=Math.min(0,Math.max(pw-w0,L))}
-   const dx=L-(pw-w0)/2,t=(Math.abs(dx)>0.5||dyF>0.5)?`translate(${dx.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;
+   const dx=L-(pw-w0)/2,t=(Math.abs(dx)>0.5||Math.abs(dyF)>0.5)?`translate(${dx.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;
    if(im){const g=[];if(over&&L<-0.5)g.push(`transparent ${(-L).toFixed(0)}px,#000 ${(-L+24).toFixed(0)}px`);if(over&&L+w0>pw+0.5)g.push(`#000 ${(pw-L-24).toFixed(0)}px,transparent ${(pw-L).toFixed(0)}px`);
     const mk=g.length?`linear-gradient(to right,${g.length===2?g.join(","):g[0].startsWith("transparent")?g[0]:"#000 0,"+g[0]})`:"";if(im.style.maskImage!==mk){im.style.maskImage=mk;im.style.webkitMaskImage=mk}}})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
