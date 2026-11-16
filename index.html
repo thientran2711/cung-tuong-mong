@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7ea3b342+","t":"2026-11-16T20:21Z","c":"night-final: her night dialogs at the commit show after the nextBuoi wrappers (showSoon) and keep used\u003c4; night-day adapted to the hold-the…","b":"97dd1212d815","h":[{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."}]};
+window.CTM_BI={"s":"69c7497f+","t":"2026-11-16T20:40Z","c":"night-final: her night dialogs at the commit show after the nextBuoi wrappers (showSoon) and keep used\u003c4; night-day adapted to the hold-the…","b":"dd11024e1355","h":[{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -44613,8 +44613,68 @@ const ns0=nightScene;nightScene=function(){if(IN||!S||!nfOn())return ns0.apply(t
 /* co-op: any answer that changes who holds tonight (her summons declined "Cáo bệnh", given to the maid…) is relayed */
 if(typeof chooseM==="function"){const cm0=chooseM;chooseM=function(){const b=S&&S.tonight,c0=CUR;CUR=(Q[0]&&Q[0].pid)||"";let r;try{r=cm0.apply(this,arguments)}finally{CUR=c0}try{if(CO()&&S&&S.tonight!==b)send()}catch(e){}return r}}
 
+/* ---------- 2b. MULTI-STEAL (coordinator s23 brief, owner 19:45Z rule): every Tranh sủng / Chặn ngự giá of the evening — hers, the co-op
+   friend's, the NPCs' — is only RECORDED at the act (its cost paid then, one try each: j75 ntTry); all are resolved ONCE at the commit:
+   each rolls its own odds (oSteal of the act; hers = the card's shown odds); the winner = the successful try with the largest margin
+   (odds − roll), tie → higher Sủng, then the earlier try; every other try gets stealNight's failure result (Sủng −BAL.steal.failSung);
+   the winner gets stealWin's oán / ghen against the holder. Same rule for NPCs (two-way law) and for the not-played ledger nights. */
+const B=()=>BAL.steal;
+let SEQ=0,RES=0;
+/* one try a night each: the same mark j75 ntTry writes (S.ntTry {w: wk(), ids}) — j75 keeps ntTry private */
+function tryMark(a){if(!S)return;const w=wk();if(!S.ntTry||S.ntTry.w!==w)S.ntTry={w,ids:[]};const k=a===S?"me":a&&a.id;if(k!=null&&!S.ntTry.ids.includes(k))S.ntTry.ids.push(k)}
+function atts(){const d=day();if(!S.nfA||S.nfA.d!==d)S.nfA={d,L:[]};return S.nfA.L}
+function regText(a,mode){return a===S?`Ngươi ${mode==="road"?"ra hành lang chờ ngự giá đi qua":"sai cung nữ sang mời Hoàng thượng"}. Thành hay không, hết ngày mới rõ.`
+ :`${NMc(a)} ${mode==="road"?"ra hành lang chờ ngự giá":"sai người sang mời Hoàng thượng"}; hết ngày mới rõ. `}
+/* record one try (cost already paid by the caller); co-op guest: the try also goes to the host, who resolves the night */
+function reg(a,mode,o){const L=atts();const w=a===S?"me":a.id;if(L.some(x=>x.w===w))return;L.push({w,mode,o:Math.round(o),q:++SEQ+L.length*1e-3});
+ if(a===S){log(regText(S,mode));if(guest())send(false,{mode,o:Math.round(o)})}}
+function entOf(w){if(w==="me")return S;return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===w)||null}
+const sungOf=a=>a===S?(S.sung||0):(a&&a.sung)||0;
+function failTxt(a,t){return `${NMc(a)} định giành đêm${t?" của "+NM(t):""} nhưng Hoàng thượng không động lòng. Sủng -${B().failSung}. `}
+/* resolve one night: L = [{a, mode, o, q, remote}] (remote = the co-op friend's try: her own seat applies her Sủng) */
+function nfResolve(t,L,live){const out={holder:t,lines:[],tries:L.length,res:[]};if(!L.length)return out;
+ const taken=typeof ntTaken==="function"?ntTaken():null;let best=null;
+ for(const x of L){const r=Math.random()*100;x.m=x.o-r;x.ok=!!t&&!taken&&r<x.o&&x.a!==t;
+  if(x.ok&&(!best||x.m>best.m||(x.m===best.m&&(sungOf(x.a)>sungOf(best.a)||(sungOf(x.a)===sungOf(best.a)&&x.q<best.q)))))best=x}
+ const ST=window.__stealSt||[];
+ for(const x of L.slice().sort((a,b)=>a.q-b.q)){const a=x.a;let txt;
+  if(x===best){RES=1;try{txt=String(stealWin(a,t,x.mode)||"").trim()}finally{RES=0}out.holder=a;
+   try{const d=S.nightWhy;if(d&&d.wk===day()){d.pick=a===S?"me":a.id;d.cause="stolen"}}catch(e){}}
+  else{if(!x.remote)ap(a,{sung:-B().failSung});txt=failTxt(a,t).trim()}
+  out.res.push({w:a===S?"me":a.id,won:x===best,mode:x.mode,txt});
+  try{ST.push({w:day(),me:t===S,mode:x.mode,ok:x===best,live,n:L.length})}catch(e){}
+  try{if(typeof newsAdd==="function"&&a!==S&&t)newsAdd(a,"steal",txt.replace(/\.\s*$/,""),t===S)}catch(e){}
+  if(!live){out.lines.push(txt);continue}
+  if(a===S||t===S)log(txt);else if(x===best&&(S.mat||0)>=2)log(txt)}
+ if(live&&best&&t===S&&best.a!==S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
+  const w=out.res.find(r=>r.won);Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng ${w?w.txt:""}</p>`})}
+ return out}
+/* the one steal pass of a night: the evening's recorded tries (played night) + the NPCs' own choice now (jsteal agent: stealWant), then ONE resolve */
+function stealPassNF(t,opt){opt=opt||{};const live=opt.live!==false;const out0={holder:t,lines:[],tries:0,res:[]};if(!S||S.dead)return out0;
+ if(guest()&&t!==S)return out0;
+ const L=[];if(live&&nfOn()){for(const x of atts()){const a=entOf(x.w);if(a&&a!==t)L.push({a,mode:x.mode,o:x.o,q:x.q,remote:!!a.coop})}S.nfA.L=[]}
+ if(t){const E=liveRivals(true).filter(v=>!L.some(x=>x.a===v)&&typeof stealEligible==="function"&&stealEligible(v,t)&&!(typeof cyTray==="function"&&cyTray(v)));
+  for(let i=E.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[E[i],E[j]]=[E[j],E[i]]}
+  let n=L.filter(x=>x.a!==S&&!x.a.coop).length;
+  for(const v of E){if(n>=B().maxTry)break;const w=stealWant(v,t);if(!w.mode||!(Math.random()<w.p))continue;
+   tryMark(v);ap(v,stealCost(w.mode));L.push({a:v,mode:w.mode,o:oSteal(v,w.mode),q:++SEQ+1e3});n++}}
+ return nfResolve(t,L,live)}
+if(typeof window.stealPass==="function")window.stealPass=stealPassNF;
+window.nfResolve=nfResolve;
+/* every act of the evening (ACT steal/road of the social menu, an NPC agent's act) only RECORDS the try */
+const sn1=stealNight;stealNight=function(a,t,mode){if(RES||!S||!nfOn())return sn1.apply(this,arguments);
+ if(!a||!t||tonightOf()!==t||a===t)return "";if(typeof ntCan==="function"&&!ntCan(a))return "";if(typeof cyTray==="function"&&cyTray(a))return "";
+ tryMark(a);ap(a,stealCost(mode));reg(a,mode,oSteal(a,mode));return a===S?" ":regText(a,mode)};
+/* her deck cards Tranh sủng / Chặn ngự giá: the card pays its cost and records the try with its shown odds; no roll now */
+const isStealCard=a=>!!(a&&(a.__steal||((a.n==="Tranh sủng"||a.n==="Chặn ngự giá")&&a.b===B4())));
+if(typeof runOpt==="function"){const ro1=runOpt;runOpt=function(a){const t=S&&tonightOf();if(!(isStealCard(a)&&S&&nfOn()&&t&&t!==S))return ro1.apply(this,arguments);
+ if(typeof ntCan==="function"&&!ntCan(S)){log(`${ntReason(S)}.`);return null}   /* one try a night: no second cost */
+ const mode=a.n==="Chặn ngự giá"?"road":"feign",o0=a.o,g0=a.go,f0=a.fail;let o=typeof o0==="number"?o0:oSteal(S,mode);try{if(o<100)o=cl(o+lotB(S,a.dom),5,95)}catch(e){}
+ a.o=100;a.go=()=>{if(typeof ntCan==="function"&&!ntCan(S)){log(`${ntReason(S)}.`);return}tryMark(S);reg(S,mode,o)};a.fail=null;
+ try{return ro1.apply(this,arguments)}finally{a.o=o0;a.go=g0;a.fail=f0}}}
+
 /* ---------- 3. the commit at "Sang ngày mới" ---------- */
-function steals(){try{if(typeof stealPass==="function"&&S.tonight){const t=tonightOf();if(t)stealPass(t,{live:true})}}catch(e){console.error(e)}}
+function steals(){try{const t=tonightOf();if(t||(S.nfA&&S.nfA.d===day()&&S.nfA.L.length))return window.stealPass(t||null,{live:true})}catch(e){console.error(e)}return null}
 /* the modal is shown once the caller's own steps (nextBuoi wrappers, curtain) are done */
 const showSoon=()=>{if(window.__bot)return;setTimeout(()=>{try{if(S&&Q.length&&$("modal").hidden)showModal()}catch(e){}},0)};
 function hold(){S.buoi=B4();try{render()}catch(e){}showSoon()}
@@ -44623,7 +44683,7 @@ function herNight(){S.buoi=B4();try{if(used>=4)used=3}catch(e){}/* no auto "Sang
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){if(!flippedToday())realFlip();steals();S.nfFin=d;send(true)}
+  if(!guest()){if(!flippedToday())realFlip();const o=steals();S.nfG=null;try{const f=friend();const r=f&&o&&o.res&&o.res.find(x=>x.w===f.id);if(r)S.nfG={d,r:{won:r.won,mode:r.mode}}}catch(e){}S.nfFin=d;send(true)}
   if(Q.length)return hold()}
  if(guest()&&S.nfFin!==d){S.nfW=d;ask();return hold()}       /* the host's last word on who holds tonight */
  if(S.tonight==="me"&&S.nfN!==d){S.nfN=d;return herNight()}
@@ -44643,8 +44703,8 @@ const mapId=id=>id==="me"?{k:"p",v:myPid()}:(friend()&&id===friend().id)?{k:"p",
 const unId=x=>!x?null:x.k==="p"?(x.v===myPid()?"me":x.v):x.v;
 function nwOut(){const w=S.nightWhy;if(!w||w.wk!==day())return null;return{pick:w.pick!=null?mapId(w.pick):null,flip0:w.flip0!=null?mapId(w.flip0):null,cause:w.cause,day:w.day,mood:w.mood,
  rows:(w.rows||[]).map(x=>Object.assign({},x,{id:mapId(x.id),name:x.id==="me"?S.name:x.name}))}}
-function send(fin){const c=CO();if(!c||!S)return;try{const m={t:"act",k:NK,mode:host()?"h":"g",d:day(),week:COOP.state.week,hold:enc(S.tonight),ntk:S.ntk&&S.ntk.w===day()?mapId(S.ntk.who):null,
-  fin:host()&&S.nfFin===day()?1:0,nw:host()?nwOut():null,id:NK+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};if(host())LAST=m;COOP.send(m)}catch(e){console.error(e)}}
+function send(fin,att){const c=CO();if(!c||!S)return;try{const m={t:"act",k:NK,mode:host()?"h":"g",d:day(),week:COOP.state.week,hold:enc(S.tonight),ntk:S.ntk&&S.ntk.w===day()?mapId(S.ntk.who):null,
+  fin:host()&&S.nfFin===day()?1:0,nw:host()?nwOut():null,att:att||null,gres:host()&&S.nfG&&S.nfG.d===day()?S.nfG.r:null,id:NK+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};if(host())LAST=m;COOP.send(m)}catch(e){console.error(e)}}
 function ask(){const c=CO();if(!c)return;try{COOP.send({t:"act",k:NK,mode:"ask",d:day(),week:COOP.state.week,id:NK+"a"+Date.now().toString(36)})}catch(e){}}
 function apply(m){if(!S||S.dead||m.d!==day())return;
  if(guest()&&(S.buoi||0)<B4()&&!m.fin){PEND_IN=m;return}PEND_IN=null;
@@ -44655,6 +44715,8 @@ function apply(m){if(!S||S.dead||m.d!==day())return;
   if(t==="me"&&was!=="me"&&!m.ntk&&typeof pushDil==="function"&&typeof mkP==="function"&&!Q.some(x=>x.pid==="ksp"))pushDil(mkP("ksp"),"Kính sự phòng báo tin");
   if(was==="me"&&t!=="me"){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep")Q.splice(i,1);
    Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng giữa đường, Hoàng thượng bị mời sang cung khác.</p>`})}
+  if(m.fin&&m.gres&&S.nfR!==day()){S.nfR=day();const g=m.gres;
+   if(g.won)log(`Ngươi ${g.mode==="road"?"chặn ngự giá giữa đường":"sai người báo đau tim"}: Hoàng thượng sang cung ngươi.`);else{ap(S,{sung:-B().failSung});log(failTxt(S,null).trim())}}
   if(m.fin){const w0=S.nfW===day();S.nfFin=day();
    if(w0&&!Q.length&&(S.buoi||0)>=B4()){try{COOPW.allowN=true;nextBuoi()}catch(e){console.error(e)}finally{COOPW.allowN=false}}}}
  try{if(typeof deal==="function")deal();if(!window.__bot&&Q.length)showModal();render()}catch(e){}}
@@ -44662,7 +44724,9 @@ try{if(typeof COOP==="object"&&COOP.on){
  COOP.on("act",m=>{try{const c=CO();if(!m||m.k!==NK||!c||m.from===c.seat)return;
   if(m.mode==="ask"){if(host()&&LAST&&LAST.d===day())send();return}
   if(m.mode==="h"&&guest())apply(m);
-  else if(m.mode==="g"&&host()&&S&&m.d===day()&&S.nfFin!==day()){apply(m);send()}}catch(e){console.error(e)}});
+  else if(m.mode==="g"&&host()&&S&&m.d===day()&&S.nfFin!==day()){
+   if(m.att){const f=friend();if(f&&!atts().some(x=>x.w===f.id)&&(typeof ntCan!=="function"||ntCan(f))){tryMark(f);atts().push({w:f.id,mode:m.att.mode==="road"?"road":"feign",o:Math.max(0,Math.min(100,+m.att.o||0)),q:++SEQ})}return}
+   apply(m);send()}}catch(e){console.error(e)}});
  const re=()=>setTimeout(()=>{try{if(!CO())return;if(host()&&LAST&&LAST.d===day())send();else if(guest()&&S&&(S.buoi||0)>=B4()&&S.nfFin!==day())ask()}catch(e){}},400);
  COOP.on("room",re);COOP.on("peer",on=>{if(on)re()})}}catch(e){}
 window.nfDebug=()=>({on:nfOn(),host:host(),guest:guest(),nfP:S&&S.nfP,nfF:S&&S.nfF,nfC:S&&S.nfC,nfN:S&&S.nfN,nfFin:S&&S.nfFin,tonight:S&&(S.tonight==="me"?"me":S.tonight&&S.tonight.id),ntk:S&&S.ntk});
@@ -44695,7 +44759,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="97dd1212d815";window.CTM_BUILD=BUILD;
+const BUILD="dd11024e1355";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

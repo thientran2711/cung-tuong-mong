@@ -20,9 +20,9 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  });
  const R={};const ok=(k,c,info)=>{R[k]={pass:!!c,info}};
  /* 1. the flip waits for the evening; it picks HER: accepting the summons spends nothing until the day ends */
- let r=await p.evaluate(()=>{const L=T.fresh();const d0=wk();const a={t0:S.tonight,nfP:S.nfP===wk()};const un=T.only(S);
+ let r=await p.evaluate(()=>{const L=T.fresh();const d0=wk();const a={t0:S.tonight,nfP:S.nfP===wk()};const un=T.only(S);const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});/* timing only: NPC last tries are case 4 + night-multi.js */
   T.toEvening();un();const k=Q.map(m=>m.pid);a.atTon=S.tonight;a.kspQ=k.includes("ksp");const n0=S.nights||0;T.drain();a.held=S.tonight==="me";a.spentEarly=(S.nights||0)-n0;
-  a.prepOpen=Q.some(m=>m.pid==="prep");const L2=L.map(v=>v.nights||0);T.endDay();a.me=(S.nights||0)-n0;a.npc=L.reduce((s,v,i)=>s+(v.nights||0)-L2[i],0);a.day=(S.nightLog||[]).slice(-1)[0]===d0;a.nextDay=wk()===d0+1;return a});
+  a.prepOpen=Q.some(m=>m.pid==="prep");const L2=L.map(v=>v.nights||0);T.endDay();a.me=(S.nights||0)-n0;a.npc=L.reduce((s,v,i)=>s+(v.nights||0)-L2[i],0);a.day=(S.nightLog||[]).slice(-1)[0]===d0;a.nextDay=wk()===d0+1;window.stealWant=sw;return a});
  ok("1 flip at tối, her night spent once at day end",r.t0==null&&r.nfP&&r.atTon==="me"&&r.kspQ&&r.held&&r.spentEarly===0&&!r.prepOpen&&r.me===1&&r.npc===0&&r.day&&r.nextDay,r);
  /* 2. A's card turned; SHE steals it in the evening: only she is recorded, A gets nothing */
  r=await p.evaluate(()=>{const L=T.fresh();const A=L[0];const un=T.only(A);T.toEvening();un();const a={pickA:S.tonight===A};const b=T.recs(L);

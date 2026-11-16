@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.preg=0;
    S.cyb={lie:wk(),rk:wk(),rv:"lui"};window.stealPass=()=>({tries:0,lines:[]});/* night-final: not her cycle tuần (jcycle locks her night); NPC last tries are tested in night-final.js */S.buoi=how==="morning"?0:B4L;used=2;/* "morning": a night won at buổi sáng spends that day only (the next day starts fresh) */S.tonight=null;try{NT&&(NT.d={})}catch(e){}render();const before={buoi:S.buoi,turn:S.turn,used,day:(typeof wk==="function"?wk():0)};
    const v=liveRivals(false)[0];const n0=S.nights||0;
-   if(how==="ksp"){S.tonight="me";pushDil?pushDil(mkP("ksp"),"Kính sự phòng báo tin"):Q.push({t:"Kính sự phòng",h:"",opts:mkP("ksp").o});showModal()}
+   if(how==="ksp"){S.tonight="me";S.nfF=wk();/* the summons comes from a turned card: the tablet of today is turned (jnf flippedToday) */pushDil?pushDil(mkP("ksp"),"Kính sự phòng báo tin"):Q.push({t:"Kính sự phòng",h:"",opts:mkP("ksp").o});showModal()}
    else if(how==="stale"){S.tonight="me";pushFront(mkP("prep"),"Chuẩn bị thị tẩm");showModal()}   /* night-final: the night dialogs only open at the commit */
    else{stealWin(S,v,how==="road"?"road":"feign");showModal()}
    /* "stale" (review r7, co-op nights desync): the night's dialogs stay open while the day moves on (a co-op week merge rebuilds S and

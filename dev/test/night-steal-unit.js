@@ -23,7 +23,7 @@ const {chromium}=require('playwright');const path=require('path');
   reset();const A=R0[0],Bv=R0[1];S.tonight=A;r=stealPass(A,{live:true});
   ok("NPC steals another NPC's night",r.tries===1&&tonightOf()!==A&&tonightOf()!==S,{h:tonightOf()&&tonightOf().name});
   /* 4 · her → NPC (her deck card, same act) */
-  reset();S.tonight=A;Q.length=0;const sd=S.duc;let s=stealNight(S,A,"feign");
+  reset();S.tonight=A;Q.length=0;const sd=S.duc;let s=stealNight(S,A,"feign");/* night-final multi-steal: the act only records the try (cost paid now); the night is resolved once at the commit */if(window.nfOn&&nfOn()&&S.nfA&&S.nfA.L.length){S.nfA.L.forEach(x=>{if(x.w==="me")x.o=100});const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});try{window.stealPass(A,{live:true})}finally{window.stealWant=sw}}
   ok("HER Tranh sủng against an NPC: she wins with the same act and cost",S.tonight==="me"&&S.duc===sd-BAL.steal.cost.feign.duc,{t:S.tonight,duc:[sd,S.duc]});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 5 · the agent's choice: self-interest, personality, relation */
