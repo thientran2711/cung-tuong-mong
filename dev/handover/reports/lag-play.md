@@ -29,6 +29,17 @@ Co-op (coop-lag.js, two throttled clients on one 4-CPU box, live Worker, 6 buổ
 (main: turn p95 6.0 s, friend-sees p50 2.4 s; lag-play: 23.4 s incl. a week change, p50 4.3 s). The friend-sees time is the
 receiver's busy main thread (frames wait behind long tasks), so it follows the play-time fixes, not the network.
 
+## Update 17:55Z — owner OD 16/11 15:45Z + 15:55Z: tab change = instant on every device
+- jbook render wrapper: a tab change calls render directly (no kitCurlSwap, no copy); Dư đồ → page no kcl-in fade either. The page turn
+  stays only in the Tuần lục book (kitBook, untouched). kitCurlSwap kept in the kit, unused by tabs. KIT.md §34.0a added, §34.0b scoped
+  to books. Dư đồ leather unroll (kitUnroll) unchanged — coordinator: say if the owner wants that gone too.
+- New test dev/test/tab-instant.js (Fold 755x1000 + iPad 1180x820, HOST): 6 tab taps each, 20 frames checked for any curl/slide/fade
+  layer: PASS 12/12, no page errors. Videos: dev/handover/reports/lag-play-video/tabs-fold.webm, tabs-ipadAir.webm (10 fps, compressed).
+- play-perf after this change (2-min bot): fold tap p95 1.41 s (was 2.1–3.1 s), worst act task 1.66 s; iPad tap p95 1.97 s (was
+  5.3–13.4 s), worst act task 0.70 s. Budget check fixed (soakLongTasksPerMin was read as a floor).
+- Reviewer: dev/test/sheet-turn.js / page-curl.js tab-turn frames are obsolete for tabs now (they still apply to the book).
+- Baseline from s19 (square-icons-r1 reviewer, main 5682ce6f, perf.js fold 10 buổi): playable 7.2 s, 23–28 long tasks > 200 ms, worst ~1.0–1.1 s.
+
 ## Top causes found (and what was done)
 1. Pixi stage canvas resized to 0 px and back on EVERY tab switch (stage collapses under other tabs) → WebGL buffer realloc twice:
    0.5–5 s per switch at 4x. FIXED (j11: skip 0-size / same-size resize; j79 kitStagePause also pauses the stage layer while it is 0 px;
@@ -37,7 +48,7 @@ receiver's busy main thread (frames wait behind long tasks), so it follows the p
    while a life's figures stream in (the "20 s long task" in bot play). FIXED: one coalesced kitBookRelayoutSoon (j87, jsl).
 3. Act-card name lookup (kitActKey → kpSlug of every table entry) re-run for every card on every DOM change (kaNorm observer + 3
    kpActArt wrappers) ~300 ms/buổi; kitPhActReady did Object.keys of the whole act table per card. FIXED: memo per KIT_ACTS object.
-4. Tab page-turn copies the whole page with computed styles 3–4 times per switch (kclPrep), plus per-frame forced layouts. FIXED part:
+4. (now REMOVED for tabs, see update) Tab page-turn copies the whole page with computed styles 3–4 times per switch (kclPrep), plus per-frame forced layouts. FIXED part:
    one getComputedStyle per element, boxes below the visible bottom keep class styles only, re-print only when the page changed
    (MutationObserver / pictures loading), copied scrollers sync only after a scroll. Still the biggest tab cost (~200 ms/copy at 4x).
 5. Layout thrash (read-after-write) in render passes: fixTitles, j59tags (innerText per person), kitMeMark scheduling (each DOM change

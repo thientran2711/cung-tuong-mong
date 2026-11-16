@@ -81,7 +81,7 @@ async function findTap(f,fn,arg){const h=await f.evaluateHandle(fn,arg);const el
   if(SHOWLOAF)r.loafWorst=allLoaf.sort((a,b)=>b.d-a.d).slice(0,10);
   const bud=Object.assign({},BUDGET.default,BUDGET[dev]||{});r.over=[];
   for(const [k,v] of Object.entries(bud)){if(k.startsWith('_')||k.startsWith('coop'))continue;const m=r.metrics[k.replace(/Min$/,'Min')];if(m===undefined)continue;
-   if(k.endsWith('Min')?m<v:m>v)r.over.push(k+' '+m+(k.endsWith('Min')?' < ':' > ')+v)}
+   const fl=/FpsMin$/.test(k);if(fl?m<v:m>v)r.over.push(k+' '+m+(fl?' < ':' > ')+v)}
   if(r.over.length)fail.push(dev+': '+r.over.join('; '));
   R.devices[dev]=r;console.log(JSON.stringify({dev,metrics:r.metrics,over:r.over}));await ctx.close()}
  await b.close();srv.close();if(OUT)fs.writeFileSync(OUT,JSON.stringify(R,null,1));
