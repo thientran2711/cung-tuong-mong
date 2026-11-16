@@ -378,15 +378,19 @@ html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none
    top-right corner beside the name row instead of taking a row of its own above the acts. ---------- */
 (function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
 html body .pc:has(>.pcr>.pcx){position:relative}
-/* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) */
-html body #popw{z-index:12!important}
-html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
+/* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) AND the pane bar
+   (jpane .kpbar, z 40, KIT §45) — at 12 the bar's chips covered the card's top and its ✕ (owner 16/11 "Nút tắt bị che", review/press-fx-r1) */
+html body #popw{z-index:41!important}
+html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8;translate:0 var(--kpcxy,0px)}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
 /* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
 html body .pc>.pcr>.pcx+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
 html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
+/* the card's ✕ stays in the card's top-right corner while the card's own body scrolls (owner 16/11 "Nút tắt bị che": on a phone the room card
+   .pc scrolls inside itself and the absolute ✕ scrolled away with the acts) — it is moved down by the card's scrollTop (--kpcxy) */
+document.addEventListener("scroll",e=>{const pc=e.target;if(!pc||!pc.classList||!pc.classList.contains("pc"))return;const x=pc.querySelector(":scope>.pcr>.pcx");if(x)pc.style.setProperty("--kpcxy",pc.scrollTop+"px")},{capture:true,passive:true});
 
 /* ---------- 10. NAME TAGS NEVER OVERLAP (KIT 31.12): name tags under figures stay one line; when two tags would touch, the later one
    steps one line down (or up when there is no room under it). Runs after every stage render and on resize. ---------- */
