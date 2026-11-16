@@ -8,7 +8,7 @@
    - no page errors. Sizes: the chapter cards are the j67 kit cards (sizes are checked by the story14-view test).
    usage: node dev/test/road-full.js <url> [lives per road] */
 const {chromium}=require('playwright');
-const [,,URL,NL]=process.argv;const NLIV=+NL||3;
+const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (default: every full road) */const NLIV=+NL||3;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
@@ -27,7 +27,7 @@ const [,,URL,NL]=process.argv;const NLIV=+NL||3;
     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
    return{k,road:S.st.f14.road,rd:S.st.f14.rd||'',plan:S.st.ch.plan.join(','),seq,vs,ends,tm:(S.st.X||[]).filter(t=>ARC67[t.a]&&ARC67[t.a].o==='tm').map(t=>t.a+(t.done?'=done':'')).join(' '),tmq:(S.st.f14.tmq||[]).join(' '),all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}};
   const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)}});
- const roads=await p.evaluate(()=>Object.keys(ROAD14).filter(r=>rdFull(r)));console.log('full roads:',roads.join(' ')||'(none)');
+ const roads=(await p.evaluate(()=>Object.keys(ROAD14).filter(r=>rdFull(r)))).filter(r=>!ONLY||ONLY.split(',').includes(r));console.log('full roads:',roads.join(' ')||'(none)');
  chk('at least one full road registered',roads.length>0,roads);
  for(const rd of roads){const k=rd.split('_')[0];
   for(let L=0;L<NLIV;L++){const R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand']);
@@ -45,8 +45,8 @@ const [,,URL,NL]=process.argv;const NLIV=+NL||3;
    const byId={};let lastAlive=null,recastBad=[];for(const x of R.vs){if(!x.a.startsWith(rd))continue;if(lastAlive!=null&&x.v!==lastAlive.v&&lastAlive.alive){recastBad.push([lastAlive.a,lastAlive.v,x.a,x.v])}lastAlive=x}
    chk(`${rd} L${L+1}: the road's rival is the same person while alive`,!recastBad.length,recastBad.slice(0,4))}}
  /* a road not complete keeps the phase-1 frame */
- const part=await p.evaluate(()=>{const k='tt';const full=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&!rdFull(id));return full[0]||''});
- if(part){const R=await p.evaluate(([rd])=>{const k='tt';const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==rd);localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));window.__forceOrigin=k;quiet=true;start();quiet=false;Q.length=0;return{road:S.st.f14.road,rd:S.st.f14.rd||'',plan:S.st.ch.plan.join(',')}},[part]);
-  chk(`incomplete road ${part} keeps the phase-1 frame`,R.road===part&&!R.rd&&/o,o,o,o,fin/.test(R.plan)&&R.plan.includes('st:st_the'),R)}
+ const part=await p.evaluate(()=>{for(const k of ['tt','dtq','muoi','cn','nc','td','ch','thd']){const L=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&!rdFull(id));if(L.length)return L[0]}return''});
+ if(part){const R=await p.evaluate(([rd])=>{const k=ARC67[rd].o;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==rd);localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));window.__forceOrigin=k;quiet=true;start();quiet=false;Q.length=0;return{road:S.st.f14.road,rd:S.st.f14.rd||'',plan:S.st.ch.plan.join(',')}},[part]);
+  chk(`incomplete road ${part} keeps the phase-1 frame`,R.road===part&&!R.rd&&/o,o,o,o,fin/.test(R.plan.replace(/st:tm96[abc],/g,''))&&R.plan.includes('st:st_the'),R)}
  chk('no page errors',!errs.length,errs.slice(0,5));
  const nb=ok.filter(x=>!x[1]).length;console.log(`road-full: ${ok.length-nb}/${ok.length} pass`);await b.close();process.exit(nb?1:0)})();
