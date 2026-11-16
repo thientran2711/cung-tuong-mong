@@ -4,7 +4,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 
 | Item | Branch | Model | State |
 |---|---|---|---|
-| C23 mg-easy | review/mg-easy @ede78f83 | sonnet | REVIEWING (review/mg-easy-r1, resumed) |
+| C23 mg-easy | review/mg-easy-r1 | sonnet | PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg | sonnet | RUNNING (resumed) |
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
@@ -22,7 +22,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
 | D32 succession-port | review/succession-port | opus | RUNNING |
 | D38 lost-items-port | review/lost-items-port | opus | RUNNING |
-| D30 palace-map-port | review/palace-map-port | sonnet | QUEUED (one at a time with D42) |
+| D30 palace-map-port | review/palace-map-port | sonnet | RUNNING |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | QUEUED |
@@ -35,6 +35,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
 PASS review/actcard-small-r1 e3664469fbeddf8e7c9fafb851bd1fda73b6354d (C40; descends from main 900ace7f; reviewer turned the zoom into kitModal kind info = KIT §8 frame, KIT §43.1 + sample)
+PASS review/mg-easy-r1 94644c1e6342eb7ea1003aae090cd5310a9597e5 (C23; knowledge minigames level-tiered + aids; reviewer swapped private .kg82tip → kit .kpnote)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -48,3 +49,4 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - Q5 (C23 mg-easy): knowledge minigames (Thơ, Câu đối, Đố đèn, Cờ, khảo hạch quiz) now scale with the player's level — low level = Dễ with many aids, high level = harder (more blanks, fewer aids); rewards unchanged. OK with the owner? Also rival NPC scores unchanged, so low-level players clear these more easily (balance look later).
 - Q6 (C28 room-btn): under 600 px the room button is icon-only (label in tooltip; a label didn't fit). OK? And should it also appear on landscape/wide screens (it never existed there)?
 - Q7 (CDN): RESOLVED — token works, images upload directly.
+- Q8 (C23 follow-up, for Foreman C's C7 balance pass): rival NPC minigame scores (kg82NpcMean) unchanged, so low-level players now beat rivals far more easily; and in the lễ/trị cung/xử án quiz banks the right answer is often the longest option (guessable). Suggest C7 or a small worker rebalance/rewrite.
