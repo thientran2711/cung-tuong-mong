@@ -116,3 +116,12 @@ BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* CO-OP (review/coop-b1b5, D21 B3): years a NEW Emperor (after a death in co-op) reigns before the month death roll can fire again (j3 uses 12 game years for the first one) */
+Object.assign(BAL,{coopEmpY:12});
+/* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
+   tin = her Chủ tin gain when she refuses and tells her mistress */
+Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
+/* BAL.psk.seat = the full-seat compensation (owner OD:L1228; the promo-skip rule, review/promo-skip jbal2 BAL.psk.seat — SAME key and values;
+   when promo-skip is merged its BAL.psk wins and this line goes): bacM × the next rank's monthly stipend (BAL.pay), hieuBac instead of a
+   phong hiệu she already has, danh, gifts = Hoàng thượng's bestows, pow = her house power, dad = her father; loss ghen = every consort. */
+BAL.psk=BAL.psk||{};if(!BAL.psk.seat)BAL.psk.seat={bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6};
