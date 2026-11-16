@@ -113,3 +113,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 ## Ownership marks (16/11): items in dev/handover/FOREMAN_C.md Slice C are [→ FOREMAN C]; items in FOREMAN_B.md are [→ FOREMAN B]; everything else = session 8.
 | D53 | opt-pics leftovers: 25 options still on placeholder (dev/test/opt-pics-table.md r1) | QUEUED [→ FOREMAN C] |
 | C50 | hc-portrait-revert-r1 PASS 0001eaf49 → merge-train-1 | MERGING |
+| C51 | review/reign-road (Emperor side story + faction road + NPC side quests, built on palace-start) | RUNNING (opus, session 8) |
