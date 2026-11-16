@@ -193,7 +193,8 @@ function k61Shown(m){try{if(!m||!S||m.__k61||!k61S()||k61Look(m))return;const E=
 /* WHEN: only the dialog that is really drawn. j68 evGate (assembled before j61, so it runs INSIDE this wrapper) holds / drops optional
    events from Q right before drawing; revealing Q[0] before it ran met people whose dialog never opened (review face-reveal r1). So the
    reveal runs right after evGate; without j68 (or for an item left unrevealed) it runs here, before / after drawing. */
-(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){const r=g0.apply(this,arguments);try{k61Shown(Q[0])}catch(e){}return r}}
+(function(){if(typeof evGate==="function"){const g0=evGate;/* D13 jspread (review spread-events-r3): evGate(1) = a dry sift inside a buổi change, nothing is drawn → no meeting */
+ evGate=function(dry){const r=g0.apply(this,arguments);if(!dry)try{k61Shown(Q[0])}catch(e){}return r}}
  const s0=showModal;showModal=function(){try{if(typeof evGate!=="function")k61Shown(Q[0])}catch(e){}const r=s0.apply(this,arguments);
   try{const M=document.getElementById("modal");if(M&&!M.hidden&&Q[0]&&!Q[0].__k61)k61Shown(Q[0])}catch(e){}return r}})();
 /* old saves (cheap backfill, once): a consort the old rule named in a dialog ("… đến tận nơi nói chuyện với ngươi") was never marked met,
@@ -249,10 +250,10 @@ function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
   const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
-function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;
+function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest("[data-k61skip]"))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
   const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
   const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}
- if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName))return;
+ if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName)||(n.closest&&n.closest("[data-k61skip]")))return;
  for(const a of ["title","aria-label"]){const v=n.getAttribute&&n.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)n.setAttribute(a,s)}}
  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let c;const L=[];while((c=w.nextNode()))L.push(c);for(const x of L){if(x.nodeType===3)k61Node(x);else for(const a of ["title","aria-label"]){const v=x.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)x.setAttribute(a,s)}}}}
 (function(){try{if(typeof MutationObserver!=="function")return;const ob=new MutationObserver(ms=>{if(!S||!S.known||!k61Table())return;for(const m of ms){if(m.type==="characterData")k61Node(m.target);else if(m.type==="attributes")k61Node(m.target);else m.addedNodes.forEach(k61Node)}});

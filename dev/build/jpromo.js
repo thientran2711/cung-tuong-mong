@@ -107,21 +107,20 @@ function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="
 (function(){const st=document.createElement("style");st.textContent=`
 .kprev{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:560px;height:min(100dvh - 24px,920px);padding:0 16px;box-sizing:border-box}
 .kprev-h{flex:none}
-.kprev-fig{position:relative;flex:1 1 auto;min-height:180px;width:100%;overflow:visible;animation:kmFade .5s ease .1s both}
+.kprev-fig{position:relative;flex:1 1 auto;min-height:180px;width:100%;overflow:visible;animation:kmFade calc(.5s*var(--pace)) ease calc(.1s*var(--pace)) both}
 /* soft light BEHIND the figure = painted KIT §68 "orb" (frame 3), warmed; never over the face (a screen-blend clip on top would wash the figure) */
 .kprev-fig::before{content:"";position:absolute;left:50%;top:40%;width:min(120%,520px);aspect-ratio:1;translate:-50% -50%;pointer-events:none;
- background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade .8s ease .3s both}
-.kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn .7s var(--km-ease,ease) .15s both}
-.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 .35s var(--km-ease,ease) .5s both} /* frame = j93 .kmlist card (one rule) */
+ background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade calc(.8s*var(--pace)) ease calc(.3s*var(--pace)) both}
+.kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn calc(.7s*var(--pace)) var(--km-ease,ease) calc(.15s*var(--pace)) both}
+.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 calc(.35s*var(--pace)) var(--km-ease,ease) calc(.5s*var(--pace)) both} /* frame = j93 .kmlist card (one rule) */
 .kprev-n{font-weight:700;color:#3a1f10;text-align:center}
 .kprev-l{margin:0;font-size:.9rem;line-height:1.45;color:#3a2a1e;text-align:center}
 @keyframes kprevIn{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%)}}
-@media (max-height:560px){.kprev{flex-direction:row;flex-wrap:wrap;align-content:center;justify-content:center;height:calc(100dvh - 16px);max-width:900px;gap:4px 14px}
- .kprev-h{width:100%}.kprev-fig{flex:0 0 min(40vw,300px);height:calc(100dvh - 70px)}.kprev-card{flex:0 1 380px}}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§65 + §66) ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
  {id:"§65.2",title:"kitPersonReveal: Nội vụ phủ phụ cấp người hầu",html:()=>{const s=(S&&S.staff&&S.staff[0])||null;if(!s)return"<em>cần một người hầu</em>";
   return `<div class="kitpg-row" style="background:#1a0f0acc;padding:10px;border-radius:8px;height:420px">${kitPersonRevealHTML({who:s,title:"Nội vụ phủ phụ cấp người hầu",sub:prServSub(s),line:prServLine(s,1)}).replace('class="kprev"','class="kprev" style="height:400px"')}</div>`}},
- {id:"§66.2",title:"kitGloom rank down: chip nứt rơi, khung xám",html:()=>`<div class="kitpg-row" style="background:#1a1418;padding:14px;border-radius:8px">${(()=>{const live=typeof S!=="undefined"&&S&&S.name,r=live?Math.max(1,S.rank|0):2;/* #kit opens before any game: no S → chips only */return kmRankDownHTML(live?S:null,r,r-1)})()}</div>`})}catch(e){}
+ {id:"§66.2",title:"kitGloom rank down: chip nứt rơi, khung xám",where:"<b>Demotion scene</b> (kitGloom, panels \"Bị giáng xuống …\" / \"Vào lãnh cung\"): the OLD rank chip cracks and falls, the new lower chip comes up dim, the frame turns grey. Not a status chip — only shown once, in the rank-down screen.",html:()=>`<div class="kitpg-row" style="background:#1a1418;padding:14px;border-radius:8px">${(()=>{const live=typeof S!=="undefined"&&S&&S.name,r=live?Math.max(1,S.rank|0):2;/* #kit opens before any game: no S → chips only */return kmRankDownHTML(live?S:null,r,r-1)})()}</div>`})}catch(e){}
 window.prSetFor=prSetFor;window.prSrvSetFor=prSrvSetFor;window.prGive=prGive;window.prStaff=prStaff;window.prCheck=prCheck;window.prNpcScan=prNpcScan;window.kitPersonReveal=kitPersonReveal;window.kitPersonRevealHTML=kitPersonRevealHTML;

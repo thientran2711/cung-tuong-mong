@@ -17,7 +17,7 @@ const PLX={
  cnh:{n:"Dãy nhà cung nhân",fn:"chỗ ăn ngủ của cung nữ, thái giám",d:"Dãy nhà thấp mái xám, cung nữ và thái giám ăn ngủ ở đây.",img:"cung-nhan",box:{x:.085,y:.645,w:.11,h:.155},anchor:{x:.14,y:.69},pos:[2,-1],fl:.42},
  tgk:{n:"Tân Giả khố",fn:"Hoán y cục: nơi cung nhân chịu phạt giặt giũ",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",img:"tan-gia-kho",box:{x:.097,y:.466,w:.13,h:.10},anchor:{x:.16,y:.50},pos:[1,-1]},
  ttp:{n:"Thượng thư phòng",fn:"học đường của hoàng tử, công chúa",d:"Nơi các hoàng tử, công chúa theo thầy học chữ, học võ.",img:"thuong-thu-phong",box:{x:.825,y:.635,w:.07,h:.09},anchor:{x:.86,y:.67},pos:[0,3],fl:.62},
- acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.30,y:.235,w:.115,h:.215},anchor:{x:.355,y:.33},pos:[2,3],fl:.62},
+ acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.742,y:.098,w:.095,h:.125},anchor:{x:.79,y:.16},pos:[2,3],fl:.62},
  dc:{n:"Đông cung",fn:"nơi Thái tử ở",d:"Điện của Thái tử, trang trọng mà không phô trương.",img:"dong-cung",box:{x:.795,y:.425,w:.075,h:.185},anchor:{x:.83,y:.47},pos:[1,3],fl:.62}};
 const PLX_NEW=["cnh","ttp","acs","dc"]; /* places with their own picture file; tgk keeps j94's */
 const PLX_AGE=6,PLX_ADULT=18;

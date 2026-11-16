@@ -69,3 +69,28 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
   {id:"kn",title:"Quản sự ma ma",palace:"Càn Ninh cung",master:"hh",tr:"chuyen",rk:4,age:[54,60],
    names:[["Diệp Thanh Hòa","Diệp ma ma"],["Phùng Thục Trinh","Phùng ma ma"],["Lam Ngọc Hoàn","Lam ma ma"]],
    duties:["chia cung nữ về các cung","phát lệ bạc","coi Thượng cung cục","bẩm sổ tháng của lục cung"]}]};
+/* ONE CORE (owner OD:L1267) for the 14-chapter frame (jst14.js, review/story14-p1-r2): every number the frame uses or prints lives here; texts print these.
+   max = chapters in one life; parts = [first, last] chapter of Phần đầu / giữa / cuối.
+   lim = months before a tutorial chapter closes by itself with NO reward (nhap: chương 1 «Nhập cung, đứng vững»; nhapCnv: chương 1 of the
+   cung nữ được sủng hạnh road; sung: «Lần đầu được sủng»; tap: «Học quy củ trong cung»; «Từ kẻ hầu thành tiểu chủ» has no limit: the later
+   chapters are a consort's and open only when she is raised). The months count
+   from the day she is in the palace (a home road «Ở nhà chờ tuyển tú» starts them at entry).
+   goal: sung = Sủng for «Lần đầu được sủng»; rel = thiện cảm of one palace person for «kết thân»; art = tài nghệ level; tin = Chủ tin and nt =
+   Hoàng thượng để ý for the servant tutorial steps (cnv, while she still serves).
+   danh / rw = Danh and reward67 tier (0..2) when a tutorial chapter is DONE (nothing when it closes by time).
+   hate: a hostile arc role (F14ROLE table in jst14) costs thiện cảm max(min, base + the better of the two thiện cảm) both ways (j9 relAdd: oán up);
+   such a role takes, when it can, someone whose thiện cảm both ways is under friend.
+   ctx (OD:L1253, this life's context for a story option, sum clamped to ±cap): the cast person's thiện cảm / aff (at most ±affCap), her oán / oan
+   (at most oanCap), her trait (tr), the player's Tâm cơ (tam: [neutral, per]) and Đức (duc: [neutral, per]), and how many consorts with oán ≥ foeOan
+   watch her (at most foeCap). odds = [min, max] odds of a chancy story option after the context.
+   shift: an ending no roll decides moves one step worse with base − c × slope and one step better with base + c × slope (each between min and max,
+   c = context + (Lợi thế − 1) × sc); base is the same both ways, so a neutral life leans neither way. */
+Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,sung:10,tap:8},
+ goal:{sung:25,rel:30,art:2,tin:60,nt:25},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
+ hate:{min:25,base:15,friend:20},tr:{"Hiểm độc":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Nhu mì":2,"Hiền lành":4,"Trung hậu":3},
+ ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},odds:[5,95],
+ shift:{base:15,slope:2,sc:2,min:5,max:40}},
+/* cung nữ được sủng hạnh (j42 cnvName): from Hoàng thượng để ý ≥ at, each time he notices her the odds he asks her name and raises her
+   Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
+ ntRise:{at:45,div:2,sub:10}});
+function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}

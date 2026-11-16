@@ -49,6 +49,9 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
   if(typeof kitReward==="function")kitReward({kind:m.place===1?"chest":"tray",title:"Ban thưởng hội thi",from:m.title,items:it,bac:m.bac})}catch(e){console.error(e)}}
 /* origin line of a prize item in the bag */
 (function(){if(typeof kinvFrom!=="function")return;const f0=kinvFrom;kinvFrom=function(f){return f==="thi"?"Thưởng hội thi":f0.apply(this,arguments)}})();
+/* owner 16/11 (Q15): her contest titles show as ONE kit row list in three places: Sổ ân thưởng (all 40), her profile card (selfCardHTML, newest 5) and the Mệnh truyện tab (panel67, newest 5). Rows = [date, title, tone] */
+window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[];return(n?H.slice(0,n):H).map(x=>[x.d,x.t,"t"])};
+(function(){if(typeof panel67!=="function")return;const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{if(kcuHonorRows(1).length)h+=`<h3>Danh hiệu thi tài</h3>`+rows67(kcuHonorRows(5))}catch(e){}return h}})();
 /* her contest titles live in the Sổ ân thưởng page */
 (function(){if(typeof awCard!=="function")return;const a0=awCard;awCard=function(){let h=a0.apply(this,arguments);try{const H=(S&&S.honors)||[];
   h+=`<h3>Danh hiệu thi tài</h3>${H.length?kitRows(H.map(x=>[x.d,[`<span class="ef t">${x.t}</span>`],"t"])):`<p class="past">Chưa đoạt danh hiệu nào.</p>`}`}catch(e){}return h}})();
@@ -65,19 +68,9 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
 .kgrv{max-height:clamp(120px,30dvh,260px);overflow-y:auto;overscroll-behavior:contain;margin:0 0 4px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:0 6px}
 .kgrv .kfacts{margin:0}
 .kg82 .kg82act{position:sticky;bottom:0;background:linear-gradient(#fffaf000,var(--k-card) 22%);padding-top:10px;margin-bottom:0;z-index:2}
-@media (max-width:699px){.kgame .kgbody.kgpic-on{display:block;overflow:visible}.kgpic{margin:8px 10px 0;min-height:0;height:104px}.kgpic img{object-position:50% 55%}
- .kg82:not(.kg-idle) .kgpic{display:none}.kginfo{max-height:none;overflow:visible}#ov .mg.kg82{overflow-y:auto}.kgrv{max-height:clamp(110px,26dvh,220px)}}
-@media (max-height:520px) and (min-width:700px){.kgpic{min-height:0;margin-top:6px;margin-bottom:6px}.kginfo{max-height:calc(100dvh - 92px)}.kgrv{max-height:clamp(90px,34dvh,200px)}}
+/* kv3:.kv1 */:where(.kv1) .kgame .kgbody.kgpic-on{display:block;overflow:visible}:where(.kv1) .kgpic{margin:8px 10px 0;min-height:0;height:104px}:where(.kv1) .kgpic img{object-position:50% 55%}
+ :where(.kv1) .kg82:not(.kg-idle) .kgpic{display:none}:where(.kv1) .kginfo{max-height:none;overflow:visible}:where(.kv1) #ov .mg.kg82{overflow-y:auto}:where(.kv1) .kgrv{max-height:clamp(110px,26dvh,220px)}
+
 /* podium in short landscape (844x390): compact header + plaque so figures keep their scale and nothing runs under the header */
-@media (max-height:520px){
-.kpod-hd{padding:5px 10px 0}.kpod-hd .kph{padding:3px 12px;gap:8px;min-width:0}.kpod-hd .kptitle{font-size:.86rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.kpod-hd .kpsub{display:none}
-.kpod-stage{padding-top:2px}
-.kpod-medal,.kpod-p1 .kpod-medal{width:46px;margin-top:-26px}.kpod-medal b,.kpod-p1 .kpod-medal b{font-size:.78rem}
-.kpod-you{bottom:calc(46px * .62)}
-.kpod-step{gap:2px;padding:0 4px 5px}
-.kpod-plq{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:6px;row-gap:1px;padding:3px 5px}
-.kpod-plq .kname{font-size:.74rem}.kpod-plq .kti{display:inline;font-size:.82em;margin-right:3px}.kpod-sub{display:none}.kpod-sc{font-size:.64rem}
-.kpod-plq .kchips{flex:0 0 100%;gap:2px}.kpod-plq .kchips .chip,.kpod-plq .kchip{font-size:.58rem;padding:0 5px;line-height:1.35}
-.kpod-ft{padding:4px 12px 6px}.kpod-next{min-height:0;padding-top:5px;padding-bottom:5px;font-size:.9rem}
-}
+
 `;document.head.appendChild(st)})();

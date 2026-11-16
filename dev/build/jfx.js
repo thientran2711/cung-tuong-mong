@@ -42,11 +42,20 @@ const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi s
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
- festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ festival:{                                   px:"lanterns",light:"fireworks"}, // Tết / Giao thừa tối: sky lanterns + fireworks (only via FESTFX)
  letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
+/* festival / night effects: ONE table, effect -> which festivals (FEST keys, j31) and which buổi it may play in (null = any buổi). Owner 11/16: every effect must match the CURRENT buổi and the CURRENT event;
+   fireworks ONLY on Tết and Giao thừa evenings (owner: an ordinary evening with fireworks feels wrong; Tết/Giao thừa with them is normal); indoor/outdoor does not matter. A festival or buổi not listed gets nothing. B4L = tối (named constant, never a raw index). */
+const FESTFX={
+ festival:{fest:["newyear","giaothua"],buoi:[B4L]},                 /* one-shot sky lanterns + fireworks (kitFx "festival") */
+ lantern:{fest:["nguyentieu","trungthu"],buoi:[B4L]},                /* one-shot sky lanterns (kitFx "lantern"), once per night */
+ gold:{fest:["newyear","giaothua","nguyentieu"],buoi:null},          /* gold/red sparks (j33 pxKind) */
+ fly:{fest:["thattich","trungthu"],buoi:[B4L]}};                     /* fireflies (j33 pxKind) */
+function kfFestFx(e){try{if(typeof S==="undefined"||!S||S.dead||typeof festToday!=="function")return false;const T=FESTFX[e],f=festToday();return !!(T&&f&&T.fest.includes(f.k)&&(!T.buoi||T.buoi.includes(S.buoi||0)))}catch(x){return false}}
+window.FESTFX=FESTFX;window.kfFestFx=kfFestFx;
 function kfOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
 function kfStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.getBoundingClientRect?o.el:null;if(el){const r=el.getBoundingClientRect();if(r.width)return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
@@ -85,7 +94,7 @@ function kfTex(){}
 const KF_ALIAS={glow:"orb",star:"spark",blob:"smoke",petal:"petal-plum"};
 function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
 const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?["petal-peach","petal-plum"]:m<=6?["petal-lotus"]:m<=9?["leaf","osmanthus"]:["snow","snow","petal-plum"]};
-function kfBudget(n){const w=innerWidth<700?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
+function kfBudget(n){const w=kitView().pages===1?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
 const R01=()=>Math.random(),RS=(a,b)=>a+Math.random()*(b-a);
 const KF_SPAWN={
  rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
@@ -102,7 +111,7 @@ const KF_SPAWN={
    const gl=kfSp("orb",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.5,sway:.25,lant:1},0xffa040,sc*1.4);const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.rotation=RS(-.12,.12);l.v.ph=gl.v.ph}},
  pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("spark",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},null,RS(.35,.6)).rotation=0}},
  brush(p){const n=Math.min(2,kfBudget(2));for(let i=0;i<n;i++){const s=kfSp("brush",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(34,44),fade:"out",a0:.92,grow:.004},null,RS(3.2,4.2));s.rotation=RS(-.5,.2)}},
- goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-gold",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
  golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
  jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
  incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
@@ -114,7 +123,7 @@ const KF_SPAWN={
 const KF_PET=()=>{const s=KF_SEASON();return s[0]==="snow"?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s};
 const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:["ink"],flowers:["petal-peach","petal-plum","osmanthus"],petals:()=>KF_PET(),
  motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],
- brush:["brush"],goldpetals:["petal-gold"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
+ brush:["brush"],goldpetals:["petal-peach"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
 function kfKinds(name){const k=KF_KINDS[name];return typeof k==="function"?k():(k||[])}
 function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
 function kfWake(){const a=KFX.app;if(!a)return;if(a.canvas.style.display==="none")a.canvas.style.display="";if(!a.ticker.started)a.ticker.start()}
@@ -148,20 +157,20 @@ const KF_WX={
  storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
  mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:["orb"],cap:10,vx:[-.3,.3],vy:[-.3,.3],sway:.6,a0:.8,float:1,tint:0xfff07a,sc:[.3,.5],life:[240,420]},
- gold:{k:["petal-gold"],cap:20,vx:[-.3,.3],vy:[.8,1.5],sway:.8,spin:.05,sc:[1,1.6],a0:.85,gust:.4}
+ gold:{k:["petal-peach"],cap:20,vx:[-.3,.3],vy:[.8,1.5],sway:.8,spin:.05,sc:[1,1.6],a0:.85,gust:.4}
 };
 function kfWxCfg(){try{if(typeof S==="undefined"||!S)return null;const w=S.wx?S.wx.k:"dust",night=(S.buoi||0)===B4L,nm=S.wx?S.wx.n:"";let id=null;
  if(w==="petal"||w==="leaf"||w==="wind"||w==="snow"||w==="snowh"||w==="frost"||w==="snowp"||w==="storm")id=w;else if(w==="rain")id="drizzle";else if(w==="mist")id="mist";
  else if(night&&(w==="dust"||nm==="đom đóm"))id="fly";
- /* festival days outdoors (was code-drawn in j33 via pxKind): gold petals at New Year / eve / Nguyên tiêu, fireflies at Thất tịch / Trung thu; replaces the weather as before */
- try{const f=typeof festToday==="function"&&festToday();if(f&&["vuon","lc","home","tgk","maid"].includes(placeOf(S.place).sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))id="gold";else if(f.k==="thattich"||f.k==="trungthu")id="fly"}}catch(e){}
+ /* festival days (was code-drawn in j33 via pxKind): which festival and which buổi come ONLY from the FESTFX table (gold / fly rows); indoor/outdoor does not matter; replaces the weather as before */
+ try{if(kfFestFx("gold"))id="gold";else if(kfFestFx("fly"))id="fly"}catch(e){}
  if(!id)return null;const c=Object.assign({lay:"wx"},KF_WX[id]);c.id=id;c.night=night;return c}catch(e){return null}}
 function kfSeCfg(){return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.5,.9],sway:.9,spin:.03,sc:[.7,1.05],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
 function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
 function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
  if(!KFX.wroot){KFX.wroot=new P.Container();KFX.wmask=new P.Sprite(P.Texture.WHITE);KFX.wroot.mask=KFX.wmask;KFX.app.stage.addChild(KFX.wroot,KFX.wmask)}  /* clip = a plain white rectangle sprite, not art */
  if(r){KFX.wmask.x=r.x;KFX.wmask.y=r.y;KFX.wmask.width=r.w;KFX.wmask.height=r.h}else{KFX.wmask.width=0;KFX.wmask.height=0}}
-function kfWxCap(c){const q=KFX.q,m=(innerWidth<700?.65:1)*(innerHeight<500?.75:1),box=c.lay==="wx"&&KFX.sr?Math.min(1,KFX.sr.w*KFX.sr.h/(innerWidth*innerHeight*.5)):1;return Math.max(2,Math.round(c.cap*m*q*Math.max(c.rain?.75:.4,box)))}
+function kfWxCap(c){const q=KFX.q,m=(kitView().pages===1?.65:1),box=c.lay==="wx"&&KFX.sr?Math.min(1,KFX.sr.w*KFX.sr.h/(innerWidth*innerHeight*.5)):1;return Math.max(2,Math.round(c.cap*m*q*Math.max(c.rain?.75:.4,box)))}
 function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth,h:innerHeight};if(!sr)return;const k=c.k[Math.floor(R01()*c.k.length)],vx=RS(c.vx[0],c.vx[1]),vy=RS(c.vy[0],c.vy[1]),sc=RS(c.sc[0],c.sc[1]),a0=c.a0*(c.night?.82:1);let x,y,v;
  if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1}}
  else{x=c.fromLeft?sr.x+RS(-60,sr.w*.7):sr.x+RS(-.04,1.04)*sr.w;y=scatter?sr.y+RS(0,sr.h):sr.y+RS(-30,-8);v={vx,vy,life:Math.ceil((sr.h+140)/vy)+60,sway:c.sway||0,spin:c.rain?0:RS(-c.spin,c.spin),fade:"none",a0,amb:1}}
@@ -264,7 +273,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  W("kitSheetTurn",o=>function(){try{if(kfOn())vib("tap")}catch(e){}return o.apply(this,arguments)});
  /* render: tabs underline, ambient petals at home, festival-night lanterns once per night */
  W("render",o=>function(){const r=o.apply(this,arguments);try{KFX.ambOK=true;kfTabsSoon();kfAmbient();
-   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("festival"),600)}}}catch(e){console.error(e)}return r});
+   const fe=kfOn()?["festival","lantern"].find(kfFestFx):null;if(fe){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx(fe),600)}}}catch(e){console.error(e)}return r});
  document.addEventListener("visibilitychange",()=>{try{if(KFX.app){if(document.hidden)KFX.app.ticker.stop();else if(KFX.parts.length)KFX.app.ticker.start()}kfAmbient()}catch(e){}});
  /* a modal closing / overlay leaving lets the ambient petals back */
  setInterval(()=>{try{if(KFX.ambOK&&!kfAmbT&&kfAmbWant())kfAmbient()}catch(e){}},2500)})();
@@ -282,7 +291,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
    figure is wrong (owner 16:40Z); they answer with j59's own figure animation */
 :is(#me,#emp,.tok){-webkit-tap-highlight-color:transparent}
 .kfrip{position:fixed;z-index:9460;pointer-events:none;overflow:hidden}
-.kfrip i{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff3c4aa 0,#f0d07055 40%,#f0d07000 70%);transform:scale(0);opacity:.9;animation:kfRip .6s ease-out forwards}
+.kfrip i{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff3c4aa 0,#f0d07055 40%,#f0d07000 70%);transform:scale(0);opacity:.9;animation:kfRip calc(0.6s*var(--pace,1)) ease-out forwards}
 @keyframes kfRip{to{transform:scale(1);opacity:0}}
 /* primary buttons: a slow sheen every ~7 s */
 .kbtn:not(.alt):not(.kdone):not(.ksel):not(:disabled){background-image:linear-gradient(105deg,#fff0 38%,#fff2c870 50%,#fff0 62%),linear-gradient(#b0402c,#8a2a1e);background-size:260% 100%,100% 100%;background-repeat:no-repeat;background-position:100% 0,0 0;animation:kfSheen 7s ease-in-out 1.5s infinite}
@@ -296,16 +305,16 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  transition:transform .32s cubic-bezier(.3,.8,.3,1.1),width .32s cubic-bezier(.3,.8,.3,1.1),opacity .2s;box-shadow:0 0 6px #f0d07088}
 /* flashes */
 .kfx-fl{position:fixed;inset:0;z-index:9440;pointer-events:none}
-.kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed .9s ease-out forwards}
-.kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl 2.2s ease-in-out forwards}
-.kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark 2.2s ease-in-out forwards}
+.kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed calc(.9s*var(--pace)) ease-out forwards}
+.kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl calc(2.2s*var(--pace)) ease-in-out forwards}
+.kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark calc(2.2s*var(--pace)) ease-in-out forwards}
 @keyframes kfFl{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
 @keyframes kfRed{0%,40%,80%{opacity:0}15%,58%{opacity:1}100%{opacity:0}}
 @keyframes kfDark{0%{opacity:0}45%{opacity:1}100%{opacity:0}}
 /* numbers flying to the top bar + the cell catching them */
 .kfnum{position:fixed;left:0;top:0;z-index:9470;pointer-events:none;padding:2px 9px;border-radius:999px;font-weight:700;font-size:.86rem;white-space:nowrap;box-shadow:0 2px 6px #0003;will-change:transform,opacity}
 .kfnum.g{background:#e6f3e4;color:#2e6b3a;border:1px solid #9cc79a}.kfnum.r{background:#f7e3df;color:#a3291c;border:1px solid #d9a197}
-.kfhit{animation:kfHit .6s ease-out}.kfhit-r{animation:kfHitR .6s ease-out}
+.kfhit{animation:kfHit calc(0.6s*var(--pace,1)) ease-out}.kfhit-r{animation:kfHitR calc(0.6s*var(--pace,1)) ease-out}
 @keyframes kfHit{0%{box-shadow:0 0 0 0 #f0d07000}30%{box-shadow:0 0 0 2px #f0d070,0 0 14px #f0d070aa}100%{box-shadow:0 0 0 0 #f0d07000}}
 @keyframes kfHitR{0%{box-shadow:0 0 0 0 #c0302000}30%{box-shadow:0 0 0 2px #c03020aa,0 0 12px #c0302066}100%{box-shadow:0 0 0 0 #c0302000}}
 #kfxcv{position:fixed;inset:0;width:100vw;height:100vh;z-index:9450;pointer-events:none}

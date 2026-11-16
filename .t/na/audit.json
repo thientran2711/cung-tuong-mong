@@ -1,0 +1,1253 @@
+[
+ {
+  "state": "early",
+  "place": "home",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "home",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "home",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "home",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Hoàng thượng",
+  "fig": true,
+  "figSrc": "",
+  "por": ""
+ },
+ {
+  "state": "early",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Hoàng hậu Hàn Nhược Lan",
+  "fig": true,
+  "figSrc": "fig-maid-m51-t8-a18.webp",
+  "por": "por-maid-m51-t8-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Kiều Họa Mi",
+  "fig": true,
+  "figSrc": "fig-maid-m09-t5-a18.webp",
+  "por": "por-maid-m09-t5-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Phùng Ngọc Dao",
+  "fig": true,
+  "figSrc": "fig-maid-m38-t4-a18.webp",
+  "por": "por-maid-m38-t4-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Lục Thanh Liên",
+  "fig": true,
+  "figSrc": "fig-maid-m29-t3-a18.webp",
+  "por": "por-maid-m29-t3-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "r2",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r2",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r2",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "r2",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Khương Yên Nhiên",
+  "fig": true,
+  "figSrc": "fig-consort-c04-t6-a18.webp",
+  "por": "por-consort-c04-t6-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Tô Mạn Châu",
+  "fig": true,
+  "figSrc": "fig-maid-m06-t2-a18.webp",
+  "por": "por-maid-m06-t2-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Trương Bá Ngôn",
+  "fig": true,
+  "figSrc": "",
+  "por": ""
+ },
+ {
+  "state": "early",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Tử Khiêm",
+  "fig": true,
+  "figSrc": "fig-man-thaiy-1-a26.webp",
+  "por": "por-man-thaiy-1-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "tgk",
+  "kind": "elder",
+  "name": "Hà cô cô",
+  "fig": true,
+  "figSrc": "fig-mama-k02-a51.webp",
+  "por": "por-mama-k02-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "early",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "early",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "early",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "home",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "home",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "home",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "home",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Hoàng thượng",
+  "fig": true,
+  "figSrc": "",
+  "por": ""
+ },
+ {
+  "state": "fallen-rival",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Hoàng hậu Hàn Nhược Lan",
+  "fig": true,
+  "figSrc": "fig-maid-m51-t8-a18.webp",
+  "por": "por-maid-m51-t8-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Kiều Họa Mi",
+  "fig": true,
+  "figSrc": "fig-maid-m09-t5-a18.webp",
+  "por": "por-maid-m09-t5-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Phùng Ngọc Dao",
+  "fig": true,
+  "figSrc": "fig-maid-m38-t4-a18.webp",
+  "por": "por-maid-m38-t4-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "vuon",
+  "kind": "srv",
+  "name": "Lục Thanh Liên",
+  "fig": true,
+  "figSrc": "fig-maid-m29-t3-a18.webp",
+  "por": "por-maid-m29-t3-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "thu",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dtd",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tn",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "kn",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r3",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r4",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r5",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r6",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r6",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r6",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r6",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r7",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r7",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r7",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r7",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r8",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r8",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r8",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "r8",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Tô Mạn Châu",
+  "fig": true,
+  "figSrc": "fig-maid-m06-t2-a18.webp",
+  "por": "por-maid-m06-t2-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Trương Bá Ngôn",
+  "fig": true,
+  "figSrc": "",
+  "por": ""
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tyv",
+  "kind": "srv",
+  "name": "Tử Khiêm",
+  "fig": true,
+  "figSrc": "fig-man-thaiy-1-a26.webp",
+  "por": "por-man-thaiy-1-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ksp",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "lc",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "tgk",
+  "kind": "elder",
+  "name": "Hà cô cô",
+  "fig": true,
+  "figSrc": "fig-mama-k02-a51.webp",
+  "por": "por-mama-k02-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "ttp",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "acs",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Kim Chi",
+  "fig": true,
+  "figSrc": "fig-maid-m30-a18.webp",
+  "por": "por-maid-m30-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Ánh Tuyết",
+  "fig": true,
+  "figSrc": "fig-maid-m17-a18.webp",
+  "por": "por-maid-m17-a18.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Tiểu Ninh Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u08-a26.webp",
+  "por": "por-eunuch-u08-a26.webp"
+ },
+ {
+  "state": "fallen-rival",
+  "place": "dc",
+  "kind": "srv",
+  "name": "Lão Toàn Tử",
+  "fig": true,
+  "figSrc": "fig-eunuch-u20-a51.webp",
+  "por": "por-eunuch-u20-a51.webp"
+ }
+]

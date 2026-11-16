@@ -29,18 +29,18 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
    fits its column (columns = number of visible tabs, two rows on phones), re-measured on resize and whenever the labels change. */
 (function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
  X+"{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;font-size:var(--tfs,.85rem)!important;padding-left:1px!important;padding-right:1px!important}"+
- "@media (max-width:1279px){"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}}"+
- "@media (max-width:700px){"+X+"::after{font-size:var(--tfs,.72rem)!important}}";document.head.appendChild(st)})();
+ "/* kv3:unwrap */"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}"+
+ "/* kv3:.kv1 */:where(.kv1) "+X+"::after{font-size:var(--tfs,.86rem)!important}";document.head.appendChild(st)})();
 let TFS_CV=null;
 /* review/lag-play-2: tabsFit ran 2x per render, each time resetting --tfs and measuring every tab (forced layout). It now re-measures only
-   when something it depends on changed: viewport, the tab buttons (labels, shown / hidden), the classes of the bar and the game shell.
+   when something it depends on changed: viewport / design canvas, the tab buttons (labels, shown / hidden), the classes of the bar and the game shell.
    A call with an argument (fonts ready, resize) always measures. */
 let TFS_SIG="";
 function tabsFit(force){try{const T=$("tabs");if(!T)return;{const gm=document.querySelector(".game");
-  const sg=innerWidth+"x"+innerHeight+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+b.className+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
-  if(!force&&sg===TFS_SIG)return;TFS_SIG="";tabsFit.sg=sg}const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
+  const sg=innerWidth+"x"+innerHeight+"|"+kitView().pages+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+b.className+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
+  if(!force&&sg===TFS_SIG)return;TFS_SIG="";tabsFit.sg=sg}const short=true;const one=kitView().pages===1,base=one?.86:.8;
  T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;TFS_SIG=tabsFit.sg;
- const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ const n=B.length,cols=one?Math.ceil(n/2):n;/* KIT §0: the spread = ONE row of tabs; the one page = TWO rows of ceil(n/2) big buttons (8 tabs → 4+4; phone-bars) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
@@ -56,8 +56,8 @@ setTimeout(tabsFit,0);
  H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:#fffaf0;color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
  H+" .h2t i{font-style:normal;font-size:.9rem;line-height:1}"+
  H+"{padding-right:5px!important}"+H+".col .hc:not(.keep){display:none!important}"+
- "@media (min-width:1200px){"+H+" .h2t{align-self:stretch;width:100%!important}}";document.head.appendChild(st)})();
-(function(){const r0=renderHud2;renderHud2=function(){try{if(window.__h2c==null&&matchMedia("(min-width:1200px)").matches){let v=null;try{v=localStorage.getItem("hclh-h2c")}catch(e){}if(v==null)window.__h2c=false}}catch(e){}
+ "";document.head.appendChild(st)})();
+(function(){const r0=renderHud2;renderHud2=function(){try{}catch(e){}
  const r=r0.apply(this,arguments);try{const el=$("hud2"),b=el&&el.querySelector(".h2t");if(b){const col=el.classList.contains("col");b.innerHTML=col?"<i>▾</i>Chỉ số":"<i>▴</i>Thu gọn";b.setAttribute("aria-label",col?"Mở rộng bảng chỉ số":"Thu gọn bảng chỉ số");b.setAttribute("aria-expanded",String(!col));b.type="button"}}catch(e){}return r}})();
 /* the real tap bug below 1200px: the toggle re-renders #hud2 (innerHTML) inside its own click, so the button is detached by the
    time the click bubbles to j24's "click outside the panel collapses it" listener; closest("#hud2") on the detached node is null,

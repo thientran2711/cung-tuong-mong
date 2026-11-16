@@ -207,7 +207,7 @@ function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o
    so every caller (j87 kitBook, kitCurlSwap) uses it unchanged: kitSheetTurn({...,slide:true}). Reuses the kitSheetTurn CSS classes (no new CSS);
    per frame only transform / opacity change (compositor). kitIsPortrait() decides; KIT_SLIDE_MS is the one slide duration (button / tab tap). */
 const KIT_SLIDE_MS=300;
-function kitIsPortrait(){try{return matchMedia("(orientation: portrait)").matches}catch(e){return innerHeight>innerWidth}}
+function kitIsPortrait(){return kitView().pages===1}
 function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
  const root=document.createElement("div");root.className="ksht ksht-slide"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;overflow:hidden`;
@@ -482,7 +482,7 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 html .game .kleather>.maptools{inset:22px 34px}
 html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{display:none!important}
 .panel:has(>.kleather){background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
-@media (max-width:760px){.kleather{padding:15px 23px}.kleather::before{inset:6px 17px}.kleather>.kl-tone,html .game .kleather>.maptools{inset:15px 23px}.kl-roll{width:15px}}
+/* kv3:.kv1 */:where(.kv1) .kleather{padding:15px 23px}:where(.kv1) .kleather::before{inset:6px 17px}:where(.kv1) .kleather>.kl-tone,html:where(.kv1) .game .kleather>.maptools{inset:15px 23px}:where(.kv1) .kl-roll{width:15px}
 /* unrolling (going to the map) */
 .kleather.kl-unroll{animation:kl-un var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
 .kl-unroll>.kl-l{animation:kl-rl var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}.kl-unroll>.kl-r{animation:kl-rr var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
@@ -557,7 +557,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
+    if(mv){kitLeather(mv);/* reviewer lag-play-r1: portrait tab change = no effect at all (owner 15:45Z) → the map unrolls in landscape only */if(t0!=null&&t0!=="go"&&t1==="go"&&!kitIsPortrait())kitUnroll(mv);else kitUnrollKeep(mv)}
     else if(t0==="go"&&t1!=="go"&&pn){/* map → page: instant too (owner 15:45Z, no fade on tab changes) */
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
