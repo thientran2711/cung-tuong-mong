@@ -2,6 +2,7 @@
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
 last wake: 16/11 18:00Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
+- 18:22Z (s7): coop-chat-r1-golive READY b7c5d787 (871a104d rejected by s7: carried coop/worker/.wrangler local state; fixed + .gitignore). FF-check OK on main 2934bede, head == READY sha, 22 files. PUSH sha:main REFUSED: HTTP 403 from the git proxy for this session (same as main s21 17:50Z) → NOT routed around; owner/main told. Needs after push: Actions 'Deploy co-op Worker' run + 2-client chat test.
 - 17:58Z (s7 takeover): s6 told to stop + archived; hourly wake moved to s7 (trig_01WRgJzWBhmuoRbMvDPTXtqt, xx:30); golive prep worker + npc-roads told D = s7. Golive worker: coop-b1b5-fix-r1-golive 0eeb5722 BIG, co-op suites running (start-up placement flake under study), NOT READY; coop-chat-r1-golive being merged on main 8f476f6f FIRST (owner). slap-mg-r3 + entry-exam-r1 SKIPPED until mg-train is on main.
 s6 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 s6 hourly wake = trig_01NSVCPThLJEaiZfkZzfES3w (xx:30). 5 running sessions told s6 id at 14:45Z. Free slots: 7, but no unclaimed real D item (cloud-del waits KIT READY; follow-ups not yet real) → none opened (OD:L1286).
