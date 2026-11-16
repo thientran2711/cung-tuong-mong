@@ -240,3 +240,4 @@
 | tham-flip-ui review (sonnet; a27f525b2; merge main 5682ce6f; reviewer may fix) | review/tham-flip-ui-r1 | main s18 | session_01UV1SzhgZtmqQ7d2jmf5wDs | RUNNING | 16/11 15:28Z |
 
 | danh-p1 review (opus) | review/danh-p1-r1 | D | session_01DgYSWna77N83b6631fN1Li | RUNNING | 16/11 15:24Z |
+| merge-train-9 (sonnet): every PASS/READY branch in FOREMAN_B/C/D_STATUS + CLAIMS not on main 5682ce6f (D: coop-guest-maid, danh-balance, close-maid, entry-exam, preg-rate, npc-death, seatcap, mem-upgrade, emperor-visit, coop-chat, coop-b1b5-fix…; B/C PASS ones not held by B's mg-train) | review/merge-train-9 | main s18 | (opening) | RUNNING | 16/11 15:30Z |
