@@ -115,7 +115,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   /* every option of every beat of every arc whose ending is fixed: the preview line carries the ladder word */
   for(const id in ARC67){let A=null;try{A=newThread67(id,'s')}catch(e){}if(!A)continue;const a=ARC67[id];
    for(const bid in (a.B||{})){A.cur=bid;let O=[];try{O=opts67(A,beatDef67(A,bid))}catch(e){continue}
-    const p={t:'x',a:id,b:bid,o:O.map(o=>oOf67(A,o,a.B[bid]))};const th=th67;th67=()=>A;let d=null;try{d=PEND.j67(p)}catch(e){}th67=th;if(!d)continue;
+    const p={t:'x',a:id,b:bid,o:O.map(o=>{try{return oOf67(A,o,a.B[bid])}catch(e){return NaN}})};const th=th67;th67=()=>A;let d=null;try{d=PEND.j67(p)}catch(e){}th67=th;if(!d)continue;
     d.o.forEach((x,i)=>{const o=O[i];const e=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;if(!Number.isFinite(p.o[i]))return;/* odds read outside a real beat */if(!e||e[0]!==e[1]&&p.o[i]<100)return;if(!/kết:/.test(x.j67||''))return;
      out.words.push([id,bid,i,/kết: [^·<]*(<[^>]*>)?[^·<]*· (Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))||f14Hold(A,e[0])>=100])})}}
   /* a turned ending: force the roll */

@@ -37,3 +37,16 @@ Nothing built the 14-chapter frame / tutorial-part / road roll → built here, a
 - Option preview line still names the planned ending ("kết: …") for sure ending options; with f14Shift the ending can move one step →
   wording "thường dẫn tới …" to decide (VANPHONG) in phase 2.
 - Sensible bot (inpage4) is slow through chapters (~1–2 chapters per 40 steps); chapter changes are covered by the fast story bot.
+
+## r2 (review/story14-p1-r2, fix of reviewer FAIL dev/handover/reports/story14-p1-r1.md) — 16/11
+Base: review/story14-p1-r1 @ 8ab69094 + origin/main ee5d33de merged (conflicts: assemble.py list, jtabs chip block now with main's data-chap + jchap inline).
+| # | reviewer item | fix |
+|---|---|---|
+| 1 | home road closes ch1 «Lỡ dịp» at first palace month | tutorial months count only in the palace (f14El / d.wait); kcEnter wrapper restarts the running tutorial chapter (t0 = entry month, r0 = entry rank); msCheck skips tutorial chapters at home |
+| 2 | cnv double reward / servant steps | cnv ch1 = Chủ tin / Đại cung nữ / phong Đáp ứng; ch2 while serving = Hoàng thượng để ý / phong Đáp ứng; len14 only if not raised (raised → shared arc), no time limit (later chapters are a consort's, j67 «len» rule) |
+| 3 | hostility keyword scan | F14ROLE: reviewed table of all 33 cast roles (20 hostile, 13 not; muoi_no, ch_ho not hostile); test fails if an arc role is missing from it |
+| 4 | ONE CORE | BAL.st14 + BAL.ntRise + ntRiseOdds() in jbal.js; jst14, j67 len/sung, j42 (HX text, roll, chip, Thân phận row) read them; number words via kitNumVi. Scan dev/measure/st14-onecore-scan.py: before 42 typed numbers + 13 number words, after 0 + 0 |
+| 5 | false certainty | j67 option preview: an ending no roll decides prints "kết: X · <ladder word>" (f14Hold = 100 − worse − better); a turned ending adds a "Xoay chiều" row (why: strongest context part) to the result card + a log line; shift base even (15/15) |
+| 6 | /15 in Thanh mai lives | f14Norm called after the j96 and jkc tm96 splices; F14 part index by number (the BAL getter made indexOf fail) |
+| 7 | "Hạn: không có hạn" | msHan67(m,form) in j67: one HẠN row for the chapter card, panel67, Mệnh truyện tab (jtabs), chapter detail (jchap risks + jgoal ms section) |
+| 8 | test gaps | __fast uses the game's own start (the sensible bot's start() overrode __forceOrigin), fails when the origin differs; new checks for items 1,2,3,5,6; dev/test/story14-host.js (host mode, fold/ipadAir/ipadPro) |
