@@ -12,7 +12,7 @@ Object.assign(BAL,{spyBase:58,spyMat:6,spySent:0,spyNoAgent:20,spyKnow:10,spyCnv
 const WHYSTEP=12;/* ≈ one ladder step (31/46/56/66/81/91) */
 function whyStep(pts){const a=Math.abs(pts);if(a<1)return"";const n=Math.round(a/WHYSTEP);return `${pts>0?"dễ hơn":"khó hơn"}${n>=1?` ${n} bậc`:" chút"}`}
 function whyNm(p){if(!p)return"";if(p===S)return"ngươi";const q=p.queen?"Hoàng hậu":"";return q||p.name||""}
-function whyPal(t){try{return t===S?"cung ngươi":(typeof palName==="function"&&palName("r"+t.id))||`cung ${t.name}`}catch(e){return `cung ${t.name}`}}
+function whyPal(t){try{if(t!==S&&typeof kitKnownName==="function"&&!kitKnownName(t))return "một thiên điện";/* unmet: palName would print "thiên điện của <name>" (reign-road-fix-r1) */return t===S?"cung ngươi":(typeof palName==="function"&&palName("r"+t.id))||`cung ${t.name}`}catch(e){return `cung ${t.name}`}}
 /* her trusted maid (S.maid): a nết and acquaintances like every other servant, assigned once, kept in the save */
 function whyMaidInit(m){if(!m)return m;if(!m.tr){const ks=Object.keys(STR);let h=0;for(const c of String(m.name||""))h=(h*31+c.charCodeAt(0))>>>0;m.tr=ks[h%ks.length]}
  if(!m.af){m.af={};try{const L=allServ().filter(s=>ownerOf(s)!==S);for(let i=0;i<2&&L.length;i++){const s=L.splice(Math.floor(Math.random()*L.length),1)[0];m.af[s.sid]=30}}catch(e){}}return m}
