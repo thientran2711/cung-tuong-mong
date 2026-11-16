@@ -20,7 +20,7 @@
    Event dialogs are PEND items (pid "rg") → the kit hides outcomes (KIT §28.6), titles "Phụ tuyến · Tân quân lập uy · Chương c · Hồi i/n".
    Every Bạc option has a non-Bạc road (Sức / risk) of the same weight (owner 15/11 20:30Z). Numbers: BAL.rg (jbal2.js).
    (4) TÂM NGUYỆN: every named person carries a life goal; jreign adds 3-step j72 quest lines (rgL) for the 6 most important people
-       (Thái hậu, Hoàng hậu, Phế phi họ Lý, her cung nữ thân tín, Tổng quản thái giám, Thái y). The Emperor's line is (1)-(2).
+       (Thái hậu, Hoàng hậu, Phế phi họ Tần, her cung nữ thân tín, Tổng quản thái giám, Thái y). The Emperor's line is (1)-(2).
    Measure: dev/measure/reign.js (bots per side). Test: dev/test/reign.js. ================================================= */
 const RGT="Tân quân lập uy";
 const RGS={emp:{n:"Hoàng thượng",tag:"theo Hoàng thượng",cls:"g"},th:{n:"Thái hậu",tag:"theo Thái hậu",cls:"g"},quyen:{n:"quyền thần",tag:"theo quyền thần",cls:"g"},ngoai:{n:"đứng ngoài",tag:"đứng ngoài",cls:"n"}};
@@ -287,14 +287,14 @@ function rgLate(){const W=rgW(),r=rgMe();if(!W)return 0;let n=0;for(let c=0;c<Ma
 const RGL={
  th:{who:"Thái hậu",g:"Giữ yên xã tắc cho con, nhìn thấy hoàng tôn đầy nhà, rồi yên lòng niệm Phật.",q:["rgl_th1","rgl_th2","rgl_th3"]},
  hh:{who:"Hoàng hậu",g:"Sinh đích tử, giữ vững Trung cung.",q:["rgl_hh1","rgl_hh2","rgl_hh3"]},
- ly:{who:"Phế phi họ Lý",g:"Rửa oan án năm xưa, được ra khỏi lãnh cung trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
+ ly:{who:"Phế phi họ Tần",g:"Rửa oan án năm xưa, được ra khỏi lãnh cung trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
  maid:{who:"Cung nữ thân tín",g:"Lo cho mẹ già ở quê, đến tuổi được xuất cung về nhà.",q:["rgl_mb1","rgl_mb2","rgl_mb3"]},
  eun:{who:"Tổng quản thái giám",g:"Có người nối dõi hương khói, về già có đất dưỡng lão.",q:["rgl_tq1","rgl_tq2","rgl_tq3"]},
  doc:{who:"Thái y",g:"Soạn xong bộ y thư thầy truyền lại, dâng lên cho đời sau dùng.",q:["rgl_ty1","rgl_ty2","rgl_ty3"]}};
 function rgL(){S.rgL=S.rgL||{};return S.rgL}
 function rgLStep(k){const L=rgL()[k];return L?L.st:0}
 function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="function"&&qOn();if(k==="ly")return !(S.lyF&&S.lyF.dead)&&!(S.lyF&&S.lyF.freed);if(k==="maid")return !!S.maid;return true}
-/* "ly": Phế phi họ Lý as a j72 requester (one persistent person, S.lyF) */
+/* "ly": Phế phi họ Tần as a j72 requester (one persistent person, S.lyF) */
 (function(){if(typeof q72A!=="function")return;const a0=q72A;q72A=function(k,id){if(k==="ly"){try{const o=lyFallen();if(o.dead||o.freed)return null;let f=null;try{f=pFaceOf({kind:"fallen",name:o.name})}catch(e){}
   return{o,n:o.name,f:Object.assign({ini:"Lý",col:"#6a7a8a",rw:"Phế phi"},f||{}),k:"ly",id:null}}catch(e){return null}}return a0.apply(this,arguments)};
  const h0=q72Home;q72Home=function(a){if(a&&a.k==="ly")return"lc";return h0.apply(this,arguments)};
@@ -326,16 +326,16 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
  T7("rgl_hh3","pro",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (3/3): Giữ yên Trung cung",h:"“Có kẻ đồn bổn cung hiếm muộn để mưu ngôi Trung cung. Muội giúp bổn cung tra ra ai tung tin.”",dl:5,
   s:[C("Tra nguồn tin",O("Nghe ngóng các cung",{p:45,sk:"mat",lto:"stay"}),O("Hỏi cung nữ các cung, ban chút quà",{c:{bac:-30},p:70,lto:"stay"})),G("kn","Báo lại cho Hoàng hậu","",100,1)],
   ok:{fx:{hh:10,danh:2},r:12,d:1,fn:fin("hh")},no:{r:-5}},ln("hh",3)));
- /* Phế phi họ Lý: an old wrong set right */
- T7("rgl_ly1","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (1/3): Chuyện năm xưa",h:"“Năm ấy ta bị gán tội dùng bùa ếm. Cung nữ của ta, A Hạnh, biết sự thật, nhưng đã bị đuổi đi. Nếu tìm được nàng...”",dl:6,
+ /* Phế phi họ Tần: an old wrong set right */
+ T7("rgl_ly1","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Tần (1/3): Chuyện năm xưa",h:"“Năm ấy ta bị gán tội dùng bùa ếm. Cung nữ của ta, A Hạnh, biết sự thật, nhưng đã bị đuổi đi. Nếu tìm được nàng...”",dl:6,
   s:[G("lc","Ngồi nghe Phế phi kể chuyện cũ","duc",80,1),C("Tìm A Hạnh",O("Dò hỏi ở Kính sự phòng",{t:()=>S.place==="ksp",tw:"phải đến Kính sự phòng",p:45,sk:"mat",lto:"stay"}),O("Nhờ người ngoài cung tìm",{c:{bac:-30},p:70,lto:"stay"}))],
   ok:{fx:{duc:2,tamco:1},r:12,ch:"rgl_ly2"},no:{r:-5}},ln("ly",1)));
- T7("rgl_ly2","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (2/3): Lời khai của A Hạnh",h:"“A Hạnh đã chịu nói. Ngươi giữ lời khai này cho kín, kẻ hại ta năm xưa vẫn còn tai mắt.”",dl:6,
+ T7("rgl_ly2","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Tần (2/3): Lời khai của A Hạnh",h:"“A Hạnh đã chịu nói. Ngươi giữ lời khai này cho kín, kẻ hại ta năm xưa vẫn còn tai mắt.”",dl:6,
   s:[G("home","Chép lại lời khai, giấu kỹ","tamco",60,1),W("Đợi A Hạnh điểm chỉ",1)],
   ok:{fx:{tamco:1},r:10,ch:"rgl_ly3"},no:{r:-5},bad:{fx:{danh:-3}},badT:"Lời khai lọt ra ngoài."},ln("ly",2)));
- T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,
+ T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Tần (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,
   s:[G("","Dâng lời khai lên Hoàng thượng","sung",45,1,{},"b",{emp:1,pl:null})],
-  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.freed=1;return fin("ly")(X)+" Hoàng thượng cho Phế phi họ Lý ra khỏi lãnh cung, về chùa tu hành."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
+  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.freed=1;return fin("ly")(X)+" Hoàng thượng cho Phế phi họ Tần ra khỏi lãnh cung, về chùa tu hành."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
  /* her maid: her mother at home */
  T7("rgl_mb1","fam",Object.assign({fu:1,r:"maid",t:"Tâm nguyện {A} (1/3): Thư nhà",h:"“Nô tỳ đã ba năm không có tin mẹ. Nghe nói quê nhà mất mùa... {Nc} cho nô tỳ gửi một lá thư.”",dl:4,
   s:[C("Gửi thư",O("Nhờ người Nội vụ phủ chuyển thư",{c:{bac:-15},p:90,lto:"stay"}),O("Đợi ngày mệnh phụ vào cung, nhờ mang ra",{c:{suc:-4},p:60,sk:"danh",lto:"stay"})),W("Đợi thư hồi âm",2)],

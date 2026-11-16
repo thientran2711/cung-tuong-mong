@@ -45,12 +45,12 @@ function qnPool(){S.qPool=S.qPool||[];return S.qPool}
 function qnById(id){return qnPool().find(q=>q.id===id)||null}
 function qnQ(q){return (3-q.tier)*20+q.sac/5+q.tai/5}
 /* names never share a "given name" / "surname + last word" with anyone in the game (j61 masks a stranger's name everywhere it appears) */
-const QNG=["Uyển Ninh","Tư Dao","Thanh Hoan","Cẩm Sắt","Nhã Như","Vân Tịch","Ngọc Khê","Lạc Y","Tri Ý","Hoán Khê","Ninh Hương","Thục Hoa","Diệu Âm","Cầm Thư","Như Yên","Uyển Thanh","Tố Vân","Linh Tê","Tịnh Dung","Mạn Ca","Kiều Ân","Hân Duyệt"];
-const CTG=["Tử Hiên","Cẩn Ngôn","Thừa Ân","Hạo Nhiên","Vân Khởi","Kỳ Dương","Duệ Trạch","Tư Viễn","Bách Xuyên","Thanh Hành","Dịch Chi","Trác Nhiên","Ngọc Đường","Hoài Cẩn","Mộ Bạch","Văn Cảnh","Quân Diệc","Tuấn Dật","Khải Trạch","Thận Hành","Minh Triết","Gia Huy"];
+const QNG=NM_F;/* one name core: jname.js */
+const CTG=NM_M;
 function nVars(n){const w=String(n||"").split(" ").filter(Boolean);const V=[n];if(w.length>=3){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}return V}
 function nUsed(skip){const S0=new Set();const all=[];try{all.push(...namesInUse())}catch(e){}(S.men||[]).forEach(m=>all.push(m.name));(S.staff||[]).forEach(x=>all.push(x.name));(rivals||[]).forEach(v=>all.push(v.name));
  h54Pool().forEach(x=>x!==skip&&all.push(x.name));qnPool().forEach(x=>x!==skip&&all.push(x.name));all.filter(Boolean).forEach(n=>nVars(n).forEach(v=>S0.add(v)));return S0}
-function nPick(G,skip){const U=nUsed(skip);for(let t=0;t<120;t++){const su=pick(SURN),g=pick(G);const n=su+" "+g;if(su.split(" ").some(w=>g.split(" ").includes(w)))continue;if(!nVars(n).some(v=>U.has(v)))return n}return pick(SURN)+" "+pick(G)}
+function nPick(G){return nmNew(G===CTG?"m":"f")}/* one name core (jname.js): unique across the save */
 function qnNew(){const P=qnPool();
  const house=pick(CLANS);const head=P.some(q=>!q.taken&&q.house===house&&q.tier===0);const tier=R(100)<20&&!head?0:R(100)<45?1:2;
  const name=nPick(QNG);

@@ -32,7 +32,7 @@ function h54Son(id){return h54Pool().find(s=>s.id===id)||null}
 function h54Q(s){return (3-s.tier)*20+s.sac/5+s.tai/5}
 function h54NewSon(){const P=h54Pool();const used=namesInUse().concat(P.map(s=>s.name),allKids().map(([k])=>k.hW&&k.hW.s?k.hW.s.name:"")).filter(Boolean);
  const house=pick(CLANS);const surU=P.filter(s=>!s.taken).map(s=>s.name.split(" ").slice(0,-2).join(" "));const SS=SURN.filter(x=>!surU.includes(x));const head=P.some(s=>!s.taken&&s.house===house&&s.tier===0);let tier=R(100)<20&&!head?0:R(100)<45?1:2;
- let name="";for(let t=0;t<80&&!name;t++){const n=pick(SS.length?SS:SURN)+" "+pick(MALEN);if(!used.includes(n))name=n}if(!name)name=pick(SURN)+" "+pick(MALEN)+" "+(R(80)+10);
+ const name=nmNew("m",{avoidSur:new Set(surU)});
  S.hSid=(S.hSid||0)+1;const s={id:S.hSid,name,house,tier,off:H54OFF[house][tier],age:18+R(6),sac:40+R(56),tai:30+R(66),taken:null};P.push(s);return s}
 function h54PoolUp(){const P=h54Pool();for(let i=P.length-1;i>=0;i--){const s=P[i];if(!s.taken&&s.age>27){h54FreeFace(s);P.splice(i,1)}}let n=P.filter(s=>!s.taken).length;while(n<8){h54NewSon();n++}}
 function h54FreeFace(s){try{if(s.fid){const U=figUsed();const i=U.indexOf(s.fid);if(i>=0)U.splice(i,1)}}catch(e){}}

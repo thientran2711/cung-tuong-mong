@@ -19,7 +19,7 @@ function j95cCur(){return j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()
 function j95cSig(){try{return rivals.map(v=>v.alive?(v.out?"o":palaceOf(v)+":"+v.rank+(v.queen?"q":"")):"x").join(",")+"|"+(S.out?1:0)+":"+S.rank}catch(e){return""}}
 /* servant names: unique among every servant and every cung nữ thân tín */
 function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
- for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){/* port 16/11: names carry no numbers (main jaudit aaNamesFix): take an unused name from the same pool */const used=new Set(allServ().map(x=>x&&x.name).concat([...seen]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(x=>!used.has(x));if(pool.length){s.name=pool[Math.floor(Math.random()*pool.length)];n++}}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
+ for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){/* port 16/11: names carry no numbers (main jaudit aaNamesFix): take an unused name from the same pool */s.name=nmNew(s.role==="eunuch"?"eun":"maid",{more:[...seen]});n++}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
  if(n)J95C.stat.dedupe+=n;return n}
 (function(){
  /* ---- 1. giá họa: the gate, the record, the reason kept ---- */
@@ -58,7 +58,7 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
    try{sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);for(const p of consorts()){if(!p.staff){p.staff=[];fillStaff(p,true)}else J95C.stat.loadNoFill++}}catch(e){j95cErr("staffInit",e)}}}
  const d0=deser;deser=function(){J95C.loading=1;let r;try{r=d0.apply(this,arguments)}finally{J95C.loading=0}J95C.lastV=null;try{j95cVisitFix();if(j95cCur())j95sync()}catch(e){j95cErr("deserVisit",e)}try{J95C.sig=j95cSig();if(j95cCur()&&S.visit&&S.visit.k===S.place){J95C.lastV=S.visit;j95stage(S.roster,j95kh())}}catch(e){j95cErr("deser",e)}return r};
  if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{const taken=new Set(allServ().map(x=>x.name).concat([S&&S.maid&&S.maid.name],(rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
-   if(s&&taken.has(s.name)){/* no numbers in names (main jaudit) */const pool=(s.role==="eunuch"?EUN:MAIDS).filter(x=>!taken.has(x));if(pool.length){s.name=pool[Math.floor(Math.random()*pool.length)];J95C.stat.dedupe++}}}catch(e){}return s}}
+   if(s&&taken.has(s.name)){/* no numbers in names (main jaudit) */s.name=nmNew(s.role==="eunuch"?"eun":"maid",{more:[...taken]});J95C.stat.dedupe++}}catch(e){}return s}}
  if(typeof ageInit==="function"){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);if(!J95C.loading)j95cDedupe();return r}}
  if(typeof start==="function"){const st0=start;start=function(){J95C.lastV=null;J95C.sig="";const r=st0.apply(this,arguments);try{j95cDedupe();if(j95cCur())j95sync()}catch(e){j95cErr("start",e)}return r}}
 })();
