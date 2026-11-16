@@ -352,7 +352,7 @@
 | road-b3 FAIL fix (opus): items 1–9 of review-road-b3-r1 in jrd_thd/jrd_cnv/jend14 (engine items → fix A) | review/road-b3-fix | B | session_01N1tNP3QtT2AK9LY7dLU2E4 | RUNNING | 16/11 19:28Z |
 | two-way-acts r1 BIG review (rules/costs/BAL) of b74af30c2 | review/two-way-acts-r1 @ 7e2ed179b | reviewer s22 | PASS 7e2ed179b (reviewer one-core fixes a89dc674; quickcheck PASS; report reports/two-way-acts-r1.md) | 16/11 |
 | fest-fx review r1 (opus, BIG): review/fest-fx a114024a -> PASS b6d05b2d (r1 fix: jfx kfWxCfg reads FESTFX; shots out of git) | review/fest-fx-r1 | main s22 | session_01UV1Szm757NUrANyodNJyo2 | PASS b6d05b2d (report reports/fest-fx-r1.md) | 16/11 19:55Z |
-| weather-fx3 (sonnet; owner waiting): weather-fx2 bd26282f (never reviewed) + visible fireflies + new videos with real backdrops | review/weather-fx3 | main s22 | session_01UV1Szkdcs3uhcwZLHe2P37 | RUNNING | 16/11 19:32Z |
+| weather-fx3 (sonnet; owner waiting): weather-fx2 bd26282f (never reviewed) + visible fireflies + new videos with real backdrops | review/weather-fx3 | main s22 | session_01UV1Szkdcs3uhcwZLHe2P37 | SẴN SÀNG 77ac0d6d; waits C sprites for swap | 16/11 19:32Z |
 | PL NIGHT re-paint (sonnet art; owner 19:40Z: tối courtyards look 'ghê' — PL tối = painted edit + CODE navy overlay nfix (37,42,58)@0.45): sample 2 → owner → every tối state in img/pl2 (+ Dư đồ overview tối if same) painted warm/moonlit, no code wash | review/pl-night-art | C | session_011xDdVNctvAE3imhAWYYnQ5 | RUNNING | 16/11 19:42Z |
 | SMALL ART bundle (sonnet): (1) URGENT realistic SNOW + FIREFLY sprites (main s22 19:33Z, owner) → CDN snow-real-*/fly-real-* → main weather-fx3; (2) card art for new two-way-acts player options (reports/two-way-acts-r1.md §Notes) | review/small-art-c | C | session_011xDdVS1hhAmMvkVNAhm5Zt | RUNNING | 16/11 19:45Z |
 | night-steal review r2 (opus, BIG) of 609c1bdd0 | review/night-steal-r2 | main s22 | session_01UV1Szie8p57AVPuNpewWQP | RUNNING | 16/11 19:13Z |
@@ -375,4 +375,4 @@
 | coop-contest-fix (opus, BIG co-op; owner Q 19:52Z; plan = reports/coop-contest-check.md Recommendation) | review/coop-contest | main s23 | session_01UV1SzhQgRNCuk7EHMhqYPi | RUNNING | 16/11 19:54Z |
 | emotion-acts-3 (opus): fix emotion-acts-2-r1 FAIL 2 (Tuần lục NPC line grammar/page filing; bots ON early death 66 % vs OFF 39 % + tuẫn táng cause) | review/emotion-acts-3 | B | session_01N1tNP6kQXZcxcwCXnwMTdP | RUNNING | 16/11 19:59Z |
 | co-op one-world audit analyst (opus; owner 19:57Z: any shared system computed separately / double-counted) | handover | main s23 (opened by s22) | session_01UV1Szk87bTSJicgPTiFX6E | RUNNING | 16/11 19:57Z |
-| weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | (opening) | RUNNING | 16/11 20:03Z |
+| weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | session_01UV1SziHY4wM9n3vdh5DZ81 | RUNNING | 16/11 20:03Z |
