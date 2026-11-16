@@ -32,7 +32,7 @@ function kidFig(k){const id=kidId(k);if(!id)return null;const B=(KIDIX[kidRole(k
 function kidFigSrc(k,kind){const f=kidFig(k);if(!f)return"";return figPath(kind==="por"?f.por:(f.file||f.src))}
 /* portraits: the identity's por once it has loaded, the old face until then (or if it fails) */
 const KPORK={},KPIM=[];
-function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;clearTimeout(window.__kporT);window.__kporT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
+function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
 /* every band of the child's identity is fetched early, so a birthday never flashes the old face */
 function kidPreAll(k){const id=kidId(k);if(!id)return;const B=(KIDIX[kidRole(k)]||{})[id]||{};KIDBANDS.forEach(b=>{if(B[b])kidPre(figPath(B[b].por))})}
 function kidPor(k,fb){try{kidPreAll(k);const src=kidFigSrc(k,"por");if(!src)return fb;if(KPORK[src]===1)return src;kidPre(src);return fb}catch(e){return fb}}

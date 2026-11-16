@@ -166,3 +166,14 @@ Order per buổi: both play → both `bend` → server `buoi` → each client ru
   and leaves its local friend entry for display.
 - Bot check: bots try harm acts on each other when in the same place. After each buổi both clients' views must agree:
   the victim's own S vs the actor's friend entry (sung, danh, suc, rank, alive).
+
+## 10. Chat (owner 16/11, review/coop-chat; server LIVE `coop-2`)
+Room-scoped (this Durable Object only; no endpoint reads another room), plain text.
+| t | direction | fields |
+|---|---|---|
+| `chat` | client → server | `text` (cut at 300 chars after stripping control / bidi characters, blank ignored), `nm` (sender name, ≤ 24), `g:{y,m,t,b}` (game year, month, tuần, buổi, for the game-style time). Whole frame ≤ 2.4 KB else `error toolarge`; one seat may send once per 350 ms else `error slow`. |
+| `chat` | server → BOTH seats (sender too) | `m:{i,s:"a"|"b",n,x,w,g,ts}` — `i` = per-room increasing id. |
+| `room` | server → client | now also `chat:[m…]` = the last 50 messages (history after reconnect / rejoin). |
+Storage: DO key `chat` (array, last 50). Deleted with the room (30 days idle). Clients escape the text when drawing it; the server stores it raw. Old clients ignore `chat` / `room.chat`.
+Client: `dev/build/jcoopchat.js` (KIT §80). Tests: `coop/worker/test/chat.test.mjs`, `dev/test/coop-chat.js`.
+
