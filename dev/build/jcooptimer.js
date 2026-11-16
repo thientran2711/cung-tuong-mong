@@ -187,7 +187,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
 .kctmf .kctmf-sh{display:none}
-/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:6.5em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}:where(.kv1) .kctmf .kctmf-l{display:none}:where(.kv1) .kctmf .kctmf-sh{display:inline}
+/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:9em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
