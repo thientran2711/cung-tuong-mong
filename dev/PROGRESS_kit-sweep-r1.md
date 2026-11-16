@@ -9,3 +9,8 @@ Results (direct, 5 sizes unless noted):
 - Looked at: place cards (T2 picture left, rows right) on several places, item card (kit panel, header ✕) at 755x1000 and 844x390.
 Notes: at 844x390 the place card text is taller than the frame (options below fold) = known overlap with kpanel-compact sizing. Item card name uses an inline colour style (grade colour) in the kit header; minor.
 No code changes by the reviewer beyond the merge.
+
+## Round 2 (11/16): + review/pcard-actrow-r1 db77f3f3b, + origin/main 02a0d3f10
+- Merge: pcard-actrow conflicted only in index.html/sw.js/assets.json (rebuilt) and kit-conform.js (add/add; kept kit-sweep's newer copy). No clash between the two in the sources.
+- kit-conform.js fix (reviewer): the person-option rule did not know the person pickers' portrait (.kopface, img /por-) and flagged them, and it flagged act options in T3 person dialogs (j70thr, night2) where the person is already the figure column. Now accepts .kopface / por- pictures and skips T3. Result: 0 MIXED, 0 CUSTOM, no floats at 5 sizes (CONFORMS 80-82, MISSING 15-17 = states not reachable in a random life).
+- pcard-actrow.js: all scenes PASS at 5 sizes. panel-size: same as main, plantpick btnOut gone. stage-rail 4/4 PASS. coop-e2e 59/59. Host + direct boot, rotate prompt at 390x844, no errors.

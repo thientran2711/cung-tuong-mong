@@ -47,7 +47,7 @@ const VPS=(SIZES||'755x1000').split(',');
     /* (b) an option that names a person must show THAT person's portrait (pcPort / kit face), never a generic act / event picture */
     try{const P=(typeof liveRivals==='function'?liveRivals(true):[]).filter(v=>v&&v.name&&v.name.length>3);
      [...d.querySelectorAll('.opts > button.ka, .kpscopts > button.ka')].forEach(bt=>{const t=((bt.querySelector('.kan')||bt).textContent||'');const who=P.find(v=>t.includes(v.name));if(!who)return;
-      const art=bt.querySelector(':scope > .kaart');if(art&&!art.querySelector('.pcp,.md,.pframe,.pfwrap,[class*="kpor"],img[src*="/fig"],img[src*="face"],img[src*="unknown"]'))why.push('generic picture on a person option: '+t.trim().slice(0,40))})}catch(e){}
+      const art=bt.querySelector(':scope > .kaart');if(art&&tpl!=='T3'&&!art.querySelector('.pcp,.md,.pframe,.pfwrap,[class*="kpor"],.kopface,img[src*="/por-"],img[src*="/fig"],img[src*="face"],img[src*="unknown"]'))why.push('generic picture on a person option: '+t.trim().slice(0,40))})}catch(e){}
     return{v:why.length?(d.classList.contains('kpanel')?'MIXED':'CUSTOM'):'CONFORMS',tpl,why:[...new Set(why)].slice(0,6),seal:(d.querySelector('.kpseal')||{}).textContent||'',title:((d.querySelector('.kptitle')||{}).textContent||'').slice(0,50)}},KIT_BLOCK.source);
    res[name]=r||{v:'MISSING'};
    await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{kitItemCardClose&&kitItemCardClose()}catch(e){}})};
