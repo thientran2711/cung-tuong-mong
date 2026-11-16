@@ -278,7 +278,7 @@ window.kitDlgFit=kitDlgFit;
 (function(){const st=document.createElement("style");st.id="kit-dlgscroll";st.textContent=`
 .modal .dlg.kdscroll{display:flex!important;flex-direction:column;overflow:hidden!important}
 .modal .dlg.kdscroll>*{flex:none}
-.modal .dlg.kdscroll>#mb{flex:1 1 auto!important;min-height:0;display:flex!important;flex-direction:column;overflow:hidden!important}
+.modal .dlg.kdscroll>#mb{flex:1 1 auto!important;min-height:0;display:flex!important;flex-direction:column;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain}
 .modal .dlg.kdscroll>#mb>*{flex:none}
 .modal .dlg.kdscroll>#mb>.opts{flex:1 1 auto!important;min-height:96px;overflow-y:auto!important;overscroll-behavior:contain;transition:box-shadow .2s}
 .modal .dlg.kdscroll>#mb>.opts{grid-template-rows:none!important;grid-auto-rows:max-content!important;align-content:start!important}
@@ -446,11 +446,23 @@ function kitFestKey(m){try{if(typeof FEST!=="object")return"";const pp=m.pp||{};
  for(const k in FEST){const n=String(FEST[k].name||"").replace(/\s*\([^)]*\)\s*$/,"");if(n&&t.indexOf(n)===0)return k}}catch(e){}return""}
 /* the dialog's natural height (32.7c / 50.1): its height minus #mb + the right column stacked at content size (the options' own content,
    not the stretched grid cell; the figure column has no height of its own — the people are sized to the result) */
+/* review/pcard-actrow (owner 16/11 "no tiny nested scroll box", spy-target dialog on iPad landscape): in the ONE fixed frame (§8.1) a person dialog whose picture + text
+   leave the options list less than ~280 px, about two rows (a tiny scroll box, rows cut in half) scrolls its WHOLE right column as one list (picture, text, then the long option
+   rows, nothing cut); the person stays pinned on the left (sticky). Otherwise the §32.5 rule stands (text fixed, only the options scroll). Class `kdpall`. */
+function kitDpAll(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb}=o;const op=mb.querySelector(":scope > .opts");if(!op)return;
+ d.classList.remove("kdpall");const tiny=op.scrollHeight>op.clientHeight+2&&op.clientHeight<280;if(tiny){d.classList.add("kdpall");if(!d.__kdpTop){d.__kdpTop=1;mb.scrollTop=0}}mb.style.setProperty("--kdpmbh",mb.clientHeight+"px")}catch(e){}}
+window.kitDpAll=kitDpAll;
 function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...mb.querySelectorAll(":scope > *, :scope > .kpb > *")].filter(e=>e!==col&&e.offsetParent&&cs(e).display!=="contents"&&cs(e).gridColumnStart==="2");
  let sum=0;items.forEach(e=>{const c=cs(e);let h=e.offsetHeight;if(e.classList.contains("opts")){const K=[...e.children].filter(x=>x.offsetParent);if(K.length){const t=e.getBoundingClientRect().top;h=Math.max(...K.map(x=>x.getBoundingClientRect().bottom))-t+e.scrollTop+parseFloat(c.paddingBottom||0)}}
   sum+=h+parseFloat(c.marginTop||0)+parseFloat(c.marginBottom||0)});
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
+(function(){const f0=kitDpFit;kitDpFit=function(){const r=f0.apply(this,arguments);try{kitDpAll()}catch(e){}return r};window.kitDpFit=kitDpFit})();
+(function(){const st=document.createElement("style");st.id="kit-dp-all";st.textContent=`
+html body #modal .dlg.kdper.kdpall>#mb{overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:max-content max-content!important;align-content:start}
+html body #modal .dlg.kdper.kdpall>#mb>.kpb>.kpsubj.kes{position:sticky!important;top:0;align-self:start;grid-row:1/-1;height:var(--kdpmbh,100%)!important}
+html body #modal .dlg.kdper.kdpall>#mb>.opts{grid-row:2!important;overflow:visible!important;min-height:max-content!important;align-self:start}
+`;document.head.appendChild(st)})();
 (function(){const p0=kitStagePeople;kitStagePeople=function(m){let L=p0.apply(this,arguments);
  /* coordinator 15/11 ("Hoàng hậu triệu kiến" showed the PLAYER): the column shows the MAIN ACTOR — the first person who is not the player;
     the player stands there only when the event is about her alone */
@@ -866,3 +878,22 @@ ${kitCompactCSS("button.ka.kart",84,112)}
  button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
+/* ================= KIT §6.3 · PERSON-CARD ACT ROWS (owner 16/11, iPad shot: Tâm sự / Sai đi dò la / Nghe ngóng chung drawn as tall boxes in a 2-column
+   grid, text clipped, uneven heights; review/pcard-actrow) =================
+   ONE rule for every act a person card offers (stage pop-up .pcpop, Hậu cung / Giao tình / court / staff / kids cards = `.pc > .pcr`), at EVERY width
+   (not only inside the narrow-pane container query): the act is the §6.2 LONG HORIZONTAL OPTION ROW = the compact act card (kitCompactCSS) — picture left,
+   title + odds ladder, Cần / Tốn / Được / Mất rows right — ONE per line, full width, never a grid cell, never clipped (a card with more text grows).
+   Where the act has no picture of its own the §59 placeholder stands in (kitActCompactOn); the pop-up is processed too (it is not inside #panel):
+   kaNorm → kitActCompactOn(root) after every normalisation pass, so no place has to call it by hand. The Hành sự deck (.cards in #panel, its own kit part)
+   and dialog options (.kopt, §6.2) are not touched. */
+(function(){const st=document.createElement("style");st.id="kit-pcard-actrow";st.textContent=`
+.pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
+.pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
+.pc>.pcr button.ka.kanoart>.kaart{display:none!important}
+${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
+@container kpane (max-width:420px){
+ .pc>.pcr button.ka.kart{--kaw:72px!important;--kah:96px!important}
+ .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
+}
+`;document.head.appendChild(st)})();
+(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}return r};window.kaNorm=kaNorm})();
