@@ -33,10 +33,11 @@ Base main at start: 900ace7fb.
 | C9 huadian-size + motif fix | review/huadian-size @78ea3d32d (5562 files on CDN: 2153 por shrunk to 8.5%, 2204 fig, 612 hd, 542 tn; 9 non-allowed motif styles swapped to donor flowers incl. player-look4; 22 por skipped) → review/huadian-size-r1 | sonnet | REVIEWING |
 | D1 result-sfx | review/result-sfx-r1 | sonnet | PASS 18926abcc |
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
-| D49 collection milestones | review/collect-ms @73f56aec3 (jcol.js; BAL.col 20/50/100/200 → Phúc duyên +5/+10/+20/+35, titles Tích bảo / Tàng bảo / Bách bảo / Vạn bảo các chủ; ledger localStorage cung-colms) → review/collect-ms-r1 | sonnet | REVIEWING |
+| D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
+| D22 real-phone UA test mode (rot.js host mode: fake real iPhone/Fold/iPad UA + viewport + touch for tests) | review/ua-test | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D6, D9, D11–D15, D17, D19, D20, D22, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D6, D9, D11–D15, D17, D19, D20, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -56,6 +57,7 @@ PASS review/small-art-wire-r1 6bce72fa60b747a398cbd66776889c3622da282a (D45; des
 PASS review/outside-art-r1 9b4a257d0db38bbaa0d649391e51d0269667d0da (D48; notes-only commit, art is CDN-only; descends from a3dbdc19f — main moved, trivial merge; all 13 scenes, 2 maps + hotspots, Huynh trưởng 2×4 ages checked by eye; cutcheck clean)
 PASS review/item-art-r5 aedcca1ed5cad2061a594a69f913c52f44da728a (D2; descends from main 9b4f1697a; art already live on CDN; site rebuilt so assets.json/sw.js hashes match the 338+21+15 replaced item pictures)
 PASS review/small-bugs-4-r1 42e4038f7104e451f4a940e7c536e3bf5deb8ebe (D47; descends from current main; jveil.js conflict: main's vlNeed(S) + 'Đang mặc' anchor; small-bugs-4.js 6 viewports on first merge, scan on final; KIT.md line ~1024 still says onText 'Đang đeo' → kit keeper wording)
+PASS review/collect-ms-r1 94591de586789e65d2dad905f9874cf2390b87e0 (D49; descends from main 7f20b751b; collect-ms.js 6 viewports; jcol.js after jearn.js in assemble; note: reward text 'Trong rương đã có N món' also counts worn trâm/y)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 (ON HOLD — do not merge yet, owner fixes pending on cycle-r2) review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
