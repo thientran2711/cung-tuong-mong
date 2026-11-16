@@ -70,7 +70,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  const setHolder=()=>A.p.evaluate(()=>{const v=liveRivals(false).find(x=>x&&!x.coop&&nightCh(x)>0)||liveRivals(false).find(x=>x&&!x.coop);S.tonight=v;S.nfF=wk();S.ntk=null;S.ntTry=null;S.nfA=null;window.stealWant=()=>({u:0,p:0,mode:null});nfSend();return{id:v.id,n:v.nights||0}});
  let H=await setHolder();
  ok(await until(B,id=>S.tonight&&S.tonight!=="me"&&S.tonight.id===id,H.id,20000),'1: guest sees the NPC holder',H);
- await B.p.evaluate(()=>{S.ntTry=null;S.nfA=null;window.stealWant=()=>({u:0,p:0,mode:null});const o0=oSteal;oSteal=()=>100;try{stealNight(S,tonightOf(),"feign")}finally{oSteal=o0}render()});
+ await B.p.evaluate(()=>{S.ntTry=null;S.nfA=null;S.cyb=Object.assign(S.cyb||{},{lie:wk()});window.stealWant=()=>({u:0,p:0,mode:null});const o0=oSteal;oSteal=()=>100;try{stealNight(S,tonightOf(),"feign")}finally{oSteal=o0}render()});
  await sleep(1500);
  ok(await A.p.evaluate(id=>S.tonight&&S.tonight.id===id,H.id),'1: not resolved before the host has had that khắc');
  await A.p.evaluate(()=>{spend(1);render()});
@@ -84,10 +84,10 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  H=await setHolder();
  ok(await until(B,id=>S.tonight&&S.tonight!=="me"&&S.tonight.id===id,H.id,20000),'2: guest sees the NPC holder',H);
  await A.p.evaluate(()=>{S.sung=80;const f=liveRivals(false).find(v=>v.coop);if(f)f.sung=20});
- const s0=await B.p.evaluate(()=>{S.ntTry=null;S.nfA=null;S.sung=20;window.stealWant=()=>({u:0,p:0,mode:null});const s=S.sung;const o0=oSteal;oSteal=()=>100;try{stealNight(S,tonightOf(),"feign")}finally{oSteal=o0}render();return s});
+ const s0=await B.p.evaluate(()=>{window.__sentAtt=0;S.ntTry=null;S.nfA=null;S.sung=20;S.cyb=Object.assign(S.cyb||{},{lie:wk()});/* not held back by her cycle tuần (jcycle) */window.stealWant=()=>({u:0,p:0,mode:null});const s=S.sung;const o0=oSteal;oSteal=()=>100;try{stealNight(S,tonightOf(),"feign")}finally{oSteal=o0}render();return s});
  await sleep(800);
- await A.p.evaluate(()=>{const o0=oSteal;oSteal=()=>100;try{stealNight(S,tonightOf(),"feign")}finally{oSteal=o0}spend(1);render()});
- ok(await until(A,()=>S.tonight==="me"||S.nfN===wk(),null,20000),'2: the higher Sủng (host) wins',await A.p.evaluate(()=>nfDebug()));
+ await A.p.evaluate(()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk()});const o0=oSteal;oSteal=()=>100;try{stealNight(S,tonightOf(),"feign")}finally{oSteal=o0}spend(1);render()});
+ ok(await until(A,()=>S.tonight==="me"||S.nfN===wk(),null,20000),'2: the higher Sủng (host) wins',await A.p.evaluate(()=>({d:nfDebug(),A:S.nfA,tr:S.ntTry,cy:typeof cyTray==='function'&&cyTray(S),used,ld:S.logs.slice(0,3)})));
  ok(await until(B,()=>S.tonight&&S.tonight!=="me"&&S.tonight.coop,null,20000),'2: guest sees the host holding it',await B.p.evaluate(()=>nfDebug()));
  const g=await B.p.evaluate(()=>({sung:S.sung,line:S.logs.slice(0,6).join(" ")}));ok(g.sung===s0&&/cũng mời được/.test(g.line),'2: guest: no Sủng loss, the "cũng mời được" line',g);
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
