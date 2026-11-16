@@ -190,7 +190,7 @@ function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0
  const R=s[2].map(r=>wkrOf(b.kind,r)).filter(Boolean).map(r=>`${r.n} (${r.lv?`${ARTS.find(x=>x.k===WK[b.kind].a).n} bậc ${r.lv}`:"mọi bậc"})`);
  return kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",[`đọc: học ${rcpStN(b.kind,b.sid)}`].concat(R),"g"],["Ghi chú",[kn?"ta đã học lối này":"ta chưa học lối này","đem tặng được, bán được"],"n"]])}
 (function(){const r0=kitItemRows;kitItemRows=function(k){if(rcpBk(k))return rcpBookRows(k);return r0.apply(this,arguments)}})();
-(function(){if(typeof kitShopEff!=="function")return;const e0=kitShopEff;kitShopEff=function(k){const b=rcpBk(k);if(b)return `đọc: học ${rcpStN(b.kind,b.sid)}${rcpKnows(S,b.kind,b.sid)?" (đã học)":""}`;return e0.apply(this,arguments)}})();
+(function(){if(typeof kitShopEff!=="function")return;const e0=kitShopEff;kitShopEff=function(k){const b=rcpBk(k);if(b)return `đọc: học lối này${rcpKnows(S,b.kind,b.sid)?" (đã học)":""}`;return e0.apply(this,arguments)}})();
 (function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){const g=x&&x.g;const b=g&&!g.wk&&rcpBk(g.k);if(!b)return o0.apply(this,arguments);const it=IT[g.k],i=g.i;
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: 1 khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(1)),
   pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
