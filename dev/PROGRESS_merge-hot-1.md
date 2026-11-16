@@ -9,3 +9,4 @@ Re-tests on final build: modal-swipe 0 STUCK; stage-rail 5/5 PASS; book-fig-scal
 Final: also merged origin/main c4e89f89 (rebuilt); same tests re-run green (stage-rail 5/5, modal 0 STUCK, book-fig ALL OK, log-sync-night 4/4).
 Last: merged origin/main feba37e5 (rebuilt); stage-rail 5/5, modal 0 STUCK at 5 sizes, book-fig ALL OK, log-sync-night 4/4.
 Last: merged origin/main 0c23da40; stage-rail 5/5, modal 0 STUCK, book-fig OK, log-sync-night 4/4.
+Last: merged origin/main a942395b; stage-rail 5/5, modal 0 STUCK, log-sync-night 4/4.
