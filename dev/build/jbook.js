@@ -61,11 +61,18 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
 /* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
-   layout per scroller per frame during a page turn) */
-function kclLkSync(faces){const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
+   layout per scroller per frame during a page turn).
+   Reading scrollTop forces a layout every frame of the turn, so it is read only after a scroll happened somewhere (or a face changed). */
+let KCL_SCROLLN=0;try{document.addEventListener("scroll",()=>{KCL_SCROLLN++},{capture:true,passive:true})}catch(e){}
+function kclLkSync(faces){let need=false;for(const Fc of faces)if(Fc.__kln!==KCL_SCROLLN||Fc.__klk!==Fc.lk)need=true;if(!need)return;for(const Fc of faces){Fc.__kln=KCL_SCROLLN;Fc.__klk=Fc.lk}
+ const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+  /* lag-play: the copy is a still picture clipped to the page: a box that starts below the visible bottom cannot show and (in flow,
+     after everything above it) cannot move what shows, so it keeps its class styles only (no per-property freeze). */
+  const rb=Math.min(src.getBoundingClientRect().bottom,innerHeight)+2;
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
+   let ra=null;if(i){ra=a.getBoundingClientRect();if(ra.top>rb&&(ra.width||ra.height))continue}
    const ca=getComputedStyle(a);/* lag-play: ONE computed style object per element (was read 2-3 times) */
    if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){for(const k of KCL_FREEZE){const v=ca[k];if(v)b.style[k]=v}}
    else if(i&&b.style&&ca.display==="none")b.style.display="none";
@@ -73,7 +80,7 @@ function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
    if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
-   if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
+   if(i&&a.firstElementChild){const r=ra||a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";

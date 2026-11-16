@@ -110,9 +110,9 @@ window.KIT_LIGHT=KIT_LIGHT;
    I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
  /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
  window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
-   if(!AR[src]){learn(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));return ""}   /* the book's own re-layout, same reading position */
+   if(!AR[src]){learn(src,()=>kitBookRelayoutSoon());return ""}   /* the book's own re-layout, same reading position */
    const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
-   const bb=kitFigBody(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
+   const bb=kitFigBody(src,()=>kitBookRelayoutSoon());if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
    const g=kitBookFig(bb,kfr0*KIT_FIG.man,pic);
    const fs=Math.max(13,Math.min(17,PW/34)),boxW=PW*R.w,colMax=boxW-fs-Math.min(TEXT_MIN,boxW-base-fs);   /* text ≥ 220 px, or never narrower than a normal figure's page */
    const per=hx*ar+TORSO,need=k=>per*g.ih*k+4;                                                  /* body right edge when the figure starts at the column's left */

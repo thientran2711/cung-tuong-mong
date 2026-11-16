@@ -15,7 +15,7 @@ const SNAPL=()=>{const by={};for(const e of document.getElementsByTagName('*')){
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch({args:PP.LAUNCH_ARGS});const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});
  await ctx.addInitScript(LST);await ctx.addInitScript(PP.INIT);await ctx.addInitScript(()=>{window.__bot={pre:1}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  const cdp=await ctx.newCDPSession(p);await cdp.send('Performance.enable');await cdp.send('HeapProfiler.enable');const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);
- await f.evaluate(PP.NEWLIFE);await sleep(2000);await f.evaluate(PP.CLEAR);
+ await PP.newLife(f);await sleep(2000);await f.evaluate(PP.CLEAR);
  const play=async n=>{const b0=await f.evaluate(()=>window.__buoiN||0);let g=0;while((await f.evaluate(()=>window.__buoiN||0))-b0<n&&g++<n*60){await f.evaluate(PP.STEP).catch(()=>{});await sleep(120)}await f.evaluate(PP.CLEAR);await sleep(1500)};
  const snap=async()=>{await cdp.send('HeapProfiler.collectGarbage');return Object.assign(await PP.metrics(cdp),await f.evaluate(SNAPL))};
  await play(WARM);const s0=await snap();await play(NB);const s1=await snap();

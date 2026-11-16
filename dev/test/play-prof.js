@@ -18,7 +18,7 @@ function agg(prof){const N={};for(const n of prof.nodes)N[n.id]=n;const dt={};co
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch({args:require('./lib/playperf').LAUNCH_ARGS});
  const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot={pre:1}});const p=await ctx.newPage();
  const cdp=await ctx.newCDPSession(p);const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);
- await f.evaluate(NEWLIFE);await sleep(2500);await f.evaluate(CLEAR);await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});
+ await require('./lib/playperf').newLife(f);await sleep(2500);await f.evaluate(CLEAR);await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});
  await cdp.send('Profiler.enable');await cdp.send('Profiler.setSamplingInterval',{interval:500});
  const tapEl=async fn=>{const h=await f.evaluateHandle(fn);const el=h.asElement();if(!el)return false;try{await el.click({timeout:15000});return true}catch(e){return false}};
  const DO={

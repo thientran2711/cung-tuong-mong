@@ -41,7 +41,7 @@ function tapLatency(ev){const by={};for(const e of ev){if(!e.id)continue;by[e.id
 const LAUNCH_ARGS=process.env.PP_ARGS!=null?process.env.PP_ARGS.split(' ').filter(Boolean):['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist','--enable-gpu-rasterization'];
 /* new life without the title flow (same as game-feel.js), overlays cleared */
 const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;/* the identity roulette is a once-per-life show, not play: skipped */try{kitRoulette=function(){}}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
- ['kroul','kroulw','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,.kbd-roulette').forEach(e=>e.remove());render();return S.name};
+ ['kroul','kroulw','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,.kbd-roulette').forEach(e=>e.remove());render();return typeof S!=='undefined'&&S?S.name:null};
 const CLEAR=()=>{Q.length=0;const m=document.getElementById('modal');if(m&&!m.hidden){try{closeModal()}catch(e){m.hidden=true}}['kroul','dawn','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,.kmfls').forEach(e=>e.remove())};
 /* bot step (in page, JS clicks): answer the open dialog, else tap one enabled act card, else Sang buổi. Mini games are dropped. */
 const STEP=()=>{if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null;if(typeof kg82Close==='function')kg82Close(true)}catch(e){}try{render()}catch(e){}return'mg'}
@@ -58,4 +58,6 @@ const STEP=()=>{if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null
 
 /* open the Hành sự cards (the act tab toggles them on the phone layout) */
 const OPENACT=()=>{const v=x=>x&&x.offsetParent!==null;if([...document.querySelectorAll('button.card.ka')].some(v))return 0;const t=document.querySelector('#tabs [data-tab="act"]');if(v(t))t.click();return 1};
-module.exports={NEWLIFE,CLEAR,STEP,OPENACT,LAUNCH_ARGS,INIT,SNAP,RESET,snap,reset,fps,metrics,pct,tapLatency};
+/* a new life, retried: right after boot start() can leave S unset for a moment (data still arriving) */
+async function newLife(f){let e0=null;for(let i=0;i<6;i++){try{const n=await f.evaluate(()=>{const r=(function(){try{return 1}catch(e){return 0}})();return r});const nm=await f.evaluate(NEWLIFE).catch(e=>{e0=e;return null});if(nm)return nm}catch(e){e0=e}await new Promise(r=>setTimeout(r,1500))}throw e0||new Error('new life failed')}
+module.exports={newLife,NEWLIFE,CLEAR,STEP,OPENACT,LAUNCH_ARGS,INIT,SNAP,RESET,snap,reset,fps,metrics,pct,tapLatency};

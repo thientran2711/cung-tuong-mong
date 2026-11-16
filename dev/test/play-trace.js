@@ -7,7 +7,7 @@ const DEV=opt('device','fold'),CPU=+opt('cpu',4),ACT=opt('act','next'),REPS=+opt
 const sleep=t=>new Promise(r=>setTimeout(r,t));const {NEWLIFE,CLEAR,OPENACT}=require('./lib/playperf');
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch({args:require('./lib/playperf').LAUNCH_ARGS});
  const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot={pre:1}});const p=await ctx.newPage();
- const cdp=await ctx.newCDPSession(p);const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);await f.evaluate(NEWLIFE);await sleep(3000);await f.evaluate(CLEAR);
+ const cdp=await ctx.newCDPSession(p);const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);await require('./lib/playperf').newLife(f);await sleep(3000);await f.evaluate(CLEAR);
  if(opt('hide',null))await f.evaluate(sel=>{const st=document.createElement('style');st.textContent=sel+'{display:none!important}';document.head.appendChild(st)},opt('hide'));
  if(opt('eval',null))console.log('eval',await f.evaluate(opt('eval')));
  await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});

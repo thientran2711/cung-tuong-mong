@@ -12918,11 +12918,18 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
 /* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
-   layout per scroller per frame during a page turn) */
-function kclLkSync(faces){const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
+   layout per scroller per frame during a page turn).
+   Reading scrollTop forces a layout every frame of the turn, so it is read only after a scroll happened somewhere (or a face changed). */
+let KCL_SCROLLN=0;try{document.addEventListener("scroll",()=>{KCL_SCROLLN++},{capture:true,passive:true})}catch(e){}
+function kclLkSync(faces){let need=false;for(const Fc of faces)if(Fc.__kln!==KCL_SCROLLN||Fc.__klk!==Fc.lk)need=true;if(!need)return;for(const Fc of faces){Fc.__kln=KCL_SCROLLN;Fc.__klk=Fc.lk}
+ const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+  /* lag-play: the copy is a still picture clipped to the page: a box that starts below the visible bottom cannot show and (in flow,
+     after everything above it) cannot move what shows, so it keeps its class styles only (no per-property freeze). */
+  const rb=Math.min(src.getBoundingClientRect().bottom,innerHeight)+2;
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
+   let ra=null;if(i){ra=a.getBoundingClientRect();if(ra.top>rb&&(ra.width||ra.height))continue}
    const ca=getComputedStyle(a);/* lag-play: ONE computed style object per element (was read 2-3 times) */
    if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){for(const k of KCL_FREEZE){const v=ca[k];if(v)b.style[k]=v}}
    else if(i&&b.style&&ca.display==="none")b.style.display="none";
@@ -12930,7 +12937,7 @@ function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
    if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
-   if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
+   if(i&&a.firstElementChild){const r=ra||a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
@@ -13436,7 +13443,11 @@ const KBK_ART={cover:"https://ctm-img.victoria-tntt.workers.dev/img/book-cover.w
    title has a picture here draws it in the label (art cover only); any other title keeps the text. */
 const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
-(function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k);if(r.__kbk)r.__kbk.relayout()})};im.src=u}catch(e){}}})();
+/* lag-play (owner 16/11 15:05Z): ONE coalesced book re-layout. Every picture that arrived (book art, each figure's size/head measure)
+   re-paginated every open book at once — 1-20 s per picture on a slow phone while a new life's figures stream in. */
+function kitBookRelayoutSoon(ms){clearTimeout(kitBookRelayoutSoon.t);kitBookRelayoutSoon.t=setTimeout(()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}),ms==null?120:ms)}
+window.kitBookRelayoutSoon=kitBookRelayoutSoon;
+(function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k)});kitBookRelayoutSoon()};im.src=u}catch(e){}}})();
 
 function kbkSfx(){try{if(typeof auOk!=="function"||!auOk())return;const C=window.__bellCtx||(window.__bellCtx=new (window.AudioContext||window.webkitAudioContext)());const t=C.currentTime,n=Math.floor(C.sampleRate*.28);
  const buf=C.createBuffer(1,n,C.sampleRate),d=buf.getChannelData(0);for(let i=0;i<n;i++){const e=i/n;d[i]=(Math.random()*2-1)*Math.pow(1-e,2)*(e<.08?e/.08:1)}
@@ -25109,9 +25120,9 @@ window.KIT_LIGHT=KIT_LIGHT;
    I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
  /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
  window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
-   if(!AR[src]){learn(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));return ""}   /* the book's own re-layout, same reading position */
+   if(!AR[src]){learn(src,()=>kitBookRelayoutSoon());return ""}   /* the book's own re-layout, same reading position */
    const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
-   const bb=kitFigBody(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
+   const bb=kitFigBody(src,()=>kitBookRelayoutSoon());if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
    const g=kitBookFig(bb,kfr0*KIT_FIG.man,pic);
    const fs=Math.max(13,Math.min(17,PW/34)),boxW=PW*R.w,colMax=boxW-fs-Math.min(TEXT_MIN,boxW-base-fs);   /* text ≥ 220 px, or never narrower than a normal figure's page */
    const per=hx*ar+TORSO,need=k=>per*g.ih*k+4;                                                  /* body right edge when the figure starts at the column's left */
@@ -29529,20 +29540,25 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
 const KRN_SKIP=".kname,.kti,[data-vp-skip],[data-krn-skip],script,style,textarea,input,option,select";
 const KRN_BLK=".kft,.krv,.kitem,.logs > div,p,li,button,.kptitle,.kpsub,figcaption,td,.kpnote,.tag";
 let KRN_C={k:"",rx:null,m:null};
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&kitTitle(p))}catch(e){return null}if(!L.length)return null;
+/* lag-play (owner 16/11 15:05Z): one rank-name pass reads the title of every person (kitTitle -> kitFace -> portrait/figure lookups)
+   for the table AND again per match, per root: ~0.8 s per tab on a slow phone. Inside ONE pass (no game state changes there) each
+   person's title is read once. */
+let KRN_TM=null;
+function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
+function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
 function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitleTail(b,t)||kpTitleTail(b.trimEnd()+" ",t)))return true;
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
-function kitRankNamePaint(root,dry){const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
+function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
  const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
   const pv=krnPrevText(n);T.rx.lastIndex=0;let m,last=0,hit=false;const f=document.createDocumentFragment();
-  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=kitTitle(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
+  while((m=T.rx.exec(v))){const nm=m[1],p=T.m.get(nm),t=krnT(p);const before=(v.slice(0,m.index).trim()?"":pv)+v.slice(0,m.index);
    if(krnTitled(before,t,nm,blkPre+v.slice(0,m.index)))continue;
    /* a name label on its own (card heading, portrait caption) whose title sits in a sibling element of the same card: titled */
    if(v.trim()===nm){let up=n.parentElement,ok=false;/* r1: a short sibling label of the name (person card .pcrk "Hoàng hậu" beside .pcname) holds its title */
@@ -29558,8 +29574,8 @@ window.kitRankNamePaint=kitRankNamePaint;
    replacements are skipped (they hold no bare name), so it never loops; too many roots in one frame → one full pass. */
 (function(){let q=false,full=true;const R=new Set();
  const run=()=>{q=false;const all=full,L=[...R];full=false;R.clear();if(window.__krnOff)return;
-  try{if(all||L.length>120){kitRankNamePaint(document.body);return}
-   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}};
+  KRN_TM=new Map();try{if(all||L.length>120){kitRankNamePaint(document.body);return}
+   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}finally{KRN_TM=null}};
  const add=n=>{const e=n&&(n.nodeType===1?n:n.parentElement);if(e&&!(e.matches&&e.matches(".kname,.kname *")))R.add(e)};
  const mo=new MutationObserver(M=>{for(const m of M){if(m.type==="characterData")add(m.target);else m.addedNodes.forEach(add)}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}full=true;run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
@@ -41335,7 +41351,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="27f97bd27827";window.CTM_BUILD=BUILD;
+const BUILD="efdd36b6522d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

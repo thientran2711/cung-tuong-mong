@@ -27,7 +27,7 @@ async function findTap(f,fn,arg){const h=await f.evaluateHandle(fn,arg);const el
   const cdp=await ctx.newCDPSession(p);await cdp.send('Performance.enable');
   const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);
   await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});
-  const name=await f.evaluate(NEWLIFE);L('life',name);await sleep(2500);await f.evaluate(CLEAR);await sleep(800);
+  const name=await require('./lib/playperf').newLife(f);L('life',name);await sleep(2500);await f.evaluate(CLEAR);await sleep(800);
   const r={acts:{},loafTop:[]};const allLoaf=[];
   /* one measured tap */
   const RS=async()=>{await PP.reset(f);await PP.reset(p.mainFrame())};const SN=async()=>{const s=await PP.snap(f),t=await PP.snap(p.mainFrame());if(t)s.loaf=s.loaf.concat(t.loaf);return s};
