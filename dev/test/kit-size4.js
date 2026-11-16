@@ -1,4 +1,4 @@
-/* kit-size4.js — kit-size #4 sheets (S = small full figure for every kind). BEFORE = the #3 S frame (what the owner circled). Derived from kit-size3.js: every frame kind at S / M / L / XL (jksize.js kszSheet3) + BEFORE (#2 sample, review/kit-size 242800da).
+/* kit-size4.js — kit-size #4 narrator sheets (palace official per topic, BAL.staff.narrator). BEFORE = the #3 S frame with the old narrator. Derived from kit-size3.js: every frame kind at S / M / L / XL (jksize.js kszSheet3) + BEFORE (#2 sample, review/kit-size 242800da).
    usage: node dev/test/kit-size3.js <url/index.html> <W>x<H> <outdir> <before jksize.js> <after jksize.js> [kinds=all]
    TAGSZ / DPR env as kit-size-ba.js (Fold: 590x820 DPR 2.4390 TAGSZ=755x1000). Writes <outdir>/k3-<tag>-<kind>-{b,a}.png and prints metrics:
    per size: frame w/h, empty px under the right column and around the left column, what the content picks, button grid, picture crop. */
@@ -21,7 +21,7 @@ async function shot(p,sel,path){await p.evaluate(()=>{const s=document.getElemen
  await p.locator(sel).first().screenshot({path});await p.setViewportSize({width:W,height:H})}
 (async()=>{const res={TAG,after:{},before_errs:null,after_errs:null};
  /* AFTER */
- {const {b,p,errs}=await boot();await p.addScriptTag({content:fs.readFileSync(AFT,'utf8')});
+ {const {b,p,errs}=await boot();await p.addScriptTag({content:fs.readFileSync(AFT,'utf8')});await p.evaluate(t=>{try{BAL.staff.narrator=eval('('+t+')')}catch(e){}},(fs.readFileSync(require('path').join(require('path').dirname(AFT),'jbal.js'),'utf8').match(/narrator:(\{[^}]*\})/)||[])[1]||'null');
   for(const k of KS.split(',')){await p.evaluate(k=>{document.querySelectorAll('.kmov,#kroul,#kroulw,#krottip').forEach(e=>e.remove());kszSheet3(k)},k);await settle(p);await p.evaluate(k=>kszSheet3(k),k);await settle(p);
    await p.evaluate(()=>document.querySelectorAll('#kszsheet .ksz3').forEach(kitFrameApply3));await p.waitForTimeout(500);
    const pick=await p.evaluate(k=>kszPick3Report(k),k);await p.evaluate(()=>document.querySelectorAll('#kszsheet .ksz3').forEach(kitFrameApply3));await p.waitForTimeout(400);

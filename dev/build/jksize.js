@@ -241,8 +241,8 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
 
 /* ================= v3 · kit-size #3 (owner 16/11 16:45Z s20, OD "(16/11 16:45Z, s20 chat)" (1)–(6)) =================
    (1) EVERY frame shows BOTH the person AND the event picture (the event picture = the real game path: the event's own picture, else
-       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own gets its NARRATOR (KIT_SIZE.v3.narrator: the player's
-       thân tín maid tells news / rules / notices; Hoàng thượng brings nights and rewards).
+       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own gets its NARRATOR (BAL.staff.narrator, owner 16/11 19:23Z: the named
+       palace official whose office covers the topic — Quản sự ma ma, Chưởng sự cô cô, Tổng quản thái giám, Kính sự phòng; jstaff).
    (2) every kind comes in S / M / L / XL and EACH SIZE HAS ITS OWN PRESENTATION (KIT_SIZE.v3.pres):
        S  = "one": ONE main picture LEFT, chosen by what the frame is about (KIT_SIZE.v3.focus):
             event-centred → the event picture LEFT (stretched to the body height), the person = small kit avatar (mdH) inside the info;
@@ -259,19 +259,17 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
 KIT_SIZE.v3={
  focus:{news:"event",rule:"event",notice:"event",night:"event",intel:"event",evidence:"event",reward:"event",week:"event",
         info:"person",result:"person",choice:"person",threat:"person",person:"person",end:"person"},
- narrator:{news:"maid",rule:"maid",notice:"maid",week:"maid",intel:"maid",evidence:"maid",threat:"maid",person:"maid",info:"maid",choice:"maid",
-        reward:"emp",night:"emp",end:"me",result:"me"},
- /* kit-size #4 (owner 16/11 19:21Z s22: "Cái này vẫn đặt được cái hình nhân vật size nhỏ, chứ không có cần thiết phải để cái hình, cái khung avatar vậy đâu."):
-    S = "figS" for EVERY kind = the SAME full figure as M/L/XL, at the small kit size (fig3.S), left; event picture top of the info; buttons under the body.
-    The old S "one" (portrait pendant / event picture left + avatar row) is no longer used by any size. */
- pres:{S:"figS",M:"fig",L:"fig",XL:"fig"},
+ /* narrator map = BAL.staff.narrator (jbal, one core; owner 16/11 19:23Z: the palace official whose office covers the topic); this is only the
+    fallback when BAL has no map */
+ narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
+ pres:{S:"one",M:"fig",L:"fig",XL:"fig"},
  /* S = small content: body up to bodyS, body + its button rows up to capS */
  bodyS:200,capS:{kv1:340,kv2:340},
  colS:104,porS:88,picMinS:139,evMin:{one:46,fig:56},
  btn:{cellS:140,cellLong:280,gap:6}};
 /* v3 figure sizes (measured BODY px, × KIT_FIG.fac) of the "fig" presentations: big enough that M holds more than S, L more than M, XL more than L */
-KIT_SIZE.fig3={S:{h:150,cw:104},M:{h:300,cw:140},L:{h:370,cw:162},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{S3:KIT_SIZE.fig3.S,M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
-Object.assign(KIT_SIZE.lay,{S:{fig:"S3"},M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
+KIT_SIZE.fig3={M:{h:300,cw:140},L:{h:370,cw:162},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
+Object.assign(KIT_SIZE.lay,{M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
 /* subject boxes of event pictures [x0,y0,x1,y1] (0..1). One registry; a picture added later gets its box here (else centred). */
 const KIT_PIC_SUBJ={"ev-hh-viec":[.42,.22,.79,.5],"ev-thinh-an":[.28,.3,.78,.97],"info-thai-hau":[.18,.08,.95,.72],"ev-news-tin-trong-cung":[0,.2,1,.9],
  "ev-tin-don":[.28,.18,.85,.68],"info-bong-loc":[.03,.38,.62,.76],"ev-mat-bao":[.28,.12,.85,.82],"info-chung-cu":[.02,.45,.8,.88],"act-cat-ban-thuong":[0,.12,.78,.72],
@@ -280,28 +278,31 @@ window.KIT_PIC_SUBJ=KIT_PIC_SUBJ;
 function kitPicSubj(src){const k=String(src||"").replace(/[?#].*$/,"").replace(/^.*\//,"").replace(/\.\w+$/,"");return KIT_PIC_SUBJ[k]||null}
 window.kitPicSubj=kitPicSubj;
 (function(){const V=KIT_SIZE.v3,Z=KIT_SIZE,css=[];
- for(const k of ["S","M","L","XL"]){const g=Z.fig[Z.lay[k].fig];css.push(`.ksz3[data-lay="${k}"]{--kszfh:${g.h}px;--kszcw:${g.cw}px}`)}
+ for(const k of ["M","L","XL"]){const g=Z.fig[Z.lay[k].fig];css.push(`.ksz3[data-lay="${k}"]{--kszfh:${g.h}px;--kszcw:${g.cw}px}`)}
  css.push(`
 .ksz3 .k3body{display:flex;gap:12px;padding:10px 12px 12px;align-items:stretch;box-sizing:border-box}
 .ksz3 .k3right{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
 .ksz3 .k3right>.kfacts,.ksz3 .k3right>.kb{flex:none}
-.ksz3[data-pres="fig"] .k3body>.kszfig,.ksz3[data-pres="figS"] .k3body>.kszfig{align-self:center}
+.ksz3[data-pres="fig"] .k3body>.kszfig{align-self:center}
 .ksz3 .k3main{flex:none;width:${V.colS}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .ksz3 .k3main>.kt3{text-align:center;width:max-content;max-width:${V.colS+24}px}
 .ksz3 .k3mpor{align-self:center}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
 .ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
 .ksz3 .k3mpic{align-self:stretch;justify-content:stretch;min-height:${V.picMinS}px}
-.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev,.ksz3[data-pres="figS"] .k3ev{min-height:${V.evMin.one}px}
+.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
 .ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
-.ksz3[data-pres="one"]>.k3btns,.ksz3[data-pres="figS"]>.k3btns{padding:0 12px 12px}
+.ksz3[data-pres="one"]>.k3btns{padding:0 12px 12px}
 .ksz3 .k3btns>.kszb{grid-column:span var(--k3s,1);width:auto;min-width:0}
 .ksz3 .kszb[data-kbs="S"] .kszr{flex-wrap:wrap;row-gap:0;white-space:nowrap}.ksz3 .kszb .kchip{white-space:nowrap}.ksz3 .k3btns .kszb[data-kbs="S"] .kszbt{min-width:6.5em}.ksz3 .k3btns>.kszb{padding:5px}.ksz3 .k3btns>.kszb>.kszbr{gap:6px}.ksz3 .k3meas{display:block}
 .ksz3 .kszfig>.kt3{max-width:calc(var(--kszcw) + 24px)}
 .ksz3.kszf{max-height:none}`);
  const st=document.createElement("style");st.id="k-size3";st.textContent=css.join("\n");document.head.appendChild(st)})();
-function kszWho3(sp){if(sp.who)return sp.who;const n=KIT_SIZE.v3.narrator[sp.kind]||"maid";try{return n==="me"?S:n==="emp"?S.emp:S.maid}catch(e){return null}}
+/* narrator (owner 16/11 19:23Z): BAL.staff.narrator (one core) → the named palace official of that office (jstaff elderBy / S.court) */
+function kszWho3(sp){if(sp.who)return sp.who;const N=(typeof BAL!=="undefined"&&BAL.staff&&BAL.staff.narrator)||KIT_SIZE.v3.narrator;const n=N[sp.kind]||"maid";
+ try{if(n==="me")return S;if(n==="emp")return S.emp;if(n==="maid")return S.maid;if(n==="tq"||n==="ksp")return S.court&&S.court[n]||S.maid;
+  if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}if(st)return st}return S.maid}catch(e){return null}}
 /* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
 function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
 function kszPic3(src,cls){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",{shape:"wide",cap:false})}</div>`}
@@ -313,21 +314,19 @@ function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p
 function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
  if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
- else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}/* "fig" (M/L/XL) and "figS" (S): the full figure left */
+ else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
  if(pres==="one"&&foc==="event"&&who&&!facts.some(f=>f&&typeof f==="object"&&f.who)&&sp.say)facts.unshift({who,text:sp.say});
- /* kit-size #4: at S the figure IS the person → a fact row spoken by that same person carries no avatar (no portrait pendant at S) */
- if(pres==="figS"&&who)facts=facts.map(f=>f&&typeof f==="object"&&f.who===who?Object.assign({},f,{who:[]}):f);
  if(facts.length)R.push(kitFacts(facts,{group:false}));if(sp.rows&&sp.rows.length)R.push(kitRows(sp.rows));
  const btns=sp.opts&&sp.opts.length?`<div class="k3btns">${sp.opts.map(kszBtn).join("")}</div>`:"";
  if(pres==="fig"&&btns)R.push(btns);
  let head=kpHeader(sp.kind,sp.title,sp.sub);if(!(sp.opts&&sp.opts.length))head=head.replace(/<\/div>$/,kitXHTML('data-kszx="1"',"Đóng")+"</div>");
- return `<div class="dlg kszf ksz3 kpanel" data-kind="${sp.kind}" data-ksz="${K}" data-pres="${pres}" data-focus="${foc}" data-lay="${K}">${head}<div class="k3body">${left}<div class="k3right">${R.join("")}</div></div>${pres!=="fig"?btns:""}</div>`}
+ return `<div class="dlg kszf ksz3 kpanel" data-kind="${sp.kind}" data-ksz="${K}" data-pres="${pres}" data-focus="${foc}" data-lay="${K}">${head}<div class="k3body">${left}<div class="k3right">${R.join("")}</div></div>${pres==="one"?btns:""}</div>`}
 /* crop every event picture around its subject; strips never shorter than the subject (returns nothing; sets min-height + object-position) */
 const KSZ_NAT={};/* natural sizes of event pictures seen, so a frame built later (picker) knows its subject's height before the picture decodes */
 function kszEvMin3(c){const im=c.querySelector("img"),src=im&&im.getAttribute("src")||"";if(im&&im.naturalWidth)KSZ_NAT[src]=[im.naturalWidth,im.naturalHeight];const n=KSZ_NAT[src];
- const pr=(c.closest(".ksz3")||{dataset:{}}).dataset.pres;const base=KIT_SIZE.v3.evMin[pr==="figS"?"one":pr]||56;const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
+ const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
  const w=c.clientWidth;return Math.max(base,Math.min(Math.ceil(w*.45),Math.ceil((sj[3]-sj[1])*n[1]*(w/n[0])*1.06)))/* never taller than a 2.2:1 strip: a tall subject is centred, not shown whole */}
 function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(c.classList.contains("k3ev"))c.style.minHeight=kszEvMin3(c)+"px";if(!im||!im.naturalWidth)return;const W=im.naturalWidth,H=im.naturalHeight;
  const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;const w=c.clientWidth;
@@ -414,7 +413,7 @@ window.kszSpecs3=kszSpecs3;
 const KSZ3_NAME={news:"TIN",rule:"LUẬT",notice:"BÁO",choice:"VIỆC",result:"KẾT QUẢ",info:"ĐIỀU",night:"ĐÊM",intel:"MẬT BÁO",evidence:"CHỨNG CỨ",reward:"BAN THƯỞNG",week:"TUẦN",threat:"CẢNH GIÁC",person:"NGƯỜI",end:"KIẾP"};
 function kszSheet3(kind){const old=document.getElementById("kszsheet");if(old)old.remove();const kk=window.kitKnown;window.kitKnown=()=>true;let X;try{X=kszSpecs3()[kind];{const host=document.createElement("div");host.style.cssText="position:absolute;left:-5000px;top:0;width:900px";document.body.appendChild(host);try{X=Object.assign({},X,kszFill3(X.XL,host))}finally{host.remove()}}}finally{}
  const V=KIT_SIZE.v3,foc=V.focus[kind];const d=document.createElement("div");d.id="kszsheet";
- let h=`<h2>${KSZ3_NAME[kind]||kind} · S / M / L / XL (${kitSzMode()==="kv2"?"iPad landscape 1180x820":"Fold portrait 755x1000"})</h2><p class="kszn">S / M / L / XL: the SAME full figure left (S = small figure, kit-size #4, no avatar frame) + event picture top-right, as wide as the info + button column; the picture grows into what the text leaves, so no frame has empty space.${(kind==="info"||kind==="choice"||kind==="news"||kind==="week")?" Thái hậu art: current files kept — Foreman C is redrawing every Thái hậu picture (slimmer robes).":""}${kind==="result"?" KẾT QUẢ frame = big / rare events only (tranh ghế, kỳ thi, mưu kế); routine actions keep today's small result toast at the bottom.":""}</p><div class="ksz3col" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">`;
+ let h=`<h2>${KSZ3_NAME[kind]||kind} · S / M / L / XL (${kitSzMode()==="kv2"?"iPad landscape 1180x820":"Fold portrait 755x1000"})</h2><p class="kszn">${foc==="event"?"Event-centred kind: S leads with the EVENT picture (person = small avatar inside the info).":"Person-centred kind: S leads with the PERSON's portrait frame (event picture = strip at the top of the info)."} M / L / XL: full figure left + event picture top-right, as wide as the info + button column; the picture grows into what the text leaves, so no frame has empty space.${(kind==="info"||kind==="choice"||kind==="news"||kind==="week")?" Thái hậu art: current files kept — Foreman C is redrawing every Thái hậu picture (slimmer robes).":""}${kind==="result"?" KẾT QUẢ frame = big / rare events only (tranh ghế, kỳ thi, mưu kế); routine actions keep today's small result toast at the bottom.":""}</p><div class="ksz3col" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">`;
  try{for(const K of ["S","M","L","XL"])h+=`<div data-k3="${K}"><div class="kszlab">${K}</div>${kszFrame3(X[K],K)}<div class="kszn k3pick"></div></div>`}finally{window.kitKnown=kk}
  window.__ksz3X=X;h+=`</div>`;d.innerHTML=h.replace(/ loading="lazy"/g,"");document.body.appendChild(d);
  const fit=()=>d.querySelectorAll(".ksz3").forEach(kitFrameApply3);fit();d.querySelectorAll("img").forEach(i=>i.complete||i.addEventListener("load",fit,{once:true}));return d}
