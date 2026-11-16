@@ -8,7 +8,9 @@
 const COLL_KEY="cung-colms";
 function colLedger(){let d=null;try{d=store.get(COLL_KEY)}catch(e){}if(!d||typeof d!=="object")d={best:0,ms:{},lives:{}};d.ms=d.ms||{};d.lives=d.lives||{};return d}
 function colLedgerSave(d){try{const k=Object.keys(d.lives);if(k.length>BAL.col.keep)k.slice(0,k.length-BAL.col.keep).forEach(x=>delete d.lives[x]);store.set(COLL_KEY,d)}catch(e){}}
-function colId(){return S&&S.origin?`${S.name}|${S.origin.k}`:""}
+/* unique life id stamped when the life starts (a same-name same-origin new life must not inherit the old life's once-only grants); old saves without it fall back to name|origin */
+function colId(){return S&&S.origin?(S.colLid||`${S.name}|${S.origin.k}`):""}
+if(typeof start==="function")(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&!S.colLid)S.colLid="L"+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}catch(e){}return r}})();
 function colHeld(){const out={};try{const w=wdOf(S);for(const sl of ["tram","y"])if(w&&w[sl]&&w[sl].k)out[w[sl].k]=1}catch(e){}
  (S.inv||[]).forEach(e=>{if(e&&e.k&&!e.h&&typeof IT!=="undefined"&&IT[e.k])out[e.k]=1});return out}
 function colN(){return S&&S.col?Object.keys(S.col).length:0}

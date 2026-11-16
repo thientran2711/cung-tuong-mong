@@ -17,3 +17,6 @@ Branch review/collect-ms (from origin/main 9b4f1697aa). Status: ready for review
 ## Notes / open
 - "Item" = any distinct kind in IT held in chest or worn (incl. consumables). If the owner wants only wardrobe/ornaments, change `colHeld()`.
 - Numbers lived in jbal2 only. No KIT REQUEST.
+
+## Reviewer r1
+Spec reading (OD L45-46): items counted PER LIFE, items do not carry over; titles are recorded in Sổ luân hồi (persist); Phúc duyên once per life, lost if kiếp dở dang. Build matches. Fix: ledger key was name|origin (a new life with the same random name + origin would inherit the old grants) -> unique S.colLid stamped in start() (old saves fall back to name|origin). Merged origin/main, jcol.js re-inserted after jearn in assemble.py, site rebuilt.
