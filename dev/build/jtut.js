@@ -400,6 +400,8 @@ function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- const c=document.querySelector('#modal.kpthome [data-tgo="cont"]');T.replay=true;try{if(S)S.tutOld=0}catch(x){}
- if(c)c.click();else{/* from Thiết lập in play: close the panel, the tour starts when the screen is free */const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()}},true);
+ T.replay=true;try{if(S)S.tutOld=0}catch(x){}
+ /* the shared ☰ "back to the game" path (j74 kitMenuResume) from the home page and from Thiết lập alike; the tour starts when the screen is free */
+ if(typeof kitMenuResume==="function"&&kitMenuResume())return;
+ const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()},true);
 }catch(e){console.error(e)}})();

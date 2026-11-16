@@ -120,8 +120,11 @@ function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg
  if(pg==="home")homeOpen();else subOpen(pg);
  const M=$("modal");if(M)M.scrollTop=0;
  if(focus!==false){const f=pg==="home"?document.querySelector("#modal.kptitle .kpmenu .kbtn"):document.querySelector("#modal.kptitle #mr .kbtn");if(f)f.focus({preventScroll:true})}}
+/* ONE close-then-open path for every ☰ entry that goes back to the game (Tiếp tục, Xem lại lời dặn on the home page AND inside Thiết lập): close the menu cards, load the sổ, nothing of the menu is left behind. window.kitMenuResume() */
+function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(!lb)return false;PG="home";dropAll();lb.click();return true}
+window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- if(g==="cont"){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(lb){PG="home";dropAll();lb.click()}return}
+ if(g==="cont"){resumeGame();return}
  go(g)},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="home"){e.preventDefault();go("home")}});
 /* re-renderers of the borrowed parts: give the parts back first, re-mount after */
