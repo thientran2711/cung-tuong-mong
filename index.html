@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"caa73a87+","t":"2026-11-16T20:02Z","c":"Merge origin/main 23595c37 into review/people-ledger-r1 (regenerated build files)","b":"28b9320d879f","h":[{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."}]};
+window.CTM_BI={"s":"9ac87b84+","t":"2026-11-16T20:10Z","c":"npc-mind: report — balance runs (BASE vs NEW n=28 each), card test results at 6 viewports","b":"6b4034faa922","h":[{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1100,7 +1100,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   if(!sameHouse(S,v)){A.push({n:"Tặng quà",o:100,x:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}});
    A.push({n:"Khiêu khích",o:100,w:{danh:1},x:"nàng quý ngươi -15, oán ngươi +9, ghen +10",go:()=>{relAdd(S,v,-15);v.ghen=cl(v.ghen+10,0,100)}});
    if(v.pg>=50)A.push({n:"Trút giận",o:100,w:{duc:-3},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-20)}});
-   A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(40+S.mat*6),x:"chứng cứ +1",run:()=>overhear(S.place)})}
+   A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat),x:"chứng cứ +1",run:()=>overhear(S.place)})}
   return A}
  if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:cl(oPlant(S,v)+15,5,95),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
   {n:"Lục rương tìm chứng cứ",o:od(45+S.mat*5),act:1,x:"chứng cứ +1 nếu nàng có làm điều sai · lộ: bị phạt",run:()=>{if(roll(od(45+S.mat*5))){return evA(S,v,1)?`Lục được thư từ của ${v.name}: chứng cứ +1.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-15);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
@@ -2242,7 +2242,7 @@ function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught
  ap(a,{danh:-8});relAdd(a,t,-25);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
 function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,-6);return r}
  relAdd(a,t,-12);evA(t,a,1);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
-function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(40+S.mat*6))){return evA(S,v,1)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat))){return evA(S,v,1)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
@@ -3257,7 +3257,10 @@ function menInit(){if(!S||S.men)return;const sur=["Tiêu","Lục","Hàn","Thẩm
 function manById(id){return (S.men||[]).find(m=>m.id===id&&m.alive)||null}
 function pMan(m){faceFor(m,m.rw==="vương gia"?"royal":"man",m.age);const fb=(AV.emperor||[]).filter((x,i)=>i!==S.emp.face)[Number(m.id.slice(1))%3]||"";return{rk:"off",rw:m.role,src:fsrc(m.fc,fb),hue:0,ini:m.name.split(" ").pop()[0],col:"#6a8aa0"}}
 /* where the men are this buổi (silhouettes on the map, revealed on arrival) */
-(function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{menInit();S.menW={};for(const m of S.men){if(!m.alive)continue;if(roll(55))S.menW[m.id]=pick(m.haunts)}}catch(e){}}})();
+/* where the men are: jmen (loaded later) decides every buổi with a reason (owner 11/15 "no dice for men in the hậu cung", OD:L1386). This old
+   flat roll(55) haunt is only the fallback when jmen is absent: while jmen's schedule runs it never rolls (npc-agent AG1: a placeWhere path
+   where jmen's menPlace failed kept this dice, e.g. a guard in the garden while S.menWhy said duty at Kính sự phòng) */
+(function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{menInit();if(typeof menSchedRoad==="function"&&menSchedRoad()){S.menW={};return}S.menW={};for(const m of S.men){if(!m.alive)continue;if(roll(55))S.menW[m.id]=pick(m.haunts)}}catch(e){}}})();
 (function(){const c0=countAt;countAt=function(k){let n=c0(k);try{for(const id in (S.menW||{}))if(S.menW[id]===k&&manById(id))n++}catch(e){}return n}})();
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k&&S.visit){for(const id in (S.menW||{})){const m=manById(id);if(m&&S.menW[id]===k){S.visit.people.push({kind:"man",ref:m,name:m.name.split(" ").slice(0,1).concat(m.name.split(" ").slice(-1)).join(" "),ini:m.name.split(" ").pop()[0],col:"#6a8aa0",info:`${m.role} · ${m.trait}`});m.seen=bkey()}}if(S.visit.people.length&&/Không gặp ai/.test(S.visit.msg||""))S.visit.msg=`Ở đây có ${S.visit.people.length} người.`;renderStage()}}catch(e){}return r}})();
 (function(){const f0=pFaceOf;pFaceOf=function(p){if(p&&p.kind==="man"&&p.ref)return pMan(p.ref);return f0(p)}})();
@@ -10633,21 +10636,26 @@ const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="
 /* (c) the same weekly decay for everyone (her rule from endTurn: -1, none for Hoàng hậu after the first tuần, none in tuần 2 if he is lạnh lùng) */
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
 const EFF={"Tham vọng":.35,"Ghen tuông":.25,"Kiêu ngạo":.25,"Hiền lành":.1,"Nhu mì":.1};
-function npcEffort(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(Math.random()>pt*FAIRN.eff)return "";
+/* the act she would do now (her best art, else a small gift) — read by the weekly pass below and by the NPC agent loop (jagent, AG1) */
+function npcEffortKind(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return null;
  const A=v.arts||{};let n,c,o,w,lose=2;
  let kd="";if((A.vu||0)>=3&&v.suc>=40){kd="vu";n="múa Kinh hồng vũ trong yến tiệc";c={suc:-20};o=odA(v,40+A.vu*8+effSac(v)/5+mm());w={sung:15,danh:3}}
- else if((A.cam||0)>=3&&v.suc>=30){n="đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện";c={suc:-10};o=odA(v,40+A.cam*8+(v.tai||0)/5+mm());w={sung:12}}
- else if((A.ky||0)>=3&&v.suc>=25){n="đánh cờ cùng Hoàng thượng";c={suc:-5};o=odA(v,45+A.ky*8+mm());w={sung:5,danh:BAL.tw.g.ky[0],tamco:BAL.tw.g.ky[1]};lose=1}
- else if((v.bac||0)>=10){n=pick(QF);c={bac:-10};o=odA(v,55+v.sung/5+mm());w={sung:3};lose=0}
- else return "";
+ else if((A.cam||0)>=3&&v.suc>=30){kd="cam";n="đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện";c={suc:-10};o=odA(v,40+A.cam*8+(v.tai||0)/5+mm());w={sung:12}}
+ else if((A.ky||0)>=3&&v.suc>=25){kd="ky";n="đánh cờ cùng Hoàng thượng";c={suc:-5};o=odA(v,45+A.ky*8+mm());w={sung:5,danh:BAL.tw.g.ky[0],tamco:BAL.tw.g.ky[1]};lose=1}
+ else if((v.bac||0)>=10){kd="qf";n=pick(QF);c={bac:-10};o=odA(v,55+v.sung/5+mm());w={sung:3};lose=0}
+ else return null;
+ return {kd,n,c,o,w,lose}}
+/* force = the agent loop chose it (no weekly trait frequency) */
+function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(!force&&Math.random()>pt*FAIRN.eff)return "";
+ const {kd,n,c,o,w,lose}=K;
  ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:kd==="vu"?{danh:-BAL.tw.g.vu[2]}:{sung:-lose});
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
  if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+BAL.tw.g.vu[0],0,100);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
  return roll(20+S.mat*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
-window.npcEffort=npcEffort;
+window.npcEffort=npcEffort;window.npcEffortKind=npcEffortKind;
 const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";try{if(S.dead)return ev;
- for(const v of liveRivals(true)){if(!v.alive||v.out)continue;ev+=npcEffort(v);const keep=(has("lanhlung")&&S.tuan===1)||(rkOf(v)>=7&&S.tuan!==0);if(!keep)v.sung=cl(v.sung-1,0,100)}
+ for(const v of liveRivals(true)){if(!v.alive||v.out)continue;ev+=window.npcEffort(v);/* the global one: jagent mutes this weekly dice while the agent loop owns the deed */const keep=(has("lanhlung")&&S.tuan===1)||(rkOf(v)>=7&&S.tuan!==0);if(!keep)v.sung=cl(v.sung-1,0,100)}
  ev+=monopoly()}catch(e){console.error(e)}return ev};
 /* (e) độc sủng and the world's answer */
 function nightsIn(p,n){const w0=wk();return (p.nightLog||[]).filter(w=>w0-w>=0&&w0-w<n).length}
@@ -17786,6 +17794,42 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+
+/* NPC AGENT LOOP (jagent, Foreman C AG1 + AG1b; owner OD:L1386 "every NPC plays the game like a player"; design dev/handover/reports/npc-agent.md §3).
+   ONE CORE: every number of jagent.js. The deeds' own costs / odds / gains stay in BAL.tw (jtwoway) and j75 (npcEffortKind); here only the
+   agent's WHEN and WHY: what each person needs, how much a deed is worth to her, and what she may do when she sees someone act.
+   on      1 = the loop runs (host only); 0 = the old drips run as before (measuring switch; window.__agOff=1 does the same for one page)
+   own     the deeds whose WHEN belongs to the loop: the weekly / monthly dice that used to fire them (npcMonthly, the SOC menu, npcEffort)
+           are muted for NPC doers while the loop is on (one path per deed). Her own use of the same deeds is unchanged.
+   routine weight of keeping her schedule this buổi (the j95 activity), × (1 + restW × need rest); needW = weight of each need against it
+           (step 1 of her choice: WHAT she wants this buổi; step 2: which deed serves it, by utility)
+   unit    gain points that close one whole need; goal = the level each need aims at (gap = (goal − now) / goal, 0..1)
+           friend = thiện cảm that counts as a friend for the 'ally' need; kidAge = she still hopes for a child below this age
+   road    need weights per origin road (8 noble origins of j1 ORIGINS; "_" = no road yet). Origin = v.nr.o (npc-roads, Foreman D) when
+           present, else v.ag.o seeded once from her house by `org` (same rule as BAL.nroad.org; that table wins when it is loaded)
+   uniq    origins one father holds alone (the player's own father): no NPC takes them
+   val     how much an indirect effect is worth to the doer, in gain points (her belief, not an outcome): tablet = a bribed tablet (Sủng),
+           kid = a prayer for a child (kid need), check = searching gifts (safety), drop = dropping a fallen friend (safety)
+   costW   how much a cost weighs against what she holds (bạc / Sức)
+   kh      khắc a deed takes (the player's talk / deck act: 1)
+   wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
+           caught = thiện cảm lost toward the listener when a listener is caught; w = NPC reaction weights {hear, join, ignore}
+   perf    p95 budget in ms per buổi tick (Fold 755x1000), n = how many ticks the counter keeps */
+Object.assign(BAL,{ag:{on:1,
+ own:["thTH","thHH","pray","ksp","fakeIll","fakePreg","announce","flaunt","check","help","apol","visit","mediate","follow","provoke","humil","warn","test","drop","gossip","effort"],
+ routine:24,restW:1.5,needW:2,unit:10,
+ goal:{sung:60,th:50,hh:40,danh:50,duc:40,rest:45,friend:30,ally:2,kidAge:38},
+ road:{_:{sung:1,th:.6,hh:.5,danh:.6,duc:.4,kid:.8,ally:.6,spite:.5,safe:.6},
+  tt:{sung:1,th:.5,hh:.3,danh:1.2,duc:.4,kid:1,ally:.7,spite:.8,safe:.6},dtq:{sung:1,th:.4,hh:.4,danh:1,duc:.3,kid:.9,ally:.5,spite:.7,safe:.5},
+  muoi:{sung:1.1,th:.6,hh:.6,danh:.8,duc:.3,kid:.8,ally:1,spite:.4,safe:.6},cn:{sung:1.3,th:.6,hh:.6,danh:.5,duc:.4,kid:1,ally:.9,spite:.4,safe:.7},
+  nc:{sung:1,th:1,hh:.5,danh:.8,duc:.4,kid:.8,ally:.7,spite:.5,safe:.8},td:{sung:.9,th:.4,hh:.4,danh:.6,duc:.2,kid:.6,ally:.6,spite:1.3,safe:.8},
+  ch:{sung:.9,th:1.3,hh:.4,danh:.8,duc:.6,kid:.9,ally:.6,spite:.5,safe:.5},thd:{sung:.9,th:.6,hh:.6,danh:1.1,duc:.8,kid:.8,ally:.6,spite:.3,safe:.6}},
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ uniq:["tt","dtq"],
+ val:{tablet:6,kid:10,check:4,drop:3},
+ costW:1,kh:1,
+ wit:{hear:40,mat:6,caught:5,w:{hear:1,join:1,ignore:3}},
+ perf:{p95:8,n:200}}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -44239,6 +44283,205 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
+/* ================= jagent: NPC AGENT LOOP — every NPC plays the game like a player (AG1 + AG1b) =================
+   Owner OD:L1386 (16/11 17:50Z): every NPC is an agent playing the game like a player: same actions, same rules, same odds, choices driven
+   by its own needs, personality and road; no special bars, gates or flat random rolls for NPC outcomes. Design: dev/handover/reports/npc-agent.md
+   §3.1 (loop), §3.5 (witness), §4 (perf). Numbers: BAL.ag (jbal2.js); the deeds' costs/odds/gains: BAL.tw (jtwoway) and j75 npcEffortKind.
+   ONE LOOP, once per buổi, HOST ONLY (a co-op guest never runs it: the world is the host's, like rivalsTurn / mlGuest):
+   - agents = everyone in the palace record (consorts, maids, eunuchs, elders, the Emperor, Thái hậu). AG1 scores CONSORTS; the others keep
+     their j95 schedule as their buổi ("routine", one option, no scoring: npc-agent §4 shortcut) until AG2 (Emperor) / AG3 (maids) add theirs.
+   - a consort's options = the deeds she could tap if she were the player: the shared deed table TW (jtwoway: Thỉnh an Thái hậu / Hoàng hậu,
+     cầu tự, đút lót Kính sự phòng, giả bệnh, giả mang thai, báo tin có thai, khoe quà, soát quà, and the social deeds of the SOC menu with
+     their target), her Sủng deck act (j75 npcEffortKind: múa / đàn / cờ / a small gift) and "keep her schedule". Each pays the player's cost
+     (Sức / bạc / Danh / Đức via twPay / ap) and rolls the player's odds (odA). The gates are the existing ones: the deed's req + cost
+     (twCanPay), SOC's ok (danger band), the motive gate motiveOK (j95), the place's access rule (j95acc), confinement.
+   - needs come from stats she already has (no new bar): Sủng, Thái hậu / Hoàng hậu regard, Danh, Đức, a child, friends, spite (hostility),
+     safety (danger bands), rest (Sức). Each need = the gap to what her ROAD wants (BAL.ag.goal × BAL.ag.road[origin]).
+   - utility = Σ need × gain × odds − certain costs, × mindW(person, tag) (jmind: abilities, strength, virtues); the pick is mindPick
+     (weighted, with jmind's human slip, OD:L1248: never the AI-best option).
+   - every act carries a WHY (her top need + her road) into the people ledger (S.roster.acts, j95actLog shape) and S.ag.log.
+   AG1b WITNESS: the chosen deed is written into the ledger at its PLACE and KHẮC before its effect lands (S.ag.pend). When she stands
+   there at that khắc, a kit event card shows the real scene with reactions at real odds (Nghe lén = the player's Nghe lén câu chuyện odds,
+   Tham gia = the same deed for her with her cost and odds, Bỏ đi, Mặc kệ); otherwise it lands when the khắc passes. Two-way: when SHE does a
+   shared deed, the consorts the ledger has at her place that khắc witness it and react by the same choice (hear / join / ignore).
+   Perf: window.__agMs (last tick), __agN (agents), agPerf() → p95 over the last BAL.ag.perf.n ticks; budget BAL.ag.perf.p95 ms.
+   Off switch for measuring: BAL.ag.on=0 or window.__agOff=1 (old drips). Loaded last (after j95/j95b/j95c, jtwoway, jmind, j75, jcoopworld).
+   ===================================================================================================================== */
+const AG={inTick:0,errs:[],ms:[],tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
+function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
+function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
+function agOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff&&!agGuest())}catch(e){return false}}
+function agOwn(k){return !!(BAL.ag&&BAL.ag.own.includes(k))}
+function agZ(){const z=S.ag=S.ag||{};z.pend=z.pend||[];z.log=z.log||[];return z}
+function agKey(){return wk()+"-"+(S.buoi||0)}
+function agRec(){try{return j95on()&&S.roster&&S.roster.key===j95key()?S.roster:null}catch(e){return null}}
+function agKh(){try{return j95kh()}catch(e){return 0}}
+function agPw(L){const s=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*s;for(const x of L){r-=x[1];if(r<=0)return x[0]}return L[L.length-1][0]}
+
+/* ---------------- ROAD: the origin road of an NPC woman (data, not a bar) ---------------- */
+function agOrg(v){try{if(v.nr&&v.nr.o)return v.nr.o;if(v.ag&&v.ag.o)return v.ag.o;const T=(BAL.nroad&&BAL.nroad.org)||BAL.ag.org;let c="";try{c=clanOf(v)}catch(e){}
+  const mine=S.origin&&S.origin.k;let L=(T[c]||T[""]).filter(x=>!(x[0]===mine&&BAL.ag.uniq.includes(x[0])));if(!L.length)L=T[""];
+  const o=agPw(L);v.ag=v.ag||{};v.ag.o=o;return o}catch(e){return"_"}}
+function agOrgName(o){try{const x=ORIGINS.find(z=>z.k===o);return x?x.n.toLowerCase():""}catch(e){return""}}
+
+/* ---------------- NEEDS (from stats she already has) ---------------- */
+function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;const gap=(g,x)=>cl((g-(x||0))/g,0,1);
+ const O=others(v).filter(x=>x&&x!==v);let fr=0,sp=0,sf=0;
+ for(const x of O){if(aff(v,x)>=G.friend)fr++;sp=Math.max(sp,hostility(v,x))}
+ for(const x of liveRivals(true))if(x!==v)sf=Math.max(sf,bandOf(danger(x,v)));
+ let q=null;try{q=queenP()}catch(e){}
+ return{sung:gap(G.sung,v.sung)*W.sung,th:S.thDead?0:gap(G.th,v.th)*W.th,hh:q&&q!==v&&!v.queen?gap(G.hh,v.hh)*W.hh:0,danh:gap(G.danh,v.danh)*W.danh,duc:gap(G.duc,v.duc)*W.duc,
+  kid:!sonsOf(v).length&&!v.preg&&(v.age||20)<G.kidAge?W.kid:0,ally:gap(G.ally,fr)*W.ally,spite:cl(sp/100,0,1)*W.spite,safe:cl(sf/Math.max(1,BANDS.length-1),0,1)*W.safe,
+  rest:gap(G.rest,v.suc)}}
+/* she weighs her needs once a day (tuần) and again after she acted (perf §4: "cache needs per agent") */
+function agNeedsC(v){const C=AG.nc=AG.nc||{};const w=wk();const c=C[v.id];const na=(AG.na||{})[v.id]||0;if(c&&c.w===w&&c.n===na)return c.N;const N=agNeeds(v);C[v.id]={w,n:na,N};return N}
+const AGNEED=["sung","th","hh","danh","duc","kid","ally","spite","safe"];
+const AGWHY={sung:"muốn được Hoàng thượng để ý hơn",th:"muốn được Thái hậu đoái hoài",hh:"giữ lễ với Hoàng hậu",danh:"muốn có tiếng trong cung",duc:"muốn giữ tiếng hiền đức",
+ kid:"mong có con",ally:"muốn có thêm người thân cận",spite:"mang lòng ghét",safe:"lo bị kẻ khác hại",rest:"mệt mỏi, muốn nghỉ"};
+
+/* ---------------- OPTIONS: the deeds she could tap if she were the player ---------------- */
+/* place of a person at khắc kh: the ledger when there is one, else her home */
+function agAt(p,kh){const R=agRec();const id=p===S?"me":ledgerId(p);if(R&&id&&R.P[id]&&R.P[id][kh])return R.P[id][kh][0];if(p===S)return"home";if(S.emp&&p===S.emp)return"dtd";if(p==="th")return"tn";return p.out?"lc":palaceOf(p)}
+function agEmpAt(kh){const R=agRec();return R&&R.P.emp?R.P.emp[kh][0]:"dtd"}
+function agThAt(kh){const R=agRec();return R&&R.P.th?R.P.th[kh][0]:"tn"}
+/* the deeds of TW she does for herself (target fixed by the deed) */
+const AGSELF={
+ thTH:{tag:"greet",at:kh=>{const k=agThAt(kh);return k==="tn"?k:null},/* one greets Thái hậu at her palace, while she receives there */t:()=>null,g:v=>{const g=BAL.tw.g.thTH;return{g:{th:g[0],danh:g[1],duc:g[2]},l:{th:-g[3]}}},act:"thỉnh an, hầu Thái hậu"},
+ thHH:{tag:"greet",at:(kh,v,t)=>{if(t===S)return"home";const k=agAt(t,kh);return k===palaceOf(t)?k:null},/* at Hoàng hậu's palace, while she is in */t:()=>{try{return queenP()}catch(e){return null}},g:v=>{const g=BAL.tw.g.thHH;return{g:{hh:g[0],danh:g[1],duc:g[2]},l:{hh:-g[3]}}},act:"sang thỉnh an Hoàng hậu"},
+ pray:{tag:"greet",at:()=>"tn",t:()=>null,g:()=>({g:{kid:BAL.ag.val.kid},l:{}}),act:"thắp hương cầu tự"},
+ ksp:{tag:"bribe",at:()=>"ksp",t:()=>null,g:()=>({g:{sung:BAL.ag.val.tablet},l:{}}),act:"đút lót Kính sự phòng"},
+ fakeIll:{tag:"scheme",at:(kh,v)=>palaceOf(v),t:()=>null,g:()=>({g:{sung:BAL.tw.g.ill},l:{}}),act:"cáo bệnh"},
+ fakePreg:{tag:"scheme",at:(kh,v)=>palaceOf(v),t:()=>null,g:()=>{const g=BAL.tw.g.preg;return{g:{sung:g[0],th:g[1]},l:{danh:-g[2]}}},act:"báo tin giả có thai"},
+ announce:{tag:"social",at:(kh,v)=>palaceOf(v),t:()=>null,g:()=>{const g=BAL.tw.g.ann;return{g:{sung:g[0],th:g[1]},l:{}}},act:"báo tin có thai"},
+ flaunt:{tag:"social",at:()=>"vuon",t:()=>null,g:()=>({g:{spite:BAL.tw.g.flaunt},l:{}}),act:"khoe quà ngự ban"},
+ check:{tag:"spy",at:(kh,v)=>palaceOf(v),t:()=>null,g:()=>({g:{safe:BAL.ag.val.check},l:{}}),act:"cho soát quà được tặng"}};
+/* the social deeds of the SOC menu (j28, mapped to TW by jtwoway): target = a person; friendly / hostile decides the motive kind */
+const AGSOC={help:["help","help","ally",g=>({ally:g.help})],apologise:["apol","help","safe",g=>({safe:g.apol})],visit:["visit","help","ally",g=>({ally:g.visit[0]})],
+ mediate:["mediate","help","ally",g=>({ally:g.mediate})],follow:["follow","social","ally",g=>({ally:g.follow})],warn:["warn","help","ally",g=>({ally:g.warn})],
+ test:["test","social","safe",g=>({safe:g.test[0]})],provoke:["provoke","harm","spite",g=>({spite:-g.provoke[1],danh:g.provoke[0]})],humiliate:["humil","harm","spite",g=>({spite:g.humil[0]})],
+ drop:["drop","social","safe",()=>({safe:BAL.ag.val.drop})],gossip:["gossip","scheme","spite",g=>({spite:g.gossip})]};
+const AGACTW={help:"sang giúp",apol:"sang tạ lỗi",visit:"sang thăm",mediate:"đứng ra hòa giải",follow:"đến nương theo",warn:"lén báo tin",test:"thử lòng",provoke:"tìm đến khiêu khích",humil:"hạ nhục",drop:"lạnh nhạt",gossip:"rỉ tai chuyện"};
+const AGHOST=new Set(["provoke","humil","drop","gossip"]);
+function agCostF(v,c){const W=BAL.ag.costW;let f=1;if(c&&c.bac<0)f*=1-Math.min(.9,-c.bac/Math.max(1,v.bac||0))*W;if(c&&c.suc<0)f*=1-Math.min(.9,-c.suc/Math.max(1,v.suc||0))*W;return Math.max(.05,f)}
+function agU(v,N,o,gl,c,tag){const u=BAL.ag.unit;let s=0;for(const n in gl.g)s+=(N[n]||0)*gl.g[n]/u*(o/100);for(const n in gl.l||{})s-=(N[n]||0)*gl.l[n]/u*(1-o/100);
+ for(const n of ["danh","duc","th","hh"])if(c&&c[n]<0)s-=(N[n]||0)*(-c[n])/u;if(s<=0)return 0;return s*agCostF(v,c)*agMW(v,tag)}
+/* mindW once per person and tag in a tick */
+function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag;if(C[k]==null){let m=1;try{m=typeof mindW==="function"?mindW(v,tag):1}catch(e){}C[k]=m}return C[k]}
+/* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
+function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<4;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
+  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;L.push([kh,k])}
+ return L.length?L[Math.floor(Math.random()*L.length)]:null}
+function agOpts(v,N,need){const O=[];
+ for(const k in AGSELF){const D=TW[k],A=AGSELF[k];if(!D)continue;if(need&&A.g(v).g[need]==null)continue;const t=A.t(v);if(D.req&&!D.req(v,t))continue;if(!twCanPay(v,k))continue;if(k==="thHH"&&!t)continue;
+  const o=D.o?D.o(v,t):100;const u=agU(v,N,o,A.g(v),twCost(k),A.tag);if(u<=0)continue;O.push({k,t,u,tag:A.tag,at:A.at,act:A.act})}
+ let T=null;
+ for(const s in AGSOC){const so=SOC[s];if(!so)continue;const [k,tag,nd,gf]=AGSOC[s];if(need&&gf(BAL.tw.g)[need]==null)continue;if(!TW[k]||!N[nd]||!twCanPay(v,k))continue;const host=AGHOST.has(k);
+  /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
+  if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
+  T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S));
+  const C=T.filter(x=>{try{return so.ok(v,x)}catch(e){return false}});if(!C.length)continue;
+  const t=mindPickBy(C,x=>host?1+hostility(v,x):1+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
+  const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
+  const N2=Object.assign({},N);if(host)N2.spite=cl(hostility(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
+  const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{}},twCost(k),tag);if(u<=0)continue;
+  O.push({k,t:k==="follow"?twFollowT(v):t,u,tag,at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh),act:AGACTW[k]||k,mot:g.why})}
+ /* her Sủng deck act (the player's dance / zither / chess / small gift cards) */
+ if(!need||need==="sung"||need==="danh")try{const K=window.npcEffortKind&&window.npcEffortKind(v);if(K){const gl={g:K.w,l:K.kd==="vu"?{danh:BAL.tw.g.vu[2]}:{sung:K.lose}};const tag=K.kd==="qf"?"greet":"art";const u=agU(v,N,K.o,gl,K.c,tag);
+  if(u>0)O.push({k:"effort",kd:K.kd,t:null,u,tag,act:K.n,at:kh=>K.kd==="cam"?palaceOf(v):K.kd==="qf"?(/ngự hoa viên/.test(K.n)?"vuon":"dtd"):agEmpAt(kh)})}}catch(e){agErr("effort",e)}
+ return O}
+
+/* ---------------- THE TICK (one per buổi, host only) ---------------- */
+function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===key)return;const t0=performance.now();z.key=key;AG.stat.tick++;AG.mwc={};
+ /* acts of a buổi already over land first */
+ const tl=performance.now();for(const p of z.pend.slice())if(p.key!==key)agLand(p);AG.tm.land+=performance.now()-tl;
+ const R=agRec();let n=0,acts=0;AG.now=0;
+ try{n=R?Object.keys(R.P).length:liveRivals(true).length+2;
+  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(e){agErr("needs",e);continue}AG.tm.needs+=performance.now()-tn0;
+   /* first WHAT she wants this buổi (one of her needs, or keeping her schedule), then HOW (the deeds that serve it) — a person, not a solver */
+   const rt=BAL.ag.routine*(1+BAL.ag.restW*N.rest);const NL=[[null,rt]];for(const n of AGNEED)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);
+   const need=mindPick(NL,v);if(!need)continue;
+   const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)continue;
+   const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)continue;c.need=need;
+   const sl=agSlot(v,c.at,c.t);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);acts++}}
+ catch(e){agErr("tick",e)}
+ if(!R){for(const p of z.pend.slice())if(p.key===key)agLand(p)}/* no ledger (co-op host, record off): the act lands at once */
+ else if(AG.now){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}/* the views of the khắc now change only when an act starts now */
+ const ms=performance.now()-t0;if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:Object.assign({},AG.tm),tick:AG.stat.tick};window.__agMs=ms;window.__agN=n;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts}
+function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95}}
+window.agPerf=agPerf;
+function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?{sung:1}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
+ for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
+ if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w} · ${o}`:w}
+function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(v,c,N);const tid=c.t?ledgerId(c.t):null;
+ const p={key:agKey(),id,vid:v.id,k:c.k,kd:c.kd||"",t:tid,kh,pl:k,act:c.act,why};z.pend.push(p);
+ if(R&&R.P[id]){R.P[id][kh]=[k,"ag_"+c.k,tid,why];if(kh===agKh())AG.now=1}
+ AG.stat.by[c.k]=(AG.stat.by[c.k]||0)+1;
+ const L={w:wk(),b:S.buoi||0,kh,id,k:c.k,t:tid,pl:k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
+ try{if(R){const A=R.acts=R.acts||[];A.push({id,kh,k:"ag:"+c.k,t:tid,why,ok:1,ag:1});if(A.length>60)A.shift()}}catch(e){}}
+/* a second plan of the same buổi (j95 re-plans on every placeWhere) keeps the acts already decided at their place/khắc */
+function agReapply(){const R=agRec();if(!R||!S.ag)return;let ch=0;for(const p of S.ag.pend){if(p.key!==R.key||!R.P[p.id])continue;const e=R.P[p.id][p.kh];if(e&&e[1]==="ag_"+p.k&&e[0]===p.pl)continue;
+  if(e&&(e[1]==="tryst"||e[1]==="meet"))continue;R.P[p.id][p.kh]=[p.pl,"ag_"+p.k,p.t,p.why];ch=1}if(ch)try{j95sync()}catch(e){}}
+function agPerson(id){if(!id)return null;if(id==="me")return S;if(id[0]==="v")return RV(+id.slice(1));return null}
+/* the deed happens (its own function: cost, odds, effect) */
+function agLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);const v=RV(p.vid);if(!v||!v.alive||v.out||S.dead){AG.stat.drop++;return""}
+ if(v.confined&&p.pl!==palaceOf(v)){AG.stat.drop++;return""}
+ const t=agPerson(p.t);let r="";AG.inTick++;
+ try{if(p.k==="effort")r=window.npcEffort(v,true)||"";else{const tt=p.k==="thHH"?queenP():p.k==="follow"?twFollowT(v):t;r=twDo(v,tt,p.k)||""}}catch(e){agErr("land",e)}finally{AG.inTick--}
+ AG.stat.land++;AG.na=AG.na||{};AG.na[v.id]=(AG.na[v.id]||0)+1;
+ try{if(r&&!seen){const me=t===S;if(p.k==="effort")newsAdd(v,"ag",r,true);else newsAdd(v,p.k,r,me);if(me)log(`${r}.`)}}catch(e){}
+ return r}
+
+/* ---------------- AG1b: SHE WITNESSES THE REAL ACT ---------------- */
+function agHereKh(){try{const R=agRec();if(!R)return null;const kh=agKh();return{R,kh,k:R.P.me?R.P.me[kh][0]:j95mePlace()}}catch(e){return null}}
+function agWatch(){if(!agOn()||S.out||(typeof isSrv==="function"&&isSrv()))return;const H=agHereKh();if(!H)return;const z=agZ();let n=0;
+ for(const p of z.pend.slice()){if(p.key!==H.R.key)continue;if(p.kh<H.kh){agLand(p);continue}
+  if(p.kh!==H.kh||p.pl!==H.k||p.seen)continue;const v=RV(p.vid);if(!v||!v.alive)continue;if(H.k==="home"&&sameHouse(S,v)&&p.t!=="me"){continue}
+  p.seen=1;AG.stat.wit++;n++;agScene(p,v)}
+ if(n)try{showModal()}catch(e){}}
+function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
+function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
+ if(t===S){const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
+ const tn=t?` ${t.name}`:"";Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)})}
+function agHearO(){return od(BAL.ag.wit.hear+(S.mat||0)*BAL.ag.wit.mat)}
+function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();
+ O.push({n:"Nghe lén",fx:{},x:`${word(o)} · tốn: 1 khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?" · chứng cứ về nàng +1":""} · hỏng: nàng bắt gặp, thiện cảm của nàng với ngươi -${B.caught}`,
+  go:()=>{if(typeof can==="function"&&can(1))spend(1);if(roll(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,1);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?" Chứng cứ về nàng +1.":""}`)}
+   else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
+ const D=TW[p.k];if(D&&p.k!=="effort"&&!AGHOST.has(p.k)&&(!D.req||D.req(S,t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
+  const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
+  O.push({n:"Tham gia",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}1 khắc · thành: ngươi cũng ${p.act}${agTn(t)}, như nàng`,go:()=>{if(typeof can==="function"&&can(1))spend(1);const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p);agSeeHer(p.k,t,true)}})}
+ O.push({n:"Bỏ đi",fx:{},x:"Nắm chắc · thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
+ O.push({n:"Mặc kệ",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
+ return O}
+function agTn(t){return t?` ${t===S?"ngươi":t.name}`:""}
+/* two-way: SHE did a shared deed; the consorts the ledger puts at her place this khắc saw it and react by the same choice */
+function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;const z=agZ();const B=BAL.ag.wit;
+ for(const v of liveRivals(true)){if(!v.alive||v.out||v===t)continue;const e=H.R.P["v"+v.id];if(!e||!e[H.kh]||e[H.kh][0]!==H.k)continue;if(H.k==="home"&&sameHouse(S,v))continue;
+  let N;try{N=agNeeds(v)}catch(x){continue}const ho=hostility(v,S);const D=TW[k];
+  const canJ=!joined&&D&&agOwn(k)&&!AGHOST.has(k)&&(!D.req||D.req(v,t))&&twCanPay(v,k);let ju=0;
+  if(canJ){const A=AGSELF[k];const gl=A?A.g(v):(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===k);return s?{g:AGSOC[s][3](BAL.tw.g),l:{}}:{g:{},l:{}}})();ju=agU(v,N,D.o?D.o(v,t):100,gl,twCost(k),A?A.tag:"social")*BAL.ag.unit}
+  const hu=motiveOK(v,S,"spy").ok?B.w.hear*(ho/50)*agMW(v,"spy"):0;
+  const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
+  const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
+  if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(roll(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else{affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
+  else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}
+  if(c!=="ignore"){const L={w:wk(),b:S.buoi||0,kh:H.kh,id:"v"+v.id,k:"see:"+c,t:"me",pl:H.k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
+   try{const A=H.R.acts=H.R.acts||[];A.push({id:"v"+v.id,kh:H.kh,k:"ag:see:"+c,t:"me",why,ok:1,ag:1});if(A.length>60)A.shift()}catch(x){}}}}
+
+/* ---------------- WIRING ---------------- */
+(function(){
+ /* one path per deed: the old weekly / monthly dice that fired a deed the loop now owns do nothing for NPC doers while the loop is on */
+ const tw0=twDo;twDo=function(a,t,k,paid){try{if(a&&a!==S&&!AG.inTick&&agOn()&&agOwn(k)){AG.stat.mute++;return""}}catch(e){}const r=tw0.apply(this,arguments);
+  try{if(a===S&&r&&!AG.inTick&&agOwn(k))agSeeHer(k,t)}catch(e){agErr("seeHer",e)}return r};
+ const ne0=window.npcEffort;window.npcEffort=function(v,force){try{if(!force&&agOn()&&agOwn("effort")){AG.stat.mute++;return""}}catch(e){}return ne0.apply(this,arguments)};
+ /* the tick: right after the buổi is planned (placeWhere builds the record, j95) */
+ const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{agTick();agReapply()}catch(e){agErr("pw",e)}return r};
+ /* every resync of the record (a khắc spent, a walk): land the khắc already passed, show what she sees where she stands */
+ const sy0=j95sync;j95sync=function(){const r=sy0.apply(this,arguments);try{if(!AG.inSync){AG.inSync=1;try{agWatch()}finally{AG.inSync=0}}}catch(e){agErr("sync",e)}return r};
+ /* labels of the ledger activities (dev table, tai mắt lines) */
+ try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
+})();
+Object.assign(window,{agTick,agOn,agNeeds,agOpts,agOrg,agZ,AG});
 
 window.__ctmBuilt=1;
 </script>
@@ -44267,7 +44510,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="28b9320d879f";window.CTM_BUILD=BUILD;
+const BUILD="6b4034faa922";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

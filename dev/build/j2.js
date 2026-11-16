@@ -144,7 +144,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   if(!sameHouse(S,v)){A.push({n:"Tặng quà",o:100,x:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}});
    A.push({n:"Khiêu khích",o:100,w:{danh:1},x:"nàng quý ngươi -15, oán ngươi +9, ghen +10",go:()=>{relAdd(S,v,-15);v.ghen=cl(v.ghen+10,0,100)}});
    if(v.pg>=50)A.push({n:"Trút giận",o:100,w:{duc:-3},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-20)}});
-   A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(40+S.mat*6),x:"chứng cứ +1",run:()=>overhear(S.place)})}
+   A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat),x:"chứng cứ +1",run:()=>overhear(S.place)})}
   return A}
  if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:cl(oPlant(S,v)+15,5,95),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
   {n:"Lục rương tìm chứng cứ",o:od(45+S.mat*5),act:1,x:"chứng cứ +1 nếu nàng có làm điều sai · lộ: bị phạt",run:()=>{if(roll(od(45+S.mat*5))){return evA(S,v,1)?`Lục được thư từ của ${v.name}: chứng cứ +1.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-15);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}

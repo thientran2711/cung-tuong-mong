@@ -77,7 +77,7 @@ function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught
  ap(a,{danh:-8});relAdd(a,t,-25);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
 function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,-6);return r}
  relAdd(a,t,-12);evA(t,a,1);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
-function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(40+S.mat*6))){return evA(S,v,1)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat))){return evA(S,v,1)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];

@@ -354,3 +354,39 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+
+/* NPC AGENT LOOP (jagent, Foreman C AG1 + AG1b; owner OD:L1386 "every NPC plays the game like a player"; design dev/handover/reports/npc-agent.md §3).
+   ONE CORE: every number of jagent.js. The deeds' own costs / odds / gains stay in BAL.tw (jtwoway) and j75 (npcEffortKind); here only the
+   agent's WHEN and WHY: what each person needs, how much a deed is worth to her, and what she may do when she sees someone act.
+   on      1 = the loop runs (host only); 0 = the old drips run as before (measuring switch; window.__agOff=1 does the same for one page)
+   own     the deeds whose WHEN belongs to the loop: the weekly / monthly dice that used to fire them (npcMonthly, the SOC menu, npcEffort)
+           are muted for NPC doers while the loop is on (one path per deed). Her own use of the same deeds is unchanged.
+   routine weight of keeping her schedule this buổi (the j95 activity), × (1 + restW × need rest); needW = weight of each need against it
+           (step 1 of her choice: WHAT she wants this buổi; step 2: which deed serves it, by utility)
+   unit    gain points that close one whole need; goal = the level each need aims at (gap = (goal − now) / goal, 0..1)
+           friend = thiện cảm that counts as a friend for the 'ally' need; kidAge = she still hopes for a child below this age
+   road    need weights per origin road (8 noble origins of j1 ORIGINS; "_" = no road yet). Origin = v.nr.o (npc-roads, Foreman D) when
+           present, else v.ag.o seeded once from her house by `org` (same rule as BAL.nroad.org; that table wins when it is loaded)
+   uniq    origins one father holds alone (the player's own father): no NPC takes them
+   val     how much an indirect effect is worth to the doer, in gain points (her belief, not an outcome): tablet = a bribed tablet (Sủng),
+           kid = a prayer for a child (kid need), check = searching gifts (safety), drop = dropping a fallen friend (safety)
+   costW   how much a cost weighs against what she holds (bạc / Sức)
+   kh      khắc a deed takes (the player's talk / deck act: 1)
+   wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
+           caught = thiện cảm lost toward the listener when a listener is caught; w = NPC reaction weights {hear, join, ignore}
+   perf    p95 budget in ms per buổi tick (Fold 755x1000), n = how many ticks the counter keeps */
+Object.assign(BAL,{ag:{on:1,
+ own:["thTH","thHH","pray","ksp","fakeIll","fakePreg","announce","flaunt","check","help","apol","visit","mediate","follow","provoke","humil","warn","test","drop","gossip","effort"],
+ routine:24,restW:1.5,needW:2,unit:10,
+ goal:{sung:60,th:50,hh:40,danh:50,duc:40,rest:45,friend:30,ally:2,kidAge:38},
+ road:{_:{sung:1,th:.6,hh:.5,danh:.6,duc:.4,kid:.8,ally:.6,spite:.5,safe:.6},
+  tt:{sung:1,th:.5,hh:.3,danh:1.2,duc:.4,kid:1,ally:.7,spite:.8,safe:.6},dtq:{sung:1,th:.4,hh:.4,danh:1,duc:.3,kid:.9,ally:.5,spite:.7,safe:.5},
+  muoi:{sung:1.1,th:.6,hh:.6,danh:.8,duc:.3,kid:.8,ally:1,spite:.4,safe:.6},cn:{sung:1.3,th:.6,hh:.6,danh:.5,duc:.4,kid:1,ally:.9,spite:.4,safe:.7},
+  nc:{sung:1,th:1,hh:.5,danh:.8,duc:.4,kid:.8,ally:.7,spite:.5,safe:.8},td:{sung:.9,th:.4,hh:.4,danh:.6,duc:.2,kid:.6,ally:.6,spite:1.3,safe:.8},
+  ch:{sung:.9,th:1.3,hh:.4,danh:.8,duc:.6,kid:.9,ally:.6,spite:.5,safe:.5},thd:{sung:.9,th:.6,hh:.6,danh:1.1,duc:.8,kid:.8,ally:.6,spite:.3,safe:.6}},
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ uniq:["tt","dtq"],
+ val:{tablet:6,kid:10,check:4,drop:3},
+ costW:1,kh:1,
+ wit:{hear:40,mat:6,caught:5,w:{hear:1,join:1,ignore:3}},
+ perf:{p95:8,n:200}}});
