@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi.","b":"e2a45aa84034","h":[{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."}]};
+window.CTM_BI={"s":"363c16e1","t":"2026-11-16T21:27Z","c":"Ghế phi tần: mỗi bậc chỉ có chừng ấy ghế; ghế đã đủ người thì không ai được thăng vượt số, người bị đẩy ra được bù bạc.","b":"36d2a74c2860","h":[{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1305,7 +1305,7 @@ dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên c
  month(){const st=S.st;let ev="";
   if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:4,sung:3});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh +4 · Sủng +3. `}else{apply({danh:-4,sung:-3});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh -4 · Sủng -3. `}}
   if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=p.slice().sort((a,b)=>a.rel-b.rel)[0];st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
-  else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:-20,sung:-15});S.rank=Math.max(0,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh -20 · Sủng -15. `}
+  else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:-20,sung:-15});S.rank=seatDown(S,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh -20 · Sủng -15. `}
   return ev},
  acts(){const st=S.st;if(!st.acc)return[];return[{n:"Tìm chứng cứ cha trung thành",t:`Tra quân báo, tìm người làm chứng. Còn ${Math.max(0,st.acc-S.turn)} tháng · chứng cứ ${st.proof}/2.`,c:{bac:-20,suc:-10},o:od(40+S.mat*6+S.tamco/5),w:{},l:{danh:-2},x:"chứng cứ +1",
   go:()=>{st.proof++;st.step=1+st.proof;if(st.proof>=2){const v=st.accuser;apply({danh:8});stEnd(1,"Rửa oan cho cha");log(`<b class="g">Chứng cứ trình lên: cha ngươi trong sạch.</b> Danh +8.`);if(v&&v.alive&&!v.out)fall(v,"bị xét tội vu cáo trung thần")}}}]}},
@@ -1734,18 +1734,18 @@ function oPlant(a,t){return odA(a,40+a.tamco/3+a.mat*3-t.maid.loyal/4)}
 function oVP(a){return odA(a,55+a.danh/5)}
 /* punishment by standing: the same for every consort */
 function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}
-  if(sev>=2&&rkOf(p)>0&&roll(has("nongnay")?100:has("nhantu")?25:50)){if(p===S)S.rank--;else if(p.queen){p.queen=false;p.rank=6}else p.rank--;log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
+  if(sev>=2&&rkOf(p)>0&&roll(has("nongnay")?100:has("nhantu")?25:50)){seatPut(p,seatDown(p,rkOf(p)-1));log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
   const m=has("nongnay")?3:has("nhantu")?1:2;p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
-  if(S.turn<12&&!p.mercy){p.mercy=1;ap(p,{danh:-10,sung:-10});if(rkOf(p)>0){if(p===S)S.rank--;else if(p.queen){p.queen=false;p.rank=6}else p.rank--}p.confined=Math.max(p.confined||0,3);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10. Lần sau sẽ không tha.</span>`);return}
+  if(S.turn<12&&!p.mercy){p.mercy=1;ap(p,{danh:-10,sung:-10});if(rkOf(p)>0)seatPut(p,seatDown(p,rkOf(p)-1));p.confined=Math.max(p.confined||0,3);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10. Lần sau sẽ không tha.</span>`);return}
   if(p===S){if(has("nhantu")&&roll(30))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
   if(has("nhantu")&&roll(30)){p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
   p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
-function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S.rank>=5||R(2)){cold(`Ngươi ${why}`);return}S.rank=Math.max(0,S.rank-2);apply({sung:-15});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);return}
+function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S.rank>=5||R(2)){cold(`Ngươi ${why}`);return}S.rank=seatDown(S,S.rank-2);apply({sung:-15});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);return}
  if(ACTX.a&&ACTX.a!==p)p.coldBy=key(ACTX.a);if(p.queen||p.rank>=5){p.out=true;p.queen=false;log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
  else if(R(2)){p.out=true;log(`<span class="g">${p.name} ${why}, bị đày vào lãnh cung.</span>`)}
- else{p.rank=Math.max(0,p.rank-2);p.sung=cl(p.sung-15,0,100);log(`<span class="g">${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.</span>`)}}
+ else{p.rank=seatDown(p,p.rank-2);p.sung=cl(p.sung-15,0,100);log(`<span class="g">${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.</span>`)}}
 /* a fabricated charge that sticks */
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(12*(DG()?1.3:1));ap(p,{danh:-d,sung:-10});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */
@@ -2766,7 +2766,7 @@ function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.cold
  const keep=(S.staff||[]).filter(s=>s.loyal>=70).slice(0,1);(S.staff||[]).filter(s=>!keep.includes(s)).forEach(s=>{});S.staff=keep;
  log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${keep.length?`; chỉ ${keep[0].name} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:f.slice(0,4).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi · cùng cảnh ngộ"})),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
-function restore(full,why){S.out=0;S.rank=full?S.coldRank:Math.max(0,S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
+function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
 function coldActs(){const A=[],fr=liveRivals(true).filter(v=>aff(v,S)>=40),f=facOf(S),son=mySons().find(k=>k.age>=8);
  A.push({n:"Cầu xin",t:"Đút bạc cho lính gác, gửi thư lên Dưỡng Hòa điện.",c:{bac:-20},o:od(10+S.an/2+S.sung/4),k:2,w:{},l:{},x:"được tha",go:()=>restore(false,"Hoàng thượng đọc thư, động lòng")});
@@ -3862,8 +3862,8 @@ function fillSeats(){let ev="";for(const r of [6,5,4,3]){if(!seatFree(r))continu
   let n=SEATCAP[r]-holders(r).length;while(n-->0&&C.length){const tot=C.reduce((s,p)=>s+seatPickW(p),0);let x=Math.random()*tot,w=C[0];for(const p of C){x-=seatPickW(p);if(x<=0){w=p;break}}C.splice(C.indexOf(w),1);ev+=promoteP(w)||"";if(C.length)S.seatLost=(S.seatLost||[]).concat(C.includes(S)?[`${RANKS[r].n}: ${NM(w)}`]:[])}}return ev}
 /* DEMOTION REVIEW: Sủng under the rank's floor for two months, or a conviction, drops one rank (and frees the seat) */
 function sungFloor(r){return Math.max(0,RANKS[r].s-20)}
-function demote(p,why){if(p===S){if(S.rank<=0)return"";S.rank--;S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`;log(t);return t}
- if(p.queen){fall(p,why);return""}if(p.rank<=0)return"";p.rank--;p.lastPromo=S.turn;const t=`${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.`;log(t);newsAdd(p,"demote",t,true);return t}
+function demote(p,why){if(p===S){if(S.rank<=0)return"";S.rank=seatDown(S,S.rank-1);S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`;log(t);return t}
+ if(p.queen){fall(p,why);return""}if(p.rank<=0)return"";p.rank=seatDown(p,p.rank-1);p.lastPromo=S.turn;const t=`${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.`;log(t);newsAdd(p,"demote",t,true);return t}
 function demoteReview(){let ev="";for(const p of consorts()){const r=rkOf(p);if(r<=0||r>=7||p.out)continue;if(p.sung<sungFloor(r))p.lowS=(p.lowS||0)+1;else p.lowS=0;
   if(p.lowS>=2){p.lowS=0;ev+=demote(p,`lâu không được sủng (Sủng ${p.sung} dưới mức ${sungFloor(r)} của ${RANKS[r].n} hai tháng)`)}
   if((p.sick||0)>0){p.sick--;ap(p,{sung:-4});if(p.sick===0&&p.suc<35)ev+=demote(p,"bệnh lâu không hầu được")}}return ev}
@@ -4007,7 +4007,7 @@ function runRound(){const c=ct();const i=c.round;const C=c.c.map(byKey).filter(p
  c.round++}
 function contestEnd(){const c=ct();const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!p.out&&!c.dq.includes(key(p))&&rkOf(p)===c.r-1);S.contest=null;if(!C.length)return"";
  const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));const w=C[0];
- let res;if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(10)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){if(w===S){S.rank++;S.lastPromo=S.turn}else{w.rank++;w.lastPromo=S.turn}}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
+ let res;if(!seatHas(w,c.r)){const cp=seatComp(w);res=`${w===S?"Ngươi":w.name} thắng, nhưng ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n} đã có người ngồi trước`;if(cp)log(cp)}else if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(10)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){seatUp(w,c.r)}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
  for(const p of C.slice(1)){oanAdd(p,w,10);if(p!==S&&w===S)p.ghen=cl(p.ghen+10,0,100)}
  const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (+10)${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
 /* weekly driver: one round per tuần (Hoàng hậu seat: one per month), acts between */
@@ -7054,7 +7054,7 @@ function panel67(){const row=(a,b)=>`<div class="pcrow"><span>${a}</span><span>$
 if(typeof srvRoadHTML==="function")(function(){const r0=srvRoadHTML;srvRoadHTML=function(){const h=r0.apply(this,arguments);try{if(v267())return h+`<div class="st67">${panel67()}</div>`}catch(e){}return h}})();
 /* ---------- shared outcome helpers (only existing systems) ---------- */
 function e67heir(n){const s=son67();if(s){s.fond=cl((s.fond||0)+n,0,100);return `Hoàng thượng thương ${s.name} hơn (+${n}).`}apply({danh:3});return "Chưa có hoàng tử: Danh +3."}
-function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0)return"";v.rank=Math.max(0,v.rank-1);return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
+function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0)return"";v.rank=seatDown(v,v.rank-1);return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
 function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (thiện cảm +${n||30}).`}
 function e67foe(v,n){if(!rvOk67(v))return"";n=Math.round((n||15)/2);oanAdd(v,S,n);return `${v.name} oán ngươi thêm.`}
 function e67pun(v,n){if(!rvOk67(v))return"";v.sung=Math.max(0,(v.sung||0)-n);return `${v.name}: Sủng -${n}.`}
@@ -10393,7 +10393,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  T7("lc_ao","pro",{r:"fallen",w:c=>["Thu","Đông"].includes(c.sea)?2:0,t:"Mang áo ấm vào lãnh cung cho {A}",h:"“Gió lạnh lùa qua song cửa Trường Môn viện. Nếu còn chút tình xưa, xin gửi cho ta tấm áo bông.”",dl:4,
   s:[G("home","Chuẩn bị áo bông","",100,1,{bac:-15}),G("lc","Mang áo vào lãnh cung","tamco",55,1,{},"b")],ok:{fx:{duc:4},r:15,fn:X=>{ap(X.A.o,{suc:8});return `${X.A.n} Sức +8.`}},no:{r:-5},bad:{fx:{danh:-3,th:-3}},badT:"Người gác bắt gặp, chuyện đến tai Thái hậu."});
  T7("lc_thu","risk",{r:"fallen",rf:v=>(v.rel||0)>=0,t:"Chuyển thư kêu oan của {A} lên Hoàng thượng",h:"“Ta bị đày vào đây, không ai nghe ta nói. Nếu còn thương ta, chuyển giúp bức thư này đến tay Hoàng thượng.”",dl:4,
-  s:[G("lc","Nhận thư ở lãnh cung","tamco",60,1,{},"b"),G("","Dâng thư lên Hoàng thượng","sung",40,1,{},"e",{emp:1})],ok:{r:20,d:2,fn:X=>{if(roll(25)){X.A.o.out=false;X.A.o.rank=Math.max(0,(X.A.o.rank||1)-1);return `Hoàng thượng đọc thư, cho ${X.A.n} ra khỏi lãnh cung.`}return "Hoàng thượng đọc thư, im lặng hồi lâu."},x:"có thể (khoảng một phần tư) Hoàng thượng tha nàng ra"},no:{r:-5,fx:{sung:-2}},bad:{fx:{danh:-3,th:-3}},badT:"Người gác bắt gặp ngươi ra vào lãnh cung."});
+  s:[G("lc","Nhận thư ở lãnh cung","tamco",60,1,{},"b"),G("","Dâng thư lên Hoàng thượng","sung",40,1,{},"e",{emp:1})],ok:{r:20,d:2,fn:X=>{if(roll(25)){X.A.o.out=false;X.A.o.rank=seatDown(X.A.o,(X.A.o.rank||1)-1);return `Hoàng thượng đọc thư, cho ${X.A.n} ra khỏi lãnh cung.`}return "Hoàng thượng đọc thư, im lặng hồi lâu."},x:"có thể (khoảng một phần tư) Hoàng thượng tha nàng ra"},no:{r:-5,fx:{sung:-2}},bad:{fx:{danh:-3,th:-3}},badT:"Người gác bắt gặp ngươi ra vào lãnh cung."});
  T7("ak_me","social",{r:"ak",rf:(k,z)=>!!z.mom&&(k.fond||50)<40,t:"Chuyển lời {A} xin lỗi mẫu thân",h:X=>`“Con lỡ lời làm mẫu thân (${X.A.mom.name}) giận, mấy hôm nay không cho con vào thỉnh an. {Nc} nói giúp con một lời.”`,dl:3,
   s:[G("",X=>`Sang cung ${X.A.mom.name} nói giúp`,"tai",55,1,{},"r",{plf:X=>q72Home({k:"rv",o:X.A.mom})})],ok:{fx:{danh:1},fn:X=>{X.A.o.fond=cl((X.A.o.fond||40)+12,0,100);relAdd(S,X.A.mom,4);return `${X.A.n} và mẫu thân làm lành (quyến luyến +12); ${X.A.mom.name} thân với ngươi +4.`},x:"mẹ con nàng làm lành (+12)"},no:{}});
 
@@ -17834,6 +17834,9 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
+   Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
+BAL.seatCap=SEATCAP;
 /* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
    led.court = khắc of buổi sáng that are the morning court (thượng triều): Hoàng thượng + the officials on the court roster (jmen menMinW) are
    at Cần Chính điện (thu) every one of those khắc, no dice, no surprise.
@@ -35138,7 +35141,7 @@ function rgSwitchOpen(){if(rgCanSwitch()||!rgOn())return;const s=rgSideNow();
  O.push({n:"Thôi",fx:{}});pushModal({t:`Phụ tuyến · ${RGT} · Đổi phe`,who:pMe(),h:`<p>Ngươi đang ${rgSideTag(s)}. Đổi phe thì phe cũ thành kẻ thù, Danh giảm, phe mới phải lấy lòng lại từ đầu.</p>`,opts:O,act:1});showModal()}
 /* outcome effects on the court (host computes; personal effects per player) */
 function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,10);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
-function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=Math.max(0,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
+function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
 function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.rg.B?"emp":p<BAL.rg.A?"quyen":"th";if(W.out==="th"&&S.thDead)W.out=p>=(BAL.rg.A+BAL.rg.B)/2?"emp":"quyen";W.at=S.turn;
  const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",8);tdPowAdd("Lễ bộ",8);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
   else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",-10);tdPowAdd("Lễ bộ",-10);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
@@ -43412,7 +43415,7 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
    kitRows(gone.map(x=>[x.t,"bị xử trảm","r"]).concat([["Em trai út","lạc trong đêm khám phủ","t"],["Hồi môn","bị tịch thu","r"],["Thế lực nhà","không còn","r"]]))}}
  /* r2-r1 (FAIL 3): home dialogs still queued (Phúc tuyển, family events …) never follow her into the palace, and an open mini-game card closes */
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE"&&!(m.pp&&m.pp.e==="dien"))Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
- S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
+ S.rank=rank=seatDown(S,rank);S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
  S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+15,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
@@ -44749,6 +44752,41 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
+/* ================= ONE SEAT RULE (review/seatcap, owner OD:L1224 + OD:L1228 + OD:L1267 ONE CORE) =================
+   The seat counts are j30 SEATCAP = BAL.seatCap (the same object; Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; Quý nhân and below
+   have no cap). Every road that puts a consort on a rank goes through these three helpers, for her and for every NPC alike:
+   - seatHas(p,r): may p sit at rank r (the seat counts everyone else who holds r);
+   - seatDown(p,r): a road that DROPS her (demotion, the Hoàng hậu's fall, a pardon out of lãnh cung, co-op merge) lands on the highest rank
+     at or under r that has a free seat;
+   - seatUp(p,r,why): a road that RAISES her: a free seat = the rank; a full seat = the full-seat compensation (jexam promoFullSeat, OD:L1228:
+     no waiting claim, a large one-off reward instead, the next rank through the normal exam).
+   seatSettle() is the safety net after every turn and when a save is loaded (old saves that are already over the cap): in a rank with too
+   many holders, the NPC who came to the rank last (lastPromo, then the weakest seatPickW) steps down to the highest free rank and gets the
+   same full-seat compensation (gain and loss). The player and the co-op friend are never pushed out by the net; on the co-op guest the host
+   decides the world (the guest's net does nothing). */
+function seatMine(p){return p===S||!!(p&&p.coop)}
+function seatHas(p,r){const c=SEATCAP[r];if(c==null)return true;return holders(r).filter(q=>q!==p).length<c}
+function seatDown(p,r){r=Math.max(0,Math.min(6,r|0));while(r>0&&!seatHas(p,r))r--;return r}
+/* put p on rank r (0–6): leaves the Hoàng hậu seat if she held it */
+function seatPut(p,r){if(p===S){S.rank=r;return r}if(p.queen)p.queen=false;p.rank=r;return r}
+function seatComp(p){try{if(typeof promoFullSeat==="function"&&rkOf(p)<7)return promoFullSeat(p,"seat",{})||""}catch(e){console.error("seatComp",e)}return""}
+function seatUp(p,r,why){if(seatHas(p,r)){if(r>=7){if(p===S){S.rank=7}else{p.rank=6;p.queen=true}}else seatPut(p,r);p.lastPromo=S.turn;return true}
+ if(rkOf(p)<r)return seatComp(p)||false;return false}
+function seatGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
+window.__seatN=window.__seatN||{settle:0,down:0};
+function seatSettle(){if(!S||S.dead||seatGuest())return"";let ev="";
+ for(const r of [7,6,5,4,3]){const c=SEATCAP[r];if(c==null)continue;let H=holders(r),g=0;
+  while(H.length>c&&g++<12){const N=H.filter(p=>!seatMine(p));if(!N.length)break;
+   N.sort((a,b)=>(b.lastPromo||0)-(a.lastPromo||0)||seatPickW(a)-seatPickW(b));const p=N[0];
+   const to=seatDown(p,r-1);seatPut(p,to);p.lastPromo=S.turn;window.__seatN.settle++;
+   const t=`${p.name}: ghế ${r>=7?"Hoàng hậu":RANKS[r].n} đã đủ người, lui về ${RANKS[to].n}. `;try{log(t)}catch(e){}ev+=t;
+   ev+=seatComp(p);H=holders(r)}}
+ return ev}
+/* outermost turn hook (this module loads last): the cap holds at the end of every turn, so at every month */
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)seatSettle()}catch(e){console.error("seatSettle",e)}return r}})();
+/* a loaded save (old saves already over the cap) and a new life (origin entry) are settled once */
+(function(){if(typeof normAll!=="function")return;const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(S&&rivals)seatSettle()}catch(e){console.error("seatSettle load",e)}return r}})();
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&rivals)seatSettle()}catch(e){console.error("seatSettle start",e)}return r}})();
 
 window.__ctmBuilt=1;
 </script>
@@ -44777,7 +44815,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e2a45aa84034";window.CTM_BUILD=BUILD;
+const BUILD="36d2a74c2860";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
