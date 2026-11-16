@@ -29,3 +29,6 @@ Main coordinator keeps: all co-op (D21, A10, C43, C44), side stories D4/D5 + Emp
   1) write a HANDOVER block in your status file (state, running agents + branches, waiting items, open owner questions);
   2) open the NEW session yourself with the remote-session tool create_session (same environment, same repo, prompt = your role paste block + "read the HANDOVER in <status file>"), tell the owner in one line, then stop spawning.
 - Agents you spawned die with your session: roll over only when no worker is mid-task, or note each running branch so the new session re-spawns from the pushed branch/PROGRESS.
+
+## COORDINATOR ORDER (owner 16/11): HOURLY SELF-WAKE
+Every foreman must keep a recurring hourly self-wake in its own session (CronCreate / scheduled check-in, re-created after any restart or rollover). Each wake: pull the handover branch, re-read this file + your STATUS + OWNER_DECISIONS (new 16/11 entries), take new items of your slice from the repo, spawn reviewers for SẴN SÀNG KIỂM, refill slots, push your STATUS. Write the time of the last wake at the top of your STATUS ("last wake: <UTC>") so the main chat can see you are alive.

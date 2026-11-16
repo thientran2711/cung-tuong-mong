@@ -1,0 +1,31 @@
+# HANDOVER → main session 9 (from session 8, 16/11)
+Role: main coordinator + kit keeper. Owner rule 16/11: the MAIN chat fixes the bugs/UI she meets while playing (urgent); everything else goes to Foremen B/C/D. Read CLAUDE.md, every 16/11 entry in dev/OWNER_DECISIONS.md, FOREMAN_B/C/D.md (rollover + hourly-wake rules), dev/kit/KIT_NUMBERS.md (next free §81), and SESSION8_QUEUE.md.
+Context rollover: budget = your start + 25%; then hand over with create_session yourself.
+Create your hourly self-wake (watch: pull docs, fast-forward PASSes, spawn reviewers for SẴN SÀNG KIỂM, relay foreman questions).
+MAIN = eba64ead4 (+ train 3, kpanel-compact, evidence-truth, palace-start, tutorial, elder-staff).
+Session 8 stays alive ONLY to relay its still-running agents' final reports into dev/handover/reports/<branch>.md (pushed here). Read that folder each wake, and act on the reports: spawn reviewers / fast-forward PASS. Session 8 archives itself when its agents are done.
+## Branches in flight (pushed; check origin + reports/)
+LIVE-BUG (main chat):
+- coop-night-sync (opus): friend jumps to the next day; the friend is stuck after a rejoin; the shared timer freezes; buổi acts/khắc reset on rejoin; stats roll back 23→10 on rejoin (CRITICAL).
+- modal-scroll c0ee5cca1 → reviewer running (modal-scroll-r1).
+- an-tinh-fix b30a76525 + log-sync da08b9af2 → reviewer running (an-tinh-fix-r1 / log-sync-r2).
+- pcard-actrow 83a9f37a4 → reviewer running (pcard-actrow-r1).
+- goal-strip-fix-r1 (kitStageRail §77): FAIL → kit-sweep worker fixing (4 items).
+- kit-sweep batch 1 1b3388297 (on goal-strip-fix), batch 2 running; then review both together.
+- facefx-all-r1 b826cfb17 → reviewer running (facefx-all-r2).
+- book-fig ae62a2732 → reviewer running (book-fig-r1).
+- cardflip-smooth ff8f5949d → reviewer running (cardflip-smooth-r1).
+- weather-fx-one (2 layers: weather in the stage, season full screen; ONE painted petal effect when both are petals; no code art) → worker running.
+- act-dedupe c4679c83e (wave 1) → reviewer running (opus); KIT §78.
+- postmerge-fix-1 (regression + remove the buổi tint) → worker running.
+- servant-system (opus): fix A (eunuchs on the room stage page 2) + audit → running.
+- reign-road c0e6f7d25 → reviewer running (opus); then Foreman D owns follow-ups.
+- mortality (opus) → running (hidden bell lifespan mean 45 sd 15, careMax 3, no floor, pregnancy additions, giữ mẹ/giữ con = Emperor's choice).
+- outside-r2-r2 reviewer (opus) → running.
+Moved to Foreman D: slap-mg (§79), coop-chat (§80), act waves 2–3, HD upscale, balance audit, servant phase 2, D54 buổi paintings, D56 icons + Nội vụ phủ art.
+## Waiting on the owner
+- Pregnancy rate: options 1 double / 2 triple / 3 cycle / 1+3 (proposed 1+3).
+- Servant caps (wait for the servant-system audit).
+## Known follow-ups
+- The #kload first-run panel is wider than 560 (kpanel-compact note).
+- The disk on this box is tight; git prune + old worktrees removed (owner allowed cleanup).
