@@ -80,3 +80,4 @@ PASS review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from
   - K4 promo-rules: SIGNED, but owner HOLD on the servant reward stays.
   - K5 cardflip: SIGNED. It goes into merge-train-2 with the plate recompress.
 - Note: review/recipes-r1 (§63) adds jrcp.js with no KIT.md text. The KIT text must be written before it merges.
+- (16/11, later) Owner LIFTED the promo-rules hold: +1 servant per rank stays. promo-rules-r1 goes into merge-train-2. Ignore the "promo-rules-r2 rework" note above.
