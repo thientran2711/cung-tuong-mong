@@ -38,4 +38,4 @@
 | D15 download-size + perf | review/perf | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
 | D17 luxury | review/luxury | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
 | D53b material dialog pictures | review/opt-pics3 | C | in-session agent (pre-order) | RUNNING | 05:19Z 16/11 |
-| A7b cycle art review | review/cycle-art-r1 | C | (session id below) | RUNNING | 05:21Z 16/11 |
+| A7b cycle art review | review/cycle-art-r1 | C | session_011xDdVNhYUE65ReNSUXEbaG | RUNNING | 05:21Z 16/11 |

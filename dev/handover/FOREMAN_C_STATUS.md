@@ -10,7 +10,7 @@ Base main at start: 900ace7fb.
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | LIVE (train-2) |
 | A7 cycle review | review/cycle-r3 | opus | PASS d9c47fad1 (owner fixes done: deck cards in Mưu kế tab (7-card family moved), monthly maid pop-up; reviewer fixed a co-op flip bug + new-game first-week pop-up + evidence-truth sites 3→0) |
-| A7b cycle art | review/cycle-art @74f96d6c1 (7 pictures on CDN, ACTS.json 392 keys) → review/cycle-art-r1 | sonnet | REVIEWING (separate session) |
+| A7b cycle art | review/cycle-art @74f96d6c1 (7 pictures on CDN, ACTS.json 392 keys) → review/cycle-art-r1 | sonnet | REVIEWING (session session_011xDdVNhYUE65ReNSUXEbaG) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
