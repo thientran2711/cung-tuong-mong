@@ -169,19 +169,19 @@ const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
 .kszidt{display:flex;flex-direction:column;gap:3px;min-width:0}
 .kszidt>b{font:700 1rem/1.2 var(--display,serif)}
 .kszidt>.kszk{font-size:.74rem;color:var(--dim,#6b5643)}
-.kszidt>.kszfx{display:flex;flex-wrap:wrap;gap:4px}
+.kszidt>.kszfx{display:flex;flex-wrap:wrap;gap:4px}.kszidt>.kszloss,.kszidt>.kszloss .ef{color:var(--bad,#c23b22)}
 .kszpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .kszpick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
 .kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
 .kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
 function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
- return `<span class="kszit" data-s="${size}">${kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size]})}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
+ return `<span class="kszit" data-s="${size}">${kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size],frame:true})}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
 function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
- const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],keep=[];let kind="";
+ const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],loss=[],keep=[];let kind="";
  for(const r of rows){const l=(r.querySelector(".krl")||{}).textContent||"";const v=r.querySelector(".krv");
-  if(/^(Được|Mất|dùng)/i.test(l))fx.push(v.innerHTML);else if(/^Loại/.test(l))kind=v.textContent;else if(/^Phẩm/.test(l)){}else keep.push(r.outerHTML)}
+  if(/^(Được|dùng)/i.test(l))fx.push(v.innerHTML);else if(/^(Mất|Kèm)/i.test(l))loss.push(v.innerHTML);else if(/^Loại/.test(l))kind=v.textContent;else if(/^Phẩm/.test(l)){}else keep.push(r.outerHTML)}
  if(!rows.some(r=>/^Xa xỉ/.test(r.textContent))){let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}if(lux)keep.unshift(`<span class="kr"><span class="krl">Xa xỉ</span><span class="krv"><span class="ef n">món này ${lux}</span></span></span>`)}
- return `<div class="kszidc"><div class="kszidh">${kszItemTile(k,"M")}<div class="kszidt"><b style="color:${I.col||"inherit"}">${I.name}</b><span class="kszk">${kind||tmp.querySelector(".kidkind")?.textContent||""}</span><span class="kszfx">${fx.join('<span class="ksep">·</span>')}</span></div></div>${keep.length?`<span class="kb kpkb">${keep.join("")}</span>`:""}</div>`}
+ return `<div class="kszidc"><div class="kszidh">${kszItemTile(k,"M")}<div class="kszidt"><b style="color:${I.col||"inherit"}">${I.name}</b><span class="kszk">${kind||tmp.querySelector(".kidkind")?.textContent||""}</span><span class="kszfx">${fx.join('<span class="ksep">·</span>')}</span>${loss.length?`<span class="kszfx kszloss">${loss.join('<span class="ksep">·</span>')}</span>`:""}</div></div>${keep.length?`<span class="kb kpkb">${keep.join("")}</span>`:""}</div>`}
 function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).filter(k=>{try{return kitItemInfo(k)}catch(e){return false}});
  let h=`<h2>KIT SIZE 4 · Items (owner part 2: 6.2 · 6.3 · 6.5) + thumbnails (7.1) + placeholder sets (7.3)</h2>`;
  h+=`<h3>Item sizes = the 4 kit sizes · GRADE as a chip ON the frame (no grade line under it)</h3><div class="kszrow" style="align-items:flex-end">${["S","M","L","XL"].map(s=>`<div><div class="kszlab">${s} · ${{S:52,M:72,L:104,XL:150}[s]} px</div>${kszItemTile(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
