@@ -19,7 +19,7 @@ KIT_SAMPLES.push(
  {id:"§28.19",title:"kitSceneArt: wide · tall · thumb",html:()=>`<div class="kitpg-row"><div style="width:220px">${kitSceneArt(kitInfoArt("sắc phong").src,"Rộng 16:9",{shape:"wide"})}</div><div style="width:120px">${kitSceneArt(kitSkillArt("vir","cong","Công"),"Cao 3:4",{shape:"tall"})}</div>${kitSceneArt(kitSkillArt("art","cam","Cầm"),"Nhỏ",{shape:"tall",size:"thumb",cap:false})}</div>`},
  {id:"§21",title:"kitSkillCard: môn (có việc), chương, trống",html:()=>`<div class="kskills">`+
   kitSkillCard({kind:"art",k:"cam",name:"Cầm",level:2,max:5,prog:[1,4],desc:"Tài: thơ, đàn, thi tài",next:"Tài +2",stepsAttr:'data-v85tab="cam"',
-   acts:[pbtn('data-kitsample="1"',"Tự học","Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ +1..2",""),pbtn('data-kitsample="2"',"Học với thầy","Chắc chắn · tốn: 2 khắc, Bạc -15 · thành: tiến bộ +1..3","thiếu bạc (cần 15)")]})+
+   acts:[pbtn('data-kitsample="1"',"Tự học","Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần",""),pbtn('data-kitsample="2"',"Học với thầy","Chắc chắn · tốn: 2 khắc, Bạc -15 · thành: tiến bộ một đến ba phần","thiếu bạc (cần 15)")]})+
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
@@ -111,12 +111,22 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
   event:q&&{kind:"choice",title:"Hoàng hậu triệu kiến",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua ta được lật thẻ bài."}],
    opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm ăn năm thua · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
   result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
+  long:{kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",facts:Array.from({length:9},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
+   opts:[{n:"Nghe hết rồi mới định",fx:{duc:1},x:"Chắc · Đức +1",go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"Chắc",go:nop}]},
   news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
  const sp=S0[k];if(!sp){back();return false}sp.onClose=back;
  if(sp.opts)sp.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});kitModal(sp);return true}catch(e){console.error("kitPopSample",e);const pg=document.getElementById("kitpage");if(pg)pg.hidden=false;return false}}
 window.kitPopSample=kitPopSample;
 KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LUẬT · VIỆC · KẾT QUẢ · TIN (chạm để mở pop-up thật)",html:()=>{
- const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"]];
+ const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"],["long","VIỆC DÀI · lời kể dài (chữ cuộn trong khung, tranh + nút đứng yên · KIT 32.5b)"]];
  const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
   (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+KIT_SAMPLES.push({id:"§81",title:"Nút kết cảnh · cảnh hoạt hình nào cũng kết bằng MỘT nút ngắn, không tự đóng (chạm để mở cảnh thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
+ const L=[["bloom","Có hỷ → «Tiếp theo»"],["edict","Thánh chỉ tấn phong → «Đã hiểu»"],["flipme","Lật thẻ bài: thẻ của ta → «Chuẩn bị thị tẩm»"],["flipother","Lật thẻ bài: người khác → «Ta biết rồi»"]];
+ return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn alt" data-kscene="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem cảnh."],{group:false}))}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kscene]");if(!b)return;e.stopPropagation();e.preventDefault();try{const k=b.dataset.kscene,R=typeof liveRivals==="function"?liveRivals(true):[];
+ if(k==="bloom")kitBloom({title:"Có hỷ",sub:"Thái y báo tin mừng"});else if(k==="edict")kitEdict({who:S,from:Math.max(0,S.rank-1),to:S.rank});else if(k==="flipme")kitFlipTablet(S,{me:true});else if(R[0])kitFlipTablet(R[0])}catch(x){console.error("kscene",x)}},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
+/* §50.2 kitPersonDlg (owner 16/11 07:35Z, OD:L448): the person pop-up outside #modal — figure left, picture right top, info, buttons; one frame size per event */
+KIT_SAMPLES.push({id:"§50.2",title:"kitPersonDlg: hộp thoại có người ngoài #modal (lời dặn, mẹo)",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" data-kpd2="tip">Mở lời dặn mẫu (cỡ coach)</button><button type="button" class="kbtn alt" data-kpd2="tour">Mở lời dặn tân thủ (4 trang cùng cỡ)</button></div>`});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpd2]");if(!b)return;e.stopPropagation();e.preventDefault();try{if(b.dataset.kpd2==="tip")kitTip({id:"kitpg",title:"Lời dặn mẫu",html:"<p>Một lời dặn ngắn của ma ma.</p>"});else window.kitTour()}catch(x){console.error(x)}},true);

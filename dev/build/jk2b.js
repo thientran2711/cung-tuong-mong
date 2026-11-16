@@ -88,10 +88,10 @@ function kitStageScale(){try{const st=$("stage");if(!st)return;const H=st.client
  let base=Math.max(H*.4,H-kfb-H*.025)*(st.__kk||1);const me=$("mefig");const toks=[...st.querySelectorAll("#tokens .tok.fig img.figimg")].filter(e=>e.offsetParent);
  const ar=e=>{if(e.naturalWidth&&e.naturalHeight)return e.naturalWidth/e.naturalHeight;if(!e.dataset.kwait){e.dataset.kwait=1;e.addEventListener("load",()=>kitStageScale(),{once:true})}return .36};
  const ks=e=>{if(e.dataset.ks)return+e.dataset.ks;let k=1;if(e.classList.contains("kidfig")){const m=/\*\s*([\d.]+)/.exec(e.style.height||"");if(m)k=+m[1]}e.dataset.ks=k;return k};
- const tokRow=$("tokens");const OV=.2;/* neighbours may overlap by 20 % of a figure's width (sleeves), like people standing in a group */
+ const tokRow=$("tokens");const OV=0;/* retired scaler (replaced by j59 + the kit slot function): no neighbour overlap, ever (OD:L1049) */
  const ws=toks.map(e=>base*ks(e)*ar(e)+4);const meW=me?base*ar(me):0;const wide=!!(me&&toks.length&&tokRow);
  const tot=ov=>ws.reduce((x,y)=>x+y,0)-ov*ws.slice(1).reduce((x,y)=>x+y,0)+(wide?meW*(1-ov):0);let OVu=OV,total=tot(OV);
- if(toks.length&&(W-16)/total<.85){OVu=.36;total=tot(OVu)}/* a crowd stands closer before anyone shrinks */
+ 
  let f=toks.length?Math.min(1,(W-16)/Math.max(1,total)):1;
  toks.forEach((e,i)=>{const b=e.closest(".tok");if(b)b.style.setProperty("margin-left",i?(-OVu*ws[i]*f).toFixed(0)+"px":"0px","important")});
  if(tokRow){if(wide){const mw=meW*f;me.style.setProperty("left",(8+mw/2).toFixed(0)+"px","important");tokRow.style.setProperty("left",(8+mw*(1-OVu)).toFixed(0)+"px","important");tokRow.style.setProperty("right","8px","important");tokRow.style.setProperty("justify-content",total*f<W-40?"center":"flex-start","important");tokRow.style.setProperty("padding","0","important");tokRow.style.setProperty("gap","0px","important")}
@@ -497,7 +497,7 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  const face=pcp&&pcp.querySelector("img.kpor");strip.innerHTML=`<span class="kpsn"><b${(L.querySelector(".pcname")||{classList:{contains:()=>0}}).classList.contains("kmy")?' class="kmy"':""}>${name}</b>${nm&&nm.classList.contains("pcrk")?`<small style="${nm.getAttribute("style")||""}">${nm.innerHTML}</small>`:""}</span><span class="kpsb">${bars.innerHTML}</span>`;
  if(pcp){const mini=document.createElement("span");mini.className="kpsf";const kin=pcp.querySelector(".kin");if(kin){mini.innerHTML=`<span class="md kit kfc sm">${kin.outerHTML}</span>`}strip.prepend(mini)}
  pc.prepend(strip);const upd=()=>{pc.style.setProperty('--kpch',pc.clientHeight+'px');const pr=pc.getBoundingClientRect();const bb=bars.getBoundingClientRect();const vb=Math.min(pr.bottom,innerHeight);
-  const hidden=bars.offsetParent&&(bb.top<pr.top+4||bb.bottom>vb-2);strip.classList.toggle("on",innerWidth<1000&&!!hidden)};
+  const hidden=bars.offsetParent&&(bb.top<pr.top+4||bb.bottom>vb-2);strip.classList.toggle("on",false&&!!hidden)};/* KIT §0: the page = the spread page, which never shows the sticky strip */
  pc.addEventListener("scroll",upd,{passive:true});const L2=pc.querySelector(':scope > .pcl');if(L2)L2.addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd();setTimeout(upd,300)}catch(e){console.error("kitPcFix",e)}}
 (function(){const run=()=>document.querySelectorAll(".pc:not([data-k2])").forEach(kitPcFix);const mo=new MutationObserver(()=>run());
  const go=()=>{mo.observe(document.body,{childList:true,subtree:true});run()};if(document.readyState!=="loading")go();else addEventListener("DOMContentLoaded",go)})();
@@ -517,12 +517,7 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  .pc.kpwide[data-k2]>.pcr{margin-top:0}
  .pc.kpwide[data-k2]>.kpstrip{grid-column:1/-1}
 
-@media (max-width:999px){
- .pc[data-k2]>.kpstrip{display:flex;position:sticky;top:-8px;z-index:5;margin:-8px -8px 0;padding:4px 8px;gap:8px;align-items:center;background:var(--panel2);border-bottom:1px solid var(--k-hair);box-shadow:0 2px 6px #5a3a2022;visibility:hidden;height:0;overflow:hidden;opacity:0;transition:opacity .15s}
- .pc[data-k2]>.kpstrip.on{visibility:visible;height:auto;opacity:1}
- .kpstrip .kpsn{display:flex;flex-direction:column;line-height:1.15}.kpstrip .kpsn b{font-family:var(--display);font-size:.95rem}.kpstrip .kpsn small{font-size:.72rem;color:var(--gold);display:flex;align-items:center;gap:3px}
- .kpstrip .kpsb{display:flex;flex-wrap:wrap;gap:0 10px;font-size:.72rem;color:var(--dim);flex:1;min-width:0}.kpstrip .kpsb>*{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px}
-}
+/* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ---------- 11. DELTA CHIPS take the whole short clause (owner 11/14: "nhà Hộ bộ thế lực −2", not "bộ thế lực −2") ----------
@@ -563,7 +558,7 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 #rtoast.kevres>:not(.kpevr){grid-column:2}
 #rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
 #rtoast.kevres>.kpevr>.ksart,.kpsubj.kpev>.ksart{width:100%;height:100%;aspect-ratio:auto}
-@media (max-width:599px){#rtoast.kevres{grid-template-columns:64px minmax(0,1fr)}#rtoast.kevres>.kpevr{width:64px;height:95px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ---------- 13. IDENTITY CARD (owner 11/14 item 6): the origin picture is no longer the backdrop; it sits in an art frame like the event art
@@ -601,7 +596,7 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
 .ksart.ksart-thumb{width:var(--ksth,64px);height:var(--ksth,64px);aspect-ratio:1;flex:0 0 auto;box-shadow:inset 0 0 0 1px #fffaf0,inset 0 0 0 2px #e6d3ac}
 .ksart.ksart-thumb>img{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px)}
 .ksart.ksart-thumb>.ksart-ph{inset:2px;font-size:.6rem;padding:2px}
-@media (max-width:599px){.ksart.ksart-thumb{--ksth:56px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .ksart>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;display:block;border-radius:2px;max-width:none}
 .ksart-ph{position:absolute;inset:3px;display:grid;place-items:center;text-align:center;padding:6px;font:700 .8rem/1.25 var(--display,serif);color:#fff3d8;
  background:linear-gradient(#5a3a1acc,#2a1a12cc),url(img/kit/bg-default.webp) center/cover;border-radius:2px}
@@ -884,7 +879,11 @@ document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closes
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
- let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");
+ /* KIT 6.3b (review/kit-keeper-2, main s11 item 4): SHORT LANDSCAPE (phone sideways, 844x390: the card's room is ~180 px high) — the two-column card whatever
+    the width: picture + name + info LEFT (narrow column, sticky), acts RIGHT, so the first act is on the first screen instead of 500 px down the page */
+ if(pc&&innerHeight<=520&&innerWidth>innerHeight){pc.style.setProperty("--kpcw","92px");return true}
+ return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
@@ -902,7 +901,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
   /* portrait screens under 1000 px (Fold, phones): the card takes the WHOLE panel under the sticky sub-tabs and the panel scrolls the
      face strip up out of the way, so the header + at least one whole act card are in view; wide screens keep strip + card together */
   const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;
-  const narrow=innerWidth<1000&&innerHeight>=innerWidth*.9;/* the face strip (picker) ALWAYS stays in view above the card (owner 11/14): narrow screens get a compact strip, and the card takes
+  const narrow=false;/* KIT §0: one page = the spread page (was: narrow portrait width) *//* the face strip (picker) ALWAYS stays in view above the card (owner 11/14): narrow screens get a compact strip, and the card takes
      the room from the strip's bottom to the panel's bottom */
   const strip=P.querySelector(".pstrip");const stripH=strip&&strip.offsetParent?strip.getBoundingClientRect().height+6:0;
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
@@ -965,12 +964,7 @@ setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=nu
 .pc.kpnar[data-k2] .kpstick .pctabs>.pct{flex:0 0 auto;white-space:nowrap}
 .kpsheetb .kwear{margin:0 0 8px}.kpsheetb .kpfacts{display:flex;flex-direction:column;gap:6px}
 /* compact picker strip on portrait screens under 1000 px: one row of small faces + names, pager arrows */
-@media (max-width:999px) and (orientation:portrait){
- #panel .pstrip{margin:0 0 4px!important;gap:4px!important}#panel .pstrip .pface{min-height:0!important;padding:1px 2px!important}
- #panel .pstrip .pface .md.kfc,#panel .pstrip .pface span.md{width:28px!important}#panel .pstrip .pface>span:not(.md){font-size:.66rem!important}
- #panel .pstrip .psep{font-size:.6rem!important;line-height:1.1!important;margin:0 0 1px!important}#panel .pstrip .pgrp{border-left:1px solid var(--k-hair,#e6d3ac);padding-left:2px}#panel .pstrip .pgrp:first-child{border-left:0}
- #panel .pstrip>button,#panel .pstrip .pnav{min-height:40px!important;min-width:32px!important}
-}
+/* kv: dropped @media (max-width:999px) and (orientation:portrait) (one page = spread page, KIT §0) */
 
  .pc.kpnar[data-k2]{display:block!important}
  .pc.kpnar[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
@@ -1063,5 +1057,5 @@ document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest
 .pc.kpnar[data-k2]>.pcl>.kpfacts{display:flex!important;grid-area:fx;margin:4px 0 0;flex-direction:column;gap:4px}
 .pc.kpnar[data-k2]>.pcl>.kpfacts .chips{gap:4px}
 .pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kst-chip{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kst-chip>.kstl{font-size:.62rem}.pc.kpwide .kst-chip .fbar{width:22px!important}
-@media (max-width:599px){.kst-chip{font-size:.7rem;padding:1px 5px}.kst-chip>.kstl{font-size:.62rem}.kst-chip .fbar{width:24px!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
