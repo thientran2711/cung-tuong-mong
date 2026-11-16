@@ -28,14 +28,14 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/art-frames-kit.md (8.8 KB): frames, ornaments, kit art
 - dev/rules/topic/art-items-pets.md (8.7 KB): item icons, gift art, pets
 - dev/rules/topic/art-other.md (18.4 KB): other art rules
-- dev/rules/topic/art-scenes.md (17.3 KB): rooms, backdrops, map art, seasons and time-of-day art
+- dev/rules/topic/art-scenes.md (18.2 KB): rooms, backdrops, map art, seasons and time-of-day art
 - dev/rules/topic/balance-economy.md (20.8 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
 - dev/rules/topic/coop.md (3.6 KB): co-op / playing with a friend
 - dev/rules/topic/handover-restatements.md (68.4 KB): owner rules as restated in handover/foreman/queue/ledger files (OD lines win where they differ)
 - dev/rules/topic/kit-ui.md (20.3 KB): shared kit, layout, panels, cards, tabs, dialogs, Fold/iPad screens
 - dev/rules/topic/people-life.md (5.8 KB): NPC behaviour, personality, servants, children, death, pregnancy, nights
 - dev/rules/topic/process-history.md (12.1 KB): older process rulings and session history (main chat reads when needed)
-- dev/rules/topic/story-roads.md (10.0 KB): main/side stories, chapters, roads, origins, endings, tutorial
+- dev/rules/topic/story-roads.md (10.2 KB): main/side stories, chapters, roads, origins, endings, tutorial
 - dev/rules/topic/systems-other.md (4.4 KB): other game systems (items rules, map, sound, stat logs, minigame limits)
 - dev/rules/topic/time-calendar.md (3.7 KB): khắc, buổi, calendar, festivals, seasons (game rules)
 - dev/rules/topic/wording.md (8.3 KB): player-visible words, VANPHONG, no %, names of acts
