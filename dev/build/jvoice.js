@@ -76,7 +76,7 @@ function now(){try{return typeof wk==="function"?wk():0}catch(e){return 0}}
 function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
   REG[key]=pool;if(!L.length)return"";let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
-  const fresh=L.filter(x=>mem[x]==null||t-mem[x]>=gap);
+  const fresh=L.filter(x=>mem[x]==null||t-mem[x]>=gap||t<mem[x]);
   const pickFrom=fresh.length?fresh:L.slice().sort((a,b)=>(mem[a]==null?-1e9:mem[a])-(mem[b]==null?-1e9:mem[b])).slice(0,1);
   const line=pickFrom[Math.floor(Math.random()*pickFrom.length)];
   try{mem[line]=t;const ks=Object.keys(mem);if(ks.length>40)for(const k of ks)if(t-mem[k]>gap*4)delete mem[k]}catch(e){}
@@ -84,14 +84,14 @@ function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m|
 /* ---- outcome flavour (VANPHONG §2.5): one short court-voice sentence before the plain numbers of a talk / visit result ----
    kOutcome(kind, ok): kind = the person's kind on the stage (th, emp, hh, rival, fallen, maid, ksp, ty, elder, man, kid); pooled, no repeat */
 const OUT={
- th:{ok:["Thái hậu khẽ gật đầu, tràng hạt lần chậm lại","Thái hậu cho ngồi, sai người dâng trà sen","Thái hậu cười hiền, hỏi han đôi câu chuyện nhà","Thái hậu nghe xong, vẻ mặt dịu đi hẳn","Ma ma Đức Thọ cung tiễn ta ra tận cửa"],
-  no:["Thái hậu chỉ ừ một tiếng, rồi nhắm mắt lần tràng hạt","Thái hậu bảo mệt, cho lui sớm","Thái hậu nhìn ta một lượt, chẳng nói thêm","Lời ta chưa dứt, Thái hậu đã chuyển sang chuyện khác"]},
- hh:{ok:["Hoàng hậu mỉm cười, giọng ôn tồn hẳn","Hoàng hậu gọi ta ngồi gần, hỏi chuyện cung ta","Hoàng hậu khen ta biết lễ trước mặt các cung","Hoàng hậu sai người gói điểm tâm cho ta mang về"],
-  no:["Hoàng hậu vẫn cười, nhưng ý cười chẳng tới đáy mắt","Hoàng hậu phẩy khăn, chuyển sang hỏi người khác","Các phi tần đưa mắt nhìn nhau, Hoàng hậu chẳng nói gì","Hoàng hậu bảo ta về nghỉ sớm, giọng nhạt như nước"]},
- emp:{ok:["Hoàng thượng bật cười, mệt mỏi như tan đi","Hoàng thượng nắm tay ta, chẳng vội buông","Hoàng thượng gác bút, ngồi nghe ta nói hết","Ánh mắt Hoàng thượng dừng ở ta lâu hơn thường lệ"],
-  no:["Hoàng thượng ừ một tiếng rồi cầm tấu chương lên","Hoàng thượng khẽ nhíu mày, chẳng nói thêm","Hoàng thượng phất tay cho lui","Hoàng thượng đang bận lòng việc triều, chẳng để ý lời ta"]},
- rival:{ok:["Nàng ta nắm tay ta, cười như chị em lâu ngày","Nàng ta tiễn ta ra tận cửa cung","Hai bên trò chuyện rôm rả, chén trà nguội lúc nào chẳng hay","Nàng ta ghé tai kể cho ta mấy chuyện trong cung"],
-  no:["Nàng ta cười nhạt, tay mân mê chén trà","Nàng ta bảo đang mệt, chẳng tiện tiếp lâu","Lời qua tiếng lại, ai cũng giữ ý","Nàng ta phe phẩy quạt, giọng mát như nước giếng"]},
+ th:{ok:["Thái hậu khẽ gật đầu, tràng hạt lần chậm lại","Thái hậu cho ngồi, sai người dâng trà sen","Thái hậu cười hiền, hỏi han đôi câu chuyện nhà","Thái hậu nghe xong, vẻ mặt dịu đi hẳn","Ma ma Đức Thọ cung tiễn ta ra tận cửa","Thái hậu kể cho ta nghe chuyện thời còn trẻ","Thái hậu ban cho ta một hộp mứt sen","Thái hậu bảo ta mai lại sang"],
+  no:["Thái hậu chỉ ừ một tiếng, rồi nhắm mắt lần tràng hạt","Thái hậu bảo mệt, cho lui sớm","Thái hậu nhìn ta một lượt, chẳng nói thêm","Lời ta chưa dứt, Thái hậu đã chuyển sang chuyện khác","Thái hậu thở dài, chẳng biết vì ta hay vì chuyện khác","Ma ma ra hiệu cho ta lui, Thái hậu đã thiếp đi","Thái hậu chỉ dặn một câu: biết phận thì hơn"]},
+ hh:{ok:["Hoàng hậu mỉm cười, giọng ôn tồn hẳn","Hoàng hậu gọi ta ngồi gần, hỏi chuyện cung ta","Hoàng hậu khen ta biết lễ trước mặt các cung","Hoàng hậu sai người gói điểm tâm cho ta mang về","Hoàng hậu cho ta xem bức thêu đang làm dở","Hoàng hậu gật đầu, bảo ta là người hiểu chuyện","Hoàng hậu nhắc ta giữ gìn sức khỏe, giọng ân cần"],
+  no:["Hoàng hậu vẫn cười, nhưng ý cười chẳng tới đáy mắt","Hoàng hậu phẩy khăn, chuyển sang hỏi người khác","Các phi tần đưa mắt nhìn nhau, Hoàng hậu chẳng nói gì","Hoàng hậu bảo ta về nghỉ sớm, giọng nhạt như nước","Hoàng hậu bận xem sổ sách, chẳng ngẩng lên","Hoàng hậu bảo: việc ấy để sau hãy bàn","Ma ma Càn Ninh cung tiễn ta ra, mặt lạnh như tiền"]},
+ emp:{ok:["Hoàng thượng bật cười, mệt mỏi như tan đi","Hoàng thượng nắm tay ta, chẳng vội buông","Hoàng thượng gác bút, ngồi nghe ta nói hết","Ánh mắt Hoàng thượng dừng ở ta lâu hơn thường lệ","Hoàng thượng bảo ta ngồi lại thêm chút nữa","Hoàng thượng khen ta hiểu ý, giọng ấm hẳn","Hoàng thượng sai người mang trà ngon nhất ra mời"],
+  no:["Hoàng thượng ừ một tiếng rồi cầm tấu chương lên","Hoàng thượng khẽ nhíu mày, chẳng nói thêm","Hoàng thượng phất tay cho lui","Hoàng thượng đang bận lòng việc triều, chẳng để ý lời ta","Hoàng thượng nhìn ra ngoài cửa sổ, lòng để tận đâu","Tổng quản thái giám ra hiệu, Hoàng thượng còn bận việc","Hoàng thượng nghe xong, chỉ nói: để trẫm nghĩ đã"]},
+ rival:{ok:["Nàng ta nắm tay ta, cười như chị em lâu ngày","Nàng ta tiễn ta ra tận cửa cung","Hai bên trò chuyện rôm rả, chén trà nguội lúc nào chẳng hay","Nàng ta ghé tai kể cho ta mấy chuyện trong cung","Nàng ta mời ta ở lại dùng bữa","Nàng ta tặng ta một túi hương tự tay khâu","Nàng ta tiễn ta, hẹn hôm sau sang chơi"],
+  no:["Nàng ta cười nhạt, tay mân mê chén trà","Nàng ta bảo đang mệt, chẳng tiện tiếp lâu","Lời qua tiếng lại, ai cũng giữ ý","Nàng ta phe phẩy quạt, giọng mát như nước giếng","Nàng ta nói chuyện thời tiết, khéo tránh mọi điều ta hỏi","Người hầu bên nàng ta cứ đứng sát, chẳng nói được gì riêng","Nàng ta cười khẽ, ánh mắt như dò xét"]},
  maid:{ok:["Người hầu cúi đầu vâng dạ, mắt sáng lên","Kẻ dưới thấy ta tử tế, làm việc càng chăm","Người hầu lui ra, bước chân nhẹ hẳn"],no:["Người hầu cúi gằm, chẳng dám nói thêm","Kẻ dưới vâng dạ cho qua, lòng chẳng phục","Người hầu lui ra, sắc mặt khó coi"]},
  any:{ok:["Mọi việc trôi chảy như ý","Người nghe gật gù, lòng đã xuôi","Lời ta nói ra, người kia nghe lọt tai"],no:["Việc chẳng thành, đành hẹn dịp khác","Người kia lắc đầu, chẳng chịu nghe","Ta về tay không, lòng chẳng vui"]}};
 OUT.fallen=OUT.rival;OUT.ksp=OUT.maid;OUT.ty=OUT.any;OUT.elder=OUT.maid;OUT.man=OUT.any;OUT.kid=OUT.any;

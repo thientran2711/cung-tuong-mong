@@ -350,4 +350,4 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back */
-Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,noRepeat:6}});
+Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,noRepeat:5}});
