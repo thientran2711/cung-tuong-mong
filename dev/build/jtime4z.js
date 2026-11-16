@@ -9,5 +9,6 @@ if(typeof BUK!=="undefined"&&BUK.length===3)BUK.splice(1,0,window.B4_TRUA_IMG?"t
  document.head.appendChild(st)}catch(e){}})();
 (function(){const d0=deser;deser=function(d){const r=d0.apply(this,arguments);
  try{if(d&&!d.b4&&S){const m=b=>b>=2?3:b>=1?2:0;S.buoi=m(S.buoi||0);const cv=x=>typeof x==="number"&&x>=0?Math.floor(x/3)*B4N+m(x%3):x;
+  /* jmen plans (b = buổi) and the jstory pledge clock (wk*3+b -> wk*4+b) */(S.menPlans||[]).forEach(P=>{if(typeof P.b==='number')P.b=m(P.b)});if(S.pl67){S.pl67.due=cv(S.pl67.due);S.pl67.t0=cv(S.pl67.t0)}
   if(S.srv){if(S.srv.sent&&S.srv.sent.until!=null)S.srv.sent.until=cv(S.srv.sent.until);for(const k in (S.srv.once||{})){const v=S.srv.once[k];if(v&&v.b!=null)v.b=cv(v.b)}}}}catch(e){console.error(e)}
  return r}})();

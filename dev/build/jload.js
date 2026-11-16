@@ -76,7 +76,7 @@ function paintAsk(){const b=el.querySelector(".klb"),o=el.querySelector(".kpopts
   o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"");return}
  head("Chọn nơi chơi trước khi thỉnh tranh");
  b.innerHTML=`<div class="kpnote">Trên iPad, iPhone, Safari và ứng dụng ở màn hình chính cất tranh riêng, không dùng chung. Thỉnh tranh ở Safari (${left} MB) rồi mở bằng màn hình chính là phải thỉnh lại một lần nữa.</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
-  (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Thiết lập › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
+  (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
  o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"")}
 function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  const c=KLOAD.core,b=el.querySelector(".klb"),o=el.querySelector(".kpopts");

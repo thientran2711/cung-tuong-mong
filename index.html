@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"45a2312d+","t":"2026-11-16T19:29Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test","b":"fbdcac6ff286","h":[{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
+window.CTM_BI={"s":"be25de29+","t":"2026-11-16T19:34Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test","b":"4d179ce3149f","h":[{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -3951,7 +3951,7 @@ function pastHTML(){const p=lifeLog();if(!p.length){const o=store.get("cung-kiep
 function themeTick(){if(!S)return;const sea=SEAK[SEASON[S.month-1]]||"ha";const f=festToday();const b=document.body;if(b.dataset.sea!==sea)b.dataset.sea=sea;const fk=f&&["newyear","trungthu","thattich","giaothua","nguyentieu"].includes(f.k)?f.k:"";if((b.dataset.fest||"")!==fk){if(fk)b.dataset.fest=fk;else delete b.dataset.fest}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{themeTick()}catch(e){}return r}})();
 /* festival weather: gold and red sparks outdoors on Tết, Nguyên tiêu, Giao thừa; night-blue stars on Thất tịch use the fireflies */
-(function(){if(typeof pxKind!=="function")return;const k0=pxKind;pxKind=function(){const k=k0.apply(this,arguments);try{const f=festToday();const P=placeOf(S.place);if(f&&["vuon","lc","home","tgk","maid"].includes(P.sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))return "gold";if(f.k==="thattich"||f.k==="trungthu")return "fly"}}catch(e){}return k}})();
+(function(){if(typeof pxKind!=="function")return;const k0=pxKind;pxKind=function(){const k=k0.apply(this,arguments);try{const f=festToday();const P=placeOf(S.place);if(f&&typeof kfFestFx==="function"){if(kfFestFx("gold"))return "gold";if(kfFestFx("fly"))return "fly"}}catch(e){}return k}})();
 /* ================= TRANH GHẾ: an open seat is won in a three-round contest, same for every candidate ================= */
 /* rounds: Tài nghệ (art + skill), Đức hạnh (Thái hậu's dilemma), Thế lực (backers); each 0-10, weighted by the Emperor's traits */
 const CR=["Tài nghệ","Đức hạnh","Thế lực"];
@@ -6702,7 +6702,7 @@ document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
 const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:"Thông tin cập nhật"};
-const SUBH={slots:"Ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
+const SUBH={slots:"Sổ mây ở trên, rồi ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
 const SONO=["một","hai","ba"];
 function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
@@ -6710,6 +6710,9 @@ function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 cla
   if(!d)return `<div class="kslot">${h}${kitRows([["Kiếp","Chưa ghi","n"]])}<div class="kslot-a"><button class="kbtn" data-new="${n}">Bắt đầu kiếp mới</button></div></div>`;
   const s=d.S;return `<div class="kslot">${h}${kitRows([["Kiếp",`${slotWho(s)} ${s.name}`,"t"]].concat(s.age!=null?[["Tuổi",`${s.age} tuổi`,"n"]]:[],[["Ngày",slotDate(s),"n"]]))}<div class="kslot-a"><button class="kbtn" data-load="${n}">Tiếp tục kiếp này</button><button class="kbtn alt" data-new="${n}" data-ask="1">Kiếp mới</button></div></div>`}).join("")}
 /* owner 16/11: two separate sets on this screen: the solo sổ (above) and the co-op rooms (jslots, below); a room never writes a sổ */
+function cloudMini(){try{return window.CTM_CLOUD&&CTM_CLOUD.mini?CTM_CLOUD.mini():""}catch(e){return ""}}
+/* Chọn sổ › Cùng hảo hữu: the title's co-op button opens this tab, so "Nhập ám hiệu" (jcooplobby join flow) lives here too */
+function coopJoin(){return `<div class="kslot kjoin"><h4 class="kpst">Nhập ám hiệu</h4>${kitRows([["Hảo hữu mời","Gõ ám hiệu hảo hữu gửi để vào phòng của hảo hữu","t"]])}<div class="kslot-a"><button class="kbtn alt" data-coop="join">Nhập ám hiệu</button></div></div>`}
 function roomsHTML(){try{return window.CTM_ROOMS?CTM_ROOMS.html():""}catch(e){return ""}}
 window.CTM_SLOTWHO=slotWho;window.CTM_SLOTDATE=slotDate;window.CTM_DRAWSLOTS=()=>drawSlots();
 /* Chọn sổ = TWO kit tabs (KIT 46 tab row, same part as Mua/Bán): "Một mình" (3 sổ) | "Cùng hảo hữu" (3 phòng); opens on the mode last played */
@@ -6719,7 +6722,7 @@ function csGet(){if(CSTAB)return CSTAB;let v=null;try{v=localStorage.getItem(CSK
 function csSet(v){CSTAB=v;try{localStorage.setItem(CSK,v)}catch(e){}}
 function csSub(){const M=$("modal");const e=M&&M.classList.contains("kptitle")&&M.querySelector('.kpt-mount[data-pg="slots"]')?M.querySelector(".dlg > .kph .kpsub"):null;if(e)e.textContent=csGet()==="coop"?SUBH.slotsco:SUBH.slots}
 function drawSlots(){const s=$("slots");if(!s)return;const t=csGet();
- s.innerHTML=`<div class="pctabs kcattabs kcstabs" role="tablist">${kitTabRowHTML([{k:"solo",label:"Một mình"},{k:"coop",label:"Cùng hảo hữu"}],t,"data-kcs")}</div>`+(t==="coop"?roomsHTML():slotsHTML());csSub()}
+ s.innerHTML=`<div class="pctabs kcattabs kcstabs" role="tablist">${kitTabRowHTML([{k:"solo",label:"Một mình"},{k:"coop",label:"Cùng hảo hữu"}],t,"data-kcs")}</div>`+(t==="coop"?coopJoin()+roomsHTML():cloudMini()+slotsHTML());csSub()}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots [data-kcs]");if(!b)return;e.stopPropagation();csSet(b.dataset.kcs);drawSlots();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}},true);
 /* playing a mode makes it the tab the list opens on next time */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots button[data-load],#slots button[data-new]:not([data-ask])");if(b)csSet("solo")},true);
@@ -6745,7 +6748,7 @@ function numVi(n){try{return window.VP&&VP.num?VP.num(n):String(n)}catch(e){retu
 function lastSlot(){const F=[1,2,3].filter(n=>loadSlot(n));if(!F.length)return 0;return F.includes(SLOT)?SLOT:F[0]}
 function homeMenu(){const n=lastSlot();let info="";
  if(n){const d=loadSlot(n);if(d&&d.S)info=[`${slotWho(d.S)} ${d.S.name}`,slotDate(d.S)].filter(Boolean).join(" · ")}
- const B=n?`<button class="kbtn k1" data-tgo="cont">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots">Kiếp mới</button>`
+ const B=n?`<button class="kbtn k1" data-tgo="slots" data-cstab="solo">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots" data-cstab="solo">Kiếp mới</button>`
           :`<button class="kbtn k1" data-tgo="slots">Bắt đầu<small>chọn sổ, xem Phúc duyên</small></button>`;
  return `<div class="kpmenu${n?" n4":""}">${B}<button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
 /* live nodes each sub-screen borrows from .tbox, in display order */
@@ -6778,6 +6781,7 @@ function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg
 function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(!lb)return false;PG="home";dropAll();lb.click();return true}
 window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
+ if(b.dataset.cstab){csSet(b.dataset.cstab);if(g==="slots")try{drawSlots()}catch(x){}}
  if(g==="cont"){resumeGame();return}
  go(g)},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="home"){e.preventDefault();go("home")}});
@@ -17381,6 +17385,7 @@ if(typeof BUK!=="undefined"&&BUK.length===3)BUK.splice(1,0,window.B4_TRUA_IMG?"t
  document.head.appendChild(st)}catch(e){}})();
 (function(){const d0=deser;deser=function(d){const r=d0.apply(this,arguments);
  try{if(d&&!d.b4&&S){const m=b=>b>=2?3:b>=1?2:0;S.buoi=m(S.buoi||0);const cv=x=>typeof x==="number"&&x>=0?Math.floor(x/3)*B4N+m(x%3):x;
+  /* jmen plans (b = buổi) and the jstory pledge clock (wk*3+b -> wk*4+b) */(S.menPlans||[]).forEach(P=>{if(typeof P.b==='number')P.b=m(P.b)});if(S.pl67){S.pl67.due=cv(S.pl67.due);S.pl67.t0=cv(S.pl67.t0)}
   if(S.srv){if(S.srv.sent&&S.srv.sent.until!=null)S.srv.sent.until=cv(S.srv.sent.until);for(const k in (S.srv.once||{})){const v=S.srv.once[k];if(v&&v.b!=null)v.b=cv(v.b)}}}}catch(e){console.error(e)}
  return r}})();
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
@@ -25652,16 +25657,17 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 function menH(x){let h=7;for(const c of String(x))h=(h*31+c.charCodeAt(0))%100003;return h}
 function menHcPal(v){const k=palaceOf(v);return k==="home"?null:k}
 function menGi(m){return Math.max(0,menGuards().indexOf(m))}
-/* the guards' roster: 2 buổi of 3 on duty, the post turns with the week */
-function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((w*3+b+i)%3===0)return null;return["thu","dtd","ksp"][(w+i)%3]}
+/* the guards' roster keeps its 3 shifts (old balance): buổi -> shift index [sáng, trưa, chiều, tối] = [0,0,1,2] (trưa rides the morning shift); 2 shifts of 3 on duty, the post turns with the week */
+const MEN_SHIFT=[0,0,1,2];
+function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((w*3+MEN_SHIFT[b]+i)%3===0)return null;return["thu","dtd","ksp"][(w+i)%3]}
 /* craftsmen's work orders (Nội vụ phủ): every other tuần, in the morning or afternoon, at the palaces in turn (highest rank first) */
 function menOrder(m,w){if(m.rw!=="nhạc sư"&&m.rw!=="họa sư")return null;const i=+m.id.slice(1)||0;if((w+i)%2)return null;
- const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?1:(w>>1)%2,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
+ const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?2:(w>>1)%2?2:0,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
 function menFestOn(){try{return festToday()}catch(e){return null}}
-function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===2,w=wk();const f=menFestOn();const L=liveRivals(true);
+function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,ww="";const i=+m.id.slice(1)||0;
   if(rw==="thị vệ"){k=menDuty(m,w,b);ww=k?"duty":""}
-  else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b===1){k=menHcPal(sick[w%sick.length]);ww="summons"}else if(!night){k="tyv";ww="duty"}}
+  else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b===2){k=menHcPal(sick[w%sick.length]);ww="summons"}else if(!night){k="tyv";ww="duty"}}
   else if(rw==="vương gia"){if(f&&!night){k="vuon";ww="fest"}else if(!S.thDead&&b===0&&(w+i)%4===0){k="tn";ww="visit"}}
   else if(rw==="nhạc sư"||rw==="họa sư"){const o=menOrder(m,w);if(o&&o.b===b){k=o.k;ww="order"}}
   else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}else if(f&&!night){k="vuon";ww="fest"}}
@@ -25683,13 +25689,13 @@ function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)ret
 function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.menPlans.push(P);menTip(P)};const C=liveRivals(false);
  /* 1. lovers (j22 v.affair): every 2–3 tuần by his nature, the night his guard roster leaves free, at a place her nature chooses */
  for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;const cad=MEN_ROVE.includes(m.trait)?2:3;if((t+menH(v.id))%cad)continue;
-  if(m.rw==="thị vệ"&&menDuty(m,t,2))continue;const careful=v.trait==="Đa nghi"||m.trait==="cẩn trọng";const k=careful?"lc":(menHcPal(v)&&v.trait==="Kiêu ngạo"?menHcPal(v):"vuon");
-  add({m:m.id,v:v.id,r:"tryst",b:2,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
+  if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=v.trait==="Đa nghi"||m.trait==="cẩn trọng";const k=careful?"lc":(menHcPal(v)&&v.trait==="Kiêu ngạo"?menHcPal(v):"vuon");
+  add({m:m.id,v:v.id,r:"tryst",b:B4L,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
  /* 2. secret letters: a consort with a reason to reach the outside, once a season (12 tuần) while the reason lasts, through a guard who can be bought, on his shift;
     one letter a tuần goes out at most (the guards can carry only one safely) */
  let lt=0;for(const v of C.slice().sort((a,b)=>menH(a.id+":"+t)-menH(b.id+":"+t))){if(lt||v.queen||!menHcPal(v))continue;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";if(!why||(t+menH(v.id))%12)continue;
   const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.includes(g.trait)||(g.loyal||50)<50)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
-  const g=G[0];const bb=[2,1,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
+  const g=G[0];const bb=[B4L,2,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.includes(m.trait))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
@@ -26801,7 +26807,7 @@ function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m
     Bắt đầu = Chọn sổ), only its words say which way of playing it is; "Kiếp mới" stays beside it. */
  const k=m.querySelector(".kbtn.k1");if(k&&!k.dataset.solo){k.dataset.solo="1";const sm=k.querySelector("small");const was=k.firstChild&&k.firstChild.nodeType===3?k.firstChild.textContent.trim():"";
   const info=sm?sm.textContent:"";k.innerHTML=`Chơi một mình<small>${was==="Tiếp tục"?"Tiếp tục: "+esc(info):esc(info)}</small>`}
- const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.coop="co";b.innerHTML="Cùng hảo hữu<small>Mời hảo hữu · Nhập ám hiệu</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
+ const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.tgo="slots";b.dataset.cstab="coop";b.innerHTML="Cùng hảo hữu<small>Mời hảo hữu · Nhập ám hiệu</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
 new MutationObserver(addBtn).observe($("modal"),{childList:true,subtree:true});
 /* live updates while a lobby screen is up */
 COOP.on("status",s=>{if(!LM||Q[0]!==LM||T.hidden)return;if(PG==="wait"){const a=document.activeElement;open("wait");if(a&&a.dataset&&a.dataset.coop){const n=document.querySelector(`#modal [data-coop="${a.dataset.coop}"]`);if(n)n.focus({preventScroll:true})}}});
@@ -27359,7 +27365,7 @@ function html(){const L=list();let h="";
 window.CTM_ROOMS={list,html,forget,upd,full:()=>list().length>=MAX};
 }catch(e){console.error(e)}})();
 /* ================= jcloud: SỔ MÂY — one character on phone AND iPad (owner 15/11, C44, review/cloud-save) =================
-   Thiết lập › Sổ mây: "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
+   Chọn sổ › Một mình (top, above the 3 sổ; owner 16/11) AND Thiết lập › Sổ mây — the same part (miniHTML/sectionHTML + btnsHTML): "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
    8-letter ám hiệu sổ (owner design; Crockford base32, guessing stopped by the Worker's per-network miss guard); "Nối sổ" + that ám hiệu links another device. Local-first: the sổ stay in localStorage
    (j6 SK(n)), the cloud is a copy.
    SYNC (run): base = the cloud version this device last matched (C.rev + per-sổ hashes C.h). For each sổ one/hai/ba:
@@ -27418,7 +27424,7 @@ const playing=()=>T.hidden&&typeof S==="object"&&S&&!S.dead;
 let BUSY=null,AGAIN=false,STATE="";
 function sync(o){if(!C.k)return Promise.resolve("");if(BUSY){AGAIN=true;return BUSY}
  STATE="busy";wire();BUSY=(async()=>{let r="";try{for(let i=0;i<3;i++){r=await run(o||{});if(r!=="retry")break}}catch(e){console.error(e);r="err"}
-  BUSY=null;STATE="";if(r==="ok"||r==="same")C.err="";saveC();wire();if(AGAIN){AGAIN=false;setTimeout(()=>sync(o),50)}
+  BUSY=null;STATE="";if(r==="ok"||r==="same"){C.err="";C.sy=Date.now()}saveC();wire();if(AGAIN){AGAIN=false;setTimeout(()=>sync(o),50)}
   if(C.pend&&!T.hidden)setTimeout(()=>{if(!T.hidden&&PG!=="pick")open("pick")},30);return r})();return BUSY}
 async function run(o){
  if(C.pend&&!o.resolve)return "conflict";
@@ -27475,21 +27481,27 @@ const group=k=>String(k||"").replace(/(.{4})(?=.)/g,"$1-");
 function slotLine(s){return s?[`${s.w||""} ${s.n||""}`.trim(),s.d||""].filter(Boolean).join(" · "):"Chưa ghi"}
 
 /* ---------- Thiết lập section (.cloudwrap, borrowed by j74 like .optwrap / .xiowrap) ---------- */
+/* ONE button set for the two places that show Sổ mây (Chọn sổ › Một mình, Thiết lập): same words, same data-cl flows, no second implementation */
+function btnsHTML(){if(!C.k)return `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div>`;
+ return `<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Đồng bộ ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div>`}
+const mask=k=>{k=String(k||"");return k.length>=8?"••••-••"+esc(k.slice(-2)):"••••-••••"};
 function sectionHTML(){let h=`<div class="kslot"><h4 class="kpst">Sổ mây</h4>`;
- if(!C.k)return h+kitRows([["Sổ mây","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+
-  `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div></div>`;
+ if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+btnsHTML()+`</div>`;
  const w=stateWord();
- h+=kitRows([["Sổ mây",esc(w[0]),w[1]]].concat(C.at?[["Gửi sau cùng",esc(fmtAt(C.at)),"n"]]:[]));
- h+=`<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Gửi ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div></div>`;
- return h}
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]]].concat(C.at?[["Gửi sau cùng",esc(fmtAt(C.at)),"n"]]:[]))+btnsHTML()+`</div>`}
+/* Chọn sổ › Một mình, above the 3 sổ (j74 drawSlots): one compact card, the state + the same buttons */
+function miniHTML(){const h=`<div class="kslot cloudmini"><h4 class="kpst">Sổ mây</h4>`;
+ if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây · chơi tiếp trên máy khác","n"]])+btnsHTML()+`</div>`;
+ const w=stateWord();
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]],["Ám hiệu",mask(C.k)+(C.sy||C.at?" · đồng bộ lúc "+esc(fmtAt(C.sy||C.at)):""),"n"]])+btnsHTML()+`</div>`}
 function wire(){let w=document.querySelector("#modal .cloudwrap")||T.querySelector(".cloudwrap");
  if(!w){const box=T.querySelector(".tbox");if(!box)return;w=document.createElement("div");w.className="cloudwrap";box.appendChild(w)}
- w.innerHTML=sectionHTML();if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
+ w.innerHTML=sectionHTML();try{document.querySelectorAll("#slots .cloudmini").forEach(e=>{e.outerHTML=miniHTML()})}catch(e){}if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
 
 /* ---------- sub-panels: kit scene panels on the title backdrop (as the co-op lobby) ---------- */
 let LM=null,PG="",MSG="",PICK={},VERS=null,ASK=0;
 function drop(){if(!LM)return;const i=Q.indexOf(LM);if(i>=0)Q.splice(i,1);LM=null;const M=$("modal");if(M&&Q.length)showModal();else if(M){M.hidden=true;M.classList.remove("kptitle","kpscene")}}
-const HEAD={code:["Ám hiệu sổ mây","Gõ ám hiệu này ở máy kia: Thiết lập › Sổ mây › Nối sổ."],link:["Nối sổ","Gõ ám hiệu sổ mây của máy kia."],
+const HEAD={code:["Ám hiệu sổ mây","Gõ ám hiệu này ở máy kia: Chọn sổ › Một mình › Sổ mây › Nối sổ."],link:["Nối sổ","Gõ ám hiệu sổ mây của máy kia."],
  pick:["Hai bản sổ khác nhau","Sổ này đã được chơi trên cả hai máy. Chọn bản giữ lại."],vers:["Các bản đã giữ","Mười bản gần nhất trên mây."]};
 function body(pg){
  if(pg==="code")return kitInput({id:"cl-key",label:"Ám hiệu sổ mây",value:group(C.k),readonly:true})+
@@ -27564,7 +27576,7 @@ function buoiKey(){try{return S&&!S.dead?[S.year,S.month,S.tuan,S.buoi||0].join(
 {const f=save;save=function(){const r=f.apply(this,arguments);try{const k=buoiKey();if(k&&lastB&&k!==lastB&&C.k&&playing())setTimeout(()=>sync(),1500);if(k)lastB=k}catch(e){}return r}}
 document.addEventListener("visibilitychange",()=>{if(!C.k)return;if(document.visibilityState==="hidden"){try{if(playing())save()}catch(e){}sync({keep:1})}else if(!T.hidden)pull()});
 addEventListener("pagehide",()=>{if(C.k)sync({keep:1})});
-window.CTM_CLOUD={wire,sync,get state(){return C},open:pg=>pg==="vers"?vers():open(pg),hash,_reload(){loadC();wire()}};
+window.CTM_CLOUD={mini:miniHTML,wire,sync,get state(){return C},open:pg=>pg==="vers"?vers():open(pg),hash,_reload(){loadC();wire()}};
 wire();
 setTimeout(()=>{if(C.k&&!T.hidden)pull()},1500);
 }catch(e){console.error(e)}})();
@@ -28235,7 +28247,7 @@ function paintAsk(){const b=el.querySelector(".klb"),o=el.querySelector(".kpopts
   o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"");return}
  head("Chọn nơi chơi trước khi thỉnh tranh");
  b.innerHTML=`<div class="kpnote">Trên iPad, iPhone, Safari và ứng dụng ở màn hình chính cất tranh riêng, không dùng chung. Thỉnh tranh ở Safari (${left} MB) rồi mở bằng màn hình chính là phải thỉnh lại một lần nữa.</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
-  (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Thiết lập › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
+  (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
  o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"")}
 function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  const c=KLOAD.core,b=el.querySelector(".klb"),o=el.querySelector(".kpopts");
@@ -29352,7 +29364,7 @@ PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rư�
   o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
    go:()=>{if(!x.ok)return;spend(2);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
 function courtMeet(t){const B=[];try{
- if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=3;
+ if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=B4L;
   if(k&&!night&&S.place!==k){const st=accState(k);const nm=accName(k);
    if(st.ask==="yk")B.push(pbtn(`data-acask="${k}"`,`Xin yết kiến ở ${nm}`,accAskLine(k),st.askWhy||(!can(1)?"hết khắc":"")));
    else if(!st.why)B.push(pbtn(`data-kgmgo="${k}"`,`Đến ${nm} gặp ngài`,`Nắm chắc · tốn: ${st.tc||0} khắc · thành: đến nơi ngài đang ngự, gặp được ngài`,!can(st.tc||0)?"hết khắc":""));
@@ -29382,7 +29394,7 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
    ladder word); hỏng: ngài từ chối khéo; consorts already in the garden see it (ghen +3).
    All need ngài rảnh (daytime, not at Cần Chính điện, not in another palace) and one such act per day per consort (S.kmEmpDay = wk()). */
 window.BAL=window.BAL||{};BAL.empDay=Object.assign({p:.06,suc:5,walkNight:15},BAL.empDay||{});
-function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=3)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
+function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=B4L)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
  if(k==="thu")return{ok:false,why:"ngài đang phê tấu ở Cần Chính điện"};if(/^r\d/.test(k)||k==="kn")return{ok:false,why:"ngài đang ở cung phi tần khác"};return{ok:true,k}}
 function kmStorm(){const f=S.wx&&S.wx.f;return f===3||f===4}  /* j12 weather flags: 3 giông tố, 4 tuyết dày */
 function kmEmpO(a,kind){const sung=a.sung||0;
@@ -31987,11 +31999,20 @@ const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi s
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
- festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ festival:{                                   px:"lanterns",light:"fireworks"}, // Tết / Giao thừa tối: sky lanterns + fireworks (only via FESTFX)
  letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
+/* festival / night effects: ONE table, effect -> which festivals (FEST keys, j31) and which buổi it may play in (null = any buổi). Owner 11/16: every effect must match the CURRENT buổi and the CURRENT event;
+   fireworks ONLY on Tết and Giao thừa evenings (owner: an ordinary evening with fireworks feels wrong; Tết/Giao thừa with them is normal); indoor/outdoor does not matter. A festival or buổi not listed gets nothing. B4L = tối (named constant, never a raw index). */
+const FESTFX={
+ festival:{fest:["newyear","giaothua"],buoi:[B4L]},                 /* one-shot sky lanterns + fireworks (kitFx "festival") */
+ lantern:{fest:["nguyentieu","trungthu"],buoi:[B4L]},                /* one-shot sky lanterns (kitFx "lantern"), once per night */
+ gold:{fest:["newyear","giaothua","nguyentieu"],buoi:null},          /* gold/red sparks (j33 pxKind) */
+ fly:{fest:["thattich","trungthu"],buoi:[B4L]}};                     /* fireflies (j33 pxKind) */
+function kfFestFx(e){try{if(typeof S==="undefined"||!S||S.dead||typeof festToday!=="function")return false;const T=FESTFX[e],f=festToday();return !!(T&&f&&T.fest.includes(f.k)&&(!T.buoi||T.buoi.includes(S.buoi||0)))}catch(x){return false}}
+window.FESTFX=FESTFX;window.kfFestFx=kfFestFx;
 function kfOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
 function kfStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.getBoundingClientRect?o.el:null;if(el){const r=el.getBoundingClientRect();if(r.width)return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
@@ -32098,8 +32119,8 @@ const KF_WX={
 function kfWxCfg(){try{if(typeof S==="undefined"||!S)return null;const w=S.wx?S.wx.k:"dust",night=(S.buoi||0)===B4L,nm=S.wx?S.wx.n:"";let id=null;
  if(w==="petal"||w==="leaf"||w==="wind"||w==="snow"||w==="snowh"||w==="frost"||w==="snowp"||w==="storm")id=w;else if(w==="rain")id="drizzle";else if(w==="mist")id="mist";
  else if(night&&(w==="dust"||nm==="đom đóm"))id="fly";
- /* festival days outdoors (was code-drawn in j33 via pxKind): gold petals at New Year / eve / Nguyên tiêu, fireflies at Thất tịch / Trung thu; replaces the weather as before */
- try{const f=typeof festToday==="function"&&festToday();if(f&&["vuon","lc","home","tgk","maid"].includes(placeOf(S.place).sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))id="gold";else if(f.k==="thattich"||f.k==="trungthu")id="fly"}}catch(e){}
+ /* festival days (was code-drawn in j33 via pxKind): which festival and which buổi come ONLY from the FESTFX table (gold / fly rows); indoor/outdoor does not matter; replaces the weather as before */
+ try{if(kfFestFx("gold"))id="gold";else if(kfFestFx("fly"))id="fly"}catch(e){}
  if(!id)return null;const c=Object.assign({lay:"wx"},KF_WX[id]);c.id=id;c.night=night;return c}catch(e){return null}}
 function kfSeCfg(){return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.5,.9],sway:.9,spin:.03,sc:[.7,1.05],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
 function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
@@ -32209,7 +32230,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  W("kitSheetTurn",o=>function(){try{if(kfOn())vib("tap")}catch(e){}return o.apply(this,arguments)});
  /* render: tabs underline, ambient petals at home, festival-night lanterns once per night */
  W("render",o=>function(){const r=o.apply(this,arguments);try{KFX.ambOK=true;kfTabsSoon();kfAmbient();
-   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("festival"),600)}}}catch(e){console.error(e)}return r});
+   const fe=kfOn()?["festival","lantern"].find(kfFestFx):null;if(fe){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx(fe),600)}}}catch(e){console.error(e)}return r});
  document.addEventListener("visibilitychange",()=>{try{if(KFX.app){if(document.hidden)KFX.app.ticker.stop();else if(KFX.parts.length)KFX.app.ticker.start()}kfAmbient()}catch(e){}});
  /* a modal closing / overlay leaving lets the ambient petals back */
  setInterval(()=>{try{if(KFX.ambOK&&!kfAmbT&&kfAmbWant())kfAmbient()}catch(e){}},2500)})();
@@ -34043,8 +34064,8 @@ window.luxGift=luxGift;
        route's own loss + Danh −2. Indices stay stable (appended after the beat's own options).
    Audit: dev/review/story-deadlines.md (script dev/review/story_audit.js). ====================================================== */
 Object.assign(BAL,{dl67Khan:4,dl67Vua:9,dl67Lon:21,dl67Pen:2,cost67:[.6,.7,.8,.9,1,1.1,1.25,1.4,1.5],alt67Pen:15,alt67Suc:-6});
-function absB67(){try{return wk()*3+(S.buoi||0)}catch(e){return 0}}
-function dlT67(nb){nb=Math.max(0,nb|0);return nb<=0?"hết hạn":nb<3?`${nb} buổi`:nb%3===0?`${nb/3} ngày`:nb<6?`${nb} buổi`:`${Math.round(nb/3)} ngày`}
+function absB67(){try{return wk()*B4N+(S.buoi||0)}catch(e){return 0}}
+function dlT67(nb){nb=Math.max(0,nb|0);return nb<=0?"hết hạn":nb<B4N?`${nb} buổi`:nb%B4N===0?`${nb/B4N} ngày`:nb<2*B4N?`${nb} buổi`:`${Math.round(nb/B4N)} ngày`}
 function rkMul67(){const L=BAL.cost67;return L[Math.max(0,Math.min(L.length-1,(S&&S.rank)|0))]}
 function price67(n){return -Math.max(5,Math.round(-n*rkMul67()/5)*5)}
 /* severity: hand-set beats, else from the text (hunted / urgent) and the beat slot (climax and turn beats are big) */
@@ -43913,7 +43934,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fbdcac6ff286";window.CTM_BUILD=BUILD;
+const BUILD="4d179ce3149f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
