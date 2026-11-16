@@ -410,7 +410,7 @@
 | fig-cutout-code review r1 (sonnet, SMALL+art; + iPad WebKit filter:url() 1x check; + Nhập cung feet crop) of 04ec6425 | review/fig-cutout-code-r1 | main s24 | session_01UV1SzmJWhZHz6G55tgfdnH | PASS 923567d5 → LIVE 9c49f13c (s24) | 16/11 21:30Z |
 | coop-one-world review r1 (opus, BIG co-op, FIRST in line) of 008ed0b9 | review/coop-one-world-r1 | main s24 | session_01UV1SzjwwR8MVK2MWpikBAb | PASS cb84d1ba (3 reviewer fixes: epidemic reaches guest, kmEmp host-only, play test; report reports/coop-one-world-r1.md) | 16/11 21:35Z |
 | item-ledger co-op merge (opus; golive HOLD 20:57Z): integrate item-ledger-r1 7aba5de9 with live coop-b1b5 gift transport (no double delivery) | review/item-ledger-coop | D | session_01DgYSWqCyhf3pLAzBVv4WqP | RUNNING | 16/11 20:58Z |
-| road-b2 review r1 (opus, BIG roads) of 50805e8c | review/road-b2-r1 | B | session_01N1tNP4f7UkPdvWCcktAgLp | RUNNING | 16/11 21:02Z |
+| road-b2 review r1 (opus, BIG roads) of 50805e8c | review/road-b2-r1 | B | session_01N1tNP4f7UkPdvWCcktAgLp | DONE FAIL 8 @57c6c6d0 (archived) | 16/11 21:02Z |
 | diemtrang-fx (sonnet, owner bug + 2 owner rules ~21:00Z) (layout split to minigame-frame) | review/diemtrang-fx | main s24 | session_01UV1SziWkZTGftRGrAU1nCe | RUNNING | 16/11 21:45Z |
 | diff-remeasure review r1 (opus, BIG BAL) of 057243ed | review/diff-remeasure-r1 | B | session_01N1tNP49bxdSjM6pJkVehNh | PASS ebe9ab2d → READY d7d7ce1e (review/diff-remeasure-live), golive blocked: baseline tag 403 | 16/11 21:06Z |
 | diemtrang-score (opus, numbers): measure Điểm trang outcome distribution, explain formula to owner plainly, propose retune (diêm dúa by choices, vụng by misses×skill, funny visible result + witty line); BAL, NPC same table, co-op same; proposal → owner BEFORE build | review/diemtrang-score | main s24 | session_01UV1SzhX2fKGhGXpNLonvo5 | RUNNING | 16/11 21:55Z |
@@ -427,3 +427,4 @@
 | kit-fit r3 review r1 (sonnet, SMALL kit + consistency + co-op) of 2d6a50e3 | review/kit-fit-r3-r1 | main s24 | session_01UV1SzmFpim4M3rHm45ksp9 | RUNNING | 16/11 22:35Z |
 | stage-figsize HOTFIX (opus, URGENT owner bug 21:20Z): people tiny on the stage after page-scale live 1aa0edb2; giant clipped eunuch + label overlap; blank side-card portraits | review/stage-figsize | main s24 | (s24 opening) | RUNNING | 16/11 21:20Z |
 | road-b3-fix2 (opus): r1 FAIL item 1 thd_hoc .5–.11 never runs (pupil age gate) + family scan | review/road-b3-fix2 | B | session_01N1tNP6woPkxcr3RNgPTnGa | RUNNING | 16/11 21:36Z |
+| road-b2-fix (opus): r1 FAIL items 1–8 (nc/bd/td/ch dominance, continuity, effects, history rules, modern words) + scan checks | review/road-b2-fix | B | session_01N1tNP6BwuYAqkmCNc2VAG2 | RUNNING | 16/11 21:37Z |
