@@ -56,7 +56,7 @@ const ns0=nightScene;nightScene=function(){if(IN||!S||!nfOn())return ns0.apply(t
  const n=typeof ntTaken==="function"?ntTaken():null;
  if(n&&n.who!=="me"){try{log(`${ntReason(S)}.`)}catch(e){}if(S.tonight==="me")S.tonight=null;return}
  const pid=CUR!=null?CUR:(Q[0]&&Q[0].pid);
- if(SW>0){S.tonight="me";S.ntk={w:day(),who:"me",nm:"ngươi"};return}          /* a won try: herWin (§2b) plays it at once */
+ if(SW>0){S.tonight="me";S.ntk={w:day(),who:"me",nm:"ngươi"};herWin();return}   /* a won try: the summons + the night at once (herWin, §2b) */
  if(pid==="ksp"){S.tonight="me";log("Ngươi tắm gội chờ giá. Hết buổi tối mới tới đêm thị tẩm; trước đó người khác vẫn có thể giành mất.");send();try{render()}catch(e){}return}
  /* his own visit "Thắp đèn hầu rượu" (or any other road): the night is hers NOW and plays at once; the day ends after it (jnight) */
  S.nfN=day();S.tonight="me";try{if(used>=4)used=3}catch(e){}send();IN=1;/* j75's nightScene takes the visit (S.ntk) */try{return ns0.apply(this,arguments)}finally{IN=0}};

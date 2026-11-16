@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6dce6d15+","t":"2026-11-16T22:20Z","c":"night-final: tries resolve at once, khắc by khắc (owner OD 22:25Z); NPCs after her khắc; ties → Sủng → seeded roll (22:10Z/22:17Z); won nig…","b":"db0641856a28","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
+window.CTM_BI={"s":"7b4176c9+","t":"2026-11-16T22:25Z","c":"night-final: stealPass live = one NPC batch (direct calls); unit test fixtures for khắc ticks","b":"12d53dc93228","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -44915,7 +44915,7 @@ const ns0=nightScene;nightScene=function(){if(IN||!S||!nfOn())return ns0.apply(t
  const n=typeof ntTaken==="function"?ntTaken():null;
  if(n&&n.who!=="me"){try{log(`${ntReason(S)}.`)}catch(e){}if(S.tonight==="me")S.tonight=null;return}
  const pid=CUR!=null?CUR:(Q[0]&&Q[0].pid);
- if(SW>0){S.tonight="me";S.ntk={w:day(),who:"me",nm:"ngươi"};return}          /* a won try: herWin (§2b) plays it at once */
+ if(SW>0){S.tonight="me";S.ntk={w:day(),who:"me",nm:"ngươi"};herWin();return}   /* a won try: the summons + the night at once (herWin, §2b) */
  if(pid==="ksp"){S.tonight="me";log("Ngươi tắm gội chờ giá. Hết buổi tối mới tới đêm thị tẩm; trước đó người khác vẫn có thể giành mất.");send();try{render()}catch(e){}return}
  /* his own visit "Thắp đèn hầu rượu" (or any other road): the night is hers NOW and plays at once; the day ends after it (jnight) */
  S.nfN=day();S.tonight="me";try{if(used>=4)used=3}catch(e){}send();IN=1;/* j75's nightScene takes the visit (S.ntk) */try{return ns0.apply(this,arguments)}finally{IN=0}};
@@ -45207,7 +45207,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="db0641856a28";window.CTM_BUILD=BUILD;
+const BUILD="12d53dc93228";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
