@@ -53,6 +53,8 @@ function diffHTML(){const k=diffOf();const lock=!!window.__diffO;
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)||!S||typeof NLP==="undefined"||!NLP)return;const mb=$("mb");if(!mb||mb.querySelector(".kdiff"))return;
   const w=document.createElement("div");w.innerHTML=diffHTML();const sec=w.firstElementChild;
   /* normal flow, below the stat tiles / face picker and above the note and the choices (never inside the choice block: OD:L128) */
+  /* review/newgame-ui-r2 wraps the card body in .kpscroll with the pinned choices (.kpscopts) outside it: go inside the scroll area */
+  const sc=mb.querySelector(":scope > .kpscroll");if(sc){sc.appendChild(sec);return}
   const anchor=mb.querySelector(":scope > .kpnote")||mb.querySelector(":scope > .kpopts")||mb.querySelector(".nlopts");if(anchor)anchor.parentNode.insertBefore(sec,anchor);else mb.appendChild(sec);
  }catch(e){console.error("jdiff card",e)}}})();
 /* older card (no kit scene panel): the same choice inside nlCardHTML */
