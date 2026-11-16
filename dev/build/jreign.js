@@ -287,7 +287,7 @@ function rgLate(){const W=rgW(),r=rgMe();if(!W)return 0;let n=0;for(let c=0;c<Ma
 const RGL={
  th:{who:"Thái hậu",g:"Giữ yên xã tắc cho con, nhìn thấy hoàng tôn đầy nhà, rồi yên lòng niệm Phật.",q:["rgl_th1","rgl_th2","rgl_th3"]},
  hh:{who:"Hoàng hậu",g:"Sinh đích tử, giữ vững Trung cung.",q:["rgl_hh1","rgl_hh2","rgl_hh3"]},
- ly:{who:"Phế phi họ Lý",g:"Rửa oan án năm xưa, được ra khỏi lãnh cung trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
+ ly:{who:"Phế phi họ Lý",g:"Rửa oan án năm xưa trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
  maid:{who:"Cung nữ thân tín",g:"Lo cho mẹ già ở quê, đến tuổi được xuất cung về nhà.",q:["rgl_mb1","rgl_mb2","rgl_mb3"]},
  eun:{who:"Tổng quản thái giám",g:"Có người nối dõi hương khói, về già có đất dưỡng lão.",q:["rgl_tq1","rgl_tq2","rgl_tq3"]},
  doc:{who:"Thái y",g:"Soạn xong bộ y thư thầy truyền lại, dâng lên cho đời sau dùng.",q:["rgl_ty1","rgl_ty2","rgl_ty3"]}};
@@ -335,7 +335,7 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
   ok:{fx:{tamco:1},r:10,ch:"rgl_ly3"},no:{r:-5},bad:{fx:{danh:-3}},badT:"Lời khai lọt ra ngoài."},ln("ly",2)));
  T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,
   s:[G("","Dâng lời khai lên Hoàng thượng","sung",45,1,{},"b",{emp:1,pl:null})],
-  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.freed=1;return fin("ly")(X)+" Hoàng thượng cho Phế phi họ Lý ra khỏi lãnh cung, về chùa tu hành."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
+  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.cleared=1;return fin("ly")(X)+" Hoàng thượng hạ chỉ rửa oan cho Phế phi họ Lý. Bà xin ở lại Trường Môn viện, sớm hôm niệm Phật đến ngày nhắm mắt."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
  /* her maid: her mother at home */
  T7("rgl_mb1","fam",Object.assign({fu:1,r:"maid",t:"Tâm nguyện {A} (1/3): Thư nhà",h:"“Nô tỳ đã ba năm không có tin mẹ. Nghe nói quê nhà mất mùa... {Nc} cho nô tỳ gửi một lá thư.”",dl:4,
   s:[C("Gửi thư",O("Nhờ người Nội vụ phủ chuyển thư",{c:{bac:-15},p:90,lto:"stay"}),O("Đợi ngày mệnh phụ vào cung, nhờ mang ra",{c:{suc:-4},p:60,sk:"danh",lto:"stay"})),W("Đợi thư hồi âm",2)],
