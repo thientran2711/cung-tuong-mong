@@ -2,6 +2,7 @@
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
 last wake: 16/11 19:38Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
+- 20:37Z: npc-roads-r1 = PASS 83d84225 (f699bbf4 had 6 BLOCKING, all fixed by reviewer: month hook, player-addressed tags/✦ endings for NPCs, false 'lần trước', voice, 18 hard numbers → BAL.nroad.op, chapter vs help quest); reviewer archived. U2–U4 02405da5 still carries all 6 → opus merge-fix worker session_01DgYSWmVoMyem8RKtKb9T19 (review/npc-roads-fix), then r2. CROSS-FOREMAN DEPENDENCY: needs story14-p1-r2 (C) + road-map-next (B) live first → FOR MAIN.
 - 20:35Z: LIVE coop-b1b5-fix-r1 (D21 co-op B1–B5) = 392fff60 pushed by s7 (FF from 95282e69; head == READY; no .wrangler/.ahcache; quickcheck PASS 182 s, perf ok; BIG suites on 4a13f093: cyc 69/69, b2b5 30/30, p2 45/45, b1 41/41, e2e 59/59, r2 47/47, rev2 37/38 (start-up miss, being classified), pets 45/48 harness). Live tag push refused by proxy. No coop/worker change → no deploy.
 - 20:27Z: golive prep worker at rollover → archived; successor session_01DgYSWnR8rVEcaej6KJZLQG. b1b5 READY b77d3250 was NOT FF (main 7c5523ad mg-tune) → successor re-merges first; rev2 miss to classify; then coop-name-mask-r1, then mem-upgrade/item-ledger/seatcap/npc-death/preg-rate/ghen-shown/danh-p1.
 - 20:25Z: coop-name-mask-r1 worker 48a942b2 FAIL 1 BLOCKING (two labels: chip 'Hảo hữu của ta' vs rest 'Hảo hữu') → reviewer fix PASS ed8ccb28 (K61FR = 'Hảo hữu của ta' everywhere per OD:L1060–1061; one constant if owner wants 'Người lạ' OD:L165); reviewer archived. Not FF on main 7c5523ad → golive worker re-merges after b1b5 + shoots .kv1 phone chip.
@@ -232,6 +233,10 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 
 | HEALTH + PREGNANCY BUNDLE (main s21 18:08Z…19:00Z) | review/suc-khoe | opus | SẴN SÀNG KIỂM 10cba645 (worker archived) → r1 FAIL 8 (3 BLOCKING) → fix worker session_01DgYSWmv4sq7YAmDVGXa2JD RUNNING 20:20Z |
 | coop-chat-r1 go-live | b7c5d787 | — | LIVE 18:21Z (Worker deploy run #5 success); live 2-client test pending (golive worker) | b1b5 pre-run: coop-r2 36/46 (10 FAIL "NPC acts on her" — mindRun returns "") → worker investigating, NOT READY |
-| NPC ROADS U0+U1 | review/npc-roads f699bbf4 | opus | SẴN SÀNG KIỂM → reviewer npc-roads-r1 session_01DgYSWnawxUrsTQBmbc3jg7 RUNNING |
-| NPC ROADS U2 maids + U3 men + U4 | review/npc-roads | opus | SẴN SÀNG KIỂM 02405da5 (worker archived) → reviewer npc-roads-r1 (whole branch) |
+| NPC ROADS U0+U1 | review/npc-roads f699bbf4 | opus | r1 PASS 83d84225 (reviewer fixes; archived) — not FF until story14-p1-r2 + road-map-next live |
+| NPC ROADS U2 maids + U3 men + U4 | review/npc-roads | opus | SẴN SÀNG KIỂM 02405da5 (worker archived) → merge-fix worker session_01DgYSWmVoMyem8RKtKb9T19 RUNNING (review/npc-roads-fix) |
 | coop-name-mask (co-op friend shown unmet) | review/coop-name-mask | sonnet | SẴN SÀNG KIỂM 48a942b2 (worker archived) → r1 PASS ed8ccb28 (reviewer fix) → go-live queue after b1b5 |
+
+
+## QUESTIONS FOR MAIN (s7)
+- (20:37Z) NPC ROADS (D) depends on story14-p1-r2 (Foreman C) and road-map-next (Foreman B) — neither is on main. Who ships them, and when? D cannot go live with npc-roads before them.

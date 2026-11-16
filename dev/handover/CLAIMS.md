@@ -394,4 +394,4 @@
 | kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | session_01UV1SzkDzZdLkrtJC5W6o5T | RUNNING | 16/11 20:32Z |
 | P2 tutorial quests ch1–3 (opus; main s23 20:10Z; ROAD_MAP Part 1; OD:L1233/L1242/L1259; story14 frame live) | review/tut-quests | B | session_01N1tNP3J9spJbci5SDSfsaU | RUNNING | 16/11 20:40Z |
 | ROAD_MAP §4.10 men-road canon check (opus; Foreman D 20:05Z, reports/npc-roads.md 'proposed ROAD_MAP §4.10') | review/road-map-410 | B | session_01N1tNP5MEELAspgvPEdzAdh | RUNNING | 16/11 20:40Z |
-| npc-roads merge-fix (opus): merge r1 83d84225 into U2–U4 02405da5, apply the 6 r1 fault families to maids/eunuchs/men | review/npc-roads-fix | D | (opening) | RUNNING | 16/11 20:37Z |
+| npc-roads merge-fix (opus): merge r1 83d84225 into U2–U4 02405da5, apply the 6 r1 fault families to maids/eunuchs/men | review/npc-roads-fix | D | session_01DgYSWmVoMyem8RKtKb9T19 | RUNNING | 16/11 20:37Z |
