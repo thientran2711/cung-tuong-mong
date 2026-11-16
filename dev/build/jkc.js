@@ -447,7 +447,7 @@ const KCOB={
   ["Thuyền muối đêm cập bến, chở thứ không phải muối.","Giả như không biết","Lén báo quan"]],
  thd:[["Cha mở lớp dạy học cho con nhà nghèo, thiếu bạc mua sách.","Bán trâm mua sách cho cha","Mặc cha lo"],
   ["Hội thơ kinh thành: danh hiệu Tài nữ đang chờ người tranh.","Dốc sức tranh","Nhường bạn khuê phòng"],
-  ["Một học trò của cha xin chép di cảo của ông để dâng lên Hàn lâm viện, ghi tên mình.","Bằng lòng","Đòi ghi tên cha"]],
+  ["Một học trò của cha xin chép bản thảo của ông để dâng lên Hàn lâm viện, ghi tên mình.","Bằng lòng","Đòi ghi tên cha"]],
  ch:[["Thái hậu, cô mẫu của ngươi, gửi thư hỏi ngươi đã học Nữ tắc đến đâu.","Chép Nữ tắc gửi vào cung","Viết thư kể chuyện nhà"],
   ["Cô mẫu cũng gửi thư cho một người cháu gái khác trong họ: hai người, một chỗ bên cạnh bà.","Kết thân với người kia","Lấn lướt người kia"],
   ["Thái hậu cho người ra xem mặt ngươi trước kỳ tuyển.","Ra mắt khiêm nhường","Ra mắt rực rỡ"]],

@@ -1163,14 +1163,14 @@ ARC67.thd_tho={o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi"
   win2:{k:1,gi:["nghien","emp"],tag:"Đứng nhì kỳ thi",t:"Ngươi đứng nhì, được ban bút nghiên. Không rực rỡ, nhưng đủ để cả cung biết tên.",fx:{danh:7,sung:3}},
   mid:{k:0,tag:"Lỡ hẹn với danh hiệu",t:"Không đứng đầu, nhưng ai đọc thơ ngươi cũng nhớ.",fx:{danh:2,tai:2}},
   lose:{k:-1,tag:"Mang tiếng sáo rỗng",t:"Thơ ngươi bị chê, {v} được dịp chế giễu. Danh tài nữ trôi xa.",fx:{danh:-8}}}};
-ARC67.thd_sach={o:"thd",t:"Di cảo của cha",w:"maid",sj:"di cảo của cha",g:"Cha để lại một bộ sách bàn chính sự, chỉ thẳng tệ tham nhũng của một nhà quyền thế. In ra thì danh cha vang dội, mà kẻ bị chỉ mặt sẽ không ngồi yên.",
+ARC67.thd_sach={o:"thd",t:"Bản thảo của cha",w:"maid",sj:"bản thảo của cha",g:"Cha viết một bộ sách bàn chính sự, chỉ thẳng tệ tham nhũng của một nhà quyền thế. In ra thì danh cha vang dội, mà kẻ bị chỉ mặt sẽ không ngồi yên.",
  cast(A){A.n1=pk67(["Hộ bộ thượng thư","Lễ bộ thượng thư","Công bộ thượng thư"]);return true},
  p:[["s1","s2"],["c1","c2","c3","G.gift","G.th"],["t1"],["x1"]],
  B:{
  s1:{h:"Rương sách cũ",w:"maid",t:"Mẹ gửi vào rương sách của cha. Trong có bộ ‘Trị quốc sách’, chương cuối chỉ đích danh {n1} tham ô đê điều.",o:[
   {n:"Đọc kỹ, chép thêm bản",c:{suc:-4},w:{tai:3},sc:1,wx:"hiểu sâu sách cha",lx:"giữ sách là giữ lửa",rt:"Ngươi chép xong một bản."},
   {n:"Cất kỹ, chưa đọc",c:{},w:{tamco:2},wx:"chưa vướng",lx:"chưa biết hết",rt:"Rương sách nằm dưới gầm giường."}]},
- s2:{h:"{n1} nghe phong thanh",w:"maid",t:"Phủ {n1} gửi quà: ‘Nghe nói cha {xung} để lại sách quý, xin được mua lại.’",o:[
+ s2:{h:"{n1} nghe phong thanh",w:"maid",t:"Phủ {n1} gửi quà: ‘Nghe nói cha {xung} viết được sách quý, xin được mua lại.’",o:[
   {n:"Từ chối",c:{},w:{duc:4},f:"firm",wx:"giữ sách",lx:"{n1} để ý",rt:"Quà bị trả lại."},
   {n:"Nhận quà, nói sách đã mất",c:{duc:-3},o:50,w:{bac:60},wx:"bạc và yên thân",l:{},lx:"họ không tin",rt:"Phủ {n1} yên tâm.",rf:"Họ biết ngươi nói dối."}]},
  c1:{h:"Hàn lâm viện muốn xem sách",w:"maid",t:"Một học sĩ Hàn lâm muốn xem sách cha để bàn chuyện in.",o:[
