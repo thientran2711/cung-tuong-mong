@@ -48,7 +48,6 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .rival .md.sm{margin-right:4px}
 /* stage */
 .stage{grid-area:stage;position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:0}
-.stage::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,#fff6e866);pointer-events:none}
 .scene-t{position:absolute;left:8px;top:8px;right:8px;z-index:1;background:#fffaf0d9;border:1px solid var(--line);border-radius:8px;padding:4px 8px}
 .scene-t h2{font-family:var(--display);color:var(--gold);font-size:1.08rem;margin:0}
 .scene-t p{margin:2px 0 0;font-size:.85rem;color:var(--ink);max-width:560px}
@@ -183,7 +182,6 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .rrow{display:grid;grid-template-columns:1fr auto auto;gap:6px;font-size:.8rem;padding:3px 0;border-bottom:1px solid var(--line)}
 .pxc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .light{position:absolute;inset:0;pointer-events:none;z-index:0;transition:background 1.5s}
-.stage::after{content:"";position:absolute;inset:0;background:#fff;opacity:var(--fl,0);pointer-events:none;z-index:2}
 .stage.frost{box-shadow:inset 0 0 40px 6px #e6f2ffcc}
 body[data-buoi="2"] .panel{background:color-mix(in srgb,var(--panel) 92%,#1a2a5a)}
 body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050)}
