@@ -87,6 +87,8 @@ async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.dis
  /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
  const m0=/url\(["']?([^"')]+)["']?\)/.exec(($("scimg")||{}).style?$("scimg").style.backgroundImage||"":"");
  const src=SCIMG[P.sc]?(m0?m0[1]:`img/${SCIMG[P.sc]}.webp`):null;PX.bgSrc=src;PX.src=src;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k||PX.src!==src)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";}
+/* celebration bursts are PAINTED sprites on the jfx canvas (kfPx); no code-drawn particles remain in j11 */
+function pxBurst(kind,n){try{const m={gold:"goldpetals",petal:"petals",ash:"ash",red:"ash"}[kind];if(m&&typeof kfPx==="function")kfPx(m)}catch(e){}}
 function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.height;PX.t+=d/60;
  if(PX.bg){const K=window.KIT_PXBG;/* KIT 31.4: the Pixi room copy uses the SAME crop as #scimg (KIT_FANCHOR / KIT_FLOOR), with only a faint breath, so feet stay on the painted floor */
  const im=$("scimg"),mu=im&&/url\(["']?([^"')]+)["']?\)/.exec(im.style.backgroundImage||"");

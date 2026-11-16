@@ -144,8 +144,8 @@ const KF_WX={
  snowh:{k:["snow"],cap:48,vx:[-1,.2],vy:[1.2,2.2],sway:.7,spin:.02,sc:[1,1.9],a0:.9,gust:.6,fall:1},
  frost:{k:["snow"],cap:10,vx:[-.2,.2],vy:[.4,.8],sway:.4,spin:.01,sc:[.8,1.2],a0:.75,fall:1},
  snowp:{k:["snow","snow","petal-plum"],cap:26,vx:[-.3,.5],vy:[.7,1.4],sway:.7,spin:.03,sc:[1.1,1.9],a0:.9,gust:.5,fall:1},
- drizzle:{k:["streak"],cap:38,vx:[-.8,-.4],vy:[9,12],a0:.34,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
- storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.45,rain:1,tint:0xbccde0,sc:[.9,1.2]},
+ drizzle:{k:["streak"],cap:38,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
+ storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
  mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:["orb"],cap:10,vx:[-.3,.3],vy:[-.3,.3],sway:.6,a0:.8,float:1,tint:0xfff07a,sc:[.3,.5],life:[240,420]}
 };
@@ -164,7 +164,7 @@ function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth
  else{x=c.fromLeft?sr.x+RS(-60,sr.w*.7):sr.x+RS(-.04,1.04)*sr.w;y=scatter?sr.y+RS(0,sr.h):sr.y+RS(-30,-8);v={vx,vy,life:Math.ceil((sr.h+140)/vy)+60,sway:c.sway||0,spin:c.rain?0:RS(-c.spin,c.spin),fade:"none",a0,amb:1}}
  v.lay=c.lay;if(c.gust)v.gust=c.gust;if(c.fall&&c.lay==="wx")v.fam=1;
  const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;
- if(c.rain){s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*.9,s.v.sc*.5)}else if(c.float)s.rotation=0;
+ if(c.rain){s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*2.6,s.v.sc*3);s.blendMode="normal"}else if(c.float)s.rotation=0;
  if(c.lay==="wx"&&KFX.wroot)KFX.wroot.addChild(s)}
 function kfWxClear(lay,ms){for(const s of KFX.parts)if(s.v&&s.v.amb&&(!lay||s.v.lay===lay)){s.v.fade="out";s.v.max=ms||40;s.v.life=Math.min(s.v.life,ms||40)}}
 function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&!kfStill()&&!document.hidden&&kfOn()&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
@@ -188,7 +188,7 @@ function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfA
    for(const c of L){const key=c.id+"|"+c.night+"|"+c.k.join();
     if(key!==KFX.keys[c.lay]){const first=!KFX.keys[c.lay];KFX.keys[c.lay]=key;if(!first)kfWxClear(c.lay,90);kfkLoad(c.k).then(()=>{const n=Math.round(kfWxCap(c)*(c.float?.5:.7));if(!c.float)for(let i=0;i<n;i++)kfWxSpawn(c,true);kfWake()}).catch(()=>{});continue}
     let cap=kfWxCap(c);
-    const n=Math.min(c.rain?3:1,cap-kfAmbLive(c.lay));for(let i=0;i<n;i++)kfWxSpawn(c,false);if(n>0)kfWake()}},250)}).catch(()=>{kfAmbT=0})}
+    const n=Math.min(c.rain?12:1,cap-kfAmbLive(c.lay));for(let i=0;i<n;i++)kfWxSpawn(c,false);if(n>0)kfWake()}},250)}).catch(()=>{kfAmbT=0})}
 /* ---------- numbers fly from the result card into their top-bar cell ---------- */
 const KF_CELL={sung:"hud-sung",danh:"hud-danh",suc:"hud-suc",bac:"hud-bac",duc:"hud-duc",sac:"hud-sac",tai:"hud-tai",tamco:"hud-tamco"};
 function kfNumbers(card,before){if(!card||!before||typeof S==="undefined"||!S)return;const keys=typeof RKEYS!=="undefined"?RKEYS:[];const L=[];
