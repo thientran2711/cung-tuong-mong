@@ -147,24 +147,27 @@ const KF_WX={
  drizzle:{k:["streak"],cap:38,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
  storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2]},
  mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
- fly:{k:["orb"],cap:10,vx:[-.3,.3],vy:[-.3,.3],sway:.6,a0:.8,float:1,tint:0xfff07a,sc:[.3,.5],life:[240,420]}
+ fly:{k:["orb"],cap:10,vx:[-.3,.3],vy:[-.3,.3],sway:.6,a0:.8,float:1,tint:0xfff07a,sc:[.3,.5],life:[240,420]},
+ gold:{k:["petal-gold"],cap:20,vx:[-.3,.3],vy:[.8,1.5],sway:.8,spin:.05,sc:[1,1.6],a0:.85,gust:.4}
 };
 function kfWxCfg(){try{if(typeof S==="undefined"||!S)return null;const w=S.wx?S.wx.k:"dust",night=(S.buoi||0)===B4L,nm=S.wx?S.wx.n:"";let id=null;
  if(w==="petal"||w==="leaf"||w==="wind"||w==="snow"||w==="snowh"||w==="frost"||w==="snowp"||w==="storm")id=w;else if(w==="rain")id="drizzle";else if(w==="mist")id="mist";
  else if(night&&(w==="dust"||nm==="đom đóm"))id="fly";
+ /* festival days outdoors (was code-drawn in j33 via pxKind): gold petals at New Year / eve / Nguyên tiêu, fireflies at Thất tịch / Trung thu; replaces the weather as before */
+ try{const f=typeof festToday==="function"&&festToday();if(f&&["vuon","lc","home","tgk","maid"].includes(placeOf(S.place).sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))id="gold";else if(f.k==="thattich"||f.k==="trungthu")id="fly"}}catch(e){}
  if(!id)return null;const c=Object.assign({lay:"wx"},KF_WX[id]);c.id=id;c.night=night;return c}catch(e){return null}}
 function kfSeCfg(){return{lay:"se",id:"se",k:KF_SEASON(),cap:8,vx:[-.35,.25],vy:[.5,.9],sway:.9,spin:.03,sc:[.7,1.05],a0:.7,fall:1,night:typeof S!=="undefined"&&S&&(S.buoi||0)===B4L}}
 function kfStageRect(){try{const st=document.getElementById("stage");if(!st)return null;const r=st.getBoundingClientRect();return r.width>40&&r.height>40&&getComputedStyle(st).visibility!=="hidden"?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}}
 function kfWxSync(){const r=kfStageRect();KFX.sr=r;const P=window.PIXI;if(!P||!KFX.app)return;
  if(!KFX.wroot){KFX.wroot=new P.Container();KFX.wmask=new P.Sprite(P.Texture.WHITE);KFX.wroot.mask=KFX.wmask;KFX.app.stage.addChild(KFX.wroot,KFX.wmask)}  /* clip = a plain white rectangle sprite, not art */
  if(r){KFX.wmask.x=r.x;KFX.wmask.y=r.y;KFX.wmask.width=r.w;KFX.wmask.height=r.h}else{KFX.wmask.width=0;KFX.wmask.height=0}}
-function kfWxCap(c){const q=KFX.q,m=(innerWidth<700?.65:1)*(innerHeight<500?.75:1),box=c.lay==="wx"&&KFX.sr?Math.min(1,KFX.sr.w*KFX.sr.h/(innerWidth*innerHeight*.5)):1;return Math.max(2,Math.round(c.cap*m*q*Math.max(.4,box)))}
+function kfWxCap(c){const q=KFX.q,m=(innerWidth<700?.65:1)*(innerHeight<500?.75:1),box=c.lay==="wx"&&KFX.sr?Math.min(1,KFX.sr.w*KFX.sr.h/(innerWidth*innerHeight*.5)):1;return Math.max(2,Math.round(c.cap*m*q*Math.max(c.rain?.75:.4,box)))}
 function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth,h:innerHeight};if(!sr)return;const k=c.k[Math.floor(R01()*c.k.length)],vx=RS(c.vx[0],c.vx[1]),vy=RS(c.vy[0],c.vy[1]),sc=RS(c.sc[0],c.sc[1]),a0=c.a0*(c.night?.82:1);let x,y,v;
  if(c.float){x=sr.x+RS(0,sr.w);y=sr.y+RS(0,sr.h);v={vx,vy,life:Math.round(RS(c.life[0],c.life[1])),sway:c.sway||0,fade:"inout",a0,amb:1}}
  else{x=c.fromLeft?sr.x+RS(-60,sr.w*.7):sr.x+RS(-.04,1.04)*sr.w;y=scatter?sr.y+RS(0,sr.h):sr.y+RS(-30,-8);v={vx,vy,life:Math.ceil((sr.h+140)/vy)+60,sway:c.sway||0,spin:c.rain?0:RS(-c.spin,c.spin),fade:"none",a0,amb:1}}
  v.lay=c.lay;if(c.gust)v.gust=c.gust;if(c.fall&&c.lay==="wx")v.fam=1;
  const s=kfSp(k,x,y,v,c.tint!=null?c.tint:null,sc);if(!s||!s.v||!s.v.max)return;
- if(c.rain){s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*2.6,s.v.sc*3);s.blendMode="normal"}else if(c.float)s.rotation=0;
+ if(c.rain){const z=Math.max(.7,Math.min(1,sr.h/520));/* streak length follows the stage height (short stage on a phone in landscape) */s.rotation=Math.atan2(vy,vx);s.scale.set(s.v.sc*2.6*z,s.v.sc*3*z);s.blendMode="normal"}else if(c.float)s.rotation=0;
  if(c.lay==="wx"&&KFX.wroot)KFX.wroot.addChild(s)}
 function kfWxClear(lay,ms){for(const s of KFX.parts)if(s.v&&s.v.amb&&(!lay||s.v.lay===lay)){s.v.fade="out";s.v.max=ms||40;s.v.life=Math.min(s.v.life,ms||40)}}
 function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&!kfStill()&&!document.hidden&&kfOn()&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
