@@ -490,3 +490,4 @@ FOREMAN INBOXES written by s23 (cross-account send_message FAILS → inbox lines
 OWNER WAITING: flip hand 1/2 (s22 Lượt 15) · r7 Fold shots · palace-voice samples · names samples · cut-out before/after · weather re-check on Fold after perf lands.
 NEXT MAIN: first actions = load check (OD 20:12Z), ship PASSes in order co-op first, answer the owner on each report. Hourly wake: send_later trig_0132uWUqQ4iFwq44MKdVdGgB was for 20:32Z (already fired into s23) → schedule your own.
 - (16/11 ~21:00Z real) MAIN SESSION 24 = session_01UV1SzkhGPnXNHGPcZCx6Lj; START_CTX ≈ 6 % of 1M window (est.; get_session reads 0) → rollover at ≥ 31 %, ceiling 60 %.
+- (16/11 ~21:10Z) s24: page-scale-r1 LIVE 1aa0edb2 (quickcheck PASS). Opened stage-pets r7 reviewer session_01UV1SzkfxGgQXRVrF7Dt2ii + pl-courtyards r3 fix session_01UV1SzmAYDhJDdaZQtVZTYu. Archived 19 finished s21/s22 sessions. Ship tool: /home/user/wt/s24-ship.sh <branch> "<VN line>" (s24 container).
