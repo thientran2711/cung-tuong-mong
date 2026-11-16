@@ -1,1 +1,1 @@
-Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới.
+Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ.
