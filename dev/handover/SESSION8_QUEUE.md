@@ -121,3 +121,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | watch 16/11 | panel-size-r1 a523531da → main. merge-train-1 (6) running, then merge-train-2 (13 PASSes). Kit keeper review/kit-keeper-1 for K1–K5 + KIT number collisions §71/§72. tutorial-r2 10a37960b reviewer running. Act split + lifespan: waiting for the owner. |
 | C56 | review/facefx-all (face marks for every person; from appearance-port-r1) | RUNNING (sonnet) |
 | C57 | review/newgame-ui-r2 (fix reviewer FAIL: §8.1 vs 28.11a portrait tier, pinned choices) | RUNNING (sonnet) |
+| C58 | review/act-dedupe wave 1 (approved AI/VIỆC/ĐI ĐÂU split; dedupe, icons, '!', shop) | RUNNING (opus). Waves 2–3 QUEUED after |
