@@ -58,7 +58,9 @@ function rgSideTag(s){if(s==="quyen")return `theo ${rgQN()}`;return RGS[s]?RGS[s
 function rgRel(side,n){if(!side||side==="ngoai")return;for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;if(s===side)relAdd(v,S,Math.round(n/2));else relAdd(v,S,-n)}}
 function rgLead(side,n){if(!n)return;if(side==="emp")apply({sung:n});else if(side==="th")apply({th:n});else if(side==="quyen")rgQAf(n*2)}
 function rgTr(n){const r=rgMe();r.tr=cl(r.tr+n,0,100)}
-function rgTok(s,A){return String(s||"").replace(/\{(\w+)\}/g,(m,k)=>({X:S.rank>=3?"Nương nương":"Tiểu chủ",x:S.rank>=3?"nương nương":"tiểu chủ",q:rgQN(),qn:(rgQH()||{name:"Tể tướng"}).name,
+/* palace voice: {X}/{x} = what a servant calls her, {goi}/{xung}… = the speaker w ("emp" | "th" | "q" | "maid" | "hh") to her — the one core (jvoice kAddr) */
+function rgSp(w){return w==="emp"||w==="th"||w==="hh"?w:w==="q"?{role:"x",rw:"quan"}:{srv:"f"}}
+function rgTok(s,A,w){return String(s||"").replace(/\{([GgXx]oi|[Xx]ung)\}/g,m=>kSay(rgSp(w),S,m)).replace(/\{(\w+)\}/g,(m,k)=>({X:kSay({srv:"f"},S,"{Goi}"),x:kSay({srv:"f"},S,"{goi}"),q:rgQN(),qn:(rgQH()||{name:"Tể tướng"}).name,
  me:S.name,maid:S.maid?S.maid.name:"cung nữ thân tín",hh:(typeof qOn==="function"&&qOn())?rivals[0].name:"Hoàng hậu",tq:S.court&&S.court.tq?S.court.tq.name:"Tổng quản thái giám",
  dadq:rgDadQ()?`phụ thân ngươi, ${rgQN()}`:rgQN(),side:rgSideN(S.reign.side)})[k]||m)}
 function rgWho(w){try{if(w==="emp")return pEmp();if(w==="th")return S.thDead?null:pTH();if(w==="q"){const h=rgQH();return h?pMin(h):null}if(w==="maid")return S.maid?pMaid():null;
@@ -86,7 +88,7 @@ function rgJoinOpts(firstTime){const O=[];const fam=rgFam();const sd=S.reign.sid
  if(sd!=="th"&&!S.thDead)O.push({n:"Theo Thái hậu",s:"th",join:"th",w:{th:firstTime?6:3},wx:["Thái hậu che chở ngươi",fl("th"),"nhà Tể tướng và phe bệ hạ để ý ngươi"].filter(Boolean).join(", ")});
  if(sd!=="quyen")O.push({n:rgDadQ()?"Theo phụ thân (Tể tướng)":`Theo ${rgQN()}`,s:"quyen",join:"quyen",w:{bac:firstTime?30:15},wx:["nhà Tể tướng hậu thuẫn ngươi bằng bạc và tin tức",fl("quyen"),"Hoàng thượng và Thái hậu để ý ngươi"].filter(Boolean).join(", ")});
  return O}
-RGBT.c1a={w:"emp",t:"Đêm khuya ở Cần Chính điện, Hoàng thượng gác bút. Chồng tấu chương trước mặt ngài đã có lời phê sẵn của {q}. “Trẫm ngồi trên ngai mà chữ của trẫm chưa ra khỏi cửa điện.” Ngài quay sang ngươi: “Ngươi nghĩ sao?”",
+RGBT.c1a={w:"emp",t:"Đêm khuya ở Cần Chính điện, Hoàng thượng gác bút. Chồng tấu chương trước mặt ngài đã có lời phê sẵn của {q}. “Trẫm ngồi trên ngai mà chữ của trẫm chưa ra khỏi cửa điện.” Ngài quay sang ngươi: “{Goi} nghĩ sao?”",
  o:[{n:"Khuyên ngài nhẫn nại chờ thời",w:{sung:2,duc:1},pw:1,s:"emp",wx:"Hoàng thượng thấy ngươi hiểu chuyện"},
   {n:"Khuyên ngài dựa vào lớp quan trẻ ở Hàn lâm viện",p:40,sk:[["tamco",3],["tai",5]],w:{sung:3},pw:3,s:"emp",l:{sung:1},lq:-10,wx:"ngài có thêm người của mình trong triều",lx:"lời bàn lọt ra ngoài, nhà Tể tướng để ý ngươi"},
   {n:"Chỉ lặng lẽ mài mực hầu ngài",w:{sung:1},wx:"không dính vào chính sự"}]};
@@ -100,7 +102,7 @@ RGBT.c2a={w:"emp",faces:1,t:()=>{const f=rgFam();const fam=f?` ${f==="quyen"?`Ph
 /* chapter 3: side mission (spy, carry a message, copy a draft) */
 RGBT.c3a={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgSideNow()]||"maid",
  t:()=>({emp:"Hoàng thượng đặt vào tay ngươi một phong thư gắn xi: “Đưa đến Phiêu kỵ tướng quân. Không được qua tay người của Tể tướng.” Cửa cung nào cũng có tai mắt của {q}.",
-  th:"Thái hậu lần tràng hạt: “Đêm đêm ai ra vào Cần Chính điện, hoàng đế bàn chuyện gì với ai, ngươi ở gần thì để ý giùm ai gia.”",
+  th:"Thái hậu lần tràng hạt: “Đêm đêm ai ra vào Cần Chính điện, hoàng đế bàn chuyện gì với ai, {goi} ở gần thì để ý giùm ai gia.”",
   quyen:"Người của {dadq} lén gặp ngươi ở góc Ngự hoa viên: “Bản nháp chiếu thư trên án của bệ hạ, {x} hầu mực, chỉ cần chép lại vài dòng.”"})[rgSideNow()]||"{maid} thì thầm: “Phe nào cũng sai người đến dò ý {x}. Đứng giữa lâu e khó yên.”",
  o:()=>{const s=rgSideNow();
   if(s==="emp")return[{n:"Giấu thư trong hộp điểm tâm, sai {maid} mang ra",p:35,sk:[["tamco",3],["mat",.5]],w:{sung:4},pw:6,tr:12,s,l:{sung:1},pl:-2,ev:"quyen",wx:"thư đến tay tướng quân, Hoàng thượng thêm người cầm quân",lx:"thư bị chặn, người phe Tể tướng nắm Chứng cứ về ngươi"},
@@ -125,7 +127,7 @@ RGBT.c4a={w:"me",t:()=>{const s=rgSideNow();return s?`Phe ${rgSideN(s)} cần l�
   {n:"Tự tay nấu nướng, đàn một khúc mời khách",c:{suc:-14},p:35,sk:[["tai",2],["sac",5]],w:{danh:4},pw:5,tr:8,s,l:{danh:-1},wx:"khách cảm lòng, nhà Hộ bộ nghiêng về phe ngươi",lx:"khách lễ phép mà không mặn mà"},
   {n:"Cáo bệnh, không mở yến",w:{},tr:s?-8:0,wx:"tiết kiệm sức và bạc"}]}};
 RGBT.c4b={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgSideNow()]||"maid",t:()=>{const s=rgSideNow();const p=rgP();const lean=p>=BAL.rg.B-5?"thế bệ hạ đang lên":p<BAL.rg.A+5?"nhà Tể tướng đang mạnh":"ba phe giằng co chưa phân";
-  return s?`Hai năm sau ngày đăng cơ, ${lean}. ${({emp:"Hoàng thượng",th:"Thái hậu",quyen:"{q}"})[s]} hỏi thẳng: “Ngươi còn một lòng với ta chứ?” Giữ phe hay đổi phe; đổi thì phe cũ thành kẻ thù.`
+  return s?`Hai năm sau ngày đăng cơ, ${lean}. ${({emp:"Hoàng thượng",th:"Thái hậu",quyen:"{q}"})[s]} hỏi thẳng: ${kSay(s==="quyen"?{role:"x",rw:"quan"}:s,S,s==="quyen"?"“{Goi} còn nhớ lời đã hứa với lão phu chứ?”":"“{Goi} còn một lòng với {xung} chứ?”")} Giữ phe hay đổi phe; đổi thì phe cũ thành kẻ thù.`
    :`Hai năm sau ngày đăng cơ, ${lean}. Người đứng giữa như ngươi, phe nào cũng muốn kéo về: chọn phe, hoặc tiếp tục đứng ngoài.`},
  o:()=>{const s=rgSideNow();const O=[];if(s)O.push({n:"Một lòng như cũ",w:{},tr:6,s,lead:2,wx:"phe mình tin ngươi hơn"});
   for(const o of rgJoinOpts(false)){if(s){o.n="Đổi phe: "+o.n.charAt(0).toLowerCase()+o.n.slice(1);o.swc=1}O.push(o)}
@@ -152,7 +154,7 @@ RGBT.c5b={w:"emp",t:()=>{const p=rgP();const T=trS();if(T)T.bien=cl(T.bien+(p>=5
 /* chapter 6: the decisive night, then the outcome */
 RGBT.c6a={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgSideNow()]||"maid",
  t:()=>({emp:"Đêm trước buổi đại triều, Hoàng thượng không ngủ. “Ngày mai trẫm sẽ tự phê tấu chương. Cấm quân có người của Tể tướng, trẫm không biết là ai.”",
-  th:"Đêm trước buổi đại triều, Thái hậu cho gọi ngươi: “Ngày mai hoàng đế muốn tự cầm triều chính, Tể tướng không chịu buông. Ai gia phải ngồi sau rèm giữ cho hai bên khỏi đổ máu. Ngươi mang phong thư này sang Càn Thanh cung.”",
+  th:"Đêm trước buổi đại triều, Thái hậu cho gọi ngươi: “Ngày mai hoàng đế muốn tự cầm triều chính, Tể tướng không chịu buông. Ai gia phải ngồi sau rèm giữ cho hai bên khỏi đổ máu. {Goi} mang phong thư này sang Càn Thanh cung.”",
   quyen:"Đêm trước buổi đại triều, người của {dadq} gõ cửa sau cung ngươi: “Ngày mai bệ hạ muốn đoạt quyền. Chỉ cần {x} cho biết đêm nay bệ hạ nghỉ ở đâu, ai ra vào.”"})[rgSideNow()]||"Đêm trước buổi đại triều, cả hậu cung không ai ngủ. Cửa các cung đóng chặt, chỉ nghe tiếng bước chân cấm quân.",
  o:()=>{const s=rgSideNow();
   if(s==="emp")return[{n:"Dò ra người của Tể tướng trong cấm quân, báo bệ hạ",p:25,sk:[["mat",.4],["tamco",4]],trd:3,w:{sung:3},pw:9,s,l:{danh:-2},pl:-2,ev:"quyen",wx:"bệ hạ nắm được cấm quân",lx:"lộ ra, phe Tể tướng nắm Chứng cứ về ngươi"},
@@ -176,12 +178,12 @@ RGBT.c6b={w:()=>({emp:"emp",th:"th",quyen:"q"})[rgW().out]||"emp",fin:1,
   return[{n:"Ở bên an ủi bệ hạ",w:{sung:3},lq0:-5,wx:"bệ hạ nhớ người ở bên lúc khó"},{n:"Đến phủ Tể tướng chúc mừng",w:{bac:20,sung:-2},lq0:8,wx:"nhà Tể tướng nhớ mặt ngươi"},{n:"Đóng cửa cung tĩnh dưỡng",w:{},wx:"giữ mình"}]}};
 /* errands of her side between chapters (one at a time, BAL.rg.erCd months apart) */
 const RGE={emp:[
- {id:"e1",w:"emp",t:"Hoàng thượng muốn biết Thái hậu nghĩ gì về việc thay Lễ bộ thượng thư. “Ngươi hay sang Đức Thọ cung, dò giúp trẫm.”",o:[{n:"Hầu chuyện Thái hậu, khéo dò ý",p:40,sk:[["tamco",3],["duc",5]],w:{sung:2},pw:3,tr:6,l:{th:-4},wx:"bệ hạ biết ý Thái hậu",lx:"Thái hậu biết ngươi dò ý"},{n:"Thưa rằng không tiện hỏi",w:{},tr:-5,wx:"giữ mình"}]},
+ {id:"e1",w:"emp",t:"Hoàng thượng muốn biết Thái hậu nghĩ gì về việc thay Lễ bộ thượng thư. “{Goi} hay sang Đức Thọ cung, dò giúp trẫm.”",o:[{n:"Hầu chuyện Thái hậu, khéo dò ý",p:40,sk:[["tamco",3],["duc",5]],w:{sung:2},pw:3,tr:6,l:{th:-4},wx:"bệ hạ biết ý Thái hậu",lx:"Thái hậu biết ngươi dò ý"},{n:"Thưa rằng không tiện hỏi",w:{},tr:-5,wx:"giữ mình"}]},
  {id:"e2",w:"emp",t:"Đêm khuya, Hoàng thượng đưa ngươi xem một bản tấu: “Lời lẽ khéo thế này, trẫm không biết là trung hay gian.”",o:[{n:"Đọc kỹ, chỉ ra chỗ khuất",p:35,sk:[["tai",2],["tamco",4]],w:{sung:3},pw:2,tr:6,l:{},wx:"bệ hạ thấy ngươi sáng suốt",lx:"ngươi đọc không ra"},{n:"Thưa rằng hậu cung không dám xem tấu",w:{duc:1},tr:-5,wx:"giữ phép"}]},
- {id:"e3",w:"emp",t:"Hoàng thượng muốn vi hành ra phố xem dân tình, lấy cớ nghỉ lại cung ngươi đêm ấy. “Ai hỏi thì ngươi che giúp trẫm.”",o:[{n:"Nhận lời che giấu",p:45,sk:[["tamco",3]],w:{sung:4},pw:2,tr:8,l:{danh:-3,th:-3},wx:"bệ hạ về an toàn, thêm tin ngươi",lx:"chuyện lộ, Thái hậu trách ngươi"},{n:"Khuyên ngài thôi đi",w:{sung:-2},tr:-4,wx:"an toàn"}]}],
+ {id:"e3",w:"emp",t:"Hoàng thượng muốn vi hành ra phố xem dân tình, lấy cớ nghỉ lại cung ngươi đêm ấy. “Ai hỏi thì {goi} che giúp trẫm.”",o:[{n:"Nhận lời che giấu",p:45,sk:[["tamco",3]],w:{sung:4},pw:2,tr:8,l:{danh:-3,th:-3},wx:"bệ hạ về an toàn, thêm tin ngươi",lx:"chuyện lộ, Thái hậu trách ngươi"},{n:"Khuyên ngài thôi đi",w:{sung:-2},tr:-4,wx:"an toàn"}]}],
  th:[
  {id:"e1",w:"th",t:"Thái hậu muốn một bộ kinh chép tay cúng giỗ tiên đế, chữ phải nắn nót, không được nhờ người.",o:[{n:"Tự chép kinh mấy đêm liền",c:{suc:-8},w:{th:4,duc:1},pw:1,tr:6,wx:"Thái hậu hài lòng"},{n:"Thưa rằng sức yếu, xin khất",w:{th:-2},tr:-5,wx:"giữ sức"}]},
- {id:"e2",w:"th",if:()=>typeof qOn==="function"&&qOn(),t:"Thái hậu muốn Hoàng hậu {hh} đứng về phía bà trong việc lập người phụ chính mới. “Ngươi làm cầu nối cho ai gia.”",o:[{n:"Sang Càn Ninh cung nói chuyện",p:40,sk:[["hh",2],["tamco",4]],w:{th:3,hh:3},pw:3,tr:6,l:{hh:-4},wx:"Hoàng hậu nghiêng về Thái hậu",lx:"Hoàng hậu phật ý vì bị kéo vào"},{n:"Khéo từ chối",w:{th:-2},tr:-5,wx:"giữ mình"}]},
+ {id:"e2",w:"th",if:()=>typeof qOn==="function"&&qOn(),t:"Thái hậu muốn Hoàng hậu {hh} đứng về phía bà trong việc lập người phụ chính mới. “{Goi} làm cầu nối cho ai gia.”",o:[{n:"Sang Càn Ninh cung nói chuyện",p:40,sk:[["hh",2],["tamco",4]],w:{th:3,hh:3},pw:3,tr:6,l:{hh:-4},wx:"Hoàng hậu nghiêng về Thái hậu",lx:"Hoàng hậu phật ý vì bị kéo vào"},{n:"Khéo từ chối",w:{th:-2},tr:-5,wx:"giữ mình"}]},
  {id:"e3",w:"th",t:"Thái hậu hỏi các cung dạo này ai hay qua lại phủ Tể tướng.",o:[{n:"Nghe ngóng các cung",p:40,sk:[["mat",.5],["tamco",4]],w:{th:4},pw:3,tr:6,l:{th:-2},wx:"Thái hậu nắm được tin",lx:"tin ngươi dò được sai"},{n:"Thưa rằng không rõ",w:{},tr:-5,wx:"giữ mình"}]}],
  quyen:[
  {id:"e1",w:"q",t:"{dadq} nhờ ngươi chuyển một hộp lễ vật đến một phi tần đang được sủng, để nàng nói đỡ cho nhà Tể tướng.",o:[{n:"Chuyển lễ khéo léo",p:50,sk:[["tamco",3]],w:{bac:20},pw:2,tr:6,lq:3,l:{danh:-3},wx:"nhà Tể tướng thêm người nói đỡ",lx:"chuyện đút lót lọt ra"},{n:"Từ chối, sợ tai tiếng",w:{},lq0:-4,tr:-5,wx:"giữ mình"}]},
@@ -199,7 +201,7 @@ function rgLine(o){const od=rgOd(o),c=rgCost(o.c);const cost=fmt(c);const win=[f
  return `${word(od)} · ${cost?"tốn: "+cost+" · ":""}thành: ${win||"qua được"} · hỏng: ${lose||"không mất gì thêm"}`}
 PEND.rg=pp=>{try{if(!rgOn())return null;const b=rgBeatDef(pp.b);if(!b)return null;const O=rgOpts(b);if(!O.length)return null;
  const t=typeof b.t==="function"?b.t():b.t;const wk_=typeof b.w==="function"?b.w():b.w;
- const d={who:rgWho(wk_)||pMe(),t:rgTok(t),o:O.map((o,i)=>{const od=rgOd(o);return{n:rgTok(o.n),fx:rgCost(o.c),j67:rgLine(o),rgS:o.s||o.join||"",go:()=>rgRes(pp.b,i,od)}})};
+ const d={who:rgWho(wk_)||pMe(),t:rgTok(t,null,wk_),o:O.map((o,i)=>{const od=rgOd(o);return{n:rgTok(o.n),fx:rgCost(o.c),j67:rgLine(o),rgS:o.s||o.join||"",go:()=>rgRes(pp.b,i,od)}})};
  if(b.faces){const F=[["emp","Hoàng thượng"],["th","Thái hậu"],["q",(rgQH()||{name:"Tể tướng"}).name]].map(([k,n])=>[rgWho(k),n]).filter(x=>x[0]);if(F.length>=2)d.faces=F}
  return d}catch(e){console.error(e);return null}};
 function rgFire(id){const d=mkP("rg",{b:id});if(!d)return false;const m={t:rgTitle(id),h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(d.faces)m.faces=d.faces;Q.push(m);try{evBusyMark()}catch(e){}return true}
@@ -313,24 +315,24 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
  T7("rgl_th2","social",Object.assign({fu:1,r:"th",t:"Tâm nguyện Thái hậu (2/3): Mẹ con hòa thuận",h:"“Hoàng đế mấy tháng nay ít sang thỉnh an. Ai gia già rồi, chỉ mong mẹ con nói với nhau được một bữa cơm.”",dl:6,
   s:[G("","Khéo nhắc bệ hạ sang Đức Thọ cung","sung",45,1,{},"r",{emp:1,pl:null}),G("tn","Bày bữa cơm mẹ con, đứng hầu","duc",70,1,{suc:-5})],
   ok:{fx:{th:6,sung:2},r:8,ch:"rgl_th3",fn:X=>{rgPMid(2);return "Hai cung bớt căng thẳng."}},no:{r:-5}},ln("th",2)));
- T7("rgl_th3","social",Object.assign({fu:1,r:"th",t:"Tâm nguyện Thái hậu (3/3): Hoàng tôn đầy nhà",h:"“Ai gia muốn bế cháu. Ngươi đưa các hoàng tôn đến đây, ai gia muốn nghe chúng đọc thơ.”",dl:6,
+ T7("rgl_th3","social",Object.assign({fu:1,r:"th",t:"Tâm nguyện Thái hậu (3/3): Hoàng tôn đầy nhà",h:"“Ai gia muốn bế cháu. {Goi} đưa các hoàng tôn đến đây, ai gia muốn nghe chúng đọc thơ.”",dl:6,
   s:[G("home","Dạy các hoàng tôn đọc một bài thơ","tai",55,2,{suc:-6}),G("tn","Đưa các hoàng tôn đến thỉnh an","duc",80,1)],
   ok:{fx:{th:8,danh:3},r:10,fn:X=>{S.shield=Math.max(S.shield||0,2);return fin("th")(X)+" Thái hậu che chở ngươi 2 tháng."}},no:{r:-5}},ln("th",3)));
  /* Hoàng hậu: an heir of her own */
- T7("rgl_hh1","social",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (1/3): Phương thuốc cầu tự",h:"“Bổn cung vào cung đã lâu mà chưa có đích tử. Nghe nói Thái y viện có một phương cổ, muội giúp bổn cung hỏi kín.”",dl:5,
+ T7("rgl_hh1","social",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (1/3): Phương thuốc cầu tự",h:"“Bổn cung vào cung đã lâu mà chưa có đích tử. Nghe nói Thái y viện có một phương cổ, {goi} giúp bổn cung hỏi kín.”",dl:5,
   s:[G("tyv","Hỏi kín Thái y","tamco",55,1),C("Lấy thuốc",O("Tự sắc thuốc, giữ kín",{c:{suc:-6},p:70,sk:"y",lto:"stay"}),O("Mua vị thuốc quý ngoài cung",{c:{bac:-30},p:85,lto:"stay"}))],
   ok:{fx:{hh:6},r:10,ch:"rgl_hh2"},no:{r:-5}},ln("hh",1)));
- T7("rgl_hh2","social",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (2/3): Cầu tự ở chùa",h:"“Bổn cung muốn cầu tự ở chùa Hộ Quốc, nhưng Thái hậu không thích hậu cung ra ngoài. Muội đi cùng, đỡ lời giúp bổn cung.”",dl:5,
+ T7("rgl_hh2","social",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (2/3): Cầu tự ở chùa",h:"“Bổn cung muốn cầu tự ở chùa Hộ Quốc, nhưng Thái hậu không thích hậu cung ra ngoài. {Goi} đi cùng, đỡ lời giúp bổn cung.”",dl:5,
   s:[G("tn","Xin Thái hậu cho Hoàng hậu ra chùa","duc",50,1),G("","Theo Hoàng hậu lên chùa dâng hương","",100,2,{suc:-6})],
   ok:{fx:{hh:6,duc:1},r:10,ch:"rgl_hh3"},no:{r:-5}},ln("hh",2)));
- T7("rgl_hh3","pro",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (3/3): Giữ yên Trung cung",h:"“Có kẻ đồn bổn cung hiếm muộn để mưu ngôi Trung cung. Muội giúp bổn cung tra ra ai tung tin.”",dl:5,
+ T7("rgl_hh3","pro",Object.assign({fu:1,r:"hh",t:"Tâm nguyện Hoàng hậu (3/3): Giữ yên Trung cung",h:"“Có kẻ đồn bổn cung hiếm muộn để mưu ngôi Trung cung. {Goi} giúp bổn cung tra ra ai tung tin.”",dl:5,
   s:[C("Tra nguồn tin",O("Nghe ngóng các cung",{p:45,sk:"mat",lto:"stay"}),O("Hỏi cung nữ các cung, ban chút quà",{c:{bac:-30},p:70,lto:"stay"})),G("kn","Báo lại cho Hoàng hậu","",100,1)],
   ok:{fx:{hh:10,danh:2},r:12,d:1,fn:fin("hh")},no:{r:-5}},ln("hh",3)));
  /* Phế phi họ Lý: an old wrong set right */
  T7("rgl_ly1","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (1/3): Chuyện năm xưa",h:"“Năm ấy ta bị gán tội dùng bùa ếm. Cung nữ của ta, A Hạnh, biết sự thật, nhưng đã bị đuổi đi. Nếu tìm được nàng...”",dl:6,
   s:[G("lc","Ngồi nghe Phế phi kể chuyện cũ","duc",80,1),C("Tìm A Hạnh",O("Dò hỏi ở Kính sự phòng",{t:()=>S.place==="ksp",tw:"phải đến Kính sự phòng",p:45,sk:"mat",lto:"stay"}),O("Nhờ người ngoài cung tìm",{c:{bac:-30},p:70,lto:"stay"}))],
   ok:{fx:{duc:2,tamco:1},r:12,ch:"rgl_ly2"},no:{r:-5}},ln("ly",1)));
- T7("rgl_ly2","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (2/3): Lời khai của A Hạnh",h:"“A Hạnh đã chịu nói. Ngươi giữ lời khai này cho kín, kẻ hại ta năm xưa vẫn còn tai mắt.”",dl:6,
+ T7("rgl_ly2","inv",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (2/3): Lời khai của A Hạnh",h:"“A Hạnh đã chịu nói. {Goi} giữ lời khai này cho kín, kẻ hại {xung} năm xưa vẫn còn tai mắt.”",dl:6,
   s:[G("home","Chép lại lời khai, giấu kỹ","tamco",60,1),W("Đợi A Hạnh điểm chỉ",1)],
   ok:{fx:{tamco:1},r:10,ch:"rgl_ly3"},no:{r:-5},bad:{fx:{danh:-3}},badT:"Lời khai lọt ra ngoài."},ln("ly",2)));
  T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,

@@ -65,7 +65,7 @@ const WD={/* KNOBS (dev/WARDROBE.md §Núm) */
  frameMalice:60,frameHost:60,frameP:3,            /* NPC giá họa: needs malice and hostility, % per month */
  warnBase:20,                                     /* tai mắt warning before a frame-up lands */
  traceBase:35,traceMat:5,clearBase:55,clearMat:5};
-const WD_GRADE=["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm","Ngự tứ"];
+const WD_GRADE=["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm","Ngự tứ","“Phẩm của {P} mà dùng được món này, e là có ai ban riêng?”","“Người ngoài nhìn vào còn tưởng {P} là cung nữ.”"];
 const WD_PR=[12,20,30,45,70,100,150,220,320];
 function wdPName(P){return P<=0?"cung nhân":P>=9?"Thái hậu":P>=8?"Hoàng hậu":RANKS[P-1]?RANKS[P-1].n:"?"}
 /* catalogue: [key, slot, name, P, grade, colour, effect, note]; colour do/vang count as festive (forbidden in quốc tang) */
@@ -247,11 +247,19 @@ const WD_GMIN={night:0,contest:1,son:2,promo:2,birthday:1,accuse:0,story:1,sinht
 function wdRemarker(p){const L=others(p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);const q=queenP();
  if(!S.thDead&&roll(12))return{name:"Thái hậu",face:pTH(),sure:true,th:1};
  if(!L.length)return null;const v=pick(L);return{v,name:wdNm(v),face:pv(v),sure:v===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((v.wdk||{})[e.k])})}}
+const WD_SAY={ok:["khen {p} ăn vận vừa vặn, đúng phẩm vị.","gật đầu khi thấy {p}: ăn vận vừa vặn, đúng lễ.","khen {p} biết chừng mực, y phục đúng phẩm.","nhìn {p} một lượt, khẽ khen là biết giữ lễ.","thấy {p} ăn vận đúng phẩm, khẽ gật đầu."],
+ over:["“Đồ này e vượt phẩm vị.”","“{I} này… phẩm của {P} cài được sao?”","“Đẹp thì đẹp, chỉ e lễ chế không cho.”","“{Xung} nhớ thứ này là của bậc trên mới được dùng.”"],
+ under:["“{P} ăn vận giản dị quá, chẳng ra dáng {R}.”","“Áo xống thế kia, người ngoài lại tưởng Nội vụ phủ bạc đãi {P}.”","“Giản dị là đức, nhưng sơ sài quá thì thất lễ.”","“{P} tiết kiệm quá, đến phẩm phục cũng chẳng buồn may mới.”"]};
 function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?st:wdBelStatus(r.v||p,p);
  if(view==="ok"&&!(roll(35)))return"";/* praise is rarer than blame */
  const item=view==="tang"?wdFestItem(p):wdItem(wdOf(p).y)||wdItem(wdOf(p).tram);const nm=item?item.n:"bộ y phục";const R0=r.name.charAt(0).toUpperCase()+r.name.slice(1);
- const said={ok:`${R0} khen ${wdNm(p)} ăn vận vừa vặn, đúng phẩm vị.`,over:`${R0} nhìn ${nm} của ${wdNm(p)} mà nói: “Đồ này e vượt phẩm vị.”`,
-  under:`${R0} cười khẽ: “${wdNmC(p)} ăn vận giản dị quá, chẳng ra dáng ${p===S?(isSrv&&isSrv()?"người hầu cận":rkName(S)):(p.alive!==undefined?rkName(p):"")}.”`,
+ /* palace voice: each remark is a pool (jvoice kLine, no repeat), the speaker's self word from the one core (kSay r → p) */
+ const sp=r.th?"th":r.v,RK=p===S?(isSrv&&isSrv()?"người hầu cận":rkName(S)):(p.alive!==undefined?rkName(p):"");
+ const fill=x=>kSay(sp,p,x).replace(/\{P\}/g,wdNmC(p)).replace(/\{R\}/g,RK).replace(/\{I\}/g,nm);
+ /* band = the listener's rank band (jvoice kBand); a remark on someone else (an NPC) is a shared world line: co-op seats show the same one (o.shared) */
+ const VO={band:kBand(p),shared:p===S?undefined:(p.id!=null?p.id:p.name)};
+ const said={ok:fill(kLine("wd:ok",WD_SAY.ok,VO)).replace(/^/,`${R0} `).replace(/\{p\}/g,wdNm(p)),over:`${R0} nhìn ${nm} của ${wdNm(p)} mà nói: ${fill(kLine("wd:over",WD_SAY.over,VO))}`,
+  under:`${R0} cười khẽ: ${fill(kLine("wd:under",WD_SAY.under,VO))}`,
   tang:`${R0} thấy ${wdNm(p)} mặc ${nm} giữa quốc tang.`}[view];
  /* who hears it: p always; others by chance; the player also through her tai mắt */
  for(const o of consorts()){if(o===p)continue;if(o===S?(roll(30+(S.mat||0)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}

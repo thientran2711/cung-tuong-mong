@@ -202,7 +202,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
    opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return}
  if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();const v=m&&m.v;const named=v&&m.known;
   const nm=named?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
-  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua muội muội hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
+  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:A.replySuc},hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",

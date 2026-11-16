@@ -121,7 +121,7 @@ function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.
  if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
  c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
 PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),loyal=S.maid.loyal||50,po=cyLieO(),
-  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=S.rank>=7?"Hoàng hậu nương nương":S.rank>=3?"nương nương":"tiểu chủ";
+  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
  const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
  const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
@@ -141,7 +141,11 @@ PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),lo
   mk("Giấu, không báo",{wt:[G6("thẻ bài vẫn nằm trên khay")],k:[`cả cung đồn có tin vui: phi tần ghen +${R.giauGhen}`,`cuối tháng chưa có thai thì mừng hụt: Sủng -${B().rumSung} Danh -${B().rumDanh}`,risk,evi],
     wl:"Ma ma không lên Kính sự phòng báo kỳ; trong cung bắt đầu xì xào ngươi có tin vui."},"giau",lie("giau"))];
  O.forEach((o,i)=>{o.hint=H[i][0];o.risk=H[i][1]});
- return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: “Kỳ nguyệt sự của ${xg} đã tới (${dName(cyDaysM(S,cyCur()))}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
+ return{who:pMaid(),t:`<p>${S.maid.name} khẽ thưa: ${kLine("cycle:ask",CY_ASK,{sp:{srv:"f"},ls:S}).replace("{d}",dName(cyDaysM(S,cyCur())))}</p><p class="past">Kính sự phòng ghi sổ theo lời ma ma các cung báo lên; ai đang kỳ thì thẻ bài tạm cất.</p>`,o:O}};
+/* palace voice: the monthly question is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {d} = the days */
+const CY_ASK=["“Kỳ nguyệt sự của {goi} đã tới ({d}). Nô tỳ lên Kính sự phòng báo thế nào ạ?”","“Bẩm {goi}, tháng này nguyệt sự đến ({d}). Thẻ bài có cần tạm cất không ạ?”",
+ "“{Goi}, ma ma Kính sự phòng vừa sai người sang hỏi. Kỳ này ({d}), nô tỳ nên thưa thế nào?”","“Nguyệt sự của {goi} lại tới rồi ({d}). Nô tỳ đã chuẩn bị nước gừng; còn bên Kính sự phòng, xin {goi} định liệu.”",
+ "“{Goi} giữ ấm bụng mấy hôm nay ({d}). Nô tỳ báo Kính sự phòng cất thẻ, hay cứ để như thường?”"];
 /* co-op (review r3): the deferred flip runs outside endTurn's withoutFriend (jcoopworld), so take the friend entry out here too:
    otherwise the Emperor could "pick" the other player's card in MY world (rivalNight would then write Sủng/thai deltas into her row) */
 function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||COOPW.tnShared/* reviewer r2: jcoopworld B2 (one host-drawn night, friend in the host deck, guest draws nothing) */||!Array.isArray(rivals))return f();const out=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)out.push([i,rivals.splice(i,1)[0]]);

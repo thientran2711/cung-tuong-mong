@@ -85,7 +85,7 @@ const FULL={"Cung ngươi":"Cung ta","Lòng":"Thiện cảm","lòng":"thiện c�
 /* save-slot words only on the title screen / save-book panel */
 const SLOT={"Trống":"Chưa ghi","trống":"chưa ghi"};
 const QUICK=/quý (ngươi|ta)|thân [+\-−]|với ngươi|[Nn]àng|[Ll]òng|Đang (cài|đeo|dùng)|[Cc]hủ tin|Cung ngươi|T\d|[Nn]ăm \d|[Tt]háng \d|năm thứ \d|^B[1-5]:|Ô |ô |\[|Nhật ký|Tuyến truyện|Bản đồ|tab |[Xx]ét nghiệm|[Kk]iểm tra|chỉ số|Thu gọn|Mở rộng|cơ hội|[Ll]ượt|tải lại|[Bb]ấm|[Bb]ạn|[Đđ]iểm|ván|[Mm]ã|ký tự|Chắc chắn ghi|âm thanh|Hiệu ứng|Tắt tiếng|cung ta|Mục Việc|[Nn]ương nương|Đóng|Đã rõ|Hành động|Quan hệ|Chỉ số|[Tt]rống|[Nn]gươi/;
-function lowRank(){try{return !!(S&&S.rank<3&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
+function lowRank(){/* one address core (jvoice kAddr, VANPHONG §2): what her own servant calls her */try{return !!(S&&!(typeof isSrv==="function"&&isSrv())&&kAddr({srv:"f"},S,{m:"cool"}).goi==="tiểu chủ")}catch(e){return false}}
 function addr(s){/* servants/eunuchs speaking to the player: tiểu chủ below Tần */
   if(!/[Nn]ương nương/.test(s)||!lowRank())return s;
   s=s.replace(/“[^”]*”/g,q=>/Nương nương (sang|đi vắng)/.test(q)?q:q.replace(/Hoàng hậu nương nương/g,"\u0000").replace(/Nương nương/g,"Tiểu chủ").replace(/nương nương/g,"tiểu chủ").replace(/\u0000/g,"Hoàng hậu nương nương"));
