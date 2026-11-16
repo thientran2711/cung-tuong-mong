@@ -34,5 +34,4 @@
   saved again (marked lives skip the sổ). save() now marks only with CW.base or CW.inLife; leaveRoom marks only with CW.base.
 - Test additions (dev/test/save-slots.js): co-op death in the room and after leaving keeps Sổ 1; Kiếp mới after a co-op death
   stays a room life; guest waiting with a solo sổ open (before fix: FAIL, after: ok); reload mid co-op.
-- Overlap with review/coop-timer-r1: jcooplobby.js auto-merges (different lines); assemble.py conflicts only on the file list
-  (keep both jslots.js and jcooptimer.js); index.html/sw.js rebuild.
+- Overlap with coop-timer: now on main (b2690dfb3); merged clean except assemble.py file list (jslots after jcoopworld, jcooptimer after jkitpage). After merge: save-slots ALL OK (755x1000, 844x390; earlier also 1000x755 1180x820 1366x1024), coop-e2e plain vs live Worker 59/59 twice.
