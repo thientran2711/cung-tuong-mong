@@ -69,7 +69,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  if(sub.cur==="now"){let card="";/* KIT §51.1: "Kết cục xuất thân" joins the chapter rows (one block = one label column), not a 2nd table under the checklist */
   const fin=c&&c.done?["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]:null;let finIn=false;
   if(m&&c){const d=MS67[m.id],st=d.steps(m);const done=st.filter(x=>x[1]).length;const nx=st.find(x=>!x[1]);
-   card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art})+(finIn=!!fin,rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],["Hạn","không có hạn"],fin]))+kitChecks(st.map(x=>[x[1],x[0]]))}
+   card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art})+(finIn=!!fin,rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],msHan67(m),fin]))+kitChecks(st.map(x=>[x[1],x[0]]))}
   else if(M){const a=ARC67[M.a],P=pos67(M)||{c:M.chap||1,i:0,n:M.seq.length};/* kicker Chương N, steps "Hồi i/n" = the act she is on, as in the story dialog title (lab67) */
    card=kitSkillCard({kind:"story",k:M.a,kicker:`Chương ${P.c}`,name:a.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",fill67(a.g,M)],["Hồi kế tiếp",hint67(M)],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],fin]);finIn=!!fin}
   else if(c&&c.all)card=kitEmpty("Mệnh truyện","Đã đi hết các chương của kiếp này.");
@@ -77,8 +77,9 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
    card=kitSkillCard({kind:"story",k:"v1",kicker:`Chương ${P.c}`,name:s.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",s.goal],
     S.st.done?["Kết cục",S.st.tag||(S.st.done>0?"Thành":"Hỏng"),S.st.done>0?"g":"r"]:["Kế tiếp",hn||"chờ hồi kế tiếp"]])}
   else card=kitEmpty("Mệnh truyện","Chưa mở chương nào. Mở bằng thẻ «Mệnh truyện» ở Hành sự.");
-  const nx=c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
-  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${nx?` <span class="kchip n" data-chap="1">còn khoảng ${nx} chương</span>`:""} ${kitInfo("Luật chương")}</div>`+card;
+  const F=typeof f14Info==="function"?f14Info():null;/* the 14-chapter frame (jst14): part chip + exact chapters left */
+  const nx=F?F.left:c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
+  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n" data-chap="1">còn ${F?"":"khoảng "}${nx} chương</span>`:""} ${kitInfo("Luật chương")}</div>`+card;
   try{if(typeof chapModel==="function"){const CM=chapModel();h+=chapInline(CM,CM&&CM.mode==="ms")}}catch(e){console.error(e)}
   if(fin&&!finIn)h+=rows67([fin])}
  else if(sub.cur==="rank"){
