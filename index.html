@@ -12941,7 +12941,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
    :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.rel&&p.rel.length&&PW>=440?kitRelTable(p.rel):""}`;
  const personBody=(p,cont)=>{const fw=p.kind==="person"?p.who:p.fig;let fig=typeof kitStageFig==="function"&&fw&&kitStageFig(fw,{cap:false})||"";
   /* owner 17:45Z: every page has its subject's full-length figure; no painting (yet) or the figure list still loading → the kit silhouette */
-  if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"https://ctm-img.victoria-tntt.workers.dev/img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
+  if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"https://ctm-img.victoria-tntt.workers.dev/img/kit/")+`unknown-fig-${sx}.webp`})||""}let kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";if(/data-fb=/.test(fig))kfr=String((.93*Math.min(1,+kfr*(window.KIT_FIG?KIT_FIG.man:1.07))).toFixed(3)); /* KIT 61: inside the silk scroll every adult stands at the same size */
   return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
@@ -20902,7 +20902,8 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true}):(q.name||"")}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ let fb="";try{fb=typeof kitFigBgKey==="function"?kitFigBgKey(q):""}catch(e){}
+ return `<figure class="kesf"${fb?` data-fb="${fb}"`:""}><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
@@ -21114,7 +21115,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* column width: the people (or the widest name chip); the right column keeps ≥ 280 px — if not, one common factor */
   let need=Math.max(tot,capW)+12,k=1;
   if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
-  else{const dw=Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
+  else{let bw=0;try{if(col.querySelector(":scope > .kesf[data-fb]"))bw=2*parseFloat(getComputedStyle(col).borderLeftWidth)||0}catch(e){}/* KIT 61: the silk scroll border is outside the figure window */const dw=Math.min(innerWidth-24,need+bw+470);const room=dw-250-44-bw;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need+bw)+"px")}
   const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
   L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
@@ -21717,6 +21718,7 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
+   if(por.querySelector(":scope>.kesf[data-fb]")){box.classList.remove("kbk-figover");return}/* KIT 61: on the silk scroll the figure stays centred and a wide robe is cropped by the scroll window (no slide, no fade) */
    if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
    const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
    if(box.closest(".kbk.narrow")){   /* phones: unchanged from r7 (OPEN: a figure wider than the whole page is still scaled to the page — owner decision pending) */
@@ -28963,6 +28965,41 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* ================= KIT 61 · FIG-BG — the silk hanging scroll behind every full-body figure (owner 15/11 ~20:40Z, option A) =================
+   The person is painted ON a vertical silk hanging scroll: a roller rod at the top AND at the bottom (knob ends), a brocade mount, a silk field whose
+   COLOUR + MOTIF say the status. One kit part, two readers: the Tuần lục person page (.kbk-por) and the event-with-a-person dialog column (.kes, kitEventDp).
+   - kitFigBgKey(p) -> table key ("c0".."c7" consort tier, "cold", "emp", "th", "serv", "man", "unk")
+   - KIT_FIGBG[key] = {n: status, col: silk colour, motif} (the table in KIT.md §61); art = img/kit/figbg-<key>.webp (448x800, 20-50 KB, one download per key, on demand)
+   - kitStageFig puts data-fb="<key>" on <figure class="kesf">; the CSS below paints the scroll on the figure's COLUMN (border-image: rods + mount keep their size,
+     the silk stretches) — the figure sits inside the silk window; a wide robe that would pass the window edge is CROPPED (overflow hidden), never sticks out.
+   - ONE figure size inside the scroll: adults all stand at the same size (men are NOT taller: kfr = min(1, kfr x KIT_FIG.man)), children by age.
+   Never a private scroll/frame elsewhere: use data-fb on a kitStageFig figure. */
+const KIT_FIGBG={
+ c0:{n:"Đáp ứng",col:"ngà",motif:"hoa mai trắng"},c1:{n:"Thường tại",col:"lục nhạt",motif:"trúc, lan"},c2:{n:"Quý nhân",col:"lam nhạt",motif:"sen, sóng nước"},
+ c3:{n:"Tần",col:"hồng phấn",motif:"mẫu đơn"},c4:{n:"Phi",col:"tím nhạt",motif:"hoa tử đằng"},c5:{n:"Quý phi",col:"hồng đỏ nhạt",motif:"trà mi"},
+ c6:{n:"Hoàng quý phi",col:"cam hổ phách",motif:"cúc vàng"},c7:{n:"Hoàng hậu",col:"vàng nhạt",motif:"phượng, mẫu đơn"},
+ cold:{n:"Lãnh cung",col:"xám lạnh",motif:"cành khô, không vàng"},emp:{n:"Hoàng thượng",col:"vàng thổ hoàng",motif:"rồng, mây lành"},
+ th:{n:"Thái hậu",col:"nâu tím nhạt",motif:"tùng, hạc, đào tiên"},serv:{n:"Cung nhân · thái giám",col:"xám vải gai",motif:"liễu"},
+ man:{n:"Vương gia · quan · công tử · thị vệ · thái y · hoàng tử",col:"xanh xám thủy mặc",motif:"trúc, núi mờ"},unk:{n:"Người lạ",col:"be đá ấm",motif:"sương mù"}};
+window.KIT_FIGBG=KIT_FIGBG;
+function kitFigBgKey(p){try{if(!p)return"";const q=p.__kp||p;if(typeof kitIsKnown==="function"&&!kitIsKnown(q))return"unk";const r=personRoleRank(q);
+ switch(r.role){case"player":case"consort":return"c"+Math.max(0,Math.min(7,+r.rank||0));case"cold":return"cold";case"emp":return"emp";case"thaihau":return"th";
+  case"maid":case"mama":case"eunuch":return"serv";case"princess":return"c3";default:return"man"}}catch(e){return"man"}}
+window.kitFigBgKey=kitFigBgKey;
+(function(){const st=document.createElement("style");st.id="kit-figbg";
+ const sel=k=>`.kbk-por:has(>.kesf[data-fb="${k}"]),.kes:has(>.kesf[data-fb="${k}"]:first-child)`;
+ st.textContent=`
+.kbk-por:has(>.kesf[data-fb]),.kes:has(>.kesf[data-fb]){--fbt:20px;--fbs:22px;box-sizing:border-box;border:solid transparent;border-width:var(--fbt) var(--fbs);border-image-slice:30 38 fill;border-image-width:var(--fbt) var(--fbs);border-image-repeat:stretch;overflow:hidden;position:relative;filter:drop-shadow(0 3px 6px #3a201040)}
+.kes:has(>.kesf[data-fb]){--fbt:16px;--fbs:17px}
+.kbk.narrow .kbk-person.kbk-full>.kbk-por:has(>.kesf[data-fb]){overflow:hidden}
+@media (max-height:520px){.kbk-por:has(>.kesf[data-fb]){--fbt:11px;--fbs:12px}.kes:has(>.kesf[data-fb]){--fbt:10px;--fbs:11px}}
+.kbk-por:has(>.kesf[data-fb])>.kesf>.kpsn{display:none}
+.kes:has(>.kesf[data-fb])>.kpsn .kname,.kes:has(>.kesf[data-fb])>.kpsn .kti,.kes:has(>.kesf[data-fb]) .kesf>.kpsn .kname,.kes:has(>.kesf[data-fb]) .kesf>.kpsn .kti{text-shadow:0 0 2px #fff6e0,0 0 5px #fff6e0,0 0 9px #fff6e0cc}
+`+Object.keys(KIT_FIGBG).map(k=>`${sel(k)}{border-image-source:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/figbg-${k}.webp);background:none}`).join("\n");
+ document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§61",title:"fig-bg · tranh lụa cuộn treo sau người (màu + họa tiết theo thân phận)",
+ html:()=>`<div style="display:flex;flex-wrap:wrap;gap:10px">`+Object.keys(KIT_FIGBG).map(k=>{const f=KIT_FIGBG[k];const src=k==="emp"?"https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-m.webp":"https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-f.webp";
+  return `<figure style="margin:0;text-align:center;font:12px/1.3 sans-serif"><div style="width:130px;height:232px;position:relative"><div class="kbk-por" style="position:absolute;inset:0"><figure class="kesf" data-fb="${k}" style="margin:0;height:100%;display:flex;align-items:flex-end;justify-content:center"><img class="kesimg" style="height:100%;width:auto" src="${src}" alt=""></figure></div></div><figcaption>${k} · ${f.n}<br>${f.col} · ${f.motif}</figcaption></figure>`}).join("")+`</div>`})}catch(e){}
 
 </script>
 
@@ -28989,7 +29026,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8e6e3afc83ca";window.CTM_BUILD=BUILD;
+const BUILD="fe2f1573f199";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -162,7 +162,8 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true}):(q.name||"")}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ let fb="";try{fb=typeof kitFigBgKey==="function"?kitFigBgKey(q):""}catch(e){}
+ return `<figure class="kesf"${fb?` data-fb="${fb}"`:""}><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" src="${src}" alt="" decoding="sync" onerror="kitImgErr(this,{sel:'.kesf',cls:'kesno'})">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
@@ -374,7 +375,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* column width: the people (or the widest name chip); the right column keeps ≥ 280 px — if not, one common factor */
   let need=Math.max(tot,capW)+12,k=1;
   if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
-  else{const dw=Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
+  else{let bw=0;try{if(col.querySelector(":scope > .kesf[data-fb]"))bw=2*parseFloat(getComputedStyle(col).borderLeftWidth)||0}catch(e){}/* KIT 61: the silk scroll border is outside the figure window */const dw=Math.min(innerWidth-24,need+bw+470);const room=dw-250-44-bw;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need+bw)+"px")}
   const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
   L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
