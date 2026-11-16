@@ -741,11 +741,13 @@ function psSeedKids(){const P=BAL.ps;let n=0,r=Math.random()*P.kidN.reduce((a,b)
  const sx=[];for(let i=0;i<n;i++)sx.push(Math.random()<P.sonP?"m":"f");if(n>=2&&!sx.includes("m"))sx[0]="m";if(n>=2&&!sx.includes("f"))sx[n-1]="f";
  for(const x of sx){const age=P.kidAge[0]+R(P.kidAge[1]-P.kidAge[0]+1);const rg=x==="m"?P.sonMom:P.dauMom;
   const M=rivals.filter(v=>v.alive&&!(x==="m"&&v.queen)&&(v.queen?rg[1]>=7:v.rank>=rg[0]&&v.rank<=rg[1])&&(v.kids||[]).length<2&&(v.kids||[]).every(k=>Math.abs(k.age-age)>=2));if(!M.length)continue;
-  const v=pick(M);const k=mkKid(x,age);v.kids.push(k);v.lastBirth=Math.max(v.lastBirth==null?-999:v.lastBirth,-12*age-R(6))}}
+  const v=pick(M);const k=mkKid(x,age);v.kids.push(k);v.lastBirth=Math.max(v.lastBirth==null?-999:v.lastBirth,-12*age-R(6));
+  v.age=Math.max(v.age,BAL.ps.momAge+age)}/* review r1: no mother (or Emperor) under momAge at a seeded child's birth */
+ if(S&&S.emp){const mx=Math.max(0,...allKids().map(([k])=>k.age||0));if(mx)S.emp.age=Math.max(S.emp.age,BAL.ps.momAge+mx)}}
 /* the opening line of a new game (Nhập cung): the Emperor has just taken the throne, the court is weak, the harem young, few children */
 function psOpenText(){const E=S.emp,K=allKids().filter(([k])=>k.alive);const ns=K.filter(([k])=>k.sex==="m").length,nd=K.length-ns;
  const kl=!K.length?"Trong cung chưa có hoàng tự nào.":`Trong cung mới có ${[ns?ns+" hoàng tử":"",nd?nd+" công chúa":""].filter(Boolean).join(", ")}, đứa lớn nhất mới ${Math.max(...K.map(([k])=>k.age))} tuổi; Hoàng hậu chưa có con trai.`;
- return `Ngài vừa đăng cơ, niên hiệu ${E.era} mới là năm đầu. Triều chính còn non: việc lớn vẫn phải qua Thái hậu và các đại thần phụ chính. Hậu cung còn thưa, phi tần phần nhiều là người cũ từ tiềm để, tuổi còn xanh. ${kl} Ngôi Đông cung còn bỏ trống.`}
+ return `Ngài vừa đăng cơ, nay mới là ${E.era} năm thứ nhất. Triều chính còn non: việc lớn vẫn phải qua Thái hậu và các đại thần phụ chính. Hậu cung còn thưa, phi tần phần nhiều là người cũ từ tiềm để, tuổi còn xanh. ${kl} Ngôi Đông cung còn bỏ trống.`}
 function mySons(){return S.kids.filter(k=>k.alive&&k.sex==="m")}
 function myDaus(){return S.kids.filter(k=>k.alive&&k.sex==="f")}
 function liveRivals(q){return rivals.filter(v=>v.alive&&!v.out&&(q||!v.queen))}
@@ -804,7 +806,7 @@ function start(){
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false};
   rivals=[];S.name=freshName();apply(o.o);if(o.art)Object.assign(S.arts,o.art);S.ally=o.ally?1:0;
   for(const [r,q] of BAL.ps.harem)rivals.push(newRival(r,q));
-  /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 0–2 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
+  /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 3–5 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
   rivals.forEach(v=>{v.age=BAL.ps.consAge[0]+R(BAL.ps.consAge[1]+1)+(v.queen||v.rank>=4?BAL.ps.consAge[2]:0)});psSeedKids();S.ps=1;S.reign={y0:S.year,power:BAL.ps.power0,ch:0,side:null};/* D5 hook: Emperor side story chapters (ch) and her side road: side = "emp" | "th" | "quyen" */spreadTraits();
   Object.assign(S,drawFace());rivals.forEach(v=>Object.assign(v,drawFace()));S.emp.face=R(Math.max(1,(AV.emperor||[]).length));
   normAll();
@@ -4045,15 +4047,16 @@ const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · 
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
   robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12,plotRel:-30, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
-  npcOut:2,npcRob:2},
+  npcOut:2,npcRob:2},                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
  /* PALACE START (owner 16/11 "game starts right after the accession" + amendment "about 4 small children"; review/palace-start; NEW games only, flag S.ps):
     j1 psSeedKids / psOpenText, j2 start, j51 kvW. harem = [rank, queen] of the consorts at the start (young and small: 10, was 12);
     consAge = [min, spread, +years for the queen and Phi+]; kidN = weights for 0,1,2,3,4,5 children in the whole palace; kidAge = [min,max] age;
     sonP = chance a seeded child is a prince; sonMom / dauMom = mother's rank range (7 = the Hoàng hậu: daughters only, never a son = no đích tử);
     empAge = [min, spread]; power0 = the throne's grip on the court (0–100, hook for the Emperor's side story and the side road, D5);
-    npcConc[y] = NPC conception × in the y-th game year (then 1); truongW = heir weight for the first-born son (old saves 25): an edge, not a lock. */
+    npcConc[y] = NPC conception × in the y-th game year (then 1); truongW = heir weight for the first-born son (old saves 25): an edge, not a lock;
+    momAge = youngest age of a mother (and the Emperor) at a seeded child's birth (review r1). */
  ps:{harem:[[7,1],[5,0],[4,0],[3,0],[3,0],[2,0],[1,0],[1,0],[0,0],[0,0]],consAge:[18,4,2],kidN:[0,0,0,30,50,20],kidAge:[1,4],sonP:.5,sonMom:[1,5],dauMom:[1,7],
-  empAge:[19,6],power0:30,npcConc:[.9],truongW:8}};                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
+  empAge:[19,6],power0:30,npcConc:[.9],truongW:8,momAge:17}};
 /* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
 function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="function"&&has("hieuthao");const heir=!!(S.heir&&S.heir.k&&S.heir.k.alive&&S.heir.v===(p===S?null:p));
  return{sons:sn,th:sn?BAL.hhTh:(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:heir?BAL.hhDucHeir:BAL.hhDuc,heir}}
@@ -4862,7 +4865,7 @@ heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.hei
  const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
  if(!roll(wait?5:15))return"";
  let r=Math.random()*c.reduce((a,b)=>a+b.w,0),i=0;while(r>c[i].w&&i<c.length-1){r-=c[i].w;i++}const x=c[i];setHeir(x.k,x.v);fx("gold");
- const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`xét hiền tài: Tài ${x.k.tal}, mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}, được ngài thương ${x.k.fond}${x.truong?", lại là con trưởng":""}`:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
+ const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}; mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}${x.truong?", lại là con trưởng":""}`/* r1: keeps the "lập hiền: Tài N, được ngài thương N" form so j53 swaps the raw talent for the Văn/Đức/Võ words (rival: rumour word) */:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
  return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};
 /* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử (ván mới S.ps: người nặng ký nhất, trưởng tử chỉ là một phần) */
 (function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>S.ps?b.w-a.w:a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();
@@ -5141,7 +5144,7 @@ function ktQuiet(e){const E=KTE[e];S.kt53t=S.turn;const L=ktList(E).filter(([k])
 function ktHeirW(k){return Math.max(0,ktHien(k)*1.1-12)}
 /* cài sau khi mọi mô-đun đã nạp (j51 đứng trước hay sau j53 đều được) */
 function ktHeirInstall(){if(window.__ktHeirOn)return;window.__ktHeirOn=1;
-if(typeof kvW==="function"){const w0=kvW;kvW=function(k,v,dich,truong){const w=w0.apply(this,arguments);try{ktSync(k);if(!hienShown(k))return 5+(dich?60:0)+(truong?25:0)+(k.fond||0)/2;return w-k.tal/2+ktHeirW(k)}catch(e){return w}}} 
+if(typeof kvW==="function"){const w0=kvW;kvW=function(k,v,dich,truong){const w=w0.apply(this,arguments);try{ktSync(k);if(!hienShown(k))return 5+(dich?60:0)+(truong?(S&&S.ps?BAL.ps.truongW:25):0)+(k.fond||0)/2;/* palace-start r1: same first-born edge as j51 kvW */return w-k.tal/2+ktHeirW(k)}catch(e){return w}}} 
 else{const h0=heirMonth;heirMonth=function(){const L=allKids().map(([k])=>[k,k.tal]);try{L.forEach(([k])=>{ktSync(k);k.tal=2*ktHeirW(k)})}catch(e){}let r;try{r=h0.apply(this,arguments)}finally{L.forEach(([k,t])=>{k.tal=t})}return r}} 
 if(typeof kvWhy==="function"){const y0=kvWhy;kvWhy=function(x){return String(y0.apply(this,arguments)).replace(/^Tài \d+ · được thương \d+/,!hienShown(x.k)?"còn nhỏ: chỉ xét đích, trưởng, lòng thương":x.v?`Hiền tài ${hienWord(x.k)} (lời đồn)`:`Hiền tài ${ktHien(x.k)} · được thương ${x.k.fond}`)}} 
 (function(){const h0=heirMonth;heirMonth=function(){const r=h0.apply(this,arguments);try{if(r&&S.heir&&S.heir.k)return String(r).replace(/lập hiền: Tài \d+, được ngài thương \d+/,S.heir.v?`lập hiền: tiếng học hành ${hienWord(S.heir.k)}, được ngài thương`:`lập hiền: Văn ${ktR(S.heir.k.tv)}, Đức ${ktR(S.heir.k.td)}, Võ ${ktR(S.heir.k.tw)}, được ngài thương ${S.heir.k.fond}`)}catch(e){}return r}})();}
@@ -29455,7 +29458,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="710fd7ca7cc0";window.CTM_BUILD=BUILD;
+const BUILD="2c962ab39403";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

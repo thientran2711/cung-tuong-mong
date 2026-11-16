@@ -40,3 +40,21 @@ Hoàng hậu had a son (đích tử) in 15/60 games, >2 kids in 15/60.
 ## Not done / hooks
 - Side road (Emperor / Thái hậu / quyền thần) and the Emperor side story: hook only, `S.reign.side` / `S.reign.ch` / `S.reign.power`
   (too big for this task: needs its own chapter/event set — D5).
+
+## Review r1 (session 8 reviewer, branch review/palace-start-r1 = palace-start 3ac727833 + origin/main 2afdafc39)
+Fixes made by the reviewer:
+1. j53 `ktHeirInstall` kvW wrapper: for children whose talent is not yet shown (<6) it returned a hard-coded first-born bonus 25, so the
+   palace-start `truongW` 8 never applied to small children (display order / Emperor dies early). Now uses the same `S.ps?BAL.ps.truongW:25`.
+2. j51 heir reason for new games ("xét hiền tài: Tài N, mẹ là …") did not match the j53 rewrite regex, so it showed the raw old `tal`
+   number (also for a rival's son, whose talent must stay a rumour word). Now "theo lệ lập hiền: Tài N, được ngài thương N; mẹ là <rank>
+   (, lại là con trưởng)" so j53 swaps in Văn/Đức/Võ (her son) or "tiếng học hành <word>" (rival's son).
+3. psSeedKids: mothers aged 18 had a 4-year-old (birth at 14; 288 of ~1180 seeded children had a mother under 17 at birth), and a
+   19-year-old Emperor had a 4-year-old. New `BAL.ps.momAge` 17: a seeded child's mother (and the Emperor) is at least 17 at its birth.
+4. Opening text: "niên hiệu X mới là năm đầu" → "nay mới là X năm thứ nhất" (VANPHONG year wording). Stale j2 comment "0–2" → "3–5";
+   jbal NPC comment put back on its line. palstart.js takes env SEED0 for a different seed set.
+Measures (after fixes): init 300 new games: 3/4/5 kids 80/159/61, 572 sons / 609 daughters, every game ≥1 of each sex, Hoàng hậu son 0,
+max age 4, no heir, mother age at birth ≥17, Emperor 19–25 (mostly 21+). Bot SEED0=55555 8 seeds × 36 months: 7 lived, 1 bot death at
+turn 2; NPC births 9 in 21 palace-years (0.43/yr; 6 sons 3 daughters; one Hoàng hậu son in year 2), events 7–14 per year, 0 page errors.
+Old save (main build, 12 consorts, 3 princes) loads in the new build: no S.ps/S.reign, first-born weight still 25, 6 months tick + tabs
+render, 0 errors. UI: Hoàng tự tabs at 1000x755, 1366x1024@2, 844x390, 755x1000@2: no overflow/cut text, princesses listed with princes
+(Trong cung); Nhập cung text at 1000x755, 1366x1024, 844x390, 390x844 (rotate prompt) fine.

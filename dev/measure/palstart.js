@@ -1,5 +1,5 @@
 // review/palace-start: children at start + births over the first 3 in-game years (owner 16/11 "game starts right after the accession").
-// usage: node dev/measure/palstart.js <page.html> init <N>            -> N fresh new games: children at start (count, sexes, mothers, đích tử)
+// usage (env SEED0=<n> picks another seed set, default 1000): node dev/measure/palstart.js <page.html> init <N>            -> N fresh new games: children at start (count, sexes, mothers, đích tử)
 //        node dev/measure/palstart.js <page.html> bot <seeds> [months=36] [mode=sens]  -> inpage6 bot plays each seed for <months>;
 //        reports children by year, first-born mother (player / NPC), modals (events) + log lines per year. env BALJ='{"npcConc":1}' overrides BAL.
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
@@ -8,7 +8,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
 (async()=>{const b=await chromium.launch();const out=[];
  for(let si=0;si<(what==='init'?1:N);si++){
   const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
-  await ctx.addInitScript(`window.__seed=${1000+si*7919};`+SEEDRNG+`window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};`);
+  await ctx.addInitScript(`window.__seed=${(+process.env.SEED0||1000)+si*7919};`+SEEDRNG+`window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};`);
   const p=await ctx.newPage();p.setDefaultTimeout(900000);await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
   const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto('file://'+path.resolve(PAGE),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
