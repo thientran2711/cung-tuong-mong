@@ -1,6 +1,6 @@
 # PROGRESS review/coop-night-sync-r1 (reviewer, coordinator session 9, 16/11)
 
-Target: review/coop-night-sync @ 22e7932d. Branch r1 = that sha + merge of origin/main a363cc14, then 0a311183 (reign-road), then 02a0d3f1 (act-dedupe); sw.js/index.html/assets.json rebuilt each time, never hand-merged (one conflict in
+Target: review/coop-night-sync @ 22e7932d. Branch r1 = that sha + merge of origin/main a363cc14, then 0a311183 (reign-road), then 02a0d3f1 (act-dedupe), then c4e89f89 (outside-r2-r2: jkc home road; jcoopworld begin() conflict resolved = branch snapshot restore + main's CW.fWasHome); sw.js/index.html/assets.json rebuilt each time, never hand-merged (one conflict in
 dev/build/jcoopworld.js fromCanon buổi clamp: kept the branch's `LASTB()` = B4L (3), main had literal 3; same value). Site rebuilt
 with dev/site/build_site.sh (index.html, sw.js, assets.json not hand-merged).
 
@@ -16,6 +16,7 @@ with dev/site/build_site.sh (index.html, sw.js, assets.json not hand-merged).
 | after the 0a311183 merge: coop-night / coop-e2e / coop-rejoin-stats | 105/105 · 59/59 · 31/31 |
 | after the 02a0d3f1 merge: coop-night / coop-e2e / coop-rejoin-stats | 104/105 (test flake, see below) · 59/59 · 31/31 |
 | coop-night run 7 (after case-3 fix) / run 8 (after isRd for all night presses) | 104/105 (guest already ready, same flake) · 105/105 |
+| FINAL on main c4e89f89: coop-night / coop-rejoin-stats / coop-e2e / coop-timer | 105/105 · 31/31 · 59/59 · 43/43 |
 | solo boot at 755x1000, 1180x820, 844x390 | game starts, no co-op clock, no overflow; "Sang buổi" steps |
 
 coop-rejoin-stats.js (new): host rejoins mid-buổi, then guest rejoins mid-buổi, after both did acts (+tài/+sắc, khắc spent):
@@ -32,6 +33,9 @@ date/week. (Run 1 had 2 script faults: over-pressing past the week; fixed in the
   the guest pressed, so both were ready and the host committed `go`; the guest ran its night while the host still read the event
   (guest showed the new date, pend, "Chờ hảo hữu…"; the week merged once after). Case 3 now detects an already-ready host and only
   finishes the night ("n/a" line). See follow-up 1.
+
+- coop-night.js + coop-rejoin-stats.js bots now accept the identity card by '^Nhận thân phận' first and skip [data-kcp] road buttons
+  (same fix main made in coop-timer.js for the jkc 'Vào cung ngay' road); without it setup looped on "Thân phận kiếp này".
 
 ## Notes / follow-ups (not blocking)
 - (1) Night `go` ignores dialogs that open on a seat AFTER it became ready (friend notices, a night chain, a late event): the other
