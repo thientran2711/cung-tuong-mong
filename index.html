@@ -26742,11 +26742,12 @@ function kidKind(R){const it=R.it||{};if(R.work){const A=typeof ARTS!=="undefine
 function kidThemes(k){const L=[];try{if(typeof TS_THEME==="object")for(const t in TS_THEME)if((TS_THEME[t].tags||[]).includes(k))L.push(TS_THEME[t].n)}catch(e){}
  try{const own=(IT[k]&&IT[k].th)||(typeof WD_ITEMS==="object"&&WD_ITEMS[k]&&WD_ITEMS[k].th)||[];for(const t of [].concat(own))if(t&&!L.includes(t))L.push(t)}catch(e){}return L}
 /* Xa xỉ: this piece · what she wears now → after wearing it · her rank's allowance (BAL.itd.allow) — wearables of the player only */
-function kidLux(R){if(R.who||R.work||R.veil)return null;const B=(typeof BAL==="object"&&BAL.itd)||{};let lux=0,cur=0;
+function kidLux(R,o){if(R.who||R.work||R.veil)return null;const B=(typeof BAL==="object"&&BAL.itd)||{};let lux=0,cur=0;
  try{if(R.wd){const w=WD_ITEMS[R.k];lux=wdLux(R.k);const c=wdOf(S)[w.sl];cur=c&&WD_ITEMS[c.k]?wdLux(c.k):0}
   else if(R.it&&R.it.sl){lux=luxVal(R.k);const c=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===R.it.sl);cur=c?luxVal(c.k):0}
   else if(R.it&&R.it.dr){lux=luxVal(R.k);return{vals:[`món này ${lux}`],over:false}}
   else return null;
+  if(o&&o.luxItem)return{vals:[`món này ${lux}`],over:false};/* a board that is not worn (Hội phối đồ): the piece only, no "Bên mình" change */
   const x=luxOf(S);const after=R.worn?x.sc:x.sc-cur+lux;const over=B.allow!==false&&after>x.bud;
   const V=[`món này ${lux}`,R.worn||after===x.sc?`Bên mình ${x.sc}`:`Bên mình ${x.sc} → ${after}`];if(B.allow!==false)V.push(`hạn mức phẩm ta ${x.bud}`);
   return{vals:V,over}}catch(e){return lux?{vals:[`món này ${lux}`],over:false}:null}}
@@ -26770,7 +26771,7 @@ function kitItemDetailRows(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return""
    const fg=R.it&&R.it.dr&&!o.dress&&typeof wdFabOf==="function"?wdFabOf(R.k):null;if(fg&&WD_ITEMS[fg]){const W=WD_ITEMS[fg];D=D.filter(x=>!/^may áo/.test(x));D.unshift(`may thành ${W.n}: ${plainFx(W.w)||"giản dị"}`);G=G.filter(x=>x!=="áo mặc 3 tháng");G.push(`áo may xong: xa xỉ ${wdLux(fg)}`)}
    if(!D.length&&!M.length&&R.it&&R.it.d)G.unshift(R.it.d)}}catch(err){console.error("kitItemDetailRows",err)}
  if(R.qty>1)G.push(`trong rương: ${R.qty} món`);if(o.note)G.push(...[].concat(o.note).filter(Boolean));
- const T=kidThemes(R.k),X=o.noLux?null:kidLux(R),F=kidFrom(R);
+ const T=kidThemes(R.k),X=o.noLux?null:kidLux(R,o),F=kidFrom(R);
  return kitRows((o.lead||[]).concat([["Phẩm",kidGradeVal(gr,R.work&&typeof econWkGrade!=="function"?I.gname:gr.n,gx)],["Loại",kidKind(R),"n"],["Hợp đề",T,"n"],["Được",D,"g"],["Mất",M,"r"],
   ["Xa xỉ",X?X.vals.map((v,i)=>i===1&&X.over?`<span class="ef r">${v}: quá hạn mức</span>`:v):[],"n"],["Lai lịch",F,"n"],["Ghi chú",G,"n"]]))}
 /* the block */
@@ -27785,7 +27786,7 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
  let selI=null;const detHTML=()=>{const e=selI!=null?S.inv[selI]:null;if(!e||typeof kitItemDetail!=="function")return`<p class="past">Chạm một món để xem; đặt vào hay bỏ ra bằng nút dưới thông tin.</p>`;
   const s=TS_SLOT.find(([,,fit])=>fit(e.k));const on=s&&P[s[0]]===e.k;const hit=T.tags.includes(e.k);
   const b=on?pbtn(`data-tsact="off"`,"Bỏ ra",`thành: ô ${s[1]} để trống`,""):pbtn(`data-tsact="on"`,`Đặt vào ${s?s[1].toLowerCase():""}`,`thành: ${hit?`hợp đề ${T.n}`:`không hợp đề ${T.n}`}${P[s&&s[0]]?` · kèm: thay ${IT[P[s[0]]].n}`:""}`,"");
-  return kitItemDetail({e},{cls:"kidet-strip",acts:[b]})};
+  return kitItemDetail({e},{cls:"kidet-strip",acts:[b],luxItem:true})};
  const paint=()=>{const pts=tsDressPts(S,P,th).raw;kg82Set("score",`${pts}/10`);kg82Set("round",`đã đặt ${Object.keys(P).filter(k=>P[k]).length}/4`);kg82Set("time","không giới hạn");
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:IT[P[sl]].n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
    `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:IT[e.k].n,src:src(e.k),grade:grade(e.k),size:"sm",sel:selI===i})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
@@ -28696,7 +28697,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fea55f61f582";window.CTM_BUILD=BUILD;
+const BUILD="491170b5f5c2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

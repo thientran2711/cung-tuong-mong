@@ -31,3 +31,9 @@ Scan (dev/review/item-info-table.md): before BLIND 5 / NOTAP 3 → after BLIND 0
 Open notes: gift picker grid (jgift) left to review/gift-pick (it reuses §70); pets have their own panel (not items); girlhood chest not on main yet
 (will be covered automatically if it uses kitInvGrid / kitReward). BAL.itd.allow=true shows the rank allowance (coordinator design) — the
 owner's 08:10Z rule hid it; flip to false if the coordinator prefers.
+
+## Review r1 (review/item-info-r1, 16/11)
+- Merged onto origin/main f012058f3 (conflicts: assemble.py list = main's list + jitd.js after jitev; KIT.md §68 + §70 both kept; built files rebuilt).
+- Reviewer fix 1: BAL.itd.allow=false (coordinator: owner 08:10Z rule wins; no "hạn mức phẩm ta", no "quá hạn mức").
+- Reviewer fix 2: Hội phối đồ strip showed "Bên mình 20 → 41" although the board is not worn → kitItemDetail o.luxItem (Xa xỉ row = "món này N" only), jts passes it. KIT.md §70.2 notes it.
+- Tests: item-info.js 5 viewports all pass, 0 page errors; scan BLIND 5/NOTAP 3 → 0/0; Hội phối đồ tap→Đặt vào→Ra mắt places the piece (844x390, 755x1000); old main save (slot 3) loads, every chest item renders §70, 8 more turns, 0 errors; 139 details render in 29 ms; +23 KB index.html.

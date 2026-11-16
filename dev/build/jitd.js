@@ -37,11 +37,12 @@ function kidKind(R){const it=R.it||{};if(R.work){const A=typeof ARTS!=="undefine
 function kidThemes(k){const L=[];try{if(typeof TS_THEME==="object")for(const t in TS_THEME)if((TS_THEME[t].tags||[]).includes(k))L.push(TS_THEME[t].n)}catch(e){}
  try{const own=(IT[k]&&IT[k].th)||(typeof WD_ITEMS==="object"&&WD_ITEMS[k]&&WD_ITEMS[k].th)||[];for(const t of [].concat(own))if(t&&!L.includes(t))L.push(t)}catch(e){}return L}
 /* Xa xỉ: this piece · what she wears now → after wearing it · her rank's allowance (BAL.itd.allow) — wearables of the player only */
-function kidLux(R){if(R.who||R.work||R.veil)return null;const B=(typeof BAL==="object"&&BAL.itd)||{};let lux=0,cur=0;
+function kidLux(R,o){if(R.who||R.work||R.veil)return null;const B=(typeof BAL==="object"&&BAL.itd)||{};let lux=0,cur=0;
  try{if(R.wd){const w=WD_ITEMS[R.k];lux=wdLux(R.k);const c=wdOf(S)[w.sl];cur=c&&WD_ITEMS[c.k]?wdLux(c.k):0}
   else if(R.it&&R.it.sl){lux=luxVal(R.k);const c=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===R.it.sl);cur=c?luxVal(c.k):0}
   else if(R.it&&R.it.dr){lux=luxVal(R.k);return{vals:[`món này ${lux}`],over:false}}
   else return null;
+  if(o&&o.luxItem)return{vals:[`món này ${lux}`],over:false};/* a board that is not worn (Hội phối đồ): the piece only, no "Bên mình" change */
   const x=luxOf(S);const after=R.worn?x.sc:x.sc-cur+lux;const over=B.allow!==false&&after>x.bud;
   const V=[`món này ${lux}`,R.worn||after===x.sc?`Bên mình ${x.sc}`:`Bên mình ${x.sc} → ${after}`];if(B.allow!==false)V.push(`hạn mức phẩm ta ${x.bud}`);
   return{vals:V,over}}catch(e){return lux?{vals:[`món này ${lux}`],over:false}:null}}
@@ -65,7 +66,7 @@ function kitItemDetailRows(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return""
    const fg=R.it&&R.it.dr&&!o.dress&&typeof wdFabOf==="function"?wdFabOf(R.k):null;if(fg&&WD_ITEMS[fg]){const W=WD_ITEMS[fg];D=D.filter(x=>!/^may áo/.test(x));D.unshift(`may thành ${W.n}: ${plainFx(W.w)||"giản dị"}`);G=G.filter(x=>x!=="áo mặc 3 tháng");G.push(`áo may xong: xa xỉ ${wdLux(fg)}`)}
    if(!D.length&&!M.length&&R.it&&R.it.d)G.unshift(R.it.d)}}catch(err){console.error("kitItemDetailRows",err)}
  if(R.qty>1)G.push(`trong rương: ${R.qty} món`);if(o.note)G.push(...[].concat(o.note).filter(Boolean));
- const T=kidThemes(R.k),X=o.noLux?null:kidLux(R),F=kidFrom(R);
+ const T=kidThemes(R.k),X=o.noLux?null:kidLux(R,o),F=kidFrom(R);
  return kitRows((o.lead||[]).concat([["Phẩm",kidGradeVal(gr,R.work&&typeof econWkGrade!=="function"?I.gname:gr.n,gx)],["Loại",kidKind(R),"n"],["Hợp đề",T,"n"],["Được",D,"g"],["Mất",M,"r"],
   ["Xa xỉ",X?X.vals.map((v,i)=>i===1&&X.over?`<span class="ef r">${v}: quá hạn mức</span>`:v):[],"n"],["Lai lịch",F,"n"],["Ghi chú",G,"n"]]))}
 /* the block */
