@@ -383,3 +383,4 @@
 | suc-khoe fix (opus): r1 FAIL F2 F4 F5 BLOCKING + F6–F10, from review/suc-khoe-r1 41716164 | review/suc-khoe-fix | D | session_01DgYSWmv4sq7YAmDVGXa2JD | RUNNING | 16/11 20:20Z |
 | D GO-LIVE prep successor (opus; handover reports/d-golive.md) | review/<each>-golive | D | session_01DgYSWnR8rVEcaej6KJZLQG | RUNNING | 16/11 20:27Z |
 | names-unique (opus): ONE name core, unique full names for everyone, ancient Chinese court names, no VN-style surnames; history expert first; old-save migration (OD 20:20Z) | review/names-unique | main s23 | session_01UV1Szgg373UqQQZzKsCM7H | RUNNING | 16/11 20:27Z |
+| one-core LAND (opus, BIG): re-merge review/one-core 7b9d022f onto main, extend guard to code added since, wire one-core-guard + kit-conform into dev/tools/quickcheck.sh (go-live gate) (owner 20:32Z) | review/one-core-land | main s23 | (opening) | RUNNING | 16/11 20:29Z |
