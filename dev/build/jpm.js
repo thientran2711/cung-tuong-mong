@@ -31,14 +31,17 @@ function kpmName(slot){if(kpmIsPlace(slot)){const k=slot.slice(2);return k==="ho
 function kpmHeadRank(k){if(!k)return null;const hd=kpmHead(k);if(!hd)return null;return hd.queen||(hd===S&&S.rank>=7)?7:rkOf(hd)}
 /* owner 11/15: only the most luxurious PL grade (nhat) for every courtyard; same-rank palaces share a picture */
 function kpmDir(slot){if(kpmIsPlace(slot)){const P=kpmPlace(slot.slice(2));return P&&P.form?"nhat-"+P.form:null}const R=KPM_DATA.rankDir||{};const r=kpmHeadRank(kpmKeyOf(slot));const form=(r!=null&&R[r])||R.empty;return form?"nhat-"+form:null}
-/* the L2 picture for now (owner OD:L1415, 16/11): ONLY the exact painted state, NEVER a stand-in. Mourning day → tang-<buổi>; festival day → <lễ>-<buổi> (or the map's own file of the same buổi); otherwise <mùa>-<buổi>.
-   Not painted (yet) → null: the courtyard level is skipped and the Dư đồ tap goes straight to the hall (the single-hall road). Paintings added to KPM_DATA.have (dev/tools/pl2_sync.py) show up by themselves. */
-function kpmArt(slot){const dir=kpmDir(slot);if(!dir)return null;const H=KPM_HALLS[dir]||[];if(kpmParts(slot,kpmKeyOf(slot)).some(x=>!H.includes(x[0])))return null; /* a hall of this place is not painted in this picture -> no courtyard */
- const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
+/* the L2 picture for now (owner OD:L1415 + 16/11 21:12Z): the exact painted state when it exists (mourning tang-<buổi>; festival <lễ>-<buổi>; else <mùa>-<buổi>).
+   A stand-in (missing state → season × nearest buổi, or a picture that does not paint every hall of the place) is allowed ONLY with tam:true → the kit 'tạm' chip (kitTam, jgrey.js)
+   that disappears by itself once the exact picture is in KPM_DATA.have / KPM_HALLS. A hall label/hotspot is NEVER put on a building that is not painted (see kitPalaceMap). */
+function kpmArt(slot){const dir=kpmDir(slot);if(!dir)return null;const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
  let f=null;try{f=typeof festToday==="function"&&festToday()}catch(e){}
  let tang=false;try{tang=typeof wdTang==="function"&&!!wdTang()}catch(e){}
  const L=[];if(tang)L.push("tang-"+b);else if(f&&f.k){L.push(f.k+"-"+b);const ff=f.files&&f.files[b],mm=ff&&/map-fest-(.+)\.webp/.exec(ff);if(mm&&mm[1].endsWith("-"+b))L.push(mm[1])}else L.push(se+"-"+b);
- const st=L.find(x=>have.includes(x));return st?{src:`img/pl2/${dir}-${st}.webp`,dir}:null}
+ const exact=L[0];const near={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]}[b]||[b];
+ near.forEach(x=>L.push(se+"-"+x));L.push("xuan-sang");const st=L.find(x=>have.includes(x));if(!st)return null;
+ const H=KPM_HALLS[dir]||[];const halls=kpmParts(slot,kpmKeyOf(slot)).every(x=>H.includes(x[0]));
+ return{src:`img/pl2/${dir}-${st}.webp`,dir,tam:!(L.slice(0,2).includes(st)&&halls)}}
 
 /* who is where inside the palace, from the one ledger (S.where) and the map's own count (countAt) */
 function kpmHead(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)||null;if(k==="home"&&S.pal!=null)return S;const i=palSlot(k);if(i==null)return null;try{return roomResidents(i,"chinh")[0]||null}catch(e){return null}}
@@ -59,7 +62,7 @@ function kpmResLine(p){return p===S?"ngươi":`${p.queen?"Hoàng hậu":RANKS[rk
 
 /* the halls (hotspots) of a slot: [part,label]; ONE rule for the whole plan (owner 11/16): >=2 halls → courtyard picture first, exactly 1 → the tap goes straight to the place */
 function kpmParts(slot,k,nm){nm=nm||kpmName(slot);return(kpmIsPlace(slot)?[["chinh",(kpmPlace(slot.slice(2))||{}).label||nm]]:slot==="kn"?[["chinh","Chính điện"]]:KPM_PARTS.slice()).concat(k==="home"?[["cungnhan",KPM_PN.cungnhan]]:[])}
-function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).length>=2&&!!kpmArt(slot)} /* >=2 halls AND the exact courtyard painting exists; else the Dư đồ tap goes straight to the hall (OD:L1415) */
+function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).length>=2&&!!kpmArt(slot)} /* >=2 halls AND some courtyard picture exists (exact or tạm stand-in); no picture at all → the Dư đồ tap goes straight to the hall */
 
 /* ---------- the component ---------- */
 /* kitPalaceMap({slot,k}) → HTML of the palace detail map, inside the Dư đồ leather (.mapv, kitLeather §32.1b). */
@@ -70,9 +73,9 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  const here=h=>!!k&&S.place===k&&kpmHall()&&kpmHall().part===h;
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
- ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b)return"";const s=SP[h];
+ ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
   return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
- </div></div>
+ ${kitTam(!A||A.tam)}</div></div>
  <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
 
 /* ---------- state + navigation ---------- */
@@ -141,9 +144,9 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .kpm-list .btn{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 8px}
 .kpmv .kpm-list .kpm-rn{font-family:var(--display);font-weight:600}
 .kpmv .kpm-list .kpm-rs{font-size:.8em;opacity:.85;line-height:1.25}
-.kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto}
-.kpmv .mapw{aspect-ratio:1.76/1} /* r3 KIT: the picture frame keeps its 1.76:1 box while the painting loads, so hotspots never collapse to the top-left under the "‹ Dư đồ" button (iPad 1180x820 FAIL 4) */
+.kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto;aspect-ratio:1.76/1} /* r3 KIT: frame keeps its 1.76:1 box while the painting loads, so hotspots never collapse under the "‹ Dư đồ" button (iPad FAIL 4) */
 .kpmv .mapw .mapimg{width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:fill!important;display:block}
+.kpmv .ktam{top:6px;bottom:auto} /* the leather crops the lower edge of the painting, so the kit 'tạm' chip (kitTam) sits top-right here */
 .kpmv .kpm-list.one{grid-template-columns:1fr}
 /* kv3:.kv1 */:where(.kv1) .kpmv .kpm-list{grid-template-columns:1fr}
 /* phone landscape (844x390): no room for a readable courtyard + rows; the picture would be a cropped strip with hidden hotspots, so the hall rows stand alone */

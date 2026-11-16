@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9e1e99f4+","t":"2026-11-16T19:08Z","c":"r2: site rebuilt after merging pl-courtyards-r1 + single-hall","b":"0850e0f94494","h":[{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."}]};
+window.CTM_BI={"s":"5425e4c1+","t":"2026-11-16T21:25Z","c":"r2: site rebuilt after merging pl-courtyards-r1 + single-hall","b":"d8ef89e8b948","h":[{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -39631,14 +39631,17 @@ function kpmName(slot){if(kpmIsPlace(slot)){const k=slot.slice(2);return k==="ho
 function kpmHeadRank(k){if(!k)return null;const hd=kpmHead(k);if(!hd)return null;return hd.queen||(hd===S&&S.rank>=7)?7:rkOf(hd)}
 /* owner 11/15: only the most luxurious PL grade (nhat) for every courtyard; same-rank palaces share a picture */
 function kpmDir(slot){if(kpmIsPlace(slot)){const P=kpmPlace(slot.slice(2));return P&&P.form?"nhat-"+P.form:null}const R=KPM_DATA.rankDir||{};const r=kpmHeadRank(kpmKeyOf(slot));const form=(r!=null&&R[r])||R.empty;return form?"nhat-"+form:null}
-/* the L2 picture for now (owner OD:L1415, 16/11): ONLY the exact painted state, NEVER a stand-in. Mourning day → tang-<buổi>; festival day → <lễ>-<buổi> (or the map's own file of the same buổi); otherwise <mùa>-<buổi>.
-   Not painted (yet) → null: the courtyard level is skipped and the Dư đồ tap goes straight to the hall (the single-hall road). Paintings added to KPM_DATA.have (dev/tools/pl2_sync.py) show up by themselves. */
-function kpmArt(slot){const dir=kpmDir(slot);if(!dir)return null;const H=KPM_HALLS[dir]||[];if(kpmParts(slot,kpmKeyOf(slot)).some(x=>!H.includes(x[0])))return null; /* a hall of this place is not painted in this picture -> no courtyard */
- const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
+/* the L2 picture for now (owner OD:L1415 + 16/11 21:12Z): the exact painted state when it exists (mourning tang-<buổi>; festival <lễ>-<buổi>; else <mùa>-<buổi>).
+   A stand-in (missing state → season × nearest buổi, or a picture that does not paint every hall of the place) is allowed ONLY with tam:true → the kit 'tạm' chip (kitTam, jgrey.js)
+   that disappears by itself once the exact picture is in KPM_DATA.have / KPM_HALLS. A hall label/hotspot is NEVER put on a building that is not painted (see kitPalaceMap). */
+function kpmArt(slot){const dir=kpmDir(slot);if(!dir)return null;const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
  let f=null;try{f=typeof festToday==="function"&&festToday()}catch(e){}
  let tang=false;try{tang=typeof wdTang==="function"&&!!wdTang()}catch(e){}
  const L=[];if(tang)L.push("tang-"+b);else if(f&&f.k){L.push(f.k+"-"+b);const ff=f.files&&f.files[b],mm=ff&&/map-fest-(.+)\.webp/.exec(ff);if(mm&&mm[1].endsWith("-"+b))L.push(mm[1])}else L.push(se+"-"+b);
- const st=L.find(x=>have.includes(x));return st?{src:`https://ctm-img.victoria-tntt.workers.dev/img/pl2/${dir}-${st}.webp`,dir}:null}
+ const exact=L[0];const near={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]}[b]||[b];
+ near.forEach(x=>L.push(se+"-"+x));L.push("xuan-sang");const st=L.find(x=>have.includes(x));if(!st)return null;
+ const H=KPM_HALLS[dir]||[];const halls=kpmParts(slot,kpmKeyOf(slot)).every(x=>H.includes(x[0]));
+ return{src:`https://ctm-img.victoria-tntt.workers.dev/img/pl2/${dir}-${st}.webp`,dir,tam:!(L.slice(0,2).includes(st)&&halls)}}
 
 /* who is where inside the palace, from the one ledger (S.where) and the map's own count (countAt) */
 function kpmHead(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)||null;if(k==="home"&&S.pal!=null)return S;const i=palSlot(k);if(i==null)return null;try{return roomResidents(i,"chinh")[0]||null}catch(e){return null}}
@@ -39659,7 +39662,7 @@ function kpmResLine(p){return p===S?"ngươi":`${p.queen?"Hoàng hậu":RANKS[rk
 
 /* the halls (hotspots) of a slot: [part,label]; ONE rule for the whole plan (owner 11/16): >=2 halls → courtyard picture first, exactly 1 → the tap goes straight to the place */
 function kpmParts(slot,k,nm){nm=nm||kpmName(slot);return(kpmIsPlace(slot)?[["chinh",(kpmPlace(slot.slice(2))||{}).label||nm]]:slot==="kn"?[["chinh","Chính điện"]]:KPM_PARTS.slice()).concat(k==="home"?[["cungnhan",KPM_PN.cungnhan]]:[])}
-function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).length>=2&&!!kpmArt(slot)} /* >=2 halls AND the exact courtyard painting exists; else the Dư đồ tap goes straight to the hall (OD:L1415) */
+function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).length>=2&&!!kpmArt(slot)} /* >=2 halls AND some courtyard picture exists (exact or tạm stand-in); no picture at all → the Dư đồ tap goes straight to the hall */
 
 /* ---------- the component ---------- */
 /* kitPalaceMap({slot,k}) → HTML of the palace detail map, inside the Dư đồ leather (.mapv, kitLeather §32.1b). */
@@ -39670,9 +39673,9 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  const here=h=>!!k&&S.place===k&&kpmHall()&&kpmHall().part===h;
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
- ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b)return"";const s=SP[h];
+ ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
   return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
- </div></div>
+ ${kitTam(!A||A.tam)}</div></div>
  <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
 
 /* ---------- state + navigation ---------- */
@@ -39741,9 +39744,9 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .kpm-list .btn{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 8px}
 .kpmv .kpm-list .kpm-rn{font-family:var(--display);font-weight:600}
 .kpmv .kpm-list .kpm-rs{font-size:.8em;opacity:.85;line-height:1.25}
-.kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto}
-.kpmv .mapw{aspect-ratio:1.76/1} /* r3 KIT: the picture frame keeps its 1.76:1 box while the painting loads, so hotspots never collapse to the top-left under the "‹ Dư đồ" button (iPad 1180x820 FAIL 4) */
+.kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto;aspect-ratio:1.76/1} /* r3 KIT: frame keeps its 1.76:1 box while the painting loads, so hotspots never collapse under the "‹ Dư đồ" button (iPad FAIL 4) */
 .kpmv .mapw .mapimg{width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:fill!important;display:block}
+.kpmv .ktam{top:6px;bottom:auto} /* the leather crops the lower edge of the painting, so the kit 'tạm' chip (kitTam) sits top-right here */
 .kpmv .kpm-list.one{grid-template-columns:1fr}
 /* kv3:.kv1 */:where(.kv1) .kpmv .kpm-list{grid-template-columns:1fr}
 /* phone landscape (844x390): no room for a readable courtyard + rows; the picture would be a cropped strip with hidden hotspots, so the hall rows stand alone */
@@ -44607,6 +44610,34 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
+/* jgrey: two KIT parts (KIT.md §GREY, kit page) — written by the kit keeper.
+   1. GREYED OPTION (owner 16/11 ~21:10Z "Chung Tú cung"): a known option she cannot take now because of COST, RANK or ITEM is never hidden:
+      it shows in the kit option list greyed (not tappable) with a reason chip in the Cần row and when it opens again.
+      TIME is NOT a grey reason (acts spill into the next buổi; s24 scope change).
+      Use: opts.push(kitOff({n,fx,x,go}, kitWhyBac(fee)))  or  kitOff(opt, why, when) ; the numbers print live values / BAL, never typed.
+      Truly unknown or story-locked options stay hidden. j3 showModal renders c.off as disabled + data-kneed; chooseM refuses it. */
+function kitOff(c,why,when){if(!c)return c;c.off={why:String(why||""),when:String(when||"")};return c}
+function kitWhyBac(need){const have=(typeof S!=="undefined"&&S)?S.bac:0;return `thiếu ${Math.max(0,need-have)} bạc (cần ${need}, có ${have})`}
+function kitWhySuc(need){const have=(typeof S!=="undefined"&&S)?S.suc:0;return `thiếu ${Math.max(0,need-have)} sức (cần ${need}, có ${have})`}
+function kitWhyRank(r){return `cần phẩm ${RANKS[r].n} trở lên`}
+function kitWhyItem(name,n){return `thiếu ${name}${n>1?` (cần ${n})`:""}`}
+/* when it opens again, in words */
+function kitWhenBac(){return "mở lại khi đủ bạc"}
+function kitWhenRank(){return "mở lại khi được tấn phong"}
+function kitWhenItem(){return "mở lại khi có đủ đồ"}
+function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.off.when?` · ${c.off.when}`:"");return ` data-kneed="${encodeURIComponent(JSON.stringify([{t,ok:false}]))}"`}
+/* 2. STAND-IN MARKER 'tạm' (owner 16/11): ONE small chip on any stand-in picture; shown only while the picture lookup says stand-in
+      (art.tam true / kitTam(true)); gone by itself when the exact picture exists. Caller: kitTam(isStandin) -> html ('' when exact).
+      Put it inside a position:relative picture box. */
+function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
+(function(){const st=document.createElement("style");st.textContent=`
+.ktam{position:absolute;bottom:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
+`;document.head.appendChild(st)})();
+function kitOffBac(c,fee){if(typeof S!=="undefined"&&S&&S.bac<fee)kitOff(c,kitWhyBac(fee),kitWhenBac());return c}
+/* kit sample page entries */
+try{if(typeof KIT_SAMPLES!=="undefined"){
+ KIT_SAMPLES.push({id:"§84 greyed option",title:"GREYED OPTION · kitOff (a known option she cannot take: cost / rank / item) — greyed, reason chip in Cần, when it opens again",where:"every dialog option list (VIỆC, visits, place card, teaching); the same ACT CARD frame, disabled",html:()=>`<div style="max-width:560px"><button class="opt" disabled data-kneed="${encodeURIComponent(JSON.stringify([{t:"thiếu 37 bạc (cần 40, có 3) · mở lại khi đủ bạc",ok:false}]))}">Ma ma giáo tập<small>Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -40 · thành: tiến bộ +2..3</small></button></div>`});
+ KIT_SAMPLES.push({id:"§84 tạm",title:"STAND-IN MARKER 'tạm' · kitTam(isStandin)",where:"corner of any stand-in picture (courtyard first); gone when the exact picture exists",html:()=>`<div style="position:relative;max-width:360px;height:120px;background:#7a6a55;border-radius:8px">${kitTam(true)}</div>`})}}catch(e){}
 
 window.__ctmBuilt=1;
 </script>
@@ -44635,7 +44666,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0850e0f94494";window.CTM_BUILD=BUILD;
+const BUILD="d8ef89e8b948";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
