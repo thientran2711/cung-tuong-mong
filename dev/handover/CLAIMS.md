@@ -258,4 +258,4 @@
 | emotion-acts review (opus; e9bd51ee) | review/emotion-acts-r1 | B | session_01N1tNP36vT978Q89SfwTmPC | RUNNING | 16/11 16:04Z |
 | D29 review (opus) of schedules3-r4 @f388b4de | review/schedules3-r5 | C | session_011xDdVPgkrf4Nx6Fu4w3gr5 | RUNNING | 16/11 16:06Z |
 | PEOPLE LEDGER successor (opus) from review/people-ledger @afcac6cb (HANDOVER in schedules3-r4 report) | review/people-ledger | C | session_011xDdVQ9uFz3dWEEUrZZp9W | RUNNING | 16/11 16:06Z |
-| tutrang-layout (sonnet; owner-bug fast lane; OD 16/11 16:20Z): Tư trang › Túi đồ — wear slots one vertical column left, bigger bag grid right, small pet strip below; whole group (every wear-slot/bag place); samples 755x1000 + 1180x820 to owner first | review/tutrang-layout | main s20 | (spawning) | RUNNING | 16/11 16:22Z |
+| tutrang-layout (sonnet; owner-bug fast lane; OD 16/11 16:20Z): Tư trang › Túi đồ — wear slots one vertical column left, bigger bag grid right, small pet strip below; whole group (every wear-slot/bag place); samples 755x1000 + 1180x820 to owner first | review/tutrang-layout | main s20 | session_01UV1SzkXdhk3ejaZYACftuT | RUNNING | 16/11 16:22Z |
