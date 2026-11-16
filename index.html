@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2298416f+","t":"2026-11-16T22:32Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi.","b":"d5f9dde51a1f","h":[{"s":"bad941b4","t":"2026-11-16T07:17Z","c":"PROGRESS final 5"}]};
+window.CTM_BI={"s":"6b873b32+","t":"2026-11-16T22:53Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi.","b":"045c5eadbd9f","h":[{"s":"bad941b4","t":"2026-11-16T07:17Z","c":"PROGRESS final 5"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -40525,7 +40525,7 @@ function likeLearn(p,k,why){const K=likeKnown(p);if(!k)k=likeUnk(p)[0];if(!k||K.
  try{if(typeof noteAdd==="function"&&p&&p.id!=null)noteAdd(p.id,`${why||"Dò được"}: nàng thích ${e.n}`)}catch(x){}return e}
 function likeRow(p){if(!p||typeof p!=="object"||isEmp(p)||isTh(p)||p===S)return null;const L=likeKeys(p);if(!L.length)return null;const K=likeKnown(p).filter(k=>L.includes(k));
  return ["Nàng thích",K.length?K.map(k=>entry(k).n).join(" · ")+(L.length>K.length?` (còn ${L.length-K.length} điều chưa rõ)`:""):"chưa rõ",K.length?"t":"n"]}
-window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;
+window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;window.disLikeKnown=likeKnown;
 (function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&v!==S&&S.chat[v.id]>=1&&likeUnk(v).length&&roll(BAL.dis.talk))likeLearn(v,null,"Chuyện trò")}catch(e){}return r}})();
 (function(){if(typeof j78facts!=="function")return;const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);try{const k=likeUnk(v)[0];if(k)F.push({k:"lk:"+k,kind:"lk",pri:BAL.dis.spyPri,txt:`${j78Who(v)} thích ${entry(k).n}.`,go:()=>{const K=likeKnown(v);if(!K.includes(k))K.push(k);return""}})}catch(e){}return F}})();
 /* the gift dialog tells her only what she already knows */
@@ -40599,8 +40599,12 @@ function strName(k){if(!k)return"";const [a,b]=k.split(":");return a==="art"?art
 const KDS=["Trang sức","Hương liệu","Vải vóc","Lễ vật"];
 function pool(){const P=[];(typeof ARTS!=="undefined"?ARTS:[]).forEach(a=>P.push("art:"+a.k));KDS.forEach(k=>P.push("kd:"+k));return P}
 function keyName(k){try{if(typeof disEntry==="function")return disEntry(k).n}catch(e){}return String(k||"").split(":").slice(1).join(":")}
-const jdisOwn=p=>isEmp(p)||isRiv(p);/* jdis already draws these */
-function mindDis(p0){const p=obj(p0);if(!p||!S)return[];if(jdisOwn(p0)&&typeof disOf==="function")return disOf(isEmp(p0)?"emp":p0);
+/* ONE likes / dislikes system (r1 fault 4): jdis owns the Emperor, the consorts and Thái hậu (owner Q25) — their dislikes, the consorts' likes,
+   what she knows of them (S.disK / S.likK), the learning and the gift penalty. jmind only adds what jdis has not: everyone else, Thái hậu's like,
+   and the liked-gift bonus. */
+const jdisOwn=p=>isEmp(p)||isRiv(p)||isTh(p);
+const jdisLikes=p=>isRiv(p)&&typeof disLikeKeys==="function"&&typeof disLikeKnown==="function";
+function mindDis(p0){const p=obj(p0);if(!p||!S)return[];if(jdisOwn(p0)&&typeof disOf==="function")return disOf(isEmp(p0)?"emp":isTh(p0)?"th":p0);
  if(Array.isArray(p.dis))return p.dis;const B=BAL.mind,id=mKey(p0),lk=[mindLikeRaw(p0)];
  const P=pool().filter(k=>!lk.includes(k)).map(k=>({k,h:H(life()+"|mdis|"+id+"|"+k)})).sort((a,b)=>a.h-b.h||(a.k<b.k?-1:1));
  const n=B.disN[0]+H(life()+"|mdisn|"+id)%(B.disN[1]-B.disN[0]+1);p.dis=P.slice(0,n).map(x=>x.k);return p.dis}
@@ -40609,15 +40613,15 @@ function mindLikeRaw(p0){const p=obj(p0);if(!p)return null;if(p.mlike)return p.m
  if(!k){const D=Array.isArray(p.dis)?p.dis:[];const ba=bestArtOf(p);const P=pool().filter(x=>!D.includes(x));
   const st=mindStr(p0);k=ba&&!D.includes(ba)?ba:(st&&st.startsWith("art:")&&!D.includes(st)&&H(life()+"|lks|"+mKey(p0))%2?st:P[H(life()+"|mlike|"+mKey(p0))%P.length])}
  p.mlike=k;return k}
-function mindLike(p0){if(isEmp(p0)){const E=S.emp;return Object.keys(LIKES).map(f=>E.likes&&E.likes[f]?f+":"+E.likes[f]:null).filter(Boolean)}const k=mindLikeRaw(p0);return k?[k]:[]}
+function mindLike(p0){if(isEmp(p0)){const E=S.emp;return Object.keys(LIKES).map(f=>E.likes&&E.likes[f]?f+":"+E.likes[f]:null).filter(Boolean)}if(jdisLikes(p0)||(isTh(p0)&&typeof disLikeKeys==="function")){const L=disLikeKeys(isTh(p0)?"th":p0);if(L.length)return L}/* jdis's likes when it has them (one list) */const k=mindLikeRaw(p0);return k?[k]:[]}
 /* ---------- knowing ---------- */
 function own(p){return !!S&&p&&typeof p==="object"&&((S.staff||[]).includes(p)||p===S.maid||(S.kids||[]).includes(p))}
 function mK(p){S.mindK=S.mindK||{};const k=mKey(p);return S.mindK[k]||(S.mindK[k]={l:0,d:[]})}
-function likeKnown(p){if(p===S||own(p))return true;if(isEmp(p)){const K=S.emp.known||{};return Object.keys(LIKES).some(f=>K[f])}return !!mK(p).l}
-function disKnownL(p){if(p===S||own(p))return mindDis(p);if(jdisOwn(p)&&typeof disKnown==="function")return disKnown(isEmp(p)?"emp":p);return mK(p).d}
-function learnLike(p,why){if(likeKnown(p)||isEmp(p))return false;mK(p).l=1;const nm=pName(p);const t=`${why||"Dò được"}: ${nm} thích ${keyName(mindLikeRaw(p))}`;
+function likeKnown(p){if(p===S||own(p))return true;if(isEmp(p)){const K=S.emp.known||{};return Object.keys(LIKES).some(f=>K[f])}if(jdisLikes(p)&&disLikeKeys(p).length)return disLikeKnown(p).length>0;return !!mK(p).l}
+function disKnownL(p){if(p===S||own(p))return mindDis(p);if(jdisOwn(p)&&typeof disKnown==="function")return disKnown(isEmp(p)?"emp":isTh(p)?"th":p);return mK(p).d}
+function learnLike(p,why){if(likeKnown(p)||isEmp(p))return false;if(jdisLikes(p)&&disLikeKeys(p).length)return !!disLikeLearn(p,null,why);mK(p).l=1;const nm=pName(p);const t=`${why||"Dò được"}: ${nm} thích ${keyName(mindLikeRaw(p))}`;
  try{if(p&&p.id!=null&&isRiv(p)&&typeof noteAdd==="function")noteAdd(p.id,t);else log(`<span class="past">${t}.</span>`)}catch(e){}return true}
-function learnDis(p,k,why){if(jdisOwn(p)&&typeof disLearn==="function")return disLearn(isEmp(p)?"emp":p,k,why);const D=mindDis(p),K=mK(p).d;k=k||D.find(x=>!K.includes(x));
+function learnDis(p,k,why){if(jdisOwn(p)&&typeof disLearn==="function")return disLearn(isEmp(p)?"emp":isTh(p)?"th":p,k,why);const D=mindDis(p),K=mK(p).d;k=k||D.find(x=>!K.includes(x));
  if(!k||K.includes(k)||!D.includes(k))return null;K.push(k);try{log(`<span class="past">${why||"Dò được"}: ${pName(p)} không ưa ${keyName(k)}.</span>`)}catch(e){}return k}
 function pName(p){if(p===S)return"ngươi";if(isEmp(p))return"Hoàng thượng";if(isTh(p))return"Thái hậu";const o=obj(p);return o&&o.queen?"Hoàng hậu":String(o&&o.name||"")}
 /* ---------- the record ---------- */
@@ -40629,7 +40633,7 @@ function mindInit(){try{if(!S)return;const L=[S,"th"].concat(typeof rivals!=="un
 /* rows for jpcf "Sở trọng" and the card lines (stranger rule) */
 function mindRows(p){const rows=[];if(!p||!S)return rows;const known=typeof kitIsKnown!=="function"||kitIsKnown(isTh(p)?S.thO:p);
  const st=mindStr(p);rows.push(["Sở trường",known&&st?strName(st):"chưa rõ",known&&st?"t":"n"]);
- if(!isEmp(p)){const lk=likeKnown(p);rows.push(["Thích",lk?mindLike(p).map(keyName).join(" · "):"chưa rõ",lk?"t":"n"])}
+ if(!isEmp(p)&&!(jdisLikes(p)&&disLikeKeys(p).length)){const lk=likeKnown(p);rows.push(["Thích",lk?mindLike(p).map(keyName).join(" · "):"chưa rõ",lk?"t":"n"])}
  if(!jdisOwn(p)){const K=disKnownL(p),N=mindDis(p).length,un=N-K.length;rows.push(["Ghét",K.length?K.map(keyName).join(" · ")+(un?` (còn ${un} điều chưa rõ)`:""):"chưa rõ",K.length?"t":"n"])}
  return rows}
 Object.assign(window,{mindOf,mindStr,mindLike,mindDis,mindRows,mindInit,mindKey:mKey,mindStrName:strName,mindKeyName:keyName,mindLearnLike:learnLike,mindLearnDis:learnDis});
@@ -40651,26 +40655,29 @@ window.mindWho=mindWho;function mindWho(o){if(o.name===S.name||o.me)return S;if(
   return p0.call(this,Object.assign({},o,{__mind:1,lines:L}))}catch(e){console.error("jmind card",e);return p0.apply(this,arguments)}}})();
 /* ---------- rules ---------- */
 /* regard change: Thái hậu S.th, a servant's loyalty (Lòng), others thiện cảm (affAdd) */
-function bump(who,n){if(who==="th")ap(S,{th:n});else if(who&&who.sid!=null&&who.loyal!=null)who.loyal=Math.max(0,Math.min(100,who.loyal+n));else if(typeof affAdd==="function"&&typeof who==="object")affAdd(who,S,n)}
+const loyW=who=>!!who&&typeof who==="object"&&who.loyal!=null&&!isRiv(who);/* servants and her own maid: Lòng */
+function bump(who,n){if(who==="th")ap(S,{th:n});else if(loyW(who))who.loyal=Math.max(0,Math.min(100,who.loyal+n));else if(typeof affAdd==="function"&&typeof who==="object")affAdd(who,S,n)}
 function giftKeys(e){const K=[];if(!e)return K;if(e.wk){K.push("art:"+e.wk.a)}else if(IT[e.k]&&IT[e.k].kd)K.push("kd:"+IT[e.k].kd);return K}
+/* the word of the regard that moves (Thái hậu's is "Thái hậu", a servant's "Lòng", others "thiện cảm") */
+function regW(who){return who==="th"?"Thái hậu":loyW(who)?"Lòng":"thiện cảm"}
 /* a liked gift: a little more regard (everyone but the Emperor, whose likes already work through j2/j83) */
-(function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];let lk=false,dk=null;const who=r==="th"?"th":r==="maid"?S.maid:r;
- try{if(e&&!e.h&&who&&who!=="emp"&&r!==S&&a===S){const G=giftKeys(e);lk=G.some(k=>mindLike(who).includes(k));
+(function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];let lk=false,dk=null,G0=[];const who=r==="th"?"th":r==="maid"?S.maid:r;
+ try{if(e&&!e.h&&who&&who!=="emp"&&r!==S&&a===S){const G=G0=giftKeys(e);lk=G.some(k=>mindLike(who).includes(k))&&!(jdisOwn(who)&&typeof disHit==="function"&&disHit(who,e));
    if(!jdisOwn(who))dk=G.find(k=>mindDis(who).includes(k)&&!mindLike(who).includes(k))||null}}catch(x){}
  /* gifts TO HER from an NPC: her own likes / dislikes move her mood */
  let her=null;try{if(r===S&&e&&!e.h&&a!==S){const G=giftKeys(e);her=G.some(k=>mindLike(S).includes(k))?"vui":G.some(k=>mindDis(S).includes(k))?"buon":null}}catch(x){}
  const out=g0.apply(this,arguments);if(!out)return out;let add="";
  try{const B=BAL.mind;if(lk){learnLike(who,"Tặng đúng ý");bump(who,B.like);
-   add+=`<span class="g">${pName(who)} vốn thích ${keyName(mindLikeRaw(who))}: thêm ${B.like} thiện cảm.</span> `}
-  if(dk){learnDis(who,dk,"Dâng quà sai ý");bump(who,-B.like);
-   add+=`<span class="r">Nhưng ${pName(who)} không ưa ${keyName(dk)}: thiện cảm -${B.like}.</span> `}
+   add+=`<span class="g">${pName(who)} vốn thích ${keyName(G0.find(k=>mindLike(who).includes(k))||mindLikeRaw(who))}: ${regW(who)} +${B.like}.</span> `}
+  if(dk){const n=BAL.dis.aff;learnDis(who,dk,"Dâng quà sai ý");bump(who,-n);/* the same penalty number as jdis (BAL.dis.aff), one per effect */
+   add+=`<span class="r">Nhưng ${pName(who)} không ưa ${keyName(dk)}: ${regW(who)} -${n}.</span> `}
   if(her&&typeof emoSet==="function")emoSet(S,her,B.herMood,her==="vui"?`Được tặng đúng món mình thích`:`Được tặng món mình không ưa`)}catch(x){}
  return out+add}})();
 /* talking: a chance to learn a like (consorts; jdis already learns dislikes the same way) */
-(function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&!likeKnown(v)&&roll(BAL.mind.learnTalk))learnLike(v,"Chuyện trò")}catch(e){}return r}})();
+(function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&!(jdisLikes(v)&&disLikeKeys(v).length)&&!likeKnown(v)&&roll(BAL.mind.learnTalk))learnLike(v,"Chuyện trò")}catch(e){}return r}})();
 /* spying: a "like" fact joins the intel pool */
 (function(){if(typeof j78facts!=="function")return;const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);
- try{if(v&&!likeKnown(v)){const k=mindLikeRaw(v);if(k)F.push({k:"like:"+k,kind:"like",pri:BAL.mind.spyPri,txt:`${typeof j78Who==="function"?j78Who(v):pName(v)} thích ${keyName(k)}.`,go:()=>learnLike(v,"Tai mắt báo")})}}catch(e){}return F}})();
+ try{if(v&&!(jdisLikes(v)&&disLikeKeys(v).length)&&!likeKnown(v)){const k=mindLikeRaw(v);if(k)F.push({k:"like:"+k,kind:"like",pri:BAL.mind.spyPri,txt:`${typeof j78Who==="function"?j78Who(v):pName(v)} thích ${keyName(k)}.`,go:()=>learnLike(v,"Tai mắt báo")})}}catch(e){}return F}})();
 /* ---------- NPC choices: weights by THAT person's abilities, strength, trọng; a weighted pick with human slips ---------- */
 /* act tag -> what it draws on: ability fields, strength keys, virtues it honours (+) or offends (-) */
 const TAG={scheme:{ab:["tamco"],str:["sk:muu"],tr:{"Nhân":-1,"Tín":-1}},spy:{ab:["tamco"],str:["sk:do"],tr:{"Tín":-1}},social:{ab:["danh"],str:["sk:giao"],tr:{"Lễ":1}},
@@ -45403,7 +45410,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d5f9dde51a1f";window.CTM_BUILD=BUILD;
+const BUILD="045c5eadbd9f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
