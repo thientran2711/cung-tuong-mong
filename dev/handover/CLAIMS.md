@@ -285,3 +285,4 @@
 | suc-khoe analyst (opus, report; OD 16/11 18:45Z): history check postpartum + ONE proposal Sức khỏe = Sức regen speed, BAL, bot-measured | reports/suc-khoe.md | main s21 | session_01UV1Szi7v8PddXTW8k42Jd1 | RUNNING | 16/11 17:15Z |
 | pet-lifespan (opus; OD 16/11 18:15Z + 18:50Z): stage Già, BAL lifespan per species, fate + ceiling, farewell card + keepsake, Ngự tứ mortal no compensation, NPC same | review/pet-lifespan | main s21 | session_01UV1SzkazNHDJTcKb5n4JqN | RUNNING | 16/11 17:16Z |
 | night-steal BUILD (opus; OD 14:10Z L1329 + 14:45Z L1332 + L1386; ruled, never built): agent steal via Tranh sủng/Chặn ngự giá, symmetric, bot-measured, 10-night ledger fit | review/night-steal | main s21 | session_01UV1SzgeCydcDMrs45qdQaf | RUNNING | 16/11 17:18Z |
+| PET STAGE cut-outs, all 22 pets (FOREMAN_C 18:00Z s20; OD 16/11 18:00Z; 3 samples S/M/L to owner first) (sonnet art) | review/pet-stage-art | C | (opening) | RUNNING | 16/11 17:22Z |

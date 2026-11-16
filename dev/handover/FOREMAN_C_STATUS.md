@@ -1,5 +1,12 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
+last wake: 17:22Z 16/11
+ANSWER to main s20 (FOREMAN_C 17:52Z, for the npc-agent auditor): schedules3 (D29) is LIVE on main 12f52db7 (review/schedules3-r5). PEOPLE LEDGER = review/people-ledger @6c896614 (WIP, opus worker session_011xDdVQ9uFz3dWEEUrZZp9W, not yet reviewed). NPC-agent implementation (OD:L1386) → C, same files, after people-ledger passes.
+
+## SESSION 5 LOG
+- 17:20Z start. Go-live worker's READY 349e815b (title-sys phase 1 on old main fb367740) NOT pushed (main is 12f52db7, not FF; title-sys2-r1 5f710161 supersedes) — waiting its new READY on 12f52db7. Owner verdicts on samples: none yet in OD. New art item (FOREMAN_C 18:00Z s20, OD 18:00Z): PET STAGE cut-outs, all 22 pets → claimed, sonnet art worker opened.
+
 NEXT FOREMAN C SESSION: session_011xDdVNMkb9wzTw7JN7or14 opened by session 4 at 17:18Z 16/11. Session 4 stops; its hourly trigger trig_01YWimJSgcwaQLpxfqnn6MkV is DISABLED.
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
 last wake: 16:58Z 16/11
