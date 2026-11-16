@@ -112,6 +112,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
   (f) courtyards: "cái mái ngói nó thành màu xanh lá cây ... tao tưởng là những người như Thường Tại hay Quý Nhân vào cung là sẽ phải ở chung với những người mà chủ vị khác chứ. Đâu có cái nơi riêng. ... cung ngày xưa làm gì có máng ngói màu xanh lá cây. Ở phía bên phượng lệnh đã vẽ đầy đủ lắm rồi." → courtyard painting STOPPED (QUESTION to main).
   (g) 22:13Z npc-agent AG1 SẴN SÀNG KIỂM 33170548 → opus reviewer session_011xDdVSu5Mec6qvjHhWrgco.
 - 22:15Z FP worker rolled over (handover end of reports/foreign-princess-art.md) → ARCHIVED; #2 sonnet session_011xDdVQWu47wSXPRRTLi2PQ (QP sash + in-room test + big crop).
+- 22:19Z urgent 5 @a18 (2ebad5c0): c30/c26/m22/m47 looked at OK → SENT to owner (large native crops); c28 FAIL (huadian still a teardrop) → lead redoes with tiny flower + motif rule in every prompt/QA. Dressing-room per-rank sample (4 of 13; approved room = Phi) → SENT to owner; told worker lowest maid room must not look poor.
 - 22:07Z npc-jealousy r2 PASS 7389d8ec → handed to main (ANSWER line). Reviewer + worker ARCHIVED.
 - 22:03Z courtyard samples (Tần cac 3 halls + home Ngọc Thanh các w/ cung nhân row; beside nhat-phi-cung) looked at → SENT to owner.
 - 21:51Z npc-jealousy r2 SẴN SÀNG KIỂM 7ba04507 → same reviewer. FP NC v20 (v16b silver costumes + game-style QP + v19 proportion, true scale beside c01/c05) looked at → SENT to owner.
