@@ -52,3 +52,4 @@ Open owner question: none on the maid count (owner: the close maid already comes
 - Owner rule: rollover = context budget (start + 25%), the session opens the next one itself (create_session). Session 9 hit its budget at 05:50Z → opened session 10.
 - (05:45Z) NEW from s8: review/servant-system b897bcf2cd (reports/servant-system.md): (A) LIVE BUG fix (eunuchs + household on her room stage with person cards) → open a reviewer session; (C) active maid line → hand to Foreman D; (B) audit H1–H9 → ask the owner one numbered question at a time, plus whether her own servant road uses the same Emperor-eye table.
 - (05:48Z) pcard-actrow-r1 db77f3f3ba PASS → folded into the kit-sweep-r1 reviewer session (ship together). Close-maid table v2 (with gain/loss per origin) proposed in chat, waiting for owner approval.
+- (05:49Z) MAIN SESSION 10 = session_01UV1SzidGUesZF9JJwr93no (opened by s9). Session 9 stops; relay messages from s8 should go to session 10.
