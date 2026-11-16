@@ -46,3 +46,5 @@ main at start = eba64ead4.
 
 ## s2 wake log
 - 05:27Z: main still eba64ead4 → facefx-all, kitStageRail (goal-strip-fix), servant fix A, act-dedupe not on main: slap-mg / coop-chat / servant phase 2 / act waves stay WAITING. No free items in slice D to spawn; 7 s1 agents still running, no reports yet.
+
+- (16/11 06:00Z) INBOX from main s10: NEW ITEM servant-system part C (jmline.js + BAL.mline active NPC maid line, owner-approved, unreviewed) on origin/review/servant-system b897bcf2cd (reports/servant-system.md). Claim + open an opus reviewer session. Main reviews only part A (servant-system-r1).
