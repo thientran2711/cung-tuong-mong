@@ -6,7 +6,7 @@ if(OUT)fs.mkdirSync(OUT,{recursive:true});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));const bad=[];p.on('response',r=>{if(r.status()>=400&&/img\//.test(r.url()))bad.push(r.status()+' '+r.url().slice(-60))});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
- await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known);await p.waitForTimeout(5000);
+ await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known);await p.evaluate(()=>{window.KP=(q,s)=>{const f=kitFace(q);return s==='lg'?pframe(f):mdH(f,s||'')}});/* jbook.js redefines kitPortrait() as an orientation check, so build the portrait from kitFace/pframe/mdH */await p.waitForTimeout(5000);
  await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render()});
  const tag=SZ.replace(/[@x]/g,'_');const R={size:SZ,steps:[]};
  const shot=async n=>{if(OUT)await p.screenshot({path:`${OUT}/ap-${n}-${tag}.jpg`,type:'jpeg',quality:70})};
@@ -66,7 +66,7 @@ if(OUT)fs.mkdirSync(OUT,{recursive:true});
   const all=F.everyone();ill=all.filter(q=>q.ill&&!['consort','player','emp'].includes(F.kind(q))).length;harm=all.filter(q=>q.pz||q.slap||q.rash).length;o.monthly={ill,harm,n:all.length};
   chk('cause.servant.ill-or-harm',ill+harm>0);
   /* a picture of someone with no fit rows plugs in when rows exist (emperor / eunuch / child): same layer, no per-kind code */
-  const fit={};for(const k of ['emp','staff','kid']){const q=who[k];if(!q)continue;const f=kitFile(k==='kid'?(kidFigSrc(q,'por')||''):((/src="([^"]*)"/.exec(kitPortrait(q,{size:'sm'}))||[])[1])||'');if(!f){fit[k]=['none',null];continue}const base=Object.keys(KIT_VEIL.fit).find(x=>x.startsWith('por-consort'));if(f&&!KIT_VEIL.fit[f]){KIT_VEIL.fit[f]=KIT_VEIL.fit[base];KIT_SCAR.fit[f]=KIT_SCAR.fit[base]}
+  const fit={};for(const k of ['emp','staff','kid']){const q=who[k];if(!q)continue;const f=kitFile(k==='kid'?(kidFigSrc(q,'por')||''):((/src="([^"]*)"/.exec(KP(q,'sm'))||[])[1])||'');if(!f){fit[k]=['none',null];continue}const base=Object.keys(KIT_VEIL.fit).find(x=>x.startsWith('por-consort'));if(f&&!KIT_VEIL.fit[f]){KIT_VEIL.fit[f]=KIT_VEIL.fit[base];KIT_SCAR.fit[f]=KIT_SCAR.fit[base]}
    reset(q);pzGive(q,2,'thử',null);const h=kitFxLayers(q,f);fit[k]=[f,/kff-doc/.test(h)];chk('layer.fitrows.'+k,/kff-doc/.test(h));reset(q)}
   window.kitKnown=kk0;o.fit=fit;return o});
  R.errs=errs;R.bad=bad;console.log(JSON.stringify(R));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

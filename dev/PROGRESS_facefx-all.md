@@ -18,3 +18,8 @@ fit rows (img/veil-fit.json + img/scar-fit.json, same schema) for por-/fig- of: 
 - Merged origin/main 4f5e5f3b3 (appearance-port) into facefx-all; only index.html/sw.js conflicted (generated): rebuilt.
 - Fit rows added to CDN img/veil-fit.json + scar-fit.json (1574 -> 7666): eunuch por/fig 961, emperor 16, kid 432, physician 28, man 248, official 56, toilette variants maid/consort -tN- 2,848 (+0 for fig-maid-m15-t8-a18: no face found). Method + scripts: dev/art/facefit/README.md. 12 fig-kid-*-a4 rows by relaxed Haar (toddlers), checked by eye.
 - Owner add-on 16/11: api.scar(p,sev,by,how) (jface.js 4b): same person lookup + seen rule, deny scheme scar on emp/thaihau (accident/illness allowed), scar layer by the seen rule on every face place, weekly heal70 for everyone. Slap tiers: api.slap(p,by,why,sev) / p.slap.sev 1..3, opacity .5/.7/.88 on fx-slap.png (data-sev), old slaps default to sev 1; sev 3 swelling layer = later.
+
+## r2 review (review/facefx-all-r2)
+- Merged origin/main eba64ead4; generated index.html/sw.js/assets.json rebuilt.
+- Tests fixed (not game code): jbook.js on main redefines kitPortrait() as an orientation check, so dev/test/facefx-scan.js and appearance-port.js got `false` for every portrait; both now build portraits from kitFace/pframe/mdH (window.KP). facefx-scan sets REAL knowledge (S.known via kOf61) instead of overriding window.kitKnown, which only changed the person check, not the portrait picker (this was the "known but silhouette" caveat).
+- appearance-port 'layer.fitrows.kid' flaked when the picked toddler died during the test's 6 simulated weeks (fxLive false): expected, not a code bug.
