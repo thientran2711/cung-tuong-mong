@@ -107,7 +107,7 @@
 | no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | session_01N1tNP3ykt4KbnfNeocJZ3W (sonnet) | RUNNING | 16/11 07:58Z |
 | no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | session_01N1tNP2boFYsfpf9ZAuvbwW (sonnet) | RUNNING | 16/11 07:58Z |
 | D9 header-own reviewer | review/header-own-r1 | B | session_01N1tNP4c1TN9m7n8JPAjyqC (sonnet) | PASS 0d48819b (READY) | 16/11 08:12Z |
-| D25 veil-zoom reviewer (moved C→B 07:30Z; C session gone) | review/veil-zoom-r1 | B | session_01N1tNP2X1WermTjz7d2nn5d (sonnet) | RUNNING | 16/11 07:58Z |
+| D25 veil-zoom reviewer (moved C→B 07:30Z; C session gone) | review/veil-zoom-r1 | B | session_01N1tNP2X1WermTjz7d2nn5d (sonnet) | PASS 622dffcb (READY) | 16/11 07:58Z |
 | D36 rank-port resume (kit-keeper-1 done) | review/rank-port | B | session_01N1tNP3A9vkZJnwyZJw3fL1 (sonnet) | RUNNING | 16/11 07:58Z |
 | D11 presentation (code wiring only; art paused; D51 at main) | review/presentation | B | session_01N1tNP3mhLhWrJukZWoGvAQ (sonnet) | RUNNING | 16/11 07:58Z |
 | D13 spread events across buổi (on top of D29 schedules3 @9b1d82fa) | review/spread-events | B | session_01N1tNP4LQMHt6zowrVAmxXG (opus) | RUNNING | 16/11 07:58Z |
@@ -152,10 +152,10 @@
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | RUNNING | 16/11 11:06Z |
 | D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | RUNNING | 16/11 11:16Z |
 | design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
-| D12 mood-bar reviewer | review/mood-bar-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
-| nw-lantern reviewer | review/nw-lantern-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
-| nw-quiz reviewer | review/nw-quiz-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
-| D36 rank-port reviewer | review/rank-port-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
-| D11 presentation reviewer | review/presentation-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
-| D13 spread-events reviewer | review/spread-events-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
+| D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | RUNNING | 16/11 11:38Z |
+| nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | RUNNING | 16/11 11:38Z |
+| nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | RUNNING | 16/11 11:38Z |
+| D36 rank-port reviewer | review/rank-port-r1 | B | session_01N1tNP3gJ9boCKEYKaNSuEG (sonnet) | RUNNING | 16/11 11:38Z |
+| D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | RUNNING | 16/11 11:38Z |
+| D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | RUNNING | 16/11 11:38Z |
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
