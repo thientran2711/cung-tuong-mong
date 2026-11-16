@@ -225,7 +225,7 @@ function owide(){try{return typeof kitOriginWide==="function"?kitOriginWide(S.or
 const rows=L=>kitRows(L.map(x=>[x[0],say(x[1]),x[2]||""]));
 const INTRO=[
  {t:"Game này là gì",h:()=>pic(owide(),"")+say(`<p>{M} là ${MMT()}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
-  rows([["Đây là","một kiếp người trong hậu cung: {x} là một cô gái vừa vào cung, mỗi ngày tự chọn việc mà làm để sống sót và đi lên"],
+  rows([["Đây là","một kiếp người trong hậu cung: {x} là một cô gái vừa vào cung, mỗi buổi tự chọn việc mà làm để sống sót và đi lên"],
    ["Mỗi kiếp","một thân phận khác (con nhà quyền thế, nhà buôn, cung nữ…), một Hoàng thượng khác, một hậu cung khác"],
    ["Lựa chọn","không có đường định sẵn; việc nào cũng ghi rõ cái được và cái giá"]])},
  {t:"Mục tiêu",h:()=>pic(ia("Sắc phong"),"")+rows([["Sống sót","trong cung có người thương, có kẻ ghen, kẻ hại; giữ được mạng mình là trước hết"],
@@ -234,12 +234,12 @@ const INTRO=[
    ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
    ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; dải mục tiêu trên màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
- {t:"Một ngày chơi thế nào",h:()=>pic(ia("Hành sự"),"")+rows([["Buổi · khắc","mỗi ngày bốn buổi: sáng, trưa, chiều, tối; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
+ {t:"Chơi thế nào",h:()=>pic(ia("Hành sự"),"")+rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
    [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
    srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
    srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
    srv()?null:["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
-   ["Sự việc","tin trong cung, sự kiện, lời mời tự tìm đến; {x} chọn cách đáp"],["Sang buổi","hết khắc thì qua buổi; qua buổi tối là sang ngày mới"]].filter(Boolean))},
+   ["Sự việc","tin trong cung, sự kiện, lời mời tự tìm đến; {x} chọn cách đáp"],["Sang buổi","hết khắc thì qua buổi; qua buổi tối là sang ngày mới, cũng là sang tuần mới"]].filter(Boolean))},
  {t:"Được · mất",h:()=>pic(ia("Luân hồi")||ia("Mệnh truyện"),"")+rows([["Mất","bệnh nặng, sinh nở gặp nạn, bị người hại thì hết kiếp","r"],
    ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
    ["Được",srv()?"được phong vị, có người nâng đỡ, đi tới đâu tùy {x}":"ngôi Hoàng hậu; con lên ngôi thì làm Hoàng thái hậu, buông rèm nhiếp chính, hay tự lên ngôi","g"],
