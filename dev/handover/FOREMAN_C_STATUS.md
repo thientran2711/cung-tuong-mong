@@ -1,8 +1,26 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+NEXT FOREMAN C SESSION: see handover block below (session 5).
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
 last wake: 16:58Z 16/11
 Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 · Magnific Pro 1,327,514 credits · disk 24 GB free, .git 4.3 GB (no repack).
+
+## HANDOVER (Foreman C session 4 → session 5, 17:20Z 16/11)
+Why: session 4 context ~30% (START_CTX ~6% → limit 31%). Session 5: read this block, SESSION 4 LOG, ## PASS, GO-LIVE PUSHES, ## QUESTIONS, CLAIMS rows with C, FOREMAN_C.md lines from '(16:05Z s19)' on, OWNER_DECISIONS from 16/11 16:00Z on. Push helper /home/user/wt/push.sh (fetch under flock, rebase, union-resolve conflict markers, push) — recreate it in your container. Session 4 hourly trigger trig_01YWimJSgcwaQLpxfqnn6MkV is DISABLED — create your own.
+GO-LIVE (OD:L1370, START_FOREMAN): C fast-forwards its own PASS branches itself: flock /home/user/wt/fetch.lock; fetch main; verify origin/main is ancestor of READY sha and branch head == sha; git push origin <sha>:refs/heads/main; log the push under GO-LIVE PUSHES. Until main s20's go-live-kit quick-check exists, a quick check (build, 0 page errors 755x1000+1180x820, game-feel old-save) must run on the exact sha before the push (the go-live worker does it).
+RUNNING C sessions (11):
+- go-live prep sonnet session_011xDdVSCv8mDYUgLi7Fk1U6: re-merging title-sys2-r1 PASS 5f710161 (contains title-sys-r1 phase 1) onto main 12f52db7 → review/title-sys-live 'READY <sha>' → FF it; then b-answers-art-r1 82756a80 the same → FF. Archive it when both are live.
+- story14-p1-r3 opus reviewer session_011xDdVSfRLPar78kg13jMBC → on PASS: write PASS, go live (BIG tier), archive.
+- people-ledger opus successor session_011xDdVQ9uFz3dWEEUrZZp9W (review/people-ledger) → on SẴN SÀNG KIỂM open an opus reviewer. Its RULE CONFLICT question is in QUESTIONS (to main).
+- origin-intros sonnet successor session_011xDdVSzL8F7w8e9XVKKjR4 (@ef815769 base; ships AFTER kc-roads-cn-nc-fix-r1) → reviewer opus when ready.
+- ART workers, all SAMPLE SENT to the owner and WAITING her verdict (relay her verdict to each by send_message; then they mass-produce, then sonnet reviewer, then go live):
+  fig-proportion session_011xDdVRcEKcovA92Ep6FWb4 (sheets fig-proportion/sample-sheet.jpg + thaihau-sample.jpg; ~100 figures ≈4,000 cr; Thái hậu ALL pictures first),
+  night-backs session_011xDdVQNx5VgxetorvVUQPh (14 FAIL pictures list),
+  buoi-art session_011xDdVP32VLjcS6HX97wHgD (sample v2 with square icons; 10 more bands),
+  icon-art session_011xDdVRMa18LU3fiFyq7ksS (sample v2 incl. download/update glyphs for main s20 status icon; placeholder sets),
+  intro-art session_011xDdVP2RGQi9JdcYahCJxx (tt set + G1; 45 panels + G2–G7 left).
+- Samples from session 3 still waiting the owner: title plates, item art audit (add item-sacphong + item-ngocan from title-sys2), cắm hoa.
+Follow-up (not started): title Q3 — seal (Ngọc ấn) from Phi up only (history; reviewer recommended) → small fix after title-sys goes live.
 
 ## SESSION 4 LOG
 - 15:45Z start. Correction applied: story14-p1-r2 STAYS with C (FOREMAN_C.md 15:45Z s19 withdrew the hand-over) → worker session_011xDdVPicFAyWqznz92TPU8 told to finish + report SẴN SÀNG KIỂM. schedules3-r4 worker idle at 32% ctx (waiting on its rand18 shard audit; no report yet). Opened 15:47Z (claimed): (a) fig-proportion sonnet session_011xDdVRcEKcovA92Ep6FWb4 · (b) night-backs sonnet session_011xDdVQNx5VgxetorvVUQPh · (c) buoi-art sonnet session_011xDdVP32VLjcS6HX97wHgD · (d) icon-art sonnet session_011xDdVRMa18LU3fiFyq7ksS · ORIGIN INTROS opus session_011xDdVSMZ3apRHJfX25BwAb (review/origin-intros; draws no art, writes ART LIST for C). Each art worker: SAMPLE READY → Foreman C sends it to the owner (SendUserFile) → her verdict → mass production. Running C total: 7.
