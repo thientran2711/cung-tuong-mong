@@ -19,7 +19,8 @@ const nrR=a=>a[0]+R(a[1]-a[0]+1);
 /* men road templates (U3, jnroadm.js): NRM[id] = {k kind, t title, sk test stat, c: {4..11: chapter {t, w, sk, E}}} */
 const NRM={};
 /* the four roads of an origin (j67 premise arcs); a man's kind → his templates */
-function nrRoads(o){const L=Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu);for(const id in NRM)if(NRM[id].k===o)L.push(id);return L}
+function nrRoads(o){const M=Object.keys(NRM).filter(id=>NRM[id].k===o);if(M.length)return M;/* a man's kind reads only men templates (kind "st" ≠ j67 o:"st") */
+ return Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu)}
 /* chapter n of a road: .4 = the premise arc, .5–.11 = jroad chapters registered in this build (null = not built yet → skipped) */
 function nrCh(r,n){if(NRM[r])return NRM[r].c[n]||null;if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
 function nrNext(r,n){for(let i=n;i<=BAL.road.last;i++)if(nrCh(r,i))return i;return 0}
