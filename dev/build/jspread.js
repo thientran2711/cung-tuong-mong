@@ -91,8 +91,8 @@ function sp13Tick(){/* inside / right after a buổi change: this buổi's own u
   sp13Sync();return sv0.apply(this,arguments)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(SP13.held&&S&&!S.dead&&!quiet&&!SP13.L.some(x=>x.code)){SP13.held=0;SP13.stat.flushed++;save()}}catch(e){}return r};
  /* load: rebuild the waiting list from the save (old saves: none) */
- const ds0=deser;deser=function(){const id0=S&&S.sp13&&S.sp13.id,mem=SP13.L.filter(x=>x.code);const r=ds0.apply(this,arguments);try{SP13.L=[];SP13.held=0;const z=S&&S.sp13;
-   if(z&&z.id&&z.id===id0)SP13.L=mem.slice();/* same life still in memory (co-op rejoin, a save round trip): the code cards stay */if(z&&Array.isArray(z.q))for(const x of z.q){const c=deserQ([x.e])[0];
+ const ds0=deser;deser=function(){const id0=S&&S.sp13&&S.sp13.id,all=SP13.L.slice();const r=ds0.apply(this,arguments);try{SP13.L=[];SP13.held=0;const z=S&&S.sp13;
+   if(z&&z.id&&z.id===id0){SP13.L=all;return r}/* same life still in memory (co-op rejoin, a save round trip): the waiting cards stay as they are */if(z&&Array.isArray(z.q))for(const x of z.q){const c=deserQ([x.e])[0];
    if(c){c.__sp13={b0:x.b0};SP13.L.push({m:c,b0:x.b0,due:x.due,slotDue:x.due,code:false,end:x.end==null?null:x.end,ser:x.e});SP13.stat.load++}}}catch(e){console.error("spread load",e)}return r};
  const st0=start;start=function(){SP13.L=[];SP13.held=0;const r=st0.apply(this,arguments);try{if(S)S.sp13={q:[],k:-1,n:0,id:Date.now().toString(36)+R(1e6)}}catch(e){}return r};
 })();
