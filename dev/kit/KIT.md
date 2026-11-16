@@ -3833,3 +3833,16 @@ Sample: kit page §82. Test: `dev/test/title-tag.js` (stage 3 lines in order, po
 
 ## 61. FIG-BG · NOT SHIPPED (owner 16/11 13:30Z, OD:L1314)
 The C8 painted-scroll background behind full-body figures is switched off everywhere: figures stand directly on the frame's own background. The art stays in storage (img/), unused; no jfigbg module in the build.
+
+## 84. KIT SIZE SYSTEM · 4 frame sizes, ONE layout per frame kind, ONE figure scale, THE button, picture sizes (owner 16/11 15:00Z s17 + 16:00Z s19 sample review (1)–(9); review/kit-size) — `dev/build/jksize.js`
+STATUS: sample sheets only (`kitSizeSheet(area)`, area = frames | buttons | long | items; shots `dev/test/kit-size-ba.js` + `dev/test/kit-size-compose.py`). NOT yet wired into the game: the mass change waits for the owner's OK (relayed by main).
+- ONE table `KIT_SIZE`: frame sizes S/M/L/XL (width per view kv1/kv2, body cap), figure sizes S/M/L/XL as measured BODY height, layouts, picture sizes, button classes.
+- `kitFrameSize(dlg)`: the smallest size whose body holds the content (person frames need an info area ≥ 210 px). `kitFrameApply` = unify buttons + fit figures + pick size.
+- (7) ONE layout per frame kind: `KIT_SIZE.kindLay` — big (VIỆC, ĐIỀU, LUẬT, BÁO, ĐÊM) = figure L, column 176; small (KẾT QUẢ, TIN) = figure M, column 140. The size class changes ONLY the info area.
+- (6) ONE figure scale: `kszFigFit` sizes every figure by its measured body (`kitFigBody` ht→b) = the layout's body height × `KIT_FIG.fac` (men 1.07, children by age). Never by the picture box.
+- (1) tag ABOVE every frame figure = `kitTitleTag3` (title plate when worn, rank line 1, name line 2; Thái hậu / Hoàng thượng gold, rank only). Painted scenes: tag UNDER the feet (j59). Tuần lục book: no tag.
+- (2) info kinds `KIT_SIZE.infoKinds` (ĐIỀU, LUẬT, TIN, KẾT QUẢ, BÁO without options): NO "Đã hiểu" / "Đã rõ" button; header carries `kitXHTML` ✕; tap outside closes (first tap only closes, OD:L418).
+- (3) `.kszbody` and `.kszright` centre vertically.
+- (4)(5) THE button `kszBtn`: row 1 = picture LEFT + name / TỐN / ĐƯỢC / MẤT; row 2 = GỢI Ý in one full-width box. In a frame every button is full width and the same class (`kitBtnUnify`: the largest needed). Class (`kitBtnSize`) sets only the picture: S Q56 · LS Q72 · LR PS 84x112.
+- (9) pictures: portrait PS/PM/PL, landscape LS/LM/LL, NARROW strips NS 192x56 · NM 300x84 · NL full x 110/140 (= the banner of a person frame), square Q56/Q64/Q72.
+- Phase 2 (after OK) places: kpBuild / kitEventStage / kitDpFit / kitCompactCSS / kitSkillCard / jkpc compact cards; 67 "Đã hiểu" literals in dev/build/j*.js (jlost 8, jk4 5, jts 4, jkitpage 4, jtut 3, j77 3, …) to audit — only info frames lose the button (tutorial / scene-end buttons stay, OD:L1261).
