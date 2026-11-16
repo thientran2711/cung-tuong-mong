@@ -125,7 +125,7 @@
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | DONE SẴN SÀNG KIỂM d0f2260a | 16/11 08:40Z |
 | reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | RUNNING | 16/11 08:40Z |
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
-| cardflip-glow REVIEW (owner bug; frame-ring light, slower, scene-end button) | review/cardflip-glow-r1 | main s14 | session_01UV1SzggxfoaRwYDvYoEu4Q (sonnet) | RUNNING | 16/11 08:36Z |
+| cardflip-glow REVIEW (owner bug; frame-ring light, slower, scene-end button) | review/cardflip-glow-r1 | main s14 | session_01UV1SzggxfoaRwYDvYoEu4Q (sonnet) | LIVE dd87e0eb, smoke PASS (archived) | 16/11 08:36Z |
 | design-scale REVIEW (opus; one page 590x820, uniform scale) | review/design-scale-r1 | main s14 | session_01UV1SzkHA4ScRWkoirdEoSn (opus) | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | RUNNING | 16/11 09:08Z |
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
