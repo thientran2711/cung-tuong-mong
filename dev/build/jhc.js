@@ -114,7 +114,7 @@ function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPers
  const strip1=pager("rel",items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
  const strip2=pager("relY",Ys2.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
  return `<div class="pgwrap krelpg"><div class="kpinline krelpk"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
-function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
+function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
  if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:S.sung})+kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"ân tình",gloss:"Ân tình",v:S.an||0});
@@ -217,6 +217,8 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .kpplist>.kppl-h{grid-column:1/-1}
 .kpplist>button,.kbk-toc>.kbk-tc{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;min-width:0!important;text-align:left!important;white-space:normal!important}
 .kpplist>button>span:last-child,.kbk-toc>.kbk-tc>:last-child{min-width:0;overflow-wrap:anywhere;line-height:1.2}
+/* owner 11/15 17:16Z: every name in a people list is the same ink (the rank shows in the frame), not one colour per person */
+.kpplist>button>span:last-child,.kbk-toc>.kbk-tc .kname,.kbk-toc>.kbk-tc .kname .kti{color:var(--ink,#2a1a12)!important}
 .kpplist>button span.md,.kbk-toc>.kbk-tc span.md{flex:0 0 auto}
 /* KIT §36.2 THẺ QUAN HỆ 3 CỘT: portrait (person-card size) | bars | Đã biết bullets; narrow = three blocks stacked in one card */
 #panel{container-type:inline-size}
