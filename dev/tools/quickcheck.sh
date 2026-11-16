@@ -3,6 +3,7 @@
 # usage: bash dev/tools/quickcheck.sh [sha|ref] [--net] [--cpu N] [--runs N] [--inject-render-ms N (self-test)]     (default: HEAD of the current worktree)
 #   1. the sha must hold its OWN build: dev/site/build_site.sh is run and index.html must come out the same (only the build line
 #      window.CTM_BI may differ, it depends on what is live right now) -> else FAIL "not built"
+#   1b. bash dev/tools/coregates.sh: one-core-guard · rules-one-source · kit-conform · dev/tools/quickcheck.d/*.sh hooks (co-op one-world probe)
 #   2. node dev/tools/quickcheck.js: open (Fold) · old save from the LIVE build loads and plays a buổi (Fold) · perf smoke vs the live build (iPad)
 # Live build = origin/main (env CTM_LIVE_REF). When the sha IS live main, the build before it is used (previous live/* tag, else the
 # previous commit that changed index.html). Nothing is pushed or committed; generated files are put back as they were.
@@ -44,11 +45,14 @@ if ! (cd "$WT" && bash dev/site/build_site.sh > "$OUT/build.log" 2>&1); then tai
 BUILD_S=$(( $(date +%s)-TB ))
 NOTBUILT=""
 if ! cmp -s <(git -C "$WT" show "$SHA:index.html" | norm) <(norm < "$WT/index.html"); then NOTBUILT=1; fi
+# 1b. CORE GATES (one core, kit, co-op one world + hooks in dev/tools/quickcheck.d): a FAIL here fails the go-live (owner CO-OP FIRST 16/11 s23)
+bash "$KIT/dev/tools/coregates.sh" "$WT" "$LIVE" "$OUT/gates" | tee "$OUT/gates.log"; GRC=${PIPESTATUS[0]}; GLINE=$(tail -1 "$OUT/gates.log")
 # 2. browser checks on the build
 node "$KIT/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | tee "$OUT/run.log"; RC=${PIPESTATUS[0]}
 # put the generated files back as committed (unless they had local edits before)
 [ -z "$DIRTY" ] && git -C "$WT" checkout -q -- index.html sw.js assets.json 2>/dev/null
 LINE=$(tail -1 "$OUT/run.log")
+if [ "$GRC" != 0 ]; then RC=1; LINE="QUICKCHECK FAIL · ${GLINE} · ${LINE#QUICKCHECK * · }"; fi
 if [ -n "$NOTBUILT" ]; then RC=1; LINE="QUICKCHECK FAIL · NOT BUILT: index.html at ${SHA:0:8} differs from a fresh build (run bash dev/site/build_site.sh, commit) · ${LINE#QUICKCHECK * · }"; fi
 echo "$LINE · build ${BUILD_S} s · total $(( $(date +%s)-T0 )) s"
 exit $RC

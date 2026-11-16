@@ -10,7 +10,7 @@
    Pure layout / pixel / timing numbers are never counted (the patterns only look at rule stats), and the comments are skipped.
    usage: node dev/test/one-core-guard.js [--update] [--allow-grow] [--list <file>]  */
 const fs=require('fs'),path=require('path');
-const ROOT=path.join(__dirname,'..','..'),B=process.env.OC_BUILD||path.join(ROOT,'dev','build'),BASE=path.join(__dirname,'one-core-baseline.json');
+const ROOT=path.join(__dirname,'..','..'),B=process.env.OC_BUILD||path.join(ROOT,'dev','build'),BASE=process.env.OC_BASE||path.join(__dirname,'one-core-baseline.json');
 const args=process.argv.slice(2),UPD=args.includes('--update'),GROW=args.includes('--allow-grow'),LIST=args.includes('--list')?args[args.indexOf('--list')+1]:null;
 const ORDER=fs.readFileSync(path.join(B,'assemble.py'),'utf8').match(/for f in \[([^\]]+)\]/)[1].match(/'([^']+)'/g).map(s=>s.slice(1,-1));
 
