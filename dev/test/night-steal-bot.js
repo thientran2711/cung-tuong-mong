@@ -19,7 +19,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
      if(v!==S&&inF&&r){const ok=tonightOf()===v&&before!==v;const tg=t===S?"me":"npc";const tr=(traitsOf(v)[0])||"?";
        T("try_"+tg);if(ok)T("win_"+tg);L.tr[tr]=L.tr[tr]||[0,0];L.tr[tr][0]++;if(ok)L.tr[tr][1]++;T("mode_"+mode)}return r};
    const fl=flip;flip=function(){inF=true;let r;try{r=fl.apply(this,arguments)}finally{inF=false}try{if(!S.dead){T("weeks");const h=tonightOf();const d=S.nightWhy;
-     const first=d&&d.wk===wk()?(d.flip0||d.pick):null;if(first||h){T("nights");if(first==="me"||(d&&d.pick==="me")||h===S)T("meNights")}}}catch(e){}return r};
+     const first=d&&d.wk===wk()?(d.flip0||d.pick):null;if(first||h){T("nights");for(const v of liveRivals(true)){const tr=(traitsOf(v)[0])||"?";L.ex=L.ex||{};L.ex[tr]=(L.ex[tr]||0)+1}if(first==="me"||(d&&d.pick==="me")||h===S)T("meNights")}}}catch(e){}return r};
    for(let l=0;l<n;l++){L={tr:{}};try{localStorage.clear()}catch(e){}
     for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}Q.length=0;S.mg=0;
     for(let w=0;w<Y*36&&!S.dead;w++){

@@ -30,10 +30,12 @@ const GEOM=()=>{const ov=document.querySelector('.kmov.kcf');if(!ov)return null;
   await sleep(600);await p.evaluate(([s,g])=>{window.CLEAN=eval('('+s+')');window.GEOM=eval('('+g+')')},[CLEAN.toString(),GEOM.toString()]);await p.evaluate(CLEAN);const res={};
   for(let i=0;i<40;i++){const busy=await p.evaluate(()=>{const o=document.querySelector('.kmov');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}return !!o||kmBusy||KMQ.length>0});if(!busy)break;await sleep(700)}await p.evaluate(CLEAN);
   /* A · a real week end: only her card can be turned (others barred by a hidden tablet), the flip roll forced */
+  for(let i=0;i<150;i++){const busy=await p.evaluate(()=>{const o=document.querySelector('.kmov');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}return !!o||kmBusy||KMQ.length>0});if(!busy)break;await sleep(600)}await p.evaluate(CLEAN);
+  await p.evaluate(()=>{for(let i=0;i<60&&isSrv();i++){S=null;start()}Q.length=0;document.querySelectorAll('.kmov').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}});
   res.real=await p.evaluate(()=>{S.dead=false;S.preg=0;S.pregUnk=0;S.ill=0;S.confined=0;S.block=0;S.sung=Math.max(S.sung,40);S.ntk=null;S.ntTry=null;const R0=Math.random;Math.random=()=>0.01;
    const L=liveRivals(true).filter(v=>!v.coop);const keep=[];L.forEach((v,i)=>{keep.push([v,v.block]);v.block=i===L.length-1?0:1});const X=L[L.length-1];Object.assign(X,{preg:0,confined:0,suc:70,duc:60});X.sung=Math.min(X.sung,30);
-   const kb=BAL.steal.k;BAL.steal.k=1e6;
-   try{CLEAN();endTurn()}finally{Math.random=R0;BAL.steal.k=kb;keep.forEach(([v,b])=>v.block=b)}
+   const kb=BAL.steal.k;BAL.steal.k=1e6;S.tuan=1;const fc=FAIRN.custom.slice();FAIRN.custom[0]=0;FAIRN.custom[1]=0;S.cyb=Object.assign({},S.cyb||{},{lie:wk()+1});
+   try{for(let k=0;k<8;k++){CLEAN();document.querySelectorAll('.kmov').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}S.tuan=1;S.ntk=null;S.ntTry=null;S.dead=false;S.preg=0;S.pregUnk=0;S.confined=0;S.block=0;S.cyb=Object.assign({},S.cyb||{},{lie:wk()+1});endTurn();if(S.nightWhy&&S.nightWhy.cause==='stolen')break}}finally{Math.random=R0;BAL.steal.k=kb;FAIRN.custom[0]=fc[0];FAIRN.custom[1]=fc[1];keep.forEach(([v,b])=>v.block=b)}
    const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}const ks=Q.filter(q=>q.t==="Kính sự phòng").map(q=>q.h);CLEAN();
    return{ks,first:consorts()[0]===S,tonight:S.tonight==="me"?"me":S.tonight&&S.tonight.name,why:S.nightWhy&&{pick:S.nightWhy.pick,flip0:S.nightWhy.flip0,cause:S.nightWhy.cause}}});
   console.log(v,JSON.stringify(res.real));
