@@ -101,6 +101,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:54Z cut-out lead #2 HANDOVER #3 pushed (13629a22, reports/fig-cutout-clean.md) → ARCHIVED. Successor opened by C after owner's skin pick + 4k-hero answer.
 - 21:58Z HOURLY: new INBOX (main s24/s25: go-live = main's hourly batch; story ch1–4 priority; 5 urgent owner-photo files; cut-out extras TSVs; makeup desat; courtyard cac/home missing). Opened fig-cutout lead #3 session_011xDdVSheHFnhXPEAMEEfZT (prep qa_fig.py + 5 urgent files; batch after skin pick) and art session_011xDdVQYXHozUcGDzx2ZoV3 (makeup desat, then courtyard cac/home sample). intro-art ARCHIVED (no owner answer; work on review/intro-art). origin-intros-r1 reviewer ARCHIVED (PASS handed to main).
 - 22:02Z makeup room desat (img/toil-mirror-room.webp, S −8%, repaint) looked at → SENT to owner. Lead #3 ready (2179fdc8: qa_fig.py, failing-merged.tsv 3,980 rows, 5 urgent job specs) — waiting her skin pick + 4k-hero.
+- 22:03Z courtyard samples (Tần cac 3 halls + home Ngọc Thanh các w/ cung nhân row; beside nhat-phi-cung) looked at → SENT to owner.
 - 21:51Z npc-jealousy r2 SẴN SÀNG KIỂM 7ba04507 → same reviewer. FP NC v20 (v16b silver costumes + game-style QP + v19 proportion, true scale beside c01/c05) looked at → SENT to owner.
 
 ## SESSION 7 LOG
