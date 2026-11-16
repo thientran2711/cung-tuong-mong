@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 — 6 workers + 2 reviewers running (8/8).
+Updated: 11/16/2026 01:24Z — 6 workers + 2 reviewers running (8/8); 7 items QUEUED.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare: token saved on this environment but api.cloudflare.com answers "Invalid API Token"/"Authentication error" (R2 bucket ctm-img) → CDN uploads BLOCKED; workers list new images under "PENDING CDN UPLOAD" in their PROGRESS file.
 
 | Item | Branch | Model | State |
