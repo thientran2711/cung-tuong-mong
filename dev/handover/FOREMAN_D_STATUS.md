@@ -1,7 +1,8 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 18:00Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
+last wake: 16/11 18:35Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
+- 18:35Z (hourly): coop-chat b7c5d787 IS LIVE on main (now under C's c19b25eb); Actions 'Deploy co-op Worker' run #5 on b7c5d787 = success 18:21Z → golive worker runs the 2-client live chat test, then re-merges coop-b1b5-fix. NEW D item health+pregnancy bundle → opus worker session_01DgYSWmn1SNsxewKAaDLZjN (review/suc-khoe; claim row written right after the open, same minute).
 - 18:22Z (s7): coop-chat-r1-golive READY b7c5d787 (871a104d rejected by s7: carried coop/worker/.wrangler local state; fixed + .gitignore). FF-check OK on main 2934bede, head == READY sha, 22 files. PUSH sha:main REFUSED: HTTP 403 from the git proxy for this session (same as main s21 17:50Z) → NOT routed around; owner/main told. Needs after push: Actions 'Deploy co-op Worker' run + 2-client chat test.
 - 17:58Z (s7 takeover): s6 told to stop + archived; hourly wake moved to s7 (trig_01WRgJzWBhmuoRbMvDPTXtqt, xx:30); golive prep worker + npc-roads told D = s7. Golive worker: coop-b1b5-fix-r1-golive 0eeb5722 BIG, co-op suites running (start-up placement flake under study), NOT READY; coop-chat-r1-golive being merged on main 8f476f6f FIRST (owner). slap-mg-r3 + entry-exam-r1 SKIPPED until mg-train is on main.
 s6 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
@@ -217,3 +218,6 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - BLOCKED: C44 cloud-del (KIT REQUEST danger button + confirm dialog → main kit keeper; resume with a sonnet worker on KIT READY, base review/cloud-save-r1).
 - FOLLOW-UPS (open when real, not now): co-op friend memory write-back (mem-upgrade Q5, co-op → D); scold/deathSentence causes (with B forced events). OWNER Q pending: Emperor/Thái hậu act on memories (mem-upgrade Q2).
 - Main coordinator = MAIN SESSION 17 (see latest FOREMAN_D.md INBOX). Archive finished sessions every wake (OD:L1287).
+
+| HEALTH + PREGNANCY BUNDLE (main s21 18:08Z…19:00Z) | review/suc-khoe | opus | worker session_01DgYSWmn1SNsxewKAaDLZjN RUNNING 18:35Z |
+| coop-chat-r1 go-live | b7c5d787 | — | LIVE 18:21Z (Worker deploy run #5 success); live 2-client test pending (golive worker) |
