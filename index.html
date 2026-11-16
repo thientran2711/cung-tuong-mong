@@ -2618,9 +2618,10 @@ function harsh(){return S&&S.wx&&(S.wx.f===2||S.wx.f===4)}
 function wxName(){return S&&S.wx?`${SEASON[S.month-1]} · ${S.wx.n}`:SEASON[S.month-1]}
 /* light by buổi, smooth CSS overlay (works without the scene layer) */
 function lightTick(){const st=$("stage");if(!st||!S)return;let L=st.querySelector(".light");if(!L){L=document.createElement("div");L.className="light";st.insertBefore(L,$("stop")&&$("stop").parentNode===st?$("stop"):null)}
- /* a scene picture already painted for its buổi (j94: <name>-<season>-sang|trua|chieu|toi) gets only a light shift (~1/4 strength); the generic picture gets the full tint (b4Light: 4 buổi, shifting by khắc) */
+ /* owner 16/11: every scene has its own 4-buổi paintings (j94), so NO buổi tint on any picture (the painting carries the light, night included).
+    Only the weather washes below stay (rain / snow / frost), at 1/4 strength on a buổi painting. */
  const b=S.buoi||0;let own=false;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[placeOf(S.place).sc]||"")}catch(e){}
- const k=own?.25:1,A=x=>(x*k).toFixed(3);const c=b4Light(b,used,k);
+ const k=own?.25:1,A=x=>(x*k).toFixed(3);const c="rgba(0,0,0,0)";
  const w=wet()?(b===B4L?`,rgba(40,50,80,${A(.25)})`:`,rgba(90,100,120,${A(.18)})`):S.wx&&(S.wx.k==="frost"||S.wx.k.startsWith("snow"))?`,rgba(200,225,255,${A(.16)})`:"";
  L.style.background=`linear-gradient(${c},${c})${w?`,linear-gradient(${w.slice(1)},${w.slice(1)})`:""}`;document.body.dataset.buoi=b;
  st.classList.toggle("frost",!!(S.wx&&S.wx.k==="frost"))}
@@ -22560,12 +22561,7 @@ window.KIT_LIGHT=KIT_LIGHT;
  if(typeof render==="function"){const r1=render;render=function(){KIT_LIGHT.sync();return r1.apply(this,arguments)}}
  if(typeof kitEventStage==="function"){const k0=kitEventStage;kitEventStage=window.kitEventStage=function(){KIT_LIGHT.sync();return k0.apply(this,arguments)}}
  KIT_LIGHT.sync()})();
-/* Tranh cảnh đã vẽ/chỉnh màu riêng cho từng buổi (j94 <tên>-<mùa>-<buổi>): TẮT lớp phủ màu buổi b4Light của j12 (balance-unified)
-   — sếp 11/15 duyệt màu đã chỉnh, không phủ thêm. j12 gọi b4Light(b,used,k) với k<1 cho tranh riêng buổi; tranh chung (k=1) vẫn phủ đủ.
-   Phủ thời tiết (mưa/sương) của j12 không đổi. Núm: KIT_SCENE_TINT = 0 (tắt) · 1 (bật lại ~1/4 như cũ). */
-window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
-(function(){if(typeof b4Light!=="function")return;const b0=b4Light;
- b4Light=window.B4LIGHT=function(b,u,k){if(k!=null&&k<1&&!window.KIT_SCENE_TINT)return "rgba(0,0,0,0)";return b0.apply(this,arguments)}})();
+/* Buổi tint removed at the source (j12 lightTick, owner 16/11): no b4Light overlay on any scene; weather washes unchanged. */
 /* ---- TRANH CẢNH ĐÃ CHỈNH + THỜI TIẾT (sếp 11/15: Ngọc Thanh các chiều mưa tháng tư "nâu sepia, tối như lãnh cung") ----
    Tranh riêng buổi (j94 <tên>-<mùa>-<buổi>, đã chỉnh màu, sếp duyệt) KHÔNG chồng thêm lọc màu cũ của p1.html/j25
    (.sc-home.day: brightness 1.35 + sepia .12; rp1: sepia .25; rp2/rp3: saturate 1.3–1.4) → .stage.kown.
@@ -31618,7 +31614,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cbb381f79b5f";window.CTM_BUILD=BUILD;
+const BUILD="0a74259c2269";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
