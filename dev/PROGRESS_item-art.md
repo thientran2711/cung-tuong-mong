@@ -86,3 +86,14 @@ All sizes redone (256/512|pet512/hi 1024), Magnific gpt-2-6, folder ba4aecfe…;
 | pet-sutu-tn | play-bow, tail up (adult: standing) | lJ8Hai4gv9 (others xSdEt4LjfW, SytbCRzUb8) | ksDaodF16B |
 | pet-linhmieu-tn | pounce, one paw raised (adult: sitting) | O6frHnBynm (others SytbCZ2Ub8, bxTmd795Y2) | rgeCI8jxtc |
 Adult refs uploaded: cuuvi u5nBTpmQLD, sutu aF2pYV4fSh, linhmieu UPm5Cqtwny.
+
+## r5 (review/item-art-r5, D2 poem re-audit)
+All 44 poems re-read at 1024. Found "Hoa triêu" (circumflex only, missing grave) in r08-b2, r08-b3, r08-b4 (b1 was already "triều"); r02-b1 and r07-b1 had ambiguous scratchy ink (acute/crossbar unclear) -> redone clean. All redone with Magnific gpt-2-6 (folder ba4aecfe…), remove-bg cut-out, `dev/art/item_art_r4_build.py`, text re-read at 1024.
+
+| key | text read | generate id (picked) | cut-out id |
+|---|---|---|---|
+| item-tp-tho-r08-b2 | "Hoa triều / Sáng sớm hoa hé nụ / Sương mai đọng cành" | 79vk1h7JAL | TdS3ZoqVNR |
+| item-tp-tho-r08-b3 | same | iGqS7Ra3uK | tCiTDRrmZJ |
+| item-tp-tho-r08-b4 | same | yiCxs9FPW9 | UPm51aGwny |
+| item-tp-tho-r02-b1 | "Thu dạ / Đêm thu trăng lạnh / Lá rụng bên thềm" | ov9WTGt829 | vQZDXLTa47 |
+| item-tp-tho-r07-b1 | "Quạt đề thơ / Quạt nhỏ đề thơ / Gió mát đầy tay" | dtyzW2VXSL | aF2pBlefSh |
