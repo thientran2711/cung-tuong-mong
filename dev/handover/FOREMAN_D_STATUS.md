@@ -29,7 +29,7 @@ main at start = eba64ead4.
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
-| kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | CLAIMED 10:55Z s4, worker opening |
+| kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | worker session_01DgYSWng42neb9J7kedxhVp RUNNING (10:55Z) |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid @66a55b06 | opus | SẴN SÀNG KIỂM (jcoopask.js guest→host request, 8 cases; coop-e2e 61/61; worker archived) → reviewer session_01DgYSWm8Dq4FhHzrbnuCRGL RUNNING (trial-merge with coop-b1b5-p2) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |

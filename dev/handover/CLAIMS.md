@@ -146,4 +146,4 @@
 | coop-guest-maid review (opus) | review/coop-guest-maid-r1 | D | session_01DgYSWm8Dq4FhHzrbnuCRGL | RUNNING | 16/11 10:34Z |
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
 | entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | RUNNING | 16/11 10:48Z |
-| kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | (s4 opening worker) | RUNNING | 16/11 10:55Z |
+| kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | RUNNING | 16/11 10:55Z |
