@@ -12,6 +12,11 @@ Object.assign(BAL,{ad:{hapP:65,hap2:35,strollP:80,rareMinGrade:3,nightSneak:10,n
 /* balance-pass 15/11: bar [22,27,31] -> [22,25,28]: at a sensible player's level (arts 1-2, Đức 45-60) the mid exam passed 52-56 % and the
    high one 27-40 % (cooldown 3 months), so Quý phi -> Hoàng hậu took years; now mid ~75-93 %, high ~64-72 % (the odds the exam was designed
    for, PROGRESS_promo-exam). dev/tmp probe: exChance at ranks 0/3/5. */
+/* CHARITY (diff-remeasure 16/11): the ONE charity act after act-dedupe w1 (Tài nghệ Tứ đức "Phát bạc cứu giúp cung nhân nghèo", once a month; was
+   hard-coded Bạc -20 → Đức +3, Danh +1 in j85). The dedupe removed the Hành sự card "Phát chẩn cho cung nhân" (Bạc -40 → Danh +7, Đức +3, any week),
+   which was the bot's main Danh source (≈0.7 Danh a tuần at ranks 1–4) → ranks 0–2 stalled and Hoàng hậu fell 34 % → 0 %. Monthly now gives the
+   old card's numbers once a month (≈ the Danh a month it used to give); NPCs the same act and numbers. */
+BAL.charity={bac:40,duc:3,danh:7};
 BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
  /* servant / ma ma road (review/promo-rules): bar and wait by target, index 1..4 = SRK.maid rank, 5 = ma ma */
  srvBar:[0,18,20,22,24,24],srvCd:[1,1,1,2,2,3]};

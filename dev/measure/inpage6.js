@@ -90,6 +90,8 @@ function sensibleStep(){
     if(accs.length&&accs[0].o>=60){note("accuse");doAct(accs[0].i,"accuse");return}}
   const opts=[];
   if(qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
+  /* diff-remeasure: the one charity act (act-dedupe moved it to Tài nghệ Tứ đức, once a month) — a sensible player uses it */
+  try{const C=BAL.charity;if(C&&typeof charity==="function"&&!S.srv&&!S.out&&S.charM!==S.turn&&can(1)&&S.bac>=C.bac+20)opts.push({L:"charity",s:3.2,f:()=>{note("charity");charity()}})}catch(e){}
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
   talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
