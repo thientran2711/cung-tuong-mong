@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b26c750c+","t":"2026-11-16T19:54Z","c":"kit-fit r2: report ROUND 2 — SẴN SÀNG KIỂM b62028a82","b":"f7775abdcb69","h":[{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
+window.CTM_BI={"s":"9bcbf568+","t":"2026-11-16T20:03Z","c":"kit-fit r2: report ROUND 2 — SẴN SÀNG KIỂM b62028a82","b":"31d0953c91e6","h":[{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -25108,6 +25108,8 @@ function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=t
 (function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
 #modal .dlg:has(>.kit-x.kxabs){position:relative}
 #modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+/* the ✕ of a card without a .kph header owns a reserved strip (36 px + 2x6): content and scrollers start under it, so it never overlaps text or a scrolled option list (fold-popw, whole group: every dialog / overlay panel) */
+#modal .dlg:has(>.kit-x.kxabs),#ov .kpanel:has(>.kit-x.kxabs){padding-top:48px!important;box-sizing:border-box}
 #modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
 #modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
 #modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}
@@ -39509,13 +39511,17 @@ const BTR_FEST={newyear:{tint:"#ee8f80",fx:[["petal-peach",16],["lantern",3]]},n
  thanhminh:{tint:"#cfe3c6",fx:[["petal-plum",10],["paper",6]]},doanngo:{tint:"#bfe0a8",fx:[["leaf",10],["jade",4]]},
  phoenix:{tint:"#f2cb8a",fx:[["petal-peach",12],["streak",3]]},thattich:{tint:"#b9b4ee",fx:[["orb",4],["spark",10]]},
  trungthu:{tint:"#f6dc92",fx:[["lantern",4],["osmanthus",10]]},trungcuu:{tint:"#f0b868",fx:[["osmanthus",12],["leaf",6]]},
- dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]}};
+ dongchi:{tint:"#d8e6f6",fx:[["snow",18],["incense",3]]},giaothua:{tint:"#ee8a72",fx:[["petal-peach",12],["lantern",4],["spark",8]]},
+ vulan:{tint:"#9fb4d8",fx:[["orb",5],["incense",3]]},vantho:{tint:"#f6b070",fx:[["petal-peach",10],["spark",8]]},lapbat:{tint:"#f0dcc0",fx:[["snow",10],["incense",3]]}};
 /* painted band skins that exist on the CDN (sample pictures made before the 15:35Z rule "all drawing → Foreman C"; the rest of the art list is in dev/handover/reports/anim-pace.md → Foreman C) */
-const BTR_ART={thu:1,trungthu:1};
+const BTR_ART={xuan:1,ha:1,thu:1,dong:1,newyear:1,nguyentieu:1,thanhminh:1,doanngo:1,phoenix:1,thattich:1,trungthu:1,trungcuu:1,dongchi:1,giaothua:1,vulan:1,vantho:1,lapbat:1};
 /* painted palace-style buổi icons img/fx/buoi-ico-<0 sáng|1 trưa|2 chiều|3 tối>.webp (owner 16/11 KIT review 7.5; art by Foreman C): set the flag to 1 when the file is on the CDN; 0 = no icon (today's look) */
-const BTR_ICON=[0,0,0,0];
+const BTR_ICON=[1,1,1,1];
 /* sun / moon on a 0..1 arc: t = place along the band, v = visible (0..1) per buổi */
 const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:.86,v:1},m:{t:-.1,v:0}},{s:{t:1.08,v:0},m:{t:.5,v:1}}];
+/* MOON on the tối band by the game's lunar tuần (month = 3 tuần: S.tuan 0 thượng tuần, 1 rằm, 2 hạ tuần; owner 16/11 ~18:58Z). Painted phase sprites img/fx/buoi-moon-<crescent|full|halfL>.webp replace the orb moon; bands that paint their own moon (trungthu, nguyentieu, vulan) or have none (giaothua) show no sprite and hide the orb moon (never two moons) */
+const BTR_MOONBAND={trungthu:1,nguyentieu:1,vulan:1,giaothua:1},BTR_PHASE=["crescent","full","halfL"];
+function btrMoon(b,V,tuan){if(b!==3)return{ph:"",none:0};if(V.fest&&BTR_MOONBAND[V.fest.k])return{ph:"",none:1};const t=Math.max(0,Math.min(2,tuan|0));return{ph:BTR_PHASE[t],none:0}}
 let btrPrev=null,btrEl=null,btrEnd=null;
 /* the 4 painted pieces (~130 KB, SW-cached after the first fetch) are warmed once the game has been running a while, so the FIRST buổi change already shows them (on demand = not at boot) */
 const BTR_KEEP=[];function btrWarm(){try{if(typeof S==="undefined"||!S){setTimeout(btrWarm,7000);return}if(btrStill())return;["wash","mist","hills","orb"].forEach(n=>{const i=new Image();BTR_KEEP.push(i);i.src=BTR_BASE+"buoi-"+n+".webp"})}catch(e){}}
@@ -39535,10 +39541,11 @@ function buoiShift(){
   /* the variant tint is mixed into the buổi tint (night keeps its dark; a festival colours it more than a season) */
   const mix=VF?34:22;d.style.cssText=`--bt-tint:color-mix(in srgb,${VT} ${mix}%,${C.tint});--bt-wash:color-mix(in srgb,#2a1c10 ${b===3?0:16}%,color-mix(in srgb,${VT} ${Math.round(mix*.6)}%,${C.wash}));--bt-ink:${C.ink};--bt-s0:${C.sky[0]};--bt-s1:${C.sky[1]}`;
   const artKey=V.fest&&BTR_ART[V.fest.k]?V.fest.k:BTR_ART[V.sea]?V.sea:"";
+  const MN=btrMoon(b,V,(window.__btrVar&&window.__btrVar.tuan!=null)?window.__btrVar.tuan:(S.tuan||0));
   const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?260:kitPace(dawn?2000:1700);
   d.innerHTML=still?`<i class="btr-tint"></i>`:
    `<i class="btr-tint"></i><i class="btr-wash"></i>${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}<i class="btr-vig"></i>`+
-   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon"></i></div>`+
+   `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
   document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
@@ -39579,7 +39586,7 @@ function buoiShift(){
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
-.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}
+.btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}.btr-moon.btr-mph{background-size:contain;background-position:center;filter:drop-shadow(0 0 2px rgba(90,52,20,.85)) drop-shadow(0 0 7px rgba(60,40,90,.5))}.btr-moon.btr-nomoon{display:none}
 .btr-title{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
 .btr-plate{inset:0;background:var(--bt-tint);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;opacity:.96}
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
@@ -44081,7 +44088,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f7775abdcb69";window.CTM_BUILD=BUILD;
+const BUILD="31d0953c91e6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
