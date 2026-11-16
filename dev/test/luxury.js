@@ -50,6 +50,11 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   const du=v.duc;luxMonthX(v);ok("5b NPC above the edict: Đức −2",v.duc===du+BAL.lux.edictDuc||v.duc===0,[du,v.duc]);
   ok("5c edict is a co-op world key",[...document.scripts].some(x=>/const W_KEYS=\[[^\]]*"luxEdict"/.test(x.textContent)));
   luxOf=lo;S.luxEdict=null;C.forEach(p=>p.luxRep=0);Q.length=q0;
+  /* 5d co-op guest: never rolls its own edict; the host's edict (world key) is told once */
+  {const W=window.COOPW;const s0={on:W.on,seat:W.seat};W.on=true;W.seat="b";luxOf=p=>({lv:3,sc:160,bud:100});C.forEach(p=>p.luxRep=9);BAL.lux.edictP=100;S.luxEdict=null;S.luxEdictSeen=null;
+   const g1=luxEdictTry(),n1=Q.length;S.luxEdict={until:S.turn+3,at:S.turn,by:"th"};const g2=luxEdictTry(),n2=Q.length;const g3=luxEdictTry(),n3=Q.length;
+   W.on=s0.on;W.seat=s0.seat;BAL.lux.edictP=pp;luxOf=lo;S.luxEdict=null;C.forEach(p=>p.luxRep=0);Q.length=q0;
+   ok("5d co-op guest: no own edict; host's edict told once",g1===""&&n1===q0&&/tiết kiệm/.test(g2)&&n2===q0+1&&g3===""&&n3===n2,[g1,n1,g2,n2,g3,n3,q0])}
   /* 6. old save: no luxRep / luxEdict / luxRepD; a whole month plays */
   delete S.luxRep;delete S.luxEdict;delete S.luxRepD;liveRivals(true).forEach(v=>delete v.luxRep);let err="";try{const m0=S.turn;for(let i=0;i<60&&S.turn===m0;i++){Q.length=0;S.mg=null;endTurn()}}catch(x){err=String(x)}
   ok("6 old save (no new keys) plays a month",!err&&S.luxRep!=null,[err,S.luxRep]);

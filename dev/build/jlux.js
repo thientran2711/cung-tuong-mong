@@ -112,16 +112,20 @@ function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p)}catch(e){}con
  p.luxRep=cl((p.luxRep|0)+(add||-1),0,B.repMax);return p.luxRep}
 function luxXaHoa(p){return (p.luxRep|0)>=BAL.lux.repOn}
 window.luxXaHoa=luxXaHoa;
-function luxEdictTry(){const B=BAL.lux;if(!S||S.dead||luxEdictOn())return"";
+/* co-op: the edict is a WORLD key — only the host rolls it; the guest gets it with the week's world and is told once (luxEdictSeen is hers) */
+const luxGuest=()=>{try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}};
+function luxEdictCard(E){const B=BAL.lux;const q=typeof queenP==="function"?queenP():null;const by=E.by;const who=by==="th"?"Thái hậu":by==="hh"&&q?`Hoàng hậu ${q.name}`:"Hoàng thượng";const me=luxXaHoa(S);S.luxEdictSeen=E.at;
+ try{Q.push({t:"Ý chỉ tiết kiệm",who:by==="th"?pTH():by==="hh"&&q?pv(q):pEmp(),h:`<p>${who} nghe lục cung chuộng xa hoa, ban ý chỉ: ${B.edictM} tháng tới hậu cung phải tiết kiệm, y phục trang sức giản dị.</p>`+
+  (typeof kitRows==="function"?kitRows([["Trong ba tháng","ăn vận xa xỉ quá lệnh: Đức "+B.edictDuc+", bề trên phật ý","r"],["Ăn vận giản dị","có khi được khen: Đức +1","g"],["Thỉnh an","mặc giản dị không bị coi là thiếu lễ","n"]].concat(me?[["Tiếng xa hoa","ngươi cũng bị nhắc tên trong số người phô trương","r"]]:[])):"")})}catch(e){}
+ return `${who} ban ý chỉ tiết kiệm ba tháng. `}
+function luxEdictTry(){const B=BAL.lux;if(!S||S.dead)return"";
+ if(luxGuest()){const E=S.luxEdict;return E&&E.until>S.turn&&E.at!=null&&S.luxEdictSeen!==E.at?luxEdictCard(E):""}
+ if(luxEdictOn())return"";
  const E=S.luxEdict;if(E&&E.at!=null&&S.turn-E.at<B.edictCd)return"";
  const C=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false);const n=C.filter(luxXaHoa).length;let fr=false;try{fr=!S.thDead&&leHostKind("th")==="frugal"}catch(e){}
  if(n<(fr?B.edictNF:B.edictN)||!roll(B.edictP))return"";
  const q=typeof queenP==="function"?queenP():null;const by=!S.thDead?"th":q&&q!==S?"hh":"emp";
- S.luxEdict={until:S.turn+B.edictM,at:S.turn,by};const who=by==="th"?"Thái hậu":by==="hh"?`Hoàng hậu ${q.name}`:"Hoàng thượng";
- const me=luxXaHoa(S);
- try{Q.push({t:"Ý chỉ tiết kiệm",who:by==="th"?pTH():by==="hh"?pv(q):pEmp(),h:`<p>${who} nghe lục cung chuộng xa hoa, ban ý chỉ: ${B.edictM} tháng tới hậu cung phải tiết kiệm, y phục trang sức giản dị.</p>`+
-  (typeof kitRows==="function"?kitRows([["Trong ba tháng","ăn vận xa xỉ quá lệnh: Đức "+B.edictDuc+", bề trên phật ý","r"],["Ăn vận giản dị","có khi được khen: Đức +1","g"],["Thỉnh an","mặc giản dị không bị coi là thiếu lễ","n"]].concat(me?[["Tiếng xa hoa","ngươi cũng bị nhắc tên trong số người phô trương","r"]]:[])):"")})}catch(e){}
- return `${who} ban ý chỉ tiết kiệm ba tháng. `}
+ S.luxEdict={until:S.turn+B.edictM,at:S.turn,by};return luxEdictCard(S.luxEdict)}
 function luxMonthX(p){const B=BAL.lux;let r="";const me=p===S;if(!p||p.alive===false)return"";
  let x={lv:0,sc:0,bud:1};try{x=luxOf(p)}catch(e){}const ratio=x.bud?x.sc/x.bud:0;
  if(p.out){if(ratio>B.occ.lanh.hi){if(me){apply({duc:B.lanhDuc});r+=`Ở lãnh cung mà còn ăn vận xa xỉ, người ta chê ngươi không biết hối lỗi. Đức ${B.lanhDuc}. `}else ap(p,{duc:B.lanhDuc})}return r}
