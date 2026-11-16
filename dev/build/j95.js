@@ -284,6 +284,9 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
   for(let i=kh;i<4;i++){const x=e[i];if(p.kind==="px"){if(x[0]!==p.home)e[i]=p.home==="tgk"?["tgk","laundry",oid,"bị phạt giặt giũ ở Tân Giả khố"]:["cnh","offduty",oid,"đến lượt nghỉ tay"]}
    else if(x[1]==="offduty"||x[1]==="laundry")e[i]=[p.home,i%2?"clean":"serve",oid,p.home==="lc"?"hầu chủ ở lãnh cung":"phận sự trong cung"]}}
  for(const p of ppl)if(p.kind==="rv"){const v=p.ref,e=R.P[p.id];for(let i=kh;i<4;i++){const un=()=>{if(typeof j95cUnsay==="function")j95cUnsay(p.id,R.key,i)};if(v.out){if(e[i][0]!=="lc"){un();e[i]=["lc","cold",null,"bị đày vào lãnh cung"]}}else if(v.confined&&e[i][0]!==palaceOf(v)&&e[i][1]!=="tryst"){un();e[i]=[palaceOf(v),"confined",null,`bị cấm túc ${v.confined} tháng`]}}}
+ /* r2: a named elder (jstaff) stands at her post from the current khắc on (her eid can be given after the plan, the guide leaves her room
+    after turn 4, Thái hậu dies): the record follows the post rule j95elderK, the same one jstaff addStage draws by */
+ for(const p of ppl){if(p.kind!=="el"||!p.ref||!p.ref.eid)continue;const e=R.P[p.id];if(!e)continue;const hk=j95elderK(p.ref);for(let i=kh;i<4;i++)if(e[i][0]!==hk)e[i]=[hk,"serve",hk==="home"?"me":"th","giữ chức trong cung"]}
  /* r2: the Nội vụ phủ eunuch stands at Nội vụ phủ only while that place exists (jact: not in lãnh cung, not on the maid road) */
  {const e=R.P["c:ped"];if(e){const on=j95nvp();for(let i=kh;i<4;i++){if(on&&e[i][0]!=="nvp")e[i]=["nvp","sell",null,"bày hàng mua từ ngoài cung ở Nội vụ phủ"];else if(!on&&e[i][0]==="nvp")e[i]=["ksp","sell",null,"đi bán hàng rong kiếm lời"]}}}
  try{j95fixHouse(R,kh,ppl)}catch(e){j95err("house",e)}
@@ -333,7 +336,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
  for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];let id=null;
   if((p.kind==="rival"||p.kind==="hh")&&p.ref)id="v"+p.ref.id;else if(p.kind==="emp")id="emp";else if(p.kind==="th")id="th";else if(p.kind==="man"&&p.ref)id=p.ref.id;else if(p.kind==="ty")id="c:ty";else if(p.kind==="ksp")id="c:ksp";else if(p.kind==="min"&&p.ref&&p.ref.c!=null)id="q:"+p.ref.c;else if(p.kind==="serv"&&p.sid!=null)id="s"+p.sid;else if(p.kind==="peddler"&&R.P["c:ped"])id="c:ped";
   else if(p.kind==="fallen"){if(!p.ref||!here("v"+p.ref.id)){V.people.splice(i,1);popIdx=null;ch=true}continue}
-  if(id&&(R.P[id]||p.kind==="man")&&!here(id)){V.people.splice(i,1);popIdx=null;ch=true}}
+  if(id&&(R.P[id]||p.kind==="man"||p.kind==="serv")&&!here(id)){V.people.splice(i,1);popIdx=null;ch=true}}
  for(const v of liveRivals(true)){const id="v"+v.id;if(!here(id))continue;if(V.people.some(p=>p.ref===v&&(p.kind==="rival"||p.kind==="hh")))continue;
   if(k==="home"&&sameHouse(S,v))continue;try{V.people.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v));ch=true}catch(e){}}
  /* jplx places: the people jplx's lists put here (servants, children, the fixtures) are on the stage (a walk that crosses into the next buổi
@@ -541,5 +544,8 @@ function j95final(){try{if(!j95on()||!S||S.dead||!S.roster||S.roster.key!==j95ke
  const n0=V.people.length;j95dedupe(V);if(V.people.length!==n0)ch=true;return ch}catch(e){j95err("final",e);return false}}
 setTimeout(()=>{try{
  if(typeof renderStage==="function"){const rs0=renderStage;renderStage=function(){j95final();return rs0.apply(this,arguments)}}
+ /* the data paths too (the stage list is state: saved, read by the map count and the bots, which draw nothing): after every arrival, khắc,
+    buổi or lãnh cung visit the stage list = the record; redraw only if it changed */
+ for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95final()&&typeof renderStage==="function")renderStage()}catch(e){j95err("final:"+n,e)}return r}}
  if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const L=hp0.apply(this,arguments);try{if(j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(L))j95elderFix(L,"home",S.roster,j95kh())}catch(e){j95err("home",e)}return L}}
 }catch(e){j95err("finalwrap",e)}},0);

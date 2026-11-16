@@ -93,6 +93,7 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
   /* (h) places in words */
   const R=S.roster;if(!R||R.key!==j95key())return;const kh=ent&&ent.key===j95key()?ent.kh:j95kh();
   if(ent)for(const p of ent.places){if(p.res!=="ok"){A.placeSkip++;continue}A.placeChk++;const rid=p.id;const e=R.P[rid];let k=p.k;if(k==="here")k=S.place;if(k==="own"){const v=rid[0]==="v"?RV(+rid.slice(1)):null;k=v?(v.out?"lc":palaceOf(v)):rid==="th"?"tn":"dtd"}
+   /* (h) says "or the record says why not": the same card can confine / banish the person it placed (record reason cấm túc / lãnh cung) (r2) */if(e&&e[kh]&&(e[kh][1]==="confined"||e[kh][1]==="cold")&&e[kh][0]!==k){A.placeWhy=(A.placeWhy||0)+1;continue}
    if(!e||e[kh][0]!==k)bad("h","câu chữ đặt "+rid+" ở "+k+" mà sổ ghi "+(e?e[kh][0]:"không có")+" ("+pid+") ent="+ent.key+"/"+ent.kh+" now="+j95key()+"/"+kh+" rec="+JSON.stringify(e&&e[kh]));if(rid[0]==="v"&&kh===j95kh()){const v=RV(+rid.slice(1));if(v&&v.alive&&whereOf(v)!==k)bad("h","whereOf lệch sau khi dời: "+v.name);if(j95arrKh(k)===kh&&j95vis(rid,k)&&countAt(k)<1)bad("h","bản đồ không đếm người được dời tới "+k)/* port 16/11: the map counts at the arrival khắc and only people drawn there */}}
   if(pid&&(pid.indexOf("e68")===0||P95B[pid]))return;
   const txt=strip(m.h||"");const sents=txt.split(/(?<=[.!?…][)"”']?)\\s+|\\s*;\\s*/);const RVL=rivals.filter(v=>v.alive).sort((a,b)=>b.name.length-a.name.length);
