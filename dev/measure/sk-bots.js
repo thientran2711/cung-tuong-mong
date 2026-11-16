@@ -30,7 +30,8 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    const bp0=birthP;birthP=function(q,fake){if(fake||!q)return bp0.apply(this,arguments);const w=isMe(q),h0=q.hardN||0,s0=q.stillN||0;const r=bp0.apply(this,arguments);T(w+"Birth");
      if((q.hardN||0)>h0)T(w+"Hard");if((q.stillN||0)>s0)T(w+"Still");if(q===S?S.dead:q.alive===false)T(w+"MomDie");return r};
    const conc0=window.__khN;
-   for(let l=0;l<n;l++){for(const k in tally)delete tally[k];window.__khN={};window.__rtN={};try{localStorage.clear()}catch(e){}
+   if(!window.__ow){window.__ow=1;const o0=window.over;window.over=function(a,b,c){window.__why=String(c||b||a).slice(0,80);return o0.apply(this,arguments)}}
+   for(let l=0;l<n;l++){for(const k in tally)delete tally[k];window.__khN={};window.__rtN={};window.__why='';try{localStorage.clear()}catch(e){}
     for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}Q.length=0;S.mg=0;
     const seen=new Set(allKids().map(([k])=>k));const yr=[];let cy=0;const perY=()=>({npcB:0,meB:0,cons:0});yr.push(perY());let snap5=null;
     const snap=()=>{const ks=allKids().filter(([k])=>k.alive);return{kids:ks.length,me:ks.filter(([k,v])=>!v).length,npcSons:ks.filter(([k,v])=>v&&k.sex==="m").length,
@@ -45,7 +46,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
      allKids().forEach(([k,v])=>{if(!seen.has(k)){seen.add(k);if(v)yr[y].npcB++;else yr[y].meB++}});
      if(S.tuan===0&&typeof sucCap==="function"){const b=S.age<30?"a<30":S.age<40?"a30":S.age<50?"a40":"a50+";T("capN_"+b);T("cap_"+b,sucCap(S));T("suc_"+b,S.suc)}
      if(w===5*36-1)snap5=snap()}
-    const ag=[];out.push({years:Math.floor((S.turn||0)/12),dead:!!S.dead,yr:yr.slice(0,Y),s5:snap5,s10:snap(),tally:Object.assign({},tally),kh:Object.assign({},window.__khN||{}),rt:Object.assign({},window.__rtN||{}),
+    const ag=[];out.push({why:S.dead?window.__why:'',years:Math.floor((S.turn||0)/12),dead:!!S.dead,yr:yr.slice(0,Y),s5:snap5,s10:snap(),tally:Object.assign({},tally),kh:Object.assign({},window.__khN||{}),rt:Object.assign({},window.__rtN||{}),
      me:{age:S.age,kh:typeof khOf==="function"?khOf(S):100,cap:typeof sucCap==="function"?sucCap(S):100,kids:S.kids.length},npc:liveRivals(true).map(v=>[v.age,typeof khOf==="function"?khOf(v):100,typeof sucCap==="function"?sucCap(v):100,v.suc,(v.kids||[]).length])})}
    window.render=r0;return out},[Math.min(CH,LIVES-done),YEARS]);
   lives.push(...part);await ctx.close();console.error("lives",lives.length)}
