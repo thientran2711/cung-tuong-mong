@@ -15,6 +15,17 @@ function v267(){return !!(S&&S.st&&S.st.v2)}
 function th67(i){return v267()?(i==="m"?S.st.M:(S.st.X||[])[i]):null}
 function thAll67(){return v267()?[S.st.M].concat(S.st.X||[]).filter(Boolean):[]}
 function thKey67(t){return t===S.st.M?"m":(S.st.X||[]).indexOf(t)}
+/* story position (owner 15/11 20:30Z): every story progress label shows the CHAPTER and the ACT, "Chương 2 · Hồi 3/4" (lab67).
+   Main line: chapter = A.chap; an old save without it takes the chapter count S.st.ch.n, else Chương 1. Hồi = the act she is on
+   (A.i+1 of A.seq.length; a closed chapter = n/n). A phụ tuyến arc (old saves, S.st.X) is one chapter: act only. The old story
+   from before chapters (no S.st.v2): Chương 1 · Hồi step+1/n. A milestone chapter (S.st.ms, a checklist) has no acts: Chương only. */
+function pos67(A){const st=S&&S.st;if(!st)return null;
+ if(!v267()){const s=STORY[S.origin&&S.origin.k],n=(s&&s.n)||0;return{c:1,i:n?Math.min((st.step||0)+(st.done?0:1),n):0,n}}
+ if(A===undefined){if(st.ms&&st.ch)return{c:st.ch.n||1,i:0,n:0};A=st.M}
+ if(!A)return st.ch&&st.ch.n?{c:st.ch.n,i:0,n:0}:null;
+ const n=A.seq?A.seq.length:0,i=A.done?n:Math.min((A.i||0)+1,n),side=A!==st.M&&(st.X||[]).includes(A);
+ return{c:side?0:(A.chap||(st.ch&&st.ch.n)||1),i,n,side}}
+function lab67(A){const p=pos67(A);if(!p)return"";return [p.c?`Chương ${p.c}`:"",p.n?`Hồi ${p.i}/${p.n}`:""].filter(Boolean).join(" · ")}
 function storyBusy(){try{return v267()&&(S.st.bm===S.turn||Q.some(m=>m.pid==="j67"))}catch(e){return false}}
 window.storyBusy=storyBusy;
 /* ---------- history (per origin and shared "*") ---------- */
@@ -130,7 +141,7 @@ function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a
  const sure=odds>=100,ok=sure||roll(odds);if(!sure){ap67(ok?o.w:o.l);if(ok&&o.sc)A.sc+=o.sc;if(!ok&&o.sf)A.sc=Math.max(0,A.sc+o.sf)}else{ap67(o.w);if(o.sc)A.sc+=o.sc}
  if(ok&&o.f)A.f[o.f]=1;if(!ok&&o.ff)A.f[o.ff]=1;let extra="";try{if(o.go)extra=o.go(A,ok)||""}catch(e){console.error(e)}
  const said=fill67(ok?(o.rt||""):(o.rf||""),A);
- log(`<b>${a.t}</b>: ${sure?"":ok?'<span class="g">Thành.</span> ':'<span class="r">Hỏng.</span> '}${said}${" "+fmt(sure?o.w:ok?o.w:o.l)}${extra?" "+extra:""}`);
+ log(`<b>${lab67(A)} · ${a.t}</b>: ${sure?"":ok?'<span class="g">Thành.</span> ':'<span class="r">Hỏng.</span> '}${said}${" "+fmt(sure?o.w:ok?o.w:o.l)}${extra?" "+extra:""}`);
  A.hist.push(`${fill67(b.l||b.h||"",A)}: ${fill67(o.n,A)}${sure?"":ok?" (thành)":" (hỏng)"}`);A.used.push(bid);A.cur=null;A.i++;
  const end=o.e?(Array.isArray(o.e)?(ok?o.e[0]:o.e[1]):o.e):null;
  if(end){end67(A,end);return}
@@ -183,7 +194,7 @@ if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(
 function msName67(x){return x.a?ARC67[x.a].t:x.t}
 function obj67(){const c=S.st&&S.st.ch,A=S.st&&S.st.M,m=S.st&&S.st.ms;if(!c)return"";
  if(m){const d=MS67[m.id];const nx=d.steps(m).find(x=>!x[1]);return `Chương ${c.n}/${c.max} «${d.t()}»: ${nx?nx[0]:"sắp xong"}`}
- if(c.all)return `Mệnh truyện trọn vẹn: ${c.fin||""}`;if(!A)return"";return `Chương ${A.chap||1}/${c.max} «${ARC67[A.a].t}»: ${hint67(A)}`}
+ if(c.all)return `Mệnh truyện trọn vẹn: ${c.fin||""}`;if(!A)return"";return `${lab67(A)} «${ARC67[A.a].t}»: ${hint67(A)}`}
 function thRows67(A,row){const a=ARC67[A.a];const n=A.seq.length,i=A.done?n:A.i;
  return rows67([["Mục tiêu",fill67(a.g,A)],["Tiến độ",`Đã qua ${i}/${n} hồi · còn ${n-i}`],["Lợi thế",`${A.sc} · mỗi phần thêm cơ may ở hồi cao trào`],["Đã qua",A.hist.join("<br>")],A.done?["Kết cục",A.tag,A.done===1?"g":A.done===-1?"r":""]:["Kế tiếp",hint67(A)]])}
 function panel67(){const row=(a,b)=>`<div class="pcrow"><span>${a}</span><span>${b}</span></div>`;const c=S.st.ch,M=S.st.M,Q0=QUEST67[S.origin.k]||QUEST67.tt;
@@ -192,8 +203,8 @@ function panel67(){const row=(a,b)=>`<div class="pcrow"><span>${a}</span><span>$
  if(c&&c.done)h+=rows67([["Kết cục xuất thân",c.fin,S.st.done===1?"g":"r"]]);
  const m=S.st.ms;if(m&&c){const d=MS67[m.id],st=d.steps(m);h+=`<h3>Chương ${c.n}/${c.max}: ${d.t()}</h3>`+rows67([["Mục tiêu",d.g()],["Các bước",st.map(x=>(x[1]?"✓ ":"✗ ")+x[0]).join("<br>")],["Tiến độ",`Xong ${st.filter(x=>x[1]).length}/${st.length} bước`]])}
  else if(c&&c.all)h+=rows67([["Chính tuyến","Đã đi hết các chương","g"]]);
- else if(M)h+=`<h3>Chương ${M.chap||1}/${c?c.max:6}: ${ARC67[M.a].t}</h3>`+thRows67(M,row);
- const X=S.st.X||[];if(X.length)h+=`<h3>Phụ tuyến</h3>`+X.map(A=>`<h3>${ARC67[A.a].t}</h3>`+thRows67(A,row)).join("");
+ else if(M)h+=`<h3>${lab67(M)}: ${ARC67[M.a].t}</h3>`+thRows67(M,row);
+ const X=S.st.X||[];if(X.length)h+=`<h3>Phụ tuyến</h3>`+X.map(A=>`<h3>${ARC67[A.a].t} · ${lab67(A)}</h3>`+thRows67(A,row)).join("");
  else h+=`<p class="past">Phụ tuyến (người thân thất lạc, mật thư, hỏa hoạn, sứ thần...) có thể mở về sau.</p>`;
  return h}
 (function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="story"&&v267()&&!(typeof isSrv==="function"&&isSrv())){const el=$("panel"),s=el.querySelector(".story");if(s&&!el.querySelector(".st67")){s.outerHTML=`<div class="st67">${panel67()}</div>`;kitFix(el)}}}catch(e){console.error(e)}return r}})();
@@ -1450,7 +1461,7 @@ ARC67.s_su={o:"*",ok:nsrv67,t:"Sứ thần phương Tây",w:"emp",sj:"sứ đoà
  p:[["s1","s2"],["c1","c2","c3","G.th","G.rival"],["t1"],["x1"]],
  B:{
  s1:{h:"Yến tiếp sứ",w:"emp",t:"Sứ thần tóc vàng cúi chào theo lối lạ. Cả yến lúng túng.",o:[
-  {n:"Đáp lễ theo lối của họ",c:{},o:45,w:{danh:4},sc:1,wx:"sứ thần quý ngươi",l:{th:-5},lx:"Thái hậu chê lạ",rt:"Sứ thần cười rạng rỡ.",rf:"Thái hậu chau mày."},
+  {n:"Đáp lễ theo lối của họ",c:{},o:45,w:{danh:4},sc:1,wx:"sứ thần có thiện cảm với ta",l:{th:-5},lx:"Thái hậu chê lạ",rt:"Sứ thần cười rạng rỡ.",rf:"Thái hậu chau mày."},
   {n:"Giữ lễ Đại Hy",c:{},w:{th:4},wx:"Thái hậu hài lòng",lx:"sứ thần ngượng",rt:"Lễ nghi đúng phép."}]},
  s2:{h:"Món quà kỳ lạ",w:"emp",t:"Sứ thần tặng ngươi một chiếc gương soi rõ từng sợi tóc.",o:[
   {n:"Dâng lên Thái hậu",c:{},w:{th:6},wx:"Thái hậu thích",lx:"không giữ được quà",rt:"Thái hậu soi mãi không chán."},
@@ -1753,7 +1764,7 @@ function msCheck67(){const m=S.st.ms,c=S.st.ch;if(!m||!c||!msDone67(m))return;co
  card67("result",`Chương ${c.n} khép lại`,[["Kết cục","Xong","g"],["Sự việc",d.end],["Thay đổi",fmt(d.fx)],R&&R.row],pMe(),d.t());S.st.ms=null;chAdvance67(null);syncMain67()}
 /* the "Mệnh truyện" card: the only way an arc chapter moves on (not while she is a servant: then beats come on their own) */
 function storyActs67(){if(!v267()||S.dead||S.out)return[];const A=S.st.M;if(!A||A.done||A.cur||!A.nb||S.turn<A.due||isSrv67()||Q.some(m=>m.pid==="j67"))return[];const b=beatDef67(A,A.nb);if(!b)return[];
- return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`Chương ${A.chap} «${ARC67[A.a].t}» · hồi ${A.i+1}/${A.seq.length} · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{suc:-5},o:100,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
+ return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{suc:-5},o:100,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
 Object.keys(STORY).forEach(k=>{Object.defineProperty(STORY[k],"acts",{get:()=>v267()?storyActs67:(STORY[k].__old||{}).acts,configurable:true,enumerable:true})});
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(v267()&&S.st.done&&deck)deck.push(...storyActs67())}catch(e){}return r}})();
 function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}catch(e){console.error(e)}
@@ -1773,14 +1784,14 @@ function hint67(A){if(!A)return"";if(A.done)return A.tag;const b=A.cur?beatDef67
 function obj67(){const c=S.st&&S.st.ch,A=S.st&&S.st.M,m=S.st&&S.st.ms;if(!c)return"";
  if(m){const d=MS67[m.id];const nx=d.steps(m).find(x=>!x[1]);return `Chương ${c.n} «${d.t()}»: ${nx?nx[0]:"sắp xong"}`}
  if(c.all)return "Đã đi hết các chương của mệnh truyện";if(!A)return"";
- return `Chương ${A.chap} «${ARC67[A.a].t}» · hạn còn ${Math.max(0,A.dl-S.turn)} tháng · ${hint67(A)}`}
+ return `${lab67(A)} «${ARC67[A.a].t}» · hạn còn ${Math.max(0,A.dl-S.turn)} tháng · ${hint67(A)}`}
 function panel67(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=QUEST67[S.origin.k]||QUEST67.tt;
  let h=`<div class="story"><h3>Mệnh truyện: ${Q0.t}</h3><p class="past" style="margin:0">Chính tuyến của kiếp này khoảng ${c?c.max:13} chương, từ ngày nhập cung đến ngày con ngươi lên ngôi Đông cung. Các phụ tuyến là việc nhờ, sự kiện, mưu sự ở các mục khác.</p></div>`
   +rows67([["Luật chương","Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức -5, 2 khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng."],["Nếu bỏ mặc","Quá hạn, chương tự khép ở kết cục xấu: mất Lợi thế, chịu thiệt của kết cục thua, Danh -3, kết cục xuất thân xấu đi. Không chết, đường lên ngôi Hoàng hậu vẫn mở.","r"],["Phần thưởng","thắng: đồ quý, hiếm hay trân phẩm theo truyện; vừa: đồ thường; thua: không"]]);
  if(c&&c.past.length)h+=`<h3>Các chương đã qua</h3>`+rows67(c.past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]));
  if(c&&c.done)h+=rows67([["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]]);
  if(m&&c){const d=MS67[m.id],st=d.steps(m);h+=`<h3>Chương ${c.n}: ${d.t()}</h3>`+rows67([["Mục tiêu",d.g()],["Các bước",st.map(x=>(x[1]?"✓ ":"✗ ")+x[0]).join("<br>")],["Tiến độ",`Xong ${st.filter(x=>x[1]).length}/${st.length} bước`],["Hạn","không có hạn"]])}
- else if(M){const a=ARC67[M.a],n=M.seq.length,i=M.done?n:M.i;h+=`<h3>Chương ${M.chap}: ${a.t}</h3>`+rows67([["Mục tiêu",fill67(a.g,M)],["Tiến độ",`Đã qua ${i}/${n} hồi · còn ${n-i}`],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],["Đã qua",M.hist.join("<br>")],["Kế tiếp",hint67(M)]])}
+ else if(M){const a=ARC67[M.a],n=M.seq.length,i=M.done?n:M.i;h+=`<h3>${lab67(M)}: ${a.t}</h3>`+rows67([["Mục tiêu",fill67(a.g,M)],["Tiến độ",`Đã qua ${i}/${n} hồi · còn ${n-i}`],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],["Đã qua",M.hist.join("<br>")],["Kế tiếp",hint67(M)]])}
  else if(c&&c.all)h+=rows67([["Chính tuyến","Đã đi hết các chương","g"]]);
  const nx=c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;if(nx)h+=`<p class="past">Còn khoảng ${nx} chương phía trước.</p>`;
  return h}
