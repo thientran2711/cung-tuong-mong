@@ -54,6 +54,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .tok:hover .md{transform:translateY(-2px)} .tok .md{transition:transform .15s}
 .tok .tag{font-size:.78rem;background:#fffaf0;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:1px 6px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .empty{color:var(--dim);font-size:.85rem;margin:0;background:#fffaf0cc;border-radius:6px;padding:2px 8px}
+#tokens>.empty{display:none}/* an empty room already says so in the room's visit line (.rmsg: "Không gặp ai."); this second copy sat over the room title at 844x390 */
 .pop{position:absolute;left:8px;right:8px;bottom:8px;max-height:calc(100% - 16px);overflow:auto;background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:8px;padding:8px 10px;z-index:3;box-shadow:0 6px 20px #5a3a2055}
 .ptop{display:flex;justify-content:space-between;align-items:center;gap:6px}
 .ptop b{font-family:var(--display);color:var(--gold)}

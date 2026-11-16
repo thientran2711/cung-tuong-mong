@@ -352,7 +352,7 @@ function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
   const snap={danh:S.danh,sung:S.sung,suc:S.suc,duc:S.duc,bac:S.bac,rank:S.rank,preg:S.preg||0,kids:(S.kids||[]).filter(x=>x.alive).length,cold:!!S.out,scar:!!S.scar};const e0=evG(S,a);const mo=motNow70(a);
   const used=[];let pre="";
   const tq=ordFor70(k,a).find(o=>o.k==="thudoc"&&!traitor70(sv70(o.sid)));
-  if(tq&&roll(30)){const s=sv70(tq.sid);evA(S,a,1);const died=k!=="huydung"&&roll(40);if(died&&tq.sid!=="maid"){S.staff.splice(S.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+5,0,100);
+  if(tq&&roll(30)){const s=sv70(tq.sid);evA(S,a,1);const died=k!=="huydung"&&roll(40);if(died&&tq.sid!=="maid"){S.staff.splice(S.staff.indexOf(s),1)}else s.loyal=cl((s.loyal||0)+5,0,100);try{if(k!=="huydung"&&!(died&&tq.sid!=="maid")&&typeof pzGive==="function"){pzGive(s,1,"nếm độc thay chủ",a,2);if(s.pz)s.pz.dx=1}}catch(e){}
    const n=note70({a,k,ok:false,mo,by:[`lệnh ${ORD70.thudoc.n.toLowerCase()} (${s.name})`],gain:evG(S,a)-e0,snap,body:k==="huydung"?`${s.name} thử hộp phấn trên tay trước, tay sưng phồng; phấn độc không chạm mặt ngươi.`:`${s.name} nếm trước bát thuốc, ${died&&tq.sid!=="maid"?"ngã gục, không qua khỏi":"đau bụng mấy ngày nhưng qua được"}; độc không đến miệng ngươi.`,known:true});return n}
   const gc=ordFor70(k,a).filter(o=>o.k==="giuchung"&&!traitor70(sv70(o.sid)));const e1=a.__err||0;if(gc.length)a.__err=e1+15;
   const SP=["ally","gift","spy"].includes(k)?[]:self70(a);const w0=window.__j70self;window.__j70self=SP.reduce((x,y)=>x+y.b,0);
@@ -382,7 +382,8 @@ function note70(o){const z=j70();const a=o.a,A=ACT[o.k];const who=o.known?title7
  for(const x of (o.self||[]))rows.push(`Tự ý giúp ngươi: ${x.t}${o.ok?", nhưng không ngăn được":""}.`);
  if(!o.ok&&o.by.length)rows.push(`Phòng bị đã chặn: ${o.by.join(", ")}.`);else if(!o.ok&&!(o.self||[]).length)rows.push("Không có lệnh phòng bị nào của ngươi dính vào; kẻ ấy tự hỏng việc.");
  if(o.gain>0)rows.push(G70(`Ngươi được: ${o.gain} chứng cứ về ${who} (chứng minh nàng ${what}); nay có ${ev}${ev>=need?", đủ để tố giác":`, cần ${need} để tố giác`}.`));
- if(lost.length)rows.push(R70(`Ngươi mất: ${lost.join(", ")}.`));
+ /* log-sync r1: a loss the body already states ("Sức -43") is not said twice (the Sổ ghi would count it twice) */
+ {const bt=String(o.body||"").replace(/<[^>]+>/g,"");const L2=lost.filter(x=>!bt.includes(x));if(L2.length)rows.push(R70(`Ngươi mất: ${L2.join(", ")}.`))}
  return rows.join(" ").trim()+" "}
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(r&&a&&a!==S&&t!==S)return String(r).replace(/\(sai ([^)]+) đi\)/,`(${a.name} sai $1 đi)`)}catch(e){}return r}})();
 /* ---------- data for the kit ---------- */

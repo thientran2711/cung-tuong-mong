@@ -194,9 +194,9 @@ function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o
    finger / a tap; the next sheet lies underneath, moving a little slower (parallax) and brightening as it is uncovered; a soft paper-edge shadow
    follows the sliding edge. Same call shape and return value as kitSheetTurn (p 0 = flat, 1 = slid off to the left; p 1→0 slides it back in),
    so every caller (j87 kitBook, kitCurlSwap) uses it unchanged: kitSheetTurn({...,slide:true}). Reuses the kitSheetTurn CSS classes (no new CSS);
-   per frame only transform / opacity change (compositor). kitPortrait() decides; KIT_SLIDE_MS is the one slide duration (button / tab tap). */
+   per frame only transform / opacity change (compositor). kitIsPortrait() decides; KIT_SLIDE_MS is the one slide duration (button / tab tap). */
 const KIT_SLIDE_MS=300;
-function kitPortrait(){try{return matchMedia("(orientation: portrait)").matches}catch(e){return innerHeight>innerWidth}}
+function kitIsPortrait(){try{return matchMedia("(orientation: portrait)").matches}catch(e){return innerHeight>innerWidth}}
 function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
  const root=document.createElement("div");root.className="ksht ksht-slide"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;overflow:hidden`;
@@ -247,7 +247,7 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
  /* The sheet is opaque paper on both faces and is CLIPPED at the spine (vanish): it lifts off the page, stands up at the spine and is
     gone there — it never lies over the picture page (iPad) or off the screen (phone) and never fades (owner 11/15 02:40Z). */
- const sl=kitPortrait(),MS=opt.ms||(sl?KIT_SLIDE_MS:KIT_TURN_MS),EZ=sl?kitSlideEase:kitTurnEase;   /* portrait: the paper slide (no book to turn), landscape: the sheet turn */
+ const sl=kitIsPortrait(),MS=opt.ms||(sl?KIT_SLIDE_MS:KIT_TURN_MS),EZ=sl?kitSlideEase:kitTurnEase;   /* portrait: the paper slide (no book to turn), landscape: the sheet turn */
  let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0,slide:sl})
                     :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1,slide:sl})}catch(e){console.error(e)}
  run();try{kitImgSync(el)}catch(e){}
@@ -351,9 +351,21 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
      cap  : small caption plaque under the plate (place / name, illustration caption only). slots: try-on slots beside the figure. */
 kitBookSpread.wantsPic=host=>{const W=(host&&host.clientWidth)||innerWidth,H=(host&&host.clientHeight)||innerHeight;return W>=900&&W/H>=1.15};
 function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.feet:.94;
- const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="sync" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||(window.KIT_FIG?KIT_FIG.h:.86)};--fz:${f.z||i+2}">`).join("");
+ /* KIT 34.6: every figure (real or silhouette) is sized by kitBookPicFit — the one body rule; f.h is ignored (kept only so old callers do not break); f.age = child factor */
+ const figs=(o.figs||[]).map((f,i)=>{let fac=1;try{fac=KIT_FIG.fac(f.src,f.age)}catch(e){}return `<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="sync" data-fac="${fac}" style="--fx:${f.x!=null?f.x:.5};--fz:${f.z||i+2};visibility:hidden">`}).join("");
  const slots=o.slots&&o.slots.length?`<div class="kbp-slots">${o.slots.map(s=>`<div class="kbp-slot${s.img?"":" empty"}"><span class="kbp-sim">${s.img?`<img src="${s.img}" alt="">`:""}</span><b>${s.label}</b>${s.n?`<small>${s.n}</small>`:""}</div>`).join("")}</div>`:"";
  return `<div class="kbp${o.plate===false?" bleed":""}" style="--ax:${ax};--feet:${feet}"><div class="kbp-plate"><div class="kbp-scene" style="background-image:url('${o.scene||""}')"></div><div class="kbp-figs">${figs}</div>${slots}</div>${o.cap?`<div class="kbp-cap">${o.cap}</div>`:""}</div>`}
+
+/* kitBookPicFit(scope): sizes every .kbp-fig by its BODY (kitBookFig, KIT 34.6): the same body height for every figure of the plate (real or "unknown" silhouette),
+   feet on the --feet line, true aspect; a figure not measured yet stays hidden. Runs on load, on plate resize and when a page is built (observer below). */
+function kitBookPicFit(scope){try{(scope||document).querySelectorAll(".kbp-fig").forEach(im=>{const pl=im.closest(".kbp-plate");if(!pl)return;const H=pl.clientHeight;if(H<40)return;
+  const b=kitFigBody(im.getAttribute("src"),()=>requestAnimationFrame(()=>kitBookPicFit()));if(!b)return;
+  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:b.ar,g=kitBookFig(Object.assign({},b,{ar}),(parseFloat(im.dataset.fac)||1),H,{stage:1});
+  im.style.height=g.ih.toFixed(1)+"px";im.style.width=g.iw.toFixed(1)+"px";im.style.transform=`translate(-50%,${g.dy.toFixed(1)}px)`;im.style.visibility="";im.dataset.kbody=g.body.toFixed(1)})}catch(e){}}
+window.kitBookPicFit=kitBookPicFit;
+(function(){let q=0;const soon=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitBookPicFit()})};
+ try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbp,.kbp-fig")||n.querySelector&&n.querySelector(".kbp-fig")))))soon()}).observe(document.body||document.documentElement,{childList:true,subtree:true})}catch(e){}
+ addEventListener("resize",soon);document.addEventListener("load",e=>{if(e.target&&e.target.classList&&e.target.classList.contains("kbp-fig"))soon()},true)})();
 
 (function(){const st=document.createElement("style");st.id="jbook-css";st.textContent=`
 /* paper skin (KIT §34.1): warm paper, faint fibres, edge tint */
@@ -420,8 +432,8 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 .kbp-scene{position:absolute;inset:0;background-size:cover;background-position:calc(var(--ax) * 100%) 100%;filter:saturate(.92)}
 .kbp-plate::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 45%,transparent 55%,#2a160840);mix-blend-mode:multiply}
 .kbp-figs{position:absolute;inset:0;z-index:2}
-.kbp-fig{position:absolute;bottom:calc((1 - var(--feet)) * 100%);left:calc(var(--fx) * 100%);height:calc(var(--fh) * 100%);width:auto;max-width:none;transform:translateX(-50%);z-index:var(--fz);filter:drop-shadow(0 6px 6px #0005)}
-.kbp-fig.dim{filter:brightness(.92) drop-shadow(0 4px 4px #0004);opacity:.92}
+.kbp-fig{position:absolute;bottom:calc((1 - var(--feet)) * 100%);left:calc(var(--fx) * 100%);height:calc(var(--kfig,.79) * 100%);width:auto;max-width:none;transform:translateX(-50%);z-index:var(--fz);filter:url(#kfa) drop-shadow(0 6px 6px #0005)}
+.kbp-fig.dim{filter:url(#kfa) brightness(.92) drop-shadow(0 4px 4px #0004);opacity:.92}
 .kbp-cap{flex:0 0 auto;align-self:center;font-family:var(--display);font-size:clamp(.82rem,1.6vw,1rem);color:var(--rule,#9a2c1c);background:#fffaf0d9;border:1px solid #9a2c1c66;border-radius:4px;padding:.2em .9em;margin-bottom:2px;letter-spacing:.03em;max-width:92%;text-align:center}
 .kbp-slots{position:absolute;z-index:4;right:3%;top:4%;display:flex;flex-direction:column;gap:8px}
 .kbp-slot{display:flex;flex-direction:column;align-items:center;gap:2px;width:clamp(64px,13vw,92px);background:#fffaf0e6;border:1px solid #9a2c1c88;border-radius:6px;padding:6px 4px 5px;box-shadow:0 3px 8px #0005;text-align:center}
