@@ -3546,8 +3546,8 @@ function palSolo(p){return !!p&&(p.queen||rkOf(p)>=6)}
 (function(){const a0=assignHouses;assignHouses=function(){palFix()}})();
 /* where a house lives on the plan */
 function palSlot(k){if(k==="home")return S.pal!=null?S.pal:null;if(k&&k[0]==="r"){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}return null}
-function palName(k){if(k==="home")return S.pal!=null?PALN[S.pal]:HOMEN;if(PLNAME[k])return PLNAME[k][0];const i=palSlot(k);if(i!=null)return PALN[i];const h=k&&k[0]==="r"&&RV(+k.slice(1));return h?`thiên điện của ${h.name}`:k}
-function palFn(k){if(k==="home")return "tẩm cung của ngươi";if(PLNAME[k])return PLNAME[k][1];const h=k&&k[0]==="r"&&RV(+k.slice(1));return h?`cung ${RANKS[h.rank].n} ${h.name}`:""}
+function palName(k){if(k==="home")return S.pal!=null?PALN[S.pal]:HOMEN;if(PLNAME[k])return PLNAME[k][0];const i=palSlot(k);if(i!=null)return PALN[i];const h=k&&k[0]==="r"&&RV(+k.slice(1));return h?`thiên điện của ${j78who(h)}`:k}
+function palFn(k){if(k==="home")return "tẩm cung của ngươi";if(PLNAME[k])return PLNAME[k][1];const h=k&&k[0]==="r"&&RV(+k.slice(1));return h?`cung ${j78who(h)}`:""}
 function residents(k){const L=[];if(k==="kn"){const q=rivals.find(v=>v.queen&&v.alive&&!v.out);if(q)L.push(q)}
  for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(k!=="kn"&&p.queen)continue;const pk=palaceOf(p);if(pk===k&&!L.includes(p))L.push(p)}
  return L.sort((a,b)=>rkOf(b)-rkOf(a))}
@@ -3558,7 +3558,7 @@ function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));return k===
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
  const seen={};for(const v of rivals){if(!v.alive||v.out||v.queen)continue;const k=palaceOf(v);if(k==="home"||k==="kn"||seen[k])continue;seen[k]=1;const hd=RV(+k.slice(1));const R2=residents(k);
-  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+RANKS[hd.rank].n+" "+hd.name:"Ở thiên điện"}${R2.length>1?" · thiên điện: "+kitNameList(R2.filter(x=>x!==hd)):""}.`,sc:"rv",v:hd}) }
+  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+j78who(hd):"Ở thiên điện"}${R2.length>1?" · thiên điện: "+kitNameList(R2.filter(x=>x!==hd)):""}.`,sc:"rv",v:hd}) }
  return L}})();
 (function(){const p0=placeOf;placeOf=function(k){if(k==="home"){const R2=residents("home").filter(x=>x!==S);return{k,n:palName("home"),fn:"tẩm cung của ngươi",d:`Cung nữ và các con ở đây.${R2.length?" Thiên điện: "+kitNameList(R2)+".":""}`,sc:"home"}}return p0.apply(this,arguments)}})();
 /* the ceremony card when she first heads a palace: the Emperor grants the best empty one; she may ask for another */
@@ -11058,9 +11058,9 @@ const K61FACE=["help","visit","warn","provoke","humiliate","test","ally","feign"
   if(a===S&&t&&(rivals||[]).includes(t))npcLearn(t,S);if(t===S&&a&&a!==S&&["ally","gift"].includes(k)&&S.known&&!k61Named(a))k61Know(a,"Nàng tự tìm đến ngươi.",true)}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{k61Week()}catch(e){}return r}})();
 /* ---- names of strangers never reach the screen: every text node is rewritten to the descriptor ---- */
-const K61T="(?:(Hoàng hậu|Hoàng quý phi|Quý phi|Phế phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) )?";let K61RX=null,K61RV=-1,K61RT=0,K61MAP={};
+const K61T="(?:(Hoàng hậu|Hoàng quý phi|Quý phi|Phế phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) )?";let K61RX=null,K61RN=-1,K61RV=-1,K61RT=0,K61MAP={};
 function k61Vars(e){const n=e&&e.name;if(!n||typeof n!=="string")return[];const w=n.split(" ").filter(Boolean);const V=[n];if(w.length>=3){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}return V.filter(x=>x.length>=4&&x.split(" ").length>=2)}
-function k61Table(){if(!S||!S.known)return null;const now=Date.now();if(K61RX&&K61RV===K61VER&&now-K61RT<1500)return K61RX;K61RV=K61VER;K61RT=now;
+function k61Table(){if(!S||!S.known)return null;const now=Date.now();const rn=(rivals||[]).length;if(K61RX!==null&&K61RV===K61VER&&K61RN===rn&&now-K61RT<1500)return K61RX;K61RV=K61VER;K61RT=now;K61RN=rn;/* name-mask: a new consort (tuyển tú, a maid promoted) is in the table the same tick */
  const M={},prot=new Set();const ents=k61All();ents.push(S);
  for(const e of ents){const kn=k61Named(e);for(const v of k61Vars(e)){if(kn){prot.add(v);M[v]=null}else if(!(v in M))M[v]=kOf61(e)}}
  for(const v of prot)M[v]=null;const keys=Object.keys(M).filter(v=>M[v]||prot.has(v));if(!keys.some(v=>M[v])){K61RX=false;return false}
@@ -11071,18 +11071,20 @@ function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
  if(k==="off")return(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan";if(k==="kid")return e.sex==="m"?"Hoàng tử":"Công chúa";
  if(k==="man"){const r=e.role;return r&&!/^(Công tử|Nam nhân)$/i.test(r)?r:"công tử"}return"người"}
-function k61Mask(e,before){const t=k61MaskT(e);const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
+function k61Mask(e,before,plain){const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
 /* public announcements (thẻ bài lật, sớ hặc tội at court, thánh chỉ, tấn phong / giáng / phế, births): everyone named in them
    becomes known by name and title (stage 2) the moment it is announced */
-const K61ANN=/thẻ bài của|sớ hặc tội|thánh chỉ|sắc phong|tấn phong|được phong|lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
+const K61ANN=/thẻ bài của|sớ hặc tội|thánh chỉ|sắc phong|tấn phong|được phong|phong (?:Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) |lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
 function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=String(text).replace(/<[^>]+>/g," ");if(!K61ANN.test(t))return false;const L=[];
  for(const e of k61All()){if(k61Named(e))continue;if(k61Vars(e).some(v=>t.includes(v)))L.push(e)}if(L.length){k61Know(L,"",true,2);K61RX=null}return L.length>0}catch(e){return false}}
-(function(){const l0=log;log=function(h){try{k61Announce(h)}catch(e){}return l0.apply(this,arguments)}})();
-function k61Scrub(s,lead,prev,ann){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
+/* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
+   never prints as a raw name ("Hà Thục Lan sang cung ngươi thăm hỏi" -> "Một vị Tần chưa quen biết sang cung ngươi thăm hỏi"); announcements first */
+(function(){const l0=log;log=function(h){try{k61Announce(h);if(typeof h==="string"&&S&&S.known)h=k61Scrub(h,true,"",h,true)}catch(e){}return l0.call(this,h)}})();
+function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
-  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before);
-  const capit=/^\s*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
+  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
+  const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;
   const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
@@ -11304,7 +11306,7 @@ function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq|
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
 function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
- const per=[];/* [who, goodParts, badParts] */
+ const per=[];const U={g:0,b:0};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
   let da=a-b.a,lo=b.a,hi=a;if(v===q&&q!==S&&before.hh!=null){const dh=(S.hh||0)-before.hh;if(dh){skip.add("hh");if(!da){da=dh;lo=before.hh;hi=S.hh||0}}}
   /* hotfix 11/15: the real before→after, never the bare word "thiện cảm" */
@@ -11312,7 +11314,8 @@ function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length)per.push([kaWho(v),gp,bp])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */U.g+=gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t))?1:0;U.b+=bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t))?1:0}}}
+ {const un=(n,w)=>`${n} vị chưa quen biết`;if(U.g)per.push([un(U.g),["quý ngươi hơn"],[]]);if(U.b)per.push([un(U.b),[],["ghét ngươi hơn"]])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[]]);continue}
   (d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`)}
@@ -11399,7 +11402,7 @@ function kaTimeNeeds(c,bacCost){const L=[];const left=4-used;L.push(j76need(c,wi
    Public API for the kit: intelOf(p), evidenceOf(p), evidenceActs(p), evidenceDo(id,k), evidenceHeldOnMe(), j78Ref(p).
    ============================================================================================================= */
 const J78={cur:null,ctx:null,seq:0};
-function j78who(p){if(!p)return"";if(p===S)return"ngươi";if(p.alive===undefined&&p.name)return p.name;try{if(typeof kitKnownName==="function"&&typeof k61Mask==="function"&&p.rank!=null&&!kitKnownName(p))return k61Mask(p)}catch(e){}/* unmet consort: "<tước> ???" (reign-road-fix-r1) */return `${rkName(p)} ${p.name}`}
+function j78who(p){if(!p)return"";if(p===S)return"ngươi";if(p.alive===undefined&&p.name)return p.name;try{if(typeof kitKnownName==="function"&&typeof k61Mask==="function"&&p.rank!=null&&!kitKnownName(p))return k61Mask(p,"",true)}catch(e){}/* unmet consort: "một vị <tước> chưa quen biết" (name-mask; was "<tước> ???") */return `${rkName(p)} ${p.name}`}
 function j78Who(p){const s=j78who(p);return s?s[0].toUpperCase()+s.slice(1):s}
 function j78when(){return `T${S.month}/${S.year} ${TUAN[S.tuan]}`}
 /* a person reference the kit renders (title coloured by rank + face) */
@@ -37236,7 +37239,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fb94c85dad36";window.CTM_BUILD=BUILD;
+const BUILD="566da08d3be8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -10,7 +10,7 @@
    Public API for the kit: intelOf(p), evidenceOf(p), evidenceActs(p), evidenceDo(id,k), evidenceHeldOnMe(), j78Ref(p).
    ============================================================================================================= */
 const J78={cur:null,ctx:null,seq:0};
-function j78who(p){if(!p)return"";if(p===S)return"ngươi";if(p.alive===undefined&&p.name)return p.name;try{if(typeof kitKnownName==="function"&&typeof k61Mask==="function"&&p.rank!=null&&!kitKnownName(p))return k61Mask(p)}catch(e){}/* unmet consort: "<tước> ???" (reign-road-fix-r1) */return `${rkName(p)} ${p.name}`}
+function j78who(p){if(!p)return"";if(p===S)return"ngươi";if(p.alive===undefined&&p.name)return p.name;try{if(typeof kitKnownName==="function"&&typeof k61Mask==="function"&&p.rank!=null&&!kitKnownName(p))return k61Mask(p,"",true)}catch(e){}/* unmet consort: "một vị <tước> chưa quen biết" (name-mask; was "<tước> ???") */return `${rkName(p)} ${p.name}`}
 function j78Who(p){const s=j78who(p);return s?s[0].toUpperCase()+s.slice(1):s}
 function j78when(){return `T${S.month}/${S.year} ${TUAN[S.tuan]}`}
 /* a person reference the kit renders (title coloured by rank + face) */
