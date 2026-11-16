@@ -5,7 +5,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | Item | Branch | Model | State |
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
-| C41 tuduc-mg | review/tuduc-mg @c859d8b4 | sonnet | RUNNING (finisher: Dung scores 0 under bot, missing viewports) |
+| C41 tuduc-mg | review/tuduc-mg @3af1d2c4 | sonnet | REVIEWING (review/tuduc-mg-r1, sonnet) |
 | C24 chapter-detail | review/chapter-detail @e46ea012 (contains tutorial-r2) | sonnet | REVIEWING (review/chapter-detail-r1, sonnet) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
@@ -82,6 +82,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - KIT REQUEST (C24 chapter-detail, optional): kitGoalDetail/kitModal head art can't show the chapter's own cover or each hồi's picture (head = tutorial-r2 art(); hồi pictures are in kitSkillCard cards) — add if the owner wants the chapter cover in the head.
 - KIT REQUEST (D33 routes-port): (1) register category loi-rieng «Lối riêng» #2c6e5a in the §6.1 legend (jroute adds it at runtime, as on the owner-approved branch); (2) «MƯU» seal for the shared mini-game frame (blood-test tampering game shows «TÀI NGHỆ»; also needed by D34 scheme games). New shared art img/kit/mg-nghiem-bowl.webp. Pre-existing main bug: Mệnh truyện sub-tab row .ktsub.kcattabs (z-index 6) draws over the «Kiếp này» end-of-life dialog (same family as the .kpbar kcattabs note above).
 - KIT REQUEST (D34 scheme-games-port): (1) «MƯU» seal (lacquer red #7a2a22) via kitGameFrame({seal}) — same as D33's request; (2) custom HUD labels on kg82Open/kitGameFrame (Bóng/Hồi/Còn for Nghe ngóng); (3) painted boards for nghe/truyen/mac/thoico — old branch reused act-binh-phong, ev-tin-don, ev-hoi-lo, tam-cung-dem via an "@path" board loader (keeper decides). Main issue seen: the one-time "Kiếp này chưa trọn" warning fires on ANY option whose text mentions death (e.g. "bị đánh chết").
+- Shared mini-game guard (found by C41): j82 kg82Play ends any game after 97.5 s real time (env.end(0)); games with a clamped frame time run slower than real time on weak devices and can end at raw 0. jtd.js now uses a real-time clock; other clamped-dt games may still hit it — keeper/owner of j82 to check.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
