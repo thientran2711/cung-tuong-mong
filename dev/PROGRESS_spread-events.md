@@ -107,3 +107,70 @@ Reviewer fixes in dev/build/jspread.js:
   Now such a card gets end = the last buổi of its tuần (due never later; forced at that buổi). After: 0 of 83 (sens 8), 0 (rand 8).
   Festival-day titles (" · Lời mời", " · Lễ", " · Thi ", "Tết/Tiết/Lễ/Hội …") are in SP13DAY too.
 - Fallback numbers (||2, ||4, :2) removed: the cap / maxWait / codeWait read BAL.spread only (OD:L1267 one core).
+
+## Fix pass r2 (review/spread-events-r2, after reviewer FAIL r1)
+Start: review/spread-events-r1 af64214f (reviewer fixes a + b kept). Merged origin/main **ee5d33de** (assemble: main's list + jk95 after jk2b,
+j95/j95b/j95c/jqsave/jspread before jkpc; new main modules after jspread: jact2/jeitem wrap endTurn only, run inside nextBuoi → planned; no new
+Q-length gate). schedules3: review/schedules3-r3 (ec649e19) = r2 4ea772f3 + an older main merge, no new code → nothing to rebase on.
+
+### FAIL 1 — the whole family of queue-length gates (LUẬT SỬA CẢ NHÓM)
+Scan (`grep -nE 'Q\.length *[<>]=? *[0-9]' dev/build/j*.js`, absolute gates in code that runs inside a buổi change):
+| module | gate | fixed by |
+|---|---|---|
+| j70 show70 | Q>2 (not urgent) | root fix below |
+| j68 e68Tick | Q>2 | root fix |
+| j72 q72Tick | Q>3 | root fix |
+| jpet petMonth | Q>2 | root fix |
+| jkc kcWeek | Q>2 | root fix (kcEndTurn; the gate sees the same queue ON/OFF) |
+| jthaiy routine | Q<3 | root fix |
+| j71 merit (endTurn) | Q<=5 | root fix |
+| jreign q72Tick wrap | Q<=1 | root fix |
+| j3 dilemma | Q===qStart (relative) | not affected (counts cards added in this endTurn) |
+Cause: without D13 the first showModal of the change already sifts the queue (j68 evGate holds/drops the extra optional cards, j95b drops false
+warnings), and from then on the modal is open, so callers skip or re-call showModal. D13 blocked that showModal, so every gate saw the unsifted pile.
+Root fix (dev/build/jspread.js + one parameter in j68): a blocked showModal during the change runs `sp13Pre()` = `evGate(1)` (dry: holds/drops
+as at a real show, marks nothing shown) + `j95bPurgeWarn(0)`, and from the first card `SP13.vo` makes the modal READ as open to game code
+(instance getter on #modal.hidden, JS only: no DOM change, nothing painted; cleared when the outermost nextBuoi returns), so the sifting runs at
+the same calls as without D13. Every gate (present and future) now sees the same queue as without D13; D13 only paces afterwards.
+Measure tools: spread_hist.js counts cards per generator, the Q length at each gate, and the reviewer's count (show70 called with a pending
+seen/warn plot and stopped by its Q gate); it now reads the REAL modal state (realHid). kcbot.js counts kcWeek cards (OFF=1).
+
+### Per-generator table (cards created per 100 tuần; sens bots, merged build, shards 3+2+5 = 24 lives, 864 tuần each side; "before" = r1 build, shards 2+5, 576 tuần)
+| generator | OFF | ON before fix (r1) | ON after fix (r2) |
+|---|---|---|---|
+| j68 e68Tick | 13.1 (113) | 2.3 (13) | 13.0 (112) |
+| j70 show70 (all j70 beats) | 15.9 (137) | 8.2 (47) | 19.0 (164) |
+| j70 "seen" (Mưu hại: she learns a plot targets her) | 5.9 (51) | 1.4 (8) | 8.1 (70) |
+| j70 aftermath / serv | 8.3 / 1.5 | 6.6 / 0.2 | 8.7 / 2.0 |
+| j71 merit | 4.6 (40) | 6.6 (38) | 5.6 (48) |
+| jpet petMonth | 1.0 (9) | 2.1 (12) | 1.9 (16) |
+| jthaiy routine | 22.5 (194) | 23.3 (134) | 22.9 (198) |
+| j3 dilemma | 13.5 (117) | 12.2 (70) | 13.4 (116) |
+Gate inputs (share of gate calls that pass): e68Tick Q<=2 OFF 66 % / before 12 % / after 67 %; show70 Q<=2 41 % / 7 % / 47 %; petMonth 13 % / 10 % / 13 %.
+Reviewer's count (s2+s5): show70 with a pending seen/warn plot stopped by the Q gate: OFF 50 of 202 (25 %), before 95 of 249 (38 %), after 56 of 234 (24 %).
+Pre-merge runs (base b85cdb1e, 3 sens runs + q72 on, 846–864 tuần each): e68Tick 71 / 24 / 104, show70 136 / 63 / 121, seen 57 / 7 / 37,
+q72Tick 40 / 18 / 46 (gate Q<=3: 62 % / 35 % / 64 %), jreign 13 / 1 / 12. rand (shard 4, ~190 tuần): show70 29 / 5 / 29, e68 23 / 2 / 11.
+Counts after the gate also depend on evBusy / rolls / plots (trajectory); they move both ways between runs (seen: 57→37 before merge, 51→70
+after) — within noise. The gate inputs match.
+kcWeek (kcbot sens, 18 home-road lives each): OFF 471 cards / 1233 weeks (38.2 per 100), ON 427 / 1227 (34.8). Within noise.
+
+### FAIL 2 — tables on the merged build (ee5d33de + r2)
+World cards shown per buổi, mean / buổi with 3+ (sáng · trưa · chiều · tối):
+| run | lives/tuần | sáng · trưa · chiều · tối | lost | late | early | page err |
+|---|---|---|---|---|---|---|
+| sens s3 OFF | 8/288 | 3.09 / 56.7 % · 0.44 / 0 · 0.52 / 0 · 0.47 / 0 | 0 | 0 | 0 | 0 |
+| sens s3 ON r2 | 8/288 | 1.53 / 0.7 % · 1.01 / 0 · 0.96 / 0.7 % · 0.87 / 4.9 % | 0 | 0 | 0 | 0 |
+| sens s2 OFF / r1 / r2 | 8/288 | sáng 3.19/54.5 % → 1.05/3.7 % → 1.60/1.0 %; tối 0.51/1.0 % → 1.10/13.5 % → 1.03/8.3 % | 0 | 0 | 0 | 0 |
+| sens s5 OFF / r1 / r2 | 8/288 | sáng 3.20/58.2 % → 1.06/4.4 % → 1.62/0 %; tối 0.52/0.3 % → 1.14/12.8 % → 0.90/4.5 % | 0 | 0 | 0 | 0 |
+| rand s4 OFF / r2 | 8/117 · 8/245 | sáng 1.54/19.2 % → 1.10/0 %; tối 0.20/0 → 0.60/2.4 % | 0 / 210* | 0 | 0 | 0 |
+*rand "lost" = cards of lives that ended TIMEOUT: the bot is stuck on main's "Dò la: Nghe ngóng" minigame overlay (state dump: `ov` = that
+minigame's intro, Q holds released cards). Not D13 (reviewer saw the same on main with D13 off); harness/bot issue for main.
+sáng mean rises vs r1 (1.05 → 1.6) because the generators make their normal number of cards again; buổi with 3+ stay ≤ 1 %.
+**tối 3+ (reviewer's 6–10.7 %)**: r1 12.8–13.5 % → r2 4.5–8.3 % (OFF 0–1 %). Of the sampled tối 3+ buổi (64): 54 are festival days (fixed-day
+must cards "· Lời mời / · Thi / · Lễ", never dropped), the rest carry a morning card that waited the whole day (Kỳ nguyệt sự, Thỉnh bình an mạch)
+or a warning/plot kept in its tuần (fix a). = open question 3 (festival-day cap), owner/coordinator call.
+Other tests on the merged build: roster_audit sens 6 shard 0: 6 277 checks, (a)–(r) all 0, page err 0 (pre-merge also rand 6 shard 4: 2 249, all 0).
+spread-e2e (file:// base; A 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@2, 390x844@3; B origin/main ee5d33de save → this build at
+755x1000 + 1180x820; C waiting cards survive reload 1/1): PASS, 0 page errors, no overflow. coop-e2e (live Worker): 59/59 (pre-merge: 59/60 with
+one 20 s friend-wait timeout, re-run 59/59). 390x844 shows the rotate prompt. Site rebuilt (index.html, sw.js, assets.json).
+KIT REQUEST: none (no UI, no player-visible text).
