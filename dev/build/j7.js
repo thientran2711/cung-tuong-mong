@@ -156,7 +156,7 @@ ev("taster",()=>S.rank>=2&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.malic
  {n:"Đổi người nấu, giấu chuyện",fx:{bac:-30},x:"2 tháng phi tần khó hại ngươi",go:()=>{S.shield=Math.max(S.shield,2)}},
  {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:"cả hậu cung bị tra, ai cũng ghen +5",go:()=>ghenAll(5)}]}});
 ev("letterhome",()=>S.turn>=3,()=>({o:od(30+S.sung/3)}),p=>({
- t:`Thư nhà giấu trong giỏ trái cây: ${S.origin.k==="td"?"vú nuôi năm xưa":"mẹ già"} lâm bệnh nặng, chỉ mong gặp mặt ngươi lần cuối.`,o:[
+ t:`Thư nhà giấu trong giỏ trái cây: ${S.origin.k==="td"?"vú nuôi năm xưa":S.kc&&S.kc.fam&&!S.kc.fam.some(m=>m.r==="me")?"tổ mẫu":"mẹ già"} lâm bệnh nặng, chỉ mong gặp mặt ngươi lần cuối.`,o:[
  {n:"Gửi 50 lượng chữa bệnh",fx:{bac:-50,duc:3}},
  {n:"Xin ân chuẩn về thăm",fx:{},x:`${word(p.o)} · thành: Đức +4, Sức +10 · hỏng: Sủng -4`,go:()=>apply(roll(p.o)?{duc:4,suc:10}:{sung:-4})},
  {n:"Viết thư hỏi han",fx:{suc:-5,duc:1}}]}));
