@@ -245,7 +245,9 @@ function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 const J95OUT_="ngoai";
 /* the khắc she would ARRIVE at k (walking costs travel(): the map number is the number she meets on arrival, main rule review/stage-slots) */
-function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;return Math.min(J95.KH-1,kh+Math.max(0,travel(S.place||"home",k)||0))}catch(e){return kh}}
+function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;let from=S.place||"home";
+ if(typeof isSrv==="function"&&isSrv()){const m=srvM();if(m&&k===palaceOf(m))return kh;if(from==="home"&&m)from=palaceOf(m)}/* j42 srvGoTo walks from her mistress's palace */
+ return Math.min(J95.KH-1,kh+Math.max(0,travel(from,k)||0))}catch(e){return kh}}
 function j95counts(R,kh){const C={};for(const id in R.P){const k=R.P[id][kh][0];if(k&&j95vis(id,k))C[k]=(C[k]||0)+1}return C}
 function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j95key()){if(!plan)return;if(R)j95log(R);R=j95plan();j95secApply(R)}
  const kh=j95kh();const ppl=j95ppl(R);const ids={};
@@ -468,11 +470,11 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
    for(const v of liveRivals(true)){if(v===S)continue;const e=S.roster.P["v"+v.id];if(!e||e[kh][0]!=="home"||sameHouse(S,v)||P.some(p=>p.ref===v))continue;P.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v))}}}catch(e){j95err("home",e)}return P}}
  /* her palace while she is away: j59 counts "home" from homePeople() (the stage she would see on coming back); her maid may be out with her,
     so while she is not at home the record answers (registered after j59's own late wrap, so it is the outer one) */
- setTimeout(()=>{try{const c1=countAt;countAt=function(k){try{if(k==="home"&&j95on()&&S&&!S.dead&&S.place!=="home"&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&S.roster&&S.roster.key===j95key()){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]==="home"&&j95vis(id,"home"))n++;return n}}catch(e){}return c1.apply(this,arguments)}}catch(e){}},0);
+ setTimeout(()=>{try{const c1=countAt;countAt=function(k){try{if(k==="home"&&j95on()&&S&&!S.dead&&S.place!=="home"&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&S.roster&&S.roster.key===j95key()){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]==="home"&&j95vis(id,"home"))n++;return n}}catch(e){}/* maid road: j59srvCount reads srvWhere, which then answers at the arrival khắc */const p=J95.arrK;try{J95.arrK=j95on()&&k!==S.place&&typeof isSrv==="function"&&isSrv()?j95arrKh(k):null;return c1.apply(this,arguments)}finally{J95.arrK=p}}}catch(e){}},0);
  /* maid road (j42): srvWhere sent a consort standing somewhere not on the maid's own map back to her palace, so the maid met her at home while
     the record had her elsewhere; with the record current it answers exactly (her mistress's palace = the maid's "home") (port 16/11) */
  if(typeof srvWhere==="function"){const sw0=srvWhere;srvWhere=function(v){try{if(j95on()&&v&&v.rel!=null&&typeof isSrv==="function"&&isSrv()&&S.roster&&S.roster.key===j95key()){const e=S.roster.P["v"+v.id];
-   if(e){const w=e[j95kh()][0];if(w==="home"){const m=srvM();return m?palaceOf(m):palaceOf(v)}if(w&&w!==J95OUT_)return w}}}catch(e){}return sw0.apply(this,arguments)}}
+   if(e){const w=e[J95.arrK!=null?J95.arrK:j95kh()][0];if(w==="home"){const m=srvM();return m?palaceOf(m):palaceOf(v)}if(w&&w!==J95OUT_)return w}}}catch(e){}return sw0.apply(this,arguments)}}
  /* old saves / a fresh life: build the record on the first render */
  const r0=render;render=function(){try{if(j95on()&&!S.dead&&S.where&&(!S.roster||S.roster.key!==j95key()||S.roster.kh!==j95kh()))j95sync(false,true)}catch(e){}return r0.apply(this,arguments)};
 })();
