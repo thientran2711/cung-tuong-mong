@@ -650,7 +650,7 @@ Grid rows: every card in a row has the row's height (fitted to content, `grid-au
 
 ## 6.2 OPTION CARD = SMALL ACT CARD WITH ITS PICTURE LEFT (owner 15/11 "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."; review/opt-pics) — `dev/build/jopic.js` (after jph) + jk4 `kitCompactCSS`
 Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rulings 15/11: keep BOTH act-card forms — the big Hành sự card
-(§6 / §6.1) unchanged; the SMALL card (§43) gets a 3:4 PORTRAIT RECTANGLE picture (never a square crop); every dialog option card is that small card.
+(§6 / §6.1) unchanged; the SMALL card (§43) gets a 3:4 PORTRAIT RECTANGLE picture when its text is at least as tall as that picture, else the SQUARE form (§6.2b, owner 16/11 s21); every dialog option card is that small card.
 - WHERE: every option of every dialog — `#modal .opts > button.ka` (events, dilemmas, nights, reactions, servant matters, festivals, co-op,
   pickers) and kit choice panels `.kpscopts > button.ka`. Not: the identity card's approved pinned pair (`.nlopts`). ONE place: the outermost
   `kaNorm1` wrapper calls `kpOptArt(b)` after the j63 frame (and kitHideOut / kitHint) built the card. Nobody adds pictures by hand.
@@ -681,6 +681,18 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
 - Kit sample page §47: "§6.2" (the three options of the owner's markup "Hoàng hậu triệu kiến" through kaNorm → kpOptArt).
 - Tests: `dev/test/opt-pics.js` (every option kind → its picture source; layout at the design sizes: picture left 84x112, nothing wider than
   its box, zoom opens and does not choose). Scan of every option title (static + bot): dev/test/opt-pics-table.md (before/after).
+
+### 6.2b PICTURE FORM BY CONTENT — tall or square, never empty space under the text (owner 16/11 s21, VIỆC "Tiết Thanh minh", Fold; refs/owner-viec-thanhminh.jpg; review/kit-fit) — `kitOptFit` / `kitOptFitAll` / `KIT_OPT_SQ` (jk4, beside `kitCompactCSS`)
+Owner rule (verbatim): "Bất kỳ khi nào mà mày cho thợ ráp nút vào á, mà mày thấy có một cái khoảng trống ở dưới thì phải lập tức đổi hình liền, đổi cái hình đại diện liền đó."
+- ONE rule for EVERY compact act card (`button.ka.kart` in the kitCompactCSS form: dialog options `.kopt`, person-card act rows §6.3, narrow-pane act
+  cards §43, the kit page). The card picks its picture form from its own content each time it is laid out:
+  TALL 3:4 (84x112, 72x96 in a pane < 420 px) when the text block `.kabody` is at least as tall as the tall picture;
+  SQUARE when the text is shorter: side = the text height, clamped to [`KIT_OPT_SQ.min` × w, w] (84 → 38..84 px, 72 → 32..72 px), so the card is as
+  tall as its text. Same meaning picture (kitOptPic §6.2), cover-cropped; class `kasq`, `data-kapic="tall|sq"`.
+- Re-measured automatically: after every kaNorm pass, after showModal, and by a ResizeObserver on each card + its text (dialog fit, fonts, rotation).
+  No screen sets a picture size by hand. The big Hành sự card (§6) is not touched (its picture is wider than 112 px).
+- Residual: a text block shorter than the minimum square (one title line, no rows) keeps (min − text) px; reported as "at min" by the test.
+- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px).
 
 ## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
 Owner: "this button does not follow the shared kit; if the text is long we HAVE a kit part for that, the long horizontal option row — why not use it?"
@@ -1719,6 +1731,15 @@ Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái
   Identity card (§14 / 28.11, kpIdFig): the unknown-lady silhouette stands in while the list / picture loads (retry 400 ms, ≤ 30 s; one reload on error).
 - Option / act card title portrait (j25 tiny face before "Thưa rằng do Hoàng thượng định"): the framed mini portrait `.kan>.md.kfc` is zoomed
   to one text line (zoom .43 ≈ 21 px) so the title stays on its line and the card keeps its neighbours' height.
+
+#### 32.2b EQUAL GAPS — the figure sits between the two frame lines (owner 16/11 s21, VIỆC "Tiết Thanh minh": "cách cái đường line của cái khung ở trên nó bằng với cái chân, với cái đường line của cái khung ở dưới"; review/kit-fit) — `kitDpFit` + `KIT_DP_GAP` / `kitFrameLines` / `kitFrameGaps` (jk4)
+- In EVERY frame with a full-body figure column (all KP_SEAL kinds with a person: VIỆC, TIN, KẾT QUẢ, BÁO, ĐÊM, ĐIỀU, LUẬT, MẬT BÁO, CHỨNG CỨ, BAN THƯỞNG,
+  CẢNH GIÁC, NGƯỜI, KIẾP; visits, summons, toilette reactions, the shop, pet care) the gap from the frame line ABOVE (the header rule = bottom of
+  `.kph`) to the top of the name chip = the gap from the painted feet to the frame line BELOW (the frame's inner bottom edge).
+- Both gaps ≥ `KIT_DP_GAP` = max(5 % of that height, 14 px), so chip + figure use ≤ 90 % of it (the kit figure scale, 85–90 %); a figure the column
+  width (32.2a cap) keeps shorter is CENTRED between the lines (equal larger gaps), never standing on the floor with the empty space above.
+- A figure cut at the floor (short column, 32.2a minVis) is not full-body: its chip stays one gap under the header rule.
+- Measured by `kitFrameGaps(dlg)` → {top, bot, full, h}; test `dev/test/kit-fit.js` (Fold 755x1000 + iPad 1180x820: |top − bot| ≤ 2, both ≥ 14).
 
 ### 32.3 Event / news pictures framed by TYPE (owner 23:20Z)
 `kitEvCat(m,{src})` maps the j89 event category (from the `ev-<cat>.webp` file or `evArtCat`) to a kit category frame (31.17: colour +
