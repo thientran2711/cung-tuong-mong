@@ -41,9 +41,9 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   const v=liveRivals(true)[0];const P=tsNpcDress(Object.assign(v,{tamco:300}),"phu");const dv=tsDressPts(v,P,"phu");
   ok("4d NPC dresses for the contest from what she owns/wears",dv.lux>0,dv);
   /* 5. reputation and edict */
-  const lo=luxOf;luxOf=p=>({lv:2,sc:150,bud:100});const C=[S].concat(liveRivals(true));C.forEach(p=>p.luxRep=0);S.luxEdict=null;
+  const lo=luxOf;luxOf=p=>({lv:3,sc:160,bud:100});const C=[S].concat(liveRivals(true));C.forEach(p=>p.luxRep=0);S.luxEdict=null;
   for(let i=0;i<3;i++)C.forEach(p=>luxRepTick(p));const xh=C.filter(luxXaHoa).length;const pp=BAL.lux.edictP;BAL.lux.edictP=100;const q0=Q.length;const e=luxEdictTry();BAL.lux.edictP=pp;
-  ok("5a three months above the allowance = tiếng xa hoa; edict follows",xh===C.length&&luxEdictOn()&&Q.length===q0+1&&/tiết kiệm/.test(e),[xh,S.luxEdict,e]);
+  ok("5a three months far above the allowance = tiếng xa hoa; edict follows",xh===C.length&&luxEdictOn()&&Q.length===q0+1&&/tiết kiệm/.test(e),[xh,S.luxEdict,e]);
   const du=v.duc;luxMonthX(v);ok("5b NPC above the edict: Đức −2",v.duc===du+BAL.lux.edictDuc||v.duc===0,[du,v.duc]);
   ok("5c edict is a co-op world key",[...document.scripts].some(x=>/const W_KEYS=\[[^\]]*"luxEdict"/.test(x.textContent)));
   luxOf=lo;S.luxEdict=null;C.forEach(p=>p.luxRep=0);Q.length=q0;

@@ -28,11 +28,11 @@ Object.assign(BAL,{lux:{
  tangDuc:-2,          /* lavish (not red/yellow — j92 punishes that) in quốc tang */
  fitDanh:1,           /* hợp dịp at a festival / yến (F 2): Danh +1 */
  plainDanh:-1,        /* quá giản dị at a festival / yến (F 2), unless the strict-host Danh already applies */
- /* reputation "tiếng xa hoa" p.luxRep 0..12 (monthly): +2 above her allowance (jinv lv ≥ 2), +1 per phô trương verdict taken (max 2), −1 otherwise */
+ /* reputation "tiếng xa hoa" p.luxRep 0..12 (monthly): +1 above her allowance (jinv lv 2), +2 far above (lv 3), +1 per phô trương verdict taken (max 2), −1 otherwise */
  repMax:12,repOn:6,repDanh:-1,repTh:-2,
  /* frugal edict: when ≥ edictN people in the palace have tiếng xa hoa (a frugal Thái hậu: edictNF), chance edictP each month, lasts edictM months,
     not again within edictCd months. While it stands: everyone above its range at month end Đức −2 (her: also Thái hậu −2); plain dress 1 in 3 Đức +1 */
- edictN:3,edictNF:2,edictP:35,edictM:3,edictCd:12,edictTh:-2,
+ edictN:4,edictNF:3,edictP:25,edictM:3,edictCd:24,edictTh:-2,
  lanhDuc:-1,          /* lavish dress in lãnh cung (monthly) */
  /* Hội phối đồ: theme range is absolute (4 pieces), capped by her allowance; a floor never above capLo × allowance */
  capLo:.45,ctFit:3,ctShow:1,ctOver:-2,ctPlainK:4,ctPlainMin:-1,ctDuc:-1,
@@ -107,7 +107,7 @@ if(typeof toilFx==="function"){const tf0=toilFx;toilFx=function(p,host,F,baseSta
  if(x&&x.sc>0){const V=luxVerdict(v,toilFOf("th"),"th");o.dv=V.v==="tang"||V.v==="vuot"?"photruong":V.v;o.style=V.style}}catch(e){}return o}})();
 
 /* ---------- monthly: reputation (tiếng xa hoa), the frugal edict, lãnh cung ---------- */
-function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p)}catch(e){}const add=(x.lv>=2?2:0)+(p===S?Math.min(2,S.luxRepD|0):0);if(p===S)S.luxRepD=0;
+function luxRepTick(p){const B=BAL.lux;let x={lv:1};try{x=luxOf(p)}catch(e){}const add=(x.lv>=3?2:x.lv>=2?1:0)+(p===S?Math.min(2,S.luxRepD|0):0);if(p===S)S.luxRepD=0;
  p.luxRep=cl((p.luxRep|0)+(add||-1),0,B.repMax);return p.luxRep}
 function luxXaHoa(p){return (p.luxRep|0)>=BAL.lux.repOn}
 window.luxXaHoa=luxXaHoa;
