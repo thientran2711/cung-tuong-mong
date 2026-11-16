@@ -19426,7 +19426,7 @@ KIT_FACEFX.person=function(ref){try{if(ref==null||typeof S==="undefined"||!S)ret
 .kff>b.tn{background:radial-gradient(42% 44% at 52% 48%,var(--tint) 0%,transparent 100%)}
 .kff>b.ey{background:radial-gradient(11% 3.6% at 33% 20.5%,var(--eye) 0%,transparent 100%),radial-gradient(10% 3.4% at 72.5% 20.5%,var(--eye) 0%,transparent 100%)}
 .kff>b.lp{background:radial-gradient(12.5% 3.6% at 56% 55.5%,var(--lip) 0%,var(--lip) 35%,transparent 100%)}
-.kfx>img.kslap,.kfxf>img.kslap{opacity:.5}`;document.head.appendChild(st)})();
+.kfx>img.kslap,.kfxf>img.kslap{opacity:.5}.kfx>img.kslap[data-sev="2"],.kfxf>img.kslap[data-sev="2"]{opacity:.7}.kfx>img.kslap[data-sev="3"],.kfxf>img.kslap[data-sev="3"]{opacity:.88}`;document.head.appendChild(st)})();
 
 /* ---------- shared helpers ---------- */
 const FXF={ill:[0,2,4,6],weakSuc:25,kidHp:[35,20],doc:[0,4,7],docWk:[0,3,4],slowWk:9,docMed:40,docNpcHeal:35,docNotice:30,
@@ -19492,14 +19492,14 @@ PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];con
  return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
 
 /* ---------- 3. BỊ TÁT: a faint soft handprint on the cheek for a few tuần (https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png on the scar-fit cheek box) ---------- */
-function slapGive(p,by,why){if(!p||!fxLive(p)||KIT_FACEFX.deny.tat[KIT_FACEFX.kind(p)])return"";p.slap={until:wk()+FXF.tatWk+(roll(30)?1:0),by:fxKey(by),at:wk()};
+function slapGive(p,by,why,sev){if(!p||!fxLive(p)||KIT_FACEFX.deny.tat[KIT_FACEFX.kind(p)])return"";sev=cl(sev|0||1,1,3);p.slap={until:wk()+FXF.tatWk+(roll(30)?1:0)+(sev-1),by:fxKey(by),at:wk(),sev};
  const t=`${fxWho(p)} bị ${by?(by===S?"ngươi":fxName(by)):"người ta"} tát${why?" vì "+why:""}: má in dấu tay${["consort","player"].includes(KIT_FACEFX.kind(p))?`, Sắc -${FXF.tat}`:""} vài tuần.`;fxLog(p,t);return t}
 KIT_FACEFX.add({id:"tat",z:30,ready:true,                  /* owner approved the handprint (pilot 11/14) */
- state:p=>p&&p.slap&&p.slap.until>wk()?p.slap:null,
+ state:p=>{if(!p||!p.slap||p.slap.until<=wk())return null;if(!p.slap.sev)p.slap.sev=1;return p.slap},   /* old slaps default to sev 1 (nhẹ); tiers 1..3 = nhẹ/vừa/nặng */
  seen:(p,st)=>fxSeen(p),
  sac:(p,st)=>{const vg=p.vl&&typeof vlG==="function"?vlG(p.vl):-1;return Math.round(FXF.tat*(vg>=0&&window.VL?VL.cover[vg]:1))},
  chip:(p,st)=>[`Má in dấu tay · còn ${fxLeft(st.until)} tuần`,"hot"],
- html:(p,file,st)=>{const s=KIT_FACEFX.cheekBox(file,{dx:.04,dy:.17,sw:.9,sh:.9});return s?`<img class="kslap" src="https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png" alt="" aria-hidden="true" style="${kitFxVars(s)}" onerror="this.remove()">`:""}});
+ html:(p,file,st)=>{const s=KIT_FACEFX.cheekBox(file,{dx:.04,dy:.17,sw:.9,sh:.9});return s?`<img class="kslap" data-sev="${cl(st.sev|0||1,1,3)}" src="https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png" alt="" aria-hidden="true" style="${kitFxVars(s)}" onerror="this.remove()">`:""}});
 
 /* ---------- 4. BỊ PHẠT QUỲ / ĐÁNH TRƯỢNG: a status chip (no art); walking costs one more khắc while it lasts (her), NPCs scheme less ---------- */
 function penGive(p,k,why,by){if(!p||!fxLive(p)||KIT_FACEFX.deny.phat[KIT_FACEFX.kind(p)])return;const sev=k==="truong"?2:1;const u=wk()+FXF.penWk[sev];p.pen={k,until:Math.max(u,p.pen&&p.pen.until||0),why:why||"",by:fxKey(by)}}
@@ -19554,10 +19554,22 @@ function faceExpr(){}
  try{if(k==="daumua"&&p&&p.ill&&p.ill.k==="daumua"&&Array.isArray(p.staff))for(const s of p.staff)if(!s.ill&&roll(35))s.ill={k:"daumua",st:1,known:true,until:wk()+3}}catch(e){}return r}})();
 /* ---------- causes for EVERYONE: illness, servants harming each other, NPC schemes on servants (owner 16/11) ---------- */
 /* the state API other branches call (review/mortality: Hoàng thượng's / Thái hậu's illness and poison go through here) */
+/* ---------- 4b. HỦY DUNG (scar layer KIT_SCAR / scar-fit): same one-rule system (owner 16/11) ----------
+   Anyone can be disfigured by a real cause, through the same person lookup (KIT_FACEFX.person), the same "seen" rule and api.scar(p,sev,by,how).
+   Only exception: nobody disfigures Hoàng thượng or Thái hậu by a SCHEME (by given); an accident / illness scar (by empty) is allowed. */
+KIT_FACEFX.deny.scar={emp:1,thaihau:1};
+function scarGive(p,sev,by,how){p=KIT_FACEFX.person(p)||p;if(!p||typeof scar70!=="function"||!fxLive(p))return false;sev=cl(sev|0||1,1,3);if(by&&KIT_FACEFX.deny.scar[KIT_FACEFX.kind(p)])return false;
+ scar70(p,sev,by||null,how||(by?"phan":"tai nan"));try{fxLog(p,`${fxWho(p)} bị hủy dung (${["","nhẹ","vừa","nặng"][sev]}).`)}catch(e){}return true}
+window.scarGive=scarGive;
+(function(){if(typeof scar70!=="function")return;const s0=scar70;scar70=function(t,sev,a,how){if(a&&t&&KIT_FACEFX.deny.scar[KIT_FACEFX.kind(t)])return SCAR70[1];return s0.apply(this,arguments)}})();
+/* the scar shows by the ONE seen rule (herself, or she knows / has seen the person), on every face place that has a scar-fit row */
+(function(){if(typeof kitScarOf!=="function")return;kitScarOf=function(p){try{p=KIT_FACEFX.person(p)||p;if(!p||!p.scar||!window.KIT_SCAR||!(p.scar.sev|0))return null;if(!(KIT_FACEFX.seen(p)||p.scar.known))return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}})();
+/* weekly recovery for everyone the base loop (herself + rivals) does not reach: the same heal70 rule */
+(function(){if(typeof endTurn!=="function"||typeof heal70!=="function")return;const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0&&!window.__j70off)for(const p of KIT_FACEFX.everyone())if(p&&p!==S&&p.scar&&p.scar.sev&&!(rivals||[]).includes(p))heal70(p)}catch(x){}return r}})();
 KIT_FACEFX.api={
  ill:function(p,k,st,known){if(!p||!ILL[k])return false;st=cl(st|0||1,1,3);const rec={k,st,known:known!==false};if(S&&(p===S.thO||p.kind==="th"))S.thIll=rec;else p.ill=rec;return true},
  cure:function(p){if(S&&(p===S.thO||p.kind==="th"))S.thIll=null;else if(p)p.ill=null;if(p)p.sick=0},
- poison:(p,sev,how,by,weeks)=>pzGive(p,sev,how,by,weeks),rash:(p,sev,how,by)=>rashGive(p,sev,how,by),slap:(p,by,why)=>slapGive(p,by,why),pen:(p,k,why,by)=>penGive(p,k,why,by)};
+ poison:(p,sev,how,by,weeks)=>pzGive(p,sev,how,by,weeks),rash:(p,sev,how,by)=>rashGive(p,sev,how,by),slap:(p,by,why,sev)=>slapGive(p,by,why,sev),scar:(p,sev,by,how)=>scarGive(p,sev,by,how),pen:(p,k,why,by)=>penGive(p,k,why,by)};
 /* monthly illness for everyone who is not a consort (consorts keep j13 illMonthP; Hoàng thượng / Thái hậu keep illMonth): the SAME odds, seasons, care, worsening and death */
 function fxIllMonth(p){if(!p||!KIT_FACEFX.live(p))return;const kd=KIT_FACEFX.kind(p);if(kd==="emp"||kd==="thaihau"||kd==="consort"||kd==="player"||kd==="cold")return;const i=illOf(p);const nm=fxName(p);
  if(!i){const sea=SEASON[S.month-1];const weak=kd==="kid"?(p.hp||100)<50:false;const base=1.5+(weak?4:0)+(S.storms||0)*1.5;const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));
@@ -31710,7 +31722,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fd5c67791329";window.CTM_BUILD=BUILD;
+const BUILD="ac0399c59178";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
