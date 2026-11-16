@@ -1,12 +1,13 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
-last wake: 11/16/2026 05:19Z
+last wake: 11/16/2026 05:24Z (Foreman B session 2 = session_01N1tNP3StF4VxqkqTsQSt3a)
+Context (session 2): system+brief ~40k tokens at start; ~55k after the mandatory setup reads → budget ~70k (start-after-setup +25%). Hourly self-wake: CronCreate job c564090d at :17 every hour.
 Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
 
 ## HANDOVER (Foreman B session 1 → session 2 = session_01N1tNP3StF4VxqkqTsQSt3a, 11/16/2026 05:19Z)
 - Slice B state: 24 PASS (20 LIVE on main via trains 1–3). PASS not yet on main: routes-port-r1 (D33, conditional loi-rieng §6.1), chapter-detail-r1 (C24), tuduc-mg-r1 (C41), difficulty-port-r1 (D31, conditional .kdiff override). Full shas under ## PASS.
 - Still running as OLD in-session agents of session 1 (they finish on their own; if no report file appears within ~2 h, re-open from the pushed branch/PROGRESS as a separate session):
-  * C41b tuduc-pic — DONE, SẴN SÀNG KIỂM @2954ff9fb9367940b62bb9b824645a14c60191e0 (report dev/handover/reports/review-tuduc-pic.md) → session 2: open a reviewer session. Was: branch review/tuduc-pic (from tuduc-mg-r1 + main; pass TD_BG as pic in jtd tdPlay → picture-left frame). Needs a reviewer when "SẴN SÀNG KIỂM".
+  * C41b tuduc-pic — branch review/tuduc-pic (from tuduc-mg-r1 + main; pass TD_BG as pic in jtd tdPlay → picture-left frame). Needs a reviewer when "SẴN SÀNG KIỂM".
   * D34 reviewer — DONE: PASS e25486e0 (see ## PASS).
 - Blocked: D36 rank-port (KIT REQUEST podium + person-dialog chips, see KIT KEEPER NEEDED), D41 promote-servants (waits for Foreman C D29 schedules/roster).
 - Open owner questions: Q3, Q5, Q6, Q8–Q20, Q22, Q23 (Q1, Q4, Q7, Q21 resolved). C7 notes for Foreman C: D31, D33, Q8, Q16.
@@ -20,7 +21,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg-r1 | sonnet | PASS 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 |
-| C41b tuduc-pic | review/tuduc-pic @2954ff9f | sonnet | SẴN SÀNG KIỂM — needs a reviewer SESSION (session 2) |
+| C41b tuduc-pic | review/tuduc-pic (on tuduc-mg-r1) | sonnet | REVIEWING — worker done 2954ff9f (contains main eba64ead); reviewer session on review/tuduc-pic-r1 opened 05:25Z |
 | C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
