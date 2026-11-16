@@ -179,6 +179,6 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 @keyframes kpodFig{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes kpodFade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kpod-col,.kpod-fig,.kpod-step,.kpod-beam,.kpod-pool{animation:none!important}.kpod-motes{display:none}}
-@media (max-width:599px){.kpod-hd{padding:8px 8px 0}.kpod-hd .kptitle{font-size:.95rem}.kpod-step{padding:0 3px 8px;border-width:12px 6px 6px}.kpod-plq{padding:4px 3px}.kpod-plq .kname{font-size:.72rem}}
-@media (orientation:landscape) and (max-height:820px){.kpod-hd{padding-top:8px}.kpod-ft{padding:6px 12px 10px}}
+/* kv3:.kv1 */:where(.kv1) .kpod-hd{padding:8px 8px 0}:where(.kv1) .kpod-hd .kptitle{font-size:.95rem}:where(.kv1) .kpod-step{padding:0 3px 8px;border-width:12px 6px 6px}:where(.kv1) .kpod-plq{padding:4px 3px}:where(.kv1) .kpod-plq .kname{font-size:.72rem}
+/* kv3:.kv2 */:where(.kv2) .kpod-hd{padding-top:8px}:where(.kv2) .kpod-ft{padding:6px 12px 10px}
 `;document.head.appendChild(st)})();
