@@ -66,3 +66,6 @@ Pet widths at class height (CSS px at iPad): S 55-167 (widest uyenuong 167, bowl
 
 SẴN SÀNG KIỂM (art only, no code): CDN img/pet-stage/pet-<key>.webp x22.
 NEXT: Già pictures (3-species sample first) + Túi kỷ vật.
+
+## GIÀ (old-age) pictures — SAMPLE READY (3 species: S mèo mướp, M chó nhỏ, L hạc)
+Sheet: `dev/handover/reports/pet-stage-art/gia-sample-sheet.jpg` (left of each pair = adult stage picture, right = Già). Same animal, same style, greying muzzle / paler faded coat / softer half-lidded eyes, calm planted pose, still dignified. File names planned: `img/pet-stage/pet-<key>-gia.webp` (same cut-out rules and S/M/L heights as the adult stage files; fish keep bowls). Dog re-rolled once (first try had a raised paw and looked too young). Credits: 4 x 40 + 4 x 3 = 172. Remaining 19 species go ahead without waiting.
