@@ -56,7 +56,7 @@
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
 | D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | DONE → PASS r1 | 06:23Z 16/11 |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
-| coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | RUNNING | 16/11 06:26Z |
+| coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | DONE PASS 24578406 | 16/11 06:26Z |
 | cardflip-smooth-r1 re-merge on main | review/merge-hot-3 | main s11 | session_01UV1SzhTBy9XN8Ebp4ao4yp (sonnet) | LIVE feba37e5 | 16/11 06:29Z |
 | canon-pairs: decide 57 old→new rule pairs in PRIORITY/ART rule files | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus, rules) | DONE | 16/11 06:29Z |
 | kc-lore: td home road vs "cả nhà bị xử trảm" (+ scan all 6 home-road origins) | review/kc-lore | main s11 | session_01UV1SzifvyTS1XcBknF7tFA (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 06:30Z |
@@ -80,9 +80,9 @@
 | balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
 | one-core: every rule number from BAL + guard test (owner ONE CORE) | review/one-core | main s11→s12 | session_01UV1Szm1iPxyYyr6JpCfpnd (opus) | RUNNING | 16/11 07:21Z |
 | D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | RUNNING | 07:23Z 16/11 |
-| servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | session_01DgYSWnPWsFwg4R6LHZTKjr | RUNNING | 16/11 07:27Z |
-| slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | RUNNING | 16/11 07:27Z |
-| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | RUNNING | 16/11 07:27Z |
+| servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | session_01DgYSWnPWsFwg4R6LHZTKjr | DONE FAIL → r2 | 16/11 07:27Z |
+| slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | DONE FAIL → r2 | 16/11 07:27Z |
+| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | DONE SẴN SÀNG KIỂM 30c0931d | 16/11 07:27Z |
 | Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | RUNNING | 16/11 07:27Z |
 | D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | PASS 99c069578 | 07:26Z 16/11 |
 | D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | PASS 81deb15f7 | 07:26Z 16/11 |
@@ -117,3 +117,10 @@
 | kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
 | D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | RUNNING | 16/11 08:26Z |
 | story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | RUNNING | 16/11 08:26Z |
+| act-split-w2 review (opus) | review/act-split-w2-r1 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | (opening, s3) | RUNNING | 16/11 08:40Z |
