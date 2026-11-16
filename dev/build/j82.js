@@ -109,7 +109,8 @@ window.KG82=KG82;
    word ("Hồi 2/5" -> Hồi · 2/5, "Câu 1/5" -> Câu · 1/5). o.round = a fixed word for the whole frame (exam: "Môn"; engine updates then keep it). */
 const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(Nhất|Nhì|Ba|Hạng\s*\d+)$/;
 /* the painted illustration of what is contested (picture LEFT of every game frame, owner 15/11): the kind's own board painting */
-function kg82Pic(kind){return `img/kit/mg-${kg82BgName(kind)}.webp`}
+/* kinds with no board painting yet (duho, den, may): no picture column at all (KIT REQUEST) */
+function kg82Pic(kind){return ["duho","den","may"].includes(kind)?"":`img/kit/mg-${kg82BgName(kind)}.webp`}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
