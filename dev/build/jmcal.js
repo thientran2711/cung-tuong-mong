@@ -15,7 +15,7 @@ const MCAL={
  days:{newyear:[1,2,3],nguyentieu:[15],thanhminh:[5],doanngo:[5],thattich:[7],vulan:[15],trungthu:[15],vantho:[25],trungcuu:[9],thanhtho:[15],dongchi:[15],lapbat:[8],giaothua:[30]},
  short:{newyear:"Nguyên đán",nguyentieu:"Nguyên tiêu",thanhminh:"Thanh minh",doanngo:"Đoan ngọ",phoenix:"Hội Phượng",thattich:"Thất tịch",vulan:"Vu Lan",trungthu:"Trung thu",vantho:"Vạn thọ",trungcuu:"Trùng cửu",thanhtho:"Thánh thọ",dongchi:"Đông chí",lapbat:"Lạp bát",giaothua:"Giao thừa"},
  line:{newyear:"Lục cung vào chúc Tết Hoàng thượng và Thái hậu, mở yến xuân.",
-  nguyentieu:"Đêm rằm tháng giêng, đèn lồng treo khắp ngự hoa viên, cả cung đố đèn.",
+  nguyentieu:"Đêm rằm tháng giêng, đèn lồng treo khắp ngự hoa viên, cả cung thắp đèn thi.",
   thanhminh:"Các cung theo Thái hậu cúng tế tiên đế, đạp thanh, thả diều.",
   doanngo:"Đua thuyền rồng trên Thái Dịch trì, đeo túi thơm, gói bánh ú.",
   phoenix:"Hội thi cưỡi ngựa bắn cung ở sân tàu ngựa phía tây, kéo dài cả tháng.",
@@ -275,7 +275,7 @@ button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transpar
 .kmc-pre{display:flex;flex-wrap:wrap;gap:5px}.kmc-pre .kbtn{font-size:.78rem;padding:4px 9px;min-height:34px}
 .kmc-save{justify-self:start;min-height:38px}
 .kmc-del{font-size:.72rem;padding:1px 7px;min-height:26px;margin-left:4px;vertical-align:middle}
-@media (max-height:520px){.kmc-tabs{flex-wrap:nowrap!important;overflow-x:auto!important}.kmc-d{aspect-ratio:auto;height:50px;min-height:50px}}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§47) ---------- */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
