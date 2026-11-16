@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 03:25Z — 10 Foreman B PASSes are LIVE on main (merge trains 1–2). Waiting for fast-forward: succession-port-r1, palace-map-port-r1, lost-items-port-r1, weather-port-r1, weekbook-entries-r1, map-labels-r1. Running: 6 workers (C24, C41 finisher, D34, D42, D33, D31) + 4 reviewers (stat-fx-2, contest-ui-r3, page-curl2). Blocked: D36 (KIT REQUEST podium), D41 (Foreman C D29).
+Updated: 11/16/2026 03:53Z — running 6/12: workers C24, C41 finisher, D34, D33, D31 + reviewer D42 places-port. No more assignable Slice B items: D36 BLOCKED (KIT REQUEST podium), D41 waits for Foreman C D29. 6 free slots — coordinator may add items here.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
@@ -107,7 +107,7 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q18 (C32 page-curl2): in landscape the ‹ › buttons keep the slow 1.3 s curl (unchanged) — keep or speed up? Portrait slide is 300 ms.
 - Q19 (C41 Tứ đức minigames): in these 4 games a higher level makes the game EASIER (wider bands, fewer wrong choices) — opposite of mg-easy's knowledge games (harder at higher level). OK? And "Để trời định" (skip) counts as 5/10 — fine?
 - Q20 (D36 leaderboard): login is guest-only (random code + chosen display name; server stores only a hash). Owner wants a recovery code or email magic link (LEADERBOARD.md; email needs a privacy policy)? Anti-cheat is basic (server recomputes score + sanity checks). The old Worker ctm-rank.victoria-tntt.workers.dev is live (/health ok, board empty).
-- Q21 (D42 places): owner has not seen the new Thượng thư phòng / A ca sở / Đông cung paintings (her rule: side-by-side with an existing scene before variants; worker picked the base) — please show her dev/art/places_work/sheet-*.jpg on branch review/places-port. Also: Ngự thiện phòng, Phật đường, Nội vụ phủ are NOT on the map and have no art (OWNER_LEDGER row 40 says live — wrong); want them as a follow-up? "Thăm con / Cho gọi con về", mother–child estrangement, Thái tử prestige, orphans → Thái hậu/Hoàng hậu wait for D29 (j95 ledger).
+- Q21 (D42 places): RESOLVED for the paintings — owner APPROVED Thượng thư phòng / A ca sở / Đông cung (16/11). Still open: Ngự thiện phòng, Phật đường, Nội vụ phủ not on the map (follow-up?).
 
 ## COORDINATOR ANSWERS (16/11, hourly watch 2)
 - PASSes D40, D32, D30, D38, C33, C46, C34 → review/merge-train-3 (main session). Do not merge them yourselves.
