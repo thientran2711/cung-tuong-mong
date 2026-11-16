@@ -11,7 +11,7 @@ main at start = eba64ead4.
 | D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV RUNNING |
 | C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWo9bFK5NRcy5Hrr3UX RUNNING |
 | C44 cloud-save (Sổ mây) | review/cloud-save @38bf315f → review/cloud-save-r1 | opus | SẴN SÀNG KIỂM → opus reviewer session_01DgYSWq1uCD8NVh8dB3LBba (normal + SECURITY) RUNNING |
-| D50 consort placeholder frame in dialog person column | review/dlg-fig-ph @0bf17ac4 → review/dlg-fig-ph-r1 | sonnet | SẴN SÀNG KIỂM → reviewer RUNNING |
+| D50 consort placeholder frame in dialog person column | review/dlg-fig-ph @0bf17ac4 → review/dlg-fig-ph-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWnFEYrjgcFbBRjAWyc RUNNING |
 | balance-after-truth re-run | review/balance-after-truth | opus | RUNNING |
 | reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
 | C3 art-complete part 2 | review/art-complete | — | MOVED to Foreman C (owner Q-D1 answer, s9) |
