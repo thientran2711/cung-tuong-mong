@@ -77,7 +77,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C18 | review/kit-popup-sample @ b6242dea (screens sent to owner) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C19 | review/pic-dupes-r1 @ b0ff9ff35 (hanh-le-v2 fixed) | SẴN SÀNG KIỂM → short re-review QUEUED-NEXT (sonnet) |
 | C20 | review/act-text @ 593e66b3a (PAUSED for slot; left: full after-scan 6 states, 755 panel scan fix, long rows) | QUEUED (resume) |
-| C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
+| C21 | review/khac-day → r1 PASS 2d038139e (+ co-op walk-spill COOPW fix) | LIVE |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
 | C22 | review/boot-flash @ 6b1d6855d (boot cover + watchdog + kRx lookbehind fix for old Safari) | REVIEWING (boot-flash-r1, opus) |
 | C23 [→ FOREMAN B] | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
@@ -109,4 +109,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
 | C47 | review/stage-side (owner s8: iPad stage side cards → one narrow vertical column like phone) | QUEUED-NEXT |
 | C48 | review/save-slots (owner s8 HIGH: co-op overwrote solo slots; ≥3 solo + ≥3 co-op rooms; recover) | RUNNING |
-| C49 | review/palace-start (owner s8: accession start, few children 0–2 mixed, no đích tử at start, slow NPC births, princesses everywhere) | QUEUED-NEXT (TOP, opus) |
+| C49 | review/palace-start (owner s8: accession start, few children 0–2 mixed, no đích tử at start, slow NPC births, princesses everywhere) | RUNNING (opus) |
