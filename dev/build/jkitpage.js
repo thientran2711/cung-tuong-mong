@@ -29,6 +29,7 @@ KIT_SAMPLES.push(
 KIT_SAMPLES.push(
  {id:"§51",title:"kitRows · bảng kit (nhãn dài xuống dòng, giá trị thẳng một cột)",html:()=>kitRows([["Đêm thị tẩm vui",["Trâm ngọc bích, Túi thơm",kitChip("Bạc",20,"g")],"t"],["Sinh hoàng tử",["Ngọc bội ngự ban",kitChip("Bạc",30,"g")],"t"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","Vòng ngọc","t"],["Chưa biết","chưa rõ","n"]])},
  {id:"§51",title:"kitRowsJoin · hai bảng nối thành một",html:()=>kitRowsJoin(kitRows([["Giá",kitChip("Bạc",-40,"r"),"t"]]),kitRows([["Phẩm","Thượng phẩm","t"],["Dùng để","dâng, tặng, bày ở yến tiệc","t"]]))},
+ {id:"§51.1",title:"kitRowsAlign · một khối một cột nhãn (mục không tiêu đề nối vào bảng trên)",html:()=>{const d=document.createElement("div");d.innerHTML=`<div class="kpsec"><h4 class="kpst">Đang tác động</h4>${kitRows([["Lo âu","Khương Lạc Anh được tấn phong · 2 tuần trước","r"]])}</div><div class="kpsec">${kitRows([["Ảnh hưởng","vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]])}</div>`;kitRowsAlign(d);return d.innerHTML}},
  {id:"§51",title:"kitReqRows · điều kiện (✓/✗)",html:()=>kitReqRows([[false,"Sủng 8 (cần 15)"],[true,"Ghế Phi: còn chỗ"],[false,"Hoàng hậu không chặn (Hoàng hậu -5)"],[true,"Đã qua một mùa ở phẩm này"]])},
  {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
@@ -121,6 +122,8 @@ KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LU�
  const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"],["long","VIỆC DÀI · lời kể dài (chữ cuộn trong khung, tranh + nút đứng yên · KIT 32.5b)"]];
  const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
   (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+KIT_SAMPLES.push({id:"§28.13b",title:"kitItem lớn · không khung, ảnh 512 (lg 150 px · xl 260 px) — so với ô có khung (md · slot)",html:()=>{const s=kitItemSrc("nhansam","img/item-nhansam.webp");
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:18px">${kitItem({src:s,name:"Nhân sâm",grade:3,size:"xl"})}${kitItem({src:s,name:"Nhân sâm",grade:4,size:"lg",qty:2})}${kitItem({src:s,name:"Nhân sâm",grade:1,size:"md"})}</div>`}});
 KIT_SAMPLES.push({id:"§81",title:"Nút kết cảnh · cảnh hoạt hình nào cũng kết bằng MỘT nút ngắn, không tự đóng (chạm để mở cảnh thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
  const L=[["bloom","Có hỷ → «Tiếp theo»"],["edict","Thánh chỉ tấn phong → «Đã hiểu»"],["flipme","Lật thẻ bài: thẻ của ta → «Chuẩn bị thị tẩm»"],["flipother","Lật thẻ bài: người khác → «Ta biết rồi»"]];
  return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn alt" data-kscene="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem cảnh."],{group:false}))}});
