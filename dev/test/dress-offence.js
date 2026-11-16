@@ -10,7 +10,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
  const R=await pg.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([n,!!c,x===undefined?"":JSON.stringify(x).slice(0,300)]);
   try{localStorage.clear()}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;
   for(let i=0;i<40;i++){start();if(!(typeof isSrv==="function"&&isSrv())&&!S.out)break}save=()=>{};Q.length=0;
-  const RND=Math.random;const force=v=>{Math.random=()=>v};const unforce=()=>{Math.random=RND};
+  const RND=Math.random;/* accusations are made face to face here (j29: a loyal servant may refuse a 'dirty' errand sent from afar — vp and xx alike) */together=()=>true;const force=v=>{Math.random=()=>v};const unforce=()=>{Math.random=RND};
   const L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined).sort((a,b)=>rkOf(a)-rkOf(b));const v=L[0],w=L[1];
   const jw=Object.keys(IT).filter(k=>IT[k].sl&&["wrist","waist","scent"].includes(IT[k].sl)&&IT[k].rk!=null);
   const lavish=(p)=>{/* within-rank jewellery until Xa xỉ > allowance; never above her rank */const r=rkOf(p);const ok=jw.filter(k=>IT[k].rk<=r).sort((a,b)=>luxVal(b)-luxVal(a));
