@@ -19,11 +19,11 @@ rdDef("cnv_ban",5,{t:"Chiếc vòng ngọc",w:"maid",sj:"chiếc vòng ngọc th
  B:{s1:{h:"Vòng ngọc giả",w:"maid",if:()=>rdPrev()==="win",t:BAN_T("Xuân Đào được tha. Nhưng thợ ngọc của Nội vụ phủ xem chiếc vòng tìm thấy trong đồ Thu Cúc, lắc đầu: ngọc nhuộm, vòng giả. Vòng thật đã ra khỏi cung.","Xuân Đào được tha, chạy sang tận cửa cung ngươi khóc. Nhưng thợ ngọc của Nội vụ phủ nói chiếc vòng tìm thấy trong đồ Thu Cúc là vòng giả. Vòng thật đã ra khỏi cung."),o:[
   {n:"Xin xem chiếc vòng giả",c:{suc:-2},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"clue",wx:"biết vòng giả làm ở đâu",l:{danh:-1},lx:"thợ ngọc không cho, đi đồn ngươi tọc mạch, tiếng sút; ngươi mệt mà vô ích",rt:"Lòng vòng có dấu khắc của một tiệm ngọc ngoài phố Đông.",rf:"Thợ ngọc cất vòng vào hộp, khóa lại."},
   {n:"Hỏi Xuân Đào đã thấy gì",c:{danh:-2},w:{duc:1},wx:"Xuân Đào kể hết với ngươi",lx:"nàng sợ, nói lộn xộn, người ta bảo ngươi khơi chuyện cũ, tiếng sút",rt:"Xuân Đào nhớ Thu Cúc hay ra cửa sau Nội vụ phủ lúc chạng vạng."},
-  {n:"Để Nội vụ phủ tự tra",c:{danh:-2},w:{suc:2},wx:"không phải dính thêm",lx:"Nội vụ phủ tra chậm như rùa, người ta bảo ngươi bỏ bạn, tiếng sút",rt:"Ngươi về làm việc, bụng không yên."}]},
+  {n:"Để Nội vụ phủ tự tra",c:{danh:-2},w:{suc:2},wx:"không phải dính thêm",lx:"Nội vụ phủ tra chậm như rùa, người ta bảo ngươi bỏ tỷ muội, tiếng sút",rt:"Ngươi về làm việc, bụng không yên."}]},
  s2:{h:"Bạn ở cung khác",w:"maid",if:()=>rdPrev()==="mid",t:"Xuân Đào đã bị đổi sang cung khác. Chiếc vòng chưa tìm thấy, còn Thu Cúc vẫn đứng hầu bên {mis} như chưa có gì.",o:[
   {n:"Gửi bánh, hỏi thăm Xuân Đào",c:{bac:-5},w:{duc:2},wx:"nàng biết ngươi chưa quên",lx:"tốn bạc, người đưa bánh nhiều chuyện",rt:"Xuân Đào gửi lại một chiếc khăn thêu hoa đào quê nhà."},
   {n:"Để mắt đến Thu Cúc",c:{suc:-2},o:()=>40+S.mat*5,w:{mat:1},sc:1,f:"clue",wx:"biết Thu Cúc đi đâu buổi tối",l:{danh:-1},lx:"Thu Cúc biết bị rình, đi đồn ngươi thù vặt, tiếng sút; ngươi mệt rã",rt:"Thu Cúc ra cửa sau Nội vụ phủ, tay ôm một bọc nhỏ.",rf:"Thu Cúc quay lại, cười với ngươi."},
-  {n:"Quên chuyện cũ cho yên",c:{danh:-2},w:{suc:2},wx:"lòng nhẹ",lx:"tiếng xấu của Xuân Đào vẫn còn, người ta bảo ngươi bỏ bạn, tiếng sút",rt:"Ngươi tự nhủ: chuyện đã qua."}]},
+  {n:"Quên chuyện cũ cho yên",c:{danh:-2},w:{suc:2},wx:"lòng nhẹ",lx:"tiếng xấu của Xuân Đào vẫn còn, người ta bảo ngươi bỏ tỷ muội, tiếng sút",rt:"Ngươi tự nhủ: chuyện đã qua."}]},
  s3:{h:"Phòng chứa củi",w:"maid",if:()=>rdPrev()!=="win"&&rdPrev()!=="mid",t:"Ngươi bị phạt quỳ, Thu Cúc đắc ý. Xuân Đào bị nhốt ở phòng chứa củi chờ xét lại. Muốn cứu nàng, phải tìm ra chiếc vòng thật trước khi Nội vụ phủ xét lần hai.",o:[
   {n:"Lén mang cơm cho Xuân Đào",c:{suc:-3},w:{duc:3},wx:"nàng còn sức chờ",lx:"ngày việc đêm lén đi, ngươi mệt rã; bị bắt gặp là thêm tội",rt:"Xuân Đào ăn vội, nắm tay ngươi: “Tỷ đừng bỏ muội.”"},
   {n:"Dò xem Thu Cúc giấu gì",c:{bac:-10},o:()=>40+S.mat*5,w:{mat:1},sc:1,f:"clue",wx:"có manh mối",l:{danh:-2},lx:"lại bị cho là vu cáo, tiếng ngươi sút; bạc mất trắng",rt:"Thu Cúc có một tờ biên nhận cầm đồ giấu trong hộp kim chỉ.",rf:"Thu Cúc la lên, cả phòng xúm lại."},
@@ -46,7 +46,7 @@ rdDef("cnv_ban",5,{t:"Chiếc vòng ngọc",w:"maid",sj:"chiếc vòng ngọc th
   {n:"Báo Nội vụ phủ xử theo phép",c:{bac:-10},o:()=>45+S.danh/5,lx:"Nội vụ phủ có người của Phúc An, bạc lo lót mất trắng, vụ chỉ dừng ở giữa hoặc hỏng",e:["mid","lose"],rt:"Nội vụ phủ ghi nhận, hứa tra.",rf:"Hồ sơ biến mất khỏi bàn Nội vụ phủ."}]}},
  E:{win:{k:1,tag:"Vòng thật về tay chủ",w:"mis",t:"{mis} nhận lại vòng thật. Xuân Đào sạch tiếng hẳn, còn Thu Cúc bị phạt quỳ nửa ngày. Nhưng ai cũng biết Thu Cúc không đủ gan làm một mình.",fx:{danh:4},go:()=>{BAN_MIS(8);return e67merit(4)}},
   mid:{k:0,tag:"Tang vật trong tay ngươi",t:"Ngươi giữ chứng cứ, chưa nói với ai. Kẻ đứng sau chưa biết ngươi đã biết.",fx:{tamco:1}},
-  lose:{k:-1,tag:"Tang vật mất dấu",t:"Phúc An đốt sổ, vòng ngọc biến mất lần nữa. {mis} cho là ngươi cứ gây chuyện vì bạn.",fx:{danh:-3},go:()=>BAN_MIS(-6)}}});
+  lose:{k:-1,tag:"Tang vật mất dấu",t:"Phúc An đốt sổ, vòng ngọc biến mất lần nữa. {mis} cho là ngươi cứ gây chuyện vì tỷ muội.",fx:{danh:-3},go:()=>BAN_MIS(-6)}}});
 
 rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){return rdCast(A,["v"])},
  g:"Thu Cúc không đủ gan một mình vu người. Có kẻ đã hứa che cho nàng. Đường bạc từ cửa sau Nội vụ phủ dẫn về cung {v}.",
@@ -61,7 +61,7 @@ rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){retu
   {n:"Mách {mis}",c:{},o:()=>35+S.danh/4,w:{danh:1},sc:1,wx:"{mis} để ý Thu Cúc",l:{danh:-2},lx:"{mis} cho là ngươi thù vặt, bớt tin; tiếng sút",go:(A,ok)=>BAN_MIS(ok?4:-4),rt:"{mis} cho người đếm lại hộp trang sức.",rf:"{mis} mắng ngươi nhiều chuyện."}]},
  c1:{h:"Điều Xuân Đào đã thấy",w:"maid",t:"Xuân Đào nhớ lại: trước hôm bị vu, nàng mang lụa đến cung {v} và thấy Phúc An dúi chiếc vòng ngọc vào tay cung nữ thân cận của {v}.",o:[
   {n:"Bảo Xuân Đào kể lại trước người làm chứng",c:{suc:-2},o:()=>45+S.duc/5,w:{mat:1},sc:1,f:"wit",wx:"lời Xuân Đào có người nghe",l:{danh:-1},lx:"tin lọt đến cung {v}, {v} để bụng; ngươi mệt mà vô ích",rt:"Một ma ma già nghe hết, gật đầu nhận sẽ nhớ.",rf:"Người làm chứng đi kể khắp nơi."},
-  {n:"Dặn Xuân Đào quên đi để giữ mạng",c:{danh:-2},w:{duc:2},wx:"Xuân Đào an toàn hơn",lx:"mất một nhân chứng, người ta bảo ngươi bịt miệng bạn, tiếng sút",rt:"Xuân Đào gật đầu, mắt vẫn sợ."},
+  {n:"Dặn Xuân Đào quên đi để giữ mạng",c:{danh:-2},w:{duc:2},wx:"Xuân Đào an toàn hơn",lx:"mất một nhân chứng, người ta bảo ngươi bịt miệng tỷ muội, tiếng sút",rt:"Xuân Đào gật đầu, mắt vẫn sợ."},
   {n:"Đem chuyện này hỏi khéo {v}",need:["v"],c:{suc:-2},o:()=>35+S.tamco/3,w:{tamco:2},sc:1,wx:"xem {v} phản ứng",l:{danh:-2},lx:"{v} biết Xuân Đào đã thấy, oán nặng hơn; tiếng ngươi sút",go:(A,ok)=>{rdOan(A,"v",ok?4:8)},rt:"{v} đánh rơi chén trà.",rf:"{v} cười: “Ai thấy gì, cứ nói ra.”"}]},
  c2:{h:"{v} ban ơn",w:"v",need:["v"],t:"{v} cho người mang đến cho Xuân Đào một bộ áo mới, kèm lời nhắn: “Cung ta thiếu người khâu vá. Muốn sang không?”",o:[
   {n:"Khuyên Xuân Đào nhận để dò bên trong",c:{},o:()=>40+S.tamco/3,w:{mat:2},sc:1,f:"inside",wx:"có người ở trong cung {v}",l:{duc:-2},lx:"Xuân Đào vào hang cọp, lòng ngươi cắn rứt",rt:"Xuân Đào sang cung {v}, mỗi tuần lén gửi ngươi một mẩu tin.",rf:"Xuân Đào bị giữ ở phòng giặt, không ra được."},
@@ -106,7 +106,7 @@ rdDef("cnv_ban",7,{t:"Xuân Đào bị phạt",w:"maid",sj:"mạng của Xuân �
  x1:{h:"Trước khi trời sáng",w:"maid",t:"Cơn sốt lên đến đỉnh. Phải cứu Xuân Đào trước khi trời sáng.",o:[
   {n:"Cho nàng uống thuốc đã có",c:{bac:-10},lx:"thuốc không hợp thì nguy",o:A=>40+(A.f.med?20:0),e:["win","lose"],rt:"Mồ hôi vã ra, cơn sốt lui.",rf:"Thuốc không đủ, nàng lịm đi."},
   {n:"Xin đưa nàng ra khỏi Tân Giả khố chữa bệnh",c:{suc:-4},lx:"quỳ xin đến rã người; hỏng thì nợ Nội vụ phủ một ân, vụ chỉ dừng ở giữa",o:A=>35+S.danh/5+(BAN_R()?S.sung/5:(S.tin||0)/5),e:["win","mid"],rt:"Nội vụ phủ cho nàng về phòng bệnh.",rf:"Nội vụ phủ chỉ cho nàng nằm chỗ ấm hơn."},
-  {n:"Quỳ chặn kiệu Hoàng thượng xin cứu bạn",need:["srv"],c:{suc:-3},o:A=>30+S.nt/3,w:{nt:12},l:{tin:-10},lx:"{mis} giận vì kẻ hầu dám chặn kiệu, Chủ tin sút",e:["win","lose"],rt:"Hoàng thượng dừng kiệu, nhìn ngươi, sai thái y đi theo.",rf:"Thị vệ kéo ngươi ra khỏi đường kiệu."},
+  {n:"Quỳ chặn kiệu Hoàng thượng xin cứu tỷ muội",need:["srv"],c:{suc:-3},o:A=>30+S.nt/3,w:{nt:12},l:{tin:-10},lx:"{mis} giận vì kẻ hầu dám chặn kiệu, Chủ tin sút",e:["win","lose"],rt:"Hoàng thượng dừng kiệu, nhìn ngươi, sai thái y đi theo.",rf:"Thị vệ kéo ngươi ra khỏi đường kiệu."},
   {n:"Xin Hoàng thượng cho thái y xuống Tân Giả khố",need:["nsrv"],c:{suc:-3},o:A=>35+S.sung/3,w:{sung:2},l:{sung:-3},lx:"Hoàng thượng thấy ngươi lo chuyện kẻ hầu, Sủng sút",e:["win","mid"],rt:"Hoàng thượng gật đầu, sai thái y đi ngay.",rf:"Hoàng thượng nói: “Việc ấy để Nội vụ phủ lo.”"}]}},
  E:{win:{k:1,tag:"Xuân Đào qua cơn nguy",w:"maid",t:"Sáng ra Xuân Đào mở mắt, gọi tên ngươi. Nàng nói: “Muội sống rồi, muội sẽ nói hết.”",fx:{duc:4},go:()=>e67merit(4)},
   mid:{k:0,tag:"Xuân Đào sống, nhưng yếu",t:"Xuân Đào qua được, nhưng gầy như que củi, còn phải ở lại Tân Giả khố.",fx:{duc:2}},
@@ -117,8 +117,8 @@ rdDef("cnv_ban",8,{t:"Lời làm chứng",w:"mis",sj:"phiên làm chứng vụ v
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Xuân Đào muốn nói",w:"maid",if:RDW(1),t:"Xuân Đào còn yếu, nhưng nắm tay ngươi: “Muội muốn đứng ra. Tỷ đứng cạnh muội nhé.”",o:[
   {n:"Hứa đứng cạnh nàng",c:{danh:-2},w:{duc:2},f:"wit",wx:"Xuân Đào có gan nói",lx:"buộc mình vào phiên chứng, người ta xì xào, tiếng sút",rt:"Xuân Đào gật đầu, mắt sáng lên."},
-  {n:"Dặn nàng chỉ nói điều chắc chắn",c:{},o:()=>45+S.tamco/4,w:{tamco:1},sc:1,wx:"lời nàng khó bị bắt bẻ",l:{duc:-2},lx:"nàng rối, quên nửa, lòng ngươi áy náy vì ép nàng tập",rt:"Hai chị em tập đi tập lại từng câu.",rf:"Nàng càng tập càng rối."},
-  {n:"Khuyên nàng để ngươi nói thay",c:{suc:-3},w:{danh:1},wx:"Xuân Đào được nghỉ",lx:"gánh thêm việc đến rã người; lời ngươi bị coi là lời bênh bạn",rt:"Xuân Đào thở phào."}]},
+  {n:"Dặn nàng chỉ nói điều tận mắt thấy",c:{},o:()=>45+S.tamco/4,w:{tamco:1},sc:1,wx:"lời nàng khó bị bắt bẻ",l:{duc:-2},lx:"nàng rối, quên nửa, lòng ngươi áy náy vì ép nàng tập",rt:"Hai chị em tập đi tập lại từng câu.",rf:"Nàng càng tập càng rối."},
+  {n:"Khuyên nàng để ngươi nói thay",c:{suc:-3},w:{danh:1},wx:"Xuân Đào được nghỉ",lx:"gánh thêm việc đến rã người; lời ngươi bị coi là lời bênh tỷ muội",rt:"Xuân Đào thở phào."}]},
  s2:{h:"Xuân Đào không dám",w:"maid",if:RDW(0),t:"Xuân Đào trốn mặt mọi người. Khi ngươi nhắc đến phiên chứng, nàng khóc: “Muội không dám. Lần sau họ giết muội mất.”",o:[
   {n:"Ôm nàng, không ép",c:{danh:-2},w:{duc:3},wx:"nàng biết ngươi thương",lx:"mất lời của nhân chứng chính, người ta bảo ngươi mềm lòng, tiếng sút",rt:"Nàng khóc đến ngủ thiếp."},
   {n:"Hứa bảo vệ nàng đến cùng",c:{suc:-2},o:()=>40+S.duc/4,w:{mat:1},sc:1,f:"wit",wx:"nàng chịu nói",l:{duc:-1},lx:"nàng hứa rồi lại sợ, ngươi áy náy vì đã hứa suông; ngươi mệt rã",rt:"Nàng lau nước mắt: “Vì tỷ.”",rf:"Nàng gật đầu, nhưng hôm sau trốn đi."},
@@ -139,7 +139,7 @@ rdDef("cnv_ban",8,{t:"Lời làm chứng",w:"mis",sj:"phiên làm chứng vụ v
   {n:"Đứng ra làm chứng, kể hết",c:{suc:-4},o:A=>35+(A.f.wit?15:0),lx:"bị bác là thành kẻ vu cáo lần hai",e:["win","lose"],rt:"Từng lời ngươi khớp với sổ cầm đồ và lời Xuân Đào.",rf:"Người của cung {v} có lời khai khác, khớp hơn."},
   {n:"Chỉ làm chứng về Phúc An",c:{},o:A=>40+S.tamco/5,lx:"cung {v} không bị nhắc, hỏng thì lời ngươi bị bác",e:["mid","lose"],rt:"Phúc An bị kết tội chở đồ ra ngoài.",rf:"Lời ngươi bị nói là không đủ."},
   {n:"Để Xuân Đào tự nói",c:{},w:{duc:2},e:"mid",lx:"lời của một cung nữ chịu phạt nhẹ cân, vụ chỉ dừng ở giữa",rt:"Xuân Đào nói run run, nhưng nói hết."}]}},
- E:{win:{k:1,tag:"Lời chứng đứng vững",w:"mis",t:"Nội vụ phủ ghi lời ngươi làm chứng. Phúc An bị giam, Thu Cúc bị gọi tên. Cả cung biết người cùng quê với Xuân Đào không phải người dễ bỏ bạn.",fx:{danh:5},go:A=>{rdOan(A,"v",6);return e67merit(5)}},
+ E:{win:{k:1,tag:"Lời chứng đứng vững",w:"mis",t:"Nội vụ phủ ghi lời ngươi làm chứng. Phúc An bị giam, Thu Cúc bị gọi tên. Cả cung biết người cùng quê với Xuân Đào không phải người dễ bỏ tỷ muội.",fx:{danh:5},go:A=>{rdOan(A,"v",6);return e67merit(5)}},
   mid:{k:0,tag:"Nửa lời chứng",t:"Phúc An bị xử, nhưng Thu Cúc và cung {v} vẫn đứng ngoài.",fx:{danh:1}},
   lose:{k:-1,tag:"Lời chứng bị bác",t:BAN_T("Lời ngươi bị bác. Ngươi bị phạt quỳ vì vu cáo lần hai, Chủ tin rơi xuống đáy.","Lời ngươi bị bác. Ngươi bị phạt bổng vì vu cáo, cả lục cung xì xào."),fx:{danh:-4,suc:-4},go:A=>{BAN_MIS(-8);rdOan(A,"v",4)}}}});
 
@@ -196,7 +196,7 @@ rdDef("cnv_ban",10,{t:"Trả lại sự thật",w:"eun",sj:"cuốn sổ đồ ra
   {n:"Xin {mis} cho Xuân Đào về cùng phòng",need:["srv"],c:{},o:()=>40+(S.tin||0)/4,w:{duc:1},sc:1,f:"keep",wx:"hai chị em ở gần nhau",l:{tin:-4},lx:"{mis} cho là ngươi đòi hỏi, Chủ tin sút",rt:"{mis} gật đầu.",rf:"{mis} nói: “Người đã đi thì đừng gọi về.”"},
   {n:"Xin Nội vụ phủ cho Xuân Đào về hầu cung mình",need:["nsrv"],c:{bac:-30},w:{duc:2},f:"keep",wx:"Xuân Đào ở trong tay ngươi",lx:"tốn bạc lo lót; cung {v} thấy ngươi giữ nhân chứng",rt:"Nội vụ phủ phân Xuân Đào về cung ngươi."}]},
  t1:{h:"{eun} mặc cả",w:"eun",t:"{eun} nói: “Ta khép sổ. Thu Cúc chịu tội một mình, cung {v} không dính. Đổi lại Xuân Đào được trắng án, người của ta cũng yên.”",o:[
-  {n:"Nhận lời",c:{danh:-2},w:{duc:1},f:"deal",wx:"Xuân Đào được trắng án chắc chắn",lx:"cung {v} không bị chạm đến, người ta bảo ngươi bán lẽ phải, tiếng sút",rt:"{eun} gật đầu, cất sổ vào ngăn kéo."},
+  {n:"Nhận lời",c:{danh:-2},w:{duc:1},f:"deal",wx:"Xuân Đào chắc được trắng án",lx:"cung {v} không bị chạm đến, người ta bảo ngươi bán lẽ phải, tiếng sút",rt:"{eun} gật đầu, cất sổ vào ngăn kéo."},
   {n:"Đòi đưa cả sổ lên",c:{suc:-3},o:()=>35+S.danh/4,w:{danh:2},sc:1,f:"truth",wx:"{eun} không dám ém",l:{danh:-2},lx:"{eun} thành kẻ thù, tiếng ngươi sút; ngươi mệt rã",rt:"{eun} nhíu mày: “Gan đấy. Được.”",rf:"{eun} nói: “Vậy thì không ai được gì.”"},
   {n:"Xin thêm bạc lộ phí cho Xuân Đào về quê",c:{duc:-2},o:()=>45+S.tamco/4,w:{bac:30},sc:1,f:"deal",wx:"Xuân Đào có vốn về làng",l:{danh:-1},lx:"bị coi là mặc cả sự thật, lòng ngươi áy náy; hỏng thì bị chê tham, tiếng sút",rt:"{eun} cười, đẩy sang một túi bạc.",rf:"{eun} nói: “Đừng được voi đòi tiên.”"}]},
  x1:{h:"Cuốn sổ",w:"eun",t:"Cuốn sổ nằm giữa bàn. Sự thật được trả lại hay bị chôn, đêm nay quyết.",o:[
@@ -239,7 +239,7 @@ rdDef("cnv_ban",11,{t:"Đồng hương",w:"maid",sj:"số phận của Xuân Đ�
   lose:{k:-1,tag:"Mất Xuân Đào",w:"maid",t:"Án giữ nguyên. Xuân Đào bị đưa ra Hoàng lăng coi mộ, xa kinh thành ba ngày đường. Ngươi ở lại, mang theo chiếc túi thơm hoa đào nàng khâu dở.",fx:{danh:-4,duc:-2},go:()=>BAN_MIS(-4)}}});
 RD97L.push({a:"cnv_ban_11",tag:"Thu Cúc tự thú, hai chị em cùng lên",w:"maid",p:.12,n:"Đưa Thu Cúc đến trước Nội vụ phủ tự thú",c:{suc:-4},
  path:["Đến gặp Thu Cúc","Gửi thuốc, không gặp","Ở lại cùng tỷ","Đọc thư cùng Xuân Đào","Ngồi khâu cùng nàng","Nhờ {mis} che chở nàng"],np:2,bad:["Không đến","Giữ thư lại, chờ xong việc","Tùy muội"],sc:2,x:[()=>S.duc>=35||S.mat>=2,"Đức từ 35 hoặc Tai mắt từ 2"],
- t:"Thu Cúc bước vào sân Nội vụ phủ, quỳ cạnh Xuân Đào, khai từng món đồ, từng nén bạc, từng lần cung {v} sai. Cả sân lặng đi. {eun} không ém được nữa. Xuân Đào được minh oan, còn được thưởng vì chịu oan mà không cắn ai; ngươi được ghi công vì đã không bỏ bạn. Từ ngày ấy, hai chị em cùng quê cùng bước lên, và trong cung người ta gọi hai người là «đôi hoa đào».",
+ t:"Thu Cúc bước vào sân Nội vụ phủ, quỳ cạnh Xuân Đào, khai từng món đồ, từng nén bạc, từng lần cung {v} sai. Cả sân lặng đi. {eun} không ém được nữa. Xuân Đào được minh oan, còn được thưởng vì chịu oan mà không cắn ai; ngươi được ghi công vì đã không bỏ tỷ muội. Từ ngày ấy, hai chị em cùng quê cùng bước lên, và trong cung người ta gọi hai người là «đôi hoa đào».",
  fx:{danh:10,duc:4},go:A=>{try{rdOan(A,"v",10)}catch(e){}return [BAN_NT(12),e67srvUp(8)].filter(Boolean).join(" ")},rw:"nt_nhuy",ti:"Đôi hoa đào cùng quê"});
 /* Empty Hoàng hậu seat (qOn() false): every text of this road that names the Hoàng hậu / Càn Ninh cung / Trung cung reads the Thái hậu /
    Đức Thọ cung instead, Hoàng hậu favour (hh) in costs/gains/endings becomes Thái hậu favour (th), and the speaker portrait follows.

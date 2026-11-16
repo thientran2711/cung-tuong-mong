@@ -288,7 +288,7 @@ rdDef("cnv_mat",11,{t:"Ánh mắt ấy",w:"emp",sj:"điều ánh mắt ấy tr�
  E:{win:{k:1,tag:"Ánh mắt thành ân tình",w:"emp",t:MATT("Hoàng thượng nói với Kính sự phòng: “Người này, đừng ai làm khó.” Ngươi vẫn chưa có phẩm vị, nhưng cả hậu cung biết ngài đã chọn. Ngày sắc phong chỉ còn là chuyện thời gian.",
    "Ngài ban cho cung ngươi một tấm biển tự tay đề chữ “Niệm”. Cả hậu cung hiểu: ngươi được phong vì một ánh mắt, và được giữ vì một tấm lòng."),fx:{danh:8,duc:2},go:()=>[matSrv({nt:20,tin:5}),matCon({sung:6})].join(" ")},
   mid:{k:0,tag:"Được nhìn mà bị ghét",t:MATT("Hoàng thượng vẫn nhìn ngươi, nhưng ánh nhìn ấy kéo theo bao cặp mắt ghen. Ngươi vẫn là cung nữ, chờ một ngày ngài nhớ lại.",
-   "Ngươi là tiểu chủ, được ngài nhớ, mà hậu cung không ai quên ngươi từng là nô tỳ. Có ân sủng, không có bạn."),fx:{danh:2},go:A=>{rdOan(A,"v",4);return [matSrv({nt:6}),matCon({sung:2})].join(" ")}},
+   "Ngươi là tiểu chủ, được ngài nhớ, mà hậu cung không ai quên ngươi từng là nô tỳ. Có ân sủng, không có tri kỷ."),fx:{danh:2},go:A=>{rdOan(A,"v",4);return [matSrv({nt:6}),matCon({sung:2})].join(" ")}},
   lose:{k:-1,tag:"Ánh mắt khép lại",t:MATT("Ngài thôi nhìn về phía hậu viện. Ngươi vẫn là cung nữ, vẫn pha trà, vẫn sống. Con đường còn dài, chỉ không còn chiếc ô năm ấy.",
    "Ngài thôi đến. Ngươi vẫn là tiểu chủ, vẫn có cung riêng, chỉ không còn ai nhìn ngươi như chiều mưa năm ấy."),fx:{danh:-3},go:()=>[matSrv({nt:-6}),matCon({sung:-4})].join(" ")}}});
 RD97L.push({a:"cnv_mat_11",tag:"Chủ cũ thành tỷ muội",w:"mis",p:.12,n:"Xin {mis} cùng đứng dưới mái hiên",c:{suc:-4},

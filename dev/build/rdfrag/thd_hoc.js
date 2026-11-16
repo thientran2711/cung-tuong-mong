@@ -7,8 +7,10 @@
 function thdHocKids(){try{return allKids().filter(([k])=>k&&k.alive)}catch(e){return[]}}
 function thdHocCast(A){const vf=v=>(v.kids||[]).some(k=>k.alive);
  /* the carried mother lost her last child: she leaves the road, another mother of a live child is cast (the engine tells the recast) */
- try{const K=S.st.f14&&S.st.f14.act,v0=K&&K.v!=null?RV(K.v):null;if(v0&&!vf(v0))delete K.v}catch(e){}
+ let gone=null;try{const K=S.st.f14&&S.st.f14.act,v0=K&&K.v!=null?RV(K.v):null;if(v0&&!vf(v0)){gone=v0;delete K.v}}catch(e){}
  if(!rdCast(A,["v"],{v:vf}))return false;const v=rv67(A,"v");if(!v||!vf(v))return false;
+ /* told to the player like the engine recast (review road-b3-r1: deleting K.v made rdCast silent) */
+ if(gone&&gone.id!==v.id)try{const L=`${gone.name} ${gone.alive?"không còn con theo học":"nay đã khuất"}, người mẹ có con trong lớp nay là ${v.name}.`;(A.rc=A.rc||[]).push(L);log(`<i>${L}</i>`)}catch(e){}
  try{const f=(S.st&&S.st.f14)||{};const L=thdHocKids();const vk=(v.kids||[]).filter(k=>k.alive);
   let a=f.n1&&vk.some(k=>k.name===f.n1)?f.n1:vk[0].name;
   let b=f.n2&&f.n2!==a&&L.some(([k])=>k.name===f.n2)?f.n2:null;
@@ -34,7 +36,7 @@ rdDef("thd_hoc",5,{t:"Học trò nhỏ",w:"emp",sj:"hai học trò nhỏ ở Th�
   {n:"Từ chối khéo",c:{sung:-2},w:{tamco:1},wx:"khỏi gánh việc khó",lx:"ngài thấy ngươi giận dỗi, phật ý",rt:"Hoàng thượng cau mày, rồi tự giao cho người khác."}]},
  c1:{h:"Bút nghiên bị giấu",w:"emp",t:"{n2} đọc thuộc cả thiên Đại học. Các anh em ganh, giấu bút nghiên của nó, và {n1} cũng góp tay.",o:[
   {n:"Phạt cả lớp chép phạt",c:{sung:-1},w:{danh:2},f:"strict",wx:"phép lớp nghiêm",lx:"bọn trẻ đều về mách mẹ, các mẹ kêu lên Hoàng thượng, ân sủng nhạt đi",go:A=>{rdOan(A,"v",2)},rt:"Cả lớp chép bài đến trưa, không ai dám giấu đồ ai nữa."},
-  {n:"Cho {n1} và {n2} ngồi chung một bàn",c:{suc:-2},o:()=>40+S.duc/4,w:{duc:3},sc:1,f:"gentle",wx:"hai đứa thành bạn",l:{danh:-1},lx:"hai đứa cãi nhau suốt buổi, người ta bảo thầy không giữ được lớp, tiếng tăm sứt mẻ",rt:"Đến chiều, {n1} đã mượn bút của {n2}.",rf:"Hai đứa giật nhau cái nghiên vỡ đôi."},
+  {n:"Cho {n1} và {n2} ngồi chung một bàn",c:{suc:-2},o:()=>40+S.duc/4,w:{duc:3},sc:1,f:"gentle",wx:"hai đứa thân nhau",l:{danh:-1},lx:"hai đứa cãi nhau suốt buổi, người ta bảo thầy không giữ được lớp, tiếng tăm sứt mẻ",rt:"Đến chiều, {n1} đã mượn bút của {n2}.",rf:"Hai đứa giật nhau cái nghiên vỡ đôi."},
   {n:"Làm như không biết",c:{duc:-2},w:{tamco:1},wx:"không động mẹ nào",lx:"làm ngơ cho trẻ bị bắt nạt, tổn đức; {n2} tủi thân",rt:"{n2} lặng lẽ viết bằng que tre."}]},
  c2:{h:"Điểm tâm của {v}",w:"v",need:["v"],t:"{v} gửi sang một hộp điểm tâm và một lời nhắn: “Con ta phải đứng đầu lớp. Ngươi biết phải làm sao.”",o:[
   {n:"Nhận hộp, hứa kèm thêm",c:{suc:-3},w:{bac:20},wx:"{v} hài lòng",lx:"kèm thêm mỗi chiều, hao sức; thành ra thiên vị",go:A=>{rdRel(A,"v",6)},rt:"{v} gửi thêm một xấp lụa."},
@@ -68,7 +70,7 @@ rdDef("thd_hoc",6,{t:"Mẹ của học trò",w:"v",sj:"lòng nghi của {v}",ok:
   {n:"Nhận một phần, trả phần còn lại",c:{},o:()=>40+S.tamco/3,w:{bac:20,duc:1},sc:1,wx:"giữ lễ mà không mắc nợ",l:{danh:-1},lx:"{v} không hiểu ý, kể ngươi chê lễ, tiếng tăm sứt mẻ",go:(A,ok)=>{rdRel(A,"v",ok?3:-3)},rt:"{v} hiểu: thầy nhận lòng, không nhận giá.",rf:"{v} cho là ngươi chê lễ mỏng."},
   {n:"Trả hết",c:{danh:-1},w:{duc:3},wx:"tay sạch",lx:"trả hết, {v} thấy bị khinh, kể khắp cung, tiếng tăm sứt mẻ",go:A=>{rdOan(A,"v",6)},rt:"Lễ về nguyên. {v} lặng thinh."}]},
  c2:{h:"Lời gièm ở buổi thỉnh an",w:"hh",need:["hh","v"],t:"Ở buổi thỉnh an, {v} than với Hoàng hậu: “Thầy dạy chữ mà có lòng riêng, con của các tỷ muội chịu thiệt.”",o:[
-  {n:"Xin Hoàng hậu cho người đến xem lớp",c:{suc:-2},o:()=>40+S.hh/4,w:{danh:2},sc:1,wx:"có người làm chứng ngươi công bằng",l:{hh:-2},lx:"Hoàng hậu thêm việc, phật lòng",go:(A,ok)=>{if(ok)rdOan(A,"v",3)},rt:"Ma ma của Trung cung xem ba buổi, về thưa: thầy công bằng.",rf:"Hoàng hậu bảo: “Việc nhỏ, tự lo.”"},
+  {n:"Xin Hoàng hậu cho người đến xem lớp",need:["hh"],c:{suc:-2},o:()=>40+S.hh/4,w:{danh:2},sc:1,wx:"có người làm chứng ngươi công bằng",l:{hh:-2},lx:"Hoàng hậu thêm việc, phật lòng",go:(A,ok)=>{if(ok)rdOan(A,"v",3)},rt:"Ma ma của Trung cung xem ba buổi, về thưa: thầy công bằng.",rf:"Hoàng hậu bảo: “Việc nhỏ, tự lo.”"},
   {n:"Nhận lời trách, hứa để tâm",c:{danh:-2},w:{hh:2},wx:"Hoàng hậu hài lòng",lx:"nhận lời trách như nhận mình thiên vị, tiếng tăm sứt mẻ",go:A=>{rdRel(A,"v",3)},rt:"Hoàng hậu gật đầu cho qua."},
   {n:"Đáp: thầy chỉ có một lòng là dạy",c:{},o:()=>40+S.tai/4,w:{danh:2},sc:1,wx:"cả điện nể",l:{hh:-2},lx:"thành ra cãi nhau trước Hoàng hậu, Trung cung phật lòng",go:A=>{rdOan(A,"v",5)},rt:"Không ai đáp lại được câu ấy.",rf:"Hoàng hậu phạt cả hai im lặng."}]},
  t1:{h:"Đứa trẻ hỏi",w:"v",t:"{n1} kéo áo ngươi: “Thầy ơi, mẹ con bảo thầy ghét con. Có thật không?”",o:[
@@ -138,7 +140,7 @@ rdDef("thd_hoc",8,{t:"Đứa trẻ bị phạt",w:"v",sj:"đứa trẻ bị ph�
   {n:"Mời thái y giỏi nhất xem bệnh",c:{bac:-30},o:()=>50+S.mat*3,w:{danh:2},sc:1,wx:"thái y nói không phải do bị phạt",l:{danh:-2},lx:"thái y nói mập mờ, người ta bảo ngươi mời thái y để chạy tội, tiếng tăm sứt mẻ",rt:"Thái y nói: trẻ bị cảm từ ba hôm trước.",rf:"Thái y chỉ nói: “Trẻ con yếu.”"},
   {n:"Ở yên trong cung mình",c:{duc:-2},w:{tamco:1},wx:"không cho {v} cớ",lx:"người ta nói thầy vô tình, tổn đức",rt:"Ngươi chỉ gửi sang một bát cháo."}]},
  x1:{h:"Ai chịu lỗi",w:"emp",t:"Chuyện đến tai Hoàng thượng. Ngài cho gọi ngươi và {v}: “Con trẫm bị phạt quỳ trong lớp, về cung thì sốt. Lỗi ở ai?”",o:[
-  {n:"Thầy chịu lỗi thay trò",c:{suc:-4},o:A=>40+(A.f.gentle?10:0)+S.duc/6,e:["win","mid"],rt:"Ngươi quỳ nhận hết. {n1} chạy ra quỳ cạnh: “Là con sai.” Hoàng thượng phẩy tay tha cả hai.",rf:"Hoàng thượng phạt bổng ngươi ba tháng, chuyện khép lại."},
+  {n:"Thầy chịu lỗi thay trò",c:{suc:-4},o:A=>40+(A.f.gentle?10:0)+S.duc/6,e:["win","mid"],rt:"Ngươi quỳ nhận hết. {n1} chạy ra quỳ cạnh: “Là con sai.” Hoàng thượng phẩy tay tha cả hai.",rf:"Hoàng thượng quở ngươi một câu trước lớp, chuyện khép lại."},
   {n:"Tâu thật: trò sai, thầy giữ phép",c:{},o:A=>40+(A.f.strict?15:0)+S.danh/5,e:["win","lose"],lx:"{v} bị bẽ trước vua",rt:"Hoàng thượng gật đầu: “Thầy nghiêm thì trò nên người.”",rf:"Hoàng thượng thấy ngươi cứng, {v} khóc to."},
   {n:"Xin ngài tha cho cả lớp",c:{sung:-2},w:{duc:2},e:"mid",lx:"xin tha mà chẳng rõ trắng đen, Hoàng thượng phật ý",rt:"Hoàng thượng cho lui, không nói thêm."}]}},
  E:{win:{k:1,tag:"Thầy chịu thay trò",w:"v",t:"{n1} từ hôm ấy gọi ngươi là thầy bằng cả tấm lòng. {v} không còn cớ để trách, và lần đầu nàng sai người mang trà sang cảm ơn.",fx:{danh:4,duc:4},go:A=>{rdRel(A,"v",10);return""}},

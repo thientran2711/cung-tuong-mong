@@ -55,7 +55,7 @@ rdDef("thd_sach",6,{t:"Kẻ bị chỉ mặt",w:"v",sj:"đòn trả của phủ 
   {n:"Để mặc, sớ tự chìm",c:{suc:-2},w:{duc:2},wx:"không tỏ ra hoảng",lx:"ngồi nhìn sớ chồng thêm, lòng mỏi, hao sức",rt:"Ngươi không làm gì."}]},
  c2:{h:"Nội vụ phủ cắt phần",w:"v",need:["v"],t:"Than sưởi, giấy mực, vải mùa đông của cung ngươi về chậm, về thiếu. Thái giám Nội vụ phủ chỉ nói “theo lệ”. Người đứng sau là {v}.",o:[
   {n:"Tự bỏ bạc mua bù",c:{bac:-40},w:{duc:2},wx:"cung không thiếu gì",lx:"tốn bạc mua bù, {v} biết đòn đã trúng",rt:"Ngươi sai người mua than ngoài cung."},
-  {n:"Tâu lên {hh}",c:{},o:()=>40+(S.hh||0)/4,sc:1,w:{hh:2},wx:"Trung cung chấn chỉnh Nội vụ phủ",l:{hh:-2},lx:"Trung cung phiền vì chuyện nhỏ, phật lòng",go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Nội vụ phủ đem bù đủ trong ba ngày.",rf:"Trung cung bảo việc nhỏ."},
+  {n:"Tâu lên {hh}",need:["hh"],c:{},o:()=>40+(S.hh||0)/4,sc:1,w:{hh:2},wx:"Trung cung chấn chỉnh Nội vụ phủ",l:{hh:-2},lx:"Trung cung phiền vì chuyện nhỏ, phật lòng",go:(A,ok)=>{if(ok)rdOan(A,"v",8)},rt:"Nội vụ phủ đem bù đủ trong ba ngày.",rf:"Trung cung bảo việc nhỏ."},
   {n:"Chịu lạnh, ghi sổ từng lần",c:{suc:-3},w:{tamco:2},wx:"có sổ làm chứng",lx:"chịu lạnh suốt mùa, sức hao",rt:"Sổ ghi đã dày ba trang."}]},
  c3:{h:"Lão thư lại đê Hoài Bắc",w:"maid",t:"Một lão thư lại coi đê Hoài Bắc lặn lội lên kinh, nhờ người đưa vào cung một lời: ông còn giữ sổ thật của đê, sổ mà phủ {n1} tưởng đã đốt.",o:[
   {n:"Gửi bạc giấu ông ở chỗ an toàn",c:{bac:-40},o:()=>45+S.mat*5,sc:1,w:{tamco:2},f:"clerk",wx:"có nhân chứng sống",l:{bac:-10},lx:"chỗ trọ bị lộ, tốn thêm bạc dời ông đi",rt:"Lão thư lại trọ ở chùa ngoài cửa thành.",rf:"Lão phải đổi chỗ, sợ hãi."},

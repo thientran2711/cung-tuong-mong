@@ -108,7 +108,7 @@ rdDef("thd_tro",8,{t:"Đơn kêu oan",w:"emp",sj:"lá đơn kêu oan của sĩ t
  g:"Sĩ tử khắp kinh soạn một lá đơn kêu oan, ký hơn trăm tên, kể tội mua bán đề thi. Đơn không qua được cửa Lễ bộ; sĩ tử thử đánh trống Đăng Văn cũng bị thị vệ chặn trước Ngọ Môn. Con đường còn lại là qua tay ngươi đến ngự án; nếu ngài phê, án sẽ giao Tam pháp ty — Hình bộ, Ngự sử đài, Đại Lý tự cùng xét.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Lá đơn trăm chữ ký",w:"maid",if:RDW(1),t:"Được tự do, {n1} viết lá đơn kêu oan, trăm sĩ tử ký tên dưới. Hắn gửi vào cung, kèm một câu: “Xin nương nương đừng vì con mà liều.”",o:[
-  {n:"Đọc kỹ từng chữ",c:{suc:-2},w:{mat:1},f:"read",wx:"biết lá đơn mạnh yếu chỗ nào",lx:"đọc từng chữ đến khuya, hao sức; mất thêm ngày",rt:"Lá đơn chắc chắn, chỉ có một câu nhắc đến Thị lang hơi quá lời."},
+  {n:"Đọc kỹ từng chữ",c:{suc:-2},w:{mat:1},f:"read",wx:"biết lá đơn mạnh yếu chỗ nào",lx:"đọc từng chữ đến khuya, hao sức; mất thêm ngày",rt:"Lá đơn chặt chẽ, chỉ có một câu nhắc đến Thị lang hơi quá lời."},
   {n:"Gửi lời cảm ơn trăm sĩ tử",c:{bac:-30},w:{danh:3},wx:"sĩ lâm nhớ ơn",lx:"tốn bạc cảm ơn sĩ tử; nhà {v} biết ngươi đứng sau, thêm oán",go:A=>{rdOan(A,"v",4)},rt:"Sĩ tử truyền nhau: trong cung có người nghe họ."},
   {n:"Bảo {n1} giữ đơn thêm ít ngày",c:{duc:-2},w:{tamco:2},wx:"chờ thời",lx:"giữ đơn của người bị oan, tổn đức; sĩ tử nóng ruột",rt:"{n1} cất lá đơn vào ống tre."}]},
  s2:{h:"Cha lên kinh",w:"dad",if:RDW(0),t:"Nghe tin học trò gặp nạn, {dad} chống gậy lên kinh. Ông ký tên đầu lá đơn: “Thầy của {n1}”.",o:[
