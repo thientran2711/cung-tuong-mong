@@ -70,3 +70,14 @@ main at start = eba64ead4.
 - (16/11 06:50Z) ORDER from main s10: UNBLOCKED → (1) act-split waves 2–3: GO (act-dedupe wave 1 live on main 02a0d3f108); (2) coop-chat review: GO (kitStageRail goal-strip-fix live since a363cc14a); (3) slap-mg still waits for facefx-all (merge-hot-2 running). Open them as separate sessions now, claim first.
 
 - (16/11 07:25Z) ORDER from main s10: D51 fxkit call-site wiring is MOVED to main (the main-run art worker paints the sprites AND wires them). Drop it from your queue.
+
+## HANDOVER (Foreman D s2 → s3, 16/11 07:30Z; reason: s2 context past start+25% budget)
+- All D workers/reviewers are SEPARATE sessions (they survive the rollover); results land in dev/handover/reports/<name>.md. RUNNING now:
+  coop-chat review (review-coop-chat-r1.md, session_01DgYSWnc7QSik7k9buMTQwK), balance-after-truth review (review-balance-after-truth-r1.md, session_01DgYSWp8zZ1eyzXhLPpAj3x),
+  servant part C review (review-servant-mline-r1.md, session_01DgYSWnPWsFwg4R6LHZTKjr), slap-mg review (review-slap-mg-r1.md, session_01DgYSWpbGcGGy33MK9zBq4u),
+  act-split w2–3 + stroll worker (act-split-w2.md, session_01DgYSWkZteXgU6WAkpJc2qr), Danh balance worker (danh-balance.md, session_01DgYSWoB9ztxCwmdBUbbxDS).
+- On each report: PASS → "## PASS" + CLAIMS line; SẴN SÀNG KIỂM (act-split-w2, danh-balance) → claim + open a reviewer session (opus; Danh = proposal to main chat, numbers need owner OK).
+- Read the INBOX lines the main chat writes into this file (s10 wrote 06:00/06:36/06:50/07:25Z orders here) on every wake.
+- Briefs must POINT TO dev/PRIORITY_RULES.md + dev/art/OWNER_ART_RULES.md and order them read in full (owner 07:45Z verbatim rule).
+- Not D's anymore: all art (main samples / C mass), D51 wiring (main), D52 (C). Nothing else waiting in slice D.
+- s1 (session_01DgYSWnmBMie8SxZvqc7aLy) is idle. s2 hourly wake trig_01GyzifNPR5nRN45YRj4LXdb is deleted at handover; s3 must create its own.
