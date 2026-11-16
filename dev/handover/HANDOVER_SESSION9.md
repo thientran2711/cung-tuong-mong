@@ -157,3 +157,4 @@ OWNER ASLEEP since 07:40Z: NO messages until her 8 AM; then ONE report with ever
 - (09:15Z s12) LIVE: main = 5e5c4128 (kc-lore-r1). weather-fx-one-r1 GO sent (reports READY to s13). CORRECTION: rollover is by CONTEXT (OD:L1217), not 30 turns — s13 told.
 - (09:20Z s12) ROLLOVER FIX: box at top of START_MAIN/START_FOREMAN (context via get_session, 30-turn counter is display only); foremen told; s13 told.
 - (09:25Z s12) npc-mind SẴN SÀNG KIỂM 7fd289cd → review + BALANCE BLOCKER (HH 0–4 %, early death 50 % on main) moved to Foreman B. NVP v4 finals on CDN img/nvp-v4-*.webp, review/nvp-v4 holds NVP_V4.md (not wired).
+- (09:28Z s12) one-core SẴN SÀNG KIỂM 7b9d022f → B reviews. All bots agree: HH reach ~5 % on main (target ~32 %) → B balance pass, 8 AM report.
