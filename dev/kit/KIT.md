@@ -3533,6 +3533,17 @@ Old flat CSS flashes: red → painted blood edge; gold / warm → painted glowbu
 `node dev/test/fxkit.js <url> <out> [shots]` (5 sizes + reduced motion): every kind loads, 50 bursts → 0 leaks + pool reused, every kitFx kind,
 lights play (screen blend), low-end sheet, edges / gift / letter / sheets clean up, auto-Gọn, frame time, heap after bursts, bytes per scene.
 Kit page sample "§68": a button per sprite kind, light, sheet, edge, gift act, letter and kitFx moment.
+### 68.6 WEATHER + SEASON LAYERS (owner 16/11 12:08Z round 2, review/weather-fx2) — `kfWxCfg` / `kfSeCfg` / `KF_WX` / `kfBolt` in `dev/build/jfx.js`
+ONE kit part for every weather / season picture; nothing is drawn per screen. Painted sprites only (atlases of §68.2); the only non-art is a plain white rectangle (the stage mask and the lightning wash).
+- Layers on the one `#kfxcv` canvas: WEATHER (`wx`, today's `S.wx`, clipped to the stage rectangle) and SEASON (`se`, month, whole screen, sparse). Falling weather of the season's own kind (spring petals, autumn leaves, winter snow) IS the season layer (one effect, cap x.85); wind is NOT merged (it stays a bold stage layer).
+- Spring (Jan-Mar): PINK peach blossom only (`petal-peach`, tint pink), never leaf / osmanthus / gold (yellow reads as autumn). Festival Tet / Nguyên tiêu use the same peach petals; gold petals only on Giao thừa.
+- Summer (Apr-Jun, lotus season): no petals. Season layer `sun` = golden motes (`orb`/`ember`, tint warm) drifting up + `KF_RAYS` (slanted painted `streak` beams, one `glowburst` sun glow at the top right). Heat shimmer and dragonflies are NOT done (no painted dragonfly atlas yet; kit request).
+- Snow (`snow` 64, `snowh` 100, `frost`, `snowp`): bigger flakes (x1.5-2.5), blue tint so they read on light paintings, denser; still no blizzard.
+- Wind (`wind`, autumn "gió heo may"): up to 96 blown leaves across the whole stage height from the left, 5-9 px/frame, strong spin and gusts, plus pale wind streaks (`streak` lines, brown-grey, tilted by their path).
+- Fireflies (`fly`, night "đom đóm" + Thất tịch / Trung thu): each = soft lime halo (normal blend, so it shows on light art) + bright core, 2 sprites on the same path, slow blink.
+- Storm lightning = `kfBolt()` (j11 calls it with the thunder sound): a light wash over the WHOLE stage rectangle (above figures and art), two strobes + fade. The old CSS `.stage::after` flash (45 % high) is deleted.
+- Rain unchanged. Gọn / reduced motion / bots: no particles and no flash (`kfStill`); caps = cap x phone x height x adaptive `KFX.q`, hard `KFK_CAP`.
+- Kit page sample §68: row of `weather <kind>` buttons (`kfWxPreview(id)`: one full-screen burst; `bolt` = lightning).
 ## 70. ITEM DETAIL · kitItemDetail · kitItemCard · kitItemTap (owner 15/11 "Khi bấm vào món đồ không thấy hiện thông tin món đồ", review/item-info) — `dev/build/jitd.js` (after jitev, before jtoil)
 Registry: §70 (next free number; coordinator to confirm). Rule: **tapping ANY item cell shows this block** — never a blind act (wear / place / take off) on a tap,
 never a private item card. Reuses §54.1 kitItemInfo (picture, name, grade), §51 kitRows, kitItem (§15), kitGradeChip, kit-x (§32.10), pbtn.
