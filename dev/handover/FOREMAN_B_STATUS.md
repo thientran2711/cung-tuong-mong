@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 — cap 12 (FOREMAN_B.md), each agent ≤2 browsers. All agents were stopped by an owner interrupt ~02:00Z; restarted with owner OK (WIP resumed from worktrees). Running: 9 workers + 3 reviewers (12/12).
+Updated: 11/16/2026 02:53Z — cap 12, each agent ≤2 browsers. Running 12/12: 9 workers (C41, C24, D34, D36, C46, C32, C26b, D33, D42) + 3 reviewers (weekbook-entries, contest-ui, lost-items-port). Waiting: D41 (Foreman C D29 roster still RUNNING), D31 (re-measure with C7). PASS so far: 13.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
 | Item | Branch | Model | State |
