@@ -37,3 +37,7 @@ Content overlap, not commit overlap: opt-pics3-r1 carries tuduc-sub-r1 (jtds.js)
 - First attempt at tuduc-mg after the opt-pics3 merge failed only because of the harness (see Extra commits), not the game.
 - After the second main merge also re-run on the final sha: boot x5 OK, tuduc-mg cong+hanh at 844x390 4/4 pass.
 - Third merge of origin/main 2940a545 (GO from s13; new main module jhouse.js kept last as on main): boot x5 OK (no page errors/overflow), coop-e2e 59/59.
+
+## Post-deploy smoke (live, main = 399483e3)
+- https://thientran2711.github.io/cung-tuong-mong/ served the new build (index.html sha256 equals the branch build; CTM_BUILD ac02e15da347; first poll still showed the previous build until Pages finished, about 1 minute).
+- 755x1000@2 and 1180x820@2: HTTP 200, boot OK, no page errors, no horizontal overflow, jtrong and jtds loaded. SMOKE PASS.
