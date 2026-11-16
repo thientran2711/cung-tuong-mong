@@ -76,3 +76,14 @@ See the table appended below (before = origin/main build, after = this build).
 - Favour formula (2 + fee/4) is my reading of decision (b); the gift-scale argument says flat 4 was already roughly fair, so this is a
   mild scale-up at high rank (6–8). Easy to tune in BAL.rcp.tFavB/tFavK.
 - D19 can value works with `wkEval(S,e.wk,target)`; Tứ đức kinds via `tdsKinds()`.
+
+### Measure results (3 lives × 24 months each, ranks stayed 0–1 in this driver)
+| build | Tứ đức lessons (teacher) | fee paid | fee per teacher lesson | fee / bổng over the run | Tứ đức works made | lối learnt | Đức end | NPC works (Tứ đức) |
+|---|---|---|---|---|---|---|---|---|
+| before (main) | 51/52/52 (22/17/18) | 330/240/250 | ≈14 | 23% / 18% / 19% | 0 | – | 52 | 0.4–0.6 (0) |
+| after | 34/75/34 (32/3/34) | 192/9/136 | 4–6 | 13% / 1% / 10% | 34/75/34 (≈even over 4 kinds) | 4/4/4/4 | 62–63 | 0.55–1.3 (0–0.5) |
+- The fee now follows bổng: 3–4 bạc at the low ranks (was 5–25 by bậc, ≈14 average), up to 22 at Hoàng hậu pay, so a teacher lesson is
+  the same share of the month at every rank (owner 20:15Z "lower the price a lot" for low ranks; bạc rule).
+- Đức +10 in this heavy driver comes from Hạnh works (Đức +1 each, same as chép kinh); a normal player makes far fewer. Tune by
+  removing `fin` from WK.phucthien if reviewers find it too strong.
+- NPCs now carry Tứ đức works (≈0.5 each after 2 years), which feed their gifts through wkNpcUse.
