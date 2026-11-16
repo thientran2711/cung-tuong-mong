@@ -20,7 +20,7 @@ Base main at start: 900ace7fb.
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
-| D2 item-art (poem items as calligraphy, incense colours, no-rack dresses, chubby teen pets, 1024 masters) | review/item-art | sonnet | RUNNING (art worker) |
+| D2 item-art | review/item-art-r2 @067a052b3 (docs only; 338 files replaced/added on CDN in place: 44 poem calligraphy, 44 incense colours, 25 rack-less dresses, 8 chubby teen pets, 121 img/hi 1024 masters) → review/item-art-r3 | sonnet | REVIEWING |
 | C20 act-text resume | review/act-text @593e66b3a | sonnet | RUNNING (worker) — also takes Foreman B Q2 (KÈM gain → ĐƯỢC) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
 | D16 Tứ đức sub-styles + CDNH works (10 items × 4 tiers with art) + A13 teacher-fee notes | review/tuduc-sub | opus | RUNNING (worker; D17/D19 wait for it) |
