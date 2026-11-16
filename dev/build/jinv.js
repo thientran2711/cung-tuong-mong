@@ -32,7 +32,7 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
  /* wear column (kinvside): its slot = one bag cell, shrunk so the 6 slots + names fit the panel height (never below 44 px); sized BEFORE the free height is measured */
  try{const sd=g.closest(".kinv").querySelector(".kinvside");if(sd){const P0=g.closest("#panel"),cs0=getComputedStyle(P0),n0=sd.querySelectorAll(".keqc").length||6,h4=(sd.querySelector(".kpst")||{offsetHeight:0}).offsetHeight+4;
    const avail=P0.getBoundingClientRect().bottom-(parseFloat(cs0.paddingBottom)||0)-(sd.getBoundingClientRect().top-(parseFloat(getComputedStyle(sd.querySelector(".keq")).paddingTop)||0)*0)-6;
-   g.__kper=Math.floor((avail-h4-12)/n0-5-13);sd.parentElement.parentElement.style.setProperty("--kside",Math.max(44,Math.min(g.firstElementChild?g.firstElementChild.getBoundingClientRect().width:999,g.__kper))+"px")}}catch(e){}
+   g.__kper=Math.floor((avail-h4-12)/n0-5-13);sd.parentElement.parentElement.style.setProperty("--kside",Math.max(56,Math.min(72,g.__kper))+"px")}}catch(e){}
  const n=+g.dataset.n||0,min=+(g.closest(".kinv").dataset.min||4);const want=Math.max(min*cols,Math.ceil(n/cols)*cols);let have=g.children.length;
  if(have<want){g.insertAdjacentHTML("beforeend",kitInvEmpty(want-have));have=want}else for(let i=have;i>Math.max(want,n);i--){const c=g.lastElementChild;if(c&&c.classList.contains("kitem-empty")){c.remove();have--}else break}
  const P=g.closest("#panel");if(!P||!P.clientHeight||!g.firstElementChild)return;const pr=P.getBoundingClientRect(),cs=getComputedStyle(P);
@@ -55,7 +55,7 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
   cols=c2}
  /* what is left (less than one bag row) goes to the equipment slots, which grow up to 112 px */
  try{const kv=g.closest(".kinv"),cw=g.firstElementChild?g.firstElementChild.getBoundingClientRect().width:0;if(cw)kv.style.setProperty("--kcell",Math.round(cw)+"px");
-  const sd=kv.querySelector(".kinvside");if(sd&&cw)kv.style.setProperty("--kside",Math.max(44,Math.min(cw,g.__kper||999))+"px")}catch(e){}
+  const sd=kv.querySelector(".kinvside");if(sd&&cw)kv.style.setProperty("--kside",Math.max(56,Math.min(72,g.__kper||999))+"px")}catch(e){}
  const q=P.querySelector(".keq:not(.keqv):not(.keqr)");if(q){q.style.removeProperty("--keqsz");if(P.scrollHeight<=P.clientHeight+1){const f2=freeOf()-8;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
   const c0=q.querySelector(".keqc");const maxW=c0?c0.clientWidth:150;if(f2>4&&s0)q.style.setProperty("--keqsz",Math.round(Math.min(112,maxW,s0+f2))+"px")}
   else{/* a few px too tall: shrink the equipment slots rather than scroll (never below 64 px) */const over=P.scrollHeight-P.clientHeight;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
@@ -203,7 +203,7 @@ function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o
  if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql">${x.label}</b></div>`).join("")+`</div></div>`;
  /* row = ONE small strip under the bag (the pet): slot SAME size as a bag cell, name + state as text beside it */
  if(o.row){let first=true,sm=0;return `<div class="keq keqr" data-keq="${key}"><h4 class="kpst">${o.title||""}</h4><div class="keqrs">`+L.map((x,i)=>{
-   const t=x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit((x.mini||"").replace(/<span class="keql2">/,(!sm&&o.sum?(sm=1,o.sum):(sm=1,""))+'<span class="keql2">'))}`:(first?`<b class="keql">${o.empty||"Chưa có"}</b>`:"");if(!x.item)first=false;
+   const t=x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit((x.mini||"").replace(/<span class="keql2">/,(!sm&&o.sum?(sm=1,o.sum):(sm=1,""))+'<span class="keql2">'))}`:(first&&!L.some(y=>y.item)?`<b class="keql">${o.empty||"Chưa có"}</b>`:"");if(!x.item)first=false;
    return `<div class="keqrc">${cell(x,i)}<div class="keqrt">${t}</div></div>`}).join("")+`</div></div>`}
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
   L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
@@ -241,12 +241,12 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .dlg.kpanel .keqpick{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0}
 /* vertical wear column + pet strip (review/tutrang-layout) */
 .kinvbody{display:block}.kinvbody.kinvws{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:start}.kinvmain{min-width:0}
-.keq.keqv{margin:0;padding:6px 4px 6px;width:calc(var(--kside,64px) + 14px);box-sizing:border-box;text-align:center}.keq.keqv .kpst{margin:0 0 4px;font-size:.58rem;letter-spacing:0;white-space:nowrap;border:0;padding:0}
+.keq.keqv{margin:0;padding:6px 4px 6px;width:calc(var(--kside,72px) + 14px);box-sizing:border-box;text-align:center}.keq.keqv .kpst{margin:0 0 4px;font-size:.58rem;letter-spacing:0;white-space:nowrap;border:0;padding:0}
 .keq.keqv .keqs{display:flex;flex-direction:column;gap:5px}.keq.keqv .keqc{display:flex;flex-direction:column;align-items:center;gap:1px}
-.keq.keqv .keqc>.kitem-slot{width:var(--kside,64px)}.keq.keqv .keql{font-size:.58rem;line-height:1.1;color:var(--ink2,#7a6a58);font-weight:600;overflow-wrap:anywhere;max-width:100%}
+.keq.keqv .keqc>.kitem-slot{width:var(--kside,72px)}.keq.keqv .keql{font-size:.58rem;line-height:1.1;color:var(--ink2,#7a6a58);font-weight:600;overflow-wrap:anywhere;max-width:100%}
 .kinvsum{margin:6px 0 0;padding:0 2px}
 .keq.keqr{margin:6px 0 0;padding:6px 8px;display:block}.keq.keqr>.kpst{display:none}.keq.keqr .keqrs{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
-.keq.keqr .keqrc{display:flex;align-items:center;gap:10px;min-width:0}.keq.keqr .keqrc>.kitem-slot{width:var(--kcell,72px);flex:none}
+.keq.keqr .keqrc{display:flex;align-items:center;gap:10px;min-width:0}.keq.keqr .keqrc>.kitem-slot{width:72px;flex:none}.keq.keqr .keqnote{flex-direction:column;align-items:flex-start;gap:1px}
 .keq.keqr .keqrt{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left}.keq.keqr .keqrt .kpst{margin:0}.keq.keqr .keql{font-size:.8rem;color:var(--ink2,#7a6a58)}
 .keq.keqr .keqnm{font-size:.82rem}.keq.keqr .keqfx,.keq.keqr .keqnote{justify-content:flex-start}
 `;document.head.appendChild(st)})();

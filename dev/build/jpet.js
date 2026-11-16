@@ -221,7 +221,7 @@ function petCareW(P){const c=P.care||0;return c>=70?["Khỏe","g"]:c>=30?["Cần
 function petHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S),mx=Math.max(petMax(S),L.length);const slots=[];
  for(let i=0;i<mx;i++){const P=L[i];const lab=i===0?"Theo hầu":"Tẩm cung";
   if(P){const T=petT(P),cw=petCareW(P);slots.push({k:"p"+i,label:lab,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]}`},
-   mini:(S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"")+`<span class="keql2"><span class="keqm">${S.petOn===i?"theo hầu":"ở tẩm cung"} · ${cw[0]}</span></span>`})}
+   mini:(S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"")+`<span class="keql2"><span class="keqm">${(typeof petStage==="function"&&BAL.pet&&BAL.pet.stages?BAL.pet.stages[petStage(P)]+" · "+Math.max(0,tsbWk()-(P.at||0))+" tuần · ":"")}${S.petOn===i?"theo hầu":"ở tẩm cung"} · ${cw[0]}</span></span><span class="keql2"><span class="keqm">${T.use}</span></span>`})}
   else slots.push({k:"e"+i,label:lab,i,item:null,ghost:petSrc(i%2?"meomuop":"cho")})}
  const up=L.reduce((s,P)=>s+(petT(P).up||0),0);
  const sum=(L.length?`<span class="kchip n kluxc">Xa xỉ <b>+${petLuxOf(S)}</b></span>`+(up?kitChip("Bạc nuôi",-up):""):"");
