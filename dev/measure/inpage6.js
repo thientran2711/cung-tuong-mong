@@ -28,6 +28,8 @@ function modalStep(sens){
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
         if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;/* diff-remeasure (16/11): a sensible player reads what the card shows: the side costs after "kèm:" / "hỏng:" count at half weight, and the risk label (OD:L477) */{const km=String(o.x||"").split(/kèm:|hỏng:/).slice(1).join(" ");const W={"Sủng":1.5,"Danh":1.2,"Đức":1.5};km.replace(/(Sủng|Danh|Đức) -(\d+)/g,(m,k,n)=>{v-=W[k]*(+n)*.5;return m});if(o.risk==="liều")v-=1;else if(o.risk==="có rủi ro")v-=.3}v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
       note("dilemma");chooseM(pickI);return true}
+    /* diff-remeasure: kit pick dialogs (tuduc-sub "Học X: làm gì?" / "… dùng vật liệu gì?", KIT shop grid): a player taps the first item she can make */
+    if(m.kit&&m.kit.pick&&!window.__noPick){try{showModal()}catch(e){}const b=[...document.querySelectorAll('#ov [data-kwrgo],[data-kwrgo]')].find(x=>!x.disabled&&x.offsetParent!==null);if(b){note("pick");b.click();return true}}
     closeModal();return true}
   return false}
 function cardOK(a){return !a.done&&!S.dead&&canPay(a)&&!a.lock&&(typeof j76win==='function'?j76win(a,()=>can(cardCost(a))):can(cardCost(a)))&&!(a.b!=null&&(S.buoi||0)!==a.b)}
