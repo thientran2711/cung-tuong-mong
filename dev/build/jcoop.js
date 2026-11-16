@@ -25,7 +25,7 @@
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const DEF_URL="https://ctm-coop.victoria-tntt.workers.dev";
-const BIG=200000,PING=20000,SILENT=50000,BACK=[1000,2000,4000,8000,10000];
+const BIG=200000,PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
 const H={};
 const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,peerOnline:false,bothIn:false,playing:false};
 let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
@@ -94,7 +94,18 @@ function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
  const s=JSON.stringify(o);try{if(s.length>BIG&&typeof CompressionStream!=="undefined")ws.send(await gz(s));else ws.send(s);return true}catch(e){return false}}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
+/* owner 16/11 ("không thấy sang buổi"): a phone that slept keeps a socket that LOOKS open (readyState 1) but is dead — a `bend` sent on it
+   is lost and the server drops the seat after 45 s ("Hảo hữu đã rời cuộc"). On return: reconnect at once when the socket is closed, she was
+   away > 3 s or nothing came in for a while; otherwise ping and reconnect when no answer comes within 3 s. The room snapshot then resends
+   what was lost (jcoopworld syncRoom: rebend / re-end) and catches her buổi up with the room. */
+let hidAt=0;
+function wake(){if(!want)return;const away=hidAt?Date.now()-hidAt:0;hidAt=0;
+ if(!ws||ws.readyState>1||away>3000||Date.now()-lastRx>PING+5000){tries=0;connect(st.room);return}
+ if(ws.readyState!==1)return;const r0=lastRx;try{ws.send('{"t":"ping"}')}catch(e){}
+ setTimeout(()=>{if(want&&lastRx===r0&&ws&&ws.readyState===1){tries=0;connect(st.room)}},3000)}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"){hidAt=Date.now();return}wake()});
+addEventListener("pageshow",e=>{if(e.persisted)hidAt=hidAt||1;wake()});
+addEventListener("focus",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
 addEventListener("online",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
 window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},state:st,create,join,resume,leave,send,on,off,emit,other,
  code:"",seat:null,week:0,online:{a:false,b:false},ended:{a:false,b:false},frozen:false,waiting:false,live};
