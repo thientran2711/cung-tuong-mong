@@ -792,5 +792,21 @@
   "seconds": 1.78,
   "bytes": 14463,
   "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-zither": {
+  "kind": "sfx",
+  "file": "sfx-zither.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oCczEl8e",
+  "seconds": 2.19,
+  "bytes": 18016,
+  "loudness": "Mmax -16 LUFS, peak -2.6 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-candle-out": {
+  "kind": "sfx",
+  "file": "sfx-candle-out.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw6kbVDCm",
+  "seconds": 1.99,
+  "bytes": 16553,
+  "loudness": "Mmax -17.4 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
  }
 }

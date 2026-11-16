@@ -2987,6 +2987,21 @@ label ("Sinh hoàng tử" wrapped to 3 lines, one word per line).
   rule panels, item dialogs, the shop, Sổ luân hồi and the end card; per list it prints the value-x spread, labels standing one word per
   line, and any legacy two-cell `.pcrow` or flex space-between row list. Exit 1 on any fail.
 
+### 51.1 ONE BLOCK = ONE LABEL COLUMN · `kitRowsAlign(root)` (owner 15/11 "Hàng trên hàng dưới chưa alignment", review/row-align) — j79
+Owner bug: mood dialog "Tâm trạng · …", block ĐANG TÁC ĐỘNG: "LO ÂU | …" and "ẢNH HƯỞNG | …" started their values at different x, because
+the 2nd row was a kitPanel section with no heading = a 2nd kitRows grid sizing its own label column.
+- **Rule:** inside one block every label | value row shares ONE label column (the widest label of the block, capped as in §51), so all
+  values start on one vertical line, like TỐN / ĐƯỢC / MẤT / GHI CHÚ in action cards. A heading (`h4.kpst`) starts a new block.
+- **How:** `kpBuild` (every kit panel, spec sections and legacy html) runs `kitRowsAlign(main)`, which joins kit tables (`.kb.kpkb`)
+  that read as one block into ONE grid: (a) a table right after a table; (b) a section with no heading whose first child is a table,
+  after a section / table that ends with a table; (c) a bare table right after such a section (e.g. Xét phẩm "Ghi chú" under
+  "Điều kiện lên …"). Content after the joined rows keeps its order. Callers write nothing special: just don't hand-build rows.
+- Narrow screens: unchanged §51 column cap (`fit-content(max(34%,7rem))`), long labels wrap inside the column.
+- Migrated in the same pass (scan): Bổng lộc (jecon `blCard` override still wrote legacy `.pcrow` rows) → `kitRows` (rank | N bạc · goods).
+- Sample on the kit page: "§51.1". Test: `node dev/test/kit-table.js <url> <W>x<H>@dpr [shots] [steps]` now also measures `kit-block`
+  (kit tables with the same left edge, ≤22 px apart, no heading between = one block; value-x spread must be ≤1 px) and has a `mood`
+  step (emoBox for the player + 3 women).
+
 > Numbering note (review r6, 15/11): review/fix-float first wrote these as §51 (relation table, §51.1 kitImgSync) and §52 (number delta). The coordinator's registry reserves §51 for kit-table, so they were renumbered: relation table = §52, kitImgSync = §52.1, number delta = §57.
 
 ## 52. RELATION TABLE · kitRelTable / kitRelRows / kitRelDelta (owner 11/15 15:30Z + 16:50Z "LUẬT KIT TRƯỚC", review/fix-float) — `dev/build/jkrel.js` (after jaudit, before jint)
@@ -3354,6 +3369,60 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   PEND builder: event → item → choice → act; fails on a destroying/handing choice with no item found, or an item without a picture).
 - Kit page (§47): sample "§64" = every story item tag + one button per act.
 
+## 62. NIGHT-END + NEW-DAY PICTURES · kitNightEnd · kitNewDay (owner 15/11 19:35Z, review/night-end) — `dev/build/jne.js` (after jevb, before j84)
+Owner: a closing picture for each night shows the END-of-night mood (never the bedding act, no faces), how the night moved the Emperor's
+mood (liked / did not like) and the rewards; sound + light by mood; a new-day picture by season / festival when no bedding night.
+- **kitNightEnd({tier, m0, m1, before, items, line})** — a kit motion stage (j93 kmStage, queued with kmPush, id `#kneov`): the picture
+  (4:3, `img/kit/ne-night-<tier>.webp`, framed like every kit picture: gold line + parchment ring) with its light layer, the title
+  (Đêm mặn nồng · Đêm êm đềm · Đêm lạnh nhạt), one line, then the kit list panel `.kmlist` = ONE `kitRows` table (§51): Hoàng thượng |
+  mood before → after · ngài hài lòng / bình thản / không vui (g / n / r), Được / Mất = `kaResultRows(before)` (Sủng, Ân tình, Danh, Bạc …
+  before → after), Kèm = `kitKemRow`; reward rows = `kitItem` sm + `kitGradeChip` + name (the kitReward list row). Button Nhận (reward) /
+  Tiếp tục. Tap during the picture = show all; tap outside the list after = close. On close each reward item flies to Tư trang
+  (`kitFlyItem`). It REPLACES the night's result toast ("Đêm thị tẩm") and the pillow-talk option's toast; the bestow tray (`kitReward`) is
+  held during her night and shown on this card instead (no double reveal).
+- **Tier rule** = `BAL.nightEnd` (jne): points = the night's own score `s` (j8 night1: prep + talk fit + his mood + luck, −2 confiscation)
+  + toilette today (jtoil makeup tuyệt/đẹp +1, vụng/diêm dúa −1) − 2 if the pillow talk lost her Sủng or Ân tình − 2 if she is ill;
+  ≥ 6 mặn nồng, ≥ 3 êm đềm, else lạnh nhạt. His mood after: warm one step better, cold one step worse (never to giận dữ), normal unchanged.
+  `window.kneLast` = {tier, pts, why[], m0, m1, items} for tests.
+- **kitNewDay({host, night, day, wx, then})** — plays inside the week panel `#dawn` BEFORE the Tuần lục book (j87) when she had NO bedding
+  night in the tuần that ended: beat 1 the lonely night (`ne-night-lonely`; Đêm không được triệu: "Đêm qua Hoàng thượng nghỉ ở cung X" /
+  "không lật thẻ bài nào" / "Thẻ bài của ngươi được lật, nhưng đêm qua ngươi không hầu giá" / stolen on the road / lãnh cung; or Đêm theo lệ:
+  mùng một / rằm at the Empress's palace — j75 nightWhy causes), beat 2 the dawn: season `ne-dawn-<xuan|ha|thu|dong>` or, on a festival
+  day (`festToday`), that festival's own band picture `ev-fest-<k>-b.webp` ("Sáng <tên lễ>"), the day's weather drifting over it
+  (petals / plum / maple / snow / rain / fireflies by `S.wx`). 2.2 s + 2.4 s (`BAL.nightEnd.lonelyMs/dawnMs`), tap = skip to the book.
+  Not for a servant (isSrv: lonely beat skipped only) — a bedded tuần shows no beats (the night card closed that night).
+- **Sound** (kitSfx when review/sfx is merged, else j11 sfx): warm sfx-zither + vo-f-laugh-soft-1 · normal sfx-wx-crickets + sfx-night ·
+  cold sfx-candle-out + vo-f-sigh-1 · lonely / custom sfx-night-watch (mõ canh) + sfx-wind · dawn sfx-wx-birds (đông: sfx-wind); j18 bell
+  still rings with the book. **Light (r2, painted only, §68):** `kitFxLight` clips placed INSIDE the picture at the painted light source (LIGHT table in jne):
+  warm candle flicker + painted peach petals · normal candle + painted fireflies (orb) · cold candle gutters out + moonlight fades in, NO
+  particles, no celebration (j11 nightFx's night/favour bursts are held during her night) · lonely lantern dims + the season's drift
+  (petals / fireflies / leaves / snow) · dawn glow-gold rises + the day's weather (painted petal / plum / leaf / snow / streak-rain /
+  orb-firefly frames of the §68 atlases). Particles are DOM frames clipped to the picture: they never cover the words or the list.
+  Gọn / reduced motion: still lights (poster), no particles, same texts.
+- Layout: column (picture over list) everywhere; landscape up to 900 px high (phone 844x390, 1000x755, 1180x820) = picture left, list right.
+  The Nhận / Tiếp tục button sits under the list (outside its scroll): always on screen (844x390 included); the list scrolls.
+- **62.3 In-night pictures by tone (owner s8):** the pillow-talk dialog (night2) shows `ev-night2-warm` (close) when the night
+  score s ≥ 6, `ev-night2-tender` (hand in hand; both drawn by review/pic-dupes) when s ≥ 3, else `ev-night2` (apart) — same thresholds as its j8 text
+  (kitEvBanner wrapper in jne). ksp / prep keep their own banners; night1 (quilt carry) belongs to review/pic-dupes.
+- **62.4 One pop-up look (owner s8):** the night dialogs (.modal.night) use the same light paper kit panel as every pop-up; the night
+  feel = jbd backdrop picture + ĐÊM seal only. Scan: `python3 dev/tools/dark_panels.py index.html` (0 dark panel rules).
+- Art (gpt-2-6, folder ba4aecfe, no faces, light/dark by tone; r2 redraw 1536x1152, ids `dev/art/night-end-r2-gens.txt`):
+  `img/kit/ne-night-{warm,normal,cold}.webp`, the lonely night PER SEASON `img/kit/ne-night-lonely-{xuan,ha,thu,dong}.webp`,
+  `img/kit/ne-dawn-{xuan,ha,thu,dong}.webp`; festivals reuse the 14 `ev-fest-<k>-b.webp`. Each picture has a focal point (FOC in jne)
+  → `object-position`; portrait screens show the dawn / lonely beats in a 3:4 frame cropped around it.
+- **62.5 Follow-ups (owner 15/11 21:10Z, L666–669):** rằm (trung tuần) / festival nights show `img/kit/ne-night-ram-{warm,normal}` /
+  `ne-night-fest-{warm,normal}` (cold keeps `ne-night-cold`; the line names the festival). The lonely beat when he slept at another palace says
+  the music drifts from it (stranger rule: an unmet consort is not named) + soft zither. Morning after (save field `S.neMorn {d, tier}`, old saves:
+  absent → nothing): mặn nồng → dialog "Kính sự phòng ghi sổ" (Danh +`BAL.nightEnd.after.warmDanh`); lạnh nhạt → "Lời ra tiếng vào" (Danh
+  `coldDanh`) with the jtoil reaction buttons Nhẫn nhịn / Cười trừ / Đáp lại. Bots / no UI: the Danh change only.
+- **Loading:** a painted 32x24 thumbnail (inline LQ) shows blurred at once; the picture fades in on load; the card / beat waits at most
+  `BAL.nightEnd.wait` (700 ms) for it. Never an empty frame.
+- **Scene rule (owner 15/11 ~21:45Z, all full-scene pictures):** every full-scene picture serves landscape AND portrait screens. Paint
+  landscape, high-res (≥ 1536 px wide), the subject inside a centred safe zone; store a focal point per picture and crop portrait screens
+  (755x1000 = 3:4, 9:16) around it with `object-position`. **Painted only (owner):** every picture, light and particle here is PAINTED art
+  (Magnific gpt-2-6); code only animates painted sprites (transform / opacity / filter) — no CSS-gradient glows, CSS dots or lines as art.
+- Kit sample page: §62 (all 9 pictures + "Xem thẻ đêm" opens a sample card). Test: `node dev/test/night-end.js <url> <outdir> <WxH,…>`.
+
 ## 67. LẬT THẺ BÀI · kitCardFlip — the end-of-day card-flip scene (owner 15/11 20:50Z, review/cardflip) — `dev/build/jflip.js` (after jsfx, before j84)
 Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). Played once per week after the tablet is decided
 (j8 `flip` → j75 `S.nightWhy` → j93), through the kit motion queue `kmPush`, after the week panel / Tuần lục book / title (never over them).
@@ -3551,6 +3620,14 @@ Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sam
   Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
   waiting notice only. Samples on the kit page "§69".
 
+- §69.3 INVITE GUIDE · kitCoopSteps({sent, joined, wait, you}) (owner 16/11 "Rồi sao nữa", C43 review/coop-invite-ux) — `jcooptimer.js`: the 1-2-3
+  guide of the lobby's "Mời hảo hữu" screen as `kitRows` rows (joined to the Ám hiệu / Hảo hữu rows with `kitRowsJoin`): "1 · Gửi lời mời" (`.w`
+  "… chạm Gửi đường dẫn bên dưới" → `.g` "✓ đã gửi cho hảo hữu" once Gửi / Chép đường dẫn / Chép mã is tapped), "2 · Hảo hữu vào phòng" (`.w`
+  "… đang đợi hảo hữu vào phòng · m:ss", the time ticks each second in place, text only; `.g` "✓ đã vào phòng"), "3 · Cùng chơi" (`.n` "tự bắt đầu khi
+  hảo hữu vào, không phải chạm gì"). Guest (`you:"b"`) row 1 reads "Nhận lời mời ✓". The kpnote under the buttons adds "Muốn thử một mình: mở đường
+  dẫn trên máy khác". When the friend joins the lobby plays `sfx-join` + `kitLine("Hảo hữu đã vào phòng. Cuộc chơi bắt đầu.")` and hands over to the
+  shared game at once (existing COOP "both" → "start"). Sample on the kit page "§69". Test: `node dev/test/coop-invite-ux.js`.
+
 ## 78. PLACE ICON · kitPlaceIcon + HAPPENING MARK · kitHapMark (owner 16/11 Dư đồ split, review/act-dedupe) — `dev/build/jact.js`
 - `kitPlaceIcon(k, size=14)` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE
   the place name on every place-name site: Dư đồ map label (`.mspot .mlab`), Danh sách tile (`.mtile b`), stage place title (`#sc-t h2`).
@@ -3585,6 +3662,7 @@ Composition only: NO new component or CSS. The right side of every person card (
 5. **Dạo này** `kitRows` (week | line): this month's log lines that name the person; empty = one `.kpnote` line.
 6. **Việc nhanh** act cards (`pbtn` in `.kskacts`): Sai tai mắt dò nơi ở / Đến cung nàng / Kết giao / Tặng quà — the same buttons and costs as the Hậu cung card — shown only when the card has no live act of its own (the stage pop-up after the visit's one talk).
 Placement: a card with 2+ act groups gets one more kit tab "Lòng người" (count chip dropped); a card with one group or none (stage pop-up, Thái hậu) shows the blocks under its acts. Not filled: her own card, children, "Người lạ".
+Dislikes (review/pcard-dislikes, `jdis.js`): the Sở trọng block also carries one row "Nàng ghét" / "Ngài ghét" (same `kitRows` row as likes; known dislikes only, else "chưa rõ"). No new part.
 `pcfBlocks(person, o, quick)` returns the HTML (kit sample §73). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
 
 ## 76. kitPalaceMap — palace DETAIL map (Chính điện · Đông / Tây phối điện) — `dev/build/jpm.js` (last module) — review/palace-map → re-ported as review/palace-map-port (number 71: main's §33 is the figure scale)
