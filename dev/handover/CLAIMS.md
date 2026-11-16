@@ -300,7 +300,7 @@
 | PET 'Già' pictures pet-<key>-gia all 22 species + keepsake painting 'Túi kỷ vật' (FOREMAN_C 17:36Z s21; OD 16/11 18:50Z; same worker as pet-stage cut-outs, OD:L1229) (sonnet art) | review/pet-stage-art | C | session_011xDdVQmHkEoHRLjnTR3KPB | RUNNING | 16/11 17:55Z |
 | spread-events LIVE prep (sonnet): merge origin/main 8f476f6f into READY review/spread-events-r3 1c4ea581, re-test, READY sha → B fast-forwards | review/spread-events-live | B | session_01N1tNP69fjejDfHnC3a2Zmt | DONE LIVE 2934bede (archived) | 16/11 17:58Z |
 | two-way-acts (opus; law HANDOVER:L46 + OD:L1386, owner 18:00Z): audit both ways, NPC pay same costs, player gets NPC-only acts | review/two-way-acts | main s21 | session_01UV1SzmD2Yq9WV4t1YpXjQ6 | RUNNING | 16/11 17:54Z |
-| night-steal review r1 (opus, BIG) of 4b5919af | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | RUNNING | 16/11 18:01Z |
+| night-steal review r1 (opus, BIG) of 4b5919af | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled over 7 runs, not 19-22 %; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:01Z |
 | lag-play review r1 (opus, BIG perf) of 7200e7d2 | review/lag-play-r1 | main s21 | session_01UV1Szh3qnjMBBhwLSJrxVX | RUNNING | 16/11 18:02Z |
 | lag-play-2 (opus): render chain split, co-op seat delta, leak, Pixi preload | review/lag-play-2 | main s21 | session_01UV1Szkd2Q5KusFL1heLce8 | RUNNING | 16/11 18:02Z |
 | care-overlap review r1 (sonnet, SMALL) of 7c02ff56 | review/care-overlap-r1 | main s21 | session_01UV1SzhEkrfs7MvRDaDQHp8 | RUNNING | 16/11 18:04Z |
@@ -316,4 +316,3 @@
 | map-labels-2 (sonnet; owner bug A ca sở placement + every Dư đồ label on its building; history check) | review/map-labels-2 | main s21 | session_01UV1Szi9inSFXF1GWG2dSP8 | RUNNING | 16/11 18:24Z |
 | kit-fit (opus kit keeper; owner bugs: figure top gap = bottom gap in every frame; option card → square picture when text short, no empty space) | review/kit-fit | main s21 | session_01UV1SzmGsieSbMBkycipcQk | RUNNING | 16/11 18:24Z |
 | chonso-tabs review r1 (sonnet, SMALL) of 5099b51cf | review/chonso-tabs-r1 | main s21 | session_01UV1SzgxM8tPohv4gezbNgu | RUNNING | 16/11 18:26Z |
-| night-steal reviewer (BIG: odds/rules + co-op) | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled, 7 runs; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:40Z |
