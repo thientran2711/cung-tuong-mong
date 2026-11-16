@@ -128,7 +128,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-p1{max-width:330px;z-index:2}.kpod-p2,.kpod-p3{z-index:1}
 .kpod-fig{position:relative;width:100%;height:var(--kfh,300px);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
  animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
-.kpod-img{height:calc(100% * var(--kf,1));width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
+.kpod-img{height:calc(100% * var(--kf,1));width:100%;object-fit:contain;object-position:50% 100%;filter:var(--kfs,url(#kfa)) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
 .kpod-img.kpod-unk{opacity:.92}
 .kpod-fb{display:none;height:100%;align-items:flex-end;justify-content:center}.kpod-nofig .kpod-img{display:none}.kpod-nofig .kpod-fb{display:flex}

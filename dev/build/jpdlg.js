@@ -43,7 +43,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:hidden}
 .kpdlg .kpdfig .kesf{margin:0}
 .kpdlg .kpdfig .kesfi{display:block}
-.kpdlg .kpdfig .kesimg{display:block;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kpdlg .kpdfig .kesimg{display:block;filter:var(--kfs,url(#kfa)) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kpdlg .kpdfig .kesf>.kpsn{display:none}
 .kpdlg .kpdr{min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
