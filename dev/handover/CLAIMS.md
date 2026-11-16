@@ -120,7 +120,7 @@
 | act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | DONE PASS 072687e2 | 16/11 08:40Z |
 | servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
 | slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | DONE SẴN SÀNG KIỂM dd0b618f | 16/11 08:40Z |
-| ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | RUNNING | 16/11 08:40Z |
+| ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | DONE SẴN SÀNG KIỂM ab50be5c | 16/11 08:40Z |
 | D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | DONE SẴN SÀNG KIỂM d0f2260a | 16/11 08:40Z |
 | reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | DONE SẴN SÀNG KIỂM 9f4e8bf9 | 16/11 08:40Z |
@@ -145,3 +145,4 @@
 | D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | RUNNING | 16/11 10:32Z |
 | coop-guest-maid review (opus) | review/coop-guest-maid-r1 | D | session_01DgYSWm8Dq4FhHzrbnuCRGL | RUNNING | 16/11 10:34Z |
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
+| entry-exam review (opus) | review/entry-exam-r1 | D | (opening, s3) | RUNNING | 16/11 10:48Z |
