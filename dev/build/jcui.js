@@ -68,16 +68,5 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
 @media (max-width:699px){.kgame .kgbody.kgpic-on{display:block;overflow:visible}.kgpic{margin:8px 10px 0;min-height:0;height:104px}.kgpic img{object-position:50% 55%}
  .kg82:not(.kg-idle) .kgpic{display:none}.kginfo{max-height:none;overflow:visible}#ov .mg.kg82{overflow-y:auto}.kgrv{max-height:clamp(110px,26dvh,220px)}}
 @media (max-height:520px) and (min-width:700px){.kgpic{min-height:0;margin-top:6px;margin-bottom:6px}.kginfo{max-height:calc(100dvh - 92px)}.kgrv{max-height:clamp(90px,34dvh,200px)}}
-/* podium in short landscape (844x390): compact header + plaque so figures keep their scale and nothing runs under the header */
-@media (max-height:520px){
-.kpod-hd{padding:5px 10px 0}.kpod-hd .kph{padding:3px 12px;gap:8px;min-width:0}.kpod-hd .kptitle{font-size:.86rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.kpod-hd .kpsub{display:none}
-.kpod-stage{padding-top:2px}
-.kpod-medal,.kpod-p1 .kpod-medal{width:46px;margin-top:-26px}.kpod-medal b,.kpod-p1 .kpod-medal b{font-size:.78rem}
-.kpod-you{bottom:calc(46px * .62)}
-.kpod-step{gap:2px;padding:0 4px 5px}
-.kpod-plq{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:6px;row-gap:1px;padding:3px 5px}
-.kpod-plq .kname{font-size:.74rem}.kpod-plq .kti{display:inline;font-size:.82em;margin-right:3px}.kpod-sub{display:none}.kpod-sc{font-size:.64rem}
-.kpod-plq .kchips{flex:0 0 100%;gap:2px}.kpod-plq .kchips .chip,.kpod-plq .kchip{font-size:.58rem;padding:0 5px;line-height:1.35}
-.kpod-ft{padding:4px 12px 6px}.kpod-next{min-height:0;padding-top:5px;padding-bottom:5px;font-size:.9rem}
-}
+/* podium in short landscape: moved to the kit podium itself (j90, KIT 26.1, kit-keeper-1) — one place for podium CSS */
 `;document.head.appendChild(st)})();
