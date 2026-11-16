@@ -935,13 +935,17 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
 #### 28.11a IDENTITY CARD — one figure tier, fixed column, fast face picker (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … quá lag"; review/newgame-ui) — `kpIdFig` / `kpIdLay` / `kitTn` / `kitPickerGo` (j79), j86
-- ONE STANDARD FIGURE TIER: her standing figure is drawn with the same BODY height (head top → feet, `kitFigBody` .ht → .b, as 33.6; crowns /
-  hairpins above the head not counted) on the same floor line for every face: portrait 80 % / landscape 84 % of the screen height, floor
-  1.2 % above the bottom. Never object-fit:contain in a box (a wide robe used to come out shorter). Phones (< 600 px portrait) keep the
-  figure-on-top layout (--kidh).
+- ONE COMMON FIGURE TIER (coordinator 16/11, review/newgame-ui-r2): her standing figure is drawn with the same BODY height (head top → feet,
+  `kitFigBody` .ht → .b, as 33.6; crowns / hairpins above the head not counted) on the same floor line (1.2 % above the bottom) for EVERY
+  face, consort and maid, at every age. Body height per screen = min(portrait 80 % / landscape 84 % of the screen height,
+  column width x .98 / `KPID_WR`), `KPID_WR = .5` = the widest painted figure over the 420 faces a new game can show
+  (widest painted width / body height, measured .496 on consort-c05-t4-a18). So every face fits the column WHOLE: no robe cut, no mask / fade,
+  no per-face shrink, no spill past the column (755x1000: column 164 px, body 321 px for all; 1180x820: 689; 844x390: 328).
+  Never object-fit:contain in a box. Phones (< 600 px portrait) keep the figure-on-top layout (--kidh).
 - FIXED COLUMN: the panel is the ONE frame size of KIT 8.1 (`--kpw` / `--kph`; kpIdLay never sets its width); the figure column is the
-  space left of the panel (its left edge minus 8 px). The whole painted figure is centred in the column when it fits;
-  wider → body core centred, robe/sleeves cut at the column edge with a 24 px fade (mask). The panel never covers her.
+  space left of the panel (its left edge minus 8 px). The figure is centred in the column. The panel never covers her.
+- PINNED CHOICES (r2): "Nhận / Đổi thân phận" sit BELOW the card's scroll area (`#mb.kpmbw` = flex column: `.kpscroll` scrolls, `.kpscopts` is a
+  plain row under it), never over the body, so the picker, its "Dung mạo chỉ để nhìn…" note and the last picker row are never covered.
 - `kitTn(src)` = the small pre-sized copy `img/tn/por-…webp` (128 px wide, ~7 KB; was the 384x506 portrait, 30–55 KB) / `img/tn/fig-…webp`
   (240 px tall, ~7 KB) when `img/TN.json` lists it (`dev/art/tn_make.py`, list from `dev/test/newgame-ui-enum.js`: every face the picker can
   show at a new game = 420). The picker cells use it; a pick shows the low-res figure AT ONCE (prefetched for the page in view) and swaps in

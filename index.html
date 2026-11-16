@@ -12112,7 +12112,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};
+const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  const phone=W<600&&H>W;if(phone){["left","top","width","height","bottom","-webkit-mask-image","mask-image"].forEach(k=>im.style.removeProperty(k));d.style.removeProperty("width");d.style.removeProperty("max-width");
@@ -12127,14 +12127,13 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
- const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);let ih=Hs/bf,iw=ih*ar;
- /* KIT 32.2a width test (head → waist must fit the column); only then is she drawn smaller (rare: a very wide headdress) */
- const k=10,wl=(fb.wl||[])[k],wr=(fb.wr||[])[k];if(wl!=null&&wr!=null){const need=(wr-wl)*iw;if(need>colW*.98){const f=colW*.98/need;ih*=f;iw*=f}}
- /* the whole painted figure fits the column → centred as a whole; wider → the body core is centred and the robe is cut at the edges */
- const pw=(fb.r-fb.l)*iw;const cx=pw<=colW?(fb.l+fb.r)/2:((fb.cl!=null?(fb.cl+fb.cr)/2:(fb.l+fb.r)/2));let left=Math.round((colL+colW/2)-cx*iw);
- if(pw>colW){const lo=colR-fb.r*iw,hi=colL-fb.l*iw;left=Math.round(Math.min(hi,Math.max(lo,left)))}const top=Math.round(floor-fb.b*ih);
+ /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
+    game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
+    column whole; every face, consort and maid, gets that same body height and floor — no robe cut, no spill, no per-face shrink */
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);Hs=Math.min(Hs,colW*.98/KPID_WR);let ih=Hs/bf,iw=ih*ar;
+ const pw=(fb.r-fb.l)*iw;let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
- const fe=Math.round(colR-left);const mk=`linear-gradient(to right,#000 ${fe-24}px,transparent ${fe}px)`;im.style.setProperty("-webkit-mask-image",mk);im.style.setProperty("mask-image",mk);
+ im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
@@ -15945,6 +15944,17 @@ addEventListener("kittn",()=>{for(const k in FP_C)delete FP_C[k]});
   if(anchor)mb.insertBefore(sec,anchor);else mb.appendChild(sec);dlg.classList.add("kfpon");
   requestAnimationFrame(()=>kitPickerLayout(sec,false));(window.requestIdleCallback||(f=>setTimeout(f,400)))(fpWarm,{timeout:1500});
  }catch(e){console.error("fpick",e)}}})();
+/* review/newgame-ui-r2 (reviewer FAIL 3): the two pinned choices no longer overlay the body (it scrolled UNDER them: the picker, its
+   "Dung mạo chỉ để nhìn…" note and last row were hidden behind them). The card body scrolls in `.kpscroll`; the choices sit BELOW that
+   scroll area as a plain pinned row, so nothing is ever covered. */
+(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl))return;const mb=$("mb");if(!mb||!mb.querySelector(":scope > .kpid")||mb.querySelector(":scope > .kpscroll"))return;
+  const opts=mb.querySelector(":scope > .kpscopts");if(!opts)return;const w=document.createElement("div");w.className="kpscroll";
+  [...mb.childNodes].forEach(n=>{if(n!==opts)w.appendChild(n)});mb.insertBefore(w,opts);mb.classList.add("kpmbw")}catch(e){console.error("kpscroll",e)}}})();
+(function(){const st=document.createElement("style");st.id="kp-scroll-css";st.textContent=`
+.modal.kpscene .dlg.kpsc>#mb.kpmbw.kpmbw{display:flex!important;flex-direction:column;overflow:hidden!important}
+html body #modal #mb.kpmbw>.kpscroll{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain;padding-bottom:6px}
+html body #modal .dlg.kpsc>#mb.kpmbw.kpmbw>.kpscopts{position:static!important;flex:0 0 auto!important;height:auto!important;align-self:stretch;margin:0!important;padding:6px 0 8px;background:none;box-shadow:0 -1px 0 #e6d3ac}
+`;document.head.appendChild(st)})();
 /* her big portrait / standing figure on the card follow the pick */
 /* review/newgame-ui: a pick changes only what shows HER face — the selected cell (gold ring + check, in place), the small portrait, the
    standing figure (low-res at once, crisp when decoded). No rebuild of the 32/52 cells, no game render() behind the full-screen card
@@ -29637,7 +29647,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4fada1013bf9";window.CTM_BUILD=BUILD;
+const BUILD="c14a7ed97c42";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

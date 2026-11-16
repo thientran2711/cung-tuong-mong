@@ -40,3 +40,9 @@ stage-fig-size.js 755x1000 + 1180x820 after the CORS fix: every kind col ≤ 36 
 ## Open / notes
 - The first-run bulk download (jload, 354 MB) competes with everything on a first visit — not touched (boot is review/boot-flash).
 - The identity card's two pinned choices still cover the last picker row on 1180x820 (card scrolls) — pre-existing, untouched.
+
+## r2 (review/newgame-ui-r2, from r1 0aa89dcb8) — reviewer FAIL fixes
+1. KIT 8.1 one panel size: panel-size.js 7 viewports, one width + one height each (0 nofit / 0 errs). No width/height set on .dlg.kpanel by newgame-ui code.
+2. ONE common figure tier (KIT 28.11a updated): body = min(80/84 % H, column*.98/KPID_WR), KPID_WR=.5 (max over 420 faces .496). 755x1000: body 321 / floor 988 for every face (col 164); 1180x820 689; 844x390 328; 1366x1024 860. No mask, no cut, no spill.
+3. Pinned choices moved out of the scroll area (j86 .kpscroll / .kpmbw): note + last picker row no longer covered.
+Tests: newgame-ui.js 755x1000, 1180x820, 1366x1024, 844x390, 1000x755 ok; panel-size.js ok; stage-fig-size.js 77 dp rows face/sq ok, distorted 0 (one browser crash at 686x880 for info/ident/stage under memory pressure, rerun alone ok).

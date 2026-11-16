@@ -747,7 +747,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};
+const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  const phone=W<600&&H>W;if(phone){["left","top","width","height","bottom","-webkit-mask-image","mask-image"].forEach(k=>im.style.removeProperty(k));d.style.removeProperty("width");d.style.removeProperty("max-width");
@@ -762,14 +762,13 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
- const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);let ih=Hs/bf,iw=ih*ar;
- /* KIT 32.2a width test (head → waist must fit the column); only then is she drawn smaller (rare: a very wide headdress) */
- const k=10,wl=(fb.wl||[])[k],wr=(fb.wr||[])[k];if(wl!=null&&wr!=null){const need=(wr-wl)*iw;if(need>colW*.98){const f=colW*.98/need;ih*=f;iw*=f}}
- /* the whole painted figure fits the column → centred as a whole; wider → the body core is centred and the robe is cut at the edges */
- const pw=(fb.r-fb.l)*iw;const cx=pw<=colW?(fb.l+fb.r)/2:((fb.cl!=null?(fb.cl+fb.cr)/2:(fb.l+fb.r)/2));let left=Math.round((colL+colW/2)-cx*iw);
- if(pw>colW){const lo=colR-fb.r*iw,hi=colL-fb.l*iw;left=Math.round(Math.min(hi,Math.max(lo,left)))}const top=Math.round(floor-fb.b*ih);
+ /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
+    game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
+    column whole; every face, consort and maid, gets that same body height and floor — no robe cut, no spill, no per-face shrink */
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);Hs=Math.min(Hs,colW*.98/KPID_WR);let ih=Hs/bf,iw=ih*ar;
+ const pw=(fb.r-fb.l)*iw;let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
- const fe=Math.round(colR-left);const mk=`linear-gradient(to right,#000 ${fe-24}px,transparent ${fe}px)`;im.style.setProperty("-webkit-mask-image",mk);im.style.setProperty("mask-image",mk);
+ im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops

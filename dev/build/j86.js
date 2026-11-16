@@ -51,6 +51,17 @@ addEventListener("kittn",()=>{for(const k in FP_C)delete FP_C[k]});
   if(anchor)mb.insertBefore(sec,anchor);else mb.appendChild(sec);dlg.classList.add("kfpon");
   requestAnimationFrame(()=>kitPickerLayout(sec,false));(window.requestIdleCallback||(f=>setTimeout(f,400)))(fpWarm,{timeout:1500});
  }catch(e){console.error("fpick",e)}}})();
+/* review/newgame-ui-r2 (reviewer FAIL 3): the two pinned choices no longer overlay the body (it scrolled UNDER them: the picker, its
+   "Dung mạo chỉ để nhìn…" note and last row were hidden behind them). The card body scrolls in `.kpscroll`; the choices sit BELOW that
+   scroll area as a plain pinned row, so nothing is ever covered. */
+(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl))return;const mb=$("mb");if(!mb||!mb.querySelector(":scope > .kpid")||mb.querySelector(":scope > .kpscroll"))return;
+  const opts=mb.querySelector(":scope > .kpscopts");if(!opts)return;const w=document.createElement("div");w.className="kpscroll";
+  [...mb.childNodes].forEach(n=>{if(n!==opts)w.appendChild(n)});mb.insertBefore(w,opts);mb.classList.add("kpmbw")}catch(e){console.error("kpscroll",e)}}})();
+(function(){const st=document.createElement("style");st.id="kp-scroll-css";st.textContent=`
+.modal.kpscene .dlg.kpsc>#mb.kpmbw.kpmbw{display:flex!important;flex-direction:column;overflow:hidden!important}
+html body #modal #mb.kpmbw>.kpscroll{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain;padding-bottom:6px}
+html body #modal .dlg.kpsc>#mb.kpmbw.kpmbw>.kpscopts{position:static!important;flex:0 0 auto!important;height:auto!important;align-self:stretch;margin:0!important;padding:6px 0 8px;background:none;box-shadow:0 -1px 0 #e6d3ac}
+`;document.head.appendChild(st)})();
 /* her big portrait / standing figure on the card follow the pick */
 /* review/newgame-ui: a pick changes only what shows HER face — the selected cell (gold ring + check, in place), the small portrait, the
    standing figure (low-res at once, crisp when decoded). No rebuild of the 32/52 cells, no game render() behind the full-screen card
