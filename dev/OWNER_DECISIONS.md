@@ -1195,3 +1195,5 @@ All must work in co-op.
 - (16/11) CORRECTION (owner): TWO effects. Weather = in the room/place stage only. Season = over the whole screen. Keep both as separate kit layers, never duplicating the same thing; no grey petals at night. → review/weather-fx-one.
 - (16/11) Owner: if the room weather and the season effect are both flying petals, use ONE petal effect (one painted Magnific sprite set, one layer). No code-drawn effects ever. → review/weather-fx-one.
 - (16/11) OWNER RULE: the MAIN chat focuses on the bugs and UI problems she meets while playing; every bug she reports is fixed urgently here. Work that is not UI and not a game bug (new features, systems, art batches, balance, audits) goes to the other foremen.
+
+- (16/11) OWNER RULE: context rollover for the main chat and every foreman. Budget = starting context + 25%; at the budget, write a HANDOVER and open the next session yourself (create_session), then stop. Text is in FOREMAN_B/C/D.md.

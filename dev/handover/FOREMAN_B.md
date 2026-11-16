@@ -29,3 +29,9 @@ Re-port the owner-approved branches stranded behind main (specs: SESSION8_QUEUE 
 ## COORDINATOR NOTE 16/11 for C24 chapter-detail: review/tutorial-r2 (session 8) built a minimal chapter detail kitGoalDetail in dev/build/jgoal.js (KIT §72). C24 must GROW kitGoalDetail, never build a second panel (KIT FIRST).
 
 ## COORDINATOR NOTE 16/11 for D32 succession re-port: session 8 is building review/mortality (BAL.mort; Emperor/Thái hậu death causes and her fate after the Emperor dies). Your D32 owns the succession CHOICE screen (Hoàng thái hậu / nhiếp chính / Nữ đế + Tiên đế băng hà art). Keep a clean hook (one function called on Emperor death) so mortality can call it; note the function name in your status.
+
+## CONTEXT ROLLOVER (owner 16/11, binding for the main chat and every foreman)
+- At session start, note the starting context size in your status file. The budget is the start + 25%. When you reach it (or the system compacts/summarises the conversation, whichever comes first), roll over:
+  1) write a HANDOVER block in your status file (state, running agents + branches, waiting items, open owner questions);
+  2) open the NEW session yourself with the remote-session tool create_session (same environment, same repo, prompt = your role paste block + "read the HANDOVER in <status file>"), tell the owner in one line, then stop spawning.
+- Agents you spawned die with your session: roll over only when no worker is mid-task, or note each running branch so the new session re-spawns from the pushed branch/PROGRESS.

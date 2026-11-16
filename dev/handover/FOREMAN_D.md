@@ -27,3 +27,9 @@ Workers:
 ## MOVED to Foreman D (owner rule 16/11: main chat = live bugs/UI only)
 - Reviews: review/reign-road @c0e6f7d255 (a main reviewer may already be running; check dev/review/reign-road.md on origin first), review/slap-mg 3c4f1c81b (after facefx-all lands; §79), review/coop-chat bdd2b6b53 (after the stage rail lands; §80; mount into kitStageRail).
 - Workers: act-split wave 2 (outings, festivals) + wave 3 (night sneaking): GO after review/act-dedupe lands (design notes in its PROGRESS); fig HD upscale for servants/eunuchs/men (Magnific, owner approved credits; resume from review/fig-hd-upscale if pushed) + face-sharp-hd2 remaining consort sheets; balance-after-truth audit re-run (opus); review/servant-system phase 2 (active NPC maid line, owner approved) once its fix A + audit are reviewed; pregnancy-rate proposal is waiting for the owner (do not change).
+
+## CONTEXT ROLLOVER (owner 16/11, binding for the main chat and every foreman)
+- At session start, note the starting context size in your status file. The budget is the start + 25%. When you reach it (or the system compacts/summarises the conversation, whichever comes first), roll over:
+  1) write a HANDOVER block in your status file (state, running agents + branches, waiting items, open owner questions);
+  2) open the NEW session yourself with the remote-session tool create_session (same environment, same repo, prompt = your role paste block + "read the HANDOVER in <status file>"), tell the owner in one line, then stop spawning.
+- Agents you spawned die with your session: roll over only when no worker is mid-task, or note each running branch so the new session re-spawns from the pushed branch/PROGRESS.
