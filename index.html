@@ -18584,7 +18584,7 @@ setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=nu
 .pc.kpnar[data-k2]>.pcl>.kpbars{grid-area:bars;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:4px;margin:4px 0 0;font-size:.78rem}
 .pc.kpnar[data-k2]>.pcl>.kwear,.pc.kpnar[data-k2]>.pcl>.kpfacts{display:none!important}
 .pc.kpnar[data-k2] .kpstick{margin:0 -7px 6px;padding:5px 7px}
-.pc.kpnar[data-k2] .kpstick .pctabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin;gap:5px}
+.pc.kpnar[data-k2] .kpstick .pctabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:5px}
 .pc.kpnar[data-k2] .kpstick .pctabs>.pct{flex:0 0 auto;white-space:nowrap}
 .kpsheetb .kwear{margin:0 0 8px}.kpsheetb .kpfacts{display:flex;flex-direction:column;gap:6px}
 /* compact picker strip on portrait screens under 1000 px: one row of small faces + names, pager arrows */
@@ -19479,6 +19479,13 @@ window.kitTabRowHTML=function(list,cur,attr){return list.map(x=>`<button class="
 /* sticky only where the page is long (see the KIT RULE in the CSS below) */
 function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollHeight>P.clientHeight*1.5;P.querySelectorAll(".kcattabs").forEach(r=>r.classList.toggle("kstick",long))}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
+/* tab-underline (C39): chip/tab rows that scroll sideways show NO scrollbar track or thumb (the grey bar / brown stub the owner saw); the overflow is hinted by a soft edge fade on the side that has more chips (.kfl / .kfr, set by kitTabFade) */
+const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip";
+function kitTabFade(){try{document.querySelectorAll(KIT_CHIPROWS).forEach(r=>{const o=r.scrollWidth>r.clientWidth+2&&getComputedStyle(r).overflowX!=="visible";r.classList.toggle("kfl",o&&r.scrollLeft>2);r.classList.toggle("kfr",o&&r.scrollLeft+r.clientWidth<r.scrollWidth-2)})}catch(e){}}
+let kitTfQ=0;function kitTabFadeSoon(){if(kitTfQ)return;kitTfQ=requestAnimationFrame(()=>{kitTfQ=0;kitTabFade()})}
+document.addEventListener("scroll",e=>{const r=e.target;if(r&&r.matches&&r.matches(KIT_CHIPROWS))kitTabFadeSoon()},true);addEventListener("resize",kitTabFadeSoon);
+try{new MutationObserver(kitTabFadeSoon).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
  const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(o&&o.classList.contains("kcattabs")&&!o.classList.contains("kinvtabs"))o.remove();return}
@@ -19507,7 +19514,13 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .kcattabs+*{margin-top:0!important}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
-html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}
+html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important}#panel .kcattabs .pct{flex:0 0 auto}
+/* tab-underline (C39): no scrollbar on any chip row; edge fade instead */
+.pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip,html body header.hud>.hud2,html body #panel .kcattabs,.pc.kpnar[data-k2] .kpstick .pctabs{scrollbar-width:none!important;-ms-overflow-style:none!important}
+.pctabs::-webkit-scrollbar,.kcattabs::-webkit-scrollbar,.ksub::-webkit-scrollbar,.ksubs::-webkit-scrollbar,.kmc-tabs::-webkit-scrollbar,.kchips::-webkit-scrollbar,.chips::-webkit-scrollbar,.relsel::-webkit-scrollbar,.hud2::-webkit-scrollbar,.j59strip::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;background:transparent!important}
+.kfr:not(.kfl){-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
+.kfl:not(.kfr){-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px);mask-image:linear-gradient(90deg,transparent,#000 22px)}
+.kfl.kfr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
 `;document.head.appendChild(cssC);
 })();
 
@@ -26172,8 +26185,10 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
  /* browsers that swallow pointer events on disabled buttons still deliver the click/touch to the parent: hit-test the locked buttons there */
  document.addEventListener("click",e=>{const t=e.target;if(!t||!t.querySelectorAll||t.closest(KF_TAP))return;for(const b of t.querySelectorAll('button:disabled')){const r=b.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){kfLocked(b,e);break}}},true)})();
 /* sliding underline under the selected tab (main tabs, person-card tabs, sub-tabs) */
-const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]'],[".pctabs",".pct.on"],[".ksubs",".ksubb.on"]];const KF_TPOS={};
-function kfTabs(){for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).forEach(c=>{const a=c.querySelector(as);let ln=c.querySelector(":scope>.kftl");
+/* tab-underline (C39): ONLY the main nav gets the sliding line. Chip rows (.pctabs/.kcattabs, scroll sideways) and .ksub rows mark the selected chip themselves (filled chip / inset underline), so a JS-positioned line drawn over a scrolling row went stale and struck through the chips */
+const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]']];const KF_TPOS={};
+function kfTabsClean(){document.querySelectorAll(".kftl").forEach(l=>{if(!l.parentElement||!l.parentElement.matches("#tabs"))l.remove()})}
+function kfTabs(){kfTabsClean();for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).forEach(c=>{const a=c.querySelector(as);let ln=c.querySelector(":scope>.kftl");
   if(!a||!a.offsetWidth){if(ln)ln.style.opacity="0";return}
   if(getComputedStyle(c).position==="static")c.style.position="relative";
   const cr=c.getBoundingClientRect(),ar=a.getBoundingClientRect(),x=ar.left-cr.left-c.clientLeft+c.scrollLeft,w=ar.width,y=ar.bottom-cr.top-c.clientTop+c.scrollTop-3;const key=cs+"|"+(c.id||"");
@@ -28778,7 +28793,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0ba73664d6aa";window.CTM_BUILD=BUILD;
+const BUILD="d5b1b345cb39";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

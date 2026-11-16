@@ -171,8 +171,10 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
  /* browsers that swallow pointer events on disabled buttons still deliver the click/touch to the parent: hit-test the locked buttons there */
  document.addEventListener("click",e=>{const t=e.target;if(!t||!t.querySelectorAll||t.closest(KF_TAP))return;for(const b of t.querySelectorAll('button:disabled')){const r=b.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){kfLocked(b,e);break}}},true)})();
 /* sliding underline under the selected tab (main tabs, person-card tabs, sub-tabs) */
-const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]'],[".pctabs",".pct.on"],[".ksubs",".ksubb.on"]];const KF_TPOS={};
-function kfTabs(){for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).forEach(c=>{const a=c.querySelector(as);let ln=c.querySelector(":scope>.kftl");
+/* tab-underline (C39): ONLY the main nav gets the sliding line. Chip rows (.pctabs/.kcattabs, scroll sideways) and .ksub rows mark the selected chip themselves (filled chip / inset underline), so a JS-positioned line drawn over a scrolling row went stale and struck through the chips */
+const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]']];const KF_TPOS={};
+function kfTabsClean(){document.querySelectorAll(".kftl").forEach(l=>{if(!l.parentElement||!l.parentElement.matches("#tabs"))l.remove()})}
+function kfTabs(){kfTabsClean();for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).forEach(c=>{const a=c.querySelector(as);let ln=c.querySelector(":scope>.kftl");
   if(!a||!a.offsetWidth){if(ln)ln.style.opacity="0";return}
   if(getComputedStyle(c).position==="static")c.style.position="relative";
   const cr=c.getBoundingClientRect(),ar=a.getBoundingClientRect(),x=ar.left-cr.left-c.clientLeft+c.scrollLeft,w=ar.width,y=ar.bottom-cr.top-c.clientTop+c.scrollTop-3;const key=cs+"|"+(c.id||"");
