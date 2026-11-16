@@ -17,4 +17,4 @@ C23 mg-easy (Thơ minigame easy rules + audit knowledge minigames) · C41 tuduc-
 Main coordinator keeps: all co-op items, boot/iPad load, face-sharp, newgame-ui, tutorial-r2, ev-art-fit, opt-pics, evidence-truth, night-end, all reviews already running, every D item not listed above.
 
 ## Model per task (owner 16/11) — set Agent `model` on EVERY spawn
-haiku = docs/status/simple scans/one-line wording · sonnet = DEFAULT (normal workers, all reviewers, art) · opus = only co-op sync, save/data-loss, perf root-cause, big refactors, or after 2 sonnet failures. Note the model next to each item in FOREMAN_B_STATUS.md.
+NO haiku. sonnet = minimum + DEFAULT (UI, art, wording, reviewers, ordinary bugs) · opus = game rules + numbers (balance, odds, economy, difficulty), game structure / core systems (time, saves, co-op sync, schemes/evidence, progression, roads), hard root-cause work. Note the model next to each item in FOREMAN_B_STATUS.md.
