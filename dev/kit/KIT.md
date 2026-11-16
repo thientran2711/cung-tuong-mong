@@ -3768,9 +3768,10 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
 
 
 ## 77. kitStageRail · THE stage icon rail (owner 16/11, shot 1b571e3a; review/goal-strip-fix) — `dev/build/jrail.js` (after jgoal, before j84)
-ONE vertical column of small round kit icon buttons at the LEFT edge of every stage (her room, every place, co-op), under the scene title
-(`#sc-t`), never over a face (left gutter only: 40 px buttons, 34 px when the screen is ≤ 430 px high, 6 px apart). Kit look: card paper,
-gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = something new.
+ONE vertical column of small SQUARE kit icon buttons (rounded corners 8 px, the same corner as the kit ✕ `.kit-x`) at the LEFT edge of every stage (her room, every place, co-op), under the scene title
+(`#sc-t`), never over a face (left gutter only: 44 px buttons = the minimum tap target, on every screen height, 6 px apart). Kit look: card paper,
+gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot (the only round part: it is a dot, not a button) = something new.
+SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình vuông hoặc chữ nhật … đừng làm hình tròn"): NO icon button in the game is round. Every icon button is a rounded-corner square (radius 8 px, like `.kit-x`) or a rectangle; `border-radius:50%` is only for dots, avatars/medallions, seals, sliders' thumbs and decoration, never for something you tap. New round tap target = FAIL.
 - Order: (1) **Lịch tháng** `img/kit/mo-calendar.webp` → `kitMonthCalOpen()` (§58; the desk calendar in her room's corner is retired: one place).
   (2) **Chat** (co-op only) — added by review/coop-chat through the API, `order:20`, icon `img/kit/ico-chat.webp`.
   (3) **Mục tiêu chương** `img/kit/mo-edict-closed.webp` → `kitGoalDetail()` (§72.3); dot while the chapter goal / step changed since she
