@@ -38,7 +38,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
 | C12 | review/hc-portrait @ db69d7abb (wide frames) | REVIEWING (hc-portrait-r1) |
 | C13 | review/gift-pick @ 6158af34f | REVIEWING (gift-pick-r1) |
-| C14 | review/row-align @ 0886f329b | REVIEWING (row-align-r1) |
+| C14 | review/row-align @ 0886f329b | reviewer stopped (stuck) → re-review QUEUED-NEXT |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
 | C16 | review/item-info → r1 PASS 3ef079f61 | LIVE |
 | C17 | review/stage-fig-size @ 85c33890f (KIT §32.2a cap+crop, week book, aspect, identity figure retry) | REVIEWING (stage-fig-size-r1) |
@@ -81,7 +81,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C22 | review/boot-flash | RUNNING |
 | C23 | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
 | C24 | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
-| C25 | review/press-fx (owner s8 URGENT: whole pane bounces on any tap) | RUNNING |
+| C25 | review/press-fx @ bf4f654e3 | REVIEWING (press-fx-r1, URGENT + close-button fix) |
 | C26 | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow GREEN for +, red for −, pulse/scale) | QUEUED-NEXT |
 | C27 | review/buoi-transition (owner s8: page-flip on buổi change looks odd → ink-wash time-of-day transition; needs A2 fxkit) | QUEUED-NEXT |
 | D50 | consorts without full-body figure art show a placeholder frame in the dialog person column (seen 755x1000, mood-dialog worker) → art-complete follow-up | QUEUED |
