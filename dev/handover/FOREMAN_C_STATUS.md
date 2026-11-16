@@ -1,8 +1,9 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+FOREMAN C session 7 = session_011xDdVPkuPo47Rd8mxWQsgD (opened by session 6 at 19:48Z 16/11; lineage depth 1/8) · START_CTX (session 7) = ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60%. Replaces session 6 session_011xDdVRacauxsVyBHUGkxk8.
 FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
 ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
-last wake: 18:56Z 16/11 (s6 ctx ~11%)
+last wake: 19:55Z 16/11 (s7 start)
 ANSWER to main s21 (FOREMAN_C 19:05Z): PET GIÀ + KEEPSAKE DONE (owner ordered) — img/pet-stage/pet-<key>-gia.webp for all 22 (cut-out, same S/M/L heights as adult stage files; checked by C on dark: reports/pet-stage-art/gia22-dark.jpg) → set BAL.pet.life.giaArt (review/pet-lifespan); keepsake 'Túi kỷ vật' = img/item-tuikyvat.webp (256) + img/item512/item-tuikyvat.webp (replaces item-tuithom reuse). Wiring = main.
 ANSWER to main s21 (FOREMAN_C 19:02Z): ICON ART DONE (owner approved sample v2) — 28 files on CDN (report reports/review-icon-art.md FINAL). For status-icons: img/kit/ico-download.webp + img/kit/ico-update.webp (256², alpha). New: img/kit/ico-cal.webp, ico-goal.webp; replaced in place: ico-chat, mo-calendar (290x420 for kmcal), desk-cal, desk-cal-plain; placeholders light+dark ph-p-*-{ps,pm,pl}, ph-l-*-{ls,lm,ll}, ph-w-*-ll, ph-s-*-{s56,s64,s72}. KIT REQUESTS for the keeper: K-ICO-1 jrail → ico-cal/ico-goal; K-ICO-2 wire ph-* by orientation/size (jph/§59); K-ICO-3 kitStatusIcon names above. Nothing wired by C.
 ANSWER to main s21 (FOREMAN_C 18:05Z): PET STAGE CUT-OUTS DONE — all 22 img/pet-stage/pet-<key>.webp LIVE on CDN (each <=40 KB; bottom edge = feet line; Foreman C looked at all 22 on dark: reports/pet-stage-art/all22-dark.jpg). Size classes (share of kitFigBody; px @ iPad 1180): S 0.22=120 meomuop meo tho ngoctho hoami sao vet uyenuong cavang cachep lyngu cuuvi · M 0.36=195 cho sutu linhmieu camke phuong · L 0.55=300 thienma bachloc kylan hac thanhlong. For the stage-pets worker: slot function must count pet width (3 people + 3 L = 1113 of 1180; M sutu 232 px wide → 1275 > 1180 → common scale-down); pets scale with kitFigBody, never fixed px. KIT REQUEST K-PET-1 still open for the kit keeper. Next from the same worker: pet Già pictures + Túi kỷ vật.
@@ -24,6 +25,9 @@ RUNNING C sessions (11):
 - small-art-c sonnet session_011xDdVS1hhAmMvkVNAhm5Zt: URGENT realistic snow + firefly sprites (main s22 19:33Z) → tell main names; then two-way-acts card art.
 - PL courtyard art 299 DONE (code d8f8edab on review/pl-courtyards-art-code on top of main's pl-courtyards-r1) → handed to main s22 chain (ANSWER/log line); C opens no reviewer unless main asks.
 Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sample. Owner approved/declined so far: see SESSION 6 LOG.
+
+## SESSION 7 LOG
+- 19:55Z start (depth 1). Read START set + handover.
 
 ## SESSION 6 LOG
 - 17:49Z start (owner-opened, depth 0). Session 5 told to stop + ARCHIVED; its trigger trig_01QgAdMjgXXZm1ovzYPbju1W DELETED; own hourly wake trig_01B8ZVK48GgTwdRJjCS83QdG (:51 each hour). All 10 running C sessions told C = session 6.
