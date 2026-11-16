@@ -27,7 +27,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/kit-ui.md (20.3 KB): shared kit, layout, panels, cards, tabs, dialogs, Fold/iPad screens
 - dev/rules/topic/people-life.md (5.8 KB): NPC behaviour, personality, servants, children, death, pregnancy, nights
 - dev/rules/topic/process-history.md (12.1 KB): older process rulings and session history (main chat reads when needed)
-- dev/rules/topic/story-roads.md (10.2 KB): main/side stories, chapters, roads, origins, endings, tutorial
+- dev/rules/topic/story-roads.md (10.9 KB): main/side stories, chapters, roads, origins, endings, tutorial
 - dev/rules/topic/systems-other.md (4.4 KB): other game systems (items rules, map, sound, stat logs, minigame limits)
 - dev/rules/topic/time-calendar.md (3.7 KB): khắc, buổi, calendar, festivals, seasons (game rules)
 - dev/rules/topic/wording.md (8.3 KB): player-visible words, VANPHONG, no %, names of acts
