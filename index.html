@@ -12863,7 +12863,8 @@ window.kitRankPaint=kitRankPaint;
 function kitMark(ok){return ok?'<span class="kmk y"><b>✓</b></span>':'<span class="kmk n"><b>✗</b></span>'}
 window.kitMark=kitMark;
 function kitMarkPaint(root){try{if(!root)return;if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return;if(root.closest&&root.closest(".kmk,script,style,textarea,input,option,select,[data-nomark]"))return;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;return p&&!p.closest(".kmk,script,style,textarea,input,option,select,title,[data-nomark]")&&/[✓✔✗✘]/.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ if(!/[✓✔✗✘]/.test(root.textContent))return;/* play-time budget: most panels carry no mark at all, skip the walk */
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;return p&&/[✓✔✗✘]/.test(n.nodeValue)&&!p.closest(".kmk,script,style,textarea,input,option,select,title,[data-nomark]")?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue,f=document.createDocumentFragment();let last=0;v.replace(/[✓✔✗✘]/g,(m,i)=>{if(i>last)f.appendChild(document.createTextNode(v.slice(last,i)));const t=document.createElement("template");t.innerHTML=kitMark(m==="✓"||m==="✔");f.appendChild(t.content);last=i+1;return m});
   if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}catch(e){}}
@@ -41448,7 +41449,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="330316a13b50";window.CTM_BUILD=BUILD;
+const BUILD="63bfe0ce21c3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
