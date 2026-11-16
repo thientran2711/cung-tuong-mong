@@ -51,7 +51,7 @@ main at start = eba64ead4.
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 | MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade @06e4179e | opus | SẴN SÀNG KIỂM (worker archived) → reviewer mem-upgrade-r1 session_01DgYSWot4sNs4TrG8fUm2of RUNNING 14:15Z |
-| ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger @fb67d4ad | opus | SẴN SÀNG KIỂM (worker archived) → reviewer item-ledger-r1 RUNNING 14:22Z |
+| ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger @fb67d4ad | opus | SẴN SÀNG KIỂM (worker archived) → reviewer item-ledger-r1 session_01DgYSWmMK8v6NhgpHp4fg8k RUNNING 14:22Z |
 
 ## PASS (for the main coordinator to fast-forward)
 - READY review/seatcap-r1 7d4638380a80b60d07c3c260207906fbd69b4637 (one seat rule jseat.js; 71 rank writes scanned all through it; BAL.seatCap===SEATCAP; 21 idle lives × 120 months 0 over cap; old over-cap saves settled on load; includes promo-skip-r1; ancestor main 0ee35a63; report reports/seatcap-r1.md). Non-blocking: co-op friend + her both on a cap-1 rank cannot be settled (with coop-b1b5-p2).

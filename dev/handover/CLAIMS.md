@@ -223,4 +223,4 @@
 | tut-place: UI bug tour step 5 card covers tap target on Fold + 1180 Tài nghệ tip (from test-drift-r2 FAIL) | review/tut-place | main s17 | session_01UV1SzkUFJmikqECkuFxtPn (sonnet) | RUNNING | 16/11 14:14Z |
 | D25 veil-zoom-r2 reviewer (sonnet) | review/veil-zoom-r3 | B | session_01N1tNP3cFohaMXQ97kod8mh | RUNNING | 16/11 14:16Z |
 | night-time analysis (opus): 3 flips/month vs 12 consorts — options + numbers + impact (report only) | (report only) | main s17 | session_01UV1SzhuYF9iVGubAH5xsE6 (opus) | RUNNING | 16/11 14:20Z |
-| item-ledger review | review/item-ledger-r1 | D | (reviewer opening) | RUNNING | 16/11 14:22Z |
+| item-ledger review | review/item-ledger-r1 | D | session_01DgYSWmMK8v6NhgpHp4fg8k | RUNNING | 16/11 14:22Z |
