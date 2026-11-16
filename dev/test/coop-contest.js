@@ -123,7 +123,7 @@ const head=o=>o.p.evaluate(()=>Q[0]?{t:Q[0].t,pid:Q[0].pid||null,sd:Q[0].pp&&Q[0
  await weekAll(A,B,'2');
  {const g=await B.p.evaluate(id=>{const b=(S.cfb||{})[id];return b?{rows:b.rows.map(r=>r.id+':'+r.s),res:!!b.res}:null},bd.id);ok(g&&JSON.stringify(g.rows)===JSON.stringify(bd.rows)&&!g.res,'2 guest: the same NPC rows from the host',g)}
  /* the friend entry's numbers follow her live stats (pos relay), so count the payments themselves: no ap()/bestow/item on the friend entry here */
- await A.p.evaluate(()=>{window.__apF=[];const a0=ap;ap=function(p,o){if(p&&p.coop)window.__apF.push(JSON.stringify(o));return a0.apply(this,arguments)};const b0=bestow;bestow=function(p){if(p&&p.coop)window.__apF.push('bestow');return b0.apply(this,arguments)};const f=COOPW.fEntry();window.__inv0=(f.inv||[]).length});
+ await A.p.evaluate(()=>{window.__apF=[];const a0=ap;ap=function(p,o){if(p&&p.coop)window.__apF.push(JSON.stringify(o));return a0.apply(this,arguments)};const b0=bestow;bestow=function(p){if(p&&p.coop)window.__apF.push('bestow');return b0.apply(this,arguments)};const f=COOPW.fEntry();/* main coop-b1b5 B1: her entry's bag mirrors her real bag (items carry ci); count only items the HOST put there (no ci) */window.__inv0=(f.inv||[]).filter(e=>e&&e.ci==null).length});
  const gb0=await B.p.evaluate(()=>S.sung);
  await B.p.evaluate(()=>{window.__score=999});ok(await answer(B,/^Vào thi/),'2 guest: plays (her real score)');
  ok(await B.p.evaluate(()=>window.__sc&&window.__sc.hold===true&&window.__sc.rivals.length>0),'2 guest: mini-game against the host NPC rows, held');
@@ -133,7 +133,7 @@ const head=o=>o.p.evaluate(()=>Q[0]?{t:Q[0].t,pid:Q[0].pid||null,sd:Q[0].pp&&Q[0
  ok(rA[0]==='902:999','2 both: the guest\'s real score ranks first',rA[0]);
  {const qa=await A.p.evaluate(()=>Q.filter(m=>/· Hội thi .*kết quả/.test(m.t||'')).length),qb=await B.p.evaluate(()=>Q.filter(m=>/· Hội thi .*kết quả/.test(m.t||'')).length);ok(qa===1&&qb===1,'2 both: one result dialog each',{qa,qb})}
  /* ---- 3 prize once ---- */
- {const post=await A.p.evaluate(()=>({ap:window.__apF,inv:(COOPW.fEntry().inv||[]).length-window.__inv0}));ok(!post.ap.length&&post.inv===0,'3 host: the winning friend entry is NOT paid on the host (no ap, bestow or item)',post);
+ {const post=await A.p.evaluate(()=>({ap:window.__apF,inv:(COOPW.fEntry().inv||[]).filter(e=>e&&e.ci==null).length-window.__inv0,mirror:(COOPW.fEntry().inv||[]).filter(e=>e&&e.ci!=null).map(e=>e.k+':'+(e.from||''))}));ok(!post.ap.length&&post.inv===0,'3 host: the winning friend entry is NOT paid on the host (no ap, bestow or item)',post);
   const gb1=await B.p.evaluate(()=>S.sung);ok(gb1-gb0>=3,'3 guest: her prize applied on her client (Sủng +3)',{gb0,gb1});
   const wonB=await B.p.evaluate(()=>(S.honors||[])[0]&&S.honors[0].p===1);ok(wonB,'3 guest: her own client paid her (honour, place 1)')}
  const nv=await A.p.evaluate(()=>liveRivals(false).find(x=>!x.coop&&present7(x)).id);
