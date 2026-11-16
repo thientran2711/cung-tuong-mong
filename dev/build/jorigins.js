@@ -20,7 +20,7 @@ ARC67.bd_hoa={o:"bd",t:"Hòa ước mười năm",w:"emp",sj:"hòa ước Bắc 
   {n:"Mời sứ đoàn vào yết kiến Hoàng thượng",c:{bac:-20},w:{danh:3,sung:2},wx:"sứ đoàn yên lòng",f:"open",rt:"Hoàng thượng ban yến, sứ đoàn nâng chén."},
   {n:"Nhờ sứ đoàn nhắn: ta vẫn bình an",c:{},o:()=>45+S.tamco/4,w:{sung:3},sc:1,f:"quiet",wx:"phụ hãn bớt nghi",l:{danh:-3},lx:"triều thần ngờ ngươi thông tin",rt:"Lời nhắn đi và về trong ba tuần.",rf:"Người của Lễ bộ chặn lời nhắn, hỏi ngươi nói gì."}]},
  s2:{h:"Đêm tân hôn lạnh",w:"me",t:"Đêm đầu trong cung, cung nữ nhìn ngươi như nhìn một con thú lạ giữa lồng.",o:[
-  {n:"Tự tay pha trà sữa quê nhà mời nàng",c:{bac:-10},o:()=>50+S.sac/5,w:{duc:2},sc:1,wx:"cung nữ bớt sợ",l:{},rt:"Cung nữ nếm thử, khẽ cười.",rf:"Cung nữ nhăn mặt, không dám nói."},
+  {n:"Tự tay nấu trà sữa ngựa quê nhà mời các cung nữ",c:{bac:-10},o:()=>50+S.sac/5,w:{duc:2},sc:1,wx:"cung nữ bớt sợ",l:{},rt:"Cung nữ nếm thử, khẽ cười.",rf:"Cung nữ nhăn mặt, không dám nói."},
   {n:"Giữ phép tắc Đại Hy, không nhắc quê nhà",c:{},w:{th:2},f:"bend",wx:"yên chuyện",lx:"nhớ thảo nguyên",rt:"Ngươi ngồi thẳng đến sáng."}]},
  c1:{h:"Quân Bắc Địch vượt ải",w:"emp",t:"Tin cấp báo: một toán quân Bắc Địch đánh cướp hai thôn gần ải. Triều thần nhìn ngươi.",o:[
   {n:"Viết thư xin phụ hãn trừng trị toán cướp",c:{suc:-3},o:()=>45+S.tai/4+S.tamco/6,w:{danh:5,sung:3},sc:2,f:"keep",wx:"biên ải yên",l:{danh:-4},lx:"bị nghi thông đồng",rt:"Phụ hãn gửi đầu mục toán cướp đến cửa ải.",rf:"Thư đến muộn, ba thôn nữa cháy."},
@@ -43,9 +43,9 @@ ARC67.bd_hoa={o:"bd",t:"Hòa ước mười năm",w:"emp",sj:"hòa ước Bắc 
 ARC67.bd_ngua={o:"bd",t:"Ngựa chiến phương Bắc",w:"emp",sj:"đàn ngựa của ngươi",g:"Ngươi lớn lên trên lưng ngựa. Trong cung này, đó là điều lạ lùng, có thể là tài hoặc là tội.",
  p:[["s1","s2"],["c1","c2","G.rumor","G.hh"],["t1"],["x1"]],
  B:{
- s1:{h:"Của hồi môn là ba trăm con ngựa",w:"emp",t:"Phụ hãn gửi theo ba trăm con ngựa làm của hồi môn. Thái bộc tự hỏi nên nuôi ở đâu.",o:[
+ s1:{h:"Của hồi môn là ba trăm con ngựa",w:"emp",t:"Phụ hãn gửi theo ba trăm con ngựa làm của hồi môn. Quan Thái bộc chưa biết nên nuôi ở đâu.",o:[
   {n:"Dâng một nửa cho Hoàng thượng",c:{bac:-20},w:{sung:5,danh:2},f:"gift",wx:"Hoàng thượng vui lòng",rt:"Hoàng thượng thân chọn con ngựa trắng."},
-  {n:"Giữ cả đàn, nhờ thái bộc nuôi",c:{bac:-40},o:()=>45+S.tamco/5,w:{danh:3},sc:1,f:"keep",wx:"có đàn ngựa riêng",l:{danh:-3},lx:"triều thần ngờ ngươi nuôi quân",rt:"Đàn ngựa gặm cỏ ở bãi sau ngự uyển.",rf:"Thái bộc tâu: bãi cỏ không đủ cho cả đàn."}]},
+  {n:"Giữ cả đàn, nhờ Thái bộc nuôi",c:{bac:-40},o:()=>45+S.tamco/5,w:{danh:3},sc:1,f:"keep",wx:"có đàn ngựa riêng",l:{danh:-3},lx:"triều thần ngờ ngươi nuôi quân",rt:"Đàn ngựa gặm cỏ ở bãi sau ngự uyển.",rf:"Thái bộc tâu: bãi cỏ không đủ cho cả đàn."}]},
  s2:{h:"Con ngựa không ai cưỡi nổi",w:"emp",t:"Con ngựa ô của Hoàng thượng hất ngã ba người quản mã. Ngươi nhìn và thấy ngay nó đau chân.",o:[
   {n:"Tự tay chữa chân cho nó",c:{suc:-4},o:()=>45+S.arts.y*6+S.suc/8,w:{sung:4,danh:3},sc:1,f:"keep",wx:"ngài thấy ngươi có tài",l:{danh:-3},rt:"Con ngựa chịu để ngươi cầm cương.",rf:"Ngựa hất ngươi ngã giữa sân."},
   {n:"Chỉ cho quản mã cách chữa",c:{},w:{duc:2},wx:"không ai bị thương",rt:"Quản mã làm theo, ngựa khỏi sau mười ngày."}]},
@@ -65,9 +65,9 @@ ARC67.bd_ngua={o:"bd",t:"Ngựa chiến phương Bắc",w:"emp",sj:"đàn ngựa
  E:{win:{k:1,tag:"Nữ kỵ của Hoàng thượng",w:"emp",t:"Hoàng thượng gọi ngươi là ‘nữ kỵ của trẫm’ ngay giữa đại lễ; cả triều thôi coi tài cưỡi ngựa là tội.",fx:{sung:10,danh:8}},
   win2:{k:1,tag:"Thầy dạy ngựa của cấm quân",w:"emp",t:"Cấm quân học cách cưỡi của ngươi, trận thi mã thắng đoàn sứ. Ngươi được ban thưởng, mặc áo cưỡi ngựa vào cung.",fx:{danh:10,sung:4}},
   mid:{k:0,tag:"Ngựa được dùng, người chưa được nhớ",t:"Đàn ngựa có ích cho Đại Hy, nhưng chẳng ai nhớ chủ của chúng.",fx:{danh:3}},
-  lose:{k:-1,tag:"Con ngựa hoang của hậu cung",w:"emp",t:"Người ta cười ngươi cưỡi ngựa như đàn ông. Đàn ngựa bị thu về thượng tứ viện.",fx:{danh:-6,sung:-6}}}};
+  lose:{k:-1,tag:"Con ngựa hoang của hậu cung",w:"emp",t:"Người ta cười ngươi cưỡi ngựa như đàn ông. Đàn ngựa bị thu về Thượng tứ viện.",fx:{danh:-6,sung:-6}}}};
 
-ARC67.bd_tuc={o:"bd",t:"Người rợ phương Bắc",w:"th",sj:"phong tục Bắc Địch của ngươi",g:"Thái hậu gọi ngươi là ‘người rợ’. Sữa ngựa, lều nỉ, tóc tết: mỗi thứ đều bị soi, và mỗi thứ đều là một cơ hội để chứng minh.",
+ARC67.bd_tuc={o:"bd",t:"Phong tục thảo nguyên",w:"th",sj:"phong tục Bắc Địch của ngươi",g:"Thái hậu gọi ngươi là ‘người rợ’. Sữa ngựa, lều nỉ, tóc tết: mỗi thứ đều bị soi, và mỗi thứ đều là một dịp để tỏ mình.",
  p:[["s1","s2"],["c1","c2","G.rumor","G.hh"],["t1"],["x1"]],
  B:{
  s1:{h:"Lời chê lều nỉ",w:"th",need:["th"],t:"Ngươi dựng một chiếc lều nỉ nhỏ ở sân sau để thấy gần quê. Thái hậu cau mày: “Trong cung không có chỗ cho lều trại.”",o:[
@@ -98,15 +98,15 @@ ARC67.bd_hoang={o:"bd",t:"Ngai Khả hãn",w:"emp",sj:"cuộc tranh ngôi Bắc 
  p:[["s1","s2"],["c1","c2","G.rumor","G.hh"],["t1"],["x1"]],
  B:{
  s1:{h:"Tin tang từ thảo nguyên",w:"emp",t:"Người đưa tin quỳ ngoài cung, mũ còn đẫm tuyết: Khả hãn đã băng hà, trong tay còn nắm chiếc vòng ngà của ngươi.",o:[
-  {n:"Xin Hoàng thượng cho để tang ba ngày",c:{bac:-10},w:{duc:3,sung:2},f:"open",wx:"Hoàng thượng thương cảm",rt:"Hoàng thượng cho miễn lễ, đến tận cửa cung viếng ngươi."},
+  {n:"Xin Hoàng thượng cho để tang ba ngày",c:{bac:-10},w:{duc:3,sung:2},f:"open",wx:"Hoàng thượng thương cảm",rt:"Hoàng thượng cho miễn lễ, đến tận cửa cung an ủi ngươi."},
   {n:"Nén đau, hỏi người đưa tin ai đang giữ trướng vàng",c:{},o:()=>45+S.tamco/4,w:{mat:1},sc:1,f:"keep",wx:"biết rõ hai huynh trưởng",l:{duc:-1},lx:"bị coi là lạnh lùng",rt:"Người đưa tin kể hết chuyện hai huynh trưởng.",rf:"Người đưa tin sợ, không dám nói."}]},
  s2:{h:"Hai bức thư cùng một đêm",w:"me",t:"Hai bức thư của hai huynh trưởng đến cùng một đêm. Cả hai đều xin ngươi tâu với Hoàng thượng giúp mình.",o:[
   {n:"Giữ thư lại, chưa tâu",c:{},w:{tamco:2},f:"quiet",wx:"giữ được chủ động",lx:"phải im lặng thêm",rt:"Hai bức thư nằm dưới đáy hộp trang sức."},
   {n:"Đưa cả hai thư cho Hoàng thượng đọc",c:{},o:50,w:{sung:4,danh:3},sc:1,f:"open",wx:"Hoàng thượng tin ngươi",l:{danh:-3},lx:"hai huynh trưởng đều oán",rt:"Hoàng thượng nói: “Ngươi thành thật hơn các huynh ngươi.”",rf:"Hoàng thượng hỏi: “Ngươi giữ bản sao nào?”"}]},
  c1:{h:"Sứ của huynh trưởng",w:"emp",t:"Sứ của trưởng huynh dâng ngọc quý, xin ngươi nói tốt với Hoàng thượng.",o:[
   {n:"Từ chối ngọc, nói thẳng điều đúng",c:{},o:()=>45+S.duc/4,w:{danh:5},sc:2,f:"keep",wx:"giữ được sạch sẽ",l:{danh:-3},rt:"Sứ ngạc nhiên rồi cúi chào.",rf:"Sứ mang ngọc đi, kể xấu ngươi khắp triều."},
-  {n:"Nhận ngọc, hứa suông",c:{},w:{bac:80},f:"bend",wx:"có thêm bạc",lx:"mang nợ với trưởng huynh",rt:"Ngươi cất ngọc vào hòm."}]},
- c2:{h:"Hoàng thúc gửi mật thư",w:"emp",t:"Hoàng thúc gửi mật thư: nếu ngươi giúp, ông sẽ cho ngươi quyền cai quản một bộ lạc.",o:[
+  {n:"Nhận ngọc, hứa suông",c:{duc:-3},w:{bac:80},f:"bend",wx:"có thêm bạc",lx:"mang nợ với trưởng huynh",rt:"Ngươi cất ngọc vào hòm."}]},
+ c2:{h:"Thúc phụ gửi mật thư",w:"emp",t:"Thúc phụ của ngươi gửi mật thư: nếu ngươi giúp, người sẽ cho ngươi quyền cai quản một bộ lạc.",o:[
   {n:"Nộp thư cho Hoàng thượng",c:{},o:()=>50+S.tamco/5,w:{sung:5,danh:3},sc:1,wx:"được ghi công",l:{sung:-2},rt:"Hoàng thượng đọc thư, mỉm cười lạnh.",rf:"Hoàng thượng hỏi: “Sao đến giờ ngươi mới nộp?”"},
   {n:"Viết thư từ chối, giữ kín",c:{suc:-3},w:{mat:1},f:"quiet",wx:"giữ được đường lui",rt:"Thư từ chối đi lúc nửa đêm."}]},
  t1:{h:"Phong thư của các trưởng lão",w:"emp",t:"Một phong thư đóng dấu của chín trưởng lão đến tay ngươi, giấu trong lớp lót hộp phấn.",o:[
@@ -115,7 +115,7 @@ ARC67.bd_hoang={o:"bd",t:"Ngai Khả hãn",w:"emp",sj:"cuộc tranh ngôi Bắc 
  x1:{h:"Phán xử ngôi Khả hãn",w:"emp",t:"Hoàng thượng triệu tập sứ hai bên. Ngài hỏi thẳng ngươi: ‘Ai nên ngồi trướng vàng?’ Lời ngươi sẽ nói ngươi là ai.",o:[
   {n:"Tâu: cả hai đều không, chín trưởng lão sẽ chọn",c:{suc:-5},o:A=>35+(A.f.keep?20:0)+(A.f.open?10:0),e:["win","lose"],rt:"Hoàng thượng đứng dậy: “Nói đúng. Đại Hy sẽ ủng hộ trưởng lão.”",rf:"Hoàng thượng cau mày; cả hai sứ cùng quay đi."},
   {n:"Tâu: nên ủng hộ trưởng huynh, người mạnh hơn",c:{suc:-4},o:A=>50+(A.f.bend?15:0),e:["win2","mid"],rt:"Hoàng thượng gật đầu, ban ấn cho trưởng huynh.",rf:"Hoàng thượng nghĩ ngươi nghiêng về người nhà."},
-  {n:"Xin Hoàng thượng tự quyết, ngươi không dám nói",c:{},w:{duc:2},e:"mid",lx:"bỏ lỡ cơ hội cất tiếng",rt:"Hoàng thượng nhìn ngươi rất lâu."}]}},
+  {n:"Xin Hoàng thượng tự quyết, ngươi không dám nói",c:{},w:{duc:2},e:"mid",lx:"bỏ lỡ dịp cất tiếng",rt:"Hoàng thượng nhìn ngươi rất lâu."}]}},
  E:{win:{k:1,tag:"Trưởng công chúa Bắc Địch",w:"emp",t:"Các trưởng lão chọn một người cai trị đúng ý, Đại Hy ủng hộ. Từ đó sứ hai nước đều gọi ngươi là ‘trưởng công chúa’.",fx:{danh:12,sung:6}},
   win2:{k:1,tag:"Người chọn Khả hãn",w:"emp",t:"Trưởng huynh lên ngôi nhờ Đại Hy, và nhớ ơn ngươi. Mỗi mùa thu ngựa quý lại về cung.",fx:{bac:120,danh:6}},
   mid:{k:0,tag:"Ngai vàng xong, ngươi vẫn ở lại",t:"Ngôi Khả hãn đã có chủ, ngươi vẫn ở lại Đại Hy, không thêm không bớt.",fx:{danh:3}},

@@ -38,3 +38,13 @@ identity pick; consider more foreign-princess origins/variants (e.g. Bắc Đị
 - Rare endings (j97 entries) for the 4 bd arcs are not written (arcs have their own 4 endings each).
 - Men role for cross-origin love arc (j96 TM96_W/role) for bd not added.
 - Balance: bd stats set from nc/dtq anchors; no bot measure run (HH reach not measured). Suggest balance-pass to measure.
+
+## Reviewer r1 (review/origins-r1, 16/11)
+Ask confirmed: OWNER_DECISIONS L750 / OWNER_LEDGER item 208 (D18) = make the existing nc visible + add at least one more foreign princess with its own story (Bắc Địch named as the example).
+Fixes made by the reviewer:
+- Wording (VANPHONG / tone): arc title bd_tuc "Người rợ phương Bắc" -> "Phong tục thảo nguyên" (the slur stays only in characters' mouths: Thái hậu, gossip);
+  "cơ hội" -> "dịp" (x2, VANPHONG); "trà sữa ... mời nàng" -> "trà sữa ngựa ... mời các cung nữ"; "viếng ngươi" (said of a living person) -> "an ủi ngươi";
+  "Hoàng thúc" (a Han title) -> "Thúc phụ"; "ông" -> "người"; "thái bộc / thượng tứ viện" capitalised as offices; fam_bd letter made logical (salt/tea shortage, open the border market).
+- Balance rule: bd_hoang c1 "Nhận ngọc, hứa suông" was +80 bạc for free (obvious pick); now costs Đức -3 like the nc twin ("Nhận vàng", Đức -3).
+- Pre-rolled lives (j69): a life rolled before bd existed (ow=1) now keeps its origin (ow69Pick(seed,noBd) uses the old table order without bd);
+  new rolls are marked ow=2 and include bd. So the update re-rolls nobody.
