@@ -17,7 +17,7 @@ const [,,URL,MAIN,OR]=process.argv;/* OR = comma list of origins for the full-ro
     if(S&&S.st&&S.st.ms&&typeof msDone67==='function'){S.st.ms.t0=-99}}
    Q.length=0;if(!S)return{retry:1};return{save:JSON.stringify(ser()),rd:S.st.f14?S.st.f14.rd||'':'-',plan:S.st.ch&&S.st.ch.plan.join(','),n:S.st.ch&&S.st.ch.n,act:S.st.f14&&S.st.f14.act?JSON.stringify(S.st.f14.act):''}},[k,months]);
   await q.context().close();return s};
- const olds=[];if(MAIN)olds.push(['main build (dtq)',await mk(MAIN,'dtq',3),'old']);olds.push(['this build, phase-1 frame (thd: road not full on this branch)',await mk(URL,'thd',3),'p1']);
+ const olds=[];if(MAIN)olds.push(['main build (dtq)',await mk(MAIN,'dtq',3),'old']);olds.push(['this build, phase-1 frame (td: road not full on this branch)',await mk(URL,'td',3),'p1']);
  try{localStorage}catch(e){}
   for(const k of (OR||'tt,dtq,muoi,cn').split(','))olds.push([`this build, full road (${k}) mid-road`,await mk(URL,k,40),'full']);
  const q=await boot(URL);
