@@ -73,7 +73,7 @@ ev("newgirl",()=>liveRivals(true).length<9&&roomFor("consort"),null,()=>({
  {n:"Tiếp đãi lạnh nhạt",fx:{},x:"tân nhân thiện cảm -10",go:()=>{const n=newGirl(-10);log(`${n.name} vào cung, phong ${RANKS[n.rank].n}.`)}},
  {n:"Dằn mặt ngay buổi đầu",fx:{duc:-4,tamco:1},x:"tân nhân sợ, thù -25",go:()=>{const n=newGirl(-25);n.ghen=cl(n.ghen+15,0,100);log(`${n.name} vào cung, khóc suốt đêm sau buổi bái kiến.`)}}]}));
 /* children */
-ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k:pick(S.kids.filter(k=>k.alive&&k.age<10)).name,o:od(40+S.arts.y*12)}),p=>{const k=KID(p.k);if(!k)return null;return{
+ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k:pick(S.kids.filter(k=>k.alive&&k.age<10)).name,o:od(40+artO(S,"y"))}),p=>{const k=KID(p.k);if(!k)return null;return{
  t:`Đêm yến tiệc, ${k.name} sốt cao co giật. Tiếng nhạc bên Thái Hòa điện vẫn vọng sang.`,o:[
  {n:"Bỏ yến, thức trắng bên con",fx:{suc:-20,sung:-3},x:`Sức khỏe ${k.name} +20`,go:()=>{k.hp=Math.min(100,k.hp+20)}},
  {n:"Mời thái y, vẫn dự yến",fx:{bac:-30,sung:3},x:`Sức khỏe ${k.name} +8`,go:()=>{k.hp=Math.min(100,k.hp+8)}},
@@ -113,7 +113,7 @@ ev("doanngo",()=>mon(5),null,()=>({
  {n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:6}},
  {n:"Đeo túi ngải cho các con",fx:{},x:"các con khỏe thêm 10",go:()=>S.kids.forEach(k=>{if(k.alive)k.hp=Math.min(100,k.hp+10)})},
  {n:"Đặt cược thuyền rồng",fx:{bac:-20},x:`${word(50)} · thắng: Bạc +60`,go:()=>{if(roll(50)){apply({bac:60});log("Thuyền ngươi cược về nhất.")}}}]}));
-ev("trungcuu",()=>mon(9),()=>({o:od(35+S.tai/2+artW("thi",S.arts.thi)*6)}),p=>({who:pEmp(),
+ev("trungcuu",()=>mon(9),()=>({o:od(35+S.tai/2+artOE(S,"thi"))}),p=>({who:pEmp(),
  t:"Tiết Trùng cửu, Hoàng thượng lên Cảnh Sơn ngắm cúc, uống rượu thù du.",o:[
  {n:"Theo ngài lên núi",fx:{suc:-15,sung:5}},
  {n:"Dâng rượu cúc chúc thọ Thái hậu",fx:{bac:-15,th:6}},
@@ -128,7 +128,7 @@ ev("dongchi",()=>mon(11)||mon(12),null,()=>({
  {n:"Xin theo hầu lễ tế",fx:{suc:-20,danh:S.rank>=3?6:2}},
  {n:"Nấu chè mừng cả cung",fx:{bac:-25,maid:10,duc:2}},
  {n:"Ở cung giữ ấm",fx:{suc:15}}]}));
-ev("thbirthday",()=>!S.thDead&&mon(10),()=>({o:od(35+S.tai/3+artW("hoa",S.arts.hoa)*8)}),p=>({who:pTH(),
+ev("thbirthday",()=>!S.thDead&&mon(10),()=>({o:od(35+S.tai/3+artOE(S,"hoa"))}),p=>({who:pTH(),
  t:"Thánh thọ Thái hậu. Các cung đua nhau dâng lễ; ai được Thái hậu khen sẽ nở mày nở mặt.",o:[
  {n:"Dâng ngọc Như Ý",fx:{bac:-80,th:12}},
  {n:"Tự thêu trăm chữ Thọ",fx:{suc:-20},x:`${word(p.o)} · thành: Thái hậu +15, Danh +4 · hỏng: Thái hậu +3`,go:()=>apply(roll(p.o)?{th:15,danh:4}:{th:3})},

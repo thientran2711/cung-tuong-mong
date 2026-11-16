@@ -379,3 +379,54 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+/* ================= BALANCE CORE (review/balance-core, owner OD 16/11 23:00Z / 23:05Z / 23:08Z, 22:50Z) =================
+   ONE table for every start value, ONE ladder for every art and Tứ đức course, ONE growth curve, the night-choice odds.
+   orig.<k>: the start of a girl of that origin — the player AND every NPC consort (NPCs draw an origin by orig.npcW; "quan" = daughter of a
+     mid official, the usual consort, NPC-only). Ranges [lo,hi] roll evenly; th / hh = Thái hậu / Hoàng hậu → her at entry (the court mood adjusts it after); art / vir = course points (art ladder below) at entry, 18 years old.
+     Bạc / Danh / Sủng / Tai mắt / rank keep the approved origin odds (OD:L19/L43, owner OD:L1218: old origins are not re-tested);
+     Sắc / Tài / Tâm cơ / Đức / Sức / arts fit the origin (history check: dev/handover/reports/balance-core.md §1).
+   NPCs: their own rank adds what years in the palace give (npc: danh/bac per rank, art points per rank to their best courses). */
+BAL.orig={
+ tt:  {sac:[45,70],tai:[35,50],tamco:[20,30],duc:40,danh:33,sung:8,bac:210,suc:75,mat:1,th:5,hh:-15,art:{cam:22,thi:18,hoa:14,ky:10},vir:{dung:12,ngon:12}},
+ dtq: {sac:[45,70],tai:[15,30],tamco:[10,20],duc:30,danh:23,sung:8,bac:140,suc:100,mat:0,th:0,hh:0,art:{vu:22,ky:8,y:6},vir:{}},
+ muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:25,danh:8,sung:8,bac:380,suc:80,mat:1,th:-5,hh:0,art:{cam:12,nau:16,theu:10},vir:{cong:12}},
+ cn:  {sac:[55,80],tai:[10,25],tamco:[30,40],duc:30,danh:14,sung:28,bac:70,suc:90,mat:3,th:5,hh:0,art:{y:16,nau:16,theu:14},vir:{cong:12,ngon:10}},
+ nc:  {sac:[55,80],tai:[20,35],tamco:[15,25],duc:30,danh:38,sung:8,bac:180,suc:85,mat:0,th:-15,hh:0,art:{vu:24,y:16,cam:10},vir:{}},
+ bd:  {sac:[50,75],tai:[10,20],tamco:[15,25],duc:30,danh:23,sung:8,bac:150,suc:100,mat:0,th:-20,hh:0,art:{vu:22,nau:10,y:8},vir:{}},
+ td:  {sac:[45,70],tai:[30,45],tamco:[30,40],duc:30,danh:14,sung:18,bac:130,suc:75,mat:2,th:0,hh:0,art:{thi:18,cam:12,theu:12},vir:{}},
+ ch:  {sac:[45,70],tai:[25,40],tamco:[20,30],duc:40,danh:28,sung:8,bac:160,suc:80,mat:1,th:40,hh:-5,art:{hoa:16,cam:12,theu:10},vir:{dung:12,hanh:10}},
+ thd: {sac:[45,70],tai:[40,55],tamco:[15,25],duc:45,danh:8,sung:8,bac:80,suc:75,mat:0,th:0,hh:5,art:{thi:26,ky:16,hoa:10,theu:8,nau:8},vir:{hanh:12}},
+ cnv: {sac:[45,70],tai:[10,25],tamco:[15,25],duc:30,danh:2,sung:0,bac:8,suc:85,mat:0,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
+ quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,mat:0,th:0,hh:0,art:{cam:14,thi:12,theu:12,hoa:8},vir:{dung:10}},
+ npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
+ npc:{danh:8,bac:20,art:4,mal:6}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓ */
+};
+/* ONE ladder for every art (ARTS) and every Tứ đức course (VIR): points 0–100, bậc 0–5 by floor (tier), named (nm); bậc 5 Tông sư = 100 points = a lifetime's mastery.
+   gain: points per lesson point (the lesson game gives 1–3; teachers more) at each bậc — the higher, the slower (bot table in the report).
+   odds: the ONE odds bonus of a course at each bậc, wherever it helps a roll (acts, events, night choices); emp = × when the Emperor's trait
+   prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
+   bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
+BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
+ gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:1,danh:{3:3,5:6}};
+/* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
+   (0–49 ×1 · 50–69 ×.6 · 70–84 ×.35 · 85+ ×.2); the same for her and every NPC; fractions roll (expected value). */
+/* the odds word ladder (VANPHONG; word() in j1 reads it): floors of Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc (below the first: Liều) */
+BAL.lad=[31,46,56,66,81,91];
+BAL.grow={keys:["sac","tai","tamco"],band:[50,70,85],mul:[1,.6,.35,.2]};
+/* NIGHT CHOICES after the card flip (owner 22:45Z / 22:50Z / 23:05Z). Odds of each choice = b + Σ w[stat]×stat + art + trait fit + Emperor mood
+   (window.nfOdds in jnf reads these through oSteal(a,mode) / oKeep(p)). No khắc, no Sức, no Đức is paid: only gain / loss (cost 0).
+   feign = Tranh sủng: favour pulls him (Sủng), safer, small loss, small extra prize. road = Chặn ngự giá: beauty + art on his path, bolder:
+   lower odds unless she is lovely and her art pleases, bigger prize, bigger loss, offends the holder and Hoàng hậu more. keep = Giữ chân
+   Hoàng thượng (the flipped consort's defence): success → every try against her that night drops rung (one) odds rung (word() ladder),
+   failure → nothing; if nobody takes her night she gains keepSung, if she is robbed anyway her oán toward the winner × oanX.
+   art: she uses her BEST art (most points); the Emperor's month art: favoured → + BAL.art.odds[bậc] × fav, disfavoured → − × dis, other → × neu;
+   artMul per choice. win/lose = extra effects on the doer (beside the night itself / beside losing), rel = thiện cảm the holder loses toward
+   the winner, hh = Hoàng hậu → winner, ghen = holder's jealousy.
+   ea (Emperor's month art, picked by the game each month, host in co-op): she knows it at the month start when Tai mắt ≥ mat, else each week
+   rumour % = r0 + Tai mắt × rMat; NPCs the same; the shown 'known likes' (discover) can also name it (disc %). */
+Object.assign(BAL.steal,{cost:{feign:{duc:0},road:{suc:0}},
+ m:{feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-2,duc:-1},rel:10,hh:0,ghen:15},
+    road:{b:20,w:{sac:.35,sung:.05},art:1.5,win:{sung:4},lose:{sung:-6,danh:-3},rel:25,hh:6,ghen:30},
+    keep:{b:35,w:{sung:.3,sac:.1},art:1}},
+ art:{fav:1,dis:.75,neu:0},keep:{rung:1,keepSung:2,oanX:1.5},
+ ea:{mat:5,r0:5,rMat:4,disc:35}});

@@ -4,7 +4,7 @@
    - ORIGIN_LORE: for EVERY origin a short backstory + how the court treats her; shown under the identity card text (kpIdentity), no new UI part:
      the same .kpidt text slot the card already uses.
    Pictures: img/origin-wide-bd.webp (16:9) and img/bg-origin-bd.webp (3:4), CDN. Missing kit part: emblem img/kit/origin-bd.webp (KIT REQUEST). */
-ORIGINS.splice(Math.max(0,ORIGINS.findIndex(o=>o.k==="nc"))+1,0,{k:"bd",n:"Công chúa Bắc Địch hòa thân",r:2,o:{danh:15,suc:90,bac:90},hh:0,th:-20,art:{vu:1},t:"Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm."});
+ORIGINS.splice(Math.max(0,ORIGINS.findIndex(o=>o.k==="nc"))+1,0,{k:"bd",n:"Công chúa Bắc Địch hòa thân",r:2,t:"Con gái Khả hãn Bắc Địch, gả sang làm tin cho hòa ước mười năm."});
 
 /* v1 story slot (every origin needs one: the chapter line j67 lives in QUEST67/ARC67 below) */
 STORY.bd={t:"Hòa thân Bắc Địch",n:3,goal:"Ngươi là tờ hòa ước còn sống. Giữ cho hai nước yên, và giữ cho mình khỏi bị coi là con tin.",
@@ -47,7 +47,7 @@ ARC67.bd_ngua={o:"bd",t:"Ngựa chiến phương Bắc",w:"emp",sj:"đàn ngựa
   {n:"Dâng một nửa cho Hoàng thượng",c:{bac:-20},w:{sung:5,danh:2},f:"gift",wx:"Hoàng thượng vui lòng",rt:"Hoàng thượng thân chọn con ngựa trắng."},
   {n:"Giữ cả đàn, nhờ Thái bộc nuôi",c:{bac:-40},o:()=>45+S.tamco/5,w:{danh:3},sc:1,f:"keep",wx:"có đàn ngựa riêng",l:{danh:-3},lx:"triều thần ngờ ngươi nuôi quân",rt:"Đàn ngựa gặm cỏ ở bãi sau ngự uyển.",rf:"Thái bộc tâu: bãi cỏ không đủ cho cả đàn."}]},
  s2:{h:"Con ngựa không ai cưỡi nổi",w:"emp",t:"Con ngựa ô của Hoàng thượng hất ngã ba người quản mã. Ngươi nhìn và thấy ngay nó đau chân.",o:[
-  {n:"Tự tay chữa chân cho nó",c:{suc:-4},o:()=>45+S.arts.y*6+S.suc/8,w:{sung:4,danh:3},sc:1,f:"keep",wx:"ngài thấy ngươi có tài",l:{danh:-3},rt:"Con ngựa chịu để ngươi cầm cương.",rf:"Ngựa hất ngươi ngã giữa sân."},
+  {n:"Tự tay chữa chân cho nó",c:{suc:-4},o:()=>45+artO(S,"y")+S.suc/8,w:{sung:4,danh:3},sc:1,f:"keep",wx:"ngài thấy ngươi có tài",l:{danh:-3},rt:"Con ngựa chịu để ngươi cầm cương.",rf:"Ngựa hất ngươi ngã giữa sân."},
   {n:"Chỉ cho quản mã cách chữa",c:{},w:{duc:2},wx:"không ai bị thương",rt:"Quản mã làm theo, ngựa khỏi sau mười ngày."}]},
  c1:{h:"Đại hội săn thu",w:"emp",t:"Hoàng thượng mở cuộc săn thu. Ai cũng chờ xem công chúa Bắc Địch có dám lên ngựa không.",o:[
   {n:"Cưỡi ngựa theo ngự giá",c:{suc:-6},o:()=>40+S.suc/5,w:{sung:6,danh:4},sc:2,f:"keep",wx:"cả đoàn săn kinh ngạc",l:{danh:-5,sung:-2},lx:"bị chê thất lễ",rt:"Ngươi đuổi kịp ngự giá, không một ai nói gì.",rf:"Mũ ngươi rơi, các phi tần cười khẽ."},
@@ -77,7 +77,7 @@ ARC67.bd_tuc={o:"bd",t:"Phong tục thảo nguyên",w:"th",sj:"phong tục Bắc
   {n:"Dâng một bình lên Thái hậu",c:{bac:-10},o:45,w:{th:6},sc:1,f:"keep",wx:"Thái hậu nếm thử",l:{th:-4},rt:"Thái hậu nhấp một ngụm, không nói.",rf:"Thái hậu đặt chén xuống, nhăn mặt."},
   {n:"Thôi uống cho đỡ điều tiếng",c:{},w:{duc:2},f:"bend",wx:"yên chuyện",lx:"nhớ nhà",rt:"Bình sữa cất vào hộc kín."}]},
  c1:{h:"Thái hậu đau đầu gối",w:"th",need:["th"],t:"Thái hậu đau đầu gối mỗi khi trở trời. Ngươi biết cách chườm mỡ cừu và cỏ thuốc của người thảo nguyên.",o:[
-  {n:"Xin chườm thuốc quê nhà",c:{suc:-3},o:()=>45+S.arts.y*6,w:{th:12},sc:2,f:"keep",wx:"Thái hậu đỡ đau",l:{th:-8},lx:"thuốc không hợp",rt:"Thái hậu ngủ được một giấc ngon.",rf:"Thái hậu ngứa rát cả đêm."},
+  {n:"Xin chườm thuốc quê nhà",c:{suc:-3},o:()=>45+artO(S,"y"),w:{th:12},sc:2,f:"keep",wx:"Thái hậu đỡ đau",l:{th:-8},lx:"thuốc không hợp",rt:"Thái hậu ngủ được một giấc ngon.",rf:"Thái hậu ngứa rát cả đêm."},
   {n:"Không dám, sợ mang họa",c:{},w:{tamco:2},wx:"không rủi ro",lx:"bỏ lỡ cơ duyên",rt:"Ngươi im lặng."}]},
  c2:{h:"Tết quê nhà",w:"maid",t:"Đến tiết Tết lớn của Bắc Địch. Ngươi muốn làm một lễ nhỏ hát và múa theo thảo nguyên.",o:[
   {n:"Mời các phi tần cùng múa",c:{bac:-30},o:50,w:{danh:5},sc:1,wx:"thêm người quen",l:{th:-6},lx:"Thái hậu chê ồn",rt:"Cả hậu cung cười vui.",rf:"Thái hậu sai người dẹp."},
@@ -86,7 +86,7 @@ ARC67.bd_tuc={o:"bd",t:"Phong tục thảo nguyên",w:"th",sj:"phong tục Bắc
   {n:"Kể truyện trời xanh và con sói tổ",c:{},o:A=>45+(A.f.keep?10:0),sc:1,wx:"Thái hậu tò mò",l:{th:-4},rt:"Thái hậu nghe say mê.",rf:"Thái hậu bảo ngươi đừng nói những chuyện ấy."},
   {n:"Nói Bắc Địch cũng kính trời đất như Đại Hy",c:{suc:-2},w:{th:6},f:"bend",wx:"Thái hậu thấy ngươi biết điều",rt:"Thái hậu gật đầu."}]},
  x1:{h:"Yến mừng thọ Thái hậu",w:"th",t:"Đại thọ Thái hậu. Mỗi phi tần dâng một lễ. Lễ của ngươi sẽ nói ngươi là ai.",o:[
-  {n:"Dâng bài ca thảo nguyên cầu thọ",c:{suc:-5},o:A=>35+(A.f.keep?20:0)+S.arts.vu*6,e:["win","lose"],rt:"Thái hậu đứng dậy vỗ tay, gọi ngươi là ‘con sơn ca của ai gia’.",rf:"Thái hậu cau mày, cả yến im bặt."},
+  {n:"Dâng bài ca thảo nguyên cầu thọ",c:{suc:-5},o:A=>35+(A.f.keep?20:0)+artO(S,"vu"),e:["win","lose"],rt:"Thái hậu đứng dậy vỗ tay, gọi ngươi là ‘con sơn ca của ai gia’.",rf:"Thái hậu cau mày, cả yến im bặt."},
   {n:"Dâng bức thêu chữ Thọ do chính tay làm",c:{suc:-4},o:A=>50+(A.f.bend?20:0),e:["win2","mid"],rt:"Thái hậu khen ngươi nay đã là con dâu Đại Hy.",rf:"Thái hậu nhận lễ, không nói gì."},
   {n:"Dâng lễ vật quý, đứng sau",c:{bac:-60},w:{th:3},e:"mid",lx:"không ai nhớ lễ của ngươi",rt:"Lễ vật đặt lẫn trong trăm lễ."}]}},
  E:{win:{k:1,tag:"Sơn ca của Thái hậu",w:"th",t:"Thái hậu thương ngươi như con. Giữ được mình mà vẫn được chấp nhận: ngươi là người Bắc Địch đầu tiên làm được thế.",fx:{th:22,danh:6}},
