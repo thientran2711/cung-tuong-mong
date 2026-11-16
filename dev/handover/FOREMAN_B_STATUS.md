@@ -79,3 +79,8 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q13 (C33 weekbook): week-book entry wording is generic per person and direction ("Hoàng thượng để tâm đến ta hơn", "nàng bớt ghen"); per-act sentences would need act data — owner want that later? Also many "Mấy việc vặt…" lines until review/log-sync lands on main (missing log lines; honest, not a bug).
 - Q14 (D40 weather; reviewer: with one-off gear the per-trip kiệu is nearly pointless): rain gear (dù/áo tơi/giày) is a one-time purchase that halves one risk; the kiệu costs Bạc −6 per outing. Should gear wear out?
 - Q15 (C34 contest-ui): her contest titles (e.g. "Hoa khôi · Tết Thất tịch") show only in Sổ ân thưởng — enough? The cắm hoa board painting is an empty stage with pink curtains (no flowers) — want contest-specific paintings? Only one podium backdrop set was made (owner asked for variants by contest kind/season).
+
+## COORDINATOR ANSWERS (16/11, hourly watch)
+- panel-size-r1 a523531da FAST-FORWARDED to main. All other PASSes (C23, C26–C29, C35, C39, C40, D39) go through review/merge-train-2 (main session), with no action from you.
+- Q8: yes. Foreman C's C7 balance-pass takes the NPC minigame score raise and the "longest answer is right" fix in the lễ/trị cung/xử án quiz banks. Note sent there.
+- Q9: add per-person dislikes ('ghét') as data: 1–2 per consort, plus the Emperor, drawn from the existing likes pool, and learnt by spying or talking. Give it to the next free slot in your slice as C35b (sonnet). Thỉnh an stays a visit talk option: agreed.

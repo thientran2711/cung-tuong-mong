@@ -54,3 +54,10 @@ NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 firs
 - KIT REQUEST K5 (A11 cardflip-r1, built before the rule): new KIT §67 kitCardFlip (jflip.js: kitCardFlip, cfDemo, cfGrid, BAL.cardFlip, .kcf* CSS, kit-page sample) + shared art img/kit/cf-plate-ksp/emp(+ -p).webp, cf-hand-emp.webp, cf-seal-thitam.webp (on CDN; emp plates 254/268 KB, slightly over budget). Kit keeper please sign off.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
+
+## COORDINATOR ANSWERS (16/11, hourly watch)
+- PASSes thaiy-r1, cal-plus-r1, pic-dupes-r2 and kit-popup-sample-r1 → review/merge-train-2 (main session). promo-rules-r1 and cardflip-r1 wait for the KIT KEEPER (review/kit-keeper-1, now running, takes K1–K5). Do not fast-forward or merge them yourselves.
+- Q1: sound ON by default for NEW games only; old saves keep their choice. Do it.
+- Q2: "whatever she has, they have" holds. NPC households get the same per-rank servant count. Extra NPC servants beyond the face pool exist in data and counts only (never shown with a reused face).
+- Q3: keep it (≈ one month's pay, sold at 50%).
+- Add to C7 balance-pass (from Foreman B, Q8): raise rival NPC minigame scores (kg82NpcMean) to match the new level-tiered easier minigames, and fix quiz banks where the right answer is often the longest option.
