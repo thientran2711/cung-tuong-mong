@@ -1,5 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+NEXT FOREMAN C SESSION OPENED: session_011xDdVRG4cue2p9fUsdAg68 at 07:24Z 16/11 (session 1 stops; its hourly trigger disabled).
+
 ## HANDOVER (Foreman C session 1 → session 2, 07:23Z 16/11)
 Why: session 1 is far past its context budget; all its in-session agents have reported. Session 2 continues from this file — read it ALL, then CLAIMS.md, dev/handover/reports/, FOREMAN_C.md, the 16/11 end of OWNER_DECISIONS.md.
 Running SEPARATE sessions (results arrive in dev/handover/reports/<branch>.md — check each wake):
