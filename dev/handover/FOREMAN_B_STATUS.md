@@ -15,7 +15,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
 | C32 page-curl2 | review/page-curl2 | sonnet | RUNNING |
 | C33 weekbook-entries | review/weekbook-entries-r1 | sonnet | PASS 1badc13c817d0d67971439fd6d2cbd944e47ad89 |
-| C34 contest-ui | review/contest-ui-r1 @7fbf0630 FAIL (podium overlaps header at 844x390) → review/contest-ui-r2 | sonnet | RUNNING (fix r2) |
+| C34 contest-ui | review/contest-ui-r2 @c881ae6b (r1 FAIL fixed) | sonnet | REVIEWING (review/contest-ui-r3, sonnet) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
 | C26b stat-fx follow-up | review/stat-fx-2 @f4096090 | sonnet | REVIEWING (review/stat-fx-2-r1, sonnet); contains stat-fx-r1 + pcard-fill-r1 |
