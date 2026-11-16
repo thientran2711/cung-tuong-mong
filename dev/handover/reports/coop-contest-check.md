@@ -33,3 +33,12 @@ Date 11/16/2026. Code: origin/main 9fc1ac33 (dev/build/j*.js, jcoop*.js, dev/coo
 4. **Contested single resources** (one queen seat, one winner prize, unique items, Emperor's one night): host decides the single winner by the same rule as for NPCs; the loser gets the normal "lost" outcome. Write the rule once in dev/rules and BAL.
 5. Fix-the-whole-group: audit every shared-event type (all `startContest` callers, exams, banquets, festivals) after item 1.
 6. Case 4 (same NPC hit twice): host-authoritative order, second act sees the changed state (add a rule: resolve acts in `id` order through the host, not by merge).
+
+## Q3 (owner add). Are BOTH players invited to the same contest?
+**Partly. Same day, but NOT the same announcement: BROKEN.**
+- The calendar day is shared (date keys year/month/tuan are W_KEYS, jcoopworld.js:24), so the festival and invitation date (`nextT7`, j71.js:327) match for both. Deadline = same festival day: OK.
+- But the invitation is created by each client alone in its own endTurn (j71.js:406 `fPlan7()` -> `Q.push(iv)`), stored in personal `S.j71.plans` (j71.js:336). `fPlan7`/`fMake7` are not muted on the guest (only festival/rivalsTurn/rivalsMonth, jcoopworld.js:371) and no host roll exists.
+- Variant (`fvPick`, j71.js:75), entrants/odds (`fPP7`, j71.js:147 uses `R(1e6)`, `shuf`) are local random, so the two players can get different contest types (a mini-game contest vs a gift/banquet variant), different rival lists, different odds.
+- The invitation lists `[S]+ents7(pp)` (j71.js:328); the friend appears only if the random pick happens to include her simulated entry. She is never told "your friend is also invited" and can't enter as a real second entrant (see Q1).
+- Each player can accept/skip alone (`P.me`, j71.js:~340), fine, but nothing tells either what the other chose.
+- Recommendation: host rolls ONE plan (variant, entrants, seed) in its endTurn and sends it in the shared world (new W key e.g. `W.S.j71plan`), both clients show the same invitation text/deadline and an "also invited: <friend>" line; each answers Enter/Skip, the answers go to the host; the host runs Q1's shared board. Verdict summary: same date OK, same announcement BROKEN, both can enter UNDEFINED (can enter separately, but only against simulated copies).
