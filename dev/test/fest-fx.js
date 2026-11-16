@@ -14,10 +14,14 @@ const clr=p=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal')
  await p.evaluate(NEWLIFE);await sleep(400);await clr(p);
  /* 1. matrix: every festival x buổi 0..3 x scene -> each effect true only for its festivals and buổi; scene never matters; no fireworks anywhere */
  const M=await p.evaluate(()=>{const out=[];const keep={m:S.month,t:S.tuan,b:S.buoi,pl:S.place,tab:tab};
-  for(const k in FEST){const f=FEST[k];S.month=f.m;S.tuan=f.t[0];for(let bu=0;bu<4;bu++)for(const [pl,tb] of [["home","ac"],["vuon","ac"],["thu","ac"],["home","go"],["lc","ac"]]){S.buoi=bu;S.place=pl;tab=tb;out.push({k,bu,pl,tb,festival:kfFestFx("festival"),lantern:kfFestFx("lantern"),gold:kfFestFx("gold"),fly:kfFestFx("fly")})}}
+  for(const k in FEST){const f=FEST[k];S.month=f.m;S.tuan=f.t[0];for(let bu=0;bu<4;bu++)for(const [pl,tb] of [["home","ac"],["vuon","ac"],["thu","ac"],["home","go"],["lc","ac"]]){S.buoi=bu;S.place=pl;tab=tb;{const w=kfWxCfg();out.push({k,bu,pl,tb,festival:kfFestFx("festival"),lantern:kfFestFx("lantern"),gold:kfFestFx("gold"),fly:kfFestFx("fly"),wx:w&&w.id,px:pxKind()})}}}
   S.month=keep.m;S.tuan=keep.t;S.buoi=keep.b;S.place=keep.pl;tab=keep.tab;return {out,keys:Object.keys(FEST),T:JSON.parse(JSON.stringify(FESTFX)),B4L,fw:!!(FX.festival)}});
  let bad=0,fire=0;for(const r of M.out)for(const e of ['festival','lantern','gold','fly']){const T=M.T[e];const want=T.fest.includes(r.k)&&(!T.buoi||T.buoi.includes(r.bu));if(r[e]!==want){bad++;console.log('  mismatch',e,JSON.stringify(r),'want',want)}if(r[e])fire++}
  ck('matrix '+M.out.length+' cells x 3 effects, true in '+fire,bad===0&&fire>0,'bad='+bad);
+ /* r1: the painted weather layer (jfx kfWxCfg) and the Pixi pxKind must follow the same table: gold where FESTFX.gold, fireflies-as-festival never outside FESTFX.fly buổi */
+ let wbad=0;for(const r of M.out){const g=M.T.gold.fest.includes(r.k)&&(!M.T.gold.buoi||M.T.gold.buoi.includes(r.bu));if(g!==(r.wx==='gold')||g!==(r.px==='gold')){wbad++;console.log('  wx/px gold mismatch',JSON.stringify(r))}
+  const fl=M.T.fly.fest.includes(r.k)&&M.T.fly.buoi.includes(r.bu);if(!g&&fl&&(r.wx!=='fly'||r.px!=='fly')){wbad++;console.log('  wx/px fly missing',JSON.stringify(r))}if(M.T.fly.fest.includes(r.k)&&!M.T.fly.buoi.includes(r.bu)&&(r.wx==='fly'||r.px==='fly')){wbad++;console.log('  wx/px fly in wrong buổi',JSON.stringify(r))}}
+ ck('weather layer kfWxCfg + pxKind follow FESTFX (gold/fly by festival and buổi)',wbad===0,'bad='+wbad);
  ck('lantern and fly only at tối, gold any buổi',M.T.lantern.buoi.join()===String(M.B4L)&&M.T.fly.buoi.join()===String(M.B4L)&&M.T.gold.buoi===null);
  ck('thanhminh gets nothing',!M.out.some(r=>r.k==='thanhminh'&&(r.lantern||r.gold||r.fly)));
  ck('fireworks row only reachable through FESTFX.festival (newyear, giaothua, tối)',M.fw&&M.T.festival.fest.join()==='newyear,giaothua'&&M.T.festival.buoi.join()===String(M.B4L));
