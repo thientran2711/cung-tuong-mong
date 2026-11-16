@@ -14,7 +14,7 @@ const CTM_NOTES=[
   "Chơi cùng hảo hữu: có đồng hồ chung; máy ngủ dậy vẫn vào lại được phòng.",
   "Thẻ lựa chọn: tranh đặt bên trái, chữ bên phải; nút chạm vào có lún xuống."]},
  {id:"2026-11-15",n:[
-  "Có bản mới khi đang chơi: không bị ngắt giữa chừng, chỉ hiện chip «Có bản mới»; sang buổi sau bản mới tự mở, vào lại đúng sổ."]}
+  "Có bản mới khi đang chơi: không bị ngắt giữa chừng, chỉ hiện dấu «Có bản mới» trên thanh trên; sang buổi sau bản mới tự mở, vào lại đúng sổ."]}
 ];
 (function(){try{
 const KEY="ctm-notes-seen",MON=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"];

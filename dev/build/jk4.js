@@ -219,7 +219,6 @@ window.kitEvCat=kitEvCat;
   if(ev&&!ev.classList.contains("ksart-cat")){const im=ev.querySelector("img");const c=kitEvCat(m,{src:im&&im.getAttribute("src")});if(c.col){ev.classList.add("ksart-cat",c.cls);ev.style.setProperty("--kcc",c.col)}}}}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kit-evstage";st.textContent=`
 .kpb.kphas.kesb{grid-template-columns:clamp(130px,40%,260px) minmax(0,1fr);gap:12px;align-items:start}
-#modal .dlg.kpanel.kesdlg{max-width:min(640px,calc(100vw - 24px))!important}
 .kpb.kphas.kesb:has(> .kes2){grid-template-columns:clamp(180px,46%,340px) minmax(0,1fr)}
 .kpsubj.kes{display:flex;flex-direction:row;align-items:flex-end;justify-content:center;gap:2px;position:sticky;top:0}
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
@@ -382,7 +381,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* column width: the people (or the widest name chip); the right column keeps ≥ 280 px — if not, one common factor */
   let need=Math.max(tot,capW)+12,k=1;
   if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
-  else{const dw=Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
+  else{const dw=d.clientWidth||Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
   const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
   L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
@@ -443,8 +442,7 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
  const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitDpFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)})})();
 (function(){const st=document.createElement("style");st.id="kit-dlgperson";st.textContent=`
-#modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important;height:min(calc(100dvh - 32px),720px);
- width:min(calc(var(--kdpw,240px) + 470px),calc(100vw - 24px));max-width:none!important}
+#modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important}
 #modal .dlg.kpanel.kdper>*{flex:none}
 #modal .dlg.kdper>#mb,.modal .dlg.kdscroll.kdper>#mb{flex:1 1 auto!important;min-height:0;display:grid!important;overflow:hidden!important;
  grid-template-columns:var(--kdpw,240px) minmax(0,1fr);grid-template-rows:max-content minmax(0,1fr);column-gap:14px;align-content:stretch}
@@ -466,7 +464,6 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
 #modal .dlg.kdper .kfact.kfnodot{grid-template-columns:minmax(0,1fr)}
 #modal .dlg.kdper #mr{padding-left:calc(var(--kdpw,240px) + 28px)}
-#modal .dlg.kdper.kdnarrow{width:calc(100vw - 16px);height:calc(100dvh - 24px)}
 #modal .dlg.kdper.kdnarrow>#mb{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-auto-rows:max-content}
 #modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(48dvh,460px) max-content minmax(0,1fr)!important}
 #modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(48dvh,460px) max-content!important}
