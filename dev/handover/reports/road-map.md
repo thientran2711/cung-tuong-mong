@@ -48,3 +48,17 @@ Build sha 240c68a79 (review/road-map). Logic tests (the chapters add no new UI: 
   BAL.road. HISTORY CHECK: tt_oan .9 (Tam ty hội thẩm). Bot speed ~3.4 s per game month.
 
 SẴN SÀNG KIỂM 240c68a79
+
+## HANDOVER (rollover at START_CTX+25 %, 11/16/2026 ~16:50Z) — successor = B1 worker + engine owner
+- Order from Foreman B s6 (16:44Z): take B1 = dtq + muoi + cn roads .5–.11 (84 chapters) on `review/road-b1` (pushed, = 240c68a7);
+  stay ENGINE OWNER of jroad.js: B2 (review/road-b2) / B3 (review/road-b3) send engine change requests to you; any jroad.js change →
+  push on `review/road-map-next`, tell Foreman B + B2 + B3. Apply the pattern fixes from reviewer road-map-r1 when it reports.
+- Report B1 in dev/handover/reports/road-b1.md (docs branch); "SẴN SÀNG KIỂM <sha>" to Foreman B (session_01N1tNP2qaiWybrEsrX5iL9y).
+- Start: sparse worktree on review/road-b1; read ROAD_MAP.md §3–§5 + §4.2/4.3/4.4 drafts; the HELPER BRIEF above; dev/build/jrd_tt.js
+  (pattern) and jroad.js. FIRST read each road's `.4` arc in j67.js (E keys/tags, cast) — dtq_bien/vu/binh/huynh, muoi_tuoc/lau/doi/no,
+  cn_chu/tinh/ban/than — rewrite the map lines, then write dev/build/jrd_dtq.js, jrd_muoi.js, jrd_cn.js (add after 'jrd_tt.js', in
+  assemble.py). HISTORY CHECK: dtq_vu .9, dtq_binh .7, muoi_lau .7.
+- Known: bot speed ~3.4 s/game month (road-full one life ≈ 9 min; run with nohup + log, filter roads: `node dev/test/road-full.js <url> 1 dtq_bien,dtq_vu`).
+  The road-full fallback check needs at least one incomplete road somewhere (it scans tt..thd). tm96 side story opens tm96a only in bot
+  runs (bot plays main beats only) — fine.
+- Worktree /home/user/wt/road-map (review/road-map) can be removed by the successor.
