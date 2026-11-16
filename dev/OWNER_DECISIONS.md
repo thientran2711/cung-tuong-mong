@@ -1071,3 +1071,4 @@ All must work in co-op.
   3. Emperor's own SIDE STORY (phụ tuyến): consolidating power over ministers/regent, border trouble, court factions — chapters progress over the years and touch her (requests, risks, rewards).
   4. Reaffirmed: EVERY named character has their own side quest line (D5 "real side stories from NPC life goals").
 - → worker review/princesses becomes review/palace-start (opus: population + birth rates + accession setting); Emperor side story + NPC side quests = D5 (opus) after it.
+- (16/11, session 8) Container restarted: all 16 resumable agents resumed from their transcripts (worktrees intact); boot-flash, save-slots, face-sharp reviewers and palace-start worker re-created on their existing worktrees; hourly watch re-created.
