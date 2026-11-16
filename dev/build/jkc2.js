@@ -331,7 +331,7 @@ for(const k in KC2CH)KCE[k]={get t(){try{return kc2ChT()}catch(x){return""}},b:K
 /* EXAM HOOK: a dedicated selection mini-game (OD:L1244 "minigame exam") can replace the j82/j91 round: window.kcEntryExam(kind, done(raw 0..10)).
    TODO(selection-minigame): when that worker ships, it sets window.kcEntryExam; until then the round is playArt (the same engine as Phúc tuyển). */
 function kc2Play(art,title,note,fin){if(window.__bot||typeof playArt!=="function"){fin(cl(3+R(6),0,10));return}
- if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam(S.kc.kd,fin);return}catch(e){console.error(e)}}
+ if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam({art,title,note},fin);return}catch(e){console.error(e)}}/* entry-exam: jentry entExam (non-word art, mgTier occ tuyen) */
  try{playArt({art,title,note,onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
 Object.assign(KCE,{
  d_tuyen:{t:"Ngày tuyển cung nữ",b:()=>{const K=S.kc;const ly=kcR("ly");if(K.gach)return{who:kcFace(ly||K.fam[0]),t:`<p>Thái giám Nội vụ phủ về huyện đường; con gái các xã xếp hàng trước cổng. Tên ngươi đã bị gạch khỏi sổ. Xuân Đào đứng trong hàng, ngoái lại nhìn ngươi.</p>`,o:[
@@ -341,14 +341,14 @@ Object.assign(KCE,{
    kc2H(kcO("Vào trình diện",{},()=>pushDil(mkP("kcE",{e:"d_thi"}),"Ngày tuyển cung nữ")),"ma ma xem dung mạo, khéo tay, lễ nghi; tiếng trong xóm và lời lý trưởng cũng được hỏi","có rủi ro")]}}},
  d_thi:{t:"Ngày tuyển cung nữ",b:()=>({who:pMe(),t:`<p>Ma ma Nội vụ phủ nhìn ngươi từ đầu đến chân, rồi chỉ vào một rổ kim chỉ và một chiếc ghế: ngươi chọn cách nào để tỏ mình?</p>`,o:[
    kc2H(kcO("Làm bài khéo tay",{suc:-5},()=>kc2Exam("kim")),`chơi màn Khéo tay; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),
-   kc2H(kcO("Đáp lời ma ma về lễ nghi",{suc:-5},()=>kc2Exam("le")),`chơi màn Vấn lễ; lễ nghi học ở nhà (${S.kc.le}/5) cộng thêm`,"có rủi ro"),
+   kc2H(kcO("Thêu một mảnh khăn",{suc:-5},()=>kc2Exam("theu")),`chơi màn Thêu; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),
    kc2H(kcO("Cúi đầu chờ ma ma xét",{suc:-5},()=>kc2Exam("")),"lấy phần giữa của màn chơi","an toàn")]})},
  n_send:{t:"Hòa ước ký xong",b:()=>{const L=kc2L();const c=kcR("cha");return{who:kcFace(c||S.kc.fam[0]),t:`<p>Hòa ước đã ký. Sáng nay kiệu hoa đỏ dừng trước cổng ${L.court}; ${kc2Br()==="bd"?"ba trăm con ngựa":"xe lễ vật"} xếp hàng sau sứ đoàn Đại Hy. ${L.mom} đứng ở bậc thềm, không khóc trước mặt ai.</p>`+
    kitRows([[NAMES.kgt,S.kgt,"t"],["Lễ nghi Đại Hy",`${S.kc.le}/5`,"t"],[NAMES.khm,kitChip("Bạc",S.khm,"n"),"t"]]),o:[
    kc2H(kcO("Lên kiệu hoa",{},()=>pushDil(mkP("kcE",{e:"n_ramat"}),"Lễ ra mắt")),"sang Đại Hy; Lễ ra mắt định phẩm vị","an toàn")]}}},
  n_ramat:{t:"Lễ ra mắt",b:()=>{const r0=RANKS[(S.origin&&S.origin.r)||0].n;return{who:pEmp(),t:`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng. Công chúa ${kc2L().land} dâng lễ ra mắt. Lễ hôm nay quyết định ngươi được phong tới đâu (cao nhất ${r0}).</p>`,o:[
    kc2H(kcO(kc2Br()==="bd"?"Dâng điệu múa thảo nguyên":"Dâng điệu múa cố quốc",{suc:-10},()=>kc2Exam("mua")),"chơi màn Múa; tài múa và dung mạo cộng thêm","có rủi ro"),
-   kc2H(kcO("Hành lễ theo phép Đại Hy",{suc:-10},()=>kc2Exam("le")),`chơi màn Vấn lễ; lễ nghi Đại Hy học ở nhà (${S.kc.le}/5) cộng thêm`,"có rủi ro"),
+   kc2Br()==="bd"?kc2H(kcO("Bắn cung trước điện",{suc:-10},()=>kc2Exam("ban")),"chơi màn Bắn cung; dung mạo và lễ nghi học ở nhà cộng thêm","có rủi ro"):kc2H(kcO("Dâng khúc đàn cố quốc",{suc:-10},()=>kc2Exam("cam")),"chơi màn Đàn; tài đàn và lễ nghi học ở nhà cộng thêm","có rủi ro"),
    kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:-5},()=>kc2Exam("")),"lấy phần giữa của màn chơi","an toàn")]}}}});
 function kc2Exam(art){const K=S.kc;if(!isKc()||K.ex&&K.ex.done)return;K.ex={art,play:1};
  const fin=raw=>{if(!S.kc||K.ex.done)return;K.ex.done=1;K.ex.raw=raw;try{kc2Enter(raw)}catch(e){console.error("kc2Enter",e)}try{showModal();render()}catch(e){}};
@@ -357,10 +357,8 @@ function kc2Exam(art){const K=S.kc;if(!isKc()||K.ex&&K.ex.done)return;K.ex={art,
 /* a stale card (the exam already done) never opens the game twice: jkc's own "Phúc tuyển left without a result" rule, for this round */
 (function(){const e0=kcEndTurn;kcEndTurn=function(){try{if(S&&S.kc&&S.kc.kd&&isKc()&&S.kc.ex&&S.kc.ex.play&&!S.kc.ex.done&&!Q.length){S.kc.ex.done=1;kc2Enter(5)}}catch(e){console.error(e)}return e0.apply(this,arguments)}})();
 /* the score: one rule, the people of this life inside it (lý trưởng's word, the envoy's report, Thái hậu's dislike) */
-function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";
- if(K.kd==="dan"){const ly=kcR("ly");return S.sac*.15+S.duc*.15+S.suc*.05+raw*3+K.kim*(g==="kim"?3.5:1.5)+K.le*(g==="le"?3.5:1.5)+S.kgt/8-S.kld/3+(ly&&ly.af>=40?3:0)-(K.self?3:0)+R(9)-4}
- const sx=kcR("sx");return S.sac*.15+S.tai*.15+S.duc*.1+raw*3+K.le*(g==="le"?3.5:1.5)+(g==="mua"?((S.arts||{}).vu||0)*2:0)+S.kgt/6+(S.th||0)/5+(sx&&sx.af>=40?3:0)+R(9)-4}
-const KC2CUT=[40,55];/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
+function kc2Score(raw){const K=S.kc;const g=(K.ex&&K.ex.art)||"";return entScore(K.kd==="dan"?"dan":"nc",raw,g)}/* ONE CORE: jentry entScore, weights BAL.entry.w */
+const KC2CUT=BAL.entry.cut;/* below [0]: two steps under the ceiling; [0]: one step under; [1]: the ceiling */
 function kc2Enter(raw){const K=S.kc;const sc=Math.round(kc2Score(raw));K.ex.sc=sc;const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;K.ex.tier=tier;
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE")Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
  K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;S.pal=null;
@@ -502,23 +500,25 @@ function kc2GateGo(){const K=S.kc;const g=K.gate;K.gateGo=1;try{K.wIn=(window.CO
    A consort start: the rank (origin rank = ceiling; an origin whose ceiling is Đáp ứng has nothing to lose and skips it). A cung nữ start
    (cnv): the placement (palace head's maid / low consort's maid / Tân Giả khố first). The "Nhập cung" card is corrected to the real result.
    New lives only (S.selx); every save made before this build is untouched. */
-const KC2DART={cnv:[["kim","Làm bài khéo tay"],["le","Đáp lời ma ma về lễ nghi"]],nc:[["mua","Dâng điệu múa cố quốc"],["le","Hành lễ theo phép Đại Hy"]],bd:[["mua","Dâng điệu múa thảo nguyên"],["le","Hành lễ theo phép Đại Hy"]],
- cn:[["le","Đáp lời ma ma về lễ nghi"],["","Dâng một chén trà"]]};
-function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const a=kcBestArt();const A=ARTS.find(x=>x.k===a);return [[a,`Dâng ${A?A.n:"tài nghệ"}`],["le","Đáp lời về lễ nghi"]]}
-function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:(S.origin.r||0)>0))}
+/* entry-exam: no word games (owner 16/11 07:20Z): the old "lễ nghi" quiz options are replaced by a second non-word art */
+const KC2DART={cnv:[["kim","Làm bài khéo tay"],["theu","Thêu một mảnh khăn"]],nc:[["mua","Dâng điệu múa cố quốc"],["cam","Dâng khúc đàn cố quốc"]],bd:[["mua","Dâng điệu múa thảo nguyên"],["ban","Bắn cung trước điện"]],
+ cn:[["huong","Pha một chén trà dâng lên"]]};
+function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const L=entArts().slice(0,2);return (L.length?L:[["cam",0,"Cầm"]]).map(([a,,n])=>[a,`Dâng ${n}`])}
+function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:true))}/* entry-exam: every origin meets the selection (ceiling Đáp ứng: gain / loss only, BAL.entry.fx) */
 PEND.kc2Sel=pp=>{if(!S||S.dead||!S.selx||S.selx.done)return null;const srv=S.origin.k==="cnv";const top=RANKS[S.origin.r||0].n;
  const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:-5},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":"lấy phần giữa của màn chơi","có rủi ro"));
  o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:-5},()=>kc2SelPlay("")),"lấy phần giữa của màn chơi","an toàn"));
  return{who:srv?pMe():pEmp(),t:srv?`<p>Nội vụ phủ chọn cung nữ. Ma ma xem dung mạo, khéo tay, lễ nghi; người tốt được chia về hầu các vị nương nương bậc cao, người kém phải giặt đồ ở Tân Giả khố trước.</p>`
-  :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`,o}};
+  :(S.origin.r||0)>0?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`
+  :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Ngươi sẽ được phong <b>${top}</b>; buổi hôm nay định Hoàng thượng và Thái hậu nhìn ngươi thế nào.</p>`,o}};
 function kc2SelPlay(art){if(!S.selx||S.selx.done)return;S.selx.art=art;const fin=raw=>{if(!S.selx||S.selx.done)return;S.selx.done=1;S.selx.raw=raw;try{kc2SelDo(raw)}catch(e){console.error("kc2Sel",e)}try{showModal();render()}catch(e){}};
  if(!art){fin(5);return}kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",fin)}
-function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(S.sac*.15+S.duc*.15+S.tai*.1+raw*3+((S.arts||{})[g]||0)*1.5+8+(S.th||0)/6+R(9)-4);const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
+function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(entScore("dir",raw,g));/* ONE CORE: jentry entScore */const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
  const note=`kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10`;
  if(S.origin.k==="cnv"){const st=[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac];kc2Place(tier,true);[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac]=st;if(S.srv){if(tier===2)S.tin=cl((S.tin||40)+8,0,100);if(tier===0){S.srv.lau=4;S.place="tgk";try{S.visit=srvVisitOf("tgk")}catch(e){}}}
   const c=Q.find(m=>m.t==="Nhập cung làm cung nữ");if(c){c.h=String(c.h).replace(/\.\s*<\/p>/,`${tier===0?" (trước hết phải giặt đồ ở Tân Giả khố bốn tuần)":""}. Kết quả ${note}.</p>`)}
   log(`Tuyển cung nữ (${KC2SW[tier]}): ${tier===0?"Tân Giả khố, rồi ":""}hầu ${kc2RkN(srvM())}.`)}
- else{const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));const was=S.rank;S.rank=rank;if(rank<was){S.sung=Math.max(0,(S.sung||0)-(was-rank)*5)}S.lastPromo=S.turn;try{palFix()}catch(e){}kc2R0();
+ else{const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));const was=S.rank;S.rank=rank;if(rank<was){S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung)}S.lastPromo=S.turn;try{palFix()}catch(e){}kc2R0();
   const c=Q.find(m=>m.t==="Nhập cung");if(c)c.h=String(c.h).replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${RANKS[rank].n}</b> (${note}${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""})`);
   log(`Tuyển chọn (${KC2SW[tier]}): phong ${RANKS[rank].n}${rank<top?`, thân phận cho tới ${RANKS[top].n}`:""}.`)}
  try{kcSnapReset()}catch(e){}deal()}
@@ -560,7 +560,7 @@ function kc2InitWait(){const fam=[kc2T("co","Chưởng sự cô cô",`${pick(SUR
  S.rank=rank;S.sung=Math.max(S.sung||0,8+rank*5);S.lastPromo=S.turn;S.staff=S.kc.staff0||[];S.place="home";try{palFix()}catch(e){}deal();
  Q.push({t:"Nhập cung",who:pMe(),art:"img/ev-nhap-cung.webp",h:`<p>Cùng ngày với hảo hữu, ${S.name} vào cung, phong <b>${RANKS[rank].n}</b> (kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""}).</p>`});
  log(`<b class="g">Vào cung cùng hảo hữu: ${RANKS[rank].n}.</b>`)}})();
-(function(){const s0=kc2Score;kc2Score=function(raw){if(S.kc&&S.kc.kd==="cho")return S.sac*.15+S.duc*.15+S.tai*.1+raw*3+S.kc.le*2+8+(S.th||0)/6+R(9)-4;return s0.apply(this,arguments)}})();
+(function(){const s0=kc2Score;kc2Score=function(raw){if(S.kc&&S.kc.kd==="cho")return entScore("cho",raw,(S.kc.ex&&S.kc.ex.art)||"");return s0.apply(this,arguments)}})();
 /* start: in co-op, an origin without a home road while the friend is at home → the wait (whatever the card said) */
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const W=window.COOPW;const hold=!!(W&&W.on&&was);if(hold)W.holdMe=true;let r;
  try{r=a0.apply(this,arguments);try{if(was&&S&&!S.dead&&!S.kc&&!kcOk(S.origin.k)){const P=kc2Co();if(P&&kc2CoHome(P)){S.selx=null;Q=Q.filter(m=>m.pid!=="kc2Sel");if(S.srv)S.srv=null;kc2InitWait();showModal();render();if(W&&W.on&&!hold)try{W.sendMe()}catch(e){};if(hold)W.heldMe=true}}}catch(e){console.error("kc2 wait",e)}}
