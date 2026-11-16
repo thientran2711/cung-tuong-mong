@@ -49,7 +49,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("punish",o=>function(p){if(typeof p==="string"||p===S)feedback("hit");return o.apply(this,arguments)});
  W("birthP",o=>function(p){const r=o.apply(this,arguments);if(p===S&&!S.dead)feedback("birth");return r});
  W("nightFx",o=>function(){feedback("night");feedback("favour");return o.apply(this,arguments)});
- W("curtain",o=>function(){feedback("page");inkWipe();return o.apply(this,arguments)});
+ /* buổi / tuần change: no page sound, no dark wipe (owner 15/11: it read as a page flip) — jbuoi.js paints the transition */
+
  W("goTo",o=>function(k){const r=o.apply(this,arguments);if(S&&S.place===k&&k!=="home")feedback("step");if(k==="lc")feedback("ash");return r});
  W("over",o=>function(){const r=o.apply(this,arguments);auTick();return r});
  W("showModal",o=>function(){const r=o.apply(this,arguments);const m=Q[0];if(m){if(m.pid&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(m.pid)){feedback("heart");heartLoop(true)}else sfx("sfx-open");if(m.cls==="night"||m.pid==="night1"||m.pid==="night2")nightFade()}auTick();return r});

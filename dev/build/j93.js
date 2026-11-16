@@ -219,8 +219,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("flip",o=>function(){const r=o.apply(this,arguments);try{if(kmOn()&&!S.dead&&S.tonight){const t=S.tonight==="me"?S:S.tonight;if(t===S)kitFlipTablet(t,{me:true});else kitFlipNote(t)}}catch(e){console.error(e)}return r});
  /* result card */
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
- /* buổi: incense + sky on the curtain */
- W("buoiShift",o=>function(){const r=o.apply(this,arguments);try{kitDayShift()}catch(e){}return r});
+ /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
  W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{if(S&&S.dead&&!was&&!window.__bot)kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
