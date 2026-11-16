@@ -6,7 +6,8 @@ Base main at start: 900ace7fb.
 | Item | Branch | Model | State |
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | LIVE (train-2) |
-| A7 cycle review | review/cycle-r2 @7d57639e8 (owner fixes: 2 Hành sự deck cards + monthly maid report pop-up báo đúng/lùi/sớm/giấu, BAL.cyc.rep) → review/cycle-r3 | opus | REVIEWING (worker SẴN SÀNG KIỂM; cycle.js 5 viewports, thaiy 49/49, coop-e2e 59/59) |
+| A7 cycle review | review/cycle-r3 | opus | PASS d9c47fad1 (owner fixes done: deck cards in Mưu kế tab (7-card family moved), monthly maid pop-up; reviewer fixed a co-op flip bug + new-game first-week pop-up + evidence-truth sites 3→0) |
+| A7b art: maid-question scene for the monthly pop-up (now shows 'Hoàng thượng ngự giá') + 2 deck card pictures (Xem sổ / Xem lén sổ nguyệt sự, now §59 placeholder) | review/cycle-art | sonnet | QUEUED (art slot) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
@@ -60,8 +61,8 @@ PASS review/item-art-r5 aedcca1ed5cad2061a594a69f913c52f44da728a (D2; descends f
 PASS review/small-bugs-4-r1 42e4038f7104e451f4a940e7c536e3bf5deb8ebe (D47; descends from current main; jveil.js conflict: main's vlNeed(S) + 'Đang mặc' anchor; small-bugs-4.js 6 viewports on first merge, scan on final; KIT.md line ~1024 still says onText 'Đang đeo' → kit keeper wording)
 PASS review/collect-ms-r1 94591de586789e65d2dad905f9874cf2390b87e0 (D49; descends from main 7f20b751b; collect-ms.js 6 viewports; jcol.js after jearn.js in assemble; note: reward text 'Trong rương đã có N món' also counts worn trâm/y)
 PASS review/act-text-r1 fe15a6d54e03ec71389875d71284fe41d333026d (C20; descends from main eba64ead4; CONDITIONAL K8; NOTE the worker's scan numbers did not reproduce on the merged build: long rows 90 (dau) / 110 (hh), mostly material-dialog tier Ghi chú 4–5 lines → K8 layout; kemgain 3 left on 2 place cards (K8 item 1))
+PASS review/cycle-r3 d9c47fad1c671907c6a83e294fedc0e50ad23a39 (A7 incl. thaiy; SUPERSEDES the held cycle-r1; descends from main eba64ead4; jcycle.js LAST after jtruth/jkpc; cycle.js ALL OK 5 viewports + rotate, thaiy 29/29, coop-e2e 59/59 on the 2nd merge)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
-(ON HOLD — do not merge yet, owner fixes pending on cycle-r2) review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
 - Person subject always gets the full-body event-stage figure, even in the ĐIỀU info pop-up (no small 3:4 portrait on main); at 1180 one run drew no figure (figure-load race?) → stage-fig-size (C17, session 8).
@@ -101,6 +102,8 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q9 (owner, D7): should she CHOOSE her own nết (temperament) at the start of a life? Now it is given from her name.
 - Q10 (owner, D7): Thái hậu archetype names Từ ái / Nghiêm khắc / Đa nghi / Quyền uy / Sùng Phật — OK? Revealed after her first thỉnh an (as built) — OK?
 - Q11 (owner, D7): thiếu lễ at thỉnh an (−2.8 per greeting when under-dressed) now outweighs a routine greeting — keep that weight?
+- Q12 (owner, A7): if she lies (báo sớm / giấu), is flipped and passes the mama check, the night goes ahead normally — including a chance to conceive during her period. Keep, or make such a night unable to lead to pregnancy?
+- Q13 (owner, A7): should 'báo lùi' also leave forgery evidence for foes who read the book (báo sớm and giấu do)?
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
