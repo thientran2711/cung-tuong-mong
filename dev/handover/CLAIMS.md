@@ -252,3 +252,4 @@
 | ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | session_011xDdVSMZ3apRHJfX25BwAb | RUNNING | 16/11 15:48Z |
 | kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
 | TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 | RUNNING | 16/11 15:52Z |
+| STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 15:58Z |
