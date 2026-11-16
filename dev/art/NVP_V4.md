@@ -5,7 +5,7 @@ Owner target (16/11 07:42Z): the circled Kinh su phong rows. Pictures are on the
   season = xuan|ha|thu|dong, buoi = sang|trua|chieu|toi; 3072x2048 webp q90 (served from img/ on the CDN, key = path).
 Comparison sheet: https://ctm-img.victoria-tntt.workers.dev/img/nvp-scene-v4-vs-ksp-sheet.jpg (KSP row above new row).
 Method and measured numbers: dev/handover/reports/place-glyphs.md (handover branch), section "NVP v4". Tone pass: dev/art/tone_match.py (handover branch) with approved set prefix kinh-su-phong.
-Magnific creations (raw): xuan-sang 6AHwfCliJO, xuan-trua bxTaYhL5Y2, xuan-chieu aF2XiBMfSh, xuan-toi CqGoRv8EEy, ha-sang eIOYwBUdqL, ha-trua lJ85XO3gv9, ha-chieu XmPcJC4Bfo, ha-toi 1lpuV9yr4r, thu-sang 8aNVPLCIrU, thu-trua s7obdLnl8e, thu-chieu UPm1I4ywny, thu-toi Bh40yQroQR, dong-sang mE3p6LQhJQ, dong-trua s7obXTHl8e, dong-chieu JNajh8ROq4, dong-toi XmPcONIBfo.
+Model for EVERY picture below: Magnific gpt-2-6 (GPT 2.6), 2k, 3:2, edit with references (first ref = the matte base 6AHwfCliJO, second ref = the Kinh su phong tile of the same season+buoi as colour reference only); the base 6AHwfCliJO itself = edit of the v1 base lJ8bS37gv9 with KSP xuan-sang. 65 credits each, 16 pictures = 1,040. Magnific creations (raw): xuan-sang 6AHwfCliJO, xuan-trua bxTaYhL5Y2, xuan-chieu aF2XiBMfSh, xuan-toi CqGoRv8EEy, ha-sang eIOYwBUdqL, ha-trua lJ85XO3gv9, ha-chieu XmPcJC4Bfo, ha-toi 1lpuV9yr4r, thu-sang 8aNVPLCIrU, thu-trua s7obdLnl8e, thu-chieu UPm1I4ywny, thu-toi Bh40yQroQR, dong-sang mE3p6LQhJQ, dong-trua s7obXTHl8e, dong-chieu JNajh8ROq4, dong-toi XmPcONIBfo.
 To wire later (after owner approval; places use img/<name>-<season>-<buoi>.webp via jplx-style SCN_HAVE/SCIMG + KIT_FLOOR): copy nvp-v4-<s>-<b>.webp to img/noi-vu-phu-<s>-<b>.webp on the CDN (cdn_sync), then point nvp (jact.js, currently sc "ksp") at the new set.
 md5 (first 12) of the CDN files:
   c1a5bc7059df img/nvp-v4-dong-chieu.webp
@@ -40,3 +40,5 @@ md5 (first 12) of the CDN files:
   532d7a22903c img/nvp-v4-xuan-sang.webp
   4b76934d1891 img/nvp-v4-xuan-toi.webp
   d9b02994a863 img/nvp-v4-xuan-trua.webp
+
+Podium backdrop sample (separate, not wired): gpt-2-6, 2k, landscape 16:9 creation 3zbJx06REY (edit of the approved Duong Hoa dien hall + KSP colour ref), portrait 3:4 creation WDs3JwscXe (edit of the landscape result). 65 cr each. Sheet: https://ctm-img.victoria-tntt.workers.dev/img/podium-bg3-sample-sheet.jpg
