@@ -860,10 +860,10 @@ function directActs(){const A=[],mk=(p,i,n,t)=>{const a=talkOpts(p)[i];if(a)A.pu
  return A}
 function canPay(a){return !(a.c&&a.c.bac&&S.bac+a.c.bac<0)&&!a.lock}
 function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
-function snapReal(){const b={};for(const k in NAMES)b[k]=S[k]||0;return b}
-function runOpt(a){if(!canPay(a))return null;const b0=snapReal();if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?100:cl(o0+lotB(S,a.dom),5,95);const ok=o>=100||roll(o);
+function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
+function runOpt(a){if(!canPay(a))return null;const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?100:cl(o0+lotB(S,a.dom),5,95);const ok=o>=100||roll(o);
   apply(ok?(a.w||{}):(a.l||{}));
-  {const d=logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
+  {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
   return ok}
 function cardCost(a){return a.k||(a.c&&a.c.suc<=-20?4:a.c&&(a.c.suc||a.c.bac||a.c.duc)?2:1)}
@@ -1005,7 +1005,7 @@ function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.fx
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
- const d=logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
+ const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
  log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" → "+res:"."}`)}
 
 /* nights */
@@ -1046,9 +1046,10 @@ function makeDil(){const pool=liveRivals(false),L=[];
 
 /* the turn */
 function endTurn(){
-  if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();
+  if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
   S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
   const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;
+  if(lsB)lsNote(lsB,{sung:"một tuần trôi qua, ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true);
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
@@ -1062,9 +1063,9 @@ function endTurn(){
 function monthTick(){let ev="";
   S.turn++;ev+=monthPay();
   if(S.pray)S.pray--;if(S.fert)S.fert--;if(S.master)S.master--;if(S.confined)S.confined--;if(S.shield)S.shield--;
-  if(S.arts.thi>=3)S.sung=cl(S.sung+(S.arts.thi>=5?2:1),0,100);
+  {const b=typeof lsSnap==="function"?lsSnap():null;if(S.arts.thi>=3)S.sung=cl(S.sung+(S.arts.thi>=5?2:1),0,100);if(b)lsNote(b,{sung:"thơ hay được truyền tụng"},true)}
   ev+=maidMonth();ev+=pregMonth();if(S.dead)return ev;S.anthai=0;ev+=itemMonth(S);anMonth(S);restock();oanMonth();assignHouses();S.chat={};ev+=illMonth();ev+=coldMonth();if(S.dead)return ev;ev+=servRanks();ev+=servMonth();ev+=facMonth();
-  const dd=has("nhantu")?2:1;if(S.duc>=60)S.th=cl(S.th+dd,-100,100);else if(S.duc<20)S.th=cl(S.th-dd,-100,100);
+  {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=60)S.th=cl(S.th+dd,-100,100);else if(S.duc<20)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:S.duc>=60?"Đức cao, Thái hậu thêm quý":"Đức thấp, Thái hậu coi nhẹ"},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
   if(!S.out&&S.sung<=0&&S.danh<=5&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
@@ -15535,7 +15536,7 @@ function fixToast(){const t=document.getElementById("rtoast");if(!t||t.dataset.n
   const sw={"THÀNH":"Thành.","HỎNG":"Hỏng.","XONG":"Xong."}[seal];if(sw&&w.startsWith(sw))w=w.slice(sw.length).trim();
   t.querySelectorAll(".rd .ef").forEach(e=>{const m=T(e.textContent).match(/^(.+?) (-?\d+) → (-?\d+)$/);if(!m)return;const d=+m[3]-+m[2];if(!d)return;
    const labs=[m[1]];if(typeof S!=="undefined"&&S&&S.maid&&m[1]==="Lòng "+S.maid.name)labs.push("Lòng cung nữ");
-   for(const lb of labs){const tok=`${lb} ${d>0?"+":"-"}${Math.abs(d)}`;const esc=tok.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${esc}(?: \\((?:đã đầy|chạm đáy) -?\\d+\\))?(?=\\s|·|$|\\.|,|;)`),"$1")}});
+   for(const lb of labs){const tok=`${lb} ${d>0?"+":"-"}${Math.abs(d)}`;const esc=tok.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${esc}(?: \\((?:đã đầy|chạm đáy) -?\\d+\\))?(?=\\s|·|$|\\.|,|;)`),"$1");const e2=`${lb} ${m[2]} → ${m[3]}`.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");w=w.replace(new RegExp(`(^|·\\s*|\\s)${e2}(?: \\((?:đã đầy|chạm đáy)\\))?(?=\\s|·|$|\\.|,|;)`),"$1")}});
   w=w.replace(/^[\s·.]+/,"").replace(/(\s*·\s*)+$/,"").replace(/·\s*·/g,"·").trim();
   if(w)sm.textContent=w;else sm.remove()}
  t.dataset.nr=t.innerHTML.length+""}
@@ -15550,7 +15551,7 @@ function trueText(h,R){if(!h)return h;for(const L in R){const {k,d,now}=R[L];con
   const esc=L.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   h=h.replace(new RegExp(`${esc} ([+-])(\\d+)(?![\\d.,]| \\((?:đã đầy|chạm đáy))`,"g"),(m,sg,n)=>{const st=(sg==="-"?-1:1)*+n;if(st===d)return m;
    if(d!==0&&Math.sign(d)!==Math.sign(st))return m;if(Math.abs(d)>Math.abs(st))return m;if(!at)return m;
-   const full=st>0?"đã đầy":"chạm đáy";return d===0?`${L} ${full} ${now}`:`${L} ${d>0?"+":""}${d} (${full} ${now})`})}return h}
+   const full=st>0?"đã đầy":"chạm đáy";/* owner 15/11: "Tài +1 (đã đầy 100)" read unclear → "Tài 99 → 100 (đã đầy)" (jlogsync) */return d===0?`${L} ${full} ${now}`:`${L} ${now-d} → ${now} (${full})`})}return h}
 function fixTrue(b){if(!b||!S)return;const R=realD(b);const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(b.seq||0)));
  for(let i=0;i<n;i++)S.logs[i]=trueText(S.logs[i],R);if(popMsg)popMsg=trueText(popMsg,R)}
 let nrTalk=null;
@@ -15595,7 +15596,7 @@ const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim(
 function kitNames(h){try{if(typeof kpPeopleIn!=="function"||typeof kpPeople!=="function"||!h)return h;if(typeof kitDedupTitle==="function")h=kitDedupTitle(h);/* KIT 9: old stored log lines */return kpPeopleIn(h,kpPeople())[0]}catch(e){return h}}
 /* --- 3. week card: true deltas, no leftover choice labels, each fact once, faces beside their lines --- */
 const LONE=/^[^\s.·:]+(?: [^\s.·:]+)?\.$/;          /* "Thôi." — a choice label with nothing after it */
-const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;
+const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|-?\d+ → -?\d+(?: \((?:đã đầy|chạm đáy)\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;
 try{const ws0=wkSnap;wkSnap=function(){const r=ws0.apply(this,arguments);try{r.maid=S.maid?S.maid.loyal:null}catch(e){}return r}}catch(e){}
 try{const wk0=wkSummary;wkSummary=function(){const s=S.wkSnap;const r=wk0.apply(this,arguments);try{if(r&&r.groups){
   if(s&&s.maid!=null&&S.maid&&S.maid.loyal!==s.maid)r.D.push([`Lòng ${S.maid.name}`,S.maid.loyal-s.maid]);
@@ -28752,6 +28753,127 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh
  `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+
  `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
+/* ===== jlogsync: Sổ ghi = header (owner 15/11 "Tại sao không khớp", OWNER_DECISIONS "Sổ ghi numbers don't match the header") =====
+   Owner screenshot: Sổ ghi "Đêm nay ta được thị tẩm. Sủng 33 → 40 …" while the header showed Sủng 37.
+   Cause: the night-talk choice (PEND.night2, j8) runs nightFx — which writes the night line "Sủng 33 → 40" — and THEN its own
+   effect ("Xin ân cho gia đình" hỏng: Sủng -3; "Thì thầm nói xấu" hỏng: Sủng -2/-6, Danh -3; "Xin cho con" hỏng: Ân tình -2;
+   "Xin tha cho cung nữ": Đức +3, Ân tình +1; "Im lặng": Ân tình +2; "Xin ân" thành: Danh +5, Bạc +40) with no line of its own.
+   The audit (dev/test/log-sync.js: bots play, after every act the Sổ ghi is replayed per stat and must end at the live value)
+   found the same fault family all over the game (weekly Sủng/Sức drift, monthly Thái hậu/Hoàng hậu drift, Ân tình fading,
+   bổng lộc, lesson cost, danh sư, clamps at 0/100 stated as the intended delta, Sủng trait multiplier, "Ân tình 0→N" in every
+   act summary because snapReal had no Ân tình, …). Rules (owner):
+   (1) every change of Sắc, Tài, Tâm cơ, Đức, Danh, Sủng, Bạc, Sức (+ Ân tình, Tai mắt, Thái hậu / Hoàng hậu → ta) has a line with its reason;
+   (2) the "X → Y" / "+n" chain of each stat replays to the header value; (3) same-moment changes in the order applied.
+   How:
+   - lsReplay(texts,start): reads her stat tokens ("Sủng 33 → 40", "Sủng +7", "Danh -3 (chạm đáy)", "Tài đã đầy 100"); a token right
+     after a word ("nàng Sủng -10", "Hàn Như Ý Danh +2", "ít nhất Sủng +3") is someone else's or a promise, not hers.
+   - lsFix(lines,start): a stated delta that is not the real one (clamp at 0/100, trait ×1.3/×0.7) is rewritten to the real one
+     ("Danh 3 → 0 (chạm đáy)", "Sủng +9"); what no line explains is returned as "Sủng 40 → 37" parts.
+   - act summaries (runOpt j2) and choice lines (logChoice j3) list only the part of the change their own lines do not already say,
+     starting from the value the Sổ ghi already shows (no second "Đức 0→3" after "Đức +3 vì …").
+   - every player action (act, choice, talk, place, scheme, lesson, buổi / tuần change, mini-game pay, any render) ends with lsSync:
+     a change still unexplained gets one line "<the action>: Sủng 40 → 37 (reason)"; time ticks name their reason (lsTag / lsNote).
+   - the night talk logs its own result after the night line ("Xin ân cho gia đình: hỏng. Sủng 40 → 37.").
+   - "(đã đầy 100)" style (owner: unclear) now reads "Tài 99 → 100 (đã đầy)" (j65 trueText). */
+(function(){
+const LK=[["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"],["danh","Danh"],["sung","Sủng"],["bac","Bạc"],["suc","Sức"],["an","Ân tình"],["mat","Tai mắt"],["th",""],["hh",""]];
+const NM=k=>(typeof NAMES==="object"&&NAMES[k])||(LK.find(x=>x[0]===k)||[])[1]||k;
+const BD={th:[-100,100],hh:[-100,100],mat:[0,10],bac:[0,1e9]};const bd=k=>BD[k]||[0,100];
+const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+const REL=w=>`${w}(?: → (?:ta|ngươi):| quý (?:ngươi|ta)| với (?:ngươi|ta):?)?(?: thiện cảm)?`;
+const LAB={th:REL("Thái hậu"),hh:REL("Hoàng hậu")};
+const N="(-?\\d+)",FULL="(?:đã đầy|chạm đáy)";
+const RX={};for(const [k,l] of LK)RX[k]=new RegExp(`(?<![\\p{L}\\d])(?:${LAB[k]||esc(l)})(?: (?:của )?(?:ngươi|ta))?:?\\s+(?:${N}\\s*→\\s*${N}(?:\\s*\\(${FULL}\\))?|([+\\-−])(\\d+)(?:\\s*\\(${FULL}\\s*${N}?\\))?|${FULL}\\s+${N})`,"gu");
+const plain=h=>String(h==null?"":h).replace(/^<span class="ld">[^<]*<\/span>/,"").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ");
+const val=k=>S?(S[k]||0):0;
+function lsSnap(){const o={};for(const [k] of LK)o[k]=val(k);return o}
+/* tokens of her stats in reading order; skips someone else's ("nàng Sủng -10") and promises ("ít nhất Sủng +3") */
+function lsToks(t){const out=[];for(const [k] of LK){const re=RX[k];re.lastIndex=0;let m;while((m=re.exec(t))){const pre=t.slice(Math.max(0,m.index-2),m.index);if(/\p{L}\s$/u.test(pre)&&!/(?:^|\s)(?:ta|ngươi)\s$/u.test(t.slice(Math.max(0,m.index-7),m.index)))continue;
+  out.push({k,i:m.index,raw:m[0],a:m[1]!=null?+m[1]:null,b:m[2]!=null?+m[2]:null,d:m[3]!=null?(m[3]==="+"?1:-1)*+m[4]:null,s:m[6]!=null?+m[6]:m[5]!=null?+m[5]:null})}}
+ return out.sort((x,y)=>x.i-y.i)}
+function lsReplay(texts,start){const v=Object.assign({},start),last={},all={};texts.forEach((t,li)=>{for(const o of lsToks(plain(t))){o.li=li;o.before=v[o.k];(all[o.k]=all[o.k]||[]).push(o);
+  if(o.a!=null)v[o.k]=o.b;else if(o.d!=null)v[o.k]=o.s!=null?o.s:o.before+o.d;else if(o.s!=null)v[o.k]=o.s;last[o.k]=o}});return{v,last,all}}
+/* replace the last occurrence of a token in a line's html (tags inside the token, as in "Sủng <b>-4</b>", are kept after it) */
+function repl(L,raw,rep){const h=String(L.get());let j=h.lastIndexOf(raw),len=raw.length;
+ if(j<0){const re=new RegExp(raw.split(/\s+/).map(esc).join("(?:\\s|<[^>]*>)+"),"g");let m;while((m=re.exec(h))){j=m.index;len=m[0].length}}
+ if(j<0)return false;const tags=(h.slice(j,j+len).match(/<[^>]*>/g)||[]).join("");L.set(h.slice(0,j)+rep+tags+h.slice(j+len));return true}
+/* lines: [{get:()=>html,set:h=>…}] oldest first. Rewrites a wrong stated delta to the real one; returns what is still unexplained. */
+function lsFix(lines,start){const R=lsReplay(lines.map(l=>l.get()),start);const parts=[];
+ for(const [k] of LK){const y=val(k);if(R.v[k]===y)continue;const o=R.last[k],[lo,hi]=bd(k),at=y<=lo||y>=hi;let done=false;
+  if(o&&o.a==null){const nd=y-o.before;let rep=null;
+   if(at&&nd!==0&&(o.d==null||Math.sign(nd)===Math.sign(o.d)))rep=`${NM(k)} ${o.before} → ${y} (${y>=hi?"đã đầy":"chạm đáy"})`;
+   else if(at&&nd===0&&(o.d==null||(o.d>0)===(y>=hi)))rep=`${NM(k)} ${y>=hi?"đã đầy":"chạm đáy"} ${y}`;
+   else if(o.d!=null&&nd!==0&&Math.sign(nd)===Math.sign(o.d))rep=`${NM(k)} ${nd>0?"+":"-"}${Math.abs(nd)}`;
+   if(rep)done=repl(lines[o.li],o.raw,rep)}
+  /* several deltas past the floor / ceiling ("ra khỏi tẩm cung: Danh -3 · nơi đông người: Danh -8" at Danh 0): each one that
+     crosses it says what it really did ("Danh chạm đáy 0") */
+  if(!done&&at&&R.all[k]){let r=start[k];const reps=[];for(const t of R.all[k]){if(t.a!=null){r=t.b;continue}if(t.d==null){r=t.s;continue}
+    const raw=t.s!=null?t.s:r+t.d,nr=Math.min(hi,Math.max(lo,raw));if(nr!==raw||t.s!=null&&nr!==r+t.d)reps.push([t,nr===r?`${NM(k)} ${nr>=hi?"đã đầy":"chạm đáy"} ${nr}`:`${NM(k)} ${r} → ${nr} (${nr>=hi?"đã đầy":"chạm đáy"})`]);r=nr}
+   if(r===y&&reps.length){for(const [t,rp] of reps.reverse())repl(lines[t.li],t.raw,rp);done=true}}
+  /* no real change (y = start) and nothing to correct: the token was someone else's — nothing to add */
+  if(!done&&y!==start[k]){const x=Math.min(hi,Math.max(lo,R.v[k]));if(x!==y)parts.push({k,a:x,b:y})}}
+ return parts}
+const partH=(p,why)=>`<span class="${(p.b>p.a)?"g":"r"}">${NM(p.k)} ${p.a} → ${p.b}</span>${why&&why[p.k]&&why[p.k].length?` (${why[p.k].join(", ")})`:""}`;
+/* act summary / choice line: the part of the change since b0 that the given lines do not already say */
+window.lsRest=function(b0,lines){try{const st={};for(const [k] of LK)st[k]=b0&&b0[k]!=null?b0[k]:val(k);return lsFix(lines,st).map(p=>partH(p)).join(", ")}catch(e){console.error(e);return typeof logReal==="function"?logReal(b0):""}};
+window.lsLines=function(n){n=Math.max(0,Math.min(n,S.logs.length));const L=[];for(let i=n-1;i>=0;i--)L.push({get:()=>S.logs[i],set:h=>{S.logs[i]=h}});return L};
+window.lsArr=function(A){return A.map((x,i)=>({get:()=>A[i],set:h=>{A[i]=h}}))};
+
+/* ---- the ledger: what the Sổ ghi shows; every action ends with lsSync ---- */
+let LG=null,ATT={},fold=0,depth=0,lab="",clickLab="";
+function reset(){LG=S?{s:S,v:lsSnap(),seq:S.logSeq||0}:null;ATT={}}
+function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
+  const w=Object.assign({},ATT);if(why)for(const k in why)if(why[k])(w[k]=w[k]||[]).push(why[k]);
+  if(quiet){reset();return}/* a death's last act still gets its line (its cost) */
+  const n=(S.logSeq||0)-LG.seq;const parts=lsFix(lsLines(n),LG.v).filter(p=>p.a!==p.b&&LG.v[p.k]!==p.b);
+  let did=false;if(parts.length){const L=String(label||lab||clickLab||"Trong cung").replace(/[.:\s]+$/,"");log(`${L}: ${parts.map(p=>partH(p,w)).join(", ")}.`);did=true}
+  reset();return did}catch(e){console.error("lsSync",e);reset()}}
+window.lsSync=lsSync;window.lsSnap=lsSnap;window.lsReplay=lsReplay;
+/* a reason for the changes a piece of code makes (time ticks): kept until the next lsSync */
+/* now=true: the reason gets its own line at once, as deltas ("Một tuần trôi qua, ân sủng nhạt dần: Sủng -1."), so the order is the order applied
+   and the chain stays right whatever is logged later; otherwise the reason waits for the next lsSync line. */
+window.lsNote=function(b,why,now){try{if(!b||!S)return;const G=new Map();for(const [k] of LK){const d=val(k)-b[k];if(!d)continue;const r=typeof why==="function"?why(k):why&&typeof why==="object"?why[k]:why;if(!r)continue;
+  if(now&&!quiet&&!S.dead){if(!G.has(r))G.set(r,[]);G.get(r).push(`<span class="${d>0?"g":"r"}">${NM(k)} ${d>0?"+":"-"}${Math.abs(d)}</span>`)}else{const A=ATT[k]=ATT[k]||[];if(!A.includes(r))A.push(r)}}
+ if(G.size)log([...G].map(([r,p])=>`${r.charAt(0).toUpperCase()+r.slice(1)}: ${p.join(", ")}.`).join(" "))}catch(e){console.error(e)}};
+function lsTag(name,why,now){const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const b=S?lsSnap():null;const r=f0.apply(this,arguments);if(b)lsNote(b,why,now);return r}}
+/* an action: label it, flush what came before it, sync after it (outermost call only) */
+function top(name,lf,isFold){const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){if(depth===0&&!fold){lsSync(lab);let l="";try{l=lf?lf.apply(this,arguments):""}catch(e){}lab=l||clickLab||lab}
+  depth++;if(isFold)fold++;try{return f0.apply(this,arguments)}finally{depth--;if(isFold)fold--;if(depth===0&&!fold&&lsSync(lab))try{render()}catch(e){}}}}
+const cut=s=>plain(s).replace(/\s+/g," ").trim().replace(/[.:]+$/,"").slice(0,60);
+top("act",i=>{const a=Array.isArray(deck)&&deck[i];return a?cut(a.n):""});
+top("doAct",(i,k)=>{const v=rivals[i],a=ACT[k];return a?`${cut(a.n||k)}${v?" "+v.name:""}`:""});
+top("talk",oi=>{try{return cut(talkOpts(curPeople()[popIdx])[oi].n)}catch(e){return""}});
+top("goTo",k=>{try{const p=places().find(x=>x.k===k);return p?"Đến "+p.n:""}catch(e){return""}});
+top("lesson",k=>{try{const a=ARTS.find(x=>x.k===k);return a?"Học "+a.n:""}catch(e){return""}});
+top("hireMaster",()=>"Mời danh sư");
+top("chooseM",i=>{try{const m=Q[0],c=m&&m.opts&&m.opts[i];return c?cut(c.n):""}catch(e){return""}},true);
+top("closeModal",()=>{try{return cut((Q[0]&&Q[0].t)||"")}catch(e){return""}});
+top("nextBuoi",()=>S&&(S.buoi||0)>=(typeof B4L!=="undefined"?B4L:3)?"Sang tuần mới":"Sang buổi mới");
+if(typeof window.aaPayMG==="function"){const p0=window.aaPayMG;window.aaPayMG=function(sc){const t=window.__aaTitle||(sc&&sc.title)||"Trò tài nghệ";lsSync(lab);lab=cut(t);const r=p0.apply(this,arguments);lsSync(lab);return r}}
+/* any other tap (shop, gift, chest, …): its button names the action; the render after it syncs */
+document.addEventListener("click",e=>{try{const b=e.target.closest&&e.target.closest("button,.opt,[data-a],[data-k]");if(!b)return;const t=cut(b.getAttribute("aria-label")||b.textContent||"");if(t&&t.length>=2){if(depth===0&&!fold)lsSync(lab);clickLab=t;lab=""}}catch(x){}},true);
+{const r0=render;render=function(){if(depth===0&&!fold)lsSync(lab);return r0.apply(this,arguments)}}
+{const d0=deser;deser=function(){const r=d0.apply(this,arguments);reset();return r}}
+{const s0=start;start=function(){const r=s0.apply(this,arguments);reset();return r}}
+
+/* ---- reasons of the time ticks (endTurn / monthTick); inline ones are noted in j3 ---- */
+/* silent ones: their own line at once (now) */
+lsTag("anMonth",k=>k==="an"?"lâu ngày, ân tình phai dần":"",true);
+lsTag("artMonth",k=>k==="suc"?"đàn cầm dưỡng sức":"",true);
+lsTag("v85Month",k=>k==="th"||k==="hh"?(S.duc>=60?"Đức cao, được quý hơn":"Đức thấp, bị coi nhẹ"):"",true);
+/* ones whose news text (logged at the end of the turn) may already say it: the reason joins the end-of-turn line if still needed */
+lsTag("stipend","bổng lộc tháng này");lsTag("v85Month","tài nghệ trong tháng");
+lsTag("illMonth","bệnh tật trong tháng");lsTag("coldMonth","lãnh cung");lsTag("maidMonth","cung nữ thân tín");
+lsTag("rivalsTurn","việc của các phi tần");lsTag("resolveTonight","đêm qua");lsTag("festival","lễ hội");
+lsTag("wdMonth","y phục trong tháng");lsTag("ordMonth70","lệ cung trong tháng");lsTag("kidsMonth","việc của con");
+
+/* ---- the night talk: its own result, after the night line (the owner's case) ---- */
+if(typeof PEND==="object"&&PEND.night2){const n2=PEND.night2;PEND.night2=function(){const d=n2.apply(this,arguments);try{(d&&d.o||[]).forEach(o=>{const g=o.go;if(typeof g!=="function")return;
+ o.go=function(){let mk=null,mq=0;const nf=nightFx;nightFx=function(){const r=nf.apply(this,arguments);mk=lsSnap();mq=S.logSeq||0;return r};let r;try{r=g.apply(this,arguments)}finally{nightFx=nf}
+  try{if(mk&&S&&!S.dead){/* what its own lines (e.g. "Đức +3 vì …") do not already say */const P=lsFix(lsLines((S.logSeq||0)-mq),mk);
+   if(P.length){const roll=/hỏng:/.test(o.x||"");const bad=P.some(p=>p.b<p.a);log(`${cut(o.n)}${roll?`: <span class="${bad?"r":"g"}">${bad?"hỏng":"thành"}</span>.`:":"} ${P.map(p=>partH(p)).join(", ")}.`)}}}catch(e){console.error(e)}
+  return r}})}catch(e){console.error(e)}return d}}
+})();
 
 </script>
 
@@ -28778,7 +28900,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0ba73664d6aa";window.CTM_BUILD=BUILD;
+const BUILD="4edd0b52c47a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
