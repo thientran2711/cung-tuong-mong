@@ -9,7 +9,7 @@ EV6("snowDay","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?2:0,
  v:["Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.","Mai nở trong tuyết ở góc vườn, Hoàng thượng truyền các cung làm thơ vịnh mai.","Ao sen đóng băng, các hoàng tử, công chúa đòi ra trượt băng.","Tuyết dày chặn lối sang Đức Thọ cung, lễ thỉnh an sáng nay khó đi."],
  o:X=>[c6("Phát áo bông cho cung nhân",{c:{bac:-25},w:{maid:8,duc:2}}),
   c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(30+S.tai/2+(S.arts.thi||0)*6),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
-  c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:5,duc:1}})]});
+  c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:typeof trSnowGreet==="function"?trSnowGreet():5,duc:1}})]});
 EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Thu"?2:0,
  v:["Trăng thu sáng vằng vặc, {A} mời các cung ra đình Thủy Tạ ngâm thơ.","Gió heo may, lá phong đỏ rụng đầy lối; {A} rủ ngươi đi nhặt lá ép vào sách.","Đêm thu nghe tiếng sáo từ cung {A} vọng sang, buồn da diết.","Mùa cua béo, {A} gửi sang một giỏ cua và rượu hoa cúc."],
  o:X=>[c6("Nhận lời, góp vui",{c:{suc:-4},r:[[X.A,7]],w:{danh:1}}),
