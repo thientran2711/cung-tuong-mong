@@ -424,4 +424,4 @@
 | diemtrang coop look F5 (opus, co-op bug): friend's look from her real toilette (jcoopworld LOOK + toilFx), not toilNpc roll | review/diemtrang-coop-look | main s24 | session_01UV1SzhX2fKGhGXpNLonvo5 | RUNNING | 16/11 22:30Z |
 | road-b1-fixa review r1 (opus, BIG engine+roads tt/dtq/muoi/cn) of f1f18496 | review/road-b1-fixa-r1 | B | session_01N1tNP4EyusTduAxd2FoWaL | RUNNING | 16/11 21:26Z |
 | npc-death re-wire (opus; golive HOLD 21:20Z): wire jnpcd/jly into main's j95 place-people record (Lý in Trường Môn viện OD:L641, place list after death, Thái y viện 'ty'), fix test fc | review/npc-death-wire | D | (opening) | RUNNING | 16/11 21:27Z |
-| kit-fit r3 review r1 (sonnet, SMALL kit + consistency + co-op) of 2d6a50e3 | review/kit-fit-r3-r1 | main s24 | (s24 opening) | RUNNING | 16/11 22:35Z |
+| kit-fit r3 review r1 (sonnet, SMALL kit + consistency + co-op) of 2d6a50e3 | review/kit-fit-r3-r1 | main s24 | session_01UV1SzmFpim4M3rHm45ksp9 | RUNNING | 16/11 22:35Z |
