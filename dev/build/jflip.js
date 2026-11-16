@@ -23,7 +23,7 @@ Object.assign(BAL,{cardFlip:{
     (t.centre = lift2 + turn.lift; t.res = centre + turn.move + turn.pause; t.end = res + turn.tail): change the numbers here only. */
  turn:{lift:700,move:1300,pause:1100,tail:4200,ease:"cubic-bezier(.45,0,.55,1)"},
  slow:BAL.pace,  /* = the ONE kit pace (BAL.pace, KIT §83; owner 16/11 "vẫn còn nhanh quá"): every hard-coded motion below × slow; t / turn / hold are already the slowed numbers */
- t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6500,lift2:7600,centre:0,res:0,end:0},other:.82,
+ t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6200,lift2:7600,centre:0,res:0,end:0},other:.82,
  hold:{me:5200},  /* only the fallback when the kit button part is missing */
  /* the reveal light = the WHOLE frame glows (owner 16/11 12:00Z: "nguyên cái khung nó phát sáng lên", never a light that runs round the ring): one soft warm halo hugging the frame ring
     (path = the frame ring's rectangle, fractions of the card), breathing slowly (opacity only, `breath` ms per cycle); nothing is drawn over the portrait window. */
@@ -34,8 +34,12 @@ Object.assign(BAL,{cardFlip:{
  plates:{l:{ar:4/3,a:"cf-gplate-ksp",b:"cf-gplate-emp",fa:{x0:.125,y0:.235,x1:.875,y1:.700},fb:{x0:.125,y0:.235,x1:.875,y1:.700},rim:{x0:.055,y0:.150,x1:.945,y1:.790}},
          p:{ar:3/4,a:"cf-gplate-ksp-p",b:"cf-gplate-emp-p",fa:{x0:.105,y0:.272,x1:.890,y1:.695},fb:{x0:.105,y0:.300,x1:.892,y1:.655},rim:{x0:.02,y0:.21,x1:.98,y1:.75}}},
  portraitBelow:.95, /* screen w/h below this uses the portrait pair */
- /* the painted hand: pinch point (fraction of the sprite), sprite height in card heights */
- hand:{px:.70,py:.905,h:2.7},
+ /* the Emperor's hand (kit part kitEmpHand; owner 16/11 17:40Z: bigger, a whole hand + sleeve reaching in from the screen edge, never cut, never pasted on).
+    px,py = pinch point (fraction of the sprite); rot = degrees the sprite is turned so the sleeve runs straight up out of the screen; sleeve = the two sprite edges that
+    carry the sleeve (left edge rows 0..cutL, top edge columns 0..cutT, measured from the pixels): they must lie ABOVE the screen top, so the sprite height is at least
+    pinchY / room (room = how much of the sprite height lies above the pinch point at the lowest cut edge after the turn, ~.62). h = minimum height in card heights,
+    minH / maxH = fractions of the screen height. reach / press / leave = the ease-in, the touch-down dip (fraction of a card height) and the retreat. */
+ hand:{px:.70,py:.905,rot:32,cutL:.43,cutT:.43,room:.58,h:3.6,minH:.40,maxH:.86,reach:.7,press:.06,lift:.10,leave:.8,shadow:{dx:.11,dy:.075,blur:.022,op:.4,hi:2.1}},
  skipNoPick:false}});
 (function(){
 const CF=BAL.cardFlip;{const t=CF.t,u=CF.turn;t.centre=t.lift2+u.lift;t.res=t.centre+u.move+u.pause;t.end=t.res+u.tail}const DIR="img/kit/";const AR=550/1037;
@@ -46,6 +50,38 @@ const red=()=>{try{return typeof kmReduced==="function"?kmReduced():matchMedia("
 function snd(n,at){const go=()=>{try{if(window.__bot)return;if(typeof sfx==="function")sfx(n)}catch(e){}};if(at)setTimeout(go,at);else go()}
 /* load AND decode before the scene starts (img.decode(): the bitmap is ready, nothing is decoded mid-flip); the Image is kept so the decoded bitmap stays cached */
 const PRE={},KEEP=[];function preload(src){if(PRE[src])return PRE[src];const im=new Image();KEEP.push(im);PRE[src]=new Promise(r=>{let d=0;const done=()=>{if(!d){d=1;r()}};setTimeout(done,2500);im.onerror=done;im.onload=()=>{try{im.decode().then(done,done)}catch(e){done()}}});im.src=src;return PRE[src]}
+/* ---------- KIT PART kitEmpHand (KIT §67b): the Emperor's hand ----------
+   ONE part for every place his hand appears (today only this scene). The painted sleeve + hand (cf-hand-emp) is sized from the SCREEN, never from the card alone, turned so the
+   forearm runs straight up, and placed so the sprite's two cut edges (where the sleeve leaves the picture) lie above the top of the screen: it always comes IN FROM THE SCREEN EDGE
+   as a whole arm, never a cut-off picture floating on the scene. Two layers, both transform-only: the hand and a soft blurred shadow (the hand's own silhouette) that lies on the
+   tray, far off while the hand is high and tucked under it when it touches. No fade-in: the arm slides in along its own axis (ease-out), dips a hair to touch the card, lifts WITH it by
+   the same pixels, and leaves the way it came (ease-in). `hand` = the .kcf-hand wrapper (fixed, holds .kcf-hs shadow + .kcf-hi hand); `tel` = the card; opt.still = no motion. */
+function kitEmpHand(hand,tel,opt){opt=opt||{};const H=CF.hand,SH=H.shadow,hi=hand.querySelector(".kcf-hi"),hs=hand.querySelector(".kcf-hs");let g=null,cur=null;
+ const A2=(el,kf,op)=>{try{return el.animate(kf,Object.assign({fill:"forwards"},op))}catch(e){return null}};
+ const aspect=()=>(hi.naturalWidth&&hi.naturalHeight)?hi.naturalWidth/hi.naturalHeight:306/480;
+ function place(){const r=tel.getBoundingClientRect(),vh=innerHeight,ar=aspect();const px=r.left+r.width*.5,py=r.top+r.height*.12;
+  const th=H.rot*Math.PI/180,c=Math.cos(th),sn=Math.sin(th);
+  /* lowest cut-edge point after the turn: left edge (0,cutL) and top edge (cutT,0), measured from the pinch point, in sprite-height units */
+  const rel=(u,v)=>{const x=(u-H.px)*ar,y=v-H.py;return{x:x*c-y*sn,y:x*sn+y*c}};
+  const up=Math.min(-rel(0,H.cutL).y,-rel(H.cutT,0).y,-rel(0,0).y);   /* how far above the pinch the lowest cut point sits, per sprite height */
+  let hh=Math.max(r.height*H.h,vh*H.minH,py/Math.min(H.room,up*.97));hh=Math.min(hh,vh*H.maxH);
+  /* if the height cap stops the arm leaving the screen, tuck the pinch point no lower than the cap allows (the hand is as big as the screen lets it be) */
+  const hw=hh*ar;g={px,py,hh,hw,r,reach:py+hh*.42};
+  Object.assign(hand.style,{left:(px-hw*H.px)+"px",top:(py-hh*H.py)+"px",width:hw+"px",height:hh+"px"});
+  for(const im of [hi,hs]){im.style.transformOrigin=`${H.px*100}% ${H.py*100}%`;im.style.transform=`rotate(${H.rot}deg)`}
+  hs.style.filter=`brightness(0) blur(${(hh*SH.blur).toFixed(1)}px)`;hs.style.opacity=SH.op;
+  return g}
+ return{
+  reach(ms){place();hand.classList.add("on");const k=g;if(opt.still)return;const d=Math.round(k.reach),pr=k.r.height*H.press,e="cubic-bezier(.2,.75,.25,1)";
+   /* one move: slide in along the arm (ease-out) to the card, then the touch-down dip, and rest there until the card is picked */
+   cur=A2(hand,[{transform:`translate(${-k.hh*.05}px,${-d}px)`,easing:e},{transform:"none",offset:H.reach},{transform:`translateY(${pr}px)`}],{duration:ms,easing:"ease-in-out"});
+   const sh=(m,o)=>`translate(${k.hh*SH.dx*m}px,${k.hh*SH.dy*m}px) rotate(${H.rot}deg)`;
+   A2(hs,[{transform:sh(SH.hi),opacity:SH.op*.5,easing:e},{transform:sh(1),opacity:SH.op,offset:H.reach},{transform:sh(.8)}],{duration:ms,easing:"ease-in-out"})},
+  lift(ms,ease){if(!g||opt.still)return;const pr=g.r.height*H.press,up=g.r.height*(H.press-H.lift);A2(hand,[{transform:`translateY(${pr}px)`},{transform:`translateY(${up}px)`}],{duration:ms,easing:ease});
+   A2(hs,[{transform:`translate(${g.hh*SH.dx*.8}px,${g.hh*SH.dy*.8}px) rotate(${H.rot}deg)`},{transform:`translate(${g.hh*SH.dx*1.35}px,${g.hh*SH.dy*1.35}px) rotate(${H.rot}deg)`}],{duration:ms,easing:ease})},
+  leave(ms){if(!g||opt.still){hand.classList.remove("on");return}const y=g.r.height*(H.press-H.lift),d=Math.round(g.reach+g.hh*.1);
+   A2(hand,[{transform:`translateY(${y}px)`},{transform:`translate(${-g.hh*.05}px,${-d}px)`}],{duration:ms,easing:"cubic-bezier(.5,0,.8,.5)"})}}}
+window.kitEmpHand=kitEmpHand;
 function byId(id){if(id==="me")return S;return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id)||null}
 function rk(p){try{return p===S?S.rank:rkOf(p)}catch(e){return p&&p.rank||0}}
 function cycleOf(p){try{if(typeof inCycle==="function")return !!inCycle(p);if(typeof cycleDaysOf==="function"){const d=cycleDaysOf(p,S.month);return Array.isArray(d)&&d.includes(S.tuan)}}catch(e){}return false}
@@ -84,11 +120,11 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
  const cards=deck.map((c,i)=>{const p=all[i];const lab=`${esc(rankName(c.p))} ${esc(nameOf(c.p))}`;
-  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}"><div class="kcf-f">${face(c.p)}${c.p===S?`<i class="kcf-mine"></i>`:""}</div>${tagOf(c.p,p.w)}</div>`}).join("");
+  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}"><i class="kcf-cs"></i><div class="kcf-f">${face(c.p)}${c.p===S?`<i class="kcf-mine"></i>`:""}</div>${tagOf(c.p,p.w)}</div>`}).join("");
  ov.innerHTML=`<div class="kcf-w" style="left:${B.x.toFixed(1)}px;top:${B.y.toFixed(1)}px;width:${B.W.toFixed(1)}px;height:${B.H.toFixed(1)}px">
   <img class="kcf-pl kcf-a" src="${ART.a}" alt="" draggable="false"><img class="kcf-pl kcf-b" src="${ART.b}" alt="" draggable="false">
   <div class="kcf-cards">${cards}</div><div class="kcf-lamp"></div><div class="kcf-vig"></div></div>
-  <img class="kcf-hand" src="${ART.hand}" alt="" draggable="false">
+  <div class="kcf-hand"><img class="kcf-hs" src="${ART.hand}" alt="" draggable="false"><img class="kcf-hi" src="${ART.hand}" alt="" draggable="false"></div>
   <div class="kmcap kcf-cap">Kính sự phòng dâng thẻ bài</div><div class="kcf-res"></div><div class="kmhint">Chạm để bỏ qua</div>`;
  document.body.appendChild(ov);
  const W=ov.querySelector(".kcf-w"),cap=ov.querySelector(".kcf-cap"),res=ov.querySelector(".kcf-res"),hand=ov.querySelector(".kcf-hand");
@@ -153,14 +189,12 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   A(W,[{transform:"none"},{transform:"translateX(-4%) scale(1.03)",offset:.45},{transform:"none"}],{duration:1050*SL,easing:"ease-in-out",fill:"none"});snd("sfx-step",120)});
  /* 4 · his hand reaches in; the card lifts, glows and grows to the centre */
  if(!tel){later(T.hand,()=>showRes());later(T.hand+600,final);return{ov,close}}
- later(T.hand,()=>{const r=tel.getBoundingClientRect();const hh=Math.min(innerHeight*.78,r.height*CF.hand.h),hw=hh*701/1100;
-  const x=r.left+r.width*.5-hw*CF.hand.px,y=r.top+r.height*.12-hh*CF.hand.py;Object.assign(hand.style,{left:x+"px",top:y+"px",height:hh+"px",width:hw+"px"});hand.classList.add("on");
-  A(hand,[{transform:`translate(${-hw*.35}px,${-hh*.75}px) rotate(-6deg)`,opacity:0},{transform:"none",opacity:1}],{duration:650*sp*SL,easing:"cubic-bezier(.25,.8,.3,1)"})});
+ const eh=kitEmpHand(hand,tel,{still,time:sp*SL});
+ later(T.hand,()=>eh.reach(T.lift2-T.hand));
  later(T.lift2,()=>{snd("sfx-tablet-flip");tel.classList.add("kcf-pick");ov.classList.add("kcf-dim");
-  liftA=A(tel,[{transform:"none"},{transform:"translateY(-10%) scale(1.08)"}],{duration:CF.turn.lift*sp,easing:CF.turn.ease});
-  A(hand,[{transform:"none",opacity:1},{transform:"translateY(-9%)",opacity:1}],{duration:CF.turn.lift*sp,easing:CF.turn.ease})});
+  liftA=A(tel,[{transform:"none"},{transform:`translateY(${-CF.hand.lift*100}%) scale(1.08)`}],{duration:CF.turn.lift*sp,easing:CF.turn.ease});eh.lift(CF.turn.lift*sp,CF.turn.ease)});
  later(T.centre,()=>{const r0=tel.getBoundingClientRect();const c=centreRect();
-  A(hand,[{transform:"translateY(-9%)",opacity:1},{transform:`translate(${-r0.width}px,-70%)`,opacity:0}],{duration:CF.turn.move*sp*.8,easing:"ease-in"});
+  eh.leave(CF.turn.move*sp*CF.hand.leave);
   if(liftA){try{liftA.cancel()}catch(e){}liftA=null}
   Object.assign(tel.style,{left:(c.x-B.x)+"px",top:(c.y-B.y)+"px",width:c.w+"px"});const r1=tel.getBoundingClientRect();
   A(tel,[{transform:`translate(${r0.left-r1.left}px,${r0.top-r1.top}px) scale(${r0.width/r1.width})`,transformOrigin:"0 0"},{transform:"none",transformOrigin:"0 0"}],{duration:CF.turn.move*sp,easing:CF.turn.ease})});
@@ -250,8 +284,12 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-halo{position:fixed;z-index:6;pointer-events:none;border:3px solid #fff0b8f0;box-shadow:0 0 calc(var(--hb)*.45) calc(var(--hs)*.7) #fff6cc,0 0 var(--hb) var(--hs) #ffd877f2,0 0 calc(var(--hb)*2.2) calc(var(--hs)*1.6) #ffb23fb0,0 0 calc(var(--hb)*4) calc(var(--hs)*2) #ff9a2e55;opacity:var(--ho,1)}
 .kcf-halo.kcf-breath{animation:kcfBreath var(--hd,3600ms) ease-in-out infinite}
 @keyframes kcfBreath{0%,100%{opacity:var(--hl,.62)}50%{opacity:var(--ho,.9)}}
-.kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none;filter:sepia(.18) saturate(.95) brightness(.9) drop-shadow(6px 10px 8px #1a0a0480)}
+.kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none}
 .kcf-hand.on{display:block}
+.kcf-hand img{position:absolute;inset:0;width:100%;height:100%;user-select:none;pointer-events:none}
+.kcf-hi{filter:sepia(.14) saturate(.96) brightness(.93)}   /* the same warm grade as the tray; no drop-shadow here (the blurred .kcf-hs under it is the shadow) */
+.kcf-cs{position:absolute;left:8.5%;top:17.8%;width:83%;height:54.4%;border-radius:3cqw;background:#1a0804;filter:blur(2.4cqw);opacity:0;pointer-events:none;transition:opacity calc(.7s*var(--kcf-s,1)) ease,transform calc(.7s*var(--kcf-s,1)) ease}
+.kcf-pick .kcf-cs{opacity:.5;transform:translate(5cqw,9cqw)}   /* the card he lifted throws a soft shadow on the tray that moves away as it rises */
 .kcf-act .kcf-hand,.kcf-act .kcf-seal{will-change:transform}
 .kcf-cap{position:absolute;left:0;right:0;top:max(10px,env(safe-area-inset-top));text-align:center;z-index:7;padding:0 12px}
 .kcf-res{position:absolute;left:0;right:0;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 22px);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px;opacity:0;pointer-events:none}

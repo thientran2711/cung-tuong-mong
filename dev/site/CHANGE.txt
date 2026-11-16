@@ -1,1 +1,1 @@
-Thiết lập › Thông tin cập nhật: hiện mã lần cập nhật đang chơi, lúc nào, điều gì mới, và mười lần trước.
+Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này.
