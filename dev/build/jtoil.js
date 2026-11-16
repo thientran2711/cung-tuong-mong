@@ -345,7 +345,7 @@ const TOIL_SAY={
  "th-scold":{
   moc:["“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”","“Người trong cung mà để mặt trơn như cung nữ quét sân, {goi} không thấy thẹn ư?”","“Thỉnh an ai gia cũng là lễ. Lễ mà sơ sài thì lòng cũng sơ sài.”","“Mặt chẳng điểm chút son, {goi} đến để ai gia xót hay để ai gia giận?”","“Người không biết trọng mình thì ai trọng cho. Về trang điểm lại rồi hãy đến.”","“Hôm nay {goi} đến vội quá, đến cả thể diện cũng bỏ quên ở cung rồi.”"],
   vung:["“Phấn son lem nhem thế kia, cung nữ hầu {goi} không biết việc sao?”","“Son phấn chỗ đậm chỗ nhạt, nhìn như bức tranh vẽ dở. Về bảo người hầu học lại đi.”","“Trang điểm vụng về thế này, ra ngoài người ta cười cả cung của {goi}.”","“Lông mày kẻ lệch, phấn đánh chẳng đều. Người hầu bên {goi} nên đổi đi thôi.”","“Trang điểm thế này, ai gia nhìn còn mỏi mắt, huống hồ là Hoàng đế.”","“Vụng tay thì học, chứ đừng đem cái vụng ra trước mặt ai gia.”"],
-  diem:["“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”","“Đỏ thắm thế này, {goi} định đi thỉnh an hay đi hát tuồng?”","“Hoa diễm quá thì mau tàn. Người trong cung nên biết giữ chừng mực.”","“Phấn dày như tường vôi. {Goi} vào cung để hầu hạ, đâu phải để lên sân khấu.”","“Ai gia già rồi, mắt kém, mà vẫn thấy chói vì son phấn của {goi}.”","“Người đoan trang không cần nhiều phấn. {Goi} nhớ lấy.”"],
+  diem:["“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”","“Đỏ thắm thế này, {goi} định đi thỉnh an hay đi hát tuồng?”","“Hoa diễm quá thì mau tàn. Người trong cung nên biết giữ chừng mực.”","[lo,mid]“Phấn dày như tường vôi. {Goi} vào cung để hầu hạ, đâu phải để lên đài hát.”","“Ai gia già rồi, mắt kém, mà vẫn thấy chói vì son phấn của {goi}.”","“Người đoan trang không cần nhiều phấn. {Goi} nhớ lấy.”"],
   plain:["“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”","“Áo vải mộc mạc đến thỉnh an, người ngoài lại tưởng ai gia bạc đãi {goi}.”","“Giản dị là đức, sơ sài là thất lễ. {Goi} phân không ra hai chữ ấy sao?”","“Tiết kiệm là đức, nhưng thỉnh an ai gia mà mặc thế này thì là coi thường.”","“Phẩm phục để đâu mà không mặc? Hay Nội vụ phủ quên phần của {goi}?”","“Áo xống thế kia, người ngoài nhìn vào lại nói hậu cung thiếu thốn.”"],
   showy:["[lo,mid,hi]“Lộng lẫy thế này, {goi} quên mất ai mới là chủ lục cung rồi chăng?”","“Châu ngọc đầy người, đi một bước kêu ba tiếng. Ai gia nghe mà nhức đầu.”","“Cây cao thì đón gió. {Goi} khoe ra như vậy, chẳng sợ gió to sao?”","“Ai gia còn chưa cài nhiều trâm như thế. {Goi} định so với ai?”","“Lộng lẫy quá hóa lố. Nhớ lấy phận mình.”","“Vàng bạc trên đầu nặng, chỉ e cái đầu chẳng gánh nổi.”"]},
  "th-praise":{
@@ -365,7 +365,7 @@ const TOIL_SAY={
  "emp-dislike":{
   moc:["“Sao hôm nay trông nhợt nhạt thế?”","“{Goi} ốm sao? Mặt nhợt quá.”","“Trông {goi} chẳng vui chút nào.”","“Sao chẳng điểm chút son? {Goi} không vui sao?”","“Như vừa ốm dậy vậy.”","“Trông {goi} mệt quá.”"],
   diem:["“Son phấn đậm quá, {xung} không quen.”","“Rửa bớt phấn đi.”","“Hoa lệ quá, lại không giống {goi} nữa.”","“Đậm quá, chẳng thấy {goi} đâu.”","“{Xung} nhìn không quen mắt.”","“Phấn dày quá, khi cười e rơi mất.”"],
-  plain:["“Sao ăn vận sơ sài vậy?”","“Nội vụ phủ bớt xén của {goi} sao?”","“Giản dị thì tốt, nhưng {xung} đến cơ mà.”","“Người hầu của {goi} lơ là quá.”","“{Xung} đến mà {goi} chẳng chút chăm chút sao?”","“Chẳng giống phi tần của {xung}.”"],
+  plain:["“Sao ăn vận sơ sài vậy?”","“Nội vụ phủ bớt xén của {goi} sao?”","“Giản dị thì tốt, nhưng {xung} đến cơ mà.”","“Người hầu của {goi} lơ là quá.”","“{Xung} đến mà {goi} chẳng chút chăm chút sao?”","[lo,mid,hi]“Chẳng giống phi tần của {xung}.”"],
   showy:["“{Xung} thích thanh nhã hơn.”","“Vàng ngọc đầy đầu, nặng lắm.”","“Đẹp thì đẹp, mà phô trương quá.”","“Nhiều trâm quá, chẳng thấy mặt {goi}.”","“Đeo cả kho báu làm gì?”","“Lộng lẫy như vậy, {xung} lại thấy xa cách.”"]},
  "rival-jealous":{
   showy:["“Phô trương đến thế, {goi} không sợ người ta dị nghị sao?”","“{Goi} hôm nay châu ngọc đầy người, chắc là được ban thưởng nhiều lắm nhỉ?”","[lo,mid,hi]“Đẹp quá, đẹp đến mức đứng cạnh Hoàng hậu cũng chẳng kém. Thật đáng nể.”","“Trâm này đẹp thật, {xung} chưa thấy bao giờ. Ai ban cho {goi} vậy?”","“{Goi} rực rỡ thế, đứng cạnh {goi} ai cũng thành lá xanh mất.”","“Hôm nay {goi} tính đi yến ở đâu mà rực rỡ thế?”"],
@@ -380,7 +380,7 @@ const TOIL_SAY={
 const TOIL_BAND={
  "th-scold":{lo:["“Mới vào cung được mấy hôm mà đã sơ suất thế này, sau này còn ra sao?”","“Phẩm còn thấp thì càng phải giữ lễ, {goi} hiểu chưa?”","“Muốn ai gia nhớ mặt thì đừng để ai gia nhớ vì cái sai.”"],
   mid:["“Đã là chủ một cung mà dung nhan còn để người ta chê sao?”","“{Ten} có cung riêng, người dưới đều nhìn {goi} mà học. Thế này thì dạy ai?”","“Ngồi ghế chủ vị thì phải giữ được thể diện của chủ vị.”"],
-  hi:["“Ở vị trí {ten}, chỉ đứng sau Hoàng hậu, mà để ai gia phải nhắc chuyện này sao?”","“Lục cung đều nhìn {goi} mà theo. {Goi} sơ suất một, bọn họ sơ suất mười.”","“Phẩm cao thì lỗi cũng cao. Ai gia không muốn nói lần thứ hai.”"],
+  hi:["“Ở vị trí {ten}, lục cung đều trông vào, mà để ai gia phải nhắc chuyện này sao?”","“Lục cung đều nhìn {goi} mà theo. {Goi} sơ suất một, bọn họ sơ suất mười.”","“Phẩm cao thì lỗi cũng cao. Ai gia không muốn nói lần thứ hai.”"],
   hq:["“Mẫu nghi thiên hạ mà thế này, lục cung lấy ai làm gương?”","“Người ngồi Trung cung phải đoan trang hơn tất cả. Hôm nay thì chưa.”","“Ai gia giao lục cung cho Hoàng hậu, không phải để người ta cười.”"]},
  "th-praise":{lo:["“Mới vào cung mà đã hiểu lễ như vậy, {goi} có tiền đồ.”","“Nhìn {goi} hôm nay, ai gia lại nhớ thời mình mới vào cung.”","“Phận còn nhỏ mà biết giữ mình, ai gia ghi nhớ.”"],
   mid:["“Đã là chủ một cung, ăn vận thế này mới xứng.”","“{Ten} biết giữ thể diện cho cung mình, ai gia vui lòng.”","“Người dưới nhìn chủ như {goi}, ắt cũng biết lễ.”"],
@@ -398,7 +398,7 @@ const TOIL_BAND={
   hi:["“{Goi} xưa nay đâu có thế.”","“Lục cung đang nhìn {goi} đấy.”"],hq:["“Trung cung mà thế này sao?”","“{Goi} dạo này mệt lắm à?”"]},
  "rival-jealous":{lo:["“Mới vào cung đã được để mắt, {goi} thật có phúc.”","“Phẩm vị chưa cao mà khéo ăn vận thế, sau này {goi} còn hơn nữa.”"],
   mid:["“Chủ một cung có khác, {xung} nhìn mà thèm.”","“{Ten} dạo này phong quang quá, cả cung ai cũng nói.”"],
-  hi:["“Phẩm cao thì đẹp cũng cao, {xung} sao dám sánh.”","“{Ten} chỉ đứng dưới một người, ăn vận thế này cũng phải.”"],
+  hi:["“Phẩm cao thì đẹp cũng cao, {xung} sao dám sánh.”","“{Ten} phẩm cao vị trọng, ăn vận thế này cũng phải.”"],
   hq:["“{Goi} hôm nay rực rỡ quá, lục cung đều lu mờ.”","“Mẫu nghi thiên hạ có khác, {xung} chỉ biết cúi đầu.”","“Phượng quan trên đầu {goi}, ai nhìn mà chẳng ngước lên.”","“{Xung} đứng cạnh {goi} hôm nay, thấy mình như cành cỏ.”","“Châu ngọc ấy, cả hậu cung chỉ {goi} đeo mới hợp.”","“{Goi} đẹp thế này, Hoàng thượng chẳng muốn rời Trung cung mất.”"]},
  "rival-tease":{hq:["“{Goi} hôm nay thật… khác thường.” Nàng ta cúi đầu, khóe miệng khẽ nhếch.","“Son của {goi} thắm quá, {xung} suýt không nhận ra.” Nàng ta cười, mắt nhìn đi chỗ khác.","“Trung cung hôm nay rực rỡ, chắc có tin vui?” Giọng nàng ta ngọt như mật pha giấm.","“{Xung} nào dám bàn dung nhan của {goi}.” Nàng ta nói, rồi khẽ liếc người bên cạnh.","“{Goi} trang điểm thế, hẳn là để Hoàng thượng nhìn cho rõ.” Nàng ta cúi chào, cười khẽ.","“Đậm đà thế này, cả điện đều thấy.” Nàng ta che quạt, giọng nhỏ mà ai cũng nghe."]},
  "rival-praise":{lo:["“Mới vào cung mà đã biết chọn y phục, {xung} phục thật.”","“{Goi} ăn vận thế này, ma ma giáo tập ắt khen.”"],mid:["“Chủ một cung mà giản dị thế, {xung} kính phục.”","“Cung của {goi} hẳn ai cũng nề nếp.”"],
@@ -443,7 +443,7 @@ function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",s
  let L=P[sub]||P.any,key="toil:"+k+":"+sub;const TT=TOIL_TRAIT[k]&&sp&&sp.trait&&TOIL_TRAIT[k][sp.trait];if(TT){L=L.concat(TT);key+=":"+sp.trait}
  const said=kLine(key,L,{sp,ls:S,m});
  /* her signature habit (jvoice kHabit), long form only, when the line has no gesture of its own */
- const hb=sp&&typeof sp==="object"&&/”$/.test(said)?kHabit(sp):"";return hb?`${said} ${hb}.`:said}
+ const hb=sp&&typeof sp==="object"&&!/^crowd/.test(k)&&/”$/.test(said)?kHabit(sp):"";/* a crowd reaction is many voices: no one consort's habit (reviewer r1) */return hb?`${said} ${hb}.`:said}
 /* gain / loss line in the palace voice (VANPHONG §2.5): a gesture of the person (pool, no repeat) — then the plain why + numbers, unchanged */
 const TOIL_GEST={
  "th+":["Thái hậu khẽ gật đầu, tràng hạt trong tay lần chậm lại","Khóe môi Thái hậu thoáng một nét cười","Thái hậu cho ta ngồi gần hơn thường lệ","Ánh mắt Thái hậu dịu đi đôi phần","Thái hậu sai ma ma rót thêm cho ta chén trà nóng"],
