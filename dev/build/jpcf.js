@@ -50,7 +50,7 @@ function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";con
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];
  for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;
   rows.push([m[2],m[3]]);if(rows.length>=4)break}
- if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":"nàng"}.</div></div>`;
+ if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}.</div></div>`;
  return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitRows(rows.map(([w,t])=>[w,t,"t"]))}</div>`}catch(x){return""}}
 /* quick acts: only for a rival, only when her card has no act (the pop-up after the one talk of the visit) */
 function pcfQuick(e){try{if(typeof rivals==="undefined"||typeof rvGroups!=="function")return"";const i=rivals.indexOf(e);if(i<0||!e.alive||e.out||typeof pbtn!=="function")return"";
