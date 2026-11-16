@@ -43,8 +43,10 @@
 
 ## CDN
 - img/FIGURES-hd.json + img/hd/fig-*.webp uploaded with cdn_sync after hdqa PASS + looking at the face sheets (left 900 up, right HD).
-- Uploaded: chunk 1 (68, incl. all c30), chunk 2 (262), chunk 3 (395) = 725 HD twins, all PASS, all face sheets looked at. Rest of FIGURES.json
-  batch running (dev/figwork/hdcut.py, worker files in /home/user/wt/face-sharp/.work/hd; resume = rerun hdcut on hd/part0..3.tsv, it skips done).
+- DONE: 1598 HD twins on the CDN (chunks 68+262+395+370+505), every one hdqa PASS (back-check to the approved 900 file + head detail gain ≥ 1)
+  and every face sheet looked at. Covers FIGURES.json consort (all tiers t1–t8, cold, tm0–tm4), player look1–4, emperor, eunuchs whose sheet URL is known.
+  7 files SKIPPED by the registration guard (not guessed): consort c09-t8 a18/a36/a51, c18-tm2-a18, c24-t6-a51, c04-t3-a36, player-look1-t1-a51
+  → they keep the 900 file (still sharp now that nothing animates).
 - 25 of the 200 missing sheet URLs fetched with Magnific creations_get (49 files, part3). The other 175 sheets (~330 files, mostly t5/t7/t8 and
   tm*-a51 aged edits) still need creations_get (token-heavy: ~1 k tokens per id) — left for a helper with Magnific API access.
 
