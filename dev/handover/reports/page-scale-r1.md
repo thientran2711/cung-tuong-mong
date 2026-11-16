@@ -1,6 +1,6 @@
 # page-scale-r1 — reviewer report (BIG, whole-game layout) — 11/16/2026
 
-VERDICT: **PASS** (sha in the CLAIMS row / last commit of `review/page-scale-r1`; ancestor = origin/main c19b25ebf). START_CTX ~3 % (1M window); no rollover.
+VERDICT: **PASS** (sha in the CLAIMS row / last commit of `review/page-scale-r1`; ancestor = origin/main 23595c376). START_CTX ~3 % (1M window); no rollover.
 
 ## What I reviewed / built
 - `review/page-scale` @ 1f4912486 had merged the OLD tutrang-layout 57d698fe8. Re-merged the CURRENT `review/tutrang-layout` @ c39139e51 (no textual conflict
@@ -29,6 +29,9 @@ VERDICT: **PASS** (sha in the CLAIMS row / last commit of `review/page-scale-r1`
 
 Sheets: `dev/handover/reports/page-scale-r1/sheet-tutrang.jpg` (BEFORE main | AFTER, Fold | iPad, Tư trang 1 pet),
 `sheet-tabs.jpg` (every tab + 2 pop-ups: Fold page | iPad right page).
+
+## Re-check after merging origin/main 23595c37 (fold-popw etc.)
+page-scale.js full run **36/36 PASS** (Dư đồ SKIP, act included); tab-pairs 0 mismatches/0 errors both sizes; Tư trang 1 and 3 pets: bag 7x6 = 7x6, slot 40 px, no scroll, 0 errors, both devices.
 
 ## Notes for the coordinator (not blocking)
 - Wear slots are 40 px on a 582x597 page on BOTH devices (KIT floor) — readable pictures + names, but the pet lines ("0 tháng tuổi", effect chip) are tiny.
