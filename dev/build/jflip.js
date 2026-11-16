@@ -24,7 +24,7 @@ Object.assign(BAL,{cardFlip:{
  turn:{lift:700,move:1300,pause:1100,tail:4200,ease:"cubic-bezier(.45,0,.55,1)"},
  slow:1.75,  /* owner 16/11 "vẫn còn nhanh quá" (after cardflip-smooth): every hard-coded motion below × slow (≈1.75× the cardflip-smooth timing); t / turn / hold are already the slowed numbers */
  t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6500,lift2:7600,centre:0,res:0,end:0},other:.82,
- hold:{me:5200,other:3000},
+ hold:{me:5200},  /* only the fallback when the kit button part is missing */
  /* the reveal light runs ALONG the picked card's frame (owner 16/11: it sat in the middle and hid the face): n painted gold glows (KIT §68 glowburst, true alpha) circle the frame
     ring (path = the frame ring's centre line, fractions of the card), 2 laps visible; sparks fly OUTWARD from the frame edge. Nothing is drawn over the portrait window. */
  edge:{path:{x0:.085,y0:.178,x1:.915,y1:.722},n:14,size:.22,lap:4200,op:.7,sparks:16},  /* final still before it closes by itself */
@@ -107,9 +107,10 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   W.classList.add("kcf-on-b");toB();deck.forEach((c,i)=>{const el=els[i];if(c.bar){el.classList.add("kcf-gone")}else place(el,keepPos.get(c))});
   hand.classList.remove("on");
   if(tel){const r=centreRect();tel.classList.add("kcf-pick");Object.assign(tel.style,{left:(r.x-B.x)+"px",top:(r.y-B.y)+"px",width:r.w+"px"});ov.classList.add("kcf-dim")}
-  showRes(true);const h=ov.querySelector(".kmhint");if(h)h.textContent="Chạm để đóng";later((me?CF.hold.me:CF.hold.other)+(still?800:0),close)}
+  showRes(true);/* KIT §81 scene-end button (owner 16/11 OD:L1261): the scene never closes by itself or by a tap; ONE kit button ends it */
+  if(typeof kitSceneEnd==="function")kitSceneEnd(ov,o.pick==="me"?"Chuẩn bị thị tẩm":"Ta biết rồi",close);else later(CF.hold.me,close)}
  function close(){if(phase===2)return;phase=2;Q.forEach(clearTimeout);ov.classList.remove("kcf-act");ov.classList.add("km-out");edgeH.forEach(h=>{try{h&&h.stop&&h.stop(200)}catch(e){}});edgeH.length=0;setTimeout(()=>ov.remove(),260);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}}
- ov.addEventListener("click",e=>{e.stopPropagation();if(phase===0)final("tap");else close()});
+ ov.addEventListener("click",e=>{e.stopPropagation();if(phase===0)final("tap")});   /* a tap while it plays = the final still; closing is only the kit button */
  let shown=false;const edgeH=[];
  /* the reveal light (owner 16/11): painted gold glows (KIT §68 glowburst) run ALONG the picked card's frame ring and never over the portrait window.
     The card is at rest in the centre when this starts. Gọn / reduced motion: the same glows stand still on the ring (no animation). */
@@ -241,6 +242,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-cap{position:absolute;left:0;right:0;top:max(10px,env(safe-area-inset-top));text-align:center;z-index:7;padding:0 12px}
 .kcf-res{position:absolute;left:0;right:0;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 22px);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px;opacity:0;pointer-events:none}
 .kcf-res.on{opacity:1;transition:opacity .4s ease}
+.kcf.km-endon .kcf-res{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 66px)}   /* the kit scene-end button (KIT §81) sits at the bottom: the result chip stands above it */
 .kcf-side .kcf-res{left:52%;right:12px;top:50%;bottom:auto;transform:translateY(-50%);align-items:flex-start}
 .kcf-res .kmres{animation:kmPop .45s var(--km-ease,ease) both}
 .kcf-seal{position:absolute;z-index:6;height:auto;transform-origin:50% 50%;animation:kcfSeal calc(.5s*var(--kcf-s,1)) cubic-bezier(.3,1.6,.5,1) calc(.15s*var(--kcf-s,1)) both;filter:drop-shadow(0 3px 6px #0008)}

@@ -12773,9 +12773,10 @@ function kitCurlOff(){try{return typeof reducedMotion==="function"?reducedMotion
 function kitCurlEase(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 /* a quick lift then a slower settle (a flick of the page): the next page shows under the corner from the first frames (owner 11/15) */
 function kitCurlLift(t){return 1-Math.pow(1-t,1.6)}
-/* KIT_TURN_MS: the ONE page-turn duration (owner 11/15 01:50Z "cho animation lật trang chậm lại": ~2× the old 680–760 ms).
+/* KIT_TURN_MS: the ONE page-turn duration (owner 11/15 01:50Z "cho animation lật trang chậm lại": ~2× the old 680–760 ms; 16/11 Foreman B
+   KIT REQUEST C32b: 1300 → 800 ms, the landscape curl was felt stiff/slow — buttons, tabs, book, cover, drag release all read this one constant).
    KIT.md §34.0. kitTurnEase: slow lift, even swing, a long gentle settle as the sheet lands. */
-const KIT_TURN_MS=1300;
+const KIT_TURN_MS=800;
 function kitTurnEase(t){const u=1-Math.pow(1-t,1.45);return (1-Math.cos(Math.PI*u))/2}
 function kitSlideEase(t){return 1-Math.pow(1-t,3)}
 function kitCurlFade(el,mid,done,ms){ms=ms||170;if(!el){mid&&mid();done&&done();return}el.classList.add("kcl-fade");
@@ -18149,17 +18150,37 @@ function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
 function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
- kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,30000);
+ kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
+
+/* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
+   kitSceneEndLabel(cls, o): o.end (the caller's own words, e.g. "Chuẩn bị thị tẩm" when the card flip lands on HER) wins; else the scene class decides;
+   else "Tiếp theo". Words are short and fit the event (never "OK"); VANPHONG register. */
+const KM_END={"km-edict":"Đã hiểu","km-gloom":"Đã hiểu","km-bloom":"Tiếp theo","km-inkov":"Tiếp theo","km-tablet":"Tiếp theo","km-soft":"Ta biết rồi"};
+function kitSceneEndLabel(cls,o){if(o&&o.end)return String(o.end);for(const k in KM_END)if(new RegExp("(^|\\s)"+k+"(\\s|$)").test(cls||""))return KM_END[k];return "Tiếp theo"}
+window.kitSceneEndLabel=kitSceneEndLabel;
+/* kitSceneFit(ov): a scene taller than the room left above the button (short landscape, 844x390) is scaled down (CSS zoom on .kmst, never below .55) so nothing
+   runs under the button; room = overlay height minus the button row (css .km-endon padding). Runs when the button appears and on resize. */
+function kitSceneFit(ov){try{const st=ov&&ov.querySelector(".kmst");if(!st)return;st.style.zoom="";const cs=getComputedStyle(ov);const avail=ov.clientHeight-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.paddingTop)||0);
+ const els=[...st.children].flatMap(c=>[c,...c.children]).filter(e=>!/kmdark|kmleaves|kmglow|kmfls|kmleaf/.test(e.className||"")&&e.getBoundingClientRect().width>0);
+ const h=els.length?Math.max(...els.map(e=>e.getBoundingClientRect().bottom))-Math.min(...els.map(e=>e.getBoundingClientRect().top)):st.scrollHeight;if(avail>0&&h>avail+2)st.style.zoom=String(Math.max(.55,Math.floor(avail/h*100)/100))}catch(e){}}
+window.kitSceneFit=kitSceneFit;addEventListener("resize",()=>document.querySelectorAll(".kmov.km-endon").forEach(kitSceneFit));
+/* kitSceneEnd(ov, label, onClick): the ONE button that ends an animation scene (also for scenes NOT built on kmStage: card flip jflip, toil reveal jtoil, …).
+   Appends `.kbtn.kmend` to the overlay `ov` (removes the "Chạm để …" hint), returns the button; onClick (optional) closes the scene. Calling it twice = one button. */
+function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".kmhint").forEach(h=>h.remove());let b=ov.querySelector(":scope > .kmend");
+ if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
+window.kitSceneEnd=kitSceneEnd;
 
 /* ---------- stage overlay ---------- */
 function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.createElement("div");ov.className="kmov "+cls+(red?" km-red km-skip":"");
  ov.setAttribute("role","dialog");ov.innerHTML=`<div class="kmst">${html}</div>${o.manual?"":`<div class="kmhint">${o.hint||"Chạm để bỏ qua"}</div>`}`;document.body.appendChild(ov);
  let phase=0;const T=[];const later=(ms,f)=>{T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
  const close=()=>{if(phase===2)return;phase=2;T.forEach(clearTimeout);ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}};
+ /* KIT 81 SCENE-END BUTTON (owner OD:L1261): a scene never closes by itself. When its animation has played (or was skipped by a tap) the hint is replaced by ONE kit
+    button (.kbtn.kmend) whose words fit the event (kitSceneEndLabel); only that button closes the scene. manual scenes carry their own button (Nhận, Chọn…). */
  const finish=()=>{if(phase>0)return;phase=1;T.forEach(clearTimeout);T.length=0;ov.classList.add("km-skip");try{o.onFinal&&o.onFinal()}catch(e){console.error(e)}
-  const h=ov.querySelector(".kmhint");if(h)h.textContent="Chạm để đóng";if(!o.manual)later(o.hold||1200,close)};
- ov.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("[data-km-close]")){close();return}if(o.manual)return;if(phase===0)finish();else close()});
+  if(!o.manual){const b=kitSceneEnd(ov,kitSceneEndLabel(cls,o));if(b)b.setAttribute("data-km-close","")}};
+ ov.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("[data-km-close]")){close();return}if(o.manual)return;if(phase===0)finish()});
  if(red)setTimeout(finish,0);else if(!o.manual)later(o.dur||1600,finish);
  return{ov,later,finish,close,get phase(){return phase}}}
 /* small sparkle burst at (x,y): PAINTED sparks of KIT §68 (kitFxBurst "spark"; a gold burst of 26+ adds gold-leaf petals). Owner 15/11 20:55Z /
@@ -18177,7 +18198,7 @@ function kitFlipTablet(p,o){o=o||{};if(!p)return;const me=p===S||o.me;const nm=p
  const side=n=>`<div class="kmtab kmtab-s" style="--i:${n}">${back}</div>`;
  const html=`<div class="kmflip${me?" kmflip-me":""}"><div class="kmcap">Hoàng thượng lật thẻ bài</div><div class="kmtabs">${side(-2)}${side(-1)}<div class="kmtab kmtab-c"><div class="kmcard"><div class="kmface kmback">${back}</div><div class="kmface kmfront"><img src="${KM_DIR}mo-tablet-front.webp" alt="" draggable="false"><div class="kmname"><small>${kmEsc(rk)}</small>${words}</div></div></div></div>${side(1)}${side(2)}</div>
   <div class="kmres">${kmFace(p,"big")}<div><b>${me?"Thẻ bài của ngươi được lật":"Tối nay: "+kmEsc(nm)}</b><small>${me?"Tối nay ngươi hầu giá.":`${kmEsc(rk)} được chọn hầu đêm nay.`}</small></div></div></div>`;
- kmPush(done=>{const st=kmStage("km-tablet"+(me?"":" km-soft"),html,{dur:1900,hold:me?1800:1100,onEnd:done,onFinal:()=>{}});
+ kmPush(done=>{const st=kmStage("km-tablet"+(me?"":" km-soft"),html,{dur:1900,end:me?"Chuẩn bị thị tẩm":"Ta biết rồi",onEnd:done,onFinal:()=>{}});
   if(me)st.later(1250,()=>{const c=st.ov.querySelector(".kmtab-c");if(c){const r=c.getBoundingClientRect();kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,26,["#f0d070","#fff3c4","#e0a526"],170)}})})}
 
 /* someone else's tablet: one short line under the top bar (kit chip), no backdrop, never takes a tap, fades by itself */
@@ -18382,6 +18403,10 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.kmov.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+.kmend{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:9;min-width:140px;animation:kmendin .35s ease-out both}
+@keyframes kmendin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.kmend{animation:none}}
 .kmhint{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:.74rem;color:#f6ead6c0;letter-spacing:.04em}
 .km-skip *:not(.km-loop),.km-skip.kmseal,.km-skip.kmxam *{animation-delay:0s!important;animation-duration:.01s!important;transition-duration:.01s!important}
 @keyframes kmFade{from{opacity:0}to{opacity:1}}@keyframes kmFadeOut{to{opacity:0}}
@@ -19505,7 +19530,11 @@ document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closes
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
- let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");
+ /* KIT 6.3b (review/kit-keeper-2, main s11 item 4): SHORT LANDSCAPE (phone sideways, 844x390: the card's room is ~180 px high) — the two-column card whatever
+    the width: picture + name + info LEFT (narrow column, sticky), acts RIGHT, so the first act is on the first screen instead of 500 px down the page */
+ if(pc&&innerHeight<=520&&innerWidth>innerHeight){pc.style.setProperty("--kpcw","92px");return true}
+ return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
@@ -22940,7 +22969,21 @@ function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidde
  const D=d.clientHeight||innerHeight;let vh=innerWidth<1000?24:28;
  while(vh>14&&fixedH()>D*.55&&o.scrollHeight>o.clientHeight+2){vh-=2;d.style.setProperty("--kdpic",vh+"vh")}
  if(!o.dataset.kdsh){o.dataset.kdsh=1;o.addEventListener("scroll",()=>o.classList.toggle("kdsh",o.scrollTop>2),{passive:true})}
+ kitDlgText(d,mb,o);
  try{if(typeof kitEsFit==="function")mb.querySelectorAll(".kpsubj.kes").forEach(kitEsFit)}catch(e){}}catch(e){console.error("kitDlgFit",e)}}
+/* KIT 32.5b · THE TEXT AREA SCROLLS (review/kit-keeper-2, Foreman D D-R1 finding "event-frame body #mb is overflow:hidden, so long text is clipped"):
+   in the fixed event frame the body #mb stays overflow:hidden (title, picture, figures, buttons never scroll away) and has TWO scroll areas:
+   the options list (.opts, §32.5) and the story text (.kpb > .kpmain). The text keeps its natural height (fixed, fully visible) as long as the
+   options keep at least min(their content, 42 % of the body); a longer text is capped to the rest and scrolls inside itself (.kdtx, soft top
+   shadow once scrolled). Person dialogs (kdper) scroll their whole right column instead (kitDpAll / .kdpall) and do not use the cap. */
+function kitDlgText(d,mb,o){try{const kb=mb.querySelector(":scope > .kpb"),tx=kb&&kb.querySelector(":scope > .kpmain");if(!kb||!tx)return;
+ d.classList.remove("kdtx");kb.style.removeProperty("max-height");tx.classList.remove("kdsh");
+ if(d.classList.contains("kdper"))return;
+ const cs=getComputedStyle(mb),pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0),gap=parseFloat(cs.rowGap)||0;
+ const inner=mb.clientHeight-pad,optNat=Math.min(o.scrollHeight,Math.max(96,Math.round(inner*.42)));
+ const room=Math.max(72,Math.floor(inner-optNat-gap)),nat=kb.scrollHeight;
+ if(nat>room+1){d.classList.add("kdtx");kb.style.maxHeight=room+"px"}
+ if(!tx.dataset.kdsh){tx.dataset.kdsh=1;tx.addEventListener("scroll",()=>tx.classList.toggle("kdsh",tx.scrollTop>2),{passive:true})}}catch(e){console.error("kitDlgText",e)}}
 window.kitDlgFit=kitDlgFit;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDlgFit();requestAnimationFrame(kitDlgFit)}catch(e){}return r};
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDlgFit,120)})})();
@@ -22953,6 +22996,11 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll>#mb>.opts{grid-template-rows:none!important;grid-auto-rows:max-content!important;align-content:start!important}
 .modal .dlg.kdscroll>#mb>.opts>*{min-height:max-content;flex:none}
 .modal .dlg.kdscroll>#mb>.opts.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
+.modal .dlg.kdscroll>#mb>.kpb{flex:0 1 auto!important;min-height:0}
+.modal .dlg.kdscroll.kdtx>#mb>.kpb{overflow:hidden;display:flex;flex-direction:column}
+.modal .dlg.kdscroll.kdtx>#mb>.kpb.kphas{display:grid;grid-template-rows:minmax(0,1fr)}
+.modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;transition:box-shadow .2s;flex:1 1 auto}
+.modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
 .modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,28vh)}
 .modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,28vh) + 40px)}
 @media (max-width:999px){.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,24vh)}}
@@ -28992,14 +29040,21 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
   event:q&&{kind:"choice",title:"Hoàng hậu triệu kiến",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua ta được lật thẻ bài."}],
    opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm ăn năm thua · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
   result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
+  long:{kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",facts:Array.from({length:9},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
+   opts:[{n:"Nghe hết rồi mới định",fx:{duc:1},x:"Chắc · Đức +1",go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"Chắc",go:nop}]},
   news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
  const sp=S0[k];if(!sp){back();return false}sp.onClose=back;
  if(sp.opts)sp.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});kitModal(sp);return true}catch(e){console.error("kitPopSample",e);const pg=document.getElementById("kitpage");if(pg)pg.hidden=false;return false}}
 window.kitPopSample=kitPopSample;
 KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LUẬT · VIỆC · KẾT QUẢ · TIN (chạm để mở pop-up thật)",html:()=>{
- const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"]];
+ const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"],["long","VIỆC DÀI · lời kể dài (chữ cuộn trong khung, tranh + nút đứng yên · KIT 32.5b)"]];
  const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
   (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+KIT_SAMPLES.push({id:"§81",title:"Nút kết cảnh · cảnh hoạt hình nào cũng kết bằng MỘT nút ngắn, không tự đóng (chạm để mở cảnh thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
+ const L=[["bloom","Có hỷ → «Tiếp theo»"],["edict","Thánh chỉ tấn phong → «Đã hiểu»"],["flipme","Lật thẻ bài: thẻ của ta → «Chuẩn bị thị tẩm»"],["flipother","Lật thẻ bài: người khác → «Ta biết rồi»"]];
+ return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn alt" data-kscene="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem cảnh."],{group:false}))}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kscene]");if(!b)return;e.stopPropagation();e.preventDefault();try{const k=b.dataset.kscene,R=typeof liveRivals==="function"?liveRivals(true):[];
+ if(k==="bloom")kitBloom({title:"Có hỷ",sub:"Thái y báo tin mừng"});else if(k==="edict")kitEdict({who:S,from:Math.max(0,S.rank-1),to:S.rank});else if(k==="flipme")kitFlipTablet(S,{me:true});else if(R[0])kitFlipTablet(R[0])}catch(x){console.error("kscene",x)}},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
 /* ================= jcooptimer: CO-OP BUỔI CLOCK (owner 15/11 ~21:25Z + ~22:55Z, review/coop-timer) — KIT §69 =================
    Co-op only (COOPW.on); single-player never starts the tick. Rules (coordinator, dev/OWNER_DECISIONS.md 15/11 ~21:25Z / ~22:55Z):
@@ -32776,9 +32831,13 @@ Object.assign(BAL,{cardFlip:{
  /* the turn of HIS card (owner 16/11: "too fast", calm): turn.lift = the card rises off the tray, turn.move = it glides to the centre (lift+move = the flip,
     ~1.15 s, soft ease-in-out), turn.pause = the face rests on its own before the reveal words / seal / burst. centre, res, end are DERIVED from these
     (t.centre = lift2 + turn.lift; t.res = centre + turn.move + turn.pause; t.end = res + turn.tail): change the numbers here only. */
- turn:{lift:400,move:750,pause:600,tail:2400,ease:"cubic-bezier(.45,0,.55,1)"},
- t:{in:650,grey:900,lift:1450,arrange:2000,carry:2600,hand:3700,lift2:4350,centre:0,res:0,end:0},other:.82,
- hold:{me:3000,other:1700},  /* final still before it closes by itself */
+ turn:{lift:700,move:1300,pause:1100,tail:4200,ease:"cubic-bezier(.45,0,.55,1)"},
+ slow:1.75,  /* owner 16/11 "vẫn còn nhanh quá" (after cardflip-smooth): every hard-coded motion below × slow (≈1.75× the cardflip-smooth timing); t / turn / hold are already the slowed numbers */
+ t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6500,lift2:7600,centre:0,res:0,end:0},other:.82,
+ hold:{me:5200},  /* only the fallback when the kit button part is missing */
+ /* the reveal light runs ALONG the picked card's frame (owner 16/11: it sat in the middle and hid the face): n painted gold glows (KIT §68 glowburst, true alpha) circle the frame
+    ring (path = the frame ring's centre line, fractions of the card), 2 laps visible; sparks fly OUTWARD from the frame edge. Nothing is drawn over the portrait window. */
+ edge:{path:{x0:.085,y0:.178,x1:.915,y1:.722},n:14,size:.22,lap:4200,op:.7,sparks:16},  /* final still before it closes by itself */
  /* two plate pairs (owner 21:45Z: landscape AND portrait screens): l = 1600x1200 (4:3), p = 1200x1600 (3:4). Per picture: the tray floor
     (yellow silk, measured from the pixels) and the tray's outer rim (the safe zone that must stay on screen); the plate box is fitted to the
     rim and the card slots are computed from the same box, so cards sit on the floor at every aspect. A ≠ B floor → the cards glide to B's. */
@@ -32824,8 +32883,8 @@ function plateBox(){const vw=innerWidth,vh=innerHeight;const P=PL(),R=P.rim;cons
 
 /* ---------- the scene ---------- */
 function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
- const me=o.pick==="me"&&o.turned==="me";const sp=me?1:CF.other;const T={};for(const k in CF.t)T[k]=CF.t[k]*sp;const still=red();
- const ov=document.createElement("div");ov.className="kmov kcf"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.__t0=performance.now();
+ const me=o.pick==="me"&&o.turned==="me";const sp=me?1:CF.other;const SL=CF.slow||1;const T={};for(const k in CF.t)T[k]=CF.t[k]*sp;const still=red();
+ const ov=document.createElement("div");ov.className="kmov kcf"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.style.setProperty("--kcf-s",SL);ov.__t0=performance.now();
  const B=plateBox();const P=PL();let F=P.fa;let fx=B.W*F.x0,fy=B.H*F.y0,FW=B.W*(F.x1-F.x0),FH=B.H*(F.y1-F.y0);
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
@@ -32858,16 +32917,27 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   W.classList.add("kcf-on-b");toB();deck.forEach((c,i)=>{const el=els[i];if(c.bar){el.classList.add("kcf-gone")}else place(el,keepPos.get(c))});
   hand.classList.remove("on");
   if(tel){const r=centreRect();tel.classList.add("kcf-pick");Object.assign(tel.style,{left:(r.x-B.x)+"px",top:(r.y-B.y)+"px",width:r.w+"px"});ov.classList.add("kcf-dim")}
-  showRes(true);const h=ov.querySelector(".kmhint");if(h)h.textContent="Chạm để đóng";later((me?CF.hold.me:CF.hold.other)+(still?800:0),close)}
- function close(){if(phase===2)return;phase=2;Q.forEach(clearTimeout);ov.classList.remove("kcf-act");ov.classList.add("km-out");try{lightH&&lightH.stop&&lightH.stop(200)}catch(e){}setTimeout(()=>ov.remove(),260);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}}
- ov.addEventListener("click",e=>{e.stopPropagation();if(phase===0)final("tap");else close()});
- let shown=false,lightH=null;function glow(){if(lightH||still||!tel)return;try{if(typeof kitFxLight==='function')lightH=kitFxLight('glow-gold',tel,{dur:2600})}catch(e){}}
- function showRes(now){if(shown)return;shown=true;glow();res.innerHTML=o.resHTML||"";res.classList.add("on");
-  if(me){ov.classList.add("kcf-mine");stamp();if(!still){burst();petals()}snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
+  showRes(true);/* KIT §81 scene-end button (owner 16/11 OD:L1261): the scene never closes by itself or by a tap; ONE kit button ends it */
+  if(typeof kitSceneEnd==="function")kitSceneEnd(ov,o.pick==="me"?"Chuẩn bị thị tẩm":"Ta biết rồi",close);else later(CF.hold.me,close)}
+ function close(){if(phase===2)return;phase=2;Q.forEach(clearTimeout);ov.classList.remove("kcf-act");ov.classList.add("km-out");edgeH.forEach(h=>{try{h&&h.stop&&h.stop(200)}catch(e){}});edgeH.length=0;setTimeout(()=>ov.remove(),260);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}}
+ ov.addEventListener("click",e=>{e.stopPropagation();if(phase===0)final("tap")});   /* a tap while it plays = the final still; closing is only the kit button */
+ let shown=false;const edgeH=[];
+ /* the reveal light (owner 16/11): painted gold glows (KIT §68 glowburst) run ALONG the picked card's frame ring and never over the portrait window.
+    The card is at rest in the centre when this starts. Gọn / reduced motion: the same glows stand still on the ring (no animation). */
+ function edgeLight(){if(!tel||typeof kitFxObj!=="function")return;const E=CF.edge,P=E.path,r=tel.getBoundingClientRect();if(!r.width)return;
+  const X=f=>r.left+r.width*f,Y=f=>r.top+r.height*f;const pts=[[X(P.x0),Y(P.y0)],[X(P.x1),Y(P.y0)],[X(P.x1),Y(P.y1)],[X(P.x0),Y(P.y1)],[X(P.x0),Y(P.y0)]];
+  const len=[];let tot=0;for(let i=0;i<4;i++){const d=Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]);len.push(d);tot+=d}
+  const at=u=>{u=((u%1)+1)%1;let d=u*tot;for(let i=0;i<4;i++){if(d<=len[i]||i===3){const t=len[i]?d/len[i]:0;return[pts[i][0]+(pts[i+1][0]-pts[i][0])*t,pts[i][1]+(pts[i+1][1]-pts[i][1])*t]}d-=len[i]}return pts[0]};
+  const sz=Math.max(40,r.width*E.size),n=E.n;
+  for(let i=0;i<n;i++){try{const u=i/n,[x,y]=at(u);const H=kitFxObj("glowburst",0,{x,y},{size:sz,opacity:E.op,fade:500});if(!H)continue;edgeH.push(H);
+   if(still||!H.el.animate)continue;let off=0;const kf=[];for(let k=0;k<5;k++){const q=pts[k];kf.push({transform:`translate(${(q[0]-sz/2).toFixed(1)}px,${(q[1]-sz/2).toFixed(1)}px)`,offset:k?off/tot:0});if(k<4)off+=len[k]}
+   H.el.style.transform=kf[0].transform;H.el.animate(kf,{duration:E.lap*SL/1.75,iterations:Infinity,easing:"linear",delay:-u*E.lap*SL/1.75})}catch(e){}}
+  /* sparks leave the frame edge going OUTWARD (never inward over the face) */
+  if(!still&&typeof kitFxSprite==="function"){const cx=X(.5),cy=Y((P.y0+P.y1)/2);for(let i=0;i<E.sparks;i++){const [x,y]=at(Math.random()),a=Math.atan2(y-cy,x-cx),v=.5+Math.random()*1.1;
+   try{kitFxSprite("spark",{x,y,vx:Math.cos(a)*v+(Math.random()-.5)*.3,vy:Math.sin(a)*v+(Math.random()-.5)*.3,drag:.985,life:90+Math.random()*80,fade:"inout",scale:.85})}catch(e){}}}}
+ function showRes(now){if(shown)return;shown=true;edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");
+  if(me){ov.classList.add("kcf-mine");stamp();if(!still)petals();snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
   cap.textContent=o.cap2||"Hoàng thượng lật thẻ bài"}
- function burst(){if(!tel)return;const r=tel.getBoundingClientRect();const at={x:r.left+r.width/2,y:r.top+r.height*.38};
-  try{if(typeof kitFxBurst==="function"){kitFxBurst("glowburst",at,1);kitFxBurst("spark",at,18);return}}catch(e){}
-  try{if(typeof kitFx==="function")kitFx("decree",{el:tel})}catch(e){}}
  function petals(){try{if(typeof kitFxBurst==="function"){kitFxBurst("petal-peach",null,18);return}}catch(e){}
   let h="";for(let i=0;i<14;i++)h+=`<img class="kcf-pt" src="${ART.petal}" alt="" draggable="false" style="--x:${(i*37+9)%96}%;--d:${((i*.41)%1.8).toFixed(2)}s;--s:${(.55+((i*29)%45)/100).toFixed(2)};--r:${(i*67)%360}deg;--w:${((i%5)-2)*24}px">`;
   const box=document.createElement("div");box.className="kcf-pts";box.innerHTML=h;ov.appendChild(box)}
@@ -32877,23 +32947,23 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  if(still){final("still");return{ov,close}}
  /* 1 · all lit: the cards settle into the tray */
  snd("sfx-tablet-shuffle",150);
- els.forEach((el,i)=>A(el,[{opacity:0,transform:"translateY(-14px) scale(1.04)"},{opacity:1,transform:"none"}],{duration:420,delay:120+i*Math.min(45,700/els.length)}));
+ els.forEach((el,i)=>A(el,[{opacity:0,transform:"translateY(-14px) scale(1.04)"},{opacity:1,transform:"none"}],{duration:420*SL,delay:(120+i*Math.min(45,700/els.length))*SL}));
  /* 2 · barred cards grey, lifted out; the rest re-arrange */
  const bars=deck.map((c,i)=>c.bar?els[i]:null).filter(Boolean);
  if(bars.length){later(T.grey,()=>{bars.forEach(el=>el.classList.add("kcf-grey"));cap.textContent="Thẻ bài người không thể hầu giá được rút ra"});
-  later(T.lift,()=>{const ys=bars.map(el=>-(B.y+fy+40+el.offsetTop));bars.forEach((el,k)=>A(el,[{transform:"none",opacity:1},{transform:`translateY(${ys[k]}px) scale(.9)`,opacity:0}],{duration:700,delay:k*70,easing:"cubic-bezier(.5,0,.7,.4)"}))});
-  later(T.arrange,()=>{const it=[];deck.forEach((c,i)=>{if(c.bar){els[i].classList.add("kcf-gone");return}it.push([els[i],keepPos.get(c)])});glide(it,650)})}
+  later(T.lift,()=>{const ys=bars.map(el=>-(B.y+fy+40+el.offsetTop));bars.forEach((el,k)=>A(el,[{transform:"none",opacity:1},{transform:`translateY(${ys[k]}px) scale(.9)`,opacity:0}],{duration:700*SL,delay:k*70*SL,easing:"cubic-bezier(.5,0,.7,.4)"}))});
+  later(T.arrange,()=>{const it=[];deck.forEach((c,i)=>{if(c.bar){els[i].classList.add("kcf-gone");return}it.push([els[i],keepPos.get(c)])});glide(it,650*SL)})}
  else later(T.arrange,()=>{deck.forEach((c,i)=>place(els[i],keepPos.get(c)))});
  /* 3 · carried to the Emperor: plate A → plate B under a slow drift; the cards stay in their slots */
  later(T.carry,()=>{cap.textContent="Thẻ bài được dâng lên Hoàng thượng";W.classList.add("kcf-on-b");toB();
-  glide(deck.map((c,i)=>c.bar?null:[els[i],keepPos.get(c)]).filter(Boolean),1000,"cubic-bezier(.45,0,.55,1)");
-  W.style.willChange="transform";setTimeout(()=>{W.style.willChange=""},1200);
-  A(W,[{transform:"none"},{transform:"translateX(-4%) scale(1.03)",offset:.45},{transform:"none"}],{duration:1050,easing:"ease-in-out",fill:"none"});snd("sfx-step",120)});
+  glide(deck.map((c,i)=>c.bar?null:[els[i],keepPos.get(c)]).filter(Boolean),1000*SL,"cubic-bezier(.45,0,.55,1)");
+  W.style.willChange="transform";setTimeout(()=>{W.style.willChange=""},1200*SL);
+  A(W,[{transform:"none"},{transform:"translateX(-4%) scale(1.03)",offset:.45},{transform:"none"}],{duration:1050*SL,easing:"ease-in-out",fill:"none"});snd("sfx-step",120)});
  /* 4 · his hand reaches in; the card lifts, glows and grows to the centre */
  if(!tel){later(T.hand,()=>showRes());later(T.hand+600,final);return{ov,close}}
  later(T.hand,()=>{const r=tel.getBoundingClientRect();const hh=Math.min(innerHeight*.78,r.height*CF.hand.h),hw=hh*701/1100;
   const x=r.left+r.width*.5-hw*CF.hand.px,y=r.top+r.height*.12-hh*CF.hand.py;Object.assign(hand.style,{left:x+"px",top:y+"px",height:hh+"px",width:hw+"px"});hand.classList.add("on");
-  A(hand,[{transform:`translate(${-hw*.35}px,${-hh*.75}px) rotate(-6deg)`,opacity:0},{transform:"none",opacity:1}],{duration:650*sp,easing:"cubic-bezier(.25,.8,.3,1)"})});
+  A(hand,[{transform:`translate(${-hw*.35}px,${-hh*.75}px) rotate(-6deg)`,opacity:0},{transform:"none",opacity:1}],{duration:650*sp*SL,easing:"cubic-bezier(.25,.8,.3,1)"})});
  later(T.lift2,()=>{snd("sfx-tablet-flip");tel.classList.add("kcf-pick");ov.classList.add("kcf-dim");
   liftA=A(tel,[{transform:"none"},{transform:"translateY(-10%) scale(1.08)"}],{duration:CF.turn.lift*sp,easing:CF.turn.ease});
   A(hand,[{transform:"none",opacity:1},{transform:"translateY(-9%)",opacity:1}],{duration:CF.turn.lift*sp,easing:CF.turn.ease})});
@@ -32964,30 +33034,31 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 /* the painting's lamplight over the cards: one static warm gradient (was two full-plate soft-light blends over the moving cards) */
 .kcf-lamp{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 38%,#ffc77a2e,transparent 72%)}
 .kcf-pl{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
-.kcf-pl.kcf-a{animation:kmFade .6s ease both}
-.kcf-pl.kcf-b{opacity:0;transition:opacity 1.1s ease-in-out}
+.kcf-pl.kcf-a{animation:kmFade calc(.6s*var(--kcf-s,1)) ease both}
+.kcf-pl.kcf-b{opacity:0;transition:opacity calc(1.1s*var(--kcf-s,1)) ease-in-out}
 .kcf-on-b .kcf-b{opacity:1}
 .kcf-cards{position:absolute;inset:0}
 /* every card state uses the SAME filter chain (grayscale sepia saturate brightness drop-shadow) so states interpolate smoothly and stay compositor-friendly */
-.kcf-c{position:absolute;z-index:2;filter:grayscale(0) sepia(.1) saturate(.96) brightness(.95) drop-shadow(3px 5px 3px #2a0d0480);transition:filter .6s ease-in-out,opacity .45s ease}
+.kcf-c{position:absolute;z-index:2;filter:grayscale(0) sepia(.1) saturate(.96) brightness(.95) drop-shadow(3px 5px 3px #2a0d0480);transition:filter calc(.6s*var(--kcf-s,1)) ease-in-out,opacity calc(.45s*var(--kcf-s,1)) ease}
 .kcf-act .kcf-c{will-change:transform,filter}   /* promoted only while the scene runs (removed at the final still / close) */
 .kcf-c span.md.kfc.kfc.kfc.kfc{width:100%!important;display:block}
 .kcf-c.kcf-grey{filter:grayscale(1) sepia(.1) saturate(.96) brightness(.62) drop-shadow(2px 3px 2px #0006)}
 .kcf-c.kcf-gone{display:none}
 .kcf-dim .kcf-c:not(.kcf-pick){filter:grayscale(0) sepia(.2) saturate(.96) brightness(.42) drop-shadow(2px 3px 2px #0006)}
-.kcf-c.kcf-pick{z-index:5;filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the gold glow is painted: kitFxLight("glow-gold") + kitFxBurst("glowburst") (KIT §68), never a CSS drop-shadow glow */
+.kcf-c.kcf-pick{z-index:5;filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light is painted and runs along the frame ring (edgeLight, KIT §67/§68), never a CSS drop-shadow glow and never over the portrait */
 .kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none;filter:sepia(.18) saturate(.95) brightness(.9) drop-shadow(6px 10px 8px #1a0a0480)}
 .kcf-hand.on{display:block}
 .kcf-act .kcf-hand,.kcf-act .kcf-seal{will-change:transform}
 .kcf-cap{position:absolute;left:0;right:0;top:max(10px,env(safe-area-inset-top));text-align:center;z-index:7;padding:0 12px}
 .kcf-res{position:absolute;left:0;right:0;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 22px);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px;opacity:0;pointer-events:none}
 .kcf-res.on{opacity:1;transition:opacity .4s ease}
+.kcf.km-endon .kcf-res{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 66px)}   /* the kit scene-end button (KIT §81) sits at the bottom: the result chip stands above it */
 .kcf-side .kcf-res{left:52%;right:12px;top:50%;bottom:auto;transform:translateY(-50%);align-items:flex-start}
 .kcf-res .kmres{animation:kmPop .45s var(--km-ease,ease) both}
-.kcf-seal{position:absolute;z-index:6;height:auto;transform-origin:50% 50%;animation:kcfSeal .5s cubic-bezier(.3,1.6,.5,1) .15s both;filter:drop-shadow(0 3px 6px #0008)}
+.kcf-seal{position:absolute;z-index:6;height:auto;transform-origin:50% 50%;animation:kcfSeal calc(.5s*var(--kcf-s,1)) cubic-bezier(.3,1.6,.5,1) calc(.15s*var(--kcf-s,1)) both;filter:drop-shadow(0 3px 6px #0008)}
 @keyframes kcfSeal{from{transform:scale(2.6) rotate(-8deg);opacity:0}to{transform:scale(1) rotate(-2deg);opacity:1}}
 .kcf-pts{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
-.kcf-pt{position:absolute;top:-8%;left:var(--x);width:calc(26px*var(--s));height:auto;opacity:0;animation:kcfFall 3.2s linear var(--d) forwards}
+.kcf-pt{position:absolute;top:-8%;left:var(--x);width:calc(26px*var(--s));height:auto;opacity:0;animation:kcfFall calc(3.2s*var(--kcf-s,1)) linear var(--d) forwards}
 @keyframes kcfFall{0%{opacity:0;transform:translate(0,0) rotate(var(--r))}10%{opacity:.95}100%{opacity:0;transform:translate(var(--w),112vh) rotate(calc(var(--r) + 300deg))}}
 .kcf.kcf-fin .kcf-c{transition:none}
 .kcf.km-red *{animation:none!important;transition:none!important}
@@ -37079,7 +37150,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ac02e15da347";window.CTM_BUILD=BUILD;
+const BUILD="2165b61a97dd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
