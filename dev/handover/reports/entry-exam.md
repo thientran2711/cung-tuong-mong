@@ -86,6 +86,7 @@ road's value (or lower the home extras in BAL.entry.w.dan / .nc).
 |---|---|---|
 | dev/test/entry-exam/direct.js — 9 origins: intro card + painting, Tuyển chọn options (no word game), exam frame rows, occ tuyen, no %, play / skip, rank in [ceiling−2, ceiling] (cnv maid), no demotion scene, "Nhập cung" → entry scene, ONE button, outside tap does not close, button closes | 755x1000, 1180x820 | 9/9 PASS each |
 | dev/test/kc-roads/direct.js (regression; updated: closes the Tiền truyện card first, and a Đáp ứng ceiling now expects the selection) | 755x1000 | 9/9 PASS |
+| dev/test/kc-roads/route.js --origin=nc (home road → Lễ ra mắt through the exam hook → palace, save/reload) | 755x1000 | PASS, entered Quý nhân (ceiling Tần), 0 errors (one "???" in an act card text "Mời thái y ??? đến tận" — not this branch) |
 Screens looked at (Fold + iPad): intro cards (td, muoi), exam frame (muoi, nc), entry scene (muoi, cnv, tt). Note: the board painting
 column of the exam frame was still empty in the shots (CDN load in the test; same frame as jexam, not this branch's code).
 
