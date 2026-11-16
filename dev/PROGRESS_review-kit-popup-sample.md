@@ -8,3 +8,4 @@ Tests (kit-popup-sample.js, host frame ?khost=1): 755x1000, 1180x820, 844x390 (r
 Findings on current main (for the coordinator)
 - No small 3:4 PERSON portrait remains: a person subject (even ĐIỀU info, Thái hậu) gets the kitEventStage full-body column (sometimes not, at 1180 one run drew no figure: race on figure load). Small 3:4 slot survives only as the info/item picture (kpiart); the "Bổng lộc" info picture is missing (brown placeholder).
 - Option card with a tiny portrait icon ("Thưa rằng do Hoàng thượng định") breaks its title onto two lines in the 2-column grid.
+Review r1 (Foreman C reviewer): merged onto origin/main 900ace7f (conflict in jkitpage.js: kept both §28.19b and §8 samples), site rebuilt. kit-popup-sample.js at 755x1000, 1180x820, 1366x1024, 844x390: all 5 pop-ups open from shared kitModal, in view, no h-overflow, kit page returns, 0 page errors. No new CSS; KIT_SAMPLES §8 registered; KIT.md §8 line present. PASS.
