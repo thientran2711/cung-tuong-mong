@@ -31,3 +31,6 @@ Hậu cung roster strip short names (not full names); her own name S (header sho
 - Tests on the merged build: rank-colour.js 1180x820 4988 pairs, 4876 ok, 112 "plain" = all "Thủ lĩnh thái giám X" drawn in the thủ lĩnh
   tone (correct KIT_RT; the scan expects the shorter "thái giám" tone — test-side); rank-name-scan after 0; hint-dedup exit 0; kit_dupes OK;
   old save (main 3ef079f61) loads + 8 weeks, 0 errors; coop-e2e 57/59 (known start-timing flake) then 59/59.
+- Re-merged origin/main 583858942. Found + fixed (pick-hint bug, whole family): a lone name label whose title stands in a SIBLING label
+  (Hậu cung person card: .pcrk "Hoàng hậu" over .pcname) was painted again → "Hoàng hậu / Hoàng hậu X". kitRankNamePaint now treats a short
+  sibling label holding the title as titled. `dev/test/rank-name-dup.js`: 85 doubled titles before (Hậu cung cards, mood, spy, dialogs) → 0.

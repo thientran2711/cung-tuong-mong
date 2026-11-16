@@ -370,7 +370,8 @@ Rules
 - RANK + NAME TOGETHER (owner 15/11 "phẩm và tên người lúc nào cũng phải đi chung", review/pick-hint, jaudit §17): every full person name
   on screen comes with its title. `kitRankNamePaint(root, dry)` (MutationObserver on body, like kitRelPaint) replaces a bare known full
   name (kpPeople, not S, with a kitTitle) in any text node outside `.kname` by `kitName(p)` (title + name, kit colours); a name already
-  after its title (same text, text just before, a title in the same small card, or "title name" earlier in the same block) is left as is.
+  after its title (same text, text just before, a title in the same small card, a short sibling label holding the title such as the
+  person card rank line `.pcrk`, or "title name" earlier in the same block) is left as is. Doubled-title scan: `dev/test/rank-name-dup.js`.
   Short names (Hậu cung roster strip under portraits) are not full names and are never touched. Opt out: `[data-krn-skip]`.
   Scan: `dev/test/rank-name-scan.js` → dev/review/rank-name-scan.md.
 - Titles: `kitTitled(title, name)` / `kitTitledName(title, name)` — the one title + name rule: name words the title already says are
