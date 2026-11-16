@@ -13,7 +13,15 @@ const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · 
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
   robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12,plotRel:-30, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
-  npcOut:2,npcRob:2}};                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
+  npcOut:2,npcRob:2},
+ /* PALACE START (owner 16/11 "game starts right after the accession" + amendment "about 4 small children"; review/palace-start; NEW games only, flag S.ps):
+    j1 psSeedKids / psOpenText, j2 start, j51 kvW. harem = [rank, queen] of the consorts at the start (young and small: 10, was 12);
+    consAge = [min, spread, +years for the queen and Phi+]; kidN = weights for 0,1,2,3,4,5 children in the whole palace; kidAge = [min,max] age;
+    sonP = chance a seeded child is a prince; sonMom / dauMom = mother's rank range (7 = the Hoàng hậu: daughters only, never a son = no đích tử);
+    empAge = [min, spread]; power0 = the throne's grip on the court (0–100, hook for the Emperor's side story and the side road, D5);
+    npcConc[y] = NPC conception × in the y-th game year (then 1); truongW = heir weight for the first-born son (old saves 25): an edge, not a lock. */
+ ps:{harem:[[7,1],[5,0],[4,0],[3,0],[3,0],[2,0],[1,0],[1,0],[0,0],[0,0]],consAge:[18,4,2],kidN:[0,0,0,30,50,20],kidAge:[1,4],sonP:.5,sonMom:[1,5],dauMom:[1,7],
+  empAge:[19,6],power0:30,npcConc:[.9],truongW:8}};                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
 /* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
 function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="function"&&has("hieuthao");const heir=!!(S.heir&&S.heir.k&&S.heir.k.alive&&S.heir.v===(p===S?null:p));
  return{sons:sn,th:sn?BAL.hhTh:(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:heir?BAL.hhDucHeir:BAL.hhDuc,heir}}
@@ -22,6 +30,8 @@ function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="functio
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
 /* fewer births per life: conception (after the ×0.7) scaled; a woman who has borne before is a little safer in labour (everyone alike) */
 (function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
+/* palace-start: NPC conception slowed in the first game years of a NEW game (S.ps), BAL.ps.npcConc; the player is never scaled here */
+(function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;const r=c0.apply(this,[p].concat([].slice.call(arguments,1)));try{if(p===S||!S||!S.ps)return r;const y=Math.floor((S.turn||0)/12),m=BAL.ps.npcConc[y];return m==null?r:Math.round(r*m*10)/10}catch(e){return r}}})();
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return cl(r-(n>0?BAL.later:0)+BAL.birthAdd,1.5,60)}})();
 /* the Hoàng hậu seat asks more: the Thái hậu's favour 55+ to stand as a candidate (same for every candidate) */
 /* (since rules-one-source: promoReqP (j8) and candOK (j34) read BAL.hhTh / hhNeed() directly; no second check here) */
