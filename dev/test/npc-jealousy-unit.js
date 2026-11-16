@@ -18,8 +18,9 @@ const {chromium}=require('playwright');const path=require('path');
   for(const v of L){v.ghen=0;delete v.gp}
   const z=(v,x)=>{affAdd(v,x,-aff(v,x));oanAdd(v,x,-oan(v,x))};z(a,S);z(a,t);
   t.rank=S.rank;ghenAdd(a,t,55);ghenAdd(a,S,55);
+  const eo=typeof emoOn==="function"?emoOn:null;if(eo)emoOn=function(){return false};/* a mood aimed at one person (jemo, real state) is not the formula */
   T("danger(v,NPC) = danger(v,her) with equal ghen/aff/oán",danger(a,t)===danger(a,S),[danger(a,t),danger(a,S)]);
-  const ht=hostility(a,t),hs=hostility(a,S);T("hostility jealousy term reads ghenOf for both",Math.abs((ht-hs))<16,[ht,hs]);
+  const ht=hostility(a,t),hs=hostility(a,S);if(eo)emoOn=eo;T("hostility jealousy term reads ghenOf for both",Math.abs((ht-hs))<16,[ht,hs]);
   // 3. the same events feed jealousy of an NPC: a night, a promotion, a flaunt
   for(const v of L){v.ghen=0;delete v.gp}
   const bw0=bestow;bestow=function(){};/* the random reward after a night (both sides, j8/j75) is not this test */
