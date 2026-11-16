@@ -276,9 +276,9 @@ function kg82Quiz(box,env){const Qs=kg82Bank(KG82_KIND[env.kind].b);let r=0,pts=
  function wrongs(){return cur.map((o,i)=>i).filter(i=>cur[i]!==Qs[r].a&&!gone.includes(i))}
  function show(){if(stop)return;if(r>=Qs.length){stop=true;return env.end(pts)}const q=Qs[r];cur=kg82Shuf([q.a].concat(kg82Shuf(q.w).slice(0,NW)));lock=false;gone=[];cost=0;auto=false;t0=tAct=performance.now();
   wrap.innerHTML=kg82Rows([[q.l,`<span class="ef t"><b>${q.q}</b></span>`]])+`<div class="kg82opts">${cur.map((o,i)=>`<button class="kgbtn" data-i="${i}">${o}</button>`).join("")}</div>`+
-   `<div class="kg82act"><button class="kgbtn" data-hint="1" id="kg82hint">Gợi ý<small>bỏ một lời sai, bớt một ít phần</small></button></div><div class="kg82tip" id="kg82tip"></div>`;
+   `<div class="kg82act"><button class="kgbtn" data-hint="1" id="kg82hint">Gợi ý<small>bỏ một lời sai, bớt một ít phần</small></button></div><div class="kpnote" id="kg82tip" style="visibility:hidden">&nbsp;</div>`;
   wrap.querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>pickA(+b.dataset.i));wrap.querySelector("#kg82hint").onclick=()=>hint(false);tip(IDLE?"Chưa rõ thì chạm Gợi ý, ma ma sẽ chỉ cho một lời không hợp.":"")}
- function tip(t){const e=wrap.querySelector("#kg82tip");if(e)e.textContent=t}
+ function tip(t){const e=wrap.querySelector("#kg82tip");if(e){e.textContent=t||"\u00a0";e.style.visibility=t?"":"hidden"}}
  function hint(isAuto){if(lock||stop)return;const w=wrongs();if(!w.length){tip("Chỉ còn lời đúng, cứ chọn.");return}const i=w[Math.floor(Math.random()*w.length)];gone.push(i);cost+=isAuto?AC:HC;tAct=performance.now();
   const b=wrap.querySelector(`button[data-i="${i}"]`);if(b){b.disabled=true;b.innerHTML=kg82Chip(`✗ ${cur[i]}`,"r")}
   tip(isAuto?"Ma ma khẽ nhắc: lời này chưa hợp.":"Lời này chưa hợp, bỏ đi."+(wrongs().length?"":" Còn một lời, chọn nó."));if(!wrongs().length){const h=wrap.querySelector("#kg82hint");if(h)h.disabled=true}}
@@ -439,7 +439,7 @@ window.startContest=startContest;window.playArt=playArt;
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .kg82act button small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
-.kg82quiz .kb{font-size:1rem}.kg82tip{min-height:1.2em;text-align:center;font-size:.85rem;color:var(--ink2,#5a3a0c);margin-top:4px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
+.kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 `;document.head.appendChild(st)})();
 
 /* lesson games (Tài nghệ tab, openMG) for the j85 arts: Thêu = the stitch-pattern game, Nấu nướng = the cooking quiz; same engines, 1–3 lesson points */
