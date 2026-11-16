@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw,#ktut,.kmov{display:none!important}'});
- const reset=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#kpop,.kmov').forEach(e=>e.remove());const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}Q.length=0});
+ const reset=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#kpop,.kmov').forEach(e=>e.remove());try{kitCatchOff()}catch(e){}const kc=document.getElementById('kxcatch');if(kc)kc.hidden=true;/* merge-train-4: a hand-hidden modal leaves the kit tap catcher */const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}Q.length=0});
  const states={milestone:()=>{},arc:()=>{const A=newThread67('td_an','m');S.st.ch.n=2;A.chap=2;A.i=1;pickNext67(A);A.due=0;A.dl=S.turn+6;A.hist.push('Hồi một: chọn đường');A.used.push(A.nb);S.st.M=A;S.st.ms=null},
   v1:()=>{S.st={step:1,done:0,tag:''};S.caseEv=2;S.foe='Lý Mai';S.foeDad='Thượng thư Lý';S.rank=1}};
  const res=[];const chk=(n,c)=>{res.push([n,!!c]);};
