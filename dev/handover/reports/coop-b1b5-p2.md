@@ -1,52 +1,33 @@
-NOT READY (worker rollover) — pushed review/coop-b1b5-p2 @ 2740a299bdf447c88dd47f6f456c7c4df67aeb29
+SẴN SÀNG KIỂM a9d25e287ff7e96ac420ac99f9715a54a3bc6bec
 
-# coop-b1b5-p2 — D21 co-op B1–B5 PART 2 + reviewer r1 fixes — worker report + HANDOVER
-Branch: review/coop-b1b5-p2 @ 2740a299 = review/coop-b1b5 d0f2260a + origin/main c4b0c58f + reviewer branch review/coop-b1b5-r1 8dd1626a
-(oldroom-r1 / oldsave-r1 tests) + part-2 code. START_CTX ≈ 2.5 % of the window; stopped at the rollover point (≈ 27 %).
-Details per item, numbers and gain/loss: dev/PROGRESS_review-coop-b1b5-p2.md on the branch. Worker NOT deployed; no Worker change
-(relays ride `act` k "ctm-p2" and optional `res` fields hd/tt/fest/pet — backward-compatible). coop-rejoin-xdev code untouched.
-No new UI part (standard kit dialogs only) → no KIT REQUEST.
+# coop-b1b5-p2 — D21 co-op B1–B5 PART 2 + reviewer r1 fixes — worker report (successor)
+Branch: review/coop-b1b5-p2 @ a9d25e287ff7e96ac420ac99f9715a54a3bc6bec (part 1 d0f2260a + origin/main c4b0c58f + reviewer tests 8dd1626a + part 2 2740a299 + r1 fixes).
+One reviewer checks part 1 + r1 fixes + part 2 together. Per-item details, numbers and gain/loss: dev/PROGRESS_review-coop-b1b5-p2.md.
+Worker NOT deployed; NO Worker change (new relays ride `act`: k "ctm-fam" mode fam/ask, k "ctm-tn" mode claim + versioned tn; all
+backward-compatible with old clients). main s13's coop-rejoin-xdev code untouched. Kit: only pushModal / pushDil → no KIT REQUEST.
+START_CTX ≈ 3 % of the window; finished ≈ 20 %.
 
-## Done
-- Part 2 (1) B1 friend as cung nữ: Mua chuộc = HER "Bạc lạ" card (Nhận / Bẩm chủ / Im lặng, BAL.coopBribe), NPC bribe → her j42 card,
-  her spy reports → MY proof (relay ev), srvMonth with my entry present.
-- (2) B2 one heir, world key S.hr (string), host heirMonth with her entry, both resolve after every rebuild, her Danh gain via setHeir.
-- (3) B3 j99succ ON in co-op: the new Emperor's mother chooses on her own client; the other player gets the base ending; the shared
-  year never moves (succAge / succEnd).
-- (4) B4 NPC item / kid / pregnancy / PET acts in host rivalsTurn / rivalsMonth / festival → res.fam / res.pet ops (thất lạc held by
-  THAT NPC, child to THAT NPC, kid death on her side, "add" for things given); festival uses HER registration (art + teacher),
-  Sức J71.cost (new j71 constant, the 4 literal −6 now read it), registration closed, result card.
-- (5) coop-pets.js setup updated for the Luân hồi flow.
-- r1 fix 2: DONE for rivalsTurn / rivalsMonth / festival (diff of her entry around each call). r1 fix 5: coop-b1 deterministic.
+## r1 fixes (all done)
+1. BLOCKING pos cap: pos = place/khắc/stats/name + hash `fh`; bag/kids/preg/fx7/pets on their own relay "ctm-fam", re-asked on a hash
+   mismatch (missed relay, rejoin). 152-item bag + 6 kids: bag JSON 22 293 chars, every pos < 4000 (coop-r2).
+2. NPC acts on her: runAct wrapper relays ANY NPC act on her entry (npcAct / mindRun / j70 / kv / due plans) as res.fam / res.pet ops;
+   the guest never runs NPC acts on the host's entry. Per-act test via mindRun: takeaway, petsteal, musk, kpoison.
+3. B5 seat card (OD:L1228): no waiting claim; LARGE compensation (promoFullSeat if promo-skip is in, else the same rule; BAL.psk.seat:
+   Bạc 4 × stipend, phong hiệu, 2 ngự ban, house favour, Danh +6; loss: consorts ghen +10); normal exam later. NOTE for merge:
+   jbal2 adds BAL.psk.seat only if absent (same key/values as review/promo-skip) — delete that guarded line when promo-skip lands.
+4. In-week night: host-authoritative (guest claims with the host version she saw; host decides, broadcasts the final, writes S.tn).
+5. coop-b1 loss checks tied to gains. 6. coop-pets 48/48 (night gate in its week end).
 
 ## Tests (LIVE Worker, host 755x1000@2 + guest 1180x820@2, one at a time)
 | Test | Result |
 |---|---|
-| dev/test/coop-p2.js (NEW) | 45/45 (B1 offer/accept/refuse/NPC bribe/spy proof; B2 host names her son, same heir both, guest heirMonth inert; B4 NPC theft → her thất lạc case, kid death, prize; festival with her registration; B3 her Ba đường card, 3-chapter epilogue, year unchanged, both reborn) |
-| coop-b1.js | 41/41 (was 27/39 before fix 5) |
-| coop-b2b5.js | 30/30 |
-| coop-e2e.js (E2E_TO=120000) | 59/59 |
-| coop-pets.js | 46/48 — FAIL "B ended the week (end sent)", "merged week keeps the late help": its week end predates the night gate |
-| oldroom-r1 / oldsave-r1 | not re-run (need the old build in .tmp/old.html) |
-Screenshots looked at: b1-guest-bribe 1180x820 (kit Việc dialog, 3 option cards), b4-guest-fest 1180x820.
-
-## HANDOVER — what the successor must do (in this order; foreman D s3 wants r1 fixes before review)
-1. **r1 fix 1 BLOCKING — pos > 4000 chars dropped by the LIVE Worker (coop/worker/src/index.js:168).** sendPos in jcoopworld carries
-   pets + fam {bag (full entries + ci), kids, preg, fake, fx7}. Make pos small: e.g. pos.fam = {h:<hash>, n} only, and send the bag/kids/
-   fx7 in their own `act` relay (k "ctm-p2", mode "fam") on change, split into chunks < cap (check the Worker's cap for `act` too);
-   liveStats/onPos must accept both shapes (old clients). Test: ≥150-item bag + 6 children, pos JSON < 4000, friend's place still updates.
-2. **r1 fix 3 — B5 "Ghế đã có người" card** (CW.seatWeek in jcoopworld): remove "đợi khi có ghế trống" (OD:L1228 bans a waiting claim)
-   and give the LARGE compensation per OD:L1228 (bạc + rare gifts, phong hiệu without rank change, favour for her family; cost: the
-   consorts' jealousy), numbers in BAL, wording VANPHONG; she later passes the normal exam. Read OD:L1228 verbatim (topic balance-economy).
-3. **r1 fix 4 — B2 in-week night**: tnRelay is peer-to-peer. Make the guest send a CLAIM (act k "ctm-tn" mode "claim"), the host decide
-   and broadcast the final {w,who} (also S.tn); the guest applies only the host's word; add a crossing test (both claim the same buổi).
-4. **r1 fix 5 rest**: case 5 of coop-b1 "child left B's house" passes vacuously when no child was gained — make it depend on the gain.
-5. **r1 fix 2 rest**: per-act test of NPC acts on the friend (NPC takeaway / petsteal / musk / kpoison with forced dice through the real
-   npcAct/mindRun path, not only COOPW.b4Run); check NPC acts outside rivalsTurn/rivalsMonth (rivalsBuoi runs withoutFriend → none).
-6. **r1 fix 6**: coop-pets.js week end → use coop-b2b5's week() helper (night gate), then 48/48.
-7. Re-run coop-p2, coop-b1, coop-b2b5, coop-e2e, coop-pets, oldroom-r1, oldsave-r1; first line "SẴN SÀNG KIỂM <sha>"; message the foreman.
-Known limits (write them in the final report): Dọa tố đối thực is never offered on the friend-servant (her affair is with an outer-court
-man, kept on her side); the j99succ epilogue is her personal ending — the shared world goes on under the host's new Emperor.
+| dev/test/coop-r2.js (NEW) | 47/47 (big chest, NPC per-act, night crossing, full seat, merged week no copies) |
+| coop-p2 | 45/45 (one run 42/45: NPC bribe card raced the player's — test race, rerun green) |
+| coop-b1 / coop-b2b5 / coop-e2e (E2E_TO=120000) / coop-pets | 41/41 / 30/30 / 59/59 / 48/48 |
+| oldroom-r1 / oldsave-r1 (old = origin/main build in .tmp/old.html) | 16/16 / 16/16 |
+Screenshots looked at: seat card 1180x820 + 755x1000 (kit BÁO dialog, gains green, jealousy red, no overflow).
+Known limits: Dọa tố đối thực is never offered on the friend-servant (her affair is with an outer-court man, kept on her side);
+the j99succ epilogue is her personal ending — the shared world goes on under the host's new Emperor.
 
 ## Owner questions
 None.
