@@ -26,7 +26,7 @@ main at start = eba64ead4.
 | coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | PASS 24578406 (archived) |
 | servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | FAIL 3 items → servant-mline-r2 (archived) |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | SẴN SÀNG KIỂM 30c0931d (archived) → r1 reviewer |
-| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | SẴN SÀNG KIỂM 319dce59 (worker archived) → reviewer danh-balance-r1 session_01DgYSWncjcb6DFsEZJo6AvA RUNNING |
+| Danh balance recheck (act-dedupe flag 1) | review/danh-balance-r1 @9a1133f0 | opus | PASS (value-neutral ONE-CORE fixes; P1–P3 proposals wait for owner, see QUESTIONS; reviewer archived) |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | worker session_01DgYSWng42neb9J7kedxhVp RUNNING (10:55Z) |
@@ -48,6 +48,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+READY review/danh-balance-r1 9a1133f0bdeb1c649e5fb9d1546d779f59154b80 (Danh gates/succession/charity numbers now read BAL.danhG/succN/charity — value-neutral, proven by literal-vs-BAL table + runtime probe; no BAL value changed; report reports/review-danh-balance-r1.md)
 READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op guest maid can rise via guest→host request; reviewer fixed NPC over-cap on host + srvout request; trial merge with coop-b1b5-p2: only jbal2 conflict, keep both; report reports/review-coop-guest-maid-r1.md)
 - READY review/slap-mg-r3 6444443b9abea1c78daac2a6a6a1b5dab8d0e9db (slap minigame §79: tiers via B's mgTier, skilled nặng 26 %, demo+hint, ONE CORE, Gọn mode; SHIP AFTER/WITH review/mg-balance — branch has mg-balance 96736fff, not its tip d1ca11be: re-merge tip + rerun dev/test/slap-mg.js before ship; ART NEEDED 7 files in reports/slap-mg-r2.md → art owner)
 - READY review/servant-mline-r3 b82d3bf3b0bc6096c92eebaff5ae91731868b8ac (servant-system part C jmline active NPC maid line + gain/loss caught chance per act + co-op host guard; contains part A servant-system-r1; main 18fb8252 ancestor; report reports/review-servant-mline-r3.md)
@@ -66,7 +67,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 
 ## QUESTIONS
 - (s4 10:58Z, for main s15 / owner) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
-- (s4 10:58Z, owner OK needed) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed yet; value-neutral one-core fixes are under review.
+- (s4 10:58Z, owner OK needed) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed; one-core fixes PASS (danh-balance-r1). Reviewer: P1 gain measured +12.5 Danh/life, not the +55 arithmetic (1 seed).
 - KIT REQUEST (for the main kit keeper, from entry-exam): a dedicated "nhập cung" entry scene on kmStage (Ngọ môn gate opens, sedan/procession crosses, gate closes, then the rank chip, ending with the §81 button); variants by origin group (consort sedan / bridal sedan + envoy (+horses for bd) / maids behind a mama (cnv) / Càn Thanh corridor at night (cn)). Until then the entry uses kitPersonReveal. Full text + art list (13 rows) in dev/handover/reports/entry-intro.md → ART NEEDED for main samples / C.
 - FOR FOREMAN B (mg-balance), from entry-exam: the 'tuyen' occasion tier reads "Khó" at art level 0 — suggest [1,0].
 - FOR MAIN s15 / kc-roads fixer (BAL.kcv, kc-roads r1 FAIL 1): entry-exam bots show home roads give a better selection than 'Vào cung ngay' (cnv skilled top 94 % vs 77 %, nc 93 % vs 80 %) — count it when retuning.
@@ -139,6 +140,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:13Z: danh-balance-r1 PASS 9a1133f0 → READY; reviewer archived. Reviewer note for the P1 proposal: '+55 Danh' is arithmetic; measured +12.5 (1 seed, overlapping CIs; run_par.js not reproducible per seed).
 - 11:06Z: close-maid SẴN SÀNG KIỂM 0aa7fdd9 (relayed by s3) → opus reviewer close-maid-r1; worker archived.
 - 11:02Z: coop-guest-maid-r1 PASS 3a875687 → READY; reviewer archived.
 - 10:58Z: danh-balance SẴN SÀNG KIỂM 319dce59 → reviewer claimed. emperor-visit worker stopped (poison half blocked by classifier) → told to do visit half only; poison half parked in QUESTIONS.

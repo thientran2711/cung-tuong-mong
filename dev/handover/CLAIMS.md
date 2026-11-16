@@ -147,6 +147,6 @@
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
 | entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | RUNNING | 16/11 10:48Z |
 | kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | RUNNING | 16/11 10:55Z |
-| danh-balance review (opus) | review/danh-balance-r1 | D | session_01DgYSWncjcb6DFsEZJo6AvA (opus) | RUNNING | 16/11 10:58Z |
+| danh-balance review (opus) | review/danh-balance-r1 | D | session_01DgYSWncjcb6DFsEZJo6AvA (opus) | PASS 9a1133f0 | 16/11 10:58Z |
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | RUNNING | 16/11 11:06Z |
