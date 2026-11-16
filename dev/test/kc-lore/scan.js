@@ -11,8 +11,7 @@ const URL=process.argv[2],OUT=process.argv[3]||'';const sleep=ms=>new Promise(r=
   const skip=async()=>{for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const k=document.getElementById('kload');if(k){k.remove();return 1}const r=document.getElementById('kroul');if(r&&r.isConnected){const x=[...r.querySelectorAll('button')].find(y=>/Bỏ qua/.test(y.textContent));if(x){x.click();return 1}}return 0});if(!n)break;await sleep(700)}};
   await p.goto(URL,{waitUntil:'domcontentloaded'});await sleep(2500);await p.evaluate(()=>{try{localStorage.clear()}catch(e){}});await p.reload({waitUntil:'domcontentloaded'});await sleep(3000);await skip();
   await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await sleep(2500);await skip();
-  await p.evaluate(og=>{for(let i=0;i<60&&(S.srv||(typeof isSrv==='function'&&isSrv())||!KC.ok.includes(S.origin.k));i++){try{store.set(NL_KEY,null)}catch(e){}start()}
-   if(S.origin.k!==og&&!S.srv){S.origin=ORIGINS.find(x=>x.k===og);nlCard()}},o);await sleep(600);await skip();
+  await p.evaluate(og=>{for(let i=0;i<400&&S.origin.k!==og;i++){try{store.set(NL_KEY,null)}catch(e){}start()}},o);await sleep(600);await skip();
   await p.evaluate(()=>{const b=document.querySelector('#modal [data-kcp="nha"]');b.click()});await sleep(700);
   for(let i=0;i<40&&await p.evaluate(()=>!!document.getElementById('kroul'));i++)await sleep(500);
   await p.evaluate(()=>{document.querySelector('#modal button[data-nl="ok"]').click()});await sleep(1500);
