@@ -1,7 +1,7 @@
-SẴN SÀNG KIỂM 8beaff4beca710cc4b763cb37e67d1adbc57e28a
+SẴN SÀNG KIỂM f5305341eb03ef951034a812a7f276265ecad79d
 # Report: review/story14-p1-r2 (fix of reviewer FAIL dev/handover/reports/story14-p1-r1.md) — worker r2
 
-Branch `review/story14-p1-r2` from review/story14-p1-r1 @ 8ab69094, merged with origin/main up to c88edbf2 (3 merges; conflicts only in
+Branch `review/story14-p1-r2` from review/story14-p1-r1 @ 8ab69094, merged with origin/main up to 0ce59361 (4 merges; conflicts only in
 assemble.py list → `jst14.js` after `j67.js`, jtabs Mệnh truyện chip block → main's `data-chap` chips + jchap inline kept, built files regenerated).
 Owner lines read verbatim: OD:L1242–L1264, L1288, L1289, 16/11 13:20Z/13:25Z/13:30Z (titles, forced events, item conservation: nothing in
 them touches this frame). START_CORE/WORKER, topic story-roads.md, VANPHONG.
