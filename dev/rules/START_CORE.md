@@ -49,3 +49,4 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [HANDOVER.md:L84] 1. Samsung Galaxy Z Fold, PORTRAIT: 755x1000 @2
 [HANDOVER.md:L85] 2. iPad, LANDSCAPE: 1180x820 @2 (iPad Air/10th gen) and 1366x1024 @2 (iPad Pro 12.9)
 [HANDOVER.md:L86] Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
+[OD:L1267] - (16/11 07:25Z, s11) OWNER RULE (ONE CORE): every number in the game comes from ONE shared rulebook (BAL); no part of the game may compute or hard-code its own number. Example of a violation: one place says Hoàng hậu needs 50 points, another says 55 — that alone breaks the one-core rule. Whole-game audit: every threshold/price/odds/gain shown to the player or used by rules must read the same BAL constant; text must print the constant, never a typed number. (Reaffirms OD:L257–258 "rules-one-source" as a standing core law.)

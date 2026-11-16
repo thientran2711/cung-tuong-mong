@@ -13,7 +13,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 ## Start files
 
 - dev/rules/START_ART.md (13.2 KB): any art work, incl. the main chat making samples (tools, Magnific, CDN, sizes, samples vs mass production, style anchor)
-- dev/rules/START_CORE.md (11.0 KB): binding laws for EVERY role (kit first, fix the whole group, priority rule #1, canon overwrite, verbatim rules, low context, devices)
+- dev/rules/START_CORE.md (11.6 KB): binding laws for EVERY role (kit first, fix the whole group, priority rule #1, canon overwrite, verbatim rules, low context, devices)
 - dev/rules/START_FOREMAN.md (6.8 KB): main chat + foremen (sessions, claims, rollover, models, agent caps, work sizing)
 - dev/rules/START_MAIN.md (6.8 KB): main chat only (what the main chat does itself, how it talks to the owner)
 - dev/rules/START_REVIEWER.md (2.9 KB): reviewers only
@@ -29,7 +29,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/art-items-pets.md (8.7 KB): item icons, gift art, pets
 - dev/rules/topic/art-other.md (18.4 KB): other art rules
 - dev/rules/topic/art-scenes.md (18.2 KB): rooms, backdrops, map art, seasons and time-of-day art
-- dev/rules/topic/balance-economy.md (21.5 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
+- dev/rules/topic/balance-economy.md (21.7 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
 - dev/rules/topic/coop.md (3.6 KB): co-op / playing with a friend
 - dev/rules/topic/handover-restatements.md (68.4 KB): owner rules as restated in handover/foreman/queue/ledger files (OD lines win where they differ)
 - dev/rules/topic/kit-ui.md (20.3 KB): shared kit, layout, panels, cards, tabs, dialogs, Fold/iPad screens
