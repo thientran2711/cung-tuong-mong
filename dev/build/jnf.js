@@ -64,9 +64,11 @@ if(typeof chooseM==="function"){const cm0=chooseM;chooseM=function(){const b=S&&
 
 /* ---------- 3. the commit at "Sang ngày mới" ---------- */
 function steals(){try{if(typeof stealPass==="function"&&S.tonight){const t=tonightOf();if(t)stealPass(t,{live:true})}}catch(e){console.error(e)}}
-function hold(){S.buoi=B4();try{if(!window.__bot&&Q.length)showModal()}catch(e){}try{render()}catch(e){}}
-function herNight(){S.buoi=B4();try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
- IN=1;try{nightScene()}finally{IN=0}try{if(!window.__bot)showModal()}catch(e){}try{render()}catch(e){}}
+/* the modal is shown once the caller's own steps (nextBuoi wrappers, curtain) are done */
+const showSoon=()=>{if(window.__bot)return;setTimeout(()=>{try{if(S&&Q.length&&$("modal").hidden)showModal()}catch(e){}},0)};
+function hold(){S.buoi=B4();try{render()}catch(e){}showSoon()}
+function herNight(){S.buoi=B4();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
+ IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;

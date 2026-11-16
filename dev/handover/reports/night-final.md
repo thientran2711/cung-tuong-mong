@@ -50,3 +50,24 @@ Not changed (one record already, decided by her at the moment): "Tiến cử <ma
 Save: new fields S.nfP / nfF / nfC / nfN / nfFin / nfW (small numbers); old saves: a morning-flipped pick of that day is kept (S.nightWhy of the day = flipped).
 
 ## 3. Tests
+| test | result (build of the last commit) |
+|---|---|
+| `dev/test/night-final.js` NEW (flip at tối + her night spent once at day end · her steal = one record, A none · NPC↔NPC steal: thief only, true Sổ ghi line · NPC takes her held night at the commit · his own visit settled, spent once · invariant: ≤ 1 night record per day over 40 played days) | 6/6 PASS, 0 page errors |
+| `dev/test/night-steal-unit.js` (review/night-steal-2) | adapted: the flip→stolen check now runs the day-end commit; reset avoids her cycle tuần. 27-29/29; the remaining random FAILs ("…NPC paid the player's cost", "at most maxTry", "HER Tranh sủng", oSteal 95 rolls) are pre-existing flakiness — the base build 609c1bdd shows the same (1 FAIL in 3 runs) |
+| `dev/test/night-day.js` | adapted to the rule (win/accept = HOLD; the night plays at "Sang ngày mới", then the next morning; "morning" win does not end the day): steal/road/morning/stale PASS; ksp re-run after the stub (NPC last tries are stubbed in this test) — see handover |
+| `dev/test/log-sync-night.js` | 4/4 PASS |
+| `dev/test/coop-e2e.js` (live Worker) | RUNNING at hand-over — successor re-runs |
+| `dev/test/coop-night.js`, `dev/test/cardflip.js`, old save | NOT RUN yet — successor |
+
+Fix found by night-day: a night started inside endTurn must show its modal after the nextBuoi wrappers (showSoon) and must not leave used ≥ 4 (j6 auto "Sang ngày mới" between dialogs).
+
+## 4. HANDOVER (worker rolled over at START_CTX 4 % + 25 %; coordinator opens the successor)
+Branch review/night-final (worktree was /home/user/wt/night-final, sparse). Last commit = see `git log -1 origin/review/night-final`.
+Successor steps:
+1. Build: `bash dev/site/build_site.sh`; serve the worktree root on a free port (python3 -m http.server).
+2. Re-run: `node dev/test/night-final.js <url>` (expect 6/6), `node dev/test/night-day.js <url>` (expect ok:true; ksp case was fixed by stubbing stealPass just before hand-over, not re-run), `node dev/test/night-steal-unit.js index.html`.
+3. Co-op (live Worker): `node dev/test/coop-e2e.js <outdir>` and `node dev/test/coop-night.js <outdir>`. Risk to watch: the guest's day-end commit waits for the host's `fin` (jnf.js §4: guest endTurn → hold() until a {k:"ctm-nf",fin:1} arrives, then COOPW.allowN + nextBuoi). If a run hangs at the guest's "Sang ngày mới", check COOPW.tr / nfDebug() on both seats. Also check: the host's flip now includes the friend card (jflip deck), the guest gets the ksp card when the host's Emperor picks her.
+4. `node dev/test/cardflip.js <url> <outdir> 755x1000,1180x820,1366x1024,844x390 2 few` (the scene now plays at the start of tối) + old save: `node dev/test/night-steal-oldsave.js _old.html index.html` (_old.html = `git show origin/main:index.html`, served from the worktree root, not committed).
+5. Shots 755x1000 + 1180x820 of the tối flip + the night at "Sang ngày mới" (scratch only, never in git).
+6. Report SẴN SÀNG KIỂM <sha> to MAIN s22 (session_01UV1SzjhT28XQmRt2EHNffg), BIG (owner rule + co-op).
+
