@@ -54,9 +54,9 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const
    has('gloss Quẻ',KIT_GLOSS["Quẻ"],/13 bạc và 3 khắc/);has('HX.lot',HX.lot,/13 bạc và 3 khắc/);has('gloss khắc',KIT_GLOSS["khắc"],/7 khắc/);has('HX.buoi',HX.buoi,/7 khắc/);
    has('gloss Bổng lộc',KIT_GLOSS["Bổng lộc"],/\(41–/);
    has('night card',nx(1),new RegExp('Sủng \\+'+nightG(3)+'.*Sủng \\+9, Ân tình \\+6'));if(nightG(0)!==9||nightA(0)!==6)bad.push(['nightG/A',nightG(0),nightA(0)]);
-   has('sneak line',accSneakLine("thu",1),/Danh -17/);has('sneak pen',accSneakPen("dtd").txt,/Danh -23/);
+   has('sneak pen',accSneakPen("vuon").txt,/Danh -17/);has('sneak pen heavy',accSneakPen("dtd").txt,/Danh -23/);if(accSneakPen("vuon").danh!==-17)bad.push(['sneak rule',accSneakPen("vuon")]);
    has('walk',travel(S.place==="home"?"home":S.place,S.place==="home"?"vuon":"home")+'',/^[56]$/);has('walk text',typeof walkFarK==="function"?walkFarK():'',/^6$/);
-   used=0;if(!can(7)||can(8))bad.push(['can() ≠ BAL.time.khac',can(7),can(8)]);used=6;has('whyTime khắc',whyTime(2),/hết khắc/);
+   used=7;if(can(1))bad.push(['can(1) with the buổi spent (BAL.time.khac)']);used=6;if(!can(1))bad.push(['can(1) with 1 khắc left (BAL.time.khac)']);
    used=0;S.suc=10;has('Sức floor',whyTime(2),/11/);if(can(2))bad.push(['can(2) with Sức under sucMin']);S.suc=12;if(!can(2))bad.push(['can(2) with Sức over sucMin']);
   }catch(e){bad.push(['ERR',e.message])}
   finally{const K=JSON.parse(keep);for(const k of ['time','lot','walk','sneak','srvAge','age','night'])Object.assign(BAL[k],K[k]);BAL.pay.splice(0,BAL.pay.length,...K.pay);used=used0;S.suc=suc0;S.buoi=buoi0}

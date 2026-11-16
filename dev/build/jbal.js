@@ -39,15 +39,15 @@ const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · 
   empAge:[19,6],power0:30,npcConc:[.9],truongW:8,momAge:17}};
 /* ================= ONE CORE (owner 16/11 07:25Z, review/one-core): rule numbers that used to be typed in several modules.
    Every check and every player-visible text reads these; dev/test/one-core-guard.js fails on a new typed copy.
-   time.khac = khắc in one buổi (4 buổi a tuần = B4N, jtime4); time.sucMin = an act of 2+ khắc needs Sức at least this.
-   lot = re-draw of the weekly lot (Gieo lại quẻ): bac bạc + k khắc.  walk = khắc to walk to a near / far place (j9 travel); farWet = far on a wet day (rain, snow).
+   time.khac = khắc in one buổi (4 buổi a tuần = B4N, jtime4); time.sucMin = an act of 2+ khắc needs Sức at least this (kiệt sức floor, j76/j80 hotfix: was typed 20 in old texts, the live rule is 5).
+   lot = re-draw of the weekly lot (Gieo lại quẻ): bac bạc + k khắc.  walk = khắc to walk to a near / far place (j9 / jclose travel; weather never adds walking khắc, owner 15/11 06:40Z OD:L351).
    sneak = Danh lost when caught sneaking in (danh; the Emperor's halls: heavy, a heavy offence) / when seen at Trường Môn viện (seen).
    srvAge = servant start (cnv): age she is asked about leaving (ask), age a maid must leave (out), age a ma ma retires (mama).
    age.sac* = once she is older than sacFrom her Sắc falls sacLoss a year, never below sacMin (everyone); age.betroth / wed = a child may be promised /
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:20},lot:{bac:10,k:1},walk:{near:1,far:2,farWet:3},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6},night:{sung:3,an:2}});
 try{Object.assign(SEATCAP,BAL.seat)}catch(e){}
 /* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
