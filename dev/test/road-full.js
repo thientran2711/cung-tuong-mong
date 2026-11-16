@@ -31,6 +31,7 @@ const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (defaul
  chk('at least one full road registered',roads.length>0,roads);
  for(const rd of roads){const k=rd.split('_')[0];
   for(let L=0;L<NLIV;L++){const R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand']);
+   if(!R.seq){chk(`${rd} L${L+1}: no error`,false,R.err||R);continue}/* __run returned {err} (B2 finding) */
    console.log(rd,'life',L+1,R.n,R.all?'ALL':'',R.months+'m','fin='+R.fin,'|',R.seq.join(' '),R.err||'');
    const ns=R.seq.map(x=>+x.split(':')[0]);
    chk(`${rd} L${L+1}: no error`,!R.err,R.err);
