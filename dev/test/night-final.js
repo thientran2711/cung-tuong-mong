@@ -1,52 +1,74 @@
-/* night-final (owner OD 16/11 22:25Z canon, refines 19:45Z): the flip at the start of buổi tối names only the intended consort; a won try takes the night at once; else the night is committed
-   ONCE at "Sang ngày mới" for exactly ONE woman (whoever holds it then); the loser gets no night record.
+/* night-final (owner OD 16/11 22:45Z FINAL + 22:50Z defence + 22:10Z no speed): tối keeps its 4 khắc; the card flip plays when tối's 4th khắc ends;
+   right after it a forced choice for every player (attackers: Tranh sủng / Chặn ngự giá / Thôi; the flipped one: Giữ chân Hoàng thượng / Thôi;
+   10 s countdown, timeout = Thôi; no khắc, no cost); NPCs choose at the same moment; ONE resolve (defence first: success → every attack −1 odds rung);
+   exactly ONE night record. Tranh sủng / Chặn ngự giá exist in no act list.
    usage: node dev/test/night-final.js <url>   (exit 0 = all pass) */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
- await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function',null,{timeout:0});await p.waitForTimeout(2000);
- await p.evaluate(()=>{window.T={};
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function'&&typeof nfOdds==='function',null,{timeout:0});await p.waitForTimeout(2000);
+ await p.evaluate(()=>{window.T={ch:"Thôi",seen:[]};
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
+   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;T.ch="Thôi";T.seen=[];
    const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
-  /* answer every open dialog with its first option that is not a way out (Cáo bệnh / Tiến cử) */
-  T.drain=(max=80)=>{const seen=[];for(let n=0;n<max&&Q.length;n++){const m=Q[0];seen.push(m.t);const o=m.opts||m.o;
-    if(o&&o.length){let i=o.findIndex(x=>!/Cáo bệnh|Tiến cử|Thôi/.test(x.n||""));if(i<0)i=0;try{chooseM(i)}catch(e){Q.shift()}if(Q[0]===m)Q.shift()}else Q.shift()}return seen};
+  /* answer every open dialog: the flip choice (pid nfch) with T.ch; others with the first option that is not a way out */
+  T.drain=(max=80)=>{const seen=[];for(let n=0;n<max&&Q.length;n++){const m=Q[0];seen.push(m.pid||m.t);const o=m.opts||m.o;
+    if(o&&o.length){let i=m.pid==="nfch"?o.findIndex(x=>x.n===T.ch):o.findIndex(x=>!/Cáo bệnh|Tiến cử|Thôi/.test(x.n||""));if(i<0)i=o.findIndex(x=>x.n==="Thôi");if(i<0)i=0;
+     if(m.pid==="nfch")T.seen.push(o.map(x=>x.n).join("/"));try{chooseM(i)}catch(e){Q.shift()}if(Q[0]===m)Q.shift()}else Q.shift()}return seen};
   T.noCyc=()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk(),rk:wk(),rv:"lui"})};/* not her cycle tuần (jcycle would lock her night) */
-  T.toEvening=()=>{let g=0;T.noCyc();while((S.buoi||0)<B4L&&g++<8){T.drain();used=4;nextBuoi()}};
+  T.toEvening=()=>{let g=0;T.noCyc();while((S.buoi||0)<B4L&&g++<8){T.drain();used=4;nextBuoi()}T.drain()};
   T.endDay=()=>{const d=wk();T.noCyc();for(let g=0;g<12&&wk()===d;g++){T.drain();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi()}T.drain()};
   T.recs=L=>{const o={me:S.nights||0};L.forEach((v,i)=>o["r"+i]=v.nights||0);return o};
-  T.only=who=>{if(who===S)S.cyb=Object.assign(S.cyb||{},{lie:wk()});/* not her cycle tuần (her card would be locked: jcycle) */const nc=nightCh;nightCh=function(p){p=p||S;return p===who?100:0};const rr=roll;roll=function(x){return x===90||x===65?true:rr.apply(this,arguments)};return()=>{nightCh=nc;roll=rr}};
+  T.only=who=>{if(who===S)S.cyb=Object.assign(S.cyb||{},{lie:wk()});const nc=nightCh;nightCh=function(p){p=p||S;if(!(S.nfX&&S.nfX.d===wk()&&S.nfX.st==="wait"))return nc.apply(this,arguments);return p===who?100:0};/* only the tablet itself is steered */const rr=roll;roll=function(x){return x===90||x===65?true:rr.apply(this,arguments)};return()=>{nightCh=nc;roll=rr}};
+  T.noNpc=()=>{const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});const kp=BAL.steal.keep.npcP;BAL.steal.keep.npcP=0;return()=>{window.stealWant=sw;BAL.steal.keep.npcP=kp}};
+  /* the flip of tonight only (the choice opens at once in bot mode); `who` gets the card */
+  T.flipTo=who=>{const un=T.only(who);const d=wk();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi();un();return wk()===d};
+  T.seq=a=>{const mr=Math.random;let i=0;Math.random=()=>i<a.length?a[i++]:.5;return()=>{Math.random=mr}};
  });
  const R={};const ok=(k,c,info)=>{R[k]={pass:!!c,info}};
- /* 1. the flip waits for the evening; it picks HER: accepting the summons spends nothing until the day ends */
- let r=await p.evaluate(()=>{const L=T.fresh();const d0=wk();const a={t0:S.tonight,nfP:S.nfP===wk()};const un=T.only(S);const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});/* timing only: NPC last tries are case 4 + night-multi.js */
-  T.toEvening();un();const k=Q.map(m=>m.pid);a.atTon=S.tonight;a.kspQ=k.includes("ksp");const n0=S.nights||0;T.drain();a.held=S.tonight==="me";a.spentEarly=(S.nights||0)-n0;
-  a.prepOpen=Q.some(m=>m.pid==="prep");const L2=L.map(v=>v.nights||0);T.endDay();a.me=(S.nights||0)-n0;a.npc=L.reduce((s,v,i)=>s+(v.nights||0)-L2[i],0);a.day=(S.nightLog||[]).slice(-1)[0]===d0;a.nextDay=wk()===d0+1;window.stealWant=sw;return a});
- ok("1 flip at tối, her night spent once at day end",r.t0==null&&r.nfP&&r.atTon==="me"&&r.kspQ&&r.held&&r.spentEarly===0&&!r.prepOpen&&r.me===1&&r.npc===0&&r.day&&r.nextDay,r);
- /* 2. A's card turned; SHE steals it in the evening: only she is recorded, A gets nothing */
- r=await p.evaluate(()=>{const L=T.fresh();const A=L[0];const un=T.only(A);T.toEvening();un();const a={pickA:S.tonight===A};const b=T.recs(L);
-  stealWin(S,A,"feign");T.drain();a.held=S.tonight==="me";a.early=(S.nights||0)-b.me;T.endDay();const e=T.recs(L);a.me=e.me-b.me;a.A=e.r0-b.r0;a.others=L.slice(1).reduce((s,v,i)=>s+e["r"+(i+1)]-b["r"+(i+1)],0);return a});
- ok("2 her steal: played at once, one record (hers), A none",r.pickA&&r.held&&r.early===1&&r.me===1&&r.A===0&&r.others===0,r);
- /* 3. A's card turned; NPC B steals it: B recorded, A none, the Sổ ghi line says he was invited to B (not 'B's card turned') */
- r=await p.evaluate(()=>{const L=T.fresh();const A=L[0],B=L[1];const un=T.only(A);T.toEvening();un();const b=T.recs(L);const s0=S.logSeq||0;
-  stealWin(B,A,"feign");T.endDay();const e=T.recs(L);const logs=S.logs.slice(0,(S.logSeq||0)-s0).join(" ");
-  return{A:e.r0-b.r0,B:e.r1-b.r1,me:e.me-b.me,line:/được mời sang cung/.test(logs),wrong:new RegExp("thẻ bài của "+B.name+" được lật").test(logs)}});
- ok("3 NPC↔NPC steal: B only, true line",r.A===0&&r.B===1&&r.me===0&&!r.wrong,r);
- /* 4. HER card turned and accepted (held); in an evening khắc, after she had it, NPC B's try wins: she gets no night, the thief does (OD 22:25Z) */
- r=await p.evaluate(()=>{const L=T.fresh();const B=L[1];const un=T.only(S);T.toEvening();un();T.drain();const held=S.tonight==="me";const b=T.recs(L);
-  const sw=window.stealWant;window.stealWant=v=>v===B?{u:1,p:.999,mode:"feign",o:95}:{u:0,p:0,mode:null};B.duc=80;B.suc=80;B.confined=0;
-  const mr=Math.random;Math.random=()=>.01;try{used=0;spend(1);render()}finally{Math.random=mr}const lost=S.tonight===B&&Q.some(m=>m.t==="Kính sự phòng");
-  T.endDay();window.stealWant=sw;const e=T.recs(L);return{held,lost,me:e.me-b.me,B:e.r1-b.r1,tot:Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0)}});
- ok("4 NPC takes her held night in an evening khắc",r.held&&r.lost&&r.me===0&&r.B===1&&r.tot===1,r);
- /* 5. the Emperor's own visit (event) during the day: the night is hers and decided at once; it plays now (one record), the day ends */
+ /* 0. the two acts are in no list: deck, person menu group, NPC harm bands, ACT.ok */
+ let r=await p.evaluate(()=>{const L=T.fresh();S.tonight=L[0];let deck=[];try{const d0=deal;deal();deck=JSON.stringify(S.deck||S.hand||[])}catch(e){}S.tonight=null;
+  return{deck:/Tranh sủng|Chặn ngự giá/.test(deck),rv:RVGRP.some(g=>g[1].includes("steal")||g[1].includes("road")),bands:BANDS.some(g=>(g[2]||[]).includes("steal")||(g[2]||[]).includes("road")),
+   okS:ACT.steal.ok(S,L[0]),okR:ACT.road.ok(S,L[0])}});
+ ok("0 no Tranh sủng / Chặn ngự giá act anywhere",!r.deck&&!r.rv&&!r.bands&&!r.okS&&!r.okR,r);
+ /* 1. no flip during the day; tối keeps 4 khắc; the flip at the end of tối; she is flipped: Giữ chân / Thôi; Thôi + nobody → her night, one record */
+ r=await p.evaluate(()=>{const L=T.fresh();const un=T.noNpc();const d0=wk();T.toEvening();const a={ton:S.tonight==null,nfP:S.nfP===wk(),khac:4-used,kspQ:Q.some(m=>m.pid==="ksp")};
+  const b=T.recs(L);T.flipTo(S);a.choice=Q.some(m=>m.pid==="nfch");a.opts=(Q.find(m=>m.pid==="nfch")||{opts:[]}).opts.map(x=>x.n).join("/");T.ch="Thôi";T.endDay();const e=T.recs(L);un();
+  a.me=e.me-b.me;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);a.day=(S.nightLog||[]).slice(-1)[0]===d0;a.next=wk()===d0+1;return a});
+ ok("1 flip at the end of tối; she is flipped: Giữ chân / Thôi; her night, one record",r.ton&&r.nfP&&r.khac===4&&!r.kspQ&&r.choice&&r.opts==="Giữ chân Hoàng thượng/Thôi"&&r.me===1&&r.tot===1&&r.day&&r.next,r);
+ /* 2. A flipped; she picks Tranh sủng and wins: her night, A none, no cost */
+ r=await p.evaluate(()=>{const L=T.fresh();const A=L[0];const un=T.noNpc();T.toEvening();const b=T.recs(L);T.flipTo(A);const a={pickA:S.tonight===A,opts:(Q.find(m=>m.pid==="nfch")||{opts:[]}).opts.map(x=>x.n).join("/")};
+  const s0=S.suc,d0=S.duc;T.ch="Tranh sủng";const rs=T.seq([.001]);const q=[];const m0=Q[0];T.drain(1);rs();a.cost=(S.suc!==s0)||(S.duc!==d0);a.sum=Q.some(m=>m.pid==="nfsum");T.endDay();un();const e=T.recs(L);a.me=e.me-b.me;a.A=e.r0-b.r0;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);return a});
+ ok("2 her Tranh sủng wins: summons, one record (hers), A none, no cost",r.pickA&&r.opts==="Tranh sủng/Chặn ngự giá/Thôi"&&!r.cost&&r.sum&&r.me===1&&r.A===0&&r.tot===1,r);
+ /* 3. A flipped; NPC B attacks at the same moment and wins; she said Thôi: B recorded, true Sổ ghi line */
+ r=await p.evaluate(()=>{const L=T.fresh();const A=L[0],B=L[1];const kp=BAL.steal.keep.npcP;BAL.steal.keep.npcP=0;const sw=window.stealWant;window.stealWant=v=>v===B?{u:1,p:.999,mode:"feign",o:95}:{u:0,p:0,mode:null};
+  const os=oSteal;oSteal=function(a,m){return a===B?95:os.apply(this,arguments)};B.confined=0;
+  T.toEvening();const b=T.recs(L);const s0=S.logSeq||0;T.flipTo(A);T.ch="Thôi";const rs=T.seq([.001,.001,.001,.001]);T.drain();rs();T.endDay();window.stealWant=sw;oSteal=os;BAL.steal.keep.npcP=kp;
+  const e=T.recs(L);const logs=S.logs.slice(0,(S.logSeq||0)-s0).join(" ");return{A:e.r0-b.r0,B:e.r1-b.r1,me:e.me-b.me,wrong:new RegExp("thẻ bài của "+B.name+" được lật").test(logs)}});
+ ok("3 NPC attack at the flip: B only, true line",r.A===0&&r.B===1&&r.me===0&&!r.wrong,r);
+ /* 4. SHE is flipped, B (odds 85 = Rất chắc) attacks. (a) she presses Giữ chân and it rolls a success → B drops to Chắc and fails on a roll of 80 → her
+       night + Sủng gain; (b) the same roll but she says Thôi → B wins (80 < 85), she gets the Kính sự phòng notice, B the night */
+ r=await p.evaluate(()=>{const out={};for(const ch of ["Giữ chân Hoàng thượng","Thôi"]){const L=T.fresh();const B=L[1];const sw=window.stealWant;window.stealWant=v=>v===B?{u:1,p:.999,mode:"feign",o:85}:{u:0,p:0,mode:null};
+   const os=oSteal;oSteal=function(a,m){return a===B?85:os.apply(this,arguments)};B.confined=0;B.sung=0;S.sung=50;
+   T.toEvening();const b=T.recs(L);T.flipTo(S);const sg=S.sung;T.ch=ch;const rs=T.seq(ch==="Thôi"?[.80]:[.01,.80]);T.drain(1);rs();const a={sung:S.sung-sg,notice:Q.some(m=>m.t==="Kính sự phòng"&&!m.opts),x:JSON.parse(JSON.stringify(S.nfX||{}))};
+   T.endDay();window.stealWant=sw;oSteal=os;const e=T.recs(L);a.me=e.me-b.me;a.B=e.r1-b.r1;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);out[ch]=a}
+  out.gain=BAL.steal.keep.gain;out.rung=[nfRungDown(85,1),nfRungDown(50,1),nfRungDown(20,1),word(nfRungDown(85,1))];return out});
+ {const g=r["Giữ chân Hoàng thượng"],t=r["Thôi"];
+  ok("4 defence: success drops every attack one rung; Thôi lets B win",g.x.def&&g.x.def.ok===1&&g.me===1&&g.B===0&&g.sung>0&&t.me===0&&t.B===1&&t.notice&&r.rung[3]==="Chắc",r)}
+ /* 5. his own visit during the day: decided and played at once; no flip choice at the end of tối; one record */
  r=await p.evaluate(()=>{const L=T.fresh();const b=T.recs(L);S.buoi=1;used=0;Q.length=0;Q.push({t:"x",pid:"empnight",h:""});const x=Q[0];nightScene();Q.splice(Q.indexOf(x),1);
-  const a={held:S.tonight==="me",settled:!!(S.ntk&&S.ntk.who==="me"),prep:Q.some(m=>m.pid==="prep")};a.stealOpen=typeof ntCan==="function"?ntCan(L[0]):null;
-  T.drain();a.early=(S.nights||0)-b.me;T.endDay();const e=T.recs(L);a.me=e.me-b.me;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);return a});
- ok("5 his own visit: decided and played at once, spent once",r.held&&r.settled&&r.prep&&r.stealOpen===false&&r.early===1&&r.me===1&&r.tot===1,r);
- /* 6. invariant over 40 played days (no stubs): never more than ONE night record per day across all women */
- r=await p.evaluate(()=>{const L=T.fresh();const bad=[];let nights=0;for(let d=0;d<40&&!S.dead;d++){const w=wk();T.toEvening();if(Math.random()<.4&&S.tonight&&S.tonight!=="me")try{stealWin(S,S.tonight,"feign")}catch(e){}T.endDay();
-   const all=[S].concat(typeof rivals!=="undefined"?rivals:[]);const n=all.reduce((s,x)=>s+((x.nightLog||[]).filter(z=>z===w).length),0);nights+=n;if(n>1)bad.push({w,n})}return{bad,nights,days:40}});
- ok("6 at most one night per day (40 days)",r.bad.length===0&&r.nights>0,r);
+  const a={held:S.tonight==="me",settled:!!(S.ntk&&S.ntk.who==="me"),prep:Q.some(m=>m.pid==="prep")};T.seen=[];
+  T.drain();a.early=(S.nights||0)-b.me;T.endDay();a.choice=T.seen.length;const e=T.recs(L);a.me=e.me-b.me;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);return a});
+ ok("5 his own visit: played at once, no flip choice, spent once",r.held&&r.settled&&r.prep&&r.early===1&&r.choice===0&&r.me===1&&r.tot===1,r);
+ /* 6. invariant over 40 played days (no stubs, random choices): never more than ONE night record per day */
+ r=await p.evaluate(()=>{const L=T.fresh();const bad=[];let nights=0;const C=["Tranh sủng","Chặn ngự giá","Thôi","Giữ chân Hoàng thượng"];for(let d=0;d<40&&!S.dead;d++){const w=wk();T.toEvening();T.ch=C[Math.floor(Math.random()*4)];T.endDay();
+   const all=[S].concat(typeof rivals!=="undefined"?rivals:[]);const n=all.reduce((s,x)=>s+((x.nightLog||[]).filter(z=>z===w).length),0);nights+=n;if(n>1)bad.push({w,n})}return{bad,nights,days:40,choices:T.seen.length}});
+ ok("6 at most one night per day (40 days)",r.bad.length===0&&r.nights>0&&r.choices>0,r);
+ /* 7. the countdown: not a bot → the kit clock chip shows in the dialog; at 0 the choice is Thôi and the dialog closes */
+ r=await p.evaluate(async()=>{const L=T.fresh();try{kmReset()}catch(e){}/* scenes queued by the bot days above */const un=T.noNpc();T.toEvening();window.__bot=0;const ms=BAL.steal.choice.ms;BAL.steal.choice.ms=1500;
+  T.flipTo(L[0]);const a0={scene:false};const dw=document.getElementById('dawn');a0.dawn=dw&&dw.className;if(dw){dw.classList.remove('on');dw.hidden=true}try{kmPump()}catch(e){}for(let i=0;i<40;i++){await new Promise(z=>setTimeout(z,250));const e=document.querySelector(".kmov.kcf .kmend");if(e){a0.scene=true;a0.qBefore=Q.some(m=>m.pid==="nfch");e.click();break}}
+  await new Promise(z=>setTimeout(z,700));const a={mb:(()=>{const h=($("mb")||{}).innerHTML;const i=h.indexOf("nfcd");return i<0?"NO nfcd; "+h.replace(/<[^>]+>/g," ").replace(/\s+/g," ").slice(0,400):h.slice(i-50,i+500)})(),cc:typeof kitCoopClock,dawn:a0.dawn,cf:(window.__cfdbg||[]).slice(-5).join(","),busy:typeof cfBusy==="function"&&cfBusy(),kmov:[...document.querySelectorAll(".kmov")].map(e=>e.className).join("|"),scene:a0.scene,qBefore:a0.qBefore,dlg:!$("modal").hidden&&Q[0]&&Q[0].pid==="nfch",chip:!!document.querySelector("#mb .kchips.kctm .kchip"),txt:(document.querySelector("#mb .kchips.kctm")||{}).textContent};await new Promise(z=>setTimeout(z,600));a.txt2=(document.querySelector("#mb .kchips.kctm")||{}).textContent;
+  await new Promise(z=>setTimeout(z,1300));a.me=S.nfX&&S.nfX.me;a.gone=!Q.some(m=>m.pid==="nfch");a.st=S.nfX&&S.nfX.st;BAL.steal.choice.ms=ms;window.__bot=1;un();return a});
+ ok("7 the scene first, then the choice; 10 s countdown (kit §69 chip), timeout = Thôi",r.scene&&!r.qBefore&&r.dlg&&r.chip&&/giây/.test(r.txt||"")&&r.txt!==r.txt2&&r.me===null&&r.gone&&r.st==="done",r);
  const pass=Object.values(R).every(x=>x.pass);
  console.log(JSON.stringify({pass,R,errs},null,1));await b.close();process.exit(pass&&!errs.length?0:1)})();

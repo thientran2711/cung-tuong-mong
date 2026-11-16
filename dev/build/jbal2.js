@@ -322,6 +322,12 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 BAL.relOan={hurt:.6,doer:.2,mend:.3};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
+/* THE FLIP CHOICE (owner OD 16/11 22:45Z + 22:50Z; jnf.js §2). PLACEHOLDERS — the numbers are tuned by the balance-core worker (review/balance-core).
+   keep = 'Giữ chân Hoàng thượng' of the flipped consort: odds = base + Sủng×sung + Sắc×sac + the Emperor's mood (odA); npcP = chance an NPC holder presses it;
+   gain = Sủng when she pressed it and nobody took the night from her; oan = extra oán toward the winner when she pressed it and was robbed anyway.
+   choice: ms = the countdown of the choice (timeout = Thôi); waitMs = the co-op host's cap waiting for the friend's choice. */
+if(!BAL.steal.keep)BAL.steal.keep={base:40,sung:.33,sac:.1,npcP:.85,gain:2,oan:10};
+if(!BAL.steal.choice)BAL.steal.choice={ms:10000,waitMs:90000};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
