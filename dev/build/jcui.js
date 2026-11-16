@@ -14,7 +14,7 @@ BAL.cp={months:{small:1,big:2},share:[1,.5,.25],item:[.6,.4,.6],minBac:5};
 const CU_POOL={dan:["dancoc","tuithom"],hat:["dancoc","vongngoc","tuithom"],co:["nghien","tranhco","demgam"],dauho:["nhansam","yensao","demgam"],ban:["nhansam","yensao","agiao"],
  tho:["nghien","tranhco"],doi:["nghien","tranhco"],doden:["nghien","tuithom","demgam"],ve:["tranhco","nghien"],hoa:["tramngoc","vongngoc","boodieu","tuithom"],
  theu:["luahang","gamto","demgam","tuithom"],kim:["luahang","gamto","tuithom","vongngoc"],mua:["tramngoc","vongngoc","vongvang","boodieu"],banh:["yensao","nhansam","agiao"],huong:["huongtram","tuithom","sonphan"]};
-const CU_KHOI={dan:"Cầm khôi",hat:"Ca khôi",co:"Kỳ khôi",dauho:"Đầu hồ khôi",ban:"Xạ khôi",tho:"Thi khôi",doi:"Đối khôi",doden:"Trí khôi",ve:"Họa khôi",hoa:"Hoa khôi",theu:"Thêu khôi",kim:"Xảo khôi",mua:"Vũ khôi",banh:"Bếp khôi",huong:"Hương khôi"};
+const CU_KHOI={dan:"Cầm khôi",hat:"Ca khôi",co:"Kỳ khôi",dauho:"Đầu hồ khôi",ban:"Xạ khôi",tho:"Thi khôi",doi:"Đối khôi",doden:"Đăng khôi",ve:"Họa khôi",hoa:"Hoa khôi",theu:"Thêu khôi",kim:"Xảo khôi",mua:"Vũ khôi",banh:"Bếp khôi",huong:"Hương khôi"};
 const CU_PLACE=["Quán quân","Á quân","Giải ba"];
 /* one prize table per contest: the pool follows HER rank (what bạc is worth to her), so Nhất > Nhì > Tam whoever stands where */
 function cuBudget(p,i,big){const r=Math.max(0,Math.min(7,rkOf(S)|0));return Math.round((BL[r]||30)*(big?BAL.cp.months.big:BAL.cp.months.small)*BAL.cp.share[i])}
@@ -49,6 +49,9 @@ function cuChest(){try{const c=CU.last;if(!c||!c.mine||c.chest)return;c.chest=1;
   if(typeof kitReward==="function")kitReward({kind:m.place===1?"chest":"tray",title:"Ban thưởng hội thi",from:m.title,items:it,bac:m.bac})}catch(e){console.error(e)}}
 /* origin line of a prize item in the bag */
 (function(){if(typeof kinvFrom!=="function")return;const f0=kinvFrom;kinvFrom=function(f){return f==="thi"?"Thưởng hội thi":f0.apply(this,arguments)}})();
+/* owner 16/11 (Q15): her contest titles show as ONE kit row list in three places: Sổ ân thưởng (all 40), her profile card (selfCardHTML, newest 5) and the Mệnh truyện tab (panel67, newest 5). Rows = [date, title, tone] */
+window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[];return(n?H.slice(0,n):H).map(x=>[x.d,x.t,"t"])};
+(function(){if(typeof panel67!=="function")return;const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{if(kcuHonorRows(1).length)h+=`<h3>Danh hiệu thi tài</h3>`+rows67(kcuHonorRows(5))}catch(e){}return h}})();
 /* her contest titles live in the Sổ ân thưởng page */
 (function(){if(typeof awCard!=="function")return;const a0=awCard;awCard=function(){let h=a0.apply(this,arguments);try{const H=(S&&S.honors)||[];
   h+=`<h3>Danh hiệu thi tài</h3>${H.length?kitRows(H.map(x=>[x.d,[`<span class="ef t">${x.t}</span>`],"t"])):`<p class="past">Chưa đoạt danh hiệu nào.</p>`}`}catch(e){}return h}})();

@@ -5,7 +5,7 @@
      doi (Câu đối)         -> engine "doiline" : paired scrolls of brush marks; the right scroll must be the MIRROR of the left (phẩy ↔ mác …); drag/tap tiles
    Same rules as mg-easy / jtd Tứ đức games: first-time demo card, Gợi ý button (costs a little, never blocks), quiet auto-hint when she stalls (tier 0/1),
    a wrong try bounces back, same 0–10 score -> j83 work tiers (raw feeds wkScore) / j71 skill scale.
-   Difficulty: ONE function nwTier(kind, env): the tier mg-balance's mgSet()/mgTier(kind,{occ,…}) puts in KG82.tier when that ships, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó); the capped score reads mgFull(env,b) when it exists;
+   Difficulty: ONE function nwTier(kind, env) = jmgt mgTierOf(env): the tier mgSet() put in KG82.tier, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó); the capped score reads mgFull(env,b) when it exists;
    every number below lives in BAL.nw (one core). The old verse/pair engines (j91) and the doi quiz bank (j82) are unreachable after this file runs. */
 BAL.nw=Object.assign(BAL.nw||{},{
  calli:{tol:[.04,.032,.026],      /* lane half-width as a share of the board side, by tier */

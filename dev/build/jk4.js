@@ -101,10 +101,14 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 @media (max-width:999px){
  html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
  html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
- html body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+ /* owner 16/11 (Q6): icon-only (label = tooltip) only under 600 px — jk3 @media(max-width:599px) */
 }
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
+/* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
+html body header.hud>#k3room:not([hidden]){grid-area:room}
+@media (min-width:1000px){html body header.hud:not(.khd2):has(#k3room:not([hidden])){grid-template-columns:auto auto minmax(0,1fr) auto!important;grid-template-areas:"menu room me stats"!important}
+ html body header.hud.khd2>#k3room:not([hidden]){justify-self:end!important;align-self:start!important}}
 html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
 html body header.hud.khd2>#kstrow{justify-self:stretch!important;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px;margin-top:3px!important}
 html body header.hud.khd2>#kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
