@@ -94,7 +94,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C33 [→ FOREMAN B] | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
 | C34 [→ FOREMAN B] | review/contest-ui (owner s8: ALL study/work/minigame frames picture LEFT info RIGHT incl. result panel; REAL PRIZES by place (themed item, bạc, chest, title, Emperor gift) + podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
 | C35 [→ FOREMAN B] | review/pcard-fill (owner s8: person card right side empty → mood, relations, tastes, known facts, recent dealings, quick actions) | QUEUED-NEXT |
-| C36 | review/opt-pics (option cards picture LEFT + info RIGHT) | RUNNING |
+| C36 | review/opt-pics → r1 PASS 900ace7fb | LIVE |
 | C37 [→ FOREMAN B] | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
 | D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
 | C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
@@ -111,3 +111,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C48 review/save-slots @ 0bfc455c6 (jslots.js) | REVIEWING (save-slots-r1, opus) |
 | C49 | review/palace-start (owner s8: ~4 small kids 1–4 y mixed, no đích tử, birth order not decisive, faction road Emperor/Thái hậu/quyền thần, princesses everywhere) | RUNNING (opus, session 8) |
 ## Ownership marks (16/11): items in dev/handover/FOREMAN_C.md Slice C are [→ FOREMAN C]; items in FOREMAN_B.md are [→ FOREMAN B]; everything else = session 8.
+| D53 | opt-pics leftovers: 25 options still on placeholder (dev/test/opt-pics-table.md r1) | QUEUED [→ FOREMAN C] |
