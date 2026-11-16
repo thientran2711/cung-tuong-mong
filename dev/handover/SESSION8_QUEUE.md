@@ -107,3 +107,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
 | C47 | review/stage-side (owner s8: iPad stage side cards → one narrow vertical column like phone) | QUEUED-NEXT |
+| C48 | review/save-slots (owner s8 HIGH: co-op overwrote solo slots; ≥3 solo + ≥3 co-op rooms; recover) | QUEUED-NEXT (TOP) |
