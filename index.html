@@ -3893,7 +3893,7 @@ document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [da
 /* tapping a place opens the place screen; the floating 'Bản đồ' button there goes back to the full map */
 (function(){const g=goTo;goTo=function(k){const wasMap=typeof tab!=="undefined"&&tab==="go";const r=g.apply(this,arguments);try{if(wasMap&&S&&!S.dead&&S.place===k){window.__fromMap=1;tab="act";render()}}catch(e){}return r}})();
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const st=$("stage");let b=document.getElementById("tomap");const show=window.__fromMap&&tab!=="go"&&!S.out;if(!show){if(b)b.remove();return r}
- if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap kbackb";b.innerHTML=typeof kitBackBtnHtml==="function"?kitBackBtnHtml("map","Bản đồ"):"‹ Bản đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
+ if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap kbackb";b.innerHTML=typeof kitBackBtnHtml==="function"?kitBackBtnHtml("map","Dư đồ"):"‹ Dư đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
  if(b.parentNode!==st)st.appendChild(b)}catch(e){}return r}})();
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
 
@@ -19443,7 +19443,7 @@ const K3SH={home:true};
 function kitBackBtnHtml(kind,label){return `<img class="kbi" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-${kind}.webp" width="30" height="30" alt="" draggable="false" onerror="this.remove()"><span class="kbl">${label}</span>`}
 window.kitBackBtnHtml=kitBackBtnHtml;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
- html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Bản đồ")}</span></div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 function k3Phone(){return innerWidth<1000&&innerHeight>innerWidth}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
@@ -29098,7 +29098,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3dbb2d4f246d";window.CTM_BUILD=BUILD;
+const BUILD="abf250e1ede9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

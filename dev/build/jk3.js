@@ -240,7 +240,7 @@ const K3SH={home:true};
 function kitBackBtnHtml(kind,label){return `<img class="kbi" src="img/kit/ico-${kind}.webp" width="30" height="30" alt="" draggable="false" onerror="this.remove()"><span class="kbl">${label}</span>`}
 window.kitBackBtnHtml=kitBackBtnHtml;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
- html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Bản đồ")}</span></div>`})}catch(e){}
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 function k3Phone(){return innerWidth<1000&&innerHeight>innerWidth}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());

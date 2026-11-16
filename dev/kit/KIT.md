@@ -2977,7 +2977,7 @@ Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · 
 Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.
 
 ## 72. kitBackBtnHtml · painted "back to a place" button (owner 15/11, review/room-btn) — `dev/build/jk3.js`
-- Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Bản đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
+- Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
   → `<img.kbi>` (img/kit/ico-<kind>.webp, 30 px, gpt-2-6 gouache, transparent, 128 px WebP ~7 KB: ico-room = red-lacquered door under green tiles with a lantern,
   ico-map = palace scroll map) + `<span.kbl>` label; the button class is `.kbackb` (no border / ground in the header; a soft paper pill over the stage art for #tomap).
 - Header `#k3room` (phone shell only, as before): label "Về phòng", or "Về <place>" when she is elsewhere (tooltip + aria-label the same). >= 600 px: icon + label in the
