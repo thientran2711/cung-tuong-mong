@@ -1311,10 +1311,14 @@ Scene rule (same branch, jk2b kitEvArt): a dialog id with NO EVENTS category (pl
 is in (j17 evArt, season × buổi), never the j89 default category (Triều chính, officials kneeling).
 
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
-- K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
-  card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
-  only when the player knows it (`wdSlots().label`). Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, giver, status if
-  known, where the "Hặc ăn mặc sai phẩm" act is). Replaces j92's temporary "Trâm: … / Y phục: …" chips.
+- K1 `kitWearSlots(p,{size})` (review/dress-offence, owner 16/11 18:30Z: "6 wear slots + the pet = 7"): SEVEN kitItem tiles right under the portrait on
+  EVERY person card (player, consorts, maids, ma ma, Thái hậu…): Cài tóc (`p.wd.tram`) · Đeo tay · Đeo eo · Túi thơm (jinv worn IT.sl) · Khăn che mặt
+  (KIT_VEIL) · Y phục (`p.wd.y`) · Theo hầu (jpet `p.petOn`); an empty slot = the empty kitItem with the slot name. Data: `dressSlots(p)` / `dressView(p)`
+  (jdress). Marks, all existing kit parts, shown ONLY when the player has SEEN that dress (`dressNow(S,p)`: same place this buổi, or a Dò la report,
+  while she still wears the same set; her own row always): kitItem corner tag `mark:["Vượt phẩm","r"]` on a piece above the wearer's rank (WD pieces
+  only once their phẩm is known), the item's Xa xỉ box (`lux`), and the label row `.kwearl` = outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị /
+  Phạm tang, when known) + `.kitl` "Xa xỉ N / M" (her total vs her rank allowance; red when above; `BAL.lux.xx.showBud` false = total only).
+  Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, what she has seen, where Tố vượt phẩm / Tố xa xỉ are).
 - K2 Rương đồ: REMOVED (review/balance-unified, 11/15). The wardrobe has no block of its own; it lives in Tư trang's ONE bag + "Đang mang"
   (`dev/build/jwdinv.js`, after jinv): WD trâm in the bag tab Trang sức, WD y phục in the tab Y phục (picture `WD_ITEMS[k].icon` = img/wd-<key>.webp,
   grade ground, corner Xa xỉ N); worn ones carry the worn band (Đang mặc, one word for every slot), pawned ones the tag "đang cầm". Đang mang: Cài tóc = `p.wd.tram`,
@@ -1513,7 +1517,7 @@ tam-cung-dem .68/.94, thai-y-vien .45/.9, tu-ninh-cung .5/.9. A new room adds it
 Two views instead of the split: HOME = the room full screen between the slim top bar and the tab bar (stage HUD plaques on it; figures big on the
 floor; tap a person = card) · PANEL = a bottom tab opens full screen in place of the room (sub-tabs, compact picker strip, person card get the
 whole height). Back to the room: tap the active tab again, or "‹ Phòng" (kit `.btn`, top bar, only shown in PANEL view); "Sang buổi" always lands
-in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen and returns to the room.
+in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen (`html body .game#game.k3ph.k3pop>#popw{grid-area:stage}`: j59dock gave it `grid-area:panel`, which the one-page grid does not have, so it squeezed the top bar to 329 px) and returns to the room.
 Result cards / events overlay as before. Classes on `.game`: `k3ph` (shell on) · `k3home` · `k3pop`. Room view measured: 686x880 670x720 (0.93) ·
 755x1000 739x867 (0.85) · 412x1058 400x860 (0.47) · 390x844 378x646 (0.59). Landscape / ≥ 1000 px keep the split (31.3).
 

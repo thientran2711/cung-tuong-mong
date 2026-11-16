@@ -24,6 +24,8 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
    const M=document.querySelector('#modal:not([hidden])');return {ovx:document.documentElement.scrollWidth>vw,bad:bad.slice(0,4),ell:/…(?!$)/.test(M?M.innerText.replace(/Đang [^\n]*…/g,''):'')}});
   ok(!r.ovx&&!r.bad.length,`${p.k} ${n}: nothing off screen`,r);
   if(SHOTS){await p.waitForTimeout(250);await p.screenshot({path:`${OUTD}/${n}-${p.k}.png`,animations:'disabled'})}};
+ /* the day's own scene overlays (#dawn new-day picture, card flip .kmov) sit above #modal and swallow clicks: the test closes them first */
+ const noOv=p=>p.evaluate(()=>{['dawn','kroul','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove())});
  const toOpt=async p=>{await p.evaluate(()=>{const b=document.querySelector('#modal [data-tgo="opt"]');if(b)b.click()});await p.waitForSelector('#modal .cloudwrap .kslot',{timeout:10000})};
  const C=p=>p.evaluate(()=>JSON.parse(JSON.stringify(CTM_CLOUD.state)));
  const idle=p=>p.waitForFunction(()=>!document.querySelector('#modal .cloudwrap')||!/Đang gửi/.test(document.querySelector('#modal .cloudwrap').textContent),null,{timeout:20000}).catch(()=>{});
@@ -78,7 +80,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  ok(pc.length===2&&/máy này/.test(pc[0])&&/trên mây/.test(pc[1]),'conflict panel shows both copies of Sổ một',pc);
  await shot(P,'5-conflict');
  const pPhone=await slot(P,1);
- await P.click('#modal.kcloud [data-cl="keep"][data-v="me"]');await P.waitForFunction(()=>!CTM_CLOUD.state.pend&&CTM_CLOUD.state.rev,null,{timeout:20000});
+ await noOv(P);await P.click('#modal.kcloud [data-cl="keep"][data-v="me"]');await P.waitForFunction(()=>!CTM_CLOUD.state.pend&&CTM_CLOUD.state.rev,null,{timeout:20000});
  await P.waitForTimeout(500);
  const L1=await head(c1.k);
  ok((await slot(P,1)).h===pPhone.h,'kept the phone copy locally');
@@ -96,7 +98,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  const pOwn=await slot(P,1);const iOwn=await slot(I,1);await title(P);
  await P.waitForSelector('#modal.kcloud [data-cl="keep"]',{timeout:20000});
  const n0=(await head(c1.k)).versions.length;
- await P.click('#modal.kcloud [data-cl="keep"][data-v="cloud"]');await P.waitForFunction(()=>!CTM_CLOUD.state.pend,null,{timeout:20000});await P.waitForTimeout(500);
+ await noOv(P);await P.click('#modal.kcloud [data-cl="keep"][data-v="cloud"]');await P.waitForFunction(()=>!CTM_CLOUD.state.pend,null,{timeout:20000});await P.waitForTimeout(500);
  ok((await slot(P,1)).h===iOwn.h,'kept the cloud (iPad) copy on the phone');
  const L2=await head(c1.k);const bk=L2.versions.find(v=>v.keep);
  ok(bk&&bk.dev==='Điện thoại'&&bk.sum[1],'phone copy backed up as a kept version',bk&&{rev:bk.rev,keep:bk.keep});
@@ -140,7 +142,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await O.click('#modal [data-cl="link"]');await O.fill('#cl-in',c1.k);await O.click('#modal [data-cl="go"]');
  await O.waitForFunction(()=>CTM_CLOUD.state.rev>0&&!document.querySelector('#modal.kcloud #cl-in'),null,{timeout:20000}).catch(()=>{});
  const oc=await C(O);
- if(oc.pend){await O.click('#modal.kcloud [data-cl="keep"][data-v="me"]');await O.waitForFunction(()=>!CTM_CLOUD.state.pend,null,{timeout:20000})}
+ if(oc.pend){await noOv(O);await O.click('#modal.kcloud [data-cl="keep"][data-v="me"]');await O.waitForFunction(()=>!CTM_CLOUD.state.pend,null,{timeout:20000})}
  await title(P);await P.waitForFunction(()=>!!loadSlot(3),null,{timeout:20000}).catch(()=>{});
  const p3=await P.evaluate(()=>{const d=loadSlot(3);return d&&{v:d.v,name:d.S.name}});ok(p3&&p3.v===5&&p3.name===old.S.name,'old v5 sổ travels unchanged',p3);
  const ld=await P.evaluate(()=>{$("title").hidden=false;showTitle();const d=loadSlot(3);SLOT=3;quiet=true;deser(d);quiet=false;$("title").hidden=true;render();return {name:S.name,dead:!!S.dead}});
