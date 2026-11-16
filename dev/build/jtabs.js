@@ -116,7 +116,7 @@ function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors()
  else{h+=q.np.length?`<div class="ktpeople">${q.np.map(z=>{const v=RV(z.a);return `<div class="ktprow">${v?kitPersonLine(v,{sub:`${z.w} · ${z.t}`}):`<div class="kpl"><span class="kplt">${z.t}<small>${z.w}</small></span></div>`}</div>`}).join("")}</div>`:kitEmpty("Việc nhờ","Chưa nghe chuyện gì.")}
  return h}
 function ktPerson(a,what){const v=a&&a.id!=null&&typeof RV==="function"?RV(a.id):null;if(v&&v.name)return kitPersonLine(v,{sub:what});
- const f=a&&a.f||{ini:"?",col:"#8a7a6a"};return `<div class="kpl">${typeof mdH==="function"?mdH(f,"sm"):""}<span class="kplt"><b>${ktEsc(q72Short(a))}</b><small>${what}</small></span></div>`}
+ const f=a&&a.f||{ini:"?",col:KIT_ROLE.slate};return `<div class="kpl">${typeof mdH==="function"?mdH(f,"sm"):""}<span class="kplt"><b>${ktEsc(q72Short(a))}</b><small>${what}</small></span></div>`}
 function ktPersonK(k,name,what){let v=null;try{const m=/^r(\d+)$/.exec(k)||/^(\d+)$/.exec(k);if(m)v=RV(+m[1])}catch(e){}if(v&&v.name)return kitPersonLine(v,{sub:what});return `<div class="kpl"><span class="kplt"><b>${ktEsc(name)}</b><small>${what}</small></span></div>`}
 if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 (function(){const st=document.createElement("style");st.id="kit-tabs";st.textContent=`
