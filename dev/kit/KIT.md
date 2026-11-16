@@ -3778,6 +3778,27 @@ SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình v
 - The chapter detail closes like every kit modal: ✕ in the header, tap outside, Esc (a "Đóng" close option → 32.10 kit ✕).
 - Sample: kit page §77. Test: `node dev/test/stage-rail.js <url> <outdir> [WxH,...]` (rail inside the stage, no button over a face box,
   no goal strip, no desk calendar, goal → detail with ✕ / Esc / outside close, calendar → LỊCH panel).
+<<<<<<< HEAD
+
+### 77.1 kitStatusIcon · ONE status icon (owner 16/11 16:25Z, review/status-icons) — `dev/build/jstatus.js` (after jrail) on top of `kitStageRail`
+Owner: "nhiều game bây giờ … chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi biết là có cái gì đó đang
+download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon được thì mình cứ việc bỏ thôi."
+RULE: a status that only says "something is running / done / needs you" is NEVER a chip, strip or reserved band on screen. It is a status icon = the §77 square
+rail button + (optional) activity animation + tap → a kit info panel with the details.
+- API: `kitStatusIcon.set(id,{title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec, order})` · `.refresh()` · `.remove(id)`.
+  It registers a rail item `st-<id>` (rail extras: `glyph` text instead of a painted `icon`, `busy`, `done`, `onTitle`). Old saves: nothing stored.
+- Look/motion: the rail button as §77. busy = the glyph bobs ±3 px with opacity .55→1 (transform + opacity only, `calc(1.8s*var(--pace))`, no layout, no
+  JS timer; off under reduced motion / Hiệu ứng Gọn via `reducedMotion()` — static glyph then); done = still, green; badge = the seal-red dot (needs her).
+  No @media (KIT §0). While no game is on screen the rail items with `onTitle` sit in a fixed bottom-left dock (`.krail.kstdock`; hidden behind dialogs / the book).
+- Panel: `kitPanel({kind:"info",look:1,…})`; the only options are real actions (e.g. "Tạm ngưng / Thỉnh tiếp"); closing = ✕ / tap outside / Esc, never "Đã hiểu".
+- PLACEHOLDER GLYPHS (text ↓ ✓ ⟳) until Foreman C paints the icons: ART REQUEST: download icon, update icon (then `icon:"img/kit/….webp"`, no code change elsewhere).
+- Users: `dl` (Thỉnh tranh nhân vật, jload; own info panel) · `upd` (Có bản mới, swreg; `onTap` opens its own card §35.2). NOT status icons: co-op buổi clock `#kctm` + friend chip `#kctmf`
+  (jcooptimer; the countdown must stay readable — owner/coordinator ruling 16/11).
+- Sample: kit page §77.1. Test: `node dev/test/status-icon.js <url> <outdir> [WxH,...]` (idle → none; busy; paused dot; done ✓ then gone; panel ✕ / Esc / no "Đã hiểu";
+  no old chip / dock band; game padding-bottom unchanged; icon 44 px inside the stage, over no face).
+
+=======
+>>>>>>> origin/main
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
 
