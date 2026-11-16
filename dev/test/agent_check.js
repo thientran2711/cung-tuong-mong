@@ -20,7 +20,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r1.one<=1,'tick: one per buổi',r1);ok(r1.bad===0,'tick: every planned act is in the ledger at its place/khắc with a why',r1);
  /* 2 */
  const r2=await p.evaluate(()=>{Q.length=0;const z=agZ();const v=liveRivals(true).find(x=>!x.queen&&!x.confined&&!sameHouse(S,x));const kh=j95kh();const here=S.roster.P.me[kh][0];
-  z.pend.push({key:j95key(),id:"v"+v.id,vid:v.id,k:"thTH",kd:"",t:null,kh,pl:here,act:"thỉnh an, hầu Thái hậu",why:"thử"});const th0=v.th;
+  agPlan(v,{k:"thTH",t:null,act:"thỉnh an, hầu Thái hậu",need:"th"},agNeeds(v),kh,here);z.pend[z.pend.length-1].why="thử";const th0=v.th;
   agWatch();const m=Q.find(x=>x.t==="Ngươi bắt gặp");if(!m)return{none:1,Q:Q.map(x=>x.t)};const O=m.opts.map(o=>o.n);const hear=m.opts.find(o=>o.n==="Nghe lén");
   const want=word(od(BAL.ag.wit.hear+(S.mat||0)*BAL.ag.wit.mat));const left=z.pend.filter(x=>x.why==="thử").length;
   Q.length=0;const ign=m.opts.find(o=>o.n==="Mặc kệ");ign.go();const after=z.pend.filter(x=>x.why==="thử").length;
