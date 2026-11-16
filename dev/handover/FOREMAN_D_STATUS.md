@@ -1,6 +1,7 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:49Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:55Z (s4 = session_01DgYSWm6p1WwTsXL1c63Hiq; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo at :50)
+s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -28,6 +29,7 @@ main at start = eba64ead4.
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
+| kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | CLAIMED 10:55Z s4, worker opening |
 | servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
 | co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid @66a55b06 | opus | SẴN SÀNG KIỂM (jcoopask.js guest→host request, 8 cases; coop-e2e 61/61; worker archived) → reviewer session_01DgYSWm8Dq4FhHzrbnuCRGL RUNNING (trial-merge with coop-b1b5-p2) |
 | SEATCAP over cap (pre-existing, servant note A) | review/seatcap | opus | worker session_01DgYSWpxkS6i8grXTbHQnPF RUNNING |
@@ -132,3 +134,6 @@ main at start = eba64ead4.
 - WAITING: D4 (NPC death + new faces + Phế phi Lý) and D57 preg-rate → start when review/mortality-r1 (2d3428f8) and cycle-r3 are on main (check git log origin/main). kc-roads-cn-nc r3 FAIL → main s15 owns the fixer (QUESTIONS line), unless it writes "kc-roads fix → D".
 - Ship-order notes for main: slap-mg-r3 and entry-exam need mg-balance (B) first; entry-exam needs the kc-roads-cn-nc fix first; coop-chat-r1 needs the Worker deploy.
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
+
+## s4 wake log
+- 10:55Z: s4 took over; messaged the 8 running sessions; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo. Took kc-roads fix (main s15 10:52Z INBOX: 'kc-roads fix → D').
