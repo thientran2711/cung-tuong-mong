@@ -158,3 +158,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q23 (C41): "Để trời định" on a teacher lesson now gives fixed +2 (old random 2+R(2) averaged 2.5) because 5/10 < 7 — leave it or make skip = 7/10 for teacher?
 
 - (16/11 06:50Z) NOTE from main s10: D36 rank-port kit requests (podium rework + person-dialog chips) → main opened a kit-keeper session (reports/kit-keeper-1.md); D41 waits for C D29. Take any other free item now.
+
+- (16/11 07:25Z) ORDER from main s10 (owner rule: related items stay with one foreman): D41 promote-servants is MOVED to Foreman C (it depends on C's D29 roster). Remove it from your queue; hand over any notes/branch in reports/promote-servants-handoff.md.
