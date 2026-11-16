@@ -2595,7 +2595,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,g=>{feedback(g>=2?"good":"bad");cb(g)})});
  const P=ACT.poison.f;ACT.poison.f=function(a,t){const r=P.apply(this,arguments);if(t===S||a===S)feedback(t===S?"poison":"ink");return r};
  for(const k of ["frame","kframe","kpoison","musk"]){const F=ACT[k].f;ACT[k].f=function(a,t){const r=F.apply(this,arguments);if(a===S&&/thành|tìm thấy|sảy|trúng|đào được/.test(r)&&!/bị lộ|phát giác|chặn kịp/.test(r))feedback("ink");if(t===S&&!/chặn kịp/.test(r))feedback("hit");return r}}
- W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim()}catch(e){}return r})})();
+ W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim();if(S&&!S.dead&&!pxPreload.done)pxPreload()}catch(e){}return r})})();
 function inkWipe(){if(!OPT.fxon||RM)return;fxOver("inkwipe")}
 function nightFade(){if(!OPT.fxon||RM)return;fxOver("nightf")}
 /* HUD numbers count smoothly */
@@ -2618,6 +2618,14 @@ function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
   {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
   const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
+/* review/lag-play-2: the first Pixi load (script parse + WebGL init, ~1-4 s on a slow phone) used to land inside her first tab / act tap.
+   Once a life is in play, at the first idle moment (~2.5 s after), fetch + run the library, then open the stage layer if the stage is on
+   screen. Same loader (kitPixi), same layer (pxLoad); nothing new is drawn. Skipped when effects are off / reduced motion. */
+function pxPreload(){if(pxPreload.done||RM||typeof OPT!=="object"||!OPT.fxon)return;pxPreload.done=1;
+ const ric=window.requestIdleCallback||(f=>setTimeout(f,1));
+ setTimeout(()=>ric(()=>{kitPixi().then(()=>ric(()=>{try{const st=$("stage");if(S&&!S.dead&&st&&st.clientWidth>0&&st.clientHeight>0)pxLoad()}catch(e){}
+  /* the FX overlay app (jfx kfApp: hidden canvas, ticker stopped until an effect plays) */
+  ric(()=>{try{if(typeof kfApp==="function"&&!(typeof kfStill==="function"&&kfStill()))kfApp().catch(()=>{})}catch(e){}},{timeout:3000})},{timeout:3000})).catch(()=>{})},{timeout:4000}),2500)}
 function pxCap(){return innerWidth<700?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
@@ -6010,16 +6018,22 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
  "@media (max-width:1279px){"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}}"+
  "@media (max-width:700px){"+X+"::after{font-size:var(--tfs,.72rem)!important}}";document.head.appendChild(st)})();
 let TFS_CV=null;
-function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
- T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
+/* review/lag-play-2: tabsFit ran 2x per render, each time resetting --tfs and measuring every tab (forced layout). It now re-measures only
+   when something it depends on changed: viewport, the tab buttons (labels, shown / hidden), the classes of the bar and the game shell.
+   A call with an argument (fonts ready, resize) always measures. */
+let TFS_SIG="";
+function tabsFit(force){try{const T=$("tabs");if(!T)return;{const gm=document.querySelector(".game");
+  const sg=innerWidth+"x"+innerHeight+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+b.className+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
+  if(!force&&sg===TFS_SIG)return;TFS_SIG="";tabsFit.sg=sg}const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
+ T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;TFS_SIG=tabsFit.sg;
  const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
  if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
-addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(tabsFit,80)});
+addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(()=>tabsFit(1),80)});
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
-try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tabsFit)}catch(e){}
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>tabsFit(1))}catch(e){}
 setTimeout(tabsFit,0);
 /* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
    not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
@@ -12843,8 +12857,9 @@ function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapT
 window.kitRankText=kitRankText;
 function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
  if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP))return NodeFilter.FILTER_REJECT;
-  re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: the cheap name test first; the ancestor walk (closest) only for the few text nodes that hold a name */
+  re.lastIndex=0;if(!re.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;
+  return !p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
  for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
   while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
@@ -12852,7 +12867,7 @@ function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;co
   if(!last)continue;if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}
  return k}catch(e){return 0}}
 window.kitRankPaint=kitRankPaint;
-(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L)kitRankPaint(r)};
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R].filter(n=>n&&n.isConnected);R.clear();/* review/lag-play-2: a root inside another queued root is walked once */for(const r of L)if(!L.some(m=>m!==r&&m.contains(r)))kitRankPaint(r)};
  const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
   if(!q&&R.size)q=requestAnimationFrame(run)});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body)};
@@ -16698,9 +16713,14 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
  return out.join("<br>")}
 /* pop card: numbers read live (the visit list keeps a snapshot "lòng 97") */
 try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
-function nrDOM(){try{fixTitles()}catch(e){}try{fixHud2()}catch(e){console.error(e)}try{fixStage()}catch(e){console.error(e)}try{fixPanel()}catch(e){console.error(e)}try{fixModal()}catch(e){console.error(e)}}
+/* review/lag-play-2: fixTitles only drops tooltips (no visible change) but reads scrollWidth = a forced layout in the middle of a render;
+   it now runs once in the next frame, after every write of the render is done (one layout, the one the paint needs anyway). */
+let nrTT=0;function fixTitlesSoon(){if(nrTT)return;nrTT=requestAnimationFrame(()=>{nrTT=0;try{fixTitles()}catch(e){}})}
+function nrDOM(){try{fixTitlesSoon()}catch(e){}try{fixHud2()}catch(e){console.error(e)}try{fixStage()}catch(e){console.error(e)}try{fixPanel()}catch(e){console.error(e)}try{fixModal()}catch(e){console.error(e)}}
 window.nrDOM=nrDOM;
-const W=o=>function(){const r=o.apply(this,arguments);nrDOM();return r};
+/* review/lag-play-2: nrDOM ran after renderHUD, renderHud2, renderStage, renderPanel AND render (5x per render, each a full DOM pass).
+   Nested calls now only count; the outermost wrapped call runs it once, when everything inside has been drawn (same end state). */
+let nrDepth=0;const W=o=>function(){nrDepth++;let r;try{r=o.apply(this,arguments)}finally{nrDepth--}if(!nrDepth)nrDOM();return r};
 try{renderHUD=W(renderHUD)}catch(e){}try{if(typeof renderHud2==="function")renderHud2=W(renderHud2)}catch(e){}
 try{renderStage=W(renderStage)}catch(e){}try{renderPanel=W(renderPanel)}catch(e){}try{showModal=W(showModal)}catch(e){}try{render=W(render)}catch(e){}
 /* tab / strip clicks re-render through these, but some handlers patch the DOM afterwards */
@@ -23943,7 +23963,8 @@ function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)ret
  bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
-if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
+/* review/lag-play-2: inside a render (window.__rdep, jlag2) the fit runs once at the end of render (next line), not mid-render */
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);if(!window.__rdep)kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
 try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
@@ -26144,7 +26165,7 @@ window.thyNpcMonth=npcMonth;
      COOP.join(code) → Promise {room}   check (GET /api/room/<code>) + connect; rejects {code:"noroom"|"full"|"net"}
      COOP.resume()   → Promise|null     reconnect to the last room of this browser (localStorage "ctm-coop-room")
      COOP.leave(keep)                   close (no reconnect); forgets the room unless keep (then "Trở lại phòng" offers it)
-     COOP.send(obj) or COOP.send(t, fields)   one protocol message; gzip binary frame above 200 KB. false if not open.
+     COOP.send(obj) or COOP.send(t, fields)   one protocol message; gzip binary frame above 8 KB, sent in order. false if not open.
      COOP.on(t, fn) / COOP.off(t, fn)   server messages by their t: room presence state week said error pong;
                                         local events: "status" (COOP.state changed), "both" (both seats online, first time
                                         per connection), "start" (lobby hands over to the game), "peer" (friend online flag
@@ -26158,7 +26179,7 @@ window.thyNpcMonth=npcMonth;
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const DEF_URL="https://ctm-coop.victoria-tntt.workers.dev";
-const BIG=200000,PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
+const PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
 const H={};
 const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,peerOnline:false,bothIn:false,playing:false};
 let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
@@ -26185,7 +26206,7 @@ async function gunz(buf){const ds=new DecompressionStream("gzip");const w=ds.wri
 async function rx(ev){lastRx=Date.now();let m;
  try{const txt=typeof ev.data==="string"?ev.data:await gunz(ev.data instanceof Blob?await ev.data.arrayBuffer():ev.data);m=JSON.parse(txt)}catch(e){console.error("COOP bad frame",e);return}
  if(!m||!m.t)return;
- if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0});
+ if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0,caps:Array.isArray(m.caps)?m.caps:[]});
   if(pend){pend.res({room:st.room,you:st.you});pend=null}}
  else if(m.t==="presence")set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week});
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
@@ -26228,8 +26249,13 @@ function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep
  const was=st.playing;both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,playing:false});
  /* the co-op game is over on this device (Về màn đầu / ‹ Lui): the world module must hand save() etc. back to single-player */
  if(was)emit("stop",{})}
+/* review/lag-play-2: frames above GZ (8 KB) go gzip (the Worker gunzips any binary frame), and every send goes through ONE ordered queue,
+   so a small message never overtakes a bigger one still being compressed (end → unend, seat → bend keep their order). */
+const GZ=8000;let sendQ=Promise.resolve();
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
- const s=JSON.stringify(o);try{if(s.length>BIG&&typeof CompressionStream!=="undefined")ws.send(await gz(s));else ws.send(s);return true}catch(e){return false}}
+ const s=JSON.stringify(o),w=ws;const job=sendQ.then(async()=>{if(w!==ws||w.readyState!==1)return false;
+  try{if(s.length>GZ&&typeof CompressionStream!=="undefined"){const z=await gz(s);if(w!==ws||w.readyState!==1)return false;w.send(z)}else w.send(s);return true}catch(e){return false}});
+ sendQ=job.catch(()=>false);return job}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
 /* owner 16/11 ("không thấy sang buổi"): a phone that slept keeps a socket that LOOKS open (readyState 1) but is dead — a `bend` sent on it
    is lost and the server drops the seat after 45 s ("Hảo hữu đã rời cuộc"). On return: reconnect at once when the socket is closed, she was
@@ -26800,17 +26826,32 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
+/* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
+   the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers
+   "seatresync" and the next push is the full copy again. Parts = buoi, used, c, d.<key>, d.S.<key> (one JSON string each). */
+let seatBase=null,seatPend=null,seatBusy=0;
+function seatParts(o){const P={buoi:JSON.stringify(o.buoi),used:JSON.stringify(o.used),c:JSON.stringify(o.c)};const d=o.d||{};
+ for(const k in d){if(k==="S"&&d.S&&typeof d.S==="object"){for(const j in d.S)if(d.S[j]!==undefined)P["d.S."+j]=JSON.stringify(d.S[j])}else if(d[k]!==undefined)P["d."+k]=JSON.stringify(d[k])}return P}
+function seatDelta(P,B){const set={},del=[];let n=0;for(const k in P)if(B[k]!==P[k]){set[k]=JSON.parse(P[k]);n++}
+ for(const k in B)if(!(k in P))del.push(k);return {set,del,n:n+del.length}}
 function seatPush(o,now){if(!CW.on||CW.seatOld||!o||COOP.state.status!=="open")return;
- if(!now&&Date.now()-seatAt<SEAT_MS){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},SEAT_MS-(Date.now()-seatAt));return}
- const k=JSON.stringify([o.week,o.buoi,o.used,o.d,o.c]);if(k===seatLast)return;
- seatAt=Date.now();COOP.send({t:"seat",sv:CW.ssv||0,o}).then(ok=>{if(ok)seatLast=k})}
-COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk()}});
-COOP.on("error",m=>{if(m&&m.code==="seatold"){CW.seatOld=true;T("seatold "+m.sv)}});
-COOP.on("week",m=>{seatLast="";CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
+ if(seatBusy&&Date.now()-seatBusy>10000)seatBusy=0;  /* no seatok within 10 s (socket dropped): give up waiting */
+ if(!now&&(seatBusy||Date.now()-seatAt<SEAT_MS)){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},Math.max(400,SEAT_MS-(Date.now()-seatAt)));return}
+ const P=seatParts(o);const k=JSON.stringify([o.week,P]);if(k===seatLast)return;
+ const caps=COOP.state.caps||[];let msg;
+ if(caps.indexOf("seatd")>=0&&!Object.keys(P).some(x=>x.split(".").length>(x.startsWith("d.S.")?3:2))&&seatBase&&seatBase.wk===o.week&&seatBase.sv===(CW.ssv||0)&&!seatBusy){const D=seatDelta(P,seatBase.P);
+  msg={t:"seatd",sv:CW.ssv||0,set:D.set,del:D.del,dev:o.dev}}
+ else msg={t:"seat",sv:CW.ssv||0,o};
+ seatAt=Date.now();seatBusy=Date.now();seatPend={P,wk:o.week};COOP.send(msg).then(ok=>{if(ok)seatLast=k;else{seatBusy=0;seatPend=null}})}
+COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk();
+ if(seatPend&&CW.ssv===m.sv)seatBase={P:seatPend.P,wk:seatPend.wk,sv:m.sv};else seatBase=null}seatBusy=0;seatPend=null});
+COOP.on("error",m=>{if(!m)return;if(m.code==="seatold"){CW.seatOld=true;seatBase=null;seatBusy=0;T("seatold "+m.sv)}
+ if(m.code==="seatresync"||m.code==="seatbig"||m.code==="badseat"){seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(m.code==="seatresync"){T("seatresync "+m.sv);snapSoon()}}});
+COOP.on("week",m=>{seatLast="";seatBase=null;seatBusy=0;seatPend=null;CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
 /* review/coop-rejoin-xdev-r1: a device that was only ASLEEP (socket gone, page kept, e.g. the Fold locked) while she played on another
    device reconnects by itself (no begin): when the room's copy of her seat is newer and was written by another device, take it, so this
    device does not go on with its stale week (and its own copies are accepted again instead of "seatold"). */
-COOP.on("room",m=>{if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
+COOP.on("room",m=>{seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
  if(!R||!R.dev||R.dev===DEV||(R.sv||0)<=(CW.ssvWk===R.week?CW.ssv||0:0)||!snapOk(R,m.state))return;T("snap wake server sv"+(R.sv||0));
  if(CW.restore(R)){CW.ssv=m.msv||R.sv||0;CW.ssvWk=R.week;CW.seatOld=false;seatLast="";T("restored "+R.week+"."+R.buoi+" u"+R.used)}});
 function snapOk(o,C){const P=C&&C.P&&C.P[CW.seat];
@@ -29550,7 +29591,10 @@ let KRN_C={k:"",rx:null,m:null};
    person's title is read once. */
 let KRN_TM=null;
 function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
+/* review/lag-play-2: the table (every person's name + title through kitTitle → kitFace, ~100-250 ms at 4x) is rebuilt only after a render
+   (titles change only through game actions, which render): window.__rendN is the render counter (jlag2.js). */
+function krnTable(){if(KRN_C&&KRN_C.rn!=null&&KRN_C.rn===window.__rendN&&KRN_C.S===S)return KRN_C;const t=krnTable0();if(t){t.rn=window.__rendN;t.S=S}return t}
+function krnTable0(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
@@ -29558,7 +29602,7 @@ function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitle
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
 function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: name test first, ancestor walk only for hits */T.rx.lastIndex=0;if(!T.rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return !p||p.closest(KRN_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
@@ -30144,11 +30188,13 @@ function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector("
  want.forEach((r,i)=>{const w=r.parentElement;if(bar.children[i]!==r)bar.insertBefore(r,bar.children[i]||null);
   if(w&&w!==bar&&w!==P&&!w.children.length&&!w.textContent.trim())w.remove()});
  [...bar.children].forEach(c=>{if(!want.includes(c))c.remove()});
- P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;bar.style.setProperty("margin-left","-"+pl,"important");bar.style.setProperty("margin-right","-"+pr,"important");bar.style.paddingLeft=pl;bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h)P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
+ P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;/* lag-play-2: write only what changed (an equal write still dirties style) */if(bar.style.marginLeft!=="-"+pl)bar.style.setProperty("margin-left","-"+pl,"important");if(bar.style.marginRight!=="-"+pr)bar.style.setProperty("margin-right","-"+pr,"important");if(bar.style.paddingLeft!==pl)bar.style.paddingLeft=pl;if(bar.style.paddingRight!==pr)bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h&&P.style.getPropertyValue("--kpbarh")!==h+"px")P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
 window.kitPane=kitPane;
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);kitPane();return r};
  if(typeof k3CatTabs==="function"){const k0=k3CatTabs;k3CatTabs=function(){const r=k0.apply(this,arguments);kitPane();return r}}
- try{const P=$("panel");if(P)new MutationObserver(()=>kitPane()).observe(P,{childList:true})}catch(e){}
+ /* review/lag-play-2: the observer fired right after every renderPanel (which had just run kitPane) and after kitPane's own prepend, each time
+   reading computed style + layout mid-task; it now runs once in the next frame (before paint), for changes made outside renderPanel. */
+ let kpQ=0;try{const P=$("panel");if(P)new MutationObserver(()=>{if(!kpQ)kpQ=requestAnimationFrame(()=>{kpQ=0;kitPane()})}).observe(P,{childList:true})}catch(e){}
  addEventListener("resize",()=>{clearTimeout(window.__kpT);window.__kpT=setTimeout(kitPane,60)})})();
 (function(){const st=document.createElement("style");st.id="kit-pane";st.textContent=`
 #panel.kpane{padding-top:0!important;scroll-padding-top:calc(var(--kpbarh,0px) + 6px)}
@@ -41330,6 +41376,25 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
+/* ================= jlag2 (review/lag-play-2, owner 16/11 15:05Z: no lag in play, first priority) =================
+   Pure speed: nothing here draws, styles or words anything; every change keeps the same end state, it only skips repeated work.
+   1. window.__rendN — render counter; window.__rdep = render depth (>0 while a render runs: per-part fits wait for the end of render).
+      __rendN (outermost render call), the "state may have changed" stamp for per-render caches (jaudit krnTable).
+   2. kaNorm1 memo — the act/option button normaliser chain (j63 kaNorm1 + j79 kpActArt + jk2b kitHideOut + jopic kpOptArt + jstory/jts/jbac
+      wrappers) ran on EVERY matching button of the page twice per render (renderPanel kitFix + the kaNorm observer), ~150 ms at 4x each.
+      Every step of that chain is idempotent (each marks the button and returns early); a button whose content and class are unchanged
+      since its last full pass is skipped. Buttons inside the dialog (#modal) always run (their wrappers read the open dialog's Q[0]). */
+(function(){
+ window.__rendN=0;
+ setTimeout(()=>{try{
+  if(typeof render==="function"){const r0=render;let d=0;render=function(){d++;window.__rdep=d;try{return r0.apply(this,arguments)}finally{d--;window.__rdep=d;if(!d)window.__rendN++}};window.render=render}
+  if(typeof kaNorm1==="function"){const n0=kaNorm1;const SIG=new WeakMap();
+   const sig=b=>b.className+"|"+b.childElementCount+"|"+b.textContent.length+"|"+(b.disabled?1:0)+"|"+b.attributes.length;
+   kaNorm1=function(b){if(!b||!b.nodeType)return n0.apply(this,arguments);const inDlg=!!(b.closest&&b.closest("#modal"));
+    if(!inDlg){const s=SIG.get(b);if(s!==undefined&&s===sig(b))return}
+    const r=n0.apply(this,arguments);if(!inDlg)try{SIG.set(b,sig(b))}catch(e){}return r}}
+ }catch(e){console.error("jlag2",e)}},0);
+})();
 
 window.__ctmBuilt=1;
 </script>
@@ -41358,7 +41423,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d46076ff8cee";window.CTM_BUILD=BUILD;
+const BUILD="a7d06631c0f5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

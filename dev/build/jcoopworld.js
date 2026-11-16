@@ -420,17 +420,32 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
+/* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
+   the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers
+   "seatresync" and the next push is the full copy again. Parts = buoi, used, c, d.<key>, d.S.<key> (one JSON string each). */
+let seatBase=null,seatPend=null,seatBusy=0;
+function seatParts(o){const P={buoi:JSON.stringify(o.buoi),used:JSON.stringify(o.used),c:JSON.stringify(o.c)};const d=o.d||{};
+ for(const k in d){if(k==="S"&&d.S&&typeof d.S==="object"){for(const j in d.S)if(d.S[j]!==undefined)P["d.S."+j]=JSON.stringify(d.S[j])}else if(d[k]!==undefined)P["d."+k]=JSON.stringify(d[k])}return P}
+function seatDelta(P,B){const set={},del=[];let n=0;for(const k in P)if(B[k]!==P[k]){set[k]=JSON.parse(P[k]);n++}
+ for(const k in B)if(!(k in P))del.push(k);return {set,del,n:n+del.length}}
 function seatPush(o,now){if(!CW.on||CW.seatOld||!o||COOP.state.status!=="open")return;
- if(!now&&Date.now()-seatAt<SEAT_MS){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},SEAT_MS-(Date.now()-seatAt));return}
- const k=JSON.stringify([o.week,o.buoi,o.used,o.d,o.c]);if(k===seatLast)return;
- seatAt=Date.now();COOP.send({t:"seat",sv:CW.ssv||0,o}).then(ok=>{if(ok)seatLast=k})}
-COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk()}});
-COOP.on("error",m=>{if(m&&m.code==="seatold"){CW.seatOld=true;T("seatold "+m.sv)}});
-COOP.on("week",m=>{seatLast="";CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
+ if(seatBusy&&Date.now()-seatBusy>10000)seatBusy=0;  /* no seatok within 10 s (socket dropped): give up waiting */
+ if(!now&&(seatBusy||Date.now()-seatAt<SEAT_MS)){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},Math.max(400,SEAT_MS-(Date.now()-seatAt)));return}
+ const P=seatParts(o);const k=JSON.stringify([o.week,P]);if(k===seatLast)return;
+ const caps=COOP.state.caps||[];let msg;
+ if(caps.indexOf("seatd")>=0&&!Object.keys(P).some(x=>x.split(".").length>(x.startsWith("d.S.")?3:2))&&seatBase&&seatBase.wk===o.week&&seatBase.sv===(CW.ssv||0)&&!seatBusy){const D=seatDelta(P,seatBase.P);
+  msg={t:"seatd",sv:CW.ssv||0,set:D.set,del:D.del,dev:o.dev}}
+ else msg={t:"seat",sv:CW.ssv||0,o};
+ seatAt=Date.now();seatBusy=Date.now();seatPend={P,wk:o.week};COOP.send(msg).then(ok=>{if(ok)seatLast=k;else{seatBusy=0;seatPend=null}})}
+COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk();
+ if(seatPend&&CW.ssv===m.sv)seatBase={P:seatPend.P,wk:seatPend.wk,sv:m.sv};else seatBase=null}seatBusy=0;seatPend=null});
+COOP.on("error",m=>{if(!m)return;if(m.code==="seatold"){CW.seatOld=true;seatBase=null;seatBusy=0;T("seatold "+m.sv)}
+ if(m.code==="seatresync"||m.code==="seatbig"||m.code==="badseat"){seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(m.code==="seatresync"){T("seatresync "+m.sv);snapSoon()}}});
+COOP.on("week",m=>{seatLast="";seatBase=null;seatBusy=0;seatPend=null;CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
 /* review/coop-rejoin-xdev-r1: a device that was only ASLEEP (socket gone, page kept, e.g. the Fold locked) while she played on another
    device reconnects by itself (no begin): when the room's copy of her seat is newer and was written by another device, take it, so this
    device does not go on with its stale week (and its own copies are accepted again instead of "seatold"). */
-COOP.on("room",m=>{if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
+COOP.on("room",m=>{seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
  if(!R||!R.dev||R.dev===DEV||(R.sv||0)<=(CW.ssvWk===R.week?CW.ssv||0:0)||!snapOk(R,m.state))return;T("snap wake server sv"+(R.sv||0));
  if(CW.restore(R)){CW.ssv=m.msv||R.sv||0;CW.ssvWk=R.week;CW.seatOld=false;seatLast="";T("restored "+R.week+"."+R.buoi+" u"+R.used)}});
 function snapOk(o,C){const P=C&&C.P&&C.P[CW.seat];

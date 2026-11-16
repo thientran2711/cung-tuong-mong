@@ -134,7 +134,7 @@ export class Room {
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
       const mine = await this.seatCopy(seat);
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0 });
+      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0, caps: ["seatd"] });
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
       return new Response(null, { status: 101, webSocket: c2 });
@@ -178,6 +178,21 @@ export class Room {
       if ((msg.sv | 0) < cur) return this.send(ws, { t: "error", code: "seatold", sv: cur });
       if (JSON.stringify(o).length > SEATMAX) return this.send(ws, { t: "error", code: "seatbig" });
       m.sv[seat] = cur + 1; o.sv = m.sv[seat]; o.sat = Date.now();
+      await this.putBig("seat-" + seat, o); await this.saveMeta();
+      return this.send(ws, { t: "seatok", sv: m.sv[seat] });
+    }
+    /* seat copy as a DELTA (review/lag-play-2): only the parts that changed since the version she last stored. msg = {t:"seatd", sv:<her
+       version>, set:{path:value}, del:[path]}, a path = "buoi" | "used" | "c" | "d.<key>" | "d.S.<key>". Applied on top of the stored copy
+       only when that copy is exactly her version sv (server-authoritative); otherwise error "seatresync" -> the client sends the FULL copy. */
+    if (t === "seatd") {
+      m.sv = m.sv || {}; const cur = m.sv[seat] || 0; const o = await this.seatCopy(seat);
+      if (!o || (msg.sv | 0) !== cur || o.seat !== seat || !msg.set || typeof msg.set !== "object") return this.send(ws, { t: "error", code: "seatresync", sv: cur });
+      const put = (path, v, del) => { const k = String(path).split("."); let x = o; for (let i = 0; i < k.length - 1; i++) { if (!x[k[i]] || typeof x[k[i]] !== "object") { if (del) return; x[k[i]] = {}; } x = x[k[i]]; } if (del) delete x[k[k.length - 1]]; else x[k[k.length - 1]] = v; };
+      const ok = p => typeof p === "string" && /^(buoi|used|c|d\.[^.]+|d\.S\.[^.]+)$/.test(p) && !/__proto__|constructor|prototype/.test(p);
+      for (const p in msg.set) { if (!ok(p)) return this.send(ws, { t: "error", code: "seatresync", sv: cur }); put(p, msg.set[p]); }
+      for (const p of Array.isArray(msg.del) ? msg.del : []) { if (ok(p)) put(p, null, true); }
+      if (JSON.stringify(o).length > SEATMAX) return this.send(ws, { t: "error", code: "seatbig" });
+      m.sv[seat] = cur + 1; o.sv = m.sv[seat]; o.sat = Date.now(); if (msg.dev) o.dev = msg.dev;
       await this.putBig("seat-" + seat, o); await this.saveMeta();
       return this.send(ws, { t: "seatok", sv: m.sv[seat] });
     }

@@ -339,7 +339,10 @@ let KRN_C={k:"",rx:null,m:null};
    person's title is read once. */
 let KRN_TM=null;
 function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
+/* review/lag-play-2: the table (every person's name + title through kitTitle → kitFace, ~100-250 ms at 4x) is rebuilt only after a render
+   (titles change only through game actions, which render): window.__rendN is the render counter (jlag2.js). */
+function krnTable(){if(KRN_C&&KRN_C.rn!=null&&KRN_C.rn===window.__rendN&&KRN_C.S===S)return KRN_C;const t=krnTable0();if(t){t.rn=window.__rendN;t.S=S}return t}
+function krnTable0(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
@@ -347,7 +350,7 @@ function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitle
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
 function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: name test first, ancestor walk only for hits */T.rx.lastIndex=0;if(!T.rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return !p||p.closest(KRN_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}

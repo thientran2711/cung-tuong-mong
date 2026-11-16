@@ -12,7 +12,7 @@
      COOP.join(code) → Promise {room}   check (GET /api/room/<code>) + connect; rejects {code:"noroom"|"full"|"net"}
      COOP.resume()   → Promise|null     reconnect to the last room of this browser (localStorage "ctm-coop-room")
      COOP.leave(keep)                   close (no reconnect); forgets the room unless keep (then "Trở lại phòng" offers it)
-     COOP.send(obj) or COOP.send(t, fields)   one protocol message; gzip binary frame above 200 KB. false if not open.
+     COOP.send(obj) or COOP.send(t, fields)   one protocol message; gzip binary frame above 8 KB, sent in order. false if not open.
      COOP.on(t, fn) / COOP.off(t, fn)   server messages by their t: room presence state week said error pong;
                                         local events: "status" (COOP.state changed), "both" (both seats online, first time
                                         per connection), "start" (lobby hands over to the game), "peer" (friend online flag
@@ -26,7 +26,7 @@
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const DEF_URL="https://ctm-coop.victoria-tntt.workers.dev";
-const BIG=200000,PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
+const PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
 const H={};
 const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,peerOnline:false,bothIn:false,playing:false};
 let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
@@ -53,7 +53,7 @@ async function gunz(buf){const ds=new DecompressionStream("gzip");const w=ds.wri
 async function rx(ev){lastRx=Date.now();let m;
  try{const txt=typeof ev.data==="string"?ev.data:await gunz(ev.data instanceof Blob?await ev.data.arrayBuffer():ev.data);m=JSON.parse(txt)}catch(e){console.error("COOP bad frame",e);return}
  if(!m||!m.t)return;
- if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0});
+ if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0,caps:Array.isArray(m.caps)?m.caps:[]});
   if(pend){pend.res({room:st.room,you:st.you});pend=null}}
  else if(m.t==="presence")set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week});
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
@@ -96,8 +96,13 @@ function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep
  const was=st.playing;both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,playing:false});
  /* the co-op game is over on this device (Về màn đầu / ‹ Lui): the world module must hand save() etc. back to single-player */
  if(was)emit("stop",{})}
+/* review/lag-play-2: frames above GZ (8 KB) go gzip (the Worker gunzips any binary frame), and every send goes through ONE ordered queue,
+   so a small message never overtakes a bigger one still being compressed (end → unend, seat → bend keep their order). */
+const GZ=8000;let sendQ=Promise.resolve();
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
- const s=JSON.stringify(o);try{if(s.length>BIG&&typeof CompressionStream!=="undefined")ws.send(await gz(s));else ws.send(s);return true}catch(e){return false}}
+ const s=JSON.stringify(o),w=ws;const job=sendQ.then(async()=>{if(w!==ws||w.readyState!==1)return false;
+  try{if(s.length>GZ&&typeof CompressionStream!=="undefined"){const z=await gz(s);if(w!==ws||w.readyState!==1)return false;w.send(z)}else w.send(s);return true}catch(e){return false}});
+ sendQ=job.catch(()=>false);return job}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
 /* owner 16/11 ("không thấy sang buổi"): a phone that slept keeps a socket that LOOKS open (readyState 1) but is dead — a `bend` sent on it
    is lost and the server drops the seat after 45 s ("Hảo hữu đã rời cuộc"). On return: reconnect at once when the socket is closed, she was

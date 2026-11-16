@@ -32,16 +32,22 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
  "@media (max-width:1279px){"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}}"+
  "@media (max-width:700px){"+X+"::after{font-size:var(--tfs,.72rem)!important}}";document.head.appendChild(st)})();
 let TFS_CV=null;
-function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
- T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
+/* review/lag-play-2: tabsFit ran 2x per render, each time resetting --tfs and measuring every tab (forced layout). It now re-measures only
+   when something it depends on changed: viewport, the tab buttons (labels, shown / hidden), the classes of the bar and the game shell.
+   A call with an argument (fonts ready, resize) always measures. */
+let TFS_SIG="";
+function tabsFit(force){try{const T=$("tabs");if(!T)return;{const gm=document.querySelector(".game");
+  const sg=innerWidth+"x"+innerHeight+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+b.className+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
+  if(!force&&sg===TFS_SIG)return;TFS_SIG="";tabsFit.sg=sg}const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
+ T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;TFS_SIG=tabsFit.sg;
  const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
  if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
-addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(tabsFit,80)});
+addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(()=>tabsFit(1),80)});
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
-try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tabsFit)}catch(e){}
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>tabsFit(1))}catch(e){}
 setTimeout(tabsFit,0);
 /* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
    not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the

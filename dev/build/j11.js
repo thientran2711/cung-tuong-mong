@@ -79,7 +79,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,g=>{feedback(g>=2?"good":"bad");cb(g)})});
  const P=ACT.poison.f;ACT.poison.f=function(a,t){const r=P.apply(this,arguments);if(t===S||a===S)feedback(t===S?"poison":"ink");return r};
  for(const k of ["frame","kframe","kpoison","musk"]){const F=ACT[k].f;ACT[k].f=function(a,t){const r=F.apply(this,arguments);if(a===S&&/thành|tìm thấy|sảy|trúng|đào được/.test(r)&&!/bị lộ|phát giác|chặn kịp/.test(r))feedback("ink");if(t===S&&!/chặn kịp/.test(r))feedback("hit");return r}}
- W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim()}catch(e){}return r})})();
+ W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim();if(S&&!S.dead&&!pxPreload.done)pxPreload()}catch(e){}return r})})();
 function inkWipe(){if(!OPT.fxon||RM)return;fxOver("inkwipe")}
 function nightFade(){if(!OPT.fxon||RM)return;fxOver("nightf")}
 /* HUD numbers count smoothly */
@@ -102,6 +102,14 @@ function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
   {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
   const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
+/* review/lag-play-2: the first Pixi load (script parse + WebGL init, ~1-4 s on a slow phone) used to land inside her first tab / act tap.
+   Once a life is in play, at the first idle moment (~2.5 s after), fetch + run the library, then open the stage layer if the stage is on
+   screen. Same loader (kitPixi), same layer (pxLoad); nothing new is drawn. Skipped when effects are off / reduced motion. */
+function pxPreload(){if(pxPreload.done||RM||typeof OPT!=="object"||!OPT.fxon)return;pxPreload.done=1;
+ const ric=window.requestIdleCallback||(f=>setTimeout(f,1));
+ setTimeout(()=>ric(()=>{kitPixi().then(()=>ric(()=>{try{const st=$("stage");if(S&&!S.dead&&st&&st.clientWidth>0&&st.clientHeight>0)pxLoad()}catch(e){}
+  /* the FX overlay app (jfx kfApp: hidden canvas, ticker stopped until an effect plays) */
+  ric(()=>{try{if(typeof kfApp==="function"&&!(typeof kfStill==="function"&&kfStill()))kfApp().catch(()=>{})}catch(e){}},{timeout:3000})},{timeout:3000})).catch(()=>{})},{timeout:4000}),2500)}
 function pxCap(){return innerWidth<700?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}

@@ -154,7 +154,8 @@ function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)ret
  bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
-if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
+/* review/lag-play-2: inside a render (window.__rdep, jlag2) the fit runs once at the end of render (next line), not mid-render */
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);if(!window.__rdep)kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
 try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
