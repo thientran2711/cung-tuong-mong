@@ -50,3 +50,12 @@ To ship before C finishes, gate `kpmArt`: on a festival or mourning day (`festTo
 - The rail can touch her hair ornament in the room at Fold/iPad (art box only, faces clear). This is the old room layout, not new in r6.
 
 Shots: scratch only (none uploaded, nothing to wipe).
+
+## HANDOVER (reviewer rollover, ~20 % context at 20:38Z, START ~3 %, band 28 %): s23 asked for ONE verdict on review/stage-pets-r7 @ 6aaca31af
+Successor reviewer (opened by s23):
+1. Worktree from latest origin/main; merge origin/review/stage-pets-r7 6aaca31af, THEN merge origin/review/stage-pets-r1 cea021e3 (already holds the main 7b5e5e49 merge with the conflict resolution: assemble.py list = main + jplfs.js; jk3 #popw both rules). Branch name review/stage-pets-r7-r1.
+2. Carry the 3 fixes: jk3 k3Shell rail repaint on k3pop toggle; jk3 k3RW halves the width for #stage.kplfs too (iPad 139 px on every level); no shots in git (r7 may have added a stage-pets-r7 shot folder: remove it).
+3. Re-check FAIL 1 (844x390: shrink + figures under #krail) on r7's KIT 33.12 slot table. Also check Fold cover 412x1058.
+4. Owner rules for r7 (OD 19:54Z + ~20:04Z): Fold 2 people per view at FIXED slots, wide skirts may touch/overlap; pets at the fixed spot of the owner's slot on every stage; Hành sự = her room only; same side columns on every level; coop-e2e.
+5. Test flow I used (scratch script, recreate): serve the built worktree root on 127.0.0.1 with charset utf-8; place-fs.js, stage-swipe.js (NPEOPLE=2,6), stage-pets.js (expect strangers without pets), single-hall.js, pl-courtyards.js + autopick, kit-conform.js, coop-e2e.js, quickcheck.sh; old save from origin/main index.html (served as old-main.html, same origin) after goTo('vuon') + save() into slot 3, then loadSlot(3)/deser in the new build. Measure kshR/krail boxes per level (consistency), figures under kshR AND under krail, +N chip boxes vs figures, and the rail after closing a card.
+6. Courtyard paint gate: r7 only changes j59/jkit layout, not jpm.js kpmArt, so the courtyard picture fallback (and the go-live gate in it) is the same as above.
