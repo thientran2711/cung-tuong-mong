@@ -47,6 +47,9 @@ function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.em
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
+/* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -
+   never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
+function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(`${K.length?"thêm ":""}${U.length} vị chưa quen biết`);return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
 function k61PortEnt(p){if(!p)return null;if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
@@ -141,7 +144,7 @@ function k61VisEnt(p){if(!p||p.kind==="chest")return null;try{return k61PortEnt(
 /* talking face to face: a stranger first; greeting (1 khắc, sure) reveals both ways and leaves the talk open */
 let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=true;try{return d0.apply(this,arguments)}finally{K61RAW=false}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(K61RAW)return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
-  const g=st===0?{n:big?"Hành lễ":"Chào hỏi",o:100,k61:"greet",kke:kOf61(e),x:`thấy rõ mặt và thân phận theo y phục${riv?" · nàng cũng biết mặt ngươi":""} · chưa biết tên`}
+  const g=st===0?{n:big?"Hành lễ":"Chào hỏi",o:100,k61:"greet",kke:kOf61(e),x:`thấy mặt, rõ thân phận${riv?" · nàng cũng biết mặt ngươi":""} · chưa biết tên`}
    :{n:big?"Kính cẩn hỏi danh tính":"Hỏi danh tính",o:100,k61:"name",kke:kOf61(e),x:`biết tên người này${riv?" · nàng cũng biết ngươi":""}`};
   return [g].concat(A.map(a=>Object.assign({},a,{lock:true,t:K61WHY})))}}catch(x){}return A}})();
 (function(){const t0=talk;talk=function(oi){try{if(S&&popIdx!=null&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];

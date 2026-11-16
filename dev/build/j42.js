@@ -391,7 +391,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
  const T=(n,o,x,run,more)=>A.push(Object.assign({n,o,w:{},l:{},x,run(){const ok=o>=100||roll(o);const r=run(ok)||"";return `${o<100?(ok?'<span class="g">thành</span>. ':'<span class="r">hỏng</span>. '):""}${r}`}},more||{}));
  if(p.sk==="man"){const m=manById(p.mid);if(!m||!srvAdult(m))return A;const risk=srvRisk(S.place);
   T("Chào hỏi đúng lễ",100,"hắn quý ngươi +5",()=>{m.af+=5;return `${m.name} gật đầu đáp lễ.`});
-  T("Liếc mắt đưa tình",od(55+S.sac/5),`tình ý của hắn +12 · kèm: bị người thấy: ${chanceW(Math.round(risk/3))}`,ok=>{if(ok)m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
+  T("Liếc mắt đưa tình",od(55+S.sac/5),`tình ý của hắn +12 · có thể bị người thấy: ${chanceW(Math.round(risk/3))}`,ok=>{if(ok)m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
   if(m.tinh>=30)T("Trao khăn tay, thư",od(60+S.tamco/5),"tình ý +15 · khăn thư là tang vật nếu bị lục",ok=>{if(ok){m.tinh+=15;m.letters++}if(roll(risk/4))srvSeen(m,1);return ok?"Hắn giấu vội vào tay áo.":"Hắn chần chừ không nhận."});
   if(m.tinh>=50){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?cl(100-risk,5,95):0,`cần bạn canh cửa · đêm kín đáo: Sức +8, tình ý +10 · có thai: ${chanceW(10)} · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
     m.trysts++;m.tinh+=10;apply({suc:8});S.srv.lover=m.id;let r=`Đêm ấy rèm buông, đèn tắt; ${fr[0].name} canh ngoài hiên. Trời chưa sáng ngươi đã lẻn về.`;if(!S.srv.preg&&roll(10)){S.srv.preg=1;S.srv.pregM=0;r+=` <b class="r">Mấy hôm sau ngươi biết mình có thai.</b>`}return r},{lock:!fr.length,t:"cần một người bạn (quý ngươi từ 30) canh cửa",act:1});
@@ -446,7 +446,7 @@ PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return n
  L.push(row("Nam nhân",H.length?H.map(m=>`${m.role} ${m.name.split(" ").slice(-2).join(" ")}: ${tinhW(m.tinh)}${S.srv.vow===m.id?" · đã hẹn ước":""}${S.srv.lover===m.id?" · tư tình":""}`).join("; "):"chưa quen ai (gặp ở vườn, điện, Thái y viện)"));
  if(S.srv.rumor||S.srv.leak)L.push(row("Lời đồn",`${S.srv.rumor||0}${S.srv.leak&&RV(S.srv.leak)?" · "+RV(S.srv.leak).name+" biết chuyện":""}`));
  if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · tháng thứ 3 thì lộ: bị đánh chết: ${chanceW(50)}, không thì bị đuổi khỏi cung`));
- if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",S.srv.knowAff.map(RV).filter(Boolean).map(v=>v.name).join(", ")))}catch(e){}return L}})();
+ if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",kitNameList(S.srv.knowAff.map(RV).filter(Boolean))))}catch(e){}return L}})();
 /* a pregnancy she cannot show: the same hard road, priced */
 (function(){const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{if(isSrv()&&S.srv.preg&&!srvOnce("abort"))X.unshift({n:"Uống thuốc phá thai",t:"Mua thuốc của tiểu thái giám, uống lén trong đêm.",k:1,c:{bac:-20},o:od(60),w:{},l:{suc:-30},x:`hết thai, Sức -15 · hỏng: băng huyết Sức -30 · kèm khi hỏng: băng huyết mà chết: ${chanceW(20)}`,once:"abort",dom:"",go:()=>{S.srv.preg=0;apply({suc:-15})},fail:()=>{S.srv.preg=0;if(roll(20))die("Uống thuốc phá thai, băng huyết mà chết")}})}catch(e){}return X}})();
 /* a friend's tip may be a consort's affair */

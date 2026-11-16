@@ -423,7 +423,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   const kitRes=typeof kitGameResult==="function"?kitGameResult({parts:[["Màn thi",skipped?`Để tài nghệ quyết định, ${raw}/10 → +${skill}`:`${kg82Word(raw)} ${raw}/10 → +${skill}`]].concat(tParts.map(([l,v])=>[l,`+${v}`]),prep?[["Chuẩn bị",`+${prep}`]]:[]),
    total:`${score} phần`,place:pw,of,rivals:ord.map(x=>({who:x.p||x.who,score:x.score,sub:x.sub})),gains,losses,note,extra:cup&&cup.html}):null;
   const html=(kitRes||`<h4 class="kpst">Phần của ngươi</h4>${kg82Rows(sRows)}<h4 class="kpst">Bảng định thứ</h4>${stand}${tail}`)+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("round",pw);kg82Set("time","đã hết");
+  kg82ShowRes(html,place<=3);kg82Set("score",`${raw}/10`);kg82Set("round",pw);kg82Set("time","đã hết");
   const out={score,raw,skill,talent,prep,skipped,place,of,standings:ord.map(x=>({id:x.id,name:x.name,score:x.score})),shown:true};KG82.last=out;
   const ok=$("kg82ok");ok.onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(out)}catch(e){console.error(e)}};const dd=kg82El();if(dd)dd.scrollTop=0;try{ok.focus({preventScroll:true})}catch(e){}};
  /* owner 15/11: everyone who competes with her becomes KNOWN at the contest (face + name, "đã gặp") */
@@ -434,7 +434,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{KG82.lv=kg82LvFor(S,kind)}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const done=(raw,skipped)=>{KG82.phase="result";const html=kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
+  kg82ShowRes(html,raw>=5);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped})}catch(e){console.error(e)}}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để trời định<small>tính 5/10</small></button></div>`;
  $("kg82go").onclick=()=>kg82Play(kind,raw=>done(raw,false));$("kg82skip").onclick=()=>done(5,true)}
