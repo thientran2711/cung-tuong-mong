@@ -14,19 +14,19 @@ const clr=p=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal')
  await p.evaluate(NEWLIFE);await sleep(400);await clr(p);
  /* 1. matrix: every festival x buổi 0..3 x scene -> each effect true only for its festivals and buổi; scene never matters; no fireworks anywhere */
  const M=await p.evaluate(()=>{const out=[];const keep={m:S.month,t:S.tuan,b:S.buoi,pl:S.place,tab:tab};
-  for(const k in FEST){const f=FEST[k];S.month=f.m;S.tuan=f.t[0];for(let bu=0;bu<4;bu++)for(const [pl,tb] of [["home","ac"],["vuon","ac"],["thu","ac"],["home","go"],["lc","ac"]]){S.buoi=bu;S.place=pl;tab=tb;out.push({k,bu,pl,tb,lantern:kfFestFx("lantern"),gold:kfFestFx("gold"),fly:kfFestFx("fly")})}}
+  for(const k in FEST){const f=FEST[k];S.month=f.m;S.tuan=f.t[0];for(let bu=0;bu<4;bu++)for(const [pl,tb] of [["home","ac"],["vuon","ac"],["thu","ac"],["home","go"],["lc","ac"]]){S.buoi=bu;S.place=pl;tab=tb;out.push({k,bu,pl,tb,festival:kfFestFx("festival"),lantern:kfFestFx("lantern"),gold:kfFestFx("gold"),fly:kfFestFx("fly")})}}
   S.month=keep.m;S.tuan=keep.t;S.buoi=keep.b;S.place=keep.pl;tab=keep.tab;return {out,keys:Object.keys(FEST),T:JSON.parse(JSON.stringify(FESTFX)),B4L,fw:!!(FX.festival)}});
- let bad=0,fire=0;for(const r of M.out)for(const e of ['lantern','gold','fly']){const T=M.T[e];const want=T.fest.includes(r.k)&&(!T.buoi||T.buoi.includes(r.bu));if(r[e]!==want){bad++;console.log('  mismatch',e,JSON.stringify(r),'want',want)}if(r[e])fire++}
+ let bad=0,fire=0;for(const r of M.out)for(const e of ['festival','lantern','gold','fly']){const T=M.T[e];const want=T.fest.includes(r.k)&&(!T.buoi||T.buoi.includes(r.bu));if(r[e]!==want){bad++;console.log('  mismatch',e,JSON.stringify(r),'want',want)}if(r[e])fire++}
  ck('matrix '+M.out.length+' cells x 3 effects, true in '+fire,bad===0&&fire>0,'bad='+bad);
  ck('lantern and fly only at tối, gold any buổi',M.T.lantern.buoi.join()===String(M.B4L)&&M.T.fly.buoi.join()===String(M.B4L)&&M.T.gold.buoi===null);
  ck('thanhminh gets nothing',!M.out.some(r=>r.k==='thanhminh'&&(r.lantern||r.gold||r.fly)));
- ck('no fireworks: FX.festival row removed',!M.fw);
+ ck('fireworks row only reachable through FESTFX.festival (newyear, giaothua, tối)',M.fw&&M.T.festival.fest.join()==='newyear,giaothua'&&M.T.festival.buoi.join()===String(M.B4L));
  ck('table keys all exist in FEST',Object.values(M.T).every(x=>x.fest.every(k=>M.keys.includes(k))));
  const E2E=async(m,t,bu,pl,tb)=>{await p.evaluate(([m,t,bu,pl,tb])=>{KFX.log.length=0;KFX.festK="";S.month=m;S.tuan=t;S.buoi=bu;S.place=pl;tab=tb;if(pl==="home")S.visit={k:"home",people:homePeople(),talked:false};else S.visit=null;Q.length=0;render()},[m,t,bu,pl,tb]);await sleep(1500);return p.evaluate(()=>KFX.log.filter(k=>k==="festival"||k==="lantern"))};
  ck('thanh minh chiều room: none',(await E2E(3,0,2,'home','ac')).length===0);
  ck('nguyên tiêu chiều: none (wrong buổi)',(await E2E(1,1,2,'home','ac')).length===0);
- ck('tết tối: none (no fireworks)',(await E2E(1,0,3,'home','ac')).length===0);
- ck('giao thừa tối garden: none (no fireworks)',(await E2E(12,2,3,'vuon','ac')).length===0);
+ ck('tết tối: festival (fireworks)',(await E2E(1,0,3,'home','ac')).join()==='festival');ck('tết chiều: none (ordinary evening-like buổi gets no fireworks)',(await E2E(1,0,2,'vuon','ac')).length===0);
+ ck('giao thừa tối: festival',(await E2E(12,2,3,'vuon','ac')).join()==='festival');
  ck('nguyên tiêu tối garden: lantern',(await E2E(1,1,3,'vuon','ac')).join()==='lantern');
  ck('nguyên tiêu tối room: lantern (scene does not matter)',(await E2E(1,1,3,'home','ac')).join()==='lantern');
  ck('trung thu tối: lantern',(await E2E(8,1,3,'vuon','ac')).join()==='lantern');

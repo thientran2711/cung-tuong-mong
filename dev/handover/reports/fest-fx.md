@@ -4,16 +4,16 @@
 dev/build/jfx.js render wrapper fired kitFx("festival") (sky lanterns + fireworks) when `S.buoi===2 && festToday()`. Buổi 2 was "tối" in the 3-buổi system; with 4 buổi (sáng/trưa/chiều/tối) it is chiều. It also ignored indoor/outdoor and which festival. Tháng ba thượng tuần = FEST.thanhminh (Tiết Thanh minh, tảo mộ) — a festival that must never get fireworks.
 
 ## Fix (v2, after the owner corrections of 11/16: no fireworks; indoor/outdoor irrelevant; effect must match the current buổi AND current event)
-- Fireworks layer REMOVED (FX.festival row deleted; no kind uses light "fireworks").
+- Fireworks (owner clarification): kept ONLY for Tết (newyear) and Giao thừa, buổi tối; none on any ordinary evening or other festival.
 - Indoor/outdoor condition DROPPED.
 - ONE table `FESTFX` (jfx.js) = effect x allowed festivals x allowed buổi (null = any), checked by `kfFestFx(effect)`:
   | effect | festivals | buổi |
+  | festival (sky lanterns + fireworks, once per night) | newyear, giaothua | tối (B4L) |
   | lantern (sky lanterns, once per night) | nguyentieu, trungthu | tối (B4L) |
   | gold (gold/red sparks, j33 pxKind) | newyear, giaothua, nguyentieu | any |
   | fly (fireflies, j33 pxKind) | thattich, trungthu | tối (B4L) |
   Thanh minh and every unlisted festival: nothing. j33 pxKind now reads the table (before: fireflies in daytime, effects keyed by place list).
 - Already buổi-gated and left: kfDeco night orbs/sparks (B4L).
-QUESTION for the owner: should Giao thừa (cuối năm, đêm) keep fireworks? NOT added. Also Tết currently has only gold sparks (no sky lantern) — add lantern to newyear?
 
 ## 3-buổi leftovers audit (grep S.buoi===N / b:N / w*3+b / *3 clocks / BUK / "% 3" over every j*.js)
 FIXED
