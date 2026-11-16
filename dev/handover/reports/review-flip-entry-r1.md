@@ -4,7 +4,7 @@ START_CTX ~8 % (estimate); finished well under the rollover line.
 
 ## Merge
 - Conflicts index.html / sw.js / assets.json → main's; assemble.py = main's list + `jfe.js` right before `jcoopone.js` (jcoopone stays LAST). Site rebuilt (bash dev/site/build_site.sh). No conflict markers.
-- Commits: 39f7a824 (merge + build), 20223e40 (test fix below).
+- Commits: 39f7a824 (merge + build), 20223e40 (test fix below), 9890f9fe (main moved during review: merge origin/main 08725411 = diemtrang-fx makeup only; index/sw/assets from main, rebuilt). After that merge: flip-entry.js Fold ALL OK, quickcheck 9890f9fe PASS (open 1104 ms, old save ok, render 231/217, buổi 797/1073 ms). Co-op suites not re-run for 08725411 (makeup FX only, no co-op/night code).
 
 ## Code check (jfe.js)
 - Self-contained: no-op when `window.nfOn` exists (night-final jnf.js), only touches S.nfP / S.nfF (same names as jnf). Safe for night-final to delete it + its assemble entry.
