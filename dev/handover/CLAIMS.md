@@ -56,4 +56,4 @@
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
 | D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | RUNNING | 06:23Z 16/11 |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
-| coop-chat review | review/coop-chat-r1 | D | (reviewer session, id follows) | RUNNING | 16/11 06:26Z |
+| coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | RUNNING | 16/11 06:26Z |

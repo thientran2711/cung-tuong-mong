@@ -21,7 +21,7 @@ main at start = eba64ead4.
 | D56 icons + Nội vụ phủ art | — | — | MOVED to Foreman C |
 | fig-hd-upscale + face-sharp-hd2 | review/fig-hd-upscale | — | MOVED to Foreman C |
 | slap-mg review 3c4f1c81b | — | sonnet | WAITING: facefx-all not on main yet |
-| coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | kitStageRail (jrail.js §77) now on main → reviewer RUNNING |
+| coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | kitStageRail (jrail.js §77) now on main → reviewer session_01DgYSWnc7QSik7k9buMTQwK RUNNING |
 | servant-system phase 2 | — | opus | WAITING: fix A + audit review |
 | act-split waves 2–3 | — | opus | WAITING: GO from main coordinator after act-dedupe lands |
 
