@@ -112,7 +112,7 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
  if(it.w)D.push(...eff(it.w));
  if(it.use){const u=Object.entries(it.use).filter(([x,v])=>v).map(([x,v])=>`${N[x]||x} ${v>0?"+":""}${v}`);if(u.length)D.push((it.kd==="Thư từ"?"đọc: ":"dùng: ")+u.join(", "))}
  if(it.ant)D.push("an thai");if(it.fert)D.push(`${it.fert} tháng dễ thụ thai`);if(it.anti)D.push("cứu một lần trúng độc");if(it.evi)D.push(`chứng cứ +${it.evi}`);
- if(it.keep)D.push("Sủng không dưới 15");if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
+ if(k==="ngocboi")D.push("Sủng không dưới 15");/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
  if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
  const lux=it.sl||it.dr?luxVal(k):0;if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
