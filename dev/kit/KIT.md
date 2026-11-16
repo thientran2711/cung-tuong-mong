@@ -3817,45 +3817,5 @@ night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar
 The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
 Sample: kit page §81 (opens a real scene: the button shows after the animation and only it closes). Test: `dev/test/scene-end.js`.
 
-## 61. FIG-BG · silk hanging scroll behind every full-body figure · kitFigBgKey / KIT_FIGBG (owner 15/11 ~20:40Z option A, review/fig-bg) — `dev/build/jfigbg.js` (last module, after jact)
-The person is painted ON a vertical silk hanging scroll: roller rod with knob ends at the TOP and at the BOTTOM, brocade mount, silk field. Colour + motif say the status.
-- Wiring (one place): `kitStageFig` puts `data-fb="<key>"` on `<figure class="kesf">`; the CSS of jfigbg paints the scroll on that figure's column with `border-image`
-  (rods + mount keep their size, the silk stretches): `.kbk-por` (Tuần lục person page) and `.kes` (kitEventDp / kitEventStage column, first figure's key). Never make a private scroll/frame.
-- ONE figure size inside the scroll: every adult stands at the same size (men NOT taller), children by age. Book: `--kfr = .93 x min(1, kfr x KIT_FIG.man)` (headroom under the rod); dialog column: already `min(1, fac)`.
-- Crop rule (owner 15/11 20:50Z): the figure sits in the silk window (`overflow:hidden`); a wide robe that would pass the window edge is CROPPED, never sticks out. The dialog column widens by the border (`kitDpFit`).
-- Name chip in the dialog column sits on the painting: light halo (text-shadow), same vivid colour.
-- Art: `img/kit/figbg-<key>.webp` 448x800 (8-49 KB each, loaded on demand = one download per key), Magnific gpt-2-6 9:16, empty of people.
-| key | status | silk colour | motif |
-|---|---|---|---|
-| c0 | Đáp ứng | ngà (ivory) | white plum blossom |
-| c1 | Thường tại | pale green | bamboo, orchid |
-| c2 | Quý nhân | pale blue | lotus, water ripples |
-| c3 | Tần (also công chúa) | pale pink | peony |
-| c4 | Phi | pale lavender | wisteria |
-| c5 | Quý phi | pale rose-red | camellia |
-| c6 | Hoàng quý phi | pale amber-orange | golden chrysanthemum |
-| c7 | Hoàng hậu | pale yellow, gold mount | phoenix, peony |
-| cold | Lãnh cung | cold grey, plain mount | bare branch, no gold |
-| emp | Hoàng thượng | imperial ochre-gold, gilded rods | dragon, auspicious clouds |
-| th | Thái hậu | dusty mauve-taupe | pine, cranes, longevity peach |
-| serv | maid / mama / eunuch | grey hemp, linen mount | willow |
-| man | Vương gia / official / guard / physician / prince / công tử | grey-green ink wash | bamboo, misty mountains |
-| unk | stranger (unknown silhouette) | warm stone-beige | mist |
-The rank colours follow the portrait-frame / trung y colours (OWNER_DECISIONS 15/11 10:08Z). Sample: kit page `#kit` § 61 (one scroll per key).
-
-### 61.1 reviewer fixes (review/fig-bg-k1-r1)
-- The dialog name chip (`.kdpcap`) wraps INSIDE the silk window (white-space normal, max-width = window) and kitDpFit clamps it to the window, not the border box (a long name was cropped by the scroll).
-- Book: a column with a silk scroll keeps its normal width (`kitBookFigCol` returns "" for `data-fb`) — the scroll window crops a wide robe; it never widens the column (text ≥ 220 px kept). The book figure keeps main's KIT 34.6 vertical offset.
-- The dialog column's border is INSIDE the capped column (kit keeper change); the older sentence "the dialog column widens by the border" above no longer applies.
-
-### 45.4 PANE BAR NEVER OVER A POP-UP (main s14 bug ".kpbar above modal"; review/kit-keeper-2)
-`.kpbar` (the sticky pane bar, §45) was z-index 40 while every `.modal` (dialogs, notices, results) is z-index 30, so the bar drew OVER an open pop-up. The bar is now z-index 29: under every `.modal` (30), the week summary `.dawn` (40), toasts (45); `#popw` (41) still lies above the bar. Rule: nothing sticky inside `#panel` may use a z-index ≥ 30 (it would cross the pop-up layer). Test: `dev/test/kpbar-modal.js` (a pop-up open over every pane tab: the pop-up's centre point belongs to the pop-up, not to the bar).
-
-### 28.13b BIG ITEM · frameless + hi-res (D3 item-big, OD:L686; KIT REQUEST from review/item-big @adda320; review/kit-keeper-2) — `kitItem` / `kitItemBigSrc` (jk2b)
-Sizes `lg` (150 px) and `xl` (min(260 px, 36 dvh)) of `kitItem` are the CENTRE picture of an item (info pop-up, gift / econ / pet-care / veil / mark pictures, reward spotlight): they carry NO frame — no border, no ground, no box-shadow, no overflow clip, no tier ground image
-(the 9-slice frame and the t-ground of §28.13 are for `slot` / `sm` / `md` only). The painting stands alone on the pop-up's paper with a soft drop shadow; the grade is shown by the grade word under it (`.kitg`, grade colour) and the name; the floating chips (`kitq` ×N, `kits` Ngự, `kiton`, `kitm`, `kitx` Xa xỉ) stay.
-`kitItem({…, frame:true})` keeps the frame for a special case (none today).
-HI-RES: for lg / xl a small painting `img/item-X.webp` (256) is requested as `img/item512/item-X.webp` (512; `kitItemBigSrc(src)` does the mapping, other sources unchanged); if the 512 file is missing the small one is shown (`onerror`, one swap). So the ~20 call sites that passed the small src (jgift, jinv, jkrev, jmark, jpet, jpetcare, jveil, jwdinv, jlost …) are hi-res and frameless WITHOUT being touched.
-Not covered (own source functions, no item512 mapping): pet stage pictures, veil / mark pictures, wardrobe `wd-*` icons (`img/wd512/…` are already 512 where the call site passes them), the 22 items with no `item512` painting (list in reports/item-big.md → ART REQUEST). Tư trang grid (`slot`) and all lists (`sm` / `md`) keep their frame.
-SPLIT with 28.13f (main s14, 16/11, OD:L686): CENTRE displays — the receive / lose / reward NOTICES whose picture slot holds the item (`kind:"notice"` + `itemPic`: kitLose "Mất đồ", receive, reward; `.kpb.kphas > .kpsubj.kpitem`; jinv `kpBuild` skips `kitSlotDress` for them) show the ITEM ALONE, big (picture column `min(150px,38%)`), sharp, frameless. The bag / Tư trang item pop-up (`kinvOpen`), every `kind:"info"` panel with an item picture (gift, econ, veil, mark) and the equipment-slot cards stay COMPACT with the grade frame + ground (28.13f, owner "ĐIỀU · Ô cài tóc far too big"): `kitSlotDress` marks their item `kitem-fr` (frame on, 64 px header icon). Rule for new code: item alone in the middle of a notice = lg/xl frameless; item as a row/slot/card in a list or bag = md / slot / `frame:true`.
-Sample: kit page §28.13b. Test: `dev/test/item-big.js` (also the real "Mất đồ" notice box ≥ 120 px and the bag pop-up still framed).
+## 61. FIG-BG · NOT SHIPPED (owner 16/11 13:30Z, OD:L1314)
+The C8 painted-scroll background behind full-body figures is switched off everywhere: figures stand directly on the frame's own background. The art stays in storage (img/), unused; no jfigbg module in the build.
