@@ -448,7 +448,9 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk.art-end .kbk-pg.k-end .kbk-in{container-type:size}
 .kbk.art-end .kbk-pg.k-end .kbk-seal i{font-size:max(1.1em,24cqh)}
 .kbk.art-cover .kbk-label{position:absolute;left:9.1%;top:3.6%;width:13.8%;height:57.7%;min-width:0;max-width:none;background:none;border:0;outline:0;box-shadow:none;padding:0;container-type:size;justify-content:center;align-items:center}
-.kbk.art-cover .kbk-lt{display:flex;flex-direction:column;align-items:center;gap:.25em;font-size:min(36cqw,13cqh);letter-spacing:0;line-height:1.05}
+.kbk.art-cover .kbk-lt{display:flex;flex-direction:column;align-items:center;gap:.25em;font-size:min(24cqw,11cqh);letter-spacing:0;line-height:1.05}
+/* review/small-bugs-3: the text fallback of the cover label (no title picture) keeps a margin: a 4–5 letter word ("Tuần", "Hoàng") ≤ ~3/4 of the
+   narrow label (was 36cqw: "Tuần" 62 of 66 px at 1000x755) */
 .kbk-ltimg{display:none}
 .kbk.art-cover.art-title .kbk-label:has(.kbk-ltimg){justify-content:flex-start}
 .kbk.art-cover.art-title .kbk-ltimg{display:block;flex:0 0 auto;width:calc(100% - 12px);height:calc(100% - 20px);margin:10px auto 0;object-fit:contain;object-position:50% 0;pointer-events:none;-webkit-user-drag:none}
