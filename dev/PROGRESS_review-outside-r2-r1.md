@@ -64,3 +64,14 @@ Results: route.js 755x1000@2 + 844x390@2 PASS · kc-end.js PASS · oldsave.js PA
 Verified: Gia tộc pager below the kpinline sub-tabs (755: sub 159–203, strip 208–282; 844: sub 0–43, strip 48–144 in the pane; the pane at 844
 opens scrolled to the detail, same as palace Hậu cung — shared behaviour). Phúc tuyển card not over the first palace screen. New art
 item-vongbackc / item-ngocboikc looked at: clean, on style.
+
+### r2-r2 second merge (main moved to 7f20b751 during the review: merge trains 1+2, cardflip, jgoal, palace-start, evidence-truth …)
+assemble: main's list + jkc.js LAST (after jtruth). New-main interactions found at home and fixed by the reviewer:
+- jflip (KIT §67 card-flip): the palace's "Hoàng thượng lật thẻ bài" scene played at home (start week + every home week via kcEndTurn's
+  palace flip). Now kcInit clears S.nightWhy (the start scene drops itself) and the home week's flip runs under quiet (no jflip / j93 note).
+  Probe: 2 home weeks → 0 scene pushes.
+- jgoal (KIT §72 goal strip): at home it showed the PALACE chapter ("Chương 1 «Nhập cung, đứng vững»: Được tấn phong một bậc"). Hook
+  window.kitGoalAlt (jgoal chapter()/nextSteps/road, KIT 72.2 note); jkc returns "Chờ kỳ tuyển tú" with home todo (tài nghệ · lòng cha mẹ ·
+  danh tiếng). After the tuyển tú the palace chapter is back.
+Final results on this build: route.js 755x1000@2 / 844x390@2 / 1366x1024@2 PASS (1000x755@1, 1180x820@2 PASS on the first merge) · kc-end PASS ·
+oldsave PASS · coop-home 51/51 · coop-e2e 59/59 · coop-timer 43/43 · 390x844 rotate prompt OK. 0 page errors.
