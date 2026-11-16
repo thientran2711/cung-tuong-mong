@@ -43,3 +43,15 @@ Test change: road-full / road-rare retry in a FRESH context (a fresh world) when
 ## Notes
 - A world whose children are all < vlAge (or only the Hoàng hậu's) cannot roll thd_hoc that life (by design); over later lives in the same world the children grow and the school-age wording takes over.
 - No UI change (texts only, j67 kit cards); no new kit part.
+
+## NEW GATE one-core-guard (Foreman B s8 23:24Z) — NOT done, handed over (worker rolled over: context at the ceiling)
+- The guard is not on origin/main yet (main 08725411); it is on review/one-core-land-r1 and needs that branch's jbal (ONE CORE block).
+- Measured: one-core-land-r1 dev/build + this branch's jroad/jrd_thd/jrd_cnv/jend14 added to assemble.py → `fails: 229`,
+  inlineNow 9681 vs baseline 6691 = **~2990 inline rule numbers** in the 4 road files (option c/w/l stat costs and gains [fx], odds and
+  stat comparisons [cmp]); e.g. jrd_thd suc:-2 ×128, danh:-2 ×124, duc:3 ×70. One fail line per (file, pattern).
+- Successor: wait for road-onecore's BAL key pattern (dev/handover/reports/road-onecore.md, worker session_01N1tNP2CnQZTs1376PcZZun),
+  merge latest origin/main (once the guard is there) into review/road-b3-fix2 @ 83641f2a, move every number into BAL.road.* with values
+  unchanged, regenerate jrd_thd/jrd_cnv from rdfrag (rdfrag/cat.sh — edit the rdfrag sources, not the generated files), run
+  `node dev/test/one-core-guard.js` → 0 fails (no --allow-grow), then re-run road-full thd_hoc, road-rare (8 B3 roads), road-option-scan,
+  road-end, road-saves, coop-e2e — ONE bot at a time (2 parallel bots OOM-killed the container once).
+- Everything above (item 1 fix + family + tests) stands at 83641f2a.
