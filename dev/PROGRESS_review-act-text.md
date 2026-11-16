@@ -60,3 +60,8 @@ Before on the merged code with the NEW scan (dau+toi only): kemgain 4, long 29 -
 - 41 long rows remain at 755 (>2.3 lines): mostly Kèm/Mất lists of many numbers (Tung tin đồn, Khiêu khích, Thỉnh an, Vu oan, Bỏ độc…) — need design (split into sub-rows) = kit.
 - Picture note: Tứ đức Dung and Ngôn "Tự học" cards show Công's embroidery picture (picture workers).
 - Root index.html / sw.js not rebuilt (coordinator rebuilds on merge).
+
+## Review r1 (reviewer, 16/11) — branch review/act-text-r1
+- Merged origin/main 4f5e5f3b32 (j19 conflict: main had its own whole-word `KWB`; kept the branch's `kWB`, made `mất`/`dễ` whole words so "mất tiền", "dễ thành" keep their colour).
+- Fixes by the reviewer (text only): Điểm trang Kèm ("mặt mộc bị chê" was green in Được; Kèm items joined with ", " not " · ", "xét y phục và dung nhan"); Liếc mắt đưa tình j22 ("một phi tần nắm 1 chứng cứ của ngươi" — was a cost shown green in Được); thái y "rõ Sức, bệnh và có thai hay chưa" (lone "bệnh"); j17 generic "chọn rồi xem kết quả ở bước sau" (lone "chọn"); KIT_GLOSS "Tác phẩm" 0..10 → "từ 0 đến 10".
+- Scan on merged build, 755x1000: dau brk 0 dots 0 pct 0 frag 0 word1 0 sign 0 kemgain 3 (K8-1: "kèm:/thành:" labels leak on place cards Xin bắt mạch, Liếc mắt) twice 1 long 90; hh brk 0 dots 0 word1 2 (fixed after) kemgain 2 long 110. `long` is much higher than the worker's 41 because the material dialogs (Tài nghệ tier line, 4-5 lines) and Đề bạt/Phạt rows are now measured; all = kit K8.
