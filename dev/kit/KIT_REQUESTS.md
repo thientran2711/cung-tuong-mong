@@ -41,3 +41,8 @@ Task C44 follow-up "Xóa sổ trên mây" needs two kit parts that KIT.md (main,
 1. **DANGER button** — a kit button variant for irreversible actions (suggest `.kbtn.kdanger`, same size/shape as `.kbtn`, one clearly different tone, never red-on-red with the lacquer `.kbtn`). Today only `.kbtn` (lacquer) and `.kbtn.alt` exist.
 2. **Confirm dialog** — a kit `kitConfirm({title, lines, yes, no})` (centre pop-up on `kitModal`, `.kbtn.kdanger` yes + `.kbtn.alt` no, optional "type the code to confirm" field via `kitInput`). Today the only confirm is the inline two-tap "Chắc chắn?" on a `.kbtn.alt` (KIT §1288 Kiếp mới, jcloud Thôi nối / Lấy lại), which is too light for deleting the cloud sổ.
 Needed by: review/cloud-del (jcloud.js, Sổ mây › Ám hiệu page). Waiting on the kit keeper ("KIT READY: danger button + kitConfirm"); then the worker resumes.
+
+## (16/11 14:30Z, main s18) from design-scale-p2-r1 reviewer — kit keeper items
+1. **Toilette one-page** (≤574 px) on BOTH modes: mirror band on top with her portrait, "Hôm nay" as chips, slots + scrolling bag, sticky buttons (matches every other kg82 page = spread). Reviewer: gain > loss.
+2. **Per-mode modal rules**: kit modals still carry :where(.kv1/.kv2) rules (kpdlg, dawn kpanel, kpsc, kitReward kmtabs/kmbox, kpm-list, kipd2, .art .pcb, toilette, coop timer chip) — breaks KIT §0.0; fold into one rule + dialog rect-compare test.
+Start AFTER design-scale-p2-r1 is live (it owns those files).
