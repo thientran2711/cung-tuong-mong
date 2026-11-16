@@ -39379,7 +39379,7 @@ const P95B={/* other saveable cards (mkP id): params → role; at = place per pa
  poisongift:{p:{v:{n:"nạn nhân quà độc (kẻ gửi giấu mặt)"}}},comet:{p:{v:{n:"bị điềm xấu ứng vào",opt:1}}},caning:{p:{v:{n:"bị Hoàng hậu phạt"}},at:{v:"kn",queen:"kn"}},
  coldvisit:{p:{f:{n:"phế phi ở lãnh cung"}}},fire:{p:{v:{n:"cung bị cháy"}},at:{v:"own"}},coldletter:{p:{f:{n:"phế phi xin giúp"},v:{n:"được nhắc đến",opt:1}}},
  loveletter:{p:{v:{n:"thư riêng bị tai mắt nhặt được"}}},thd1:{p:{v:{h:"accuse",w:v=>1+(v.ghen||0)}}},giftin:{p:{f:{f:"gift",nb:1,key:1}}},
- giftpick:{p:{v:{me:1}}},/* r3 reviewer: her own scheme mini-game pick (jsgame) and her blood-test accusation (jroute) are her acts, not an NPC act */sgpick:{p:{v:{me:1}}},rtNgNpc:{p:{v:{me:1}}},/* r4: jroute NPC acts — rtBm = the witness blackmails her (uyhiep, gated in rtCaughtBy/rtMonth; never re-picked), rtNpcEsc = a consort really preparing to flee, seen at the place the record puts her */rtBm:{p:{v:{h:"uyhiep",nr:1}}},rtNpcEsc:{p:{v:{n:"đang lén chuẩn bị trốn khỏi cung (việc có thật: kế đã lập từ trước)"}}},plantpick:{p:{v:{me:1}}},j70start:{p:{v:{me:1}}},
+ giftpick:{p:{v:{me:1}}},/* r3 reviewer: her own scheme mini-game pick (jsgame) and her blood-test accusation (jroute) are her acts, not an NPC act */sgpick:{p:{v:{me:1}}},rtNgNpc:{p:{v:{me:1}}},/* r4: jroute NPC acts — rtBm = the witness blackmails her (uyhiep, gated in rtCaughtBy/rtMonth; never re-picked), rtNpcEsc = a consort really preparing to flee, seen at the place the record puts her */rtBm:{p:{v:{h:"uyhiep",nr:1}}},rtNpcEsc:{p:{v:{n:"đang lén chuẩn bị trốn khỏi cung (việc có thật: kế đã lập từ trước)"}}},/* r4 (sens audit (g)): jcmaid — her maid shoved the other side's maid (her maid's temper; the mistress there is only the injured side); the other side's people scorn her maid (a hostile act: the mistress must have a motive, else another one is picked) */cmBrawl:{p:{v:{n:"chủ của cung nữ bị cung nữ của ngươi xô ngã (việc có thật: cung nữ ngươi nóng tính)"}}},cmScorn:{p:{v:{h:"provoke"}}},plantpick:{p:{v:{me:1}}},j70start:{p:{v:{me:1}}},
  cnvBribe:{p:{r:{h:"bribe",toMis:1}}},cnvBlack:{p:{r:{h:"uyhiep"}}},cnvOrd:{p:{t:{tgt:"mis",h:"$k"}}},
  j71m:{p:{a0:{n:"việc lập công (ngươi tự quyết)",opt:1}}},q72o:{q72:1},
  j70thr:{p:{v:{h:"plot",warn:1}}},j71f:{p:{a:{f:"visit",nr:1,opt:1}}},
@@ -41502,7 +41502,7 @@ function cmRange(a){return a[0]+R(a[1]-a[0]+1)}
 /* review/close-maid-r1: "kín miệng" only matters for a maid who can be bought; one who cannot (land / pick / old) gets another talent */
 const CM_NOBUY=["land","pick","old"];
 function cmTals(src){return Object.keys(CM_TAL).filter(k=>!(k==="kin"&&CM_NOBUY.includes(src)))}
-function cmSecFor(){const k=pick(Object.keys(CM_SEC));const o={k};if(k==="spy"){const L=liveRivals(true).filter(v=>v!==S);const v=L.length?pick(L):null;if(!v)return{k:"debt"};o.by=v.id}return o}
+function cmSecFor(){const k=pick(Object.keys(CM_SEC));const o={k};if(k==="spy"){/* planting a spy is a hostile act: only a consort with a motive (shared gate, OD:L35; schedules3-r4) */const L=liveRivals(true).filter(v=>v!==S&&(typeof motiveOK!=="function"||motiveOK(v,S,"spy").ok));const v=L.length?pick(L):null;if(!v)return{k:"debt"};try{if(typeof j95actLog==="function")j95actLog(v,S,"spy",motiveOK(v,S,"spy"))}catch(e){}o.by=v.id}return o}
 /* a new maid of hers: src from the origin (or given), loyalty in that src's range, one talent, one secret */
 function cmInit(m,src,keepLoy){if(!m||m.src)return m;const B=cmB();const k=S.origin&&S.origin.k;m.src=src||CM_SRC[k]||"noi";
  if(!keepLoy)m.loyal=cmRange(B.loy[m.src]||B.loy.noi);m.tal=m.tal||pick(cmTals(m.src));m.sec=m.sec||cmSecFor();m.secKn=0;m.at=S.turn||0;cmC("init_"+m.src);return m}
@@ -42318,7 +42318,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3285f51c8b09";window.CTM_BUILD=BUILD;
+const BUILD="929587bbaf1c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
