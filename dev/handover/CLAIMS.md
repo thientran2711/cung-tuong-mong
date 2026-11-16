@@ -342,7 +342,7 @@
 | road-b1 FAIL fix B (opus): items 2–9 + smaller in jrd_muoi + jrd_cn | review/road-b1-fixb | B | session_01N1tNP2czBg1KKfRHBThvj3 | RUNNING | 16/11 18:55Z |
 | PL COURTYARDS paint (sonnet art; OD:L1415 + 19:25Z; MISSING TSV in origin/review/pl-courtyards-r1:dev/handover/reports/pl-courtyards-r1.md, 6 multi-hall dirs incl. tang; 1 sample first → owner, then batch, CDN img/pl2 + pl2_sync.py) | review/pl-courtyards-art | C | session_011xDdVPpLX6EsrLyakadqwQ | DONE 299 on CDN, code d8f8edab → main s22 chain | 16/11 18:55Z |
 | DƯ ĐỒ MAP FRAME painted (sonnet art; FOREMAN_C 18:45Z s21; 3 style samples, 9-slice, mocked on iPad 1180x820 + Fold 755x1000 → owner; chosen one → KIT READY to main) | review/map-frame-art | C | session_011xDdVQTc7r6hnCLcZWWdgm | RUNNING | 16/11 18:55Z |
-| mg-tune review r1 (opus, BIG): review/mg-tune 96131b41 (mgPace time part, BAL.mgTier.pace) | review/mg-tune-r1 | B | session_01N1tNP6N19V74jBmPimyvBU | RUNNING | 16/11 19:03Z |
+| mg-tune review r1 (opus, BIG): review/mg-tune 96131b41 (mgPace time part, BAL.mgTier.pace) | review/mg-tune-r1 | B | session_01N1tNP6N19V74jBmPimyvBU | DONE PASS 859acc68 (archived) | 16/11 19:03Z |
 | img-cleanup (owner OD 18:40Z/18:50Z): images out of git, check, briefs | review/img-cleanup | B | session_01N1tNP5tb8oh4F7fytQX5iq | DONE SẴN SÀNG a2e99bd0 (archived) | 16/11 19:05Z |
 | fest-fx review r1 (opus, BIG: buổi/save migration) of a114024a3 | review/fest-fx-r1 | main s22 | session_01UV1Szm757NUrANyodNJyo2 | RUNNING | 16/11 19:06Z |
 | pl-courtyards r2 review (sonnet) of pl-courtyards-r1 8b4a2160 + single-hall ff05f03d | review/pl-courtyards-r2 | main s22 | session_01UV1SzjAzD5HAahkBznYHxb | RUNNING | 16/11 19:06Z |
@@ -371,3 +371,4 @@
 | kit-size phase 2 keeper (opus) | review/kit-size | main s22 | session_01UV1Szir6A61kJEUGvE9Guz | RUNNING | 16/11 19:50Z |
 | stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | RUNNING | 16/11 19:49Z |
 | coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | RUNNING | 16/11 19:46Z |
+| mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | (opening) | RUNNING | 16/11 19:52Z |
