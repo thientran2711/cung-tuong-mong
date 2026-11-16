@@ -853,7 +853,7 @@ rdDef("cn_than",8,{t:"Kẻ không muốn án lật",w:"emp",sj:"tờ sớ hặc 
   mid:{k:0,tag:"Gió tạm lặng",t:"Không ai thắng. Tờ sớ còn, trang sổ còn. Ngoài triều, người ta chờ xem ai mỏi trước.",fx:{tamco:2}},
   lose:{k:-1,tag:"Bị cấm xen việc triều",t:"Hoàng thượng cấm ngươi xen việc triều. Trang sổ bị giữ ở ngự thư phòng, còn nhà {v} mở tiệc.",fx:{danh:-4,sung:-3}}}});
 
-rdDef("cn_than",9,{t:"Nhận hay không",w:"emp",sj:"việc ngươi nhận họ Thẩm",cast(A){return rdCast(A,["v"],CN_NORECAST)},
+rdDef("cn_than",9,{t:"Nhận hay không",w:"emp",sj:"việc ngươi nhận họ Thẩm",cast(A){rdCast(A,["v"],CN_NORECAST);return true},
  g:()=>(CNT4W()?"Họ Thẩm đã nhận lại ngươi, nhưng tên ngươi vẫn chưa vào tông phả và sổ cung vẫn ghi xuất thân cũ. ":"")+"Nhận họ Thẩm thì cả triều nhìn ngươi như con một nhà bị oan, mà cũng như cái gai trong mắt nhà Thượng thư. Giữ thân phận cũ thì an, mà cha ruột mãi không có ai thắp hương.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"Đại Lý tự đã đọc",w:"emp",if:RDW(1),t:"Đại Lý tự tâu: trang sổ là thật. Hoàng thượng hỏi ngươi: “Nàng muốn trẫm xử thế nào?”",o:[
@@ -882,7 +882,7 @@ rdDef("cn_than",9,{t:"Nhận hay không",w:"emp",sj:"việc ngươi nhận họ 
   mid:{k:0,tag:"Thân phận cũ, lòng mới",t:"Ngươi giữ thân phận cũ, nhưng trong lòng đã biết mình là ai.",fx:{duc:3}},
   lose:{k:-1,tag:"Chưa được nhận",t:"Việc nhận họ bị gác lại. Người ta bảo ngươi đã quá tham, và nhà Thượng thư nắm lấy cớ ấy.",fx:{danh:-4}}}});
 
-rdDef("cn_than",10,{t:"Minh oan cho cha ruột",w:"emp",sj:"tờ trình minh oan cho Thẩm Thị lang",cast(A){return rdCast(A,["v"],CN_NORECAST)},
+rdDef("cn_than",10,{t:"Minh oan cho cha ruột",w:"emp",sj:"tờ trình minh oan cho Thẩm Thị lang",cast(A){rdCast(A,["v"],CN_NORECAST);return true},/* review road-b1-fixa-r1: .10/.11 run without {v} (her beats are guarded; texts name the Thượng thư house) — the road never skips its last chapters */
  g:()=>(CNT4F()?"Cha ruột ngươi đã được rửa oan, nhưng kẻ vu ông chưa bị gọi tên. ":"")+"Có chỉ của Hoàng thượng, Đại Lý tự mở lại án bạc cứu đê. Đây không còn là chuyện của một mình ngươi: lật án này là gọi tên một lão Thái phó và cả nhà Thượng thư.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"Đại Lý tự gọi chứng",w:"eun",if:RDW(1),t:"Đại Lý tự cần lão quản gia làm chứng. Lão yếu lắm rồi, đường vào kinh xa.",o:[
@@ -907,11 +907,11 @@ rdDef("cn_than",10,{t:"Minh oan cho cha ruột",w:"emp",sj:"tờ trình minh oan
   {n:"Xin xét đến cùng, gọi tên kẻ tham",c:{suc:-4},o:A=>40-(CN_FL("cn_than.deal")?15:0)+(A.f.copy?15:0)+(A.f.wit?10:0)+(A.f.face?5:0),e:["win","lose"],go:A=>{rdOan(A,"v",10)},rt:"Đại Lý tự tâu, Hoàng thượng phê: Thẩm Thị lang bị vu; lão Thái phó bị tước hàm, nhà Thượng thư phải nộp lại bạc cứu đê.",rf:"Đại Lý tự tâu, Hoàng thượng phê: chứng cứ không đủ, án cũ giữ nguyên."},
   {n:"Chỉ xin rửa oan cho cha",c:{},o:A=>20+(A.f.rec?15:0)+(A.f.friend?10:0)+S.duc/6,e:["win","mid"],rt:"Đại Lý tự tâu, Hoàng thượng phê: Thẩm Thị lang vô tội, được truy phục chức.",rf:"Đại Lý tự tâu, Hoàng thượng phê: Thẩm Thị lang được tha tội, nhưng không ai bị gọi tên."},
   {n:"Rút đơn để giữ mạng lão quản gia",c:{},w:{duc:3},e:"mid",lx:"án dừng giữa chừng",go:A=>{rdRel(A,"v",5)},rt:"Ngươi rút đơn. Lão quản gia được về quê nằm nghỉ."}]}},
- E:{win:{k:1,tag:"Cha ruột được minh oan",w:"emp",t:"Thẩm Thị lang được minh oan trước cả triều. Lão Thái phó tóc bạc lặng lẽ rời kinh; nhà {v} mất nửa thế.",fx:{danh:7,duc:2}},
+ E:{win:{k:1,tag:"Cha ruột được minh oan",w:"emp",t:"Thẩm Thị lang được minh oan trước cả triều. Lão Thái phó tóc bạc lặng lẽ rời kinh; nhà Thượng thư mất nửa thế.",fx:{danh:7,duc:2}},
   mid:{k:0,tag:"Oan được gỡ một nửa",t:"Cha ruột ngươi được tha tội, mà kẻ hại ông vẫn chưa bị gọi tên.",fx:{duc:3,danh:2}},
-  lose:{k:-1,tag:"Án cũ giữ nguyên",t:"Án giữ nguyên. Nhà {v} mở tiệc, còn ngươi ngồi bên lão quản gia đang ho từng cơn.",fx:{danh:-5,sung:-2}}}});
+  lose:{k:-1,tag:"Án cũ giữ nguyên",t:"Án giữ nguyên. Nhà Thượng thư mở tiệc, còn ngươi ngồi bên lão quản gia đang ho từng cơn.",fx:{danh:-5,sung:-2}}}});
 
-rdDef("cn_than",11,{t:"Họ thật",w:"emp",sj:"họ Thẩm sau cùng",cast(A){return rdCast(A,["v"],CN_NORECAST)},
+rdDef("cn_than",11,{t:"Họ thật",w:"emp",sj:"họ Thẩm sau cùng",cast(A){rdCast(A,["v"],CN_NORECAST);return true},
  g:"Mọi việc đi đến cuối. Họ Thẩm có trở lại được với đầy đủ danh phận, hay chỉ lặng lẽ sống trong lòng ngươi? Đây là kết cục truyện xuất thân của ngươi.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"Phủ cũ mở cửa",w:"maid",if:RDW(1),t:"Phủ cũ họ Thẩm được trả. Cỏ mọc cao ngang gối, bức hoành phi còn treo lệch trên cửa chính.",o:[
