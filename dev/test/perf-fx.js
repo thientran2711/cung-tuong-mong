@@ -1,6 +1,6 @@
-/* weather FX frame-time: usage node dev/test/perf-fx.js <url> <snow|fly> <WxH> [cpuThrottle]; FX on vs off, rAF deltas over 8 s (swiftshader = pessimistic vs real GPU). Pass rule (s23 16/11): no frame >33 ms, median within 2 ms of FX-off */
+/* weather FX frame-time: usage node dev/test/perf-fx.js <url> <snow|fly|rain|storm> <WxH> [cpuThrottle]; FX on vs off, rAF deltas over 8 s (swiftshader = pessimistic vs real GPU). Pass rule (s23 16/11): no frame >33 ms, median within 2 ms of FX-off */
 const {chromium}=require("playwright");
-const [,,URL,KIND,VP,THR]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));const CFG={snow:{month:12,buoi:0,wx:{n:'tuyết rơi',k:'snow',f:1}},fly:{month:5,buoi:3,wx:{n:'đom đóm',k:'dust',f:0}}}[KIND];
+const [,,URL,KIND,VP,THR]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));const CFG={snow:{month:12,buoi:0,wx:{n:'tuyết rơi',k:'snow',f:1}},fly:{month:5,buoi:3,wx:{n:'đom đóm',k:'dust',f:0}},rain:{month:8,buoi:0,wx:{n:'mưa phùn',k:'rain',f:1}},storm:{month:8,buoi:0,wx:{n:'giông tố',k:'storm',f:3}}}[KIND];
 (async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']});const [W,H]=VP.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block'});const p=await c.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));const t0=Date.now();
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
  await p.addStyleTag({content:'#kload{display:none!important}'});

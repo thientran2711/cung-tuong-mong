@@ -158,7 +158,7 @@ const KF_WX={
  snowh:{k:[KF_SPR.snow],cap:190,vx:[-1,.2],vy:[1.2,2.2],sway:.7,spin:.02,sc:[1.4,2.5],a0:1,gust:.6,fall:1,snow:1},
  frost:{k:[KF_SPR.snow],cap:26,vx:[-.2,.2],vy:[.4,.8],sway:.4,spin:.01,sc:[1.1,1.7],a0:.9,fall:1,snow:1},
  snowp:{k:[KF_SPR.snow,KF_SPR.snow,"petal-plum"],cap:84,vx:[-.3,.5],vy:[.7,1.4],sway:.7,spin:.03,sc:[1.4,2.4],a0:1,gust:.5,fall:1,snow:1},
- drizzle:{k:["streak"],cap:38,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
+ drizzle:{k:["streak"],cap:20,vx:[-.8,-.4],vy:[9,12],a0:.75,rain:1,tint:0xc4d6e6,sc:[.8,1.1]},
  storm:{k:["streak"],cap:80,vx:[-3.4,-2],vy:[14,19],a0:.8,rain:1,tint:0xbccde0,sc:[.9,1.2],bolt:1},
  mist:{k:["smoke"],cap:4,vx:[.15,.45],vy:[-.12,.12],a0:.22,float:1,tint:0xf0ece4,sc:[3,4.6],life:[480,700]},
  fly:{k:[KF_SPR.fly],cap:90,vx:[-.3,.3],vy:[-.25,.25],sway:.8,a0:1,float:1,sc:[.5,.8],life:[300,560],glow:1},  /* each firefly = tiny warm core + soft green-gold halo (2 sprites), slow wander, deep slow blink, depth (near = bigger, far = tiny) */
