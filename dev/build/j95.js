@@ -565,7 +565,9 @@ function j95at(w,k){return w===k||(j95srvR()&&j95lk(w)===j95lk(k))}
 /* her party: she is not a shadow ("bóng: người khác đang ở đó, không tính ta"), nor is her trusted maid walking with her away from home */
 function j95party(id,k){return id==="me"||(id==="mm:me"&&k===S.place&&k!=="home")}
 (function(){const v0=j95vis;j95vis=function(id,k){if(j95led())return !!(id&&k&&k!==J95OUT_&&!j95party(id,k));return v0.apply(this,arguments)};
- const a0=j95arrKh;j95arrKh=function(k){if(j95led())return j95kh();return a0.apply(this,arguments)}})();
+ const a0=j95arrKh;j95arrKh=function(k){if(j95led()&&j95cntNow())return j95kh();return a0.apply(this,arguments)}})();
+/* the one switch for the Dư đồ moment (BAL.led.cnt): "now" = one moment for every place (owner 13:50Z); "arrive" = each place at her arrival */
+function j95cntNow(){try{return !(BAL.led&&BAL.led.cnt==="arrive")}catch(e){return true}}
 function j95sv(id){const sid=+String(id).slice(1);try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&s.sid===sid)return s}catch(e){}return null}
 /* the record id of a stage entry (the same mapping j95stage uses, plus children, maids, elders, other people's servants) */
 function j95ledId(p){if(!p)return null;if(p.lid)return p.lid;const k=p.kind;try{
@@ -611,7 +613,7 @@ function j95ledStage(){if(!j95led())return false;const V=S.visit;if(!V||!Array.i
 (function(){if(typeof talkOpts!=="function")return;const t0=talkOpts;talkOpts=function(p){try{if(p&&p.j95led&&(p.kind==="npc"||(p.kind==="kid"&&!(S.kids||[]).includes(p.ref))||(j95srvR()&&p.kind!=="srv")))return[]}catch(e){}return t0.apply(this,arguments)}})();
 /* the map count = the record, at every place (jplx's own list count at Dãy nhà cung nhân / Tân Giả khố / schools and jact's Nội vụ phủ +1
    are other sources of the same people): registered last, so it is the outermost countAt */
-setTimeout(()=>{try{const c2=countAt;countAt=function(k){try{if(j95led()&&S&&!S.dead&&!S.out&&S.roster&&S.roster.key===j95key()&&!(typeof isKc==="function"&&isKc())){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P){const w=R.P[id][kh][0];if(j95at(w,k)&&j95vis(id,w))n++}return n}}catch(e){}return c2.apply(this,arguments)}}catch(e){j95err("ledcount",e)}},0);
+setTimeout(()=>{try{const c2=countAt;countAt=function(k){try{if(j95led()&&S&&!S.dead&&!S.out&&S.roster&&S.roster.key===j95key()&&!(typeof isKc==="function"&&isKc())){const R=S.roster;const kh=j95cntNow()||j95at(S.place,k)?j95kh():j95arrKh(j95lk(k));let n=0;for(const id in R.P){const w=R.P[id][kh][0];if(j95at(w,k)&&j95vis(id,w))n++}return n}}catch(e){}return c2.apply(this,arguments)}}catch(e){j95err("ledcount",e)}},0);
 /* FIXED SCHEDULE (owner 16/11 13:40Z: "giống như là một cái lịch … ai ở đâu làm gì là phải có hết", no random presence): the record's plan
    for a buổi is a calendar, not a fresh roll. Every planning step draws from a generator seeded by the life (S.j95seed, saved) and the buổi
    key (plus the person for a single plan), so the same buổi always has the same schedule however often or late it is computed (a newcomer,
