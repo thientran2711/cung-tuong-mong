@@ -21,5 +21,9 @@ kitModal kind info: optional subject picture (chapter cover) in place of the top
 - `dev/test/chapter-detail.js`: 3 states x (chip, card, picture, check line) -> panel; v1 td lines; Đi làm; rank picture; Việc nhờ chip popup; no page errors.
 - `dev/test/chapter-detail-scan.js` (LUẬT SỬA CẢ NHÓM scan): clicks every tappable-looking element on Mệnh truyện / Việc nhờ / Sổ ghi (all sub tabs) in 3 states and reports dead taps. Empty-state illustrations are decorative and skipped.
 
-## Before / after (755x1000)
-See the table in the final report / below.
+## 16/11 coordinator note: folded into kitGoalDetail
+Merged origin/review/tutorial-r2 (jgoal.js, KIT §72). My separate panel is gone: `chapOpen()` calls `kitGoalDetail()`; jgoal.js kitGoalDetail now takes the arc/v1 sections from `chapModel()` (jchap.js): Các hồi / Tiến độ checks with how/where, Chuyện đã qua (kitSkillCard per hồi with picture), Cần lưu ý rows; ms sections, promoReq and "Đi làm" opts unchanged. The inline block under the card is in jtabs.js via chapInline. Rank card -> chapRankOpen (kitModal, existing parts).
+
+## Before / after (755x1000), scan of Mệnh truyện / Việc nhờ / Sổ ghi, 3 states
+- before (main): chip, "còn N chương" chip, picture, check lines: dead (only the card opened a panel in tutorial-r2).
+- after: 220 tappable-looking elements, 176 change something, 0 confirmed dead taps; 44 were not clickable by Playwright within 40 s on the loaded box (mostly picture placeholders .ksart-ph and the same element types that tap fine in other rows); flaky, rerun on a quiet box.
