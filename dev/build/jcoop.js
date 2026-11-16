@@ -98,11 +98,15 @@ function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep
  if(was)emit("stop",{})}
 /* review/lag-play-2: frames above GZ (8 KB) go gzip (the Worker gunzips any binary frame), and every send goes through ONE ordered queue,
    so a small message never overtakes a bigger one still being compressed (end → unend, seat → bend keep their order). */
-const GZ=8000;let sendQ=Promise.resolve();
+/* review/lag-play-2-r1: COOP.send(obj,true) = URGENT (page hide / close): no gzip (compression is async and a page being hidden or closed may
+   never get to the send); when nothing is queued it goes out at once, in this call, like before (frames up to 200 KB went plain). */
+const GZ=8000,BIG=200000;let sendQ=Promise.resolve(),sendN=0;
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
- const s=JSON.stringify(o),w=ws;const job=sendQ.then(async()=>{if(w!==ws||w.readyState!==1)return false;
-  try{if(s.length>GZ&&typeof CompressionStream!=="undefined"){const z=await gz(s);if(w!==ws||w.readyState!==1)return false;w.send(z)}else w.send(s);return true}catch(e){return false}});
- sendQ=job.catch(()=>false);return job}
+ const s=JSON.stringify(o),w=ws,now=typeof t!=="string"&&f===true;
+ if(now&&!sendN&&s.length<=BIG){try{w.send(s);return true}catch(e){return false}}
+ sendN++;const job=sendQ.then(async()=>{if(w!==ws||w.readyState!==1)return false;
+  try{if(s.length>(now?BIG:GZ)&&typeof CompressionStream!=="undefined"){const z=await gz(s);if(w!==ws||w.readyState!==1)return false;w.send(z)}else w.send(s);return true}catch(e){return false}});
+ sendQ=job.catch(()=>false).then(r=>{sendN--;return r});return job}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
 /* owner 16/11 ("không thấy sang buổi"): a phone that slept keeps a socket that LOOKS open (readyState 1) but is dead — a `bend` sent on it
    is lost and the server drops the seat after 45 s ("Hảo hữu đã rời cuộc"). On return: reconnect at once when the socket is closed, she was

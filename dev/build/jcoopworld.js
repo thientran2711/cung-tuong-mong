@@ -436,7 +436,7 @@ function seatPush(o,now){if(!CW.on||CW.seatOld||!o||COOP.state.status!=="open")r
  if(caps.indexOf("seatd")>=0&&!Object.keys(P).some(x=>x.split(".").length>(x.startsWith("d.S.")?3:2))&&seatBase&&seatBase.wk===o.week&&seatBase.sv===(CW.ssv||0)&&!seatBusy){const D=seatDelta(P,seatBase.P);
   msg={t:"seatd",sv:CW.ssv||0,set:D.set,del:D.del,dev:o.dev}}
  else msg={t:"seat",sv:CW.ssv||0,o};
- seatAt=Date.now();seatBusy=Date.now();seatPend={P,wk:o.week};COOP.send(msg).then(ok=>{if(ok)seatLast=k;else{seatBusy=0;seatPend=null}})}
+ seatAt=Date.now();seatBusy=Date.now();seatPend={P,wk:o.week};COOP.send(msg,!!now).then(ok=>{if(ok)seatLast=k;else{seatBusy=0;seatPend=null}})}
 COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk();
  if(seatPend&&CW.ssv===m.sv)seatBase={P:seatPend.P,wk:seatPend.wk,sv:m.sv};else seatBase=null}seatBusy=0;seatPend=null});
 COOP.on("error",m=>{if(!m)return;if(m.code==="seatold"){CW.seatOld=true;seatBase=null;seatBusy=0;T("seatold "+m.sv)}
