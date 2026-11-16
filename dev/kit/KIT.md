@@ -3691,7 +3691,6 @@ gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = 
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
 
-<<<<<<< HEAD
 ### 50.2 kitPersonDlg — THE person pop-up for hosts outside #modal (owner 16/11 07:35Z + 07:37Z, OD:L448 / OD:L963; review/popup-fullbody) — `dev/build/jpdlg.js`
 - RULE: every pop-up where a person appears = LEFT the person's FULL-BODY figure (rank + name chip above), RIGHT TOP the event picture (landscape banner), below it the info, bottom the buttons. The small framed portrait (`.kpsubj` + pframe) is never used for a person pop-up. ONE event = ONE frame size for all its pages / steps.
 - #modal dialogs get it from kitEventStage / kitDpApply (§32.7, §50). Overlays OUTSIDE #modal (tutorial coach `kitCoach`, tips `kitTip`, any future notice) call `kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns,})` and then `kitPersonDlgFit(root)`; nobody writes a second copy.
@@ -3701,7 +3700,7 @@ The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.k
 - Tests: `dev/test/popup-fullbody.js` (every PEND person event, person info / news / result / night / intel / evidence, the tutorial pages + steps, a tip: FAILS a small portrait, a missing figure column, pages / steps of one event that differ in frame size) and `dev/test/kit-conform.js` (T4 small portrait = FAIL; tutorial pages / steps one size).
 - 50.3 DEFAULT BANNER (`kitDefaultBanner`, jk4): a person pop-up whose event has no picture of its own (ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / tai mắt / chứng cứ) still shows the picture RIGHT TOP: kitInfoArt of its title (info-*.webp / act-cat-*), else one act-cat picture per kind (KIT_KIND_BANNER). A person panel without an options group scrolls as a whole: its figure column is the visible height of #mb and sticks at the top.
 - popup-fullbody.js also FAILS: no picture right top, figure column / visible figure < 150 px, any person pop-up whose frame size differs from the viewport's frame (all kinds, tutorial pages / steps / tip).
-=======
+
 ## 81. SCENE-END BUTTON — every animation scene ends with ONE short button (owner OD:L1261, 16/11 07:20Z; review/kit-keeper-2) — `dev/build/j93.js` (`kitSceneEnd`, `kitSceneEndLabel`, `kmStage`)
 RULE: no animation / scene closes by itself, and no scene closes by a tap anywhere. The scene plays (a tap during it = skip to its final frame, hint "Chạm để bỏ qua"); at the final frame the hint
 disappears and ONE kit button `.kbtn.kmend` (bottom centre of the scene, safe-area aware, 140 px min width, fades in) shows words that fit the event. ONLY that button closes the scene
@@ -3717,4 +3716,3 @@ STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-c
 night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar (`kitCalendar`, dawn) · co-op scenes (`jcoop*`: buổi clock end, waiting-strip results) · the card-flip VIDEOS (`cardflip-videos`) · a `kitFlipNote`-like note is NOT a scene (no tap) and stays.
 The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
 Sample: kit page §81 (opens a real scene: the button shows after the animation and only it closes). Test: `dev/test/scene-end.js`.
->>>>>>> origin/main
