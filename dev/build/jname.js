@@ -55,9 +55,9 @@ function nmPeople(){const L=[];if(typeof S==="undefined"||!S)return L;const seen
  return L}
 function nmAlive(e){const o=e.o;return o.alive!==false&&o.alive!==0&&!o.dead&&!o.out}
 function nmReg(){if(typeof S==="undefined"||!S)return null;if(!S.nmReg||typeof S.nmReg!=="object")S.nmReg={};return S.nmReg}
-/* co-op: the host owns the one registry (owner rule); a guest never writes it (seat "a" of COOPW = host; solo = owner). A guest's new person is
+/* co-op: the host owns the one registry (owner rule); a guest never writes it (worldOn() of the one-world co-op, review/coop-one-world: true = solo or host; before it lands: COOPW seat "a" = host). A guest's new person is
    named on her side without registering; the host's sweep (jnamefix, after every rebuild) renames any clash once it reaches the world. */
-function nmOwner(){try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")return false}catch(e){}return true}
+function nmOwner(){try{if(typeof worldOn==="function")return !!worldOn()}catch(e){}try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")return false}catch(e){}return true}
 /* taken = every name ever given in this save (registry) + every name held now; vars = short forms of the LIVING (no "Uyển Nhi" beside "Thẩm Uyển Nhi") */
 function nmTaken(){const full=new Set(),vars=new Set(),sur=new Set();const R=nmReg();if(R)for(const k in R)full.add(k);
  for(const e of nmPeople()){const b=nmBare(e.o[e.f]);full.add(b);if(nmAlive(e)){nmVars(b).forEach(v=>vars.add(v));const s=nmSurOf(b);if(s)sur.add(s)}}

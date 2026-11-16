@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1ecdfb9d+","t":"2026-11-16T20:51Z","c":"One name core: jname.js pools + nmNew, jnamefix.js registry/migration/sweep; every name site uses it","b":"db3daaefb2f1","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
+window.CTM_BI={"s":"14c487bf+","t":"2026-11-16T20:58Z","c":"Name core: old-save rewrite also moves name-keyed entries (S.rcpK v\u003cid>\u003cname>); old-save migration test names-oldsave.js","b":"37a003e10d9e","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -846,9 +846,9 @@ function nmPeople(){const L=[];if(typeof S==="undefined"||!S)return L;const seen
  return L}
 function nmAlive(e){const o=e.o;return o.alive!==false&&o.alive!==0&&!o.dead&&!o.out}
 function nmReg(){if(typeof S==="undefined"||!S)return null;if(!S.nmReg||typeof S.nmReg!=="object")S.nmReg={};return S.nmReg}
-/* co-op: the host owns the one registry (owner rule); a guest never writes it (seat "a" of COOPW = host; solo = owner). A guest's new person is
+/* co-op: the host owns the one registry (owner rule); a guest never writes it (worldOn() of the one-world co-op, review/coop-one-world: true = solo or host; before it lands: COOPW seat "a" = host). A guest's new person is
    named on her side without registering; the host's sweep (jnamefix, after every rebuild) renames any clash once it reaches the world. */
-function nmOwner(){try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")return false}catch(e){}return true}
+function nmOwner(){try{if(typeof worldOn==="function")return !!worldOn()}catch(e){}try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")return false}catch(e){}return true}
 /* taken = every name ever given in this save (registry) + every name held now; vars = short forms of the LIVING (no "Uyển Nhi" beside "Thẩm Uyển Nhi") */
 function nmTaken(){const full=new Set(),vars=new Set(),sur=new Set();const R=nmReg();if(R)for(const k in R)full.add(k);
  for(const e of nmPeople()){const b=nmBare(e.o[e.f]);full.add(b);if(nmAlive(e)){nmVars(b).forEach(v=>vars.add(v));const s=nmSurOf(b);if(s)sur.add(s)}}
@@ -44313,7 +44313,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="db3daaefb2f1";window.CTM_BUILD=BUILD;
+const BUILD="37a003e10d9e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
