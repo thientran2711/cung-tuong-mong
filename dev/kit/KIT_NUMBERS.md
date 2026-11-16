@@ -26,7 +26,7 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | 58 | LỊCH THÁNG (kitMonthCal, kitDeskCal) | main, jmcal.js | done |
 | 59 | PLACEHOLDER PICTURES (KIT_PH) | main, jph.js | done |
 | 60 | MAKEUP COLOURS (kitSwatches, kitFaceZoom, 60.5 toilReveal) | review/mk-colour | SIGNED+FIX (K2) |
-| 61 | FIG-BG silk scroll behind full-body figures | review/fig-bg | SIGNED (K1) |
+| 61 | FIG-BG silk scroll behind full-body figures | review/fig-bg | NOT SHIPPED (owner 16/11 13:30Z; art kept in storage) |
 | 62 | NIGHT-END + NEW-DAY pictures (kitNightEnd, kitNewDay) | review/night-end-r2 | awaiting merge |
 | 63 | RECIPES (jrcp.js) | review/recipes-r1 | number reserved; KIT text MISSING on the branch |
 | 64 | ITEMS IN EVENTS (kitItemTag, kitItemFx) | main, jitev.js | done |

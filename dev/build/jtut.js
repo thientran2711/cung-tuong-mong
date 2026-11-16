@@ -119,6 +119,15 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const marks=(s.marks||[]).map(m=>rectOf(m)).filter(Boolean).map(m=>clip(m,3));
  const key=[vw,vh,r?[r.left,r.top,r.width,r.height].map(Math.round).join(","):"-",marks.map(m=>[m.left,m.top,m.width].map(Math.round).join(",")).join(";"),card.offsetHeight].join("|");
  if(!force&&key===LAST)return;LAST=key;
+ /* the card keeps the ONE kit frame size (OD:L963); when it fits on no side of the target, the lit hole shrinks to the part of the target that still leaves the card a free side (the target stays tappable there: a card/row is tapped anywhere on it). A target that fills the screen and is not a tap step stays whole */
+ if(r&&!(r.height>vh*.6&&!s.interact)){const cw0=card.offsetWidth,ch0=card.offsetHeight,g0=12,M0=8;
+  const fits=r.bottom+g0+ch0<=vh-M0||r.top-g0-ch0>=M0||r.right+g0+cw0<=vw-M0||r.left-g0-cw0>=M0;
+  if(!fits){const O=[];const mk=(l,t,rr,b)=>{if(rr-l>=88&&b-t>=88)O.push({left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t})};
+   mk(r.left,r.top,r.right,Math.min(r.bottom,vh-M0-g0-ch0));/* card below */
+   mk(r.left,Math.max(r.top,M0+ch0+g0),r.right,r.bottom);/* card above */
+   mk(Math.max(r.left,M0+cw0+g0),r.top,r.right,r.bottom);/* card at the left */
+   mk(r.left,r.top,Math.min(r.right,vw-M0-g0-cw0),r.bottom);/* card at the right */
+   O.sort((a,b)=>b.width*b.height-a.width*a.height);if(O[0])r=O[0]}}
  const D=R0.querySelector(".ktut-dim");
  if(r){if(D)D.remove();hole.hidden=false;Object.assign(hole.style,{left:r.left+"px",top:r.top+"px",width:r.width+"px",height:r.height+"px"})}
  else{hole.hidden=true;if(!R0.querySelector(".ktut-dim"))R0.insertAdjacentHTML("afterbegin",`<div class="ktut-dim"></div>`)}
