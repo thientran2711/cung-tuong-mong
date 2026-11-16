@@ -29,7 +29,7 @@ function cmRange(a){return a[0]+R(a[1]-a[0]+1)}
 /* review/close-maid-r1: "kín miệng" only matters for a maid who can be bought; one who cannot (land / pick / old) gets another talent */
 const CM_NOBUY=["land","pick","old"];
 function cmTals(src){return Object.keys(CM_TAL).filter(k=>!(k==="kin"&&CM_NOBUY.includes(src)))}
-function cmSecFor(){const k=pick(Object.keys(CM_SEC));const o={k};if(k==="spy"){const L=liveRivals(true).filter(v=>v!==S);const v=L.length?pick(L):null;if(!v)return{k:"debt"};o.by=v.id}return o}
+function cmSecFor(){const k=pick(Object.keys(CM_SEC));const o={k};if(k==="spy"){/* planting a spy is a hostile act: only a consort with a motive (shared gate, OD:L35; schedules3-r4) */const L=liveRivals(true).filter(v=>v!==S&&(typeof motiveOK!=="function"||motiveOK(v,S,"spy").ok));const v=L.length?pick(L):null;if(!v)return{k:"debt"};try{if(typeof j95actLog==="function")j95actLog(v,S,"spy",motiveOK(v,S,"spy"))}catch(e){}o.by=v.id}return o}
 /* a new maid of hers: src from the origin (or given), loyalty in that src's range, one talent, one secret */
 function cmInit(m,src,keepLoy){if(!m||m.src)return m;const B=cmB();const k=S.origin&&S.origin.k;m.src=src||CM_SRC[k]||"noi";
  if(!keepLoy)m.loyal=cmRange(B.loy[m.src]||B.loy.noi);m.tal=m.tal||pick(cmTals(m.src));m.sec=m.sec||cmSecFor();m.secKn=0;m.at=S.turn||0;cmC("init_"+m.src);return m}
