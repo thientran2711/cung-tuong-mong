@@ -24,7 +24,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
 | D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
 | D31 difficulty-port | review/difficulty-port | opus | RUNNING (port only; numbers within spec; bot table for C7 re-measure) |
-| D33 routes-port | review/routes-port @d0d22f92 | opus | REVIEWING (review/routes-port-r1, sonnet); bowl art on CDN; bot table in PROGRESS_routes-port.md for C7 |
+| D33 routes-port | review/routes-port-r1 | opus | PASS 332308a1961681e37e0e4de78e86adc9aac5524d (CONDITIONAL on kit keeper: loi-rieng category in §6.1) |
 | D34 scheme-games-port | review/scheme-games-port @7a581aed (contains mg-easy-r1) | sonnet | REVIEWING (review/scheme-games-port-r1, sonnet) |
 | D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
@@ -52,6 +52,7 @@ PASS review/contest-ui-r3 231ae9e93f271c2d3b3bb171dab55051ba7e2160 (C34; picture
 PASS review/page-curl2-r1 3f95e00368db1e5acf3aca47889ce7cb42861a4b (C32; portrait paper slide / landscape curl, swipe only in Tuần lục; CONDITIONAL: kit keeper adds kitSlideSheet + kitPortrait/KIT_SLIDE_MS/kitSlideEase + portrait=slide/landscape=curl rule + Gọn 120 ms fade + 'swipe only inside kitBook' to KIT §34)
 PASS review/stat-fx-2-r1 6d4540a7cf2b61de482fde24f9e3df36782fa61f (C26b; person card / status tiles glow on re-render, grudges inverted; k61How full sentences; mood tile without cause = plain kit card. Number colour itself waits for the §57.1 KIT REQUEST)
 PASS review/places-port-r1 add62a7e9283cd328ddd9a46951abf0210e7bb26 (D42; 5 new reachable places + children by age + access rules; owner-approved paintings; CONTAINS review/palace-map-port-r1 (D30) — fast-forward this one and D30 comes with it; kitPalaceMap now KIT §76, confirm)
+PASS review/routes-port-r1 332308a1961681e37e0e4de78e86adc9aac5524d (D33; Lối riêng routes + blood test + bowl art; ẩn dật vow now 34/34 harmful acts; CONDITIONAL: keeper registers category loi-rieng #2c6e5a in KIT §6.1; old-save not re-run by reviewer, worker's passed)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
