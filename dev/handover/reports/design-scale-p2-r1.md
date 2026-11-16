@@ -63,3 +63,8 @@ sticky at the bottom; delete the two `:where(.kv1) .toilw` rules.
 design-scale A: RIGHT 99.1 %, LEFT 100 % (582x623 both) · tab-pairs 1180x820 + 755x1000: 0 mismatches, 0 errors · coop-e2e 59/59 ·
 scene-end 4 sizes PASS (main's test fix) · cardflip 2 sizes exit 0 · dlg-clip 2 sizes clipped 0 · newgame-ui 755x1000 exit 0 · media-check 0.
 Not re-run on e9c6021d (passed on 802fe821, no related change since): view-scale, popup-fullbody, kit-conform, kit-table, newgame-ui iPad/phone.
+
+## GO (s18) → READY b80ea61e (main 2232ea32 merged; assemble.py conflict = main's list + kvfallback; media-check 0; site rebuilt)
+design-scale 6 sizes ok, 0 errs (A right 100 %, left 98.9 %) · tab-pairs 1180x820 / 755x1000 / 1366x1024: 0 mismatches (1366 showed 6 Dư đồ
+mismatches only while design-scale ran in parallel; alone 0) · kit-conform exit 0 · boot-flash 755x1000 + 1180x820 exit 0 · boot-slow host exit 0 ·
+coop-e2e 59/59 (one parallel run 57/59 "A frozen when B left" timing; alone 59/59).
