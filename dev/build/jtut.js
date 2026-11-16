@@ -157,7 +157,7 @@ window.kitCoach=kitCoach;window.kitCoachOff=coachOff;
 
 /* ---------- kitTip: small lời dặn card, never blocks, once each ---------- */
 let TIPEL=null;
-function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next,.kloadchip").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
+function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
  el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
@@ -400,6 +400,8 @@ function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- const c=document.querySelector('#modal.kpthome [data-tgo="cont"]');T.replay=true;try{if(S)S.tutOld=0}catch(x){}
- if(c)c.click();else{/* from Thiết lập in play: close the panel, the tour starts when the screen is free */const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()}},true);
+ T.replay=true;try{if(S)S.tutOld=0}catch(x){}
+ /* the shared ☰ "back to the game" path (j74 kitMenuResume) from the home page and from Thiết lập alike; the tour starts when the screen is free */
+ if(typeof kitMenuResume==="function"&&kitMenuResume())return;
+ const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click()},true);
 }catch(e){console.error(e)}})();

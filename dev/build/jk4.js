@@ -806,6 +806,8 @@ function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=t
 (function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
 #modal .dlg:has(>.kit-x.kxabs){position:relative}
 #modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+/* the ✕ of a card without a .kph header owns a reserved strip (36 px + 2x6): content and scrollers start under it, so it never overlaps text or a scrolled option list (fold-popw, whole group: every dialog / overlay panel) */
+#modal .dlg:has(>.kit-x.kxabs),#ov .kpanel:has(>.kit-x.kxabs){padding-top:48px!important;box-sizing:border-box}
 #modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
 #modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
 #modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}

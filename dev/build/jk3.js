@@ -295,6 +295,8 @@ html body .game#game.k3ph.k3home:not(.maptab)>#panel{display:none!important}
 html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto minmax(0,1fr) auto!important}
 html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!important;min-height:0!important;height:0!important;border:0!important;overflow:hidden!important}
 html body .game#game.k3ph.k3pop>#panel{display:none!important}
+/* the person card docked by j59 (#popw.j59dock, grid-area:panel) has no 'panel' area on the one-page grid: it took implicit tracks and squeezed the top bar to 329 px (Fold, found by review/two-way-acts shots) — it takes the page box like a tab panel */
+html body .game#game.k3ph.k3pop>#popw{grid-area:stage!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
 html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;padding:0 12px;font-weight:600;color:var(--gold);white-space:nowrap}
 /* KIT §75 painted back button (room / map): icon + short label, no bar */
@@ -544,7 +546,7 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #mo
 (function(){
  /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
  const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.crossOrigin="anonymous";/* CDN pictures: CORS or the canvas read fails (review/stage-side) */im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
-   const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
+   const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
    /* owner 11/15 05:45Z ("khung nhảy"): ONE portrait box for every person — the trimmed headroom is the same constant for every frame
       (KIT_PORT_TRIM = the tallest crest's top), never measured per frame, so switching people never moves or resizes the frame */
