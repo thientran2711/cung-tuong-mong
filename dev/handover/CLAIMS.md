@@ -10,7 +10,7 @@
 | facefx-all reviewer | review/facefx-all-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | book-fig reviewer | review/book-fig-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | cardflip-smooth reviewer | review/cardflip-smooth-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| weather-fx-one | review/weather-fx-one | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| weather-fx-one | review/weather-fx-one | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | WIP-PUSHED (handed to s9) | 16/11 05:19Z |
 | act-dedupe w1 reviewer | review/act-dedupe-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | postmerge-fix-1 | review/postmerge-fix-1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | servant-system | review/servant-system | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
