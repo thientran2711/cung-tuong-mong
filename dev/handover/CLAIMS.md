@@ -187,5 +187,5 @@
 | D57 preg-rate review | review/preg-rate-r1 | D | session_01DgYSWobwX8ehBC7umUckXK | RUNNING | 16/11 13:17Z |
 | D57 preg-rate review | review/preg-rate-r1 | D | (reviewer opening) | RUNNING | 16/11 13:17Z |
 | merge-train-8 successor (loads .claude/settings.json) | review/merge-train-8 | main s16 | session_01UV1Sziaz47NKuNr1wC1DBx (sonnet) | RUNNING | 16/11 13:17Z |
-| owner-answers-b reviewer (sonnet) | review/owner-answers-b-r1 | B | session_01N1tNP4wHpgLwCe8XoWsAXv | RUNNING | 16/11 13:20Z |
+| owner-answers-b reviewer (sonnet) | review/owner-answers-b-r1 | B | session_01N1tNP4wHpgLwCe8XoWsAXv | DONE PASS 07f84484 (archived) | 16/11 13:20Z |
 | phone-bars: owner 13:25Z (C) Fold portrait top bar + bottom 8 tabs = 2 rows x 4, one-page phone layout (kit, whole group) | review/phone-bars | main s17 | session_01UV1Szhj7vkq8TCucEUAPnU (sonnet kit) | RUNNING | 16/11 13:31Z |
