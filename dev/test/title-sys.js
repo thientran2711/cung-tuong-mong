@@ -61,7 +61,8 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   const R0=Math.random;Math.random=()=>0.5;
   try{
   S.dead=false;
-  two('nights',30,'gSung',()=>sg(100));if(!(B.gSung[1]>B.gSung[0]))F.push('gSung');
+  two('nights',30,'gSung',()=>{S.sung=0;apply({sung:Math.round(70/sg(1))});return S.sung});
+  {dhWear(S,'nights',true);S.dh.nights.pick='gSung';dhWear(S,'nights',true);const sh=new Set();for(let i=0;i<30;i++)sh.add(fmt({sung:5}));if(sh.size!==1)F.push('gSung: preview text rolls');dhWear(S,null,true)}if(!(B.gSung[1]>B.gSung[0]))F.push('gSung');
   two('meta',10,'gDanh',()=>{S.danh=0;apply({danh:60});return S.danh});if(!(B.gDanh[1]>B.gDanh[0]))F.push('gDanh');
   two('w_theu',1,'gBac',()=>{S.bac=0;apply({bac:120});return S.bac});if(B.gBac[1]-B.gBac[0]!==10)F.push('gBac');
   two('w_hat',1,'gTren',()=>{S.th=0;apply({th:48});return S.th});if(!(B.gTren[1]>B.gTren[0]))F.push('gTren');

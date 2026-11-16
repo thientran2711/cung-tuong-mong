@@ -114,12 +114,11 @@ function dhApplyFx(p){if(!p||p.coop)return;const f=wornFx(p),want={};if(f&&FLAT.
 (function(){if(typeof wearBonus!=="function")return;const w0=wearBonus;wearBonus=function(p){const b=w0.apply(this,arguments);try{const f=p&&wornFx(p);if(f&&f[0]==="sac")b.sac=(b.sac||0)+f[1]}catch(e){}return b}})();
 /* ---------- bonus hooks: each at the ONE place that computes that gain ---------- */
 const fr=(n,d)=>{if(!(n>0)||!d)return 0;const x=n/d;return Math.floor(x)+(Math.random()<x%1?1:0)};
-/* her Sủng gains: sg (j1, the one Sủng gain formula) */
-(function(){if(typeof sg!=="function")return;const g0=sg;sg=function(n){const r=g0.apply(this,arguments);try{if(r>0&&S)return r+fr(r,dhB(S,"gSung"))}catch(e){}return r}})();
-/* her Danh / bạc / Thái hậu + Hoàng hậu / cung nữ gains: apply (j1, every change of her stats) */
+/* her Sủng / Danh / bạc / Thái hậu + Hoàng hậu / cung nữ gains: apply (j1, every change of her stats). Sủng is raised here BEFORE j1 runs it through sg
+   (review/title-sys-r1: not inside sg, because sg also prints the previews (fmt, wkGainTxt) and a roll there made the shown number jump and differ from the real one) */
 const GAINK=[["danh","gDanh"],["bac","gBac"],["th","gTren"],["hh","gTren"],["maid","gTrung"]];
 function addGains(p,o,keys){if(!o||typeof o!=="object")return o;let c=null;for(const [k,t] of keys){const v=o[k];if(!(v>0))continue;const d=dhB(p,t);if(!d)continue;const x=fr(v,d);if(x){c=c||Object.assign({},o);c[k]=v+x}}return c||o}
-(function(){if(typeof apply!=="function")return;const a0=apply;apply=function(o){try{if(S&&!S.dead)o=addGains(S,o,GAINK)}catch(e){}return a0.call(this,o)}})();
+(function(){if(typeof apply!=="function")return;const a0=apply;apply=function(o){try{if(S&&!S.dead)o=addGains(S,o,[["sung","gSung"]].concat(GAINK))}catch(e){}return a0.call(this,o)}})();
 /* NPC gains: ap (j8, every change of an NPC's stats; her branch goes through apply above) */
 (function(){if(typeof ap!=="function")return;const a0=ap;ap=function(p,o){try{if(p&&p!==S)o=addGains(p,o,[["sung","gSung"]].concat(GAINK))}catch(e){}return a0.call(this,p,o)}})();
 /* liking from consorts: affAdd (j9, every thiện cảm change); x (her or a consort) likes y (the wearer) more */
@@ -158,14 +157,14 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
  const worn=wornKey(S)===key;
  kitPanel({kind:"reward",title:up?"Danh hiệu lên bậc":"Danh hiệu mới",sub:o.when,dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo",esc(chTxt(key,S.dh[key].i)||o.fx||"chỉ để làm đẹp")],["Xem lại","Nhiệm vụ › Danh hiệu"]]}],
-  opts:worn?[{n:"Đã hiểu",fx:{},x:"danh hiệu đang đeo trên đầu",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"cất vào sổ danh hiệu",go:()=>{}}]})}
+  opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
  const cur=wornKey(S)===key?pickOf(S,key,e.i):null;
  const opts=L.map(t=>({n:bLab(t)+(t===cur?" · đang lấy":""),fx:{},x:bTxt(t,bv(t,e.i)),go:()=>{e.pick=t;if(wornKey(S)===key)dhApplyFx(S);else dhWear(S,key,true);
   if(typeof log==="function")log(`Ngươi đeo danh hiệu «${o.name}»: ${bTxt(t,bv(t,e.i))}.`);if(back)dhPanel()}}));
- opts.push({n:back?"Quay lại":"Để sau",fx:{},x:back?"về sổ danh hiệu":"cất vào sổ danh hiệu",go:()=>{if(back)dhPanel()}});
+ opts.push({n:back?"Quay lại":"Để sau",fx:{},x:"",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
 window.dhPick=dhPick;
