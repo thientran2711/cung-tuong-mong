@@ -43,7 +43,7 @@ main at start = eba64ead4.
 | D21 full review r2 → fix | review/coop-b1b5-fix @7c7fcc45 | opus | SẴN SÀNG KIỂM (worker archived) → final reviewer coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ RUNNING |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
-| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer npc-death-r1 RUNNING 13:42Z |
+| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer npc-death-r1 session_01DgYSWocL5CmLHseB9i8sEn RUNNING 13:42Z |
 | D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | PASS 1c31bd79 (review/preg-rate-r1; reviewer archived) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
 | C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
