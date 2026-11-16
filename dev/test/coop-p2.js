@@ -70,6 +70,7 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
  for(const [o,rk] of [[A,3],[B,3]])await o.p.evaluate(rk=>{if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=rk;S.sung=Math.max(S.sung||0,40);render()},rk);
  if(!(await until(A,()=>!!COOPW.friend(),null,20000)&&await until(B,()=>!!COOPW.friend(),null,20000)))await week(A,B,'setup');/* a life on the tiểu thư road at home: her palace entry comes with the merged week */
  ok(await until(A,()=>!!COOPW.friend(),null,30000)&&await until(B,()=>!!COOPW.friend(),null,30000),'each has the other as a consort entry');
+ for(let i=0;i<4;i++){await clear(A);await clear(B);await sleep(400)}/* review/coop-b1b5-fix: the setup week (tiểu thư road) leaves 'Tuần mới' / reward dialogs queued in front of the B1 card */
  for(const o of [A,B])await o.p.evaluate(()=>{window.__dil=[];const d=pushDil;pushDil=function(x,t){window.__dil.push(t||'');return d.apply(this,arguments)}});
  const MT=o=>o.p.evaluate(()=>{const M=document.getElementById('modal');return M&&!M.hidden?M.textContent.replace(/\s+/g,' ').slice(0,400):''});
  const tapM=async(o,re,ms=15000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const M=document.getElementById('modal');if(!M||M.hidden)return false;const R=new RegExp(src);

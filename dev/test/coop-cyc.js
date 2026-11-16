@@ -51,8 +51,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  /* close everything on B except her maid's cycle card (the test answers that one itself) */
  const clearB=async()=>{for(let i=0;i<25;i++){if(await isCy(B))return 'cy';const s=await clear(B,1);if(s!=='x'&&s!=='many'&&s!=='mg')return s}};
  const wkA=()=>A.p.evaluate(()=>COOP.state.week||0),wkB=()=>B.p.evaluate(()=>COOP.state.week||0);
- async function merge(w0,lbl){for(let i=0;i<60;i++){await clear(A);await clear(B);await press1(A);await press1(B);await sleep(800);if(await wkA()>w0&&await wkB()>w0)break}
-  for(let i=0;i<4;i++){await clear(A);await clear(B);await sleep(300)}ok(await wkA()>w0&&await wkB()>w0,lbl)}
+ async function merge(w0,lbl,keepB){for(let i=0;i<60;i++){await clear(A);if(!(keepB&&await wkB()>w0))await clear(B);await press1(A);await press1(B);await sleep(800);if(await wkA()>w0&&await wkB()>w0)break}
+  /* keep the guest's dialogs (her "Kính sự phòng báo tin" card): clear() takes its first road, which may decline the night */
+  for(let i=0;i<4;i++){await clear(A);if(!keepB)await clear(B);await sleep(300)}ok(await wkA()>w0&&await wkB()>w0,lbl)}
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A: Cùng hảo hữu');await A.p.waitForTimeout(600);
  ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A: Mời hảo hữu');
@@ -61,6 +62,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await bothIn('both in the game');
  for(const o of [A,B])await setTm(o,{buoiMs:600000});
  for(const [o,rk] of [[A,5],[B,3]])await o.p.evaluate(rk=>{if(S.srv)S.srv.risen=1;S.rank=rk;S.bac=Math.max(S.bac||0,400);S.duc=Math.max(S.duc||0,60);render()},rk);
+ if(!(await until(A,()=>!!COOPW.friend(),null,20000)))await merge(await wkA(),'setup: one week (a life that starts as a cung nữ / at home: her consort entry comes with the merged week)');
  {const fa=await until(A,()=>!!COOPW.friend(),null,60000),fb=await until(B,()=>!!COOPW.friend(),null,60000);console.log('guest sees the host entry:',fb);ok(fa,'the host has the guest as a consort entry (her card in the host deck)',[fa,fb,await A.p.evaluate(()=>[S.rank,!!S.srv,S.place]),await B.p.evaluate(()=>[S.rank,!!S.srv,S.place,typeof COOPW.friend])])}
  /* host: forced deck — only the friend's card can win; the REAL nightCh chain (with jcycle's tray rule) still decides whether it is on the tray */
  await A.p.evaluate(()=>{if(window.__ff)return;window.__ff=1;const f=flip;flip=function(){const r0=roll,n0=nightCh;roll=x=>x>=60;
@@ -93,7 +95,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(d1.duc-d0.duc===dDuc,`${k}: her cost lands once on her side (Đức ${dDuc})`,[d0.duc,d1.duc]);
   if(k==='giau')ok(d1.ghen>d0.ghen,'giau: the palace grows jealous (ghen up, on her side)',[d0.ghen,d1.ghen]);
   ok(await until(A,w=>{const r=COOPW.fcy;return r&&r.w===w&&!r.pend},d1.w,15000),`${k}: her answer reached the host before the host's draw`);
-  await merge(w0,`${k}: the week merges`);
+  await merge(w0,`${k}: the week merges`,true);
   for(let i=0;i<10&&!(await A.p.evaluate(()=>!!(S.tn&&S.tn.w===COOP.state.week))&&await B.p.evaluate(()=>!!(S.tn&&S.tn.w===COOP.state.week)));i++)await sleep(500);
   const a=await A.p.evaluate(()=>{const f=COOPW.friend();return{w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:f?cyTray(f):null,on:f?cycOn(f):null,duc:f&&f.duc,hold:COOPW.cyHold}});
   const c=await B.p.evaluate(()=>({w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:cyTray(S),on:cycOn(S),duc:S.duc}));
@@ -123,6 +125,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
    const want=((S.tuan||0)+1)%3,base=S.name;for(let i=0;i<400;i++){S.name=base.replace(/ \d+$/,'')+(i?' '+i:'');if(typeof cyBase!=='function'||cyBase(S).t===want)break}render();return{name:S.name,age:S.age}});
   await A.p.evaluate(n=>{const f=COOPW.friend();if(f){f.name=n.name;f.age=n.age;f.preg=0}},nb);
   const w0=await wkA();await merge(w0,'mixed (old guest in her cycle tuần): the week still merges, the host does not wait for ever');
+  {const tr=await A.p.evaluate(()=>COOPW.tr.filter(x=>/^cy(Hold|Free)/.test(x)).slice(-4));ok(tr.some(x=>/^cyHold/.test(x))&&/^cyFree/.test(tr[tr.length-1]||''),'mixed: the host waited for the old guest (no relay) and was freed by her week end',tr)}
   ok(await A.p.evaluate(()=>COOPW.cyHold==null),'mixed: no hold left on the host');
   ok(!A.errs.length,'host (mixed): no page errors',A.errs.slice(0,5));ok(!B.errs.length,'old guest: no page errors',B.errs.slice(0,5))}
  else console.log('skip mixed: no',HTML);
