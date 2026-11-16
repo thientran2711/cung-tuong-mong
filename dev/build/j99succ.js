@@ -6,7 +6,12 @@
    ghi Sổ luân hồi (danh hiệu) và Phúc duyên (j52 PD_END). Hai chiều: mẹ ruột tân đế là phi tần khác cũng buông rèm được.
    Mọi thẻ là PEND (succ0 / succC) nên ghi sổ, nạp sổ, tải lại vẫn còn; khi đang ở vĩ thanh thế gian dừng (S.succ.on). */
 const SUCC={b:{min:15,max:92},c:{min:5,max:80},yrs:3};
-const SUCC_ART={"succ-card":"img/ev-tien-de-bang-ha.webp"};/* tranh (dev/SUCCESSION_PLAN.md §7): key → img; thẻ chọn đã có tranh (pilot gpt-2-6), các tranh khác chờ duyệt */
+/* pictures (dev/SUCCESSION_PLAN.md §7): the choice card = Tiên đế băng hà (owner APPROVED 15/11 03:15Z, st-* style); the 9 epilogue chapters
+   reuse approved event pictures already on the CDN (no new art): kit 31.16 headArt band at the top of each card */
+const SUCC_ART={"succ-card":"img/ev-tien-de-bang-ha.webp",
+ a1:"img/ev-tan-phong.webp",a2:"img/ev-trieu-chinh.webp",a3:"img/ev-am-muu.webp",
+ b1:"img/ev-trieu-chinh-2.webp",b2:"img/ev-canh-phong.webp",b3:"img/ev-trieu-chinh.webp",
+ c1:"img/ev-dai-xa.webp",c2:"img/ev-thang-tran.webp",c3:"img/ev-fest-nguyentieu-b.webp"};
 const SUCC_END={
  a_ok:{h:"Hoàng thái hậu",pd:40},a_dm:{h:"Mẫu hậu Hoàng thái hậu",pd:30},a_bad:{h:"Thái hậu bị giam lỏng",pd:20},a_rare:{h:"Thái hoàng thái hậu",pd:80,rare:1},
  b_ok:{h:"Nhiếp chính Thái hậu",pd:55},b_keep:{h:"Thái hậu chấp chính",pd:45},b_bad:{h:"Bị ép trả rèm",pd:20},b_rare:{h:"Nhị thánh lâm triều",pd:90,rare:1},
@@ -15,6 +20,8 @@ try{if(typeof PD_END==="object")for(const k in SUCC_END){const e=SUCC_END[k];if(
 const SUCC_ERA=["Thiên Thụ","Thánh Lịch","Trường An","Cửu Thị","Như Ý","Vĩnh Xương","Kim Thiên","Phượng Nghi"];
 /* ---------- the court behind her ---------- */
 function succSon(){const E=S&&S.succ;if(!E)return null;const L=allKids().map(x=>x[0]);return L.find(k=>k.name===E.son)||null}
+/* a man's name only when she knows it (j61 name rule); else his title alone, never "Vương gia ???" */
+function succMN(m){try{return typeof k61Named==="function"&&!k61Named(m)?m.role:m.name}catch(e){return m.name}}
 function succSN(k){return String(k&&k.name||"tân đế").replace(/^Hoàng tử\s+/,"")}
 function succSup(){const r={houses:[],pow:0,mil:false,milArmy:false,milGuard:false,vg:null,vgAlly:false,allies:0,thOK:false,thB:false,thOpp:false};
  try{const T=S.trieu&&S.trieu.H?S.trieu:(typeof trS==="function"?trS():null);if(T)for(const c in T.H){const h=T.H[c];if(!h)continue;
@@ -64,7 +71,7 @@ PEND.succ0=function(){const E=S.succ,son=succSon();if(!E||!son)return null;const
  const t=`<p>${E.era?`Hoàng thượng niên hiệu ${E.era}`:"Hoàng thượng"} băng hà${E.age0?`, thọ ${E.age0} tuổi`:""}; di chiếu truyền ngôi cho ${son.name}, ${son.age} tuổi, ${E.dm?"ngươi là đích mẫu":"con ngươi"}.</p>
 <p>Ngọc tỷ đặt trên án, triều thần quỳ ngoài điện chờ ý ngươi.</p>
 <p>Đứng sau ngươi: ${hs}; binh quyền: ${U.mil?[U.milArmy?"nhà Đại tướng quân":"",U.milGuard?"cấm quân":""].filter(Boolean).join(", ")+" theo ngươi":"chưa có"}; phe trong hậu cung: ${U.allies} người.</p>
-<p>${S.thDead?"Thái hậu đã băng hà.":`Thái hậu (sắp thành Thái hoàng thái hậu) với ngươi: ${S.th||0}.`} ${U.vg?(U.vgAlly?`${U.vg.name} đứng về phía ngươi.`:`${U.vg.name} đang dòm ngó ngôi báu.`):""}</p>`;
+<p>${S.thDead?"Thái hậu đã băng hà.":`Thái hậu (sắp thành Thái hoàng thái hậu) với ngươi: ${S.th||0}.`} ${U.vg?(U.vgAlly?`${succMN(U.vg)} đứng về phía ngươi.`:`${succMN(U.vg)} đang dòm ngó ngôi báu.`):""}</p>`;
  const o=[
   {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`Chắc chắn · thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
   {n:"Buông rèm nhiếp chính",fx:{},x:`${word(pb)} · tốn: ${fmt({bac:-100,suc:-10})} · thành: buông rèm nghe chính đến khi tân đế 16 tuổi, Danh +8 · hỏng: đại thần không phục, Danh -10, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền`,need:nb,go:()=>succTry("b")},
@@ -91,7 +98,7 @@ function succPick(c){const E=S.succ;if(!E||!c)return;if(c.c)apply(c.c);if(c.s)ap
  if(c.end)return succEnd(typeof c.end==="function"?c.end():c.end);
  E.ch++;succAge();if(E.ch===2&&E.r==null)E.r=succRareOK()&&roll(E.p==="a"?12:E.p==="b"?10:8)?1:0;succNext()}
 function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?rivals.find(v=>v.id===E.foe&&v.alive):null,U=succSup();
- const vgN=U.vg?U.vg.name:"Thân vương Dụ";const fN=foe?foe.name:"một phi tần cũ";
+ const vgN=U.vg?succMN(U.vg):"Thân vương Dụ";const fN=foe?foe.name:"một phi tần cũ";
  const A=[
   {t:"Lễ tôn phong ở Từ Ninh cung",h:`<p>Tân đế ${sn} lên ngôi. Ngươi nhận kim sách, được tôn làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, dời sang Từ Ninh cung.</p><p>Ấn phượng của hậu cung vẫn còn trong tay ngươi. Tân đế quỳ trước thềm: “Mẫu hậu muốn thế nào, nhi thần đều nghe.”</p>`,
    o:[{n:"Trao ấn phượng cho tân Hoàng hậu, lui về Từ Ninh cung",e:{hoa:2,q:-1},s:{duc:3},txt:"Ngươi trao ấn phượng, lui về Từ Ninh cung."},
@@ -183,7 +190,8 @@ function succPatch(m){const M=$("modal");if(!M)return;m.opts.forEach((c,i)=>{con
  if(c.need&&c.need.length){b.setAttribute("data-kneed",encodeURIComponent(JSON.stringify(c.need)));if(c.need.some(n=>!n.ok))b.disabled=true}
  if(c.rare){b.classList.add("ksel","k97");b.setAttribute("aria-label","Cơ duyên hiếm: "+String(c.n).replace(/<[^>]+>/g,""))}})}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];if(!m||!/^succ/.test(m.pid||""))return s0.apply(this,arguments);
- if(m.pid==="succ0"){m.showOut=true;m.optLayout="rows";m.headArt={src:SUCC_ART["succ-card"],label:"Tiên đế băng hà"}}
+ if(m.pid==="succ0"){m.showOut=true;m.optLayout="rows";m.headArt=SUCC_ART["succ-card"]}/* no caption: the dialog title already says it (one fact, one place) */
+ else if(m.pid==="succC"){const E=S.succ;const a=E&&E.p&&SUCC_ART[E.p+((E.ch||0)+1)];if(a)m.headArt=a}
  const kf=kitFix;kitFix=function(){kitFix=kf;try{succPatch(m)}catch(e){console.error(e)}return kf.apply(this,arguments)};
  try{return s0.apply(this,arguments)}finally{kitFix=kf}}})();
 /* chooseM refuses a locked option even if it is reached another way */
