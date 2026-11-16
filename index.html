@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d94667b8+","t":"2026-11-16T22:03Z","c":"review/palace-voice-r1: guard the whole bare IT[e.k] family on inventory scans (j8 NPC month/plant/conf/gift/vượt phẩm, j24/j28 plant, jtru…","b":"aed2e01d7862","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
+window.CTM_BI={"s":"89b865b7+","t":"2026-11-16T22:07Z","c":"review/palace-voice-r1: rank-band wording fixes (Thái hậu 'vào cung để hầu hạ / lên sân khấu' -> [lo,mid] + 'đài hát'; Quý phi no longer 'c…","b":"701540d6fe2f","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -7159,7 +7159,7 @@ PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==
 function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a=ARC67[A.a],b=beatDef67(A,bid);const o=opts67(A,b)[i];if(!o)return;
  const sure=odds>=100,ok=sure||roll(odds);if(!sure){ap67(ok?o.w:o.l);if(ok&&o.sc)A.sc+=o.sc;if(!ok&&o.sf)A.sc=Math.max(0,A.sc+o.sf)}else{ap67(o.w);if(o.sc)A.sc+=o.sc}
  if(ok&&o.f)A.f[o.f]=1;if(!ok&&o.ff)A.f[o.ff]=1;let extra="";try{if(o.go)extra=o.go(A,ok)||""}catch(e){console.error(e)}
- const said=fill67(ok?(o.rt||""):(o.rf||""),A);
+ const said=fill67(ok?(o.rt||""):(o.rf||""),A,b&&b.w);/* rt/rf take the beat speaker's address tokens too (reviewer r1: Hoàng thượng nàng / ái phi) */
  log(`<b>${lab67(A)} · ${a.t}</b>: ${sure?"":ok?'<span class="g">Thành.</span> ':'<span class="r">Hỏng.</span> '}${said}${" "+fmt(sure?o.w:ok?o.w:o.l)}${extra?" "+extra:""}`);
  A.hist.push(`${fill67(b.l||b.h||"",A)}: ${fill67(o.n,A)}${sure?"":ok?" (thành)":" (hỏng)"}`);A.used.push(bid);A.cur=null;A.i++;
  const end=o.e?(Array.isArray(o.e)?(ok?o.e[0]:o.e[1]):o.e):null;
@@ -7273,7 +7273,7 @@ gift:{h:"Có người mang quà đến nhờ vả về {sj}",w:"maid",t:"Một n
  {n:"Từ chối, trả lại quà",c:{bac:0,danh:0,suc:-2},w:{danh:3,duc:3},wx:"tiếng thanh liêm",lx:"nhà ấy phật ý",rt:"Lời từ chối lan ra, người khen ngươi thanh liêm."},
  {n:"Nhận quà, đổi lấy tin tức",c:{suc:-3},o:()=>40+S.tamco/3,w:{bac:30},sc:1,wx:"thêm manh mối",l:{danh:-4},rt:"Người kia kể hết những gì hắn biết.",rf:"Chuyện nhận quà bị kẻ khác bắt gặp."}]},
 night:{h:"Hoàng thượng thấy ngươi có tâm sự",w:"emp",need:["nsrv"],t:"Hoàng thượng thấy ngươi ngồi lặng bên song cửa: “{Goi} đang nghĩ gì?”",o:[
- {n:"Kể ngài nghe về {sj}",c:{sung:-2},o:()=>45+S.sung/4,sc:1,w:{sung:3},wx:"ngài hứa để ý",l:{sung:-4},lx:"ngài thấy phiền",rt:"Hoàng thượng nghe chăm chú.",rf:"Hoàng thượng phẩy tay: “Chuyện hậu cung, nàng tự lo.”"},
+ {n:"Kể ngài nghe về {sj}",c:{sung:-2},o:()=>45+S.sung/4,sc:1,w:{sung:3},wx:"ngài hứa để ý",l:{sung:-4},lx:"ngài thấy phiền",rt:"Hoàng thượng nghe chăm chú.",rf:"Hoàng thượng phẩy tay: “Chuyện hậu cung, {goi} tự lo.”"},
  {n:"Gượng cười, hầu ngài vui",c:{suc:-5},w:{sung:5},wx:"ngài vui",lx:"việc vẫn để đó",rt:"Đêm ấy Hoàng thượng rất vui."},
  {n:"Xin ngài một ân điển nhỏ",c:{sung:-4},w:{danh:3},sc:1,wx:"có thánh ý đứng sau",rt:"Hoàng thượng gật đầu ban ân."}]},
 srv:{h:"Đồng liêu dò hỏi về {sj}",w:"maid",need:["srv"],t:"Mấy cung nữ cùng phòng vây lấy ngươi, tò mò hỏi về {sj}.",o:[
@@ -7690,7 +7690,7 @@ ARC67.cn_chu={o:"cn",t:"Chủ cũ",w:"v",sj:"chuyện ngươi từng hầu {v}",
  c2:{h:"{v} gặp nạn",w:"v",need:["v"],t:"{v} bị một phi tần khác vu ăn cắp trâm. Nàng nhìn ngươi, không nói gì.",o:[
   {n:"Đứng ra nói giúp chủ cũ",c:{danh:-2},o:50,sc:2,f:"kind",wx:"{v} nợ ngươi",l:{danh:-3},lx:"bị kéo vào",go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok)relAdd(S,v,25)},rt:"Trâm được tìm thấy ở chỗ khác, {v} được minh oan.",rf:"Lời ngươi không đủ, cả hai bị trách."},
   {n:"Đứng ngoài nhìn",c:{duc:-2},w:{tamco:2},f:"hard",wx:"{v} yếu đi",go:A=>e67pun(rv67(A,"v"),5),rt:"{v} bị phạt."}]},
- c3:{h:"Hoàng thượng hỏi về chủ cũ",w:"emp",need:["nsrv"],t:"Hoàng thượng hỏi: “Nghe nói nàng từng hầu {v}. Nàng ấy đối với nàng thế nào?”",o:[
+ c3:{h:"Hoàng thượng hỏi về chủ cũ",w:"emp",need:["nsrv"],t:"Hoàng thượng hỏi: “Nghe nói {goi} từng hầu {v}. Nàng ấy đối với {goi} thế nào?”",o:[
   {n:"Nói tốt về {v}",c:{},w:{duc:3,sung:2},f:"kind",wx:"ngài khen ngươi trung hậu",lx:"{v} chẳng biết ơn",rt:"Hoàng thượng gật đầu khen."},
   {n:"Kể thật những gì đã chịu",c:{},o:45,w:{sung:3},f:"hard",wx:"ngài thương ngươi",l:{sung:-3},lx:"ngài cho là ngươi để bụng",go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok)v.sung=Math.max(0,(v.sung||0)-5)},rt:"Hoàng thượng nhíu mày về phía {v}.",rf:"Hoàng thượng bảo: chuyện cũ bỏ đi."}]},
  t1:{h:"Ngươi sắp vượt {v}",w:"v",need:["v"],t:"Tin đồn: ngươi sắp được thăng ngang hoặc hơn {v}. Nàng mất ăn mất ngủ.",o:[
@@ -7902,7 +7902,7 @@ ARC67.nc_vuong={o:"nc",t:"Ngai vàng cố quốc",w:"emp",sj:"cuộc tranh ngôi
  c3:{h:"Hoàng huynh gặp nguy",w:"maid",t:"Tin về: hoàng huynh bị vây ở kinh đô Nam Chiếu, xin ngươi cầu viện.",o:[
   {n:"Quỳ xin Hoàng thượng cứu",need:["nsrv"],c:{sung:-4},o:()=>40+S.sung/4,sc:1,f:"bro",wx:"Đại Hy có thể xuất quân",l:{sung:-4},rt:"Hoàng thượng hứa cân nhắc.",rf:"Hoàng thượng bảo việc nước người, không xen."},
   {n:"Gửi bạc riêng giúp huynh",c:{bac:-60},sc:1,f:"bro",wx:"huynh cầm cự thêm",rt:"Bạc đến kịp."}]},
- t1:{h:"Ai đáng làm vua",w:"emp",t:"Hoàng thượng hỏi riêng: “Nàng nói thật đi: huynh nàng hay thúc nàng, ai sẽ thắng?”",o:[
+ t1:{h:"Ai đáng làm vua",w:"emp",t:"Hoàng thượng hỏi riêng: “{Goi} nói thật đi: huynh {goi} hay thúc {goi}, ai sẽ thắng?”",o:[
   {n:"Nói thật những gì đã dò được",if:A=>A.f.know,c:{},sc:2,w:{sung:3},wx:"ngài quyết đúng hơn",lx:"không còn đường lui",rt:"Hoàng thượng gật gù."},
   {n:"Nói theo lòng mình",c:{},o:50,sc:1,wx:"ngài nghe ngươi",l:{sung:-3},rt:"Hoàng thượng tin ngươi.",rf:"Hoàng thượng nghi ngươi thiên vị."}]},
  x1:{h:"Đại Hy chọn phe",w:"emp",t:"Hoàng thượng phải ra quyết định cuối cùng, và ngài muốn nghe ngươi.",o:[
@@ -8559,7 +8559,7 @@ ARC67.s_tinh={o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return 
  t1:{h:"{man} muốn đưa ngươi trốn",w:"man",need:["man"],t:"{man} nói có cách đưa ngươi ra khỏi cung, sống cuộc đời khác.",o:[
   {n:"Từ chối, chọn con đường trong cung",c:{},w:{duc:5},sc:1,f:"clean",wx:"giữ được tất cả",lx:"lòng đau",rt:"Ngươi gỡ tay hắn ra."},
   {n:"Xin hắn rời cung, để ngươi yên",c:{bac:-40},o:60,sc:1,wx:"dứt mối dây",l:{danh:-4},lx:"hắn không chịu đi",rt:"{man} xin ra ngoài kinh.",rf:"{man} không nỡ đi."}]},
- x1:{h:"Hồi kết của cám dỗ",w:"emp",t:"Lời đồn đến tai Hoàng thượng. Ngài hỏi thẳng: “Nàng và {man} là thế nào?”",o:[
+ x1:{h:"Hồi kết của cám dỗ",w:"emp",t:"Lời đồn đến tai Hoàng thượng. Ngài hỏi thẳng: “{Goi} và {man} là thế nào?”",o:[
   {n:"Thưa thật: có rung động, nhưng chưa từng vượt lễ",c:{sung:-4},o:A=>40+(A.f.clean?25:0),e:["win","lose"],rt:"Hoàng thượng im lặng rồi ôm ngươi: ‘Lỗi của trẫm đã bỏ nàng cô đơn.’",rf:"Hoàng thượng giận, lạnh nhạt hẳn với ngươi."},
   {n:"Chối hoàn toàn",c:{},o:A=>45+(A.f.clean?20:0)-(A.f.close?10:0)+S.tamco/8,e:["mid","lose"],rt:"Không ai chứng minh được gì.",rf:"Có người làm chứng thấy hai người."}]}},
  E:{win:{k:1,tag:"Vượt qua cám dỗ",w:"emp",t:"Hoàng thượng cảm động vì sự thật của ngươi, thương ngươi hơn. {man} rời cung, ngươi nhẹ lòng.",fx:{sung:8,duc:5}},
@@ -19398,7 +19398,7 @@ const R97L=[
  fx:{danh:12,sung:5},go:()=>e67dad(10),rw:"bienngu",ti:"Nhà có đan thư thiết khoán"},
 {a:"dtq_binh",tag:"Người giữ nửa binh phù",w:"emp",p:.15,n:"Xin ngài cho cha và vua cùng giữ một nửa binh phù",c:{suc:-4},
  path:["Đáp: cha chỉ giữ hộ","Thưa thật: cha già rồi","Dò xem ai khuyên ngài","Hồi thư khuyên cha tự lui","Kết giao với nhà tướng trẻ","Chúc mừng tướng trẻ","chia quân","Khuyên cha về một mình","Đỡ lời cha"],np:3,bad:["Hứa với cha sẽ giữ","Tìm lỗi của tướng trẻ","Để cha mang thân binh"],sc:2,x:[()=>S.sung>=45,"Sủng từ 45"],
- t:"Hoàng thượng bẻ đôi binh phù ngay trên ngự án, một nửa đưa cha ngươi, một nửa đặt vào tay ngươi: “Trẫm tin cha nàng, vì trẫm tin nàng.” Từ đó, muốn điều quân phải có đủ hai nửa; và nửa kia nằm trong hộp gấm ở cung ngươi.",
+ t:"Hoàng thượng bẻ đôi binh phù ngay trên ngự án, một nửa đưa cha ngươi, một nửa đặt vào tay ngươi: “Trẫm tin cha {goi}, vì trẫm tin {goi}.” Từ đó, muốn điều quân phải có đủ hai nửa; và nửa kia nằm trong hộp gấm ở cung ngươi.",
  fx:{sung:10,danh:8},go:()=>e67dad(5),rw:"ngocboi",ti:"Người giữ nửa binh phù"},
 {a:"dtq_huynh",tag:"Huynh về cùng hòa thư",w:"emp",p:.15,n:"Gửi cho huynh chiếc trâm của mẹ làm tín vật bỏ trốn",c:{suc:-3,bac:-80},
  path:["Tự gom bạc chuộc","Xin gặp riêng sứ giặc","Nhờ Lễ bộ dò ý","Dâng kế đổi tù binh","Lấy thư của huynh","Bỏ bạc mua đường cứu"],np:2,bad:["Tránh mặt sứ giặc","Mặc kệ"],sc:2,x:[()=>S.bac>=100,"Bạc từ 100"],
@@ -19453,7 +19453,7 @@ const R97L=[
  fx:{th:20,danh:8,sac:2},rw:"nt_dongchau",ti:"Chim công của Đức Thọ cung"},
 {a:"nc_vuong",tag:"Nữ vương Nam Chiếu",w:"emp",p:.10,n:"Mở phong thư thứ ba, thư của các trưởng lão Nam Chiếu",c:{suc:-4},
  path:["Xin Hoàng thượng cho để tang","Đọc kỹ, dò xem ai được lòng dân","Trả lại","Vận động Lễ bộ","Quỳ xin Hoàng thượng cứu","Gửi bạc riêng giúp huynh","Nói thật những gì đã dò"],np:2,bad:["Nhận vàng","Vận động Binh bộ"],sc:2,x:[()=>S.sung>=45,"Sủng từ 45"],
- t:"Phong thư thứ ba đóng dấu của mười hai trưởng lão: hoàng huynh và hoàng thúc đều đã mất lòng dân, họ xin rước ngươi về làm nữ vương. Hoàng thượng đọc xong, im lặng đến canh ba, rồi nói: “Đi hay ở, trẫm để nàng chọn. Ở lại, Đại Hy phong nàng làm Nam Chiếu trưởng công chúa.”",
+ t:"Phong thư thứ ba đóng dấu của mười hai trưởng lão: hoàng huynh và hoàng thúc đều đã mất lòng dân, họ xin rước ngươi về làm nữ vương. Hoàng thượng đọc xong, im lặng đến canh ba, rồi nói: “Đi hay ở, trẫm để {goi} chọn. Ở lại, Đại Hy phong {goi} làm Nam Chiếu trưởng công chúa.”",
  fx:{danh:12},rw:"nt_dongchau",ti:"Nam Chiếu trưởng công chúa",
  exit:["Về cố quốc lên ngôi nữ vương","Ở lại bên Hoàng thượng","Nữ vương Nam Chiếu","{me} trở về Nam Chiếu trong đoàn xe cờ vàng của Đại Hy. Ngày lên ngôi, ngươi đặt quốc hiệu mới, ký hòa ước trăm năm với Đại Hy, và trị vì cố quốc đến bạc đầu. Sử Nam Chiếu chép ngươi là vị nữ vương hiền nhất.","Về cố quốc làm nữ vương"]},
 /* ===== Con gái tội thần ===== */
@@ -19547,7 +19547,7 @@ const R97L=[
  fx:{duc:6,danh:14,sung:5},rw:"bienngu",ti:"Phong hiệu Từ Tế"},
 {a:"s_tinh",tag:"Bài thơ tiễn ra biên",w:"emp",p:.15,n:"Viết cho {man} một bài thơ tiễn, nhờ Hoàng thượng chuyển",c:{suc:-3},
  path:["Cảm ơn rồi đi ngay","Đốt","Từ chối","Dồn sức giành lại Hoàng thượng","Quát hắn, dọa tố","Từ chối, chọn con đường trong cung","Xin hắn rời cung"],np:3,bad:["Đứng lại trò chuyện","Giữ lại","Đến, chỉ để nói lời từ biệt","Tìm an ủi bên {man}"],sc:1,x:[()=>S.duc>=50,"Đức từ 50"],
- t:"Hoàng thượng đọc bài thơ tiễn trước rồi mới sai người chuyển đi. {man} xin ra biên ải, về sau lập công lớn. Đêm ấy ngài nói: “Nàng có thể giấu trẫm, mà nàng lại đưa cho trẫm đọc.” Từ đó, lời gièm nào về ngươi đến tai ngài cũng bị gạt đi.",
+ t:"Hoàng thượng đọc bài thơ tiễn trước rồi mới sai người chuyển đi. {man} xin ra biên ải, về sau lập công lớn. Đêm ấy ngài nói: “{Goi} có thể giấu trẫm, mà {goi} lại đưa cho trẫm đọc.” Từ đó, lời gièm nào về ngươi đến tai ngài cũng bị gạt đi.",
  fx:{sung:10,duc:5,danh:4},rw:"ngocboi",ti:"Người Hoàng thượng không nghi"},
 {a:"s_thay",tag:"Mạng lưới của lão Tổng quản",w:"eun",p:.15,n:"Ngồi bên giường ông, đọc lại cho ông nghe cuốn sổ",c:{suc:-3},
  path:["Nghe lời, đi lối khác","Hỏi vì sao","Giúp","Ghi lòng tạc dạ","Hỏi phi tần ấy là ai","Đứng ra nói giúp","Giữ kín","Đến thăm, nhận sổ"],np:2,bad:["Từ chối khéo","Dùng ngay"],sc:2,x:[()=>S.mat>=1||S.tamco>=45,"Tai mắt từ 1 hoặc Tâm cơ từ 45"],
@@ -19568,7 +19568,7 @@ const R97L=[
  fx:{danh:10,sung:6},go:()=>e67heir(20),rw:"ngocboi",ti:"Mẫu thân của hoàng tử được vua tự dạy"},
 {a:"st_dong",tag:"Mật chiếu sau biển Chính đại quang minh",w:"emp",need:"kid",p:.10,n:"Đêm ấy không xin gì, chỉ ngồi nghe ngài nói về giang sơn",c:{suc:-3},
  path:["Thưa: chọn người hiền","Nhận lời","Cho con cưỡi ngựa bắn cung","Đưa con đến hầu Thái hậu","Dâng lễ lên Đức Thọ cung","Mời thầy giỏi kèm riêng","Tự dạy con","Đổi người nấu, giăng bẫy","Tự nấu cho con"],np:3,bad:["Lật lại chuyện con nàng"],sc:3,x:[()=>{const s=r97son();return !!s&&(s.fond||0)>=50&&S.sung>=50},"có hoàng tử được thương từ 50, Sủng từ 50"],
- t:"Canh tư, Hoàng thượng một mình trèo lên điện Càn Thanh, đặt một hộp gấm sau tấm biển “Chính đại quang minh”. Sáng ra ngài chỉ nói với ngươi: “Nàng đã nghe trẫm cả đêm mà không xin gì. Trẫm biết phải viết tên ai.” Tên trong mật chiếu là {k}.",
+ t:"Canh tư, Hoàng thượng một mình trèo lên điện Càn Thanh, đặt một hộp gấm sau tấm biển “Chính đại quang minh”. Sáng ra ngài chỉ nói với ngươi: “{Goi} đã nghe trẫm cả đêm mà không xin gì. Trẫm biết phải viết tên ai.” Tên trong mật chiếu là {k}.",
  fx:{danh:10,sung:8},go:()=>{const s=r97son();if(s&&typeof setHeir==="function"&&!(S.heir&&S.heir.k===s)){setHeir(s,null);return `${s.name} được lập làm Thái tử.`}return e67heir(25)},rw:"nt_dongchau",ti:"Mẫu thân của Thái tử trong mật chiếu"}
 ];
 R97L.forEach(d=>{R97[d.a]=d});
@@ -19772,7 +19772,7 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
  b1h:{h:"Tin chàng thăng chức",w:"lv",if:()=>T96().endA==="a_hen",t:"Tin từ Cần Chính điện: {lv} vừa được thăng chức. Đêm ấy, {lvroute}, có một cành hoa khô gửi đến cho ngươi.",o:[
   {n:"Ép cành hoa vào sách, giữ lại",c:{},w:{suc:4},go:()=>adj96({h:6,t:4,lt:1}),rt:"Cành hoa nằm giữa hai trang thơ."},
   {n:"Mừng thầm, nhưng đốt đi",c:{},w:{duc:2},go:()=>adj96({h:-2}),rt:"Ngươi đốt cành hoa, lòng vẫn mừng cho chàng."},
-  {n:"Khen chàng một câu trước mặt Hoàng thượng",c:{sung:-2},o:()=>50+S.sung/5,w:{sung:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:6})},rt:"Hoàng thượng gật gù: “Người này dùng được.”",rf:"Hoàng thượng nhìn ngươi: “Nàng biết hắn sao?”"}]},
+  {n:"Khen chàng một câu trước mặt Hoàng thượng",c:{sung:-2},o:()=>50+S.sung/5,w:{sung:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:6})},rt:"Hoàng thượng gật gù: “Người này dùng được.”",rf:()=>kSay("emp",S,"Hoàng thượng nhìn ngươi: “{Goi} biết hắn sao?”")}]},
  b1d:{h:"Ánh mắt từ xa",w:"lv",t:"Đã lâu ngươi không nhắc đến {lvn}. Nhưng mỗi lần ngươi đi qua {lvp}, chàng vẫn dừng việc mà nhìn theo. Chàng {lvtinh}.",o:[
   {n:"Đổi đường đi, tránh hẳn {lvp}",c:{suc:-2},w:{duc:2},go:()=>adj96({t:-6,h:-3}),rt:"Ngươi đổi đường. Ánh mắt kia dần thưa."},
   {n:"Gật đầu chào chàng một lần",c:{},w:{suc:3},go:()=>adj96({h:5,t:8}),rt:"Chỉ một cái gật đầu, mà đủ để chàng mỉm cười cả ngày."}]},
@@ -19796,7 +19796,7 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
   {n:"Bình thản chờ, tin mình trong sạch",c:{},if:()=>!hasEv96(),o:()=>55+S.duc/5,w:{duc:3},l:{danh:-4},go:(A,ok)=>{if(!ok)adj96({sus:8})},rt:"Bức thư giả bị thái y nghiệm ra mực mới. Kẻ giá họa mất mặt.",rf:"Không ai chứng minh được thư giả, lời đồn vẫn bay."}]},
  b5:{h:"Hoàng thượng thử lòng",w:"emp",need:["nsrv"],t:"Yến tiệc trong cung. Hoàng thượng chợt gọi {lv} đến trước mặt, rồi quay sang ngươi: “{Goi} rót cho khanh ấy một chén. Trẫm nghe nói hai người là chỗ quen biết cũ.”",o:[
   {n:"Thản nhiên rót rượu như với mọi quan",c:{},o:()=>45+S.tamco/3+(A96has("cut")?15:0)-(T96().sus||0)/3,w:{sung:4},l:{sung:-6},go:(A,ok)=>{adj96({sus:ok?-10:12})},rt:"Tay ngươi không run. Hoàng thượng cười, uống cạn chén của mình.",rf:"Rượu sóng sánh ra ngoài. Hoàng thượng đặt chén xuống, không nói gì."},
-  {n:"Tiến cử chàng hết lời trước mặt ngài",c:{sung:-2},o:()=>40+S.danh/5+(T96().rise||0)*5-(T96().sus||0)/4,w:{danh:3},l:{sung:-5},go:(A,ok)=>{if(ok)adj96({rise:1,sus:-4});else adj96({sus:12})},rt:"Hoàng thượng gật đầu: “Trẫm sẽ trọng dụng.”",rf:"Hoàng thượng nheo mắt: “Nàng lo cho hắn quá nhỉ.”"},
+  {n:"Tiến cử chàng hết lời trước mặt ngài",c:{sung:-2},o:()=>40+S.danh/5+(T96().rise||0)*5-(T96().sus||0)/4,w:{danh:3},l:{sung:-5},go:(A,ok)=>{if(ok)adj96({rise:1,sus:-4});else adj96({sus:12})},rt:"Hoàng thượng gật đầu: “Trẫm sẽ trọng dụng.”",rf:"Hoàng thượng nheo mắt: “{Goi} lo cho hắn quá nhỉ.”"},
   {n:"Xin ngài ban hôn cho chàng",c:{},w:{duc:3},go:()=>{T96().wedAsk=1;adj96({sus:-8,h:-5})},rt:"Hoàng thượng bật cười: “Được, trẫm sẽ để ý.”"}]},
  b6:{h:"Phiên tra hỏi",w:"emp",t:"Chuyện đến tai Hoàng thượng. Ngài cho gọi ngươi vào Dưỡng Hòa điện, trên án là {lvtok}. “Nàng nói đi.”",o:[
   {n:"Thẳng thắn: chuyện trước khi vào cung, nay đã không còn",c:{sung:-3},o:()=>40+S.duc/6+((man96()||{}).letters?-10:10)-(T96().sus||0)/5+(A96has("cut")?10:0),e:["b_tin","b_nghi"],rt:"Hoàng thượng nhìn ngươi rất lâu, rồi đẩy tín vật sang: “Trẫm tin nàng.”",rf:"Hoàng thượng không tin, chỉ phẩy tay cho lui."},
@@ -19816,7 +19816,7 @@ ARC67.tm96c={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn cuối",w:"lv",
   {n:"Dồn sức lấy lại lòng Hoàng thượng",c:{suc:-6},o:()=>45+S.sac/5+S.sung/5,w:{sung:5},l:{sung:-3},go:(A,ok)=>adj96({sus:ok?-15:4}),rt:"Hoàng thượng lại ghé cung ngươi như xưa.",rf:"Ngài đến, nhưng vẫn lạnh lùng dò xét."}]},
  c1o:{h:"Người bị giáng",w:"lv",if:()=>T96().endB==="b_ton"||(T96().hurt||0)>=1,t:"{lv} sau lần gánh tội vẫn chưa ngóc đầu lên được. Nghe nói chàng sống thanh bần, đêm đêm vẫn đọc lại mấy chữ ngươi viết năm nào.",o:[
   {n:"Lén gửi bạc giúp chàng",c:{bac:-60},w:{},go:()=>adj96({t:8,h:5}),rt:"Bạc đến tay chàng qua ba người trung gian."},
-  {n:"Xin Hoàng thượng phục chức cho chàng",c:{sung:-4},o:()=>40+S.sung/4-(T96().sus||0)/4,w:{danh:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:8})},rt:"Chàng được phục chức. Không ai biết ai đã nói giúp.",rf:"Hoàng thượng hỏi lại: “Sao nàng quan tâm hắn vậy?”"},
+  {n:"Xin Hoàng thượng phục chức cho chàng",c:{sung:-4},o:()=>40+S.sung/4-(T96().sus||0)/4,w:{danh:2},l:{sung:-3},go:(A,ok)=>{if(ok)adj96({rise:1});else adj96({sus:8})},rt:"Chàng được phục chức. Không ai biết ai đã nói giúp.",rf:()=>kSay("emp",S,"Hoàng thượng hỏi lại: “Sao {goi} quan tâm hắn vậy?”")},
   {n:"Để mặc, giữ mình",c:{},w:{tamco:2},go:()=>adj96({h:-4}),rt:"Ngươi không nhúng tay. Lòng ngươi biết thế là phải."}]},
  c1t:{h:"Người được trọng dụng",w:"lv",t:"{lv} nay là cánh tay đắc lực trong triều, lời chàng nói Hoàng thượng đều nghe. Lần đầu tiên, chàng có đủ sức để giúp ngươi, hoặc để hại chính mình vì ngươi.",o:[
   {n:"Nhờ chàng đỡ một việc của nhà ngươi",c:{},w:{danh:4},go:()=>adj96({t:2,rise:1}),rt:"Chàng làm gọn gàng. Nhà ngươi qua được một cơn sóng."},
@@ -45257,7 +45257,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="aed2e01d7862";window.CTM_BUILD=BUILD;
+const BUILD="701540d6fe2f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

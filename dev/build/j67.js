@@ -148,7 +148,7 @@ PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==
 function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a=ARC67[A.a],b=beatDef67(A,bid);const o=opts67(A,b)[i];if(!o)return;
  const sure=odds>=100,ok=sure||roll(odds);if(!sure){ap67(ok?o.w:o.l);if(ok&&o.sc)A.sc+=o.sc;if(!ok&&o.sf)A.sc=Math.max(0,A.sc+o.sf)}else{ap67(o.w);if(o.sc)A.sc+=o.sc}
  if(ok&&o.f)A.f[o.f]=1;if(!ok&&o.ff)A.f[o.ff]=1;let extra="";try{if(o.go)extra=o.go(A,ok)||""}catch(e){console.error(e)}
- const said=fill67(ok?(o.rt||""):(o.rf||""),A);
+ const said=fill67(ok?(o.rt||""):(o.rf||""),A,b&&b.w);/* rt/rf take the beat speaker's address tokens too (reviewer r1: Hoàng thượng nàng / ái phi) */
  log(`<b>${lab67(A)} · ${a.t}</b>: ${sure?"":ok?'<span class="g">Thành.</span> ':'<span class="r">Hỏng.</span> '}${said}${" "+fmt(sure?o.w:ok?o.w:o.l)}${extra?" "+extra:""}`);
  A.hist.push(`${fill67(b.l||b.h||"",A)}: ${fill67(o.n,A)}${sure?"":ok?" (thành)":" (hỏng)"}`);A.used.push(bid);A.cur=null;A.i++;
  const end=o.e?(Array.isArray(o.e)?(ok?o.e[0]:o.e[1]):o.e):null;
@@ -262,7 +262,7 @@ gift:{h:"Có người mang quà đến nhờ vả về {sj}",w:"maid",t:"Một n
  {n:"Từ chối, trả lại quà",c:{bac:0,danh:0,suc:-2},w:{danh:3,duc:3},wx:"tiếng thanh liêm",lx:"nhà ấy phật ý",rt:"Lời từ chối lan ra, người khen ngươi thanh liêm."},
  {n:"Nhận quà, đổi lấy tin tức",c:{suc:-3},o:()=>40+S.tamco/3,w:{bac:30},sc:1,wx:"thêm manh mối",l:{danh:-4},rt:"Người kia kể hết những gì hắn biết.",rf:"Chuyện nhận quà bị kẻ khác bắt gặp."}]},
 night:{h:"Hoàng thượng thấy ngươi có tâm sự",w:"emp",need:["nsrv"],t:"Hoàng thượng thấy ngươi ngồi lặng bên song cửa: “{Goi} đang nghĩ gì?”",o:[
- {n:"Kể ngài nghe về {sj}",c:{sung:-2},o:()=>45+S.sung/4,sc:1,w:{sung:3},wx:"ngài hứa để ý",l:{sung:-4},lx:"ngài thấy phiền",rt:"Hoàng thượng nghe chăm chú.",rf:"Hoàng thượng phẩy tay: “Chuyện hậu cung, nàng tự lo.”"},
+ {n:"Kể ngài nghe về {sj}",c:{sung:-2},o:()=>45+S.sung/4,sc:1,w:{sung:3},wx:"ngài hứa để ý",l:{sung:-4},lx:"ngài thấy phiền",rt:"Hoàng thượng nghe chăm chú.",rf:"Hoàng thượng phẩy tay: “Chuyện hậu cung, {goi} tự lo.”"},
  {n:"Gượng cười, hầu ngài vui",c:{suc:-5},w:{sung:5},wx:"ngài vui",lx:"việc vẫn để đó",rt:"Đêm ấy Hoàng thượng rất vui."},
  {n:"Xin ngài một ân điển nhỏ",c:{sung:-4},w:{danh:3},sc:1,wx:"có thánh ý đứng sau",rt:"Hoàng thượng gật đầu ban ân."}]},
 srv:{h:"Đồng liêu dò hỏi về {sj}",w:"maid",need:["srv"],t:"Mấy cung nữ cùng phòng vây lấy ngươi, tò mò hỏi về {sj}.",o:[
@@ -679,7 +679,7 @@ ARC67.cn_chu={o:"cn",t:"Chủ cũ",w:"v",sj:"chuyện ngươi từng hầu {v}",
  c2:{h:"{v} gặp nạn",w:"v",need:["v"],t:"{v} bị một phi tần khác vu ăn cắp trâm. Nàng nhìn ngươi, không nói gì.",o:[
   {n:"Đứng ra nói giúp chủ cũ",c:{danh:-2},o:50,sc:2,f:"kind",wx:"{v} nợ ngươi",l:{danh:-3},lx:"bị kéo vào",go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok)relAdd(S,v,25)},rt:"Trâm được tìm thấy ở chỗ khác, {v} được minh oan.",rf:"Lời ngươi không đủ, cả hai bị trách."},
   {n:"Đứng ngoài nhìn",c:{duc:-2},w:{tamco:2},f:"hard",wx:"{v} yếu đi",go:A=>e67pun(rv67(A,"v"),5),rt:"{v} bị phạt."}]},
- c3:{h:"Hoàng thượng hỏi về chủ cũ",w:"emp",need:["nsrv"],t:"Hoàng thượng hỏi: “Nghe nói nàng từng hầu {v}. Nàng ấy đối với nàng thế nào?”",o:[
+ c3:{h:"Hoàng thượng hỏi về chủ cũ",w:"emp",need:["nsrv"],t:"Hoàng thượng hỏi: “Nghe nói {goi} từng hầu {v}. Nàng ấy đối với {goi} thế nào?”",o:[
   {n:"Nói tốt về {v}",c:{},w:{duc:3,sung:2},f:"kind",wx:"ngài khen ngươi trung hậu",lx:"{v} chẳng biết ơn",rt:"Hoàng thượng gật đầu khen."},
   {n:"Kể thật những gì đã chịu",c:{},o:45,w:{sung:3},f:"hard",wx:"ngài thương ngươi",l:{sung:-3},lx:"ngài cho là ngươi để bụng",go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok)v.sung=Math.max(0,(v.sung||0)-5)},rt:"Hoàng thượng nhíu mày về phía {v}.",rf:"Hoàng thượng bảo: chuyện cũ bỏ đi."}]},
  t1:{h:"Ngươi sắp vượt {v}",w:"v",need:["v"],t:"Tin đồn: ngươi sắp được thăng ngang hoặc hơn {v}. Nàng mất ăn mất ngủ.",o:[
@@ -891,7 +891,7 @@ ARC67.nc_vuong={o:"nc",t:"Ngai vàng cố quốc",w:"emp",sj:"cuộc tranh ngôi
  c3:{h:"Hoàng huynh gặp nguy",w:"maid",t:"Tin về: hoàng huynh bị vây ở kinh đô Nam Chiếu, xin ngươi cầu viện.",o:[
   {n:"Quỳ xin Hoàng thượng cứu",need:["nsrv"],c:{sung:-4},o:()=>40+S.sung/4,sc:1,f:"bro",wx:"Đại Hy có thể xuất quân",l:{sung:-4},rt:"Hoàng thượng hứa cân nhắc.",rf:"Hoàng thượng bảo việc nước người, không xen."},
   {n:"Gửi bạc riêng giúp huynh",c:{bac:-60},sc:1,f:"bro",wx:"huynh cầm cự thêm",rt:"Bạc đến kịp."}]},
- t1:{h:"Ai đáng làm vua",w:"emp",t:"Hoàng thượng hỏi riêng: “Nàng nói thật đi: huynh nàng hay thúc nàng, ai sẽ thắng?”",o:[
+ t1:{h:"Ai đáng làm vua",w:"emp",t:"Hoàng thượng hỏi riêng: “{Goi} nói thật đi: huynh {goi} hay thúc {goi}, ai sẽ thắng?”",o:[
   {n:"Nói thật những gì đã dò được",if:A=>A.f.know,c:{},sc:2,w:{sung:3},wx:"ngài quyết đúng hơn",lx:"không còn đường lui",rt:"Hoàng thượng gật gù."},
   {n:"Nói theo lòng mình",c:{},o:50,sc:1,wx:"ngài nghe ngươi",l:{sung:-3},rt:"Hoàng thượng tin ngươi.",rf:"Hoàng thượng nghi ngươi thiên vị."}]},
  x1:{h:"Đại Hy chọn phe",w:"emp",t:"Hoàng thượng phải ra quyết định cuối cùng, và ngài muốn nghe ngươi.",o:[
@@ -1548,7 +1548,7 @@ ARC67.s_tinh={o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return 
  t1:{h:"{man} muốn đưa ngươi trốn",w:"man",need:["man"],t:"{man} nói có cách đưa ngươi ra khỏi cung, sống cuộc đời khác.",o:[
   {n:"Từ chối, chọn con đường trong cung",c:{},w:{duc:5},sc:1,f:"clean",wx:"giữ được tất cả",lx:"lòng đau",rt:"Ngươi gỡ tay hắn ra."},
   {n:"Xin hắn rời cung, để ngươi yên",c:{bac:-40},o:60,sc:1,wx:"dứt mối dây",l:{danh:-4},lx:"hắn không chịu đi",rt:"{man} xin ra ngoài kinh.",rf:"{man} không nỡ đi."}]},
- x1:{h:"Hồi kết của cám dỗ",w:"emp",t:"Lời đồn đến tai Hoàng thượng. Ngài hỏi thẳng: “Nàng và {man} là thế nào?”",o:[
+ x1:{h:"Hồi kết của cám dỗ",w:"emp",t:"Lời đồn đến tai Hoàng thượng. Ngài hỏi thẳng: “{Goi} và {man} là thế nào?”",o:[
   {n:"Thưa thật: có rung động, nhưng chưa từng vượt lễ",c:{sung:-4},o:A=>40+(A.f.clean?25:0),e:["win","lose"],rt:"Hoàng thượng im lặng rồi ôm ngươi: ‘Lỗi của trẫm đã bỏ nàng cô đơn.’",rf:"Hoàng thượng giận, lạnh nhạt hẳn với ngươi."},
   {n:"Chối hoàn toàn",c:{},o:A=>45+(A.f.clean?20:0)-(A.f.close?10:0)+S.tamco/8,e:["mid","lose"],rt:"Không ai chứng minh được gì.",rf:"Có người làm chứng thấy hai người."}]}},
  E:{win:{k:1,tag:"Vượt qua cám dỗ",w:"emp",t:"Hoàng thượng cảm động vì sự thật của ngươi, thương ngươi hơn. {man} rời cung, ngươi nhẹ lòng.",fx:{sung:8,duc:5}},

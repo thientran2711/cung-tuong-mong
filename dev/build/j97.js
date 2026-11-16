@@ -61,7 +61,7 @@ const R97L=[
  fx:{danh:12,sung:5},go:()=>e67dad(10),rw:"bienngu",ti:"Nhà có đan thư thiết khoán"},
 {a:"dtq_binh",tag:"Người giữ nửa binh phù",w:"emp",p:.15,n:"Xin ngài cho cha và vua cùng giữ một nửa binh phù",c:{suc:-4},
  path:["Đáp: cha chỉ giữ hộ","Thưa thật: cha già rồi","Dò xem ai khuyên ngài","Hồi thư khuyên cha tự lui","Kết giao với nhà tướng trẻ","Chúc mừng tướng trẻ","chia quân","Khuyên cha về một mình","Đỡ lời cha"],np:3,bad:["Hứa với cha sẽ giữ","Tìm lỗi của tướng trẻ","Để cha mang thân binh"],sc:2,x:[()=>S.sung>=45,"Sủng từ 45"],
- t:"Hoàng thượng bẻ đôi binh phù ngay trên ngự án, một nửa đưa cha ngươi, một nửa đặt vào tay ngươi: “Trẫm tin cha nàng, vì trẫm tin nàng.” Từ đó, muốn điều quân phải có đủ hai nửa; và nửa kia nằm trong hộp gấm ở cung ngươi.",
+ t:"Hoàng thượng bẻ đôi binh phù ngay trên ngự án, một nửa đưa cha ngươi, một nửa đặt vào tay ngươi: “Trẫm tin cha {goi}, vì trẫm tin {goi}.” Từ đó, muốn điều quân phải có đủ hai nửa; và nửa kia nằm trong hộp gấm ở cung ngươi.",
  fx:{sung:10,danh:8},go:()=>e67dad(5),rw:"ngocboi",ti:"Người giữ nửa binh phù"},
 {a:"dtq_huynh",tag:"Huynh về cùng hòa thư",w:"emp",p:.15,n:"Gửi cho huynh chiếc trâm của mẹ làm tín vật bỏ trốn",c:{suc:-3,bac:-80},
  path:["Tự gom bạc chuộc","Xin gặp riêng sứ giặc","Nhờ Lễ bộ dò ý","Dâng kế đổi tù binh","Lấy thư của huynh","Bỏ bạc mua đường cứu"],np:2,bad:["Tránh mặt sứ giặc","Mặc kệ"],sc:2,x:[()=>S.bac>=100,"Bạc từ 100"],
@@ -116,7 +116,7 @@ const R97L=[
  fx:{th:20,danh:8,sac:2},rw:"nt_dongchau",ti:"Chim công của Đức Thọ cung"},
 {a:"nc_vuong",tag:"Nữ vương Nam Chiếu",w:"emp",p:.10,n:"Mở phong thư thứ ba, thư của các trưởng lão Nam Chiếu",c:{suc:-4},
  path:["Xin Hoàng thượng cho để tang","Đọc kỹ, dò xem ai được lòng dân","Trả lại","Vận động Lễ bộ","Quỳ xin Hoàng thượng cứu","Gửi bạc riêng giúp huynh","Nói thật những gì đã dò"],np:2,bad:["Nhận vàng","Vận động Binh bộ"],sc:2,x:[()=>S.sung>=45,"Sủng từ 45"],
- t:"Phong thư thứ ba đóng dấu của mười hai trưởng lão: hoàng huynh và hoàng thúc đều đã mất lòng dân, họ xin rước ngươi về làm nữ vương. Hoàng thượng đọc xong, im lặng đến canh ba, rồi nói: “Đi hay ở, trẫm để nàng chọn. Ở lại, Đại Hy phong nàng làm Nam Chiếu trưởng công chúa.”",
+ t:"Phong thư thứ ba đóng dấu của mười hai trưởng lão: hoàng huynh và hoàng thúc đều đã mất lòng dân, họ xin rước ngươi về làm nữ vương. Hoàng thượng đọc xong, im lặng đến canh ba, rồi nói: “Đi hay ở, trẫm để {goi} chọn. Ở lại, Đại Hy phong {goi} làm Nam Chiếu trưởng công chúa.”",
  fx:{danh:12},rw:"nt_dongchau",ti:"Nam Chiếu trưởng công chúa",
  exit:["Về cố quốc lên ngôi nữ vương","Ở lại bên Hoàng thượng","Nữ vương Nam Chiếu","{me} trở về Nam Chiếu trong đoàn xe cờ vàng của Đại Hy. Ngày lên ngôi, ngươi đặt quốc hiệu mới, ký hòa ước trăm năm với Đại Hy, và trị vì cố quốc đến bạc đầu. Sử Nam Chiếu chép ngươi là vị nữ vương hiền nhất.","Về cố quốc làm nữ vương"]},
 /* ===== Con gái tội thần ===== */
@@ -210,7 +210,7 @@ const R97L=[
  fx:{duc:6,danh:14,sung:5},rw:"bienngu",ti:"Phong hiệu Từ Tế"},
 {a:"s_tinh",tag:"Bài thơ tiễn ra biên",w:"emp",p:.15,n:"Viết cho {man} một bài thơ tiễn, nhờ Hoàng thượng chuyển",c:{suc:-3},
  path:["Cảm ơn rồi đi ngay","Đốt","Từ chối","Dồn sức giành lại Hoàng thượng","Quát hắn, dọa tố","Từ chối, chọn con đường trong cung","Xin hắn rời cung"],np:3,bad:["Đứng lại trò chuyện","Giữ lại","Đến, chỉ để nói lời từ biệt","Tìm an ủi bên {man}"],sc:1,x:[()=>S.duc>=50,"Đức từ 50"],
- t:"Hoàng thượng đọc bài thơ tiễn trước rồi mới sai người chuyển đi. {man} xin ra biên ải, về sau lập công lớn. Đêm ấy ngài nói: “Nàng có thể giấu trẫm, mà nàng lại đưa cho trẫm đọc.” Từ đó, lời gièm nào về ngươi đến tai ngài cũng bị gạt đi.",
+ t:"Hoàng thượng đọc bài thơ tiễn trước rồi mới sai người chuyển đi. {man} xin ra biên ải, về sau lập công lớn. Đêm ấy ngài nói: “{Goi} có thể giấu trẫm, mà {goi} lại đưa cho trẫm đọc.” Từ đó, lời gièm nào về ngươi đến tai ngài cũng bị gạt đi.",
  fx:{sung:10,duc:5,danh:4},rw:"ngocboi",ti:"Người Hoàng thượng không nghi"},
 {a:"s_thay",tag:"Mạng lưới của lão Tổng quản",w:"eun",p:.15,n:"Ngồi bên giường ông, đọc lại cho ông nghe cuốn sổ",c:{suc:-3},
  path:["Nghe lời, đi lối khác","Hỏi vì sao","Giúp","Ghi lòng tạc dạ","Hỏi phi tần ấy là ai","Đứng ra nói giúp","Giữ kín","Đến thăm, nhận sổ"],np:2,bad:["Từ chối khéo","Dùng ngay"],sc:2,x:[()=>S.mat>=1||S.tamco>=45,"Tai mắt từ 1 hoặc Tâm cơ từ 45"],
@@ -231,7 +231,7 @@ const R97L=[
  fx:{danh:10,sung:6},go:()=>e67heir(20),rw:"ngocboi",ti:"Mẫu thân của hoàng tử được vua tự dạy"},
 {a:"st_dong",tag:"Mật chiếu sau biển Chính đại quang minh",w:"emp",need:"kid",p:.10,n:"Đêm ấy không xin gì, chỉ ngồi nghe ngài nói về giang sơn",c:{suc:-3},
  path:["Thưa: chọn người hiền","Nhận lời","Cho con cưỡi ngựa bắn cung","Đưa con đến hầu Thái hậu","Dâng lễ lên Đức Thọ cung","Mời thầy giỏi kèm riêng","Tự dạy con","Đổi người nấu, giăng bẫy","Tự nấu cho con"],np:3,bad:["Lật lại chuyện con nàng"],sc:3,x:[()=>{const s=r97son();return !!s&&(s.fond||0)>=50&&S.sung>=50},"có hoàng tử được thương từ 50, Sủng từ 50"],
- t:"Canh tư, Hoàng thượng một mình trèo lên điện Càn Thanh, đặt một hộp gấm sau tấm biển “Chính đại quang minh”. Sáng ra ngài chỉ nói với ngươi: “Nàng đã nghe trẫm cả đêm mà không xin gì. Trẫm biết phải viết tên ai.” Tên trong mật chiếu là {k}.",
+ t:"Canh tư, Hoàng thượng một mình trèo lên điện Càn Thanh, đặt một hộp gấm sau tấm biển “Chính đại quang minh”. Sáng ra ngài chỉ nói với ngươi: “{Goi} đã nghe trẫm cả đêm mà không xin gì. Trẫm biết phải viết tên ai.” Tên trong mật chiếu là {k}.",
  fx:{danh:10,sung:8},go:()=>{const s=r97son();if(s&&typeof setHeir==="function"&&!(S.heir&&S.heir.k===s)){setHeir(s,null);return `${s.name} được lập làm Thái tử.`}return e67heir(25)},rw:"nt_dongchau",ti:"Mẫu thân của Thái tử trong mật chiếu"}
 ];
 R97L.forEach(d=>{R97[d.a]=d});
