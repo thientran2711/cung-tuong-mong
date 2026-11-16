@@ -61,3 +61,16 @@ history ideas); OD 16/11 coordinator ruling (girlhood chest: 5 worn + un-worn ha
 - "6 slots": owner 20:05Z #8 says fill ALL 6 slots; coordinator ruling 16/11 keeps Khăn che mặt empty (veil = hủy dung) + un-worn
   handkerchief = 6 things. Built per the ruling; on the palace road the court-issued robe + hairpin stay worn, the girlhood ones go in the bag.
 - Maid-origin (cung nữ) lives get no girlhood chest (servant start). Owner may want one.
+
+## Reviewer r1 (review/econ-items-r1, 16/11) — merged origin/main 0c23da40 (jkc.js now on main), jeitem.js LAST, site rebuilt
+Fixes made by the reviewer:
+1. Robe re-issue wait = owner 16/11 s9 option 3: a RANDOM 1–3 weeks weighted by how Nội vụ phủ regards her (`eitRegard`: rank, Sủng,
+   recent tip up; every stipend skim cause down; weeks = 1 + two rolls vs 100 − regard). Replaces the fixed `reWk[rank]` (+1 low Sủng gave
+   4 weeks at rank 0, over the owner's 3). Test: 300 samples, rank 0 Sủng 5 mean ≈2.7, rank 6 Sủng 80 mean ≈1.2, all in 1..3.
+2. Maid road capped below the bạc road: maid/Tai mắt bonus clamped to ±`re.maidAdj` (5); before, Tai mắt 10 alone added +40 and the free
+   road beat the bạc road on odds.
+3. Pilfer answers each have a gain AND a loss (owner 16/11 07:15Z): Phạt nặng also deters the other servants (detM/2); Răn dạy rồi tha
+   +4 Lòng but the other servants pocket more for softM (3) months; Làm ngơ +12 Lòng (was +3, strictly worse than Răn dạy).
+4. "Đợi Nội vụ phủ" no longer says "không được không mất" — the loss (thiếu lễ in trung y) is shown.
+5. One chest function: jkc `kcChest` (now on main) calls `girlChest(S,{wear:true,who})`; the palace chest shows items through the kit's
+   kgItem like kcChestShow, un-worn robe/hairpin say "cất trong Tư trang".

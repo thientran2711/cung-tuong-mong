@@ -116,9 +116,9 @@ news via newsAdd.
   missing; charcoal / ice first, then the dearest goods (`stipPickLines`). Before: every line went one step worse at once.
 - Servants pocket goods: a servant (staff or her cung nữ) with Lòng < `pil.loyal` or a spy pockets the dearest piece of the month at
   `pil.base + (pil.loyal − Lòng)·pil.k (+spy, +ignored before, +her Sủng low)`, cap `pil.cap`. She notices at `pil.see + Tai mắt·seeMat (+loyal
-  cung nữ)`: dialog Phạt nặng (piece back, −Lòng, `detM` months deterred, a spy confesses) / Răn dạy rồi tha (+Lòng) / Trả về Nội vụ phủ
-  (replacement) / Làm ngơ (piece lost, +Lòng, more likely again). NPCs: the same as data, punishment by trait.
-- Robe re-issue: Nội vụ phủ waits `reWk[rank]` weeks (+1 when Sủng low). Roads (robbery card and Tư trang → Việc → "Xin cấp lại y phục"):
-  Lót tay (Bạc `re.tip[rank]`, odds base + rank·rk + Sủng/sungDiv) · Sai cung nữ đi xin (Sức `re.suc`, same odds − altPen + her maid's
-  Lòng + Tai mắt; fail = maid Lòng −3) · Viết thư xin nhà (Sức 2, `famWk` weeks, odds by origin home money) · Đợi.
+  cung nữ)`: dialog Phạt nặng (piece back, −Lòng, `detM` months deterred and the other servants detM/2, a spy confesses) / Răn dạy rồi tha (piece back,
+  +forgiveLoyal; the other servants pocket more for softM months) / Trả về Nội vụ phủ (replacement) / Làm ngơ (piece lost, +ignoreLoyal, more likely again). NPCs: the same as data, punishment by trait.
+- Robe re-issue (owner 16/11 s9): Nội vụ phủ waits a RANDOM 1–3 weeks weighted by its regard for her (`eitRegard` 0..100 = reG.base + rank·rk + (Sủng−30)·sung + tip if tipped in tipM months − cause per stipend skim cause; weeks = 1 + two rolls against 100 − regard). Roads (robbery card and Tư trang → Việc → "Xin cấp lại y phục"):
+  Lót tay (Bạc `re.tip[rank]`, odds base + rank·rk + Sủng/sungDiv) · Sai cung nữ đi xin (Sức priced like the bạc, same odds − altPen ± at most `re.maidAdj` for her maid's
+  Lòng + Tai mắt, so it never beats the bạc odds; fail = maid Lòng −3) · Viết thư xin nhà (Sức 2, `famWk` weeks, odds by origin home money) · Đợi.
 - Girlhood chest (palace road): `girlChest(p)` — 6 things (same as jkc kcChest), 3 worn, robe + hairpin kept as fallback; NPCs keep one girlhood robe.

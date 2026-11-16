@@ -45,9 +45,11 @@ const dlgCheck=p=>p.evaluate(()=>{const M=document.getElementById('modal');const
    if(r3.after.back!==1)F(sz,`punish did not return the piece ${JSON.stringify(r3.after)}`)}
   await p.evaluate(()=>{BAL.eit.pil.base=8;BAL.eit.pil.cap=55;BAL.eit.pil.see=25;Q.length=0;document.getElementById('modal').hidden=true;render()});
   /* 4. robe lost → wait by rank; Tư trang → Việc button → dialog; maid road succeeds (forced roll) */
-  const r4=await p.evaluate(()=>{const out={};S.place="home";const w=wdOf(S);out.had=!!w.y;w.y=null;S.rank=0;S.sung=5;tyLost(S,"cuop");out.waitWk=S.tyNvp-wk();S.rank=6;S.sung=60;tyLost(S,"cuop");out.waitWkHigh=S.tyNvp-wk();S.rank=1;
+  const r4=await p.evaluate(()=>{const out={};S.place="home";const w=wdOf(S);out.had=!!w.y;w.y=null;S.rank=0;S.sung=5;tyLost(S,"cuop");out.waitWk=S.tyNvp-wk();S.rank=6;S.sung=60;tyLost(S,"cuop");out.waitWkHigh=S.tyNvp-wk();
+   /* owner 16/11 s9: a RANDOM 1–3 weeks weighted by Nội vụ phủ's regard */const smp=(rk,sg)=>{S.rank=rk;S.sung=sg;const L=[];for(let i=0;i<300;i++)L.push(eitReWk(S));return{min:Math.min(...L),max:Math.max(...L),mean:+(L.reduce((x,y)=>x+y,0)/L.length).toFixed(2)}};out.wLow=smp(0,5);out.wHigh=smp(6,80);S.rank=1;
    tab="inv";try{KINV_SUB="viec"}catch(e){}render();const btn=document.querySelector('[data-eitre]');out.btn=!!btn;if(btn)btn.click();return out});
   await clean(p);await sleep(900);await clean(p);const d4=await dlgCheck(p);await p.screenshot({path:`${OUT}/reissue-${wh}.jpg`,type:'jpeg',quality:55});
+  for(const w of [r4.wLow,r4.wHigh])if(w.min<1||w.max>3)F(sz,`re-issue wait out of 1–3 ${JSON.stringify(w)}`);if(!(r4.wLow.mean>r4.wHigh.mean+.5))F(sz,`re-issue wait not weighted by regard ${JSON.stringify([r4.wLow,r4.wHigh])}`);
   if(!r4.btn)F(sz,'no Xin cấp lại button in Tư trang Việc');if(!d4.shown||d4.t!=="Xin cấp lại y phục")F(sz,`re-issue dialog ${JSON.stringify(d4)}`);
   else{if(!d4.inView||d4.ovf||d4.pageOvf)F(sz,`re-issue layout ${JSON.stringify(d4)}`);if(d4.opts.length<3)F(sz,`re-issue roads ${d4.opts.length}`);
    r4.after=await p.evaluate(()=>{const r0=Math.random;Math.random=()=>0;const i=Q[0].opts.findIndex(o=>/^Sai /.test(o.n));const s0=S.suc;chooseM(i>=0?i:0);Math.random=r0;KMQ.length=0;return{y:!!wdOf(S).y,ty:tyOn(S),suc:S.suc-s0,nvp:S.tyNvp}});
@@ -63,6 +65,6 @@ const dlgCheck=p=>p.evaluate(()=>{const M=document.getElementById('modal');const
   let r6=null;if(SAVE){r6=await p.evaluate(save=>{try{localStorage.setItem(SK(3),save);const d=loadSlot(3);SLOT=3;quiet=true;deser(d);quiet=false;deal();endTurn();render();return{ok:!!S&&!S.dead,girl:S.girl||null}}catch(e){quiet=false;return{ok:false,err:e.message}}},fs.readFileSync(SAVE,'utf8'));if(!r6.ok)F(sz,`old save ${JSON.stringify(r6)}`)}
   if(errs.length)F(sz,`page errors ${errs.join(' | ')}`);
   R.push({sz,r1,r2,r3,d3,r4,d4,r5,r6,errs});await ctx.close()}
- await b.close();fs.writeFileSync(`${OUT}/econ-items.json`,JSON.stringify(R,null,1));console.log(JSON.stringify(R.map(x=>({sz:x.sz,girl:x.r1.girl,chest:x.r1.chest&&x.r1.chest.rows.length,lux:x.r1.lux&&x.r1.lux.sc,ice:x.r2.ice,sev:x.r2.sev,skim:x.r2.skimmed,pil:x.r3.ev,wait:[x.r4.waitWk,x.r4.waitWkHigh],roads:x.d4.opts,rob:x.r5.opts}))));
+ await b.close();fs.writeFileSync(`${OUT}/econ-items.json`,JSON.stringify(R,null,1));console.log(JSON.stringify(R.map(x=>({sz:x.sz,girl:x.r1.girl,chest:x.r1.chest&&x.r1.chest.rows.length,lux:x.r1.lux&&x.r1.lux.sc,ice:x.r2.ice,sev:x.r2.sev,skim:x.r2.skimmed,pil:x.r3.ev,wait:[x.r4.wLow,x.r4.wHigh],roads:x.d4.opts,rob:x.r5.opts}))));
  console.log(fails.length?'FAIL\n'+fails.join('\n'):'PASS');process.exit(fails.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
 function BAL_ICE3(){return 1}

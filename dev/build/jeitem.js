@@ -10,7 +10,7 @@
       NPCs: the same rule as data (their servants pocket, they punish by their trait).
    3. XIN CẤP LẠI Y PHỤC: when her robe is lost (robbed / confiscated) she is no longer stuck waiting: the robbery card and Tư trang → Việc offer
       roads with odds — lót tay Nội vụ phủ (Bạc by rank) · sai cung nữ đi xin (the equal road without bạc: Sức + her maid's Lòng, owner rule 20:30Z)
-      · viết thư xin nhà (Sức, arrives in BAL.eit.re.famWk weeks, odds by her family) · đợi Nội vụ phủ (delay by rank, BAL.eit.reWk).
+      · viết thư xin nhà (Sức, arrives in BAL.eit.re.famWk weeks, odds by her family) · đợi Nội vụ phủ (a random 1–3 weeks weighted by how Nội vụ phủ regards her, owner 16/11 s9; eitRegard, BAL.eit.reG).
    4. RƯƠNG ĐỒ KHUÊ CÁC: a new life brings her girlhood chest into the palace — the same 6 things as the home road of review/outside-r2-r2
       (jkc kcChest: Trâm ngọc bích, a plain Thường y phục, Vòng bạc hoa mai, Ngọc bội khuê các, Túi thơm thêu, an un-worn Khăn tay lụa;
       Khăn che mặt stays empty = coordinator ruling 16/11, veil = hủy dung). Đeo tay / Đeo eo / Túi thơm are worn at once; the girlhood
@@ -22,9 +22,9 @@ Object.assign(BAL,{eit:{
  ice:[0,0,1,1,1,2,2,3],                       /* blocks of ice a month in Hạ by rank (Đáp ứng … Hoàng hậu) */
  skimN:{base:1,many:1,lowSung:1,lowRank:1,lowRankMax:1,highRank:5},   /* goods lines skimmed: base +2 causes +Sủng low +rank ≤ lowRankMax −rank ≥ highRank */
  pil:{loyal:45,base:8,k:.6,spy:15,ok:15,lowSung:8,cap:55,detM:6,see:25,seeMat:8,seeMaid:15,
-      punLoyal:15,forgiveLoyal:8,ignoreLoyal:3,npcPun:50},
- reWk:[3,3,2,2,2,1,1,1],reLowSung:1,          /* weeks Nội vụ phủ takes to re-issue a lost robe, by rank (+1 when Sủng < BAL.stip.lowSung) */
- re:{tip:[6,8,10,12,15,18,22,26],base:50,rk:5,sungDiv:5,suc:6,altPen:10,maidFail:3,famSuc:2,famWk:1,famOk:75,famPoor:40,famCut:30}}});
+      punLoyal:15,forgiveLoyal:4,ignoreLoyal:12,softM:3,npcPun:50},
+ reG:{base:50,rk:5,sung:.2,tip:25,cause:15},   /* owner 16/11 s9: re-issue after a RANDOM 1–3 weeks weighted by how Nội vụ phủ regards her (eitRegard 0..100) */
+ re:{tip:[6,8,10,12,15,18,22,26],base:50,rk:5,sungDiv:5,suc:6,altPen:10,maidAdj:5,maidFail:3,famSuc:2,famWk:1,famOk:75,famPoor:40,famCut:30}}});
 /* ---------- items: ice (art img/item-bangda.webp, img/item-bangvun.webp, gpt-2-6, dev/art/ITEM_ART.md §6) + the girlhood pieces of jkc ---------- */
 (function(){const N={
  bangda:{n:"Băng đá",kd:"Băng",d:"Mùa hạ giải nhiệt: Sức +5 · mùa khác Sức +1 · để qua tháng thì tan",pr:4,cool:[5,1],tg:[]},
@@ -44,7 +44,7 @@ Object.assign(BAL,{eit:{
 let EIT_PIL=null;/* her pending dialog (shown after the stipend card + chest) */
 function eitPilWho(p){const P=BAL.eit.pil,L=[];if(p.maid&&p.maid.alive!==false)L.push(p.maid);for(const s of (p.staff||[]))if(s&&(s.role==="maid"||s.role==="eunuch"))L.push(s);
  return L.map(s=>{const lo=s.loyal|0;if(lo>=P.loyal&&!s.spyFor)return null;if(s.pilDet!=null&&S.turn<s.pilDet)return null;
-   let ch=P.base+Math.max(0,P.loyal-lo)*P.k+(s.spyFor?P.spy:0)+(s.pilOk?P.ok:0)+((p.sung||0)<BAL.stip.lowSung?P.lowSung:0);return{s,ch:Math.min(P.cap,Math.round(ch))}}).filter(Boolean)}
+   let ch=P.base+Math.max(0,P.loyal-lo)*P.k+(s.spyFor?P.spy:0)+(s.pilOk?P.ok:0)+(p.pilSoft!=null&&S.turn<p.pilSoft&&p.pilSoftBy!==s.name?P.ok:0)+((p.sung||0)<BAL.stip.lowSung?P.lowSung:0);return{s,ch:Math.min(P.cap,Math.round(ch))}}).filter(Boolean)}
 function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.length)return null;if(p===S&&typeof isSrv==="function"&&isSrv())return null;
  const C=eitPilWho(p);let hit=null;for(const c of C)if(roll(c.ch)){hit=c.s;break}if(!hit)return null;
  /* the dearest piece that really arrived this month */
@@ -60,15 +60,15 @@ function eitPilEvent(X){const s=X.s,P=BAL.eit.pil,it=IT[X.k]||{n:X.k};const nm=i
  const who=eitIsMaid(s)?(typeof pMaid==="function"?pMaid():null):(typeof pServ==="function"?pServ(s):null);
  const h=`<p>Kiểm lại đồ Nội vụ phủ phát, thiếu một ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}. Hỏi ra mới biết ${role} ${s.name} lén giữ lấy.</p>${kitRows([["Mất",`1 ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}`,"r"],["Gợi ý",`<span class="ef i">thiện cảm của ${s.name} với ngươi ${s.loyal|0}${s.spyFor?", có điều khả nghi":""}${s.pilN>1?`, đã ${s.pilN} lần`:""}.</span>`]])}`;
  const O=[
-  {n:"Phạt nặng",fx:{},x:`thành: lấy lại đồ, ${s.name} ${P.detM} tháng không dám tái phạm · kèm: thiện cảm của ${s.name} với ngươi -${P.punLoyal}${s.spyFor?" · tra khảo có thể khai ra kẻ đứng sau":""}`,
-   go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;s.pilOk=0;let r=`Ngươi phạt ${s.name}, lấy lại ${nm.toLowerCase()}. Thiện cảm của ${s.name} với ngươi -${P.punLoyal}.`;
+  {n:"Phạt nặng",fx:{},x:`thành: lấy lại đồ, ${s.name} ${P.detM} tháng không dám tái phạm, kẻ hầu khác cũng sợ · kèm: thiện cảm của ${s.name} với ngươi -${P.punLoyal}${s.spyFor?" · tra khảo có thể khai ra kẻ đứng sau":""}`,
+   go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)-P.punLoyal,0,100);s.pilDet=S.turn+P.detM;s.pilOk=0;S.pilSoft=null;for(const o of (S.staff||[]))if(o&&o!==s&&(o.pilDet==null||o.pilDet<S.turn+Math.round(P.detM/2)))o.pilDet=S.turn+Math.round(P.detM/2);let r=`Ngươi phạt ${s.name}, lấy lại ${nm.toLowerCase()}. Thiện cảm của ${s.name} với ngươi -${P.punLoyal}.`;
     if(s.spyFor&&!eitIsMaid(s)){const m=typeof byKey==="function"?byKey(s.spyFor):null;r+=` Bị tra khảo, ${s.name} khai là tai mắt của ${m&&m!==S?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;const i=S.staff.indexOf(s);if(i>=0)S.staff.splice(i,1);if(m&&m!==S)try{evA(S,m,1)}catch(e){}}
     log(r)}},
-  {n:"Răn dạy rồi tha",fx:{},x:`thành: lấy lại đồ, ${s.name} cảm ơn · kèm: thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal}, có thể tái phạm`,
-   go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100);log(`Ngươi răn dạy ${s.name} rồi tha. ${s.name} dập đầu tạ ơn. Thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal}.`)}}];
+  {n:"Răn dạy rồi tha",fx:{},x:`thành: lấy lại đồ, thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal} · kèm: kẻ hầu khác thấy ngươi dễ tính, ${P.softM} tháng tới dễ ăn bớt hơn`,
+   go:()=>{eitPilBack(X);s.loyal=cl((s.loyal|0)+P.forgiveLoyal,0,100);S.pilSoft=S.turn+P.softM;S.pilSoftBy=s.name;log(`Ngươi răn dạy ${s.name} rồi tha. ${s.name} dập đầu tạ ơn. Thiện cảm của ${s.name} với ngươi +${P.forgiveLoyal}.`)}}];
  if(!eitIsMaid(s))O.push({n:"Trả về Nội vụ phủ",fx:{},x:`thành: lấy lại đồ, Nội vụ phủ đưa người khác đến thay · kèm: ${s.name} rời cung ngươi`,
    go:()=>{eitPilBack(X);const i=S.staff.indexOf(s);if(i>=0){S.staff.splice(i,1);let n=null;try{n=mkServ(s.role);S.staff.push(n)}catch(e){}log(`Ngươi trả ${s.name} về Nội vụ phủ${n?`; ${n.name} đến hầu thay`:""}.`)}}});
- O.push({n:"Làm ngơ",fx:{},x:`không lấy lại đồ · kèm: thiện cảm của ${s.name} với ngươi +${P.ignoreLoyal}, dễ ăn bớt nữa`,go:()=>{s.loyal=cl((s.loyal|0)+P.ignoreLoyal,0,100);s.pilOk=1;log(`Ngươi làm ngơ, coi như thưởng ${s.name}.`)}});
+ O.push({n:"Làm ngơ",fx:{},x:`thành: thiện cảm của ${s.name} với ngươi +${P.ignoreLoyal} (coi như thưởng) · kèm: mất món đồ, ${s.name} dễ ăn bớt nữa`,go:()=>{s.loyal=cl((s.loyal|0)+P.ignoreLoyal,0,100);s.pilOk=1;log(`Ngươi làm ngơ, coi như thưởng ${s.name}.`)}});
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
 function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco|0)/4,5,95)))return;const harsh=/Hiểm độc|Kiêu ngạo|Thù dai|Đa nghi/.test(`${p.trait||""} ${p.trait2||""}`);
  const nm=(IT[X.k]||{n:X.k}).n.replace(/ \(hàng kém\)$/,"").toLowerCase();
@@ -78,11 +78,15 @@ function eitPilNpc(X){const p=X.p,s=X.s,P=BAL.eit.pil;if(!roll(cl(P.see+(p.tamco
 (function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilEvent(EIT_PIL))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
 
 /* ---------- 3. XIN CẤP LẠI Y PHỤC ---------- */
-function eitReWk(p){const E=BAL.eit;return (E.reWk[Math.max(0,Math.min(7,rkOf(p)|0))]|0)+((p.sung||0)<BAL.stip.lowSung?E.reLowSung:0)}
+/* how Nội vụ phủ regards her (0..100): rank, Sủng, a recent tip (jstip st.tip) up; every skim cause (thất sủng, a fault, a superior's grudge,
+   an untipped greedy eunuch, a disloyal maid) down. Weeks = 1 + two rolls against (100 − regard): good standing / a bribe → nearer 1, disliked → nearer 3. */
+function eitRegard(p){const G=BAL.eit.reG,B=BAL.stip;let g=G.base+rkOf(p)*G.rk+((p.sung||0)-30)*G.sung;
+ try{const st=stipSt(p),f0=st.fault;if(st.tip!=null&&S.turn-st.tip<B.tipM)g+=G.tip;g-=stipCauses(p,false).C.length*G.cause;st.fault=f0}catch(e){}return cl(Math.round(g),0,100)}
+function eitReWk(p){const g=eitRegard(p);return 1+(roll(100-g)?1:0)+(roll(100-g)?1:0)}
 (function(){if(typeof tyLost!=="function")return;const l0=tyLost;tyLost=function(p,why){const r=l0.apply(this,arguments);try{if(p)p.tyNvp=wk()+eitReWk(p)}catch(e){}return r};window.tyLost=tyLost})();
 function eitReNeed(){try{return !!(S&&!S.dead&&!S.out&&typeof tyOn==="function"&&tyOn(S)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=cl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv),5,95);
- const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+Math.round(((m.loyal||0)-50)/5)+(S.mat||0)*4,5,95):0;
+ const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?cl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor((S.mat||0)/2),-R.maidAdj,R.maidAdj),5,95):0;
  const home=S.origin&&BAL.home?(BAL.home[S.origin.k]||0):0;const fam=S.origin?cl((home>0?R.famOk:R.famPoor)-(S.homeCut?R.famCut:0),5,95):0;
  return{bribe,maid,fam,tip:R.tip[r],m,suc:alt.suc}}
 /* the road without silver is priced like the silver at her rank (balance-pass rule: jstory altCost / BAL.bacTuan / BAL.altK when present,
@@ -101,7 +105,7 @@ function eitReOpts(withWait){const R=BAL.eit.re,o=eitReOdds();const O=[];const w
   go:()=>{if(roll(o.maid)){const n=eitIssue("nvp","Nội vụ phủ");log(n?`${o.m.name} khéo nói, Nội vụ phủ đưa ${n} về.`:"Nội vụ phủ không còn áo đúng phẩm.")}else{o.m.loyal=cl((o.m.loyal||0)-R.maidFail,0,100);log(`<span class="r">${o.m.name} bị thái giám Nội vụ phủ mắng đuổi về.</span> Thiện cảm của ${o.m.name} với ngươi -${R.maidFail}.`)}}});
  if(S.origin&&!S.tyFam)O.push({n:"Viết thư xin nhà gửi áo",fx:{suc:-R.famSuc},x:`${word(o.fam)} · tốn: Sức -${R.famSuc} · thành: ${R.famWk} tuần nữa nhà gửi y phục vào · hỏng: nhà không gửi được`,
   go:()=>{S.tyFam={w:wk()+R.famWk,ok:roll(o.fam)?1:0};log("Ngươi viết thư nhờ người đưa về nhà xin gửi áo vào cung.")}});
- if(withWait)O.push({n:"Đợi Nội vụ phủ",fx:{},x:`không được không mất · kèm: ${wkL?`${wkL} tuần nữa`:"sắp"} Nội vụ phủ cấp áo trơn đúng phẩm; trong Tư trang có áo khác thì mặc được ngay`,go:()=>{}});
+ if(withWait)O.push({n:"Đợi Nội vụ phủ",fx:{},x:`tốn: không · thành: ${wkL?`${wkL} tuần nữa`:"sắp"} Nội vụ phủ cấp áo trơn đúng phẩm · kèm: trong lúc đợi, mặc trung y ra ngoài bị chê thiếu lễ; trong Tư trang có áo khác thì mặc được ngay`,go:()=>{}});
  return O}
 function eitReDialog(){return{ev:1,t:"Xin cấp lại y phục",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h:`<p>Ngươi chỉ còn trung y. Nội vụ phủ giữ phần cấp áo cho các cung, nhưng việc nhanh hay chậm còn tùy người lo liệu.</p>${kitRows([["Gợi ý",`<span class="ef i">Phẩm càng cao, càng được sủng thì Nội vụ phủ càng nể.</span>`]])}`,opts:eitReOpts(true)}}
 /* the robbery card offers the roads at once (it said "Nội vụ phủ sẽ cấp lại áo sau N tuần") */
@@ -123,14 +127,16 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* ---------- 4. RƯƠNG ĐỒ KHUÊ CÁC (a new life, palace road) ---------- */
 function girlChest(p,o){o=o||{};p=p||S;const L=[];const who=o.who||"Mẫu thân";p.inv=p.inv||[];
  try{wdOf(p)}catch(e){}/* jearn: the court's starting kit first */
- try{const w=wdOf(p);if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear&&!w.tram)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}
-  const yk=wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear&&!w.y)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
- for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=IT[k].sl;const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===sl);const e={k,from:"kc",giver:who};if(!busy)e.w=1;p.inv.push(e);L.push(e)}
+ /* o.wear (the home road, jkc kcChest): she wears all of it; else (palace road) the court issue stays worn and the robe + hairpin go in the bag */
+ try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}
+  const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
+ for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=IT[k].sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&IT[x.k].sl===sl)delete x.w});
+  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&IT[x.k].sl===sl);const e={k,from:"kc",giver:who};if(!busy)e.w=1;p.inv.push(e);L.push(e)}
  if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};p.inv.push(e);L.push(e)}
  p.girl=L.map(e=>e.k);return{who,L}}
 function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof kitReward!=="function")return;
  const it=e=>{if(WD_ITEMS[e.k]&&!IT[e.k]){const w=WD_ITEMS[e.k];return{n:w.n,d:w.sl==="y"?"Y phục · cất trong Tư trang":"Cài tóc · cất trong Tư trang",img:w.icon,tier:w.g|0}}
-  const a=typeof itemArt==="function"?itemArt(e.k):null;const W=e.w?" · đang đeo":"";return{k:e.k,n:IT[e.k].n,d:(IT[e.k].d||"")+W,img:a?a.src:"",tier:a?a.grade|0:0}};
+  try{if(typeof kgItem==="function"){const r=kgItem(e);if(e.w)r.d=(r.d||"")+" · đang đeo";else if(WD_ITEMS[e.k]||(IT[e.k]&&IT[e.k].sl))r.d=(r.d||"")+" · cất trong Tư trang";return r}}catch(x){}const a=typeof itemArt==="function"?itemArt(e.k):null;const W=e.w?" · đang đeo":"";return{k:e.k,n:IT[e.k].n,d:(IT[e.k].d||"")+W,img:a?a.src:"",tier:a?a.grade|0:0}};
  kitReward({kind:"chest",title:"Rương đồ khuê các",from:`${c.who} sửa soạn · đồ con gái mang theo vào cung`,items:c.L.map(it)})}catch(e){console.error("girlChestShow",e)}}
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
