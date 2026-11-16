@@ -41,7 +41,9 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | 73 | PERSON CARD FILL (pcfBlocks) | review/pcard-fill-r1 | FINAL (already §73) |
 | **74** | **BUỔI TRANSITION · buoiShift** (was "§71 (coordinator to confirm)") | review/buoi-transition-r1 | MUST RENUMBER: KIT.md heading, `KIT_SAMPLES` id `§71` → `§74`, comments "KIT 71" in jbuoi.js, PROGRESS, test |
 | **75** | **kitBackBtnHtml · painted back-to-a-place button** (was "§72 provisional") | review/room-btn-r1 | MUST RENUMBER: KIT.md heading (drop "provisional"), `KIT_SAMPLES` id `§72` → `§75`, comments in jk3.js, room-btn tests/PROGRESS |
-| 76+ | free | | next free number is 76 |
+| **76** | **kitPalaceMap · palace detail map** (was a second "§71") | review/palace-map-port-r1 | RENUMBERED in merge-train-3 |
+| **77** | **kitStageRail · stage icon rail (Lịch · Chat · Mục tiêu)** (owner 16/11) | review/goal-strip-fix-r1 | — |
+| 78+ | free | | next free number is 78 |
 
 Why this order: face-sharp (§71) and tutorial (§72) were already registered by the coordinator in their own branch text ("§72 = coordinator registry; §71 = kitFigHD"), pcard-fill moved itself to §73 to get out of the way; buoi-transition and room-btn only had "to confirm / provisional" labels, so they move.
 
