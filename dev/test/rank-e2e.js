@@ -79,10 +79,10 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  ok(ui.cols.length===3&&ui.cols.every(c=>c.fig>=.55&&c.fig>c.plq*1.5&&c.corner),'podium: figures the biggest, medal on the plaque corner '+JSON.stringify(ui.cols));
  ok(ui.fr.length&&ui.fr.every(Boolean),'list: frame by highest phẩm on every row '+JSON.stringify(ui.fr));
  await C.p.locator('#krkov [data-krk="rules"]').click();await C.p.waitForTimeout(500);
- const ru=await C.p.evaluate(()=>{const c=document.querySelector('#krkov .krk-pop:not([hidden]) .krk-card');return c?{t:c.innerText,x:!!c.querySelector('.kit-x')}:null});
- ok(ru&&ru.x&&/Ví dụ một kiếp|Kiếp vừa rồi của ta/i.test(ru.t)&&/Hoàng hậu/i.test(ru.t)&&/2200/.test(ru.t),'Cách tính: kit card with the points table and a worked life');
- await shot(C.p,'3b','rules');await C.p.locator('#krkov .krk-pop .kit-x').click();await C.p.waitForTimeout(300);
- ok(await C.p.evaluate(()=>document.querySelector('#krkov .krk-pop').hidden),'Cách tính closes with its ✕');ok((await layout(C.p,'board')).bad.length===0,'board layout '+JSON.stringify((await layout(C.p,'board')).bad));
+ const ru=await C.p.evaluate(()=>{const c=document.querySelector('#modal:not([hidden]) .dlg.kpanel[data-kind="rule"]');return c?{t:c.innerText,x:!!c.querySelector('.kit-x'),kit:!!c.querySelector('.kph')&&!document.querySelector('.krk-pop,.krk-card')}:null});
+ ok(ru&&ru.x&&ru.kit&&/Ví dụ một kiếp|Kiếp vừa rồi của ta/i.test(ru.t)&&/Hoàng hậu/i.test(ru.t)&&/2200/.test(ru.t),'Cách tính: kit card with the points table and a worked life');
+ await shot(C.p,'3b','rules');await C.p.locator('#modal .dlg.kpanel .kit-x').click();await C.p.waitForTimeout(300);
+ ok(await C.p.evaluate(()=>!document.querySelector('#modal.krkp:not([hidden])')),'Cách tính closes with its ✕');ok((await layout(C.p,'board')).bad.length===0,'board layout '+JSON.stringify((await layout(C.p,'board')).bad));
  await C.p.evaluate(()=>{document.querySelector('#krkov .krk-body').scrollTop=1e6});await shot(C.p,4,'board-lives-list');
  await C.p.locator('#krkov [data-krt="players"]').click();await C.p.waitForFunction(()=>{const d=RK.data.players;return d&&document.querySelector('#krkov .krk-list')});await C.p.waitForTimeout(600);
  bd=await board(C.p);ok(bd.rows.length===3&&sorted(bd.rows)&&bd.tab==='Người chơi','Người chơi board: one row per player '+bd.rows.map(r=>r.pn+' '+r.s).join(', '));
@@ -90,11 +90,11 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  const pA=await C.p.evaluate(()=>RK.data.players.rows[1]);ok(pA.k===2&&pA.t>pA.s,'A: 2 lives, total over best');
  await shot(C.p,5,'board-players');ok((await layout(C.p,'players')).bad.length===0,'players layout '+JSON.stringify((await layout(C.p,'players')).bad));
  /* rename */
- await C.p.locator('#krkov [data-krk="name"]').click();await C.p.fill('#krk-in','Đồ đụ');await C.p.locator('#krkov [data-krk="save"]').click();
- await C.p.waitForFunction(()=>/không nhã/.test((document.querySelector('.krk-msg')||{}).textContent||''));ok(true,'obscene name refused');
- await B.p.evaluate(async()=>{const r=await rkReq('POST','/name',{gid:rkIdGet().gid,name:'Hoa Phi'});rkIdSet({pn:r.j.me.pn})});await C.p.fill('#krk-in','hoa phi');await C.p.locator('#krkov [data-krk="save"]').click();await C.p.waitForFunction(()=>/đã có người/.test((document.querySelector('.krk-msg')||{}).textContent||''));ok(true,'duplicate name refused');
+ await C.p.locator('#krkov [data-krk="name"]').click();await C.p.fill('#krk-in','Đồ đụ');await C.p.locator('#modal [data-krk="save"]').click();
+ await C.p.waitForFunction(()=>/không nhã/.test((document.querySelector('#krk-msg')||{}).textContent||''));ok(true,'obscene name refused');
+ await B.p.evaluate(async()=>{const r=await rkReq('POST','/name',{gid:rkIdGet().gid,name:'Hoa Phi'});rkIdSet({pn:r.j.me.pn})});await C.p.fill('#krk-in','hoa phi');await C.p.locator('#modal [data-krk="save"]').click();await C.p.waitForFunction(()=>/đã có người/.test((document.querySelector('#krk-msg')||{}).textContent||''));ok(true,'duplicate name refused');
  await shot(C.p,6,'rename');ok((await layout(C.p,'rename')).bad.length===0,'rename layout');
- await C.p.fill('#krk-in','Lan Quý nhân');await C.p.locator('#krkov [data-krk="save"]').click();await C.p.waitForFunction(()=>rkIdGet().pn==='Lan Quý nhân'&&document.querySelector('#krkov .krk-list'));await C.p.waitForTimeout(600);
+ await C.p.fill('#krk-in','Lan Quý nhân');await C.p.locator('#modal [data-krk="save"]').click();await C.p.waitForFunction(()=>rkIdGet().pn==='Lan Quý nhân'&&document.querySelector('#krkov .krk-list')&&!document.querySelector('#modal.krkp:not([hidden])'));await C.p.waitForTimeout(600);
  bd=await board(C.p);ok(bd.rows.some(r=>r.pn==='Lan Quý nhân'&&r.mine),'renamed: shown on the board');
  /* offline: a life ends without network, is queued, then sent */
  await C.p.evaluate(()=>rkClose());await C.p.waitForTimeout(1200);await C.ctx.setOffline(true);
@@ -112,21 +112,21 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  const outside=await C.p.evaluate(async u=>{const r=await fetch(u+'/top/lives?n=1&gid='+rkIdGet().gid).then(r=>r.json());return r.rows.length===1&&r.mine&&r.mine.r>1},RURL);ok(outside,'own best life returned even outside the top');
  /* recovery code (owner Q20): first open shows it once, copyable; a second device restores the same guest with it */
  const R1=await mk('R1',true);const gA=await A.p.evaluate(()=>rkIdGet());await R1.p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});
- await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForSelector('#krkov .krk-code');
+ await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForSelector('#modal #krk-code');
  const c1=await R1.p.evaluate(()=>({code:document.getElementById('krk-code').value,ro:document.getElementById('krk-code').readOnly,seen:!!document.querySelector('[data-krk="seen"]'),gid:rkIdGet().gid}));
  ok(/^([A-Z0-9]{4}-){5}[A-Z0-9]{4}$/.test(c1.code)&&c1.code.replace(/-/g,'').toLowerCase()===c1.gid&&c1.ro&&c1.seen,'first open shows the recovery code once (readonly, copyable): '+c1.code);
  await shot(R1.p,8,'recovery');ok((await layout(R1.p,'recovery')).bad.length===0,'recovery layout');
  await R1.ctx.grantPermissions(['clipboard-read','clipboard-write']).catch(()=>{});await R1.p.click('[data-krk="copy"]');await R1.p.waitForTimeout(300);
  ok(await R1.p.evaluate(()=>/Đã chép|Chọn mã/.test(document.querySelector('[data-krk="copy"]').textContent)),'copy button answers');
- await R1.p.fill('#krk-rin','abcd-efgh');await R1.p.click('[data-krk="restore"]');await R1.p.waitForTimeout(300);ok(await R1.p.evaluate(()=>/chưa đúng/.test(document.querySelector('.krk-msg').textContent)),'short code refused');
- await R1.p.fill('#krk-rin','zzzz-zzzz-zzzz-zzzz-zzzz-zzzz');await R1.p.click('[data-krk="restore"]');await R1.p.waitForFunction(()=>/Không tìm thấy/.test((document.querySelector('.krk-msg')||{}).textContent||''),null,{timeout:15000});ok(true,'unknown code: not found');
+ await R1.p.fill('#krk-rin','abcd-efgh');await R1.p.click('[data-krk="restore"]');await R1.p.waitForTimeout(300);ok(await R1.p.evaluate(()=>/chưa đúng/.test(document.querySelector('#krk-msg').textContent)),'short code refused');
+ await R1.p.fill('#krk-rin','zzzz-zzzz-zzzz-zzzz-zzzz-zzzz');await R1.p.click('[data-krk="restore"]');await R1.p.waitForFunction(()=>/Không tìm thấy/.test((document.querySelector('#krk-msg')||{}).textContent||''),null,{timeout:15000});ok(true,'unknown code: not found');
  await R1.p.click('[data-krk="seen"]');await R1.p.waitForFunction(()=>document.querySelector('#krkov .krk-list')||/Chưa có/.test((document.querySelector('#krkov .krk-body')||{}).textContent||''));
  ok(await R1.p.evaluate(()=>rkIdGet().rcSeen===1),'after "Ta đã ghi lại" the card does not open by itself');
- await R1.p.evaluate(()=>rkClose());await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForTimeout(500);ok(await R1.p.evaluate(()=>!document.querySelector('#krkov .krk-code')),'second open goes to the board');
- await R1.p.click('[data-krk="code"]');await R1.p.waitForSelector('#krkov .krk-code');ok(await R1.p.evaluate(()=>!document.querySelector('[data-krk="seen"]')&&/Mã của ta/.test(document.querySelector('.krk-code').textContent)),'code can be read again from the board button');
+ await R1.p.evaluate(()=>rkClose());await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForTimeout(500);ok(await R1.p.evaluate(()=>!document.querySelector('#krk-code')),'second open goes to the board');
+ await R1.p.click('#krkov [data-krk="code"]');await R1.p.waitForSelector('#modal #krk-code');ok(await R1.p.evaluate(()=>!document.querySelector('[data-krk="seen"]')&&/Mã của ta/.test(document.querySelector('#modal .dlg').textContent)),'code can be read again from the board button');
  await R1.p.fill('#krk-rin',gA.gid.toUpperCase().replace(/(.{4})(?=.)/g,'$1-'));await R1.p.click('[data-krk="restore"]');
  await R1.p.waitForFunction(g=>rkIdGet().gid===g,gA.gid,{timeout:15000});await R1.p.waitForFunction(()=>document.querySelector('#krkov .krk-list'),null,{timeout:15000});
- const rs=await R1.p.evaluate(()=>({pn:rkIdGet().pn,mine:[...document.querySelectorAll('#krkov .krk-row')].some(r=>r.classList.contains('krk-mine')||/Ta/.test((r.querySelector('.krk-you')||{}).textContent||''))}));
+ const rs=await R1.p.evaluate(()=>({pn:rkIdGet().pn,mine:[...document.querySelectorAll('#krkov .krk-row')].some(r=>r.classList.contains('krk-mine')||/^Ta$/.test(((r.querySelector('.kchip')||{}).textContent||'').trim()))}));
  ok(rs.pn===gA.pn&&rs.mine,'restored with the code: same guest on a new device ('+rs.pn+')');await shot(R1.p,9,'restored');ok((await layout(R1.p,'restored')).bad.length===0,'restored layout');await R1.ctx.close()
  }
  /* old save from the published build (no guest id, no S.rk) */

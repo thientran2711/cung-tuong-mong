@@ -35207,7 +35207,7 @@ function rkPodList(rows,tab){return rows.slice(0,3).map(x=>{const L=tab==="playe
   nameH:`<b class="kname" style="--rc:#8a5a12">${rkEsc(x.pn)}</b>`,
   sub:L.n?`${rkEsc(L.p)} ${rkEsc(L.n)}`:"Chưa có kiếp nào",score:`${RK_T.unit} ${x.s}`,prize:L.e?`<span class="kpod-fx2">${rkEsc(L.e)}</span>`:null}})}
 function rkRowH(x,tab,o){o=o||{};const L=tab==="players"?(x.best||{}):x;const mine=rkMine(x)||o.mine;
- const who=`<span class="krk-who"><b class="krk-pn">${rkEsc(x.pn)}${mine?` <i class="krk-you">${RK_T.me}</i>`:""}</b><small>${L.n?`${rkEsc(L.n)} · ${rkEsc(L.o)}`:"Chưa có kiếp nào được ghi"}</small></span>`;
+ const who=`<span class="krk-who"><b class="krk-pn">${rkEsc(x.pn)}${mine?` ${kitChip(RK_T.me,"n")}`:""}</b><small>${L.n?`${rkEsc(L.n)} · ${rkEsc(L.o)}`:"Chưa có kiếp nào được ghi"}</small></span>`;
  const c1=tab==="players"?[L.n?`${rkEsc(L.p)}`:"",`${x.k} kiếp`]:[rkEsc(L.p),rkEsc(rkEnd(L))];
  const pe=tab==="players"?`${L.n?rkEsc(L.p)+" · ":""}${x.k} kiếp · tổng ${x.t}`:`${rkEsc(L.p)} · ${rkEsc(rkEnd(L))}`;
  return `<div class="krk-row${mine?" krk-mine":""}${o.cls?" "+o.cls:""}"><b class="krk-rk">${x.r||""}</b><span class="krk-fc">${mdH(rkFace(L),"sm")}</span>${who}`+
@@ -35218,51 +35218,45 @@ function rkHeadH(tab){const l=tab==="players"?["Kiếp tốt nhất","Số kiế
 /* "Cách tính": a kit card over the board (owner 15/11) — what Công danh is, the points table read from the ONE rule table
    (score.js RULES), and one worked life (her latest life when there is one, else a sample) scored by the same CTM_RANK.score */
 const RK_SAMPLE={n:"Tô Uyển Như",on:"Con gái thầy đồ nghèo",mr:4,sr:-1,y:6,sons:1,daus:1,tz:0,danh:40,duc:30,tg:1,endk:"Xuất gia",rare:false};
-function rkRulesH(){const R=CTM_RANK.RULES;const n=v=>`<b>${v}</b>`;
+function rkRulesSpec(){const R=CTM_RANK.RULES;const n=v=>`<b>${v}</b>`;
  const own=(()=>{try{const k=Object.keys(RK.ends);if(k.length)return RK.ends[k[k.length-1]];const q=rkQ();return q.length?q[q.length-1].life:null}catch(e){return null}})();
  const L=own||RK_SAMPLE;const sc=CTM_RANK.score(L);
  const E=Object.entries(R.end).sort((a,b)=>b[1]-a[1]);
  const who=`${rkEsc(CTM_RANK.phamName(L))} ${rkEsc(L.n)}`;
  const lifeLine=[`${rkEsc(CTM_RANK.phamName(L))}`,`${L.y|0} năm trong cung`,(L.sons|0)||(L.daus|0)?`${L.sons|0} hoàng tử, ${L.daus|0} công chúa`:"không con",
   `Danh ${Math.round(L.danh||0)}, Đức ${Math.round(L.duc||0)}`,(L.tg|0)?`thắng Tranh ghế ${L.tg} lần`:"",`kết cục ${rkEsc(L.endk||"—")}`].filter(Boolean).join(" · ");
- return `<div class="krk-card krk-rules" role="dialog" aria-label="Cách tính ${RK_T.unit}">
- <div class="kph krk-ch"><span class="kpht"><span class="kptitle">Cách tính ${RK_T.unit}</span><small class="kpsub">điểm của một kiếp, tính lúc kiếp khép lại</small></span>${kitXHTML('data-krk="list"',"Về bảng")}</div>
- <div class="krk-cb">
- <p class="krk-lead">Mỗi kiếp khép lại được chấm một số ${RK_T.unit}: cộng các phần dưới đây. ${RK_T.screen} tự tính lại từ sổ kiếp gửi lên, số tự khai không được nhận.</p>
- <div class="kpsec"><h4 class="kpst">${own?"Kiếp vừa rồi của ta":"Ví dụ một kiếp"}: ${who}</h4><p class="krk-ex">${lifeLine}</p>
-  ${kitRows(sc.parts.map(([k,v])=>[k,`+${v}`,"g"]).concat(sc.partial?[["Kiếp dở dang","chỉ tính một nửa","r"]]:[]).concat([[RK_T.unit,n(sc.score),"t"]]))}</div>
- <div class="kpsec"><h4 class="kpst">Phẩm cao nhất từng đạt</h4>${kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))}
-  <p class="past">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p></div>
- <div class="kpsec"><h4 class="kpst">Kết cục</h4>${kitTiles(E.map(([k,v])=>[k,`${v}`]))}<p class="past">Kết cục khác (chết, lãnh cung, bị đuổi…) không thêm.</p></div>
- <div class="kpsec"><h4 class="kpst">Cộng thêm</h4>${kitRows([
+ return{kind:"rule",cls:"krkp",title:`Cách tính ${RK_T.unit}`,sub:"điểm của một kiếp, tính lúc kiếp khép lại",sections:[
+ {html:`<p class="kpnote">Mỗi kiếp khép lại được chấm một số ${RK_T.unit}: cộng các phần dưới đây. ${RK_T.screen} tự tính lại từ sổ kiếp gửi lên, số tự khai không được nhận.</p>`},
+ {h:`${own?"Kiếp vừa rồi của ta":"Ví dụ một kiếp"}: ${who}`,html:`<p class="kpnote">${lifeLine}</p>`+kitRows(sc.parts.map(([k,v])=>[k,`+${v}`,"g"]).concat(sc.partial?[["Kiếp dở dang","chỉ tính một nửa","r"]]:[]).concat([[RK_T.unit,n(sc.score),"t"]]))},
+ {h:"Phẩm cao nhất từng đạt",html:kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))+`<p class="kpnote">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p>`},
+ {h:"Kết cục",html:kitTiles(E.map(([k,v])=>[k,`${v}`]))+`<p class="kpnote">Kết cục khác (chết, lãnh cung, bị đuổi…) không thêm.</p>`},
+ {h:"Cộng thêm",rows:[
   ["Năm trong cung",`${R.year} mỗi năm tròn, nhiều nhất ${R.yearCap} năm`,"t"],["Con cái",`hoàng tử ${R.son}, công chúa ${R.dau}; nhiều nhất ${R.kidCap} người con`,"t"],
   ["Thái tử",`${R.tz} mỗi con trai được lập Thái tử, nhiều nhất ${R.tzCap}`,"t"],["Danh, Đức",`lúc cuối kiếp, mỗi bậc được ${R.danh}, tính đến 100`,"t"],
-  ["Tranh ghế",`${R.tg} mỗi lần thắng, nhiều nhất ${R.tgCap} lần`,"t"],["Cơ duyên hiếm",`${R.rare} khi kiếp gặp kết cục hiếm`,"t"]])}</div>
- <div class="kpsec"><h4 class="kpst">Bớt đi</h4>${kitRows([["Kiếp dở dang","chưa tròn một năm mà chưa lên Quý nhân (cung nữ: Chưởng sự cô cô): cả kiếp chỉ tính một nửa","r"]])}</div>
- <div class="kpsec"><h4 class="kpst">Xếp hạng</h4>${kitRows([["Kiếp","mỗi kiếp một dòng, công danh cao đứng trên"],["Người chơi","mỗi người một dòng, xếp theo kiếp tốt nhất; bằng nhau thì theo tổng công danh mọi kiếp"]])}</div>
- </div></div>`}
+  ["Tranh ghế",`${R.tg} mỗi lần thắng, nhiều nhất ${R.tgCap} lần`,"t"],["Cơ duyên hiếm",`${R.rare} khi kiếp gặp kết cục hiếm`,"t"]]},
+ {h:"Bớt đi",rows:[["Kiếp dở dang","chưa tròn một năm mà chưa lên Quý nhân (cung nữ: Chưởng sự cô cô): cả kiếp chỉ tính một nửa","r"]]},
+ {h:"Xếp hạng",rows:[["Kiếp","mỗi kiếp một dòng, công danh cao đứng trên"],["Người chơi","mỗi người một dòng, xếp theo kiếp tốt nhất; bằng nhau thì theo tổng công danh mọi kiếp"]]}]}}
+function rkRulesOpen(){kitModal(rkRulesSpec())}
 /* ---------- recovery code (owner Q20, 16/11): the guest id itself, shown as groups of four; the server keeps only its hash, so no email and no privacy policy ---------- */
 function rkCodeFmt(g){return String(g||"").toUpperCase().replace(/(.{4})(?=.)/g,"$1-")}
 function rkCodeParse(t){const g=String(t||"").toLowerCase().replace(/[^a-z0-9]/g,"");return /^[a-z0-9]{16,40}$/.test(g)?g:""}
-function rkCodeH(){const first=!rkIdGet().rcSeen;
- return `<div class="krk-name krk-code"><h4 class="kpst">Mã khôi phục</h4>
- <p class="past">${first?"Xin ghi giữ mã này. Mất sổ hoặc đổi máy, nhập mã để lấy lại tên hiệu và các kiếp đã ghi.":"Mã giữ tên hiệu và các kiếp đã ghi. Ai có mã là lấy được tên hiệu của ta, xin đừng đưa cho ai."}</p>
- ${kitInput({id:"krk-code",label:"Mã của ta",value:rkCodeFmt(rkIdGet().gid),readonly:true})}
- <div class="krk-nb"><button class="kbtn" data-krk="copy">Chép mã</button>${first?`<button class="kbtn alt" data-krk="seen">Ta đã ghi lại</button>`:""}</div>
- <h4 class="kpst krk-rs">Lấy lại bằng mã</h4>
- <p class="past">Nhập mã đã ghi. Kiếp ghi trên máy này từ nay thuộc về tên hiệu ấy.</p>
- ${kitInput({id:"krk-rin",label:"Nhập mã",value:"",placeholder:"XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"})}
- ${RK.msg?`<p class="krk-msg">${rkEsc(RK.msg)}</p>`:""}
- <div class="krk-nb"><button class="kbtn" data-krk="restore">Lấy lại</button></div></div>`}
-function rkNameH(){return `<div class="krk-name">${kitInput({id:"krk-in",label:"Tên hiệu",value:rkIdGet().pn&&!/^Khách vô danh/.test(rkIdGet().pn)?rkIdGet().pn:"",placeholder:"Tên hiệu mới"})}
- <p class="past">Từ hai đến hai mươi bốn chữ; không trùng tên người khác, không dùng lời tục.</p>${RK.msg?`<p class="krk-msg">${rkEsc(RK.msg)}</p>`:""}
- <div class="krk-nb"><button class="kbtn" data-krk="save">Ghi tên</button></div></div>`}
+function rkMsgSet(t){RK.msg=t||"";const e=document.getElementById("krk-msg");if(e){e.textContent=RK.msg;e.hidden=!RK.msg}}
+function rkMsgH(){return `<p class="kpnote" id="krk-msg"${RK.msg?"":" hidden"}>${rkEsc(RK.msg)}</p>`}
+function rkCodeOpen(){const first=!rkIdGet().rcSeen;RK.msg="";
+ kitModal({kind:"info",cls:"krkp",title:"Mã khôi phục",sub:rkEsc(rkMyName()),btn:"Đã hiểu",onClose:()=>{if(!rkIdGet().rcSeen)rkIdSet({rcSeen:1})},sections:[
+ {h:"Mã của ta",html:`<p class="kpnote">${first?"Xin ghi giữ mã này. Mất sổ hoặc đổi máy, nhập mã để lấy lại tên hiệu và các kiếp đã ghi.":"Mã giữ tên hiệu và các kiếp đã ghi. Ai có mã là lấy được tên hiệu của ta, xin đừng đưa cho ai."}</p>
+  ${kitInput({id:"krk-code",label:"Mã của ta",value:rkCodeFmt(rkIdGet().gid),readonly:true})}<button class="kbtn" data-krk="copy">Chép mã</button>${first?`<button class="kbtn alt" data-krk="seen">Ta đã ghi lại</button>`:""}`},
+ {h:"Lấy lại bằng mã",html:`<p class="kpnote">Nhập mã đã ghi. Kiếp ghi trên máy này từ nay thuộc về tên hiệu ấy.</p>
+  ${kitInput({id:"krk-rin",label:"Nhập mã",value:"",placeholder:"XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"})}${rkMsgH()}<button class="kbtn" data-krk="restore">Lấy lại</button>`}]})}
+function rkNameOpen(){RK.msg="";
+ kitModal({kind:"info",cls:"krkp",title:"Đổi tên hiệu",sub:rkEsc(rkMyName()),btn:"Đã hiểu",sections:[
+ {h:"Tên hiệu",html:`${kitInput({id:"krk-in",label:"Tên hiệu",value:rkIdGet().pn&&!/^Khách vô danh/.test(rkIdGet().pn)?rkIdGet().pn:"",placeholder:"Tên hiệu mới"})}
+  <p class="kpnote">Từ hai đến hai mươi bốn chữ; không trùng tên người khác, không dùng lời tục.</p>${rkMsgH()}<button class="kbtn" data-krk="save">Ghi tên</button>`}]});
+ const inp=document.getElementById("krk-in");if(inp){inp.maxLength=24;setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},80)}}
 function rkBodyH(){const tab=RK.tab,d=RK.data[tab];
- if(RK.view==="name")return rkNameH();
- if(RK.view==="code")return rkCodeH();
- if(!d)return `<p class="krk-note">${RK.err?`Mạng đứt, chưa mở được ${RK_T.screen}.`:"Đang mở bảng."}</p>`;
- const rows=d.rows||[];const note=RK.err?`<p class="krk-note">Mạng đứt: đây là bảng lần trước.</p>`:"";
- if(!rows.length)return note+`<p class="krk-note">Chưa có ${tab==="players"?"người chơi":"kiếp"} nào trên bảng.</p>`;
+ if(!d)return kitEmpty(RK_T.screen,RK.err?`Mạng đứt, chưa mở được ${RK_T.screen}.`:"Đang mở bảng.");
+ const rows=d.rows||[];const note=RK.err?`<p class="kpnote">Mạng đứt: đây là bảng lần trước.</p>`:"";
+ if(!rows.length)return note+kitEmpty(RK_T.screen,`Chưa có ${tab==="players"?"người chơi":"kiếp"} nào trên bảng.`);
  const pod=rows.length>=2?`<div class="kpod-stage krk-stage">${(()=>{const L=rkPodList(rows,tab);const t=[L[1],L[0],L[2]].filter(Boolean);return t.map(kpodCol).join("")})()}</div>`:"";
  return note+pod+`<div class="krk-list">${rkHeadH(tab)}${rows.map(x=>rkRowH(x,tab)).join("")}</div>`}
 function rkMeH(){const tab=RK.tab,d=RK.data[tab]||{};const q=rkQ().length;const qn=q?`<small class="krk-q">${q} kiếp chờ gửi, có mạng sẽ gửi.</small>`:"";
@@ -35273,54 +35267,50 @@ function rkMeH(){const tab=RK.tab,d=RK.data[tab]||{};const q=rkQ().length;const 
  return `<div class="krk-me"><small class="krk-ml">${lab}${row&&row.r?` · hạng ${row.r} trên ${tab==="players"?d.of:d.of} ${tab==="players"?"người":"kiếp"}`:""}</small>${h}${qn}</div>`}
 function rkSub(){const d=RK.data[RK.tab];if(!d)return "Công danh của mọi người chơi";return RK.tab==="players"?`${d.of} người chơi đã vào cung`:`${d.of} kiếp đã ghi`}
 function rkPaint(){const ov=document.getElementById("krkov");if(!ov)return;const root=ov.firstElementChild;
- /* ONE title (owner 15/11: no seal chip + second title), the kit ✕ at its right end: closes the board, or goes back from Đổi tên hiệu */
- root.querySelector(".kpod-hd").innerHTML=`<div class="kph krk-h"><span class="kpht"><span class="kptitle">${RK.view==="name"?"Đổi tên hiệu":RK.view==="code"?"Mã khôi phục":RK_T.screen}</span><small class="kpsub">${RK.view==="name"||RK.view==="code"?rkEsc(rkMyName()):rkSub()}</small></span>${kitXHTML('data-krk="'+(RK.view==="name"||RK.view==="code"?"list":"close")+'"',RK.view==="name"||RK.view==="code"?"Về bảng":"Đóng")}</div>`;
+ /* ONE title (owner 15/11: no seal chip + second title), the kit ✕ at its right end */
+ root.querySelector(".kpod-hd").innerHTML=`<div class="kph"><span class="kpht"><span class="kptitle">${RK_T.screen}</span><small class="kpsub">${rkSub()}</small></span>${kitXHTML('data-krk="close"',"Đóng")}</div>`;
  root.querySelectorAll(".krk-tabs .ksubb").forEach(b=>{const on=b.dataset.krt===RK.tab;b.classList.toggle("on",on);b.setAttribute("aria-selected",on?"true":"false")});
- const body=root.querySelector(".krk-body");const keep=RK.view==="rules"&&body.querySelector(".krk-list");if(!keep)body.innerHTML=rkBodyH();
- const sub=RK.view==="name"||RK.view==="code";root.querySelector(".krk-meb").innerHTML=!sub?rkMeH():"";
- const pop=root.querySelector(".krk-pop");pop.innerHTML=RK.view==="rules"?rkRulesH():"";pop.hidden=RK.view!=="rules";
- root.querySelector(".krk-tabs").hidden=sub;
- root.querySelector(".krk-btns").hidden=sub;if(RK.view==="rules")try{pop.querySelector(".kit-x").focus({preventScroll:true})}catch(e){}
- const fit=()=>rkFit(root);fit();root.querySelectorAll(".krk-stage img").forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});setTimeout(fit,300);
- const inp=root.querySelector("#krk-in");if(inp){inp.maxLength=24;setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},50)}}
+ root.querySelector(".krk-body").innerHTML=rkBodyH();root.querySelector(".krk-meb").innerHTML=rkMeH();
+ const fit=()=>rkFit(root);fit();root.querySelectorAll(".krk-stage img").forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});setTimeout(fit,300)}
 function rkFit(root){try{const st=root.querySelector(".krk-stage"),b=root.querySelector(".krk-body");
  if(st&&b){st.style.height="";if(innerHeight<500&&innerWidth>innerHeight)st.style.height=Math.max(180,b.clientHeight-4)+"px"}kpodFit(root)}catch(e){}}
 async function rkLoad(tab,quiet){const d=rkIdGet();const c=store.get(RK_C+tab);if(c&&!RK.data[tab])RK.data[tab]=c;if(!quiet)rkPaint();
  const r=await rkReq("GET",`/top/${tab}?n=50&gid=${encodeURIComponent(d.gid)}`);
  if(r.st===200&&r.j.ok){RK.err=0;RK.data[tab]=r.j;store.set(RK_C+tab,r.j);if(r.j.me)rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn})}else RK.err=1;
  if(RK.tab===tab)rkPaint()}
-function rkOpen(tab,o){o=o||{};RK.tab=tab==="players"?"players":"lives";RK.view="list";RK.lid=o.lid||"";RK.msg="";rkClose();if(!rkIdGet().rcSeen)RK.view="code";
+function rkOpen(tab,o){o=o||{};RK.tab=tab==="players"?"players":"lives";RK.lid=o.lid||"";RK.msg="";rkClose();
  const ov=document.createElement("div");ov.id="krkov";
  ov.innerHTML=`<div class="kpod krk" role="dialog" aria-label="${RK_T.screen}"><div class="kpod-hd"></div>
   <div class="ksub krk-tabs" role="tablist"><button class="ksubb" role="tab" data-krt="lives">${RK_T.lives}</button><button class="ksubb" role="tab" data-krt="players">${RK_T.players}</button></div>
-  <div class="krk-body"></div><div class="krk-ft"><div class="krk-meb"></div><div class="krk-btns"><button class="kbtn alt" data-krk="name">Đổi tên hiệu</button><button class="kbtn alt" data-krk="code">Mã khôi phục</button><button class="kbtn alt" data-krk="rules">Cách tính</button></div></div>
-  <div class="krk-pop" hidden></div></div>`;
+  <div class="krk-body"></div><div class="krk-ft"><div class="krk-meb"></div><div class="krk-btns"><button class="kbtn alt" data-krk="name">Đổi tên hiệu</button><button class="kbtn alt" data-krk="code">Mã khôi phục</button><button class="kbtn alt" data-krk="rules">Cách tính</button></div></div></div>`;
  document.body.appendChild(ov);const root=ov.firstElementChild;
- ov.__key=e=>{if(e.key==="Escape"){e.preventDefault();if(RK.view!=="list"){RK.view="list";rkPaint()}else rkClose()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-in"){e.preventDefault();rkSaveName()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-rin"){e.preventDefault();rkRestore()}};addEventListener("keydown",ov.__key);
+ ov.__key=e=>{if(e.key==="Escape"&&!document.querySelector("#modal:not([hidden])")){e.preventDefault();rkClose()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-in"){e.preventDefault();rkSaveName()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-rin"){e.preventDefault();rkRestore()}};addEventListener("keydown",ov.__key);
  const onR=()=>rkFit(root);addEventListener("resize",onR);ov.__off=()=>removeEventListener("resize",onR);
- root.addEventListener("click",e=>{if(RK.view==="rules"&&e.target.classList&&e.target.classList.contains("krk-pop")){RK.view="list";rkPaint();return}const t=e.target.closest("[data-krt],[data-krk]");if(!t)return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
-  if(t.dataset.krt){if(RK.tab!==t.dataset.krt){RK.tab=t.dataset.krt;RK.view="list";rkPaint();rkLoad(RK.tab,true)}return}
-  const k=t.dataset.krk;if(k==="close")rkClose();else if(k==="name"){RK.view="name";RK.msg="";rkPaint()}else if(k==="rules"){RK.view="rules";rkPaint()}
-  else if(k==="list"){if(RK.view==="code"&&!rkIdGet().rcSeen)rkIdSet({rcSeen:1});RK.view="list";RK.msg="";rkPaint()}else if(k==="save")rkSaveName()
-  else if(k==="code"){RK.view="code";RK.msg="";rkPaint()}else if(k==="copy")rkCopyCode(t);else if(k==="seen"){rkIdSet({rcSeen:1});RK.view="list";RK.msg="";rkPaint()}else if(k==="restore")rkRestore()});
- rkPaint();rkFlush();rkHello().then(()=>rkLoad(RK.tab,true));try{root.querySelector('.kpod-hd .kit-x').focus({preventScroll:true})}catch(e){}return ov}
+ root.addEventListener("click",e=>{const t=e.target.closest("[data-krt],[data-krk]");if(!t)return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
+  if(t.dataset.krt){if(RK.tab!==t.dataset.krt){RK.tab=t.dataset.krt;rkPaint();rkLoad(RK.tab,true)}return}
+  const k=t.dataset.krk;if(k==="close")rkClose();else if(k==="name")rkNameOpen();else if(k==="rules")rkRulesOpen();else if(k==="code")rkCodeOpen()});
+ rkPaint();rkFlush();if(!rkIdGet().rcSeen)rkCodeOpen();rkHello().then(()=>rkLoad(RK.tab,true));try{root.querySelector('.kpod-hd .kit-x').focus({preventScroll:true})}catch(e){}return ov}
+document.addEventListener("click",e=>{const t=e.target.closest("#modal [data-krk]");if(!t)return;const k=t.dataset.krk;
+ if(k==="save")rkSaveName();else if(k==="restore")rkRestore();else if(k==="copy")rkCopyCode(t);else if(k==="seen"){rkIdSet({rcSeen:1});try{kitModalClose()}catch(x){}}});
+/* the title screen shows these panels before any life exists (S undefined): closeModal reads S.dead, so close by hand then */
+(function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){if(typeof S==="undefined"||!S){const m=Q.shift();try{if(m&&m.onClose)m.onClose()}catch(e){}if(Q.length)showModal();else{const M=$("modal");if(M)M.hidden=true}return}return c0.apply(this,arguments)};window.closeModal=closeModal})();
 async function rkCopyCode(btn){const txt=rkCodeFmt(rkIdGet().gid);let ok=false;
  try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(txt);ok=true}}catch(e){}
  if(!ok)try{const i=document.getElementById("krk-code");if(i){i.focus();i.select();i.setSelectionRange(0,99);ok=document.execCommand("copy")}}catch(e){}
  if(btn){btn.textContent=ok?"Đã chép":"Chọn mã rồi chép tay";setTimeout(()=>{if(btn.isConnected)btn.textContent="Chép mã"},2500)}}
 async function rkRestore(){const inp=document.getElementById("krk-rin");if(!inp)return;const g=rkCodeParse(inp.value);
- if(!g){RK.msg="Mã chưa đúng, xin xem lại từng chữ.";rkPaint();return}
- if(g===rkIdGet().gid){RK.msg="Đây đã là mã của ta.";rkPaint();return}
- RK.msg="Đang tìm mã.";rkPaint();const r=await rkReq("GET",`/me?gid=${encodeURIComponent(g)}`);
+ if(!g){rkMsgSet("Mã chưa đúng, xin xem lại từng chữ.");return}
+ if(g===rkIdGet().gid){rkMsgSet("Đây đã là mã của ta.");return}
+ rkMsgSet("Đang tìm mã.");const r=await rkReq("GET",`/me?gid=${encodeURIComponent(g)}`);
  if(r.st===200&&r.j.ok&&r.j.me){rkIdSet({gid:g,pid:r.j.me.pid,pn:r.j.me.pn,hat:Date.now(),rcSeen:1});try{if(S)S.rkGid=g}catch(e){}RK.data={};["lives","players"].forEach(t=>store.set(RK_C+t,null));
-  RK.view="list";RK.msg="";rkPaint();rkFlush();rkLoad(RK.tab,true);return}
- RK.msg=r.st===404?"Không tìm thấy mã này trên bảng.":r.st===0?"Mạng đứt, chưa lấy lại được.":"Chưa lấy lại được.";rkPaint()}
+  try{kitModalClose()}catch(x){}rkMsgSet("");rkPaint();rkFlush();rkLoad(RK.tab,true);return}
+ rkMsgSet(r.st===404?"Không tìm thấy mã này trên bảng.":r.st===0?"Mạng đứt, chưa lấy lại được.":"Chưa lấy lại được.")}
 function rkClose(){const ov=document.getElementById("krkov");if(!ov)return;try{ov.__off&&ov.__off();removeEventListener("keydown",ov.__key)}catch(e){}ov.remove()}
 async function rkSaveName(){const inp=document.getElementById("krk-in");if(!inp)return;const v=inp.value.replace(/\s+/g," ").trim();
- if(!v){RK.msg="Xin viết tên hiệu.";rkPaint();return}RK.msg="Đang ghi tên.";rkPaint();const i2=document.getElementById("krk-in");if(i2)i2.value=v;
+ if(!v){rkMsgSet("Xin viết tên hiệu.");return}rkMsgSet("Đang ghi tên.");
  await rkHello();const r=await rkReq("POST","/name",{gid:rkIdGet().gid,name:v});
- if(r.st===200&&r.j.ok){rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn});RK.view="list";RK.msg="";RK.data={};rkPaint();rkLoad(RK.tab,true);return}
- RK.msg=r.st===0?"Mạng đứt, chưa đổi được tên.":(r.j.why||"Chưa đổi được tên.");rkPaint();const i3=document.getElementById("krk-in");if(i3)i3.value=v}
+ if(r.st===200&&r.j.ok){rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn});try{kitModalClose()}catch(x){}RK.msg="";RK.data={};rkPaint();rkLoad(RK.tab,true);return}
+ rkMsgSet(r.st===0?"Mạng đứt, chưa đổi được tên.":(r.j.why||"Chưa đổi được tên."))}
 window.rkOpen=rkOpen;window.rkClose=rkClose;window.rkFlush=rkFlush;
 document.addEventListener("click",e=>{const b=e.target.closest("[data-krk-open]");if(!b)return;e.preventDefault();e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}rkOpen(b.dataset.krkOpen,{lid:b.dataset.lid||""})},true);
 /* title screen (☰ opens it too): one more kit button beside Sổ luân hồi */
@@ -35337,30 +35327,18 @@ setInterval(()=>{if(rkQ().length&&navigator.onLine!==false)rkFlush()},60000);
 setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 /* ---------- kit CSS (tokens of j79; frame and stage of j90) ---------- */
 (function(){const st=document.createElement("style");st.id="kitrank";st.textContent=`
+#modal.krkp{z-index:9100}
 #krkov{position:fixed;inset:0;z-index:8990;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
 .kpod.krk{grid-template-rows:auto auto minmax(0,1fr) auto;cursor:auto;user-select:text;-webkit-user-select:text}
 .krk .kpod-hd{padding:10px clamp(8px,2.5vw,32px) 0;justify-content:stretch}
-.krk .kpod-hd .kph.krk-h{position:relative;display:flex;width:100%;box-sizing:border-box;justify-content:center;text-align:center;padding:8px 56px}
-.krk .kpod-hd .krk-h .kptitle{font-size:1.15rem}
+.krk .kpod-hd .kph{position:relative;flex:1 1 auto}
 .krk-tabs{margin:8px clamp(8px,2.5vw,32px) 0;position:relative;top:auto}
-.krk-tabs[hidden],.krk-btns[hidden]{display:none!important}
-.krk-pop{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:max(10px,env(safe-area-inset-top)) clamp(8px,2.5vw,32px) 10px;background:#2a1a1260;cursor:pointer}
-.krk-pop[hidden]{display:none}
-.krk-card{cursor:auto;position:relative;width:min(640px,100%);max-height:100%;display:flex;flex-direction:column;background:var(--k-card,#fffaf0);border:1px solid #c9a46a;border-radius:var(--k-rad,8px);box-shadow:0 14px 40px #2a1a1270;overflow:hidden}
-.krk-card>.kph.krk-ch{position:relative;flex:none;display:flex;align-items:center;padding:10px 56px 8px 14px;border-bottom:1px solid var(--k-hair,#e6d3ac);background:linear-gradient(#f6ead6,#fffaf0)}
-.krk-card .kptitle{font-family:var(--display);font-weight:700;color:var(--gold);font-size:1.05rem}.krk-card .kpsub{display:block;font-size:.76rem;color:var(--dim)}
-.krk-cb{overflow-y:auto;min-height:0;padding:8px 14px 14px;-webkit-overflow-scrolling:touch}
-.krk-cb .kpsec{margin-top:10px}.krk-cb .kpst{margin:0 0 4px}.krk-lead,.krk-ex{margin:4px 0;font-size:.88rem;line-height:1.45;color:var(--ink)}.krk-ex{color:var(--dim);font-size:.82rem}
-.krk-cb .past{margin:4px 0 0;font-size:.8rem}
-.krk-tabs .ksubb.on{background:linear-gradient(#c9952a,#a8781c);color:#fff8e6}
 .krk-body{overflow-y:auto;overflow-x:hidden;min-height:0;-webkit-overflow-scrolling:touch;padding:0 0 8px}
 .krk .krk-stage{height:clamp(270px,50vh,520px);flex:none;cursor:default;padding-top:4px}
 .krk .krk-stage .kpod-plq .kname{display:block}
-.krk-list,.krk-name,.krk-note{margin:10px clamp(8px,2.5vw,32px) 0;background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
-.krk-note{padding:10px 12px;font-size:.88rem;color:var(--ink)}
-.krk-code .krk-rs{margin-top:14px}.krk-name{padding:10px 12px}.krk-name .kpst{margin:0 0 6px}
-.krk-name .krk-msg{margin:6px 0 0;font-size:.84rem;font-weight:700;color:var(--bad,#a8301f)}
-.krk-nb{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin:10px clamp(8px,2.5vw,32px) 0}.krk-name .krk-nb{margin:10px 0 0}
+.krk-body>.kpnote,.krk-body>.kcard,.krk-body>.kskc{margin:10px clamp(8px,2.5vw,32px) 0}
+/* PRIVATE (KIT REQUEST kitRankList / kitRankRow): the ranked list frame + row, until the kit keeper builds the part */
+.krk-list{margin:10px clamp(8px,2.5vw,32px) 0;background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
 .krk-row{display:grid;grid-template-columns:2.4em 40px minmax(0,2.3fr) minmax(0,1.2fr) minmax(0,1.3fr) minmax(4.6em,auto);grid-template-areas:"rk fc who c1 c2 s";
  align-items:center;gap:4px 10px;padding:6px 10px;border-bottom:1px solid var(--k-hair,#e6d3ac);font-size:.86rem;line-height:1.3}
 .krk-row:last-child{border-bottom:0}
@@ -35375,22 +35353,21 @@ setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 .krk-hd>.krk-rk{font-family:inherit;font-size:inherit;color:inherit}.krk-hd>.krk-s{white-space:normal}
 .krk-list>.krk-row:nth-child(2)>.krk-rk,.krk-list>.krk-row:nth-child(3)>.krk-rk,.krk-list>.krk-row:nth-child(4)>.krk-rk{font-size:1.15rem;color:#a8781c}
 .krk-mine{background:#fff3c4;box-shadow:inset 3px 0 0 #a8740c}
-.krk-you{font-style:normal;font-family:var(--display);font-size:.7rem;color:#5a3a10;background:#fff3c4;border:1px solid #a8740c;border-radius:10px;padding:0 7px;white-space:nowrap;vertical-align:1px}
-.krk-ft{display:flex;flex-direction:column;gap:6px;padding:8px clamp(8px,2.5vw,32px) 12px;background:linear-gradient(#f5ecdc00,#f5ecdcf2 30%)}
+/* PRIVATE (KIT REQUEST kitRankFoot): the player's own-life strip under the list */
+.krk-ft{display:flex;flex-direction:column;gap:6px;padding:8px clamp(8px,2.5vw,32px) 12px}
 .krk-me{background:#fffaf0f5;border:1px solid #a8740c;border-radius:var(--k-rad,8px);overflow:hidden}
 .krk-me .krk-ml{display:block;padding:4px 10px 0;font-size:.74rem;font-weight:700;color:var(--k-lab,#8a7350)}
 .krk-me .krk-row{border-bottom:0}.krk-me .krk-q{display:block;padding:0 10px 6px;font-size:.74rem;color:var(--dim)}
-.krk-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.krk-btns .kbtn{min-height:42px;padding:6px 14px}
-.krk-end{margin:10px 0 0}.krk-end .kpst{margin:0 0 4px}.krk-end .krk-eb{margin-top:8px;min-height:40px;padding:6px 14px;font-size:.84rem}
+.krk-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
 .kpmenu.krk-m{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:639px){
  .krk-row{grid-template-columns:2em 36px minmax(0,1fr) auto;grid-template-areas:"rk fc who s" "rk fc pe s";gap:2px 8px;padding:6px 8px;font-size:.84rem}
  .krk-row>.krk-c{display:none}.krk-row>.krk-pe{display:block;grid-area:pe;font-size:.76rem;color:var(--ink);min-width:0;overflow-wrap:anywhere}
- .krk-hd{display:none}.krk-btns .kbtn{flex:1 1 0;padding:6px 8px}
+ .krk-hd{display:none}.krk-btns .kbtn{flex:1 1 0}
 }
 @media (orientation:landscape) and (max-height:820px){.krk .krk-stage{height:clamp(240px,62vh,520px)}.krk-ft{padding-bottom:8px}}
-@media (orientation:landscape) and (max-height:500px){.krk .kpod-hd{padding-top:4px}.krk .kpod-hd .kph.krk-h{padding:4px 52px}.krk .kpod-hd .krk-h .kpsub{display:none}.krk-tabs{margin-top:4px}
- .krk .krk-stage{height:230px}.krk-me .krk-ml{display:none}.krk .krk-stage .kpod-plq .kpod-fx2{display:none}.krk-ft{flex-direction:row;align-items:flex-end;padding:4px clamp(8px,2.5vw,32px) 6px}.krk-meb{flex:1 1 auto;min-width:0}.krk-btns{flex-direction:column}.krk-btns .kbtn{min-height:36px}}
+@media (orientation:landscape) and (max-height:500px){.krk .kpod-hd{padding-top:4px}.krk .kpod-hd .kpsub{display:none}.krk-tabs{margin-top:4px}
+ .krk .krk-stage{height:230px}.krk-me .krk-ml{display:none}.krk .krk-stage .kpod-plq .kpod-fx2{display:none}.krk-ft{flex-direction:row;align-items:flex-end;padding:4px clamp(8px,2.5vw,32px) 6px}.krk-meb{flex:1 1 auto;min-width:0}.krk-btns{flex-direction:column}}
 `;document.head.appendChild(st)})();
 
 /* jtut: HƯỚNG DẪN TÂN THỦ (owner 11/15 03:55Z "hướng dẫn tân thủ cho người chơi làm quen tính năng của game") — KIT.md §72 (72.1–72.3; was §36 on the old branch, §36 is Hậu cung on main).
@@ -40682,7 +40659,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2a6c5a1c1fc2";window.CTM_BUILD=BUILD;
+const BUILD="cd17af7a315e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
