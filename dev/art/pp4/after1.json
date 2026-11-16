@@ -1,0 +1,99 @@
+{
+ "eventsChecked": 305,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Tạ Kiều Nguyệt",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Lục Châu (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Hạ Khinh Vũ",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Ôn Vân Thường",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Liễu Mi Trang",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Âu Dương Lan Chi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Phùng Thanh Liên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Tống Tịch Nhan",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Trịnh Diễm Thu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Phong Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 106,
+ "actsPh": [],
+ "errs": []
+}

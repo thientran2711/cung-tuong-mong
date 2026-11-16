@@ -32,10 +32,15 @@ function pcfRel(e){try{if(typeof kitRelRows!=="function"||typeof kitRelTable!=="
 function pcfTaste(e){try{const rows=[];
  if(isEmp(e)){const E=S.emp,K=E.known||{},L=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${L[k]}`);
   rows.push(["Ngài thích",like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",like.length?"":"n"]);
+  try{const d=typeof disRow==="function"&&disRow("emp");if(d)rows.push(d)}catch(x){}
   const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push(["Ngài hay",T.join("; ")])}
- else if(isTh(e)){rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])}
+ else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
+  if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push(["Tính nết",k?thArch().n:"chưa rõ",k?"":"n"])}else rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])
+  try{const d=typeof disRow==="function"&&disRow("th");if(d)rows.push(d)}catch(x){}}
  else if(typeof trKnown==="function"&&e.id!=null){const K=trKnown(e),T=typeof traitsOf==="function"?traitsOf(e):[];const un=T.filter(t=>!K.includes(t)).length;
   rows.push(["Tính nết",K.length?K.join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
+  try{const l=typeof disLikeRow==="function"&&disLikeRow(e);if(l)rows.push(l)}catch(x){}
+  try{const d=typeof disRow==="function"&&disRow(e);if(d)rows.push(d)}catch(x){}
   const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push(["Hay",tend.join("; ")])}
  if(!rows.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitRows(rows)}</div>`}catch(x){return""}}
 function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=typeof intelOf==="function"?intelOf(e):[];const old=(S.notes&&S.notes[e.id])||[];
@@ -54,7 +59,9 @@ function pcfQuick(e){try{if(typeof rivals==="undefined"||typeof rvGroups!=="func
  const B=[];const push=b=>{if(b&&/<button(?![^>]*disabled)/.test(b))B.push(b)};
  try{push(scoutBtn(e))}catch(x){}try{push(seeBtn(e))}catch(x){}try{const g=rvGroups(e,i).find(([h])=>h==="Giao thiệp");(g&&g[1]||[]).forEach(push)}catch(x){}
  if(!B.length)return"";return `<div class="kpsec"><h4 class="kpst">Việc nhanh</h4><div class="kskacts pcb">${B.slice(0,3).map(b=>`<div class="kpanec">${b}</div>`).join("")}</div></div>`}catch(x){return""}}
-function pcfBlocks(e,o,quick){return [pcfMood(e),pcfRel(e),pcfTaste(e),pcfIntel(e),pcfLog(e),quick?pcfQuick(e):""].filter(Boolean).join("")}
+/* PCF_X: more blocks from other modules (jmem: Kỷ niệm, Ân oán chưa dứt), each f(person) -> kitRows HTML or "" */
+function pcfX(e){try{return (window.PCF_X||[]).map(f=>{try{return f(e)||""}catch(x){return""}}).join("")}catch(x){return""}}
+function pcfBlocks(e,o,quick){return [pcfMood(e),pcfRel(e),pcfTaste(e),pcfIntel(e),pcfX(e),pcfLog(e),quick?pcfQuick(e):""].filter(Boolean).join("")}
 window.pcfBlocks=pcfBlocks;window.pcfEnt=pcfEnt;
 if(typeof pcard==="function"){const p0=pcard;pcard=function(o){let e=null;try{if(!window.__pcfOff&&o&&!o.__pcf)e=pcfEnt(o)}catch(x){}
  if(!e)return p0.apply(this,arguments);
@@ -91,5 +98,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
- try{if(!S)return"";const v=(typeof rivals!=="undefined"&&rivals[0])||null;if(!v)return"";return `<div class="kitpg-row" style="width:min(100%,520px)">${pcfBlocks(v,{},true)}</div>`}catch(e){return""}}})}catch(e){}
+ try{const v=S&&(typeof rivals!=="undefined"&&rivals[0])||null;if(v){const h=pcfBlocks(v,{},true);if(h)return `<div class="kitpg-row" style="width:min(100%,520px)">${h}</div>`}
+  /* no game open (#kit): the same blocks built from kit parts with demo data (owner 11/16 15:00Z 3.6: the sample was EMPTY) */
+  return `<div class="kitpg-row" style="width:min(100%,520px)"><div style="width:100%">${kitRows([["Tâm trạng","Vui vẻ, dễ gần"],["Sở trọng","Thi họa, trà ngon"],["Đã biết","Hay giúp người, giận khó nói"],["Dạo này","Được ban thưởng ở Ngự hoa viên"]])}${kitRelTable(kitRelRows(null)||[])||kitRel2([{head:"Nàng → ta",dir:"them",rows:[{w:"Thiện cảm",now:12,kind:"good"},{w:"Oán",now:3,kind:"bad"},{w:"Ghen",now:8,kind:"bad"}]},{head:"Ta → nàng",dir:"me",rows:[{w:"Thiện cảm",now:20,kind:"good"}]}])}</div></div>`}catch(e){return""}}})}catch(e){}
 })();

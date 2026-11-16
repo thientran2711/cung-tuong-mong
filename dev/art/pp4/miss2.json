@@ -1,0 +1,133 @@
+{
+ "eventsChecked": 312,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Tạ Mộng Điệp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hồng Ngọc (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Hàn Kiều Nguyệt",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Hạ Yên Nhiên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Tô Tuyết Dao",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Song Hỷ (cung nữ)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Cố Dao Cầm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Lục Mạn Châu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thu Cúc (cung nữ)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Hoa Lăng Vân",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Mộ Dung Uyển Nhi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu An Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Lễ Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 107,
+ "actsPh": [
+  {
+   "name": "Các lối, sách phổ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "hoc-tap"
+  },
+  {
+   "name": "Sai cung nữ thân tín lấy đồ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Sai người lấy trộm đồ",
+   "key": "",
+   "ph": "dark",
+   "tone": "dark",
+   "cat": "giao-thiep"
+  }
+ ],
+ "errs": []
+}

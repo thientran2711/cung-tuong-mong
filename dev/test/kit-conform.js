@@ -4,7 +4,8 @@
      T1 PANEL (§8)            .dlg.kpanel > .kph + #mb > .kpb > [.kpsubj] + .kpmain (kit blocks) + .opts.kpopts
      T2 EVENT FRAME (§8.2)    T1 with ONE picture left (.kpsubj.kpiart / .kpev) and kit rows right; no band on top
      T3 PERSON EVENT (§32.7/§50) T1 with the figure column (.kpsubj.kes) [+ ONE banner .kdlgart.kesband/.kdpban in the right column]
-     T4 PERSON INFO (§8)      T1 with a 3:4 portrait (.kpsubj > .pfwrap/.pcp) [+ ONE headArt band: look-up panels §28.19b]
+     T4 PERSON INFO (RETIRED 16/11 07:35Z, OD:L448) T1 with a 3:4 portrait (.kpsubj > .pfwrap/.pcp) — now a FAIL: every pop-up with a person uses T3 (full-body figure left)
+     T6 PERSON DIALOG OUTSIDE #modal (jpdlg kitPersonDlg: tutorial coach, tips) .dlg.kpdlg — checked by the 'multi-page' block below
      T5 IDENTITY (§28.11)     .kpb.kpid
    It also checks the stage + tab bar for loose floating chips (anything position:fixed over #tabs that is not a kit layer).
    Verdict per case: CONFORMS · MIXED (template frame, but hand-made blocks inside: .kpraw with non-kit classes, inline grid/flex/absolute
@@ -32,10 +33,11 @@ const VPS=(SIZES||'755x1000').split(',');
     kids.forEach(e=>{if(e.matches('.kpb,.opts,.kpscopts,.kdlgart.kesband,.kdlgart.kdpban,.kpnote,.kpsec'))return;if(e.matches('.kdlgart'))return;why.push('#mb child '+(e.className||e.tagName))});
     const body=mb.querySelector(':scope > .kpb');let tpl='T1';
     if(body){if(body.classList.contains('kpid'))tpl='T5';else{const sj=body.querySelector(':scope > .kpsubj');if(sj){if(sj.matches('.kes'))tpl='T3';else if(sj.matches('.kpiart,.kpev'))tpl='T2';else tpl='T4'}}}
+    if(tpl==='T4'&&body&&body.querySelector(':scope > .kpsubj .pframe,:scope > .kpsubj .pfwrap,:scope > .kpsubj .pcp,:scope > .kpsubj .pfr'))why.push('small framed portrait on a person pop-up (OD:L448): use the full-body figure column (T3)');
     /* pictures outside the options: T2 = 1, T3 = figure + ≤ 1 banner, T4 = portrait + ≤ 1 band, T1 = ≤ 1 band */
     const pics=[...mb.querySelectorAll('.ksart')].filter(e=>!e.closest('.opts,.kpscopts,.kaart,.kpkgrid,.kshg,.kinv,.kip,.kmc,.kmlist,.kfacts,.kpl')&&e.getClientRects().length);
     const bands=mb.querySelectorAll(':scope > .kdlgart').length;
-    const seal0=(d.querySelector('.kpseal')||{}).textContent||'';if(tpl==='T3'&&/^(ĐIỀU|LUẬT)$/.test(seal0.trim()))why.push('loose figure column on an info panel');
+    const seal0=(d.querySelector('.kpseal')||{}).textContent||'';/* (16/11 07:35Z, OD:L448: an ĐIỀU / LUẬT panel about a person now HAS the figure column — the old 'loose figure column on an info panel' rule is retired) */
     if(tpl==='T2'&&pics.length>1)why.push('two pictures: band + left picture');
     if(tpl==='T1'&&bands&&body&&body.querySelector(':scope > .kpsubj'))why.push('band + subject picture');
     if(tpl!=='T5'&&tpl!=='T3'&&tpl!=='T4'&&bands>1)why.push('two bands');
@@ -62,6 +64,8 @@ const VPS=(SIZES||'755x1000').split(',');
   await run('choice',()=>{Q.push({t:"Việc khó",h:"<p>Chọn.</p>",opts:[{n:"Một",fx:{}},{n:"Hai",fx:{}}]});showModal()});
   await run('headart-notice',()=>{Q.push({t:"Hỏa hoạn",h:"<p>Lửa bén.</p>",headArt:{src:"img/ev-hoa-hoan.webp",label:"Hỏa hoạn"}});showModal()});
   await run('headart-choice',()=>{Q.push({t:"Điềm lạ quanh cung",h:"<p>Có điềm lạ.</p>",headArt:{src:"img/ev-chuyen-la.webp",label:"Điềm lạ"},opts:[{n:"Xem",fx:{}},{n:"Bỏ qua",fx:{}}]});showModal()});
+  await run('info-person',()=>kitModal({kind:"info",title:"Một người",subject:liveRivals(true)[0],facts:["Một câu ngắn."]}));
+  await run('news-person',()=>{Q.push({t:"Tin trong cung",who:liveRivals(true)[0],h:"<p>Một tin ngắn.</p>"});showModal()});
   await run('intel',()=>kitIntelPanel(liveRivals(true)[0]));
   await run('evidence',()=>kitEvidencePanel(liveRivals(true)[0]));
   await run('item',()=>kinvOpen(kinvItems()[0]));
@@ -91,10 +95,22 @@ const VPS=(SIZES||'755x1000').split(',');
   if(srvOk){await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});let m=0;
    for(const id of ids){if(m>=+(process.env.KC_SRV||25))break;const ok=await p.evaluate(id=>{for(const pp of [{},{v:(liveRivals(true)[0]||{}).id}]){let d=null;try{d=PEND[id](Object.assign({},pp))}catch(e){d=null}if(!d||!(d.o||d.t))continue;try{Q.length=0;pushDil(mkP(id,pp),id);showModal();if(Q.length)return true}catch(e){}}return false},id);
     if(ok){m++;await check('SRV:'+id)}}}
+  /* MULTI-PAGE EVENTS (owner 16/11 07:37Z, OD:L963): ONE event = ONE frame size for all its pages / steps; a person pop-up outside #modal (tutorial coach, tip) is the
+     kitPersonDlg template (full-body figure left, picture right top, buttons bottom). Fails when the 4 intro pages (or the spotlight steps) differ in size. */
+  const tourFails=[];
+  try{await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.kitTour()});await sleep(1500);const pg=[],st=[];
+   for(let i=0;i<30;i++){const o=await p.evaluate(()=>{const d=document.querySelector('#ktut .kpdlg');if(!d)return null;const r=d.getBoundingClientRect();const s=(d.querySelector('.kpsub')||{}).textContent||'';
+     return{w:Math.round(r.width),h:Math.round(r.height),pg:/trang \d+\/4/.test(s),fig:!!d.querySelector('.kpsubj.kes .kesimg'),small:!!d.querySelector('.pframe,.pfwrap,.pcp'),next:!!d.querySelector('[data-ktut=next]')}});
+    if(!o)break;(o.pg?pg:st).push([o.w,o.h]);if(!o.fig||o.small)tourFails.push('tutorial card without a full-body figure / with a small portrait: '+JSON.stringify(o));if(!o.next)break;
+    await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());await sleep(1100)}
+   const same=L=>L.every(x=>x[0]===L[0][0]&&x[1]===L[0][1]);if(pg.length<4)tourFails.push('tutorial: '+pg.length+' intro pages (want 4)');
+   if(!same(pg))tourFails.push('tutorial intro pages differ in frame size '+JSON.stringify(pg));if(st.length&&pg.length&&(st[0][0]!==pg[0][0]||st[0][1]!==pg[0][1]))tourFails.push('tutorial steps '+JSON.stringify(st[0])+' differ from the intro pages '+JSON.stringify(pg[0]));if(st.length&&!same(st))tourFails.push('tutorial steps differ in frame size '+JSON.stringify(st));
+   await p.evaluate(()=>{try{kitCoachOff()}catch(e){}})}catch(e){errs.push('tour: '+String(e.message).slice(0,100))}
   /* loose floats over the tab bar (owner shot faa95830: co-op wait chips) */
   const floats=await p.evaluate(()=>{const t=document.getElementById('tabs');if(!t)return[];const T=t.getBoundingClientRect();
    return [...document.body.querySelectorAll('*')].filter(e=>{const cs=getComputedStyle(e);if(cs.position!=='fixed'||cs.display==='none'||cs.visibility==='hidden'||+cs.opacity<.05||cs.pointerEvents==='none'&&!e.textContent.trim())return false;if(e.matches('#modal,#modal *,#tabs,#tabs *,.modal,.kpscene,#rtoast,#kpop,#ov,.kbd,.kmov,.kmov *,#kpodov,#kpodov *,.kline,#kline,header.hud,header.hud *'))return false;
     const r=e.getBoundingClientRect();return r.width>4&&r.height>4&&r.left<T.right&&r.right>T.left&&r.top<T.bottom&&r.bottom>T.top}).map(e=>e.id||e.className)});
+  tourFails.forEach(x=>floats.push(x));
   let retired=[];try{const h=await (await p.request.get(URL)).text();retired=['EL.id="kctm"','el.id="kgoalst"'].filter(x=>h.includes(x))}catch(e){errs.push('retired check: '+String(e.message).slice(0,80))}
   retired.forEach(x=>floats.push('retired float in code: '+x));
   const cnt={};Object.values(res).forEach(r=>cnt[r.v]=(cnt[r.v]||0)+1);

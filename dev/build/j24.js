@@ -67,7 +67,7 @@ function judgeServ(s,how,paid){const c=s.cause;if(how==="phat"){if(c&&c.fault){s
  s.cause=null;render()}
 function servJudgeBtns(s){const c=s.cause;const fault=c&&c.fault,merit=c&&!c.fault;const tr=s.trouble!=null&&wk()-s.trouble<=4;
  return [pbtn(`data-sj="thuong" data-sid="${s.sid}"`,merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ",merit?"Chắc chắn · tốn: Bạc -10 · thành: lòng +15, kẻ hầu khác lòng +2":"Chắc chắn · tốn: Bạc -10 · thành: lòng +6 (ít hơn thưởng có cớ)",S.bac<10?"thiếu bạc (cần 10)":""),
-  s.spyFor&&s.spyFor!=="me"?pbtn(`data-sv="phat" data-sid="${s.sid}"`,"Tra khảo","Chắc chắn · thành: khai là tai mắt của ai · lòng -15",""):pbtn(`data-sj="phat" data-sid="${s.sid}"`,fault?`Phạt vì ${c.txt}`:"Phạt vô cớ",fault?"Chắc chắn · thành: kỷ cương, kẻ hầu khác lòng +1 · tốn: lòng -5":"Chắc chắn · tốn: lòng -25, Đức -3, kẻ hầu khác lòng -5 · kèm: hắn/nàng mang hận; lòng dưới 30 thì mỗi tuần bán mình cho phi tần khác: "+chanceW(15),""),
+  s.spyFor&&s.spyFor!=="me"?pbtn(`data-sv="phat" data-sid="${s.sid}"`,"Tra khảo","Chắc chắn · thành: khai là tai mắt của ai · lòng -15",""):pbtn(`data-sj="phat" data-sid="${s.sid}"`,fault?`Phạt vì ${c.txt}`:"Phạt vô cớ",fault?"Chắc chắn · thành: kỷ cương, kẻ hầu khác lòng +1 · tốn: lòng -5":"Chắc chắn · tốn: lòng -25, Đức -3, kẻ hầu khác lòng -5 · kèm: mang hận; lòng dưới 30 có thể theo phi tần khác: "+chanceW(15),""),
   fault?pbtn(`data-sj="tha" data-sid="${s.sid}"`,"Tha lỗi","Chắc chắn · thành: lòng +5 · tốn: kẻ hầu khác lòng -1",""):"",
   tr?pbtn(`data-sv="che" data-sid="${s.sid}"`,"Che chở (đang bị bắt tội)","Chắc chắn · thành: lòng +20 · tốn: Danh -2",""):""]}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-sj]");if(b&&!b.disabled){e.stopPropagation();const s=servById(+b.dataset.sid);if(s&&!S.dead&&!Q.length){const bf=rsnap();judgeServ(s,b.dataset.sj);resultShow(b.firstChild.textContent,bf,true)}}},true);
@@ -96,4 +96,4 @@ wrapR("scout",()=>"Sai tai mắt dò nơi ở");wrapR("invite",()=>"Mời đến
 (function(){const p0=pushDil;pushDil=function(){try{if(S&&!S.dead)stat().un++}catch(e){}return p0.apply(this,arguments)}})();
 (function(){const n0=nightScene;nightScene=function(){try{if(S&&!S.dead)stat().un++}catch(e){}return n0.apply(this,arguments)}})();
 /* the status drawer closes on a tap outside it (narrow screens) */
-document.addEventListener("click",e=>{const el=$("hud2");if(!el||el.classList.contains("col")||e.target.closest("#hud2")||matchMedia("(min-width:1200px)").matches)return;window.__h2c=true;try{localStorage.setItem("hclh-h2c","1")}catch(x){}renderHud2()});
+document.addEventListener("click",e=>{const el=$("hud2");if(!el||el.classList.contains("col")||e.target.closest("#hud2"))return;window.__h2c=true;try{localStorage.setItem("hclh-h2c","1")}catch(x){}renderHud2()});

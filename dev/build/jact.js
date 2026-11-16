@@ -10,7 +10,7 @@
       j7 rvquarrel, j72 việc nhờ, j78 intelLearn, the Emperor in the garden). Nội vụ phủ is a place (shop = jinv kitShopNvp + a
       weekly rare item). Faces never on place names (silhouettes only; unchanged).
    Co-op: everything here is her personal state (S.adDoor, S.adHap, S.adRare); no world agency; old saves fill lazily. */
-const AD={hapP:65,hap2:35,rareMinGrade:3};
+const AD=BAL.ad; /* numbers in BAL (jbal2.js): hapP, hap2, strollP, rareMinGrade */
 /* ---------- 1. shared doors ---------- */
 const AD_DOOR={/* deck name → [pop-up kind, pop-up option name, scope] */
  "Thỉnh an Thái hậu":["th","Thỉnh an, chép kinh","day"],
@@ -112,26 +112,33 @@ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){
 /* ---------- 7. "!" happenings: ≤2 places per buổi, re-rolled each buổi, fired on arrival (existing events) ---------- */
 function adPresent(k){try{return liveRivals(true).filter(v=>whereOf(v)===k&&!v.confined)}catch(e){return[]}}
 function adOpenOk(k){try{if(typeof accessOf==="function"&&!accessOf(S,k).ok)return false}catch(e){}return k!==S.place}
-function adHapRoll(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x)=>{if(!k||used.has(k)||!adOpenOk(k))return false;used.add(k);L.push({k,id,x:x||null,done:0});return true};
+/* first slots (fix of the wave-1 report, flag 2): the Emperor's stroll takes the FIRST slot when he is in the garden (BAL.ad.strollP),
+   then the fixed happenings of the day (AD_HAP_FIX: a festival at its place, night happenings; jact2), then the random ones up to the
+   buổi's roll. Never more than 2 per buổi. A fixed happening may share a place with the stroll (both fire on arrival). */
+const AD_HAP_FIX=[];
+function adHapRoll(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x,share)=>{if(!k||(!share&&used.has(k))||!adOpenOk(k))return false;used.add(k);L.push({k,id,x:x||null,done:0});return true};
+ if(W.emp==="vuon"&&roll(AD.strollP))add("vuon","emp");
+ for(const f of AD_HAP_FIX){if(L.length>=2)break;try{const h=f();if(h)add(h.k,h.id,h.x,1)}catch(e){console.error("jact fix",e)}}
  const C=[];
- if(W.emp==="vuon")C.push(()=>add("vuon","emp"));
  if(liveRivals(true).filter(v=>!v.confined).length>=2)C.push(()=>add("vuon","quarrel"));
  for(const p of places()){if(p.k==="home")continue;if(adPresent(p.k).length>=2){C.push(()=>add(p.k,"gossip"));break}}
  try{if(typeof q72CanOffer==="function"&&q72CanOffer()){const P=shuf(places().filter(p=>p.k!=="home"&&p.k!=="nvp").map(p=>p.k)).slice(0,4);
   for(const k of P){const x=q72Choose(q72Cands(k),k);if(x){C.push(()=>add(k,"favour",x));break}}}}catch(e){}
  const n=roll(AD.hapP)?(roll(AD.hap2)?2:1):0;const S2=shuf(C);for(const f of S2){if(L.length>=n)break;f()}
- return L}
+ return L.slice(0,2)}
 function adHapNow(){if(!S||S.dead||adSrv()||S.out)return[];let b="";try{b=bkey()}catch(e){return[]}if(!S.adHap||S.adHap.b!==b){let L=[];try{L=adHapRoll()}catch(e){console.error("jact hap",e)}S.adHap={b,L}}return S.adHap.L}
 function adHapAt(k){return adHapNow().find(h=>h.k===k&&!h.done)||null}
 const AD_HAP_T={emp:"Hoàng thượng dạo vườn",quarrel:"Hai phi tần cãi nhau",gossip:"Nghe lỏm chuyện",favour:"Có người nhờ việc"};
-function adHapArrive(k){if(S.place!==k||S.dead)return;const h=adHapAt(k);if(!h)return;h.done=1;let fired=false;
+const AD_HAP_FIRE={};/* id → (h,k) => fired (jact2 adds fest, cold) */
+function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;for(let i=0;i<2;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true}if(any){try{showModal()}catch(e){}}}
+function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fired=!!AD_HAP_FIRE[h.id](h,k)}catch(e){console.error("jact fire",e)}return fired}
  if(h.id==="emp"&&(S.where||{}).emp==="vuon"){const d=mkP("adStroll",{});if(d){pushDil(d,AD_HAP_T.emp);fired=true}}
  else if(h.id==="quarrel"){const R=liveRivals(true).filter(v=>!v.confined);const here=adPresent(k);const a=here[0]||pick(R);const b=here.find(v=>v!==a)||pick(R.filter(v=>v!==a));
   if(a&&b){const d=mkP("rvquarrel",{a:a.id,b:b.id});if(d){pushDil(d,AD_HAP_T.quarrel);fired=true}}}
  else if(h.id==="gossip"){const here=adPresent(k);const v=here.length?pick(here):null;if(v){let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}
   if(!f){try{f=overhear(k)}catch(e){}}pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe ${v.name} to nhỏ với người bên cạnh.</p><p>${f||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});fired=true}}
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
- if(fired){try{showModal()}catch(e){}}}
+ return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
 PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(35+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
@@ -139,10 +146,14 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;cons
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
-.ic.kplic{vertical-align:-2px;margin-right:3px;flex:none}
+/* KIT 78 (owner 11/16 15:00Z 5.6): the place icon sits ABOVE the name, centred, never left of it — map chips, map tiles, the stage title, the kit sample */
+.ic.kplic{display:block;margin:0 auto 1px;flex:none}
+.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic),#sc-t h2:has(>.kplic){display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
+.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic){position:relative}.mspot .mlab:has(>.kplic)>.khap,.mtile b:has(>.kplic)>.khap{position:absolute;top:-5px;right:-5px;margin:0}
+#sc-t h2:has(>.kplic){align-items:flex-start;text-align:left}#sc-t h2>.kplic{margin:0 0 1px}
 /* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
-.mspot .mlab:has(>.kplic){max-width:max(100%,calc(4.4em + 17px))}
+.mspot .mlab:has(>.kplic){max-width:max(100%,4.4em)}
 .khap{display:inline-block;font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:var(--ink);background:var(--trim);border-radius:50%;width:13px;height:13px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fff8e6,0 0 6px var(--trim)}
 .mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
 /* kit page samples */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mlab" style="display:inline-block;margin:4px 8px;padding:2px 6px;background:#3a2a1ee6;color:#ffe7b0;border-radius:8px">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:k}${k==="vuon"?'<i class="khap">!</i>':""}</span>`).join("")})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mspot" style="position:static;transform:none;display:inline-flex;margin:4px 8px"><span class="mlab">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:({home:"Cung của ta"}[k]||k)}${k==="vuon"?`<i class="khap" role="img" aria-label="Có chuyện buổi này">!</i>`:""}</span></span>`).join("")})}catch(e){}

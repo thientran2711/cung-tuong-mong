@@ -26,7 +26,7 @@ const GEOM=()=>{const ov=document.querySelector('.kmov.kcf');if(!ov)return null;
   for(let i=0;i<60&&await p.evaluate(()=>typeof NLP!=='undefined'&&!!NLP);i++){await p.evaluate(()=>{const s=[...document.querySelectorAll('#kroul button,.kroul button')].find(x=>/Bỏ qua/.test(x.textContent));if(s)s.click();const b=document.querySelector('button[data-nl="ok"]');if(b)b.click()});await p.waitForTimeout(300)}
   for(let i=0;i<30;i++){await sleep(600);const k=await p.evaluate(()=>{const r=document.querySelector('[id^=kroul],.kroul,.kbd-roulette');if(!r)return 0;const bs=[...r.querySelectorAll('button')];const b=bs.find(x=>/Bỏ qua/.test(x.textContent))||bs.find(x=>/Tiếp|Vào|Nhập/.test(x.textContent))||bs[0];if(b)b.click();else r.click();return 1});if(!k)break}
   await sleep(600);await p.evaluate(([s,g])=>{window.CLEAN=eval('('+s+')');window.GEOM=eval('('+g+')')},[CLEAN.toString(),GEOM.toString()]);await p.evaluate(CLEAN);const res={};
-  for(let i=0;i<40;i++){const busy=await p.evaluate(()=>{const o=document.querySelector('.kmov');if(o){o.click();o.click()}const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}return !!o||kmBusy||KMQ.length>0});if(!busy)break;await sleep(700)}await p.evaluate(CLEAN);
+  for(let i=0;i<40;i++){const busy=await p.evaluate(()=>{const o=document.querySelector('.kmov');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}return !!o||kmBusy||KMQ.length>0});if(!busy)break;await sleep(700)}await p.evaluate(CLEAN);
   /* A · a real week end: only her card can be turned (others barred by a hidden tablet), the flip roll forced */
   res.real=await p.evaluate(()=>{S.dead=false;S.preg=0;S.pregUnk=0;S.ill=0;S.confined=0;S.block=0;S.sung=Math.max(S.sung,40);const R0=Math.random;Math.random=()=>0.01;
    const keep=[];for(const v of liveRivals(true)){keep.push([v,v.block]);v.block=1}let nc=0;try{nc=nightCh(S)}catch(e){}
@@ -39,14 +39,14 @@ const GEOM=()=>{const ov=document.querySelector('.kmov.kcf');if(!ov)return null;
    const G={};for(const [k,at] of beats){const w=at-(performance.now()-o.__t0);if(w>0)await W(w);G[k]=GEOM()}return G});
   if(ALL){await p.evaluate(()=>cfDemo(14,3,'me'));await p.waitForFunction(()=>document.querySelector('.kcf-hand.on'),null,{timeout:30000,polling:50}).catch(()=>{});await SHOT(p,{path:`${OUT}/hand-${v}.jpg`});await p.evaluate(()=>{const o=[...document.querySelectorAll('.kmov.kcf')].pop();o.click()});await sleep(1200);await SHOT(p,{path:`${OUT}/final-me-${v}.jpg`});await p.evaluate(CLEAN)}
   res.realPlan=await p.evaluate(()=>window.cfLast||null);
-  await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o){o.click();o.click()}});await sleep(600);
+  await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}});await sleep(600);
   /* B · demos: 20+ cards (another woman picked), 2 cards (hers); tap-skip lands on the final still */
   await p.evaluate(CLEAN);await sleep(400);await p.evaluate(CLEAN);await p.evaluate(()=>cfDemo(22,6,3));await p.waitForFunction(()=>{const o=document.querySelector('.kmov.kcf');return o&&performance.now()-o.__t0>=BAL.cardFlip.t.carry*.82+200},null,{timeout:30000,polling:50}).catch(()=>{});res.d22=await p.evaluate(GEOM);if(ALL)await SHOT(p,{path:`${OUT}/demo22-arr-${v}.jpg`});
-  res.d22n=await p.evaluate(()=>document.querySelectorAll('.kmov').length);await p.evaluate(()=>[...document.querySelectorAll('.kmov.kcf')].pop().click());await sleep(700);res.d22f=await p.evaluate(GEOM);await SHOT(p,{path:`${OUT}/demo22-final-${v}.jpg`});
-  await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o)o.click()});await sleep(500);
+  res.d22n=await p.evaluate(()=>document.querySelectorAll('.kmov').length);await p.evaluate(()=>[...document.querySelectorAll('.kmov.kcf')].pop().click());await sleep(700);res.d22f=await p.evaluate(GEOM);res.d22btn=await p.evaluate(()=>{const b=document.querySelector('.kmov.kcf .kmend');return b?b.textContent:null});await sleep(6000);res.d22still=await p.evaluate(()=>!!document.querySelector('.kmov.kcf'));  /* the scene must still be open (no auto-close) */await SHOT(p,{path:`${OUT}/demo22-final-${v}.jpg`});
+  await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}});await sleep(500);
   await p.evaluate(CLEAN);await p.evaluate(()=>cfDemo(2,0,'me'));await sleep(1500);res.d2=await p.evaluate(GEOM);
   await p.evaluate(()=>document.querySelector('.kmov.kcf').click());await sleep(800);res.d2f=await p.evaluate(GEOM);if(ALL)await SHOT(p,{path:`${OUT}/demo2-final-${v}.jpg`});
-  await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o)o.click()});await sleep(500);
+  await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}});await sleep(500);
   /* C · reduced motion: final still at once */
   await p.emulateMedia({reducedMotion:'reduce'});await p.evaluate(CLEAN);await p.evaluate(()=>cfDemo(12,3,'me'));await sleep(900);res.rm=await p.evaluate(()=>({fin:!!document.querySelector('.kmov.kcf.kcf-fin'),red:!!document.querySelector('.kmov.kcf.km-red'),pts:document.querySelectorAll('.kcf-pt').length}));
   if(ALL)await SHOT(p,{path:`${OUT}/rm-${v}.jpg`});await p.emulateMedia({reducedMotion:'no-preference'});await p.evaluate(CLEAN);

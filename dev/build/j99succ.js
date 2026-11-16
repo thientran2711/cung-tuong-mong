@@ -31,23 +31,23 @@ function succSup(){const r={houses:[],pow:0,mil:false,milArmy:false,milGuard:fal
  r.mil=r.milArmy||r.milGuard;
  try{const set=new Set();const f=typeof facOf==="function"?facOf(S):null;if(f&&typeof facMembers==="function")facMembers(f).forEach(x=>{if(x!==S&&x.alive&&!x.out)set.add(x)});
   liveRivals(true).forEach(v=>{if((v.rel||0)>=40)set.add(v)});r.allies=set.size}catch(e){}
- r.thOK=!!S.thDead||(S.th||0)>=60;r.thB=!!S.thDead||(S.th||0)>=50;r.thOpp=!S.thDead&&(S.th||0)<20;return r}
-function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-50)/2+((S.tamco||0)-35)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
- let o=20+U.pow/6+((S.danh||0)-70)/2+((S.tamco||0)-60)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=BAL.age.reign)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
+ r.thOK=!!S.thDead||(S.th||0)>=BAL.succN.cTh;r.thB=!!S.thDead||(S.th||0)>=BAL.succN.thB;r.thOpp=!S.thDead&&(S.th||0)<BAL.succN.thOpp;return r}
+function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-BAL.succN.bDanh)/2+((S.tamco||0)-BAL.succN.bTam)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
+ let o=20+U.pow/6+((S.danh||0)-BAL.succN.cDanh)/2+((S.tamco||0)-BAL.succN.cTam)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=BAL.succN.bAge)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
 function succNeed(t,ok){return{t:(ok?"✓ ":"✗ ")+t,ok:!!ok}}
 function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
- if(p==="b"){N.push(succNeed(`Tân đế dưới ${BAL.age.reign} tuổi (${son?son.age:0} tuổi)`,son&&son.age<BAL.age.reign));N.push(succNeed(`Danh từ 50 (có ${S.danh||0})`,(S.danh||0)>=50));
-  N.push(succNeed(`Tâm cơ từ 35 (có ${S.tamco||0})`,(S.tamco||0)>=35));N.push(succNeed(`Một nhà quyền thần đứng sau ngươi (có ${U.houses.length})`,U.houses.length>=1));
-  N.push(succNeed(`Bạc 100 (có ${S.bac||0})`,(S.bac||0)>=100));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
- if(p==="c"){N.push(succNeed(`Phẩm Phi trở lên (đang ${RANKS[S.rank].n})`,S.rank>=4&&!cold));N.push(succNeed(`Danh từ 70 (có ${S.danh||0})`,(S.danh||0)>=70));
-  N.push(succNeed(`Tâm cơ từ 60 (có ${S.tamco||0})`,(S.tamco||0)>=60));N.push(succNeed(`Hai nhà quyền thần đứng sau ngươi (có ${U.houses.length})`,U.houses.length>=2));
+ if(p==="b"){N.push(succNeed(`Tân đế dưới ${BAL.succN.bAge} tuổi (${son?son.age:0} tuổi)`,son&&son.age<BAL.succN.bAge));N.push(succNeed(`Danh từ ${BAL.succN.bDanh} (có ${S.danh||0})`,(S.danh||0)>=BAL.succN.bDanh));
+  N.push(succNeed(`Tâm cơ từ ${BAL.succN.bTam} (có ${S.tamco||0})`,(S.tamco||0)>=BAL.succN.bTam));N.push(succNeed(`Một nhà quyền thần đứng sau ngươi (có ${U.houses.length})`,U.houses.length>=1));
+  N.push(succNeed(`Bạc ${BAL.succN.bBac} (có ${S.bac||0})`,(S.bac||0)>=BAL.succN.bBac));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
+ if(p==="c"){N.push(succNeed(`Phẩm ${RANKS[BAL.succN.cRank].n} trở lên (đang ${RANKS[S.rank].n})`,S.rank>=BAL.succN.cRank&&!cold));N.push(succNeed(`Danh từ ${BAL.succN.cDanh} (có ${S.danh||0})`,(S.danh||0)>=BAL.succN.cDanh));
+  N.push(succNeed(`Tâm cơ từ ${BAL.succN.cTam} (có ${S.tamco||0})`,(S.tamco||0)>=BAL.succN.cTam));N.push(succNeed(`Hai nhà quyền thần đứng sau ngươi (có ${U.houses.length})`,U.houses.length>=2));
   N.push(succNeed(U.mil?`Binh quyền: ${[U.milArmy?"nhà Đại tướng quân":"",U.milGuard?"cấm quân":""].filter(Boolean).join(", ")}`:"Binh quyền: nhà Đại tướng quân hoặc cấm quân theo ngươi",U.mil));
-  N.push(succNeed(S.thDead?"Thái hậu không phản đối (đã băng hà)":`Thái hậu không phản đối (Thái hậu với ngươi từ 60, có ${S.th||0})`,U.thOK));
-  N.push(succNeed(`Bạc 300 (có ${S.bac||0})`,(S.bac||0)>=300));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
+  N.push(succNeed(S.thDead?"Thái hậu không phản đối (đã băng hà)":`Thái hậu không phản đối (Thái hậu với ngươi từ ${BAL.succN.cTh}, có ${S.th||0})`,U.thOK));
+  N.push(succNeed(`Bạc ${BAL.succN.cBac} (có ${S.bac||0})`,(S.bac||0)>=BAL.succN.cBac));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
  return N.sort((x,y)=>(+x.ok)-(+y.ok))}
 /* ---------- NPC dowager (two-way): the same conditions as (b) ---------- */
-function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.age.reign)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
- return (((v.danh||40)>=50&&(v.tamco||40)>=35)||tr.some(t=>/Tham vọng|Hiểm độc|Kiêu ngạo/.test(t||"")))}
+function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
+ return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Hiểm độc|Kiêu ngạo/.test(t||"")))}
 let SUCC_NPC=null;
 (function(){const o0=over;over=function(h,t,fate,alive){if(SUCC_NPC&&S&&!S.dead){const v=SUCC_NPC;SUCC_NPC=null;
   if(!/buông rèm/.test(t||""))t=String(t||"").replace(/\.?\s*$/,".")+` Tân đế còn nhỏ, ${v.name} buông rèm nhiếp chính, nắm cả triều đình lẫn hậu cung.`;fate=(fate||"")+" · Thánh mẫu nhiếp chính"}
@@ -92,7 +92,7 @@ function succBegin(p,failB){const E=S.succ;const U=succSup();E.p=p;E.st=1;E.ch=0
  const en=succEnemy();E.foe=en?en.id:null;succNext()}
 function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}}/* chooseM shows and renders after go() */
 function succAge(){const son=succSon();S.age=(S.age||30)+SUCC.yrs;S.year=(S.year||1)+SUCC.yrs;if(son)son.age=(son.age||0)+SUCC.yrs}
-function succRareOK(){const E=S.succ;if(E.p==="a")return (S.duc||0)>=60&&E.hoa>=3&&E.an<=1;if(E.p==="b")return E.hoa>=3&&E.tam>=3&&(S.duc||0)>=50&&(S.tamco||0)>=55;return E.tam>=4&&E.an<=2&&(S.danh||0)>=80&&(S.duc||0)>=50}
+function succRareOK(){const E=S.succ;if(E.p==="a")return (S.duc||0)>=60&&E.hoa>=3&&E.an<=1;if(E.p==="b")return E.hoa>=3&&E.tam>=3&&(S.duc||0)>=50&&(S.tamco||0)>=55;return E.tam>=4&&E.an<=2&&(S.danh||0)>=BAL.succN.rareCDanh&&(S.duc||0)>=50}
 function succPick(c){const E=S.succ;if(!E||!c)return;if(c.c)apply(c.c);if(c.s)apply(c.s);for(const k of ["q","an","tam","hoa"])if(c.e&&c.e[k])E[k]=(E[k]||0)+c.e[k];
  if(c.txt)log(c.txt);if(c.do)try{c.do()}catch(e){console.error(e)}
  if(c.end)return succEnd(typeof c.end==="function"?c.end():c.end);

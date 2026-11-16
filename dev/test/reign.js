@@ -12,7 +12,7 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof rgMonth==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;
   for(let i=0;i<40;i++){start();if(S.ps&&!(typeof isSrv==='function'&&isSrv())&&S.origin.k!=='tt')break}Q.length=0;$("modal").hidden=true});
- await p.waitForTimeout(800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
+ await p.waitForTimeout(800);await p.addStyleTag({content:'#kroul,#kroulw,.kmov{display:none!important}'});
  const fails=[];const ok=(c,m)=>{if(!c)fails.push(m)};
  const clear=()=>p.evaluate(()=>{const md=document.getElementById('modal');md.hidden=true;md.className='modal';Q.length=0});
  const shot=async n=>{if(SHOT){await p.waitForTimeout(400);await p.screenshot({path:`${SHOT}-${W}x${H}-${n}.png`})}};
@@ -55,9 +55,9 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  /* 7. outcome bands + her result */
  r=await p.evaluate(()=>{const res=[];for(const [pw,side] of [[75,'emp'],[52,'th'],[30,'quyen'],[30,'emp']]){const W=rgW();W.out='';W.p=pw;W.ch=6;S.reign.res='';S.reign.side=side;rgDecide();const before={sung:S.sung,th:S.th,bac:S.bac,rank:S.rank};const t=rgMine();
    res.push({pw,side,out:W.out,res:S.reign.res,t,d:{sung:S.sung-before.sung,th:S.th-before.th,bac:S.bac-before.bac,rank:S.rank-before.rank}})}return res});
- console.log('outcome',JSON.stringify(r));ok(r[0].out==='emp'&&r[0].res==='win','p 75 → thân chính, emp side wins');ok(r[1].out==='th'&&r[1].res==='win','p 52 → rèm châu');ok(r[2].out==='quyen'&&r[2].res==='win','p 30 → nhiếp chính');ok(r[3].res==='lose','emp side loses at p 30');ok(r[0].d.rank===0,'emp win never gives a free rank (owner: promotion needs the exam)');
- r=await p.evaluate(()=>{const W=rgW();W.out='';W.p=75;S.reign.res='';S.reign.side='emp';S.sung=Math.max(S.sung,95);rgDecide();rgMine();const e=S.ex||{};const g=e.grace===S.rank+1&&e.gw==='rg';const t0=S.turn;S.empDead=1;const on=rgOn();S.empDead=0;S.succ={on:1};const on2=rgOn();S.succ=null;return{g,on,on2}});
- console.log('exam/emp-dead',JSON.stringify(r));ok(r.g,'emp win grants the exam (grace, conditions waived)');ok(!r.on&&!r.on2,'the road stops once the Emperor is dead / succession epilogue');
+ console.log('outcome',JSON.stringify(r));ok(r[0].out==='emp'&&r[0].res==='win','p 75 → thân chính, emp side wins');ok(r[1].out==='th'&&r[1].res==='win','p 52 → rèm châu');ok(r[2].out==='quyen'&&r[2].res==='win','p 30 → nhiếp chính');ok(r[3].res==='lose','emp side loses at p 30');ok((r[0].d.rank===1&&/không qua khảo hạch/.test(r[0].t))||/Ân chỉ chờ phong/.test(r[0].t)||(r[0].d.rank===0&&/ban thưởng hậu hĩnh/.test(r[0].t)),'emp win = direct rank +1, no exam (owner 16/11 06:20Z: long-road reward skips the exam)');
+ r=await p.evaluate(()=>{const W=rgW();W.out='';W.p=75;S.reign.res='';S.reign.side='emp';S.sung=Math.max(S.sung,95);if(S.rank>=BAL.rg.rankCap)S.rank=2;const rk0=S.rank;rgDecide();const tm=rgMine();const e=S.ex||{};const g=S.rank===rk0+1&&!(e.grace===S.rank+1)&&!e.w1&&!deck.some(x=>x&&x.exam)&&/(tấn phong .* làm .*không qua khảo hạch|Ân chỉ chờ phong)/.test(tm);const t0=S.turn;S.empDead=1;const on=rgOn();S.empDead=0;S.succ={on:1};const on2=rgOn();S.succ=null;return{g,on,on2}});
+ console.log('exam/emp-dead',JSON.stringify(r));ok(r.g,'emp win = direct rank +1, no exam (owner 16/11 06:20Z)');ok(!r.on&&!r.on2,'the road stops once the Emperor is dead / succession epilogue');
  r=await p.evaluate(()=>{Q.length=0;const W=rgW();W.out='emp';S.reign.side='emp';S.reign.done={};for(const c of RGC)for(const id of c.b)if(id!=='c6b')S.reign.done[id]=1;const id=rgNext();rgFire(id);showModal();return{id,t:Q[0].t}});
  ok(r.id==='c6b','after the outcome the last beat comes');await shot('c6b');
  /* 8. co-op guest never moves the court clock; old saves get nothing */

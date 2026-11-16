@@ -1,0 +1,128 @@
+{
+ "eventsChecked": 303,
+ "eventsPh": [
+  {
+   "kind": "event",
+   "id": "q72:fam_thd",
+   "tone": "light",
+   "title": "Phụ tuyến · Thư cha: xin sách cho trường làng · Lời nhờ (1 bước)"
+  }
+ ],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Đoan Mộc Linh Lung",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Lục Uyển Nhi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Diệp Thủy Tiên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Đường Mi Trang",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quỳnh Chi (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Mộ Dung Vân Thường",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Nhan Lăng Vân",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Cố Dao Cầm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Lâm Yên Nhiên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu An Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 106,
+ "actsPh": [
+  {
+   "name": "Các lối, sách phổ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "hoc-tap"
+  },
+  {
+   "name": "Sai cung nữ thân tín lấy đồ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Sai người lấy trộm đồ",
+   "key": "",
+   "ph": "dark",
+   "tone": "dark",
+   "cat": "giao-thiep"
+  }
+ ],
+ "errs": []
+}
