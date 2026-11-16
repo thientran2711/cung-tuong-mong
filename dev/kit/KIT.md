@@ -1029,12 +1029,6 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Tall frame and small frame: `.kfxc` (clip = photo window) > `.kfx` (box of the por picture, same 1.14x cut as the portrait); stage figures:
   `.kfxf` box laid over the figure image (idle animation off on that figure).
 - Scar only when the player knows (`KIT_SCAR.on`: herself or j70 `knows(p)`, or `p.scar.known`); a veil is public; never on the grey silhouette.
-- **Zoom-follow (D25, review/veil-zoom):** the overlay box `.kfxc > .kfx` is NOT a fixed 1.14 cut any more: `kporApply` (jkpor, the one place that
-  sets a picture's zoom z / lift L / shift D) writes `--kxl/--kxt/--kxw/--kxh` (the picture box in window units) on the `.kfx` next to the picture it
-  just placed (`.kfx.kfxz`), so veil, scar, slap, rash and makeup layers sit on the face for EVERY z (1.00–1.14). Stage figures: the `.kfxf` box keeps
-  a reference to its own figure (`s.__fig`) and copies THAT figure's transform (jface); before, her own box (host `#stage`) copied the first token's
-  transform whenever another figure stood on the stage. kitFaceZoom / the reveal draw the picture and the layers in one box (already exact).
-  Check: `node dev/test/veil-zoom.js <url> <W>x<H>@dpr [outdir] [--host <device>]` (every place, every family; must print `fail 0`).
 ### 28.8b FACE FX REGISTRY — `kitFaceFx` / `KIT_FACEFX` (review/appearance-port, dev/build/jface.js) — ONE layer for every face condition
 - Every condition that changes how a face looks registers ONE entry; nobody adds their own hook on `kitFxLayers`, `effSac` or `pcard`:
   `KIT_FACEFX.add({id, z, ready, state(p), seen(p,st), sac(p,st), chip(p,st), html(p,file,st)})`.
