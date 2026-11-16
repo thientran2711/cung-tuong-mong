@@ -40,7 +40,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C13 | review/gift-pick @ 6158af34f | REVIEWING (gift-pick-r1) |
 | C14 | review/row-align @ 0886f329b | REVIEWING (row-align-r1) |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
-| C16 | review/item-info @ 50a0f22da (KIT §70 jitd) | REVIEWING (item-info-r1; BAL.itd.allow=false per owner 08:10Z) |
+| C16 | review/item-info → r1 PASS 3ef079f61 | LIVE |
 | C17 | review/stage-fig-size @ 85c33890f (KIT §32.2a cap+crop, week book, aspect, identity figure retry) | REVIEWING (stage-fig-size-r1) |
 
 ## D. UNASSIGNED owner asks (§5; ledger worker refines into dev/handover/OWNER_LEDGER.md)
