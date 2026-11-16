@@ -185,3 +185,5 @@
 | seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | RUNNING | 16/11 13:08Z |
 | foreign-princess v7 (BD hair Đáp ứng/Phi/Quý phi ×2 options, NC back to v5 slight slim) | review/foreign-princess-samples | main s16 | session_01UV1SzhXgLn4WHG9rL1BT7L (sonnet) | RUNNING | 16/11 13:10Z |
 | D57 preg-rate review | review/preg-rate-r1 | D | session_01DgYSWobwX8ehBC7umUckXK | RUNNING | 16/11 13:17Z |
+| D57 preg-rate review | review/preg-rate-r1 | D | (reviewer opening) | RUNNING | 16/11 13:17Z |
+| merge-train-8 successor (loads .claude/settings.json) | review/merge-train-8 | main s16 | session_01UV1Sziaz47NKuNr1wC1DBx (sonnet) | RUNNING | 16/11 13:17Z |
