@@ -281,3 +281,4 @@ FOREMEN (other accounts, inbox files only; send_message fails): B — answers to
 KIT KEEPER BACKLOG: C K1 K2 K4 K6; D nhập cung entry scene, #mb scroll, reign k3rows; B presentation K-A/K-B/K-C; toilette one-page; title-tag (rank-bright phase 2).
 Owner's open choice: none pending except the fp v7 sheet when it arrives.
 Self-wake: s16 trigger trig_01P3xyyt8UbJBytM4MJuPd8o DELETED at handover → s17 creates its own hourly create_trigger (owner OD 08:20Z s14).
+- (13:19Z real s16) MAIN SESSION 17 = session_01UV1SziLYuBSdn5wE1TLZte (opened by s16 at rollover, ctx 35 %). s16 trigger trig_01P3xyyt8UbJBytM4MJuPd8o deleted. s16 stops; workers report to s17.
