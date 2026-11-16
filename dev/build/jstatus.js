@@ -3,7 +3,7 @@
    biết là có cái gì đó đang download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon
    được thì mình cứ việc bỏ thôi."  → a status that has no business on screen as a chip/strip is a SQUARE kit icon (the stage rail button, §77) with
    a tiny activity animation while it is running; tap → a kit info panel (kitPanel kind "info", ✕ top-right / tap outside / Esc, NO "Đã hiểu").
-   API:  kitStatusIcon.set(id, {title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec, order})
+   API:  kitStatusIcon.set(id, {title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec | onTap:fn (own card), order})
          kitStatusIcon.refresh()  (call after the state changed) · kitStatusIcon.remove(id) · kitStatusIcon.items()
    - It lives in the stage rail (left column, under the scene title, never over a face); while no game is on screen (title) the same square button sits
      in a fixed bottom-left dock (rail `onTitle`). Nothing else floats; no strip, no chip, no reserved band under the tab bar.
@@ -18,7 +18,7 @@ function railItem(id,o){return{id:"st-"+id,order:o.order||40,title:o.title,glyph
 function set(id,o){if(!id||!o)return;M.set(id,o);if(window.kitStageRail)kitStageRail.add(railItem(id,o))}
 function refresh(){if(window.kitStageRail)kitStageRail.paint()}
 function remove(id){M.delete(id);if(window.kitStageRail)kitStageRail.remove("st-"+id)}
-function open(id){const o=M.get(id);if(!o||typeof o.panel!=="function")return;let sp=null;try{sp=o.panel()}catch(e){console.error("kitStatusIcon panel",e)}if(!sp)return;
+function open(id){const o=M.get(id);if(o&&typeof o.onTap==="function"){o.onTap();return}if(!o||typeof o.panel!=="function")return;let sp=null;try{sp=o.panel()}catch(e){console.error("kitStatusIcon panel",e)}if(!sp)return;
  sp=Object.assign({kind:"info"},sp);sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
  try{kitPanel(sp,true);showModal()}catch(e){console.error("kitStatusIcon open",e)}}
 window.kitStatusIcon={set,refresh,remove,open,items:()=>[...M.keys()]};

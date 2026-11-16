@@ -34,10 +34,8 @@ function box(p,sel){return ev(p,s=>{const vw=innerWidth,vh=innerHeight,bad=[];co
  return{overflowX:document.documentElement.scrollWidth>vw,bad,pct:/%/.test(r.innerText),text:r.innerText.replace(/\s+/g,' ')}},sel)}
 /* a full-page shot at @2 takes longer than the 4.5 s line lives: the shots redraw the same line (KSW.line) first */
 /* the chip sits on the top bar and covers no other part of it */
-const chipBox=p=>ev(p,()=>{const c=document.getElementById('kupdchip');if(!c||c.hidden)return{shown:false};const q=c.getBoundingClientRect(),hud=document.querySelector('header.hud');
- const H=hud.getBoundingClientRect();const hit=[...hud.querySelectorAll('*')].filter(e=>!e.contains(c)&&e.children.length===0&&e.getClientRects().length&&(e.textContent.trim()||e.tagName==='IMG')).map(e=>[e,e.getBoundingClientRect()])
-  .filter(([e,r])=>r.width&&q.left<r.right-1&&q.right>r.left+1&&q.top<r.bottom-1&&q.bottom>r.top+1).map(([e])=>e.className||e.tagName);
- return{shown:true,text:c.textContent,inHud:q.top>=H.top-1&&q.bottom<=H.bottom+1&&q.left>=H.left-1&&q.right<=H.right+1,covers:hit,box:[q.left,q.top,q.width,q.height].map(Math.round)}});
+const chipBox=p=>ev(p,()=>{const c=document.querySelector('#krail [data-rail="st-upd"]');if(!c)return{shown:false};const q=c.getBoundingClientRect(),st=document.getElementById('stage').getBoundingClientRect();
+ return{shown:true,text:(c.getAttribute('aria-label')||'').replace(/ \(có mới\)$/,''),inHud:q.top>=st.top-1&&q.bottom<=st.bottom+1&&q.left>=st.left-1&&q.right<=st.right+1,covers:[],box:[q.left,q.top,q.width,q.height].map(Math.round)}});
 const mark=p=>ev(p,()=>window.__CTM_MARK||'A');
 const where=p=>ev(p,()=>typeof S!=='undefined'&&S?{name:S.name,k:[S.year,S.month,S.tuan,S.buoi||0].join(':'),used,tab,title:!document.getElementById('title').hidden}:null);
 /* a fresh life in sổ 1, no Luân hồi, no opening dialogs */
@@ -76,10 +74,10 @@ const tapIn=(p,sel,re)=>until(p,([s,r])=>{const b=[...document.querySelectorAll(
   await setVer('B');const t0=Date.now();await bgShort(p);
   ok(await until(p,()=>window.KSW&&KSW.pending,60000),'new build found after a return to the foreground',Date.now()-t0);
   await sleep(7000);ok(await mark(p)==='A'&&!await ev(p,()=>!!document.getElementById('kupd')),'mid-buổi: no reload, no card over the game');
-  const c0=await chipBox(p);R.chip=c0;ok(c0.shown&&c0.inHud&&!c0.covers.length&&c0.text==='Có bản mới','chip "Có bản mới" on the top bar, covers nothing',c0);
+  const c0=await chipBox(p);R.chip=c0;ok(c0.shown&&c0.inHud&&!c0.covers.length&&c0.text==='Có bản mới','status icon "Có bản mới" in the stage rail',c0);
   await p.screenshot({path:`${OUT}/${SC}-1-chip-${tag}.png`});
   if(SC==='play'){
-   await ev(p,()=>document.getElementById('kupdchip').click());await sleep(500);R.card=await box(p,'#kupd');
+   await ev(p,()=>document.querySelector('#krail [data-rail="st-upd"]').click());await sleep(500);R.card=await box(p,'#kupd');
    ok(!R.card.none&&!R.card.bad.length&&!R.card.overflowX&&/Mở bản mới ngay\?/.test(R.card.text)&&/Để sau/.test(R.card.text),'chip → card "Mở bản mới ngay?" Để sau / Mở bản mới, fits',R.card);
    await p.screenshot({path:`${OUT}/play-2-card-${tag}.png`});
    await tapIn(p,'#kupd .kbtn','^Để sau$');await sleep(3500);
@@ -99,8 +97,8 @@ const tapIn=(p,sel,re)=>until(p,([s,r])=>{const b=[...document.querySelectorAll(
    await sleep(1500);ok(!await ev(p,()=>{const l=document.getElementById('kupdline');return l&&!l.classList.contains('out')}),'the line goes by itself');
    /* chip → Mở bản mới (mid-buổi, 2 khắc) */
    await settle(p);await ev(p,()=>{used=2;render();save()});const w2=await where(p);
-   await setVer('A');await bgShort(p);ok(await until(p,()=>KSW.pending&&!document.getElementById('kupdchip').hidden,60000),'B → A: chip again');
-   await ev(p,()=>document.getElementById('kupdchip').click());ok(await until(p,()=>!!document.getElementById('kupd'),5000),'chip → card');await keepPre(p);
+   await setVer('A');await bgShort(p);ok(await until(p,()=>KSW.pending&&!!document.querySelector('#krail [data-rail="st-upd"]'),60000),'B → A: chip again');
+   await ev(p,()=>document.querySelector('#krail [data-rail="st-upd"]').click());ok(await until(p,()=>!!document.getElementById('kupd'),5000),'chip → card');await keepPre(p);
    ok(await until(p,()=>{const b=[...document.querySelectorAll('#kupd .kbtn')].find(x=>x.textContent.trim()==='Mở bản mới');if(b){b.click();return true}return false},5000),'tap Mở bản mới');
    ok(await until(p,()=>!window.__CTM_MARK&&document.readyState==='complete'&&window.KSW&&KSW.resumed,90000),'Mở bản mới → A opened at once',await ev(p,()=>({m:window.__CTM_MARK,k:window.KSW,rec:localStorage.getItem('ctm-upd-resume')&&1})));
    const w3=await where(p);ok(w3&&!w3.title&&JSON.stringify(w3)===JSON.stringify(w2),'same sổ, same buổi, same khắc, same tab',[w2,w3]);
@@ -189,8 +187,8 @@ async function coop(b){const A={n:'host'},B={n:'guest'};
  /* host: chip → Mở bản mới → guest: Cùng mở */
  await clearAll(A.p,B.p);for(const o of [A,B])await ev(o.p,()=>{used=1;render()});await sleep(800);const pre=[await co(A.p),await co(B.p)];
  await setVer('A');for(const o of [A,B])await bgShort(o.p);
- ok(await until(A.p,()=>KSW.pending&&!document.getElementById('kupdchip').hidden,60000),'B → A: host chip');
- await ev(A.p,()=>document.getElementById('kupdchip').click());await sleep(400);R.coCard=await box(A.p,'#kupd');ok(/Bạn chơi cùng sẽ được hỏi/.test(R.coCard.text)&&!R.coCard.bad.length,'host card asks the friend',R.coCard);
+ ok(await until(A.p,()=>KSW.pending&&!!document.querySelector('#krail [data-rail="st-upd"]'),60000),'B → A: host chip');
+ await ev(A.p,()=>document.querySelector('#krail [data-rail="st-upd"]').click());await sleep(400);R.coCard=await box(A.p,'#kupd');ok(/Bạn chơi cùng sẽ được hỏi/.test(R.coCard.text)&&!R.coCard.bad.length,'host card asks the friend',R.coCard);
  await A.p.screenshot({path:`${OUT}/coop-3-card-host-fold-755x1000.png`});
  ok(await tapIn(A.p,'#kupd .kbtn','^Mở bản mới$'),'host taps Mở bản mới');
  ok(await until(B.p,()=>{const k=document.getElementById('kupd');return k&&/Cùng mở/.test(k.innerText)},20000),'guest gets the card Cùng mở / Để sau',{g:await ev(B.p,()=>({k:window.KSW,card:document.getElementById('kupd')&&document.getElementById('kupd').innerText,tr:(window.COOPW&&COOPW.tr||[]).slice(-6)})),h:await ev(A.p,()=>({k:window.KSW}))});
