@@ -117,3 +117,18 @@ Sheet: c01 and c05-t4 (game consorts) + the 4 NC figures all at the SAME height 
 Honest: face now looks consistent; NC figures read similar in height but their bodies are slimmer than c05 and the Quý phi robe is still plainer than c05-t4 but richer than v19; all four smile lightly.
 Credits: 6 x 40 = 240 (v8-v20 total 4,000).
 STATUS: WAIT.
+
+## OWNER on v20 (via Foreman C s8): Đáp ứng/Tần/Phi OK. Quý phi lost her waist sash/belt -> redraw with a clear sash like the other three and the game's consorts. NC still reads short and narrow-shouldered next to game figures -> put ONE NC princess (Tần) in a REAL game room next to one of our consort figures at the game's real scale (real build + Playwright, sprite override, like reports/fig-cutout-clean tools/ingame_probe.js), iPad 1180x820 @2, PLUS a LARGE full-resolution crop of the two figures. Fix height/shoulders from what is seen, then send Foreman C the in-room shot + big crop.
+
+## HANDOVER (art worker, context rollover; written 16/11 ~22:15Z) — successor to be opened by Foreman C
+My START_CTX was not recorded at session start (this session ran many image reads); I roll over now because my context is heavy, not because of 30 turns.
+STATE: v20 on the handover branch = `foreign-princess-art/sample-v20.jpg`; BD approved (Quý phi B etc.) and untouched. NC Đáp ứng/Tần/Phi costumes (silver) approved by the owner on v20; NC Quý phi needs the waist sash back; NC proportion/shoulders to be verified IN THE GAME.
+KEY FACTS FOR THE NEXT WORKER:
+- Magnific: gpt-2-6 only, folder ba4aecfe-efce-47e2-b53f-30d292091886. Owner method: NO figure/body/costume ref images for NC; at most ONE face ref (uploaded face-consort-01 = EbnrrdZuuO; the owner did NOT choose c01 skin, skin tone will follow her pick from a skin sheet). One generation = all 4 ranks on one canvas (16:9, count 6 and pick). Prompt in words, no numbers, "no text/labels".
+- Best NC lineup so far: creation u5YxUziQLD (1344x752, local copy lost with the container; re-download via creations_read/webUrl). Quý phi redraw must keep silver costume language of the other three, a clear waist sash/belt, classic court-consort robe, plain-ish, hair compact.
+- Heads/proportion: she measures by eye next to game figures; measure c01/c05 and NC with pixel readings (crown>chin / crown>sole, headdress excluded) but trust her eye; she wants NC bodies as tall AND as broad-shouldered as the game consorts (c05-t4 is wide-sleeved), not slim fashion-plate. Shoulders: in-game consorts have wide sleeves; NC v20 narrower.
+- IN-GAME TEST (not started): build the real game (dev/build/assemble.py, site dev/site/build_site.sh; images from CDN https://ctm-img.victoria-tntt.workers.dev/img/..., fig naming fig-consort-cNN-tN-aNN.webp, sprite override like reports/fig-cutout-clean/tools/ingame_probe.js on the handover branch), Playwright iPad 1180x820 deviceScaleFactor 2, NC Tần next to a game consort figure; save full shot + a big full-res crop of both figures (sprites are 900 px tall; NC lineup crop is ~520 px so upscale first with Magnific upscale for the test).
+- Deliverables go to Foreman C only (send_message to the current Foreman C id from FOREMAN_C_STATUS.md top lines); never to the owner.
+- Credits so far: v8-v20 = 4,000 (all gpt-2-6). Skin sheet decision pending (owner).
+- Rules: no pixel squeezing; delete rejected sheets (owner: rejected images stored nowhere); English in repo files; Vietnamese to owner.
+- STEP 2 (full set: 3 princesses x 2 countries, all ranks x age bands, maid pairs, game-ready files) not started.
