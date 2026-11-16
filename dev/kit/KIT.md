@@ -1063,6 +1063,33 @@ so stage blocks may stand beside a head or between figures, never over the paint
   frame left, facts right; portrait/Fold: frame on top, facts below. Her full-body figure still stands on the background.
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
+#### 28.11a IDENTITY CARD — one figure tier, fixed column, fast face picker (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … quá lag"; review/newgame-ui) — `kpIdFig` / `kpIdLay` / `kitTn` / `kitPickerGo` (j79), j86
+- ONE COMMON FIGURE TIER (coordinator 16/11, review/newgame-ui-r2): her standing figure is drawn with the same BODY height (head top → feet,
+  `kitFigBody` .ht → .b, as 33.6; crowns / hairpins above the head not counted) on the same floor line (1.2 % above the bottom) for EVERY
+  face, consort and maid, at every age. Body height per screen = min(portrait 80 % / landscape 84 % of the screen height,
+  column width x .98 / `KPID_WR`), `KPID_WR = .5` = the widest painted figure over the 420 faces a new game can show
+  (widest painted width / body height, measured .496 on consort-c05-t4-a18). So every face fits the column WHOLE: no robe cut, no mask / fade,
+  no per-face shrink, no spill past the column (755x1000: column 164 px, body 321 px for all; 1180x820: 689; 844x390: 328).
+  Never object-fit:contain in a box. Phones (< 600 px portrait) keep the figure-on-top layout (--kidh).
+- FIXED COLUMN: the panel is the ONE frame size of KIT 8.1 (`--kpw` / `--kph`; kpIdLay never sets its width); the figure column is the
+  space left of the panel (its left edge minus 8 px). The figure is centred in the column. The panel never covers her.
+- PINNED CHOICES (r2): "Nhận / Đổi thân phận" sit BELOW the card's scroll area (`#mb.kpmbw` = flex column: `.kpscroll` scrolls, `.kpscopts` is a
+  plain row under it), never over the body, so the picker, its "Dung mạo chỉ để nhìn…" note and the last picker row are never covered.
+- `kitTn(src)` = the small pre-sized copy `img/tn/por-…webp` (128 px wide, ~7 KB; was the 384x506 portrait, 30–55 KB) / `img/tn/fig-…webp`
+  (240 px tall, ~7 KB) when `img/TN.json` lists it (`dev/art/tn_make.py`, list from `dev/test/newgame-ui-enum.js`: every face the picker can
+  show at a new game = 420). The picker cells use it; a pick shows the low-res figure AT ONCE (prefetched for the page in view) and swaps in
+  the crisp one when decoded (`decode()`); body measured on the small copy.
+- PICKER (kitPicker, every picker): page turns never re-measure the layout (`root.__kpc`), the next page's pictures are decoded before the
+  swap (≤ 80 ms wait), the pages either side decoded in idle time; `onPage(cells)` hook. A pick changes the selected cell IN PLACE (no rebuild),
+  the small portrait and the figure; no game `render()` while the identity card covers the screen (it renders once when the card closes).
+- Under any full-screen scene panel (.modal.kpscene with its painted backdrop) or the Luân hồi deck the stage Pixi layer and the FX layer stop
+  (`kitStagePause`), restart when the stage shows again.
+- CORS (all pixel reads): every `new Image()` whose pixels are read on a canvas sets `crossOrigin="anonymous"` (CDN pictures; without it the
+  canvas is tainted and every measure silently fell back to the whole picture — kitFigBody, jk3 topOf were affected; jsl headX, jkpor, jmark, jk2b already had it).
+- Opening card "Nhập cung" / "Nhập cung làm cung nữ": EVENT frame (32.2) — `stage:[S]` + headArt `img/ev-nhap-cung.webp` (consort road) /
+  `img/ev-nhap-cung-cn.webp` (palace-maid road), gpt-2-6 1280x716 (181 / 206 KB); facts as kit rows (kitRows); no portrait strip.
+  `kpIsScene` treats a "Nhập cung" card that names its stage as an event panel.
+- Test: `node dev/test/newgame-ui.js <url> <WxH> [shot]` (tier/column/timings/Nhập cung), THR=4 / TRACE=page|pick for traces.
 ### 28.12 kitRoulette — LUÂN HỒI, face-down pick (owner 11/14 item 6b approved; owner 11/15 04:00Z face-down idea + exact flow) — KIT READY
 `kitRoulette({items:[{k,src,wide,name,rare}], target, toEl, done})` on the reincarnation background (`kitBackdrop(ov,"roulette")`), at a new game
 AND at rebirth (hooked on `nlCard`, once per rolled life). The origin is pre-rolled (j52 seed + j69 weights): the cards only SHOW it, odds unchanged.
