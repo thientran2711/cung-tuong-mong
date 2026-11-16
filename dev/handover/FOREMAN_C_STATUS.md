@@ -45,7 +45,9 @@ Base main at start: 900ace7fb.
 | D15 download-size (129 MB first load) + perf test | review/perf | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f6da49b3 (jtrong.js after jaudit, BAL.trong; 5 archetypes; trGreet one greeting rule; trThDeed whole-group fix) → review/personality-r1 | opus | REVIEWING (bot HH 6/28=21% vs main ~27–32%, small n) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D9, D11–D14, D19, D20, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (separate session) |
+| D20 weather redo with §68 | — | — | NOT TAKEN: session 8 runs review/weather-fx-one (claimed) — D20 folded into it unless the coordinator says otherwise |
+| D-list rest (D3, D9, D11–D14, D19, D25, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
