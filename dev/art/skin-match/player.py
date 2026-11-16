@@ -9,6 +9,7 @@ import seg, measure
 T_A, T_B, BLUSH = 10.5, 12.5, 4.5   # face median target (m03 Ngọc Lan face ≈ a 8.3–8.5 b 11.0–11.2, approved rosy consorts a 10–12.5 b 12–15)
 
 def run(im, por):
+    raise RuntimeError("ROSY PASS RETIRED (owner 16/11 12:45Z: \"Thôi tất cả các hình về bỏ cái lớp dòng đi, về cái B á.\" = no rosy-skin layer on any picture; undone by dev/art/skin-norosy/). Never re-apply.")
     P = seg.probs(im, full=por); r = measure.regions(im, P); st = measure.stats(r)
     lab = r["lab"].copy(); L, A, B = lab[..., 0], lab[..., 1], lab[..., 2]
     da = float(np.clip(T_A - st["face_a"], 0, 4)); db = float(np.clip(T_B - st["face_b"], 0, 6))
