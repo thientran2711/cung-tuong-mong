@@ -36,7 +36,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C9 | review/huadian-size (batch at 8.5%) | QUEUED |
 | C10 | OWNER_LEDGER sweep (docs) | DONE (dev/handover/OWNER_LEDGER.md; D29–D49 added) |
 | C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
-| C12 | review/hc-portrait @ db69d7abb (wide frames) | REVIEWING (hc-portrait-r1) |
+| C12 | review/hc-portrait → r1 PASS 583858942 (+ roster labels fix KIT 45.2) | LIVE |
 | C13 | review/gift-pick @ 6158af34f | REVIEWING (gift-pick-r1) |
 | C14 | review/row-align @ 0886f329b | reviewer stopped (stuck) → re-review QUEUED-NEXT |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
