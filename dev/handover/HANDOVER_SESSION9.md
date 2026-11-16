@@ -340,3 +340,4 @@ Known bug to assign: promo-rules.js 755 "reveal shown" 15/16 (pre-existing on ma
 Kit requests logged (KIT_REQUESTS.md 14:30Z): toilette one-page + per-mode modal rules → folded into kit-size.
 Self-wake: s18 trigger trig_01FU9oLkWxGaw2Xup9hZZvMa DELETED at handover → s19 creates its own.
 - (15:35Z) MAIN SESSION 19 = session_01UV1Szj2CNVe1xogpW5uFR5; START_CTX ~6 % of window (est., used_tokens read 0) → rollover at ~31 %, ceiling 60 %.
+- (15:29Z s19) PENDING: after merge-train-9 lands → re-run percent-measure (fresh % to owner; she asked 15:30Z for systems/story %), steer free foreman slots to STORY ROADS (full roads ~15 % of ~288 ch, NPC roads 0, origin intros 0). Kit review part 2 (OD 15:10Z) routed to kit-size/kit-marks/anim-pace/square-icons. Self-wake trigger DENIED by permission classifier (owner told).
