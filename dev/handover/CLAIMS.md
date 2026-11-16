@@ -366,7 +366,7 @@
 | 10-night ledger BUILD (V3-B, reports/night-time.md; no player-only knob) | review/night-ledger | D | (D opens) | INBOX | 16/11 19:41Z |
 | img-cleanup review r1 (opus, BIG: build/quickcheck gate + 6.1k file removal): review/img-cleanup a2e99bd0 | review/img-cleanup-r1 | B | session_01N1tNP5L4nZgzCiWcpjcHmx | DONE PASS 2032fb69 → LIVE 785b8274 (archived) | 16/11 19:42Z |
 | night-final (opus; owner bug: night committed once at end of day, one woman) | review/night-final | main s22 | session_01UV1SziCQkwUnKFA7eL1uRp | RUNNING | 16/11 19:46Z |
-| suc-khoe review r1 (opus, BIG) of 10cba645 | review/suc-khoe-r1 | D | session_01DgYSWnQ5MJS6ViDgFmBeGV | RUNNING | 16/11 19:48Z |
+| suc-khoe review r1 (opus, BIG) of 10cba645 | review/suc-khoe-r1 | D | session_01DgYSWnQ5MJS6ViDgFmBeGV | DONE FAIL 8 (3 BLOCKING) @41716164 (archived) | 16/11 19:48Z |
 | coop-name-mask review r1 (sonnet, SMALL) of 48a942b2 | review/coop-name-mask-r1 | D | session_01DgYSWmQ9JPMfwpdYSLALUt | RUNNING | 16/11 19:50Z |
 | kit-size phase 2 keeper (opus) | review/kit-size | main s22 | session_01UV1Szir6A61kJEUGvE9Guz | RUNNING | 16/11 19:50Z |
 | stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | RUNNING | 16/11 19:49Z |
@@ -380,3 +380,4 @@
 | NPC AGENT AG1 core + AG1b witness (opus; reports/npc-agent.md §5 + FOREMAN_C.md 18:00Z/19:28Z; base main caa73a87 with people-ledger + two-way-acts) | review/npc-agent | C | session_011xDdVQdAMNqfygpH41qGcQ | RUNNING | 16/11 20:08Z |
 | coop-one-world FIX (opus, BIG co-op): world computed on host only — worldOn() guard on every world loop, merge3 host-wins for W numbers, thIll/cm/men → W_KEYS, CI probe guard (reports/coop-one-world.md plan b,c,d,f; flip = night-final, contests = coop-contest-fix) | review/coop-one-world | main s23 | session_01UV1Szj18sSZbfw4DZWoqJh | RUNNING | 16/11 20:06Z |
 | FIG-PROPORTION REDO (sonnet art; owner 20:12Z REJECTED fig-proportion: heads too small vs body — man in the middle + both old women of the 3 examples): match approved head size/shoulder ratio exactly, 3 examples first → owner, then all 85+scenes | review/fig-proportion-art | C | session_011xDdVRzEtFchdNQKaMfih7 | RUNNING | 16/11 20:14Z |
+| suc-khoe fix (opus): r1 FAIL F2 F4 F5 BLOCKING + F6–F10, from review/suc-khoe-r1 41716164 | review/suc-khoe-fix | D | (opening) | RUNNING | 16/11 20:20Z |
