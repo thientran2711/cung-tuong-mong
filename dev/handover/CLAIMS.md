@@ -124,3 +124,4 @@
 | D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | (opening, s3) | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
 | reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
