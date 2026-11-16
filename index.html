@@ -11872,6 +11872,10 @@ html body #modal:not(.pcm) .dlg.kpanel>#mr{flex:0 0 auto}
 /* KIT §8.1 short notice: centred in the one-size frame (margin:auto 0 centres when it fits, top-aligned + scroll when it does not — nothing is clipped) */
 html body #modal:not(.pcm) .dlg.kpanel>#mb{display:flex;flex-direction:column}
 html body #modal:not(.pcm) .dlg.kpanel>#mb>*{flex:0 0 auto}
+/* KIT §8.1 SCROLL CHAIN (owner 16/11 "Không vuốt được"): only the panel's own scroller (#mb, the dawn .kpb, the person card .pc) holds the
+   swipe. A nested scroller (.kshg grid, .opts list, .pcl ...) hands the swipe on when it has nothing (more) to scroll: with
+   overscroll-behavior:contain the browser latches the finger to it and #mb never moves (the 10-piece Học Cầm grid was unreachable by touch). */
+html body #modal .dlg>#mb *,html body #modal .pc *,.dawn .dbox.kpanel>.kpb *{overscroll-behavior:auto}
 html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort{margin:auto 0;text-align:center;align-items:center}
 html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line);box-shadow:inset 0 -2px 0 #fffaf0,0 1px 0 #e6d3ac}
@@ -21825,7 +21829,7 @@ window.kitDlgFit=kitDlgFit;
 (function(){const st=document.createElement("style");st.id="kit-dlgscroll";st.textContent=`
 .modal .dlg.kdscroll{display:flex!important;flex-direction:column;overflow:hidden!important}
 .modal .dlg.kdscroll>*{flex:none}
-.modal .dlg.kdscroll>#mb{flex:1 1 auto!important;min-height:0;display:flex!important;flex-direction:column;overflow:hidden!important}
+.modal .dlg.kdscroll>#mb{flex:1 1 auto!important;min-height:0;display:flex!important;flex-direction:column;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain}
 .modal .dlg.kdscroll>#mb>*{flex:none}
 .modal .dlg.kdscroll>#mb>.opts{flex:1 1 auto!important;min-height:96px;overflow-y:auto!important;overscroll-behavior:contain;transition:box-shadow .2s}
 .modal .dlg.kdscroll>#mb>.opts{grid-template-rows:none!important;grid-auto-rows:max-content!important;align-content:start!important}
@@ -32316,7 +32320,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ce77d6b5ca04";window.CTM_BUILD=BUILD;
+const BUILD="65d2568e1b9e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

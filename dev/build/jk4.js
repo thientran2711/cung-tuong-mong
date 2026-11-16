@@ -264,7 +264,7 @@ window.kitDlgFit=kitDlgFit;
 (function(){const st=document.createElement("style");st.id="kit-dlgscroll";st.textContent=`
 .modal .dlg.kdscroll{display:flex!important;flex-direction:column;overflow:hidden!important}
 .modal .dlg.kdscroll>*{flex:none}
-.modal .dlg.kdscroll>#mb{flex:1 1 auto!important;min-height:0;display:flex!important;flex-direction:column;overflow:hidden!important}
+.modal .dlg.kdscroll>#mb{flex:1 1 auto!important;min-height:0;display:flex!important;flex-direction:column;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain}
 .modal .dlg.kdscroll>#mb>*{flex:none}
 .modal .dlg.kdscroll>#mb>.opts{flex:1 1 auto!important;min-height:96px;overflow-y:auto!important;overscroll-behavior:contain;transition:box-shadow .2s}
 .modal .dlg.kdscroll>#mb>.opts{grid-template-rows:none!important;grid-auto-rows:max-content!important;align-content:start!important}
