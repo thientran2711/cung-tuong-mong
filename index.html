@@ -29263,11 +29263,11 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
    Numbers: BAL.cyc. No kit part of its own: kitModal/kitFacts/kitChip/kitLine, act cards (talkOpts, deck), j75 lock pattern. ===== */
 (function(){
 if(typeof BAL==="object")BAL.cyc={
- read:[5,7,9,12,16,21,27,35],     /* bạc road "Xem sổ nguyệt sự" by rank (≈ 1/8 of BAL.pay[rank]); 1 khắc, sure */
- peekSuc:4,peekO:35,peekAf:1,peekTc:4, /* her road (2 khắc): Sức lost; odds = peekO + thiện cảm of the Tổng quản × peekAf + Tâm cơ / peekTc */
+ read:[10,14,18,24,31,41,54,70],  /* bạc road "Xem sổ nguyệt sự" by rank (≈ 1/4 of BAL.pay[rank]; review r1: 1/8 made the free road a dead pick); 1 khắc, sure */
+ peekSuc:4,peekO:50,peekAf:1,peekTc:4, /* her road (2 khắc): Sức lost; odds = peekO + thiện cảm of the Tổng quản × peekAf + Tâm cơ / peekTc */
  peekDanh:2,peekAfLoss:2,          /* caught peeking: Danh lost, Tổng quản thiện cảm lost */
  hide:[12,16,20,28,36,48,64,84],   /* bạc road "Sửa sổ nguyệt sự" (hide her hidden pregnancy) by rank (≈ 1/3 of pay); odds hideO */
- hideO:80,hideDuc:4,hideMaid:2,    /* her road: Đức lost; odds = 25 + ma ma's loyalty / hideMaid */
+ hideO:80,hideDuc:4,hideMaid:2,hideMaidO:35, /* her road: Đức lost; odds = hideMaidO + ma ma's loyalty / hideMaid (review r1: base 25 → 35, a loyal ma ma beats the bribe) */
  backDuc:6,backO:35,backTc:3,      /* "Khai lùi ngày nguyệt sự" (non-bạc twin of j22's 80-bạc bribe): Đức, odds base + Tâm cơ / backTc + loyalty/5 */
  backDanh:3,                       /* its failure: Danh lost (and the Tổng quản knows: S.ksKnows) */
  foeHost:50,npcRead:12,npcForge:4,forgeBac:30, /* NPC: hostility that makes a foe; monthly % she reads the book / forges a "không báo"; bạc it costs */
@@ -29362,7 +29362,7 @@ function cyDeck(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))ret
  /* hide a hidden pregnancy: the book keeps her reports */
  if(cyPreg(S)&&S.hidden&&!S.pregUnk&&c.hide!==S.pregWk&&S.preg<=3){const pw=S.pregWk;
   deck.unshift({n:"Sửa sổ nguyệt sự",t:"Đút lót Kính sự phòng ghi tháng nào ngươi cũng báo, để không ai đoán ra tin vui.",c:{bac:-B().hide[r]},o:od(B().hideO),w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.ksKnows=1}});
-  const o2=od(25+Math.round(loyal/B().hideMaid));
+  const o2=od(B().hideMaidO+Math.round(loyal/B().hideMaid));
   deck.unshift({n:"Dặn ma ma báo ngày giả",t:`Dặn ${S.maid&&S.maid.name?"ma ma "+S.maid.name:"ma ma trong cung"} cứ đúng kỳ lên Kính sự phòng báo như thường.`,c:{duc:-B().hideDuc},o:o2,w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: ma ma lỡ lời, cả cung biết ngươi có thai",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.hidden=false;try{ghenAll(6)}catch(e){}log("Ma ma lỡ lời ở Kính sự phòng: cả cung biết ngươi có thai.")}})}
  /* the non-bạc twin of j22 "Hối lộ Kính sự phòng sửa sổ": move her last reported cycle so the conception falls after a real night */
  if(S.preg&&S.pregMismatch&&!S.out&&(S.nightLog||[]).some(w=>S.pregWk-w>=2&&S.pregWk-w<=6)){const o3=od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5));
@@ -29417,7 +29417,7 @@ const rm0=rivalsMonth;rivalsMonth=function(){let ev=rm0.apply(this,arguments)||"
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="de8fa2eed2b4";window.CTM_BUILD=BUILD;
+const BUILD="c13dae5aa8b7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

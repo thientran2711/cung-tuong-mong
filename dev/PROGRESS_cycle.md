@@ -12,7 +12,7 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
   `S.nightWhy.rows[].reasons` gets `{k:"cyc"}`. Her cycle week starts with a `kitLine` notice + Sổ ghi line; while her pregnancy is
   not yet found (`pregUnk`) a missed cycle logs "Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy." (pregnancy hint).
 - **Sổ nguyệt sự** (Kính sự phòng, Tổng quản talk cards, after the j61 greeting like every other card):
-  bạc road "Xem sổ nguyệt sự" (Bạc `BAL.cyc.read[rank]`, 1 khắc, sure) ↔ "Hầu chuyện, xem lén sổ nguyệt sự" (2 khắc, Sức −4,
+  bạc road "Xem sổ nguyệt sự" (Bạc `BAL.cyc.read[rank]` ≈ 1/4 bổng, 1 khắc, sure) ↔ "Hầu chuyện, xem lén sổ nguyệt sự" (2 khắc, Sức −4,
   odds from Tổng quản thiện cảm + Tâm cơ; fail: Danh −2, thiện cảm −2). The book = `kitModal({kind:"intel"})` + `kitFacts`: each woman
   "tháng này / tháng trước: đã báo, mồng a–b | chưa tới kỳ (… tuần) | không báo (chip) | đã dứt kỳ" + nights this month.
   Reading: rival who stopped reporting → note + `S.cyKnow[id]=pregWk` → "Bỏ xạ hương" possible on that HIDDEN pregnancy;
@@ -20,7 +20,7 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
   option "Xin Kính sự phòng chép lại cho đúng" (rumour off; names the forger with chứng cứ +1, sure-ish when thiện cảm ≥ 20).
   A clever rival (Tâm cơ ≥ 60, 40 %) hides her own pregnancy behind false reports.
 - **Her forgeries** (deck cards): hide a found, hidden pregnancy: "Sửa sổ nguyệt sự" (Bạc `BAL.cyc.hide[rank]`, odds 80, fail: Tổng quản knows)
-  ↔ "Dặn ma ma báo ngày giả" (Đức −4, odds 25 + ma ma loyalty/2, fail: whole palace learns she is pregnant).
+  ↔ "Dặn ma ma báo ngày giả" (Đức −4, odds 35 + ma ma loyalty/2, fail: whole palace learns she is pregnant).
   Non-bạc twin of j22 "Hối lộ Kính sự phòng sửa sổ" (80 bạc): "Khai lùi ngày nguyệt sự" (Đức −6, odds Tâm cơ + loyalty; fail Danh −3 +
   `S.ksKnows`), only when a real night lies 2–6 weeks before conception.
 - **NPCs**: monthly (monthPay hook, per player, runs on host and guest): a foe (hostility ≥ 50) may read the book and guess her hidden
@@ -46,3 +46,10 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
 - coop-e2e: 59/59 passed (live Worker, room WPUH). The first run timed out at page.goto (load avg ~42 on 4 CPUs); the passing run used a
   180 s default timeout in a local copy of the test (not committed).
 - Merge note: assemble.py list conflicts trivially with review/thaiy (adds jthaiy.js) — keep both; jcycle.js stays last.
+
+## Review r1 (review/cycle-r1, on review/thaiy-r1 f7c61f829)
+- Merged onto thaiy-r1; assemble order: jthaiy.js right after jty.js, jcycle.js LAST; site rebuilt with build_site.sh.
+- Balance (bạc-equivalence rule 15/11 20:30Z): book read cost 1/8 → ~1/4 of bổng (BAL.cyc.read), peek odds base 35 → 50
+  (at 1/8 bổng + Khó odds the free road was never worth taking); "Dặn ma ma báo ngày giả" base 25 → 35 (BAL.cyc.hideMaidO),
+  so a loyal ma ma beats the 80-odds bribe while an average one does not.
+- thaiy now gets cycleLate() (its lateHint() hook was optional).
