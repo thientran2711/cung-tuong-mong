@@ -29,3 +29,4 @@
 | reign-road review | review/reign-road-r1 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | RUNNING | 16/11 05:27Z |
 | D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | RUNNING | 05:29Z 16/11 |
+| coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | (opening) | RUNNING | 16/11 05:31Z |
