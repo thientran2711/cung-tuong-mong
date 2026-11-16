@@ -37,6 +37,8 @@ function entTier(sc){const C=BAL.entry.cut;return sc>=C[1]?2:sc>=C[0]?1:0}
 function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise;let c=0;for(let i=-n;i<=n;i++)if(entTier(Math.round(b+i))>=t)c++;return Math.round(c*100/(2*n+1))}
 function entWord(p){const L=typeof LADW!=="undefined"?LADW:["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
  return p>=91?L[6]:p>=81?L[5]:p>=66?L[4]:p>=56?L[3]:p>=46?L[2]:p>=31?L[1]:L[0]}
+/* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
+function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest()))))}catch(e){return 4}}
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
 function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";

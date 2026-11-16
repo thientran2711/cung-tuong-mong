@@ -12,7 +12,8 @@ const dist={};for(const r of mg){const lv=+r.tier.split('/')[2];const k=`${r.kin
  await p.goto(URL);await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:60000});
  await p.evaluate(()=>{try{SLOT=3;document.getElementById('title').hidden=true}catch(e){}});
  const res=await p.evaluate(({N,dist})=>{const OR=['tt','dtq','muoi','cn','nc','thd','ch','td','cnv'];const out=[];
-  const D=(kind,lv,bot)=>{const a=dist[`${kind}|0|${bot}`],c=dist[`${kind}|2|${bot}`];if(!a||!c)return dist[`dan|${Math.min(2,lv)>=1?2:0}|${bot}`];const t=Math.min(1,lv/2);return a.map((x,i)=>x*(1-t)+c[i]*t)};
+  const D=(kind,lv,bot)=>{const L=Object.keys(dist).filter(k=>k.endsWith('|'+bot));const of=kd=>L.filter(k=>k.startsWith(kd+'|')).map(k=>[+k.split('|')[1],dist[k]]).sort((x,y)=>Math.abs(x[0]-lv)-Math.abs(y[0]-lv));
+   let M=of(kind);if(!M.length){/* kind not measured: pool of every measured kind at the nearest level */const P=L.map(k=>[+k.split('|')[1],dist[k]]).sort((x,y)=>Math.abs(x[0]-lv)-Math.abs(y[0]-lv));const l0=P[0][0];const Q=P.filter(x=>x[0]===l0).map(x=>x[1]);return Q[0].map((_,i)=>Q.reduce((a,q)=>a+q[i],0)/Q.length)}return M[0][1]};
   const tierP=(road,raw,art)=>{const n=BAL.entry.noise;const T=[0,0,0];for(let i=-n;i<=n;i++)T[entTier(Math.round(entBase(road,raw,art)+i))]+=1/(2*n+1);return T};
   for(const og of OR){const acc={skilled:[0,0,0],average:[0,0,0],random:[0,0,0]};const home={skilled:[0,0,0],average:[0,0,0],random:[0,0,0]};let lives=0,arts={},odds={};
    for(let L=0;L<N;L++){for(let i=0;i<400;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S.origin.k===og)break}if(S.origin.k!==og)continue;lives++;Q.length=0;
