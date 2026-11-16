@@ -117,3 +117,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C52 | review/balance-after-truth (owner s8: impact of evidence-truth + palace-start on Hoàng hậu / death rates) | RUNNING (opus) |
 | C53 | review/act-dedupe (owner s8: Hành sự repeats other tabs (vẽ/thơ/viết văn vs Tài nghệ) → one place per thing; whole-game audit) | RUNNING (sonnet) |
 | C54 | review/mortality (owner s8: age-based death/illness for all incl. Emperor/Thái hậu; poison/assassination; Emperor death → her fate) | RUNNING (opus) |
+| C55 | review/elder-staff (owner s8: real named elderly staff in offices; tutorial guide = real NPC via staffGuide()) | RUNNING (opus) |
