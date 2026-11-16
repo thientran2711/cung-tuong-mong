@@ -433,5 +433,5 @@ Object.assign(BAL.steal,{cost:{feign:{duc:0},road:{suc:0}},
  m:{feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-3,duc:-1},rel:10,hh:0,ghen:15},
     road:{b:12,w:{sac:.35,sung:.05},art:1.5,win:{sung:6,danh:2},lose:{sung:-5,danh:-2},rel:25,hh:4,ghen:30}},
  art:{fav:1,dis:.75,neu:0},
- keep:{base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.5},/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance an NPC holder tries it (night-final tunes) */
+ keep:{base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85},/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
  ea:{mat:5,r0:5,rMat:4,disc:35}});
