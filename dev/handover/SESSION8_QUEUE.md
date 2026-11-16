@@ -115,4 +115,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C50 | hc-portrait-revert-r1 PASS 0001eaf49 → merge-train-1 | MERGING |
 | C51 | review/reign-road (Emperor side story + faction road + NPC side quests, built on palace-start) | RUNNING (opus, session 8) |
 | C52 | review/balance-after-truth (owner s8: impact of evidence-truth + palace-start on Hoàng hậu / death rates) | RUNNING (opus) |
-| C53 | review/act-dedupe (owner s8: Hành sự repeats other tabs (vẽ/thơ/viết văn vs Tài nghệ) → one place per thing; whole-game audit) | QUEUED-NEXT (session 8, sonnet) |
+| C53 | review/act-dedupe (owner s8: Hành sự repeats other tabs (vẽ/thơ/viết văn vs Tài nghệ) → one place per thing; whole-game audit) | RUNNING (sonnet) |
