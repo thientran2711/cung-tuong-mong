@@ -16272,7 +16272,7 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   const lf=d>=70?1:d<25?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   /* (her Thái hậu / Hoàng hậu drift by Đức is written once, with numbers, in the turn-change line of jlogsync — log-sync r1) */
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm Lòng (+1). `:`Đức ${d}: kẻ hầu bớt Lòng (-1). `;
-  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=60&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-20,duc:3,danh:1}))}}
+  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=BAL.charity.bac*3&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-BAL.charity.bac,duc:BAL.charity.duc,danh:BAL.charity.danh}))}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);let e2="";try{if(!S.dead)e2=v85Month()}catch(e){}return typeof ev==="string"?ev+e2:ev}})();
 /* ---- the danger ladder card names the Đức term ---- */
@@ -38008,7 +38008,7 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.v
        cảm lạnh = BAL.wx.cold[sev] % → Phong hàn (j13 illness, weeks of lost Sức; starts "nặng" when her Sức < BAL.wx.weakSuc);
        trơn trượt = BAL.wx.slip[sev] % → Sức −BAL.wx.slipSuc; pregnant: BAL.wx.slipMisc % she loses the child.
      × BAL.wx.lowSuc when Sức < 40, × BAL.wx.veryLowSuc when Sức < 20, slip × BAL.wx.preg when pregnant;
-     × BAL.wx.gear when she owns a dù / áo tơi (cold) or giày đế cỏ (slip); × BAL.wx.help when a servant holds the umbrella
+     × BAL.wx.gear when she owns a dù / áo tơi (cold) or giày đế cỏ (slip) — gear lasts BAL.wx.gearMo months, then rebuy (Q14); × BAL.wx.help when a servant holds the umbrella
      (a maid/eunuch of hers with loyalty ≥ BAL.wx.helpLoyal); from rank BAL.wx.kieuRank she goes out by kiệu when she has the bạc
      (Bạc −BAL.wx.kieuBac per outing) × BAL.wx.kieu.
    - indoor acts and fine weather: nothing.
@@ -38016,11 +38016,11 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.v
    - when it happens to her: a kit result card at once. NPCs: each buổi an NPC is out of her palace in bad weather, the same odds
      in the garden (her own gear / kiệu / servants); what happens goes into the news. ================= */
 Object.assign(BAL,{wx:{cold:[0,3,5,8],slip:[0,4,5,6],lowSuc:1.5,veryLowSuc:2,preg:1.5,gear:.5,help:.7,helpLoyal:50,
- kieu:.15,kieuRank:3,kieuBac:6,slipSuc:12,slipMisc:25,weakSuc:30}});
+ kieu:.15,kieuRank:3,kieuBac:6,slipSuc:12,slipMisc:25,weakSuc:30,gearMo:3}});
 /* gear for the shop (low price tier) */
-IT.du={n:"Dù giấy dầu",kd:"Tạp vật",d:"Che mưa tuyết khi ra ngoài: ít cảm lạnh hơn",pr:15,rk:0,tg:["rv"],wxg:"cold"};
-IT.aotoi={n:"Áo tơi lá",kd:"Tạp vật",d:"Mặc ngoài khi mưa bão: ít cảm lạnh hơn",pr:12,rk:0,tg:["rv"],wxg:"cold"};
-IT.giaycoi={n:"Giày đế cỏ",kd:"Tạp vật",d:"Đế cỏ bện, đi đá trơn, băng giá ít ngã",pr:12,rk:0,tg:["rv"],wxg:"slip"};
+IT.du={n:"Dù giấy dầu",kd:"Tạp vật",d:`Che mưa tuyết khi ra ngoài: ít cảm lạnh hơn. Dùng được ${BAL.wx.gearMo} tháng thì sờn rách, phải mua cái mới`,pr:15,rk:0,tg:["rv"],wxg:"cold"};
+IT.aotoi={n:"Áo tơi lá",kd:"Tạp vật",d:`Mặc ngoài khi mưa bão: ít cảm lạnh hơn. Dùng được ${BAL.wx.gearMo} tháng thì rách nát, phải mua cái mới`,pr:12,rk:0,tg:["rv"],wxg:"cold"};
+IT.giaycoi={n:"Giày đế cỏ",kd:"Tạp vật",d:`Đế cỏ bện, đi đá trơn, băng giá ít ngã. Dùng được ${BAL.wx.gearMo} tháng thì mòn đế, phải mua đôi mới`,pr:12,rk:0,tg:["rv"],wxg:"slip"};
 try{for(const k of ["du","aotoi","giaycoi"])if(!SHOP_ALL.includes(k))SHOP_ALL.push(k)}catch(e){}
 /* paintings (gpt-2-6, item-art style): img/item-<k>.webp 256 + img/item512/item-<k>.webp 512; grade Thường */
 try{for(const k of ["du","aotoi","giaycoi"]){if(typeof ITEM_ART_G==="object")ITEM_ART_G[k]=0;if(typeof ITIMG==="object")ITIMG[k]=k}}catch(e){}
@@ -38028,7 +38028,23 @@ function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.n;if(f===3)return 3
 function wxKind(){const n=(S&&S.wx&&S.wx.n)||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
 function wxPal(p,k){if(!k)return"";if(k==="home")return palaceOf(p);if(k[0]==="r"){const v=rivals.find(x=>"r"+x.id===k);return v?palaceOf(v):k}return k}
 function wxOutdoor(p,a,b){if(!a||!b||a===b)return false;return wxPal(p,a)!==wxPal(p,b)}
-function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&IT[e.k]&&IT[e.k].wxg===g)}
+function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&IT[e.k]&&IT[e.k].wxg===g&&wxGearLeft(e)>0)}
+/* Q14 (owner via main s16 12:55Z): rain gear wears out — one season (BAL.wx.gearMo months), then she (or an NPC) must buy again; the kiệu
+   stays per trip. Clock = S.turn (months). Each gear entry carries e.wxe = the S.turn it wears out at, stamped when it is first seen
+   (bought, given, or an old save: a fresh season). Worn-out gear leaves the chest at the next week end; the item card shows "còn N tháng". */
+function wxGearLeft(e){if(!e||!IT[e.k]||!IT[e.k].wxg)return 0;const t=(S&&S.turn)|0;return e.wxe==null?BAL.wx.gearMo:Math.max(0,e.wxe-t)}
+function wxGearStamp(p){const t=(S&&S.turn)|0;for(const e of (p&&p.inv)||[])if(e&&IT[e.k]&&IT[e.k].wxg&&e.wxe==null)e.wxe=t+BAL.wx.gearMo}
+function wxGearSweep(p){if(!p||!p.inv)return;wxGearStamp(p);const t=(S&&S.turn)|0,gone=[];
+ p.inv=p.inv.filter(e=>{if(e&&IT[e.k]&&IT[e.k].wxg&&e.wxe!=null&&e.wxe<=t){gone.push(IT[e.k].n);return false}return true});
+ if(gone.length&&p===S)log(`<span class="r">${gone.join(", ")} dùng đã hết mùa, sờn rách nên bỏ đi.</span> Gặp mưa tuyết muốn che chắn thì phải mua cái mới.`)}
+function wxGearAll(){try{if(!S)return;wxGearSweep(S);const CW=window.COOPW;if(CW&&CW.on&&CW.seat!=="a")return;/* co-op: NPC world rolls stay on the host */
+ for(const v of (typeof rivals!=="undefined"&&rivals)||[])if(v&&v.inv)wxGearSweep(v)}catch(e){console.error("wx gear",e)}}
+(function(){const b0=buy;buy=function(p){const r=b0.apply(this,arguments);try{if(r)wxGearStamp(p)}catch(e){}return r}})();
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);wxGearAll();return r}})();
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S)wxGearStamp(S);for(const v of (typeof rivals!=="undefined"&&rivals)||[])wxGearStamp(v)}catch(e){}return r}})();
+/* the kit item card (KIT §70) already prints o.months as "còn N tháng" in Ghi chú: pass the gear's months left */
+(function(){if(typeof kitItemDetailRows!=="function")return;const k0=kitItemDetailRows;kitItemDetailRows=function(ref,o){try{const R=kitItemRef(ref);
+  if(R&&R.e&&R.it&&R.it.wxg&&!R.who&&(!o||o.months==null))return k0.call(this,R,Object.assign({},o||{},{months:Math.max(1,wxGearLeft(R.e))}))}catch(e){}return k0.apply(this,arguments)}})();
 function wxHelper(p){return (p===S?[S.maid].concat(S.staff||[]):[p.maid].concat(p.staff||[])).find(s=>s&&!s.spyFor&&(s.loyal||0)>=BAL.wx.helpLoyal)||null}
 function wxKieuOk(p){return rkOf(p)>=BAL.wx.kieuRank&&!p.out&&(p.bac||0)>=BAL.wx.kieuBac}
 /* the odds of one outdoor walk for p: {sev, cold, slip, why:[...], kieu} (percent, rounded) */
@@ -38074,7 +38090,7 @@ function wxAfter(){try{if(!S||S.dead)return;const R=wxRisk(S);if(R.kieu)ap(S,{ba
   for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined||W[v.id]!=="vuon")continue;
    const R=wxRisk(v);if(R.kieu)ap(v,{bac:-BAL.wx.kieuBac});const t=wxHit(v,R);if(t){news+=t;try{newsAdd(v,"wx",t.replace(/<[^>]+>/g,""),false)}catch(e){}}}
   if(news)try{log(news)}catch(e){}}catch(e){console.error("wx npc",e)}return r}})();
-window.wxRisk=wxRisk;window.wxSev=wxSev;window.wxOutAct=wxOutAct;
+window.wxRisk=wxRisk;window.wxSev=wxSev;window.wxGearLeft=wxGearLeft;window.wxGearAll=wxGearAll;window.wxOutAct=wxOutAct;
 /* ================= jbuoi: BUỔI TRANSITION (KIT §74, owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) =================
    Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain, j11 / j18 / j93) with a painted time-of-day transition:
    the scene (already holding the next buổi's light, §56) is veiled by a tinted ink wash that thins out; a small painted sky band slides the sun / moon
@@ -42531,7 +42547,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c9e3825b7512";window.CTM_BUILD=BUILD;
+const BUILD="70ed3df8145d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
