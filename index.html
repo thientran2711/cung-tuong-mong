@@ -15943,6 +15943,8 @@ let EVART=null;
 (function(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/EVENTS.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.categories)EVART=j}).catch(()=>{})}catch(e){}})();
 function evArtCat(id){const A=EVART;if(!A||!id)return null;id=String(id);const E=A.events||{};
  if(E[id])return E[id];
+ /* review/ev-art-fit: "cat:<category>" names a picture GROUP directly (jevfit.js KIT_EVFIT rules) */
+ if(id.slice(0,4)==="cat:"){const c=id.slice(4);return A.categories&&A.categories[c]?c:null}
  const ns=id.indexOf(":");if(ns>0&&E[id.slice(0,ns)+":*"])return E[id.slice(0,ns)+":*"];
  if(ns<0){for(const k in E){const i=k.indexOf(":");if(i>0&&k.slice(i+1)===id)return E[k]}}
  return null}
@@ -18364,11 +18366,11 @@ try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định t
    item.pid (+ pp.id / pp.k) → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · else the j89 default category. A panel about a person
    (who / subject) keeps the person's portrait (section 8). The frame is kitArtFrame (same frame as act art); the label = the category title. ---------- */
 /* the buổi news card (owner 11/15: "Triều chính" does not fit palace gossip): the picture of its MAIN item = the first sentence that maps
-   to a scene by the week book's table (j87 KBK_EVRE: thị tẩm, có thai, tin đồn, ốm, ban thưởng…); none → people visiting (kbkEvId default) */
+   to a scene by the week book's table (j87 KBK_EVRE: thị tẩm, có thai, tin đồn, ốm, ban thưởng…); none → no picture of its own (review/ev-art-fit: never the "people visiting" default) */
 function kitNewsArtId(m){try{const t=String(m.h||"").replace(/<p class="past">[\s\S]*?<\/p>/,"");const plain=typeof kpPlain==="function"?kpPlain(t):t.replace(/<[^>]+>/g," ");
  if(typeof kbkEvId!=="function"||typeof KBK_EVRE==="undefined")return "news:"+(m.t||"");
  for(const s0 of plain.split(kRx("(?<=[.!?])\\s+",""))){const s=s0.replace(/^\s*Tai mắt (kể|thấy):\s*/i,"");if(!s.trim())continue;if(/thẻ bài[^.]*lật/i.test(s))return "sys:thi-tam";for(const [re,id] of KBK_EVRE)if(re.test(s))return id}
- return kbkEvId("",null)}catch(e){return "news:"+(m.t||"")}}
+ return "cat:tin-cung"  /* review/ev-art-fit: no "people visiting" default (kbkEvId) — no match → the palace-news group (ev-news-tin-trong-cung) */}catch(e){return "news:"+(m.t||"")}}
 function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src="",lab="";const pp=m.pp||{};const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
  if(m.art)src=m.art;else if(m.stArt&&typeof stArtOf==="function")src=stArtOf.apply(null,m.stArt);
  if(!src){const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?kitNewsArtId(m):"");
@@ -18377,7 +18379,7 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
   if(id&&(typeof evArtCat!=="function"||evArtCat(id))){src=evArtOf(id,salt);lab=typeof evArtTitle==="function"?evArtTitle(id):""}}
  if(!src&&(kitIsEventChoice(m)||m.kind==="news"||/Tin trong cung/.test(m.t||""))){try{src=typeof evArt==="function"?evArt():""}catch(e){src=""}}  /* no j89 default (Triều chính) as a stand-in: no room picture → no picture */return src?{src,lab:lab||""}:null}catch(e){return null}}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
-  const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId;if(!want||body.querySelector(":scope > .kpsubj"))return r;
+  const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId||kitEvFitWant(m,kind);if(!want||body.querySelector(":scope > .kpsubj"))return r;
   const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,{shape:"tall"})}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
 /* the result card right after an event choice shows the same picture, small, left of the rows */
 (function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitSceneArt(a.src,a.lab,{shape:"tall",cap:false})}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}}catch(e){}return r}})();
@@ -20912,7 +20914,151 @@ function stipGi(gi,who){if(!gi)return"";const [k,fr]=Array.isArray(gi)?gi:[gi,"s
 const STIP_FPRIZE={"newyear:mua":"gamto","nguyentieu:co":"trahop","phoenix:ban":"cungbac"};
 (function(){for(const f of ["cRun7","cFin7"]){if(typeof window[f]!=="function")continue;const o=window[f];window[f]=function(k,kind){let w0=0;try{w0=j7s().win||0}catch(e){}const r=o.apply(this,arguments);
   try{const it=STIP_FPRIZE[k+":"+kind];if(it&&(j7s().win||0)>w0){const n=goodsGive(S,it,{from:"emp",sub:"Phần thưởng hội thi"});if(n)log(`Phần thưởng: ${n} vào rương.`)}}catch(e){console.error(e)}return r}}})();
-window.stipSkim=stipSkim;window.stipGoods=stipGoods;window.stipShow=stipShow;
+window.stipSkim=stipSkim;window.stipGoods=stipGoods;window.stipShow=stipShow;/* ================= jevfit: EVENT PICTURE BY MEANING (owner 15/11 "Mấy cái ảnh minh họa không liên quan gì cả", review/ev-art-fit) =================
+   RULE (KIT §28.10c): no generic default picture anywhere. A dialog that has no picture of its own (own banner img/ev-<key>.webp, its own
+   EVENTS.json id, a story beat, a festival band) gets the picture of its MEANING GROUP (owner 15/11: one picture per group, shared by every
+   event of that meaning) — never "whoever is on the stage" (the old jk4 default: any visitor → "Có người đến chơi" gift box, the Emperor →
+   "Hoàng thượng ngự giá", Thái hậu → "Thỉnh an"). Nothing fits → the §59 placeholder (jph), listed in CTM_MISSING_PICS so it gets painted.
+   KIT_EVFIT rows: [rule, group, title RegExp | null, body RegExp | null]; the body is the first two sentences of the dialog text
+   (never the option hints). First row whose title AND body tests pass wins. group = an EVENTS.json category (https://ctm-img.victoria-tntt.workers.dev/img/ev-<group>[-n].webp);
+   kitEvFit(m) → {id:"cat:<group>", rule} | {art:{src,lab}, rule} (a group given as a picture, or a function of the dialog) | null
+   (j89 evArtCat resolves "cat:<group>").
+   Groups added by this branch (EVENTS.json): mat-bao (warning / whispered tip-off), am-muu (a plot being hatched), bac-tien (silver, loans,
+   allowance), canh-phong (guarding her palace), hao-huu (co-op friend), nguy-gia (rescuing the Emperor), tin-cung (palace news: ev-news-tin-trong-cung), tham-hoi (a consort comes to chat: ev-khach-den), qua-tang (gifts, rewards: ev-khach-den-2, formerly mixed into khach-den).
+   Test: node dev/test/ev-art-fit.js <build url> <out.json> → every dialog, its picture, group and rule. ===================================== */
+const KIT_EVFIT=[
+ /* warnings, tip-offs */
+ /* remarks on her dress / face (the toilette pictures, jtoil): who speaks × praise or blame */
+ ["dress-remark",m=>{const {b}=kitEvFitText(m);const who=/^(Thái hậu|Ai gia)/.test(b)?"th":/^Hoàng hậu/.test(b)?"hh":/^(Hoàng thượng|Ngài)/.test(b)?"emp":"rival";
+   const bad=/chê|vượt phẩm|giản dị quá|chẳng ra dáng|quê|lòe loẹt|sai phẩm|mặt mộc|cười khẽ|mỉa/i.test(b);
+   const k=who==="emp"?(bad?"emp-dislike":"emp-like"):who==="rival"?(bad?"rival-tease":"rival-praise"):who+(bad?"-scold":"-praise");
+   return{src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-${k}.webp`,lab:bad?"Lời chê y phục":"Lời khen y phục"}},/^(Lời nhận xét|Thái hậu chê dung nhan|Hoàng hậu chê dung nhan)$/i,null],
+ ["dress-contest",{src:"https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-crowd-jealous.webp",lab:"Hội phối đồ"},/^Hội phối đồ ·/i,null],
+ ["dress-contest-call","hh-viec",/^Hội phối đồ: báo đề/i,null],
+ ["guard","canh-phong",/^Phòng bị$/i,null],
+ /* Lập công (j71m): each task by its own meaning */
+ ["merit-rite","te-le",/^Lập công · (Lễ|Chép kinh)/i,null],
+ ["merit-graft","tham-quan",/^Lập công · Bắt kẻ tham ô/i,null],
+ ["merit-books","bac-tien",/^Lập công · Soát sổ sách/i,null],
+ ["merit-relief","lu-lut",/^Lập công · Cứu tế/i,null],
+ ["merit-plague","dich-benh",/^Lập công · Dịch/i,null],
+ ["merit-peace","tranh-sung",/^Lập công · Hòa giải/i,null],
+ ["merit-nurse","benh-tat",/^Lập công · (Hầu bệnh|Trông con bệnh)/i,null],
+ ["merit-fire","hoa-hoan",/^Lập công · Hỏa hoạn/i,null],
+ ["merit-talent","trieu-chinh",/^Lập công · Tiến cử/i,null],
+ ["merit-envoy","su-than",/^Lập công · Tiếp sứ thần/i,null],
+ ["merit-plot","tai-mat",/^Lập công · Vạch mưu/i,null],
+ ["merit-rescue","nguy-gia",/^Lập công · Cứu giá/i,null],
+ /* festivals announced ahead (jts) */
+ ["fest-soon-ny","fest-newyear",/^Sắp tới: Yến tiệc đầu xuân/i,null],
+ ["fest-soon-tt","fest-thattich",/^Sắp tới: Thi tài ngày Thất tịch/i,null],
+ /* her clothes */
+ ["underwear-out",{src:"https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-rival-tease.webp",lab:"Y phục chưa chỉnh tề"},/^Ra ngoài khi mặc trung y/i,null],
+ ["clothes-snatched","tai-mat",/^Bị giật y phục/i,null],
+ ["omen","chuyen-la",/^(Điềm báo|Điềm lạ)/i,null],
+ /* side quests / chapters with no picture of their own: by what they ask */
+ ["q-money","bac-tien",/Mượn tiền|gửi bạc|túng thiếu/i,null],
+ ["q-hh","hh-viec",/Lời Hoàng hậu|Hoàng hậu giao/i,null],
+ ["q-rescue","hinh-phat",/^Cứu .* khỏi/i,null],
+ ["q-memorial","trieu-chinh",/sớ|triều đình|Lục bộ|thượng thư/i,null],
+ ["q-leak","tai-mat",/làm lọt|tin của|dò la|nghe ngóng/i,null],
+ ["dread","am-muu",/^Hung tin/i,null],
+ ["rank-review","tan-phong",/^Xét phẩm/i,null],
+ ["accused-theft","vu-oan",/^Bị tố ăn cắp/i,null],
+ /* co-op: the friend in the palace */
+ ["coop-friend","hao-huu",/^Hảo hữu (vào cung|tìm đến|nhận lời|từ chối)/i,null],
+ ["coop-harm","am-muu",/^(Hảo hữu ra tay|Biến cố)$/i,null],
+ ["coop-week","tin-cung",/^Tuần mới$/i,null],
+ ["warn","mat-bao",/^(Lời cảnh báo|Tai mắt báo tin|Mật báo)/i,null],
+ /* the j70 plot family: the kind of harm decides the picture */
+ ["plot-poison","dau-doc",/^(Mưu hại|Sau vụ mưu hại|Thời cơ ra tay|Mưu đã xong|Mưu bị lộ)$/i,/độc|thuốc|trà|canh|bánh/i],
+ ["plot-musk","hai-thai",/^(Mưu hại|Sau vụ mưu hại|Thời cơ ra tay|Mưu đã xong|Mưu bị lộ)$/i,/xạ hương|thai/i],
+ ["plot-frame","vu-oan",/^(Mưu hại|Sau vụ mưu hại|Thời cơ ra tay|Mưu đã xong|Mưu bị lộ)$/i,/vu|bùa|hình nhân|tố/i],
+ ["plot-caught","hinh-phat",/^Mưu bị lộ$/i,null],
+ ["plot","am-muu",/^(Mưu hại|Sau vụ mưu hại|Thời cơ ra tay|Mưu đã xong)$/i,null],
+ ["loyal-servant","cung-nhan",/^Kẻ hầu trung thành$/i,null],
+ ["spy-send","tai-mat",/^Sai .* đi dò la|dò la|nghe lén/i,null],
+ /* "Có người đến" (j24 approaches): what she came FOR */
+ ["visit-mock","tranh-sung",/^Có người đến$/i,/mỉa|chê|cười nhạo|khiêu khích|buông lời|xỉa xói|lườm/i],
+ ["visit-loan","bac-tien",/^Có người đến$/i,/mượn|vay/i],
+ ["visit-ally","mat-uoc",/^Có người đến$/i,/kết làm chị em|liên thủ|kết minh|cùng nhau đứng vững/i],
+ ["visit-gift","qua-tang",/^Có người đến$/i,/tặng|biếu|mang sang|gửi sang/i],
+ ["visit","tham-hoi",/^Có người đến$/i,null],
+ ["faction","mat-uoc",/^Lời mời vào phe$/i,null],
+ /* the Emperor, Thái hậu, Hoàng hậu calling */
+ ["emp-visit","hoang-de-dem",/^(Hoàng thượng đến|Hoàng thượng triệu)/i,null],
+ ["th-call","thinh-an",/^Thái hậu triệu/i,null],
+ ["share-favour","tranh-sung",/^Mưa móc đều khắp$/i,null],
+ /* rewards, gifts */
+ ["reward","qua-tang",/^(Thánh thượng ban thưởng|Thái hậu ban thưởng|Hoàng hậu ban thưởng|Đồ ngự tứ|Ngự tứ|Chủ thưởng|Được ban thưởng|Quà tặng)$/i,null],
+ /* money */
+ ["stipend","bac-tien",/Bổng lộc|^Hàng chợ đen$/i,null],
+ /* servants, maid road */
+ ["servant","cung-nhan",/^(Kẻ hầu xin|Việc của kẻ hầu|Kẻ hầu)$/i,null],
+ ["maid-road","cung-nu",/^(Tin về chủ nhân|Đổi chủ)$/i,null],
+ /* health, poison */
+ ["doctor","benh-tat",/^Thái y bắt mạch$/i,null],
+ ["poison","dau-doc",/^(Trúng độc|Phát hiện có độc)$/i,null],
+ /* guilt, punishment, pardon */
+ ["mistress-order","am-muu",/^Lệnh của /i,null],
+ ["mistress-scold","hinh-phat",/ quở mắng$|^Tân Giả khố$/i,null],
+ ["selection","tuyen-tu",/^Tuyển tú$/i,null],
+ ["old-colleague","cung-nhan",/Đồng liêu cũ/i,null],
+ ["punish","hinh-phat",/^(Tội bất kính|Mang tội ăn trộm|Nhận lỗi|Tự thú)$/i,null],
+ ["pardon","dai-xa",/^Minh oan$/i,null],
+ ["mourning","quoc-tang",/^Quốc tang$/i,null],
+ /* rank, promotion, seat contest */
+ ["contest-art","tai-nghe",/^Vòng 1: Tài nghệ|dùng vật liệu gì\?$|^Hội phối đồ/i,null],
+ ["promotion","tan-phong",/^(Thăng bậc|Lễ tấn phong|Tranh ghế|Kết quả tranh ghế|Vòng 2: Đức hạnh|Ban cung)/i,null],
+ /* the bedchamber office (pictures owned by review/night-end-r1: the existing "ngự giá" group only) */
+ ["night-stolen","tranh-sung",/^Kính sự phòng$/i,/báo đau|giành|cướp|sai người báo/i],
+ ["night-office","hoang-de-dem",/^(Kính sự phòng|Thái giám Kính sự phòng kể)$/i,null],
+ ["night-office-b","hoang-de-dem",null,/Kính sự phòng/],
+ ["home-news","thu-nha",/^(Tin nhà|Thư nhà)/i,null],
+ /* any other title: the meaning of its first sentences */
+ ["b-warn","mat-bao",null,/thì thầm|khẽ thưa|mật báo|dò hỏi giờ giấc|có ý (hại|không lành)/i],
+ ["b-poison","dau-doc",null,/hạ độc|bỏ độc|thuốc độc|trúng độc|đầu độc/i],
+ ["b-musk","hai-thai",null,/xạ hương|sảy thai|hại thai/i],
+ ["b-frame","vu-oan",null,/vu oan|vu cáo|vu khống|bùa|hình nhân/i],
+ ["b-bribe","hoi-lo",null,/hối lộ|đút lót|uy hiếp|tống tiền/i],
+ ["b-plot","am-muu",null,/âm mưu|mưu hại|hãm hại|lập mưu|bày mưu/i],
+ ["b-humiliate","tranh-sung",null,/quỳ dâng trà|bắt ngươi quỳ|làm nhục|sỉ nhục/i],
+ ["b-oldlove","tu-tinh",null,/thanh mai|trúc mã|người cũ|ngày từ biệt/i],
+ ["b-origin","thu-nha",null,/thân thế|miếng ngọc cũ|cha mẹ ruột/i],
+ ["b-rumor","tin-don",null,/tin đồn|đồn rằng|lời đồn|đồn đại/i],
+ ["b-loan","bac-tien",null,/mượn .{0,12}bạc|vay .{0,12}bạc|bổng lộc|cắt xén/i],
+ ["b-mock","tranh-sung",null,/mỉa mai|khiêu khích|cười nhạo|chèn ép|ghen tức/i],
+ ["b-gift","qua-tang",null,/ban thưởng|ban cho ngươi|mang sang tặng|gửi tặng|biếu ngươi/i],
+ ["b-doctor","benh-tat",null,/thái y|bắt mạch|ốm nặng|phát sốt/i]
+];
+function kitEvFitText(m){const P=s=>String(s||"").replace(/<p class="past">[\s\S]*?<\/p>/g," ").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+ return {t:P(m&&(m.t||m.kit&&m.kit.title)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(/(?<=[.!?…”])\s+/).slice(0,2).join(" ")}}
+function kitEvFit(m){try{if(!m||typeof evArtCat!=="function")return null;const {t,b}=kitEvFitText(m);
+ for(const [rule,g,tr,br] of KIT_EVFIT){if(tr&&!tr.test(t))continue;if(br&&!br.test(b))continue;if(!tr&&!br)continue;
+  const G=typeof g==="function"?g(m):g;if(G&&typeof G==="object"&&G.src)return{art:G,rule};if(G&&evArtCat("cat:"+G))return{id:"cat:"+G,rule}}
+ return null}catch(e){return null}}
+window.kitEvFit=kitEvFit;window.KIT_EVFIT=KIT_EVFIT;
+const KIT_EVFIT_WHY=new WeakMap();
+/* owner 15/11 "Hình minh họa đâu? Khung sự kiện đâu?" (BÁO "Hảo hữu vào cung": rows + a tiny portrait, no picture): every BÁO / TIN /
+   KẾT QUẢ / VIỆC / BAN THƯỞNG / MẬT BÁO / CẢNH GIÁC / CHỨNG CỨ pop-up gets the event picture too (jk2b showModal), not only choices.
+   Not: rule / info (ĐIỀU) / person cards, look-up, shop and pick lists, the identity card, night panels (review/night-end), Nhập cung (review/newgame-ui). */
+const KIT_EVFIT_KINDS=/^(notice|news|result|choice|reward|intel|threat|evidence)$/;
+function kitEvFitWant(m,kind){try{if(!m||!KIT_EVFIT_KINDS.test(kind||""))return false;if(m.kit&&(m.kit.look||m.kit.shop||m.kit.pick))return false;
+ if(m.shop)return false;if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;const T=kitEvFitText(m);if(/^Nhập cung/.test(T.t)||/^Không vào được lúc này/.test(T.b))return false;  /* a closed-door notice belongs to its place (jplace) */return true}catch(e){return false}}
+window.kitEvFitWant=kitEvFitWant;
+/* titles whose meaning group beats a shared own banner (the j70 "threat" banner ev-j70thr shows a court audience, not a whispered warning) */
+const KIT_EVFIT_OVER=/^(Lời cảnh báo|Tai mắt báo tin|Mật báo)$/;
+/* a panel that already shows a PORTRAIT subject but nobody on the stage (MẬT BÁO "Tai mắt báo tin" with the unknown-man frame, a BÁO with a
+   small portrait): the event picture goes in the wide band on top (the same .kdlgart band as headArt / kitEventStage), never skipped */
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);try{
+ const M=document.getElementById("modal"),mb=document.getElementById("mb"),dlg=M&&M.querySelector(".dlg.kpanel");if(!m||!dlg||!mb||M.hidden)return r;
+ if(mb.querySelector(":scope > .kdlgart")||mb.querySelector(".kpsubj.kpev")||mb.querySelector(".kpid"))return r;
+ const kind=dlg.dataset.kind||"";if(!kitEvFitWant(m,kind)||!mb.querySelector(".kpsubj"))return r;
+ if(typeof kitStagePeople==="function"&&kitStagePeople(m).length)return r;  /* kitEventStage (jk4) lays the band itself */
+ const a=typeof kitEvArt==="function"?kitEvArt(Object.assign({kind},m)):null;if(!a||!a.src)return r;
+ const d=document.createElement("div");d.className="kdlgart kesband";
+ d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},typeof kitEvCat==="function"?kitEvCat(m,a):{},a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}catch(e){console.error("kitEvFit band",e)}return r}})();
+
 /* ================= jk4: KIT 4 (kit owner #3, owner 11/14) — ONE STAT CELL + ONE STAT ROW (KIT 32) =================
    Owner: "the shared kit — why do workers draw their own?" Every place a number stat (Sắc · Tài · Tâm cơ · Đức · Bạc · Sức · Sủng · Danh …)
    is shown as a cell uses kitStatCell; every row of them is a kitStatRow. A cell = TWO lines with fixed line boxes:
@@ -21126,7 +21272,7 @@ window.kitEsFit=kitEsFit;
 
 /* KIT 32.3 event / news pictures framed by EVENT TYPE: the j89 category of the picture → a kit category frame (colour + corner ornament,
    the same frames as act pictures, 31.17). */
-const KIT_EVCAT={"trieu-chinh":"trieu-chinh","tham-quan":"trieu-chinh","duoc-mua":"trieu-chinh","lu-lut":"trieu-chinh","han-han":"trieu-chinh","bien-ai":"trieu-chinh","thang-tran":"trieu-chinh","su-than":"trieu-chinh","hoa-than":"trieu-chinh","quoc-tang":"trieu-chinh","dai-xa":"trieu-chinh","hoang-de-vui":"sung-ai","hoang-de-dem":"sung-ai","vi-hanh":"sung-ai","di-san":"sung-ai","tu-tinh":"sung-ai","mat-uoc":"sung-ai","hoang-de-gian":"trung-phat","hinh-phat":"trung-phat","lanh-cung":"trung-phat","hoa-hoan":"trung-phat","le-xuan":"le-nghi","le-ha":"le-nghi","le-thu":"le-nghi","le-dong":"le-nghi","te-le":"le-nghi","yen-tiec":"le-nghi","tan-phong":"le-nghi","tuyen-tu":"le-nghi","thinh-an":"le-nghi","tang-le":"le-nghi","hh-viec":"le-nghi","sinh-no":"cham-con","con-tre":"cham-con","khach-den":"giao-thiep","thu-nha":"giao-thiep","chuyen-la":"giao-thiep","cung-nhan":"hau-ha","cung-nu":"hau-ha","tai-nghe":"hoc-tap","thoi-tiet":"nghi-ngoi","dieu-troi":"nghi-ngoi","dieu-lanh":"nghi-ngoi","benh-tat":"nghi-ngoi","dich-benh":"nghi-ngoi","tranh-sung":"muu-ke","tin-don":"muu-ke","tai-mat":"muu-ke","vu-oan":"muu-ke","hoi-lo":"muu-ke","dau-doc":"hai-nguoi","hai-thai":"hai-nguoi"};
+const KIT_EVCAT={"trieu-chinh":"trieu-chinh","tham-quan":"trieu-chinh","duoc-mua":"trieu-chinh","lu-lut":"trieu-chinh","han-han":"trieu-chinh","bien-ai":"trieu-chinh","thang-tran":"trieu-chinh","su-than":"trieu-chinh","hoa-than":"trieu-chinh","quoc-tang":"trieu-chinh","dai-xa":"trieu-chinh","hoang-de-vui":"sung-ai","hoang-de-dem":"sung-ai","vi-hanh":"sung-ai","di-san":"sung-ai","tu-tinh":"sung-ai","mat-uoc":"sung-ai","hoang-de-gian":"trung-phat","hinh-phat":"trung-phat","lanh-cung":"trung-phat","hoa-hoan":"trung-phat","le-xuan":"le-nghi","le-ha":"le-nghi","le-thu":"le-nghi","le-dong":"le-nghi","te-le":"le-nghi","yen-tiec":"le-nghi","tan-phong":"le-nghi","tuyen-tu":"le-nghi","thinh-an":"le-nghi","tang-le":"le-nghi","hh-viec":"le-nghi","sinh-no":"cham-con","con-tre":"cham-con","khach-den":"giao-thiep","thu-nha":"giao-thiep","chuyen-la":"giao-thiep","cung-nhan":"hau-ha","cung-nu":"hau-ha","tai-nghe":"hoc-tap","thoi-tiet":"nghi-ngoi","dieu-troi":"nghi-ngoi","dieu-lanh":"nghi-ngoi","benh-tat":"nghi-ngoi","dich-benh":"nghi-ngoi","tranh-sung":"muu-ke","tin-don":"muu-ke","tai-mat":"muu-ke","vu-oan":"muu-ke","hoi-lo":"muu-ke","dau-doc":"hai-nguoi","hai-thai":"hai-nguoi",/* review/ev-art-fit groups */"mat-bao":"muu-ke","am-muu":"muu-ke","bac-tien":"giao-thiep","canh-phong":"hau-ha","hao-huu":"giao-thiep","tham-hoi":"giao-thiep","qua-tang":"giao-thiep","tin-cung":"giao-thiep","nguy-gia":"sung-ai"};
 function kitEvCat(m,a){try{const src=String(a&&a.src||"");const mm=/\/ev-([a-z-]+?)(?:-\d+)?\.webp/.exec(src);let k=mm&&KIT_EVCAT[mm[1]];
   if(!k&&typeof evArtCat==="function"){const c=evArtCat(m.evId||m.pid||"");if(c)k=KIT_EVCAT[c]}
   if(!k)k="giao-thiep";const C=typeof KIT_CAT==="object"&&KIT_CAT[k];return {col:C?C[1]:"#8a6a3a",cls:"kcat-"+k}}catch(e){return {}}}
@@ -21362,19 +21508,24 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
    takes the festival's own band (https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-<k>-b.webp, the one the festival day already shows, j71) — not the Hoàng thượng / Thái hậu picture */
   if(m&&!m.art&&!m.stArt&&!(m.evId&&typeof evArtCat==="function"&&evArtCat(m.evId))){const f=kitFestKey(m);if(f&&typeof evArtCat==="function"&&!evArtCat("fest:"+f))return{src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${f}-b.webp`,lab:String(FEST[f].name||"").replace(/\s*\([^)]*\)\s*$/,"")}}
   if(m&&!m.evId&&!m.art&&!m.stArt){const f=kitFestKey(m);if(f&&typeof evArtCat==="function"&&evArtCat("fest:"+f))m.evId="fest:"+f;
-   /* a j24 approach (Có người đến, Thái hậu triệu …) is its own kind even when a later layer would give the room picture */
-   else if(typeof evArtCat==="function"&&typeof kpSlug==="function"&&kitStagePeople(m).length){const sl=kpSlug(String(m.t||"").replace(/<[^>]+>/g," "));if(sl&&evArtCat("j24:"+sl))m.evId="j24:"+sl;
-    /* no event kind of its own (e.g. a j68 "Hoàng thượng" / "Tin đồn" event): e68:<id>, else the meaning of its TITLE (week-book table), else who it is (Hoàng thượng / Thái hậu / visitor) — not the room */
-    else{const pp=m.pp||{};const own=m.pid?m.pid+(pp.id||pp.k?":"+(pp.id||pp.k):""):"";if((!own||!evArtCat(own))&&typeof KBK_EVRE!=="undefined"){const txt=String(m.t||"").replace(/<[^>]+>/g," ");/* the title only: the body matched loosely (a tea chat read as "poison") */
-     const e68=/^e68/.test(m.pid||"")?"e68:"+m.pid.slice(3):"";const hit=KBK_EVRE.find(([re])=>re.test(txt));
-     if(e68&&evArtCat(e68))m.evId=e68;else if(hit&&evArtCat(hit[1]))m.evId=hit[1];
-     else{const P=kitStagePeople(m);const p=P[0];if(p&&p!==S)m.evId=S&&p===S.emp?"j24:hoang-thuong-den":S&&p===S.thO?"j24:thai-hau-trieu":"j24:co-nguoi-den"}}}}}}catch(e){}
+   /* review/ev-art-fit (owner 15/11 "ảnh minh họa không liên quan"): no "who is on the stage" default any more (visitor → gift box,
+      Emperor → ngự giá, Thái hậu → thỉnh an). Order: its own id (pid / e68) → its MEANING (jevfit kitEvFit: title + first sentences) →
+      a j24 approach title → the week-book table on the title → nothing (jph placeholder, listed as missing). */
+   else if(typeof evArtCat==="function"){const pp=m.pp||{};const own=m.pid?m.pid+(pp.id||pp.k?":"+(pp.id||pp.k):""):"";const e68=/^e68/.test(m.pid||"")?"e68:"+m.pid.slice(3):"";
+    if(own&&evArtCat(own)){}else if(e68&&evArtCat(e68))m.evId=e68;
+    else{const fit=typeof kitEvFit==="function"?kitEvFit(m):null;
+     if(fit&&fit.art){window.__evFitWhy="fit:"+fit.rule;return{src:fit.art.src,lab:fit.art.lab||""}}
+     if(fit){m.evId=fit.id;KIT_EVFIT_WHY.set(m,fit.rule)}
+     else if(typeof kpSlug==="function"&&kitStagePeople(m).length){const sl=kpSlug(String(m.t||"").replace(/<[^>]+>/g," "));if(sl&&evArtCat("j24:"+sl))m.evId="j24:"+sl;
+      else if(typeof KBK_EVRE!=="undefined"){const txt=String(m.t||"").replace(/<[^>]+>/g," ").replace(/^\s*(Chính tuyến|Phụ tuyến) · /,"");/* "Phụ tuyến" read as "yến" (feast) *//* the title only: the body matched loosely (a tea chat read as "poison") */
+       const hit=KBK_EVRE.find(([re])=>re.test(txt));if(hit&&evArtCat(hit[1]))m.evId=hit[1]}}}}}
+  try{if(m&&/^cat:/.test(m.evId||""))window.__evFitWhy="fit:"+(KIT_EVFIT_WHY.get(m)||"saved")}catch(e){}}catch(e){}
   const r=a0.apply(this,arguments);if(r||!window.__kesArt||!m||window.KIT_EVENT_DP===false)return r;
   try{if(typeof evArtCat!=="function"||typeof evArtOf!=="function")return r;const P=kitStagePeople(m);if(!P.length)return r;
    const salt=S?(S.year*100+S.month*3+(S.tuan||0)):0;const t=String(m.t||"").replace(/<[^>]+>/g," ");const slug=typeof kpSlug==="function"?kpSlug(t):"";
-   let id=slug&&evArtCat("j24:"+slug)?"j24:"+slug:"";
+   let id="";{const fit=typeof kitEvFit==="function"?kitEvFit(m):null;if(fit){window.__evFitWhy="fit:"+fit.rule;if(fit.art)return{src:fit.art.src,lab:fit.art.lab||""};id=fit.id}}if(!id&&slug&&evArtCat("j24:"+slug))id="j24:"+slug;
    if(!id&&typeof KBK_EVRE!=="undefined"){const txt=t+" "+String(m.h||"").replace(/<[^>]+>/g," ");const hit=KBK_EVRE.find(([re])=>re.test(txt));
-    if(hit&&evArtCat(hit[1]))id=hit[1];else if(P[0]!==S){const p=P[0];id=S&&p===S.emp?"j24:hoang-thuong-den":S&&p===S.thO?"j24:thai-hau-trieu":"j24:co-nguoi-den"}}
+    if(hit&&evArtCat(hit[1]))id=hit[1]}  /* no "who is on the stage" default (review/ev-art-fit) */
    if(!id)return r;const src=evArtOf(id,salt);return src?{src,lab:typeof evArtTitle==="function"?evArtTitle(id):""}:r}catch(e){return r}};window.kitEvArt=kitEvArt;
  const k0=kitEventStage;kitEventStage=function(){window.__kesArt=1;try{return k0.apply(this,arguments)}finally{window.__kesArt=0}};window.kitEventStage=kitEventStage})();
 /* review/stage-fig-size (kit-sample race: a 1180 run drew no figure): kitFigOf needs the figure list (FIGURES.json from the CDN, j28 FIGS);
@@ -23816,6 +23967,9 @@ function tsbBurnable(p){return (p.inv||[]).map((e,i)=>[e,i]).filter(([e])=>{if(!
 function tsbItemN(e){try{if(e.wk)return e.wk.n;return iname(e)}catch(x){return e.k}}
 function tsbItemArt(e){try{return typeof itemArt==="function"?itemArt(e):null}catch(x){return null}}
 function tsbItemGrade(e){const a=tsbItemArt(e);return a&&a.grade!=null?a.grade:0}
+/* review/ev-art-fit (owner 15/11): these events showed the ROOM she stands in (tsbPlaceArt) — not what happened. Each now takes its
+   meaning group's picture (EVENTS.json category via j89 "cat:<group>"); the room picture stays only for place dialogs (jplace). */
+function tsbFitArt(g){try{const id="cat:"+g;const src=typeof evArtOf==="function"?evArtOf(id,(S.year||0)*100+(S.month||0)*3+(S.tuan||0)):"";return src?{src,label:typeof evArtTitle==="function"?evArtTitle(id):""}:undefined}catch(e){return undefined}}
 function tsbPlaceArt(){try{const f=evArt();return f?{src:f,label:placeName(S.place||"home")}:undefined}catch(e){return undefined}}
 function tsbItemSrc(e){try{const a=tsbItemArt(e);if(a&&a.src)return a.src;if(e.wk)return `https://ctm-img.victoria-tntt.workers.dev/img/item-tp-${e.wk.kind||"theu"}-b${(e.wk.ti||0)+1}.webp`;const f=ITIMG[e.k];return kitItemSrc(e.k,f?`https://ctm-img.victoria-tntt.workers.dev/img/item-${f}.webp`:`https://ctm-img.victoria-tntt.workers.dev/img/item-${e.k}.webp`)}catch(x){return""}}
 function tsbBurn(p,n,cause){if((p.tsbSafe||0)>=tsbWk())return[];const L=tsbBurnable(p);const out=[];for(let i=0;i<n&&L.length;i++){const j=R(L.length);const [e]=L.splice(j,1);const ix=p.inv.indexOf(e);if(ix>=0){p.inv.splice(ix,1);out.push(tsbItemN(e));if(p===S)tsbLedger({what:tsbItemN(e),how:"cháy",cause})}}return out}
@@ -23876,7 +24030,7 @@ PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const 
  if(mm)o.push({n:`Giao cho ${mm.name} canh chừng`,fx:{},x:`${word(cl(mm.loyal,5,95))} · thành: như canh giữ cửa cung, không tốn bạc · hỏng: ${mm.name} lơ là, cung vẫn hở`,need:[{t:`kẻ hầu tin cẩn (${mm.name}, Lòng ${mm.loyal})`,ok:true}],go:()=>{if(roll(mm.loyal)){S.tsbGuard=tsbWk()+2;log(`${mm.name} thức canh quanh cung cho ngươi.`)}else log(`${mm.name} hứa canh chừng nhưng ngủ quên.`)}});
  if(fire)o.push({n:"Chuyển đồ quý sang chỗ khác",fx:{},x:`Chắc chắn · tốn: 1 khắc · thành: đồ quý được giữ an toàn nếu kho có cháy trong 2 tuần`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);S.tsbSafe=tsbWk()+2;log("Ngươi cho chuyển đồ quý khỏi kho.")}});
  o.push({n:"Bỏ qua",fx:{},x:`Chắc chắn · kèm: nếu có mưu thật, nó vẫn đến`});
- return{t:`<p>${sign} ${who}</p>`,o,headArt:tsbPlaceArt(),title:"Điềm lạ quanh cung"}};
+ return{t:`<p>${sign} ${who}</p>`,o,headArt:tsbFitArt("chuyen-la"),title:"Điềm lạ quanh cung"}};
 
 /* the bully card (Giao / Không giao + more after the first time), both kinds: batnat (rank) and uyhiep (evidence, j78) */
 PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;const ev=pp.k==="uyhiep";const e=pp.ix>=0?S.inv[pp.ix]:null;const want=e&&!e.h?e:null;const g=tsbBulPay(a,S);
@@ -23895,7 +24049,7 @@ PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;
    go:()=>{tsbKh(1);apply({bac:-20});S.tsbBul[key(a)].stop=tsbWk()+18;log(`${pro?tsbCap(pro.n):"Người che chở"} lên tiếng; ${a.name} không dám đòi của ngươi nữa.`)}});
   if(evG(S,a)>=1){const ou=odA(S,45+evG(S,a)*8-(typeof witOf==="function"?witOf(a)/5:0));O.push({n:"Dùng chứng cứ đáp trả",fx:{},x:`${word(ou)} · thành: nàng sợ chuyện của nàng lộ, thôi đòi, trả lại của đã lấy · hỏng: Danh -2 · kèm: nàng oán ngươi +15 · (dùng 1 chứng cứ)`,need:[{t:`chứng cứ về nàng (có ${evG(S,a)})`,ok:true}],
    go:()=>{oanAdd(a,S,15);if(roll(ou)){const back=tsbGiveBack(a);S.tsbBul[key(a)].stop=tsbWk()+18;log(`<span class="g">Ngươi nhắc khéo chuyện của ${a.name}; nàng tái mặt, thôi đòi${back?`, trả lại ${back}`:""}.</span>`)}else{evA(S,a,-1);apply({danh:-2});log(`${a.name} không sợ, còn đi kể ngươi dọa nàng.`)}}})}}
- return{t:`<p>${why}</p>${tile}${rep}`,o:O,stage:[a],headArt:tsbPlaceArt(),title:ev?"Bị uy hiếp đòi của":"Bị ép nộp của"}};
+ return{t:`<p>${why}</p>${tile}${rep}`,o:O,stage:[a],headArt:tsbFitArt("hoi-lo"),title:ev?"Bị uy hiếp đòi của":"Bị ép nộp của"}};
 function tsbGiveBack(a){const L=(S.tsbLog||[]).filter(x=>x.how==="bị lấy"&&x.who===a.id&&!x.back);for(const x of L){const ix=(a.inv||[]).findIndex(e=>e.tsbFrom==="me"&&tsbItemN(e)===x.what);if(ix>=0){const e=a.inv.splice(ix,1)[0];delete e.tsbFrom;S.inv.push(e);x.back=1;return x.what}
   const m=String(x.what).match(/^(\d+) lượng/);if(m){const g=Math.min(+m[1],a.bac||0);ap(a,{bac:-g});apply({bac:g});x.back=1;return `${g} lượng bạc`}}return""}
 function tsbProtector(a){if(!S.thDead&&(S.th||0)>=40)return{n:"Thái hậu"};const L=liveRivals(true).filter(v=>v!==a&&aff(v,S)>=30&&rkOf(v)>rkOf(a));return L.length?{n:tsbNm(L[0]),v:L[0]}:null}
@@ -23918,7 +24072,7 @@ PEND.tsbFirst=pp=>{if(!S)return null;const v=RV(pp.v);if(!v||!v.alive)return nul
  O.push({n:"Khéo lời hóa giải",fx:{},x:`${word(td)} · thành: nàng bớt ghen 10 · nàng với ngươi +8 · Danh +1 · hỏng: nàng cho là ngươi giả vờ, nàng oán ngươi +5`,need:[near],go:()=>{if(roll(td)){v.ghen=cl((v.ghen||0)-10,0,100);affAdd(v,S,8);apply({danh:1});log(`<span class="g">Ngươi khéo lời; ${nm} dịu lại đôi chút.</span>`)}else{oanAdd(v,S,5);log(`${tsbCap(nm)} nghe xong chỉ cười nhạt.`)}}});
  O.push({n:"Đáp trả thẳng thắn",fx:{},x:`${word(tc)} · thành: người xung quanh nể ngươi, Danh +3 · hỏng: bị cho là hỗn, Danh -3 · kèm: nàng oán ngươi +8`,need:[near],go:()=>{oanAdd(v,S,8);if(roll(tc)){apply({danh:3});log(`<span class="g">Ngươi đáp lời ${nm} không kém một câu; cung nhân xung quanh đều thấy.</span>`)}else{apply({danh:-3});log(`<span class="r">Ngươi cãi lại ${nm}, bị cho là không biết phép.</span>`)}}});
  O.push({n:"Im lặng ghi nhớ",fx:{},x:`Chắc chắn · thành: ghi lại thái độ của nàng (Giao tình) · kèm: nàng tưởng ngươi yếu thế${hi?" · Danh -1":""}`,need:[near],go:()=>{try{noteAdd(v.id,`lần đầu gặp: nàng ${G.join(", ")}`)}catch(e){}if(hi)apply({danh:-1});log(`Ngươi im lặng, ghi nhớ thái độ của ${nm}.`)}});
- return{t:`<p>Lần đầu gặp ${nm}. ${say} ${act}</p><p class="past">Nhìn lời lẽ và thái độ thì nàng ${G.join(", ")}.</p>`,o:O,stage:[v],who:v,headArt:tsbPlaceArt(),title:"Lần đầu gặp mặt"}};/* who: the speaker is HER (lines 2–3 showed the player's face) */
+ return{t:`<p>Lần đầu gặp ${nm}. ${say} ${act}</p><p class="past">Nhìn lời lẽ và thái độ thì nàng ${G.join(", ")}.</p>`,o:O,stage:[v],who:v,headArt:tsbFitArt("tham-hoi"),title:"Lần đầu gặp mặt"}};/* who: the speaker is HER (lines 2–3 showed the player's face) */
 /* NPCs: a newcomer meeting someone who already resents her gets the same cold first meeting (Danh / oán, no card) */
 (function(){if(typeof npcLearn!=="function")return;const n0=npcLearn;npcLearn=function(a,b){let first=false;try{first=b&&b!==S&&a&&a!==S&&!npcKnows(a,b)}catch(e){}const r=n0.apply(this,arguments);
  try{if(first&&(rivals||[]).includes(a)&&(rivals||[]).includes(b)&&(oan(a,b)>=15||aff(a,b)<=-15)){oanAdd(b,a,4);if(rkOf(a)>rkOf(b))ap(b,{danh:-1})}}catch(e){}return r}})();
@@ -23940,7 +24094,7 @@ PEND.tsbFireW=()=>{const W=S&&S.tsbFW;if(!W)return null;const hau=W.cause==="hau
  if(hau)O.push({n:`Phạt ${W.who||"kẻ hầu"}`,fx:{},x:`Chắc chắn · thành: hiểm họa cháy giảm hẳn · kẻ hầu khác giữ kỷ cương · Mất: ${W.who||"kẻ ấy"} Lòng -8`,go:()=>{if(S.tsbFW)S.tsbFW.heed=1;const s=(S.staff||[]).find(x=>x.name===W.who)||(S.maid&&S.maid.name===W.who?S.maid:null);if(s)s.loyal=cl((s.loyal||0)-8,0,100);log(`Ngươi phạt ${W.who||"kẻ hầu"} vì lơ là đèn nến.`)}});
  O.push({n:"Cất đồ quý sang chỗ khác",fx:{},x:`Chắc chắn · tốn: 1 khắc · thành: đồ quý được giữ an toàn nếu có cháy trong 3 tuần · kèm: hiểm họa cháy vẫn còn`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);S.tsbSafe=tsbWk()+3;log("Ngươi cho cất đồ quý sang gian khác.")}});
  O.push({n:"Bỏ qua",fx:{},x:`Chắc chắn · kèm: có thể cháy mất một món đồ (vải vóc, thư từ, hương liệu, lễ vật bằng gỗ, giấy)`});
- return{t:`<p>${t}</p>`,o:O,headArt:tsbPlaceArt(),title:"Đèn nến trong cung"}};
+ return{t:`<p>${t}</p>`,o:O,headArt:tsbFitArt("hoa-hoan"),title:"Đèn nến trong cung"}};
 
 /* Tư trang: "Thú nuôi" (jpet petHTML) + "Sổ đồ mất" */
 function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";try{if(typeof petHTML==="function")h+=petHTML()}catch(e){console.error("petHTML",e)}
@@ -24162,7 +24316,10 @@ function tsbPetWeek(){return petWeek()}function tsbPetMonth(){return petMonth()}
 function petLine(t,acc){t=petK(t);const T=PET[t];const sw=petHasFree(S)?"":(()=>{const j=petWorst(S);return j>=0?` · Mất: ${petT(tsbPets(S)[j]).n} phải gửi về Ngự thú viên (đủ ô)`:""})();
  return `thành: có ${T.n} (${PET_TIER[T.tr]}) · ${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu · ${T.use}${sw} · kèm: Xa xỉ +${petLux(t)} · ${T.up?`Bạc -${T.up} mỗi tháng · `:""}${T.bad}${acc||""} · (mỗi tuần phải chăm)`}
 function petTake(t,from,src){if(!petHasFree(S)){const j=petWorst(S);if(j<0)return null;petLose(S,j,"gửi về Ngự thú viên")}return petAdd(S,t,from,src)}
-function petArtOf(t,label){try{return tsbPlaceArt()}catch(e){return undefined}}
+/* review/ev-art-fit (owner 15/11): pet events showed the ROOM she stands in; now the picture of what happens — a pet given (gift group),
+   the autumn hunt (Đi săn group), caring for a pet (act-cham-thu-nuoi) */
+function petArtOf(t,label,g){try{if(g){const id="cat:"+g;const src=typeof evArtOf==="function"?evArtOf(id,0):"";if(src)return{src,label:typeof evArtTitle==="function"?evArtTitle(id):""}}
+ return{src:"https://ctm-img.victoria-tntt.workers.dev/img/act-cham-thu-nuoi.webp",label:label||"Thú nuôi"}}catch(e){return undefined}}
 function petPicK(t,lead){t=petK(t);const T=PET[t];return{facts:lead?[String(lead).replace(/<[^>]+>/g,"")]:undefined,itemPic:kitItem({src:petSrc(t,1,typeof petcStageSrc==="function"?"-non":""),name:"",grade:T.tr,size:"lg",lux:petLux(t)}).replace('<span class="kitn"></span>','').replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`)}}
 function petCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;if(d.kit&&!d.kit.facts)d.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];Q.push({t:title||d.title,h:d.t,opts:d.o,headArt:d.headArt,kit:d.kit,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});tsbShow();return true}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsbPet/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.kit=d.kit;if(q.kit&&!q.kit.facts)q.kit.facts=[String(d.t||"").replace(/<[^>]+>/g,"")];q.stage=undefined}}})}catch(e){}return out}})();
@@ -24170,17 +24327,17 @@ PEND.tsbPetGift=pp=>{if(!S)return null;pp.t=petK(pp.t);const T=PET[pp.t];if(!T)r
  if(pp.src==="man"){const m=typeof manById==="function"?manById(pp.m):null;if(!m)return null;const risk=typeof lộRisk==="function"?lộRisk("home"):25;
   O.push({n:"Nhận",fx:{},x:`${word(100-risk)} · ${petLine(pp.t)} · hắn vui, tình ý +5 · hỏng: có người dò ra nguồn quà, Danh -3, một phi tần nắm 1 chứng cứ của ngươi`,go:()=>{petTake(pp.t,`${m.name} gửi tặng`,"man");m.tinh=cl((m.tinh||0)+5,0,100);if(!roll(100-risk)){apply({danh:-3});const v=liveRivals(true).sort((x,y)=>(y.mat||0)-(x.mat||0))[0];if(v)evA(v,S,1);log(`<span class="r">Có người dò ra ${T.n.replace(/^./,c=>c.toLowerCase())} là quà ${m.name} gửi; lời ra tiếng vào.</span>`)}else log(`Ngươi lặng lẽ nhận ${T.n.replace(/^./,c=>c.toLowerCase())} ${m.name} gửi tặng.`)}});
   O.push({n:"Trả lại",fx:{},x:`thành: giữ mình trong sạch, không ai dò được gì · Mất: hắn buồn, tình ý -5`,go:()=>{m.tinh=cl((m.tinh||0)-5,0,100);log(`Ngươi trả lại món quà của ${m.name}.`)}});
-  return{t:`<p>Một thái giám quen việc lén đưa đến cung ngươi ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}); kèm mảnh giấy ghi tên ${m.name}.</p>`,o:O,headArt:petArtOf(pp.t),kit:petPicK(pp.t),title:"Quà gửi lén"}}
+  return{t:`<p>Một thái giám quen việc lén đưa đến cung ngươi ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}); kèm mảnh giấy ghi tên ${m.name}.</p>`,o:O,headArt:petArtOf(pp.t,"","qua-tang"),kit:petPicK(pp.t),title:"Quà gửi lén"}}
  const who={emp:"Hoàng thượng",th:"Thái hậu",hh:"Hoàng hậu",trib:"Hoàng thượng"}[pp.src]||"Hoàng thượng";
  const decl={emp:["Sủng -2",{sung:-2}],trib:["Sủng -2",{sung:-2}],th:["Thái hậu quý ngươi -3",{th:-3}],hh:["Hoàng hậu quý ngươi -3",{hh:-3}]}[pp.src]||["Sủng -2",{sung:-2}];
  const gain=pp.src==="trib"?" · Hoàng hậu quý ngươi +2 (không tranh cống phẩm)":pp.src==="emp"?"":"";
  O.push({n:"Tạ ơn, nhận nuôi",fx:{},x:`Chắc chắn · ${petLine(pp.t)}${pp.src==="emp"||pp.src==="trib"?" · ba phi tần ghen ngươi nhất ghen +3":""}`,go:()=>{petTake(pp.t,PET_SRCN[pp.src],pp.src);if(pp.src==="emp"||pp.src==="trib")liveRivals(true).sort((x,y)=>(y.ghen||0)-(x.ghen||0)).slice(0,3).forEach(v=>v.ghen=cl((v.ghen||0)+3,0,100));log(`<span class="g">Ngươi tạ ơn, nhận ${T.n} ${who} ban.</span>`)}});
  O.push({n:"Khiêm nhường xin gửi Ngự thú viên",fx:{},x:`Chắc chắn · thành: không thêm Xa xỉ, không ai ghen, không tốn bạc nuôi${gain} · Mất: ${who} hơi phật ý, ${decl[0]}`,go:()=>{apply(Object.assign({},decl[1],pp.src==="trib"?{hh:2}:{}));log(`Ngươi xin gửi ${T.n.replace(/^./,c=>c.toLowerCase())} lại Ngự thú viên; ${who} hơi phật ý.`)}});
  const lead={emp:`Hoàng thượng nhớ lời ngươi từng khen, sai thái giám đem đến ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}), ban cho ngươi nuôi.`,th:`Thái hậu thương ngươi hiếu thuận, ban cho ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}) để giữ điềm thọ.`,hh:`Hoàng hậu sai người đem đến ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}), nói là để ngươi có bạn khuây khỏa.`,trib:`Sứ thần nước ngoài dâng cống. Hoàng thượng chọn ${T.n.replace(/^./,c=>c.toLowerCase())} (${T.d}) ban riêng cho ngươi.`}[pp.src]||"";
- return{t:`<p>${lead}</p>`,o:O,headArt:petArtOf(pp.t),kit:petPicK(pp.t),title:{emp:"Ngự ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",trib:"Cống phẩm"}[pp.src]}};
+ return{t:`<p>${lead}</p>`,o:O,headArt:petArtOf(pp.t,"","qua-tang"),kit:petPicK(pp.t),title:{emp:"Ngự ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",trib:"Cống phẩm"}[pp.src]}};
 PEND.tsbPetHunt=pp=>{if(!S||!pp.ts||!pp.ts.length)return null;pp.ts=pp.ts.map(petK);const O=pp.ts.map(t=>({n:`Xin ${PET[t].n}`,fx:{},x:"Chắc chắn · "+petLine(t),go:()=>{petTake(t,PET_SRCN.hunt,"hunt");log(`<span class="g">Hoàng thượng ban ngươi ${PET[t].n.replace(/^./,c=>c.toLowerCase())} săn được mùa thu.</span>`)}}));
  O.push({n:"Không xin gì, chỉ chúc mừng",fx:{},x:`thành: Hoàng thượng khen hiểu chuyện, Sủng +2 · không thêm Xa xỉ, không tốn bạc nuôi`,go:()=>{apply({sung:2});log("Ngươi chỉ chúc mừng Hoàng thượng thắng lợi trong cuộc săn.")}});
- const T=PET[pp.ts[0]];return{t:`<p>Thu săn ở bãi săn hoàng gia. Hoàng thượng thắng lớn, cho gọi các phi tần đi theo đến chọn thú săn được còn sống để nuôi.${T.rescue?" Trong đoàn có một con hươu trắng tỏa ánh bạc, ai cũng nói là thần thú.":""}</p>`,o:O,headArt:petArtOf(pp.ts[0]),kit:petPicK(pp.ts[0]),title:"Thu săn"}};
+ const T=PET[pp.ts[0]];return{t:`<p>Thu săn ở bãi săn hoàng gia. Hoàng thượng thắng lớn, cho gọi các phi tần đi theo đến chọn thú săn được còn sống để nuôi.${T.rescue?" Trong đoàn có một con hươu trắng tỏa ánh bạc, ai cũng nói là thần thú.":""}</p>`,o:O,headArt:petArtOf(pp.ts[0],"","di-san"),kit:petPicK(pp.ts[0]),title:"Thu săn"}};
 PEND.tsbPetW=pp=>{const P=tsbPets(S)[pp.i];if(!P)return null;const T=petT(P);const mm=tsbMaid(S);const O=[];
  O.push({n:"Tự tay chăm",fx:{},x:`tốn: 1 khắc · thành: ${T.n} khỏe lại · Sức +2 (khuây khỏa)`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);P.care=90;P.warn=0;apply({suc:2});log(`Ngươi tự tay chăm ${T.n.replace(/^./,c=>c.toLowerCase())}; nó khỏe lại.`)}});
  if(mm)O.push({n:`Giao ${mm.name} chăm`,fx:{},x:`${word(cl(mm.loyal,5,95))} · thành: ${T.n} khỏe lại · hỏng: kẻ hầu chăm qua loa, chỉ đỡ đôi chút · (cơ may theo Lòng của ${mm.name})`,go:()=>{if(roll(mm.loyal)){P.care=80;P.warn=0;log(`${mm.name} chăm ${T.n.replace(/^./,c=>c.toLowerCase())} chu đáo.`)}else{P.care+=15;log(`${mm.name} chăm qua loa.`)}}});
@@ -24909,7 +25066,9 @@ function kitEvBanner(m){try{const key=kitDlgKey(m);if(key){const f=`https://ctm-
   const room=typeof evArt==="function"?evArt():"";return room?{src:room,lab:"",key:key||"",own:false}:null}catch(e){return null}}
 window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
 /* the existing dialog pictures (left picture / band, jk2b kitEvArt) take the banner when it exists */
-(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.art&&!m.stArt){const b=kitEvBanner(m);if(b&&b.own)return{src:b.src,lab:b.lab}}}catch(e){}return k0.apply(this,arguments)}})();
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.art&&!m.stArt){/* review/ev-art-fit: a warning reuses the threat banner j70thr (a court audience) — its meaning group wins */
+  if(typeof kitEvFit==="function"&&KIT_EVFIT_OVER.test(kitEvFitText(m).t)){const f=kitEvFit(m);if(f&&f.id&&typeof evArtOf==="function"){window.__evFitWhy="fit:"+f.rule;return{src:evArtOf(f.id,0),lab:evArtTitle(f.id)}}}
+  const b=kitEvBanner(m);if(b&&b.own)return{src:b.src,lab:b.lab}}}catch(e){}return k0.apply(this,arguments)}})();
 /* an own banner already paints the people of the scene: the stage figures (kitEventStage → .kesov over the picture, jk4) would stand
    a second, grey/cut-out person in the middle of it — on such a banner the overlay is dropped (the text and the speaker row name them) */
 (function(){if(typeof kitEventStage!=="function")return;const k0=kitEventStage;kitEventStage=function(m){const r=k0.apply(this,arguments);
@@ -29858,7 +30017,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="89c95e574ca8";window.CTM_BUILD=BUILD;
+const BUILD="2830a2ab9bab";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

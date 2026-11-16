@@ -9,6 +9,8 @@ let EVART=null;
 (function(){try{fetch("img/EVENTS.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.categories)EVART=j}).catch(()=>{})}catch(e){}})();
 function evArtCat(id){const A=EVART;if(!A||!id)return null;id=String(id);const E=A.events||{};
  if(E[id])return E[id];
+ /* review/ev-art-fit: "cat:<category>" names a picture GROUP directly (jevfit.js KIT_EVFIT rules) */
+ if(id.slice(0,4)==="cat:"){const c=id.slice(4);return A.categories&&A.categories[c]?c:null}
  const ns=id.indexOf(":");if(ns>0&&E[id.slice(0,ns)+":*"])return E[id.slice(0,ns)+":*"];
  if(ns<0){for(const k in E){const i=k.indexOf(":");if(i>0&&k.slice(i+1)===id)return E[k]}}
  return null}

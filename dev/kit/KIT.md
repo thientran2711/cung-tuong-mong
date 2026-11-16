@@ -935,6 +935,25 @@ so stage blocks may stand beside a head or between figures, never over the paint
   → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · default category. Label = `evArtTitle`.
 - The result card right after an event choice shows the same picture small on its left (`#rtoast.kevres > .kpevr`).
 - Merged review/event-art dd2f253 (96 st-* story pictures, EVENTS.json stories, j89 stArtOf).
+#### 28.10c PICTURE BY MEANING — no default picture (owner 15/11 "Mấy cái ảnh minh họa không liên quan gì cả" + "Hình minh họa đâu? Khung sự kiện đâu?", review/ev-art-fit) — `dev/build/jevfit.js`
+- NEVER a stand-in picture: not "who is on the stage" (the old jk4 default gave every visitor the "Có người đến chơi" gift box, the Emperor
+  "Hoàng thượng ngự giá", Thái hậu "Thỉnh an"), not the room she stands in (jtsb tsbPlaceArt; the room stays only for PLACE dialogs, jplace),
+  not "people visiting" for unmatched news (jk2b kitNewsArtId → `cat:tin-cung`).
+- Order (kitEvArt, jk4): own banner `img/ev-<key>.webp` (jevban) → own EVENTS.json id (pid / e68 / q72 …) → **the MEANING GROUP**
+  `kitEvFit(m)` → j24 approach title → week-book table on the title (with "Chính/Phụ tuyến · " stripped: "tuyến" was read as "yến") →
+  nothing = §59 placeholder (listed in `CTM_MISSING_PICS`, to be painted).
+- Groups (owner 15/11): ONE picture (or 2–3 variants) per MEANING, shared by every event of that meaning = an EVENTS.json category,
+  addressed as `"cat:<group>"` (j89 evArtCat). `KIT_EVFIT` rows `[rule, group | {src,lab} | fn(m), title RegExp, body RegExp]`, tested on the
+  title (prefixes stripped) and the first two sentences of the text (never option hints); first hit wins. Caption = the group's title.
+- Groups added: `mat-bao` Mật báo, lời cảnh báo · `am-muu` Âm mưu · `bac-tien` Bạc tiền, bổng lộc · `canh-phong` Canh phòng cung ·
+  `hao-huu` Hảo hữu trong cung (co-op) · `nguy-gia` Cứu giá — painted gpt-2-6, 1024x768 (mat-bao 1024x690, focal kept in the 2.3:1 band); `tham-hoi` Sang chơi,
+  hàn huyên (ev-khach-den) · `qua-tang` Quà tặng, ban thưởng (ev-khach-den-2, the gift box, no longer inside khach-den) · `tin-cung` Tin trong cung.
+  Dress remarks (Lời nhận xét, … chê dung nhan) use the toilette pictures `ev-toil-<who>-<praise|scold>`; Hội phối đồ `ev-toil-crowd-jealous`.
+- WHICH PANELS: every event-like pop-up, not only choices — kinds notice (BÁO), news (TIN), result (KẾT QUẢ), choice (VIỆC), reward,
+  intel, threat, evidence (`kitEvFitWant`). Not: rule / info (ĐIỀU) / person cards, look-up panels, shop / pick lists, act pickers,
+  the identity card, night panels (review/night-end), Nhập cung (review/newgame-ui).
+- Test: `node dev/test/ev-art-fit.js <url> <out.json> [steps] [seeds]` (every dialog built + bot lives → picture, group, rule);
+  `EVJSON=img/EVENTS.json node dev/test/ev-art-fit-shots.js <url> <dir>` (owner cases at 755x1000, 1180x820, 844x390).
 ### 28.11 IDENTITY CARD + REINCARNATION BACKGROUND (owner item 6)
 - (11/14 19:10Z, replaces the frame part below) The origin picture is a WIDE band across the top of the card: `img/origin-wide-<k>.webp` (1280x720, gpt-2-6, one per origin) in the PICTURE FRAME (28.17, shape wide, no caption), height `clamp(84px,19dvh,190px)`; name, origin · age, tiles below it. The two choices are sticky at the bottom of the card (the body scrolls under them), choice titles wrap (never cut).
 - The origin picture (`img/bg-origin-<k>.webp`) is no longer the backdrop: it sits in the kit art frame `.kpidart` (kitArtFrame) — landscape:
