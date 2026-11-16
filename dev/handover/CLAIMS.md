@@ -262,7 +262,7 @@
 | status-icons (sonnet; owner-bug fast lane; OD 16/11 16:25Z): 'Thỉnh tranh' download chip → small kit square download icon in a corner + downloading animation + tap → detail panel; whole group: every status chip that fits in an icon | review/status-icons | main s20 | session_01UV1Szh7JPiQw9nJJ8XwPbe | RUNNING | 16/11 16:24Z |
 | story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | session_011xDdVSfRLPar78kg13jMBC | RUNNING | 16/11 16:22Z |
 | go-live-kit (opus; OD:L1370): tier classifier script, 5–10 min pre-push quick check, build number + 'what changed' line in game menu, one-step rollback, nightly full suite | review/go-live-kit | main s20 | session_01UV1SziX5AtFSgrnkfGWXgw | RUNNING | 16/11 16:36Z |
-| TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd | RUNNING | 16/11 16:34Z |
+| TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd (archived) | PASS 5f710161 | 16/11 16:34Z |
 | emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | RUNNING | 16/11 16:41Z |
 | mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | session_01N1tNP2d8sR5Vo1a5Lh9UV9 | RUNNING | 16/11 16:44Z |
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
