@@ -6,7 +6,7 @@
 const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
 const [,,PORT,ROOT,...OV]=process.argv;const DIRS=Object.fromEntries(OV.map(s=>s.split('=')));let cur=OV.length?OV[0].split('=')[0]:null,stale=null;
 const TYPES={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json',
- '.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.svg':'image/svg+xml'};
+ '.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.svg':'image/svg+xml','.mp4':'video/mp4','.webm':'video/webm'};
 const etags=new Map();
 function etag(f,st){const k=f+':'+st.mtimeMs+':'+st.size;if(!etags.has(k))etags.set(k,'"'+crypto.createHash('sha1').update(k).digest('hex').slice(0,16)+'"');return etags.get(k)}
 http.createServer((q,r)=>{const u=new URL(q.url,'http://x');let p=decodeURIComponent(u.pathname);

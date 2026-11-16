@@ -59,7 +59,7 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
      {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}, Đức -${BAL.dutySkip.duc} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}, Đức -${BAL.dutySkip.duc}.`)}}]}
    Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
-blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p><div class="pcb rows">${BAL.pay.map((b,i)=>`<div class="pcrow"><span>${i>=7?"Hoàng hậu":RANKS[i].n}</span><b>${b} bạc</b></div><div class="pcrow"><span class="past">${typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i]}${BAL.duty[i]?` · lễ nghĩa ${BAL.duty[i]}`:""}${BAL.banThuong[i]?` · ban thưởng ${BAL.banThuong[i]}`:""}</span><span></span></div>`).join("")}</div><p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
+blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
 /* a good night: Hoàng thượng's thưởng also brings silver (same for every consort) */
 (function(){const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(why==="night"&&p&&(p===S||p.alive)){ap(p,{bac:BAL.nightBac});if(p===S)log(`Kèm theo ${BAL.nightBac} bạc thưởng. Bạc +${BAL.nightBac}.`)}}catch(e){}return r}})();
 /* ---------- works on the item grade scale + price by grade and skill ---------- */
@@ -109,8 +109,8 @@ function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a
  const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: 2 khắc · thành: chọn người (Hoàng thượng, Thái hậu, phi tần), quý theo phẩm (${gr.n}: ${BAL.craftGift[econWkGrade(w)]})`,t2),econSellBtn(i),
   pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: 1 khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh -3, mất tác phẩm`,t1)];
  if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?" · kèm: phi tần ghen +2":""}`,t2));
- const rows=kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",[`đem tặng: quý ${BAL.craftGift[econWkGrade(w)]}`,`Nội vụ phủ mua: Bạc +${econPrice(S,e)}`,`bán ra ngoài: Bạc +${wkSellVal(w)}`],"g"],
-  ["Ghi chú",[`${w.q} phần: chơi ${w.raw} + ${ar?ar.n:""} bậc ${w.lv}${w.m?" + vật liệu":""}`,w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn,w.d,w.p!=null?"phải dâng trong tuần này":"",w.show?"đã bày ở yến tiệc":""].filter(Boolean),"n"]]);
+ /* the rows = KIT §70 kitItemDetailRows (same Phẩm · Loại · Được · Lai lịch · Ghi chú as every item) */
+ const rows=kitItemDetailRows({ix:i});
  kitModal({kind:"info",title:w.n,sub:`Tác phẩm tự tay · ${gr.n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:econWkGrade(w),size:"lg"}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rows}</div><div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const o0=kinvOpen;kinvOpen=function(x){try{const e=x&&x.g&&x.g.i>=0?S.inv[x.g.i]:null;if(e&&e.wk)return econWkOpen(x);
@@ -143,11 +143,11 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=40?p.maid:null}
 function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
 A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>cl(oSpy(a)-BAL.selfMinus,5,95),x:"không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh -2",f:(a,t)=>{
- if(roll(cl(oSpy(a)-BAL.selfMinus,5,95))){evA(a,t,1);ap(a,{tamco:1});return `${NMc(a)} tự đi nghe ngóng chuyện ${NM(t)}: <span class="g">nắm thêm một chứng cứ</span>. `}
+ if(roll(cl(oSpy(a)-BAL.selfMinus,5,95))){ap(a,{tamco:1});return spyFind(a,t,"tự đi nghe ngóng")}
  relAdd(a,t,-8);ap(a,{danh:-2});return `${NMc(a)} rình nghe chuyện ${NM(t)}: <span class="r">bị bắt gặp</span>. Danh -2. `}});
 A("bribel","Sai cung nữ thân tín lấy lòng",{c:{},ok:(a,t)=>!!econLoyalMaid(a)&&!!t.maid,o:(a,t)=>cl(oBribe(a,t)-BAL.selfMinus,5,95),x:`không tốn bạc · cung nữ thân tín lòng -${BAL.loyalCost} · chậm và dễ hỏng hơn`,f:(a,t)=>{
  const m=econLoyalMaid(a);if(!m)return"";m.loyal=cl((m.loyal||0)-BAL.loyalCost,0,100);
- if(roll(cl(oBribe(a,t)-BAL.selfMinus,5,95))){t.maid.loyal=cl(t.maid.loyal-10,0,100);if(t.schemes>0){evA(a,t,1);return `${m.name} làm thân với ${t.maid.name}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm 1 chứng cứ. `}return `${m.name} làm thân được với ${t.maid.name} của ${NM(t)}. `}
+ if(roll(cl(oBribe(a,t)-BAL.selfMinus,5,95))){t.maid.loyal=cl(t.maid.loyal-10,0,100);if(t.schemes>0){/*evok: schemes>0*/evA(a,t,1);return `${m.name} làm thân với ${t.maid.name}, dò ra mưu kế của ${NM(t)}: ${NM(a)} nắm 1 chứng cứ. `}return `${m.name} làm thân được với ${t.maid.name} của ${NM(t)}. `}
  t.maid.loyal=cl(t.maid.loyal+5,0,100);evA(t,a,1);return `${t.maid.name} nhận ra ${m.name} đến dò, báo cho chủ. `}});
 A("blockf","Nhờ ơn người quen rút thẻ bài",{c:{},ok:(a,t)=>!!econFavor(a)&&!t.block,o:a=>oBlock(a),x:`không tốn bạc · người quen của ngươi trả ơn: thiện cảm -${BAL.favorCost} · 2 tuần nàng không được lật thẻ`,f:(a,t)=>{
  const v=econFavor(a);if(!v)return"";relAdd(v,a,-BAL.favorCost);const c=caught(a,t,false,"nhờ người rút thẻ bài của "+NM(t));if(c)return c;

@@ -49,12 +49,13 @@ const IEV_NOUN=[
  [/tập chứng cứ|xấp chứng cứ|cuốn sổ|sổ sách|sổ nợ|giấy nợ|văn tự/i,"chungcu"],
  [/(đốt|giữ|dâng|xé|trả|nhận|cất|đọc|mở|gửi|trình|nộp) (lại |hết |cả )?(bức |lá |phong )?thư|thư từ/i,"thu"],[/(đốt|giữ|cất|trả|ném|giặt) (lại |chiếc )?khăn|chiếc khăn/i,"khantay"],[/túi bạc|nén bạc|thỏi bạc|hộp vàng bạc|đút lót|hối lộ/i,"vangbac"]];
 /* ---------- option name → what it does to the item (earliest verb in the name wins) ---------- */
-const IEV_VERB=[["burn",/(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)/i],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
+const IEV_VERB=[["burn",kRx("(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)","i")],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
  ["pour",/đổ (đi|bỏ|xuống|ra)|hắt (đi|bỏ)/i],["well",/giếng|(ném|thả|vứt) (xuống|vào) (hồ|sông|ao)|xuống hồ|xuống sông/i],["bury",/chôn(?! chặt)/i],
  ["back",/trả (lại|về)(?! cho)|gửi trả|đưa trả|hoàn trả/i],["refuse",/từ chối|khước từ|không nhận|chối từ/i],
  ["give",/dâng|trình (lên|với)?|(^|\s)nộp|giao (cho|nộp|lại|ra)|đưa (cho|lên|tới|đến)|chuyển (cho|tới)|tặng lại|đem (đến|tới|cho|lên)|mang (đến|tới|lên|cho)|chia cho|trả (\S+ ){0,2}cho/i],
  ["use",/(^|\s)uống|ăn (ngay|hết|thử|luôn)|nếm|thoa lên|dùng ngay/i],
- ["keep",/(^|\s)(?<!vờ )nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))|(^|\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên/i]];
+ ["keep",kRx("(?<!vờ)(?:^|\\s)nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))","i")],/* lookbehind leading (kRx, Safari < 16.4) */
+ ["keep",kRx("(^|\\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên","i")]];
 /* option names whose first verb is not what happens to the item shown (the token is kept away, only the note burns) */
 const IEV_OPT=[[/đốt mảnh giấy, cất tín vật/i,"give"]];
 const IEV_DESTROY=["burn","tear","smash","pour","well","bury"];
@@ -89,7 +90,8 @@ function ievOf(m){if(!m||!m.opts||!m.opts.length)return null;let r=null;
  const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null,own:!!r.own}}
 window.ievOf=ievOf;window.ievVerb=ievVerb;window.ievNoun=ievNoun;
 /* ---------- §64.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
-function kitItemTag(I){return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname}`})}</div>`}
+function kitItemTag(I){/* KIT §70: tap the tag → kitItemCard (the shared item detail) */const tap=typeof kitItemTap==="function"&&I.k?kitItemTap({k:I.k}):"";
+ return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname} · chạm để xem`,data:tap})}</div>`}
 window.kitItemTag=kitItemTag;
 function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev:not(.kiev-own)").forEach(x=>x.remove());if(!R)return null;
  const own=mb.querySelector(".tsbtile");if(own){own.classList.add("kiev","kiev-own");return own}
@@ -115,14 +117,14 @@ function ievCenter(r){return{x:r.left+r.width/2,y:r.top+r.height/2}}
 function kitItemFx(act,I,o){o=o||{};if(!ievOn())return 0;if(typeof I==="string"||(I&&!I.name&&I.k))I=kitItemInfo(I);
  IEV.log.push({act,name:I&&I.name});if(IEV.log.length>80)IEV.log.shift();
  const RB=(typeof BAL==="object"&&BAL.itev)||{};
- if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700)}}return 0}
+ if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700)}}return 0}
  let r=o.from&&o.from.width?o.from:null;if(!r){const s=Math.min(110,innerWidth*.22);r={left:innerWidth/2-s/2,top:innerHeight*.4-s/2,width:s,height:s}}
  const w=ievClone(I,r),c=ievCenter(r);ievCatch();let d=RB[act]||1200;const end=()=>{w.remove();setTimeout(ievUncatch,0)};
- try{try{if(typeof sfx==="function")sfx(act==="keep"?"sfx-coin":"sfx-open")}catch(e){}
+ try{try{const KS={keep:"itemFly",back:"giftBack",give:"give",burn:"mgFire",well:"mgThrow",use:"heal"};/* jsfx moments (dev/audio/SFX_PLAN.md) */if(typeof kitSfx==="function")kitSfx(KS[act]||"itemLose");else if(typeof sfx==="function")sfx(act==="keep"?"sfx-coin":"sfx-open")}catch(e){}
  if(act==="keep"){const tb=ievBag();const b=tb?tb.getBoundingClientRect():{left:innerWidth/2,top:innerHeight-40,width:0,height:0};const t=ievCenter(b);
   const dx=t.x-c.x,dy=t.y-c.y,sc=Math.max(.15,Math.min(b.width||40,b.height||40)/Math.max(1,r.width));d=RB.keep||900;
   ievAnim(w,[{transform:ievT(0,0,1),opacity:1},{transform:ievT(0,-18,1.12),opacity:1,offset:.2},{transform:ievT(dx*.5,dy*.5-70,.7),opacity:1,offset:.6},{transform:ievT(dx,dy,sc),opacity:.25}],{duration:d}).finished.then(()=>{end();
-   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
+   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
  else if(act==="back"||act==="give"){let t=null;const to=o.to&&o.to.getBoundingClientRect?o.to.getBoundingClientRect():o.to;
   if(to&&to.width)t={x:to.left+to.width/2,y:to.top+to.height*.42};else t={x:act==="back"?-r.width:innerWidth/2,y:act==="back"?c.y-40:-r.height};
   const dx=t.x-c.x,dy=t.y-c.y;d=RB.back||1000;
@@ -161,12 +163,14 @@ window.kitItemFx=kitItemFx;
 /* new particle kinds for the shared Pixi layer (jfx KF_SPAWN): embers, ash falling at a point, paper scraps, dust, water drops, splash */
 (function(){if(typeof KF_SPAWN!=="object")return;const Rr=(a,b)=>a+Math.random()*(b-a);
  Object.assign(KF_SPAWN,{
-  embers(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("glow",p.x+Rr(-36,36),p.y+Rr(-8,8),{vx:Rr(-.5,.5),vy:Rr(-2.4,-1),drag:.985,life:Rr(45,75),sway:.5,fade:"out",a0:.95},Math.random()<.5?0xff7a20:0xffc040,Rr(.25,.5),"add")},
-  ashfall(p){const n=kfBudget(12);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-40,40),p.y+Rr(-10,10),{vx:Rr(-.6,.6),vy:Rr(.2,.9),g:.02,life:Rr(90,130),spin:Rr(-.08,.08),sway:.6,fade:"inout",a0:.85},Math.random()<.5?0x4a4440:0x8a8480,Rr(.3,.6))},
-  scraps(p){const n=kfBudget(8);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-14,14),p.y+Rr(-30,30),{vx:Rr(-1.6,1.6),vy:Rr(-1.2,.4),g:.08,life:Rr(60,90),spin:Rr(-.2,.2),sway:.4,fade:"out",a0:.9},0xf1e6cc,Rr(.35,.6))},
-  dust(p){const n=kfBudget(8);for(let i=0;i<n;i++){const a=Rr(Math.PI*1.05,Math.PI*1.95),sp=Rr(1,2.6);kfSp("blob",p.x+Rr(-20,20),p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*.5,drag:.94,life:Rr(45,70),grow:.02,fade:"out",a0:.45},0x9a7a55,Rr(.4,.7))}},
-  drops(p){const n=kfBudget(10);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-6,6),p.y+Rr(-4,4),{vx:Rr(-.8,.2),vy:Rr(.5,1.8),g:.22,life:Rr(40,60),fade:"out",a0:.85},Math.random()<.5?0x5a3a20:0x8a6a40,Rr(.18,.32))},
-  splash(p){const n=kfBudget(12);for(let i=0;i<n;i++){const a=Rr(-Math.PI*.9,-Math.PI*.1),sp=Rr(1.5,3.4);kfSp("petal",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.16,life:Rr(35,55),fade:"out",a0:.85},Math.random()<.5?0xbfe0f0:0xffffff,Rr(.18,.32))}}})})();
+  embers(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("ember",p.x+Rr(-36,36),p.y+Rr(-8,8),{vx:Rr(-.5,.5),vy:Rr(-2.4,-1),drag:.985,life:Rr(45,75),sway:.5,fade:"out",a0:.95},null,Rr(.7,1.3))},
+  ashfall(p){const n=kfBudget(12);for(let i=0;i<n;i++)kfSp("ash",p.x+Rr(-40,40),p.y+Rr(-10,10),{vx:Rr(-.6,.6),vy:Rr(.2,.9),g:.02,life:Rr(90,130),spin:Rr(-.08,.08),sway:.6,fade:"inout",a0:.9},null,Rr(.5,.9))},
+  scraps(p){const n=kfBudget(8);for(let i=0;i<n;i++)kfSp("paper",p.x+Rr(-14,14),p.y+Rr(-30,30),{vx:Rr(-1.6,1.6),vy:Rr(-1.2,.4),g:.08,life:Rr(60,90),spin:Rr(-.2,.2),sway:.4,fade:"out",a0:.95},null,Rr(.5,.85))},
+  dust(p){const n=kfBudget(8);for(let i=0;i<n;i++){const a=Rr(Math.PI*1.05,Math.PI*1.95),sp=Rr(1,2.6);kfSp("smoke",p.x+Rr(-20,20),p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*.5,drag:.94,life:Rr(45,70),grow:.004,fade:"out",a0:.5},0x9a7a55,Rr(.4,.7))}},
+  drops(p){const n=kfBudget(10);for(let i=0;i<n;i++)kfSp("ink",p.x+Rr(-6,6),p.y+Rr(-4,4),{vx:Rr(-.8,.2),vy:Rr(.5,1.8),g:.22,life:Rr(40,60),fade:"out",a0:.85},null,Rr(.12,.2))},
+  splash(p){const n=kfBudget(12);for(let i=0;i<n;i++){const a=Rr(-Math.PI*.9,-Math.PI*.1),sp=Rr(1.5,3.4);kfSp("orb",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.16,life:Rr(35,55),fade:"out",a0:.85},0xbfe0f0,Rr(.2,.35))}}})})();
+/* painted kinds these spawners need (KIT §68 painted-fx; loaded by jfx kfPx before spawning) */
+try{Object.assign(KF_KINDS,{embers:["ember"],ashfall:["ash"],scraps:["paper"],dust:["smoke"],drops:["ink"],splash:["orb"]})}catch(e){}
 /* ---------- wiring: showModal places the tag; chooseM plays the act ---------- */
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=typeof Q!=="undefined"&&Q[0];const M=document.getElementById("modal");

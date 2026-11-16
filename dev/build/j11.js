@@ -38,7 +38,7 @@ function feedback(k,o){o=o||{};if(SFXN[k])sfx(SFXN[k]);vib(k);if(!OPT.fxon||RM)r
 function fxCls(c,el){if(!el)return;el.classList.remove(c);void el.offsetWidth;el.classList.add(c);setTimeout(()=>el.classList.remove(c),700)}
 function fxOver(c){const d=document.createElement("div");d.className="fxo "+c;document.body.appendChild(d);setTimeout(()=>d.remove(),1300)}
 function stamp(t,c){const d=document.createElement("div");d.className="stamp "+(c||"red");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1500)}
-function coinPop(n){const e=$("hud-bac");if(!e)return;const r=e.getBoundingClientRect();const d=document.createElement("div");d.className="coinp";d.textContent="◉ +"+(n||"");d.style.left=r.left+"px";d.style.top=r.top+"px";document.body.appendChild(d);setTimeout(()=>d.remove(),900)}
+function coinPop(n){if(typeof kitStatFx==="function"&&n)return kitStatFx([{k:"bac",dv:+n}],{src:"coin"});const e=$("hud-bac");if(!e)return;const r=e.getBoundingClientRect();const d=document.createElement("div");d.className="coinp";d.textContent="◉ +"+(n||"");d.style.left=r.left+"px";d.style.top=r.top+"px";document.body.appendChild(d);setTimeout(()=>d.remove(),900)}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button");if(b&&!b.disabled)feedback(b.closest("#tabs")?"page":"tap")},true);
 /* ---- hooks into the game (wrapping the shared functions, so NPC events show too when they touch the player) ---- */
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
@@ -49,7 +49,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("punish",o=>function(p){if(typeof p==="string"||p===S)feedback("hit");return o.apply(this,arguments)});
  W("birthP",o=>function(p){const r=o.apply(this,arguments);if(p===S&&!S.dead)feedback("birth");return r});
  W("nightFx",o=>function(){feedback("night");feedback("favour");return o.apply(this,arguments)});
- W("curtain",o=>function(){feedback("page");inkWipe();return o.apply(this,arguments)});
+ /* buổi / tuần change: no page sound, no dark wipe (owner 15/11: it read as a page flip) — jbuoi.js paints the transition */
+
  W("goTo",o=>function(k){const r=o.apply(this,arguments);if(S&&S.place===k&&k!=="home")feedback("step");if(k==="lc")feedback("ash");return r});
  W("over",o=>function(){const r=o.apply(this,arguments);auTick();return r});
  W("showModal",o=>function(){const r=o.apply(this,arguments);const m=Q[0];if(m){if(m.pid&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(m.pid)){feedback("heart");heartLoop(true)}else sfx("sfx-open");if(m.cls==="night"||m.pid==="night1"||m.pid==="night2")nightFade()}auTick();return r});
@@ -78,7 +79,7 @@ function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
   const g=new PIXI.Graphics();g.circle(8,8,8).fill(0xffffff);PX.tex.dot=app.renderer.generateTexture(g);const e=new PIXI.Graphics();e.ellipse(10,5,10,5).fill(0xffffff);PX.tex.petal=app.renderer.generateTexture(e);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
 function pxCap(){return innerWidth<700?60:120}
-function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home"].includes(P.sc),w=S.wx?S.wx.k:"dust";
+function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
 async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
@@ -86,7 +87,7 @@ async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.dis
  for(const p of PX.parts)p.destroy();PX.parts=[];if(PX.bg){PX.bg.destroy({texture:false});PX.bg=null}
  /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
  const m0=/url\(["']?([^"')]+)["']?\)/.exec(($("scimg")||{}).style?$("scimg").style.backgroundImage||"":"");
- const src=SCIMG[P.sc]?(m0?m0[1]:`img/${SCIMG[P.sc]}.webp`):null;PX.bgSrc=src;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";
+ const src=SCIMG[P.sc]?(m0?m0[1]:`img/${SCIMG[P.sc]}.webp`):null;PX.bgSrc=src;PX.src=src;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k||PX.src!==src)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";
  const kind=pxKind(),wk2=S.wx?S.wx.k:"",heavy=wk2==="snowh"||wk2==="storm",n=Math.round(pxCap()*(kind==="smoke"?.3:heavy?1:kind==="rain"?.6:.45));for(let i=0;i<n;i++)PX.parts.push(mkPart(kind,true));
  if(wk2==="snowp")for(let i=0;i<Math.round(n/4);i++)PX.parts.push(mkPart("petal",true));
  if((S.buoi||0)===B4L){const pts=[[.12,.3],[.88,.3],[.3,.18],[.7,.18]];pts.forEach(([x,y],i)=>{const g=mkPart("dust",true);g.v.kind="lamp";g.v.vx=0;g.v.vy=0;g.tint=0xffb050;g.scale.set(2.2);g.blendMode="add";g.alpha=0;g.v.on=i*40;g.v.fx=x;g.v.fy=y;PX.parts.push(g)});if(["vuon","lc","home"].includes(P.sc))for(let i=0;i<14;i++){const s=mkPart("dust",true);s.v.kind="star";s.v.vx=0;s.v.vy=0;s.tint=0xffffff;s.scale.set(.12);s.v.fy=Math.random()*.25;PX.parts.push(s)}}}

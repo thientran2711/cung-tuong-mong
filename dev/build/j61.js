@@ -23,17 +23,27 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
  add(S.emp);if(!S.thDead){S.thO=S.thO||{};add(S.thO)}add(S.maid);(S.staff||[]).forEach(add);(S.kids||[]).forEach(add);
  (rivals||[]).forEach(v=>{add(v);add(v.maid);(v.staff||[]).forEach(add);(v.kids||[]).forEach(add)});
  for(const c in (S.court||{}))add(S.court[c]);(S.men||[]).forEach(add);try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c])}catch(e){}return L}
-function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return +K[kOf61(e)]||0}
+/* her own household (maid, servants hired later, her own children born later) lives with her: always fully known (review/face-reveal:
+   new servants were "Thái giám ???" in her own guard-order and spy dialogs) */
+function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)}catch(x){return false}}
+function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
    (the "Đã quen" level alone is not enough: owner case "listed in Ân oán, Ta chưa gặp"). Everyone else keeps the face level (>= 1). */
-function met61(e){try{return !!(S&&S.met&&S.met[e.id]!=null)||/* a meeting in week 0 stores 0 (review ts-a r6) */(typeof sameHouse==="function"&&sameHouse(S,e))}catch(x){return false}}
-function isKnown61(e){if(k61St(e)<1)return false;if(S&&e&&e!==S&&(rivals||[]).includes(e))return met61(e);return true}
+function met61(e){try{return !!(S&&S.met&&S.met[e.id]!=null)||/* a meeting in week 0 stores 0 (review ts-a r6) *//* a cung nữ has met the consort she serves (review/small-bugs-2) */!!(S&&S.srv&&e&&S.srv.mid===e.id)||(typeof sameHouse==="function"&&sameHouse(S,e))}catch(x){return false}}
+/* ONE source of truth for "met" (review/small-bugs-2, LUẬT SỬA CẢ NHÓM): the chí tôn Hoàng thượng and Thái hậu are MET from the first
+   day of palace life on every road (consort, cung nữ, lãnh cung): their face shows on the stage, in dialogs, news rows and the Tuần lục alike.
+   The reigning Hoàng hậu is a consort: met61 (S.met / same palace). kitChiTonMet(k) answers the same for the stage chips (kitCourtKnown). */
+function k61ChiTon(e){return !!(S&&e&&(e===S.emp||(S.thO&&e===S.thO)))}
+function kitChiTonMet(k){try{if(!S)return true;if(k==="emp")return true;if(k==="th")return !S.thDead;if(k==="hh"){const q=typeof queenP==="function"?queenP():null;return !q||q===S||isKnown61(q)}}catch(e){}return true}
+window.kitChiTonMet=kitChiTonMet;window.kitCourtKnown=kitChiTonMet;
+function isKnown61(e){if(k61ChiTon(e))return true;if(k61St(e)<1)return false;if(S&&e&&e!==S&&(rivals||[]).includes(e))return met61(e);return true}
 /* public figures (kit review): Hoàng thượng, Thái hậu and the reigning Hoàng hậu are known by name and title (stage 2) from the first
    day; their face (grey silhouette until then) shows after the first meeting / thỉnh an */
 function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;if(k61IsKid(e))return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
 /* the Emperor's children are announced at birth: every name is public; the FACE only after she has met the child (owner 11/15, jht) */
 function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
+function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.emp);if((+S.known[k]||0)<2)S.known[k]=2}if(!S.thDead){S.thO=S.thO||{};const k=kOf61(S.thO);if((+S.known[k]||0)<2)S.known[k]=2}}catch(e){}}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
@@ -60,7 +70,9 @@ function k61Title(e){const k=k61Kind(e);if(k==="consort")return typeof kitTitled
  if(k==="tq")return T("Tổng quản thái giám",e.name);if(k==="phys")return T("thái y",e.name);if(k==="eun")return T("thái giám",e.name);if(k==="maid")return T("cung nữ",e.name);if(k==="mama")return T("ma ma",e.name);
  if(k==="off")return T((typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan",e.name);return e.name||"người ấy"}
 /* becoming known (logged once); the other side learns her too when they meet */
-function k61Know(list,how,quiet,st){st=st||2;if(!S||!k61S())return[];const L=(Array.isArray(list)?list:[list]).filter(e=>e&&e!==S&&k61St(e)<st);if(!L.length)return[];
+/* the "how" of a meeting is appended to the log line as its own sentence: a bare fragment ("Thỉnh an", "gặp") must never dangle at the end of "Dạo này" (stat-fx-2) */
+function k61How(h){h=String(h||"").trim();if(!h)return"";h=h.charAt(0).toLocaleUpperCase("vi")+h.slice(1);return /[.!?…"”)]$/.test(h)?h:h+"."}
+function k61Know(list,how,quiet,st){st=st||2;how=k61How(how);if(!S||!k61S())return[];const L=(Array.isArray(list)?list:[list]).filter(e=>e&&e!==S&&k61St(e)<st);if(!L.length)return[];
  const nm=L.filter(e=>!k61Named(e)&&st>=2);const pubSeen=L.filter(e=>k61Pub(e)&&!isKnown61(e));const desc=L.filter(e=>!isKnown61(e)&&st===1).map(k61Desc);
  L.forEach(e=>{S.known[kOf61(e)]=st<2&&k61Pub(e)?2:st});K61VER++;
  if(!quiet){if(nm.length)log(`<span class="g">Ngươi đã biết: đó là ${nm.map(k61Title).join(", ")}.</span>${how?" "+how:""}`);else if(pubSeen.length&&st<3)log(`Ngươi đã được thấy mặt ${pubSeen.map(k61Title).join(", ")}.${how?" "+how:""}`);else if(desc.length)log(`Ngươi đã thấy mặt ${desc.join(", ")}; chưa biết tên.${how?" "+how:""}`);else if(st===3)log(`<span class="g">Ngươi đã quen biết ${L.map(k61Title).join(", ")}.</span>${how?" "+how:""}`)}return L}
@@ -74,7 +86,7 @@ function k61Week(){if(!S||!S.known)return;S.nkn=S.nkn||{};S.kRids=S.kRids||rival
  for(const v of rivals)if(!S.kRids.includes(v.id)){S.kRids.push(v.id);if(v.alive&&!v.out)S.nkn["r"+v.id]={}}
  for(const kb in S.nkn){const b=kb==="me"?S:RV(+kb.slice(1));if(!b||(b!==S&&(!b.alive||b.out))){delete S.nkn[kb];continue}for(const a of liveRivals(true))if(a!==b&&!S.nkn[kb]["r"+a.id]&&roll(35))npcLearn(a,b)}}
 /* ---- a new life: who she knows from the first day ---- */
-function k61InitNew(){if(!S)return;S.known={me:3};S.nkn={me:{}};S.kRids=rivals.map(v=>v.id);const K=e=>{if(e)S.known[kOf61(e)]=3},o=S.origin&&S.origin.k;
+function k61InitNew(){if(!S)return;S.known={me:3};k61SeedChiTon();S.nkn={me:{}};S.kRids=rivals.map(v=>v.id);const K=e=>{if(e)S.known[kOf61(e)]=3},o=S.origin&&S.origin.k;
  K(S.maid);(S.staff||[]).forEach(K);(S.kids||[]).forEach(K);
  rivals.forEach(v=>{try{if(sameHouse(S,v)){K(v);npcLearn(v,S)}}catch(e){}});
  try{const T=S.trieu;if(T&&T.H)for(const c in T.H)if(T.H[c].dadOf==="me")K(T.H[c])}catch(e){}
@@ -85,7 +97,7 @@ function k61InitNew(){if(!S)return;S.known={me:3};S.nkn={me:{}};S.kRids=rivals.m
  if(S.ally){const v=liveRivals(false).filter(x=>!sameHouse(S,x)).sort((a,b)=>aff(S,b)-aff(S,a))[0];if(v&&aff(S,v)>=25){K(v);npcLearn(v,S)}}
  K61VER++}
 (function(){const s0=start;start=function(){K61NEW=true;let r;try{r=s0.apply(this,arguments)}finally{K61NEW=false}try{k61InitNew();if(Q.length)showModal();render()}catch(e){console.error(e)}return r}})();
-(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(K61NEW&&S&&!S.known)k61InitNew()}catch(e){}return r}})();
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(K61NEW&&S&&!S.known)k61InitNew();k61SeedChiTon()}catch(e){}return r}})();
 /* ---- portraits carry who they are (a key string); strangers render as the grey silhouette ---- */
 (function(){const W=(name,get)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{const e=get.apply(this,arguments);if(e&&r){const k=kOf61(e);if(typeof r==="object")r.kk=k;else if(typeof r==="string"&&r)K61SRC[r]=k}}catch(x){}return r}};
  W("pv",v=>v);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pMaid",()=>S.maid);W("pDoc",()=>S.court&&S.court.ty);W("pServ",s=>s);W("pServ0",s=>s);
@@ -154,8 +166,38 @@ function k61Unknown(st){return (rivals||[]).filter(v=>v.alive&&!v.out&&k61St(v)<
 (function(){if(typeof facHTML!=="function")return;const f0=facHTML;facHTML=function(){if(!S||!S.known)return f0.apply(this,arguments);return k61Hide(()=>f0.apply(this,arguments),2)}})();
 /* ---- ways she gets to know people ---- */
 /* someone speaking to her in an event (a dialog she must answer) */
-(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&m.opts&&m.who&&S&&S.known){const e=k61PortEnt(m.who);if(e&&!k61Named(e)&&e!==S.emp)k61Meet(e,"Người ấy đến tận nơi nói chuyện với ngươi.")
-  else if(e===S.emp&&!k61Named(e)&&/Hoàng thượng/.test(m.h||""))k61Meet(e,"Ngài cho gọi ngươi đến hầu chuyện.")}}catch(e){}return s0.apply(this,arguments)}})();
+/* FACE REVEAL (owner 15/11 ~21:00Z, whole class): EVERY event dialog that SHOWS a person to her — comes to talk, picks a quarrel,
+   frames / harms her, summons her, a merit task, a toilette reaction, a j67 arc step, a j68 event, a gift handed over in person: any
+   Q item that carries the person (who / who2 / stage / faces / kit.subject) — reveals that person's FACE (stage >= 1; a consort also
+   counts as met, met61) the moment the dialog opens, so the dialog itself already draws the real face and full-body figure, and so
+   does every other screen afterwards (stage, news, Tuần lục, Ân oán). The NAME (stage >= 2) comes with it when the person speaks to
+   her (a dialog with options and the person as `who`) or the text names her / him. Hoàng thượng / Thái hậu / Hoàng hậu / the
+   Emperor's children are named from day one (k61Pub); the dialog now gives their face too (was: grey in summons, Thái hậu triệu,
+   lake-trip / festival invitations). People only MENTIONED (a name in a news list, a tuyển tú roll, a rumour) stay strangers. */
+function k61ShownEnts(m){const L=[];if(!m||!S)return L;const add=x=>{if(!x||typeof x!=="object")return;let e=null;
+  try{e=k61PortEnt(x)||(x.__kp&&typeof x.__kp==="object"?x.__kp:null)||(k61All().includes(x)?x:null)}catch(er){}if(e&&e!==S&&!L.includes(e))L.push(e)};
+ (Array.isArray(m.stage)?m.stage:[]).forEach(add);add(m.who);add(m.who2);add(m.kit&&m.kit.subject);(Array.isArray(m.kit&&m.kit.stage)?m.kit.stage:[]).forEach(add);
+ (Array.isArray(m.faces)?m.faces:[]).forEach(f=>add(f&&f[0]));return L}
+function k61NameIn(e,txt){return k61Vars(e).some(v=>txt.includes(v))}
+/* panels she opens herself to look something up (Chứng cứ về X, Đã biết về X, Tâm trạng · X) only SHOW what she already has:
+   never a meeting (review face-reveal r1: opening the intel / evidence panel of an unmet consort made her met) */
+function k61Look(m){return !!(m&&m.kit&&m.kit.look)}
+function k61Shown(m){try{if(!m||!S||m.__k61||!k61S()||k61Look(m))return;const E=k61ShownEnts(m);m.__k61=1;if(!E.length)return;
+  const txt=String((m.t||"")+" "+(m.h||"")).replace(/<[^>]+>/g," ");let w=null;try{w=m.who?k61PortEnt(m.who)||m.who.__kp||m.who:null}catch(x){}
+  for(const e of E){const talk=!!(m.opts&&m.opts.length)&&e===w;const st=talk||k61NameIn(e,txt)?2:1;
+   const how=k61Pub(e)?"":talk?"Người ấy đến tận nơi nói chuyện với ngươi.":"Người ấy hiện ra trước mặt ngươi.";
+   if(k61St(e)<st||((rivals||[]).includes(e)&&!met61(e)))k61Meet(e,how,st)}}catch(x){console.error("k61Shown",x)}}
+/* WHEN: only the dialog that is really drawn. j68 evGate (assembled before j61, so it runs INSIDE this wrapper) holds / drops optional
+   events from Q right before drawing; revealing Q[0] before it ran met people whose dialog never opened (review face-reveal r1). So the
+   reveal runs right after evGate; without j68 (or for an item left unrevealed) it runs here, before / after drawing. */
+(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){const r=g0.apply(this,arguments);try{k61Shown(Q[0])}catch(e){}return r}}
+ const s0=showModal;showModal=function(){try{if(typeof evGate!=="function")k61Shown(Q[0])}catch(e){}const r=s0.apply(this,arguments);
+  try{const M=document.getElementById("modal");if(M&&!M.hidden&&Q[0]&&!Q[0].__k61)k61Shown(Q[0])}catch(e){}return r}})();
+/* old saves (cheap backfill, once): a consort the old rule named in a dialog ("… đến tận nơi nói chuyện với ngươi") was never marked met,
+   so she stayed a grey silhouette; her logged line marks her met now */
+function k61Backfill(){try{if(!S||!S.known||S.k61bf)return;S.k61bf=1;const T=(S.logs||[]).map(x=>String(x).replace(/<[^>]+>/g," ")).filter(x=>/đến tận nơi nói chuyện với ngươi|tự đến gặp ngươi|tự tìm đến ngươi/.test(x));
+  if(!T.length)return;S.met=S.met||{};for(const v of rivals||[])if(v.id!=null&&S.met[v.id]==null&&k61Named(v)&&T.some(x=>k61Vars(v).some(n=>x.includes(n))))S.met[v.id]=wk()}catch(e){}}
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(!K61NEW)k61Backfill()}catch(e){}return r}})();
 /* morning audience */
 (function(){const a0=act;act=function(i){const a=deck[i];const was=a&&a.done;const r=a0.apply(this,arguments);try{if(a&&a.done&&!was&&S&&S.known){
   if(/^Thỉnh an Thái hậu/.test(a.n)&&!S.thDead){S.thO=S.thO||{};k61Know(S.thO,"Buổi thỉnh an, ngươi được dẫn đến trước mặt Thái hậu.")}
@@ -223,7 +265,7 @@ function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const 
 
 /* kit names for strangers: j79's kitName/kitPersonLine draw "<title> ???" (rank colour kept: the dress shows the rank) */
 setTimeout(()=>{try{if(typeof kitName!=="function")return;const n0=kitName;kitName=function(p,o){try{if(p&&p!==S&&S&&S.known){const e=k61PortEnt(p)||p;
-  if(e&&k61All().includes(e)&&!k61Named(e)){const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
+  if(e&&k61All().includes(e)&&!k61Named(e)){const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti" style="--rt:${kitRtOf(t)}">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
 /* ---- kit review (FAIL 11/14): a NAME she knows is never hidden. Stage 2 "Biết tên" and the public figures (Hoàng thượng, Thái hậu,
    Hoàng hậu) whose face she has not seen yet: grey silhouette in the grey stone frame (j60), but the name stays (card name, strip,
    stage tag, kitName, podium) and the frame label is the title (tước) instead of "Người lạ". Only stage 0 reads "Người lạ" (j60) or

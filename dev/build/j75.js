@@ -24,7 +24,13 @@ window.ntTaken=ntTaken;window.ntReason=ntReason;window.ntCan=ntCan;
 
 /* --- stealing: one try each, nothing after the visit is taken (her and NPCs alike) --- */
 const sn0=stealNight;stealNight=function(a,t,mode){if(!ntCan(a))return "";ntTry(a);return sn0.apply(this,arguments)};
-const sw0=stealWin;stealWin=function(a,t,mode){const n=ntTaken();if(n)return `${ntReason(a)}. `;const r=sw0.apply(this,arguments);if(a!==S)ntTake(a);return r};
+const sw0=stealWin;stealWin=function(a,t,mode){const n=ntTaken();if(n)return `${ntReason(a)}. `;
+ /* owner 11/15 16:58Z: the log says what REALLY happened to the one she took the night from (no card range "+3 đến +23") */
+ const me=a===S&&t&&t!==S;const b=me?{f:aff(t,S),o:Math.round(oan(t,S)),g:t.ghen||0}:null;
+ let r=sw0.apply(this,arguments);if(a!==S)ntTake(a);
+ if(me)try{const sg=x=>(x>0?"+":"−")+Math.abs(x);const d=[];const g=(t.ghen||0)-b.g,f=aff(t,S)-b.f,o=Math.round(oan(t,S))-b.o;
+  if(g)d.push(`nàng ghen ${sg(g)}`);if(f)d.push(`Nàng → ta: thiện cảm ${sg(f)}`);if(o)d.push(`Nàng oán ta ${sg(o)}`);if(d.length)r=r.replace(/\s*$/,"")+" "+d.join(", ")+". "}catch(e){}
+ return r};
 for(const k of ["steal","road"]){const A0=ACT[k];if(!A0)continue;const ok0=A0.ok;A0.ok=function(a,t){return ntCan(a)&&ok0.apply(this,arguments)}}
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(v){const w=ntReason(S);return w||(l0?l0.apply(this,arguments):"")}}
 /* the NPC social "steal" used to report a stolen night without moving it; now it is the real act or nothing */
@@ -37,7 +43,7 @@ const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||!Array
  deck=deck.filter(a=>!(S.pregUnk&&a&&a.n==="Báo tin có thai"));
  for(const a of deck){if(!a||a.__steal||!(a.n==="Tranh sủng"||a.n==="Chặn ngự giá")||a.b!==2)continue;const road=a.n==="Chặn ngự giá";const desc=a.t;const v=tonightOf();if(!v||v===S)continue;
   a.__steal=1;Object.defineProperty(a,"lock",{get:()=>!ntCan(S),set:()=>{},enumerable:true,configurable:true});Object.defineProperty(a,"t",{get:()=>ntCan(S)?desc:ntReason(S),set:()=>{},enumerable:true,configurable:true});
-  a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${v.name} ghen +25, thù -15 · mỗi đêm chỉ thử một lần`;
+  a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"} · mỗi đêm chỉ thử một lần`;
   a.go=()=>{ntTry(S);const n=ntTaken();if(n){log(`${ntReason(S)}.`);return}const t=tonightOf();if(!t||t===S)return;log(`${stealWin(S,t,road?"road":"feign")}Đêm thị tẩm đang chờ; Sủng, Ân tình tính sau đêm.`)};
   a.fail=()=>{ntTry(S);log("Đêm nay ngươi không còn dịp giành lại.")}}}catch(e){console.error(e)}return r};
 /* results never echo the pre-act line of a steal card (that line was the source of '+3..8', 'có thể') */
@@ -183,13 +189,13 @@ function whyRows(){const T=[];for(const p of consorts()){if(p!==S&&(!p.alive||p.
   if(p.block)rs.push({k:"block",t:"thẻ bài bị giấu",pub:p===S?false:false});if(p.admonWk!=null&&wk()-p.admonWk<=2)rs.push({k:"admon",t:"vừa bị khuyên mưa móc đều khắp",pub:true});if(FAIRN.sat&&satN(p))rs.push({k:"sat",t:`đã được thị tẩm ${nightsIn(p,6)} đêm trong sáu tuần, ngài muốn đổi người`,pub:true});if(p.tablet)rs.push({k:"tablet",t:"đã đút lót Kính sự phòng",pub:p===S});
   T.push({id:p===S?"me":p.id,name:p===S?"Ngươi":p.name,rank:rkName(p),sung:p.sung,w,n6:nightsIn(p,6),reasons:rs})}
  const tot=T.reduce((a,x)=>a+x.w,0)||1;T.forEach(x=>x.share=Math.round(x.w*100/tot));return T.sort((a,b)=>b.w-a.w)}
-const fl0=flip;flip=function(){let rows=null;try{rows=whyRows()}catch(e){}const r=fl0.apply(this,arguments);let cause=S&&S.tonight?"tablet":"none";
+const fl0=flip;flip=function(){let rows=null;try{rows=whyRows()}catch(e){}const r=fl0.apply(this,arguments);const t0=S&&S.tonight;let cause=S&&S.tonight?"tablet":"none";
  try{if(S&&!S.dead){const q=queenP();const tq=S.tuan===0?FAIRN.custom[0]:S.tuan===1?FAIRN.custom[1]:0;const cur=tonightOf();
   if(S.tonight&&q&&tq&&!ntTaken()&&cur!==q&&nightCh(q)>0&&roll(tq)){const lost=cur;
    if(lost===S){for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp")Q.splice(i,1);Q.push({t:"Kính sự phòng",who:pEunCourt?pEunCourt("ksp"):undefined,h:`<p>Thẻ bài của ngươi đã được lật, nhưng hôm nay là ${S.tuan===0?"mùng một":"rằm"}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.</p>`})}
    S.tonight=q===S?"me":q;if(q===S)pushDil(mkP("ksp"),"Kính sự phòng báo tin");cause="custom"}
   else if(S.tonight&&ntTaken()&&ntTaken().who!=="me")cause="stolen";
-  const t=tonightOf();S.nightWhy={wk:wk(),pick:t?(t===S?"me":t.id):null,cause,day:S.tuan===0?"mùng một":S.tuan===1?"rằm":"",mood:MOODW[S.emp.mood],rows:rows||[]}}}catch(e){console.error(e)}return r};
+  const t=tonightOf();S.nightWhy={wk:wk(),pick:t?(t===S?"me":t.id):null,flip0:t0?(t0==="me"?"me":t0.id):null/* the card he turned (KIT §67 card-flip) */,cause,day:S.tuan===0?"mùng một":S.tuan===1?"rằm":"",mood:MOODW[S.emp.mood],rows:rows||[]}}}catch(e){console.error(e)}return r};
 window.nightWhy=function(){const d=S&&S.nightWhy;if(!d||d.wk!==wk())return null;const row=d.rows.find(x=>x.id===d.pick)||null;const tot=d.rows.reduce((a,x)=>a+x.w,0);
  const text=!d.pick?"Đêm nay Hoàng thượng không lật thẻ bài nào.":d.cause==="custom"?`Hôm nay là ${d.day}: theo lệ, Hoàng thượng nghỉ ở cung Hoàng hậu.`:d.cause==="stolen"?"Hoàng thượng bị mời sang cung khác giữa đường.":row?`${row.name}: Sủng ${row.sung} · dịp được lật thẻ: ${typeof chanceLvl==="function"?chanceLvl(row.share):word(row.share)} · ${row.n6} đêm trong sáu tuần gần đây · Hoàng thượng đang ${d.mood}`:"";
  return Object.assign({},d,{row,text})};

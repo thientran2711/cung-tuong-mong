@@ -56,17 +56,45 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
    ánh tán xạ ấm nhẹ — bớt tương phản chút, sáng hơn chút, KHÔNG ngả xám/lam, KHÔNG sepia/nâu; lớp .light (z 0, DƯỚI người) phủ ánh ngà ấm rất nhẹ,
    người giữ nguyên màu (không phủ lên hình). Vệt mưa do lớp hạt j11 vẽ. Lãnh cung giữ nguyên vẻ hoang lạnh của tranh. */
 (function(){const css=document.createElement("style");css.textContent=`
-.stage.kown .scimg{filter:none!important}
-.stage.kown.rp2 .scimg{filter:saturate(1.04)!important}.stage.kown.rp3 .scimg{filter:saturate(1.07) brightness(1.02)!important}
-.stage.kown.kwet:not(.sc-lc) .scimg{filter:saturate(.97) contrast(.94) brightness(1.07)!important}
-.stage.kown.kwet.night:not(.sc-lc) .scimg{filter:saturate(.95) contrast(.95) brightness(1.01)!important}
-.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(255,238,210,.13),rgba(255,226,188,.08))!important}
-.stage.kown.kwet.night:not(.sc-lc)>.light{background:linear-gradient(rgba(255,214,160,.04),rgba(255,200,140,.06))!important}`;document.head.appendChild(css);
- function tag(){try{const st=$("stage");if(!st||!S)return;let own=false;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[placeOf(S.place).sc]||"")}catch(e){}
-  st.classList.toggle("kown",own);st.classList.toggle("kwet",own&&typeof wet==="function"&&!!wet())}catch(e){}}
+.stage .scimg,.stage>.pxc{filter:var(--kscf,none)!important}
+.stage.kown:not(.kwet):not(.sc-lc)>.light{background:none!important}
+.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(255,234,198,.10),rgba(255,222,178,.06))!important}
+.stage.kown.kwet.night:not(.sc-lc)>.light{background:linear-gradient(rgba(255,214,160,.04),rgba(255,200,140,.05))!important}`;document.head.appendChild(css);
+ /* KIT §56.2 ONE SCENE GRADE (owner 15/11 LUẬT SỬA CẢ NHÓM: every place, not only her room). The ONLY filter on a scene picture is
+    --kscf, written here and used by BOTH backdrops: the CSS picture (.scimg) and the Pixi copy of it (.pxc canvas, which hides .scimg
+    on WebGL devices — before, every .scimg filter silently vanished there, so a phone and a no-WebGL screen showed different colours).
+    The old stacked rules of p1.html/j25 (.sc-home brightness 1.25/1.35 + sepia .12, rp1 sepia .25, rp2/rp3 saturate 1.3–1.4 + hue/sepia)
+    are overridden for EVERY picture, graded or not. Dry snow / frost (j12 lightTick: a cool rgba(200,225,255) wash) on a graded painting:
+    no wash (the winter paintings already hold their snow light; a blue-grey cast is the lãnh cung look) — the frost edge (.frost) stays.
+    Wet grade re-measured over every graded place (scan: the r9 values .97/.94/1.07 + ivory .13 took chroma −1.7 on average, −3.5 on the
+    warm chiều halls = greyer; now chroma ±0, b* +1, L* +5). Knobs: KIT_SCENE.grade(o) → filter string; o = {own, wet, night, sc, tier}. */
+ const G={dry:"none",wet:"saturate(1.05) contrast(.95) brightness(1.05)",wetNight:"saturate(1.02) contrast(.96) brightness(1.02)",
+  rp2:"saturate(1.04)",rp3:"saturate(1.07) brightness(1.02)"};
+ function grade(o){if(o.sc==="lc")return "none";               /* lãnh cung: the bleak painting as painted (Tân Giả khố has its own painting, sc "tgk", graded like the others) */
+  if(o.own&&o.wet)return o.night?G.wetNight:G.wet;
+  return o.tier===3?G.rp3:o.tier===2?G.rp2:G.dry}
+ function state(){const P=placeOf(S.place),k=S.place;let own=false,tier=-1;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[P.sc]||"")}catch(e){}
+  if(k&&k[0]==="r"){try{const v=RV(+k.slice(1));if(v)tier=v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0}catch(e){}}
+  return {own,wet:typeof wet==="function"&&!!wet(),night:(S.buoi||0)===(typeof B4L==="number"?B4L:3),sc:P.sc,tier}}
+ window.KIT_SCENE={G,grade,state};
+ function tag(){try{const st=$("stage");if(!st||!S)return;const o=state();
+  st.classList.toggle("kown",o.own);st.classList.toggle("kwet",o.own&&o.wet);
+  const f=grade(o);if(st.style.getPropertyValue("--kscf")!==f)st.style.setProperty("--kscf",f)}catch(e){}}
  window.kitSceneTag=tag;
  if(typeof renderStage==="function"){const r2=renderStage;renderStage=function(){const r=r2.apply(this,arguments);tag();return r}}
  if(typeof lightTick==="function"){const l0=lightTick;lightTick=function(){const r=l0.apply(this,arguments);tag();return r}}})();
+/* ---- KIT §56.4 LIFE-STATE PLACE (coordinator 15/11: a lãnh cung save showed Ngọc Thanh các on the stage) ----
+   The stage picture follows S.place. Two life states pin her to one place, whatever path set S.place:
+   · in lãnh cung (S.out): Lãnh cung. A new day (j3) leaves S.visit.k="home" after coldVisit, so a reload (deser) put her back "home"
+     = her old palace picture; any later S.place="home" did the same. → coldVisit() (place lc + the fallen consorts with her).
+   · a maid serving punishment in Tân Giả khố (S.srv.lau>0): Tân Giả khố (j42 forced it only on goTo).
+   Checked before every render/renderStage, so old saves are right on load. Promotion (S.pal) only renames "home": same room picture. */
+(function(){function lifePlace(){try{if(typeof S!=="object"||!S||S.dead)return;
+  if(S.out){if(S.place!=="lc"||!S.visit||S.visit.k!=="lc"){if(typeof coldVisit==="function")coldVisit();else{S.place="lc";S.visit={k:"lc",people:[],talked:false}}}}
+  else if(typeof isSrv==="function"&&isSrv()&&S.srv.lau>0&&(S.place!=="tgk"||!S.visit||S.visit.k!=="tgk")){S.place="tgk";if(typeof srvVisitOf==="function")S.visit=srvVisitOf("tgk")}}catch(e){}}
+ window.kitLifePlace=lifePlace;
+ if(typeof render==="function"){const f0=render;render=function(){lifePlace();return f0.apply(this,arguments)}}
+ if(typeof renderStage==="function"){const f1=renderStage;renderStage=function(){lifePlace();return f1.apply(this,arguments)}}})();
 /* ---- TUẦN LỤC: WIDE FIGURES (owner 13:45Z Thái hậu cut by the column; 03:55Z ONE figure scale: full body ≈85–90 % of picture
    height, NEVER shrink to fit) — KIT §56.3 ----
    The person page (.kbk-person.kbk-full) gives the figure a fixed column --porf sized for a normal standing figure. A wider figure
@@ -78,7 +106,7 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
    · phones (.kbk.narrow): same — figure moved inside the page, never scaled; the text already sits on the paper panel. */
 (function(){let q=0;const TEXT_MIN=220,FIG_MIN=.85,TORSO=.12;   /* TORSO: half shoulder width ≈ 12 % of figure height (sleeves/train may go behind the text) */
  const AR=window.__figAR=window.__figAR||{},HX=window.__figHX=window.__figHX||{},R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
- const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}`;document.head.appendChild(st);
+ const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}html body .kbk-person.kbk-full>.kbk-por{overflow:clip!important}`;document.head.appendChild(st);
  /* where the BODY stands in the picture (0..1 of its width): centre of the head = alpha mass of the top 16 % rows. Trains/outpainted hems
     make many figures asymmetric, so the body is not the picture centre. CDN images are CORS-open; on failure 0.5. */
  function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d");g.drawImage(I,0,0,w,h);
@@ -103,14 +131,14 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
    if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
    const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
-   if(box.closest(".kbk.narrow")){   /* phones: unchanged from r7 (OPEN: a figure wider than the whole page is still scaled to the page — owner decision pending) */
-    const s=w0>bw?bw/w0:1,w=w0*s,l=(pw-w)/2;let dx=0;if(l<0)dx=-l;else if(l+w>bw)dx=bw-(l+w);
-    const t=(s<1||Math.abs(dx)>0.5)?`translateX(${dx.toFixed(1)}px) scale(${s.toFixed(4)})`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;return}
-   const over=w0>pw+1;box.classList.toggle("kbk-figover",over);if(!over)return;
-   let L=0;const bodyR=hx*w0+TORSO*H;if(L+bodyR>pw)L=Math.max(pw-bodyR,-(hx*w0-TORSO*H));
-   const dx=L-(pw-w0)/2,t=Math.abs(dx)>0.5?`translateX(${dx.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t;
-   /* a train that passes the page's left edge must not end in a straight cut (owner 13:45Z): it fades into the paper over 48 px */
-   if(im){const mk=L<-0.5?`linear-gradient(to right,transparent ${(-L).toFixed(0)}px,#000 ${(-L+48).toFixed(0)}px)`:"";if(im.style.maskImage!==mk){im.style.maskImage=mk;im.style.webkitMaskImage=mk}}})}catch(e){}}
+   /* KIT 32.2a (owner 15/11, "Tuần lục p.6 Thái hậu": the robe spread under the text): the figure stays INSIDE its own column on every
+      screen (phones too) and is never scaled: the body (head centre) is centred in the column and whatever is wider (train, hem, outer
+      sleeve) is CUT at the column edge (the column clips), with a 24 px soft fade at a cut edge; the text never sits on the figure. */
+   box.classList.remove("kbk-figover");const over=w0>pw+1;
+   let L=(pw-w0)/2;if(over){L=pw/2-hx*w0;L=Math.min(0,Math.max(pw-w0,L))}
+   const dx=L-(pw-w0)/2,t=Math.abs(dx)>0.5?`translateX(${dx.toFixed(1)}px)`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;
+   if(im){const g=[];if(over&&L<-0.5)g.push(`transparent ${(-L).toFixed(0)}px,#000 ${(-L+24).toFixed(0)}px`);if(over&&L+w0>pw+0.5)g.push(`#000 ${(pw-L-24).toFixed(0)}px,transparent ${(pw-L).toFixed(0)}px`);
+    const mk=g.length?`linear-gradient(to right,${g.length===2?g.join(","):g[0].startsWith("transparent")?g[0]:"#000 0,"+g[0]})`:"";if(im.style.maskImage!==mk){im.style.maskImage=mk;im.style.webkitMaskImage=mk}}})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
  window.kitBookFigClamp=clamp;
  try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbk-person,.kesfi,.kbk")||n.querySelector&&n.querySelector(".kbk-person.kbk-full")))))soon()}).observe(document.body,{childList:true,subtree:true})}catch(e){}

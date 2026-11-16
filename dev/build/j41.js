@@ -66,7 +66,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
   if(!window.__accSilent&&!S.dead&&!Q.length&&!S.out&&!S.confined){const st=accState(k);const opts=[];
    if(st.ask&&!st.empAway)opts.push({n:st.ask==="yk"?"Xin yết kiến":"Xin bái kiến",fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)});
    if(st.kind&&st.sneakOk)opts.push({n:"Lẻn vào",fx:{},x:accSneakLine(k,st.tc),go:()=>setTimeout(()=>accSneak(k),0)});
-   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: không đủ khắc (cần ${st.tc+2}, còn ${4-used}).</p>`:""}`,opts});showModal()}
+   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: ${typeof j77Bound==="function"?j77Bound(st.tc+2):`không đủ khắc (cần ${st.tc+2})`}.</p>`:""}`,opts});showModal()}
   return}
  const prev=S.place;const r=g0.apply(this,arguments);
  try{if(k==="lc"&&S.place==="lc"&&prev!=="lc"&&!S.out){apply({danh:-2});log("Bị thấy lui tới Trường Môn viện: Danh -2.");if(S.visit)S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+"Có người thấy ngươi ở lãnh cung: Danh -2."}}catch(e){}
@@ -121,7 +121,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 (function(){const st=document.createElement("style");st.textContent=`
 .mspot.agrey{cursor:pointer;pointer-events:auto}
 .mspot.agrey .mlab{opacity:1!important}
-.mspot .mlab .mlock{display:inline-block;vertical-align:-1px;margin-left:4px;opacity:.85}
+.mspot .mlab .mlock{flex:none;display:block;margin-left:0;opacity:1;color:#6b4a1c}.mspot .mlab .kmlock{flex:none}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
 .mspot .macts{display:flex;flex-direction:column;gap:2px;margin-top:2px;align-items:center;z-index:3}
