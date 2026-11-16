@@ -115,4 +115,4 @@ Running (main): story14-p1 opus session_01UV1SzkHMTxeSLrXW9U3BdC (plan + phase-1
 ART (main samples): foreign-princess v3 sent 07:12Z (955 cr total) — waiting owner verdict; s11 flagged: Nam Chiếu lost its silver ethnic ornaments, maid faces not checked. place-glyphs worker session_01UV1SzmEsuu42GCFecC9HGf: glyph v2 sample (3, 120 cr) sent — waiting verdict (then 6 more → Foreman C ~240 cr); NOW redoing Nội vụ phủ 16-set + PALETTE GUIDE (OD:L1257) ~1,040 cr. Foreman C: 38 festival buổi pictures tonight (OD:L1258, ~2,500 cr) using that palette guide.
 Foremen inbox written: B (Q24 answered, D5 cancelled → NPC roads, mg-balance HIGH, D36 unblocked, model audit), C (D13/D19/D14/D44, fig-bg-k1 review, festival art), D (GO act waves, C44 live, Xóa sổ trên mây button).
 Owner questions OPEN: NVP glossy floor (superseded by her 07:15Z redo order); fp v3 verdict; glyph v2 verdict. Percent "xong / chơi được" never measured in s11 — measure (bot/feature checklist) and report real numbers.
-- (07:12Z) MAIN SESSION 12 = (see next line, opened by s11).
+- (07:12Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB (opened by s11). Workers report there from now on.
