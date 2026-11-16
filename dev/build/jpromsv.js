@@ -13,10 +13,10 @@
    Co-op: s.coop servants skip pride/leave. Old saves: new fields (s.proud) are optional. Numbers in BAL.sp (one source). ================= */
 Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:3,eunuch:2},
  proud:{tham:45,lanh:30,chuyen:30,nhat:10,trung:5},proudAvg:24,proudMo:6,proudLoy:3,bully:1,leaveCh:15,leaveLoyal:60,envySenior:5,
- keepMul:.5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2}});
+ keepMul:.5,keepMin:5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2}});
 function spQ(o){const q=typeof queenP==="function"?queenP():null;return q&&q!==o?q:null}
 /* the favour road for mistress o and servant s: {ok,n,k,lbl,how,val} */
-function spFav(o,s){const B=BAL.sp,pay=BAL.pay||[40,55,70,95,125,165,215,280];const r=Math.min(7,Math.max(0,rkOf(o)));
+function spFav(o,s){const B=BAL.sp,pay=BAL.pay;const r=Math.min(7,Math.max(0,rkOf(o)));
  const n=cl(Math.round(dbCost(s)*pay[B.favRef]/pay[r]*B.favPerBac),B.favMin,B.favMax);const q=spQ(o);const k=q?"hh":"th";
  const lbl=k==="hh"?"Hoàng hậu quý ngươi":"Thái hậu quý ngươi",how=k==="hh"?"xin Hoàng hậu chuẩn":"xin Thái hậu chuẩn";
  let val;if(o===S)val=S[k]||0;else val=q?aff(q,o):(o.th||0);
@@ -37,14 +37,14 @@ function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+
  const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
  const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(1);dbDo(S,s,road,true)};
  tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
-  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,"lòng -2"],kem,go:go("bac")}),
-   tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất","lòng -2"],kem,go:go("fav")})]});
+  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,`lòng -${BAL.dbFail}`],kem,go:go("bac")}),
+   tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`lòng -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
 function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const [cm,ce]=capOf(v);const n=(v.staff||[]).filter(x=>x.role===s.role).length+(s.role==="maid"?1:0);return n<(s.role==="maid"?cm:ce)})());
  return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
 function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
-function spLeaveCard(s){const B=BAL.sp,v=spGoTo(S,s);const keep=Math.max(5,Math.round(dbCost({role:s.role,rk:srk(s)-1})*B.keepMul));const others=S.staff.filter(x=>x!==s);
+function spLeaveCard(s){const B=BAL.sp,v=spGoTo(S,s);const keep=Math.max(B.keepMin,Math.round(dbCost({role:s.role,rk:srk(s)-1})*B.keepMul));const others=S.staff.filter(x=>x!==s);
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:"Tăng tiền thưởng, giữ lại",fx:{bac:-keep},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{s.loyal=cl(s.loyal+B.keepGain,0,100);s.proud=Math.max(s.proud||0,S.turn)+B.keepMo;log(`Ngươi tăng tiền thưởng giữ ${s.name} lại.`)}}),
    tsOpt({n:"Giáng một bậc, giữ kỷ cương",duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:["lòng dưới 30 thì có khi bán mình cho cung khác"],go:()=>{s.rk=srk(s)-1;s.proud=0;s.loyal=cl(s.loyal-B.demoteLoy,0,100);others.forEach(x=>x.loyal=cl(x.loyal+B.demoteOthers,0,100));log(`Ngươi giáng ${s.name} xuống ${srkName(s)}.`)}}),
