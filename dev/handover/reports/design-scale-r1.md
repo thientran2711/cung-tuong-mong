@@ -56,3 +56,9 @@ Content: 27 dropped, 9 unwrapped; no new content width rules. Chrome only (allow
 3. One-page tab bar: 9 buttons in one row, font ~.59rem, "Sang buổi" wraps 2 lines — readable at s 1.22 but check with owner shots.
 4. dev/test/design-scale.js does not dismiss the first-run "Luân hồi" overlay / is timing-sensitive: under load the Fold flow read room→room→room once (re-run alone: room→page→room). Harden (tap "Bỏ qua", wait for overlay gone).
 5. PRE-EXISTING on main (not this branch): after Dư đồ, opening Hậu cung keeps `.maptab` → Hậu cung shows full width with the stage hidden on iPad (`game maptab cardtab`, panel 1164). Seen on live main too. Group fix: tab-mode classes must be reset on every tab change.
+
+## GO re-merges (s15)
+- main 92668096: index.html/sw.js only → rebuilt. main's new rotate-prompt.js / lib/device.js / test README expected portrait 755x1000 → fixed to 590x820 (6fd1ccf8); ALL PASS. cardflip, kit-popup-sample (5), popup-fullbody, dlg-clip, newgame-ui, stage-rail, coop 59/59, design-scale: pass.
+- main 9ddb3f6c (stage-slots-fix-r1): j59.js geo() conflict → main's kitSlotSw + design-scale's 46 px gutter (no innerWidth). stage-slots-fix 4 sizes (incl. 590x820), stage-slots-fix-r1-ev 3 sizes, design-scale (97.2 %), coop 59/59, rotate-prompt: pass.
+- scene-end "bloom" early=true FAIL at 755x1000/1180x820 — same on live main 9ddb3f6c (pre-existing).
+- **READY 802fe821** sent to s15.
