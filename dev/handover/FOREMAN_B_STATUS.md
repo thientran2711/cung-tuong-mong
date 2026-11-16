@@ -7,7 +7,7 @@ Context: session B1 started small (~30k tokens); now far past start+25% → ROLL
 - Slice B state: 24 PASS (20 LIVE on main via trains 1–3). PASS not yet on main: routes-port-r1 (D33, conditional loi-rieng §6.1), chapter-detail-r1 (C24), tuduc-mg-r1 (C41), difficulty-port-r1 (D31, conditional .kdiff override). Full shas under ## PASS.
 - Still running as OLD in-session agents of session 1 (they finish on their own; if no report file appears within ~2 h, re-open from the pushed branch/PROGRESS as a separate session):
   * C41b tuduc-pic — branch review/tuduc-pic (from tuduc-mg-r1 + main; pass TD_BG as pic in jtd tdPlay → picture-left frame). Needs a reviewer when "SẴN SÀNG KIỂM".
-  * D34 reviewer — branch review/scheme-games-port-r1 for review/scheme-games-port @7a581aed. Result → PASS/FAIL line here.
+  * D34 reviewer — DONE: PASS e25486e0 (see ## PASS).
 - Blocked: D36 rank-port (KIT REQUEST podium + person-dialog chips, see KIT KEEPER NEEDED), D41 promote-servants (waits for Foreman C D29 schedules/roster).
 - Open owner questions: Q3, Q5, Q6, Q8–Q20, Q22, Q23 (Q1, Q4, Q7, Q21 resolved). C7 notes for Foreman C: D31, D33, Q8, Q16.
 - Tools on the box: /home/user/wt/{PREAMBLE.txt, REVIEWER.txt, WORKER_B.txt, REPORT_B.txt, RESUME_B.txt, stpush.sh}. New session has its own container: copy the briefs from dev/handover/ (PREAMBLE.txt, REVIEWER.txt) + this file's rules; workers now run as separate sessions writing dev/handover/reports/<branch>.md.
@@ -40,7 +40,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D30 palace-map-port | review/palace-map-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
 | D31 difficulty-port | review/difficulty-port-r1 | opus | PASS cbb8ab2bf4b1c9efd2b7022c9ef87fe6b28b013c (CONDITIONAL: keeper decides the local .kdiff .ksub override) |
 | D33 routes-port | review/routes-port-r1 | opus | PASS 332308a1961681e37e0e4de78e86adc9aac5524d (CONDITIONAL on kit keeper: loi-rieng category in §6.1) |
-| D34 scheme-games-port | review/scheme-games-port @7a581aed (contains mg-easy-r1) | sonnet | REVIEWING (review/scheme-games-port-r1, sonnet) |
+| D34 scheme-games-port | review/scheme-games-port-r1 | sonnet | PASS e25486e0df86f6779aa61aa289e3ba5236b99f40 (CONDITIONAL: keeper confirms jopic grid-auto-rows change) |
 | D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
@@ -71,6 +71,7 @@ PASS review/routes-port-r1 332308a1961681e37e0e4de78e86adc9aac5524d (D33; Lối 
 PASS review/chapter-detail-r1 936a2fe78b457ad3339c8554c46c6d674c4edf57 (C24; grows kitGoalDetail — one panel, no kit part changed; chapter tap → detail + inline progress; dead-tap scan 0 confirmed dead; nit: inline progress repeats Hạn/Lợi thế; tiny private .chapgo + cursor rules for keeper to absorb)
 PASS review/tuduc-mg-r1 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 (C41; 4 Tứ đức minigames, Dung real-time clock; follow-up C41b adds the left picture)
 PASS review/difficulty-port-r1 cbb8ab2bf4b1c9efd2b7022c9ef87fe6b28b013c (D31; Dễ/Vừa/Khó per life as multipliers on BAL, Vừa = base exactly (verified); coop-e2e 59/59; when review/newgame-ui-r2 lands re-run dev/test/difficulty.js + idcard-pin-scan.js (picker already handles .kpscroll); numbers wait for C7 n≥30 re-measure)
+PASS review/scheme-games-port-r1 e25486e0df86f6779aa61aa289e3ba5236b99f40 (D34; 4 scheme minigames behind one choice dialog, odds ±1 step for her only, coop-timer 43/43; CONDITIONAL: kit keeper confirms reviewer's kit-wide jopic.js change `grid-auto-rows:max-content` (option cards were squeezed/clipped in kdper dialogs) — eyeball other kart option dialogs)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -104,6 +105,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - Shared mini-game guard (found by C41): j82 kg82Play ends any game after 97.5 s real time (env.end(0)); games with a clamped frame time run slower than real time on weak devices and can end at raw 0. jtd.js now uses a real-time clock; other clamped-dt games may still hit it — keeper/owner of j82 to check.
 - KIT REQUEST (D31): identity-card face picker filter tabs (.ksub.kpkf "Phi tần / Cung nữ", kitPicker j79) are sticky z-index 5 and paint over the pinned choices (.kpopts.kpscopts z 3) while scrolling — 1180x820 scroll 0–48, 1000x755 0–64, 844x390 112–176 (pre-existing on main). D31 adds a local `.kdiff .ksub{position:static;z-index:auto;margin:2px 0 4px}` (#jdiff-css) — keeper: absorb as a kit variant (e.g. .ksub.kinline) or approve. Reviewer: the overlap on the identity card also comes from .kcf-cards and IMG.kfr without jdiff; newgame-ui-r2's .kpscroll layout would fix it. Also seen once: Hành sự filter-chip bar over the end modal (synthetic trigger; check on a real death).
 - C41 tuduc-mg-r1 reviewer: shared easy-rules layer (Gợi ý + idle hint wrapper tdWrap, first-time card, hint ring .tdring.ksel) now exists twice (mg-easy + jtd) — one kit version worth having.
+- D34 reviewer: jopic.js one-option-per-row rule now grid-auto-rows:max-content (kit-wide); MƯU seal / HUD labels / boards still open; Thời cơ choice dialog still shows the act's own picture/caption ("Đầu độc") — OD:L199 wants it abstract → neutral picture? "Kiếp này chưa trọn" warning fires on every scheme act except Dò la (regex over option text) — main to fix.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
