@@ -13,6 +13,7 @@ T0=$(date +%s)
 REF=HEAD; ARGS=()
 for a in "$@"; do case "$a" in --*) ARGS+=("$a");; *) if [ "${#ARGS[@]}" -gt 0 ] && [ "${ARGS[-1]}" = "--cpu" ]; then ARGS+=("$a"); else REF=$a; fi;; esac; done
 TOP=$(git rev-parse --show-toplevel) || exit 1
+KIT=$(cd "$(dirname "$0")/../.." && pwd)   # where the check scripts live (this go-live kit), may differ from the sha under test
 SHA=$(git -C "$TOP" rev-parse --verify -q "$REF^{commit}") || { echo "QUICKCHECK FAIL · unknown sha $REF (fetch it first)"; exit 1; }
 LIVE_REF=${CTM_LIVE_REF:-origin/main}
 LIVE=$(git -C "$TOP" rev-parse --verify -q "$LIVE_REF^{commit}")
@@ -42,7 +43,7 @@ BUILD_S=$(( $(date +%s)-TB ))
 NOTBUILT=""
 if ! cmp -s <(git -C "$WT" show "$SHA:index.html" | norm) <(norm < "$WT/index.html"); then NOTBUILT=1; fi
 # 2. browser checks on the build
-node "$TOP/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | tee "$OUT/run.log"; RC=${PIPESTATUS[0]}
+node "$KIT/dev/tools/quickcheck.js" "$WT" "$OLDF" --out "$OUT" "${ARGS[@]}" | tee "$OUT/run.log"; RC=${PIPESTATUS[0]}
 # put the generated files back as committed (unless they had local edits before)
 [ -z "$DIRTY" ] && git -C "$WT" checkout -q -- index.html sw.js assets.json 2>/dev/null
 LINE=$(tail -1 "$OUT/run.log")
