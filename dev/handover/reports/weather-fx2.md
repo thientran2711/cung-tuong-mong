@@ -15,6 +15,6 @@ Rain unchanged. No new art, no new bytes. Perf: same caps x phone x height x ada
 - Heat shimmer and DRAGONFLIES need a painted atlas (kit request: "dragonfly" 9x64px, Magnific gpt-2-6). Coordinator was not reachable by send_message (session id not found).
 - Software-GL box: q drops to .7 on snow/rain; videos are worse than a real device.
 ## Tests
-weather-port 755x1000@2 + 1180x820@2 PASS (0 page errors); game-feel: 0 errs, overflowX false, off switch 0 parts, old save + offline OK; kit-conform 755x1000 / 1180x820: 84 conform, 15-16 MISSING (dialog kinds unrelated to weather; not compared with main), 0 floats; boot at both sizes: 0 page errors in every run.
+weather-port 755x1000@2 + 1180x820@2 PASS (0 page errors); game-feel: 0 errs, overflowX false, off switch 0 parts, old save + offline OK; kit-conform 755x1000 / 1180x820: 84 conform, 15-16 MISSING (dialog kinds unrelated to weather; not compared with main), 0 floats; dedicated boot-flash not run (every test above boots the game at both sizes with 0 page errors).
 ## Videos (dev/handover/reports/weather-videos-v2/, 755x1000, ~15 s, first ~5 s = game start cover)
 weather-{spring-petals,rain,storm,snow,wind-leaves,mist,fireflies-night,summer-lotus-season}-755x1000.mp4. I looked at a late frame of each (storm frame caught mid-flash, whole frame washed).
