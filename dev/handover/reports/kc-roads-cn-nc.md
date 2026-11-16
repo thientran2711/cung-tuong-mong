@@ -1,3 +1,4 @@
+SẴN SÀNG KIỂM 793cd37
 # kc-roads-cn-nc report (branch review/kc-roads-cn-nc)
 
 Task (main s11, opus): a PRE-PALACE home road for "Cung nữ tuyển vào cung" and "Công chúa hòa thân" (every country branch), the td pattern
