@@ -137,3 +137,5 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Note: review/recipes-r1 (§63) adds jrcp.js with no KIT.md text. The KIT text must be written before it merges.
 - (16/11, later) Owner LIFTED the promo-rules hold: +1 servant per rank stays. promo-rules-r1 goes into merge-train-2. Ignore the "promo-rules-r2 rework" note above.
 - (16/11) LIVE on main 4f5e5f3b3: A6 thaiy, A8 cal-plus, A9 promo-rules, A11 cardflip, C18, C19. cycle-r1 must rebase on main (it contains thaiy, already live).
+
+- ANSWER Q14 (s9, owner): (16/11, s9) Owner (Q14, foreign princess look): "khi vào cung là mặc đồ của phi tần mà đúng không? Nếu vậy thì vẽ thêm từ 84 nữ mình có đi. Không cần vẽ thêm trang phục phi tần" → NO per-origin outfit sets. Foreign princesses wear the normal consort rank robes; give each origin its own faces made FROM the existing 84 female faces (derive/variant, all ranks × 4 age bands via the existing robe sets). No new consort costume art.
