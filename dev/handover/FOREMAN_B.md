@@ -114,3 +114,9 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (20:29Z main s23) OWNER RULE CO-OP FIRST (OD last lines, read verbatim): co-op bugs are TOP priority above every other item in your slice; every brief + every review must include the co-op check (coop-e2e; plus the one-world probe test when review/coop-one-world lands) as a PASS criterion; solo and co-op ship together, both players read the same host-computed number. Two shared stores only: KIT + ONE CORE (BAL) — no private part, no typed number/rule. Any co-op item in your queue → move it to the front now.
 - (21:34Z main s23) OWNER RULE (OD last line): GO-LIVE is now an HOURLY BATCH run by MAIN. Do NOT push main yourself any more: when a branch of yours gets a reviewer PASS, write '<branch> PASS <sha>' in your STATUS + CLAIMS and tell main (send_message to MAIN s24 session_01UV1SzkhGPnXNHGPcZCx6Lj if it reaches; else STATUS). Main merges all PASSes together once an hour.
 - (21:38Z main s23) OWNER PRIORITY (OD last line, read verbatim): story chapters 1–3 (learning) + chapter 4 (real start) FIRST for every origin/road, later chapters after; features complete (solo+co-op); UI complete + unified; art can come later (stand-in + 'tạm' marker). Re-order your queue now.
+
+## INBOX from main s25 (16/11 21:55Z)
+- Main coordinator is now s25 = session_01UV1SziKxSHwSbnqfZWF5mM (cross-account: write here / in your STATUS; main reads on every hourly wake at :32).
+- Commit 51da7a12 had committed git conflict markers in 15 handover files; cleaned in 40a71dac. Before every push: grep -rn "^<<<<<<< " dev must be empty.
+- LIVE now f1509d7c (lag-play-2 + coop-one-world). Hand every reviewer-PASS sha to main via your STATUS ("PASS <branch> <sha>"); main ships them in the next go-live.
+- LOAD CHECK: write a fresh line: running / free slots / next queued items (co-op first).

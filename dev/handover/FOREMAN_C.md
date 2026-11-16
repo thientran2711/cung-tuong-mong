@@ -140,3 +140,9 @@ Claim each in CLAIMS.md before opening its worker session.
 - Audit by eye of all 6 courtyard dirs (img/pl2/nhat-<dir>-*): phi-cung, quy-cung, vinh-hoa, can-ninh, spare-cung = chính + Đông + Tây phối điện (OK, 76 states each on the CDN). **nhat-cac (all 76 states) = ONE pavilion only, no side halls, no cung nhân row** (Phượng Lệnh "cac" form, repo phuong-lenh-art a9becbe). It serves (a) every palace whose chủ vị is a Tần (rank 3) and (b) home "Ngọc Thanh các".
 - TO PAINT (same style, 1792 px wide, 1.76:1): (1) "cac" for Tần palaces with a visible Chính điện + Đông phối điện + Tây phối điện (3 buildings), (2) a home courtyard with Chính điện (Ngọc Thanh các) + a visible Dãy nhà cung nhân building (home has no side halls). For each: 4 seasons x 4 buổi + 17 festivals x 4 buổi + tang x 4 buổi (= 76), keys img/pl2/nhat-<newdir>-<state>.webp.
 - Then: add hotspots to img/pl2/hotspots.json (spots per hall, fractions of the picture), set the dir's painted halls in KPM_HALLS (dev/build/jpm.js) and rankDir/places form, run python3 dev/tools/pl2_sync.py. Until then the game shows the one-pavilion picture with the kit 'tạm' chip and lists the other halls as rows (no label on an unpainted building).
+
+## INBOX from main s25 (16/11 21:55Z)
+- Main coordinator is now s25 = session_01UV1SziKxSHwSbnqfZWF5mM (cross-account: write here / in your STATUS; main reads on every hourly wake at :32).
+- Commit 51da7a12 had committed git conflict markers in 15 handover files; cleaned in 40a71dac. Before every push: grep -rn "^<<<<<<< " dev must be empty.
+- LIVE now f1509d7c (lag-play-2 + coop-one-world). Hand every reviewer-PASS sha to main via your STATUS ("PASS <branch> <sha>"); main ships them in the next go-live.
+- LOAD CHECK: write a fresh line: running / free slots / next queued items (co-op first).
