@@ -493,7 +493,8 @@ function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(S.sac*.1
   const c=Q.find(m=>m.t==="Nhập cung làm cung nữ");if(c){c.h=String(c.h).replace(/\.\s*<\/p>/,`${tier===0?" (trước hết phải giặt đồ ở Tân Giả khố bốn tuần)":""}. Kết quả ${note}.</p>`)}
   log(`Tuyển cung nữ (${KC2SW[tier]}): ${tier===0?"Tân Giả khố, rồi ":""}hầu ${kc2RkN(srvM())}.`)}
  else{const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));const was=S.rank;S.rank=rank;if(rank<was){S.sung=Math.max(0,(S.sung||0)-(was-rank)*5)}S.lastPromo=S.turn;try{palFix()}catch(e){}kc2R0();
-  const c=Q.find(m=>m.t==="Nhập cung");if(c)c.h=String(c.h).replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${RANKS[rank].n}</b> (${note}${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""})`);
+  const c=Q.find(m=>m.t==="Nhập cung");if(c){const h0=String(c.h),nw=`${RANKS[rank].n} (${note}${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""})`;/* reviewer r1: main (j2, review/newgame-ui) now shows the rank in a kitRows "Phong" row; the old sentence form is kept for safety */
+   c.h=h0.includes(`phong <b>${RANKS[was].n}</b>`)?h0.replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${nw}</b>`):h0.replace(new RegExp(`(Phong[\\s\\S]*?>)${RANKS[was].n}(<)`),`$1${nw}$2`)}
   log(`Tuyển chọn (${KC2SW[tier]}): phong ${RANKS[rank].n}${rank<top?`, thân phận cho tới ${RANKS[top].n}`:""}.`)}
  try{kcSnapReset()}catch(e){}deal()}
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
