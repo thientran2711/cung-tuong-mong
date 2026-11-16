@@ -8,6 +8,10 @@ game pre-rotated with taps landing on the right buttons (owner 11/15; 412x1058 /
 Anything not listed here, or listed but drawn differently, is a FAIL.
 
 ## 0. SUPPORTED SCREENS · DESIGN CANVAS — RULE: ONE LAYOUT PER ORIENTATION, SCALED (owner 11/15) — `dev/site/rot.js`
+**0.1 Rotate prompt (owner 15/11 05:50Z "390x844 shows the rotate prompt"; review/small-bugs-3):** on a narrow portrait screen (w/h < 0.62) the prompt
+"⟳ Xoay ngang điện thoại để chơi" (`#krottip`, one line, `width:max-content`) shows on EVERY open and every turn back to portrait, until she turns the
+phone (it goes) or taps it; the sideways game stays playable under it. Direct mode (tests, `?khost=0`) shows the same prompt without catching taps.
+(Was: once per device for 4 s, localStorage `ctm-rot-tip` — a returning player saw the sideways title screen only; the prompt wrapped to 2 lines.)
 The game is laid out at exactly TWO design sizes and never reflows on a device: the picture is scaled uniformly, like resizing a window.
 
 | screen | layout drawn | how it is shown |
@@ -430,12 +434,19 @@ Never %, never "Chắc chắn" (sure acts show nothing).
 apply it automatically; HUD help (`HX`) reads the same text. Terms: Sủng, Danh, Đức, Sắc, Tài, Tâm cơ, Tai mắt, Ân tình, Sức, Bạc, Chủ tin, Lòng,
 Ghen, Oán, Thù, Thiện cảm, Chứng cứ, Nguy hiểm, Quẻ / Quẻ tuần, Phục vị, khắc, Thị tẩm, Lật thẻ, Lãnh cung, Cấm túc, Bổng lộc, Ân thưởng,
 Tranh ghế, Tuyển tú, Thế lực, Công lao, Kính sự phòng, Nội vụ phủ, Tân Giả khố, Thai, Cơ hội, Phúc duyên. A new term gets an entry here first.
+**12.1 Road-aware glosses (review/small-bugs-2).** A stat means what it means on HER road: `kitRoad()` = "srv" (cung nữ road, `isSrv`),
+"cold" (lãnh cung) or "" (consort). `KIT_GLOSS_ROAD[road][term]` overrides `KIT_GLOSS[term]`; read every gloss through `kitGlossText(term)`
+(popover, HX). `kitHxRoad()` rebuilds the header tap texts (HX) when the road changes. No consort-only goal (lập Hoàng hậu, mẹ Thái tử,
+thăng bậc, thị tẩm, lật thẻ, bổng lộc, sắc phong) shows on the cung nữ road or in lãnh cung: the Đức "!" badge (jk3 k3Hud) and the
+Ân sủng plaque (jk3 k3AsRows) are consort-road only. Test: `dev/test/small-bugs-2.js` check 1.
 
 ## 13. MINI-GAME FRAME (j79) — for j82 and the lesson games
 ```js
 box.innerHTML = kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.",
                               hud:[["score","Phần",0],["time","Thời gian","30 giây"]], id:"kgbox"});
 kitGameSet("score", 12);                       // update a HUD cell
+// j82 progress cell ("round"): its LABEL follows the game type (review/small-bugs-2) — kg82Open({..., round:"Môn", roundV:"1/3"}) locks it
+// for an exam (engine "Hồi n/5" updates are ignored); otherwise kg82Set("round","Hồi 2/5") shows Hồi · 2/5, "Câu 1/5" Câu · 1/5, a place "Nhì" Hạng · Nhì.
 document.getElementById("kgbox-res").hidden=false;
 document.getElementById("kgbox-res").innerHTML = kitGameResult({
   parts:[["Phần chơi 7/10","+21"],["Cầm bậc 3","+27"],["Tài 62","+19"],["Chuẩn bị","+8"]], total:75, place:"Nhì", of:4,
@@ -531,7 +542,43 @@ Categories (`kitActCat(name)`): hau-ha Hầu hạ · hoc-tap Học tập · giao
 buon-ban Buôn bán · le-nghi Lễ nghi · di-lai Đi lại. Art: square, painterly, same style anchor as portraits, ≤ 60 KB webp.
 Grid rows: every card in a row has the row's height (fitted to content, `grid-auto-rows:auto` + stretch), no empty space from a taller row.
 
+## 6.2 OPTION CARD = SMALL ACT CARD WITH ITS PICTURE LEFT (owner 15/11 "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."; review/opt-pics) — `dev/build/jopic.js` (after jph) + jk4 `kitCompactCSS`
+Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rulings 15/11: keep BOTH act-card forms — the big Hành sự card
+(§6 / §6.1) unchanged; the SMALL card (§43) gets a 3:4 PORTRAIT RECTANGLE picture (never a square crop); every dialog option card is that small card.
+- WHERE: every option of every dialog — `#modal .opts > button.ka` (events, dilemmas, nights, reactions, servant matters, festivals, co-op,
+  pickers) and kit choice panels `.kpscopts > button.ka`. Not: the identity card's approved pinned pair (`.nlopts`). ONE place: the outermost
+  `kaNorm1` wrapper calls `kpOptArt(b)` after the j63 frame (and kitHideOut / kitHint) built the card. Nobody adds pictures by hand.
+- LAYOUT: `.kaart` (kitArtFrame picture, 84x112, cover-cropped, category edge colour `--kcc0`) LEFT · `.kabody` (title + risk chip / odds,
+  Cần / Tốn / Được / Mất / Gợi ý rows as §6 / §28.6) RIGHT. CSS = the §43 small-card rule set `kitCompactCSS(B,w,h)` (jk4, ONE string, used for
+  `.kpane` act cards with B=`button.ka.kart` and for options with B=`button.ka.kart.kopt`). Options: one card per row, full width
+  (overrides 31.16 `k3grid` when the cards have pictures; owner L109), card min-height = picture + padding, so the usual cards are all the
+  same size; a card with more text grows, never clips. The tiny portrait icon beside an option title (j25 `.md`) is removed: the picture replaces it.
+- TAP ON THE PICTURE = `kitPicZoom(src)`: the picture large over the screen (`#kpzoom`), tap anywhere closes; it does NOT choose the option
+  (capture-phase click handler). Any other kit part may call `kitPicZoom(src)`.
+- WHICH PICTURE — `kitOptPic(title, button)` → `{src, key, how}`; owner ruling: one picture per MEANING GROUP, reused everywhere; first hit wins:
+  1. `act` — `kitActKey(title)`: the option is an act, or ACTS.json already holds its own choice picture (act-pics2 "-h" keys);
+  2. `log` — ACTS.json "log" meaning rules (`kbkRules`, the Tuần lục picture of the same choice line; key "-" = none);
+  3. `rule` — `KIT_OPT_RULES` (jopic): ~60 meaning groups (thôi / im lặng / giữ mình / đứng xem / từ chối / trả lại / nhận lỗi / quỳ xin / thưa trình /
+     vâng mệnh / lì xì / đút bạc / dâng lễ / góp bạc / cược / lạnh lùng / cảnh cáo / đáp trả / chứng cứ / ghi nhớ / tố giác / theo dõi / dò la / sai người /
+     đốt / giấu / buông tay / hẹn gặp / hạ độc / thử độc / vu oan / rình thời cơ / trách phạt / canh giữ / hoảng sợ / an ủi / giúp / tiệc / bái kiến /
+     xin ân / chép kinh / cầu / thái y / dạy con / dự thi / kết mạng / vẽ / kết thân / sớ / đòi nợ / khen / trang điểm / mời thầy …) → an existing act
+     picture when it truly shows the action, else a group picture painted for it (`img/act-opt-<group>.webp`);
+  4. `face` — a person picker (title starts with a consort's name / "Hoàng thượng" / "Thái hậu") → that person's portrait (`pv`, face at the top);
+  5. `item` — an item picker (title = an item name in `IT`) → `kitItemSrc(k)`;
+  6. `own` — a picture the option already carries;
+  7. `ph` — the §59 act placeholder (light / dark by `kitPhTone`), recorded in `CTM_MISSING_PICS` as kind "opt" (so the owner sees it still lacks one).
+  A key whose file is not on the CDN (`img/_index.json`) is skipped. The card carries `data-kopic="<how>:<key>"` (tests, audits).
+- Painted for groups with no fitting picture (gpt-2-6, folder ba4aecfe…, hands-only house style of the act pictures, 384x506 webp ≤ 53 KB;
+  ids in dev/figwork/optpics/gens.txt, prompts in prompts.json): `opt-thoi` (closing a fan, turning away), `opt-thua-trinh` (hands folded
+  in a polite bow before a seated superior), `opt-buong-tay` (letting a jade pendant go by a lake), `opt-rinh-cho` (dark: watching from behind
+  a lattice for the moment), `opt-canh-giu` (barring and locking the palace door, casket moved), `opt-hoang-so` (alarm, toppled cup).
+- Kit sample page §47: "§6.2" (the three options of the owner's markup "Hoàng hậu triệu kiến" through kaNorm → kpOptArt).
+- Tests: `dev/test/opt-pics.js` (every option kind → its picture source; layout at the design sizes: picture left 84x112, nothing wider than
+  its box, zoom opens and does not choose). Scan of every option title (static + bot): dev/test/opt-pics-table.md (before/after).
+
 ## 15. STAGE OVERLAYS (j79) — nothing on the stage covers a figure
+**15.1 Place subtitle (review/small-bugs-3):** the subtitle after the place name (`.stop .scene-t .rmsg`, "· Ở đây còn 1 người.") never shrinks under its
+longest word (`min-width:min-content`; the title row wraps): 390x844 direct mode set it one letter per line. Test `dev/test/small-bugs-3.js` wrap.
 - The status chips (`#hud2`) live in the header as its second row (`.hud2.khud`): collapsed = Buổi/khắc + Quẻ; expanded (▾) = every chip wraps
   in the header, which grows while the stage shrinks. Never an overlay on the stage.
 - The date shows ONCE (header line), in the wording guide's words; the duplicate date chip is hidden. Every "T3/1" text anywhere (logs, news,
@@ -1090,6 +1137,25 @@ kitSceneArt(src, label, {shape:"wide"|"tall", fb:"fallback src", col:"#category 
 - Caption: plain label = dark strip bottom-left (`figcaption`); with `col` = category colour on the frame line + small centred chip (act cards).
 - Never add a crest, tassel, brocade or rank frame to a picture of a place / thing / scene.
 
+#### 28.19b CORNER MARK — `kitSceneArt(src, label, {mark, markAlt})` (owner 15/11 mood dialog, review/mood-dialog) — `dev/build/jk2b.js`
+- `o.mark` = a small seal picture laid in the TOP-RIGHT corner of any kitSceneArt frame (`i.ksart-mark`, a background layer, not an `<img>`,
+  so the "picture fills its slot" img rules of `.kdpban` / `.kaart` / `.kpev` never stretch it); width clamp(34 px, 17 %, 64 px), 1:1,
+  drop shadow, no tap. `o.markAlt` = its text (aria-label). Thumb tiles: 40 % at 2 px.
+- Passed through every path that builds a dialog picture: `headArt:{src,label,mark,markAlt}` (jk3 band) and a kitEvArt result
+  `{src,lab,mark,markAlt}` (kitEventStage / kitEventDp banner, jk4).
+- First user: the MOOD BOX "Tâm trạng · X" (jevb `emoBox`): mark = the SAME painted mood seal as on the portrait
+  (`img/kit/emo-[m-|mo-]<k>.webp`, emoArtSet: women / young men / mature men; `emo-an` when the mood is unknown).
+- MOOD BOX PICTURE (owner 15/11 "ảnh khung tâm trạng là hiện sự việc liên quan, nhưng là tấn phong kìa"): the picture of the EVENT that caused
+  the current mood, caption = that cause in its own words (« » option quotes dropped). `emoCauseArt(cause)`: the event picture recorded with the
+  cause when an event choice set it (evbMood → cause.a) → `EMO_CAUSE_EV` (mood-cause words: qua đời / mất con, sinh hạ, lãnh cung, giáng /
+  cấm túc / phạt, tấn phong, thị tẩm / lật thẻ, ốm, việc triều, làm nhục, đối đãi tử tế, chơi đùa) → the week book table `KBK_EVRE` → a picture
+  made for that line (kbkSpecific, only if on the CDN) → the mood's own scene `img/ev-mood-<k>[-2].webp` (no cause / no picture; 10 moods incl.
+  `an` = chưa rõ, 2 each, 800x600, no people, gloomy moods dark). Caption then = the mood word ("Chưa rõ lòng người" when unknown).
+- LOOK-UP PANELS (`kit.look`: Tâm trạng · X, Đã biết về X, Chứng cứ về X) are not visits: kitEvArt returns only their own headArt or
+  nothing — never the person-dialog default "Có người đến chơi" (jk4) and never the §59 placeholder (jph).
+Test: `node dev/test/mood-dialog.js <build url> <outdir> [WxH@dpr,…]` (tấn phong / mất con / thị tẩm / no cause / recorded event / unknown /
+intel panel / the Emperor with the men's seal).
+
 ## 29. SETTING CONTROLS · SLIDER / TOGGLE / TEXT BOX (jkitctl, kit review 11/14) — KIT READY: slider/toggle/input
 Every setting control of the game uses these three (no browser-default range, checkbox or monospace text box anywhere). First user: Thiết lập
 (title screen; ☰ in the game opens the same screen, so it is also the in-game Thiết lập). Each keeps a real `<input>`/`<textarea>` with the given id,
@@ -1165,6 +1231,9 @@ second row. Nothing else lives in the top bar: the Hoàng thượng box, Thái h
 `#hud2` stays in the DOM only as the host of the status sheet. The old "▾ Tư chất" toggle is gone.
 
 ### 31.2 STAGE HUD — kit plaques at the stage edges (`#kshL` in `.stop`, `#kshR`)
+**31.2a State row never past the edge (review/small-bugs-3, KIT_REQUESTS "k3 top state row wrap/overflow rule"):** under 600 px the two lines of `#k3tt`
+flow as ONE wrapping row of whole items (`.kstl`/`.kstv` `display:contents`, flex-wrap; each `.k3r` nowrap): time, toilette, weather, quẻ and every
+`K3_STATE` chip stay whole, the next item drops to a new line (was: "Quẻ Hạ (Co…" cut at the right edge). ≥ 600 px the `khd2` two-row bar applies (§32.12).
 Plaques: `--k3pl` = `rgba(255,250,240,.88)`, `1px --line`, radius 8, text ≥ .75rem (.64rem on narrow stages `.k3n`), never truncated.
 - LEFT column (`--kgw` wide): place name (`#sc-t`) · time plaque (Buổi …, còn N khắc, weather chip with its painted icon, Quẻ tuần) ·
   Tư chất (Sắc, Tài, Tâm cơ, Đức with icons; icon + number in 2 columns on narrow stages, label in the tooltip) · Tình trạng chips (Giả bệnh,
@@ -1842,6 +1911,11 @@ Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node d
   every other option is long it is a slim full row, otherwise a grid cell. The meaningless "Ghi chú: không được mất gì" line is gone everywhere (j63 drops it).
 
 ### 32.10 CLOSING A PANEL — ONE ✕ (kit-x) + tap outside + Esc; forced panels have none (owner 11/15: "no Thôi / Lui / Đóng / Đã hiểu buttons") — `kitXHTML` / `kitXAdd` / `kitCloseSync` / `kitCloseLayer` (jk4), j3 `kitCancelIx`
+**32.10a A floating card never covers a dialog (review/small-bugs-3; owner 844x390: the result card sat on the dialog's options and its catcher ate
+the first tap).** While any dialog is open (`#modal`, any visible `[role=dialog]`: reward box, game frame, book, item sheet, podium) — `kitDialogOpen()`,
+body class `kdlg-on` — the act result card `#rtoast` and the `kitLine` pill `#kupdline` are PARKED (hidden, no `#kxcatch`). When the last dialog
+closes, a parked result card comes back with a fresh 7 s timer and its catcher. New floating cards join the same rule (add their id to the
+`kdlg-on` CSS in jk4). Test `dev/test/small-bugs-3.js` toast.
 THE component — one place, every panel inherits it (#modal: event dialogs, choice cards, place cards 32.8, person cards / self / Hoàng thượng
 (pcm), info and report cards, Tư trang item and slot cards 28.13f, the shop 28.13d, title-screen pages, co-op pages; plus the week book
 kitBook, game / lesson results in #ov and the person card opened from the room #popw).
@@ -1890,6 +1964,13 @@ Shots: dev/shots/kit-close/ (755x1000@2, 1000x755@2, 1180x820@2, 844x390@3).
   change says nothing about numbers (no "Sủng nàng 45 → 45"; j75 NPC effort / family gift lines).
 
 ### 32.12 TOP BAR GRID — her block never wraps · portrait = name block height · two-row fallback (review/header-fix → review/header-danh) — jk4 `kitHdFit`
+**Name block vs time block (review/small-bugs-3, 1000x755):** `kitHdClash(hd, tc)` — the right edge of her block's text + 8 px must stay left of
+the time block's first text / icon, else the two-row bar (`khd2`). A long date ("Tháng chạp · trung tuần · năm thứ hai mươi ba") ran under the
+weather icon in the one-row bar. Test `dev/test/small-bugs-3.js` header.
+The bar re-fits whenever its content changes after render (MutationObserver on the header + picture load; review/small-bugs-3-r1:
+1180x820 a late date/weather write left the one-row bar overlapping).
+Her portrait never waits for the figure manifests (review/small-bugs-2): `kitMePor()` (jimg) = `por-player-<look>-t1-a<band>` from her
+life-long identity `S.fid`, the same picture on every life type (cung nữ, lãnh cung, every origin); `porOf(S)` uses it while FIGURES*.json load.
 (review/header-fix wrote this as "31.19", which main already uses for ACT ORDER.)
 - ≥ 600 px her block is fixed: frame · name (1 line) · rank chip + age chip (1 line) · short date (1 line); `max-content`, never shrinks
   (owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines). The time block is the column that gives.
@@ -1998,6 +2079,10 @@ Every stage that shows full-body people (room, place, her palace, servant road, 
    KIT_FIG scale (woman .79 / maxPx, man ×1.07 capped under the ribbon, child by age). Never shrunk to fit: when a figure's core
    (less the 20 % a neighbour may overlap) is wider than a slot, Fold falls back to the maxPx cap, then the screen uses fewer slots;
    only a stage narrower than ONE person scales that one person down. Her idle sway breathes from the feet (no lift).
+   **No figure under a stage panel, any size (review/small-bugs-2, supersedes the compact-stage exception above):** the right column
+   (#kshR) is reserved on compact stages (844x390 `.j59c`) too, and a left plaque column (#kshL) that reaches the heads moves the first slot
+   to its right edge + 6 px. A wide robe that steps over its slot (the 20 % neighbour allowance) beside a reserved panel is pulled in
+   so its core ends at the panel edge (j59 `inLim`; the slot count is unchanged). Test: `dev/test/small-bugs-2.js` check 4 (lãnh cung, home, vườn with 1–3 people).
 3. **Never a mini portrait on the stage** (owner 08:00Z): a person without figure art stands as the kit's full-size soft silhouette
    (`img/kit/unknown-fig-f|m|k.webp`, `.j59sil`, man silhouette ×1.07) in a slot, with the real chip; a stranger is the grey silhouette
    with "Người lạ". Only things that are not people (a chest) keep their small token, still in a slot.
@@ -2203,6 +2288,7 @@ Each rule closes a whole class; the scans that prove it live in `dev/test/cb-*.{
   brightness; a `filter` follows the picture's own pixels, so it follows the figure's shape). A figure / picture never shows a focus outline
   from a tap; keyboard `:focus-visible` rings stay on buttons. Never add a rectangular background / box-shadow / outline on a figure's press.
 ### 42.2 `kitLine(text, ms)` — ONE-LINE NOTICE (pill)
+- Parked while a dialog is open (§32.10a).
 - A small centred pill ABOVE the bottom bar (tabs + Sang buổi), never over the top bar, the scene title strip or a dialog title. `ms` = auto-hide.
 - Used by the new-build notice "Đã mở bản mới" (dev/site/swreg.js `line()` delegates to it) and any later one-line status. No private toasts.
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
@@ -2230,6 +2316,8 @@ container `kpane` under 640 px every act card is compact: the act's OWN picture 
 left, title + odds on one line, one-line description, Cần/Tốn/Được chips; no own picture → no thumbnail (`.kanoart`), never a category / skill
 picture as stand-in. Containers: person card `.pc > .pcr` (kit-fig2) and — tabs-kit r7 extension — any `.kpanec` (skill-card act cells,
 Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `render()` and (jtabs) after `renderPanel()`.
+- (review/opt-pics, owner override 15/11) the small card's picture is a 3:4 PORTRAIT RECTANGLE, 84x112 (72x96 in a pane under 420 px), never a
+  square crop; the rule set is ONE string `kitCompactCSS(B,w,h)` (jk4), also used by every dialog option card (§6.2). The big Hành sự card is untouched.
 - r8 (owner 11/15 14:30Z "no group images"): the rule is now EVERY act card, not only panes: `kitActArt` returns no `act-cat-*` src and
   `kpActArt` marks a card without its own picture `.kanoart` (no picture slot, text full width) — Hành sự deck, person cards, Ân oán.
 - Fix that came with it (main bug): jk3's sort helper was also named `kitActKey(b)` and, in the one concatenated script, replaced j79's
@@ -2237,6 +2325,10 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
 
 ## 45. PANE = FIXED BAR + SCROLL BODY (owner 11/15, review/tabs-kit · `dev/build/jpane.js`)
+**45.1 A face strip is never half under the pane bar (review/small-bugs-3; 844x390 Hậu cung › Phi tần showed the palace labels "Càn Ninh cung…"
+cut off above the frames).** `kitPcSize` fit (jk2b) scrolls a newly opened person card flush under the sub-tab bar; when the scroll cannot carry the
+`.pstrip` fully under the bar, the strip is shown whole (labels included). The fit also re-runs after a re-render of the same person until the player
+scrolls herself (`__kpcUser`). Test `dev/test/small-bugs-3.js` strip.
 - Every tab pane is one layout: the **pane bar** (`.kpbar`) holds the page's sub-tabs (`.ksub`) and its first filter row (`.kcattabs`, Hành sự categories, Tư trang item filters, the jtabs sub-tabs); everything else is the list.
 - The bar sits flush at the top of the pane, directly under the header frame (the pane's own border is the kit gap), full width, opaque, no shadow; it never moves. The list scrolls below it and is cut off at the bar's bottom edge; nothing shows above or behind the bar (pane top padding is 0 while a bar is present). `scroll-padding-top` = bar height, so anchored scrolling stops below it.
 - Tabs keep drawing their own rows where they always did; `kitPane()` (after every panel render, on panel child changes and on resize) moves them into the bar. k3CatTabs finds its row by `data-g`, kgSub finds `.ksub` inside the bar. No other code may make a row sticky.
@@ -2259,7 +2351,7 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
 with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
 KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
-§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRelRow, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRelRow, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
 error, no horizontal overflow, 0 page errors).
 
 _(Numbers: review/kit-fig2 used 37-40, then 42-45; main took 37-43 and tabs-kit 45-47, so kitNameRank = §48, Ân oán = §49, kitEventDp = §50; kitActCompact is main's §43 (one copy, the tabs-kit superset).)_
@@ -2275,6 +2367,47 @@ NOT moved (reported to the coordinator with shots): stage figures (j59) — thei
 the top edge (KIT 33: figures fill the stage), where the scene title (top left) and the chip column (top right, `#kshR`) already sit;
 a label over the head would cover either. Pets: no pet card exists on main yet.
 Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-fill.js` (chip bottom ≤ painted top).
+
+### 48.1 RANK TITLE · `kitRankTone` + `.krt` / `.krn` (owner, ref. shot of another game: a title floating above the name) — `dev/build/jk4.js`
+The rank / role line above every name is a TITLE, the name under it is plain ink. One look everywhere a rank sits over a name:
+- TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), VIVID
+  (owner 15/11 22:25Z: every tone ≥ 4.4:1 on parchment #fbf3e2), no chip, no background.
+- FRAMED UI (dialogs incl. kitEventDp captions, person cards, Tuần lục, lists, podium plates, kit page): PLAIN text in the vivid tone — no glow,
+  no outline. On a dark `.modal.night` panel the tone is lightened (55 % + white), still plain.
+- ON A PAINTING (stage name tags `.j59t` over the scene, captions over a picture `.kesov`, the kit sample's scene row `.krs`): the tone
+  lightened (72 % + white) + a thin dark outline (8 hairline text-shadows `--krt-ol` #1c100a) + a soft glow of the same colour (3 px + 8 px).
+- NAME: `--krt-ink` #2a1a12, bold, no colour; on a painting it keeps the paper halo of scene words (KIT 33.5); on `.modal.night` parchment #f3e6cf.
+- Sizes: title .84rem (a title that IS the name, e.g. "Hoàng thượng", `.j59only`: .92rem); name as before (stage 1rem, knr .98rem).
+  Tuần lục heading: title .62em of the 1.4em heading, on its own line above the name.
+`kitRankTone(title, col)` → colour, ONE table `KIT_RT` keyed by the title's words (so every builder agrees whatever `--rc` it passes):
+
+| title | colour | | title | colour |
+|---|---|---|---|---|
+| Đáp ứng | champagne-bronze #876638 | | Phế phi · lãnh cung | ash slate #5d6b7a |
+| Thường tại | green #1a7f37 | | Thái hậu | bronze #9c4f12 |
+| Quý nhân | blue #1f5fcc | | Hoàng thượng | imperial gold #8f6800 |
+| Tần | pink #c42a78 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | grey-jade #52746a / jade #0a7d68 / blue #2f5db0 (MRCOL family) |
+| Phi (any "… phi") | purple #7e3cc8 | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #b4441e / violet #6a46b8 / sand-brown #8f5a24 |
+| Quý phi | crimson #c8102e | | Tiểu thái giám / Thái giám / Thủ lĩnh / Tổng quản | sage #59743a / green #1f7a48 / steel #2a5f92 / bronze #934414 |
+| Hoàng quý phi | amber #b04a00 | | Thái y · officials · Thị vệ | teal #0a7d76 · blue #2f55a4 · steel #465f80 |
+| Hoàng hậu | gold #8c5f00 | | Hoàng tử · Công chúa · Người lạ | sky #1a6fb8 · coral #bf412b · grey #666666 |
+
+Men are never pink/purple. Unknown title → the caller's colour darkened (80 % + black).
+**48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
+`.kesov>.kpsn`) have no box / frame / plate: rank + name sit straight on the dialog background (title colour + outline as above, name plain
+ink, hers gold-glow). Over a picture (`.kesov`) the name keeps the paper halo of scene words for readability.
+**48.1b HER OWN NAME (owner 15/11 ~20:10Z)**: the name of HER character (the local player's `S` only; in co-op the friend's name is
+NOT marked) = near-black ink #1a0f08 + a soft light-gold glow (`.kmy`: text-shadow #fff6d8 1px, #ffe9a8 3px, #f3cf6a 6px, #e8bd4a 11px),
+on a PAINTING (stage tag, .kesov, .krs); in framed UI her name is plain black bold, no glow (owner 22:25Z). Everybody else's name stays plain ink (stage names keep the paper halo for readability). `.kmy` is set by:
+`kitNameRank(rank,name,col,me)` (4th arg; omitted → `kitIsMyName(name)` = it is `S.name`), Ân oán `relSide` (her side "Ta"), stage tag
+`.j59n` when the figure is S, `kitName(S,{named:true})` (32.7 captions, Tuần lục heading, podium plate), her identity card (kpIdentity),
+her person card `.pcname` (pcard `o.me`, or o.name === S.name) + its sticky strip. Kit page sample §48.1 shows her name next to another.
+Where it applies (one CSS block `#kit-rt`, nobody styles a title over a name on their own): `kitNameRank` (sets `.krt`/`.krn`), stage name
+tags `.j59t`/`.j59n` (j59 sets `--rt`), 32.7 / kitEventDp captions `.kpsn .kname .kti` (kitName sets `--rt` on `.kti`), person cards
+`.pcrk` over `.pcname` (j15 sets `--rt`) and the sticky strip `.kpstrip`, Tuần lục person heading `.kbk-pname`, honour podium name plates `.kpod-plq` (j90). Dialog face captions (`.faces figcaption`, j3: "Nhập cung", "Thân phận kiếp này") are built with `kitNameRank` (rank over name). A title INSIDE a sentence
+(kitName in prose rows) keeps the plain inline look. Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
+Test: `node dev/test/rank-title.js <url> <outdir> <tag> [sizes] [day,night,rain,cold,dp,kit,old]` (colours, serif, title above name,
+no tag overlap / cut; OLDURL=<old build> for the old-save case).
 
 ### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
 In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
@@ -2315,6 +2448,11 @@ count) over the Hậu cung pager strip (j15 `pager`) of THAT group only — no g
 (relSel); Y keeps its own tab, default Ta (her own relation with X; Chí tôn when X = Ta). Tabs and strips are remembered (KTSUB, PG).
 Markup: each picker = `.kpinline.krelpk` (label + kitSubTabs row + strip) — the §45 `.kpinline` exception keeps the row with its strip.
 ### 49.3 relPerson + THE STRANGER RULE (owner 11/15) — `isKnown61` / `met61` (j61), `relPerson` (jhc)
+**49.3a CHÍ TÔN ARE MET FROM DAY ONE (review/small-bugs-2):** Hoàng thượng and Thái hậu are met from the first day of palace life on every
+road — `isKnown61` returns true for them (and `k61SeedChiTon` keeps their k61 level ≥ 2, old saves included). The reigning Hoàng hậu is a
+consort: silhouette until met (`met61`). `kitChiTonMet(k)` ("emp" | "th" | "hh") is the same answer for the stage chips' attitude
+(`window.kitCourtKnown`). Stage chip, mdH, pcPort, kitPortrait (news / Tuần lục rows), kitStageFig / kitFigOf (dialogs) all agree —
+test `dev/test/small-bugs-2.js` check 3.
 `relPerson(k)` = the ONE helper of Ân oán: person object → face drawn from THAT object, name, rank, colour (`data-pid` / `data-fk` on the
 side block; the test checks face key == person key for every X).
 STRANGER RULE — one gate for every renderer: a consort Ta has NOT MET is the grey kit silhouette of her sex (portrait `img/kit/unknown-f`,
@@ -2329,6 +2467,14 @@ longest-first, then ordered by their place in the text (before: the longest name
 and B's rank colour on A's row). The face is mdH(kitFace(p)) = the same por file + current-rank colour as her Hậu cung strip tile.
 Tests: `node dev/test/rel-row.js <url> <outdir> <tag> [sizes]`; `node dev/test/stranger-sweep.js <url> [outdir]` (one unmet consort through
 every renderer: no real face / figure file, silhouette present; 8 news rows: src + rank colour == her strip tile; met again → face back).
+49.3b FACE REVEAL BY DIALOG (owner 15/11 ~21:00Z, review/face-reveal): an event dialog that SHOWS a person (the Q item carries her /
+him as `who` / `who2` / `stage` / `faces` / `kit.subject`) reveals that face when it opens (j61 `k61Shown` at showModal: face level ≥ 1, a
+consort also met61), so the dialog and every renderer afterwards draw the real face / figure; name level ≥ 2 when the person speaks to her
+(options + `who`) or the text names them. Hoàng thượng / Thái hậu / Hoàng hậu / children (named from day one) get their face from their first
+dialog. Only MENTIONED people (news lists, tuyển tú roll, marriage-candidate rows, rumours) stay strangers. Only the dialog REALLY DRAWN reveals: the hook runs after
+j68 evGate (an optional event it holds / drops reveals nobody). Look-up panels she opens herself (`kitPanel` spec `look:1`: Đã biết về X,
+Chứng cứ về X, Tâm trạng · X) never reveal / meet — a new look-up panel with a `subject` must carry `look:1`. Check: `node dev/test/face-reveal-look.js <url>`. Scan: `node dev/test/face-reveal-scan.js
+<url> [steps] [seeds]` (every dialog the bot sees: site, people shown, stranger before, revealed after); static list `python3 dev/test/face-reveal-sites.py --md`.
 Shots: dev/shots/kit-fig2/.
 
 ## 50. kitEventDp — THE event-with-a-person dialog (owner 11/15, replaces 32.6 for events with a person) — `dev/build/jk4.js`
@@ -2439,6 +2585,8 @@ label ("Sinh hoàng tử" wrapped to 3 lines, one word per line).
   (label purple §11.2, number red).
 - **Fact rows without a person (`kitFacts` world rows):** no blank round dot any more (`.kfact > .kfdot` hidden, text takes the row); the
   week book keeps its small diamond bullet.
+- review/small-bugs-3: the econ override of the Bổng lộc rule card (jecon `blCard`, rank | bạc · goods · lễ nghĩa · ban thưởng) was still legacy
+  `.pcrow`; now kitRows like j20. Test `dev/test/small-bugs-3.js` bl.
 - Migrated (legacy `.pcrow` → kitRows): Ân thưởng (rewards + Sổ ân thưởng), Bổng lộc, Thang nguy hiểm (j24 fallback), Tuyển tú, Bảng phẩm
   vị "Ghế theo phẩm", Kiếp này (end card) + Sổ luân hồi, Tranh ghế (contestants + score table), Hoàng thượng "Điều ngài thích" (j15 + jhc),
   self card Tư chất / Tài nghệ, cung nữ "Đường đi", identity card (nlCard), Kế vị box, Thượng thư phòng box, Việc nhờ steps, Điều kiện
@@ -2447,6 +2595,51 @@ label ("Sinh hoàng tử" wrapped to 3 lines, one word per line).
 - Test: `node dev/test/kit-table.js <site url> <W>x<H>@dpr [shotdir]` opens every tab / sub-tab / person / category, the HUD rule dialogs,
   rule panels, item dialogs, the shop, Sổ luân hồi and the end card; per list it prints the value-x spread, labels standing one word per
   line, and any legacy two-cell `.pcrow` or flex space-between row list. Exit 1 on any fail.
+
+> Numbering note (review r6, 15/11): review/fix-float first wrote these as §51 (relation table, §51.1 kitImgSync) and §52 (number delta). The coordinator's registry reserves §51 for kit-table, so they were renumbered: relation table = §52, kitImgSync = §52.1, number delta = §57.
+
+## 52. RELATION TABLE · kitRelTable / kitRelRows / kitRelDelta (owner 11/15 15:30Z + 16:50Z "LUẬT KIT TRƯỚC", review/fix-float) — `dev/build/jkrel.js` (after jaudit, before jint)
+ONE component for "how this person stands with me", wherever a person's relation numbers are listed with their change (week book
+person pages today; any new screen that lists them). Replaces the private chip row + "Hiện nay" row of the week book (`.kbk-rel`,
+`.kbk-relchips`, `.kbk-pair`, `.kbk-pchips` are gone).
+```js
+kitRelRows(person, snap)   // → the FIXED rows for that kind of person, same order every time:
+//   phi tần / Hoàng hậu : "<Nàng|Hoàng hậu> → ta: thiện cảm" · "<…> oán ta" · "<…> ghen" · "Ta → <nàng|Hoàng hậu>: thiện cảm"
+//   Hoàng thượng        : "Hoàng thượng → ta: sủng"          Thái hậu : "Thái hậu → ta: thiện cảm"
+//   kẻ hầu              : "<Nàng|Hắn> → ta: thiện cảm" · "Ta tin cậy"
+//   stranger ("Phi ???") or anyone else: one row "<…> → ta: thiện cảm" = "chưa rõ nàng nghĩ gì" (no numbers)
+//   row = {dir:"them"|"me", label, now:int, d:int|null, kind:"good"|"bad"}; snap = S.wkSnap (pp[id]=[rel,ghen,oan,ta→nàng], sp, sung, th)
+kitRelTable(rows, {head:true, dHead:"Tuần này"})   // → .krtw > .krt
+kitRelDelta(label, "them"|"me"|"none", d, kind)    // → .krd: one relation change inside running text (a fact line)
+```
+- ONE grid for the whole table: label | **Hiện nay** | **Tuần này**. Every row shares the columns: numbers right-aligned on the same x
+  (±1 px, tabular figures), never wrap; labels wrap inside their column (min `min(8.5em,46%)`), never one word per line, never cut.
+- Label = direction colour (§11.2 `kitRel`, purple them→ta, blue ta→them), weight 600, written in the final words (`KIT_REL`, VANPHONG §1)
+  and marked `data-vp-skip` so the word fixer never makes "Nàng ta oán ta". Number = ink. Change = Được/Mất colour (green good for her,
+  red bad: more oán/ghen is red), "—" when nothing moved. Whole numbers only; negative with "−".
+- Narrow column (container < 240 px: phone pages): the label takes its own line, the two numbers stay in two aligned columns
+  under it (container query on `.krtw`).
+- `kitRelDelta` inside facts: the same look as a table row, no chip box, never wraps; between two other people (`"none"`) no direction
+  colour ("thiện cảm +7"). The week book redraws every relation chip of a log line with it (`kbkRelInline`, j87), and the on-screen word
+  fixer turns "thân ±N" into "thiện cảm ±N" everywhere.
+- Week book (§27 / §36.5, amended 17:45Z): every page keeps its own subject and its full-length figure — Tổng lược = her own figure,
+  each person = that person, Triều đình · thiên hạ = Hoàng thượng; a person without a painting (or before img/FIGURES.json arrives)
+  gets the kit silhouette `img/kit/unknown-fig-{f,m,k}.webp`, replaced by the painting as soon as the list arrives. Under the name:
+  `kitRelTable(kitRelRows(p, S.wkSnap))`. No chip row, no "Hiện nay" row of its own.
+- Sample: kit sample page §47 (`#kit`): every row kind, a narrow and a wide table, inline deltas (§52), number deltas (§57).
+- Test: `node dev/test/book-person.js <url> [sizes]` (fixed rows, column x ±1 px, no private chips, integers, no card text, every page
+  has a figure, small avatars without a box, page turn without re-render / undecoded pictures).
+
+### 52.1 NO FLASH on page / tab turns — `kitImgSync(root, ms)` (jbook)
+A picture shown again (on a turning sheet's copy `kclPrep`, a page that was hidden, a page the game has just re-rendered in
+`kitCurlSwap`) must never paint one empty frame while it decodes. `kitImgSync` marks every `<img>` `decoding="sync"` + eager and returns a
+promise resolved when all are decoded. Used by kclPrep (every sheet copy), kitCurlSwap (the new page of every tab turn), kitBook (whole
+book after layout). Full figures (`kitStageFig`), book pictures (`kitBookPic`) and week-book event prints are `decoding="sync"`.
+kitBook never rebuilds its sheets when a relayout comes out the same (fonts ready, book art loaded): it only repaints.
+Copies (review r6 → r7): `kclPrep` gives each copied `<img>` the live one's `currentSrc` (the same decoded bitmap, no second srcset pick);
+`kitImgPending(root)` = a picture of the copy is not decoded yet; `kitSheetTurn(...).pending()` / `.ready(ms)`. kitBook keeps the live sheet
+shown and the copy hidden until the copy is decoded (≤ 350 ms), then turns; kitCurlSwap hides the sheet until decoded and turns from
+the start, or skips the turn if it is still not ready. A turning sheet never shows a blank portrait.
 
 ## 53. EVENT-CHOICE PARTS · kitHint · kitRisk · kitHintRow · kitKemRow · kitResultSeal (owner 11/15 14:30Z / 15:05Z / 15:10Z, review/opt-render) — `dev/build/jk2b.js`, `dev/build/j63.js`
 Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
@@ -2517,10 +2710,32 @@ buổi ∈ sang|trua|chieu|toi) gets `.stage.kown`:
   rp2/rp3 saturate) are NOT applied on top of graded paintings (owner 17:24Z: "her room at trưa all brown"). rp2/rp3 keep a tiny lift.
 - j12's per-buổi colour wash `b4Light()` returns transparent for graded paintings (`KIT_SCENE_TINT=0`; 1 restores ~¼ of the old wash).
 - `.stage.kown.kwet` = wet weather (`wet()`: drizzle, storm, heavy snow) on a graded painting: **warm, soft light** (owner 12:35Z: spring rainy
-  afternoon must not look like the cold palace) — painting `saturate(.97) contrast(.94) brightness(1.07)`, night `saturate(.95) contrast(.95)
-  brightness(1.01)`; `.light` layer (z-index 0, **below** characters) a faint warm ivory gradient. Rain streaks come from j11 particles.
+  afternoon must not look like the cold palace) — painting grade + `.light` layer (z-index 0, **below** characters) a faint warm ivory gradient. Rain streaks come from j11 particles.
   Characters are never overlaid. Lãnh cung (`.sc-lc`) is excluded and keeps its bleak painting.
 - `window.kitSceneTag()` re-applies the classes (called after `renderStage` and `lightTick`).
+- **ONE scene grade `--kscf` (review/place-colour, owner 15/11 LUẬT SỬA CẢ NHÓM "check every place").** The only filter on a scene
+  picture is the CSS variable `--kscf` on `#stage`, written by `kitSceneTag()` from `KIT_SCENE.grade(KIT_SCENE.state())` and used by BOTH
+  backdrops: `.scimg` and the Pixi copy `.pxc` (on WebGL devices Pixi hides `.scimg`, so before this every `.scimg` filter — the wet-light
+  lift, the rp2/rp3 lift — silently did not show there: phones and no-WebGL screens showed different colours). Grades (`KIT_SCENE.G`):
+  dry `none`; wet day `saturate(1.05) contrast(.95) brightness(1.05)` + `.light` ivory `rgba(255,234,198,.10)→rgba(255,222,178,.06)`;
+  wet night `saturate(1.02) contrast(.96) brightness(1.02)` + amber `.04→.05` (re-measured on every graded place: the r9 wet grade took chroma
+  −1.7 on average, −3.5 on warm chiều halls = greyer; now chroma ±0, b* +1, L* +5); consort
+  palace tier rp2 `saturate(1.04)`, rp3 `saturate(1.07) brightness(1.02)`; `sc-lc` (Lãnh cung, Tân Giả khố) always `none` (the bleak
+  painting as painted). The old p1.html/j25 stacked rules (`.sc-home` brightness 1.25/1.35 + sepia .12, rp1 sepia .25, rp2/rp3 saturate
+  1.3–1.4 + hue/sepia) are overridden for every picture, graded or not. Never add a `filter:` on `.scimg`/`.pxc` elsewhere: change `G`.
+- Dry snow / frost on a graded painting: no cool `rgba(200,225,255)` wash on `.light` (it gave every winter place a blue-grey lãnh-cung
+  cast); the frost edge (`.stage.frost` inset glow) stays. Lãnh cung keeps its grey weather wash.
+- Characters: never under any scene layer — `.light` (z 0) and `.pxc` (z 0) sit below `.tokens` (z 1); figure filter is `var(--klf)` = 
+  `brightness(1)` (owner 06:00Z choice A). Checked by the grey probe figure in the scan.
+- Scan (LUẬT SỬA CẢ NHÓM): `node dev/test/place-colour.js <index.html> <OUT> 1180x820 0/2 "" nopx` (+ shard 1/2) then
+  `python3 dev/test/place-colour.py <OUT> [<BEFORE_OUT>]` → every place × 4 seasons × 4 buổi × the season's 4 weathers + Dư đồ map +
+  festival maps: filter chain, mean L*/a*/b* seen vs painted, grey-probe figure colour, flags, contact sheets, before/after table.
+
+**56.4 Life-state place.** `kitLifePlace()` (jsl.js, run before every `render`/`renderStage`): in lãnh cung (`S.out`) the place is always
+Lãnh cung (`coldVisit()`), a cung nữ serving in Tân Giả khố (`S.srv.lau>0`) is always in Tân Giả khố. Before, a new day left
+`S.visit.k="home"` in lãnh cung, so a reload (`deser`) or any `S.place="home"` showed her old palace picture (Ngọc Thanh các).
+Test: `node dev/test/life-place.js <index.html> <WxH>` (lãnh cung in session / new day / reload / back home, restored, promoted palace,
+maid room, Tân Giả khố in session / reload / done, maid risen, old save).
 
 **56.3 Wide figures on the Tuần lục person page (owner 03:55Z one scale ≈85–90 %, never shrink to fit; 13:45Z Thái hậu cut; coordinator
 r8: text ≥ 220 px).** `.kbk-person.kbk-full` gives the figure a column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider
@@ -2540,6 +2755,23 @@ figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/
   facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
   <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
   resize events.
+
+## 57. NUMBER DELTA · kitNumDelta / kitDeltaAuto (kit request from kit-fig2, KIT_REQUESTS.md; review/fix-float) — `dev/build/jkrel.js`
+One inline change for anything that is not a person's relation ("Kho lúa −10", "nhà Hộ bộ thế lực +6", "Sủng +3"), the same family as
+`kitRelDelta` (§52): `<span class="krd krd-n"><span class="krd-l">label</span> <b class="g|r|n">±N</b></span>`.
+- Label in ink (weight 600, `kitGloss` when the word has a gloss); the number a whole number with "+" / "−", Được/Mất colour by what it
+  means for her (`kpSent`: ghen +, oán + are red); no chip box, never wraps.
+- `kitDeltaAuto(label, d, textBefore)` picks the right one: relation words (quý/với ngươi|ta, oán ngươi|ta, ghen, thiện cảm, thân) →
+  `kitRelDelta` with the KIT_REL words ("Nàng → ta: thiện cảm", "Nàng oán ta", between two other people "thiện cảm" without a direction
+  colour); anything else → `kitNumDelta`.
+- The actor is always named (review r6): a bare "thân / thiện cảm ±N" right after another change of the same person toward me in the
+  same sentence ("Nàng oán ta +2, thân −2", textBefore = the 60 characters before it) is that person's thiện cảm toward me →
+  "Nàng → ta: thiện cảm −2" (or "<Name> → ta: thiện cảm"). Only a label the writer already framed ("hai người khác: thiện cảm")
+  or one with no such lead stays the undirected "thiện cảm". Sample on the kit page §57.
+- Used by every fact line: `kpChipify` (j79, overridden in jkrel) → `kitFacts` → news "Tin trong cung hôm nay", Tuần lục, panel notes,
+  Bổng lộc row. New code that prints a change inside text calls `kitDeltaAuto` / `kitNumDelta`; boxed `kitChip` stays for chip ROWS
+  (e.g. "Ta tuần qua"), never inside a sentence.
+
 
 ## 58. LỊCH THÁNG · kitMonthCal + kitDeskCal (owner 15/11 ~18:30Z, review/month-calendar) — `dev/build/jmcal.js` (after jevb, before j84)
 A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coordinator).
@@ -2646,3 +2878,105 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
 - API: `kitCardFlip({deck:[{id,p,bar}],pick,turned,resHTML,onEnd})`, `cfDemo(n,barred,who)` (kit page §67 "Xem lật thẻ"), `cfGrid(n,W,H)`.
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
+
+## 59. PLACEHOLDER PICTURES · KIT_PH · kitPhTone (owner 15/11 ~18:45Z, review/placeholder-pics) — `dev/build/jph.js` (last module)
+Four generic palace still-lifes (Magnific gpt-2-6, no people, no faces) stand in for every EVENT or ACT that has no picture of its own, so the
+owner recognises "this one still lacks its picture" in play. They are deliberately emblematic (no scene, no people) so they never look like a real picture.
+| file | size | used for |
+|---|---|---|
+| `img/ph-event-light.webp` | 640x480 (as dialog banners `ev-<key>`) | event dialog, normal / positive tone: closed folding screen + sealed scroll, soft daylight |
+| `img/ph-event-dark-v2.webp` | 640x480 | event dialog, negative / scheming tone: same still-life in a gloomy hall on an overcast day — heavy shadow, cold muted slate/grey-green (owner: dark = gloomy mood, NOT night) |
+| `img/ph-act-light.webp` | 384x506 (as act pictures `act-<key>`) | act card, normal tone: blank round fan + lacquer box + jade hairpin, daylight |
+| `img/ph-act-dark-v2.webp` | 384x506 | act card, scheming / harmful tone: same objects in cold grey gloom, box ajar, vial |
+- **Tone rule (`kitPhTone(text,{cat,fam})`)**: DARK when the act category is `hai-nguoi` / `muu-ke`, or the event family (j68) is `rumor` / `myst`,
+  or the id + title + first sentence of the body (event) / the act name (act) match `KIT_PH_NEG` (harm, poison, framing, scheming, spying, rumours, bribery, theft,
+  punishment, jealousy/rivalry, quarrels, resentment, cold palace, demotion, crime, illness, death…); otherwise LIGHT. Tone, never time of day.
+- **Events**: outermost `kitEvArt` wrapper. When the dialog would show nothing, or only the room she stands in (j17 `evArt`, the old generic
+  stand-in), it shows the event placeholder. Never replaces: EVENTS.json category art, own banners `ev-<key>` (jevban), story beats (`stArt`),
+  explicit `art`, festival bands, j24 people pictures. Shop / pick / gift / giftin dialogs keep their rules (no event picture).
+- **Acts**: `kitActArt` returns the placeholder (`r.ph = "light"|"dark"`) when the act has no own key (`kitActKey`) or its `img/act-<key>.webp`
+  is not in the CDN index; j79 `kpActArt` draws it in the normal act-art slot (`kitArtFrame`, category edge colour) of every act card
+  (deck, person cards, panes, exam card): jk4 (`kpActArt` / `kitActCompactOn`) and jexam no longer drop the slot once `kitPhActReady()` —
+  replacing the earlier "no thumbnail" (`.kanoart`) state. Card marked `data-kph="light|dark"` (not observed by j63 kaMO: no render loop).
+- **Not changed**: the week book (Tuần lục) lines — owner 11/15 "no picture rather than a repeated one" still holds there.
+- **Before the manifests load** (EVART / ACTS.json) nothing is replaced and nothing recorded (every id would look unmapped).
+- **Dev list**: `window.CTM_MISSING_PICS` = `[{kind:"event"|"act", id, tone, title}]`, each logged once (`console.info("[CTM missing pic]",…)`).
+  Whole-game list: `node dev/tools/missing_pics.js <build url> <out.json> dev/art/MISSING_PICS.md`.
+- Kit sample page: §59 (four pictures).
+
+## 68. PAINTED EFFECTS · kitFxBurst · kitFxSprite · kitFxLight · kitFxSheet · kitFxEdge · kitFxObj · kitFxGift · kitFxLetter (owner 15/11 20:55Z + 21:00Z + 22:35Z + 22:45Z, review/fxkit) — `dev/build/jfxkit.js` (right after jfx.js)
+Every effect is PAINTED (Magnific gpt-2-6, folder ba4aecfe…, Kling clips from painted stills); code only moves / fades / glows painted art.
+Files: CDN `img/fx/` (cdn_sync.py, never git), on demand only (assets.json group `fx`: jload never pre-downloads; sw.js caches each file by
+content the first time it plays). Sources + recipes: `dev/fxwork/` (gens.txt = every Magnific id, slice.py, light.sh, sheet.sh, atlas.json).
+### 68.1 API (target = element | {x,y} viewport px | null = screen centre; everything fire-and-forget, auto-cleans)
+| call | does |
+|---|---|
+| `kitFxBurst(name, at, n, o)` | n painted particles of a sprite kind with the kind's motion (fall / burst / rise / bloom / rain / flash); o {motion, scale, speed, tint (neutral art only), up, life} → Promise(count) |
+| `kitFxSprite(name, o)` | one particle, full control (x,y/el, vx, vy, g, drag, life, spin, sway, grow, a0, fade, frame, rot) |
+| `kitFxLight(name, target, o)` | painted light clip on black, `mix-blend-mode:screen` (WebM VP9 + MP4 H.264; weak device → 6×4 WebP sheet; reduced motion / Gọn → poster still); o {dur, fade, scale, size, cx, cy, inside, opacity, rate} → handle {stop(ms)}. Screen blend only reads on dark / painted scenes — on cream paper use `kitFxBurst("glowburst")` |
+| `kitFxSheet(name, target, o)` | true-alpha sprite sheet played once (silk, thread) or a light's sheet; o {fps, loop, hold, keep} → handle |
+| `kitFxEdge(name, o)` | full-screen painted edge overlay bleeding in from outside (portrait / landscape art); o {in, hold, out, opacity} → handle |
+| `kitFxObj(name, frame, target, o)` | one painted object (atlas frame) as a DOM picture for staged moments → {to(x,y,ms,{r,s}), frame(i), stop()} |
+| `kitFxGift(act, target, o)` | gift moments: `give` (box / silk bundle carried up, ribbon slips off), `open` (lacquer box opens: light + sparks), `refuse` (set down, taken back); o {kind:"box"\|"silk", from} |
+| `kitFxLetter(target, o)` | secret letter rises sealed, then opens; o {kind:"seal"\|"roll"\|"envelope", open} |
+| `kitFxPreload([names])` · `kitFxClear()` | warm a scene's files · remove every live effect |
+`kitFx(kind)` (jfx, §54) is the event-level entry and now uses only these painted parts (table below).
+### 68.2 Registry (sizes = one download each)
+| kind | name | source / alpha | size |
+|---|---|---|---|
+| sprite | petal-plum, petal-peach, petal-lotus, osmanthus, leaf, ash, paper, coin, lantern, jade, petal-gold, gift (4: box closed/open, silk bundle, ribbon), letter (4) | gpt-2-6 sheet on slate → images_remove_background | 10–22 KB |
+| sprite | snow, spark, ember, orb, streak, smoke, incense, glowburst, lotuslight | painted on black → luma alpha (slice.py) | 4–16 KB |
+| sprite | ink, brush | painted on white → ink alpha | 34–42 KB |
+| light | candle, glow-gold, moonlight, lantern-red, divine, fireworks | gpt-2-6 still on black → Kling 2.5 loop (start = end frame) → light.sh | 6–45 KB per clip (fireworks 180 KB) |
+| sheet | silk (white silk descends), thread (red thread snaps) | Kling clip → video_remove_background → sheet.sh | 25–76 KB |
+| edge | blood, poison, ink | gpt-2-6 full frame on white, -p 3:4 and -l 4:3 → ink alpha | 40–106 KB |
+Library on the CDN ≈ 1.6 MB (both video formats); a device downloads ≈ 1.1 MB at most, scene by scene (danger 91 KB, poison 93 KB,
+death 74 KB + incense, festival 214 KB, gift 22 KB, letter 13 KB, promotion ≈ 40 KB).
+### 68.3 kitFx moments (jfx FX table, all painted)
+decree: gold glow + rays + gold dust · promote: glow + rays + sparks + gold-leaf petals · hit (slap): brush streak + paper shake ·
+harm / expose: ink-blood edge + ink · poison: green-black edge · verdict / seal: shake + ink blot · rumour: ink-wisp edge · birth: warm glow +
+flowers · preg: lotus light + lotus petals · favour: seasonal petals · romance: peach blossom · betray: red thread snaps · night: embers ·
+death: dim + white silk + incense · demote: dim + cracked jade + ash · festival: sky lanterns + fireworks · letter: sealed letter · coin: silver rain.
+Old flat CSS flashes: red → painted blood edge; gold / warm → painted glowburst; dark / night stay plain colour washes (grading, not an object).
+### 68.4 Budget + switches (owner 22:35Z)
+- Sprite atlas ≤ ~40 KB, light clip ≤ ~400 KB, centre art ≤ ~250 KB. ONE Pixi layer (jfx), pooled sprites (`KFK.pool`), hard cap `KFK_CAP`
+  (140 phone / 240), ticker stops when empty and when the page is hidden; lights stop when hidden; nothing awaits an effect (co-op never waits).
+- Thiết lập "Hiệu ứng: Đầy đủ / Gọn" (`OPT.fxon`, kitToggle in j74). Gọn = stills, no particles. Until she picks (`OPT.fxpick`): weak devices
+  (saveData, deviceMemory ≤ 2, ≤ 2 cores) start in Gọn; slow frames (KFX.q at its floor with particles on screen, 3 checks) switch to Gọn.
+- prefers-reduced-motion → same as Gọn. Bots / quiet → nothing.
+### 68.5 Tests + sample
+`node dev/test/fxkit.js <url> <out> [shots]` (5 sizes + reduced motion): every kind loads, 50 bursts → 0 leaks + pool reused, every kitFx kind,
+lights play (screen blend), low-end sheet, edges / gift / letter / sheets clean up, auto-Gọn, frame time, heap after bursts, bytes per scene.
+Kit page sample "§68": a button per sprite kind, light, sheet, edge, gift act, letter and kitFx moment.
+## 70. ITEM DETAIL · kitItemDetail · kitItemCard · kitItemTap (owner 15/11 "Khi bấm vào món đồ không thấy hiện thông tin món đồ", review/item-info) — `dev/build/jitd.js` (after jitev, before jtoil)
+Registry: §70 (next free number; coordinator to confirm). Rule: **tapping ANY item cell shows this block** — never a blind act (wear / place / take off) on a tap,
+never a private item card. Reuses §54.1 kitItemInfo (picture, name, grade), §51 kitRows, kitItem (§15), kitGradeChip, kit-x (§32.10), pbtn.
+### 70.1 kitItemRef(ref) — the resolver
+`ref` = "key" · `{k}` · an S.inv entry · a kitInvGrid tile `{g}` (bag / dress pick) · `{ix}` inv index · `{wdSlot:"tram"|"y"}` (worn garment) · `{e}`;
+`who` = another person (her worn piece; no Xa xỉ row, no "ngươi" risks). → `{k, e, g, I, wd, it, work, veil, worn, who, qty}` or null.
+### 70.2 kitItemDetailRows(ref, o) — ONE row set for every item (kit table §51)
+| row | content |
+|---|---|
+| Phẩm | grade word in the KIT_GRADE colour (works: tier + "(N phần)") |
+| Loại | kind · slot: "Trâm cài · cài tóc", "Y phục · mặc", "Trang sức · đeo tay", "Vải vóc · may áo", "Tác phẩm tự tay · Thêu", "Mạng che mặt · che mặt" |
+| Hợp đề | theme tags: Hội phối đồ đề (jts TS_THEME: Thanh nhã · Phú quý · Hương sắc) + an item's own `th` list (future dress-contest themes) |
+| Được / Mất | the effects (jinv kitItemLists / jwdinv wdItemLists — the old builders, now lists) |
+| Xa xỉ | wearables of the player: "món này N · Bên mình A → B · hạn mức phẩm ta M"; B over M → red "…: quá hạn mức". `BAL.itd.allow=false` hides the allowance (owner 08:10Z rule) |
+| Lai lịch | origin / giver: "Hoàng hậu ban", "X tặng", "Nội vụ phủ cấp…", "tự tay ta làm" |
+| Ghi chú | duration, rank it suits, đồ phẩm known, pawn, count in the chest, `o.note` |
+`o` = {months, dress, pawn, note, lead (rows put first, e.g. the shop price), noLux, luxItem (Xa xỉ row = the piece only, for a board that is not worn: Hội phối đồ)}. **kitItemRows(k, o)** (jinv) and **wdItemRowsE(e, o)** (jwdinv) now
+return this, so every older caller shows the same rows (Tư trang panels, Bên mình slot panels, shop card, gift picker, works panel econWkOpen).
+### 70.3 kitItemDetail(ref, {acts, size, cls}) → `.kidet`
+Picture (kitItem md/lg, the kit graded frame) · name (display font, grade colour) · kitGradeChip + kind · "Đang mặc" chip when worn · the rows ·
+`acts` (pbtn HTML or `{id,n,sub,why,go}`) in a 2-col kit button grid. `cls:"kidet-strip"` = the framed strip used beside a grid (dress pick, Hội phối đồ, veil picker).
+### 70.4 kitItemCard(ref, {acts, note, closeModal}) · kitItemTap(ref)
+- `kitItemCard` floats `.kidc` (z 9470: above dialogs and minigames) with the block; ✕ / tap outside / Esc close it. Plain act buttons (data-kinvact /
+  data-wd …) run their own handler, then the card closes (`closeModal:true` also closes the panel under it).
+- `kitItemTap(ref)` → `data-kid="k" [data-kix=i] role="button" tabindex="0"`: any tile with it opens the card on tap (capture, stops the tap).
+  `data-kidpick="wear"|"use"` on a pick tile (Bên mình slot panel) → the card carries the ONE act (Cài / Mặc / Đeo / May áo).
+- `kitItem({sel:true})` = the selected tile (gold ring, lifted) whose detail is shown beside its grid.
+### 70.5 Sites (scan `node dev/test/item-info-scan.js`, table dev/review/item-info-table.md)
+Dress pick (jtoil Hồi 1: tap = select + strip, buttons Cài / Mặc / Đeo / Tháo; "Mặc bộ này" / "Giữ đồ hôm qua" unchanged) · Tư trang bag + Bên mình panels ·
+Bên mình pick tiles (card + act) · shop picture card (price row + detail) · reward box rows / shelf (j93) · event item tag (§64) · bully demand tile (jtsb) ·
+Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · veil picker (jveil) · other people's worn slots (jk2b kitWearSlots → card with who).
+Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.

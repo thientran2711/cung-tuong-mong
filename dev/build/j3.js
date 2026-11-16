@@ -35,12 +35,17 @@ function kitCloseTxt(h){return String(h==null?"":h).replace(/<[^>]*>/g,"").repla
 function kitCancelIx(m){if(!m||!m.opts||m.mustChoose)return -1;return m.opts.findIndex(c=>c&&KIT_CLOSE_W.test(kitCloseTxt(c.n))&&(!c.fx||Object.keys(c.fx).every(k=>!c.fx[k])))}
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
-  const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption><b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;return `<button class="opt" data-m="${i}" ${poor?"disabled":""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
+  const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;return `<button class="opt" data-m="${i}" ${poor?"disabled":""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
   $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose)m.onClose();if(!S.dead||Q.length)showModal();render()}
 function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
-  apply(c.fx||{});log(`${c.n}. ${fmt(c.fx)}${c.x&&!c.go?" · "+c.x:""}`);if(c.go)c.go();showModal();render()}
+  const b0=snapReal(),s0=S.logSeq||0;apply(c.fx||{});if(c.go)c.go();try{logChoice(m,c,b0,s0)}catch(e){console.error(e)}showModal();render()}
+/* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
+   The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
+function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
+ const d=logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
+ log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" → "+res:"."}`)}
 
 /* nights */
 /* rivals */
@@ -87,7 +92,7 @@ function endTurn(){
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
   if(Q.length===qStart&&roll(22))pushDil(makeDil());
-  rollWx();S.place="home";placeWhere();if(S.out)coldVisit();S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
+  rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
   flip();if(!S.dead)newLots();
   if(ev)Q.splice(qStart,0,{t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${ev}</p>`});
   if(S.justCrowned){S.justCrowned=0;record("Lên ngôi Hoàng hậu");Q.unshift({t:"Mẫu nghi thiên hạ",cls:"end",who:pMe(),h:`<p>Sau ${S.year} năm trong cung, ${S.name} nhận kim sách kim ấn, lên ngôi Hoàng hậu.</p><p>Con đường còn lại: đưa một hoàng tử lên ngôi, thành Hoàng thái hậu.</p>`,btn:"Tiếp tục"})}
