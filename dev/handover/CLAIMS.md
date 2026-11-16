@@ -34,5 +34,5 @@
 | kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | RUNNING | 16/11 05:39Z |
 | C43 coop-invite-ux review | review/coop-invite-ux-r1 | D | session_01DgYSWo9bFK5NRcy5Hrr3UX | RUNNING | 16/11 05:41Z |
 | facefx-all-r2 re-merge + kitPortrait main bug (jbook.js overrides j60 kitPortrait, breaks j90 podium fallback) | review/merge-hot-2 | main s9 | session_01UV1SzjMYTh2Gz2tanxwTrD | RUNNING | 16/11 05:43Z |
-| C9 huadian review r3 | review/huadian-size-r3 | C | (session id below) | RUNNING | 05:45Z 16/11 |
-| D53b review | review/opt-pics3-r1 | C | (session id below) | RUNNING | 05:45Z 16/11 |
+| C9 huadian review r3 | review/huadian-size-r3 | C | session_011xDdVShMB5Qb9z7oyaRK2z | RUNNING | 05:45Z 16/11 |
+| D53b review | review/opt-pics3-r1 | C | session_011xDdVPyoY1HQLa11JfUnXa | RUNNING | 05:45Z 16/11 |
