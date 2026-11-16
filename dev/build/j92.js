@@ -303,28 +303,42 @@ function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAd
    log(`${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi.`)}
   return ""}
  return wdFrameResolve(a,t)}
-/* the cry of theft: the room is searched; whoever planted it may be traced; the accused can clear herself with evidence */
-function wdFrameResolve(a,t){const i=(t.inv||[]).findIndex(e=>e&&e.gh===key(a)&&e.h);const nm=IT[(t===S&&S.wdFrame?S.wdFrame.k:null)||((t.inv[i]||{}).k)]?IT[(t===S&&S.wdFrame?S.wdFrame.k:null)||t.inv[i].k].n:"món đồ";
+/* the cry of theft: the room is searched; whoever planted it may be traced; the accused can clear herself with evidence.
+   Optional OWNER field (jlost, đồ thất lạc): an entry with .lo belongs to its owner (e.gh = the owner who raises it); the real culprit is
+   e.by (a rival) or nobody (just misplaced / a servant's slip); case evidence (lostEv) counts like evidence against the culprit; the item goes back to its owner. */
+function wdFrameIx(a,t){return (t.inv||[]).findIndex(e=>e&&e.gh===key(a)&&(e.h||e.lo))}
+function wdFrameNm(k){return (k&&(IT[k]||(typeof WD_ITEMS!=="undefined"&&WD_ITEMS[k])||{}).n)||"món đồ"}
+function wdFrameCulprit(a,e){if(e&&e.lo){const c=e.by?byKey(e.by):null;return c&&c!==a?c:null}return a}
+function wdFrameEv(t,a,e){const c=wdFrameCulprit(a,e);return (c?evG(t,c):0)+(e&&e.lo&&typeof lostEv==="function"?lostEv(e.lo):0)}
+function wdFrameTake(t,i){const e=t.inv.splice(i,1)[0];if(e&&e.lo&&typeof lostReturn==="function")lostReturn(e);return e}
+function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);const i=wdFrameIx(a,t);const e=t.inv[i]||null;const nm=wdFrameNm((t===S&&S.wdFrame?S.wdFrame.k:null)||(e&&e.k));
  if(t===S)S.wdFrame=null;
  if(i<0){ap(a,{danh:-5});relAdd(a,t,-10);return `${wdNmC(a)} tố ${wdNm(t)} lấy trộm ${nm}; Cung Chính ti khám phòng ${wdNm(t)} không thấy gì. ${wdNmC(a)} bị quở vì tố bừa, Danh -5. `}
- if(t!==S&&roll(25)){const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
- if(t===S){pushDil(mkP("wdframe",{a:key(a),k:t.inv[i].k}),"Bị tố ăn cắp");return ""}
- const o=cl(WD.clearBase+(t.mat||0)*WD.clearMat+evG(t,a)*10,5,95);
- if(roll(o)){t.inv.splice(i,1);evA(t,a,1);ap(a,{danh:-10});punish(a,"giá họa vu oan",2);return `${wdNmC(a)} tố ${wdNm(t)} ăn trộm ${nm}; ${wdNm(t)} minh oan được, tra ra ${wdNm(a)} giá họa. ${wdNmC(a)} Danh -10, bị phạt. `}
- t.inv.splice(i,1);ap(t,{danh:-10,sung:-5});t.framedBy=key(a);punish(t,"lấy trộm đồ",1);return `<span class="r">Cung Chính ti tìm thấy ${nm} của ${wdNm(a)} trong phòng ${wdNm(t)}.</span> ${wdNmC(t)} mang tội ăn trộm: Danh -10, Sủng -5, bị phạt. `}
+ const lo=!!e.lo,cu=wdFrameCulprit(a,e);
+ if(t!==S&&roll(25)){if(lo){wdFrameTake(t,i);return `${wdNmC(t)} cho người soát phòng trước, thấy ${nm} của ${wdNm(a)} lẫn trong rương, sai người đem trả. `}const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
+ if(t===S){pushDil(mkP("wdframe",{a:key(a),k:e.k,lo:e.lo||0}),lo?"Đồ thất lạc":"Bị tố ăn cắp");return ""}
+ const o=cl(WD.clearBase+(t.mat||0)*WD.clearMat+wdFrameEv(t,a,e)*10,5,95);
+ if(roll(o)){wdFrameTake(t,i);
+  if(cu){evA(t,cu,1);ap(cu,{danh:-10});punish(cu,"giá họa vu oan",2);return `${wdNmC(a)} tố ${wdNm(t)} ${lo?"giữ":"ăn trộm"} ${nm}; ${wdNm(t)} minh oan được, tra ra ${wdNm(cu)} giá họa. ${wdNmC(cu)} Danh -10, bị phạt. `}
+  return `${wdNmC(a)} báo ${nm} thất lạc ở chỗ ${wdNm(t)}; ${wdNm(t)} minh oan được: món đồ chỉ thất lạc, không ai lấy trộm. ${nm} về lại với ${wdNm(a)}. `}
+ wdFrameTake(t,i);ap(t,{danh:-10,sung:-5});if(cu)t.framedBy=key(cu);punish(t,"lấy trộm đồ",1);return `<span class="r">Cung Chính ti tìm thấy ${nm} của ${wdNm(a)} trong phòng ${wdNm(t)}.</span> ${wdNmC(t)} mang tội ăn trộm: Danh -10, Sủng -5, bị phạt. `}
 /* her side of it: choices show only their cost; the result card tells the truth after */
-PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const it=IT[pp.k];const nm=it?it.n:"món đồ";const ev=a.ev||0;const tr=!!pp.tr;
- const o1=cl(WD.clearBase+25+(S.mat||0)*WD.clearMat,5,95),o2=cl(WD.clearBase+(S.mat||0)*WD.clearMat+(tr?15:0),5,95);
- const clear=how=>{const i=S.inv.findIndex(e=>e&&e.gh===pp.a&&e.h);if(i>=0)S.inv.splice(i,1);ap(a,{danh:-10});relAdd(a,S,-15);punish(a,"giá họa vu oan",2);
-  Q.push({t:"Minh oan",who:pMe(),h:`<p>${how} Tra ra ${wdNm(a)} sai người lén đặt ${nm} vào phòng ngươi.</p><p class="past">${wdNmC(a)}: Danh -10, bị phạt.</p>`});log(`Ngươi minh oan được: ${wdNm(a)} giá họa, Danh -10, bị phạt.`)};
- const guilty=(light)=>{const i=S.inv.findIndex(e=>e&&e.gh===pp.a&&e.h);if(i>=0)S.inv.splice(i,1);S.framedBy=pp.a;
+PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k);const tr=!!pp.tr;const lo=!!pp.lo;
+ const cur=()=>{if(typeof lostUnwear==="function")lostUnwear(S,a);const i=wdFrameIx(a,S);return{i,e:S.inv[i]||null}};const E0=cur().e;const cu=wdFrameCulprit(a,E0);const ev=E0?wdFrameEv(S,a,E0):(a.ev||0);
+ const o1=cl(WD.clearBase+25+(S.mat||0)*WD.clearMat,5,95),o2=cl(WD.clearBase+(S.mat||0)*WD.clearMat+(tr?15:0)+(lo?ev*10:0),5,95);
+ const clear=how=>{const x=cur();if(x.i>=0)wdFrameTake(S,x.i);
+  if(!cu){Q.push({t:"Minh oan",who:pMe(),h:`<p>${how} Tra ra ${nm} chỉ thất lạc, không ai lấy trộm. Món đồ về lại với ${wdNm(a)}.</p>`});log(`Ngươi minh oan được: ${nm} chỉ thất lạc, đã trả về ${wdNm(a)}.`);return}
+  ap(cu,{danh:-10});relAdd(cu,S,-15);punish(cu,"giá họa vu oan",2);
+  Q.push({t:"Minh oan",who:pMe(),h:`<p>${how} Tra ra ${wdNm(cu)} sai người lén đặt ${nm} vào phòng ngươi.</p><p class="past">${wdNmC(cu)}: Danh -10, bị phạt.</p>`});log(`Ngươi minh oan được: ${wdNm(cu)} giá họa, Danh -10, bị phạt.`)};
+ const guilty=(light)=>{const x=cur();if(x.i>=0)wdFrameTake(S,x.i);if(cu)S.framedBy=key(cu);
   if(light){apply({danh:-5});log("Ngươi nhận lỗi, xin khoan hồng: trả lại đồ, Danh -5.");Q.push({t:"Nhận lỗi",who:pMe(),h:`<p>${nm} được trả về cho ${wdNm(a)}. Ngươi bị quở, Danh -5.</p>`});return}
   apply({danh:-10,sung:-5});punish(S,"lấy trộm đồ",1);Q.push({t:"Mang tội ăn trộm",who:pMe(),h:`<p class="r">Không minh oan được: ngươi mang tội lấy trộm ${nm} của ${wdNm(a)}. Danh -10, Sủng -5, bị phạt.</p>`})};
+ const spendEv=()=>{const x=cur();if(x.e&&x.e.lo&&typeof lostEvUse==="function"&&lostEvUse(x.e.lo))return true;if(cu&&evG(S,cu)>0){evA(S,cu,-1);return true}return false};
  const O=[];
- O.push({n:"Trình chứng cứ minh oan",fx:{},j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{if((a.ev||0)<1){guilty(false);return}evA(S,a,-1);if(roll(o1))clear("Ngươi trình chứng cứ về "+wdNm(a)+".");else guilty(false)}});
+ O.push({n:"Trình chứng cứ minh oan",fx:{},j67:lo?"tốn: 1 chứng cứ đã tra xét":`tốn: 1 chứng cứ về ${a.name}`,go:()=>{if(!spendEv()){guilty(false);return}if(roll(o1))clear(lo?"Ngươi trình chứng cứ đã tra xét.":`Ngươi trình chứng cứ về ${wdNm(a)}.`);else guilty(false)}});
  O.push({n:"Xin Cung Chính ti tra xét",fx:{},j67:"tốn: không tốn gì",go:()=>{if(roll(o2))clear("Cung Chính ti tra hỏi người ra vào.");else guilty(false)}});
  O.push({n:"Nhận lỗi, xin khoan hồng",fx:{},j67:"tốn: không tốn gì",go:()=>guilty(true)});
- return{t:`<p>${wdNmC(a)} tố ngươi lấy trộm <b>${nm}</b>. Cung Chính ti khám phòng ngươi và tìm thấy món ấy trong rương.</p>`,o:ev>=1?O:O.slice(1),who:pv(a)}};
+ return{t:lo?`<p>${wdNmC(a)} báo Cung Chính ti: <b>${nm}</b> của nàng bị thất lạc, nay thấy ở cung ngươi. Cung Chính ti khám phòng ngươi và tìm thấy món ấy.</p>`:`<p>${wdNmC(a)} tố ngươi lấy trộm <b>${nm}</b>. Cung Chính ti khám phòng ngươi và tìm thấy món ấy trong rương.</p>`,o:ev>=1?O:O.slice(1),who:pv(a)}};
 A("giahoa","Giá họa trộm đồ",{c:{bac:-40},ok:(a,t)=>a.bac>=40&&!(t===S&&S.wdFrame),o:(a,t)=>oPlant(a,t),x:"sai người lén đặt đồ quý vào phòng nàng rồi tố nàng ăn cắp",f:(a,t)=>wdFrame(a,t)});
 try{AOUT.giahoa=["nàng mang tội ăn trộm: Danh -10, Sủng -5, bị phạt","kẻ đặt đồ bị bắt: nàng nắm 2 chứng cứ, thù -20 · hoặc nàng minh oan được: ngươi Danh -10, bị phạt"]}catch(e){}
 try{LACK.giahoa=()=>S.bac<40?"cần Bạc 40 để sai người":""}catch(e){}
@@ -433,7 +447,7 @@ try{KG82_ENG.groom=kg92Groom;KG82_KIND.chai={e:"groom",n:"Chải chuốt",t:"Đi
 function wdGroomApply(p,zone){const tgt=Math.min(8,wdPOf(p))+(zone==="ok"?0:zone==="over"?1.5:-2.25);wdApply(p,wdBest(p,tgt,e=>wdP(e,p)))}
 function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=wdMama(S);
  const how=`Kim lướt qua lại trên thước. Chạm ba lần: cài trâm, chọn áo, điểm trang (trong ${WD.groomSec} giây). Trung bình ba lần dừng ở vùng giữa là đúng phẩm; lệch phải là vượt phẩm, lệch trái là quá giản dị. Vùng giữa rộng theo Tài, khéo tay${m?`, có ${m.name} tinh ý giúp`:", ma ma tinh ý"}.`;
- const d=kg82Open({art:"Chải chuốt",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
+ const d=kg82Open({art:"Chải chuốt",pic:"img/kit/mg-chai-bg.webp",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
  const done=zone=>{spend(1);wdGroomApply(S,zone);const t=wdItemsTxt(S);log(`Ngươi chải chuốt, ${zone==="ok"?"ăn vận vừa vặn":zone==="over"?"ăn vận lộng lẫy":"ăn vận giản dị"}: ${t}.`);
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
   kg82ShowRes(html);$("kg92ok").onclick=()=>{kg82Close();render()}};

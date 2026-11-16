@@ -51,7 +51,9 @@ const TOK67={
  eun:()=>eun67(),k:()=>{const s=son67();return s?s.name:"hoàng tử"},d:()=>{const d=dau67();return d?d.name:"công chúa"},
  mis:()=>{const m=srvMis67();return m?m.name:"chủ nhân"},foe:()=>S.foe||"kẻ thù",foed:()=>S.foeDad||"kẻ thù của cha",
  sj:A=>A.sj||"chuyện này",xung:()=>S.rank>=3?"nương nương":"tiểu chủ",Xung:()=>S.rank>=3?"Nương nương":"Tiểu chủ",n1:A=>A.n1||"",n2:A=>A.n2||"",emp:()=>"Hoàng thượng"};
-function fill67(s,A){return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
+/* a goal / step text that names the arc's people tells HER who they are (D47: the Mục tiêu row showed "Quý nhân ???" for the very woman the chapter says she found out): name + face known (j61 stage 2), nothing logged */
+function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="string")return;const L=[];for(const k of ["v","v2"])if(t.includes("{"+k+"}")){const v=rv67(A,k);if(v)L.push(v)}if(t.includes("{foe}")){const v=foe67();if(v)L.push(v)}if(L.length)k61Know(L,"",true,2)}catch(e){}}
+function fill67(s,A){if(typeof s==="string")arcReveal67(s,A);return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
 function who67(w,A){try{switch(w){
  case"v":case"v2":{const v=rv67(A,w);return v?pv(v):null}
  case"th":return S.thDead?null:pTH();case"emp":return pEmp();case"hh":return qOn()?pv(rivals[0]):null;case"maid":return S.maid?pMaid():null;case"me":return pMe();
@@ -1606,7 +1608,7 @@ ARC67.s_ban={o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù v�
  const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);Object.values(ARC67).forEach(a=>Object.values(a.B).forEach(walk))})();
 
 /* one-line objective of the main quest on the Hành sự tab */
-(function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch){const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
+(function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
 const QUEST67={
  tt:{t:"Ván cờ phủ Tể tướng",e:[["Phủ Tể tướng đứng sau ngôi Trung cung",{danh:10,th:6,bac:80},"Qua ba chương, nhà Tể tướng thành chỗ dựa vững nhất của ngươi trong triều."],["Giữ được nhà, giữ được mình",{danh:4},"Ngươi đi qua sóng gió của phủ Tể tướng, không mất mà cũng không được bao nhiêu."],["Một mình giữa triều đình",{tamco:3},"Phủ Tể tướng không còn đỡ được ngươi; từ nay ngươi tự đi đường mình."]]},
  dtq:{t:"Vinh nhục nhà tướng",e:[["Nhà tướng môn vững như núi",{danh:10,sung:6,th:4},"Binh quyền, chiến công và lòng vua đều đứng về phía nhà ngươi."],["Nhà tướng còn đứng",{danh:4},"Nhà ngươi qua được bão tố, vinh có, nhục có."],["Tướng môn sa sút",{tamco:3},"Nhà tướng sa sút, ngươi phải tự gây dựng chỗ đứng."]]},
