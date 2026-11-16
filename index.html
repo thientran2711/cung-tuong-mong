@@ -6701,7 +6701,7 @@ document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
 const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:"Thông tin cập nhật"};
-const SUBH={slots:"Ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
+const SUBH={slots:"Sổ mây ở trên, rồi ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
 const SONO=["một","hai","ba"];
 function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
@@ -6709,6 +6709,9 @@ function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 cla
   if(!d)return `<div class="kslot">${h}${kitRows([["Kiếp","Chưa ghi","n"]])}<div class="kslot-a"><button class="kbtn" data-new="${n}">Bắt đầu kiếp mới</button></div></div>`;
   const s=d.S;return `<div class="kslot">${h}${kitRows([["Kiếp",`${slotWho(s)} ${s.name}`,"t"]].concat(s.age!=null?[["Tuổi",`${s.age} tuổi`,"n"]]:[],[["Ngày",slotDate(s),"n"]]))}<div class="kslot-a"><button class="kbtn" data-load="${n}">Tiếp tục kiếp này</button><button class="kbtn alt" data-new="${n}" data-ask="1">Kiếp mới</button></div></div>`}).join("")}
 /* owner 16/11: two separate sets on this screen: the solo sổ (above) and the co-op rooms (jslots, below); a room never writes a sổ */
+function cloudMini(){try{return window.CTM_CLOUD&&CTM_CLOUD.mini?CTM_CLOUD.mini():""}catch(e){return ""}}
+/* Chọn sổ › Cùng hảo hữu: the title's co-op button opens this tab, so "Nhập ám hiệu" (jcooplobby join flow) lives here too */
+function coopJoin(){return `<div class="kslot kjoin"><h4 class="kpst">Nhập ám hiệu</h4>${kitRows([["Hảo hữu mời","Gõ ám hiệu hảo hữu gửi để vào phòng của hảo hữu","t"]])}<div class="kslot-a"><button class="kbtn alt" data-coop="join">Nhập ám hiệu</button></div></div>`}
 function roomsHTML(){try{return window.CTM_ROOMS?CTM_ROOMS.html():""}catch(e){return ""}}
 window.CTM_SLOTWHO=slotWho;window.CTM_SLOTDATE=slotDate;window.CTM_DRAWSLOTS=()=>drawSlots();
 /* Chọn sổ = TWO kit tabs (KIT 46 tab row, same part as Mua/Bán): "Một mình" (3 sổ) | "Cùng hảo hữu" (3 phòng); opens on the mode last played */
@@ -6718,7 +6721,7 @@ function csGet(){if(CSTAB)return CSTAB;let v=null;try{v=localStorage.getItem(CSK
 function csSet(v){CSTAB=v;try{localStorage.setItem(CSK,v)}catch(e){}}
 function csSub(){const M=$("modal");const e=M&&M.classList.contains("kptitle")&&M.querySelector('.kpt-mount[data-pg="slots"]')?M.querySelector(".dlg > .kph .kpsub"):null;if(e)e.textContent=csGet()==="coop"?SUBH.slotsco:SUBH.slots}
 function drawSlots(){const s=$("slots");if(!s)return;const t=csGet();
- s.innerHTML=`<div class="pctabs kcattabs kcstabs" role="tablist">${kitTabRowHTML([{k:"solo",label:"Một mình"},{k:"coop",label:"Cùng hảo hữu"}],t,"data-kcs")}</div>`+(t==="coop"?roomsHTML():slotsHTML());csSub()}
+ s.innerHTML=`<div class="pctabs kcattabs kcstabs" role="tablist">${kitTabRowHTML([{k:"solo",label:"Một mình"},{k:"coop",label:"Cùng hảo hữu"}],t,"data-kcs")}</div>`+(t==="coop"?coopJoin()+roomsHTML():cloudMini()+slotsHTML());csSub()}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots [data-kcs]");if(!b)return;e.stopPropagation();csSet(b.dataset.kcs);drawSlots();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}},true);
 /* playing a mode makes it the tab the list opens on next time */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#slots button[data-load],#slots button[data-new]:not([data-ask])");if(b)csSet("solo")},true);
@@ -6744,7 +6747,7 @@ function numVi(n){try{return window.VP&&VP.num?VP.num(n):String(n)}catch(e){retu
 function lastSlot(){const F=[1,2,3].filter(n=>loadSlot(n));if(!F.length)return 0;return F.includes(SLOT)?SLOT:F[0]}
 function homeMenu(){const n=lastSlot();let info="";
  if(n){const d=loadSlot(n);if(d&&d.S)info=[`${slotWho(d.S)} ${d.S.name}`,slotDate(d.S)].filter(Boolean).join(" · ")}
- const B=n?`<button class="kbtn k1" data-tgo="cont">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots">Kiếp mới</button>`
+ const B=n?`<button class="kbtn k1" data-tgo="slots" data-cstab="solo">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots">Kiếp mới</button>`
           :`<button class="kbtn k1" data-tgo="slots">Bắt đầu<small>chọn sổ, xem Phúc duyên</small></button>`;
  return `<div class="kpmenu${n?" n4":""}">${B}<button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
 /* live nodes each sub-screen borrows from .tbox, in display order */
@@ -6777,6 +6780,7 @@ function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg
 function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[data-load="${n}"]`);if(!lb)return false;PG="home";dropAll();lb.click();return true}
 window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
+ if(b.dataset.cstab){csSet(b.dataset.cstab);if(g==="slots")try{drawSlots()}catch(x){}}
  if(g==="cont"){resumeGame();return}
  go(g)},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="home"){e.preventDefault();go("home")}});
@@ -26681,7 +26685,7 @@ function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m
     Bắt đầu = Chọn sổ), only its words say which way of playing it is; "Kiếp mới" stays beside it. */
  const k=m.querySelector(".kbtn.k1");if(k&&!k.dataset.solo){k.dataset.solo="1";const sm=k.querySelector("small");const was=k.firstChild&&k.firstChild.nodeType===3?k.firstChild.textContent.trim():"";
   const info=sm?sm.textContent:"";k.innerHTML=`Chơi một mình<small>${was==="Tiếp tục"?"Tiếp tục: "+esc(info):esc(info)}</small>`}
- const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.coop="co";b.innerHTML="Cùng hảo hữu<small>Mời hảo hữu · Nhập ám hiệu</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
+ const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.tgo="slots";b.dataset.cstab="coop";b.innerHTML="Cùng hảo hữu<small>Mời hảo hữu · Nhập ám hiệu</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
 new MutationObserver(addBtn).observe($("modal"),{childList:true,subtree:true});
 /* live updates while a lobby screen is up */
 COOP.on("status",s=>{if(!LM||Q[0]!==LM||T.hidden)return;if(PG==="wait"){const a=document.activeElement;open("wait");if(a&&a.dataset&&a.dataset.coop){const n=document.querySelector(`#modal [data-coop="${a.dataset.coop}"]`);if(n)n.focus({preventScroll:true})}}});
@@ -27239,7 +27243,7 @@ function html(){const L=list();let h="";
 window.CTM_ROOMS={list,html,forget,upd,full:()=>list().length>=MAX};
 }catch(e){console.error(e)}})();
 /* ================= jcloud: SỔ MÂY — one character on phone AND iPad (owner 15/11, C44, review/cloud-save) =================
-   Thiết lập › Sổ mây: "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
+   Chọn sổ › Một mình (top, above the 3 sổ; owner 16/11) AND Thiết lập › Sổ mây — the same part (miniHTML/sectionHTML + btnsHTML): "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
    8-letter ám hiệu sổ (owner design; Crockford base32, guessing stopped by the Worker's per-network miss guard); "Nối sổ" + that ám hiệu links another device. Local-first: the sổ stay in localStorage
    (j6 SK(n)), the cloud is a copy.
    SYNC (run): base = the cloud version this device last matched (C.rev + per-sổ hashes C.h). For each sổ one/hai/ba:
@@ -27298,7 +27302,7 @@ const playing=()=>T.hidden&&typeof S==="object"&&S&&!S.dead;
 let BUSY=null,AGAIN=false,STATE="";
 function sync(o){if(!C.k)return Promise.resolve("");if(BUSY){AGAIN=true;return BUSY}
  STATE="busy";wire();BUSY=(async()=>{let r="";try{for(let i=0;i<3;i++){r=await run(o||{});if(r!=="retry")break}}catch(e){console.error(e);r="err"}
-  BUSY=null;STATE="";if(r==="ok"||r==="same")C.err="";saveC();wire();if(AGAIN){AGAIN=false;setTimeout(()=>sync(o),50)}
+  BUSY=null;STATE="";if(r==="ok"||r==="same"){C.err="";C.sy=Date.now()}saveC();wire();if(AGAIN){AGAIN=false;setTimeout(()=>sync(o),50)}
   if(C.pend&&!T.hidden)setTimeout(()=>{if(!T.hidden&&PG!=="pick")open("pick")},30);return r})();return BUSY}
 async function run(o){
  if(C.pend&&!o.resolve)return "conflict";
@@ -27355,21 +27359,27 @@ const group=k=>String(k||"").replace(/(.{4})(?=.)/g,"$1-");
 function slotLine(s){return s?[`${s.w||""} ${s.n||""}`.trim(),s.d||""].filter(Boolean).join(" · "):"Chưa ghi"}
 
 /* ---------- Thiết lập section (.cloudwrap, borrowed by j74 like .optwrap / .xiowrap) ---------- */
+/* ONE button set for the two places that show Sổ mây (Chọn sổ › Một mình, Thiết lập): same words, same data-cl flows, no second implementation */
+function btnsHTML(){if(!C.k)return `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div>`;
+ return `<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Đồng bộ ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div>`}
+const mask=k=>{k=String(k||"");return k.length>=8?"••••-••"+esc(k.slice(-2)):"••••-••••"};
 function sectionHTML(){let h=`<div class="kslot"><h4 class="kpst">Sổ mây</h4>`;
- if(!C.k)return h+kitRows([["Sổ mây","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+
-  `<div class="kslot-a"><button class="kbtn" data-cl="make">Giữ sổ trên mây<small>lập ám hiệu sổ mới</small></button><button class="kbtn alt" data-cl="link">Nối sổ<small>máy kia đã có ám hiệu</small></button></div></div>`;
+ if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây","n"],["Để làm gì","Một kiếp chơi tiếp được trên cả điện thoại lẫn máy tính bảng, một mình hay cùng hảo hữu","t"]])+btnsHTML()+`</div>`;
  const w=stateWord();
- h+=kitRows([["Sổ mây",esc(w[0]),w[1]]].concat(C.at?[["Gửi sau cùng",esc(fmtAt(C.at)),"n"]]:[]));
- h+=`<div class="kslot-a">${C.pend?`<button class="kbtn" data-cl="pick">Chọn bản sổ</button>`:`<button class="kbtn" data-cl="now"${STATE==="busy"?" disabled":""}>Gửi ngay</button>`}<button class="kbtn alt" data-cl="code">Ám hiệu sổ</button><button class="kbtn alt" data-cl="vers">Các bản đã giữ</button></div></div>`;
- return h}
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]]].concat(C.at?[["Gửi sau cùng",esc(fmtAt(C.at)),"n"]]:[]))+btnsHTML()+`</div>`}
+/* Chọn sổ › Một mình, above the 3 sổ (j74 drawSlots): one compact card, the state + the same buttons */
+function miniHTML(){const h=`<div class="kslot cloudmini"><h4 class="kpst">Sổ mây</h4>`;
+ if(!C.k)return h+kitRows([["Tình trạng","Chưa giữ trên mây · chơi tiếp trên máy khác","n"]])+btnsHTML()+`</div>`;
+ const w=stateWord();
+ return h+kitRows([["Tình trạng",esc(w[0]),w[1]],["Ám hiệu",mask(C.k)+(C.sy||C.at?" · đồng bộ lúc "+esc(fmtAt(C.sy||C.at)):""),"n"]])+btnsHTML()+`</div>`}
 function wire(){let w=document.querySelector("#modal .cloudwrap")||T.querySelector(".cloudwrap");
  if(!w){const box=T.querySelector(".tbox");if(!box)return;w=document.createElement("div");w.className="cloudwrap";box.appendChild(w)}
- w.innerHTML=sectionHTML();if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
+ w.innerHTML=sectionHTML();try{document.querySelectorAll("#slots .cloudmini").forEach(e=>{e.outerHTML=miniHTML()})}catch(e){}if(LM&&PG&&Q[0]===LM&&!T.hidden&&STATE!=="busy")redraw()}
 
 /* ---------- sub-panels: kit scene panels on the title backdrop (as the co-op lobby) ---------- */
 let LM=null,PG="",MSG="",PICK={},VERS=null,ASK=0;
 function drop(){if(!LM)return;const i=Q.indexOf(LM);if(i>=0)Q.splice(i,1);LM=null;const M=$("modal");if(M&&Q.length)showModal();else if(M){M.hidden=true;M.classList.remove("kptitle","kpscene")}}
-const HEAD={code:["Ám hiệu sổ mây","Gõ ám hiệu này ở máy kia: Thiết lập › Sổ mây › Nối sổ."],link:["Nối sổ","Gõ ám hiệu sổ mây của máy kia."],
+const HEAD={code:["Ám hiệu sổ mây","Gõ ám hiệu này ở máy kia: Chọn sổ › Một mình › Sổ mây › Nối sổ."],link:["Nối sổ","Gõ ám hiệu sổ mây của máy kia."],
  pick:["Hai bản sổ khác nhau","Sổ này đã được chơi trên cả hai máy. Chọn bản giữ lại."],vers:["Các bản đã giữ","Mười bản gần nhất trên mây."]};
 function body(pg){
  if(pg==="code")return kitInput({id:"cl-key",label:"Ám hiệu sổ mây",value:group(C.k),readonly:true})+
@@ -27444,7 +27454,7 @@ function buoiKey(){try{return S&&!S.dead?[S.year,S.month,S.tuan,S.buoi||0].join(
 {const f=save;save=function(){const r=f.apply(this,arguments);try{const k=buoiKey();if(k&&lastB&&k!==lastB&&C.k&&playing())setTimeout(()=>sync(),1500);if(k)lastB=k}catch(e){}return r}}
 document.addEventListener("visibilitychange",()=>{if(!C.k)return;if(document.visibilityState==="hidden"){try{if(playing())save()}catch(e){}sync({keep:1})}else if(!T.hidden)pull()});
 addEventListener("pagehide",()=>{if(C.k)sync({keep:1})});
-window.CTM_CLOUD={wire,sync,get state(){return C},open:pg=>pg==="vers"?vers():open(pg),hash,_reload(){loadC();wire()}};
+window.CTM_CLOUD={mini:miniHTML,wire,sync,get state(){return C},open:pg=>pg==="vers"?vers():open(pg),hash,_reload(){loadC();wire()}};
 wire();
 setTimeout(()=>{if(C.k&&!T.hidden)pull()},1500);
 }catch(e){console.error(e)}})();
@@ -28115,7 +28125,7 @@ function paintAsk(){const b=el.querySelector(".klb"),o=el.querySelector(".kpopts
   o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"");return}
  head("Chọn nơi chơi trước khi thỉnh tranh");
  b.innerHTML=`<div class="kpnote">Trên iPad, iPhone, Safari và ứng dụng ở màn hình chính cất tranh riêng, không dùng chung. Thỉnh tranh ở Safari (${left} MB) rồi mở bằng màn hình chính là phải thỉnh lại một lần nữa.</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
-  (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Thiết lập › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
+  (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
  o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"")}
 function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  const c=KLOAD.core,b=el.querySelector(".klb"),o=el.querySelector(".kpopts");
@@ -43775,7 +43785,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c983c8e628a8";window.CTM_BUILD=BUILD;
+const BUILD="c2f77a00d01f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
