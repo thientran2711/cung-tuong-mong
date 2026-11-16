@@ -282,3 +282,4 @@ KIT KEEPER BACKLOG: C K1 K2 K4 K6; D nhập cung entry scene, #mb scroll, reign 
 Owner's open choice: none pending except the fp v7 sheet when it arrives.
 Self-wake: s16 trigger trig_01P3xyyt8UbJBytM4MJuPd8o DELETED at handover → s17 creates its own hourly create_trigger (owner OD 08:20Z s14).
 - (13:19Z real s16) MAIN SESSION 17 = session_01UV1SziLYuBSdn5wE1TLZte (opened by s16 at rollover, ctx 35 %). s16 trigger trig_01P3xyyt8UbJBytM4MJuPd8o deleted. s16 stops; workers report to s17.
+- (13:19Z) MAIN SESSION 17 = session_01UV1SziLYuBSdn5wE1TLZte; START_CTX ~6 % of window (1M; get_session reads 0, own estimate) → roll over at ~31 %, ceiling 60 %. Self-wake trig_01BRGhrPtrU9hJda11i33Cts (hourly :18).
