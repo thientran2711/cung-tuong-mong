@@ -299,11 +299,11 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  muoi_tuoc:{rkSeat:4},        /* lowest rank index allowed to write a lantern poem at the Trung thu feast (.7) */
  muoi_lau:{rkSend:3},         /* lowest rank index allowed to send goods into a prison through Nội vụ phủ (.8) */
  muoi_doi:{han:3},            /* months to pay the relief contribution before Hộ bộ closes its books (.8) */
- muoi_no:{han:3},             /* months to raise the money (.5 / .6) */
- cn_chu:{gap:1},              /* ranks she must sit above the old mistress for the .9 climax bonus */
- cn_tinh:{danh:40},           /* Danh at which her own word weighs in the Kính sự phòng report (.9) */
- cn_ban:{ill:2},              /* months Tố Nga survives without the ginseng (.8) */
- cn_than:{dl:3},              /* months the old Thẩm steward can hold out (.7) */
+ muoi_no:{han:3,phat:12,cam:6}, /* han: months to raise the money (.5 / .6); phat: months of khất bổng the rival gets (.9 / .10); cam: months of cấm túc when she has no rank to lose (.10) */
+ cn_chu:{gap:1,cam:1,phat:3}, /* gap: ranks she must sit above the old mistress for the .9 climax bonus; cam: months of cấm túc for the old mistress (.7 win); phat: months of khất bổng (.8 x1, .9, .11 win2) */
+ cn_tinh:{danh:40,cam:3,phat:3}, /* danh: Danh at which her own word weighs in the Kính sự phòng report (.9); cam: months of her cấm túc (.9 lose / self-confinement, .11 lose); phat: months of khất bổng (.11 lose) */
+ cn_ban:{ill:2,cam:2,phat:1}, /* ill: months Tố Nga survives without the ginseng (.8); cam: months of cấm túc for the framer (.6 win, .10 win); phat: months of khất bổng on her (.7 lose) */
+ cn_than:{dl:3,phat:2},      /* dl: months the old Thẩm steward can hold out (.7); phat: months of khất bổng the Thượng thư house gets her (.6 s2 fail, .9 c3 refuse) */
  /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
     read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */
  tienSc:2,
