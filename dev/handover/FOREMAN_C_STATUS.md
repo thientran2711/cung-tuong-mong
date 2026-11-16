@@ -10,7 +10,8 @@ Base main at start: 900ace7fb.
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | PASS a151b4939 |
 | A9 promo-rules review | review/promo-rules-r1 | opus | PASS 0d425b5a8 — CONDITIONAL on kit keeper sign-off (K4) |
 | D46 placeholder pictures (acts/events on placeholder, e68 flowerBloom, LUẬT Bổng lộc, Đoan ngọ banner check) | review/placeholder-pics2 | sonnet | RUNNING (art worker) |
-| A11 cardflip review | review/cardflip @1daf0d9d4 → review/cardflip-r1 | sonnet | RUNNING (reviewer) |
+| A11 cardflip review | review/cardflip-r1 | sonnet | PASS 6452171fc — CONDITIONAL on kit keeper sign-off (K5) |
+| D45 small art (earrings + embroidered shoes, guard 4 indigo, c02-t1-a18 grey skin, Emperor costume audit no Qing hat; + A9 follow-ups: per-rank Đeo eo pendants, mid-rank bangles, per-rank Túi thơm, maid robes per maid rank) | review/small-art | sonnet | RUNNING (art worker) |
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | PASS fa02fc656 |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | PASS bc0a1ba24 |
@@ -32,6 +33,7 @@ PASS review/kit-popup-sample-r1 fa02fc6565575e284ad7dc1e0c8553cdfcdf400d (C18; d
 PASS review/thaiy-r1 f7c61f829ce0a2cc3653143685e4280977c819e2 (A6; descends from main 583858942; thaiy.js 49/49 at 5 viewports, coop-e2e 59/59; jthaiy after jty in assemble). Note: at top ranks the bạc road (12.5–15% of pay) is cheaper in feel than the 3-khắc/Sức-5 road → handed to C7 balance-pass bạc-equivalence scan, not a blocker.
 PASS review/cal-plus-r1 a151b4939fe4713fe10c80f09a3333dd4be5f25b (A8; descends from main 6298d2f55; month-cal.js 5 viewports + seal-events.js pass; note: month-cal 844x390 'desk overlaps' flake also on plain main 1/5 runs; seal once covered 280px2 at 844x390 in one run, 41 later dialogs clean)
 PASS review/promo-rules-r1 0d425b5a8665d3891981e4de246c590c1bc2feb3 (A9; descends from main 2afdafc39; CONDITIONAL: kit keeper signs off K4 first; promo-rules 29/29 at 5 viewports, effects now real §68 painted sprites — the branch's calls had wrong signatures so nothing painted ever played; promo-exam 17/18 old-save step fails on main too)
+PASS review/cardflip-r1 6452171fce1da8d0cf7f8acca2bee99ed80dff75 (A11; descends from main c36a06321; CONDITIONAL: kit keeper signs off K5; reviewer replaced CSS gold glow with §68 glow-gold; dev/test/cardflip.js timed out (CPU-starved box) → reduced real-browser test at 5 viewports, no errors/overflow; final merge not re-run in browser)
 NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 first (or just cycle-r1 when it passes, it contains both).
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
@@ -49,5 +51,6 @@ NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 firs
 - Q2 (owner, A9): only HER household gains one free servant per rank (up to 5 maids + 4 eunuchs); NPC households stay 4+2 (face pool limited) — breaks 'whatever she has, they have'. Accept, or give NPCs the same?
 - Q3 (owner, A9): each rank-up reward set ≈ one month's pay (sold at 50%). Keep or trim?
 - Art follow-ups (A9, not blocking): per-rank Đeo eo pendants, middle-rank bangles (vongngoc repeats ranks 0–4), per-rank Túi thơm, maid robes per maid rank, servant-road edict animation → Foreman C will take under D45 small art.
+- KIT REQUEST K5 (A11 cardflip-r1, built before the rule): new KIT §67 kitCardFlip (jflip.js: kitCardFlip, cfDemo, cfGrid, BAL.cardFlip, .kcf* CSS, kit-page sample) + shared art img/kit/cf-plate-ksp/emp(+ -p).webp, cf-hand-emp.webp, cf-seal-thitam.webp (on CDN; emp plates 254/268 KB, slightly over budget). Kit keeper please sign off.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
