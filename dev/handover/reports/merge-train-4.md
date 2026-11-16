@@ -37,3 +37,8 @@ No new § added in this train; no duplicate § numbers. Next free §81.
 ## Open for owners (not fixed here)
 - jroute: "đợi qua cơn giận của Hoàng thượng (còn NaN tháng)" shows when no cooldown is set (routes-port-r1 bug).
 - Conditional PASS items still with the kit keeper: loi-rieng category (routes), K8 (act-text), K10 (small-art-wire), .kdiff .ksub (difficulty).
+
+## UPDATE (GO round, s14/s15) — READY 9266809641ffbf7a33119e71646933c6e0be0821
+- Re-merged origin/main 399483e3 (merge-train-5) and 18fb8252 (final, frozen); branch contains main. Assemble tail: jtruth, jlogsync, jkpc, jcycle, jtds, jwkpics, jact, jkc, jhouse.
+- Only test fixes after the merge (KIT 81 scenes need their end button): schemewire, small-art-wire, chapter-detail (now also green at 844x390 and 1000x755).
+- All tests green on the final head (co-op trio, cloud-save, newgame-ui, flip-newlife, popup-fullbody, dlg-clip, scene-end, every branch test, act-text-scan 0 page errors).
