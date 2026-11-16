@@ -17,8 +17,8 @@
      who paused presses "Tiếp tục" ({mode:"hold",on}; kit panel over both screens, no budget). (c) room frozen (a player away, two builds),
      a player choosing her thân phận (Luân hồi, death screen, title): stopped, no budget.
    - Time out: each client ends its own buổi — sáng..chiều: COOPW.forceBend() (even under an open dialog / mini game: the room steps for
-     the friend now, her step waits for the dialog through CW.pendBuoi, so no choice is cut and nothing runs twice); tối: nextBuoi()
-     (→ endTurn → end) as soon as she has no dialog / mini game open. While her buổi is overdue, a dialog with no choice (only ✕ /
+     the friend now, her step waits for the dialog through CW.pendBuoi, so no choice is cut and nothing runs twice); tối: the host commits the
+     night for both (COOPW.forceNight, jcoopworld night gate); each seat runs it (→ endTurn → end) once she has no dialog / mini game open. While her buổi is overdue, a dialog with no choice (only ✕ /
      Đã rõ) or with one single road is read for her after BAL.coopTm.readMs; a real choice is never made for her.
    - Reconnect / refresh: the host appends its clock to its `pos` ({tm:{key,dl,rem,run,up,cap,hold,pz}}), re-sent on every stop/start, so
      the room snapshot (`room`.pos.a.tm) brings it back to either seat; the host also keeps "ctm-coop-tm" in localStorage (last second
@@ -58,7 +58,7 @@ function lenPick(){try{const n=+localStorage.getItem(LENK);return TB().lens.incl
 function lenMs(){const n=lenPick();return n?n*60000:TB().buoiMs}
 /* choosing a thân phận (first life / rebirth: Luân hồi), a death screen, the title: the clock stands still, no pause budget spent */
 function myLife(){if(!CW.on)return false;if(typeof S==="undefined"||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)||!!document.getElementById("kroul")}
-function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN())}
+function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN()||(CW.nReady&&CW.nReady()))}
 const ST={key:"",pz:false,rd:false,lf:false,bz:false,kh:0,at:0};
 const FS={key:"",pz:false,rd:false,lf:false,bz:false,kh:0};
 /* busy (owner 16/11 friend chip "! Đang bận"): a dialog / event / mini game is open on her screen — the friend only ever sees "đang bận" */
@@ -96,6 +96,9 @@ function hostTick(dt){const k=roomKey();if(!K||K.key!==k){if(K&&K.t0)LOGL.push({
  if(pz)K.cap=Math.max(0,K.cap-dt);K.pz=pz;
  setRun(!stopFree&&!pz);
  if(K.run&&hnow()>=K.dl+TB().graceMs){setRun(false);K.rem=0;K.up=true}
+ /* review/coop-night-sync: a clock restored already run out (host reload / rejoin: localStorage or the room snapshot) never passed the
+    run→up edge below, so timeUp never fired: "Còn 0:00" stood still and the buổi never advanced. The time-up is a state, not an edge. */
+ if(K.up&&due!==k)timeUp(k);
  const now=[K.run,K.pz,K.hold,K.up].join(),t=pnow();
  if(now!==was){sendClk(true);if(K.up)timeUp(k)}else if(t-lastSync>TB().syncMs)sendClk(false);
  if(t-lastSave>1000){lastSave=t;lsPut()}}
@@ -127,7 +130,9 @@ function overdue(){return live()&&!S.dead&&(due===myKey()||!!CW.pendBuoi)}
 function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
  if(due===myKey()&&myKey()===roomKey()){const b=S.buoi||0;
   if(b<LAST()){if(!CW.bend)CW.forceBend()}
-  else if(!CW.pend&&CW.sent!==wkN()&&!Q.length&&!S.mg&&!frozenRoom()){try{nextBuoi()}catch(e){console.error(e)}}}
+  else if(!CW.pend&&CW.sent!==wkN()){/* tối: the host commits the night for both (jcoopworld night gate); each seat runs it once her dialog is closed */
+   if(CW.forceNight)try{CW.forceNight()}catch(e){console.error(e)}
+   if(!Q.length&&!S.mg&&!frozenRoom()){try{nextBuoi()}catch(e){console.error(e)}}}}
  if(overdue())autoRead()}
 /* a dialog with no choice, or with one single road, is read for her once her buổi is overdue (never a real choice) */
 function autoRead(){const M=$("modal");if(!Q.length||!M||M.hidden){AR.m=null;return}const m=Q[0];
@@ -283,7 +288,7 @@ function word(){const n=$("next");if(!n||!CW.on||n.dataset.coopWait)return;if(n.
 /* ---------- tick ---------- */
 let IV=0,lastPing=0;
 function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(2000,t-lastT):0;lastT=t;
- if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold)}
+ if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold);if(G&&G.up&&G.key===roomKey()&&due!==G.key)timeUp(G.key)}
  sendSt(false);dueTick();paint(false)}catch(e){console.error("coop clock",e)}}
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
 function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);unpad();K=null;G=null;due="";AR.m=null;setHold("")}

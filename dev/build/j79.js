@@ -343,6 +343,10 @@ html body #modal:not(.pcm) .dlg.kpanel>#mr{flex:0 0 auto}
 /* KIT §8.1 short notice: centred in the one-size frame (margin:auto 0 centres when it fits, top-aligned + scroll when it does not — nothing is clipped) */
 html body #modal:not(.pcm) .dlg.kpanel>#mb{display:flex;flex-direction:column}
 html body #modal:not(.pcm) .dlg.kpanel>#mb>*{flex:0 0 auto}
+/* KIT §8.1 SCROLL CHAIN (owner 16/11 "Không vuốt được"): only the panel's own scroller (#mb, the dawn .kpb, the person card .pc) holds the
+   swipe. A nested scroller (.kshg grid, .opts list, .pcl ...) hands the swipe on when it has nothing (more) to scroll: with
+   overscroll-behavior:contain the browser latches the finger to it and #mb never moves (the 10-piece Học Cầm grid was unreachable by touch). */
+html body #modal .dlg>#mb *,html body #modal .pc *,.dawn .dbox.kpanel>.kpb *{overscroll-behavior:auto}
 html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort{margin:auto 0;text-align:center;align-items:center}
 html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .dlg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line);box-shadow:inset 0 -2px 0 #fffaf0,0 1px 0 #e6d3ac}
