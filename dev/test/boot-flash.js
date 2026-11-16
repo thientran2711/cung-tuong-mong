@@ -4,10 +4,11 @@
    'boot' (#kboot cover), 'title' (#title / title kit panel), 'load' (#kload), 'game' (#game skeleton or game), 'blank' (nothing painted yet).
    FAIL = any frame where the bare #game skeleton shows before the game is ready (window.__kbootDone not set yet). On an old build (no
    cover) every 'game' state before 'title' / 'load' is the flash. Screencast frames (jpeg) are saved for eyeballing.
-   usage: node dev/test/boot-flash.js <baseURL> <w> <h> <outdir> [label]   (one browser, closed at the end) */
-const {chromium}=require('playwright');const fs=require('fs');
+   usage: node dev/test/boot-flash.js <baseURL> <w> <h> <outdir> [label]   (one browser, closed at the end)
+   D22: set DEVICE=<name from dev/test/lib/device.js> (e.g. DEVICE=iphone14) to use that real profile (UA, touch, DSF) instead of the plain <w>x<h> viewport. */
+const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');
 const [,,BASE,W,H,OUT,LBL='run']=process.argv;fs.mkdirSync(OUT,{recursive:true});
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:+W,height:+H},deviceScaleFactor:1});
+(async()=>{const b=await chromium.launch();const ctx=process.env.DEVICE?await D.newDeviceContext(b,process.env.DEVICE,{serviceWorkers:'allow'}):await b.newContext({viewport:{width:+W,height:+H},deviceScaleFactor:1});
  /* probe from the HOST page only (the frame's first about:blank window is reused by its navigation, so an init script does not follow it):
     at the screen centre (and 20 px above the bottom) of the host, and inside the game frame (same origin) at its design centre / bottom */
  await ctx.addInitScript(()=>{if(window.top!==window)return;const L=[];let last="";
