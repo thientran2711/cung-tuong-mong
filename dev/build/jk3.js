@@ -348,7 +348,7 @@ function kitTabFade(){try{document.querySelectorAll(KIT_CHIPROWS).forEach(r=>{co
 let kitTfQ=0;function kitTabFadeSoon(){if(kitTfQ)return;kitTfQ=requestAnimationFrame(()=>{kitTfQ=0;kitTabFade()})}
 document.addEventListener("scroll",e=>{const r=e.target;if(r&&r.matches&&r.matches(KIT_CHIPROWS))kitTabFadeSoon()},true);addEventListener("resize",kitTabFadeSoon);
 /* DOM changes (the page mutates ~500x/s while idle): throttled to one check per 150 ms, never per frame */
-let kitTfM=0;try{new MutationObserver(()=>{if(kitTfM)return;kitTfM=setTimeout(()=>{kitTfM=0;kitTabFadeSoon()},150)}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+let kitTfM=0;try{/* kit keeper (perf): observe only the three hosts of chip rows; skip while the page is hidden or in Gọn mode (OPT.fxon false) */const mo=new MutationObserver(()=>{if(kitTfM||document.hidden||(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false))return;kitTfM=setTimeout(()=>{kitTfM=0;kitTabFadeSoon()},150)});document.querySelectorAll("#panel,#modal,header.hud").forEach(h=>mo.observe(h,{childList:true,subtree:true}))}catch(e){}
 
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
