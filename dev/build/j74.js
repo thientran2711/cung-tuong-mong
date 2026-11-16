@@ -94,7 +94,7 @@ function numVi(n){try{return window.VP&&VP.num?VP.num(n):String(n)}catch(e){retu
 function lastSlot(){const F=[1,2,3].filter(n=>loadSlot(n));if(!F.length)return 0;return F.includes(SLOT)?SLOT:F[0]}
 function homeMenu(){const n=lastSlot();let info="";
  if(n){const d=loadSlot(n);if(d&&d.S)info=[`${slotWho(d.S)} ${d.S.name}`,slotDate(d.S)].filter(Boolean).join(" · ")}
- const B=n?`<button class="kbtn k1" data-tgo="slots" data-cstab="solo">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots">Kiếp mới</button>`
+ const B=n?`<button class="kbtn k1" data-tgo="slots" data-cstab="solo">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots" data-cstab="solo">Kiếp mới</button>`
           :`<button class="kbtn k1" data-tgo="slots">Bắt đầu<small>chọn sổ, xem Phúc duyên</small></button>`;
  return `<div class="kpmenu${n?" n4":""}">${B}<button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
 /* live nodes each sub-screen borrows from .tbox, in display order */
