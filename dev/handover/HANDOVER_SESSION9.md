@@ -86,3 +86,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (06:35Z s11) Owner awake (reviewing via s10). Art resumed for samples: foreign-princess REDO (OD:L1238-1239, ~340 cr) + place-glyphs finish (approved; NVP 15 edits already paid → contact sheet only). flip-newlife-r1 reviewer opened. merge-hot-3 asked to re-merge ba07c65e.
 - (06:37Z s11) LIVE: main = feba37e5 (merge-hot-3 = cardflip-smooth-r1: smoother, slower card flip). merge-hot-1 asked to re-merge.
 - (06:40Z s11) foreign-princess v2 samples (260 cr; total 600) looked at by s11 and sent to the owner. Waiting for her verdict; after approval mass production → Foreman C.
+- (06:41Z s11) place-glyphs SẴN SÀNG KIỂM 4ddddde3 → reviewer place-glyphs-r1 opened. NVP scene contact sheet (16 tiles, already paid) sent to owner; s11 flagged the GLOSSY floor (OD:L86 'no glossy floors'); wiring waits for her verdict.

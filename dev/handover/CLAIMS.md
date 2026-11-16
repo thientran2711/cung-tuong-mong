@@ -61,3 +61,4 @@
 | canon-pairs: decide 57 old→new rule pairs in PRIORITY/ART rule files | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus, rules) | RUNNING | 16/11 06:29Z |
 | kc-lore: td home road vs "cả nhà bị xử trảm" (+ scan all 6 home-road origins) | review/kc-lore | main s11 | session_01UV1SzifvyTS1XcBknF7tFA (sonnet) | RUNNING | 16/11 06:30Z |
 | flip-newlife reviewer (+ .ksub overlap fix on identity card) | review/flip-newlife-r1 | main s11 | session_01UV1SzhzxBjcTWbAts1faFn (sonnet) | RUNNING | 16/11 06:35Z |
+| place-glyphs reviewer (glyphs only; NVP scene stays unwired) | review/place-glyphs-r1 | main s11 | session_01UV1SzknxC4i1bfnzo28AyP (sonnet) | RUNNING | 16/11 06:41Z |
