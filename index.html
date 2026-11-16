@@ -14598,7 +14598,7 @@ const KG82_KIND={
  ban:{e:"aim",n:"Bắn cung",t:"Bắn hồng tâm",how:"Ngắm đưa qua đưa lại trên bia. Chạm khi ngắm ở giữa hồng tâm. 6 phát tên."},
  tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
  doi:{e:"doiline"},/* filled by jnwp */
- doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý."},
+ doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý. Làm nhanh thì được trọn phần."},
  ve:{e:"pattern",m:"ink",n:"Vẽ",t:"Nhớ nét bút",how:"Nét mực hiện trên ô giấy rồi tan. Chạm lại đúng những ô có nét mực. 5 hồi."},
  hoa:{e:"pattern",m:"flower",n:"Cắm hoa",t:"Nhớ thế hoa",how:"Hoa hiện trên các ô bình rồi khuất. Chạm lại đúng những ô có hoa. 5 hồi."},
  theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
@@ -14802,7 +14802,7 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
  /* mg-easy: tier 0/1 draw a gold ring round the white group in danger (it has ONE empty neighbour left); a quiet glow shows that last empty spot when she stalls or presses Gợi ý (a little score) */
  const tier=kg82Tier(env.lv),IDLE=[6000,10000,0][tier];
  /* mg-balance-2: time per position, the time a capture still earns full marks, extra stones: BAL.mgTier.lev.co by ease */
- const LIM=Math.round(mgLev(env,"co","lim")),FAST=Math.round(mgLev(env,"co","fast")),MORE=Math.round(mgLev(env,"co","extra"));let hintAt=0,hinted=false,tAct=0;
+ const LIM=Math.round(mgLev(env,"co","lim")),MORE=Math.round(mgLev(env,"co","extra"));let hintAt=0,hinted=false,tAct=0;
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=`<button class="kgbtn" id="kg82gohint">Gợi ý<small>chỉ chỗ ăn, bớt một ít phần</small></button>`;box.appendChild(hb);
  const doHint=()=>{if(phase!=="play"||stop||!P)return;if(!hinted){hinted=true;kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Quân trắng chỉ còn một khí ở đây",kg82Col("--gold","#8f5f0c"))}hintAt=performance.now()};hb.querySelector("button").onclick=doHint;
  function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}P=kg82GoGen(n,R0[round],MORE)||kg82GoGen(n,R0[round])||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
@@ -14823,7 +14823,7 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
    env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}else env.hud({score:`${Math.round(pts)}/10`,time:"–"});
   draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play"||stop)return;tAct=performance.now();const [x,y]=C.at(e);let bi=-1,bd=1e9;for(let i=0;i<n*n;i++){const d=Math.hypot(px(i)-x,py(i)-y);if(d<bd){bd=d;bi=i}}
-  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const el=performance.now()-t0,sp=el<=FAST?1:1-.4*Math.min(1,(el-FAST)/Math.max(1,LIM-FAST));pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (down to 60 %) */mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
+  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const sp=mgPace(env,"co",performance.now()-t0,LIM);pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (review/mg-tune: the ONE time part jmgt mgPace) */mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
   else{mark={i:bi,ok:false};kg82Pop(pops,px(bi),py(bi)-s*.6,"Chưa ăn được",kg82Col("--red","#c23b22"));kg82Pluck(0,false)}round++;setTimeout(next,950)});
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
@@ -15364,7 +15364,14 @@ function mgMore(env){const e=env&&env.lv!=null?+env.lv:5;return Math.max(0,Math.
 /* a board lever that moves with the ease (mg-balance-2): BAL.mgTier.lev[kind][name] = [value at ease 0, value at ease 5], linear between, held at the
    ease-0 value below 0 (heat lag / gusts of Nấu ăn, time + decoys of Cờ, beat window of Múa, time + shortage of Làm phúc, aim aid of Đầu hồ, sway of Đi đứng, voice band of Ngôn) */
 function mgLev(env,kind,name){const L=((BAL.mgTier.lev||{})[kind]||{})[name];if(!L)return null;const e=cl(env&&env.lv!=null?+env.lv:5,0,5)/5;return L[0]+(L[1]-L[0])*e}
-window.mgTier=mgTier;window.mgLev=mgLev;window.mgFull=mgFull;window.mgTol=mgTol;window.mgMore=mgMore;window.mgGrade=mgGrade;window.mgSet=mgSet;window.mgWord=mgWord;window.mgTierOf=mgTierOf;
+/* the TIME PART of a round (review/mg-tune, owner 16/11 07:25Z "mức vừa", ONE CORE for the whole family): the share of the round's score she keeps
+   for the time she took. el = ms from the round's start to its finish, lim = the round's time limit. Kept whole while el ≤ fast·lim, then falls
+   linearly to keep at el = lim (time out). fast / keep = BAL.mgTier.lev[kind].fast / .keep through mgLev (by the board ease) when the engine has
+   them, else BAL.mgTier.pace.fast / .keep. Read by every engine that scores correctness (jnwp calli / doiline, jnwq lay / sort / seat / clue,
+   jlant lamp, j82 go): a right answer found quickly is Tuyệt phẩm, a right answer found slowly is Tinh xảo. */
+function mgPace(env,kind,el,lim){const P=BAL.mgTier.pace,e=cl(env&&env.lv!=null?+env.lv:5,0,5)/5,at=(n)=>{const v=mgLev(env,kind,n);return v!=null?v:P[n][0]+(P[n][1]-P[n][0])*e};
+ const f=cl(at("fast"),0,.99),k=cl(at("keep"),0,1),u=cl((+el||0)/Math.max(1,+lim||1),0,1);return u<=f?1:1-(1-k)*(u-f)/(1-f)}
+window.mgTier=mgTier;window.mgPace=mgPace;window.mgLev=mgLev;window.mgFull=mgFull;window.mgTol=mgTol;window.mgMore=mgMore;window.mgGrade=mgGrade;window.mgSet=mgSet;window.mgWord=mgWord;window.mgTierOf=mgTierOf;
 /* wiring (edited in place, 16/11): j82 startContest (occ "hoi" / o.occ, o.big), playArt (occ "hoc" / o.occ), kg82Lesson (lessons), kg82Word → mgWord,
    jexam exRun (occ "exam", rank = target), jts tsGame (occ "trieu" / o.occ), jkc Phúc tuyển (playArt occ "tuyen"). Skip / "để tài nghệ quyết định"
    values keep using her real art level (KG82.tier.lv) through kg82NpcMean. */
@@ -15430,7 +15437,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
   for(const q of U){let bj=-1,bd=tol*tol;for(let j=Math.max(0,idx);j<Math.min(G.length,Math.max(idx,0)+look);j++){const d=(G[j][0]-q[0])**2+(G[j][1]-q[1])**2;if(d<=bd){bd=d;bj=j}}
    if(bj>=0){hit++;if(bj>idx)idx=bj}else miss++}
   const first=k91Dist(U[0][0],U[0][1],G[0][0],G[0][1])<=tol*2.6;const prog=(idx+1)/G.length,acc=hit/Math.max(1,hit+miss);return Math.max(0,Math.min(1,prog*Math.pow(acc,T.accPow)*(first?1:.7)))}
- function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost);sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
+ function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);/* review/mg-tune: × the time part (jmgt mgPace, ONE CORE) */const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost)*mgPace(env,"tho",performance.now()-t0,LIM);sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
   F.say=[`${F.n}: ${w}`,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
  function hint(auto){if(phase!=="play"||(dm&&dm.on)||si>=F.ns)return;const now=performance.now();glow=now+(auto?5000:6500);tAct=now;if(!auto){cost+=T.hintCost;tip={t:`Nét ${si+1}: bắt đầu ở chấm xanh, đi theo nét mờ`,c:K91C.gold(),until:now+3200}}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
@@ -15496,7 +15503,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
   t.at=i;t.locked=true;P.fill[i]=t;t.x=P.slots[i].x;t.y=P.slots[i].y;P.glow=null;kg82Pluck(i,true);if(P.rows.every((_,k)=>P.fill[k]))setTimeout(()=>{if(phase==="play")judge()},350)}
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const i=P.rows.findIndex((_,k)=>!P.fill[k]);if(i<0)return;const now=performance.now();P.glow={i,until:now+(auto?5000:6500)};tAct=now;if(!auto){P.cost+=T.hintCost;tip={t:"Nét đang sáng là hình lật gương của nét bên trái",c:K91C.gold(),until:now+3200}}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
- function judge(){phase="judge";const ok=P.rows.filter((_,k)=>P.fill[k]).length,nb=P.n;pts+=Math.max(0,ok-P.miss*T.miss-P.cost);tot+=nb;
+ function judge(){phase="judge";const ok=P.rows.filter((_,k)=>P.fill[k]).length,nb=P.n;pts+=Math.max(0,ok-P.miss*T.miss-P.cost)*mgPace(env,"doi",performance.now()-t0,R[r]*nwP(T.sec,tier)*1000);/* review/mg-tune: time part */tot+=nb;
   P.say=[ok===nb?(P.miss||P.cost?"Đối chỉnh!":"Đối chỉnh, không sai nét!"):`Đối được ${ok}/${nb} nét`,ok===nb?K91C.good():K91C.gold()];setTimeout(next,1500)}
  function frame(g,x,y,w,h,st){k91Tile(g,x,y,w,h,"",st,14,"tho-slip")}
  const stop=k91Loop(now=>{if(!P)return;kg82Bg(g,W,H,"doi",.14,1);
@@ -15525,7 +15532,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
    if(t){sel=sel===t?null:t;return}
    const i=slotAt(x,y);if(i>=0&&sel){place(sel,i);sel=null}}});
  KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const i=P.rows.findIndex((_,k)=>!P.fill[k]);if(i<0)return null;const t=P.tiles.find(t=>!t.locked&&!t.bk&&okFor(t,i));if(!t)return null;
-  const a=C.client(t.x+t.w0/2,t.y+t.h0/2),b=C.client(P.slots[i].x+P.slots[i].w/2,P.slots[i].y+P.slots[i].h/2);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
+  const a=C.client(t.x+t.w0/2,t.y+t.h0/2),b=C.client(P.slots[i].x+P.slots[i].w/2,P.slots[i].y+P.slots[i].h/2);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],cands:P.tiles.filter(t=>!t.locked).length/* review/mg-tune, bots: tray marks to compare */}};
  KG82.st=()=>({r,n:P&&P.n,miss:P&&P.miss,cost:P&&P.cost,pts,tot,phase,left:R[Math.min(r,R.length-1)]*nwP(T.sec,tier)*1000-(performance.now()-t0)});
  /* test oracle for the bots: every tray tile (ok = the right mirror of an empty row) and every empty slot, in client px */
  KG82.peekX=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const e=P.rows.findIndex((_,k)=>!P.fill[k]);return{tiles:P.tiles.filter(t=>!t.locked&&!t.bk).map(t=>{const c=C.client(t.x+t.w0/2,t.y+t.h0/2);return{x:c.x,y:c.y,ok:e>=0&&okFor(t,e)}}),
@@ -15534,8 +15541,8 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
 
 /* ================= registry: the word games are unhooked everywhere ================= */
 KG82_ENG.calli=nwCalli;KG82_ENG.doiline=nwDoi;/* the old verse / pair engines are gone from j91 (review/mg-train) */
-KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay; làm đủ các nét theo thứ tự số. Giữ bút trong vệt mờ thì nét đẹp. Có nút Gợi ý. 3 chữ."};
-KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối."};
+KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay; làm đủ các nét theo thứ tự số. Giữ bút trong vệt mờ thì nét đẹp. Có nút Gợi ý. 3 chữ. Làm nhanh thì được trọn phần."};
+KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối. Làm nhanh thì được trọn phần."};
 KG82_SPR.tho=["tho-slip","ve-brush","ve-inkstone"];KG82_SPR.doi=["tho-slip"];
 KG82_MGL.thi=["Thi: thư pháp đồ nét","tho"];
 try{if(window.K91)window.K91.engines=Object.keys(KG82_ENG)}catch(e){}
@@ -16993,7 +17000,7 @@ BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:1
    clues = evidence pictures per case by tier; peek = seconds the model stays when it hides (tier 2). Raw score stays 0..10 like every j82 game. */
 BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,peek:8,idle:[9,14,0],clues:[2,2,3],
  n:{le:[3,4,5],tc:[5,6,8],thq:[4,5,6],xa:[3,4,5]},rounds:{le:3,tc:2,thq:3,xa:5},
- lim:{le:[30,30,28],tc:[45,45,42],thq:[30,30,28],xa:[18,17,15]}};
+ lim:{le:[30,30,28],tc:[45,45,42],thq:[30,30,28],xa:[14,10,8]}};/* xa 18/17/15 → 14/10/8 (review/mg-tune: a case is seen in ~3 s; the time part needs a limit near the play) */
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);
  try{if(!p||p.dead||p.alive===false||(p===S&&S.dead))return ev;const i=illOf(p);
@@ -17185,14 +17192,19 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
    into Dễ / Khó; kAdj = per-engine ease trim from the bot calibration (dev/PROGRESS_mg-balance.md); word = raw thresholds Tạm được/Khá/Giỏi/Xuất sắc;
    npc = [base, per art level] mean play score of a rival / of "Để tài nghệ quyết định" (j82 kg82NpcMean);
    aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
-   lev[kind][name] = [at ease 0, at ease 5] board levers read by mgLev (mg-balance-2: Nấu ăn fire lag s / gusts heat-per-s / gust gap s; Cờ time ms / full-speed ms / extra stones;
+   lev[kind][name] = [at ease 0, at ease 5] board levers read by mgLev (mg-balance-2: Nấu ăn fire lag s / gusts heat-per-s / gust gap s; Cờ time ms / full-speed share of it (mg-tune) / share kept at time out / extra stones;
+   pace = the TIME PART of correctness games (jmgt mgPace, review/mg-tune): fast = share of the round time that still keeps the whole score, keep = share kept at time out,
+     each [at ease 0, at ease 5]; an engine's own lev[kind].fast / .keep win (co, doden, and the no-word engines tho / doi / le / tc / xa / thq);
    wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds, cong = [Công level that adds +1 tier, highest tier that lift can reach (2 Tinh xảo: Tuyệt phẩm needs the score)] (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
 Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:0,theu:0,co:-1,banh:-.1,dauho:1.2,td_hanh:-1.4,td_dung:-1.2,td_ngon:-.9},
- lev:{banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[1800,7000],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
+ lev:{/* review/mg-tune time part (mgPace) of the correctness games, calibrated with dev/measure/mg-bots.js (skilled ≈ 25 % Xuất sắc at the matching level) */
+  tho:{fast:[.05,.175],keep:[.5,.5]},doi:{fast:[.05,.375],keep:[.3,.3]},doden:{fast:[.05,.175],keep:[.3,.3]},le:{fast:[.075,.25],keep:[.3,.3]},
+  tc:{fast:[.075,.175],keep:[.3,.3]},xa:{fast:[.05,.1],keep:[.1,.1]},thq:{fast:[.075,.45],keep:[.5,.5]},
+  banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
   td_hanh:{lim:[8000,20000],short:[2,0]},dauho:{aid:[.14,.6],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.6,td_ngon:2,ban:.8,dan:2.8,den:1.05,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.7,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2 */
- word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+ pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
@@ -17317,7 +17329,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function unseat(it){const s=slotOf(it);if(s){s.list=s.list.filter(x=>x!==it);relayout(s)}it.slot=-1}
  function home(it,fly){if(fly)it.bk={x:it.x,y:it.y,a:performance.now()};unseat(it);it.x=it.hx;it.y=it.hy;it.sc=1}
  function seat(it,s){unseat(it);if(!s.multi)s.list.slice().forEach(o=>home(o,true));s.list.push(it);it.slot=P.slots.indexOf(s);relayout(s)}
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(10*pts/Math.max(1,tot))),300)}
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}/* float: graded once by kg82 mgGrade */
   P=cfg.build(r,tier,W,H);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
   phase="play";t0=tAct=performance.now();drag=null;const d=hb.querySelector("#nwqdone");if(d)d.disabled=false;hb.querySelector("#nwqhint").disabled=false}
  const itemAt=(x,y)=>{for(let i=P.items.length-1;i>=0;i--){const it=P.items[i];if(it.locked)continue;const h=it.size*it.sc/2+4;if(Math.abs(x-it.x)<=h&&Math.abs(y-it.y)<=h)return it}return null};
@@ -17332,7 +17344,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=wrongOnes();if(!w.length)return;const it=w.find(i=>i.slot<0)||w[0];const si=P.slots.findIndex(s=>s.ok(it)&&(s.multi||imm||!s.list.length||s.list[0]===it));const now=performance.now();
   P.glow={it,si,until:now+(auto?5000:6500)};P.cost+=auto?B.auto:B.hint;tAct=now;if(P.peekAt!=null)P.peekAt=now;tip(cfg.hint(it,P.slots[si],P),K91C.gold())}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost);tot+=n;P.glow=null;
+ function judge(){phase="judge";let ok=0;P.items.forEach(it=>{const good=it.slot>=0&&P.slots[it.slot].ok(it);it.res=good?"ok":"bad";if(good)ok++});const n=P.items.length;pts+=Math.max(0,ok-P.miss*B.miss-P.cost)*mgPace(env,kind,performance.now()-t0,LIM);/* review/mg-tune: time part */tot+=n;P.glow=null;
   P.say=[ok===n?(P.miss||P.cost?cfg.fine:cfg.perfect):`Đúng ${ok}/${n}`,ok===n?K91C.good():K91C.gold()];hb.querySelector("#nwqhint").disabled=true;const d=hb.querySelector("#nwqdone");if(d)d.disabled=true;setTimeout(next,1800)}
  const dn=hb.querySelector("#nwqdone");if(dn)dn.onclick=()=>{if(phase==="play")judge()};
  const pos=(it,now)=>{if(!it.bk)return[it.x,it.y];const k=Math.min(1,(now-it.bk.a)/300),e=1-Math.pow(1-k,3);if(k>=1){delete it.bk;return[it.x,it.y]}return[it.bk.x+(it.x-it.bk.x)*e,it.bk.y+(it.y-it.bk.y)*e]};
@@ -17355,7 +17367,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on)||drag)return null;const w=wrongOnes();
   if(!w.length)return imm?null:{sel:"#nwqdone"};const it=w.find(i=>i.slot<0&&!i.bk)||w.find(i=>!i.bk);if(!it||it.bk)return null;
   const si=P.slots.findIndex(s=>s.ok(it)&&(s.multi||imm||!s.list.length||s.list[0]===it));if(si<0)return null;const s=P.slots[si];
-  const a=C.client(it.x,it.y),b=C.client(s.multi?s.ax+s.aw/2:s.x,s.multi?s.ay+s.ah/2:s.y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]]}};
+  const a=C.client(it.x,it.y),b=C.client(s.multi?s.ax+s.aw/2:s.x,s.multi?s.ay+s.ah/2:s.y);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],cands:P.slots.length/* review/mg-tune, bots: places to look through */}};
  next();return()=>{done=true;stop()}}
 
 /* ---- shared paints ---- */
@@ -17454,7 +17466,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
    [[cx-60,0],[cx+60,1]].forEach(([x,j])=>{nwqRobe(g,x-30,112,60,66,NWQ_COL[j===0?0:1][1]);nwqFit(g,j===0?"ve-brush":"mua-fan",x+22,150,28)});
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});
  if(dm)hb.hidden=true;
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(pts)),300)}
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),300)}
   const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);const att=["c","t","e"].slice(0,NC);
   const cul={c:cols[0],t:thg[0],e:emb[0]};const S=[{cul:true,c:cols[0],t:thg[0],e:emb[0]}];
   for(let i=1;i<NS;i++){const m=Math.floor(Math.random()*(NC));const keep=kg82Shuf(att).slice(0,Math.min(m,NC-1));const q={cul:false};
@@ -17466,7 +17478,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
  function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const w=live().filter(q=>!q.cul);if(!w.length)return;const q=w[Math.floor(Math.random()*w.length)];q.gone=true;P.cost+=auto?B.auto:B.hint;tAct=performance.now();
   P.tip={t:auto?"Ma ma khẽ nhắc: người này chưa khớp.":"Người này chưa khớp vật chứng, bỏ đi.",c:K91C.gold(),until:performance.now()+2600};if(!live().filter(q=>!q.cul).length)hb.querySelector("#nwqhint").disabled=true}
  hb.querySelector("#nwqhint").onclick=()=>hint(false);
- function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss);
+ function end(ok){phase="judge";P.S.forEach(q=>{q.res=q.cul?"ok":q.res});if(ok)pts+=Math.max(.4,2-P.cost-P.miss*B.xaMiss)*mgPace(env,"xa",performance.now()-t0,LIM);/* review/mg-tune: time part */
   P.say=[ok?(P.miss||P.cost?"Đúng người rồi!":"Khớp vật chứng, đúng người!"):"Hết giờ, người khớp vật chứng đã hiện",ok?K91C.good():K91C.red()];hb.querySelector("#nwqhint").disabled=true;setTimeout(next,1700)}
  function accuse(q){if(phase!=="play"||q.gone)return;tAct=performance.now();if(q.cul){kg82Pluck(3,true);end(true)}else{q.gone=true;q.res="bad";P.miss++;kg82Pluck(0,false);P.tip={t:"Người này chưa khớp, thử người khác.",c:K91C.red(),until:performance.now()+2200};if(live().length<=1&&live()[0]&&live()[0].cul){P.tip={t:"Chỉ còn một người, chạm người ấy.",c:K91C.gold(),until:performance.now()+2600}}}}
  const lab=(c)=>c[0],thN=t=>t[1];
@@ -17488,7 +17500,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
   else if(P.tip){g.fillStyle="rgba(255,250,236,.92)";g.fillRect(8,H*.36-3,W-16,26);g.textAlign="center";g.textBaseline="alphabetic";g.font=k91F(700,Math.min(13,W/26),1);g.fillStyle=P.tip.c;kg82Lbl(g,P.tip.t,W/2,H*.36+15,W-24)}
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Vụ ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;const q=P.S.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);if(q)accuse(q)}});
- KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y}};
+ KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y,cands:live().length*P.att.length/* review/mg-tune, bots: suspects × clues to compare */}};
  next();return()=>{done=true;stop()}}
 Object.assign(KG82_ENG,{lay:nwqLay,sort:nwqSort,seat:nwqSeat,clue:nwqClue});
 window.NWQ={tier:nwqTier,engines:["lay","sort","seat","clue"],kinds:["le","tc","xa","thq"]};
@@ -17503,7 +17515,7 @@ try{if(typeof KG82_MGL!=="undefined")KG82_MGL.y=["Y thuật & điều hương: p
    Uses only existing kit parts: j82 game frame + canvas, k91Btns / k91DemoCard / k91Pointer / k91Loop, the doden-bg painting. KIT REQUEST: none.
    Registers KG82_ENG.lamp; KG82_KIND.doden (j82) points at it. Old saves: key "doden" unchanged; the demo flag is the new key "doden2". */
 BAL.lantern={field:[8,10,12],same:[3,3,4],lit:[3,4,5],rows:[2,3,3],seq:[3,4,5],lim:[32000,28000,24000],idle:[9000,14000,0],
- pts:[3,3.5,3.5],miss:.18,speed:.3,hint:.3,tier:null,
+ pts:[3,3.5,3.5],miss:.18,hint:.3,/* time part: jmgt mgPace (BAL.mgTier.lev.doden) */tier:null,
  timeout:.6,autoHint:.5,bad:[1300,1300,500],glow:3500,pause:[900,1100],short:{h:520,min:240}};
 const LM_COL=[["#c23b22","#ff8a6a","#6e1608"],["#d99a1b","#ffe08a","#7a5206"],["#2f9d78","#8ff0c8","#0f5a40"]];
 function lmTier(env){const T=BAL.lantern.tier;if(T!=null)return cl(+T||0,0,2);
@@ -17544,10 +17556,10 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    o.T=Array(n).fill(0);idx.forEach(i=>o.T[i]=1);o.P=Array(n).fill(0);o.cols=cols;o.rows=rows;o.need=lit;o.sc=lmShuf([0,1,2,3]).slice(0,1)[0]}
   else{const m=B.seq[tier];const pairs=lmShuf([0,1,2,3].flatMap(s=>[0,1,2].map(c=>({s,c})))).slice(0,m);o.S=pairs;o.tray=lmShuf(pairs.map((p,i)=>({...p,i,used:0,bad:0})));o.k=0;o.need=m}
   return o}
- function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(Math.round(cl(pts,0,10))),400)}R=mk(rd);t0=tAct=performance.now()}
- function fin(timeout){if(R.fin)return;const now=performance.now(),sp=cl(1-(now-t0)/LIM,0,1),base=B.pts[R.type];let p;
+ function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}R=mk(rd);t0=tAct=performance.now()}
+ function fin(timeout){if(R.fin)return;const now=performance.now(),sp=mgPace(env,"doden",now-t0,LIM)/* review/mg-tune: the ONE time part (was its own speed share) */,base=B.pts[R.type];let p;
   const frac=R.type===0?R.found/R.need:R.type===1?R.P.filter((v,i)=>v===R.T[i]).length/R.P.length:R.k/R.need;
-  p=timeout?base*frac*B.timeout:base*(1-B.speed+B.speed*sp);p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
+  p=timeout?base*frac*B.timeout:base*sp;p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
   kg82Pop(pops,W/2,H*.5,timeout?"Hết giờ":"Đèn đã sáng!",timeout?K91C.gold():K91C.good());kg82Pluck(3,!timeout);setTimeout(next,B.pause[timeout?1:0])}
  function nextTarget(){if(!R||R.fin)return null;
   if(R.type===0){const i=R.L.findIndex(x=>x.ok&&!x.on);return i<0?null:{i}}
@@ -17593,7 +17605,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    if(R.glow===i&&now-R.glowAt<B.glow&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
  k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
- KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];return C.client(c.x+c.w/2,c.y+c.h/2)};
+ KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];/* cands (review/mg-tune, bots only): the lanterns a person looks through for this tap */const n=R.type===0?R.L.filter(x=>!x.on).length:R.type===1?R.P.length:R.tray.filter(x=>!x.used).length;return Object.assign(C.client(c.x+c.w/2,c.y+c.h/2),{cands:n})};
  /* test oracle for the random-play measure: every cell centre of the round */
  KG82.cells=()=>{if(!R||R.fin)return[];return geo().f.map(c=>C.client(c.x+c.w/2,c.y+c.h/2))};
  /* short screens (844x390): the dialog scrolls, so bring the board to the top of the scroll area where it fits whole above the Gợi ý button */
@@ -30327,10 +30339,10 @@ document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)ret
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý."},
- tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý."},
- xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý."},
- thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý."}};
+ le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."},
+ thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý. Làm nhanh thì được trọn phần."}};
 /* family C (owner 16/11 07:20Z, no word games): the exam games are skill games of jnwq (lay / sort / clue / seat); no question banks remain.
    The kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
 (function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k]})();
@@ -41547,7 +41559,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2c586bc87f3b";window.CTM_BUILD=BUILD;
+const BUILD="43c38dcf9693";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
