@@ -44,10 +44,13 @@ function asFestDone(k){return !!(S.adFest&&S.adFest[k]===S.year)}
 if(typeof ACC_ROLE!=="undefined"&&Array.isArray(ACC_ROLE))ACC_ROLE.unshift((p,k)=>{if(p!==S||adSrv())return null;const f=asFestToday();return f&&AS_FPLACE[f.k]===k&&!asFestDone(f.k)?{ok:true,fest:1}:null});
 AD_HAP_FIX.push(()=>{const f=asFestToday();if(!f||asFestDone(f.k)||S.confined)return null;return{k:AS_FPLACE[f.k],id:"fest",x:f.k}});
 AD_HAP_T.fest="Ngày hội";
+/* a light event keeps at least 2 options: when the left-out acts leave one, the plain "watch and go back" (no gain, no loss) is added */
+const AS_WATCH={n:"Đứng xem rồi về",fx:{},x:"không được không mất"};
+function asLightOpts(k,O){const O2=(O||[]).filter(o=>o&&!asSameAsJ71(k,o.n));if(O2.length<2&&!O2.some(o=>o.n===AS_WATCH.n))O2.push(Object.assign({},AS_WATCH));return O2}
 AD_HAP_FIRE.fest=(h)=>{const k=h.x,f=festToday();if(!f||f.k!==k||asFestDone(k))return false;S.adFest=S.adFest||{};S.adFest[k]=S.year;let fired=false;
  if(AS_LIGHT[k]){const m=Object.assign({who:pEmp(),ev:"fest",evId:"fest:"+k,headArt:{src:`img/ev-fest-${k}-b.webp`,label:f.name}},AS_LIGHT[k]());
-  let O=(m.opts||[]).filter(o=>!(k==="nguyentieu"&&o.n==="Thả đèn cầu con"));const O2=O.filter(o=>!asSameAsJ71(k,o.n));m.opts=O2.length>=2?O2:O;Q.push(m);fired=true}
- const j=AS_J7F[k];if(j&&EVI[j]){try{if(EVI[j].ok()){const d=mkEv(j);if(d){d.o=(d.o||[]).filter(o=>!asSameAsJ71(k,o.n)).length>=2?d.o.filter(o=>!asSameAsJ71(k,o.n)):d.o;pushDil(d,f.name);fired=true}}}catch(e){console.error(e)}}
+  m.opts=asLightOpts(k,(m.opts||[]).filter(o=>!(k==="nguyentieu"&&o.n==="Thả đèn cầu con")));Q.push(m);fired=true}
+ const j=AS_J7F[k];if(j&&EVI[j]){try{if(EVI[j].ok()){const d=mkEv(j);if(d){d.o=asLightOpts(k,d.o);pushDil(d,f.name);fired=true}}}catch(e){console.error(e)}}
  return fired};
 /* "Thả đèn cầu con" → the Hành sự card "Thả đèn hoa đăng" (jts), wish "Cầu con" on the Nguyên tiêu night (the card already costs Bạc -10) */
 if(typeof tsPanel==="function"&&typeof tsOpt==="function"){const p0=tsPanel;tsPanel=function(o){try{const f=festToday();if(o&&Array.isArray(o.opts)&&f&&f.k==="nguyentieu"&&/: thả đèn$/.test(o.t||"")&&!o.opts.some(x=>x&&x.n==="Cầu con"))

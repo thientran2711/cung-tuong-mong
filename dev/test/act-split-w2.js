@@ -47,7 +47,8 @@ const OLD=`window.__oldRoll=function(){const L=[],W=S.where||{};const used=new S
    out.cold={day:Ld.some(x=>x.id==="cold"),night:Ln.some(x=>x.id==="cold"&&x.k==="lc"),inPool:freshEvents().some(e=>e.id==="coldvisit")};used=0;clr();goTo("lc");out.cold.q=Q.map(m=>String(m.t||"").slice(0,40)+": "+(m.opts||[]).map(o=>o.n).join(" / "));
    out.cold.seen=S.seen&&S.seen.coldvisit!=null;clr();goTo("home");clr()}
   /* 9. one door for Nghe lén câu chuyện */
-  {scen('cao');let k=null;for(let t=0;t<40&&!k;t++){clr();k=places().map(x=>x.k).find(x=>x!=="home"&&adPresent(x).length>=2&&accessOf(S,x).ok)||null;if(!k){used=0;try{if((S.buoi||0)>=B4L){S.buoi=0;endTurn()}else nextBuoi()}catch(e){}}}
+  {scen('cao');let k=null;const two=x=>{used=0;clr();goTo(x);clr();const ok=S.place===x&&curPeople().filter(q=>q.kind==="rival").length>=2;if(!ok){goTo("home");clr()}return ok};
+   for(let t=0;t<60&&!k;t++){clr();k=places().map(x=>x.k).find(x=>x!=="home"&&adPresent(x).filter(v=>!v.queen).length>=2&&accessOf(S,x).ok&&two(x))||null;if(!k){used=0;try{if((S.buoi||0)>=B4L){S.buoi=0;endTurn()}else nextBuoi()}catch(e){}}}
    out.nghe={k};if(k){used=0;clr();goTo(k);clr();const P=curPeople();const I=P.map((x,i)=>i).filter(i=>P[i].kind==="rival");out.nghe.people=P.map(x=>x.kind+":"+x.name);
     if(I.length>=2){const [ia,ib]=I;popIdx=ia;const A=talkOpts(P[ia]);const j=A.findIndex(a=>a.n==="Nghe lén câu chuyện");out.nghe.has=j>=0;if(j>=0){talk(j);clr()}
      popIdx=ib;const B=talkOpts(P[ib]);const o=B.find(a=>a.n==="Nghe lén câu chuyện");out.nghe.lockB=!!(o&&o.lock);out.nghe.whyB=o&&o.t;
