@@ -60,7 +60,7 @@ fs.mkdirSync(DIR,{recursive:true});
  await p.click('.ktrv-ov');await p.waitForTimeout(2500);
  out.card=await p.evaluate(()=>{const c=document.querySelector('.ktrv-card');return c?c.innerText.replace(/\n/g,' | '):null});
  await p.screenshot({path:`${DIR}/e2e-${tag}-rev2.jpg`,quality:60});
- for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov').catch(()=>{});await p.waitForTimeout(900)}
+ for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov .kmend').catch(()=>{});await p.waitForTimeout(900)}
  out.revGone=!(await p.$('.ktrv'));
  await p.waitForSelector('#toildone');out.resultCard=await p.evaluate(()=>document.querySelector('#toildone').closest('#kg82,.kg82,body').innerText.slice(0,300));
  await p.screenshot({path:`${DIR}/e2e-${tag}-result.jpg`,quality:60});

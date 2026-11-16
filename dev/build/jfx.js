@@ -337,7 +337,8 @@ function kitGain(x,o){o=o||{};if(!kfOn())return;const I=kgInfo(x);KFX.gains=KFX.
     const an=fl.animate([{transform:"none",opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(.6)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(${sc})`,opacity:.2}],{duration:620,easing:"cubic-bezier(.5,0,.6,1)"});
     an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
    KFX.gainClosed=(KFX.gainClosed||0)+1;ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);done()};
-  ov.addEventListener("click",close)};
+  /* KIT 81 (owner OD:L1261): only the "Nhận" button closes the gain scene; a tap anywhere else does nothing */
+  ov.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.closest(".krevok"))close(e);else e.stopPropagation()})};
  if(typeof kmPush==="function")kmPush(run);else run(()=>{})}
 window.kitGain=kitGain;
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
