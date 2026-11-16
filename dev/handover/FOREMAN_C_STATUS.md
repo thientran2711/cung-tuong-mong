@@ -93,6 +93,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
   (f) OWNER (angry): "vậy mày còn kêu là vẽ độ phân giải thấp. Trong khi đó là ta đang muốn đẹp, muốn cái nét nó rõ để cho cái hình trong game của ta nó phóng to trên cái màn hình to được." → NO low resolution ever; full high-res (≥2k, 4k where possible, quality high).
 - 21:43Z FP NC v17 (from scratch, one lineup, face ref c01 only) HELD by C: heads still big (~5.5 heads tall vs ~7.5 game consorts) → v18 with c01 size check on sheet.
   OWNER on v17 (verbatim): "Mẹ vẽ hình bị lố rồi. Hình quý phi cái gì mà ngọc ngà châu báu, còn nhìn mà thấy sến súa. Nhưng mà bỏ qua cái vấn đề đó thì nhìn lại đi, tỷ lệ người sai đủ má mày. Chưa nói tới là hình 1, hình 2 tóc y chang nhau." → v18: proportion + restrained Quý phi (no gaudy jewels) + different hair per rank.
+- 21:46Z FP NC v19 (one lineup, proportion OK vs c01, distinct hair, restrained QP) looked at → SENT to owner with question: keep plain or add moderate NC silver collar/bells.
 
 ## SESSION 7 LOG
 - 19:55Z start (depth 1). Read START set + handover. Session 6 told to stop + ARCHIVED. Its trigger trig_01B8ZVK48GgTwdRJjCS83QdG DISABLED (delete was refused by the permission check). Own hourly wake trig_018LdWFfDWDX4GYybxC2JWX5 (:41 each hour). All 9 running C sessions told C = session 7. buoi-art-r1 PASS be25de29 (on main 0188d595) → reviewer told to re-merge current main + build_site + quick check, give new READY sha; then C fast-forwards main.
