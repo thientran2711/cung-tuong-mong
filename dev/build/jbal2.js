@@ -282,3 +282,26 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  tienSc:2,
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
+/* NPC ROADS (Foreman D, review/npc-roads; ROAD_MAP §0 'NPC roads', reports/npc-roads.md) — ONE CORE: every number of jnroad.js */
+Object.assign(BAL,{nroad:{
+ /* months from her arrival (or the game start) to her chapter .4; months between two chapters [min, max] */
+ d0:[2,6],gap:[4,7],
+ /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter − sc after a lost one + help when the player helped) */
+ base:30,div:3,sc:8,help:15,
+ /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55) */
+ fx:{win:{danh:4,sung:3,suc:-6,pow:2},mid:{danh:1,suc:-4},lose:{danh:-4,sung:-3,suc:-3,pow:-2}},
+ /* the loser's grudge toward the winner (oán), and the player's share when SHE is the NPC's rival */
+ oan:{win:8,lose:5},onMe:{win:{danh:-2,sung:-2},lose:{danh:1}},
+ /* the help hồi: the chapter index range it may fall on (one per road per life), the bond or shared side she needs to ask,
+    the deadline (weeks), the costs of the two roads (bạc road vs Sức road of equal weight), the bond she gives back */
+ helpN:[5,10],askRel:20,dl:6,bac:[30,45,70,100],suc:8,rel:6,relBad:-12,relB:8,
+ /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
+ bacRk:[2,4,6],
+ /* palace news lines a month (NPC chapter ends), at most */
+ newsMo:2,
+ /* origin of an NPC consort from her house (clan): [origin key, weight] */
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ /* one father = one record: these origins are never given to an NPC when the player has them */
+ uniq:["tt","dtq"],
+ /* at most this many NPC roads have the player as their rival at one time */
+ meMax:3}});
