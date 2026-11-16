@@ -191,6 +191,6 @@
 | skin-norosy-r1 review (sonnet, fast lane) | review/skin-norosy-r1 | main s17 | session_01UV1SzhbYGWHAmettjmU4Rc | RUNNING | 16/11 13:36Z |
 | cardflip-glow2-r2 review (sonnet, fast lane; r1 archived) | review/cardflip-glow2-r2 | main s17 | session_01UV1SzjxA4tS9pjHtfQwPxZ | RUNNING | 16/11 13:38Z |
 | test-drift-roulette-r2 review (sonnet) | review/test-drift-roulette-r1 | main s17 | session_01UV1Szjoc74qzY1ffJ45Mrv | RUNNING | 16/11 13:38Z |
-| MEMORY UPGRADE + CAUSE ledger (s17 13:50Z/13:55Z; OD 13:25Z (A) + 13:40Z (b)) | review/mem-upgrade | D | (worker opening) | RUNNING | 16/11 13:45Z |
-| ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | (worker opening) | RUNNING | 16/11 13:45Z |
+| MEMORY UPGRADE + CAUSE ledger (s17 13:50Z/13:55Z; OD 13:25Z (A) + 13:40Z (b)) | review/mem-upgrade | D | session_01DgYSWnbZAx5XWMeN9VzwiE | RUNNING | 16/11 13:45Z |
+| ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | session_01DgYSWoSdvBQtzpXxCDVUPh | RUNNING | 16/11 13:45Z |
 | merge-train-8 successor c (sonnet) | review/merge-train-8 | main s17 | session_01UV1SzhTCE7SXbum6V4ghBh | RUNNING | 16/11 13:39Z |
