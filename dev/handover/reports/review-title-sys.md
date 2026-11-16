@@ -1,4 +1,12 @@
-SẴN SÀNG KIỂM e464c0f0a7979bf1e4e7cc52f2264276591c190e
+HANDOVER (NOT ready for review yet) — review/title-sys @ e464c0f0a7979bf1e4e7cc52f2264276591c190e
+## HANDOVER (worker rolled over at the context limit, 16/11 ~14:50Z; Foreman C opens the successor)
+Foreman C 14:45Z message: fold the NEW owner input into phase 1 BEFORE SẴN SÀNG KIỂM. Successor must read verbatim: OWNER_DECISIONS 16/11 13:55Z (s17 TITLE BONUSES) + 14:10Z (bonuses much more varied + HISTORY RULE: check real court honorifics + dramas + similar games' title systems first, notes in the report); FOREMAN_C.md '(14:15Z s17) OWNER CLARIFIES', '(14:35Z s17) TITLE BONUSES', '(14:45Z s17)'; 13:55Z option 1 names on paintings = main's kit keeper part (just use it).
+What must change in dev/build/jdh.js + BAL.dh (jbal2.js) — everything else of phase 1 stays:
+1. ONE title worn at a time (already so). It gives ONE stat and the PLAYER CHOOSES which stat (per 14:15Z): add S.titleStat (chosen from the title's allowed bonus list) — picker in the Danh hiệu tab (option cards "Đeo «X» · chọn: …"); NPCs pick by personality/need.
+2. Replace the current fx model (BAL.dh.T[id].fx = flat Sắc/Danh/Sủng/Đức ±1–3) by a bonus TYPE catalogue in BAL (modest constants): flat stat; % on gains (Emperor favour +5–10 % on Sủng gains); bạc (% chance / amount); LUCK (the canon's luck stat — find its definition first; j2 runOpt uses lotB(S,a.dom)); pregnancy chance +1–2 % max; khắc/energy; relation gains with a group; event odds; skill / mini-game bonus; maid loyalty; rumour resistance. High-value bonuses only on titles that are hard/long to earn (high steps). Hook each type at its ONE existing place (apply()/sg for Sủng gains, runOpt odds, lotB, fert/preg roll, wearBonus, maid.loyal, rumour code…) — never a private copy of a number.
+3. Report: a table "title → allowed bonus types" + the split by type, and HISTORY notes (real honorifics, dramas, game title systems) before proposing names/bonuses.
+Wear/remove must stay exactly reversible (dhApplyFx/p.dhOn pattern; % bonuses applied at use time, not stored). Tests: extend dev/test/title-sys.js (each bonus type on/off), 755x1000@2 + 1180x820@2.
+Server/worktree: removed; recreate per PREAMBLE (sparse worktree on review/title-sys).
 # review/title-sys — TITLE SYSTEM (danh hiệu) PHASE 1, game logic (Foreman C worker)
 Branch review/title-sys @ e464c0f0, based on review/title-tag 8b21c97d (on review/rank-bright) — merge those first. Details + PHASE 2 PLAN: dev/PROGRESS_title-sys.md on the branch.
 START_CTX ~4 % of 1M; finished ~25 % (under the +25 % limit).
