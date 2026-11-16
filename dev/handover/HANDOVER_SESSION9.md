@@ -494,3 +494,4 @@ NEXT MAIN: first actions = load check (OD 20:12Z), ship PASSes in order co-op fi
 - (16/11 ~21:40Z) s24: weather-fx3 LIVE 594415aa. coop-one-world 912ca80b → BIG reviewer session_01UV1SzjwwR8MVK2MWpikBAb. fig-cutout-code 04ec6425 → reviewer session_01UV1SzmJWhZHz6G55tgfdnH. stage-figsize hotfix (owner bug: tiny people + iPad header/tab bar after page-scale) session_01UV1SziFt6yExRxFGSGFA24 (owner: no rollback). flip-entry hotfix session_01UV1SzgZumVkkN1moZ9qiiW (repro: shots.js home = flip screen). palace-voice successor session_01UV1Szkk4oz7w3HZvDnHJf1.
 - (16/11 ~21:58Z) s24: kit-fit 2b LIVE b53ba8b9.
 - (16/11 ~22:22Z) s24: fig-cutout-code #kfa LIVE 9c49f13c; feet delta b01caedb → reviewer session_01UV1SzjarPt7SUW9fAa9GFn.
+- (16/11 ~22:25Z) OWNER PHOTOS: OD paths dev/handover/refs/<name>.jpg → CDN img/_review/owner-refs-1116/<name>.jpg (git blocks images).
