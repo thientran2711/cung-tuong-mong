@@ -24,7 +24,8 @@ const [,,BASE,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.s
  await p.locator('#kg82skip').tap();await p.waitForTimeout(900);
  out.podium=await p.evaluate(()=>{const r=document.querySelector('.kpod');if(!r)return{missing:true};const f=[...r.querySelectorAll('.kpod-fig')].map(e=>Math.round(e.offsetHeight));
   const im=[...r.querySelectorAll('.kpod-img')].map(e=>e.offsetHeight);
-  return{figH:f,imgH:im,sameFig:Math.max(...f)-Math.min(...f)<=1,unk:r.querySelectorAll('.kpod-unk').length,chips:[...r.querySelectorAll('.kpod-plq')].map(e=>e.querySelectorAll('.kchip').length),txt:r.innerText.replace(/\n+/g,' | ').slice(0,420)}});
+  const hb=r.querySelector('.kpod-hd').getBoundingClientRect().bottom;const tops=[...r.querySelectorAll('.kpod-img,.kpod-you')].map(e=>e.getBoundingClientRect().top);const fb=r.querySelector('.kpod-next').getBoundingClientRect();const sb=Math.max(...[...r.querySelectorAll('.kpod-step')].map(e=>e.getBoundingClientRect().bottom));
+  return{clearOfHeader:Math.min(...tops)>=hb-1,stepsAboveFooter:sb<=fb.top+1,hdBottom:Math.round(hb),figH:f,imgH:im,sameFig:Math.max(...f)-Math.min(...f)<=1,unk:r.querySelectorAll('.kpod-unk').length,chips:[...r.querySelectorAll('.kpod-plq')].map(e=>e.querySelectorAll('.kchip').length),txt:r.innerText.replace(/\n+/g,' | ').slice(0,420)}});
  await p.waitForTimeout(3500);await p.screenshot({path:`${OUT}/podium-${tag}.jpg`,type:'jpeg',quality:60});
  await p.locator('.kpod-next').click({force:true});await p.waitForTimeout(2500);
  out.chest=await p.evaluate(()=>({kmrew:!!document.getElementById('kmrew'),last:window.CU&&CU.last&&{place:CU.last.mine&&CU.last.mine.place,k:CU.last.mine&&CU.last.mine.k,bac:CU.last.mine&&CU.last.mine.bac,title:CU.last.mine&&CU.last.mine.title,pl:CU.last.places.map(x=>[x.k,x.bac])},bac:S.bac,honors:S.honors}));

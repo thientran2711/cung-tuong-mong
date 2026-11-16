@@ -41,3 +41,8 @@ Implemented in code so the owner can see it, but these are kit changes for the k
 
 ## Test results (dev/test/contest-ui.js, Playwright, one browser at a time)
 755x1000@2, 1180x820@1, 1366x1024@2, 844x390@2, 390x844@3: picture left of info (top band on phones), counters hidden on intro, rivals box scrolls alone, buttons in view, 3 podium figure boxes equal height (410/738/120/...), 0 silhouettes (all 5 rivals known after the intro; unknown before), prize chips on every place, result panel picture-left, no horizontal overflow, 0 page errors. Not verified by the test: the chest reveal (kitReward) timing (it starts after "Tiếp"; spark seen in the 755 shot; assets load slowly on this box) and the "Ban thưởng hội thi" rows (seen in screenshots 1180 and 755; the test's text check ran after the chest overlay).
+
+## r2 (reviewer FAIL fix)
+- Podium at max-height:520px (844x390): compact header (one line, no sub), small medals, plaque = one row name+title+score, chips on one wrapped row, smaller Tiep; figures keep KIT_FIG scale (figH 120 -> 151, min-height untouched); rules in #kcu-css. Test now asserts figures clear of the header.
+- CU.did cleared when a contest starts and right after its own onDone (jcui startContest wrapper), not only inside cFin7/fxFin7.
+- Checked 844x390@2, 755x1000@2, 1180x820@2, 1366x1024, 1000x755, 390x844: no errors, same fig height, no overflow.
