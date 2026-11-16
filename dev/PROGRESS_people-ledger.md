@@ -34,26 +34,39 @@ vs the record at the current khắc: hidden / extra / counted twice / place miss
 | AFTER, maid road (cnv) 1180x820 | 25 | 720 | 1433 | many | many | 1 | 12 (see open 1) |
 *before: closed spots (data-ak) were not read by the first tool version; the hidden list is the real gap.
 
-## OPEN (next worker — Foreman C opens the successor)
-1. **Maid road (cnv) not under the ledger yet** (LUẬT SỬA CẢ NHÓM: same law). Its stage has its own rules (j42 srvVisitOf, j95srvStage
-   caps: 4 consorts, at home only the mistress; j59srvCount for the map). To do: `j95led()` true on the maid road too; `j95ledId` must map
-   `srv` entries (ref consort → v<id>, ref servant → s<sid>, sk emp/th); drop the caps (j59 pages); map count = record. Measure with
-   `ledger_shadows.js URL 25 1180x820 cnv`.
-2. **RULE CONFLICT for Foreman C / main** (do not decide alone): main's dev/test/stage-counts.js (review/stage-slots) checks "map number
-   before walking = people met on arrival" (arrival khắc). The owner's 13:50Z law needs the counts to add up at ONE moment (current khắc).
-   People move between khắc, so both cannot hold. This branch follows the owner's newest law; stage-counts.js then reports mismatches that
-   are only the khắc shift of the walk (ledger_shadows checks stage = record at arrival instead). Ask: OK to change stage-counts.js to
-   "stage = record at arrival" + "map = record now"?
-3. Outside men / officials "leave only at set hours", mandatory presence (morning court): not audited yet. Add to ledger_shadows: men
-   (`m*`) and officials (`q:*`) change ngoai↔inside only at the khắc jmen / jtd set; at Sáng khắc 0–1 the Emperor + court officials at
-   Cần Chính điện.
-4. Not yet run on this branch: roster_audit sens/rand, roster_dom, oldsave, coop-e2e, Playwright shots at 755x1000 + 1180x820 (look at the
-   crowded stage pages: Càn Ninh cung / Ngự hoa viên can hold 15+ people now).
-5. Coordination: Foreman D's review/mem-upgrade (cause ledger) and review/item-ledger — not yet git-grepped for shared style. Rule for them:
-   people/places only through S.roster (`j95bPut`, `whereOf`, `j95table`); no second people list.
-6. KIT REQUEST K14 (two-shadows map mark, "N người theo hầu" tag) still pending at the kit keeper; nothing private drawn.
+## Stage 3 (successor worker, 16/11 16:05Z–, START_CTX ~4 % of the window)
+7. **Maid road (cnv) under the same one-record rule** (OPEN 1): `j95led()` is on for both roads. Her room = the servants' room of her
+   mistress's palace (`j95lk`: record "home" ≡ palaceOf(mistress), one map place; `j95at` matches places). The stage adds everyone the record
+   puts there with the maid road's own talk entries (`kind:"srv"`, sk hh/mis/rv/sv/emp/ty/man, j42 shapes) — the caps (4 consorts, only the
+   mistress at home, 4 servants) are gone (j59 pages a crowd); others (consort maids, elders, children, posts, officials) use the kit kinds
+   and get no orders (talkOpts []). `j95ledId` maps srv entries. Map count = the record.
+8. **Set hours + morning court** (OPEN 3): jmen's fixed schedule `menSched()` (duty rosters, work orders, festivals, visits, officials'
+   roster `menMinW`) now runs on BOTH roads (`menSchedRoad()`); the maid road no longer rolls j22's dice (`roll(55)` + random haunt).
+   4-buổi fix (jtime4 rule "old buổi 2 = tối"): night = `B4L` (physician off duty, prince/envoy not at festivals at night), trysts at night,
+   letter shifts `[B4L,2,1,0]`, physician summons in the afternoon (old buổi 1 = 2). Morning court: `BAL.led.court` (2) first khắc of buổi
+   sáng Hoàng thượng is at Cần Chính điện (thu), no dice, no surprise (`J95.court` switch). j95 reads the schedule on both roads (`j95ms`).
+9. **RULE CONFLICT switch** (OPEN 2): `BAL.led.cnt` = "now" (owner 13:50Z, default) | "arrive" (main's stage-counts) — one place, read by
+   `j95cntNow()` (j95arrKh + the outermost countAt). QUESTION FOR MAIN written in dev/handover/reports/review-people-ledger.md.
+10. **Stage title count**: j59 `kitHereMsg` also rewrites the leading "Ở đây còn N người." of a longer line (was "còn 1 người" with 11 there
+    when the record brought people in after the line was written).
+11. **One id style** (OPEN 5): `ledgerId(p)` (j95) = the record id of any person; Foreman D's jmem `mk()` / jil `ilKey()` key consorts by bare
+    id ("3" vs record "v3"; ilKey returns "" for consort id 0) → they should call `ledgerId`. Neither keeps a second people/place list.
 
-## Handover (worker rollover, owner 16/11 08:22Z s14)
-Worker context reached its rollover line during stage 2. Branch review/people-ledger @ (see git log) is pushed and builds. Successor: read
-this file + dev/handover/reports/review-schedules3-r4.md, then do OPEN 1 → 4 → 3 → 5, write dev/handover/reports/review-people-ledger.md
-with first line "SẴN SÀNG KIỂM <sha>".
+## Tests (stage 3)
+| test | result |
+|---|---|
+| ledger_shadows consort 1180x820, 30 moments | map 1664 = record 1664, hidden/extra/twice/offmap/stage/title 0, page err 0 |
+| ledger_shadows maid road 755x1000, 30 | BEFORE 711 vs 1397 (25 moments, every moment bad) → AFTER 1625 = 1625, all 0 |
+| ledger_hours consort, 3×60 + 40 moments | court 48/48 ok; men/officials faults 0 (one secret-meeting guard now counted as a planned reason) |
+| ledger_hours maid road, 40 | BEFORE: 129 men inside without a reason (j22 dice), physician inside at night 11, roster officials missing → AFTER 0 |
+| stage-counts (main) with BAL.led.cnt="arrive" | thd 156 / cnv 72 walks, mismatches 0 (with "now": only the walk's khắc shift) |
+| roster_oldsave main→this, previous branch→this, maid-road save | load 755x1000 + 1180x820, record on load, 0 bad, 0 errors |
+| ledger_stage (host mode) fold, ipadAir, ipadPro, foldLand, iphone14 × both roads | stage = record = title, no overflow, no page error |
+| roster_audit sens 18 / rand 18 / coop-e2e | see the report |
+
+## OPEN
+- KIT REQUEST K14 (two-shadows map mark, "N người theo hầu") still at the kit keeper.
+- Crowded stages: Fold portrait pages 2 figures + "+N" chip (kit j59) — kit keeper may want a denser page for 15+ people.
+
+## Handover
+Successor: read this file + dev/handover/reports/review-people-ledger.md (docs branch).
