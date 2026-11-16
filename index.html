@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad.","b":"d6d24d2f64c0","h":[{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."}]};
+window.CTM_BI={"s":"1aa0edb2+","t":"2026-11-16T20:40Z","c":"Go live: review/page-scale-r1 (merge main 392fff60, build)","b":"7a599b86abdd","h":[{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -44594,6 +44594,41 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
+/* ================= jfe: FLIP-ENTRY HOTFIX — the card flip waits for buổi tối (owner bug 16/11 ~20:58Z, OD 14:00Z (4)) =================
+   Owner: "vừa vào game lại hiện ra cái màn thị tẩm ... cái màn mà chọn lật thẻ bài". Root: start() (j2), the new day (j3 endTurn), the
+   co-op cycle answer (jcoopworld cyFree) and the cycle option (jcycle) call flip() in the MORNING; jflip plays the card-flip scene at once
+   (after the Luân hồi identity card closes), so a new game / new life opened straight into the Kính sự phòng tray.
+   Fix (= review/night-final jnf.js part 1, copied unchanged in behaviour so night-final keeps the same code): on the palace route a flip()
+   before buổi tối only marks the tablet as waiting (S.nfP = day); entering buổi tối (nextBuoi) runs it; a night the Emperor already spends
+   with someone (j75 ntTaken: a won steal, his own visit) = no flip. Nothing else of the night rules changes (commit, steals, co-op relay).
+   Servant route (j42) and home route (jkc) keep their own week. When jnf.js (review/night-final) is live it owns this: this file is a no-op
+   (it runs after jnf.js and sees window.nfOn) and can be deleted on that merge.
+   Save: S.nfP / S.nfF (same names as jnf) — absent in old saves = harmless; an old save flipped in the morning keeps its pick. */
+(function(){
+if(typeof flip!=="function"||typeof nextBuoi!=="function"||typeof window.nfOn==="function")return;
+const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
+const B4=()=>typeof B4L==="number"?B4L:2;
+function on(){try{return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
+function flippedToday(){return S.nfF===day()||!!(S.nightWhy&&S.nightWhy.wk===day())}
+let REAL=0;const f0=flip;
+function realFlip(){S.nfP=null;S.nfF=day();
+ const n=typeof ntTaken==="function"?ntTaken():null;
+ if(n){S.tonight=n.who==="me"?"me":((typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===n.who)||null);return}
+ REAL=1;try{return f0.apply(this,arguments)}finally{REAL=0}}
+flip=function(){if(!S||REAL||!on())return f0.apply(this,arguments);
+ if((S.buoi||0)<B4()){S.tonight=null;S.nfP=day();return}       /* the tablet waits for buổi tối */
+ return realFlip.apply(this,arguments)};
+const nb0=nextBuoi;nextBuoi=function(){const b0=S&&S.buoi,d0=S&&day();const r=nb0.apply(this,arguments);
+ try{if(S&&!S.dead&&on()&&(S.buoi||0)>=B4()&&(b0!==S.buoi||d0!==day())&&!flippedToday()){
+   flip();if(typeof deal==="function")deal();if(!window.__bot){try{if(Q.length&&$("modal").hidden)showModal()}catch(e){}}render()}}catch(e){console.error(e)}
+ return r};
+/* any other road into buổi tối (co-op: the friend's buổi pulled in, jcoopworld CW.rbuoi; an old save loaded at tối with the tablet waiting) */
+let SOON=0;if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);
+ try{if(!SOON&&S&&!S.dead&&on()&&(S.buoi||0)>=B4()&&S.nfP===day()&&!flippedToday()){SOON=1;setTimeout(()=>{SOON=0;try{
+   if(S&&!S.dead&&on()&&(S.buoi||0)>=B4()&&S.nfP===day()&&!flippedToday()&&!Q.length&&!S.mg){flip();if(typeof deal==="function")deal();if(!window.__bot){try{if(Q.length&&$("modal").hidden)showModal()}catch(e){}}render()}}catch(e){console.error(e)}},0)}}catch(e){}
+ return r}}
+window.feWaits=()=>!!(S&&S.nfP===day()&&!flippedToday());
+})();
 
 window.__ctmBuilt=1;
 </script>
@@ -44622,7 +44657,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d6d24d2f64c0";window.CTM_BUILD=BUILD;
+const BUILD="7a599b86abdd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
