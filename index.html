@@ -31929,7 +31929,7 @@ Object.assign(WK,{
  thuchuc:["Thư thăm hỏi","Thư tạ ơn","Thiếp chúc xuân","Thiếp mừng sinh thần","Thư hỏi bệnh","Câu đối mừng xuân","Bài chúc thọ","Quạt đề lời tặng","Bài khuyên can","Tập lời khuyên răn"],
  phucthien:["Túi bình an","Tràng hạt tự xâu","Hoa đăng sen","Mâm quả cúng Phật","Chuông gió cầu an","Nữ giới chép tay","Nến sáp ong","Gia huấn chép tay","Áo bông cho trẻ côi","Chăn bông cho người già"]};
  for(const k in R)WKR[k]=R[k].map((n,i)=>({id:"r"+String(i+1).padStart(2,"0"),n,lv:WKR_LV[i],st:null,like:null}));
- for(const k in R)WKR_ART[k]=1})();
+ for(const k in R){WKR_ART[k]=1;if(typeof ITEM_ART_TP!=="undefined"&&!ITEM_ART_TP.includes(k))ITEM_ART_TP.push(k)}})();
 /* ---- the 4 lối of each kind = the course's 4 sub-styles ---- */
 Object.assign(RCP_ST,{
  kimchi:[["s1","Hà bao, túi thơm",["r01","r02","r05"]],["s2","Thắt nút, tua kết",["r03","r04","r08"]],["s3","Hài thêu",["r06","r09"]],["s4","Đai, khăn choàng",["r07","r10"]]],
@@ -32002,7 +32002,7 @@ function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
  TDV.go=1;try{window.__tdsL0(k,mode)}finally{TDV.go=0}
  if(TDV.hit)tdsFinish(mode==="self"?"tự học":"học");save();render()}
 /* review/tuduc-mg: its result (raw, skipped) decides the work; a skipped game makes no work (the "Học nhanh" rule) */
-(function(){if(typeof tdFinish!=="function")return;const f0=tdFinish;tdFinish=function(k,mode,raw,skipped){TDV.raw=raw;TDV.skip=skipped?1:0;TDV.fin=1;let r;try{r=f0.apply(this,arguments)}finally{TDV.fin=0}
+(function(){if(typeof tdFinish!=="function")return;const f0=tdFinish;tdFinish=function(k,mode,raw,skipped){TDV.raw=raw;TDV.skip=skipped&&!window.__bot?1:0;TDV.fin=1;let r;try{r=f0.apply(this,arguments)}finally{TDV.fin=0}
  try{if(TDV.hit)tdsFinish(mode==="self"?"tự học":"học")}catch(e){console.error("tds fin",e)}return r}})();
 /* the lesson progress hook: hers marks the lesson as done; NPCs' lessons can end with a work; level-ups open lối / grant a recipe */
 (function(){const a0=addVir;addVir=function(p,k,g){const before=p&&p.vir?p.vir[k]|0:0;const r=a0.apply(this,arguments);try{
@@ -32026,7 +32026,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tứ đức cards: real costs, "ra một món", the lối list ---------- */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
-  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`Chắc chắn · ${game}tốn: 2 khắc, Sức -15 · thành: tiến bộ +1..2, ra một món ${W}`,t2||(S.suc<25?"Sức dưới 25":""))
+  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`Chắc chắn · ${game}tốn: 2 khắc, Sức -15 · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<25?"Sức dưới 25":""))
    :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`Chắc chắn · ${game}tốn: 2 khắc, Sức -10, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<10?"Sức dưới 10":"")):h);
   s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
@@ -32072,7 +32072,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f02cc0100abe";window.CTM_BUILD=BUILD;
+const BUILD="e33524d1e5ce";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
