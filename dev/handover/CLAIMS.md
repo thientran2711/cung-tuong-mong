@@ -452,3 +452,5 @@
 | kit-size #8 SUCCESSOR keeper (sonnet): 4 MIXED places, kit samples, tests; grade-chip overlay = owner question (not built) | review/kit-size-8 | main s25 | session_01UV1SzkSQRtUsXoy2TJVcQG (prev session_01UV1SzhXp2nPad8V7gu3hSj archived) | RUNNING | 16/11 22:05Z |
 | tut-quests review r1 (opus, BIG progression) of 36e7b0e6 | review/tut-quests-r1 | B | session_01N1tNP3JmqXB54dZmfEik59 | RUNNING | 16/11 22:07Z |
 | map-frame-kit r1 review (task 3 of the opt-greyed/pl-courtyards SMALL reviewer) of 036c5dd5; pl-courtyards-r3 now f42dd31c | review/map-frame-kit-r1 | main s25 | session_01UV1SziEeCRZLBrZtUTMGPw | RUNNING | 16/11 22:07Z |
+| WAITING NEXT BATCH (add): fig-cutout-code-r2 PASS 8fb59e05 (feet never cut in person dialogs; CHANGE "Hình người trong khung báo không còn mất chân; viền tách nền sạch hơn.") — reviewer + root-cause worker archived | — | main s25 | — | QUEUED | 16/11 22:09Z |
+| co-op test stability + coop-chat shared-world root cause (opus, co-op TOP) | review/coop-stable | main s25 | session_01UV1SzgdVKpJMBjxefGgfEo | RUNNING | 16/11 22:09Z |
