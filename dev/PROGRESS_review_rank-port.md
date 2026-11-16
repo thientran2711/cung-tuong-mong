@@ -19,3 +19,9 @@ Consequently two rank-e2e checks (end card figure fill / name above; podium figu
 
 ## Backend
 https://ctm-rank.victoria-tntt.workers.dev is live (/health ok, /top/lives empty). Tests use the local stand-in only, never the real Worker.
+
+## 11/16 resume (kit parts landed)
+- Merged origin/main cdad7109 + review/kit-keeper-1 05bce551 (assemble.py list: score.js + jrank.js kept after jnight.js; generated files rebuilt).
+- Podium + end card already use the kit parts (kpodCol entry fields fig/face/nameH/you/mine; option-less person dialog). No private podium CSS added.
+- Recovery code (owner Q20): client only, Worker unchanged. Code = the guest id shown as 6 groups of 4 (server keeps only its hash). Card opens once on first Bảng vàng open ("Ta đã ghi lại"), later via button "Mã khôi phục" (view code + copy + restore). Restore = GET /me?gid= (404 -> not found), then local id/name switch, queue flushes under the new id.
+- rank-e2e: new recovery section (guest R1), S.succ bypass for the Thai hau scenario (main's j99succ), first-life roulette wait, podium ratio 1.5 (kit rule).

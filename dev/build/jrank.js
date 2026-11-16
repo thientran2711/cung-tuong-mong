@@ -139,11 +139,25 @@ function rkRulesH(){const R=CTM_RANK.RULES;const n=v=>`<b>${v}</b>`;
  <div class="kpsec"><h4 class="kpst">Bớt đi</h4>${kitRows([["Kiếp dở dang","chưa tròn một năm mà chưa lên Quý nhân (cung nữ: Chưởng sự cô cô): cả kiếp chỉ tính một nửa","r"]])}</div>
  <div class="kpsec"><h4 class="kpst">Xếp hạng</h4>${kitRows([["Kiếp","mỗi kiếp một dòng, công danh cao đứng trên"],["Người chơi","mỗi người một dòng, xếp theo kiếp tốt nhất; bằng nhau thì theo tổng công danh mọi kiếp"]])}</div>
  </div></div>`}
+/* ---------- recovery code (owner Q20, 16/11): the guest id itself, shown as groups of four; the server keeps only its hash, so no email and no privacy policy ---------- */
+function rkCodeFmt(g){return String(g||"").toUpperCase().replace(/(.{4})(?=.)/g,"$1-")}
+function rkCodeParse(t){const g=String(t||"").toLowerCase().replace(/[^a-z0-9]/g,"");return /^[a-z0-9]{16,40}$/.test(g)?g:""}
+function rkCodeH(){const first=!rkIdGet().rcSeen;
+ return `<div class="krk-name krk-code"><h4 class="kpst">Mã khôi phục</h4>
+ <p class="past">${first?"Xin ghi giữ mã này. Mất sổ hoặc đổi máy, nhập mã để lấy lại tên hiệu và các kiếp đã ghi.":"Mã giữ tên hiệu và các kiếp đã ghi. Ai có mã là lấy được tên hiệu của ta, xin đừng đưa cho ai."}</p>
+ ${kitInput({id:"krk-code",label:"Mã của ta",value:rkCodeFmt(rkIdGet().gid),readonly:true})}
+ <div class="krk-nb"><button class="kbtn" data-krk="copy">Chép mã</button>${first?`<button class="kbtn alt" data-krk="seen">Ta đã ghi lại</button>`:""}</div>
+ <h4 class="kpst krk-rs">Lấy lại bằng mã</h4>
+ <p class="past">Nhập mã đã ghi. Kiếp ghi trên máy này từ nay thuộc về tên hiệu ấy.</p>
+ ${kitInput({id:"krk-rin",label:"Nhập mã",value:"",placeholder:"XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"})}
+ ${RK.msg?`<p class="krk-msg">${rkEsc(RK.msg)}</p>`:""}
+ <div class="krk-nb"><button class="kbtn" data-krk="restore">Lấy lại</button></div></div>`}
 function rkNameH(){return `<div class="krk-name">${kitInput({id:"krk-in",label:"Tên hiệu",value:rkIdGet().pn&&!/^Khách vô danh/.test(rkIdGet().pn)?rkIdGet().pn:"",placeholder:"Tên hiệu mới"})}
  <p class="past">Từ hai đến hai mươi bốn chữ; không trùng tên người khác, không dùng lời tục.</p>${RK.msg?`<p class="krk-msg">${rkEsc(RK.msg)}</p>`:""}
  <div class="krk-nb"><button class="kbtn" data-krk="save">Ghi tên</button></div></div>`}
 function rkBodyH(){const tab=RK.tab,d=RK.data[tab];
  if(RK.view==="name")return rkNameH();
+ if(RK.view==="code")return rkCodeH();
  if(!d)return `<p class="krk-note">${RK.err?`Mạng đứt, chưa mở được ${RK_T.screen}.`:"Đang mở bảng."}</p>`;
  const rows=d.rows||[];const note=RK.err?`<p class="krk-note">Mạng đứt: đây là bảng lần trước.</p>`:"";
  if(!rows.length)return note+`<p class="krk-note">Chưa có ${tab==="players"?"người chơi":"kiếp"} nào trên bảng.</p>`;
@@ -158,13 +172,13 @@ function rkMeH(){const tab=RK.tab,d=RK.data[tab]||{};const q=rkQ().length;const 
 function rkSub(){const d=RK.data[RK.tab];if(!d)return "Công danh của mọi người chơi";return RK.tab==="players"?`${d.of} người chơi đã vào cung`:`${d.of} kiếp đã ghi`}
 function rkPaint(){const ov=document.getElementById("krkov");if(!ov)return;const root=ov.firstElementChild;
  /* ONE title (owner 15/11: no seal chip + second title), the kit ✕ at its right end: closes the board, or goes back from Đổi tên hiệu */
- root.querySelector(".kpod-hd").innerHTML=`<div class="kph krk-h"><span class="kpht"><span class="kptitle">${RK.view==="name"?"Đổi tên hiệu":RK_T.screen}</span><small class="kpsub">${RK.view==="name"?rkEsc(rkMyName()):rkSub()}</small></span>${kitXHTML('data-krk="'+(RK.view==="name"?"list":"close")+'"',RK.view==="name"?"Về bảng":"Đóng")}</div>`;
+ root.querySelector(".kpod-hd").innerHTML=`<div class="kph krk-h"><span class="kpht"><span class="kptitle">${RK.view==="name"?"Đổi tên hiệu":RK.view==="code"?"Mã khôi phục":RK_T.screen}</span><small class="kpsub">${RK.view==="name"||RK.view==="code"?rkEsc(rkMyName()):rkSub()}</small></span>${kitXHTML('data-krk="'+(RK.view==="name"||RK.view==="code"?"list":"close")+'"',RK.view==="name"||RK.view==="code"?"Về bảng":"Đóng")}</div>`;
  root.querySelectorAll(".krk-tabs .ksubb").forEach(b=>{const on=b.dataset.krt===RK.tab;b.classList.toggle("on",on);b.setAttribute("aria-selected",on?"true":"false")});
  const body=root.querySelector(".krk-body");const keep=RK.view==="rules"&&body.querySelector(".krk-list");if(!keep)body.innerHTML=rkBodyH();
- root.querySelector(".krk-meb").innerHTML=RK.view!=="name"?rkMeH():"";
+ const sub=RK.view==="name"||RK.view==="code";root.querySelector(".krk-meb").innerHTML=!sub?rkMeH():"";
  const pop=root.querySelector(".krk-pop");pop.innerHTML=RK.view==="rules"?rkRulesH():"";pop.hidden=RK.view!=="rules";
- root.querySelector(".krk-tabs").hidden=RK.view==="name";
- root.querySelector(".krk-btns").hidden=RK.view==="name";if(RK.view==="rules")try{pop.querySelector(".kit-x").focus({preventScroll:true})}catch(e){}
+ root.querySelector(".krk-tabs").hidden=sub;
+ root.querySelector(".krk-btns").hidden=sub;if(RK.view==="rules")try{pop.querySelector(".kit-x").focus({preventScroll:true})}catch(e){}
  const fit=()=>rkFit(root);fit();root.querySelectorAll(".krk-stage img").forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});setTimeout(fit,300);
  const inp=root.querySelector("#krk-in");if(inp){inp.maxLength=24;setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},50)}}
 function rkFit(root){try{const st=root.querySelector(".krk-stage"),b=root.querySelector(".krk-body");
@@ -173,20 +187,32 @@ async function rkLoad(tab,quiet){const d=rkIdGet();const c=store.get(RK_C+tab);i
  const r=await rkReq("GET",`/top/${tab}?n=50&gid=${encodeURIComponent(d.gid)}`);
  if(r.st===200&&r.j.ok){RK.err=0;RK.data[tab]=r.j;store.set(RK_C+tab,r.j);if(r.j.me)rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn})}else RK.err=1;
  if(RK.tab===tab)rkPaint()}
-function rkOpen(tab,o){o=o||{};RK.tab=tab==="players"?"players":"lives";RK.view="list";RK.lid=o.lid||"";RK.msg="";rkClose();
+function rkOpen(tab,o){o=o||{};RK.tab=tab==="players"?"players":"lives";RK.view="list";RK.lid=o.lid||"";RK.msg="";rkClose();if(!rkIdGet().rcSeen)RK.view="code";
  const ov=document.createElement("div");ov.id="krkov";
  ov.innerHTML=`<div class="kpod krk" role="dialog" aria-label="${RK_T.screen}"><div class="kpod-hd"></div>
   <div class="ksub krk-tabs" role="tablist"><button class="ksubb" role="tab" data-krt="lives">${RK_T.lives}</button><button class="ksubb" role="tab" data-krt="players">${RK_T.players}</button></div>
-  <div class="krk-body"></div><div class="krk-ft"><div class="krk-meb"></div><div class="krk-btns"><button class="kbtn alt" data-krk="name">Đổi tên hiệu</button><button class="kbtn alt" data-krk="rules">Cách tính</button></div></div>
+  <div class="krk-body"></div><div class="krk-ft"><div class="krk-meb"></div><div class="krk-btns"><button class="kbtn alt" data-krk="name">Đổi tên hiệu</button><button class="kbtn alt" data-krk="code">Mã khôi phục</button><button class="kbtn alt" data-krk="rules">Cách tính</button></div></div>
   <div class="krk-pop" hidden></div></div>`;
  document.body.appendChild(ov);const root=ov.firstElementChild;
- ov.__key=e=>{if(e.key==="Escape"){e.preventDefault();if(RK.view!=="list"){RK.view="list";rkPaint()}else rkClose()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-in"){e.preventDefault();rkSaveName()}};addEventListener("keydown",ov.__key);
+ ov.__key=e=>{if(e.key==="Escape"){e.preventDefault();if(RK.view!=="list"){RK.view="list";rkPaint()}else rkClose()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-in"){e.preventDefault();rkSaveName()}else if(e.key==="Enter"&&e.target&&e.target.id==="krk-rin"){e.preventDefault();rkRestore()}};addEventListener("keydown",ov.__key);
  const onR=()=>rkFit(root);addEventListener("resize",onR);ov.__off=()=>removeEventListener("resize",onR);
  root.addEventListener("click",e=>{if(RK.view==="rules"&&e.target.classList&&e.target.classList.contains("krk-pop")){RK.view="list";rkPaint();return}const t=e.target.closest("[data-krt],[data-krk]");if(!t)return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
   if(t.dataset.krt){if(RK.tab!==t.dataset.krt){RK.tab=t.dataset.krt;RK.view="list";rkPaint();rkLoad(RK.tab,true)}return}
   const k=t.dataset.krk;if(k==="close")rkClose();else if(k==="name"){RK.view="name";RK.msg="";rkPaint()}else if(k==="rules"){RK.view="rules";rkPaint()}
-  else if(k==="list"){RK.view="list";RK.msg="";rkPaint()}else if(k==="save")rkSaveName()});
+  else if(k==="list"){if(RK.view==="code"&&!rkIdGet().rcSeen)rkIdSet({rcSeen:1});RK.view="list";RK.msg="";rkPaint()}else if(k==="save")rkSaveName()
+  else if(k==="code"){RK.view="code";RK.msg="";rkPaint()}else if(k==="copy")rkCopyCode(t);else if(k==="seen"){rkIdSet({rcSeen:1});RK.view="list";RK.msg="";rkPaint()}else if(k==="restore")rkRestore()});
  rkPaint();rkFlush();rkHello().then(()=>rkLoad(RK.tab,true));try{root.querySelector('.kpod-hd .kit-x').focus({preventScroll:true})}catch(e){}return ov}
+async function rkCopyCode(btn){const txt=rkCodeFmt(rkIdGet().gid);let ok=false;
+ try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(txt);ok=true}}catch(e){}
+ if(!ok)try{const i=document.getElementById("krk-code");if(i){i.focus();i.select();i.setSelectionRange(0,99);ok=document.execCommand("copy")}}catch(e){}
+ if(btn){btn.textContent=ok?"Đã chép":"Chọn mã rồi chép tay";setTimeout(()=>{if(btn.isConnected)btn.textContent="Chép mã"},2500)}}
+async function rkRestore(){const inp=document.getElementById("krk-rin");if(!inp)return;const g=rkCodeParse(inp.value);
+ if(!g){RK.msg="Mã chưa đúng, xin xem lại từng chữ.";rkPaint();return}
+ if(g===rkIdGet().gid){RK.msg="Đây đã là mã của ta.";rkPaint();return}
+ RK.msg="Đang tìm mã.";rkPaint();const r=await rkReq("GET",`/me?gid=${encodeURIComponent(g)}`);
+ if(r.st===200&&r.j.ok&&r.j.me){rkIdSet({gid:g,pid:r.j.me.pid,pn:r.j.me.pn,hat:Date.now(),rcSeen:1});try{if(S)S.rkGid=g}catch(e){}RK.data={};["lives","players"].forEach(t=>store.set(RK_C+t,null));
+  RK.view="list";RK.msg="";rkPaint();rkFlush();rkLoad(RK.tab,true);return}
+ RK.msg=r.st===404?"Không tìm thấy mã này trên bảng.":r.st===0?"Mạng đứt, chưa lấy lại được.":"Chưa lấy lại được.";rkPaint()}
 function rkClose(){const ov=document.getElementById("krkov");if(!ov)return;try{ov.__off&&ov.__off();removeEventListener("keydown",ov.__key)}catch(e){}ov.remove()}
 async function rkSaveName(){const inp=document.getElementById("krk-in");if(!inp)return;const v=inp.value.replace(/\s+/g," ").trim();
  if(!v){RK.msg="Xin viết tên hiệu.";rkPaint();return}RK.msg="Đang ghi tên.";rkPaint();const i2=document.getElementById("krk-in");if(i2)i2.value=v;
@@ -230,7 +256,7 @@ setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 .krk .krk-stage .kpod-plq .kname{display:block}
 .krk-list,.krk-name,.krk-note{margin:10px clamp(8px,2.5vw,32px) 0;background:#fffaf0f2;border:1px solid var(--line,#c9a46a);border-radius:var(--k-rad,8px);box-shadow:inset 0 0 0 1px #ffffff80}
 .krk-note{padding:10px 12px;font-size:.88rem;color:var(--ink)}
-.krk-name{padding:10px 12px}.krk-name .kpst{margin:0 0 6px}
+.krk-code .krk-rs{margin-top:14px}.krk-name{padding:10px 12px}.krk-name .kpst{margin:0 0 6px}
 .krk-name .krk-msg{margin:6px 0 0;font-size:.84rem;font-weight:700;color:var(--bad,#a8301f)}
 .krk-nb{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin:10px clamp(8px,2.5vw,32px) 0}.krk-name .krk-nb{margin:10px 0 0}
 .krk-row{display:grid;grid-template-columns:2.4em 40px minmax(0,2.3fr) minmax(0,1.2fr) minmax(0,1.3fr) minmax(4.6em,auto);grid-template-areas:"rk fc who c1 c2 s";

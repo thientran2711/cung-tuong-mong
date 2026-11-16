@@ -9,22 +9,23 @@ const {chromium}=require('playwright');
 const [,,BASE,RURL,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ.replace('@','_');
 const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.push(m)};
 (async()=>{const b=await chromium.launch();const errs=[];process.on('unhandledRejection',e=>{console.log('ABORT',e.message.split('\n')[0],'errors:',JSON.stringify(errs.slice(0,6)));process.exit(2)});
- const mk=async(name)=>{const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
+ const mk=async(name,fresh)=>{const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
   await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kload{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();p.setDefaultTimeout(150000);
   p.on('pageerror',e=>errs.push(name+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::/.test(m.text()))errs.push(name+' console: '+m.text())});
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   for(let i=0;i<120;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':(window.KLOAD?'':'ok')});if(s==='ok')break;await p.waitForTimeout(500)}/* first-run download card (jload) skipped */
+  if(!fresh)await p.evaluate(()=>rkIdSet({rcSeen:1}));/* recovery card is tested on its own (guest R) */
   return{ctx,p}};
  const newLife=async p=>{await p.evaluate(()=>{window.__prevS=S;SLOT=1;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}Q.length=0;start()});
   await p.waitForFunction(()=>(typeof NLP!=='undefined'&&NLP)||(S&&S!==window.__prevS&&!S.dead&&S.rkSeed));
   await p.evaluate(()=>{if(typeof NLP!=='undefined'&&NLP)nlAccept(false);Q.length=0;$('modal').hidden=true;render()});
-  for(let i=0;i<6;i++){await p.waitForTimeout(300);await p.evaluate(()=>{const k=document.querySelector('#kroul .krskip');if(k)k.click()})}
+  for(let i=0;i<30;i++){await p.waitForTimeout(300);await p.evaluate(()=>{const k=document.querySelector('#kroul .krskip');if(k)k.click()});if(i>=5&&await p.evaluate(()=>!document.getElementById('kroul')&&!document.getElementById('kroulw')))break}
   await p.evaluate(()=>{Q.length=0;$('modal').hidden=true});ok(await p.evaluate(()=>!document.getElementById('kroul')&&S&&!S.dead),'new life started')};
  /* o: {rank, years, sons, danh, duc, end:"die"|"thaihau"} — the life is played by setting the state, then the real ending runs */
  const endLife=async(p,o)=>{await p.evaluate(o=>{if(S.srv)S.srv.risen=1;for(let r=S.rank;r<=o.rank;r++){S.rank=r;rkTrack()}S.maxRank=o.rank;
    for(let y=1;y<o.years;y++){S.year++;S.age++;rkTrack()}S.danh=o.danh||0;S.duc=o.duc||0;
    for(let i=0;i<(o.sons||0);i++){S.kids.push({name:'Hoàng tử '+['Vĩnh An','Vĩnh Khang','Vĩnh Thọ'][i],sex:'m',age:3,hp:90,fond:50,born:0,alive:true});rkTrack()}
-   if(o.end==='thaihau'){S.heir={k:S.kids[S.kids.length-1]};emperorDies('')}else over('Hồng nhan bạc mệnh','Bệnh nặng không qua khỏi.','Bệnh mà chết')},o);
+   if(o.end==='thaihau'){S.heir={k:S.kids[S.kids.length-1]};S.succ={on:true};emperorDies('')}else over('Hồng nhan bạc mệnh','Bệnh nặng không qua khỏi.','Bệnh mà chết')},o);
   await p.waitForSelector('.krk-end');};
  const endRank=p=>p.waitForFunction(()=>{const e=document.querySelector('.krk-end');return e&&/đứng hạng/.test(e.textContent)?e.textContent:null},null,{timeout:240000}).then(h=>h.jsonValue());
  const layout=async(p,scene)=>p.evaluate(scene=>{const vw=innerWidth,vh=innerHeight,bad=[];const root=document.querySelector('#krkov')||document.querySelector('#modal');
@@ -73,7 +74,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
    return i>=0?h.includes('frame-consort-'+i):/frame-(maid|mama)-/.test(h)});
   return{title:r.querySelector('.kpod-hd').innerText.split('\n')[0],seal:!!r.querySelector('.kpod-hd .kpseal'),x:!!r.querySelector('.kpod-hd .kit-x'),lui:[...r.querySelectorAll('button')].some(b=>/^\s*Lui\s*$/.test(b.textContent)),cols,fr}});
  ok(ui.title==='Bảng vàng'&&!ui.seal&&ui.x&&!ui.lui,'one title Bảng vàng, kit ✕, no Lui '+JSON.stringify([ui.title,ui.seal,ui.x,ui.lui]));
- ok(ui.cols.length===3&&ui.cols.every(c=>c.fig>=.55&&c.fig>c.plq*2&&c.corner),'podium: figures the biggest, medal on the plaque corner '+JSON.stringify(ui.cols));
+ ok(ui.cols.length===3&&ui.cols.every(c=>c.fig>=.55&&c.fig>c.plq*1.5&&c.corner),'podium: figures the biggest, medal on the plaque corner '+JSON.stringify(ui.cols));
  ok(ui.fr.length&&ui.fr.every(Boolean),'list: frame by highest phẩm on every row '+JSON.stringify(ui.fr));
  await C.p.locator('#krkov [data-krk="rules"]').click();await C.p.waitForTimeout(500);
  const ru=await C.p.evaluate(()=>{const c=document.querySelector('#krkov .krk-pop:not([hidden]) .krk-card');return c?{t:c.innerText,x:!!c.querySelector('.kit-x')}:null});
@@ -107,6 +108,24 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  await openBoard(A.p,'lives');bd=await board(A.p);ok(bd.rows.length===5&&sorted(bd.rows)&&bd.rows.filter(r=>r.mine).length===2,'A: 5 lives, own two marked');
  /* own row shown when outside the top (n=2 board) */
  const outside=await C.p.evaluate(async u=>{const r=await fetch(u+'/top/lives?n=1&gid='+rkIdGet().gid).then(r=>r.json());return r.rows.length===1&&r.mine&&r.mine.r>1},RURL);ok(outside,'own best life returned even outside the top');
+ /* recovery code (owner Q20): first open shows it once, copyable; a second device restores the same guest with it */
+ const R1=await mk('R1',true);const gA=await A.p.evaluate(()=>rkIdGet());await R1.p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});
+ await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForSelector('#krkov .krk-code');
+ const c1=await R1.p.evaluate(()=>({code:document.getElementById('krk-code').value,ro:document.getElementById('krk-code').readOnly,seen:!!document.querySelector('[data-krk="seen"]'),gid:rkIdGet().gid}));
+ ok(/^([A-Z0-9]{4}-){5}[A-Z0-9]{4}$/.test(c1.code)&&c1.code.replace(/-/g,'').toLowerCase()===c1.gid&&c1.ro&&c1.seen,'first open shows the recovery code once (readonly, copyable): '+c1.code);
+ await shot(R1.p,8,'recovery');ok((await layout(R1.p,'recovery')).bad.length===0,'recovery layout');
+ await R1.ctx.grantPermissions(['clipboard-read','clipboard-write']).catch(()=>{});await R1.p.click('[data-krk="copy"]');await R1.p.waitForTimeout(300);
+ ok(await R1.p.evaluate(()=>/Đã chép|Chọn mã/.test(document.querySelector('[data-krk="copy"]').textContent)),'copy button answers');
+ await R1.p.fill('#krk-rin','abcd-efgh');await R1.p.click('[data-krk="restore"]');await R1.p.waitForTimeout(300);ok(await R1.p.evaluate(()=>/chưa đúng/.test(document.querySelector('.krk-msg').textContent)),'short code refused');
+ await R1.p.fill('#krk-rin','zzzz-zzzz-zzzz-zzzz-zzzz-zzzz');await R1.p.click('[data-krk="restore"]');await R1.p.waitForFunction(()=>/Không tìm thấy/.test((document.querySelector('.krk-msg')||{}).textContent||''),null,{timeout:15000});ok(true,'unknown code: not found');
+ await R1.p.click('[data-krk="seen"]');await R1.p.waitForFunction(()=>document.querySelector('#krkov .krk-list')||/Chưa có/.test((document.querySelector('#krkov .krk-body')||{}).textContent||''));
+ ok(await R1.p.evaluate(()=>rkIdGet().rcSeen===1),'after "Ta đã ghi lại" the card does not open by itself');
+ await R1.p.evaluate(()=>rkClose());await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForTimeout(500);ok(await R1.p.evaluate(()=>!document.querySelector('#krkov .krk-code')),'second open goes to the board');
+ await R1.p.click('[data-krk="code"]');await R1.p.waitForSelector('#krkov .krk-code');ok(await R1.p.evaluate(()=>!document.querySelector('[data-krk="seen"]')&&/Mã của ta/.test(document.querySelector('.krk-code').textContent)),'code can be read again from the board button');
+ await R1.p.fill('#krk-rin',gA.gid.toUpperCase().replace(/(.{4})(?=.)/g,'$1-'));await R1.p.click('[data-krk="restore"]');
+ await R1.p.waitForFunction(g=>rkIdGet().gid===g,gA.gid,{timeout:15000});await R1.p.waitForFunction(()=>document.querySelector('#krkov .krk-list'),null,{timeout:15000});
+ const rs=await R1.p.evaluate(()=>({pn:rkIdGet().pn,mine:[...document.querySelectorAll('#krkov .krk-row')].some(r=>r.classList.contains('krk-mine')||/Ta/.test((r.querySelector('.krk-you')||{}).textContent||''))}));
+ ok(rs.pn===gA.pn&&rs.mine,'restored with the code: same guest on a new device ('+rs.pn+')');await shot(R1.p,9,'restored');ok((await layout(R1.p,'restored')).bad.length===0,'restored layout');await R1.ctx.close()
  }
  /* old save from the published build (no guest id, no S.rk) */
  if(OLD){const O=await b.newContext({viewport:{width:W,height:H}});const op=await O.newPage();await op.goto(OLD,{waitUntil:'domcontentloaded'});await op.waitForTimeout(3000);
