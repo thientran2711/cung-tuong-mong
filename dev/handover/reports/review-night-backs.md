@@ -1,5 +1,4 @@
-SAMPLE READY (v2, symbolic, after owner rejected backs-only v1) — dev/handover/reports/night-backs/sample-v2.jpg (top-left OLD, then A: shadows on curtain screen + candles; B: two pairs of shoes + folded robes; C: hairpin + dragon jade on pillow, mandarin-duck quilt). v1 (backs-only, REJECTED by owner: "Tranh quay lưng tôi không ưng... muốn tranh trừu tượng, ẩn ý") was dev/handover/reports/night-backs/sample-ev-night2-tender-old-vs-new.jpg.
-OLD NOTE:  (left = OLD ev-night2-tender, right = NEW backs-only; same key img/ev-night2-tender.webp, 640x480, 4:3)
+SAMPLE READY — dev/handover/reports/night-backs/sample-ev-night2-tender-old-vs-new.jpg (left = OLD ev-night2-tender, right = NEW backs-only; same key img/ev-night2-tender.webp, 640x480, 4:3)
 
 # review-night-backs (Foreman C art worker) — owner OD 16/11 15:00Z item 1.7: "Tôi chỉ muốn thấy sau lưng thôi"
 
@@ -42,5 +41,3 @@ FAIL list to repaint in STEP 3 after the owner's OK (13): ev-night2-tender (samp
 ## STEP 2 — SAMPLE
 ev-night2-tender repainted backs-only: Emperor (golden dragon robe, Han-style crossed collar, topknot + small gold guan crown, NO Qing hat / queue per OD:L364) and consort (pale pink hanfu, gold hairpins) seen from behind, hands joined on the bed edge, moonlit lattice window, red curtains, candle, lantern. Magnific gpt-2-6 2k, 3 variants + 1 rejected round (first round had a Qing fur hat + braid → redone). Credits: 6 x 65 = 390.
 Waiting for Foreman C verdict. Nothing uploaded to the CDN yet.
-
-## STEP 2b (v2) credits: 3 x 65 = 195 (total 585). No people on the bed; all 3 viewed, no faces.

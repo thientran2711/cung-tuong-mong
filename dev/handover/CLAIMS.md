@@ -268,7 +268,7 @@
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
 | kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | session_01UV1Szjj42P74XsFm4trr8J | RUNNING | 16/11 16:50Z |
 | road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | session_01N1tNP4jWtq6Qf3eWpQ7krw | DONE FAIL 5 (archived) | 16/11 16:47Z |
-| road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | DONE handed to fix A/B (archived) | 16/11 16:47Z |
+| road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | RUNNING | 16/11 16:47Z |
 | road B2 chapters nc(+bd)+td+ch .5–.11 (opus helper) | review/road-b2 | B | session_01N1tNP4zDh6M8kQNxdcYKvM | RUNNING | 16/11 16:47Z |
 | road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | DONE SẴN SÀNG bcc79551 (archived) | 16/11 16:47Z |
 | page-scale (opus; OD 17:00Z + OD:L345/L1278): phone portrait page = iPad right page scaled uniformly — root cause + whole-group fix for every tab panel (bag 7 vs 4 rows first) + comparison test | review/page-scale | main s20 | session_01UV1SzibwMrHrCm5SBrYNJR | RUNNING | 16/11 17:00Z |
@@ -312,7 +312,7 @@
 | pl-courtyards (sonnet; import only): every Dư đồ place × all PL nhất states (season×buổi + every festival PL has), CDN, hotspots, missing list | review/pl-courtyards | main s21 | session_01UV1SzgpcJ5djqV62duegkJ | RUNNING | 16/11 18:16Z |
 | dudo-lock review r1 (sonnet, BIG) of 2cd2eb91 | review/dudo-lock-r1 | main s21 | session_01UV1SzifEntpsUEBQt52nco | PASS 2cd2eb918 (no merge needed: already on main 2934bede) | 16/11 18:50Z |
 | ios-install-first review r1 (sonnet) of 1bd8eef95 | review/ios-install-first-r1 | main s21 | session_01UV1SzgyEy92gymRnB3jn9M | RUNNING | 16/11 18:22Z |
-| dress-offence review r1 (sonnet, BIG) of f47c7fd3 (allowance must stay hidden, OD L187) | review/dress-offence-r1 | main s21 | session_01UV1Szi3HKYg7eh4LPkWhsT | DONE PASS 40903f4a3044 (report dev/handover/reports/dress-offence-r1.md) | 16/11 18:23Z |
+| dress-offence review r1 (sonnet, BIG) of f47c7fd3 (allowance must stay hidden, OD L187) | review/dress-offence-r1 | main s21 | session_01UV1Szi3HKYg7eh4LPkWhsT | RUNNING | 16/11 18:23Z |
 | map-labels-2 (sonnet; owner bug A ca sở placement + every Dư đồ label on its building; history check) | review/map-labels-2 | main s21 | session_01UV1Szi9inSFXF1GWG2dSP8 | RUNNING | 16/11 18:24Z |
 | kit-fit (opus kit keeper; owner bugs: figure top gap = bottom gap in every frame; option card → square picture when text short, no empty space) | review/kit-fit | main s21 | session_01UV1SzmGsieSbMBkycipcQk | RUNNING | 16/11 18:24Z |
 | chonso-tabs review r1 (sonnet, SMALL) of 5099b51cf | review/chonso-tabs-r1 | main s21 | session_01UV1SzgxM8tPohv4gezbNgu | RUNNING | 16/11 18:26Z |

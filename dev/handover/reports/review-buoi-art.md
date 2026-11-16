@@ -1,10 +1,7 @@
-SẴN SÀNG KIỂM 80048c85976b2172b34bc1d15585914eb1d7c923 (branch review/buoi-art, descends from origin/main)
+SAMPLE READY v2 — dev/handover/reports/buoi-art/sample-sheet.jpg (icons redone as SQUARE tiles with thin gold-red border, 128 px, ~5 KB each; bands unchanged; +40 credits = 160 total)
 
-# review-buoi-art (art worker for Foreman C)
-Owner approved sample v2 ("ok", icons stay). Done:
-- Bands on CDN img/fx/ (1080x360 WebP, 20-48 KB each, viewed all): 4 seasons xuan, ha, thu (existing), dong; festivals newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, trungthu (existing), trungcuu, dongchi, giaothua. EXTRA festivals found in j31's second FEST table: vulan, vantho, lapbat → bands made + BTR_FEST entries (tint + sprites) added. Total 17 bands.
-- 4 buổi icons buoi-ico-0..3.webp (square tiles, 128 px, ~5 KB) on CDN. No new kit slot needed (BTR_ICON slot from anim-pace; BTR_ICON=[1,1,1,1]).
-- Wiring (dev/build/jbuoi.js): BTR_ART = all 17 keys; festival band on a festival day, else season band (existing artKey logic); icon before the buổi title. Build files regenerated (index.html, sw.js, assets.json).
-- Test dev/test/buoi-art.js: forces all 4 seasons + 13 festivals, checks band file + icon file per buổi at 755x1000 and 1180x820: FAIL 0, 0 page errors; screens at 755x1000 viewed (xuan, dong: band + square icon + title OK). 1180x820 DOM-checked, screen not viewed.
-- Spring = flower petals only (no gold). Credits: 17 generations x 40 = 680 (incl. 1 redo of icons). Files not in git (CDN only).
-- Notes: festival bands show on any buổi of that festival day (e.g. giaothua night band also at sáng if the festival spans); looks fine as the festival look. Optional later: per-festival title seal.
+# review-buoi-art (Foreman C art worker, branch review/buoi-art)
+Sheet: top row = existing samples (thu, trungthu); middle row = NEW xuan (spring, pink blossom only, no gold petals) + NEW giaothua (festival); bottom = 4 buổi icons sáng / trưa / chiều / tối (round painted medallions on transparent, 160 px WebP ~9 KB each; shown big and at 64 px).
+Credits: 3 images x 40 = 120. Magnific gpt-2-6, folder ba4aecfe. Bands 1080x360 WebP 21 KB / 28 KB.
+Waiting for owner verdict via Foreman C; nothing mass-produced yet. Next after OK: ha, dong, newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, trungcuu, dongchi (10 pictures, ~400 credits), upload to CDN, wire BTR_ART + BTR_ICON=[1,1,1,1] on review/buoi-art.
+Progress file: dev/PROGRESS_buoi-art.md on review/buoi-art.
