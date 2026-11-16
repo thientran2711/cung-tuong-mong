@@ -88,8 +88,14 @@
 | D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | PASS 81deb15f7 | 07:26Z 16/11 |
 | C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | PASS c8734770b | 07:26Z 16/11 |
 | orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 07:40Z |
-| person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | RUNNING | 16/11 07:30Z |
+| person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | READY-FOR-REVIEW 591bde42 | 16/11 08:50Z |
 | stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | DONE fddbbefe, awaiting review | 16/11 07:30Z |
+| D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | RUNNING | 07:26Z 16/11 |
+| D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
+| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
+| orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | RUNNING | 16/11 07:40Z |
+| person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | READY-FOR-REVIEW 591bde42 | 16/11 08:50Z |
+| stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | RUNNING | 16/11 07:30Z |
 | ONE design frame + uniform scale; Fold portrait = iPad half (OD 07:47Z, 07:50Z) — plan + phase 1 | review/design-scale | main s12 | session_01UV1SzjmR9rHoafmnuNS1KA (opus) | RUNNING | 16/11 07:30Z |
 | coop-rejoin-xdev: rejoin from ANOTHER device keeps personal stats (per-seat Worker copy) | review/coop-rejoin-xdev | main s12 | session_01UV1SzjMEc5viCb8vMx3A49 (opus) | SẴN SÀNG KIỂM 53b7b4f6 | 16/11 07:58Z |
 | night-end-r2 reviewer (stalled since s8) + end button when kit ready | review/night-end-r3 | main s12 | session_01UV1SzkTTgASxgc7UuFiJDs (sonnet) | RUNNING | 16/11 07:58Z |
