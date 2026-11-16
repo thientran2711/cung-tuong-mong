@@ -13,3 +13,8 @@ html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72re
 .mspot .mmeta{background:none!important;border:solid transparent!important;border-width:3px 6px!important;border-image:url(/mockassets/slip.webp) 20 22 fill/3px 6px stretch!important;border-radius:0!important;padding:0!important;filter:drop-shadow(0 1px 1px #3a2a1e55);color:#4a3a2a}
 /* clipped labels at the pan edge fade out instead of being cut */
 .kleather>.mapsc{-webkit-mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);mask-composite:intersect}
+/* owner 16/11: no figure chip (.msil) under a place; the text row N bóng · K khắc is the ONE info line */
+.mspot .msil{display:none!important}
+/* Fold (.kv1) hid .mmeta; with .msil gone it is the only info line, so show it on every device */
+:where(.kv1) .mspot .mmeta,.mspot .mmeta{display:block!important}
+.mspot .mlab em{display:inline!important}
