@@ -47,6 +47,22 @@ Nền bàn chơi và mọi đồ vật là tranh gpt-2-6 (`img/kit/mg-*.webp`, 2
 Thi dùng nền sân hội (khán đài, rèm, đèn lồng); học, tự luyện, tác phẩm dùng nền phòng học riêng. Bảng đủ các trò và tranh: `dev/kit/KIT.md` mục 13.1.
 
 
+## mg-balance-2 (11/16/2026): ease levers + Ngôn without words
+Every number below is in `BAL.mgTier.lev[kind]` = [value at ease 0, value at ease 5], read with `mgLev(env, kind, name)` (jmgt). Ease = `env.lv` from `mgTier` (higher = easier).
+| Kind | Lever(s) added | Effect on a player |
+|---|---|---|
+| Nấu ăn `banh` | `lag` (fire answers the fan late), `gust` + `gap` (draughts push the fire up/down, popped as «Gió lùa») | at low ease she must let go early and correct gusts; at high ease the fire follows the fan |
+| Cờ `co` | `lim` (time per position), `fast` (a capture within it earns full 2, slower down to 60 %), `extra` (more stones = more groups to read) | hard boards are busier and reward a quick read |
+| Múa `mua` | `beat` (each step must be tapped within the beat), `sp` (show speed), `retry` (wrong steps forgiven per round on easy boards) | Khó: keep the beat; Dễ: one slip forgiven |
+| Làm phúc `td_hanh` | `lim` (round time, auto «Phát xong»), `short` (portions short in rounds 1–2) | short rounds need thought under time |
+| Đầu hồ `dauho` | `aid` (seconds of flight shown by the aim dots), `mouth` (pot mouth size) | longer aim dots = finer throws |
+| Đi đứng `td_dung` | `band` (safe band), `kick` (step sway) | bigger sway, narrower band at low ease |
+| Ngôn `td_ngon` | `band`, `win` (reply window ms), `rate` (voice rise per s), `fade` | see below |
+
+**Ngôn · «Nói đúng lúc, vừa tiếng»** (replaces the word game «Ứng đối», owner 16/11 07:20Z no word games; kind `td_ngon`, engine key `tdtalk`, callers unchanged):
+5 turns; a speaker (name · bề trên / ngang hàng / kẻ dưới · mood) talks (bubble with moving dots, no sentence); an upset speaker needs a calm-down (grey ring);
+the GREEN ring = her turn: she holds «Thưa», her voice bar rises, she lets go inside the green band (bề trên nhỏ nhẹ low, kẻ dưới ôn tồn middle, ngang hàng vui vẻ higher).
+Cutting in («cướp lời») or staying silent costs the timing part (30 %); the voice part (70 %) is full inside the band, fading outside. Gợi ý + first-time demo card (k91DemoCard) as the nw-* games.
 ## Exam games, no word games (family C, review/nw-quiz, owner 16/11 07:20Z)
 The four promotion-exam kinds that were question banks are now skill games of the same subject (`dev/build/jnwq.js`, numbers in `BAL.nwq`):
 | Kind | Game (engine) | Action | Scoring (raw 0–10) | Easier at low tier |

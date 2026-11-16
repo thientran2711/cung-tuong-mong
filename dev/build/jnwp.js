@@ -5,8 +5,8 @@
      doi (Câu đối)         -> engine "doiline" : paired scrolls of brush marks; the right scroll must be the MIRROR of the left (phẩy ↔ mác …); drag/tap tiles
    Same rules as mg-easy / jtd Tứ đức games: first-time demo card, Gợi ý button (costs a little, never blocks), quiet auto-hint when she stalls (tier 0/1),
    a wrong try bounces back, same 0–10 score -> j83 work tiers (raw feeds wkScore) / j71 skill scale.
-   Difficulty: ONE function nwTier(kind, env): the tier mg-balance's mgSet()/mgTier(kind,{occ,…}) puts in KG82.tier when that ships, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó); the capped score reads mgFull(env,b) when it exists;
-   every number below lives in BAL.nw (one core). The old verse/pair engines (j91) and the doi quiz bank (j82) are unreachable after this file runs. */
+   Difficulty: ONE function nwTier(kind, env) = jmgt mgTierOf(env): the tier mgSet() put in KG82.tier, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó); the capped score reads mgFull(env,b) when it exists;
+   every number below lives in BAL.nw (one core). The old verse/pair engines (j91) and the doi quiz bank (j82/j5) were deleted in review/mg-train. */
 BAL.nw=Object.assign(BAL.nw||{},{
  calli:{tol:[.04,.032,.026],      /* lane half-width as a share of the board side, by tier */
   rounds:[[2,3,3],[3,3,4],[3,4,5]],/* strokes of the 3 glyphs, by tier */
@@ -21,8 +21,8 @@ BAL.nw=Object.assign(BAL.nw||{},{
   idle:[8000,14000,0],ghost:[1,0,0]}});
 
 /* ---------- difficulty: one hook ---------- */
-function nwTier(kind,env){/* review/mg-balance: mgSet() puts the tier in KG82.tier before kg82Play and env.lv is the ease; on main without it the level tiers apply */
- if(typeof mgTier==="function"&&KG82.tier!=null){const t=typeof KG82.tier==="object"?KG82.tier.tier:KG82.tier;if(typeof t==="number"&&isFinite(t))return cl(Math.round(t),0,2)}return kg82Tier(env&&env.lv)}
+function nwTier(kind,env){/* review/mg-train: one helper for the whole no-word family (jmgt mgTierOf: KG82.tier set by mgSet, else kg82Tier(env.lv)) */
+ return typeof mgTierOf==="function"?mgTierOf(env):kg82Tier(env&&env.lv)}
 const nwP=(a,t)=>a[Math.min(t,a.length-1)];
 const NWC={ink:"#2a1a12",paper:"#fffdf6"};
 function nwBtn(box,id,text,sub){return k91Btns(box,[[id,text,sub]])}
@@ -79,7 +79,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
   {const tip2=ink&&ink.length?ink[ink.length-1]:null;if(tip2)kg82Spr(g,"ve-brush",tip2[0],tip2[1],S0*.2,null,{ax:.06,ay:.95,alpha:.95})}
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/NR/FULL))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;tAct=performance.now();ink=[[x,y]]},move:(x,y)=>{if(ink&&phase==="play"){const l=ink[ink.length-1];if(k91Dist(x,y,l[0],l[1])>=2)ink.push([x,y])}},
-  up:()=>{if(!ink||phase!=="play"){ink=null;return}const U=ink;ink=null;if(U.length<4)return;inks.push(U);const s=scoreStroke(F.S[si],U);sc.push(s);kg82Pluck(si,s>.5);si++;if(si>=F.ns)setTimeout(()=>{if(phase==="play")endGlyph()},250)}});
+  up:()=>{if(!ink||phase!=="play"||si>=F.ns){ink=null;return}/* review/mg-train: an extra stroke in the 250 ms after the last one read F.S[ns] (page error) */const U=ink;ink=null;if(U.length<4)return;inks.push(U);const s=scoreStroke(F.S[si],U);sc.push(s);kg82Pluck(si,s>.5);si++;if(si>=F.ns)setTimeout(()=>{if(phase==="play")endGlyph()},250)}});
  KG82.peek=()=>{if(!F||phase!=="play"||(dm&&dm.on)||ink||si>=F.ns)return null;return{drag:F.S[si].filter((p,i,a)=>i%2===0||i===a.length-1).map(p=>{const c=C.client(p[0],p[1]);return[c.x,c.y]})}};
  KG82.st=()=>({r,si,phase,ink:!!ink,ns:F&&F.ns,left:LIM-(performance.now()-t0)});
  next();return()=>{done=true;stop()}}
@@ -163,7 +163,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
  next();return()=>{done=true;stop()}}
 
 /* ================= registry: the word games are unhooked everywhere ================= */
-KG82_ENG.calli=nwCalli;KG82_ENG.doiline=nwDoi;delete KG82_ENG.verse;delete KG82_ENG.pair;
+KG82_ENG.calli=nwCalli;KG82_ENG.doiline=nwDoi;/* the old verse / pair engines are gone from j91 (review/mg-train) */
 KG82_KIND.tho={e:"calli",n:"Thơ",t:"Thư pháp đồ nét",how:"Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay; làm đủ các nét theo thứ tự số. Giữ bút trong vệt mờ thì nét đẹp. Có nút Gợi ý. 3 chữ."};
 KG82_KIND.doi={e:"doiline",n:"Câu đối",t:"Đối nét bút",how:"Bức liễn bên trái có các nét bút. Kéo nét trong khay vào ô bên phải, ngang hàng với nét trái: nét phải là hình lật gương của nét trái. Đặt sai thì nét tự quay về. Có nút Gợi ý. 3 câu đối."};
 KG82_SPR.tho=["tho-slip","ve-brush","ve-inkstone"];KG82_SPR.doi=["tho-slip"];
