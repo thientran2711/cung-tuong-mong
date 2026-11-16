@@ -105,7 +105,9 @@ window.KIT_PICFALL=window.KIT_PICFALL||{};
 `;document.head.appendChild(st)})();
 /* ---------- the item someone else wears / holds (person card slots, K1): the kit ITEM dialog, not an info picture ----------
    item picture in its grade frame, name + grade, the owner (small portrait + name), the item's kit rows, ✕ close (no "Đã hiểu"). */
-function kitOtherItem(v,x,sl){try{const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x.k];const g=x.grade|0,gr=KIT_GRADE[g]||KIT_GRADE[0];
+function kitOtherItem(v,x,sl){try{/* KIT §70: the shared item detail card (who = the wearer; Lai lịch = who gave it) */
+ if(typeof kitItemCard==="function"&&kitItemCard({wdSlot:sl,who:v},{note:[`${sl==="tram"?"cài":"mặc"} trên người ${v.name}`,x.label?`ta đã biết: ${x.label}`:"đúng phẩm hay không: chưa rõ",
+  "hặc ăn mặc sai phẩm: thẻ người của nàng ta, nhóm Hại nặng"]}))return;const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x.k];const g=x.grade|0,gr=KIT_GRADE[g]||KIT_GRADE[0];
  const src=typeof kitItemSrc==="function"?kitItemSrc(x.k,x.icon):(x.icon||"");
  let rows="";try{rows=W&&typeof wdItemRowsE==="function"?wdItemRowsE({k:x.k},{}):typeof kitItemRows==="function"?kitItemRows(x.k,{}):""}catch(e){rows=""}
  const own=`<div class="kgiftown">${typeof mdH==="function"?mdH(pv(v),"sm"):""}<span>${sl==="tram"?"Đang cài":"Đang mặc"}: ${typeof kitName==="function"?kitName(v):giftE(v.name)}</span></div>`;

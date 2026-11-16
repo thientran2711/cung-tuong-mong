@@ -28,12 +28,14 @@ function kipTile(c,i,on){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
   `<span class="kshn"${I.col?` style="color:${I.col}"`:""} title="${kipE(I.name)}">${kipE(I.name)}</span>`+
   `<span class="kshe" title="${kipE(I.use)}">${kipE(I.use)}</span><span class="kshp">${kipE(I.gname)}</span></div>`}
 /* the detail: the option's own decorated kit card (a display copy: name, odds, Tốn / Được / Mất / Kèm or the reason) + the confirm button.
-   KIT §70 item-detail (review/item-info) goes above the card once it lands (coordinator 15/11). */
+   KIT §70 item detail (kitItemDetail strip, jitd) sits above the card (reviewer r1, item-info landed). */
 function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=m.opts[i];const src=M.querySelector(`.opts>.opt[data-m="${i}"]`);
  if(!c||!src){d.innerHTML=`<p class="kshm">Chạm vào một món để xem được gì.</p>`;return}
  const lock=kipLocked(c)||src.disabled;const card=src.cloneNode(true);card.removeAttribute("data-m");card.setAttribute("tabindex","-1");card.setAttribute("aria-hidden","true");
  card.classList.add("kipcard");card.querySelectorAll(".kitem").forEach(x=>x.remove());card.disabled=false;
- d.innerHTML="";
+ /* KIT §70 item detail (review/item-info, landed on main): the chosen item's own detail strip above the option card (reviewer r1) */
+ let det="";try{const e=S.inv[c.ik];if(e&&typeof kitItemDetail==="function")det=kitItemDetail({e},{cls:"kidet-strip kipdet",noLux:true})}catch(x){}
+ d.innerHTML=det;
  d.appendChild(card);
  d.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
 function kipSelect(M,m,i){KIP_SEL.set(m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
