@@ -372,9 +372,9 @@ function note70(o){const z=j70();const a=o.a,A=ACT[o.k];const who=o.known?title7
  N.self=(o.self||[]).map(x=>x.t);const sent=/\(sai ([^)]+) đi\)/.exec(N.body);let body=String(o.body||"").replace(/\s*\(sai ([^)]+) đi\)/,"");N.sentBy=sent?sent[1]:null;
  /* owner 15/11 ("Gì mà viết liên tục vậy"): one fact per row — who · what, who was sent, the result, then each detail as its own sentence;
     every row ends with a full stop so the kit (kpSentences) cuts it into its own line, never glued to the next name */
- const rows=[];rows.push(`<b>${who}</b> ${o.ok?"đã":"định"} <b>${what}</b> nhắm vào ngươi.`);
- if(o.known)rows.push(`Vì sao: nàng ${o.mo.t}.`);else rows.push("Chưa rõ là ai.");
- if(sent)rows.push(`Kẻ được sai đi: ${sent[1]}.`);
+ const rows=[];rows.push(`<b>${who}</b>${o.known?"":" (chưa rõ là ai)"} ${o.ok?"đã":"định"} <b>${what}</b> nhắm vào ngươi.`);
+ if(o.known)rows.push(`Vì sao: nàng ${o.mo.t}.`);
+ if(sent)rows.push(`Người được sai đi ${what} ngươi: ${sent[1]}.`);
  const clean=/không tìm ra điều gì sai trái; chỉ biết ([^.<]+)/.exec(String(body).replace(/<[^>]+>/g,""));
  if(clean){rows.push(G70("Kết quả: không tìm ra điều gì sai trái của ngươi."));rows.push(`${o.known?"Nàng":"Kẻ ấy"} chỉ biết thêm ${clean[1].trim()}.`)}
  else{rows.push(o.ok?R70("Kết quả: mưu ấy đã thành."):G70("Kết quả: không thành."));

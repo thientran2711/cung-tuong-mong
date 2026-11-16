@@ -106,12 +106,13 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
   const A0=ACTX.a;ACTX.a=a;let d=0;window.__truthAuto=1;try{d=framed(S,why)}finally{window.__truthAuto=0;ACTX.a=A0}
   const t=`Không minh oan được: ngươi mang tội ${why.replace(/^bị /,"")}. Danh -${d}, Sủng -10, bị phạt.`;log(t);Q.push({t:"Mang tội",who:pMe(),h:`<p class="r">${t}</p>`});};
  const go=(o,how)=>()=>{if(roll(clamp(o)))clear(how);else guilty(false)};
+ const H="minh oan được thì kẻ vu oan bị lộ, bị phạt; hỏng thì ngươi mang tội: mất Danh, Sủng, bị phạt",RK="có rủi ro";
  const O=[];
- O.push({n:"Xin tra sổ Kính sự phòng",fx:{},j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
- if(wit)O.push({n:`Gọi ${S.maid.name} làm chứng`,fx:{},j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)});
- if(ty)O.push({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")});
- if(ev>=1)O.push({n:`Trình chứng cứ về ${a.name}`,fx:{},j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}});
- O.push({n:"Nhận tội, xin khoan hồng",fx:{},j67:"tốn: không tốn gì",go:()=>guilty(true)});
+ O.push({n:"Xin tra sổ Kính sự phòng",fx:{},hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
+ if(wit)O.push({n:`Gọi ${S.maid.name} làm chứng`,fx:{},hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)});
+ if(ty)O.push({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:H,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")});
+ if(ev>=1)O.push({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:H,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}});
+ O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:`<p>Cung Chính ti khám tẩm cung ngươi, tìm thấy hình nhân bùa ngải. Có kẻ tố ngươi ${why.replace(/^bị vu /,"")}.</p><p class="past">Ngươi không làm việc ấy. Chọn cách minh oan.</p>`,o:O,who:pv(a)}};
 
 /* ---------- 4. evidence card + intel: the rumours, shown as weak ---------- */

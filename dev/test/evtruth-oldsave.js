@@ -8,7 +8,7 @@ const [,,URL,OUT,VS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sizes
  for(const [w,h] of sizes){const p=await b.newPage({viewport:{width:w,height:h}});p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function');await p.waitForTimeout(1500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
-  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.origin);await p.waitForTimeout(800);
+  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.origin);await p.waitForTimeout(800);await p.evaluate(()=>document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove()));
   const r=await p.evaluate(()=>{Q.length=0;closeModal&&closeModal();const out={};const [a,c]=liveRivals(true);
    /* 1. old save: a consort holds 3 on the clean player, the player holds 2 on a clean consort */
    for(const v of [a,c]){v.schemes=0;v.deeds=[];v.dw=0;v.dkeys=[];v.plan=null;v.affair=null;v.scandal=0;v.inv=(v.inv||[]).filter(e=>!IT[e.k]||!IT[e.k].il)}
@@ -21,10 +21,10 @@ const [,,URL,OUT,VS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sizes
    /* the news card as the j70 notice draws it */
    const n=note70({a:a2,k:"spy",ok:true,mo:motNow70(a2),by:[],self:[],gain:0,snap:{danh:S.danh,sung:S.sung,suc:S.suc,duc:S.duc,rank:S.rank,preg:S.preg,kids:(S.kids||[]).length,cold:S.out,scar:S.scar},body:txt+" (sai Tiểu Phúc Tử đi)",known:false});
    out.news=n;Q.push({t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${n}</p>`});showModal();return out});
-  await p.waitForTimeout(700);await p.screenshot({path:`${OUT}/news-${w}x${h}.png`});
+  await p.waitForTimeout(700);await p.evaluate(()=>document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove()));await p.screenshot({path:`${OUT}/news-${w}x${h}.png`});
   const rows=await p.evaluate(()=>[...document.querySelectorAll('#modal .kfact .kft')].map(e=>e.textContent.trim()));
   r.rows=rows;
   const f=await p.evaluate(()=>{closeModal();Q.length=0;const a=liveRivals(true)[0];ACTX.a=a;let d;try{d=framed(S,"bị vu dùng bùa ngải")}finally{ACTX.a=null}showModal();return{d,q:Q.length,t:Q[0]&&Q[0].t,opts:(Q[0]&&Q[0].opts||[]).map(o=>o.n)}});
-  await p.waitForTimeout(700);await p.screenshot({path:`${OUT}/frame-${w}x${h}.png`});r.frame=f;
+  await p.waitForTimeout(700);await p.evaluate(()=>document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove()));await p.screenshot({path:`${OUT}/frame-${w}x${h}.png`});r.frame=f;
   res[w+'x'+h]=r;await p.close()}
  console.log(JSON.stringify({res,errs},null,1));await b.close()})();
