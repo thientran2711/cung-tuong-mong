@@ -14,7 +14,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C28 room-btn | review/room-btn-r1 | sonnet | PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
 | C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
 | C32 page-curl2 | review/page-curl2 | sonnet | RUNNING |
-| C33 weekbook-entries | review/weekbook-entries @1ddfdda7 | sonnet | REVIEWING (review/weekbook-entries-r1, sonnet) |
+| C33 weekbook-entries | review/weekbook-entries-r1 | sonnet | PASS 1badc13c817d0d67971439fd6d2cbd944e47ad89 |
 | C34 contest-ui | review/contest-ui-r1 @7fbf0630 FAIL (podium overlaps header at 844x390) → review/contest-ui-r2 | sonnet | RUNNING (fix r2) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
@@ -46,6 +46,7 @@ PASS review/weather-port-r1 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f (D40; bad-w
 PASS review/succession-port-r1 0d9b49b9202c663ef4151c01e890a05ffd62aa30 (D32; succession choice + epilogues + 17 living endings no longer say "Chết vì")
 PASS review/palace-map-port-r1 306de247abcc3c9cf0bbab9fbddb91e6946131c3 (D30; palace courtyard → hall rows → residence room paintings; 675 images on CDN; courtyard pl2 images ~500 KB each = over budget, re-encode follow-up)
 PASS review/lost-items-port-r1 1d51bbf1ea55c70de7b2b46d136601c97c30a60e (D38; lost items + rivalry/steal acts; 0 unfair penalties in bot runs; ancestry vs main a523531d re-checked by Foreman B)
+PASS review/weekbook-entries-r1 1badc13c817d0d67971439fd6d2cbd944e47ad89 (C33; per-person readable week-book entries; reviewer fixed rival festival prizes landing on Hoàng thượng/her page)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
