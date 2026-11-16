@@ -1,4 +1,24 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
+
+## HANDOVER (Foreman C session 1 → session 2, 07:23Z 16/11)
+Why: session 1 is far past its context budget; all its in-session agents have reported. Session 2 continues from this file — read it ALL, then CLAIMS.md, dev/handover/reports/, FOREMAN_C.md, the 16/11 end of OWNER_DECISIONS.md.
+Running SEPARATE sessions (results arrive in dev/handover/reports/<branch>.md — check each wake):
+- review/cycle-art-r1 reviewer — session_011xDdVNhYUE65ReNSUXEbaG (A7b art) → on PASS add under ## PASS
+- review/memories worker (D26 memories + hook ledger, opus) — session_011xDdVPYyJVKrkdKtDKo6f9 → on SẴN SÀNG KIỂM open an opus reviewer session
+- review/schedules3 finishing worker (D29, opus) — session_011xDdVRcAbEJXh2PekTYPF4 → reviewer (opus) when ready
+- review/veil-zoom worker (D25) — session_011xDdVQH85mp5QLY8bMqh7D → D25 MOVED to Foreman B by owner 07:30Z after it started: when it reports, hand the branch + review to Foreman B (note in QUESTIONS) unless the coordinator says keep it
+- review/promote-servants worker (D41, opus) — session_011xDdVPy5sdrvK7cDYuJHzz → reviewer (opus)
+- review/econ-items-r1 reviewer (D6, opus) — session_011xDdVQ5xcrYDf3N1snQ5L1
+- review/luxury-r1 reviewer (D17, opus) — session_011xDdVSB4Ws7io5HBcz34c9 → after D17 PASS, D19 'Biếu quà làm lành' belongs to Foreman B now (moved 07:30Z) — tell B the luxGift API is in dev/PROGRESS_luxury.md
+- review/perf-r1 reviewer (D15, opus) — session_011xDdVSxy2NRrKa7UvyR112
+Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass production only after she approves the main chat's SAMPLE):
+- C9 huadian worker #4 on review/huadian-size-r3 @1aed2877e — FAIL list in dev/handover/reports/review-huadian-size-r3.md (c14 t4/t5 discs, m48-t5 / m14-t6 / m34-t7 / c28-t6 rings+beads, c28-t6-a36 damaged, m22-t6 rectangle+bead, c25 t4–t6 specks, c28-t2 / c02-t2 / c02-t5 oversize drops, small pendant dots m45/m47/c18/m43) + add the a51 huadian on c12-ty5-a51 on top of D24's new version
+- D23 mole audit resume on review/mole-audit-r2 @474f73570 (fixed copies were LOCAL in session 1's container — re-derive from the CDN per dev/PROGRESS_mole-audit.md; consorts re-fixed on the current CDN copy)
+- Art moved D → C (owner): C3 art-complete part 2, D54 buổi paintings for places without a 4-buổi set, D56 icons + Nội vụ phủ art, fig-hd-upscale, face-sharp-hd2 (D51 wiring → main). Art for 'Ý chỉ tiết kiệm' (D17). CDN re-encode of oversize pictures (D15 img-budget.py).
+Not ours any more: D3, D9, D11–D14, D19, D20 (→ weather-fx-one), D25, D44 → Foreman B; D50 done (audit, code notes for D's review/dlg-fig-ph); D51 → main.
+Infra: shared .git repack under /home/user/wt/fetch.lock when packs > ~12 GB (session 1 did 17 → 4.1 GB). Cloudflare token works on this environment (CLOUDFLARE_API_TOKEN=proxy-injected). Magnific project ba4aecfe-efce-47e2-b53f-30d292091886.
+Hourly wake: session 1's trigger trig_01GL5rGaTCLK88QYky8yGPt1 is DISABLED at rollover — session 2 must create its own hourly wake (create_trigger, fires into session 2).
+Briefs: point workers to the files with the owner's exact words (OWNER_DECISIONS.md, WORKER_BRIEF.md; dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md once they exist — not yet on 07:23Z); never summarise her rules.
 ORDER 16/11 applied (05:19Z 16/11): no new in-session subagents — every new worker/reviewer is a separate cloud session (create_session); workers report to their branch + PROGRESS + dev/handover/reports/<branch>.md; items claimed in dev/handover/CLAIMS.md before opening; hourly self-wake.
 last wake: 06:23Z 16/11
 Context: this session is already far past start+25% (long session, est.). The 12 in-session agents below were started before the order and may finish; Foreman C rolls over (HANDOVER block + create_session) as soon as they have reported or at the first summarisation, whichever comes first.
@@ -42,7 +62,7 @@ Base main at start: 900ace7fb.
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
 | D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
 | D22 real-phone UA test mode | review/ua-test-r1 | sonnet | PASS cad6e04c0 (test infra only; 13 device profiles verified; rotate-prompt 18/18) |
-| D15 download-size + perf test | review/perf @ef6bc7d54 (first load 912 MB → 43 MB, title 746 s → 30 s; assets.py core/fig/lazy/fx; perf.js + budget) → review/perf-r1 | opus | REVIEWING (separate session) |
+| D15 download-size + perf test | review/perf @ef6bc7d54 (first load 912 MB → 43 MB, title 746 s → 30 s; assets.py core/fig/lazy/fx; perf.js + budget) → review/perf-r1 | opus | REVIEWING (session session_011xDdVSxy2NRrKa7UvyR112) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality-r1 | opus | PASS 99b5e3157 (reviewer fixed co-op friend trọng mismatch + stranger rule in jpcf 'Sở trọng') |
 | D29 schedules/roster re-port | review/schedules3 @10517412e (85%: ported, merged-build re-runs left) | opus | RUNNING (finishing session session_011xDdVRcAbEJXh2PekTYPF4) |
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |

@@ -79,4 +79,4 @@
 | percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | RUNNING | 16/11 07:20Z |
 | balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
 | one-core: every rule number from BAL + guard test (owner ONE CORE) | review/one-core | main s11→s12 | session_01UV1Szm1iPxyYyr6JpCfpnd (opus) | RUNNING | 16/11 07:21Z |
-| D15 review | review/perf-r1 | C | (session id below) | RUNNING | 07:23Z 16/11 |
+| D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | RUNNING | 07:23Z 16/11 |
