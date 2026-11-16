@@ -5,7 +5,7 @@
      doi (Câu đối)         -> engine "doiline" : paired scrolls of brush marks; the right scroll must be the MIRROR of the left (phẩy ↔ mác …); drag/tap tiles
    Same rules as mg-easy / jtd Tứ đức games: first-time demo card, Gợi ý button (costs a little, never blocks), quiet auto-hint when she stalls (tier 0/1),
    a wrong try bounces back, same 0–10 score -> j83 work tiers (raw feeds wkScore) / j71 skill scale.
-   Difficulty: ONE function nwTier(kind, env): the mg-balance tier function mgTier(art, occasion) when it exists, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó);
+   Difficulty: ONE function nwTier(kind, env): the tier mg-balance's mgSet()/mgTier(kind,{occ,…}) puts in KG82.tier when that ships, else kg82Tier(env.lv) (0 Dễ · 1 Vừa · 2 Khó); the capped score reads mgFull(env,b) when it exists;
    every number below lives in BAL.nw (one core). The old verse/pair engines (j91) and the doi quiz bank (j82) are unreachable after this file runs. */
 BAL.nw=Object.assign(BAL.nw||{},{
  calli:{tol:[.04,.032,.026],      /* lane half-width as a share of the board side, by tier */
@@ -21,9 +21,8 @@ BAL.nw=Object.assign(BAL.nw||{},{
   idle:[8000,14000,0],ghost:[1,0,0]}});
 
 /* ---------- difficulty: one hook ---------- */
-function nwTier(kind,env){let t=kg82Tier(env&&env.lv);
- try{if(typeof mgTier==="function"){const r=mgTier(kind==="tho"?"thi":kind,KG82.ctx);const n=typeof r==="number"?r:(r&&typeof r.tier==="number"?r.tier:null);if(n!=null&&isFinite(n))t=cl(Math.round(n),0,2)}}catch(e){}
- return t}
+function nwTier(kind,env){/* review/mg-balance: mgSet() puts the tier in KG82.tier before kg82Play and env.lv is the ease; on main without it the level tiers apply */
+ if(typeof mgTier==="function"&&typeof KG82.tier==="number"&&isFinite(KG82.tier))return cl(Math.round(KG82.tier),0,2);return kg82Tier(env&&env.lv)}
 const nwP=(a,t)=>a[Math.min(t,a.length-1)];
 const NWC={ink:"#2a1a12",paper:"#fffdf6"};
 function nwBtn(box,id,text,sub){return k91Btns(box,[[id,text,sub]])}
@@ -40,7 +39,7 @@ const NW_GLYPH={
   ["Chữ Vị",[[[.3,.2],[.7,.2]],[[.14,.44],[.86,.44]],[[.5,.1],[.5,.9]],[[.45,.52],[.32,.7],[.12,.88]],[[.55,.52],[.68,.7],[.88,.88]]]]]};
 function nwPick(n){const L=NW_GLYPH[n]||NW_GLYPH[3];return L[Math.floor(Math.random()*L.length)]}
 function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw.calli,tier=nwTier("tho",env),lv=env.lv||0;
- const NR=T.rounds[0].length,S0=Math.min(W,H)-34,ox=(W-S0)/2,oy=(H-S0)/2+14,tol=S0*nwP(T.tol,tier);
+ const FULL=typeof mgFull==="function"?mgFull(env,T.full):T.full,NR=T.rounds[0].length,S0=Math.min(W,H)-34,ox=(W-S0)/2,oy=(H-S0)/2+14,tol=S0*nwP(T.tol,tier);
  let r=-1,sum=0,F=null,si=0,ink=null,inks=[],sc=[],phase="",t0=0,LIM=0,done=false,tAct=0,glow=0,cost=0,tip=null;const pops=[];
  const toC=([u,v])=>[ox+u*S0,oy+v*S0];
  const bez=(P,t)=>P.length===2?[P[0][0]+(P[1][0]-P[0][0])*t,P[0][1]+(P[1][1]-P[0][1])*t]:[(1-t)*(1-t)*P[0][0]+2*(1-t)*t*P[1][0]+t*t*P[2][0],(1-t)*(1-t)*P[0][1]+2*(1-t)*t*P[1][1]+t*t*P[2][1]];
@@ -54,7 +53,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
    g.fillStyle=K91C.good();g.beginPath();g.arc(x0,y0,9,0,Math.PI*2);g.fill();g.fillStyle="#fff";g.font=k91F(700,11,1);g.textAlign="center";g.textBaseline="middle";g.fillText("1",x0,y0+.5);
    g.fillStyle="#e0a526";g.beginPath();g.arc(px,py,5,0,Math.PI*2);g.fill();g.restore();return y0+34}});
  if(dm)hb.hidden=true;
- function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(Math.round(10*Math.min(1,sum/NR/T.full))),300)}const n=nwP(T.rounds,tier)[r],G=nwPick(n);F={n:G[0],S:G[1].map(sample),ns:G[1].length};si=0;inks=[];sc=[];ink=null;glow=0;cost=0;tip=null;
+ function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(10*Math.min(1,sum/NR/FULL)),300)}const n=nwP(T.rounds,tier)[r],G=nwPick(n);F={n:G[0],S:G[1].map(sample),ns:G[1].length};si=0;inks=[];sc=[];ink=null;glow=0;cost=0;tip=null;
   LIM=(T.base+F.ns*T.per+lv*T.lvSec)*1000;phase="play";t0=tAct=performance.now()}
  /* ordered progress along the guide: a drawn point only counts when it lies a little FURTHER along the stroke (calligraphy has a direction) */
  function scoreStroke(G,U){if(U.length<2)return 0;const look=Math.max(30,Math.round(G.length*.3));let idx=-1,hit=0,miss=0;
@@ -78,7 +77,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
    if(glow>now)k91Glow(g,P[0][0]-12,P[0][1]-12,24,24,now)}
   inks.concat(ink?[ink]:[]).forEach(U=>{g.save();g.lineCap="round";g.lineJoin="round";g.strokeStyle="#1e140e";for(let i=1;i<U.length;i++){const sp=k91Dist(U[i][0],U[i][1],U[i-1][0],U[i-1][1]);g.lineWidth=Math.max(2.5,Math.min(10,10-sp*.35));g.beginPath();g.moveTo(U[i-1][0],U[i-1][1]);g.lineTo(U[i][0],U[i][1]);g.stroke()}g.restore()});
   {const tip2=ink&&ink.length?ink[ink.length-1]:null;if(tip2)kg82Spr(g,"ve-brush",tip2[0],tip2[1],S0*.2,null,{ax:.06,ay:.95,alpha:.95})}
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,(sum+(phase==="play"?0:0))/NR/T.full))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/NR/FULL))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;tAct=performance.now();ink=[[x,y]]},move:(x,y)=>{if(ink&&phase==="play"){const l=ink[ink.length-1];if(k91Dist(x,y,l[0],l[1])>=2)ink.push([x,y])}},
   up:()=>{if(!ink||phase!=="play"){ink=null;return}const U=ink;ink=null;if(U.length<4)return;inks.push(U);const s=scoreStroke(F.S[si],U);sc.push(s);kg82Pluck(si,s>.5);si++;if(si>=F.ns)setTimeout(()=>{if(phase==="play")endGlyph()},250)}});
  KG82.peek=()=>{if(!F||phase!=="play"||(dm&&dm.on)||ink||si>=F.ns)return null;return{drag:F.S[si].filter((p,i,a)=>i%2===0||i===a.length-1).map(p=>{const c=C.client(p[0],p[1]);return[c.x,c.y]})}};
@@ -112,7 +111,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
   P.slots=P.rows.map((_,i)=>({x:P.rx,y:top+i*rh+(rh-sz)/2,w:sz,h:sz}));P.left=P.rows.map((_,i)=>({x:P.lx,y:top+i*rh+(rh-sz)/2,w:sz,h:sz}));
   const ty0=wide?top:top+P.n*rh+34,perRow=wide?Math.max(2,Math.floor((W-WL-10)/(sz+8))):Math.max(2,Math.floor((W-12)/(sz+8)));
   P.tiles.forEach((t,i)=>{const row=Math.floor(i/perRow),col=i%perRow;const n=Math.min(perRow,P.tiles.length-row*perRow);const rw=n*(sz+8)-8;const x0=wide?WL+(W-WL-rw)/2:(W-rw)/2;t.hx=x0+col*(sz+8);t.hy=ty0+row*(sz+8);t.w0=sz;t.h0=sz;if(t.at==null){t.x=t.hx;t.y=t.hy}});P.trayY=ty0}
- function next(){r++;if(r>=R.length){done=true;return setTimeout(()=>env.end(Math.round(10*pts/Math.max(1,tot))),300)}const n=R[r];
+ function next(){r++;if(r>=R.length){done=true;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}const n=R[r];
   const rows=[];for(let i=0;i<n;i++){let t;do t=NW_TYPES[Math.floor(Math.random()*NW_TYPES.length)];while(i&&t===rows[i-1]&&Math.random()<.8);rows.push(t)}
   const good=rows.map(t=>({type:t,mir:true}));const used=[...new Set(rows)];const dec=[];
   for(let i=0;i<ND;i++){let d;const pool=NW_TYPES.filter(t=>!used.includes(t));
