@@ -81,3 +81,25 @@ Re-ran dev/test/kit-conform.js on main+kit-size (Fold 87 ok / 18 MISSING, iPad 9
 
 ### HANDOVER (next kit-size worker)
 Waiting for the owner's verdict via main. Then phase 2: wire kszFrame3/kitFramePick3 into kpBuild / kitEventStage (#modal), map KP_SEAL kinds → focus, narrator from kitStagePeople fallback, items → jk2b kitItem (XL master scale), button grid into kpopts; audit the 67 "Đã hiểu" literals; fix kit-conform test to wait for the walk. Server: node dev/test/cdn-overlay-serve.js 8733 <wt> <empty list> (run_in_background, long timeout). Rebuild: bash dev/site/build_site.sh then restore index.html/sw.js before committing.
+
+## kit-size #4 (opus, 16/11 ~19:22Z–) — owner 19:21Z S circle, 19:22Z approval of #3, 19:23Z narrator, ~19:32Z S reversal
+START_CTX ≈ 4 % of 1M (context_usage read 0; estimate). Rollover at ≈ 29 %, ceiling 60 %. Branch review/kit-size: merged origin/main (fb5dcbb1), code @dded439c.
+- S small full figure (19:21Z): built (`pres.S="figS"`, fig3.S body 150), full-screen shots sent; owner REVERSED after seeing them ("để nguyên hình toàn thân sẽ không thấy rõ cái mặt") → undone, S = #3 portrait pendant again. The two full-screen shots were removed from git by img-cleanup (fd8642e0); not kept (rejected images are stored nowhere).
+- NARRATOR (19:23Z): ONE map `BAL.staff.narrator` (dev/build/jbal.js), read by `kszWho3` (jksize.js): TIN / BÁO / TUẦN / VIỆC → `kn` Quản sự ma ma (monthly palace report, maids, lệ bạc) · LUẬT / ĐIỀU / CHỨNG CỨ → `tn` Chưởng sự cô cô (Thái hậu's edicts, cung quy, punishments) · ĐÊM → `ksp` Kính sự phòng (S.court.ksp) · BAN THƯỞNG → `tq` Tổng quản thái giám (S.court.tq). No office fits: MẬT BÁO / CẢNH GIÁC / NGƯỜI → her thân tín maid (her own informant; a palace official would not bring her secret reports), KIẾP / KẾT QUẢ → the player (her own life / result). `gt` Giáo tập ma ma: no frame kind (lễ nghi / tutorial = LỜI DẶN, her own frame). Real NPCs with real figures (fig-mama-k03 / k02-a51, fig-eunuch-u19-a51 / u22-a36).
+- Sheets (images on Cloudflare, not git — img-cleanup rule): https://ctm-img.victoria-tntt.workers.dev/img/review/kit-size4/k4-{755x1000,1180x820}-{news,rule,notice,week,intel,evidence,night,reward,end}.jpg — BEFORE (#3 narrator, S) | S | M | L | XL. Wipe img/review/kit-size4/ after the verdict.
+
+### Self-check (narrator kinds; Fold · iPad; tools dev/test/kit-size4.js + kit-size4-compose.py)
+| kind | narrator (tag) | content picks own size | empty px under info | figure gap top/bottom max | info scrolls |
+|---|---|---|---|---|---|
+| TIN | Quản sự ma ma / Diệp Thanh Hòa | 3/4 · 3/4 | 0 · 0 | 1 · 1 | - · - |
+| LUẬT | Chưởng sự cô cô / Hà Tú Dung | 4/4 · 4/4 | 0 · 0 | 0 · 0 | - · - |
+| BÁO | Quản sự ma ma / Diệp Thanh Hòa | 4/4 · 4/4 | 0 · 0 | 0 · 0 | - · - |
+| TUẦN | Quản sự ma ma / Diệp Thanh Hòa | 4/4 · 4/4 | 0 · 0 | 0 · 0 | - · - |
+| MẬT BÁO | Cung nữ thân tín / Tố Như | 4/4 · 4/4 | 0 · 0 | 0 · 0 | - · - |
+| CHỨNG CỨ | Chưởng sự cô cô / Hà Tú Dung | 4/4 · 4/4 | 0 · 0 | 0 · 0 | - · XL |
+| ĐÊM | Thái giám / Mã Thuận Đức (Kính sự phòng) | 3/4 · 3/4 | 0 · 0 | 0 · 0 | - · - |
+| BAN THƯỞNG | Tổng quản thái giám / Lý Liên Anh | 4/4 · 3/4 | 0 · 0 | 0 · 0 | - · - |
+| KIẾP | the player | 4/4 · 4/4 | 0 · 0 | 0 · 0 | - · - |
+Page errors: none (after/before, both devices). Figures never stretched; people never overlap (figure column vs info/button areas checked). ✗ picks = sample content one step off (TIN M → L, ĐÊM/BAN THƯỞNG XL → L: the XL sample fits L), not layout faults. Known: at S an event-centred kind shows the event picture left and the narrator only when no fact row carries a person (as approved in #3); the Kính sự phòng eunuch's tag reads "Thái giám" (kitTitle) — office name on the tag = phase 2 if wanted.
+
+### Next = PHASE 2 (s22 19:22Z): wire kszFrame3 / kitFramePick3 into kpBuild (j79:330) / kitEventStage (jk4:196), KP_SEAL kinds → focus, narrator via kszWho3 (BAL map) as kitStagePeople fallback, items → jk2b kitItem (XL master), button grid into kpopts, audit the "Đã hiểu" literals (40 files), reuse kit-fit parts (§32.2b equal figure gaps, §6.2b square option card, review/kit-fit) — no duplicates; measure every kind Fold 755x1000 + iPad 1180x820 (no cut text, no overflow).
