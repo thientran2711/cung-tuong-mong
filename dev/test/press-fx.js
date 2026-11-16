@@ -57,7 +57,9 @@ const HELP=()=>{window.__pf={
    console.error(vp,nm,tested,hits.size)
    if(!hits.size)rows.push({vp,state:nm,tested,el:'-',bad:false})}
   /* real buttons still press */
-  const chk=async(sel,label,pre)=>{if(pre)await p.evaluate(pre);await sleep(900);const r=await p.evaluate(sel=>{const e=[...document.querySelectorAll(sel)].find(x=>{const r=x.getBoundingClientRect();return r.width&&r.top>=0&&r.bottom<=innerHeight&&!x.disabled});if(!e)return null;const r=e.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;
+  const chk=async(sel,label,pre)=>{if(pre)await p.evaluate(pre);await sleep(900);const r=await p.evaluate(sel=>{const L=[...document.querySelectorAll(sel)].filter(x=>x.getBoundingClientRect().width&&!x.disabled);let e=L.find(x=>{const r=x.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight});
+   /* r1: phones / portrait put the act list below the fold: scroll the first one into view instead of reporting 'not found' */
+   if(!e&&L[0]){e=L[0];e.scrollIntoView({block:'center'})}if(!e)return null;const r=e.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;
    /* a result card / reward left by the previous check's tap covers it: move it out of the way (test artefact, not the game) */
    for(let i=0;i<6;i++){const t=document.elementFromPoint(x,y);if(!t||e.contains(t))break;let c=t;while(c.parentElement&&c.parentElement!==document.body&&!c.parentElement.contains(e))c=c.parentElement;c.style.display='none'}
    return [x,y]},sel);
@@ -66,6 +68,13 @@ const HELP=()=>{window.__pf={
   await chk('#tabs [data-tab]','main tab button',()=>{Q.length=0;showModal()});
   await chk('#modal .opt','dialog option',()=>{Q.length=0;Q.push({t:'Thử chọn',h:'<p>x</p>',opts:[{n:'Đường một',fx:{}},{n:'Đường hai',fx:{}}],mustChoose:1});showModal()});
   await chk('#panel button.card.ka:not(.kdis),#panel button.ka:not(.kdis)','act card',()=>{Q.length=0;showModal();document.querySelector('button[data-tab="act"]').click()});
+  /* r1 (owner 16/11 "Nút tắt bị che"): the room person card's ✕ (#popx) is on top in every tab, panel and card scrolled to the end */
+  for(const t of tabs){const r=await p.evaluate(async t=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));Q.length=0;showModal();document.querySelector(`button[data-tab="${t}"]`).click();await sl(200);
+   popIdx=null;renderStage();await sl(100);const ps=document.querySelector('#stage [data-p]');if(!ps)return null;popIdx=+ps.dataset.p;renderStage();await sl(700);
+   const P=document.getElementById('panel');P.scrollTop=P.scrollHeight;const pc=document.querySelector('#popw .pc');if(pc)pc.scrollTop=pc.scrollHeight;await sl(300);
+   const x=document.getElementById('popx');if(!x||!x.offsetParent)return null;const r=x.getBoundingClientRect();const top=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+   const res=top&&x.contains(top)?'on top':'NO PRESS: ✕ covered by '+(top?__pf.name(top):'-');popIdx=null;renderStage();return res},t);
+   if(r)ok.push({vp,label:'✕ on top · '+t,res:r})}
   if(errs.length)ok.push({vp,label:'page errors',res:errs.slice(0,3).join(' | ')});
   await c.close()}
  await b.close();const bad=rows.filter(r=>r.bad);
