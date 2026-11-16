@@ -19,7 +19,7 @@ Base main at start: 900ace7fb.
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
 | C8 fig-bg step 2 | review/fig-bg @21eb452d3 | sonnet | RUNNING (worker, silk scroll A) |
 | C9 huadian-size | review/huadian-size @cb36de68b | sonnet | RUNNING (worker) |
-| D1 result-sfx | review/result-sfx | sonnet | PAUSED (cap 12; WIP + PROGRESS pushed, resume next) |
+| D1 result-sfx | review/result-sfx @41899d048 | sonnet | PAUSED (research + PROGRESS only; plan: central result sound, kg82ShowRes ok-arg, iOS WebAudio unlock; resume next) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality | opus | PAUSED (cap 12; WIP + PROGRESS pushed, resume next) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
 | D-list rest (D2, D3, D6, D9, D11–D20, D22–D27, D44–D53) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
@@ -31,4 +31,4 @@ PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends
 (none yet)
 
 ## QUESTIONS
-(none yet)
+- Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
