@@ -12,8 +12,8 @@ function fillSeats(){let ev="";for(const r of [6,5,4,3]){if(!seatFree(r))continu
   let n=SEATCAP[r]-holders(r).length;while(n-->0&&C.length){const tot=C.reduce((s,p)=>s+seatPickW(p),0);let x=Math.random()*tot,w=C[0];for(const p of C){x-=seatPickW(p);if(x<=0){w=p;break}}C.splice(C.indexOf(w),1);ev+=promoteP(w)||"";if(C.length)S.seatLost=(S.seatLost||[]).concat(C.includes(S)?[`${RANKS[r].n}: ${NM(w)}`]:[])}}return ev}
 /* DEMOTION REVIEW: Sủng under the rank's floor for two months, or a conviction, drops one rank (and frees the seat) */
 function sungFloor(r){return Math.max(0,RANKS[r].s-20)}
-function demote(p,why){if(p===S){if(S.rank<=0)return"";S.rank--;S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`;log(t);return t}
- if(p.queen){fall(p,why);return""}if(p.rank<=0)return"";p.rank--;p.lastPromo=S.turn;const t=`${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.`;log(t);newsAdd(p,"demote",t,true);return t}
+function demote(p,why){if(p===S){if(S.rank<=0)return"";S.rank=seatDown(S,S.rank-1);S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`;log(t);return t}
+ if(p.queen){fall(p,why);return""}if(p.rank<=0)return"";p.rank=seatDown(p,p.rank-1);p.lastPromo=S.turn;const t=`${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.`;log(t);newsAdd(p,"demote",t,true);return t}
 function demoteReview(){let ev="";for(const p of consorts()){const r=rkOf(p);if(r<=0||r>=7||p.out)continue;if(p.sung<sungFloor(r))p.lowS=(p.lowS||0)+1;else p.lowS=0;
   if(p.lowS>=2){p.lowS=0;ev+=demote(p,`lâu không được sủng (Sủng ${p.sung} dưới mức ${sungFloor(r)} của ${RANKS[r].n} hai tháng)`)}
   if((p.sick||0)>0){p.sick--;ap(p,{sung:-4});if(p.sick===0&&p.suc<35)ev+=demote(p,"bệnh lâu không hầu được")}}return ev}
