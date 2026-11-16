@@ -17,6 +17,7 @@ const {chromium}=require('playwright');const [,,URL,SZ0,OUT,NN]=process.argv;con
   const v=liveRivals(true).sort((a,b)=>rkOf(a)-rkOf(b))[0];window.__v=v;v.rank=1;v.queen=false;k61Meet(v,'gặp mặt',3);render()});
  C.knownFace=await p.evaluate(()=>kitIsKnown(window.__v)&&isKnown61(window.__v)&&!/unknown-/.test(kitFace(window.__v).src||''));
  const idx=await p.evaluate(()=>rivals.indexOf(window.__v));
+const endBtn=async()=>{await p.waitForSelector('#kg82ok',{timeout:12000,state:'attached'});const nb=await p.evaluate(()=>{const r=document.getElementById('kg82box-res')||document.getElementById('kg82');return r.querySelectorAll('button').length});if(nb!==1)C.oneEndButton=false;else if(C.oneEndButton!==false)C.oneEndButton=true;if(C.noAutoClose!==false){await p.waitForTimeout(1500);C.noAutoClose=await p.evaluate(()=>!!document.getElementById('kg82ok')&&!!document.getElementById('kg82'))}await p.evaluate(()=>document.getElementById('kg82ok').click());await p.waitForFunction(()=>!document.getElementById('kg82'),null,{timeout:12000})};
  const shot=async n=>{await p.screenshot({path:`${OUT}/slap-${SZ}-${n}.jpg`,type:'jpeg',quality:70})};
  const ov=()=>p.evaluate(()=>{const d=document.getElementById('kg82');const o=[];if(d&&d.scrollWidth>d.clientWidth+2)o.push('kg82-x');if(document.documentElement.scrollWidth>innerWidth+1)o.push('page-x');
   if(d)d.querySelectorAll('.kgbox *').forEach(e=>{if(e.children.length===0&&e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible')o.push('cut:'+e.textContent.slice(0,30))});return o});
@@ -35,8 +36,9 @@ const {chromium}=require('playwright');const [,,URL,SZ0,OUT,NN]=process.argv;con
  R.barOverflow=await ov();C.barNoOverflow=!R.barOverflow.length;
  C.idleGlow=await p.waitForFunction(()=>KG82.slapHint===true,null,{timeout:3000,polling:30}).then(()=>true,()=>false);await p.waitForTimeout(150);await shot('4-hint');
  await p.evaluate(()=>{window.__slapTap&&window.__slapTap()});C.popMode=await p.evaluate(()=>!!KG82.slapEnd&&KG82.slapEnd.still===false);
- await p.waitForFunction(()=>!document.getElementById('kg82'),null,{timeout:12000});
+ await endBtn();
  C.demoOnce=await p.evaluate(()=>!!(S.mgSeen&&S.mgSeen.tat));await p.evaluate(()=>{window.__rkS=6;window.__v.rank=1});
+ /* r3: the game waits on its end control (kit: the "Đã hiểu" button becomes the frame ✕, OD:L331) — never closes by itself (OD:L1261) */
  /* 5. marks: the three tiers on ONE known face (kitPortrait lg) */
  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;SLAPG.busy=0});
  R.marks=await p.evaluate(async()=>{const v=window.__v,o=[];const strip=document.createElement('div');strip.id='slapstrip';strip.style.cssText='position:fixed;left:0;top:0;right:0;z-index:99999;background:#f4e6c8;display:flex;gap:8px;padding:8px;justify-content:center';
@@ -52,18 +54,18 @@ const {chromium}=require('playwright');const [,,URL,SZ0,OUT,NN]=process.argv;con
  /* 7. Gọn: no pops, the result is a still line */
  await p.evaluate(i=>{OPT.fxon=false;used=0;Q.length=0;document.getElementById('modal').hidden=true;window.__v.slap=null;SLAPG.busy=0;doAct(i,'tat')},idx);await p.waitForSelector('#kg82go');await p.click('#kg82go');await p.waitForTimeout(700);
  await p.evaluate(()=>{window.__slapTap&&window.__slapTap()});C.gonStill=await p.evaluate(()=>!!KG82.slapEnd&&KG82.slapEnd.still===true);await p.waitForTimeout(200);await shot('6-gon');
- await p.waitForFunction(()=>!document.getElementById('kg82'),null,{timeout:12000});await p.evaluate(()=>{OPT.fxon=true});
+ await endBtn();await p.evaluate(()=>{OPT.fxon=true});
  /* 8. NPC dodge: card odds by tier, demo for "ne", game, result */
  await p.evaluate(()=>{used=0;Q.length=0;document.getElementById('modal').hidden=true;const v=window.__v;v.rank=6;window.__rkS=2;S.slap=null;runAct(v,S,'tat');showModal()});
  await p.waitForTimeout(500);await shot('7-dodge-card');R.dodgeCard=await p.evaluate(()=>document.getElementById('modal').innerText.slice(0,300));C.dodgeNoPercent=!/%/.test(R.dodgeCard);
  R.dodgeTier=await p.evaluate(()=>{const t=slapMg(true,window.__v);return{word:t.word,ease:t.ease,odds:BAL.slap.dodgeOdds[t.tier]}});
  await p.evaluate(()=>document.querySelector('#modal .opt[data-m="0"]').click());await p.waitForSelector('#kg82go',{timeout:30000,state:'attached'});await shot('8-dodge-intro');await p.click('#kg82go');await p.waitForTimeout(700);
  C.dodgeDemo=await p.evaluate(()=>!!document.getElementById('k91demo'));if(C.dodgeDemo)await p.click('#k91demo');await p.waitForTimeout(600);await shot('9-dodge-bar');
- await p.waitForFunction(()=>!document.getElementById('kg82'),null,{timeout:12000});await p.waitForTimeout(400);R.dodgeEnd={slap:await p.evaluate(()=>S.slap?S.slap.sev:0),modal:await p.evaluate(()=>document.getElementById('modal').innerText.slice(0,200))};await shot('10-dodge-result');
+ await p.waitForSelector('#kg82ok',{timeout:12000,state:'attached'});await p.waitForTimeout(300);await shot('9b-dodge-end');await endBtn();await p.waitForTimeout(400);R.dodgeFig=await p.evaluate(()=>!!document.querySelector('#modal .kevfig, #modal .kevstage, #modal [class*=kevf]'));R.dodgeEnd={slap:await p.evaluate(()=>S.slap?S.slap.sev:0),modal:await p.evaluate(()=>document.getElementById('modal').innerText.slice(0,200))};await shot('10-dodge-result');
  R.npc=await p.evaluate(()=>{const v=window.__v,o={};for(const g of [1,2,3]){window.__rkS=1;v.rank=1+g;const c=[0,0,0,0];for(let i=0;i<2000;i++)c[slapNpcTier(v)]++;o['gap'+g]=c.slice(1).map(x=>Math.round(x/20))}return o});
  if(N){await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__rkS=6;window.__v.rank=1;window.__v.slap=null;S.slap=null});const c={skip:[0,0,0,0],tap:[0,0,0,0]};
   const play=async(mode)=>{await p.evaluate(i=>{used=0;Q.length=0;window.__v.slap=null;SLAPG.busy=0;doAct(i,'tat')},idx);await p.waitForSelector('#kg82go',{timeout:30000,state:'attached'});
    if(mode==='skip')await p.click('#kg82skip');else{await p.click('#kg82go');await p.waitForTimeout(Math.random()*3300);await p.evaluate(()=>{if(window.__slapTap)window.__slapTap()})}
-   await p.waitForFunction(()=>!document.getElementById('kg82'),null,{timeout:12000});await p.waitForTimeout(150);return p.evaluate(()=>({sev:window.__v.slap?window.__v.slap.sev:0}))};
+   if(mode==='skip')await p.waitForFunction(()=>!document.getElementById('kg82'),null,{timeout:12000});else await endBtn();await p.waitForTimeout(150);return p.evaluate(()=>({sev:window.__v.slap?window.__v.slap.sev:0}))};
   for(let i=0;i<N;i++){const m=i%5===0?'skip':'tap';const r=await play(m);c[m][r.sev]++}R.spread=c;C.skipIsLight=c.skip[1]===c.skip.reduce((a,x)=>a+x,0)}
  R.errs=errs;C.noErrors=!errs.length;R.fails=Object.entries(C).filter(([k,v])=>v===false).map(([k])=>k);console.log(JSON.stringify(R));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
