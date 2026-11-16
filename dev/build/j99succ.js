@@ -53,10 +53,12 @@ let SUCC_NPC=null;
   if(!/buông rèm/.test(t||""))t=String(t||"").replace(/\.?\s*$/,".")+` Tân đế còn nhỏ, ${v.name} buông rèm nhiếp chính, nắm cả triều đình lẫn hậu cung.`;fate=(fate||"")+" · Thánh mẫu nhiếp chính"}
  return o0.call(this,h,t,fate,alive)}})();
 /* ---------- hook: the Emperor dies ---------- */
-(function(){const e0=emperorDies;emperorDies=function(ev){if(!S||S.dead||(S.succ&&S.succ.on)||(window.COOPW&&COOPW.on))return e0.apply(this,arguments);
+(function(){const e0=emperorDies;emperorDies=function(ev){if(!S||S.dead||(S.succ&&S.succ.on))return e0.apply(this,arguments);/* co-op (review/coop-b1b5-p2 B3): on too; the death roll and the heir are the host's (jcoopworld B3 + B2 S.hr) */
  try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)&&typeof kvOrder==="function"){const o=kvOrder().sort((a,b)=>a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}
  const h=S.heir&&S.heir.k&&S.heir.k.alive?S.heir:null;let open=false,npc=null;
  try{if(h){const v=h.v,live=v&&v.alive&&!v.out;npc=live&&succNpcClaims(v,h.k)?v:null;open=!v||(S.rank>=7&&!S.out&&!npc)}}catch(e){console.error(e)}
+ /* co-op: the new Emperor's mother is the other PLAYER: she chooses on her own client; here the base reign ending (no NPC claim) */
+ try{if(window.COOPW&&COOPW.on&&h&&h.v&&h.v.coop){open=false;npc=null}}catch(e){}
  if(open){if(ev)log(ev);succOpen(h);return}
  if(npc){SUCC_NPC=npc;const od0=od;od=function(b){return od0(b-12)};try{return e0.apply(this,arguments)}finally{od=od0;SUCC_NPC=null}}
  return e0.apply(this,arguments)}})();
@@ -91,7 +93,7 @@ function succBegin(p,failB){const E=S.succ;const U=succSup();E.p=p;E.st=1;E.ch=0
  if(p==="c")E.nh=pick(SUCC_ERA);
  const en=succEnemy();E.foe=en?en.id:null;succNext()}
 function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}}/* chooseM shows and renders after go() */
-function succAge(){const son=succSon();S.age=(S.age||30)+SUCC.yrs;S.year=(S.year||1)+SUCC.yrs;if(son)son.age=(son.age||0)+SUCC.yrs}
+function succAge(){const son=succSon();const co=!!(window.COOPW&&COOPW.on);S.age=(S.age||30)+SUCC.yrs;/* co-op: the year is the shared world's date (her epilogue is her own ending; the world goes on) */if(!co)S.year=(S.year||1)+SUCC.yrs;if(son&&(!co||(S.kids||[]).includes(son)))son.age=(son.age||0)+SUCC.yrs}
 function succRareOK(){const E=S.succ;if(E.p==="a")return (S.duc||0)>=60&&E.hoa>=3&&E.an<=1;if(E.p==="b")return E.hoa>=3&&E.tam>=3&&(S.duc||0)>=50&&(S.tamco||0)>=55;return E.tam>=4&&E.an<=2&&(S.danh||0)>=BAL.succN.rareCDanh&&(S.duc||0)>=50}
 function succPick(c){const E=S.succ;if(!E||!c)return;if(c.c)apply(c.c);if(c.s)apply(c.s);for(const k of ["q","an","tam","hoa"])if(c.e&&c.e[k])E[k]=(E[k]||0)+c.e[k];
  if(c.txt)log(c.txt);if(c.do)try{c.do()}catch(e){console.error(e)}
@@ -151,7 +153,7 @@ PEND.succC=function(){const E=S.succ;if(!E||!E.on||!E.p)return null;const ch=suc
 /* a chapter option's cost is put into fx (so the kit shows it in Tốn and chooseM takes it); succPick must not take it twice */
 function succEndA(){const E=S.succ;return E.an>=4&&E.hoa<=0?"a_bad":E.dm?"a_dm":"a_ok"}
 /* ---------- endings ---------- */
-function succEnd(k){const E=S.succ||{},e=SUCC_END[k]||SUCC_END.a_ok,son=succSon(),sn=succSN(son);const yrs=S.year-(E.y0||S.year);
+function succEnd(k){const E=S.succ||{},e=SUCC_END[k]||SUCC_END.a_ok,son=succSon(),sn=succSN(son);const yrs=window.COOPW&&COOPW.on?(E.ch||0)*SUCC.yrs/* co-op: the world's year does not move */:S.year-(E.y0||S.year);
  const pre=yrs>0?`${yrs} năm sau ngày tiên đế băng hà. `:"";let t="",fate=e.h,die=false;
  switch(k){
   case"a_ok":t=`${pre}Hoàng đế ${sn} hiếu thuận, sớm tối thỉnh an. Ngươi sống những năm cuối đời yên ổn ở Từ Ninh cung, được tôn là Hoàng thái hậu đức độ.`;break;
