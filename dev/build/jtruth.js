@@ -43,7 +43,7 @@ function rumA(h,t,n){if(!h||!t||h===t||!n)return;if(h===S)t.evR=Math.max(0,(t.ev
 /* every holder → target: evidence above the target's real wrongs becomes rumour (old saves at load; any bypassing write after) */
 function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(rivals.filter(v=>v));
  for(const t of P){if(t!==S&&!t.alive&&!t.out)continue;const cap=deedCap(t);
-  for(const h of P){if(h===t)continue;const g=evG(h,t);if(g>cap){const x=g-cap;if(h===S)t.ev=cap;else h.evm[key(t)]=cap;rumA(h,t,x);moved+=x}}}
+  for(const h of P){if(h===t)continue;const g=evG(h,t);if(g>cap){const x=g-cap;if(h===/*evok: sweep*/S)t.ev=cap;else h.evm[key(t)]=cap;rumA(h,t,x);moved+=x}}}
  if(moved)try{window.__evSwept=(window.__evSwept||0)+moved}catch(e){}return moved}
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1}evTruthSweep()}}catch(e){console.error("truth load",e)}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){S.truthV=1;evTruthSweep()}}catch(e){}return r}})();
@@ -130,3 +130,8 @@ function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.sto
 /* test counters for the other frame road (Giá họa, j92): every resolved frame-up, and the ones the victim cleared */
 (function(){if(typeof wdFrameResolve!=="function")return;const w0=wdFrameResolve;wdFrameResolve=function(a,t){const r=w0.apply(this,arguments);try{if(r||t===S){window.__frames=(window.__frames||0)+1;if(t===S)window.__framesMe=(window.__framesMe||0)+1;
  if(/minh oan được|không thấy gì|không thành/.test(r||"")){window.__framesClear=(window.__framesClear||0)+1;if(t===S)window.__framesMeClear=(window.__framesMeClear||0)+1}}}catch(e){}return r}})();
+/* ---------- 5. frames are the schemer's road against a clean rival (reviewer r1, owner 16/11 "không lần nào cũng minh oan được thì chán chết") ----------
+   With true evidence only, a schemer who holds no proof on her target cannot Tố giác her (accOK); she fabricates instead: the weight of
+   Vu oan / Cài đồ in her scheme menu (j40 mindMenu) × BAL.truth.frameW. Same rule for every consort, the player as target or not. */
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const T=BAL.truth;
+ if(O.length&&t&&T.frameW!==1&&!accOK(v,t))for(const x of O)if(x[0]==="frame"||x[0]==="plant")x[1]*=T.frameW}catch(e){}return O}})();
