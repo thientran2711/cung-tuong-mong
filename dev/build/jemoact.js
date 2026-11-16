@@ -60,7 +60,8 @@ Object.assign(BAL,{ea:{
     m = men (thị vệ, thái y, vương gia, nhạc sư, sứ thần, họa sư): loy = Lòng (standing in his post), tinh = his regard for her (shown on his
         card), away = tuần he is sent home (off the map, cannot be met), xAway = the same after an extreme;
     o = court eunuchs + Thái y viện (S.court): af = their favour toward the consorts (Tổng quản's help, the Thái y's loyalty);
-    q = ministers (Triều đình, S.trieu.H): pow = standing at court, rel = clan relation, dPow = a pow change that stirs a feeling;
+    q = ministers (Triều đình, S.trieu.H): pow = standing at court, rel = clan relation, dPow = a pow change in a tuần that stirs a
+        feeling (20 + 3 × change, at most vMax; bot r1 of this branch at dPow 4 with no fading: 12 extremes a 100 tuần, far too many);
     k = children: hp = health, fond = the Emperor's fondness (heir choice), tal = learning;
     e = the Emperor: sung = Sủng of the consort(s) it lands on, kho = the realm treasury (j55 S.trieu.kho) a bestowal of his / Thái hậu's costs, ill = % a chill after drinking alone, away = his chance to turn a tablet ×
         this in the tuần he vents (acts) / 0 after drinking alone;
@@ -68,11 +69,12 @@ Object.assign(BAL,{ea:{
         to chant with her (Sức −, Thái hậu +);
     act = share of the outburst numbers an emotion ACT costs (a calmer vent the person chooses); sick = % a sad / anxious outburst ends in
     illness (the everyone-illness of jface: heals / worsens by the same monthly rule). */
- nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:4},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15},
- /* (6) QUỞ TRÁCH BY TEMPER + MOOD (audit row built): the Emperor's own feeling when he punishes (cấm túc): angry (emo gian ≥ v) → +mo month,
+ nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15},
+ /* (6) QUỞ TRÁCH BY TEMPER + MOOD (audit row built): the Emperor's own feeling when he punishes (cấm túc): angry AT THIS PERSON or at no one (emo gian ≥ v; bot at v 60 with any
+    target: +1 on 95 % of all cấm túc, far too many) → +mo month,
     joyful (vui ≥ v) → −mo (never under 1); his words follow his nết. Thái hậu's scolding (outburst quo) hits ×hot / ×timid by her nết;
     hỏi tội: arguing back with a timid mistress is easier (tryT), with a hot one harder; her words follow her nết. */
- quo:{v:60,mo:1,hot:1.5,timid:.5,tryT:{hot:-10,even:0,timid:10}},
+ quo:{v:75,mo:1,hot:1.5,timid:.5,tryT:{hot:-10,even:0,timid:10}},
  /* (7) PILLOW TALK BY MOOD (audit row built, j8 night1): her mood band moves each answer's grade: joy +up to the lively answers (thơ văn,
     nũng nịu); low mood −dn to every answer but the quiet one (xoa vai), −dn2 at band ±2; a hot temper in a furious anger cannot "Rót rượu,
     nũng nịu" (greyed, like (5)). */
@@ -432,8 +434,11 @@ function eaPeople(){const L=[];try{const seen=new Set([S]);const add=p=>{if(p&&t
   for(const m of S.men||[])add(m);if(S.court)for(const c in S.court)if(S.court[c]&&S.court[c].name)add(S.court[c]);if(typeof allKids==="function")for(const [k] of allKids())add(k)}
  for(const h of eaMins())add(h)}catch(e){}return L}
 /* ministers carry feelings too, from real causes (owner 13:40Z: every feeling has a recorded reason): their standing at court moved */
-function eaMinFeel(){const N=NK().q;for(const h of eaMins()){const o=h.eaPw;h.eaPw=h.pow||0;if(o==null||typeof emoSet!=="function")continue;const d=(h.pow||0)-o;
- if(d>=N.dPow)emoSet(h,"vui",30+d*5,"thế ở triều lên");else if(d<=-N.dPow){const T=eaTemper(h);emoSet(h,T.k==="hot"?"gian":T.k==="timid"?"so":"buon",30-d*5,"thế ở triều sa sút")}}}
+function eaMinFeel(){const N=NK().q;for(const h of eaMins()){
+ /* their feeling fades by the same jemo rule as everyone's (EMO_DECAY; jemo's own decay loop does not reach the ministers) */
+ const e=h.emo;if(e&&typeof EMO!=="undefined"&&EMO[e.k]){e.v=Math.max(0,Math.round(e.v-((typeof EMO_DECAY!=="undefined"&&EMO_DECAY[e.k])||6)));if(e.v<15)h.emo=null}
+ const o=h.eaPw;h.eaPw=h.pow||0;if(o==null||typeof emoSet!=="function")continue;const d=(h.pow||0)-o,v=Math.min(N.vMax,20+Math.abs(d)*3);
+ if(d>=N.dPow)emoSet(h,"vui",v,"thế ở triều lên");else if(d<=-N.dPow){const T=eaTemper(h);emoSet(h,T.k==="hot"?"gian":T.k==="timid"?"so":"buon",v,"thế ở triều sa sút")}}}
 /* an emotion act of a non-consort: name per kind and feeling group */
 const EA_NACT={m:{gian:"Ra thao trường luyện võ",buon:"Viết thư về quê",so:"Lên chùa thắp hương",ghen:"Uống rượu một mình",vui:"Đàn ca cùng bằng hữu"},
  o:{gian:"Ra sân sau đi bộ",buon:"Ngồi uống trà một mình",so:"Thắp hương cầu an",ghen:"Lẩm bẩm than thở",vui:"Pha trò với tiểu thái giám"},
@@ -460,7 +465,7 @@ function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e
    and his words follow his nết; one rule for her and every consort (the log line shows both). */
 const QUO_E={hot:"Hoàng thượng đập bàn quát lớn",even:"Hoàng thượng nghiêm giọng hạ chỉ",timid:"Hoàng thượng thở dài hạ chỉ"};
 (function(){if(typeof punish!=="function")return;const p0=punish;punish=function(p,why,sev){if(!eaOn()||!S.emp)return p0.apply(this,arguments);
- const q=typeof p==="string"?S:p;const c0=(q&&q.confined)||0;const Q=Q6(),e=S.emp.emo;const md=e&&e.v>=Q.v?(e.k==="gian"?1:e.k==="vui"?-1:0):0;const tk=eaTemper(S.emp).k;let mNew=null;
+ const q=typeof p==="string"?S:p;const c0=(q&&q.confined)||0;const Q=Q6(),e=S.emp.emo;const md=e&&e.v>=Q.v?(e.k==="gian"&&(e.t==null||e.t===(typeof emoKey==="function"?emoKey(q):""))?1:e.k==="vui"?-1:0):0;const tk=eaTemper(S.emp).k;let mNew=null;
  const l0=log;log=function(h){try{if(typeof h==="string"){const m=/bị cấm túc (\d+) tháng/.exec(h);if(m){const a=+m[1];mNew=Math.max(1,a+md*Q.mo);h=h.replace(m[0],`bị cấm túc ${mNew} tháng`).replace(/<\/span>$/,"")+` ${QUO_E[tk]}${md>0?"; ngài đang giận, phạt nặng thêm":md<0?"; ngài đang vui, phạt nhẹ đi":""}.</span>`;if(md)cnt(EA_N,md>0?"quoUp":"quoDn")}
   else if(/bị giáng xuống/.test(h))h=h.replace(/<\/span>$/,"")+` ${QUO_E[tk]}.</span>`}}catch(x){}return l0.apply(this,arguments)};
  let r;try{r=p0.apply(this,arguments)}finally{log=l0}
