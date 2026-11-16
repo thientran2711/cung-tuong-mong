@@ -10,7 +10,7 @@
      (e) 0 page errors.
    usage: node dev/test/act-audit.js <url of the build> <out.jsonl> [W]x[H]@dpr [scenario,…]
    Prints one JSON line per button run to <out.jsonl>; dev/test/act-audit-sum.py turns it into the ACT_AUDIT.md tables. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,URL,OUT,SZ,SC]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);
 const T0=Date.now(),lg=m=>console.error('['+Math.round((Date.now()-T0)/1000)+'s] '+m);
 const LIB=String.raw`

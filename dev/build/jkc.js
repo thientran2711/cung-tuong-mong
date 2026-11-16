@@ -601,7 +601,7 @@ try{KIT_GLOSS["Tin trong cung"]="Những gì ta biết thật về hậu cung, q
 function kcFamList(w){return S.kc.fam.filter(m=>m.alive&&(w==="ban"?/^ban/.test(m.r):!/^ban/.test(m.r)))}
 function kcFamActs(m){return deck.map((a,i)=>[a,i]).filter(([a])=>a.who===m.id)}
 function kcFamCard(m){const acts=kcFamActs(m);
- const rel=kitRelRow({kind:"quy",a:m.t,b:"ta",v:m.af})+kitRelRow({kind:"quy",a:"Ta",b:m.t.toLowerCase(),v:m.me})+(m.oan?kitRelRow({kind:"oan",a:m.t,b:"ta",v:m.oan}):"");
+ const rel=kitRel2([{head:`${m.t} → ta`,dir:"them",rows:[{w:"Thiện cảm",now:m.af==null?null:Math.round(m.af),kind:"good"}].concat(m.oan?[{w:"Oán",now:Math.round(m.oan),kind:"bad"}]:[]).map(r=>r.now==null?{w:r.w,unk:"chưa rõ"}:r)},{head:`Ta → ${m.t.toLowerCase()}`,dir:"me",rows:[m.me==null?{w:"Thiện cảm",unk:"chưa rõ"}:{w:"Thiện cảm",now:Math.round(m.me),kind:"good"}]}]);
  const tuyen=m.r==="muoi"||/^ban/.test(m.r)?[["Cùng đi tuyển tú",[`Sắc ${m.sac}`,`Tài ${m.tai}`,`Danh ${m.danh}`],"t"]]:[];
  return pcard({f:kcFace(m),col:kcFace(m).col,name:m.name,rank:m.t,lines:[`${m.age} tuổi`,`Tính ${m.tr.toLowerCase()}`,`Đang ở ${kcAt(m).toLowerCase()}`],note:rel,tabKey:"kcfam",
   groups:[["Việc",tuyen.concat(acts.map(([a,i])=>cardH(a,i)))]],empty:"Lúc này chưa có việc nào làm được với người này."})}
