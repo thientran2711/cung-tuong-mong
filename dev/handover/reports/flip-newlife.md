@@ -1,4 +1,4 @@
-# flip-newlife — SẴN SÀNG KIỂM 8e0bb094f3ca4b31f01523b544d5dfe5c4689f66 (review/flip-newlife, parent main 02a0d3f108)
+# flip-newlife — SẴN SÀNG KIỂM 9bea3721e55a72c35f487ced821e85804a371884 (review/flip-newlife; merged main c4e89f89; also fixes bug 4 empty-room text + bug 5 whole-name painter, see dev/PROGRESS_flip-newlife.md)
 - Root: week-0 palace flip queued in j93 KMQ inside start() while the Luân hồi identity card (NLP) is open; nothing reset queue/scenes on a new life. Reproduced on main (scene over the card).
 - Fix: j93 kmReset()/kmOnReset (queue, running-job gen, all .kmov/#kmrew/.kmfly/.kmalarm, podium, buổi transition) called from start() and slot load; jflip life token + busy() waits while NLP open (scene plays after "Nhận thân phận").
 - UI (kit only): "Tất cả" usable first; grey-card popover sits ON the tapped card (kpPop inside); shop rare tile has kitItem mark "hàng hiếm".

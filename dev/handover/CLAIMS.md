@@ -45,7 +45,7 @@
 | D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | session_01DgYSWnFEYrjgcFbBRjAWyc | RUNNING | 16/11 05:59Z |
 | promo-skip audit + fix (quest rewards → direct rank; prince → rank, princess → exam) | review/promo-skip | main s10 | session_01UV1SzhzQSFQc43nUVdpwAi | RUNNING | 16/11 06:20Z |
 | D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | PASS d16535c68 | 06:01Z 16/11 |
-| cardflip-newlife bug (overlay stays after new life + flip scene during Luân hồi identity card) + act-dedupe UI (usable first, popover, hàng hiếm label) | review/flip-newlife | main s10 | session_01UV1SzhXJHY3uWDTJeQ1dYH | READY FOR REVIEW 8e0bb094f3ca4b31f01523b544d5dfe5c4689f66 | 16/11 06:36Z |
+| cardflip-newlife bug (overlay stays after new life + flip scene during Luân hồi identity card) + act-dedupe UI (usable first, popover, hàng hiếm label) | review/flip-newlife | main s10 | session_01UV1SzhXJHY3uWDTJeQ1dYH | READY FOR REVIEW 9bea3721e55a72c35f487ced821e85804a371884 | 16/11 06:36Z |
 | kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | session_01UV1Szj1bf6YFPCryaDjdEi | RUNNING | 16/11 06:50Z |
 | ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | PAUSED (owner asleep) | 16/11 06:55Z |
 | ART D56 icons + Nội vụ phủ scene + 12 missing place glyphs | review/place-glyphs | main s10 | session_01UV1SzmEsuu42GCFecC9HGf | PAUSED (owner asleep) | 16/11 06:55Z |
