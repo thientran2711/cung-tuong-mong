@@ -7,7 +7,7 @@
   img/TN.json = {"v":1,"have":[N,...]} (the game uses a thumbnail only when it is listed; else the full picture as before).
   usage: python3 dev/art/tn_make.py <names.txt | -> [srcdir]   (srcdir holds por-N.webp / fig-N.webp; missing ones are fetched from the CDN)
   The list = every portrait the picker can show at a new game (ages 18-20 -> a18; ranks 0-3 -> t1..t4; palace maid start -> tm1 / plain maid),
-  made by dev/test/newgame-ui.js enum. Then: python3 dev/site/cdn_sync.py img/tn img/TN.json"""
+  made by dev/test/newgame-ui-enum.js. Then: python3 dev/site/cdn_sync.py img/tn img/TN.json"""
 import json, os, sys, urllib.request
 from PIL import Image
 R = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))

@@ -49,7 +49,7 @@ addEventListener("kittn",()=>{for(const k in FP_C)delete FP_C[k]});
   if(!(m&&m.nl&&fpOn()))return;const mb=$("mb");const kid=mb.querySelector(".kpid");if(!kid)return;
   const anchor=mb.querySelector(":scope > .kpnote")||mb.querySelector(":scope > .kpopts");const w=document.createElement("div");w.innerHTML=fpHTML();const sec=w.firstElementChild;
   if(anchor)mb.insertBefore(sec,anchor);else mb.appendChild(sec);dlg.classList.add("kfpon");
-  requestAnimationFrame(()=>kitPickerLayout(sec,false));
+  requestAnimationFrame(()=>kitPickerLayout(sec,false));(window.requestIdleCallback||(f=>setTimeout(f,400)))(fpWarm,{timeout:1500});
  }catch(e){console.error("fpick",e)}}})();
 /* her big portrait / standing figure on the card follow the pick */
 /* review/newgame-ui: a pick changes only what shows HER face — the selected cell (gold ring + check, in place), the small portrait, the
@@ -59,6 +59,9 @@ function fpSel(k){const r=document.querySelector("#modal .kpick[data-pick=face]"
 function fpRefresh(){try{const m=Q[0];if(!(m&&m.nl))return;m.faces=[[pMe(),S.name]];const sj=document.querySelector("#modal .kpid .kpsubj");if(sj)sj.innerHTML=pframe(pMe());
   fpSel(S.pid);if(typeof kpIdFig==="function")kpIdFig($("modal"))}catch(e){console.error(e)}}
 function fpPick(k){if(!fpOn())return;fpSel(k);if(!(FP88()?faceChoose(k):fpSet(k)))return;window.__fpDirty=1;fpRefresh()}
+/* the other tab is ready before she taps it: its items built and its thumbnails fetched + decoded in idle time */
+function fpWarm(){try{if(!FP88()||!fpOn())return;const cur=window.__fpF;const oth=cur==="maid"?"consort":"maid";window.__fpF=oth;let L;try{L=fpItems()}finally{window.__fpF=cur}
+ L.forEach(x=>{const s=x.face&&x.face.src;if(s&&!FP_PF[s]){const im=new Image();im.decoding="async";im.src=s;FP_PF[s]=im;im.decode&&im.decode().catch(()=>0)}})}catch(e){}}
 /* the crisp figure starts loading on touch-down, ~100 ms before the tap ends */
 document.addEventListener("pointerdown",e=>{try{const b=e.target.closest&&e.target.closest('#modal .kpick[data-pick=face] .kpki');if(!b)return;const x=fpItems().find(i=>i.k===b.dataset.pk);if(x&&x.fig&&!FP_PF[x.fig]){const im=new Image();im.src=x.fig;FP_PF[x.fig]=im}}catch(x){}},true);
 /* layout only (the look is the kit picker's): the scene panel keeps buttons visible, the picker takes the room that is left */
