@@ -1,6 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 Updated: 11/16/2026 — Foreman C started (account C). Wave 1: 6 reviewers + 1 worker (CPU cap: 4 cores).
-Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare NOT connected (no token on this environment) → new images stay under "PENDING CDN UPLOAD" in each branch's PROGRESS file and are listed below.
+Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
 | Item | Branch | Model | State |
