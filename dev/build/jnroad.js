@@ -41,18 +41,24 @@ function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!
  /* the player is her rival only for a real reason (she is cold to the player) and only for a few NPCs at once (BAL.nroad.meMax) */
  const meN=rivals.filter(x=>x!==v&&x.alive&&!x.out&&x.nr&&!x.nr.x&&x.nr.c==="me").length;const meOk=!isSrv()&&aff(v,S)<0&&meN<nrB().meMax;
  const L=liveRivals(true).filter(p=>p!==v).concat(meOk?[S]:[]);if(!L.length)return null;
- L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=key(p);return p}
+ L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(nrB().rvTop,L.length)))];N.c=key(p);return p}
 /* the stat the chapter's climax rewards (tamco, danh, duc, tai, sac, sung …) — read from the chapter data */
 const NRSK={tamco:"tamco",mat:"tamco",danh:"danh",duc:"duc",an:"duc",tai:"tai",thi:"tai",cam:"tai",ky:"tai",hoa:"tai",vu:"sac",sac:"sac",sung:"sung"};
 function nrStat(A){if(A&&A.sk)return A.sk;const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const b of P){const d=A.B&&A.B[b];for(const o of(d&&d.o||[]))for(const k in(o.w||{})){const s=NRSK[k];if(s)cnt[s]=(cnt[s]||0)+1}}}catch(e){}
  const k=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];return k||"tamco"}
 /* the ending of a chapter by its sign: the arc's own ending tag (E[*].tag) */
-function nrEnd(A,k){const E=A&&A.E||{};const ks=Object.keys(E).filter(x=>(E[x].k||0)===k);const x=ks.length?E[pick(ks)]:null;return x&&x.tag?plain(x.tag):""}
+/* r1: the tags are written to the player («… tên ngươi») — an NPC's ending speaks of her («nàng»); the rare ✦ endings are the player's
+   Cơ duyên hiếm (hidden conditions, OD:L39) and are never dealt to an NPC by the sign alone (scan: 17 tags with «ngươi», 47 ✦ of 327) */
+function nrTag(t,he){he=he||"nàng";const He=he[0].toUpperCase()+he.slice(1);return String(t||"").replace(/\bNgươi\b/g,He).replace(/\bngươi\b/g,he)}
+/* fix (voice, whole group): the narration's word for an NPC — a woman (consort, maid) «nàng», a man or eunuch «hắn» (the men news line) */
+function nrHe(p){try{if(!p)return"nàng";if(p.role==="eunuch"||p.sex==="m")return"hắn";if(typeof nrMenL==="function"&&nrMenL().some(e=>e.p===p))return"hắn"}catch(e){}return"nàng"}
+function nrEnd(A,k,he){const E=A&&A.E||{};const tg=x=>plain(E[x].tag||"");const ks=Object.keys(E).filter(x=>(E[x].k||0)===k&&tg(x)&&!/✦/.test(tg(x)));
+ const x=ks.length?pick(ks):null;return x?nrTag(tg(x),he):""}
 function nrTitle(r){const A=NRM[r]||ARC67[r];return A?plain(A.t):""}
 /* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, Lợi thế only after a won chapter like hers — a lost chapter
    gives no malus, so no losing spiral — and her help) */
 function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);return""}const B=nrB();const sk=nrStat(A);
- const b=B.base+(v[sk]||40)/B.div+(N.k>0?B.sc:0)+(N.hb||0);const p=odA(v,b);
+ const b=B.base+(v[sk]||B.st0)/B.div+(N.k>0?B.sc:0)+(N.hb||0);const p=odA(v,b);
  const k=roll(p)?1:roll(p/2)?0:-1;const riv=nrRival(v);const fx=k>0?B.fx.win:k<0?B.fx.lose:B.fx.mid;
  const own={};for(const z in fx)if(z!=="pow")own[z]=fx[z];ap(v,own);if(v.suc!=null)v.suc=cl(v.suc,0,100);
  try{if(fx.pow){const c=clanOf(v);if(c&&typeof tdPowAdd==="function")tdPowAdd(c,fx.pow)}}catch(e){}
@@ -70,21 +76,30 @@ function nrAsk(v){try{if(isSrv()||S.out)return false;const N=v.nr;if(N.c==="me")
 const NRHK={emp:"emp",th:"th",hh:"hh",dad:"thu",bro:"thu",off:"thu",man:"thu",envoy:"thu",mom:"thu",v:"do",foe:"do",foed:"do",v2:"do",eun:"do",gd:"do",doc:"y",maid:"che",mis:"che",kid:"che",mama:"che"};
 function nrKind(A){const w=A&&A.w;let k=NRHK[w]||"bac";try{const B=A.B||{};const ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}return k}
 function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function"||!T72I["nr_"+nrKind(A)])return false;const q=q72();if(!q)return false;
- const hk=nrKind(A);if(q.ch.some(c=>c.ri===v.id&&/^nr_/.test(c.tid))||q.a.some(x=>x.ri===v.id&&/^nr_/.test(x.tid)))return false;
+ const hk=nrKind(A);if(q.ch.concat(q.a).some(c=>nrIsV(c,v)&&/^nr_/.test(c.tid)))return false;
  if(typeof rgL==="function"){try{const L=rgL();if(v.queen&&L.hh&&!L.hh.done&&L.hh.st>0)return false}catch(e){}}
  const riv=nrRival(v);const bk=riv&&riv!==S?(riv.queen?"hh":"rv"):null;
  q.ch.push({tid:"nr_"+hk,at:wk(),rk:v.queen?"hh":"rv",ri:v.id,bk,bi:bk?riv.id:null,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 /* result of the help hồi → her chapter (called by the j72 outcome fn) */
-function nrHelped(X,how){try{const v=X.A&&X.A.o;if(!v||!v.nr)return"";const N=v.nr,B=nrB();N.hs=2;
- if(how>0){N.hb=B.help;return ` ${v.name} ghi nhớ ơn này; chương «${nrChT(v)}» của nàng thêm phần chắc.`}
- if(how<0){N.hb=-B.help;return ` ${v.name} biết ngươi bán đứng nàng; chương «${nrChT(v)}» của nàng thêm khó.`}
+function nrHelped(X,how){try{const v=X.A&&X.A.o;if(!v||!v.nr)return"";const N=v.nr,B=nrB(),he=nrHe(v);N.hs=2;
+ if(how>0){N.hb=B.help;return ` ${v.name} ghi nhớ ơn này; chương «${nrChT(v)}» của ${he} thêm phần chắc.`}
+ if(how<0){N.hb=-B.help;return ` ${v.name} biết ngươi bán đứng ${he}; chương «${nrChT(v)}» của ${he} thêm khó.`}
  return""}catch(e){console.error(e);return""}}
 function nrChT(v){const A=nrCh(v.nr.r,v.nr.n);return A?plain(A.t):""}
+/* fix (whole group: consorts, maids, eunuchs, men): the asker is matched by kind AND id (a consort id may equal a servant sid) */
+const nrIsV=(x,v)=>x.ri===v.id&&(x.rk==="rv"||x.rk==="hh");
+function nrHoldM(f){try{const q=q72();if(q.a.some(x=>/^nr_/.test(x.tid)&&f(x)))return true;
+ for(let i=q.ch.length-1;i>=0;i--)if(/^nr_/.test(q.ch[i].tid)&&f(q.ch[i]))q.ch.splice(i,1)}catch(e){}return false}
+function nrHold(v){return nrHoldM(x=>nrIsV(x,v))}
+const nrSameA=(x,rk,ri)=>x.rk===rk&&(x.ri??null)===(ri??null);
 /* the month: every live NPC road whose chapter is due plays it (host only) */
 function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev="";
  for(const v of rivals.slice()){try{if(!v.alive||v.out){if(v.nr&&!v.nr.x)v.nr.x=1;continue}
   const N=v.nr||nrInit(v);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrAsk(v)&&nrOffer(v))continue;
+  /* r1: her help hồi decides THIS chapter — wait while the player works on it (j72 deadline ends it); a request j72 never got to show
+     (offer caps / busy weeks) is withdrawn when the chapter falls due: she plays it alone */
+  if(N.hs===1&&nrHold(v))continue;
   const r=nrPlay(v);if(!r)continue;
   const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.riv===S||news<B.newsMo){log(line);news++}
@@ -92,7 +107,10 @@ function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev=""
  try{news=nrMMonth(news)}catch(e){console.error(e)}
  try{if(typeof nrMenMonth==="function")nrMenMonth(news)}catch(e){console.error(e)}
  return ev}
-(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=nrMonth()}catch(e){console.error(e)}return ev}})();
+/* hooked on rivalsMonth (not monthTick): every month route calls it — the palace month (j3 monthTick), a player who lives as a kẻ hầu
+   (j42 srvMonth) and a player still at home (jkc) — so NPC roads never freeze while she is not a consort (r1 fix). S.out is 1 inside
+   the srvW/kcW wrappers, so she is neither asked nor cast as a rival there (nrAsk / nrRival). */
+(function(){if(typeof rivalsMonth!=="function")return;const m0=rivalsMonth;rivalsMonth=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=nrMonth()}catch(e){console.error(e)}return ev}})();
 /* a maid raised to consort keeps who she was: a raised maid's road is a cn road (Cung nữ được sủng hạnh) */
 window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMonth;window.nrPlay=nrPlay;
 
@@ -101,42 +119,50 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
 (function(){if(typeof T7!=="function")return;const C=q72C,O=q72O,B=()=>BAL.nroad;
  const bac=()=>{const R0=B().bacRk;let i=0;for(const r of R0)if(S.rank>=r)i++;return -B().bac[Math.min(i,B().bac.length-1)]};
  const nr=X=>{const v=X.A&&X.A.o;return v&&v.nr?v.nr:null};
- const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n} «${A?plain(A.t):""}»`:X.A.n};
+ const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n}${A&&A.t?` «${plain(A.t)}»`:""}`:X.A.n};
  head.toString=()=>"Tuyến truyện riêng của một người trong cung";/* j72 logs plain(T.t) when the asker is gone */
- /* who speaks (VANPHONG §2): a consort says ta and calls the player tỷ tỷ / muội muội; a maid (sv/rsv/maid) says nô tỳ and calls her
-    tiểu chủ / nương nương by rank (tsGoi); a man (U3) says thần / nô tài by his kind (nrVoice) */
+ /* VANPHONG §2: Hoàng hậu = bổn cung / muội muội; a peer consort = tỷ (higher rank) or muội (lower) and calls the player the other */
+ const hi=X=>{const v=X.A&&X.A.o;return !!(v&&(v.queen||v.rank>S.rank))};
+ /* who speaks (VANPHONG §2): a maid (sv/rsv/maid) says nô tỳ and calls the player tiểu chủ / nương nương by rank (tsGoi); a man (U3)
+    says thần / nô tài / bản vương by his kind (nrVoice); a consort as above */
  const mv=X=>typeof nrVoice==="function"?nrVoice(X):null;
  const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
- const call=X=>{const m=mv(X);if(m)return cap(m.call);const v=X.A&&X.A.o;return v&&v.rank>S.rank?"Muội muội":"Tỷ tỷ"};
- const me=X=>{const m=mv(X);return m?m.me:"ta"};
+ const call=X=>{const m=mv(X);return m?cap(m.call):hi(X)?"Muội muội":"Tỷ tỷ"};
+ const me=X=>{const m=mv(X);if(m)return m.me;const v=X.A&&X.A.o;return v&&v.queen?"bổn cung":hi(X)?"tỷ":"muội"};
+ const Me=X=>cap(me(X));
  const ok={r:0,d:1,fn:X=>nrHelped(X,1)},bad={fn:X=>nrHelped(X,-1)};
- const def=(k,h,steps)=>T7("nr_"+k,"social",{fu:1,r:"rv",t:head,h,dl:B().dl,s:[steps],ok:Object.assign({},ok,{r:B().rel}),no:{r:-4},bad:Object.assign({},bad,{r:B().relBad,rb:B().relB})});
- const betray=O("Đem chuyện mách cho {B}",{t:X=>!!X.B,tw:"không có ai để mách",c:{duc:-3},k:1,to:"bad",rb:0});
+ const def=(k,h,steps)=>T7("nr_"+k,"social",{fu:1,r:"rv",t:head,h,dl:B().dl,s:[steps],ok:Object.assign({},ok,{r:B().rel}),no:{get r(){return -B().no}},bad:Object.assign({},bad,{r:B().relBad,rb:B().relB})});
+ const betray=O("Đem chuyện mách cho {B}",{t:X=>!!X.B,tw:"không có ai để mách",c:{get duc(){return -B().op.betray}},k:1,to:"bad",rb:0});
  def("emp",X=>`“Việc của ${me(X)} đến tai Hoàng thượng rồi. ${call(X)} được gần thánh giá, xin nói giúp ${me(X)} một lời.”`,C("Nói giúp trước mặt Hoàng thượng",
-  O("Nhân lúc hầu Hoàng thượng, khéo nhắc đến nàng",{c:{suc:-B().suc},p:55,sk:"sung",l:{sung:-3},lx:"Hoàng thượng phật ý vì ngươi xen vào",to:"ok"}),
-  O("Dâng lễ nhờ người thân cận đỡ lời",{c:{get bac(){return bac()}},p:75,sk:"tamco",l:{danh:-2},lx:"lễ bị trả về, người ta bàn tán",to:"ok"}),betray));
+  O(X=>`Nhân lúc hầu Hoàng thượng, khéo nhắc đến ${nrHe(X.A&&X.A.o)}`,{c:{suc:-B().suc},p:B().op.pS,sk:"sung",l:{sung:-B().op.l3},lx:"Hoàng thượng phật ý vì ngươi xen vào",to:"ok"}),
+  O("Dâng lễ nhờ người thân cận đỡ lời",{c:{get bac(){return bac()}},p:B().op.pB,sk:"tamco",l:{danh:-B().op.l2},lx:"lễ bị trả về, người ta bàn tán",to:"ok"}),betray));
  def("th",X=>`“Thái hậu đang nghe lời gièm về ${me(X)}. ${call(X)} thường đến Đức Thọ cung, xin đỡ cho ${me(X)}.”`,C("Đỡ lời trước Thái hậu",
-  O("Hầu Thái hậu một buổi, nói đỡ cho nàng",{c:{suc:-B().suc},p:55,sk:"duc",l:{duc:-2},lx:"Thái hậu chê ngươi lắm lời",to:"ok"}),
-  O("Dâng Thái hậu một lễ thay lời",{c:{get bac(){return bac()}},p:75,sk:"duc",l:{danh:-2},lx:"Thái hậu cho là ngươi mua lòng",to:"ok"}),betray));
+  O(X=>`Hầu Thái hậu một buổi, nói đỡ cho ${nrHe(X.A&&X.A.o)}`,{c:{suc:-B().suc},p:B().op.pS,sk:"duc",l:{duc:-B().op.l2},lx:"Thái hậu chê ngươi lắm lời",to:"ok"}),
+  O("Dâng Thái hậu một lễ thay lời",{c:{get bac(){return bac()}},p:B().op.pB,sk:"duc",l:{danh:-B().op.l2},lx:"Thái hậu cho là ngươi mua lòng",to:"ok"}),betray));
  def("hh",X=>`“Trung cung đang để mắt đến ${me(X)}. ${call(X)} nói được với Hoàng hậu, xin nói giúp một câu.”`,C("Đỡ lời trước Hoàng hậu",
-  O("Thỉnh an Hoàng hậu, khéo nhắc đến nàng",{c:{suc:-B().suc},p:55,sk:"duc",l:{duc:-2},lx:"Hoàng hậu nghi ngươi kết bè",to:"ok"}),
-  O("Dâng lễ Khôn Ninh cung",{c:{get bac(){return bac()}},p:75,sk:"tamco",l:{danh:-2},lx:"lễ bị trả về",to:"ok"}),betray));
- def("thu",X=>`“${cap(me(X))} có một lá thư phải đến tay người nhà, không được qua tay Kính sự phòng. ${call(X)} giúp ${me(X)}.”`,C("Đưa thư ra ngoài cung",
-  O("Nhờ thái giám của mình mang ra",{c:{get bac(){return bac()}},p:75,sk:"mat",l:{danh:-3},lx:"thư bị chặn, tên ngươi dính vào",to:"ok"}),
-  O("Gửi theo người nhà mình vào thăm",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-3},lx:"người nhà bị khám, thư bị lộ",to:"ok"}),betray));
- def("do",X=>`“${cap(me(X))} cần biết ${X.B?X.B.n:"kẻ kia"} đang tính gì. ${call(X)} có tai mắt, giúp ${me(X)} dò một chuyện.”`,C("Dò la giúp nàng",
-  O("Sai người dò la",{c:{get bac(){return bac()}},p:70,sk:"mat",l:{danh:-2},lx:"người của ngươi bị bắt gặp",to:"ok",rb:-4}),
-  O("Tự đi hỏi chuyện",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"ngươi bị nghi là tai mắt",to:"ok",rb:-4}),betray));
+  O(X=>`Thỉnh an Hoàng hậu, khéo nhắc đến ${nrHe(X.A&&X.A.o)}`,{c:{suc:-B().suc},p:B().op.pS,sk:"duc",l:{duc:-B().op.l2},lx:"Hoàng hậu nghi ngươi kết bè",to:"ok"}),
+  O("Dâng lễ Khôn Ninh cung",{c:{get bac(){return bac()}},p:B().op.pB,sk:"tamco",l:{danh:-B().op.l2},lx:"lễ bị trả về",to:"ok"}),betray));
+ def("thu",X=>`“${Me(X)} có một lá thư phải đến tay người nhà, không được qua tay Kính sự phòng. ${call(X)} giúp ${me(X)}.”`,C("Đưa thư ra ngoài cung",
+  O("Nhờ thái giám của mình mang ra",{c:{get bac(){return bac()}},p:B().op.pB,sk:"mat",l:{danh:-B().op.l3},lx:"thư bị chặn, tên ngươi dính vào",to:"ok"}),
+  O("Gửi theo người nhà mình vào thăm",{c:{suc:-B().suc},p:B().op.pS,sk:"tamco",l:{danh:-B().op.l3},lx:"người nhà bị khám, thư bị lộ",to:"ok"}),betray));
+ def("do",X=>`“${Me(X)} cần biết ${X.B?X.B.n:"kẻ kia"} đang tính gì. ${call(X)} có tai mắt, giúp ${me(X)} dò một chuyện.”`,C(X=>`Dò la giúp ${nrHe(X.A&&X.A.o)}`,
+  O("Sai người dò la",{c:{get bac(){return bac()}},p:B().op.pDo,sk:"mat",l:{danh:-B().op.l2},lx:"người của ngươi bị bắt gặp",to:"ok",get rb(){return -B().op.rbDo}}),
+  O("Tự đi hỏi chuyện",{c:{suc:-B().suc},p:B().op.pS,sk:"tamco",l:{danh:-B().op.l2},lx:"ngươi bị nghi là tai mắt",to:"ok",get rb(){return -B().op.rbDo}}),betray));
  def("y",X=>`“Bệnh này không thể để Thái y viện ghi sổ. ${call(X)} quen thái y, xin mời người đến xem kín cho ${me(X)}.”`,C("Mời thái y xem kín",
-  O("Mời thái y quen, trả công hậu",{c:{get bac(){return bac()}},p:75,sk:"y",l:{danh:-2},lx:"Thái y viện ghi tên ngươi",to:"ok"}),
-  O("Tự sắc thuốc mang sang",{c:{suc:-B().suc},p:50,sk:"y",l:{duc:-2},lx:"thuốc không hợp, nàng trách ngươi",to:"ok"}),betray));
- def("che",X=>mv(X)&&mv(X).sv?`“${cap(me(X))} đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho ${me(X)} ít hôm.”`:`“Người của ${me(X)} đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho nàng ấy ít hôm.”`,C("Che chở người của nàng",
-  O("Cho ở nhờ cung mình",{c:{suc:-B().suc},p:60,sk:"tamco",l:{danh:-3},lx:"người ta bàn ngươi chứa kẻ có tội",to:"ok"}),
-  O("Bỏ bạc lo chỗ khác",{c:{get bac(){return bac()}},p:75,sk:"mat",l:{danh:-2},lx:"chỗ ấy không kín",to:"ok"}),betray));
- def("bac",X=>`“${cap(me(X))} đang cần bạc gấp, việc nhà không thể nói ra. ${call(X)} giúp ${me(X)} lần này, ${me(X)} không quên.”`,C("Giúp nàng việc bạc",
+  O("Mời thái y quen, trả công hậu",{c:{get bac(){return bac()}},p:B().op.pB,sk:"y",l:{danh:-B().op.l2},lx:"Thái y viện ghi tên ngươi",to:"ok"}),
+  O("Tự sắc thuốc mang sang",{c:{suc:-B().suc},p:B().op.pY,sk:"y",l:{duc:-B().op.l2},lx:X=>`thuốc không hợp, ${nrHe(X.A&&X.A.o)} trách ngươi`,to:"ok"}),betray));
+ def("che",X=>mv(X)&&mv(X).sv?`“${Me(X)} đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho ${me(X)} ít hôm.”`:`“Người của ${me(X)} đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho nàng ấy ít hôm.”`,C(X=>mv(X)&&mv(X).sv?`Che chở ${nrHe(X.A&&X.A.o)}`:`Che chở người của ${nrHe(X.A&&X.A.o)}`,
+  O("Cho ở nhờ cung mình",{c:{suc:-B().suc},p:B().op.pChe,sk:"tamco",l:{danh:-B().op.l3},lx:"người ta bàn ngươi chứa kẻ có tội",to:"ok"}),
+  O("Bỏ bạc lo chỗ khác",{c:{get bac(){return bac()}},p:B().op.pB,sk:"mat",l:{danh:-B().op.l2},lx:"chỗ ấy không kín",to:"ok"}),betray));
+ def("bac",X=>`“${Me(X)} đang cần bạc gấp, việc nhà không thể nói ra. ${call(X)} giúp ${me(X)} lần này, ${me(X)} không quên.”`,C(X=>`Giúp ${nrHe(X.A&&X.A.o)} việc bạc`,
   O("Cho mượn bạc",{c:{get bac(){return bac()}},k:1,to:"ok",l:{},lx:"bạc ra khỏi tay ngươi"}),
-  O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"việc không xong, nàng mất lòng tin",to:"ok"}),betray));
+  O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:B().op.pS,sk:"tamco",l:{danh:-B().op.l2},lx:X=>`việc không xong, ${nrHe(X.A&&X.A.o)} mất lòng tin`,to:"ok"}),betray));
 })();
+
+/* r1: an NPC-road request reaches j72 through its follow-up queue (q.ch), so j72 would print «Lại là {A}: chuyện lần trước còn tiếp.» —
+   false here (it is her FIRST ask on this road; true information only, HANDOVER L46): the offer is shown as a plain new request */
+(function(){if(typeof PEND!=="object"||typeof PEND.q72o!=="function")return;const f=PEND.q72o;
+ PEND.q72o=pp=>f(pp&&pp.x&&/^nr_/.test(pp.x.tid)&&pp.how==="fu"?Object.assign({},pp,{how:""}):pp)})();
 
 /* ---------- her road on her person card (Hậu cung): one more row of the kit person card (.pcinfo span, the j85/j24 pattern) ---------- */
 function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!(ARC67[N.r]||NRM[N.r]))return"";const T=nrTitle(N.r);
@@ -167,28 +193,30 @@ function nrAf(x,y,n){if(!x||!y||y.sid==null||!n)return;x.af=x.af||{};x.af[y.sid]
 function nrMRival(s){const N=s.nr;const ms=nrMis(s);const L=nrServL(nrRole(s)).filter(x=>x!==s&&nrMis(x)!==ms);
  if(N.c!=null){const p=L.find(x=>nrMid(x)===N.c);if(p)return p;N.rc=N.cn||"";N.c=null}
  if(!L.length)return null;const af=x=>(s.af&&x.sid!=null&&s.af[x.sid])||0;L.sort((a,b)=>af(a)-af(b));
- const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=nrMid(p);N.cn=p.name;return p}
+ const p=L[Math.min(L.length-1,R(Math.min(nrB().rvTop,L.length)))];N.c=nrMid(p);N.cn=p.name;return p}
 function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;return null}const B=nrB(),M=B.m;
- const p=cl(Math.round(B.base+nrMStat(s)/B.div+(N.k>0?B.sc:0)+(N.hb||0)),5,95);
+ const p=odA(s,B.base+nrMStat(s)/B.div+(N.k>0?B.sc:0)+(N.hb||0));
  const k=roll(p)?1:roll(p/2)?0:-1;const riv=nrMRival(s);const fx=k>0?M.fx.win:k<0?M.fx.lose:M.fx.mid;
  for(const z in fx){if(z==="mp"&&s.sid==null)continue;s[z]=cl((s[z]||0)+fx[z],0,100)}
  const ms=nrMis(s);const mf=k>0?M.mis.win:k<0?M.mis.lose:null;if(ms&&mf)ap(ms,mf);
  if(riv){if(k>0)nrAf(riv,s,-M.af);else if(k<0)nrAf(s,riv,-M.af)}
- const tag=nrEnd(A,k);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ const tag=nrEnd(A,k,nrHe(s));N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
  N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
- const rc=N.rc?` ${N.rc} nay không còn ở đây, kẻ đứng đối mặt nàng là ${riv?riv.name:"người khác"}.`:"";N.rc="";
+ const rc=N.rc?` ${N.rc} nay không còn ở đây, kẻ đứng đối mặt ${nrHe(s)} là ${riv?riv.name:"người khác"}.`:"";N.rc="";
  return {n:n0,t:plain(A.t),tag,k,rc,riv,ms}}
 /* motive to ask the player: her own maid asks when her loyalty is high; another house's maid only when the player is close to her
    mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
 function nrMAsk(s){try{if(isSrv()||S.out)return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
  if(aff(ms,S)>=nrB().askRel)return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
 function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
- const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>c.rk===rk&&c.ri===ri&&/^nr_/.test(c.tid)))return false;
+ const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMRival(s);const bb=riv?nrMK(riv):[null,null];
  q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk:bb[0],bi:bb[1],p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMMonth(news){const B=nrB();let n=news||0;
  for(const s of nrMaidL().concat(nrServL("eunuch"))){try{const N=s.nr||nrMInit(s);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrMAsk(s)&&nrMOffer(s))continue;
+  /* fix (r1 finding 6, whole group): her help hồi decides THIS chapter — wait while the player works on it; an unshown request is withdrawn */
+  if(N.hs===1){const [rk,ri]=nrMK(s);if(nrHoldM(x=>nrSameA(x,rk,ri)))continue}
   const r=nrMPlay(s);if(!r)continue;const mine=r.ms===S;
   const who=mine?`${s.name}, người hầu của ngươi`:r.ms?`${s.name}, người hầu của ${r.ms.name}`:s.name;
   const line=`<span class="past">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;

@@ -100,7 +100,7 @@ function nrCWho(k){return k==="me"?S:RV(k)}
 function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
  if(e.g==="men"){const L=(S.men||[]).filter(m=>m!==e.p&&m.alive!==false&&m.id!=="m96");const p=N.c!=null&&L.find(m=>m.id===N.c);if(p)return p;if(N.c!=null){N.rc=N.cn||"";N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.id;N.cn=q.name;return q}
  if(e.g==="off"){const T=trS();const L=Object.keys(T.H).filter(c=>c!==e.c);if(N.c&&L.includes(N.c))return N.c;if(!L.length)return null;
-  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(2,L.length)))];return N.c}
+  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(nrB().offTop,L.length)))];return N.c}
  if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.name;return q}
  /* court men: the consort he leans toward (patron pk) and the one he leans against (c), from his af (key "me" = the player) */
  const C=liveRivals(true).concat(S.out||S.dead?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
@@ -109,10 +109,10 @@ function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
  return nrCWho(N.c)}
 const nrMy=k=>allKids().some(z=>z[0]===k&&!z[1]);
 function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;return null}const B=nrB(),M=B.men;
- const pr=cl(Math.round(B.base+nrMenStat(e)/B.div+(N.k>0?B.sc:0)+(N.hb||0)),5,95);const k=roll(pr)?1:roll(pr/2)?0:-1;
+ const pr=odA(p,B.base+nrMenStat(e)/B.div+(N.k>0?B.sc:0)+(N.hb||0));const k=roll(pr)?1:roll(pr/2)?0:-1;
  const riv=nrMenRival(e);let me="",hit=false;const w=k>0?"win":"lose";
- if(e.g==="men"){const fx=k>0?M.men.fx.win:k<0?M.men.fx.lose:M.men.fx.mid;for(const z in fx)p[z]=cl((p[z]||50)+fx[z],0,100);
-  if(riv&&k!==0)riv.loyal=cl((riv.loyal||50)+M.men.rv[w],0,100)}
+ if(e.g==="men"){const fx=k>0?M.men.fx.win:k<0?M.men.fx.lose:M.men.fx.mid;for(const z in fx)p[z]=cl((p[z]||B.loy0)+fx[z],0,100);
+  if(riv&&k!==0)riv.loyal=cl((riv.loyal||B.loy0)+M.men.rv[w],0,100)}
  else if(e.g==="off"){const ally=NRM[N.r].ally;if(k!==0){tdPowAdd(e.c,M.off.pow[w]);if(riv){tdPowAdd(riv,M.off.rv[w]);tdRelAdd(e.c,riv,ally?(k>0?M.off.ally:-M.off.ally):-M.off.rel)}}
   if(riv&&riv===tdHouse(S)&&k!==0){hit=true;me=ally?(k>0?" Nhà ngươi thêm một chỗ dựa.":" Nhà ngươi với phủ ấy thêm hiềm khích."):(k>0?" Nhà ngươi bị lấn một bước.":" Nhà ngươi bớt một mối lo.")}}
  else if(e.g==="hz"){const fx=k>0?M.hz.fx.win:k<0?M.hz.fx.lose:M.hz.fx.mid;for(const z in fx)p[z]=cl((p[z]||0)+fx[z],0,100);
@@ -120,7 +120,7 @@ function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N
  else{/* court */const pk=N.pk,ck=N.c;p.af=p.af||{};if(pk!=null&&k!==0){p.af[pk]=cl((p.af[pk]||0)+(k>0?M.court.af:-M.court.af),-100,100);
    if(k>0&&ck!=null)p.af[ck]=cl((p.af[ck]||0)-M.court.af,-100,100);if(k<0){const pp=nrCWho(pk);if(pp)ap(pp,{danh:-M.court.danh})}}
   if(k!==0&&(pk==="me"||ck==="me")){hit=true;me=pk==="me"?(k>0?" Hắn nghiêng về phía ngươi thêm một phần.":" Hắn vấp ngã, ngươi mang tiếng lây."):(k>0?" Hắn càng xa ngươi.":"")}}
- const tag=nrEnd(A,k);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ const tag=nrEnd(A,k,"hắn");N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
  N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
  const rn=riv&&typeof riv==="object"?(riv===S?"ngươi":riv.name):typeof riv==="string"?(TDOFF[riv]||riv):"người khác";
  const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt hắn là ${rn}.`:"";N.rc="";
@@ -131,12 +131,14 @@ function nrMenAsk(e){try{if(isSrv()||S.out||!e.a)return false;const M=nrB().men,
  if(e.g==="men")return (p.tinh||0)>=M.askTinh;const af=(p.af&&p.af.me)||0;if(af>=M.askAf)return true;
  if(e.g==="off"){const h=tdHouse(S);return !!(h&&tdRel(e.c,h)>=M.askRel)}return false}catch(x){return false}}
 function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
- const [rk,ri]=e.a;if(q.ch.concat(q.a).some(c=>c.rk===rk&&c.ri===ri&&/^nr_/.test(c.tid)))return false;
+ const [rk,ri]=e.a;if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMenRival(e);let bk=null,bi=null;if(e.g==="men"&&riv){bk="man";bi=riv.id}else if(e.g==="off"&&riv){bk="off";bi=riv}else if(e.g==="court"&&riv&&riv!==S){bk=riv.queen?"hh":"rv";bi=riv.id}
  q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMenMonth(news){const B=nrB();let n=news||0;
  for(const e of nrMenL()){try{const N=e.p.nr||nrMenInit(e);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrMenAsk(e)&&nrMenOffer(e))continue;
+  /* fix (r1 finding 6, whole group): his help hồi decides THIS chapter — wait while the player works on it; an unshown request is withdrawn */
+  if(N.hs===1&&e.a&&nrHoldM(x=>nrSameA(x,e.a[0],e.a[1])))continue;
   const r=nrMenPlay(e);if(!r)continue;
   const line=`<span class="past">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.hit||n<B.newsMo){log(line);n++}}catch(x){console.error(x)}}
