@@ -387,12 +387,24 @@ function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",s
  /* a scolding never uses the warm words (no "con" / "ái phi" while she is being told off); praise follows the real relation */
  const bad=/scold|dislike|jealous|tease/.test(k);let m;try{m=sp?kAddr(sp,S).m:"cool"}catch(e){m="cool"}if(bad&&m==="warm")m="cool";if(!bad&&m==="cold")m="cool";
  return kLine("toil:"+k+":"+sub,P[sub]||P.any,{sp,ls:S,m})}
+/* gain / loss line in the palace voice (VANPHONG §2.5): a gesture of the person (pool, no repeat) — then the plain why + numbers, unchanged */
+const TOIL_GEST={
+ "th+":["Thái hậu khẽ gật đầu, tràng hạt trong tay lần chậm lại","Khóe môi Thái hậu thoáng một nét cười","Thái hậu cho ta ngồi gần hơn thường lệ","Ánh mắt Thái hậu dịu đi đôi phần","Thái hậu sai ma ma rót thêm cho ta chén trà nóng"],
+ "th-":["Thái hậu đặt chén trà xuống, tiếng sứ chạm bàn khô khốc","Thái hậu nhìn ta một lượt rồi quay đi, chẳng nói thêm","Cả điện lặng đi khi Thái hậu khẽ nhíu mày","Tràng hạt trong tay Thái hậu dừng lại giữa chừng","Ma ma đứng hầu cúi gằm mặt, chẳng dám nhìn ta"],
+ "hh+":["Hoàng hậu mỉm cười, giọng ôn tồn hẳn","Hoàng hậu khẽ vỗ tay ta, ra chiều hài lòng","Hoàng hậu gọi ta ngồi bên phải, chỗ của người được nể","Ánh mắt Hoàng hậu lướt qua ta, có phần tán thưởng"],
+ "hh-":["Hoàng hậu vẫn cười, nhưng ý cười chẳng tới đáy mắt","Hoàng hậu phẩy nhẹ khăn tay, chuyển sang chuyện khác","Các phi tần đưa mắt nhìn nhau khi Hoàng hậu lên tiếng","Hoàng hậu chẳng nói nặng lời, mà lời nào cũng như kim"],
+ "emp+":["Hoàng thượng nhìn ta lâu hơn thường lệ","Hoàng thượng bật cười, bao mệt mỏi như tan đi","Hoàng thượng nắm lấy tay ta, chẳng vội buông","Ánh nến lay lay, ánh mắt Hoàng thượng chẳng rời ta"],
+ "emp-":["Hoàng thượng khẽ nhíu mày rồi cầm tấu chương lên","Hoàng thượng ngồi chưa ấm chỗ đã gọi người hầu trà","Hoàng thượng chỉ ừ một tiếng, chẳng hỏi han gì thêm","Ánh mắt Hoàng thượng lướt qua ta rồi dừng ở nơi khác"],
+ "v+":["Nàng ta nắm tay ta, giọng thân mật hẳn","Nàng ta ghé lại gần, cười như chị em lâu ngày","Nàng ta khen ta trước mặt mọi người"],
+ "v-":["Nàng ta cười, nhưng tay vò nát chiếc khăn lụa","Nàng ta liếc ta một cái, sắc như dao","Nàng ta quay sang thì thầm với người bên cạnh","Nàng ta phe phẩy quạt, giọng mát như nước giếng"]};
+function toilLit(r){const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
+ const g=TOIL_GEST[k]?kLine("toil-gest:"+k,TOIL_GEST[k]):"";return (g?g+" — ":"")+r.line+"."}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
 function toilReact(r){TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
-  const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${r.line}.</p>${more}`;
+  const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
   const nm=r.name||who,boss=r.host==="th"||r.host==="emp"||(r.host&&r.host.queen),them=lv=>lv?nm:boss?"bề trên":"nàng ta";

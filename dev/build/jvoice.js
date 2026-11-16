@@ -81,5 +81,21 @@ function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m|
   const line=pickFrom[Math.floor(Math.random()*pickFrom.length)];
   try{mem[line]=t;const ks=Object.keys(mem);if(ks.length>40)for(const k of ks)if(t-mem[k]>gap*4)delete mem[k]}catch(e){}
   return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
+/* ---- outcome flavour (VANPHONG §2.5): one short court-voice sentence before the plain numbers of a talk / visit result ----
+   kOutcome(kind, ok): kind = the person's kind on the stage (th, emp, hh, rival, fallen, maid, ksp, ty, elder, man, kid); pooled, no repeat */
+const OUT={
+ th:{ok:["Thái hậu khẽ gật đầu, tràng hạt lần chậm lại","Thái hậu cho ngồi, sai người dâng trà sen","Thái hậu cười hiền, hỏi han đôi câu chuyện nhà","Thái hậu nghe xong, vẻ mặt dịu đi hẳn","Ma ma Đức Thọ cung tiễn ta ra tận cửa"],
+  no:["Thái hậu chỉ ừ một tiếng, rồi nhắm mắt lần tràng hạt","Thái hậu bảo mệt, cho lui sớm","Thái hậu nhìn ta một lượt, chẳng nói thêm","Lời ta chưa dứt, Thái hậu đã chuyển sang chuyện khác"]},
+ hh:{ok:["Hoàng hậu mỉm cười, giọng ôn tồn hẳn","Hoàng hậu gọi ta ngồi gần, hỏi chuyện cung ta","Hoàng hậu khen ta biết lễ trước mặt các cung","Hoàng hậu sai người gói điểm tâm cho ta mang về"],
+  no:["Hoàng hậu vẫn cười, nhưng ý cười chẳng tới đáy mắt","Hoàng hậu phẩy khăn, chuyển sang hỏi người khác","Các phi tần đưa mắt nhìn nhau, Hoàng hậu chẳng nói gì","Hoàng hậu bảo ta về nghỉ sớm, giọng nhạt như nước"]},
+ emp:{ok:["Hoàng thượng bật cười, mệt mỏi như tan đi","Hoàng thượng nắm tay ta, chẳng vội buông","Hoàng thượng gác bút, ngồi nghe ta nói hết","Ánh mắt Hoàng thượng dừng ở ta lâu hơn thường lệ"],
+  no:["Hoàng thượng ừ một tiếng rồi cầm tấu chương lên","Hoàng thượng khẽ nhíu mày, chẳng nói thêm","Hoàng thượng phất tay cho lui","Hoàng thượng đang bận lòng việc triều, chẳng để ý lời ta"]},
+ rival:{ok:["Nàng ta nắm tay ta, cười như chị em lâu ngày","Nàng ta tiễn ta ra tận cửa cung","Hai bên trò chuyện rôm rả, chén trà nguội lúc nào chẳng hay","Nàng ta ghé tai kể cho ta mấy chuyện trong cung"],
+  no:["Nàng ta cười nhạt, tay mân mê chén trà","Nàng ta bảo đang mệt, chẳng tiện tiếp lâu","Lời qua tiếng lại, ai cũng giữ ý","Nàng ta phe phẩy quạt, giọng mát như nước giếng"]},
+ maid:{ok:["Người hầu cúi đầu vâng dạ, mắt sáng lên","Kẻ dưới thấy ta tử tế, làm việc càng chăm","Người hầu lui ra, bước chân nhẹ hẳn"],no:["Người hầu cúi gằm, chẳng dám nói thêm","Kẻ dưới vâng dạ cho qua, lòng chẳng phục","Người hầu lui ra, sắc mặt khó coi"]},
+ any:{ok:["Mọi việc trôi chảy như ý","Người nghe gật gù, lòng đã xuôi","Lời ta nói ra, người kia nghe lọt tai"],no:["Việc chẳng thành, đành hẹn dịp khác","Người kia lắc đầu, chẳng chịu nghe","Ta về tay không, lòng chẳng vui"]}};
+OUT.fallen=OUT.rival;OUT.ksp=OUT.maid;OUT.ty=OUT.any;OUT.elder=OUT.maid;OUT.man=OUT.any;OUT.kid=OUT.any;
+function kOutcome(kind,ok){const P=OUT[kind]||OUT.any;return kLine("out:"+(OUT[kind]?kind:"any")+":"+(ok?"ok":"no"),ok?P.ok:P.no)}
+window.kOutcome=kOutcome;
 window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;
 })();

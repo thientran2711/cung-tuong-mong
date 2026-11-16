@@ -1035,7 +1035,7 @@ ARC67.ch_co={o:"ch",t:"Quân cờ của cô mẫu",w:"th",sj:"những việc Th�
  c2:{h:"Cô mẫu muốn ngươi có con",w:"th",t:"Thái hậu sốt ruột: ngươi phải sinh hoàng tử. Bà sai thái y bắt mạch, ban thuốc bổ.",o:[
   {n:"Uống thuốc của cô mẫu",c:{suc:-3},w:{th:5},wx:"cô mẫu vui",lx:"thuốc mạnh, mệt người",rt:"Thái hậu gật đầu."},
   {n:"Khéo xin tự lo",c:{},o:50,w:{tamco:2},sc:1,f:"own",wx:"tự chủ",l:{th:-5},rt:"Thái hậu chiều ngươi.",rf:"Thái hậu phật lòng."}]},
- c3:{h:"Hoàng hậu cầu hòa",w:"hh",need:["hh"],t:"Hoàng hậu {hh} mời riêng ngươi: “Thái hậu già rồi. Sau này muội dựa vào ai?”",o:[
+ c3:{h:"Hoàng hậu cầu hòa",w:"hh",need:["hh"],t:"Hoàng hậu {hh} mời riêng ngươi: “Thái hậu già rồi. Sau này {goi} dựa vào ai?”",o:[
   {n:"Ngầm bắt tay Hoàng hậu",c:{th:-5},o:45,w:{hh:15},sc:1,f:"own",wx:"có đường lui",l:{hh:-6},lx:"Thái hậu biết",rt:"Hoàng hậu cười, rót trà mời ngươi.",rf:"Thái hậu biết chuyện, giận lắm."},
   {n:"Báo lại với Thái hậu",c:{hh:-10},w:{th:8},f:"obey",wx:"cô mẫu tin ngươi hơn",rt:"Thái hậu cười nhạt về phía Càn Ninh cung."}]},
  t1:{h:"Cô mẫu hỏi lòng ngươi",w:"th",t:"Thái hậu cầm tay ngươi: “Ai gia không sống mãi. Ngươi là cháu ai gia, hay là người của chính ngươi?”",o:[
@@ -1395,7 +1395,7 @@ ARC67.s_than={o:"*",ok:nsrv67,t:"Người thân thất lạc",w:"eun",sj:"chuy�
  c1:{h:"Hắn xin việc ở cung ngươi",w:"eun",t:"{n1} xin được về hầu cung ngươi.",o:[
   {n:"Nhận",c:{bac:-20},o:A=>50+(A.f.true?20:0)-(A.f.wary?0:5),sc:1,f:"took",wx:"có người thân bên cạnh",l:{danh:-3},lx:"hắn là tai mắt người khác",rt:"{n1} chăm chỉ, trung thành.",rf:"Ngươi bắt gặp hắn lục thư từ."},
   {n:"Từ chối, giới thiệu nơi khác",c:{},w:{tamco:2},wx:"giữ khoảng cách",lx:"hắn buồn",rt:"{n1} về hầu Ngự thiện phòng."}]},
- c2:{h:"{v} nhắc khéo",w:"v",need:["v"],t:"{v} cười: ‘Nghe nói tỷ có người thân trong đám thái giám. Thật thú vị.’",o:[
+ c2:{h:"{v} nhắc khéo",w:"v",need:["v"],t:"{v} cười: ‘Nghe nói {goi} có người thân trong đám thái giám. Thật thú vị.’",o:[
   {n:"Thản nhiên nhận",c:{danh:-2},w:{duc:3},wx:"không ai bắt bẻ được",rt:"{v} cụt hứng."},
   {n:"Phản đòn: hỏi ai đưa hắn vào",c:{},o:45,sc:1,wx:"{v} lộ mình",l:{danh:-3},rt:"{v} khựng lại.",rf:"{v} cười khẩy."}]},
  c3:{h:"Hắn gặp nạn",w:"eun",t:"{n1} bị vu ăn cắp ở Ngự thiện phòng.",o:[

@@ -247,11 +247,17 @@ const WD_GMIN={night:0,contest:1,son:2,promo:2,birthday:1,accuse:0,story:1,sinht
 function wdRemarker(p){const L=others(p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);const q=queenP();
  if(!S.thDead&&roll(12))return{name:"Thái hậu",face:pTH(),sure:true,th:1};
  if(!L.length)return null;const v=pick(L);return{v,name:wdNm(v),face:pv(v),sure:v===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((v.wdk||{})[e.k])})}}
+const WD_SAY={ok:["khen {p} ăn vận vừa vặn, đúng phẩm vị.","gật đầu khi thấy {p}: ăn vận vừa vặn, đúng lễ.","khen {p} biết chừng mực, y phục đúng phẩm.","nhìn {p} một lượt, khẽ khen là biết giữ lễ."],
+ over:["“Đồ này e vượt phẩm vị.”","“{I} này… phẩm của {P} cài được sao?”","“Đẹp thì đẹp, chỉ e lễ chế không cho.”","“{Xung} nhớ thứ này là của bậc trên mới được dùng.”"],
+ under:["“{P} ăn vận giản dị quá, chẳng ra dáng {R}.”","“Áo xống thế kia, người ngoài lại tưởng Nội vụ phủ bạc đãi {P}.”","“Giản dị là đức, nhưng sơ sài quá thì thất lễ.”","“{P} tiết kiệm quá, đến phẩm phục cũng chẳng buồn may mới.”"]};
 function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?st:wdBelStatus(r.v||p,p);
  if(view==="ok"&&!(roll(35)))return"";/* praise is rarer than blame */
  const item=view==="tang"?wdFestItem(p):wdItem(wdOf(p).y)||wdItem(wdOf(p).tram);const nm=item?item.n:"bộ y phục";const R0=r.name.charAt(0).toUpperCase()+r.name.slice(1);
- const said={ok:`${R0} khen ${wdNm(p)} ăn vận vừa vặn, đúng phẩm vị.`,over:`${R0} nhìn ${nm} của ${wdNm(p)} mà nói: “Đồ này e vượt phẩm vị.”`,
-  under:`${R0} cười khẽ: “${wdNmC(p)} ăn vận giản dị quá, chẳng ra dáng ${p===S?(isSrv&&isSrv()?"người hầu cận":rkName(S)):(p.alive!==undefined?rkName(p):"")}.”`,
+ /* palace voice: each remark is a pool (jvoice kLine, no repeat), the speaker's self word from the one core (kSay r → p) */
+ const sp=r.th?"th":r.v,RK=p===S?(isSrv&&isSrv()?"người hầu cận":rkName(S)):(p.alive!==undefined?rkName(p):"");
+ const fill=x=>kSay(sp,p,x).replace(/\{P\}/g,wdNmC(p)).replace(/\{R\}/g,RK).replace(/\{I\}/g,nm);
+ const said={ok:fill(kLine("wd:ok",WD_SAY.ok)).replace(/^/,`${R0} `).replace(/\{p\}/g,wdNm(p)),over:`${R0} nhìn ${nm} của ${wdNm(p)} mà nói: ${fill(kLine("wd:over",WD_SAY.over))}`,
+  under:`${R0} cười khẽ: ${fill(kLine("wd:under",WD_SAY.under))}`,
   tang:`${R0} thấy ${wdNm(p)} mặc ${nm} giữa quốc tang.`}[view];
  /* who hears it: p always; others by chance; the player also through her tai mắt */
  for(const o of consorts()){if(o===p)continue;if(o===S?(roll(30+(S.mat||0)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}

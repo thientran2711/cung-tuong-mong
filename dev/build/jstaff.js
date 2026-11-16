@@ -109,12 +109,23 @@ if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){if(p&&p.kin
 if(typeof personRoleRank==="function"){const r0=personRoleRank;personRoleRank=function(p){if(p&&p.kind==="elder"&&p.ref)return r0.call(this,p.ref);return r0.apply(this,arguments)}}
 /* palace women are known by name and office from the first day (Biết tên); talking makes her Quen biết (j61 familiarity rules) */
 if(typeof k61St==="function"){const k0=k61St;k61St=function(e){const v=k0.apply(this,arguments);return e&&e.eid&&e.elder?Math.max(2,v):v}}
+const STAFF_SAY={
+ tnDead:["“Từ ngày Thái hậu đi, Đức Thọ cung chỉ còn khói hương.”","“Chuỗi tràng hạt của Thái hậu, nô tỳ vẫn lau mỗi sớm.”","“Đức Thọ cung giờ vắng lắm, đêm nghe cả tiếng lá rơi.”"],
+ tnHi:["“Thái hậu dạo này hay nhắc đến {goi}.”","“Hôm qua Thái hậu hỏi nô tỳ, {goi} dạo này ăn ngủ có ngon không.”","“Thái hậu bảo trà {goi} dâng hôm trước rất vừa miệng.”","“Có người nói xấu {goi} trước mặt Thái hậu, Thái hậu chỉ cười cho qua.”"],
+ tnMid:["“Thái hậu chưa nói gì về {goi}. {Goi} chăm thỉnh an thì hơn.”","“Thái hậu ít khi nhắc đến {goi}. Lửa gần rơm lâu ngày mới bén, {goi} cứ thong thả.”","“Lòng Thái hậu như mặt hồ, chưa gợn sóng vì ai. {Goi} chịu khó lui tới.”","“Thái hậu thích người biết giữ lễ, chẳng thích người khéo miệng. Nô tỳ chỉ dám thưa vậy.”"],
+ tnLo:["“Thái hậu không vui khi nghe nhắc đến {goi}. {Goi} chớ để lỡ lễ nữa.”","“Hôm trước có người nhắc tên {goi}, Thái hậu đặt chén trà xuống chẳng nói gì. {Goi} nên cẩn trọng.”","“Thái hậu đang phật ý. Nước chảy đá mòn, {goi} cứ chăm thỉnh an, đừng nóng vội.”","“Nô tỳ không dám nói nhiều. Chỉ xin {goi} dạo này đến Đức Thọ cung cho đúng giờ.”"],
+ knNone:["“Càn Ninh cung còn để trống. Việc lục cung tạm bẩm lên Thái hậu.”","“Ngôi Trung cung còn trống, sổ sách lục cung nô tỳ đưa sang Đức Thọ cung cả.”","“Chưa có chủ mới, Càn Ninh cung đêm nào cũng chỉ thắp một ngọn đèn.”"],
+ knMe:["“{Goi} cứ dặn, sổ sách lục cung nô tỳ giữ đủ.”","“Bẩm {goi}, sổ chi tiêu tháng này đã kê xong, xin {goi} xem qua.”","“Các cung đều đã nộp sổ. {Goi} có điều gì cần hỏi, nô tỳ xin thưa.”"],
+ knHi:["“Hoàng hậu có lời khen {goi} biết giữ lễ.”","“Hoàng hậu bảo, trong các cung chỉ có {goi} là hiểu chuyện.”","“Hôm qua Hoàng hậu cho người cất phần điểm tâm, dặn để dành cho {goi}.”"],
+ knMid:["“Hoàng hậu chưa nói gì về {goi}.”","“Hoàng hậu bận việc lục cung, ít khi nhắc tên ai. {Goi} chớ bận lòng.”","“Hoàng hậu xưa nay xét người lâu. {Goi} cứ giữ lễ là hơn.”"],
+ knLo:["“Hoàng hậu thấy {goi} chưa biết phận.”","“Nô tỳ nói thật lòng: Hoàng hậu dạo này nhắc đến {goi} chẳng mấy vui.”","“Cây cao thì gió lay. Hoàng hậu đang để mắt đến {goi} đấy.”"]};
 function talkLine(st){const warm=((st.af&&st.af.me)||0)>=30;
- if(st.eid==="gt")return pick([`“Đi đứng chớ ngẩng cao đầu quá vai người trên. Cung quy là thế.”`,`“Gặp Hoàng hậu thì quỳ trước, thưa sau. Gặp Thái hậu thì chờ người cho đứng dậy.”`,`“Tú nữ mới năm nay có mấy người lanh lợi. Chớ để bị lấn.”`,`“Lời nói trong cung như nước đổ, không hốt lại được.”`]);
- if(st.eid==="tn"){if(S.thDead)return`“Từ ngày Thái hậu đi, Đức Thọ cung chỉ còn khói hương.”`;const t=S.th||0;
-  const g=kSay({srv:"f"},S,"{goi}"),G=kSay({srv:"f"},S,"{Goi}");/* a servant never calls a consort "ngươi" (VANPHONG §2) */return (t>=30?`“Thái hậu dạo này hay nhắc đến ${g}.”`:t>=0?`“Thái hậu chưa nói gì về ${g}. ${G} chăm thỉnh an thì hơn.”`:`“Thái hậu không vui khi nghe nhắc đến ${g}. ${G} chớ để lỡ lễ nữa.”`)+(warm?` Thái hậu → ngươi: thiện cảm <b>${t}</b>.`:"")}
- if(st.eid==="kn"){const q=typeof queenP==="function"?queenP():null;if(!q)return`“Càn Ninh cung còn để trống. Việc lục cung tạm bẩm lên Thái hậu.”`;if(q===S)return`“${kSay({srv:"f"},S,"{Goi}")} cứ dặn, sổ sách lục cung nô tỳ giữ đủ.”`;
-  const v=typeof rel==="function"?rel(q,S):0;const g=kSay({srv:"f"},S,"{goi}");return `“Hoàng hậu ${v>=10?`có lời khen ${g} biết giữ lễ`:v>-10?`chưa nói gì về ${g}`:`thấy ${g} chưa biết phận`}.”`+(warm?` Hoàng hậu → ngươi: thiện cảm <b>${v}</b>.`:"")}
+ if(st.eid==="gt")return kLine("staff:gt",[`“Đi đứng chớ ngẩng cao đầu quá vai người trên. Cung quy là thế.”`,`“Gặp Hoàng hậu thì quỳ trước, thưa sau. Gặp Thái hậu thì chờ người cho đứng dậy.”`,`“Tú nữ mới năm nay có mấy người lanh lợi. Chớ để bị lấn.”`,`“Lời nói trong cung như nước đổ, không hốt lại được.”`]);
+ /* palace voice: each answer is a pool by how things stand (jvoice kLine, no repeat within BAL.voice.noRepeat tuần), address from the one core */
+ if(st.eid==="tn"){if(S.thDead)return kLine("staff:tn:dead",STAFF_SAY.tnDead);const t=S.th||0;
+  return kLine("staff:tn:"+(t>=30?"hi":t>=0?"mid":"lo"),STAFF_SAY["tn"+(t>=30?"Hi":t>=0?"Mid":"Lo")],{sp:{srv:"f"},ls:S})+(warm?` Thái hậu → ngươi: thiện cảm <b>${t}</b>.`:"")}
+ if(st.eid==="kn"){const q=typeof queenP==="function"?queenP():null;if(!q)return kLine("staff:kn:none",STAFF_SAY.knNone);if(q===S)return kLine("staff:kn:me",STAFF_SAY.knMe,{sp:{srv:"f"},ls:S});
+  const v=typeof rel==="function"?rel(q,S):0;return kLine("staff:kn:"+(v>=10?"hi":v>-10?"mid":"lo"),STAFF_SAY["kn"+(v>=10?"Hi":v>-10?"Mid":"Lo")],{sp:{srv:"f"},ls:S})+(warm?` Hoàng hậu → ngươi: thiện cảm <b>${v}</b>.`:"")}
  return""}
 function cardHTML(st){const p=postOf(st.eid);const f=staffFace(st);
  const lines=[typeof tuoi==="function"?tuoi(st.age):"",`Thiện cảm <b>${(st.af&&st.af.me)||0}</b>`].filter(Boolean);
