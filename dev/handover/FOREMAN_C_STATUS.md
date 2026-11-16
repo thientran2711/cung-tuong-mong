@@ -48,7 +48,7 @@ Base main at start: 900ace7fb.
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |
 | D20 weather redo with §68 | — | — | NOT TAKEN: session 8 runs review/weather-fx-one (claimed) — D20 folded into it unless the coordinator says otherwise |
 | D25 veil/scar box follows the jkpor portrait zoom | review/veil-zoom | sonnet | RUNNING (session session_011xDdVQH85mp5QLY8bMqh7D) |
-| D41 promote own servants (moved B → C, owner 07:25Z, with D29) | review/promote-servants | opus | RUNNING (separate session) |
+| D41 promote own servants (moved B → C, owner 07:25Z, with D29) | review/promote-servants | opus | RUNNING (session session_011xDdVPy5sdrvK7cDYuJHzz) |
 | D-list rest (D3, D9, D11–D14, D19, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
