@@ -2,8 +2,11 @@
 // Được (Thành) / Kèm rows really gets from the game's own colour rule (j19 kcls / effList / kemCol), and effects that never apply
 // (l:{...} on a card whose odds o is 100). usage: node dev/measure/kcxscan.js [out.json]   (serves the built index.html, no pictures)
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const ROOT=path.resolve(__dirname,'../..');
-function cards(src,file){const out=[];let i=0;while((i=src.indexOf('kcCard({',i))>=0){let d=0,j=i+7;for(;j<src.length;j++){const c=src[j];if(c==='{')d++;else if(c==='}'){d--;if(!d)break}}
-  const body=src.slice(i+7,j+1);const line=src.slice(0,i).split('\n').length;i=j;
+/* fix2: every object literal passed to kcCard( … ), also the conditional form kcCard(S.maid?{…}:{…}) (reviewer r1 item 2: jkc "Sai tỳ nữ nghe ngóng" was missed) */
+function objs(src){const R=[];let i=0;while((i=src.indexOf('kcCard(',i))>=0){let p=0,b=0,j=i+6,st=-1;for(;j<src.length;j++){const c=src[j];
+  if(c==='(')p++;else if(c===')'){p--;if(!p)break}else if(c==='{'){if(!b&&p===1)st=j;b++}else if(c==='}'){b--;if(!b&&p===1&&st>=0){R.push([st,j]);st=-1}}}i=j}return R}
+function cards(src,file){const out=[];for(const [s,j] of objs(src)){
+  const body=src.slice(s,j+1);const line=src.slice(0,s).split('\n').length;
   const g=re=>{const m=body.match(re);return m?m[1]:null};
   const xm=body.match(/(?:^|[,{])x:(?:"((?:[^"\\]|\\.)*)"|`((?:[^`\\]|\\.)*)`)/);
   out.push({file,line,n:g(/\bn:"([^"]*)"/)||g(/\bn:`([^`]*)`/)||'?',o:g(/\bo:([^,}]+)/),l:g(/\bl:(\{[^}]*\})/),w:g(/\bw:(\{[^}]*\})/),c:g(/\bc:(\{[^}]*\})/),
