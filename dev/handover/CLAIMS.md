@@ -248,7 +248,7 @@
 | (a) FIGURE-PROPORTION AUDIT every full-body figure (OD 15:00Z 1.1/1.4/2.1; list + 3 samples to owner first) (sonnet art) | review/fig-proportion | C | session_011xDdVRcEKcovA92Ep6FWb4 | RUNNING | 16/11 15:48Z |
 | (b) transition/night pictures BACKS ONLY, 3 'Gối đầu' repaint (OD 15:00Z 1.7; 1 sample first) (sonnet art) | review/night-backs | C | session_011xDdVQNx5VgxetorvVUQPh | RUNNING | 16/11 15:48Z |
 | (c) buổi-transition band art: 3 seasons + 9 festivals (anim-pace list) + 4 buổi icons sáng/trưa/chiều/tối (OD 15:10Z 7.5) (sonnet art) | review/buoi-art | C | session_011xDdVP32VLjcS6HX97wHgD | RUNNING | 16/11 15:48Z |
-| (d) calendar icon cổ trang + square-icons art + placeholder picture sets per orientation/size (OD 15:10Z 7.3 / group 8) (sonnet art) | review/icon-art | C | session_011xDdVRMa18LU3fiFyq7ksS | RUNNING | 16/11 15:48Z |
+| (d) calendar icon cổ trang + square-icons art + placeholder picture sets per orientation/size (OD 15:10Z 7.3 / group 8) (sonnet art) | review/icon-art | C | session_011xDdVRMa18LU3fiFyq7ksS | DONE (28 on CDN; archived 19:02Z) | 16/11 15:48Z |
 | ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | session_011xDdVSMZ3apRHJfX25BwAb (rolled over @ef815769, archived) | successor RUNNING | 16/11 15:48Z |
 | kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
 | TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 (archived) | SẴN SÀNG KIỂM 21b9df01 | 16/11 15:52Z |
