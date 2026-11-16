@@ -1,7 +1,7 @@
 /* ONE DESIGN FRAME + UNIFORM SCALE (KIT §0, owner 16/11 07:47Z + 07:50Z): the one-page view (portrait) must be the spread's page, scaled.
    usage: node dev/test/sw-serve.js 8971 <repo root> &   node dev/test/design-scale.js http://localhost:8971/ <outdir> [shots]
    A. LAYOUT (direct mode at the two design sizes, same seeded game): open Hậu cung (Chí tôn: Hoàng thượng) on the SPREAD 1180x820 and on
-      ONE PAGE 590x820; every visible element of the RIGHT page (#panel) is measured relative to the page box; match = same x, y, w, h within
+      ONE PAGE 590x852 (KIT_FRAME.page; the page box is 582x623 in both modes); every visible element of the RIGHT page (#panel) is measured relative to the page box; match = same x, y, w, h within
       1 CSS px (xw = same x and width only). Same for the LEFT page (#stage, room home). Mismatches are listed by element.
    B. DEVICES (host mode ?khost=1, real clicks through the transform): 755x1000@2 1180x820@2 1366x1024@2 412x1058@2 390x844@3 844x390@3:
       canvas w/h, pages, scale s, rotation; tab → page → active tab → room on the one-page view; 0 page errors; no overflow in the canvas. */
@@ -30,7 +30,7 @@ const settle=async f=>{for(let i=0;i<8;i++){await sleep(1200);const had=await f.
 const openTab=k=>{CLEAN();const b=document.querySelector(`#tabs [data-kg="${k}"]`)||document.querySelector(`#tabs [data-tab="${k}"]`);b&&b.click()};
 (async()=>{const b=await chromium.launch();const R={layout:{},devices:{}};const BASE=BASE0.replace(/\/?$/,'/')+'index.html';
  /* A. layout */
- const M={};for(const [W,H,tag] of [[1180,820,'spread'],[590,820,'page']]){L('A',tag);const {c,p,errs}=await game(b,W,H,BASE+'?khost=0');await ready(p);await p.evaluate(LIFE);await settle(p);/* the whole save (ser/deser: S + rivals + kids …), not only S — rivals are a global, and the two viewports draw a different number of randoms */if(tag==='spread')M.state=await p.evaluate(()=>JSON.stringify(ser()));else{await p.evaluate(j=>{quiet=true;deser(JSON.parse(j));quiet=false;tab='act';CLEAN()},M.state);await settle(p)}
+ const M={};for(const [W,H,tag] of [[1180,820,'spread'],[590,852,'page']]){L('A',tag);const {c,p,errs}=await game(b,W,H,BASE+'?khost=0');await ready(p);await p.evaluate(LIFE);await settle(p);/* the whole save (ser/deser: S + rivals + kids …), not only S — rivals are a global, and the two viewports draw a different number of randoms */if(tag==='spread')M.state=await p.evaluate(()=>JSON.stringify(ser()));else{await p.evaluate(j=>{quiet=true;deser(JSON.parse(j));quiet=false;tab='act';CLEAN()},M.state);await settle(p)}
   M[tag]={pages:await p.evaluate(()=>kitView().pages),stage:await p.evaluate(RECTS,'#stage')};
   if(SHOTS)await p.screenshot({path:`${OUT}/A-${tag}-home.jpg`,type:'jpeg',quality:55});
   await p.evaluate(openTab,'rv');await sleep(1500);await settle(p);M[tag].panel=await p.evaluate(RECTS,'#panel');M[tag].who=await p.evaluate(()=>S.name);
@@ -53,6 +53,6 @@ const openTab=k=>{CLEAN();const b=document.querySelector(`#tabs [data-kg="${k}"]
   if(SHOTS)await p.screenshot({path:`${OUT}/B-${tag}-${W}x${H}.jpg`,type:'jpeg',quality:55});r.errs=errs;R.devices[tag]=r;
   L(tag,JSON.stringify({canvas:[r.view.w,r.view.h],pages:r.view.kv.pages,s:r.krot.s,rot:r.krot.rotated,flow:r.flow.map(x=>x.home?'room':x.panel?'page':'?').join('→'),errs:errs.length,ovf:r.view.ovf}));await c.close()}
  fs.writeFileSync(OUT+'/design-scale.json',JSON.stringify(R,null,1));
- const d=R.devices;if(process.env.SIZES){console.log(JSON.stringify(Object.fromEntries(Object.entries(d).map(([k,v])=>[k,v.flow]))));await b.close();return}R.ok={pageCanvas:d.fold.view.w===590&&d.fold.view.h===820&&d.fold.view.kv.pages===1,spread:['ipad','ipad-pro','phone-land','fold-cover','phone'].every(t=>d[t].view.w===1180&&d[t].view.kv.pages===2),
-  rotated:d['fold-cover'].krot.rotated&&d.phone.krot.rotated,oneAtATime:d.fold.flow.map(x=>x.home?'room':x.panel?'page':'?').join('→')==='room→page→room',noErrors:Object.values(d).every(x=>!x.errs.length)&&!R.layout.errs.length,rightPageMatch:R.layout.right.full};
+ const d=R.devices;if(process.env.SIZES){console.log(JSON.stringify(Object.fromEntries(Object.entries(d).map(([k,v])=>[k,v.flow]))));await b.close();return}R.ok={pageCanvas:d.fold.view.w===590&&d.fold.view.h===852&&d.fold.view.kv.pages===1,spread:['ipad','ipad-pro','phone-land','fold-cover','phone'].every(t=>d[t].view.w===1180&&d[t].view.kv.pages===2),
+  rotated:d['fold-cover'].krot.rotated&&d.phone.krot.rotated,oneAtATime:d.fold.flow.map(x=>x.home?'room':x.panel?'page':'?').join('→')==='room→page→room',noErrors:Object.values(d).every(x=>!x.errs.length)&&!R.layout.errs.length,rightPageMatch:R.layout.right.full,leftPageMatch:R.layout.left.full,sameBox:''+R.layout.right.boxSpread===''+R.layout.right.boxPage};
  console.log(JSON.stringify(R.ok));await b.close()})();
