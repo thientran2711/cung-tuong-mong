@@ -12,7 +12,8 @@ Base main at start: 900ace7fb.
 | A11 cardflip review | review/cardflip @1daf0d9d4 → review/cardflip-r1 | sonnet | RUNNING (reviewer) |
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
 | C18 kit-popup-sample review | review/kit-popup-sample @b6242dea → review/kit-popup-sample-r1 | sonnet | RUNNING (reviewer) |
-| C19 pic-dupes-r1 re-review | review/pic-dupes-r1 @b0ff9ff35 (act-hanh-le-v2) | sonnet | RUNNING (short reviewer) |
+| C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | PASS bc0a1ba24 |
+| D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes | sonnet | RUNNING (worker) |
 | C20 act-text resume | review/act-text @593e66b3a | sonnet | RUNNING (worker) — also takes Foreman B Q2 (KÈM gain → ĐƯỢC) |
 | C6 mk-colour | review/mk-colour @973729653 | sonnet | RUNNING (worker; presets, vụng looks, lips QA, then reveal scene D28) |
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
@@ -21,10 +22,10 @@ Base main at start: 900ace7fb.
 | D1 result-sfx | review/result-sfx | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality | opus | RUNNING (worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D2, D3, D6, D9–D20, D22–D27, D30–D34, D36, D38–D42, D44–D52 per FOREMAN_C.md) | — | per item | QUEUED (after reviews + C-workers) |
+| D-list rest (D2, D3, D6, D9, D11–D20, D22–D27, D30–D34, D36, D38–D42, D44–D52 per FOREMAN_C.md) | — | per item | QUEUED (after reviews + C-workers) |
 
 ## PASS (for the main coordinator to fast-forward)
-(none yet)
+PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
 
 ## PENDING CDN UPLOAD (account C cannot upload)
 (none yet)
