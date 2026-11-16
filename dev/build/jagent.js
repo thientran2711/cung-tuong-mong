@@ -37,7 +37,7 @@ function agPw(L){const s=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*s;for(con
 function agOrg(v){try{if(v.nr&&v.nr.o)return v.nr.o;if(v.ag&&v.ag.o)return v.ag.o;const T=(BAL.nroad&&BAL.nroad.org)||BAL.ag.org;let c="";try{c=clanOf(v)}catch(e){}
   const mine=S.origin&&S.origin.k;let L=(T[c]||T[""]).filter(x=>!(x[0]===mine&&BAL.ag.uniq.includes(x[0])));if(!L.length)L=T[""];
   const o=agPw(L);v.ag=v.ag||{};v.ag.o=o;return o}catch(e){return"_"}}
-function agOrgName(o){try{const x=ORIGINS.find(z=>z.k===o);return x?x.n.toLowerCase():""}catch(e){return""}}
+function agOrgName(o){try{const x=ORIGINS.find(z=>z.k===o);return x?x.n[0].toLowerCase()+x.n.slice(1):""}catch(e){return""}}
 
 /* ---------------- NEEDS (from stats she already has) ---------------- */
 function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;const gap=(g,x)=>cl((g-(x||0))/g,0,1);
@@ -157,14 +157,18 @@ function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
 function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
  if(t===S){const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
  const tn=t?` ${t.name}`:"";Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)})}
+/* the deeds she may join where she sees them done (the same deed for her: her cost, her odds, her gains — BAL.tw, one source) */
+const AGJOIN={thTH:()=>{const g=BAL.tw.g.thTH;return `thành: Thái hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Thái hậu ${g[3]}`},
+ thHH:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`},
+ pray:()=>"thành: lòng thành cầu tự, dễ có thai hơn",ksp:()=>"thành: thẻ bài của ngươi dễ được lật hơn"};
 function agHearO(){return od(BAL.ag.wit.hear+(S.mat||0)*BAL.ag.wit.mat)}
 function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();
- O.push({n:"Nghe lén",fx:{},x:`${word(o)} · tốn: 1 khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?" · chứng cứ về nàng +1":""} · hỏng: nàng bắt gặp, thiện cảm của nàng với ngươi -${B.caught}`,
+ O.push({n:"Nghe lén",fx:{},x:`${word(o)} · tốn: 1 khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?" · chứng cứ về nàng +1":""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
   go:()=>{if(typeof can==="function"&&can(1))spend(1);if(roll(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,1);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?" Chứng cứ về nàng +1.":""}`)}
    else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
- const D=TW[p.k];if(D&&p.k!=="effort"&&!AGHOST.has(p.k)&&(!D.req||D.req(S,t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
+ const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
-  O.push({n:"Tham gia",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}1 khắc · thành: ngươi cũng ${p.act}${agTn(t)}, như nàng`,go:()=>{if(typeof can==="function"&&can(1))spend(1);const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p);agSeeHer(p.k,t,true)}})}
+  O.push({n:"Tham gia",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}1 khắc · ${J()}`,go:()=>{if(typeof can==="function"&&can(1))spend(1);const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
  O.push({n:"Bỏ đi",fx:{},x:"Nắm chắc · thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
  O.push({n:"Mặc kệ",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
  return O}
