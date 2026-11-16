@@ -266,3 +266,4 @@
 | emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | RUNNING | 16/11 16:41Z |
 | mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | (opening) | RUNNING | 16/11 16:44Z |
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | (opening) | RUNNING | 16/11 16:44Z |
+| kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | (spawning) | RUNNING | 16/11 16:50Z |
