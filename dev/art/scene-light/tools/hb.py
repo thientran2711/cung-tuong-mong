@@ -6,7 +6,7 @@ def mod(n,p):
     s=importlib.util.spec_from_file_location(n,W+p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 sk=mod("sk","dev/art/skin-smudge.py");hd=mod("hd","dev/art/huadian.py")
 MEN=("man","eunuch","official","emperor","physician")
-A_LIM=8.0
+A_LIM=-999.0  # ROSY PASS RETIRED (owner 16/11 12:45Z: "Thôi tất cả các hình về bỏ cái lớp dòng đi, về cái B á." = no rosy-skin layer on any picture; undone by dev/art/skin-norosy/). Never re-apply.
 def target(name):
     m=re.search(r"-t(\d)-",name)
     if not name.startswith(("por-consort","fig-consort")) or not m: return None

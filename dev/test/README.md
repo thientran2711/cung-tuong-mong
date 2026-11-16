@@ -39,3 +39,19 @@ Options (2nd/3rd arg `extra`): any Playwright context option (default `serviceWo
 ## What desktop-style tests never exercise (UA / device branches in game code)
 See `dev/PROGRESS_ua-test.md` for the list (iOS "add to home screen" note, hover glow, pointer:coarse hint, vibrate, standalone, safe-area, old-Safari regex).
 Rule: a fix that touches one of these needs one run of the matching profile (`iphone14` / `ipadAir` / `fold`) in HOST mode.
+
+## Performance budget test (D15)
+`node dev/test/perf.js` (see header of the file and dev/PROGRESS_perf.md): first-load bytes / time to title / time to first turn / heap after 10 buổi / long tasks on fold, iphone14, ipadAir; budget in `perf-budget.json`; exit 1 when over. Note: it enables the service worker (unlike the other profile tests).
+
+### First-hour list + fresh-install / offline / update checks (review/perf-r1)
+- `dev/site/first-hour.txt` decides what blocks entry (assets.py group `core`). It is GENERATED: `node dev/measure/firsthour.js fold,ipadAir 0 3`
+  (needs the built root + the CDN; one life per origin incl. the cung nữ road `cnv`, 3 weeks each; the new list is the union with the old one),
+  then `bash dev/site/build_site.sh`. Re-run it whenever a branch adds art that every new life sees in its first weeks (new rooms, act pictures,
+  kit pictures, title/loading art), otherwise that art is `lazy` (fetched when first shown: fine online, missing offline until seen once).
+- `node dev/test/lazy-offline.js --devices fold,iphone14 --lives 2 --weeks 2 --save-data --offline`: fresh install (SW on, host mode, no background
+  set), counts pictures the first weeks needed that were NOT downloaded ahead (group lazy, fetched on use), broken pictures, then offline: every
+  file seen must come from the cache and the saved life's rooms must show. Exit 1 on a broken picture or a seen file not served offline.
+- `node dev/test/upgrade-sw.js --old <root of an older built checkout>`: returning install, old SW + old ctm-assets -> this build (pictures stubbed,
+  keys real): new worker in control, no stale index, one shell cache, still-valid asset keys kept, core complete, offline reload on the new build.
+## KIT §81 scene end in tests (`dev/test/lib/kmscene.js`)
+A kit scene (card flip, edict, bloom, gloom, ink…) waits for its end button `.kmov.km-endon > .kmend`. A test that clicks through the motion queue (edict → reward chest → person reveal) must press it: `const KM=require('./lib/kmscene'); await KM.use(ctx)` before goto, then `__kmNext()` in page code. Without it the queue stays on the first scene (e.g. the Kính sự phòng flip at life start).
