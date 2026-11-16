@@ -1,7 +1,7 @@
 # night-steal-r2 — REVIEW (BIG tier: odds/rules + co-op)
 
 Reviewer: session_01UV1Szie8p57AVPuNpewWQP, opened by MAIN s22 (session_01UV1SzjhT28XQmRt2EHNffg). START_CTX ≈ 3 % of the window.
-Reviewed: review/night-steal-2 @ 609c1bdd0 (+ ed6fcd05 report). Merged onto origin/main ec315daf, then again onto f03886af (which brought jtwoway, the two-way deed table) → review/night-steal-r2
+Reviewed: review/night-steal-2 @ 609c1bdd0 (+ ed6fcd05 report). Merged onto origin/main ec315daf, then f03886af (which brought jtwoway, the two-way deed table), then caa73a87 (people-ledger) → review/night-steal-r2
 (conflicts: jbal2 keeps main's BAL.spread + the branch's BAL.relOan/BAL.steal; assemble = main's list (incl. jtwoway, jst14) + jsteal after j75; index.html/sw.js/assets.json rebuilt by build_site.sh).
 
 ## VERDICT: PASS (see sha in the CLAIMS row / coordinator message) — with finding F1 for a NEW people-life build item
@@ -63,15 +63,15 @@ Steal outcome with GHEN0 (bot `GHEN0=1`, seeds 13000/37000/97000, 60 lives): her
    tsLeNpc guests exclude her because she gets the invite panel (jts.js:159–181) — equivalent, OK.
 
 ## 3. Tests (merged build)
-- unit `night-steal-unit.js`: 29/29 on 10 runs in a row (final build), 0 page errors. **Reviewer fix (test only, game code unchanged):** the test was a coin flip
+- unit `night-steal-unit.js`: 29/29 on 10 runs in a row (f03886af merge) + 3 runs on the caa73a87 merge, 0 page errors. **Reviewer fix (test only, game code unchanged):** the test was a coin flip
   (before: 25–29/29 on both the merged and the unmerged branch build): forced odds 95 / 5 left 5 % wrong outcomes → 100 / .001; the ledger test was not forced → force();
   her cycle (jcycle, by tuần) could block her try → reset() moves S.tuan off her cycle tuần; R0 was liveRivals(false) while stealPass draws from liveRivals(true),
   so a thief outside R0 kept un-reset Đức/Sức → R0 = liveRivals(true).
-- old save `night-steal-oldsave.js` (origin/main ec315daf build → r2, and again f03886af → final r2): PASS, 0 errors.
+- old save `night-steal-oldsave.js` (origin/main ec315daf, f03886af and caa73a87 builds → r2): PASS, 0 errors.
 - co-op `coop-e2e.js` (Fold host + iPad guest, live Worker): first merge (ec315daf) 59/59. Final build (f03886af merge): 4 runs = 51/59, 57/60, 57/59, **59/59**;
   plain origin/main f03886af: 2 runs = 59/59, 59/60. The failing checks differ every run (rejoin same date, reborn friend name, buổi 2:3 sync, frozen when B left,
   friend starts as Người lạ, fold #next enabled on main) = live-Worker timing; 0 page errors in every run; none names a night/steal step. Weak signal: "week after
-  rebirth advances" failed 2 of 4 on r2, 0 of 2 on main → coordinator: run coop-e2e once more at go-live; if that check fails again, dump Q titles
+  rebirth advances" failed 2 of 4 on r2, 0 of 2 on main. After the third merge (caa73a87): **59/59**, 0 page errors → coordinator: run coop-e2e once more at go-live; if that check fails again, dump Q titles
   (a guest-seat Kính sự phòng notice from stealPass would be the suspect).
 - shots `night-steal-shot.js` 755x1000 + 1180x820 (+1366x1024): steal result "Thẻ bài của ta được lật · … Đêm nay: <thief>", 0 page errors; no UI change in
   this branch (the pre-existing jflip label overlap on Fold from r1 is still a KIT REQUEST for the kit keeper, not this branch).
@@ -79,4 +79,4 @@ Steal outcome with GHEN0 (bot `GHEN0=1`, seeds 13000/37000/97000, 60 lives): her
 - Bot gains `GHEN0=1` (counterfactual) for the F1 follow-up.
 
 ## Branch state
-review/night-steal-r2 = merges onto origin/main ec315daf and f03886af + reviewer fixes (jbal2 comment, unit test determinism, bot GHEN0, relprobe) + this report; site rebuilt. Not pushed to main.
+review/night-steal-r2 = merges onto origin/main ec315daf, f03886af and caa73a87 + reviewer fixes (jbal2 comment, unit test determinism, bot GHEN0, relprobe) + this report; site rebuilt. Not pushed to main.
