@@ -3012,3 +3012,41 @@ Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §7
   seal), else just under the bar at the right edge. Tap → `#kctmp` kit panel (`kpHeader("notice",name,"Hảo hữu cùng chơi")` + kitRows Hảo hữu /
   Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
   waiting notice only. Samples on the kit page "§69".
+
+## 71. kitPalaceMap — palace DETAIL map (Chính điện · Đông / Tây phối điện) — `dev/build/jpm.js` (last module) — review/palace-map → re-ported as review/palace-map-port (number 71: main's §33 is the figure scale)
+Owner 11/15: a palace has the chủ vị's main hall and side halls where others live together. Flow: **Dư đồ → tap a consort palace (any of the 8
+MAPH.rivalSlots, also Càn Ninh) → the palace detail map → tap a hall → that hall's room with exactly its people.** Back: room → detail → Dư đồ.
+```js
+kitPalaceMap({slot, k, why})   // → HTML: div.mapv.kpmv (inside the Dư đồ leather, kitLeather §34.1b) — slot 0..7 or "kn", k = palace key
+kpmSplit(k)        // {chinh|dong|tay: {ppl:[rivals present], n, res:[residents]}} — n from S.where + countAt(k): Σn = the Dư đồ chip count
+kpmHallOf(p, k)    // = jres residenceOf(p).part when p lives in this palace, else "chinh" (guests)
+kpmRoomImg(k, part)// = jres residenceArt(palSlot(k), part) without "img/" / ".webp" (25 rooms × 4 seasons × 4 buổi)
+```
+- Picture: Phượng Lệnh L2 courtyard paintings (bird's-eye; same family as our img/map-* which came from PL L1), ONLY the most luxurious
+  grade `nhat` (owner 11/15): `img/pl2/nhat-<form>-<mùa>-<buổi>.webp` (16 states) + festivals `nhat-<form>-<lễ>-<buổi>.webp` (festToday();
+  missing → the normal state of that buổi). The courtyard follows the RANK of the palace's CURRENT chủ vị (owner 11/15, as in Phượng Lệnh; our
+  8 names are labels) — lookup `rankDir` in hotspots.json: Hoàng hậu → can-ninh · Hoàng quý phi → vinh-hoa · Quý phi → quy-cung · Phi → phi-cung
+  · Tần → cac · no chủ vị → spare-cung. It changes as soon as the head is promoted, demoted or replaced; same-rank palaces share a picture
+  (accepted). An empty palace opens its (empty) courtyard too; a hall tap there = the "Cung trống" card. Rooms = OUR residence paintings only.
+- Other places (owner 11/15): Ngọc Thanh các (her home before she heads a palace) → cac, Dưỡng Hòa điện → duong-hoa, Đức Thọ cung → duc-tho,
+  Trường Môn viện → truong-mon, Ngự hoa viên → garden, Kính sự phòng → noi-thi (`places` in hotspots.json, slot `"p:<key>"`). They open the same
+  courtyard view with ONE hotspot (the place's main building, chip = countAt) that enters the place as before: its existing room painting and
+  everyone present. (Đông cung is not a place in the game yet; Cần Chính điện / Thái y viện keep the direct tap.)
+- Fit: the courtyard picture takes the height the hall rows leave (container units, aspect kept, hotspots stay on the picture): nothing clipped
+  at 686x880, 755x1000, 1180x820, 1366x1024.
+- Room header: in a hall the visit line reads only "Ở đây có N người. Người ở: <this hall's residents>." (not the whole palace).
+- Hotspots: one set per picture in `img/pl2/hotspots.json` (fractions of the picture), inlined into jpm.js by `python3 dev/tools/pl2_sync.py [rawdir]`
+  (also converts new PL files to 1792 px webp and rebuilds the state lists). Each hall = the map's own spot skin (`.mspot` + `.mlab` + `.msil`
+  silhouettes): name + chip "N bóng người" (0 → "vắng"). Under the picture: one kit `.btn` row per hall (name · N bóng người · ở: residents —
+  residence is public; who is present stays anonymous until she goes in, as on Dư đồ). Fold portrait: rows stacked; iPad: three in a row.
+- Tap a hall = the Dư đồ tap rule (j77Tap: access, khắc, bái kiến card) to the palace, then the room: stage picture = the hall's residence
+  painting (KIT_FLOOR / KIT_FANCHOR set per hall), title "<cung> · <hall>", people = curPeople() filtered to that hall (chest of an absent chủ vị
+  in Chính điện; servants / men / kids in Chính điện). Already there: free, straight to the room. The hall choice lasts this buổi (`S.hall`).
+- ONE SOURCE (review/residence-art `jres.js`, merged): who lives in which hall = `residenceOf` / `roomResidents`; room picture = `residenceArt`;
+  floor lines = jres KIT_FLOOR / KIT_FANCHOR. jpm keeps no hall or picture logic of its own (only the present-this-buổi count from S.where/countAt).
+  Càn Ninh: one hall (jres keeps everyone under the Hoàng hậu as "kn"). Her own home (Ngọc Thanh các, or her palace) adds a 4th row/hotspot
+  "Dãy nhà cung nhân" (chip "N cung nhân" = her servants) → the cung-nhan room (residenceArt(null,"cungnhan")) with her servants on the stage.
+- Back: the room's `#tomap` reads "‹ <cung>" and returns to the detail map; the detail map's "‹ Dư đồ" returns to the plan; any tab-bar tap closes it.
+- Test: `node dev/test/palace-map.js <url> <W>x<H>@dpr <outdir> <tag>` (shots map → detail → room → back; checks Σ hall counts = countAt, room people =
+  hall people, no overflow, no page errors). Shots: `dev/shots/palace-map/`.
+- Residence rooms (jres.js, loaded after jk4): 25 rooms × 4 seasons × 4 buổi = 400 paintings `img/<room>-<mùa>-<buổi>.webp`; API `residenceArt / residenceOf / roomResidents / roomPeople / resRoomName`. Map labels stay the Dư đồ kit name tags (`.mlab`); readable Dư đồ tags are the later C46 item.
