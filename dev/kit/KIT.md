@@ -2737,6 +2737,19 @@ One inline change for anything that is not a person's relation ("Kho lúa −10"
   (e.g. "Ta tuần qua"), never inside a sentence.
 
 
+## 57.1 STAT FX · kitStatFx / kitStatGlow (owner 15/11 s8, review/stat-fx) — `dev/build/jstatfx.js` (after jfxkit)
+Every stat / number change she can see, readable. ONE entry; replaces `popNum` (apply), `coinPop`, the result-card fly of `kfNumbers` and the old
+gold `kfhit` flash (those now call it).
+- `kitStatFx([{k,dv,name?,from?}],{src})`: `k` = top-bar key (sung danh suc bac duc sac tai tamco; other keys give a label only), `dv` signed, `from` = point/rect to fly from.
+- Label carries NAME + delta ("Danh +2", `.ksfl.g|.r`, 1.02rem bold pill). Result card: label holds ~0.9 s then flies ~1.5 s to its cell; change with no card:
+  label under the cell, held ~1.6 s. Several changes QUEUE (700 ms apart, 950 ms from a card, max 10); a tap anywhere skips (`kitStatFxSkip`).
+- The cell then glows GREEN (+) / dim RED (-), 3 pulses over ~2.6 s, its number (.kstv) scales ~1.15x and takes the colour (`kitStatGlow(cell,dv)`; class `.ksf-g/.ksf-r`).
+- The same change announced by two paths (apply + result card / coin) shows once (2.2 s window per key+delta, different `src`).
+- Gọn (Hiệu ứng: Gọn) = glow only, no label; reduce-motion = steady glow (`.ksf-s`), no movement. Not run in `quiet` / bot.
+- `kitStatSet` on a non-HUD cell/tile (person card, status sheet) whose number changes calls `kitStatDelta` = the same glow, so relation numbers on cards pulse too.
+- Colour is by MEANING: gain green, loss red, never by row. `kcls` (j19) now matches whole words (`KWB`): "Thêu thùa" is no longer hostile (thù), "Nguyên đán" no longer
+  "nguy", "truyền/truyện" no longer "truy"; a KÈM value that is an explicit gain stays green (`kemCol`). Scans: `dev/test/stat-fx-scan.py`, `stat-fx-scan.js`. Sample: kit page §57.1.
+
 ## 58. LỊCH THÁNG · kitMonthCal + kitDeskCal (owner 15/11 ~18:30Z, review/month-calendar) — `dev/build/jmcal.js` (after jevb, before j84)
 A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coordinator).
 - **Source = FEST only** (j31 table + j71 `thanhtho`, hidden while `S.thDead`). Private contests, tea parties, private banquets and every

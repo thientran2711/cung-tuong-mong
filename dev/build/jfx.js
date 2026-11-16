@@ -137,15 +137,11 @@ let kfAmbT=0;function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clea
   KF_SPAWN.season();kfAmbT=setInterval(()=>{if(!kfAmbWant()){KFX.ambOn=false;clearInterval(kfAmbT);kfAmbT=0;return}if(KFX.amb<cap()){KF_SPAWN.season();kfWake()}},1400)}).catch(()=>{})}
 /* ---------- numbers fly from the result card into their top-bar cell ---------- */
 const KF_CELL={sung:"hud-sung",danh:"hud-danh",suc:"hud-suc",bac:"hud-bac",duc:"hud-duc",sac:"hud-sac",tai:"hud-tai",tamco:"hud-tamco"};
-function kfNumbers(card,before){if(!card||!before||kfStill()||typeof S==="undefined"||!S)return;const keys=typeof RKEYS!=="undefined"?RKEYS:[];const L=[];
+function kfNumbers(card,before){if(!card||!before||typeof S==="undefined"||!S)return;const keys=typeof RKEYS!=="undefined"?RKEYS:[];const L=[];
  for(const [k,n] of keys){const dv=(S[k]||0)-(before[k]||0);if(dv)L.push([k,n.replace(/ với ngươi$/,""),dv])}if(!L.length)return;
- document.querySelectorAll(".kmfls").forEach(e=>e.remove());const r=card.getBoundingClientRect();if(!r.width)return;
- L.slice(0,7).forEach(([k,n,dv],i)=>{const sp=document.createElement("span");sp.className="kfnum "+(dv>0?"g":"r");sp.textContent=`${n} ${dv>0?"+":"−"}${Math.abs(dv)}`;document.body.appendChild(sp);
-  const w=sp.offsetWidth,h=sp.offsetHeight,x0=r.left+r.width/2-w/2+(i-(Math.min(L.length,7)-1)/2)*Math.min(90,r.width/Math.min(L.length,7)),y0=Math.max(4,r.top-h-6);
-  const cell=KF_CELL[k]&&document.getElementById(KF_CELL[k]);const cr=cell&&cell.getBoundingClientRect();const ok=cr&&cr.width&&cr.bottom>0&&cr.top<innerHeight;
-  const x1=ok?cr.left+cr.width/2-w/2:x0,y1=ok?cr.top+cr.height/2-h/2:y0-60;const delay=200+i*130;
-  const an=sp.animate([{transform:`translate(${x0}px,${y0+14}px) scale(.6)`,opacity:0},{transform:`translate(${x0}px,${y0-8}px) scale(1.08)`,opacity:1,offset:.22},{transform:`translate(${x0}px,${y0-12}px) scale(1)`,opacity:1,offset:.4},{transform:`translate(${x1}px,${y1}px) scale(${ok?.72:1})`,opacity:ok?1:0,offset:.94},{transform:`translate(${x1}px,${y1}px) scale(.6)`,opacity:0}],{duration:ok?1300:1500,delay,easing:"cubic-bezier(.45,.05,.4,1)",fill:"both"});
-  an.onfinish=()=>{sp.remove();if(ok){cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(dv>0?"kfhit":"kfhit-r");setTimeout(()=>cell.classList.remove("kfhit","kfhit-r"),700);if(KFX.app)KF_SPAWN.pop&&kfPx("pop",{x:cr.left+cr.width/2,y:cr.top+cr.height/2})}}})}
+ document.querySelectorAll(".kmfls").forEach(e=>e.remove());const r=card.getBoundingClientRect();if(!r.width||typeof kitStatFx!=="function")return;
+ /* KIT §57.1 kitStatFx: name + delta label flies slowly (queued, tap skips) to its top-bar cell, which glows green / red and pulses */
+ const n=Math.min(L.length,7);kitStatFx(L.slice(0,7).map(([k,nm,dv],i)=>({k,name:nm,dv,from:{x:r.left+r.width/2,y:r.top}})),{src:"card"})}
 /* ---------- touch kit ---------- */
 const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]';
 const KF_FIG="#me,#emp,.tok";
@@ -270,7 +266,7 @@ function kitGain(x,o){o=o||{};if(!kfOn())return;const I=kgInfo(x);KFX.gains=KFX.
    if(im&&tb&&!still&&im.animate){const a=im.getBoundingClientRect(),b=tb.getBoundingClientRect();const fl=im.cloneNode();fl.className="krevfly";fl.style.cssText=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(fl);
     const dx=b.left+b.width/2-(a.left+a.width/2),dy=b.top+b.height/2-(a.top+a.height/2),sc=Math.max(.12,Math.min(b.width,b.height)/Math.max(1,a.width));
     const an=fl.animate([{transform:"none",opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(.6)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(${sc})`,opacity:.2}],{duration:620,easing:"cubic-bezier(.5,0,.6,1)"});
-    an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
+    an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
    KFX.gainClosed=(KFX.gainClosed||0)+1;ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);done()};
   ov.addEventListener("click",close)};
  if(typeof kmPush==="function")kmPush(run);else run(()=>{})}

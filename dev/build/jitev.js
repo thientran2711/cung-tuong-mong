@@ -116,14 +116,14 @@ function ievCenter(r){return{x:r.left+r.width/2,y:r.top+r.height/2}}
 function kitItemFx(act,I,o){o=o||{};if(!ievOn())return 0;if(typeof I==="string"||(I&&!I.name&&I.k))I=kitItemInfo(I);
  IEV.log.push({act,name:I&&I.name});if(IEV.log.length>80)IEV.log.shift();
  const RB=(typeof BAL==="object"&&BAL.itev)||{};
- if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700)}}return 0}
+ if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700)}}return 0}
  let r=o.from&&o.from.width?o.from:null;if(!r){const s=Math.min(110,innerWidth*.22);r={left:innerWidth/2-s/2,top:innerHeight*.4-s/2,width:s,height:s}}
  const w=ievClone(I,r),c=ievCenter(r);ievCatch();let d=RB[act]||1200;const end=()=>{w.remove();setTimeout(ievUncatch,0)};
  try{try{const KS={keep:"itemFly",back:"giftBack",give:"give",burn:"mgFire",well:"mgThrow",use:"heal"};/* jsfx moments (dev/audio/SFX_PLAN.md) */if(typeof kitSfx==="function")kitSfx(KS[act]||"itemLose");else if(typeof sfx==="function")sfx(act==="keep"?"sfx-coin":"sfx-open")}catch(e){}
  if(act==="keep"){const tb=ievBag();const b=tb?tb.getBoundingClientRect():{left:innerWidth/2,top:innerHeight-40,width:0,height:0};const t=ievCenter(b);
   const dx=t.x-c.x,dy=t.y-c.y,sc=Math.max(.15,Math.min(b.width||40,b.height||40)/Math.max(1,r.width));d=RB.keep||900;
   ievAnim(w,[{transform:ievT(0,0,1),opacity:1},{transform:ievT(0,-18,1.12),opacity:1,offset:.2},{transform:ievT(dx*.5,dy*.5-70,.7),opacity:1,offset:.6},{transform:ievT(dx,dy,sc),opacity:.25}],{duration:d}).finished.then(()=>{end();
-   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
+   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),2700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
  else if(act==="back"||act==="give"){let t=null;const to=o.to&&o.to.getBoundingClientRect?o.to.getBoundingClientRect():o.to;
   if(to&&to.width)t={x:to.left+to.width/2,y:to.top+to.height*.42};else t={x:act==="back"?-r.width:innerWidth/2,y:act==="back"?c.y-40:-r.height};
   const dx=t.x-c.x,dy=t.y-c.y;d=RB.back||1000;
