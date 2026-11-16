@@ -19039,11 +19039,21 @@ function kitItemSrc(k,fb){try{if(typeof itemArt==="function"){const s=itemArt(k)
    o.onText = text of the worn band (default "Đang mặc"); o.mark = [text,"r"|"g"|"n"] small corner tag (e.g. "đã tẩm");
    o.sel = selected (KIT §70: its kitItemDetail is shown beside the grid) → gold ring.
    o.ghost = (empty only) a picture shown as a faint silhouette = the TYPE outline of an empty equipment slot (kitEquipSlots). */
-function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]||KIT_GRADE[0];const sz=o.size||"md";const slot=sz==="slot";
+/* KIT 28.13b BIG ITEM (D3 item-big, OD:L686; review/kit-keeper-2): sizes lg / xl are FRAMELESS (the painting alone, soft shadow, grade shown by the name/grade line; o.frame:true keeps the frame) and HI-RES:
+   a small painting `https://ctm-img.victoria-tntt.workers.dev/img/item-X.webp` is shown as `https://ctm-img.victoria-tntt.workers.dev/img/item512/item-X.webp` (falls back to the small one if the 512 file is missing). One place — every big item picture in the game follows. */
+function kitItemBigSrc(src){return typeof src==="string"&&/(^|\/)img\/item-[^\/]+$/.test(src)&&src.indexOf("/item512/")<0?src.replace(/(^|\/)img\/item-([^\/]+)$/,"$1img/item512/item-$2"):src}
+window.kitItemBigSrc=kitItemBigSrc;
+function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]||KIT_GRADE[0];const sz=o.size||"md";const slot=sz==="slot";const bigSz=(sz==="lg"||sz==="xl")&&!o.frame;
  const lab=o.label&&!slot?`<span class="kitl kitl-${o.label[1]||"n"}">${o.label[0]}</span>`:"";const tip=(o.tip||o.name||"").replace(/"/g,"&quot;");
- return `<span class="kitem kitem-${sz}${o.empty?" kitem-empty":" kig"+Math.max(0,Math.min(4,o.grade|0))}${o.on?" kitem-on":""}${o.sel?" kitem-sel":""}${(o.grade|0)===4&&!o.empty?" kitem-nt":""}" style="--ig:${g.g};--ic:${g.c}${g.r?";--ir:"+g.r:""}" ${o.data||""} title="${tip}"${slot&&!o.empty?` aria-label="${tip}"`:""}>`+
-  `<span class="kitb">${o.src&&!o.empty?`<img src="${o.src}" alt="" onerror="this.remove()">`:""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}">Xa xỉ ${o.lux}</i>`:""}</span>`+
+ return `<span class="kitem kitem-${sz}${o.empty?" kitem-empty":" kig"+Math.max(0,Math.min(4,o.grade|0))}${o.on?" kitem-on":""}${o.sel?" kitem-sel":""}${(sz==="lg"||sz==="xl")&&o.frame?" kitem-fr":""}${(o.grade|0)===4&&!o.empty?" kitem-nt":""}" style="--ig:${g.g};--ic:${g.c}${g.r?";--ir:"+g.r:""}" ${o.data||""} title="${tip}"${slot&&!o.empty?` aria-label="${tip}"`:""}>`+
+  `<span class="kitb">${o.src&&!o.empty?(bigSz&&kitItemBigSrc(o.src)!==o.src?`<img src="${kitItemBigSrc(o.src)}" data-fb="${o.src}" alt="" onerror="if(this.dataset.fb&&this.src.indexOf('/item512/')>0){this.src=this.dataset.fb;this.removeAttribute('data-fb')}else this.remove()">`:`<img src="${o.src}" alt="" onerror="this.remove()">`):""}${o.empty&&o.ghost?`<img class="kigh" src="${o.ghost}" alt="" aria-hidden="true" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4&&!o.empty?`<i class="kits" aria-hidden="true">Ngự</i>`:""}${o.on?`<i class="kiton">${o.onText||"Đang mặc"}</i>`:""}${o.mark?`<i class="kitm kitm-${o.mark[1]||"n"}">${o.mark[0]}</i>`:""}${o.lux&&!o.empty?`<i class="kitx" title="Xa xỉ ${o.lux}">Xa xỉ ${o.lux}</i>`:""}</span>`+
   (slot?"":`<span class="kitn">${o.name||""}</span>${o.empty?"":`<span class="kitg">${g.n}</span>`}${lab}`)+`</span>`}
+(function(){const st=document.createElement("style");st.id="k2b-item-big";st.textContent=`
+html body .kitem-lg:not(.kitem-fr){--isz:150px}html body .kitem-xl:not(.kitem-fr){--isz:min(260px,36dvh)}
+html body .kitem-lg:not(.kitem-fr)>.kitb,html body .kitem-xl:not(.kitem-fr)>.kitb{background:none!important;border:0!important;box-shadow:none!important;outline:0!important;overflow:visible!important;border-radius:0!important}
+html body .kitem-lg:not(.kitem-fr)>.kitb::after,html body .kitem-xl:not(.kitem-fr)>.kitb::after{display:none!important}
+html body .kitem-lg:not(.kitem-fr)>.kitb>img,html body .kitem-xl:not(.kitem-fr)>.kitb>img{width:100%!important;height:100%!important;object-fit:contain;filter:drop-shadow(0 6px 9px #3a201666) drop-shadow(0 1px 2px #3a20164d)}
+`;document.head.appendChild(st)})();
 /* K1: the two worn slots beside the portrait (everyone: player, consorts, maids, ma ma, Thái hậu…); the outfit status only when known */
 function kitWearSlots(p,opts){try{if(!p||typeof wdSlots!=="function")return"";const L=wdSlots(p);const me=p===S;const lab=L[0]&&L[0].label?[L[0].label,L[0].labelKey==="ok"?"ok":L[0].labelKey==="under"?"n":"no"]:null;
  return `<div class="kwear${opts&&opts.cls?" "+opts.cls:""}">`+L.map((x,i)=>kitItem({src:x.empty?"":kitItemSrc(x.k,x.icon),name:x.empty?x.name:x.name,grade:x.grade,empty:x.empty,size:(opts&&opts.size)||"sm",
@@ -27954,7 +27964,7 @@ window.kitPane=kitPane;
  addEventListener("resize",()=>{clearTimeout(window.__kpT);window.__kpT=setTimeout(kitPane,60)})})();
 (function(){const st=document.createElement("style");st.id="kit-pane";st.textContent=`
 #panel.kpane{padding-top:0!important;scroll-padding-top:calc(var(--kpbarh,0px) + 6px)}
-#panel.kpane>.kpbar{position:sticky;top:0;z-index:40;display:flex;flex-direction:column;gap:6px;margin-top:0!important;margin-bottom:var(--k-tabgap,10px)!important;padding:8px 8px 6px;
+#panel.kpane>.kpbar{position:sticky;top:0;z-index:29;display:flex;flex-direction:column;gap:6px;margin-top:0!important;margin-bottom:var(--k-tabgap,10px)!important;padding:8px 8px 6px;
  background:var(--panel,#fffaf0);border-bottom:1px solid var(--k-hair,#e6d3ac);box-shadow:none}
 #panel.kpane>.kpbar>.ksub{position:static!important;margin:0!important;top:auto!important}
 #panel.kpane>.kpbar>.kcattabs{position:static!important;margin:0!important;padding:0!important;box-shadow:none!important;background:transparent!important;top:auto!important}
@@ -28494,6 +28504,8 @@ KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LU�
  const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"],["long","VIỆC DÀI · lời kể dài (chữ cuộn trong khung, tranh + nút đứng yên · KIT 32.5b)"]];
  const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
   (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+KIT_SAMPLES.push({id:"§28.13b",title:"kitItem lớn · không khung, ảnh 512 (lg 150 px · xl 260 px) — so với ô có khung (md · slot)",html:()=>{const s=kitItemSrc("nhansam","https://ctm-img.victoria-tntt.workers.dev/img/item-nhansam.webp");
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:18px">${kitItem({src:s,name:"Nhân sâm",grade:3,size:"xl"})}${kitItem({src:s,name:"Nhân sâm",grade:4,size:"lg",qty:2})}${kitItem({src:s,name:"Nhân sâm",grade:1,size:"md"})}</div>`}});
 KIT_SAMPLES.push({id:"§81",title:"Nút kết cảnh · cảnh hoạt hình nào cũng kết bằng MỘT nút ngắn, không tự đóng (chạm để mở cảnh thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
  const L=[["bloom","Có hỷ → «Tiếp theo»"],["edict","Thánh chỉ tấn phong → «Đã hiểu»"],["flipme","Lật thẻ bài: thẻ của ta → «Chuẩn bị thị tẩm»"],["flipother","Lật thẻ bài: người khác → «Ta biết rồi»"]];
  return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn alt" data-kscene="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem cảnh."],{group:false}))}});
@@ -36076,7 +36088,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="068fc9cbc822";window.CTM_BUILD=BUILD;
+const BUILD="30b5528efd4d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

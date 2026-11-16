@@ -2160,7 +2160,7 @@ kitBook, game / lesson results in #ov and the person card opened from the room #
   (jk3 §9); the week book at the screen's top right (`.kbk > .kbk-x`); a game result at its header's right end. A floating card inside a
   panel (shop item card) uses the same class at its own top right. `kitXAdd(dlg, close)` adds it (once) and wires it.
 - THE ✕ IS NEVER COVERED (owner 16/11 "Nút tắt bị che", review/press-fx-r1): nothing in or over a panel may sit on its ✕. The docked room card
-  `#popw` lies above the pane bar (`#popw` z 41 > `.kpbar` z 40, jk3 §9), and the panel person card's top line is the pane bar's bottom
+  `#popw` lies above the pane bar (`#popw` z 41 > `.kpbar` z 29, jk3 §9), and the panel person card's top line is the pane bar's bottom
   (`kitPcSize`, jk2b, KIT 45.2), so a card is never scrolled with its top under the bar. When the card's own body scrolls (phones), the ✕ follows: jk3 §9 sets `--kpcxy` = the card's
   scrollTop and the ✕ is translated by it, so it never leaves the card's top-right corner. Test dev/test/press-fx.js
   (check "✕ on top"): for every tab with a room person open and the panel + card scrolled to the end, the point under `#popx` must hit `#popx`.
@@ -3654,3 +3654,14 @@ STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-c
 night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar (`kitCalendar`, dawn) · co-op scenes (`jcoop*`: buổi clock end, waiting-strip results) · the card-flip VIDEOS (`cardflip-videos`) · a `kitFlipNote`-like note is NOT a scene (no tap) and stays.
 The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
 Sample: kit page §81 (opens a real scene: the button shows after the animation and only it closes). Test: `dev/test/scene-end.js`.
+
+### 45.4 PANE BAR NEVER OVER A POP-UP (main s14 bug ".kpbar above modal"; review/kit-keeper-2)
+`.kpbar` (the sticky pane bar, §45) was z-index 40 while every `.modal` (dialogs, notices, results) is z-index 30, so the bar drew OVER an open pop-up. The bar is now z-index 29: under every `.modal` (30), the week summary `.dawn` (40), toasts (45); `#popw` (41) still lies above the bar. Rule: nothing sticky inside `#panel` may use a z-index ≥ 30 (it would cross the pop-up layer). Test: `dev/test/kpbar-modal.js` (a pop-up open over every pane tab: the pop-up's centre point belongs to the pop-up, not to the bar).
+
+### 28.13b BIG ITEM · frameless + hi-res (D3 item-big, OD:L686; KIT REQUEST from review/item-big @adda320; review/kit-keeper-2) — `kitItem` / `kitItemBigSrc` (jk2b)
+Sizes `lg` (150 px) and `xl` (min(260 px, 36 dvh)) of `kitItem` are the CENTRE picture of an item (info pop-up, gift / econ / pet-care / veil / mark pictures, reward spotlight): they carry NO frame — no border, no ground, no box-shadow, no overflow clip, no tier ground image
+(the 9-slice frame and the t-ground of §28.13 are for `slot` / `sm` / `md` only). The painting stands alone on the pop-up's paper with a soft drop shadow; the grade is shown by the grade word under it (`.kitg`, grade colour) and the name; the floating chips (`kitq` ×N, `kits` Ngự, `kiton`, `kitm`, `kitx` Xa xỉ) stay.
+`kitItem({…, frame:true})` keeps the frame for a special case (none today).
+HI-RES: for lg / xl a small painting `img/item-X.webp` (256) is requested as `img/item512/item-X.webp` (512; `kitItemBigSrc(src)` does the mapping, other sources unchanged); if the 512 file is missing the small one is shown (`onerror`, one swap). So the ~20 call sites that passed the small src (jgift, jinv, jkrev, jmark, jpet, jpetcare, jveil, jwdinv, jlost …) are hi-res and frameless WITHOUT being touched.
+Not covered (own source functions, no item512 mapping): pet stage pictures, veil / mark pictures, wardrobe `wd-*` icons (`img/wd512/…` are already 512 where the call site passes them), the 22 items with no `item512` painting (list in reports/item-big.md → ART REQUEST). Tư trang grid (`slot`) and all lists (`sm` / `md`) keep their frame.
+Sample: kit page §28.13b. Test: `dev/test/item-big.js`.
