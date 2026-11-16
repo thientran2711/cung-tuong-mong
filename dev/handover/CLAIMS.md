@@ -125,3 +125,4 @@
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | RUNNING | 16/11 08:40Z |
 | reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | RUNNING | 16/11 08:40Z |
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
+| cardflip-glow REVIEW (owner bug; frame-ring light, slower, scene-end button) | review/cardflip-glow-r1 | main s14 | session_01UV1SzggxfoaRwYDvYoEu4Q (sonnet) | RUNNING | 16/11 08:36Z |
