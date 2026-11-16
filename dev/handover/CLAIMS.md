@@ -153,7 +153,7 @@
 | D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | RUNNING | 16/11 11:16Z |
 | design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
 | D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | RUNNING | 16/11 11:38Z |
-| nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | RUNNING | 16/11 11:38Z |
+| nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | DONE PASS 9696bc72 (archived) | 16/11 11:38Z |
 | nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | RUNNING | 16/11 11:38Z |
 | D36 rank-port reviewer | review/rank-port-r1 | B | session_01N1tNP3gJ9boCKEYKaNSuEG (sonnet) | RUNNING | 16/11 11:38Z |
 | D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | RUNNING | 16/11 11:38Z |
