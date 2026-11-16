@@ -12,7 +12,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
 | C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn-r1 | sonnet | PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
-| C29 rel-picker | review/rel-picker @ac064162 | sonnet | REVIEWING (review/rel-picker-r1, sonnet) |
+| C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
 | C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING (resumed) |
 | C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
@@ -26,7 +26,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
-| D36 leaderboard + Bảng vàng | review/rank-port | sonnet | QUEUED |
+| D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
 | D39 appearance-port | review/appearance-port @00ff5a35 | sonnet | REVIEWING (review/appearance-port-r1, sonnet) |
 | D40 weather-risk-port | review/weather-port | sonnet | QUEUED |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
@@ -38,6 +38,7 @@ PASS review/actcard-small-r1 e3664469fbeddf8e7c9fafb851bd1fda73b6354d (C40; desc
 PASS review/mg-easy-r1 94644c1e6342eb7ea1003aae090cd5310a9597e5 (C23; knowledge minigames level-tiered + aids; reviewer swapped private .kg82tip → kit .kpnote)
 PASS review/buoi-transition-r1 c91bfdc4629fbf4ebf84307f543d44a394ff138b (C27; ink-wash buổi transition, KIT §71 jbuoi.js; 4 images already on CDN)
 PASS review/room-btn-r1 c80e5df978eaffb29ce218b4431e17b415232750 (C28; KIT §72 kitBackBtnHtml, painted room/map icons already on CDN; 'Bản đồ'→'Dư đồ' per VANPHONG)
+PASS review/rel-picker-r1 ce7c076a38d55c95901d19002832983f91560052 (C29; compact Giao tình pickers, kitNameRank face labels, pager arrows only on overflow game-wide; KIT §49.2c + sample)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
