@@ -40,11 +40,13 @@ function fire(f){f()}
 function randomStep(){
   const cand=[];
   deck.forEach((a,i)=>{if(cardOK(a))cand.push(()=>{note("card",a.n);act(i)})});
+  if(!window.__hsOnly){/* danh-balance: Hành-sự-only random player */
   places().forEach(p=>{if(placeOK(p))cand.push(()=>{note("go");goTo(p.k)})});
   rivals.forEach((v,i)=>{if(v.alive&&!v.out&&can(2))rvBtns(i).forEach(k=>cand.push(()=>{note("scheme_"+k);doAct(i,k)}))});
   lessonCands().forEach(a=>cand.push(()=>{note("lesson");lesson(a.k)}));
   if(S.bac>=60&&!S.master)cand.push(()=>{note("master");hireMaster()});
   talkCands().forEach(t=>cand.push(()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}));
+  }
   if(!cand.length||window.__turnActs>=40){window.__buoi++;if(!cand.length&&used<=1)window.__idle++;window.__turnActs=0;nextBuoi();return}
   window.__turnActs++;{const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used;if(window.__rtk!==tk){window.__rtk=tk;window.__rn=0}if(++window.__rn>30){window.__rn=0;window.__buoi++;nextBuoi();return}}rpick(cand)()}
 // ---- SENSIBLE
