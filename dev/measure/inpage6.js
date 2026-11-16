@@ -114,7 +114,7 @@ function sensibleStep(){
   if(op2.length&&op2[0].s>0.35){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
-  for(let i=0;i<n;i++){window.__iter++;window.__lifeIter++;
+  for(let i=0;i<n;i++){if(window.__vtPump)window.__vtPump(5);/* run_rep.js virtual clock (vclock.js): game timers advance 5 ms per bot step */window.__iter++;window.__lifeIter++;
     if(S&&!S.dead){window.__maxRank=Math.max(window.__maxRank,S.rank);if(S.rank>=7&&window.__hhTurn==null){window.__hhTurn=S.turn;window.__hhWk=S.turn*3+S.tuan;window.__hhB=window.__lifeB}const t=S.turn+"_"+S.tuan;if(window.__lastT!==t){window.__lastT=t;window.__sucTrace.push(S.suc)}}
     {const tk=S?S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used:'';if(tk!==window.__stk){window.__stk=tk;window.__stn=0}else window.__stn++}
     if(window.__lifeIter>60000||window.__stn>400){window.__res.push({ex:JSON.parse(JSON.stringify(window.__exN||{})),origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",stuck:window.__stn>400,ring:(window.__ring||[]).slice(),acts:window.__acts,state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out,q0:Q[0]&&{t:strip(Q[0].t||Q[0].title||"").slice(0,160),opts:(Q[0].opts||[]).map(o=>o.n+"|"+JSON.stringify(o.fx||{}))},modalHidden:q("#modal").hidden,ov:q("#ov").hidden?"":strip(q("#ov").innerHTML).slice(0,200),logs:(S.logs||[]).slice(0,3).map(strip)})});window.__maxRank=0;window.__lifeIter=0;window.__stn=0;window.__acts={};start();continue}
