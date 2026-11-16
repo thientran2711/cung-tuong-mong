@@ -60,13 +60,16 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
+/* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
+   layout per scroller per frame during a page turn) */
+function kclLkSync(faces){const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
-   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){const c0=getComputedStyle(a);for(const k of KCL_FREEZE){const v=c0[k];if(v)b.style[k]=v}}
-   else if(i&&b.style&&getComputedStyle(a).display==="none")b.style.display="none";
-   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
-   const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
+   const ca=getComputedStyle(a);/* lag-play: ONE computed style object per element (was read 2-3 times) */
+   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){for(const k of KCL_FREEZE){const v=ca[k];if(v)b.style[k]=v}}
+   else if(i&&b.style&&ca.display==="none")b.style.display="none";
+   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);if(i&&ca.position==="sticky")b.style.position="relative";
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
    if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
@@ -176,7 +179,7 @@ function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;const s=Math.sin(Math.PI*p),c=Math.cos(Math.PI*p);
   /* a live face follows its page's scroll (the new page may still settle while the sheet turns) */
-  for(const Fc of [F,B])for(const [a,b] of Fc.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   const ang=-180*p,tilt=4.2*s,skew=-2.4*s,lift=-0.014*h*s;
   sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
   /* the face turning away from the light darkens, the one landing brightens */
@@ -216,7 +219,7 @@ function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o
  const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;
-  for(const bx of [F,B])for(const [a,b] of bx.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   sheet.style.transform=`translate3d(${(-p*w).toFixed(2)}px,0,0)`;
   B.style.transform=`translate3d(${((1-p)*w*.2).toFixed(2)}px,0,0)`;
   dim.style.opacity=(.26*(1-p)).toFixed(3);edge.style.opacity=Math.min(1,(1-p)*8).toFixed(3)}
@@ -262,10 +265,14 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  try{take()}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
  /* the new page finishes its layout a moment later (person card sizing, chips): print it again once it has settled */
- let alive=true;const reback=()=>{if(!alive)return;try{take()}catch(e){}};
+ let alive=true,dirty=false;const reback=()=>{if(!alive)return;dirty=false;try{take()}catch(e){}};
+ /* lag-play (owner 16/11 15:05Z): a re-print copies the whole page with its computed styles (~100-400 ms on a slow phone); it ran
+    unconditionally at 90 ms. Now only when the page changed since the last print: a DOM change, a picture still loading, or a new sig. */
+ const kmo=new MutationObserver(()=>{dirty=true});try{kmo.observe(el,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){}
+ const loading=()=>{try{return [...el.querySelectorAll("img")].some(im=>im.getAttribute("src")&&!im.complete)}catch(e){return true}};
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
- let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
- const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
+ let s0=sig(),ld=loading();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(()=>{if(dirty||ld)reback()},90);
+ const fin=()=>{alive=false;clearInterval(iv);kmo.disconnect();host.remove();if(kclLive===end)kclLive=null};
  let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);
  /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
     copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */

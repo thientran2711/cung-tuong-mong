@@ -2612,7 +2612,11 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
+  app.ticker.maxFPS=60;
+  /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
+     buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
+  {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
+  const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
 function pxCap(){return innerWidth<700?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
@@ -3124,7 +3128,7 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
   if(k==="lot"&&S.lot){const can1=!S.relot&&S.bac>=10&&can(1);Q.unshift({t:`Quẻ ${LV[S.lot.lv]} · ${S.lot.dom}`,h:lotHTML(S.lot)+`<p class="past">${HX.lot}</p>`+(can1?`<div class="opts"><button class="opt" id="relot2">Gieo lại<small>${kitParse("Chắc chắn · tốn: Bạc -10, 1 khắc")}</small></button></div>`:"")});showModal();const r=$("relot2");if(r)r.onclick=()=>{Q.shift();showModal();reLot(false)};return}
   if(k==="bl"){Q.unshift({t:"Bổng lộc",h:blCard()});showModal();return}if(k==="aw"){Q.unshift({t:"Ân thưởng",h:awCard()});showModal();return}const t=HX[k]||b.textContent;Q.unshift({t:b.textContent.replace(/[+-]\d+$/,"").trim(),h:`<p>${t}</p>`});showModal()}}
 /* keep the Pixi scene the size of the stage whenever the layout changes (not only on window resize) */
-(function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
+(function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}try{if(typeof kitStagePause==="function")kitStagePause()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
 /* every disabled button says why */
 function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=4?"hết khắc buổi này":"Sức dưới 20";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
 (function(){const kf=kitFix;kitFix=function(root){kf(root);(root||document).querySelectorAll(".rbtn button:disabled,.btn:disabled,.pcb button:disabled").forEach(b=>{if(b.querySelector(".kwhy"))return;const sm=b.querySelector("small");const w=guessWhy(b);if(!w)return;if(sm)sm.insertAdjacentHTML("afterbegin",`<span class="kwhy">${w}</span> `);else b.insertAdjacentHTML("beforeend",`<small><span class="kwhy">${w}</span></small>`)})}})();
@@ -4109,6 +4113,10 @@ document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [da
  if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap kbackb";b.innerHTML=typeof kitBackBtnHtml==="function"?kitBackBtnHtml("map","Dư đồ"):"‹ Dư đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
  if(b.parentNode!==st)st.appendChild(b)}catch(e){}return r}})();
 document.addEventListener("click",e=>{const t=e.target.closest("button[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
+/* lag-play (owner 16/11 15:05Z): ONE coalesced late render for every "a picture arrived, redraw" case (portraits, kid portraits, unknown
+   silhouettes, por fallbacks). Each used to run its own full render() — a whole-game redraw per picture (~0.5 s on a slow phone). */
+function kitRenderSoon(ms){clearTimeout(kitRenderSoon.t);kitRenderSoon.t=setTimeout(()=>{try{if(typeof S!=="undefined"&&S)render()}catch(e){}},ms==null?250:ms)}
+window.kitRenderSoon=kitRenderSoon;
 
 /* ================= FIGURES v2: every manifest merged; one identity per person for life, never reused in a game ================= */
 /* img/FIGURES.json (consorts, player, emperor, eunuchs), img/FIGURES-servants.json (maid, mama, eunuch), img/FIGURES-others.json
@@ -4155,7 +4163,7 @@ figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p)
 /* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
 const PORK={};
 function porOf(who,fb){try{if(!who||!FIGS.length)return fb;const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");if(!src)return fb;
- if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;clearTimeout(window.__porT);window.__porT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
+ if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
 (function(){const W=(name,get)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{const who=get.apply(this,arguments);if(r&&typeof r==="object"&&who)r.src=porOf(who,r.src);else if(typeof r==="string"&&who)return porOf(who,r)}catch(e){}return r}};
  W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pDoc",()=>S.court&&S.court.ty);W("pServ0",s=>s);W("maidSrc",m=>m);W("courtSrc",(k,c)=>c);W("pMan",m=>m)})();
 /* place screens: every person present stands full-body when art exists (servants, physician and eunuchs too) */
@@ -6473,7 +6481,7 @@ function kidFig(k){const id=kidId(k);if(!id)return null;const B=(KIDIX[kidRole(k
 function kidFigSrc(k,kind){const f=kidFig(k);if(!f)return"";return figPath(kind==="por"?f.por:(f.file||f.src))}
 /* portraits: the identity's por once it has loaded, the old face until then (or if it fails) */
 const KPORK={},KPIM=[];
-function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;clearTimeout(window.__kporT);window.__kporT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
+function kidPre(src){if(!src||KPORK[src]!=null)return;KPORK[src]=2;const im=new Image();im.onload=()=>{KPORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{KPORK[src]=0};KPIM.push(im);im.src=src}
 /* every band of the child's identity is fetched early, so a birthday never flashes the old face */
 function kidPreAll(k){const id=kidId(k);if(!id)return;const B=(KIDIX[kidRole(k)]||{})[id]||{};KIDBANDS.forEach(b=>{if(B[b])kidPre(figPath(B[b].por))})}
 function kidPor(k,fb){try{kidPreAll(k);const src=kidFigSrc(k,"por");if(!src)return fb;if(KPORK[src]===1)return src;kidPre(src);return fb}catch(e){return fb}}
@@ -11008,7 +11016,7 @@ function k61InitNew(){if(!S)return;S.known={me:3};k61SeedChiTon();S.nkn={me:{}};
  W("pv",v=>v);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pMaid",()=>S.maid);W("pDoc",()=>S.court&&S.court.ty);W("pServ",s=>s);W("pServ0",s=>s);
  W("pMan",m=>m);W("pMin",h=>h);W("kidFace",k=>k);W("pEunCourt",k=>S.court&&S.court[k]);W("pMsg",()=>S.court&&S.court.tq);W("courtSrc",(k,c)=>c);W("maidSrc",m=>m);
  W("pFaceOf",p=>{if(!p||p.kind==="chest")return null;if(p.kind==="ksp"&&!p.ref)return S.court&&S.court.ksp;if(p.kind==="peddler"&&!p.ref)return S.court&&S.court.ped;return null})})();
-const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new Image();im.onload=()=>{K61U[g]=1;try{if(S)render()}catch(e){}};im.src=`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-${g}.webp`}catch(e){}});
+const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new Image();im.onload=()=>{K61U[g]=1;kitRenderSoon(250)};im.src=`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-${g}.webp`}catch(e){}});
 function k61G(e){const k=k61Kind(e);return k==="kid"?"k":["emp","man","eun","tq","phys","off"].includes(k)?"m":"f"}
 function k61Sil(p){const e=k61PortEnt(p);if(!e||isKnown61(e))return p;const g=k61G(e);
  return Object.assign({},p,{src:K61U[g]?`https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",rw:p.rw?(k61Named(e)?k61Lab(e):k61Short(e)):p.rw,stranger:1})}
@@ -12251,7 +12259,9 @@ const KIT_ACT_CATS=[["hai-nguoi",/hạ độc|đẩy|vu |vu oan|trù ẻo|ngáng
  ["hau-ha",/hầu|dâng|chăm|phục dịch|quét|lau|lĩnh đồ|theo hầu|việc chủ|canh|nấu|pha trà/i],["nghi-ngoi",/nghỉ|ngủ|tắm|dưỡng|chải chuốt|giả bệnh|tĩnh dưỡng/i],
  ["buon-ban",/bán|mua|buôn|chợ|đổi|bạc/i],["le-nghi",/vấn an|thỉnh an|lễ|cầu|chùa|phật|xin xăm|cúng|bái/i],["giao-thiep",/thăm|tặng|kết|trò chuyện|mời|gặp|tâm sự|làm thân|nói/i],["di-lai",/đi |dạo|sang|ra |vào |đến /i]];
 let KIT_ACTS={acts:{},have:[]};try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/ACTS.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j){KIT_ACTS=j;try{document.querySelectorAll("button.ka.kcard[data-kart]").forEach(b=>{b.removeAttribute("data-kart");kpActArt(b)})}catch(e){}}}).catch(()=>{})}catch(e){}
-const kpSlug=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+/* memoised (pure; hot in act-card lookups) */
+const KPSLUG_C=new Map();const kpSlug=s=>{const k=String(s||"");let v=KPSLUG_C.get(k);if(v===undefined){v=kpSlug0(k);if(KPSLUG_C.size>8000)KPSLUG_C.clear();KPSLUG_C.set(k,v)}return v};
+const kpSlug0=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 function kitActCat(name){for(const [c,re] of KIT_ACT_CATS)if(re.test(name))return c;return"giao-thiep"}
 function kitActArt(name){const A=KIT_ACTS.acts||{};const key=A[name]||A[kpSlug(name)];const cat=kitActCat(name);const have=KIT_ACTS.have||[];
  return{src:key?`https://ctm-img.victoria-tntt.workers.dev/img/act-${key}.webp`:have.includes("act-cat-"+cat)?`https://ctm-img.victoria-tntt.workers.dev/img/act-cat-${cat}.webp`:"",cat,label:(KIT_ACTS.cats||{})[cat]||{"hau-ha":"Hầu hạ","hoc-tap":"Học tập","giao-thiep":"Giao thiệp","muu-ke":"Mưu kế","hai-nguoi":"Hại người","nghi-ngoi":"Nghỉ ngơi","buon-ban":"Buôn bán","le-nghi":"Lễ nghi","di-lai":"Đi lại"}[cat]}}
@@ -12399,7 +12409,13 @@ function kpActCtx(kan,n){try{const b=kan.closest&&kan.closest("button[data-vlear
   if(n==="Học với Thái hậu")return"Xin Thái hậu cho học cùng";if(n==="Tự học, làm tác phẩm")return"Tự luyện, làm tác phẩm";return n}
 function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpActCtx(kan,kpPlain(c.textContent))}
 const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
-function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+/* lag-play (owner 16/11 15:05Z, lag = first priority): kitActKey is pure in (name, KIT_ACTS) but walked every act table entry
+   (kpSlug of each) and was called for every act card on every DOM change (kaNorm MutationObserver + kpActArt wrappers): ~300 ms per
+   buổi on a 4x-slow phone. Memoised per KIT_ACTS object (a new ACTS.json load starts a fresh cache). */
+var KAK_SRC=null,KAK_C=new Map();
+function kitActKey(name){if(KAK_SRC!==KIT_ACTS){KAK_SRC=KIT_ACTS;KAK_C=new Map()}const k=typeof name==="string"?name:String(name==null?"":name);let v=KAK_C.get(k);
+ if(v===undefined){v=kitActKey0(name);if(KAK_C.size>5000)KAK_C.clear();KAK_C.set(k,v)}return v}
+function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
  let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
  for(const p in P)if(name.startsWith(p))take(p,P[p]);
  for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}
@@ -12484,7 +12500,7 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
    (its 60 fps WebGL redraw competed with the face picker's decodes: one page turn waited ~470 ms on the GPU read-back); it restarts when
    the stage shows again. */
 function kitStageCovered(){try{const M=$("modal");if($("kroul"))return true;if(!M||M.hidden||!M.classList.contains("kpscene"))return false;const bg=getComputedStyle(M).backgroundImage;return !!bg&&bg!=="none"}catch(e){return false}}
-function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const cov=kitStageCovered();const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
+function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const st0=$("stage");const cov=kitStageCovered()||!!(st0&&!st0.clientHeight)/* lag-play: a 0-px (hidden) stage draws nothing visible */;const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
  try{if(typeof KFX!=="undefined"&&KFX.app){const t=KFX.app.ticker;if(kitStageCovered()){if(t.started){t.stop();KFX.__kpause=1}}else if(KFX.__kpause){KFX.__kpause=0;if(typeof kfWake==="function")kfWake()}}}catch(e){}}
 (function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitStagePause()})};const go=()=>{const M=$("modal");if(!M||!document.body)return setTimeout(go,300);
  new MutationObserver(kick).observe(M,{attributes:true,attributeFilter:["class","hidden"]});new MutationObserver(kick).observe(document.body,{childList:true});setInterval(kitStagePause,1500)};go()})();
@@ -12901,13 +12917,16 @@ function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.
  for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
+/* lag-play: copied scrollers follow their live page each frame — all reads first, then the writes (read/write interleaved forced one
+   layout per scroller per frame during a page turn) */
+function kclLkSync(faces){const L=[];for(const Fc of faces)for(const [a,b] of Fc.lk)L.push([b,a.scrollTop,b.scrollTop]);for(const [b,t,c] of L)if(c!==t)b.scrollTop=t}
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
-   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){const c0=getComputedStyle(a);for(const k of KCL_FREEZE){const v=c0[k];if(v)b.style[k]=v}}
-   else if(i&&b.style&&getComputedStyle(a).display==="none")b.style.display="none";
-   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
-   const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
+   const ca=getComputedStyle(a);/* lag-play: ONE computed style object per element (was read 2-3 times) */
+   if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){for(const k of KCL_FREEZE){const v=ca[k];if(v)b.style[k]=v}}
+   else if(i&&b.style&&ca.display==="none")b.style.display="none";
+   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);if(i&&ca.position==="sticky")b.style.position="relative";
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
    if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
@@ -13017,7 +13036,7 @@ function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;const s=Math.sin(Math.PI*p),c=Math.cos(Math.PI*p);
   /* a live face follows its page's scroll (the new page may still settle while the sheet turns) */
-  for(const Fc of [F,B])for(const [a,b] of Fc.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   const ang=-180*p,tilt=4.2*s,skew=-2.4*s,lift=-0.014*h*s;
   sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
   /* the face turning away from the light darkens, the one landing brightens */
@@ -13057,7 +13076,7 @@ function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o
  const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
  let last=0;
  function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;
-  for(const bx of [F,B])for(const [a,b] of bx.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  kclLkSync([F,B]);
   sheet.style.transform=`translate3d(${(-p*w).toFixed(2)}px,0,0)`;
   B.style.transform=`translate3d(${((1-p)*w*.2).toFixed(2)}px,0,0)`;
   dim.style.opacity=(.26*(1-p)).toFixed(3);edge.style.opacity=Math.min(1,(1-p)*8).toFixed(3)}
@@ -13103,10 +13122,14 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  try{take()}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
  /* the new page finishes its layout a moment later (person card sizing, chips): print it again once it has settled */
- let alive=true;const reback=()=>{if(!alive)return;try{take()}catch(e){}};
+ let alive=true,dirty=false;const reback=()=>{if(!alive)return;dirty=false;try{take()}catch(e){}};
+ /* lag-play (owner 16/11 15:05Z): a re-print copies the whole page with its computed styles (~100-400 ms on a slow phone); it ran
+    unconditionally at 90 ms. Now only when the page changed since the last print: a DOM change, a picture still loading, or a new sig. */
+ const kmo=new MutationObserver(()=>{dirty=true});try{kmo.observe(el,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){}
+ const loading=()=>{try{return [...el.querySelectorAll("img")].some(im=>im.getAttribute("src")&&!im.complete)}catch(e){return true}};
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
- let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
- const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
+ let s0=sig(),ld=loading();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(()=>{if(dirty||ld)reback()},90);
+ const fin=()=>{alive=false;clearInterval(iv);kmo.disconnect();host.remove();if(kclLive===end)kclLive=null};
  let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);
  /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
     copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */
@@ -19794,7 +19817,7 @@ function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt")
    the art in each band (alpha mask read once per picture from a small canvas), so the Tư chất / Trong cung blocks may sit beside a figure's
    head or between two figures but never over the painted body. Falls back to the element box while a mask is not ready. ---------- */
 const KIT_MASK={};
-function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null;KIT_MASK[src]={};const I=new Image();I.crossOrigin="anonymous";I.onload=()=>{try{const N=24,Wc=48;const c=document.createElement("canvas");c.width=Wc;c.height=N*4;const x=c.getContext("2d");x.drawImage(I,0,0,Wc,N*4);const d=x.getImageData(0,0,Wc,N*4).data;const b=[];
+function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null;KIT_MASK[src]={};const I=new Image();I.crossOrigin="anonymous";I.onload=()=>{try{const N=24,Wc=48;const c=document.createElement("canvas");c.width=Wc;c.height=N*4;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(I,0,0,Wc,N*4);const d=x.getImageData(0,0,Wc,N*4).data;const b=[];
   for(let r=0;r<N;r++){let lo=1,hi=0;for(let yy=r*4;yy<r*4+4;yy++)for(let xx=0;xx<Wc;xx++){if(d[(yy*Wc+xx)*4+3]>40){lo=Math.min(lo,xx/Wc);hi=Math.max(hi,(xx+1)/Wc)}}b.push(hi>lo?[lo,hi]:null)}
   KIT_MASK[src]={b};setTimeout(()=>{try{khStage()}catch(e){}},30)}catch(e){KIT_MASK[src]={b:null,bad:1}}};I.src=src;return null}
 kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.querySelectorAll("#mefig, #tokens .tok img.figimg, #tokens .tok:not(.fig) .md").forEach(e=>{if(!e.offsetParent&&e.id!=="mefig")return;const r=e.getBoundingClientRect();if(r.width<8||r.height<8)return;
@@ -22529,7 +22552,7 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #mo
 (function(){
  /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
  const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.crossOrigin="anonymous";/* CDN pictures: CORS or the canvas read fails (review/stage-side) */im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
-   const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
+   const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
    /* owner 11/15 05:45Z ("khung nhảy"): ONE portrait box for every person — the trimmed headroom is the same constant for every frame
       (KIT_PORT_TRIM = the tallest crest's top), never measured per frame, so switching people never moves or resizes the frame */
@@ -25080,7 +25103,7 @@ window.KIT_LIGHT=KIT_LIGHT;
  const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}html body .kbk-person.kbk-full>.kbk-por{overflow:clip!important}`;document.head.appendChild(st);
  /* where the BODY stands in the picture (0..1 of its width): centre of the head = alpha mass of the top 16 % rows. Trains/outpainted hems
     make many figures asymmetric, so the body is not the picture centre. CDN images are CORS-open; on failure 0.5. */
- function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d");g.drawImage(I,0,0,w,h);
+ function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(I,0,0,w,h);
    const d=g.getImageData(0,0,w,Math.max(2,Math.round(h*.16))).data;let sx=0,sa=0;for(let i=3;i<d.length;i+=4){const a=d[i];if(a>40){sx+=((i>>2)%w)*a;sa+=a}}return sa?sx/sa/w:.5}catch(e){return .5}}
  function learn(src,then){if(AR[src]!=null)return;AR[src]=0;const I=new Image();I.crossOrigin="anonymous";
    I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
@@ -36584,7 +36607,7 @@ window.kitMePor=mePor;
 if(typeof porOf==="function"){const p1=porOf;porOf=function(who,fb){const r=p1.apply(this,arguments);try{if(who===S&&S&&typeof r==="string"&&/(^|\/)por-[^/]*\.webp/.test(r)&&!oldFace(r))S.porMe=r;if(who===S&&S&&(!r||(oldFace(r)&&!figReady()))){const m=mePor();if(m)return m}}catch(e){}return r}}
 /* a por that fails to load falls back to the old face in place (never a broken frame) */
 document.addEventListener("error",e=>{try{const im=e.target;if(!im||im.tagName!=="IMG")return;const s=im.getAttribute("src")||"";if(!/(^|\/)por-/.test(s)||im.dataset.jimgFb)return;
-  if(typeof PORK!=="undefined")PORK[s]=0;if(typeof KPORK!=="undefined"&&/por-kid-/.test(s))KPORK[s]=0;im.dataset.jimgFb="1";clearTimeout(window.__jimgT);window.__jimgT=setTimeout(()=>{try{if(S)render()}catch(x){}},300)}catch(x){}},true);
+  if(typeof PORK!=="undefined")PORK[s]=0;if(typeof KPORK!=="undefined"&&/por-kid-/.test(s))KPORK[s]=0;im.dataset.jimgFb="1";kitRenderSoon(300)}catch(x){}},true);
 
 /* 2 — a silhouette always stands in the stone frame */
 const isSil=f=>!!f&&(f.stranger||/kit\/unknown-[fmk]\.webp/.test(String(f.src||"")));
@@ -36872,7 +36895,10 @@ function kitPhNote(kind,id,tone,title){try{const k=kind+"|"+id;if(KIT_PH_SEEN[k]
 const kitPhPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
 /* manifests ready? (before they arrive every id looks unmapped: no placeholder, no record) */
 function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
-function kitPhActReady(){try{return typeof KIT_ACTS!=="undefined"&&!!KIT_ACTS&&!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}catch(e){return false}}
+/* cached per KIT_ACTS object (Object.keys of the whole act table ran per act card per DOM change) */
+var KPHAR_SRC=null,KPHAR_V=false;
+function kitPhActReady(){try{if(typeof KIT_ACTS==="undefined"||!KIT_ACTS)return false;if(KPHAR_SRC!==KIT_ACTS||KPHAR_SRC.acts!==KPHAR_A){KPHAR_SRC=KIT_ACTS;KPHAR_A=KIT_ACTS.acts;KPHAR_V=!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}return KPHAR_V}catch(e){return false}}
+var KPHAR_A=null;
 const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
 /* ---- events ---- */
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
@@ -41309,7 +41335,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="95d14ec91b36";window.CTM_BUILD=BUILD;
+const BUILD="27f97bd27827";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

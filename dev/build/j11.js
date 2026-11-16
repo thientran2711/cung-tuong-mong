@@ -96,7 +96,11 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
+  app.ticker.maxFPS=60;
+  /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
+     buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
+  {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
+  const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
 function pxCap(){return innerWidth<700?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
