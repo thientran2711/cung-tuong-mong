@@ -15,3 +15,5 @@ Workers (resume / build):
 Main coordinator keeps: all co-op (D21, A10, C43, C44), side stories D4/D5 + Emperor side story/factions, D8 emperor roads, D35 tutorial, D37 drag curl (with Foreman B C32), D43 (needs owner), A12 art-complete, and everything already RUNNING/REVIEWING in SESSION8_QUEUE.
 
 (16/11) Moved to Foreman B: D30 D31 D32 D33 D34 D36 D38 D39 D40 D41 D42 (branch re-ports). Do NOT take them.
+
+## KIT FIRST (owner 16/11, binding): every visual/UI change goes into the shared kit part only (KIT.md registry), so it changes everywhere; list all places using that element before changing; reviewers FAIL any change that makes one place differ from the others of its kind and run a consistency scan; read KIT.md before every UI task; two slices touching the same kit part → ask the main coordinator first.
