@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 09:20Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 09:29Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -32,7 +32,7 @@ main at start = eba64ead4.
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → reviewer session_01DgYSWoEfbFL74QqJ1ySvjK RUNNING (review/slap-mg-r3) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
-| D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | SẴN SÀNG KIỂM (worker archived) → reviewer session_01DgYSWmoCsGpJbQckATgPpk RUNNING (covers unreviewed coop-pets A10) |
+| D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | opus | worker session_01DgYSWnjWQExva4hE6H8RyB RUNNING |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix | sonnet | worker session_01DgYSWqEhdCoCY3dvQCAGz8 RUNNING |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
@@ -74,6 +74,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 09:29Z: coop-b1b5-r1 FAIL (6) → send_message to part-2 worker session_01DgYSWnjWQExva4hE6H8RyB: fixes first, then part 2, one reviewer for both. Reviewer archived.
 - 09:20Z: slap-mg-r2 SẴN SÀNG KIỂM dd0b618f → opus reviewer; worker archived. ART NEEDED for slap (sprites + intro pic) in reports/slap-mg-r2.md → art owner (C / main samples).
 - 09:09Z: coop-b1b5 SẴN SÀNG KIỂM d0f2260a → opus reviewer + part-2 worker opened; worker archived. 10 D sessions running.
 - 08:36Z: main s12/s13/s14 inbox read (07:55 entry exam, 08:00 orphan audit D = #2 #3 #7 #18 #19 #20 #33, 08:10 scene-end sweep, 08:20 kc-roads review, 08:45 OD:L1288, 09:32 coop-rejoin cancelled, 08:23 worker rollover, 08:27 kit §81). PICKUP: #7 mortality = already PASS by main s12 (mortality-r1 2d3428f8) → not D; #3 D58 folded into servant-mline-r2 worker (same servant system, one worker); #19, #20, #33 opened; #2 + #18 wait for mortality/cycle-r3 on main. coop-chat PASS → READY. servant-mline + slap-mg FAIL → fix workers. 7 sessions opened, 5 finished sessions archived (incl. s1). 9 D sessions running.

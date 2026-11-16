@@ -127,7 +127,7 @@
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
 | cardflip-glow REVIEW (owner bug; frame-ring light, slower, scene-end button) | review/cardflip-glow-r1 | main s14 | session_01UV1SzggxfoaRwYDvYoEu4Q (sonnet) | LIVE dd87e0eb, smoke PASS (archived) | 16/11 08:36Z |
 | design-scale REVIEW (opus; one page 590x820, uniform scale) | review/design-scale-r1 | main s14 | session_01UV1SzkHA4ScRWkoirdEoSn (opus) | RUNNING | 16/11 08:40Z |
-| D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | RUNNING | 16/11 09:08Z |
+| D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | DONE FAIL 6 (2 blocking) → fixes in coop-b1b5-p2 | 16/11 09:08Z |
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
 | slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | RUNNING | 16/11 09:19Z |
 | item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | session_011xDdVP6DUKfEQP1er7RbtD (sonnet) | RUNNING | 16/11 09:27Z |
