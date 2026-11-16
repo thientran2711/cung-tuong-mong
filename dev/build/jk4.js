@@ -608,7 +608,7 @@ window.kitNameRank=kitNameRank;
    elsewhere: stage name tags (.j59t / .j59n), kitEventDp / 32.7 captions (.kpsn .kname .kti — kitName sets --rt on .kti), person cards
    (.pcrk over .pcname), the Tuần lục person heading (.kbk-pname). Inline titles inside sentences (kitName in prose) keep the plain look. */
 /* KIT 48.1f THE TONE (owner 11/16 13:00Z "nhạt nhòa → tươi hơn"): the colour of a title on PAPER is DERIVED from the one palette (RCOL / MRCOL / ERCOL /
-   RCOL_COLD / KIT_ROLE, j1): same hue, saturation kept high, lightness lowered only as far as needed for >= 3.6:1 on parchment #fbf3e2 (jewel tones: legibility comes from the kit rank-text edge 48.1h, not from darkening).
+   RCOL_COLD / KIT_ROLE, j1): same hue, saturation kept high, lightness lowered only as far as needed for >= 3.6:1 on parchment #fbf3e2 (jewel tones: framed UI shows the vivid tone as PLAIN text (no edge, owner 11/16 13:50Z); only paintings get the light halo 48.1d/e).
    No second table of hexes: change a base in j1 and every title, chip, ring, halo and portrait ground changes with it. */
 const KIT_TONE_CACHE={};
 function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[key])return KIT_TONE_CACHE[key];
@@ -657,8 +657,6 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-/* 48.1h ONE EDGE FOR EVERY RANK TEXT (owner 11/16 "nhạt nhòa" + s17): the rank colour stays vivid; legibility = a thin enamel edge (same hue, deep) + a soft shadow, never a darker colour. The painting rules below add their light halo on top. */
-${T},html body .kname .kti{-webkit-text-stroke:.45px color-mix(in srgb,var(--rt,#7a5a30) 45%,#1c100a);paint-order:stroke fill;text-shadow:0 1px 1.5px #3a1e0c38!important}
 ${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d (owner 15/11 "Phẩm của tôi cũng viền sáng như tên"): on a painting HER rank line (stage: hers only, 48.1e) gets the SAME light
  halo as the name line under it (was a dark outline + tinted glow, hard to read), in its full rank tone so it keeps its colour on the light halo */
  text-shadow:0 0 1px #fff8ee,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
@@ -679,8 +677,8 @@ html body .stage.j59 #tokens .tok .tag,html body .stage.j59 #j59metag .tag{backg
 /* 48.1c (owner 15/11 ~20:40Z): person-dialog captions (kitEventDp .kdpcap, event-stage .kesov captions) have NO box */
 html body #mb .kesov>.kpsn,html body #modal .dlg.kdper .kes>.kpsn.kdpcap,html body .kesf>.kpsn{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 /* 48.3 (owner 15/11 session 8): a title INSIDE a line (kitName in prose, picker rows, lists, logs, toasts; kitRankPaint) is in its rank
-   tone too — the line's own font, no glow; the 48.1h edge applies; lightened on .modal.night (below) */
-html body .kname .kti{color:var(--rt,inherit)!important}
+   tone too — the line's own font, plain: no glow, no outline, no shadow; lightened on .modal.night (below) */
+html body .kname .kti{color:var(--rt,inherit)!important;text-shadow:none!important}
 html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
