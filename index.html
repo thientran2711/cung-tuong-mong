@@ -477,7 +477,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .tabs button{min-height:34px!important;padding:2px 3px!important;font-size:.74rem!important;white-space:nowrap;overflow:hidden;text-overflow:clip;min-width:0}
 /* kv3:.kv2 */:where(.kv2) .tabs{grid-template-columns:repeat(11,minmax(0,1fr))}:where(.kv2) .tabs button{min-height:44px!important;font-size:.85rem!important}
 
-/* kv3:.kv1 */:where(.kv1) .tabs button{font-size:0!important}:where(.kv1) .tabs button::after{content:attr(data-s);font-size:.68rem}:where(.kv1) .bar .main{width:66px;padding:4px 6px;white-space:normal;font-size:.8rem;line-height:1.1}
+/* kv3:.kv1 *//* ONE-PAGE BOTTOM BAR (owner 16/11 13:25Z (C), review/phone-bars): the 8 tabs are TWO ROWS OF 4 big buttons (tabsFit sets the 4 columns, j57 the label size) and Sang buổi is ONE tall button spanning both rows at the right — the spread keeps its one row of 11 */:where(.kv1) .bar{gap:5px}:where(.kv1) .tabs{gap:4px!important;grid-auto-rows:minmax(36px,1fr)}:where(.kv1) .tabs button{min-height:36px!important;padding:2px 4px!important;border-radius:8px}:where(.kv1) .bar .main{width:84px;padding:4px 6px;white-space:normal;font-size:.95rem;line-height:1.15;border-radius:8px}
 .bar .main{align-self:stretch}
 /* map tiles: readable band on art */
 .pmap{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}
@@ -6037,11 +6037,11 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 (function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
  X+"{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;font-size:var(--tfs,.85rem)!important;padding-left:1px!important;padding-right:1px!important}"+
  "/* kv3:unwrap */"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}"+
- "/* kv3:.kv1 */:where(.kv1) "+X+"::after{font-size:var(--tfs,.72rem)!important}";document.head.appendChild(st)})();
+ "/* kv3:.kv1 */:where(.kv1) "+X+"::after{font-size:var(--tfs,.86rem)!important}";document.head.appendChild(st)})();
 let TFS_CV=null;
-function tabsFit(){try{const T=$("tabs");if(!T)return;const short=true;const base=kitView().pages===1?.72:.8;
+function tabsFit(){try{const T=$("tabs");if(!T)return;const short=true;const one=kitView().pages===1,base=one?.86:.8;
  T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
- const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ const n=B.length,cols=one?Math.ceil(n/2):n;/* KIT §0: the spread = ONE row of tabs; the one page = TWO rows of ceil(n/2) big buttons (8 tabs → 4+4; phone-bars) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
@@ -22454,6 +22454,9 @@ window.kitBackBtnHtml=kitBackBtnHtml;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0",title:"Khung thiết kế · một trang = nửa trang đôi iPad (co giãn đều)",
  html:()=>{const F=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:820}},k=.2,v=(typeof kitView==="function"?kitView():{pages:2}),pg=(t,c)=>`<div style="width:${F.page.w*k}px;height:${F.page.h*k}px;border:1px solid var(--line);background:${c};display:grid;place-items:center;font-size:.7rem;color:var(--ink)">${t}</div>`;
   return `<div class="kitpg-row" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap"><div><div style="display:flex">${pg("Phòng (trang trái)","#f3e6c9")}${pg("Thẻ đang mở (trang phải)","#fbf3dd")}</div><small>Ngang: ${F.spread.w}×${F.spread.h}</small></div><div>${pg("Phòng ⇄ thẻ","#fbf3dd")}<small>Dọc: ${F.page.w}×${F.page.h}</small></div><small>Đang xem: ${v.pages===1?"một trang":"trang đôi"}</small></div>`}})}catch(e){}
+/* KIT §0 sample: the ONE-PAGE bottom bar — 8 tabs as TWO ROWS OF 4 + Sang buổi as one tall button (owner 16/11 13:25Z (C); the real bar gets the same from :where(.kv1) in p1.html + tabsFit) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0b",title:"Thanh tab dưới · một trang: 2 hàng x 4 nút + Sang buổi",
+ html:()=>`<nav class="bar" style="width:582px;max-width:100%;display:flex;gap:5px;align-items:stretch"><div class="tabs" style="flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(36px,1fr);gap:4px;overflow:visible">${["Hành sự","Dư đồ","Hậu cung","Giao tình","Hoàng tự","Tư trang","Tài nghệ","Mệnh truyện"].map((t,i)=>`<button type="button" aria-selected="${i===0}" style="min-height:36px;padding:2px 4px;border-radius:8px;font-size:.86rem">${t}</button>`).join("")}</div><button type="button" class="main" style="width:84px;padding:4px 6px;white-space:normal;font-size:.95rem;line-height:1.15;border-radius:8px">Sang buổi</button></nav>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 /* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
@@ -41635,7 +41638,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="18499c80997e";window.CTM_BUILD=BUILD;
+const BUILD="53b5e3a55f74";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
