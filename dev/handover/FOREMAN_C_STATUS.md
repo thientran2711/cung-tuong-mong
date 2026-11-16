@@ -1,5 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+NEXT FOREMAN C SESSION OPENED: session_011xDdVSPB2kuFjWy26nTiZa at 10:28Z 16/11 (session 2 stops; its hourly trigger trig_01NcACiwuYDkpgFwjswQ2rd5 disabled).
+
 ## HANDOVER (Foreman C session 2 → session 3, 10:30Z 16/11)
 Why: session 2 context 25% at 10:28Z (START_CTX ~4% → limit 29%); the next wake would pass it. Session 3 continues from this file — read this block, the SESSION 2 LOG below, ## PASS, ## QUESTIONS, CLAIMS.md (rows with C), dev/handover/reports/, the newest notes at the end of FOREMAN_C.md, new OD lines.
 Running SEPARATE sessions (results in dev/handover/reports/<branch>.md):
