@@ -66,7 +66,7 @@ const shot=async(p,n)=>{if(!SHOTS)return;for(let t=0;t<2;t++){try{await p.screen
   await p.evaluate(()=>{S.place='home';S.month=8;render()});await p.waitForFunction(()=>window.KFX&&KFX.amb>=3,null,{timeout:30000}).catch(()=>{});await sleep(4000);await clearOv(p);await shot(p,'3-home-autumn-leaves-fold');
   await p.evaluate(()=>{const before={};for(const [k] of RKEYS)before[k]=S[k]||0;S.sung+=6;S.danh+=3;S.duc-=2;resultShow('Dâng trà',before,true)});await sleep(1150);await shot(p,'4-result-numbers-fly-fold');await c.close()}
  /* ---- 4. old save (made by main) loads in this build; offline after the first visit ---- */
- if(PH.includes('4')){L('old/offline');const c=await ctx(b,755,1000,2,true);const p=await c.newPage();const errs=[],reqs=[];watch(p,errs,reqs);
+ if(PH.includes('4')){L('old/offline');const c=await ctx(b,755,1000,2,true);await c.addInitScript(()=>{window.__nlInner=1});const p=await c.newPage();const errs=[],reqs=[];watch(p,errs,reqs);
   await fetch(BASE+'__ver/main');await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await sleep(2000);
   R.oldSave=await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;quiet=false;S.inv.push({k:'nhansam'});localStorage.setItem(SK(3),JSON.stringify(ser()));return{name:S.name,key:SK(3)}});
   await fetch(BASE+'__ver/none');await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.KFX);await sleep(2000);

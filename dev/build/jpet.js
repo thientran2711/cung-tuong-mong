@@ -218,17 +218,27 @@ function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),na
  const h2=h.replace(`<span class="kitg">${KIT_GRADE[T.tr].n}</span>`,`<span class="kitg">${PET_TIER[T.tr]}</span>`);
  return h2}
 function petCareW(P){const c=P.care||0;return c>=70?["Khỏe","g"]:c>=30?["Cần chăm","n"]:["Biếng ăn","r"]}
-function petHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S),mx=Math.max(petMax(S),L.length);const slots=[];
- for(let i=0;i<mx;i++){const P=L[i];const lab=i===0?"Theo hầu":"Tẩm cung";
-  if(P){const T=petT(P),cw=petCareW(P);slots.push({k:"p"+i,label:lab,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]}`},
-   mini:(S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"")+`<span class="keql2"><span class="keqm">${(typeof petStage==="function"&&BAL.pet&&BAL.pet.stages?BAL.pet.stages[petStage(P)]+" · "+(w=>w>=48?Math.floor(w/48)+" tuổi":Math.floor(w/4)+" tháng tuổi")(Math.max(0,tsbWk()-(P.at||0)))+" · ":"")}${S.petOn===i?"theo hầu":"ở tẩm cung"} · ${cw[0]}</span></span><span class="keql2"><span class="keqm">${T.use}</span></span>`})}
-  else slots.push({k:"e"+i,label:lab,i,item:null,ghost:petSrc(i%2?"meomuop":"cho")})}
- const up=L.reduce((s,P)=>s+(petT(P).up||0),0);
- const sum=(L.length?`<span class="kchip n kluxc">Xa xỉ <b>+${petLuxOf(S)}</b></span>`+(up?kitChip("Bạc nuôi",-up):""):"");
- let h=kitEquipSlots({key:"pets",title:`Thú nuôi (${L.length}/${petMax(S)})`,slots,sum,onPick:petPick,row:true,empty:"Chưa nuôi con nào"});
- /* empty slot = the kit's own empty square; the pet tile keeps its grade frame. Grade frames/colours/seal = the item kit (owner 10:10Z) */
- 
- return h}
+/* LEFT COLUMN pet box (owner 16/11 16:55Z): directly under Y phục, same column width, slot = wear-slot size; name / age / effect as small lines.
+   Shows the pet that follows her (else the first); 0 pets = one empty slot + "Chưa nuôi con nào". Tap = the Thú cưng sub-tab of Tư trang. */
+function petStageTxt(P){return typeof petStage==="function"&&BAL.pet&&BAL.pet.stages?BAL.pet.stages[petStage(P)]:""}
+function petAgeTxt(P){const w=Math.max(0,tsbWk()-(P.at||0));return (w>=48?Math.floor(w/48)+" tuổi":Math.floor(w/4)+" tháng tuổi")}
+function petSideHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S);const i=Math.max(0,L.findIndex((P,j)=>j===S.petOn)),P=L[i];let slot;
+ if(P){const T=petT(P),cw=petCareW(P);slot={k:"p"+i,label:T.n,lc:KIT_GRADE[T.tr].c,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]} · chạm để mở Thú cưng`},
+   info:`<span>${petAgeTxt(P)}</span>${S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"<span>ở tẩm cung</span>"}${L.length>1?`<span>+${L.length-1} con nữa</span>`:""}`}}
+ else slot={k:"e0",label:"Chưa nuôi con nào",i:0,item:null,ghost:petSrc("cho")};
+ return kitEquipSlots({key:"pets",title:"Thú cưng",slots:[slot],onPick:()=>{KINV_SUB="thu";try{localStorage.setItem("hclh-inv-sub","thu")}catch(e){}try{renderPanel()}catch(e){render()}},col:true})}
+/* Tư trang › Thú cưng sub-tab: every pet as a kit card (kitSkillCard) + Chăm (jpetcare) / Cho theo hầu / Gửi về, and the shop button */
+function petPanelHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S),free=petMax(S)-L.length;
+ const shop=pbtn(`data-petshop="1"`,"Nhờ thái giám tìm thú nuôi",free>0?`tốn: 1 khắc, Bạc · thành: một con thú nhỏ về tẩm cung (còn ${free} ô)`:"",free>0?(typeof whyTime==="function"?whyTime(1):""):"hết ô nuôi");
+ const cards=L.map((P,i)=>{const T=petT(P),cw=petCareW(P),cur=tsbPetOn(S),B=[];
+  B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,"thành: cho ăn, tắm chải, chơi (mỗi việc 1 khắc) · No, Sạch, Vui, Tình cảm tăng",""));
+  if(S.petOn!==i)B.push(pbtn(`data-pet="follow" data-i="${i}"`,"Cho theo hầu",`thành: ${PET_SN[T.st]} +${1+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${1+(petT(cur).sacX||0)}`:""}`,""));
+  const fromHi=/emp|hunt|trib/.test(P.src||"")||P.from==="Hoàng thượng ban",fromTh=P.src==="th";
+  B.push(pbtn(`data-pet="free" data-i="${i}"`,"Gửi về Ngự thú viên",`thành: bớt Xa xỉ ${S.petOn===i?petLux(P.t):Math.round(petLux(P.t)/2)}${T.up?` · thôi tốn Bạc ${T.up} mỗi tháng`:""} · Mất: ${T.n}${fromHi?" · Hoàng thượng phật ý, Sủng -3":fromTh?" · Thái hậu quý ngươi -8":P.src==="hh"?" · Hoàng hậu quý ngươi -3":""}`,""));
+  return kitSkillCard({kind:"pet",k:String(i),name:T.n,kicker:`${PET_TIER[T.tr]} · ${petStageTxt(P)} · ${petAgeTxt(P)} · ${S.petOn===i?"theo hầu":"ở tẩm cung"}`,max:0,img:petPSrc(P),
+   desc:`<span class="kchip ${cw[1]}">${cw[0]}</span> ${kitRows(petRowsL(P,i))}`,acts:B,can:true})}).join("");
+ return `<div class="kskills kpetcards">${cards||kitSkillCard({kind:"empty",name:"Chưa nuôi con nào",max:0,img:petSrc("cho"),desc:"Nhờ thái giám Nội vụ phủ tìm một con thú nhỏ về nuôi."})}${kitSkillCard({kind:"petshop",name:`Thú nuôi (${L.length}/${petMax(S)})`,max:0,img:"",desc:"Con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.",acts:[shop],can:true})}</div>`}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-petshop]");if(!b||b.disabled)return;ev.stopPropagation();petShop()},true);
 /* one kit table (KIT §51): petRowsL = the rows, wrappers (jpetcare) add rows to the SAME table, never a 2nd kitRows */
 function petRows(P,i){return kitRows(petRowsL(P,i))}
 function petRowsL(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");

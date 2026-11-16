@@ -4,7 +4,7 @@
    Bug it guards: Dư đồ → Hậu cung kept .maptab (full-width panel, stage hidden on iPad).
    usage: node dev/test/sw-serve.js 8971 <repo root> &   node dev/test/tab-pairs.js http://localhost:8971/ [W x H @D …]  (default 1180x820@2 755x1000@2) */
 const {chromium}=require('playwright');const [,,BASE0,...SZ]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-const SEED=()=>{let a=20261116;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
+const SEED=()=>{window.__nlInner=1;let a=20261116;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
 const LIFE=()=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){start();if(!isSrv()&&!(window.isKc&&isKc()))break}
  window.CLEAN=()=>{document.querySelectorAll('[id^=kroul],#dawn,#kload,#kpodov,.kmov').forEach(e=>e.remove());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()};CLEAN();return S.name};
 (async()=>{const b=await chromium.launch();const sizes=(SZ.length?SZ:['1180x820@2','755x1000@2']).map(s=>{const m=s.match(/(\d+)x(\d+)@?(\d*)/);return[+m[1],+m[2],+(m[3]||1)]});let fail=0;

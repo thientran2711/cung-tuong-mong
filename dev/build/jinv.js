@@ -5,7 +5,7 @@
    Tap a slot → the caller's onPick(item) (Tư trang: the item panel, kitModal with the item picture, facts and act cards).
      kitInvGrid({key, tabs:[{k,label}], items:[{cat, src, name, grade, qty, on, onText, mark, tip, id}], minRows:4, onPick:fn(item), side:html, sum:html, below:html}) → HTML
      BAG + WEAR LAYOUT (owner 16/11 16:20Z, review/tutrang-layout): where a bag also shows what is worn, pass side = kitEquipSlots({col:true,…}) (ONE vertical
-     column on the LEFT, width = one square slot), sum = the worn-bonus chips (a line under the grid), below = the pet strip (kitEquipSlots({row:true,…}));
+     column on the LEFT, width = one square slot), sum = the worn-bonus chips (a line under the grid), the PET box goes in the same column under Y phục (jpet petSideHTML);
      the grid (wider, more cells) sits on the right. Every place with wear slots + a bag (Tư trang, Chọn y phục) uses this one arrangement.
    The chosen tab is remembered per key (`hclh-kinv-<key>`). Items are only ever EARNED (bought, given, bestowed): the bag starts empty. */
 const KINV={reg:{},cur:{}};
@@ -32,7 +32,11 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
  /* wear column (kinvside): its slot = one bag cell, shrunk so the 6 slots + names fit the panel height (never below 44 px); sized BEFORE the free height is measured */
  try{const sd=g.closest(".kinv").querySelector(".kinvside");if(sd){const P0=g.closest("#panel"),cs0=getComputedStyle(P0),n0=sd.querySelectorAll(".keqc").length||6,h4=(sd.querySelector(".kpst")||{offsetHeight:0}).offsetHeight+4;
    const avail=P0.getBoundingClientRect().bottom-(parseFloat(cs0.paddingBottom)||0)-(sd.getBoundingClientRect().top-(parseFloat(getComputedStyle(sd.querySelector(".keq")).paddingTop)||0)*0)-6;
-   g.__kper=Math.floor((avail-h4-12)/n0-5-13);sd.parentElement.parentElement.style.setProperty("--kside",Math.max(56,Math.min(72,g.__kper))+"px")}}catch(e){}
+   const pi=[...sd.querySelectorAll(".keqpi")].reduce((a,e)=>a+e.offsetHeight,0),nk=sd.querySelectorAll(".keq").length;g.__kper=Math.floor((avail-h4*nk-12*nk-pi)/n0-5-13);const kv0=sd.parentElement.parentElement;let ks=Math.max(40,Math.min(72,g.__kper));kv0.style.setProperty("--kside",ks+"px");
+   /* measured pass: the column must end inside the panel (labels may wrap); shrink the slot by the overflow, never below 40 px */
+   const lim=P0.getBoundingClientRect().bottom-(parseFloat(cs0.paddingBottom)||0)-14;for(let it=0;it<14;it++){const ov=sd.getBoundingClientRect().bottom-lim;if(ov<=1||ks<=40)break;ks=Math.max(40,ks-Math.max(1,Math.ceil(ov/n0)));kv0.style.setProperty("--kside",ks+"px")}
+   /* still too tall at the 40 px floor (short iPad page + pets): the pet box drops its title and spare lines (the slot + name already say what it is) */
+   kv0.classList.toggle("kinvtight",sd.getBoundingClientRect().bottom-lim>1);g.__kper=ks}}catch(e){}
  const n=+g.dataset.n||0,min=+(g.closest(".kinv").dataset.min||4);const want=Math.max(min*cols,Math.ceil(n/cols)*cols);let have=g.children.length;
  if(have<want){g.insertAdjacentHTML("beforeend",kitInvEmpty(want-have));have=want}else for(let i=have;i>Math.max(want,n);i--){const c=g.lastElementChild;if(c&&c.classList.contains("kitem-empty")){c.remove();have--}else break}
  const P=g.closest("#panel");if(!P||!P.clientHeight||!g.firstElementChild)return;const pr=P.getBoundingClientRect(),cs=getComputedStyle(P);
@@ -55,7 +59,7 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
   cols=c2}
  /* what is left (less than one bag row) goes to the equipment slots, which grow up to 112 px */
  try{const kv=g.closest(".kinv"),cw=g.firstElementChild?g.firstElementChild.getBoundingClientRect().width:0;if(cw)kv.style.setProperty("--kcell",Math.round(cw)+"px");
-  const sd=kv.querySelector(".kinvside");if(sd&&cw)kv.style.setProperty("--kside",Math.max(56,Math.min(72,g.__kper||999))+"px")}catch(e){}
+  const sd=kv.querySelector(".kinvside");if(sd&&cw)kv.style.setProperty("--kside",Math.max(40,Math.min(72,g.__kper||999))+"px")}catch(e){}
  const q=P.querySelector(".keq:not(.keqv):not(.keqr)");if(q){q.style.removeProperty("--keqsz");if(P.scrollHeight<=P.clientHeight+1){const f2=freeOf()-8;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
   const c0=q.querySelector(".keqc");const maxW=c0?c0.clientWidth:150;if(f2>4&&s0)q.style.setProperty("--keqsz",Math.round(Math.min(112,maxW,s0+f2))+"px")}
   else{/* a few px too tall: shrink the equipment slots rather than scroll (never below 64 px) */const over=P.scrollHeight-P.clientHeight;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
@@ -200,11 +204,7 @@ function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o
  const cell=(x,i)=>kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`});
  /* col = the VERTICAL "Đang mang" column beside the bag: slot picture + the slot name (small) under it; the item name, chips and note live in the tap panel / tooltip */
- if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql">${x.label}</b></div>`).join("")+`</div></div>`;
- /* row = ONE small strip under the bag (the pet): slot SAME size as a bag cell, name + state as text beside it */
- if(o.row){let first=true,sm=0;return `<div class="keq keqr" data-keq="${key}"><h4 class="kpst">${o.title||""}</h4><div class="keqrs">`+L.map((x,i)=>{if(!x.item&&!first&&!L.some(y=>y.item))return"";/* 0 pets: ONE empty slot with the text; with pets: spare slots stay (tap = pet shop), no label */
-   const t=x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit((x.mini||"").replace(/<span class="keql2">/,(!sm&&o.sum?(sm=1,o.sum):(sm=1,""))+'<span class="keql2">'))}`:(first&&!L.some(y=>y.item)?`<b class="keql">${o.empty||"Chưa có"}</b>`:"");if(!x.item)first=false;
-   return `<div class="keqrc">${cell(x,i)}<div class="keqrt">${t}</div></div>`}).join("")+`</div></div>`}
+ if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql"${x.lc?` style="color:${x.lc}"`:""}>${x.label}</b>${x.info?`<span class="keqpi">${x.info}</span>`:""}</div>`).join("")+`</div></div>`;
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
   L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit(x.mini)}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
@@ -241,14 +241,13 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .dlg.kpanel .keqpick{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0}
 /* vertical wear column + pet strip (review/tutrang-layout) */
 .kinvbody{display:block}.kinvbody.kinvws{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:start}.kinvmain{min-width:0}
-.keq.keqv{margin:0;padding:6px 4px 6px;width:calc(var(--kside,72px) + 14px);box-sizing:border-box;text-align:center}.keq.keqv .kpst{margin:0 0 4px;font-size:.58rem;letter-spacing:0;white-space:nowrap;border:0;padding:0}
+.keq.keqv{margin:0;padding:6px 4px 6px;width:max(66px,calc(var(--kside,72px) + 14px));box-sizing:border-box;text-align:center}.keq.keqv .kpst{margin:0 0 4px;font-size:.52rem;letter-spacing:0;white-space:nowrap;border:0;padding:0}
 .keq.keqv .keqs{display:flex;flex-direction:column;gap:5px}.keq.keqv .keqc{display:flex;flex-direction:column;align-items:center;gap:1px}
 .keq.keqv .keqc>.kitem-slot{width:var(--kside,72px)}.keq.keqv .keql{font-size:.58rem;line-height:1.1;color:var(--ink2,#7a6a58);font-weight:600;overflow-wrap:anywhere;max-width:100%}
+.keq.keqv+.keq.keqv{margin-top:6px}.keq.keqv .keqpi{display:flex;flex-direction:column;gap:1px;font-size:.56rem;line-height:1.15;color:var(--ink2,#7a6a58);overflow-wrap:anywhere;max-width:100%}
+.keq.keqv .keqpi .kchip{font-size:.56rem;padding:0 4px;margin:0;white-space:nowrap}.keq.keqv .keql[style]{font-size:.62rem}
+.kinvtight .keq.keqv+.keq.keqv>.kpst,.kinvtight .keq.keqv .keqpi>span:nth-child(n+3){display:none}
 .kinvsum{margin:6px 0 0;padding:0 2px}
-.keq.keqr{margin:6px 0 0;padding:6px 8px;display:block}.keq.keqr>.kpst{display:none}.keq.keqr .keqrs{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
-.keq.keqr .keqrc{display:flex;align-items:center;gap:10px;min-width:0}.keq.keqr .keqrc>.kitem-slot{width:72px;flex:none}.keq.keqr .keqnote{flex-direction:column;align-items:flex-start;gap:1px}
-.keq.keqr .keqrt{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left}.keq.keqr .keqrt .kpst{margin:0}.keq.keqr .keql{font-size:.8rem;color:var(--ink2,#7a6a58)}
-.keq.keqr .keqnm{font-size:.82rem}.keq.keqr .keqfx,.keq.keqr .keqnote{justify-content:flex-start}
 `;document.head.appendChild(st)})();
 /* ---------- new wear slots (owner 11/15): EXTEND j8 IT, no new item list. Only items that have a painting get a slot:
    Đeo eo = ngocboi (ngọc bội ngự ban worn at the waist: shows imperial favour, Danh +1; still a keepsake: never given, never sold),
@@ -354,16 +353,16 @@ function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=vei
 if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0.apply(this,arguments);try{
   const i=h.indexOf('<div class="cards">');if(i>=0)h=h.slice(0,i);h=h.replace(/^<div class="ph">[\s\S]*?<\/div>\s*/,"");
   const bag=kitInvGrid({key:"tutrang",tabs:KINV_CATS.map(c=>({k:c[0],label:c[1]})).concat(S.inv.some(e=>!e.h&&IT[e.k]&&kinvCat(IT[e.k].kd)==="tap")?[{k:"tap",label:"Tạp vật"}]:[]),
-   items:kinvItems(),minRows:2,onPick:kinvOpen,side:keqTT(),sum:(KEQ.reg.tutrang||{}).sum,below:(typeof petHTML==="function"?petHTML():"")});
+   items:kinvItems(),minRows:2,onPick:kinvOpen,side:keqTT()+(typeof petSideHTML==="function"?petSideHTML():""),sum:(KEQ.reg.tutrang||{}).sum});
   return kinvSubHTML(h,bag)}catch(e){console.error("kitInvGrid",e);return inv0.apply(this,arguments)}}}
 /* ---------- Tư trang SUB-TABS (owner 11/15): the ONE sub-tab control (.ksub > .ksubb, KIT 20 — same as Hậu cung) at the top:
-   "Túi đồ" (default: the bag grid with its category chips + the "Bên mình" equipment slots, seen without scrolling past any act) ·
+   "Túi đồ" | "Thú cưng" (all her pets as kit cards + care/buy/follow/send back, jpet petPanelHTML; the left-column pet box opens it) | "Việc"; "Túi đồ" (default: the bag grid with its category chips + the "Bên mình" equipment slots, seen without scrolling past any act) ·
    "Việc" (Nhờ thái giám mua đồ, Soát đồ, Sai cung nữ… — the act cards, doable ones first: kitDoableFirst, KIT 37.1).
    The pick is remembered per viewer (hclh-inv-sub); both panes are rendered, the other one is hidden. ---------- */
 let KINV_SUB=(()=>{try{return localStorage.getItem("hclh-inv-sub")||"tui"}catch(e){return"tui"}})();
-function kinvSubHTML(acts,bag){const cur=KINV_SUB==="viec"&&acts.trim()?"viec":"tui";const P=[["tui","Túi đồ"],["viec","Việc"]];
+function kinvSubHTML(acts,bag){const pets=typeof petPanelHTML==="function"?petPanelHTML():"";const cur=KINV_SUB==="viec"&&acts.trim()?"viec":KINV_SUB==="thu"&&pets?"thu":"tui";const P=[["tui","Túi đồ"]].concat(pets?[["thu","Thú cưng"]]:[],[["viec","Việc"]]);
  const nav=`<div class="kinvsubw"><nav class="ksub kinvsub" role="tablist">${P.map(([k,l])=>`<button type="button" class="ksubb${k===cur?" on":""}" role="tab" aria-selected="${k===cur}" data-kinvsub="${k}">${l}</button>`).join("")}</nav></div>`;
- return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div><div class="kinvpane kdoable" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
+ return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}<div class="kinvpane kdoable" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
 function kinvDoable(){try{const pane=document.querySelector('#panel [data-kinvpane="viec"]');if(!pane)return;
  const first=typeof kitDoableFirst==="function"?kitDoableFirst:function(box,sel){const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return;
    const off=e=>e.disabled||e.classList.contains("kdis")||e.getAttribute("aria-disabled")==="true"||(!/^(BUTTON|A)$/.test(e.tagName)&&!!(e.querySelector("button")&&e.querySelector("button").disabled));
