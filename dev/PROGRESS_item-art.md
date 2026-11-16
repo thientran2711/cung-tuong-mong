@@ -72,3 +72,17 @@ Redrawn with the adult art as style/identity reference: round plump body, short 
 
 ## Notes
 - Box CPU-starved (load ~40): webp encoding done with method=3 and 3 processes; one final browser smoke only.
+
+## r4 (review/item-art-r4, D2 reviewer FAIL fix)
+All sizes redone (256/512|pet512/hi 1024), Magnific gpt-2-6, folder ba4aecfe…; generate (picked) -> remove-bg cut-out -> `dev/art/item_art_r4_build.py` (fit to sibling framing). Text read at 1024.
+
+| key | text read | generate id | cut-out id |
+|---|---|---|---|
+| item-tp-tho-r06-b4 | "Tống biệt / Chén rượu tiễn người đi / Sông dài mây cũng buồn" | MBwZPl0DCm (others xSdEIMfjfW, LwBQmeUswO) | 1lpf8zJr4r |
+| item-tp-tho-r08-b1 | "Hoa triều / Sáng sớm hoa hé nụ / Sương mai đọng cành" | 1lpfodWr4r (others rgeC8X3xtc, cpl67SJ0eP) | 3zbUxaTREY |
+| item-tp-tho-r01-b1 | "Xuân nhật / Nắng xuân ấm cửa sổ / Chim hót gọi hoa đào" | aF2pYnwfSh (others JNa1QuROq4, 9ZQs5bQNYZ) | jUXum0lLD0 |
+| item-tp-tho-r03-b1 | "Vịnh mai / Mai nở trong tuyết / Hương thơm giữa trời đông" | lJ8Hvvbgv9 (others LwBQmmxswO, MBwZP4oDCm) | 1lpf8c3r4r |
+| pet-cuuvi-tn | play-bow, tails fanned (adult: sitting) | Do729v5pcl (others tCiTGHtmZJ, 6AHg1cTiJO) | aF2pWzSfSh |
+| pet-sutu-tn | play-bow, tail up (adult: standing) | lJ8Hai4gv9 (others xSdEt4LjfW, SytbCRzUb8) | ksDaodF16B |
+| pet-linhmieu-tn | pounce, one paw raised (adult: sitting) | O6frHnBynm (others SytbCZ2Ub8, bxTmd795Y2) | rgeCI8jxtc |
+Adult refs uploaded: cuuvi u5nBTpmQLD, sutu aF2pYV4fSh, linhmieu UPm5Cqtwny.
