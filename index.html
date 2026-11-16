@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"728085a8+","t":"2026-11-16T20:02Z","c":"weather-fx2 report: boot wording","b":"bcb371b1c3b8","h":[{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
+window.CTM_BI={"s":"77ac0d6d+","t":"2026-11-16T20:02Z","c":"weather-fx3: drop obsolete v2 videos (replaced by v3 on the handover branch)","b":"272a1007c363","h":[{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."},{"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng."},{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -2614,7 +2614,7 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;
+  app.ticker.maxFPS=15;/* PERF (owner 16/11 lag): the backdrop only breathes ±0.3 %, so 15 fps is invisible; every frame of this canvas costs a full-stage WebGL composite, double with the weather canvas */
   /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
      buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
   {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
@@ -2624,7 +2624,7 @@ function pxCap(){return kitView().pages===1?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
-async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
+async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";pxWake();
  lightTick();const P=placeOf(S.place),k=P.sc+"|"+pxKind()+"|"+(S.wx?S.wx.k:"")+"|"+(S.buoi||0);if(PX.key===k)return;PX.key=k;
  for(const p of PX.parts)p.destroy();PX.parts=[];if(PX.bg){PX.bg.destroy({texture:false});PX.bg=null}
  /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
@@ -2648,7 +2648,11 @@ function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.h
  if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d){sfx("sfx-thunder");if(typeof kfBolt==="function")kfBolt()}  /* lightning = kit weather layer kfBolt (jfx): flashes the WHOLE stage frame */
  for(const p of PX.parts){const v=p.v;if(v.kind==="lamp"){if(v.on>0){v.on-=d}else p.alpha=Math.min(.55,p.alpha+.01*d)*(RM?1:.85+.15*Math.sin(PX.t*9+v.ph));p.x=v.fx*W;p.y=v.fy*H;continue}if(v.kind==="star"){p.y=v.fy*H;p.alpha=.5+.4*Math.sin(PX.t*2+v.ph);continue}v.ph+=.02*d;if(S&&S.wx&&S.wx.k==="wind")p.x+=1.2*d;p.x+=(v.vx+Math.sin(v.ph)*.3)*d;p.y+=v.vy*d;if(v.kind==="fly"){p.alpha=.4+.5*Math.sin(v.ph*3);p.x+=Math.sin(v.ph*1.3)*.4*d;p.y+=Math.cos(v.ph)*.4*d}if(v.kind==="petal"||v.kind==="leaf")p.rotation+=.02*d;
   if(p.y>H+12){p.y=-10;p.x=Math.random()*W}if(p.y<-20){p.y=H+10;p.x=Math.random()*W}if(p.x<-20)p.x=W+10;if(p.x>W+20)p.x=-10}
- for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}}
+ for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}
+ /* PERF (owner 16/11 lag): the backdrop is a still painting; nothing moves on this canvas (weather is the jfx canvas). Once laid out, draw it ONCE and stop the ticker; pxWake() draws again on scene change / resize. Two live full-stage WebGL canvases made weather scenes lag. */
+ if(PX.bg&&!PX.parts.length&&!PX.fxl.children.length){PX.idle=(PX.idle||0)+1;if(PX.idle>3){PX.idle=0;PX.app.ticker.stop()}}else PX.idle=0}
+function pxWake(){try{if(PX.app&&!PX.app.ticker.started&&!(typeof kitStageCovered==="function"&&kitStageCovered()))PX.app.ticker.start()}catch(e){}}
+window.addEventListener("resize",()=>{pxWake();setTimeout(pxWake,300)});
 /* ---- settings pop-over on the title screen ---- */
 function optHTML(){return `<div class="optbox"><button class="btn" id="o-snd">${OPT.snd?"Tắt âm thanh":"Bật âm thanh"}</button>
  <label>Nhạc <input type="range" id="o-mus" min="0" max="1" step=".05" value="${OPT.mus}"></label><label>Hiệu ứng âm <input type="range" id="o-sfx" min="0" max="1" step=".05" value="${OPT.sfx}"></label><label>Giọng <input type="range" id="o-vo" min="0" max="1" step=".05" value="${OPT.vo==null?.7:OPT.vo}"></label>
@@ -32137,13 +32141,15 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
   if(v.life<=0||(v.amb&&(v.lay==="wx"&&KFX.sr?(s.y>KFX.sr.y+KFX.sr.h+20||s.y<KFX.sr.y-90||s.x<KFX.sr.x-90||s.x>KFX.sr.x+KFX.sr.w+90):(s.y>H+20||s.y<-90||s.x<-90||s.x>W+90)))){kfkFree(s);L.splice(i,1);continue}
   if(v.fx!=null){if(KFX.sr){s.x=KFX.sr.x+v.fx*KFX.sr.w;s.y=KFX.sr.y+v.fy*KFX.sr.h}v.ph+=.03*d;s.alpha=v.a0*(.7+.3*Math.sin(v.ph*3));continue}
-  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
+  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;if(v.drag!==1){const k=Math.pow(v.drag,d);v.vx*=k;v.vy=v.vy*k+v.g*d}else if(v.g)v.vy+=v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);if(v.bl){const q=.5+.5*Math.sin(v.ph*v.bl);a*=.3+.7*Math.sqrt(q)}s.alpha=Math.max(0,a);
   if(v.amb)amb++}
  KFX.live=L.length;KFX.amb=amb;kfBoltTick(d);
+ /* PERF (owner 16/11 lag): ambient-only weather (snow / fireflies / petals / mist) runs at 30 fps (motion is dt-based, so speed is unchanged); bursts and lightning get 60; rain streaks are dt-based too */
+ {let fast=KFX.bt!=null;if(!fast)for(let i=0;i<L.length;i++){const v=L[i].v;if(!v.amb){fast=true;break}}const mf=fast?60:30;if(KFX.app.ticker.maxFPS!==mf){KFX.app.ticker.maxFPS=mf;KFX.tgt=mf}}
  /* quality: frames slower than ~48 fps for half a second → fewer particles; steady 58+ for 4 s → back up */
- const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<48){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>58){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
+ const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<(KFX.tgt||60)*.8){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>(KFX.tgt||60)*.96){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
  if(!L.length&&!KFX.ambOn&&KFX.bt==null){KFX.app.ticker.stop();KFX.app.renderer.render(KFX.app.stage);KFX.app.canvas.style.display="none"}}
 /* TWO kit layers on the ONE jfx Pixi canvas (#kfxcv: painted sprites only, pointer-events none; owner 16/11):
    (1) WEATHER ("wx"): today's weather S.wx (j12 WX) — rain, snow, mist, weather petals / leaves, night fireflies — clipped to the STAGE rectangle (Pixi mask),
@@ -44014,7 +44020,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bcb371b1c3b8";window.CTM_BUILD=BUILD;
+const BUILD="272a1007c363";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
