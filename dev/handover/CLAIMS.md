@@ -322,3 +322,5 @@
 | go-live-kit review r2 (sonnet, BIG) of 35d6206c | review/go-live-kit-r2 | main s21 | session_01UV1Szh1sDq4htTKesRN96t | RUNNING | 16/11 18:31Z |
 | page-scale review r1 (opus, BIG) of 1f4912486 + re-merge tutrang-layout c39139e51 | review/page-scale-r1 | main s21 | session_01UV1SzkGZ6JD6JjaGpLMDdF | RUNNING | 16/11 18:32Z |
 | two-way-acts r2 successor (sonnet): shots of new options, OPEN rows, ECONOMY.md canon fix | review/two-way-acts | main s21 | session_01UV1SzkuSsv7KHqJJgVJZY6 | RUNNING | 16/11 18:32Z |
+| night-steal reviewer (BIG: odds/rules + co-op) | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled, 7 runs; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:40Z |
+| chonso-tabs reviewer r1 (SMALL) | review/chonso-tabs-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | PASS c4f80b7f98a45d5dced890f0c3e3b2f2995bcb01 | 16/11 |
