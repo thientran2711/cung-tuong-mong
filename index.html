@@ -2619,7 +2619,7 @@ function pbtn(at,n,sm,why){const k=/class="oc/.test(sm||"")?sm:kitParse(sm||"");
 function whyTime(c){return !S||S.dead?"":used+c>4?"hết khắc buổi này":c>1&&S.suc<20?"Sức dưới 20":""}
 /* pager: items [{f,name,dim,sep}] + index key; returns strip + the chosen card (built lazily by mk(i)) */
 function pager(key,items,mk){const n=items.length;if(!n)return"";let i=PG[key];if(i==null||i<0||i>=n)i=0;PG[key]=i;
- const strip=`<div class="pstrip"><button class="parr" data-pg="${key}" data-pi="${(i-1+n)%n}" aria-label="Người trước">‹</button><div class="pfaces">${(()=>{let h="",open=false;items.forEach((t,j)=>{if(t.sep||!open){if(open)h+="</div></div>";h+=`<div class="pgrp">${t.sep?`<span class="psep">${t.sep}</span>`:items.some(x=>x.sep)?`<span class="psep">&nbsp;</span>`:""}<div class="pgf">`;open=true}h+=`<button class="pface${j===i?" on":""}${t.dim?" dim":""}" data-pg="${key}" data-pi="${j}" aria-pressed="${j===i}">${mdH(t.f,"sm")}<span>${t.name}</span></button>`});return h+(open?"</div></div>":"")})()}</div><span class="pcount">${i+1}/${n}</span><button class="parr" data-pg="${key}" data-pi="${(i+1)%n}" aria-label="Người sau">›</button></div>`;
+ const strip=`<div class="pstrip"><button class="parr" data-pg="${key}" data-pi="${(i-1+n)%n}" aria-label="Người trước">‹</button><div class="pfaces">${(()=>{let h="",open=false;items.forEach((t,j)=>{if(t.sep||!open){if(open)h+="</div></div>";h+=`<div class="pgrp">${t.sep?`<span class="psep">${t.sep}</span>`:items.some(x=>x.sep)?`<span class="psep">&nbsp;</span>`:""}<div class="pgf">`;open=true}h+=`<button class="pface${j===i?" on":""}${t.dim?" dim":""}" data-pg="${key}" data-pi="${j}" aria-pressed="${j===i}">${mdH(t.f,"sm")}${t.rank!=null&&typeof kitNameRank==="function"?kitNameRank(t.rank,t.name,t.col,t.me):`<span>${t.name}</span>`}</button>`});return h+(open?"</div></div>":"")})()}</div><span class="pcount">${i+1}/${n}</span><button class="parr" data-pg="${key}" data-pi="${(i+1)%n}" aria-label="Người sau">›</button></div>`;
  return strip+mk(i)}
 function shortN(nm){const a=String(nm).split(" ");return a.length>2?a.slice(-2).join(" "):a.slice(-1)[0]}
 
@@ -12318,12 +12318,15 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
  .game{grid-template-rows:auto minmax(0,1fr) minmax(0,40%) auto!important}
 }`;document.head.appendChild(st)})();
 /* ---- face strip (pager): only WHOLE faces, never a name cut at the edge; the window follows the chosen person; group labels wrap ---- */
-function kitStripFit(){document.querySelectorAll(".pstrip .pfaces").forEach(P=>{try{const F=[...P.querySelectorAll(".pface")];if(!F.length)return;F.forEach(f=>f.classList.remove("kpfh"));P.querySelectorAll(".pgrp").forEach(g=>g.classList.remove("kpfh"));
+function kitStripFit(){document.querySelectorAll(".pstrip .pfaces").forEach(P=>{try{const F=[...P.querySelectorAll(".pface")];if(!F.length)return;const ST=P.closest(".pstrip");
+  /* KIT 49.2c (owner 15/11, review/rel-picker): the ‹ › pager and the N/M count appear ONLY when the faces do not all fit: first measure with them hidden (.kpall), keep that when every face is whole, else show them and measure again */
+  const fit=()=>{F.forEach(f=>f.classList.remove("kpfh"));P.querySelectorAll(".pgrp").forEach(g=>g.classList.remove("kpfh"));
   P.scrollLeft=0;const W=P.clientWidth;const w=F.map(f=>f.getBoundingClientRect().width+8);let on=F.findIndex(f=>f.classList.contains("on"));if(on<0)on=0;
   let s=on,e=on,sum=w[on];let turn=0;while(true){const canL=s>0&&sum+w[s-1]<=W,canR=e<F.length-1&&sum+w[e+1]<=W;if(!canL&&!canR)break;if((turn++%2===0&&canR)||!canL){e++;sum+=w[e]}else{s--;sum+=w[s]}}
   F.forEach((f,i)=>{if(i<s||i>e)f.classList.add("kpfh")});const gh=()=>P.querySelectorAll(".pgrp").forEach(g=>g.classList.toggle("kpfh",!g.querySelector(".pface:not(.kpfh)")));gh();
   /* group labels ("Thừa Minh cung") can be wider than their faces: drop the face farthest from the chosen one until nothing is cut (review fold-layout FAIL 3) */
-  for(let k=0;k<F.length&&P.scrollWidth>P.clientWidth+1&&e>s;k++){if(e-on>=on-s){F[e].classList.add("kpfh");e--}else{F[s].classList.add("kpfh");s++}gh()}}catch(x){}})}
+  for(let k=0;k<F.length&&P.scrollWidth>P.clientWidth+1&&e>s;k++){if(e-on>=on-s){F[e].classList.add("kpfh");e--}else{F[s].classList.add("kpfh");s++}gh()}};
+  if(ST)ST.classList.add("kpall");fit();if(ST&&F.some(f=>f.classList.contains("kpfh"))){ST.classList.remove("kpall");fit()}}catch(x){}})}
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitStripFit)}catch(e){}return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTimeout(kitStripFit,120)});
 (function(){const st=document.createElement("style");st.id="kit2-strip";st.textContent=`
@@ -12331,6 +12334,7 @@ addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTime
 .pstrip .psep{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;max-width:100%;display:block;line-height:1.15}
 .pstrip .pface span{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;max-width:none!important}
 .pstrip .pgrp{min-width:0}
+.pstrip.kpall>.parr,.pstrip.kpall>.pcount{display:none!important}
 `;document.head.appendChild(st)})();
 /* ---- dilemma options without risk data: the rows come from the option's own outcome branches (go/fail source): every `roll(N)`-guarded
    apply/ap/die becomes "<effect>: <ladder word>" (gain → Được, loss → Kèm), unguarded apply → certain; never "Khó lường" or "xem ở bước sau" ---- */
@@ -22783,7 +22787,8 @@ window.relPerson=relPerson;
 const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":"Phi tần";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id}))))}
-const stripItem=(x,q)=>({f:q.f,name:q.name,sep:x.sep,dim:q.met===false});
+/* KIT 49.2c: strip label = kitNameRank (rank in its rank colour over the short name); Ta keeps her kmy glow */
+const stripItem=(x,q)=>({f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
@@ -22801,7 +22806,7 @@ function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPers
  if(PG.relY==null||!Ys2[PG.relY])PG.relY=0;const Y=Ys2[PG.relY].q;
  const strip1=pager("rel",items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
  const strip2=pager("relY",Ys2.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
- return `<div class="pgwrap krelpg"><div class="kpinline krelpk"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
+ return `<div class="pgwrap krelpg"><div class="kpinline krelpk${items.length<=3?" krelfew":""}"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk${Ys2.length<=3?" krelfew":""}"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
@@ -22936,6 +22941,20 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar.ksbn{opacity:.45}
 /* KIT §49.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
 .krelst{margin:6px 0 2px;font-size:.78rem;color:var(--dim);font-weight:600}
+/* KIT §49.2c COMPACT RELATION PICKER (owner 15/11 "Khung này choáng space quá", review/rel-picker): each picker = ONE flex row, label + group chips on the first
+   line and the face strip beside them when the width allows (strip basis 300 px), else directly under them; no band behind the chips, no tall empty strip;
+   faces + labels small (kitNameRank: rank in its rank colour over the short name); ‹ › and N/M only when the faces overflow (kitStripFit .kpall) */
+html body #panel .krelpk{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;margin:0 0 2px;padding:0}
+html body #panel .krelpk>.krelst{margin:0;flex:0 0 auto;line-height:1.2}
+html body #panel .krelpk>.kcattabs.ktsub{margin:0!important;padding:2px 0!important;background:transparent!important;box-shadow:none!important;flex:0 1 auto;width:auto;min-width:0;overflow-x:auto}
+html body #panel .krelpk>.pstrip{flex:1 1 300px;margin:0!important;gap:3px!important}
+html body #panel .krelpk.krelfew>.pstrip{flex:0 1 auto}
+html body #panel .krelpk .pstrip>.parr{min-height:34px!important;min-width:26px!important;width:26px;font-size:1.1rem}
+html body #panel .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
+html body #panel .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
+html body #panel .krelpk .pface .knr>.knr-r{font-size:.58rem!important;margin:0!important;white-space:nowrap;font-weight:700}
+html body #panel .krelpk .pface .knr>.knr-n{font-size:.66rem;white-space:nowrap;font-weight:600}
+html body #panel .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
 .krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
@@ -29078,7 +29097,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c37d9c00a6f1";window.CTM_BUILD=BUILD;
+const BUILD="a6f07471415d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
