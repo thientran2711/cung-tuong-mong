@@ -174,3 +174,9 @@ spread-e2e (file:// base; A 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844
 755x1000 + 1180x820; C waiting cards survive reload 1/1): PASS, 0 page errors, no overflow. coop-e2e (live Worker): 59/59 (pre-merge: 59/60 with
 one 20 s friend-wait timeout, re-run 59/59). 390x844 shows the rotate prompt. Site rebuilt (index.html, sw.js, assets.json).
 KIT REQUEST: none (no UI, no player-visible text).
+
+## Review r3 (reviewer, 11/16/2026) — review/spread-events-r3
+Merged onto origin/main 5682ce6f (assemble: main's list + jk95 after jk2b, j95/j95b/j95c/jqsave/jspread before jkpc). Reviewer fixes:
+- j61 evGate wrapper skips k61Shown when evGate(1) is a dry sift (a face-reveal / meeting fired for cards D13 then moved to a later buổi: 4 per 108 tuần).
+- jspread nextBuoi wrapper repaints when a card painted mid-change (j95b after() → inner showModal while the modal reads open) is moved by planning (painted mid-change ~4 per 290 tuần; displaced 0 measured; guard only).
+Full report: dev/handover/reports/review-spread-events-r3.md (docs branch).
