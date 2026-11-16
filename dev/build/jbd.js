@@ -25,8 +25,8 @@ function kitBdCss(){const T="linear-gradient(transparent,transparent)";
  const BM=`background:var(--kbd-gradm,var(--kbd-gradl,var(--kbd-grad,${T}))),var(--kbd-m,var(--kbd-l)) var(--kbd-posm,var(--kbd-posl,var(--kbd-pos,center)))/cover no-repeat,var(--kbd-col,#e9dcc8)!important`;
  const rules=sel=>{const sl=sel.split(","),q=t=>sl.map(x=>x+t).join(",");
   return `${sel}{${BP}}
-@media (orientation:landscape){${q(":not([data-kbdo=p])")}{${BL}}}
-@media (orientation:landscape) and (max-aspect-ratio:7/5){${q(":not([data-kbdo=p]):not([data-kbdo=l])")}{${BM}}}
+${sl.map(x=>":where(.kv2) "+x+":not([data-kbdo=p])").join(",")}{${BL}}
+
 ${q("[data-kbdo=l]")}{${BL}}
 ${q("[data-kbdo=m]")}{${BM}}
 `};
