@@ -51,10 +51,16 @@ function kporGeo(src,v){const K=KIT_POR,WL=14.655,WT=20.289,WW=70.691,WH=49.373;
  const D=Math.max(-(v.eL?Math.min(K.dx,cv):K.dx),Math.min(v.eR?Math.min(K.dx,cv):K.dx,(v.x||.5)-.5));
  const left=WL-(z-1)*WW/2-D*z*WW,top=WT-L*WH;const s=(z-1)/2;
  return{z,L,D,left,top,w:z*WW,h:z*WH,clip:`inset(${(L/z*100).toFixed(3)}% ${((s-D*z)/z*100).toFixed(3)}% ${((z-1-L)/z*100).toFixed(3)}% ${((s+D*z)/z*100).toFixed(3)}%)`}}
+/* D25 veil-zoom: the face-overlay box (.kfxc > .kfx: veil, scar, slap, rash, makeup layers, jk2b section 7) is the SAME box as the picture this rule just
+   placed: left/top/width/height of the picture in window units (the .kfxc window = WL/WT/WW/WH of the kin box), so every overlay follows the
+   per-picture zoom z, lift L and shift D instead of the fixed 1.14 cut (which sat 3-10 % off the face whenever z < 1.14). One place, every frame. */
+function kporFx(img,G){try{const K=KPOR_WIN,fx=img.parentElement&&img.parentElement.querySelector(":scope>.kfxc>.kfx");if(!fx)return;const st=fx.style;
+ st.setProperty("--kxl",((G.left-K[0])/K[2]*100).toFixed(3)+"%");st.setProperty("--kxt",((G.top-K[1])/K[3]*100).toFixed(3)+"%");st.setProperty("--kxw",(G.w/K[2]*100).toFixed(3)+"%");st.setProperty("--kxh",(G.h/K[3]*100).toFixed(3)+"%");fx.classList.add("kfxz")}catch(e){}}
+const KPOR_WIN=[14.655,20.289,70.691,49.373];
 function kporApply(img){try{if(!img||!img.classList||!img.classList.contains("kpor"))return;const src=img.currentSrc||img.getAttribute("src")||"";
  if(!src||/face-|unknown/.test(src))return;
  const set=v=>{const G=kporGeo(src,v);const st=img.style;st.setProperty("--kpl",G.left.toFixed(3)+"%");st.setProperty("--kpt2",G.top.toFixed(3)+"%");st.setProperty("--kpw",G.w.toFixed(3)+"%");
-  st.setProperty("--kph",G.h.toFixed(3)+"%");st.setProperty("--kpc",G.clip);img.dataset.kpz=G.z.toFixed(3);img.dataset.kpf=v.f==null?"":v.f.toFixed(3);img.dataset.kpt=v.t.toFixed(3);img.dataset.kpx=(v.x||.5).toFixed(3);img.classList.add("kporz")};
+  st.setProperty("--kph",G.h.toFixed(3)+"%");st.setProperty("--kpc",G.clip);img.dataset.kpz=G.z.toFixed(3);img.dataset.kpf=v.f==null?"":v.f.toFixed(3);img.dataset.kpt=v.t.toFixed(3);img.dataset.kpx=(v.x||.5).toFixed(3);img.classList.add("kporz");kporFx(img,G)};
  const v=kporTop(src,set);set(v==null?{t:KIT_POR.t0,f:null,x:.5}:v)}catch(e){}}
 document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.classList.contains("kpor"))kporApply(t)},true);
 try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){if(m.target.classList&&m.target.classList.contains("kpor"))kporApply(m.target);continue}
@@ -64,4 +70,7 @@ try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){if(m.
  const st=document.createElement("style");st.id="kpor-css";st.textContent=`
 html body ${sel},html body .pcp.kit ${sel},html body span.md.kfc ${sel}{left:var(--kpl)!important;top:var(--kpt2)!important;width:var(--kpw)!important;height:var(--kph)!important;
  object-fit:cover!important;object-position:50% 0!important;clip-path:var(--kpc)!important;border-radius:0!important}`;
+  st.textContent+=`
+html body .kfxc>.kfx.kfxz{left:var(--kxl)!important;top:var(--kxt)!important;width:var(--kxw)!important;height:var(--kxh)!important}`;
+ 
  document.head.appendChild(st)})();
