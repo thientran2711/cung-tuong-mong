@@ -54,3 +54,4 @@
 | D3 item-big | review/item-big | B | (id follows) | RUNNING | 16/11 06:20Z |
 | D9 header-own | review/header-own | B | (id follows) | RUNNING | 16/11 06:20Z |
 | D12 mood-bar | review/mood-bar | B | (id follows) | RUNNING | 16/11 06:20Z |
+| verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | (opening) | RUNNING | 16/11 07:45Z |
