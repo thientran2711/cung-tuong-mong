@@ -9,7 +9,7 @@
    2. "Thắp đèn hầu rượu": he stays in HER palace — the night cards are the normal night (j8 night1 → night2 → nightFx, BAL.night) with the visit's
       own opening (no bath, no quilt); then on top: Sủng / Danh, every consort's jealousy, the consort whose tablet he left (ghen, quý ngươi −),
       the Hoàng hậu displeased, and the Thái hậu displeased by chance (her archetype, jtrong TH_ARCH.neg) for breaking the Kính sự phòng custom,
-      scaled by her trọng (DEED.empvisit offends Lễ). The result card shows the true numbers and ends with a button (OD:L1261).
+      scaled by her trọng (DEED.empvisit offends Lễ). The night's own closing card (jne kitNightEnd, KIT §62/§81) shows the whole night before → after with these extras, and the visit caption (r1: no second modal).
       "Khuyên ngài giữ long thể" is the safe road: Đức, the Thái hậu pleased, a little Sủng lost. "Phô tài" stays as it was.
    3. Co-op: the Emperor is a world person, so ONLY the host rolls (jmort host()), for both seats (her and the friend entry), one visit a day.
       The result is written into the world (S.emp.visit = {w day, pid}); the visited seat plays the card (the guest after the merged week arrives),
@@ -29,7 +29,7 @@ function empOk(){const V=B();if(!S||S.dead||S.mg)return false;const i=S.emp&&S.e
 /* the night already taken today blocks a visit, unless it is only the tablet's pick: the Emperor leaves the tablet for her (that consort loses it) */
 function ntOther(){const n=typeof ntTaken==="function"?ntTaken():null;if(!n)return null;const t=S.tonight&&S.tonight!=="me"?S.tonight:null;return t&&n.who===t.id?null:n}
 /* her own tablet tonight does not stop him: he comes himself instead of the sedan (the Kính sự phòng card goes) */
-function meOk(){return !S.out&&!S.preg&&!ntOther()}
+function meOk(){let cy=false;try{cy=typeof cyTray==="function"&&!!cyTray(S)}catch(e){}return !S.out&&!S.preg&&!cy&&!ntOther()}
 function showFor(now){const t=S.tonight&&S.tonight!=="me"?S.tonight:null,mine=S.tonight==="me";S.visW=day();
  if(mine)for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].pid==="ksp")Q.splice(i,1);
  const d=mkP("empnight",{v:t&&t.id!=null?t.id:null,mine:mine?1:0});if(d){pushDil(d,"Ngự giá lâm cung");/* he is at her door tonight: never held / dropped by the event pacing gate (j68 evGate) */const m=Q.find(x=>x&&x.pid==="empnight"&&!x.must);if(m)m.must=1;if(now)try{if($("modal").hidden)showModal()}catch(e){}}}
@@ -58,7 +58,8 @@ PEND.empnight=function(p){p=p||{};const V=B(),d=p0.call(this,Object.assign({o:od
  const a=d.o.find(o=>/^Thắp đèn hầu rượu/.test(o.n||""));
  if(a){a.x=`ngài nghỉ lại cung ngươi đến sáng · thành: đêm thị tẩm, thêm Sủng +${V.sung}, Danh +${V.danh} · kèm: phi tần ghen +${V.ghen}${lost?`, ${lost.name} ghen +${V.lostGhen}, quý ngươi -${V.lostRel}`:""}${q&&q!==S?`, Hoàng hậu quý ngươi -${V.hh}`:""}${T.p?` · kèm: Thái hậu phật ý vì ngài bỏ lệ Kính sự phòng, Thái hậu quý ngươi -${T.loss}: ${chanceW(T.p)}`:""}`;
   a.hint=lv=>`ngài nghỉ lại cung ta, được sủng ái và danh tiếng hơn đêm thường; nhưng phi tần ghen${lv>=1?(lost?`, ${lost.name} mất đêm mà oán`:"")+(T.p?", Thái hậu có thể phật ý":""):""}`;a.risk="có rủi ro";
-  a.lk=()=>{const n=ntOther();return n?`Đêm nay Hoàng thượng đã ở cung ${n.who==="me"?"ngươi":n.nm}`:""};
+  /* r1: keep the locks other modules put on this road (jcycle: her monthly days) — the cycle test caught them dropped */
+  {const lk0=a.lk;a.lk=()=>{const n=ntOther();if(n)return `Đêm nay Hoàng thượng đã ở cung ${n.who==="me"?"ngươi":n.nm}`;return typeof lk0==="function"?lk0():(lk0||"")}}
   a.go=()=>{if(lost&&S.ntk&&S.ntk.who===lost.id)S.ntk=null;S.visNight=day();S.visLost=lost?lost.id:null;S.visQ=q&&q!==S?1:0;nightScene();
    if(Q[0]&&Q[0].pid==="prep"&&S.tonight==="me"){const n=mkP("vnight",{q:V.q});if(n)Q[0]={t:"Ngự giá lâm cung",h:n.t,opts:n.o,who:n.who,pid:n.pid,pp:n.pp}}else S.visNight=null}}
  const c=d.o.find(o=>/^Khuyên ngài giữ long thể/.test(o.n||""));
@@ -78,6 +79,9 @@ function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];
  const T=thDispl();if(T.p&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe tin, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
  else if(T.p)P.push("Thái hậu nghe tin, không nói gì.");
  log(`Ngự giá lâm cung: ${L.join(" · ")}. ${P.join(" ")}`);
- Q.push({t:"Sáng hôm sau",who:pEmp(),h:`<p>Trời vừa sáng, Hoàng thượng mới rời cung ngươi lên triều.</p><p>${kitParse(`thành: ${L.join(", ")}`)}</p><p class="past">${P.join("<br>")}</p>`,btn:"Đã hiểu"})}
+ /* review r1: no second card. The night's own closing card (jne kitNightEnd, KIT §62 + §81 kit button) already shows the whole night
+    before → after (Được / Mất / Kèm rows, real numbers incl. these extras, applied inside nightFx); it gets the visit's caption. */
+ S.visMorn=day()}
+window.kneLineHook=function(){if(S&&S.visMorn!=null&&day()-S.visMorn<=1){S.visMorn=null;return "Hoàng thượng nghỉ lại tới sáng mới lên triều; cả hậu cung đều hay."}return ""};
 window.visAfter=visAfter;
 })();

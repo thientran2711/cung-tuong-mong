@@ -25,3 +25,9 @@ review/mortality-r1 @2d3428f8 + origin/main merged (745f25eb): conflicts index.h
 
 ## Next / open
 See dev/handover/reports/emperor-visit.md (handover branch).
+
+## Review r1 (reviewer session_01DgYSWoamKdMf5ewt8WHax6, branch review/emperor-visit-r1)
+- Merged origin/main b85cdb1e (mortality-r1 is already on main, so no ship-order dependency left). Conflicts: jbal2 (BAL.visit/night + BAL.psk kept), assemble (main's list + jvisit.js), generated files rebuilt.
+- FAMILY FIX "shown ≠ applied" (night gains): new j8 nightGain(s) (BAL.night) is the one formula for nightFx (her), j75 rivalNight (NPCs; was typed 3/2), j8 nx() (night talk line; was a typed "Sủng +5, Ân tình +5 / +3, +2") and j79 stealX (Tranh sủng / Chặn ngự giá floor; was typed 3/2 and chance 22 → BAL.night.bestow + bestowS × stealS). Test 1b checks every mood × q × talk: shown == nightFx applied.
+- Morning card removed: on main the night's closing card (jne kitNightEnd, KIT §62, own kit button) already shows the visit night's real Được / Mất / Kèm rows (extras are applied inside nightFx); the separate "Sáng hôm sau" modal was drawn UNDER that scene and closed by ✕. Now the night card carries the visit caption (jne hook window.kneLineHook).
+- Bug found by dev/test/cycle.js: jvisit replaced the "Thắp đèn hầu rượu" lock and dropped jcycle's monthly-days lock (empnight not locked). Fixed: earlier lk kept; the daily roll also skips her while her tray is put away.

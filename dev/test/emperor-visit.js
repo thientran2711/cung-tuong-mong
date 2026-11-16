@@ -1,7 +1,7 @@
 /* review/emperor-visit: the visit road end to end in the real build (dev/index.html) + the frequency bot.
    usage: node dev/test/emperor-visit.js [years=6] [lives=6]
    1. FLOW: a forced visit → card "empnight" (3 options, Thắp đèn has the visit numbers) → the visit night (no prep / quilt) → night2 → nightFx
-      → "Sáng hôm sau" card with a button; checks Sủng / Danh / Thái hậu / Hoàng hậu / jealousy deltas against BAL.visit + BAL.night.
+      → the night's closing card (jne kitNightEnd) gets the visit caption (r1: no second modal); checks Sủng / Danh / Thái hậu / Hoàng hậu / jealousy deltas against BAL.visit + BAL.night.
    2. Safe road: "Khuyên ngài giữ long thể" gives BAL.visit.adviseDuc / adviseTh.
    3. Gates: pregnant / lãnh cung / gap → no visit; empnight no longer drawn by the generic pool.
    4. BOT: real endTurn days (dialogs cleared, Sủng held at a level) → visits per year per Sủng level; Thái hậu displeased rate per archetype. */
@@ -27,10 +27,19 @@ const YEARS=+process.argv[2]||6,LIVES=+process.argv[3]||6,BEFORE=+process.env.BE
    Q.length=0;Q.push(c);run(a);const n1=Q[0];if(!n1||n1.pid!=="vnight")F("visit night card missing: "+(n1&&n1.pid));else{
     if(/chăn gấm|Kính sự phòng đã báo/.test(n1.h))F("visit night still has the quilt/prep text");out.flow.night=strip(n1.h);
     const sB=S.sung;const ex=JSON.stringify({x:0});Q.shift();n1.opts[3].go();const n2=Q[0];if(!n2||n2.pid!=="night2")F("night2 missing");else{const it=Q.shift();n2.opts[1].go()}
-    const m=Q.find(x=>x.t==="Sáng hôm sau");if(!m)F("no morning card");else{out.flow.morning=strip(m.h);if(m.btn!=="Đã hiểu")F("morning card has no button")}}
+    /* r1: no second modal; the night's closing card (jne kitNightEnd, KIT §81 button) carries the visit's caption */
+    if(Q.find(x=>x.t==="Sáng hôm sau"))F("second morning modal still pushed");const ln=window.kneLineHook&&kneLineHook();out.flow.morning=ln;if(!ln)F("night card caption hook empty")}
    out.flow.d={sung:S.sung-s0,danh:S.danh-d0,th:S.th-th0,hh:S.hh-hh0,lostGhen:t?t.ghen-g0:null};
    if(S.danh-d0<V.danh)F("Danh gain "+(S.danh-d0));if(S.sung-s0<V.sung+N.sung)F("Sủng gain "+(S.sung-s0));if(t&&t.ghen-g0<V.lostGhen)F("lost rival ghen "+(t.ghen-g0));
    if(S.tonight!=="me")F("tonight not hers")}
+  /* 1b. r1 family fix: the night talk line (j8 nx) shows the real best / worst of nightFx (nightGain, BAL.night) */
+  {const mood0=S.emp.mood;out.flow.nx=[];for(const md of [0,1,2,3])for(const q of [1,2,4])for(const b of [-1,0,1,3]){S.emp.mood=md;const m=[1,0,-1,-2][md];
+    const x=nx(b,"",{q,vp:0});const mm=x.match(/thành: đêm vui, Sủng \+(\d+), Ân tình \+(\d+) · hỏng: đêm nhạt, Sủng \+(\d+), Ân tình \+(\d+)/);
+    const hi=nightGain(q+b+m+2),lo=nightGain(q+b+m);if(!mm||+mm[1]!==hi.sung||+mm[2]!==hi.an||+mm[3]!==lo.sung||+mm[4]!==lo.an)F(`nx shown≠applied mood${md} q${q} b${b}: ${x}`);
+    /* applied: run the real nightFx at the two ends and read the true change */
+    for(const [s,w] of [[q+b+m+2,hi],[q+b+m,lo]]){const s0=S.sung,a0=S.an;S.sung=40;S.an=40;const L0=log;log=()=>{};try{nightFx(s)}finally{log=L0}const got={sung:S.sung-40,an:S.an-40};S.sung=s0;S.an=a0;
+     if(got.sung<w.sung||got.an!==w.an)F(`nightFx s${s} gave ${JSON.stringify(got)} not ${JSON.stringify(w)}`)}
+    if(md===1&&q===2)out.flow.nx.push(`b${b}: ${x.split(" · ").slice(0,3).join(" · ")}`)}S.emp.mood=mood0;Q.length=0}
   /* 2. safe road */
   quiet();S.visW=null;S.tonight=null;S.ntk=null;S.preg=0;force();const c2=Q.find(x=>x.pid==="empnight");if(c2){const o=c2.opts.find(o=>/^Khuyên/.test(o.n));const du=S.duc,th=S.th;Q.length=0;Q.push(c2);run(o);
    out.flow.advise={duc:S.duc-du,th:S.th-th};if(S.duc-du!==V.adviseDuc&&S.duc<100)F("advise Đức "+(S.duc-du))}else F("no 2nd card");
