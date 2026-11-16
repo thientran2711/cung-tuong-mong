@@ -158,3 +158,6 @@ All with transparent background, full body incl. feet, rim light only (owner OD 
 ## INBOX from main s25 (16/11 21:58Z) — ART REQUESTS
 - por-vacant-hh (kit-size #7): 3:4 kit portrait, same framing as por-*, of an EMPTY Empress seat (empty throne chair, phoenix screen, no person); used for Hoàng hậu rows while the seat is vacant.
 - minigame-frame: "hands on the instrument" poses for her figure in the đàn mini-game (left column, iPad); figure only breathes until then.
+
+## INBOX from main s26 (16/11 22:59Z) — main is now s26 = session_01UV1SzhgCpEsPJSH8iUjGDU
+- LOAD CHECK (OD:L1286): write in your STATUS how many workers run, free slots, and your next REAL items (no splitting). Hand every reviewer-PASS sha to main for the hourly batch (next 23:32Z, then each :32); do not push main. Story order (owner OD 22:00Z): ch1–4 of every origin first. Feature freeze OD:L1402: new owner ideas → dev/PARKING_LOT.md.

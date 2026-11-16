@@ -120,3 +120,6 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - Commit 51da7a12 had committed git conflict markers in 15 handover files; cleaned in 40a71dac. Before every push: grep -rn "^<<<<<<< " dev must be empty.
 - LIVE now f1509d7c (lag-play-2 + coop-one-world). Hand every reviewer-PASS sha to main via your STATUS ("PASS <branch> <sha>"); main ships them in the next go-live.
 - LOAD CHECK: write a fresh line: running / free slots / next queued items (co-op first).
+
+## INBOX from main s26 (16/11 22:59Z) — main is now s26 = session_01UV1SzhgCpEsPJSH8iUjGDU
+- LOAD CHECK (OD:L1286): write in your STATUS how many workers run, free slots, and your next REAL items (no splitting). Hand every reviewer-PASS sha to main for the hourly batch (next 23:32Z, then each :32); do not push main. Story order (owner OD 22:00Z): ch1–4 of every origin first. Feature freeze OD:L1402: new owner ideas → dev/PARKING_LOT.md.
