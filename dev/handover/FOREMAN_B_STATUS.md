@@ -16,7 +16,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
 | C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING (resumed) |
 | C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
-| C35 pcard-fill | review/pcard-fill | sonnet | RUNNING |
+| C35 pcard-fill | review/pcard-fill @85c2c933 | sonnet | REVIEWING (review/pcard-fill-r1, sonnet; renumber its KIT part §71→§73) |
 | C37 panel-size | review/panel-size | sonnet | RUNNING |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
@@ -52,3 +52,4 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - Q6 (C28 room-btn): under 600 px the room button is icon-only (label in tooltip; a label didn't fit). OK? And should it also appear on landscape/wide screens (it never existed there)?
 - Q7 (CDN): RESOLVED — token works, images upload directly.
 - Q8 (C23 follow-up, for Foreman C's C7 balance pass): rival NPC minigame scores (kg82NpcMean) unchanged, so low-level players now beat rivals far more easily; and in the lễ/trị cung/xử án quiz banks the right answer is often the longest option (guessable). Suggest C7 or a small worker rebalance/rewrite.
+- Q9 (C35 pcard-fill): the game has no per-person 'ghét' (dislike) data — the card shows only known traits/tendencies and the Emperor's known likes. Add dislike data as a design item? Also Thỉnh an stays a talk option of the visit (no free shortcut that would bypass one-talk-per-visit).
