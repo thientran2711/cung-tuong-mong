@@ -4,14 +4,14 @@
    Bug it guards: Dư đồ → Hậu cung kept .maptab (full-width panel, stage hidden on iPad).
    usage: node dev/test/sw-serve.js 8971 <repo root> &   node dev/test/tab-pairs.js http://localhost:8971/ [W x H @D …]  (default 1180x820@2 755x1000@2) */
 const {chromium}=require('playwright');const [,,BASE0,...SZ]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-const SEED=()=>{let a=20261116;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
+const SEED=()=>{window.__nlInner=1;let a=20261116;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
 const LIFE=()=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){start();if(!isSrv()&&!(window.isKc&&isKc()))break}
  window.CLEAN=()=>{document.querySelectorAll('[id^=kroul],#dawn,#kload,#kpodov,.kmov').forEach(e=>e.remove());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()};CLEAN();return S.name};
 (async()=>{const b=await chromium.launch();const sizes=(SZ.length?SZ:['1180x820@2','755x1000@2']).map(s=>{const m=s.match(/(\d+)x(\d+)@?(\d*)/);return[+m[1],+m[2],+(m[3]||1)]});let fail=0;
  for(const [W,H,D] of sizes){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,serviceWorkers:'block',hasTouch:true,isMobile:W<1100});await c.addInitScript(SEED);
   const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(BASE0.replace(/\/?$/,'/')+'index.html?khost=1',{waitUntil:'commit'});
   await p.waitForSelector('#krotf',{timeout:60000});let f;for(let i=0;i<600&&!f;i++){f=p.frames().find(x=>/krot=1/.test(x.url()));if(!f)await sleep(300)}
-  await f.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await f.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:180000}).catch(()=>{});await sleep(1500);
+  await f.waitForFunction(()=>typeof start==='function'&&document.readyState==='complete',null,{timeout:180000});await f.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:180000}).catch(()=>{});await sleep(1500);
   await f.evaluate(LIFE);for(let i=0;i<5;i++){await sleep(800);await f.evaluate(()=>CLEAN())}
   const tabs=await f.evaluate(()=>[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetWidth).map(b=>b.dataset.tab||b.dataset.kg).filter(Boolean));
   const tap=async t=>{await f.evaluate(()=>CLEAN());const q=await f.evaluate(t=>{const e=[...document.querySelectorAll('#tabs button')].find(b=>b.offsetWidth&&(b.dataset.tab||b.dataset.kg)===t);if(!e)return null;const r=e.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]},t);if(!q)return false;

@@ -177,9 +177,14 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
  return out.join("<br>")}
 /* pop card: numbers read live (the visit list keeps a snapshot "lòng 97") */
 try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
-function nrDOM(){try{fixTitles()}catch(e){}try{fixHud2()}catch(e){console.error(e)}try{fixStage()}catch(e){console.error(e)}try{fixPanel()}catch(e){console.error(e)}try{fixModal()}catch(e){console.error(e)}}
+/* review/lag-play-2: fixTitles only drops tooltips (no visible change) but reads scrollWidth = a forced layout in the middle of a render;
+   it now runs once in the next frame, after every write of the render is done (one layout, the one the paint needs anyway). */
+let nrTT=0;function fixTitlesSoon(){if(nrTT)return;nrTT=requestAnimationFrame(()=>{nrTT=0;try{fixTitles()}catch(e){}})}
+function nrDOM(){try{fixTitlesSoon()}catch(e){}try{fixHud2()}catch(e){console.error(e)}try{fixStage()}catch(e){console.error(e)}try{fixPanel()}catch(e){console.error(e)}try{fixModal()}catch(e){console.error(e)}}
 window.nrDOM=nrDOM;
-const W=o=>function(){const r=o.apply(this,arguments);nrDOM();return r};
+/* review/lag-play-2: nrDOM ran after renderHUD, renderHud2, renderStage, renderPanel AND render (5x per render, each a full DOM pass).
+   Nested calls now only count; the outermost wrapped call runs it once, when everything inside has been drawn (same end state). */
+let nrDepth=0;const W=o=>function(){nrDepth++;let r;try{r=o.apply(this,arguments)}finally{nrDepth--}if(!nrDepth)nrDOM();return r};
 try{renderHUD=W(renderHUD)}catch(e){}try{if(typeof renderHud2==="function")renderHud2=W(renderHud2)}catch(e){}
 try{renderStage=W(renderStage)}catch(e){}try{renderPanel=W(renderPanel)}catch(e){}try{showModal=W(showModal)}catch(e){}try{render=W(render)}catch(e){}
 /* tab / strip clicks re-render through these, but some handlers patch the DOM afterwards */
