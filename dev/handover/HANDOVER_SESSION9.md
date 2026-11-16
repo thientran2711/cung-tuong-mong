@@ -24,7 +24,7 @@ LIVE-BUG (main chat):
 - outside-r2-r2 reviewer (opus) → running.
 Moved to Foreman D: slap-mg (§79), coop-chat (§80), act waves 2–3, HD upscale, balance audit, servant phase 2, D54 buổi paintings, D56 icons + Nội vụ phủ art.
 ## Waiting on the owner
-- Pregnancy rate: options 1 double / 2 triple / 3 cycle / 1+3 (proposed 1+3).
+- Pregnancy rate: ANSWERED option 4 (1+3) → Foreman D D57 preg-rate.
 - Servant caps (wait for the servant-system audit).
 ## Known follow-ups
 - The #kload first-run panel is wider than 560 (kpanel-compact note).
