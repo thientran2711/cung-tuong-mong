@@ -140,7 +140,7 @@ PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];con
  return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
 
 /* ---------- 3. BỊ TÁT: a faint soft handprint on the cheek for a few tuần (img/fx-slap.png on the scar-fit cheek box) ---------- */
-function slapSev(p){const z=p&&p.slap;return z?cl(z.sev|0||2,1,3):0}   /* old saves without sev = vừa */
+function slapSev(p){const z=p&&p.slap;return z?cl(z.sev|0||1,1,3):0}   /* old saves without sev = nhẹ (same as the tat entry's state() from facefx-all-r2 on main; reviewer r1) */
 function slapGive(p,by,why,sev){sev=cl(sev|0||BAL.slap.def,1,3);if(!p||!fxLive(p)||KIT_FACEFX.deny.tat[KIT_FACEFX.kind(p)])return"";p.slap={sev,until:wk()+BAL.slap.wk[sev]+(roll(30)?1:0),by:fxKey(by),at:wk()};
  const t=`${fxWho(p)} bị ${by?(by===S?"ngươi":fxName(by)):"người ta"} tát${why?" vì "+why:""}: má in dấu tay ${BAL.slap.nm[sev]}${["consort","player"].includes(KIT_FACEFX.kind(p))?`, Sắc -${BAL.slap.sac[sev]}`:""} vài tuần.`;fxLog(p,t);return t}
 KIT_FACEFX.add({id:"tat",z:30,ready:true,                  /* owner approved the handprint (pilot 11/14) */

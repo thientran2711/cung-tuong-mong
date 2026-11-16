@@ -118,8 +118,10 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    (+0/1 random); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng); thau = Thái hậu rebukes a nặng slap
    (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap); rep = weekly chance a passer-by reports a mark that is still on (needs vừa+);
    def = tier of a slap with no game ("Tát luôn" and old callers). bar = the power bar: speed (rad/ms), zone half-width as a share of the bar by tier 0/1/2 of her Sắc-less skill, red/amber widths;
-   NPC: npc = rolled tier weights by rank gap (1, 2, 3+); dodge = how wide the safe window is (share), dodgeMs = time to react. */
+   NPC: npc = rolled tier weights by rank gap (1, 2, 3+); dodge = how wide the safe window is (share), dodgeMs = time to react.
+   missRel = relation change when she dodges a nhẹ slap completely; dodgeOdds = the odds shown on the "Né đòn" card (reviewer r1: were typed in jslap, ONE CORE). */
 BAL.slap={nm:["","nhẹ","vừa","nặng"],def:1,sac:[0,2,3,5],wk:[0,2,4,7],duc:[0,-2,-4,-7],rel:[0,-15,-25,-40],oan:[0,0,8,18],
  hoang:[0,20,30,55],sung:[0,-2,-4,-7],thau:40,thauDanh:-4,evT:[0,0,35,70],evW:[0,10,30,55],rep:[0,0,12,30],
  bar:{w:.0026,red:.16,amber:.38,ms:3200},
+ missRel:-5,dodgeOdds:50,
  npc:[[0,60,32,8],[0,45,38,17],[0,30,42,28]],dodge:{w:.0024,safe:.2,ms:3200}};
