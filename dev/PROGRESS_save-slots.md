@@ -22,4 +22,4 @@
 
 ## Tests
 - node dev/test/save-slots.js [755x1000 1180x820 844x390]: ALL OK (17 checks each).
-- coop-e2e plain: see report.
+- coop-e2e plain (live Worker): 59/59 passed.
