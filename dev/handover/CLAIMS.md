@@ -371,4 +371,4 @@
 | kit-size phase 2 keeper (opus) | review/kit-size | main s22 | session_01UV1Szir6A61kJEUGvE9Guz | RUNNING | 16/11 19:50Z |
 | stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | RUNNING | 16/11 19:49Z |
 | coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | RUNNING | 16/11 19:46Z |
-| mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | (opening) | RUNNING | 16/11 19:52Z |
+| mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | session_01N1tNP4ZB3MEyANJVvpH6Ba | RUNNING | 16/11 19:52Z |
