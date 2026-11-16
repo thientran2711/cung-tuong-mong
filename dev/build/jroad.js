@@ -16,8 +16,24 @@ const rdRel=(A,k,n)=>{const v=rv67(A,k);if(v)relAdd(S,v,n);return v};
 const rdOan=(A,k,n)=>{const v=rv67(A,k);if(v)oanAdd(v,S,n);return v};
 const RDW=k=>()=>rdK()>0===(k>0)&&(k>0||rdK()<=0);/* opening filter: RDW(1) after a won chapter, RDW(0) after a middle or lost one */
 
+/* ONE CORE (OD:L1267, review/road-onecore): a chapter's numbers live in BAL.road.fx[id] (jbalroad.js); rdDef puts them back on the
+   options (c / w / l / o) and endings (fx) when the chapter is registered, so the j67 engine reads the same shape as before.
+   rdOdds adds the odds terms left to right (same order as the old inline arrow → bit-identical); RDQ = named road predicates / counts
+   that an odds term may read (set by the data file, e.g. RDQ.cnchuGap); rdFb = the road flag book S.st.f14.fb (CN_FL / MUOI_FL). */
+const RDQ={};
+const rdFb=(k,v)=>{try{const F=S.st.f14.fb=S.st.f14.fb||{};if(v!=null)F[k]=v;return F[k]||0}catch(e){return 0}};
+const rdIn=(c,f)=>Array.isArray(c)?c.some(f):f(c);
+function rdOdds(q,A){let x=q[0];for(let i=1;i<q.length;i++){const t=q[i],k=t[0],neg=k[0]==="-",K=neg?k.slice(1):k;let v;
+  if(K==="d")v=S[t[1]]/t[2];else if(K==="m")v=S[t[1]]*t[2];else if(K==="k")v=RDQ[t[1]](A)*t[2];
+  else if(K==="f")v=t[1].split("|").some(g=>A.f[g])?t[2]:t[3];else if(K==="e")v=rdIn(t[1],c=>rdEnd(c)===t[2])?t[3]:t[4];
+  else if(K==="b")v=rdFb(t[1])?t[2]:t[3];else if(K==="q")v=RDQ[t[1]](A)?t[2]:t[3];else throw Error("rdOdds term "+k);
+  x=neg?x-v:x+v}return x}
+function rdFx(id,def){const F=BAL.road.fx&&BAL.road.fx[id];if(!F)return;
+ for(const bk in F){if(bk==="E"){for(const ek in F.E)if(def.E&&def.E[ek])def.E[ek].fx=F.E[ek];continue}
+  const O=def.B&&def.B[bk]&&def.B[bk].o;if(!Array.isArray(O))continue;
+  F[bk].forEach((x,i)=>{const o=O[i];if(!x||!o)return;for(const k of ["c","w","l"])if(x[k])o[k]=x[k];if(x.o){const q=x.o;o.o=A=>rdOdds(q,A)}})}}
 /* register one chapter: n = 5..11 */
-function rdDef(road,n,def){const id=road+"_"+n;ARC67[id]=Object.assign({o:"rd",road,rn:n},def);(ROAD14[road]=ROAD14[road]||{})[n]=id;
+function rdDef(road,n,def){const id=road+"_"+n;rdFx(id,def);ARC67[id]=Object.assign({o:"rd",road,rn:n},def);(ROAD14[road]=ROAD14[road]||{})[n]=id;
  try{if(typeof RTHEME67==="object"&&!RTHEME67[id])RTHEME67[id]=def.rth||RTHEME67[road]||"court"}catch(e){}return id}
 function rdFull(road){const R=ROAD14[road];if(!R)return false;for(let n=BAL.road.first;n<=BAL.road.last;n++)if(!R[n])return false;return true}
 function rdOn(){try{return !!(f14()&&S.st.f14.rd)}catch(e){return false}}

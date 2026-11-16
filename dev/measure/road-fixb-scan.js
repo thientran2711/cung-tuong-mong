@@ -7,7 +7,7 @@
    - WORD: VANPHONG words (chắc chắn, bạn, modern words, Khôn Ninh, digits/% in strings).
    - NUM: private number-word tables, typed RANKS index, typed "… lượng" amounts. */
 const fs=require('fs');const V=process.argv.includes('-v');const FR=new RegExp(process.argv.slice(2).find(a=>!a.startsWith('-'))||'^jrd_.*\\.js$');
-global.ARC67={};global.RTHEME67={};global.BAL={road:{first:5,last:11}};global.rdK=()=>0;global.rdPrev=()=>"";global.window=global;global.RD97L=[];
+global.ARC67={};global.RTHEME67={};global.BAL={st14:{parts:[[1,3],[4,11]]}};eval(fs.readFileSync('dev/build/jbalroad.js','utf8'));/* BAL.road + BAL.road.fx (review/road-onecore) */global.rdK=()=>0;global.rdPrev=()=>"";global.window=global;global.RD97L=[];
 const bal=fs.readFileSync('dev/build/jbal2.js','utf8');
 const J=fs.readFileSync('dev/build/jroad.js','utf8');const src=J.slice(J.indexOf('const ROAD14'),J.indexOf('function rdOn'));
 const files=fs.readdirSync('dev/build').filter(f=>/^jrd_.*\.js$/.test(f));
