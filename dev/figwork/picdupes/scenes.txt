@@ -31,7 +31,7 @@ gui-ngu-thu-vien|0|a eunuch's hands carrying a woven pet basket toward the gate 
 giao-nguoi-cham-thu|0|a consort's hand passing a small cat's red leash into a maid's hands
 moi-dao-ngu-hoa-vien|0|the Emperor's yellow sleeve and a consort's pink sleeve walking side by side on a garden path in the imperial flower garden, peonies, rockery and a little bridge
 tang-qua-co-doc|1|a hand placing a pretty box of sweet cakes on a tray while the other hand hides a small poison vial in a sleeve
-hanh-le|0|a consort seen from behind making a formal curtsy, hands at the right side of her waist, before an unknown lady's hem in a garden
+hanh-le-v2|0|a court lady in side view from slightly behind (face hidden by her bun) making the standing van-phuc curtsy: head gently bowed, both hands lightly clasped at the right side of her hip, knees slightly bent; a higher-ranked lady's long hem and slippers on the garden path ahead; respectful, serene, not tired or in pain (reviewer FAIL r1: old hanh-le looked like a sore back)
 ban-noi-vu-phu|0|a consort's hand handing a handmade embroidered fan across a counter to an official's hands at the Imperial Household office, a small stack of silver beside it
 dang-qua-thai-hau|0|two hands offering a gift box on a tray toward an elder lady's dark plum brocade sleeve and prayer beads
 nghe-ngong-chung|0|a palace maid seen from behind by a well in a service courtyard, half hidden by hanging robes, listening to distant servants' chatter

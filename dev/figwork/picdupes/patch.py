@@ -9,7 +9,7 @@ P={"Nghỉ ngơi một lát":"nghi-ngoi-mot-lat","Đọc sách giải khuây":"d
 "Phát bạc cứu giúp cung nhân nghèo":"phat-bac-cuu-giup","Hỏi han ở *: ai cần giúp?":"hoi-han-ai-can-giup","Xem con ở mục Con của ngươi":"xem-con-muc-con",
 "Bỏ việc này":"bo-viec-nho","Dâng, tặng":"dang-tang-tac-pham","Bày ở yến tiệc":"bay-tac-pham-yen-tiec","Tự luyện, làm tác phẩm":"tu-luyen-tac-pham",
 "Gửi về Ngự thú viên":"gui-ngu-thu-vien","Giao * chăm":"giao-nguoi-cham-thu","Mời ngài dạo ngự hoa viên":"moi-dao-ngu-hoa-vien","Tặng quà ăn có độc":"tang-qua-co-doc",
-"Hành lễ":"hanh-le","Bán cho Nội vụ phủ":"ban-noi-vu-phu","Dâng quà lên Thái hậu":"dang-qua-thai-hau",
+"Hành lễ":"hanh-le-v2","Bán cho Nội vụ phủ":"ban-noi-vu-phu","Dâng quà lên Thái hậu":"dang-qua-thai-hau",
 # same meaning as an existing book-line picture (reuse, not a new drawing)
 "Sai đi dò la":"sai-di-do-la-h","Nghe ngóng chung":"nghe-ngong-chung","Xin Thái hậu đỡ lời":"xin-th-do-loi-g-h","Đưa cơm áo":"dua-com-ao-h"}
 for pet in json.load(open(sys.argv[4]))['pets'] if len(sys.argv)>4 else []:

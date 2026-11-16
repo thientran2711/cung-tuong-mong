@@ -29,3 +29,16 @@ of these only ve-hau and tranh-ghe-xong are live (one log rule each) and both ar
 - review/act-pics2: near-duplicate template pictures ve-hau (#269) and tranh-ghe-xong (#249) are in its queue.
 - Not covered: q72 quest step names ("Đến <consort palace>", step titles) only render with an active quest; a runtime pass with quests would list them.
 - Coordinator: ev-night2-warm / ev-night2-tender are on the CDN but unused (night-end-r1 owns the tone pictures).
+
+## r1 fixes (reviewer FAIL 16/11)
+- (1) "Hành lễ": old img/act-hanh-le.webp (consort from behind, hand on hip = looked like a sore back, ACT_ART_AUDIT.md:140 salutes must
+  not look like punishment) replaced by NEW name img/act-hanh-le-v2.webp (gpt-2-6, folder ba4aecfe…, ref If6wqwdtvE, creation MBwRa4gDCm):
+  side view from slightly behind, face hidden by the bun, standing vạn phúc curtsy — head bowed, both hands clasped at the right side of the hip
+  (right over left, 5 fingers each, zoom-checked), knees slightly bent, a higher lady's hem + slippers ahead on a garden path.
+  384x506 WebP 57 KB on the CDN. Rejected takes: XmPzQ3xBfo (hands behind back), gOIH3faSXO (profile edge visible).
+  Live img/ACTS.json (fresh pull) "Hành lễ" -> hanh-le-v2, pushed and verified live; patch.py + scenes.txt + gens.txt updated. Old act-hanh-le.webp stays on the CDN unused.
+- (2) Static-name list committed: dev/figwork/picdupes/extra.txt = the 18 act rows of dev/art/MISSING_PICS.md + every exact name of patch.py
+  + "Đến <place>" names (patterns with "*" and pet names are left out; pets come from names.js at runtime). 44 names.
+  Exact scan command (from the worktree root, local build served on a free port):
+    node dev/test/pic-dupes.js http://127.0.0.1:<port>/ dev/figwork/picdupes/out.json dev/figwork/picdupes/extra.txt
+  Test a manifest patch before pushing it: ACTS_FILE=<patched ACTS.json> node dev/test/pic-dupes.js <same args>.
