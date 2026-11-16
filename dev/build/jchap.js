@@ -13,7 +13,7 @@ function chapModel(){try{const st=S&&S.st;if(!st)return null;const c=st.ch,M=st.
  const done=c&&c.past?c.past:[];
  if(m&&c&&typeof MS67==="object"&&MS67[m.id]){const d=MS67[m.id],st0=d.steps(m);o.mode="ms";o.kicker=`Chương ${c.n}`;o.title=d.t();o.sub=`Chương ${c.n}/${c.max}`;o.goal=d.g();
   o.steps=st0.map(x=>({ok:!!x[1],t:x[0],d:x[1]?"":chapHow(x[0])}));const nx=st0.find(x=>!x[1]);o.next=nx?nx[0]:"đã xong mọi bước";
-  o.risks=[["Hạn","không có hạn: đi chậm cũng không mất gì"]];o.go="Hành sự"}
+  o.risks=[msHan67(m,2)];o.go="Hành sự"}
  else if(M&&!M.done){const a=ARC67[M.a],P=pos67(M)||{c:M.chap||1,i:0,n:M.seq.length};o.mode="arc";o.kicker=`Chương ${P.c}`;o.title=a.t;o.sub=lab67(M);o.goal=fill67(a.g,M);
   o.cover=stArtOf(M.a,null,null)||art;
   M.seq.forEach((x,i)=>{const dn=i<M.i,cur=i===M.i;o.steps.push({ok:dn,t:`Hồi ${i+1}/${M.seq.length}${cur?" (đang tới)":""}`,d:dn?(M.hist[i]||""):(cur?hint67(M):"chưa mở")})});

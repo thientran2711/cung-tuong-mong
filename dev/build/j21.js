@@ -47,9 +47,9 @@ function seenFaces(k){const L=seenAt(k),n=countAt(k);if(!n)return"";return `<spa
 /* walk to a consort and open her card; if she has gone, say where, offer to follow */
 function goSee(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=whereOf(v);
  const open=()=>{const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");if(i>=0){popIdx=i;popMsg=""}else{const now=whereOf(v);S.visit.msg=`${v.name} vừa rời đi, sang ${placeName(now)}. <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}renderStage()};
- if(S.place===k){open();return}const tc=travel(S.place,k);if(!walkOk(tc)||S.confined||S.out)return;goTo(k);open()}
-function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!walkOk(tc)?walkWhy(tc):"";
- return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,`Chắc chắn · tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
+ if(S.place===k){open();return}const tc=travel(S.place,k);if(S.confined||S.out)return;if(!walkOk(tc)){walkGo(k);return}goTo(k);open()}
+function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":walkBlock(k,tc);
+ return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,walkLate(k,tc)?`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi buổi sau, có khi nàng đã đi chỗ khác`:`Chắc chắn · tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-see]");if(s&&!s.disabled){e.preventDefault();e.stopPropagation();goSee(+s.dataset.see);return}const f=e.target.closest("[data-follow]");if(f){e.preventDefault();e.stopPropagation();goSee(+f.dataset.follow)}},true);
 /* finding someone: send her eyes (1 khắc), or invite her over */
 function scoutBtn(v){if(!v||!v.alive||v.out||locKnown(v)||together(S,v))return"";const o=od(50+(S.mat||0)*8+S.tamco/10);return pbtn(`data-scout="${v.id}"`,"Sai tai mắt dò nơi ở",`${word(o)} · tốn: 1 khắc · thành: biết nàng ở đâu buổi này · hỏng: không dò ra`,whyTime(1))}
@@ -64,8 +64,8 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-scout]");i
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k)curPeople().forEach(p=>{if(p.ref&&p.kind!=="chest"&&p.ref.id!=null)seeLoc(p.ref,k)})}catch(e){}return r}})();
 /* ===== visiting a consort at her own palace: chance she is home; her gatekeeper may tell where she went ===== */
 function visitBtn(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=palaceOf(v),tc=travel(S.place,k);if(S.place===k)return"";
- return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`Chắc chắn · tốn: ${tc} khắc · thành: nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!walkOk(tc)?walkWhy(tc):"")}
-function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(!walkOk(tc)||S.confined||S.out)return;goTo(k);if(S.place!==k)return;
+ return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`Chắc chắn · tốn: ${tc} khắc · thành: ${walkLate(k,tc)?"đến nơi buổi sau, ":""}nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":walkBlock(k,tc))}
+function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(S.confined||S.out)return;if(!walkOk(tc)){walkGo(k);return}goTo(k);if(S.place!==k)return;
  const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");
  if(i>=0){if(aff(v,S)<=-40){S.visit.tk=S.visit.tk||{};S.visit.tk[i]=1;S.visit.msg=`${v.name} cáo bệnh không tiếp ngươi (nàng ghét ngươi).`}else{popIdx=i;popMsg=""}}
  else{const now=whereOf(v);const friend=aff(v,S)>=20||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “Nương nương sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg="Cung nữ gác cửa: “Nương nương đi vắng.”"}
