@@ -27,4 +27,4 @@ document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [da
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const st=$("stage");let b=document.getElementById("tomap");const show=window.__fromMap&&tab!=="go"&&!S.out;if(!show){if(b)b.remove();return r}
  if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap";b.innerHTML="‹ Bản đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
  if(b.parentNode!==st)st.appendChild(b)}catch(e){}return r}})();
-document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
+document.addEventListener("click",e=>{const t=e.target.closest("button[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
