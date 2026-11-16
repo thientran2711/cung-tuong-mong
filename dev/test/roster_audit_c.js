@@ -45,7 +45,7 @@ window.__AUDC=function(){const A=window.__aud;for(const k of "jklmnopqr")if(A.er
    /* (o)(n) save -> load: no servant created, stage keeps the record's people here */
    if(S&&!S.dead&&!Q.length&&!S.mg&&Math.random()<.2){const sids=allServ().map(s=>s.sid).sort().join(",");const d=JSON.parse(JSON.stringify(ser()));quiet=true;deser(d);quiet=false;A.c.loads++;
     const s2=allServ().map(s=>s.sid).sort().join(",");if(s2!==sids)bad("o","nạp ván sinh/mất kẻ hầu: "+allServ().filter(s=>!sids.split(",").includes(String(s.sid))).map(s=>s.name).join(","));
-    const R=S.roster,kh=j95kh();if(R&&R.key===j95key()&&S.visit&&S.visit.k===S.place){for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(e&&e[kh][0]===S.place&&!(S.place==="home"&&sameHouse(S,v))&&!S.visit.people.some(p=>p.ref===v))bad("n","sau khi nạp: sổ có "+v.name+" ở "+S.place+" mà sân khấu không vẽ")}}
+    const R=S.roster,kh=j95kh();if(R&&R.key===j95key()&&S.visit&&S.visit.k===S.place&&!(typeof isSrv==="function"&&isSrv())){for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(e&&e[kh][0]===S.place&&!(S.place==="home"&&sameHouse(S,v))&&!S.visit.people.some(p=>p.ref===v))bad("n","sau khi nạp: sổ có "+v.name+" ở "+S.place+" mà sân khấu không vẽ")}}
     check("nạp")}}catch(e){bad("o","lỗi kiểm nạp: "+e.message)}return r}}
  /* (j) */
  {const o=wdFrame;wdFrame=function(a,t){const npc=a&&a!==S&&a.rel!=null&&t&&a!==t;if(!npc)return o.apply(this,arguments);A.c.frames++;const af=aff(a,t);const sc=a.schemes||0;const L=S.roster&&S.roster.acts;const n0=L?L.length:0;

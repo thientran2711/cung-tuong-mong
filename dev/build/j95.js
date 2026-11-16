@@ -288,7 +288,7 @@ function j95fixHouse(R,kh,ppl){let n=0;const st=J95.stat;
  if(n)st.fix=(st.fix||0)+n;return n}
 /* the stage where she stands follows the record (people leave / arrive between khắc). Returns true when it changed. */
 /* one figure per person on the stage: an inner render can reconcile before an older goTo wrapper (j22 men) adds its own (port 16/11) */
-function j95dedupe(V){if(!V||!V.people)return;const seen=new Set();for(let i=0;i<V.people.length;i++){const p=V.people[i];const r=p&&p.ref;if(!r)continue;const k=p.kind+":"+(r.id!=null?r.id:r.c!=null?r.c:r.name);if(seen.has(k)){V.people.splice(i,1);i--;popIdx=null}else seen.add(k)}}
+function j95dedupe(V){if(!V||!V.people)return;const seen=new Set();for(let i=0;i<V.people.length;i++){const p=V.people[i];const r=p&&p.ref;if(!r)continue;const k=p.kind+":"+(p.kind==="min"?(r.c!=null?r.c:r.name):r.id!=null?r.id:r.c!=null?r.c:r.name);if(seen.has(k)){V.people.splice(i,1);i--;popIdx=null}else seen.add(k)}}
 function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)return false;j95dedupe(V);/* the maid road fills its stage by its own rules (j42 srvVisitOf reads whereOf = the record; j59srvCount) */if(typeof isSrv==="function"&&isSrv())return false;const k=S.place;let ch=false;
  const here=id=>R.P[id]&&R.P[id][kh][0]===k;
  for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];let id=null;
@@ -300,7 +300,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
  /* men, officials, the court physician and the Kính sự phòng eunuch the record puts here (port 16/11: the map counts them, so the stage draws them) */
  for(const id in R.P){if(!here(id))continue;
   if(id[0]==="m"&&id[1]!=="m"){const m=manById(id);if(!m||!m.alive||V.people.some(p=>p.kind==="man"&&p.ref&&(p.ref===m||p.ref.id===m.id)))continue;V.people.push({kind:"man",ref:m,name:m.name.split(" ").slice(0,1).concat(m.name.split(" ").slice(-1)).join(" "),ini:m.name.split(" ").pop()[0],col:"#6a8aa0",info:`${m.role} · ${m.trait}`});ch=true}
-  else if(id.indexOf("q:")===0){try{const c=id.slice(2);const h=(trS().H||{})[c];if(!h||V.people.some(p=>p.ref===h))continue;V.people.push({kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${R.P[id][kh][0]==="thu"?"vào chầu":"dự yến"}`});ch=true}catch(e){}}
+  else if(id.indexOf("q:")===0){try{const c=id.slice(2);const h=(trS().H||{})[c];if(!h||V.people.some(p=>p.kind==="min"&&p.ref&&(p.ref===h||p.ref.c===c||p.ref.name===h.name)))continue;V.people.push({kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${R.P[id][kh][0]==="thu"?"vào chầu":"dự yến"}`});ch=true}catch(e){}}
   else if(id==="c:ty"&&!V.people.some(p=>p.kind==="ty")){const o=S.court&&S.court.ty;V.people.push({kind:"ty",name:o&&o.name||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"});ch=true}
   else if(id==="c:ksp"&&!V.people.some(p=>p.kind==="ksp")){V.people.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});ch=true}}
  /* lãnh cung: every fallen consort the record puts here (no limit), nobody invented */

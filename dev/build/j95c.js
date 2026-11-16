@@ -58,7 +58,7 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
    try{sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);for(const p of consorts()){if(!p.staff){p.staff=[];fillStaff(p,true)}else J95C.stat.loadNoFill++}}catch(e){j95cErr("staffInit",e)}}}
  const d0=deser;deser=function(){J95C.loading=1;let r;try{r=d0.apply(this,arguments)}finally{J95C.loading=0}J95C.lastV=null;try{j95cVisitFix();if(j95cCur())j95sync()}catch(e){j95cErr("deserVisit",e)}try{J95C.sig=j95cSig();if(j95cCur()&&S.visit&&S.visit.k===S.place){J95C.lastV=S.visit;j95stage(S.roster,j95kh())}}catch(e){j95cErr("deser",e)}return r};
  if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{const taken=new Set(allServ().map(x=>x.name).concat([S&&S.maid&&S.maid.name],(rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
-   if(s&&taken.has(s.name)){const base=s.name.replace(/ \d+$/,"");let i=2;while(taken.has(base+" "+i))i++;s.name=base+" "+i;J95C.stat.dedupe++}}catch(e){}return s}}
+   if(s&&taken.has(s.name)){/* no numbers in names (main jaudit) */const pool=(s.role==="eunuch"?EUN:MAIDS).filter(x=>!taken.has(x));if(pool.length){s.name=pool[Math.floor(Math.random()*pool.length)];J95C.stat.dedupe++}}}catch(e){}return s}}
  if(typeof ageInit==="function"){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);if(!J95C.loading)j95cDedupe();return r}}
  if(typeof start==="function"){const st0=start;start=function(){J95C.lastV=null;J95C.sig="";const r=st0.apply(this,arguments);try{j95cDedupe();if(j95cCur())j95sync()}catch(e){j95cErr("start",e)}return r}}
 })();
