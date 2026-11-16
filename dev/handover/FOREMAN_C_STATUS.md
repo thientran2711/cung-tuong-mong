@@ -23,7 +23,7 @@ Base main at start: 900ace7fb.
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
 | D45 small art + wiring | review/small-art-wire-r1 | sonnet | PASS 6bce72fa6 — CONDITIONAL on kit keeper (K10: kitReward CSS for >6-row chest lists) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
-| D23 whole-game mole audit + D24 eye patch | review/mole-audit | sonnet | PAUSING (ALL ART PAUSED tonight, owner 07:30Z) — asked to push WIP + PROGRESS and stop; resume in her morning |
+| D23 whole-game mole audit + D24 eye patch | review/mole-audit-r2 @474f73570 | sonnet | PAUSED (art pause). D24 DONE + uploaded (c12-ty5-a51 por+fig: forehead hole redrawn; no huadian on a51 — C9 must add it on top of this version). D23: 8,747 por scanned, real moles found in c07, c08, c16, c17 (big one c17-t2), c30-tm0-a36, eunuchs u23/u26/u30; 158 por + ~150 fig + 65 hd fixed LOCALLY ONLY in /home/user/wt/mole-audit-fixed/img/ (404 files, this container — lost on rollover; re-derive from CDN with the commands in dev/PROGRESS_mole-audit.md). Left: upload (consorts re-fixed on current CDN copy), c17 by hand, 5 figs, face-* avatars, tn, scene pictures, residual scan |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
