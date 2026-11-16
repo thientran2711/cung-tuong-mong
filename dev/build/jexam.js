@@ -14,10 +14,10 @@
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."},
- tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."},
- xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."},
- thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."}};
+ le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
+ tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
+ xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
+ thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."}};
 const EXQ={
  le:[{q:"Gặp Thái hậu giữa hành lang, phi tần phải làm gì?",a:"Đứng nép bên đường, cúi mình vấn an",w:["Đi tiếp cho kịp giờ","Gật đầu chào","Hỏi Thái hậu đi đâu"]},
   {q:"Thỉnh an Hoàng hậu vào lúc nào?",a:"Sáng sớm, theo giờ Hoàng hậu định",w:["Lúc nào rảnh thì sang","Chiều tối trước giờ ngủ","Chỉ ngày lễ Tết"]},
