@@ -21,4 +21,4 @@ Wiring (dev/build/jly.js, existing figWho/figRoles/pFaceOf hooks, no new kit par
 Verified (dev/test/b-answers-art.js, 755x1000 + 1180x820, 0 page errors): Lý in Trường Môn viện, Quản sự in Tân Giả khố, Thầy dạy in Thượng thư phòng.
 ## (3) 'Sáng hôm sau' banner
 img/ev-morning-after-b.webp (1024x768, 4:3 like ev-fest-*-b), creation s7osXRNl8e, 40 cr. Slot lives only on review/emperor-visit (dev/build/jvisit.js:81, Q.push {t:"Sáng hôm sau",...}) — NOT on main. One-line wiring when that branch lands: add headArt:{src:"img/ev-morning-after-b.webp",label:"Sáng hôm sau"} to that Q item (shown in test as kitModal headArt, 755x1000 OK). Note: picture has light snow + blossom (late winter/early spring); season-neutral variants are a follow-up if wanted.
-Credits total: 4 gen x40... = 6 x 40 + 3 x 3 = 249.
+Credits total: 7 generations x 40 + 3 background removals x 3 = 289.
