@@ -558,3 +558,16 @@ addEventListener("resize",()=>{const d=document.querySelector("#modal .dlg.kszli
    cover crop on the subject box (object-position = the box centre); v3 frames then run the exact fit (kitPicFocus). */
 (function(){if(typeof kitSceneArt!=="function")return;const a0=kitSceneArt;kitSceneArt=function(src,label,o){let h=a0.apply(this,arguments);try{const b=src&&kitPicSubj(src);
  if(b){const x=((b[0]+b[2])/2*100).toFixed(1),y=((b[1]+b[3])/2*100).toFixed(1);h=h.replace(/<img /,`<img style="object-position:${x}% ${y}%" `)}}catch(e){}return h};window.kitSceneArt=kitSceneArt})();
+/* AGENDA / TODAY rows (owner 16/11 21:18Z, Tư trang "HÔM NAY": Thỉnh an Thái hậu had the Thái hậu picture, Thỉnh an Hoàng hậu and Tiết Thanh minh none):
+   kitAgendaFact({k,n}) → a kitFacts row WITH its picture for every kind: th = Thái hậu · hh = the Empress (no Empress: kit vacant portrait) · emp / night =
+   Hoàng thượng · fest = the festival picture (ev-fest-<key>, else the rite category picture) · anything else = act / category picture of its name.
+   Whole group: every today / agenda list builds its rows with this. */
+function kitAgendaPic(o){const ok=s=>s&&(typeof kitOptOnCdn!=="function"||kitOptOnCdn(s));try{
+ if(o.k==="th")return typeof pTH==="function"?pTH():null;
+ if(o.k==="hh"){const q=typeof rivals!=="undefined"&&rivals[0]&&rivals[0].alive?rivals[0]:null;return q||(typeof kitVacantFace==="function"?kitVacantFace():{src:"",ini:"?"})}
+ if(o.k==="emp"||o.k==="night")return typeof pEmp==="function"?pEmp():null;
+ if(o.k==="thuong")return S;
+ if(o.k==="fest"){const f=typeof festToday==="function"?festToday():null;const s=f&&`img/ev-fest-${f.k}.webp`;if(ok(s))return{src:s,ini:""}}
+ const a=typeof kitActArt==="function"?kitActArt(o.n||""):null;if(a&&ok(a.src))return{src:a.src,ini:""}}catch(e){}return null}
+function kitAgendaFact(o,text){const p=kitAgendaPic(o);return p?{text:text||o.n,who:p,auto:false}:{text:text||o.n}}
+Object.assign(window,{kitAgendaPic,kitAgendaFact});

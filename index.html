@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"274a55d1","t":"2026-11-16T20:53Z","c":"kit-size #6: S event picture = standard PM 3:4; focal crop for every event picture (KIT_PIC_SUBJ 329 boxes, kitPicFocus keeps the subject w…","b":"0fbd29063ee8","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
+window.CTM_BI={"s":"2e8b413b+","t":"2026-11-16T20:57Z","c":"kit-size #6: build","b":"b6de0d7f7879","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -33599,7 +33599,7 @@ function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const
  const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac?["Sắc",wb.sac]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
- const occ=kitFacts(st.occ.map(o=>`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`));
+ const occ=kitFacts(st.occ.map(o=>kitAgendaFact(o,`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`)),{group:false});/* every row with its picture (owner 16/11 21:18Z, KIT §84 agenda rows) */
  const mama=toilSkill().mama;
  box.innerHTML=`<div class="toilw"><div class="toilfig">${pcPort(Object.assign({},me,{src:por.src}),me.col)}<h4 class="kpst">Hôm nay</h4>${occ}`+
   (mama?`<p class="past">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+`</div>`+
@@ -38436,6 +38436,10 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Vi�
  `<div class="pc"><div class="pcr"><div class="pcb">`+
  [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, chứng cứ +1 · mất: thiện cảm -5"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
+/* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
+   task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */
+(function(){const p0=kitOptPic;kitOptPic=function(title,b){const t=kitOptPlain(title),m=/^Đi làm:\s*(.+)$/i.exec(t);if(!m)return p0.apply(this,arguments);
+ const r0=p0.apply(this,arguments);if(r0&&r0.src&&r0.how!=="ph")return r0;const r=p0.call(this,m[1],b);if(r&&r.src&&r.how!=="ph")return r;try{const a=kitActArt(m[1]);if(a&&a.src&&!/\/ph-act-/.test(a.src)&&kitOptOnCdn(a.src))return{src:a.src,key:"",how:"cat"}}catch(e){}return r0&&r0.how==="ph"?r0:r};/* nothing yet (e.g. the person chip is painted later): "none" lets kpOptArt run again */window.kitOptPic=kitOptPic})();
 /* ================= UPDATE NOTES (D10) — "Thông tin cập nhật" =================
    ONE maintained list: CTM_NOTES below (newest FIRST). The coordinator adds ONE entry per release (or a line to today's entry):
      {id:"2026-11-16", n:["Câu ngắn, cổ trang, không dấu %.", ...]}          // id = ISO date (+ letter b, c… for a second release the same day)
@@ -44821,6 +44825,19 @@ addEventListener("resize",()=>{const d=document.querySelector("#modal .dlg.kszli
    cover crop on the subject box (object-position = the box centre); v3 frames then run the exact fit (kitPicFocus). */
 (function(){if(typeof kitSceneArt!=="function")return;const a0=kitSceneArt;kitSceneArt=function(src,label,o){let h=a0.apply(this,arguments);try{const b=src&&kitPicSubj(src);
  if(b){const x=((b[0]+b[2])/2*100).toFixed(1),y=((b[1]+b[3])/2*100).toFixed(1);h=h.replace(/<img /,`<img style="object-position:${x}% ${y}%" `)}}catch(e){}return h};window.kitSceneArt=kitSceneArt})();
+/* AGENDA / TODAY rows (owner 16/11 21:18Z, Tư trang "HÔM NAY": Thỉnh an Thái hậu had the Thái hậu picture, Thỉnh an Hoàng hậu and Tiết Thanh minh none):
+   kitAgendaFact({k,n}) → a kitFacts row WITH its picture for every kind: th = Thái hậu · hh = the Empress (no Empress: kit vacant portrait) · emp / night =
+   Hoàng thượng · fest = the festival picture (ev-fest-<key>, else the rite category picture) · anything else = act / category picture of its name.
+   Whole group: every today / agenda list builds its rows with this. */
+function kitAgendaPic(o){const ok=s=>s&&(typeof kitOptOnCdn!=="function"||kitOptOnCdn(s));try{
+ if(o.k==="th")return typeof pTH==="function"?pTH():null;
+ if(o.k==="hh"){const q=typeof rivals!=="undefined"&&rivals[0]&&rivals[0].alive?rivals[0]:null;return q||(typeof kitVacantFace==="function"?kitVacantFace():{src:"",ini:"?"})}
+ if(o.k==="emp"||o.k==="night")return typeof pEmp==="function"?pEmp():null;
+ if(o.k==="thuong")return S;
+ if(o.k==="fest"){const f=typeof festToday==="function"?festToday():null;const s=f&&`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${f.k}.webp`;if(ok(s))return{src:s,ini:""}}
+ const a=typeof kitActArt==="function"?kitActArt(o.n||""):null;if(a&&ok(a.src))return{src:a.src,ini:""}}catch(e){}return null}
+function kitAgendaFact(o,text){const p=kitAgendaPic(o);return p?{text:text||o.n,who:p,auto:false}:{text:text||o.n}}
+Object.assign(window,{kitAgendaPic,kitAgendaFact});
 
 window.__ctmBuilt=1;
 </script>
@@ -44849,7 +44866,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0fbd29063ee8";window.CTM_BUILD=BUILD;
+const BUILD="b6de0d7f7879";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

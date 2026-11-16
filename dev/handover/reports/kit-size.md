@@ -122,3 +122,11 @@ Merged origin/main 95282e69 + review/kit-fit 7865ed13 (§6.2b square option card
 5. old-save + coop-e2e (CO-OP FIRST, OD 20:32Z: a PASS criterion) on this build.
 6. Kit page sample for the live frame + focal crop.
 Note: with the new subject floors some sample contents pick one size larger on the #4 sheets (sheet marks ✗); live frames are picked by content, so this is expected.
+
+### kit-size #6 — part 2 (s23 → s24 orders: CO-OP FIRST + 2 owner examples)
+- coop-e2e on this build: 59/59 PASS (Fold host + iPad guest, rejoin, rebirth, solo + old save).
+- OWNER chapter goal list (OD 21:10Z): every "Đi làm" card has a picture (Học một môn tài nghệ → act-hoc-tai-nghe-h; Emperor card keeps his portrait), and short cards are small squares (38 px, §6.2b) instead of the big 84x112 portrait. KIT §84 (9c).
+- OWNER Tư trang HÔM NAY (OD 21:18Z): every row has its picture via `kitAgendaFact` (Thái hậu, Hoàng hậu, festival = ev-fest-<key>).
+- Before (live main) / after shots (looked at): img/_review/kit-size5/goal-homnay-ba-755x1000.jpg · goal-homnay-ba-1180x820.jpg.
+- Still open for the next keeper: items 2 (MIXED place cards on main), 3 (kszItem3 in kitItem), 4 ("Đã hiểu" audit 78/41), 6 (kit page sample); other today/agenda lists to move onto kitAgendaFact (grep kitFacts callers with day lists); ART REQUEST to C: a kit "vacant seat" portrait for an empty Empress seat (today falls back to the stranger silhouette / initial).
+Rollover: context ≈ START + 25 % reached → handover here; the coordinator opens the successor.
