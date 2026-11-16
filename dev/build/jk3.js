@@ -180,7 +180,7 @@ html body #hud2 .khg .khsh{position:sticky;top:-8px;z-index:2;background:var(--k
 html body #hud2 .khg .khc .hc{white-space:normal!important}
 /* one fact, one place: Thái hậu / Hoàng hậu attitude is in the Trong cung column of the sheet (and on their stage chips) */
 html body #hud2 .khg .khc .hc[data-hx="th"],html body #hud2 .khg .khc .hc[data-hx="hh"]{display:none!important}
-@media (max-width:599px){html body #hud2 .khg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 /* 4 · STICKY HEADERS in the panel (sub-tabs .ksub and any later sticky bar): opaque, and the panel's 8 px top padding band above them is
    covered too, so rows scrolling up never show above the bar */
 html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040;overflow:visible!important}
@@ -244,9 +244,14 @@ const K3SH={home:true};
    (gpt-2-6), label beside it (short, one line, ellipsis); the button has no bar of its own (no border / ground), so nothing reads as an empty field. */
 function kitBackBtnHtml(kind,label){return `<img class="kbi" src="img/kit/ico-${kind}.webp" width="30" height="30" alt="" draggable="false" onerror="this.remove()"><span class="kbl">${label}</span>`}
 window.kitBackBtnHtml=kitBackBtnHtml;
+/* KIT §0 sample: ONE design frame — the spread (2 pages) and the one-page view, drawn to scale from KIT_FRAME */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0",title:"Khung thiết kế · một trang = nửa trang đôi iPad (co giãn đều)",
+ html:()=>{const F=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:820}},k=.2,v=(typeof kitView==="function"?kitView():{pages:2}),pg=(t,c)=>`<div style="width:${F.page.w*k}px;height:${F.page.h*k}px;border:1px solid var(--line);background:${c};display:grid;place-items:center;font-size:.7rem;color:var(--ink)">${t}</div>`;
+  return `<div class="kitpg-row" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap"><div><div style="display:flex">${pg("Phòng (trang trái)","#f3e6c9")}${pg("Thẻ đang mở (trang phải)","#fbf3dd")}</div><small>Ngang: ${F.spread.w}×${F.spread.h}</small></div><div>${pg("Phòng ⇄ thẻ","#fbf3dd")}<small>Dọc: ${F.page.w}×${F.page.h}</small></div><small>Đang xem: ${v.pages===1?"một trang":"trang đôi"}</small></div>`}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
-function k3Phone(){return innerWidth<1000&&innerHeight>innerWidth}
+/* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
+function k3Phone(){try{return kitView().pages===1}catch(e){return innerWidth<innerHeight}}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
@@ -278,9 +283,12 @@ if(typeof render==="function"){const r0=render;render=function(){const r=r0.appl
 /* any code path that switches tab on its own (rank chip, court chips, links "Xem đầy đủ ở Nhật ký") opens the panel view */
 (function(){let t0=typeof tab!=="undefined"?tab:null;setInterval(()=>{try{if(tab!==t0){t0=tab;if(k3Phone()&&K3SH.home&&!window.__k3quiet){K3SH.home=false;k3Shell()}}}catch(e){}},150)})();
 const cssS=document.createElement("style");cssS.id="k3-shell";cssS.textContent=`
-html body .game#game.k3ph.k3home:not(.maptab){grid-template-rows:auto minmax(0,1fr) 0 auto!important}
+html body .game#game.k3ph:not(.maptab)>#stage{grid-area:stage!important}html body .game#game.k3ph:not(.maptab)>#panel{grid-area:stage!important}
+html body .game#game.k3ph:not(.maptab){grid-template-areas:"hud" "stage" "bar"!important;grid-template-columns:minmax(0,1fr)!important}
+html body .game#game.k3ph.k3home:not(.maptab){grid-template-rows:auto minmax(0,1fr) auto!important}
 html body .game#game.k3ph.k3home:not(.maptab)>#panel{display:none!important}
-html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto 0 minmax(0,1fr) auto!important}
+/* KIT §0: one page shows ONE page box between the top bar and the tab bar (no empty row, no extra gap): same page box as the spread */
+html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto minmax(0,1fr) auto!important}
 html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!important;min-height:0!important;height:0!important;border:0!important;overflow:hidden!important}
 html body .game#game.k3ph.k3pop>#panel{display:none!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}

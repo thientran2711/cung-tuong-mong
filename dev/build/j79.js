@@ -103,6 +103,9 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
    /* owner 11/15 16:55Z (fix-float): an older line still carries her rank of that day ("Đáp ứng X" after she became Thường tại): a consort is
       always drawn with her CURRENT title, the old one is dropped */
    else if(t&&KP_CONS_RX.test(pre)&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p))))pre=pre.replace(KP_CONS_RX,"");
+   /* review night-end-r2: HER name (kitTitle "") after a rank in the text ("Thánh chỉ: Thường tại X …", "Đêm qua Đáp ứng X hầu giá") — kitName(named)
+      draws her current rank itself, so the rank in the text is dropped (it doubled: "Thường tại Thường tại X") */
+   else if(p===S&&/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/.test(pre))pre=pre.replace(/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/,"");
    const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":RANKS[S.rank].n):t;/* her own rank is drawn by kitName(named) */
    const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);/* KIT 48.3 (owner 15/11 s8): the text's own title before the name goes INSIDE the name block, in its rank tone (it stayed plain ink) */
    const tm=KP_TITLE_RX.exec(pre);if(tm&&p!==S){const k=kitName(p,{noTitle:true,pre});const j=k.indexOf(">");if(j>0&&/^<b class="kname/.test(k)){const tt=tm[1];const col=typeof kitPersonCol==="function"?kitPersonCol(p):"";
@@ -270,6 +273,18 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
 function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  if(front)Q.unshift(m);else Q.push(m);return m}
+/* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
+   are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
+   (a) a kit table right after another kit table; (b) a section with no heading whose first child is a kit table, right after a section
+   (or table) that ends with a kit table; (c) a bare kit table right after such a section. A heading (h4.kpst) always starts a new block.
+   Runs on every kit panel (kpBuild), for spec sections and legacy html alike. */
+function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(".kb.kpkb")?e:null;
+ const tail=e=>KB(e)||(e&&e.matches&&e.matches(".kpsec")?KB(e.lastElementChild):null);
+ const head=e=>KB(e)||(e&&e.matches&&e.matches(".kpsec")&&!e.querySelector(":scope>.kpst,:scope>h1,:scope>h2,:scope>h3,:scope>h4,:scope>h5,:scope>h6")?KB(e.firstElementChild):null);
+ [...root.querySelectorAll(".kpkb")].map(k=>k.parentElement).filter((p,i,a)=>p&&a.indexOf(p)===i).concat([root]).forEach(par=>{
+  let prev=null;for(const e of [...par.children]){const h=head(e),t0=prev&&tail(prev);
+   if(h&&t0&&t0!==h){while(h.firstChild)t0.appendChild(h.firstChild);h.remove();if(e!==h&&!e.children.length&&!e.textContent.trim()){e.remove();continue}}
+   if(e.parentElement===par)prev=e}})}
 function kitModal(spec){const m=kitPanel(spec,true);showModal();return m}
 function kpKind(m){if(m.kit&&m.kit.kind)return m.kit.kind;const t=String(m.t||""),c=String(m.cls||"");
  if(/night/.test(c))return"night";if(/\bend\b/.test(c))return"end";if(/^Tin trong cung/.test(t))return"news";if(/^Tai mắt|báo tin/.test(t))return"intel";
@@ -317,6 +332,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  if(faces){faces.classList.add("kpfaces");main.appendChild(faces)}
  for(const b of blocks){if(typeof b==="string")main.insertAdjacentHTML("beforeend",b);else main.appendChild(b)}
  body.appendChild(main);mb.innerHTML="";mb.appendChild(body);
+ try{kitRowsAlign(main)}catch(e){}
  /* KIT §8.1 SHORT NOTICE (kit keeper): only facts (≤ 3), ≤ 220 characters, no sections / rows / opts / subject → .kpshort, centred in the frame (CSS below) */
  try{if(!showSubj&&!opts&&!faces&&!main.querySelector(".kpsec,.kpkb,.kpfaces,.kmlist,table")&&main.querySelectorAll(".kfacts>*").length<=3&&main.textContent.trim().length<=220)body.classList.add("kpshort")}catch(e){}
  if(opts){opts.classList.add("kpopts");mb.appendChild(opts)}
@@ -412,10 +428,7 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .kbtn,.dlg.kpanel #mr .main{font-family:var(--display);font-weight:700;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a;border-radius:8px;min-height:42px;padding:8px 22px;cursor:pointer;white-space:normal}
 .kbtn:hover{filter:brightness(1.06)}
 .kbtn.alt{background:var(--k-card);color:var(--ink);border-color:var(--line);box-shadow:none}
-/* night / end keep their mood, same structure */
-.modal.night .dlg.kpanel{background:#140b08;color:#f3e6cf;border-color:#6a3a28;box-shadow:0 0 0 3px #2a1610,0 0 30px #ff9a3c33}
-.modal.night .dlg.kpanel .kph{background:linear-gradient(#2a1610f0,#140b08f0);border-color:#4a2a20;box-shadow:none}.modal.night .kptitle{color:#e9c07a}.modal.night .kpsub,.modal.night .kfwhen{color:#c8b89c}
-.modal.night .kft{color:#f3e6cf}.modal.night .kfact{border-color:#4a2a20}.modal.night .kname{color:color-mix(in srgb,var(--rc) 55%,#fff)}
+/* night: same light paper panel as every pop-up (owner s8 "Tại sao khung này màu tối"); the night feel comes from the backdrop + seal */
 .modal.end .dlg.kpanel{text-align:left}
 /* odds meter */
 .kodm{display:inline-flex;align-items:center;gap:5px;cursor:pointer;vertical-align:middle;line-height:1;white-space:nowrap}
@@ -435,7 +448,7 @@ button.ka .kr-why .krv{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-star
 button.ka .kr-why .kwhy{display:inline-block!important;font-size:.7rem;line-height:1.3;font-weight:600;padding:0 6px;border-radius:10px;border:1px solid #e3a497;background:#fcefeb;color:var(--bad)!important;white-space:normal;overflow-wrap:anywhere}
 button.ka .kr-why .kwhy.kok{border-color:#8fbf9f;background:#eef7f0;color:var(--good)!important;font-weight:600}
 button.ka .kr-why .ksep{display:none}
-@media (max-width:599px){.dlg.kpanel{max-width:100%}.kpb.kphas{grid-template-columns:84px minmax(0,1fr);gap:9px}.dlg.kpanel .kph{padding:8px 10px}.dlg.kpanel #mb{padding:8px 10px 2px}.dlg.kpanel #mr{padding:4px 10px 10px}.kft{font-size:.84rem}.kpacts{grid-template-columns:1fr}.ktier{grid-template-columns:4.4rem minmax(0,1fr) auto}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 @media (min-width:1200px){.dlg.kpanel{max-width:620px}}
 `;document.head.appendChild(st)})();
 
@@ -455,7 +468,7 @@ KP_SEAL.week="TUẦN";
  if(!G.length&&!me.length)secs.push(`<div class="kpsec">${kitFacts([{text:"Một tuần yên ả.",kind:"world",auto:false}])}</div>`);
  w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",kitDate(S.month,S.year,S.tuan),`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
  w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:1400);
- const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest(".kodm,.kgl"))return;close()};const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
+ const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest("#dawn-go"))close()};/* KIT 81 (owner OD:L1261): only the button closes the week-change scene */const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
 (function(){const st=document.createElement("style");st.id="kp-dawn-css";st.textContent=`
 .dawn .dbox.kpanel{position:relative;z-index:1;width:var(--kpw);max-width:var(--kpw);height:var(--kph);max-height:var(--kph);overflow:auto;background:var(--k-card);border:1px solid var(--gold);border-radius:10px;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #000a;padding:0;text-align:left;color:var(--ink)}
 .dawn .dbox.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line)}
@@ -589,7 +602,7 @@ function kpActArt(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope 
  art.innerHTML=`<span class="kaph">${a.label}</span>`+(a.src?`<img src="${a.src}" alt="" loading="lazy" onerror="this.remove()">`:"");b.classList.add("kart")}
 (function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){n0.apply(this,arguments);try{if(b.classList.contains("ka")&&b.classList.contains("kcard"))kpActArt(b)}catch(e){}}})();
 (function(){const st=document.createElement("style");st.id="kp-art-css";st.textContent=`
-:root{--kas:88px}@media (max-width:1199px){:root{--kas:76px}}@media (max-width:599px){:root{--kas:64px}}
+:root{--kas:88px}/* kv:(max-width:1199px) */:root{--kas:76px}/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 button.ka.kcard.kart{flex-direction:row!important;align-items:flex-start;gap:9px}
 button.ka.kcard.kart>.kabody{display:flex;flex-direction:column;gap:3px;flex:1 1 auto;min-width:0}
 .kaart{position:relative;flex:0 0 var(--kas);width:var(--kas);height:var(--kas);border-radius:6px;overflow:hidden;background:url(img/kit/bg-default.webp) center/cover;box-shadow:0 0 0 1px #8a6a32,0 0 0 3px #e9d29a,0 0 0 4px #b08a4a,inset 0 0 12px #5a3a1a40;margin:4px}
@@ -600,7 +613,7 @@ button.ka.kdis .kaart{filter:grayscale(.7);opacity:.8}
 .cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts{grid-auto-rows:auto!important;align-items:stretch!important}
 /* columns follow the space the grid really has (the panel is half the screen in landscape): at most 3, each at least 280px */
 .cards:has(> button.ka){grid-template-columns:repeat(auto-fill,minmax(max(280px,31%),1fr))!important}
-@media (max-width:599px){.cards:has(> button.ka){grid-template-columns:1fr!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ================= STAGE OVERLAYS (owner 11/14): nothing on the stage covers a figure =================
@@ -857,16 +870,16 @@ span.md.kmini.kmini>img{position:absolute!important;inset:auto!important;left:9.
 span.md.kmini.kmini>img[src*="face-"]{top:11.75%!important;height:80.3%!important}
 span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.4%/115.55% 164.6% no-repeat;pointer-events:none;z-index:1}
 /* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
-:root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
+:root{--kaw:150px;--kah:226px}/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
 .cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(min(100%,max(440px,31%)),1fr))!important}
-@media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
 button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 /* 2 · info art beside the body */
 .dlg.kpanel .kpb.kpinfo{grid-template-columns:var(--kaw) minmax(0,1fr)!important}
 .kpiart{height:var(--kah);align-self:start}
-@media (max-width:599px){.dlg.kpanel .kpb.kpinfo{grid-template-columns:96px minmax(0,1fr)!important}.kpiart{height:142px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .kpnow{display:flex;gap:6px;align-items:center;font-size:1rem}.kpnow .kodm{font-size:.9rem}
 /* 3 · identity card */
 .dlg.kpsc .kpb.kpid{grid-template-columns:clamp(104px,22%,156px) minmax(0,1fr)!important;gap:16px!important;align-items:center}
@@ -900,15 +913,15 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 .stop .scene-t,.stop .scene-t *{white-space:normal!important;overflow-wrap:anywhere}#hud2 .khc .hc>img{grid-column:1}
 /* stage name tags: one line, never cut, never three lines over a child figure (reviewer 11/14) */
 #tokens .tok .tag{white-space:nowrap!important;text-overflow:clip!important;max-width:none!important;width:max-content!important;overflow:visible!important}
-@media (max-width:599px){#tokens .tok .tag{font-size:.66rem!important;padding:0 5px!important}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 .khh{font-family:var(--display);font-size:.72rem;color:var(--k-lab);letter-spacing:.04em;text-transform:uppercase;padding-bottom:2px;border-bottom:1px solid var(--k-hair)}
-@media (max-width:899px){#hud2 .khg{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:599px){#hud2 .khg{gap:4px 6px}#hud2 .khc .hc{font-size:.7rem}}
+/* kv: dropped @media (max-width:899px) (one page = spread page, KIT §0) *//* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 /* Tư chất block on the stage (only where it covers no figure) */
 .kstat{position:absolute;left:8px;top:calc(var(--kstt,52px));z-index:3;display:flex;flex-direction:column;gap:1px;padding:5px 8px;min-width:118px;border-radius:8px;background:rgba(255,250,240,.86);border:1px solid var(--k-hair);box-shadow:0 2px 8px #5a3a2030;backdrop-filter:blur(2px)}
 .kstat.kright{left:auto;right:8px}
 .kstat .kst{display:flex;justify-content:space-between;gap:10px;border:0;background:none;padding:1px 0;font:inherit;font-size:.76rem;color:var(--ink);cursor:pointer;text-align:left}
 .kstat .kst b{font-weight:700}
-@media (max-width:599px){.kstat{min-width:96px;padding:3px 6px}.kstat .kst{font-size:.68rem}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ---- true outcome words for harm acts (AOUT): death / miscarriage / heir loss computed for the card's target (J78.cardV, or the person being talked to) ---- */
 function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch(e){}try{if(typeof popIdx!=="undefined"&&popIdx!=null){const p=curPeople()[popIdx];return p&&(p.ref||null)}}catch(e){}return null}
@@ -950,7 +963,7 @@ html body #tabs.tabs button.kghide{display:none!important}
 .ksub{display:flex;gap:0;margin:0 0 8px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--k-card2,#f6ead6);position:sticky;top:0;z-index:5;flex:0 0 auto}
 .ksubb{flex:1 1 0;min-height:38px;border:0;border-right:1px solid var(--line);background:transparent;font:inherit;font-size:.86rem;font-weight:600;color:var(--dim);padding:6px 8px;cursor:pointer;white-space:nowrap}
 .ksubb:last-child{border-right:0}.ksubb.on{background:var(--k-card,#fffaf0);color:var(--gold);box-shadow:inset 0 -3px 0 var(--gold)}
-@media (max-width:599px){.ksubb{font-size:.78rem;min-height:34px;padding:4px 4px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ---- KIT §21 · SKILL CARD = THE ONE HEAD CARD (owner 11/14; one form since tabs-kit r7, owner 11/15 "tab như trang chữ"):
    every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…), every Tứ đức course, every Tác phẩm line, the Mệnh truyện chapter / Sắc phong head and
@@ -1059,7 +1072,7 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
 .kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
 .kpkpg:disabled{opacity:.35;cursor:default}.kpkpg[hidden]{visibility:hidden;display:block}
 .kpkpn{font-size:.72rem;color:var(--k-lab);text-align:center;min-height:1em}
-@media (max-width:599px){.kpkgrid{grid-template-columns:repeat(var(--kpcols,4),50px);gap:4px}.kpki{width:50px}.kpki span.md.kmini.kmini{width:44px!important}.kpkwrap{grid-template-columns:24px minmax(0,1fr) 24px}}
+/* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 /* ---- compact header on phones (owner 11/14: the stage must keep room): menu · her · Hoàng thượng on one row, the four bars under, status row last ---- */
 (function(){const st=document.createElement("style");st.id="kit2-phonehud";st.textContent=`

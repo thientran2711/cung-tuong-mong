@@ -18,7 +18,12 @@ KP_SEAL.honor="VINH DANH";
 const KPOD_WORD=["Nhất","Nhì","Tam"];
 function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){const r=personRoleRank(p);return KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}
  if(typeof allKids==="function"&&allKids().some(([k])=>k===p))return typeof kidFigSrc==="function"?kidFigSrc(p):"";
- if(typeof figFor!=="function")return"";return figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||""}catch(e){return""}}
+ if(typeof figFor!=="function")return"";const f=figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||"";return f||kitSilFig(p)}catch(e){return""}}
+/* D50 review/dlg-fig-ph: a person with no full-body art (story NPC, deposed consort, staff record, child without a ref ...) never leaves an empty frame:
+   the kit silhouette unknown-fig-f|m|k by role/sex (same fallback chain as the week book j87 and the §59 placeholder rules). Art still missing is listed by dev/test/dlg-fig-scan.js. */
+function kitSilFig(p){try{if(!p||typeof p!=="object")return"";let r;try{r=personRoleRank(p)}catch(e){r=null}let g=r&&r.kid?"k":r&&r.sex==="m"?"m":"f";
+ if(!r||r.role==="other"){const sx=p.sex||(p.ref&&p.ref.sex);if(sx==="m")g="m";if(typeof p.age==="number"&&p.age<14)g="k"}return KIT_DIR+`unknown-fig-${g}.webp`}catch(e){return""}}
+window.kitSilFig=kitSilFig;
 function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.assign({},x));
  if(L.every(x=>x.place))L.sort((a,b)=>a.place-b.place);else{L.sort((a,b)=>(parseFloat(b.score)||0)-(parseFloat(a.score)||0));L.forEach((x,i)=>x.place=i+1)}return L}
 function kpodPrize(pz){if(!pz)return"";if(typeof pz==="string")return `<span class="kpod-pz">${pz}</span>`;
