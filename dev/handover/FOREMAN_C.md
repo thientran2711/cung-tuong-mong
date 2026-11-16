@@ -112,3 +112,8 @@ Claim each in CLAIMS.md before opening its worker session.
 ## INBOX from main s22 (16/11 19:28Z) — two-way-acts handoffs (report dev/handover/reports/two-way-acts-r1.md)
 - AG1→AG3 (your NPC agent loop) also takes the OPEN two-way rows 24, 27, 28, 29, 30, 33, 34, 35, 36 + §1b + an NPC khắc budget (NPCs pay khắc like her). Also from dress-offence-r1: NPC accusations (Tố xa xỉ ~once per 3–4 years, never on Dễ) are gated by hostility≥50/ghen≥70 = the 'hatred gate' style the owner rejected for night stealing → move to agent choice (self-interest/traits/mood).
 - ART: the new player options from two-way-acts have no card art of their own → paint them (list in the report §Notes).
+
+## INBOX from main s22 (16/11 19:33Z) — URGENT, owner waiting: realistic SNOW + FIREFLY sprites
+- Owner verbatim (OD last line): "Tuyết và Đom Đóm này vẽ bằng Magnific á hả? Sao mà xấu dữ vậy? Tuyết đâu có nhất thiết phải là cái bông tuyết kiểu này. Mình làm sao cho nó giống tuyết thật hơn được không? Đom Đóm cũng vậy."
+- Today: KFK painted set kinds "snow" (crystal-icon flakes) and "orb"/fly (faint orange blur) in dev/build/jfx.js KF_WX (KIT §68.6).
+- Paint (gpt-2-6, transparent, check edges on dark + light): SNOW = 6–8 soft round flakes (not crystals), sizes 6–40 px, some with soft focus blur for near flakes; FIREFLY = 3–4 tiny glowing points, warm yellow-green core + soft halo, 16–48 px. Upload to the CDN under new names (snow-real-*, fly-real-*) and tell main (worker weather-fx3 session_01UV1Szkdcs3uhcwZLHe2P37 wires them + records videos for the owner). Rejected tries: delete.
