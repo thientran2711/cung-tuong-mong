@@ -982,12 +982,15 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
  .game{grid-template-rows:auto minmax(0,1fr) minmax(0,40%) auto!important}
 }`;document.head.appendChild(st)})();
 /* ---- face strip (pager): only WHOLE faces, never a name cut at the edge; the window follows the chosen person; group labels wrap ---- */
-function kitStripFit(){document.querySelectorAll(".pstrip .pfaces").forEach(P=>{try{const F=[...P.querySelectorAll(".pface")];if(!F.length)return;F.forEach(f=>f.classList.remove("kpfh"));P.querySelectorAll(".pgrp").forEach(g=>g.classList.remove("kpfh"));
+function kitStripFit(){document.querySelectorAll(".pstrip .pfaces").forEach(P=>{try{const F=[...P.querySelectorAll(".pface")];if(!F.length)return;const ST=P.closest(".pstrip");
+  /* KIT 49.2c (owner 15/11, review/rel-picker): the ‹ › pager and the N/M count appear ONLY when the faces do not all fit: first measure with them hidden (.kpall), keep that when every face is whole, else show them and measure again */
+  const fit=()=>{F.forEach(f=>f.classList.remove("kpfh"));P.querySelectorAll(".pgrp").forEach(g=>g.classList.remove("kpfh"));
   P.scrollLeft=0;const W=P.clientWidth;const w=F.map(f=>f.getBoundingClientRect().width+8);let on=F.findIndex(f=>f.classList.contains("on"));if(on<0)on=0;
   let s=on,e=on,sum=w[on];let turn=0;while(true){const canL=s>0&&sum+w[s-1]<=W,canR=e<F.length-1&&sum+w[e+1]<=W;if(!canL&&!canR)break;if((turn++%2===0&&canR)||!canL){e++;sum+=w[e]}else{s--;sum+=w[s]}}
   F.forEach((f,i)=>{if(i<s||i>e)f.classList.add("kpfh")});const gh=()=>P.querySelectorAll(".pgrp").forEach(g=>g.classList.toggle("kpfh",!g.querySelector(".pface:not(.kpfh)")));gh();
   /* group labels ("Thừa Minh cung") can be wider than their faces: drop the face farthest from the chosen one until nothing is cut (review fold-layout FAIL 3) */
-  for(let k=0;k<F.length&&P.scrollWidth>P.clientWidth+1&&e>s;k++){if(e-on>=on-s){F[e].classList.add("kpfh");e--}else{F[s].classList.add("kpfh");s++}gh()}}catch(x){}})}
+  for(let k=0;k<F.length&&P.scrollWidth>P.clientWidth+1&&e>s;k++){if(e-on>=on-s){F[e].classList.add("kpfh");e--}else{F[s].classList.add("kpfh");s++}gh()}};
+  if(ST)ST.classList.add("kpall");fit();if(ST&&F.some(f=>f.classList.contains("kpfh"))){ST.classList.remove("kpall");fit()}}catch(x){}})}
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitStripFit)}catch(e){}return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTimeout(kitStripFit,120)});
 (function(){const st=document.createElement("style");st.id="kit2-strip";st.textContent=`
@@ -995,6 +998,7 @@ addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTime
 .pstrip .psep{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;max-width:100%;display:block;line-height:1.15}
 .pstrip .pface span{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;max-width:none!important}
 .pstrip .pgrp{min-width:0}
+.pstrip.kpall>.parr,.pstrip.kpall>.pcount{display:none!important}
 `;document.head.appendChild(st)})();
 /* ---- dilemma options without risk data: the rows come from the option's own outcome branches (go/fail source): every `roll(N)`-guarded
    apply/ap/die becomes "<effect>: <ladder word>" (gain → Được, loss → Kèm), unguarded apply → certain; never "Khó lường" or "xem ở bước sau" ---- */

@@ -2595,6 +2595,14 @@ Each picker ("Xem quan hệ của" X, "với" Y) is a row of small kit sub-tabs 
 count) over the Hậu cung pager strip (j15 `pager`) of THAT group only — no group labels inside the strip. The X tab follows an outside link
 (relSel); Y keeps its own tab, default Ta (her own relation with X; Chí tôn when X = Ta). Tabs and strips are remembered (KTSUB, PG).
 Markup: each picker = `.kpinline.krelpk` (label + kitSubTabs row + strip) — the §45 `.kpinline` exception keeps the row with its strip.
+### 49.2c COMPACT PICKER (owner 15/11 "Khung này choáng space quá" · review/rel-picker) — CSS in jhc `kit-hc`, fit in j79 `kitStripFit`
+Each Ân oán picker is ONE flex row `.kpinline.krelpk`: label (`.krelst`) + kitSubTabs group chips (no band behind them) + the face strip
+(`.pstrip`, flex basis 300 px). The strip sits beside the chips when the width allows, else wraps directly under them. Faces and labels are small:
+a face label is `kitNameRank(rank, shortName, rankColour, me)` — the rank in its rank colour over the short name (owner 11/15 ~793); Ta keeps her
+glow. The pager ‹ › and the N/M count are shown ONLY when the faces do not all fit: `kitStripFit` measures first with them hidden (`.pstrip.kpall`),
+keeps that when every face is whole, else drops `.kpall` and measures again with the arrows. This applies to EVERY `pager()` strip in the game
+(Hậu cung, Chí tôn, staff, kid, qt, rel...). Never write a custom picker/strip row: use `.krelpk` + `kitSubTabs` + `pager`.
+Sample on the kit page: §49.2c (few faces: no arrows; overflowing faces: arrows + count).
 ### 49.3 relPerson + THE STRANGER RULE (owner 11/15) — `isKnown61` / `met61` (j61), `relPerson` (jhc)
 **49.3a CHÍ TÔN ARE MET FROM DAY ONE (review/small-bugs-2):** Hoàng thượng and Thái hậu are met from the first day of palace life on every
 road — `isKnown61` returns true for them (and `k61SeedChiTon` keeps their k61 level ≥ 2, old saves included). The reigning Hoàng hậu is a

@@ -62,3 +62,6 @@ window.kitFrwWarm=kitFrwWarm;
     [...L.children].filter(x=>x===n||(x.offsetParent&&!x.classList.contains("pcname")&&x.getBoundingClientRect().top>=top))
      .forEach(x=>{const a=x.animate([{transform:`translateY(${d}px)`},{transform:"translateY(0)"}],{duration:180,easing:"ease-out"});a.id="kfwSlide"})}catch(e){}})}catch(e){}
   return r}})();
+
+/* KIT §49.2c sample (jhc kitRelPickerSample; registered here because jhc loads before the kit page) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§49.2c",title:"picker gọn · nhãn + chip nhóm + dải mặt một hàng, mũi tên chỉ khi tràn",html:()=>window.kitRelPickerSample?window.kitRelPickerSample():""})}catch(e){}

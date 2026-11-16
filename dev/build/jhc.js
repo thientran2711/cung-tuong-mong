@@ -95,7 +95,8 @@ window.relPerson=relPerson;
 const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":"Phi tần";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id}))))}
-const stripItem=(x,q)=>({f:q.f,name:q.name,sep:x.sep,dim:q.met===false});
+/* KIT 49.2c: strip label = kitNameRank (rank in its rank colour over the short name); Ta keeps her kmy glow */
+const stripItem=(x,q)=>({f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
@@ -248,6 +249,19 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar.ksbn{opacity:.45}
 /* KIT §49.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
 .krelst{margin:6px 0 2px;font-size:.78rem;color:var(--dim);font-weight:600}
+/* KIT §49.2c COMPACT RELATION PICKER (owner 15/11 "Khung này choáng space quá", review/rel-picker): each picker = ONE flex row, label + group chips on the first
+   line and the face strip beside them when the width allows (strip basis 300 px), else directly under them; no band behind the chips, no tall empty strip;
+   faces + labels small (kitNameRank: rank in its rank colour over the short name); ‹ › and N/M only when the faces overflow (kitStripFit .kpall) */
+html body :is(#panel,#kitpage) .krelpk{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;margin:0 0 2px;padding:0}
+html body :is(#panel,#kitpage) .krelpk>.krelst{margin:0;flex:0 0 auto;line-height:1.2}
+html body :is(#panel,#kitpage) .krelpk>.kcattabs.ktsub{margin:0!important;padding:2px 0!important;background:transparent!important;box-shadow:none!important;flex:0 1 auto;width:auto;min-width:0;overflow-x:auto}
+html body :is(#panel,#kitpage) .krelpk>.pstrip{flex:1 1 300px;margin:0!important;gap:3px!important}
+html body :is(#panel,#kitpage) .krelpk .pstrip>.parr{min-height:34px!important;min-width:26px!important;width:26px;font-size:1.1rem}
+html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
+html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
+html body :is(#panel,#kitpage) .krelpk .pface .knr>.knr-r{font-size:.58rem!important;margin:0!important;white-space:nowrap;font-weight:700}
+html body :is(#panel,#kitpage) .krelpk .pface .knr>.knr-n{font-size:.66rem;white-space:nowrap;font-weight:600}
+html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
 .krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
@@ -274,4 +288,12 @@ html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,
 /* narrow card (phones): the box sits at the top of its cell, never centred against the info beside it (which differs per person) */
 .pc[data-k2]:not(.kpwide) .pcl>.pcp.kit,.pc[data-k2]:not(.kpwide) .pcl>.kwear{align-self:start!important}
 `;document.head.appendChild(st);
+/* KIT §49.2c sample (kit page #kit): the compact picker = label + kitSubTabs chips + face strip on ONE row (strip under them when too narrow);
+   ‹ › and N/M only when the faces overflow (kitStripFit .kpall). Row 1: few faces (no arrows). Row 2: the same faces, strip narrowed so they overflow (arrows). */
+window.kitRelPickerSample=()=>{
+ if(typeof S==="undefined"||!S||typeof relItems!=="function")return `<em>cần một ván đang chơi</em>`;
+ const L=relItems().map(x=>{const q=relPerson(x.k);return stripItem(Object.assign({},x,{sep:""}),q)}).slice(0,6);
+ const row=(lab,key,items,w)=>{const t=kitSubTabs(key,[{k:"a",label:"Nhóm",n:items.length}]);return `<div class="kpinline krelpk" style="max-width:${w}px"><p class="krelst">${lab}</p>${t.html}${pager("ks"+key,items,()=>"")}</div>`};
+ setTimeout(()=>{try{kitStripFit()}catch(e){}},60);
+ return row("Ít người","ksa",L.slice(0,2),520)+row("Nhiều người (tràn)","ksb",L.concat(L),340)};
 })();
