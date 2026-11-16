@@ -139,19 +139,19 @@ function pump(force,upTo){if(PUMP||!S||S.dead||!nfOn()||guest())return;const A=n
 /* co-op: the friend's own result goes back to her seat (she applies her own Sủng loss / plays her own night) */
 function gres(o,k){try{const f=friend();const r=f&&o&&o.res&&o.res.find(x=>x.w===f.id);if(!r)return;const d=day();if(!S.nfG||S.nfG.d!==d)S.nfG={d,L:[]};S.nfG.L.push({k,won:r.won,mode:r.mode,lost:r.lost,txt:r.txt})}catch(e){}}
 /* her own try (deck card, ACT menu): cost already paid; single player resolves now, co-op waits for the friend's same khắc */
-function myTry(mode,o){if(typeof ntCan==="function"&&!ntCan(S)){log(`${ntReason(S)}.`);return}tryMark(S);const A=nfS();if(A.L.some(x=>x.w==="me"))return;
+function myTry(mode,o){if(typeof ntCan==="function"&&!ntCan(S)){log(`${ntReason(S)}.`);return}tryMark(S);const A=nfS();
  const k=Math.max(A.K,khac());A.L.push({w:"me",mode,o:Math.round(o),k});
  if(guest()){log(waitTxt(S,mode));send(false,{mode,o:Math.round(o),k});return}
  if(gU()<=k)log(waitTxt(S,mode));
  pump(false,k+1)}
-/* the one-night pass of a NOT played night (10-night ledger, live:false): the NPCs' own choice, one batch, same tie rule */
+/* one whole-night pass of the NPCs' own choice, one batch, same tie rule: a NOT played night (10-night ledger, live:false: lines only) or a
+   direct call (live; the played evening itself never calls it: its NPC tries run khắc by khắc in pump) */
 function stealPassNF(t,opt){opt=opt||{};const live=opt.live!==false;const out0={holder:t,lines:[],tries:0,res:[]};if(!S||S.dead||!t)return out0;
  if(guest()&&t!==S)return out0;
- if(live&&nfOn()){pump(true);return out0}
  const E=liveRivals(true).filter(v=>typeof stealEligible==="function"&&stealEligible(v,t)&&!(typeof cyTray==="function"&&cyTray(v)));
  for(let i=E.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[E[i],E[j]]=[E[j],E[i]]}
- const L=[];for(const v of E){if(L.length>=B().maxTry)break;const w=stealWant(v,t);if(!w.mode||!(Math.random()<w.p))continue;tryMark(v);ap(v,stealCost(w.mode));L.push({a:v,mode:w.mode,o:oSteal(v,w.mode)})}
- return nfResolve(t,L,false,"ledger")}
+ const L=[];for(const v of E){if(live&&nfOn()&&nfS().L.some(x=>x.w===v.id))continue;if(L.length>=B().maxTry)break;const w=stealWant(v,t);if(!w.mode||!(Math.random()<w.p))continue;tryMark(v);ap(v,stealCost(w.mode));L.push({a:v,mode:w.mode,o:oSteal(v,w.mode)})}
+ return nfResolve(t,L,live,"pass")}
 if(typeof window.stealPass==="function")window.stealPass=stealPassNF;
 window.nfResolve=nfResolve;window.nfPump=pump;window.nfSeedPick=seedPick;
 /* every act of the evening (ACT steal/road of the social menu, an NPC agent's act) is a try of the khắc it is made in */

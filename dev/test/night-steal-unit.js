@@ -56,7 +56,7 @@ const {chromium}=require('playwright');const path=require('path');
   reset();A.coop=true;ok("the co-op friend (a human) is never an NPC stealer",!stealEligible(A,S));delete A.coop;
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 11 · the real flip runs the pass: with forced odds, a week's flip ends stolen on some week */
-  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.nfC=null;S.buoi=B4L;used=4;flip();Q.length=0;const w0=wk();if(S.tonight)try{endTurn()}catch(e){}Q.length=0;const d=S.nightWhy;if(d&&d.wk===w0&&d.cause==="stolen")st++}/* night-final: the NPC tries run at the day-end commit, not at the flip */
+  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.nfC=null;S.nfA=null;S.nfN=null;S.buoi=B4L;used=4;flip();Q.length=0;const w0=wk();try{endTurn()}catch(e){}Q.length=0;const d=S.nightWhy;if(d&&d.wk===w0&&d.cause==="stolen")st++}/* night-final (OD 22:25Z): the NPC tries run khắc by khắc after her; khắc she never had are run at the day-end commit */
   ok("tối flip → day-end commit → steal pass → nightWhy.cause 'stolen'",st>0,{st});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   ok("SOC 'steal' folded into the one choice",SOC.steal.ok(R0[0],S)===false);
