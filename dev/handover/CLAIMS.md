@@ -96,12 +96,12 @@
 | mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | session_01UV1SzkBzFb19bZRxsyptRX (opus) | RUNNING | 16/11 08:00Z |
 | promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | RUNNING | 16/11 08:00Z |
 | merge-train-6: 11 PASS branches without a slot (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | RUNNING | 16/11 08:00Z |
-| mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | (opening) (opus) | RUNNING | 16/11 07:58Z |
-| no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| D9 header-own reviewer | review/header-own-r1 | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| D25 veil-zoom reviewer (moved C→B 07:30Z; C session gone) | review/veil-zoom-r1 | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| D36 rank-port resume (kit-keeper-1 done) | review/rank-port | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| D11 presentation (code wiring only; art paused; D51 at main) | review/presentation | B | (opening) (sonnet) | RUNNING | 16/11 07:58Z |
-| D13 spread events across buổi (on top of D29 schedules3 @9b1d82fa) | review/spread-events | B | (opening) (opus) | RUNNING | 16/11 07:58Z |
+| mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | session_01N1tNP4yBvmQ6Gd69aHoWJR (opus) | RUNNING | 16/11 07:58Z |
+| no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | session_01N1tNP6akcFFA3AcqEfs5hk (sonnet) | RUNNING | 16/11 07:58Z |
+| no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | session_01N1tNP3ykt4KbnfNeocJZ3W (sonnet) | RUNNING | 16/11 07:58Z |
+| no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | session_01N1tNP2boFYsfpf9ZAuvbwW (sonnet) | RUNNING | 16/11 07:58Z |
+| D9 header-own reviewer | review/header-own-r1 | B | session_01N1tNP4c1TN9m7n8JPAjyqC (sonnet) | RUNNING | 16/11 07:58Z |
+| D25 veil-zoom reviewer (moved C→B 07:30Z; C session gone) | review/veil-zoom-r1 | B | session_01N1tNP2X1WermTjz7d2nn5d (sonnet) | RUNNING | 16/11 07:58Z |
+| D36 rank-port resume (kit-keeper-1 done) | review/rank-port | B | session_01N1tNP3A9vkZJnwyZJw3fL1 (sonnet) | RUNNING | 16/11 07:58Z |
+| D11 presentation (code wiring only; art paused; D51 at main) | review/presentation | B | session_01N1tNP3mhLhWrJukZWoGvAQ (sonnet) | RUNNING | 16/11 07:58Z |
+| D13 spread events across buổi (on top of D29 schedules3 @9b1d82fa) | review/spread-events | B | session_01N1tNP4LQMHt6zowrVAmxXG (opus) | RUNNING | 16/11 07:58Z |

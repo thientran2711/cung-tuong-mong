@@ -1,6 +1,7 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
 last wake: 11/16/2026 07:58Z (Foreman B session 3 = session_01N1tNP6N19EQTqoHAMZcxqK)
+RUNNING 08:00Z (10 sessions): D12 mood-bar session_01N1tNP2hssUsxJwKBBsGRUZ (opus) · mg-balance session_01N1tNP4yBvmQ6Gd69aHoWJR (opus) · nw-poem session_01N1tNP6akcFFA3AcqEfs5hk · nw-lantern session_01N1tNP3ykt4KbnfNeocJZ3W · nw-quiz session_01N1tNP2boFYsfpf9ZAuvbwW · D9 reviewer header-own-r1 session_01N1tNP4c1TN9m7n8JPAjyqC · D25 reviewer veil-zoom-r1 session_01N1tNP2X1WermTjz7d2nn5d · D36 rank-port session_01N1tNP3A9vkZJnwyZJw3fL1 · D11 presentation session_01N1tNP3mhLhWrJukZWoGvAQ · D13 spread-events (opus, on schedules3) session_01N1tNP4LQMHt6zowrVAmxXG. QUEUED/HELD: D3 (KIT REQUEST: frameless big kitItem + kitItemBigSrc, reports/item-big.md), D19 (after econ merge-train-6), D14 + D44 (art, owner's morning), night-card preg-FX follow-up (after night-end-r3). READY: C35b pcard-dislikes-r1 3b2e15ef (contains main c4e89f8; main moved to cdad710 → merge needed).
 PICKUP 07:58Z (session 3): alive. Taking main s12 overnight order: opening mg-balance (opus) + no-word-games A/B/C (sonnet), reviewers D9 + D25, D36 resume, D11, D13. C35b PASS 3b2e15ef → READY. D3 BLOCKED on KIT REQUEST. Held: D14, D44 (art paused), D19 (after econ #8), night-card preg-FX follow-up (after night-end-r2).
 Context (session 3): ~60k tokens after the mandatory setup reads → budget ~75k (start +25%). Hourly self-wake: CronCreate job b7059734 at :43 every hour. Routine trig_01MqRpkkmxprHXt9EXHEjJ6q (woke session 2) DISABLED 06:22Z.
 Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no reports yet (review/item-big pushed adda3201). No new SẴN SÀNG KIỂM. Q24 not answered yet → D11/D13/D14/D19/D44 stay HELD.
@@ -60,6 +61,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D42 places-leftovers | review/places-port-r1 | sonnet | LIVE (main 63cf7b12a, train 3) — was PASS add62a7e9283cd328ddd9a46951abf0210e7bb26 (includes D30 palace-map-port-r1; kitPalaceMap renumbered §71→§76) |
 
 ## PASS (for the main coordinator to fast-forward)
+READY review/pcard-dislikes-r1 3b2e15ef50bcf851453b453d540e17ad1f08f355 (C35b; 1–2 dislikes per consort + Emperor, kit rows only; contains main c4e89f8, not cdad710 → merge on landing; owner Qs: disliked gift still net-positive? Thái hậu dislikes later?)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
 PASS review/actcard-small-r1 e3664469fbeddf8e7c9fafb851bd1fda73b6354d (C40; descends from main 900ace7f; reviewer turned the zoom into kitModal kind info = KIT §8 frame, KIT §43.1 + sample)
 PASS review/mg-easy-r1 94644c1e6342eb7ea1003aae090cd5310a9597e5 (C23; knowledge minigames level-tiered + aids; reviewer swapped private .kg82tip → kit .kpnote)
@@ -91,6 +93,7 @@ PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends f
 All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills,orb}.webp (C27), img/kit/ico-room.webp + ico-map.webp (C28). Branch review/cdn-pending-b is obsolete (images only; never merge it; delete it — Foreman B's delete push was refused by the server).
 
 ## KIT KEEPER NEEDED
+- KIT REQUEST (D3 item-big, blocks it): (1) frameless big mode in kitItem for size lg/xl (no border/background/shadow/clip, transparent contain image ~240–300 px, soft drop-shadow, badges as floating chips, grade by name only); (2) helper kitItemBigSrc(k|obj) → src512/wd512 (future 1024) with fallback, for 20 call sites listed in reports/item-big.md; (3) same big-src mapping for pets/veil/mark/econ.
 (Keeper on main already: renumbered buoi-transition §71→§74, room-btn §72→§75 (KIT_NUMBERS.md); fixed rel-picker .knr-s, actcard-small info mark = §46 ktinfo, tab-underline observer scope, appearance 28.8b text. Items below not yet handled stay open.) (ONE KIT KEEPER rule, owner 16/11 — these Foreman B branches were built before the rule reached B and add/change kit parts; main coordinator's kit keeper please approve/renumber before fast-forward)
 - buoi-transition-r1: KIT §71 jbuoi.js (buổi transition overlay)
 - room-btn-r1: KIT §72 kitBackBtnHtml (painted back button)
