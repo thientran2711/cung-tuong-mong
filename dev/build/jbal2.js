@@ -270,5 +270,11 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
  /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
  cap:{tt_mat:4},
+ /* Phần cuối in hồi form (jend14.js, B3): fertM / prayM = months of easier conception (S.fert / S.pray, j8 conceiveCh) from «Người nối dõi»;
+    hauTh / hauDanh = Thái hậu / Danh weight for the lập hậu choice when ch13 is won at the top seat below Hoàng hậu; hauShield / keShield =
+    months of che chở (S.shield) for a sitting Hoàng hậu / a Thái tử son; keFond = how dear (kid.fond) her son must be for a won ch14 to set
+    him as Thái tử when none exists; keHeir = Hoàng thượng's love for her son on a won ch14 (half on a middle ending, lost on a lost one);
+    keDanh = Danh of a won ch14 with no son */
+ end:{fertM:4,prayM:3,hauTh:10,hauDanh:6,hauShield:6,keShield:6,keFond:60,keHeir:12,keDanh:6},
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
