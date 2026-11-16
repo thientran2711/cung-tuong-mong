@@ -376,4 +376,4 @@
 | emotion-acts-3 (opus): fix emotion-acts-2-r1 FAIL 2 (Tuần lục NPC line grammar/page filing; bots ON early death 66 % vs OFF 39 % + tuẫn táng cause) | review/emotion-acts-3 | B | session_01N1tNP6kQXZcxcwCXnwMTdP | RUNNING | 16/11 19:59Z |
 | co-op one-world audit analyst (opus; owner 19:57Z: any shared system computed separately / double-counted) | handover | main s23 (opened by s22) | session_01UV1Szk87bTSJicgPTiFX6E | RUNNING | 16/11 19:57Z |
 | weather-fx3 review r1 (sonnet, SMALL) of 77ac0d6d | review/weather-fx3-r1 | main s23 | session_01UV1SziHY4wM9n3vdh5DZ81 | RUNNING | 16/11 20:03Z |
-| stage-pets r7 (opus): Fold = 2 people per view at FIXED slots (swipe for more), pets FIXED spot tied to owner slot on every stage/place (OD 19:54Z + 20:04Z) | review/stage-pets | main s23 | (opening) | RUNNING | 16/11 20:04Z |
+| stage-pets r7 (opus): Fold = 2 people per view at FIXED slots (swipe for more), pets FIXED spot tied to owner slot on every stage/place (OD 19:54Z + 20:04Z) | review/stage-pets-r7 | main s23 | session_01UV1Szk2pMiNBA4H6RniQUP | RUNNING | 16/11 20:04Z |
