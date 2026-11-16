@@ -93,9 +93,13 @@ const KP_CONS_RX=/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại
 const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô|[Cc]ung nữ(?: thân tín)?|[Tt]hái giám|[Tt]ổng quản|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]hợ [^ ]+|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử|[Tt]iểu chủ|[Cc]hủ tử|[Nn]ương nương|[Tt]ú nữ) $/;
 /* the text ends with the first word(s) of t (her own title, shortened) */
 function kpTitleTail(pre,t){const w=String(t||"").split(" ").filter(Boolean);for(let k=w.length;k>=1;k--){const x=w.slice(0,k).join(" ")+" ";if(pre.endsWith(x)||pre.toLowerCase().endsWith(x.toLowerCase()))return true}return false}
-function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
- for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
-  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));
+/* whole names only (flip-newlife / outside-r2 bug: "Lan Chi" was painted INSIDE the already-painted "Mộc Lan Chi", giving "Đoan Cung nữ thân tín Mộc Lan Chi"):
+   an occurrence counts only if it is not glued to letters and does not lie inside an occurrence of a longer, already-painted name (cov) */
+function kpFindName(s,n,cov){const L=/[A-Za-zÀ-ỹĐđ]/;const rg=[];for(const c of cov||[])if(c!==n&&c.includes(n)){let j=-1;while((j=s.indexOf(c,j+1))>=0)rg.push([j,j+c.length])}
+ let i=-1;while((i=s.indexOf(n,i+1))>=0){const e=i+n.length;if(L.test(s[i-1]||"")||L.test(s[e]||""))continue;if(rg.some(r=>i>=r[0]&&e<=r[1]))continue;return i}return -1}
+function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);const cov=[];
+ for(const [n,p] of people){if(!plain.includes(n)||who.includes(p)||kpFindName(plain,n,cov)<0)continue;who.push(p);cov.push(n);let done=false;
+  h=kpMapText(h,s=>{if(done)return s;const i=kpFindName(s,n,cov.slice(0,-1));if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));
    /* owner 11/15 16:55Z (fix-float): an older line still carries her rank of that day ("Đáp ứng X" after she became Thường tại): a consort is
       always drawn with her CURRENT title, the old one is dropped */
    else if(t&&KP_CONS_RX.test(pre)&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p))))pre=pre.replace(KP_CONS_RX,"");
