@@ -108,7 +108,9 @@ def sim_from(a, b):
 def tf_pts(v, W, H):
     return [(v[0] / 100 * W, v[1] / 100 * H), (v[2] / 100 * W, v[3] / 100 * H), (v[4] / 100 * W, v[5] / 100 * H)]
 
-WOMEN = ("consort", "maid", "mama")
+WOMEN = ("consort", "maid", "mama", "thaihau")
+
+args_redo = None
 
 def main_missing(model, jobs):
     """points for every picture of a woman that has none (no toil-fit row needed: detect_free on the whole picture)"""
@@ -127,7 +129,8 @@ def main_missing(model, jobs):
         fn = os.path.join(outdir, g + ".json")
         try: cur = json.load(open(fn))
         except Exception: cur = {}
-        todo = sorted(n for n in L if n not in cur); tot["kept"] += len(L) - len(todo)
+        redo = args_redo and g.startswith(args_redo)
+        todo = sorted(n for n in L if redo or n not in cur); tot["kept"] += len(L) - len(todo)
         if not todo: continue
         with cf.ThreadPoolExecutor(jobs) as ex:
             datas = dict(zip(todo, ex.map(lambda n: get(BASE + n), todo)))
@@ -145,6 +148,8 @@ def main_missing(model, jobs):
 def main():
     args = sys.argv[1:]
     if "--missing" in args:
+        global args_redo
+        args_redo = args[args.index("--redo") + 1] if "--redo" in args else None   # --redo thaihau: measure that group again (whole picture)
         model = args[args.index("--model") + 1] if "--model" in args else os.path.join(ROOT, ".mk/face_landmarker.task")
         return main_missing(model, int(args[args.index("--jobs") + 1]) if "--jobs" in args else 8)
     model = args[args.index("--model") + 1] if "--model" in args else os.path.join(ROOT, ".mk/face_landmarker.task")

@@ -41,9 +41,10 @@ const res=[];const ok=(c,msg,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' 
  for(let i=0;i<6;i++){const c=await p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&/^(Tiếp theo|Đã hiểu|Chạm để đóng)$/.test(x.textContent.trim()));if(b){b.click();return 1}return 0});if(!c)break;await p.waitForTimeout(700)}
  await p.evaluate(()=>{try{kg82Close()}catch(e){}TOIL.st=null;document.querySelectorAll('.ktrv,.kmov').forEach(e=>e.remove())});
  const hold=await p.evaluate(async()=>{Q.length=0;S.toilette=null;used=0;toilOpen();const g0=MK_FIT.get,mw=BAL.toil.meshWait;MK_FIT.get=()=>null;BAL.toil.meshWait=1500;TOIL.st.col=toilColFix({});toilMakeup();
-   await new Promise(r=>setTimeout(r,500));const held=!TOIL.geo.ready()&&!TOIL.geo.lip()&&!(TOIL.test.I);await new Promise(r=>setTimeout(r,2200));MK_FIT.get=g0;BAL.toil.meshWait=mw;
-   return{held,auto:!!(TOIL.st&&TOIL.st.auto),t:S.toilette&&{score:S.toilette.score,look:S.toilette.look,mk:toilMk(S.toilette)}}});
- ok(hold.held&&hold.auto&&hold.t,'no face points: board holds, then her hand is played from skill (no guessed targets)',hold);
+   await new Promise(r=>setTimeout(r,500));const held=!TOIL.geo.ready()&&!TOIL.geo.lip()&&!(TOIL.test.I);
+   /* review r2: every finish button is off while the board holds, and a forced next() does nothing */const bt=document.getElementById('toilnx');const off=!!(bt&&bt.disabled);try{bt&&bt.click();TOIL.test.next()}catch(e){window.__holdErr=String(e)}await new Promise(r=>setTimeout(r,2200));MK_FIT.get=g0;BAL.toil.meshWait=mw;
+   return{held,off,err:window.__holdErr||'',auto:!!(TOIL.st&&TOIL.st.auto),t:S.toilette&&{score:S.toilette.score,look:S.toilette.look,mk:toilMk(S.toilette)}}});
+ ok(hold.held&&hold.off&&!hold.err&&hold.auto&&hold.t,'no face points: board holds, then her hand is played from skill (no guessed targets)',hold);
  const npc=await p.evaluate(()=>{const c={};for(const v of liveRivals(false)){const r=toilNpc(v);const k=toilMk(r);c[k]=(c[k]||0)+1}return c});ok(Object.keys(npc).length>0,'NPC looks from the same table',npc);
  /* co-op: an NPC's look reads world facts only — this seat being Hoàng hậu / in cold palace / summoned tonight changes nothing */
  const seat=await p.evaluate(()=>{const f=()=>JSON.stringify(liveRivals(false).map(v=>toilNpc(v)));const a=f();const k={rank:S.rank,tonight:S.tonight,out:S.out};S.rank=7;S.tonight="me";S.out=true;const b=f();Object.assign(S,k);return a===b});

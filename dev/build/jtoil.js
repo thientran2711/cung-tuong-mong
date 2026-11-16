@@ -381,12 +381,12 @@ function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden
   if(phase===2)kg82Spr(g,"chai-rouge",W-Math.min(70,W*.12),H-Math.min(60,H*.13),Math.min(96,W*.16),null,{});
   g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,["Tự tay kẻ mày lên đúng chân mày","Đánh phấn hồng lên hai gò má","Chạm khi vòng đỏ khép vừa môi"][phase]||"",W/2,22,W-20);
   kg82DrawPops(g,pops,now)}
- function next(){if(phase===0){st.parts.brow=browQ();kg82Pop(pops,W/2,H*.2,st.parts.brow>=PB.brow[0]?"Mày cong như liễu!":st.parts.brow>=PB.brow[1]?"Mày tạm đều":"Nét mày lệch",st.parts.brow>=PB.brow[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
+ function next(){if(!ready||stop)return;/* review r2: nothing finishes before THIS face is anchored */if(phase===0){st.parts.brow=browQ();kg82Pop(pops,W/2,H*.2,st.parts.brow>=PB.brow[0]?"Mày cong như liễu!":st.parts.brow>=PB.brow[1]?"Mày tạm đều":"Nét mày lệch",st.parts.brow>=PB.brow[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
   else if(phase===1){const r=powQ();st.parts.powder=r.q;st.parts.over=r.over;st.parts.thick=r.thick;kg82Pop(pops,W/2,H*.2,r.q>=PB.powder[0]?"Phấn mịn đều!":r.over>PB.over?"Phấn dày quá":r.spill>PB.spill?"Phấn lem ra ngoài":"Phấn chưa đều",r.q>=PB.powder[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
   phase++;t0=0;ring0=performance.now();cur=null;ptr=null;
   if(phase>=3){st.parts.son=sonQ();stop=true;draw(performance.now());setTimeout(()=>toilFinish(true),650);return}
   toilHUD({round:`${phase+2}/4`});setBtn()}
- function setBtn(){const a=box.querySelector(".kg82act");const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx">${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop)next()}}}
+ function setBtn(){const a=box.querySelector(".kg82act");const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx"${ready?"":" disabled"}>${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop&&ready)next()}}}
  function pdown(e){if(stop||!ready)return;e.preventDefault();C.__down=true;if(!t0)t0=performance.now();const p=C.at(e);ptr=p;if(phase===0){cur=[p]}else if(phase===2)tapLip(p);else if(phase===1){try{kitSfx("mgPuff")}catch(x){}}try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
  function pmove(e){if(stop||!ready)return;const p=C.at(e);if(e.pointerType==="mouse"&&!e.buttons&&phase!==2){ptr=p;return}ptr=p;if(phase===0&&cur)cur.push(p)}
  let bs=0,pq=0,pqT=0;function pup(e){C.__down=false;if(phase===0&&cur){if(cur.length>1)strokes.push(cur);cur=null;bs=browQ();try{kitSfx("mgBrush")}catch(x){}}if(e.pointerType!=="mouse")ptr=null}
@@ -397,7 +397,7 @@ function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden
  let last=performance.now();
  function frame(now){if(stop)return;const dt=Math.min(250,now-last);last=now;
   /* the face points may still be on their way: hold the board; if they never come, her hand is played from skill (the NPC table) */
-  if(!ready){if(anchor()){ready=true;t0=0}else if(now-wait0>BAL.toil.meshWait){const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),toilColFix(st.col),(st.col&&st.col.want)||"",st.style,st.occ.map(o=>o.k));
+  if(!ready){if(anchor()){ready=true;t0=0;setBtn()}else if(now-wait0>BAL.toil.meshWait){const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),toilColFix(st.col),(st.col&&st.col.want)||"",st.style,st.occ.map(o=>o.k));
    Object.assign(st.parts,R.parts);st.auto=1;stop=true;setTimeout(()=>toilFinish(true),0);return}else{g.drawImage(baseLayer(),0,0,W,H);g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,"Đang soi gương…",W/2,22,W-20);raf=requestAnimationFrame(frame);return}}
   if(phase===1&&ptr&&C.__down){for(const p of cpts)if(Math.hypot(p.x-ptr[0],p.y-ptr[1])<=puffR){p.c+=dt/(400*CK);pdirty=true}}
   if(phase===2&&lips[li]&&now-ring0>per*3){dots.push({x:lips[li][0]+lr*3,y:lips[li][1],q:0});li++;ring0=now;if(li>=3)next()}
