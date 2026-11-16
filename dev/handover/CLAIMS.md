@@ -36,4 +36,4 @@
 | facefx-all-r2 re-merge + kitPortrait main bug (jbook.js overrides j60 kitPortrait, breaks j90 podium fallback) | review/merge-hot-2 | main s9 | session_01UV1SzjMYTh2Gz2tanxwTrD | RUNNING | 16/11 05:43Z |
 | C9 huadian review r3 | review/huadian-size-r3 | C | session_011xDdVShMB5Qb9z7oyaRK2z | RUNNING | 05:45Z 16/11 |
 | D53b review | review/opt-pics3-r1 | C | session_011xDdVPyoY1HQLa11JfUnXa | RUNNING | 05:45Z 16/11 |
-| D29 finish re-runs | review/schedules3 | C | (session id below) | RUNNING | 05:50Z 16/11 |
+| D29 finish re-runs | review/schedules3 | C | session_011xDdVRcAbEJXh2PekTYPF4 | RUNNING | 05:50Z 16/11 |

@@ -44,7 +44,7 @@ Base main at start: 900ace7fb.
 | D22 real-phone UA test mode | review/ua-test-r1 | sonnet | PASS cad6e04c0 (test infra only; 13 device profiles verified; rotate-prompt 18/18) |
 | D15 download-size (129 MB first load) + perf test | review/perf | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f6da49b3 (jtrong.js after jaudit, BAL.trong; 5 archetypes; trGreet one greeting rule; trThDeed whole-group fix) → review/personality-r1 | opus | REVIEWING (bot HH 6/28=21% vs main ~27–32%, small n) |
-| D29 schedules/roster re-port | review/schedules3 @10517412e (85%: ported, merged-build re-runs left) | opus | RUNNING (finishing worker session) |
+| D29 schedules/roster re-port | review/schedules3 @10517412e (85%: ported, merged-build re-runs left) | opus | RUNNING (finishing session session_011xDdVRcAbEJXh2PekTYPF4) |
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |
 | D20 weather redo with §68 | — | — | NOT TAKEN: session 8 runs review/weather-fx-one (claimed) — D20 folded into it unless the coordinator says otherwise |
 | D-list rest (D3, D9, D11–D14, D19, D25, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
