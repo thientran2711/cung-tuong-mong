@@ -2,6 +2,7 @@
 This file wins over AGENTS.md wherever they differ. Owner = "sếp" (Victoria); Claude = "em"; to the owner: Vietnamese only, short; every report ends "~X% xong / ~Y% chơi được".
 
 ## Rule sources (all binding; read before work)
+- START HERE (owner 16/11 OD:L1241, low context): read the dev/rules START set for your role in full (main = START_CORE + START_FOREMAN + START_MAIN; foreman = START_CORE + START_FOREMAN; worker = START_CORE + START_WORKER; reviewer = + START_REVIEWER; art = + START_ART), then ONLY the dev/rules/topic files your task touches; never the whole canon. dev/rules lives on the handover branch claude/cung-tuong-mong-handover-hj0h8w.
 - `dev/OWNER_DECISIONS.md` — every owner ruling, newest last. **Live copy: branch `claude/cung-tuong-mong-handover-hj0h8w`** (main holds a copy synced by the coordinator; if they differ, the handover branch wins).
 - `dev/handover/WORKER_BRIEF.md` (same branch) — LUẬT KIT TRƯỚC, LUẬT SỬA CẢ NHÓM, LUẬT ƯU TIÊN SỐ 1, art and test rules.
 - `dev/handover/HANDOVER_1115_PM.md` (same branch) — current state, branches, queue.
