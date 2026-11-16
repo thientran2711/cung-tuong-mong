@@ -66,3 +66,11 @@ when the room turns (j76 carry / walkSpillTick). Time is per seat; the shared wo
 Option lists touched (time is no grey reason): place card j77Card (Xin bái kiến/yết kiến, Lẻn vào, Nhờ thái giám, Đi (đến nơi vào buổi sau)),
 gate greeting card accEtqCard (Bái kiến … rồi vào / Đi (đến nơi vào buổi sau) / Vào thẳng), in-place greeting cbGreetCard,
 person buttons visitBtn/seeBtn (kit Cần chip data-kneed), j55 Quốc sự buttons. No new UI part.
+
+## Follow-up (reviewer r1: seed the guard, flake 2/56) — review/time-spill-seed a6a61b2e (on review/time-spill-r1 27fa7955)
+- Seeded RNG for the life and every roll (env SEED, default 7), like coop-one-world.js; `SEED=n node dev/test/time-spill-guard.js <root>` replays.
+- Root cause found with seeds 31/33/35: start() picked a random origin; a MAID life (isSrv) has no consort gate greeting, so goTo did
+  nothing ("place home, carry 0"). Guard now starts a consort life (__forceOrigin 'thd', as walk-spill.js). Seed 3: a random event card
+  blocked nextBuoi after the in-palace greeting → cards cleared first. Gate-greeting row prints the blocking state.
+- 100/100 seeds PASS; default seed 10/10 PASS. Test-only change (no game code, no build change).
+SẴN SÀNG KIỂM a6a61b2eaf799afcef9e04871621df6ba8547a02 (review/time-spill-seed)
