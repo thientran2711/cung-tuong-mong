@@ -77,7 +77,7 @@ const AGSOC={help:["help","help","ally",g=>({ally:g.help})],apologise:["apol","h
  drop:["drop","social","safe",()=>({safe:BAL.ag.val.drop})],gossip:["gossip","scheme","spite",g=>({spite:g.gossip})]};
 const AGACTW={help:"sang giúp",apol:"sang tạ lỗi",visit:"sang thăm",mediate:"đứng ra hòa giải",follow:"đến nương theo",warn:"lén báo tin",test:"thử lòng",provoke:"tìm đến khiêu khích",humil:"hạ nhục",drop:"lạnh nhạt",gossip:"rỉ tai chuyện"};
 const AGHOST=new Set(["provoke","humil","drop","gossip"]);
-function agCostF(v,c){const W=BAL.ag.costW;let f=1;if(c&&c.bac<0)f*=1-Math.min(.9,-c.bac/Math.max(1,v.bac||0))*W;if(c&&c.suc<0)f*=1-Math.min(.9,-c.suc/Math.max(1,v.suc||0))*W;return Math.max(.05,f)}
+function agCostF(v,c){const A=BAL.ag,W=A.costW;let f=1;if(c&&c.bac<0)f*=1-Math.min(A.costCap,-c.bac/Math.max(1,v.bac||0))*W;if(c&&c.suc<0)f*=1-Math.min(A.costCap,-c.suc/Math.max(1,v.suc||0))*W;return Math.max(A.costMin,f)}
 function agU(v,N,o,gl,c,tag){const u=BAL.ag.unit;let s=0;for(const n in gl.g)s+=(N[n]||0)*gl.g[n]/u*(o/100);for(const n in gl.l||{})s-=(N[n]||0)*gl.l[n]/u*(1-o/100);
  for(const n of ["danh","duc","th","hh"])if(c&&c[n]<0)s-=(N[n]||0)*(-c[n])/u;if(s<=0)return 0;return s*agCostF(v,c)*agMW(v,tag)}
 /* mindW once per person and tag in a tick */
@@ -85,7 +85,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
-function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<4;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
+function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
   if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
  return L.length?L[Math.floor(Math.random()*L.length)]:null}
 /* the people a SOC deed could aim at: kept per tuần and per what she did since (perf §4 "cache SOC target lists"); the living are re-checked */
@@ -99,7 +99,7 @@ function agOpts(v,N,need){const O=[];
   /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
   if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
   const C=agSocT(v,s,so,()=>T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)));if(!C.length)continue;
-  const t=mindPickBy(C,x=>host?1+hostility(v,x):1+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
+  const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+hostility(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
   const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
   const N2=Object.assign({},N);if(host)N2.spite=cl(hostility(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
   const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{}},twCost(k),tag);if(u<=0)continue;
@@ -206,7 +206,7 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
   let N;try{N=agNeedsC(v)}catch(x){continue}const ho=hostility(v,S);const D=TW[k];
   const canJ=!joined&&D&&agOwn(k)&&!AGHOST.has(k)&&(!D.req||D.req(v,t))&&twCanPay(v,k);let ju=0;
   if(canJ){const A=AGSELF[k];const gl=A?A.g(v):(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===k);return s?{g:AGSOC[s][3](BAL.tw.g),l:{}}:{g:{},l:{}}})();ju=agU(v,N,D.o?D.o(v,t):100,gl,twCost(k),A?A.tag:"social")*BAL.ag.unit}
-  const hu=motiveOK(v,S,"spy").ok?B.w.hear*(ho/50)*agMW(v,"spy"):0;
+  const hu=motiveOK(v,S,"spy").ok?B.w.hear*(ho/B.hoD)*agMW(v,"spy"):0;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
   if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */

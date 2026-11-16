@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6b873b32+","t":"2026-11-16T22:53Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi.","b":"045c5eadbd9f","h":[{"s":"bad941b4","t":"2026-11-16T07:17Z","c":"PROGRESS final 5"}]};
+window.CTM_BI={"s":"dc695d38+","t":"2026-11-16T22:58Z","c":"npc-agent r1-fix 4: one likes/dislikes system — jmind defers to jdis for Emperor/consorts/Thái hậu (dislikes, consort likes, known-stores, …","b":"1e330e85f208","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1304,7 +1304,7 @@ dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên c
  hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${chanceW(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${chanceW(15)}`,
  month(){const st=S.st;let ev="";
   if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:4,sung:3});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh +4 · Sủng +3. `}else{apply({danh:-4,sung:-3});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh -4 · Sủng -3. `}}
-  if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=mindPickBy(p,x=>Math.max(1,30-(x.rel||0))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN rel */st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
+  if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=mindPickBy(p,x=>Math.max(BAL.mind.pick.j4.floor,BAL.mind.pick.j4.top-(x.rel||0))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN rel */st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
   else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:-20,sung:-15});S.rank=Math.max(0,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh -20 · Sủng -15. `}
   return ev},
  acts(){const st=S.st;if(!st.acc)return[];return[{n:"Tìm chứng cứ cha trung thành",t:`Tra quân báo, tìm người làm chứng. Còn ${Math.max(0,st.acc-S.turn)} tháng · chứng cứ ${st.proof}/2.`,c:{bac:-20,suc:-10},o:od(40+S.mat*6+S.tamco/5),w:{},l:{danh:-2},x:"chứng cứ +1",
@@ -2023,7 +2023,7 @@ function promote(){return promoteP(S)}
 function birth(fake){return birthP(S,fake)}
 function pregMonth(){return pregMonthP(S)}
 function maidMonthP(p){if(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:50};const m=p.maid;m.loyal=cl(m.loyal-1,0,100);if(m.loyal>=45||!roll(15))return"";const pool=others(p);if(!pool.length)return"";
- const pr=x=>Math.round(-BAL.tw.maid.bac*econSchemeMul(x,p));/* two-way law: buying a maid costs the player's price (Mua người trong cung nàng, Dùng bạc, same rank/guard multiplier); an NPC who cannot pay does not buy */const a=mindPickBy(pool.filter(x=>(x.bac||0)>=pr(x)),x=>Math.max(1,10-rel(x,p))*mindW(x,"bribe"),null);/* npc-mind: was ARGMIN rel */if(!a)return"";ap(a,{bac:-pr(a)});const me=p===S;let ev;
+ const pr=x=>Math.round(-BAL.tw.maid.bac*econSchemeMul(x,p));/* two-way law: buying a maid costs the player's price (Mua người trong cung nàng, Dùng bạc, same rank/guard multiplier); an NPC who cannot pay does not buy */const a=mindPickBy(pool.filter(x=>(x.bac||0)>=pr(x)),x=>Math.max(BAL.mind.pick.j8buy.floor,BAL.mind.pick.j8buy.top-rel(x,p))*mindW(x,"bribe"),null);/* npc-mind: was ARGMIN rel */if(!a)return"";ap(a,{bac:-pr(a)});const me=p===S;let ev;
  if(p.schemes>0){ap(p,{danh:-10});evA(a,p,2);relAdd(a,p,-10);ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, đem chuyện ngươi bày mưu hại người kể ra ngoài.</span> Danh -10. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ. `;punish(p,"bị cung nữ tố giác mưu kế",2)}
  else{const g=Math.min(30,p.bac);ap(p,{bac:-g});ap(a,{bac:g});ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, lấy trộm hộp trang sức của ngươi rồi bỏ trốn.</span> Bạc -30. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, trộm bạc bỏ trốn. `}
  if(me){S.maid=newMaid(pick(MAIDS.filter(x=>x!==m.name)),BAL.cmaid.newLoy);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (thiện cảm ${S.maid.loyal}). `}
@@ -2070,7 +2070,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
   if(S.sac>75)v.ghen=cl(v.ghen+1,0,100);v.ghen=cl(v.ghen-(v.rel>20?3:1),0,100);v.pg=Math.max(0,v.pg-1);
-  if(v.queen){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=2&&rel(v,p)<0),p=>evG(v,p)*2-rel(v,p)/5,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
+  if(v.queen){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=2&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(Math.random()<want*.04){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
@@ -2410,7 +2410,7 @@ function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length
  /* NPCs found, join, invite, divide */
  for(const v of liveRivals(true)){if(facOf(v))continue;
   const fr=others(v).filter(x=>(x===S||x.alive)&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
-  const x=mindPickBy(fr.filter(y=>y!==S),y=>1+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST */if(x&&roll(25)){const g=facOf(x);ev+=g?(roll(odA(v,30+aff(x,v)/2))?(S.mat>=2||facOf(S)===g?joinFac(v,g):(joinFac(v,g),"")):""):(S.mat>=2?found(v,x):(found(v,x),""))}}
+  const x=mindPickBy(fr.filter(y=>y!==S),y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST */if(x&&roll(25)){const g=facOf(x);ev+=g?(roll(odA(v,30+aff(x,v)/2))?(S.mat>=2||facOf(S)===g?joinFac(v,g):(joinFac(v,g),"")):""):(S.mat>=2?found(v,x):(found(v,x),""))}}
  const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);if(l&&l!==S&&!facOf(S)&&aff(l,S)>=35&&roll(10))Q.push({t:"Lời mời vào phe",who:pv(l),h:`<p>${l.name} mời ngươi vào ${f.name}. Vào thì cùng chia tin tức, chứng cứ, che chở nhau.</p><p class="past">Mở mục Giao tình › Phe phái để xin vào.</p>`})}
  if(mine&&roll(5)){const o=S.facs.find(f=>f!==mine);const l=o&&facLeader(o);if(l&&l!==S){const r=divide(l,mine);if(r)ev+=r}}
  return ev}
@@ -3766,14 +3766,14 @@ const SOC={
  drop:{w:0.6,ok:(v,t)=>aff(v,t)>=30&&(t===S?S.sung<25||S.confined:t.sung<25||t.confined),run:(v,t)=>{affAdd(v,t,-20);return `${v.name} lạnh nhạt với ${NM(t)} lúc sa cơ`}},
  steal:{w:0.5,ok:(v,t)=>(t===S?S.tonight:true)&&v.sung>=20,run:(v,t)=>{ap(v,{sung:2});ap(t,{sung:-2});oanAdd(t,v,4);return `${v.name} khéo léo cướp đêm thị tẩm của ${NM(t)}`}},
  bribeksp:{w:0.4,ok:v=>v.bac>=30,run:v=>{ap(v,{bac:-30,sung:2});return `${v.name} đút lót Kính sự phòng để được lật thẻ`}},
- follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>1+rkOf(y)+Math.max(0,aff(v,y))/10,v);relAdd(v,x,6)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
+ follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,6)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
  feign:{w:0.5,ok:(v,t)=>danger(v,t)>=20,run:(v,t)=>{affAdd(t,v,6);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
  apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=15,run:(v,t)=>{oanAdd(t,v,-8);return `${v.name} sang xin lỗi ${NM(t)}`}},
  serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{v.th=cl((v.th||0)+2,-100,100);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
  gossip:{w:0.4,ok:()=>true,run:(v,t)=>{const x=pick(liveRivals(true).filter(y=>y!==v));if(x)ap(x,{danh:-1});return `${v.name} rỉ tai chuyện trong cung`}},
  pray:{w:0.3,ok:()=>true,run:v=>{v.pray=Math.max(v.pray||0,1);return `${v.name} lên chùa cầu khấn`}},
  idle:{w:3,ok:()=>true,run:()=>""}};
-function npcSocial(v){const T=others(v);if(!T.length)return"";const t=mindPickBy(T,x=>4+Math.abs(aff(v,x))/4+oan(v,x)/4,v);/* npc-mind: was UNIFORM; people deal more with those they feel strongly about */const O=[];for(const k in SOC){const s=SOC[k];let w=s.w*persW(v,k)*mindW(v,(MIND_SOC[k]||"social"));if(w>0&&s.ok(v,t))O.push([k,w])}if(!O.length)return"";
+function npcSocial(v){const T=others(v);if(!T.length)return"";const t=mindPickBy(T,x=>BAL.mind.pick.j28soc.base+Math.abs(aff(v,x))/BAL.mind.pick.j28soc.aff+oan(v,x)/BAL.mind.pick.j28soc.oan,v);/* npc-mind: was UNIFORM; people deal more with those they feel strongly about */const O=[];for(const k in SOC){const s=SOC[k];let w=s.w*persW(v,k)*mindW(v,(MIND_SOC[k]||"social"));if(w>0&&s.ok(v,t))O.push([k,w])}if(!O.length)return"";
  let r=Math.random()*O.reduce((a,b)=>a+b[1],0),i=0;while(r>O[i][1]&&i<O.length-1){r-=O[i][1];i++}const k=O[i][0];persCount(v,k);if(k==="idle")return"";const txt=SOC[k].run(v,t);
  if(txt)newsAdd(v,k,txt,t===S||v.id===undefined);return t===S&&txt?txt+". ":""}
 /* the weekly news feed: deeds that show character; seen deeds may reveal a trait */
@@ -4000,7 +4000,7 @@ function fScore(p){const L=backers(p);let n=0;for(const b of L)n+=/^phe/.test(b)
 function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==p&&!c.dq.includes(key(x)));const k=key(p);
  const w={pr:2,lo:2,sc:R2.length?.6*persW(p,"poison")*persW(p,"frame"):0};const tot=w.pr+w.lo+w.sc;let r=Math.random()*tot;
  if((r-=w.pr)<0){c.pr[k]=(c.pr[k]||0)+1;return}if((r-=w.lo)<0){if(p.bac>=30&&roll(55)){ap(p,{bac:-30});(c.bk[k]=c.bk[k]||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}return}
- const t=mindPickBy(R2,x=>2+Math.max(0,hostility(p,x)),p);sabotage(p,t)/* npc-mind: was FIRST (always her) */}
+ const t=mindPickBy(R2,x=>BAL.mind.pick.j34.base+Math.max(0,hostility(p,x)),p);sabotage(p,t)/* npc-mind: was FIRST (always her) */}
 function sabotage(a,t){const c=ct();const o=cl(40+(a.tamco||0)/4-(t===S&&S.maid&&S.maid.loyal>=70?10:0),5,90);persCount(a,"contest:scheme");
  if(roll(o)){c.sab[key(t)]=(c.sab[key(t)]||0)+1;const m=t===S?`Đàn của ngươi bị cắt dây trước buổi diễn (vòng sau -2).`:`${a===S?"Ngươi":a.name} phá ${t.name}: vòng sau nàng -2.`;if(t===S||a===S)log(m);return m}
  if(roll(50)){c.dq.push(key(a));ap(a,{danh:-6,sung:-8});const m=`${a===S?"Ngươi":a.name} ra tay với ${NM(t)} bị bắt quả tang: bị loại khỏi cuộc tranh ghế, Danh -6, Sủng -8.`;log(m);return m}return `${a===S?"Ngươi":a.name} định ra tay nhưng không thành.`}
@@ -4247,7 +4247,7 @@ npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v
   /* Đa nghi wastes effort on a false suspicion */
   if(T.includes("Đa nghi")&&roll(22)){const L=others(v).filter(x=>x!==t&&(x===S||x.alive&&!x.out)&&danger(x,v)<30);if(L.length){const u=pick(L);mindLog(v,"_wrongBelief");mindLog(v,"_mistake");evA(v,u,0);newsAdd(v,"spy",`Người của ${v.name} dò xét ${NM(u)} vì một mối ngờ không có thật`,u===S);return""}}
   /* Tham vọng overreaches: aims at the highest seat */
-  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=mindPickBy(L,x=>1+rkOf(x)*rkOf(x)+Math.max(0,hostility(v,x))/5,v);/* npc-mind: was ARGMAX rank */if(hi&&hi!==t&&bandOf(danger(v,hi))>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
+  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=mindPickBy(L,x=>BAL.mind.pick.j40.base+rkOf(x)*rkOf(x)+Math.max(0,hostility(v,x))/BAL.mind.pick.j40.host,v);/* npc-mind: was ARGMAX rank */if(hi&&hi!==t&&bandOf(danger(v,hi))>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
   /* rash: slighted Kiêu ngạo, or a bad week for anyone */
   const rash=rashOf(v);if(rash){err+=10;mindLog(v,"_rash");mindLog(v,"_mistake")}
   /* low wit: clumsy */
@@ -4439,7 +4439,7 @@ function tinAdd(s,n){if(!s)return;s.tin=cl(Math.round(tinOf(s)+n),0,100)}
 function sbar(lbl,v,cls){v=Math.round(v||0);return `<span class="sbar ${cls||""}"><span class="sbl">${lbl}</span><span class="sbt"><u style="width:${cl(v,0,100)}%"></u></span><b>${v}</b></span>`}
 function bondBars(s){return sbar("Lòng",s.loyal,"lo")+sbar("Chủ tin",tinOf(s),"ti")}
 /* entrusting: a scheme order needs Chủ tin 40, guarding a tryst 60 (same for every mistress) */
-(function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;const sc=s=>s.loyal+tinOf(s)/2+(s.tr==="lanh"?15:0);if(p!==S&&typeof mindPickBy==="function")return mindPickBy(L,s=>Math.pow(Math.max(1,sc(s)),2)*mindW(s,"spy"),p);/* npc-mind: an NPC mistress picks by trust, not always the best; her own pick stays the best (shown odds) */return L.slice().sort((a,b)=>sc(b)-sc(a))[0]}})();
+(function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;const sc=s=>s.loyal+tinOf(s)/2+(s.tr==="lanh"?15:0);if(p!==S&&typeof mindPickBy==="function")return mindPickBy(L,s=>Math.pow(Math.max(BAL.mind.pick.tin.floor,sc(s)),BAL.mind.pick.tin.pow)*mindW(s,"spy"),p);/* npc-mind: an NPC mistress picks by trust, not always the best; her own pick stays the best (shown odds) */return L.slice().sort((a,b)=>sc(b)-sc(a))[0]}})();
 watcher=function(){const s=(S.staff||[]).filter(x=>x.loyal>=60&&tinOf(x)>=60).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=60&&tinOf(S.maid)>=60)return{name:S.maid.name,loyal:S.maid.loyal};return null};
 /* trust moves: a task done well raises it, a servant caught lowers it; being trusted slowly warms the servant's heart */
 (function(){const m0=servMerit;servMerit=function(s,n){const r=m0.apply(this,arguments);tinAdd(s,(n||1)*1.5);return r}})();
@@ -5934,7 +5934,7 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
  for(const p of consorts())if(p.cc&&S.turn-(p.ccT||0)>=4){p.cc--;p.ccT=S.turn}
  if(TD.npc)for(const v of liveRivals(true)){if(v.confined||S.dead)continue;const w=TD.npc*traitsOf(v).reduce((m,t)=>m*(TDAMB[t]||1),1);let r="";
   const tg=consorts().filter(t=>t!==v&&tdHouse(t)&&!sameHouse(v,t));
-  const leakT=mindPickBy(tg.filter(t=>deG(v,t)>=1),t=>deG(v,t)+Math.max(0,hostility(v,t))/20,v);/* npc-mind: was FIRST */
+  const leakT=mindPickBy(tg.filter(t=>deG(v,t)>=1),t=>deG(v,t)+Math.max(0,hostility(v,t))/BAL.mind.pick.j55.host,v);/* npc-mind: was FIRST */
   if(leakT&&v.bac>=20&&roll(22*w))r=tdLeak(v,leakT);
   else if(v.bac>=60&&roll(3*w)){const H=CLANS.map(c=>T.H[c]).filter(h=>!tdBacks(h,v)&&h.c!==tdHouse(v));const h=H.sort((a,b)=>b.pow-a.pow)[R(Math.min(3,H.length))];if(h)r=tdGift(v,h)}
   else if(tg.length&&v.bac>=50&&roll(2*w)){const t=pickTarget(v);if(t&&tg.includes(t))r=tdProbe(v,t)}
@@ -16525,7 +16525,7 @@ if(typeof wrapR==="function")wrapR("wkPoisonPick",()=>"Bỏ độc vào món");
 const WILL={hacdinh:{eff:"chết",tr:"dễ lần ra: thái y nhận ra ngay, tra được người mua"},xahuong:{eff:"sảy thai (trộn vào túi thơm, hương trầm)",tr:"khó lần ra: mùi lẫn trong hương"},botngua:{eff:"ngứa, mất thể diện, Danh -5",tr:"vừa: áo dính bột còn để lại dấu"}};
 for(const k in WILL)if(IT[k]&&!/Hiệu quả:/.test(IT[k].d))IT[k].d+=` · Hiệu quả: ${WILL[k].eff} · Dấu vết: ${WILL[k].tr}`;
 /* who ends up holding evidence when a buyer is exposed: the Empress, else the most hostile consort */
-function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().filter(x=>x!==p&&x.alive&&!x.out);if(!L.length)return null;return mindPickBy(L,x=>1+hostility(x,p)*mindW(x,"frame"),null)}/* npc-mind: was ARGMAX */
+function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().filter(x=>x!==p&&x.alive&&!x.out);if(!L.length)return null;return mindPickBy(L,x=>BAL.mind.pick.j83.base+hostility(x,p)*mindW(x,"frame"),null)}/* npc-mind: was ARGMAX */
 function illAllies(p){return consorts().filter(v=>v!==p&&v.alive&&!v.out&&aff(v,p)>=40&&(v.inv||[]).some(e=>WILL[e.k]&&!e.h&&!e.t))}
 const IROUTE={
  maid:{n:"Sai cung nữ thân tín mua lén ngoài cung",k:1,ks:Object.keys(WILL),cost:k=>IT[k].pr+15,o:p=>cl(Math.round(55+(p.maid?p.maid.loyal:0)/3+(p.mat||0)*2),5,95),
@@ -17961,10 +17961,10 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
    uniq    origins one father holds alone (the player's own father): no NPC takes them
    val     how much an indirect effect is worth to the doer, in gain points (her belief, not an outcome): tablet = a bribed tablet (Sủng),
            kid = a prayer for a child (kid need), check = searching gifts (safety), drop = dropping a fallen friend (safety)
-   costW   how much a cost weighs against what she holds (bạc / Sức)
+   costW   how much a cost weighs against what she holds (bạc / Sức); costCap = most of her holding a cost can weigh; costMin = floor of the factor
    kh      khắc a deed takes (the player's talk / deck act: 1)
    wit     witness (AG1b): hear/mat = odds base and per Tai mắt level of "Nghe lén" (the player's Nghe lén câu chuyện, j2/j9);
-           caught = thiện cảm lost toward the listener when a listener is caught; w = NPC reaction weights {hear, join, ignore}
+           caught = thiện cảm lost toward the listener when a listener is caught; hoD = hostility that makes an NPC as keen to listen as w.hear; w = NPC reaction weights {hear, join, ignore}
    perf    p95 budget in ms per slice of the buổi tick (one frame's work, Fold 755x1000), n = how many slices the counter keeps,
            slice = ms of deciding in one frame before the other consorts wait for the next frame / resync of the same buổi */
 Object.assign(BAL,{ag:{on:1,
@@ -17979,9 +17979,27 @@ Object.assign(BAL,{ag:{on:1,
  org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
  uniq:["tt","dtq"],
  val:{tablet:2,kid:10,check:4,drop:3},
- costW:1,kh:1,
- wit:{hear:40,mat:6,caught:5,w:{hear:1,join:1,ignore:3}},
+ costW:1,costCap:.9,costMin:.05,kh:1,
+ wit:{hear:40,mat:6,caught:5,hoD:50,w:{hear:1,join:1,ignore:3}},
  perf:{p95:8,n:200,slice:4}}});
+
+/* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
+   like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)
+   likeSung, herMood, learnTalk (% a talk reveals a like), spyPri (intel priority), disN = [min,max] dislikes drawn for people jdis does not cover
+   slip      % of NPC choices that misjudge (a random option);  temp = weight power of mindPick
+   strW / abW / abMid / trW / wMin  mindW: × when the act uses her strength; per point of ability above abMid; × per honoured / offended virtue; floor
+   odds      odds shift (%) on an act that uses her strength;  kidTal = a child's talent from which a strength is an art;  bacPer = bạc per ability point
+   pickMin   least weight of a target in mindPickBy
+   pick.<site>  the target weights of every mindPickBy call site (base + x / divisor …): j10fr (friend to warn), j28up (the higher-ranked to court),
+             j28soc (social target), j34 (sabotage target), j4 (who is framed: top - rel), j40 (harm target: base + rank² + hostility / host),
+             j55 (leak target), j8buy (who buys: top - rel), j8ev (Hoàng hậu evidence case: evG × ev − rel / rel), j83 (gift framer),
+             j96 (accuser: base + ghen / ghen − rel), lost1 / lost2 (jlost), tin (informant: max(floor, score)^pow), wd (jwd92b), ag (jagent SOC target)
+   men       menDecide (a stray man seen): report [base, hostility per], hide [Tham vọng, else], listen [Đa nghi, else],
+             ignore [Hiền lành / Nhu mì, else, floor, hostility per], keep = weight added to the old fixed answer */
+Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,abMid:40,trW:.35,wMin:.05,odds:4,kidTal:55,bacPer:3,pickMin:.01,
+ pick:{j10fr:{base:1},j28up:{base:1,aff:10},j28soc:{base:4,aff:4,oan:4},j34:{base:2},j4:{top:30,floor:1},j40:{base:1,host:5},j55:{host:20},j8buy:{top:10,floor:1},
+  j8ev:{ev:2,rel:5},j83:{base:1},j96:{base:40,ghen:2,floor:1},lost1:{base:1},lost2:{base:2},tin:{floor:1,pow:2},wd:{base:1},ag:{base:1}},
+ men:{report:[1,25],hide:[2,.6],listen:[2,.5],ignore:[2.5,1.2,.3,80],keep:4}}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -19076,7 +19094,7 @@ window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.
  try{if(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())){const T=[S].concat(liveRivals(true)).filter(p=>p===S||(p.alive&&!p.out));
   for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined||(v.malice||0)<WD.frameMalice)continue;
    const L=T.filter(t=>t!==v&&hostility(v,t)>=WD.frameHost&&ACT.giahoa.ok(v,t));if(!L.length||!roll(WD.frameP))continue;
-   const t=mindPickBy(L,x=>1+hostility(v,x),v);/* npc-mind: was ARGMAX */const x=wdFrame(v,t);if(x){add+=x;try{log(x)}catch(e){}}if(S.dead)break}}}catch(e){console.error(e)}
+   const t=mindPickBy(L,x=>BAL.mind.pick.wd.base+hostility(v,x),v);/* npc-mind: was ARGMAX */const x=wdFrame(v,t);if(x){add+=x;try{log(x)}catch(e){}}if(S.dead)break}}}catch(e){console.error(e)}
  return (r||"")+add}})();
 /* pacing (measured: without it an angry palace impeached her ~140 times a life). Same for every accuser and every target:
    an accuser waits WD.vpCdA tuần between impeachments and WD.frCdA between frame-ups; a target is not impeached again within
@@ -19556,7 +19574,7 @@ function loc96(){const m=man96();if(!m)return"vuon";try{if(typeof rosterWhere===
 function gate96(v,act){try{if(typeof motiveGate==="function")return motiveGate(v,S,act)!==false;if(typeof motiveOk==="function")return motiveOk(v,S,act)!==false}catch(e){}
  return !!(v&&(rel(v,S)<0||(v.ghen||0)>=55||oan(v,S)>=15))}
 function foe96(A){const t=T96();if(t&&t.foe!=null){const v=RV(t.foe);if(rvOk67(v)&&gate96(v,"accuse")){A.act.v=v.id;return v}}const v=rv67(A,"v");if(v&&gate96(v,"accuse"))return v;
- const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(1,40+(x.ghen||0)/2-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
+ const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(BAL.mind.pick.j96.floor,BAL.mind.pick.j96.base+(x.ghen||0)/BAL.mind.pick.j96.ghen-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
 /* ---------- the man: a real NPC of S.men ---------- */
 function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[k];const used=new Set(S.men.map(m=>m.name.split(" ").slice(-2).join(" ")));
  let nm="";for(let i=0;i<20;i++){const s=pick(V.sur||SURN.filter(x=>x.indexOf(" ")<0)),g=pick(MALEN);nm=`${s} ${g}`;if(!used.has(g))break}
@@ -22287,7 +22305,7 @@ function loOk(e){return !!e&&!e.h&&!e.t&&!e.lo&&!e.w&&!e.keep&&!(typeof wdIsNt==
 function loMotive(v,t){try{if(typeof motiveOK==="function")return !!motiveOK(v,t,"plant").ok}catch(e){}return true}
 /* hidden cause, chosen by the existing motive system */
 function loCause(p){let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(danger(v,p))>=2&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}/* two-way law: a rival's theft costs what her Act 'Sai người lấy trộm đồ' costs: bạc LO.act.bac + Đức -4 */
- if(R0.length&&roll(LO.rivP)){const v=mindPickBy(R0,x=>1+danger(x,p)*mindW(x,"scheme"),null);/* npc-mind: was ARGMAX */ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v)}}
+ if(R0.length&&roll(LO.rivP)){const v=mindPickBy(R0,x=>BAL.mind.pick.lost1.base+danger(x,p)*mindW(x,"scheme"),null);/* npc-mind: was ARGMAX */ap(v,{bac:-LO.act.bac,duc:LO.act.duc});return{cause:"riv",by:key(v)}}
  const st=[p.maid].concat(p.staff||[]).filter(Boolean);const sv=st.find(s=>s.tr==="nhat");
  if(roll(sv?LO.srvP[1]:LO.srvP[0])){const s=sv||pick(st);return{cause:"srv",sv:s?s.name:""}}return{cause:"mis"}}
 /* the same function for everyone: an item leaves its owner's chest */
@@ -22314,7 +22332,7 @@ function loEntryAt(h,c){if(!h)return null;let w=null;try{w=typeof wdOf==="functi
 /* where the item is now; it may have moved (planted with "Cài đồ vào rương"): then the case follows it */
 function loEntry(c){const h=loP(c.at);const x=loEntryAt(h,c);if(x||!c.at)return x;for(const p of [S].concat(consorts())){if(p===h||!loAlive(p))continue;const y=loEntryAt(p,c);if(y){c.at=key(p);return y}}return null}
 function loHolder(c){const o=loP(c.own),cu=c.by?loP(c.by):null;const L=consorts().filter(x=>x!==o&&x!==cu&&loAlive(x));if(!L.length)return null;
- if(cu)return mindPickBy(L,x=>2+danger(cu,x),cu);/* npc-mind: was ARGMAX+noise */return pick(L)}
+ if(cu)return mindPickBy(L,x=>BAL.mind.pick.lost2.base+danger(cu,x),cu);/* npc-mind: was ARGMAX+noise */return pick(L)}
 function loHonest(h){const tr=typeof traitsOf==="function"?traitsOf(h).join(" "):(h.trait||"");return (h.malice||0)<50&&!/Tham vọng|Kiêu ngạo/.test(tr)}
 /* where it turns up */
 function loFind(c){const r=R(100);const o=loP(c.own);if(!o||!loAlive(o)){c.st="done";c.how="mat";return}
@@ -40554,7 +40572,7 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;window.disLikeKnown=like
    uses on top of PERS persW: strength, current abilities (tài, đức, danh, sức, tâm cơ), trọng, and mindPick() = a weighted pick with a
    human slip (BAL.mind.slip % of the time an NPC takes a lesser option). Sites listed in dev/handover/reports/npc-mind.md.
    Numbers: BAL.mind. Test: dev/test/npcmind-check.js ================= */
-Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,trW:.35,odds:4}});
+/* numbers: BAL.mind (jbal2.js, the rulebook file; r1 fault 3 ONE CORE) */
 (function(){
 const H=s=>typeof ctxHash==="function"?ctxHash(s):(typeof trHash==="function"?trHash(s):0);
 const life=()=>{try{return typeof trLifeSeed==="function"?trLifeSeed():String(typeof ctxSeed==="function"?ctxSeed():1)}catch(e){return"1"}};
@@ -40591,7 +40609,7 @@ function mindStr(p0){const p=obj(p0);if(!p||!S)return null;
  const c=courtKey(p);if(c&&STR_COURT[c])return STR_COURT[c];
  if(p.eid)return/gt|tn/.test(p.eid)?"sk:le":"sk:quan";
  const nm=String(p.name||"");for(const [re,k] of STR_TITLE)if(re.test(nm))return k;
- if(isKid(p))return (p.tal||0)>=55?["art:thi","art:ky","art:cam","art:hoa"][H(life()+"|kstr|"+mKey(p))%4]:p.sex==="m"?"sk:vo":"sk:tay";
+ if(isKid(p))return (p.tal||0)>=BAL.mind.kidTal?["art:thi","art:ky","art:cam","art:hoa"][H(life()+"|kstr|"+mKey(p))%4]:p.sex==="m"?"sk:vo":"sk:tay";
  const T=traitsOf(isEmp(p)?S.emp:p)||[];for(const t of T)if(STR_TR[t])return STR_TR[t];
  if(ba)return ba;return SEED_STR[H(life()+"|str|"+mKey(p))%SEED_STR.length]}
 function strName(k){if(!k)return"";const [a,b]=k.split(":");return a==="art"?artN(b):SK[b]||b}
@@ -40685,18 +40703,18 @@ const TAG={scheme:{ab:["tamco"],str:["sk:muu"],tr:{"Nhân":-1,"Tín":-1}},spy:{a
  art:{ab:["tai","sac"],str:["art:cam","art:ky","art:thi","art:hoa","art:vu","art:y"],tr:{"Cần":1}},greet:{ab:["duc"],str:["sk:le"],tr:{"Hiếu":1,"Lễ":1}},bribe:{ab:["bac"],str:["sk:buon"],tr:{"Liêm":-1}},
  frame:{ab:["tamco","danh"],str:["sk:muu"],tr:{"Tín":-1,"Nhân":-1}},punish:{ab:["danh"],str:["sk:chinh"],tr:{"Nhân":-1}},reward:{ab:["duc"],str:[],tr:{"Nhân":1}},
  work:{ab:["suc"],str:["sk:hau","sk:quan","sk:tay"],tr:{"Cần":1}},flee:{ab:[],str:[],tr:{"Trung":-1,"Nghĩa":-1}},confess:{ab:[],str:[],tr:{"Tín":1}}};
-function abv(p,f){try{const o=obj(p);if(f==="bac")return Math.min(100,(o.bac||0)/3);return +o[f]||0}catch(e){return 0}}
+function abv(p,f){try{const o=obj(p);if(f==="bac")return Math.min(100,(o.bac||0)/BAL.mind.bacPer);return +o[f]||0}catch(e){return 0}}
 function mindW(p,tag){const T=TAG[tag];if(!T||!p)return 1;const B=BAL.mind;let w=1;try{
- if(T.ab.length){const a=T.ab.reduce((s,f)=>s+abv(p,f),0)/T.ab.length;w*=1+(a-40)*B.abW}/* ability 40 = neutral; 90 ×1.6, 0 ×0.52 */
+ if(T.ab.length){const a=T.ab.reduce((s,f)=>s+abv(p,f),0)/T.ab.length;w*=1+(a-B.abMid)*B.abW}/* ability B.abMid = neutral */
  const st=mindStr(p);if(st&&T.str.includes(st))w*=B.strW;
- if(typeof trongOf==="function")for(const v of trongOf(isTh(p)?"th":p)){const t=T.tr[v]||0;if(t>0)w*=1+B.trW;else if(t<0)w*=1-B.trW}}catch(e){}return Math.max(.05,w)}
+ if(typeof trongOf==="function")for(const v of trongOf(isTh(p)?"th":p)){const t=T.tr[v]||0;if(t>0)w*=1+B.trW;else if(t<0)w*=1-B.trW}}catch(e){}return Math.max(B.wMin,w)}
 /* odds shift (in %) an NPC gets on an act that uses their strength */
 function mindOdds(p,tag){const T=TAG[tag];if(!T)return 0;const st=mindStr(p);return st&&T.str.includes(st)?BAL.mind.odds:0}
 /* the weighted pick: options [[x,w],...]; slip % of the time the NPC misjudges (takes a random option of the rest, weight-blind) */
 function mindPick(O,p){O=(O||[]).filter(o=>o&&o[1]>0);if(!O.length)return null;if(O.length>1&&roll(BAL.mind.slip)){return O[Math.floor(Math.random()*O.length)][0]}
  const t=BAL.mind.temp;const W=O.map(o=>Math.pow(o[1],t));const s=W.reduce((a,b)=>a+b,0);let r=Math.random()*s;for(let i=0;i<O.length;i++){r-=W[i];if(r<=0)return O[i][0]}return O[O.length-1][0]}
 /* a target pick by affinity/oán: score(t) = base + hostility... (sites pass their own score); never argmax */
-function mindPickBy(L,score,p){return mindPick((L||[]).map(x=>[x,Math.max(.01,score(x))]),p)}
+function mindPickBy(L,score,p){return mindPick((L||[]).map(x=>[x,Math.max(BAL.mind.pickMin,score(x))]),p)}
 Object.assign(window,{mindW,mindOdds,mindPick,mindPickBy,MIND_TAG:TAG});
 /* SOC deed -> tag (j28 npcSocial weights) */
 const MIND_SOC={help:"help",visit:"help",mediate:"help",apologise:"help",warn:"social",ally:"social",follow:"social",serveTH:"greet",provoke:"harm",humiliate:"harm",
@@ -40709,8 +40727,9 @@ if(typeof mindMenu==="function"){const m0=mindMenu;mindMenu=function(v,t){const 
   if(O.length>1&&roll(BAL.mind.slip))return O.map(o=>[o[0],1]);return O.map(([k,w])=>[k,w*mindW(v,MENU_TAG[k]||"scheme")])}catch(e){return O}}}
 /* a stray man seen in the hậu cung: was a fixed rule per trait (no dice); now each answer is weighted, the old answer stays the most likely */
 if(typeof menDecide==="function"){const d0=menDecide;menDecide=function(w,c){const d=d0.apply(this,arguments);try{const h=c?hostility(w,c):0;const T=traitsOf(w);
-  const O=[["report",(1+h/25)*mindW(w,"court")],["hide",(T.includes("Tham vọng")?2:.6)*mindW(w,"bribe")],["listen",(T.includes("Đa nghi")?2:.5)*mindW(w,"spy")],["ignore",(T.includes("Hiền lành")||T.includes("Nhu mì")?2.5:1.2)*Math.max(.3,1-h/80)*mindW(w,"help")]];
-  O.forEach(o=>{if(o[0]===d)o[1]+=4});return mindPick(O,w)||d}catch(e){return d}}}
+  const M=BAL.mind.men;
+  const O=[["report",(M.report[0]+h/M.report[1])*mindW(w,"court")],["hide",(T.includes("Tham vọng")?M.hide[0]:M.hide[1])*mindW(w,"bribe")],["listen",(T.includes("Đa nghi")?M.listen[0]:M.listen[1])*mindW(w,"spy")],["ignore",(T.includes("Hiền lành")||T.includes("Nhu mì")?M.ignore[0]:M.ignore[1])*Math.max(M.ignore[2],1-h/M.ignore[3])*mindW(w,"help")]];
+  O.forEach(o=>{if(o[0]===d)o[1]+=M.keep});return mindPick(O,w)||d}catch(e){return d}}}
 
 })();
 /* ================= jfighd: kitFigHD — HIGH-RES FIGURES WHERE A FIGURE IS SHOWN BIG (review/face-sharp, owner 15/11 "mặt vẫn bị mất nét") =================
@@ -45162,7 +45181,7 @@ const AGSOC={help:["help","help","ally",g=>({ally:g.help})],apologise:["apol","h
  drop:["drop","social","safe",()=>({safe:BAL.ag.val.drop})],gossip:["gossip","scheme","spite",g=>({spite:g.gossip})]};
 const AGACTW={help:"sang giúp",apol:"sang tạ lỗi",visit:"sang thăm",mediate:"đứng ra hòa giải",follow:"đến nương theo",warn:"lén báo tin",test:"thử lòng",provoke:"tìm đến khiêu khích",humil:"hạ nhục",drop:"lạnh nhạt",gossip:"rỉ tai chuyện"};
 const AGHOST=new Set(["provoke","humil","drop","gossip"]);
-function agCostF(v,c){const W=BAL.ag.costW;let f=1;if(c&&c.bac<0)f*=1-Math.min(.9,-c.bac/Math.max(1,v.bac||0))*W;if(c&&c.suc<0)f*=1-Math.min(.9,-c.suc/Math.max(1,v.suc||0))*W;return Math.max(.05,f)}
+function agCostF(v,c){const A=BAL.ag,W=A.costW;let f=1;if(c&&c.bac<0)f*=1-Math.min(A.costCap,-c.bac/Math.max(1,v.bac||0))*W;if(c&&c.suc<0)f*=1-Math.min(A.costCap,-c.suc/Math.max(1,v.suc||0))*W;return Math.max(A.costMin,f)}
 function agU(v,N,o,gl,c,tag){const u=BAL.ag.unit;let s=0;for(const n in gl.g)s+=(N[n]||0)*gl.g[n]/u*(o/100);for(const n in gl.l||{})s-=(N[n]||0)*gl.l[n]/u*(1-o/100);
  for(const n of ["danh","duc","th","hh"])if(c&&c[n]<0)s-=(N[n]||0)*(-c[n])/u;if(s<=0)return 0;return s*agCostF(v,c)*agMW(v,tag)}
 /* mindW once per person and tag in a tick */
@@ -45170,7 +45189,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
-function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<4;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
+function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
   if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
  return L.length?L[Math.floor(Math.random()*L.length)]:null}
 /* the people a SOC deed could aim at: kept per tuần and per what she did since (perf §4 "cache SOC target lists"); the living are re-checked */
@@ -45184,7 +45203,7 @@ function agOpts(v,N,need){const O=[];
   /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
   if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
   const C=agSocT(v,s,so,()=>T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)));if(!C.length)continue;
-  const t=mindPickBy(C,x=>host?1+hostility(v,x):1+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
+  const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+hostility(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
   const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
   const N2=Object.assign({},N);if(host)N2.spite=cl(hostility(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
   const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{}},twCost(k),tag);if(u<=0)continue;
@@ -45291,7 +45310,7 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
   let N;try{N=agNeedsC(v)}catch(x){continue}const ho=hostility(v,S);const D=TW[k];
   const canJ=!joined&&D&&agOwn(k)&&!AGHOST.has(k)&&(!D.req||D.req(v,t))&&twCanPay(v,k);let ju=0;
   if(canJ){const A=AGSELF[k];const gl=A?A.g(v):(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===k);return s?{g:AGSOC[s][3](BAL.tw.g),l:{}}:{g:{},l:{}}})();ju=agU(v,N,D.o?D.o(v,t):100,gl,twCost(k),A?A.tag:"social")*BAL.ag.unit}
-  const hu=motiveOK(v,S,"spy").ok?B.w.hear*(ho/50)*agMW(v,"spy"):0;
+  const hu=motiveOK(v,S,"spy").ok?B.w.hear*(ho/B.hoD)*agMW(v,"spy"):0;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
   if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */
@@ -45410,7 +45429,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="045c5eadbd9f";window.CTM_BUILD=BUILD;
+const BUILD="1e330e85f208";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -20,7 +20,7 @@
    uses on top of PERS persW: strength, current abilities (tài, đức, danh, sức, tâm cơ), trọng, and mindPick() = a weighted pick with a
    human slip (BAL.mind.slip % of the time an NPC takes a lesser option). Sites listed in dev/handover/reports/npc-mind.md.
    Numbers: BAL.mind. Test: dev/test/npcmind-check.js ================= */
-Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,disN:[1,2],slip:12,temp:1,strW:1.6,abW:.012,trW:.35,odds:4}});
+/* numbers: BAL.mind (jbal2.js, the rulebook file; r1 fault 3 ONE CORE) */
 (function(){
 const H=s=>typeof ctxHash==="function"?ctxHash(s):(typeof trHash==="function"?trHash(s):0);
 const life=()=>{try{return typeof trLifeSeed==="function"?trLifeSeed():String(typeof ctxSeed==="function"?ctxSeed():1)}catch(e){return"1"}};
@@ -57,7 +57,7 @@ function mindStr(p0){const p=obj(p0);if(!p||!S)return null;
  const c=courtKey(p);if(c&&STR_COURT[c])return STR_COURT[c];
  if(p.eid)return/gt|tn/.test(p.eid)?"sk:le":"sk:quan";
  const nm=String(p.name||"");for(const [re,k] of STR_TITLE)if(re.test(nm))return k;
- if(isKid(p))return (p.tal||0)>=55?["art:thi","art:ky","art:cam","art:hoa"][H(life()+"|kstr|"+mKey(p))%4]:p.sex==="m"?"sk:vo":"sk:tay";
+ if(isKid(p))return (p.tal||0)>=BAL.mind.kidTal?["art:thi","art:ky","art:cam","art:hoa"][H(life()+"|kstr|"+mKey(p))%4]:p.sex==="m"?"sk:vo":"sk:tay";
  const T=traitsOf(isEmp(p)?S.emp:p)||[];for(const t of T)if(STR_TR[t])return STR_TR[t];
  if(ba)return ba;return SEED_STR[H(life()+"|str|"+mKey(p))%SEED_STR.length]}
 function strName(k){if(!k)return"";const [a,b]=k.split(":");return a==="art"?artN(b):SK[b]||b}
@@ -151,18 +151,18 @@ const TAG={scheme:{ab:["tamco"],str:["sk:muu"],tr:{"Nhân":-1,"Tín":-1}},spy:{a
  art:{ab:["tai","sac"],str:["art:cam","art:ky","art:thi","art:hoa","art:vu","art:y"],tr:{"Cần":1}},greet:{ab:["duc"],str:["sk:le"],tr:{"Hiếu":1,"Lễ":1}},bribe:{ab:["bac"],str:["sk:buon"],tr:{"Liêm":-1}},
  frame:{ab:["tamco","danh"],str:["sk:muu"],tr:{"Tín":-1,"Nhân":-1}},punish:{ab:["danh"],str:["sk:chinh"],tr:{"Nhân":-1}},reward:{ab:["duc"],str:[],tr:{"Nhân":1}},
  work:{ab:["suc"],str:["sk:hau","sk:quan","sk:tay"],tr:{"Cần":1}},flee:{ab:[],str:[],tr:{"Trung":-1,"Nghĩa":-1}},confess:{ab:[],str:[],tr:{"Tín":1}}};
-function abv(p,f){try{const o=obj(p);if(f==="bac")return Math.min(100,(o.bac||0)/3);return +o[f]||0}catch(e){return 0}}
+function abv(p,f){try{const o=obj(p);if(f==="bac")return Math.min(100,(o.bac||0)/BAL.mind.bacPer);return +o[f]||0}catch(e){return 0}}
 function mindW(p,tag){const T=TAG[tag];if(!T||!p)return 1;const B=BAL.mind;let w=1;try{
- if(T.ab.length){const a=T.ab.reduce((s,f)=>s+abv(p,f),0)/T.ab.length;w*=1+(a-40)*B.abW}/* ability 40 = neutral; 90 ×1.6, 0 ×0.52 */
+ if(T.ab.length){const a=T.ab.reduce((s,f)=>s+abv(p,f),0)/T.ab.length;w*=1+(a-B.abMid)*B.abW}/* ability B.abMid = neutral */
  const st=mindStr(p);if(st&&T.str.includes(st))w*=B.strW;
- if(typeof trongOf==="function")for(const v of trongOf(isTh(p)?"th":p)){const t=T.tr[v]||0;if(t>0)w*=1+B.trW;else if(t<0)w*=1-B.trW}}catch(e){}return Math.max(.05,w)}
+ if(typeof trongOf==="function")for(const v of trongOf(isTh(p)?"th":p)){const t=T.tr[v]||0;if(t>0)w*=1+B.trW;else if(t<0)w*=1-B.trW}}catch(e){}return Math.max(B.wMin,w)}
 /* odds shift (in %) an NPC gets on an act that uses their strength */
 function mindOdds(p,tag){const T=TAG[tag];if(!T)return 0;const st=mindStr(p);return st&&T.str.includes(st)?BAL.mind.odds:0}
 /* the weighted pick: options [[x,w],...]; slip % of the time the NPC misjudges (takes a random option of the rest, weight-blind) */
 function mindPick(O,p){O=(O||[]).filter(o=>o&&o[1]>0);if(!O.length)return null;if(O.length>1&&roll(BAL.mind.slip)){return O[Math.floor(Math.random()*O.length)][0]}
  const t=BAL.mind.temp;const W=O.map(o=>Math.pow(o[1],t));const s=W.reduce((a,b)=>a+b,0);let r=Math.random()*s;for(let i=0;i<O.length;i++){r-=W[i];if(r<=0)return O[i][0]}return O[O.length-1][0]}
 /* a target pick by affinity/oán: score(t) = base + hostility... (sites pass their own score); never argmax */
-function mindPickBy(L,score,p){return mindPick((L||[]).map(x=>[x,Math.max(.01,score(x))]),p)}
+function mindPickBy(L,score,p){return mindPick((L||[]).map(x=>[x,Math.max(BAL.mind.pickMin,score(x))]),p)}
 Object.assign(window,{mindW,mindOdds,mindPick,mindPickBy,MIND_TAG:TAG});
 /* SOC deed -> tag (j28 npcSocial weights) */
 const MIND_SOC={help:"help",visit:"help",mediate:"help",apologise:"help",warn:"social",ally:"social",follow:"social",serveTH:"greet",provoke:"harm",humiliate:"harm",
@@ -175,7 +175,8 @@ if(typeof mindMenu==="function"){const m0=mindMenu;mindMenu=function(v,t){const 
   if(O.length>1&&roll(BAL.mind.slip))return O.map(o=>[o[0],1]);return O.map(([k,w])=>[k,w*mindW(v,MENU_TAG[k]||"scheme")])}catch(e){return O}}}
 /* a stray man seen in the hậu cung: was a fixed rule per trait (no dice); now each answer is weighted, the old answer stays the most likely */
 if(typeof menDecide==="function"){const d0=menDecide;menDecide=function(w,c){const d=d0.apply(this,arguments);try{const h=c?hostility(w,c):0;const T=traitsOf(w);
-  const O=[["report",(1+h/25)*mindW(w,"court")],["hide",(T.includes("Tham vọng")?2:.6)*mindW(w,"bribe")],["listen",(T.includes("Đa nghi")?2:.5)*mindW(w,"spy")],["ignore",(T.includes("Hiền lành")||T.includes("Nhu mì")?2.5:1.2)*Math.max(.3,1-h/80)*mindW(w,"help")]];
-  O.forEach(o=>{if(o[0]===d)o[1]+=4});return mindPick(O,w)||d}catch(e){return d}}}
+  const M=BAL.mind.men;
+  const O=[["report",(M.report[0]+h/M.report[1])*mindW(w,"court")],["hide",(T.includes("Tham vọng")?M.hide[0]:M.hide[1])*mindW(w,"bribe")],["listen",(T.includes("Đa nghi")?M.listen[0]:M.listen[1])*mindW(w,"spy")],["ignore",(T.includes("Hiền lành")||T.includes("Nhu mì")?M.ignore[0]:M.ignore[1])*Math.max(M.ignore[2],1-h/M.ignore[3])*mindW(w,"help")]];
+  O.forEach(o=>{if(o[0]===d)o[1]+=M.keep});return mindPick(O,w)||d}catch(e){return d}}}
 
 })();
