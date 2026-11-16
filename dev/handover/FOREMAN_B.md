@@ -27,3 +27,5 @@ Re-port the owner-approved branches stranded behind main (specs: SESSION8_QUEUE 
 ## ONE KIT KEEPER (owner 16/11, #1 rule since day one): only the main coordinator's kit keeper creates/changes kit parts, frames or shared art. Foremen and their workers only USE the kit; missing/changed part → STOP that part and write KIT REQUEST in your status QUESTIONS. Never invent a style, frame, chip or variant.
 
 ## COORDINATOR NOTE 16/11 for C24 chapter-detail: review/tutorial-r2 (session 8) built a minimal chapter detail kitGoalDetail in dev/build/jgoal.js (KIT §72). C24 must GROW kitGoalDetail, never build a second panel (KIT FIRST).
+
+## COORDINATOR NOTE 16/11 for D32 succession re-port: session 8 is building review/mortality (BAL.mort; Emperor/Thái hậu death causes and her fate after the Emperor dies). Your D32 owns the succession CHOICE screen (Hoàng thái hậu / nhiếp chính / Nữ đế + Tiên đế băng hà art). Keep a clean hook (one function called on Emperor death) so mortality can call it; note the function name in your status.
