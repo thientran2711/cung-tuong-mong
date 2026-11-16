@@ -1,4 +1,4 @@
-PASS 44355544ca1638b3aa64bc13b741f49f7f2381fb
+PASS e3d29d73b1e4bcfc05f6334f30e158d39918d194  (supersedes 44355544; re-merged onto origin/main 7b5e5e49 on Foreman C s7 request)
 
 # people-ledger-r1 — Opus reviewer (Foreman C session 6), tier BIG
 Reviewed review/people-ledger 4bdb8672 merged onto origin/main 67cd00a2 (two merges: 810d594a, then 67cd00a2; only generated
@@ -45,3 +45,14 @@ New numbers read BAL (led.court, led.cnt). Typed ones left: emoHalf `<50` (pre-e
 - Test harness: dev/test/ledger_stage.js does not dismiss main's new iOS install card (ios-install-first) nor an open result card, so on
   67cd00a2 the iPad shot shows that card; in-page counts are unaffected. Worker should add the dismiss next pass.
 - One transient iPad maid-road shot caught her act moment (her figure alone, large); a re-run showed the normal stage (her + figure + "+11").
+
+## Re-merge (Foreman C s7 request): 9fc1ac33, then 7b5e5e49 → e3d29d73
+- jmen.js conflict: main's own 4-buổi fix (MEN_SHIFT [0,0,1,2] guard shifts, menOrder buổi map, letters [B4L,2,0]) kept inside the ledger's
+  menSched (both roads). index.html / sw.js / assets.json rebuilt.
+- ledger_shadows thd 1180x820 1131=1131, cnv 755x1000 1088=1088, all 0; final build 359=359 / 328=328; page err 0.
+- ledger_hours cnv 0 bad (court 8/8); thd court 7/7, 1 fault at moment 0 (below). Old save main→r1 loads, 0 bad. coop-e2e 59/59
+  (first run 58/59: a timing failure on the "reborn friend name" step).
+- ledger_stage.js: also taps the iOS install choice "Chơi luôn trên trình duyệt" (#kload [data-kl="web"]) — test-only.
+- PRE-EXISTING (also on main, more often there): at life start a guard's S.menW can keep j22's flat `roll(55)` haunt (e.g. m7 at vuon) while
+  S.menWhy says duty ksp. Probe: 1/12 lives here, 3/16 on main 9fc1ac33. Some placeWhere path reaches j22's dice without jmen's overwrite.
+  Next ledger pass: find the bypass, or make j22's men dice a no-op whenever jmen's schedule runs (OD:L1386, owner 13:40Z: no random presence).
