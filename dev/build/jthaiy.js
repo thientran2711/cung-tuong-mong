@@ -91,7 +91,7 @@ function why(road){if(!S||S.dead)return"không được";if(S.out)return"ở lã
  if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return"hết khắc";return""}
  if(S.confined)return"đang bị cấm túc";if(!can(T().khSelf))return `cần ${T().khSelf} khắc`;if((S.suc||0)<20)return"Sức không đủ";return""}
 function xLine(road){const tr=trusted(S);const self=road==="self";
- return `thành: rõ Sức, bệnh, có thai hay chưa · thấy mưu hại ngầm (nếu có): ${word(findO(self))} · kèm: ${self?"người trong cung thấy ngươi ở Thái y viện, thái y khó nói sai":"kín đáo, thái y đến tận cung"}${tr?"":", thái y chưa phải người của ngươi nên lời có khi không thật"}`}
+ return `thành: rõ Sức, bệnh và có thai hay chưa · thấy mưu hại ngầm (nếu có): ${word(findO(self))} · kèm: ${self?"người trong cung thấy ngươi ở Thái y viện, thái y khó nói sai":"kín đáo, thái y đến tận cung"}${tr?"":", thái y chưa phải người của ngươi nên lời có khi không thật"}`}
 function req(road,paid){const self=road==="self";if(!paid){if(why(road))return"";if(self){spend(T().khSelf);apply({suc:-T().sucSelf})}else{spend(T().khPay);apply({bac:-cost()})}}
  const z=thy();z.req=(z.req||0)+1;const tr=trusted(S),by=bribedBy(S);const lie=!!by&&roll(self?T().lieSelf:T().lie);
  const [vd,cls]=verdict(lie);const P=[];const F={};const who=S.doctor?"Thái y tâm phúc của ngươi":docName();

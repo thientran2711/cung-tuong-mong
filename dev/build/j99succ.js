@@ -32,8 +32,8 @@ function succSup(){const r={houses:[],pow:0,mil:false,milArmy:false,milGuard:fal
  try{const set=new Set();const f=typeof facOf==="function"?facOf(S):null;if(f&&typeof facMembers==="function")facMembers(f).forEach(x=>{if(x!==S&&x.alive&&!x.out)set.add(x)});
   liveRivals(true).forEach(v=>{if((v.rel||0)>=40)set.add(v)});r.allies=set.size}catch(e){}
  r.thOK=!!S.thDead||(S.th||0)>=BAL.succN.cTh;r.thB=!!S.thDead||(S.th||0)>=BAL.succN.thB;r.thOpp=!S.thDead&&(S.th||0)<BAL.succN.thOpp;return r}
-function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-50)/2+((S.tamco||0)-35)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
- let o=20+U.pow/6+((S.danh||0)-70)/2+((S.tamco||0)-60)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=16)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
+function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-BAL.succN.bDanh)/2+((S.tamco||0)-BAL.succN.bTam)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
+ let o=20+U.pow/6+((S.danh||0)-BAL.succN.cDanh)/2+((S.tamco||0)-BAL.succN.cTam)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=BAL.succN.bAge)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
 function succNeed(t,ok){return{t:(ok?"✓ ":"✗ ")+t,ok:!!ok}}
 function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
  if(p==="b"){N.push(succNeed(`Tân đế dưới ${BAL.succN.bAge} tuổi (${son?son.age:0} tuổi)`,son&&son.age<BAL.succN.bAge));N.push(succNeed(`Danh từ ${BAL.succN.bDanh} (có ${S.danh||0})`,(S.danh||0)>=BAL.succN.bDanh));
@@ -46,7 +46,7 @@ function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
   N.push(succNeed(`Bạc ${BAL.succN.cBac} (có ${S.bac||0})`,(S.bac||0)>=BAL.succN.cBac));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
  return N.sort((x,y)=>(+x.ok)-(+y.ok))}
 /* ---------- NPC dowager (two-way): the same conditions as (b) ---------- */
-function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=16)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
+function succNpcClaims(v,k){if(!v||!v.alive||v.out||!k||k.age>=BAL.succN.bAge)return false;const tr=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).concat([v.trait]);
  return (((v.danh||40)>=BAL.succN.npcDanh&&(v.tamco||40)>=BAL.succN.npcTam)||tr.some(t=>/Tham vọng|Hiểm độc|Kiêu ngạo/.test(t||"")))}
 let SUCC_NPC=null;
 (function(){const o0=over;over=function(h,t,fate,alive){if(SUCC_NPC&&S&&!S.dead){const v=SUCC_NPC;SUCC_NPC=null;

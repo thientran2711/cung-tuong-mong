@@ -226,6 +226,17 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
    a sachet or pendant becomes wearable, nothing is auto-worn. wearBonus counts every stat key (it only knew Sắc/Danh). ---------- */
 try{if(IT.ngocboi){IT.ngocboi.sl="waist";IT.ngocboi.w={danh:1};IT.ngocboi.d="Đeo eo: Danh +1 · còn giữ: Sủng không dưới 15 · mất là đại họa"}
  if(IT.tuithom){IT.tuithom.sl="scent";IT.tuithom.w={sac:1};delete IT.tuithom.use;IT.tuithom.d="Đeo bên mình: Sắc +1, thơm dịu"}}catch(e){}
+/* ---------- per-rank pieces of the promotion set (D45 small-art, review/small-art-wire): same slots as above, one painting per rank.
+   Đeo eo ngocboi_r0..r7 (the plain Ngọc bội of a rank, NOT the ngự ban keepsake `ngocboi`), Đeo tay vongngoc_r1..r4 (r0 = vongngoc, r5..r7 = vongvang),
+   Túi thơm tuithom_r1..r7 (r0 = tuithom). rk = the rank that receives it, so it is never "vượt phẩm" for the one who is given it. Not in any shop or
+   Mệnh truyện pool: they come only through jpromo (BAL.promo.waist / wrist / scent). A sachet can be tainted like tuithom (TAINT lists it). ---------- */
+const RANKED_W=[["Ngọc bội trơn",40,1],["Ngọc bội vân như ý",55,1],["Ngọc bội lá sen",70,1],["Ngọc bội hồ điệp",90,2],["Ngọc bội song ngư",110,2],["Ngọc bội phượng bài",140,2],["Ngọc hoàn kết tua",180,3],["Bộ ngọc bội phượng đại lễ",240,3]];
+const RANKED_B={1:["Vòng ngọc khảm vàng",60,2,1],2:["Vòng phỉ thúy",75,3,1],3:["Vòng vàng xoắn xâu ngọc",90,3,2],4:["Đôi vòng ngọc khóa phượng vàng",105,4,2]};
+const RANKED_S=[null,["Túi thơm hình quả đào",10,1],["Túi thơm hồ lô",14,1],["Túi thơm uyên ương",20,2],["Túi thơm mẫu đơn",28,2],["Túi thơm sen",40,2],["Túi thơm phượng song nang",55,3],["Cầu hương kim ty",75,3]];
+try{RANKED_W.forEach(([n,pr,d],r)=>{IT["ngocboi_r"+r]={n,kd:"Trang sức",d:`Đeo eo: Danh +${d}`,pr,rk:r,sl:"waist",w:{danh:d},tg:["rv"]}});
+ for(const r in RANKED_B){const [n,pr,s,d]=RANKED_B[r];IT["vongngoc_r"+r]={n,kd:"Trang sức",d:`Đeo tay: Sắc +${s}, Danh +${d}`,pr,rk:+r,sl:"wrist",w:{sac:s,danh:d},tg:["th","hh","rv"]}}
+ RANKED_S.forEach((x,r)=>{if(!x)return;const [n,pr,s]=x;IT["tuithom_r"+r]={n,kd:"Hương liệu",d:`Đeo bên mình: Sắc +${s}, thơm dịu`,pr,rk:r,sl:"scent",w:{sac:s},tg:["rv","hh"]};
+  if(typeof TAINT==="object"){TAINT.xa.on.push("tuithom_r"+r);TAINT.bua.on.push("tuithom_r"+r)}})}catch(e){console.error("ranked items",e)}
 /* ---------- LUXURY axis (owner 11/15): besides vượt phẩm (above her rank → tố), what she wears can be too LAVISH for her standing.
    Shown as NUMBERS (owner 11/15): every item / garment has "Xa xỉ N" = [8,16,28,44,64][grade] + giá/10 (luxVal);
    her allowance = 36 + 16 × rank (+10 if Sủng ≥ 60) (luxAllow). Total worn vs allowance, e.g. "Xa xỉ 112 / 84".
@@ -370,7 +381,7 @@ function kitShopTile(o,x,i){const key=o.key||"shop",u=x.unit||"bạc";const g=KI
  const why=kitShopWhyQ(o,x,q),tot=q*x.price,verb=x.sell?"Bán":"Mua";const lab=why?kitShopWhyShort(why):(q>1?`${verb} · ${tot} ${u}`:verb);
  const A=`data-kshop="${key}" data-kshi="${i}"`;
  return `<div class="kshc${mx<1?" kshno":""}" ${A}>`+
-  `<button type="button" class="kshpic" ${A} data-kshdet="1" aria-label="Xem ${x.name}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,qty:q,size:"slot",tip:`${x.name} · chạm để xem`})}</button>`+
+  `<button type="button" class="kshpic" ${A} data-kshdet="1" aria-label="Xem ${x.name}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,qty:q,size:"slot",mark:x.mark,tip:`${x.name} · chạm để xem`})}</button>`+
   `<span class="kshn" style="color:${g.c}" title="${x.name}">${x.name}</span><span class="kshe"${x.eff?` title="${x.eff}"`:""}>${x.eff||""}</span>`+
   `<span class="kshp">${x.sell?"bán ":""}${x.price} ${u}${x.sell&&x.have?` · có ${x.have()}`:""}</span>`+
   `<span class="kshst"><button type="button" class="kbtn alt kshqb" ${A} data-kshq="-" aria-label="Bớt một"${q<=1?" disabled":""}>−</button><b class="kshqn" aria-live="polite">${q}</b>`+
