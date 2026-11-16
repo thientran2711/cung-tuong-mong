@@ -25,9 +25,9 @@ Object.assign(BAL,{cardFlip:{
  slow:1.75,  /* owner 16/11 "vẫn còn nhanh quá" (after cardflip-smooth): every hard-coded motion below × slow (≈1.75× the cardflip-smooth timing); t / turn / hold are already the slowed numbers */
  t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6500,lift2:7600,centre:0,res:0,end:0},other:.82,
  hold:{me:5200},  /* only the fallback when the kit button part is missing */
- /* the reveal light runs ALONG the picked card's frame (owner 16/11: it sat in the middle and hid the face): n painted gold glows (KIT §68 glowburst, true alpha) circle the frame
-    ring (path = the frame ring's centre line, fractions of the card), 2 laps visible; sparks fly OUTWARD from the frame edge. Nothing is drawn over the portrait window. */
- edge:{path:{x0:.085,y0:.178,x1:.915,y1:.722},n:14,size:.22,lap:4200,op:.7,sparks:16},  /* final still before it closes by itself */
+ /* the reveal light = the WHOLE frame glows (owner 16/11 12:00Z: "nguyên cái khung nó phát sáng lên", never a light that runs round the ring): one soft warm halo hugging the frame ring
+    (path = the frame ring's rectangle, fractions of the card), breathing slowly (opacity only, `breath` ms per cycle); nothing is drawn over the portrait window. */
+ edge:{path:{x0:.085,y0:.178,x1:.915,y1:.722},rad:.03,blur:.08,spread:.02,op:1,lo:.7,breath:3600},
  /* two plate pairs (owner 21:45Z: landscape AND portrait screens): l = 1600x1200 (4:3), p = 1200x1600 (3:4). Per picture: the tray floor
     (yellow silk, measured from the pixels) and the tray's outer rim (the safe zone that must stay on screen); the plate box is fitted to the
     rim and the card slots are computed from the same box, so cards sit on the floor at every aspect. A ≠ B floor → the cards glide to B's. */
@@ -39,7 +39,7 @@ Object.assign(BAL,{cardFlip:{
  skipNoPick:false}});
 (function(){
 const CF=BAL.cardFlip;{const t=CF.t,u=CF.turn;t.centre=t.lift2+u.lift;t.res=t.centre+u.move+u.pause;t.end=t.res+u.tail}const DIR="img/kit/";const AR=550/1037;
-const PL=()=>CF.plates[innerWidth/innerHeight<CF.portraitBelow?"p":"l"];
+const PL=()=>CF.plates[kitView().pages===1?"p":"l"];
 const ART={get a(){return DIR+PL().a+".webp"},get b(){return DIR+PL().b+".webp"},hand:DIR+"cf-hand-emp.webp",seal:DIR+"cf-seal-thitam.webp",petal:DIR+"mo-petal-peach.webp"};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const red=()=>{try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
@@ -98,12 +98,13 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
    A(el,[{transform:`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width})`,transformOrigin:"0 0"},{transform:"none",transformOrigin:"0 0"}],{duration:dur,easing:ease||"cubic-bezier(.4,0,.2,1)"})})};
  let liftA=null;
  /* the final still (also the reduced-motion picture and the target of a skip) */
- const side=innerHeight<560&&innerWidth/innerHeight>1.5;if(side)ov.classList.add("kcf-side");
+ 
  /* phone landscape: the card stands left of centre, the result chip on the right (never over the card) */
- const centreRect=()=>{const vh=innerHeight,vw=innerWidth;if(side){const h=Math.min(vh*.86,vw*.3/AR);return{w:h*AR,h,x:vw*.33-h*AR/2,y:Math.max(6,(vh-h)/2+6)}}
+ const centreRect=()=>{const vh=innerHeight,vw=innerWidth;
   const h=Math.min(vh*.6,vw*.42/AR,560);return{w:h*AR,h,x:vw/2-h*AR/2,y:Math.max(8,vh*.43-h/2)}};
  function final(src){ov.dataset.fin=typeof src==="string"?src:"auto";phase=1;Q.forEach(clearTimeout);Q.length=0;ov.classList.add("kcf-fin");
   ov.getAnimations({subtree:true}).forEach(a=>{try{a.cancel()}catch(e){}});ov.classList.remove("kcf-act");
+  const hl=ov.querySelector(".kcf-halo.kcf-breath");if(hl){hl.classList.remove("kcf-breath");void hl.offsetWidth;hl.classList.add("kcf-breath")}   /* the cancel above must not stop the frame's slow breathing */
   W.classList.add("kcf-on-b");toB();deck.forEach((c,i)=>{const el=els[i];if(c.bar){el.classList.add("kcf-gone")}else place(el,keepPos.get(c))});
   hand.classList.remove("on");
   if(tel){const r=centreRect();tel.classList.add("kcf-pick");Object.assign(tel.style,{left:(r.x-B.x)+"px",top:(r.y-B.y)+"px",width:r.w+"px"});ov.classList.add("kcf-dim")}
@@ -113,17 +114,11 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  let shown=false;const edgeH=[];
  /* the reveal light (owner 16/11): painted gold glows (KIT §68 glowburst) run ALONG the picked card's frame ring and never over the portrait window.
     The card is at rest in the centre when this starts. Gọn / reduced motion: the same glows stand still on the ring (no animation). */
- function edgeLight(){if(!tel||typeof kitFxObj!=="function")return;const E=CF.edge,P=E.path,r=tel.getBoundingClientRect();if(!r.width)return;
-  const X=f=>r.left+r.width*f,Y=f=>r.top+r.height*f;const pts=[[X(P.x0),Y(P.y0)],[X(P.x1),Y(P.y0)],[X(P.x1),Y(P.y1)],[X(P.x0),Y(P.y1)],[X(P.x0),Y(P.y0)]];
-  const len=[];let tot=0;for(let i=0;i<4;i++){const d=Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]);len.push(d);tot+=d}
-  const at=u=>{u=((u%1)+1)%1;let d=u*tot;for(let i=0;i<4;i++){if(d<=len[i]||i===3){const t=len[i]?d/len[i]:0;return[pts[i][0]+(pts[i+1][0]-pts[i][0])*t,pts[i][1]+(pts[i+1][1]-pts[i][1])*t]}d-=len[i]}return pts[0]};
-  const sz=Math.max(40,r.width*E.size),n=E.n;
-  for(let i=0;i<n;i++){try{const u=i/n,[x,y]=at(u);const H=kitFxObj("glowburst",0,{x,y},{size:sz,opacity:E.op,fade:500});if(!H)continue;edgeH.push(H);
-   if(still||!H.el.animate)continue;let off=0;const kf=[];for(let k=0;k<5;k++){const q=pts[k];kf.push({transform:`translate(${(q[0]-sz/2).toFixed(1)}px,${(q[1]-sz/2).toFixed(1)}px)`,offset:k?off/tot:0});if(k<4)off+=len[k]}
-   H.el.style.transform=kf[0].transform;H.el.animate(kf,{duration:E.lap*SL/1.75,iterations:Infinity,easing:"linear",delay:-u*E.lap*SL/1.75})}catch(e){}}
-  /* sparks leave the frame edge going OUTWARD (never inward over the face) */
-  if(!still&&typeof kitFxSprite==="function"){const cx=X(.5),cy=Y((P.y0+P.y1)/2);for(let i=0;i<E.sparks;i++){const [x,y]=at(Math.random()),a=Math.atan2(y-cy,x-cx),v=.5+Math.random()*1.1;
-   try{kitFxSprite("spark",{x,y,vx:Math.cos(a)*v+(Math.random()-.5)*.3,vy:Math.sin(a)*v+(Math.random()-.5)*.3,drag:.985,life:90+Math.random()*80,fade:"inout",scale:.85})}catch(e){}}}}
+ function edgeLight(){if(!tel)return;const E=CF.edge,P=E.path,r=tel.getBoundingClientRect();if(!r.width)return;
+  const h=document.createElement("div");h.className="kcf-halo";if(!still)h.classList.add("kcf-breath");
+  Object.assign(h.style,{left:(r.left+r.width*P.x0)+"px",top:(r.top+r.height*P.y0)+"px",width:(r.width*(P.x1-P.x0))+"px",height:(r.height*(P.y1-P.y0))+"px",borderRadius:(r.width*E.rad)+"px"});
+  for(const [k,v] of [["--hb",(r.width*E.blur).toFixed(1)+"px"],["--hs",(r.width*E.spread).toFixed(1)+"px"],["--ho",E.op],["--hl",E.lo],["--hd",(E.breath*SL)+"ms"]])h.style.setProperty(k,v);
+  ov.appendChild(h);edgeH.push({stop(){try{h.remove()}catch(e){}}})}
  function showRes(now){if(shown)return;shown=true;edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");
   if(me){ov.classList.add("kcf-mine");stamp();if(!still)petals();snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
   cap.textContent=o.cap2||"Hoàng thượng lật thẻ bài"}
@@ -234,7 +229,10 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-c.kcf-grey{filter:grayscale(1) sepia(.1) saturate(.96) brightness(.62) drop-shadow(2px 3px 2px #0006)}
 .kcf-c.kcf-gone{display:none}
 .kcf-dim .kcf-c:not(.kcf-pick){filter:grayscale(0) sepia(.2) saturate(.96) brightness(.42) drop-shadow(2px 3px 2px #0006)}
-.kcf-c.kcf-pick{z-index:5;filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light is painted and runs along the frame ring (edgeLight, KIT §67/§68), never a CSS drop-shadow glow and never over the portrait */
+.kcf-c.kcf-pick{z-index:5;filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light = the whole frame glowing (.kcf-halo, edgeLight, KIT §67), never a running light and never over the portrait */
+.kcf-halo{position:fixed;z-index:6;pointer-events:none;border:3px solid #fff0b8f0;box-shadow:0 0 calc(var(--hb)*.45) calc(var(--hs)*.7) #fff6cc,0 0 var(--hb) var(--hs) #ffd877f2,0 0 calc(var(--hb)*2.2) calc(var(--hs)*1.6) #ffb23fb0,0 0 calc(var(--hb)*4) calc(var(--hs)*2) #ff9a2e55;opacity:var(--ho,1)}
+.kcf-halo.kcf-breath{animation:kcfBreath var(--hd,3600ms) ease-in-out infinite}
+@keyframes kcfBreath{0%,100%{opacity:var(--hl,.62)}50%{opacity:var(--ho,.9)}}
 .kcf-hand{position:fixed;z-index:6;display:none;pointer-events:none;filter:sepia(.18) saturate(.95) brightness(.9) drop-shadow(6px 10px 8px #1a0a0480)}
 .kcf-hand.on{display:block}
 .kcf-act .kcf-hand,.kcf-act .kcf-seal{will-change:transform}
@@ -242,7 +240,6 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-res{position:absolute;left:0;right:0;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 22px);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px;opacity:0;pointer-events:none}
 .kcf-res.on{opacity:1;transition:opacity .4s ease}
 .kcf.km-endon .kcf-res{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 66px)}   /* the kit scene-end button (KIT §81) sits at the bottom: the result chip stands above it */
-.kcf-side .kcf-res{left:52%;right:12px;top:50%;bottom:auto;transform:translateY(-50%);align-items:flex-start}
 .kcf-res .kmres{animation:kmPop .45s var(--km-ease,ease) both}
 .kcf-seal{position:absolute;z-index:6;height:auto;transform-origin:50% 50%;animation:kcfSeal calc(.5s*var(--kcf-s,1)) cubic-bezier(.3,1.6,.5,1) calc(.15s*var(--kcf-s,1)) both;filter:drop-shadow(0 3px 6px #0008)}
 @keyframes kcfSeal{from{transform:scale(2.6) rotate(-8deg);opacity:0}to{transform:scale(1) rotate(-2deg);opacity:1}}
@@ -252,7 +249,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf.kcf-fin .kcf-c{transition:none}
 .kcf.km-red *{animation:none!important;transition:none!important}
 .kcf.km-red .kcf-res{opacity:1}
-@media (max-height:500px){.kcf-cap{font-size:.92rem}.kcf-res{bottom:calc(max(6px,env(safe-area-inset-bottom)) + 16px)}.kcf-res .kmres{padding:4px 10px}}
+
 .kcf-sample{display:flex;flex-wrap:wrap;gap:8px}.kcf-sample figure{margin:0;width:150px;text-align:center}.kcf-sample img{width:100%;height:96px;object-fit:contain;background:#1a0f0a;border-radius:6px}.kcf-sample figcaption{font-size:.75rem}
 `;document.head.appendChild(st);
 })();
