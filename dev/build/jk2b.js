@@ -390,16 +390,18 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
   const fx=kitFxLayers(p,kitFile(m[1]));if(fx)h=h.replace(/(<img class="kfr")/,`<span class="kfxc"><span class="kfx">${fx}</span></span>$1`)}catch(e){}return h}})();
 (function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img[^>]*src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;const fx=kitFxLayers(q,kitFile(m[1]));
   if(fx)h=h.replace(/<i class="kmf"/,`<span class="kfxc kfxm"><span class="kfx">${fx}</span></span><i class="kmf"`)}catch(e){}return h}})();
-function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>e.remove());const ppl=typeof curPeople==="function"?curPeople():[];
- const put=(img,p,host)=>{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;s.__fig=img;/* D25: the picture this box belongs to (jface copies its transform) */
+/* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
+function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;s.__fig=img;/* D25: the picture this box belongs to (jface copies its transform) */
   /* lay the box over the DRAWN picture: object-fit contain/cover + object-position, and the image's own transform (kit owner #2: the veil sat beside the face) */
   const cs=getComputedStyle(img);const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
   if(nw&&nh&&/contain|cover|scale-down/.test(cs.objectFit)){const k=cs.objectFit==="cover"?Math.max(bw/nw,bh/nh):Math.min(bw/nw,bh/nh,cs.objectFit==="scale-down"?1:99);w=nw*k;h=nh*k;
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  s.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${L}px;top:${T}px;width:${w}px;height:${h}px;transform:${cs.transform};transform-origin:${tor}`;img.classList.add("kfxon");host.appendChild(s)};
- st.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];put(b.querySelector("img.figimg"),p&&p.ref,b)});
+  s.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${L}px;top:${T}px;width:${w}px;height:${h}px;transform:${cs.transform};transform-origin:${tor}`;img.classList.add("kfxon");host.appendChild(s)}}
+function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>e.remove());const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
+ /* the person of a place token: its ref, or (Hoàng thượng, Thái hậu, cung nữ thân tín, thái y) the one KIT_FACEFX person lookup */
+ st.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];put(b.querySelector("img.figimg"),p&&(p.ref||(window.KIT_FACEFX?KIT_FACEFX.person(p):null)),b)});
  const me=$("mefig");if(me&&typeof S!=="undefined")put(me,S,me.parentElement)}catch(e){}}
 (function(){const k0=kitStageScale;kitStageScale=function(){const r=k0.apply(this,arguments);try{kitFigFx()}catch(e){}return r}})();
 /* the fit tables load asynchronously: redraw once both are in */
@@ -624,7 +626,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
 .dlg.kpsc .kpid>.kpidart>.ksart>img{object-position:center 45%}
 /* the two choices never leave the screen (owner 11/14: "Đổi thân phận (−100…" was cut at 686x880): the body scrolls under them */
 .modal.kpscene .dlg.kpsc.kfpon>#mb{overflow-y:auto!important;overscroll-behavior:contain}
-.dlg.kpsc>#mb>.kpscopts{position:sticky;bottom:0;z-index:3;margin:4px 0 0!important;padding:6px 0 8px;background:linear-gradient(rgba(255,250,240,0),rgba(255,250,240,.97) 8px);box-shadow:0 -1px 0 #e6d3ac}
+.dlg.kpsc>#mb>.kpscopts{position:sticky;bottom:0;z-index:9;margin:4px 0 0!important;padding:6px 0 8px;background:linear-gradient(rgba(255,250,240,0),rgba(255,250,240,.97) 8px);box-shadow:0 -1px 0 #e6d3ac}
 .dlg.kpsc>#mb>.kpscopts .kan{white-space:normal}
 `;document.head.appendChild(st)})();
 

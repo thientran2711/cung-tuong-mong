@@ -20,7 +20,7 @@ function tabName(k){try{if(k==="act")return isS()?"Phận sự":"Hành sự";if(
   return b?(b.dataset.l0||b.textContent).trim():k}catch(e){return k}}
 /* ---------- data ---------- */
 function road(){try{const Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||null;return Q0?Q0.t:""}catch(e){return""}}
-function chapter(){try{if(!S||!S.st)return null;const c=S.st.ch,m=S.st.ms,M=S.st.M;
+function chapter(){try{/* a road with its own chapter (jkc at home before the tuyển tú) */if(typeof window.kitGoalAlt==="function"){const a=window.kitGoalAlt();if(a)return a}if(!S||!S.st)return null;const c=S.st.ch,m=S.st.ms,M=S.st.M;
  if(typeof v267==="function"&&v267()&&c){
   if(m&&typeof MS67==="object"&&MS67[m.id]){const d=MS67[m.id],st=d.steps(m);return{kind:"ms",id:m.id,n:c.n,max:c.max,t:d.t(),g:d.g(),steps:st.map(x=>({t:x[0],ok:!!x[1]})),any:!!d.any}}
   if(M&&typeof ARC67==="object"&&ARC67[M.a]){const a=ARC67[M.a],P=(typeof pos67==="function"&&pos67(M))||{c:M.chap||1,i:M.i||0,n:M.seq.length};
@@ -29,7 +29,7 @@ function chapter(){try{if(!S||!S.st)return null;const c=S.st.ch,m=S.st.ms,M=S.st
  const s=typeof STORY==="object"&&S.origin&&STORY[S.origin.k];if(s){let hn="";try{hn=s.hint?s.hint():""}catch(e){}return{kind:"v1",n:1,max:s.n||0,t:s.t,g:plain(s.goal),next:hn}}}catch(e){console.error("goal",e)}return null}
 /* act: matched anywhere in the card title (.kan may start with a small portrait label, e.g. "Hoàng hậu")
    the 2–3 concrete things to do next, each with where to tap (tab + act card) */
-function nextSteps(C){const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
+function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:(x.tl||tabName(x.tab))+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
  const hh=(()=>{try{return typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].alive}catch(e){return false}})();
  if(C&&C.kind==="arc"&&C.wait)L.push({t:"Quyết hồi truyện đang chờ",why:"hồi truyện chờ lựa chọn của ngươi",tab:"story"});
  if(isS()){
@@ -46,7 +46,7 @@ function nextSteps(C){const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng m
  return L.slice(0,3).map(x=>Object.assign(x,{where:tabName(x.tab)+(x.card?` › thẻ ${x.card}`:"")}))}
 function kitGoalNow(){if(typeof S==="undefined"||!S||S.dead)return null;const C=chapter();if(!C)return null;
  let step="";if(C.kind==="ms"){const nx=C.steps.find(x=>!x.ok);step=nx?nx.t:"sắp xong"}else step=plain(C.next||C.g);
- return{road:road(),C,kicker:`Chương ${C.n}`,title:C.t,goal:C.g,step,next:nextSteps(C)}}
+ return{road:C.road||road(),C,kicker:`Chương ${C.n}`,title:C.t,goal:C.g,step,next:nextSteps(C)}}
 /* ---------- "Đi làm": open the tab, ring the act card with the guide's spotlight (kitCoach, jtut) when it is on screen ---------- */
 function goWhere(x){try{if(!x||!x.tab)return;const b=document.querySelector(`#tabs [data-tab="${x.tab}"]`);
  /* tapping the tab that is already open sends a phone back to the room (jk3), so only tap another tab */
