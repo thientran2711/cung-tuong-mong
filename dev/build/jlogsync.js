@@ -36,8 +36,12 @@ function lsSnap(){const o={};for(const [k] of LK)o[k]=val(k);return o}
 function lsToks(t){const out=[];for(const [k] of LK){const re=RX[k];re.lastIndex=0;let m;while((m=re.exec(t))){const pre=t.slice(Math.max(0,m.index-2),m.index);if(/\p{L}\s$/u.test(pre)&&!/(?:^|\s)(?:ta|ngươi)\s$/u.test(t.slice(Math.max(0,m.index-7),m.index)))continue;
   out.push({k,i:m.index,raw:m[0],a:m[1]!=null?+m[1]:null,b:m[2]!=null?+m[2]:null,d:m[3]!=null?(m[3]==="+"?1:-1)*+m[4]:null,s:m[6]!=null?+m[6]:m[5]!=null?+m[5]:null})}}
  return out.sort((x,y)=>x.i-y.i)}
-function lsReplay(texts,start){const v=Object.assign({},start),last={};texts.forEach((t,li)=>{for(const o of lsToks(plain(t))){o.li=li;o.before=v[o.k];
-  if(o.a!=null)v[o.k]=o.b;else if(o.d!=null)v[o.k]=o.s!=null?o.s:o.before+o.d;else if(o.s!=null)v[o.k]=o.s;last[o.k]=o}});return{v,last}}
+function lsReplay(texts,start){const v=Object.assign({},start),last={},all={};texts.forEach((t,li)=>{for(const o of lsToks(plain(t))){o.li=li;o.before=v[o.k];(all[o.k]=all[o.k]||[]).push(o);
+  if(o.a!=null)v[o.k]=o.b;else if(o.d!=null)v[o.k]=o.s!=null?o.s:o.before+o.d;else if(o.s!=null)v[o.k]=o.s;last[o.k]=o}});return{v,last,all}}
+/* replace the last occurrence of a token in a line's html (tags inside the token, as in "Sủng <b>-4</b>", are kept after it) */
+function repl(L,raw,rep){const h=String(L.get());let j=h.lastIndexOf(raw),len=raw.length;
+ if(j<0){const re=new RegExp(raw.split(/\s+/).map(esc).join("(?:\\s|<[^>]*>)+"),"g");let m;while((m=re.exec(h))){j=m.index;len=m[0].length}}
+ if(j<0)return false;const tags=(h.slice(j,j+len).match(/<[^>]*>/g)||[]).join("");L.set(h.slice(0,j)+rep+tags+h.slice(j+len));return true}
 /* lines: [{get:()=>html,set:h=>…}] oldest first. Rewrites a wrong stated delta to the real one; returns what is still unexplained. */
 function lsFix(lines,start){const R=lsReplay(lines.map(l=>l.get()),start);const parts=[];
  for(const [k] of LK){const y=val(k);if(R.v[k]===y)continue;const o=R.last[k],[lo,hi]=bd(k),at=y<=lo||y>=hi;let done=false;
@@ -45,9 +49,12 @@ function lsFix(lines,start){const R=lsReplay(lines.map(l=>l.get()),start);const 
    if(at&&nd!==0&&(o.d==null||Math.sign(nd)===Math.sign(o.d)))rep=`${NM(k)} ${o.before} → ${y} (${y>=hi?"đã đầy":"chạm đáy"})`;
    else if(at&&nd===0&&(o.d==null||(o.d>0)===(y>=hi)))rep=`${NM(k)} ${y>=hi?"đã đầy":"chạm đáy"} ${y}`;
    else if(o.d!=null&&nd!==0&&Math.sign(nd)===Math.sign(o.d))rep=`${NM(k)} ${nd>0?"+":"-"}${Math.abs(nd)}`;
-   if(rep){const L=lines[o.li],h=String(L.get());let j=h.lastIndexOf(o.raw),len=o.raw.length;
-    if(j<0){/* the token has tags inside ("Sủng <b>-4</b>") */const re=new RegExp(o.raw.split(/\s+/).map(esc).join("(?:\\s|<[^>]*>)+"),"g");let m;while((m=re.exec(h))){j=m.index;len=m[0].length}}
-    if(j>=0){const tags=(h.slice(j,j+len).match(/<[^>]*>/g)||[]).join("");L.set(h.slice(0,j)+rep+tags+h.slice(j+len));done=true}}}
+   if(rep)done=repl(lines[o.li],o.raw,rep)}
+  /* several deltas past the floor / ceiling ("ra khỏi tẩm cung: Danh -3 · nơi đông người: Danh -8" at Danh 0): each one that
+     crosses it says what it really did ("Danh chạm đáy 0") */
+  if(!done&&at&&R.all[k]){let r=start[k];const reps=[];for(const t of R.all[k]){if(t.a!=null){r=t.b;continue}if(t.d==null){r=t.s;continue}
+    const raw=t.s!=null?t.s:r+t.d,nr=Math.min(hi,Math.max(lo,raw));if(nr!==raw||t.s!=null&&nr!==r+t.d)reps.push([t,nr===r?`${NM(k)} ${nr>=hi?"đã đầy":"chạm đáy"} ${nr}`:`${NM(k)} ${r} → ${nr} (${nr>=hi?"đã đầy":"chạm đáy"})`]);r=nr}
+   if(r===y&&reps.length){for(const [t,rp] of reps.reverse())repl(lines[t.li],t.raw,rp);done=true}}
   /* no real change (y = start) and nothing to correct: the token was someone else's — nothing to add */
   if(!done&&y!==start[k]){const x=Math.min(hi,Math.max(lo,R.v[k]));if(x!==y)parts.push({k,a:x,b:y})}}
  return parts}
