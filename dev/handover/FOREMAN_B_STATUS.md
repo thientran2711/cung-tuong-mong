@@ -18,7 +18,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C34 contest-ui | review/contest-ui-r1 @7fbf0630 FAIL (podium overlaps header at 844x390) → review/contest-ui-r2 | sonnet | RUNNING (fix r2) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
-| C26b stat-fx follow-up | review/stat-fx-2 | sonnet | RUNNING (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
+| C26b stat-fx follow-up | review/stat-fx-2 @f4096090 | sonnet | REVIEWING (review/stat-fx-2-r1, sonnet); contains stat-fx-r1 + pcard-fill-r1 |
 | C46 map-labels | review/map-labels @5462586d | sonnet | REVIEWING (review/map-labels-r1, sonnet) |
 | D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
 | D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
@@ -68,6 +68,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - (found by succession reviewer, exists on main today) the sticky .kpbar kcattabs strip ("Tất cả 0/16 …") draws on top of the modal on the 1180x820 end card ("Kiếp này") — z-index/stacking, kit keeper.
 - §72 CLASH: review/room-btn-r1 (PASS c80e5df9) used KIT §72 for kitBackBtnHtml, and review/tutorial-r2's kitGoalDetail (jgoal.js) is also §72 — keeper please assign one of them a new number.
 - map-labels (reviewing): re-skins existing kit §34.1d .mspot .mlab (paper chip 13px, wrap, no opacity cuts) + mapFit floor zoom (no touching labels); when D30 lands raise its .kpm-spot .mlab hall labels to 13px.
+- KIT REQUEST (C26b stat-fx-2): in §57.1 jstatfx.js the glowing number never takes the gain/loss colour because jk4's `.kst:not(.kst-tile):not(.kst-chip)>.kstv{color:var(--ink)}` (0,4,0) beats `.ksf-g>.kstv`/`.ksf-r>.kstv` (0,2,0). Proposed: `.kst.ksf-g:not(.kst-tile):not(.kst-chip)>.kstv{color:#1f6b2f}`, `.kst.ksf-r:not(.kst-tile):not(.kst-chip)>.kstv{color:#a3291c}`, plus `.krt-v.ksf-g` / `.krt-v.ksf-r` for relation-table numbers (verified live by the worker; not applied).
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
