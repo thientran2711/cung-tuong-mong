@@ -18547,6 +18547,29 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  tienSc:2,
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
+/* NPC ROADS (Foreman D, review/npc-roads; ROAD_MAP §0 'NPC roads', reports/npc-roads.md) — ONE CORE: every number of jnroad.js */
+Object.assign(BAL,{nroad:{
+ /* months from her arrival (or the game start) to her chapter .4; months between two chapters [min, max] */
+ d0:[2,6],gap:[4,7],
+ /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter + help when the player helped) */
+ base:30,div:3,sc:8,help:15,
+ /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55) */
+ fx:{win:{danh:4,sung:3,suc:-6,pow:2},mid:{danh:1,suc:-4},lose:{danh:-4,sung:-3,suc:-3,pow:-2}},
+ /* the loser's grudge toward the winner (oán), and the player's share when SHE is the NPC's rival */
+ oan:{win:8,lose:5},onMe:{win:{danh:-2,sung:-2},lose:{danh:1}},
+ /* the help hồi: the chapter index range it may fall on (one per road per life), the bond or shared side she needs to ask,
+    the deadline (weeks), the costs of the two roads (bạc road vs Sức road of equal weight), the bond she gives back */
+ helpN:[5,10],askRel:20,dl:6,bac:[30,45,70,100],suc:8,rel:6,relBad:-12,relB:8,
+ /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
+ bacRk:[2,4,6],
+ /* palace news lines a month (NPC chapter ends), at most */
+ newsMo:2,
+ /* origin of an NPC consort from her house (clan): [origin key, weight] */
+ org:{"Tể tướng":[["tt",1]],"Đại tướng quân":[["dtq",1]],"Thái hậu":[["ch",1]],"Hàn lâm":[["thd",3],["td",1]],"Lễ bộ":[["thd",1],["td",1],["muoi",1]],"Hộ bộ":[["muoi",3],["td",1]],"":[["muoi",1],["thd",1],["td",1]]},
+ /* one father = one record: these origins are never given to an NPC when the player has them */
+ uniq:["tt","dtq"],
+ /* at most this many NPC roads have the player as their rival at one time */
+ meMax:3}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -35087,6 +35110,142 @@ try{KIT_GLOSS["Tâm nguyện"]="Mỗi người có một tâm nguyện. Họ s�
    const cur=ktSubGet("story",L);if(cur==="rg"||cur==="rgl"){const sub=kitSubTabs("story",L.slice(0,3));return sub.html+(cur==="rg"?rgPaneHTML():rgGoalHTML())}}return h0.apply(this,arguments)}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rgsw]");if(!b||b.disabled)return;e.stopPropagation();try{rgSwitchOpen()}catch(x){console.error(x)}},true);
 /* co-op: the guest's own S.reign is personal; the court (S.trieu.rg) comes from the host's world */
+/* ================= jnroad: NPC ROADS (owner OD:L1243, OD:L1252, OD:L1264, OD:L1386; ROAD_MAP.md §0 'NPC roads', reports/npc-roads.md) =================
+   Every NPC woman lives one road of her own origin, like the player: a consort rolls an origin from her house (BAL.nroad.org) and one of
+   that origin's four roads (the j67 premise arcs ARC67[road] with o:<origin>); her chapters are the SAME chapters the player would play
+   (.4 = ARC67[road], .5–.11 = ROAD14[road][n] of jroad.js / jrd_<origin>.js). Nothing is copied: titles, cast keys, climax options and
+   ending tags are read from that data at run time, so a chapter B adds later appears in NPC roads by itself.
+   Off-screen: each chapter falls due after BAL.nroad.gap months; she plays it with HER OWN stats (odA, the stat the chapter's climax
+   rewards, her Lợi thế from the chapter before) — no special roll for NPCs (OD:L1386). Its end moves real fields both ways (gain AND loss,
+   BAL.nroad.fx), her rival is a REAL person of this life (another consort, or the player: real oán both ways, OD:L1247).
+   It touches the player only for real reasons: (1) ONE chapter of her road per life (index rolled per life, OD:L1252) is a help hồi =
+   a j72 follow-up «Phụ tuyến · {A}: road · Chương n» with a deadline (OD:L499), asked only when the bond or a shared side is real;
+   (2) the player is her rival: the chapter's end lands on the player; (3) a palace news line (capped, BAL.nroad.newsMo).
+   State: v.nr = {o origin, r road, n next chapter, k last ending sign, t turn due, h help chapter, hk help kind, hs help state,
+   hb help bonus, c rival id ("me" = the player), e last ending tag, x closed, l lives log [n,k]} — saved with the consort (rivals).
+   Host-only in co-op (world state; the jreign pattern). window.__nroff switches it off (bot ON/OFF measure). Kit only: j72 card + log. */
+function nrGuest(){const C=window.COOPW;return !!(C&&C.on&&C.seat&&C.seat!=="a")}
+function nrOn(){return !!(typeof S==="object"&&S&&!S.dead&&!window.__nroff&&typeof ARC67==="object")}
+const nrB=()=>BAL.nroad;
+const nrR=a=>a[0]+R(a[1]-a[0]+1);
+/* the four roads of an origin (j67 premise arcs) */
+function nrRoads(o){return Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu)}
+/* chapter n of a road: .4 = the premise arc, .5–.11 = jroad chapters registered in this build (null = not built yet → skipped) */
+function nrCh(r,n){if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
+function nrNext(r,n){for(let i=n;i<=BAL.road.last;i++)if(nrCh(r,i))return i;return 0}
+/* origin of an NPC woman (canon ROAD_MAP §5.2: one father = one record) */
+function nrOrigin(v){if(v.fromMaid)return "cn";let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
+ let L=(nrB().org[c]||nrB().org[""]).filter(([o])=>!(nrB().uniq.includes(o)&&o===me));if(!L.length)L=nrB().org[""];
+ const tot=L.reduce((a,z)=>a+z[1],0);let x=Math.random()*tot;for(const [o,w] of L){if((x-=w)<0)return o}return L[0][0]}
+/* a road of that origin: avoid the player's road and roads other NPCs of the same origin already live (variety) */
+function nrPickRoad(o){const L=nrRoads(o);if(!L.length)return "";const mine=S.st&&S.st.f14&&S.st.f14.road;
+ const held=rivals.filter(x=>x.nr&&x.nr.r).map(x=>x.nr.r);const free=L.filter(r=>r!==mine&&!held.includes(r));const L2=free.length?free:L.filter(r=>r!==mine);return pick(L2.length?L2:L)}
+function nrInit(v){if(v.nr||!v.alive||v.out)return v.nr||null;const o=nrOrigin(v),r=nrPickRoad(o);if(!r)return null;
+ const n=nrNext(r,BAL.road.first-1);const H=nrB().helpN;const h=nrNext(r,H[0]+R(H[1]-H[0]+1))||0;
+ v.nr={o,r,n,k:0,t:S.turn+nrR(nrB().d0),h:h&&h<=H[1]?h:0,hs:0,hb:0,c:null,e:"",x:0,l:[]};return v.nr}
+/* the rival of her road: a REAL person kept for the whole road; the one she is coldest with (the player counts like any consort) */
+function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!p.out&&p!==v;
+ if(N.c!=null){const p=N.c==="me"?S:RV(N.c);if(ok(p))return p;const old=N.c==="me"?null:p;N.c=null;N.rc=old?old.name:""}
+ /* the player is her rival only for a real reason (she is cold to the player) and only for a few NPCs at once (BAL.nroad.meMax) */
+ const meN=rivals.filter(x=>x!==v&&x.alive&&!x.out&&x.nr&&!x.nr.x&&x.nr.c==="me").length;const meOk=!isSrv()&&aff(v,S)<0&&meN<nrB().meMax;
+ const L=liveRivals(true).filter(p=>p!==v).concat(meOk?[S]:[]);if(!L.length)return null;
+ L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=key(p);return p}
+/* the stat the chapter's climax rewards (tamco, danh, duc, tai, sac, sung …) — read from the chapter data */
+const NRSK={tamco:"tamco",mat:"tamco",danh:"danh",duc:"duc",an:"duc",tai:"tai",thi:"tai",cam:"tai",ky:"tai",hoa:"tai",vu:"sac",sac:"sac",sung:"sung"};
+function nrStat(A){const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const b of P){const d=A.B&&A.B[b];for(const o of(d&&d.o||[]))for(const k in(o.w||{})){const s=NRSK[k];if(s)cnt[s]=(cnt[s]||0)+1}}}catch(e){}
+ const k=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];return k||"tamco"}
+/* the ending of a chapter by its sign: the arc's own ending tag (E[*].tag) */
+function nrEnd(A,k){const E=A&&A.E||{};const ks=Object.keys(E).filter(x=>(E[x].k||0)===k);const x=ks.length?E[pick(ks)]:null;return x&&x.tag?plain(x.tag):""}
+function nrTitle(r){const A=ARC67[r];return A?plain(A.t):""}
+/* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, Lợi thế only after a won chapter like hers — a lost chapter
+   gives no malus, so no losing spiral — and her help) */
+function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);return""}const B=nrB();const sk=nrStat(A);
+ const b=B.base+(v[sk]||40)/B.div+(N.k>0?B.sc:0)+(N.hb||0);const p=odA(v,b);
+ const k=roll(p)?1:roll(p/2)?0:-1;const riv=nrRival(v);const fx=k>0?B.fx.win:k<0?B.fx.lose:B.fx.mid;
+ const own={};for(const z in fx)if(z!=="pow")own[z]=fx[z];ap(v,own);if(v.suc!=null)v.suc=cl(v.suc,0,100);
+ try{if(fx.pow){const c=clanOf(v);if(c&&typeof tdPowAdd==="function")tdPowAdd(c,fx.pow)}}catch(e){}
+ let me="";if(riv){if(k>0)oanAdd(riv,v,B.oan.win);else if(k<0)oanAdd(v,riv,B.oan.lose);
+  if(riv===S&&k!==0){const o=k>0?B.onMe.win:B.onMe.lose;ap(S,o);me=k>0?` ${v.name} lấn được ngươi một bước.`:` ${v.name} vấp ngã, ngươi bớt một mối lo.`}}
+ const tag=nrEnd(A,k);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
+ const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt nàng là ${riv?NM(riv):"người khác"}.`:"";N.rc="";
+ return {n:n0,t:plain(A.t),tag,k,me,rc,riv}}
+/* motive to ask the player (real reasons only): bond, a shared side, or the player is her rival (never asks her rival) */
+function nrAsk(v){try{if(isSrv()||S.out)return false;const N=v.nr;if(N.c==="me")return false;
+ if(aff(v,S)>=nrB().askRel)return true;const f=facOf(v);if(f&&f===facOf(S))return true;
+ const a=typeof rgSideOf==="function"?rgSideOf(v):null;return !!(a&&a===rgSideOf(S))}catch(e){return false}}
+/* the help kind of a chapter from its main cast key (w) */
+const NRHK={emp:"emp",th:"th",hh:"hh",dad:"thu",bro:"thu",off:"thu",man:"thu",envoy:"thu",mom:"thu",v:"do",foe:"do",foed:"do",v2:"do",eun:"do",gd:"do",doc:"y",maid:"che",mis:"che",kid:"che",mama:"che"};
+function nrKind(A){const w=A&&A.w;let k=NRHK[w]||"bac";try{const B=A.B||{};const ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}return k}
+function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function"||!T72I["nr_"+nrKind(A)])return false;const q=q72();if(!q)return false;
+ const hk=nrKind(A);if(q.ch.some(c=>c.ri===v.id&&/^nr_/.test(c.tid))||q.a.some(x=>x.ri===v.id&&/^nr_/.test(x.tid)))return false;
+ if(typeof rgL==="function"){try{const L=rgL();if(v.queen&&L.hh&&!L.hh.done&&L.hh.st>0)return false}catch(e){}}
+ const riv=nrRival(v);const bk=riv&&riv!==S?(riv.queen?"hh":"rv"):null;
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk:v.queen?"hh":"rv",ri:v.id,bk,bi:bk?riv.id:null,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+/* result of the help hồi → her chapter (called by the j72 outcome fn) */
+function nrHelped(X,how){try{const v=X.A&&X.A.o;if(!v||!v.nr)return"";const N=v.nr,B=nrB();N.hs=2;
+ if(how>0){N.hb=B.help;return ` ${v.name} ghi nhớ ơn này; chương «${nrChT(v)}» của nàng thêm phần chắc.`}
+ if(how<0){N.hb=-B.help;return ` ${v.name} biết ngươi bán đứng nàng; chương «${nrChT(v)}» của nàng thêm khó.`}
+ return""}catch(e){console.error(e);return""}}
+function nrChT(v){const A=nrCh(v.nr.r,v.nr.n);return A?plain(A.t):""}
+/* the month: every live NPC road whose chapter is due plays it (host only) */
+function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev="";
+ for(const v of rivals.slice()){try{if(!v.alive||v.out){if(v.nr&&!v.nr.x)v.nr.x=1;continue}
+  const N=v.nr||nrInit(v);if(!N||N.x||!N.n||S.turn<N.t)continue;
+  if(N.h&&N.n===N.h&&!N.hs&&nrAsk(v)&&nrOffer(v))continue;
+  const r=nrPlay(v);if(!r)continue;
+  const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  if(r.riv===S||news<B.newsMo){log(line);news++}
+  if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${N.e}`:""}.</span>`)}catch(e){console.error(e)}}
+ return ev}
+(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=nrMonth()}catch(e){console.error(e)}return ev}})();
+/* a maid raised to consort keeps who she was: a raised maid's road is a cn road (Cung nữ được sủng hạnh) */
+window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMonth;window.nrPlay=nrPlay;
+
+/* ---------- the help hồi templates (j72 follow-ups, fu:1: never dealt at random; one task = one hồi, OD:L1243) ----------
+   Every option has a cost AND a loss; the bạc road and the Sức road weigh the same (OD:L582: bạc priced by her rank, BAL.nroad.bac). */
+(function(){if(typeof T7!=="function")return;const C=q72C,O=q72O,B=()=>BAL.nroad;
+ const bac=()=>{const R0=B().bacRk;let i=0;for(const r of R0)if(S.rank>=r)i++;return -B().bac[Math.min(i,B().bac.length-1)]};
+ const nr=X=>{const v=X.A&&X.A.o;return v&&v.nr?v.nr:null};
+ const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n} «${A?plain(A.t):""}»`:X.A.n};
+ head.toString=()=>"Tuyến truyện riêng của một người trong cung";/* j72 logs plain(T.t) when the asker is gone */
+ const call=X=>{const v=X.A&&X.A.o;return v&&v.rank>S.rank?"muội muội":"tỷ tỷ"};
+ const ok={r:0,d:1,fn:X=>nrHelped(X,1)},bad={fn:X=>nrHelped(X,-1)};
+ const def=(k,h,steps)=>T7("nr_"+k,"social",{fu:1,r:"rv",t:head,h,dl:B().dl,s:[steps],ok:Object.assign({},ok,{r:B().rel}),no:{r:-4},bad:Object.assign({},bad,{r:B().relBad,rb:B().relB})});
+ const betray=O("Đem chuyện mách cho {B}",{t:X=>!!X.B,tw:"không có ai để mách",c:{duc:-3},k:1,to:"bad",rb:0});
+ def("emp",X=>`“Việc của ta đến tai Hoàng thượng rồi. ${call(X)} được gần thánh giá, xin nói giúp ta một lời.”`,C("Nói giúp trước mặt Hoàng thượng",
+  O("Nhân lúc hầu Hoàng thượng, khéo nhắc đến nàng",{c:{suc:-B().suc},p:55,sk:"sung",l:{sung:-3},lx:"Hoàng thượng phật ý vì ngươi xen vào",to:"ok"}),
+  O("Dâng lễ nhờ người thân cận đỡ lời",{c:{get bac(){return bac()}},p:75,sk:"tamco",l:{danh:-2},lx:"lễ bị trả về, người ta bàn tán",to:"ok"}),betray));
+ def("th",X=>`“Thái hậu đang nghe lời gièm về ta. ${call(X)} thường đến Đức Thọ cung, xin đỡ cho ta.”`,C("Đỡ lời trước Thái hậu",
+  O("Hầu Thái hậu một buổi, nói đỡ cho nàng",{c:{suc:-B().suc},p:55,sk:"duc",l:{duc:-2},lx:"Thái hậu chê ngươi lắm lời",to:"ok"}),
+  O("Dâng Thái hậu một lễ thay lời",{c:{get bac(){return bac()}},p:75,sk:"duc",l:{danh:-2},lx:"Thái hậu cho là ngươi mua lòng",to:"ok"}),betray));
+ def("hh",X=>`“Trung cung đang để mắt đến ta. ${call(X)} nói được với Hoàng hậu, xin nói giúp một câu.”`,C("Đỡ lời trước Hoàng hậu",
+  O("Thỉnh an Hoàng hậu, khéo nhắc đến nàng",{c:{suc:-B().suc},p:55,sk:"duc",l:{duc:-2},lx:"Hoàng hậu nghi ngươi kết bè",to:"ok"}),
+  O("Dâng lễ Khôn Ninh cung",{c:{get bac(){return bac()}},p:75,sk:"tamco",l:{danh:-2},lx:"lễ bị trả về",to:"ok"}),betray));
+ def("thu",X=>`“Ta có một lá thư phải đến tay người nhà, không được qua tay Kính sự phòng. ${call(X)} giúp ta.”`,C("Đưa thư ra ngoài cung",
+  O("Nhờ thái giám của mình mang ra",{c:{get bac(){return bac()}},p:75,sk:"mat",l:{danh:-3},lx:"thư bị chặn, tên ngươi dính vào",to:"ok"}),
+  O("Gửi theo người nhà mình vào thăm",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-3},lx:"người nhà bị khám, thư bị lộ",to:"ok"}),betray));
+ def("do",X=>`“Ta cần biết ${X.B?X.B.n:"kẻ kia"} đang tính gì. ${call(X)} có tai mắt, giúp ta dò một chuyện.”`,C("Dò la giúp nàng",
+  O("Sai người dò la",{c:{get bac(){return bac()}},p:70,sk:"mat",l:{danh:-2},lx:"người của ngươi bị bắt gặp",to:"ok",rb:-4}),
+  O("Tự đi hỏi chuyện",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"ngươi bị nghi là tai mắt",to:"ok",rb:-4}),betray));
+ def("y",X=>`“Bệnh này không thể để Thái y viện ghi sổ. ${call(X)} quen thái y, xin mời người đến xem kín cho ta.”`,C("Mời thái y xem kín",
+  O("Mời thái y quen, trả công hậu",{c:{get bac(){return bac()}},p:75,sk:"y",l:{danh:-2},lx:"Thái y viện ghi tên ngươi",to:"ok"}),
+  O("Tự sắc thuốc mang sang",{c:{suc:-B().suc},p:50,sk:"y",l:{duc:-2},lx:"thuốc không hợp, nàng trách ngươi",to:"ok"}),betray));
+ def("che",X=>`“Người của ta đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho nàng ấy ít hôm.”`,C("Che chở người của nàng",
+  O("Cho ở nhờ cung mình",{c:{suc:-B().suc},p:60,sk:"tamco",l:{danh:-3},lx:"người ta bàn ngươi chứa kẻ có tội",to:"ok"}),
+  O("Bỏ bạc lo chỗ khác",{c:{get bac(){return bac()}},p:75,sk:"mat",l:{danh:-2},lx:"chỗ ấy không kín",to:"ok"}),betray));
+ def("bac",X=>`“Ta đang cần bạc gấp, việc nhà không thể nói ra. ${call(X)} giúp ta lần này, ta không quên.”`,C("Giúp nàng việc bạc",
+  O("Cho mượn bạc",{c:{get bac(){return bac()}},k:1,to:"ok",l:{},lx:"bạc ra khỏi tay ngươi"}),
+  O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"việc không xong, nàng mất lòng tin",to:"ok"}),betray));
+})();
+
+/* ---------- her road on her person card (Hậu cung): one more row of the kit person card (.pcinfo span, the j85/j24 pattern) ---------- */
+function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!ARC67[N.r])return"";const T=nrTitle(N.r);
+ if(N.x)return `Tuyến truyện: «${T}» <span class="past">· đã khép${N.e?`: ${N.e}`:""}</span>`;
+ const n=N.l.length?N.l[N.l.length-1][0]:0;return n?`Tuyến truyện: «${T}» <span class="past">· qua chương ${n}${N.e?`: ${N.e}`:""}</span>`:`Tuyến truyện: «${T}» <span class="past">· chưa mở</span>`}
+(function(){if(typeof rvCard!=="function")return;const c0=rvCard;/* same row pattern as j85 ducLine / j24 danger line: one <span> in the card's .pcinfo */
+ rvCard=function(v){let h=c0.apply(this,arguments);try{if(v&&!window.__nroff){const l=nrLine(v);if(l)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${l}</span>`)}}catch(e){console.error(e)}return h}})();
+window.nrLine=nrLine;
 /* ================= jevb: EVENT BALANCE · CONTEXT · MOOD CAUSES · REAL PRECONDITIONS (owner 15/11 14:05Z, 14:30Z, 15:10Z) =================
    Wraps only; loaded after jstory. Numbers in BAL (ctx*, moodEv*). Audit: dev/review/event-balance.md (bots: dev/measure/evbot.js).
    (1) CONTEXT, not a fixed answer: the odds of a rolled event option depend on the people in it AT THAT MOMENT —
@@ -42681,7 +42840,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="70753047e7e3";window.CTM_BUILD=BUILD;
+const BUILD="f64fb5d90a62";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

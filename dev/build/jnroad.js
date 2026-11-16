@@ -45,9 +45,10 @@ function nrStat(A){const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const
 /* the ending of a chapter by its sign: the arc's own ending tag (E[*].tag) */
 function nrEnd(A,k){const E=A&&A.E||{};const ks=Object.keys(E).filter(x=>(E[x].k||0)===k);const x=ks.length?E[pick(ks)]:null;return x&&x.tag?plain(x.tag):""}
 function nrTitle(r){const A=ARC67[r];return A?plain(A.t):""}
-/* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, her Lợi thế, her help) */
+/* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, Lợi thế only after a won chapter like hers — a lost chapter
+   gives no malus, so no losing spiral — and her help) */
 function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);return""}const B=nrB();const sk=nrStat(A);
- const b=B.base+(v[sk]||40)/B.div+(N.k>0?B.sc:N.k<0?-B.sc:0)+(N.hb||0);const p=odA(v,b);
+ const b=B.base+(v[sk]||40)/B.div+(N.k>0?B.sc:0)+(N.hb||0);const p=odA(v,b);
  const k=roll(p)?1:roll(p/2)?0:-1;const riv=nrRival(v);const fx=k>0?B.fx.win:k<0?B.fx.lose:B.fx.mid;
  const own={};for(const z in fx)if(z!=="pow")own[z]=fx[z];ap(v,own);if(v.suc!=null)v.suc=cl(v.suc,0,100);
  try{if(fx.pow){const c=clanOf(v);if(c&&typeof tdPowAdd==="function")tdPowAdd(c,fx.pow)}}catch(e){}
@@ -126,11 +127,10 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
   O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"việc không xong, nàng mất lòng tin",to:"ok"}),betray));
 })();
 
-/* ---------- her road on her person card (Hậu cung): one more row of the kit person card (pcard lines, j15 rvCard) ---------- */
+/* ---------- her road on her person card (Hậu cung): one more row of the kit person card (.pcinfo span, the j85/j24 pattern) ---------- */
 function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!ARC67[N.r])return"";const T=nrTitle(N.r);
  if(N.x)return `Tuyến truyện: «${T}» <span class="past">· đã khép${N.e?`: ${N.e}`:""}</span>`;
  const n=N.l.length?N.l[N.l.length-1][0]:0;return n?`Tuyến truyện: «${T}» <span class="past">· qua chương ${n}${N.e?`: ${N.e}`:""}</span>`:`Tuyến truyện: «${T}» <span class="past">· chưa mở</span>`}
-(function(){if(typeof rvCard!=="function"||typeof relLines!=="function")return;const c0=rvCard;
- rvCard=function(v){const r0=relLines;relLines=function(x){const L=r0.apply(this,arguments);try{if(x===v&&!window.__nroff){const l=nrLine(x);if(l)return L.concat([l])}}catch(e){}return L};
-  try{return c0.apply(this,arguments)}finally{relLines=r0}}})();
+(function(){if(typeof rvCard!=="function")return;const c0=rvCard;/* same row pattern as j85 ducLine / j24 danger line: one <span> in the card's .pcinfo */
+ rvCard=function(v){let h=c0.apply(this,arguments);try{if(v&&!window.__nroff){const l=nrLine(v);if(l)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${l}</span>`)}}catch(e){console.error(e)}return h}})();
 window.nrLine=nrLine;

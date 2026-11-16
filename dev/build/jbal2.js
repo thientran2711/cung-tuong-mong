@@ -286,7 +286,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
 Object.assign(BAL,{nroad:{
  /* months from her arrival (or the game start) to her chapter .4; months between two chapters [min, max] */
  d0:[2,6],gap:[4,7],
- /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter − sc after a lost one + help when the player helped) */
+ /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter + help when the player helped) */
  base:30,div:3,sc:8,help:15,
  /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55) */
  fx:{win:{danh:4,sung:3,suc:-6,pow:2},mid:{danh:1,suc:-4},lose:{danh:-4,sung:-3,suc:-3,pow:-2}},
