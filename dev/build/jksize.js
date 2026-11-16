@@ -144,7 +144,51 @@ function kszSheet(area){const old=document.getElementById("kszsheet");if(old)old
   h+=`<h2>KIT SIZE 3 · VIỆC DÀI (long story) = XL, landscape picture on TOP, info + buttons BELOW</h2><p class="kszn">Rule: a frame whose story text does not fit the L body and has no person → XL with the landscape picture LL across the top; text scrolls inside, the picture and the buttons stay.</p>`;
   h+=`<div data-want="XL">${kszFrame({kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",pic:"img/ev-hh-viec.webp",facts:Array.from({length:6},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
    opts:[op("Nghe hết rồi mới định",[["Được",ch("Đức",1)]]),op("Cho lui, để mai bàn",[])]})}</div>`}
+ if(area==="items")h+=kszItemsSheet();
  h=h.replace(/ loading="lazy"/g,"");const d=document.createElement("div");d.id="kszsheet";d.innerHTML=h;document.body.appendChild(d);
  const fit=()=>d.querySelectorAll(".kszf.kpanel").forEach(f=>{const k=kitFrameApply(f);const w=f.parentElement.dataset.want;f.title=k;f.parentElement.dataset.got=k;const t=f.parentElement.previousElementSibling;if(t&&t.hasAttribute("data-ksztbl"))t.textContent="picked → "+tbl(k)});
  fit();d.querySelectorAll("img").forEach(i=>i.complete||i.addEventListener("load",fit,{once:true}));return d}
 window.kitSizeSheet=kitSizeSheet;
+
+/* ---- ITEMS (owner kit review part 2, 16/11 15:10Z: 6.2 / 6.3 / 6.5 / 7.1 / 7.3) ----
+   6.2 item detail card: name · row 1 = kind ("Trâm cài · cài tóc") · row 2 = gains / losses chips; the rest (Hợp đề, Xa xỉ, Lai lịch, Ghi chú) as kit rows.
+       Xa xỉ on EVERY item that has a luxury value (was: wearables of the player only).
+   6.3 / 6.5 grade = a chip ON the item frame (top-left), no grade word under the tile; pick grids show picture + name + effects only ("Sắc +5, Danh +2");
+       the kind text is dropped there (full info on tap = the 6.2 card); the gift-chest reveal (first appearance, §54) keeps the full info.
+   Item sizes = the 4 kit sizes: S 52 · M 72 · L 104 · XL 150 (kitItem sm/md/lg/xl). */
+const KSZ_ITEM={S:"sm",M:"md",L:"lg",XL:"xl"};
+(function(){const st=document.createElement("style");st.id="k-size-items";st.textContent=`
+.kszit{position:relative;display:inline-block;line-height:0}
+.kszit>.kszgc{position:absolute;left:50%;translate:-50% 0;bottom:3px;white-space:nowrap;z-index:3;font:700 .58rem/1 var(--body,sans-serif);color:#fff;background:var(--kgc);padding:2px 4px;border-radius:3px;box-shadow:0 0 0 1px #fffaf0;pointer-events:none;letter-spacing:.02em}
+.kszit[data-s="S"]>.kszgc{font-size:.5rem;padding:1px 3px}
+.kszit .kitn,.kszit .kitg{display:none}
+.kszidc{box-sizing:border-box;border:1px solid var(--line,#d2b071);border-radius:8px;background:var(--panel,#fffaf0);padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:.8rem}
+.kszidh{display:flex;gap:10px;align-items:flex-start}
+.kszidt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.kszidt>b{font:700 1rem/1.2 var(--display,serif)}
+.kszidt>.kszk{font-size:.74rem;color:var(--dim,#6b5643)}
+.kszidt>.kszfx{display:flex;flex-wrap:wrap;gap:4px}
+.kszpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.kszpick>div{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px;border:1px solid var(--line,#d2b071);border-radius:6px;background:var(--panel2,#f6ead6)}
+.kszpick>div>b{font:600 .74rem/1.2 var(--body)}.kszpick>div>small{font-size:.7rem;color:var(--good,#2d7a52)}
+.kszphg{display:grid;grid-template-columns:auto repeat(3,auto);gap:8px 14px;align-items:end;font-size:.7rem}`;document.head.appendChild(st)})();
+function kszItemTile(k,size){const I=kitItemInfo(k);const G=KIT_GRADE[Math.max(0,Math.min(4,I.grade|0))];
+ return `<span class="kszit" data-s="${size}">${kitItem({src:I.src,name:"",grade:I.grade,size:KSZ_ITEM[size]})}<b class="kszgc" style="--kgc:${G.c}">${I.gname||G.n}</b></span>`}
+function kszItemDetail(k){const I=kitItemInfo(k);const tmp=document.createElement("div");tmp.innerHTML=kitItemDetail(k,{cls:"kidet-strip"});
+ const rows=[...tmp.querySelectorAll(".kidrows .kr")];const fx=[],keep=[];let kind="";
+ for(const r of rows){const l=(r.querySelector(".krl")||{}).textContent||"";const v=r.querySelector(".krv");
+  if(/^(Được|Mất|dùng)/i.test(l))fx.push(v.innerHTML);else if(/^Loại/.test(l))kind=v.textContent;else if(/^Phẩm/.test(l)){}else keep.push(r.outerHTML)}
+ if(!rows.some(r=>/^Xa xỉ/.test(r.textContent))){let lux=0;try{lux=typeof luxVal==="function"?luxVal(k):0}catch(e){}if(lux)keep.unshift(`<span class="kr"><span class="krl">Xa xỉ</span><span class="krv"><span class="ef n">món này ${lux}</span></span></span>`)}
+ return `<div class="kszidc"><div class="kszidh">${kszItemTile(k,"M")}<div class="kszidt"><b style="color:${I.col||"inherit"}">${I.name}</b><span class="kszk">${kind||tmp.querySelector(".kidkind")?.textContent||""}</span><span class="kszfx">${fx.join('<span class="ksep">·</span>')}</span></div></div>${keep.length?`<span class="kb kpkb">${keep.join("")}</span>`:""}</div>`}
+function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","thu"].concat(typeof WD_ITEMS==="object"?["y_haiduong","nt_nhuy"]:[]).filter(k=>{try{return kitItemInfo(k)}catch(e){return false}});
+ let h=`<h2>KIT SIZE 4 · Items (owner part 2: 6.2 · 6.3 · 6.5) + thumbnails (7.1) + placeholder sets (7.3)</h2>`;
+ h+=`<h3>Item sizes = the 4 kit sizes · GRADE as a chip ON the frame (no grade line under it)</h3><div class="kszrow" style="align-items:flex-end">${["S","M","L","XL"].map(s=>`<div><div class="kszlab">${s} · ${{S:52,M:72,L:104,XL:150}[s]} px</div>${kszItemTile(ks[1]||ks[0],s)}</div>`).join("")}</div>`;
+ h+=`<h3>6.2 item detail card: kind on the upper row, gains / losses on the row below; Xa xỉ on every item with a luxury value</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:1120px">${ks.map(kszItemDetail).join("")}</div>`;
+ const pk=Object.keys(IT).filter(k=>!IT[k].story&&IT[k].sl).slice(0,6);
+ h+=`<h3>6.3 pick grid (Tặng quà · Dâng quà · Cài đồ): picture + name + effects only; full info on tap</h3><div class="kszpick" style="max-width:640px">${pk.map(k=>{const I=kipItem({k});const use=String(I.use||"").replace(/^[^:]*:\s*/,"");return `<div>${kszItemTile(k,"M")}<b style="color:${I.col}">${I.name}</b><small>${use}</small></div>`}).join("")}</div>`;
+ h+=`<h3>6.5 item tag in events: tile with grade chip, name only</h3><div class="kszrow">${pk.slice(0,6).map(k=>`<div style="text-align:center;width:64px">${kszItemTile(k,"S")}<div style="font-size:.68rem">${kitItemInfo(k).name}</div></div>`).join("")}</div>`;
+ const Z=KIT_SIZE.pic,m=kitSzMode();const box=(k,src)=>{const p=Z[k];const w=typeof p.w==="number"?p.w:300,hh=typeof p.h==="number"?p.h:p.h[m];return `<div><div class="kszlab">${k} ${w}x${hh}</div><div style="width:${w}px;height:${hh}px">${kitSceneArt(kszImg(src),"",{shape:w<hh?"tall":"wide",cap:false}).replace('class="ksart','style="height:100%;aspect-ratio:auto" class="ksart')}</div></div>`};
+ h+=`<h3>7.1 thumbnails = the picture size table (replaces wide / tall / thumb): portrait PS · PM · PL · landscape LS · LM · LL · square Q56 · Q64 · Q72</h3><div class="kszrow" style="align-items:flex-end">${["PS","PM","PL"].map(k=>box(k,"img/ev-trieu-chinh.webp")).join("")}${["LS","LM"].map(k=>box(k,"img/ev-trieu-chinh.webp")).join("")}${["Q56","Q64","Q72"].map(k=>box(k,"img/ev-trieu-chinh.webp")).join("")}</div>`;
+ h+=`<h3>7.3 placeholder pictures: ONE set per real orientation (portrait 3:4 · landscape · square) × tone (light · dark), shown at every size of that orientation</h3><p class="kszn">Today: 2 event (640x480) + 2 act (384x506) pictures stretched into every slot. Spec: ph-{light,dark}-{p,l,q}.webp painted at the largest size of its orientation (PL 162x216 → 3:4 at 486x648, LL 860x260 → 3.3:1 at 1720x520, Q72 → 1:1 at 288x288) — ART REQUEST → Foreman C (all drawing is C's, OD 15:35Z). Below: the slots with today's pictures.</p>`;
+ h+=`<div>${[["portrait","img/ph-act-light.webp",["PS","PM","PL"]],["landscape","img/ph-event-light.webp",["LS","LM","LL"]],["square","img/ph-act-dark-v2.webp",["Q56","Q64","Q72"]]].map(([n,src,L])=>`<div class="kszlab">${n}</div><div class="kszrow" style="align-items:flex-end;margin-bottom:10px">${L.map(k=>box(k,src)).join("")}</div>`).join("")}</div>`;
+ return h}

@@ -13,7 +13,7 @@ const [,,URL,SZ,OUT,AS='frames,buttons,long',INJ]=process.argv;const [W,H]=SZ.sp
  await p.addStyleTag({content:'#krottip{display:none!important}'});if(INJ)await p.addScriptTag({content:fs.readFileSync(INJ,'utf8')});
  if(W<H)await p.evaluate(()=>{document.documentElement.classList.remove('kv2');document.documentElement.classList.add('kv1')});
  const out={};
- for(const a of AS.split(',')){await p.evaluate(a=>{document.querySelectorAll('.kmov,#kroul,#kroulw,#krottip').forEach(e=>e.remove());kitSizeSheet(a)},a);await p.waitForTimeout(4000);
+ for(const a of AS.split(',')){await p.evaluate(a=>{document.querySelectorAll('.kmov,#kroul,#kroulw,#krottip').forEach(e=>e.remove());kitSizeSheet(a)},a);await p.waitForTimeout(2000);await p.waitForFunction(()=>[...document.querySelectorAll('#kszsheet img')].every(i=>i.complete),null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(800);
   await p.evaluate(()=>document.querySelectorAll('#kszsheet .kszf.kpanel').forEach(f=>kitFrameApply(f)));await p.waitForTimeout(600);
   out[a]=await p.evaluate(()=>[...document.querySelectorAll('#kszsheet .kszf.kpanel')].map(f=>{const q=f.getBoundingClientRect(),R=f.querySelector('.kszright'),Bd=f.querySelector('.kszbody');
    const rb=R?Math.max(...[...R.children].map(c=>c.getBoundingClientRect().bottom)):0;const fig=f.querySelector('.kszfig img');let fe=null;if(fig&&fig.naturalWidth){const r=fig.getBoundingClientRect();fe=+((r.width/r.height)/(fig.naturalWidth/fig.naturalHeight)).toFixed(3)}
@@ -22,6 +22,6 @@ const [,,URL,SZ,OUT,AS='frames,buttons,long',INJ]=process.argv;const [W,H]=SZ.sp
    return{want:f.parentElement.dataset.want,got:f.dataset.ksz,w:q.width|0,h:q.height|0,emptyRight:Bd?Math.max(0,(Bd.getBoundingClientRect().bottom-12-rb)|0):0,emptyFig:fb?Math.max(0,(Bd.getBoundingClientRect().bottom-12-fb)|0):null,figAspectErr:fe,picFits:pics,scrolls:R?R.scrollHeight>R.clientHeight+1:false}}));
   const h=await p.evaluate(()=>document.getElementById('kszsheet').scrollHeight);
   await p.evaluate(h=>{const s=document.getElementById('kszsheet');s.style.position='absolute';s.style.height=h+'px';document.body.style.height=h+'px'},h);
-  await p.setViewportSize({width:W,height:Math.min(h+30,6000)});await p.waitForTimeout(800);
+  await p.setViewportSize({width:W,height:Math.min(h+30,6000)});await p.waitForTimeout(1500);await p.waitForFunction(()=>[...document.querySelectorAll('#kszsheet img')].every(i=>i.complete),null,{timeout:30000}).catch(()=>{});
   await p.screenshot({path:`${OUT}/sample-${a}-${process.env.TAGSZ||(W+'x'+H)}.jpg`,type:'jpeg',quality:80,fullPage:true});await p.setViewportSize({width:W,height:H});await p.evaluate(()=>{document.body.style.height=''})}
  console.log(JSON.stringify({W,H,out,errs}));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
