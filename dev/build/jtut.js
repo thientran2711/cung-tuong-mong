@@ -134,9 +134,8 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
   if(r.right+g+cw<=vw-M)C.push([r.right+g,hy,1e3]);if(r.left-g-cw>=M)C.push([r.left-g-cw,hy,1e3]);
   const pref=s.side==="above"?[1,0]:[0,1];
   let c=null;if(C.length){/* the side the step prefers when it fits, else the roomiest */c=C.find(x=>x[1]===(s.side==="above"?r.top-g-ch:r.bottom+g))||C.sort((a,b)=>b[2]-a[2])[0]}
-  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): narrow the card
-     into the wider free side so it never lies over the target */const sl=r.left-g-M,sr=vw-r.right-g-M;const sp=Math.max(sl,sr);
-   if(sp>=240){card.style.width=Math.floor(sp)+"px";const ch2=card.offsetHeight;L=sl>=sr?M:r.right+g;Tp=Math.min(Math.max(M,cy-ch2/2),vh-ch2-M);c=[L,Tp]}}
+  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): the card keeps its ONE frame size (owner 16/11, OD:L963) and lies at the free edge on the wider side; the rest of the target stays tappable */
+   const sl=r.left-g-M,sr=vw-r.right-g-M;L=sl>=sr?M:vw-cw-M;Tp=Math.min(Math.max(M,cy-ch/2),vh-ch-M);c=[L,Tp]}
   if(c){L=c[0];Tp=c[1]}
   else{/* too big: inside the target at its bottom (above the tab bar), or at the screen's free edge for a tap step */
    L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}

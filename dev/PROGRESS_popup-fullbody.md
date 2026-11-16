@@ -29,3 +29,15 @@ Every pop-up where a person appears = approved event template: LEFT full-body fi
 
 ## Files
 jpdlg.js (new kit part) · jtut.js (coach + tip use it; own card CSS removed) · jk4.js (info / rule / person exclusion removed) · assemble.py (jpdlg after jk4) · jkitpage.js (§50.2 sample) · KIT.md (§8 / 8.2 T4 retired, T6, §32.2 line, §50.2).
+
+## Test results (final build)
+| viewport | popup-fullbody.js | note |
+|---|---|---|
+| Fold 755x1000@2 | 33 OK · 3 WARN(figure measure pending, CDN) · 0 FAIL | |
+| iPad 1180x820@2 | 33 OK · 3 WARN · 0 FAIL | |
+| iPad Pro 1366x1024@2 | 33 OK · 3 WARN · 0 FAIL | |
+| 844x390 | 35 OK · 1 WARN · 0 FAIL | tutorial pages 560x358 x4 identical; steps 560x300 x4 identical |
+| 412x1058, 390x844 | SKIPPED | portrait phones show the game's own "Xoay ngang điện thoại" overlay (not a supported screen; the existing #modal template is garbled there too, pre-existing) |
+kit-conform.js 755x1000: 73 CONFORMS, 0 MIXED/CUSTOM, no floats, tutorial pages + steps one size.
+WARN = a figure still hidden because kitFigBody (CDN CORS measure) had not finished after 25 s in a long sequence (PEND:shop passes alone) — pre-existing latent flake in kitDpFit, not touched here.
+Interact tutorial step with no room (phone landscape): the card keeps its frame size and lies at the free edge (the old code narrowed the width = a second size).
