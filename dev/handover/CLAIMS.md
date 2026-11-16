@@ -73,3 +73,4 @@
 | npc-mind: personality/sở trường/thích/ghét inventory + NPC choice audit (OD:L1248-1249) | review/npc-mind | main s11 | session_01UV1SzjTpyN5PV8pMieq1vi (opus) | RUNNING | 16/11 06:53Z |
 | weather-fx-one reviewer | review/weather-fx-one-r1 | main s11 | session_01UV1SzkPmftvVeoQw464NEK (sonnet) | RUNNING | 16/11 06:55Z |
 | kit-keeper-2: event-frame #mb scroll, C32b curl speed, podium.js test | review/kit-keeper-2 | main s11 | session_01UV1SzjsFdjAm6CFetJ7BrB (sonnet) | RUNNING | 16/11 06:55Z |
+| pre-palace home roads for cn + nc (all branches), td pattern (OD:L1251) | review/kc-roads-cn-nc | main s11 | session_01UV1Szk5QsvVYvw2L45Qpqa (opus) | RUNNING | 16/11 06:59Z |
