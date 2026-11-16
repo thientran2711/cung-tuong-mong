@@ -75,3 +75,4 @@
 | kit-keeper-2: event-frame #mb scroll, C32b curl speed, podium.js test | review/kit-keeper-2 | main s11 | session_01UV1SzjsFdjAm6CFetJ7BrB (sonnet) | RUNNING | 16/11 06:55Z |
 | pre-palace home roads for cn + nc (all branches), td pattern (OD:L1251) | review/kc-roads-cn-nc | main s11 | session_01UV1Szk5QsvVYvw2L45Qpqa (opus) | RUNNING | 16/11 06:59Z |
 | D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | RUNNING | 07:06Z 16/11 |
+| cardflip-glow: reveal light on frame border, not over face; slower (owner bug) | review/cardflip-glow | main s11 | session_01UV1Szki5WiXQ1nthXM98EG (sonnet) | RUNNING | 16/11 07:12Z |

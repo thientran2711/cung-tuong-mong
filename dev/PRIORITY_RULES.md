@@ -31,7 +31,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/systems-other.md (4.4 KB): other game systems (items rules, map, sound, stat logs, minigame limits)
 - dev/rules/topic/time-calendar.md (3.7 KB): khắc, buổi, calendar, festivals, seasons (game rules)
 - dev/rules/topic/wording.md (8.3 KB): player-visible words, VANPHONG, no %, names of acts
-- dev/rules/topic/art-animations.md (13.2 KB): animations, page curl, effects, glow, sprites, videos
+- dev/rules/topic/art-animations.md (13.6 KB): animations, page curl, effects, glow, sprites, videos
 - dev/rules/topic/art-costumes.md (15.7 KB): costumes, hair, jewellery, veils, makeup, huadian, foreign costumes
 - dev/rules/topic/art-events-effects.md (26.3 KB): event, story, act and minigame pictures
 - dev/rules/topic/art-faces-figures.md (22.1 KB): faces, figures, portraits, ages, poses, proportions
