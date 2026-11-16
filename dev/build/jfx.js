@@ -332,7 +332,7 @@ function kfLoss(before,d,lg){const gone=before.filter(x=>x&&typeof x==="object"&
  for(const [title,g] of G.lose)kitLose(g.L,{why:"lose",title,text:g.text})}
 
 /* one reward item for kitReward from an inventory entry: the same name / painting / grade as the Tư trang bag (kgInfo) */
-function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.sub:(it.d||I.sub||""),img:I.src,tier:I.grade,gn:x.wk?I.gname:""}}
+function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.sub:(it.d||I.sub||""),img:I.src,tier:I.grade,gn:x.wk?I.gname:"",k:x.wk?"":x.k}}
 function kgWho(f,x){if(x&&x.giver)return x.giver;if(f==="emp")return"Hoàng thượng";if(f==="th")return"Thái hậu";if(f==="hh")return"Hoàng hậu";if(f==="nvp")return"Nội vụ phủ";
  try{const v=typeof RV==="function"?RV(f):null;if(v&&v.name)return v.name}catch(e){}return""}
 function kgGroups(add){const G=new Map();

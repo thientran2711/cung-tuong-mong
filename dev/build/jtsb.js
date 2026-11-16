@@ -132,7 +132,7 @@ PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const 
 PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;const ev=pp.k==="uyhiep";const e=pp.ix>=0?S.inv[pp.ix]:null;const want=e&&!e.h?e:null;const g=tsbBulPay(a,S);
  if(!want&&g<5&&!ev)return null;const o0=tsbBulO(a,S,ev);const nm=tsbNm(a);const hate=[];if((a.ghen||0)>=30)hate.push("ghen với ngươi");if(oan(a,S)>=15)hate.push("ôm oán ngươi");
  const what=want?`<b>${tsbItemN(want)}</b>${want.w?" (ngươi đang đeo)":""}`:`${g} lượng bạc`;
- const tile=want&&typeof kitItem==="function"?`<div class="tsbtile">${kitItem({src:tsbItemSrc(want),name:tsbItemN(want),grade:tsbItemGrade(want),size:"md"})}</div>`:"";
+ const tile=want&&typeof kitItem==="function"?`<div class="tsbtile">${kitItem({src:tsbItemSrc(want),name:tsbItemN(want),grade:tsbItemGrade(want),size:"md",data:typeof kitItemTap==="function"?kitItemTap({e:want}):""})}</div>`:"";
  const why=ev?`${tsbCap(nm)} nắm ${evG(a,S)} chứng cứ của ngươi, sai người đến nói: muốn chuyện yên thì nộp ${what}.`:`${tsbCap(nm)} cậy phẩm cao hơn ngươi${hate.length?` (nàng ${hate.join(", ")})`:""}, ${together(a,S)?"chặn ngươi giữa đường":"sai cung nữ đến tận cung ngươi"}, đòi ngươi nộp ${what}.`;
  const rep=pp.n>=2?`<p class="past">Đây là lần thứ ${pp.n} nàng làm khó ngươi.</p>`:"";
  const O=[];const lose=want?`${tsbItemN(want)} -1`:`Bạc -${g}`;
