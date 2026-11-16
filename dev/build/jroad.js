@@ -14,6 +14,8 @@ const ROAD14={};
 /* shared helpers for every road data file (jrd_<origin>.js): hostile/friendly roles are REAL both ways (OD:L1247) */
 const rdRel=(A,k,n)=>{const v=rv67(A,k);if(v)relAdd(S,v,n);return v};
 const rdOan=(A,k,n)=>{const v=rv67(A,k);if(v)oanAdd(v,S,n);return v};
+/* road-long flag (a choice in one chapter read by a later chapter of the same road): S.st.f14.fb, cleared with the road (same store as jrd_cn CN_FL / jrd_muoi MUOI_FL on B1/B3); key "<road>.<flag>" */
+const RD_FL=(k,v)=>{try{const F=S.st.f14.fb=S.st.f14.fb||{};if(v!=null)F[k]=v;return F[k]||0}catch(e){return 0}};
 const RDW=k=>()=>rdK()>0===(k>0)&&(k>0||rdK()<=0);/* opening filter: RDW(1) after a won chapter, RDW(0) after a middle or lost one */
 
 /* register one chapter: n = 5..11 */

@@ -313,7 +313,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
     Thái hậu hands her people to her; ch_bi shield = months of shelter (S.shield) won by the .11 win */
  td_an:{rank:3},
  /* nc roads: months of cấm túc (S.confined) a lost nc_gian / nc_tuc / nc_vuong beat puts her under */
- ncConf:{gian:3,tuc:1,vuong:1},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3},
+ ncConf:{gian:3,tuc:1,vuong:1},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3,conf:1},  /* ch_bi conf = months of cấm túc the Hoàng hậu puts {v} under at ch_bi .6 c2 (printed with kitNumVi) */
  /* B1 roads (jrd_dtq/jrd_muoi/jrd_cn): deadlines in months (printed as words), rank indexes (RANKS[i].n printed), thresholds */
  dtq_bien:{grain:3,speak:4},  /* grain: months before Hộ bộ closes the spring books (.5); speak: lowest rank index whose memorial reaches the desk (.9) */
  dtq_vu:{lim:2},              /* months before Đại Lý tự opens the đối chất (.9) */
