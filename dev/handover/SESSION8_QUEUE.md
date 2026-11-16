@@ -27,7 +27,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 ## C. Unfinished workers (§4 + §9)
 | C1 | review/face-sharp (her face hazy on stage; LIVE BUG) | RUNNING wave 1 |
 | C2 | review/rank-colour @ 99b8b62 (KIT §48.3) | REVIEWING together with pick-hint-r1 |
-| C3 | review/art-complete @ e8a7446e4 (eunuch ranks 360/360 DONE; kids 144, old looks 128, old-love men 56 left) | RUNNING part 2 |
+| C3 | review/art-complete @ e8a7446e4+ (part 2 PAUSED by coordinator to free a slot; resume from /home/user/wt/artc PROGRESS) | QUEUED |
 | C4 | review/act-pics2 @ 5f80a2727 (237/380 live; 143 left from thu-cu-lot) | RESUME later (QUEUED) |
 | C5 | review/skin-match @ 9bb31ae53 (1500/1500 on CDN) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C6 | review/mk-colour (8+8 presets, 8 vụng, lips QA, then reveal scene) | QUEUED |
@@ -88,7 +88,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C28 | review/room-btn (owner s8: header '‹ Phòng' bar → painted room icon button) | QUEUED-NEXT |
 | C29 | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
 | C30 | night-panel → merged into B1 | MERGED |
-| C31 | review/log-sync (owner s8: Sổ ghi Sủng 33→40 vs header 37; audit unlogged stat changes) | RUNNING |
+| C31 | review/log-sync @ e5189610 (jlogsync.js; night-talk unlogged effect = cause) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C32 | review/page-curl2 (owner s8 APPROVED: Tuần lục only — landscape curl, portrait paper slide; no swipe elsewhere; tab change animation only on tap) | QUEUED-NEXT |
 | C33 | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
 | C34 | review/contest-ui (owner s8: ALL study/work/minigame frames picture LEFT info RIGHT incl. result panel; REAL PRIZES by place (themed item, bạc, chest, title, Emperor gift) + podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
