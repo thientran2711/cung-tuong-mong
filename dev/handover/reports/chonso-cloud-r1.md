@@ -1,6 +1,6 @@
 # chonso-cloud-r1 review
 
-Verdict: PASS (see sha in the coordinator message). Merged review/chonso-cloud 523dc56af + review/chonso-cloud-ios 2c3df1d15 onto origin/main c053ee925 as review/chonso-cloud-r1 (index.html / sw.js / assets.json conflicts = generated files: took main's, rebuilt with dev/site/build_site.sh). dev/tools/quickcheck.sh does not exist on main, not run.
+Verdict: PASS. Re-reviewed on the worker new sha 9361f6604 (merged with main 0188d595) + 1-line reviewer fix; same results: save-slots 84, chonso-cloud 26, cloud-save 45, coop-e2e 59/59, coop-lobby, ios_install_first all PASS.
 
 ## Tests (all on the result tree)
 - save-slots 84 ok / ALL OK; chonso-cloud 26/26; cloud-save 45/45; coop-e2e (live worker) 59/59.
