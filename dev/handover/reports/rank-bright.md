@@ -15,7 +15,7 @@ Computed tone before -> after: Đáp ứng 135,102,56 -> 149,102,21 (see sheet);
 755x1000@2 + 1180x820@2: kit-page 0 page errors (the 'lot/rcpL/pal' sample errors are IDENTICAL on origin/main: samples need a started game); kit-conform 755: 84/15 vs main 85/15 (count wobbles run to run), 1180: 86/15, floats none; boot (rank-title day/kit, rank-bright) 0 page errors, no overlap/cut tags.
 Sheet: dev/handover/reports/rank-bright/before-after.jpg (Fold, seeded, bg loaded: stage tags / person pop-up / Ân oán list). Script dev/test/rank-bright.js.
 ## Rework 13:30Z - 13:50Z (main s17: change was too subtle)
-Jewel-tone bases (RCOL #c4861a #12b84a #1f6cff #ff3d8f #a23cff #ff1f3d #ff6a00 #ffc400, MRCOL/ERCOL brighter). Framed UI (paper) = PLAIN vivid text, no stroke/shadow/glow (owner 15/11 22:25Z + 16/11 13:50Z; KIT 48.1h overwritten); light halo only on paintings (48.1d/e, unchanged).
+Jewel-tone bases (RCOL #c4861a #12b84a #1f6cff #ff3d8f #a23cff #ff1f3d #ff6a00 #ffc400, MRCOL/ERCOL brighter). Framed UI (paper) = PLAIN vivid text, no stroke/shadow/glow (owner 15/11 22:25Z + 16/11 13:50Z; KIT 48.1h overwritten); on paintings (OD 13:55Z option 1) EVERY person glows: rank line in its rank colour, name line light-gold, title in tier colour, her tag brighter (KIT 48.1d/e/h overwritten).
 ## Rework 2 (owner 13:35Z: Đáp ứng bronze / gold too pale on paper)
 Tone floor 2.8->3.6:1 (deeper, same hue, still saturated); sheet before-after3.jpg (all ranks on paper + zoomed crops).
 
