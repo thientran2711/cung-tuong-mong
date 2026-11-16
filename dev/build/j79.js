@@ -478,7 +478,8 @@ function kitGameResult(r){r=r||{};const rows=[];
    fits ONE screen with no scrolling, background art stays visible, each fact once, buttons always visible ---------- */
 /* kitTiles: a grid of kit stat cells, tile size (kitStatCell, jk4 KIT 32) */
 function kitTiles(list){return `<div class="kstgrid">${list.map(([l,v,c])=>kitStatCell(null,kitGloss(l),v,{cls:"kst-tile",vcls:c,nobar:true})).join("")}</div>`}
-function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||/^Nhập cung/.test(String(m.t||""))||(m.kit&&m.kit.scene)))}
+/* review/newgame-ui: the opening "Nhập cung" card that names its stage (j2: stage + headArt) is an EVENT panel (KIT 32.2 frame), not a scene panel */
+function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||(/^Nhập cung/.test(String(m.t||""))&&!m.stage)||(m.kit&&m.kit.scene)))}
 function kpIdentity(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb");const o=S.origin,srv=typeof isSrv==="function"&&isSrv();
  const pos=srv||o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;const pts=typeof pdGet==="function"?pdGet():0;
  const opts=mb.querySelector(".nlopts");if(opts)opts.remove();
@@ -747,18 +748,30 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  const port=H>W;const dw=Math.round(port?W*.58:Math.min(560,W*.54));d.style.setProperty("width",dw+"px","important");d.style.setProperty("max-width",dw+"px","important");
  const pad=Math.round(W*(port?.03:.025));const colR=W-pad-dw-8,colL=port?0:Math.round(W*.01);const colW=colR-colL;
  const want=M.__kidWant||im.getAttribute("src")||"";const s1=kitTn(want)||want;/* measured on the small copy (same fractions, tiny canvas) */
- const fb=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
- if(!fb){im.style.visibility="hidden";return}im.style.visibility="";
+ const fb0=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
+ /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
+ const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
  const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);let ih=Hs/bf,iw=ih*ar;
  /* KIT 32.2a width test (head → waist must fit the column); only then is she drawn smaller (rare: a very wide headdress) */
  const k=10,wl=(fb.wl||[])[k],wr=(fb.wr||[])[k];if(wl!=null&&wr!=null){const need=(wr-wl)*iw;if(need>colW*.98){const f=colW*.98/need;ih*=f;iw*=f}}
- const cx=((fb.cl!=null?(fb.cl+fb.cr)/2:(fb.l+fb.r)/2));let left=Math.round((colL+colW/2)-cx*iw);const top=Math.round(floor-fb.b*ih);
+ /* the whole painted figure fits the column → centred as a whole; wider → the body core is centred and the robe is cut at the edges */
+ const pw=(fb.r-fb.l)*iw;const cx=pw<=colW?(fb.l+fb.r)/2:((fb.cl!=null?(fb.cl+fb.cr)/2:(fb.l+fb.r)/2));let left=Math.round((colL+colW/2)-cx*iw);
+ if(pw>colW){const lo=colR-fb.r*iw,hi=colL-fb.l*iw;left=Math.round(Math.min(hi,Math.max(lo,left)))}const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  const fe=Math.round(colR-left);const mk=`linear-gradient(to right,#000 ${fe-24}px,transparent ${fe}px)`;im.style.setProperty("-webkit-mask-image",mk);im.style.setProperty("mask-image",mk);
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
-(function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}return r}})();
-(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
+/* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
+   opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
+   (its 60 fps WebGL redraw competed with the face picker's decodes: one page turn waited ~470 ms on the GPU read-back); it restarts when
+   the stage shows again. */
+function kitStageCovered(){try{const M=$("modal");if($("kroul"))return true;if(!M||M.hidden||!M.classList.contains("kpscene"))return false;const bg=getComputedStyle(M).backgroundImage;return !!bg&&bg!=="none"}catch(e){return false}}
+function kitStagePause(){try{if(typeof PX==="undefined"||!PX.app)throw 0;const cov=kitStageCovered();const t=PX.app.ticker;if(cov&&t.started){t.stop();PX.app.canvas.style.visibility="hidden"}else if(!cov&&!t.started&&!document.hidden){PX.app.canvas.style.visibility="";t.start()}}catch(e){}
+ try{if(typeof KFX!=="undefined"&&KFX.app){const t=KFX.app.ticker;if(kitStageCovered()){if(t.started){t.stop();KFX.__kpause=1}}else if(KFX.__kpause){KFX.__kpause=0;if(typeof kfWake==="function")kfWake()}}}catch(e){}}
+(function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitStagePause()})};const go=()=>{const M=$("modal");if(!M||!document.body)return setTimeout(go,300);
+ new MutationObserver(kick).observe(M,{attributes:true,attributeFilter:["class","hidden"]});new MutationObserver(kick).observe(document.body,{childList:true});setInterval(kitStagePause,1500)};go()})();
+(function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig");const d=M.querySelector(".dlg");if(d&&!(Q[0]&&Q[0].nl)){d.style.removeProperty("width");d.style.removeProperty("max-width")}}}catch(e){}return r}})();
+(function(){const b0=kpBuild;kpBuild=function(M,m){try{if(!(m&&m.nl)){const d=M.querySelector(".dlg");if(d){d.style.removeProperty("width");d.style.removeProperty("max-width")}M.__kidWant=""}}catch(e){}b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(kpIsScene(m)){const t=$("rtoast");if(t)t.classList.remove("on")}}catch(e){}}})();
 /* ---- 4. status grouped by purpose ---- */
 const KH_GRP=[["Tư chất",["sac","tai","tamco","duc","mat","srk","merit"]],["Nhân tâm",["th","hh","maid","tin","chu"]],["Ân sủng",["con","dem","an","aw","nt"]],["Thời gian",["buoi","lot","bl","wage","date"]]];

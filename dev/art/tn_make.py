@@ -26,7 +26,7 @@ for n in names:
         if kind == "por": w, h = size, round(im.height * size / im.width)
         else: h, w = size, round(im.width * size / im.height)
         out = os.path.join(R, "img", "tn", f"{kind}-{n}.webp")
-        im.resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=q, method=6)
+        im.resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=q, method=4)
         tot[kind][0] += os.path.getsize(f); tot[kind][1] += os.path.getsize(out)
 json.dump({"v": 1, "have": names}, open(os.path.join(R, "img", "TN.json"), "w"), separators=(",", ":"))
 for k, (a, b) in tot.items(): print(f"{k}: {len(names)} files, {a//1024} KB -> {b//1024} KB (avg {b/len(names)/1024:.1f} KB)")

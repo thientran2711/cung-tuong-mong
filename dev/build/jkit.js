@@ -15,7 +15,8 @@ window.KIT_FIG=KIT_FIG;
    phoenix headdresses above the head are NOT counted as height. Returns the result when ready, else null and calls cb once measured.
    (Same code as review/men jk4; the cache lives on window so a second identical copy can never clash.) */
 function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});const o=KIT_FB[src];if(o&&o.v)return o.v;if(o){o.w.push(cb);return null}const e={v:null,w:[cb]};KIT_FB[src]=e;
- const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";
+ const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};const im=new Image();im.decoding="async";/* review/newgame-ui: CORS read — since the pictures moved to the CDN (11/15) a plain cross-origin load tainted the canvas, getImageData threw,
+   and EVERY body measure fell back to the whole picture (t 0, b 1, ht 0): figures were sized by their canvas, not their body */im.crossOrigin="anonymous";
  im.onload=()=>{let v={t:0,b:1,l:0,r:1,ht:0,ar:im.naturalWidth/Math.max(1,im.naturalHeight)};try{const nh=im.naturalHeight,nw=im.naturalWidth,h=Math.min(500,nh),w=Math.max(1,Math.round(nw*h/nh));
    const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;
    let t=h,b=-1,l=w,r=-1;for(let y=0;y<h;y++){const q=y*w*4;for(let i=0;i<w;i++){if(d[q+i*4+3]>40){if(y<t)t=y;if(y>b)b=y;if(i<l)l=i;if(i>r)r=i}}}
