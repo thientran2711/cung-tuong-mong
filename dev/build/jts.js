@@ -348,6 +348,6 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
 .ts-it.ts-on .kitb{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e) drop-shadow(0 0 2px #be8c1ee6));transform:scale(1.06)}
 #kg82 .kgbox{position:relative}
 #kg82 .ts-guard{position:absolute;left:50%;top:38%;transform:translateX(-50%);z-index:2;min-height:44px}
-@media (max-width:420px){#kg82 .ts-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 `;document.head.appendChild(st)})();
 window.TSA=Object.assign(TSA,{dangerOf:tsDangerOf,dangerPanel:tsDangerPanel,promoPanel:tsPromoPanel,summonMe:tsSummonMe,summonWeek:tsSummonWeek,denWish:tsDenWish,denCard:tsDenCard,dressAnnounce:tsDressAnnounce,dressHold:tsDressHold,leHost:tsLeHost,birthReward:tsBirthReward,festPre:tsFestPre});

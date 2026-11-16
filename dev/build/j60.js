@@ -7,8 +7,8 @@
         kitKnown(p) (hook, default true, overridable: assign window.kitKnown) · KIT_RANK_COL[rank|'cold'] (live view of RCOL).
    Wraps pcPort, mdH, pcard, renderStage and the face constructors; no other module is edited. ================= */
 const KIT_DIR="img/kit/";
-/* ONE rank palette: the global RCOL (j1, re-set by j59) for ranks 0..7, plus lãnh cung grey; read live, never copied */
-const KIT_COLD_COL="#cfd3d8";
+/* ONE rank palette: the global RCOL (j1) for ranks 0..7, plus lãnh cung grey; read live, never copied */
+const KIT_COLD_COL=RCOL_COLD;
 const KIT_RANK_COL=new Proxy({},{get:(t,k)=>k==="cold"||k==="8"?KIT_COLD_COL:(typeof RCOL!=="undefined"?RCOL[k]:undefined),has:(t,k)=>k==="cold"||(+k>=0&&+k<8)});
 function kitRankCol(r){return r==="cold"?KIT_COLD_COL:RCOL[Math.max(0,Math.min(7,+r||0))]}
 /* roles with their frame / ground / rim metal */
@@ -18,7 +18,7 @@ const KIT_ROLES={player:{n:"Ngươi",sex:"f",metal:null},consort:{n:"Phi tần",
  official:{n:"Quan",sex:"m",metal:"#a8742f"},physician:{n:"Thái y",sex:"m",metal:"#c9a86a"},man:{n:"Nam nhân",sex:"m",metal:"#c9ccd2"},royal:{n:"Vương gia",sex:"m",metal:"#d9b25f"},
  guard:{n:"Thị vệ",sex:"m",metal:"#9aa2a8"},unknown:{n:"Người lạ",sex:"f",metal:"#b8bcc2"},other:{n:"",sex:"f",metal:"#c9a24a"}};
 /* servant rank palettes (owner 11/14): maids thô sử..nữ quan, eunuchs tiểu thái giám..tổng quản; a global MRCOL/ERCOL wins when defined */
-window.KIT_MRCOL=window.KIT_MRCOL||["#9aa3a8","#5fa39a","#4f74a8","#a0584a","#6a5a8e"];window.KIT_ERCOL=window.KIT_ERCOL||["#8f9a8a","#5f8a6a","#3f6a8a","#7a4a3a"];
+window.KIT_MRCOL=window.MRCOL;window.KIT_ERCOL=window.ERCOL;/* aliases of the j1 palette, never copies of values */
 function kitServCol(role,r){const M=typeof MRCOL!=="undefined"?MRCOL:window.KIT_MRCOL,E=typeof ERCOL!=="undefined"?ERCOL:window.KIT_ERCOL;const L=role==="eunuch"?E:M;return L[Math.max(0,Math.min(L.length-1,+r||0))]}
 const KIT_ORIGINS=["tt","dtq","muoi","cn","nc","td","ch","thd"];
 /* the hook another worker implements; keep the name; override by assigning window.kitKnown */
@@ -79,7 +79,7 @@ function kitFace(p){try{if(!p)return{src:"",ini:"?"};if(p===S)return pMe();if(p=
  if(p.kind&&typeof pFaceOf==="function"&&!p.name)return pFaceOf(p);if(rivals.includes(p))return pv(p);if(allKids().some(([k])=>k===p))return kidFace(p);
  if(p.role==="maid"||p.role==="eunuch")return pServ(p);if(S.court){const k=Object.keys(S.court).find(x=>S.court[x]===p);if(k)return k==="ty"?pDoc():pEunCourt(k)}
  if((S.men||[]).includes(p))return pMan(p);if(typeof pMin==="function"&&typeof CLANS!=="undefined"&&p.c&&CLANS.includes(p.c))return pMin(p);if(typeof h54Face==="function"&&(p.off||p.house))return h54Face(p)}catch(e){}
- const f={src:"",ini:String(p.name||"?").split(" ").pop()[0]||"?",col:"#8a7a6a"};f.__kp=p;f.__kr=personRoleRank(p);return f}
+ const f={src:"",ini:String(p.name||"?").split(" ").pop()[0]||"?",col:KIT_ROLE.slate};f.__kp=p;f.__kr=personRoleRank(p);return f}
 /* ONE helper: size "lg" = the tall 3:4 frame (pframe), "big"/"sm"/"xs"/"" = round avatar */
 function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.size==="frame"?pframe(f):mdH(f,o.size||"")}
 /* the tall frame: one picture per frame (550x1037: every frame has the SAME portrait opening 384x506 at (83,214); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); the box is 480 canvas units wide and as tall as the canvas, the stage (.kin) is scaled by the opening (box width / 480) and centred, so every opening is identical; side ornaments may reach past the box edges, crest and tassel are inside its height */

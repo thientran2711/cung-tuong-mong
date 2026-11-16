@@ -157,11 +157,11 @@ const css=document.createElement("style");css.id="k3-layout";css.textContent=`
 /* stage frame (KIT 31.3): portrait screens get a FIXED aspect — Fold/tablets 600–999 px wide: 2:1 (width:height); phones < 600 px: 3:2.
    The panel below takes the rest and scrolls. Landscape: the left column (unchanged). */
 :root{--kstH:calc((100vw - 16px) / 2)}
-@media (max-width:599px){:root{--kstH:calc((100vw - 12px) / 1.5)}}
+/* kv3:.kv1 */:root:where(.kv1){--kstH:calc((100vw - 12px) / 1.5)}
 /* 3 · ONE STAGE SIZE (portrait): same on every tab; the panel scrolls */
-@media (max-aspect-ratio:1/1){
- html body .game#game:not(.maptab),html body .game#game.cardtab:not(.maptab){grid-template-rows:auto var(--kstH) minmax(0,1fr) auto!important}
-}
+/* kv3:.kv1 */
+ html:where(.kv1) body .game#game:not(.maptab),html:where(.kv1) body .game#game.cardtab:not(.maptab){grid-template-rows:auto var(--kstH) minmax(0,1fr) auto!important}
+
 /* 1 · TOP BAR: one slim row */
 html body header.hud{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me stats"!important;align-items:center!important;gap:0 10px!important;padding:4px 8px!important;min-height:0!important;flex-wrap:nowrap!important}
 html body header.hud>#menu{grid-area:menu;min-height:40px!important;min-width:40px!important;padding:0 8px!important;align-self:center}
@@ -248,10 +248,13 @@ window.kitBackBtnHtml=kitBackBtnHtml;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0",title:"Khung thiết kế · một trang = nửa trang đôi iPad (co giãn đều)",
  html:()=>{const F=window.KIT_FRAME||{spread:{w:1180,h:820},page:{w:590,h:820}},k=.2,v=(typeof kitView==="function"?kitView():{pages:2}),pg=(t,c)=>`<div style="width:${F.page.w*k}px;height:${F.page.h*k}px;border:1px solid var(--line);background:${c};display:grid;place-items:center;font-size:.7rem;color:var(--ink)">${t}</div>`;
   return `<div class="kitpg-row" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap"><div><div style="display:flex">${pg("Phòng (trang trái)","#f3e6c9")}${pg("Thẻ đang mở (trang phải)","#fbf3dd")}</div><small>Ngang: ${F.spread.w}×${F.spread.h}</small></div><div>${pg("Phòng ⇄ thẻ","#fbf3dd")}<small>Dọc: ${F.page.w}×${F.page.h}</small></div><small>Đang xem: ${v.pages===1?"một trang":"trang đôi"}</small></div>`}})}catch(e){}
+/* KIT §0 sample: the ONE-PAGE bottom bar — 8 tabs as TWO ROWS OF 4 + Sang buổi as one tall button (owner 16/11 13:25Z (C); the real bar gets the same from :where(.kv1) in p1.html + tabsFit) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§0b",title:"Thanh tab dưới · một trang: 2 hàng x 4 nút + Sang buổi",
+ html:()=>`<nav class="bar" style="width:582px;max-width:100%;display:flex;gap:5px;align-items:stretch"><div class="tabs" style="flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(36px,1fr);gap:4px;overflow:visible">${["Hành sự","Dư đồ","Hậu cung","Giao tình","Hoàng tự","Tư trang","Tài nghệ","Mệnh truyện"].map((t,i)=>`<button type="button" aria-selected="${i===0}" style="min-height:36px;padding:2px 4px;border-radius:8px;font-size:.86rem">${t}</button>`).join("")}</div><button type="button" class="main" style="width:84px;padding:4px 6px;white-space:normal;font-size:.95rem;line-height:1.15;border-radius:8px">Sang buổi</button></nav>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 /* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
-function k3Phone(){try{return kitView().pages===1}catch(e){return innerWidth<innerHeight}}
+function k3Phone(){try{return kitView().pages===1}catch(e){return false}}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
@@ -299,12 +302,12 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 .kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .kbackb:active .kbi{transform:scale(.94)}
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
-@media (max-width:599px){html body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
- html body header.hud>#k3room.kbackb .kbl{display:none}
+/* kv3:.kv1 */html:where(.kv1) body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
+ html:where(.kv1) body header.hud>#k3room.kbackb .kbl{display:none}
  /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
- html body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
- html body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
- html body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
+ html:where(.kv1) body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
+ html:where(.kv1) body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
 html body header.hud>#k3room[hidden]{display:none!important}

@@ -3,7 +3,7 @@
    usage: node dev/test/act-pics.js <baseURL> <outdir> [weeks=4] [seed=7] [shots=0]
    Writes <outdir>/result.json {weeks:[{head,pages:[{title,facts:[[text,art,label]]}]}], logs, dupAdj, dupL, errs};
    with shots>0 also week<N>.jpg = the "Việc của ngươi" spread of the first <shots> weeks. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT,WK,SEED,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,OUT,WK,SEED,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const WEEKS=+(WK||4);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true});
  const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[],bad=[];p.on('pageerror',e=>errs.push(e.message));
