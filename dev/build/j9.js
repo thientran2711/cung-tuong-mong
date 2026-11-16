@@ -10,9 +10,10 @@ function ghenOf(v,t){if(!v||!t||v===t||v===S||v.coop)return 0;if(t===S)return v.
 function ghenAdd(v,t,n){if(!v||!t||v===t||v===S||v.coop||!n)return;if(t===S){v.ghen=cl(Math.round((v.ghen||0)+n),0,100);return}v.gp=v.gp||{};const x=cl(Math.round((v.gp[t.id]||0)+n),0,100);if(x)v.gp[t.id]=x;else delete v.gp[t.id]}
 /* everyone else's jealousy of p rises by n (her: ghenAll, the same rule incl. the Emperor's Đa tình) */
 function ghenAt(p,n){if(!p)return;if(p===S)return ghenAll(n);const m=has("datinh")?1.5:1;liveRivals(true).forEach(v=>{if(v!==p)ghenAdd(v,p,Math.round(n*m))})}
-function ghenMax(v){let g=ghenOf(v,S);for(const k in (v&&v.gp)||{})g=Math.max(g,v.gp[k]||0);return g}
+function ghenGone(k){if(+k>=900)return false;const t=RV(+k)||RV(k);return !t||!t.alive}/* a dead NPC target (pid keys >= 900 = co-op friend, kept while away) */
+function ghenMax(v){let g=ghenOf(v,S);for(const k in (v&&v.gp)||{})if(!ghenGone(k))g=Math.max(g,v.gp[k]||0);return g}
 /* weekly drift, the same for every pair (was: toward her only) */
-function ghenWeek(v){const B=BAL.ghenW;for(const t of others(v)){if(t!==S&&(!t.alive||t.out))continue;
+function ghenWeek(v){const B=BAL.ghenW;if(v.gp)for(const k in v.gp)if(ghenGone(k))delete v.gp[k];const L=others(v);if(!L.includes(S))L.push(S);/* as a cung nữ she is not in consorts(): her row keeps its old weekly drift */for(const t of L){if(t!==S&&(!t.alive||t.out))continue;
  if((t.sung||0)>(v.sung||0)-B.sungGap&&!v.queen&&roll(B.sungP))affAdd(v,t,-1);if(v.queen&&rkOf(t)>=B.qRank&&roll(B.qP))affAdd(v,t,-1);
  if((t.sac||0)>B.sac)ghenAdd(v,t,1);ghenAdd(v,t,-(aff(v,t)>B.relHi?B.decayHi:B.decay))}}
 function rel(x,y){return aff(x,y)}

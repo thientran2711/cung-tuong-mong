@@ -135,7 +135,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];P.S.empKnown={};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
  /* NPCs start fresh toward the new face */
- (C2.W.R||[]).forEach(r=>{for(const m of ["rl","ro","gp","ep"]){r[m]=r[m]||{};r[m][mp]=m==="gp"?R(15):0}if(r.evm)r.evm[mp]=0;if(r.resHead===mp)r.resHead=null});
+ (C2.W.R||[]).forEach(r=>{for(const m of ["rl","ro","gp","ep"]){r[m]=r[m]||{};r[m][mp]=0/* npc-jealousy r2: no starting jealousy for anyone (was a guest-side R(15) the host never saw) */}if(r.evm)r.evm[mp]=0;if(r.resHead===mp)r.resHead=null});
  const wasSrv=!!(S.srv&&!S.srv.risen);
  fromCanon(C2);CW.life=P.life;
  if(known&&S.emp&&!Object.keys(S.emp.known||{}).length)S.emp.known={};
