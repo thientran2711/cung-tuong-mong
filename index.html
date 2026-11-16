@@ -2112,7 +2112,7 @@ function walkWhy(tc){const left=Math.max(0,4-used);return left<=0?"hết khắc"
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(typeof CW!=="undefined"&&CW&&CW.on)return null;
+function walkSpill(k){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null;if(window.COOPW&&COOPW.on)return null; /* co-op world (jcoopworld: window.COOPW; the global CW is a face-key helper) */
  const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,4-used);if(tc<=left)return null;
  let a={ok:true};if(typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
  return{k,tc,now:left,rest:tc-left,b:b+1,ok:!!a.ok,why:a.why||""}}
@@ -4168,7 +4168,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
   if(!window.__accSilent&&!S.dead&&!Q.length&&!S.out&&!S.confined){const st=accState(k);const opts=[];
    if(st.ask&&!st.empAway)opts.push({n:st.ask==="yk"?"Xin yết kiến":"Xin bái kiến",fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)});
    if(st.kind&&st.sneakOk)opts.push({n:"Lẻn vào",fx:{},x:accSneakLine(k,st.tc),go:()=>setTimeout(()=>accSneak(k),0)});
-   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: không đủ khắc (cần ${st.tc+2}, còn ${4-used}).</p>`:""}`,opts});showModal()}
+   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: ${typeof j77Bound==="function"?j77Bound(st.tc+2):`không đủ khắc (cần ${st.tc+2})`}.</p>`:""}`,opts});showModal()}
   return}
  const prev=S.place;const r=g0.apply(this,arguments);
  try{if(k==="lc"&&S.place==="lc"&&prev!=="lc"&&!S.out){apply({danh:-2});log("Bị thấy lui tới Trường Môn viện: Danh -2.");if(S.visit)S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+"Có người thấy ngươi ở lãnh cung: Danh -2."}}catch(e){}
@@ -10136,6 +10136,23 @@ function j76left(){return !S?0:(4-used)+4*(B4L-(S.buoi||0))}
 function j76nextName(){const b=Math.min(B4L,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
 function j76spills(c){return !!S&&!S.dead&&c>0&&used<4&&used+c>4&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<B4L&&c<=j76left()}
+/* ===== THE KHẮC NEED CHIP READS THE DAY (owner 15/11, "Khắc check must use the whole DAY's khắc") =====
+   One source for every "N khắc" item of a Cần row (act cards, person acts, servant / event options): j63/j79/jclose and jtsb used
+   to test used+c<=4 (this buổi only) while can() above already let the act spill. Green when it fits this buổi ("còn N") or spills
+   ("sang buổi trưa"); red only when it really cannot be done, saying why in words:
+   - bound to this buổi (a card with a.b, a sáng-only lesson: window w) → "không kịp xong trong buổi sáng (cần N khắc)";
+   - the day is short (buổi tối never runs past the night) → "hết khắc trong ngày (cần N, còn M)";
+   - 0 left / a spill already running → "hết khắc buổi này (cần N)" (the buổi turns first).
+   A card bound to ANOTHER buổi gets a plain ✓ "N khắc": its own Buổi chip says why it is closed now. */
+function j76arrive(c){const left=Math.max(0,4-used);let b=S.buoi||0,r=c-left;while(r>0&&b<B4L){b++;r-=4}return BUOI[b].replace("Buổi ","buổi ")}
+function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:true};const left=Math.max(0,4-used),b=S.buoi||0;
+ if(a&&a.b!=null&&a.b!==b)return{t:`${c} khắc`,ok:true};
+ if(used+c<=4)return{t:`${c} khắc (còn ${left})`,ok:true};
+ const w=win||(a&&a.b!=null)||window.__j76win;
+ if(left<=0||S.j76carry)return{t:`hết khắc buổi này (cần ${c})`,ok:false};
+ if(w)return{t:`không kịp xong trong ${BUOI[b].toLowerCase()} (cần ${c} khắc)`,ok:false};
+ if(c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false};
+ return{t:`${c} khắc (sang ${j76arrive(c)})`,ok:true}}
 /* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
    Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
    Exempt: 1-khắc acts, acts that restore Sức and cost none (rest), and walking (map, visits). */
@@ -10147,10 +10164,16 @@ can=function(c){if(window.__j76paid)c=Math.max(0,c-window.__j76paid);if(!S||S.de
  if(used+c<=4)return true;return j76spills(c)};
 
 (function(){const s0=spend;spend=function(c){if(window.__j76paid){window.__j76paid=0;return}const before=used;const r=s0.apply(this,arguments);
- try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);used=4}}catch(e){}return r}})();
+ try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);S.j76ck=j76key();used=4}}catch(e){}return r}})();
 /* the clock turns: carry the spilled khắc into the new buổi; a new day drops nothing because tối never spills */
-(function(){const n0=nextBuoi;nextBuoi=function(){if(!S)return n0.apply(this,arguments);const b0=S.buoi||0,c=S.j76carry||0;const r=n0.apply(this,arguments);
- try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(4,c);S.j76carry=c>4?c-4:0}else S.j76carry=0;if(!S.dead){save();render()}}}catch(e){}return r}})();
+function j76key(){try{return wkKey()+"/"+(S.buoi||0)}catch(e){return String(S&&S.buoi)}}
+/* co-op safety: a carry belongs to the buổi it was spent in. If the buổi changed without this wrapper (co-op re-sync sets S.buoi and
+   used=0 directly), the next buổi still pays it; anything older is dropped, never charged to a later buổi. */
+function j76carryFix(){try{if(!S||!S.j76carry||!S.j76ck||window.__j76nb)return;const k=j76key();if(k===S.j76ck)return;
+ const [w0,b0]=S.j76ck.split("/");if(w0===wkKey()&&+b0+1===(S.buoi||0))used=Math.max(used,Math.min(4,S.j76carry));S.j76carry=0;S.j76ck=""}catch(e){}}
+(function(){const r0=render;render=function(){j76carryFix();return r0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){if(!S)return n0.apply(this,arguments);const b0=S.buoi||0,c=(S.j76ck&&S.j76ck!==j76key())?0:(S.j76carry||0);if(!c&&S.j76carry){S.j76carry=0;S.j76ck=""}window.__j76nb=1;let r;try{r=n0.apply(this,arguments)}finally{window.__j76nb=0}
+ try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(4,c);S.j76carry=c>4?c-4:0;S.j76ck=S.j76carry?j76key():""}else{S.j76carry=0;S.j76ck=""}if(!S.dead){save();render()}}}catch(e){}return r}})();
 /* why an act cannot be done now, in words */
 (function(){const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(can(c))return"";const sw=j76sucWhy(c);if(sw)return sw;
  if(S.j76carry||used>=4)return w0.call(this,c)||"hết khắc buổi này";if(used+c>4&&window.__j76win)return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
@@ -10162,8 +10185,8 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
 /* walking is never locked by the Sức floor */
 ["goTo","mapHTML","seeBtn","visitBtn","goSee","visitPal"].forEach(f=>{try{const o=window[f];if(typeof o!=="function")return;window[f]=function(){const t=window.__j76trip;window.__j76trip=1;try{return o.apply(this,arguments)}finally{window.__j76trip=t}}}catch(e){}});
 (function(){const cw=cardWhy;cardWhy=function(a){return j76win(a,()=>{const r=cw.apply(this,arguments);if(/^Hết khắc buổi này — chờ buổi sau$/.test(r||"")){const w=whyTime(cardCost(a));return j76cap(w)||r}return /^(không kịp xong|hết khắc trong ngày)/.test(r||"")?j76cap(r):r})}})();
-(function(){const ch=cardH;cardH=function(a,i){return j76win(a,()=>{let h=ch.apply(this,arguments);
- try{const c=cardCost(a);if(!/\sdisabled>/.test(h.slice(0,h.indexOf(">")+1))&&j76spills(c))h=h.replace(/<\/span>(\s*)(<span class="kinfo"|<\/button>\s*$)/,`<span class="kl">Ghi chú</span><span>${eff("kéo sang "+j76nextName())}</span></span>$1$2`)}catch(e){}return h})}})();
+/* deck cards: the spill is said once, on the Cần khắc chip (j76need: "2 khắc (sang buổi trưa)"), no second Ghi chú line */
+(function(){const ch=cardH;cardH=function(a,i){return j76win(a,()=>ch.apply(this,arguments))}})();
 (function(){const a0=act;act=function(i){return j76win(deck[i],()=>a0.apply(this,arguments))}})();
 /* learning with the Thái hậu is a sáng-only lesson: it must finish in sáng */
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(mode!=="th")return l0.apply(this,arguments);const w=window.__j76win;window.__j76win=1;try{return l0.apply(this,arguments)}finally{window.__j76win=w}}})();
@@ -10176,7 +10199,7 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
  try{if(!S||S.dead)return h;const trip=/data-(see|visit|follow)=/.test(at||"");const m=String(sm||"").replace(/<[^>]+>/g,"").match(/(\d+)\s*khắc/);
   let c=m?+m[1]:(window.__j76c||window.__j76lastC||0);if(trip&&m)c=+m[1]+1;
   if(why&&/^(đến nơi sẽ hết khắc — chờ buổi sau|hết khắc buổi này|Hết khắc buổi này — chờ buổi sau|hết khắc)$/.test(why)&&c){const w=whyTime(c);if(w&&w!==why)h=h.replace(`<span class="kwhy">${why}</span>`,`<span class="kwhy">${w}</span>`)}
-  else if(!why&&c&&j76spills(c))h=h.replace(/<\/small><\/button>$/,`<span class="kl">ghi chú</span><span class="ef n">${trip?"đến nơi đã sang "+j76nextName():"kéo sang "+j76nextName()}</span></small></button>`)}catch(e){}return h}})();
+  else if(!why&&c&&!trip&&j76spills(c)&&!/data-kneed=/.test(h))h=h.replace(/^<button /,`<button data-kneed="${encodeURIComponent(JSON.stringify([j76need(c)]))}" `)}catch(e){}return h}})(); /* the spill is said on the kit Cần chip ("✓ 2 khắc (sang buổi trưa)"), like the deck cards */
 /* a note never stays on a button that ended up greyed by a later gate (rank, access) */
 ["visitBtn","seeBtn"].forEach(f=>{try{const o=window[f];if(typeof o!=="function")return;window[f]=function(){const h=o.apply(this,arguments);return /^<button[^>]*\sdisabled/.test(h||"")?h.replace(/<span class="kl">ghi chú<\/span><span class="ef n">[^<]*<\/span>/,""):h}}catch(e){}});
 (function(){const w0=whyTime;whyTime=function(c){window.__j76lastC=c;return w0.apply(this,arguments)}})();
@@ -10184,10 +10207,10 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
 (function(){const g0=guessWhy;guessWhy=function(b){const r=g0.apply(this,arguments);if(r==="Sức dưới 20")return whyTime(2)||(S&&S.suc<SUC_FLOOR?j76sucWhy(2):"")||r;return r}})();
 /* travel: finish this buổi on the road, the clock turns, then arrive in the new buổi */
 (function(){const g0=goTo;goTo=function(k){
- try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())){
+ try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())&&!(window.COOPW&&COOPW.on)){
   const tc=travel(S.place,k),room=4-used;
   if(tc>room&&room>0&&can(tc+1)&&!(typeof accessOf==="function"&&!accessOf(S,k).ok)){const b0=S.buoi||0;
-   S.j76carry=tc-room;used=4;log(`Đường xa: đi hết ${BUOI[b0].toLowerCase()}, đến nơi đã sang ${j76nextName()}.`);nextBuoi();
+   S.j76carry=tc-room;S.j76ck=j76key();used=4;log(`Đường xa: đi hết ${BUOI[b0].toLowerCase()}, đến nơi đã sang ${j76nextName()}.`);nextBuoi();
    if(S.dead||(S.buoi||0)===b0){S.j76carry=0;return}
    const q=Q.splice(0);window.__j76paid=tc;let r;try{r=g0.apply(this,arguments)}finally{window.__j76paid=0;Q.unshift(...q)}render();return r}}}catch(e){window.__j76paid=0}
  return g0.apply(this,arguments)}})();
@@ -10242,13 +10265,18 @@ function j76sleep(p){let n=(typeof harsh==="function"&&harsh())?8:14;if(p.suc<30
 })();
 /* what stops the walk itself, in words */
 function j77Kh(n){return walkOk(n)}
-function j77WalkWhy(tc){return walkWhy(tc)}
+/* the map's walk reason reads the DAY (owner 15/11): a walk longer than this buổi's khắc spills (j9 walkSpill, card "Đi (đến nơi vào buổi sau)");
+   only buổi tối (no walk past the night) or a place closed when she would arrive is a real stop, said in words */
+function j77WalkWhy(tc,k){const left=Math.max(0,4-used),b=S.buoi||0;if(left>0&&b>=B4L)return `hết khắc trong ngày (đi ${tc} khắc)`;
+ const P=k&&typeof walkSpill==="function"?walkSpill(k):null;if(P)return P.ok?`đi ${tc} khắc, đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()}`:`đến nơi đã sang ${String(BUOI[P.b]).toLowerCase()} — ${P.why}`;if(left>0&&window.COOPW&&COOPW.on)return `không kịp đến trong ${String(BUOI[b]).toLowerCase()} (đi ${tc} khắc)`;return walkWhy(tc)} /* co-op: no walk spill (the room turns the buổi together) */
+/* an entry that holds only for THIS buổi (asked / sneaked / greeted / led in now) cannot spill: say why in words, not "còn N" (owner 15/11) */
+function j77Bound(n){const b=S.buoi||0;return b>=B4L?`hết khắc trong ngày (cần ${n} khắc)`:`không kịp trong ${String(BUOI[b]).toLowerCase()} (cần ${n} khắc)`}
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
 accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
  const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=j77Kh(tc+1);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=j77Kh(tc+1)&&!st.empAway;return st}
- if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc),tc,walk:1};
+ if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc,k),tc,walk:1};
  return{why:"",tc}};
 /* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
 function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-15,sev:2,txt:`Danh -15, ${typeof aaPunishTxt==="function"?aaPunishTxt(2):"tội nặng (có thể bị giáng phẩm)"}`}:{danh:-8,sev:1,txt:`Danh -8, ${typeof aaPunishTxt==="function"?aaPunishTxt(1):"bị phạt"}`}}
@@ -10272,17 +10300,17 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  const st=accState(k);const nm=accName(k);let n=0;try{n=countAt(k)}catch(e){}
  const left=Math.max(0,4-used);const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;const bu=i=>String(BUOI[i]||"").toLowerCase();
  const L=[sp&&sp.ok?`<p>Đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
- if(sp&&!sp.ok)L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`);
+ if(sp&&!sp.ok&&!String(st.why||"").includes(sp.why))L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`); /* said once (j77WalkWhy already names it) */
  if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng, trưa và chiều.</p>`);
  if(n)L.push(`<p class="past">Có ${n} bóng người ở đó.</p>`);
  const opts=[];
  if(st.ask){const nmA=st.ask==="yk"?"Xin yết kiến":"Xin bái kiến";
   if(st.empAway)L.push(`<p class="past">${nmA}: Hoàng thượng không có ở đây.</p>`);
   else if(st.dayDone)L.push(`<p class="past">${nmA}: ${st.askWhy}.</p>`);
-  else if(!st.askOk)L.push(`<p class="past">${nmA}: cần ${st.tc+1} khắc, còn ${left}.</p>`);
+  else if(!st.askOk)L.push(`<p class="past">${nmA}: ${j77Bound(st.tc+1)}.</p>`);
   else opts.push({n:nmA,fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)})}
  if(st.kind){if(st.sneakOk)opts.push({n:"Lẻn vào",fx:{},x:accSneakLine(k,st.tc),go:()=>setTimeout(()=>accSneak(k),0)});
-  else L.push(`<p class="past">Lẻn vào: cần ${st.tc+1} khắc, còn ${left}.</p>`)}
+  else L.push(`<p class="past">Lẻn vào: ${j77Bound(st.tc+1)}.</p>`)}
  if(sp&&sp.ok)opts.push({n:"Đi (đến nơi vào buổi sau)",fx:{},x:`Chắc chắn · tốn: ${sp.now?`${sp.now} khắc ${bu(sp.b-1)} + `:""}${sp.rest} khắc ${bu(sp.b)} · thành: đến nơi ${bu(sp.b)}, thấy ai ở đó`,go:()=>setTimeout(()=>walkSpillGo(k),0)});
  const waitHelps=!sp&&(st.kind==="hour"||st.walk||/sáng|thỉnh an/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk&&!st.dayDone)||(st.kind&&!st.sneakOk));
  if(waitHelps&&!S.out&&!S.confined&&!S.mg){const b=S.buoi||0,night=b>=(typeof B4L==="number"?B4L:2),morn=st.kind==="hour"||/sáng|thỉnh an/.test(st.why||""); /* owner final names (11/15): night "Sang ngày mới" / day "Sang buổi"; no daytime wait for a place that only opens in the morning */
@@ -10367,7 +10395,7 @@ function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.de
  const C=ACC_ETQ,sh=h.name.split(" ").pop(),sg=n=>(n>0?"+":"")+n,skA=accSkipAff(h,S);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Khách phẩm thấp hơn ${C.mode==="required"?"phải":"theo lệ nên"} vào chào chủ vị trước${C.invite?" (đến theo lời mời thì khỏi)":""}${C.mode==="required"?"":"; ngươi vẫn có thể đi thẳng đến chỗ người ngươi thăm"}.</p>`];
  if(j77Kh(tc+C.khac))opts.push({n:`Bái kiến ${accRkName(h)} rồi vào`,fx:{},x:`Chắc chắn · tốn: ${tc+C.khac} khắc · thành: ${sh}: ${(typeof pvRel==="function"?pvRel(h,C.okAff):"thiện cảm "+sg(C.okAff))} · (gồm ${C.khac} khắc bái kiến)`,go:()=>setTimeout(()=>accEtqGo(k,h,1,then),0)});
- else L.push(`<p class="past">Bái kiến: cần ${tc+C.khac} khắc, còn ${left}.</p>`);
+ else L.push(`<p class="past">Bái kiến: ${j77Bound(tc+C.khac)}.</p>`);
  if(C.mode!=="required"&&j77Kh(tc))opts.push({n:"Vào thẳng, không bái kiến",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: vào cung · kèm: thiếu lễ, ${sh}: ${(typeof pvRel==="function"?pvRel(h,skA):"thiện cảm "+sg(skA))}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}`,go:()=>setTimeout(()=>accEtqGo(k,h,0,then),0)});
  if(C.invite)L.push(`<p class="past">Đến theo lời mời thì không cần bái kiến: mời nàng sang cung ngươi, hoặc chờ được mời.</p>`);
  opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts});showModal()}
@@ -10385,20 +10413,28 @@ function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name
 /* person-card acts: the visit and 'Đến gặp' carry the greeting in their price, and run it before opening her card */
 (function(){const v0=visitPal;visitPal=function(id){const v=rivals.find(x=>x.id===id);if(!v||!S||S.dead||Q.length)return;const k=palaceOf(v);
   if(S.place!==k&&!S.confined&&!S.out&&!accessOf(S,k).ok)return j77Card(k);
-  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>visitPal(id));
-  if(S.place!==k&&!j77Kh(travel(S.place,k)))return;const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return v0.apply(this,arguments)}finally{can=c0}};
+  if(S.place!==k&&!j77Kh(travel(S.place,k))){if(accGuestSpill(k,travel(S.place,k)))walkSpillGo(k);return} /* arrives next buổi; the greeting (if owed) is asked on arrival */
+  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>visitPal(id));const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return v0.apply(this,arguments)}finally{can=c0}};
  const s0=goSee;goSee=function(id){const v=rivals.find(x=>x.id===id);if(!v||!S||S.dead||Q.length)return;const k=whereOf(v);
   if(S.place!==k&&!S.confined&&!S.out&&!accessOf(S,k).ok)return j77Card(k);
   if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>goSee(id));
   if(S.place===k)return s0.apply(this,arguments);if(!j77Kh(travel(S.place,k)))return;const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return s0.apply(this,arguments)}finally{can=c0}}})();
 /* the two person-card buttons, one rule: a lock is not a dead button: tapping opens the card with its reason and ways in */
 function accGuestLine(k,tc,tail){const who=accEtq(S,k);return `Chắc chắn · tốn: ${tc+(who?ACC_ETQ.khac:0)} khắc · thành: ${tail}${who?` · (gồm ${ACC_ETQ.khac} khắc bái kiến ${accRkName(who)} ${who.name.split(" ").pop()})`:""}`}
-function accGuestWhy(k,tc){if(S.confined)return"đang cấm túc";if(S.out)return"đang ở lãnh cung";const a=accessOf(S,k);if(!a.ok)return"";return j77Kh(tc)?"":`đi tốn ${tc} khắc, còn ${Math.max(0,4-used)}`}
+/* khắc for the person-card walks read the DAY (owner 15/11): the palace visit may arrive next buổi (walk spill, j9); 'Đến gặp' is bound
+   to where she is THIS buổi, so it is red with that reason; buổi tối never runs past the night */
+function accGuestSpill(k,tc,bound){if(bound||j77Kh(tc)||typeof walkSpill!=="function")return null;const P=walkSpill(k);return P&&P.ok?P:null}
+function accGuestWhy(k,tc,bound){if(S.confined)return"đang cấm túc";if(S.out)return"đang ở lãnh cung";const a=accessOf(S,k);if(!a.ok)return"";if(j77Kh(tc))return"";
+ if(accGuestSpill(k,tc,bound))return"";const b=S.buoi||0,bu=String(BUOI[b]||"").toLowerCase();
+ if(bound)return `không kịp gặp nàng trong ${bu} (đi ${tc} khắc)`;if(b>=B4L)return `hết khắc trong ngày (đi ${tc} khắc)`;
+ const P=typeof walkSpill==="function"?walkSpill(k):null;return P&&!P.ok&&P.why?`đến nơi đã sang ${String(BUOI[b+1]).toLowerCase()} — ${P.why}`:`không kịp đến trong ${bu} (đi ${tc} khắc)`}
+function accGuestNeed(h,k,tc){const P=accGuestSpill(k,tc);if(!P||/data-kneed=|\sdisabled/.test(h.slice(0,h.indexOf(">")+1)))return h;
+ return h.replace(/^<button /,`<button data-kneed="${encodeURIComponent(JSON.stringify([{t:`đi ${tc} khắc (đến nơi ${String(BUOI[P.b]).toLowerCase()})`,ok:true}]))}" `)}
 function accLockTag(k){const a=accessOf(S,k);return a.ok?"":` · (${a.why}: chạm để xem cách vào)`}
 visitBtn=function(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=palaceOf(v);if(S.place===k)return"";const tc=travel(S.place,k);
- return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,accGuestLine(k,tc,"nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng")+accLockTag(k),accGuestWhy(k,tc))};
+ return accGuestNeed(pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,accGuestLine(k,tc,"nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng")+accLockTag(k),accGuestWhy(k,tc)),k,tc)};
 seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);
- return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,accGuestLine(k,tc,"gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người")+accLockTag(k),accGuestWhy(k,tc))};
+ return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,accGuestLine(k,tc,"gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người")+accLockTag(k),accGuestWhy(k,tc,1))};
 /* hard-lock extra way in: ask a eunuch to lead her in (bạc), for the Emperor's halls */
 function accLeadO(k){return od(35+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
 function accLeadCost(){return 15}
@@ -10412,7 +10448,7 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
   if(!m.opts)m.opts=[{n:"Thôi",fx:{},x:""}],m.btn=undefined;
   const ok=j77Kh(tc+1)&&S.bac>=accLeadCost();
   if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+1} khắc, Bạc -${accLeadCost()} · thành: được vào buổi này · hỏng: mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
-  else m.h+=`<p class="past">Nhờ thái giám dẫn vào: cần ${accLeadCost()} bạc và ${tc+1} khắc (có ${S.bac} bạc, còn ${left} khắc).</p>`;
+  else m.h+=`<p class="past">Nhờ thái giám dẫn vào: ${!j77Kh(tc+1)?j77Bound(tc+1):`cần ${accLeadCost()} bạc (có ${S.bac})`}.</p>`;
   m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
 /* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
@@ -11097,7 +11133,7 @@ function kaCaughtTxt(v,k){try{const n=cl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1)
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m||!String(h).includes(CAUGHT))return h;const t=kaCaughtTxt(v,m[1]);return t?String(h).split(CAUGHT).join(t):h})}catch(e){}return G}})();
 /* ---------- "Cần" row: every condition an act needs, with its current status, from the real checks (can/whyTime/cardWhy/ok/LACK/evG) ---------- */
 function kaNeedAttr(L){return L&&L.length?` data-kneed="${encodeURIComponent(JSON.stringify(L))}"`:""}
-function kaTimeNeeds(c,bacCost){const L=[];const left=4-used;L.push({t:`${c} khắc (còn ${left})`,ok:used+c<=4});if(c>1)L.push({t:`Sức ≥20 (có ${S.suc})`,ok:S.suc>=20});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}
+function kaTimeNeeds(c,bacCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));if(c>1)L.push({t:`Sức ≥20 (có ${S.suc})`,ok:S.suc>=20});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}
 (function(){const ch=cardH;cardH=function(a,i){let h=ch.apply(this,arguments);try{if(!S||S.dead)return h;const c=cardCost(a);const L=kaTimeNeeds(c,a.c&&a.c.bac<0?-a.c.bac:0);
   if(a.b!=null)L.push({t:`${BUOI[a.b]} (đang ${BUOI[S.buoi||0].toLowerCase()})`,ok:(S.buoi||0)===a.b});
   if(a.done)L.push({t:"chưa làm trong buổi này",ok:false});
@@ -11840,7 +11876,7 @@ function kpDeathP(k,v){try{const inv=x=>(x.inv||[]).some(e=>e.k===x.__k&&!e.h);c
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m)return h;const p=kpDeathP(m[1],v);if(p==null)return h;
   return String(h).replace(/,\s*có thể chết( đuối)?/g,(x,d)=>` · ${kpDeathWord(p,m[1]==="poison"?"nàng":"con nàng")}`)})}catch(e){}return G}})();
 /* Cần: the Sức rule follows the live game rule (j80 SUC_FLOOR; one source, never a hard-coded 20) */
-if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=4-used;L.push({t:`${c} khắc (còn ${left})`,ok:used+c<=4});
+if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));
  const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:20;if(c>1)L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}}
 /* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
@@ -23534,9 +23570,9 @@ function tsbNeedMark(){try{const m=Q[0];if(!m||!m.opts||!m.opts.some(o=>o&&o.nee
 /* an option whose Cần is unmet cannot be taken (its button is disabled); a direct call (bot, co-op) falls back to the first allowed option, never a dead end */
 (function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&o.need&&o.need.some(n=>!n.ok)){const j=m.opts.findIndex(x=>!x.need||x.need.every(n=>n.ok));if(j>=0)return c0.call(this,j)}}catch(e){}return c0.apply(this,arguments)}})();
 function tsbArt(f,label){return{src:`https://ctm-img.victoria-tntt.workers.dev/img/${f}.webp`,label:label||""}}
-function tsbNeedKhac(c){return{t:`${c} khắc (còn ${4-used})`,ok:used+c<=4}}
+function tsbNeedKhac(c){return j76need(c)} /* the day's khắc (j76): spills into the next buổi */
 function tsbNeedBac(n){return{t:`Bạc ${n} (có ${S.bac})`,ok:S.bac>=n}}
-function tsbKh(c){const n=Math.max(0,Math.min(c,4-used));if(n)spend(n)}
+function tsbKh(c){if(typeof j76spills==='function'&&j76spills(c)){spend(c);return}const n=Math.max(0,Math.min(c,4-used));if(n)spend(n)}
 
 /* ---------------- scars: j70 when present, else the same p.scar shape ---------------- */
 const TSB_SCAR=[null,{n:"nhẹ",d:10,sung:4,danh:1,need:4,perm:0},{n:"vừa",d:25,sung:8,danh:3,need:8,perm:3},{n:"nặng",d:45,sung:14,danh:5,need:14,perm:15}];
@@ -25256,7 +25292,7 @@ function cbGreetMark(k){S.acGreet=S.acGreet||{};S.acGreet[k]=bkey()}
 function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ETQ,nm=accName(k),hn=`${accRkName(h)} ${h.name}`,sh=h.name.split(" ").pop(),left=Math.max(0,4-used);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Ngươi đang ở đây mà chưa bái kiến trong ${String(BUOI[S.buoi||0]).toLowerCase()}.</p>`];const opts=[];
  if(j77Kh(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
- else L.push(`<p class="past">Bái kiến: cần ${C.khac} khắc, còn ${left}.</p>`);
+ else L.push(`<p class="past">Bái kiến: ${j77Bound(C.khac)}.</p>`);
  opts.push({n:"Thôi",fx:{},x:"",go:()=>setTimeout(()=>{S.acSeen=S.acSeen||{};S.acSeen[k]=bkey();window.__fromMap=1;tab="act";render()},0)});
  Q.push({t:nm,h:L.join(""),opts});const m=Q[Q.length-1];try{if(typeof kitPlaceDress==="function")kitPlaceDress(m,k)}catch(e){}showModal();return true}
 function cbGreetGo(k){const h=cbGreetTodo(k);if(!h||Q.length||!j77Kh(ACC_ETQ.khac))return;const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;const bf=typeof rsnap==="function"?rsnap():null;
@@ -25332,7 +25368,7 @@ window.kitLine=kitLine;
 /* ---------- 5. ONE Sức NEED PER CARD (owner 17:12Z: "Múa trong yến tiệc": "cần Sức trên 20 (có 17)" AND "Sức ≥5 (có 17)") ----------
    The Cần row read the floor (Sức ≥5) while the card's real gate (j76) is "more Sức than the card costs". One need, the real one:
    cost c > floor → "Sức trên c"; else the floor "Sức ≥5"; rest cards (they restore Sức) and 1-khắc acts need no Sức. */
-(function(){if(typeof kaTimeNeeds!=="function")return;kaTimeNeeds=function(c,bacCost){const L=[];const left=4-used;L.push({t:`${c} khắc (còn ${left})`,ok:used+c<=4});
+(function(){if(typeof kaTimeNeeds!=="function")return;kaTimeNeeds=function(c,bacCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));
  const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:5;const A=window.__cbCard;const cs=A&&A.c&&A.c.suc<0?-A.c.suc:0;const rest=!!(A&&typeof j76isRest==="function"&&j76isRest(A));
  if(c>1&&!rest){if(cs>0&&cs+1>fl)L.push({t:`Sức trên ${cs} (có ${S.suc})`,ok:S.suc>cs});else L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl})}
  if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}})();
@@ -28882,7 +28918,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f3bd8d33ec40";window.CTM_BUILD=BUILD;
+const BUILD="ee1746dba6b9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
