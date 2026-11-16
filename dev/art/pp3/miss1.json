@@ -1,0 +1,140 @@
+{
+ "eventsChecked": 308,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Bảo hắn giả vờ nhận, làm phản gián",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Trịnh Ngọc Hành",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Chu Vân Thường",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Tạ Tịch Nhan",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phương Thảo (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Bạch Tú Uyển",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Đoan Mộc Tuyết Dao",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Ôn Hàm Hương",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Kiều Cẩm Tú",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Từ Dao Cầm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Âu Dương Nhược Lan",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Cố Tử Yên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Nghĩa Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 99,
+ "actsPh": [
+  {
+   "name": "Bỏ phấn lạ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Mời thái y bắt mạch",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Sang Thái y viện xin bắt mạch",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "di-lai"
+  },
+  {
+   "name": "Tát",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  }
+ ],
+ "errs": []
+}
