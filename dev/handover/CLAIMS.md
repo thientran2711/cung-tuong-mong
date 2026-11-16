@@ -140,5 +140,5 @@
 | design-scale phase 2/3 + maptab tab-mode reset bug (opus) | review/design-scale-p2 | main s14 | session_01UV1Szh2HXLUxv3oHmnezMy (opus) | RUNNING | 16/11 09:44Z |
 | co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | RUNNING | 16/11 10:05Z |
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
-| D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | (opening, C s2) | RUNNING | 16/11 10:26Z |
-| item512-art review (sonnet) | review/item512-art-r1 | C | (opening, C s2) | RUNNING | 16/11 10:26Z |
+| D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | session_011xDdVRRJzACvMmmuEuVbJq | RUNNING | 16/11 10:26Z |
+| item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | RUNNING | 16/11 10:26Z |

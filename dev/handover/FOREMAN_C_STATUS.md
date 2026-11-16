@@ -1,7 +1,17 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
+## HANDOVER (Foreman C session 2 → session 3, 10:30Z 16/11)
+Why: session 2 context 25% at 10:28Z (START_CTX ~4% → limit 29%); the next wake would pass it. Session 3 continues from this file — read this block, the SESSION 2 LOG below, ## PASS, ## QUESTIONS, CLAIMS.md (rows with C), dev/handover/reports/, the newest notes at the end of FOREMAN_C.md, new OD lines.
+Running SEPARATE sessions (results in dev/handover/reports/<branch>.md):
+- review/schedules3-r2 — D29 fix pass 2 worker (opus) session_011xDdVRRJzACvMmmuEuVbJq, from review/schedules3-r1 @ f74f95d3 FAIL list (reports/review-schedules3-r1.md) → on SẴN SÀNG KIỂM open an opus reviewer (review/schedules3-r3). Foreman B's D13 review/spread-events builds on this ledger API (additive only).
+- review/item512-art-r1 — art reviewer (sonnet) session_011xDdVPGrgbkaEq66QU6t5j for review/item512-art @ f9d10956 (22 items needed no art — key mapping; 8 marks redrawn → img/mark512/; 344 credits) → on PASS write it under ## PASS; pass the kit notes (kitItemBigSrc from IT key; mark512 folder) to main/kit keeper via QUESTIONS.
+Waiting on main s15 (session_01UV1SzisvHjTamjSXck6FLz): story14-p1 FAIL fix owner (QUESTIONS); eunuch-picker review (QUESTIONS); art batches (art mass production comes from main after the owner approves samples; orphan-audit #24–#29, #31 are C's art queue).
+Hourly wake: session 2's trigger trig_01NcACiwuYDkpgFwjswQ2rd5 is DISABLED at rollover — session 3 creates its own (create_trigger into session 3).
+Archive rule OD:L1287: archive each finished worker/reviewer session on every wake. Push helper: fetch --depth=30 + rebase, union-resolve CLAIMS/STATUS conflicts.
+Connectors 07:30Z: GitHub OK, Cloudflare token active, Magnific Pro ~1.33M credits.
+
 ORDER 16/11 applied (session 2): separate sessions only, claim before work, hourly self-wake trig_01NcACiwuYDkpgFwjswQ2rd5 (fires :25 each hour into session_011xDdVRG4cue2p9fUsdAg68), no art until main hands a batch.
-last wake: 09:30Z 16/11
+last wake: 10:28Z 16/11
 START_CTX (session 2) = ~4% (~45k of 1M; get_session read 0 at start). Roll over at >= 29% (~290k) of the window, hard ceiling 60%, or at first summarisation. 08:30Z: 16%. 09:30Z: 20%.
 Connectors (session 2, 07:30Z): GitHub push OK · Cloudflare token active · Magnific OK (Pro, 1,332,001 credits left of 12.6M). Disk 27 GB free, .git 2.7 GB (no repack needed).
 
@@ -16,6 +26,7 @@ Connectors (session 2, 07:30Z): GitHub push OK · Cloudflare token active · Mag
 - 08:30Z wake: PASS written for D26 memories-r1 99c069578, D41 promote-servants-r1 81deb15f7, C8 fig-bg-k1-r1 c8734770b, D17 luxury-r1 a84d31c2d. D29 schedules3 worker DONE (SẴN SÀNG KIỂM 9b1d82fa) → reviewer opus session_011xDdVQQoCYSxtUpobZT8YJ (review/schedules3-r1). NEW from main s12: story14-p1 review → opus session_011xDdVPn9oVRYe6dLkGFrUb (review/story14-p1-r1). D15 perf-r1 reviewer still running (session_011xDdVSxy2NRrKa7UvyR112).
 - 08:30Z ARCHIVED (OD:L1287, finished, report in repo): cycle-art-r1, econ-items-r1, memories worker + r1, promote-servants worker + r1, fig-bg-k1-r1, luxury-r1, veil-zoom worker, schedules3 worker.
 - 09:30Z wake: PASS D15 perf-r1 d2221602f. story14-p1-r1 = FAIL (5 fixes incl. ONE CORE: hand-typed numbers in jst14 → BAL; home road breaks tutorial ch1; false-certainty preview; /15 label; deadline text; cnv untested) → see QUESTIONS for main s14. D29 schedules3-r1 reviewer still running. NEW art batch from main s14 (08:43Z, kit-keeper-2-r1 PASS): item512 pictures → sonnet art worker session_011xDdVP6DUKfEQP1er7RbtD on review/item512-art (report reports/review-item512-art.md). Archived: perf-r1, story14-p1-r1 reviewers.
+- 10:28Z wake: D29 schedules3-r1 = FAIL f74f95d3 (main's new jhouse/jact break one-ledger; reviewer fixed most, audit (c) 447/32 left; 6-item fix list) → opus fix worker session_011xDdVRRJzACvMmmuEuVbJq on review/schedules3-r2. item512-art SẴN SÀNG KIỂM f9d10956 → sonnet reviewer session_011xDdVPGrgbkaEq66QU6t5j. Archived: schedules3-r1 reviewer, item512 worker. Context 25% → ROLLOVER to session 3.
 - ORPHAN AUDIT §6 pickup (reports/orphan-audit.md): #13 D29 → in review now; #24–#29, #31 are ART → wait for main's batch (art paused); #29's non-art part ('eunuch picker' A12 code review) belongs with A12 art-complete (main keeps A12 per FOREMAN_C.md) → Foreman C takes it only if main confirms (QUESTIONS).
 
 NEXT FOREMAN C SESSION OPENED: session_011xDdVRG4cue2p9fUsdAg68 at 07:24Z 16/11 (session 1 stops; its hourly trigger disabled).
