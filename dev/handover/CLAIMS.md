@@ -405,3 +405,4 @@
 | palace-voice successor (opus): owner 21:05Z rules (rank-band pools, Hoàng thượng 'nàng'/'ái phi' only, gain/loss SHORT toast + LONG panels) + trait pools, from review/palace-voice 3dbcda79 | review/palace-voice | main s24 | session_01UV1Szkk4oz7w3HZvDnHJf1 | RUNNING | 16/11 21:12Z |
 | C9 HUADIAN finish (sonnet art; owner 20:50Z '0.85'; r3 FAIL list + motifs + Luân hồi too big) | review/huadian-size | C | session_011xDdVRtVMfTs3c4LPGswkr | RUNNING | 16/11 20:52Z |
 | stage-figsize HOTFIX (opus, URGENT owner bug 21:20Z): people tiny on the stage after page-scale live 1aa0edb2; giant clipped eunuch + label overlap; blank side-card portraits | review/stage-figsize | main s24 | (s24 opening) | RUNNING | 16/11 21:20Z |
+| fig-cutout HELPER scan maid/eunuch/kid (sonnet art) | review/fig-cutout-clean | C | session_011xDdVNeDXtnshFoPTHBjHg | RUNNING | 16/11 20:56Z |
