@@ -12,24 +12,25 @@ const clr=p=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal')
  p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
  await p.goto('http://localhost:8977/',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});await sleep(2500);
  await p.evaluate(NEWLIFE);await sleep(400);await clr(p);
- /* 1. matrix: every festival x buổi 0..3 x scene -> expected kind or null */
+ /* 1. matrix: every festival x buổi 0..3 x scene -> each effect true only for its festivals and buổi; scene never matters; no fireworks anywhere */
  const M=await p.evaluate(()=>{const out=[];const keep={m:S.month,t:S.tuan,b:S.buoi,pl:S.place,tab:tab};
-  for(const k in FEST){const f=FEST[k];S.month=f.m;S.tuan=f.t[0];for(let bu=0;bu<4;bu++)for(const [pl,tb] of [["home","ac"],["vuon","ac"],["thu","ac"],["tn","ac"],["home","go"],["lc","ac"]]){S.buoi=bu;S.place=pl;tab=tb;out.push({k,bu,pl,tb,got:kfFestKind()})}}
-  S.month=keep.m;S.tuan=keep.t;S.buoi=keep.b;S.place=keep.pl;tab=keep.tab;return {out,keys:Object.keys(FEST),T:FESTFX}});
- let bad=0,fire=0;const exp=(r,T)=>{const want=T[r.k];const sky=(r.pl==="vuon")||r.tb==="go";return (want&&r.bu===3&&sky)?want:null};
- for(const r of M.out){const e=exp(r,M.T);if(r.got!==e){bad++;console.log('  mismatch',JSON.stringify(r),'want',e)}if(r.got)fire++}
- ck('matrix '+M.out.length+' cells ('+M.keys.length+' festivals x 4 buổi x 6 scenes), fires in '+fire,bad===0&&fire>0,'bad='+bad);
- ck('thanhminh never fires',!M.out.some(r=>r.k==='thanhminh'&&r.got));ck('no fire on any buổi but tối',!M.out.some(r=>r.got&&r.bu!==3));ck('no fire in room/halls',!M.out.some(r=>r.got&&r.tb==='ac'&&r.pl!=='vuon'));
- ck('table keys all exist in FEST',Object.keys(M.T).every(k=>M.keys.includes(k)));
- /* 2. end to end: render() really calls kitFx (KFX.log) */
+  for(const k in FEST){const f=FEST[k];S.month=f.m;S.tuan=f.t[0];for(let bu=0;bu<4;bu++)for(const [pl,tb] of [["home","ac"],["vuon","ac"],["thu","ac"],["home","go"],["lc","ac"]]){S.buoi=bu;S.place=pl;tab=tb;out.push({k,bu,pl,tb,lantern:kfFestFx("lantern"),gold:kfFestFx("gold"),fly:kfFestFx("fly")})}}
+  S.month=keep.m;S.tuan=keep.t;S.buoi=keep.b;S.place=keep.pl;tab=keep.tab;return {out,keys:Object.keys(FEST),T:JSON.parse(JSON.stringify(FESTFX)),B4L,fw:!!(FX.festival)}});
+ let bad=0,fire=0;for(const r of M.out)for(const e of ['lantern','gold','fly']){const T=M.T[e];const want=T.fest.includes(r.k)&&(!T.buoi||T.buoi.includes(r.bu));if(r[e]!==want){bad++;console.log('  mismatch',e,JSON.stringify(r),'want',want)}if(r[e])fire++}
+ ck('matrix '+M.out.length+' cells x 3 effects, true in '+fire,bad===0&&fire>0,'bad='+bad);
+ ck('lantern and fly only at tối, gold any buổi',M.T.lantern.buoi.join()===String(M.B4L)&&M.T.fly.buoi.join()===String(M.B4L)&&M.T.gold.buoi===null);
+ ck('thanhminh gets nothing',!M.out.some(r=>r.k==='thanhminh'&&(r.lantern||r.gold||r.fly)));
+ ck('no fireworks: FX.festival row removed',!M.fw);
+ ck('table keys all exist in FEST',Object.values(M.T).every(x=>x.fest.every(k=>M.keys.includes(k))));
  const E2E=async(m,t,bu,pl,tb)=>{await p.evaluate(([m,t,bu,pl,tb])=>{KFX.log.length=0;KFX.festK="";S.month=m;S.tuan=t;S.buoi=bu;S.place=pl;tab=tb;if(pl==="home")S.visit={k:"home",people:homePeople(),talked:false};else S.visit=null;Q.length=0;render()},[m,t,bu,pl,tb]);await sleep(1500);return p.evaluate(()=>KFX.log.filter(k=>k==="festival"||k==="lantern"))};
- const A=await E2E(3,0,2,'home','ac');ck('thanh minh chiều, room: no FX',A.length===0,JSON.stringify(A));
- const A2=await E2E(1,1,2,'home','ac');ck('nguyên tiêu chiều, room: no FX',A2.length===0);
- const A3=await E2E(1,0,3,'home','ac');ck('tết tối, room: no FX',A3.length===0);
- const A4=await E2E(1,1,3,'vuon','ac');ck('nguyên tiêu tối, garden: lanterns',A4.join()==='lantern',JSON.stringify(A4));
- const A5=await E2E(1,0,3,'vuon','ac');ck('tết tối, garden: festival (lanterns+fireworks)',A5.join()==='festival',JSON.stringify(A5));
- const A6=await E2E(12,2,3,'vuon','ac');ck('giao thừa tối, garden: festival',A6.join()==='festival');
- const A7=await E2E(3,0,3,'vuon','ac');ck('thanh minh tối, garden: no FX',A7.length===0);
+ ck('thanh minh chiều room: none',(await E2E(3,0,2,'home','ac')).length===0);
+ ck('nguyên tiêu chiều: none (wrong buổi)',(await E2E(1,1,2,'home','ac')).length===0);
+ ck('tết tối: none (no fireworks)',(await E2E(1,0,3,'home','ac')).length===0);
+ ck('giao thừa tối garden: none (no fireworks)',(await E2E(12,2,3,'vuon','ac')).length===0);
+ ck('nguyên tiêu tối garden: lantern',(await E2E(1,1,3,'vuon','ac')).join()==='lantern');
+ ck('nguyên tiêu tối room: lantern (scene does not matter)',(await E2E(1,1,3,'home','ac')).join()==='lantern');
+ ck('trung thu tối: lantern',(await E2E(8,1,3,'vuon','ac')).join()==='lantern');
+ ck('thanh minh tối garden: none',(await E2E(3,0,3,'vuon','ac')).length===0);
  /* shots */
  const shot=async(n)=>{if(SHOTS)await p.screenshot({path:OUT+'/'+n+'.jpg',type:'jpeg',quality:62})};
  /* 3. 4-buổi leftovers */
@@ -52,6 +53,6 @@ const clr=p=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal')
  if(SHOTS)for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad']]){await p.setViewportSize({width:W,height:H});
   await E2E(1,1,2,'home','ac');await sleep(1200);await shot(`room-nguyentieu-chieu-${tag}`);
   await E2E(1,1,3,'vuon','ac');await sleep(2500);await shot(`garden-nguyentieu-toi-${tag}`);
-  await E2E(1,0,3,'vuon','ac');await sleep(2500);await shot(`garden-tet-toi-${tag}`);
+  await E2E(1,0,3,'vuon','ac');await sleep(2500);await shot(`garden-tet-toi-${tag}`);await E2E(1,1,3,'home','ac');await sleep(2500);await shot(`room-nguyentieu-toi-${tag}`);
   await E2E(3,0,2,'home','ac');await sleep(1500);await shot(`room-thanhminh-chieu-${tag}`)}
  console.log(fails?'FAILED '+fails:'ALL PASS');await b.close();srv.close();process.exit(fails?1:0)})();

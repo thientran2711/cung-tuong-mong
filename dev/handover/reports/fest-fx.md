@@ -3,10 +3,17 @@
 ## Root cause
 dev/build/jfx.js render wrapper fired kitFx("festival") (sky lanterns + fireworks) when `S.buoi===2 && festToday()`. Buổi 2 was "tối" in the 3-buổi system; with 4 buổi (sáng/trưa/chiều/tối) it is chiều. It also ignored indoor/outdoor and which festival. Tháng ba thượng tuần = FEST.thanhminh (Tiết Thanh minh, tảo mộ) — a festival that must never get fireworks.
 
-## Fix (whole group)
-- ONE data table `FESTFX` in jfx.js (festival key -> kitFx kind): newyear + giaothua = "festival" (lanterns + fireworks), nguyentieu + trungthu = "lantern" (sky lanterns only). Any festival not listed (thanhminh, doanngo, phoenix, thattich, trungcuu, dongchi, ...) gets nothing.
-- `FESTFX_SKY` = where the sky is visible: garden scene ("vuon") or the map tab. Never her room / halls / lãnh cung.
-- Buổi = `B4L` (tối), named constant. `kfFestKind()` returns the kind or null; the render wrapper fires once per night key as before.
+## Fix (v2, after the owner corrections of 11/16: no fireworks; indoor/outdoor irrelevant; effect must match the current buổi AND current event)
+- Fireworks layer REMOVED (FX.festival row deleted; no kind uses light "fireworks").
+- Indoor/outdoor condition DROPPED.
+- ONE table `FESTFX` (jfx.js) = effect x allowed festivals x allowed buổi (null = any), checked by `kfFestFx(effect)`:
+  | effect | festivals | buổi |
+  | lantern (sky lanterns, once per night) | nguyentieu, trungthu | tối (B4L) |
+  | gold (gold/red sparks, j33 pxKind) | newyear, giaothua, nguyentieu | any |
+  | fly (fireflies, j33 pxKind) | thattich, trungthu | tối (B4L) |
+  Thanh minh and every unlisted festival: nothing. j33 pxKind now reads the table (before: fireflies in daytime, effects keyed by place list).
+- Already buổi-gated and left: kfDeco night orbs/sparks (B4L).
+QUESTION for the owner: should Giao thừa (cuối năm, đêm) keep fireworks? NOT added. Also Tết currently has only gold sparks (no sky lantern) — add lantern to newyear?
 
 ## 3-buổi leftovers audit (grep S.buoi===N / b:N / w*3+b / *3 clocks / BUK / "% 3" over every j*.js)
 FIXED
@@ -25,8 +32,7 @@ CHECKED, left as is (correct or harmless)
 NOT CHANGED (balance call for the owner): jstory deadlines dl67Khan/Vua/Lon stay in buổi (4/9/21), so a pledge is ~25% shorter in real days than under 3 buổi.
 
 ## Tests — node dev/test/fest-fx.js dev <outdir> [shots]  (ALL PASS, 0 page errors)
-- matrix 14 festivals x 4 buổi x 6 scenes = 336 cells: fires only in newyear/giaothua ("festival") and nguyentieu/trungthu ("lantern"), buổi tối, garden or map tab. thanhminh never.
-- end to end render(): Thanh minh chiều room none; Nguyên tiêu chiều room none; Tết tối room none; Nguyên tiêu tối garden = lantern; Tết/Giao thừa tối garden = festival; Thanh minh tối garden none.
-- old 3-buổi save: buổi 2->3, plans [2,1,0]->[3,2,0], pledge due 7->10, t0 3->4.
-- jstory clock monotonic; guard roster tối == old tối shift.
-- Shots dev/shots/fest-fx/: Fold 755x1000 + iPad 1180x820 (room Nguyên tiêu chiều = no fireworks; garden Tết tối = fireworks; garden Nguyên tiêu tối = lantern kind logged). Fold garden/room panels are blank in the sandbox (CDN pictures not loaded offline); iPad shows the real stage.
+- matrix 14 festivals x 4 buổi x 5 scenes x 3 effects = each effect true only for its festivals/buổi, scene never matters; thanhminh nothing; no fireworks row.
+- end to end render(): Thanh minh chiều none; Nguyên tiêu chiều none; Tết tối none; Giao thừa tối none; Nguyên tiêu tối (garden and room) lantern; Trung thu tối lantern; Thanh minh tối none.
+- old 3-buổi save: buổi 2->3, plans [2,1,0]->[3,2,0], pledge due 7->10, t0 3->4; jstory clock monotonic; guard roster tối == old tối shift.
+- Shots dev/shots/fest-fx/ (Fold 755x1000 + iPad 1180x820). Fold panels are blank offline (CDN pictures).
