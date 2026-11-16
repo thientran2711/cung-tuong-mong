@@ -10,6 +10,12 @@ Context (session 3): ~60k tokens after the mandatory setup reads → budget ~75k
 Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no reports yet (review/item-big pushed adda3201). No new SẴN SÀNG KIỂM. Q24 not answered yet → D11/D13/D14/D19/D44 stay HELD.
 (Rule 07:45Z s10: every brief must POINT to dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md and order them read in full — owner words verbatim, never a summary.)
 
+## HANDOVER (Foreman B session 4 → session 5, 11/16/2026 11:42Z)
+- Session 4 = session_01N1tNP4iHywUqpPDALBadFp passed its context budget (~63k) → rolls over now; its scheduled task trig_01K7JZZfex4PD3oM4YxJoQ8H is DELETED. Session 5 must create its OWN hourly wake as a SERVER-SIDE scheduled task (create_trigger, fires into session 5) — NOT CronCreate: the in-session cron died with a container restart and B missed 3 hourly wakes (08:26Z–11:26Z; owner noticed).
+- RUNNING: see "RUNNING 11:40Z" at the top (2 workers + 6 reviewers, all separate sessions). Next: read each reviewer report (reports/review-<branch>-r1.md) → PASS → "READY <full sha>" under ## PASS, archive the reviewer; FAIL → new worker on the r-branch. mg-balance: owner wants the replacement list in the morning — it is in reports/mg-balance.md STEP 1; push the worker for SẴN SÀNG. nw-poem: nudged 11:38Z for a WIP push; if still nothing by 12:30Z, check events and re-open from scratch.
+- Free slots: 4. Waiting (no real item yet): D19 (econ on main), night-card preg-FX (night-end-r3 on main), ONE-CORE follow-up (reports/one-core.md), D3 (KIT REQUEST kitItemBigSrc).
+- Owner questions: QB1, QB2 (QUESTIONS above) + older Q3, Q5, Q6, Q10–Q15, Q20, Q23, Q25 + C35b Qs.
+
 ## QUESTIONS (new 11:40Z, for main → owner)
 - QB1 (nw-lantern worker): rename the lantern title 'Trí khôi' → 'Đăng khôi'? Keep the talent formula Tài + Tâm cơ + Thi, or change it now the game has no words?
 - QB2 (D11 presentation worker): use the night music for the 'sủng ái' event group until new music exists? Painted FX only in the dramatic group, or also (lighter) in the ordinary group as now?
