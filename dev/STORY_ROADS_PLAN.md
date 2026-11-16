@@ -93,6 +93,10 @@ Pre-palace home roads (OD:L1251, replaces the "no home road" part of OD:L1244): 
 home road like td — built by a separate worker on `review/kc-roads-cn-nc`; this plan only references it. cnv starts as a palace maid, no home road.
 Entry rank (OD:L1250): an origin's entry rank is only its CEILING; she earns it by passing the tuyển tú selection (minigame score from tài,
 đức, abilities); a weaker result gives a lower rank; patronage (the Thái hậu's person …) opens the higher ceiling. Every origin.
+Entry choice and co-op (OD:L1288, replaces the 07:25Z co-op home-road line): where a road offers "Vào cung ngay / Chờ 3 năm", waiting
+3 years must be worth as much as 3 years lived in the palace (home gains equal what 3 palace years would give), so both choices are real.
+Co-op: both players get that choice at the SAME time point on their roads, each chooses freely, time runs the same for both; one may live
+in the palace while the other lives at home. No forced joint entry, no waiting for the friend. P5 balance measures the two branches.
 Origin intros (OD:L1244): every origin gets
 - a NARRATED intro with ILLUSTRATIONS (3–4 painted panels, kit scene panel kitPanel({scene:true}) + kitTiles), and
 - an ENTRY animation (palace gate → selection hall, kit §67/§68 painted FX parts), and
@@ -136,6 +140,13 @@ Build sketch: NPC road = light state on the person {road, ch, h, flags}, advance
 grudge, debt, faction, event), no dialogs; the hồi that names the player becomes a j72-style Việc nhờ card with gain and loss; at most one
 open NPC request at a time. Starts after phase 1 is on main (needs the frame), can run beside phases 2–4.
 
+### 3.0 NPC identities from the same pool (OD:L1289)
+NPC consorts roll their identity (origin) at game start from the SAME pool as the player (9 origins + country branches), so in some lives an
+NPC consort IS a foreign princess (Nam Chiếu / Bắc Địch) with that princess art set, costume rules and road. The 3+3 princess faces per
+country are shared by player and NPC rolls, never the same face twice in one game. Her NPC road (this phase) = one of that origin's roads.
+Phase 1 note: castRv67 already casts live consorts; once NPC origins exist, road roles prefer the NPC whose identity fits the role
+(e.g. "the daughter of the family's enemy" = a consort whose origin/family is that enemy, OD:L1247).
+
 ### 3.1 Men's roads (OD:L1264)
 Every named male character gets an identity + road on the same frame, same rule: her help = ONE hồi of his road, a different request at
 a different hồi each life, never his last request again. Groups and road templates (identity = role + family + trait; a template is a
@@ -167,3 +178,5 @@ Totals to write in phase 6: ~20 templates for men + the women's origin roads reu
 
 [OD:L1259] - (16/11 07:15Z, s11) OWNER RULE (tutorial chapters 1–3): the new-player tutorial must still be PART OF THE STORY — narration and plot thread tie each tutorial task to what is happening in her life/road; not a detached feature tour.
 [OD:L1264] - (16/11 07:25Z, s11) OWNER RULE (NPC roads for men too): NPC roads (OD:L1252) exist so far only in concept for women (consorts, maids, by identity). MEN need them too — every named male character (Emperor, princes, officials, guards, eunuchs, suitors/men of the outer court…) gets his own identity + road, with the same "her help = one hồi, varied per life" rule.
+[OD:L1288] - (16/11 08:45Z, s12) OWNER RULE (co-op entry choice + value of waiting, REPLACES the 07:25Z co-op home-road line, verbatim): "Cái vấn đề lựa chọn vào cung hay là chờ 3 năm á, thì mình cũng phải cho cái giá của cái việc chờ 3 năm nó bằng với cái giá mà mình ở trong 3 năm mình làm được gì ở trong cung. Bạn hiểu không? Thì như vậy thì cái chờ 3 năm đó nó mới có giá trị. Đó. Chứ bây giờ ai cũng chọn vào cung hết, chắc chắn cái chuyện chờ 3 năm là ít ai chọn. Rồi cái vấn đề này nữa là khi mà chơi chung á, ai muốn chọn gì kệ họ, thời gian vẫn trôi như nhau thôi. Cái người nào mà chọn chờ 3 năm ở ngoài cung thì vẫn sống ngoài cung. Người nào vào cung rồi thì cứ sống ở trong cung. Nhưng mà ý của tôi nói là vào cung chung một lúc có nghĩa là vậy nè. Là cái tuyến truyện của họ đều phải cho họ cái sự lựa chọn là vào cung ngay và chờ 3 năm chung một mốc thời gian, bạn hiểu không? Chứ không phải là ngày hôm nay đó là cái người A được hỏi, rồi phải một tuần sau cái người B mới được hỏi, là không phải." → (1) "Chờ 3 năm" must be worth as much as 3 years lived in the palace (gains at home equal what 3 palace years would give), so both choices are real. (2) Co-op: both players get the "Vào cung ngay / Chờ 3 năm" choice at the SAME time point on their roads; each chooses freely; time runs the same for both; one may live in the palace while the other lives at home. No forced joint entry, no waiting for the friend.
+[OD:L1289] - (16/11 09:10Z, s12) OWNER RULE (verbatim): "Rồi lưu ý nha, các nhân vật NPC phi tần á, là khi mà vào game là cũng bóc hên xui những cái thân phận này, cho nên là cũng sẽ có những cái kiếp mà tôi chơi á, là sẽ có phi tần là công chúa liên bang giống như vậy nè nha." → NPC consorts also roll their identity (origin) at game start from the same pool as the player, so in some lives an NPC consort IS a foreign princess (Nam Chiếu / Bắc Địch) with that princess art set, costume rules and road. The 3+3 princess faces per country are shared by player and NPC rolls (never the same face twice in one game).
