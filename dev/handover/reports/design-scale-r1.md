@@ -62,3 +62,8 @@ Content: 27 dropped, 9 unwrapped; no new content width rules. Chrome only (allow
 - main 9ddb3f6c (stage-slots-fix-r1): j59.js geo() conflict → main's kitSlotSw + design-scale's 46 px gutter (no innerWidth). stage-slots-fix 4 sizes (incl. 590x820), stage-slots-fix-r1-ev 3 sizes, design-scale (97.2 %), coop 59/59, rotate-prompt: pass.
 - scene-end "bloom" early=true FAIL at 755x1000/1180x820 — same on live main 9ddb3f6c (pre-existing).
 - **READY 802fe821** sent to s15.
+
+## LIVE (main 802fe821) — SMOKE PASS
+- design-scale B on GitHub Pages, 6 sizes: Fold 590x820 1 page room→page→room; iPad / iPad Pro spread; Fold cover + phone 390x844 rotated; 844x390 spread; 0 errors, no overflow.
+- rotate-prompt on live: ALL PASS.
+- Known pre-existing on main: scene-end "bloom" early=true FAIL (755x1000, 1180x820); Dư đồ→Hậu cung keeps .maptab (→ design-scale-p2); stage-counts elder off-by-one.
