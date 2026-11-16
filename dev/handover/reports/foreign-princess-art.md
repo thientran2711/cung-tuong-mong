@@ -85,3 +85,11 @@ STATUS: WAIT for the owner's verdict on v16; then STEP 2.
 ## v16b SAMPLE READY (Foreman C: put the skin-fixed BD Tần + Quý phi B on the sheet). v16 sheet deleted.
 File: `foreign-princess-art/sample-v16b.jpg`. BD Tần (YMsdzwNWeC) and NC Quý phi B (aFA5hMifSh) = skin-only edits (c01 skin ref), outfit unchanged, labelled "da đã chỉnh, đồ giữ nguyên"; NC Đáp ứng/Tần/Phi as v16. Skin-fixed BD Tần differs slightly from the approved one (hair/headband re-rendered a little). Credits already counted (v8-v16 total 2,960); v16b 0.
 STATUS: WAIT for the owner's verdict.
+
+## OWNER on v16b: she dislikes the NC face, head reads big, face/style/proportion drift across ranks. EVERYTHING NC DROPPED (incl. Quý phi B). Redraw from scratch: no figure/body/costume refs, at most ONE face ref; all 4 ranks in ONE generation.
+## v17 SAMPLE READY (v16b deleted)
+File: `foreign-princess-art/sample-v17.jpg` = ONE gpt-2-6 generation (4RQznLX9Aa), unedited, no crops: NC Đáp ứng | Tần | Phi | Quý phi, same canvas.
+Only ref = the approved consort face face-consort-01 (EbnrrdZuuO). Prompt: same princess, same face (fair porcelain, soft round-almond eyes, serene closed lips), same painting style, natural adult proportion, only costume rises by rank (pale blue silver / deeper blue + silver bells headdress / deep azure + tall silver crown + layered collar / own palace court robe teal-gold phoenix + gold crown + pearls). First batch had printed rank name cards and broad smiles -> redone with "no text/labels", closed lips. Looked at 8 lineups; picked this one (alts Sym6ibQUb8, kspw7fx16B, iGbc0Up3uK).
+Honest: the girl is generated, not a pixel-copy, so her face differs slightly from lineup to lineup but is consistent within this sheet by eye. Heads look natural-sized.
+Credits: 8 x 40 = 320 (v8-v17 total 3,280).
+STATUS: WAIT for the owner's verdict.
