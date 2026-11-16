@@ -8,6 +8,11 @@
    - Settings: a row "Thông tin cập nhật" (kit .kctl row + .kbtn.alt) in Thiết lập; it opens the title's own sub-screen "notes" (j74 go('notes'), ‹ Lui back to Thiết lập) with the recent releases (≤ 8).
    Only kit parts: kitModal kind "notice" (news/info/rule add a picture column) (sections + facts), kctl row, kbtn. No private CSS. */
 const CTM_NOTES=[
+ {id:"2026-11-16b",n:[
+  "Mỗi đời chọn được mức Dễ, Vừa hay Khó; có thêm những lối riêng để rời cung, xuất gia hay sống ẩn dật.",
+  "Tứ đức có trò chơi nhỏ riêng và làm ra đồ thủ công; chạm vào chương mục tiêu để xem chi tiết.",
+  "Thắng thua trò chơi nhỏ có tiếng báo; nhiều thẻ có tranh mới; sưu tầm đủ món được danh hiệu.",
+  "Chữ trên thẻ hành động rõ hơn; mỗi tháng có kỳ nguyệt sự, xem được sổ nguyệt sự ở Kính sự phòng."]},
  {id:"2026-11-16",n:[
   "Thiết lập có mục «Thông tin cập nhật»: xem lại những điều mới của từng lần cập nhật.",
   "Sổ chơi một mình và phòng chơi cùng hảo hữu ghi riêng, không đè lên nhau.",
