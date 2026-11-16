@@ -109,3 +109,35 @@ dev/test/toilette.js + toil-react.js + toil-looks.js stay green; new measure dev
 
 ### HANDOVER (if this worker rolls over)
 State: phase 1 report done, waiting for owner choice 1/2/3 via s24. Sim lives in dev/handover/reports/diemtrang-score/ (sim.js today's model, heavy.js colour table, prop.js proposal). Build branch: review/diemtrang-score from origin/main.
+
+---
+
+## PHASE 2 — BUILD (owner answer 16/11 ~22:30Z: no palette warning; no dotted guides, freehand strict scoring; brow target per portrait)
+
+Branch review/diemtrang-score, base review/minigame-frame bd2234661 (on top of diemtrang-fx). Commit 2793359f3 (built). Only dev/build/jtoil.js changed in game code.
+
+### OWNER BLOCK (Vietnamese)
+Sếp, em làm xong cách chấm Điểm trang mới:
+- Không còn đường chấm gạch, không còn vòng má. Sếp tự tay kẻ mày, đánh phấn lên mặt.
+- Chỗ đúng được giấu và lấy từ chính gương mặt đang soi: chân mày thật, gò má thật, môi thật. Chân mày không còn nằm trên trán nữa (em đã soi ảnh để kiểm).
+- Chấm khắt khe: mày phải nằm đúng chân mày, đủ dài, không lố ra ngoài, không nguệch ngoạc, hai bên phải cân; phấn phải đúng gò má, đều hai bên, không lem ra ngoài; son phải chấm đúng môi. Tay nghề chỉ nới ra một chút.
+- Hỏng một phần là mặt vụng, và người trong cung chê đúng chỗ hỏng (mày lệch, phấn loang, son lem).
+- Diêm dúa vẫn do lựa chọn (màu đậm, kiểu diêm dúa, phấn dày, y phục phô trương, đậm quá so với dịp hôm đó), không báo trước, chỉ lộ ra lúc xem kết quả.
+- Phi tần khác dùng cùng bảng; hai người chơi chung thấy cùng một kết quả.
+
+Kết quả đo (tay chơi bình thường, Kiểu thanh nhã, trên 100 lần), theo tay nghề mới vào / khá / giỏi / tối đa:
+- Vụng: 47 / 35 / 22 / 17 (trước đây gần như 0)
+- Vừa: 51 / 60 / 48 / 40
+- Đẹp: 1 / 5 / 29 / 42
+- Chọn Kiểu diêm dúa: diêm dúa khoảng 37 đến 53.
+Tay khéo, chơi cẩn thận thì gần như không vụng (đó là công sức của sếp). Tay vội thì vụng 86 đến 98.
+
+### English details
+- New BAL.toil keys (ONE CORE): skillShare 20→10; brow{tol,tolSk,overK,messyK,symK,smear}; cheek{r,dx,dy,puff,step,spill,bal,doseLo,doseLoSk,doseHi,doseHiSk,cake}; lip{tol,tolSk,ttol,ttolSk}; fail .3; fb (fallback ideal from 360 measured portraits); heavy/tone per colour; teaseGhen, presetDiem, mixH, showyH, cakeH; allow{thuong 4, thinhan 3, night 5, fest 6, tang 1}; diemOdds [0,.3,.55,.8,.95]; play{q0 .53, qSk .15, spread .44, cake .12, diemPre .3}. Removed: diemThick, npc.base/sac/spread.
+- Functions: toilIdeal (mk-fit brows 40–59 / eyes 20–39 / lips 0–11 → hidden targets; re-anchors when the face points arrive), toilBrowQ, toilPowderQ (dose grid over the face, offscreen layer), toilLipQ, toilHeavy, toilAllow, toilLookOf, toilMk, toilNpcPlay; toilMakeup rewritten (no guides; lip ring kept as the timing mechanic); toilFinish look; toilNpc + toilAuto through toilNpcPlay (hash-seeded, no Math.random); TOIL_SLIP witty lines (Thái hậu / Hoàng hậu / Hoàng thượng / rival × brow / powder / son, + diêm dúa); rivals tease a vụng face too.
+- No palette warning was added (owner: keep the surprise).
+- Measure: `node dev/measure/toil-dist.js [n]` (reads the real jtoil block; face data from CDN). NPC/bot by skill .12/.4/.75/1: vụng 43/28/13/3, diêm dúa 10/11/14/16.
+- Tests: dev/test/toil-draw.js Fold 755x1000@2 + iPad 1180x820@2 PASS 6 (careful hand on the painted brows → đẹp 80; sloppy (brows 22 px up, powder off) → vụng, slip brow). Shots looked at: the ideal brow lies exactly on the painted brows.
+- Seen, not mine: on this base the result reveal still shows the round dark disc (diemtrang-fx scope); the mirror face picture leaves a beige strip on the right of the glass.
+- KIT REQUEST (open): the vụng face layer could draw the specific slip (one brow kinked / blush on one cheek / son outside the lip); today TOIL_MKS.vung draws the generic smudge.
+- Merge note: review/diemtrang-coop-look (F5) also edits toilFx's first line (toilFriendRec); trivial conflict with toilMk here — keep both (rec from toilFriendRec, mk = toilMk(rec)).
