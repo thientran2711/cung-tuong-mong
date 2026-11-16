@@ -101,3 +101,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (07:05Z s11) Owner: place glyphs not in game style → v2 sample (3 glyphs, ≤~200 cr) by the place-glyphs worker; live v1 stays until v2 approved.
 - (07:10Z s11) Owner: minigames too easy → mg-balance (opus) to Foreman B (spec OD 07:10Z).
 - (07:15Z s11) Owner on fp v2 (OD:L1256) → v3 redo sent to the sample worker (new distinct faces for nc and bd, hair per rank, rank costume colours matched to game dress tiers, no fur).
+- (07:05Z s11) place-glyphs v2 SAMPLE (3: Kính sự phòng, Lãnh cung, Tân Giả khố; 120 cr) looked at + sent to owner. Waiting for her verdict; then remaining 6 → Foreman C.
