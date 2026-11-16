@@ -13,8 +13,8 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn-r1 | sonnet | PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
 | C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
-| C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
-| C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING (resumed) |
+| C32 page-curl2 | review/page-curl2 | sonnet | QUEUED (C33 done; next free slot; D37 drag-curl is the coordinator's — coordinate) |
+| C33 weekbook-entries | review/weekbook-entries @1ddfdda7 | sonnet | REVIEWING (review/weekbook-entries-r1, sonnet) |
 | C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
@@ -72,3 +72,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q10 (C37 panel-size): with one frame size per viewport, short one-line notices now sit in a full-size frame with empty paper (as the rule asks). Owner may want to see it before it goes live.
 - Q11 (D39 appearance-port): her own ingredient-specific allergy in recipes (PM:L326) was not built — rash causes already include son phấn and bad-luck food. Owner wants a per-ingredient allergy in recipes (new feature), or is the current cause list enough?
 - Q12 (D32 succession-port): the 12 dedicated epilogue pictures in SUCCESSION_PLAN §7 were never approved; chapters reuse approved event art. Owner wants dedicated pictures? And ending cards show ev-quoc-tang (from main's code) — the right picture for succession endings?
+- Q13 (C33 weekbook): week-book entry wording is generic per person and direction ("Hoàng thượng để tâm đến ta hơn", "nàng bớt ghen"); per-act sentences would need act data — owner want that later? Also many "Mấy việc vặt…" lines until review/log-sync lands on main (missing log lines; honest, not a bug).
