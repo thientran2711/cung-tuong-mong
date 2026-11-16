@@ -18,7 +18,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C34 contest-ui | review/contest-ui-r3 | sonnet | PASS 231ae9e93f271c2d3b3bb171dab55051ba7e2160 (CONDITIONAL on kit keeper: kitGameFrame pic etc.) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
-| C26b stat-fx follow-up | review/stat-fx-2 @f4096090 | sonnet | REVIEWING (review/stat-fx-2-r1, sonnet); contains stat-fx-r1 + pcard-fill-r1 |
+| C26b stat-fx follow-up | review/stat-fx-2-r1 | sonnet | PASS 6d4540a7cf2b61de482fde24f9e3df36782fa61f |
 | C46 map-labels | review/map-labels-r1 | sonnet | PASS e23562007d7f431fce9fdbc95bf1f2799ad6a350 (KIT KEEPER: §34.1d re-skin) |
 | D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
 | D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
@@ -50,6 +50,7 @@ PASS review/weekbook-entries-r1 1badc13c817d0d67971439fd6d2cbd944e47ad89 (C33; p
 PASS review/map-labels-r1 e23562007d7f431fce9fdbc95bf1f2799ad6a350 (C46; readable Dư đồ paper-chip labels 13px, mapFit floor zoom; needs kit keeper approval of the §34.1d re-skin)
 PASS review/contest-ui-r3 231ae9e93f271c2d3b3bb171dab55051ba7e2160 (C34; picture-left game frames, real prizes by place, equal-height podium, new podium backdrop; CONDITIONAL: kit keeper signs off the contest-ui list in KIT KEEPER NEEDED; prize numbers = Q16)
 PASS review/page-curl2-r1 3f95e00368db1e5acf3aca47889ce7cb42861a4b (C32; portrait paper slide / landscape curl, swipe only in Tuần lục; CONDITIONAL: kit keeper adds kitSlideSheet + kitPortrait/KIT_SLIDE_MS/kitSlideEase + portrait=slide/landscape=curl rule + Gọn 120 ms fade + 'swipe only inside kitBook' to KIT §34)
+PASS review/stat-fx-2-r1 6d4540a7cf2b61de482fde24f9e3df36782fa61f (C26b; person card / status tiles glow on re-render, grudges inverted; k61How full sentences; mood tile without cause = plain kit card. Number colour itself waits for the §57.1 KIT REQUEST)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
