@@ -21,11 +21,8 @@ const KIT_PET={h:{S:.24,M:.30,L:.34},ov:.5,
   cho:"M",sutu:"M",linhmieu:"M",camke:"M",cuuvi:"M",phuong:"M",
   hac:"L",thienma:"L",bachloc:"L",kylan:"L",thanhlong:"L"},img:{}};
 window.KIT_PET=KIT_PET;
-/* KIT 33.9 · 3 PEOPLE + 3 PETS ON ONE STAGE (owner 16/11 18:15Z: people "phải cao hết cái khung hình", never shrunk). With 1–3 people on the page everyone keeps the FULL kit figure height (KIT_FIG, no J59HMIN shrink).
-   3 people: the right plaque column folds to portrait icons (.stage.k3ico, KIT_STAGE3.colA px, text hidden, title + tap keep the card). Width is made like a group photo: when the slot rule (33.7) does not fit the art,
-   the first person's left edge sits at the free-area left, the last person's right edge (+ pet) at its right, the others evenly between (side overlap, never a face covered); every other person (the middle one of 3) is the BACK row:
-   feet lifted KIT_STAGE3.lift (4.5 % of the stage height, never above the ribbon), drawn behind (z 1 vs 2); name chips stay on ONE row, one slot wide, above everything. Pets stay in the front strip on the floor line. */
-const KIT_STAGE3={colA:56,lift:.045};window.KIT_STAGE3=KIT_STAGE3;
+/* KIT 33.9 · SWIPE STAGE (owner 16/11 18:22Z, replaces "3 people on one stage"): people NEVER shrink (KIT_FIG). A view holds as many people (+ their pets) as fit side by side at the kit height (j59 `fits`, 33.7 slots; up to 6: Fold portrait ≈ 2, iPad more),
+   the others are reached by SWIPING the row left / right (no arrow buttons; the row follows the finger, then slides out / in, 220 ms, transform only). Two "+N" kit chips in the top corners of the backdrop: LEFT = people already passed, RIGHT = people still to come; hidden at 0. A drag never opens a pop-up; a tap does. */
 function kitPetClass(k){try{k=typeof petK==="function"?petK(k):k}catch(e){}return KIT_PET.cls[k]||"M"}
 function kitPetOf(who){try{if(!who)return null;for(const w of [typeof figWho==="function"?figWho(who):null,who.ref,who,who.__kp]){if(w&&typeof w==="object"&&Array.isArray(w.pets)&&typeof tsbPetOn==="function"){const P=tsbPetOn(w);if(P)return P}}}catch(e){}return null}
 function kitPetLoad(src,cb){const c=KIT_PET.img;if(c[src]!==undefined)return c[src];c[src]=null;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{c[src]={ar:im.naturalWidth/Math.max(1,im.naturalHeight)};if(cb)cb()};im.onerror=()=>{c[src]=false;if(cb)cb()};im.src=src;return null}

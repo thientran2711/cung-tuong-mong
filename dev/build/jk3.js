@@ -195,10 +195,7 @@ html body .stage.k3g #sc-t h2{display:block!important;font-size:1.05rem;line-hei
 html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
-.stage.k3ico .kshR .k3ct,.stage.k3ico .kshR .k3p,.stage.k3ico .kshR .k3r{display:none!important}
-.stage.k3ico .kshR .k3c{padding:2px;justify-content:center;gap:0}
-html body .stage.k3ico .kshR{width:var(--kcola,56px)!important}
-.kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-width:0;max-width:none;z-index:2;align-items:stretch;box-sizing:border-box}
+html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-width:0;max-width:none;z-index:2;align-items:stretch;box-sizing:border-box}
 /* review/stage-side: one narrow column; every plaque is the column width (border-box), names / labels wrap, nothing runs past its edge */
 .kshR *{box-sizing:border-box}.kshR .k3c .k3ct>b{white-space:normal!important;overflow-wrap:anywhere}.kshR .k3c .k3ct{flex:1 1 auto}
 .kshR .k3r>b{white-space:normal;text-align:right}

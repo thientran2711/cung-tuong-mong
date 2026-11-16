@@ -19,3 +19,19 @@ The kit figure scale is KIT_FIG.h = .79 of the stage (owner-approved 11/15, meas
 
 ## Shots (FULL screen, label = device + size, in dev/handover/reports/stage-pets-r3/)
 ipad-1180x820-{n1M,n2SL,n3SML,n3LLL}.jpg · fold-755x1000-{n1M,n2SL,n3SML,n3LLL}.jpg. NPC pictures are the grey placeholder silhouettes in the test env (art not loaded); pets = real cut-out / placeholder art.
+
+# ROUND 4 — SWIPE STAGE (owner 16/11 18:22Z; replaces "3 people on one stage"; the r3 stagger/lift/column-fold code is REMOVED)
+Rule: people never shrink; a view holds what fits at the kit height; the rest by swipe; "+N" chips on BOTH sides (left = passed, right = still to come, hidden at 0); no arrow buttons; tap = pop-up, drag never opens it. KIT.md 33.9 rewritten in place; code j59.js (j59swipe / j59go / j59chips), test dev/test/stage-swipe.js (+ stage-pets.js still 16/16 pass).
+## Numbers (embedded room stage, test env)
+| device | body px (kit) | people per view | swipes (6 people) | chips | arrow buttons | page errors |
+|---|---|---|---|---|---|---|
+| iPad 1180x820 | 492 (no shrink) | 1 | 5 forward + back OK | L/R = +1/+4, +2/+3, +3/+2, +4/+1, +5/- ; hidden at 0 | 0 | 0 |
+| Fold 755x1000 | 542 (no shrink) | 1 | 5 forward + back OK | same | 0 | 0 |
+Swipe: drag follows the finger (--j59dx), release ≥ 56 px slides out then in (220 ms, `translate` only; instant for reduced-motion), < 56 px bounces back. rAF frame times over a swipe (headless software rendering, 2 jobs in parallel, screenshots taken mid-swipe add spikes): avg 18–22 ms, p95 22–66 ms; the swap itself (j59lay) is one layout call. Real-device perf not measurable here.
+## Why only 1 person per view today — numbers
+The room stage on the page keeps the right plaque column (iPad 148 px, Fold 181 px of the stage) and the fixed 33.7 slots (k people at 1/(k+1) of the free width) + the pet rule (art/2 + pet + widest/2 ≤ slot). At kit height the widest art is 267 px (man silhouette, iPad) / 294 px (Fold); woman 189 / 208. Free width iPad ≈ 434, Fold ≈ 574 → two people need 2·(art/2+pet…) > slot (iPad 145 vs 267; Fold 191 vs 294). So the spec "Fold 2 people + 2 pets, iPad 5–6" can only come true on the FULL-SCREEN backdrop (no column): Fold 755 → slot 252 ≥ woman 208 + pet only for SMALL pets (pet allowance 44 px; M/L pets need 89/69+ → 1 per view); iPad 1180 → 3 men or 4 women per view. 5–6 per view on iPad would need the pet to overlap the neighbour's empty margin or edge-to-edge packing (breaks the fixed-slot rule OD 16/11) — owner/main decision.
+## NOT done / for main
+- The Dư đồ courtyard-map level and the full-screen place painting are NOT on main (only palace names exist); branches review/palace-map, palace-map-port(-r1), palace-start(-r1) hold work — not touched, not built. The swipe stage is kit code on #stage (j59) and will serve that painting once it uses the same stage layer.
+- Own-room order: homePeople() already lists the maid before others; a maid's pet follows the maid; eunuchs etc. come after → next swipe (not separately testable here: no eunuchs in the test state).
+- Old-save: no save field touched. Dư đồ locks untouched.
+## Shots (FULL screen, device + size in the file name): dev/handover/reports/stage-pets-r4/ {ipad-1180x820,fold-755x1000}-{n1-view1,n2-view1,n2-view2,n6-view1,n6-view3,n6-swipe2-drag,n6-swipe2-anim}.jpg
