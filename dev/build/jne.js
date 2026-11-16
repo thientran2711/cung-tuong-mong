@@ -10,7 +10,7 @@
        festival's own picture (img/ev-fest-<k>-b.webp, the 14 festival paintings) — with the day's weather drifting over it (kitWxEffects
        weather → petals / rain / snow / leaves / fireflies). Tap = skip to the week panel. Reduced motion: still pictures, no particles.
    Both are kit motion pieces (j93 kmStage / the week panel) — no private frames; rows = kitRows (§51), items = kitItem + kitGradeChip.
-   No new save state (old saves load unchanged). */
+   Save state: only S.neMorn (the morning-after follow-up, §4 below; absent in old saves → nothing). */
 Object.assign(BAL,{nightEnd:{
  /* tier points = s (the night's own score from j8 night1: prep q + talk fit + his mood [+1,0,−1,−2] + luck 0..2, −2 if an over-rank
     piece was confiscated) + her toilette today (jtoil makeup: tuyệt/đẹp +1, vụng/diêm dúa −1) + talk (−2 when the pillow talk lost her
