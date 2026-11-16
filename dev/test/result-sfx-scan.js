@@ -28,7 +28,7 @@ for(const r of after){const b=before.find(x=>x.file===r.file&&Math.abs(x.line-r.
 console.log(`\ncall sites: ${after.length}, with ok arg: ${after.length-bad}, missing: ${bad} (before: ${before.length} sites, ${before.filter(x=>x.n>1).length} with ok)`);
 /* resultShow wrappers: all are re-entered through the one central wrapper (jsfx) */
 const js=fs.readFileSync(path.join(root,'dev/build/jsfx.js'),'utf8');
-const central=/W\("resultShow"[\s\S]{0,400}kitResultSfx/.test(js)&&/W\("kg82ShowRes"/.test(js);
+const central=/const RS=o=>[\s\S]{0,400}kitResultSfx[\s\S]{0,250}W\("resultShow",RS\)[\s\S]{0,400}W\("__aaR0",RS\)/.test(js)&&/W\("kg82ShowRes"/.test(js);
 const rsB=files.filter(f=>/(^|[^\w.])resultShow\s*=\s*function|W\("resultShow"/.test(fs.readFileSync(path.join(root,'dev/build',f),'utf8')));
 console.log(`resultShow definitions/wrappers: ${rsB.join(' ')} -> central sound wrapper in jsfx.js: ${central?'yes':'NO'}`);
 process.exit(bad||!central?1:0);
