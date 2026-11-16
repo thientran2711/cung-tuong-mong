@@ -350,6 +350,7 @@ Rules
 - Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+- Kit page sample (#kit, §8): `kitPopSample(k)` opens the REAL pop-up via kitModal for k = info (ĐIỀU, Thái hậu) · rule (LUẬT, small 3:4 picture slot) · event (VIỆC, Hoàng hậu: kitEventStage figure + scene band + act-card options) · result (KẾT QUẢ) · news (TIN, no person, picture in its type frame); the kit page hides while it is open and returns on close. Test: dev/test/kit-popup-sample.js.
 
 ## 9. FACTS, ROWS, CHIPS, PEOPLE (j79)
 - `kitFacts(facts,{group})`: `facts` = array of strings (split into sentences) or objects `{who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"}`.
