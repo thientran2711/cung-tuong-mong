@@ -66,6 +66,25 @@ Tutorial chapters 1–3, each 3–5 hồi, each hồi a TASK that is done only w
   Emperor once (night / dâng canh), answer one event card.
 - Ch3 "Học quy củ trong cung": sell 1–2 items from the chest (Tư trang › bán), buy one item (Nhờ thái giám mua đồ), take one Việc nhờ
   (j72) to its end, make one ally (Giao tình), read Sổ ghi.
+STORY FIRST (OD:L1259): chapters 1–3 are part of her story — every task is motivated by what is happening in her life and her rolled
+road (narration + a plot thread that later chapters pick up), never a detached feature tour. The road rolled at đầu thai (S.st.f14.road)
+seeds the reason; the feature is the means. Worked examples per origin group:
+- Court families (tt, dtq, ch): a letter from home — the house needs silver to quiet an official who is digging into the father (the
+  road's first conflict) → she SELLS 1–2 chest items and sends the silver home (Tư trang › bán + gửi); gain: the family's gratitude and a
+  name she will meet again in ch4; loss: the items and a little Danh if the sale is seen.
+- Merchant / poor scholar (muoi, thd): her stipend is short and a rival mocks her plain dress at the first gathering → she BUYS one item
+  through the eunuch (Nhờ thái giám mua đồ) and WEARS an outfit for the gathering (Tư trang › mặc); the eunuch becomes the contact the
+  road uses later; loss: silver she will miss next month.
+- Disgraced house (td): the old steward of her house (story-only NPC allowed, OD:L1234) sends a message from outside → she must find out
+  who guards the side gate: GO to a place on Dư đồ and READ a person card (Hậu cung); gain: the first clue of the frame-up; loss: the
+  guard now knows her face.
+- Foreign princess (nc, incl. Bắc Địch): the Lễ bộ asks her to prove she follows palace custom → THỈNH AN the Thái hậu three mornings and
+  learn one art lesson (Tài nghệ); gain: Thái hậu's first favour; loss: her envoy is angry she bowed so low.
+- Palace maids (cn, cnv): her mistress needs a gift for a senior consort by month end → she makes one work in an art mini-game and GIVES it
+  (gift picker); gain: the mistress's trust; loss: a fellow maid who wanted the errand resents her (real oán, OD:L1247).
+- Every origin, ch2 "Lần đầu được sủng": a real reason from the road (her father's rival's daughter is favoured; the Thái hậu hints) leads
+  to the first night / dâng canh; ch3 "Học quy củ": a Việc nhờ from a person already in her road (j72 card) and one ally made in Giao tình.
+Each hồi text names the real people involved (castRv67 / road cast), and the chapter-end card ties the outcome into chapter 4.
 State per task: counters written by the feature itself (S.tu14.{sold,bought,gift,...}); no counter → the task cannot be marked; the coach
 (jtut kitCoach) may point at the button but never completes the task. Replay: tasks reset per life, rewards only when done again (no skip-with-reward).
 Servant life (cnv) gets its own three chapters (phận sự, Đồng liêu, chủ tin).
@@ -130,3 +149,5 @@ open NPC request at a time. Starts after phase 1 is on main (needs the frame), c
 [OD:L1251] - (16/11 07:00Z, s11) OWNER (replaces the "no home road" part of OD:L1244): build a PRE-PALACE road for the two remaining origins Cung nữ tuyển vào cung (cn) and Công chúa hòa thân (nc, every country branch incl. Bắc Địch), the same way as the td fix (home life before the event that sends her into the palace; that event shown as a kit event card, then the palace road). "Bạn linh động." Coordinator: cnv (cung nữ được sủng hạnh) already starts as a palace maid → no home road. Narrated intro + illustrations + entry animation + selection minigame (OD:L1244, L1250) still apply to every origin.
 [OD:L1252] - (16/11 07:00Z, s11) OWNER RULE (variety across lives): an NPC who comes to ask her help must NOT bring the same task every life. Same person A with the same identity in two lives → a DIFFERENT request, at a DIFFERENT point of A's own road (this life A comes at hồi 1, another life at hồi 4). Tasks and their choices vary per life. → NPC roads (OD:L1243) are the way: her help = one hồi drawn from A's road. Treated as the owner's approval of NPC roads; D5 "side quests for every NPC" is replaced by it.
 [OD:L1253] - (16/11 07:00Z, s11) OWNER RULE (no memorised outcomes, main story too): the same identity + same road + same option chosen must NOT always give the same result across lives. Outcomes depend on the context of that life (people's traits, relations, abilities, who is watching, earlier choices), so players cannot learn the story by heart and always pick "the best". Reaffirms OD:L478 for EVERY story choice (main road, NPC requests, events).
+
+[OD:L1259] - (16/11 07:15Z, s11) OWNER RULE (tutorial chapters 1–3): the new-player tutorial must still be PART OF THE STORY — narration and plot thread tie each tutorial task to what is happening in her life/road; not a detached feature tour.
