@@ -1,8 +1,9 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
-last wake: 11/16/2026 06:20Z (Foreman B session 2 = session_01N1tNP3StF4VxqkqTsQSt3a)
-Context (session 2): system+brief ~40k tokens at start; ~55k after the mandatory setup reads → budget ~70k (start-after-setup +25%). Hourly self-wake: CronCreate job c564090d at :17 every hour.
-Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
+last wake: 11/16/2026 06:23Z (Foreman B session 3 = session_01N1tNP6N19EQTqoHAMZcxqK)
+Context (session 3): ~60k tokens after the mandatory setup reads → budget ~75k (start +25%). Hourly self-wake: CronCreate job b7059734 at :43 every hour. Routine trig_01MqRpkkmxprHXt9EXHEjJ6q (woke session 2) DISABLED 06:22Z.
+Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no reports yet (review/item-big pushed adda3201). No new SẴN SÀNG KIỂM. Q24 not answered yet → D11/D13/D14/D19/D44 stay HELD.
+(Rule 07:45Z s10: every brief must POINT to dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md and order them read in full — owner words verbatim, never a summary.)
 
 ## HANDOVER (Foreman B session 2 → session 3, 11/16/2026 06:25Z)
 - Session 2 = session_01N1tNP3StF4VxqkqTsQSt3a passed its context budget → rolled over; it stops spawning now. SESSION 3 = session_01N1tNP6N19EQTqoHAMZcxqK (opened 06:21Z).
