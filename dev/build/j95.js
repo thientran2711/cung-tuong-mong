@@ -269,6 +269,10 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
  if(R.P["mm:me"])for(let i=kh;i<4;i++)R.P["mm:me"][i]=S.out?["lc","serve","me","hầu chủ ở lãnh cung"]:me==="home"?["home","serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
  /* staff whose owner fell / rose: follow the owner's new home */
  for(const p of ppl)if((p.kind==="st"||p.kind==="mm")&&p.ref!==S){const e=R.P[p.id];for(let i=kh;i<4;i++){if(e[i][1]!=="follow"&&e[i][1]!=="errand"&&e[i][0]!==p.home)e[i]=[p.home,"serve","v"+p.ref.id,"phận sự trong cung"]}}
+ /* jplx lists can change inside a buổi (a servant punished to Tân Giả khố, the rest list): now and later khắc follow them */
+ for(const p of ppl){if((p.kind!=="px"&&p.kind!=="st")||!p.ref)continue;const e=R.P[p.id];if(!e)continue;const oid=p.ref===S?"me":"v"+p.ref.id;
+  for(let i=kh;i<4;i++){const x=e[i];if(p.kind==="px"){if(x[0]!==p.home)e[i]=p.home==="tgk"?["tgk","laundry",oid,"bị phạt giặt giũ ở Tân Giả khố"]:["cnh","offduty",oid,"đến lượt nghỉ tay"]}
+   else if(x[1]==="offduty"||x[1]==="laundry")e[i]=[p.home,i%2?"clean":"serve",oid,p.home==="lc"?"hầu chủ ở lãnh cung":"phận sự trong cung"]}}
  for(const p of ppl)if(p.kind==="rv"){const v=p.ref,e=R.P[p.id];for(let i=kh;i<4;i++){const un=()=>{if(typeof j95cUnsay==="function")j95cUnsay(p.id,R.key,i)};if(v.out){if(e[i][0]!=="lc"){un();e[i]=["lc","cold",null,"bị đày vào lãnh cung"]}}else if(v.confined&&e[i][0]!==palaceOf(v)&&e[i][1]!=="tryst"){un();e[i]=[palaceOf(v),"confined",null,`bị cấm túc ${v.confined} tháng`]}}}
  try{j95fixHouse(R,kh,ppl)}catch(e){j95err("house",e)}
  const W=j95view(R,kh);S.where=W;const MW={};for(const m of S.men||[]){const e=R.P[m.id];if(m.alive&&e&&e[kh][0]&&e[kh][0]!==J95OUT_)MW[m.id]=e[kh][0]}S.menW=MW;

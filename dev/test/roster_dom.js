@@ -21,7 +21,7 @@ const [,,BASE,OUT,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');
    const drawn=[...document.querySelectorAll('#stage [data-p]')].map(e=>P[+e.dataset.p]).filter(Boolean);
    for(const q of drawn){if((q.kind==="rival"||q.kind==="hh")&&q.ref&&!here.has("v"+q.ref.id))out.bad.push("sân khấu vẽ "+q.ref.name+" nhưng sổ không ở đây");if(q.kind==="emp"&&!here.has("emp"))out.bad.push("sân khấu vẽ Hoàng thượng nhưng sổ không ở đây");if(q.kind==="th"&&!here.has("th"))out.bad.push("sân khấu vẽ Thái hậu nhưng sổ không ở đây")}
    /* the maid road stage shows at most 4 consorts (j42 srvVisitOf / j95srvStage cap; its map count follows the stage, dev/test/stage-counts.js) */const srvCap=typeof isSrv==="function"&&isSrv()&&drawn.filter(q=>q.kind==="srv"&&q.ref&&q.ref.rel!=null).length>=(S.place==="home"?1:4);
-   if(S.visit&&S.visit.k===S.place&&S.place!=="lc"&&!srvCap)for(const v of liveRivals(true)){if(here.has("v"+v.id)&&!(S.place==="home"&&sameHouse(S,v))&&!drawn.some(q=>q.ref===v))out.bad.push("sổ có "+v.name+" ở đây mà sân khấu không vẽ")}
+   if(S.visit&&S.visit.k===S.place&&S.place!=="lc"&&!srvCap)for(const v of liveRivals(true)){if(typeof isSrv==="function"&&isSrv()&&S.place==="home"&&v!==srvM())continue;/* maid road: at home only her mistress is drawn (j95srvStage) */if(here.has("v"+v.id)&&!(S.place==="home"&&sameHouse(S,v))&&!drawn.some(q=>q.ref===v))out.bad.push("sổ có "+v.name+" ở đây mà sân khấu không vẽ")}
    out.place=S.place;out.drawn=drawn.length;out.ov=document.documentElement.scrollWidth>innerWidth+1;return out});
   if(i%5===0&&!process.env.NOSHOT)await p.screenshot({path:`${OUT}/stage-${i}.png`});
   /* map */
