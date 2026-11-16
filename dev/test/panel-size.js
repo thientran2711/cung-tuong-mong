@@ -24,11 +24,11 @@ const EXEMPT=/^(pcm|zoom)/; /* person card keeps pcard (KIT §3); picture zoom i
     const bs=(M&&M.querySelector('#mb'));const sc=[...el.querySelectorAll('*')].filter(x=>x.scrollHeight>x.clientHeight+2&&/auto|scroll/.test(getComputedStyle(x).overflowY)).map(x=>(x.id||x.className||x.tagName).toString().split(' ')[0]).slice(0,3);
     const btn=el.querySelector('#mr button,.kbtn');const br=btn&&btn.getBoundingClientRect();
     const xb=el.querySelector('.kph>.kit-x');const xr=xb&&xb.getBoundingClientRect();const kh=(el.querySelector('.kph')||el).getBoundingClientRect();const xIn=xr?xr.top>=kh.top-1&&xr.bottom<=kh.bottom+1:null;
-    const seal=(el.querySelector('.kpseal')||{}).textContent||'';
-    return{kind,w:Math.round(r.width),h:Math.round(r.height),top:Math.round(r.top),cls:el.className.toString().replace(/\s+/g,' ').slice(0,70),mcls:M.className.replace(/\s+/g,' '),seal,
+    const seal=(el.querySelector('.kpseal')||{}).textContent||'';const mbE=el.querySelector(':scope > #mb'),hdE=el.querySelector(':scope > .kph'),mrE=el.querySelector(':scope > #mr');const ch=Math.round((hdE?hdE.offsetHeight:0)+(mbE?[...mbE.children].reduce((s,c)=>{const cs=getComputedStyle(c);return s+c.offsetHeight+parseFloat(cs.marginTop)+parseFloat(cs.marginBottom)},0)+12:0)+(mrE&&!mrE.hidden?mrE.offsetHeight:0));const compact=el.classList.contains('kpcompact');const art=!!el.querySelector('.kpsubj,.kpiart,.kdlgart,.kaart,.ksart');
+    return{kind,ch,compact,art,w:Math.round(r.width),h:Math.round(r.height),top:Math.round(r.top),cls:el.className.toString().replace(/\s+/g,' ').slice(0,70),mcls:M.className.replace(/\s+/g,' '),seal,
      fits:r.top>=-1&&r.bottom<=innerHeight+1&&r.left>=-1&&r.right<=innerWidth+1,btnIn:br&&br.width>0?br.bottom<=r.bottom+1&&br.top>=r.top:null,scroll:sc,xIn,hs:el.scrollWidth>el.clientWidth+2}});
    if(m)size[name]=m;else size[name]={missing:1};
-   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const d=document.querySelector('.dawn');if(d)d.remove();const o=document.getElementById('ov');if(o){o.hidden=true;o.innerHTML=''}try{kitItemCardClose&&kitItemCardClose()}catch(e){}});};
+   await p.evaluate(()=>{Q.length=0;document.getElementById('title').hidden=true;try{document.getElementById('modal').className='modal'}catch(e){}document.getElementById('modal').hidden=true;const d=document.querySelector('.dawn');if(d)d.remove();const o=document.getElementById('ov');if(o){o.hidden=true;o.innerHTML=''}try{kitItemCardClose&&kitItemCardClose()}catch(e){}});};
   const run=async(name,fn)=>{try{await p.evaluate(fn)}catch(e){errs.push(name+': '+String(e.message).slice(0,120))}await measure(name)};
   await run('info-short',()=>kitModal({kind:"info",title:"Điều ngắn",sub:"Một dòng",facts:["Một câu ngắn."]}));
   await run('info-long',()=>kitModal({kind:"info",title:"Điều dài",sub:"Nhiều dòng",facts:Array.from({length:26},(_,i)=>"Câu số "+(i+1)+" dài vừa phải để thành hàng.")}));
@@ -48,6 +48,12 @@ const EXEMPT=/^(pcm|zoom)/; /* person card keeps pcard (KIT §3); picture zoom i
   await run('item',()=>kinvOpen(kinvItems()[0]));
   await run('place',()=>{kitPanel({kind:"info",title:"Ngự hoa viên"},true);kitPlaceDress(Q[0],"vuon");showModal()});
   await run('calendar',()=>kitMonthCalOpen());
+  await run('confirm',()=>{Q.push({t:"Chắc chưa?",h:"<p>Làm vậy không quay lại được.</p>",opts:[{n:"Chắc",fx:{}},{n:"Thôi",fx:{}}]});showModal()});
+  await run('picker-3',()=>{Q.push({t:"Chọn một người",opts:[{n:"Một",fx:{}},{n:"Hai",fx:{}},{n:"Ba",fx:{}}]});showModal()});
+  await run('title-menu',()=>{document.getElementById('title').hidden=false;showTitle()});
+  await run('title-opt',()=>{document.getElementById('title').hidden=false;showTitle();const b=document.querySelector('#modal [data-tgo="opt"]');if(b)b.click()});
+  await run('title-slots',()=>{document.getElementById('title').hidden=false;showTitle();const b=document.querySelector('#modal [data-tgo="slots"]');if(b)b.click()});
+  await run('title-past',()=>{document.getElementById('title').hidden=false;showTitle();const b=document.querySelector('#modal [data-tgo="past"]');if(b)b.click()});
   await run('identity',()=>{Q.unshift({t:"Nhập cung",nl:1,cls:"nlcard",h:"<p>x</p>"});showModal()});
   const ids=await p.evaluate(()=>Object.keys(PEND));let n=0;
   for(const id of ids){if(MAXP&&n>=+MAXP)break;
@@ -57,7 +63,9 @@ const EXEMPT=/^(pcm|zoom)/; /* person card keeps pcard (KIT §3); picture zoom i
   await p.screenshot({path:'/dev/null'}).catch(()=>{});await ctx.close()}
  fs.writeFileSync(OUT,JSON.stringify(R,null,1));
  for(const wh of Object.keys(R)){const s=R[wh].size;const ks=Object.keys(s).filter(k=>!s[k].missing&&!EXEMPT.test(k));
-  const ws=[...new Set(ks.map(k=>s[k].w))],hs=[...new Set(ks.map(k=>s[k].h))];
+  const ws=[...new Set(ks.map(k=>s[k].w))],hs=[...new Set(ks.map(k=>s[k].h))];const big=ks.filter(k=>!s[k].compact),cp=ks.filter(k=>s[k].compact);const bhs=[...new Set(big.map(k=>s[k].h))];
+  console.log('  '+wh+' TABLE  case | compact | frame h | content h | empty%');for(const k of ks)console.log('   '+k.padEnd(28),s[k].compact?'COMPACT':'big    ',String(s[k].h).padStart(4),String(s[k].ch).padStart(4),Math.max(0,Math.round(100*(s[k].h-s[k].ch)/s[k].h))+'%',s[k].art?'art':'');
+  const wasteBad=cp.filter(k=>s[k].h-s[k].ch>60);if(wasteBad.length)console.log('  WASTE>60px in compact:',wasteBad.join(','));if(bhs.length>1)console.log('  BIG frames differ:',bhs.join('/'));
   console.log(wh,'cases',ks.length,'widths',ws.join('/'),'heights',hs.sort((a,b)=>a-b).join('/'),'| missing:',Object.keys(s).filter(k=>s[k].missing).join(','),'| nofit:',ks.filter(k=>!s[k].fits).join(','),'| xOut:',ks.filter(k=>s[k].xIn===false).join(','),'| btnOut:',ks.filter(k=>s[k].btnIn===false).join(','),'| errs',R[wh].errs.length);
-  if(ws.length>1||hs.length>1)bad++}
+  if(ws.length>1||bhs.length>1||ks.some(k=>s[k].compact&&s[k].h>Math.max(...bhs,0)+1))bad++}
  await b.close();process.exit(bad?1:0)})();
