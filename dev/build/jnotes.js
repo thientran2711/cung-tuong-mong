@@ -45,10 +45,21 @@ function tick(){try{if(!CTM_NOTES.length){clearInterval(T);return}
  const u=unseen();ls.set(top);clearInterval(T);if(u.length)show(u,"Điều mới trong cung","Xem lại ở Thiết lập, mục «Thông tin cập nhật».","Đã hiểu")}catch(e){}}
 const T=setInterval(tick,1500);
 /* body() = the Thông tin cập nhật sub-screen of the title / Thiết lập (j74 page "notes"): kit sections, same markup kitPanel builds */
-const body=()=>CTM_NOTES.slice(0,8).map(e=>`<div class="kpsec"><h4 class="kpst">${when(e.id)}</h4>${kitFacts(e.n.map(t=>({text:t,kind:"world"})),{group:false})}</div>`).join("");
-window.CTM_NOTES_UI={list:CTM_NOTES,seen:ls.get,body,tick,calm,reset(){try{localStorage.removeItem(KEY)}catch(e){}}};
+/* BUILD LINE (go-live kit, owner OD:L1370 (d)): window.CTM_BI is written by dev/site/buildinfo.py at build time = {s: source commit, t: time
+   (ISO UTC), c: ONE "what changed" line, h: last 10 live builds}. Shown at the top of this sub-screen with kit parts only (kpsec + kpst +
+   kitRows, §51) and as the small line of the Settings row. Times in the device's local time, mm/dd/yyyy hh:mm. Empty when the build has none. */
+const BI=()=>{const b=window.CTM_BI;return b&&b.s?b:null};
+function stamp(t){const d=new Date(t||"");if(isNaN(d))return String(t||"");const p=n=>String(n).padStart(2,"0");
+ return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`}
+const esc=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function buildHTML(){const b=BI();if(!b)return "";
+ const now=`<div class="kpsec kbuild"><h4 class="kpst">Lần cập nhật đang chơi</h4>${kitRows([["Mã",esc(b.s)],["Lúc",stamp(b.t)],["Điều mới",esc(b.c)]])}</div>`;
+ const h=(b.h||[]).slice(0,10);
+ return now+(h.length?`<div class="kpsec kbuilds"><h4 class="kpst">Các lần trước</h4>${kitRows(h.map(e=>[stamp(e.t),[esc(e.s),esc(e.c)]]))}</div>`:"")}
+const body=()=>buildHTML()+CTM_NOTES.slice(0,8).map(e=>`<div class="kpsec"><h4 class="kpst">${when(e.id)}</h4>${kitFacts(e.n.map(t=>({text:t,kind:"world"})),{group:false})}</div>`).join("");
+window.CTM_NOTES_UI={list:CTM_NOTES,seen:ls.get,body,tick,calm,build:BI,buildHTML,reset(){try{localStorage.removeItem(KEY)}catch(e){}}};
 /* Settings: one more kit row at the end of the Thiết lập grid (label + .kbtn.alt, same row part as the switches) */
 const o0=optHTML;
-optHTML=function(){let h=o0.apply(this,arguments);const row=`<div class="kctl"><span class="kctl-l">Thông tin cập nhật<small>những điều mới từng lần</small></span><span class="kctl-c"><button type="button" class="kbtn alt" data-tgo="notes">Xem</button></span></div>`;
+optHTML=function(){let h=o0.apply(this,arguments);const row=`<div class="kctl"><span class="kctl-l">Thông tin cập nhật<small>${BI()?`mã ${esc(BI().s)} · ${stamp(BI().t)}`:"những điều mới từng lần"}</small></span><span class="kctl-c"><button type="button" class="kbtn alt" data-tgo="notes">Xem</button></span></div>`;
  return h.replace(/<\/div>\s*$/,row+"</div>")};
 }catch(e){console.error(e)}})();

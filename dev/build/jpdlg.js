@@ -47,7 +47,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdfig .kesf>.kpsn{display:none}
 .kpdlg .kpdr{min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
-.kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,17dvh,150px);aspect-ratio:auto}
+.kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,calc(17*var(--kvh,1dvh)),150px);aspect-ratio:auto}
 .kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
 .kpdlg .kpdt{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;font-size:.9rem;line-height:1.45;color:var(--ink)}
 .kpdlg .kpdt p{margin:0 0 6px}
