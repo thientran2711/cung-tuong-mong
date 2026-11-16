@@ -329,3 +329,4 @@
 | fest-fx (sonnet; owner bug: fireworks in her room on chiều): festival FX only tối + outdoor + fitting festivals; audit 3-buổi index leftovers | review/fest-fx | main s21 | session_01UV1Szk4mBQYLcS8DPSeeBv | RUNNING | 16/11 18:37Z |
 | pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
 | map-labels-2-b review r1 (sonnet) of 1deaf9cb (on dudo-lock) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | RUNNING | 16/11 18:38Z |
+| single-hall direct (sonnet): single-hotspot places skip the courtyard step (owner rule), on pl-courtyards-r1 | review/single-hall | main s21 | (see HANDOVER) | RUNNING | 16/11 18:40Z |
