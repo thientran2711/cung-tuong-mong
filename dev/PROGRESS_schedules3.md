@@ -153,3 +153,38 @@ Open: (1) 1 moment in 36 lives: a walk to Đức Thọ cung drew Thái hậu wit
 record right). (2) Known (a) at a mid-buổi maid→consort promotion (documented above) did not show this round. (3) Main bugs for session 8:
 jstaff Tân Giả khố double placement (both roads), jmen 3-buổi assumption; the jplx×jstaff overlaps are reconciled in j95 (point 3) but the
 owners of jplx/jstaff may prefer to fix them at source.
+
+## Fix pass 2 (review/schedules3-r2, 16/11) — after the reviewer's FAIL on r1 (dev/handover/reports/review-schedules3-r1.md)
+Base: review/schedules3-r1 f74f95d3 + merge of origin/main 18fb8252 (assemble: j95 order kept; main's new jpdlg after jk4). Site rebuilt.
+Root cause of items 1–4: j95 reconciled the stage only inside its own goTo/sync, but main modules loaded AFTER j95 (jact, jhouse, jkc, …)
+and older ones on other paths (jstaff addStage, j22 men, jhouse coldVisit) add people later. Fix at the root, for the whole family:
+- **ONE final reconcile, outermost** (`j95final`, installed with setTimeout 0 like j59's outermost countAt, so it wraps every module
+  whatever the load order): after `goTo, spend, nextBuoi, endTurn, coldVisit, talk, closeModal, chooseM` and before every `renderStage`, the
+  stage list is made to follow the record (j95stage + `j95elderFix` + j95dedupe); redraws only if something changed. `homePeople` (her room
+  stage AND the map number of her room through j59) is wrapped last too for the named elders. Off in co-op (j95on) and on a trip outside
+  the palace (jkc isKc). The bots stub renderStage, so the data-path hooks are what the audit sees; the renderStage hook covers the real game.
+- **Item 1 (her servants in lãnh cung)**: the stage did draw them (kind `serv`); the audit did not recognise kind `serv` (test gap). Audit fixed
+  both ways. Also: a drawn servant the record no longer has (sold / moved) now leaves the stage.
+- **Item 2 (Nội vụ phủ eunuch)**: (a) audit did not recognise kind `peddler` (test gap, fixed). (b) "đếm nvp: bản đồ 2 sổ 1" happened while she
+  was in LÃNH CUNG: jact adds +1 to countAt("nvp") unconditionally, and j95 took it off only while the place exists. Now: j95's countAt always
+  takes jact's +1 off for nvp; `j95vis("c:ped","nvp")` needs `j95nvp()`; the record line of c:ped follows `j95nvp()` from the current khắc on
+  (she can fall mid-buổi). One peddler entry: jact and j95stage both check `kind==="peddler"` before adding, and j95dedupe keeps one.
+- **Item 3 (home elder)**: the record now re-applies the post rule `j95elderK` to every named elder from the current khắc on at each sync (eid
+  given after the plan, turn 4 passing, Thái hậu dying, her fall), and the final reconcile makes the stage (and homePeople) follow the record.
+- **Item 4 (intermittent men)**: a drawn man the record does not have at all (j22 pushes from a stale S.menW before the sync) was never
+  removed (the guard was `R.P[id]` exists). Now a `man` entry not at this place in the record leaves the stage. stage-counts 3×: 0.
+- **Audit (h)**: the rule text says "or the record says why not (cấm túc / lãnh cung)": a card that places a consort and then confines her in
+  the same choice is now counted as `placeWhy`, not an error (record right).
+- dev/tools/roster.js: c:ped visible at nvp only when the place exists (not in lãnh cung / maid road).
+Family scan (modules that put people on a stage or count a place; script in the r2 report): j2/j3/j6/j9/j14/j41 (build S.visit), j22 (men),
+j42 (maid road, own rules), jmen (officials), jres (residence filter), jsl, jplx, jstaff, jact, jkc, jhouse, j59 (count) — all now pass through
+the final reconcile (stage) or j95's countAt (map); jcoopworld is co-op (ledger off).
+
+Ledger API changes in r2 (additive only; nothing removed or renamed):
+- new `j95final()` → true if the stage list changed (call after you add people to S.visit yourself; it is already run after the paths above).
+- new `j95elderFix(list, place, R, kh)` and `j95elderEntry(st)` (named elders on a stage list follow the record).
+- `j95vis("c:ped", "nvp")` is now also false when the Nội vụ phủ place does not exist (`j95nvp()` false).
+- `countAt("nvp")`: the final number = record in every state (jact's +1 is taken off whenever jact is loaded).
+- record: elders' and c:ped's now/later khắc are resynced each sync (no change to the shape `[place, act, target, reason]`).
+
+Results (r2 build = main 18fb8252 + r1 + r2): see dev/handover/reports/review-schedules3-r2.md (docs branch).
