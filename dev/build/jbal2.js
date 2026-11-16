@@ -290,6 +290,20 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
+/* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
+   act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
+   (relAdd: the robbed one also gains oán rel×.6); ghen = jealousy of the robbed consort.
+   agent (owner 16/11 14:10Z + 14:45Z + OD:L1386): an NPC tries out of SELF-INTEREST, not hatred. want = need × personality (persW "steal",
+   traits + mood, jemo) × relation to the holder × fear × odds (oSteal, the player's own formula). need = weighted gaps of favour (Sủng),
+   rank (to Hoàng hậu) and an heir (no living son; with a son the heir gap is heirHas). relation: thiện cảm toward the holder ≥ friend → only friendMin of the wish is left;
+   oán toward her adds oanW at oán 100 (a little: hatred drives harm schemes, not this). fear: holder ≥ gap ranks higher → × f; the
+   Empress's custom night (mùng một / rằm) → × custom. try chance = 1 − e^(−k × want), at most pMax; at most maxTry tries per night
+   (first win ends it, j75 one-try-each still holds). A road try needs Sức ≥ sucMin + its cost; a feign try needs Đức ≥ its cost. */
+/* relAdd (j9): oán that a change of thiện cảm n leaves — on a hurt (n<0) the hurt one gains |n|×hurt, the doer |n|×doer; a kindness (n>0) melts |n|×mend.
+   One number for the act and the card text (stealKem: oán ngươi +rel×hurt). */
+BAL.relOan={hurt:.6,doer:.2,mend:.3};
+BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
+ need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
