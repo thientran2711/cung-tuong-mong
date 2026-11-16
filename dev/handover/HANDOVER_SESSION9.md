@@ -222,3 +222,4 @@ Follow-ups: canon overwrite OD:L1141 → L1151 (mortality); "plead beforehand" a
 - (10:37Z real s15) merge-train-4 SMOKE PASS live 92668096 (boot, rotate 13 profiles, sfx 6 sizes, difficulty, collect-ms) → archived.
 - (10:52Z real s15) HOURLY WAKE: ctx 191k = 19 % (START re-based ~10 %; rollover ~35 %, ceiling 60 %). D READY list → merge-train-7 worker (sonnet) opened, queued after merge-train-6. kc-roads-cn-nc-r1 FAIL fixer → D (FOREMAN_D.md, OD:L1229). B STATUS stale 90 min → ping in FOREMAN_B.md. C fine (item512-art-r1 PASS). stage-slots-fix-r1 GO (re-merge 92668096) ahead of design-scale-r1.
 - (11:01Z real s15) LIVE: main = 9ddb3f6c (stage-slots-fix-r1, owner bug: stage slots + event band/column overlap, one kit slot fn). Smoke asked. design-scale-r1 told to re-merge → READY.
+- (11:12Z real s15) stage-slots-fix-r1 SMOKE PASS live 9ddb3f6c (755x1000 + 1180x820, 0 page errors) → archived. MORNING REPORT item: owner bug stage slot overlap fixed.
