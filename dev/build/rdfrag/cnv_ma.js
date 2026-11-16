@@ -68,11 +68,11 @@ rdDef("cnv_ma",5,{t:"Bài học thứ nhất",w:"maid",sj:"việc đầu tiên L
  x1:{h:"Ngày sương giá",w:"maid",need:["srv"],t:"Sương xuống. Sáu cung chờ áo rét và than. Phùng cô cô đứng ở cửa kho, tay cầm sổ.",o:[
   {n:"Giao đủ sáu cung, ghi thiếu đúng chỗ thiếu",c:{suc:-4},o:A=>40+(A.f.honest?15:0)+(A.f.hard?10:0)+S.duc/6,e:["win","lose"],rt:"Sáu cung đủ áo. Trong sổ, dòng thiếu ghi rõ: “chờ Nội vụ phủ tra.”",rf:"Phùng cô cô tâu lên rằng ngươi làm mất gấm."},
   {n:"Giao đủ, lặng lẽ khép sổ",c:{duc:-2},o:A=>45+(A.f.lead?15:0)+S.tamco/6,e:["win","mid"],lx:"che chỗ thiếu trong sổ, lòng ngươi áy náy; hỏng thì chỉ dừng ở giữa",rt:"Sáu cung đủ áo, không ai kêu.",rf:"Có một cung kêu, nhưng nhỏ."},
-  {n:"Xin ma ma đứng ra giao",c:{},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi đứng sau."}]},
+  {n:"Xin ma ma đứng ra giao",c:{danh:-2},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi đứng sau."}]},
  x2:{h:"Ngày sương giá",w:"maid",need:["nsrv"],t:"Sương xuống. Than cung ngươi vẫn thiếu ba phần. Phùng cô cô đến thỉnh an, tay cầm sổ lệ mới, chờ ngươi nói một lời.",o:[
   {n:"Đòi đủ phần than theo sổ cũ, chỉ rõ chỗ thiếu",c:{suc:-4},o:A=>40+(A.f.honest?15:0)+(A.f.hard?10:0)+S.duc/6,e:["win","lose"],rt:"Phùng cô cô cúi đầu. Than về đủ trước tối; dòng thiếu trong sổ ghi: “chờ Nội vụ phủ tra.”",rf:"Phùng cô cô tâu lên rằng cung ngươi đòi quá lệ."},
   {n:"Nhận than lệ mới, lặng lẽ cho người mua thêm",c:{bac:-20},o:A=>45+(A.f.lead?15:0)+S.tamco/6,e:["win","mid"],lx:"tốn bạc bù chỗ thiếu, chỗ hở trong sổ vẫn bị che; hỏng thì chỉ dừng ở giữa",rt:"Cung ngươi đủ ấm, không ai kêu.",rf:"Than mua ngoài ít hơn ngươi tưởng."},
-  {n:"Mời ma ma đứng ra nói",c:{},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi ngồi sau."}]}},
+  {n:"Mời ma ma đứng ra nói",c:{danh:-2},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi ngồi sau."}]}},
  E:{win:{k:1,tag:"Việc đầu trót lọt",w:"maid",t:LMMT("Sáu cung đủ áo rét trước sương giá. Lưu ma ma vỗ vai ngươi: “Được.” Cả Nội vụ phủ biết bà có một học trò làm được việc.",
    "Than về đủ, không ai bị mắng. Lưu ma ma cúi chào ngươi theo phép tiểu chủ, nhưng khi lui ra, bà khẽ nói: “Học trò của ta.”"),fx:{danh:4},go:()=>[lmmSrv({tin:6}),e67merit(5),lmmCon({tamco:2})].join(" ")},
   mid:{k:0,tag:"Xong việc, còn nợ một câu hỏi",t:"Việc xong, nhưng hai mươi tấm gấm vẫn chưa ai trả lời. Ma ma không nhắc, ngươi cũng không quên.",fx:{duc:2},go:()=>e67merit(2)},
@@ -109,7 +109,7 @@ rdDef("cnv_ma",6,{t:"Sổ sách Nội vụ phủ",w:"eun",sj:"khoản thiếu tr
  x1:{h:"Đêm khóa sổ",w:"eun",t:"Đêm khóa sổ, Nội vụ phủ đèn đuốc sáng trưng. Ai có chứng cứ thì đưa ra đêm nay, mai sổ đã niêm.",o:[
   {n:"Dâng chứng cứ lên Tổng quản",c:{suc:-4},o:A=>35+(A.f.proof?15:0),e:["win","lose"],rt:"{eun} lật từng trang, rồi cho giữ Phùng cô cô lại.",rf:"{eun} bảo: “Chứng cứ mỏng quá.” Phùng cô cô nhìn ngươi."},
   {n:"Đưa chứng cứ cho ma ma tự xử",c:{mat:-1},o:A=>45+(A.f.safe?10:0)+(A.f.two?10:0),e:["win","mid"],lx:"chứng cứ rời tay ngươi, mất một đầu mối; hỏng thì chỉ dừng ở giữa",rt:"Ma ma cầm sổ đến thẳng Tổng quản, đòi tra.",rf:"Ma ma cất sổ đi: “Chưa phải lúc.”"},
-  {n:"Đốt bản chép, giữ mình",c:{},w:{duc:1},e:"mid",lx:"đầu mối mất, chuyện chỉ dừng ở giữa",rt:"Ngọn lửa nhỏ trong lò, ngươi nhìn đến khi tắt."}]}},
+  {n:"Đốt bản chép, giữ mình",c:{danh:-2},w:{duc:1},e:"mid",lx:"đầu mối mất, chuyện chỉ dừng ở giữa",rt:"Ngọn lửa nhỏ trong lò, ngươi nhìn đến khi tắt."}]}},
  E:{win:{k:1,tag:"Sổ gốc đã ra ánh sáng",w:"eun",t:"Kho Nội vụ phủ bị niêm, Phùng cô cô bị giữ lại hỏi. Nhưng ngươi biết: người như bà ta không ngã một lần là xong.",fx:{danh:5,mat:1},go:A=>{rdOan(A,"v",6);return [lmmSrv({tin:5}),e67merit(4),lmmCon({tamco:2})].join(" ")}},
   mid:{k:0,tag:"Sổ đã niêm",t:"Sổ niêm phong. Chứng cứ còn trong tay ai đó, chưa ai dùng. Phùng cô cô bình yên, nhưng đã biết có người lật sổ.",fx:{duc:2}},
   lose:{k:-1,tag:"Chứng cứ mỏng",t:"Tổng quản gác lại. Phùng cô cô bình yên, và đã biết ai lật sổ. Lưu ma ma bảo ngươi: “Từ giờ, ngủ đừng sâu.”",fx:{danh:-3},go:()=>lmmSrv({tin:-4})}}});
@@ -217,7 +217,7 @@ rdDef("cnv_ma",9,{t:"Kỳ sát hạch",w:"eun",sj:"kỳ sát hạch của Nội 
    "Danh sách tuyển công bố. Người về cung nào là người của cung ấy cả đời."),o:[
   {n:"Đứng thẳng chờ",c:{danh:-2},o:A=>40+(A.f.hard?15:0)+S.duc/6,e:["win","mid"],lx:"phó mặc cho người chấm, người ta bảo ngươi không dám nói, tiếng sút; hỏng thì chỉ dừng ở giữa",rt:LMMT("Tên ngươi được đọc đầu tiên.","Người ngươi chọn được đọc tên đầu tiên."),rf:LMMT("Tên ngươi được đọc, nhưng ở cuối.","Người ngươi chọn được đọc tên, nhưng kèm một tai mắt.")},
   {n:"Nhắc Tổng quản những gì đã thấy",c:{suc:-3},o:A=>35+(A.f.know?15:0)+S.danh/5,e:["win","lose"],rt:LMMT("{eun} gạch một cái tên của Phùng cô cô, ghi tên ngươi vào.","{eun} gạch ba cái tên Phùng cô cô cài vào, đưa người ngươi chọn về cung ngươi."),rf:"{eun} cho là ngươi tranh."},
-  {n:"Nhường chỗ cho học trò khác của ma ma",c:{},w:{duc:3},e:"mid",lx:"chờ thêm một kỳ, chuyện chỉ dừng ở giữa",rt:LMMT("Ngươi lùi một bước. Một người khác của ma ma được đọc tên.","Ngươi nhường người giỏi nhất cho một cung khác. Một học trò của ma ma được đọc tên ở đó.")}]}},
+  {n:"Nhường chỗ cho học trò khác của ma ma",c:{danh:-2},w:{duc:3},e:"mid",lx:"chờ thêm một kỳ, chuyện chỉ dừng ở giữa",rt:LMMT("Ngươi lùi một bước. Một người khác của ma ma được đọc tên.","Ngươi nhường người giỏi nhất cho một cung khác. Một học trò của ma ma được đọc tên ở đó.")}]}},
  E:{win:{k:1,tag:"Qua kỳ sát hạch",w:"eun",t:LMMT("Ngươi qua cả ba bài. Tên ngươi vào danh sách chờ ghế chưởng sự. Phùng cô cô ghi tên ngươi bằng nét bút rất mạnh.",
    "Cung ngươi nhận đúng những người ngươi muốn. Bảy học trò của Lưu ma ma về các cung, và cả bảy đều biết ai đã đứng ra."),fx:{danh:5},go:A=>{rdOan(A,"v",4);return [lmmSrv({tin:4}),e67merit(6),lmmCon({mat:2})].join(" ")}},
   mid:{k:0,tag:"Qua mà chưa có ghế",t:LMMT("Ngươi qua, nhưng xếp cuối. Năm nay chưa có ghế cho ngươi.","Ngươi nhận được người, nhưng cũng nhận một tai mắt. Phùng cô cô vẫn giữ danh sách."),fx:{duc:2},go:()=>e67merit(3)},
@@ -287,7 +287,7 @@ rdDef("cnv_ma",11,{t:"Chưởng sự",w:"maid",sj:"ghế của Lưu ma ma",cast(
    "Tổng quản đến cung ngươi: “Hoàng hậu giao việc chọn người cho nô tài. Nô tài muốn nghe một lời của tiểu chủ.”"),o:[
   {n:"Nói: ghế ấy phải về người của Lưu ma ma",c:{suc:-4},o:A=>35+(A.f.seat?15:0)+S.danh/6,e:["win","lose"],rt:"{eun} gật đầu chậm: “Người của bà Lưu, thì sổ sẽ sạch.”",rf:"{eun} lắc đầu: “Ai cũng nói thế.”"},
   {n:"Nói: ai ngồi cũng được, miễn sổ sạch",c:{mat:-1},o:A=>45+(A.f.give?15:0)+S.duc/6,e:["win","mid"],lx:"không đòi ghế cho người của ma ma, mạng lưới lỏng ra; hỏng thì chỉ dừng ở giữa",rt:"{eun} cười: “Câu ấy, bà Lưu cũng nói.”",rf:"{eun} chọn người già nhất."},
-  {n:"Không nói gì",c:{},w:{duc:2},e:"mid",lx:"để ghế cho người khác quyết, chuyện chỉ dừng ở giữa",rt:"Ngươi chỉ cúi đầu."}]}},
+  {n:"Không nói gì",c:{danh:-2},w:{duc:2},e:"mid",lx:"để ghế cho người khác quyết, chuyện chỉ dừng ở giữa",rt:"Ngươi chỉ cúi đầu."}]}},
  E:{win:{k:1,tag:"Người nối nghiệp Lưu ma ma",w:"maid",t:LMMT(`Ngươi ngồi ghế của Lưu ma ma. Ngày nhận chức, ngươi bưng khay trà đầy đi qua sân sỏi Nội vụ phủ, không sóng một giọt. Cả lớp cung nữ mới đứng nhìn.`,
    "Ghế của Lưu ma ma về tay học trò bà, người do ngươi chọn. Than, gấm và người của Nội vụ phủ, từ nay đi qua tay người của ngươi. Ma ma gửi về một lá thư: “Giữ lấy họ.”"),fx:{danh:8},go:A=>{rdOan(A,"v",4);return [lmmRk(BAL.road.cnvMaRk),lmmCon({mat:2,tamco:2})].join(" ")}},
   mid:{k:0,tag:"Ghế về tay người khác",t:LMMT("Ghế về tay một ma ma già, không phe ai. Ngươi được ghi tên chờ kỳ sau. Lưu ma ma về quê, mang theo nụ cười yên lòng.",

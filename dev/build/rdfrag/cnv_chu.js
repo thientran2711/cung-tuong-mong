@@ -79,7 +79,7 @@ rdDef("cnv_chu",6,{t:"Kẻ dò hỏi",w:"v",sj:"kẻ dò hỏi chuyện cung {mi
  x1:{h:"Bắt kẻ dò hỏi",w:"maid",t:"Đêm nay cung nữ áo xanh hẹn gặp người mua tin ở góc sân sau. Bắt tận tay, cho nàng mang tin giả về, hay để yên?",o:[
   {n:"Bắt tận tay kẻ dò hỏi",c:{suc:-5},o:A=>40+S.mat*4,e:["win","lose"],rt:"Cung nữ áo xanh bị bắt cùng mẩu giấy ghi giờ trực của cả cung.",rf:"Nàng chạy thoát, chỉ còn lời ngươi nói."},
   {n:"Cho nàng mang tin giả về",c:{bac:-15},lx:"tốn bạc mua người dựng tin giả; kẻ dò hỏi vẫn ở lại trong cung, vụ chỉ dừng ở giữa",o:A=>40+(A.f.own?15:0)+S.tamco/4,e:["win","mid"],rt:"Cung {v} tin rằng gói thuốc đã bị đốt.",rf:"Tin giả bị nghi, nhưng nàng không moi thêm được gì."},
-  {n:"Để yên, khép kín cửa",c:{},w:{duc:2},e:"mid",lx:"kẻ dò hỏi vẫn ở đó, vụ chỉ dừng ở giữa",rt:"Ngươi khóa cửa sân sau, đi ngủ sớm."}]}},
+  {n:"Để yên, khép kín cửa",c:{danh:-2},w:{duc:2},e:"mid",lx:"kẻ dò hỏi vẫn ở đó, vụ chỉ dừng ở giữa",rt:"Ngươi khóa cửa sân sau, đi ngủ sớm."}]}},
  E:{win:{k:1,tag:"Kẻ dò hỏi bị bắt",w:"mis",t:"Người của {v} bị bắt hoặc bị lừa. {mis} biết, trong lúc cả cung chao đảo, ngươi là người đứng giữ cửa.",fx:{danh:4},go:A=>{rdOan(A,"v",8);CHU_MIS(8);return e67merit(4)}},
   mid:{k:0,tag:"Cửa đã khép",t:"Tin không lọt thêm, nhưng kẻ dò hỏi vẫn còn đó, và {v} vẫn chưa thôi tìm.",fx:{mat:1}},
   lose:{k:-1,tag:"Tin đã lọt",w:"v",t:"{v} biết đêm ấy ai trực ở cung {mis}. Từ nay ánh mắt nàng dừng trên ngươi mỗi khi gặp.",fx:{danh:-3},go:A=>{rdOan(A,"v",6)}}}});

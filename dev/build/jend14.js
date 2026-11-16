@@ -80,7 +80,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
 
 /* ---------- ch13 · hau14 · Tranh ngôi Trung cung ---------- */
 ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi Trung cung",cast(A){try{if(S.st.f14&&S.st.f14.tienloi)A.sc=(A.sc||0)+BAL.road.tienSc}catch(e){}return egSeatRv(A)},
- g:A=>egQueen()?"Ngươi đã ngồi ngôi Trung cung, nhưng ngôi ấy chưa vững: kẻ muốn kéo ngươi xuống vẫn còn. Giữ được ngôi, lục cung mới thật sự phục.":"Ngôi Trung cung là đích cuối của mọi phi tần. Từng bậc phải đủ Sủng, Danh, Đức; lúc bàn lập hậu, Hoàng thượng nhìn hoàng tử, lòng Thái hậu và tiếng của nhà ngươi. Chương này đưa ngươi một bước thật về phía ngôi ấy.",
+ g:A=>egQueen()?"Ngươi đã ngồi ngôi Trung cung, nhưng ngôi ấy chưa vững: kẻ muốn kéo ngươi xuống vẫn còn. Giữ được ngôi, lục cung mới thật sự phục.":`Ngôi Trung cung là đích cuối của mọi phi tần. Từng bậc phải đủ Sủng, Danh, Đức; lúc bàn lập hậu, Hoàng thượng nhìn hoàng tử, ${egThGone()?"lòng triều thần":"lòng Thái hậu"} và tiếng của nhà ngươi. Chương này đưa ngươi một bước thật về phía ngôi ấy.`,
  p:[["s1","s2","s3","s4"],["c1","c2","G.th","G.emp","G.hh"],["t1"],["x1"]],
  B:{s1:{h:"Ngôi chưa ấm chỗ",w:"v",if:()=>egQueen(),need:["v"],t:"Ngươi ngồi ngôi Trung cung chưa lâu, {v} đã kết bè với mấy nhà quyền thần, rỉ tai rằng ngươi không đủ đức làm mẫu nghi.",o:[
   {n:"Mở tiệc ban thưởng lục cung",c:{bac:-60},w:{danh:4},wx:"lục cung biết ơn",lx:"tốn bạc, {v} chê ngươi mua lòng",rt:"Cả lục cung nhận quà, khen ngươi rộng tay."},
@@ -113,7 +113,7 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi
  x1:{h:"Thánh ý",w:"emp",t:A=>egQueen()&&rv67(A,"v")?"Hoàng thượng triệu ngươi và {v} cùng đến điện. Ngài hỏi: lục cung loạn đã lâu, lỗi tại ai?":"Hoàng thượng triệu ngươi đến điện, hỏi: “Nếu trẫm giao lục cung cho nàng, nàng lấy gì giữ nó yên?”",o:[
   {n:"Thưa: lấy đức mà giữ",c:{suc:-5},o:()=>35+S.duc/3+S.th/6,e:["win","mid"],rt:"Hoàng thượng gật đầu thật lâu.",rf:"Hoàng thượng nói: đức thì ai cũng tự xưng."},
   {n:"Thưa: lấy phép mà giữ",c:{suc:-5},o:()=>45+S.tamco/3+S.danh/6,e:["win","lose"],rt:"Hoàng thượng thấy ngươi cứng rắn, đủ sức trị lục cung.",rf:"Hoàng thượng lắc đầu: nàng quá cứng."},
-  {n:"Thưa: thiếp không dám nhận",c:{},w:{duc:3},e:"mid",lx:"bỏ lỡ một lần thánh ý",rt:"Hoàng thượng cười: “Nàng khiêm nhường quá.”"}]}},
+  {n:"Thưa: thiếp không dám nhận",c:{danh:-2},w:{duc:3},e:"mid",lx:"bỏ lỡ một lần thánh ý",rt:"Hoàng thượng cười: “Nàng khiêm nhường quá.”"}]}},
  E:{win:{k:1,tag:"Một bước gần ngôi Trung cung",w:"emp",t:A=>egQueen()&&rv67(A,"v")?"Hoàng thượng phạt {v}, tuyên trước lục cung rằng Trung cung là ngươi. Từ nay không ai dám nhắc chuyện thay ngôi.":"Hoàng thượng ghi tên ngươi trong lòng. Lục cung biết: ngày bàn lập hậu, ngươi là người phải nhắc đến.",fx:{danh:5,sung:3},go:A=>{if(rv67(A,"v"))rdOan(A,"v",8);return egHauWin()}},
   mid:{k:0,tag:"Thánh ý còn để ngỏ",t:"Hoàng thượng chưa định. Ngươi giữ được chỗ đứng, nhưng ngôi Trung cung vẫn còn xa một bước.",fx:{danh:2}},
   lose:{k:-1,tag:"Người khác được thế",t:A=>(rv67(A,"v")?"Hoàng thượng nghiêng về {v}.":"Hoàng thượng chưa thấy ngươi đủ sức giữ lục cung.")+" Ngươi lùi một bước, nhưng đường lên ngôi Trung cung vẫn còn mở.",fx:{sung:-4,danh:-3},go:A=>{rdRel(A,"v",-6)}}}};
@@ -154,7 +154,7 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
  x1:{h:"Đại lễ đầu xuân",w:"emp",t:"Đại lễ đầu xuân. Hoàng thượng đứng trước Thái miếu, các hoàng tự đứng sau. Ai đứng gần ngài nhất, cả triều sẽ nhìn.",o:[
   {n:"Lo trọn lễ, không tranh chỗ",c:{suc:-5},o:()=>35+S.duc/3+S.danh/6,e:["win","mid"],rt:"Hoàng thượng thấy ngươi đứng đúng chỗ của bậc mẫu nghi.",rf:"Lễ trọn, nhưng không ai nhắc tên ngươi."},
   {n:"Đưa con đứng gần Hoàng thượng",c:{suc:-5},o:()=>45+S.sung/3+S.tamco/6,e:["win","lose"],need:["kid"],rt:"Hoàng thượng đặt tay lên vai {k}.",rf:"Triều thần xì xào ngươi tranh ngôi cho con."},
-  {n:"Lùi lại, nhường bậc",c:{},w:{duc:3},e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi lùi sau một bước."}]}},
+  {n:"Lùi lại, nhường bậc",c:{danh:-2},w:{duc:3},e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi lùi sau một bước."}]}},
  E:{win:{k:1,tag:"Mẫu nghi thiên hạ",w:"emp",t:()=>mySons().length?"Cả triều nhìn mẹ con ngươi. Con ngươi đứng gần ngôi Đông cung hơn ai hết; ngày ngươi thành Hoàng thái hậu chỉ còn chờ trời định.":"Lục cung gọi ngươi là mẹ. Không có hoàng tử của riêng mình, ngươi vẫn là bậc mẫu nghi mà ai cũng phục.",get fx(){return egThGone()?{danh:8}:{danh:6,th:4}},go:A=>egKeWin()},
   mid:{k:0,tag:"Lục cung nể đức",t:"Lễ trọn, lòng người yên. Ngôi Đông cung vẫn để Hoàng thượng định, nhưng tên ngươi được nhắc với lòng kính trọng.",fx:{danh:3,duc:2},go:()=>mySons().length?e67heir(BAL.road.end.keHeir>>1):""},
   lose:{k:-1,tag:"Bị cho là tranh ngôi",t:"Triều thần cho là ngươi tranh ngôi cho con. Hoàng thượng lạnh nhạt một mùa; đường của con ngươi vẫn còn, nhưng dài hơn.",fx:{sung:-5,danh:-4},go:A=>{const s=son67();if(s)s.fond=cl((s.fond||0)-BAL.road.end.keHeir,0,100);return s?`Hoàng thượng bớt thương ${s.name}.`:""}}}};

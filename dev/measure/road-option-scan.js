@@ -36,7 +36,7 @@ const R=ROAD14;for(const r in R)console.log(r,Object.keys(R[r]).join(','));
  const costOf=o=>Object.entries(o.c||{}).filter(([k,v])=>v<0);
  const le=(X,Y)=>{const y=Object.fromEntries(costOf(Y));return costOf(X).every(([k,v])=>y[k]!=null&&-v<=-y[k])};
  const upside=(Y,X)=>Object.entries(Y.w||{}).some(([k,v])=>v>0&&!((X.w||{})[k]>=v));
- let inv=[],dom=[],weak=[],unread=[];
+ let inv=[],dom=[],weak=[],unread=[],freeMid=[];
  for(const[id,a]of Object.entries(ARC67)){const xs=new Set((a.p||[]).slice(-1)[0]||[]);
   for(const[bk,b]of Object.entries(a.B||{})){const O=typeof b.o==='function'?[]:b.o;
    for(const o of O){const e=ends(a,o);if(e&&o.o!=null&&Array.isArray(o.e)&&e[0]<e[1])inv.push(`${id}.${bk} «${o.n}» e:${JSON.stringify(o.e)}`)}
@@ -48,10 +48,13 @@ const R=ROAD14;for(const r in R)console.log(r,Object.keys(R[r]).join(','));
    /* (B) bold win/lose beside a safe win/mid: the safe one must cost something, or the bold one must have base ≥ safe + 10 */
    for(const B of E)for(const F of E){if(B===F||B.o.o==null||F.o.o==null)continue;if(!(B.e[0]===2&&B.e[1]===0&&F.e[0]===2&&F.e[1]===1))continue;
     if(!costOf(F.o).length&&!(B.b>=F.b+10))weak.push(`${id}.${bk} bold «${B.o.n}» ${B.b} vs free safe «${F.o.n}» ${F.b}`);
-    else if(costOf(F.o).length&&!(B.b>F.b)&&le(F.o,B.o))weak.push(`${id}.${bk} bold «${B.o.n}» ${B.b} ≤ safe «${F.o.n}» ${F.b} at no more cost`)}}}
+    else if(costOf(F.o).length&&!(B.b>F.b)&&le(F.o,B.o))weak.push(`${id}.${bk} bold «${B.o.n}» ${B.b} ≤ safe «${F.o.n}» ${F.b} at no more cost`)}
+   /* (D) review road-b3-fix-r1 (b3-r1 item 1 rule, thd + cnv + jend14 at 0): a free sure «mid» with a stat gain beside a costed option (the gain needs a real loss too); B1 roads (cn/dtq/muoi/tt) were held only to the narrower b1-r1 rule — their hits are for the coordinator to rule on */
+   if(O.some(o=>costOf(o).length))for(const o of O)if(o.o==null&&o.e==="mid"&&!costOf(o).length&&o.w&&Object.values(o.w).some(v=>v>0))freeMid.push(`${id}.${bk} «${o.n}» w=${JSON.stringify(o.w)}`)}}
  console.log('INVERTED e: (success gives a worse ending than failure):',inv.length);inv.forEach(x=>console.log('  '+x));
  console.log('X-BEAT DOMINANCE (one option at least as good at no more cost):',dom.length);dom.forEach(x=>console.log('  '+x));
  console.log('X-BEAT BOLD ≤ SAFE (free safe needs bold base +10; costed safe needs bold base above it):',weak.length);weak.forEach(x=>console.log('  '+x));
+ console.log('X-BEAT FREE SURE MID WITH A GAIN beside a costed option:',freeMid.length);freeMid.forEach(x=>console.log('  '+x));
  console.log('x-beat odds not readable by the scan (check by hand):',unread.length);unread.forEach(x=>console.log('  '+x));
  /* (C) wording (VANPHONG + road-history): every text field incl. function texts (string parts of the source) and RD97L */
  const BAN=[[/chắc chắn/i,'chắc chắn'],[/(^|[^\p{L}])bạn([^\p{L}]|$)/iu,'bạn'],[/cơ hội/i,'cơ hội'],[/kế toán/i,'kế toán'],[/hóa đơn|hoá đơn/i,'hóa đơn'],[/cạnh tranh/i,'cạnh tranh'],[/tẩy chay/i,'tẩy chay'],[/Khôn Ninh/,'Khôn Ninh (Hoàng hậu ở Càn Ninh cung)'],[/chỉ số|\bstat\b/i,'chỉ số'],[/(^|[^\p{L}])(bấm|nhấn|click)([^\p{L}]|$)/iu,'bấm'],[/%/,'%']];

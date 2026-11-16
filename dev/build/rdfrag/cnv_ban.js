@@ -76,7 +76,7 @@ rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){retu
  x1:{h:"Đêm Thu Cúc đến cung {v}",w:"v",t:"Đêm nay Thu Cúc lẻn đến cung {v} lần cuối, mang theo bạc. Chặn đường nàng, theo đến tận cửa, hay để nàng đi?",o:[
   {n:"Chặn Thu Cúc giữa đường, ép nàng khai",c:{suc:-4},o:A=>40+(A.f.turn?10:0)+S.tamco/5,e:["win","lose"],rt:"Thu Cúc quỳ xuống: “Là {v} sai. Ta khai.”",rf:"Thu Cúc la lên. Thị vệ cung {v} chạy ra."},
   {n:"Theo đến cửa cung {v}, nhìn tận mắt",c:{bac:-20},o:A=>35+S.mat*5+(A.f.fence?10:0),lx:"bạc lo đường mất trắng, thấy mà chưa bắt được, vụ chỉ dừng ở giữa",e:["win","mid"],rt:"Ngươi thấy cung nữ của {v} nhận bạc, và cả {v} đứng sau song cửa.",rf:"Cửa đóng trước khi ngươi kịp nhìn."},
-  {n:"Để nàng đi, ghi lại giờ giấc",c:{},w:{mat:1},e:"mid",lx:"cung {v} chưa bị chạm đến, vụ chỉ dừng ở giữa",rt:"Ngươi ghi: canh hai, cửa Tây, mang bọc lụa."}]}},
+  {n:"Để nàng đi, ghi lại giờ giấc",c:{danh:-2},w:{mat:1},e:"mid",lx:"cung {v} chưa bị chạm đến, vụ chỉ dừng ở giữa",rt:"Ngươi ghi: canh hai, cửa Tây, mang bọc lụa."}]}},
  E:{win:{k:1,tag:"Lộ mặt kẻ đứng sau",w:"v",t:"Kẻ hứa che Thu Cúc là {v}. Ngươi biết, và {v} biết ngươi biết. Từ nay giữa ngươi và cung {v} là thù thật.",fx:{danh:3,mat:1},go:A=>{rdOan(A,"v",10);rdRel(A,"v",-10)}},
   mid:{k:0,tag:"Biết mà chưa có chứng",t:"Ngươi biết đường đi của chiếc vòng và của bạc. Nhưng biết thì chưa đủ để ai bị xử.",fx:{tamco:1}},
   lose:{k:-1,tag:"Bị {v} phát hiện",w:"v",t:"Người của {v} thấy ngươi rình. Từ đêm ấy, cung {v} tìm cách dập cả ngươi lẫn Xuân Đào.",fx:{danh:-3},go:A=>{rdOan(A,"v",8)}}}});

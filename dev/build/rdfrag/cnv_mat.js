@@ -101,7 +101,7 @@ rdDef("cnv_mat",6,{t:"Tránh hay gặp",w:"emp",sj:"những lần Hoàng thượ
  x1:{h:"Đêm hội đèn",w:"emp",t:"Đêm hội đèn Nguyên tiêu, cả hậu cung ra Ngự hoa viên. Hoàng thượng đi giữa đám đèn, mắt tìm một người.",o:[
   {n:"Đứng chỗ đèn sáng nhất",c:{suc:-3},o:A=>35+(A.f.meet?15:0)+S.sac/5,e:["win","lose"],rt:"Ngài dừng trước mặt ngươi, chọn một chiếc đèn cá chép, đặt vào tay ngươi.",rf:"Ngài thấy ngươi cùng lúc với {mis}. Nàng kéo ngài đi."},
   {n:"Đứng sau, để ngài tự tìm",c:{danh:-2},o:A=>40+(A.f.hide?15:0)+S.duc/5,e:["win","mid"],lx:"đứng khuất sau đám đông, người ta bảo ngươi làm cao, tiếng sút; có thể ngài không tìm thấy, chuyện chỉ dừng ở giữa",rt:"Ngài vòng qua ba dãy đèn để đến chỗ ngươi.",rf:"Ngài nhìn quanh, rồi thôi."},
-  {n:"Cáo ốm ở lại",c:{},w:{duc:2},e:"mid",lx:"lỡ một đêm hội, chuyện chỉ dừng ở giữa",rt:"Ngươi ngồi bên cửa sổ nhìn đèn trôi."}]}},
+  {n:"Cáo ốm ở lại",c:{danh:-2},w:{duc:2},e:"mid",lx:"lỡ một đêm hội, chuyện chỉ dừng ở giữa",rt:"Ngươi ngồi bên cửa sổ nhìn đèn trôi."}]}},
  E:{win:{k:1,tag:"Gặp nhau dưới đèn",w:"emp",t:MATT("Chiếc đèn cá chép treo trên đầu giường ngươi. Cả cung biết: Hoàng thượng không còn nhìn trộm nữa, ngài nhìn thẳng.",
    "Chiếc đèn cá chép treo trước cửa cung ngươi. Cả hậu cung biết: ngài đã tìm đến người ngài phong."),fx:{danh:3},go:()=>{matMis(0,4);return [matSrv({nt:12}),matCon({sung:4})].join(" ")}},
   mid:{k:0,tag:"Lỡ một lần",t:"Ngài vẫn nhớ, ngươi vẫn giữ mình. Giữa hai người chỉ còn một khoảng hành lang.",fx:{duc:2},go:()=>matSrv({nt:3})},
@@ -139,7 +139,7 @@ rdDef("cnv_mat",7,{t:"Kính sự phòng ghi tên",w:"eun",sj:"tên ngươi trong
  x1:{h:"Đêm lật thẻ",w:"emp",t:"Khay thẻ dâng lên Dưỡng Tâm điện. Hoàng thượng đưa tay lướt qua hàng thẻ xanh.",o:[
   {n:"Tin vào lời ngài đã nói",c:{suc:-2},o:A=>40+(A.f.clean?15:0)+S.sac/6+S.duc/6,e:["win","mid"],lx:"thấp thỏm chờ suốt đêm lật thẻ, ngươi mệt rã; hỏng thì chuyện chỉ dừng ở giữa",rt:"Ngài lật thẻ ngươi, không do dự.",rf:"Ngài lật thẻ người khác. Thẻ ngươi vẫn ở đó."},
   {n:"Để người đã mua đặt thẻ lên trên",c:{bac:-10},o:A=>40+(A.f.buy?20:0)+(A.f.know?10:0),e:["win","lose"],rt:"Thẻ ngươi nằm trên cùng. Ngài lật.",rf:"Tổng quản bắt quả tang tiểu thái giám đổi khay."},
-  {n:"Xin rút thẻ một kỳ",c:{},w:{duc:3},e:"mid",lx:"chờ thêm, chuyện chỉ dừng ở giữa",go:()=>matMis(3),rt:"Ngươi xin nghỉ một kỳ, {mis} yên lòng."}]}},
+  {n:"Xin rút thẻ một kỳ",c:{danh:-2},w:{duc:3},e:"mid",lx:"chờ thêm, chuyện chỉ dừng ở giữa",go:()=>matMis(3),rt:"Ngươi xin nghỉ một kỳ, {mis} yên lòng."}]}},
  E:{win:{k:1,tag:"Thẻ được lật",w:"emp",t:MATT("Thánh dụ truyền xuống: ngày mai cung nữ ở cung {mis} hầu giá. Cả cung chạy tới chạy lui. Lần đầu tiên, tên ngươi đứng trên một tờ giấy vàng.",
    "Thẻ xanh mang tên ngươi được lật. Đêm mai, kiệu Kính sự phòng sẽ đến cửa cung ngươi."),fx:{danh:3},go:A=>{rdOan(A,"v",4);return [matSrv({nt:10}),matCon({sung:3})].join(" ")}},
   mid:{k:0,tag:"Tên còn chờ",t:"Tên ngươi vẫn ở đó, không lên không xuống. Kỳ sau, hay kỳ sau nữa.",fx:{duc:2},go:()=>matSrv({nt:3})},
@@ -225,7 +225,7 @@ rdDef("cnv_mat",9,{t:"Từ tớ thành chủ",w:"mis",sj:"ngươi và {mis}",cas
    ()=>({hh:"Hoàng hậu hỏi {mis} trước mặt cả điện: “Người hầu cũ của muội, nay là tiểu chủ. Muội thấy thế nào?”",th:"Thái hậu hỏi {mis} trước mặt cả điện: “Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy thế nào?”",emp:"Hoàng thượng hỏi {mis} trước mặt cả điện: “Người hầu cũ của ái phi, nay là tiểu chủ. Ái phi thấy thế nào?”"})[CNV_QM()]),o:[
   {n:"Nhìn {mis}, không nói gì",c:{danh:-2},o:A=>40+(A.f.low?20:0)+S.duc/6,e:["win","mid"],lx:"phó mặc cho người cũ, người ta bảo ngươi vẫn nép sau chủ cũ, tiếng sút; hỏng thì chỉ dừng ở giữa",rt:"{mis} nói: “Là người tốt.” Câu ấy, cả cung nghe.",rf:MATT("{mis} chỉ nói: “Tùy bệ hạ.”","{mis} chỉ nói: “Thiếp không dám nói.”")},
   {n:"Tự trả lời trước",c:{suc:-2},o:A=>35+(A.f.high?15:0)+S.tai/5,e:["win","lose"],rt:"Ngươi nói: “Nếu không có tỷ, không có hôm nay.” {mis} ngẩn ra.",rf:"Ngươi nói hớ một câu, {mis} cười lạnh."},
-  {n:"Cúi đầu lui",c:{},w:{duc:2},e:"mid",lx:"không ai biết lòng ngươi, chuyện chỉ dừng ở giữa",rt:"Ngươi lui ra. Câu hỏi treo lơ lửng."}]}},
+  {n:"Cúi đầu lui",c:{danh:-2},w:{duc:2},e:"mid",lx:"không ai biết lòng ngươi, chuyện chỉ dừng ở giữa",rt:"Ngươi lui ra. Câu hỏi treo lơ lửng."}]}},
  E:{win:{k:1,tag:"Ngang hàng mà còn nghĩa",w:"mis",t:MATT("{mis} xin Hoàng thượng cho ngươi thôi hầu nàng, “để nó chờ chỉ dụ cho đàng hoàng”. Ngươi vẫn ở cung nàng, nhưng không còn là nô tỳ của ai.",
    "{mis} gọi ngươi là “muội” trước mặt cả điện. Từ đó không ai còn dám nhắc ngươi từng hầu nàng."),fx:{danh:4,duc:2},go:()=>{matMis(10);return [matSrv({tin:8,nt:6}),matCon({sung:2})].join(" ")}},
   mid:{k:0,tag:"Không thân không thù",t:"Ngươi và {mis} gặp nhau thì chào, xong thì thôi. Giữa hai người còn một tờ giấy chưa đốt.",fx:{duc:2}},
@@ -295,7 +295,7 @@ rdDef("cnv_mat",11,{t:"Ánh mắt ấy",w:"emp",sj:"điều ánh mắt ấy tr�
  x1:{h:"Dưới mái hiên",w:"emp",t:"Chiều mưa. Cùng mái hiên năm ấy. Hoàng thượng đứng đó, như đang chờ ngươi nói câu cuối cùng.",o:[
   {n:"Bước đến che ô cho ngài",c:{suc:-3},o:A=>35+(A.f.love?15:0)+S.sac/6,e:["win","lose"],rt:"Ngài nắm tay ngươi dưới ô: “Năm ấy trẫm cũng muốn làm thế này.”",rf:"Ngài nhận ô, nhưng mắt nhìn đi nơi khác."},
   {n:"Đứng yên, để ngài bước đến",c:{duc:-1},o:A=>40+(A.f.calm?15:0)+S.duc/6,e:["win","mid"],lx:"để ngài phải bước trước, lòng ngươi áy náy; có thể ngài không bước, chuyện chỉ dừng ở giữa",rt:"Ngài bước đến, đứng cạnh ngươi đến khi tạnh mưa.",rf:"Ngài đứng đó, ngươi đứng đây. Mưa tạnh."},
-  {n:"Cúi đầu, lui vào trong",c:{},w:{duc:3},e:"mid",lx:"khép lại một ánh nhìn, chuyện chỉ dừng ở giữa",rt:"Ngươi lui. Ngài không gọi."}]}},
+  {n:"Cúi đầu, lui vào trong",c:{danh:-2},w:{duc:3},e:"mid",lx:"khép lại một ánh nhìn, chuyện chỉ dừng ở giữa",rt:"Ngươi lui. Ngài không gọi."}]}},
  E:{win:{k:1,tag:"Ánh mắt thành ân tình",w:"emp",t:MATT("Hoàng thượng nói với Kính sự phòng: “Người này, đừng ai làm khó.” Ngươi vẫn chưa có phẩm vị, nhưng cả hậu cung biết ngài đã chọn. Ngày sắc phong chỉ còn là chuyện thời gian.",
    "Ngài ban cho cung ngươi một tấm biển tự tay đề chữ “Niệm”. Cả hậu cung hiểu: ngươi được phong vì một ánh mắt, và được giữ vì một tấm lòng."),fx:{danh:8,duc:2},go:()=>[matSrv({nt:20,tin:5}),matCon({sung:6})].join(" ")},
   mid:{k:0,tag:"Được nhìn mà bị ghét",t:MATT("Hoàng thượng vẫn nhìn ngươi, nhưng ánh nhìn ấy kéo theo bao cặp mắt ghen. Ngươi vẫn là cung nữ, chờ một ngày ngài nhớ lại.",
