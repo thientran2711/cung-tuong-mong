@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 07:17Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
+last wake: 16/11 07:27Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
 main at start = eba64ead4.
@@ -20,10 +20,11 @@ main at start = eba64ead4.
 | D54 buổi paintings | — | — | MOVED to Foreman C |
 | D56 icons + Nội vụ phủ art | — | — | MOVED to Foreman C |
 | fig-hd-upscale + face-sharp-hd2 | review/fig-hd-upscale | — | MOVED to Foreman C |
-| slap-mg review 3c4f1c81b | — | sonnet | WAITING: facefx-all not on main yet |
+| slap-mg review 3c4f1c81b | review/slap-mg-r1 | sonnet | facefx-all-r2 on main → reviewer RUNNING |
 | coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | kitStageRail (jrail.js §77) now on main → reviewer session_01DgYSWnc7QSik7k9buMTQwK RUNNING |
-| servant-system phase 2 | — | opus | WAITING: fix A + audit review |
-| act-split waves 2–3 | — | opus | WAITING: GO from main coordinator after act-dedupe lands |
+| servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | reviewer RUNNING (main s10 inbox 06:00Z; part A PASS e82a9bcf by main) |
+| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | GO (main s10 06:50Z) → worker RUNNING |
+| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker RUNNING (audit + proposal; no number change without owner OK) |
 
 ## PASS (for the main coordinator to fast-forward)
 - PASS review/coop-invite-ux-r1 727b6112b330eb8b96e621b0368f5cacccd1788f (C43 invite waiting state + 1-2-3 steps + auto-continue; coop-e2e 59/59; ff when written — main has moved since (bd6342c7), re-merge needed)
@@ -57,6 +58,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s2 wake log
+- 07:27Z: missed s10 inbox lines (06:00/06:36/06:50Z) found and taken now: servant part C review, act-split w2–3 (+stroll slot folded in: same act/happening code, owner 07:25Z same-worker rule), Danh balance recheck; facefx-all-r2 is on main → slap-mg review. act-dedupe UI flag (3) and art flag (4) are not in D's slice (UI = main; art = main samples / C).
 - 07:17Z: s1 reports all agents done and is idle. PASS C43, row-align-r2, D50 recorded. balance-after-truth → opus reviewer claimed.
 - 06:26Z: C44 PASS recorded; D51 wiring → main (owner 07:25Z); art no longer C's queue → main samples / C mass production (owner 06:55Z/07:30Z/07:45Z; art PAUSED tonight). Art-needed list from D50 stays in QUESTIONS for whoever owns art. act-dedupe w1 on main (02a0d3f1) — act waves 2–3 still wait for "GO" in FOREMAN_D.md. facefx-all not on main → slap-mg waits. servant fix A review not seen → phase 2 waits. balance-after-truth: s1 agent, no branch pushed yet (started 05:19Z; stale check at 08:19Z).
 - 05:27Z: main still eba64ead4 → facefx-all, kitStageRail (goal-strip-fix), servant fix A, act-dedupe not on main: slap-mg / coop-chat / servant phase 2 / act waves stay WAITING. No free items in slice D to spawn; 7 s1 agents still running, no reports yet.
