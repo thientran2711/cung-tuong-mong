@@ -22,7 +22,7 @@ Object.assign(BAL,{cardFlip:{
     ~1.15 s, soft ease-in-out), turn.pause = the face rests on its own before the reveal words / seal / burst. centre, res, end are DERIVED from these
     (t.centre = lift2 + turn.lift; t.res = centre + turn.move + turn.pause; t.end = res + turn.tail): change the numbers here only. */
  turn:{lift:700,move:1300,pause:1100,tail:4200,ease:"cubic-bezier(.45,0,.55,1)"},
- slow:1.75,  /* owner 16/11 "vẫn còn nhanh quá" (after cardflip-smooth): every hard-coded motion below × slow (≈1.75× the cardflip-smooth timing); t / turn / hold are already the slowed numbers */
+ slow:BAL.pace,  /* = the ONE kit pace (BAL.pace, KIT §83; owner 16/11 "vẫn còn nhanh quá"): every hard-coded motion below × slow; t / turn / hold are already the slowed numbers */
  t:{in:1100,grey:1600,lift:2500,arrange:3500,carry:4600,hand:6500,lift2:7600,centre:0,res:0,end:0},other:.82,
  hold:{me:5200},  /* only the fallback when the kit button part is missing */
  /* the reveal light = the WHOLE frame glows (owner 16/11 12:00Z: "nguyên cái khung nó phát sáng lên", never a light that runs round the ring): one soft warm halo hugging the frame ring
@@ -39,7 +39,7 @@ Object.assign(BAL,{cardFlip:{
  skipNoPick:false}});
 (function(){
 const CF=BAL.cardFlip;{const t=CF.t,u=CF.turn;t.centre=t.lift2+u.lift;t.res=t.centre+u.move+u.pause;t.end=t.res+u.tail}const DIR="img/kit/";const AR=550/1037;
-const PL=()=>CF.plates[innerWidth/innerHeight<CF.portraitBelow?"p":"l"];
+const PL=()=>CF.plates[kitView().pages===1?"p":"l"];
 const ART={get a(){return DIR+PL().a+".webp"},get b(){return DIR+PL().b+".webp"},hand:DIR+"cf-hand-emp.webp",seal:DIR+"cf-seal-thitam.webp",petal:DIR+"mo-petal-peach.webp"};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const red=()=>{try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
@@ -98,9 +98,9 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
    A(el,[{transform:`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width})`,transformOrigin:"0 0"},{transform:"none",transformOrigin:"0 0"}],{duration:dur,easing:ease||"cubic-bezier(.4,0,.2,1)"})})};
  let liftA=null;
  /* the final still (also the reduced-motion picture and the target of a skip) */
- const side=innerHeight<560&&innerWidth/innerHeight>1.5;if(side)ov.classList.add("kcf-side");
+ 
  /* phone landscape: the card stands left of centre, the result chip on the right (never over the card) */
- const centreRect=()=>{const vh=innerHeight,vw=innerWidth;if(side){const h=Math.min(vh*.86,vw*.3/AR);return{w:h*AR,h,x:vw*.33-h*AR/2,y:Math.max(6,(vh-h)/2+6)}}
+ const centreRect=()=>{const vh=innerHeight,vw=innerWidth;
   const h=Math.min(vh*.6,vw*.42/AR,560);return{w:h*AR,h,x:vw/2-h*AR/2,y:Math.max(8,vh*.43-h/2)}};
  function final(src){ov.dataset.fin=typeof src==="string"?src:"auto";phase=1;Q.forEach(clearTimeout);Q.length=0;ov.classList.add("kcf-fin");
   ov.getAnimations({subtree:true}).forEach(a=>{try{a.cancel()}catch(e){}});ov.classList.remove("kcf-act");
@@ -238,10 +238,9 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-act .kcf-hand,.kcf-act .kcf-seal{will-change:transform}
 .kcf-cap{position:absolute;left:0;right:0;top:max(10px,env(safe-area-inset-top));text-align:center;z-index:7;padding:0 12px}
 .kcf-res{position:absolute;left:0;right:0;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 22px);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 12px;opacity:0;pointer-events:none}
-.kcf-res.on{opacity:1;transition:opacity .4s ease}
+.kcf-res.on{opacity:1;transition:opacity calc(0.4s*var(--pace,1)) ease}
 .kcf.km-endon .kcf-res{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 66px)}   /* the kit scene-end button (KIT §81) sits at the bottom: the result chip stands above it */
-.kcf-side .kcf-res{left:52%;right:12px;top:50%;bottom:auto;transform:translateY(-50%);align-items:flex-start}
-.kcf-res .kmres{animation:kmPop .45s var(--km-ease,ease) both}
+.kcf-res .kmres{animation:kmPop calc(0.45s*var(--pace,1)) var(--km-ease,ease) both}
 .kcf-seal{position:absolute;z-index:6;height:auto;transform-origin:50% 50%;animation:kcfSeal calc(.5s*var(--kcf-s,1)) cubic-bezier(.3,1.6,.5,1) calc(.15s*var(--kcf-s,1)) both;filter:drop-shadow(0 3px 6px #0008)}
 @keyframes kcfSeal{from{transform:scale(2.6) rotate(-8deg);opacity:0}to{transform:scale(1) rotate(-2deg);opacity:1}}
 .kcf-pts{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
@@ -250,7 +249,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf.kcf-fin .kcf-c{transition:none}
 .kcf.km-red *{animation:none!important;transition:none!important}
 .kcf.km-red .kcf-res{opacity:1}
-@media (max-height:500px){.kcf-cap{font-size:.92rem}.kcf-res{bottom:calc(max(6px,env(safe-area-inset-bottom)) + 16px)}.kcf-res .kmres{padding:4px 10px}}
+
 .kcf-sample{display:flex;flex-wrap:wrap;gap:8px}.kcf-sample figure{margin:0;width:150px;text-align:center}.kcf-sample img{width:100%;height:96px;object-fit:contain;background:#1a0f0a;border-radius:6px}.kcf-sample figcaption{font-size:.75rem}
 `;document.head.appendChild(st);
 })();

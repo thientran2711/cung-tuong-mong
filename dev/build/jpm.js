@@ -132,9 +132,9 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto}
 .kpmv .mapw .mapimg{width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:fill!important;display:block}
 .kpmv .kpm-list.one{grid-template-columns:1fr}
-@media (orientation:portrait){.kpmv .kpm-list{grid-template-columns:1fr}}
+/* kv3:.kv1 */:where(.kv1) .kpmv .kpm-list{grid-template-columns:1fr}
 /* phone landscape (844x390): no room for a readable courtyard + rows; the picture would be a cropped strip with hidden hotspots, so the hall rows stand alone */
-@media (orientation:landscape) and (max-height:520px){.kpmv .mapsc{display:none!important}.game.maptab #panel .mapv.kpmv{justify-content:flex-start}.kpmv .kpm-list{align-content:center;flex:1 1 auto}}
+
 `;document.head.appendChild(st)})();
 /* phone shell (kitPhoneShell §31.7): arriving in a hall shows the ROOM, not the act page */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(window.__kpmArrive){const h=kpmHall();
