@@ -15,8 +15,8 @@ Mã: `dev/build/j82.js` (khung thi, chấm điểm, 5 trò cũ) + `dev/build/j91
 | Cờ (`co`, học Kỳ) | Ăn quân: thế cờ vây 7×7 | chạm giao điểm đặt quân ăn nhóm trắng còn một khí | 5 thế, mỗi thế 2 | thêm 0,8 giây mỗi thế/bậc |
 | Đầu hồ (`dauho`) | Ném tên vào bình | KÉO ngược rồi buông (lực + hướng), gió đổi mỗi lần | 6 lần: giữa miệng 1, vào miệng 0,7, vào tai bình 0,5 | đường bay dự kiến hiện dài hơn, miệng bình rộng hơn |
 | Bắn cung (`ban`) | Bắn hồng tâm | ngắm đưa qua lại, chạm đúng lúc ngắm ở giữa (canh thời điểm) | 6 phát: hồng tâm 1 … trượt 0 | vòng trúng rộng thêm 6 %/bậc |
-| Thơ (`tho`, học Thi) | Điền câu lục bát (Truyện Kiều, ca dao) | KÉO chữ vào ô trống câu bát; chữ thứ 6 phải hiệp vần chữ thứ 6 câu lục | 4 câu, 2→4 ô trống; mỗi chữ đúng một phần | ít chữ nhử hơn, thêm giờ |
-| Câu đối (`doi`) | Nối chữ đối | KÉO sợi chỉ từ mỗi chữ vế ra sang chữ đối (núi–sông, cao–rộng) | 3 câu đối 4/5/7 chữ; mỗi cặp đúng một phần | câu ngắn hơn, thêm giờ |
+| Thơ (`tho`, học Thi) | Thư pháp đồ nét (jnwp, không chữ) | ĐẶT ngón tay ở chấm xanh rồi KÉO theo nét mờ, làm các nét theo số thứ tự (3 chữ 2–5 nét) | tiến độ dọc nét × độ giữ trong vệt (BAL.nw.calli) | vệt rộng hơn, bóng bút chạy sẵn, thêm giờ |
+| Câu đối (`doi`) | Đối nét bút (jnwp, không chữ) | KÉO nét trong khay sang liễn phải: phải là hình lật gương của nét liễn trái, cùng hàng (3 hồi, 3–5 cặp) | mỗi cặp đúng một phần, đặt sai trừ BAL.nw.doi.miss | ít nét nhử hơn, hình mờ gợi sẵn, thêm giờ |
 | Đố đèn (`doden`) | Ráp đèn giải đố | CHẠM xoay 9 mảnh đèn cho thẳng để đọc lời đố, rồi chạm chiếc đèn mang lời giải | 2 đèn; ráp nhanh tới 3, giải đúng 2 | ít mảnh bị xoay hơn, thêm giờ |
 | Vẽ (`ve`, học Họa) | Đồ nét bút | VẼ bằng ngón tay theo nét mờ (cành trúc, lá lan, núi, sóng, trăng, chữ Nhân) | độ phủ nét × độ vững tay, 4 bức | vùng nét rộng thêm 10 %/bậc, thêm giờ |
 | Cắm hoa (`hoa`) | Cắm thế thiên – nhân – địa | KÉO từng cành vào bình; cành dài = Thiên, vừa = Nhân, ngắn = Địa; cân thế hoa | khoảng cách đóa hoa tới vòng đích (85 %) + cân đối (15 %); 3 bình 3/4/5 cành | vòng đích rộng hơn, thêm giờ |
@@ -27,7 +27,7 @@ Mã: `dev/build/j82.js` (khung thi, chấm điểm, 5 trò cũ) + `dev/build/j91
 | Điều hương (`huong`, học Y thuật & điều hương) | Pha hương theo mẫu | KÉO 3 thanh trượt (3 vị hương) cho màu khói khớp hương mẫu, rồi Dâng hương | 3 lư; độ lệch tỉ lệ (0 → 10, lệch 0,32 → 0) | thêm giờ |
 
 Không hai môn trùng cơ chế: nhịp rơi (Đàn) · giữ/buông liên tục (Hát) · giải thế (Cờ) · kéo-ném vật lý (Đầu hồ) · canh thời điểm một chạm (Bắn cung) ·
-kéo chữ vào ô (Thơ) · nối cặp bằng dây (Câu đối) · xoay mảnh ghép (Đố đèn) · đồ nét tự do (Vẽ) · đặt góc theo bố cục (Cắm hoa) · nhớ vị trí (Thêu) ·
+đồ nét theo thứ tự (Thơ/thư pháp) · lật gương nét bút (Câu đối) · xoay mảnh ghép (Đố đèn) · đồ nét tự do (Vẽ) · đặt góc theo bố cục (Cắm hoa) · nhớ vị trí (Thêu) ·
 gỡ đồ thị không chéo (Khéo tay) · nhớ chuỗi (Múa) · giữ đại lượng + thứ tự (Nấu ăn) · pha tỉ lệ thanh trượt (Điều hương).
 
 ## Thứ hạng (một luật cho mọi người)
