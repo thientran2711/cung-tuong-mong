@@ -116,7 +116,8 @@ function agOpts(v,N,need){const O=[];
 /* her ONE deed of the buổi (two-way §1b, khắc rule): a planned act, or a reaction to the player's deed (agSeeHer hear / join) */
 function agUsed(v){const z=agZ(),key=agKey();return (z.did&&z.did[v.id]===key)||z.pend.some(p=>p.vid===v.id&&p.key===key)}
 function agUse(v){const z=agZ();z.did=z.did||{};z.did[v.id]=agKey();if(AG.q){const i=AG.q.L.indexOf(v.id);if(i>=0)AG.q.L.splice(i,1)}}
-function agDecide(v){if(agUsed(v))return 0;let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(e){agErr("needs",e);return 0}AG.tm.needs+=performance.now()-tn0;
+function agDecide(v){if(agUsed(v))return 0;let N;const t9=performance.now();try{return agDecide0(v)}finally{(AG.last=AG.last||[]).push("d"+v.id+":"+(performance.now()-t9).toFixed(1))}}
+function agDecide0(v){let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(e){agErr("needs",e);return 0}AG.tm.needs+=performance.now()-tn0;
  /* first WHAT she wants this buổi (one of her needs, or keeping her schedule), then HOW (the deeds that serve it) — a person, not a solver */
  const rt=BAL.ag.routine*(1+BAL.ag.restW*N.rest);const NL=[[null,rt]];for(const n of AGNEED)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);
  const need=agPw(NL);if(!need)return 0;/* her slip (jmind) is in the second step, once */
@@ -125,30 +126,35 @@ function agDecide(v){if(agUsed(v))return 0;let N;const tn0=performance.now();try
  const sl=agSlot(v,c.at,c.t);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
 function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();if(Q.key!==key){if(Q.L.length)AG.stat.qdrop+=Q.L.length;AG.q=null;return}
  AG.inSlice=1;const t0=performance.now();const tm0=Object.assign({},AG.tm);const z=agZ();let acts=0;AG.now=0;AG.mwc={};
- try{if(first){const tl=performance.now();for(const p of z.pend.slice())if(p.key!==key)agLand(p);AG.tm.land+=performance.now()-tl}/* acts of a buổi already over land first */
-  const R=agRec(),B=BAL.ag.perf.slice;
-  while(Q.L.length){if(performance.now()-t0>=B&&!Q.all)break;const v=RV(Q.L.shift());if(!v||!v.alive||v.out)continue;try{acts+=agDecide(v)}catch(e){agErr("tick",e)}}
+ const B=BAL.ag.perf.slice;
+ try{/* acts of a buổi already over land first (they too share the frame budget: the rest land in the next slice, before anyone decides) */
+  {const tl=performance.now();for(const p of z.pend.slice()){if(p.key===key)continue;if(performance.now()-t0>=B&&!Q.all)break;agLand(p)}AG.tm.land+=performance.now()-tl}
+  const R=agRec();const old=z.pend.some(p=>p.key!==key);
+  while(Q.L.length&&!old){if(performance.now()-t0>=B&&!Q.all)break;const v=RV(Q.L.shift());if(!v||!v.alive||v.out)continue;try{acts+=agDecide(v)}catch(e){agErr("tick",e)}}
   if(!R){for(const p of z.pend.slice())if(p.key===key)agLand(p)}/* no ledger (co-op host, record off): the act lands at once */
-  else if(AG.now){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}/* the views of the khắc now change only when an act starts now */
+  else if(AG.now){if(Q.all){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}else if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}}/* the views of the khắc now change only when an act starts now: in its own frame (perf §4: no full resync inside the tick) */
  }catch(e){agErr("tick",e)}finally{AG.inSlice=0}
  const ms=performance.now()-t0;const d={};for(const k in AG.tm)d[k]=+(AG.tm[k]-(tm0[k]||0)).toFixed(2);
- if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:d,tick:AG.stat.tick,left:Q.L.length};window.__agMs=ms;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts;AG.stat.slice++;
+ if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:d,tick:AG.stat.tick,left:Q.L.length};if(ms>BAL.ag.perf.p95){AG.over=AG.over||[];AG.over.push({ms:+ms.toFixed(1),tm:d,n:AG.last||[]});if(AG.over.length>20)AG.over.shift()}AG.last=[];window.__agMs=ms;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts;AG.stat.slice++;
  Q.ms+=ms;if(!Q.L.length){AG.bt.push(Q.ms);if(AG.bt.length>BAL.ag.perf.n)AG.bt.shift();AG.q=null}
  else if(!Q.tm){Q.tm=1;setTimeout(()=>{if(AG.q===Q){Q.tm=0;agSlice()}},0)}}
 function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===key)return;z.key=key;AG.stat.tick++;
  if(AG.q&&AG.q.L.length)AG.stat.qdrop+=AG.q.L.length;/* a buổi gone by before her turn came (only in a run with no frames between buổi): she kept her schedule */
  const R=agRec();window.__agN=R?Object.keys(R.P).length:liveRivals(true).length+2;
  AG.q={key,L:liveRivals(true).filter(v=>v.alive&&!v.out).map(v=>v.id),ms:0,tm:0,all:!!window.__agAll};agSlice(1)}
+function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){}const ms=performance.now()-ts;AG.tm.sync+=ms;AG.sms=AG.sms||[];AG.sms.push(ms);if(AG.sms.length>BAL.ag.perf.n)AG.sms.shift()}
 /* finish the buổi's deciders now (tests / bot that need every decision before they read the record) */
 function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
-function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95,buoi:(()=>{const M=AG.bt.slice().sort((a,b)=>a-b);return M.length?{n:M.length,p50:+M[Math.floor(.5*M.length)].toFixed(2),p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2)}:null})()}}
+function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95,buoi:(()=>{const M=AG.bt.slice().sort((a,b)=>a-b);return M.length?{n:M.length,p50:+M[Math.floor(.5*M.length)].toFixed(2),p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2)}:null})(),sync:(()=>{const M=(AG.sms||[]).slice().sort((a,b)=>a-b);return M.length?{n:M.length,p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2),max:+M[M.length-1].toFixed(2)}:null})()}}
 window.agPerf=agPerf;
 function agWhy(v,c,N){let best=c.need||null,bv=c.need?1e9:0;const W=AGSELF[c.k]?AGSELF[c.k].g(v).g:c.k==="effort"?{sung:1}:(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===c.k);return s?AGSOC[s][3](BAL.tw.g):{}})();
  for(const n in W){const x=(N[n]||0)*W[n];if(x>bv){bv=x;best=n}}let w=best?AGWHY[best]:"tiện tay";if(best==="spite"&&c.t)w+=` ${c.t===S?"ngươi":c.t.name}`;
  if(c.mot&&AGHOST.has(c.k))w+=` (${c.mot})`;const o=agOrgName(agOrg(v));return o?`${w} · ${o}`:w}
 function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(v,c,N);const tid=c.t?ledgerId(c.t):null;
  const p={key:agKey(),id,vid:v.id,k:c.k,kd:c.kd||"",t:tid,kh,pl:k,act:c.act,why};z.pend.push(p);z.did=z.did||{};z.did[v.id]=p.key;
- if(R&&R.P[id]){R.P[id][kh]=[k,"ag_"+c.k,tid,why];if(kh===agKh())AG.now=1}
+ if(R&&R.P[id]){const was=R.P[id][kh]&&R.P[id][kh][0];R.P[id][kh]=[k,"ag_"+c.k,tid,why];
+  /* the views of the khắc now change only where she stands: an act starting now at her place, or a consort leaving it (perf: else no resync) */
+  if(kh===agKh()){let me=null;try{me=R.P.me?R.P.me[kh][0]:j95mePlace()}catch(e){}if(k===me||was===me)AG.now=1}}
  AG.stat.by[c.k]=(AG.stat.by[c.k]||0)+1;
  const L={w:wk(),b:S.buoi||0,kh,id,k:c.k,t:tid,pl:k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
  try{if(R){const A=R.acts=R.acts||[];A.push({id,kh,k:"ag:"+c.k,t:tid,why,ok:1,ag:1});if(A.length>60)A.shift()}}catch(e){}}
@@ -157,7 +163,8 @@ function agReapply(){const R=agRec();if(!R||!S.ag)return;let ch=0;for(const p of
   if(e&&(e[1]==="tryst"||e[1]==="meet"))continue;if(agBound(p.id,p.kh,R.key)){p.drop=1;continue}R.P[p.id][p.kh]=[p.pl,"ag_"+p.k,p.t,p.why];ch=1}if(ch)try{j95sync()}catch(e){}}
 function agPerson(id){if(!id)return null;if(id==="me")return S;if(id[0]==="v")return RV(+id.slice(1));return null}
 /* the deed happens (its own function: cost, odds, effect) */
-function agLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);const v=RV(p.vid);if(!v||!v.alive||v.out||S.dead||p.gone||p.drop){AG.stat.drop++;return""}
+function agLand(p,seen){const t9=performance.now();try{return agLand0(p,seen)}finally{(AG.last=AG.last||[]).push("l"+p.k+":"+(performance.now()-t9).toFixed(1))}}
+function agLand0(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);const v=RV(p.vid);if(!v||!v.alive||v.out||S.dead||p.gone||p.drop){AG.stat.drop++;return""}
  if(v.confined&&p.pl!==palaceOf(v)){AG.stat.drop++;return""}
  const t=agPerson(p.t);let r="";AG.inTick++;
  try{if(p.k==="effort")r=window.npcEffort(v,true)||"";else{const tt=p.k==="thHH"?queenP():p.k==="follow"?twFollowT(v):t;r=twDo(v,tt,p.k)||""}}catch(e){agErr("land",e)}finally{AG.inTick--}

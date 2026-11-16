@@ -415,7 +415,7 @@ Object.assign(BAL,{ag:{on:1,
  val:{tablet:2,kid:10,check:4,drop:3},
  costW:1,costCap:.9,costMin:.05,kh:1,
  wit:{hear:40,mat:6,caught:5,hoD:50,w:{hear:1,join:1,ignore:3}},
- perf:{p95:8,n:200,slice:4}}});
+ perf:{p95:8,n:200,slice:3}}});
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
    like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)

@@ -22,7 +22,7 @@ const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(UR
  }
  const rep=await p.evaluate(()=>{const z=S.ag||{};const R=S.roster;let agRows=0;if(R)for(const id in R.P)for(const e of R.P[id])if(e&&String(e[1]).indexOf("ag_")===0)agRows++;
   const L=liveRivals(true);const mean=f=>Math.round(L.reduce((a,v)=>a+(+v[f]||0),0)/Math.max(1,L.length));
-  return{on:typeof agOn==="function"&&agOn(),week:wk(),month:S.month,year:S.year,stat:window.AG&&AG.stat,tm:window.AG&&AG.tm,slow:window.AG&&AG.slow,ms:window.AG&&AG.ms.map(x=>+x.toFixed(1)),errs:window.AG&&AG.errs,perf:typeof agPerf==="function"&&agPerf(),agN:window.__agN,
+  return{on:typeof agOn==="function"&&agOn(),week:wk(),month:S.month,year:S.year,stat:window.AG&&AG.stat,tm:window.AG&&AG.tm,slow:window.AG&&AG.slow,over:window.AG&&AG.over,ms:window.AG&&AG.ms.map(x=>+x.toFixed(1)),errs:window.AG&&AG.errs,perf:typeof agPerf==="function"&&agPerf(),agN:window.__agN,
    log:(z.log||[]).slice(-8),pend:(z.pend||[]).length,agRows,mean:{suc:mean("suc"),sung:mean("sung"),th:mean("th"),bac:mean("bac")},orgs:L.map(v=>v.ag&&v.ag.o||(v.nr&&v.nr.o)||"-").join(","),
    scenes:(window.__agSc||[]).slice(0,4),nSc:(window.__agSc||[]).length,acts:R&&R.acts?R.acts.filter(a=>a.ag).length:0}});
  rep.pageErrs=errs;console.log(JSON.stringify(rep,null,1));await b.close()})();
