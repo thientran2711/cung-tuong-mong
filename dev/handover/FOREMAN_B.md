@@ -3,7 +3,7 @@ Owner (16/11, session 8): open a second account, run a foreman there with at mos
 
 ## Roles
 - Main coordinator (session 8, account A): owner chat, OWNER_DECISIONS, SESSION8_QUEUE, ALL fast-forwards of main, urgent live bugs, co-op, reviews of its own slice.
-- Foreman B (account B): runs ONLY the items listed under "Slice B" below. Max 8 agents at once (workers + reviewers). Never talks to the owner. Never pushes main. Never edits OWNER_DECISIONS.md or SESSION8_QUEUE.md (coordinator's files). Writes ONLY dev/handover/FOREMAN_B_STATUS.md (+ its workers' review/* branches).
+- Foreman B (account B): runs ONLY the items listed under "Slice B" below. Max 15 agents at once (owner 16/11) (workers + reviewers). Never talks to the owner. Never pushes main. Never edits OWNER_DECISIONS.md or SESSION8_QUEUE.md (coordinator's files). Writes ONLY dev/handover/FOREMAN_B_STATUS.md (+ its workers' review/* branches).
 
 ## How Foreman B works
 1. Setup like HANDOVER_TO_SESSION8 §0.2 (sparse worktrees under /home/user/wt, fetch --depth=30 under flock, PREAMBLE.txt + REVIEWER.txt copied with "Coordinator = Foreman B (reports to main session 8)"). Cloudflare token + Magnific must be connected on account B (ask the owner once if missing; never paste secrets in chat).
@@ -18,3 +18,6 @@ Main coordinator keeps: all co-op items, boot/iPad load, face-sharp, newgame-ui,
 
 ## Model per task (owner 16/11) — set Agent `model` on EVERY spawn
 NO haiku. sonnet = minimum + DEFAULT (UI, art, wording, reviewers, ordinary bugs) · opus = game rules + numbers (balance, odds, economy, difficulty), game structure / core systems (time, saves, co-op sync, schemes/evidence, progression, roads), hard root-cause work. Note the model next to each item in FOREMAN_B_STATUS.md.
+
+## Slice B — added 16/11 (owner: B may run up to 15 agents)
+Re-port the owner-approved branches stranded behind main (specs: SESSION8_QUEUE §D + OWNER_LEDGER §7): D29 schedules/roster re-port (opus) · D30 palace map re-port · D31 difficulty modes (opus) · D32 succession choice re-port (opus) · D33 routes re-port (opus) · D34 scheme minigames re-port · D36 leaderboard + Bảng vàng · D38 lost items (opus) · D39 appearance overlays · D40 bad-weather risks · D41 promote own servants (opus) · D42 places leftovers. Dependencies: D29 first (Foreman C's D13 waits for it); D30 + D42 share scene files (one at a time); D31/D33 re-measure balance (coordinate with Foreman C's C7 via QUESTIONS); D39 before any appearance art.
