@@ -1,0 +1,66 @@
+{
+ "hy1": {
+  "figs": [
+   {
+    "file": "fig-man-huynh-1-a18",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-1",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-huynh-1-a26",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-1",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-huynh-1-a36",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-1",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-huynh-1-a51",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-1",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "hy2": {
+  "figs": [
+   {
+    "file": "fig-man-huynh-2-a18",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-2",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-huynh-2-a26",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-2",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-huynh-2-a36",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-2",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-huynh-2-a51",
+    "role": "man",
+    "sub": "huynh",
+    "identity": "huynh-2",
+    "ageBand": "a51"
+   }
+  ]
+ }
+}

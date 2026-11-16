@@ -12,3 +12,26 @@ class_name = "Room"
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Room"]
+
+# Sổ mây (cloud save, review/cloud-save): one Durable Object per sync code (src/vault.js)
+[[durable_objects.bindings]]
+name = "VAULT"
+class_name = "Vault"
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["Vault"]
+
+# per-IP limits (Workers Rate Limiting binding; namespace_id = any account-unique integer string)
+[[ratelimits]]
+name = "VAULT_RL"
+namespace_id = "4401"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "VAULT_NEW_RL"
+namespace_id = "4402"
+simple = { limit = 5, period = 60 }
+
+[vars]
+VAULT_ORIGINS = "https://thientran2711.github.io"
