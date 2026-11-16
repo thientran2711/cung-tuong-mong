@@ -1,6 +1,7 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 07:27Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
+last wake: 16/11 07:29Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+s3 start context ≈ 40k tokens; budget ≈ 50k → rollover per FOREMAN_D.md.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
 main at start = eba64ead4.
@@ -56,6 +57,9 @@ main at start = eba64ead4.
 - D52 is Foreman C's (review/skin-audit). Shared briefs for workers: dev/handover/PREAMBLE.txt + REVIEWER.txt (s1 had local copies at /home/user/wt/FOREMAN_D_*.txt; sessions do not share disk — paste the brief text in each create_session prompt).
 
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
+
+## s3 wake log
+- 07:29Z: s3 took over. 6 D sessions RUNNING (no new reports yet). mg-balance (07:10Z s11 inbox line) was pasted into FOREMAN_B/C/D.md alike, but OD:L1255/L1265 and HANDOVER_SESSION9 assign it to Foreman B (B has the scope extensions 07:20/07:25Z) → D does NOT take it (no double work); main chat: confirm, or write "mg-balance → D" here and D starts at once.
 
 ## s2 wake log
 - 07:27Z: missed s10 inbox lines (06:00/06:36/06:50Z) found and taken now: servant part C review, act-split w2–3 (+stroll slot folded in: same act/happening code, owner 07:25Z same-worker rule), Danh balance recheck; facefx-all-r2 is on main → slap-mg review. act-dedupe UI flag (3) and art flag (4) are not in D's slice (UI = main; art = main samples / C).
