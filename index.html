@@ -18603,7 +18603,7 @@ setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=nu
  render=function(){const out=r0.apply(this,arguments);try{const t=typeof tab!=="undefined"?tab:null;if(t!==last){last=t;requestAnimationFrame(again);setTimeout(again,160);setTimeout(again,480)}}catch(e){}return out};
  window.render=render},0);
 (function(){const P=$("panel");if(!P)return;const mark=e=>{if(!(e.target.closest&&e.target.closest(".pc")))P.__kpcUser=1};P.addEventListener("touchstart",mark,{passive:true});P.addEventListener("wheel",mark,{passive:true});
- document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],[data-tab],.ksubb"))P.__kpcUser=0},true)})();
+ document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],button[data-tab],.ksubb"))P.__kpcUser=0},true)})();
 (function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`
 .pc[data-k2]{max-height:var(--kpcmax,none)!important;overflow-y:auto!important;overscroll-behavior:contain;padding:0 7px 7px!important}
 .pc[data-k2].kpcfull{height:var(--kpcmax)!important;min-height:var(--kpcmax)!important;flex:0 0 auto!important}
@@ -29430,7 +29430,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a2f7036d4518";window.CTM_BUILD=BUILD;
+const BUILD="e42bd2bdc4fe";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
