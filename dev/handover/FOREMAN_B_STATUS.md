@@ -4,15 +4,14 @@ last wake: 11/16/2026 06:20Z (Foreman B session 2 = session_01N1tNP3StF4VxqkqTsQ
 Context (session 2): system+brief ~40k tokens at start; ~55k after the mandatory setup reads → budget ~70k (start-after-setup +25%). Hourly self-wake: CronCreate job c564090d at :17 every hour.
 Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
 
-## HANDOVER (Foreman B session 1 → session 2 = session_01N1tNP3StF4VxqkqTsQSt3a, 11/16/2026 05:19Z)
-- Slice B state: 24 PASS (20 LIVE on main via trains 1–3). PASS not yet on main: routes-port-r1 (D33, conditional loi-rieng §6.1), chapter-detail-r1 (C24), tuduc-mg-r1 (C41), difficulty-port-r1 (D31, conditional .kdiff override). Full shas under ## PASS.
-- Still running as OLD in-session agents of session 1 (they finish on their own; if no report file appears within ~2 h, re-open from the pushed branch/PROGRESS as a separate session):
-  * C41b tuduc-pic — branch review/tuduc-pic (from tuduc-mg-r1 + main; pass TD_BG as pic in jtd tdPlay → picture-left frame). Needs a reviewer when "SẴN SÀNG KIỂM".
-  * D34 reviewer — DONE: PASS e25486e0 (see ## PASS).
-- Blocked: D36 rank-port (KIT REQUEST podium + person-dialog chips, see KIT KEEPER NEEDED), D41 promote-servants (waits for Foreman C D29 schedules/roster).
-- Open owner questions: Q3, Q5, Q6, Q8–Q20, Q22, Q23 (Q1, Q4, Q7, Q21 resolved). C7 notes for Foreman C: D31, D33, Q8, Q16.
-- Tools on the box: /home/user/wt/{PREAMBLE.txt, REVIEWER.txt, WORKER_B.txt, REPORT_B.txt, RESUME_B.txt, stpush.sh}. New session has its own container: copy the briefs from dev/handover/ (PREAMBLE.txt, REVIEWER.txt) + this file's rules; workers now run as separate sessions writing dev/handover/reports/<branch>.md.
-- Cloudflare: works on account B's environment (token re-saved 11/16).
+## HANDOVER (Foreman B session 2 → session 3, 11/16/2026 06:25Z)
+- Session 2 = session_01N1tNP3StF4VxqkqTsQSt3a passed its context budget → rolled over; it stops spawning now.
+- All B work runs as SEPARATE sessions (nothing dies with session 2). Running: C35b reviewer session_01N1tNP2GaMKbqSeCQe8Lxot (review/pcard-dislikes-r1 → reports/review-pcard-dislikes-r1.md); D3 item-big session_01N1tNP3vh5qQKaG75iP6uRK (reports/item-big.md); D9 header-own session_01N1tNP6D57poL6nUn778JPv (reports/header-own.md); D12 mood-bar (opus) session_01N1tNP2hssUsxJwKBBsGRUZ (reports/mood-bar.md). If no push/report after ~2–3 h, check with get_session/list_events, then re-open from the pushed branch + PROGRESS.
+- New PASS this session: C41b review/tuduc-pic-r1 2954ff9f (under ## PASS). PASS waiting for fast-forward: D31, D33, D34, C24, C41(+C41b).
+- Held, waiting for main's answer Q24: D11, D13, D14, D19, D44 (cross-foreman/art). D25 runs at C. D41 moved to C (handoff file written). D36 blocked on kit-keeper-1. C32b curl speed = KIT REQUEST to keeper.
+- Open owner questions: Q3, Q5, Q6, Q10–Q15, Q20, Q23, Q24 (main), Q25.
+- Wakes: session 2 had an in-session cron (dies with it) and the routine "Foreman B hourly wake" trig_01MqRpkkmxprHXt9EXHEjJ6q fires into SESSION 2. Session 3: create your own hourly wake, then disable trig_01MqRpkkmxprHXt9EXHEjJ6q (update_trigger enabled=false) so session 2 is not woken. If session 2 is woken anyway it only checks that session 3 is alive and does nothing else.
+- Brief pattern used for new sessions: short header + "read and obey dev/handover/PREAMBLE.txt (+REVIEWER.txt) on the docs branch" + key rules (ENGLISH, VANPHONG, ONE KIT KEEPER, art paused tonight, shallow flock fetch, sparse worktree, no main/PR/owner) + task spec + REPORTING to dev/handover/reports/<branch>.md.
 
 Updated: 11/16/2026 06:20Z (session 2) — PASS new: C41b. Reviewing: C35b. Running: D3, D9, D12. Held (Q24): D11, D13, D14, D19, D44. Blocked: D36 (kit-keeper-1). D41 moved to C. Free slots: 7.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
