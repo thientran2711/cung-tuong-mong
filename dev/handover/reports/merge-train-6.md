@@ -1,14 +1,15 @@
 # merge-train-6
 
-Branch review/merge-train-6 @ 7d6d3514, descends from origin/main 92668096 (train-4 live) (main moved 4 times during the run; merged again each time, generated files rebuilt with dev/site/build_site.sh). All merges --no-ff, one at a time, econ before luxury.
+Branch review/merge-train-6 @ e9c6021d, descends from origin/main b85cdb1e
 
-## IN (10), each at its PASS sha (checked against review-<name>.md)
+## IN (11), each at its PASS sha (checked against review-<name>.md)
 1. econ-items-r1 eed75e7 (D6)  2. luxury-r1 a84d31c (D17)  3. toil-react-r1 75bd0eb (D27)  4. pcard-dislikes-r1 3b2e15e (C35b)
 5. coop-invite-ux-r1 727b611 (C43)  6. dlg-fig-ph-r1 fd7768b (D50)  7. row-align-r2 69e6d56  8. origins-r1 968ed00 (D18)  9. memories-r1 99c0695 (D26)
+11. balance-pass-r1 89ea80f (owner Q6 = option 2: merged AS IS, no BAL tuning; conflicts: jbal birthAdd 4->2 kept with main's wkFinCap, jecon dutySkip duc:0 kept with main's home.bd:20)
 10. cycle-art-r1 74f96d6 (added after train-4 landed; conflicts: jevban KIT_DLGMAP got "cyrep" added to main's line, jopic option rules both kept)
 
-## DEFERRED (not merged)
-- balance-pass-r1 89ea80f: owner question Q6 open (HH 45 % > 32 % target).
+## DEFERRED
+None.
 
 ## Conflicts and resolution
 - index.html, sw.js, assets.json: never hand-merged; took ours, rebuilt after the last merge.
@@ -32,3 +33,6 @@ Branch review/merge-train-6 @ 7d6d3514, descends from origin/main 92668096 (trai
 
 ## Re-test on 7d6d3514
 All suite runs exit 0 at both sizes: kit-table 0 fails, pcard-dislikes ALL PASS, econ-items PASS, coop-e2e 59/59, boot x5, cycle.js ALL OK (755x1000, 1180x820).
+
+## Final re-test on e9c6021d (main b85cdb1e: mortality, night-end, promo-skip live)
+Both sizes: all suite items exit 0 incl. promo-exam 20/20, opt-render (no errors), coop-e2e 59/59, kit-table 0 fails, cycle ALL OK, boot x5. jbal2 conflict: kept BAL.dis + mortality block. promo-rules chest/reveal FAILs are the known main regression (not run in this train).
