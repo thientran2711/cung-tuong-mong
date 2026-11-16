@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report","b":"850e93473b48","h":[{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."}]};
+window.CTM_BI={"s":"08725411+","t":"2026-11-16T22:44Z","c":"golive batch 3 (urgent owner bug): diemtrang-fx-r1 — makeup figures no longer dark block (kmk→kmkl), rim light only, reveal zoom; site rebu…","b":"15c9a0750c12","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -9004,7 +9004,7 @@ function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(
  const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
    if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
    else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
- if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";return c}
+ if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";if(s.need&&typeof kitOffNeed==="function")kitOffNeed(c,s.need);return c}
 /* ---------- events ---------- */
 /* EV6(id, fam, spec): spec = {big, w(ctx)->weight, pp()->params|null (actor ids), v:[texts with {A} {B} {M} {S} {W} {P}], o(X)->choices, t title} */
 const FAM6={day:"Chuyện trong cung",visit:"Có người đến",emp:"Hoàng thượng",sea:"Thời tiết",fest:"Ngày hội",merit:"Lập công",court:"Tin triều đình",kid:"Chuyện các con",serv:"Kẻ hầu",rumor:"Tin đồn",myst:"Chuyện lạ cần tra",plot:"Mưu hại",quest:"Việc nhờ"};
@@ -14944,7 +14944,7 @@ function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc
  o.push(ch70(`Đề phòng: ${r.gd.toLowerCase()}`,{c:{bac:-10},wt:[G70("mưu của nàng khó thành hơn nhiều (giữ được mình)")],k:[R70("nàng vẫn còn ý hại")],ok:()=>{p.g+=25;p.pend=0;return `Ngươi ${r.gd.toLowerCase()}. Mưu của ${a.name} khó thành hơn.`}}));
  if(!p.dig)o.push(ch70("Cho người dò tiếp",{c:{bac:-15},p:40+mat*7+tc/6,wt:[G70(`chứng cứ về ${a.name} +1`),G70("biết rõ cách và thời cơ nàng chờ")],lt:[R70("nàng biết bị dò, ra tay sớm hơn")],ok:()=>{/*evok: plot deed*/evA(S,a,1);p.dig=1;p.pend=0;return `Người của ngươi lần ra: ${a.name} ${r.n.toLowerCase()}, chờ ${OPP70[M.opp[0]].n}. Chứng cứ +1.`},no:()=>{p.pg=Math.max(p.pg,p.need);p.pend=0;return `${a.name} biết mình bị dò, gấp rút ra tay.`}}));
  o.push(ch70(`Chặn từ gốc: ${r.st.toLowerCase()}`,{c:{bac:-30},p:42+mat*5+tc/5+(p.dig?12:0),wt:[G70("mưu bị cắt đứt"),G70(`chứng cứ về ${a.name} +1`)],lt:[R70(`${a.name} oán ngươi +5`),R70("mưu vẫn tiếp tục")],ok:()=>{p.foil=1;p.pend=0;return `Ngươi ${r.st.toLowerCase()}. Đường dây của ${a.name} đã đứt.`},no:()=>{oanAdd(a,S,5);p.pend=0;return `Việc chặn không thành, ${a.name} sinh nghi.`}}));
- if(evG(S,a)>=2&&ACT.accuse&&accOK(S,a)){const c=ch70(`Tố giác ${a.name} ngay`,{p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ, mưu tan")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;const x=runAct(S,a,"accuse");if(!alive70(a)||a.confined)abandon70(p,"exposed");log(x||"Ngươi tố giác.")};o.push(c)}
+ if(ACT.accuse&&(rkOf(a)<7||rkOf(S)>=3)){const c=ch70(`Tố giác ${a.name} ngay`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ, mưu tan")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;const x=runAct(S,a,"accuse");if(!alive70(a)||a.confined)abandon70(p,"exposed");log(x||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Lấy kế trả kế: để nàng ra tay rồi bắt quả tang",{c:{suc:-5},p:32+mat*6+tc/4+(p.dig?15:0),wt:[G70("nàng bị bắt quả tang, bị phạt"),G70(`chứng cứ về ${a.name} +2`)],lt:[R70("bẫy hở: nàng ra tay dễ hơn")],ok:()=>{p.trap=1;p.pend=0;return `Ngươi giăng sẵn người, chờ ${a.name} ra tay.`},no:()=>{p.g-=10;p.pend=0;return `Bẫy của ngươi bị lộ, lại khiến mình lơ là.`}}));
  const alt=others(a).filter(x=>x!==S&&alive70(x)&&oan(a,x)>=20&&!(typeof sameHouse==="function"&&sameHouse(a,x)));
  if(alt.length&&M.k!=="musk"&&M.k!=="catswap"&&!p.kid){const x=alt.sort((u,v)=>oan(a,v)-oan(a,u))[0];o.push(ch70(`Xui khiến nàng nhắm sang ${x.name}`,{c:{bac:-40},p:28+tc/4+mat*3,wt:[G70("mưu đổi hướng khỏi ngươi")],lt:[R70(`${a.name} oán ngươi +8`)],k:[R70(`${x.name} có thể gặp nạn`)],ok:()=>{p.t=x.id;p.pend=0;p.kn=1;duc70(S,-3,"xui người hại kẻ khác");return `Lời xui của ngươi lọt tai: ${a.name} quay sang nhắm vào ${x.name}.`},no:()=>{oanAdd(a,S,8);p.pend=0;return `${a.name} biết ngươi giật dây.`}}))}
@@ -14956,7 +14956,7 @@ function optsNpc70(p){const a=pa70(p),t=pt70(p),M=pm70(p),mat=S.mat||0;return[
 function optsAft70(p){const a=pa70(p),M=pm70(p),mat=S.mat||0;const o=[];const ev=evG(S,a);
  o.push(ch70("Tra xét đến cùng",{c:{bac:-20},p:30+mat*8+(p.trail||0)*12+(p.dig?10:0),wt:[G70("lần ra kẻ chủ mưu thật"),G70("chứng cứ +2")],lt:[R70("dấu vết đứt, không biết là ai")],ok:()=>{/*evok: plot deed*/evA(S,a,2);p.pend=0;const s=p.acc?servById(p.acc):null;noteAdd(a.id,`đứng sau vụ ${M.n.toLowerCase()} nhắm vào ngươi${s?` (đồng lõa: ${s.name})`:""}`);return `Tra ra rồi: chính ${a.name} đứng sau${s?`, ${s.name} trong cung ngươi là đồng lõa`:""}. Chứng cứ +2.`},no:()=>{p.pend=0;return "Dấu vết đứt giữa chừng; ngươi chưa biết là ai."}}));
  const s=p.acc?servById(p.acc):null;if(s&&(S.staff||[]).includes(s)&&p.dig)o.push(ch70(`Giao ${s.name} cho Thận Hình ti`,{wt:[G70("bớt một kẻ phản trong cung")],k:[R70("kẻ hầu khác run sợ")],ok:()=>{S.staff.splice(S.staff.indexOf(s),1);(S.staff||[]).forEach(x=>x.loyal=cl(x.loyal-2,0,100));p.pend=0;return `${s.name} bị giải đi.`}}));
- if(ev>=2&&accOK(S,a)){const c=ch70(`Tố giác ${a.name}`,{p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;log(runAct(S,a,"accuse")||"Ngươi tố giác.")};o.push(c)}
+ if(rkOf(a)<7||rkOf(S)>=3){const c=ch70(`Tố giác ${a.name}`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;log(runAct(S,a,"accuse")||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Nuốt giận, đợi thời",{wt:[G70("Đức +1")],k:[R70(`${a.name} vẫn nhởn nhơ`)],ok:()=>{apply({duc:1});p.pend=0;return "Ngươi nén giận, chờ thời cơ."}}));return o}
 /* her own plot: the start, the moment, the end */
 function optsWhen70(p){const t=pt70(p),M=pm70(p);const now=M.opp.find(k=>k!=="night"&&OPP70[k].ok(p,t))||"night";const bn=J70CFG.prep+OPP70[now].b+(p.bonus||0)-p.g;const o0=oddsOf70(S,t,M.k,bn);const o=[];
@@ -17774,7 +17774,7 @@ Object.assign(BAL,{reveal:{shake:Math.round(420*BAL.pace),pause:Math.round(700*B
    Frame rate (reviewer r1): frameW = Vu oan/Cài đồ weight × when she holds no proof to accuse; frameW1 = Vu oan weight added at grudge
    band "nhỏ"; npcFrameP = % per tuần that a consort with malice ≥ npcFrameMal frames a more favoured rival (NPC-vs-NPC);
    frameHide = minus on the victim's detection (oSee) during a frame (quiet work). */
-Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ksB:25,wB:15,tyB:20,evB:10,clearMin:10,clearMax:85,fDuc:8,fDanh:15,frameW:2,frameW1:2,npcFrameP:10,npcFrameMal:40,frameHide:30}});
+Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ksB:25,wB:15,tyB:20,evB:10,clearMin:10,clearMax:85,fDuc:8,fDanh:15,frameW:2,frameW1:2,witLoy:60,tyArts:3,npcFrameP:10,npcFrameMal:40,frameHide:30}});
 /* CO-OP BUỔI CLOCK (KIT §69, dev/build/jcooptimer.js, owner 15/11 ~21:25Z), ms. buoiMs = the longest a co-op buổi lasts (owner 23:10Z: 5 phút; the host picks 3 / 5 / 8 = lens, minutes, in the lobby) (both "Sẵn sàng"
    ends it sooner) · pauseCapMs = the most the clock may stand still in one buổi while a player is in a mini game or a dialog ·
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
@@ -22029,7 +22029,7 @@ function pzWeek(p){const z=p&&p.pz;if(!z)return;if(z.until<=wk()){p.pz=null;fxLo
 PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];const y=(S.arts&&S.arts.y)||0;
  o.push(ch70("Mời thái y bắt mạch, giải độc",{c:{bac:-FXF.docMed},wt:[G70("rõ là độc gì, mau tan")],ok:()=>{z.dx=1;z.until=Math.max(wk()+1,z.until-2);let t="Thái y bắt mạch, nói ngươi trúng độc, kê thang giải độc.";
   const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(40+(S.doctor?20:0))){evA(S,by,1);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} +1.`}return t}}));
- if((S.inv||[]).some(e=>e.k==="giaidoc"&&!e.h))o.push(ch70("Uống thuốc giải trong rương",{wt:[G70("độc tan ngay")],k:[R70("dùng hết 1 thuốc giải")]," ok":null,ok:()=>{takeItem(S,"giaidoc");S.pz=null;return "Ngươi uống thuốc giải, môi hồng trở lại."}}));
+ o.push(ch70("Uống thuốc giải trong rương",{need:[{t:kitWhyItem("thuốc giải"),ok:(S.inv||[]).some(e=>e.k==="giaidoc"&&!e.h),w:kitWhenItem()}],wt:[G70("độc tan ngay")],k:[R70("dùng hết 1 thuốc giải")],ok:()=>{takeItem(S,"giaidoc");S.pz=null;return "Ngươi uống thuốc giải, môi hồng trở lại."}}));
  o.push(ch70("Tự sắc thuốc giải độc",{p:cl(30+y*15,5,95),c:{suc:-3},wt:[G70("độc tan sớm hơn")],lt:[R70("uống sai vị, lâu khỏi hơn")],ok:()=>{z.until=Math.max(wk()+1,z.until-1);return "Ngươi tự sắc cam thảo, lục đậu giải độc."},no:()=>{z.until++;return "Thuốc không hợp, độc lâu tan hơn."}}));
  o.push(ch70("Nằm nghỉ chờ khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${fxLeft(z.until)} tuần`)],ok:()=>"Ngươi nằm nghỉ, uống nước cháo loãng."}));
  return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
@@ -34885,8 +34885,8 @@ function toilRxOpts(r){const R=toilRx(),L=[];const h=r.host,cons=h&&h!=="th"&&h!
  if(!bad&&h&&h!=="emp"){const cost=toilGiveCost(),gain=Math.abs(r.n)>=2?R.giveAffBig:R.giveAff,item=toilGiveItem(cost);
   const done=(what)=>{toilBack(h,gain);log(`Ta gửi ${what} đáp lễ; ${nm} nhận lấy, thêm quý ta.`)};
   L.push({n:"Tặng lại",fx:{bac:-cost},hideOut:true,hint:lv=>lv?`đáp lễ bằng bạc; ${boss?"bề trên":nm} thêm quý ta`:"đáp lễ bằng bạc, người nhận thêm quý ta",risk:"an toàn",go:()=>done("chút bạc")});
-  if(item)L.push({n:`Tặng lại: ${item.n}`,fx:{},hideOut:true,hint:`tốn một món của ta, đáng giá ngang chút bạc kia; ${boss?"bề trên":nm} thêm quý ta`,risk:"an toàn",
-   go:()=>{const i=(S.inv||[]).findIndex(e=>e&&IT[e.k]&&IT[e.k].n===item.n&&!e.h&&!e.w&&!e.t&&!e.wk&&!econNo(S,e)&&!econGiver(e)&&econPrice(S,e)===item.pr);if(i<0)return;S.inv.splice(i,1);done(item.n)}})}
+  L.push(kitOffIf({n:item?`Tặng lại: ${item.n}`:"Tặng lại bằng một món đồ",fx:{},hideOut:true,hint:`tốn một món của ta, đáng giá ngang chút bạc kia; ${boss?"bề trên":nm} thêm quý ta`,risk:"an toàn",
+   go:()=>{if(!item)return;const i=(S.inv||[]).findIndex(e=>e&&IT[e.k]&&IT[e.k].n===item.n&&!e.h&&!e.w&&!e.t&&!e.wk&&!econNo(S,e)&&!econGiver(e)&&econPrice(S,e)===item.pr);if(i<0)return;S.inv.splice(i,1);done(item.n)}},!!item,kitWhyItem("món đồ đáng giá ngang chút bạc kia"),kitWhenItem()))}
  /* Hỏi bí quyết */
  if(cons&&!h.queen&&!toilTipOn()){let np=null;try{np=toilNpc(h)}catch(e){}const mine=toilToday(S),my=mine&&mine.makeup?(mine.score|0):0;
   if(np&&np.makeup&&np.score>=my+R.askGap){const T=traitsOf(h)||[];const odds=cl(Math.round(R.askBase+aff(h,S)/R.askAffDiv-(h.ghen||0)/R.askGhenDiv-(T.some(t=>t==="Kiêu ngạo"||t==="Hiểm độc")?R.askProud:0)),10,90);
@@ -41135,7 +41135,7 @@ let FRAME_LAST="";
 /* the player's side: she picks a defence; each card shows its cost and its odds word (reviewer r1: the roads differ only in odds, so the
    VANPHONG ladder word is what makes the choice readable); the result card tells the truth */
 PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;const why=pp.why||"bị vu dùng bùa ngải";const base=T.clearBase+(S.mat||0)*T.clearMat;
- const ks=(S.nightLog||[]).some(w=>wk()-w<=T.ksW);const wit=S.maid&&(S.maid.loyal||0)>=60;const ty=S.doctor||((S.arts&&S.arts.y)||0)>=3;const ev=evG(S,a);
+ const ks=(S.nightLog||[]).some(w=>wk()-w<=T.ksW);const wit=S.maid&&(S.maid.loyal||0)>=T.witLoy;const ty=S.doctor||((S.arts&&S.arts.y)||0)>=T.tyArts;const ev=evG(S,a);
  const clamp=x=>cl(Math.round(x),T.clearMin,T.clearMax);
  const clear=how=>{try{window.__framesMe=(window.__framesMe||0)+1;window.__framesMeClear=(window.__framesMeClear||0)+1}catch(e){}const t=frameExpose(a,S,how);
   Q.push({t:"Minh oan",who:pMe(),h:`<p>${t}</p>`});log(t)};
@@ -41147,9 +41147,9 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  const H="minh oan được thì kẻ vu oan bị lộ, bị phạt; hỏng thì ngươi mang tội: mất Danh, Sủng, bị phạt",RK="có rủi ro";
  const O=[];
  O.push({n:"Xin tra sổ Kính sự phòng",fx:{},hint:`${word(clamp(base+(ks?T.ksB:-10)))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+(ks?T.ksB:-10),ks?"sổ Kính sự phòng ghi đêm ấy ngươi hầu Hoàng thượng":"sổ Kính sự phòng và người gác cửa xác nhận ngươi không rời cung")});
- if(wit)O.push({n:`Gọi ${S.maid.name} làm chứng`,fx:{},hint:`${word(clamp(base+T.wB))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)});
- if(ty)O.push({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:`${word(clamp(base+T.tyB))} · ${H}`,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")});
- if(ev>=1)O.push({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:`${word(clamp(base+T.evB*2+10))} · ${H}`,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}});
+ O.push(kitOffIf({n:S.maid?`Gọi ${S.maid.name} làm chứng`:"Gọi cung nữ tâm phúc làm chứng",fx:{},hint:`${word(clamp(base+T.wB))} · ${H}`,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)},!!wit,S.maid?`lòng ${S.maid.name} chưa tới ${T.witLoy} (có ${S.maid.loyal||0})`:"thiếu cung nữ thân cận",kitWhenWit()));
+ O.push(kitOffIf({n:"Mời Thái y nghiệm hình nhân",fx:{bac:-10},hint:`${word(clamp(base+T.tyB))} · ${H}`,risk:RK,j67:"tốn: Bạc -10",go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")},!!ty,`thiếu thái y tâm phúc hoặc y thuật ${T.tyArts} trở lên`,kitWhenTy()));
+ O.push(kitOffIf({n:`Trình chứng cứ về ${a.name}`,fx:{},hint:`${word(clamp(base+T.evB*2+10))} · ${H}`,risk:RK,j67:`tốn: 1 chứng cứ về ${a.name}`,go:()=>{evA(S,a,-1);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}},ev>=1,kitWhyEv(a,1),kitWhenEv()));
  O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:`<p>Cung Chính ti khám tẩm cung ngươi, tìm thấy hình nhân bùa ngải. Có kẻ tố ngươi ${why.replace(/^bị vu /,"")}.</p><p class="past">Ngươi không làm việc ấy. Chọn cách minh oan.</p>`,o:O,who:pv(a)}};
 
@@ -45137,10 +45137,20 @@ function kitTam(standin){return standin?`<span class="ktam" role="note" title="T
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;bottom:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
 `;document.head.appendChild(st)})();
+/* ONE place that maps an engine need[{t,ok,w?}] (the same shape as the Cần row / data-kneed) to the greyed option:
+   the first unmet need becomes the reason chip ("thiếu …"), w (or the item/evidence/rank default) is the "opens again when" line.
+   Whole group: item / evidence / rank gated options of the ch70 / evChoice (c6) engine, truth (vu oan), toilette give-back, accuse. */
+function kitWhyEv(a,n){const have=(typeof evG==="function"&&a)?evG(S,a):0;return `thiếu chứng cứ về ${a&&a.name||"nàng"} (cần ${n}, có ${have})`}
+function kitWhenEv(){return "mở lại khi nắm đủ chứng cứ"}
+function kitOffNeed(c,needs){const u=(needs||[]).filter(x=>x&&!x.ok);if(!c||!u.length)return c;const n=u[0];return kitOff(c,n.t,n.w||"")}
+function kitWhenWit(){return "mở lại khi cung nữ thêm tin cẩn"}
+function kitWhenTy(){return "mở lại khi có thái y tâm phúc"}
+function kitOffIf(c,ok,why,when){return ok?c:kitOff(c,why,when)}
 function kitOffBac(c,fee){if(typeof S!=="undefined"&&S&&S.bac<fee)kitOff(c,kitWhyBac(fee),kitWhenBac());return c}
 /* kit sample page entries */
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§84 greyed option",title:"GREYED OPTION · kitOff (a known option she cannot take: cost / rank / item) — greyed, reason chip in Cần, when it opens again",where:"every dialog option list (VIỆC, visits, place card, teaching); the same ACT CARD frame, disabled",html:()=>`<div style="max-width:560px"><button class="opt" disabled data-kneed="${encodeURIComponent(JSON.stringify([{t:"thiếu 37 bạc (cần 40, có 3) · mở lại khi đủ bạc",ok:false}]))}">Ma ma giáo tập<small>Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -40 · thành: tiến bộ +2..3</small></button></div>`});
+ KIT_SAMPLES.push({id:"§84 need[] chips",title:"GREYED OPTION from engine need[] · kitOffNeed / kitWhyEv / kitWhyItem — item and evidence gated options stay in the list, greyed, chip says what is missing and when it opens",where:"vu oan defence (trình chứng cứ, Thái y, cung nữ), antidote card, toilette give-back, accuse",html:()=>`<div style="max-width:560px;display:grid;gap:8px"><button class="opt" disabled data-kneed="${encodeURIComponent(JSON.stringify([{t:"thiếu chứng cứ về Lục Dao Cầm (cần 1, có 0) · mở lại khi nắm đủ chứng cứ",ok:false}]))}">Trình chứng cứ về Lục Dao Cầm<small>Khá chắc · tốn: 1 chứng cứ · thành: minh oan</small></button><button class="opt" disabled data-kneed="${encodeURIComponent(JSON.stringify([{t:"thiếu thuốc giải · mở lại khi có đủ đồ",ok:false}]))}">Uống thuốc giải trong rương<small>tốn: 1 thuốc giải · thành: độc tan ngay</small></button></div>`});
  KIT_SAMPLES.push({id:"§84 tạm",title:"STAND-IN MARKER 'tạm' · kitTam(isStandin)",where:"corner of any stand-in picture (courtyard first); gone when the exact picture exists",html:()=>`<div style="position:relative;max-width:360px;height:120px;background:#7a6a55;border-radius:8px">${kitTam(true)}</div>`})}}catch(e){}
 /* ================= jcoopone: ONE WORLD — the co-op guard table (review/coop-one-world) =================
    Owner co-op rule OD:L96 (one shared world, one truth) + one-core law OD:L1267; audit dev/handover/reports/coop-one-world.md.
@@ -45219,7 +45229,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="850e93473b48";window.CTM_BUILD=BUILD;
+const BUILD="15c9a0750c12";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
