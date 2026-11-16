@@ -1,0 +1,3062 @@
+{
+"ue-u01-r0": {
+"ref": "KLM20Jnkqp",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u01-r0-a18",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u01-r0-a26",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u01-r0-a36",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u01-r0-a51",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u01-r2": {
+"ref": "KLM20Jnkqp",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u01-r2-a18",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u01-r2-a26",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u01-r2-a36",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u01-r2-a51",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u01-r3": {
+"ref": "KLM20Jnkqp",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u01-r3-a18",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u01-r3-a26",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u01-r3-a36",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u01-r3-a51",
+"role": "eunuch",
+"identity": "u01",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u02-r0": {
+"ref": "aF2O9spfSh",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u02-r0-a18",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u02-r0-a26",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u02-r0-a36",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u02-r0-a51",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u02-r2": {
+"ref": "aF2O9spfSh",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u02-r2-a18",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u02-r2-a26",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u02-r2-a36",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u02-r2-a51",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u02-r3": {
+"ref": "aF2O9spfSh",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u02-r3-a18",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u02-r3-a26",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u02-r3-a36",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u02-r3-a51",
+"role": "eunuch",
+"identity": "u02",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u03-r0": {
+"ref": "cplqLO10eP",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u03-r0-a18",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u03-r0-a26",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u03-r0-a36",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u03-r0-a51",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u03-r2": {
+"ref": "cplqLO10eP",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u03-r2-a18",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u03-r2-a26",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u03-r2-a36",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u03-r2-a51",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u03-r3": {
+"ref": "cplqLO10eP",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u03-r3-a18",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u03-r3-a26",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u03-r3-a36",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u03-r3-a51",
+"role": "eunuch",
+"identity": "u03",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u04-r0": {
+"ref": "79vpBcQJAL",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u04-r0-a18",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u04-r0-a26",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u04-r0-a36",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u04-r0-a51",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u04-r2": {
+"ref": "79vpBcQJAL",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u04-r2-a18",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u04-r2-a26",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u04-r2-a36",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u04-r2-a51",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u04-r3": {
+"ref": "79vpBcQJAL",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u04-r3-a18",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u04-r3-a26",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u04-r3-a36",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u04-r3-a51",
+"role": "eunuch",
+"identity": "u04",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u05-r0": {
+"ref": "gOITpnfSXO",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u05-r0-a18",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u05-r0-a26",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u05-r0-a36",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u05-r0-a51",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u05-r2": {
+"ref": "gOITpnfSXO",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u05-r2-a18",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u05-r2-a26",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u05-r2-a36",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u05-r2-a51",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u05-r3": {
+"ref": "gOITpnfSXO",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u05-r3-a18",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u05-r3-a26",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u05-r3-a36",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u05-r3-a51",
+"role": "eunuch",
+"identity": "u05",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u06-r0": {
+"ref": "O6fdflrynm",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u06-r0-a18",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u06-r0-a26",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u06-r0-a36",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u06-r0-a51",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u06-r2": {
+"ref": "O6fdflrynm",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u06-r2-a18",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u06-r2-a26",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u06-r2-a36",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u06-r2-a51",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u06-r3": {
+"ref": "O6fdflrynm",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u06-r3-a18",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u06-r3-a26",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u06-r3-a36",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u06-r3-a51",
+"role": "eunuch",
+"identity": "u06",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u07-r0": {
+"ref": "8aNgPb4IrU",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u07-r0-a18",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u07-r0-a26",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u07-r0-a36",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u07-r0-a51",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u07-r2": {
+"ref": "8aNgPb4IrU",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u07-r2-a18",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u07-r2-a26",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u07-r2-a36",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u07-r2-a51",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u07-r3": {
+"ref": "8aNgPb4IrU",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u07-r3-a18",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u07-r3-a26",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u07-r3-a36",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u07-r3-a51",
+"role": "eunuch",
+"identity": "u07",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u08-r0": {
+"ref": "1lpGWEGr4r",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u08-r0-a18",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u08-r0-a26",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u08-r0-a36",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u08-r0-a51",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u08-r2": {
+"ref": "1lpGWEGr4r",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u08-r2-a18",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u08-r2-a26",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u08-r2-a36",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u08-r2-a51",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u08-r3": {
+"ref": "1lpGWEGr4r",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u08-r3-a18",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u08-r3-a26",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u08-r3-a36",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u08-r3-a51",
+"role": "eunuch",
+"identity": "u08",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u09-r0": {
+"ref": "79vpBxAJAL",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u09-r0-a18",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u09-r0-a26",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u09-r0-a36",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u09-r0-a51",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u09-r2": {
+"ref": "79vpBxAJAL",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u09-r2-a18",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u09-r2-a26",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u09-r2-a36",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u09-r2-a51",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u09-r3": {
+"ref": "79vpBxAJAL",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u09-r3-a18",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u09-r3-a26",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u09-r3-a36",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u09-r3-a51",
+"role": "eunuch",
+"identity": "u09",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u10-r0": {
+"ref": "iGqmQDb3uK",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u10-r0-a18",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u10-r0-a26",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u10-r0-a36",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u10-r0-a51",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u10-r2": {
+"ref": "iGqmQDb3uK",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u10-r2-a18",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u10-r2-a26",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u10-r2-a36",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u10-r2-a51",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u10-r3": {
+"ref": "iGqmQDb3uK",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u10-r3-a18",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u10-r3-a26",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u10-r3-a36",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u10-r3-a51",
+"role": "eunuch",
+"identity": "u10",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u11-r0": {
+"ref": "4RuofTr9Aa",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u11-r0-a18",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u11-r0-a26",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u11-r0-a36",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u11-r0-a51",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u11-r2": {
+"ref": "4RuofTr9Aa",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u11-r2-a18",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u11-r2-a26",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u11-r2-a36",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u11-r2-a51",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u11-r3": {
+"ref": "4RuofTr9Aa",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u11-r3-a18",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u11-r3-a26",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u11-r3-a36",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u11-r3-a51",
+"role": "eunuch",
+"identity": "u11",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u12-r0": {
+"ref": "fHAy6SFCDY",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u12-r0-a18",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u12-r0-a26",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u12-r0-a36",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u12-r0-a51",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u12-r2": {
+"ref": "fHAy6SFCDY",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u12-r2-a18",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u12-r2-a26",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u12-r2-a36",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u12-r2-a51",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u12-r3": {
+"ref": "fHAy6SFCDY",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u12-r3-a18",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u12-r3-a26",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u12-r3-a36",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u12-r3-a51",
+"role": "eunuch",
+"identity": "u12",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u13-r0": {
+"ref": "N2FIaXR6D9",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u13-r0-a18",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u13-r0-a26",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u13-r0-a36",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u13-r0-a51",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u13-r2": {
+"ref": "N2FIaXR6D9",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u13-r2-a18",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u13-r2-a26",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u13-r2-a36",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u13-r2-a51",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u13-r3": {
+"ref": "N2FIaXR6D9",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u13-r3-a18",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u13-r3-a26",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u13-r3-a36",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u13-r3-a51",
+"role": "eunuch",
+"identity": "u13",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u14-r0": {
+"ref": "iGqmCyd3uK",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u14-r0-a18",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u14-r0-a26",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u14-r0-a36",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u14-r0-a51",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u14-r2": {
+"ref": "iGqmCyd3uK",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u14-r2-a18",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u14-r2-a26",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u14-r2-a36",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u14-r2-a51",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u14-r3": {
+"ref": "iGqmCyd3uK",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u14-r3-a18",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u14-r3-a26",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u14-r3-a36",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u14-r3-a51",
+"role": "eunuch",
+"identity": "u14",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u15-r0": {
+"ref": "3zbhHpsREY",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u15-r0-a18",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u15-r0-a26",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u15-r0-a36",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u15-r0-a51",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u15-r2": {
+"ref": "3zbhHpsREY",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u15-r2-a18",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u15-r2-a26",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u15-r2-a36",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u15-r2-a51",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u15-r3": {
+"ref": "3zbhHpsREY",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u15-r3-a18",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u15-r3-a26",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u15-r3-a36",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u15-r3-a51",
+"role": "eunuch",
+"identity": "u15",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u16-r0": {
+"ref": "jUXYeiXLD0",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u16-r0-a18",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u16-r0-a26",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u16-r0-a36",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u16-r0-a51",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u16-r2": {
+"ref": "jUXYeiXLD0",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u16-r2-a18",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u16-r2-a26",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u16-r2-a36",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u16-r2-a51",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u16-r3": {
+"ref": "jUXYeiXLD0",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u16-r3-a18",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u16-r3-a26",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u16-r3-a36",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u16-r3-a51",
+"role": "eunuch",
+"identity": "u16",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u17-r0": {
+"ref": "LwBWdRZswO",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u17-r0-a18",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u17-r0-a26",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u17-r0-a36",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u17-r0-a51",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u17-r2": {
+"ref": "LwBWdRZswO",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u17-r2-a18",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u17-r2-a26",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u17-r2-a36",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u17-r2-a51",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u17-r3": {
+"ref": "LwBWdRZswO",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u17-r3-a18",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u17-r3-a26",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u17-r3-a36",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u17-r3-a51",
+"role": "eunuch",
+"identity": "u17",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u18-r0": {
+"ref": "Bh4s7ykoQR",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u18-r0-a18",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u18-r0-a26",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u18-r0-a36",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u18-r0-a51",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u18-r2": {
+"ref": "Bh4s7ykoQR",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u18-r2-a18",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u18-r2-a26",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u18-r2-a36",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u18-r2-a51",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u18-r3": {
+"ref": "Bh4s7ykoQR",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u18-r3-a18",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u18-r3-a26",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u18-r3-a36",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u18-r3-a51",
+"role": "eunuch",
+"identity": "u18",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u19-r0": {
+"ref": "UPmMmLMwny",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u19-r0-a18",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u19-r0-a26",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u19-r0-a36",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u19-r0-a51",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u19-r2": {
+"ref": "UPmMmLMwny",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u19-r2-a18",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u19-r2-a26",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u19-r2-a36",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u19-r2-a51",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u19-r3": {
+"ref": "UPmMmLMwny",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u19-r3-a18",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u19-r3-a26",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u19-r3-a36",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u19-r3-a51",
+"role": "eunuch",
+"identity": "u19",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u20-r0": {
+"ref": "79vptK9JAL",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u20-r0-a18",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u20-r0-a26",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u20-r0-a36",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u20-r0-a51",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u20-r2": {
+"ref": "79vptK9JAL",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u20-r2-a18",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u20-r2-a26",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u20-r2-a36",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u20-r2-a51",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u20-r3": {
+"ref": "79vptK9JAL",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u20-r3-a18",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u20-r3-a26",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u20-r3-a36",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u20-r3-a51",
+"role": "eunuch",
+"identity": "u20",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u21-r0": {
+"ref": "u5n6Cf6QLD",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u21-r0-a18",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u21-r0-a26",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u21-r0-a36",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u21-r0-a51",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u21-r2": {
+"ref": "u5n6Cf6QLD",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u21-r2-a18",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u21-r2-a26",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u21-r2-a36",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u21-r2-a51",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u21-r3": {
+"ref": "u5n6Cf6QLD",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u21-r3-a18",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u21-r3-a26",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u21-r3-a36",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u21-r3-a51",
+"role": "eunuch",
+"identity": "u21",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u22-r0": {
+"ref": "tCi7thqmZJ",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u22-r0-a18",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u22-r0-a26",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u22-r0-a36",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u22-r0-a51",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u22-r2": {
+"ref": "tCi7thqmZJ",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u22-r2-a18",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u22-r2-a26",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u22-r2-a36",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u22-r2-a51",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u22-r3": {
+"ref": "tCi7thqmZJ",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u22-r3-a18",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u22-r3-a26",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u22-r3-a36",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u22-r3-a51",
+"role": "eunuch",
+"identity": "u22",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u23-r0": {
+"ref": "bxT2bkG5Y2",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u23-r0-a18",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u23-r0-a26",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u23-r0-a36",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u23-r0-a51",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u23-r2": {
+"ref": "bxT2bkG5Y2",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u23-r2-a18",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u23-r2-a26",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u23-r2-a36",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u23-r2-a51",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u23-r3": {
+"ref": "bxT2bkG5Y2",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u23-r3-a18",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u23-r3-a26",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u23-r3-a36",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u23-r3-a51",
+"role": "eunuch",
+"identity": "u23",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u24-r0": {
+"ref": "SytDSJeUb8",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u24-r0-a18",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u24-r0-a26",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u24-r0-a36",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u24-r0-a51",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u24-r2": {
+"ref": "SytDSJeUb8",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u24-r2-a18",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u24-r2-a26",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u24-r2-a36",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u24-r2-a51",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u24-r3": {
+"ref": "SytDSJeUb8",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u24-r3-a18",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u24-r3-a26",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u24-r3-a36",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u24-r3-a51",
+"role": "eunuch",
+"identity": "u24",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u25-r0": {
+"ref": "dtysdIZXSL",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u25-r0-a18",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u25-r0-a26",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u25-r0-a36",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u25-r0-a51",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u25-r2": {
+"ref": "dtysdIZXSL",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u25-r2-a18",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u25-r2-a26",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u25-r2-a36",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u25-r2-a51",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u25-r3": {
+"ref": "dtysdIZXSL",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u25-r3-a18",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u25-r3-a26",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u25-r3-a36",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u25-r3-a51",
+"role": "eunuch",
+"identity": "u25",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u26-r0": {
+"ref": "8aNU8CtIrU",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u26-r0-a18",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u26-r0-a26",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u26-r0-a36",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u26-r0-a51",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u26-r2": {
+"ref": "8aNU8CtIrU",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u26-r2-a18",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u26-r2-a26",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u26-r2-a36",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u26-r2-a51",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u26-r3": {
+"ref": "8aNU8CtIrU",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u26-r3-a18",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u26-r3-a26",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u26-r3-a36",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u26-r3-a51",
+"role": "eunuch",
+"identity": "u26",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u27-r0": {
+"ref": "VXU1VIjMMU",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u27-r0-a18",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u27-r0-a26",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u27-r0-a36",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u27-r0-a51",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u27-r2": {
+"ref": "VXU1VIjMMU",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u27-r2-a18",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u27-r2-a26",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u27-r2-a36",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u27-r2-a51",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u27-r3": {
+"ref": "VXU1VIjMMU",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u27-r3-a18",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u27-r3-a26",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u27-r3-a36",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u27-r3-a51",
+"role": "eunuch",
+"identity": "u27",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u28-r0": {
+"ref": "cpl5coL0eP",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u28-r0-a18",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u28-r0-a26",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u28-r0-a36",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u28-r0-a51",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u28-r2": {
+"ref": "cpl5coL0eP",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u28-r2-a18",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u28-r2-a26",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u28-r2-a36",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u28-r2-a51",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u28-r3": {
+"ref": "cpl5coL0eP",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u28-r3-a18",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u28-r3-a26",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u28-r3-a36",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u28-r3-a51",
+"role": "eunuch",
+"identity": "u28",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u29-r0": {
+"ref": "4RuI4YT9Aa",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u29-r0-a18",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u29-r0-a26",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u29-r0-a36",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u29-r0-a51",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u29-r2": {
+"ref": "4RuI4YT9Aa",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u29-r2-a18",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u29-r2-a26",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u29-r2-a36",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u29-r2-a51",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u29-r3": {
+"ref": "4RuI4YT9Aa",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u29-r3-a18",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u29-r3-a26",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u29-r3-a36",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u29-r3-a51",
+"role": "eunuch",
+"identity": "u29",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+},
+"ue-u30-r0": {
+"ref": "xSdWx4AjfW",
+"rank": "r0",
+"figs": [
+{
+"file": "fig-eunuch-u30-r0-a18",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r0",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u30-r0-a26",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r0",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u30-r0-a36",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r0",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u30-r0-a51",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r0",
+"ageBand": "a51"
+}
+]
+},
+"ue-u30-r2": {
+"ref": "xSdWx4AjfW",
+"rank": "r2",
+"figs": [
+{
+"file": "fig-eunuch-u30-r2-a18",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r2",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u30-r2-a26",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r2",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u30-r2-a36",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r2",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u30-r2-a51",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r2",
+"ageBand": "a51"
+}
+]
+},
+"ue-u30-r3": {
+"ref": "xSdWx4AjfW",
+"rank": "r3",
+"figs": [
+{
+"file": "fig-eunuch-u30-r3-a18",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r3",
+"ageBand": "a18"
+},
+{
+"file": "fig-eunuch-u30-r3-a26",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r3",
+"ageBand": "a26"
+},
+{
+"file": "fig-eunuch-u30-r3-a36",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r3",
+"ageBand": "a36"
+},
+{
+"file": "fig-eunuch-u30-r3-a51",
+"role": "eunuch",
+"identity": "u30",
+"tier": "r3",
+"ageBand": "a51"
+}
+]
+}
+}

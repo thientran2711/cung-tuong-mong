@@ -1,0 +1,1154 @@
+{
+"kd-p01": {
+"ref": "jUXW0idLD0",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: deep sapphire blue with silver-white. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a closed folding fan. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a closed folding fan. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a closed folding fan. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p01-a26",
+"role": "prince",
+"identity": "p01",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p01-a36",
+"role": "prince",
+"identity": "p01",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p01-a51",
+"role": "prince",
+"identity": "p01",
+"ageBand": "51"
+}
+]
+},
+"kd-f01": {
+"ref": "79veXYQJAL",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: soft peach pink with ivory. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a round silk fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a round silk fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a round silk fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f01-a26",
+"role": "princess",
+"identity": "f01",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f01-a36",
+"role": "princess",
+"identity": "f01",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f01-a51",
+"role": "princess",
+"identity": "f01",
+"ageBand": "51"
+}
+]
+},
+"kd-p02": {
+"ref": "ksDGY7916B",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: jade green with ivory. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a rolled scroll. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a rolled scroll. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a rolled scroll. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p02-a26",
+"role": "prince",
+"identity": "p02",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p02-a36",
+"role": "prince",
+"identity": "p02",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p02-a51",
+"role": "prince",
+"identity": "p02",
+"ageBand": "51"
+}
+]
+},
+"kd-f02": {
+"ref": "79veB2vJAL",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: lilac with silver-white. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a folding fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a folding fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a folding fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f02-a26",
+"role": "princess",
+"identity": "f02",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f02-a36",
+"role": "princess",
+"identity": "f02",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f02-a51",
+"role": "princess",
+"identity": "f02",
+"ageBand": "51"
+}
+]
+},
+"kd-p03": {
+"ref": "MBw1jaxDCm",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: crimson red with gold. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a jade pendant. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a jade pendant. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a jade pendant. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p03-a26",
+"role": "prince",
+"identity": "p03",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p03-a36",
+"role": "prince",
+"identity": "p03",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p03-a51",
+"role": "prince",
+"identity": "p03",
+"ageBand": "51"
+}
+]
+},
+"kd-f03": {
+"ref": "79veBGfJAL",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: rose red with gold. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a silk handkerchief. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a silk handkerchief. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a silk handkerchief. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f03-a26",
+"role": "princess",
+"identity": "f03",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f03-a36",
+"role": "princess",
+"identity": "f03",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f03-a51",
+"role": "princess",
+"identity": "f03",
+"ageBand": "51"
+}
+]
+},
+"kd-p04": {
+"ref": "CqG46sdEEy",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: teal with pale grey. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a sheathed sword. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a sheathed sword. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a sheathed sword. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p04-a26",
+"role": "prince",
+"identity": "p04",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p04-a36",
+"role": "prince",
+"identity": "p04",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p04-a51",
+"role": "prince",
+"identity": "p04",
+"ageBand": "51"
+}
+]
+},
+"kd-f04": {
+"ref": "yiCBIcgPW9",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: sky blue with white. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a string of prayer beads. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a string of prayer beads. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a string of prayer beads. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f04-a26",
+"role": "princess",
+"identity": "f04",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f04-a36",
+"role": "princess",
+"identity": "f04",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f04-a51",
+"role": "princess",
+"identity": "f04",
+"ageBand": "51"
+}
+]
+},
+"kd-p05": {
+"ref": "mE374nFhJQ",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: ivory white with sky blue. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a string of prayer beads. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a string of prayer beads. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a string of prayer beads. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p05-a26",
+"role": "prince",
+"identity": "p05",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p05-a36",
+"role": "prince",
+"identity": "p05",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p05-a51",
+"role": "prince",
+"identity": "p05",
+"ageBand": "51"
+}
+]
+},
+"kd-f05": {
+"ref": "jUXWMvwLD0",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: mint green with cream. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a plum blossom branch. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a plum blossom branch. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a plum blossom branch. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f05-a26",
+"role": "princess",
+"identity": "f05",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f05-a36",
+"role": "princess",
+"identity": "f05",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f05-a51",
+"role": "princess",
+"identity": "f05",
+"ageBand": "51"
+}
+]
+},
+"kd-p06": {
+"ref": "0eg5x4jTfW",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: navy blue with gold. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding an open book. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding an open book. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding an open book. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p06-a26",
+"role": "prince",
+"identity": "p06",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p06-a36",
+"role": "prince",
+"identity": "p06",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p06-a51",
+"role": "prince",
+"identity": "p06",
+"ageBand": "51"
+}
+]
+},
+"kd-f06": {
+"ref": "s7o0puul8e",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: coral with pale gold. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a small jade ruyi. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a small jade ruyi. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a small jade ruyi. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f06-a26",
+"role": "princess",
+"identity": "f06",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f06-a36",
+"role": "princess",
+"identity": "f06",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f06-a51",
+"role": "princess",
+"identity": "f06",
+"ageBand": "51"
+}
+]
+},
+"kd-p07": {
+"ref": "dtyLUGVXSL",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: emerald green with cream. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a closed folding fan. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a closed folding fan. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a closed folding fan. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p07-a26",
+"role": "prince",
+"identity": "p07",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p07-a36",
+"role": "prince",
+"identity": "p07",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p07-a51",
+"role": "prince",
+"identity": "p07",
+"ageBand": "51"
+}
+]
+},
+"kd-f07": {
+"ref": "cplbr6w0eP",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: lavender with pale blue. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a round silk fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a round silk fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a round silk fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f07-a26",
+"role": "princess",
+"identity": "f07",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f07-a36",
+"role": "princess",
+"identity": "f07",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f07-a51",
+"role": "princess",
+"identity": "f07",
+"ageBand": "51"
+}
+]
+},
+"kd-p08": {
+"ref": "MBw1sGdDCm",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: slate grey-blue with white. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a rolled scroll. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a rolled scroll. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a rolled scroll. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p08-a26",
+"role": "prince",
+"identity": "p08",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p08-a36",
+"role": "prince",
+"identity": "p08",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p08-a51",
+"role": "prince",
+"identity": "p08",
+"ageBand": "51"
+}
+]
+},
+"kd-f08": {
+"ref": "ksDGcux16B",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: celadon with white. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a folding fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a folding fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a folding fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f08-a26",
+"role": "princess",
+"identity": "f08",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f08-a36",
+"role": "princess",
+"identity": "f08",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f08-a51",
+"role": "princess",
+"identity": "f08",
+"ageBand": "51"
+}
+]
+},
+"kd-p09": {
+"ref": "YMLHrg5WeC",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: cinnabar red with dark navy. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a jade pendant. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a jade pendant. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a jade pendant. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p09-a26",
+"role": "prince",
+"identity": "p09",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p09-a36",
+"role": "prince",
+"identity": "p09",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p09-a51",
+"role": "prince",
+"identity": "p09",
+"ageBand": "51"
+}
+]
+},
+"kd-f09": {
+"ref": "6AHmuKviJO",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: apricot with cream. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a silk handkerchief. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a silk handkerchief. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a silk handkerchief. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f09-a26",
+"role": "princess",
+"identity": "f09",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f09-a36",
+"role": "princess",
+"identity": "f09",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f09-a51",
+"role": "princess",
+"identity": "f09",
+"ageBand": "51"
+}
+]
+},
+"kd-p10": {
+"ref": "gOIVBaGSXO",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: sky blue with white. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a sheathed sword. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a sheathed sword. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a sheathed sword. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p10-a26",
+"role": "prince",
+"identity": "p10",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p10-a36",
+"role": "prince",
+"identity": "p10",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p10-a51",
+"role": "prince",
+"identity": "p10",
+"ageBand": "51"
+}
+]
+},
+"kd-f10": {
+"ref": "s7o0dvwl8e",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: crimson with gold. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a string of prayer beads. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a string of prayer beads. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a string of prayer beads. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f10-a26",
+"role": "princess",
+"identity": "f10",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f10-a36",
+"role": "princess",
+"identity": "f10",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f10-a51",
+"role": "princess",
+"identity": "f10",
+"ageBand": "51"
+}
+]
+},
+"kd-p11": {
+"ref": "TdSKsy2VNR",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: deep teal with bronze. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a string of prayer beads. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a string of prayer beads. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a string of prayer beads. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p11-a26",
+"role": "prince",
+"identity": "p11",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p11-a36",
+"role": "prince",
+"identity": "p11",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p11-a51",
+"role": "prince",
+"identity": "p11",
+"ageBand": "51"
+}
+]
+},
+"kd-f11": {
+"ref": "SytMouIUb8",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: plum with pale pink. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a plum blossom branch. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a plum blossom branch. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a plum blossom branch. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f11-a26",
+"role": "princess",
+"identity": "f11",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f11-a36",
+"role": "princess",
+"identity": "f11",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f11-a51",
+"role": "princess",
+"identity": "f11",
+"ageBand": "51"
+}
+]
+},
+"kd-p12": {
+"ref": "Bh4lOAUoQR",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: moss green with ivory. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding an open book. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding an open book. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding an open book. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p12-a26",
+"role": "prince",
+"identity": "p12",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p12-a36",
+"role": "prince",
+"identity": "p12",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p12-a51",
+"role": "prince",
+"identity": "p12",
+"ageBand": "51"
+}
+]
+},
+"kd-f12": {
+"ref": "WDsqxPHcXe",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: moonlight blue with silver. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a small jade ruyi. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a small jade ruyi. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a small jade ruyi. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f12-a26",
+"role": "princess",
+"identity": "f12",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f12-a36",
+"role": "princess",
+"identity": "f12",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f12-a51",
+"role": "princess",
+"identity": "f12",
+"ageBand": "51"
+}
+]
+},
+"kd-p13": {
+"ref": "5jV20mfKxe",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: warm brown with cream. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a closed folding fan. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a closed folding fan. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a closed folding fan. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p13-a26",
+"role": "prince",
+"identity": "p13",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p13-a36",
+"role": "prince",
+"identity": "p13",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p13-a51",
+"role": "prince",
+"identity": "p13",
+"ageBand": "51"
+}
+]
+},
+"kd-f13": {
+"ref": "Do7xDSXpcl",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: lemon yellow with white. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a round silk fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a round silk fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a round silk fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f13-a26",
+"role": "princess",
+"identity": "f13",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f13-a36",
+"role": "princess",
+"identity": "f13",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f13-a51",
+"role": "princess",
+"identity": "f13",
+"ageBand": "51"
+}
+]
+},
+"kd-p14": {
+"ref": "TdSKlRcVNR",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: black with crimson accents. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a rolled scroll. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a rolled scroll. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a rolled scroll. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p14-a26",
+"role": "prince",
+"identity": "p14",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p14-a36",
+"role": "prince",
+"identity": "p14",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p14-a51",
+"role": "prince",
+"identity": "p14",
+"ageBand": "51"
+}
+]
+},
+"kd-f14": {
+"ref": "6AHmQUbiJO",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: jade green with pale pink. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a folding fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a folding fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a folding fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f14-a26",
+"role": "princess",
+"identity": "f14",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f14-a36",
+"role": "princess",
+"identity": "f14",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f14-a51",
+"role": "princess",
+"identity": "f14",
+"ageBand": "51"
+}
+]
+},
+"kd-p15": {
+"ref": "aF2yRXlfSh",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: pale celadon green with white. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a jade pendant. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a jade pendant. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a jade pendant. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p15-a26",
+"role": "prince",
+"identity": "p15",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p15-a36",
+"role": "prince",
+"identity": "p15",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p15-a51",
+"role": "prince",
+"identity": "p15",
+"ageBand": "51"
+}
+]
+},
+"kd-f15": {
+"ref": "eIOj7Y0dqL",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: blush pink with sky blue. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a silk handkerchief. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a silk handkerchief. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a silk handkerchief. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f15-a26",
+"role": "princess",
+"identity": "f15",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f15-a36",
+"role": "princess",
+"identity": "f15",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f15-a51",
+"role": "princess",
+"identity": "f15",
+"ageBand": "51"
+}
+]
+},
+"kd-p16": {
+"ref": "dtyLJcDXSL",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: dark blue with apricot gold. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a sheathed sword. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a sheathed sword. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a sheathed sword. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p16-a26",
+"role": "prince",
+"identity": "p16",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p16-a36",
+"role": "prince",
+"identity": "p16",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p16-a51",
+"role": "prince",
+"identity": "p16",
+"ageBand": "51"
+}
+]
+},
+"kd-f16": {
+"ref": "Bh4lyV9oQR",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: ivory white with rose. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a string of prayer beads. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a string of prayer beads. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a string of prayer beads. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f16-a26",
+"role": "princess",
+"identity": "f16",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f16-a36",
+"role": "princess",
+"identity": "f16",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f16-a51",
+"role": "princess",
+"identity": "f16",
+"ageBand": "51"
+}
+]
+},
+"kd-p17": {
+"ref": "s7o0Bhgl8e",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: ochre gold with brown. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a string of prayer beads. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a string of prayer beads. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a string of prayer beads. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p17-a26",
+"role": "prince",
+"identity": "p17",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p17-a36",
+"role": "prince",
+"identity": "p17",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p17-a51",
+"role": "prince",
+"identity": "p17",
+"ageBand": "51"
+}
+]
+},
+"kd-f17": {
+"ref": "Bh4lPZsoQR",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: turquoise with ivory. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a plum blossom branch. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a plum blossom branch. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a plum blossom branch. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f17-a26",
+"role": "princess",
+"identity": "f17",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f17-a36",
+"role": "princess",
+"identity": "f17",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f17-a51",
+"role": "princess",
+"identity": "f17",
+"ageBand": "51"
+}
+]
+},
+"kd-p18": {
+"ref": "8aNS9zmIrU",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: steel blue with pearl grey. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding an open book. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding an open book. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding an open book. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p18-a26",
+"role": "prince",
+"identity": "p18",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p18-a36",
+"role": "prince",
+"identity": "p18",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p18-a51",
+"role": "prince",
+"identity": "p18",
+"ageBand": "51"
+}
+]
+},
+"kd-f18": {
+"ref": "LwBcXfLswO",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: peony pink with gold. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a small jade ruyi. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a small jade ruyi. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a small jade ruyi. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f18-a26",
+"role": "princess",
+"identity": "f18",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f18-a36",
+"role": "princess",
+"identity": "f18",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f18-a51",
+"role": "princess",
+"identity": "f18",
+"ageBand": "51"
+}
+]
+},
+"kd-p19": {
+"ref": "P3EoC1w42C",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: forest green with gold. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a closed folding fan. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a closed folding fan. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a closed folding fan. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p19-a26",
+"role": "prince",
+"identity": "p19",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p19-a36",
+"role": "prince",
+"identity": "p19",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p19-a51",
+"role": "prince",
+"identity": "p19",
+"ageBand": "51"
+}
+]
+},
+"kd-f19": {
+"ref": "vQZORM5a47",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: pale violet with white. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a round silk fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a round silk fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a round silk fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f19-a26",
+"role": "princess",
+"identity": "f19",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f19-a36",
+"role": "princess",
+"identity": "f19",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f19-a51",
+"role": "princess",
+"identity": "f19",
+"ageBand": "51"
+}
+]
+},
+"kd-p20": {
+"ref": "jUXWdExLD0",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: scarlet with black. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a rolled scroll. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a rolled scroll. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a rolled scroll. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p20-a26",
+"role": "prince",
+"identity": "p20",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p20-a36",
+"role": "prince",
+"identity": "p20",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p20-a51",
+"role": "prince",
+"identity": "p20",
+"ageBand": "51"
+}
+]
+},
+"kd-f20": {
+"ref": "dtyLOzcXSL",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: cherry red with ivory. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a folding fan. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a folding fan. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a folding fan. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f20-a26",
+"role": "princess",
+"identity": "f20",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f20-a36",
+"role": "princess",
+"identity": "f20",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f20-a51",
+"role": "princess",
+"identity": "f20",
+"ageBand": "51"
+}
+]
+},
+"kd-p21": {
+"ref": "SytMtsCUb8",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: azure blue with ivory. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a jade pendant. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a jade pendant. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a jade pendant. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p21-a26",
+"role": "prince",
+"identity": "p21",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p21-a36",
+"role": "prince",
+"identity": "p21",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p21-a51",
+"role": "prince",
+"identity": "p21",
+"ageBand": "51"
+}
+]
+},
+"kd-f21": {
+"ref": "0eg5gWJTfW",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: powder blue with peach. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a silk handkerchief. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a silk handkerchief. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a silk handkerchief. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f21-a26",
+"role": "princess",
+"identity": "f21",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f21-a36",
+"role": "princess",
+"identity": "f21",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f21-a51",
+"role": "princess",
+"identity": "f21",
+"ageBand": "51"
+}
+]
+},
+"kd-p22": {
+"ref": "rgenerGxtc",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: pine green with silver-grey. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a sheathed sword. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a sheathed sword. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a sheathed sword. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p22-a26",
+"role": "prince",
+"identity": "p22",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p22-a36",
+"role": "prince",
+"identity": "p22",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p22-a51",
+"role": "prince",
+"identity": "p22",
+"ageBand": "51"
+}
+]
+},
+"kd-f22": {
+"ref": "YMLHsc9WeC",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: seafoam green with lilac. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a string of prayer beads. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a string of prayer beads. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a string of prayer beads. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f22-a26",
+"role": "princess",
+"identity": "f22",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f22-a36",
+"role": "princess",
+"identity": "f22",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f22-a51",
+"role": "princess",
+"identity": "f22",
+"ageBand": "51"
+}
+]
+},
+"kd-p23": {
+"ref": "fHAPGu0CDY",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: russet brown with gold. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding a string of prayer beads. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding a string of prayer beads. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding a string of prayer beads. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p23-a26",
+"role": "prince",
+"identity": "p23",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p23-a36",
+"role": "prince",
+"identity": "p23",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p23-a51",
+"role": "prince",
+"identity": "p23",
+"ageBand": "51"
+}
+]
+},
+"kd-f23": {
+"ref": "nVjFL02YQD",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: honey gold with coral. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a plum blossom branch. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a plum blossom branch. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a plum blossom branch. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f23-a26",
+"role": "princess",
+"identity": "f23",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f23-a36",
+"role": "princess",
+"identity": "f23",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f23-a51",
+"role": "princess",
+"identity": "f23",
+"ageBand": "51"
+}
+]
+},
+"kd-p24": {
+"ref": "79vea9TJAL",
+"prompt": "The SAME man as the young man of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. He is an imperial prince (a royal prince, vương gia) in his own palace. Signature colour family: midnight blue with jade. Left: about 30, a handsome man in his prime, rich layered brocade prince court robe with embroidered four-claw dragon roundel and cloud borders, jade belt, small gold crown (guan) with hairpin, holding an open book. Middle: about 43, the same man mature and dignified, faint lines, a short neat moustache, a grander prince robe with gold dragon roundels, gold and jade crown, jade belt, holding an open book. Right: about 57, the same man elderly and stately, fine lines, greying hair, a neat greying moustache and short beard, a heavy dark-toned version of his colour family prince robe with gold dragon embroidery, gold crown, holding an open book. Masculine colours, NOT pink, NOT purple.",
+"figs": [
+{
+"file": "fig-kid-p24-a26",
+"role": "prince",
+"identity": "p24",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-p24-a36",
+"role": "prince",
+"identity": "p24",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-p24-a51",
+"role": "prince",
+"identity": "p24",
+"ageBand": "51"
+}
+]
+},
+"kd-f24": {
+"ref": "TdSkTgEVNR",
+"prompt": "The SAME woman as the young woman of about 20 on the far right of the reference image: exactly the same face and features, now grown older. Semi-realistic painterly guofeng style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference; plain light parchment background; fair skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow), closed lips; no mole, no forehead mark, no huadian, no bead between brows, clean bare forehead, no marks on the face. A character lineup of THREE full-body standing figures, head to feet, side by side with wide clear empty space between them, all feet on one baseline, same height, each complete from top of head to feet. Calm still upright standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels, no frames. She is an imperial princess (công chúa), now a married noble lady. Signature colour family: pearl white with lavender. Left: about 30, a beautiful woman in her prime, layered rich silk princess court robe with gold phoenix embroidery and embroidered sash, high crossed collar, elegant married-lady chignon with gold phoenix hairpins and a dangling bu yao ornament, holding a small jade ruyi. Middle: about 43, the same woman mature and graceful, faint lines, a grander robe in a deeper tone of her colour family with gold embroidery, fuller chignon with gold and jade hairpins, holding a small jade ruyi. Right: about 57, the same woman elderly and dignified, fine lines, greying hair in a neat chignon with a few jade and gold pins, a heavy dark-toned brocade robe of her colour family, holding a small jade ruyi. Full-length modest robes, high collars.",
+"figs": [
+{
+"file": "fig-kid-f24-a26",
+"role": "princess",
+"identity": "f24",
+"ageBand": "26"
+},
+{
+"file": "fig-kid-f24-a36",
+"role": "princess",
+"identity": "f24",
+"ageBand": "36"
+},
+{
+"file": "fig-kid-f24-a51",
+"role": "princess",
+"identity": "f24",
+"ageBand": "51"
+}
+]
+}
+}

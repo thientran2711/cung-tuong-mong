@@ -12,3 +12,18 @@
  return r}})();
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const R=r0.apply(this,arguments);
  try{if(who&&S&&who!==S.maid&&who.role==="maid"&&R[0]==="mama")return["maid","mama"]}catch(e){}return R}})();
+/* 3. Staff eunuchs wear their rank (group b): SRK.eunuch r0 Tiểu thái giám · r1 Thái giám · r2 Thủ lĩnh thái giám · r3 Tổng quản.
+      The old eunuch art (tier null) is the r1 dress; rank art has tier "r0" / "r2" / "r3" (img/FIGURES-servants.json). f88Pick's base mode
+      takes the nearest rank (the same road as maid ranks m0..m4), so a rank with no art yet falls back to the nearest one drawn. */
+(function(){if(typeof f88Best!=="function"||typeof f88Pick!=="function")return;const b0=f88Best;
+ f88Best=function(L,who,kind){try{if(who&&S&&who!==S&&(who.role==="eunuch"||who.role==="eun")){
+  const Lp=kind==="por"?L.filter(f=>f.por):L;const rk=who.rk==null?1:Math.max(0,Math.min(3,who.rk|0));
+  return f88Pick(Lp.length?Lp:L,null,figAgeOf(who),true,rk)}}catch(e){console.error("jartc eunuch rank",e)}
+  return b0.apply(this,arguments)}})();
+/* 4. Grown children (group c): princes / princesses p01-p24 / f01-f24 have adult bands 26 / 36 / 51 (img/FIGURES-kids.json, the same
+      identity's face at about 30 / 43 / 57). j73 stopped at band 20 ("17+ shows the 20 art for life"); now 17-25 -> 20, 26-35 -> 26,
+      36-50 -> 36, 51+ -> 51. kidFig takes the nearest DRAWN band, so an identity without adult art keeps its band-20 face. Adults stand
+      full height on place screens. */
+(function(){if(typeof kidBandOf!=="function"||typeof KIDBANDS==="undefined")return;[26,36,51].forEach(b=>{if(!KIDBANDS.includes(b))KIDBANDS.push(b)});
+ try{KIDH[26]=KIDH[36]=KIDH[51]=1}catch(e){}
+ const k0=kidBandOf;kidBandOf=function(a){a=+a||0;return a<=16?k0(a):a<=25?20:a<=35?26:a<=50?36:51}})();
