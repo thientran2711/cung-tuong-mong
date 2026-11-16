@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fdc9297b+","t":"2026-11-16T22:49Z","c":"coop-steal test: not held back by the cycle tuần; debug info on fail","b":"4f090c39abe1","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
+window.CTM_BI={"s":"6391274b+","t":"2026-11-16T23:23Z","c":"site rebuilt","b":"051e80a552cc","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -45111,7 +45111,7 @@ function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){S.nfX={d,st:"wait"};if(!flippedToday())realFlip()}
+  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};if(S.nfN!==d&&!flippedToday())realFlip()}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
  else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
@@ -45278,7 +45278,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4f090c39abe1";window.CTM_BUILD=BUILD;
+const BUILD="051e80a552cc";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const path=require('path');
   S.tonight="me";Q.push({t:"x",pid:"ksp"});const v1=R0[0];const d0=v1.duc,s0=v1.suc;let r=stealPass(S,{live:true});Math.random=mathR;
   ok("NPC steals HER night (live): holder moves",r.tries===1&&tonightOf()!==S&&tonightOf()===r.holder,{tries:r.tries,h:r.holder&&r.holder.name});
   ok("…her Kính sự phòng prep card is withdrawn, the news card is shown",!Q.some(q=>q.pid==="ksp")&&Q.some(q=>q.t==="Kính sự phòng"));
-  const d=r.holder;ok("…the NPC paid the player's cost",(d.duc===60-BAL.steal.cost.feign.duc&&d.suc===70)||(d.suc===70-BAL.steal.cost.road.suc&&d.duc===60),{duc:d.duc,suc:d.suc});
+  const d=r.holder;ok("…a flip-choice try costs nothing (OD 22:45Z: no Sức, no khắc — only gain and loss)",d.duc===60&&d.suc===70,{duc:d.duc,suc:d.suc});
   ok("…one try each per night (j75): she cannot try again",!stealEligible(d,S));
   /* 3 · NPC → NPC */
   reset();const A=R0[0],Bv=R0[1];S.tonight=A;r=stealPass(A,{live:true});
@@ -56,8 +56,8 @@ const {chromium}=require('playwright');const path=require('path');
   reset();A.coop=true;ok("the co-op friend (a human) is never an NPC stealer",!stealEligible(A,S));delete A.coop;
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 11 · the real flip runs the pass: with forced odds, a week's flip ends stolen on some week */
-  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.nfC=null;S.nfA=null;S.nfN=null;S.buoi=B4L;used=4;flip();Q.length=0;const w0=wk();try{endTurn()}catch(e){}Q.length=0;const d=S.nightWhy;if(d&&d.wk===w0&&d.cause==="stolen")st++}/* night-final (OD 22:25Z): the NPC tries run khắc by khắc after her; khắc she never had are run at the day-end commit */
-  ok("tối flip → day-end commit → steal pass → nightWhy.cause 'stolen'",st>0,{st});
+  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.nfC=null;S.nfX=null;S.nfN=null;S.buoi=B4L;used=4;flip();Q.length=0;const w0=wk();const bo=window.__bot;window.__bot=1;try{endTurn();const k=Q.findIndex(m=>m.pid==="nfch");if(k>=0){Q.unshift(Q.splice(k,1)[0]);chooseM(Q[0].opts.findIndex(o=>o.n==="Thôi"))}}catch(e){}window.__bot=bo;Q.length=0;const d=S.nightWhy;if(d&&d.wk===w0&&d.cause==="stolen")st++}/* night-final (OD 22:45Z): the flip at the end of tối, then the choice (she: Thôi); the NPCs choose at the same moment, one resolve */
+  ok("end-of-tối flip → choice → NPC attack → nightWhy.cause 'stolen'",st>0,{st});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   ok("SOC 'steal' folded into the one choice",SOC.steal.ok(R0[0],S)===false);
   /* 12 · symmetry (night-steal-2): an NPC weighs HER exactly like an NPC holder in her position (same rank, thiện cảm, oán; custom night as Empress) */

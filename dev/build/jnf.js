@@ -237,7 +237,7 @@ function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){S.nfX={d,st:"wait"};if(!flippedToday())realFlip()}
+  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};if(S.nfN!==d&&!flippedToday())realFlip()}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
  else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
