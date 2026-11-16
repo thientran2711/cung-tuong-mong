@@ -5,7 +5,7 @@ Context (session 2): system+brief ~40k tokens at start; ~55k after the mandatory
 Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
 
 ## HANDOVER (Foreman B session 2 → session 3, 11/16/2026 06:25Z)
-- Session 2 = session_01N1tNP3StF4VxqkqTsQSt3a passed its context budget → rolled over; it stops spawning now.
+- Session 2 = session_01N1tNP3StF4VxqkqTsQSt3a passed its context budget → rolled over; it stops spawning now. SESSION 3 = session_01N1tNP6N19EQTqoHAMZcxqK (opened 06:21Z).
 - All B work runs as SEPARATE sessions (nothing dies with session 2). Running: C35b reviewer session_01N1tNP2GaMKbqSeCQe8Lxot (review/pcard-dislikes-r1 → reports/review-pcard-dislikes-r1.md); D3 item-big session_01N1tNP3vh5qQKaG75iP6uRK (reports/item-big.md); D9 header-own session_01N1tNP6D57poL6nUn778JPv (reports/header-own.md); D12 mood-bar (opus) session_01N1tNP2hssUsxJwKBBsGRUZ (reports/mood-bar.md). If no push/report after ~2–3 h, check with get_session/list_events, then re-open from the pushed branch + PROGRESS.
 - New PASS this session: C41b review/tuduc-pic-r1 2954ff9f (under ## PASS). PASS waiting for fast-forward: D31, D33, D34, C24, C41(+C41b).
 - Held, waiting for main's answer Q24: D11, D13, D14, D19, D44 (cross-foreman/art). D25 runs at C. D41 moved to C (handoff file written). D36 blocked on kit-keeper-1. C32b curl speed = KIT REQUEST to keeper.
