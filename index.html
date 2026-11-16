@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b53ba8b9+","t":"2026-11-16T21:04Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ.","b":"09b55d5bf8a2","h":[{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"}]};
+window.CTM_BI={"s":"c5d88237+","t":"2026-11-16T21:37Z","c":"Name core: nmOwner uses worldOn() (review/coop-one-world: solo/host owns the registry) when present","b":"59113d0c3921","h":[{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -11488,6 +11488,13 @@ function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e==
 function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
 function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.emp);if((+S.known[k]||0)<2)S.known[k]=2}if(!S.thDead){S.thO=S.thO||{};const k=kOf61(S.thO);if((+S.known[k]||0)<2)S.known[k]=2}}catch(e){}}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
+/* co-op friend (owner OD:L165: "Người lạ" until met, reborn = unknown again; OD:L1061 header chip): while she has not met the friend, ONE label everywhere —
+   the owner's wording (OD:L1060 "hảo hữu của ta", = the header chip + panel title in jcooptimer): "Hảo hữu của ta" (no rank, no "???"); met -> her real name (k61Named) */
+const K61FR="Hảo hữu của ta";
+function k61Coop(e){try{return !!(e&&e.coop&&!k61Named(e))}catch(x){return false}}
+/* the friend can sit in rivals OR in a consort's staff (guest maid): look in the whole world, not only rivals */
+function k61CoopEnt(){try{return k61All().find(e=>e&&e.coop)||null}catch(x){return null}}
+window.k61Coop=k61Coop;window.k61CoopEnt=k61CoopEnt;window.K61FR=K61FR;
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
 /* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -
@@ -11576,14 +11583,14 @@ function k61StChip(st){const w=K61STW[st]||K61STN[st];return chip(typeof kitGlos
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));
   const how=st===0?"Chào hỏi khi gặp mặt, hỏi người hầu, hoặc sai tai mắt dò la thì mới biết.":"Đã thấy mặt, chưa biết tên: hỏi danh tính khi gặp, hỏi người hầu hoặc dò la.";
-  return c0.call(this,Object.assign({},o,{name:"???",rank:k61Cap(k61Desc(e)),ghen:null,lines:[`<span class="past">${K61WHY}. ${how}</span>`],chips,groups:G,note:o.note&&pop?o.note:"",empty:o.empty}))}
+  return c0.call(this,Object.assign({},o,{name:k61Coop(e)?K61FR:"???",rank:k61Cap(k61Desc(e)),ghen:null,lines:[`<span class="past">${K61WHY}. ${how}</span>`],chips,groups:G,note:o.note&&pop?o.note:"",empty:o.empty}))}
  if(e&&st<=2&&e!==S)return k61Pass(o.f,()=>c0.call(this,Object.assign({},o,{ghen:null,lines:[`<span class="past">Mới biết tên: tính nết, sủng ái, quan hệ chưa rõ. Trò chuyện thêm hoặc dò la để quen biết.</span>`],chips:[k61StChip(2)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)))})));
  if(e&&e!==S&&S&&S.known&&e!==S.maid&&!(S.staff||[]).includes(e)&&!(S.kids||[]).includes(e))return c0.call(this,Object.assign({},o,{chips:[k61StChip(3)].concat(o.chips||[])}))}catch(x){console.error(x)}return c0.apply(this,arguments)}})();
 /* face strips: the label is the descriptor */
-(function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:isKnown61(e)?"???":"Người lạ"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
+(function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:k61Coop(e)?K61FR:isKnown61(e)?"???":"Người lạ"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
 /* place screen tags */
 function k61VisEnt(p){if(!p||p.kind==="chest")return null;try{return k61PortEnt(pFaceOf(p))}catch(e){return null}}
-(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent=isKnown61(e)?"???":"Người lạ"}else if(e&&k61NoFace(e)){const t=b.querySelector(".tag");if(t&&t.textContent==="Người lạ"&&p.name)t.textContent=p.name}})}catch(e){}return r}})();
+(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent=k61Coop(e)?K61FR:isKnown61(e)?"???":"Người lạ"}else if(e&&k61NoFace(e)){const t=b.querySelector(".tag");if(t&&t.textContent==="Người lạ"&&p.name)t.textContent=p.name}})}catch(e){}return r}})();
 /* talking face to face: a stranger first; greeting (1 khắc, sure) reveals both ways and leaves the talk open */
 let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=true;try{return d0.apply(this,arguments)}finally{K61RAW=false}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(K61RAW)return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
@@ -11678,7 +11685,7 @@ function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
  if(k==="off")return(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan";if(k==="kid")return e.sex==="m"?"Hoàng tử":"Công chúa";
  if(k==="man"){const r=e.role;return r&&!/^(Công tử|Nam nhân)$/i.test(r)?r:"công tử"}return"người"}
-function k61Mask(e,before,plain){const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
+function k61Mask(e,before,plain){if(k61Coop(e))return K61FR;const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
 /* public announcements (thẻ bài lật, sớ hặc tội at court, thánh chỉ, tấn phong / giáng / phế, births): everyone named in them
    becomes known by name and title (stage 2) the moment it is announced */
 const K61ANN=/thẻ bài của|sớ hặc tội|thánh chỉ|sắc phong|tấn phong|được phong|phong (?:Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) |lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
@@ -11714,7 +11721,7 @@ function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const 
 
 /* kit names for strangers: j79's kitName/kitPersonLine draw "<title> ???" (rank colour kept: the dress shows the rank) */
 setTimeout(()=>{try{if(typeof kitName!=="function")return;const n0=kitName;kitName=function(p,o){try{if(p&&p!==S&&S&&S.known){const e=k61PortEnt(p)||p;
-  if(e&&k61All().includes(e)&&!k61Named(e)){const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti" style="--rt:${kitRtOf(t)}">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
+  if(e&&k61All().includes(e)&&!k61Named(e)){if(k61Coop(e))return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${K61FR}</b>`;const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti" style="--rt:${kitRtOf(t)}">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
 /* ---- kit review (FAIL 11/14): a NAME she knows is never hidden. Stage 2 "Biết tên" and the public figures (Hoàng thượng, Thái hậu,
    Hoàng hậu) whose face she has not seen yet: grey silhouette in the grey stone frame (j60), but the name stays (card name, strip,
    stage tag, kitName, podium) and the frame label is the title (tước) instead of "Người lạ". Only stage 0 reads "Người lạ" (j60) or
@@ -13048,6 +13055,9 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
+ /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
+    width left from an earlier layout keeps the 900 px file and the browser upscales her face */
+ try{if(typeof kitFigHD==="function")kitFigHD(im)}catch(e){}
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
@@ -32379,7 +32389,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
 .kctmf .kctmf-sh{display:none}
-/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:6.5em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}:where(.kv1) .kctmf .kctmf-l{display:none}:where(.kv1) .kctmf .kctmf-sh{display:inline}
+/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:9em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
@@ -32540,11 +32550,14 @@ function css(){if(document.getElementById("kchat-css"))return;const st=document.
 const BU=b=>{try{const n=(typeof BUOI!=="undefined"&&BUOI[b])||"";return n}catch(e){return""}};
 /* game-style time: "hạ tuần, tháng 3 · Buổi chiều" */
 function kitChatWhen(g){g=g||{};try{const t=typeof TUAN!=="undefined"&&TUAN[g.t]||"";return `${t?t+", ":""}tháng ${g.m||1}${BU(g.b)?" · "+BU(g.b):""}`}catch(e){return""}}
-function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(m.n||(mine?"Ta":"Hảo hữu"))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
+/* the friend's signature: her real name once she has met the friend, else the ONE label of the header chip ("Hảo hữu", j61 k61Coop; OD:L165) */
+function frUnmet(){try{const W=window.COOPW;if(!W||!W.on||typeof k61Coop!=="function")return false;const f=k61CoopEnt();return !f||k61Coop(f)}catch(e){return false}}
+function frSign(n){return frUnmet()?K61FR:(n||"Hảo hữu")}
+function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(mine?(m.n||"Ta"):frSign(m.n))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
 function kitChatList(msgs,seat){return (msgs&&msgs.length)?msgs.map(m=>kitChatBubble(m,m.s===seat)).join(""):`<p class="kpnote kchat-empty">Chưa có thư nào. Viết đôi dòng gửi hảo hữu.</p>`}
 function kitChatPanel(o){css();o=o||{};const nm=o.name?esc(String(o.name).slice(0,24)):"hảo hữu";
  const inp=typeof kitInput==="function"?kitInput({id:"kchat-in",label:"Thư",placeholder:"Viết thư gửi hảo hữu…"}):`<input class="kinput" id="kchat-in" placeholder="Viết thư gửi hảo hữu…">`;
- return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice","Thư từ","Truyền tin cùng "+nm):""}<div class="kchat-list" id="kchat-list" data-k61skip="1">${kitChatList(o.msgs,o.seat)}</div><div class="kchat-row">${inp}<button type="button" class="kbtn" id="kchat-go">Gửi</button></div></div>`}
+ return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice","Thư từ","Truyền tin cùng "+nm):""}<div class="kchat-list" id="kchat-list" data-k61skip="1" data-krn-skip="1">${kitChatList(o.msgs,o.seat)}</div><div class="kchat-row">${inp}<button type="button" class="kbtn" id="kchat-go">Gửi</button></div></div>`}
 window.kitChatPanel=kitChatPanel;window.kitChatList=kitChatList;window.kitChatBubble=kitChatBubble;window.kitChatWhen=kitChatWhen;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§80",title:"kitChatPanel · Thư từ (nhắn tin cho hảo hữu; biểu tượng nằm ở cột nút §77)",
  html:()=>{const g={y:1,m:3,t:2,b:1};const ms=[{i:1,s:"b",n:"Lan Nhi",x:"Chào muội, hôm nay muội ra vườn ngự hoa chăng?",g},{i:2,s:"a",n:"Mai Hương",x:"Có chứ. Hẹn gặp ở đình nghỉ mát nhé!",g},{i:3,s:"b",n:"Lan Nhi",x:"<b>Được</b> thôi.",g:{y:1,m:3,t:2,b:2}}];
@@ -32554,7 +32567,7 @@ const ST={msgs:[],seen:0,open:false,sounds:0,shakes:0,max:0};
 function seat(){return COOP.state.you||COOP.seat||""}
 function unread(){const s=seat();return ST.msgs.filter(m=>m.s!==s&&m.i>ST.seen).length}
 function markSeen(){const mx=ST.msgs.length?ST.msgs[ST.msgs.length-1].i:0;if(mx>ST.seen){ST.seen=mx;LS.set(SK(),String(mx))}}
-function frName(){const s=seat();for(let i=ST.msgs.length-1;i>=0;i--)if(ST.msgs[i].s!==s&&ST.msgs[i].n)return ST.msgs[i].n;
+function frName(){if(frUnmet())return K61FR;const s=seat();for(let i=ST.msgs.length-1;i>=0;i--)if(ST.msgs[i].s!==s&&ST.msgs[i].n)return ST.msgs[i].n;
  try{const o=COOP.other(),so=(COOP.state.seats||{})[o];if(so&&so.name)return so.name}catch(e){}return""}
 /* ---------- icon: ONE place = the kitStageRail column (KIT §77, owner 16/11); no own button / frame on the stage ---------- */
 let railOn=false;
@@ -32569,7 +32582,7 @@ let P=null;
 function listEl(){return P&&P.querySelector("#kchat-list")}
 function fillList(){const l=listEl();if(!l)return;const near=l.scrollHeight-l.scrollTop-l.clientHeight<80;l.innerHTML=kitChatList(ST.msgs,seat());if(near||!l.dataset.sc){l.scrollTop=l.scrollHeight;l.dataset.sc="1"}}
 function openPanel(){if(!live())return false;css();if(P)return true;ST.open=true;markSeen();
- P=document.createElement("div");P.id="kchatp";P.className="modal kpscene";P.setAttribute("data-k61skip","1");P.setAttribute("role","dialog");P.setAttribute("aria-label","Thư từ");document.body.appendChild(P);
+ P=document.createElement("div");P.id="kchatp";P.className="modal kpscene";P.setAttribute("data-k61skip","1");P.setAttribute("data-krn-skip","1");P.setAttribute("role","dialog");P.setAttribute("aria-label","Thư từ");document.body.appendChild(P);
  P.innerHTML=kitChatPanel({msgs:ST.msgs,seat:seat(),name:frName()});
  const seal=P.querySelector(".kpseal");if(seal)seal.remove();
  const dlg=P.querySelector(".dlg");try{if(typeof kitXAdd==="function")kitXAdd(dlg,closePanel)}catch(e){}
@@ -40475,7 +40488,11 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;
  addEventListener("resize",()=>{clearTimeout(window.__kfhdT);window.__kfhdT=setTimeout(all,150)});
  document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&RE.test(t.src||"")&&!t.dataset.kfhdw){t.dataset.kfhdw=1;fit(t)}},true);
 })();
-/* ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
+/* review/fig-cutout-code (owner 16/11 "vệt đen trên cổ", "tách nền … hư hết"): #kfa now HARDENS the cut-out edge (alpha 3a-1.2:
+   a<0.40 -> 0, a>0.73 -> 1). Many cut-outs carry a wide feathered edge and translucent smoke/veil residue (scan dev/handover/reports/
+   fig-cutout-root.md); every figure's drop-shadow showed THROUGH those translucent pixels as a grey band along the robe and a dark streak
+   at the neck. The old 1.07/-0.065 only cut alpha<0.06. Sheer sleeves painted opaque are untouched; whole group = every url(#kfa) user.
+   ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
    The cut-out figures keep a faint alpha haze (alpha 1–12) over much of their box (background removal + lossy WebP alpha). Every
    drop-shadow (her rank halo, the selection glow, the ground shadow) also shadows that haze, so the glow showed as a yellow / grey
    RECTANGLE. url(#kfa) comes FIRST in every people-picture filter (p1 #mefig / .tok.fig .figimg, j59 HG/SG, jk4 .kesimg, j79 .kidfig2,
@@ -40483,7 +40500,7 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;
    Static (no animation: KIT motion rule STILL PEOPLE). */
 (function(){try{if(document.getElementById("kfa"))return;const d=document.createElementNS("http://www.w3.org/2000/svg","svg");d.setAttribute("width","0");d.setAttribute("height","0");
  d.setAttribute("aria-hidden","true");d.style.cssText="position:absolute;width:0;height:0;overflow:hidden";
- d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.07" intercept="-0.065"/></feComponentTransfer></filter></defs>';
+ d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="3" intercept="-1.2"/></feComponentTransfer></filter></defs>';
  (document.body||document.documentElement).appendChild(d)}catch(e){}})();
 /* kit page sample (§71): one figure drawn large (HD twin when drawn above 900 px) with the static rank halo and the static selection glow */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitFigHD · #kfa (người sắc nét, viền sáng theo dáng)",
@@ -44897,7 +44914,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="09b55d5bf8a2";window.CTM_BUILD=BUILD;
+const BUILD="59113d0c3921";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
