@@ -3,7 +3,7 @@
    a new build NEVER reloads the page in the middle of play.
    - registers sw.js (updateViaCache none) and asks for a new sw.js on open, on every return to the foreground and every 20 min.
      A new worker takes over ('controllerchange') → the build is "pending".
-   - pending while playing: only the kit chip "Có bản mới" on the top bar (#kupdchip, beside her rank). Tap → kit card
+   - pending while playing: only the kit status icon "Có bản mới" (kitStatusIcon "upd", KIT §77.1: square rail icon with a red dot, no chip on the top bar). Tap → kit card
      "Có bản mới · Mở bản mới ngay?" with Để sau / Mở bản mới.
    - the new build opens by itself only at a natural break:
        · Sang buổi / Sang ngày mới: once the new buổi has begun (and its dialogs are read; not after she has spent a khắc of it),
@@ -118,9 +118,6 @@ function hookCoop(){const c=coop();if(!c||!c.on||K.hooked)return;K.hooked=true;
 
 /* ---------- kit pieces: chip on the top bar, the card, the one-line notice ---------- */
 function css(){if($i("kit-upd"))return;const st=document.createElement("style");st.id="kit-upd";st.textContent=`
-.kupdchip{position:fixed;z-index:25;display:inline-flex;align-items:center;gap:5px;margin:0;font:600 .72rem/1.25 var(--body,inherit);padding:2px 9px 2px 7px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:#fffaf0f0;color:var(--ink,#3a2418);box-shadow:0 2px 8px #0002;cursor:pointer;white-space:nowrap}
-.kupdchip::before{content:"";width:7px;height:7px;border-radius:50%;background:#b0402c;box-shadow:0 0 0 2px #b0402c33}
-.kupdchip[hidden]{display:none}
 .kupd{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);transform:translateX(-50%);z-index:9700;width:min(420px,calc(100vw - 24px));animation:kupdIn .3s ease}
 .kupd .dlg.kpanel{width:100%;max-width:none;margin:0;box-shadow:0 6px 24px #0006}
 .kupd .dlg.kpanel .kpb{padding:8px 14px 2px;min-height:0;flex:none}.kupd .dlg.kpanel .kpnote{margin:0}
@@ -129,27 +126,10 @@ function css(){if($i("kit-upd"))return;const st=document.createElement("style");
 @keyframes kupdIn{from{opacity:0;transform:translate(-50%,12px)}}
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
-/* beside her rank / age on the top bar; under the date when that row is full; never over another part of the bar (nor the Trân nữ seal):
-   no free spot in the bar (one-row iPad bar with a long name) -> just under the bar, centred */
-function place(){const el=$i("kupdchip");if(!el)return;
- const show=K.pending&&!K.leaving&&playing()&&!busy();el.hidden=!show;K.chip=show;if(!show)return;
- const hud=document.querySelector("header.hud"),r=$i("me-r"),d=$i("me-d"),me=$i("me");if(!hud||!r||!me){el.style.cssText="top:8px;right:8px";return}
- const H0=hud.getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight,sl=hud.querySelector(".kseal-hud");/* the Trân nữ seal (jseal) owns the bar's right end */
- const H={left:H0.left,top:H0.top,bottom:H0.bottom,right:sl?Math.min(H0.right,sl.getBoundingClientRect().left-4):H0.right};
- const others=[...hud.children].filter(e=>e!==me&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
- const free=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&!others.some(q=>x<q.right+4&&x+w>q.left-4&&y<q.bottom&&y+h>q.top);
- const row=r.closest(".k3rr")||r,rr=[row,...row.querySelectorAll("*")].map(e=>e.getBoundingClientRect()).filter(q=>q.width).reduce((a,q)=>({right:Math.max(a.right,q.right),top:a.top,height:a.height}),row.getBoundingClientRect()),dr=d?d.getBoundingClientRect():rr;
- /* 3rd spot (one-row iPad bar, rank row full): right of the "Buổi …" line, checked against every visible leaf of the bar + the seal, so it
-    never lands on the stage under the bar (owner 16:40Z: the update chip must not sit over the scene) */
- const tm=hud.querySelector("#k3tc .k3time"),lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
- const leafFree=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&y>=H0.top&&y+h<=H0.bottom&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+1&&y+h>q.top-1);
- const tr=tm&&tm.getBoundingClientRect(),c3=tr&&tr.width?[[tr.right+12,tr.top+(tr.height-h)/2]].filter(([x,y])=>leafFree(x,y)):[];
- const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].filter(([x,y])=>free(x,y)).concat(c3)[0]||[Math.max(H.left+4,(H.left+H.right-w)/2),H0.bottom+4];
- el.style.left=Math.round(at[0])+"px";el.style.top=Math.round(at[1])+"px"}
-function chip(){css();let el=$i("kupdchip");
- if(!el){el=document.createElement("button");el.id="kupdchip";el.className="kchip kupdchip";el.type="button";el.textContent="Có bản mới";el.setAttribute("aria-label","Có bản mới · chạm để xem");
-  el.addEventListener("click",e=>{e.stopPropagation();card()});document.body.appendChild(el)}
- place()}
+/* the status icon (kitStatusIcon "upd", jstatus): shown only while a new build is pending, she is playing and no dialog is open; the rail repaints on every tick */
+const showIcon=()=>!!(K.pending&&!K.leaving&&playing()&&!busy());
+function place(){K.chip=showIcon();try{if(window.kitStatusIcon)kitStatusIcon.refresh()}catch(e){}}
+function chip(){css();try{if(window.kitStatusIcon)kitStatusIcon.set("upd",{title:"Có bản mới",order:20,glyph:"⟳",badge:()=>true,show:showIcon,onTap:()=>card()})}catch(e){}place()}
 K.showChip=()=>{K.pending=true;chip()};/* test hook (dev/test/brand-seal.js): the chip alone, no card */
 function close(){if(K.cardEl){K.cardEl.remove();K.cardEl=null}place()}
 function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")return null;
