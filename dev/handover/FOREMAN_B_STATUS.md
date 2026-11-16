@@ -1,10 +1,10 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 01:42Z — 5 workers + 3 reviewers running (8/8).
+Updated: 11/16/2026 01:43Z — 4 workers + 4 reviewers running (8/8).
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare: token saved on this environment but api.cloudflare.com answers "Invalid API Token"/"Authentication error" (R2 bucket ctm-img) → CDN uploads BLOCKED; workers list new images under "PENDING CDN UPLOAD" in their PROGRESS file.
 
 | Item | Branch | Model | State |
 |---|---|---|---|
-| C23 mg-easy | review/mg-easy | sonnet | RUNNING |
+| C23 mg-easy | review/mg-easy @ede78f83 | sonnet | REVIEWING (review/mg-easy-r1, sonnet) |
 | C41 tuduc-mg | review/tuduc-mg | sonnet | RUNNING |
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (checks tutorial-r2 first) |
 | C26 stat-fx | review/stat-fx @ce35ee8c | sonnet | REVIEWING (review/stat-fx-r1, sonnet) |
@@ -31,3 +31,4 @@ PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; desc
 - Q2 (C26 stat-fx, for review/act-text owner): a gain still listed in a KÈM row should move to ĐƯỢC — stat-fx only fixed its colour; belongs to review/act-text (coordinator's slice).
 - Q3 (C27 buoi-transition): night→morning uses a dawn variant (mist + first light). Should a NEW WEEK also get the sky-band overlay on top of the dawn() week-summary screen, or keep dawn() alone?
 - Q4 (C27): KIT section §71 used provisionally for the buổi transition (jbuoi.js) — coordinator please confirm/assign the number.
+- Q5 (C23 mg-easy): knowledge minigames (Thơ, Câu đối, Đố đèn, Cờ, khảo hạch quiz) now scale with the player's level — low level = Dễ with many aids, high level = harder (more blanks, fewer aids); rewards unchanged. OK with the owner? Also rival NPC scores unchanged, so low-level players clear these more easily (balance look later).
