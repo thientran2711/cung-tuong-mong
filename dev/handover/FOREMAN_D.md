@@ -71,3 +71,5 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 
 - (08:41Z s14) REVIEW REQUEST (opus, structure): review/kc-roads-cn-nc SẴN SÀNG KIỂM 793cd37 round 3 (OD:L1288 co-op free choice + 'Chờ' value BAL.kcv). Read dev/handover/reports/kc-roads-cn-nc.md section ROUND 3 first. On PASS write 'READY <sha>' (from current main) in your STATUS + send to main s14; FAIL list to worker session_01UV1Szk5QsvVYvw2L45Qpqa. Also side flag: 'Mạnh thái y ???' stranger label in Gia tộc pager (j61, not reproduced) — check while there.
 - (08:42Z s14) CORRECTION to the kc-roads line above: the worker rolled over (archived); send a FAIL list to main s14 (it opens a fresh worker from the HANDOVER section of reports/kc-roads-cn-nc.md), not to the old worker.
+
+- (09:10Z s14) KIT LIVE: scene-end button KIT §81 (main 9a4da876; kitSceneEnd / .kbtn.kmend). START the scene-end SWEEP now from the list in KIT.md §81 (card flip already done by cardflip-glow). Whole family, kit part only, reviewer before main, READY <sha> to main s14.
