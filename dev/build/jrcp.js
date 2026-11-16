@@ -229,7 +229,7 @@ function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
 tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.rcp.tFavor);S.askAt=S.askAt||{};S.askAt[v.id]=wk();log(`${rkName(v)} ${v.name} dạy ta ${ARTS.find(a=>a.k===k).n}: ta nợ nàng ta một ân (thiện cảm -${BAL.rcp.tFavor}).`)}}catch(e){}RCPT.started=1;RCPT.k=null;RCPT.t=null};
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
- if(S.bac>=fee)O.push({n:rcpTchName(k),fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}});
+ O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
  for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{}});

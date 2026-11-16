@@ -29,10 +29,10 @@ function kpmHeadRank(k){if(!k)return null;const hd=kpmHead(k);if(!hd)return null
 /* owner 11/15: only the most luxurious PL grade (nhat) for every courtyard; same-rank palaces share a picture */
 function kpmDir(slot){if(kpmIsPlace(slot)){const P=kpmPlace(slot.slice(2));return P&&P.form?"nhat-"+P.form:null}const R=KPM_DATA.rankDir||{};const r=kpmHeadRank(kpmKeyOf(slot));const form=(r!=null&&R[r])||R.empty;return form?"nhat-"+form:null}
 /* the L2 picture for now: festival state of this buổi if drawn, else season × buổi, else the nearest buổi of the season */
-function kpmArt(slot){const dir=kpmDir(slot);if(!dir)return null;const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
+function kpmArt(slot){const R0=KPM_DATA.rankDir||{};const dir=kpmDir(slot);if(!dir)return null;const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
  let f=null;try{f=typeof festToday==="function"&&festToday()}catch(e){}
  const L=[];try{if(typeof wdTang==="function"&&wdTang())L.push("tang-"+b)}catch(e){} /* quốc tang: painted mourning state tang-<buổi> when Foreman C has drawn it (OD:L1415), else the festival / season picture */if(f&&f.k){L.push(f.k+"-"+b);const ff=f.files&&f.files[b],mm=ff&&/map-fest-(.+)\.webp/.exec(ff);if(mm)L.push(mm[1])} /* same festival state as the Dư đồ map (Đoan ngọ / Trùng cửu: the noon picture serves sáng + chiều) */const near={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]}[b]||[b];
- near.forEach(x=>L.push(se+"-"+x));L.push("xuan-sang");const st=L.find(x=>have.includes(x));return st?{src:`img/pl2/${dir}-${st}.webp`,dir}:null}
+ near.forEach(x=>L.push(se+"-"+x));L.push("xuan-sang");const st=L.find(x=>have.includes(x));return st?{src:`img/pl2/${dir}-${st}.webp`,dir,tam:st!==L[0]||(!kpmIsPlace(slot)&&!(kpmHeadRank(kpmKeyOf(slot))!=null&&R0[kpmHeadRank(kpmKeyOf(slot))]))}:null}
 
 /* who is where inside the palace, from the one ledger (S.where) and the map's own count (countAt) */
 function kpmHead(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)||null;if(k==="home"&&S.pal!=null)return S;const i=palSlot(k);if(i==null)return null;try{return roomResidents(i,"chinh")[0]||null}catch(e){return null}}
@@ -63,7 +63,7 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
  const here=h=>!!k&&S.place===k&&kpmHall()&&kpmHall().part===h;
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
- <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
+ <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}${kitTam(!A||A.tam)}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b)return"";const s=SP[h];
   return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
  </div></div>
