@@ -329,5 +329,7 @@ Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:
    raw0 / pow0: the value used when the card has none).
    why.ref = what an ordinary new girl brings (Sắc 40+R55 ≈ 65, Tài 30+R50 ≈ 55, Đức 30, mini-game mark 5, art level 1, Thái hậu 0, Danh 20):
    the reason line names the part of HER score that sits furthest above (or below) these, weighted by the road's own w. Text only, never a rule. */
-Object.assign(BAL.entry.w,{kc:{sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:5,le:2,pow:1/8,pow0:40,th:1/6,ld:-1/3}});
+Object.assign(BAL.entry.w,{kc:{sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:5,le:2,pow:1/8,pow0:40,th:1/6,ld:-1/3,
+ /* reviewer origin-intros-r1: the extras jkc kcMyScore typed by hand (same values): way = Tài/Đức added by "Đối đáp lanh lợi" / "Đáp lời khiêm nhường", chTh = Thái hậu added for Cháu gái Thái hậu, rW = per origin rank r, vh / tdFall = sớ tiến cử / td fall */
+ way:6,chTh:15,rW:4,vh:6,tdFall:-6}});
 Object.assign(BAL.entry,{why:{ref:{sac:65,tai:55,duc:30,raw:5,art:1,th:0,danh:20,home:0}}});

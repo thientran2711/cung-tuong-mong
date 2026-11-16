@@ -134,8 +134,8 @@ function oiParts(road,raw,art){const W=BAL.entry.w[road]||BAL.entry.w.dir;const 
  try{const std=(W.base||0)+(W.sac||0)*(S.sac||0)+(W.duc||0)*(S.duc||0)+(W.tai||0)*(S.tai||0)+(W.suc||0)*(S.suc||0)+(W.raw||0)*raw+(W.art||0)*lv+(W.th||0)*(S.th||0);P.push(["home",entBase(road,raw,art)-std-F.home])}catch(e){}
  return P}
 function oiPartsKc(raw,way){const W=BAL.entry.w.kc;const F=BAL.entry.why.ref;const arts=Math.max(0,...Object.values(S.arts||{}));
- return [["sac",W.sac*((S.sac||0)-F.sac)],["tai",W.tai*((S.tai||0)+(way==="tai"?6:0)-F.tai)],["duc",W.duc*((S.duc||0)+(way==="duc"?6:0)-F.duc)],["danh",W.danh*(Math.min(W.danhCap,S.danh||0)-F.danh)],
-  ["art",W.arts*(arts-F.art)],["raw",W.raw*(raw-F.raw)],["th",W.th*((S.th||0)-F.th)]]}
+ return [["sac",W.sac*((S.sac||0)-F.sac)],["tai",W.tai*((S.tai||0)+(way==="tai"?W.way:0)-F.tai)],["duc",W.duc*((S.duc||0)+(way==="duc"?W.way:0)-F.duc)],["danh",W.danh*(Math.min(W.danhCap,S.danh||0)-F.danh)],
+  ["art",W.arts*(arts-F.art)],["raw",W.raw*(raw-F.raw)],["th",W.th*((S.th||0)+(oiK()==="ch"?W.chTh:0)-F.th)]]}
 function oiArtN(art){try{const k=entKind(art);return k&&KG82_KIND[k]?KG82_KIND[k].n:((ARTS.find(a=>a.k===art)||{}).n||"")}catch(e){return""}}
 /* words by judge group: g = "maid" (Nội vụ phủ ma ma), "bride" (hòa thân: bá quan, sứ thần), "consort" */
 function oiWord(key,pos,g,A,way){const maid=g==="maid";const Q0=oiQueen();
