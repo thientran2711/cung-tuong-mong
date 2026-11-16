@@ -210,7 +210,7 @@
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | session_011xDdVSCHRnD3ox6Afg4tHa | SAMPLE READY (waits owner) | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | session_011xDdVP5yaxTpEx8BoJ4t2i | SẴN SÀNG KIỂM f46f826e (cắm hoa SAMPLE waits owner) | 16/11 13:45Z |
 | kc-roads Chờ-value fix (r1 FAIL item 1, OD:L1288) | review/kc-roads-cn-nc-fix2 | D | session_01DgYSWoQg78D5zyhdSa6uoH | RUNNING | 16/11 13:46Z |
-| D31 difficulty re-measure + HH ~32 % on Vừa + Q14 rain gear wears out (opus) | review/diff-remeasure | B | session_01N1tNP4CcXesvskQcWYTMwP | RUNNING | 16/11 13:55Z |
+| D31 difficulty re-measure + HH ~32 % on Vừa + Q14 rain gear wears out (opus) | review/diff-remeasure | B | session_01N1tNP3F65YoGjUoBixheuW (successor 17:10Z; first worker rolled over, archived) | RUNNING | 16/11 13:55Z |
 | EMOTION ACTIONS + extreme-mood consequences + FORCED emotion events, player + all NPCs (OD 13:08Z, 13:25Z(B), 13:50Z) (opus) | review/emotion-acts | B | session_01N1tNP3dP2Jd2zhw72gV1uW | RUNNING | 16/11 13:55Z |
 | D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | session_01N1tNP5D4rJRWvpDvFV93Kf | DONE SẴN SÀNG KIỂM f88a191b (archived) | 16/11 13:55Z |
 | D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | session_01N1tNP6zPQNzSmyMgNCuSPj | BLOCKED on KIT REQUEST A/B/C (items 1,3,4,5 done d8636053; worker archived) | 16/11 13:55Z |
