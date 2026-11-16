@@ -121,6 +121,7 @@ def fix(im, sm, skin, box, Lb, Cb, gl, gc, strength=0.85):
 def rosy(im, skin, box, Lc, ac, bc, A_T=13.0, B_T=15.0, blush=4.0):
     """HỒNG HÀO nhẹ (sếp 11/15): sưởi tông da về đích (a*, b* của mặt hồng hào) + má hồng mờ hai bên + môi hồng thêm chút.
     Chỉ trong vùng da mặt (mờ biên), không đụng mắt/mày/tóc/áo; không đổi nét."""
+    raise RuntimeError("ROSY PASS RETIRED (owner 16/11 12:45Z: \"Thôi tất cả các hình về bỏ cái lớp dòng đi, về cái B á.\" = no rosy-skin layer on any picture; undone by dev/art/skin-norosy/). Never re-apply.")
     x0, y0, x1, y1 = box; out = im.copy(); sub = out[y0:y1, x0:x1]
     bgr = sub[..., :3].astype(np.float32) / 255; lab = cv2.cvtColor(bgr, cv2.COLOR_BGR2LAB); h, w = lab.shape[:2]
     m = cv2.GaussianBlur(cv2.dilate(skin.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(np.float32), (0, 0), max(1.5, w / 60))
