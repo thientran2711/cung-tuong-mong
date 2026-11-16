@@ -9,13 +9,14 @@
    Entry: p / l = portrait / wide-landscape art; m = 4:3 art (optional, else l); pos / posl = background-position; grad / gradl = soft veil over the art (optional); col = ground colour.
    posm / gradm = the 4:3 tier's own position / veil (else those of l). Nobody else writes `background:url(...)` for a backdrop: add an entry here. */
 const KIT_BD={
+ /* title: the boot cover dev/site/kboot.js (KIT §14.1, painted before any script) mirrors these values: change both together */
  title:{sel:"#title.title",p:"img/title-key.webp",l:"img/title-key-l.webp",m:"img/title-key-m.webp",pos:"center top",posl:"left 25%",posm:"left center",col:"#f3e6d6",
   grad:"linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72))",gradl:"linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18))"},
  reborn:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",
   grad:"linear-gradient(rgba(40,20,12,.10),rgba(40,20,12,.04) 40%,rgba(40,20,12,.18))"},
  roulette:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",grad:"linear-gradient(rgba(40,20,12,.12),rgba(40,20,12,.22))"},
- podium:{sel:".kpod",box:true,p:"img/kit/podium-bg-p.webp",l:"img/kit/podium-bg.webp",pos:"center top",col:"var(--bg)",
-  grad:"linear-gradient(#fffaf022,#f5ecdc55 70%,#f5ecdcd0)"},
+ podium:{sel:".kpod",box:true,p:"img/kit/podium-bg2-p.webp",l:"img/kit/podium-bg2.webp",pos:"center bottom",col:"var(--bg)",
+  grad:"linear-gradient(#fffaf000,#f5ecdc22 60%,#f5ecdcb0)"},
  night:{sel:".modal.night",p:"img/tam-cung-dem-p.webp",l:"img/tam-cung-dem.webp",col:"#000"}
 };
 function kitBdCss(){const T="linear-gradient(transparent,transparent)";

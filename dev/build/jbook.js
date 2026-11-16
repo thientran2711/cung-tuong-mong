@@ -22,6 +22,7 @@ function kitCurlLift(t){return 1-Math.pow(1-t,1.6)}
    KIT.md §34.0. kitTurnEase: slow lift, even swing, a long gentle settle as the sheet lands. */
 const KIT_TURN_MS=1300;
 function kitTurnEase(t){const u=1-Math.pow(1-t,1.45);return (1-Math.cos(Math.PI*u))/2}
+function kitSlideEase(t){return 1-Math.pow(1-t,3)}
 function kitCurlFade(el,mid,done,ms){ms=ms||170;if(!el){mid&&mid();done&&done();return}el.classList.add("kcl-fade");
  setTimeout(()=>{try{mid&&mid()}catch(e){console.error(e)}el.classList.remove("kcl-fade");setTimeout(()=>done&&done(),ms)},ms)}
 function kitCurlSfx(){try{if(typeof kbkSfx==="function")kbkSfx()}catch(e){}}
@@ -153,7 +154,7 @@ function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=per
    vanish: the sheet lands off this page (phone / single page: beyond the spine): it is CLIPPED at the spine, never faded.
    The sheet is ALWAYS opaque paper on both faces (owner 11/15 02:40Z: "tờ lật luôn đục, không trong suốt"): no opacity, no blend.
    Per frame only transform/opacity change (compositor). */
-function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
+function kitSheetTurn(o){o=o||{};if(o.slide)return kitSlideSheet(o);const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
  const root=document.createElement("div");root.className="ksht"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;perspective:${Math.round(Math.max(1900,w*3.6))}px;perspective-origin:0px 42%`;
  if(o.vanish)root.style.clipPath="inset(-400px -6000px -400px 0)";
@@ -188,6 +189,40 @@ function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.m
   /* the copies' pictures: pending() = one is not decoded yet; ready(ms) resolves once all are (capped at ms) */
   pending(){return kitImgPending(root)},ready(ms){return kitImgSync(root,ms)}}}
 
+/* ---------- kitSlideSheet: the PORTRAIT page turn (owner 15/11, review/page-curl2; OWNER_DECISIONS "Page turn only on landscape") ----------
+   Portrait (phones, Fold folded) shows ONE page, no book, so there is no curl: the page is a sheet of paper that SLIDES sideways with the
+   finger / a tap; the next sheet lies underneath, moving a little slower (parallax) and brightening as it is uncovered; a soft paper-edge shadow
+   follows the sliding edge. Same call shape and return value as kitSheetTurn (p 0 = flat, 1 = slid off to the left; p 1→0 slides it back in),
+   so every caller (j87 kitBook, kitCurlSwap) uses it unchanged: kitSheetTurn({...,slide:true}). Reuses the kitSheetTurn CSS classes (no new CSS);
+   per frame only transform / opacity change (compositor). kitPortrait() decides; KIT_SLIDE_MS is the one slide duration (button / tab tap). */
+const KIT_SLIDE_MS=300;
+function kitPortrait(){try{return matchMedia("(orientation: portrait)").matches}catch(e){return innerHeight>innerWidth}}
+function kitSlideSheet(o){const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
+ const root=document.createElement("div");root.className="ksht ksht-slide"+(o.cls?" "+o.cls:"");
+ root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;overflow:hidden`;
+ const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
+ const mkBox=cls=>{const b=document.createElement("div");b.className=cls;b.sc=[];b.lk=[];return b};
+ const put=(box,src)=>{[...box.children].forEach(c=>c.remove());const p=src&&src.nodeType===1?kclPrep(src,!!o.ctx):null;
+  if(p){box.appendChild(ctxWrap(p.m));box.sc=p.sc;box.lk=p.lk;return}
+  const d=document.createElement("div");d.className="kpaper kcl-blank";if(typeof src==="string"&&src)d.innerHTML=src;box.appendChild(d);box.sc=[];box.lk=[]};
+ const U=o.under?mkBox("ksht-under"):null;if(U)put(U,o.under);
+ const B=mkBox("ksht-under");B.style.willChange="transform";put(B,o.back||null);
+ const dim=document.createElement("i");dim.style.cssText="position:absolute;inset:0;background:#2a1406;pointer-events:none;opacity:0";
+ const sheet=document.createElement("div");sheet.className="ksht-sheet";sheet.style.cssText=`width:${w}px;height:${h}px;transform-style:flat`;
+ const F=mkBox("ksht-face ksht-front");put(F,o.front||null);
+ const edge=document.createElement("i");edge.style.cssText="position:absolute;left:100%;top:0;bottom:0;width:30px;pointer-events:none;background:linear-gradient(90deg,#2a140666,#2a140626 45%,#2a140600)";
+ sheet.append(F,edge);if(U)root.appendChild(U);root.append(B,dim,sheet);host.appendChild(root);
+ const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
+ let last=0;
+ function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;
+  for(const bx of [F,B])for(const [a,b] of bx.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  sheet.style.transform=`translate3d(${(-p*w).toFixed(2)}px,0,0)`;
+  B.style.transform=`translate3d(${((1-p)*w*.2).toFixed(2)}px,0,0)`;
+  dim.style.opacity=(.26*(1-p)).toFixed(3);edge.style.opacity=Math.min(1,(1-p)*8).toFixed(3)}
+ set(o.p||0);
+ return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1,slide:1,
+  pending(){return kitImgPending(root)},ready(ms){return kitImgSync(root,ms)}}}
+
 /* kitCurl = the kit's page turn for every book (week book j87, kitBookSpread): since the owner's 11/15 10:00Z rule it is the WHOLE-SHEET
    turn (kitSheetTurn); the corner-fold engine stays as kitCurlFold (not used for page turns any more). Same call shape:
    kitCurl({host, front, back, w, h, x, y, p, shadeL, shadeR, vanish, ctx}) → {set(p,dir), destroy(), el, rescroll(), setBack()} */
@@ -212,8 +247,9 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
  /* The sheet is opaque paper on both faces and is CLIPPED at the spine (vanish): it lifts off the page, stands up at the spine and is
     gone there — it never lies over the picture page (iPad) or off the screen (phone) and never fades (owner 11/15 02:40Z). */
- let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0})
-                    :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1})}catch(e){console.error(e)}
+ const sl=kitPortrait(),MS=opt.ms||(sl?KIT_SLIDE_MS:KIT_TURN_MS),EZ=sl?kitSlideEase:kitTurnEase;   /* portrait: the paper slide (no book to turn), landscape: the sheet turn */
+ let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0,slide:sl})
+                    :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1,slide:sl})}catch(e){console.error(e)}
  run();try{kitImgSync(el)}catch(e){}
  const r1=el.getBoundingClientRect();
  /* the page row may differ a little per tab (iPad 1366: the panel box moves a few px): still a page turn; only another layout
@@ -229,11 +265,11 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
  let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
  const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
- let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);
  /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
     copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */
  if(c.pending&&c.pending()){host.style.visibility="hidden";stop();c.set(fwd?0:1);
-  c.ready(350).then(()=>{if(!alive)return;if(c.pending()){end();return}host.style.visibility="";stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);kitCurlSwap.t0=stop.t0})}
+  c.ready(sl?220:350).then(()=>{if(!alive)return;if(c.pending()){end();return}host.style.visibility="";stop=kitCurlRun(c,fwd?0:1,fwd?1:0,MS,fin,EZ);kitCurlSwap.t0=stop.t0})}
  const end=()=>{stop();fin()};kclLive=end;
  /* test hook: hold the running turn at p (kitCurlSwap.hold(.45)) */
  kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p);host.style.visibility=""};kitCurlSwap.end=end;return true}
@@ -346,7 +382,7 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 /* shadow the lifted page casts along the fold on the page being uncovered */
 .kcl-gs{position:absolute;left:0;top:0;width:100px;transform-origin:0 0;will-change:transform,opacity;
  background:linear-gradient(90deg,#1e0f058c,#1e0f053a 30%,#1e0f0510 65%,transparent)}
-.kcl-fade{transition:opacity .17s!important;opacity:0!important}
+.kcl-fade{transition:opacity .12s!important;opacity:0!important}
 /* two-page book */
 .kbs{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:var(--kbs-pad,10px 14px 12px)}
 .kbs-book{position:relative;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;transition:opacity .17s}
@@ -500,23 +536,6 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    return out};
   window.render=render},0)})();
 
-/* ---------- swipe the page to turn it (like the week book and the owner's binder app): on #panel a quick horizontal swipe = the next /
-   previous tab in the tab bar (left swipe → forward, the sheet swings over the spine; right swipe → back). Not on the map, not in a
-   dialog, not when the swipe starts in something that scrolls sideways (person strip, chips) or in a form control. ---------- */
-(function(){let sw=null;
- const sideScroll=t=>{for(let e=t;e&&e.id!=="panel"&&e!==document.body;e=e.parentElement){if(e.scrollWidth>e.clientWidth+4){const ox=getComputedStyle(e).overflowX;if(ox==="auto"||ox==="scroll")return true}}return false};
- const down=(t,x,y)=>{sw=null;if(!(t&&t.closest))return;
-  if(!t.closest("#panel")||t.closest("input,textarea,select,canvas,[data-noswipe],.kgl,.mapv")||document.querySelector(".game.maptab"))return;
-  const m=document.getElementById("modal");if(m&&!m.hidden)return;if(sideScroll(t))return;sw={x,y,t:performance.now()}};
- const up=(x,y)=>{const s=sw;sw=null;if(!s)return;const dx=x-s.x,dy=y-s.y,dt=performance.now()-s.t;
-  if(Math.abs(dx)<64||Math.abs(dx)<Math.abs(dy)*1.8||dt>900)return;
-  const B=[...document.querySelectorAll("#tabs [data-tab]")].filter(b=>b.offsetParent&&!b.disabled);const cur=B.findIndex(b=>typeof tab!=="undefined"&&b.dataset.tab===tab);if(cur<0)return;
-  const nb=B[cur+(dx<0?1:-1)];if(!nb)return;nb.click();
-  /* the swipe was a page turn, not a tap: swallow a click that may follow on the panel */
-  const kill=ev=>{ev.stopPropagation();ev.preventDefault()};document.addEventListener("click",kill,{capture:true,once:true});setTimeout(()=>document.removeEventListener("click",kill,{capture:true}),350)};
- /* touch: touch events (a pointer stream is cancelled once the browser starts panning); mouse / pen: pointer events */
- document.addEventListener("touchstart",e=>{if(e.touches.length!==1){sw=null;return}const q=e.touches[0];down(e.target,q.clientX,q.clientY)},{passive:true,capture:true});
- document.addEventListener("touchend",e=>{const q=e.changedTouches[0];if(q)up(q.clientX,q.clientY)},{passive:true,capture:true});
- document.addEventListener("touchcancel",()=>{sw=null},{passive:true,capture:true});
- document.addEventListener("pointerdown",e=>{if(e.pointerType==="touch")return;if(e.button>0||!e.isPrimary){sw=null;return}down(e.target,e.clientX,e.clientY)},{passive:true,capture:true});
- document.addEventListener("pointerup",e=>{if(e.pointerType==="touch")return;up(e.clientX,e.clientY)},{passive:true,capture:true})})();
+/* ---------- NO swipe on the game page (owner 15/11, review/page-curl2): horizontal swipe exists ONLY inside the Tuần lục book (j87 kitBook:
+   landscape = page curl, portrait = paper slide). Everywhere else a tab changes only by TAPPING its button, and only then the short tab-change
+   animation plays (kitCurlSwap: landscape = sheet turn, portrait = paper slide). The old "swipe the panel = next / previous tab" handler is gone. ---------- */
