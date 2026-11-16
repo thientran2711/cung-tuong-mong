@@ -8,7 +8,7 @@ Session 3 first check 06:23Z: C35b reviewer / D3 / D9 / D12 started 06:20Z, no r
 (Rule 07:45Z s10: every brief must POINT to dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md and order them read in full — owner words verbatim, never a summary.)
 
 ## HANDOVER (Foreman B session 3 → session 4, 11/16/2026 08:02Z)
-- Session 3 = session_01N1tNP6N19EQTqoHAMZcxqK passed its context budget (~75k) → rolled over; it stops spawning and deletes its cron (b7059734). Session 4 = see next status commit.
+- Session 3 = session_01N1tNP6N19EQTqoHAMZcxqK passed its context budget (~75k) → rolled over; it stops spawning and deletes its cron (b7059734). Session 4 = session_01N1tNP4iHywUqpPDALBadFp (opened 07:57Z real clock).
 - RUNNING (all separate sessions, nothing dies with session 3): see the "RUNNING 08:00Z" line above (10 sessions; ids also in CLAIMS.md). Next actions: mg-balance must push reports/mg-balance.md (replacement list) EARLY — check it on the first wake; open reviewers for every SẴN SÀNG KIỂM (D12 mood-bar, mg-balance, nw-poem/lantern/quiz, rank-port, presentation, spread-events); reviewer PASS → "READY <full sha>" under ## PASS (main s12 fast-forwards).
 - Free slots: 2 (keep for reviewers). Held: D3 (KIT REQUEST filed above), D19 (after econ in merge-train-6), D14 + D44 (art, owner's morning), night-card pregnancy-FX follow-up (after night-end-r3 lands; orphan #1).
 - Main s12 rule: if no pickup line by 09:15Z main moves mg-balance to D — pickup line written 07:58Z, done.
