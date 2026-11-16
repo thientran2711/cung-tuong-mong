@@ -17,3 +17,5 @@ Main coordinator keeps: all co-op (D21, A10, C43, C44), side stories D4/D5 + Emp
 (16/11) Moved to Foreman B: D30 D31 D32 D33 D34 D36 D38 D39 D40 D41 D42 (branch re-ports). Do NOT take them.
 
 ## KIT FIRST (owner 16/11, binding): every visual/UI change goes into the shared kit part only (KIT.md registry), so it changes everywhere; list all places using that element before changing; reviewers FAIL any change that makes one place differ from the others of its kind and run a consistency scan; read KIT.md before every UI task; two slices touching the same kit part → ask the main coordinator first.
+
+## ONE KIT KEEPER (owner 16/11, #1 rule since day one): only the main coordinator's kit keeper creates/changes kit parts, frames or shared art. Foremen and their workers only USE the kit; missing/changed part → STOP that part and write KIT REQUEST in your status QUESTIONS. Never invent a style, frame, chip or variant.
