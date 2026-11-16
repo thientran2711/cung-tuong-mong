@@ -28,7 +28,8 @@ main at start = eba64ead4.
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
-| servant-mline FAIL fixes → then D58 close-maid | review/servant-mline-r2 → review/close-maid | opus | worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
+| servant-mline FAIL fixes | review/servant-mline-r2 @c3e1cacd | opus | SẴN SÀNG KIỂM → reviewer session_01DgYSWkVHL3tGcMAWshbEUA RUNNING (review/servant-mline-r3) |
+| D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → reviewer session_01DgYSWoEfbFL74QqJ1ySvjK RUNNING (review/slap-mg-r3) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
@@ -76,6 +77,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 09:34Z: servant-mline-r2 SẴN SÀNG KIỂM c3e1cacd → opus reviewer (worker note C: co-op guest's own maid cannot rise — reviewer judges). Worker goes on with D58. 12 D sessions running (cap).
 - 09:33Z (hourly): PASS act-split-w2-r1 + balance-after-truth-r1 → READY. reign-road-fix SẴN SÀNG KIỂM → reviewer. kc-roads-cn-nc r3 review (s14 08:41Z) and scene-end sweep (KIT §81 live 09:10Z) opened. 3 finished sessions archived. danh-balance worker (session_01DgYSWoB9ztxCwmdBUbbxDS): no report yet. 11 D sessions running.
 - 09:29Z: coop-b1b5-r1 FAIL (6) → send_message to part-2 worker session_01DgYSWnjWQExva4hE6H8RyB: fixes first, then part 2, one reviewer for both. Reviewer archived.
 - 09:20Z: slap-mg-r2 SẴN SÀNG KIỂM dd0b618f → opus reviewer; worker archived. ART NEEDED for slap (sprites + intro pic) in reports/slap-mg-r2.md → art owner (C / main samples).
