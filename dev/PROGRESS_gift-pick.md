@@ -68,3 +68,6 @@ OWNER_DECISIONS 22:45Z #4/#5 (painted gift animations), 22:35Z perf budget.
   is sticky at the bottom of the scrolling option box everywhere. KIT.md 28.13i updated.
 - Final run (after restart, 2d038139e merge): gift-pick.js all 6 sizes: confirm in view at all sizes, inv −1 + giftcarry:give, tap skip removes
   the catcher at once (0 at 300 ms), Gọn 0 fx, 0 overflow / cut text, 0 page / HTTP errors. Skip check now waits 1.5 s for fades.
+- Re-merged origin/main 6298d2f55 (jopic KIT §6.2 option pictures): the display copy of the option card drops its .kaart picture and
+  kart/kopt classes (the title broke letter by letter beside the picture; the §70 strip already shows the item). Re-run 1180x820, 844x390,
+  755x1000: all pass (confirm in view, give + giftcarry, skip, Gọn, 0 errors).
