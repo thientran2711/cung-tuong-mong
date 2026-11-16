@@ -45,5 +45,8 @@ for line in open(W+"/"+sys.argv[3]):
     os.remove(raw)  # disk is tight: the cut-out is re-downloadable from Magnific (bg id)
     print(jid,"ok",im.size)
 json.dump(sorted(byfile.values(),key=lambda f:f["file"]),open(FP,"w"),indent=1,ensure_ascii=False)
-if made: subprocess.run([sys.executable,"-I",os.path.abspath(W+"/../porcrop.py")]+made)
+# porcrop needs opencv 4.x (5.x has no haar files): pip install --target dev/figwork/artcomplete/.cache/pylib "opencv-python-headless==4.10.0.84"
+# (-I: dev/figwork/cv2.py would shadow the real cv2 if the script dir were on sys.path)
+lib=W+"/.cache/pylib"; por=os.path.abspath(W+"/../porcrop.py")
+if made: subprocess.run([sys.executable,"-I","-c","import sys,runpy;sys.path.insert(0,sys.argv[1]);sys.argv=sys.argv[2:];runpy.run_path(sys.argv[0],run_name='__main__')",lib,por]+made)
 print(sys.argv[2],len(byfile))
