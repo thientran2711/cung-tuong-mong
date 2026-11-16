@@ -8,7 +8,9 @@
            PERSON = per-person function: on the guest it does nothing for anyone but her.
    Inline checks (same helper): j3 endTurn NPC Sức/tablet ticks, j8 kidsMonth NPC moms, j13 Emperor/Thái hậu illness + NPC fortune lots.
    Safety net for anything missed: jcoopworld guestNet() takes back her endTurn's world rolls before her week goes to the server.
-   Not here: the night flip (review/night-final) and contests (review/coop-contest) use the same worldOn(). Shop stock is personal (kept). */
+   Not here: the night flip (review/night-final) and contests (review/coop-contest) use the same worldOn(). Shop stock is personal (kept).
+   Palace men (S.men) are the host's: the guest may build a throwaway set (menInit) but never writes it (jcoopworld HOST_ONLY) and every
+   rebuild takes the host's set. */
 (function(){
 const guest=()=>!worldOn();
 const wrap=(n,mk)=>{const f=window[n];if(typeof f!=="function")return;window[n]=mk(f)};
@@ -41,9 +43,7 @@ wrap("wdNpcDress",f=>function(v){if(guest()&&v!==S)return;return f.apply(this,ar
 wrap("drawLot",f=>function(p){if(guest()&&p!==S)return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
 /* Thái hậu / Hoàng hậu mood (S.cm, a world key): the host rolls it; the guest keeps only her own spy line and resets her own offence count */
 wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt();C.thDrop=0;C.hhDrop=0;if((S.mat||0)>=3)C.spy=wk()}catch(e){}return}return f.apply(this,arguments)});
-/* the palace men are the host's (S.men world key): the guest never invents her own set */
-wrap("menInit",f=>function(){if(guest()&&S&&!S.men)return;return f.apply(this,arguments)});
 /* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
 wrap("endTurn",f=>function(){if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)});
-window.COOP_ONE={MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","menInit","fxIllMonth","wdNpcDress"])};
+window.COOP_ONE={MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
 })();

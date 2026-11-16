@@ -14,13 +14,13 @@ const ROOT=path.resolve(__dirname,'../..');const {serve,BASE}=require('./coop-se
 (async()=>{const {merge3}=await import(path.join(ROOT,'coop/worker/src/merge.js'));
 const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820}});await serve(ctx);
 await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9';});
-const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
+const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));if(process.env.DBGID){p.on('console',m=>{if(m.text().startsWith('DBG'))console.log(m.text().slice(0,600))});await ctx.addInitScript(([id,k])=>{window.__DBG={id,k}},[process.env.DBGID,process.env.DBGK])}
 await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});
 await p.waitForFunction(()=>typeof start==='function'&&typeof endTurn==='function'&&window.COOPW&&window.COOP_ONE);
-const WEEKS=+process.env.W||8,RUNS=+process.env.RUNS||8;
-const out=await p.evaluate(([WEEKS,RUNS])=>{
- let seed=1;const rnd=()=>{seed=(seed*1103515245+12345)%2147483648;return seed/2147483648};const nat=Math.random;
- const solo=worldOn();
+const WEEKS=+process.env.W||8,RUNS=+process.env.RUNS||8,SEED=+process.env.SEED||7;
+const out=await p.evaluate(([WEEKS,RUNS,SEED])=>{
+ let seed=SEED;const rnd=()=>{seed=(seed*1103515245+12345)%2147483648;return seed/2147483648};const nat=Math.random;
+ const solo=worldOn();Math.random=rnd;/* one seeded run (env SEED): a failure can be replayed */
  window.__nlInner=1;document.getElementById('title').hidden=true;for(let i=0;i<20&&!(typeof S!=='undefined'&&S&&S.name);i++)start();Q.length=0;
  const drain=()=>{for(let i=0;i<80&&Q.length;i++)Q.shift();S.mg=null};
  for(let w=0;w<WEEKS;w++){drain();S.buoi=B4L;try{endTurn()}catch(e){}drain()}
@@ -34,11 +34,11 @@ const out=await p.evaluate(([WEEKS,RUNS])=>{
    /* the room base holds the world as the host wrote it (HOST_ONLY keys: thIll/cm/men/menG2) */
    if(seat==='b'){const h=JSON.parse(JSON.stringify(res.length?res[res.length-1].hostBaseW:null));COOPW.base.W={S:h||{}}}
    const c0=COOPW.toCanon();seed=sd;Math.random=rnd;let err=null;
-   try{S.buoi=B4L;endTurn()}catch(e){err=String(e&&e.stack||e)}Math.random=nat;drain();
+   try{S.buoi=B4L;endTurn()}catch(e){err=String(e&&e.stack||e)}seed=sd+1;drain();
    const c1=COOPW.toCanon();
    /* her own act after the week end (a dawn dialog): an NPC loses 5 Sủng */
    let act=null;if(seat==='b'){const v=rivals.find(x=>!x.coop&&x.alive&&!x.out&&(x.sung||0)>=10);if(v){v.sung-=5;act=v.id}}
-   const sent=COOPW.guestNet(COOPW.toCanon());COOPW.on=false;COOPW.pend=false;COOPW.net=null;return {c0,c1,sent,err,act}};
+   const pre=COOPW.toCanon();const sent=COOPW.guestNet(JSON.parse(JSON.stringify(pre)));if(window.__DBG){const f=c=>{const v=c.W.R.find(x=>x.id==window.__DBG.id);return v?JSON.stringify(v[window.__DBG.k]):'-'};console.log('DBG',seat,'c0',f(c0),'c1',f(c1),'pre',f(pre),'sent',f(sent),'net0',COOPW.net&&f(COOPW.net.c0),'net1',COOPW.net&&f(COOPW.net.c1))}COOPW.on=false;COOPW.pend=false;COOPW.net=null;return {c0,c1,sent,err,act}};
   const H=runSeat('a',1000+r*7);
   res.push({hostBaseW:H.c0.W.S});
   const G=runSeat('b',5000+r*13);
@@ -55,7 +55,7 @@ const out=await p.evaluate(([WEEKS,RUNS])=>{
   C2.W.S.men=hm;C2.W.S.cm={th:{lv:3,why:'x'},hh:{lv:0,why:''}};COOPW.on=true;COOPW.seat='b';COOPW.fromCanon(C2);COOPW.on=false;
   rt={name:S.men&&S.men[0]&&S.men[0].name,tinh:S.men&&S.men[0]&&S.men[0].tinh,cmTh:S.cm&&S.cm.th&&S.cm.th.lv,seen:!!(S.cm&&S.cm.seen)}}catch(e){rt={err:String(e)}}
  mig.rt=rt;
- return {res,mig,solo,after:worldOn()}},[WEEKS,RUNS]);
+ Math.random=nat;return {res,mig,solo,after:worldOn()}},[WEEKS,RUNS,SEED]);
 /* ---- analysis in node ---- */
 const OWN=/^\.R\[#\d+\]\.(rl|ro|gp|ep|evm)\./;const DATE=/^\.S\.(year|month|tuan|turn|cnews)\b/;
 function flat(o,pre,acc){if(o&&typeof o==='object'){if(Array.isArray(o)&&o.length&&o.every(e=>e&&typeof e==='object'&&e.id!=null)){for(const e of o)flat(e,pre+'[#'+e.id+']',acc);return acc}
@@ -70,12 +70,14 @@ for(const r of out.res){if(r.H.err||r.G.err){errN++;console.log('ERR',r.H.err||r
  const b0=fl(r.H.c0.W),h1=fl(r.H.c1.W),g0=fl(r.G.c0.W),g1=fl(r.G.c1.W),gs=fl(r.G.sent.W);
  for(const k of new Set([...Object.keys(g0),...Object.keys(g1)])){if(skip(k))continue;if(g0[k]===g1[k])continue;const t=top(k);const c=h1[k]===g1[k]?'same':(h1[k]!==b0[k]?'DIFF':'G');if(c!=='same')raw[t]=(raw[t]||0)+1}
  for(const k of new Set([...Object.keys(g0),...Object.keys(gs)])){if(skip(k))continue;if(g0[k]===gs[k])continue;
-  if(r.G.act!=null&&k==='.R[#'+r.G.act+'].sung')continue;netBad[top(k)]=(netBad[top(k)]||0)+1}
+  if(r.G.act!=null&&k==='.R[#'+r.G.act+'].sung')continue;netBad[top(k)]=(netBad[top(k)]||0)+1;if(process.env.DBG)console.log('net',k,'g0',g0[k],'g1',g1[k],'sent',gs[k])}
  const M=merge3(r.H.c0.W,r.H.c1.W,r.G.sent.W),mf=fl(M);
  for(const k of new Set([...Object.keys(h1),...Object.keys(mf)])){if(skip(k)||b0[k]!==g0[k])continue;/* a value naming the viewer (who:"me" → pid) differs by seat already at base */if(r.G.act!=null&&k==='.R[#'+r.G.act+'].sung')continue;if(h1[k]!==mf[k])mergeBad[top(k)]=(mergeBad[top(k)]||0)+1}
- if(r.G.act!=null){actN++;const id=r.G.act,hv=r.H.c1.W.R.find(x=>x.id===id),mv=M.R.find(x=>x.id===id);if(hv&&mv&&mv.sung===hv.sung-5)actOk++;else console.log('act lost',id,hv&&hv.sung,mv&&mv.sung)}}
+ if(r.G.act!=null){const id=r.G.act,hv=r.H.c1.W.R.find(x=>x.id===id),mv=M.R.find(x=>x.id===id),bv=r.H.c0.W.R.find(x=>x.id===id);
+  /* merge3 rule 1 (A deep-equals B) takes one value when the host's own change happens to equal hers: not a loss of this branch */
+  if(hv&&bv&&hv.sung===bv.sung-5){}else{actN++;if(hv&&mv&&mv.sung===hv.sung-5)actOk++;else console.log('act lost',id,hv&&hv.sung,mv&&mv.sung)}}}
 const tbl=o=>Object.entries(o).sort().map(([k,v])=>'  '+k.padEnd(26)+v).join('\n')||'  (none)';
-console.log('runs',out.res.length,'month runs',out.res.filter(r=>r.month).length);
+console.log('seed',SEED,'runs',out.res.length,'month runs',out.res.filter(r=>r.month).length);
 console.log('1. guest raw endTurn: world paths moved only on the guest / differently (the safety net takes these back):\n'+tbl(raw));
 console.log('2. guest sent week, world paths changed vs base:\n'+tbl(netBad));
 console.log('3. merged vs host, world paths differing:\n'+tbl(mergeBad));

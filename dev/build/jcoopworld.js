@@ -183,7 +183,7 @@ function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W)
  const S0=W0.S||{},S1=W1.S||{},S2=W2.S||{},SO={};
  for(const k of new Set([...Object.keys(S0),...Object.keys(S1),...Object.keys(S2)])){const v=NET_DATE.includes(k)||HOST_ONLY.includes(k)?S2[k]:unroll(S0[k],S1[k],S2[k],false);if(v!==undefined)SO[k]=v}
  const m0=new Map((W0.R||[]).map(r=>[String(r.id),r])),m1=new Map((W1.R||[]).map(r=>[String(r.id),r]));const R=[],seen=new Set();let back=0;
- for(const r of W2.R||[]){const id=String(r.id);seen.add(id);if(m0.has(id))R.push(m1.has(id)?unrollR(m0.get(id),m1.get(id),r,mp):r);else if(!m1.has(id))R.push(r)}
+ for(const r of W2.R||[]){const id=String(r.id);seen.add(id);if(m0.has(id))R.push(unrollR(m0.get(id),m1.has(id)?m1.get(id):r,r,mp)/* missing right after the week end: treat all of it as the roll */);else if(!m1.has(id))R.push(r)}
  for(const r of W0.R||[]){const id=String(r.id);if(!seen.has(id)&&!m1.has(id)){R.push(J(r));back++}}
  C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
 CW.unroll=unroll;CW.guestNet=guestNet;
