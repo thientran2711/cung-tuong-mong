@@ -22,3 +22,9 @@ START_CTX not recorded; rolled over for context. Read: CLAUDE.md, START_CORE/WOR
 - Seen clean on a18 sheets: c01, c03–c07, c09, c11, c13, c15 (kc/ngheo/t1-8/tcold/tm0-4 poses fine, hands ok at sheet scale).
 - NOT done: sheets c16–c19, c21–c25, c27–c32 full (only ty row seen), maids/eunuch/kids (helper), a26/a36/a51 age files (assumed same pose as a18), scan to finish (local process; tools/scan1.py + tools/allfigs.txt; results scan-partial.jsonl is a partial dump), Luân hồi before/after for owner, CDN upload, review/fig-cutout-clean code branch (none needed yet).
 - Credit math: ~65/figure at 2k (try 1k/medium quality to cut). Failing set so far: ty family 1,024 + back-turned consort non-ty ~3 looks x4 ages + maid TBD.
+
+## OWNER SAMPLE (successor, 16/11) — Luân hồi before/after
+- Files: luanhoi-sample-c20-c02-ty3-{dark,light}.jpg (order: c20 before | c20 after | c02 before | c02 after). Same recipe (upload CDN webp -> gpt-2-6 edit, transparent, 672x2160 2k, 65 credits each).
+- After: calm front-facing standing pose, hands joined at waist, same face/hair/pin/gown colour, feet+shoes fully visible, no halo on dark or light. Before: body in profile/looking back + grey halo along sleeve/hair.
+- Note: gown sleeves are slightly wider/looser than the old sprite (pose change); face/outfit kept. NOT uploaded to CDN yet — awaiting owner verdict. Scratch masters: render.png 672x2160 (CDN webp target 900 tall).
+- Scan split/consort sheets c16–c19, c21–c25, c27–c32: pending.
