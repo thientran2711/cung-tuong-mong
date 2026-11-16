@@ -8,7 +8,10 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
  await pg.route(u=>!/^file:/.test(String(u)),r=>r.abort());await pg.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  const errs=[];pg.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await pg.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await pg.waitForTimeout(400);await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'domcontentloaded'});await pg.waitForTimeout(400);
- await pg.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await pg.waitForTimeout(800);
+ /* a consort life (a servant start has no dress verdict: jtoil is off for servants) — new game again until she is not a servant */
+ for(let i=0;i<12;i++){if(i){await pg.evaluate(()=>localStorage.clear());await pg.reload({waitUntil:'domcontentloaded'});await pg.waitForTimeout(400)}
+  await pg.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await pg.waitForTimeout(800);
+  if(!(await pg.evaluate(()=>typeof isSrv==="function"&&isSrv())))break}
  const R=await pg.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([n,!!c,x===undefined?"":JSON.stringify(x).slice(0,300)]);
   /* 1. defaults: re-implement the pre-D17 toilDress ratio rule and compare over a sweep of worn totals (no host taste, no context) */
   const old=(r,d,F)=>{const B=BAL.toil.dress[F];if(d<=B.under||r<B.rLo)return"giandi";if(B.showR!=null&&r>B.showR)return"photruong";if(d>=B.fitD&&r>=B.fitR&&(B.fitHi==null||r<=B.fitHi))return"hopdip";return"hoppham"};
