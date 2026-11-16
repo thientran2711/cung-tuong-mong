@@ -14,9 +14,10 @@ const TOP=git('rev-parse','--show-toplevel').trim();
 /* ---- rules (edit here; keep the reason words short) ---- */
 const GENERATED=/^(index\.html|sw\.js|assets\.json|dev\/index\.html|dev\/build\/all[\w]*\.js|manifest\.webmanifest)$/;
 const SMALL_PATH=[[/^dev\/(kit|art|handover|rules|review|shots-td|fxwork|figwork|measure|ideas|research|audio)\//,'docs/art/kit files'],[/\.(md|txt|png|jpe?g|webp|svg|gif|mp3|ogg|mp4|webm)$/i,'docs/media'],
- [/^dev\/test\//,'tests only'],[/^(img|icons|audio|cdn|docs)\//,'art/sound/docs'],[/^dev\/tools\//,'dev tools (not in the game)'],[/^dev\/build\/avatars\.js$/,'art list'],[/^\.gitignore$/,'git ignore']];
+ [/^dev\/test\//,'tests only'],[/^(img|icons|audio|cdn|docs)\//,'art/sound/docs'],[/^dev\/build\/avatars\.js$/,'art list'],[/^\.gitignore$/,'git ignore']];
 const BIG_PATH=[[/^coop\//,'co-op server Worker','coop'],[/^dev\/coop\//,'co-op protocol','coop'],[/^dev\/build\/assemble\.py$/,'module order'],[/^dev\/site\/(swreg\.js|sw\.tpl\.js|assets\.py|build_site\.sh|kboot\.js|rot\.js|buildinfo\.py|cdn_sync\.py)$/,'boot / update / deploy','save'],
- [/^\.github\//,'CI'],[/wrangler|worker/i,'server Worker','coop']];
+ [/^\.github\//,'CI'],[/^dev\/tools\/(tier|quickcheck|golive|rollback|nightly|shots|perfgate|gate-selftest)\b/,'go-live gate (checks itself)','gate'],
+ [/^dev\/test\/lib\//,'test harness shared by the gate','gate'],[/^dev\/tools\//,'dev tools (unsure -> BIG)'],[/wrangler|worker/i,'server Worker','coop']];
 /* modules where ANY logic change is BIG (text-only edits stay SMALL) */
 const BIG_MOD={bal:/^j(bal2?|bac|diff|ecom?|econ|eitem|stip|earn|int|lux|wd92b|wdinv|weather|rcp|tds|wkr|col|jpet|pet|petcare)\.js$/,save:/^j(slots|load|cloud|kiep)\.js$/,coop:/^jcoop\w*\.js$/,
  time:/^j(time4z?|buoi|cycle|mcal|night|rest)\.js$/,prog:/^j(promo|promsv|exam|chap|route|reign|goal|story|truth|mort|logsync|why|evb|trong|tin|mline|house|staff|cmaid|poison|lost|mem|kc|ts|tsb|orig|origins|age|pal|men|rash|veil|ty|emo|mood|cmood|dis|thaiy|jact|act2?|audit|clos|close|jly)\.js$/};
@@ -103,6 +104,7 @@ if(tier==='SMALL'){
  if(has('save'))['save-slots.js','ts-oldsave.js','load-migrate.js','cloud-save.js'].forEach(t=>tests.push(T('node dev/test/'+t,'save / slots')));
  if(has('coop'))['coop-e2e.js','coop-timer.js','coop-world.js'].forEach(t=>tests.push(T('node dev/test/'+t,'co-op')));
  if(has('time'))['khac-day-run.js','buoi-transition.js','night-day.js'].forEach(t=>tests.push(T('node dev/test/'+t,'time / buổi')));
+ if(has('gate'))['bash dev/tools/gate-selftest.sh  (rollback dry runs on a scratch clone + perf gate injection)'].forEach(t=>tests.push(T(t,'go-live gate itself')));
  if(has('bal'))['rules-one-source.js','paid-tiers.js','difficulty.js'].forEach(t=>tests.push(T('node dev/test/'+t,'numbers / BAL one-source')));
 }
 const seen=new Set();const TL=tests.filter(t=>!seen.has(t.cmd)&&seen.add(t.cmd)&&(!/^node dev\/test\/(\S+)/.test(t.cmd)||tlist.includes(t.cmd.match(/^node dev\/test\/(\S+)/)[1])));

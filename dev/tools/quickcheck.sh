@@ -1,6 +1,6 @@
 #!/bin/bash
 # QUICK CHECK on a READY sha before it goes live (go-live kit, owner OD:L1370 (c)). Bounded: ~1–3 min on this box (budget 5–10 min).
-# usage: bash dev/tools/quickcheck.sh [sha|ref] [--net] [--cpu N]     (default: HEAD of the current worktree)
+# usage: bash dev/tools/quickcheck.sh [sha|ref] [--net] [--cpu N] [--runs N] [--inject-render-ms N (self-test)]     (default: HEAD of the current worktree)
 #   1. the sha must hold its OWN build: dev/site/build_site.sh is run and index.html must come out the same (only the build line
 #      window.CTM_BI may differ, it depends on what is live right now) -> else FAIL "not built"
 #   2. node dev/tools/quickcheck.js: open (Fold) · old save from the LIVE build loads and plays a buổi (Fold) · perf smoke vs the live build (iPad)
@@ -11,7 +11,7 @@
 set -o pipefail
 T0=$(date +%s)
 REF=HEAD; ARGS=()
-for a in "$@"; do case "$a" in --*) ARGS+=("$a");; *) if [ "${#ARGS[@]}" -gt 0 ] && [ "${ARGS[-1]}" = "--cpu" ]; then ARGS+=("$a"); else REF=$a; fi;; esac; done
+for a in "$@"; do case "$a" in --*) ARGS+=("$a");; *) if [ "${#ARGS[@]}" -gt 0 ] && [[ "${ARGS[-1]}" =~ ^--(cpu|runs|inject-render-ms)$ ]]; then ARGS+=("$a"); else REF=$a; fi;; esac; done
 TOP=$(git rev-parse --show-toplevel) || exit 1
 KIT=$(cd "$(dirname "$0")/../.." && pwd)   # where the check scripts live (this go-live kit), may differ from the sha under test
 SHA=$(git -C "$TOP" rev-parse --verify -q "$REF^{commit}") || { echo "QUICKCHECK FAIL · unknown sha $REF (fetch it first)"; exit 1; }
