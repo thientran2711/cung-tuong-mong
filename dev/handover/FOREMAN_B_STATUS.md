@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 01:24Z — 6 workers + 2 reviewers running (8/8); 7 items QUEUED.
+Updated: 11/16/2026 01:26Z — 5 workers + 3 reviewers running (8/8).
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare: token saved on this environment but api.cloudflare.com answers "Invalid API Token"/"Authentication error" (R2 bucket ctm-img) → CDN uploads BLOCKED; workers list new images under "PENDING CDN UPLOAD" in their PROGRESS file.
 
 | Item | Branch | Model | State |
@@ -9,7 +9,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (checks tutorial-r2 first) |
 | C26 stat-fx | review/stat-fx @ce35ee8c | sonnet | REVIEWING (review/stat-fx-r1, sonnet) |
 | C27 buoi-transition | review/buoi-transition | sonnet | RUNNING (art, Magnific) |
-| C39 tab-underline | review/tab-underline | sonnet | RUNNING |
+| C39 tab-underline | review/tab-underline @ca4b2898 | sonnet | REVIEWING (review/tab-underline-r1, sonnet) |
 | C40 actcard-small | review/actcard-small @884e8846 | sonnet | REVIEWING (review/actcard-small-r1, sonnet) |
 | C28 room-btn | review/room-btn | sonnet | RUNNING (art) |
 | C29 rel-picker | review/rel-picker | sonnet | QUEUED |
