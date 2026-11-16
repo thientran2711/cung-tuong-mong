@@ -32,3 +32,6 @@ missing_pics, 3 fresh lives: option cards on placeholder 23/26/22 (before) -> 18
 ## Skipped
 - Person-name choices (Phi/Quý nhân/Quý phi/Tần/Thường tại/Hoàng hậu X, ???, cung nữ, thái giám): portrait fallback by design.
 - Events/acts of review/ev-art-fit, act-pics2: grep showed none of these 23 items covered there.
+
+## Reviewer r1 (PASS)
+Merged origin/main (a3dbdc19f); generated files rebuilt. Live ACTS.json valid, no key lost vs git copy; 18 pictures viewed (men navy/teal, none pink/purple); rule-steal scan old vs new rules over all j*.js strings: only "Thuê thợ thêu" changed from non-placeholder; kpActName only rewrites inside data-vlearn/data-learn buttons, other callers unaffected (non-learning acts keep keys); Tứ đức + arts cards distinct at 755x1000; q72 banners resolve (kitEvBanner own) ; missing_pics: events 0/309, acts 0/110, options 18, 0 errors.
