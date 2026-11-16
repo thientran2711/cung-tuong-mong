@@ -79,3 +79,10 @@ L65, L80, L117, L126, L139, L311, L366, L375, L395, L398, L401, L687, L924, L115
 ## Other notes
 - OD:L516 (Ân sủng panel standard) and OD:L1204 Q10 part (Thái hậu archetypes) are owner rulings not found in either rule file.
 - CLAUDE.md is not on the handover branch; read from origin/main.
+
+## Follow-up (s11 requests, 11/16/2026)
+- OD:L1237 (work sizing, 08:05Z) added to PRIORITY_RULES section 2 right after OD:L1229 (related items to the same foreman). Decision b: L1237 extends L1229 (split only when one worker would take too long); no older line on the same rule to overwrite.
+- OD:L1238 (foreign-princess samples: proportions, no stiff standing, right hand holds something, varied hands, Bắc Địch hair/headwear) and OD:L1239 (NO palace-maid-uniform rule, withdrawn) added to OWNER_ART_RULES section 3 right after OD:L1210 (Q14 block). Neither overwrites an older line: L1238 is a sample review on L1209; L1239 withdraws a coordinator note, not an owner line.
+- Older pose/hand/proportion rules checked, all present in the art file: OD:L11 (poses calm, HANDS varied with props), OD:L143, OD:L237/L417/L427 (vạn phúc hands), OD:L383/L838 (hand anatomy audit), OD:L542-543, OD:L949 (squashed figure), OD:L1179 (standard proportions).
+- Removed (invented "one shared maid uniform" note, not her rule): [HO/HANDOVER_SESSION9.md:L66] and [HO/HANDOVER_SESSION9.md:L73] in both rule files (status lines). Kept: OD:L1210, OD:L1212, [HO/HANDOVER_SESSION9.md:L48] — they say a home maid switches to the palace maid dress at high rank, which is her own ruling (OD:L1210 verbatim) and matches L1239.
+- Re-check: 0 text mismatches against OWNER_DECISIONS.md, 0 duplicate tags.
