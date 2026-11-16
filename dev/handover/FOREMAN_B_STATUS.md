@@ -21,8 +21,9 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg-r1 | sonnet | PASS 53a13452d69cfabbfb21c1f36e80c9c33bd4b1b4 |
-| C41b tuduc-pic | review/tuduc-pic (on tuduc-mg-r1) | sonnet | REVIEWING — worker done 2954ff9f (contains main eba64ead); reviewer session on review/tuduc-pic-r1 opened 05:25Z |
+| C41b tuduc-pic | review/tuduc-pic (on tuduc-mg-r1) | sonnet | REVIEWING — worker done 2954ff9f (contains main eba64ead); reviewer session session_01N1tNP4dwJ1QEvs8oHcaKvZ on review/tuduc-pic-r1 (05:24Z) |
 | C24 chapter-detail | review/chapter-detail-r1 | sonnet | PASS 936a2fe78b457ad3339c8554c46c6d674c4edf57 |
+| C35b pcard-dislikes | review/pcard-dislikes | sonnet | RUNNING — worker session (id follows), claimed 05:27Z (coordinator answer Q9) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS d8b54d0970ac8591d07163650058485f4bceb818 |
@@ -107,6 +108,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - KIT REQUEST (D31): identity-card face picker filter tabs (.ksub.kpkf "Phi tần / Cung nữ", kitPicker j79) are sticky z-index 5 and paint over the pinned choices (.kpopts.kpscopts z 3) while scrolling — 1180x820 scroll 0–48, 1000x755 0–64, 844x390 112–176 (pre-existing on main). D31 adds a local `.kdiff .ksub{position:static;z-index:auto;margin:2px 0 4px}` (#jdiff-css) — keeper: absorb as a kit variant (e.g. .ksub.kinline) or approve. Reviewer: the overlap on the identity card also comes from .kcf-cards and IMG.kfr without jdiff; newgame-ui-r2's .kpscroll layout would fix it. Also seen once: Hành sự filter-chip bar over the end modal (synthetic trigger; check on a real death).
 - C41 tuduc-mg-r1 reviewer: shared easy-rules layer (Gợi ý + idle hint wrapper tdWrap, first-time card, hint ring .tdring.ksel) now exists twice (mg-easy + jtd) — one kit version worth having.
 - D34 reviewer: jopic.js one-option-per-row rule now grid-auto-rows:max-content (kit-wide); MƯU seal / HUD labels / boards still open; Thời cơ choice dialog still shows the act's own picture/caption ("Đầu độc") — OD:L199 wants it abstract → neutral picture? "Kiếp này chưa trọn" warning fires on every scheme act except Dò la (regex over option text) — main to fix.
+- KIT REQUEST (C32b, coordinator answer Q18): speed the landscape ‹ › Tuần lục curl from ~1.3 s to ~0.8 s. The duration lives in kit §34 (jbook.js kitCurlSwap MS / j87 curl dur) = kit timing → per ONE KIT KEEPER Foreman B does NOT change it; keeper please do it (or say 'Foreman B may' and B opens a worker).
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS

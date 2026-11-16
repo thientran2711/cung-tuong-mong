@@ -18,7 +18,7 @@
 | mortality | review/mortality | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | outside-r2-r2 reviewer | review/outside-r2-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | DONE 2954ff9f | 16/11 05:20Z |
-| C41b review | review/tuduc-pic-r1 | B | (separate session, id follows) | RUNNING | 16/11 05:25Z |
+| C41b review | review/tuduc-pic-r1 | B | session_01N1tNP4dwJ1QEvs8oHcaKvZ | RUNNING | 16/11 05:25Z |
 | D34 review | review/scheme-games-port-r1 | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | PASS e25486e0 | 16/11 05:19Z |
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r3 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | D-R2 row-align re-review | review/row-align-r2 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
@@ -27,3 +27,4 @@
 | D50 dialog fig placeholder | review/dlg-fig-ph | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | balance-after-truth re-run | review/balance-after-truth | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | reign-road review | review/reign-road-r1 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
+| C35b pcard-dislikes | review/pcard-dislikes | B | (worker session, id follows) | RUNNING | 16/11 05:27Z |
