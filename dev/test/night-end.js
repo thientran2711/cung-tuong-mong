@@ -8,7 +8,7 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;docu
  document.querySelectorAll('[id^=kroul],.kroul,#dawn,#kload').forEach(e=>e.remove());document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 (async()=>{const b=await chromium.launch(Object.assign({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']},process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{}));
  const vps=(VPS||'755x1000').split(',');const R={};
- for(const v of vps){const [W,H]=v.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,ignoreHTTPSErrors:true});const p=await c.newPage();
+ for(const v of vps){const [W,H]=v.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,ignoreHTTPSErrors:true,serviceWorkers:'block'});const p=await c.newPage();
   /* the CDN tunnel is slow/flaky in this sandbox: serve pictures we have on disk (img/…) locally, the rest goes to the network */
   await p.route(/ctm-img\.victoria-tntt\.workers\.dev\/img\//,async r=>{const u=new URL(r.request().url());const f=decodeURIComponent(u.pathname.slice(1));
    if(fs.existsSync(f)){const ext=f.split('.').pop();return r.fulfill({path:f,headers:{'access-control-allow-origin':'*','content-type':{webp:'image/webp',webm:'video/webm',mp4:'video/mp4',json:'application/json'}[ext]||'application/octet-stream'}})}return r.continue()});const errs=[];
