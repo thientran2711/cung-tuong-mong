@@ -2,6 +2,7 @@
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
 last wake: 16/11 20:38Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
+- 21:27Z: LIVE coop-name-mask-r1 = c1e1bbd1 (s7 re-merged main 9c49f13c itself, built, golive.sh PASS 212 s, diff = j61/jcoopchat/jcooptimer/coop-chat test/CHANGE + built; pushed FF). npc-death-r1 HOLD: on main 594415aa test 8/12 — main's j95 place-people record bypasses jnpcd/jly (Lý not in Trường Môn viện = OD:L641 lost; dead still listed; Thái y 'ty' missing) → opus re-wire worker. seatcap 627f9b92 withdrawn by golive worker (jseat.js must be LAST) → new READY coming.
 - 20:58Z: go-live: coop-name-mask-r1 READY 06d0cb13 tests 55/55 ×2 + .kv1 chip no clipping, but main moved (1aa0edb2) → re-merge asked (co-op first). mem-upgrade-r1 READY 60fb873f (suites green with __j95off test fix; fix to be included) waits behind it. item-ledger-r1 HOLD: double gift delivery vs live coop-b1b5 transport → opus integration worker session_01DgYSWqCyhf3pLAzBVv4WqP (review/item-ledger-coop), then BIG re-review.
 - 20:41Z: rev2 miss on live 392fff60 classified HARNESS/timing (2 runs: 38/38 and 36/38 start-up flake; fpos from old B arrives, Sủng matches) → no rollback. Note: place half of that check is vacuous in the harness (old B stays 'home'); harmless.
 - 20:40Z (hourly): INBOX main s22/s23: 10-night ledger REMOVED from D queue (main gives it to its night-final successor, OD:L1229); P5 STORY BOT balance → opus worker session_01DgYSWknF3zCGUsx9BmG3ub (review/story-bot, report only); CO-OP FIRST OD:L1447 sent to golive successor, suc-khoe-fix, npc-roads-fix (coop-e2e = PASS criterion; co-op item coop-name-mask-r1 is front of the go-live queue). Running: golive successor, suc-khoe-fix, npc-roads-fix, story-bot. Context ≈ 17 %.
@@ -66,7 +67,7 @@ main at start = eba64ead4.
 | D21 full review r2 → fix | review/coop-b1b5-fix @7c7fcc45 | opus | SẴN SÀNG KIỂM (worker archived) → final reviewer coop-b1b5-fix-r1 → PASS 287a7010 (reviewer archived) → LIVE 392fff60 20:34Z |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
-| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | PASS 5f58a715 (review/npc-death-r1; reviewer archived) |
+| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | PASS 5f58a715 (review/npc-death-r1; reviewer archived) → golive HOLD 21:20Z (j95 place record) → re-wire worker |
 | D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | PASS 1c31bd79 (review/preg-rate-r1; reviewer archived) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | SẴN SÀNG KIỂM 98d7acc4 (P1: Danh hold hs 51→12 %, mix 72→47 %; P2 Tài-nghệ bot report only; worker archived) → PASS dd3363ff (review/danh-p1-r1; reviewer archived) |
 | C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
@@ -238,7 +239,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 | coop-chat-r1 go-live | b7c5d787 | — | LIVE 18:21Z (Worker deploy run #5 success); live 2-client test pending (golive worker) | b1b5 pre-run: coop-r2 36/46 (10 FAIL "NPC acts on her" — mindRun returns "") → worker investigating, NOT READY |
 | NPC ROADS U0+U1 | review/npc-roads f699bbf4 | opus | r1 PASS 83d84225 (reviewer fixes; archived) — not FF until story14-p1-r2 + road-map-next live |
 | NPC ROADS U2 maids + U3 men + U4 | review/npc-roads | opus | SẴN SÀNG KIỂM 02405da5 (worker archived) → merge-fix worker session_01DgYSWmVoMyem8RKtKb9T19 RUNNING (review/npc-roads-fix) |
-| coop-name-mask (co-op friend shown unmet) | review/coop-name-mask | sonnet | SẴN SÀNG KIỂM 48a942b2 (worker archived) → r1 PASS ed8ccb28 (reviewer fix) → go-live queue after b1b5 |
+| coop-name-mask (co-op friend shown unmet) | review/coop-name-mask | sonnet | r1 PASS ed8ccb28 → LIVE c1e1bbd1 21:26Z |
 
 
 ## QUESTIONS FOR MAIN (s7)
