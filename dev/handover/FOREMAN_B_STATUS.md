@@ -20,7 +20,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
-| D32 succession-port | review/succession-port | opus | RUNNING |
+| D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
 | D38 lost-items-port | review/lost-items-port | opus | RUNNING |
 | D30 palace-map-port | review/palace-map-port | sonnet | RUNNING |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
@@ -55,3 +55,4 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - Q9 (C35 pcard-fill): the game has no per-person 'ghét' (dislike) data — the card shows only known traits/tendencies and the Emperor's known likes. Add dislike data as a design item? Also Thỉnh an stays a talk option of the visit (no free shortcut that would bypass one-talk-per-visit).
 - Q10 (C37 panel-size): with one frame size per viewport, short one-line notices now sit in a full-size frame with empty paper (as the rule asks). Owner may want to see it before it goes live.
 - Q11 (D39 appearance-port): her own ingredient-specific allergy in recipes (PM:L326) was not built — rash causes already include son phấn and bad-luck food. Owner wants a per-ingredient allergy in recipes (new feature), or is the current cause list enough?
+- Q12 (D32 succession-port): the 12 dedicated epilogue pictures in SUCCESSION_PLAN §7 were never approved; chapters reuse approved event art. Owner wants dedicated pictures? And ending cards show ev-quoc-tang (from main's code) — the right picture for succession endings?
