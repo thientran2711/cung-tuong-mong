@@ -12,7 +12,7 @@ Base main at start: 900ace7fb.
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
 | D47 small-bugs-4 | review/small-bugs-4 @74e2d3730 → review/small-bugs-4-r1 | sonnet | REVIEWING (4 fixed: thiếu lễ 'Vì sao', stranger greet/arc reveal, 'theo lòng nàng', 'Đang cài'→'Đang mặc' 10→0; 2 already done on main; canonical kit page = #kit) |
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
-| D46b new placeholders from new main content (23 option cards e.g. 'Hòa giải…', 'Răn dạy…', 'Xử nghiêng về…'; events q72 dong_tam, dt_hen, dt_thu; acts 'Bỏ phấn lạ', 'Mời thái y bắt mạch', 'Sang Thái y viện xin bắt mạch', 'Tát'; + 'Thuê thợ thêu ngoài cung' wrong padlock picture) | review/placeholder-pics3 | sonnet | RUNNING (art worker) |
+| D46b new placeholders + Tứ đức/arts self-study pictures | review/placeholder-pics3 @dfb040a8e (on opt-pics2-r1) → -r1 | sonnet | REVIEWING (acts 4→0, non-person options →0, 3 q72 banners, kpActName fix in j79.js; NOTE ACTS.json on CDN already edited live) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
 | D45 small art + wiring | review/small-art-wire @d6e63783a (on promo-rules-r1 + main + small-art) | sonnet | WIRED (except earrings/shoes → K7); reviewer RUNNING (review/small-art-wire-r1) (item-pics.js / inv-grade.js hung >10 min — reviewer to compare vs base) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
