@@ -36,7 +36,7 @@ Base main at start: 900ace7fb.
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
 | D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
 | D22 real-phone UA test mode | review/ua-test @89ba6983e (dev/test/lib/device.js: 13 device profiles + serveRoot/openHost host mode; rotate-prompt.js; book-title.js + boot-flash.js migrated; dev/test/README.md) → review/ua-test-r1 | sonnet | REVIEWING |
-| D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
+| D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f6da49b3 (jtrong.js after jaudit, BAL.trong; 5 archetypes; trGreet one greeting rule; trThDeed whole-group fix) → review/personality-r1 | opus | REVIEWING (bot HH 6/28=21% vs main ~27–32%, small n) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
 | D-list rest (D3, D9, D11–D15, D17, D19, D20, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
@@ -98,6 +98,9 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q7 (owner, D49): what counts as an 'item' for the Sổ luân hồi collection milestones — every distinct kind she has held or worn incl. consumables (current build), or only wardrobe pieces + ornaments (trâm, y phục, trang sức)?
 - Q8 (owner, C9 huadian): besides flowers/leaves/butterfly/phoenix, some styles use a crescent moon (c05, c26) or flame/drop/blade shapes (c06, m06, c15, c29 t1, c09 t1). Not fruit — keep them, or replace with flowers too? (Rings/beads/coins/dots/seeds ARE being replaced.)
 - IMPORTANT for session 8 (D22 finding, affects REVIEWER.txt viewport rule): in the real game (built root index.html, rot.js host mode) the game renders ONLY at design sizes 1180x820 (landscape) or 755x1000 (portrait), scaled to the screen. So Fold landscape 1000x755 = 1180x820 ×0.85, iPad Pro 1366x1024 = 1180x820 ×1.16, iPhone landscape 844x390 = 1180x820 ×0.48, portrait iPads = 755x1000. Playwright sets navigator.webdriver → rot.js picks DIRECT mode unless ?khost=1, and dev/index.html has no rot.js → tests at 1000x755 / 1366x1024 / 844x390 / 390x844 in direct mode check layouts no player sees. Proposal: reviewers test UI at 755x1000 + 1180x820 direct, and the other sizes via dev/test/lib/device.js openHost() (host mode). Coordinator please decide and update REVIEWER.txt.
+- Q9 (owner, D7): should she CHOOSE her own nết (temperament) at the start of a life? Now it is given from her name.
+- Q10 (owner, D7): Thái hậu archetype names Từ ái / Nghiêm khắc / Đa nghi / Quyền uy / Sùng Phật — OK? Revealed after her first thỉnh an (as built) — OK?
+- Q11 (owner, D7): thiếu lễ at thỉnh an (−2.8 per greeting when under-dressed) now outweighs a routine greeting — keep that weight?
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
