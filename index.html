@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"632c5426","t":"2026-11-16T23:30Z","c":"balance-core: night choice numbers measured (road b14, mode win/lose), tests balance-core.js + balance-night.js","b":"7abf664fe3ec","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
+window.CTM_BI={"s":"f6030018+","t":"2026-11-16T23:38Z","c":"balance-core: BAL.steal.keep names agreed with night-final (base/sung/sac/art/gain/oan/npcP); fix name clash bestArt → stBestArt (j1/j85 be…","b":"ee919508fda7","h":[{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -16779,7 +16779,7 @@ function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x
  crsPush(p.arts,p.artp,k,g,l=>{const f={[a.st]:BAL.art.stUp};if(BAL.art.danh[l])f.danh=BAL.art.danh[l];const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)})}
 function npcStudy(v){if(!v||!v.alive||v.out||!roll(BAL.orig.npc.study))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
  const w=k=>{let x=1;if(/Hiền lành|Nhu mì/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Hiểm độc"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
- const bk=(typeof bestArt==="function"&&bestArt(v)||{}).k;/* like a player she keeps at her best art (BAL.orig.npc.focus) */ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)*(a.k===bk?BAL.orig.npc.focus:1)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
+ const bk=(typeof stBestArt==="function"&&stBestArt(v)||{}).k;/* like a player she keeps at her best art (BAL.orig.npc.focus) */ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)*(a.k===bk?BAL.orig.npc.focus:1)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
  let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
  let g=1;if((v.bac||0)>=cost+40&&roll(50)){ap(v,{bac:-cost});g=2+R(2)}if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}
 /* ---- monthly effects (every consort alike) ---- */
@@ -18089,13 +18089,14 @@ BAL.grow={keys:["sac","tai","tamco"],band:[40,60,80],mul:[1,.5,.25,.1]};
    the winner, hh = Hoàng hậu → winner, ghen = holder's jealousy.
    ea (Emperor's month art, picked by the game each month, host in co-op): she knows it at the month start when Tai mắt ≥ mat, else each week
    rumour % = r0 + Tai mắt × rMat; NPCs the same; the shown 'known likes' (discover) can also name it (disc %).
-   Measured (dev/test/balance-night.js, real consort population, value of a night = 8 Sủng): best choice Tranh sủng ≈ 58 %, Chặn ngự giá ≈ 37 %, Thôi ≈ 5 %;
-   Chặn ngự giá is best for ≈ 67 % when her best art is his favoured art, ≈ 20 % when it is the disfavoured one. */
+   Measured (dev/test/balance-night.js, real consort population, 2 seeds × 3 lives × 2 y, value of a night = 8 Sủng): road b 10 → best choice
+   Tranh sủng ≈ 66 % / Chặn ngự giá ≈ 25 %; b 14 → 36 % / 60 %; b 12 chosen (≈ half and half). Chặn ngự giá is best for most nights when her best art is his
+   favoured one, for few when it is the disfavoured one. */
 Object.assign(BAL.steal,{cost:{feign:{duc:0},road:{suc:0}},
  m:{feign:{b:34,w:{sung:.35,sac:.05},art:.5,win:{},lose:{sung:-3,duc:-1},rel:10,hh:0,ghen:15},
-    road:{b:14,w:{sac:.35,sung:.05},art:1.5,win:{sung:6,danh:2},lose:{sung:-5,danh:-2},rel:25,hh:4,ghen:30},
-    keep:{b:35,w:{sung:.3,sac:.1},art:1}},
- art:{fav:1,dis:.75,neu:0},keep:{rung:1,keepSung:2,oanX:1.5},
+    road:{b:12,w:{sac:.35,sung:.05},art:1.5,win:{sung:6,danh:2},lose:{sung:-5,danh:-2},rel:25,hh:4,ghen:30}},
+ art:{fav:1,dis:.75,neu:0},
+ keep:{base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.5},/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance an NPC holder tries it (night-final tunes) */
  ea:{mat:5,r0:5,rMat:4,disc:35}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
@@ -45280,18 +45281,18 @@ function eaLearn(start){if(!S||S.dead||!empArt())return"";const E=BAL.steal.ea;c
 (function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{if(empArt()&&!eaKnows(S)&&roll(BAL.steal.ea.disc)&&eaTell(S,"dò được"))return true}catch(e){}return d0.apply(this,arguments)}})();
 /* ---- night choices ---- */
 /* her best art (most points; a tie prefers his favoured art, never his disfavoured one first) */
-function bestArt(p){const ea=empArt();let b=null;for(const a of ARTS){const v=artPts(p,a.k);const pr=ea?(a.k===ea.f?1:a.k===ea.d?-1:0):0;
+function stBestArt(p){const ea=empArt();let b=null;for(const a of ARTS){const v=artPts(p,a.k);const pr=ea?(a.k===ea.f?1:a.k===ea.d?-1:0):0;
   if(v>0&&(!b||v>b.v||(v===b.v&&pr>b.pr)))b={k:a.k,v,l:((p.arts||{})[a.k])||0,pr}}return b}
-function stealArtB(p,mode){const M=BAL.steal.m[mode]||{},b=bestArt(p);if(!b)return 0;const ea=empArt(),A=BAL.steal.art;
+function stealArtB(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mode]||{}),b=stBestArt(p);if(!b)return 0;const ea=empArt(),A=BAL.steal.art;
  const f=ea?(b.k===ea.f?A.fav:b.k===ea.d?-A.dis:A.neu):A.neu;return Math.round(BAL.art.odds[b.l]*f*(M.art==null?1:M.art))}
 function stealBase(a,mode){const M=BAL.steal.m[mode];let o=M.b;for(const k in M.w){const v=k==="sac"?effSac(a):(a[k]||0);o+=v*M.w[k]}return o+stealArtB(a,mode)}
-function oKeep(p){return odA(p,stealBase(p,"keep")+stealFit(p)+mm())}
+function oKeep(p){const K=BAL.steal.keep;return odA(p,K.base+(p.sung||0)*K.sung+effSac(p)*K.sac+stealArtB(p,"keep")+stealFit(p)+mm())}
 /* a failed Tranh sủng / Chặn ngự giá: the loss of that choice (BAL.steal.m[mode].lose); returns the line */
 function stealLose(mode){return Object.assign({},(BAL.steal.m[mode==="road"?"road":"feign"]||{}).lose||{sung:-BAL.steal.failSung})}
 function stealFail(a,t,mode){const L=stealLose(mode);ap(a,L);return `${NMc(a)} định giành đêm${t?" của "+NM(t):""} nhưng Hoàng thượng không động lòng. ${fmt(L)}. `}
 /* Giữ chân Hoàng thượng: nobody took her night → keepSung; robbed anyway (w = winner, mode = its choice) → the steal's thiện cảm / oán hit is × oanX (the extra part here) */
-function keepNoSteal(p){const n=BAL.steal.keep.keepSung;if(n)ap(p,{sung:n});return n}
-function keepRobbed(p,w,mode){try{const M=BAL.steal.m[mode==="road"?"road":"feign"]||{};const x=Math.round((M.rel==null?BAL.steal.rel:M.rel)*(BAL.steal.keep.oanX-1));if(x>0&&w&&w!==p)relAdd(w,p,-x)}catch(e){}}
+function keepNoSteal(p){const n=BAL.steal.keep.gain;if(n)ap(p,{sung:n});return n}
+function keepRobbed(p,w,mode){try{const M=BAL.steal.m[mode==="road"?"road":"feign"]||{};const x=Math.round((M.rel==null?BAL.steal.rel:M.rel)*(BAL.steal.keep.oan-1));if(x>0&&w&&w!==p)relAdd(w,p,-x)}catch(e){}}
 /* the word() ladder (BAL.lad): odds o dropped n rungs, keeping its place inside the band */
 function rungDown(o,n){const F=[0].concat(BAL.lad),top=100;let i=0;for(let j=0;j<F.length;j++)if(o>=F[j])i=j;const lo=F[i],hi=i+1<F.length?F[i+1]:top;
  const t=Math.max(0,i-(n|0)),lo2=F[t],hi2=t+1<F.length?F[t+1]:top;return Math.max(5,Math.round(lo2+(o-lo)*(hi2-lo2)/Math.max(1,hi-lo)))}
@@ -45384,7 +45385,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7abf664fe3ec";window.CTM_BUILD=BUILD;
+const BUILD="ee919508fda7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
