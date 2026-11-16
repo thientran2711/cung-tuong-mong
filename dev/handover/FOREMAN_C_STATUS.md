@@ -18,7 +18,7 @@ Base main at start: 900ace7fb.
 | C6 mk-colour | review/mk-colour @973729653 | sonnet | RUNNING (worker; presets, vụng looks, lips QA, then reveal scene D28) |
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
 | C8 fig-bg step 2 | review/fig-bg @21eb452d3 | sonnet | RUNNING (worker, silk scroll A) |
-| C9 huadian-size | review/huadian-size @cb36de68b | sonnet | RUNNING (worker) |
+| C9 huadian-size | review/huadian-size @230e3cf25 | sonnet | RUNNING (worker #2: det2.py ~85% boxes; hand-fix ~100 a18 boxes → mask shrink to 8.5% → sheets per tier/age → CDN; ~5700 files) |
 | D1 result-sfx | review/result-sfx @41899d048 | sonnet | RUNNING (resumed worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | PAUSED (design + measure tools in PROGRESS; builds on j28 PERS; plan jtrong.js + BAL.trong, 5 Thái hậu archetypes, one greeting rule; resume next) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
