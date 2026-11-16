@@ -38,7 +38,7 @@ const fails=[];const F=(m)=>fails.push(m);
  if(!/^Chương/.test(d.t||''))F('strip tap did not open chapter detail: '+d.t);if(!d.opts.length)F('detail: no Đi làm');
  await shot('4-detail');
  const okThinh=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(b=>/thỉnh an/i.test(b.innerText));if(b){b.click();return true}const a=document.querySelector('#modal .opts button');if(a)a.click();return false});
- await p.waitForTimeout(2200);const ring=await p.evaluate(()=>({tab,ring:!!document.querySelector('#ktut:not([hidden]) .ktut-hole:not([hidden])')}));
+ await p.waitForTimeout(2200);const ring=await p.evaluate(()=>({tab,ring:!!document.querySelector('#ktut:not([hidden]) .ktut-hole:not([hidden])'),q:Q.length}));
  if(okThinh&&!ring.ring)F('Đi làm: no ring on the act card');
  await shot('5-dilam');
  await p.evaluate(()=>{try{kitCoachOff()}catch(e){}});

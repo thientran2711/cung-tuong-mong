@@ -54,14 +54,16 @@ function kitGoalStrip(o){o=o||{};const G=o.G||kitGoalNow();if(!G)return"";const 
   `${nx&&o.next!==false?`<span class="kgoal-n">Việc kế: ${esc(nx.t)}</span>`:""}<span class="kgoal-go" aria-hidden="true">›</span></button>`}
 /* ---------- "Đi làm": open the tab, ring the act card with the guide's spotlight (kitCoach, jtut) when it is on screen ---------- */
 function goWhere(x){try{if(!x||!x.tab)return;const b=document.querySelector(`#tabs [data-tab="${x.tab}"]`);
- if(b&&b.offsetParent)b.click();else{tab=x.tab;if(typeof render==="function")render()}
+ /* tapping the tab that is already open sends a phone back to the room (jk3), so only tap another tab */
+ const open=tab===x.tab&&!document.querySelector(".game.k3home")&&!!document.querySelector("#panel")&&!!document.querySelector("#panel").getClientRects().length;
+ if(!open){if(b&&b.offsetParent)b.click();else{tab=x.tab;if(typeof render==="function")render()}}
  if(!x.act)return;/* the panel re-renders: the ring follows the card by a finder, not a node */
  const find=()=>[...document.querySelectorAll("#panel button.ka")].find(e=>e.offsetParent&&x.act.test(((e.querySelector(".kan")||e).textContent||"").trim()))||null;
  setTimeout(()=>{try{const c=find();if(!c)return;c.scrollIntoView({block:"center"});
   if(typeof kitCoach==="function")setTimeout(()=>{kitCoach({title:x.t,sub:"Mệnh truyện · việc kế",html:`<p>Thẻ đang sáng là việc này. Chạm vào thẻ để làm.</p>`,target:find,pad:4,interact:true,btns:[{k:"ok",t:"Đã hiểu"}],on(){kitCoachOff()}});
    const off=e=>{if(e.target.closest&&e.target.closest("#panel button.ka")){document.removeEventListener("click",off,true);try{kitCoachOff()}catch(x){}}};document.addEventListener("click",off,true)},300)}catch(e){}},450)}catch(e){console.error("goal go",e)}}
 /* ---------- chapter detail (kit panel, event frame) ---------- */
-function art(){try{return{src:kitOriginArt(S.origin.k),label:road()}}catch(e){return null}}
+function art(){try{return{src:typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k),label:road()}}catch(e){return null}}
 function nextRows(N){return N.map((x,i)=>[`Việc ${i+1}`,`<b>${esc(x.t)}</b><br><span class="past">${esc(x.why)} · chạm: ${esc(x.where)}</span>`,""])}
 function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
 function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
@@ -73,14 +75,14 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
   if(C.dl!=null)R.push(["Hạn",`còn ${Math.max(0,C.dl-S.turn)} tháng`,C.dl-S.turn<=1?"r":""]);if(C.hist.length)R.push(["Đã qua",C.hist.map(esc).join("<br>")]);sec.push({h:"Tiến độ",rows:R})}
  if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]});
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
- kitPanel({kind:"rule",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),subject:pMe(),sections:sec,opts:nextOpts(G.next),btn:"Đóng"},true);showModal()}
+ kitPanel({kind:"rule",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),subject:pMe(),stage:[S],sections:sec,opts:nextOpts(G.next),btn:"Đóng"},true);showModal()}
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
 function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
  const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
  const sec=[{h:"Đường đời kiếp này",rows:[["Đường lớn",life],G.road?["Truyện riêng",`«${esc(G.road)}» · từng chương mở dần theo thời gian`]:null,["Chương này",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]].filter(Boolean)},
   {h:"Việc nên làm trước",rows:nextRows(G.next)},
   {h:"Xem lại",rows:[["Dải mục tiêu",`ở đầu mục ${tabName("act")} và trên màn chính; chạm vào để xem chi tiết chương`],["Mệnh truyện",`mục ${tabName("story")} ở hàng dưới`]]}];
- return {kind:"notice",title:"Mệnh truyện kiếp này",sub:`${G.kicker} · ${C.t}`,headArt:art(),subject:pMe(),sections:sec,btn:"Đã hiểu"}}
+ return {kind:"notice",title:"Mệnh truyện kiếp này",sub:`${G.kicker} · ${C.t}`,headArt:art(),subject:pMe(),stage:[S],sections:sec,btn:"Đã hiểu"}}
 /* queued right after the Nhập cung card of a new life (each machine, own life; co-op guest too). The new life is made inside Luân hồi
    (j52 nlBegin → the inner start, maybe after the figures load), so this watches the queue: a "Nhập cung" card with no goal card yet. */
 function nhapAt(){return Q.findIndex(x=>x&&(/^Nhập cung/.test(String(x.t||""))||(x.kit&&/^Nhập cung/.test(String(x.kit.title||"")))))}

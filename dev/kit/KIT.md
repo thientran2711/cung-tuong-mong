@@ -2968,7 +2968,7 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
   học một môn tài nghệ · kết giao một người; cung nữ road: phận sự · tài nghệ · kết thân đồng liêu; a story act waiting → "Quyết hồi truyện".
 
 ### 71.3 kitGoalDetail + kitGoalCard — chapter detail and "Mệnh truyện kiếp này" — `dev/build/jgoal.js`
-- Both are a kit panel in the event frame (§8 + §32.2): `headArt` = the origin painting (`kitOriginArt`), `subject` = her (full-body figure on
+- Both are a kit panel in the event frame (§8 + §32.2): `headArt` = the wide origin painting (`kitOriginWide`), `subject` + `stage:[S]` = her (full-body figure on
   the picture, §32.6), sections of `kitRows` / `kitChecks` / `kitReqRows` only.
 - `kitGoalDetail()` (seal ĐIỀU): Mục tiêu chương · Tiến độ (✓/✗ steps, "xong một điều là đủ" for an any-step chapter) · for Chương 1 the
   tấn phong table (`promoReq` via `kitReqRows`) · for a story chapter Hồi i/n, Kế tiếp, Lợi thế, Hạn, Đã qua · Việc nên làm (what, why,
