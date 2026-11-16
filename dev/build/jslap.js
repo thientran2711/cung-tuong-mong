@@ -25,7 +25,7 @@ window.slapMg=slapMg;
    Zones are TIME windows round the moment the needle crosses their centre (BAL.slap.bar.redMs / amberMs, dodge.safeMs, by ease), turned into widths at that speed,
    so the measured rates do not depend on the screen size. First play of each kind: the one-screen demo card (j91 k91DemoCard, S.mgSeen); the clock starts after it.
    Idle hint: no tap for BAL.slap.hint[tier] ms → the zone glows and the line says where to tap. Gọn / reduced motion (kfStill): no pops, the zone glow is still. */
-function kg82SlapBar(box,env){const dodge=env.kind==="ne",B=BAL.slap,D=dodge?B.dodge:B.bar,R=B.raw,ease=env.lv||0;
+function kg82SlapBar(box,env){KG82.slapHint=false;KG82.slapEnd=null;KG82.slapDemo=false;const dodge=env.kind==="ne",B=BAL.slap,D=dodge?B.dodge:B.bar,R=B.raw,ease=env.lv||0;
  const tier=KG82.tier&&KG82.tier.tier!=null?KG82.tier.tier:1,still=typeof kfStill==="function"?kfStill():!!(typeof OPT!=="undefined"&&OPT.fxon===false);
  const C=kg82Canvas(box,(innerHeight||800)<520?.3:.46,250),{g,W,H}=C;const w=slapE(D.w,ease);
  const A=W*.42,cx=W/2,by=H*.52,bh=Math.max(26,H*.16);let t0=performance.now();const ph=Math.random()*6.283;
@@ -41,14 +41,14 @@ function kg82SlapBar(box,env){const dodge=env.kind==="ne",B=BAL.slap,D=dodge?B.d
    :["Kim chạy qua lại trên thước. Giữa thước là vùng đỏ, hai bên vùng vàng.","Chạm một lần đúng lúc kim lướt qua giữa: đỏ là tay nặng, vàng là tay vừa, ngoài là tay nhẹ.","Không chạm thì tay nhẹ. Chần chừ lâu, vùng đỏ sẽ sáng lên chỉ chỗ."],
   art:(g2,W2,H2,now)=>{const a=W2*.3,x0=W2/2,y0=58,h0=16;g2.fillStyle="rgba(120,86,40,.18)";g2.fillRect(x0-a,y0-h0/2,a*2,h0);
    if(dodge){g2.fillStyle=good;g2.globalAlpha=.6;g2.fillRect(x0+a*.3-a*.15,y0-h0/2,a*.3,h0)}else{g2.fillStyle=gold;g2.globalAlpha=.55;g2.fillRect(x0-a*.3,y0-h0/2,a*.6,h0);g2.fillStyle=red;g2.globalAlpha=.8;g2.fillRect(x0-a*.1,y0-h0/2,a*.2,h0)}
-   g2.globalAlpha=1;const nx=x0+a*Math.sin(still?.35:now/520);g2.fillStyle="#3a2412";g2.fillRect(nx-1.5,y0-h0/2-4,3,h0+8);return y0+h0+26}}):null;
+   g2.globalAlpha=1;KG82.slapDemo=true;const nx=x0+a*Math.sin(still?.35:now/520);g2.fillStyle="#3a2412";g2.fillRect(nx-1.5,y0-h0/2-4,3,h0+8);return y0+h0+26}}):null;
  const ruler=(x,y,ww,hh)=>{if(!kg82Spr(g,"tat-ruler",x+ww/2,y+hh/2,ww*1.08,hh*1.9)){g.fillStyle="rgba(120,86,40,.18)";g.fillRect(x,y,ww,hh);g.strokeStyle="#8a6a30";g.lineWidth=2;g.strokeRect(x,y,ww,hh)}};
  const zone=(n,col,al,x,hw)=>{if(!kg82Spr(g,n,x,by,hw*2,bh,{alpha:.9})){g.fillStyle=col;g.globalAlpha=al;g.fillRect(x-hw,by-bh/2,hw*2,bh);g.globalAlpha=1}};
  function draw(now){kg82Bg(g,W,H,env.kind,.35);
   ruler(cx-A,by-bh/2,A*2,bh);
   if(dodge)zone("ne-zone-green",good,.55,zx,A*zr);else{zone("tat-zone-amber",gold,.5,cx,A*za);zone("tat-zone-red",red,.78,cx,A*zr)}
-  const idle=!lock&&!(dm&&dm.on)&&now-tAct>B.hint[tier];
-  if(idle){const hw=A*zr,x=(dodge?zx:cx);if(still){g.save();g.strokeStyle="#e0a526";g.lineWidth=3.5;g.strokeRect(x-hw-3,by-bh/2-3,hw*2+6,bh+6);g.restore()}else if(typeof k91Glow==="function")k91Glow(g,x-hw,by-bh/2,hw*2,bh,now)}
+  const idle=!lock&&!(dm&&dm.on)&&now-tAct>B.hint[tier];if(idle)KG82.slapHint=true;
+  if(idle){const hw=A*(dodge?zr:za),x=(dodge?zx:cx);if(still){g.save();g.strokeStyle="#e0a526";g.lineWidth=3.5;g.strokeRect(x-hw-3,by-bh/2-3,hw*2+6,bh+6);g.restore()}else if(typeof k91Glow==="function")k91Glow(g,x-hw,by-bh/2,hw*2,bh,now)}
   const x=lock?hitX:pos(now);
   if(!kg82Spr(g,"tat-hand",x,by-bh/2-4,null,bh*1.25,{ay:1})){g.fillStyle="#3a2412";g.beginPath();g.moveTo(x,by-bh/2-2);g.lineTo(x-9,by-bh/2-18);g.lineTo(x+9,by-bh/2-18);g.closePath();g.fill()}
   g.fillStyle="#3a2412";g.fillRect(x-1.5,by-bh/2-2,3,bh+4);
@@ -56,7 +56,7 @@ function kg82SlapBar(box,env){const dodge=env.kind==="ne",B=BAL.slap,D=dodge?B.d
   kg82Lbl(g,idle?(dodge?"Vùng xanh đang sáng: chạm khi kim vào đó":"Vùng đỏ đang sáng: chạm khi kim lướt qua giữa"):(dodge?"Chạm khi kim vào vùng xanh":"Chạm khi kim lướt qua giữa vùng đỏ"),W/2,H*.2,W-24);
   if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,resT[0],W/2,H*.82)}else kg82DrawPops(g,pops,now);
   if(dm&&dm.on)dm.draw(g,W,H,now)}
- function end(raw,txt,col){if(stop)return;lock=true;if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
+ function end(raw,txt,col){if(stop)return;lock=true;KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
  function tap(){if(lock||stop||(dm&&dm.on))return;const now=performance.now();hitX=pos(now);const raw=zoneOf(hitX);lock=true;
   if(dodge)end(raw,raw?"Né kịp!":"Không kịp",raw?good:red);else{const s=slapTierOf(raw);end(raw,["","Nhẹ tay","Vừa tay","Nặng tay!"][s],[ink,ink,gold,red][s])}}
  function frame(now){if(stop)return;if(lock||(dm&&dm.on)){draw(now);raf=requestAnimationFrame(frame);return}const tt=now-t0;
