@@ -28,3 +28,15 @@ Findings:
 2. The left column (kgfig) is ~259 x 534 CSS px. The sample is 511x900 (aspect 0.57; old 0.43) so it is width-limited: displayed 249x438 vs old 231x526 => the PERSON shrinks to ~0.83 of her old on-screen height (measured 845 vs ~1020 device px). Fix options: widen kgfig to ~300 CSS px (then scale 1.0) or accept 0.83. Needs a kit decision (KIT_REQUESTS).
 3. BIG: the current build draws the player from fig-consort-c<NN>-t<tier>-a<age> (12 faces x 8 tiers x 4 ages = 384 files, plus hd/ twins), NOT fig-player-look*. The sample was made on the obsolete fig-player-look1 base (the shot swaps it in whatever face she has). A real set must be made per consort face.
 Full-set estimate (per instrument/pose): 384 files x ~43 cr = ~16,500 cr; 1 age x 12 faces x 8 tiers = 96 files = ~4,100 cr (age bands can reuse a pose with fewer files); minimum sensible = 12 faces x current tier = 12 files ~520 cr. With 8 art types (dan, co, tho, ve, mua, huong, theu, banh) multiply accordingly; recommend asking the owner to pick the subset (e.g. dan only, 96 files).
+
+### Per-pose cost (for the hold; poses made from the NEW repainted consort figures after pilot approval)
+~43 cr per figure (40 gen + 3 bg removal). One instrument: 12 faces x current tier = 12 files ~520 cr (pilot); 12 faces x 8 tiers (1 age) = 96 files ~4,100 cr; full 12 x 8 x 4 ages = 384 files ~16,500 cr (+ hd twins by upscale). Eight arts (dan, co, tho, ve, mua, huong, theu, banh) multiply those. KIT REQUEST draft for the column width is in dev/kit/KIT_REQUESTS.md.
+
+## ORIGIN INTRO ART (Foreman C s9 item 3, main s26 decided VẼ) — plan + 3 new samples (NO batch before Foreman C says)
+Panel list = ART LIST of review/origin-intros (dev/handover/reports/review-origin-intros.md): 51 panels + G1–G7 (G1 + 6 panels already painted: tt-1..4, tt-h3, G1 = style anchor, live at img/intro/). Remaining to paint: 45 panels + G2–G7 (6) = 51 images. Format 1280x720 WebP <=250 KB, 16:9, subject in the centre band (3:1 banner crop).
+Order (owner OD 22:00Z story ch1–4 first): wave 1 = keys -1..-4 of every other origin (dtq, muoi, cn, nc, bd, td, ch, thd, cnv = 9 origins x 4 = 36, minus none) ; wave 2 = home-road h1/h2/h3 (dtq-h3, muoi-h3, cn has none, nc-h3, bd-h3, td-h1/h2/h3, ch-h3, thd-h3, cnv-h3 = 10); wave 3 = G2–G7 (6). Total 52 incl. 1 sample-only duplicate check; cost ~65 cr per 2k gpt-2-6 generation => ~3,400 cr + ~50% retries ≈ 5,000 cr.
+New samples (gpt-2-6, 2k 16:9, resized 1280x720; looked at each myself; no faces in cn-2 per the ◆ rule, men no pink/purple, no blood):
+- cn-2 ◆ rain night, two clothed silhouettes behind a paper screen: https://ctm-img.victoria-tntt.workers.dev/img/_review/origin-intros/cn-2.webp  (native 2688x1520: cn-2-full.webp; 3:1 banner crop: cn-2-banner3x1.jpg)
+- dtq-4 dawn: she (back) in brocade to a red sedan, riding boots by the door, groom + horse: .../dtq-4.webp (+ -full, -banner3x1)
+- nc-1 Nhĩ Hải lake, three pagodas, camellias, no people: .../nc-1.webp (+ -full, -banner3x1)
+All in img/_review/origin-intros/ (NOT on the live img/intro/ keys; upload after approval).

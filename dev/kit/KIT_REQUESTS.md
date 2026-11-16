@@ -68,3 +68,8 @@ All 13 files are LIVE on the CDN (md5-checked), 1200x800 webp ~200 KB, same angl
 | maid 5 nữ quan | img/toil-room-maid5-nuquan.webp |
 Spec: (1) one helper `kitRoomPlate(rankIdx|maidIdx)` returning the key; fallback = `img/toil-mirror-room.webp` for unknown/Lãnh cung/Phế phi. (2) Load on demand only (perf rule OD:L714), only the plate of the current rank. (3) Same for any other place that shows this dressing-room plate. (4) No tint/overlay in code (owner rule). (5) Whether the player can ever be a maid rank: ask main; the 5 maid plates are for maid/NPC reveal scenes if any. Keep `toil-mirror-room.webp` (still used as fallback; it equals c5-phi).
 If the owner later wants Hoàng quý phi to differ more, only `toil-room-c7-hoangquyphi.webp` is repainted in place.
+
+## KIT REQUEST (DRAFT) — art worker (Foreman C) 17/11 — kgfig column width for instrument-pose figures
+Part: kitGameFig left column (.kgfig, KIT §13.4) on html.kv2. Today it is ~259 x 534 CSS px at 1180x820, tuned for a bare figure (aspect ~0.43). A pose figure holding an instrument (đàn tranh on a stand) is aspect ~0.57 (511x900), so it is WIDTH-limited: measured in the real build (review/minigame-frame bd223466) the person shrinks to ~0.83 of her bare height (845 vs ~1020 device px).
+Needed: kgfig inner width ~300 CSS px (or width = height x 0.57 + padding) so a pose figure keeps scale 1.0; the bare figure then stays centred (no stretch). Alternatively accept 0.83. Decision for the kit keeper + owner. Not needed until the repainted consort figures + pilot poses are approved (Foreman C s9: HOLD).
+Evidence: https://ctm-img.victoria-tntt.workers.dev/img/_review/art-requests-c/dan-real-old-vs-new-column.png
