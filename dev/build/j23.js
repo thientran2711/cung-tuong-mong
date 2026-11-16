@@ -12,10 +12,13 @@ const ARTMS={
 function artMonth(){if(!S||S.out)return;if(S.arts.cam>=1)S.suc=cl(S.suc+1,0,100);if(S.arts.cam>=4)S.kids.filter(k=>k.alive).forEach(k=>k.tal=cl(k.tal+1,0,100))}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(!S.dead)artMonth()}catch(e){}return ev}})();
 /* three roads */
-function lessonMode(k,mode){const l=S.arts[k],cost=5+l*5;if(!S||S.dead||Q.length||S.mg||l>=5)return;
+/* teacher fee (jrcp: depends on the chosen teacher) and the favour paid when the session starts */
+function tchFee(k){return 5+S.arts[k]*5}
+function tchPaid(k){}
+function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.length||S.mg||l>=5)return;
  if(mode==="self"){if(!can(2)||S.suc<25)return;apply({suc:-15})}
  else if(mode==="th"){if(!can(2)||S.th<40||(S.buoi||0)!==0||S.thDead)return;apply({suc:-10,th:3})}
- else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost})}
+ else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});tchPaid(k)}
  spend(2);S.mg={k,l,mode};save();render();resumeMG()}
 (function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học cùng Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
   if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=pick(liveRivals(true));if(t){t.ev++;log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ +1.`)}}}render()})}})();
