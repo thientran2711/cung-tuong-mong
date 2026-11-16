@@ -289,9 +289,6 @@ window.kitPicSubj=kitPicSubj;
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
 .ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
-/* focal zoom-out: when the subject is bigger than the crop, the picture is shown smaller around its subject over a soft blurred copy of itself */
-.ksz3 .kpz{background:var(--kpzbg) center/cover no-repeat}.ksz3 .kpz::before{content:"";position:absolute;inset:0;backdrop-filter:blur(9px) saturate(.9);background:rgba(255,250,240,.18);z-index:0}
-.ksz3 .kpz>.ksart{background:transparent;z-index:1}.ksz3 .kpz>.ksart img{position:absolute;object-fit:fill;max-width:none}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
 .ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
@@ -331,15 +328,13 @@ function kszEvMin3(c){const im=c.querySelector("img"),src=im&&im.getAttribute("s
  const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
  const w=c.clientWidth;const NM=KIT_SIZE.pic.NM;return Math.max(base,Math.min(Math.ceil(w*NM.h/NM.w),Math.ceil((sj[3]-sj[1])*n[1]*(w/n[0])*1.06)))/* the strip's floor is at most the standard NARROW strip ratio (NM 300x84): a taller subject is shown whole by kitPicFocus (zoom-out), never by a taller frame */}
 function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(c.classList.contains("k3ev"))c.style.minHeight=kszEvMin3(c)+"px";if(!im||!im.naturalWidth)return;kitPicFocus(c,im)})}
-/* kitPicFocus(box, img) — THE focal crop (owner 16/11 19:54Z "cái lá thư chưa có đúng vị trí"): the picture's subject box (KIT_PIC_SUBJ) stays WHOLE inside the
-   visible crop at every size. Cover crop when the subject fits (positioned so the subject is centred, clamped to the picture); when the subject is
-   bigger than the crop, the picture is scaled down until the subject fits and the rest of the box shows a blurred copy (.kpz). No box: centred. */
+/* kitPicFocus(box, img) — THE focal crop (owner 16/11 19:54Z "cái lá thư chưa có đúng vị trí"; owner 21:1xZ: the picture ALWAYS FILLS its frame, never letterboxed / blur-padded):
+   `cover` at every size, positioned so the centre of the subject box (KIT_PIC_SUBJ) sits at the centre of the visible window (clamped to the picture). When the subject is
+   bigger than the window the window still shows its centre (the frame, not the picture, adapts: kszEvMin3 grows the strip up to the standard NARROW ratio). No box: centred. */
 function kitPicFocus(c,im){const W=im.naturalWidth,H=im.naturalHeight,w=c.clientWidth,h=c.clientHeight;if(!W||!w||!h)return;const src=im.getAttribute("src")||"";
- const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):kitPicSubj(src);const P=KIT_SIZE.v3.subjPad,b=sj?[Math.max(0,sj[0]-P),Math.max(0,sj[1]-P),Math.min(1,sj[2]+P),Math.min(1,sj[3]+P)]:null;
- const s0=Math.max(w/W,h/H);let s=s0;if(b){const sf=Math.min(w/((b[2]-b[0])*W),h/((b[3]-b[1])*H));if(sf<s0)s=Math.max(sf,Math.min(w/W,h/H))}
- c.classList.toggle("kpz",s<s0-1e-6);if(s<s0-1e-6){c.style.setProperty("--kpzbg",`url("${src.replace(/"/g,"")}")`);const iw=W*s,ih=H*s,cx=(b[0]+b[2])/2*iw,cy=(b[1]+b[3])/2*ih;
-  const L=iw<=w?(w-iw)/2:Math.min(0,Math.max(w-iw,w/2-cx)),T=ih<=h?(h-ih)/2:Math.min(0,Math.max(h-ih,h/2-cy));Object.assign(im.style,{width:iw+"px",height:ih+"px",left:L+"px",top:T+"px",objectPosition:""});return}
- Object.assign(im.style,{width:"",height:"",left:"",top:""});c.style.removeProperty("--kpzbg");const vw=w/s,vh=h/s,bb=b||[.5,.5,.5,.5],cx=(bb[0]+bb[2])/2*W,cy=(bb[1]+bb[3])/2*H;
+ const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):kitPicSubj(src);
+ Object.assign(im.style,{width:"",height:"",left:"",top:""});
+ const s=Math.max(w/W,h/H),vw=w/s,vh=h/s,bb=sj||[.5,.5,.5,.5],cx=(bb[0]+bb[2])/2*W,cy=(bb[1]+bb[3])/2*H;
  const px=W-vw>1?Math.min(1,Math.max(0,(cx-vw/2)/(W-vw))):.5,py=H-vh>1?Math.min(1,Math.max(0,(cy-vh/2)/(H-vh))):.5;im.style.objectPosition=`${(px*100).toFixed(1)}% ${(py*100).toFixed(1)}%`}
 window.kitPicFocus=kitPicFocus;
 /* (4) button grid: cols from the area width, short buttons one cell, long ones the cells they need */

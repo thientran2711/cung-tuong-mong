@@ -130,3 +130,22 @@ Note: with the new subject floors some sample contents pick one size larger on t
 - Before (live main) / after shots (looked at): img/_review/kit-size5/goal-homnay-ba-755x1000.jpg · goal-homnay-ba-1180x820.jpg.
 - Still open for the next keeper: items 2 (MIXED place cards on main), 3 (kszItem3 in kitItem), 4 ("Đã hiểu" audit 78/41), 6 (kit page sample); other today/agenda lists to move onto kitAgendaFact (grep kitFacts callers with day lists); ART REQUEST to C: a kit "vacant seat" portrait for an empty Empress seat (today falls back to the stranger silhouette / initial).
 Rollover: context ≈ START + 25 % reached → handover here; the coordinator opens the successor.
+
+## kit-size #7 (sonnet, 16/11 ~21:14Z–) — kit keeper successor; coordinator = MAIN s24 session_01UV1SzkhGPnXNHGPcZCx6Lj
+START_CTX ≈ 4 % of 1M (context_usage read 0; estimate). Rollover at ≈ 29 %, ceiling 60 %. Merged origin/main (b53ba8b9) on top of 25ae41e3.
+
+### (0) FAIL of tin-ba-755x1000 fixed — the event picture FILLS its frame (cover) at every size
+- ROOT CAUSE: `kitPicFocus` (#6) scaled the picture DOWN when the subject box was bigger than the window and padded the rest with a blurred copy (`.kpz`) → faded side strips at M/L/XL. Subject boxes are 0.5–0.9 of the picture and the strip is 3.5:1, so it fired on almost every picture (e.g. KIT_PIC_SUBJ ev-e68-letterhome).
+- FIX (jksize.js, KIT §84 (3) overwritten in place): always `object-fit:cover`; the crop is positioned so the CENTRE of the focal box is the centre of the window (clamped); `.kpz` blur-pad code + CSS deleted. Strip floor height (kszEvMin3) unchanged.
+- WHOLE GROUP, measured with new `dev/test/kit-size7-pics.js` (renders every one of the 329 event pictures in the real v3 frame at S/M/L/XL, strip kind NEWS + event-centred kind NOTICE = 2632 frames per device): Fold 755x1000 and iPad 1180x820 — 329/329 fill at every size and kind, 0 frames padded, subject centre inside the window 100 %, page errors 0. Share of the subject box visible: S 0.93, strip M/L/XL avg 0.56 (min 0.24 — thin strip, the centre of the subject is what is shown), event-centred M/L 0.95, XL 0.87–0.99. (1366x1024 / 412x1058: see below.)
+- Before/after sheets (CDN, looked at): https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-size7/k7-{755x1000,1180x820}-{news,notice}-{1,2}.jpg — rows BEFORE/AFTER per picture (letterhome = the owner's TIN letter, ev-hh-viec, info-lich, act-cat-trang-diem, fest-trungcuu, info-phuc-duyen, fest-newyear, hinh-phat = the 8 worst), columns S M L XL. Wipe img/_review/kit-size7/ after the verdict.
+- Test tools: kit-size7-pics.js (guard), kit-size7-sheet.js + kit-size7-compose.py (sheets).
+
+### Items from the #6 handover
+- Item 4 "Đã hiểu": the 78 literals are DATA; jk4.js:759–770 (and j3.js:32–35) already turn a close-only button (Đã hiểu|Đã rõ|OK|Xong) into nothing (✕ / tap outside closes). Hard-coded `<button>Đã hiểu</button>` remain only in scene-end / mini-game result screens (j82, j92, jexam, jroute, jts, jtd, jtoil, jslap), which OD:L1261 keeps. kit-size5 (20 cases × 2 devices) shows hasDaHieu false on every info frame. No change needed.
+- "Other today/agenda lists → kitAgendaFact": only jtoil.js:189 builds a day list from rows; the Thái hậu / Hoàng thượng "Việc hôm nay" (jhc.js) are act cards (cardH) that already carry pictures. Nothing else to move.
+- Items 2 (MIXED place cards), 3 (kszItem3 in kitItem: ~40 callers, in-flight areas), 6 (kit page sample): NOT done this session — see HANDOVER.
+- ART REQUEST for Foreman C (to append to dev/handover/FOREMAN_C.md as INBOX; I may push review/kit-size only): "INBOX from kit-size #7 (16/11 ~21:40Z) — kit 'vacant seat' portrait: a 3:4 kit portrait (same framing as por-*) of an EMPTY Empress seat (empty throne chair, phoenix screen, no person), used by kitAgendaFact (th/hh rows) and every Hoàng hậu row while the seat is vacant; today it falls back to the stranger silhouette / initial. Name `por-vacant-hh`, transparent frame like the other por-*."
+
+### HANDOVER (next kit-size worker)
+Open: 2, 3, 6 above; coop-e2e + quickcheck result lines are in the READY message to main. Server: node dev/test/cdn-overlay-serve.js 8733 <wt> <empty list>. Rebuild: bash dev/site/build_site.sh.
