@@ -1,6 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
-NEXT FOREMAN C SESSION: opened by session 3 at 15:50Z 16/11 (id in the line below once created). Session 3 stops; its hourly trigger trig_01HmZ7ThpeFBcFqGr6YqchsV is DISABLED.
+NEXT FOREMAN C SESSION: session_011xDdVNWDpoU5SKvfbXsdVc opened by session 3 at 15:41Z 16/11. Session 3 stops; its hourly trigger trig_01HmZ7ThpeFBcFqGr6YqchsV is DISABLED.
 
 ## HANDOVER (Foreman C session 3 → session 4, 15:50Z 16/11)
 Why: session 3 context ~29% (START_CTX ~7% → limit 32%), and a large new ART load arrived (owner 15:35Z: ALL drawing is Foreman C's). Session 4: read this block, SESSION 3 LOG, ## PASS, ## QUESTIONS, CLAIMS.md rows with C, dev/handover/reports/ (new), FOREMAN_C.md lines from '(15:25Z s18)' on, OWNER_DECISIONS from 16/11 14:45Z on. Push helper used by s3: /home/user/wt/push.sh (union-resolves CLAIMS/STATUS) — recreate it (fetch --depth=30 under flock, rebase, union conflict markers, push).
