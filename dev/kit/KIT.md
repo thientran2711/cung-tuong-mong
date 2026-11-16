@@ -390,6 +390,9 @@ Second-layer panels that must open OVER a #modal (item card `#kidfl`, co-op frie
 markup (kpHeader + kit ✕ + T1/T2 body) in their own layer. Scan: `node dev/test/kit-conform.js <url> <out.json> [WxH,...] [maxPend]` opens every
 panel kind + place cards + chapter detail + item card + every PEND dialog, classifies each CONFORMS / MIXED / CUSTOM by template, flags any loose
 float over the tab bar and retired floats in the code; exit 1 on any MIXED / CUSTOM / float. Reviewers run it on every UI branch.
+PERSON OPTION rule (coordinator 16/11): an option row that names a person shows THAT person's portrait in its picture slot (pcPort / kit face,
+stranger = grey kit silhouette), never a generic act / event picture — the scan flags "generic picture on a person option" (fix owner: review/pcard-actrow).
+The scan also opens the less-visited dialogs: outer court (menNtCard), Tranh ghế (contestOpen), lãnh cung, co-op lobby, and a servant life's PEND dialogs.
 
 ## 9. FACTS, ROWS, CHIPS, PEOPLE (j79)
 - `kitFacts(facts,{group})`: `facts` = array of strings (split into sentences) or objects `{who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"}`.
