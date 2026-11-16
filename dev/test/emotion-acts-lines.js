@@ -7,20 +7,22 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof eaDo==='function'&&typeof wkBookData==='function',null,{timeout:120000});await p.waitForTimeout(2000);
  await p.evaluate(`window.__SEEN=${process.env.SEEN?1:0}`);const R=await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}try{trS()}catch(e){}
-  if(window.__SEEN){const s0=KIT_FACEFX.seen;KIT_FACEFX.seen=()=>true}const one={};for(const x of eaPeople()){const k=eaKind(x);if(!one[k])one[k]=x}
+  if(window.__SEEN){KIT_FACEFX.seen=()=>true;S.mat=20;try{k61Know(k61All(),"",true,2)}catch(e){}}const one={};for(const x of eaPeople()){const k=eaKind(x);if(!one[k])one[k]=x}
   const out=[];const txt=f=>String((f&&(f.text||f.t||f.h))||"").replace(/<[^>]+>/g,"");
-  const where=(line)=>{S.wkSnap=Object.assign(wkSnap(),{seq:S.logSeq||0});log(line);const d=wkBookData();
+  /* emotion-acts-3: every line goes the game's own way (eaSay: fog = the book's name rule, ministers → court news); a line not written is reported, not filed */
+  const where=(x,line,toMe)=>{S.wkSnap=Object.assign(wkSnap(),{seq:S.logSeq||0});const n0=S.logSeq||0;eaSay(x,line,toMe);if((S.logSeq||0)===n0)return null;const d=wkBookData();
    const me=(d.me||[]).map(txt).join(" | ");const per=(d.persons||[]).map(x=>{const nm=x.who===S.emp?"[Hoàng thượng]":x.who===S.thO||x.who&&x.who.kind==="th"?"[Thái hậu]":"["+(x.who&&x.who.name)+"]";
      const t=JSON.stringify(x.blocks||x.F||[]).replace(/<[^>]+>/g,"").replace(/\\"/g,"'");return nm+" "+t.slice(0,240)}).join(" | ");const wd=(d.world||[]).map(txt).join(" | ");return{me,per,wd}};
   const broken=s=>/\(\s*[,;]|[,;]\s*\)|\(\s*\)|undefined|NaN/.test(s);
-  const run=(kd,x,lab,h)=>{if(!h)return;const w=where(h);const all=w.me+" "+w.per+" "+w.wd;out.push({kd,lab,line:h.replace(/<[^>]+>/g,""),onMe:!!w.me,me:w.me.slice(0,200),per:w.per.slice(0,200),wd:w.wd.slice(0,120),broken:broken(all)||broken(h)})};
+  const run=(kd,x,lab,h,toMe)=>{if(!h)return;const w=where(x,h,toMe);if(!w){out.push({kd,lab,line:h.replace(/<[^>]+>/g,""),notWritten:1});return}const all=w.me+" "+w.per+" "+w.wd;out.push({kd,lab,line:h.replace(/<[^>]+>/g,""),onMe:!!w.me,me:w.me.slice(0,200),per:w.per.slice(0,200),wd:w.wd.slice(0,120),broken:broken(all)||broken(h)})};
   for(const kd of ["e","t","s","m","o","q","k","c"]){const x=one[kd];if(!x){out.push({kd,lab:"NO PERSON"});continue}
-   for(const r of EA_REACT.filter(r=>r.who===kd)){if(kd==="m")x.eaAway=0;if(kd==="e")x.eaQ=-1;let o=null;try{o=eaDo(x,r)}catch(e){out.push({kd,lab:r.k,err:String(e)});continue}Q.length=0;run(kd,x,"out:"+r.k+":"+r.g,o&&o.h)}
+   for(const r of EA_REACT.filter(r=>r.who===kd)){if(kd==="m")x.eaAway=0;if(kd==="e")x.eaQ=-1;let o=null;try{o=eaDo(x,r)}catch(e){out.push({kd,lab:r.k,err:String(e)});continue}Q.length=0;run(kd,x,"out:"+r.k+":"+r.g,o&&o.h,o&&o.target===S)}
    for(const g of ["gian","buon","so","ghen","vui"]){if(kd==="c")continue;const n=(window.EA_NACT_||null);}
    for(const g of ["gian","buon","so","ghen","vui"]){if(kd==="c")continue;let o=null;try{o=eaDo(x,{k:"act",g,n:"Thử"})}catch(e){}Q.length=0;run(kd,x,"act:"+g,o&&o.h)}
    for(const g of ["gian","buon","so","ghen","vui"]){x.eaX={};const L0=S.logSeq||0;const keep=log;let got="";window.log=function(h){got=h;return keep.apply(this,arguments)};
     try{x.ill=null;if(kd==="t")S.thIll=null;for(let i=0;i<BAL.ea.ext.wk;i++){x.emo={k:g==="ghen"?"ghen":g,v:99,w:wk()};eaExtNpc(x,g)}}catch(e){out.push({kd,lab:"ext:"+g,err:String(e)})}window.log=keep;Q.length=0;
-    if(got){S.logs.shift();S.logSeq--;run(kd,x,"ext:"+g,got)}else out.push({kd,lab:"ext:"+g,line:"(no log line: fog / q tdNews)"})}}
+    if(got){S.logs.shift();S.logSeq--;run(kd,x,"ext:"+g,got,/ngươi/.test(got))}else out.push({kd,lab:"ext:"+g,line:"(no log line: fog / q tdNews)"})}}
   return out});
  let nb=0,nMe=0;for(const r of R){if(r.broken)nb++;if(r.onMe&&r.line&&!/ngươi/.test(r.line))nMe++;if(r.broken||(r.onMe&&r.line&&!/ngươi/.test(r.line)))console.log(JSON.stringify(r))}
+ console.log("WRITTEN",R.filter(r=>r.line&&!r.notWritten&&!/^\(no log/.test(r.line)).length,"NOT WRITTEN (fog / court news)",R.filter(r=>r.notWritten).length);if(process.env.ALL)for(const r of R)console.log("ROW "+JSON.stringify(r));
  console.log("SUMMARY lines",R.length,"broken",nb,"lines about others filed on her own page",nMe,"pageerrors",errs.length,errs.slice(0,3));await b.close();process.exit(nb||nMe||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
