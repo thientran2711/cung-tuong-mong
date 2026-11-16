@@ -56,7 +56,7 @@ function kpmSplit(k){const W=S.where||{};const O={chinh:{ppl:[],n:0,res:[]},dong
 /* her own servants (the people her rooms show, minus consorts, kids, men): they live in the dãy nhà cung nhân */
 function kpmIsSrv(p){return !!p&&!(p.ref&&(rivals||[]).includes(p.ref))&&!["kid","man","emp","th","hh","rival","chest","fallen"].includes(p.kind)}
 function kpmServants(){try{return (homePeople()||[]).filter(kpmIsSrv)}catch(e){return[]}}
-function kpmSil(n,ppl){if(!n)return"";const im=g=>typeof K61U==="object"&&K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:(typeof SILH==="string"?SILH:"");
+function kpmSil(n,ppl){return"";if(!n)return"";const im=g=>typeof K61U==="object"&&K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:(typeof SILH==="string"?SILH:"");
  const L=ppl.map(()=>"f");while(L.length<n)L.push("f");return `<span class="msil" aria-label="${n} bóng người">${L.slice(0,Math.min(n,3)).map(im).join("")}${n>1?`<b>${n}</b>`:""}</span>`}
 function kpmResLine(p){return p===S?"ngươi":`${p.queen?"Hoàng hậu":RANKS[rkOf(p)].n} ${p.name}`}
 
@@ -137,8 +137,6 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .mspot.kpm-spot[data-go="kpm:tay"]{align-items:flex-start}
 .kpmv .mspot.kpm-spot[data-go="kpm:dong"]{align-items:flex-end}
 .kpmv .mspot.kpm-spot .mlab i{font-size:.66rem}
-.kpmv .mspot.kpm-spot .msil{margin-top:3px}
-.kpmv .mspot.kpm-spot .msil svg{width:13px;height:18px}
 .kpmv .kpm-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:8px}
 .kpmv .kpm-list .btn{min-height:44px;white-space:normal;text-align:center}
 .kpmv .kpm-list .btn{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 8px}
@@ -146,7 +144,6 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .kpm-list .kpm-rs{font-size:.8em;opacity:.85;line-height:1.25}
 .kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto;aspect-ratio:1.76/1} /* r3 KIT: frame keeps its 1.76:1 box while the painting loads, so hotspots never collapse under the "‹ Dư đồ" button (iPad FAIL 4) */
 .kpmv .mapw .mapimg{width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:fill!important;display:block}
-.kpmv .ktam{top:6px;bottom:auto} /* the leather crops the lower edge of the painting, so the kit 'tạm' chip (kitTam) sits top-right here */
 .kpmv .kpm-list.one{grid-template-columns:1fr}
 /* kv3:.kv1 */:where(.kv1) .kpmv .kpm-list{grid-template-columns:1fr}
 /* phone landscape (844x390): no room for a readable courtyard + rows; the picture would be a cropped strip with hidden hotspots, so the hall rows stand alone */

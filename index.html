@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"75a8833b+","t":"2026-11-16T22:11Z","c":"review r1: KIT 84.1a note + report","b":"2d8dc6057091","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
+window.CTM_BI={"s":"c4ec5d14+","t":"2026-11-16T22:19Z","c":"review r1: pl-courtyards report","b":"7b72cb0a4fd7","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -605,9 +605,6 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 .game.maptab .maptools>.past .mleg{color:#e8d6b4}
 .game.maptab .maptools .mz{min-height:34px;min-width:34px;margin:0;padding:2px 8px;font-size:.78rem;background:#fff8ecdd;box-shadow:0 2px 6px #0004}
 .game.maptab .maptools .fest{font-size:.66rem}
-.msil{display:inline-flex;align-items:flex-end;gap:1px;background:#1a0e08b8;border-radius:8px;padding:1px 4px;margin-top:2px;pointer-events:none;order:3}
-.msil svg{width:8px;height:11px;fill:#f3e6cf}.msil b{color:#f3e6cf;font-size:.58rem;margin-left:2px;font-weight:600}
-/* kv3:.kv2 */:where(.kv2) .mspot .msil svg{width:10px;height:14px}:where(.kv2) .msil b{font-size:.7rem}
 .tomap{position:absolute;left:8px;bottom:8px;z-index:6;background:#1a0e08c0;color:#ffe7b0;border:1px solid #c9a46a;border-radius:14px;padding:6px 12px;min-height:36px;font-family:var(--display);font-size:.82rem;cursor:pointer;box-shadow:0 2px 8px #0005}
 
 /* full-body figures */
@@ -4112,7 +4109,7 @@ window.voTone=voTone;window.VOT=VOT;window.VOMAP=VOMAP;
 /* ================= THE MAP TAB, FULL SCREEN: the plan fills all between the top bar and the tab bar ================= */
 /* people present show as anonymous silhouettes with a count (hữu duyên: who is there is learned only by going); residents are named inside the palace screen */
 const SILH=`<svg viewBox="0 0 10 14" aria-hidden="true"><circle cx="5" cy="3" r="2.4"/><path d="M1 14c0-4.4 1.6-7.2 4-7.2s4 2.8 4 7.2z"/></svg>`;
-function silChip(n){if(!n)return"";const k=Math.min(n,3);return `<span class="msil" aria-label="${n} bóng người">${SILH.repeat(k)}${n>1?`<b>${n}</b>`:""}</span>`}
+function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span class="msil" aria-label="${n} bóng người">${SILH.repeat(k)}${n>1?`<b>${n}</b>`:""}</span>`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{/* drop the faces of residents and the names in the hover title; add the silhouettes */
   h=h.replace(/<span class="mfaces">[\s\S]*?<\/span><\/button>/g,"</button>");
@@ -4125,8 +4122,8 @@ function silChip(n){if(!n)return"";const k=Math.min(n,3);return `<span class="ms
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
  const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792;const fit=Math.max(1,(sc.clientHeight/Math.max(1,sc.clientWidth))*asp);
- /* KIT 34.1d: the floor zoom is also the smallest at which no two place labels (13 px chips, owner 16/11) touch; the palace detail map (.kpmv) keeps its own layout */
- let fit2=fit;if(!sc.closest(".kpmv")){const cap=fit+2.5;const touch=()=>{const R=[...w.querySelectorAll(".mspot .mlab")].map(l=>l.getBoundingClientRect()).filter(r=>r.width>0);for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)return true}return false};
+ /* KIT 34.1d + §85: the floor zoom is also the smallest at which no two places (label + info row, as ONE box) touch; the palace detail map (.kpmv) keeps its own layout */
+ let fit2=fit;if(!sc.closest(".kpmv")){const cap=fit+3.5;const touch=()=>{const R=[...w.querySelectorAll(".mspot")].map(s=>{const p=[...s.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);if(!p.length)return{width:0};const L=Math.min(...p.map(r=>r.left)),T=Math.min(...p.map(r=>r.top)),R=Math.max(...p.map(r=>r.right)),B=Math.max(...p.map(r=>r.bottom));return{left:L,right:R,top:T,bottom:B,width:R-L}}).filter(r=>r.width>0);for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)return true}return false};
   for(let g=0;g<12;g++){w.style.width=(fit2*100)+"%";if(!touch()||fit2>=cap)break;fit2=Math.min(cap,fit2+.25)}}
  const z=Math.max(fit2,window.__mapZ||fit2);w.style.width=(z*100)+"%";window.__mapFit=fit2;
  const key=S.place+"|"+z.toFixed(2)+"|"+sc.clientWidth;if(window.__mapKey2===key&&window.__mapPos2){sc.scrollLeft=window.__mapPos2[0];sc.scrollTop=window.__mapPos2[1]}
@@ -11646,7 +11643,7 @@ function k61SexAt(k){const W=S.where||{},L=[];for(const v of rivals)if(v.alive&&
  if(k==="tn"&&!S.thDead)L.push("f");if(k==="home"){L.push("f");S.kids.filter(x=>x.alive).forEach(()=>L.push("k"))}if(k==="tyv"||k==="ksp")L.push("m");
  if(k==="lc")for(let i=0;i<Math.max(1,Math.min(3,rivals.filter(v=>v.alive&&v.out).length));i++)L.push("f");
  for(const id in (S.menW||{}))if(S.menW[id]===k&&manById(id))L.push("m");return L}
-function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const im=g=>K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:SILH;
+function k61SilChip(k,n){return"";const L=k61SexAt(k);while(L.length<n)L.push("f");const im=g=>K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:SILH;
  return `<span class="msil" aria-label="${n} bóng người">${L.slice(0,Math.min(n,3)).map(im).join("")}${n>1?`<b>${n}</b>`:""}</span>`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(S&&typeof SILH==="string"&&(K61U["fig-f"]||K61U["fig-m"]||K61U["fig-k"]))
  h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?)<span class="msil" aria-label="(\d+) bóng người">[\s\S]*?<\/span>/g,(all,open,k,n)=>open+k61SilChip(k,+n))}catch(e){}return h}})();
@@ -39915,7 +39912,7 @@ function kpmSplit(k){const W=S.where||{};const O={chinh:{ppl:[],n:0,res:[]},dong
 /* her own servants (the people her rooms show, minus consorts, kids, men): they live in the dãy nhà cung nhân */
 function kpmIsSrv(p){return !!p&&!(p.ref&&(rivals||[]).includes(p.ref))&&!["kid","man","emp","th","hh","rival","chest","fallen"].includes(p.kind)}
 function kpmServants(){try{return (homePeople()||[]).filter(kpmIsSrv)}catch(e){return[]}}
-function kpmSil(n,ppl){if(!n)return"";const im=g=>typeof K61U==="object"&&K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:(typeof SILH==="string"?SILH:"");
+function kpmSil(n,ppl){return"";if(!n)return"";const im=g=>typeof K61U==="object"&&K61U["fig-"+g]?`<svg viewBox="0 0 10 14" aria-hidden="true"><image href="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-${g}.webp" width="10" height="14" preserveAspectRatio="xMidYMax meet"/></svg>`:(typeof SILH==="string"?SILH:"");
  const L=ppl.map(()=>"f");while(L.length<n)L.push("f");return `<span class="msil" aria-label="${n} bóng người">${L.slice(0,Math.min(n,3)).map(im).join("")}${n>1?`<b>${n}</b>`:""}</span>`}
 function kpmResLine(p){return p===S?"ngươi":`${p.queen?"Hoàng hậu":RANKS[rkOf(p)].n} ${p.name}`}
 
@@ -39996,8 +39993,6 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .mspot.kpm-spot[data-go="kpm:tay"]{align-items:flex-start}
 .kpmv .mspot.kpm-spot[data-go="kpm:dong"]{align-items:flex-end}
 .kpmv .mspot.kpm-spot .mlab i{font-size:.66rem}
-.kpmv .mspot.kpm-spot .msil{margin-top:3px}
-.kpmv .mspot.kpm-spot .msil svg{width:13px;height:18px}
 .kpmv .kpm-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:8px}
 .kpmv .kpm-list .btn{min-height:44px;white-space:normal;text-align:center}
 .kpmv .kpm-list .btn{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 8px}
@@ -40005,7 +40000,6 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 .kpmv .kpm-list .kpm-rs{font-size:.8em;opacity:.85;line-height:1.25}
 .kpmv .mapw{position:relative;width:min(100cqw,calc(100cqh * 1.76))!important;height:auto!important;max-width:none!important;flex:0 0 auto;aspect-ratio:1.76/1} /* r3 KIT: frame keeps its 1.76:1 box while the painting loads, so hotspots never collapse under the "‹ Dư đồ" button (iPad FAIL 4) */
 .kpmv .mapw .mapimg{width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:fill!important;display:block}
-.kpmv .ktam{top:6px;bottom:auto} /* the leather crops the lower edge of the painting, so the kit 'tạm' chip (kitTam) sits top-right here */
 .kpmv .kpm-list.one{grid-template-columns:1fr}
 /* kv3:.kv1 */:where(.kv1) .kpmv .kpm-list{grid-template-columns:1fr}
 /* phone landscape (844x390): no room for a readable courtyard + rows; the picture would be a cropped strip with hidden hotspots, so the hall rows stand alone */
@@ -44962,13 +44956,36 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
       Put it inside a position:relative picture box. */
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
 (function(){const st=document.createElement("style");st.textContent=`
-.ktam{position:absolute;bottom:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
+.ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
 `;document.head.appendChild(st)})();
 function kitOffBac(c,fee){if(typeof S!=="undefined"&&S&&S.bac<fee)kitOff(c,kitWhyBac(fee),kitWhenBac());return c}
 /* kit sample page entries */
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§84 greyed option",title:"GREYED OPTION · kitOff (a known option she cannot take: cost / rank / item) — greyed, reason chip in Cần, when it opens again",where:"every dialog option list (VIỆC, visits, place card, teaching); the same ACT CARD frame, disabled",html:()=>`<div style="max-width:560px"><button class="opt" disabled data-kneed="${encodeURIComponent(JSON.stringify([{t:"thiếu 37 bạc (cần 40, có 3) · mở lại khi đủ bạc",ok:false}]))}">Ma ma giáo tập<small>Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -40 · thành: tiến bộ +2..3</small></button></div>`});
  KIT_SAMPLES.push({id:"§84 tạm",title:"STAND-IN MARKER 'tạm' · kitTam(isStandin)",where:"corner of any stand-in picture (courtyard first); gone when the exact picture exists",html:()=>`<div style="position:relative;max-width:360px;height:120px;background:#7a6a55;border-radius:8px">${kitTam(true)}</div>`})}}catch(e){}
+/* jmapc: KIT PART "Dư đồ · họa đồ chú thiêm" (style C, owner 16/11 "kiểu C là đã ok rồi"; KIT §85; art dev: Foreman C, review/map-frame-c).
+   ONE part for every map label: no leather/frame (map full-bleed with a 1 px hairline), each place name on a pale-yellow paper slip
+   (https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip.webp, 9-slice), the info row (.mmeta "N bóng · K khắc") on the same slip, a small "Dư đồ" cartouche, the tools (−, +, Ra vào,
+   Danh sách) in a slim paper band ABOVE the map (cannot cover a label), clipped labels at the pan edge fade out.
+   The dark people-count chip .msil is GONE everywhere (silChip / k61SilChip / kpmSil return ""): the text row is the one info line,
+   shown on every device (Fold too). mapFit (j38) tests each place as ONE box (.mlab + .mmeta). Used by: Dư đồ all zooms, palace detail .kpm-spot. */
+(function(){const st=document.createElement("style");st.textContent=`
+.panel:has(>.kleather) .kleather{padding:0!important;background:none!important;clip-path:none!important;border:0!important;box-shadow:none!important;filter:none!important;-webkit-mask:none!important;mask:none!important;display:flex!important;flex-direction:column}
+.kleather::before,.kleather::after,.kleather>.kl-tone,.kleather>.kl-roll,.kleather>[class*=stitch],.kleather>[class*=roll]{display:none!important}
+html .game .kleather>.maptools{position:static!important;inset:auto!important;flex:none;order:-1;display:flex!important;align-items:center;justify-content:space-between;height:38px;padding:0 6px 0 8px;background:#f7efd6;border-bottom:1px solid #b79a5b99;z-index:5;pointer-events:auto}
+html .game .kleather>.maptools:not(:has(.kpm-back))::before{content:"Dư đồ";display:inline-flex;align-items:center;justify-content:center;width:92px;height:26px;background:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip-cartouche.webp) 0 0/100% 100% no-repeat;font:600 14px/1 var(--display);letter-spacing:.14em;color:#4a2a14;text-indent:.14em;padding-bottom:1px}
+html .game .kleather>.maptools>span:last-child{position:static!important;display:flex;gap:4px}
+html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72rem;background:#fffaf0;border:1px solid #c9a35a;border-radius:6px;box-shadow:none}
+.kleather:not(.kpmv)>.mapsc{flex:1;height:auto!important}
+.kleather>.mapsc{border-radius:0!important;box-shadow:none!important;outline:1px solid #b79a5bcc;outline-offset:-1px}
+.kleather:not(.kpmv)>.mapsc{-webkit-mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);mask-composite:intersect}
+.mspot .mlab{background:none!important;border:solid transparent!important;border-width:3px 7px!important;border-image:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip.webp) 20 22 fill/3px 7px stretch!important;border-radius:0!important;box-shadow:none!important;padding:0 1px!important;filter:drop-shadow(0 1px 1px #3a2a1e66);color:#2a1a12}
+.mspot .mlab i{background:none!important}
+.mspot .mmeta{background:none!important;border:solid transparent!important;border-width:3px 6px!important;border-image:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip.webp) 20 22 fill/3px 6px stretch!important;border-radius:0!important;padding:0!important;filter:drop-shadow(0 1px 1px #3a2a1e55);color:#4a3a2a}
+:where(.kv1) .mspot .mmeta,.mspot .mmeta{display:block!important}
+.mspot .mlab em{display:inline!important}
+`;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§85 họa đồ chú thiêm",title:"DƯ ĐỒ STYLE C · place slip + info row + 'Dư đồ' cartouche (no frame, no figure chip)",where:"Dư đồ (all zooms), palace detail .kpm-spot; same slip everywhere",html:()=>`<div style="position:relative;max-width:420px;padding:24px 16px;background:#cdbb97;border-radius:6px"><div style="display:inline-flex;flex-direction:column;align-items:center"><span class="mspot" style="position:static;border:0;background:none;display:flex;flex-direction:column;align-items:center"><span class="mlab">Càn Ninh cung</span><span class="mmeta">11 bóng · <em class="ok">2 khắc</em></span></span></div></div>`})}catch(e){}
 
 window.__ctmBuilt=1;
 </script>
@@ -44997,7 +45014,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2d8dc6057091";window.CTM_BUILD=BUILD;
+const BUILD="7b72cb0a4fd7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
