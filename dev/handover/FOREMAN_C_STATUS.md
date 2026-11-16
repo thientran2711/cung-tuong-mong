@@ -47,6 +47,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 20:33Z FP v11 (Quý phi A/B in own court robes for BD + NC; bodies on one baseline; NC home fuller build, heads 12.7–13.0 %) checked by C against OD:L1207/1212/1256 → sent to owner.
 - 20:35Z fig-proportion redo v2 (owner-✓ costumes kept, head +15–20 %, shoulders narrower; head 10.2–10.7 % vs ref 9.7–9.8) checked by C → sent to owner; batch waits.
 - 20:38Z pl-night-art: 159/159 tối repainted + on CDN (no code change; old wash was baked into pictures). C check: non-winter pavements read as snow/frost → worker grades them to dry moonlit stone, then done. Map C sample ready in worker's container → asked to push sheet.
+- 20:41Z pl-night-art DONE: 125 non-winter tối graded to grey moonlit stone (C looked: no snow look); 159 on CDN, no code. Worker ARCHIVED.
 
 ## SESSION 6 LOG
 - 17:49Z start (owner-opened, depth 0). Session 5 told to stop + ARCHIVED; its trigger trig_01QgAdMjgXXZm1ovzYPbju1W DELETED; own hourly wake trig_01B8ZVK48GgTwdRJjCS83QdG (:51 each hour). All 10 running C sessions told C = session 6.
