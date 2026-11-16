@@ -1,8 +1,8 @@
 # night-steal-r2 — REVIEW (BIG tier: odds/rules + co-op)
 
 Reviewer: session_01UV1Szie8p57AVPuNpewWQP, opened by MAIN s22 (session_01UV1SzjhT28XQmRt2EHNffg). START_CTX ≈ 3 % of the window.
-Reviewed: review/night-steal-2 @ 609c1bdd0 (+ ed6fcd05 report). Merged onto origin/main ec315daf → review/night-steal-r2
-(conflicts: jbal2 keeps main's BAL.spread + the branch's BAL.relOan/BAL.steal; assemble = main's list + jsteal after j75; index.html/sw.js/assets.json rebuilt by build_site.sh).
+Reviewed: review/night-steal-2 @ 609c1bdd0 (+ ed6fcd05 report). Merged onto origin/main ec315daf, then again onto f03886af (which brought jtwoway, the two-way deed table) → review/night-steal-r2
+(conflicts: jbal2 keeps main's BAL.spread + the branch's BAL.relOan/BAL.steal; assemble = main's list (incl. jtwoway, jst14) + jsteal after j75; index.html/sw.js/assets.json rebuilt by build_site.sh).
 
 ## VERDICT: PASS (see sha in the CLAIMS row / coordinator message) — with finding F1 for a NEW people-life build item
 
@@ -33,6 +33,8 @@ The night-stealing code is equal both ways and one-core. The worker's claim that
   | **pooled** | **378** | **32.3 %** | **5.05** | **1418** | **21.4 %** | **3.68** |
 
   Her row is above the control on every seed. Whole row: her night 29.9 % (408), NPC night 18.0 % (4876), all tries 3.19 / 10 nights ✓ (target ≈ 3).
+  After the second merge (main f03886af with jtwoway), seeds 13000/37000/97000, 60 lives: her 29.1 % vs same-rank control 19.1 % (her night 26.6 %, NPC night 17.4 %,
+  all tries 3.27 / 10) — jtwoway narrowed it a little, the gap stays ≈ 10 pts.
   The worker's "rank-2 probe 25.8 % vs 26.2 %" is a different instrument; the bot (worker's own, 31.7 vs 20.6) and this run agree on a ≈ 11-pt gap.
 
 ## 2. F1 — where the gap comes from (pre-existing, outside this branch; NEW build item, two-way law HANDOVER.md:L46 / OD:L1386)
@@ -53,17 +55,19 @@ Steal outcome with GHEN0 (bot `GHEN0=1`, seeds 13000/37000/97000, 60 lives): her
    Fix direction (whole group): per-target jealousy for everyone (e.g. v.gh[t.id] fed by the same events: nights, gifts, promotions), one formula for her and NPCs.
 2. **BAL.hz** multiplies harm chance only when the target is her (j24.js:13, jts.js:102, j70.js:148). Vừa = ×1 (so not a bias on Vừa), Dễ ×.55 / Khó ×1.1 —
    a difficulty knob, owner-visible decision; noted only.
-3. **Kind acts that never/rarely reach her:** SOC.follow targets liveRivals only (j28 SOC); SOC.mediate only between t and her; SOC.test odds 60 (her) vs 50 (NPC);
+3. **Kind acts that never/rarely reach her:** main's jtwoway (merged here) already made mediate / test / provoke / humiliate shared deeds with one cost and
+   one odds (test 55 % for everyone). Still open: "Nương theo" (follow) picks its target from liveRivals only — never her (jtwoway.js:89 twFollowT);
    NPC gift / handmade-work thresholds `v.rel>5` for her vs `rel>0` for NPCs (j8.js:388, j83.js:205); q72Npc errands only NPC↔NPC (j72.js:209);
    affAdd "trust" scaling only on rises toward her (j28.js:67, avg ≈ 1). NPC "kết giao" toward her is a dialog she answers (j24.js:25) — the passive bot
    discards it, which is the fair "her position" part.
    tsLeNpc guests exclude her because she gets the invite panel (jts.js:159–181) — equivalent, OK.
 
 ## 3. Tests (merged build)
-- unit `night-steal-unit.js`: 29/29, 6 runs in a row, 0 page errors. **Reviewer fix:** the test was a coin flip (before: 27–29/29 on both the merged
-  and the unmerged branch build) — oSteal forced to 95 (5 % loss) and her cycle days (jcycle cyTray) could block her try; now odds 100 + force() on the
-  ledger test + `S.cyb={lie:wk()}` in reset(). Game code unchanged by this.
-- old save `night-steal-oldsave.js` (origin/main ec315daf build → r2): PASS, 0 errors.
+- unit `night-steal-unit.js`: 29/29 on 10 runs in a row (final build), 0 page errors. **Reviewer fix (test only, game code unchanged):** the test was a coin flip
+  (before: 25–29/29 on both the merged and the unmerged branch build): forced odds 95 / 5 left 5 % wrong outcomes → 100 / .001; the ledger test was not forced → force();
+  her cycle (jcycle, by tuần) could block her try → reset() moves S.tuan off her cycle tuần; R0 was liveRivals(false) while stealPass draws from liveRivals(true),
+  so a thief outside R0 kept un-reset Đức/Sức → R0 = liveRivals(true).
+- old save `night-steal-oldsave.js` (origin/main ec315daf build → r2, and again f03886af → final r2): PASS, 0 errors.
 - co-op `coop-e2e.js` (Fold host + iPad guest, live Worker): 59/59, 0 page errors (fold / ipad / solo).
 - shots `night-steal-shot.js` 755x1000 + 1180x820 (+1366x1024): steal result "Thẻ bài của ta được lật · … Đêm nay: <thief>", 0 page errors; no UI change in
   this branch (the pre-existing jflip label overlap on Fold from r1 is still a KIT REQUEST for the kit keeper, not this branch).
@@ -71,4 +75,4 @@ Steal outcome with GHEN0 (bot `GHEN0=1`, seeds 13000/37000/97000, 60 lives): her
 - Bot gains `GHEN0=1` (counterfactual) for the F1 follow-up.
 
 ## Branch state
-review/night-steal-r2 = merge onto origin/main ec315daf + reviewer fixes (jbal2 comment, unit test determinism, bot GHEN0, relprobe) + this report; site rebuilt. Not pushed to main.
+review/night-steal-r2 = merges onto origin/main ec315daf and f03886af + reviewer fixes (jbal2 comment, unit test determinism, bot GHEN0, relprobe) + this report; site rebuilt. Not pushed to main.

@@ -7,8 +7,8 @@ const {chromium}=require('playwright');const path=require('path');
  const R=await p.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([c?"PASS":"FAIL",n,x==null?"":JSON.stringify(x)]);
   window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
-  const R0=liveRivals(false).filter(v=>!v.coop);const keep=JSON.stringify(BAL.steal);
-  const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={lie:wk()}};  /* r2: her cycle days never block a test try; tries forced to win (odds 100) so the unit run is not a coin flip */
+  const R0=liveRivals(true).filter(v=>!v.coop);/* r2: the same list stealPass draws from, so reset() covers every possible thief */const keep=JSON.stringify(BAL.steal);
+  const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3};  /* r2: her cycle (jcycle, by tuần) is never on during a test try; forced tries use odds 100 / .001 (still wanted, never won) so the unit run is not a coin flip */
   const force=()=>{BAL.steal.k=1e6;BAL.steal.pMax=1;BAL.steal.maxTry=1};const o0=oSteal;
   /* 1 · one core: the act costs read BAL.steal (ACT, deck cards, stealNight) */
   ok("ACT steal/road cost = BAL.steal.cost",JSON.stringify(ACT.steal.c)===JSON.stringify({duc:-BAL.steal.cost.feign.duc})&&JSON.stringify(ACT.road.c)===JSON.stringify({suc:-BAL.steal.cost.road.suc}),[ACT.steal.c,ACT.road.c]);
@@ -39,14 +39,14 @@ const {chromium}=require('playwright');const path=require('path');
   v.sung=10;v.rank=1;S.tonight=t;const pq=stealWant(v,t).p;ok("try chance ≤ pMax",pq<=BAL.steal.pMax);
   Object.assign(v,{sung:sav.sung,rank:sav.rank,kids:sav.kids,rl:sav.rl,ro:sav.ro});Math.random=M;
   /* 6 · no hatred needed: an NPC with zero oán/ill-will toward the holder still tries out of ambition */
-  reset();force();oSteal=function(){return 5};for(const x of R0){x.ro={};x.rl={};x.oan=0;x.rel=0;x.ghen=0}S.tonight="me";r=stealPass(S,{live:true});
+  reset();force();oSteal=function(){return .001};for(const x of R0){x.ro={};x.rl={};x.oan=0;x.rel=0;x.ghen=0}S.tonight="me";r=stealPass(S,{live:true});
   ok("an NPC with no hatred at all still tries (self-interest)",r.tries===1,{tries:r.tries});
   ok("a failed try against her is told to her (log/news) and she keeps the night",tonightOf()===S);
   /* 7 · ledger (not played) night: notice lines only, no dialog */
   reset();force();oSteal=function(){return 100};S.tonight=A;Q.length=0;r=stealPass(A,{live:false});
   ok("ledger night (live:false): returns notice lines, pushes no dialog",r.lines.length===1&&Q.length===0&&r.holder!==A,{lines:r.lines});
   /* 8 · maxTry */
-  reset();Object.assign(BAL.steal,JSON.parse(keep));BAL.steal.k=1e6;BAL.steal.pMax=1;BAL.steal.maxTry=2;oSteal=function(){return 5};S.tonight=A;r=stealPass(A,{live:true});
+  reset();Object.assign(BAL.steal,JSON.parse(keep));BAL.steal.k=1e6;BAL.steal.pMax=1;BAL.steal.maxTry=2;oSteal=function(){return .001};S.tonight=A;r=stealPass(A,{live:true});
   ok("at most maxTry tries a night",r.tries===2,{tries:r.tries});
   /* 9 · co-op guest seat: only tries against the guest herself */
   reset();window.COOPW=window.COOPW||{};const cw={on:COOPW.on,seat:COOPW.seat};COOPW.on=true;COOPW.seat="b";S.tonight=A;r=stealPass(A,{live:true});
