@@ -161,3 +161,4 @@
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
 | nw-poem reviewer | review/nw-poem-r1 | B | session_01N1tNP6KZ44Worq4v7zxTjS (sonnet) | RUNNING | 16/11 11:47Z |
 | skin-light: owner bug player vs maid skin/light mismatch on stage (whole figure group, one kit light) | review/skin-light | main s15 | session_01UV1SzinoxqBjmDnBtQQBku (opus) | RUNNING | 16/11 11:53Z |
+| cardflip-glow2: owner bug thị tẩm frame = whole-frame glow, no chasing light (kit-wide) | review/cardflip-glow2 | main s15 | session_01UV1SzhKvfZJ5FbwZFnCStj (sonnet) | RUNNING | 16/11 11:55Z |
