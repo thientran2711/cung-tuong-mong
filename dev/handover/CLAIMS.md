@@ -17,3 +17,5 @@
 | reign-road reviewer | review/reign-road-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | mortality | review/mortality | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | outside-r2-r2 reviewer | review/outside-r2-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | RUNNING | 16/11 05:19Z |
+| D34 review | review/scheme-games-port-r1 | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | RUNNING | 16/11 05:19Z |

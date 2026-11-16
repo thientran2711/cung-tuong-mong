@@ -1,4 +1,18 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
+ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
+last wake: 11/16/2026 05:19Z
+Context: session B1 started small (~30k tokens); now far past start+25% → ROLLED OVER to a new Foreman B session (see HANDOVER).
+
+## HANDOVER (Foreman B session 1 → session 2, 11/16/2026 05:19Z)
+- Slice B state: 24 PASS (20 LIVE on main via trains 1–3). PASS not yet on main: routes-port-r1 (D33, conditional loi-rieng §6.1), chapter-detail-r1 (C24), tuduc-mg-r1 (C41), difficulty-port-r1 (D31, conditional .kdiff override). Full shas under ## PASS.
+- Still running as OLD in-session agents of session 1 (they finish on their own; if no report file appears within ~2 h, re-open from the pushed branch/PROGRESS as a separate session):
+  * C41b tuduc-pic — branch review/tuduc-pic (from tuduc-mg-r1 + main; pass TD_BG as pic in jtd tdPlay → picture-left frame). Needs a reviewer when "SẴN SÀNG KIỂM".
+  * D34 reviewer — branch review/scheme-games-port-r1 for review/scheme-games-port @7a581aed. Result → PASS/FAIL line here.
+- Blocked: D36 rank-port (KIT REQUEST podium + person-dialog chips, see KIT KEEPER NEEDED), D41 promote-servants (waits for Foreman C D29 schedules/roster).
+- Open owner questions: Q3, Q5, Q6, Q8–Q20, Q22, Q23 (Q1, Q4, Q7, Q21 resolved). C7 notes for Foreman C: D31, D33, Q8, Q16.
+- Tools on the box: /home/user/wt/{PREAMBLE.txt, REVIEWER.txt, WORKER_B.txt, REPORT_B.txt, RESUME_B.txt, stpush.sh}. New session has its own container: copy the briefs from dev/handover/ (PREAMBLE.txt, REVIEWER.txt) + this file's rules; workers now run as separate sessions writing dev/handover/reports/<branch>.md.
+- Cloudflare: works on account B's environment (token re-saved 11/16).
+
 Updated: 11/16/2026 04:53Z — 20 of 21 Foreman B PASSes are LIVE (trains 1–3). Waiting for fast-forward: routes-port-r1 (conditional: loi-rieng category). Running: worker D31 difficulty-port + reviewers C24 chapter-detail, D34 scheme-games-port, C41 tuduc-mg. Blocked: D36 (KIT REQUEST podium), D41 (Foreman C D29). Free slots: 8 — coordinator may add items.
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner re-saved the token 11/16; R2 listing verified).
 
