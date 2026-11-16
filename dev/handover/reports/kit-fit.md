@@ -1,4 +1,54 @@
-SẴN SÀNG KIỂM e383a4dd7
+SẴN SÀNG KIỂM b62028a82 (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
+
+# ROUND 2 — kit keeper successor for MAIN s22 (16/11)
+START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 (clean) + round-2 kit changes; site rebuilt + committed.
+
+## What changed (kit parts only)
+1. **§32.2b equal gaps, whole group** (owner s21/s22: every full figure in a frame):
+   - Week book person page — `kitBookFigClamp` (jsl): lines = running-head rule `.kbk-rh` ↔ the page frame's bottom line (art pages: painted
+     border inner edge `KBK_ART_LINE.b` = 2.44 % of page height, measured on book-right.webp; plain pages: the drawn `.kbk-in` frame). Figure
+     raised by half the difference, never past its column floor (page-number row) or top. Size rule §34.6 unchanged.
+   - Identity card — `kpIdLay` (j79, §28.11a overwritten in place): painted figure centred between screen top/bottom (spread) or screen
+     top/panel top (one page, `kitView().pages===1`). ROOT CAUSE found on Fold: kpIdLay's own `W<600` phone test disagreed with the CSS
+     `html.kv1` one-page rule, so Fold 755x1000 drew a 176 px figure in a 98 px strip at the bottom-left; now the figure stands above the panel.
+   - Coach / tip dialog + every #modal person column were done in round 1.
+2. **KIT SLOT ROW `.kslot` compact** (j74; KIT.md "KIT SLOT ROW" under §29 Chọn sổ; kit page sample "§29 slot"): slot name as a 6.4em label
+   column on the left; info as label+value pairs flowing on lines (a pair never splits, no word-by-word wrap) ON TOP, buttons in ONE row
+   BELOW. NOTE: the request suggested "info left, buttons right"; I did NOT do that — the owner ruled 16/11 (OD:1178) "info rows on top,
+   buttons below" after a side-by-side slot card wrapped values word by word. Same part for sổ, rooms, Sổ mây card, Nhập ám hiệu.
+3. **§67 card flip** (jflip): ROOT CAUSE of the Fold bug: `.kcf-mine` is both the glow `<i>` on her card and the overlay class on her nights;
+   the glow CSS (absolute, 83 % × 54 % box) hit the OVERLAY → the whole scene shrank into a box with tray, cards and labels piled under the
+   raised card. CSS now `i.kcf-mine`. Plus `coverTags` hides every other card's tag that meets the picked card's final centre rect or the
+   result chip (after the chip shows, again after its pop) — the faded "Quý nhân" under "Quý phi ???" on iPad.
+
+## Measurements (dev/test/kit-fit2.js, CSS px) — BEFORE (this branch before round 2) → AFTER
+| case | 755x1000 before | 755x1000 after | 1180x820 before | 1180x820 after |
+|---|---|---|---|---|
+| book gap top/bot | 57/38 | 49/47 | 47/35 | 40/41 |
+| id gap top/bot | 812/−696 (176 px figure in a strip) | 15/14 (above panel) | 121/10 | 66/65 |
+| slots (Một mình) panel scroll | 0 (row 144) | 0 (row 83) | 99 px (panel 574) | 0 (panel 482 of 574) |
+| slotsco (Cùng hảo hữu) scroll | 97 px (row 186) | 0 (row 102) | 223 px | 0 (panel 542) |
+| flip me: tags over pick/chip/each other | 2 / 0 / 0 (scene shrunk) | 0/0/0 | 2 / 0 / 2 | 0/0/0 |
+| flip other | 2 / 0 / 0 | 0/0/0 | 3 / 0 / 1 | 0/0/0 |
+Extra sizes (after): id 412x1058 17/16, 1366x1024 82/82; book 412x1058 31/31, 1366x1024 39/39 (older line definition).
+Room for the Sổ mây card (review/chonso-cloud, not merged here): Một mình panel 482 + one card ≈ 87 = ~569 ≤ 574 on iPad. Its Cùng hảo hữu
+tab adds a "Nhập ám hiệu" card (~66 px) → ~608 > 574: that tab would scroll ~34 px on iPad (Fold none). Rooms show 5 pairs (3 lines).
+
+## Tests
+- kit-fit2.js (new): AFTER 0 violations, 0 page errors (755x1000 + 1180x820; id/book also 412x1058 + 1366x1024). BEFORE 12.
+- kit-fit.js (round 1, 30 cases): 0 violations, 0 page errors (both sizes).
+- kit-conform: 755 CONFORMS 87 / MISSING 15, 1180 CONFORMS 86 / MISSING 16, MIXED 0, CUSTOM 0, floats none (MISSING = stale place-tap cases as in round 1).
+- Old save: ts-oldsave main build → this build: loads, 12 weeks, 0 page errors.
+- media-check: 0 width breakpoints.
+
+## Before | after shots (labelled, full screen) — dev/handover/reports/kit-fit/r2-<case>-<WxH>.jpg
+book, id, slots, slotsco, flipme, flipother × 755x1000 / 1180x820 (12).
+
+## Not done / notes
+- Card-flip demo shows cards of a fresh life (few rivals); 12-card trays with long names were not reached in this run.
+- review/chonso-cloud must be merged after this (it touches j74 drawSlots; its .kslot cards inherit the compact row with no change).
+
+(round 1) SẴN SÀNG KIỂM e383a4dd7
 
 # kit-fit (kit keeper, opus) — owner bugs 16/11 s21 (2) figure gaps + (3) option empty space
 START_CTX ≈ 5 % (context_usage read 0; estimate). Branch review/kit-fit off origin/main b7c5d787e. Owner screen: dev/handover/refs/owner-viec-thanhminh.jpg (docs branch).
