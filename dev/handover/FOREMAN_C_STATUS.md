@@ -6,7 +6,7 @@ Base main at start: 900ace7fb.
 | Item | Branch | Model | State |
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | LIVE (train-2) |
-| A7 cycle review | review/cycle-r1 @7ea3ec447 → review/cycle-r2 | opus | PASS ON HOLD — owner fixes (FOREMAN_C.md note): (1) Xem sổ / Xem lén sổ nguyệt sự as HÀNH SỰ deck cards; (2) monthly period popup (maid asks: báo đúng / lùi / sớm / giấu). RUNNING (opus worker on cycle-r2) |
+| A7 cycle review | review/cycle-r2 @7d57639e8 (owner fixes: 2 Hành sự deck cards + monthly maid report pop-up báo đúng/lùi/sớm/giấu, BAL.cyc.rep) → review/cycle-r3 | opus | REVIEWING (worker SẴN SÀNG KIỂM; cycle.js 5 viewports, thaiy 49/49, coop-e2e 59/59) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
@@ -80,6 +80,8 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - NOTE for session 8 / B2 outside-r2 (D48 art ready on CDN, Foreman C did not touch jkc.js): (1) SCIMG kcKhue:'kc-khue', kcSanh:'kc-sanh', kcThu:'kc-thu', kcMe:'kc-me', kcDi:'kc-di', kcVuon:'kc-vuon', kcTu:'kc-tu', kcHoc:'kc-hoc', kcChua:'kc-chua', kcCho:'kc-cho', kcTra:'kc-tra', kcSach:'kc-sach', kcHau:'kc-hau' (check feet on floor line); (2) Huynh: load img/FIGURES-huynh.json like congtu, fid 'man:huynh-1'/'man:huynh-2', band via figBest, replacing 'man:thive-*'; (3) Dư đồ: map-kc-nha.webp + map-kc-hotspots-nha.json (Trong phủ) and map-kc-kinh.webp + map-kc-hotspots-kinh.json (Kinh thành), palace map-hotspots schema — showing a map is a kit part decision (kit keeper). Maps are 440/467 KB (palace map 393 KB). Not drawn: bến sông, ngoại ô, Thần Võ môn scenes; mother/grandmother/di nương portraits.
 - KIT REQUEST K10 (D45 small-art-wire-r1, reviewer fix): one CSS rule in j93.js after the .km-long.km-done rules — .kmrew.km-long.km-done{max-height:calc(100dvh - 12px)} + .km-long.km-done .kmlist{flex:0 1 auto;min-height:0;max-height:none} — so a 10-icon rank chest still fits at 1000x755 with Nhận visible (list scrolls). Applies only to lists >6 rows. Kit keeper please confirm.
 - Test debt (FYI): dev/test/inv-grade.js is stale vs the current pick-list UI (fails on main too: roulette overlay blocks Đeo tay slot, then waits for #modal [data-kinvact="wear"]).
+- KIT REQUEST K11 (A7 cycle-r2): option cards in a scrolling person dialog can't grow taller than ~130px at 755x1000 — jopic.js:161 sets min-height: calc(var(--kah)+18px) !important on button.ka.kart.kopt, overriding jk4's min-height:max-content; when the list scrolls, grid rows collapse and a tall card's rows spill over the next. Suggested: min-height:max(calc(var(--kah)+18px),max-content) or grid-auto-rows:max-content on that list. (cycle-r2 worked around it with the hint style.)
+- Art gap (A7): the 2 new Hành sự cards 'Xem sổ nguyệt sự' / 'Xem lén sổ nguyệt sự' use the §59 placeholder → Foreman C art slot later.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
