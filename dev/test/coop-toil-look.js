@@ -104,10 +104,15 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  await same('no sitting (mặt mộc)');
  await sit(A,{score:72,look:"diem",col:{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den",want:"diem",seed:1}});await sit(B,{score:30,look:"vung",col:{seed:2}});
  const [d1,,d2]=await same('A diêm dúa · B vụng');ok(d1.face==="diem"&&d2.face==="vung","face layer reads diêm dúa / vụng on both seats",[d1.face,d2.face]);
+ /* review r1: shots of each seat with the friend's page open (OUT is outside the repo). Check, not asserted: her portrait stays a silhouette
+    until met (k61 rule), so her makeup shows where her picture is drawn (stage); the data check above is the binding one. */
+ const look=async(o,n)=>{await clear(o);await ev(o,()=>{const f=rivals.find(v=>v.coop);tab='rv';PG.rv=rivals.indexOf(f);render()});await sleep(1500);await shot(o,n)};
+ await look(A,'07-friend-look');await look(B,'07-friend-look');
  await sit(A,{score:90,look:"dep"});await sit(B,{score:55,look:null});await same('A tuyệt · B vừa');
  /* A puts on another dress (worn set wd): B's dress verdict for A follows */
  const wdA=await ev(A,()=>{const w=wdOf(S);const L=Object.keys(WD_ITEMS||{}).filter(k=>WD_ITEMS[k].sl==="y"&&(!w.y||w.y.k!==k));const k=L[L.length-1];if(k)w.y={k,from:"test"};render();return k||""});
  if(wdA){await same('A in another dress ('+wdA+')');let wa,wb;for(let i=0;i<30;i++){wa=await ev(A,()=>JSON.stringify(S.wd));wb=await ev(B,()=>JSON.stringify((rivals.find(v=>v.coop)||{}).wd));if(wa===wb)break;await sleep(300)}await same('A in another dress, relayed');ok(wa===wb,'B holds A\'s worn clothes (wd relay)',[wa,wb])}else ok(false,'no other dress to try');
- /* one buổi later, still the same (the pos relay keeps it; the week merge carries LOOK toilette + wd) */
+ /* review r1: one merged week later, still the same on both seats (the week merge carries LOOK toilette + wd; a new week = mặt mộc) */
+ await weekBoth(A,B,1);await same('after the merged week');
  for(const o of [A,B]){ok(!o.errs.length,o.name+' no page errors',o.errs.slice(0,4))}
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

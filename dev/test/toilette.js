@@ -56,7 +56,8 @@ fs.mkdirSync(DIR,{recursive:true});
  await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/toil-${tag}-5-result.jpg`,quality:70});
  out.rec=await p.evaluate(()=>S.toilette);
  /* D28: the final-look reveal comes first: tap through it (skip to zoom, close) */
- for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov').catch(()=>{});await p.waitForTimeout(700)}
+ /* KIT 81 (OD:L1261): the zoomed face ends with ONE kit button (.kmend); a tap on the overlay only zooms (review diemtrang-coop-look-r1: the old tap-only loop hung on #toildone) */
+ for(let i=0;i<6&&await p.$('.ktrv');i++){if(await p.$('.ktrv-ov .kmend'))await p.click('.ktrv-ov .kmend').catch(()=>{});else await p.click('.ktrv-ov').catch(()=>{});await p.waitForTimeout(900)}
 
  await require('./lib/roulette').clearMoments(p);await p.waitForSelector('#toildone');await p.click('#toildone');await p.waitForTimeout(600);
  out.chip2=await p.evaluate(()=>{const c=document.querySelector('#k3tt [data-k3="toil"]');return c?c.textContent:null});
