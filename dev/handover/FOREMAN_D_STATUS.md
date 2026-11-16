@@ -8,12 +8,12 @@ main at start = eba64ead4.
 | Item | Branch | Model | State |
 |---|---|---|---|
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r2 @70119a805 → review/newgame-ui-r3 | sonnet | RUNNING (reviewer) |
-| D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | RUNNING (reviewer) |
-| C43 coop-invite-ux | review/coop-invite-ux | sonnet | RUNNING |
+| D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → separate reviewer session RUNNING |
+| C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session RUNNING |
 | C44 cloud-save (Sổ mây) | review/cloud-save | opus | RUNNING (client + Worker code + local tests; DEPLOY → Foreman C) |
 | D50 consort placeholder frame in dialog person column | review/dlg-fig-ph | sonnet | RUNNING |
 | balance-after-truth re-run | review/balance-after-truth | opus | RUNNING |
-| reign-road review | review/reign-road @c0e6f7d25 → review/reign-road-r1 | opus | RUNNING (reviewer; first checks no other reviewer pushed) |
+| reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
 | C3 art-complete part 2 | review/art-complete | — | MOVED to Foreman C (owner Q-D1 answer, s9) |
 | D51 fxkit follow-ups | — | sonnet | sprites MOVED to Foreman C; D keeps call-site wiring → WAITING for C's sprites on a review/* branch |
 | D52 skin-match audit | review/skin-audit | — | NOT TAKEN: already RUNNING under Foreman C (FOREMAN_C_STATUS.md) — no double work |
@@ -31,7 +31,8 @@ main at start = eba64ead4.
 
 ## QUESTIONS
 - (answered, see HANDOVER) Q-D1.
-- NOTE for main chat: review/reign-road-r1 is claimed twice in CLAIMS.md (main s8 subagent AND D s1 agent). Whoever pushes first wins; the other should stop. D will not re-open it.
+- FOR MAIN CHAT, BEFORE MERGING review/reign-road-r1 (fa201bbe0/0a311183): D's duplicate reviewer found 2 FAILs r1 misses (reports/reign-road-r1b.md): (1) Triều cục faction rows show unknown consorts as "Quý phi ???" → cherry-pick the jreign.js hunk of 3eb2c956d + rebuild site; (2) at 755x1000, 26/153 option hints overflow the fixed 130px .opts.k3rows card → shorten hints or KIT REQUEST (k3rows rows grow with content). Kit keeper decides (2).
+- (resolved) review/reign-road-r1 was claimed twice in CLAIMS.md (main s8 subagent AND D s1 agent). Whoever pushes first wins; the other should stop. D will not re-open it.
 - Q-D1 (for the main coordinator / owner): account D has NO Magnific and NO Cloudflare connector. Blocked until connected: C3, D51 sprites, D54, D56, fig-hd-upscale, face-sharp-hd2, and the C44 Worker deploy. Can the owner connect both on account D, or should these art items go back to an account that has them?
 
 ## HANDOVER (Foreman D s1 → s2, 16/11 05:19Z; reason: the s1 chat was summarised → rollover rule) — s2 = session_01DgYSWq6iuqbu5Vkmq1qN59 (opened 05:22Z); s1 hourly wake deleted, s2 owns the watch
