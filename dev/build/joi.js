@@ -103,13 +103,15 @@ function oiSel(home){const k=oiK();const o=S.origin||{};const top=o.r||0;const K
 function oiAlso(){try{return entCtx({}).also||""}catch(e){return"Sắc, Tài, Đức, tài nghệ"}}
 function oiPanelSpec(P,i,n,home){const k=oiK();const [src,txt0,cap]=P;const txt=oiT(txt0);const last=i===n-1;
  const tone=typeof kitPhTone==="function"?kitPhTone(txt):"light";const fb=(typeof KIT_PH!=="undefined"&&KIT_PH.ev&&KIT_PH.ev[tone])||"img/ph-event-light.webp";
- /* §59: a key not on the CDN index (KIT_CDNHAVE, kitPhOnCdn) shows the placeholder at once; the onerror fallback stays for the rest */
+ /* §59: a key not on the CDN index (KIT_CDNHAVE, kitPhOnCdn) shows the placeholder at once */
  let on=true;try{on=typeof kitPhOnCdn!=="function"||kitPhOnCdn(src)}catch(e){}
- const pic=typeof kitSceneArt==="function"?kitSceneArt(on?src:fb,cap||"",{shape:"wide",fb}):"";
  let tail="";if(last){const X=oiSel(home);tail=kitTiles([["Xuất thân",S.origin.n],["Cao nhất kỳ này",X.top],[home?"Rồi sẽ qua":"Sắp qua",X.head],["Xét theo",oiAlso()]])}
- return{scene:true,kind:"notice",title:`Tiền truyện · ${S.origin.n}`,sub:`${i+1}/${n}`,html:pic+`<p>${txt}</p>`+tail,cls:"koi",btn:last?(home?"Tiếp theo":k==="cnv"?"Theo ma ma":"Vào cung"):"Tiếp theo",
+ /* reviewer origin-intros-r1: each panel is the kit STORY CARD, the same form as jentry's "Tiền truyện" card and every story event card
+    (card art → KIT event picture dialog band .kdlgart, her full-body figure, text, ONE button); a private 16:9 block in a scene panel
+    pushed the narration off screen at 844x390 and cut the tiles at 1000x755 (KIT §14 / kit consistency of event pictures) */
+ return{t:`Tiền truyện · ${S.origin.n} · ${i+1}/${n}`,who:pMe(),art:on?src:fb,h:`<p>${txt}</p>`+tail,btn:last?(home?"Tiếp theo":k==="cnv"?"Theo ma ma":"Vào cung"):"Tiếp theo",
   onClose:last&&!home?()=>{try{oiGate("dir")}catch(e){console.error(e)}}:null}}
-function oiBuild(home){const L=oiPanels(home);return L.map((P,i)=>{const sp=oiPanelSpec(P,i,L.length,home);const m=kitPanel(sp);const j=Q.indexOf(m);if(j>=0)Q.splice(j,1);m.oiP=i+1;m.entI=1;return m})}
+function oiBuild(home){const L=oiPanels(home);return L.map((P,i)=>{const m=oiPanelSpec(P,i,L.length,home);m.oiP=i+1;m.entI=1;return m})}
 /* after jentry (it put ONE "Tiền truyện" card, or the origin painting on the home road's first card): the panels take that place */
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
  try{if(was&&S&&!S.dead&&!S.oiV&&OI_TXT[oiK()]){S.oiV=OI_V;const home=!!S.kc;const P=oiBuild(home);

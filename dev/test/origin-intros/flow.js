@@ -1,4 +1,4 @@
-/* review/origin-intros: every origin, one road: new life → intro panels (kit scene panel, picture frame with §59 fallback, n/N, last panel
+/* review/origin-intros (reviewer r1: each panel is the kit story card — picture band #mb > .kdlgart, text in #mb): every origin, one road: new life → intro panels (kit scene panel, picture frame with §59 fallback, n/N, last panel
    kitTiles) → the selection named for its road (consorts "Tuyển chọn", hòa thân "Lễ ra mắt", cn "Xét phong danh phận", cnv "Tuyển cung nữ")
    → "Để tài nghệ quyết định" → "Nhập cung" card with a "Vì sao" row → entry scene (ONE button) → the first day (two buổi played).
    Home road (road=nha): panels 1, 2, h3 then the home road's own first card; the reason is checked by forcing the road's entry
@@ -25,13 +25,13 @@ const HEAD={nc:'Lễ ra mắt',bd:'Lễ ra mắt',cn:'Xét phong danh phận',cn
   const want=ROAD==='nha'?3:4;const pan=[];
   for(let i=0;i<want+1;i++){for(let w=0;w<48&&await p.evaluate(()=>{const im=document.querySelector('#modal figure.ksart img');return !!(im&&!(im.complete&&im.naturalWidth&&im.dataset.fb==='1')&&!(im.complete&&im.naturalWidth))});w++)await sleep(250);
    const s=await p.evaluate(()=>{const m=Q[0];if(!m||!m.oiP)return null;const M=document.getElementById('modal');const d=M.querySelector('.dlg');const fig=d&&d.querySelector('figure.ksart');const img=fig&&fig.querySelector('img');const shown=!!(img&&img.complete&&img.naturalWidth);
-     const r=d.getBoundingClientRect();return{n:m.oiP,t:m.t,scene:M.classList.contains('kpscene'),sub:(d.querySelector('.kph')||{}).innerText||'',fig:!!fig,src:img?img.getAttribute('src'):'',shown,txt:(d.querySelector('#mb p')||{}).textContent||'',tiles:d.querySelectorAll('.kst-tile').length,
+     const r=d.getBoundingClientRect();return{n:m.oiP,t:m.t,scene:!!d.querySelector('#mb > .kdlgart'),sub:(d.querySelector('.kph')||{}).innerText||'',fig:!!fig,src:img?img.getAttribute('src'):'',shown,txt:(d.querySelector('#mb')||{}).innerText||'',tiles:d.querySelectorAll('.kst-tile').length,
       btn:(document.getElementById('mclose')||{}).textContent||'',fit:r.bottom<=innerHeight+1&&r.right<=innerWidth+1&&r.top>=-1,ovx:document.documentElement.scrollWidth>innerWidth+1}});
    if(!s)break;pan.push(s);if(SH&&(s.n===1||s.n===want))await p.screenshot({path:`${SH}/oi-${o}-${ROAD}-${s.n}-${W}.jpg`,type:'jpeg',quality:50});
    await p.evaluate(()=>document.getElementById('mclose').click());await sleep(500)}
   R.panels=pan.map(x=>({n:x.n,src:x.src.replace(/^.*img\//,'img/'),btn:x.btn,tiles:x.tiles,fit:x.fit}));
   if(pan.length!==want)f.push(`panels ${pan.length}/${want}`);
-  pan.forEach((x,i)=>{if(!x.scene)f.push('not scene panel '+x.n);if(!x.fig)f.push('no picture frame '+x.n);if(!/img\/(intro\/|ph-event)/.test(x.src)||!x.shown)f.push('picture '+x.src+(x.shown?'':' not shown'));if(!x.txt||x.txt.length<20)f.push('no narration '+x.n);
+  pan.forEach((x,i)=>{if(!x.scene)f.push('no kit picture band '+x.n);if(!x.fig)f.push('no picture frame '+x.n);if(!/img\/(intro\/|ph-event)/.test(x.src)||!x.shown)f.push('picture '+x.src+(x.shown?'':' not shown'));if(!x.txt||x.txt.length<20)f.push('no narration '+x.n);
    if(!x.fit)f.push('panel off screen '+x.n);if(x.ovx)f.push('h-overflow '+x.n);if(/\d+\s*%|undefined|NaN|\$\{/.test(x.txt))f.push('bad text '+x.n);if(i===pan.length-1&&x.tiles!==4)f.push('last tiles '+x.tiles);if(i<pan.length-1&&x.btn!=='Tiếp theo')f.push('btn '+x.btn)});
   if(ROAD==='nha'){R.next=await p.evaluate(()=>Q[0]&&Q[0].t);if(!R.next||/^Tiền truyện/.test(R.next))f.push('home card after panels '+R.next);
    /* force the road's entry to check the reason row (home years are kc-roads' tests) */
