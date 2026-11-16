@@ -1,6 +1,6 @@
-PASS 016d011c758e5255899bcfda0dbd522d25d4333a
+PASS 69e6d56f18c555763acd3dd0eb291b3736ad022e
 
-review/row-align-r2 @ 016d011c758e5255899bcfda0dbd522d25d4333a contains origin/main 7a738bc4 (fast-forwardable).
+review/row-align-r2 @ 69e6d56f18c555763acd3dd0eb291b3736ad022e contains origin/main ba07c65e (fast-forwardable).
 - Merged newest main twice (generated index.html/assets.json/sw.js conflicts only; rebuilt with build_site.sh).
 - Small fix: Triều cục pane (jreign.js rgPaneHTML) had two adjacent kit tables with 47.9px value spread (kit-adjacent/kit-block FAIL at 1180x820, 1366x1024). Merged into one kit table. After: 0 fails.
 - kit-table.js: 1180x820@2 0 fails, 1366x1024@2 0 fails, 844x390@3 0 fails (also re-run after last main merge); r1: 755x1000@2, 1000x755@1 PASS. 0 page errors.
