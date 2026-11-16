@@ -1777,8 +1777,27 @@ kitBookSpread.wantsPic(host)              // false on phones: skip building the 
 ### 34.3 kitBookPic — the picture page (illustration only)
 `kitBookPic({scene, ax, feet, figs:[{src,h,x,dim}], cap, slots:[{label,n,img}], plate})` → HTML: a printed plate inside a thin red double
 rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 31.4), full-body figures (`kitFigOf(p)`) standing on the
-`feet` line, `h` = height fraction (default KIT_FIG.h, §33 — never a private size); `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
+`feet` line, sized by their BODY (§34.6; `h` ignored); `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
 "Thử y phục" — a caption, never the right page's facts); `slots` = try-on slots beside her figure (Tư trang).
+
+### 34.6 BOOK FIGURE SCALE — one body rule on every book page (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn", Tuần lục p.7–8, iPad 1180) — `kitBookFig` (jkit) · `kitBookPicFit` (jbook) · `kitBookFigClamp` (jsl)
+Fault: the book sized the whole PICTURE BOX (person page: `.kesfi` = 100 % × `--kfr` of the column; kitBookPic: `--fh` × plate), not the BODY. The
+"unknown" silhouette (`unknown-fig-*.webp`) is painted to its box edges (no margin, hair bun at the very top), a real figure carries margins
+and a crown, so the silhouette stood 10–15 % taller, with another head height and foot line than Thái hậu beside it. The ground shadow
+(`drop-shadow`) of `.kbp-fig` also lacked the kit alpha-clean `url(#kfa)`.
+Rule (measured like the stage `kitEsOvFit` §33.6 and the dialog `kitDpFit` §32.2a/32.7b — one body height per viewport):
+- `kitBookFig(b, fac, H, o)` → `{ih, iw, dy, body}`: body = head top (`ht`, else painted top) .. feet (`b`) of `kitFigBody`; `fac = KIT_FIG.fac(src, age)` (woman 1, man 1.07,
+  child by age). Person page column (default, = dialog rule 32.7b, the tallest person fills the column): body = `H × fac / KIT_FIG.man` (woman .935 H, man ≈ H).
+  Picture plate (`o.stage`, = stage rule §33): body = `min(KIT_FIG.h × H, KIT_FIG.maxPx) × fac`. `ih` = picture box height, `iw = ih × true aspect` (never stretched),
+  `dy` = how far the box hangs below the foot line (painted feet < 1 stand ON the line, the same line for every figure of the page).
+- Silhouettes use the SAME path, box and scale as real figures (a silhouette is a figure whose file is `unknown-fig-f|m|k`; `fac` from the same table).
+- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): `kitBookFigCol` (column width, while paginating) and `kitBookFigClamp` (live, jsl)
+  both call `kitBookFig`. A figure is NEVER scaled to fit (the old "not below 85 %" shrink made a wide Thái hậu smaller than the silhouette beside her): the column widens as before
+  (≤ 74 % of the page) and what is still wider is cut at the column edge (32.2a, soft 24 px fade). An unmeasured figure is hidden, never shown at its raw box.
+- `kitBookPic` figures: `h` is ignored (kept so old callers do not break); `age` = child factor; sized by `kitBookPicFit` (on load / resize / DOM insert), feet on `--feet`.
+  `filter:url(#kfa) … drop-shadow` on every `.kbp-fig` (like `.kesimg`), so the ground shadow shows no faint rectangle.
+- Test: `SHOTS=1 node dev/test/book-fig-scale.js <page.html|url> <outdir>` — per viewport (755×1000, 1000×755, 1180×820, 1366×1024, 844×390): body px, body/column, foot gap, aspect error for
+  Thái hậu, a normal consort, the silhouette f / m and a kitBookPic with 1 real + 2 silhouettes; FAIL if women's bodies differ > 3 % or an aspect is off > 1 %.
 
 ### 34.4 Page mapping (owner-approved; iPad left page · right page)
 | tab | LEFT (picture, iPad only) | RIGHT (text, iPad + phone) |
