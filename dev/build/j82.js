@@ -83,7 +83,7 @@ function kg82Help(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[])
 /* difficulty / fair NPC roll (j91): lv = the person's best art level in the kind's formula (0–5); a higher level makes the game easier
    (wider timing windows, longer looks); NPCs (person rivals) roll the mini-game by the SAME level: raw ≈ 4 + 0.4·lv ± 4 */
 function kg82LvFor(p,kind){let m=0;try{kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&!KG82_STAT[s])m=Math.max(m,kg82Lv(p,s)||0)})}catch(e){}return cl(Math.round(m),0,5)}
-function kg82NpcMean(lv){return 4+.4*lv}
+function kg82NpcMean(lv){const N=BAL.mgTier.npc;return N[0]+N[1]*lv}/* ONE CORE (mg-balance-r1): BAL.mgTier.npc */
 function kg82NpcRaw(p,kind){const r=(Math.random()+Math.random()+Math.random())/3;return cl(Math.round(kg82NpcMean(kg82LvFor(p,kind))+(r-.5)*8),0,10)}
 window.kg82NpcRaw=kg82NpcRaw;window.kg82LvFor=kg82LvFor;
 /* mg-easy (owner 15/11): the games that look like "knowledge" (thơ, câu đối, đố đèn, vấn đáp của khảo hạch, cờ) must be winnable by matching what is SHOWN, never by knowing old verse.

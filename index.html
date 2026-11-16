@@ -14642,7 +14642,7 @@ function kg82Help(p){const m=p.maid?(p.maid.loyal||0)/10:0;const s=(p.staff||[])
 /* difficulty / fair NPC roll (j91): lv = the person's best art level in the kind's formula (0–5); a higher level makes the game easier
    (wider timing windows, longer looks); NPCs (person rivals) roll the mini-game by the SAME level: raw ≈ 4 + 0.4·lv ± 4 */
 function kg82LvFor(p,kind){let m=0;try{kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&!KG82_STAT[s])m=Math.max(m,kg82Lv(p,s)||0)})}catch(e){}return cl(Math.round(m),0,5)}
-function kg82NpcMean(lv){return 4+.4*lv}
+function kg82NpcMean(lv){const N=BAL.mgTier.npc;return N[0]+N[1]*lv}/* ONE CORE (mg-balance-r1): BAL.mgTier.npc */
 function kg82NpcRaw(p,kind){const r=(Math.random()+Math.random()+Math.random())/3;return cl(Math.round(kg82NpcMean(kg82LvFor(p,kind))+(r-.5)*8),0,10)}
 window.kg82NpcRaw=kg82NpcRaw;window.kg82LvFor=kg82LvFor;
 /* mg-easy (owner 15/11): the games that look like "knowledge" (thơ, câu đối, đố đèn, vấn đáp của khảo hạch, cờ) must be winnable by matching what is SHOWN, never by knowing old verse.
@@ -15770,16 +15770,19 @@ Object.defineProperty(WK.theu,"a",{get:()=>wkHasArt("theu")?"theu":"hoa"});Objec
 const WMAT=BAL.wk.matQ;/* material bonus to the score (BAL.wk) */
 function wkLv(p,a){return typeof artLv==="function"?(artLv(p,a)||0):((p&&p.arts)||{})[a]||0}
 function wkTier(q){const T=BAL.mgTier.wk.th;return q>=T[2]?3:q>=T[1]?2:q>=T[0]?1:0}/* mg-balance: thresholds in BAL.mgTier.wk.th */
+/* the tier line printed on every work card (j83 / jwkr / jtds): ONE CORE, reads BAL.mgTier.wk.th (mg-balance-r1) */
+function wkThTxt(){const T=BAL.mgTier.wk.th;return `Thường dưới ${T[0]} · Khá ${T[0]} · Tinh xảo ${T[1]} · Tuyệt phẩm ${T[2]}`}
 /* score = mini-game raw 0..10 + grade + material; shown plainly */
 /* Công (Tứ đức, j85): its quality bonus (0..100 scale, 10 per phần here) and +1 tier from Công bậc 3 */
 function wkCong(p){if(typeof virtueBonus!=="function")return{lv:0,q:0};let v;try{v=virtueBonus(p,"cong")}catch(e){return{lv:0,q:0}}if(v==null)return{lv:0,q:0};if(typeof v==="number")return{lv:v,q:0};return{lv:+(v.lv!=null?v.lv:v.level!=null?v.level:0)||0,q:+(v.q||0)||0}}
 function wkCongPh(p){return Math.round(wkCong(p).q/10)}
 function wkLvQ(p,a){const L=BAL.mgTier.wk.lvQ;return L[cl(Math.round(wkLv(p,a)),0,L.length-1)]}/* mg-balance: her art level adds a little (BAL), the play decides */
 function wkScore(p,kind,mat,raw){return raw+wkLvQ(p,WK[kind].a)+WMAT[mat]+wkCongPh(p)}
-function wkTierP(p,q,mat){const t=Math.min(3,wkTier(q)+(wkCong(p).lv>=3?1:0));return mat==null?t:Math.min(t,BAL.wk.cap[mat])}
+function wkCongUp(p,t){const C=BAL.mgTier.wk.cong;return wkCong(p).lv>=C[0]&&t<C[1]?1:0}/* mg-balance-r1: the Công lift (+1 tier) stops at BAL.mgTier.wk.cong[1] (Tinh xảo), so Tuyệt phẩm always needs the play score */
+function wkTierP(p,q,mat){const t0=wkTier(q),t=Math.min(3,t0+wkCongUp(p,t0));return mat==null?t:Math.min(t,BAL.wk.cap[mat])}
 /* lowest play score (0..10) that reaches tier t with this material, or -1 (out of reach) */
 function wkNeedRaw(p,kind,mat,t){for(let r=0;r<=10;r++)if(wkTierP(p,wkScore(p,kind,mat,r),mat)>=t)return r;return -1}
-function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw}${wkLvQ(p,K.a)?` + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLvQ(p,K.a)}`:""}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${c.lv>=3?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
+function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw}${wkLvQ(p,K.a)?` + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLvQ(p,K.a)}`:""}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${wkCongUp(p,wkTier(wkScore(p,kind,mat,raw)))?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
 /* act-text (owner 15/11): the quality tiers in ONE clear line, no code-like signs: "chơi 5 phần ra Khá, 9 phần ra Tinh xảo, Tuyệt phẩm cần vật liệu quý" */
 function wkTierTxt(p,kind,mat){const lo=wkTierP(p,wkScore(p,kind,mat,WAVG),mat),N=[1,2,3].filter(t=>t>lo).map(t=>{const r=wkNeedRaw(p,kind,mat,t);return r<0?(t===3&&BAL.wk.cap[mat]<3?`${WTIER[t]} cần vật liệu quý`:`${WTIER[t]} chưa với tới`):`${r} phần ra ${WTIER[t]}`});
  const L=(lo>0?[`${WAVG} phần đã ra ${WTIER[lo]}`]:[]).concat(N);return L.length?(/^\d/.test(L[0])?"chơi ":"")+L.join(", "):`chơi ${WAVG} phần đã ra ${WTIER[lo]}`}
@@ -15886,7 +15889,7 @@ function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + ${a.n} bậc ${l}: +${BAL.mgTier.wk.lvQ[cl(Math.round(l),0,5)]} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
@@ -15935,7 +15938,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wk]");if
 function wkTabHTML(){const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
  let h=`<div class="ph"><span>Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu.</span><span>Đồ mua bằng bạc vẫn quý hơn</span></div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return"";const B=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
-  return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${BAL.mgTier.wk.lvQ[cl(Math.round(l),0,5)]}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkTierTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
+  return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${wkLvQ(S,a.k)}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkTierTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
  return h}
 (function(){const a0=artTabHTML;artTabHTML=function(){return a0.apply(this,arguments)+wkTabHTML()}})();
 /* ---- incoming gift dialog shows the work's real name ---- */
@@ -16017,7 +16020,7 @@ const ARTFX={
  theu:["Tài +2 · đồ thêu tự làm: phẩm +14 mỗi bậc (thang 100)","Tài +2, Thái hậu +2","Tài +2, Danh +3 · mỗi tháng gửi đồ thêu bán ra ngoài: Bạc +5","Tài +2, Thái hậu +3","Tài +2, Danh +6 · mỗi tháng Bạc +10 (thay +5)"],
  nau:["Tài +2 · món tự nấu: phẩm +14 mỗi bậc (thang 100)","Tài +2 · ăn uống điều độ: mỗi tháng Sức +2","Tài +2, Danh +3 · mỗi tháng canh bổ dâng Dưỡng Hòa điện: Ân tình +1","Tài +2 · mỗi tháng Sức +4 (thay +2)","Tài +2, Danh +6 · mỗi tháng Ân tình +2 (thay +1)"]};
 const VIRFX={
- cong:["đồ thêu, món nấu tự làm: phẩm +4","phẩm +8 · học Thêu, Nấu: thêm 1 tiến bộ mỗi buổi","phẩm +12 · thành phẩm lên thêm 1 bậc","phẩm +16","phẩm +20 · thành phẩm lên thêm 2 bậc · Danh +4"],
+ cong:["đồ thêu, món nấu tự làm: phẩm +4","phẩm +8 · học Thêu, Nấu: thêm 1 tiến bộ mỗi buổi","phẩm +12 · thành phẩm lên thêm 1 bậc (tới Tinh xảo)","phẩm +16","phẩm +20 · thành phẩm lên thêm 2 bậc · Danh +4"],
  dung:["Sắc +2 · yến tiệc, lễ nghi, thỉnh an dễ thành hơn (+3)","yến tiệc, lễ nghi, thỉnh an +6","Sắc +2 · yến tiệc, lễ nghi, thỉnh an +9","yến tiệc, lễ nghi, thỉnh an +12","Sắc +2, Danh +4 · yến tiệc, lễ nghi, thỉnh an +15"],
  ngon:["trò chuyện, kết giao, tố giác dễ thành hơn (+3)","trò chuyện, kết giao, tố giác +6 · lỡ lời: mỗi thiệt hại bớt 1","Tâm cơ +1 · trò chuyện, kết giao, tố giác +9","trò chuyện, kết giao, tố giác +12 · lỡ lời: mỗi thiệt hại bớt 2","Danh +4 · trò chuyện, kết giao, tố giác +15"],
  hanh:["Đức +3","Đức +3, Thái hậu +3","Đức +3 · mỗi tháng Đức +1 (đến 80)","Đức +3, Thái hậu +3, Hoàng hậu +5","Đức +3, Danh +4"]};
@@ -17111,12 +17114,13 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    occ = [base, perRank] stake of each occasion (stake = base + perRank × rank 0..7, + big for a big contest; exam: rank = the target rank);
    mid/slope = board ease at the matching level and its change per level of gap (ease 0..5, engines: higher = easier); band = gap that turns Vừa
    into Dễ / Khó; kAdj = per-engine ease trim from the bot calibration (dev/PROGRESS_mg-balance.md); word = raw thresholds Tạm được/Khá/Giỏi/Xuất sắc;
+   npc = [base, per art level] mean play score of a rival / of "Để tài nghệ quyết định" (j82 kg82NpcMean);
    aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
-   wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
+   wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds, cong = [Công level that adds +1 tier, highest tier that lift can reach (2 Tinh xảo: Tuyệt phẩm needs the score)] (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
 Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:-2,theu:0,co:-2,banh:-2,dauho:0},
  kG:{td_cong:1.6,ban:.8,dan:2.3,den:.9,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.5,mua:8,theu:5.5,co:4},
- word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15]}}});
+ word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* BAL.psk = PROMO-SKIP (jexam promoReward, owner 16/11 06:20Z/06:45Z/07:15Z): long-road rewards = direct rank; every reward has a gain AND a loss.
    son1 (first prince): Hoàng hậu oán +hhOan, every other mother of a prince oán +momOan.
    emp (Hoàng thượng side wins): Thái hậu quý −th; every consort of a losing side oán +oan.
@@ -29638,7 +29642,7 @@ function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")re
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
-  return{kind:"wk",k:a.k,name:a.n,level:l,prog:S.artp[a.k],need:l+2,desc:`${kinds} <span class="kchip g">phẩm +${BAL.mgTier.wk.lvQ[cl(Math.round(l),0,5)]}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(acts.length&&!why)}}).filter(Boolean);
+  return{kind:"wk",k:a.k,name:a.n,level:l,prog:S.artp[a.k],need:l+2,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(acts.length&&!why)}}).filter(Boolean);
  L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đã tinh thông (bậc 5) thì tự học là ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
@@ -35831,7 +35835,7 @@ function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=w
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,
   go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,a.k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
 wkAsk=function(k,mode,run){const a=ARTS.find(x=>x.k===k);if(!wkKindsOf(k).some(x=>WKR[x]))return;Object.assign(KWR,{k,mode,run,kind:KWR.k===k?KWR.kind:null});
  Q.push({t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm gì?`,kit:{kind:"info",pick:1,html:wkrBody()},btn:"Đã hiểu",cls:"kwrd"});showModal();render()};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kwrtab],[data-kwrgo]");if(!t||!document.querySelector("#modal .kshop.kwr"))return;e.stopPropagation();
@@ -38111,7 +38115,7 @@ function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S
  for(let m=0;m<3;m++){const need=fee+(K.mat[m]||0);O.push({n:`${r.n} · ${K.mn[m]}`,fx:{},x:`${K.mat[m]?`tốn: Bạc -${K.mat[m]} (trả khi làm xong) · `:""}${wkOddsTxt(S,kind,m)}${K.fin?" · "+wkFinTxt(K):""}${newSt?` · kèm: học ${rcpStN(kind,st[0])}`:""}`,
   dis:S.bac<need?`thiếu bạc (cần ${need})`:"",go:()=>{if(S.bac<need){log(`Không đủ bạc: cần ${need}.`);tdsReset();return}tdsRun(k,lm,{kind,mat:m,r:rid,subj:wkrSubj(kind,r)})}})}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
 /* run the lesson itself (j85 lessonVir, or review/tuduc-mg tdPlay); the work is made once the lesson really happened */
 function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
  if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-10});spend(2);TDV.hit={k};tdsFinish("tự học");save();render();return}
@@ -38156,7 +38160,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
    const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
-   return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${l}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
+   return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();
 if(typeof KIT_GLOSS==="object")KIT_GLOSS["Lối Tứ đức"]="Mỗi môn Tứ đức làm ra một loại đồ (Công: đồ kim chỉ; Dung: phấn son tự chế; Ngôn: thư từ, lời chúc; Hạnh: vật cầu phúc, việc thiện), chia bốn lối. Lối đầu biết sẵn; bậc 2, 4, 5 mỗi bậc tự mở thêm một lối; thầy dạy hay sách phổ mở sớm hơn. Mỗi buổi học ra một món, đem tặng, dâng, bán như tác phẩm tài nghệ; quà đúng lối người nhận thích mới được trọn.";
@@ -39180,7 +39184,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="12fcc9a89135";window.CTM_BUILD=BUILD;
+const BUILD="1da8eef265d4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
