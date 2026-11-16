@@ -1,14 +1,14 @@
 /* review/seatcap: long-life bots; per month, the max holders of each capped rank (j30 SEATCAP / BAL.seatCap) and every write that put a rank over cap.
-   usage: node dev/test/seatcap-sim.js <url-of-dev/index.html> [lives=20] [months=120] [mode=idle|active] [trace=1]
+   usage: node dev/test/seatcap-sim.js <url-of-dev/index.html> [lives=20] [months=120] [mode=idle|active] [trace=1] [firstLife=0]
    idle = she does nothing (kept alive); active = a bot that takes the first card each buổi and answers dialogs with option 0 (kept alive).
    Prints JSON: per life the max holders per rank, months over cap, and the source snippet of each over-cap write (trace=1). exit 1 on over-cap or page error. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,LIVES='20',MON='120',MODE='idle',TRACE='1']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('playwright');const fs=require('fs');const [,,URL,LIVES='20',MON='120',MODE='idle',TRACE='1',L0='0']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block'});
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(1200000);
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<200;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}
  const ORIG=['tt','dtq','th','muoi','nc','td','thd','cn','cnv'];const out=[];
- for(let L=0;L<+LIVES;L++){const r=await p.evaluate(([L,MON,MODE,TRACE,ORIG])=>{const CAP=SEATCAP;const mx={},over={},hits=[];
+ for(let L=+L0;L<+L0+(+LIVES);L++){const r=await p.evaluate(([L,MON,MODE,TRACE,ORIG])=>{const CAP=SEATCAP;const mx={},over={},hits=[];
    const cnt=r=>consorts().filter(q=>rkOf(q)===r).length;
    const chk=()=>{const o=[];for(const k in CAP){const n=cnt(+k);if(n>CAP[k])o.push(+k)}return o};
    const tr=v=>{if(v.__tr)return;v.__tr=1;let rk=v.rank,qn=v.queen;Object.defineProperty(v,'rank',{enumerable:true,configurable:true,get(){return rk},set(x){const was=chk().join();rk=x;const now=chk().join();if(now&&now!==was&&hits.length<40)hits.push({k:'rank',to:x,q:!!qn,ov:now,st:(new Error).stack.split('\n').slice(2,6).join(' | ')})}});
@@ -25,7 +25,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,LIVES
     try{endTurn()}catch(e){err='turn:'+e.message;break}
     for(const k in CAP){const n=cnt(+k);mx[k]=Math.max(mx[k]||0,n);if(n>CAP[k])over[k]=(over[k]||0)+1}}
    render=r0;quiet=false;return {L,orig:window.__forceOrigin,months:S.turn-t0,mx,over,hits,err,her:S.rank}},[L,+MON,MODE,TRACE,ORIG]);
-  out.push(r);process.stderr.write(`life ${L} ${r.orig} mx=${JSON.stringify(r.mx)} over=${JSON.stringify(r.over)} hits=${(r.hits||[]).length} ${r.err||''}\n`)}
+  out.push(r);process.stderr.write(`life ${L} ${r.orig} mx=${JSON.stringify(r.mx)} over=${JSON.stringify(r.over)} hits=${(r.hits||[]).length} ${r.err||''} ${JSON.stringify((r.hits||[]).map(h=>h.k+'>'+h.ov+' @'+(h.st||'').split(' | ')[0].replace(/.*\//,'')))}\n`)}
  /* map stack positions back to source text */
  let src='';try{src=await p.evaluate(()=>document.documentElement.outerHTML)}catch(e){}
  const html=fs.existsSync('index.html')?fs.readFileSync('index.html','utf8').split('\n'):[];

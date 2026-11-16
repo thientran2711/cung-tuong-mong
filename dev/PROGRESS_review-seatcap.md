@@ -33,5 +33,19 @@ compensation, which this branch reuses instead of writing a second rule; it also
 - dev/test/seatcap-active.js (measure smart bot inpage6 "sens", real lives)
 - dev/test/seatcap-oldsave.js (save made on origin/main with rank 6 ×3, rank 5 ×4 → load here)
 
+## Results (cap: Hoàng hậu 1 · Hoàng quý phi 1 · Quý phi 2 · Phi 4 · Tần 6)
+Max holders per rank over all months of all lives (idle = she does nothing, kept alive, 120 months each, origins rotate over all 9):
+| run | lives × months | Tần (3) | Phi (4) | Quý phi (5) | Hoàng quý phi (6) | Hoàng hậu (7) | months over cap |
+|---|---|---|---|---|---|---|---|
+| BEFORE origin/main (idle) | 3 × 120 | 5 | 5 | **4** | **3** | 1 | rank 4: 3 · rank 5: 163 · rank 6: 174 |
+| promo-skip-r1 only (idle) | 3 × 120 | 4 | 3 | 2 | **2** | 1 | rank 6: 20 |
+| AFTER review/seatcap (idle) | 21 × 120 (2520 months) | 6 | 4 | 2 | 1 | 1 | **0** |
+| AFTER, active smart bot (measure inpage6 "sens", real lives + save round trips) | 2 lives, 281 months | 3 | 2 | 2 | 1 | 1 | **0** |
+| AFTER, old save over cap (rank 6 ×3, rank 5 ×4 incl. her) | load + 24 months | settled on load: 6→1, 5→2 (she kept Quý phi); 4 NPCs moved down, each Bạc +700, a phong hiệu | | | | | **0** |
+Tracer after the fix: only one-statement artefacts (a cold-palace pardon flips `out` the line before rank=0; seatPut clears `queen`
+the line before the rank) — no road leaves a rank over cap at the end of a turn; seatSettle moved nobody in the idle runs.
+coop-e2e: 59/59 passed. No page errors in any run. No UI change (texts go through log/news; no new kit part).
+Note: __mloff (maid line) is not on main yet; the over-cap seen with __mloff=1 came from roads 1–8 above, which do not depend on it.
+
 ## Status
-In progress — see dev/handover/reports/seatcap.md on the handover branch for the final result.
+SẴN SÀNG KIỂM (see dev/handover/reports/seatcap.md on the handover branch).
