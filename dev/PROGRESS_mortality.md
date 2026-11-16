@@ -57,5 +57,58 @@ Co-op: existing rule OD L94 (she reincarnates at once into the same world) — n
 All text goes through the existing news/log lines, the existing kit modal (event card "Giữ mẹ hay giữ con" = a normal Q news item) and the
 existing end card (`over()` with alive flag). No chip/row/frame added → no KIT REQUEST. Player-visible words cổ trang, no %, no numbers of odds.
 
-## Bot results
-See the tables below (filled from `node dev/measure/mort-bots.js 20 5` / `20 20`, new vs `MORT_OFF=1`).
+## Bot results (16/11, build of commit after ef8759cb + fixes)
+Bots = `dev/measure/mort-bots.js`: month-loop lives in the real build (monthTick directly, no buổi acts, so NO scheme miscarriages / poison by
+rivals / punishments — those are game rules on top and unchanged). Pregnancies: conceiveCh once a month. Styles: sensible (treats illness, rests,
+keeps Sủng/Danh), random (coin each month), reckless (no care, Sức −15/month), mother (sensible + a Thái tử son at start = the HTH road), world
+(she is kept alive: reads every other group). "old" = same bots with `BAL.mort.on=0` (the game before this branch). Merge: `--merge *.json`.
+Sim = `node dev/measure/mort-sim.js 40000` (lifespan model alone).
+
+### 20 lives × 5 years per style
+| style | she died new / old | Emperor died while she lived new / old | HTH ending new / old | children raised per life new / old | natural miscarriage new / old | she died in childbirth (per birth) new / old |
+|---|---|---|---|---|---|---|
+| sensible | 10 % / 5 % | 15 % / 0 % | 0 / 0 | 0.70 / 0.75 | 11 % / 26 % | 11 % / 6 % |
+| random | 5 % / 5 % | 35 % / 0 % | 0 / 0 | 0.85 / 0.85 | 29 % / 32 % | 5 % / 6 % |
+| reckless | 35 % / 20 % | 10 % / 0 % | 0 / 0 | – | – | – |
+| mother | 10 % / 15 % | 20 % / 0 % | 20 % / 0 % | 1.60 / 1.90 | 19 % / 20 % | 3 % / 7 % |
+Pooled natural miscarriage: new 22 % of pregnancies (36/161) vs old 30 % (43/143). Pooled childbirth death new 7.6 % of births (8/105), old ≈ 6 %.
+Hard births seen (new): 16 (Emperor's choice 4); stillbirths 3.
+
+### 10 lives × 20 years
+| style | she died | Emperor died while she lived | HTH ending | children raised per life | childbirth death per birth |
+|---|---|---|---|---|---|
+| mother new | 40 % | 30 % | 30 % | 2.40 | 14 % (4/29) |
+| mother old | 30 % | 70 % (legacy roll from year 13) | 60 % | 2.90 | 10 % (3/31) |
+| sensible new | 40 % | 60 % | 0 (heir is another's son: Thái phi ×4) | 2.10 | 8 % |
+Sim (lifespan + plots + accidents only): Emperor dies within 10 / 20 years 23 % / 53 % (start age 20–33, power 50); palace-start (19–24, power 30)
+19 % / 45 % (plots 9 %). Her death by lifespan or accident within 5 / 10 / 20 years 4 % / 11 % / 33 %. Thái hậu alive after 5 / 10 / 20 years
+61 % / 34 % / 8 %. Children dying before 10: 12 % (curve) + 3 % newborn ≈ 15 %. Adult curve rolled at 18: under 30 13 %, 30–39 22 %, 40–49 27 %,
+50–59 22 %, 60–69 12 %, over 70 ≈ 5 %.
+
+### Death-age histogram by group (all NEW runs pooled, ledger + classified)
+| group | n | causes | 10–19 | 20–29 | 30–39 | 40–49 | 50–59 | 60–69 | 70+ |
+|---|---|---|---|---|---|---|---|---|---|
+| her | 23 | childbirth 10 · illness 8 · lifespan 4 · accident 1 | 1 | 18 | 4 | | | | |
+| consorts | 369 | illness 196 · lifespan 116 · other 51 · accident 5 · childbirth 1 | 16 | 292 | 53 | 8 | | | |
+| servants (maid + staff + officials) | 203 | lifespan 199 · accident 4 | 2 | 14 | 4 | 56 | 83 | 39 | 5 |
+| Emperor | 32 | lifespan 30 · accident 2 | | 9 | 17 | 4 | 2 | | |
+| Thái hậu | 62 | lifespan 56 · old illness 6 | | | | | 20 | 42 | |
+| children | 42 | lifespan 21 · other 17 · illness 4 | 40 (0–9) | 2 | | | | | |
+| men (lovers / officials outside) | 176 | lifespan 169 · accident 7 | | 23 | 101 | 41 | 11 | | |
+Old model (same bots): only consorts (illness 141 of 158), her (childbirth / illness), Thái hậu (old illness / story) and children ever died.
+
+### Findings for the coordinator (not changed here)
+- Consorts in their 20s die of illness at a high rate in BOTH models (existing j13 + jbal2 illDie 2, illAdd 1): ≈ 13 % per consort-year in
+  the bots. Not part of this task; worth a balance look.
+- With the owner's curve (mean 45) the Emperor (20–33 at start) dies within 20 years ≈ 53 % (sim) — above the coordinator's earlier 25–40 %
+  target, because the curve is the owner's. Lever if wanted: `BAL.mort.life.dice.emp` can get its own {mean,sd} (it is an alias of adult now).
+- The HTH road (mother style) is reachable: 20 % in 5 years, 30 % in 20 years (old: 0 % / 60 % — the legacy roll killed the Emperor at year 13–17).
+- Existing UI: on the end card the act-filter tab strip of the right page ("Tất cả 0/15 · Giao thiệp …") draws above the modal at 1000x755 and
+  844x390 (seen in the mortality-ui shots, also with old endings) — a kit z-index issue, not touched here.
+
+## Tests
+- `node dev/test/mortality.js [months] [lives]` — every person rolled at start (0 missing), month loop no errors, Emperor-fate branches
+  (xuất gia / Thái phi / tuẫn táng / miễn tuẫn táng / Thái phi with a daughter), birth branches (Emperor's choice both ways, hard birth survived,
+  stillbirth), old save without S.mort rolls once at load. PASS, 0 page errors.
+- `node dev/test/mortality-ui.js <outdir>` — the "Giữ mẹ hay giữ con" card and the "Xuất gia" end card at 755x1000, 1000x755, 1180x820,
+  1366x1024, 844x390: open, no '%', no overflow, nothing off-screen, 0 page errors; 390x844 shows the rotate prompt. ALL PASS. Shots looked at.

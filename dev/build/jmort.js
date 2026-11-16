@@ -91,7 +91,7 @@ function accText(p){const odd=Math.random()*100<M.oddP;if(p===S.emp)return pick(
 function empPlot(){if(cw())return "";const P=S.mort;let ev="";
  if(P.plot){P.plot.mo--;if(P.plot.mo>0)return "";const k=P.plot.k;P.plot=null;
   if(roll(mortFoil(pw())))return k==="ass"?"Cấm quân bắt được thích khách nấp trong Ngự hoa viên; Hoàng thượng bình an. ":"Thái giám thử món phát hiện chén canh có độc; Ngự thiện phòng bị tra xét. ";
-  P.empDue=k==="ass"?"Thích khách lẻn vào tẩm điện":"Ngự thiện có độc";return ev}
+  P.empDue=k==="ass"?"Thích khách lẻn vào tẩm điện hành thích":"Ngự thiện bị kẻ gian bỏ độc";return ev}
  for(const k of ["ass","poi"])if(roll(mortPlotY(k,pw())/12)){P.plot={k,mo:1+R(2)};
   if(S.mat>=2||roll(50))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
  return ev}
