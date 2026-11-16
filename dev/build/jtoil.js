@@ -383,7 +383,7 @@ window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.
    ONE layer in the kit's face-effects slot (jk2b kitFxLayers: tall frame, small avatar, stage figures — same box as the picture), so it lines
    up wherever the scar / veil do. Points per picture: img/toil-fit.json (dev/figwork/toilfit.py: mouth found by colour in the portrait, cheeks
    on the face's own skin line, figures matched to their portrait by template). A picture without points gets nothing (never guessed). */
-const TOIL_FIT={url:"img/toil-fit2.json"/* review/mk-colour: toil-fit.json with 1402 mouths moved onto the face-mesh lips (dev/art/mkfit/fixtoil.py); rename back to toil-fit.json after merge */,fit:null,_ld:0,load(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j){TOIL_FIT.fit=j;try{if(typeof S!=="undefined"&&S&&!Q.length)render()}catch(e){}}}).catch(()=>{})}catch(e){}}};
+const TOIL_FIT={url:"img/toil-fit2.json"/* toil-fit2.json = toil-fit.json with 1402 mouths moved onto the face-mesh lips (dev/art/mkfit/fixtoil.py); kept as THE fit file (kit keeper K2) */,fit:null,_ld:0,load(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j){TOIL_FIT.fit=j;try{if(typeof S!=="undefined"&&S&&!Q.length)render()}catch(e){}}}).catch(()=>{})}catch(e){}}};
 try{TOIL_FIT.load()}catch(e){}
 const TOIL_LOOKS={
  /* owner 15/11 on the sheet: "đẹp" subtle and natural; "diêm dúa" = the old đẹp a little stronger (pretty, just noticeably overdone, never a clown) */
@@ -549,13 +549,13 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 (function(){const st=document.createElement("style");st.id="kswt-css";st.textContent=`
 .kswt{display:grid;gap:8px}
 .kswt-r{display:grid;gap:4px}
-.kswt-h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:.92em}
+.kswt-h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:.8rem}
 .kswt-h b{font-family:var(--display,serif);color:var(--ink,#2a1a12)}
 .kswt-h span{color:var(--dim,#7a6650)}
 .kswt-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:4px}
 .kswt-i{display:grid;justify-items:center;gap:2px;padding:4px 2px;border:1px solid transparent;border-radius:8px;background:none;cursor:pointer;color:var(--ink,#2a1a12);font:inherit;min-width:0}
 .kswt-i i{display:block;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55),rgba(255,255,255,0) 42%),var(--sw);box-shadow:inset 0 0 0 1px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.18)}
-.kswt-i small{font-size:.72em;line-height:1.15;text-align:center;overflow-wrap:anywhere}
+.kswt-i small{font-size:.72rem;line-height:1.15;text-align:center;overflow-wrap:anywhere}
 .kswt-i.on{border-color:var(--gold,#c9a227);background:rgba(201,162,39,.12)}
 .kswt-i.on i{box-shadow:0 0 0 2px #fffaf0,0 0 0 4px var(--gold,#c9a227)}
 .kswt-i:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:1px}`;document.head.appendChild(st)})();
@@ -650,7 +650,7 @@ window.toilReveal=toilReveal;
 .ktrv-zoom .kfzoom{width:min(74vw,46vh,340px);margin:0}
 .ktrv-zin .ktrv-zoom{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .ktrv-zin .ktrv-fw{opacity:0;transition:none}
-.ktrv-card{position:absolute;left:50%;bottom:max(34px,env(safe-area-inset-bottom));transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s;padding:8px 10px;border-radius:12px;background:#fff7e6f2;box-shadow:0 4px 18px #0006}
+.ktrv-card{position:absolute;left:50%;bottom:max(34px,env(safe-area-inset-bottom));transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
 .ktrv-zoomed .ktrv-card{opacity:1;transform:translate(-50%,0)}
 @media (max-height:480px){.ktrv-zoom{left:30%;top:50%}.ktrv-zoom .kfzoom{width:min(60vh,240px)}.ktrv-card{left:auto;right:3%;bottom:auto;top:50%;transform:translate(0,-46%);width:min(52vw,380px)}.ktrv-zoomed .ktrv-card{transform:translate(0,-50%)}}
 `;document.head.appendChild(st)})();
