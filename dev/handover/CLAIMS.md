@@ -142,7 +142,7 @@
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
 | D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | session_011xDdVRRJzACvMmmuEuVbJq | RUNNING | 16/11 10:26Z |
 | item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | PASS f9d10956 | 16/11 10:26Z |
-| D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | RUNNING | 16/11 10:32Z |
+| D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | DONE FAIL 1 → coop-b1b5-fix | 16/11 10:32Z |
 | coop-guest-maid review (opus) | review/coop-guest-maid-r1 | D | session_01DgYSWm8Dq4FhHzrbnuCRGL | PASS 3a875687 | 16/11 10:34Z |
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
 | entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | RUNNING | 16/11 10:48Z |
@@ -150,3 +150,4 @@
 | danh-balance review (opus) | review/danh-balance-r1 | D | session_01DgYSWncjcb6DFsEZJo6AvA (opus) | PASS 9a1133f0 | 16/11 10:58Z |
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | RUNNING | 16/11 11:06Z |
+| D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | RUNNING | 16/11 11:16Z |

@@ -39,6 +39,7 @@ main at start = eba64ead4.
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING — VISIT half only (extends existing j7 'empnight'); POISON half PARKED (worker's reply blocked by a safety classifier) → QUESTIONS |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
+| D21 full review r2 → fix | review/coop-b1b5-r2 @d5879537 FAIL 1 BLOCKING (guest's jcycle answer ignored by host) → review/coop-b1b5-fix | opus | worker session_01DgYSWnyGPZR3V86DPDjc32 RUNNING (11:16Z); r2 reviewer archived |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak residue (log lines, palName, ??? rows) | review/name-mask | sonnet | worker session_01DgYSWoDkH3BjgWkcd7Y4Cg RUNNING |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
@@ -140,6 +141,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 11:16Z: coop-b1b5-r2 FAIL 1 BLOCKING (jcycle × co-op guest) → opus fix worker from r2 @d5879537; reviewer archived.
 - 11:13Z: danh-balance-r1 PASS 9a1133f0 → READY; reviewer archived. Reviewer note for the P1 proposal: '+55 Danh' is arithmetic; measured +12.5 (1 seed, overlapping CIs; run_par.js not reproducible per seed).
 - 11:06Z: close-maid SẴN SÀNG KIỂM 0aa7fdd9 (relayed by s3) → opus reviewer close-maid-r1; worker archived.
 - 11:02Z: coop-guest-maid-r1 PASS 3a875687 → READY; reviewer archived.
