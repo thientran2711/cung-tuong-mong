@@ -10681,7 +10681,9 @@ function k61Title(e){const k=k61Kind(e);if(k==="consort")return typeof kitTitled
  if(k==="tq")return T("Tổng quản thái giám",e.name);if(k==="phys")return T("thái y",e.name);if(k==="eun")return T("thái giám",e.name);if(k==="maid")return T("cung nữ",e.name);if(k==="mama")return T("ma ma",e.name);
  if(k==="off")return T((typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan",e.name);return e.name||"người ấy"}
 /* becoming known (logged once); the other side learns her too when they meet */
-function k61Know(list,how,quiet,st){st=st||2;if(!S||!k61S())return[];const L=(Array.isArray(list)?list:[list]).filter(e=>e&&e!==S&&k61St(e)<st);if(!L.length)return[];
+/* the "how" of a meeting is appended to the log line as its own sentence: a bare fragment ("Thỉnh an", "gặp") must never dangle at the end of "Dạo này" (stat-fx-2) */
+function k61How(h){h=String(h||"").trim();if(!h)return"";h=h.charAt(0).toLocaleUpperCase("vi")+h.slice(1);return /[.!?…"”)]$/.test(h)?h:h+"."}
+function k61Know(list,how,quiet,st){st=st||2;how=k61How(how);if(!S||!k61S())return[];const L=(Array.isArray(list)?list:[list]).filter(e=>e&&e!==S&&k61St(e)<st);if(!L.length)return[];
  const nm=L.filter(e=>!k61Named(e)&&st>=2);const pubSeen=L.filter(e=>k61Pub(e)&&!isKnown61(e));const desc=L.filter(e=>!isKnown61(e)&&st===1).map(k61Desc);
  L.forEach(e=>{S.known[kOf61(e)]=st<2&&k61Pub(e)?2:st});K61VER++;
  if(!quiet){if(nm.length)log(`<span class="g">Ngươi đã biết: đó là ${nm.map(k61Title).join(", ")}.</span>${how?" "+how:""}`);else if(pubSeen.length&&st<3)log(`Ngươi đã được thấy mặt ${pubSeen.map(k61Title).join(", ")}.${how?" "+how:""}`);else if(desc.length)log(`Ngươi đã thấy mặt ${desc.join(", ")}; chưa biết tên.${how?" "+how:""}`);else if(st===3)log(`<span class="g">Ngươi đã quen biết ${L.map(k61Title).join(", ")}.</span>${how?" "+how:""}`)}return L}
@@ -28283,7 +28285,7 @@ function tsWish(p,host){const a=aff(p,host),g=p===S?0:(host===S?(p.ghen||0):Math
  if(a>=25)return["thân","chúc tỷ muội phúc lộc dồi dào, mãi được thánh ân"];if(g>=50||a<=-25)return["gượng","nói đôi câu chúc lấy lệ, ánh mắt không vui"];return["lễ","chúc theo lễ, lời lẽ chừng mực"]}
 function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==S);if(!G.length)return;
   /* review ts-a FAIL 3: the guests come into her palace — she sees each face (k61Meet), so a named guest is never a grey "Người lạ" */
-  G.forEach(v=>{try{if(typeof k61Meet==="function")k61Meet(v,"Lễ tấn phong")}catch(e){}});
+  G.forEach(v=>{try{if(typeof k61Meet==="function")k61Meet(v,"Nhân lễ tấn phong, ngươi được thấy người.")}catch(e){}});
   const W=G.map(v=>[v,tsWish(v,S)]);const warm=W.filter(x=>x[1][0]==="thân"),cold=W.filter(x=>x[1][0]==="gượng"),pol=W.filter(x=>x[1][0]==="lễ");
   const lines=warm.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})).concat(cold.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})));
   if(pol.length)lines.push(`${pol.length} vị khác chúc theo lễ, lời lẽ chừng mực.`);if(warm.length+cold.length>4)lines.push(`Còn ${warm.length+cold.length-4} vị nữa, xem trong Sổ ghi.`);
@@ -28297,7 +28299,7 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
  /* an NPC host: the same rite, she is a guest */
  if(!tsOn()||S.out||S.confined)return;const s=tsS();if(s.leWk===wk())return;s.leWk=wk();const [k]=tsWish(S,p);
  /* the invitation names the host: she is known from now on (name + face) */
- try{if(typeof k61Meet==="function")k61Meet(p,"Lễ tấn phong")}catch(e){}const rich=(p.bac||0)>=40;
+ try{if(typeof k61Meet==="function")k61Meet(p,"Nhân lễ tấn phong, ngươi được thấy người.")}catch(e){}const rich=(p.bac||0)>=40;
  tsPanel({t:`Lễ tấn phong ${p.name}`,who:pv(p),h:`<p>${p.name} vừa được tấn phong ${RANKS[cl(to,0,7)].n}. Cung nàng mở tiệc, mời lục cung sang chúc.</p>${tsRows([[kitRel("them",KIT_REL.affThem),knows(p)?`${tsQuy(aff(p,S))} · ${aff(p,S)}`:KIT_REL.unknown,aff(p,S)>=11?"g":aff(p,S)<=-11?"r":"n"],["Lì xì",rich?"nhà nàng có của, hẳn phát cho khách":"nàng không dư dả, chưa chắc có lì xì","n"]])}`,
   opts:[tsOpt({n:"Đến chúc mừng",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["thiện cảm +5",rich?"lì xì Bạc +6":"nàng nhớ ngươi đến"],kem:k==="gượng"?["ngươi đang ghen với nàng, khó giấu nét mặt"]:[],go:()=>{tsAff(p,5);if(rich){apply({bac:6});p.bac=(p.bac||0)-6}log(`Ngươi sang dự lễ tấn phong của ${p.name}.`)}}),
    tsOpt({n:"Gửi lễ mừng",fx:{bac:-15},need:[tsNeedBac(15)],duoc:["thiện cảm +6"],go:()=>{tsAff(p,6);p.bac=(p.bac||0)+15;log(`Ngươi gửi lễ mừng ${p.name}.`)}}),
@@ -28336,7 +28338,7 @@ function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv(
  if(p!==S){const raw=typeof kg82NpcRaw==="function"?kg82NpcRaw(p,k==="duho"?"dan":k):5;const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
   if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||S.mat>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
  tsSummonMe(k)}
-function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face with him (never a grey "Người lạ" emperor) */try{if(typeof k61Meet==="function"&&E&&!tsNamed(E))k61Meet(E,"Được triệu riêng")}catch(e){}const odds=tsSummonOdds(S,k);const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const reb=k==="duho"?tsRebel():0;
+function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face with him (never a grey "Người lạ" emperor) */try{if(typeof k61Meet==="function"&&E&&!tsNamed(E))k61Meet(E,"Ngài triệu riêng, ngươi được diện kiến.")}catch(e){}const odds=tsSummonOdds(S,k);const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const reb=k==="duho"?tsRebel():0;
  const likes=k==="dan"&&E.known&&E.known.music?` Ngài thích khúc ${E.likes.music}.`:"";
  const kem=reb?[`biên cương bất ổn (${reb}), cấm quân đang lùng loạn đảng quanh kinh thành`]:[];
  const go=()=>{const b=tsPre();tsGame({kind:k,art:k==="dan"?"Cầm":k==="co"?"Kỳ":"Du hồ",title:k==="dan"?"Đàn cho Hoàng thượng nghe":k==="co"?"Đánh cờ cùng Hoàng thượng":"Du hồ cùng Hoàng thượng",odds,risk:reb&&roll(40)?1:0,
@@ -28386,7 +28388,7 @@ function tsDressTotal(p,raw){return raw*4+Math.round(effSac(p)/5)+Math.round((p.
 function tsNpcDress(p,th){const T=TS_THEME[th];const P={};const inv=(p.inv||[]).map(e=>e.k);const smart=roll(40+(p.tamco||0)/2);
  for(const [sl,,fit] of TS_SLOT){const c=inv.filter(fit);if(!c.length)continue;const sc=k=>(T.tags.includes(k)?2:0)+Math.min(1.5,(IT[k].pr||0)/70)-(IT[k].rk>rkOf(p)&&p.trait!=="Kiêu ngạo"?3:0);P[sl]=smart?c.sort((a,b)=>sc(b)-sc(a))[0]:pick(c)}return P}
 function tsDressAnnounce(){const s=tsS();const th=pick(Object.keys(TS_THEME));s.dress={th,m:S.month%12+1,y:S.month===12?S.year+1:S.year};const T=TS_THEME[th];const H=tsDressHost();
- /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Thỉnh an")}catch(e){}
+ /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Buổi thỉnh an, ngươi được thấy người.")}catch(e){}
  const have=TS_SLOT.filter(([sl,,fit])=>S.inv.some(e=>fit(e.k)&&T.tags.includes(e.k))).length;
  tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"],["Lưu ý","đồ vượt phẩm vị bị trừ nặng nếu bị nhận ra","n"]])}`,
   opts:tsBorrowOpts(th).concat([tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})}
@@ -29591,9 +29593,10 @@ function pcfEnt(o){try{const f=o&&o.f;let e=f&&f.__kp&&typeof f.__kp==="object"?
 const isEmp=e=>S&&e===S.emp, isTh=e=>S&&(e===S.thO||e.kind==="th");
 function pcfName(e){try{if(isEmp(e))return"Hoàng thượng";if(isTh(e))return"Thái hậu";return plain(e.name||"")}catch(x){return""}}
 function pcfMood(e){try{if(typeof kitEmotion!=="function"||typeof emoBoxArt!=="function")return"";const m=kitEmotion(e);if(!m)return"";
- if(!m.known)return `<div class="kpsec">${kitSkillCard({kind:"mood",name:"Tâm trạng: chưa rõ",max:0,img:emoBoxArt(e,m,[]).src,desc:"Ngươi chưa gặp, chưa có tai mắt bên người này"})}</div>`;
+ if(!m.known)return `<div class="kpsec">${kitSkillCard({kind:"mood",name:"Tâm trạng: chưa rõ",max:0,img:"",desc:"Ngươi chưa gặp, chưa có tai mắt bên người này"})}</div>`;
  const L=typeof emoCauses==="function"?emoCauses(e):[];const a=emoBoxArt(e,m,L);const key=typeof emoKey==="function"?emoKey(e):"";
- const card=kitSkillCard({kind:"mood",name:`Tâm trạng: ${m.name}`,max:0,img:a.src,desc:a.label&&a.label!==m.name?a.label:"Không có chuyện gì đáng kể gần đây"});
+ /* no cause event = no event picture: the plain mood card (no stand-in picture; stat-fx-2) */const own=typeof emoCauseArt==="function"?emoCauseArt(L.find(x=>x.k===m.k)||(m.k==="binh"?null:L[0])):"";
+ const card=kitSkillCard({kind:"mood",name:`Tâm trạng: ${m.name}`,max:0,img:own?a.src:"",desc:a.label&&a.label!==m.name?a.label:"Không có chuyện gì đáng kể gần đây"});
  return `<div class="kpsec pcf-mood" data-emo-open="${key}" role="button" tabindex="0" title="Xem vì sao">${card}</div>`}catch(x){return""}}
 function pcfRel(e){try{if(typeof kitRelRows!=="function"||typeof kitRelTable!=="function")return"";const R=kitRelRows(e);if(!R.length||R.every(r=>r.unk!=null))return"";
  return `<div class="kpsec"><h4 class="kpst">Lòng người với ta</h4>${kitRelTable(R,{head:false})}</div>`}catch(x){return""}}
@@ -29633,6 +29636,26 @@ if(typeof pcard==="function"){const p0=pcard;pcard=function(o){let e=null;try{if
   const h=p0.apply(this,arguments);const at=h.lastIndexOf("</div></div>");
   return at<0?h:h.slice(0,at)+`<div class="pcf">${body}</div>`+h.slice(at)}catch(x){console.error("pcf",x);return p0.apply(this,arguments)}}}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-emo-open]");if(!t||e.target.closest("button,a"))return;const k=t.dataset.emoOpen;if(k&&typeof emoBox==="function"){e.stopPropagation();try{emoBox(k)}catch(x){console.error(x)}}},true);
+/* stat-fx-2: the person card and the status sheet are re-drawn with innerHTML, so kitStatSet never sees their numbers change. A call-site watcher (uses the
+   existing kitStatDelta -> kitStatGlow, no new kit part): when a card/tile/relation number is drawn again with another value than the one drawn for the same
+   cell a moment ago, that cell glows GREEN for a rise / RED for a fall. Key = card/sheet name + cell label; memory lasts 20 s. HUD cells keep their own path. */
+(function(){if(typeof MutationObserver!=="function"||typeof kitStatDelta!=="function")return;
+ const SEL=".kst-tile,.kst-chip,.krt-v",MEM=new Map(),TTL=20000;
+ const num=t=>{const m=/^\s*([−-]?)\s*(\d+(?:[.,]\d+)?)/.exec(String(t||"").replace(/ /g," "));return m?(m[1]?-1:1)*parseFloat(m[2].replace(",",".")):null};
+ const txt=e=>e?e.textContent.replace(/\s+/g," ").trim():"";
+ function ckey(c){const h=c.closest(".pc,.kpsc,.kpstats,#modal,.dlg");if(!h)return null;
+  const who=txt(h.querySelector(".pcname"))||txt(h.querySelector(".kpidn"))||(h.id||h.className);
+  let lab,val;if(c.classList.contains("krt-v")){const l=c.previousElementSibling&&c.previousElementSibling.classList.contains("krt-d")?c.previousElementSibling.previousElementSibling:c.previousElementSibling;lab=txt(l);val=txt(c)}
+  else{lab=txt(c.querySelector(".kstl"));val=txt(c.querySelector(".kstv"))}
+  return lab?who+"|"+lab:null}
+ function scan(root){const L=root.matches&&root.matches(SEL)?[root]:[];if(root.querySelectorAll)root.querySelectorAll(SEL).forEach(x=>L.push(x));
+  const now=Date.now();for(const c of L){if((c.id||"").startsWith("hud-")||c.closest("header.hud"))continue;const k=ckey(c);if(!k)continue;
+   const v=num(c.classList.contains("krt-v")?c.textContent:txt(c.querySelector(".kstv")));if(v==null)continue;const o=MEM.get(k);MEM.set(k,{v,t:now});
+   if(o&&now-o.t<TTL&&o.v!==v){const bad=/oán|ghen|hận|thù|ghét/i.test(k.split("|").pop());/* a rise in grudge / jealousy is a loss for her: colour by meaning */try{bad?kitStatDelta(c,v,o.v):kitStatDelta(c,o.v,v)}catch(e){}}}
+  if(MEM.size>400)for(const[k,o]of MEM)if(now-o.t>TTL)MEM.delete(k)}
+ let pend=new Set(),raf=0;new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1)pend.add(n);
+  if(!raf&&pend.size)raf=requestAnimationFrame(()=>{raf=0;const P=[...pend];pend=new Set();for(const n of P)if(n.isConnected)try{scan(n)}catch(e){console.error(e)}})}).observe(document.body,{childList:true,subtree:true});
+ window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
  try{if(!S)return"";const v=(typeof rivals!=="undefined"&&rivals[0])||null;if(!v)return"";return `<div class="kitpg-row" style="width:min(100%,520px)">${pcfBlocks(v,{},true)}</div>`}catch(e){return""}}})}catch(e){}
@@ -29663,7 +29686,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="32906e14ee80";window.CTM_BUILD=BUILD;
+const BUILD="b9091acd2c6e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
