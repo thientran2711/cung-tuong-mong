@@ -228,3 +228,42 @@ and read td_an .10 in full (1 fix). B2 should send a list for pass 3.
 
 ## PASS PLAN (updated)
 Pass 3 (~45 min): re-read B2 after its doubt list arrives (nc roads, ch_co/ch_ho/ch_bi), B1 cn_* in full, B3 spot-check of fixes, and any chapter changed after the above ADJUSTs; then finish.
+
+---
+# PASS 3 (final, 16/11/2026 ~19:40Z) — B2 doubt list answered; fixes verified in code
+Read: B2 road-b2.md «Per road — doubts», review/road-b2 @e8fefb47, review/road-b1 @81787d43, review/road-map-next, review/road-b3-r1 @0426e7bb.
+
+## Verified FIXED in code
+- tt pilot (road-map-next): no «sau rèm» left; Ngự thư phòng, hộp tấu niêm, hồi tị, khẩu dụ, «Khanh tiến cử ai?», gia ấn, «Hoàng hậu tiến lời, Hoàng thượng ghi nhớ» (flag S.st.f14.tienloi for ch13) all present.
+- nc .11 s2 → «Gia lễ yến trong nội cung» (state audience stays at tiền triều). td_an .10 x1 → «Xin cho lão quản gia đọc lời khai thay» with «tiên đế bị người che mắt». thd_hoc → vỡ lòng morning class, sư phó keep the classics. thd_tro .8 → Đăng Văn drum blocked at Ngọ Môn first. cnv_chu .8 → «có ý chỉ Hoàng hậu, Thái hậu chuẩn».
+## Still OPEN
+- muoi_tuoc (B1 @81787d43): «bảo cử» for a merchant title and a hereditary-title option are unchanged. Reword «nạp bạc xin hàm, có đại thần đứng bảo»; keep hereditary as the very hard road. Low severity (flavour), not blocking.
+- dtq_binh c3 officials' wives (pass 2) not checked after B1's last merge; low.
+
+## B2 doubt list — verdicts (HC = history check items, B2's own words)
+| road / item | verdict | note |
+|---|---|---|
+| nc_gian: Hội Đồng quán (會同館) lodging, Lễ bộ lộ dẫn (路引), Đại Lý tự spy case | PLAUSIBLE | Ming envoy hostel and travel pass; spy cases go to Hình bộ/Đại Lý tự. |
+| nc_gian: night cấm quân search of a consort's palace | ADJUST | Guards do not enter the harem at night; the search of a consort's palace is done by Nội vụ phủ / eunuchs under Hoàng hậu or Emperor's order, guards stay at the gate. In the text found, cấm quân only watch the old Kha and seize a letter at the city gate (fine). If a palace search exists, the actors must be Nội vụ phủ + eunuch. |
+| nc_su: tam quỳ cửu khấu for a prince-envoy, iron export ban, seating by tribute year | PLAUSIBLE | Tributary ritual (Qing/Ming usage); iron/horse/salt export bans to northern powers are Tống practice; precedence by tribute order is real. |
+| nc_su: Thượng Lâm offence handed back | PLAUSIBLE | Hunting-park trespass is a classic incident; handing the offender back to his own prince = standard diplomacy. |
+| nc_tuc: nghĩa nữ into a noble genealogy, altar search | PLAUSIBLE | Adopted-daughter ("giả công chúa/tông nữ") for heqin and clan adoption are real; ancestral-altar search as proof is dramatic but fine. Court-hall/screen scenes already removed. |
+| nc_vuong: losing claimant made Thân vương | PLAUSIBLE | Placating a rival with a prince title is the usual settlement. |
+| td_an: retrial, protégé judge recuses; petition-rank rule; year-end burning of seal registers | PLAUSIBLE (two invented rules flagged by B2 are acceptable as game rules) | Make «đốt sổ ấn cuối năm» read as a rule («hết kỳ, sổ cũ bị niêm/tiêu hủy theo lệ»), not as an event anyone can use at will. |
+| td_ke: forged Nội vụ phủ search order, censor memorial | PLAUSIBLE | Forged orders/seals are a standard intrigue; censor memorial must be sent in writing, not heard in a court she attends (B2 says the audience scene is removed). |
+| td_song: surname restored by merit, pardoned son in cấm quân, Hộ bộ census | PLAUSIBLE | 立功贖罪: exiled/conscripted sons restored by merit; household registers (hoàng sách) are the census. |
+| td_tha: phản tọa vs tự thú, autumn assizes, lãnh cung witness, khi quân, vu cổ | **PLAUSIBLE — strong** | 反坐 (punishing a false accuser with the penalty he charged) and 自首 are real Tang-code principles; autumn assizes (thu thẩm/thu quyết) are right for capital cases; khi quân and vu cổ (Hán Vũ Đế's witchcraft purge) are real palace crimes. |
+| ch_co: Cửu môn đề đốc, yếm thắng doll, private seal of Đức Thọ cung | PLAUSIBLE | Cửu môn đề đốc is a Qing office (capital gate commander); the Thái hậu's seal is a state-type seal (Hoàng thái hậu bảo), so call it «ấn của Thái hậu», not «ấn riêng» if a reviewer objects. |
+| ch_benh: outside physician in palace, stand-in at Phụng Tiên điện, mourning, seal after death | PLAUSIBLE + 1 ADJUST | Outside doctors were summoned in extremis (needs Emperor's chỉ, show it). Phụng Tiên điện: B2 already makes the Lễ quan refuse a consort the front rank («phép không cho phi tần đứng hàng ấy») and prefers Hoàng hậu — correct. ADJUST: option t2 «Xin Hoàng thượng cho dâng hương đầu» — first incense is the Emperor's, then the Hoàng hậu leads the women; reword to «Xin dâng hương thay Thái hậu trong hàng nội mệnh phụ» so the ask is possible; the failure line may stay. |
+| ch_ho: clan meeting at phủ Quốc cữu, ngoại thích impeachment, private seal to a niece | PLAUSIBLE | Hán–Ming ngoại thích politics; Quốc cữu is the empress dowager's brother. |
+| ch_bi: ban chết of a late emperor's consort + exile of her house; Hàn lâm cart; censors against the Thái hậu | PLAUSIBLE | Late emperor's consorts followed him (tuẫn táng until Ming Anh Tông ended it, 1464) or were confined; 賜死 and exile of a clan is real; censors attacking a dowager's interference is the Đại lễ nghị type. |
+| engine requests (S.thPow, per-thread n1), Thái hậu named after S.thDead | not history | engine owner. |
+
+## B1 cn_* (read B1's doubts only; chapter text not re-read in full)
+Consistent with the pass-2 rule set: Thận hình ty judges servants, Kính sự phòng keeps the favour register, Hoàng hậu holds authority over consorts, a maid is never judged outside the palace. cn_than «flood-relief case, posthumous honour» is the 追贈 pattern (posthumous title after a cleared case) — PLAUSIBLE. cn_chu .8 «no real promotion in a road chapter» is a design question, not history.
+
+## FINAL SUMMARY
+- 10 map items + 4 reviewer doubts + 12 B3 doubts + 12 B2 roads: 0 WRONG left in code (the 2 WRONG found, tt_co .10 and nc .11 s2, are fixed). Open: muoi_tuoc wording (low), ch_benh t2 wording (low), nc_gian night-search actors (check if present).
+- 11 whole-family rules (pass 1 nos. 1–7, pass 2 nos. 8–11) are the lasting output; the engine/reviewers can scan any later road with them.
+- Memory for later roads (NPC roads, men's roads, OD:L1264): consort never in court; verdicts and appointments the Emperor's; one gloss for the three courts; recusal; retrial by chỉ; grace not law; inner-palace audiences for foreign envoys; honorary rank by quyên nạp.
+Expert pass finished; 3 of 3 passes used.
