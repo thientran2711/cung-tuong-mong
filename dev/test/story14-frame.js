@@ -19,7 +19,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   const m0=msStart67;msStart67=function(id){const r=m0.apply(this,arguments);rec('ms',id);return r};
   const s0=start;start=function(){S&&(S.__uid14=0);const r=s0.apply(this,arguments);return r};
   const i0=a67init;a67init=function(k){window.__L.push({uid:(window.__uid14=(window.__uid14||0)+1),k,ch:[]});S.__uid14=window.__uid14;const r=i0.apply(this,arguments);try{window.__L[window.__L.length-1].road=S.st.f14&&S.st.f14.road;window.__L[window.__L.length-1].plan=S.st.ch.plan.slice()}catch(e){}return r};
-  start()});
+  /* r3: the first life is not left to the roulette: a bd (Bắc Địch) life has no j67 chapter frame at all (jorigins defines STORY.bd after j67 wraps STORY; same on main), so the bot saw no chapter in about half the runs */window.__forceOrigin='tt';start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:0});await p.evaluate(()=>{document.querySelectorAll('.kroul').forEach(e=>e.remove());window.__startPre=start});await p.evaluate(INP);
  await p.evaluate(()=>{const n0=nextBuoi;nextBuoi=function(){if(S&&S.mg){S.mg=null;try{if(typeof kg82Close==='function')kg82Close(true)}catch(e){}}return n0.apply(this,arguments)};for(const f of ['act','lesson','talk']){const o=window[f];if(typeof o!=='function')continue;window[f]=function(){const r=o.apply(this,arguments);if(S&&S.mg){S.mg=null;try{kg82Close(true)}catch(e){}const ov=document.getElementById('ov');if(ov)ov.hidden=true}return r}}});
  const t0=Date.now();for(let i=0;i<N;i++){await p.evaluate(()=>window.__bot.step('sens',300));if(i%10===9)console.error('step',i+1,Math.round((Date.now()-t0)/1000)+'s')}
@@ -40,14 +40,15 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   const md0=msDone67;window.__md0=md0;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)};
   window.__fast=(k,pick,maxCh)=>{quiet=true;try{localStorage.removeItem('ctm-arcs')}catch(e){}window.__forceOrigin=k;start();quiet=false;Q.length=0;
    if(S.origin.k!==k)return {k:S.origin.k,want:k,err:'asked '+k+', got '+S.origin.k,seq:[],ends:[],ctx:[],host:[]};/* r1 item 8: every origin really runs */
-   const seq=[],ends=[],ctx=[],host=[];let lastN=0,stuck=0,err=null,mon=0;
+   window.__stall=0;const seq=[],ends=[],ctx=[],host=[];let lastN=0,stuck=0,err=null,mon=0;
    for(;mon<900&&!S.st.ch.all&&S.st.ch.n<=maxCh;mon++){const c=S.st.ch;if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?')+(c.n<=3?'/T':c.n<=11?'/R':'/E'));lastN=c.n;stuck=0}
     if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
     const A=S.st.M;try{if(A&&A.host14)for(const kk in A.host14){const v=RV(A.host14[kk]);if(v&&!host.some(h=>h.id===v.id))host.push({id:v.id,a:A.a,me:aff(S,v),her:aff(v,S),oan:oan(v,S)})}
      if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const b=beatDef67(A,A.cur);const O=opts67(A,b);const i=pick==='rand'?Math.floor(Math.random()*O.length):0;
       const o=O[i];if(o&&o.o!=null)ctx.push(A.a+':'+A.cur+':'+oOf67(A,o,b));res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,b):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message)}
-    if(S.st.ms&&++stuck>30){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}/* cnv: the consort chapters open when she is really raised */
-    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
+    if(S.st.ms&&++stuck>30){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}if(S.st.ms&&S.st.ms.force14){S.dead=false;try{msCheck67()}catch(e){err=err||('close '+e.message)}}/* a life that keeps dying skips a67Month: the test closes its stuck chapter itself *//* cnv: the consort chapters open when she is really raised */
+    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}if((S.age||0)>40)S.age=40;/* the story bot keeps her alive: a dead month skips a67Month, so a long life (Thanh mai chapters) never closed its last chapter */try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
+    if(S.turn===t){if(++window.__stall>5){err=err||('time stopped at month '+S.turn+' buổi '+S.buoi+' '+JSON.stringify({mg:!!S.mg,out:S.out,dead:S.dead,place:S.place,exam:!!S.exam,kc:!!S.kc,wait:S.wait,night:S.night,ms:S.st.ms&&S.st.ms.id,M:S.st.M&&S.st.M.a}).slice(0,300));break}}else window.__stall=0}
    return {k:S.origin.k,want:k,road:S.st.f14&&S.st.f14.road,seq,ends,ctx,host,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}});
  const FB=[];for(const k of ['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'])FB.push(await p.evaluate(k=>window.__fast(k,'rand',99),k));
  for(const r of FB)console.log(r.k,'(asked '+r.want+')',r.road,'host:'+JSON.stringify(r.host),'n='+r.n,r.all?'ALL':'',r.months+'m',r.fin,'|',r.seq.join(' '),r.err||'');
@@ -117,18 +118,22 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
    for(const bid in (a.B||{})){A.cur=bid;let O=[];try{O=opts67(A,beatDef67(A,bid))}catch(e){continue}
     const p={t:'x',a:id,b:bid,o:O.map(o=>{try{return oOf67(A,o,a.B[bid])}catch(e){return NaN}})};const th=th67;th67=()=>A;let d=null;try{d=PEND.j67(p)}catch(e){}th67=th;if(!d)continue;
     d.o.forEach((x,i)=>{const o=O[i];const e=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;if(!Number.isFinite(p.o[i]))return;/* odds read outside a real beat */if(!e||e[0]!==e[1]&&p.o[i]<100)return;if(!/kết:/.test(x.j67||''))return;
-     out.words.push([id,bid,i,/kết: [^·<]*(<[^>]*>)?[^·<]*· (Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))||f14Hold(A,e[0])>=100])})}}
+     out.words.push([id,bid,i,/kết: [^·<]*\(có thể xoay chiều: (Rất thấp|Thấp|Vừa|Cao|Rất cao)\)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))&&(h=>!/kết:/.test(h)||/xoay chiều/.test(h))(kitHint({j67:x.j67},null,0).hint)/* the dialog hint: where it names the ending it says it can turn */&&!/kết: [^·<]*· (Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))||f14Hold(A,e[0])>=100])})}}
   /* a turned ending: force the roll */
   const A=newThread67('tt_oan','m');S.st.M=A;A.s14=1;const r0=rnd67;rnd67=()=>0;const cards=[];const c0=card67;card67=function(kind,t,rows){cards.push([kind,t,rows]);return c0.apply(this,arguments)};
   try{end67(A,'win')}finally{rnd67=r0;card67=c0}const rc=cards.find(c=>c[0]==='result');out.turned={end:A.end,row:rc&&rc[2].find(x=>x&&x[0]==='Xoay chiều')};Q.length=0;return out});
  const wBad=pv.words.filter(x=>!x[3]);console.log('preview fixed endings:',pv.words.length,'missing word:',JSON.stringify(wBad.slice(0,5)),'turned:',JSON.stringify(pv.turned));
- chk('r1 item 5: every fixed-ending option preview shows how sure the ending is (odds ladder)',pv.words.length>0&&!wBad.length,wBad.slice(0,8));
+ chk('r1 item 5: every fixed-ending option preview shows the chance it turns (chance scale Rất thấp…Rất cao, never the act ladder: VANPHONG; and the story dialog kit hint keeps it, r3)',pv.words.length>0&&!wBad.length,wBad.slice(0,8));
  chk('r1 item 5: an ending that turned says why on the result card',pv.turned.end!=='win'&&pv.turned.row&&/Tưởng đã định/.test(pv.turned.row[1]),pv.turned);
  chk('r1 item 5: neutral context leans neither way (BAL.st14.shift.base both ways)',await p.evaluate(()=>{const Z=BAL.st14.shift;return Z.base-0*Z.slope===Z.base+0*Z.slope}),null);
  await p.context().close();
  /* ---- 2) old saves ---- */
- const mk=async(url,pre,tries)=>{const q=await boot(url,pre);const s=await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start();
-   for(let i=0;i<8;i++){Q.length=0;used=0;nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S){return{retry:1}}/* the life ended inside the 8 buổi (rebirth screen): build the save again */return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();if(s.retry&&(tries||0)<3)return mk(url,pre,(tries||0)+1);return s};
+ const mk=async(url,pre,tries)=>{const q=await boot(url,pre);
+   await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start()});
+   /* the first start() of a page finishes after the Luân hồi roulette (S is set a moment later) */
+   await q.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin&&S.st,null,{timeout:60000});
+   const s=await q.evaluate(()=>{for(let i=0;i<8;i++){Q.length=0;used=0;if(S.dead){S.dead=false;S.suc=60}nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S)return{retry:1};
+    return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();if(s.retry&&(tries||0)<3)return mk(url,pre,(tries||0)+1);return s};
  const olds=[];if(MAIN)olds.push(['main build',await mk(MAIN)]);olds.push(['frame off',await mk(URL,()=>{window.F14_ON=false})]);
  const q=await boot(URL);
  for(const [nm,o] of olds){const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));const plan=S.st.ch&&S.st.ch.plan.join(',');
