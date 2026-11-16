@@ -62,7 +62,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await setTm(A,{buoiMs:60000,pauseCapMs:6000,readMs:2000});await setTm(B,{readMs:2000});await reset(A);await clear(A);await clear(B);
  {const k=(await K(A)).k;ok(k===(await K(B)).k,'1: same buổi',k);
   await clear(B);ok(await press(B),'1: B presses Sẵn sàng');
-  ok(await until(A,()=>COOPW.tm.frReady()&&/Hảo hữu đã sẵn sàng/.test((document.getElementById('kctm')||{}).textContent||''),null,15000),'1: A sees "Hảo hữu đã sẵn sàng"',await K(A));
+  ok(await until(A,()=>COOPW.tm.frReady()&&/Đã sẵn sàng/.test((document.getElementById('kctmf')||{}).textContent||''),null,15000),'1: A sees "Hảo hữu đã sẵn sàng"',await K(A));
   await shot(A,'tm-ready-755x1000');
   const v=(await K(A)).v;ok(v&&v.left>40000,'1: clock still running long',v);
   await clear(A);const t0=Date.now();ok(await press(A),'1: A presses Sẵn sàng');
@@ -74,7 +74,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await setTm(A,{buoiMs:15000});await reset(A);
  {const k=(await K(A)).k;
   ok(await press(A),'2: A presses Sẵn sàng');const t0=Date.now();
-  ok(await until(B,()=>{const t=(document.getElementById('kctm')||{}).textContent||'';return /Còn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
+  ok(await until(B,()=>{const t=((document.getElementById('kctm')||{}).textContent||'')+((document.getElementById('kctmf')||{}).textContent||'');return /Còn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
   const ms=await bothPast(A,B,k,40000);ok(ms>=5000,'2: AFK B: time out steps both (not before the clock)',ms);
   const a=await K(A),bb=await K(B);ok(a.k===bb.k,'2: same buổi after time out',[a.k,bb.k])}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
@@ -87,9 +87,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const l1=(await K(A)).v.left;await sleep(3000);const v2=(await K(A)).v;ok(v2.pz&&Math.abs(v2.left-l1)<600,'3: paused clock does not run',[l1,v2.left]);
   ok(await until(A,()=>{const v=COOPW.tm.view();return v&&!v.pz&&v.run},null,10000),'3: after the cap the clock runs again',await K(A));
   ok(await until(A,k=>COOPW.tm.myKey()!==k,k0,20000),'3: time out → A steps');const ms=Date.now()-t0;ok(ms>=12000,'3: time out came after cap + length',ms);
-  const b1=await K(B);ok(b1.k===k0&&b1.pb&&b1.mg,'3: B still in the mini game, her step waits (pendBuoi)',b1);
+  await until(B,()=>!!COOPW.pendBuoi,null,8000);const b1=await K(B);ok(b1.k===k0&&b1.pb&&b1.mg,'3: B still in the mini game, her step waits (pendBuoi)',b1);
   await B.p.evaluate(()=>{S.mg=null;render()});
-  ok(await until(B,k=>COOPW.tm.myKey()!==k,k0,10000),'3: mini game over → B steps');
+  ok(await until(B,k=>COOPW.tm.myKey()!==k,k0,10000),'3: mini game over → B steps',await B.p.evaluate(()=>({k:COOPW.tm.myKey(),S:S.buoi,used,pend:COOPW.pend,sent:COOPW.sent,tr:(COOPW.tr||[]).slice(-25)})));
   await sleep(1500);const a=await K(A),bb=await K(B);ok(a.k===bb.k&&+bb.k.split(':')[1]===+k0.split(':')[1]+1,'3: B stepped exactly once',[k0,a.k,bb.k])}}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* get to tối (both press) */

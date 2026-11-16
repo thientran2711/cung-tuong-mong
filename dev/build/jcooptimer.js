@@ -33,6 +33,7 @@ const LSK="ctm-coop-tm";
 const pnow=()=>(typeof performance!=="undefined"&&performance.now)?performance.now():Date.now();
 const host=()=>CW.seat==="a";
 const other=()=>CW.seat==="a"?"b":"a";
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 const LAST=()=>typeof B4L==="number"?B4L:2;
 const wkN=()=>COOP.state.week||0;
 const live=()=>CW.on&&typeof S!=="undefined"&&!!S;
@@ -58,11 +59,14 @@ function lenMs(){const n=lenPick();return n?n*60000:TB().buoiMs}
 /* choosing a thân phận (first life / rebirth: Luân hồi), a death screen, the title: the clock stands still, no pause budget spent */
 function myLife(){if(!CW.on)return false;if(typeof S==="undefined"||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)||!!document.getElementById("kroul")}
 function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN())}
-const ST={key:"",pz:false,rd:false,lf:false,at:0};
-const FS={key:"",pz:false,rd:false,lf:false};
+const ST={key:"",pz:false,rd:false,lf:false,bz:false,kh:0,at:0};
+const FS={key:"",pz:false,rd:false,lf:false,bz:false,kh:0};
+/* busy (owner 16/11 friend chip "! Đang bận"): a dialog / event / mini game is open on her screen — the friend only ever sees "đang bận" */
+function myBz(){if(!live())return false;try{if(S.mg||Q.length)return true;const M=$("modal");if(M&&!M.hidden)return true;return inMg()}catch(e){return false}}
+const myKh=()=>{try{return Math.max(0,4-(+used||0))}catch(e){return 0}};
 let bended={a:false,b:false},bkeyB="";
-function sendSt(force){const k=roomKey(),pz=myPz(),rd=myRd(),lf=myLife(),t=pnow();if(!force&&ST.key===k&&ST.pz===pz&&ST.rd===rd&&ST.lf===lf&&t-ST.at<10000)return;
- ST.key=k;ST.pz=pz;ST.rd=rd;ST.lf=lf;ST.at=t;say("st",{key:k,pz,rd,lf})}
+function sendSt(force){const k=roomKey(),pz=myPz(),rd=myRd(),lf=myLife(),bz=myBz(),kh=myKh(),t=pnow();if(!force&&ST.key===k&&ST.pz===pz&&ST.rd===rd&&ST.lf===lf&&ST.bz===bz&&ST.kh===kh&&t-ST.at<10000)return;
+ ST.key=k;ST.pz=pz;ST.rd=rd;ST.lf=lf;ST.bz=bz;ST.kh=kh;ST.at=t;say("st",{key:k,pz,rd,lf,bz,kh})}
 function frReady(){const k=roomKey(),o=other();if(bkeyB===k&&bended[o])return true;if(FS.key===k&&FS.rd)return true;
  const e=COOP.state.ended||{};const b=+k.split(":")[1];return b>=LAST()&&!!e[o]}
 /* ---------- the clock: host ---------- */
@@ -111,7 +115,7 @@ function setHold(by){by=by||"";if(by===HOLD&&(!!HP===!!by))return;HOLD=by;
  if(!HP){HP=document.createElement("div");HP.id="kctmh";HP.className="modal kpscene";HP.setAttribute("role","alertdialog");document.body.appendChild(HP)}
  HP.innerHTML=kitCoopHold(by===CW.seat);const s=HP.querySelector(".kpseal");if(s)s.remove()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ctm]");if(!b)return;e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- if(b.dataset.ctm==="hold")hold(true);else if(b.dataset.ctm==="go")hold(false);
+ if(b.dataset.ctm==="hold")hold(true);else if(b.dataset.ctm==="go")hold(false);else if(b.dataset.ctm==="fr")frPanel(true);else if(b.dataset.ctm==="frx")frPanel(false);
  else if(b.dataset.ctm==="len"){try{localStorage.setItem(LENK,String(+b.dataset.n))}catch(x){}const r=b.closest(".kctmlen");if(r)r.outerHTML=kitCoopLenRow()}},true);
 /* ---------- time up: end her buổi (carried through any open dialog) ---------- */
 let due="",AR={m:null,t:0};
@@ -137,7 +141,7 @@ COOP.on("act",m=>{if(!m||m.k!=="ctm-tm"||!CW.on||m.from===CW.seat)return;
  if(m.mode==="clk")onClk(m);
  else if(m.mode==="tp"){if(host())say("tq",{t0:m.t0,n:m.n,th:Date.now()})}
  else if(m.mode==="tq"){if(!host())onTq(m)}
- else if(m.mode==="st"){const was=FS.key===m.key&&FS.rd;FS.key=m.key;FS.pz=!!m.pz;FS.rd=!!m.rd;FS.lf=!!m.lf;if(m.rd&&!was&&m.key===roomKey()&&!myRd())note();if(host())hostTick(0)}
+ else if(m.mode==="st"){const was=FS.key===m.key&&FS.rd;FS.key=m.key;FS.pz=!!m.pz;FS.rd=!!m.rd;FS.lf=!!m.lf;FS.bz=!!m.bz;FS.kh=+m.kh||0;FS.at=pnow();if(m.rd&&!was&&m.key===roomKey()&&!myRd())note();if(host())hostTick(0)}
  else if(m.mode==="hold"){if(host()&&K){if(m.on)K.hold=m.by||other();else if(K.hold===(m.by||other()))K.hold="";setHold(K.hold);hostTick(0)}}
  else if(m.mode==="ask"){sendSt(true);if(host()&&K)sendClk(false)}});
 const bv=m=>{if(m&&m.bended){bended={a:!!m.bended.a,b:!!m.bended.b};bkeyB=(m.week!=null?m.week:wkN())+":"+(m.buoi||0)}};
@@ -166,7 +170,17 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 #kctm{position:fixed;z-index:24;right:8px;pointer-events:none;max-width:calc(100vw - 16px)}
 #kctm[hidden]{display:none}
 #kctm .kchip{background:#fffaf0f2;box-shadow:0 2px 8px #0002}
-#kctmh{z-index:9400}
+#kctmh,#kctmp{z-index:9400}
+#kctmp .dlg #kctmpb{padding:8px 12px 2px}#kctmp .dlg #kctmpb .kpnote{margin:6px 0 0}
+#kctmp .dlg #kctmpr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
+.kctmf{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:5px;margin:0;padding:2px 6px 2px 2px;border:1px solid var(--gold,#b8892b);border-radius:16px;background:#fffaf0f2;box-shadow:0 2px 8px #0002;font:inherit;color:var(--ink,#3a2418);cursor:pointer;min-height:30px;max-width:100%}
+.kctmf .kctmf-f{flex:0 0 auto;display:inline-flex;width:26px;height:26px;border-radius:50%;overflow:hidden}
+.kctmf .kctmf-f>*{width:26px!important;height:26px!important;min-width:0!important;margin:0!important}
+.kctmf .kctmf-n{font-size:.74rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:9em}
+.kctmf .kchip{margin:0;white-space:nowrap;font-size:.72rem}
+#kctmf{position:fixed;z-index:24;max-width:calc(100vw - 16px)}
+#kctmf[hidden]{display:none}
+@media (max-width:599px),(max-height:430px){.kctmf .kctmf-n{max-width:5.5em}.kctmf .kctmf-s{font-size:.68rem}}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
@@ -176,7 +190,15 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
  else if(o.state==="pz")L.push(`<span class="kchip w">${ring}Đợi · còn ${fmtT(o.left)}</span>`);
  else if(o.state==="stop")L.push(`<span class="kchip n">${ring}Còn ${fmtT(o.left)}</span>`);
  else L.push(`<span class="kchip ${(o.left||0)<=20000?"r":"n"}">${ring}Còn ${fmtT(o.left)}</span>`);
- if(o.fr==="ready")L.push(kitChip("Hảo hữu đã sẵn sàng","ok"));else if(o.fr==="busy")L.push(kitChip("Hảo hữu đang dở tay, xin đợi","w"));
+ /* the friend's status, always shown (owner 16/11: "không biết hảo hữu đang tới đâu hay sẵn sàng chưa"): name + one word */
+ const nm=o.name?esc(String(o.name).slice(0,16))+" ":"";
+ if(o.fr==="ready")L.push(kitChip(`${nm||"Hảo hữu "}đã sẵn sàng`,"ok"));
+ else if(o.fr==="busy")L.push(kitChip(o.me?"Hảo hữu đang dở tay, xin đợi":`${nm||"Hảo hữu "}đang dở tay`,"w"));
+ else if(o.fr==="hold")L.push(kitChip(`${nm||"Hảo hữu "}xin tạm dừng`,"w"));
+ else if(o.fr==="away")L.push(kitChip(`${nm||"Hảo hữu "}đang vắng`,"r"));
+ else L.push(kitChip(o.me?"Hảo hữu đang dở tay, xin đợi":`${nm||"Hảo hữu "}đang hành sự`,o.me?"w":"n"));
+ /* she is ready, the friend not yet: what she can still do meanwhile */
+ if(o.me&&o.fr!=="ready")L.push(kitChip("Trong lúc đợi: xem các tab, Tư trang, Sổ ghi","n"));
  if(o.btn)L.push(`<button type="button" class="kchip n" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button>`);
  return `<span class="kchips kctm">${L.join("")}</span>`}
 /* the panel over both screens while the game is held (kit panel markup, as the freeze panel #coopfz) */
@@ -187,18 +209,62 @@ function kitCoopHold(mine){css();const t=mine?["Đang tạm dừng","Hậu cung 
 function kitCoopLenRow(){css();const cur=lenPick()||Math.round(TB().buoiMs/60000);
  const B=TB().lens.map(n=>`<button type="button" class="kchip ${n===cur?"g":"n"}" data-ctm="len" data-n="${n}" aria-pressed="${n===cur}">${n===cur?"✓ ":""}${n} phút</button>`).join("");
  return typeof kitRows==="function"?`<div class="kctmlen">${kitRows([["Mỗi buổi tối đa",`<span class="kchips kctm">${B}</span>`,"t"]])}</div>`:""}
+/* §69.2 FRIEND CHIP (owner 16/11: "Đồng hồ count down cho 2 người chơi đâu? Nút sẵn sàng của hảo hữu đâu …", coordinator spec): top of the
+   screen, always visible in co-op: her face (grey silhouette until met — stranger rule, kitFaceH) + "Hảo hữu của ta" (her name once known)
+   + one status chip + the shared buổi countdown. st: ready ✓ / busy ! / work … / away / hold ⏸. Tap → kitCoopFriendPanel. */
+const FST={ready:["g","✓","Đã sẵn sàng"],busy:["w","!","Đang bận"],work:["n","…","Đang làm việc"],away:["r","✕","Đang vắng"],hold:["w","⏸","Tạm dừng"]};
+const mmss=ms=>{const s=Math.max(0,Math.ceil((ms||0)/1000));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
+function kitCoopFriend(o){css();o=o||{};const s=FST[o.st]||FST.work;
+ const clk=o.clock==null?"":o.clock==="up"?`<span class="kchip r kctmf-t">Hết buổi</span>`:`<span class="kchip ${o.clock==="pz"?"w":(o.left||0)<=20000?"r":"n"} kctmf-t">${o.clock==="pz"?"Đợi":"Còn"} ${mmss(o.left)}</span>`;
+ return `<button type="button" class="kchips kctmf" data-ctm="fr" aria-label="${esc((o.name||"Hảo hữu của ta")+": "+s[2])}"><span class="kctmf-f">${o.face||""}</span><span class="kctmf-n">${esc(o.name||"Hảo hữu của ta")}</span><span class="kchip ${s[0]} kctmf-s"><b>${s[1]}</b> ${s[2]}</span>${clk}</button>`}
+function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const nm=o.name||"Hảo hữu của ta";
+ const fw={ready:o.meRd?"đã sẵn sàng":"đã sang buổi, đang chờ ngươi",busy:"đang bận việc, xin đợi chốc lát",work:`đang làm việc${o.kh?` · còn ${o.kh} khắc`:""}`,
+  away:"đang vắng hay mất kết nối · hảo hữu mở lại trò chơi là tự vào lại",hold:"xin tạm dừng chốc lát"}[o.st]||"đang làm việc";
+ const rows=[["Hảo hữu",`${s[1]} ${fw}`,s[0]],["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${fmtT(o.left)}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"],
+  ["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"]];
+ const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
+  o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì bấm Sẵn sàng (hay hết khắc) là sang buổi cho cả hai.":
+  "Cứ làm việc của ngươi. Hết khắc hay bấm Sẵn sàng là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
+ return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",nm,"Hảo hữu cùng chơi"):`<b>${esc(nm)}</b>`}<div class="body" id="kctmpb">${typeof kitRows==="function"?kitRows(rows):""}<p class="kpnote">${note}</p></div><div class="row" id="kctmpr"><button class="kbtn" data-ctm="frx">Đóng</button></div></div>`}
+window.kitCoopFriend=kitCoopFriend;window.kitCoopFriendPanel=kitCoopFriendPanel;
 window.kitCoopClock=kitCoopClock;window.kitCoopHold=kitCoopHold;window.kitCoopLenRow=kitCoopLenRow;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§69",title:"kitCoopClock · kitCoopHold · đồng hồ buổi khi chơi cùng hảo hữu",
- html:()=>[{left:102000,len:120000,state:"run",btn:true},{left:15000,len:120000,state:"run",fr:"ready"},{left:64000,len:120000,state:"pz",fr:"busy"},{left:0,len:120000,state:"up"}].map(o=>`<div class="kitpg-row">${kitCoopClock(o)}</div>`).join("")+
+ html:()=>[{left:102000,len:120000,state:"run",btn:true,name:"Lan"},{left:15000,len:120000,state:"run",fr:"ready",name:"Lan"},{left:64000,len:120000,state:"pz",fr:"busy",name:"Lan"},{left:80000,len:120000,state:"run",me:true,name:"Lan"},{left:50000,len:120000,state:"stop",fr:"away",name:"Lan"},{left:0,len:120000,state:"up"}].map(o=>`<div class="kitpg-row">${kitCoopClock(o)}</div>`).join("")+
   `<div class="kitpg-row" style="position:relative">${kitCoopHold(false)}</div>`})}catch(e){}
 /* ---------- the chip over #next ---------- */
-let EL=null,lastH="";
-function hideChip(){if(EL&&!EL.hidden)EL.hidden=true}
-function paint(force){if(!live()||S.dead){hideChip();return}const v=view();const M=$("modal"),T=$("title"),nx=$("next");
- if(!v||!nx||!nx.offsetParent||(M&&!M.hidden)||(T&&!T.hidden)||document.getElementById("coopfz")||HP){hideChip();return}
- const fr=frReady()?"ready":(FS.key===v.key&&FS.pz)?"busy":"";
+let EL=null,lastH="",waitKey="",FE=null,lastF="",FP=null;
+function hideChip(){if(EL&&!EL.hidden)EL.hidden=true;if(FE&&!FE.hidden)FE.hidden=true}
+/* the friend's state as one word (FST) */
+function frSt(v){if(!COOP.state.peerOnline)return"away";if(frReady())return"ready";const k=v?v.key:roomKey();const h=v?v.hold:HOLD;
+ if(h&&h!==CW.seat)return"hold";if(FS.key===k&&(FS.pz||FS.bz||FS.lf))return"busy";return"work"}
+function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend():null;let name="",face="";
+ try{if(f){const named=typeof k61Named==="function"?k61Named(f):true;if(named)name=f.name||"";face=typeof kitFaceH==="function"?kitFaceH(f,"xs"):""}}catch(e){}
+ if(!name){try{const so=(COOP.state.seats||{})[other()];void so}catch(e){}}
+ const clock=!v?null:(v.up||(v.run&&v.left<=0))?"up":(v.pz||v.hold||!v.run||frozenRoom())?"pz":"run";
+ return {name,face,st:frSt(v),left:v?v.left:0,clock,kh:FS.kh,meRd:myRd(),myKh:myKh()}}
+/* top of the screen: right of the buổi line in the bar when there is room, else just under the bar at the right */
+function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE)return;const H=hud.getBoundingClientRect(),w=FE.offsetWidth,h=FE.offsetHeight;
+ const sl=hud.querySelector(".kseal-hud");const R0=Math.min(innerWidth-6,sl?sl.getBoundingClientRect().left-4:H.right-4);
+ const lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length&&!FE.contains(e)).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
+ const free=(x,y)=>x>=H.left+2&&x+w<=R0&&y>=H.top&&y+h<=H.bottom&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+1&&y+h>q.top-1);
+ const tm=hud.querySelector("#k3tc .k3time"),tr=tm&&tm.getBoundingClientRect();
+ const C=[];if(tr&&tr.width){C.push([R0-w,tr.top+(tr.height-h)/2]);C.push([tr.right+10,tr.top+(tr.height-h)/2])}
+ const at=C.find(([x,y])=>free(x,y))||[Math.max(8,innerWidth-8-w),H.bottom+4];
+ FE.style.left=Math.round(at[0])+"px";FE.style.top=Math.round(at[1])+"px"}
+function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)||document.getElementById("coopfz")||HP){if(FE&&!FE.hidden)FE.hidden=true;return}
+ const o=frInfo();const h=kitCoopFriend(o);
+ if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");document.body.appendChild(FE)}
+ if(h!==lastF){FE.innerHTML=h;lastF=h}if(FE.hidden)FE.hidden=false;placeF();if(FP)FP.innerHTML=kitCoopFriendPanel(o)}
+function frPanel(on){if(!on){if(FP){FP.remove();FP=null}return}if(!FP){FP=document.createElement("div");FP.id="kctmp";FP.className="modal kpscene";FP.setAttribute("role","dialog");document.body.appendChild(FP);
+ FP.addEventListener("click",e=>{if(e.target===FP)frPanel(false)})}FP.innerHTML=kitCoopFriendPanel(frInfo());const s=FP.querySelector(".kpseal");if(s)s.remove()}
+function paint(force){if(!live()||S.dead){hideChip();return}try{paintF()}catch(e){console.error(e)}const v=view();const M=$("modal"),T=$("title"),nx=$("next");
+ if(!v||!nx||!nx.offsetParent||(M&&!M.hidden)||(T&&!T.hidden)||document.getElementById("coopfz")||HP){if(EL&&!EL.hidden)EL.hidden=true;return}
+ const fo=(COOP.state.seats||{})[other()];const fr=frReady()?"ready":!COOP.state.peerOnline?"away":(v.hold&&v.hold!==CW.seat)?"hold":(FS.key===v.key&&FS.pz)?"busy":"";
+ const me=myRd();if(me&&fr!=="ready"&&waitKey!==v.key){waitKey=v.key;try{kitLine("Hảo hữu đang dở tay, xin đợi · trong lúc đợi vẫn xem được các tab, Tư trang, Sổ ghi",5000)}catch(e){}}
+ /* she can still press "Sẵn sàng" and her khắc are spent: the kit selected look (.ksel) on the button */
+ const go=!me&&!nx.disabled&&typeof used==="number"&&used>=4;if(nx.classList.contains("ksel")!==go)nx.classList.toggle("ksel",go);
  const state=v.up||(v.run&&v.left<=0)?"up":(v.pz||v.hold)?"pz":(!v.run||frozenRoom())?"stop":"run";
- const h=kitCoopClock({left:v.left,len:v.len||lenMs(),state,fr,btn:!v.up&&!frozenRoom()});
+ const h=kitCoopClock({left:v.left,len:v.len||lenMs(),state,fr:me?fr:"",me,name:fo&&fo.name||"",btn:!v.up&&!frozenRoom()&&!me});
  if(!EL){css();EL=document.createElement("div");EL.id="kctm";EL.setAttribute("role","status");EL.setAttribute("aria-live","off");document.body.appendChild(EL)}
  if(h!==lastH||force){EL.innerHTML=h;lastH=h}
  const r=nx.getBoundingClientRect();EL.style.right=Math.max(8,Math.round(innerWidth-r.right))+"px";EL.style.bottom=Math.round(innerHeight-r.top+6)+"px";if(EL.hidden)EL.hidden=false}
@@ -211,7 +277,7 @@ function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(20
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold)}
  sendSt(false);dueTick();paint(false)}catch(e){console.error("coop clock",e)}}
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
-function stop(){if(IV){clearInterval(IV);IV=0}hideChip();K=null;G=null;due="";AR.m=null;setHold("")}
+function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);K=null;G=null;due="";AR.m=null;setHold("")}
 if(CW.on)go();
 /* test hooks (dev/test/coop-timer*.js) */
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};

@@ -96,7 +96,7 @@ COOP.on("error",e=>{if(LM&&(PG==="wait"||PG==="join")){ERR=errText(e);open("err"
 COOP.on("both",()=>{if(!LM)return;drop();PG="";try{T.hidden=true}catch(e){}const s=COOP.state;COOP.emit("start",{room:s.room,you:s.you,host:s.you==="a",week:s.week,state:s.C})});
 /* freeze overlay: kit panel markup (.modal.kpscene > .dlg.kpanel with kpHeader), above everything, no way around it but waiting or leaving */
 let FZ=null;
-const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang nối lại."],peer:["Đợi hảo hữu trở lại","Hảo hữu đã rời cuộc. Hậu cung dừng lại cho đến khi hảo hữu trở lại."],
+const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang tự nối lại, không mất gì."],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
  week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();

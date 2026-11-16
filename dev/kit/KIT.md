@@ -2934,3 +2934,11 @@ Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §7
   "Hết buổi: xem xong là sang buổi", "Hết buổi tối: sang ngày mới".
 - #next in co-op reads "Sẵn sàng" (the lock words "Đợi hảo hữu…" stay). Numbers: `BAL.coopTm` (jbal2). Sample on the kit page (§47): "§69".
 
+- §69.1 (owner 16/11 "Đồng hồ count down … nút sẵn sàng của hảo hữu đâu", "chờ mà không hiểu nên làm gì tiếp", review/coop-timer-r1):
+  the friend's chip is ALWAYS shown, with her name (`o.name`, ≤ 16 chars): `ready` → `kitChip("<Tên> đã sẵn sàng","ok")`, `busy` (mini game) →
+  `.w` "<Tên> đang dở tay", `hold` → `.w` "<Tên> xin tạm dừng", `away` (friend offline) → `.r` "<Tên> đang vắng", else `.n` "<Tên> đang hành sự".
+  `o.me` (SHE is ready, the friend not): friend chip `.w` "Hảo hữu đang dở tay, xin đợi" + `.n` "Trong lúc đợi: xem các tab, Tư trang, Sổ ghi",
+  no Tạm dừng button; once per buổi a kitLine says the same. #next lock words (jcoopworld lockNext) always say why: "Chờ hảo hữu…" (she is
+  ready / her week end is out), "Đợi hảo hữu" (host's places / a step after a dialog), "Hảo hữu đang vắng", "Đang nối lại…", "Đợi cùng bản mới".
+  Khắc spent and she can still press "Sẵn sàng": #next gets the kit selected look `.ksel` (§31.13).
+  Freeze panel (#coopfz, peer): "Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; …".
