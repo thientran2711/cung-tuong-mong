@@ -123,3 +123,4 @@ Owner questions OPEN: NVP glossy floor (superseded by her 07:15Z redo order); fp
 - (07:18Z s11 final) LIVE: main = bad941b4 (merge-hot-1: Học Cầm modal swipe, Ân tình 0→N log-sync fix, book-fig). Next in ff queue: flip-newlife-r1 (s12 sends go).
 - (07:19Z s12) LIVE: main = bad941b4 (merge-hot-1: modal-scroll, log-sync-r2 Ân tình, book-fig; on top of bd6342c7). ff #2 flip-newlife-r1 GO sent.
 - (07:20Z s12) OD 'no word games' (07:20Z s11) → Foreman B mg-balance scope; s12 follows up on B pickup each wake; tell owner when the replacement list is ready.
+- (07:22Z s12) weather-fx-one-r1 PASS 5a6ea974 (from main bad941b4) → ff queue after kc-lore-r1 (queue now: flip-newlife-r1 [GO sent] → servant-system-r1 → kc-lore-r1 c40335d0 → weather-fx-one-r1 → merge-train-5 → merge-train-4 1a32f53a when its round ends). fp v3b sent to owner 07:21Z (layout fix done, 0 cr).
