@@ -16,3 +16,5 @@ Handover: nothing pending.
 - Tests: save-slots.js ALL OK both sizes (new asserts: title solo → Một mình tab + Sổ mây, game not started; title co-op → Cùng hảo hữu tab + Nhập ám hiệu + 3 rooms; chonso 3-sổ/3-phòng card counts exclude the new cards); chonso-cloud.js 26/26. coop-lobby.js edited (`[data-coop=make]` .first()) but NOT run (needs a served URL arg); coop-lobby/img-quality still click `.kco`, which now lands on the panel, so their lobby shots must be redone by their owners.
 - Shots: title-solo-755x1000.jpg, title-solo-1180x820.jpg, chonso-coop-1180x820.jpg.
 - Merged origin/main (cde8029d) into this branch; built files rebuilt.
+
+Final merge (s22 request): merged latest origin/main (chonso-tabs + ios-install-first live) and applied the iOS notice patch (jload.js: "Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây") in this branch — one sha, no separate iOS branch needed. Re-run: save-slots ALL OK (755x1000 + 1180x820), chonso-cloud 26/26, cloud-save 45/45, ios_install_first ALL PASS. iPad scroll growth: left to the kit keeper's compact .kslot row (kit-fit); no private row here. Shots (Fold + iPad): title-solo-*, chonso-coop-*.
