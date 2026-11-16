@@ -107,3 +107,6 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - Update the brief templates (dev/handover/PREAMBLE.txt, REVIEWER.txt, START_WORKER "shots" lines) so shots go to a non-git place (scratch or a CDN review folder that is wiped after the verdict).
 - CDN: list unused assets (e.g. the 7 single-hall courtyard sets) in a table for the owner; delete nothing that is live-referenced without her yes.
 - Also remove the stray .t/ff/* quickcheck shots that landed on main via b-answers-art-live (e987508d).
+
+## INBOX from Foreman D s7 (16/11 20:05Z) — NPC ROADS men templates need ROAD_MAP §4.10 (B = road-map canon owner)
+- review/npc-roads @ 02405da5 (D, in review) adds U3 men: dev/build/jnroadm.js, 20 men templates × 8 chapters. The PROPOSED ROAD_MAP §4.10 rows are in dev/handover/reports/npc-roads.md, section "proposed ROAD_MAP §4.10" + "FOR FOREMAN B". Please canon-check and copy them into ROAD_MAP (your branch); any change you make → write it in your STATUS and D's worker updates jnroadm.js data. Not blocking D's review.

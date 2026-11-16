@@ -2,6 +2,7 @@
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
 last wake: 16/11 19:38Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
+- 20:05Z: npc-roads U2 maids + U3 men (jnroadm.js, 20 templates) + U4 balance SẴN SÀNG KIỂM 02405da5 (consorts 38/38, maids 22/22, men 23/23, saves 6/6; BAL.nroad.fx rebalanced NPC Danh/Sủng ON≈OFF) — worker archived; npc-roads-r1 reviewer told to give ONE verdict on 02405da5. §4.10 men rows proposal → FOREMAN_B.md INBOX (B canon).
 - 19:50Z: coop-name-mask r2 SẴN SÀNG KIỂM 48a942b2 (unmet friend = 'Hảo hữu' everywhere = live chip / OD:L1061; met = name; reborn = unknown; face met61) — worker archived → sonnet SMALL reviewer session_01DgYSWmQ9JPMfwpdYSLALUt (review/coop-name-mask-r1).
 - 19:48Z: suc-khoe SẴN SÀNG KIỂM 10cba645 (worker archived) → opus BIG reviewer session_01DgYSWnQ5MJS6ViDgFmBeGV (review/suc-khoe-r1). NUMBER FOR OWNER: NPC births/consort-year 0.097 → 0.141 (+45 %) from her ở cữ 1 month + ×0.7 removal; mother deaths/birth 9.1 → 7.6 %; BAL.conc NOT retuned (would undo her ruling) — owner/main to decide.
 - 19:38Z (hourly): no new D INBOX; new OD lines (s22: side columns, avatar frame) not D items. 5 D sessions alive: golive prep (b1b5 BIG set), suc-khoe, npc-roads-r1 reviewer, npc-roads U2/U3, coop-name-mask redo. No free real D item → none opened. Context ≈ 12 %.
@@ -228,5 +229,5 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 | HEALTH + PREGNANCY BUNDLE (main s21 18:08Z…19:00Z) | review/suc-khoe | opus | SẴN SÀNG KIỂM 10cba645 (worker archived) → reviewer suc-khoe-r1 session_01DgYSWnQ5MJS6ViDgFmBeGV RUNNING |
 | coop-chat-r1 go-live | b7c5d787 | — | LIVE 18:21Z (Worker deploy run #5 success); live 2-client test pending (golive worker) | b1b5 pre-run: coop-r2 36/46 (10 FAIL "NPC acts on her" — mindRun returns "") → worker investigating, NOT READY |
 | NPC ROADS U0+U1 | review/npc-roads f699bbf4 | opus | SẴN SÀNG KIỂM → reviewer npc-roads-r1 session_01DgYSWnawxUrsTQBmbc3jg7 RUNNING |
-| NPC ROADS U2 maids + U3 men + U4 | review/npc-roads | opus | successor session_01DgYSWnAp8mvj9ZAfXiKrhf RUNNING 18:50Z |
+| NPC ROADS U2 maids + U3 men + U4 | review/npc-roads | opus | SẴN SÀNG KIỂM 02405da5 (worker archived) → reviewer npc-roads-r1 (whole branch) |
 | coop-name-mask (co-op friend shown unmet) | review/coop-name-mask | sonnet | SẴN SÀNG KIỂM 48a942b2 (worker archived) → reviewer r1 session_01DgYSWmQ9JPMfwpdYSLALUt RUNNING |

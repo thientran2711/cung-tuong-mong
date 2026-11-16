@@ -337,7 +337,7 @@
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
 | emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | DONE FAIL 2 (archived) | 16/11 18:50Z |
 | npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | RUNNING | 16/11 18:50Z |
-| NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | RUNNING | 16/11 18:50Z |
+| NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | DONE SẴN SÀNG KIỂM 02405da5 (archived; reviewer npc-roads-r1 now covers U0–U4) | 16/11 18:50Z |
 | road-b1 FAIL fix A (opus): engine item 1 (RD97L/E.r97) + all items in jrd_tt + jrd_dtq; merges fix B at the end → SẴN SÀNG | review/road-b1-fixa | B | session_01N1tNP2G4bsFxWrsbzomkzU | RUNNING | 16/11 18:55Z |
 | road-b1 FAIL fix B (opus): items 2–9 + smaller in jrd_muoi + jrd_cn | review/road-b1-fixb | B | session_01N1tNP2czBg1KKfRHBThvj3 | DONE 70a43f49 merged by fix A (archived) | 16/11 18:55Z |
 | PL COURTYARDS paint (sonnet art; OD:L1415 + 19:25Z; MISSING TSV in origin/review/pl-courtyards-r1:dev/handover/reports/pl-courtyards-r1.md, 6 multi-hall dirs incl. tang; 1 sample first → owner, then batch, CDN img/pl2 + pl2_sync.py) | review/pl-courtyards-art | C | session_011xDdVPpLX6EsrLyakadqwQ | DONE 299 on CDN, code d8f8edab → main s22 chain | 16/11 18:55Z |
