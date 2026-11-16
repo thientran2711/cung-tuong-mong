@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 09:53Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:05Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -28,7 +28,8 @@ main at start = eba64ead4.
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
-| servant-mline FAIL fixes | review/servant-mline-r2 @c3e1cacd | opus | SẴN SÀNG KIỂM → reviewer session_01DgYSWkVHL3tGcMAWshbEUA RUNNING (review/servant-mline-r3) |
+| servant-mline FAIL fixes | review/servant-mline-r3 | opus | PASS b82d3bf3 |
+| co-op guest's own maid cannot rise (note C, HIGH, pre-existing on main) | review/coop-guest-maid | opus | (opening) |
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → reviewer session_01DgYSWoEfbFL74QqJ1ySvjK RUNNING (review/slap-mg-r3) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
@@ -44,6 +45,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/servant-mline-r3 b82d3bf3b0bc6096c92eebaff5ae91731868b8ac (servant-system part C jmline active NPC maid line + gain/loss caught chance per act + co-op host guard; contains part A servant-system-r1; main 18fb8252 ancestor; report reports/review-servant-mline-r3.md)
 - READY review/scene-end-sweep-r1 67db47f616f41f93098ba64bbcdfee646053d517 (owner OD 07:20Z: every animation scene ends with a kit §81 button; toilReveal, kitGain, j79 dawn, roulette converted; main 18fb8252 ancestor; non-blocking: kitPodiumShow missing from the scan table, j18 dawn onclick dead code)
 - READY review/reign-road-fix-r1 90c5b9e50641edb94c2bcec465cc31e1c66bba49 (orphan #33: unmet consorts no longer shown as "Quý phi ???" in Triều cục + 11 other sites via kitNameList; main 18fb8252 ancestor; report reports/review-reign-road-fix-r1.md)
 - READY review/act-split-w2-r1 072687e2cd549536374db37fe393f1b077464c39 (act-split waves 2–3 + Emperor-stroll first "!" slot; main 399483e3 is an ancestor → ff OK; report reports/review-act-split-w2-r1.md)
