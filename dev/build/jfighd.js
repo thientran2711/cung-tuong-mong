@@ -8,23 +8,23 @@
    and keeps the light file otherwise (performance budget). src stays the 900 file (all code that compares / keys on src is unchanged).
    A src change by any code drops a stale srcset at once (MutationObserver). Test hook: window.KFHD {n, list}. ================= */
 (function(){
- const K=window.KFHD={map:null,n:0,ld:0};const RE=/\/img\/(fig-[^\/?#]+\.webp)(?:[?#].*)?$/;
+ const K=window.KFHD={map:null,n:0,ld:0,bad:{}};const RE=/\/img\/(fig-[^\/?#]+\.webp)(?:[?#].*)?$/;
  function hdUrl(lo){return lo.replace(/\/img\/(fig-[^\/?#]+\.webp)/,"/img/hd/$1")}
- function fit(im){try{const s=im.getAttribute("src")||"";const m=RE.exec(im.src||s);const ent=m&&K.map&&K.map[m[1]];
-   if(ent&&K.bad&&K.bad[m[1]])return;
+ function fit(im){try{const s=im.getAttribute("src")||"";const m=RE.exec(im.src||s);const ent=m&&K.map&&!K.bad[m[1]]&&K.map[m[1]];
    if(!ent){if(im.dataset.kfhd){im.removeAttribute("srcset");im.removeAttribute("sizes");delete im.dataset.kfhd}return}
    const ss=`${im.src} ${ent[0]}w, ${hdUrl(im.src)} ${ent[1]}w`;if(im.getAttribute("srcset")!==ss){im.setAttribute("srcset",ss);im.dataset.kfhd=m[1];K.n++}
    const w=Math.round(im.getBoundingClientRect().width);const sz=(w>4?w:ent[0])+"px";if(im.getAttribute("sizes")!==sz)im.setAttribute("sizes",sz)}catch(e){}}
  function all(){if(!K.map)return;document.querySelectorAll("img").forEach(im=>{if(im.dataset.kfhd||RE.test(im.src||""))fit(im)})}
  window.kitFigHD=fit;window.kitFigHDAll=all;
  function load(){if(K.ld)return;K.ld=1;try{fetch("img/FIGURES-hd.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&typeof j==="object"){K.map=j.files||j;K.list=Object.keys(K.map).length;all()}}).catch(()=>{K.ld=0})}catch(e){K.ld=0}}
+ /* FALLBACK: a browser that picked an HD twin which fails to load (missing file / network) shows NO picture (srcset candidate failed, src not retried).
+   Drop the srcset at once so the 900 px src loads, and never offer that twin again this session. */
+ document.addEventListener("error",e=>{const t=e.target;try{if(t&&t.tagName==="IMG"&&t.dataset.kfhd&&/\/img\/hd\//.test(t.currentSrc||"")){K.bad[t.dataset.kfhd]=1;K.fb=(K.fb||0)+1;t.removeAttribute("srcset");t.removeAttribute("sizes");delete t.dataset.kfhd;const s=t.getAttribute("src");t.setAttribute("src",s)}}catch(x){}},true);
  load();setInterval(()=>{K.ld=0;load()},300000);
  let T=0;const sched=()=>{if(T)return;T=requestAnimationFrame(()=>{T=0;all()})};
  try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){const im=m.target;if(im.tagName==="IMG"&&m.attributeName==="src")fit(im)}else if(m.addedNodes.length){sched();break}}})
   .observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:["src"]})}catch(e){}
  addEventListener("resize",()=>{clearTimeout(window.__kfhdT);window.__kfhdT=setTimeout(all,150)});
- /* review/face-sharp-r2: an HD twin that fails to load (404, offline, CDN hiccup) must never blank a figure: drop the srcset at once so the 900 file shows, and never re-add it for that file this session */
- document.addEventListener("error",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.dataset&&t.dataset.kfhd&&t.getAttribute("srcset")){K.bad=K.bad||{};K.bad[t.dataset.kfhd]=1;t.removeAttribute("srcset");t.removeAttribute("sizes");delete t.dataset.kfhd}},true);
  document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&RE.test(t.src||"")&&!t.dataset.kfhdw){t.dataset.kfhdw=1;fit(t)}},true);
 })();
 /* ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----

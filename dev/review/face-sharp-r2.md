@@ -1,6 +1,8 @@
 # Review face-sharp-r2 (reviewer, 16/11) — branch review/face-sharp @ e9cc2b870b, merged onto origin/main a523531
 
-RESULT: **PASS** (after one reviewer fix, item 1 below; the worker's own build FAILED the HD-fallback check).
+RESULT: **PASS**. NOTE: at final merge (origin/main a3dbdc19f3) main ALREADY contains review/face-sharp via r1 incl. an equivalent HD-failure fallback (jfighd.js `error` handler, K.bad), so
+this branch's final tree = main + this note + dev/test/face-sharp-probe.js; my own jfighd fix (item 1) was dropped in favour of main's. Tests below ran on the pre-merge build of e9cc2b870b (+my fix).
+The worker's e9cc2b870b alone FAILED the HD-fallback check (item 1); main's version was read, not re-run in a browser (same mechanism).
 
 ## What I checked and found
 1. **HD fallback (FAIL on the worker's sha, fixed in r2).** With `img/hd/*` answering 404 (also what happens offline: the SW does not cache HD files by manifest,
@@ -39,6 +41,6 @@ RESULT: **PASS** (after one reviewer fix, item 1 below; the worker's own build F
     Not run: coop-e2e (co-op not touched). Memory was tight (other agents' browsers), runs were sequential, one browser.
 
 ## Reviewer changes on review/face-sharp-r2
-- dev/build/jfighd.js: HD-failure fallback (item 1); site rebuilt (index.html, sw.js, assets.json).
+- (dropped at final merge, superseded by main) dev/build/jfighd.js HD-failure fallback.
 - dev/test/face-sharp-probe.js: the probe used above.
-- merge of origin/main a523531: assemble.py file list (main's + jfighd.js last), KIT.md both §70 and §71 kept.
+- merges of origin/main (a523531, then a3dbdc19f3): conflicting generated/kit files taken from main.
