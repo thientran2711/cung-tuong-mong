@@ -14,10 +14,10 @@
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10 giây."},
- tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10 giây."},
- xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10 giây."},
- thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10 giây."}};
+ le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."},
+ tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."},
+ xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."},
+ thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì bấm Gợi ý."}};
 const EXQ={
  le:[{q:"Gặp Thái hậu giữa hành lang, phi tần phải làm gì?",a:"Đứng nép bên đường, cúi mình vấn an",w:["Đi tiếp cho kịp giờ","Gật đầu chào","Hỏi Thái hậu đi đâu"]},
   {q:"Thỉnh an Hoàng hậu vào lúc nào?",a:"Sáng sớm, theo giờ Hoàng hậu định",w:["Lúc nào rảnh thì sang","Chiều tối trước giờ ngủ","Chỉ ngày lễ Tết"]},
@@ -61,7 +61,7 @@ const EXQ={
   {q:"«Hoàng thượng giận một đại thần, hỏi ý ngươi. Ngươi đáp?»",a:"Xin ngài nguôi giận rồi hãy xét",w:["Xin chém ngay","Bênh đại thần","Kể thêm lỗi của đại thần"]}]};
 /* the quiz engine (j82) reads these banks; the kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
 (function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k];
- if(typeof kg82Bank!=="function")return;const b0=kg82Bank;kg82Bank=function(b){if(EXQ[b])return kg82Shuf(EXQ[b]).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,2)}));return b0.apply(this,arguments)}})();
+ if(typeof kg82Bank!=="function")return;const b0=kg82Bank;kg82Bank=function(b){if(EXQ[b])return kg82Shuf(EXQ[b]).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,3)}));return b0.apply(this,arguments)}})();
 
 /* ---------- rules (numbers in BAL.ex, jbal2) ---------- */
 const EX_VIR=[["cong","dung"],["dung","ngon"],["ngon","hanh"]];
@@ -178,7 +178,7 @@ function exStart(){const e=exS(S);const P=exPlan(S);
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);KG82.lv=lv;try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`});if(!d){exAbort();return}
   const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
-  box.innerHTML=`<h4 class="kpst">Khảo hạch tấn phong ${exRk(P.to)}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
+  box.innerHTML=`<h4 class="kpst">Khảo hạch tấn phong ${exRk(P.to)}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv,k)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
