@@ -1,6 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 ORDER 16/11 applied (05:19Z 16/11): no new in-session subagents — every new worker/reviewer is a separate cloud session (create_session); workers report to their branch + PROGRESS + dev/handover/reports/<branch>.md; items claimed in dev/handover/CLAIMS.md before opening; hourly self-wake.
-last wake: 05:19Z 16/11
+last wake: 06:23Z 16/11
 Context: this session is already far past start+25% (long session, est.). The 12 in-session agents below were started before the order and may finish; Foreman C rolls over (HANDOVER block + create_session) as soon as they have reported or at the first summarisation, whichever comes first.
 Updated: 11/16/2026 05:30Z — 12 agents running (cap 12). Repack done: .git packs 17 GB → 4.1 GB (56 → 2 packs), disk 4.6 → 21 GB free. Will repack again if packs pass ~12 GB.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
@@ -19,11 +19,11 @@ Base main at start: 900ace7fb.
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
 | D46b new placeholders + Tứ đức/arts self-study pictures | review/placeholder-pics3-r1 | sonnet | PASS 696127b32 (contains opt-pics2-r1 + placeholder-pics2-r1) |
 | D50 consort full-body placeholders | — | sonnet | DONE — NO ART NEEDED: audit of 8744 manifest entries vs CDN = 0 missing; 400-turn soak 0 empty figFor. Cause is code (see NOTE) |
-| D52 skin-match audit | review/skin-audit @704b8f669 (240 fixed + uploaded) → review/skin-audit-r1 | sonnet | REVIEWING (session session_011xDdVQAh8KF6j8akV71fAj) |
+| D52 skin-match audit | review/skin-audit-r1 | sonnet | PASS d16535c68 |
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
 | D45 small art + wiring | review/small-art-wire-r1 | sonnet | PASS 6bce72fa6 — CONDITIONAL on kit keeper (K10: kitReward CSS for >6-row chest lists) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
-| D23 whole-game mole audit + D24 consort-c12-ty5-a51 eye patch | review/mole-audit | sonnet | RUNNING (art worker) |
+| D23 whole-game mole audit + D24 eye patch | review/mole-audit | sonnet | PAUSING (ALL ART PAUSED tonight, owner 07:30Z) — asked to push WIP + PROGRESS and stop; resume in her morning |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
@@ -35,9 +35,9 @@ Base main at start: 900ace7fb.
 | D16 Tứ đức sub-styles + CDNH works | review/tuduc-sub-r1 | opus | PASS adeb7de66 (reviewer capped Đức from handmade works at 1/month shared with Chép kinh — BAL.wkFinCap) |
 | D17 luxury / xa xỉ system + dress-contest themes + luxury RANGE per occasion | review/luxury | opus | RUNNING (worker; D19 waits) |
 | C7 balance-pass | review/balance-pass-r1 | opus | PASS 89ea80f78 (jbac.js reprice; reviewer fixed negative fair target that over-priced 25/48 'dearer' rows) |
-| D53b material-dialog pictures | review/opt-pics3 @b7053b9bb (jwkpics.js; 24 pictures + 1 banner + 3 acts) → review/opt-pics3-r1 | sonnet | REVIEWING (session session_011xDdVPyoY1HQLa11JfUnXa) |
+| D53b material-dialog pictures | review/opt-pics3-r1 | sonnet | PASS f02abdc41 |
 | C8 fig-bg step 2 | review/fig-bg @acc254846 | sonnet | BUILT, BLOCKED on KIT KEEPER (K1): 14 painted scrolls on CDN, jfigbg.js, KIT §61; tests 6 viewports (390x844 rival dialog img height 0 not investigated; 2-person dialog shows one scroll) |
-| C9 huadian-size + motif fix | review/huadian-size-r2 @4011dc151 (805 more files on CDN) → review/huadian-size-r3 | sonnet | REVIEWING (session session_011xDdVShMB5Qb9z7oyaRK2z) |
+| C9 huadian-size + motif fix | review/huadian-size-r3 @1aed2877e (reviewer FAIL list: c14 t4/t5 discs, m48-t5 / m14-t6 / m34-t7 / c28-t6 rings+beads, c28-t6-a36 damaged, m22-t6 rectangle+bead, c25 t4–t6 specks, c28-t2 / c02-t2 / c02-t5 oversize drops, small pendant dots m45/m47/c18/m43) | sonnet | FAIL → worker #4 QUEUED for the owner's MORNING (ALL ART PAUSED tonight, owner 07:30Z) |
 | D1 result-sfx | review/result-sfx-r1 | sonnet | PASS 18926abcc |
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
 | D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
@@ -48,6 +48,7 @@ Base main at start: 900ace7fb.
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |
 | D20 weather redo with §68 | — | — | NOT TAKEN: session 8 runs review/weather-fx-one (claimed) — D20 folded into it unless the coordinator says otherwise |
 | D25 veil/scar box follows the jkpor portrait zoom | review/veil-zoom | sonnet | RUNNING (session session_011xDdVQH85mp5QLY8bMqh7D) |
+| D41 promote own servants (moved B → C, owner 07:25Z, with D29) | review/promote-servants | opus | RUNNING (separate session) |
 | D-list rest (D3, D9, D11–D14, D19, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
@@ -76,6 +77,8 @@ PASS review/tuduc-sub-r1 adeb7de66543c1100f46f819f3dcd05a9d88bcf2 (D16; descends
 PASS review/balance-pass-r1 89ea80f78c8a8b64bbb1df2c5bebc144ec72e98a (C7; descends from main eba64ead4; jbac.js right after jevb.js; 2058 cards probed: no NaN/0/negative prices, shown = charged, co-op deterministic; opt-render, story-deadline, event-context, promo-exam 17/17, coop-e2e 59/59; follow-ups: free roads that are clear losses need content work; BAL.bacVal.duc (1 Đức = 8 khắc) vs bacroad ~5.3 — re-check; HH 45% = Q6)
 PASS review/toil-react-r1 75bd0eb78fec8106b35156c770f5a15578eab603 (D27; descends from main eba64ead4; jtoilr.js right after jtoil.js; reviewer fixed odds hint mapping to the ladder via word(odds), item road priced by sell value + no royal/keepsake gifts; toil-react.js 755/1180 + toilette.js pass; optional KIT REQUEST: a kit 'Tốn: <item>' row)
 PASS review/personality-r1 99b5e3157041da54fd71e0f95fa93f206d2cc9f3 (D7; descends from main 02a0d3f10; jtrong.js right after jaudit.js; trong-check.js 6 viewports + host mode fold/ipadAir/iphone14Land, coop-e2e 59/59; balance: HH reachable but harder — 6/36 sensible-bot lives (17%) vs main ~27–32%, C7 to keep watching; note: 1 crash seen in j91 minigame finish ('reading p of undefined') — not this branch, check main)
+PASS review/opt-pics3-r1 f02abdc41bb8be5a8e3f1553fdb2e0c8e6b0d3c9 (D53b; descended from main 0a311183 at review time — main moved since, merge needed; CONTAINS placeholder-pics3-r1 + tuduc-sub-r1; jwkpics.js after jtds.js)
+PASS review/skin-audit-r1 d16535c68512b2a6c8c0fcb33b6c762fadb87aa0 (D52; descended from main 02a0d3f1 at review time; notes-only commit, 240 fixed figures live on CDN)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
@@ -126,6 +129,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - KIT REQUEST K14 (D29 schedules3): map mark 'two shadows close together' for a secret meeting (data: j95mapSigns()); stage name-tag second line 'N người theo hầu' (data: j95followers(p)); please confirm jk95's two person-card sections built from kpsec/kpst/kitRows/kitChip/kpnote.
 - NOTE for session 8 (main bugs found by D29): jmen still assumes 3 buổi — 'night' = buổi 2 (now Chiều), tryst plans b:2, guard roster w*3+b → lovers' trysts happen in the afternoon (owner: mostly night); jstaff shows Thái hậu's elder at both Đức Thọ cung and Tân Giả khố on the maid road.
 - Q15 (owner, D29): co-op — share the NPC location ledger S.roster as world state (host decides, guest reads)? Now the ledger is off in co-op rooms. Q16: maid road shows at most 4 consorts per place while the ledger may hold more — keep the cap?
+- ORDER 07:30Z/07:45Z noted: (a) ALL art PAUSED tonight → no new art sessions until the owner's morning; D23 paused, C9 worker #4 queued. (b) Non-art D3, D9, D11–D14, D19, D25, D44 → Foreman B. CONFLICT: D25 (review/veil-zoom) was claimed by C and its session started at 06:09Z (session_011xDdVQH85mp5QLY8bMqh7D) before Foreman C saw the move — it keeps running; when it reports, Foreman C hands the branch + review to Foreman B (or the coordinator says otherwise). D13 (needs D29) also went to B: D29 finishing session is C's — B please read dev/handover/reports/review-schedules3.md for the ledger API. (c) D41 promote-servants taken by C (claimed). (d) Art moved D → C (C3 art-complete p2, D51 sprites, D54 buổi paintings, D56 icons + Nội vụ phủ art, fig-hd-upscale, face-sharp-hd2) → QUEUED for the morning (art pause); mass production only after the owner approves the main chat's SAMPLE. (e) Verbatim-rules files dev/art/OWNER_ART_RULES.md and dev/PRIORITY_RULES.md do not exist yet on the docs branch or main (checked 06:23Z) — Foreman C briefs will point to them once they exist; until then briefs point to OWNER_DECISIONS.md + WORKER_BRIEF.md.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 

@@ -34,8 +34,8 @@
 | kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | RUNNING | 16/11 05:39Z |
 | C43 coop-invite-ux review | review/coop-invite-ux-r1 | D | session_01DgYSWo9bFK5NRcy5Hrr3UX | RUNNING | 16/11 05:41Z |
 | facefx-all-r2 re-merge + kitPortrait main bug (jbook.js overrides j60 kitPortrait, breaks j90 podium fallback) | review/merge-hot-2 | main s9 | session_01UV1SzjMYTh2Gz2tanxwTrD | RUNNING | 16/11 05:43Z |
-| C9 huadian review r3 | review/huadian-size-r3 | C | session_011xDdVShMB5Qb9z7oyaRK2z | RUNNING | 05:45Z 16/11 |
-| D53b review | review/opt-pics3-r1 | C | session_011xDdVPyoY1HQLa11JfUnXa | RUNNING | 05:45Z 16/11 |
+| C9 huadian review r3 | review/huadian-size-r3 | C | session_011xDdVShMB5Qb9z7oyaRK2z | FAIL → fix queued (art pause) | 05:45Z 16/11 |
+| D53b review | review/opt-pics3-r1 | C | session_011xDdVPyoY1HQLa11JfUnXa | PASS f02abdc41 | 05:45Z 16/11 |
 | D29 finish re-runs | review/schedules3 | C | session_011xDdVRcAbEJXh2PekTYPF4 | RUNNING | 05:50Z 16/11 |
 | servant-system A reviewer (LIVE BUG: household on her room stage) | review/servant-system-r1 | main s10 | (opening) | RUNNING | 16/11 06:00Z |
 | weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | RUNNING | 16/11 06:00Z |
@@ -44,7 +44,7 @@
 | C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | RUNNING | 16/11 05:58Z |
 | D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | session_01DgYSWnFEYrjgcFbBRjAWyc | RUNNING | 16/11 05:59Z |
 | promo-skip audit + fix (quest rewards → direct rank; prince → rank, princess → exam) | review/promo-skip | main s10 | session_01UV1SzhzQSFQc43nUVdpwAi | RUNNING | 16/11 06:20Z |
-| D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | RUNNING | 06:01Z 16/11 |
+| D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | PASS d16535c68 | 06:01Z 16/11 |
 | cardflip-newlife bug (overlay stays after new life + flip scene during Luân hồi identity card) + act-dedupe UI (usable first, popover, hàng hiếm label) | review/flip-newlife | main s10 | session_01UV1SzhXJHY3uWDTJeQ1dYH | RUNNING | 16/11 06:36Z |
 | kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | session_01UV1Szj1bf6YFPCryaDjdEi | RUNNING | 16/11 06:50Z |
 | ART foreign-princess SAMPLE sheet (nc + bd) | review/foreign-princess-samples | main s10 | session_01UV1SzhLiXwuRzRVVTE8AJr | PAUSED (owner asleep) | 16/11 06:55Z |
@@ -55,3 +55,4 @@
 | D9 header-own | review/header-own | B | session_01N1tNP6D57poL6nUn778JPv | RUNNING | 16/11 06:20Z |
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | RUNNING | 16/11 07:45Z |
+| D41 promote own servants | review/promote-servants | C | (session id below) | RUNNING | 06:23Z 16/11 |
