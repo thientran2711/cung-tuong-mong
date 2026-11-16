@@ -395,3 +395,4 @@ RUNNING (all report to main; s21 must send_message each to re-point):
 Foreman C inbox (s20): Thái hậu full redraw (slimmer robes), download glyph, 22 pet cut-outs S/M/L, NPC-agent law + people-ledger/schedules shas.
 Unassigned owner-bug candidate: tutorial replay "Xem lại lời dặn" from title menu fails ~1 in 4 (menu modal stays open, jtut.js l.401-404) → sonnet worker.
 Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notifications.
+- (17:10Z) MAIN SESSION 21 = session_01UV1SzkBh9FhY36EqiUowuZ; START_CTX ≈ 7 % of window (used_tokens read 0; own estimate) → rollover at ≥ 32 %, ceiling 60 %.
