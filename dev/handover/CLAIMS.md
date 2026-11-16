@@ -345,3 +345,6 @@
 | pl-courtyards r2 review (sonnet) of pl-courtyards-r1 8b4a2160 + single-hall ff05f03d | review/pl-courtyards-r2 | main s22 | session_01UV1SzjAzD5HAahkBznYHxb | RUNNING | 16/11 19:06Z |
 | stage-pets r6: Hành sự = her room only; Dư đồ → courtyard → full-screen place (reuse palace-map*) | review/stage-pets | main s22 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 19:06Z |
 | coop-name-mask (sonnet; bug found on live coop-chat check): host sees the co-op friend as unmet ('Tần ???') — whole group: every place the partner's name shows on either side | review/coop-name-mask | D | session_01DgYSWkvZreu7VC5sEPQKcx | RUNNING | 16/11 19:07Z |
+| stage-pets r6 successor (opus): Hành sự room-only + Dư đồ → courtyard → full-screen place | review/stage-pets | main s22 | session_01UV1SzgpdHamQttRh7q9Hmw | RUNNING | 16/11 19:09Z |
+| two-way-acts review r1 (opus, BIG) of b74af30c2 | review/two-way-acts-r1 | main s22 | session_01UV1Szk6vunJCTmCx6dDAov | RUNNING | 16/11 19:09Z |
+| fold-popw (sonnet; LIVE bug: Fold person card collapses grid; ✕ over scrolled options) | review/fold-popw | main s22 | session_01UV1Szio5b3cREgAGjbua6W | RUNNING | 16/11 19:09Z |
