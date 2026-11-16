@@ -158,7 +158,7 @@ Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) a
 | intel / evidence / threat | `kitIntel(list)` `kitEvidence(e)` `kitThreat(t)` (j79) | section 10 |
 | odds meter | `kitOdds(word|number)`; `oddsChip(w)` now draws it (j79) | section 11: the 7-step ladder for the act's own odds only; side chances + HUD use `chanceW`/`chanceLvl` (Rất thấp…Rất cao) |
 | glossary | `kitGloss(term)`, `KIT_GLOSS` (j79) | section 12 |
-| mini-game frame | `kitGameFrame` `kitGameSet` `kitGameResult` (j79) | section 13 |
+| mini-game frame | `kitGameFrame` `kitGameSet` `kitGameResult` `kitGameFig` `kitGameFigRefresh` (j79) | section 13, 13.4 |
 | scene panel | `kitPanel({scene:true,…})`, `kitTiles(list)` (j79) | section 14 (identity card, opening story, title screen) |
 | backdrop | `KIT_BD` + `kitBackdrop(el,key)` (jbd) | section 30: every full-screen backdrop, portrait AND landscape art |
 | result card | `resultShow(title,before,ok)` → `#rtoast.karesult` | section 7 (j63) |
@@ -603,6 +603,15 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
   light lip tint, brighter skin), `diem` diêm dúa (owner 15/11: the same painted layer a little stronger — deeper, wider rouge, bolder lip tint, a little more powder sheen;
   pretty, noticeably overdone, never clownish) — presets `TOIL_LOOKS`. Only her face. Sheet: `node dev/test/toil-looks.js`.
 - Since §60 (review/mk-colour): a colour step (Chọn màu) before the skill hồi; blush + lips + eyelids + brows wear HER picked colours (see §60).
+
+### 13.4 TÀI NGHỆ FRAME WITH HER LIVE FIGURE · kitGameFig (owner 16/11 ~21:30Z, review/minigame-frame) — `dev/build/j79.js`
+- ONE frame for EVERY mini-game: `kg82Open` -> `kg82Frame` -> `kitGameFrame({..., fig:true})` (contests, exams, works, lessons, self-practice, Điểm trang, Chải chuốt, scheme/slap/td games: all 30 kinds in `KG82.kinds`, scan = before the change a static painting `.kgpic` column / none; after: `.kgfig` on every kind).
+- Wide screens (html.kv2: iPad 1180x820, 1366x1024): LEFT column `.kgfig` = HER full figure in the outfit she wears now (`kitStageFig(S)`: kit figure at the KIT_FIG ratio, women ~.79; the face layers of `kitFxLayers` ride on it, so Điểm trang makeup, scar, veil show LIVE). One mirror only: Điểm trang no longer shows the static mirror picture nor the round `kitFaceZoom` disc; the prop picture is OFF by default (the game board already paints it); `g.prop:true` + `g.pic` draws a small corner thumbnail if a game ever needs one.
+- Fold / one page (html.kv1): NO left column, the game alone at full width (`:where(.kv1) .kgfig{display:none}`; the legacy small picture band is gone too).
+- Live change: after an outfit / makeup pick call `kitGameFigRefresh()` (jtoil does in toilDressUI and toilColUI). Play animation: while the game runs (frame not `.kg-idle`) the figure breathes (`.kgf-anim`, off with Settings "Hiệu ứng: Gọn" and reduced motion). Rim light only: this part never overlays glow on the person.
+- KIT REQUEST (art, Foreman C): per-game "hands on the instrument / brush / fan" figure poses (e.g. đàn). Until then the figure breathes.
+- Not a tài nghệ frame (no figure): pet care mini-game (`petcGameBox`).
+- Sample: kit page §13.4.
 
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
