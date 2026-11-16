@@ -24,7 +24,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/art-animations.md (13.2 KB): animations, page curl, effects, glow, sprites, videos
 - dev/rules/topic/art-costumes.md (15.7 KB): costumes, hair, jewellery, veils, makeup, huadian, foreign costumes
 - dev/rules/topic/art-events-effects.md (26.3 KB): event, story, act and minigame pictures
-- dev/rules/topic/art-faces-figures.md (21.4 KB): faces, figures, portraits, ages, poses, proportions
+- dev/rules/topic/art-faces-figures.md (22.1 KB): faces, figures, portraits, ages, poses, proportions
 - dev/rules/topic/art-frames-kit.md (8.8 KB): frames, ornaments, kit art
 - dev/rules/topic/art-items-pets.md (8.7 KB): item icons, gift art, pets
 - dev/rules/topic/art-other.md (18.4 KB): other art rules

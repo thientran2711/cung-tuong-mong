@@ -100,3 +100,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (07:00Z s11) LIVE: main = a942395b (postmerge-fix-1: CSS buổi tint removed, every place has its painted 16-set; kpshort test). Sổ mây post-deploy smoke PASS.
 - (07:05Z s11) Owner: place glyphs not in game style → v2 sample (3 glyphs, ≤~200 cr) by the place-glyphs worker; live v1 stays until v2 approved.
 - (07:10Z s11) Owner: minigames too easy → mg-balance (opus) to Foreman B (spec OD 07:10Z).
+- (07:15Z s11) Owner on fp v2 (OD:L1256) → v3 redo sent to the sample worker (new distinct faces for nc and bd, hair per rank, rank costume colours matched to game dress tiers, no fur).
