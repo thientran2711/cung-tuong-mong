@@ -219,3 +219,4 @@ Follow-ups: canon overwrite OD:L1141 → L1151 (mortality); "plead beforehand" a
 - (09:51Z real s15) stage-slots-fix worker archived (idle; reviewer stage-slots-fix-r1 fixes in place).
 - (10:31Z real s15) LIVE: main = 92668096 (merge-train-4: 13 PASS branches; coop-e2e 59/59). Smoke asked. GO → design-scale-r1.
 - (10:35Z real s15) test-drift-roulette SẴN SÀNG KIỂM 39f3eb22 (tests only; tutorial 'tour did not start' = test drift, no game bug) → reviewer test-drift-roulette-r1 session_01UV1SzhniUmWP7bnY8M4Lgu. merge-train-6 READY dce6603b (#7; told to add cycle-art-r1 now that train-4 is live).
+- (10:37Z real s15) merge-train-4 SMOKE PASS live 92668096 (boot, rotate 13 profiles, sfx 6 sizes, difficulty, collect-ms) → archived.
