@@ -105,3 +105,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C43 | review/coop-invite-ux (owner s8 'Rồi sao nữa': waiting state, 1-2-3 steps, auto-continue on join) | QUEUED |
 | C44 | review/cloud-save (owner s8: same character on phone + iPad, solo + co-op; sync code, auto upload, conflict pick, 10 versions) | QUEUED-NEXT |
 | C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
+| C46 | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
