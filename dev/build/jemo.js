@@ -159,7 +159,7 @@ try{emoGateWrap()}catch(e){}
 function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(p)S.emoSeen[emoKey(p)]=W}}catch(e){}}
 function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false}catch(e){}
  const W=emoW(),k=emoKey(p),s=(S.emoSeen||{})[k];if(s!=null&&W-s<=2)return true;
- if((S.staff||[]).includes(p)||p===S.maid||(S.kids||[]).includes(p))return true;
+ if(typeof k61Own==="function"?k61Own(p):((S.staff||[]).includes(p)||p===S.maid||(S.kids||[]).includes(p)))return true;/* her own people: ONE list (j61 k61Own; home family included) */
  try{if(p===S.thO&&typeof cmKnown==="function")return cmKnown("th");const q=typeof queenP==="function"?queenP():null;if(p===q&&typeof cmKnown==="function"&&cmKnown("hh"))return true}catch(e){}
  if((S.mat||0)>=3&&(rivals||[]).includes(p))return true;
  if(p===S.emp&&(S.nightLog||[]).some(w=>W-w<=2))return true;return false}

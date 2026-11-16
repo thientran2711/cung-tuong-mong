@@ -33,7 +33,7 @@ function doc(){return S&&S.court&&S.court.ty||null}
 function off(){return !S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())}
 function rk(){try{return Math.max(0,Math.min(7,typeof rkOf==="function"?rkOf(S):S.rank|0))}catch(e){return 0}}
 function cost(){return T().cost[rk()]}
-function docName(){const c=doc();return c&&c.name?c.name:"Thái y"}
+function docName(){const c=doc();if(c&&c.name){try{if(typeof k61Named==="function"&&!k61Named(c))return"Thái y"}catch(e){}return c.name}return"Thái y"}/* j61 name rule: a physician she has not learnt the name of is his title alone, never "thái y ???" (the "Mạnh thái y ???" side flag) */
 function rv(v){return v&&v!==S&&v.alive!==false&&!v.out&&!v.coop}
 /* ---------- trust and bribes (one rule: her, NPCs, treat()) ---------- */
 function bribers(p){const c=doc();if(!c||!c.af)return[];return liveRivals(true).filter(v=>rv(v)&&v!==p&&(c.af[v.id]||0)>=T().bribeAf&&(()=>{try{return hostility(v,p)>=T().bribeHost}catch(e){return false}})()).sort((a,b)=>(c.af[b.id]||0)-(c.af[a.id]||0))}
