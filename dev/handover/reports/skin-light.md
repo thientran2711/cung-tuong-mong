@@ -26,3 +26,16 @@ Branch review/skin-light (from origin/main 695934d1). Worker session_01UV1Szinox
 - A few audit face boxes are stale (e.g. fig-consort-c01-tm3: fbox no longer on the face) → the mediapipe values are still used (they were measured on the face); measure.py re-measures current CDN files if ever needed.
 - Perf: portraits now carry an SVG component-transfer filter (cheap; figures already had #kfa). Watch list views on weak devices.
 - New figure art must be added to FIGLIGHT.json (KIT §82 note).
+
+## Owner test 12:20Z — player WITHOUT the rosy-skin layer, in Ngọc Thanh các (her screenshot room)
+- Images: dev/handover/reports/skin-light/test-no-rosy-fold-755x1000.jpg, test-no-rosy-ipad-1180x820.jpg
+  (same room, same positions, maid m13 lavender like Tố Cẩm; 1 = now, 2 = rosy layer removed, 3 = kitFigLight v1).
+- Her player = fig-consort-c32-t2-a18 (ivory dress, raised hand, fan). "No rosy" = the CURRENT file with only the rosy pass undone on skin
+  (face a* -3.4 b* -0.8 = measured vs the pre-rosy git file 8ca92bddc2; neck/hands = the skin-match shift undone), so huadian and later edits stay.
+- Finding: removing the rosy layer makes the face less pink but NOT darker — her face is still the brightest thing on the stage (face L* 85 vs maid ~77–80, room in shade).
+  The "too white / stands out of the room" is BRIGHTNESS + crisp even lighting, not the pink layer.
+- kitFigLight v1 (panel 3) darkens her correctly but shifts her ivory dress towards grey-green (the de-pinking curve lowers red on every light tone) → v1 must NOT merge as is.
+## Proposal v2 (scene light, every figure via the kit)
+- Light comes from the ROOM: per scene (and buổi), measure the backdrop's mid-tone brightness + white balance once (scene table, like FIGLIGHT) and give every figure on that stage the same small exposure/warmth step toward it (luminance-only curve, chroma-neutral so clothes keep their colour), plus per-figure luminance normalisation only (no hue change) so no figure is brighter than the others.
+- Optional: a soft contact shadow + slight lower-body shade so figures sit on the floor. Faces/makeup untouched.
+- Needs the owner to pick between panels 1/2 (keep or drop rosy layer) before mass work.
