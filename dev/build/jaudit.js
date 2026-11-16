@@ -132,15 +132,15 @@ function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid
 /* 11. MÀU CHIỀU QUAN HỆ (owner, KIT §11.2): a relation LABEL is coloured by its direction — người khác → ta purple (--rel-them),
    ta → người khác blue (--rel-me). The number keeps its Được/Mất colour. kitRel(dir,text) is the one builder; kitRelPaint(root)
    colours the labels already written as text everywhere (cards, chips, Ân oán, Giao tình, stage, week book, result cards). */
-function kitRel(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}">${text}</span>`}
+function kitRel(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}" data-vp-skip>${text}</span>`/* final words already: the word fixer keeps "Nàng oán ta" as is */}
 window.kitRel=kitRel;KIT_REL.paint=null;
 const KREL_RE=new RegExp([
  "(Ta|ta) → (nàng(?: ta)?|hắn|y|người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}): thiện cảm","(Ta|ta) tin cậy","tin cậy(?= [\\p{Lu}][\\p{L}]* [\\p{Lu}]?[\\p{L}]*\\s?[+\\-−]?\\d)","tin cậy(?= [+\\-−]?\\d)",
- "(Nàng(?: ta)?|Hắn|Y|Hoàng hậu|Thái hậu|Hoàng thượng|Người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}) → (ta|người ấy|nàng): thiện cảm","[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,3} với ta","oán ta","bớt oán ta","(?<![\\p{L}])thiện cảm(?= [+\\-−]?\\d|:| của)","(?<![\\p{L}])Thiện cảm(?= [+\\-−]?\\d|:|$| của)","(?<![\\p{L}])ghen(?= [+\\-−]\\d)"].join("|"),"gu");
+ "(Nàng(?: ta)?|Hắn|Y|Hoàng hậu|Thái hậu|Hoàng thượng|Người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}) → (ta|người ấy|nàng): thiện cảm","[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,3} với ta","(?:(?:[Nn]àng(?: ta)?|Hoàng hậu|Thái hậu|[Hh]ắn) )?(?:bớt )?oán ta","(?<![\\p{L}])thiện cảm(?= [+\\-−]?\\d|:| của)","(?<![\\p{L}])Thiện cảm(?= [+\\-−]?\\d|:|$| của)","(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?ghen(?= [+\\-−]\\d)"].join("|"),"gu");
 function kitRelPaint(root){if(!root||!root.querySelectorAll)return;const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT)$/.test(p.tagName)||p.closest(".krel,[data-vp-skip]"))return NodeFilter.FILTER_REJECT;KREL_RE.lastIndex=0;return KREL_RE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;KREL_RE.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
-  while((m=KREL_RE.exec(v))){const t=m[0];const me=/^(Ta|ta)\b|^tin cậy/.test(t)||/^(Ta|ta) /.test(t);if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.className="krel krel-"+(me?"me":"them");sp.textContent=t;f.appendChild(sp);last=m.index+t.length}
+  while((m=KREL_RE.exec(v))){const t=m[0];const me=/^(Ta|ta)\b|^tin cậy/.test(t)||/^(Ta|ta) /.test(t);if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.className="krel krel-"+(me?"me":"them");/* the subject stays inside the label (owner 15:30Z: a lone "Nàng " node became "Nàng ta oán ta") */sp.textContent=t.replace(/^([Nn])àng ta (?=(?:bớt )?oán|ghen)/,"$1àng ");sp.setAttribute("data-vp-skip","");f.appendChild(sp);last=m.index+t.length}
   if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
 (function(){const st=document.createElement("style");st.id="krel-css";st.textContent=".krel-them{color:var(--rel-them,#7a4fa0)!important;font-weight:600}.krel-me{color:var(--rel-me,#2f6f9f)!important;font-weight:600}";document.head.appendChild(st);
  let q=false;const run=()=>{q=false;try{kitRelPaint(document.body)}catch(e){}};const mo=new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(run)}});
@@ -156,7 +156,7 @@ window.kitThey=kitThey;
 
 /* 13. every other consort-act outcome text that says "thù −N" / "thân ±N" is a relAdd in the code (j8): drawn with the real numbers */
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;for(const k of Object.keys(AOUT)){const d=Object.getOwnPropertyDescriptor(AOUT,k);if(!d||d.get||!Array.isArray(d.value))continue;const old=d.value;
- const fx=s=>{const t=T();if(!t||typeof s!=="string")return s;return s.replace(/(nàng )?thù -(\d+)/g,(m,_,n)=>pvRel(t,-n)).replace(/(nàng )?thân ([+\-])(\d+)/g,(m,_,sg,n)=>pvRel(t,(sg==="+"?1:-1)*n))};
+ const fx=s=>{const t=T();if(!t||typeof s!=="string")return s;return s.replace(/(nàng )?thù -(\d+)/g,(m,_,n)=>pvRel(t,-n)).replace(/(nàng )?(?:thân|thiện cảm) ([+\-])(\d+)/g,(m,_,sg,n)=>pvRel(t,(sg==="+"?1:-1)*n))};
  try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){return old.map(fx)},set(v){}})}catch(e){}}})();
 
 /* 14. harm acts offered at a PLACE (j9 placeHarms) drew their card from ACT.x + the cost as a gain: no Tốn line, no outcome,

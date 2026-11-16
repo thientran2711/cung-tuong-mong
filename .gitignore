@@ -6,3 +6,8 @@ dev/site/.assets-cache.json
 # pictures live on Cloudflare R2 (dev/art/CDN.md): keep local copies here, push with dev/site/cdn_sync.py, never commit
 /img/
 dev/site/.cdn-state.json
+# painted-fx sources (Magnific downloads, previews): not in git, re-download by gens.txt ids
+/dev/fxwork/raw/
+/dev/fxwork/cut/
+/dev/fxwork/vid/
+/dev/fxwork/*.jpg
