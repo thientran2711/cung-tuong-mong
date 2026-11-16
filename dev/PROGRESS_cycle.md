@@ -53,3 +53,43 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
   (at 1/8 bổng + Khó odds the free road was never worth taking); "Dặn ma ma báo ngày giả" base 25 → 35 (BAL.cyc.hideMaidO),
   so a loyal ma ma beats the 80-odds bribe while an average one does not.
 - thaiy now gets cycleLate() (its lateHint() hook was optional).
+
+## Review r2 (review/cycle-r2, from cycle-r1 7ea3ec447 + origin/main 4f5e5f3b3) — owner 16/11 (A7)
+- Merge: assemble.py takes main's list + `jcycle.js` LAST; j19 takes main's whole-word KRED (`KWB`), which already covers the
+  "nguy" inside "nguyệt" case fixed in r0; generated files (index.html, sw.js, assets.json) rebuilt with build_site.sh.
+- (1) **Sổ nguyệt sự as HÀNH SỰ deck cards** (no walk to Dư đồ; owner rule "acts that need no meeting are Hành sự cards"):
+  "Xem sổ nguyệt sự" (Bạc `BAL.cyc.read[rank]`, 1 khắc, sure, opens the book) and "Xem lén sổ nguyệt sự" (Sức −4, 2 khắc, odds
+  peekO + Tổng quản thiện cảm + Tâm cơ/4; fail Danh −2 + Tổng quản thiện cảm −2). Added in `cyDeck()` (deal hook) for every non-cold,
+  non-servant deck. The Kính sự phòng talk cards stay as the place shortcut (same numbers).
+- (2) **Monthly report pop-up** `PEND.cyrep` (kit dialog via pushDil + c6 option cards; who = her maid): when her cycle tuần starts,
+  flip() is deferred (`cyAsk`), the maid asks how to report to Kính sự phòng; the chosen option calls flip() again, so the answer
+  decides this week's tablet. Numbers `BAL.cyc.rep`:
+  - Báo đúng ngày — sure; card off this tuần (as before).
+  - Báo lùi vài hôm — Đức −2; odds = "Khai lùi ngày nguyệt sự" formula (backO 35 + Tâm cơ/3 + ma ma loyalty/5); card off this tuần and
+    next tuần's flip weight ×0.5; a pregnancy begun ≤3 tuần after it: the book still shows the first missed cycle as reported, foes and
+    thái y see one missed cycle less (`window.cycleLate` = book view, `cycleLateTrue` = real), and a mismatched conception with a real
+    night 2–6 tuần earlier is cleared like "Khai lùi". Fail = Danh −3 + S.ksKnows (as Khai lùi).
+  - Báo sớm, nói đã sạch kỳ — Đức −3; her card stays on the tray (`cyTray`), steal acts open.
+  - Giấu, không báo — free; card stays; the book says "không báo" (self rumour: no "chép lại" option), phi tần ghen +4; no real
+    pregnancy by the month's end → mừng hụt Sủng −3 Danh −2 (same as a rival's forged "không báo"); if she does conceive, foes reading
+    the book learn it a month early.
+  - Both lies: flipped/stealing during the cycle → Kính sự phòng mama checks in nightScene: passes with lieO 50 + loyalty/4 + Tâm cơ/5;
+    caught = night lost, Sủng −6, Danh −4, S.ksKnows. Forgery evidence: at the month's end each foe (hostility ≥ 50) reading the book
+    (npcRead 12 %) gets chứng cứ +1 on her.
+  - Never answered (reload/closed): the week ends with "báo đúng" (endTurn hook). Saves: only new optional S.cyb fields (rk, rv, df,
+    lie, lieM, lieEv, giauM, back, lck); old saves load. Co-op: all personal state (S.cyb, S.tonight), runs per player like flip().
+  - Bạc-equivalence: the pop-up has no bạc road (all roads cost Đức / risk); the deck book cards keep the r1 bạc ↔ Sức+risk balance.
+  - Option display: palace-event hidden-outcome mode (KIT 28.6) with a truthful hint per option (odds word of the rolled road, every
+    risk in words, "tổn Đức") + risk chip; full numbers on the result card. Full Được/Mất/Kèm rows were tried (KIT_ACT_PIDS) but overflow.
+- **KIT REQUEST (option card overflow)**: in a scrolling person dialog (`.dlg.kdper > #mb > .opts.k3rows`), jopic.js:161 sets
+  `min-height: calc(var(--kah)+18px) !important` on `button.ka.kart.kopt`, replacing jk4's `min-height: max-content`; when the option
+  list must scroll, the grid auto rows collapse to that min-height (130px at 755x1000) and taller cards' rows spill over the next card.
+  Seen with full Được/Mất/Kèm rows (pid in KIT_ACT_PIDS). Suggested kit fix: `min-height: max(calc(var(--kah)+18px), max-content)` or
+  `grid-auto-rows: max-content` on that list. Not used here (hint mode fits).
+- Note (kit, not requested): the two deck cards fall in the "Giao thiệp" tab (KIT_ACT_CATS has no rule for "sổ nguyệt sự"/"xem lén");
+  card art = §59 placeholder until art exists (act art queue).
+- Test: dev/test/cycle.js extended (sections 9–10 + per-size pop-up and Hành sự checks).
+- r2 results (site build): cycle.js ALL OK at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (@2/@3) + 390x844 rotate prompt
+  (one earlier run aborted once with "ksp roads missing" in logic section 5 — random start state; the test now reports the state instead
+  of crashing; the rerun passed); thaiy.js 49/49; cardflip.js 5 sizes: no page errors, no overflow, cards inside tray; coop-e2e 59/59 (room T5YM).
+- State: pushed review/cycle-r2; nothing local-only; no art generated, no CDN upload.

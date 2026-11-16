@@ -51,7 +51,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
     S.pregMismatch=true;S.nightLog=[S.pregWk-3];deal();if(!deck.some(x=>x.n==='Khai lùi ngày nguyệt sự'))f.push('back card missing');
     S.preg=0;S.hidden=false;S.pregMismatch=false;S.cyb={};
     /* 5 book */
-    const tq={kind:'ksp'};const T=talkOpts(tq);const r1=T.find(x=>x.n==='Xem sổ nguyệt sự'),r2=T.find(x=>/xem lén sổ nguyệt sự/.test(x.n));if(!r1||!r2)f.push('ksp roads missing');
+    const tq={kind:'ksp'};const T=talkOpts(tq);const r1=T.find(x=>x.n==='Xem sổ nguyệt sự'),r2=T.find(x=>/xem lén sổ nguyệt sự/.test(x.n));if(!r1||!r2){f.push('ksp roads missing '+JSON.stringify({names:T.map(x=>x.n),srv:isSrv(),out:S.out,dead:S.dead,rank:S.rank}));return{f,info}}
     info.roads=[r1&&JSON.stringify(r1.c),r2&&JSON.stringify(r2.c)+' o'+r2.o];
     const rv=liveRivals(false).filter(x=>!x.preg);const h=rv[0];if(h){h.preg=1;h.fake=0;h.hidden=true;h.pregWk=wk()-4;h.tamco=10;h.bac=100}
     const m2=rv[1];if(m2){m2.preg=2;m2.fake=0;m2.hidden=false;m2.pregWk=wk()-6;m2.pregMismatch=true}
