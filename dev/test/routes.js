@@ -8,12 +8,15 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json',webp:'im
 async function serve(c){await c.route('http://game.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:MT[f.split('.').pop()]||'application/octet-stream'})})}
 const OUT=process.argv[2]||'.';const sizes=[];for(let i=3;i+2<process.argv.length;i+=3)sizes.push(process.argv.slice(i,i+3).map(Number));if(!sizes.length)sizes.push([686,880,2.2],[1180,820,2]);
 (async()=>{const b=await chromium.launch();const rep=[];
- for(const [W,H,D] of sizes){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,serviceWorkers:'block',reducedMotion:'reduce'});await serve(c);const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-  await p.goto(GAME,{waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});await p.waitForTimeout(2000);
-  await p.evaluate(()=>{window.__forceOrigin='tt';document.querySelector('#slots button[data-new="1"]').click()});await p.waitForTimeout(1500);
-  
-  await p.evaluate(()=>{try{nlAccept()}catch(e){}});await p.waitForTimeout(2500);
-  const clear=async()=>{for(let i=0;i<4;i++){const k=await p.evaluate(()=>{const b=document.querySelector('#kroul .krskip');if(b){b.click();return 1}return 0});if(!k)break;await p.waitForTimeout(1200)}await p.evaluate(()=>{for(let k=0;k<40&&Q.length;k++)closeModal();const o=document.querySelector('#kmrt,.kmroul');if(o)o.remove()});await p.waitForTimeout(300)};
+ for(const [W,H,D] of sizes){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,serviceWorkers:'block',reducedMotion:'reduce'});await serve(c);const p=await c.newPage();const errs=[];p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message));
+  await p.goto(GAME,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);await p.evaluate(()=>{try{localStorage.clear()}catch(e){}});
+  /* current main (16/11): same start as dev/test/ts-a.js — drop the loading screen, start a consort life (not a servant life), remove the
+     Luân hồi roulette + identity card */
+  await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});
+  for(let i=0;i<60;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:120000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;try{store.set(NL_KEY,null)}catch(e){}start()})}
+  await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
+  const clear=async()=>{for(let i=0;i<3;i++){await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kroul,#kmrt,.kmroul').forEach(e=>e.remove());try{NLP=null}catch(e){}for(let k=0;k<40&&Q.length;k++)closeModal();Q.length=0;const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal'}render()});await p.waitForTimeout(400)}};
   await clear();
   const check=async n=>{const r=await p.evaluate(()=>{const cut=[...document.querySelectorAll('#panel button.ka:not([hidden]) .kan, #modal button .kan, #modal .kr .krv')].filter(e=>e.offsetParent&&e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible').map(e=>e.textContent.slice(0,40));
     return{ovf:document.documentElement.scrollWidth>innerWidth+1,cut}});rep.push({W,n,...r})};
@@ -29,7 +32,7 @@ const OUT=process.argv[2]||'.';const sizes=[];for(let i=3;i+2<process.argv.lengt
   /* 3. Mệnh truyện section */
   await goTab('story');await p.evaluate(()=>{const h=[...document.querySelectorAll('#panel h3')].find(x=>/Lối riêng/.test(x.textContent));if(h)h.scrollIntoView({block:'start'})});await shot('3-story');
   /* 4. blood test (trích huyết nghiệm thân) */
-  await p.evaluate(()=>{const k=mkKid('m',4);k.tf=S.men[0].id;S.kids.push(k);const v=liveRivals(true).find(x=>!x.queen)||liveRivals(true)[0];try{k61Know(v,'',true,2);k61Know(k,'',true,2)}catch(e){}S.rt.tt=null;rtNgSet(k,v.id,true);S.rt.ng.saw=1;S.rt.ng.at=wk();S.rt.ng.held=1;rtPush('rtNg',{})});await p.waitForTimeout(2500);await p.evaluate(()=>{const e=[...document.querySelectorAll('body *')].filter(x=>x.children.length===0&&/Chạm để đóng/.test(x.textContent)&&x.offsetParent);if(e.length)e[e.length-1].click()});await p.waitForTimeout(1500);await shot('4-nghiem');
+  await p.evaluate(()=>{const k=mkKid('m',4);k.tf=S.men[0].id;S.kids.push(k);const v=liveRivals(true).find(x=>!x.queen)||liveRivals(true)[0];try{k61Know(v,'',true,2);k61Know(k,'',true,2)}catch(e){}S.rt.tt=null;rtNgSet(k,v.id,true);S.rt.ng.saw=1;S.rt.ng.at=wk();S.rt.ng.held=1;rtPush('rtNg',{})});await p.waitForTimeout(2500);await p.evaluate(()=>{const e=[...document.querySelectorAll('body *')].filter(x=>x.children.length===0&&/Chạm để (đóng|lui)/.test(x.textContent)&&x.offsetParent);if(e.length)e[e.length-1].click()});await p.waitForTimeout(1500);await shot('4-nghiem');
   await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++)Q.shift();showModal();S.rt.ng=null});
   /* 4b. the tampering mini-game + the bowl scene (shared j82 frame) */
   await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++)Q.shift();showModal();rtNgSleight('alum',4,()=>{})});await shot('4b-mg-intro');
@@ -37,6 +40,6 @@ const OUT=process.argv[2]||'.';const sizes=[];for(let i=3;i+2<process.argv.lengt
   await p.evaluate(()=>{try{kg82Close()}catch(e){}rtNgScene(true,'Hoàng tử',()=>{})});await p.waitForTimeout(1500);await shot('4d-bowl');
   await p.evaluate(()=>{try{kg82Close()}catch(e){}});
   /* 5. an ending: escape succeeds */
-  await p.evaluate(()=>{S.rt.tc={prep:{guard:1,route:1,home:1},since:S.turn};rtFled('doan')});await p.waitForTimeout(3000);await p.evaluate(()=>{const e=[...document.querySelectorAll('body *')].filter(x=>x.children.length===0&&/Chạm để đóng/.test(x.textContent)&&x.offsetParent);if(e.length)e[e.length-1].click()});await p.waitForTimeout(2000);await shot('5-ending');
+  await p.evaluate(()=>{S.rt.tc={prep:{guard:1,route:1,home:1},since:S.turn};rtFled('doan')});await p.waitForTimeout(3000);await p.evaluate(()=>{const e=[...document.querySelectorAll('body *')].filter(x=>x.children.length===0&&/Chạm để (đóng|lui)/.test(x.textContent)&&x.offsetParent);if(e.length)e[e.length-1].click()});await p.waitForTimeout(2000);await shot('5-ending');
   rep.push({W,errs:errs.slice(0,8)});await c.close()}
  console.log(JSON.stringify(rep,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

@@ -14,7 +14,9 @@ const RT_END={tt_lo:["tt","Tư thông bại lộ"],tt_hoa:["tt","Giọt máu v�
  tc_cung:["tc","Cao chạy xa bay cùng người thương"],tc_lien:["tc","Thoát thân, nhà bị liên lụy"],tc_bat:["tc","Bị bắt khi trốn"],
  hl_tu:["hl","Dâng biểu xuất gia"],hl_hon:["hl","Được ban hôn cho Vương gia"],hl_que:["hl","Xuất cung về quê"],hl_phe:["hl","Phế làm thứ dân"],
  ad_an:["ad","Một đời an nhiên"]};
-const RT_HARM=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe","pushp","trip","provoke","humiliate","plant","catswap","steal","accuse"];
+/* every act on main that harms another person breaks the quiet-life vow (LUẬT SỬA CẢ NHÓM 16/11: list re-scanned against every A("…") on main) */
+const RT_HARM=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe","pushp","trip","provoke","humiliate","plant","catswap","steal","accuse",
+ "lygian","slowpoison","huydung","uyhiep","giahoa","blockf","pgift","thathu","phonghoa","batnat","thaopet","petsteal","expose","xinhh","vp"];
 const RT_ART={tt:"img/ev-tu-tinh.webp",hen:"img/ev-mat-uoc.webp",tc:"img/ev-cung-nu.webp",thu:"img/ev-thu-nha.webp",lo:"img/ev-hoi-lo.webp",hoa:"img/ev-hoa-hoan.webp",
  bat:"img/ev-hinh-phat.webp",lc:"img/ev-lanh-cung.webp",tu:"img/act-xuat-gia.webp",ta:"img/ev-thinh-an.webp",an:"img/ev-te-le.webp",con:"img/ev-con-tre.webp",don:"img/ev-tin-don.webp"};
 try{Object.assign(PD_END,{"Trốn khỏi cung":12,"Cao chạy xa bay":15,"Xuất cung về quê":10,"Phế làm thứ dân":6,"Một đời an nhiên":15,"Dâng biểu xuất gia":10})}catch(e){}
@@ -301,7 +303,7 @@ function rtBookHTML(){const b=rtBook();const ids=Object.keys(RT_END);const met=i
 function rtAccN(a){if(a==="emp")return"Hoàng thượng";if(a==="th")return"Thái hậu";const v=RV(a);return v?rtVn(v):"kẻ tố"}
 function rtNgKid(){const T=S.rt;return T&&T.ng?(S.kids||[]).find(k=>k.name===T.ng.k&&k.alive)||null:null}
 function rtNgSet(k,acc,oil){const T=rtS();if(T.ng||!k)return;const v=RV(acc);if(oil==null)oil=!!(v&&(/Hiểm|Tâm/.test(v.trait||"")||(v.tamco||0)>=60)&&roll(35));
- T.ng={k:k.name,acc,at:wk()+1,oil:!!oil,P:{}};rtStat("ng_set");rtEmo("so",60,"sắp trích huyết nghiệm thân");
+ T.ng={k:k.name,acc,at:wk()+1,oil:!!oil,P:{}};try{if(!window.__bot)rtMgBowl()}catch(e){}rtStat("ng_set");rtEmo("so",60,"sắp trích huyết nghiệm thân");
  log(`<span class="r">${rtAccN(acc)} truyền: tuần sau trích huyết nghiệm thân cho ${k.name} trước mặt lục cung.</span>`);rtRefresh()}
 function rtNgDue(){const T=S.rt;if(!T||!T.ng||T.ng.held)return;if(!rtNgKid()){T.ng=null;return}if(wk()>=T.ng.at){T.ng.held=1;rtPush("rtNg",{})}}
 function rtNgCards(){const T=S.rt;if(!T||!T.ng||T.ng.held)return[];const P=T.ng.P,k=rtNgKid();if(!k)return[];const A=[];const m=k.tf&&(S.men||[]).find(x=>x.id===k.tf&&x.alive);const tyLover=m&&m.rw==="thái y";
@@ -373,7 +375,7 @@ RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
       bowl. 3 hồi, need 2. Speed and cone width from the number of watchers, her Tâm cơ and Tai mắt. «Để Tâm cơ quyết định» = one roll with
       the same odds word. Bots and reduced motion get the roll (reduced motion may still play: the cones then move in steps).
    2) rtNgScene(shown, kidName, cb): the bowl — two drops fall, then slowly merge or drift apart; reduced motion = the final frame only.
-   Board = the existing painted table (mg-huong-bg); bowl, drops, ripples and cones are live marks (no painted bowl sprite yet). */
+   Board = the existing painted table (mg-huong-bg); the bowl is a painted sprite (img/kit/mg-nghiem-bowl.webp); drops, ripples and cones are live marks. */
 function rtMgOn(){return !window.__bot&&typeof kg82Open==="function"&&!!document.getElementById("ov")}
 function rtMgO(n){return od(62+S.tamco/4+(S.mat||0)*3-n*6+rtDf().o)}
 function rtMgDraw(g,W,H,t,cones,hit,flash){try{kg82Bg(g,W,H,"huong",.1,1)}catch(e){g.fillStyle="#efe2c8";g.fillRect(0,0,W,H)}
@@ -381,11 +383,14 @@ function rtMgDraw(g,W,H,t,cones,hit,flash){try{kg82Bg(g,W,H,"huong",.1,1)}catch(
  for(const c of cones){const a=c.a;g.save();g.translate(c.x,c.y);g.rotate(a);const L=H*1.1;const gr=g.createLinearGradient(0,0,0,L);gr.addColorStop(0,"rgba(255,236,170,.55)");gr.addColorStop(1,"rgba(255,236,170,0)");
   g.fillStyle=c.on?"rgba(200,60,40,.28)":gr;g.beginPath();g.moveTo(0,0);g.lineTo(Math.tan(c.w)*L,L);g.lineTo(-Math.tan(c.w)*L,L);g.closePath();g.fill();g.restore();
 const im=rtMgFig();if(im&&im.complete&&im.naturalWidth){const h=H*.2,w=h*im.naturalWidth/im.naturalHeight;g.drawImage(im,c.x-w/2,c.y-h*.85,w,h)}}
- /* the bowl: rim + water (live marks) */
+ /* the bowl: the painted porcelain bowl (img/kit/mg-nghiem-bowl.webp, Magnific gpt-2-6) — water centre at (.5,.38) of the sprite, water
+    ellipse ≈ .86 of its width; until it has loaded (or offline without it) the old live-drawn bowl stands in */
+ const bi=rtMgBowl();if(bi&&bi.complete&&bi.naturalWidth){const sw=Math.min(W*.44,250),sh=sw*bi.naturalHeight/bi.naturalWidth;g.drawImage(bi,bx-sw/2,by-sh*.38,sw,sh);if(flash){g.fillStyle=flash;g.fillRect(0,0,W,H)}return{bx,by,bw:sw*.86}}
  g.save();g.fillStyle="rgba(250,248,240,.96)";g.strokeStyle="#3d5f8a";g.lineWidth=2.5;g.beginPath();g.ellipse(bx,by,bw/2,bw*.16,0,0,Math.PI*2);g.fill();g.stroke();
  g.fillStyle="rgba(170,205,215,.75)";g.beginPath();g.ellipse(bx,by+2,bw*.44,bw*.12,0,0,Math.PI*2);g.fill();
  g.fillStyle="rgba(250,248,240,.96)";g.beginPath();g.moveTo(bx-bw/2,by);g.quadraticCurveTo(bx,by+bw*.62,bx+bw/2,by);g.quadraticCurveTo(bx,by+bw*.2,bx-bw/2,by);g.fill();g.stroke();g.restore();
  if(flash){g.fillStyle=flash;g.fillRect(0,0,W,H)}return{bx,by,bw}}
+let RT_MGBOWL=null;function rtMgBowl(){if(!RT_MGBOWL){RT_MGBOWL=new Image();RT_MGBOWL.decoding="async";RT_MGBOWL.src="img/kit/mg-nghiem-bowl.webp"}return RT_MGBOWL}
 let RT_MGFIG=null;function rtMgFig(){if(!RT_MGFIG){RT_MGFIG=new Image();RT_MGFIG.src="img/kit/unknown-fig-f.webp"}return RT_MGFIG}
 function rtNgSleight(kind,n,cb){const o=rtMgO(n);if(!rtMgOn()){cb(roll(o));return}
  const what={alum:"bỏ phèn vào bát",swap:"đổi bát nước",oil:"nhỏ dầu vào bát"}[kind]||"ra tay";
@@ -418,5 +423,5 @@ function rtNgScene(shown,kn,cb){if(!rtMgOn()){cb();return}
   if(t>=T)try{kg82Lbl(g,shown?"Hai giọt máu hòa làm một":"Hai giọt máu tách rời",W/2,H*.9,W*.9,false)}catch(e){}};
  const end=()=>{kg82Set("time","đã hết");const res=typeof kitGameResult==="function"?kitGameResult({parts:[["Giọt máu",shown?"hòa làm một":"tách rời"]],note:shown?`${kn} là cốt nhục hoàng gia.`:"Cả điện lặng ngắt."}):"";
   const r=document.createElement("div");r.innerHTML=res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;box.appendChild(r);$("kg82ok").onclick=()=>{kg82Close();cb()}};
- if(red){draw(T);end();return}
+ if(red){draw(T);const bi=rtMgBowl();if(!bi.complete)bi.addEventListener("load",()=>{try{draw(T)}catch(e){}},{once:true});end();return}
  const fr=now=>{const t=(now-t0)/1000;draw(Math.min(t,T));if(t<T)raf=requestAnimationFrame(fr);else end()};KG82.run={stop:()=>cancelAnimationFrame(raf)};raf=requestAnimationFrame(fr)}

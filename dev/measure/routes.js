@@ -18,10 +18,12 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
  await p.evaluate(([mode,careful])=>{window.__rtL=[];const rec=(cut)=>{try{if(!S||(typeof isSrv==='function'&&isSrv()))return;const T=S.rt||{};window.__rtL.push({open:!!T.open,ends:(T.ends||[]).slice(),y:+(S.turn/12).toFixed(2),cut:!!cut,fate:S.fate||"",ad:T.ad?{on:T.ad.on,harm:T.ad.harm||0,m:S.turn-T.ad.since,duc:S.duc}:null})}catch(e){}};
   const o0=over;over=function(){rec(false);return o0.apply(this,arguments)};const s0=start;start=function(){try{if(S&&!S.dead&&S.turn>0)rec(true)}catch(e){}return s0.apply(this,arguments)};
   const PRI={tc:["tc0","tc_guard","tc_maid","tc_home","tc_route","tc_pass","tc_cloth","tc_drug"],tt:null,hl:["hl_plead","hl_tu","hl_hon","hl_que","hl_phe"],ad:["ad0","ad_kinh","ad_che"]};
-  const go=a=>{const i=deck.indexOf(a);if(i<0)return;window.__rtActs=(window.__rtActs||0)+1;act(i);if(typeof rtStat==='function')rtStat('bot_'+String(a.rtId).replace(/\d+$/,''))};
+  /* __rtGo is on ONLY while the route policy looks at the deck; it is off again before act() runs, so nested time steps (nextBuoi inside
+     act) and the inpage6 sensible bot never see «Lối riêng» cards (old bug: the sens bot started ẩn dật / tư tình in other modes) */
+  const go=a=>{const i=deck.indexOf(a);if(i<0)return;window.__rtGo=0;window.__rtActs=(window.__rtActs||0)+1;act(i);if(typeof rtStat==='function')rtStat('bot_'+String(a.rtId).replace(/\d+$/,''))};
   const ok=a=>a&&a.rt&&!a.lock&&!a.done&&can(cardCost(a))&&canPay(a);
-  window.__rtPol=()=>{if(mode==='off'||!S||S.dead||Q.length||(typeof isSrv==='function'&&isSrv()))return;if(window.__rtIn)return;window.__rtIn=1;window.__rtGo=1;try{rtRefresh();pol()}finally{window.__rtIn=0;window.__rtGo=0;try{if(S&&!S.dead)rtRefresh()}catch(e){}}};
-  const pol=()=>{for(let g=0;g<4;g++){const C=deck.filter(ok);if(!C.length)return;let a=null;
+  window.__rtPol=()=>{if(mode==='off'||!S||S.dead||Q.length||(typeof isSrv==='function'&&isSrv()))return;if(window.__rtIn)return;window.__rtIn=1;try{pol()}finally{window.__rtIn=0;window.__rtGo=0;try{if(S&&!S.dead)rtRefresh()}catch(e){}}};
+  const pol=()=>{for(let g=0;g<4;g++){window.__rtGo=1;rtRefresh();const C=deck.filter(ok);window.__rtGo=0;if(!C.length)return;let a=null;
    const T=S.rt||{};const P=(T.tc&&T.tc.prep)||{};const prepN=Object.keys(P).length;
    if(mode==='tc'||mode==='tt'){const goes=C.filter(x=>/^tcgo_/.test(x.rtId));const best=goes.sort((x,y)=>y.o-x.o)[0];const wait=T.tc&&S.turn-T.tc.since>=18;
     if(best&&(careful==='0'||best.o>=46||wait||(best.rtId==='tcgo_doan'&&best.o>=38)))a=best}
