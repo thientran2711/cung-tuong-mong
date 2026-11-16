@@ -293,3 +293,5 @@
 | D GO-LIVE prep (worker merges+tests; Foreman D runs golive.sh --yes itself) | review/<each>-golive | D | session_01DgYSWnvC5ntuJ6oLspAoXu | RUNNING | 16/11 17:45Z |
 | NPC ROADS (ROAD_MAP.md §0 row 'NPC roads', 1 unit = 1 NPC) | review/npc-roads | D | session_01DgYSWmUVjZctWQWG8HUzdY | RUNNING | 16/11 17:45Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan-r1 | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | DONE PASS 0e8e3684 | 16/11 |
+| status-icons r2 review (sonnet, SMALL) of 0613ec0a5 | review/status-icons-r1 | main s21 | session_01UV1Szkts9Mdx3Ydnpyf3No | RUNNING | 16/11 17:44Z |
+| care-overlap (sonnet, UI bug on live): Chăm screen act picture covers top bars — whole group via kit | review/care-overlap | main s21 | session_01UV1SzhZKa3YaPKzy8XgdPe | RUNNING | 16/11 17:44Z |
