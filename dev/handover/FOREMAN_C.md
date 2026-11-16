@@ -42,3 +42,6 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 ## MOVED FROM FOREMAN D (owner 16/11, s9)
 - (16/11, s9) Owner (Q-D1): account D has no Magnific/Cloudflare → "Chuyển việc vẽ cho tài khoản khác". Coordinator: C3 art-complete part 2, D51 fxkit sprites, D54 buổi paintings, D56 icons + Nội vụ phủ art, fig-hd-upscale, face-sharp-hd2 and the C44 cloud-save Worker deploy MOVE from Foreman D to Foreman C (has Magnific + Cloudflare). Foreman D keeps the non-art part of D51 (wiring call sites) and C44 code; C deploys.
 Claim each in CLAIMS.md before opening its worker session.
+
+## INBOX from main s11 (16/11 06:35Z)
+- Moved to C (from B, OD:L1229): D13 spread events across buổi (opus, with your D29 roster) and D19 Biếu quà làm lành with works (after/with your D17 luxury, one worker on econ files at a time). D14 học thành tài painted scene + D44 fig export ≥1100 px → your art production queue, start only after the owner's morning (art PAUSED; samples by main first).
