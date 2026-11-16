@@ -34,7 +34,14 @@ function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k o
 /* a recast person is told to the player (ROAD_MAP §5.2, review road-map-r1 item 4): the line above goes to the log when the chapter opens
    and heads the chapter's first hồi card ("… nay đã khuất, kẻ nối tay là …") */
 (function(){const p0=PEND.j67;if(!p0)return;PEND.j67=function(p){const r=p0.apply(this,arguments);try{const A=r&&th67(p.t);
-  if(A&&A.rc&&A.rc.length&&!A.i&&typeof r.t==="string"){const i=r.t.indexOf("<br>");if(i>=0)r.t=r.t.slice(0,i+4)+`<i>${A.rc.join(" ")}</i><br>`+r.t.slice(i+4)}}catch(e){console.error(e)}return r}})();
+  const L=[];if(A&&A.rc&&A.rc.length&&!A.i)L.push(...A.rc);if(A&&A.rq&&A.rq.i===A.i)L.push(...A.rq.t);
+  if(L.length&&typeof r.t==="string"){const i=r.t.indexOf("<br>");if(i>=0)r.t=r.t.slice(0,i+4)+`<i>${L.join(" ")}</i><br>`+r.t.slice(i+4)}}catch(e){console.error(e)}return r}})();
+/* a recast in the MIDDLE of a road chapter (j67 beatOk67 need:["v"] → castRv67, review road-b1-r1 item 7) is told the same way: log + the
+   next hồi card (A.rq, kept for that hồi only). rdCast clears the old id before it casts, so it is not told twice. */
+(function(){const c0=castRv67;castRv67=function(A,k){const oid=A&&A.act?A.act[k]:null;const r=c0.apply(this,arguments);
+ try{if(r&&oid!=null&&rdOn()){const a=ARC67[A.a],rd=S.st.f14.rd;if(a&&(A.a===rd||a.road===rd)){const old=RV(oid),nv=rv67(A,k);
+  if(old&&nv&&old.id!==nv.id){const L=`${old.name} ${old.alive?"đã rời cung":"nay đã khuất"}, kẻ nối tay là ${nv.name}.`;log(`<i>${L}</i>`);
+   if(!A.rq||A.rq.i!==A.i)A.rq={i:A.i,t:[]};A.rq.t.push(L)}}}}catch(e){console.error(e)}return r}})();
 /* a new life: Phần giữa = the full road when it exists */
 (function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);
  try{if(!f14())return r;const c=S.st.ch,rd=S.st.f14.road;if(!rd||!rdFull(rd))return r;
