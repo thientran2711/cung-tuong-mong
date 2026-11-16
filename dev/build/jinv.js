@@ -202,7 +202,7 @@ function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o
  /* col = the VERTICAL "Đang mang" column beside the bag: slot picture + the slot name (small) under it; the item name, chips and note live in the tap panel / tooltip */
  if(o.col)return `<div class="keq keqv" data-keq="${key}"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqs">`+L.map((x,i)=>`<div class="keqc">${cell(x,i)}<b class="keql">${x.label}</b></div>`).join("")+`</div></div>`;
  /* row = ONE small strip under the bag (the pet): slot SAME size as a bag cell, name + state as text beside it */
- if(o.row){let first=true,sm=0;return `<div class="keq keqr" data-keq="${key}"><h4 class="kpst">${o.title||""}</h4><div class="keqrs">`+L.map((x,i)=>{
+ if(o.row){let first=true,sm=0;return `<div class="keq keqr" data-keq="${key}"><h4 class="kpst">${o.title||""}</h4><div class="keqrs">`+L.map((x,i)=>{if(!x.item&&!first&&!L.some(y=>y.item))return"";/* 0 pets: ONE empty slot with the text; with pets: spare slots stay (tap = pet shop), no label */
    const t=x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit((x.mini||"").replace(/<span class="keql2">/,(!sm&&o.sum?(sm=1,o.sum):(sm=1,""))+'<span class="keql2">'))}`:(first&&!L.some(y=>y.item)?`<b class="keql">${o.empty||"Chưa có"}</b>`:"");if(!x.item)first=false;
    return `<div class="keqrc">${cell(x,i)}<div class="keqrt">${t}</div></div>`}).join("")+`</div></div>`}
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
