@@ -168,7 +168,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const meX=me?{f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar}:null;
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
- let capOn=innerWidth>=1000;/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
+ let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  const size=(tagH)=>{const fo0=Math.max(sH*.03,tagH+8);const foA=KA&&KA.feet?sH-KA.feet:0;
   const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
@@ -178,7 +178,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
    /* review/small-bugs-2 (owner: a second person in lãnh cung hid behind the people panel at 844x390): compact stages reserve it too —
       no figure is ever placed under a stage panel, at any size, in any place */
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
- const MAXN=st.classList.contains("kplfs")&&innerWidth<1000?2:6/* KIT 33.10 (owner 18:22Z): Fold portrait at most 2 people (+ their pets) per view; iPad as many as really fit */,M=E.length,nAll=M+(me?1:0);
+ const MAXN=st.classList.contains("kplfs")&&(()=>{try{return kitView().pages===1}catch(e){return false}})()?2:6/* KIT 33.10 (owner 18:22Z): Fold portrait at most 2 people (+ their pets) per view; iPad as many as really fit */,M=E.length,nAll=M+(me?1:0);
  {}
  const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};

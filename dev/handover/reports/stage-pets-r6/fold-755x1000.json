@@ -1,0 +1,575 @@
+{
+ "vp": "755x1000@2",
+ "steps": {
+  "1-room": {
+   "r": "home",
+   "i": {
+    "place": "home",
+    "tab": "act",
+    "cls": "game k3ph k3home kbook",
+    "fs": false,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": null,
+    "pg": "",
+    "n": 4,
+    "body": [
+     615,
+     446,
+     446,
+     432
+    ],
+    "overlap": 150,
+    "chips": [],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "2-dudo": {
+   "r": "go",
+   "i": {
+    "place": "home",
+    "tab": "go",
+    "cls": "game k3ph maptab",
+    "fs": false,
+    "stage": null,
+    "panel": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "kshR": [
+     544,
+     176,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": null,
+    "pg": "",
+    "n": 0,
+    "body": [],
+    "overlap": 0,
+    "chips": [],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "3-court": {
+   "r": [
+    0,
+    "r2",
+    3
+   ],
+   "i": {
+    "place": "home",
+    "tab": "go",
+    "cls": "game k3ph maptab",
+    "fs": false,
+    "stage": null,
+    "panel": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "kshR": [
+     544,
+     176,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": null,
+    "pg": "",
+    "n": 0,
+    "body": [],
+    "overlap": 0,
+    "chips": [],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "4-place": {
+   "r": [
+    "home",
+    0
+   ],
+   "i": {
+    "place": "r2",
+    "tab": "act",
+    "cls": "game k3ph kbook k3home",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": "‹ Cảnh Phúc cung",
+    "pg": "0,2,0,0,1",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+1",
+      "l": 707,
+      "r": 736,
+      "top": 429,
+      "b": 448
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 1
+   }
+  },
+  "5-after-swipe": {
+   "i": {
+    "place": "r2",
+    "tab": "act",
+    "cls": "game k3ph kbook k3home",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": "‹ Cảnh Phúc cung",
+    "pg": "1,2,0,1,1",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+1",
+      "l": 7,
+      "r": 36,
+      "top": 185,
+      "b": 204
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "5-pop": {
+   "i": {
+    "place": "r2",
+    "tab": "act",
+    "cls": "game k3ph kbook k3pop",
+    "fs": true,
+    "stage": null,
+    "panel": null,
+    "kshR": null,
+    "pop": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "tomap": "‹ Cảnh Phúc cung",
+    "pg": "1,2,0,1,1",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+1",
+      "l": 14,
+      "r": 43,
+      "top": 184,
+      "b": 203
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "5-closed": {
+   "i": {
+    "place": "r2",
+    "tab": "act",
+    "cls": "game k3ph kbook k3home",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     416
+    ],
+    "pop": null,
+    "tomap": "‹ Cảnh Phúc cung",
+    "pg": "1,2,0,1,1",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+1",
+      "l": 7,
+      "r": 36,
+      "top": 34,
+      "b": 53
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "7-cards": {
+   "r": "act",
+   "i": {
+    "place": "r2",
+    "tab": "act",
+    "cls": "game k3ph kbook",
+    "fs": true,
+    "stage": null,
+    "panel": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "kshR": null,
+    "pop": null,
+    "tomap": "‹ Cảnh Phúc cung",
+    "pg": "1,2,0,1,1",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+1",
+      "l": 14,
+      "r": 43,
+      "top": 53,
+      "b": 72
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "8-vuon": {
+   "r": [
+    "vuon",
+    "p:vuon",
+    false,
+    false,
+    "vuon"
+   ],
+   "i": {
+    "place": "vuon",
+    "tab": "act",
+    "cls": "game k3ph kbook k3home",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": "Dư đồ",
+    "pg": "0,5,0,0,4",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+4",
+      "l": 704,
+      "r": 736,
+      "top": 429,
+      "b": 448
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 1
+   }
+  },
+  "8-after-swipe": {
+   "i": {
+    "place": "vuon",
+    "tab": "act",
+    "cls": "game k3ph kbook k3home",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": "Dư đồ",
+    "pg": "1,5,0,1,4",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+3",
+      "l": 704,
+      "r": 736,
+      "top": 429,
+      "b": 448
+     },
+     {
+      "t": "+1",
+      "l": 7,
+      "r": 36,
+      "top": 185,
+      "b": 204
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "8-pop": {
+   "i": {
+    "place": "vuon",
+    "tab": "act",
+    "cls": "game k3ph kbook k3pop",
+    "fs": true,
+    "stage": null,
+    "panel": null,
+    "kshR": null,
+    "pop": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "tomap": "Dư đồ",
+    "pg": "1,5,0,1,4",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+3",
+      "l": 705,
+      "r": 737,
+      "top": 428,
+      "b": 447
+     },
+     {
+      "t": "+1",
+      "l": 14,
+      "r": 43,
+      "top": 184,
+      "b": 203
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "8-closed": {
+   "i": {
+    "place": "vuon",
+    "tab": "act",
+    "cls": "game k3ph kbook k3home",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     416
+    ],
+    "pop": null,
+    "tomap": "Dư đồ",
+    "pg": "1,5,0,1,4",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+3",
+      "l": 704,
+      "r": 736,
+      "top": 433,
+      "b": 452
+     },
+     {
+      "t": "+1",
+      "l": 7,
+      "r": 36,
+      "top": 34,
+      "b": 53
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 0
+   }
+  },
+  "8-tyv": {
+   "r": [
+    "tyv",
+    null,
+    false,
+    false,
+    "tyv"
+   ],
+   "i": {
+    "place": "tyv",
+    "tab": "act",
+    "cls": "game k3ph k3home kbook",
+    "fs": true,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": "Dư đồ",
+    "pg": "0,3,0,0,2",
+    "n": 1,
+    "body": [
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+2",
+      "l": 704,
+      "r": 736,
+      "top": 429,
+      "b": 448
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 1
+   }
+  },
+  "9-home": {
+   "r": "home",
+   "i": {
+    "place": "home",
+    "tab": "act",
+    "cls": "game k3ph k3home kbook",
+    "fs": false,
+    "stage": [
+     4,
+     141,
+     747,
+     771
+    ],
+    "panel": null,
+    "kshR": [
+     570,
+     150,
+     172,
+     412
+    ],
+    "pop": null,
+    "tomap": "Dư đồ",
+    "pg": "0,2,0,1,3",
+    "n": 2,
+    "body": [
+     609,
+     609
+    ],
+    "overlap": 0,
+    "chips": [
+     {
+      "t": "+2",
+      "l": 704,
+      "r": 736,
+      "top": 429,
+      "b": 448
+     }
+    ],
+    "chipOnFig": 0,
+    "pets": 1
+   }
+  }
+ },
+ "errs": []
+}

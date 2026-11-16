@@ -58,3 +58,37 @@ WHAT IS KNOWN (do not re-derive):
 - Maid's pet: the test state has none; layout reserves it by the same rule (pets follow the owner's column).
 - Test harness note: stage-swipe.js positions the mouse at 0.62·W of the stage; on a full-screen view recompute the box.
 DoD: Hành sự = her room only (iPad 2 people, Fold 2, + pets, no overlap) — shots; Dư đồ → courtyard → place full screen (Fold 2 + pets, iPad max that fits) + mid-swipe frame + chips; tap → pop-up works; old save; kit-conform; stage-pets.js/stage-swipe.js green; KIT.md 33.9/33.7b updated (full-screen place section); report + push; message s22 "SẴN SÀNG KIỂM <sha>".
+
+# ROUND 6 — DONE (worker s22-r6; base = review/stage-pets r5 + review/pl-courtyards-r2 9e1e99f4 merged)
+Owner rules covered: OD 18:22Z (SWIPE STAGE), 18:35Z (+N both sides), 19:15Z (HÀNH SỰ STAGE = her room only), 19:25Z (courtyard only for multi-hall places), s22 19:24Z new rule (Dư đồ / courtyard / place / room carry the SAME left + right columns as her room), s22 19:23Z (courtyard back button over "Tây phối điện", pl-courtyards-r2 review).
+## What changed (kit first, whole group)
+- KIT 33.10 FULL-SCREEN PLACE VIEW (`dev/build/jplfs.js`, `kplAway()`; read by the kit shell jk3 `k3Phone`): anywhere that is not her residence the ONE-PAGE shell is used on every screen size: the stage page = the place painting over the whole page (iPad 1164 px wide instead of the 582 px left page), "Hành sự" tab = cards page, tap a person = that person's card page, ✕ = painting. Her residence keeps the Hành sự stage (iPad split). Every road into a place (map, person card, follow, event) lands on the painting (`goTo` → `k3ShowPlace`). Fold portrait: max 2 people per view (j59 MAXN), iPad: as many as fit (MAXN 6).
+- KIT 33.11 SIDE COLUMNS EVERYWHERE (`kitSideHost()` in jk3; k3Stage + jrail use it): the same #kshR right column and #krail left rail stand on the room stage, the place painting, the Dư đồ plan and the courtyard (inside the map leather, the picture + hall rows use the space between). One width rule (k3RW from the PAGE width).
+- BACK TO MAP = one left-rail button (`back`, icon ico-map, "Về Dư đồ" / "Về <cung>") on every level; replaces the j38 "‹ Dư đồ" pill (was over her name chip) and the courtyard's "‹ Dư đồ" button (was over "Tây phối điện") — whole group.
+- KIT 33.9 chips: "+N" chips now stand in the TOP corners above the heads (left under the title + rail, right under the side column in its reserved zone); a new place always opens on view 1 (view index keyed by place).
+- Bug fix (whole group, kit shell): the person card page on the one-page shell (#popw.j59dock grid-area "panel" does not exist there) squeezed the top bar + tabs into a 470 px column and the card into a 270 px strip — Fold room AND places. Now grid-area stage.
+- KIT §0 build check: j59 `innerWidth>=1000` (r5 capOn) and my MAXN switch replaced by `kitView().pages` (media-check passes; build_site.sh ran).
+## Numbers (CSS px; dev/test/place-fs.js, json in dev/handover/reports/stage-pets-r6/)
+| step | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| room (Hành sự, her residence) | split n/a (one page), 2 per view, body 609 (.79), overlap 0, +2 chip under column | stage | cards, 2 per view, body 492, overlap 0, +2 under column |
+| Dư đồ plan / courtyard | columns L+R on the leather, back button in left rail | same; "Tây phối điện" label free |
+| place in a palace hall (courtyard → hall) | painting full page, body 609, columns, overlap 0 | 2 people, 492, overlap 0 |
+| Ngự hoa viên 5–6 people (single hall, straight from Dư đồ) | 1–2 per view (art-dependent: her fan / sleeve poses ~300 px > column 273 px → 1), swipe OK, chips L/R | 3 per view, swipe OK, +3 / +3 |
+| Thái y viện (single hall) | straight in, no courtyard | straight in |
+| tap person → card page / ✕ | OK / back to painting | OK / back |
+| Hành sự tab while away | cards page (no stage) | cards page (no stage) |
+| page errors | 0 | 0 |
+Swipe frames (stage-swipe.js, 6 people): Fold avg 16.6 ms p95 19 ms; iPad avg 16.9 ms p95 18.7 ms; 0 arrow buttons.
+## Tests
+- place-fs.js Fold + iPad @2: all steps as above, 0 page errors. Room shot = step 9 (step 1 is taken while the figures still load).
+- stage-swipe.js NPEOPLE=2,6 Fold + iPad @2: OK, 0 errors.
+- stage-pets.js: Fold 16/16 pass; iPad 13/16 — the 3 "n3*" cases FAIL "p1 has no pet": the painting now holds 3 people per view and the 3rd is a STRANGER (Người lạ, man silhouette in the test env), who by KIT 33.8 shows no pet; the test's expectation predates 3-per-view. Not changed.
+- Old save (origin/main build, saved while she stands in Ngự hoa viên) → this build: loads, painting full page, 0 errors (Fold + iPad). No save field added.
+- kit-conform 755x1000: 88 CONFORMS, 0 MIXED/CUSTOM, floats none (14 MISSING = dialog kinds not openable in the test state).
+## Known / for review
+- iPad after a swipe: the left "+N" chip (32 px) can touch the outer 4 px of a wide man silhouette's sleeve at shoulder height (chipOnFig 1 in one frame); faces never.
+- Fold: wide poses (fan / spread sleeves ≈ 300 px) do not fit the 273 px column beside the right column → 1 per view there (rule: never shrink, never overlap). Real art with narrower poses gives 2.
+- iPad room: her pose decides 1 vs 2 per view the same way (r5 rule, unchanged).
+- KIT parts changed (kit keeper please review): jk3 k3Phone / k3Stage / kitSideHost / one-page #popw rule, jrail host, j59 chips + MAXN + capOn, KIT.md 33.9 (rewritten in place), 33.10 + 33.11 (new).
+Shots (full screen, device + size + step in name): dev/handover/reports/stage-pets-r6/{fold-755x1000,ipad-1180x820}-{2-dudo,3-court,4a-visit-choice,4-place,7-cards,8-vuon,8a-swipe-drag,8b-swipe-anim,8c-view2,8d-pop,8-tyv,9-home}.jpg (+ Fold 5a–5d).
