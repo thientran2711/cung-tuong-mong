@@ -46,4 +46,4 @@ Main-s9 sessions running (all told to merge newest main before final push; each 
 - kit-sweep-r1 reviewer session_01UV1SziYTkPQjJKnWcb8GoX
 Still to do: weather-fx-one finishing worker (reports/weather-fx-one.md); kit-keeper sign-off scheme-games-port-r1 (jopic.js grid-auto-rows); pcard-actrow-r1 verdict pending from s8.
 Owner answers this session (all in OWNER_DECISIONS): pregnancy 1+3 → Foreman D D57; D art → Foreman C; Thái hậu archetypes keep; thiếu lễ keep −2.8; robbed-clothes re-issue random 1–3 wk; foreign princess (nc Nam Chiếu, bd Bắc Địch): own home-costume sets by rank below Quý phi, court robes from Quý phi; home maids home dress at low rank, palace uniform at high rank; SAMPLES FIRST (Foreman C → reports/foreign-princess-samples/) → send to owner.
-Open owner question: how many home maids follow each foreign princess (1 proposed / 2 / none) — the home-maid feature does not exist yet. Remaining old questions: Q12/Q13 cycle lies, Q22 scheme minigame on bribery/eavesdrop, Q20 leaderboard login (B), Q15/Q17 (B).
+Open owner question: none on the maid count (owner: the close maid already comes from home; Foreman C to confirm in code).
