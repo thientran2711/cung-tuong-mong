@@ -68,3 +68,6 @@ Not re-run on e9c6021d (passed on 802fe821, no related change since): view-scale
 design-scale 6 sizes ok, 0 errs (A right 100 %, left 98.9 %) · tab-pairs 1180x820 / 755x1000 / 1366x1024: 0 mismatches (1366 showed 6 Dư đồ
 mismatches only while design-scale ran in parallel; alone 0) · kit-conform exit 0 · boot-flash 755x1000 + 1180x820 exit 0 · boot-slow host exit 0 ·
 coop-e2e 59/59 (one parallel run 57/59 "A frozen when B left" timing; alone 59/59).
+- main moved to 5d6de0d9 (title-tag-r1) during the GO tests → merged again: **READY 5682ce6f** (assemble.py same resolution; media-check 0; rebuilt).
+  Smoke: design-scale A right 98.2 %, left 98.9 % (x2 runs; only her figure img width 0 = image not decoded yet; one parallel-free run read 90.4 % with the
+  stage not laid out yet = timing), tab-pairs 755x1000 + 1180x820 0 mismatches 0 errors, boot-flash 755x1000 exit 0.
