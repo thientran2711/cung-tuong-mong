@@ -43,7 +43,7 @@
 | owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | RUNNING | 16/11 05:54Z |
 | C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | PASS 7e187abe | 16/11 06:26Z |
 | D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | session_01DgYSWnFEYrjgcFbBRjAWyc | PASS fd7768b3 | 16/11 07:17Z |
-| promo-skip audit + fix (quest rewards → direct rank; prince → rank, princess → exam) | review/promo-skip | main s10 | session_01UV1SzhzQSFQc43nUVdpwAi | RUNNING | 16/11 06:20Z |
+| promo-skip audit + fix (long-road rewards → direct rank; first prince rank, later sons/princess waived exam; gain+loss; full-seat compensation) | review/promo-skip | main s10 → s11 | session_01UV1SzhzQSFQc43nUVdpwAi | SẴN SÀNG KIỂM 7f655c55 | 16/11 07:55Z |
 | D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | PASS d16535c68 | 06:01Z 16/11 |
 | cardflip-newlife bug (overlay stays after new life + flip scene during Luân hồi identity card) + act-dedupe UI (usable first, popover, hàng hiếm label) | review/flip-newlife | main s10 | session_01UV1SzhXJHY3uWDTJeQ1dYH | READY FOR REVIEW 9bea3721e55a72c35f487ced821e85804a371884 | 16/11 06:36Z |
 | kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | session_01UV1Szj1bf6YFPCryaDjdEi | DONE: A KIT OK c2cbe401e (review/fig-bg-k1), B KIT OK 05bce5519 (review/kit-keeper-1); report reports/kit-keeper-1.md | 16/11 06:38Z |
