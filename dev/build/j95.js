@@ -244,6 +244,8 @@ function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id
  if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(id==="c:ty"||id==="c:ksp")return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 const J95OUT_="ngoai";
+/* the khắc she would ARRIVE at k (walking costs travel(): the map number is the number she meets on arrival, main rule review/stage-slots) */
+function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;return Math.min(J95.KH-1,kh+Math.max(0,travel(S.place||"home",k)||0))}catch(e){return kh}}
 function j95counts(R,kh){const C={};for(const id in R.P){const k=R.P[id][kh][0];if(k&&j95vis(id,k))C[k]=(C[k]||0)+1}return C}
 function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j95key()){if(!plan)return;if(R)j95log(R);R=j95plan();j95secApply(R)}
  const kh=j95kh();const ppl=j95ppl(R);const ids={};
@@ -445,7 +447,7 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  const wo0=whereOf;whereOf=function(p){try{if(j95on()&&p&&p!==S&&p.rel!=null&&S.roster&&S.roster.key===j95key()){const e=S.roster.P["v"+p.id];if(e)return e[j95kh()][0]}}catch(e){}return wo0.apply(this,arguments)};
  const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(j95on()&&S&&!S.dead){if(S.place===k&&k&&k!=="home"&&k!==palaceOf(S)){const z=j95z();const key=j95c()+":"+k;const bk=j95key();if(z.meLast!==bk+key){z.meLast=bk+key;z.me[key]=(z.me[key]||0)+1}}
    if(S.roster){j95sync(true);if(S.visit){const n0=S.visit.people&&S.visit.people.length;j95dedupe(S.visit);if(S.visit.people&&S.visit.people.length!==n0)J95.stageCh=1}if(J95.stageCh&&S.visit&&S.visit.k===S.place)render()}}}catch(e){j95err("wrap",e)}return r};
- const c0=countAt;countAt=function(k){if(!j95on()||!S.roster||S.roster.key!==j95key())return c0.apply(this,arguments);const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;return n};
+ const c0=countAt;countAt=function(k){if(!j95on()||!S.roster||S.roster.key!==j95key())return c0.apply(this,arguments);const R=S.roster,kh=j95arrKh(k);let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;return n};
  const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(j95on()){const sg=j95mapSigns();for(const x of L)if(sg[x.k]&&!(x.d||"").includes(sg[x.k]))x.d=(x.d||"")+` Có ${sg[x.k]}.`}}catch(e){}return L};
  if(typeof tryst==="function"){const t0=tryst;tryst=function(m,risk){const r=t0.apply(this,arguments);try{/* jmen catches her talking with a man in the hậu cung (its talk wrapper) */if(j95on()&&!j95men()&&!S.dead&&!S.out&&m&&m.alive)j95npcCatch(m)}catch(e){}return r}}
  /* the motive gate on every NPC act aimed at someone */
