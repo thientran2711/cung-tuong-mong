@@ -158,3 +158,19 @@ Merged build (main 900ace7fb + this branch before jbac), sensible bot v4 via run
    story-deadline 12/12; event-context 9/9; promo-exam 17/17 (1180x820); opt-scan --fail unclassified 0; rest-cards.js "ok" is falsy on
    BOTH main and the branch (its "Nghỉ ngơi một lát" morning card lookup returns null — pre-existing test issue); dưỡng sức now Sức +24 / Bạc −6 as set.
    Not run: hint-dedup.js, old-save load.
+
+## REVIEW r1 (16/11, Foreman C reviewer, branch review/balance-pass-r1)
+Merged origin/main 4f5e5f3b3 then 67af14139 (assemble: jbac after jevb, main's jthaiy/jpromo/jflip/jtut/jgoal/jstaff kept; jbal2: bar
+[22,25,28] + main's srvBar/srvCd; jecon: main's kitRows blCard kept). Fixes made here:
+- jbac: target E = max(0, best free option). Before, a card whose free roads all LOSE (rumorEmpLove "Lan thêm lời đồn" E −20 khắc,
+  stormNight, proudVisit at low rank) pushed its silver options UP to match a negative E: 45 bạc for "Tai mắt +1" (rank 3–7), 25 bạc for
+  "Sang thân thiết" at rank 1 — silver priced above its own worth. 25 of 48 "dearer" rows had a negative target. Now priced at worth (8 / 5 bạc).
+- jecon: log "Không đủ bạc lo lễ nghĩa" no longer prints "Đức -0" (dutySkip.duc is 0 now).
+Checks: in-page probe over every E68 card × 8 ranks × 6 draws (2058 cards): display == fx == charged (chooseM) at ranks 0/1/3/5/7, rebuild
+from pid/pp (save/co-op path) gives the same price, deterministic for the same state, no NaN / ≤0 / non-integer price, option keys
+unchanged vs __bacFairOff. Old main save (with a pending silver card) loads, card rebuilt at the new price, 8 turns, re-save OK.
+Bot: runb + inpage6 + inty: dresses (43 wears in 7 min), life completes (14.7 years, no TIMEOUT).
+Follow-ups (not blocking): (a) cards whose free road is a clear loss need a better free road (rumorEmpLove, stormNight, proudVisit) —
+the price can't fix those; (b) stormNight "Cứu người" 15→35–45 bạc for Đức +3 Danh +1 rides on BAL.bacVal.duc = 8 khắc (scan uses 16/3≈5.3):
+re-check that value; (c) HH 45 % (n=22) above the 32 % target — owner question Q6 open; (d) opt-render 755x1000 A:giftto "not in cost
+mode" (empty-bag picker, jgift/jk2b KIT_ACT_PIDS lacks "giftto") is pre-existing main, not this branch.
