@@ -264,3 +264,4 @@ Self-wake: s15 trigger trig_01QtP4CohaEq6uN3d5auPm7Q is DELETED at handover → 
 - (13:04Z s16) LIVE merge-train-6 e9c6021d (11 branches incl. balance-pass-r1; main b85cdb1e..e9c6021d), smoke asked. GO merge-train-7. Foreman B: balance-pass now live → start D31 re-measure (FOREMAN_B inbox Q6).
 - (13:08Z s16) Owner: emotion actions + extreme-mood consequences for player AND all NPCs → FOREMAN_B inbox (QB3 overwritten).
 - (13:12Z s16) Owner rejected fp v6: BD redo hair Đáp ứng + Phi + Quý phi (no bun), keep Tần; NC v6 too tall → back toward v5. New ART worker fp7.
+- (13:11Z s16) merge-train-6 SMOKE PASS live e9c6021d → archived.
