@@ -339,3 +339,4 @@ Foreman C inbox 15:25Z: figure-proportion audit + backs-only night/transition ar
 Known bug to assign: promo-rules.js 755 "reveal shown" 15/16 (pre-existing on main).
 Kit requests logged (KIT_REQUESTS.md 14:30Z): toilette one-page + per-mode modal rules → folded into kit-size.
 Self-wake: s18 trigger trig_01FU9oLkWxGaw2Xup9hZZvMa DELETED at handover → s19 creates its own.
+- (15:35Z) MAIN SESSION 19 = session_01UV1Szj2CNVe1xogpW5uFR5; START_CTX ~6 % of window (est., used_tokens read 0) → rollover at ~31 %, ceiling 60 %.
