@@ -180,7 +180,6 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kslhead{display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 12px;align-items:start;margin:0 0 6px}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem{position:static!important;width:64px;margin:0;padding:0;top:auto}
 #modal .dlg.kitslot .kslhead>.kpsubj.kpitem>.kitem{--isz:64px!important;width:64px!important}
-#modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitg{display:none}
 #modal .dlg.kitslot .kslinfo{min-width:0}
 #modal .dlg.kitslot .kslinfo>.kinvrows{margin:0}
 #modal .dlg.kitslot .kslinfo>p{margin:4px 0 0}
@@ -226,6 +225,8 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 /* kv: dropped @media (max-width:899px) (one page = spread page, KIT §0) */
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
+/* KIT §54.1b: the grade chip hangs half below the frame, so the caption under a wear / pet slot starts below it */
+.keq .keqc>.kitem-slot:not(.kitem-empty){margin-bottom:max(calc(var(--keqsz,var(--kside,72px))*.06),6px)}
 @supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
  .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}.keq .keqc>.keqnm{margin-top:0}}
 .keq .keqnote{display:flex;justify-content:center;min-width:0}.keq .keqnote>.keql2{flex-basis:auto}
