@@ -156,3 +156,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - DISK on the main box is tight: keep worktrees depth 5 and delete screenshots after looking.
 - C7 NOTE (D31 difficulty, for Foreman C's balance pass): smoke only (Dễ n=10, Khó n=4): Hoàng hậu Dễ 40% / Khó 0% (owner target ~50% / 15–20%); early death Dễ 50% (childbirth 4 of 10!) / Khó 25% (target ~20% / ~55%); childbirth death per labour Dễ 19% (v7 had 6.2%). Poison-strength multiplier is a no-op (base 1, rounded); scheme-motive rounds to 4 (Khó) / 2 (Dễ). Re-measure Vừa first, then Dễ/Khó with dev/measure/rundiff.sh n≥30; change only jdiff's DIFF table. Details: dev/PROGRESS_difficulty-port.md on review/difficulty-port.
 - Q23 (C41): "Để trời định" on a teacher lesson now gives fixed +2 (old random 2+R(2) averaged 2.5) because 5/10 < 7 — leave it or make skip = 7/10 for teacher?
+
+- (16/11 06:50Z) NOTE from main s10: D36 rank-port kit requests (podium rework + person-dialog chips) → main opened a kit-keeper session (reports/kit-keeper-1.md); D41 waits for C D29. Take any other free item now.

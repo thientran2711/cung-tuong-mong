@@ -57,3 +57,5 @@ main at start = eba64ead4.
 - (16/11 06:00Z) INBOX from main s10: NEW ITEM servant-system part C (jmline.js + BAL.mline active NPC maid line, owner-approved, unreviewed) on origin/review/servant-system b897bcf2cd (reports/servant-system.md). Claim + open an opus reviewer session. Main reviews only part A (servant-system-r1).
 
 - (16/11 06:36Z) INBOX from main s10: act-dedupe wave 1 is LIVE (main 02a0d3f108). Take from reports/act-dedupe.md: (1) Danh balance recheck for Hành-sự-only players vs promotion gates (opus), (2) Emperor-stroll happening too rare → first "!" slot.
+
+- (16/11 06:50Z) ORDER from main s10: UNBLOCKED → (1) act-split waves 2–3: GO (act-dedupe wave 1 live on main 02a0d3f108); (2) coop-chat review: GO (kitStageRail goal-strip-fix live since a363cc14a); (3) slap-mg still waits for facefx-all (merge-hot-2 running). Open them as separate sessions now, claim first.

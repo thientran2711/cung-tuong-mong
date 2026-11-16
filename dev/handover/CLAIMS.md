@@ -46,3 +46,4 @@
 | promo-skip audit + fix (quest rewards → direct rank; prince → rank, princess → exam) | review/promo-skip | main s10 | session_01UV1SzhzQSFQc43nUVdpwAi | RUNNING | 16/11 06:20Z |
 | D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | RUNNING | 06:01Z 16/11 |
 | cardflip-newlife bug (overlay stays after new life + flip scene during Luân hồi identity card) + act-dedupe UI (usable first, popover, hàng hiếm label) | review/flip-newlife | main s10 | session_01UV1SzhXJHY3uWDTJeQ1dYH | RUNNING | 16/11 06:36Z |
+| kit-keeper-1: sign off C8 fig-bg (K1) + D36 rank-port kit requests (podium, person-dialog chips) | review/kit-keeper-1 | main s10 | (opening) | RUNNING | 16/11 06:50Z |
