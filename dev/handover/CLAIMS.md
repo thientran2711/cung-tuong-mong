@@ -57,7 +57,7 @@
 | D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | RUNNING | 06:23Z 16/11 |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
 | coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | RUNNING | 16/11 06:26Z |
-| cardflip-smooth-r1 re-merge on main | review/merge-hot-3 | main s11 | session_01UV1SzhTBy9XN8Ebp4ao4yp (sonnet) | RUNNING | 16/11 06:29Z |
+| cardflip-smooth-r1 re-merge on main | review/merge-hot-3 | main s11 | session_01UV1SzhTBy9XN8Ebp4ao4yp (sonnet) | LIVE feba37e5 | 16/11 06:29Z |
 | canon-pairs: decide 57 old→new rule pairs in PRIORITY/ART rule files | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus, rules) | RUNNING | 16/11 06:29Z |
 | kc-lore: td home road vs "cả nhà bị xử trảm" (+ scan all 6 home-road origins) | review/kc-lore | main s11 | session_01UV1SzifvyTS1XcBknF7tFA (sonnet) | RUNNING | 16/11 06:30Z |
 | flip-newlife reviewer (+ .ksub overlap fix on identity card) | review/flip-newlife-r1 | main s11 | session_01UV1SzhzxBjcTWbAts1faFn (sonnet) | RUNNING | 16/11 06:35Z |
