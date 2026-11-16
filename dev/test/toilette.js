@@ -67,7 +67,7 @@ fs.mkdirSync(DIR,{recursive:true});
  try{const j=fs.readFileSync('img/toil-fit.json','utf8');await p.evaluate(j=>{TOIL_FIT.fit=JSON.parse(j)},j)}catch(e){}
  for(const lk of ['dep','diem']){await p.evaluate(lk=>{S.toilette.look=lk;S.toilette.makeup=true;render()},lk);await p.waitForTimeout(2500);
   await p.waitForFunction(()=>[...document.querySelectorAll('img.kmkc')].every(i=>!/^data:image\/gif/.test(i.src)),null,{timeout:120000}).catch(()=>{});
-  out['face_'+lk]=await p.evaluate(()=>({kmk:document.querySelectorAll('img.kmk').length,kmkc:document.querySelectorAll('img.kmkc').length,col:S.toilette.col,where:[...new Set([...document.querySelectorAll('img.kmk')].map(e=>(e.closest('#stage')?'stage':e.closest('header')?'header':e.closest('.kmini')?'avatar':'other')))]}));
+  out['face_'+lk]=await p.evaluate(()=>({kmk:document.querySelectorAll('img.kmkl').length,kmkc:document.querySelectorAll('img.kmkc').length,col:S.toilette.col,where:[...new Set([...document.querySelectorAll('img.kmkl')].map(e=>(e.closest('#stage')?'stage':e.closest('header')?'header':e.closest('.kmini')?'avatar':'other')))]}));
   await p.screenshot({path:`${DIR}/toil-${tag}-6-face-${lk}.jpg`,quality:70})}
  await p.evaluate(()=>{const b=document.querySelector('#tabs [data-tab=inv]')||document.querySelector('[data-tab=inv]');if(b)b.click()});await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/toil-${tag}-7-tutrang.jpg`,quality:70});
 

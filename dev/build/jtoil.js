@@ -415,7 +415,7 @@ function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=TOI
 window.toilMakeupSvg=toilMakeupSvg;window.TOIL_FIT=TOIL_FIT;
 /* her face layers: skin light + blush (SVG, as approved) under the colour layer (lips, eyelids, brows painted from the picture itself, §60) */
 function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=toilMakeupSvg(file,lk,col,!!mk);if(!src&&!mk)return"";
- return (src?`<img class="kmk kmk-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk}
+ return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
@@ -425,7 +425,7 @@ if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p
    Placement: img/mk-fit/<face>.json (dev/art/mkfit/mkfit.py — MediaPipe face mesh on every picture of her 84 faces + old player looks: lips
    outer/inner, both upper eyelids + lower lash line, both brows; 60 points in 1/4000 of the picture). The colour layer is painted FROM THE
    PICTURE ITSELF in a canvas (lip / lid / brow pixels recoloured with their own light and shade, soft masks), so it reads as painted, not pasted;
-   it is one <img class="kmk kmkc"> over the same box as the picture. A picture without points keeps the older SVG lip oval (never guessed). */
+   it is one <img class="kmkl kmkc"> over the same box as the picture. A picture without points keeps the older SVG lip oval (never guessed). */
 const TOIL_COL={
  mat:{label:"Phấn mắt",def:"hoadao",L:[["hoadao","Phấn hoa đào","hoa đào",[234,148,146]],["hongmai","Phấn hồng mai","hồng mai",[214,104,128]],["rangchieu","Phấn ráng chiều","ráng chiều",[226,128,96]],
   ["kimsa","Phấn kim sa","kim sa",[204,160,92]],["nautram","Phấn nâu trầm","nâu trầm",[150,100,82]],["tuvi","Phấn tử vi","tử vi",[170,116,168]],["hophach","Phấn hổ phách","hổ phách",[214,132,62]]]},
@@ -478,7 +478,7 @@ function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.f
  const mx=(x1-x0)*.14,my=(y1-y0)*.14;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
 function toilMkLayer(file,look,col){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const key=[file,look,col.mat,col.son,col.may,look==="vung"?col.seed|0:""].join("|");
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>80)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key)}
- const b=e.box;return `<img class="kmk kmkc kmk-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
+ const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
 function toilMkPaint(file,v,look,col,e,key){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
  im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src})};
  im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("img/"+file)}

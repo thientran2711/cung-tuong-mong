@@ -598,7 +598,7 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
   The clock of each hồi starts at the first touch. Result = kitRows (each hồi /100, Phần chơi, Tay nghề chip, Dung nhan, Hôm nay: who reacts how).
 - Small CSS (`#toil-css`): `.toilw` two columns (portrait | slots + bag), one column under 640 px with a 110 px portrait beside the facts.
 - Face look all day (owner 15/11): one layer in the face-effects slot `kitFxLayers` (jk2b §7 — tall frame, small avatar, stage figures; same box as
-  the picture, order portrait < makeup < scar < veil): `<img class="kmk kmk-dep|kmk-diem">` = an SVG drawn from `img/toil-fit.json`
+  the picture, order portrait < makeup < scar < veil): `<img class="kmkl kmkl-dep|kmkl-diem">` = an SVG drawn from `img/toil-fit.json`
   (mouth + both cheeks + face size per por-/fig- picture, `dev/figwork/toilfit.py`). Looks: none (mộc / vụng / vừa), `dep` (rosy feathered cheeks,
   light lip tint, brighter skin), `diem` diêm dúa (owner 15/11: the same painted layer a little stronger — deeper, wider rouge, bolder lip tint, a little more powder sheen;
   pretty, noticeably overdone, never clownish) — presets `TOIL_LOOKS`. Only her face. Sheet: `node dev/test/toil-looks.js`.
@@ -3206,7 +3206,7 @@ round avatar, stage figure, person dialogs, Tuần lục — every place `kitFxL
   tint (`.kswt-i.on`, `aria-checked`). Grid `auto-fill minmax(54px,1fr)`, wraps on any width. Tap → `onPick`. CSS `#kswt-css`.
 - **`kitFaceZoom(p, file)`**: a round bronze-mirror frame (gold ring) with the face of picture `file` centred from `img/toil-fit.json`, the picture +
   `kitFxLayers(p,file)` (so the zoom shows exactly what every other place shows). 200 px (110 px beside the facts under 640 px). CSS `#kfzoom-css`.
-- **Colour layer** `toilMkLayer` → `<img class="kmk kmkc">` in the face-effects slot (order: picture < skin/blush SVG `kmk` < colour layer `kmkc`
+- **Colour layer** `toilMkLayer` → `<img class="kmkl kmkc">` in the face-effects slot (order: picture < skin/blush SVG `kmkl` < colour layer `kmkc`
   < scar < veil), its box = the face region of the picture. Painted in a canvas FROM THE PICTURE ITSELF (`toilMkDraw`): lips (outer minus mouth
   opening), eyelids (layers from the lash line toward the brow; the eye stays clear), brows (only hair pixels darker than the skin) are recoloured
   to the picked colour with each pixel's own light/shade (highlights on the lip keep some shine), soft masks (canvas shadow, works on old Safari);
