@@ -6,6 +6,8 @@ const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const tag=SZ.replace('@','_');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
+ /* review/kit-keeper-2: the new-life roulette (#kroul / #kroulw, KIT 14) and the prize chest (#kmrew) cover the page after start() and used to eat the first tap — skip it and keep it hidden */
+ await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click());document.querySelectorAll(".kroul,#kmrew,#kprevov").forEach(e=>e.remove());const kl=document.getElementById("kload");if(kl)kl.remove()},250)});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
  const checks=[];
  const check=async(name)=>p.evaluate((name)=>{const r=document.querySelector('.kpod');if(!r)return{name,missing:true};const vw=innerWidth,vh=innerHeight;
@@ -18,7 +20,7 @@ const tag=SZ.replace('@','_');
   const p1=steps.find(s=>s.c==='kpod-p1');const order=steps.every(s=>s.c==='kpod-p1'||s.top>p1.top);
   const figs=[...r.querySelectorAll('.kpod-img')].map(i=>i.complete&&i.naturalWidth>0);
   return{name,overflowX:document.documentElement.scrollWidth>vw,bad,order,steps,figsLoaded:figs,ell:/…/.test(r.innerText),coThe:/có thể/.test(r.innerText),win:r.classList.contains('kpod-win')}},name);
- await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);await p.addStyleTag({content:'.kroul{display:none!important}'});
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
   setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);render()});
  await require('./lib/roulette').dismissRoulette(p);
