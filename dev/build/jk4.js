@@ -489,7 +489,7 @@ var KIT_DP_GAP={pct:.05,min:14};
 /* the two frame lines a figure column sits between: the header rule (bottom of .kph) and the frame's inner bottom edge; offsets from the column box */
 function kitFrameLines(d,col){try{const D=d.getBoundingClientRect(),C=col.getBoundingClientRect();const ph=d.querySelector(":scope > .kph");const cs=getComputedStyle(d);
  const top=ph&&ph.offsetParent?ph.getBoundingClientRect().bottom:D.top+(parseFloat(cs.borderTopWidth)||0);const bot=D.bottom-(parseFloat(cs.borderBottomWidth)||0);
- return{top,bot,offTop:Math.max(0,C.top-top),offBot:Math.max(0,bot-C.bottom)}}catch(e){return{top:0,bot:0,offTop:0,offBot:0}}}
+ return{top,bot,offTop:C.top-top,offBot:bot-C.bottom}}/* signed: a sticky column (kdpall) may run past the frame bottom */catch(e){return{top:0,bot:0,offTop:0,offBot:0}}}
 /* measure (tests, audits): gap from the header rule to the top of the first name chip (or painted head) and from the lowest painted feet to the
    frame's inner bottom edge, in CSS px; full = no figure cut at the floor */
 function kitFrameGaps(d){try{d=d||document.querySelector("#modal .dlg.kdper");const col=d&&d.querySelector("#mb .kpsubj.kes");if(!col)return null;const L=kitFrameLines(d,col),C=col.getBoundingClientRect();
@@ -962,7 +962,10 @@ window.kitCompactCSS=kitCompactCSS;
    Tests: dev/test/kit-fit.js (empty px under the text and figure gaps, Fold + iPad). */
 var KIT_OPT_SQ={min:.45};
 const KIT_OPT_FIT_SEL="button.ka.kart";
-function kitOptFit(b){try{if(!b||!b.isConnected)return;const art=b.querySelector(":scope > .kaart"),body=b.querySelector(":scope > .kabody");if(!art||!body)return;
+let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the dialog (content height, 32.7c) and its figure (32.2b gaps) are laid out again */
+function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
+function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;const art=b.querySelector(":scope > .kaart"),body=b.querySelector(":scope > .kabody");if(!art||!body)return;
  const set=s=>{if(s){b.style.setProperty("--kah",s+"px","important");b.style.setProperty("--kaw",s+"px","important");["flex-basis","width","height"].forEach(k=>art.style.setProperty(k,s+"px","important"));b.classList.add("kasq")}
   else{b.style.removeProperty("--kah");b.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));b.classList.remove("kasq")}};
  set(0);if(getComputedStyle(art).display==="none"||getComputedStyle(b).flexDirection!=="row"){b.dataset.kapic="";return}

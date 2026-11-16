@@ -10,7 +10,7 @@
    CDN pictures go through the session proxy (HTTPS_PROXY). */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,URL,OUT,TAG,SIZES,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
-const KINDS=['coach','tip','court0','court1','court2','fest','choice','news','result','notice','night','info','rule','intel','evidence','reward','threat','person','end','toil','thtrieu','visit','emp','man','two','child','many','ban','shop','pet'];
+const KINDS=['coach','tip','court0','court1','court2','fest','choice','news','result','notice','night','info','rule','intel','evidence','reward','threat','person','end','toil','thtrieu','visit','emp','man','two','child','many','ban','scroll','shop','pet'];
 const MEAS=`(()=>{const M=document.getElementById('modal');let d;const vis=e=>e&&e.getClientRects().length>0;const pd=[...document.querySelectorAll('.dlg.kpdlg')].find(vis);if(pd)d=pd;else if(!M||M.hidden){d=document.getElementById('panel');if(!d)return{nomodal:true}}else d=M.querySelector('.dlg');if(!d)return{nodlg:true};const R=e=>e.getBoundingClientRect();
  const out={kind:d.dataset&&d.dataset.kind||'',seal:(d.querySelector('.kseal')||{}).textContent||'',kdper:d.classList.contains('kdper')};
  const col=d.querySelector(pd?'.kpsubj.kes':'#mb .kpsubj.kes');
@@ -50,13 +50,14 @@ const MEAS=`(()=>{const M=document.getElementById('modal');let d;const vis=e=>e&
     else if(k==='two')Q.push({t:'Có người đến',stage:[v,v2],who:pv(v),h:`<p>${v.name} cùng ${v2.name} sang thăm.</p>`,opts:o});
     else if(k==='child')Q.push({t:'Hoàng tử đến thỉnh an',stage:[{__fig:'img/fig-eunuch-ndp-tray.webp',__cap:'Tiểu hoàng tử',__role:'Hoàng tử',age:7,sex:'m'}],h:'<p>Tiểu hoàng tử đến thỉnh an.</p>',opts:o});
     else if(k==='many')Q.push({t:'Việc khó xử',who:pv(v),h:`<p>${v.name} hỏi khó.</p>`,opts:many});
+    else if(k==='scroll')Q.push({t:'Hoàng thượng',who:pEmp(),h:'<p>Hoàng thượng ghé qua, hỏi chuyện bếp núc.</p>',opts:many.concat(many).map((o,i)=>Object.assign({},o,{n:o.n+' '+i,hint:o.hint+'; lâu dần bệ hạ để mắt hơn, thêm tình nghĩa với bệ hạ'})),art:'img/ev-toil-th-scold.webp'});
     else if(k==='ban')Q.push({t:'Thái hậu chê dung nhan',who:pTH(),h:'<p>“Ăn vận phô trương quá.”</p>',opts:o,art:'img/ev-toil-th-scold.webp'});
     else if(k==='shop'){S.shop=Object.keys(IT).filter(k=>IT[k].pr>0&&IT[k].pr<200).slice(0,8);S.bac=70;invAct('shop');return true}
     else if(k==='pet'){try{const P=tsbPets(S);if(!P.length)return'none';petcOpen(0)}catch(e){return'none'}return true}
     Q.forEach(m=>m.must=1);showModal();await W(900);return document.getElementById('modal').hidden?'hidden':true},k).catch(e=>'ERR '+e.message.slice(0,160));
    if(ok!==true){rows.push({k,skip:String(ok)});continue}
    await p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,15000)}))));await sleep(1800);
-   const r=await p.evaluate(MEAS);r.k=k;
+   const r=await p.evaluate(MEAS);r.k=k;if(process.env.DBG){const g=await p.evaluate(()=>{const a=kitFrameGaps();const c=document.querySelector('#mb .kpsubj.kes');const h=c&&c.clientHeight;const cls=document.querySelector('#modal .dlg').className;kitDpFit();return{a,h,cls,b:kitFrameGaps(),h2:c&&c.clientHeight,mb:document.getElementById('mb').clientHeight}});console.log('DBG',k,JSON.stringify(g))}
    const v=[];if(r.gapTop!=null&&r.full){if(Math.abs(r.gapTop-r.gapBot)>2)v.push(`gaps ${r.gapTop}/${r.gapBot} unequal`);if(Math.min(r.gapTop,r.gapBot)<14)v.push(`gap < 14`)}
    (r.opts||[]).forEach(o=>{if(o.empty>2&&!o.atMin)v.push(`opt "${o.t}" empty ${o.empty}px (${o.form} ${o.pic}, text ${o.text})`)});r.viol=v;bad+=v.length;rows.push(r);
    if(SHOTS==='all'||(SHOTS||'').split(',').includes(k))await p.screenshot({path:`${OUT}/${TAG}-${k}-${sz}.jpg`,type:'jpeg',quality:70});
