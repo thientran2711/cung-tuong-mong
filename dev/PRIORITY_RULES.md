@@ -36,8 +36,8 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/art-events-effects.md (26.3 KB): event, story, act and minigame pictures
 - dev/rules/topic/art-faces-figures.md (21.4 KB): faces, figures, portraits, ages, poses, proportions
 - dev/rules/topic/art-frames-kit.md (8.8 KB): frames, ornaments, kit art
-- dev/rules/topic/art-items-pets.md (8.3 KB): item icons, gift art, pets
-- dev/rules/topic/art-other.md (18.6 KB): other art rules
+- dev/rules/topic/art-items-pets.md (8.7 KB): item icons, gift art, pets
+- dev/rules/topic/art-other.md (18.4 KB): other art rules
 - dev/rules/topic/art-scenes.md (17.3 KB): rooms, backdrops, map art, seasons and time-of-day art
 
 Before 11/16/2026 this file held all lines itself (~200 KB); split by script with 0 lines lost, 0 duplicated, 0 text changes (report: dev/handover/reports/canon-pairs.md).

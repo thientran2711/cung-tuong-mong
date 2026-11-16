@@ -137,3 +137,7 @@ Topic routing was by old section + keywords; a few lines may sit in a near topic
 - OD:L1251 replaces only the "no home road" half of OD:L1244; the rest of L1244 (intros, illustrations, entry animation, selection minigame) still stands, so both are kept, L1251 directly after L1244 (b*, mixed line, no rewording).
 - Gap found: owner lines after OD:L1232 were never in the rule files. Added verbatim: OD:L1241 (low context) -> START_CORE after L1232; OD:L1233, L1234, L1242, L1243, L1244, L1251 -> topic/story-roads.md (before L1247/L1250); OD:L1240 (place glyphs approved) -> topic/art-other.md. Note: OD:L1234's side-quest half is superseded by L1252 (b*, kept for its story-only-NPC rule). Not added (not rules: coordinator decisions/findings/asks): OD:L1235, L1236, L1245, L1246, L1249 is an ask but already added earlier.
 - Check: 0 duplicate tags, 0 mismatches. Indexes regenerated.
+
+## Follow-up 4 (s11: OD:L1254, README)
+- OD:L1254 (place glyphs: redraw in the game's style) added to dev/rules/topic/art-items-pets.md; it reverses OD:L1240 (glyphs approved, ship), so L1240 was deleted from topic/art-other.md (overwrite rule).
+- dev/rules/README.md: 3-step "how to keep the canon". Index script committed as dev/rules/make_index.py (run from repo root). Check: 0 dup tags, 0 mismatches.

@@ -26,8 +26,8 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/topic/art-events-effects.md (26.3 KB): event, story, act and minigame pictures
 - dev/rules/topic/art-faces-figures.md (21.4 KB): faces, figures, portraits, ages, poses, proportions
 - dev/rules/topic/art-frames-kit.md (8.8 KB): frames, ornaments, kit art
-- dev/rules/topic/art-items-pets.md (8.3 KB): item icons, gift art, pets
-- dev/rules/topic/art-other.md (18.6 KB): other art rules
+- dev/rules/topic/art-items-pets.md (8.7 KB): item icons, gift art, pets
+- dev/rules/topic/art-other.md (18.4 KB): other art rules
 - dev/rules/topic/art-scenes.md (17.3 KB): rooms, backdrops, map art, seasons and time-of-day art
 - dev/rules/topic/balance-economy.md (19.8 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
 - dev/rules/topic/coop.md (3.6 KB): co-op / playing with a friend
