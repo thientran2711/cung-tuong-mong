@@ -188,3 +188,44 @@ CHANGE (jnf.js):
 5. ONE odds function (e.g. window.nfOdds(who,mode,ctx)) reading BAL.steal.* placeholders — numbers are tuned by the separate numbers worker on review/balance-core.
 6. Co-op: host collects both seats' choices (guest sends {choice} on act ctm-nf), resolves, relays; each seat plays its own result in sync.
 Tests to update: night-multi, night-final, night-day, night-steal-unit, cardflip (choice UI at 755x1000/1180x820), coop-steal (both seats choose in the scene), coop-night/coop-e2e baseline (105/105, 59/59 now), old save, quickcheck.
+
+## 8. WORKER s26 (session_01UV1Szgug9twCetQq6poyGK, coordinator MAIN s26 session_01UV1SzhgCpEsPJSH8iUjGDU)
+START_CTX ≈ 7 % of 1M (own estimate). Rules read: START_CORE, START_WORKER, WORKER_BRIEF, OD 22:10Z / 22:45Z / 22:50Z / 23:05Z verbatim, time-calendar.md, coop.md, KIT §69 + §81.
+Branch review/night-final on top of fdc9297b: 8436bdc6 (rework) → 6391274b (site) → **fa660921** (pushed). NOT ready for review yet (co-op tests not run, 8.4).
+
+### 8.1 What changed (OD 22:45Z FINAL + 22:50Z)
+| rule | how | file |
+|---|---|---|
+| tối keeps 4 khắc; flip at the END of tối's 4th khắc | flip() before the commit only marks S.nfP; endTurn's first press of the day = realFlip (j8 → j75 → jflip scene) → S.nfX {st:"wait"}. His own visit (ntTaken) or her night already played today (S.nfN) = no flip, no choice. The old "flip at start of tối" nextBuoi hook is deleted | jnf §1, §3 |
+| Tranh sủng / Chặn ngự giá in NO act list | j2 deal: both deck cards deleted; jnf §0: removed from RVGRP "Hại nặng" (person menu) and BANDS (NPC agent harm acts), ACT.steal/road.ok = false, SOC.steal off. The whole khắc-tick path deleted (pump, npcTries, myTry, stealNight/runOpt/spend wrappers, render tick, held-summons-stolen path) | j2.js, jnf §0 |
+| forced choice after the flip result, 10 s, timeout = Thôi, no khắc/Sức/cost | jflip exports cfBusy() + cfShow(). jnf step(): no other dialog waiting → openChoice (holds back the flip's ksp summons until after the choice; NPCs choose NOW: npcAttackers = stealWant/stealEligible ≤ maxTry; flipped NPC keeps with keep.npcP) → after the scene ends: ONE kit dialog pid "nfch" (Kính sự phòng eunuch, option cards with odds word + gain/loss; attackers Tranh sủng / Chặn ngự giá / Thôi; the flipped Giữ chân Hoàng thượng / Thôi) + kit §69 kitCoopClock chip "Còn N giây" (ticks; found as #mb .kchips.kctm because the kit text pass drops wrapper ids). Countdown starts when on screen; 0 → Thôi | jnf §2b, jflip |
+| resolve ONCE | resolveAll: defence roll first (success → every attack −1 rung, rungDown on word()'s own ladder) → nfResolve (one roll each; several → higher Sủng → seedPick) → none = flipped keeps. Defended + kept (≥1 attack) → Sủng +keep.gain; defended + robbed → oanAdd(holder, winner, keep.oan). Her win → herWin sequence; her own flipped night kept → ksp summons ("Tắm gội chờ giá" plays at once); NPC holder → rivalNight at endTurn | jnf |
+| ONE odds function | window.nfOdds(who, mode, ctx): feign/road = oSteal; keep = odA(keep.base + Sủng×keep.sung + Sắc×keep.sac + mm()); ctx.down = rungs; ctx.adj = hook (monthly favoured art OD 23:05Z NOT built — not in §7; main told) | jnf |
+| BAL placeholders | jbal2, own lines after BAL.steal, only if absent: BAL.steal.keep {base 40, sung .33, sac .1, npcP .85, gain 2, oan 10}, BAL.steal.choice {ms 10000, waitMs 90000}. Names sent to main for balance-core | jbal2.js |
+| co-op host-authoritative | host: commit → realFlip → openChoice → {open, hold, nw}; waits for guest {ph:"ch"} (cap waitMs → Thôi); resolves; {fin, gres, gdef}. Guest never flips: open → cfShow() + own choice → ch; fin → own Sủng / herWin / defence gain / lost-night notice / ksp; then nextBuoi via allowN (RR). **Written, NOT run** | jnf §4 |
+| ledger + servant/home routes | stealPassNF = npcAttackers + nfResolve, no cost | jnf |
+
+### 8.2 Tests (fa660921, single player)
+| test | result |
+|---|---|
+| night-final.js REWRITTEN (0 acts gone · 1 flip at end of tối, 4 khắc kept, her Giữ chân/Thôi, one record · 2 her Tranh sủng wins, summons, no cost · 3 NPC attack at the flip, true Sổ ghi line · 4 defence drops B 85→72 (Rất chắc→Chắc), B fails; Thôi → B wins + notice · 5 his visit: no choice, one record · 6 40 days ≤ 1 night/day · 7 non-bot: scene first, then dialog, §69 chip ticks, timeout = Thôi) | 8/8 PASS, 0 errors |
+| night-steal-unit.js (flip case answers the choice; "NPC paid the cost" → "costs nothing") | 27/27 PASS |
+| night-day.js (steal/road = nfResolve won result; ksp plays at once) | ok 2 of 4 runs; misses = "road" (pre-existing ~1/5 flake) |
+| log-sync-night.js | PASS |
+| night-multi.js | NOT UPDATED (tests the deleted khắc-tick path) — rewrite: Sủng tie, seedPick order-free, NPC↔NPC at the flip, ledger live:false |
+| quickcheck.sh, cardflip.js | killed by the worker restart — re-run (quickcheck alone) |
+| coop-steal / coop-night / coop-e2e (live Worker), night-steal-oldsave | NOT RUN — coop-steal must be rewritten for the flip choice on both seats |
+
+### 8.3 For review
+- Card-flip scene words unchanged (§81 "Chuẩn bị thị tẩm" + seal "THỊ TẨM" on HER) although she may still be robbed in the choice after — coordinator/kit keeper to decide.
+- "Giữ chân Hoàng thượng" has no option picture of its own (dialog shows category art ev-tranh-sung) — possible ART REQUEST.
+- The choice waits for the scene's end button (§81, no auto close); safety: opens anyway after 2×waitMs. A stuck kmPush queue / an open #dawn panel delays the scene (seen in tests only).
+- j75 / jcycle deck wrappers for the deleted cards are dead code (harmless).
+
+### 8.4 HANDOVER (rolled over at START_CTX 7 % + 25 %; the COORDINATOR opens the successor)
+Worktree /home/user/wt/nf2 (sparse) on review/night-final @ fa660921; serve with `python3 -m http.server 8731` from it.
+1. `bash dev/site/build_site.sh`; re-run night-final (8/8), night-steal-unit (27/27), night-day ×3, log-sync-night.
+2. Rewrite night-multi.js and coop-steal.js for the flip choice; run coop-steal, coop-night (baseline 105/105), coop-e2e (59/59). Watch: guest gets {open} → scene + nfch; host waits for {ch}; fin → guest's own night.
+3. cardflip.js 755x1000,1180x820 + old save; night-steal-oldsave.js; quickcheck.sh (alone).
+4. Shots (scratch only) Fold 755x1000 + iPad 1180x820: flip scene → choice dialog with clock chip → night.
+5. CLAIMS "SẴN SÀNG KIỂM <sha>" + send_message main s26. HOLD: no go-live until a reviewer passes it.
