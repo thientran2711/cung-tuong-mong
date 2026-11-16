@@ -15,7 +15,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{const b=await chromium.launch();const rep=[];let bad=0;
  for(const sz of sizes){const [wh,d]=sz.split('@');const [W,H]=wh.split('x').map(Number);
   const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,serviceWorkers:'block',hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce'});
-  await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});/* Luân hồi roulette: Bỏ qua */
+  await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click());/* reward chests (kitReward): Nhận, as the player does */document.querySelectorAll('[data-km-close]').forEach(b=>{if(b.offsetParent)b.click()})},300)});/* Luân hồi roulette: Bỏ qua */
   const p=await c.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)+' @'+String(e.stack||'').split('\n')[1]));
   const R={size:sz,origin:ORG,fail:[]};const F=m=>R.fail.push(m);
   const shot=async(n,force)=>{if(SHOTS==='none'||(SHOTS==='few'&&!force))return;await p.evaluate(()=>{try{PX.app.ticker.stop()}catch(e){}});await sleep(250);

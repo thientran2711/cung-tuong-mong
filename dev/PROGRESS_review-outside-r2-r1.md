@@ -23,3 +23,30 @@ Merge: origin/main d51a393e merged in (conflicts only in built files index.html/
 3. After Điện tuyển the Phúc tuyển minigame result card ("Đàn: Phúc tuyển … Phần màn chơi cộng vào Điện tuyển") was still open over the first palace screen (1180x820 shot).
 4. Investigate: one random-play run at 1366 lost S.kc (undefined) at turn 3 while answering pending dialogs at home (no page error). Find which choice clears S.kc without ending the life / ensure every home-ending path sets S.kc.end.
 5. Note only: OWNER #8 girlhood chest (20:05Z) is not on this branch.
+
+## Worker fixes on the r1 FAIL list (review/outside-r2-r1, 16/11)
+Merged origin/main d34b5116 then 2d038139 (jkc stays last, after jph). jk3 = main's (k3AsRows reads kitRoad()); jkc wraps kitRoad → "kc" at home, so the
+Ân sủng rows and the Đức "!" Hoàng hậu goal stay off at home (one road switch for every kitRoad reader).
+1. Gia tộc pager under the sub-tab bar: the sub-tabs were outside `.pgwrap` (height 100%) and sticky, so the pager column overflowed under them.
+   Now the jhc pattern: `<div class="pgwrap"><div class="kpinline">sub-tabs</div>pager…</div>` (kpinline = static tabs, kit CSS). Scan: kitSubTabs + pager
+   are used together only in jhc (already kpinline) and jkc Gia tộc (fixed); Dư đồ uses a pbtn list (no pager).
+2. Co-op: the home road works in a co-op room; kcCoop gate removed. jcoopworld: friendHome(P) (no palace entry for a friend at home; notices
+   "Hảo hữu chọn thân phận … ở nhà cha chờ kỳ tuyển tú" on onState and on sendMe for the guest; "Hảo hữu nhập cung" from onWeek when she enters),
+   CW.weekEnd (the co-op week path, called directly by jkc so the palace-only endTurn wrappers made after it — jtsb, jts — are skipped as in
+   single-player), CW.altTurn (jkc: kcEndTurn runs inside it), CW.holdMe/heldMe + CW.sendMe (the blob is sent after kcInit, not the palace start).
+   kcEndTurn in co-op also runs placeWhere (host sends the palace whereabouts). Test: dev/test/outside/coop-home.js (live Worker) 51/51.
+   Test bots (coop-e2e, coop-bot, coop-play) accepted the identity card with /Vào cung/ which matched the road button "Vào cung ngay" (loop) →
+   "Nhận thân phận" first, road buttons [data-kcp] never tapped.
+3. Phúc tuyển card over the palace: kcEnter drops every queued home dialog (kcE except the Điện tuyển being answered) and closes an open
+   mini-game; kcPhucPlay does nothing once she is in the palace / the round is done (stale card).
+4. S.kc undefined: root cause = the random run's dialog loop ended her home life (an option ended it) and then pressed the end card, whose
+   "Đầu thai kiếp sau" starts a NEW life (start(): new S without S.kc). Not a lost field. Guards: over() wrapper sets S.kc.end on every home ending
+   (a bare die() at home included); route.js never presses an end card and fails if a home life ends without S.kc.end.
+   Test dev/test/outside/kc-end.js: 6 ending paths (marriage, tu, rare, kcDie, bare die, Sức 0) all set S.kc.end; the end card makes a new life.
+5. Girlhood chest (OWNER #8): at the start of the home road a kitReward chest "Rương đồ khuê các" (Mẫu thân / Tổ mẫu sửa soạn) fills and wears
+   Cài tóc (Trâm ngọc bích), Y phục (a Thường garment of her P), Đeo tay (NEW Vòng bạc hoa mai), Đeo eo (NEW Ngọc bội khuê các), Túi thơm (Túi
+   thơm thêu); kept into the palace. Luxury 48 / allowance 57 (Vừa phẩm) at Đáp ứng (a jade bangle made it Xa hoa → silver). Two new paintings
+   (gpt-2-6, CDN, dev/art/ITEM_ART.md §5). OPEN for the coordinator: Khăn che mặt is left empty — in this game the veil is the hủy dung cover
+   (worn without need = gossip, covers the face on every portrait); filling it needs an owner ruling.
+Art gap (not in this task): house/city scenes reuse palace rooms (Khuê phòng = phi-tần cung room etc.), Huynh trưởng uses the guard figure,
+Dư đồ at home has no house/city map painting (pbtn list).
