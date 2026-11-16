@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 05:57Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
+last wake: 16/11 06:26Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
 main at start = eba64ead4.
@@ -10,29 +10,30 @@ main at start = eba64ead4.
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r3 @f484d226 | sonnet | PASS (see ## PASS) |
 | D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV RUNNING |
 | C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWo9bFK5NRcy5Hrr3UX RUNNING |
-| C44 cloud-save (Sổ mây) | review/cloud-save @38bf315f → review/cloud-save-r1 | opus | SẴN SÀNG KIỂM → opus reviewer session_01DgYSWq1uCD8NVh8dB3LBba (normal + SECURITY) RUNNING |
+| C44 cloud-save (Sổ mây) | review/cloud-save-r1 @7e187abe | opus | PASS (see ## PASS) |
 | D50 consort placeholder frame in dialog person column | review/dlg-fig-ph @0bf17ac4 → review/dlg-fig-ph-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWnFEYrjgcFbBRjAWyc RUNNING |
 | balance-after-truth re-run | review/balance-after-truth | opus | RUNNING |
 | reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
 | C3 art-complete part 2 | review/art-complete | — | MOVED to Foreman C (owner Q-D1 answer, s9) |
-| D51 fxkit follow-ups | — | sonnet | sprites MOVED to Foreman C; D keeps call-site wiring → WAITING for C's sprites on a review/* branch |
+| D51 fxkit follow-ups | — | — | MOVED to main (owner 07:25Z s10: one worker paints + wires) |
 | D52 skin-match audit | review/skin-audit | — | NOT TAKEN: already RUNNING under Foreman C (FOREMAN_C_STATUS.md) — no double work |
 | D54 buổi paintings | — | — | MOVED to Foreman C |
 | D56 icons + Nội vụ phủ art | — | — | MOVED to Foreman C |
 | fig-hd-upscale + face-sharp-hd2 | review/fig-hd-upscale | — | MOVED to Foreman C |
 | slap-mg review 3c4f1c81b | — | sonnet | WAITING: facefx-all not on main yet |
-| coop-chat review bdd2b6b53 | — | sonnet | WAITING: kitStageRail (goal-strip-fix) not on main yet |
+| coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | kitStageRail (jrail.js §77) now on main → reviewer RUNNING |
 | servant-system phase 2 | — | opus | WAITING: fix A + audit review |
 | act-split waves 2–3 | — | opus | WAITING: GO from main coordinator after act-dedupe lands |
 
 ## PASS (for the main coordinator to fast-forward)
+- PASS review/cloud-save-r1 7e187abe27073b10fb4fd02434d212b43ec1142a (C44 Sổ mây; on main c4e89f8; code back to 8 chars (owner design) + per-network miss guard DO; MERGE = AUTO-DEPLOY of coop/worker (migration v2 Vault; dry-run OK; if rejected, old Worker keeps running → drop the [[ratelimits]] blocks); smoke test in reports/review-cloud-save-r1.md)
 - PASS review/newgame-ui-r3 f484d226ff5bcf856735be4931bba4cac9d87133 (D-R1; on main 0a311183f; lag: long tasks 45.5 s→8.3 s, face tap 2.7–3.8 s→0.1–0.65 s; small fixes j86 .kpmbw, j2 psOpenText row; report reports/review-newgame-ui-r3.md)
 
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
 - ART NEEDED (for Foreman C, art owner since Q-D1; from D50): full-body figures for Phế phi họ Lý, Quản sự Tân Giả khố, Thầy dạy Thượng thư phòng — 4 age bands each (they now show the kit silhouette).
-- C44 (a): the worker made the Sổ mây code 26 chars (130 bits) with Chép/Gửi buttons. OWNER_DECISIONS l.1016 (coordinator design, owner did not object) says 8 chars; the ≥128-bit rule came from D s1's brief, not the owner. Default = keep 8 chars + strong server-side rate limit/lockout, unless the main chat asks the owner once and she wants the long code. The reviewer is told to judge 8-char + lockout.
+- (resolved by C44 r1: 8 chars + miss guard) C44 (a): the worker made the Sổ mây code 26 chars (130 bits) with Chép/Gửi buttons. OWNER_DECISIONS l.1016 (coordinator design, owner did not object) says 8 chars; the ≥128-bit rule came from D s1's brief, not the owner. Default = keep 8 chars + strong server-side rate limit/lockout, unless the main chat asks the owner once and she wants the long code. The reviewer is told to judge 8-char + lockout.
 - C44 (b): no "xóa sổ trên mây" button (the drop endpoint exists and is tested). Add one? (main chat / owner)
 - C44 deploy note: merging to main AUTO-DEPLOYS through .github/workflows/coop-worker.yml (migration v2 adds the Vault DO); no Cloudflare connector needed. If the account rejects the [[ratelimits]] blocks, remove them and redeploy. Smoke test in dev/PROGRESS_review-cloud-save.md.
 - KIT REQUEST (for the kit keeper, from D-R1 review): the event-frame body #mb is overflow:hidden, so long text is clipped (also on main: Nhập cung "Hậu cung" row at 1366x1024, any long event dialog) → the kit event-frame body needs a scroll area.
@@ -52,6 +53,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s2 wake log
+- 06:26Z: C44 PASS recorded; D51 wiring → main (owner 07:25Z); art no longer C's queue → main samples / C mass production (owner 06:55Z/07:30Z/07:45Z; art PAUSED tonight). Art-needed list from D50 stays in QUESTIONS for whoever owns art. act-dedupe w1 on main (02a0d3f1) — act waves 2–3 still wait for "GO" in FOREMAN_D.md. facefx-all not on main → slap-mg waits. servant fix A review not seen → phase 2 waits. balance-after-truth: s1 agent, no branch pushed yet (started 05:19Z; stale check at 08:19Z).
 - 05:27Z: main still eba64ead4 → facefx-all, kitStageRail (goal-strip-fix), servant fix A, act-dedupe not on main: slap-mg / coop-chat / servant phase 2 / act waves stay WAITING. No free items in slice D to spawn; 7 s1 agents still running, no reports yet.
 
 - (16/11 06:00Z) INBOX from main s10: NEW ITEM servant-system part C (jmline.js + BAL.mline active NPC maid line, owner-approved, unreviewed) on origin/review/servant-system b897bcf2cd (reports/servant-system.md). Claim + open an opus reviewer session. Main reviews only part A (servant-system-r1).

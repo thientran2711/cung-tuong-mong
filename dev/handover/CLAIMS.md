@@ -41,7 +41,7 @@
 | weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | RUNNING | 16/11 06:00Z |
 | scheme-games-port-r1 kit sign-off (jopic grid-auto-rows:max-content) | review/scheme-games-port-r1 | main s10 | — | KIT OK → merge-train-4 | 16/11 06:00Z |
 | owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | RUNNING | 16/11 05:54Z |
-| C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | RUNNING | 16/11 05:58Z |
+| C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | PASS 7e187abe | 16/11 06:26Z |
 | D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | session_01DgYSWnFEYrjgcFbBRjAWyc | RUNNING | 16/11 05:59Z |
 | promo-skip audit + fix (quest rewards → direct rank; prince → rank, princess → exam) | review/promo-skip | main s10 | session_01UV1SzhzQSFQc43nUVdpwAi | RUNNING | 16/11 06:20Z |
 | D52 review | review/skin-audit-r1 | C | session_011xDdVQAh8KF6j8akV71fAj | PASS d16535c68 | 06:01Z 16/11 |
@@ -56,3 +56,4 @@
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
 | D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | RUNNING | 06:23Z 16/11 |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
+| coop-chat review | review/coop-chat-r1 | D | (reviewer session, id follows) | RUNNING | 16/11 06:26Z |
