@@ -39,11 +39,13 @@ main at start = eba64ead4.
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit @16a2d41e | opus | VISIT half SẴN SÀNG KIỂM (worker archived; built on mortality-r1) → reviewer emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 RUNNING; POISON half PARKED → QUESTIONS |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
-| D21 full review r2 → fix | review/coop-b1b5-r2 @d5879537 FAIL 1 BLOCKING (guest's jcycle answer ignored by host) → review/coop-b1b5-fix | opus | worker session_01DgYSWnyGPZR3V86DPDjc32 RUNNING (11:16Z); r2 reviewer archived |
+| D21 full review r2 → fix | review/coop-b1b5-fix @7c7fcc45 | opus | SẴN SÀNG KIỂM (worker archived) → final reviewer coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ RUNNING |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | SẴN SÀNG KIỂM (worker archived) → reviewer name-mask-r1 session_01DgYSWmyLaHvXUgNsFAkrBH RUNNING |
-| D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
-| D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
+| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death | opus | worker session_01DgYSWoy8UWVPrve6HEjZfR RUNNING (12:58Z; mortality live) |
+| D57 preg-rate (orphan #2) | review/preg-rate | opus | worker session_01DgYSWnxBe741HPgNbrkYjF RUNNING (12:58Z; checks cycle-r3 on main first) |
+| Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
+| C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | worker session_01DgYSWnuoGnBrzpLuCRGnpy RUNNING (Worker deploy via GitHub workflow at merge) |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
@@ -69,8 +71,8 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
-- (s4 10:58Z, for main s15 / owner) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
-- (s4 10:58Z, owner OK needed) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed; one-core fixes PASS (danh-balance-r1). Reviewer: P1 gain measured +12.5 Danh/life, not the +55 arithmetic (1 seed).
+- ANSWERED s16 12:55Z: PARKED, do not work around. (was: s4 10:58Z) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
+- ANSWERED s16 12:55Z: P1 YES, P2 bot first, P3 NO → danh-p1 worker. (was: s4 10:58Z) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed; one-core fixes PASS (danh-balance-r1). Reviewer: P1 gain measured +12.5 Danh/life, not the +55 arithmetic (1 seed).
 - KIT REQUEST (for the main kit keeper, from entry-exam): a dedicated "nhập cung" entry scene on kmStage (Ngọ môn gate opens, sedan/procession crosses, gate closes, then the rank chip, ending with the §81 button); variants by origin group (consort sedan / bridal sedan + envoy (+horses for bd) / maids behind a mama (cnv) / Càn Thanh corridor at night (cn)). Until then the entry uses kitPersonReveal. Full text + art list (13 rows) in dev/handover/reports/entry-intro.md → ART NEEDED for main samples / C.
 - FOR FOREMAN B (mg-balance), from entry-exam: the 'tuyen' occasion tier reads "Khó" at art level 0 — suggest [1,0].
 - FOR MAIN s15 / kc-roads fixer (BAL.kcv, kc-roads r1 FAIL 1): entry-exam bots show home roads give a better selection than 'Vào cung ngay' (cnv skilled top 94 % vs 77 %, nc 93 % vs 80 %) — count it when retuning.
@@ -143,6 +145,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 12:58Z (hourly + s16 inbox 12:55Z): mortality-r1 LIVE → D4 + D57 started; s16 answers taken: Danh P1 approved (+P2 bot, P3 NO) → danh-p1 worker; cloud-del worker; coop-b1b5-fix SẴN SÀNG KIỂM 7c7fcc45 → final opus reviewer. D8 poison stays PARKED (s16). Context 28 % → rollover to s5 now.
 - 12:40Z: name-mask SẴN SÀNG KIỂM 8b911c73 → sonnet reviewer; worker archived.
 - 12:20Z: kc-roads-cn-nc-fix SẴN SÀNG KIỂM de331af6 (Chờ gap cnv +47→−7, nc +94→+17) → opus reviewer, tests it merged with entry-exam-r1; worker archived.
 - 12:18Z: emperor-visit SẴN SÀNG KIỂM 16a2d41e → opus reviewer (also: fix j8 nx() shown ≠ applied night numbers; morning card → KIT §81 end button). ART NEEDED (for main/C): 'Sáng hôm sau' morning banner for the visit night.
@@ -155,3 +158,14 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - 11:02Z: coop-guest-maid-r1 PASS 3a875687 → READY; reviewer archived.
 - 10:58Z: danh-balance SẴN SÀNG KIỂM 319dce59 → reviewer claimed. emperor-visit worker stopped (poison half blocked by classifier) → told to do visit half only; poison half parked in QUESTIONS.
 - 10:55Z: s4 took over; messaged the 8 running sessions; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo. Took kc-roads fix (main s15 10:52Z INBOX: 'kc-roads fix → D').
+
+## HANDOVER (Foreman D s4 → s5, 16/11 13:00Z; reason: context 28 % ≈ START_CTX 5 % + 25 % budget (30 %)) — s5 = <filled below>
+- s4 hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo is DELETED at handover; s5 creates its own.
+- RUNNING D sessions (separate cloud sessions; reports land in dev/handover/reports/<name>.md; briefs tell them to read Foreman D's id from the top of this file before send_message):
+  reviewers: emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 (built on mortality-r1; also fixes j8 nx() shown≠applied + morning card → KIT §81) · kc-roads-cn-nc-fix-r1 session_01DgYSWkvGFpv3Z1xMBG8TJC (merges entry-exam-r1; ship kc-roads fix → entry-exam-r1 → after B's mg-balance) · name-mask-r1 session_01DgYSWmyLaHvXUgNsFAkrBH (sonnet) · coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ
+  workers: seatcap session_01DgYSWpxkS6i8grXTbHQnPF (long sims) · npc-death (D4) session_01DgYSWoy8UWVPrve6HEjZfR · preg-rate (D57) session_01DgYSWnxBe741HPgNbrkYjF · danh-p1 session_01DgYSWmtmVG7yFfTVZxCumE · cloud-del session_01DgYSWnuoGnBrzpLuCRGnpy (sonnet)
+- s5 FIRST: send_message each of these 9: "Foreman D is now s5 = <id>; send your result line there".
+- On SẴN SÀNG KIỂM: claim + open a reviewer (opus rules/numbers/co-op; sonnet UI), archive the worker. On PASS: READY line under ## PASS + CLAIMS PASS + archive. On FAIL: fix worker from the reviewer branch.
+- READY for main this session (all under ## PASS): coop-guest-maid-r1 3a875687, danh-balance-r1 9a1133f0, close-maid-r1 ebc85f78, entry-exam-r1 d7364cb2 (ship order note).
+- PARKED: D8 poison roads (s16: do not work around the classifier). ART NEEDED (for C): 'Sáng hôm sau' banner for the Emperor-visit morning.
+- Main coordinator = MAIN SESSION 16 session_01UV1SzhWSw7EETVzp3xX5hi (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
