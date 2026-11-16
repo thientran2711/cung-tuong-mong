@@ -16,5 +16,7 @@ NO BAL value is changed on this branch (owner OK needed); proposal goes in the r
    Reproduce: `PRE="window.__hsOnly=1;window.__capWk=144;" MORE=indanh bash dev/measure/pass/mkinp.sh tmp/inp_hs.js`, then
    `cd dev/measure && node run_par.js root/_after.html sens 48 out.json ../../tmp/inp_hs.js 4 501`; `python3 dev/measure/andanh.py a=out.json`.
 
-## Next
+## Done 2
+- All arms run, report dev/review/danh-balance.md, data dev/measure/pass/data/danh/, site rebuilt. Proposal P1 (BAL.charity) + P2 (exam, needs a Tài nghệ bot) waiting for the owner.
+## Next (old)
 - Wait for arms, write the table + proposal into dev/handover/reports/danh-balance.md (handover branch), rebuild the site, push.
