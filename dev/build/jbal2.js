@@ -157,4 +157,6 @@ Object.assign(BAL,{cmaid:{loy:{home:[65,85],land:[70,90],th:[55,75],pick:[35,50]
  pickN:3,pickAlone:3,pickKeep:50,kinSave:50,talLoy:40,talBac:3,talSuc:3,talSpy:6,secTrust:70,secTell:8,secOut:3,secLoy:10,secDanh:3,secBac:15,secPay:30,dilCd:6,
  ttPress:6,ttDanh:3,ttSung:3,ttLoy:10,ttBac:30,dtqGuard:50,dtqBrawl:6,brLoy:8,brDanh:1,brOan:8,scorn:6,scLoy:6,scDanh:1,scDuc:1,scOan:8,muoiBack:40,
  landAsk:8,landGift:4,landBac:25,laLoy:12,laTh:2,laDanh:2,chTh:15,chThUp:2,chKnow:50,chThDown:4,thdMerit:1,cnSpy:10,cnTurn:8,cnvNet:8,
- tdMeet:4,tdBac:30,tdCase:1,tdExpose:3,tdDanh:4,tdTh:3,seeMat:3}});
+ tdMeet:4,tdBac:30,tdCase:1,tdExpose:3,tdDanh:4,tdTh:3,seeMat:3,
+ /* review/close-maid-r1 (ONE CORE): newLoy = loyalty of the maid Nội vụ phủ sends when she gives one back (cmReplace); spyDanh = Danh lost for sending a confessed spy back */
+ newLoy:40,spyDanh:1}});

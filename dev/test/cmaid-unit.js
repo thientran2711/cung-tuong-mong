@@ -11,8 +11,10 @@ const {chromium}=require('playwright');const [,,URL,OUT,VP='755x1000@2']=process
   go('thd');const q=Q.find(x=>x.pid==="cmPick");C.pickCard=!!q&&q.opts.length===BAL.cmaid.pickN;if(q){const o=q.opts[1];o.go();C.picked=S.maid.src==="pick"&&o.n.includes(S.maid.name)&&!!S.maid.tal&&!!S.maid.sec}
   /* 2 tt: a home maid with loyalty in range; the Nhập cung row names the source */
   go('tt');const L=BAL.cmaid.loy.home;C.ttHome=S.maid.src==="home"&&S.maid.loyal>=L[0]&&S.maid.loyal<=L[1];C.ttRow=cmRow().includes("từ nhà");C.thdRow=(()=>{go('thd');const n=Q.find(x=>x.t==="Nhập cung");return !!n&&/Chưa có ai theo từ nhà/.test(n.h)})();
-  /* 3 old save: no S.cm, maid without src → kept, loyalty kept */
-  go('dtq');delete S.cm;S.maid={name:"Tiểu Đào",loyal:57,fc:""};render=()=>{};servMonth();C.oldSave=S.maid.name==="Tiểu Đào"&&S.maid.loyal>=55&&S.maid.src==="home";
+  /* 2b (r1) her maid's state must not touch S.cm (jcmood court mood): a new life, then the court-mood month runs */
+  go('tt');C.moodKey=(()=>{try{cmMonth();return !!(S.cm&&S.cm.th&&S.cm.hh)&&!!S.cmaid}catch(e){return false}})();
+  /* 3 old save: no S.cmaid, maid without src → kept, loyalty kept */
+  go('dtq');delete S.cmaid;S.maid={name:"Tiểu Đào",loyal:57,fc:""};render=()=>{};servMonth();C.oldSave=S.maid.name==="Tiểu Đào"&&S.maid.loyal>=55&&S.maid.src==="home";
   /* 4 dtq guard: an NPC's hit on her household is stopped */
   go('dtq');for(let i=0;i<2;i++){const s=mkServ('maid');S.staff.push(s)}const v=liveRivals(true).find(x=>x!==S);const pt0=pickTarget;pickTarget=()=>S;
   const g=forceRoll(true,()=>mlHit(v));pickTarget=pt0;C.dtqGuard=/chắn trước/.test(g);
@@ -25,9 +27,9 @@ const {chromium}=require('playwright');const [,,URL,OUT,VP='755x1000@2']=process
   /* 8 land: cannot be bought (maidMonthP with low loyalty) */
   go('nc');S.maid.loyal=10;const mm=S.maid;forceRoll(true,()=>maidMonthP(S));C.landNoBuy=S.maid===mm;
   /* 9 cn: a turned roommate costs Danh */
-  go('cn');S.maid.loyal=10;S.schemes=0;const d0=S.danh;const r=forceRoll(true,()=>maidMonthP(S));C.cnTurn=S.danh<=d0-BAL.cmaid.cnTurn&&/chuyện cũ/.test(r);
+  go('cn');S.maid.loyal=10;S.maid.tal="theu"/* not kín miệng (forced rolls would make her refuse the buyer) */;S.schemes=0;const d0=S.danh;const r=forceRoll(true,()=>maidMonthP(S));C.cnTurn=S.danh<=d0-BAL.cmaid.cnTurn&&/chuyện cũ/.test(r);
   /* 10 cnv: rises → pick card */
-  go('cnv');S.cm={v:1};const isS=isSrv;isSrv=()=>false;S.maid=newMaid("Ngọc Lan",50);Q.length=0;cmMonthMe();isSrv=isS;C.cnvPick=Q.some(x=>x.pid==="cmPick");
+  go('cnv');S.cmaid={v:1};const isS=isSrv;isSrv=()=>false;S.maid=newMaid("Ngọc Lan",50);Q.length=0;cmMonthMe();isSrv=isS;C.cnvPick=Q.some(x=>x.pid==="cmPick");
   /* 11 secret dilemma builds for each kind */
   go('tt');C.secCards=["debt","family","spy"].every(k=>{S.maid.sec={k,by:v.id};const d=mkP("cmSec",{});return d&&d.o.length===2});
   return C});
