@@ -597,3 +597,14 @@ function j95ledStage(){if(!j95led())return false;const V=S.visit;if(!V||!Array.i
 /* the map count = the record, at every place (jplx's own list count at Dãy nhà cung nhân / Tân Giả khố / schools and jact's Nội vụ phủ +1
    are other sources of the same people): registered last, so it is the outermost countAt */
 setTimeout(()=>{try{const c2=countAt;countAt=function(k){try{if(j95led()&&S&&!S.dead&&!S.out&&S.roster&&S.roster.key===j95key()&&!(typeof isKc==="function"&&isKc())){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;return n}}catch(e){}return c2.apply(this,arguments)}}catch(e){j95err("ledcount",e)}},0);
+/* FIXED SCHEDULE (owner 16/11 13:40Z: "giống như là một cái lịch … ai ở đâu làm gì là phải có hết", no random presence): the record's plan
+   for a buổi is a calendar, not a fresh roll. Every planning step draws from a generator seeded by the life (S.j95seed, saved) and the buổi
+   key (plus the person for a single plan), so the same buổi always has the same schedule however often or late it is computed (a newcomer,
+   a reload, the dev tool). Habits, weekly intentions and surprises keep their reasons; only the dice became the calendar's. */
+function j95hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function j95rng(seed){let a=seed>>>0;return function(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function j95seed(){if(!S.j95seed)S.j95seed=1+Math.floor(Math.random()*2147483646);return S.j95seed}
+function j95cal(tag,f){return function(){if(J95.cal===false||!S)return f.apply(this,arguments);const r0=Math.random;Math.random=j95rng(j95hash(j95seed()+"|"+j95key()+"|"+tag(...arguments)));try{return f.apply(this,arguments)}finally{Math.random=r0}}}
+J95.cal=true;
+j95week=j95cal(()=>"wk"+wk(),j95week);j95plan=j95cal(()=>"plan",j95plan);
+j95planRival=j95cal(v=>"v"+(v&&v.id),j95planRival);j95planOther=j95cal(p=>"o"+(p&&p.id),j95planOther);j95planEmp=j95cal(()=>"emp",j95planEmp);j95planTH=j95cal(()=>"th",j95planTH);
