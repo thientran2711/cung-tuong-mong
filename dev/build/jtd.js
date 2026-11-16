@@ -184,7 +184,7 @@ Object.assign(KG82_ENG,{tdthread:tdWrap(kgTdThread,"tdthread"),tdwalk:tdWrap(kgT
 `;document.head.appendChild(st)})();
 
 /* ---------- the study acts (j85 lessonVir): intro (rules) -> game -> result -> progress ---------- */
-const TD_MODE={self:"Tự học",master:"Theo ma ma giáo tập"};
+const TD_MODE={self:"Tự học",master:"Học với ma ma"};
 function tdPoints(mode,raw){return mode==="self"?(raw>=9?2:1):(raw>=7?3:2)}
 function tdQuality(p){try{const a=(p&&p.vpf&&p.vpf.cong)||[];return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length/10*2):0}catch(e){return 0}}
 (function(){const v0=virtueBonus;virtueBonus=function(p,k){const b=v0.apply(this,arguments);try{if(k==="cong"&&b&&b.q!=null&&p===S)b.q+=tdQuality(p)}catch(e){}return b};window.virtueBonus=virtueBonus})();
@@ -207,7 +207,7 @@ function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vi
  if(mode==="self"){if(!can(2)||S.suc<25)return}else if(!can(2)||S.bac<cost)return;
  const b=typeof rsnap==="function"?rsnap():null,g=tdPoints(mode,raw);
  if(mode==="self"){apply({suc:-15});spend(2);addVir(S,k,g);log(`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
- else{apply({suc:-10,bac:-cost});spend(2);addVir(S,k,g);log(`Theo ma ma giáo tập học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
+ else{apply({suc:-10,bac:-cost});spend(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
  if(k==="cong"){S.vpf=S.vpf||{};S.vpf.cong=(S.vpf.cong||[]).concat(raw).slice(-3)}
  save();render();try{if(b&&typeof resultShow==="function")resultShow(`${mode==="self"?"Tự học":"Học"} ${V.n}`,b,null)}catch(e){}}
 window.lessonVir=tdPlay;window.tdPlay=tdPlay;
