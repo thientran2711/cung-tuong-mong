@@ -363,7 +363,7 @@
 | percent-measure re-run (sonnet) | handover | main s22 | session_01UV1SzjbPtX1ynyRZgs7MvS | DONE ~67 % xong | 16/11 19:35Z |
 | palace-voice (opus): expert brief, one address function, repetition pools, literary gain/loss | review/palace-voice | main s22 | session_01UV1SzgzYMEz8LE25rzybvi | RUNNING | 16/11 19:38Z |
 | lag-play-2 review r1 (opus, BIG perf+co-op) of d006dfdd | review/lag-play-2-r1 | main s22 | session_01UV1SzjyH2iaj5P368p1TBN | RUNNING | 16/11 19:40Z |
-| 10-night ledger BUILD (V3-B, reports/night-time.md; no player-only knob) | review/night-ledger | D | (D opens) | INBOX | 16/11 19:41Z |
+| 10-night ledger BUILD (V3-B, reports/night-time.md; no player-only knob) | review/night-ledger | main (moved to night-final successor by s23) | session_01UV1Szj7YLUcLKMH5ncGTcL | MOVED | 16/11 19:41Z |
 | img-cleanup review r1 (opus, BIG: build/quickcheck gate + 6.1k file removal): review/img-cleanup a2e99bd0 | review/img-cleanup-r1 | B | session_01N1tNP5L4nZgzCiWcpjcHmx | DONE PASS 2032fb69 → LIVE 785b8274 (archived) | 16/11 19:42Z |
 | night-final (opus; owner bug: night committed once at end of day, one woman) | review/night-final | main s22 | session_01UV1SziCQkwUnKFA7eL1uRp | RUNNING | 16/11 19:46Z |
 | suc-khoe review r1 (opus, BIG) of 10cba645 | review/suc-khoe-r1 | D | session_01DgYSWnQ5MJS6ViDgFmBeGV | DONE FAIL 8 (3 BLOCKING) @41716164 (archived) | 16/11 19:48Z |
@@ -399,3 +399,5 @@
 | FIG CUT-OUT CLEAN (sonnet art, URGENT owner 20:29Z–21:02Z): transparent-gen test → Luân hồi large figures + whole group re-cut; anatomy audit; back-turned pose audit; huadian too big (C9) | review/fig-cutout-clean | C | (opening) | RUNNING | 16/11 20:50Z |
 | art-complete part 2 resume (sonnet art): act-pics2 143 keys left + grown-kid a26/a36/a51 for 40 ids | review/art-complete-p2 | C | (opening) | RUNNING | 16/11 20:50Z |
 | NPC per-target jealousy for everyone, one formula (opus; main s23 20:27Z; reports/night-steal-r2.md) | review/npc-jealousy | C | (opening) | RUNNING | 16/11 20:50Z |
+| stage-pets r7 review r1 (sonnet, SMALL layout + co-op check) of review/stage-pets-r7 6aaca31af + r1 fixes cea021e3 (steps: reports/stage-pets-r1.md HANDOVER) | review/stage-pets-r7-r1 | main s24 | (s24 opening) | RUNNING | 16/11 21:05Z |
+| pl-courtyards r3 fix (sonnet): r2 FAIL 1+2 → gate kpmArt (festival/mourning/missing exact file = skip courtyard level, never a stand-in), FAIL 4 iPad back-button gap via kit; on main + pl-courtyards-r1 8b4a2160 + single-hall ff05f03d | review/pl-courtyards-r3 | main s24 | (s24 opening) | RUNNING | 16/11 21:05Z |
