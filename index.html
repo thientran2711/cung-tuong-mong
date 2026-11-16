@@ -15536,7 +15536,7 @@ BAL.nw=Object.assign(BAL.nw||{},{
 
 /* ---------- difficulty: one hook ---------- */
 function nwTier(kind,env){/* review/mg-balance: mgSet() puts the tier in KG82.tier before kg82Play and env.lv is the ease; on main without it the level tiers apply */
- if(typeof mgTier==="function"&&typeof KG82.tier==="number"&&isFinite(KG82.tier))return cl(Math.round(KG82.tier),0,2);return kg82Tier(env&&env.lv)}
+ if(typeof mgTier==="function"&&KG82.tier!=null){const t=typeof KG82.tier==="object"?KG82.tier.tier:KG82.tier;if(typeof t==="number"&&isFinite(t))return cl(Math.round(t),0,2)}return kg82Tier(env&&env.lv)}
 const nwP=(a,t)=>a[Math.min(t,a.length-1)];
 const NWC={ink:"#2a1a12",paper:"#fffdf6"};
 function nwBtn(box,id,text,sub){return k91Btns(box,[[id,text,sub]])}
@@ -38687,7 +38687,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b16f8c534ac1";window.CTM_BUILD=BUILD;
+const BUILD="66c0dc4bd122";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

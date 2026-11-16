@@ -22,7 +22,7 @@ BAL.nw=Object.assign(BAL.nw||{},{
 
 /* ---------- difficulty: one hook ---------- */
 function nwTier(kind,env){/* review/mg-balance: mgSet() puts the tier in KG82.tier before kg82Play and env.lv is the ease; on main without it the level tiers apply */
- if(typeof mgTier==="function"&&typeof KG82.tier==="number"&&isFinite(KG82.tier))return cl(Math.round(KG82.tier),0,2);return kg82Tier(env&&env.lv)}
+ if(typeof mgTier==="function"&&KG82.tier!=null){const t=typeof KG82.tier==="object"?KG82.tier.tier:KG82.tier;if(typeof t==="number"&&isFinite(t))return cl(Math.round(t),0,2)}return kg82Tier(env&&env.lv)}
 const nwP=(a,t)=>a[Math.min(t,a.length-1)];
 const NWC={ink:"#2a1a12",paper:"#fffdf6"};
 function nwBtn(box,id,text,sub){return k91Btns(box,[[id,text,sub]])}
