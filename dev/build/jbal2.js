@@ -94,3 +94,12 @@ Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:80
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
    Reviewer r1 (coordinator ruling 15/11): owner rule 08:10Z wins -> false (no allowance, no "quá hạn mức"). */
 Object.assign(BAL,{itd:{allow:false}});
+/* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
+   (+0/1 random); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng); thau = Thái hậu rebukes a nặng slap
+   (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap); rep = weekly chance a passer-by reports a mark that is still on (needs vừa+);
+   def = tier of a slap with no game ("Tát luôn" and old callers). bar = the power bar: speed (rad/ms), zone half-width as a share of the bar by tier 0/1/2 of her Sắc-less skill, red/amber widths;
+   NPC: npc = rolled tier weights by rank gap (1, 2, 3+); dodge = how wide the safe window is (share), dodgeMs = time to react. */
+BAL.slap={nm:["","nhẹ","vừa","nặng"],def:1,sac:[0,2,3,5],wk:[0,2,4,7],duc:[0,-2,-4,-7],rel:[0,-15,-25,-40],oan:[0,0,8,18],
+ hoang:[0,20,30,55],sung:[0,-2,-4,-7],thau:40,thauDanh:-4,evT:[0,0,35,70],evW:[0,10,30,55],rep:[0,0,12,30],
+ bar:{w:.0026,red:.16,amber:.38,ms:3200},
+ npc:[[0,60,32,8],[0,45,38,17],[0,30,42,28]],dodge:{w:.0024,safe:.2,ms:3200}};
