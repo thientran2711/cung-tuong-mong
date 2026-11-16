@@ -30,7 +30,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
-| D42 places-leftovers | review/places-port @6169b031 (on palace-map-port-r1) | sonnet | REVIEWING (review/places-port-r1, sonnet); 51 new paintings on CDN |
+| D42 places-leftovers | review/places-port-r1 | sonnet | PASS add62a7e9283cd328ddd9a46951abf0210e7bb26 (includes D30 palace-map-port-r1; kitPalaceMap renumbered §71→§76) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
@@ -51,6 +51,7 @@ PASS review/map-labels-r1 e23562007d7f431fce9fdbc95bf1f2799ad6a350 (C46; readabl
 PASS review/contest-ui-r3 231ae9e93f271c2d3b3bb171dab55051ba7e2160 (C34; picture-left game frames, real prizes by place, equal-height podium, new podium backdrop; CONDITIONAL: kit keeper signs off the contest-ui list in KIT KEEPER NEEDED; prize numbers = Q16)
 PASS review/page-curl2-r1 3f95e00368db1e5acf3aca47889ce7cb42861a4b (C32; portrait paper slide / landscape curl, swipe only in Tuần lục; CONDITIONAL: kit keeper adds kitSlideSheet + kitPortrait/KIT_SLIDE_MS/kitSlideEase + portrait=slide/landscape=curl rule + Gọn 120 ms fade + 'swipe only inside kitBook' to KIT §34)
 PASS review/stat-fx-2-r1 6d4540a7cf2b61de482fde24f9e3df36782fa61f (C26b; person card / status tiles glow on re-render, grudges inverted; k61How full sentences; mood tile without cause = plain kit card. Number colour itself waits for the §57.1 KIT REQUEST)
+PASS review/places-port-r1 add62a7e9283cd328ddd9a46951abf0210e7bb26 (D42; 5 new reachable places + children by age + access rules; owner-approved paintings; CONTAINS review/palace-map-port-r1 (D30) — fast-forward this one and D30 comes with it; kitPalaceMap now KIT §76, confirm)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -77,7 +78,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - page-curl2-r1 (PASS, conditional): portrait paper slide kitSlideSheet = new variant of the page-turn kit part (§34, reuses .ksht*); global swipe-to-change-tab removed; keeper may add a line to KIT.md §34.
 - KIT REQUEST (C41 tuduc-mg): a kit-owned "hint ring" part for canvas mini-games (Gợi ý marker is now a position-fixed div with .ksel); mini-game frame picture-left/info-right is a frame-level change (contest-ui's kitGameFrame({pic}) covers it once approved).
 - KIT REQUEST (D36 rank-port, blocks it): (1) podium j90 per owner 08:55Z — characters big/most prominent, podium shrunk to the name-plate under the feet, medal at the plate's top-right, "Ta" tag, optional entry fields fig/face/nameH/you; used by Bảng vàng and other podium users; must match C34 contest-ui podium + KIT_FIG (old implementation: origin/review/rank-ui 895c898ef j90 diff); (2) person dialog jk4: her own chip shows rank+name via kitName(q,{cap:true,named:q===S}) in kitStageFig; figure column sticky for dialogs without options so the full figure shows at 844x390 (895c898ef jk4 + CSS `#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))`); (3) KIT.md text podium §26 and 32.7b from that commit.
-- places-port (reviewing): new shared art thuong-thu-phong-*, a-ca-so-*, dong-cung-* (16 season/buổi + fallback each, gpt-2-6 edits of approved scenes); no kit parts changed.
+- places-port-r1 (PASS): KIT §76 kitPalaceMap number to confirm; KIT_FLOOR .62 for the new rooms; new shared art thuong-thu-phong-*, a-ca-so-*, dong-cung-* (16 season/buổi + fallback each, gpt-2-6 edits of approved scenes); no kit parts changed.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
