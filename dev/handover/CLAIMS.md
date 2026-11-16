@@ -176,7 +176,7 @@
 | mg-balance reviewer (opus) | review/mg-balance-r1 | B | session_01N1tNP2U5AHvsMDtXGkvaLK (opus) | RUNNING | 16/11 12:55Z |
 | D13 spread-events fix pass (opus): Q-length gates inside the buổi change (j70/j68/j72/jpet/jkc) | review/spread-events-r2 | B | session_01N1tNP2tutKGRiVqfsdERwB (opus) | RUNNING | 16/11 12:55Z |
 | mg-balance part 2 (opus): out-of-target engines banh/co/td_hanh/mua + calibrate dauho/td_dung + td_ngon no-word replacement | review/mg-balance-2 | B | session_01N1tNP4L7Uvc92DNAw2B9G7 (opus) | RUNNING | 16/11 12:55Z |
-| owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | session_01N1tNP3XJQSsGp1Vgi9GXaP (sonnet) | RUNNING | 16/11 12:55Z |
+| owner answers 12:55Z follow-up (sonnet): QB1 Đăng khôi, QB2 sủng ái music check, Q6 room btn, Q15 titles on profile, Q25 Thái hậu dislikes + thích row, Q12 ending card picture | review/owner-answers-b | B | session_01N1tNP3XJQSsGp1Vgi9GXaP (sonnet) | DONE SẴN SÀNG KIỂM 011beb29 (archived) | 16/11 12:55Z |
 | coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | session_01DgYSWn4KTZXiGjQcE6uwsQ | RUNNING | 16/11 12:58Z |
 | D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | session_01DgYSWoy8UWVPrve6HEjZfR | RUNNING | 16/11 12:58Z |
 | D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | RUNNING | 16/11 12:58Z |
@@ -187,3 +187,4 @@
 | D57 preg-rate review | review/preg-rate-r1 | D | session_01DgYSWobwX8ehBC7umUckXK | RUNNING | 16/11 13:17Z |
 | D57 preg-rate review | review/preg-rate-r1 | D | (reviewer opening) | RUNNING | 16/11 13:17Z |
 | merge-train-8 successor (loads .claude/settings.json) | review/merge-train-8 | main s16 | session_01UV1Sziaz47NKuNr1wC1DBx (sonnet) | RUNNING | 16/11 13:17Z |
+| owner-answers-b reviewer (sonnet) | review/owner-answers-b-r1 | B | (opening, Foreman B s5) | RUNNING | 16/11 13:20Z |
