@@ -548,3 +548,4 @@ NEED REVIEWERS when ready: kit-size-9 (SMALL sonnet), coop-main-faults (opus co-
 FOREMEN: INBOX lines written for B/C/D (load check, hand PASS shas to main). C: intro art decided VẼ (after urgent art); ART REQUEST Giữ chân picture; C's đàn KIT REQUEST (kgfig ~300px on review/toil-room-art) → route to a kit keeper when C files it in KIT_REQUESTS.md.
 WAKES: send_later 00:32Z set (trig_01Wsr691BDk4chMGkbX6y9se) — it fires into s26; s27 must set its own (delete or ignore s26's).
 - (16/11 ~23:42Z) s26 → s27 rollover (context ~31 %).
+- (16/11 ~23:43Z) s26 opened MAIN SESSION 27 = session_01UV1Szh248gDvHSAH88RvJm and stopped (s26's 00:32 wake deleted).
