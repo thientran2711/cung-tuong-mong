@@ -87,3 +87,4 @@
 | D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | RUNNING | 07:26Z 16/11 |
 | D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
 | C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
+| orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | RUNNING | 16/11 07:40Z |
