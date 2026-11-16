@@ -1788,7 +1788,7 @@ rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 
 `node dev/test/page-curl.js <url> WxH@dpr <out>` (week book: frozen mid-curl frames, back turn, finger drag, reduced motion = fade, no
 page errors) · `node dev/test/book-mock.js <url> WxH@dpr <out> <tag>` (mockups). Shots: `dev/shots/book/`.
 
-## 39. TOP 15 · LÔ A (review/ts-a, `dev/build/jts.js`, before j84) — the pieces other modules may reuse
+## 44. TOP 15 · LÔ A (review/ts-a, `dev/build/jts.js`, before j84) — the pieces other modules may reuse
 Owner 11/15 02:00Z (Top 15 of dev/research/TRUNGSINH_COMPARE.md). Everything is built from existing kit parts; the only new CSS (`#ts-css`) lays out the dressing board.
 - **`tsOpt({n, fx, odds, need:[{t,ok}], duoc:[], mat:[], kem:[], note, later, go})`** → a dialog option (Q item `opts`) that always shows Cần / Tốn / Được / Mất / Kèm + odds word
   (j63 frame). `fx` = costs paid on choosing (→ Tốn); `odds` 0–100 (null = sure, no word); `need` = the Cần row (✗ unmet disables the option, a bot
@@ -3230,24 +3230,24 @@ Dress pick (jtoil Hồi 1: tap = select + strip, buttons Cài / Mặc / Đeo / T
 Bên mình pick tiles (card + act) · shop picture card (price row + detail) · reward box rows / shelf (j93) · event item tag (§64) · bully demand tile (jtsb) ·
 Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · veil picker (jveil) · other people's worn slots (jk2b kitWearSlots → card with who).
 Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.
-## 71. BUỔI TRANSITION · buoiShift (owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) — `dev/build/jbuoi.js` (last module)
-Registry: §71 (coordinator to confirm). Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain). Page turn now exists ONLY in Tuần lục (review/page-curl2).
+## 74. BUỔI TRANSITION · buoiShift (owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) — `dev/build/jbuoi.js` (last module)
+Registry: §74 (KIT_NUMBERS.md; was "§71 to confirm"). Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain). Page turn now exists ONLY in Tuần lục (review/page-curl2).
 `curtain()` → `buoiShift()` (called after the state changed, never awaited, never in sync): one fixed overlay `#buoitr` (z 36, pointer-events none), ~1.7 s (dawn 2 s):
 tinted ink-wash veil thins out over the scene that already holds the next buổi's §56 light · painted sky band (hills, sun disc / moon disc slide along an arc from the previous
 to the new buổi position) · brush-calligraphy title "Buổi trưa" on an ink-wash plate + kit seal (§39 kitSeal) · night→morning = dawn variant (painted mist + first light + glowburst).
 Tap anywhere = skip (listener only; the tap still reaches the game). Gọn / reduced motion / weak device (`kfStill`) = one quick tint fade (260 ms), bots / quiet = nothing. The buổi bell / night-watch sfx stays.
 Art (Magnific gpt-2-6, recipes `dev/fxwork/buoi/slice_buoi.py`, CDN `img/fx/`, on demand, group fx): `buoi-wash` (ink alpha, used as CSS mask so one file serves all colours, 38 KB), `buoi-mist` (luma alpha, 42 KB), `buoi-hills` (ink alpha, 35 KB), `buoi-orb` (sun | moon, 15 KB) = 130 KB, downloaded the first time a buổi changes.
-Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §71 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
+Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §74 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
 
 
-## 72. kitBackBtnHtml · painted "back to a place" button (owner 15/11, review/room-btn) — `dev/build/jk3.js`
+## 75. kitBackBtnHtml · painted "back to a place" button (owner 15/11, review/room-btn) — `dev/build/jk3.js`
 - Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`
   → `<img.kbi>` (img/kit/ico-<kind>.webp, 30 px, gpt-2-6 gouache, transparent, 128 px WebP ~7 KB: ico-room = red-lacquered door under green tiles with a lantern,
   ico-map = palace scroll map) + `<span.kbl>` label; the button class is `.kbackb` (no border / ground in the header; a soft paper pill over the stage art for #tomap).
 - Header `#k3room` (phone shell only, as before): label "Về phòng", or "Về <place>" when she is elsewhere (tooltip + aria-label the same). >= 600 px: icon + label in the
   right column under the time block, right-aligned, no bar. < 600 px: icon only (label in tooltip, same rule as the stat cells), under the menu button next to the time block.
 - New back buttons to a place MUST use this part (`node dev/test/room-btn-scan.py` fails on a text "‹ <place>" bar). New icon kinds: add `img/kit/ico-<kind>.webp` in the same style.
-- Tests: `node dev/test/room-btn.js <url> <outdir>` (6 viewports). Kit page: sample §72. Number §72 is provisional (coordinator to confirm).
+- Tests: `node dev/test/room-btn.js <url> <outdir>` (6 viewports). Kit page: sample §75. Number §75 (KIT_NUMBERS.md; was provisional §72).
 ## 69. CO-OP BUỔI CLOCK · kitCoopClock (owner 15/11 ~21:25Z, review/coop-timer) — `dev/build/jcooptimer.js` (after jkitpage)
 - `kitCoopClock({left, len, state, fr})` → one row of kit chips (`.kchips.kctm`, `kitChip` look): clock chip with a small ring
   (`.kctm-r`, share of time left) + words, and the friend's chip. state `run` → `.kchip.n` "Còn 1 phút 42 giây" (`.r` under 20 giây);

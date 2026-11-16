@@ -2,7 +2,7 @@
 Owner (15/11): "Làm thành biểu tượng phòng hay sao để bấm đi." Spec: OWNER_DECISIONS "Header ‹ Phòng bar → a room icon button".
 
 ## Done
-- KIT §72 `kitBackBtnHtml(kind,label)` (jk3.js): painted icon + short label, class `.kbackb` (NOT `.kbk`/`.kbb`: both taken by the week book). Used by `#k3room` (header) and `#tomap` (stage).
+- KIT §75 `kitBackBtnHtml(kind,label)` (jk3.js): painted icon + short label, class `.kbackb` (NOT `.kbk`/`.kbb`: both taken by the week book). Used by `#k3room` (header) and `#tomap` (stage).
 - `#k3room`: icon + "Về phòng" / "Về <place>" (tooltip + aria-label); no border/ground; >=600 px right column under the time block; <600 px icon only under the menu button
   (jk4 grid areas "menu me" / "room tc" / "stats stats"; the old third column collapsed to 0 px at 390 so the old "‹ Phòng" was clipped too).
 - `#tomap` ("‹ Bản đồ" on a place stage reached from Dư đồ): same part, map icon, paper pill over the art.

@@ -1,4 +1,4 @@
-/* room-btn test (owner 15/11): header "‹ Phòng" bar → painted room icon button (KIT §72 kitBackBtnHtml). Checks at each viewport: icon loaded, label, no bar
+/* room-btn test (owner 15/11): header "‹ Phòng" bar → painted room icon button (KIT §75 kitBackBtnHtml). Checks at each viewport: icon loaded, label, no bar
    (border/background none), button inside the header, tap target >= 32 px, tap returns to the room view, #tomap uses the same part.
    usage: node dev/test/room-btn.js <url> <outdir> ; icons are served from img/kit/ when the CDN does not have them yet */
 const {chromium}=require('playwright');const fs=require('fs');

@@ -1,4 +1,4 @@
-/* KIT §71 buổi transition (jbuoi): plays on every buổi change, 4 buổi + dawn variant, tap skip, Gọn = fade only, never blocks input, cleans up, 0 page errors.
+/* KIT §74 buổi transition (jbuoi): plays on every buổi change, 4 buổi + dawn variant, tap skip, Gọn = fade only, never blocks input, cleans up, 0 page errors.
    usage: node dev/test/buoi-transition.js http://localhost:<port>/index.html <outdir> [shots]   (local img/fx/buoi-* served from <worktree>/img/fx when CDN lacks them) */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const [,,URL,OUT,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const FX=path.resolve(__dirname,'../../img/fx');

@@ -240,11 +240,11 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
    opened from the room (#popw) shows full screen too and returns to the room when closed. Result cards / events overlay as before.
    Wider or landscape screens keep the split stage | panel. ---------- */
 const K3SH={home:true};
-/* KIT §72 kitBackBtnHtml(kind,label): ONE painted icon button for every "go back to a place" control (room / map). Icon = img/kit/ico-<kind>.webp
+/* KIT §75 kitBackBtnHtml(kind,label): ONE painted icon button for every "go back to a place" control (room / map). Icon = img/kit/ico-<kind>.webp
    (gpt-2-6), label beside it (short, one line, ellipsis); the button has no bar of its own (no border / ground), so nothing reads as an empty field. */
 function kitBackBtnHtml(kind,label){return `<img class="kbi" src="img/kit/ico-${kind}.webp" width="30" height="30" alt="" draggable="false" onerror="this.remove()"><span class="kbl">${label}</span>`}
 window.kitBackBtnHtml=kitBackBtnHtml;
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBackBtnHtml · nút về phòng / về bản đồ (biểu tượng vẽ)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 function k3Phone(){return innerWidth<1000&&innerHeight>innerWidth}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
@@ -285,7 +285,7 @@ html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!imp
 html body .game#game.k3ph.k3pop>#panel{display:none!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
 html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;padding:0 12px;font-weight:600;color:var(--gold);white-space:nowrap}
-/* KIT §72 painted back button (room / map): icon + short label, no bar */
+/* KIT §75 painted back button (room / map): icon + short label, no bar */
 .kbackb{display:inline-flex;flex-direction:row;align-items:center;gap:5px;background:none!important;border:0!important;box-shadow:none!important;padding:0 6px!important;font-weight:600;color:var(--gold);white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .kbackb .kbi{width:30px;height:30px;max-width:none;flex:none;object-fit:contain;filter:drop-shadow(0 1px 1px #5a3a2040)}
 .kbackb .kbl{font-size:.74rem;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis}

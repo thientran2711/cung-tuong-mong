@@ -1,4 +1,4 @@
-/* ================= jbuoi: BUỔI TRANSITION (KIT §71, owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) =================
+/* ================= jbuoi: BUỔI TRANSITION (KIT §74, owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) =================
    Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain, j11 / j18 / j93) with a painted time-of-day transition:
    the scene (already holding the next buổi's light, §56) is veiled by a tinted ink wash that thins out; a small painted sky band slides the sun / moon
    along its arc between the buổi positions; the new buổi name is a brush-calligraphy title with the kit seal. Night -> morning = dawn variant
@@ -66,5 +66,5 @@ function buoiShift(){
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,6vw,2.4rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff6,0 0 14px color-mix(in srgb,var(--bt-tint) 90%,#fff0);white-space:nowrap}
 .btr-seal{position:relative;width:34px;height:34px;opacity:0}
 `;document.head.appendChild(st)})();
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"buổi transition · buoiShift (qua buổi: nước mực, vầng trời, chữ thư pháp)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§74",title:"buổi transition · buoiShift (qua buổi: nước mực, vầng trời, chữ thư pháp)",
  html:()=>`<div class="kitpg-row">${[0,1,2,3].map(b=>`<button type="button" class="kbtn alt" onclick="(function(){const s=S.buoi;S.buoi=${b};buoiShift();S.buoi=s})()">${BUOI[b]}</button>`).join("")}</div>`})}catch(e){}
