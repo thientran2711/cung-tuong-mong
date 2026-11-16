@@ -105,7 +105,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C42 | review/evidence-truth (owner s8: evidence only for real deeds; clean player safe; frame scheme separate; news one fact per line) | QUEUED-NEXT (high) |
 | C43 | review/coop-invite-ux (owner s8 'Rồi sao nữa': waiting state, 1-2-3 steps, auto-continue on join) | QUEUED |
 | C44 | review/cloud-save (owner s8: same character on phone + iPad, solo + co-op; sync code, auto upload, conflict pick, 10 versions) | QUEUED-NEXT |
-| C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
+| C45 | review/newgame-ui @ f4ddeefeb (lag fixes, same heights, Nhập cung event frame) | REVIEWING (opus) |
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
 | C47 | review/stage-side → r1 PASS 6298d2f55 | LIVE (note: 755x1000 3 people shows 2 + page chip) |
 | C48 review/save-slots @ 0bfc455c6 (jslots.js) | REVIEWING (save-slots-r1, opus) |
