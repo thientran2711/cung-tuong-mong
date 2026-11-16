@@ -327,7 +327,7 @@ the week summary (dawn) and the lesson overlay (`#ov .mg`). The person card moda
                          MẬT BÁO intel · CẢNH GIÁC threat · CHỨNG CỨ evidence · BAN THƯỞNG reward · TUẦN week · TÀI NGHỆ game
     .kptitle / small.kpsub
   #mb > .kpb[.kphas]
-    .kpsubj       ONLY when the panel is about a person: pframe (3:4 kit portrait) + rank-titled name. Never a room/place picture.
+    .kpsubj       the panel's SUBJECT slot: a person = the FULL-BODY figure column (.kpsubj.kes, §32.2 / §50 — owner 16/11 07:35Z, OD:L448: the small 3:4 portrait is NOT allowed for a person pop-up); an item / event / info picture = .kpiart / .kpev / .kpitem. Never a room/place picture beside a person.
     .kpmain       blocks: .kpsec (h4.kpst label + content) · .kfacts · .kb rows · .ktiers · .kchips · .kpnote
   .opts.kpopts    options = ACT CARD frame (section 6)
   #mr > .kbtn     the ONE button (lacquer red, gold ring); `.kbtn.alt` = quiet secondary
@@ -380,7 +380,8 @@ picture rows by hand inside a dialog. Pick by the rule; never add a per-place / 
 | T1 PANEL (§8) | `.dlg.kpanel` > `.kph` (seal + title + sub, kit ✕) + `#mb` > `.kpb` > `.kpmain` (facts / kitRows / tiers / chips / notes) + `.opts.kpopts` + `#mr` | any notice, rule, result, news WITHOUT a picture or person |
 | T2 EVENT FRAME (§8.2, = 6.2 / 32.2a "picture left, info right") | T1 + ONE picture LEFT `.kpsubj.kpiart(.kpev)` (kitSceneArt tall) + kit rows RIGHT; options BELOW as kit option rows (32.9) that scroll inside the frame | any dialog with a picture and NO person: events, place cards (32.8), chapter detail (72.3), item card (70.4), headArt notices. ONE picture only (`kitOnePic`, jk4: a headArt band is moved into the left slot) |
 | T3 PERSON EVENT (32.7 / 50 `kitEventDp`) | T1 + the person's figure column LEFT (`.kpsubj.kes`, 32.2a cap/crop) + ONE banner in the right column + text + options | an EVENT (VIỆC / BÁO / ĐÊM / KẾT QUẢ…) where a person acts or speaks. Never for an ĐIỀU / LUẬT info panel |
-| T4 PERSON INFO (§8 `subject`) | T1 + a 3:4 kit portrait `.kpsubj > pframe` + rank-titled name | a look-up panel ABOUT one person (Tâm trạng, Đã biết về X, Chứng cứ về X) |
+| T4 — RETIRED (owner 16/11 07:35Z, OD:L448) | a 3:4 portrait `.kpsubj > pframe` for a person | a pop-up ABOUT a person (ĐIỀU / LUẬT / NGƯỜI info, Chứng cứ về X) is now T3: figure column LEFT, picture right top, info, buttons. `dev/test/kit-conform.js` FAILS the small-portrait form |
+| T6 PERSON DIALOG OUTSIDE #modal (§50.2 `kitPersonDlg`, `dev/build/jpdlg.js`) | `.dlg.kpanel.kpdlg` = header + figure column LEFT + banner right top + text + buttons | the tutorial coach (LỜI DẶN), contextual tips, co-op / other overlays that are not #modal. ONE frame size per event: `std` = --kpw x --kph (every intro page), `coach` = same width, --kpch height (every spotlight step + tip) |
 | T5 IDENTITY (28.11) | `.kpb.kpid` | the Nhập cung identity card only |
 | OPTION ROW (6 / 6.2 / 32.9) | `button.ka` act card: picture left + Cần / Tốn / Được / Mất / Kèm rows | every choice inside any template; short ones 2 per row, long ones full rows |
 | PERSON CARD (`pcard` §3 / 28.17 / 31.9) | `.modal.pcm` | the person card only (exempt from T1–T5) |
@@ -1662,8 +1663,7 @@ Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái
   same rule — the figure stays INSIDE its column (`.kbk-por` clips) on every screen, phones included, never scaled; the body (head centre)
   is centred in the column; train / hem / outer sleeve wider than the column is cut at the column edge with a 24 px soft fade. The old
   "train runs behind the text on a paper panel" (.kbk-figover) is retired. Test: `dev/test/book-figwide.js` (+ overText = figure px under the text, faceIn).
-- INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) keep the small 3:4 portrait (§8 .kpsubj); the stage column is for
-  EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) — kitEventStage returns early on those kinds unless the panel names its stage itself (`stage:[…]`: the Nội vụ phủ shop, pet care).
+- INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) show the FULL-BODY figure column like every other person pop-up (owner 16/11 07:35Z, OD:L448) — kitEventStage no longer returns early on those kinds.
 - MAIN ACTOR: the column shows the first person who is not the player (stage / who); the player stands there only when the event is about her
   alone (then as rank + name, never "Ngươi" — owner rule: rank and name always together).
 - TRUE PROPORTIONS (owner 15/11 "figure squashed"): a person picture is never scaled differently in X and Y. kitDpFit takes the aspect from
@@ -3668,3 +3668,11 @@ gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = 
 
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
+
+### 50.2 kitPersonDlg — THE person pop-up for hosts outside #modal (owner 16/11 07:35Z + 07:37Z, OD:L448 / OD:L963; review/popup-fullbody) — `dev/build/jpdlg.js`
+- RULE: every pop-up where a person appears = LEFT the person's FULL-BODY figure (rank + name chip above), RIGHT TOP the event picture (landscape banner), below it the info, bottom the buttons. The small framed portrait (`.kpsubj` + pframe) is never used for a person pop-up. ONE event = ONE frame size for all its pages / steps.
+- #modal dialogs get it from kitEventStage / kitDpApply (§32.7, §50). Overlays OUTSIDE #modal (tutorial coach `kitCoach`, tips `kitTip`, any future notice) call `kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns,size:"std"|"coach"})` and then `kitPersonDlgFit(root)`; nobody writes a second copy.
+- Sizes: `std` = the one pop-up frame (`--kpw` x `--kph`, §8.1) — the tutorial's 4 "Game này chơi gì" pages, all identical. `coach` = same width, height `--kpch` = min(--kph, max(300px, 54dvh)) so the spotlighted target stays visible — every spotlight step and every tip, identical. (Documented exception to "same size for every pop-up": a spotlight coach card must not cover its target; flagged for the owner's review.)
+- Figure: kitStageFig (§32.2) laid by `kitPersonDlgFit` — the painted body (head-top .. feet) fills the figure column under the name chip, feet on the column floor, a wide hem / sleeve is cut by the column edge (kitFigBody; KIT_FIG ratio). Guide figure: `fig-mama-*` (`mmFig()` in jtut).
+- Narrow (< 600 px): figure column clamp(84px,32%,140px) beside the text (the #modal template stacks the figure on top there; a coach card that tall would cover the screen).
+- Tests: `dev/test/popup-fullbody.js` (every PEND person event, person info / news / result / night / intel / evidence, the tutorial pages + steps, a tip: FAILS a small portrait, a missing figure column, pages / steps of one event that differ in frame size) and `dev/test/kit-conform.js` (T4 small portrait = FAIL; tutorial pages / steps one size).
