@@ -30,3 +30,7 @@ WAITING.
 ## Scope update (Foreman C 16:50Z, OD 16/11 16:45Z (4))
 Priority 1 = redraw ALL Thai hau pictures (fig-thaihau-1/2/3, h1/h2/h3 x a18/a26/a36/a51 + any scene/event pictures showing her) with less bulky robes at consort proportion. Code scale: Thai hau is not in KIT_FIG.men so fac=1 like consorts, no code-side enlargement found. Then the rest of the list. Head:height numbers for every figure: audit-list.txt + dev/measure/fig_proportion.py output (to be attached in final report).
 WAITING for the owner's verdict on the Thai hau sample.
+
+## Thai hau complete picture list (Foreman C 16:55Z) — dev/handover/reports/fig-proportion/thaihau-all-pictures.txt
+Full-body figures (15, all redraw): fig-thaihau-1/2/3, fig-thaihau-h1/h2/h3-a18/a26/a36/a51 (+ hd/ tn/ variants if present). Portraits por-thaihau-* / face-thaihau-1..6 (faces; re-cut from the new figures so face and body match). Scene/act/event pictures naming her (act-*-thai-hau*, act-*-th-*, ev-q72-th-*, ev-toil-th-*, info-thai-hau, thai-hau): to be LOOKED AT one by one when generation starts; any that show her bulky get redrawn. 
+## Head:height table for EVERY figure: dev/handover/reports/fig-proportion/heads-table.csv (file, verdict, heads = body/head crown-inclusive, width/height, canvas)
