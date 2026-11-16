@@ -211,7 +211,7 @@ try{Object.assign(KF_KINDS,{embers:["ember"],ashfall:["ash"],scraps:["paper"],du
 #mb .kiev-txt{float:right;margin:0 0 6px 10px;padding:4px 4px 2px;border-radius:10px;background:rgba(255,250,240,.9);box-shadow:0 1px 5px #0002}
 #mb .kiev .kitem{cursor:default}
 /* short landscape (844x390): the banner is ~95 px tall → a 40 px picture, name + grade on one line each, so the frame stays inside the banner (r1) */
-@media (max-height:500px){#mb .kiev .kitem-md{--isz:40px;width:auto;min-width:40px}#mb .kiev .kitem>.kitn,#mb .kiev .kitem>.kitg{white-space:nowrap}#mb .ksart>.kiev-ban{right:6px;bottom:6px;padding:3px 4px 2px}}
+
 /* §64.2 animation pieces (WAAPI on fixed clones; particles on the jfx Pixi layer) */
 .kievfx{position:fixed;z-index:9480;pointer-events:none;will-change:transform,opacity}
 .kievfx>img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 6px #0005)}

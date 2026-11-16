@@ -28,7 +28,7 @@ function mlAgeOk(s){const B=mlB();const a=s.age||B.ageDef;return a>=B.eyeAge[0]&
 /* 1. the Emperor's eye */
 function mlEyeP(p,s){const B=mlB();if(!mlAgeOk(s))return 0;let c=B.eye[Math.max(0,Math.min(B.eye.length-1,srk(s)))]||0;
  c*=1+Math.max(0,p.sung||0)/100*B.eyeSung;if(s.seek&&s.seek.until>=(S.turn||0))c*=B.seekMul*(s.seek.used?B.useMul:1);return c}
-function mlEye(p,s){if(mlGuest())return false;/* co-op guest: rises are made on the host only (the week merge drops a new consort made on the guest, PROTOCOL §4.4) */if(!mlOn()){const O=BAL.mline;mlC("eyeTry");const ok=srk(s)>=O.offRank&&roll(O.offEye);if(ok)mlC("eyeHit");return ok}const c=mlEyeP(p,s);mlC("eyeTry");mlC("eyeP",c);const ok=roll(c);if(ok)mlC("eyeHit");return ok}
+function mlEye(p,s){/* co-op guest (review/coop-guest-maid): her maid rolls the eye like solo; the new consort reaches the world through the guest→host request (jcoopask, PROTOCOL §4.1) */if(!mlOn()){const O=BAL.mline;mlC("eyeTry");const ok=srk(s)>=O.offRank&&roll(O.offEye);if(ok)mlC("eyeHit");return ok}const c=mlEyeP(p,s);mlC("eyeTry");mlC("eyeP",c);const ok=roll(c);if(ok)mlC("eyeHit");return ok}
 function mlRose(p,s){mlC("rose");if(s.seek)mlC("roseSeek");if(s.seek&&s.seek.used&&roll(mlB().useTurn)){s.loyal=Math.min(s.loyal||0,mlB().riseLoy-1);mlC("useTurn")}}
 /* 2. seeking his notice */
 function mlSeek(p){const B=mlB();let ev="";for(const s of (p.staff||[]).slice()){if(s.role!=="maid"||!mlAgeOk(s))continue;const T=S.turn||0;
@@ -59,7 +59,7 @@ function mlCaught(p,t,k,w,x){const B=mlB();mlC("caught_"+k);if(p===S){apply({dan
 function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"";/* co-op guest: her maid's harm to an NPC maid is world state (host) */
  const M=(p.staff||[]).filter(s=>s.role==="maid");if(!M.length||!roll(B.feud))return"";
  const foes=others(p).filter(t=>t&&(!G||t===S)&&(t.staff||[]).some(x=>x.role==="maid")&&hostility(p,t)>=B.feudHost);if(!foes.length)return"";
- const t=pick(foes),a=pick(M),b=pick(t.staff.filter(x=>x.role==="maid"));if(!a||!b)return"";const see=mlSee(p,t);const k=roll(B.feudPoison)?"poison":roll(B.feudFrame)?"frame":"fight";mlC("feud_"+k);
+ const t=pick(foes),a=pick(M),b=pick(t.staff.filter(x=>x.role==="maid"));if(!a||!b)return"";{const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}/* jcmaid: a martial close maid (dtq) stands in the way */const see=mlSee(p,t);const k=roll(B.feudPoison)?"poison":roll(B.feudFrame)?"frame":"fight";mlC("feud_"+k);
  if(k==="fight"){a.loyal=cl(a.loyal+B.fightLoy,0,100);b.loyal=cl(b.loyal+B.fightLoy,0,100);const l=roll(B.fightLose)?a:b;/* the loser of the scuffle is slapped: either side */mlFx(typeof slapGive==="function"?slapGive:null,l,l===a?t:p,"cãi nhau giành việc");
   if(see)ev+=`${a.name} (cung ${NM(p)}) và ${b.name} (cung ${NM(t)}) giành việc ở Nội vụ phủ, cào cấu nhau giữa sân; ${l.name} bị tát. `}
  else if(k==="frame"){if(roll(B.frameCatch)){/* caught: b is cleared, a is punished by her own master to save face */
@@ -76,7 +76,7 @@ function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"
  return ev}
 /* 4. a consort targets another palace's maid (co-op guest: pickTarget (jcoopworld) returns only her, so an NPC's act aimed at her
    household lands on her side, NPC vs NPC rolls on the host) */
-function mlHit(p){const B=mlB();if(p===S||!roll(B.hit))return"";const t=pickTarget(p);if(!t||!(t.staff||[]).some(x=>x.role==="maid"))return"";const s=pick(t.staff.filter(x=>x.role==="maid"));if(!s)return"";
+function mlHit(p){const B=mlB();if(p===S||!roll(B.hit))return"";const t=pickTarget(p);if(!t||!(t.staff||[]).some(x=>x.role==="maid"))return"";const s=pick(t.staff.filter(x=>x.role==="maid"));if(!s)return"";{const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}
  const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const cruel=tr.some(x=>x==="Hiểm độc"||x==="Kiêu ngạo");const k=(p.bac||0)>=B.hitBribeBac&&roll(B.hitBribe)?"bribe":cruel&&roll(B.hitBeat)?"beat":"frame";mlC("hit_"+k);let ev="";const see=mlSee(t);
  if(k==="bribe"){const r=bribeServ(p,s);if(t===S&&r&&s.spyFor!==key(p))ev+=r}
  else if(k==="beat"){mlFx(typeof slapGive==="function"?slapGive:null,s,p,`bị ${p.name} đánh`);s.loyal=cl(s.loyal+B.beatLoy,0,100);

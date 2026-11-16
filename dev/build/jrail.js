@@ -43,7 +43,7 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .krailb:active{transform:scale(.94)}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
-@media (max-height:430px){.krailb{width:34px;height:34px;min-width:34px;padding:3px}.krail{gap:4px}}
+
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút tròn bên trái sân khấu (Lịch · Chat · Mục tiêu)",
  html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["mo-calendar","Lịch tháng",0],["ico-chat","Chat",0],["mo-edict-closed","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
