@@ -45,10 +45,10 @@ const out=o=>console.log(JSON.stringify(o));
   await p.waitForTimeout(1500);await p.evaluate(()=>document.querySelector('#ktut [data-ktut=skip]').click());await p.waitForTimeout(800);
   const r=await p.evaluate(()=>({tour:KTUT.rec.tour,hidden:document.getElementById('ktut').hidden}));out({TAG,skip:r});if(r.tour!=='skip'||!r.hidden)fail('skip');
   /* a first-open tip (Tài nghệ), non-blocking */
-  await p.evaluate(()=>document.querySelector('#tabs [data-tab=art]').click());const ok=await until(p,()=>{if(KTUT.tip&&KTUT.tip!=='tab-art'){const b=document.querySelector('#ktip [data-ktip]');if(b)b.click();return false}return KTUT.tip==='tab-art'},12000);/* a queued earlier tip (Hành sự) may show first: the player taps its Đã hiểu */await p.waitForTimeout(600);await shot(p,'tip-tai-nghe');
+  await p.evaluate(()=>document.querySelector('#tabs [data-tab=art]').click());const ok=await until(p,()=>{if(KTUT.tip&&KTUT.tip!=='tab-art'){const b=document.querySelector('#ktip [data-ktut=tip]');if(b)b.click();return false}return KTUT.tip==='tab-art'},12000);/* a queued earlier tip (Hành sự) may show first: the player taps its Đã hiểu */await p.waitForTimeout(600);await shot(p,'tip-tai-nghe');
   const tb=await p.evaluate(()=>{const t=document.getElementById('ktip');if(!t)return null;const r=t.querySelector('.dlg').getBoundingClientRect(),tb=document.getElementById('tabs').getBoundingClientRect();return{above:r.bottom<=tb.top,pe:getComputedStyle(t).pointerEvents}});
   out({TAG,tip:ok,tb});if(!ok||!tb||!tb.above)fail('tip');
-  await p.evaluate(()=>document.querySelector('#ktip [data-ktip]').click());await p.waitForTimeout(500);
+  await p.evaluate(()=>document.querySelector('#ktip [data-ktut=tip]').click());await p.waitForTimeout(500);
   const again=await p.evaluate(async()=>{document.querySelector('#tabs [data-tab=act]').click();await new Promise(r=>setTimeout(r,1500));document.querySelector('#tabs [data-tab=art]').click();await new Promise(r=>setTimeout(r,2500));return KTUT.tip});
   if(again==='tab-art')fail('tip shown twice');
   out({TAG,mode:'skip',errs:p.errs});if(p.errs.length)fail('page errors');await p.context().close()}

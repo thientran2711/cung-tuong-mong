@@ -35142,20 +35142,29 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const B=R0.querySelector(".ktut-blks");
  B.innerHTML=s.interact&&r?blk(0,0,vw,r.top)+blk(0,r.bottom,vw,vh-r.bottom)+blk(0,r.top,r.left,r.height)+blk(r.right,r.top,vw-r.right,r.height):blk(0,0,vw,vh);
  R0.querySelector(".ktut-marks").innerHTML=marks.map(m=>`<div class="ktut-mark" style="left:${m.left}px;top:${m.top}px;width:${m.width}px;height:${m.height}px"></div>`).join("");
- /* card: below, above, right, left of the target; a target too big for any of these: the card lies at its lower edge (never for a tap step) */
- const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8;let L,Tp;
+ /* card: below, above, right, left of the target, NEVER over its hole. The kit card keeps its ONE look; when its full size (--kpw x --kph) fits on no side it shrinks on the roomiest side (the kit text scrolls inside, .kpdt). Only when even the minimum size fits nowhere (a hole that fills the screen): a step that asks for a tap puts the card at the screen part farthest from the hole, the others lie at the target's lower edge */
+ card.style.removeProperty("--kph");card.style.removeProperty("--kpw");
+ const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8,MINW=Math.min(cw,300),MINH=Math.min(ch,250);let L,Tp;
  if(!r){L=(vw-cw)/2;Tp=Math.max(M,(vh-ch)/2)}
- else{const cx=r.left+r.width/2,cy=r.top+r.height/2;const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
-  const C=[];if(r.bottom+g+ch<=vh-M)C.push([hx,r.bottom+g,vh-M-r.bottom-g-ch]);if(r.top-g-ch>=M)C.push([hx,r.top-g-ch,r.top-g-ch-M]);
-  if(r.right+g+cw<=vw-M)C.push([r.right+g,hy,1e3]);if(r.left-g-cw>=M)C.push([r.left-g-cw,hy,1e3]);
-  const pref=s.side==="above"?[1,0]:[0,1];
-  let c=null;if(C.length){/* the side the step prefers when it fits, else the roomiest */c=C.find(x=>x[1]===(s.side==="above"?r.top-g-ch:r.bottom+g))||C.sort((a,b)=>b[2]-a[2])[0]}
-  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): the card keeps its ONE frame size (owner 16/11, OD:L963) and lies at the free edge on the wider side; the rest of the target stays tappable */
-   const sl=r.left-g-M,sr=vw-r.right-g-M;L=sl>=sr?M:vw-cw-M;Tp=Math.min(Math.max(M,cy-ch/2),vh-ch-M);c=[L,Tp]}
-  if(c){L=c[0];Tp=c[1]}
-  else{/* too big: inside the target at its bottom (above the tab bar), or at the screen's free edge for a tap step */
+ else{const cx=r.left+r.width/2,cy=r.top+r.height/2;
+  const reg=(side,aw,ah)=>({side,aw,ah,w:Math.min(cw,aw),h:Math.min(ch,ah)});
+  const C=[reg("below",vw-2*M,vh-M-r.bottom-g),reg("above",vw-2*M,r.top-g-M),reg("right",vw-M-r.right-g,vh-2*M),reg("left",r.left-g-M,vh-2*M)].filter(x=>x.aw>=MINW&&x.ah>=MINH);
+  const want=s.side==="above"?"above":"below";
+  C.forEach(x=>{x.full=x.w>=cw&&x.h>=ch;x.sc=(x.full?1e6+(x.side===want?5e5:0)+(x.side==="below"||x.side==="above"?1e3:0):(x.w>=cw?1e5:0))+x.w*x.h/* a card that must shrink keeps its width when it can: only the height gives */});
+  C.sort((a,b)=>b.sc-a.sc);const c=C[0];
+  if(c){c.w=Math.round(c.w);c.h=Math.round(c.h);if(c.w<cw)card.style.setProperty("--kpw",c.w+"px");if(c.h<ch)card.style.setProperty("--kph",c.h+"px");if(c.w<cw||c.h<ch)try{kitPersonDlgFit(R0)}catch(e){}
+   if(c.side==="below"){L=Math.min(Math.max(M,cx-c.w/2),vw-c.w-M);Tp=r.bottom+g}
+   else if(c.side==="above"){L=Math.min(Math.max(M,cx-c.w/2),vw-c.w-M);Tp=r.top-g-c.h}
+   else if(c.side==="right"){L=r.right+g;Tp=Math.min(Math.max(M,cy-c.h/2),vh-c.h-M)}
+   else{L=r.left-g-c.w;Tp=Math.min(Math.max(M,cy-c.h/2),vh-c.h-M)}}
+  else if(s.interact){/* the hole fills the screen: the card goes to the corner farthest from the hole's centre, as small as it may be */
+   const w=Math.min(cw,Math.max(MINW,vw-2*M)),h=MINH;card.style.setProperty("--kpw",w+"px");card.style.setProperty("--kph",h+"px");try{kitPersonDlgFit(R0)}catch(e){}
+   L=cx>vw/2?M:vw-w-M;Tp=cy>vh/2?M:vh-h-M}
+  else{/* too big: inside the target at its bottom (above the tab bar) */
    L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}
- card.style.left=Math.round(Math.max(M,Math.min(L,vw-cw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-ch-M)))+"px"}
+ const fw=card.offsetWidth,fh=card.offsetHeight;
+ card.style.left=Math.round(Math.max(M,Math.min(L,vw-fw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-fh-M)))+"px";
+ LAST=key.replace(/\|[^|]*$/,"|"+fh)}
 addEventListener("resize",()=>{LAST="";if(CUR){place(true);clearTimeout(T.rz);T.rz=setTimeout(()=>{try{if(T.on&&STEPS[T.step]&&STEPS[T.step].prep)STEPS[T.step].prep(true)}catch(e){}LAST="";place(true)},350)}if(T.tip)tipPlace()});
 addEventListener("orientationchange",()=>{LAST="";setTimeout(()=>{if(CUR)place(true);if(T.tip)tipPlace()},250)});
 document.addEventListener("scroll",()=>{if(CUR)place(false)},true);
@@ -40315,7 +40324,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7dacc76a7135";window.CTM_BUILD=BUILD;
+const BUILD="f9cfd7066d56";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
