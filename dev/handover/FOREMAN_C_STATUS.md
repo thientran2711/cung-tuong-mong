@@ -1,12 +1,12 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 03:40Z — 12 agents running (cap 12). Main train-2 (4f5e5f3b3) took 6 Foreman C PASSes: pic-dupes-r2, kit-popup-sample-r1, thaiy-r1, cal-plus-r1, cardflip-r1, promo-rules-r1 → LIVE.
+Updated: 11/16/2026 03:22Z — 12 agents running (cap 12); load ~45 on 4 CPUs; disk 11 GB free.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
 | Item | Branch | Model | State |
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | LIVE (train-2) |
-| A7 cycle review | review/cycle-r1 (contains thaiy-r1) | opus | PASS 7ea3ec447 — kit keeper OK needed for 1-word j19 fix (K6) |
+| A7 cycle review | review/cycle-r1 @7ea3ec447 → review/cycle-r2 | opus | PASS ON HOLD — owner fixes (FOREMAN_C.md note): (1) Xem sổ / Xem lén sổ nguyệt sự as HÀNH SỰ deck cards; (2) monthly period popup (maid asks: báo đúng / lùi / sớm / giấu). QUEUED-NEXT slot (worker on cycle-r2) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
@@ -43,7 +43,7 @@ PASS review/mk-colour-r1 b9e20184566744ec84d1fd9055e50ee8599f858d (C6+D28; desce
 PASS review/placeholder-pics2-r1 81af8e41264c4012c9f3744534db3fa3f0b28341 (D46; descends from main a523531da; e68 flowerBloom picture drawn + CDN + KIT_DLGMAP; 0/304 events and 0/98 acts on placeholder; missing_pics.js now lists 64 option cards → D53)
 PASS review/recipes-r2 9eafa355bb294aab0d61c7c0966576e44dcebc7c (A13; descends from main a523531da; jrcp.js stays LAST in assemble; recipes.js 5 viewports, month-cal, item-events 86 ok, ts-oldsave ok, coop-e2e ok on first merge only; fixed clipped shop book line at 755)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
-PASS review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
+(ON HOLD — do not merge yet, owner fixes pending on cycle-r2) review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
 - Person subject always gets the full-body event-stage figure, even in the ĐIỀU info pop-up (no small 3:4 portrait on main); at 1180 one run drew no figure (figure-load race?) → stage-fig-size (C17, session 8).
