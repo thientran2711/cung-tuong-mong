@@ -26,3 +26,9 @@ Numbers where a same-size card CANNOT avoid the tap hole (step "thu", card frame
 - 1000x755: card 560x529, overlap 11088 px².
 - 1180x820, 1366x1024: fits, overlap 0, green.
 Options for main/owner: (a) accept strip overlap (test: relax only for this); (b) lower the ONE kit frame height --kph for portrait viewports (e.g. 700 -> ~580 at 755x1000) for ALL pop-ups; (c) hole narrower on the act card (target the card's top row only). I did not do any without a decision.
+
+## FINAL (main s18 option c) — a42c972c (origin/main 2232ea32 merged)
+OD:L963 kept: every tour card keeps the ONE kit frame size (kit-conform 755x1000 and 1180x820: floats none, tour cards same size). No --kph change, no test loosening. place(): for a TAP step whose same-size card fits no side, the lit hole shrinks to the part of the target the card leaves free (min 56 px; the act card is tapped anywhere on it); then the card goes below/above/side. Look-at steps keep their whole hole (card at the least-overlap spot).
+Step "thu": 755x1000 hole 737x135 (card 560x700 below at y292, overlap 0); 390x844 hole 372x85, card 362x591, overlap 0; 1180x820 / 1366x1024 whole hole, overlap 0.
+Tests (serial, tour+skip then replay+old+bot, per size): 390x844, 1000x755, 755x1000, 412x1058, 1180x820 (tour,skip), 1366x1024 (tour,skip) green; game-feel ok:true; kit-conform green.
+Known flakes (not from this change, seen on e10e892d and c1b09285 alike): (1) "tour did not start" when the new-life flow ends on the night-prep dialog "Kính sự phòng báo tin" (random; helper roulette.js does not know its options); (2) mode "replay" at 1180x820/1366x1024 fails about every other run ("busy", menu modal "Cung Tường Mộng" still open) and passes on rerun. Both are in the test helper / ☰ replay path, worth a separate ticket.
