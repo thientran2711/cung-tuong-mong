@@ -16451,7 +16451,7 @@ addEventListener("kittn",()=>{for(const k in FP_C)delete FP_C[k]});
 /* review/newgame-ui-r2 (reviewer FAIL 3): the two pinned choices no longer overlay the body (it scrolled UNDER them: the picker, its
    "Dung mạo chỉ để nhìn…" note and last row were hidden behind them). The card body scrolls in `.kpscroll`; the choices sit BELOW that
    scroll area as a plain pinned row, so nothing is ever covered. */
-(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl))return;const mb=$("mb");if(!mb||!mb.querySelector(":scope > .kpid")||mb.querySelector(":scope > .kpscroll"))return;
+(function(){const b0=kpBuild;kpBuild=function(M,m){try{const o=$("mb");o&&o.classList.remove("kpmbw")}catch(e){}/* r3: #mb is reused by the next pop-up; a stale .kpmbw (overflow hidden) clipped Nhập cung and every later panel */b0.apply(this,arguments);try{if(!(m&&m.nl))return;const mb=$("mb");if(!mb||!mb.querySelector(":scope > .kpid")||mb.querySelector(":scope > .kpscroll"))return;
   const opts=mb.querySelector(":scope > .kpscopts");if(!opts)return;const w=document.createElement("div");w.className="kpscroll";
   [...mb.childNodes].forEach(n=>{if(n!==opts)w.appendChild(n)});mb.insertBefore(w,opts);mb.classList.add("kpmbw")}catch(e){console.error("kpscroll",e)}}})();
 (function(){const st=document.createElement("style");st.id="kp-scroll-css";st.textContent=`
@@ -34410,7 +34410,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2193da45924c";window.CTM_BUILD=BUILD;
+const BUILD="20e78ea448eb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

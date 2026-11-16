@@ -46,3 +46,8 @@ stage-fig-size.js 755x1000 + 1180x820 after the CORS fix: every kind col ≤ 36 
 2. ONE common figure tier (KIT 28.11a updated): body = min(80/84 % H, column*.98/KPID_WR), KPID_WR=.5 (max over 420 faces .496). 755x1000: body 321 / floor 988 for every face (col 164); 1180x820 689; 844x390 328; 1366x1024 860. No mask, no cut, no spill.
 3. Pinned choices moved out of the scroll area (j86 .kpscroll / .kpmbw): note + last picker row no longer covered.
 Tests: newgame-ui.js 755x1000, 1180x820, 1366x1024, 844x390, 1000x755 ok; panel-size.js ok; stage-fig-size.js 77 dp rows face/sq ok, distorted 0 (one browser crash at 686x880 for info/ident/stage under memory pressure, rerun alone ok).
+
+## r3 (review/newgame-ui-r3, reviewer) — merged onto origin/main eba64ead4
+Conflicts: j2 Nhập cung (kept event frame, added main's psOpenText as a kit row "Hậu cung"), jk4 (main's visibility:""), generated files rebuilt.
+Fix: j86 stale `.kpmbw` on reused #mb after the identity card closed (overflow hidden leaked to the next pop-up).
+Lag (4x CPU, 755x1000, long tasks): main 159 tasks / 45.5 s total / max 1451 ms; r3 48 / 8.3 s / max 613 ms. Pick tap→paint main 2.7–3.8 s, r3 0.1–0.65 s.

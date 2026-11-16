@@ -54,7 +54,7 @@ addEventListener("kittn",()=>{for(const k in FP_C)delete FP_C[k]});
 /* review/newgame-ui-r2 (reviewer FAIL 3): the two pinned choices no longer overlay the body (it scrolled UNDER them: the picker, its
    "Dung mạo chỉ để nhìn…" note and last row were hidden behind them). The card body scrolls in `.kpscroll`; the choices sit BELOW that
    scroll area as a plain pinned row, so nothing is ever covered. */
-(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl))return;const mb=$("mb");if(!mb||!mb.querySelector(":scope > .kpid")||mb.querySelector(":scope > .kpscroll"))return;
+(function(){const b0=kpBuild;kpBuild=function(M,m){try{const o=$("mb");o&&o.classList.remove("kpmbw")}catch(e){}/* r3: #mb is reused by the next pop-up; a stale .kpmbw (overflow hidden) clipped Nhập cung and every later panel */b0.apply(this,arguments);try{if(!(m&&m.nl))return;const mb=$("mb");if(!mb||!mb.querySelector(":scope > .kpid")||mb.querySelector(":scope > .kpscroll"))return;
   const opts=mb.querySelector(":scope > .kpscopts");if(!opts)return;const w=document.createElement("div");w.className="kpscroll";
   [...mb.childNodes].forEach(n=>{if(n!==opts)w.appendChild(n)});mb.insertBefore(w,opts);mb.classList.add("kpmbw")}catch(e){console.error("kpscroll",e)}}})();
 (function(){const st=document.createElement("style");st.id="kp-scroll-css";st.textContent=`
