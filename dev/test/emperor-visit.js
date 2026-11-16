@@ -15,7 +15,9 @@ const YEARS=+process.argv[2]||6,LIVES=+process.argv[3]||6,BEFORE=+process.env.BE
  await page.goto('http://ts.local/dev/index.html',{waitUntil:'domcontentloaded',timeout:120000});await page.waitForTimeout(2500);
  const res=await page.evaluate(([YEARS,LIVES,BEFORE])=>{const out={fail:[],flow:{},bot:{}};const F=m=>out.fail.push(m);const strip=x=>String(x||"").replace(/<[^>]+>/g,"");
   const V=BAL.visit,N=BAL.night;const quiet=()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}};
-  const force=()=>{const k=["base","cap"].map(x=>V[x]);V.base=100;V.cap=100;S.visW=null;if(S.emp)S.emp.visit=null;const r=visRoll();V.base=k[0];V.cap=k[1];return r};
+  /* r1: her monthly days (jcycle cyTray) now also keep him away; the forced flow cases run outside them */
+  const offCy=()=>{try{const b=cyBase(S);if(b&&S.tuan===b.t)S.tuan=(S.tuan+1)%3}catch(e){}};
+  const force=()=>{offCy();const k=["base","cap"].map(x=>V[x]);V.base=100;V.cap=100;S.visW=null;if(S.emp)S.emp.visit=null;const r=visRoll();V.base=k[0];V.cap=k[1];return r};
   const run=(o)=>{const it=Q.shift();(o.go||(()=>{}))();if(o.fx&&Object.keys(o.fx).length)apply(o.fx);return it};
   /* 1. flow */
   SLOT=3;start();quiet();S.sung=50;S.an=30;S.tonight=null;S.preg=0;S.out=0;S.th=30;S.hh=20;S.thDead=false;

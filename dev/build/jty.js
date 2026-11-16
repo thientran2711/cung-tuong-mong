@@ -61,7 +61,7 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
 (function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(k){
   if(window.__tyCardK===k){window.__tyCardK=null;window.__tyGo=1;try{const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r}finally{window.__tyGo=0}}
   if(S&&!S.dead&&k&&k!=="home"&&k!==S.place&&tyOn(S)&&!window.__tyGo&&!Q.length&&!S.out){const c=tyCost(k,null);
-   Q.push({t:"Ra ngoài khi mặc trung y?",kind:"notice",h:`<p class="past">${when()}</p><p>Ngươi đang mặc trung y (${TY_COL[tyTier(S)]}), chưa khoác y phục.</p><p>Mặc trung y ra khỏi tẩm cung là thiếu lễ, người trong cung sẽ chê cười: ${c.L.join("; ")}.</p>`,
+   Q.push({t:"Ra ngoài khi mặc trung y?",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>Ngươi đang mặc trung y (${TY_COL[tyTier(S)]}), chưa khoác y phục.</p><p>Mặc trung y ra khỏi tẩm cung là thiếu lễ, người trong cung sẽ chê cười: ${c.L.join("; ")}.</p>`,
     opts:[{n:"Vẫn đi",fx:{},x:`Chắc chắn · tốn: Danh -${c.danh}${c.duc?` · tốn: Đức -${c.duc}`:""}`,go:()=>{setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
           {n:"Ở lại",fx:{},x:"Chắc chắn · (thay y phục trong Tư trang: Y phục → Mặc, rồi hãy đi)",go:()=>{}}]});render();return}
   const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r};window.goTo=goTo})();
@@ -94,7 +94,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
  w.y=null;S.tyOmen=null;tyLost(S,"cuop");S.tyRobbed=(S.tyRobbed||0)+1;
  const nm=typeof accName==="function"?accName(k):k;apply({danh:-(T.robDanh+T.robWalk)});
  log(`Trên đường ở ${nm}, kẻ lạ giật mất ${it.n}. Ngươi phải mặc trung y về cung (Danh -${T.robDanh+T.robWalk}).`);
- Q.unshift({t:"Bị giật y phục giữa đường",kind:"notice",h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi mất ${it.n}, chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p><p>Nội vụ phủ sẽ cấp lại áo sau ${T.reissueWk} tuần; muốn sớm hơn thì mặc áo khác trong Tư trang.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
+ Q.unshift({t:"Bị giật y phục giữa đường",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi mất ${it.n}, chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p><p>Nội vụ phủ sẽ cấp lại áo sau ${T.reissueWk} tuần; muốn sớm hơn thì mặc áo khác trong Tư trang.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
   opts:[{n:"Về tẩm cung",fx:{},x:`Chắc chắn · (Danh -${T.robDanh+T.robWalk} đã mất trên đường)`,go:()=>{}}]});
  try{for(const v of liveRivals(true).slice(0,2))newsAdd(v,"ty",`Nghe nói ${S.name} bị giật y phục giữa đường, phải mặc trung y về cung`,true)}catch(x){}
  window.__tyGo=1;try{const a=window.__accSilent;window.__accSilent=1;goTo("home");window.__accSilent=a}finally{window.__tyGo=0}return true}
@@ -103,7 +103,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
 /* the omen: an enemy plans it; her people warn her (a card) — then night walks to lonely places are dangerous for omenWk weeks */
 function tyWeek(){const T=BAL.ty;let ev="";try{
  if(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.tyOmen&&S.tyOmen.until>=wk())){const E=tyEnemies(S);if(E.length&&roll(T.plotCh)){const v=pick(E);S.tyOmen={by:v.id,until:wk()+T.omenWk};
-   Q.push({t:"Điềm báo",kind:"notice",h:`<p class="past">${when()}</p><p>Cung nhân báo: mấy đêm nay có kẻ lạ lảng vảng quanh lối đi vắng, hỏi han giờ giấc ngươi ra vào.</p><p>Có người thấy kẻ ấy từng ra vào chỗ ${v.name}.</p>`,
+   Q.push({t:"Điềm báo",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>Cung nhân báo: mấy đêm nay có kẻ lạ lảng vảng quanh lối đi vắng, hỏi han giờ giấc ngươi ra vào.</p><p>Có người thấy kẻ ấy từng ra vào chỗ ${v.name}.</p>`,
     opts:[{n:"Đã rõ",fx:{},x:`Chắc chắn · kèm: ${T.omenWk} tuần tới đi đêm, qua nơi vắng dễ bị giật y phục (ở nơi đông người, đi ban ngày thì không sao)`,go:()=>{}}]})}}
  /* Nội vụ phủ issues a plain robe of her rank (a chest) */
  if(S&&!S.dead&&S.tyNvp!=null&&wk()>=S.tyNvp){S.tyNvp=null;const w=wdOf(S);if(!w.y){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(k&&WD_ITEMS[k]){S.inv=S.inv||[];S.inv.push({k,src:"nvp",nvp:1,giver:"Nội vụ phủ",d:typeof wdWhen==="function"?wdWhen():""});try{earnK(S,k)}catch(e){}
