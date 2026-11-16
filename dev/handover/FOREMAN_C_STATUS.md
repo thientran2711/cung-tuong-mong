@@ -7,7 +7,7 @@ Base main at start: 900ace7fb.
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | PASS f7c61f829 |
 | A7 cycle review | review/cycle @578384ce9 merged onto review/thaiy-r1 → review/cycle-r1 (jcycle last) | opus | RUNNING (reviewer) |
-| A8 cal-plus review | review/cal-plus @08c66800a → review/cal-plus-r1 | sonnet | RUNNING (reviewer) |
+| A8 cal-plus review | review/cal-plus-r1 | sonnet | PASS a151b4939 |
 | A9 promo-rules review | review/promo-rules @53b0084d0 → review/promo-rules-r1 (glow/crack → §68) | opus | RUNNING (reviewer) |
 | A11 cardflip review | review/cardflip @1daf0d9d4 → review/cardflip-r1 | sonnet | RUNNING (reviewer) |
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
@@ -20,7 +20,7 @@ Base main at start: 900ace7fb.
 | C8 fig-bg step 2 | review/fig-bg @21eb452d3 | sonnet | RUNNING (worker, silk scroll A) |
 | C9 huadian-size | review/huadian-size @230e3cf25 | sonnet | RUNNING (worker #2: det2.py ~85% boxes; hand-fix ~100 a18 boxes → mask shrink to 8.5% → sheets per tier/age → CDN; ~5700 files) |
 | D1 result-sfx | review/result-sfx @41899d048 | sonnet | RUNNING (resumed worker) |
-| D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | PAUSED (design + measure tools in PROGRESS; builds on j28 PERS; plan jtrong.js + BAL.trong, 5 Thái hậu archetypes, one greeting rule; resume next) |
+| D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
 | D-list rest (D2, D3, D6, D9, D11–D20, D22–D27, D44–D53) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
@@ -29,6 +29,7 @@ PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends
 
 PASS review/kit-popup-sample-r1 fa02fc6565575e284ad7dc1e0c8553cdfcdf400d (C18; descends from main 583858942; 5 pop-up samples on real kitModal, KIT §8; jkitpage.js conflict kept both samples)
 PASS review/thaiy-r1 f7c61f829ce0a2cc3653143685e4280977c819e2 (A6; descends from main 583858942; thaiy.js 49/49 at 5 viewports, coop-e2e 59/59; jthaiy after jty in assemble). Note: at top ranks the bạc road (12.5–15% of pay) is cheaper in feel than the 3-khắc/Sức-5 road → handed to C7 balance-pass bạc-equivalence scan, not a blocker.
+PASS review/cal-plus-r1 a151b4939fe4713fe10c80f09a3333dd4be5f25b (A8; descends from main 6298d2f55; month-cal.js 5 viewports + seal-events.js pass; note: month-cal 844x390 'desk overlaps' flake also on plain main 1/5 runs; seal once covered 280px2 at 844x390 in one run, 41 later dialogs clean)
 NOTE: review/cycle-r1 is built ON TOP of thaiy-r1 — fast-forward thaiy-r1 first (or just cycle-r1 when it passes, it contains both).
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
