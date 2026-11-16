@@ -420,7 +420,7 @@ picture rows by hand inside a dialog. Pick by the rule; never add a per-place / 
 | PERSON CARD (`pcard` §3 / 28.17 / 31.9) | `.modal.pcm` | the person card only (exempt from T1–T5) |
 | SLOT / ITEM CARD (28.13f `kitSlotDress`) | T2 inside the panel | an equipment slot / item detail |
 | NOTICE (42.2 `kitLine`) | one pill | a one-line passing notice; never a floating chip strip over the stage or the tab bar |
-| STAGE RAIL (§77 `kitStageRail`) | round icons, left edge of the stage | every shortcut button on the stage (Lịch, Chat, Mục tiêu); nothing else floats on the stage or over the tabs |
+| STAGE RAIL (§77 `kitStageRail`) | square icons, left edge of the stage | every shortcut button on the stage (Lịch, Chat, Mục tiêu) and every status icon (§77.1 `kitStatusIcon`: download, …); nothing else floats on the stage or over the tabs |
 Second-layer panels that must open OVER a #modal (item card `#kidfl`, co-op friend panel `#kctmp`, load panel) use the same `.dlg.kpanel`
 markup (kpHeader + kit ✕ + T1/T2 body) in their own layer. Scan: `node dev/test/kit-conform.js <url> <out.json> [WxH,...] [maxPend]` opens every
 panel kind + place cards + chapter detail + item card + every PEND dialog, classifies each CONFORMS / MIXED / CUSTOM by template, flags any loose
@@ -1871,7 +1871,7 @@ Tapping the label opens the kit option card (`j77Card`): the reason, Xin yết k
 WALK RULE (owner 11/15 01:35Z, `walkOk(tc)` / `walkWhy(tc)` in j9 — one rule for map, list, person-card visit/see, servant road): she may
 walk anywhere whose walk cost ≤ khắc left (never walk + 1). Arriving with 0 left is allowed: the tap first shows a kit card "Đường đi N khắc
 · đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi, ✕ to stay, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
-"hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" (+ lock mark; card reason "đi N khắc, còn M").
+"hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" and NO lock mark (owner-bug 16/11 18:30Z "chỗ nào cũng khóa hết", review/dudo-lock): the lock mark (`.mlock`) means ONLY that a rule keeps her out now (accessOf fails, cấm túc, lãnh cung); an open place that is just far (farther than the khắc left) gets ONE grey kit state: the same label greyed, no lock mark (`.mspot.awalk` map label, `.mtile.awalk` Danh sách tile; owner 16/11 "chỗ không đủ khắc thì cho nút màu xám", review/map-labels-2-b); it stays tappable and its tap card offers walk spill. Rule locks (`.agrey`) keep the normal label + lock mark + reason; nothing is grey at full khắc. Every "go there" button (map, list, person cards "Đến gặp" / "Đến cung nàng thăm" / "Đến chỗ hắn", generic data-go) reads ONE rule: `walkBlock(k)` (disabled reason) / `walkLate(k)` (arrives next buổi) / `walkGo(k)` (go now or spill), j9. Test: `GRID=1 node dev/test/dudo-lock.js dev/index.html` (lock mark = rule lock for every life × buổi × khắc; every far place reached by spill).
 WALK SPILL (owner 11/15 09:05Z, `walkSpill(k)` / `walkSpillGo(k)` in j9): a walk longer than the khắc left is NOT a dead end. The card
 says "Đi bây giờ thì đến nơi vào buổi chiều" (N and M in the 32.8 fact line) and offers "Đi (đến nơi vào buổi sau)" — "Tốn: M khắc buổi
 sáng + (N−M) khắc buổi chiều · Thành: đến nơi buổi chiều, thấy ai ở đó" — plus ✕ to stay (no separate "Đợi buổi sau" for this case). Going
@@ -2428,14 +2428,16 @@ Owner 11/14: images + sounds are downloaded to the device on first entry with a 
 - Screen `#kload.modal.kpscene.kload` = the `title` backdrop (`kitBackdrop(el,"title")`, KIT_BD, no new art) + ONE kit scene panel
   (`.dlg.kpanel.kpsc`, `kpHeader("notice","Cung Tường Mộng","Lần đầu nhập cung · thỉnh tranh vẽ, tiếng nhạc về máy")`): right column in
   landscape, bottom in portrait (section 14). Body `.klb`: one `kitProgress` + `.kpnote` lines (one-time note; size of the background set;
-  iPad/iPhone outside the home screen: "thêm vào màn hình chính"). Buttons `.kpopts` only when the line is cut/stalls:
+  iPad/iPhone Safari: see 35.1). Buttons `.kpopts` only when the line is cut/stalls:
   `.kbtn.alt` "Vào cung ngay" + `.kbtn` "Thỉnh tiếp". Fades out (0.45 s) when the essential set is in; z 9600.
 - `kitProgress({label,have,total,sub})` → `.kprog`: `h4.kpst` label · track `.kprog-t` (12 px, `--line` border, `--k-card2` ground, fill
   lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` "26 / 83 MB" (display font, `--gold`) · sub line `.kprog-s`
   (time left in words: "còn chừng nửa phút / một phút / N phút", "sắp xong"). Never "%" (VANPHONG); MB is the only unit.
-- Background indicator `.kloadchip` (bottom-left, z 8700, above nothing important): one `.kchip` button with a 64 px `.kprog-t` + MB;
-  tap = "Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp" (remembered); fades when done.
+- Background indicator = the status icon `dl` (§36.6 / §77.1, no chip): tap → info panel with `kitProgress` + "Tạm ngưng / Thỉnh tiếp" (remembered); still ✓ then gone when done.
 - Wording: "thỉnh" (bring in) for downloading; no tải/dữ liệu/phiên bản (VANPHONG §3).
+### 35.1 iOS/iPadOS Safari: choose-first notice (review/ios-install-first)
+A Home-Screen app on iOS has its own Cache Storage + localStorage, apart from Safari, so a download made in Safari is repeated in the app. In Safari (IOS && !standalone) with <50% of the core set cached and no earlier choice, `jload.js` shows the SAME `#kload` kit panel in mode "ask" and downloads NOTHING: `.kpnote` lines + stacked `.kpopts.ask` buttons: `.kbtn` "Thêm vào màn hình chính (khuyên)" (mode "guide": 3 numbered `.kpnote` steps, Share → "Thêm vào MH chính"; no download) · `.kbtn.alt` "Chơi luôn trên trình duyệt" (stores localStorage flag `ctm-ios-browser`=1, then the normal download with a line that the app will download again) · when a Safari save exists `.kbtn.alt` "Mở sổ mây trước (chưa thỉnh tranh)" (enter with no download and open Thiết lập › Sổ mây at once; notice returns next visit). Installed app, Android, desktop: unchanged. Test: `node dev/test/ios_install_first.js`.
+
 Mechanics (not visual): assets.json (dev/site/assets.py) = [path, sha256/16, bytes, core|fig]; cache `ctm-assets` keyed `path?h=hash`,
 never wiped by a build (sw.js prunes only keys no longer in assets.json); app shell in `ctm-shell-<content hash>`; co-op worker and every
 other origin bypass the service worker.
@@ -2444,9 +2446,8 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
 - sw.js is generated per build (`ctm-shell-<content hash>`); the page registers it (`updateViaCache:"none"`) and calls `registration.update()`
   on open, on every return to the foreground (visibilitychange / pageshow / focus / online) and every 20 min. New worker: skipWaiting →
   clients.claim → `controllerchange` → the build is pending. index.html is network first (`cache:"no-cache"`). `window.CTM_BUILD` = build id.
-- RULE: a new build NEVER reloads the page in the middle of play. While playing, the only sign is the chip `#kupdchip.kchip.kupdchip`
-  "Có bản mới" (gold border, small lacquer dot) on the top bar, right of her rank / age chips (under the date when that row is full; it never
-  covers another part of the bar; hidden while any dialog is open). Tap → card `#kupd.kupd` (bottom centre above `#tabs`, z 9700, ≤420 px):
+- RULE: a new build NEVER reloads the page in the middle of play. While playing, the only sign is the status icon `st-upd`
+  (§77.1 `kitStatusIcon`, glyph ⟳ placeholder + seal-red dot; no chip on the top bar, nothing next to her rank; hidden while any dialog is open). Tap → card `#kupd.kupd` (bottom centre above `#tabs`, z 9700, ≤420 px):
   `.dlg.kpanel[data-kind=notice]` + `kpHeader("notice","Có bản mới","Mở bản mới ngay?")` + `.kpnote` "Sổ đang chơi giữ nguyên, mở lại đúng chỗ.
   Để sau thì bản mới tự mở khi ngươi sang buổi." + `.kbtn.alt` "Để sau" · `.kbtn` "Mở bản mới".
 - The new build opens by itself only at a natural break: (1) after Sang buổi / Sang ngày mới, once the new buổi is written and its dialogs are read
@@ -2484,21 +2485,13 @@ the name sits left-aligned beside it and wraps inside its own cell; a list title
 
 ### 36.2 THẺ QUAN HỆ 3 CỘT — `kitRel3(face, rank, name, col, middleHTML, rightHTML, extra)` (`.krel3`)
 One card per person: LEFT = the kit portrait (`pcPort`, full column 120–170 px, the person-card frame) with rank (small, rank colour) over the
-name (never cut); MIDDLE = relation bars (`kitRelBar`, 36.3) + small notes + the act card that is possible there (e.g. Đến gặp);
+name (never cut); MIDDLE = the two-column relation box (`kitRel2`, §49.1) + small notes + the act card that is possible there (e.g. Đến gặp);
 RIGHT = "Đã biết" bullets (`kitKnownList(v)`: intel + notes, newest first, one fact per line, the person's own name dropped, source · date
 as a small dim line, max 4, then "Xem thêm N điều ›" → the intel panel). Container ≤ 560 px: the three blocks stack in the same card
 (portrait ≤ 180 px centred). Used by Giao tình › Ân oán for "Ngươi", for another consort, for Hoàng thượng and Thái hậu.
 
-### 36.3 RELATION WORDS (owner 05:15Z + 05:25Z) — subject + verb + object, both directions side by side, same bar
-`Nàng quý ngươi: <mức> · n` · `Nàng oán ngươi: n` · `Ngươi quý nàng: <mức> · n` · `Ngươi oán nàng: n` (role where natural: "Hoàng hậu quý ngươi",
-"Hắn quý ngươi"; unknown: "chưa rõ"). Mức (`quyW`): Ghét ≤ -30 · Không ưa < -10 · Bình thường ≤ 10 · Có cảm tình < 30 · Quý mến < 60 · Thân thiết.
-Labels are `kitGloss("Quý"|"Oán", label)`: a tap shows one line. Person cards (jk2b `kitPcGrid` chips, order: Nàng quý · Nàng oán · Ngươi quý ·
-Ngươi oán · Ghen), Ân oán rows, week-book "Hiện nay" rows and delta chips all use these words; the bare word "Thiện cảm" is never shown.
-
-- **Review 11/15 (signed bar, card columns):** "quý" (−100…100) and "Thái hậu thương" use `kitSignedBar(v)` (`.ksbar`): a track with a clear
-  midline at 0, the fill grows FROM the midline toward the sign (right green = liking, left red = dislike), length ∝ |v|; "oán" (0…100) keeps the
-  one-sided bar. A card with nothing for the right column is TWO columns (`.kr3two`), never an empty third column; the "Ngươi" card in another
-  person's view shows "Đã biết" about that person.
+### 36.3 RELATION WORDS (owner 11/16 15:00Z, replaces the 11/15 sentence + bar rules) — see §49.1 kitRel2
+Relations are TWO columns (that person → me | me → that person), short words Thiện cảm / Oán / Ghen / Sủng, number in its colour, no bars; the longer "Nàng quý ngươi: …" sentences are retired. Labels are `kitGloss` terms: a tap shows one line.
 
 ### 36.4 PORTRAIT BOX (owner 05:45Z "khung nhảy", "muốn đặt đâu là đặt") — person card left column
 - ONE box for every person and rank: the `.pcp.kit` cell at the full left-column width (left edge = the name/rank's left edge, width = the chips
@@ -2525,10 +2518,11 @@ every page), the text column on the right with the name (continuation: "(tiếp 
 (`paginate`, real heights) and continues on the next page only when really full; the figure never shrinks. Phones (page < 440 px): same, the
 text sits on a soft paper panel over the figure's edge. The filler "(Đã ghi vào mục Đã biết …)" never becomes a fact in the book.
 
-### 36.6 BACKGROUND DOWNLOAD CHIP (amends §35, owner 04:15Z) — never over the game
-While a life is on screen the chip lives in a reserved strip UNDER the tab bar: `body.kload-dock .game{padding-bottom:30px}` and the chip at
-the bottom-left inside it; only a dialog's own buttons lift it; it hides while the week book is open; when done it fades and the strip is
-given back. Title screen: the old placement. (Touches jload `placeChip`/CSS only; the first-load flow of review/cdn-images is untouched.)
+### 36.6 BACKGROUND DOWNLOAD = STATUS ICON (owner 16/11 16:25Z; overwrites the old chip / strip under the tab bar) — see §77.1
+No chip and no reserved strip any more (`body.kload-dock`, `.kloadchip` are gone: the game frame keeps its full height). The "Thỉnh tranh nhân vật" background
+download is ONE `kitStatusIcon` ("dl"): a small SQUARE icon in the stage rail (title screen: the same button in a bottom-left dock), a calm bobbing ↓ while it
+runs, still ✓ for 5 s when it is finished and then gone, a red dot when it is paused / cut. Tap → kit info panel (progress bar, what is coming, "Tạm ngưng /
+Thỉnh tiếp"; ✕ top-right, tap outside, Esc). (Touches jload `paintChip`; the first-load flow of review/cdn-images is untouched.)
 
 ### 36.7 NGƯỜI CHẠY VIỆC (owner item 2, was "Sai đi: …")
 One line on the cung nữ thân tín card only: `runnerLine()` → "Người chạy việc: <tên>" (tap: what it means) + "Đổi ›" when two or more servants
@@ -2695,7 +2689,7 @@ margin-bottom (falls back to `.ksub` when no bar). Before → after (scan rt/sca
 Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
 with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
 KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
-§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRelRow, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRel2, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
 error, no horizontal overflow, 0 page errors).
 
 _(Numbers: review/kit-fig2 used 37-40, then 42-45; main took 37-43 and tabs-kit 45-47, so kitNameRank = §48, Ân oán = §49, kitEventDp = §50; kitActCompact is main's §43 (one copy, the tabs-kit superset).)_
@@ -2784,16 +2778,13 @@ so the shop and a full person dialog share the same box; a two-choice visit is a
 (doable first). Test: `dev/test/fig-fill.js` (dialog size + fill), `dev/test/shop-fix.js`.
 
 ## 49. ÂN OÁN · RELATIONS (owner 11/15) — `dev/build/jhc.js`
-### 49.1 kitRelRow — ONE relation row everywhere
-`kitRelRow({kind:"quy"|"oan"|"pos", a, b, v, what, word, gloss, signed, max, good})` → `.krr`:
-- line 1 `.krrl` = "<A> → <B>: thiện cảm" / "…: oán" (player = "ta"), colour `KIT_REL`: purple `#7a4fa0` someone → ta, blue `#3f62a8`
-  ta → someone, ink `#6a5040` between two others; tap = the kit gloss (VANPHONG: Thiện cảm "có chịu giúp, kết giao với ta không",
-  Oán "mối hận vì việc ta đã làm, có muốn trả đũa ta không; nguôi dần mỗi tháng"). Thiện cảm and oán stay TWO stats.
-- line 2 `.krr2` = a grid [word · number (8.2rem, never wraps)] [bar (84 px)] → every row's bar starts and ends at the same x.
-  Thiện cảm (−100..100): `kitSignedBar` — midline at the centre, green fill right / red fill left, marker `.ksb-mk` centred on the bar.
-  Oán (0..100): `kitPosBar` — same size and place, fills from the left, no midline, marker at the value; word ladder `oanW`
-  (BAL.oanLv [5,20,45,75]: Không oán · Chút oán · Oán · Oán sâu · Oán hận). "pos" = sủng / ân tình (number, green).
-  Unknown value → "chưa rõ" + an empty bar in the same place.
+### 49.1 kitRel2 — ONE relation component everywhere (owner 11/16 15:00Z 4.6–4.8; replaces kitRelRow + the 3-column kitRelTable; bars are gone)
+`kitRel2([{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}, …], {week})` (jkrel.js) → `.kr2`: TWO column boxes side by side —
+LEFT = that person → me ("Nàng → ta", purple tab), RIGHT = me → that person ("Ta → nàng", blue tab); one box when only one direction exists (Hoàng thượng → ta: Sủng, Ân tình; Thái hậu → ta).
+Rows use SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Ân tình / Tin cậy; tap = kit gloss), the NUMBER in its meaning colour (thiện cảm > 10 green, < −10 red; oán/ghen ≥ 20 red; sủng green), NO bars, no mixed rows.
+`week:true` adds the "Hiện nay" and "Tuần này" columns, aligned inside each box (Tuần này = green/red change or "—"). Unknown value → "chưa rõ". Container < 260 px: the two boxes stack (left first).
+`kitRelTable(kitRelRows(p,snap),{head})` builds the two columns from the fixed rows of §52. Callers (the full list, all via kitRel2): Ân oán pair view (`relRows`, jhc), week-book person pages (j87), person-card "Lòng người với ta" (pcfRel), Gia tộc card (jkc), kit sample §49.1 / §52.
+Never draw a relation any other way; `kitRelDelta` (a change inside a sentence, §52) stays.
 ### 49.2 Picker + pair — "Xem quan hệ của X" · "với Y"
 Two strips = the Hậu cung pager strip (`pager`, j15: ‹ ›, N/M, selected highlight), groups Ta · Chí tôn · Phi tần (k61Hide still lists
 only consorts she knows by name), labels = the name only (`PG.rel`, `PG.relY`; an outside link that sets `relSel` still selects X).
@@ -2854,6 +2845,7 @@ Emperor's visits. It is the 32.7 person dialog:
 - RIGHT, bottom: the options as kit option cards (Được / Mất / odds), doable first; TWO per row when every option is short (≤ 2 rows,
   ≤ 70 characters), else one per row (`.opts.kdpo2`). Only the options scroll.
 - Height = content (32.7c), inside the standard person-dialog box.
+- Shop / care dialogs (`.kshopd`: pet shop, errand shop, pet care) carry the same banner; their body (`.kpmain`) starts in grid row 2 UNDER it and scrolls itself (review/care-overlap: it spanned rows 1 to -1 and the picture covered the bars / first tiles). Test: `node dev/test/care-scan.js <url> <WxH@dpr> <outdir>` (cases in dev/test/care-cases.js; add every new kshopd dialog there).
 `window.KIT_EVENT_DP=false` restores 32.6 (people on the picture) for a test. Test: `node dev/test/event-dp.js <url> <outdir> <tag> [sizes]
 [kinds]` (mock, long, nopic, emp: banner in the right column, focus, fill, chip above, option columns, empty space under the options).
 - Tap (owner 11/15): no visible label; TAPPING any seal (hers or an NPC's, any frame size) opens the kit popover `kpPop` (j79) with the mood
@@ -3003,16 +2995,11 @@ kitRelRows(person, snap)   // → the FIXED rows for that kind of person, same o
 //   kẻ hầu              : "<Nàng|Hắn> → ta: thiện cảm" · "Ta tin cậy"
 //   stranger ("Phi ???") or anyone else: one row "<…> → ta: thiện cảm" = "chưa rõ nàng nghĩ gì" (no numbers)
 //   row = {dir:"them"|"me", label, now:int, d:int|null, kind:"good"|"bad"}; snap = S.wkSnap (pp[id]=[rel,ghen,oan,ta→nàng], sp, sung, th)
-kitRelTable(rows, {head:true, dHead:"Tuần này"})   // → .krtw > .krt
+kitRelTable(rows, {head:true})   // → kitRel2 (§49.1): TWO column boxes, left = that person → me, right = me → that person; rows carry w (short word), sj, ob
 kitRelDelta(label, "them"|"me"|"none", d, kind)    // → .krd: one relation change inside running text (a fact line)
 ```
-- ONE grid for the whole table: label | **Hiện nay** | **Tuần này**. Every row shares the columns: numbers right-aligned on the same x
-  (±1 px, tabular figures), never wrap; labels wrap inside their column (min `min(8.5em,46%)`), never one word per line, never cut.
-- Label = direction colour (§11.2 `kitRel`, purple them→ta, blue ta→them), weight 600, written in the final words (`KIT_REL`, VANPHONG §1)
-  and marked `data-vp-skip` so the word fixer never makes "Nàng ta oán ta". Number = ink. Change = Được/Mất colour (green good for her,
-  red bad: more oán/ghen is red), "—" when nothing moved. Whole numbers only; negative with "−".
-- Narrow column (container < 240 px: phone pages): the label takes its own line, the two numbers stay in two aligned columns
-  under it (container query on `.krtw`).
+- TWO column boxes (owner 11/16 15:00Z): LEFT "Nàng → ta" (that person → me), RIGHT "Ta → nàng"; short words (Thiện cảm / Oán / Ghen / Sủng / Tin cậy), NO bars; inside each box the **Hiện nay** and **Tuần này** columns are aligned (numbers right-aligned, tabular, never wrap).
+  Number colour = meaning (§49.1); change = Được/Mất colour, "—" when nothing moved; whole numbers, negative with "−". Container < 260 px: the boxes stack. Words carry `data-vp-skip`.
 - `kitRelDelta` inside facts: the same look as a table row, no chip box, never wraps; between two other people (`"none"`) no direction
   colour ("thiện cảm +7"). The week book redraws every relation chip of a log line with it (`kbkRelInline`, j87), and the on-screen word
   fixer turns "thân ±N" into "thiện cảm ±N" everywhere.
@@ -3434,6 +3421,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   (h < 560, w/h > 1.5): card left of centre, chip on the right. Servant road, bots, `quiet`: no scene. No save state (old saves load).
 - Co-op: the friend's card is on the tray (her real eligibility); the scene waits while `COOPW.pend` so both players see it when the merged
   week arrives. Each player's pick is still rolled locally (protocol unchanged).
+- **KIT PART `kitEmpHand(handEl, cardEl, {still,time})` (§67b, review/flip-hand; owner 16/11 17:40Z: "bị nhỏ, bị cắt, giống như dán vào" → "có một người thò tay vào").** The ONE Emperor's hand: painted `cf-hand-emp` (sleeve + hand, no face), used by every scene where his hand appears (today only the card flip; any new scene calls this part, never its own hand). Markup `<div class="kcf-hand"><img class="kcf-hs"><img class="kcf-hi"></div>`. Rules: (1) size comes from the SCREEN (`BAL.cardFlip.hand`: ≥ `h` card heights, ≥ `minH` of the screen height, ≤ `maxH`), never a small sticker; (2) the sprite is turned `rot`° about the pinch point so the forearm runs straight up, and its height is raised until the two sprite edges that carry the sleeve (left edge rows 0..`cutL`, top edge columns 0..`cutT`, measured from the pixels) lie ABOVE the top of the screen → the arm always enters from the screen edge, no cut edge is ever visible, no fade-in; (3) motion = slide in along the arm (ease-out `reach`), a small touch-down dip (`press` card heights), rest until the card is picked, lift WITH the card by the same pixels (`lift`), leave the way it came (ease-in); (4) a soft blurred shadow (the hand's own silhouette, `.kcf-hs`, offset `shadow.dx/dy` of the hand height, wider while it is high) lies on the tray, and the picked card throws `.kcf-cs` (soft dark pad, offset 5/9 cqw) while it is up; all transform/opacity only, no extra WebGL, no filter animation. A longer sleeve or a different pose is an ART REQUEST to Foreman C (`Emperor hand + sleeve, long, cut-out`), never drawn here.
 - API: `kitCardFlip({deck:[{id,p,bar}],pick,turned,resHTML,onEnd})`, `cfDemo(n,barred,who)` (kit page §67 "Xem lật thẻ"), `cfGrid(n,W,H)`.
 - SMOOTHNESS + CALM (owner 16/11, review/cardflip-smooth; iPad "giựt" + "too fast"): (1) only transform / opacity / filter move; no `mask-image` on the moving
   box (edge fade = static `.kcf-vig` overlay), no soft-light blend of two full plates over the cards (= one static `.kcf-lamp` gradient); (2) plates + hand + seal are
@@ -3712,7 +3700,7 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
   taps through the hole only and never puts the card over the target; every other step takes all taps outside the card. Re-measured on
   resize, rotation, scroll and every 140 ms while open (the hole follows a target that moves: page turn, map unroll, re-render). No target =
   centred card on a plain dim. Reduced motion / Cảnh động off (`kmReduced`): no slide of the hole, no card rise.
-- `kitTip({id, title, html})` → `.ktip` above the tab bar (`#tabs` / `#next` / `.kloadchip`, like the "Có bản mới" card): small portrait,
+- `kitTip({id, title, html})` → `.ktip` above the tab bar (`#tabs` / `#next`, like the "Có bản mới" card): small portrait,
   1–3 sentences, one `.kbtn` "Đã hiểu". Only the card takes taps; it never opens over a dialog, the menu, a motion moment, the week book or a
   mini game (it waits), and a dialog that opens hides it until the dialog is gone. One at a time, 1.5 s apart, each id once per device.
 - **Lượt dẫn đầu kiếp** (`KTUT_STEPS`, "lời dặn n/12"): 1 **Game này chơi gì** (owner 16/11: "bạn tôi hỏi ủa game này chơi cái gì? Mục tiêu là gì?"):
@@ -3786,8 +3774,35 @@ SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình v
 - Sample: kit page §77. Test: `node dev/test/stage-rail.js <url> <outdir> [WxH,...]` (rail inside the stage, no button over a face box,
   no goal strip, no desk calendar, goal → detail with ✕ / Esc / outside close, calendar → LỊCH panel).
 
+### 77.1 kitStatusIcon · ONE status icon (owner 16/11 16:25Z, review/status-icons) — `dev/build/jstatus.js` (after jrail) on top of `kitStageRail`
+Owner: "nhiều game bây giờ … chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi biết là có cái gì đó đang
+download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon được thì mình cứ việc bỏ thôi."
+RULE: a status that only says "something is running / done / needs you" is NEVER a chip, strip or reserved band on screen. It is a status icon = the §77 square
+rail button + (optional) activity animation + tap → a kit info panel with the details.
+- API: `kitStatusIcon.set(id,{title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec, order})` · `.refresh()` · `.remove(id)`.
+  It registers a rail item `st-<id>` (rail extras: `glyph` text instead of a painted `icon`, `busy`, `done`, `onTitle`). Old saves: nothing stored.
+- Look/motion: the rail button as §77. busy = the glyph bobs ±3 px with opacity .55→1 (transform + opacity only, `calc(1.8s*var(--pace))`, no layout, no
+  JS timer; off under reduced motion / Hiệu ứng Gọn via `reducedMotion()` — static glyph then); done = still, green; badge = the seal-red dot (needs her).
+  No @media (KIT §0). While no game is on screen the rail items with `onTitle` sit in a fixed bottom-left dock (`.krail.kstdock`; hidden behind dialogs / the book).
+- Panel: `kitPanel({kind:"info",look:1,…})`; the only options are real actions (e.g. "Tạm ngưng / Thỉnh tiếp"); closing = ✕ / tap outside / Esc, never "Đã hiểu".
+- PLACEHOLDER GLYPHS (text ↓ ✓ ⟳) until Foreman C paints the icons: ART REQUEST: download icon, update icon (then `icon:"img/kit/….webp"`, no code change elsewhere).
+- Users: `dl` (Thỉnh tranh nhân vật, jload; own info panel) · `upd` (Có bản mới, swreg; `onTap` opens its own card §35.2). NOT status icons: co-op buổi clock `#kctm` + friend chip `#kctmf`
+  (jcooptimer; the countdown must stay readable — owner/coordinator ruling 16/11).
+- Sample: kit page §77.1. Test: `node dev/test/status-icon.js <url> <outdir> [WxH,...]` (idle → none; busy; paused dot; done ✓ then gone; panel ✕ / Esc / no "Đã hiểu";
+  no old chip / dock band; game padding-bottom unchanged; icon 44 px inside the stage, over no face).
+
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
+
+## 80. CO-OP CHAT "Thư từ" · kitChatBtn · kitChatPanel · kitChatList · kitChatBubble (owner 16/11, review/coop-chat) — `dev/build/jcoopchat.js` (after jcooptimer)
+Registry: §80 (KIT_NUMBERS.md). KIT REQUEST filed in KIT_REQUESTS.md (chat bubble + list part was missing; built here as a proper kit part, no private chat UI).
+- `kitChatBtn({unread, flow})` → `button#kchat.kchatb`: painted icon `img/kit/ico-chat.webp` (128 px, gpt-2-6 gouache: lacquer-red speech bubble holding a sealed letter with a plum blossom; 8 KB, CDN, on demand) + red count badge `.kchat-n` ("9+" above 9). Placed by the module on the LEFT of HER room scene (`#stage`, `S.place==="home"`, co-op only, never in solo, hidden under the title / freeze panel / dead). `flow:1` = in-flow (kit page).
+- `kitChatPanel({msgs, seat, name})` → kit panel markup (`.dlg.kpanel.kpsc[data-kind=notice]`, `kpHeader("notice","Thư từ","Truyền tin cùng <name>")`, the kit ✕ (32.10) in the header) inside `#kchatp.modal.kpscene` (z 9400, covers the screen; tap outside / Esc / ✕ close it back to the icon). Body = `.kchat-list` (`kitChatList`: `kitChatBubble` per line, mine right on cream-gold, friend left on paper; head = sender name + game-style time "hạ tuần, tháng 3 · Buổi chiều"; empty note "Chưa có thư nào…") + a row of the kit text box (`kitInput`, 300 chars) and the kit button `.kbtn` "Gửi". Enter sends.
+- Text is ALWAYS escaped (plain text only). Sender name = her character name at send time.
+- Arrival while the frame is closed: unread badge + lit icon (`.kchat-un`), shake (`.kchat-shake`) + §68 `kitFxBurst("glowburst")` + `kitFxLight("glow-gold")`, sound `kitSfx("notice")` (the sound kit's own OPT.snd / mute / hidden-tab rules). Gọn / reduced motion / bots: no shake, no particles, a still gold glow only. Away from her room: `kitLine("Có thư từ hảo hữu")` + sound.
+- Transport: PROTOCOL §10 (Worker `chat` message, last 50 per room, history in the `room` snapshot, unread = friend lines newer than localStorage `ctm-chat-seen-<room>`).
+- Tests: `node dev/test/coop-chat.js <out> [AxB@dpr] [BxH@dpr]` (two clients, live Worker) · `node coop/worker/test/chat.test.mjs` (server). Kit page: sample §80.
+- Rail (owner 16/11): the left of the stage is ONE icon column, `kitStageRail` (KIT §77). When `kitStageRail.add` exists, jcoopchat mounts the chat icon there (`add({id:"chat",icon:"img/kit/ico-chat.webp",title:"Thư từ",onTap,badge,glow})`, `pulse("chat")` on arrival, `remove` outside her room); the own `button#kchat` is only the fallback until §77 merges (no separate floating icon style stays after that: delete `kitChatBtn` placement then, keep the sample). Coordinator: re-point `ICON()` in dev/test/coop-chat.js to the rail item at merge.
 
 ### 50.2 kitPersonDlg — THE person pop-up for hosts outside #modal (owner 16/11 07:35Z + 07:37Z, OD:L448 / OD:L963; review/popup-fullbody) — `dev/build/jpdlg.js`
 - RULE: every pop-up where a person appears = LEFT the person's FULL-BODY figure (rank + name chip above), RIGHT TOP the event picture (landscape banner), below it the info, bottom the buttons. The small framed portrait (`.kpsubj` + pframe) is never used for a person pop-up. ONE event = ONE frame size for all its pages / steps.
@@ -3826,6 +3841,20 @@ HI-RES: for lg / xl a small painting `img/item-X.webp` (256) is requested as `im
 Not covered (own source functions, no item512 mapping): pet stage pictures, veil / mark pictures, wardrobe `wd-*` icons (`img/wd512/…` are already 512 where the call site passes them), the 22 items with no `item512` painting (list in reports/item-big.md → ART REQUEST). Tư trang grid (`slot`) and all lists (`sm` / `md`) keep their frame.
 SPLIT with 28.13f (main s14, 16/11, OD:L686): CENTRE displays — the receive / lose / reward NOTICES whose picture slot holds the item (`kind:"notice"` + `itemPic`: kitLose "Mất đồ", receive, reward; `.kpb.kphas > .kpsubj.kpitem`; jinv `kpBuild` skips `kitSlotDress` for them) show the ITEM ALONE, big (picture column `min(150px,38%)`), sharp, frameless. The bag / Tư trang item pop-up (`kinvOpen`), every `kind:"info"` panel with an item picture (gift, econ, veil, mark) and the equipment-slot cards stay COMPACT with the grade frame + ground (28.13f, owner "ĐIỀU · Ô cài tóc far too big"): `kitSlotDress` marks their item `kitem-fr` (frame on, 64 px header icon). Rule for new code: item alone in the middle of a notice = lg/xl frameless; item as a row/slot/card in a list or bag = md / slot / `frame:true`.
 Sample: kit page §28.13b. Test: `dev/test/item-big.js` (also the real "Mất đồ" notice box ≥ 120 px and the bag pop-up still framed).
+## 79. TÁT AS A SHORT GAME · kg82SlapBar · slapGame · slap tiers (owner 16/11, review/slap-mg) — `dev/build/jslap.js` (after jts) + `jface.js` (marks) + `BAL.slap` (jbal2) — KIT §79 (confirmed by the coordinator brief)
+- **Engine `slapbar`** (j82 `KG82_ENG`, kinds `tat` and `ne`): one needle swings over a bar, ONE tap, about 3 s (`BAL.slap.bar.ms` / `.dodge.ms`). `tat`: red zone = nặng (raw 10), amber = vừa (6), elsewhere or too late = nhẹ. `ne` (dodge): tap inside a green zone = dodged. Drawn with the j82 helpers only (`kg82Canvas`, `kg82Silk`, `kg82Lbl`, `kg82Pop`); no private CSS. `KG82.peek` serves bots; `window.__slapTap()` taps (tests).
+- **`slapGame({dodge, title, go, skip, skipSub, rows, onDone({raw, skipped})})`**: intro card = `tsRows` + two `.kbtn` (play / skip), then the game, then straight on. Bots skip. `slapTierOf(raw)` = 1..3.
+- **Her slap**: `doAct(i,"tat")` is wrapped: game first, then the normal act with `SLAP.next = tier`. "Tát luôn" = nhẹ (`BAL.slap.def`): a lazy slap is a light one, so a harder slap is a risk she chooses; a random tier would make skipping a free gamble.
+- **NPC slap on her** (`runAct(npc, S, "tat")` wrapped): tier rolled by rank gap (`BAL.slap.npc`), a `tsOpt` card "Né đòn" (dodge game, tier -1; nhẹ misses altogether) / "Chịu đòn". Skip = no dodge. Bots take the rolled tier.
+- **Marks** (kit face fx entry `tat`): `p.slap.sev` 1..3. Same `img/fx-slap.png`, darker per tier (`.kslap.s1/.s2/.s3` in the one face-fx stylesheet); nặng adds the painted `img/fx-slap-swell.png` (soft red swelling, no blood). Weeks, Sắc, Đức, grudge, Hoàng thượng / Thái hậu, evidence: all in `BAL.slap`. Old saves without `sev` read as nhẹ (facefx-all-r2 rule on main; reviewer r1). `slapGive(p, by, why, sev)`; `slapSev(p)`.
+- **Evidence**: vừa / nặng slaps may give the target or a witness a chứng cứ at once (`evT`, `evW`) and a mark that is still on may be reported later (`rep`, weekly, once per mark).
+- **Co-op**: acts on the friend go through the existing `runAct` path (deltas sent by jcoopworld); the tier rides on the same `res` message (`m.slap`) so the friend's face gets the same mark. No dodge in co-op (the friend's act is already resolved on the sender's side).
+- **r2 (review/slap-mg-r2)** — difficulty = the ONE tier system `mgTier` (jmgt, review/mg-balance): occasions `tat` (her slap, stakes by HER rank) and `ne` (dodge, stakes = the attacker's rank) in `BAL.mgTier.occ`; skill = Vũ (`KG82_F.tat/ne`, like Bắn cung). The engine reads `env.lv` as the ease 0..5; zones are TIME windows round the centre crossing (`BAL.slap.bar.redMs/amberMs`, `dodge.safeMs`, needle speed `w`, all by ease), so rates do not depend on the screen. Intro row "Độ khó" = `mgDiffTxt`. Dodge card odds = `BAL.slap.dodgeOdds[tier]` (measured).
+  First play of each kind: the j91 one-screen demo card (`k91DemoCard`, `S.mgSeen`); the clock starts after "Đã hiểu, bắt đầu". Idle `BAL.slap.hint[tier]` ms → the j91 hint glow (`k91Glow`) round the zone + the line says where to tap. Gọn / reduced motion (`kfStill`): no pops (the result is a still line), the glow is a still outline.
+  Painted parts drop in by file name (no code change): board + left picture `img/kit/mg-tat-bg.webp`, `mg-ne-bg.webp` (kg82Bg / kg82Pic), sprites `mg-tat-ruler`, `mg-tat-hand`, `mg-tat-zone-red`, `mg-tat-zone-amber`, `mg-ne-zone-green` (kg82Spr, `KG82_SPR.tat/ne`); until then kit silk + plain shapes, each missing file listed once in `CTM_MISSING_PICS` (kind "mg").
+  `kg82Pic` (whole family): a kind whose painting is not on the CDN (`KIT_CDNHAVE`) gets no picture column at all (was: a broken picture for ~2 s until the CDN retry gave up).
+- **r3 (reviewer, review/slap-mg-r3)**: the game no longer closes by itself (OD:L1261): the result row ("Kết quả: Tay nặng / Né kịp…") stays with the j82 end button `#kg82ok` "Đã hiểu" (the kit turns it into the frame ✕, OD:L331, same as every j82 game / playArt); only it closes and the act card follows. Game length words printed from `BAL.slap.bar.ms` / `dodge.ms` (`kitNumVi`, ONE CORE). Intro rows coloured by meaning (every tier costs Đức → loss colour, OD:L908). Hint line "Giữa thước đang sáng" = the glow ring. The NPC-slap result card carries the slapper (`who`, full-body person pop-up, OD 07:35Z).
+- Test: `node dev/test/slap-mg.js <url> <WxH[@scale]> <outdir> [N]` (met face + kslap s1/s2/s3 + kswell asserts, demo, glow, Gọn, tier vs rank, costs per tier, dodge flow, screenshots). Rates: `node dev/measure/mg-bots.js <url> tat,ne e0,e2,e5 skilled,casual,random 200` (anticipation bot).
 
 ## 82. TITLE SYSTEM PARTS · name tag in 3 lines, title plate, hiệu joined to the rank, title info card (owner 16/11 13:00Z / 13:15Z / 13:20Z; review/title-tag) — `dev/build/jtitle.js`
 RANK (Tần, Phi, Quý phi…) is NOT a title. Three things, three parts:
@@ -3856,3 +3885,15 @@ STATUS: sample sheets only (`kitSizeSheet(area)`, area = frames | buttons | long
   - (4) buttons: frame layout first, then its button area = grid (`kszBtnGrid3`): cell = what the widest SHORT (class S) button needs at its narrowest (title ≥ 6.5 em, chips never break; ≥ 140); cols = what fits; short buttons 1 cell, long (LS / LR) the cells for ≥ 280 (full row on narrow frames). THE one kit button `kszBtn` everywhere.
   - (5) items (owner 17:20Z): ONE MASTER = the XL item (frame + picture + Xa xỉ square box, `KIT_SIZE.item3`), scaled UNIFORMLY to L 104 / M 72 / bag slot (`kszItem3`, transform scale from 150): the Xa xỉ box keeps exactly the same place and size relative to the frame at every size (measured 0.747 / 0.027 / 0.227 of the frame at XL, L, M, slot); only its content changes (word + number at XL / L, number only at M / slot). Grade chip NOT scaled, centred on the bottom edge. S 52 dropped. Wear row: grade chip on the frame, no grade line.
 - Phase 2 (after OK) places: kpBuild / kitEventStage / kitDpFit / kitCompactCSS / kitSkillCard / jkpc compact cards; 67 "Đã hiểu" literals in dev/build/j*.js (jlost 8, jk4 5, jts 4, jkitpage 4, jtut 3, j77 3, …) to audit — only info frames lose the button (tutorial / scene-end buttons stay, OD:L1261).
+
+## 83. KIT MARKS (owner 11/16 15:00Z kit review, review/kit-marks) — gold imperial rank · text-line colour · ink-brush ✓/✗ · seals · place icon · grade chip
+- **83.1 Imperial gold (2.4)**: Hoàng thượng and Thái hậu rank + name = imperial gold everywhere, never black (`KIT_ROLE.emp/th` in j1 → `kitRankTone`; a person whose NAME is the title is painted as a title by `kitNameRank`, `.knr-only`). Glow only on paintings (§48.1h).
+- **83.2 Text lines (2.6)**: inside a sentence / list row the rank AND the name are the SAME rank tone (`kitNameTone`, j79 → `--rtn` on `.kname`); her own name (.kmy) and "ngươi" keep ink. Only on PAINTINGS the stage rule applies (rank tone + glow, name ink + gold glow).
+- **83.3 ✓ / ✗ (4.5)**: ONE bare ink-brush mark, no circle/box: `kitMark(ok)` → `.kmk.y|n` (SVG mask in the row's own colour; the glyph stays inside hidden so textContent is unchanged); `kitMarkPaint(root)` wraps every ✓ ✗ ✔ ✘ typed by older builders (same observer pass as kitRankPaint). `kitChecks` uses `.kchm` + kitMark. (The earlier in-game tick could not be found in the shallow history; this is a fresh brush stroke in the same spirit — owner to confirm.)
+- **83.4 Number deltas in the person card (4.11)**: no square boxes around +3 / −3 (the boxes in the catalogue were the sample's demo `.btn` triggers; now bare `.lnk` text). The number beside the stat is enough.
+- **83.5 KẾT QUẢ seal (5.2)**: amber-orange `#b8650a` (`.rtoast.sure .seal`), never grey.
+- **83.6 Grade chips (5.3, 5.4)**: ONE part `kitGradeChip(grade,{size,name,extra})`: normal size under the item name on the reveal card / detail / lists; `size:"sm"` = the grade tag over an item picture or in a tight row. Not two parts. 5.4 `kitGloom` = the demotion scene (old chip cracks, frame turns grey), shown once in the rank-down screen — now labelled on its sample.
+- **83.7 Place icon (5.6)**: `kitPlaceIcon` sits ABOVE the place name, centred: map chips, map tiles, the stage title (jact CSS `.ic.kplic{display:block}`).
+- **83.8 Kit sample page**: a sample may carry `where:"…"` (shown under its heading: where it is used + size). Samples 2.2 (§36.4) and 3.6 (§73) no longer render empty when the page opens before a game. Still erroring without a game (outside this branch): §58, §58.1, §58.3, §28.13e, §76. Tests: `node dev/test/kit-sample-probe.js <url>`, `dev/test/kit-marks.js <url> <out.jpg> <WxH@dpr> <ids>`.
+- **83.9 Danger button + kitConfirm** (kit request cloud-del / Foreman D): `.kbtn.kdanger` (charcoal with a cinnabar rim, same size as `.kbtn`, never lacquer red) for irreversible actions; `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` (j79) = centre pop-up on kitModal: the lines, optional type-to-confirm field (kitInput; the danger button stays disabled until it matches), the panel's own quiet button = no, `.kbtn.kdanger` = yes. Sample §83.9 on the kit page. Replaces the inline two-tap "Chắc chắn?" wherever the action deletes data.
+- **83.10 Mood mark on picture corners (owner 15:10Z 7.2)**: `.ksart-mark` is bigger: `clamp(46px,24%,88px)` (thumb 52 %).

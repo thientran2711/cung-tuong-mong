@@ -286,6 +286,20 @@ function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(
    if(h&&t0&&t0!==h){while(h.firstChild)t0.appendChild(h.firstChild);h.remove();if(e!==h&&!e.children.length&&!e.textContent.trim()){e.remove();continue}}
    if(e.parentElement===par)prev=e}})}
 function kitModal(spec){const m=kitPanel(spec,true);showModal();return m}
+/* ================= KIT 83.9 · DANGER BUTTON + kitConfirm (kit request cloud-del / Foreman D, s18) =================
+   `.kbtn.kdanger` = the button for an IRREVERSIBLE action: same size and shape as `.kbtn`, but charcoal with a cinnabar rim (never the lacquer red of `.kbtn`).
+   `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` = a centre pop-up on kitModal: the lines, optional "type <code> to confirm" field (kitInput; the danger button stays
+   disabled until it matches), `.kbtn.alt` no (the panel's own button) and `.kbtn.kdanger` yes. onYes runs once, then the pop-up closes. */
+function kitConfirm(o){o=o||{};const id="kcf"+(window.__kcf=(window.__kcf||0)+1),need=o.type?String(o.type):"";let done=false;
+ const body=`<div class="kcf" data-kcf-id="${id}">${(o.lines||[]).map(l=>`<p>${l}</p>`).join("")}${need?`<p class="kcf-t">Gõ <b>${need}</b> để xác nhận.</p>${typeof kitInput==="function"?kitInput({id:id+"i",label:"Xác nhận",placeholder:need}):`<input id="${id}i" class="kinput">`}`:""}<div class="kcf-b"><button type="button" class="kbtn kdanger" data-kcf-yes="${id}"${need?" disabled":""}>${o.yes||"Xóa"}</button></div></div>`;
+ window.__kcfH=window.__kcfH||{};window.__kcfH[id]=()=>{if(done)return;done=true;try{o.onYes&&o.onYes()}catch(e){console.error(e)}try{closeModal()}catch(e){}};
+ return kitModal({kind:"notice",title:o.title||"Chắc chắn?",sections:[{h:"",html:body}],btn:o.no||"Thôi",onClose:()=>{if(!done){done=true;try{o.onNo&&o.onNo()}catch(e){}}}})}
+window.kitConfirm=kitConfirm;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcf-yes]");if(b&&!b.disabled){const h=window.__kcfH&&window.__kcfH[b.dataset.kcfYes];if(h)h()}});
+document.addEventListener("input",e=>{const i=e.target;if(!i||!i.id||!/^kcf\d+i$/.test(i.id))return;const id=i.id.slice(0,-1),w=i.closest(".kcf"),need=w&&w.querySelector(".kcf-t b"),y=w&&w.querySelector("[data-kcf-yes]");if(y&&need)y.disabled=i.value.trim()!==need.textContent});
+(function(){const st=document.createElement("style");st.id="kit-danger";st.textContent=`html body .kbtn.kdanger{background:linear-gradient(#3a2d28,#241a16)!important;color:#ffe9dc!important;border:1px solid #d9482b!important;box-shadow:inset 0 0 0 1px #ff9c7a40,0 1px 0 #d9c49a!important}
+html body .kbtn.kdanger:disabled{opacity:1;background:#d8cdbd!important;color:#6b5643!important;border-color:#b9a98f!important;box-shadow:none!important;cursor:not-allowed}
+.kcf p{margin:.3em 0}.kcf-t{color:var(--k-lab,#8a7350)}.kcf-b{display:flex;justify-content:center;margin-top:.7em}`;document.head.appendChild(st)})();
 function kpKind(m){if(m.kit&&m.kit.kind)return m.kit.kind;const t=String(m.t||""),c=String(m.cls||"");
  if(/night/.test(c))return"night";if(/\bend\b/.test(c))return"end";if(/^Tin trong cung/.test(t))return"news";if(/^Tai mắt|báo tin/.test(t))return"intel";
  if(/^Kết quả|^Bị bắt|^Bị từ chối|^Được (yết kiến|mời)/.test(t))return"result";if(/ban thưởng|Ân thưởng|Bổng lộc/.test(t))return m.opts?"choice":/Bổng lộc|Ân thưởng$/.test(t)?"rule":"reward";
@@ -380,7 +394,7 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .kpst{margin:2px 0 0;font-family:var(--display);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--k-lab);border-bottom:1px solid var(--k-hair);padding-bottom:2px}
 .kpnote{font-size:.78rem;color:var(--dim);border-left:3px solid var(--k-hair);padding:2px 0 2px 8px}
 /* names, faces, chips */
-.kname{color:var(--rc,var(--ink));color:color-mix(in srgb,var(--rc,#2a1a12) 62%,#2a1a12);font-weight:700}.kname .kti{font-weight:600;font-size:.92em}
+.kname{color:var(--rc,var(--ink));color:color-mix(in srgb,var(--rc,#2a1a12) 62%,#2a1a12);color:var(--rtn,color-mix(in srgb,var(--rc,#2a1a12) 62%,#2a1a12));font-weight:700}.kname .kti{font-weight:600;font-size:.92em}
 .kname.kme{color:var(--ink)}
 .kchips{display:inline-flex;flex-wrap:wrap;gap:4px}
 .kchip{display:inline-flex;flex-wrap:nowrap;align-items:baseline;gap:3px;font-size:.76rem;line-height:1.25;padding:1px 7px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--dim);white-space:normal;overflow-wrap:anywhere;margin:1px 2px;vertical-align:baseline}
@@ -1174,8 +1188,32 @@ function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;co
   if(!last)continue;if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}
  return k}catch(e){return 0}}
 window.kitRankPaint=kitRankPaint;
-(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L)kitRankPaint(r)};
+/* ================= KIT 54.2 · THE INK-BRUSH MARK ✓ / ✗ (owner 11/16 15:00Z 4.5: "no circles around ✗ / ✓; the ✓ used in the game earlier looked nicer, mút mực") =====
+   ONE mark everywhere: a bare brush-stroke tick (green) / cross (red) drawn from an SVG mask in the colour of its text (no circle, no box, no chip behind it).
+   `kitMark(ok)` → `<span class="kmk y|n"><b>✓|✗</b></span>` (the glyph stays inside, hidden, so textContent / searches / screen readers read the same);
+   `kitMarkPaint(root)` (same MutationObserver pass as kitRankPaint) wraps every ✓ / ✗ / ✔ / ✘ character an older builder typed into text.
+   Colour: the mark inherits the colour of its row (met = --good, unmet = --bad); inside a neutral line .y / .n force green / red. */
+function kitMark(ok){return ok?'<span class="kmk y"><b>✓</b></span>':'<span class="kmk n"><b>✗</b></span>'}
+window.kitMark=kitMark;
+function kitMarkPaint(root){try{if(!root)return;if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return;if(root.closest&&root.closest(".kmk,script,style,textarea,input,option,select,[data-nomark]"))return;
+ if(!/[✓✔✗✘]/.test(root.textContent))return;/* play-time budget: most panels carry no mark at all, skip the walk */
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;return p&&/[✓✔✗✘]/.test(n.nodeValue)&&!p.closest(".kmk,script,style,textarea,input,option,select,title,[data-nomark]")?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const L=[];while(W.nextNode())L.push(W.currentNode);
+ for(const n of L){const v=n.nodeValue,f=document.createDocumentFragment();let last=0;v.replace(/[✓✔✗✘]/g,(m,i)=>{if(i>last)f.appendChild(document.createTextNode(v.slice(last,i)));const t=document.createElement("template");t.innerHTML=kitMark(m==="✓"||m==="✔");f.appendChild(t.content);last=i+1;return m});
+  if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}catch(e){}}
+window.kitMarkPaint=kitMarkPaint;
+(function(){const T="url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1.8 13.4c1.4-1.2 3.6-.8 5 1.2.3.4.6.9.8 1.3C10.4 11.2 15.4 5.4 22.4 2.4c-5.3 4.5-9.3 10.9-11.4 18.5-.4 1.4-2 1.7-2.9.5C6.5 18.2 4 15.7 1.8 13.4z'/%3E%3C/svg%3E\")",X="url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3.3c2.7.8 6.2 4.2 9.2 7.9 2.4 3 5.4 7.2 8.8 9.6-3.4-.4-7-3.6-9.8-7C8.3 10.7 5.3 6.6 3 3.3zM21 3.1c-2.8 2.9-5.6 5.8-8.1 9.3-2.4 3.3-5.3 6.2-9.4 8.3 2.5-3.5 4.7-6.7 7-10 2.4-3.4 5.4-6 10.5-7.6z'/%3E%3C/svg%3E\")";const st=document.createElement("style");st.id="kit-mark";
+ st.textContent=`.kmk{display:inline-block;width:1.05em;height:1.05em;vertical-align:-.2em;margin:0 .12em 0 0;background:currentColor;-webkit-mask:${T} center/contain no-repeat;mask:${T} center/contain no-repeat;font-style:normal;line-height:1}
+.kmk.n{-webkit-mask-image:${X};mask-image:${X}}.kmk>b{display:none}
+.kmk.y{color:var(--good,#2d7a52)}.kmk.n{color:var(--bad,#c23b22)}
+.g .kmk.y,.ok .kmk.y,.kok .kmk.y,.y .kmk.y{color:inherit}.r .kmk.n,.no .kmk.n,.n .kmk.n{color:inherit}`;document.head.appendChild(st)})();
+/* KIT 48.3b (owner 11/16 15:00Z 2.6): inside a TEXT LINE the name wears the SAME rank tone as its title (not a second shade): copy the title's --rt to --rtn on the name block;
+   `.kname{color:var(--rtn,…)}`. Her own name (.kmy) and "ngươi" (.kme) keep their ink. Painting captions keep their stage rule (higher-specificity CSS in jk4). */
+function kitNameTone(root){try{if(!root||root.nodeType!==1)return;const L=root.matches&&root.matches(".kname")?[root]:[];root.querySelectorAll&&L.push(...root.querySelectorAll(".kname"));
+ for(const n of L){if(n.style.getPropertyValue("--rtn")||n.classList.contains("kmy")||n.classList.contains("kme"))continue;const t=n.querySelector(":scope>.kti");const v=t&&t.style.getPropertyValue("--rt");if(v)n.style.setProperty("--rtn",v)}}catch(e){}}
+window.kitNameTone=kitNameTone;
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
  const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
   if(!q&&R.size)q=requestAnimationFrame(run)});
- const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body)};
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body);kitNameTone(document.body);kitMarkPaint(document.body)};
  if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();

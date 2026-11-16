@@ -73,7 +73,7 @@ function tmRoll96(k){if(!window.TM96_ON)return false;let f=null;try{f=localStora
  const os=P.map((x,i)=>x==="o"?i:-1).filter(i=>i>=0);P.splice(os.length>=2?os[1]+1:P.indexOf("st:tm96a")+1,0,"st:tm96b");
  const fi=P.indexOf("fin");P.splice(fi>=0?fi+1:P.length-2,0,"st:tm96c");
  for(let n=0;n<2;n++){const j=P.lastIndexOf("s");if(j>=0)P.splice(j,1)}
- c.max=P.filter(x=>x!=="fin").length;histAdd67("tm","tm96a")}catch(e){console.error(e)}return r}})();
+ c.max=P.filter(x=>x!=="fin").length;if(typeof f14Norm==="function")f14Norm();/* a 14-chapter life (jst14) keeps 14 */histAdd67("tm","tm96a")}catch(e){console.error(e)}return r}})();
 /* ---------- faces: a man's figure already drawn, the preferred identity if free (never reused), frame by his real role ---------- */
 MANSUB["thống lĩnh cấm quân"]=["guard","thive"];MANSUB["phó sứ nam chiếu"]=["envoy","suthan"];MANSUB["vương gia"]=MANSUB["vương gia"]||["prince","royal","vuonggia"];
 (function(){const r0=figRoles;figRoles=function(who){try{if(who&&who.tm96){const V=TM96V[who.tm96];if(V.fr==="official")return["official","man"];if(V.fr==="physician")return["man","physician"];return["man"]}}catch(e){}return r0.apply(this,arguments)}})();
