@@ -152,3 +152,9 @@
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | RUNNING | 16/11 11:06Z |
 | D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | RUNNING | 16/11 11:16Z |
 | design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
+| D12 mood-bar reviewer | review/mood-bar-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
+| nw-lantern reviewer | review/nw-lantern-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
+| nw-quiz reviewer | review/nw-quiz-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
+| D36 rank-port reviewer | review/rank-port-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
+| D11 presentation reviewer | review/presentation-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
+| D13 spread-events reviewer | review/spread-events-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
