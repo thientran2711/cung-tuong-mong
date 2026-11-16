@@ -20,7 +20,7 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
   const t0=Date.now();await p.evaluate(()=>{window.__bt&&clearInterval(window.__bt);let pid=1;window.__bt=setInterval(()=>{const pk=KG82.peek();if(!pk)return;const cv=document.querySelector('#kg82box canvas');
     const ev=(t,x,y,id)=>cv&&cv.dispatchEvent(new PointerEvent(t,{clientX:x,clientY:y,pointerId:id||1,pointerType:'touch',bubbles:true,isPrimary:true,cancelable:true}));
     if(pk.drag){const D=pk.drag;ev('pointerdown',D[0][0],D[0][1]);for(let i=1;i<D.length;i++)ev('pointermove',D[i][0],D[i][1]);ev('pointerup',D[D.length-1][0],D[D.length-1][1])}
-    else if(pk.hold){ev('pointerdown',pk.x,pk.y,++pid);setTimeout(()=>ev('pointerup',pk.x,pk.y,pid),45)}
+    else if(pk.hold){const id=++pid;ev('pointerdown',pk.x,pk.y,id);setTimeout(()=>ev('pointerup',pk.x,pk.y,id),45)}
     else if(pk.sel){const e=document.querySelector(pk.sel);if(e&&!e.disabled)e.click()}
     else if(pk.x!=null){ev('pointerdown',pk.x,pk.y);ev('pointerup',pk.x,pk.y)}},50)});
   while(Date.now()-t0<200000){if(await p.evaluate(()=>{const e=document.getElementById('kg82ok');return !!e&&KG82.phase==='result'&&!!document.querySelector('#kg82 .kit-x[data-kitx=ov]')}))break;await p.waitForTimeout(250)}
@@ -30,7 +30,7 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
    const ell=d?[...d.querySelectorAll('*')].some(e=>e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).textOverflow==='ellipsis'):false;const txt=d?d.innerText:'';
    return{over:o,ell,pct:/%/.test(txt),txt:txt.slice(0,300).replace(/\n+/g,' | '),last:KG82.last,hudOver:KG82.over||0}});
   let after=null;if(ok){await p.evaluate(()=>document.getElementById('kg82ok').click());await p.waitForTimeout(400);after=await p.evaluate(([k])=>({lv:S.vir[k],p:S.virp[k],log:(S.log||[]).slice(-1)[0],ov:document.getElementById('ov').hidden}),[k])}
-  const pass=ok&&!info.over&&!info.ell&&!info.pct&&!info.hudOver&&after&&(after.lv>before.lv||after.p>before.p)&&after.ov;
+  const pass=ok&&(!info.last||info.last.skipped||info.last.raw>=3)&&!info.over&&!info.ell&&!info.pct&&!info.hudOver&&after&&(after.lv>before.lv||after.p>before.p)&&after.ov;
   res.push({k,mode,pass:!!pass,raw:info.last&&info.last.raw,gain:info.last&&info.last.gain,over:info.over,ell:info.ell,pct:info.pct,hudOver:info.hudOver,after:after&&{lv:after.lv,p:after.p,log:String(after.log&&after.log.t||after.log).slice(0,90)},ms:Date.now()-t0});
   }catch(e){res.push({k,mode,pass:false,err:String(e.message).slice(0,200)})}await p.evaluate(()=>{try{if(document.getElementById('kg82'))kg82Close();TDS.busy=false}catch(e){}})}}
  console.log(JSON.stringify(res,null,1));console.log('page errors:',errs.length?errs.slice(0,5):'none');

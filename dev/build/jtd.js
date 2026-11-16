@@ -64,7 +64,7 @@ function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=td
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
 function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=.45+.04*lv,DUR=20,STEP=1.6,KN=12;
  const kicks=Array.from({length:KN},(_,k)=>({t:2.4+k*STEP,d:k%3===2?(Math.random()<.5?-1:1):(k%2?-1:1)*(Math.random()<.35?-1:1),m:.9+.4*Math.random()}));
- let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
+ let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,pend=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
  const good=kg82Col("--good","#2d7a52"),red=kg82Col("--red","#c23b22");
  const FY=H*.8,TOPY=H*.3;
  function draw(now){kg82Bg(g,W,H,"td_dung",.06,.6);g.textAlign="center";g.textBaseline="alphabetic";
@@ -83,17 +83,19 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEa
   g.fillStyle="#3a1a0c";g.font=`700 13px ${kg82Col("--body","sans-serif")}`;g.textAlign="left";kg82Lbl(g,"◀ giữ nửa trái đỡ bát sang trái",10,H-12,W*.45);g.textAlign="right";kg82Lbl(g,"giữ nửa phải đỡ bát sang phải ▶",W-10,H-12,W*.45);g.textAlign="center";
   if(dir){g.save();g.fillStyle="rgba(255,224,138,.22)";g.fillRect(dir<0?0:W/2,H*.2,W/2,H*.7);g.restore()}
   kg82DrawPops(g,pops,now)}
- function frame(now){if(stop)return;const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
+ function step(dt){t+=dt;
   while(ki<KN&&t>=kicks[ki].t){v+=kicks[ki].d*kicks[ki].m*1.1;ki++}
-  v+=(.55*x+dir*3.2)*dt;v*=Math.exp(-1.4*dt);x+=v*dt;
+  const eff=dir||pend;/* a tap shorter than one frame still counts for that frame */v+=(.55*x+eff*3.2)*dt;v*=Math.exp(-1.4*dt);x+=v*dt;
   if(Math.abs(x)>=1){spill++;x=0;v=0;stag=1;kg82Pluck(0,false);kg82Pop(pops,W/2,H*.5,"Bát nghiêng quá, đứng lại một nhịp",red)}
-  if(stag>0)stag-=dt;else if(Math.abs(x)<BAND)inB+=dt;
+  if(stag>0)stag-=dt;else if(Math.abs(x)<BAND)inB+=dt}
+ /* real-time clock: a slow frame (down to ~4 fps) is run as several small steps, so a laggy phone gets the same 20 s as everyone, never a clock that crawls past the shared 97 s guard */
+ function frame(now){if(stop)return;const dl=Math.min(.25,Math.max(0,(now-last)/1000));last=now;const n=Math.max(1,Math.ceil(dl/.034));for(let q=0;q<n&&t<DUR+1;q++)step(dl/n);pend=0;
   env.hud({score:`${Math.round(inB/DUR*10)}/10`,round:`Bước ${Math.min(ki+1,KN)}/${KN}`,time:`${Math.max(0,Math.ceil(DUR+1-t))} giây`});
   draw(now);if(t>=DUR+1){stop=true;return setTimeout(()=>env.end(Math.round(inB/DUR*10)),300)}raf=requestAnimationFrame(frame)}
  const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);dir=Math.max(-1,Math.min(1,d))};
- C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [px]=C.at(e);ptr.set(e.pointerId,px<W/2?-1:1);try{C.cv.setPointerCapture(e.pointerId)}catch(_){}setDir()});
+ C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [px]=C.at(e);ptr.set(e.pointerId,px<W/2?-1:1);pend=px<W/2?-1:1;try{C.cv.setPointerCapture(e.pointerId)}catch(_){}setDir()});
  const up=e=>{ptr.delete(e.pointerId);setDir()};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
- KG82.peek=()=>{const want=-Math.sign(x+.4*v)||1;const c=C.client(want<0?W*.25:W*.75,H*.5);return{hold:want,x:c.x,y:c.y}};
+ KG82.dbg=()=>({x,v,t,dir,inB,spill,ki,stag,n:ptr.size});KG82.peek=()=>{const want=-Math.sign(x+.4*v)||1;const c=C.client(want<0?W*.25:W*.75,H*.5);return{hold:want,x:c.x,y:c.y}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 
 /* ---------- 3. Ngôn: Ứng đối ---------- */
