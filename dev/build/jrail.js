@@ -7,7 +7,7 @@
    (2) Chat is added by co-op chat (review/coop-chat) through the API:
      kitStageRail.add({id, icon:"img/kit/….webp", title:"Tên", onTap:fn, badge:()=>bool, when:()=>bool, order:20})
      kitStageRail.remove(id) · kitStageRail.paint() (re-draw now; it also re-draws after every renderStage / render and on resize).
-   Kit look: the round kit button (card paper, gold hairline, soft shadow) with a painted icon; the badge = the kit seal-red dot.
+   Kit look: the square kit icon button (card paper, gold hairline, soft shadow) with a painted icon; the badge = the kit seal-red dot.
    Old saves load unchanged: S.goalSeen is new and optional. */
 (function(){try{
 const R=[];const byId=id=>R.find(x=>x.id===id);
@@ -38,13 +38,13 @@ add({id:"goal",order:30,icon:"img/kit/mo-edict-closed.webp",title:"Mục tiêu c
  onTap:()=>{S.goalSeen=gSig();if(typeof kitGoalDetail==="function")kitGoalDetail()}});
 const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krail{position:absolute;left:8px;top:44px;z-index:7;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.krailb{pointer-events:auto;position:relative;width:40px;height:40px;min-width:40px;padding:4px;margin:0;border-radius:50%;box-sizing:border-box;cursor:pointer;
+.krailb{pointer-events:auto;position:relative;width:44px;height:44px;min-width:44px;padding:4px;margin:0;border-radius:8px;box-sizing:border-box;cursor:pointer;
  background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8892b);box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),inset 0 0 0 3px var(--k-hair,#e6d3ac),0 2px 6px #0003;display:flex;align-items:center;justify-content:center}
 .krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .krailb:active{transform:scale(.94)}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
-@media (max-height:430px){.krailb{width:34px;height:34px;min-width:34px;padding:3px}.krail{gap:4px}}
+@media (max-height:430px){.krail{gap:4px}}
 `;document.head.appendChild(css);
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút tròn bên trái sân khấu (Lịch · Chat · Mục tiêu)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
  html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["mo-calendar","Lịch tháng",0],["ico-chat","Chat",0],["mo-edict-closed","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
