@@ -12,7 +12,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
 | C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn @11afc011 | sonnet | REVIEWING (review/room-btn-r1, resumed) — icons on CDN |
-| C29 rel-picker | review/rel-picker | sonnet | RUNNING (resumed) |
+| C29 rel-picker | review/rel-picker @ac064162 | sonnet | REVIEWING (review/rel-picker-r1, sonnet) |
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
 | C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING (resumed) |
 | C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
