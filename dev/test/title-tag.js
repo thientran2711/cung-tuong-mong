@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
 (async()=>{const PX=process.env.HTTPS_PROXY;const b=await chromium.launch(PX?{proxy:{server:PX,bypass:'127.0.0.1,localhost'}}:{});const R={errs:[],fail:[]};
  const [wh,d]=(SZ||'755x1000@2').split('@');const [W,H]=wh.split('x').map(Number);
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:!!PX});
- const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>R.errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();p.setDefaultTimeout(240000);await p.addInitScript(()=>{let a=0x2f6e2b1;Math.random=()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});/* seeded: same people every run */p.on('pageerror',e=>R.errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove()});await p.addStyleTag({content:'img.figimg,#mefig,#tokens .tok{animation:none!important}#kroul{display:none!important}'});
  await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;deal();render()});await sleep(800);
@@ -20,9 +20,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
  await p.screenshot({path:`${OUT}/title-stage-${wh}.jpg`,type:'jpeg',quality:75});
  await clean();await p.evaluate(()=>{tab='rv';render();window.scrollTo(0,0)});await sleep(2500);
  R.listPlates=await p.evaluate(()=>document.querySelectorAll('#panel .kdh').length);if(R.listPlates)R.fail.push('plate in list/cards');
- await clean();await p.evaluate(()=>{const L=liveRivals(true).filter(x=>!x.queen);const v=L[0];v.titleWorn="s8";S.met[v.id]=1;Q.push({t:"Có người đến",who:pv(v),stage:[v],headArt:{src:"img/ev-khach-den.webp"},h:`<p>${v.name} đến thăm.</p>`,opts:[{n:"Nhịn",fx:{duc:2},x:"giữ lễ",go:()=>{}}]});showModal()});
- await p.waitForFunction(()=>{const m=document.getElementById('modal');return m&&!m.hidden&&m.querySelector('.kpsn')},null,{timeout:30000}).catch(()=>R.fail.push('no dialog'));await sleep(3000);
- R.dp=await p.evaluate(()=>{const c=document.querySelector('#modal .kdpcap, #modal .kesf>.kpsn');if(!c)return null;const a=c.querySelector('.kdh'),r=c.querySelector('.kti, .knr-r');return{txt:c.innerText.replace(/\n/g,' / '),plate:!!a,order:a&&r?a.getBoundingClientRect().bottom<=r.getBoundingClientRect().top+2:null}});
+ for(let k=0;k<4;k++){await clean();await p.evaluate(()=>{const L=liveRivals(true).filter(x=>!x.queen);const v=L[0];window.__dpName=v.name;v.titleWorn="s8";S.met[v.id]=1;Q.push({t:"Có người đến",who:pv(v),stage:[v],headArt:{src:"img/ev-khach-den.webp"},h:`<p>${v.name} đến thăm.</p>`,opts:[{n:"Nhịn",fx:{duc:2},x:"giữ lễ",go:()=>{}}]});showModal()});
+  const ok=await p.waitForFunction(()=>{const m=document.getElementById('modal');return m&&!m.hidden&&[...m.querySelectorAll('.kdpcap,.kesf>.kpsn')].some(c=>c.innerText.includes(window.__dpName))},null,{timeout:15000}).then(()=>true).catch(()=>false);if(ok)break}
+ await sleep(2500);
+ R.dp=await p.evaluate(()=>{const c=[...document.querySelectorAll('#modal .kdpcap, #modal .kesf>.kpsn')].find(c=>c.innerText.includes(window.__dpName));if(!c)return null;const a=c.querySelector('.kdh'),r=c.querySelector('.kti, .knr-r');return{txt:c.innerText.replace(/\n/g,' / '),plate:!!a,order:a&&r?a.getBoundingClientRect().bottom<=r.getBoundingClientRect().top+2:null}});
  if(!R.dp||!R.dp.plate||R.dp.order===false)R.fail.push('dp plate '+JSON.stringify(R.dp));await p.screenshot({path:`${OUT}/title-dp-${wh}.jpg`,type:'jpeg',quality:75});
  await p.goto(URL+'#kit',{waitUntil:'domcontentloaded'});await sleep(6000);
  R.kit=await p.evaluate(()=>{const e=document.querySelector('[data-kit="§82"]');if(!e)return'no §82';e.scrollIntoView({block:'start'});return{plates:e.querySelectorAll('.kdh').length,over:e.scrollWidth>e.clientWidth+1}});await sleep(600);await p.screenshot({path:`${OUT}/title-kit-${wh}.jpg`,type:'jpeg',quality:75});
