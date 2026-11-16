@@ -1,3 +1,5 @@
+MANDATORY: read dev/PRIORITY_RULES.md in full (and dev/art/OWNER_ART_RULES.md in full for any art work) before anything else. Never summarise the owner's rules in a brief — point to these files.
+
 # FOREMAN C (quản đốc thứ ba, third account) — rules + assigned slice
 Owner (16/11, session 8): a third account runs Foreman C for the rest of the queue. Same rules as dev/handover/FOREMAN_B.md (read it: roles, how it works, model rule NO haiku / sonnet default / opus for rules-numbers-structure, max 12 agents, each ≤2 browsers; art workers fill free slots (owner 16/11), report ONLY in dev/handover/FOREMAN_C_STATUS.md, never push main, never edit OWNER_DECISIONS/SESSION8_QUEUE/FOREMAN_B files, never talk to the owner — questions go under QUESTIONS).
 NO DOUBLE WORK: take ONLY items listed below. Items of the main coordinator (session 8) and Foreman B are off-limits even if they look idle. If an item touches another slice's branch, coordinate via your status QUESTIONS.

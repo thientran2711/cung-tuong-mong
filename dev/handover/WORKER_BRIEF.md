@@ -1,3 +1,5 @@
+MANDATORY: read dev/PRIORITY_RULES.md in full (and dev/art/OWNER_ART_RULES.md in full for any art work) before anything else. Never summarise the owner's rules in a brief — point to these files.
+
 > **LANGUAGE (owner, 15/11 ~18:30Z):** all repo work files, PROGRESS, reviews, KIT.md, commit messages and reports are written in ENGLISH (saves credits). Player-visible game text stays Vietnamese (VANPHONG.md).
 
 > **KIT-FIRST RULE (LUẬT KIT TRƯỚC) (owner, 15/11 16:50Z, priority #1):** EVERY place showing info (chips, stat rows, relation lines, cards…) across the game comes from the standard kit. Workers do NOT write/draw their own styles. No kit yet → STOP, report to the coordinator → build the shared kit component + record it in KIT.md + kit sample page → only then use it. Reviewers FAIL every home-made chip/row.

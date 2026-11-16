@@ -1,3 +1,5 @@
+MANDATORY: read dev/PRIORITY_RULES.md in full (and dev/art/OWNER_ART_RULES.md in full for any art work) before anything else. Never summarise the owner's rules in a brief — point to these files.
+
 # FOREMAN B (quản đốc phụ, second account "Tam Thiếu") — rules + assigned slice
 Owner (16/11, session 8): open a second account, run a foreman there with at most 8 workers; workers report to the foreman; the foreman reports through this repo; the main coordinator (session 8+) checks every hour.
 
