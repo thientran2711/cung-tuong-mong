@@ -1,7 +1,7 @@
 # balance-core — report (worker session_01UV1Szkjt9soqZga18GCoey, opened by MAIN s26)
 
 START_CTX ≈ 4 % of the 1M window. Branch **review/balance-core** (base origin/main 08725411). Owner lines: OD 16/11 22:45Z, 22:50Z, 23:00Z, 23:05Z, 23:08Z, 22:10Z.
-Status: built + tested at **10fa43d4**; **ships only after the owner agrees to the OWNER PROPOSAL (§7)** (main shows it to her first).
+Status: built + tested at **7c581f8c**; **ships only after the owner agrees to the OWNER PROPOSAL (§7)** (main shows it to her first).
 
 ## 0. What the owner saw ("một cái tài lên 75 … chơi một xíu lên 100")
 Measured on main (dev/index.html, 12 starts per origin, probe + sens bot):
@@ -105,13 +105,14 @@ Odds = b + Σ w×stat + best-art bonus + trait fit (stealFit) + Emperor mood (mm
 | choice | b | stats | art × | win (beside the night) | lose | holder thiện cảm / ghen | Hoàng hậu |
 |---|---|---|---|---|---|---|---|
 | Tranh sủng (feign) | 34 | Sủng .35, Sắc .05 | .5 | — | Sủng −3, Đức −1 | −10 / +15 | 0 |
-| Chặn ngự giá (road) | 14 | Sắc .35, Sủng .05 | 1.5 | Sủng +6, Danh +2 | Sủng −5, Danh −2 | −25 / +30 | −4 |
-| Giữ chân (keep) | 35 | Sủng .3, Sắc .1 | 1 | success: every try against her −1 rung (`rungDown`); nobody took it: Sủng +2; robbed anyway: hit × 1.5 | — | | |
+| Chặn ngự giá (road) | 12 | Sắc .35, Sủng .05 | 1.5 | Sủng +6, Danh +2 | Sủng −5, Danh −2 | −25 / +30 | −4 |
+| Giữ chân (keep) `BAL.steal.keep` (names agreed with night-final) | base 35 | Sủng .3, Sắc .1 | 1 | success: every try against her −1 rung (`rungDown`); nobody took it: Sủng +gain 2; robbed anyway: hit × oan 1.5; npcP .5 (night-final tunes) | — | | |
 Best art: most points; Emperor's month art (S.emp.ea {f,d}, rolled monthly, his trait doubles the weight of the arts he prizes): favoured +odds[bậc] × 1, disfavoured −odds[bậc] × .75, other 0.
 Who knows the month art: Tai mắt ≥ 5 at the month start; else each week a rumour 5 + Tai mắt × 4 %; "dò được" via discover 35 %; NPCs the same (measured: she knows it ≈ 18 % of weeks with Tai mắt 0–1, NPCs ≈ 13–18 %).
-Measured on the real consort population (her + NPCs, 3 lives × 2 y, value of a night = 8 Sủng): **best choice Tranh sủng 58 %, Chặn ngự giá 37 %, Thôi 5 %**
-(before: Tranh sủng ≈ 96 %, same prize for both). Chặn ngự giá is best for 67 % when her best art is his favoured one, 35 % neutral, 20 % disfavoured.
-Odds 10/50/90 %: Tranh sủng 38/58/79, Chặn ngự giá 28/43/60, Giữ chân 41/60/80.
+Measured on the real consort population (her + NPCs, 2 seeds × 3 lives × 2 y, value of a night = 8 Sủng), road base 12: **best choice Tranh sủng ≈ 62 %, Chặn ngự giá ≈ 33 %, Thôi ≈ 5 %**
+(before: Tranh sủng ≈ 96 %, same prize for both). Chặn ngự giá is best ≈ 84 % of nights when her best art is his favoured one, ≈ 28 % neutral, ≈ 13 % disfavoured.
+(Tried: base 10 → 66/25, base 14 → 36/60.) Odds 10/50/90 %: Tranh sủng 39/57/75, Chặn ngự giá 27/42/58, Giữ chân 42/60/77.
+Fix found while measuring: my `bestArt` clashed with j1/j85 `bestArt()` (singer pick) → renamed `stBestArt`; earlier night numbers were re-measured after it.
 
 ## 6. Two-way, co-op, old saves
 - NPCs: same table (rstats → origSet), same ladder (addArtP, npcMonthly, npcStudy → crsPush), same growth curve (ap), same odds (oSteal/oKeep for everyone), same month-art knowledge rule.
@@ -148,9 +149,9 @@ Sắc, Tài, Tâm cơ càng cao càng khó lên (từ 40 chậm một nửa, t�
 | Người | Tranh sủng | Chặn ngự giá | Giữ chân |
 |---|---|---|---|
 | Tân nhân, Sủng 10, Sắc 75, Vũ Thuần thục — tháng ngài chuộng Vũ | Khó | Năm ăn năm thua | — |
-| như trên — tháng ngài không ưa Vũ | Khó | Khó (sát Liều) | — |
+| như trên — tháng ngài không ưa Vũ | Khó | Liều | — |
 | Sủng phi, Sủng 50, Sắc 60, Cầm Tinh thông — tháng thường | Năm ăn năm thua | Khó | Năm ăn năm thua |
-| như trên — tháng ngài chuộng Cầm | Khá chắc | Khá chắc | Khá chắc |
+| như trên — tháng ngài chuộng Cầm | Khá chắc | Năm ăn năm thua | Khá chắc |
 | Mỹ nhân, Sủng 25, Sắc 85, Vũ Xuất chúng — tháng ngài chuộng Vũ | Khá chắc | Chắc | — |
 Tranh sủng: dễ hơn, được ít, hỏng mất ít (Sủng −3, Đức −1). Chặn ngự giá: liều hơn, thắng thêm Sủng +6, Danh +2; hỏng mất Sủng −5, Danh −2; người bị cướp và Hoàng hậu giận hơn.
 Giữ chân Hoàng thượng thành: mọi người tranh đêm của nàng tụt một bậc phần thắng. Mỗi tháng Hoàng thượng có một môn chuộng, một môn không ưa; biết qua Tai mắt, lời đồn hay dò la.
@@ -162,10 +163,10 @@ Giữ chân Hoàng thượng thành: mọi người tranh đêm của nàng tụ
 - dev/test/balance-core.js (new): 38/38 PASS, 0 page errors (origins from table ×10, NPC origin, ladder 70–130 lessons, two-way lesson, old-save migration, growth both ways, feign rides Sủng / road rides Sắc, oKeep, rungDown, month art fav ↑ dis ↓, Tai mắt learning, road loss from BAL, word() reads BAL.lad, ARTFX prints BAL).
 - dev/test/night-steal-unit.js: 29/29 PASS (twice), 0 errors.
 - dev/test/balance-night.js (new): the §5 population measure.
-- quickcheck on 10fa43d4: QUICKCHECK PASS · open 1246 ms · old save ok · perf new/live render 217/238 ms, tab 306/337, buổi 789/959, long tasks 11/12.
+- quickcheck on 7c581f8c: QUICKCHECK PASS · open 1056 ms · old save ok · perf new/live render 231/208 ms, tab 275/238, buổi 939/668, long tasks 11/9 (earlier run on 10fa43d4: new faster than live on all four → box noise). balance-core.js 38/38 ×7 runs, night-steal-unit 29/29.
 - Not run: coop-e2e (live Worker) — the co-op change is two guard names in jcoopone; please run once at go-live.
 
 ## 9. Notes for night-final (review/night-final) and merge
-- nfOdds should call `oSteal(a,mode)` / `oKeep(p)`, apply `rungDown(o, BAL.steal.keep.rung)` to tries against a holder whose keep succeeded, use `stealFail(a,t,mode)` instead of `ap(a,{sung:-failSung})`+failTxt, and `keepNoSteal(p)` / `keepRobbed(p,winner,mode)`.
+- nfOdds should call `oSteal(a,mode)` (month-art bonus already inside) / `oKeep(p)` (or own keep formula + ctx.art = `stealArtB(who,mode)`), apply `rungDown(o, BAL.steal.keep.rung)` to tries against a holder whose keep succeeded, use `stealFail(a,t,mode)` instead of `ap(a,{sung:-failSung})`+failTxt, and `keepNoSteal(p)` / `keepRobbed(p,winner,mode)`.
 - Expected merge touch points with night-final: jbal2 (BAL.steal block — mine uses Object.assign after the original), j8 stealNight tail, assemble.py list (jbalcore before jcoopone, jnf placement theirs).
 - Scratch measuring scripts (not in git): probe.js (start values), fast.js (NPC loop), lessons.py (ladder simulation), night.js (= dev/test/balance-night.js).
