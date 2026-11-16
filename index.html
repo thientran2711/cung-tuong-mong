@@ -20750,6 +20750,10 @@ const KIT_EVFIT=[
  ["q-money","bac-tien",/Mượn tiền|gửi bạc|túng thiếu/i,null],
  ["q-hh","hh-viec",/Lời Hoàng hậu|Hoàng hậu giao/i,null],
  ["q-rescue","hinh-phat",/^Cứu .* khỏi/i,null],
+ ["q-memorial","trieu-chinh",/sớ|triều đình|Lục bộ|thượng thư/i,null],
+ ["q-leak","tai-mat",/làm lọt|tin của|dò la|nghe ngóng/i,null],
+ ["dread","am-muu",/^Hung tin/i,null],
+ ["rank-review","tan-phong",/^Xét phẩm/i,null],
  ["accused-theft","vu-oan",/^Bị tố ăn cắp/i,null],
  /* co-op: the friend in the palace */
  ["coop-friend","hao-huu",/^Hảo hữu (vào cung|tìm đến|nhận lời|từ chối)/i,null],
@@ -20814,7 +20818,7 @@ const KIT_EVFIT=[
  ["b-doctor","benh-tat",null,/thái y|bắt mạch|ốm nặng|phát sốt/i]
 ];
 function kitEvFitText(m){const P=s=>String(s||"").replace(/<p class="past">[\s\S]*?<\/p>/g," ").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
- return {t:P(m&&(m.kit&&m.kit.title||m.t)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(/(?<=[.!?…”])\s+/).slice(0,2).join(" ")}}
+ return {t:P(m&&(m.t||m.kit&&m.kit.title)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(/(?<=[.!?…”])\s+/).slice(0,2).join(" ")}}
 function kitEvFit(m){try{if(!m||typeof evArtCat!=="function")return null;const {t,b}=kitEvFitText(m);
  for(const [rule,g,tr,br] of KIT_EVFIT){if(tr&&!tr.test(t))continue;if(br&&!br.test(b))continue;if(!tr&&!br)continue;
   const G=typeof g==="function"?g(m):g;if(G&&typeof G==="object"&&G.src)return{art:G,rule};if(G&&evArtCat("cat:"+G))return{id:"cat:"+G,rule}}
@@ -28929,7 +28933,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa2f81514973";window.CTM_BUILD=BUILD;
+const BUILD="7f8e6f11baba";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

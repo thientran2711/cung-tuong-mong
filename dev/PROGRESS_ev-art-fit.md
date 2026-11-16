@@ -22,3 +22,40 @@ Owner 15/11: "Mệt ghê á. Mấy cái ảnh minh họa không liên quan gì c
 ## Not touched (owners)
 night pictures (review/night-end-r1: ksp/night1/night2/prep keep theirs; Kính sự phòng notices use the existing ngự giá group),
 option cards (review/opt-pics), act collisions (review/pic-dupes), Nhập cung (review/newgame-ui), week book lines (owner rule).
+
+## Before / after (dev/test/ev-art-fit.js: every dialog builder + 2 bot seeds × 6 steps; dialog showings)
+| | before (main f012058f3) | after |
+|---|---|---|
+| shows a picture | 400 | 2255 |
+| no picture (BÁO/TIN/KẾT QUẢ/VIỆC with rows only) | 1464 | 24 (look-ups, pick lists, Nhập cung, early race before EVENTS.json) |
+| gift box "Có người đến chơi" on a non-gift dialog | 41 | 0 (gift box = only gifts / rewards now, caption "Quà tặng, ban thưởng") |
+| room picture as event picture | 3 | 0 |
+| §59 placeholder | 7 | 7 → rules added for the last ones (Hung tin, sớ, làm lọt, Xét phẩm) |
+
+| event / dialog | before | after |
+|---|---|---|
+| VIỆC Lời cảnh báo (maid tip-off; owner screenshot) | Có người đến chơi (gift box) / j70thr court audience | Mật báo, lời cảnh báo (new ev-mat-bao) |
+| MẬT BÁO Tai mắt báo tin | portrait only / court audience | Mật báo, lời cảnh báo |
+| Có người đến · mỉa mai | gift box | Tranh chấp hậu cung |
+| Có người đến · xin lỗi / kể chuyện | gift box | Sang chơi, hàn huyên (tea table) |
+| Có người đến · mượn bạc / kết chị em / tặng | gift box | Bạc tiền (new) / Mật ước / Quà tặng |
+| Mưu hại / Sau vụ mưu hại / Thời cơ ra tay | gift box | Đầu độc / Hại thai / Vu oan / Âm mưu (new) by the kind of harm |
+| Phòng bị | gift box | Canh phòng cung (new) |
+| BÁO Hảo hữu vào cung / tìm đến / nhận lời / từ chối (co-op) | no picture | Hảo hữu trong cung (new) |
+| Biến cố / Hảo hữu ra tay · Tuần mới (co-op) | no picture | Âm mưu · Tin trong cung |
+| Bổng lộc tháng N | placeholder / Lãnh cung / Trừng phạt / Chuyện kẻ hầu (random) | Bạc tiền, bổng lộc |
+| Phụ tuyến · * without own art | Yến tiệc ("tuyến" read as "yến") | by meaning (bạc, Hoàng hậu, sớ, tai mắt…) |
+| Lời nhận xét / … chê dung nhan | Thỉnh an / gift box | toilette pictures by speaker × praise/blame |
+| Ban cung, Lễ tấn phong, Xét phẩm | ngự giá / Đại xá | Tấn phong |
+| Quốc tang | Hoàng thượng ngự giá | Quốc tang |
+| Lập công · Lễ Thân tằm / Chép kinh / Cứu giá / Tiến cử … | Thỉnh an / none | Tế lễ / Tế lễ / Cứu giá (new) / Triều chính … |
+| Thánh thượng / Thái hậu ban thưởng, Ngự tứ | portrait / Đại xá / Có người đến | Quà tặng, ban thưởng |
+| Hội phối đồ (· đề / · báo đề) | Điềm lành / Yến tiệc | toilette crowd / Việc Hoàng hậu giao |
+| Điềm lạ, Bị ép nộp của, Lần đầu gặp mặt, Đèn nến (jtsb) | the room she stands in | Chuyện lạ / Hối lộ, uy hiếp / Sang chơi / Hỏa hoạn |
+| pet events (ban thú, thu săn, biếng ăn) | the room she stands in | Quà tặng / Đi săn / Chăm thú nuôi |
+| Tin trong cung (no line matches) | Có người đến chơi | Tin trong cung |
+| Sắp tới: Yến tiệc đầu xuân / Thi tài Thất tịch | gift box / none | Tết Nguyên đán / Thất tịch |
+| Ra ngoài khi mặc trung y? (1208 showings) | placeholder | Y phục chưa chỉnh tề (toilette) |
+
+Shots (dev/test/ev-art-fit-shots.js, 755x1000 · 1180x820 · 844x390): Lời cảnh báo, Có người đến (mỉa mai), Hảo hữu vào cung —
+right picture + caption at all three, no horizontal scroll. dev/test/dialog-art.js: no Triều chính stand-in.
