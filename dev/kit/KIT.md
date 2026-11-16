@@ -340,7 +340,7 @@ the week summary (dawn) and the lesson overlay (`#ov .mg`). The person card moda
                          MẬT BÁO intel · CẢNH GIÁC threat · CHỨNG CỨ evidence · BAN THƯỞNG reward · TUẦN week · TÀI NGHỆ game
     .kptitle / small.kpsub
   #mb > .kpb[.kphas]
-    .kpsubj       ONLY when the panel is about a person: pframe (3:4 kit portrait) + rank-titled name. Never a room/place picture.
+    .kpsubj       the panel's SUBJECT slot: a person = the FULL-BODY figure column (.kpsubj.kes, §32.2 / §50 — owner 16/11 07:35Z, OD:L448: the small 3:4 portrait is NOT allowed for a person pop-up); an item / event / info picture = .kpiart / .kpev / .kpitem. Never a room/place picture beside a person.
     .kpmain       blocks: .kpsec (h4.kpst label + content) · .kfacts · .kb rows · .ktiers · .kchips · .kpnote
   .opts.kpopts    options = ACT CARD frame (section 6)
   #mr > .kbtn     the ONE button (lacquer red, gold ring); `.kbtn.alt` = quiet secondary
@@ -393,7 +393,8 @@ picture rows by hand inside a dialog. Pick by the rule; never add a per-place / 
 | T1 PANEL (§8) | `.dlg.kpanel` > `.kph` (seal + title + sub, kit ✕) + `#mb` > `.kpb` > `.kpmain` (facts / kitRows / tiers / chips / notes) + `.opts.kpopts` + `#mr` | any notice, rule, result, news WITHOUT a picture or person |
 | T2 EVENT FRAME (§8.2, = 6.2 / 32.2a "picture left, info right") | T1 + ONE picture LEFT `.kpsubj.kpiart(.kpev)` (kitSceneArt tall) + kit rows RIGHT; options BELOW as kit option rows (32.9) that scroll inside the frame | any dialog with a picture and NO person: events, place cards (32.8), chapter detail (72.3), item card (70.4), headArt notices. ONE picture only (`kitOnePic`, jk4: a headArt band is moved into the left slot) |
 | T3 PERSON EVENT (32.7 / 50 `kitEventDp`) | T1 + the person's figure column LEFT (`.kpsubj.kes`, 32.2a cap/crop) + ONE banner in the right column + text + options | an EVENT (VIỆC / BÁO / ĐÊM / KẾT QUẢ…) where a person acts or speaks. Never for an ĐIỀU / LUẬT info panel |
-| T4 PERSON INFO (§8 `subject`) | T1 + a 3:4 kit portrait `.kpsubj > pframe` + rank-titled name | a look-up panel ABOUT one person (Tâm trạng, Đã biết về X, Chứng cứ về X) |
+| T4 — RETIRED (owner 16/11 07:35Z, OD:L448) | a 3:4 portrait `.kpsubj > pframe` for a person | a pop-up ABOUT a person (ĐIỀU / LUẬT / NGƯỜI info, Chứng cứ về X) is now T3: figure column LEFT, picture right top, info, buttons. `dev/test/kit-conform.js` FAILS the small-portrait form |
+| T6 PERSON DIALOG OUTSIDE #modal (§50.2 `kitPersonDlg`, `dev/build/jpdlg.js`) | `.dlg.kpanel.kpdlg` = header + figure column LEFT + banner right top + text + buttons | the tutorial coach (LỜI DẶN), contextual tips, co-op / other overlays that are not #modal. ONE frame size for all of them: --kpw x --kph (tutorial pages, spotlight steps, tips) |
 | T5 IDENTITY (28.11) | `.kpb.kpid` | the Nhập cung identity card only |
 | OPTION ROW (6 / 6.2 / 32.9) | `button.ka` act card: picture left + Cần / Tốn / Được / Mất / Kèm rows | every choice inside any template; short ones 2 per row, long ones full rows |
 | PERSON CARD (`pcard` §3 / 28.17 / 31.9) | `.modal.pcm` | the person card only (exempt from T1–T5) |
@@ -688,6 +689,12 @@ the `.pcb` / `.rbtn` / `.kskacts` auto-fill grids won.
 - Test: `dev/test/pcard-actrow.js` (every person-card host × 5 design sizes: every act is a row ≥ 90 % of its group, one per line, no clipped child, equal
   treatment). Before/after table: `dev/test/pcard-actrow-table.md`. Kit sample page §47: "§6.3".
 
+### 6.3b PERSON CARD AT SHORT LANDSCAPE (844x390; main s11 item 4, review/kit-keeper-2) — `kitPcWide` (jk2b)
+One rule for EVERY person card (stage pop-up for maid / elder / consort / emperor, Hậu cung / Giao tình / Hoàng tự / Nhân sự tabs, the card in a dialog): when the screen is landscape and
+at most 520 px high (a phone sideways), the card is the TWO-COLUMN card whatever its container width (`kitPcWide` returns true and sets `--kpcw` = 92 px): name, rank, picture and info chips in the
+narrow left column (sticky, scrolls by itself when taller than the card), the acts (long rows, 6.3) in the right column starting at the card's top — the first act is on the first screen, never
+500 px down a stacked page. Wider screens are unchanged (container rule 31.18). Test: `dev/test/pcard-land.js` (every host: acts beside the picture, first act fully visible without scrolling at 844x390; other sizes: no horizontal overflow).
+
 ## 15. STAGE OVERLAYS (j79) — nothing on the stage covers a figure
 **15.1 Place subtitle (review/small-bugs-3):** the subtitle after the place name (`.stop .scene-t .rmsg`, "· Ở đây còn 1 người.") never shrinks under its
 longest word (`min-width:min-content`; the title row wraps): 390x844 direct mode set it one letter per line. Test `dev/test/small-bugs-3.js` wrap.
@@ -854,7 +861,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - Layout: two-page spread when the viewport is ≥ 900 px wide and landscape (iPad 1180x820, 1366x1024), the closed cover centred; one page at a
   time otherwise (Fold 755x1000, phones). Person page: portrait column `--por` beside name/chips/facts; under 440 px page width facts run full
   width below the portrait. Font scales with the page (`--fs` 13–17 px).
-- Turning (page-curl kit, §34): drag/swipe follows the finger with the WHOLE-SHEET turn (§34.0 `kitSheetTurn` via `kitCurl`: the sheet swings around the spine, both faces printed with their pages; `KIT_TURN_MS` 1300 ms);
+- Turning (page-curl kit, §34): drag/swipe follows the finger with the WHOLE-SHEET turn (§34.0 `kitSheetTurn` via `kitCurl`: the sheet swings around the spine, both faces printed with their pages; `KIT_TURN_MS` 800 ms);
   release past ~40 % or a flick completes, else it falls back. Tap the right/left page edge, the ‹ › buttons, ←/→/PageUp/PageDown, Esc = Lui.
   `prefers-reduced-motion` (or Cảnh động off): cross-fade instead of the turn. Soft paper sound with the Tiếng động slider.
 - Art: `img/book-cover.webp` (indigo thread-bound cover, title label strip: the title is written in it, word per line), `book-right.webp`
@@ -1675,8 +1682,7 @@ Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái
   same rule — the figure stays INSIDE its column (`.kbk-por` clips) on every screen, phones included, never scaled; the body (head centre)
   is centred in the column; train / hem / outer sleeve wider than the column is cut at the column edge with a 24 px soft fade. The old
   "train runs behind the text on a paper panel" (.kbk-figover) is retired. Test: `dev/test/book-figwide.js` (+ overText = figure px under the text, faceIn).
-- INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) keep the small 3:4 portrait (§8 .kpsubj); the stage column is for
-  EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) — kitEventStage returns early on those kinds unless the panel names its stage itself (`stage:[…]`: the Nội vụ phủ shop, pet care).
+- INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) show the FULL-BODY figure column like every other person pop-up (owner 16/11 07:35Z, OD:L448) — kitEventStage no longer returns early on those kinds.
 - MAIN ACTOR: the column shows the first person who is not the player (stage / who); the player stands there only when the event is about her
   alone (then as rank + name, never "Ngươi" — owner rule: rank and name always together).
 - TRUE PROPORTIONS (owner 15/11 "figure squashed"): a person picture is never scaled differently in X and Y. kitDpFit takes the aspect from
@@ -1730,6 +1736,15 @@ The picture is capped at 28vh (24vh under 1000 px wide); if the fixed part still
 compressed first (down to 14vh, `--kdpic`), figures scale with it. Dialogs without `.opts` (Đã rõ cards, person cards, identity /
 Luân hồi panels with `.kpscopts`) are unchanged. Shots: dev/shots/book-release/dlg/.
 
+### 32.5b THE TEXT AREA SCROLLS TOO — `kitDlgText` (jk4; review/kit-keeper-2, Foreman D finding D-R1 "long event text is clipped"; owner OD:L191 "in dialogs only the option list / text area scrolls")
+The event frame body `#mb` stays `overflow:hidden` on purpose (title `.kph`, picture / figures, buttons never scroll away) but it now has TWO scroll areas inside it, never more:
+the options list (`.opts`, 32.5) and the STORY TEXT (`.kpb > .kpmain`). `kitDlgText` (called by `kitDlgFit` after the picture compression) lets the text keep its natural
+height as long as the options keep at least min(their content, 42 % of the body, 96 px minimum); a longer text is capped to the rest (`max-height` on `.kpb`, class `kdtx` on the dialog) and
+scrolls INSIDE `.kpmain` (soft top shadow `.kdsh` once scrolled, same as the options). Nothing is ever clipped: a text taller than the frame is reachable by scrolling it, at every viewport.
+Person dialogs (`kdper`, figure column on the left, 32.7) are not capped: their whole right column scrolls (`.kdpall`, pcard-actrow) with the person pinned on the left.
+Dialogs without `.opts` (notices, results, news, rules, info) already scroll their whole `#mb` (§8).
+Family scan: `node dev/test/dlg-clip.js <url> <out.json> [WxH@dpr,…]` opens every kit modal and every PEND event dialog twice (own text, +long text) at the 5 sizes and FAILS on any text cut off by a clipping ancestor or a long dialog with no scroll area. Sample: kit page §8 "VIỆC DÀI".
+
 ### 32.6 PEOPLE ON THE PICTURE — event stage (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) — `kitEsOvFit` (jk4)
 When an event dialog has a place / event picture band (headArt or the event picture), kitEventStage puts the people ON it (`.kesov`):
 feet on the picture's floor line (86 % of its height), body height = KIT_FIG.h × picture height (kitFigBody, forehead to feet; men
@@ -1767,12 +1782,11 @@ week book j87, kitBookSpread, any future book). Never write a private turn.
    A live page turn (tab switch) and a single-page book turn are CLIPPED at the spine (`vanish`): the sheet lifts, stands up at the spine
    and is gone there — it never fades and never lies over the picture page (iPad) or off screen (phone). Checked mid-turn at 20/45/70 %
    on 755x1000@2, 412x1058@2, 1180x820@2, 1366x1024@2 (dev/shots/review/page-curl/).
-5. **Timing — ONE constant `KIT_TURN_MS` = 1300 ms** (jbook; owner 11/15 01:50Z "cho animation lật trang chậm lại": was 680–760 ms) for
+5. **Timing — ONE constant `KIT_TURN_MS` = 800 ms** (jbook; owner 11/15 01:50Z "cho animation lật trang chậm lại": was 680–760 ms, then 1300 ms; 16/11 KIT REQUEST C32b → 800 ms, the 1300 ms curl felt stiff) for
    every turn (tab switch, week book, book swap), ease `kitTurnEase` (slow lift, even swing, long gentle settle as it lands). A finger drag
    follows the finger; its release finishes in proportion. A new tap while a turn runs makes the running turn jump to its end at once, then
    the new one starts (fast taps never pile up, jam or leave a sheet behind). Only transforms (and the face shading) change per frame.
-6. **Input:** tab bar buttons, ‹ › buttons, keys, and a horizontal SWIPE on the page (left = forward / next tab, right = back) all turn the
-   page. The page swipe is ignored in the map, dialogs, form controls and anything that scrolls sideways (person strip, chips).
+6. **Input:** tab bar buttons, ‹ › buttons and keys turn the page everywhere; a horizontal SWIPE exists ONLY inside the Tuần lục book (`kitBook`: landscape curl following the finger, portrait paper slide). Nowhere else in the game swipes between tabs (owner 15/11): tabs change by tap, then the short tab-change animation of 34.0b plays. The page swipe is ignored in the map, dialogs, form controls and anything that scrolls sideways (person strip, chips).
 7. **"Cảnh động" off (`OPT.fxon=false`) or prefers-reduced-motion:** no turn animation at all — the page changes at once (short cross-fade).
 ```js
 const t=kitSheetTurn({host, front, back, under, w, h, x, y, p:0, ctx, vanish, shadeL, shadeR}); // spine = left edge at (x,y)
@@ -1783,6 +1797,13 @@ kitCurlSwap(el, fn, {dir, ms});   // live tab switch (#panel); kitCurlSwap.hold(
 ```
 Test: `node dev/test/sheet-turn.js <url> WxH@dpr <out> <tag>` (frames held with kitCurlSwap.hold, one #panel, no overflow, fast taps,
 swipe, Cảnh động off). Shots: `dev/shots/page-curl2/`.
+
+### 34.0b PORTRAIT = PAPER SLIDE, LANDSCAPE = CURL (owner 15/11 "Page turn only on landscape"; review/page-curl2-r1, C32; keeper text 16/11)
+One rule for every page change (tab switch via `kitCurlSwap`, Tuần lục via `kitBook`, any future book): `kitIsPortrait()` (orientation: portrait — phones and Fold portrait, one page on screen, no book to turn) → the page is a sheet of paper that SLIDES sideways (`kitSlideSheet`, called as `kitSheetTurn({…, slide:true})`, same host/front/back/under/set(p) API and same `.ksht*` classes, no new CSS; only transform changes per frame); landscape (book spread or a wide single page) → the whole-sheet curl of 34.0.
+- Durations: `KIT_SLIDE_MS` = 300 ms (portrait slide, ease `kitSlideEase` = ease-out cubic), `KIT_TURN_MS` = 800 ms (landscape curl, `kitTurnEase`). Both are read by every caller; a caller never passes its own number (`kitCurlSwap` `ms` is for tests only).
+- Gọn / "Cảnh động" off / reduced motion: no slide and no curl; a ~120 ms cross-fade (`kitCurlFade`, j87 `fade`).
+- Swipe: only inside `kitBook` (see 34.0 item 6).
+- Test: `dev/test/page-curl.js` (landscape curl frames use `KIT_TURN_MS`), `dev/test/sheet-turn.js`.
 
 ### 34.1 (HISTORY — superseded by 34.0 for page turns) kitCurl v2 corner fold, now `kitCurlFold` (owner 11/15 03:30Z)
 Owner refs `dev/owner-shots/1115-curl-ref-1.jpg`, `-2.jpg`: the CORNER lifts first and leads, the sheet folds on a DIAGONAL, tilts as it
@@ -3339,7 +3360,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   "Giữa đường, Hoàng thượng bị mời sang cung khác.") and who has the night. No flip → "Đêm nay Hoàng thượng không lật thẻ bài nào."
 - Wording (VANPHONG): Kính sự phòng dâng thẻ bài · Thẻ bài người không thể hầu giá được rút ra · Thẻ bài được dâng lên Hoàng thượng ·
   Hoàng thượng lật thẻ bài · Đêm nay ngươi được thị tẩm. · Thẻ bài của ngươi được lật. · Tối nay: <bậc> <tên> / được chọn hầu đêm nay.
-- Tap = final still, second tap = close; closes by itself (`hold`). Reduced motion / Cảnh động off = the final still only. Phone landscape
+- Tap while it plays = the final still; the scene never closes by itself or by a tap: it ends with ONE kit button `kitSceneEnd` (§81): "Chuẩn bị thị tẩm" when she is picked (`pick=="me"`), "Ta biết rồi" otherwise (owner OD:L1261, 16/11). Reduced motion / Cảnh động off = the final still only. Phone landscape
   (h < 560, w/h > 1.5): card left of centre, chip on the right. Servant road, bots, `quiet`: no scene. No save state (old saves load).
 - Co-op: the friend's card is on the tray (her real eligibility); the scene waits while `COOPW.pend` so both players see it when the merged
   week arrives. Each player's pick is still rolled locally (protocol unchanged).
@@ -3352,6 +3373,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   mutation for the many body MutationObservers while it moves); (7) reduced motion / Gọn (`kmReduced`) = final still only (unchanged).
   Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
   before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
+- REVEAL LIGHT ALONG THE FRAME + SLOWER (owner 16/11, review/cardflip-glow): the old reveal (`kitFxLight("glow-gold")` on the card + `kitFxBurst("glowburst"/"spark")` at 38% height) sat on the portrait and hid the face. Now `edgeLight()` (only caller: `showRes`) puts `BAL.cardFlip.edge.n` (14) painted gold glows (§68 `kitFxObj("glowburst")`, true alpha) on the frame ring's centre line (`edge.path`, fractions of the card) and circles them along it (`edge.lap` 4200 ms/lap, linear, until the scene closes); sparks (`kitFxSprite("spark")`) leave the frame edge going OUTWARD. Nothing is drawn over the portrait window. Gọn / reduced motion: the glows stand still on the ring. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
@@ -3681,3 +3703,29 @@ gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = 
 
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
+
+### 50.2 kitPersonDlg — THE person pop-up for hosts outside #modal (owner 16/11 07:35Z + 07:37Z, OD:L448 / OD:L963; review/popup-fullbody) — `dev/build/jpdlg.js`
+- RULE: every pop-up where a person appears = LEFT the person's FULL-BODY figure (rank + name chip above), RIGHT TOP the event picture (landscape banner), below it the info, bottom the buttons. The small framed portrait (`.kpsubj` + pframe) is never used for a person pop-up. ONE event = ONE frame size for all its pages / steps.
+- #modal dialogs get it from kitEventStage / kitDpApply (§32.7, §50). Overlays OUTSIDE #modal (tutorial coach `kitCoach`, tips `kitTip`, any future notice) call `kitPersonDlg({kind,title,sub,p,fig,name,pic:{src,lab},html,btns,})` and then `kitPersonDlgFit(root)`; nobody writes a second copy.
+- Size: ALWAYS the one pop-up frame (`--kpw` x `--kph`, §8.1) — tutorial pages, spotlight steps and tips are identical, and identical to every #modal person pop-up of the viewport (reviewer popup-fullbody-r1 #3, OD:L963). A spotlight card that cannot sit beside its target lies at the free edge; the rest of the target stays tappable.
+- Figure: kitStageFig (§32.2) laid by `kitPersonDlgFit` — the painted body (head-top .. feet) fills the figure column under the name chip, feet on the column floor, a wide hem / sleeve is cut by the column edge (kitFigBody; KIT_FIG ratio). Guide figure: `fig-mama-*` (`mmFig()` in jtut).
+- Narrow (< 600 px): figure column clamp(84px,32%,140px) beside the text (the #modal template stacks the figure on top there; a coach card that tall would cover the screen).
+- Tests: `dev/test/popup-fullbody.js` (every PEND person event, person info / news / result / night / intel / evidence, the tutorial pages + steps, a tip: FAILS a small portrait, a missing figure column, pages / steps of one event that differ in frame size) and `dev/test/kit-conform.js` (T4 small portrait = FAIL; tutorial pages / steps one size).
+- 50.3 DEFAULT BANNER (`kitDefaultBanner`, jk4): a person pop-up whose event has no picture of its own (ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / tai mắt / chứng cứ) still shows the picture RIGHT TOP: kitInfoArt of its title (info-*.webp / act-cat-*), else one act-cat picture per kind (KIT_KIND_BANNER). A person panel without an options group scrolls as a whole: its figure column is the visible height of #mb and sticks at the top.
+- popup-fullbody.js also FAILS: no picture right top, figure column / visible figure < 150 px, any person pop-up whose frame size differs from the viewport's frame (all kinds, tutorial pages / steps / tip).
+
+## 81. SCENE-END BUTTON — every animation scene ends with ONE short button (owner OD:L1261, 16/11 07:20Z; review/kit-keeper-2) — `dev/build/j93.js` (`kitSceneEnd`, `kitSceneEndLabel`, `kmStage`)
+RULE: no animation / scene closes by itself, and no scene closes by a tap anywhere. The scene plays (a tap during it = skip to its final frame, hint "Chạm để bỏ qua"); at the final frame the hint
+disappears and ONE kit button `.kbtn.kmend` (bottom centre of the scene, safe-area aware, 140 px min width, fades in) shows words that fit the event. ONLY that button closes the scene
+(the next queued scene starts after it). Never "OK"; never a second button in the same scene (scenes that already end with a list + their own button, e.g. the reward chest "Nhận", count as having it).
+Parts: `kmStage(cls,html,{end:"…"})` does it for every scene built on it (no `hold` auto-close any more); `kitSceneEnd(ov,label,onClick)` is the same button for a scene that is NOT built on kmStage
+(it removes the hint, adds `.kmend`, one button even if called twice); `kitSceneEndLabel(cls,o)` = `o.end` || class table `KM_END` || "Tiếp theo".
+Words (VANPHONG register): card flip lands on HER → "Chuẩn bị thị tẩm"; another consort picked → "Ta biết rồi"; promotion edict / demotion → "Đã hiểu"; birth / pregnancy → "Tiếp theo"; death → "Tiếp theo";
+anything else → "Tiếp theo" (information) or "Đã hiểu" (a rule / consequence). The caller may pass its own short words (`end`).
+Reduced motion / Gọn: the scene is shown at its final frame at once, the button is the same. The queue safety timer is now 10 min (a scene waits for her button).
+SCENES THAT MUST USE IT (list for the sweep, state at this commit): ON kmStage = DONE (button automatic): card flip km-tablet (j93 kitFlipTablet) · promotion edict km-edict (kitEdict) · demotion / cold palace km-gloom (kitGloom) · pregnancy / birth km-bloom (kitBloom) · death km-inkov (kitInk) · the big card flip scene `jflip.js` kitCardFlip (r1: `kitSceneEnd`, "Chuẩn bị thị tẩm" when it lands on HER, "Ta biết rồi" otherwise; CF.hold auto-close removed).
+STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-close): `jtoil.js` toilReveal (§60.5, auto zoom + "Chạm để đóng") ·
+`jpromo.js` kitPersonReveal + `kitReward` chest (manual: own "Nhận" — check wording per event) · item fly / reveal (`jitev.js` kitItemFx, `jkrev.js`) · level-up / skill reveal · festival and place-day scenes ·
+night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar (`kitCalendar`, dawn) · co-op scenes (`jcoop*`: buổi clock end, waiting-strip results) · the card-flip VIDEOS (`cardflip-videos`) · a `kitFlipNote`-like note is NOT a scene (no tap) and stays.
+The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
+Sample: kit page §81 (opens a real scene: the button shows after the animation and only it closes). Test: `dev/test/scene-end.js`.
