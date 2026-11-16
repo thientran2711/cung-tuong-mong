@@ -94,3 +94,12 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
+/* ONE CORE for festival contests (review/coop-contest-r1): read by j71 (solo), j8 festival(), j34 Tranh ghế and jcoopcontest (co-op), never typed twice.
+   gift (Dâng lễ, P): an NPC gift weighs rich (bạc >= richBac: richV, she pays cost) else max(min, Tài*kTai + Họa*kHoa + người hầu*kHelp);
+   her three gifts = [richV (ngọc quý, cost bạc), her own weight, plain]; every gift + luck*rand. praise/small to the best gift, miss if she gives none.
+   fxWin = the feast-contest winner (Yến tiệc đầu xuân / Thất tịch, j8 festival); fxGhen / winGhen = rivals' jealousy when she wins a feast /
+   a festival contest; giftGhen = when her gift wins; fxBestow / winBestow = odds (word ladder) of the Emperor's gift to the winner.
+   ctOan / ctGhen = Tranh ghế: Oán of each loser toward the winner; jealousy when she is crowned. */
+Object.assign(BAL,{fest:{gift:{richBac:100,richV:55,cost:60,min:15,plain:15,luck:25,kTai:.3,kHoa:8,kHelp:.8,
+  praise:{th:{th:4,danh:1},emp:{sung:3,danh:1}},small:{th:{th:1},emp:{sung:1}},miss:{th:{th:-2},emp:{sung:-2}}},
+ fxWin:{sung:8,danh:3},fxGhen:8,winGhen:4,giftGhen:3,fxBestow:50,winBestow:30,ctOan:10,ctGhen:10}});

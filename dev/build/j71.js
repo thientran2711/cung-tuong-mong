@@ -71,6 +71,12 @@ const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ng�
 function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
+/* ONE CORE (BAL.fest): the gift weights and the feast prize, read by solo (here, j8) and co-op (jcoopcontest) alike */
+function giftW7(v){const g=BAL.fest.gift;return Math.max(g.min,(v.tai||0)*g.kTai+aw7(v,"hoa")*g.kHoa+help7(v)*g.kHelp)}
+function gift7(v){const g=BAL.fest.gift;return (v.bac||0)>=g.richBac?g.richV:giftW7(v)}
+function myGifts7(){const g=BAL.fest.gift;return [g.richV,Math.round((S.tai||0)*g.kTai+aw7(S,"hoa")*g.kHoa+help7(S)*g.kHelp),g.plain]}
+function giftPay7(v){const g=BAL.fest.gift;if((v.bac||0)>=g.richBac)ap(v,{bac:-g.cost})}
+function pzd7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(" · ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */
 function fvPick(k,noC){const j=j7s(),L=FV7[k]||[];const ok=i=>{const t=L[i][0];if(noC&&t==="C")return false;if(S.thDead&&(L[i][1]==="th"||/Thái hậu/.test(L[i][2])))return false;if(t==="G"&&!liveRivals(true).some(v=>present7(v)&&(v.bac||0)>=25))return false;return true};
  let idx=[...L.keys()].filter(ok);const used=j.vu["f:"+k]||[];let pool=idx.filter(i=>!used.includes(i));if(!pool.length){j.vu["f:"+k]=[];pool=idx}
@@ -93,8 +99,8 @@ function det7(kind,p){return SC7[kind].by.split(", ").map(n=>ST7[n]?`${n} ${Math
 function cScore7(E,kindOf,prep,meB,her){return E.map(p=>{const kind=kindOf(p);if(p===S&&her&&her.score!=null)return{p,kind,t:Math.round(her.score),pr:0,lk:0,s:Math.round(her.score),mg:1};const t=Math.round(SC7[kind].f(p));let pr=0;if(p===S)pr=meB;else if(prep.includes(p.id)&&(p.bac||0)>=20){ap(p,{bac:-20});pr=J71.prep}const lk=Math.round(Math.random()*J71.luck);return{p,kind,t,pr,lk,s:t+pr+lk}}).sort((a,b)=>b.s-a.s)}
 function rowsH7(L,title){return `<p class="past">${title}</p>`+L.map((x,i)=>x.mg?`<p><b>${i+1}. Ngươi — ${SC7[x.kind].n}: ${x.s} phần tự chơi (đã cộng tài nghệ: ${det7(x.kind,x.p)}, và chuẩn bị)</b></p>`:`<p>${x.p===S?"<b>":""}${i+1}. ${x.p===S?"Ngươi":x.p.name} — ${SC7[x.kind].n}: ${x.s} phần = ${x.t} tài nghệ (${det7(x.kind,x.p)})${x.pr?` + ${x.pr} chuẩn bị`:""} + ${x.lk} may rủi${x.p===S?"</b>":""}</p>`).join("")+`<p class="past">Phần tài nghệ tính theo tài sắc thật của mỗi người vào ngày hội; may rủi từ 0 đến ${J71.luck}, như nhau cho mọi người.</p>`}
 function cRun7(k,kind,E,prep,meB,meIn,her){const L=cScore7(E.filter(p=>meIn||p!==S),()=>kind,prep,meB,her);
- if(!L.length)return"";const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}
- const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(roll(30))bestow(S,"contest")}catch(e){}}
+ if(!L.length)return"";const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}
+ const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
  const top=L.slice(0,3).map((x,i)=>`${["Nhất","Nhì","Ba"][i]} ${gn7(x.p)} (${x.s})`).join(", ");const mi=L.findIndex(x=>x.p===S);
  let me="";if(mi>=0){me=mi<3?"":` · ngươi hạng ${mi+1}/${L.length}`;if(mi===1||mi===2){apply({danh:1});me+=` · ngươi hạng ${mi+1}: Danh +1`}if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=", đứng chót: Danh -1"}}
  const head=w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${meIn?R7("Không thành:")+" ":""}${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`;
@@ -105,7 +111,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
  const fill=s=>s.replace(/\{A\}/g,A?A.name:"một phi tần");let o=[];let who=pEmp();let h=`<p class="past">${fn}</p><p>${fill(txt)}</p>`;
  if(t==="C"){const E=[S].concat(ents7(pp)),c=SC7[sub],pz=prize7(k);const p1=cOdds7(sub,E,pp.pr||[],0,pp.sd),p2=cOdds7(sub,E,pp.pr||[],J71.prep,pp.sd+7);
   h+=`<p>Chấm theo ${c.by}. Dự thi: ngươi và ${E.length-1} phi tần${(pp.pr||[]).length?`; ${(pp.pr||[]).length} người đã bỏ bạc chuẩn bị trước`:""}.</p>`;
-  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,kem=`kèm: thắng thì các phi tần ghen +4`,lose=`hỏng: đứng chót thì Danh -1`;
+  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,kem=`kèm: thắng thì các phi tần ghen +${BAL.fest.winGhen}`,lose=`hỏng: đứng chót thì Danh -1`;
   const run=(b)=>()=>{log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],b,true)}`)};
   o.push({n:`Dự thi ${c.n}`,fx:{suc:-6},x:`${word(p1)} · ${gain} · ${lose} · ${kem}`,go:run(0)});
   o.push({n:`Chuẩn bị kỹ rồi dự thi`,fx:{suc:-6,bac:-20},x:`${word(p2)} · ${gain} · ${lose} · ${kem}`,go:run(J71.prep)});
@@ -127,17 +133,17 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh +4, Sủng +2${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh -2`,go:()=>{if(roll(po)){apply({danh:4,sung:2});G.forEach(v=>relAdd(S,v,6));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
    if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm +4`)}, Danh +1`,go:()=>{relAdd(S,G[0],4);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
    o.push({n:"Không bày tiệc, nghỉ ngơi",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi nghỉ trong cung.`)}})}}
- else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const gift=v=>(v.bac||0)>=100?55:Math.max(15,(v.tai||0)*.3+aw7(v,"hoa")*8+help7(v)*.8);
-  const mine=[55,Math.round((S.tai||0)*.3+aw7(S,"hoa")*8+help7(S)*.8),15];const rv=R2.map(gift);
-  const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*25;if(rv.every(x=>x+r()*25<m))w++}return cl(Math.round(w/5),3,97)};
-  const praise=th?{th:4,danh:1}:{sung:3,danh:1},small=th?{th:1}:{sung:1};const tg=th?"Thái hậu":"Hoàng thượng";
-  const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25}));L.push({p:S,s:mine[i]+Math.random()*25});L.sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});const w=L[0].p;
-   if(w===S){apply(praise);ghenAll(3);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
+ else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const GL=BAL.fest.gift.luck;
+  const mine=myGifts7();const rv=R2.map(gift7);
+  const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*GL;if(rv.every(x=>x+r()*GL<m))w++}return cl(Math.round(w/5),3,97)};
+  const GF=BAL.fest.gift,praise=GF.praise[th?"th":"emp"],small=GF.small[th?"th":"emp"];const tg=th?"Thái hậu":"Hoàng thượng";
+  const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*GL}));L.push({p:S,s:mine[i]+Math.random()*GL});L.sort((a,b)=>b.s-a.s);R2.forEach(giftPay7);const w=L[0].p;
+   if(w===S){apply(praise);ghenAll(BAL.fest.giftGhen);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
   h+=`<p>${R2.length} phi tần khác cũng dâng lễ.</p>`;
-  o.push({n:"Dâng ngọc quý",fx:{bac:-60},x:`${word(odds(mine[0]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +3`,go:run(0)});
-  o.push({n:"Tự tay làm lễ vật (theo Họa, Tài, người hầu)",fx:{suc:-10},x:`${word(odds(mine[1]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +3`,go:run(1)});
+  o.push({n:"Dâng ngọc quý",fx:{bac:-GF.cost},x:`${word(odds(mine[0]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +${BAL.fest.giftGhen}`,go:run(0)});
+  o.push({n:"Tự tay làm lễ vật (theo Họa, Tài, người hầu)",fx:{suc:-10},x:`${word(odds(mine[1]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +${BAL.fest.giftGhen}`,go:run(1)});
   o.push({n:"Lễ mọn cho phải phép",fx:{bac:-10},x:`${word(odds(mine[2]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: không được gì`,go:run(2)});
-  const miss=th?{th:-2}:{sung:-2};o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25})).sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
+  const miss=GF.miss[th?"th":"emp"];o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*GL})).sort((a,b)=>b.s-a.s);R2.forEach(giftPay7);if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
  else if(t==="R"){const lead=S.rank>=4;const po=cl(Math.round((lead?50:35)+(S.duc||0)/3),10,92);who=S.thDead?pEmp():pTH();
   o.push({n:lead?"Đứng hàng đầu dâng hương":"Xin đứng hầu gần hương án",fx:{suc:-5},x:`${word(po)} · thành: Danh +3, ${S.thDead?"Sủng +2":"Thái hậu với ngươi +3"} · hỏng: sơ suất nghi lễ, Danh -2`,go:()=>{if(roll(po)){apply(S.thDead?{danh:3,sung:2}:{danh:3,th:3});log(`${fn}: ngươi hành lễ chu đáo, được khen.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: ngươi sơ suất trong lúc hành lễ, bị chê.`)}}});
   o.push({n:"Cúng dường bạc dầu đèn",fx:{bac:-15},x:"Đức +2, Lòng cung nữ +3",go:()=>{apply({duc:2,maid:3});log(`${fn}: ngươi cúng dường dầu đèn.`)}});
@@ -341,7 +347,7 @@ function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
   if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-6},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +4`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
+   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-6},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +${BAL.fest.winGhen}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),BAL.fest.winBestow),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0);if(L.length)cFin7(k,V[1],L)}}]};
   if(meIn)apply({suc:-6});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
@@ -357,13 +363,13 @@ function mgRun7(o){/* o: {title, art, E (incl. S), kindOf, pr, meB, done(L)} */c
  const fin=res=>{try{const sc=res&&typeof res.score==="number"?res.score:null;const her=sc!=null?{p:S,kind:o.art,t:Math.round(sc),pr:0,lk:0,s:Math.round(sc),mg:1}:cScore7([S],()=>o.art,[],o.meB)[0];const L=L0.concat([her]).sort((a,b)=>b.s-a.s);o.done(L,!!(res&&res.shown));showModal();render()}catch(e){console.error(e)}};
  try{startContest({art:o.art,artName:SC7[o.art].n,title:o.title,rivals:L0.map(x=>({id:x.p.id,name:x.p.name,face:pv(x.p),score:x.s,talent:x.t,prep:x.pr,luck:x.lk})),prep:o.meB,talent:Math.round(SC7[o.art].f(S)),talentBy:det7(o.art,S),luck:J71.luck,stakes:o.stakes,big:o.big,fk:o.fk,onDone:fin})}catch(e){console.error(e);fin(null)}}
 /* apply a finished contest (any source): prize to the winner, her rank effects, rows */
-function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(!cu&&roll(30))bestow(S,"contest")}catch(e){}}
+function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(!cu&&roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
  const mi=L.findIndex(x=>x.p===S);let me="";if(mi>0){if(mi<=2){apply({danh:1});me=` Ngươi hạng ${mi+1}: Danh +1.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=" Đứng chót: Danh -1."}}
  log(`${fName7(k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${R7("Không thành:")} ${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
  if(!shown)Q.push({t:`${fShort7(k)} · Hội thi ${SC7[kind].n}: kết quả`,h:rowsH7(L,`${fName7(k)} · bảng phần thi`),who:pEmp(),must:1})}
-function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,{sung:8,danh:3});const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&roll(50))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
- if(w===S){ghenAll(8);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3.`)}
- else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
+function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,BAL.fest.fxWin);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
+ if(w===S){ghenAll(BAL.fest.fxGhen);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}.`)}
+ else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(BAL.fest.fxWin)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
  if(mi>=0&&!shown)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1})}
 /* ---------- the old automatic feast contests (Yến tiệc đầu xuân, Thi tài ngày Thất tịch): now an invitation a month before, her talent of choice ---------- */
 const FX7={sac:{f:"xuan",n:"Yến tiệc đầu xuân",m:1,arts:["mua","hat","dan"]},tai:{f:"tt",n:"Thi tài ngày Thất tịch",m:7,arts:["dan","tho","kim"]}};
@@ -371,7 +377,7 @@ function fxBest7(p,A){let b=A[0],v=-1;for(const a of A){const x=SC7[a].f(p);if(x
 function fxOdds7(F,art,meB,seed){const E=[S].concat(liveRivals(true).filter(present7));const r=rng7(seed);let w=0;const N=500;const base=E.map(p=>p===S?SC7[art].f(S)+meB:SC7[fxBest7(p,F.arts)].f(p));
  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+r()*J71.luck;if(x>b){b=x;bi=i}}if(bi===0)w++}return cl(Math.round(100*w/N),3,97)}
 PEND.j71x=pp=>{if(!S)return null;const F=FX7[pp.kk];if(!F)return null;const n=liveRivals(true).filter(present7).length;const best=fxBest7(S,F.arts);
- const gain="thành: đứng đầu, Sủng +8, Danh +3, có thể được ban thưởng",lose="hỏng: đứng chót thì Danh -1",kem="kèm: ngày hội tốn Sức -6, đứng đầu thì các phi tần ghen +8";
+ const gain=`thành: đứng đầu, ${pz7(BAL.fest.fxWin)}, có thể được ban thưởng`,lose="hỏng: đứng chót thì Danh -1",kem=`kèm: ngày hội tốn Sức -6, đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`;
  const set=(a,pr)=>()=>{const j=j7s();j.fx=j.fx||{};j.fx[F.f]={y:pp.y,a,pr};log(a?`${F.n}: ngươi ghi tên dâng ${SC7[a].n}${pr?", bỏ bạc mời thầy kèm":""}.`:`${F.n}: ngươi không ghi tên.`)};
  const o=F.arts.map(a=>({n:`Ghi tên dâng ${SC7[a].n} (theo ${SC7[a].by})`,fx:{},od:fxOdds7(F,a,0,pp.sd),x:`${word(fxOdds7(F,a,0,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(a,0)}));
  o.push({n:`Dâng ${SC7[best].n}, bỏ bạc mời thầy kèm trước`,fx:{bac:-30},od:fxOdds7(F,best,J71.prep,pp.sd),x:`${word(fxOdds7(F,best,J71.prep,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(best,1)});
@@ -384,13 +390,13 @@ function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0
   const E=liveRivals(true).filter(present7);if(me)E.unshift(S);if(E.length<2)return "";if(me)me.done=1;
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
   if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-6},x:"đứng đầu, Sủng +8, Danh +3, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +8",go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:8,danh:3},50),done:(L,sh)=>fxFin7(title,L,sh)})},
+    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-6},x:`đứng đầu, ${pz7(BAL.fest.fxWin)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7(BAL.fest.fxWin,BAL.fest.fxBestow),done:(L,sh)=>fxFin7(title,L,sh)})},
      {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0))}]});return ""}
   if(me)apply({suc:-6});
-  const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,{sung:8,danh:3});if(roll(50))try{bestow(w,"contest")}catch(e){}
+  const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,BAL.fest.fxWin);if(roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);
-  if(w===S){ghenAll(8);r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
-  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+="Ngươi đứng chót: Danh -1. "}}
+  if(w===S){ghenAll(BAL.fest.fxGhen);r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}. `}
+  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(BAL.fest.fxWin)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+="Ngươi đứng chót: Danh -1. "}}
   if(me)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1});
   /* j54: married daughters come back, princesses perform (same as before) */
   try{const V=[];h54Daus().forEach(([k,p])=>{if(k.hW&&k.hW.kind!=="hoa"&&h54Live(p)){k.hM=cl(k.hM+2,0,100);if((k.hW.joy||50)>=40){ap(p,{sung:1});if(p===S)V.push(h54Name(k))}}});

@@ -428,8 +428,8 @@ function rivalsMonth(){let ev="";
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artW2(p,"vu")*6:(artW2(p,"cam")+artW2(p,"thi"))*3;
  const sc=C.map(p=>(k==="sac"?effSac(p):p[k])+art(p)+R(wet()?40:30)+(wet()&&k==="sac"?-artW2(p,"vu")*3:0));const wi=sc.indexOf(Math.max(...sc)),w=C[wi];
- ap(w,{sung:8,danh:3});if(roll(50))bestow(w,"contest");
- if(w===S){ghenAll(8);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
+ ap(w,BAL.fest.fxWin);if(roll(BAL.fest.fxBestow))bestow(w,"contest");
+ if(w===S){ghenAll(BAL.fest.fxGhen);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}. `}
  apply({danh:-2});return `<span class="r">${title}: ${w.name} chiếm hết phong quang, ngươi lu mờ.</span> Danh -2. `}
 function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}
 
