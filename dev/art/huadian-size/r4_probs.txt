@@ -1,0 +1,12 @@
+consort-c14 4 5
+maid-m48 5
+maid-m14 6
+maid-m34 7
+consort-c28 2 6
+consort-c02 2 5
+maid-m22 6
+consort-c25 4 5 6
+maid-m45 1
+maid-m47 3 6
+consort-c18 6
+maid-m43 5

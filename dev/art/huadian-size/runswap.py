@@ -9,7 +9,7 @@ from shrink2 import swap
 SWAP=json.load(open(os.path.dirname(os.path.abspath(__file__))+'/swap_map.json'))
 def process(path,name,src):
     m=re.match(r'por-(.*)-t(\d)-a(\d+)',name); st,t,a=m.groups()
-    rule=SWAP[st]; dn=f'por-{rule["donor"]}-t{t}-a{a}'
+    rule=SWAP.get(f'{st}-t{t}') or SWAP[st]; dn=f'por-{rule["donor"]}-t{t}-a{a}'
     info,_,an=runpor.process(path,name,src)
     if an is None or info['status'] in('suspect','nomark'): info['status']='swap_'+info['status']; return info,None
     dinfo,_,dan=runpor.process(f'{src}/{dn}.webp',dn,src)

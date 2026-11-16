@@ -31,7 +31,7 @@ def process(path,name,srcdir=None):
         bx=MAN_AGED[name]; win=(bx[0]-0.12*fw,bx[1]-0.12*fw,bx[2]+0.12*fw,bx[3]+0.10*fw); inner=bx; info0=dict(match=1.0,manual=1)
     else:
         n18=re.sub(r'-a\d+$','-a18',name); sc,k,bx=locate(f'{srcdir}/{n18}.webp',path,n18); info0=dict(match=round(sc,3),mk=round(k,3))
-        if sc>=0.50:
+        if sc>=float(os.environ.get("LOCMIN","0.50")):
             win=(bx[0]-0.04*fw,bx[1]-0.04*fw,bx[2]+0.04*fw,bx[3]+0.015*fw); inner=bx
         else:
             win,_=window(name,cx,ey,fw); inner=None
