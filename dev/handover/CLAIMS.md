@@ -44,3 +44,4 @@
 | C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | RUNNING | 16/11 05:58Z |
 | D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | session_01DgYSWnFEYrjgcFbBRjAWyc | RUNNING | 16/11 05:59Z |
 | promo-skip audit + fix (quest rewards → direct rank; prince → rank, princess → exam) | review/promo-skip | main s10 | session_01UV1SzhzQSFQc43nUVdpwAi | RUNNING | 16/11 06:20Z |
+| D52 review | review/skin-audit-r1 | C | (session id below) | RUNNING | 06:01Z 16/11 |
