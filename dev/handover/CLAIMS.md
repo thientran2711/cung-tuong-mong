@@ -360,7 +360,7 @@
 | kit-fit r2 keeper (opus): equal gaps week-book+identity, .kslot compact, card-flip labels | review/kit-fit | main s22 | session_01UV1SzmCjS3uEujA4xhcCKD | RUNNING | 16/11 19:15Z |
 | kit-size #4 keeper (opus): S = avatar frame (owner final), narrator = palace officials (BAL.staff.narrator), then phase 2 | review/kit-size | main s22 | session_01UV1SzhCYv882hXXmEVyBNE | RUNNING | 16/11 19:22Z |
 | fold-popw review r1 (sonnet) of 13c46a8e | review/fold-popw-r1 | main s22 | session_01UV1SzjQzaXE8hTNhdkom55 | RUNNING | 16/11 19:33Z |
-| percent-measure re-run (sonnet) | handover | main s22 | session_01UV1SzjbPtX1ynyRZgs7MvS | RUNNING | 16/11 19:35Z |
+| percent-measure re-run (sonnet) | handover | main s22 | session_01UV1SzjbPtX1ynyRZgs7MvS | DONE ~67 % xong | 16/11 19:35Z |
 | palace-voice (opus): expert brief, one address function, repetition pools, literary gain/loss | review/palace-voice | main s22 | session_01UV1SzgzYMEz8LE25rzybvi | RUNNING | 16/11 19:38Z |
 | lag-play-2 review r1 (opus, BIG perf+co-op) of d006dfdd | review/lag-play-2-r1 | main s22 | session_01UV1SzjyH2iaj5P368p1TBN | RUNNING | 16/11 19:40Z |
 | 10-night ledger BUILD (V3-B, reports/night-time.md; no player-only knob) | review/night-ledger | D | (D opens) | INBOX | 16/11 19:41Z |
@@ -370,5 +370,6 @@
 | coop-name-mask review r1 (sonnet, SMALL) of 48a942b2 | review/coop-name-mask-r1 | D | session_01DgYSWmQ9JPMfwpdYSLALUt | RUNNING | 16/11 19:50Z |
 | kit-size phase 2 keeper (opus) | review/kit-size | main s22 | session_01UV1Szir6A61kJEUGvE9Guz | RUNNING | 16/11 19:50Z |
 | stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | RUNNING | 16/11 19:49Z |
-| coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | RUNNING | 16/11 19:46Z |
+| coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | DONE (reports/coop-contest-check.md) | 16/11 19:46Z |
 | mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | session_01N1tNP4ZB3MEyANJVvpH6Ba | RUNNING | 16/11 19:52Z |
+| coop-contest-fix (opus, BIG co-op; owner Q 19:52Z; plan = reports/coop-contest-check.md Recommendation) | review/coop-contest | main s23 | (opening) | RUNNING | 16/11 19:54Z |
