@@ -165,3 +165,17 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* DANH HIỆU (jdh, owner 16/11 13:00Z/13:15Z/13:20Z/13:25Z D, review/title-sys): achievement titles. n0 = the counts that open the 3 steps of a title
+   (owner: 1 / 5 / 10 times = the same name, a higher colour tier); step = tiers added per step (tier = b + i*step, max 8). T[id] = per title:
+   b base tier (1–8), n its own counts when not n0, st its own step, fx = the stat it gives ONLY while worn, per step ([key,[s1,s2,s3]]; sac via
+   wearBonus, danh/sung/duc applied on wear and taken back on removal). artLv = the art level counted by the mastery titles. Phase 2 knobs (hiệu by
+   the Emperor, confiscation, atonement) are planned in dev/PROGRESS_title-sys.md, not used yet. */
+BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
+ T:{w_doden:{b:3,fx:["danh",[1,1,2]]},w_tho:{b:3,fx:["danh",[1,1,2]]},w_doi:{b:3,fx:["danh",[1,1,2]]},w_dan:{b:3,fx:["danh",[1,1,2]]},
+  w_mua:{b:3,fx:["sac",[1,1,2]]},w_hat:{b:3,fx:["sac",[1,1,2]]},w_theu:{b:3,fx:["danh",[1,1,2]]},w_kim:{b:3,fx:["sac",[1,1,2]]},
+  w_hoa:{b:3,fx:["sac",[1,1,2]]},w_ve:{b:3,fx:["danh",[1,1,2]]},w_co:{b:3,fx:["danh",[1,1,2]]},w_banh:{b:3,fx:["sung",[1,1,2]]},
+  w_ban:{b:3,fx:["danh",[1,1,2]]},w_dauho:{b:3,fx:["danh",[1,1,2]]},w_huong:{b:3,fx:["sac",[1,1,2]]},
+  meta:{b:6,st:1,n:[3,6,10],fx:["sung",[1,2,3]]},podium:{b:2},nights:{b:2,n:[1,10,30],fx:["sung",[1,1,2]]},kids:{b:3,n:[1,3,5],fx:["danh",[1,2,2]]},
+  a_thinh:{b:1,n:[5,20,50],fx:["duc",[1,1,2]]},a_doc:{b:1,n:[5,20,50]},a_nhan:{b:1,n:[5,20,50],fx:["sac",[1,1,2]]},
+  l_cam:{b:2,st:1},l_ky:{b:2,st:1},l_thi:{b:2,st:1},l_hoa:{b:2,st:1},l_vu:{b:2,st:1},l_y:{b:2,st:1},l_theu:{b:2,st:1},l_nau:{b:2,st:1},
+  m_mon:{b:1,fx:["sung",[1,1,2]]},m_kinh:{b:1,fx:["duc",[1,1,2]]},m_theu:{b:1},m_tranh:{b:1},m_khuc:{b:1}}};
