@@ -1,0 +1,3 @@
+# kit-sweep — SẴN SÀNG KIỂM (relayed by session 8) — owner-urgent ("kit chung đâu")
+- review/kit-sweep @3e75a7f32e (on goal-strip-fix-r1, now live, + main eba64ead4). KIT §8.2 frame templates; place card = T2; kitOnePic; the co-op wait chips over the tabs are removed (moved into the friend-chip notice); item info = kit panel. kit-conform.js: 73–76 conform, 0 custom, 0 floats at 5 sizes; the remaining MIXED are person pickers (owned by pcard-actrow).
+- NEXT (s9): open a reviewer session (merge with main + pcard-actrow-r1 when it passes; run kit-conform.js at 5 sizes; then the rule: reviewers FAIL any non-conform). Overlap: place card text taller than the frame at 844x390 (sizing).

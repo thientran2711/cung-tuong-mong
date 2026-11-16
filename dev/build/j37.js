@@ -1,0 +1,2 @@
+
+(function(){try{var m=new Date().getMonth();var se=["xuan","xuan","xuan","ha","ha","ha","thu","thu","thu","dong","dong","dong"][m];var h=new Date().getHours();var b=h<11?"sang":h<18?"chieu":"toi";var t=document.getElementById("title");if(t)t.style.setProperty("background","linear-gradient(rgba(40,18,10,.15),rgba(40,18,10,.35)),url(img/map-"+se+"-"+b+".webp) center/cover no-repeat","important")}catch(e){}})();

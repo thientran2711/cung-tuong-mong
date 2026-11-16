@@ -1,0 +1,7 @@
+# review/perf (D15, Foreman C) — worker report
+Verdict: SẴN SÀNG KIỂM · sha ef6bc7d540e7216431a2083e14cd772d6c79c91f · base main eba64ead4 + review/ua-test-r1.
+Root cause: jload.js blocked entry on every 'core' file, and assets.py's core (everything except fig-/por-/ev-/st-/map-fest-) had grown to 7,934 files / 890 MB (+1,042 MB background). Real play of 3 lives × 3 weeks needs ~933 files / 60 MB.
+Fix (no game UI, no kit): assets.py groups core/fig/lazy/fx — core = dev/site/first-hour.txt + ALWAYS set (+ her, Emperor, Thái hậu figures); background fig capped CTM_BG_MB=120; lazy never prefetched (cache-on-first-use); jload.js skips lazy + skips background on Data-saver/cellular/2g/3g; sw.tpl.js answers the ?krot=1 canvas iframe with the host's index.html. New dev/measure/firsthour.js, dev/measure/img-budget.py, dev/test/perf.js + dev/test/perf-budget.json (exit 1 over budget).
+Fold host mode, cold, 20 Mbit: first load 911.9 MB → 43.3 MB; time to title 746 s → 29.6 s; cached after run 940 → 72 MB; first playable turn 15.9 → 7.9 s; heap flat ~38 MB. iPhone/iPad similar.
+Follow-ups: index.html fetched 3× on first visit (rot.js iframe URL differs; SW reload) → kit keeper (rot.js/host canvas); 793 centre-art files > 250 KB and 12,908 sprites > 40 KB on CDN (art pipeline, morning); loading note 'không cần mạng' now only true for seen art (VANPHONG owner); old-install offline path not tested on a real device.
+Next: independent reviewer session (opus — boot/SW structure) → review/perf-r1.

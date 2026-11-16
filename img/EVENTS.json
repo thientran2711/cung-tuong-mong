@@ -1,0 +1,1219 @@
+{
+ "note": "Event art (3:4, 768x1024 webp, no faces). events: eventId -> category; ids are namespaced (e68:, j7:, arc:, plot:, qs:, fest:, news:, sys:, j3:, j24:, j54:, j55:, j22:); \"hh:*\", \"lc:*\", \"cnv:*\", \"j42:*\" = whole prefix. Pick a file by a stable hash of the event id/variant. See dev/art/EVENT_ART.md.",
+ "default": "trieu-chinh",
+ "categories": {
+  "trieu-chinh": {
+   "title": "Triều chính",
+   "files": [
+    "img/ev-trieu-chinh.webp",
+    "img/ev-trieu-chinh-2.webp"
+   ]
+  },
+  "tham-quan": {
+   "title": "Án tham ô",
+   "files": [
+    "img/ev-tham-quan.webp"
+   ]
+  },
+  "duoc-mua": {
+   "title": "Được mùa",
+   "files": [
+    "img/ev-duoc-mua.webp"
+   ]
+  },
+  "lu-lut": {
+   "title": "Lũ lụt",
+   "files": [
+    "img/ev-lu-lut.webp"
+   ]
+  },
+  "han-han": {
+   "title": "Hạn hán, cầu mưa",
+   "files": [
+    "img/ev-han-han.webp"
+   ]
+  },
+  "bien-ai": {
+   "title": "Chiến sự biên ải",
+   "files": [
+    "img/ev-bien-ai.webp",
+    "img/ev-bien-ai-2.webp"
+   ]
+  },
+  "thang-tran": {
+   "title": "Thắng trận",
+   "files": [
+    "img/ev-thang-tran.webp"
+   ]
+  },
+  "su-than": {
+   "title": "Sứ thần, triều cống",
+   "files": [
+    "img/ev-su-than.webp",
+    "img/ev-su-than-2.webp"
+   ]
+  },
+  "hoa-than": {
+   "title": "Hòa thân",
+   "files": [
+    "img/ev-hoa-than.webp"
+   ]
+  },
+  "hoang-de-vui": {
+   "title": "Hoàng thượng vui",
+   "files": [
+    "img/ev-hoang-de-vui.webp",
+    "img/ev-hoang-de-vui-2.webp"
+   ]
+  },
+  "hoang-de-gian": {
+   "title": "Hoàng thượng phiền muộn, giận",
+   "files": [
+    "img/ev-hoang-de-gian.webp"
+   ]
+  },
+  "hoang-de-dem": {
+   "title": "Hoàng thượng ngự giá",
+   "files": [
+    "img/ev-hoang-de-dem.webp"
+   ]
+  },
+  "vi-hanh": {
+   "title": "Vi hành, chơi đùa",
+   "files": [
+    "img/ev-vi-hanh.webp",
+    "img/ev-vi-hanh-2.webp"
+   ]
+  },
+  "di-san": {
+   "title": "Đi săn, Hội Phượng",
+   "files": [
+    "img/ev-di-san.webp"
+   ]
+  },
+  "quoc-tang": {
+   "title": "Quốc tang",
+   "files": [
+    "img/ev-quoc-tang.webp"
+   ]
+  },
+  "le-xuan": {
+   "title": "Lễ hội mùa xuân",
+   "files": [
+    "img/ev-le-xuan.webp",
+    "img/ev-le-xuan-2.webp"
+   ]
+  },
+  "le-ha": {
+   "title": "Tết Đoan ngọ",
+   "files": [
+    "img/ev-le-ha.webp"
+   ]
+  },
+  "le-thu": {
+   "title": "Lễ hội mùa thu",
+   "files": [
+    "img/ev-le-thu.webp",
+    "img/ev-le-thu-2.webp",
+    "img/ev-le-thu-3.webp"
+   ]
+  },
+  "le-dong": {
+   "title": "Lễ hội mùa đông",
+   "files": [
+    "img/ev-le-dong.webp",
+    "img/ev-le-dong-2.webp"
+   ]
+  },
+  "te-le": {
+   "title": "Tế lễ, lễ Phật",
+   "files": [
+    "img/ev-te-le.webp"
+   ]
+  },
+  "yen-tiec": {
+   "title": "Yến tiệc, mừng thọ",
+   "files": [
+    "img/ev-yen-tiec.webp"
+   ]
+  },
+  "sinh-no": {
+   "title": "Sinh nở, có thai",
+   "files": [
+    "img/ev-sinh-no.webp"
+   ]
+  },
+  "con-tre": {
+   "title": "Chuyện các con",
+   "files": [
+    "img/ev-con-tre.webp",
+    "img/ev-con-tre-2.webp"
+   ]
+  },
+  "tang-le": {
+   "title": "Tang lễ, qua đời",
+   "files": [
+    "img/ev-tang-le.webp"
+   ]
+  },
+  "tan-phong": {
+   "title": "Tấn phong",
+   "files": [
+    "img/ev-tan-phong.webp"
+   ]
+  },
+  "tuyen-tu": {
+   "title": "Tuyển tú",
+   "files": [
+    "img/ev-tuyen-tu.webp"
+   ]
+  },
+  "thinh-an": {
+   "title": "Thỉnh an Thái hậu, Hoàng hậu",
+   "files": [
+    "img/ev-thinh-an.webp"
+   ]
+  },
+  "khach-den": {
+   "title": "Có người đến chơi",
+   "files": [
+    "img/ev-khach-den.webp",
+    "img/ev-khach-den-2.webp"
+   ]
+  },
+  "tranh-sung": {
+   "title": "Tranh chấp hậu cung",
+   "files": [
+    "img/ev-tranh-sung.webp"
+   ]
+  },
+  "cung-nhan": {
+   "title": "Chuyện kẻ hầu",
+   "files": [
+    "img/ev-cung-nhan.webp"
+   ]
+  },
+  "thu-nha": {
+   "title": "Thư nhà",
+   "files": [
+    "img/ev-thu-nha.webp"
+   ]
+  },
+  "tai-nghe": {
+   "title": "Tài nghệ",
+   "files": [
+    "img/ev-tai-nghe.webp"
+   ]
+  },
+  "thoi-tiet": {
+   "title": "Thời tiết, bốn mùa",
+   "files": [
+    "img/ev-thoi-tiet.webp",
+    "img/ev-thoi-tiet-2.webp",
+    "img/ev-thoi-tiet-3.webp"
+   ]
+  },
+  "dieu-troi": {
+   "title": "Điềm trời",
+   "files": [
+    "img/ev-dieu-troi.webp"
+   ]
+  },
+  "dieu-lanh": {
+   "title": "Điềm lành",
+   "files": [
+    "img/ev-dieu-lanh.webp"
+   ]
+  },
+  "benh-tat": {
+   "title": "Ốm đau, thái y",
+   "files": [
+    "img/ev-benh-tat.webp"
+   ]
+  },
+  "dich-benh": {
+   "title": "Dịch bệnh",
+   "files": [
+    "img/ev-dich-benh.webp"
+   ]
+  },
+  "hoa-hoan": {
+   "title": "Hỏa hoạn",
+   "files": [
+    "img/ev-hoa-hoan.webp"
+   ]
+  },
+  "tin-don": {
+   "title": "Tin đồn, bê bối",
+   "files": [
+    "img/ev-tin-don.webp"
+   ]
+  },
+  "tai-mat": {
+   "title": "Tai mắt, kẻ khả nghi",
+   "files": [
+    "img/ev-tai-mat.webp"
+   ]
+  },
+  "chuyen-la": {
+   "title": "Chuyện lạ, ma quái",
+   "files": [
+    "img/ev-chuyen-la.webp"
+   ]
+  },
+  "dau-doc": {
+   "title": "Đầu độc",
+   "files": [
+    "img/ev-dau-doc.webp"
+   ]
+  },
+  "vu-oan": {
+   "title": "Vu oan, bùa ngải",
+   "files": [
+    "img/ev-vu-oan.webp"
+   ]
+  },
+  "hai-thai": {
+   "title": "Hại thai, xạ hương",
+   "files": [
+    "img/ev-hai-thai.webp"
+   ]
+  },
+  "hoi-lo": {
+   "title": "Hối lộ, uy hiếp",
+   "files": [
+    "img/ev-hoi-lo.webp"
+   ]
+  },
+  "mat-uoc": {
+   "title": "Mật ước, liên thủ",
+   "files": [
+    "img/ev-mat-uoc.webp"
+   ]
+  },
+  "hinh-phat": {
+   "title": "Trừng phạt",
+   "files": [
+    "img/ev-hinh-phat.webp"
+   ]
+  },
+  "lanh-cung": {
+   "title": "Lãnh cung",
+   "files": [
+    "img/ev-lanh-cung.webp",
+    "img/ev-lanh-cung-2.webp",
+    "img/ev-lanh-cung-3.webp"
+   ]
+  },
+  "dai-xa": {
+   "title": "Đại xá, ân điển",
+   "files": [
+    "img/ev-dai-xa.webp"
+   ]
+  },
+  "hh-viec": {
+   "title": "Việc Hoàng hậu giao",
+   "files": [
+    "img/ev-hh-viec.webp",
+    "img/ev-hh-viec-2.webp"
+   ]
+  },
+  "cung-nu": {
+   "title": "Đời cung nữ",
+   "files": [
+    "img/ev-cung-nu.webp",
+    "img/ev-cung-nu-2.webp"
+   ]
+  },
+  "tu-tinh": {
+   "title": "Tư tình, ánh mắt",
+   "files": [
+    "img/ev-tu-tinh.webp"
+   ]
+  }
+ },
+ "events": {
+  "arc:ch_benh": "benh-tat",
+  "arc:ch_bi": "tai-mat",
+  "arc:ch_co": "mat-uoc",
+  "arc:ch_ho": "tranh-sung",
+  "arc:cn_ban": "vu-oan",
+  "arc:cn_chu": "tranh-sung",
+  "arc:cn_than": "thu-nha",
+  "arc:cn_tinh": "tu-tinh",
+  "arc:cnv_ban": "vu-oan",
+  "arc:cnv_chu": "tai-mat",
+  "arc:cnv_ma": "cung-nhan",
+  "arc:cnv_mat": "hoang-de-dem",
+  "arc:dtq_bien": "bien-ai",
+  "arc:dtq_binh": "bien-ai",
+  "arc:dtq_huynh": "bien-ai",
+  "arc:dtq_vu": "vu-oan",
+  "arc:muoi_doi": "lu-lut",
+  "arc:muoi_lau": "tham-quan",
+  "arc:muoi_no": "tham-quan",
+  "arc:muoi_tuoc": "thu-nha",
+  "arc:nc_gian": "mat-uoc",
+  "arc:nc_su": "su-than",
+  "arc:nc_tuc": "thinh-an",
+  "arc:nc_vuong": "su-than",
+  "arc:s_ban": "mat-uoc",
+  "arc:s_dich": "dich-benh",
+  "arc:s_hoa": "hoa-hoan",
+  "arc:s_su": "su-than",
+  "arc:s_than": "thu-nha",
+  "arc:s_thay": "cung-nhan",
+  "arc:s_thu": "tai-mat",
+  "arc:s_tinh": "tu-tinh",
+  "arc:td_an": "vu-oan",
+  "arc:td_ke": "vu-oan",
+  "arc:td_song": "thu-nha",
+  "arc:td_tha": "tranh-sung",
+  "arc:thd_hoc": "tai-nghe",
+  "arc:thd_sach": "tham-quan",
+  "arc:thd_tho": "tai-nghe",
+  "arc:thd_tro": "tham-quan",
+  "arc:tt_co": "thu-nha",
+  "arc:tt_mat": "mat-uoc",
+  "arc:tt_oan": "tham-quan",
+  "arc:tt_tranh": "thu-nha",
+  "cnv:*": "cung-nu",
+  "e68:allyOffer": "mat-uoc",
+  "e68:autumnMoon": "le-thu",
+  "e68:borderNews": "bien-ai",
+  "e68:borrowDress": "khach-den",
+  "e68:bribedServ": "hoi-lo",
+  "e68:brokenHeirloom": "cung-nhan",
+  "e68:clanFather": "tham-quan",
+  "e68:docCheck": "benh-tat",
+  "e68:doubtVisit": "tranh-sung",
+  "e68:droughtPrayer": "han-han",
+  "e68:embroidery": "tai-nghe",
+  "e68:empAsksAbout": "hoang-de-vui",
+  "e68:empChess": "hoang-de-vui",
+  "e68:empDish": "hoang-de-vui",
+  "e68:empDream": "dieu-troi",
+  "e68:empGiftOdd": "hoang-de-vui",
+  "e68:empIncognito": "vi-hanh",
+  "e68:empOldFlame": "hoang-de-gian",
+  "e68:empPoem": "hoang-de-vui",
+  "e68:empSleepRead": "hoang-de-dem",
+  "e68:empSulk": "hoang-de-gian",
+  "e68:empWager": "vi-hanh",
+  "e68:envoyGift": "su-than",
+  "e68:eunRequest": "khach-den",
+  "e68:eunuchSqueeze": "hoi-lo",
+  "e68:famineDonate": "lu-lut",
+  "e68:flowerBloom": "dieu-lanh",
+  "e68:fortuneNun": "te-le",
+  "e68:giftArrive": "khach-den",
+  "e68:gossipTea": "khach-den",
+  "e68:hairpinThief": "chuyen-la",
+  "e68:heatStroke": "thoi-tiet",
+  "e68:hhSummons": "thinh-an",
+  "e68:kidFight": "con-tre",
+  "e68:kidGift": "con-tre",
+  "e68:kidLie": "con-tre",
+  "e68:kidSick": "con-tre",
+  "e68:kidTutor": "con-tre",
+  "e68:kindVisit": "khach-den",
+  "e68:leakRoof": "thoi-tiet",
+  "e68:letterHome": "thu-nha",
+  "e68:lostItem": "chuyen-la",
+  "e68:lotusSeason": "thoi-tiet",
+  "e68:maidQuarrel": "cung-nhan",
+  "e68:musician": "tai-nghe",
+  "e68:newGirlAdvice": "khach-den",
+  "e68:newServSus": "tai-mat",
+  "e68:nightSteps": "chuyen-la",
+  "e68:officialWife": "khach-den",
+  "e68:painter": "tai-nghe",
+  "e68:poisonedFish": "chuyen-la",
+  "e68:proudVisit": "tranh-sung",
+  "e68:rumorEmpLove": "tan-phong",
+  "e68:rumorEvidence": "tin-don",
+  "e68:rumorFavor": "tin-don",
+  "e68:rumorPreg": "tin-don",
+  "e68:rumorSpy": "tai-mat",
+  "e68:rumorTH": "tin-don",
+  "e68:servGamble": "cung-nhan",
+  "e68:servHero": "hoa-hoan",
+  "e68:servLeave": "cung-nhan",
+  "e68:servRomance": "tu-tinh",
+  "e68:sickServant": "cung-nhan",
+  "e68:silkAllot": "tranh-sung",
+  "e68:slyVisit": "tai-mat",
+  "e68:snowDay": "thoi-tiet",
+  "e68:spoiledFood": "dau-doc",
+  "e68:springAllergy": "benh-tat",
+  "e68:stormNight": "thoi-tiet",
+  "e68:strayCat": "cung-nhan",
+  "e68:templeRite": "te-le",
+  "e68:thMama": "thinh-an",
+  "fest:doanngo": "le-ha",
+  "fest:dongchi": "le-dong",
+  "fest:giaothua": "le-dong",
+  "fest:newyear": "le-xuan",
+  "fest:nguyentieu": "le-xuan",
+  "fest:phoenix": "di-san",
+  "fest:thanhminh": "le-xuan",
+  "fest:thattich": "le-thu",
+  "fest:trungcuu": "le-thu",
+  "fest:trungthu": "le-thu",
+  "hh:*": "hh-viec",
+  "j22:affair": "tu-tinh",
+  "j24:co-nguoi-den": "khach-den",
+  "j24:hoang-thuong-den": "hoang-de-dem",
+  "j24:ke-hau-xin": "cung-nhan",
+  "j24:mot-anh-mat": "tu-tinh",
+  "j24:thai-hau-trieu": "thinh-an",
+  "j24:viec-ke-hau": "cung-nhan",
+  "j3:coldletter": "lanh-cung",
+  "j3:embezzle": "tham-quan",
+  "j3:loveletter": "tin-don",
+  "j3:thbenh": "benh-tat",
+  "j3:tuyen": "tuyen-tu",
+  "j3:vase": "cung-nhan",
+  "j42:*": "cung-nu",
+  "j54:h54met": "con-tre",
+  "j54:h54sad": "con-tre",
+  "j54:h54show": "con-tre",
+  "j54:h54tut": "con-tre",
+  "j55:tdPop": "trieu-chinh",
+  "j7:caning": "hinh-phat",
+  "j7:coldvisit": "lanh-cung",
+  "j7:comet": "dieu-troi",
+  "j7:condemnedmaid": "hinh-phat",
+  "j7:doanngo": "le-ha",
+  "j7:doctorblack": "hoi-lo",
+  "j7:doll": "vu-oan",
+  "j7:dongchi": "le-dong",
+  "j7:empnight": "hoang-de-dem",
+  "j7:eunuch": "tai-mat",
+  "j7:fire": "hoa-hoan",
+  "j7:flood": "lu-lut",
+  "j7:foreignwed": "hoa-than",
+  "j7:ghost": "chuyen-la",
+  "j7:guardrumour": "tin-don",
+  "j7:jealousprince": "hoang-de-gian",
+  "j7:letterhome": "thu-nha",
+  "j7:maidhostage": "hoi-lo",
+  "j7:minister": "trieu-chinh",
+  "j7:newgirl": "tuyen-tu",
+  "j7:pact": "mat-uoc",
+  "j7:phoenix": "dieu-lanh",
+  "j7:poisongift": "dau-doc",
+  "j7:princefever": "con-tre",
+  "j7:rvbribe": "hoi-lo",
+  "j7:rvframe": "vu-oan",
+  "j7:rvmusk": "hai-thai",
+  "j7:rvquarrel": "tranh-sung",
+  "j7:taster": "dau-doc",
+  "j7:thbirthday": "yen-tiec",
+  "j7:trungcuu": "le-thu",
+  "j7:vulan": "le-thu",
+  "lc:*": "lanh-cung",
+  "news:hoa-than": "hoa-than",
+  "news:nam-chieu": "bien-ai",
+  "news:thang-tran": "thang-tran",
+  "news:thua-tran": "bien-ai",
+  "plot:accuse": "vu-oan",
+  "plot:block": "hoi-lo",
+  "plot:bribe": "hoi-lo",
+  "plot:catswap": "hai-thai",
+  "plot:frame": "vu-oan",
+  "plot:huydung": "hinh-phat",
+  "plot:joint": "vu-oan",
+  "plot:kframe": "vu-oan",
+  "plot:kpoison": "dau-doc",
+  "plot:ksab": "con-tre",
+  "plot:musk": "hai-thai",
+  "plot:plant": "vu-oan",
+  "plot:poison": "dau-doc",
+  "plot:pond": "chuyen-la",
+  "plot:pushp": "chuyen-la",
+  "plot:rumor": "tin-don",
+  "qs:cong": "su-than",
+  "qs:giac-thang": "thang-tran",
+  "qs:giac-thua": "bien-ai",
+  "qs:han": "han-han",
+  "qs:hoi": "yen-tiec",
+  "qs:lut": "lu-lut",
+  "qs:mua": "duoc-mua",
+  "qs:tham": "tham-quan",
+  "qs:yen": "trieu-chinh",
+  "sys:an-xa": "dai-xa",
+  "sys:bang-ha": "quoc-tang",
+  "sys:chet-con": "tang-le",
+  "sys:chet-npc": "tang-le",
+  "sys:co-thai": "sinh-no",
+  "sys:dai-xa": "dai-xa",
+  "sys:giang-chuc": "hinh-phat",
+  "sys:lanh-cung": "lanh-cung",
+  "sys:lap-hau": "tan-phong",
+  "sys:lap-thai-tu": "tan-phong",
+  "sys:mood-binh": "trieu-chinh",
+  "sys:mood-gian": "hoang-de-gian",
+  "sys:mood-phien": "hoang-de-gian",
+  "sys:mood-vui": "hoang-de-vui",
+  "sys:om": "benh-tat",
+  "sys:qua-doi": "tang-le",
+  "sys:sinh-con": "sinh-no",
+  "sys:sinh-npc": "sinh-no",
+  "sys:tan-phong": "tan-phong",
+  "sys:thai-hau-mat": "tang-le",
+  "sys:thi-tam": "hoang-de-dem",
+  "sys:tranh-ghe": "tan-phong",
+  "sys:tuyen-tu": "tuyen-tu"
+ },
+ "stories": {
+  "tt_co": {
+   "title": "Quân cờ trong tay cha",
+   "o": "tt",
+   "fb": "trieu-chinh",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-tt-co-s1.webp",
+    "s2": "img/st-tt-co-s2.webp",
+    "c1": "img/st-tt-co-c1.webp",
+    "c2": "img/st-tt-co-c2.webp",
+    "c3": "img/st-tt-co-c3.webp",
+    "t1": "img/st-tt-co-t1.webp",
+    "x1": "img/st-tt-co-x1.webp",
+    "bia": "img/st-tt-co-bia.webp",
+    "ket-win": "img/st-tt-co-ket-win.webp",
+    "ket-mid": "img/st-tt-co-ket-mid.webp",
+    "ket-lose": "img/st-tt-co-ket-lose.webp",
+    "ket": "img/st-tt-co-ket.webp"
+   }
+  },
+  "tt_oan": {
+   "title": "Phủ Tể tướng mắc oan",
+   "o": "tt",
+   "fb": "trieu-chinh",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-tt-oan-s1.webp",
+    "s2": "img/st-tt-oan-s2.webp",
+    "c1": "img/st-tt-oan-c1.webp",
+    "c2": "img/st-tt-oan-c2.webp",
+    "c3": "img/st-tt-oan-c3.webp",
+    "t1": "img/st-tt-oan-t1.webp",
+    "x1": "img/st-tt-oan-x1.webp",
+    "bia": "img/st-tt-oan-bia.webp",
+    "ket-win": "img/st-tt-oan-ket-win.webp",
+    "ket-mid": "img/st-tt-oan-ket-mid.webp",
+    "ket-lose": "img/st-tt-oan-ket-lose.webp",
+    "ket": "img/st-tt-oan-ket.webp"
+   }
+  },
+  "tt_tranh": {
+   "title": "Phủ Tể tướng chia đôi",
+   "o": "tt",
+   "fb": "trieu-chinh",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-tt-tranh-s1.webp",
+    "s2": "img/st-tt-tranh-s2.webp",
+    "c1": "img/st-tt-tranh-c1.webp",
+    "c2": "img/st-tt-tranh-c2.webp",
+    "c3": "img/st-tt-tranh-c3.webp",
+    "t1": "img/st-tt-tranh-t1.webp",
+    "x1": "img/st-tt-tranh-x1.webp",
+    "bia": "img/st-tt-tranh-bia.webp"
+   }
+  },
+  "tt_mat": {
+   "title": "Mật ước với Hoàng hậu",
+   "o": "tt",
+   "fb": "trieu-chinh",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-tt-mat-s1.webp",
+    "s2": "img/st-tt-mat-s2.webp",
+    "c1": "img/st-tt-mat-c1.webp",
+    "c2": "img/st-tt-mat-c2.webp",
+    "c3": "img/st-tt-mat-c3.webp",
+    "t1": "img/st-tt-mat-t1.webp",
+    "x1": "img/st-tt-mat-x1.webp",
+    "bia": "img/st-tt-mat-bia.webp",
+    "ket-win": "img/st-tt-mat-ket-win.webp",
+    "ket-win2": "img/st-tt-mat-ket-win2.webp",
+    "ket-mid": "img/st-tt-mat-ket-mid.webp",
+    "ket-lose": "img/st-tt-mat-ket-lose.webp"
+   }
+  },
+  "dtq_bien": {
+   "title": "Khói lửa Nhạn Môn",
+   "o": "dtq",
+   "fb": "bien-ai",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-dtq-bien-s1.webp",
+    "s2": "img/st-dtq-bien-s2.webp",
+    "c1": "img/st-dtq-bien-c1.webp",
+    "c2": "img/st-dtq-bien-c2.webp",
+    "c3": "img/st-dtq-bien-c3.webp",
+    "t1": "img/st-dtq-bien-t1.webp",
+    "x1": "img/st-dtq-bien-x1.webp",
+    "bia": "img/st-dtq-bien-bia.webp",
+    "ket-win": "img/st-dtq-bien-ket-win.webp",
+    "ket-mid": "img/st-dtq-bien-ket-mid.webp",
+    "ket-lose": "img/st-dtq-bien-ket-lose.webp",
+    "ket": "img/st-dtq-bien-ket.webp"
+   }
+  },
+  "dtq_vu": {
+   "title": "Bức thư mưu phản",
+   "o": "dtq",
+   "fb": "bien-ai",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-dtq-vu-s1.webp",
+    "s2": "img/st-dtq-vu-s2.webp",
+    "c1": "img/st-dtq-vu-c1.webp",
+    "c2": "img/st-dtq-vu-c2.webp",
+    "c3": "img/st-dtq-vu-c3.webp",
+    "t1": "img/st-dtq-vu-t1.webp",
+    "x1": "img/st-dtq-vu-x1.webp",
+    "bia": "img/st-dtq-vu-bia.webp"
+   }
+  },
+  "dtq_binh": {
+   "title": "Binh phù và long ngai",
+   "o": "dtq",
+   "fb": "bien-ai",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-dtq-binh-s1.webp",
+    "s2": "img/st-dtq-binh-s2.webp",
+    "c1": "img/st-dtq-binh-c1.webp",
+    "c2": "img/st-dtq-binh-c2.webp",
+    "c3": "img/st-dtq-binh-c3.webp",
+    "t1": "img/st-dtq-binh-t1.webp",
+    "x1": "img/st-dtq-binh-x1.webp",
+    "bia": "img/st-dtq-binh-bia.webp",
+    "ket-win": "img/st-dtq-binh-ket-win.webp",
+    "ket-win2": "img/st-dtq-binh-ket-win2.webp",
+    "ket-mid": "img/st-dtq-binh-ket-mid.webp",
+    "ket-lose": "img/st-dtq-binh-ket-lose.webp"
+   }
+  },
+  "dtq_huynh": {
+   "title": "Người anh nơi đất giặc",
+   "o": "dtq",
+   "fb": "bien-ai",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-dtq-huynh-s1.webp",
+    "s2": "img/st-dtq-huynh-s2.webp",
+    "c1": "img/st-dtq-huynh-c1.webp",
+    "c2": "img/st-dtq-huynh-c2.webp",
+    "ket-win": "img/st-dtq-huynh-ket-win.webp",
+    "ket-win2": "img/st-dtq-huynh-ket-win2.webp",
+    "ket-mid": "img/st-dtq-huynh-ket-mid.webp",
+    "ket-lose": "img/st-dtq-huynh-ket-lose.webp"
+   }
+  },
+  "muoi_tuoc": {
+   "title": "Mua tước cho cha",
+   "o": "muoi",
+   "fb": "tham-quan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {
+    "s1": "img/st-muoi-tuoc-s1.webp",
+    "s2": "img/st-muoi-tuoc-s2.webp",
+    "c1": "img/st-muoi-tuoc-c1.webp",
+    "c2": "img/st-muoi-tuoc-c2.webp",
+    "c3": "img/st-muoi-tuoc-c3.webp",
+    "t1": "img/st-muoi-tuoc-t1.webp",
+    "x1": "img/st-muoi-tuoc-x1.webp",
+    "bia": "img/st-muoi-tuoc-bia.webp",
+    "ket-win": "img/st-muoi-tuoc-ket-win.webp",
+    "ket-mid": "img/st-muoi-tuoc-ket-mid.webp",
+    "ket-lose": "img/st-muoi-tuoc-ket-lose.webp",
+    "ket": "img/st-muoi-tuoc-ket.webp"
+   }
+  },
+  "muoi_lau": {
+   "title": "Thuyền muối đêm",
+   "o": "muoi",
+   "fb": "tham-quan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "muoi_doi": {
+   "title": "Năm đói ở Giang Nam",
+   "o": "muoi",
+   "fb": "tham-quan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "muoi_no": {
+   "title": "Món nợ trong cung",
+   "o": "muoi",
+   "fb": "tham-quan",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cn_chu": {
+   "title": "Chủ cũ",
+   "o": "cn",
+   "fb": "cung-nhan",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cn_tinh": {
+   "title": "Mối tình thuở hầu trà",
+   "o": "cn",
+   "fb": "cung-nhan",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cn_ban": {
+   "title": "Tri kỷ ở Tân Giả khố",
+   "o": "cn",
+   "fb": "cung-nhan",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cn_than": {
+   "title": "Thân thế thật",
+   "o": "cn",
+   "fb": "cung-nhan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "nc_gian": {
+   "title": "Mật lệnh cố quốc",
+   "o": "nc",
+   "fb": "su-than",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "nc_su": {
+   "title": "Sứ đoàn cố quốc",
+   "o": "nc",
+   "fb": "su-than",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "nc_tuc": {
+   "title": "Người ngoại tộc",
+   "o": "nc",
+   "fb": "su-than",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "nc_vuong": {
+   "title": "Ngai vàng cố quốc",
+   "o": "nc",
+   "fb": "su-than",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "td_an": {
+   "title": "Lật lại án cũ",
+   "o": "td",
+   "fb": "vu-oan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "td_ke": {
+   "title": "Kẻ đứng sau màn",
+   "o": "td",
+   "fb": "vu-oan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "td_song": {
+   "title": "Người em còn sống",
+   "o": "td",
+   "fb": "vu-oan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "td_tha": {
+   "title": "Thù hay tha",
+   "o": "td",
+   "fb": "vu-oan",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "ch_co": {
+   "title": "Quân cờ của cô tổ",
+   "o": "ch",
+   "fb": "thinh-an",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "ch_benh": {
+   "title": "Thái hậu lâm bệnh",
+   "o": "ch",
+   "fb": "thinh-an",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "ch_ho": {
+   "title": "Hai người cháu",
+   "o": "ch",
+   "fb": "thinh-an",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "ch_bi": {
+   "title": "Bí mật năm xưa",
+   "o": "ch",
+   "fb": "thinh-an",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "thd_tho": {
+   "title": "Danh hiệu Tài nữ",
+   "o": "thd",
+   "fb": "tai-nghe",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "thd_sach": {
+   "title": "Di cảo của cha",
+   "o": "thd",
+   "fb": "tai-nghe",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "thd_tro": {
+   "title": "Học trò của cha",
+   "o": "thd",
+   "fb": "tai-nghe",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "thd_hoc": {
+   "title": "Thầy giáo trong cung",
+   "o": "thd",
+   "fb": "tai-nghe",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cnv_chu": {
+   "title": "Bí mật của chủ nhân",
+   "o": "cnv",
+   "fb": "cung-nu",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cnv_ban": {
+   "title": "Chị em đồng hương",
+   "o": "cnv",
+   "fb": "cung-nu",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cnv_mat": {
+   "title": "Ánh mắt nơi hành lang",
+   "o": "cnv",
+   "fb": "cung-nu",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "cnv_ma": {
+   "title": "Ma ma dạy việc",
+   "o": "cnv",
+   "fb": "cung-nu",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_than": {
+   "title": "Người thân thất lạc",
+   "o": "*",
+   "fb": "thu-nha",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_thu": {
+   "title": "Bức mật thư",
+   "o": "*",
+   "fb": "tai-mat",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_hoa": {
+   "title": "Đêm cháy Tây cung",
+   "o": "*",
+   "fb": "hoa-hoan",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_su": {
+   "title": "Sứ thần phương Tây",
+   "o": "*",
+   "fb": "su-than",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_dich": {
+   "title": "Mùa dịch đậu mùa",
+   "o": "*",
+   "fb": "dich-benh",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_tinh": {
+   "title": "Cám dỗ",
+   "o": "*",
+   "fb": "tu-tinh",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_thay": {
+   "title": "Lão thái giám",
+   "o": "*",
+   "fb": "cung-nhan",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "s_ban": {
+   "title": "Kẻ thù hóa tri kỷ",
+   "o": "*",
+   "fb": "mat-uoc",
+   "efb": {
+    "win": "tan-phong",
+    "win2": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "st_the": {
+   "title": "Gây dựng thế lực",
+   "o": "st",
+   "fb": "tan-phong",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "st_con": {
+   "title": "Con đường của con",
+   "o": "st",
+   "fb": "tan-phong",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  },
+  "st_dong": {
+   "title": "Ngôi Đông cung",
+   "o": "st",
+   "fb": "tan-phong",
+   "efb": {
+    "win": "tan-phong",
+    "mid": null,
+    "lose": "lanh-cung"
+   },
+   "files": {}
+  }
+ }
+}

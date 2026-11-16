@@ -1,0 +1,2438 @@
+{
+ "ngu-hoa-vien": {
+  "kind": "scene",
+  "file": "img/ngu-hoa-vien.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplQijT0eP",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/ngu-hoa-vien.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/p8JKONpehw",
+   "model": "Nano Banana"
+  }
+ },
+ "ngu-thu-phong": {
+  "kind": "scene",
+  "file": "img/ngu-thu-phong.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNaMraIOq4",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/ngu-thu-phong.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/yiCpuhwPW9",
+   "model": "Nano Banana"
+  }
+ },
+ "duong-tam-dien": {
+  "kind": "scene",
+  "file": "img/duong-tam-dien.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rge2EXzxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/duong-tam-dien.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/YMLElLhWeC",
+   "model": "Nano Banana"
+  }
+ },
+ "tu-ninh-cung": {
+  "kind": "scene",
+  "file": "img/tu-ninh-cung.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rge2EoYxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/tu-ninh-cung.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/KLM3pemkqp",
+   "model": "Nano Banana"
+  }
+ },
+ "khon-ninh-cung": {
+  "kind": "scene",
+  "file": "img/khon-ninh-cung.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxT6hdw5Y2",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/khon-ninh-cung.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/3zbIKxAREY",
+   "model": "Nano Banana"
+  }
+ },
+ "phi-tan-cung": {
+  "kind": "scene",
+  "file": "img/phi-tan-cung.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsu6OTcXe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/phi-tan-cung.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/s7onIaxl8e",
+   "model": "Nano Banana"
+  }
+ },
+ "thai-y-vien": {
+  "kind": "scene",
+  "file": "img/thai-y-vien.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLENPmWeC",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/thai-y-vien.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/EbzOYpluuO",
+   "model": "Nano Banana"
+  }
+ },
+ "kinh-su-phong": {
+  "kind": "scene",
+  "file": "img/kinh-su-phong.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/VXUqZRaMMU",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/kinh-su-phong.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/SytchqdUb8",
+   "model": "Nano Banana"
+  }
+ },
+ "lanh-cung": {
+  "kind": "scene",
+  "file": "img/lanh-cung.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBzFHuswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/lanh-cung.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/KLM3pC5kqp",
+   "model": "Nano Banana"
+  }
+ },
+ "tam-cung-dem": {
+  "kind": "scene",
+  "file": "img/tam-cung-dem.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGq8UJy3uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "previous": {
+   "file": "img/old-nb/tam-cung-dem.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/1lpZdHZr4r",
+   "model": "Nano Banana"
+  }
+ },
+ "sung": {
+  "kind": "icon",
+  "file": "img/sung.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZwQZJa47",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "native GPT transparency",
+  "previous": {
+   "file": "img/old-nb/sung.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/w4hTuKK7EI",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/JNaME9ZOq4"
+  }
+ },
+ "danh": {
+  "kind": "icon",
+  "file": "img/danh.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZlkA16B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/O6fpnCLynm (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/danh.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/xSdAtQPjfW",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/O6fDQ9synm"
+  }
+ },
+ "bac": {
+  "kind": "icon",
+  "file": "img/bac.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBnJgTswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "native GPT transparency",
+  "previous": {
+   "file": "img/old-nb/bac.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/WDsu73acXe",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/VXUqOXPMMU"
+  }
+ },
+ "suc": {
+  "kind": "icon",
+  "file": "img/suc.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZgLD16B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/P3EdWF342C (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/suc.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/If6sADWtvE",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/eIOk9hXdqL"
+  }
+ },
+ "tam-co": {
+  "kind": "icon",
+  "file": "img/tam-co.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBnJ7EswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/MBw5fPoDCm (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/tam-co.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/w4hTujj7EI",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/p8JK4ajehw"
+  }
+ },
+ "duc": {
+  "kind": "icon",
+  "file": "img/duc.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nPkrNQLD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "native GPT transparency",
+  "previous": {
+   "file": "img/old-nb/duc.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/KLM3BQbkqp",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/8aNLRqsIrU"
+  }
+ },
+ "sac": {
+  "kind": "icon",
+  "file": "img/sac.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2FoGcV6D9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/UPmT2uowny (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/sac.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/LwBzhkLswO",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/KLM3dyikqp"
+  }
+ },
+ "tai": {
+  "kind": "icon",
+  "file": "img/tai.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/9ZQBA0DNYZ",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "native GPT transparency",
+  "previous": {
+   "file": "img/old-nb/tai.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/TdSHyYGVNR",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/gOIWvATSXO"
+  }
+ },
+ "tai-mat": {
+  "kind": "icon",
+  "file": "img/tai-mat.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4jabjoQR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/jUXzNaALD0 (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/tai-mat.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/79vVQU4JAL",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/rge2o3extc"
+  }
+ },
+ "thai-hau": {
+  "kind": "icon",
+  "file": "img/thai-hau.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXz7mYLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/1lp2PhVr4r (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/thai-hau.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/79vVQw9JAL",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/aF2wnYhfSh"
+  }
+ },
+ "hoang-hau": {
+  "kind": "icon",
+  "file": "img/hoang-hau.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPxv2vBfo",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/9ZQB0j1NYZ (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/hoang-hau.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/rge2tySxtc",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/jUXGIv5LD0"
+  }
+ },
+ "hoang-thuong": {
+  "kind": "icon",
+  "file": "img/hoang-thuong.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hVN5T7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/5jV3JhlKxe (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/hoang-thuong.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/yiCpbnvPW9",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/mE3gActhJQ"
+  }
+ },
+ "con": {
+  "kind": "icon",
+  "file": "img/con.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXz7QpLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/ksDZPrA16B (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/con.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/EbzOVscuuO",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/cplQw650eP"
+  }
+ },
+ "thai": {
+  "kind": "icon",
+  "file": "img/thai.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmT91bwny",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/jUXz6l8LD0 (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/thai.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/VXUq4fRMMU",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/1lpZBuOr4r"
+  }
+ },
+ "doc": {
+  "kind": "icon",
+  "file": "img/doc.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplFdGe0eP",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/79vMzPfJAL (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/doc.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/5jViBPlKxe",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/79vVELOJAL"
+  }
+ },
+ "chung-cu": {
+  "kind": "icon",
+  "file": "img/chung-cu.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNaDiUvOq4",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "native GPT transparency",
+  "previous": {
+   "file": "img/old-nb/chung-cu.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/SytcEGjUb8",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/gOIWvxwSXO"
+  }
+ },
+ "cam": {
+  "kind": "art",
+  "file": "img/cam.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZwHhVa47",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/tCigkfXmZJ (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/cam.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/4RudKDu9Aa",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/s7onhi0l8e"
+  }
+ },
+ "ky": {
+  "kind": "art",
+  "file": "img/ky.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuXA8V9Aa",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/ksDZPlZ16B (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/ky.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/YMLE7fGWeC",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/p8JK9Qgehw"
+  }
+ },
+ "thi": {
+  "kind": "art",
+  "file": "img/thi.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsQdKkcXe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/s7oY3OGl8e (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/thi.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/w4hTQT07EI",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/YMLEUvGWeC"
+  }
+ },
+ "hoa": {
+  "kind": "art",
+  "file": "img/hoa.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBnODyswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/w4hVG6h7EI (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/hoa.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/gOIWCcHSXO",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/P3Eeqpp42C"
+  }
+ },
+ "vu": {
+  "kind": "art",
+  "file": "img/vu.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JkmUbehw",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/yiCeW27PW9 (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/vu.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/KLM3opXkqp",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/ov9jRLg829"
+  }
+ },
+ "y-thuat": {
+  "kind": "art",
+  "file": "img/y-thuat.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hV6hi7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/gOIcZWRSXO (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/y-thuat.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/6AHorKViJO",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/WDsuwbAcXe"
+  }
+ },
+ "rank-dap-ung": {
+  "kind": "badge",
+  "file": "img/rank-dap-ung.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fpRCwynm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/0egHvHHTfW (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-dap-ung.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/O6fDqFXynm",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/yiCpHw0PW9"
+  }
+ },
+ "rank-thuong-tai": {
+  "kind": "badge",
+  "file": "img/rank-thuong-tai.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqIYkI3uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/w4hVGMr7EI (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-thuong-tai.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/aF2wcWtfSh",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/jUXGtrjLD0"
+  }
+ },
+ "rank-quy-nhan": {
+  "kind": "badge",
+  "file": "img/rank-quy-nhan.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZwqYPa47",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/MBw5C1GDCm (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-quy-nhan.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/huRSYWUvqL",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/iGq8rR03uK"
+  }
+ },
+ "rank-tan": {
+  "kind": "badge",
+  "file": "img/rank-tan.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2Fonzn6D9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/aF27j9kfSh (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-tan.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/ksDR8tX16B",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/iGq8rAM3uK"
+  }
+ },
+ "rank-phi": {
+  "kind": "badge",
+  "file": "img/rank-phi.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oYP91l8e",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/If6lKOMtvE (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-phi.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/fHA70DsCDY",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/yiCpqZIPW9"
+  }
+ },
+ "rank-quy-phi": {
+  "kind": "badge",
+  "file": "img/rank-quy-phi.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNsubeIrU",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/xSdGNM2jfW (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-quy-phi.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/O6fDq1hynm",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/XmPr3CdBfo"
+  }
+ },
+ "rank-hoang-quy-phi": {
+  "kind": "badge",
+  "file": "img/rank-hoang-quy-phi.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vM3ngJAL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/JNaDnh4Oq4 (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-hoang-quy-phi.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/jUXGhukLD0",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/MBwb4ahDCm"
+  }
+ },
+ "rank-hoang-hau": {
+  "kind": "badge",
+  "file": "img/rank-hoang-hau.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSq8E3VNR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/CqGOsdREEy (Magnific remove background)",
+  "previous": {
+   "file": "img/old-nb/rank-hoang-hau.webp",
+   "magnificUrl": "https://www.magnific.com/app/creation/6AHorUtiJO",
+   "model": "Nano Banana",
+   "sourceUrl": "https://www.magnific.com/app/creation/XmPr3qtBfo"
+  }
+ },
+ "face-maid-1": {
+  "kind": "face",
+  "file": "img/face-maid-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AH8AbUiJO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "item-tram-phuong": {
+  "kind": "item",
+  "file": "img/item-tram-phuong.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8Jkh5tehw",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/LwBniHJswO (Magnific remove background)"
+ },
+ "item-vong-ngoc": {
+  "kind": "item",
+  "file": "img/item-vong-ngoc.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4jCjSoQR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/If6lKMqtvE (Magnific remove background)"
+ },
+ "item-bo-dieu": {
+  "kind": "item",
+  "file": "img/item-bo-dieu.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeA7zHxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/rgeA9FDxtc (Magnific remove background)"
+ },
+ "item-gam-to-chau": {
+  "kind": "item",
+  "file": "img/item-gam-to-chau.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyra05XSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/yiCeWgHPW9 (Magnific remove background)"
+ },
+ "item-lua-hang-chau": {
+  "kind": "item",
+  "file": "img/item-lua-hang-chau.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBnykeswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/WDsQm2NcXe (Magnific remove background)"
+ },
+ "item-nhan-sam": {
+  "kind": "item",
+  "file": "img/item-nhan-sam.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqIW9k3uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/huRUr8CvqL (Magnific remove background)"
+ },
+ "item-yen-sao": {
+  "kind": "item",
+  "file": "img/item-yen-sao.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplFBWX0eP",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/79vMzS8JAL (Magnific remove background)"
+ },
+ "item-a-giao": {
+  "kind": "item",
+  "file": "img/item-a-giao.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeAJjCxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/If6lklztvE (Magnific remove background)"
+ },
+ "item-thuoc-giai": {
+  "kind": "item",
+  "file": "img/item-thuoc-giai.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jV3SrGKxe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/gOIc2T2SXO (Magnific remove background)"
+ },
+ "item-thuoc-an-thai": {
+  "kind": "item",
+  "file": "img/item-thuoc-an-thai.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSqIBUVNR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/O6fpWXuynm (Magnific remove background)"
+ },
+ "item-huong-tram": {
+  "kind": "item",
+  "file": "img/item-huong-tram.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIcNNPSXO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/jUXzi0lLD0 (Magnific remove background)"
+ },
+ "item-xa-huong": {
+  "kind": "item",
+  "file": "img/item-xa-huong.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmTiaowny",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/fHAJs64CDY (Magnific remove background)"
+ },
+ "item-hac-dinh-hong": {
+  "kind": "item",
+  "file": "img/item-hac-dinh-hong.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZwox16B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/KLMRP0rkqp (Magnific remove background)"
+ },
+ "item-bot-ngua": {
+  "kind": "item",
+  "file": "img/item-bot-ngua.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF27KcNfSh",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/0egHasLTfW (Magnific remove background)"
+ },
+ "item-tranh-co": {
+  "kind": "item",
+  "file": "img/item-tranh-co.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lp27mor4r",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/eIO1FJWdqL (Magnific remove background)"
+ },
+ "item-nghien-muc": {
+  "kind": "item",
+  "file": "img/item-nghien-muc.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLuX4GWeC",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/Syt0ArlUb8 (Magnific remove background)"
+ },
+ "item-dan-co": {
+  "kind": "item",
+  "file": "img/item-dan-co.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oY4Hel8e",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/JNaDYgpOq4 (Magnific remove background)"
+ },
+ "item-ngoc-boi-ban": {
+  "kind": "item",
+  "file": "img/item-ngoc-boi-ban.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8W95kgv9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/XmPxqeuBfo (Magnific remove background)"
+ },
+ "item-thu-nha": {
+  "kind": "item",
+  "file": "img/item-thu-nha.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nPxhkQLD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/bxTiObx5Y2 (Magnific remove background)"
+ },
+ "item-tui-thom": {
+  "kind": "item",
+  "file": "img/item-tui-thom.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nPj60QLD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/cplFaVD0eP (Magnific remove background)"
+ },
+ "item-phan-son": {
+  "kind": "item",
+  "file": "img/item-phan-son.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPxESnBfo",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/If6l1agtvE (Magnific remove background)"
+ },
+ "item-hinh-nhan": {
+  "kind": "item",
+  "file": "img/item-hinh-nhan.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4juJPoQR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "128x128 alpha q85",
+  "cutout": "https://www.magnific.com/app/creation/UPmTzPrwny (Magnific remove background)"
+ },
+ "face-maid-2": {
+  "kind": "face",
+  "file": "img/face-maid-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeAODrxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-3": {
+  "kind": "face",
+  "file": "img/face-maid-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZ7pj16B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-4": {
+  "kind": "face",
+  "file": "img/face-maid-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AH8cbjiJO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-5": {
+  "kind": "face",
+  "file": "img/face-maid-5.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/EbzyxcnuuO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-6": {
+  "kind": "face",
+  "file": "img/face-maid-6.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lp2J8er4r",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-eunuch-1": {
+  "kind": "face",
+  "file": "img/face-eunuch-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZwkf0a47",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-2": {
+  "kind": "face",
+  "file": "img/face-eunuch-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZJjZ16B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-3": {
+  "kind": "face",
+  "file": "img/face-eunuch-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egHteBTfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-4": {
+  "kind": "face",
+  "file": "img/face-eunuch-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsQ8eMcXe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-physician": {
+  "kind": "face",
+  "file": "img/face-physician.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/KLMR7S8kqp",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-baby-1": {
+  "kind": "face",
+  "file": "img/face-prince-baby-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzVPYLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-baby-2": {
+  "kind": "face",
+  "file": "img/face-prince-baby-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuXhn59Aa",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-baby-1": {
+  "kind": "face",
+  "file": "img/face-princess-baby-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8WpiPgv9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-baby-2": {
+  "kind": "face",
+  "file": "img/face-princess-baby-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EdmYB42C",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-small-1": {
+  "kind": "face",
+  "file": "img/face-prince-small-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hVBGd7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-small-2": {
+  "kind": "face",
+  "file": "img/face-prince-small-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGTNQjfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-small-1": {
+  "kind": "face",
+  "file": "img/face-princess-small-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeA06zxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-small-2": {
+  "kind": "face",
+  "file": "img/face-princess-small-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oYDZhl8e",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-child-1": {
+  "kind": "face",
+  "file": "img/face-prince-child-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vMocCJAL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-child-2": {
+  "kind": "face",
+  "file": "img/face-prince-child-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmTXYxwny",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-child-1": {
+  "kind": "face",
+  "file": "img/face-princess-child-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeA0Zcxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-child-2": {
+  "kind": "face",
+  "file": "img/face-princess-child-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqICoj3uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-teen-1": {
+  "kind": "face",
+  "file": "img/face-prince-teen-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeA0GVxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-teen-2": {
+  "kind": "face",
+  "file": "img/face-prince-teen-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNsJlzIrU",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-teen-1": {
+  "kind": "face",
+  "file": "img/face-princess-teen-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EdmoQ42C",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-teen-2": {
+  "kind": "face",
+  "file": "img/face-princess-teen-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGOi4mEEy",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-01": {
+  "kind": "face",
+  "file": "img/face-consort-01.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNsy0CIrU",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-02": {
+  "kind": "face",
+  "file": "img/face-consort-02.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF27iXsfSh",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-03": {
+  "kind": "face",
+  "file": "img/face-consort-03.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hV8jy7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-04": {
+  "kind": "face",
+  "file": "img/face-consort-04.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyrwTpXSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-05": {
+  "kind": "face",
+  "file": "img/face-consort-05.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbtQNvREY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-06": {
+  "kind": "face",
+  "file": "img/face-consort-06.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lp2TkWr4r",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-07": {
+  "kind": "face",
+  "file": "img/face-consort-07.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fph9Oynm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-08": {
+  "kind": "face",
+  "file": "img/face-consort-08.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AH8uAwiJO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-09": {
+  "kind": "face",
+  "file": "img/face-consort-09.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyrJlSXSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-10": {
+  "kind": "face",
+  "file": "img/face-consort-10.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lp2MW5r4r",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-11": {
+  "kind": "face",
+  "file": "img/face-consort-11.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeADTpxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-12": {
+  "kind": "face",
+  "file": "img/face-consort-12.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLuxraWeC",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-13": {
+  "kind": "face",
+  "file": "img/face-consort-13.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/9ZQBEuWNYZ",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-14": {
+  "kind": "face",
+  "file": "img/face-consort-14.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIcoI5SXO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-15": {
+  "kind": "face",
+  "file": "img/face-consort-15.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyrJ4NXSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-16": {
+  "kind": "face",
+  "file": "img/face-consort-16.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/If6l9ZGtvE",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-17": {
+  "kind": "face",
+  "file": "img/face-consort-17.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Syt0IW4Ub8",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-18": {
+  "kind": "face",
+  "file": "img/face-consort-18.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuXEXL9Aa",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-19": {
+  "kind": "face",
+  "file": "img/face-consort-19.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZwRJTa47",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-20": {
+  "kind": "face",
+  "file": "img/face-consort-20.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4jPSaoQR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-21": {
+  "kind": "face",
+  "file": "img/face-consort-21.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPxyUsBfo",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-22": {
+  "kind": "face",
+  "file": "img/face-consort-22.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGOA3mEEy",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-23": {
+  "kind": "face",
+  "file": "img/face-consort-23.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIO1JwUdqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-24": {
+  "kind": "face",
+  "file": "img/face-consort-24.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fpafIynm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-25": {
+  "kind": "face",
+  "file": "img/face-consort-25.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw5wq1DCm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-26": {
+  "kind": "face",
+  "file": "img/face-consort-26.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjEjEoYQD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-27": {
+  "kind": "face",
+  "file": "img/face-consort-27.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oYoWvl8e",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-28": {
+  "kind": "face",
+  "file": "img/face-consort-28.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyryLLXSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-29": {
+  "kind": "face",
+  "file": "img/face-consort-29.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeAeWExtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-30": {
+  "kind": "face",
+  "file": "img/face-consort-30.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nPnZ7QLD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-31": {
+  "kind": "face",
+  "file": "img/face-consort-31.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huRUR6lvqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-32": {
+  "kind": "face",
+  "file": "img/face-consort-32.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oYoB5l8e",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-33": {
+  "kind": "face",
+  "file": "img/face-consort-33.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AH8qTyiJO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-34": {
+  "kind": "face",
+  "file": "img/face-consort-34.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLustnWeC",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-35": {
+  "kind": "face",
+  "file": "img/face-consort-35.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzBRpLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-36": {
+  "kind": "face",
+  "file": "img/face-consort-36.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjELaeYQD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-37": {
+  "kind": "face",
+  "file": "img/face-consort-37.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2FoHXO6D9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-38": {
+  "kind": "face",
+  "file": "img/face-consort-38.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGXzijfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-consort-39": {
+  "kind": "face",
+  "file": "img/face-consort-39.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCeEXsPW9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-40": {
+  "kind": "face",
+  "file": "img/face-consort-40.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fpCoVynm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-07": {
+  "kind": "face",
+  "file": "img/face-maid-07.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqI5GB3uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-08": {
+  "kind": "face",
+  "file": "img/face-maid-08.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqI5n83uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-09": {
+  "kind": "face",
+  "file": "img/face-maid-09.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAJzKMCDY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-10": {
+  "kind": "face",
+  "file": "img/face-maid-10.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huRU25IvqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-11": {
+  "kind": "face",
+  "file": "img/face-maid-11.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8WtiHgv9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-12": {
+  "kind": "face",
+  "file": "img/face-maid-12.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF27DuxfSh",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "rejected": {
+   "magnificUrl": "https://www.magnific.com/app/creation/gOIcmZQSXO",
+   "reason": "face read as masculine"
+  },
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-13": {
+  "kind": "face",
+  "file": "img/face-maid-13.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmTvzQwny",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-14": {
+  "kind": "face",
+  "file": "img/face-maid-14.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/KLMRpNzkqp",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-15": {
+  "kind": "face",
+  "file": "img/face-maid-15.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/VXUb7WSMMU",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-16": {
+  "kind": "face",
+  "file": "img/face-maid-16.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGB1QjfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-17": {
+  "kind": "face",
+  "file": "img/face-maid-17.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIO1PeVdqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-18": {
+  "kind": "face",
+  "file": "img/face-maid-18.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huRUAfVvqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-19": {
+  "kind": "face",
+  "file": "img/face-maid-19.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuXH389Aa",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-20": {
+  "kind": "face",
+  "file": "img/face-maid-20.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuXHZt9Aa",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-21": {
+  "kind": "face",
+  "file": "img/face-maid-21.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxTiDLa5Y2",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-22": {
+  "kind": "face",
+  "file": "img/face-maid-22.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNaDERYOq4",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-23": {
+  "kind": "face",
+  "file": "img/face-maid-23.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lp2Xhyr4r",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-24": {
+  "kind": "face",
+  "file": "img/face-maid-24.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov9LinV829",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-25": {
+  "kind": "face",
+  "file": "img/face-maid-25.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIO14G3dqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-26": {
+  "kind": "face",
+  "file": "img/face-maid-26.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3Edxiy42C",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "rejected": {
+   "magnificUrl": "https://www.magnific.com/app/creation/Bh4j6cloQR",
+   "reason": "face read as masculine"
+  },
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-27": {
+  "kind": "face",
+  "file": "img/face-maid-27.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBnIqLswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-maid-28": {
+  "kind": "face",
+  "file": "img/face-maid-28.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vMCS6JAL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-29": {
+  "kind": "face",
+  "file": "img/face-maid-29.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7KyVRpcl",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-maid-30": {
+  "kind": "face",
+  "file": "img/face-maid-30.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplFUc70eP",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-mama-1": {
+  "kind": "face",
+  "file": "img/face-mama-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSqJyyVNR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-mama-2": {
+  "kind": "face",
+  "file": "img/face-mama-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huRUGWOvqL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-mama-3": {
+  "kind": "face",
+  "file": "img/face-mama-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIcvQrSXO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-mama-4": {
+  "kind": "face",
+  "file": "img/face-mama-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw5yRZDCm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-mama-5": {
+  "kind": "face",
+  "file": "img/face-mama-5.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjEg9jYQD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-mama-6": {
+  "kind": "face",
+  "file": "img/face-mama-6.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjEg6sYQD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-05": {
+  "kind": "face",
+  "file": "img/face-eunuch-05.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8Jk4cvehw",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-06": {
+  "kind": "face",
+  "file": "img/face-eunuch-06.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdG8K2jfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-eunuch-07": {
+  "kind": "face",
+  "file": "img/face-eunuch-07.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jV3dVnKxe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-eunuch-08": {
+  "kind": "face",
+  "file": "img/face-eunuch-08.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsQwSecXe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-09": {
+  "kind": "face",
+  "file": "img/face-eunuch-09.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE3SGAdhJQ",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-10": {
+  "kind": "face",
+  "file": "img/face-eunuch-10.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIcafbSXO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-eunuch-11": {
+  "kind": "face",
+  "file": "img/face-eunuch-11.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE3SGY8hJQ",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-12": {
+  "kind": "face",
+  "file": "img/face-eunuch-12.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7K4RSpcl",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-eunuch-13": {
+  "kind": "face",
+  "file": "img/face-eunuch-13.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjES4rYQD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-14": {
+  "kind": "face",
+  "file": "img/face-eunuch-14.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8Wvbogv9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-15": {
+  "kind": "face",
+  "file": "img/face-eunuch-15.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGtVbjfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-16": {
+  "kind": "face",
+  "file": "img/face-eunuch-16.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hVutm7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-17": {
+  "kind": "face",
+  "file": "img/face-eunuch-17.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyriySXSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-18": {
+  "kind": "face",
+  "file": "img/face-eunuch-18.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oYvIWl8e",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-eunuch-19": {
+  "kind": "face",
+  "file": "img/face-eunuch-19.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nPV0yQLD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-eunuch-20": {
+  "kind": "face",
+  "file": "img/face-eunuch-20.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Syt0CunUb8",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-thaihau-1": {
+  "kind": "face",
+  "file": "img/face-thaihau-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZom816B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-thaihau-2": {
+  "kind": "face",
+  "file": "img/face-thaihau-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZove16B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-thaihau-3": {
+  "kind": "face",
+  "file": "img/face-thaihau-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGmTijfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-thaihau-4": {
+  "kind": "face",
+  "file": "img/face-thaihau-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbtjuwREY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-thaihau-5": {
+  "kind": "face",
+  "file": "img/face-thaihau-5.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyr37LXSL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-thaihau-6": {
+  "kind": "face",
+  "file": "img/face-thaihau-6.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7KNwHpcl",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-1": {
+  "kind": "face",
+  "file": "img/face-emperor-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Syt0Em2Ub8",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-2": {
+  "kind": "face",
+  "file": "img/face-emperor-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeAtBDxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-3": {
+  "kind": "face",
+  "file": "img/face-emperor-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmTuC7wny",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-4": {
+  "kind": "face",
+  "file": "img/face-emperor-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSqPy7VNR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-5": {
+  "kind": "face",
+  "file": "img/face-emperor-5.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzv22LD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-6": {
+  "kind": "face",
+  "file": "img/face-emperor-6.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2ForXl6D9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-7": {
+  "kind": "face",
+  "file": "img/face-emperor-7.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE3SYS6hJQ",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-emperor-8": {
+  "kind": "face",
+  "file": "img/face-emperor-8.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAJTOICDY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-official-1": {
+  "kind": "face",
+  "file": "img/face-official-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIcEDkSXO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-official-2": {
+  "kind": "face",
+  "file": "img/face-official-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCe5hsPW9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-official-3": {
+  "kind": "face",
+  "file": "img/face-official-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzveeLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-official-4": {
+  "kind": "face",
+  "file": "img/face-official-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDZID216B",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-official-5": {
+  "kind": "face",
+  "file": "img/face-official-5.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZw0jya47",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-official-6": {
+  "kind": "face",
+  "file": "img/face-official-6.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hVHYz7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-baby-3": {
+  "kind": "face",
+  "file": "img/face-prince-baby-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8WEGlgv9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-baby-4": {
+  "kind": "face",
+  "file": "img/face-prince-baby-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSq9FfVNR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-baby-3": {
+  "kind": "face",
+  "file": "img/face-princess-baby-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF27Tw2fSh",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-baby-4": {
+  "kind": "face",
+  "file": "img/face-princess-baby-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fp5eRynm",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-small-3": {
+  "kind": "face",
+  "file": "img/face-prince-small-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hVHDV7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-small-4": {
+  "kind": "face",
+  "file": "img/face-prince-small-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzacWLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-small-3": {
+  "kind": "face",
+  "file": "img/face-princess-small-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzfw4LD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-small-4": {
+  "kind": "face",
+  "file": "img/face-princess-small-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeAvwRxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-child-3": {
+  "kind": "face",
+  "file": "img/face-prince-child-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzfyJLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-child-4": {
+  "kind": "face",
+  "file": "img/face-prince-child-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzf4RLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-child-3": {
+  "kind": "face",
+  "file": "img/face-princess-child-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGa41jfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-child-4": {
+  "kind": "face",
+  "file": "img/face-princess-child-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAJMLTCDY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-teen-3": {
+  "kind": "face",
+  "file": "img/face-prince-teen-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbtldFREY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-prince-teen-4": {
+  "kind": "face",
+  "file": "img/face-prince-teen-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov9Lz1k829",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-teen-3": {
+  "kind": "face",
+  "file": "img/face-princess-teen-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNaD577Oq4",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-princess-teen-4": {
+  "kind": "face",
+  "file": "img/face-princess-teen-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGfLajfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-woman-mid-1": {
+  "kind": "face",
+  "file": "img/face-woman-mid-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXzCgJLD0",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-woman-mid-2": {
+  "kind": "face",
+  "file": "img/face-woman-mid-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAJDHRCDY",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-woman-mid-3": {
+  "kind": "face",
+  "file": "img/face-woman-mid-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hVbNy7EI",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-woman-mid-4": {
+  "kind": "face",
+  "file": "img/face-woman-mid-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nPXnLQLD",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "rejected": {
+   "magnificUrl": "https://www.magnific.com/app/creation/XmPxGaTBfo",
+   "reason": "face read as masculine"
+  }
+ },
+ "face-woman-mid-5": {
+  "kind": "face",
+  "file": "img/face-woman-mid-5.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8WQ9Igv9",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-woman-mid-6": {
+  "kind": "face",
+  "file": "img/face-woman-mid-6.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsQ48scXe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-woman-mid-7": {
+  "kind": "face",
+  "file": "img/face-woman-mid-7.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdGfFejfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-woman-mid-8": {
+  "kind": "face",
+  "file": "img/face-woman-mid-8.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4jzVroQR",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-man-old-1": {
+  "kind": "face",
+  "file": "img/face-man-old-1.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgeAabgxtc",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-man-old-2": {
+  "kind": "face",
+  "file": "img/face-man-old-2.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqIl9Z3uK",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-man-old-3": {
+  "kind": "face",
+  "file": "img/face-man-old-3.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7KRMPpcl",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82"
+ },
+ "face-man-old-4": {
+  "kind": "face",
+  "file": "img/face-man-old-4.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/Syt0qwtUb8",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "dropped": "owner review 11/13: stern/sly, sad, plump, childlike, tanned or odd expression"
+ },
+ "face-consort-41": {
+  "kind": "face",
+  "file": "img/face-consort-41.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytTaIGUb8",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "consort tier4",
+  "review": "serene, fair skin, adult"
+ },
+ "face-consort-42": {
+  "kind": "face",
+  "file": "img/face-consort-42.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jVReTYKxe",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "consort tier4",
+  "review": "serene, fair skin, adult"
+ },
+ "face-consort-43": {
+  "kind": "face",
+  "file": "img/face-consort-43.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBYtXaswO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "consort tier4",
+  "review": "serene, fair skin, adult"
+ },
+ "face-consort-44": {
+  "kind": "face",
+  "file": "img/face-consort-44.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOI0vIJSXO",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "consort tier4",
+  "review": "serene, fair skin, adult"
+ },
+ "face-consort-45": {
+  "kind": "face",
+  "file": "img/face-consort-45.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egq7gtTfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "consort tier4",
+  "review": "serene, fair skin, adult"
+ },
+ "face-maid-31": {
+  "kind": "face",
+  "file": "img/face-maid-31.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/If6gZiNtvE",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "maid 18-30",
+  "review": "serene, fair skin, adult"
+ },
+ "face-maid-32": {
+  "kind": "face",
+  "file": "img/face-maid-32.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE3UARehJQ",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "maid 18-30",
+  "review": "serene, fair skin, adult"
+ },
+ "face-maid-33": {
+  "kind": "face",
+  "file": "img/face-maid-33.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdz8BljfW",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "maid 18-30",
+  "review": "serene, fair skin, adult"
+ },
+ "face-mama-7": {
+  "kind": "face",
+  "file": "img/face-mama-7.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vDEErJAL",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "mama 45+",
+  "review": "serene, fair skin, adult"
+ },
+ "face-mama-8": {
+  "kind": "face",
+  "file": "img/face-mama-8.webp",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuBqbN9Aa",
+  "model": "GPT 2.6 (gpt-2-6), 1k high",
+  "size": "256x256 q82",
+  "tags": "mama 45+",
+  "review": "serene, fair skin, adult"
+ },
+ "map-sang": {
+  "kind": "map",
+  "file": "img/map-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/ha_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/LwpBTEzswO"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-xuan-sang": {
+  "kind": "map",
+  "file": "img/map-xuan-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/xuan_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/VXsUB2CMMU"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-ha-sang": {
+  "kind": "map",
+  "file": "img/map-ha-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/ha_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/LwpBTEzswO"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-thu-sang": {
+  "kind": "map",
+  "file": "img/map-thu-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/thu_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/jUDXV4hLD0"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-dong-sang": {
+  "kind": "map",
+  "file": "img/map-dong-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/dong_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/JNta8zKOq4"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-chieu": {
+  "kind": "map",
+  "file": "img/map-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/ha_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/LwpBTEzswO"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-xuan-chieu": {
+  "kind": "map",
+  "file": "img/map-xuan-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/xuan_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/VXsUB2CMMU"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-ha-chieu": {
+  "kind": "map",
+  "file": "img/map-ha-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/ha_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/LwpBTEzswO"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-thu-chieu": {
+  "kind": "map",
+  "file": "img/map-thu-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/thu_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/jUDXV4hLD0"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-dong-chieu": {
+  "kind": "map",
+  "file": "img/map-dong-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/dong_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/JNta8zKOq4"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-toi": {
+  "kind": "map",
+  "file": "img/map-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/ha_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/EbZzRkFuuO"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-xuan-toi": {
+  "kind": "map",
+  "file": "img/map-xuan-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/xuan_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/ks0DcLY16B"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-ha-toi": {
+  "kind": "map",
+  "file": "img/map-ha-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/ha_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/EbZzRkFuuO"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-thu-toi": {
+  "kind": "map",
+  "file": "img/map-thu-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/thu_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/79IvIGkJAL"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-dong-toi": {
+  "kind": "map",
+  "file": "img/map-dong-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/dong_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/p8SJSFMehw"
+  },
+  "what": "Hoàng cung (Hậu cung) overview, Nhất phẩm grade, m = Hoàng đế twin (women consorts), no people; laid out from hoangcung_site_plan_v3c",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-hotspots": {
+  "kind": "map-hotspots",
+  "file": "img/map-hotspots.json",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/_plan/hoangcung_site_plan_v3c.png",
+   "commit": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319"
+  },
+  "what": "hand-placed hotspot boxes on the map pictures, buildings identified from plan v3c"
+ },
+ "map-fest-newyear-sang": {
+  "kind": "map",
+  "festival": "newyear",
+  "file": "img/map-fest-newyear-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/newyear_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/LweAMgwswO"
+  },
+  "what": "Tết Nguyên đán dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific LweAMgwswO | no generation | 0 cr | code tint sang of newyear_trua (S339; L1 has no people)",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-newyear-chieu": {
+  "kind": "map",
+  "festival": "newyear",
+  "file": "img/map-fest-newyear-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/newyear_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/LweAMgwswO"
+  },
+  "what": "Tết Nguyên đán dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific LweAMgwswO | no generation | 0 cr | code tint chieu of newyear_trua (S339; L1 has no people)",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-newyear-toi": {
+  "kind": "map",
+  "festival": "newyear",
+  "file": "img/map-fest-newyear-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/newyear_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/BhO1SW4oQR"
+  },
+  "what": "Tết Nguyên đán dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific BhO1SW4oQR | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref ks0DcLY16B (xuan_toi) | NBP festival edit of xuan_toi (copy-unchanged form, ONE change: the festival dressing; NO peo",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-nguyentieu-toi": {
+  "kind": "map",
+  "festival": "nguyentieu",
+  "file": "img/map-fest-nguyentieu-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/nguyentieu_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/JNmTthkOq4"
+  },
+  "what": "Tết Nguyên tiêu dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific JNmTthkOq4 | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref ks0DcLY16B (xuan_toi) | NBP festival edit of xuan_toi (copy-unchanged form, ONE change: the festival dressing; NO peo",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-thanhminh-sang": {
+  "kind": "map",
+  "festival": "thanhminh",
+  "file": "img/map-fest-thanhminh-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/thanhminh_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/u5AJ326QLD"
+  },
+  "what": "Tiết Thanh minh dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific u5AJ326QLD | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref VXsUB2CMMU (xuan_trua) | NBP festival edit of xuan_trua (copy-unchanged form, ONE change: the festival dressing; NO p",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-doanngo-trua": {
+  "kind": "map",
+  "festival": "doanngo",
+  "file": "img/map-fest-doanngo-trua.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/doanngo_trua.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/w4IcXIb7EI"
+  },
+  "what": "Tết Đoan ngọ dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific w4IcXIb7EI | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref LwpBTEzswO (ha_trua) | NBP festival edit of ha_trua (copy-unchanged form, ONE change: the festival dressing; NO peopl",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-phoenix-sang": {
+  "kind": "map",
+  "festival": "phoenix",
+  "file": "img/map-fest-phoenix-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/phoenix_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/XmJkJIoBfo"
+  },
+  "what": "Hội Phượng (thi cưỡi ngựa bắn cung) dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific XmJkJIoBfo | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref LwpBTEzswO (ha_trua) | NBP festival edit of ha_trua (copy-unchanged form, ONE change: the festival dressing; NO peopl",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-thattich-toi": {
+  "kind": "map",
+  "festival": "thattich",
+  "file": "img/map-fest-thattich-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/thattich_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/lJXzp2lgv9"
+  },
+  "what": "Tết Thất tịch dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific lJXzp2lgv9 | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref 79IvIGkJAL (thu_toi) | NBP festival edit of thu_toi (copy-unchanged form, ONE change: the festival dressing; NO peopl",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-trungthu-sang": {
+  "kind": "map",
+  "festival": "trungthu",
+  "file": "img/map-fest-trungthu-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/trungthu_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/MBgHszpDCm"
+  },
+  "what": "Tết Trung thu dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific MBgHszpDCm | no generation | 0 cr | code tint sang of trungthu_trua (S339; L1 has no people)",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-trungthu-chieu": {
+  "kind": "map",
+  "festival": "trungthu",
+  "file": "img/map-fest-trungthu-chieu.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/trungthu_chieu.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/MBgHszpDCm"
+  },
+  "what": "Tết Trung thu dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific MBgHszpDCm | no generation | 0 cr | code tint chieu of trungthu_trua (S339; L1 has no people)",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-trungthu-toi": {
+  "kind": "map",
+  "festival": "trungthu",
+  "file": "img/map-fest-trungthu-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/trungthu_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/8aPxOFOIrU"
+  },
+  "what": "Tết Trung thu dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific 8aPxOFOIrU | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref 79IvIGkJAL (thu_toi) | NBP festival edit of thu_toi (copy-unchanged form, ONE change: the festival dressing; NO peopl",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-trungcuu-trua": {
+  "kind": "map",
+  "festival": "trungcuu",
+  "file": "img/map-fest-trungcuu-trua.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/trungcuu_trua.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/79t0828JAL"
+  },
+  "what": "Tết Trùng cửu dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific 79t0828JAL | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref jUDXV4hLD0 (thu_trua) | NBP festival edit of thu_trua (copy-unchanged form, ONE change: the festival dressing; NO peo",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-dongchi-sang": {
+  "kind": "map",
+  "festival": "dongchi",
+  "file": "img/map-fest-dongchi-sang.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/dongchi_sang.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/vQigNBLa47"
+  },
+  "what": "Tiết Đông chí dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific vQigNBLa47 | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref JNta8zKOq4 (dong_trua) | NBP festival edit of dong_trua (copy-unchanged form, ONE change: the festival dressing; NO p",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ },
+ "map-fest-giaothua-toi": {
+  "kind": "map",
+  "festival": "giaothua",
+  "file": "img/map-fest-giaothua-toi.webp",
+  "source": {
+   "repo": "thientran2711/phuong-lenh-art",
+   "branch": "main",
+   "path": "places/palace/nhat/m/L1/overview/giaothua_toi.webp",
+   "commit": "e1993f449f077af24353f39ca9d0cd1f1e882606",
+   "repoHead": "29b6bb97cd65ac5b2f25b4d4f5da511f55245319",
+   "magnificUrl": "https://www.magnific.com/app/creation/rgMRVVKxtc"
+  },
+  "what": "Đêm Giao thừa dressing of the Hoàng cung overview (nhat m L1, no people)",
+  "note": "Magnific rgMRVVKxtc | imagen-nano-banana-2 (Nano Banana Pro) 2k 16:9 | 75 cr | ref p8SJSFMehw (dong_toi) | NBP festival edit of dong_toi (copy-unchanged form, ONE change: the festival dressing; NO peo",
+  "processing": "resized 2752x1536 -> 1792x1000 (Lanczos), WebP q64-70, <=400 KB"
+ }
+}

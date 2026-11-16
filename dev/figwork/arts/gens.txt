@@ -1,0 +1,17 @@
+# arts/virtues/book (key = output basename without .webp; PFX="" in fetch.py)
+art-cam LwB0VJMswO
+art-ky 79vdBitJAL
+art-thi s7oTMPIl8e
+art-hoa 79vdBRhJAL
+art-vu aF2P9kTfSh
+art-y gOIMp3tSXO
+art-theu rgeYcYoxtc
+art-nau LwB0VTBswO
+vir-cong Do7xLLlpcl
+vir-ngon 79vdB8lJAL
+vir-hanh jUXcTDFLD0
+vir-dung Bh4gU9loQR
+book-cover rgeY0OAxtc
+book-left w4heBZX7EI
+book-right aF2PNrVfSh
+book-end P3E8mch42C

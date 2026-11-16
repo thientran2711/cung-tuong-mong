@@ -1,0 +1,14 @@
+# Report: verbatim rule files (session_01UV1SzghGXF2QE55VX7SGi6) — DONE
+Files: dev/art/OWNER_ART_RULES.md, dev/PRIORITY_RULES.md. Every line copied unchanged by script from line-number lists (checked: 0 mismatches against dev/OWNER_DECISIONS.md). Tag [OD:Lnn] = line in OWNER_DECISIONS.md.
+## Counts (OD lines per group)
+Art: A1 tools/CDN/samples 43 · A2 style/faces/figures 70 · A3 costumes/hair/veils/makeup 50 · A4 scenes/backgrounds 55 · A5 events/animations/effects 128 · A6 items/icons 30 · A7 frames/ornaments 37 · A8 other 48 · other files 172 lines.
+Priority: P1 binding laws 70 · P2 process 91 · P3 design/balance 52 · P4 wording 32 · P5 other standing 143 · other files 230 lines.
+CANON OVERWRITE (owner 16/11 07:55Z, OD:L1232) applied: no SUPERSEDED entries any more. Where a newer line explicitly says CORRECTION / REVERSES / REPLACES / OVERRIDE / CLARIFICATION / final etc., the older line was deleted and the newer line stands in its slot (about 40 pairs, incl. model rule OD:L1053-1057 -> L1059). The rule itself is in PRIORITY_RULES (OD:L1232).
+## Sources searched
+dev/OWNER_DECISIONS.md (all 1231 lines, classified by 5 readers, plus my keyword cross-check), dev/art/*.md, dev/HANDOVER.md, dev/kit/KIT.md, dev/handover/* (HANDOVER_*, FOREMAN_*, SESSION8_QUEUE, OWNER_LEDGER, WORKER_BRIEF, REVIEWER, PREAMBLE, AGENTS_SESSION6, TAKEOVER_*, CLAIMS, NAMING_PROPOSAL). Non-OD files: only owner-tagged lines or owner-rule sections (section "Z").
+## Ambiguous / caution
+- Inclusion was deliberately generous; some UI-layout lines may sit in the art file. Better too many than a lost rule.
+- NOT applied (57 older->newer candidate pairs found by classifiers, but the newer line has no explicit replace wording, so the older rule may still be valid): L9->L90, L16->L182, L65->L77, L75->L77, L80->L81, L90->L212, L90->L216, L102->L231, L117->L124, L121->L122, L124->L125, L126->L139, L139->L144, L185->L197, L189->L197, L231->L245, L284->L307, L284->L311, L307->L332, L330->L342, L363->L365, L366->L390, L375->L380, L395->L398, L398->L403, L401->L407, L403->L407, L411->L412, L469->L477, L501->L516, L502->L517, L517->L530, L525->L590, L526->L646, L528->L595, L529->L592, L532->L701, L532->L702, L542->L543, L598->L599, L613->L707, L613->L708, L616->L703, L616->L704, L687->L747, L790->L800, L844->L987, L924->L962, L962->L985, L980->L1000, L1088->L1098, L1135->L1148, L1155->L1161, L1203->L1204, L1206->L1207, L1206->L1209, L1230->L1231. Coordinator or sếp decides; both lines are still in the files.
+- Section Z contains coordinator restatements of owner rules; where they differ from OD lines, OD wins.
+- ~31 lines the readers were unsure about are in A8 / P5.
+- Not read line by line by me: OWNER_ART_RULES/PRIORITY_RULES completeness depends on the classifiers; I cross-checked key terms (Magnific, huadian, LUẬT, PRIORITY, binding) and added the misses.
