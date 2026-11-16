@@ -1185,3 +1185,4 @@ All must work in co-op.
 - (16/11) LIVE: evidence-truth-r1 7f20b751b on main (true evidence; frames sometimes land, defence can fail; per-road defence odds).
 - (16/11) OWNER DECISION: the left edge of the stage = one compact column of icons: Lịch (calendar), Chat (co-op), Nhiệm vụ (goal). The goal STRIP is replaced by the icon (no strip on the stage or the panel). → kit part kitStageRail §77 on review/goal-strip-fix; coop-chat mounts into it.
 - (16/11) Owner: person-target pickers (spy target etc.) show a generic scene picture instead of the person's portrait, and the options sit in a tiny cut-off scroll box. Rule: an option for a person shows that person's kit portrait (silhouette for strangers). → review/pcard-actrow.
+- (16/11) LIVE bug: nearly every Sổ ghi act line shows a false 'Ân tình 0→1' → review/log-sync (worker on log number mismatch).
