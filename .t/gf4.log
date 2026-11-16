@@ -1,0 +1,22 @@
+18:31:14 old/offline
+{
+ "oldSave": {
+  "name": "Hạ Ngọc Hành",
+  "key": "hclh-save-v2-3"
+ },
+ "oldLoad": {
+  "ok": true,
+  "name": "Hạ Ngọc Hành",
+  "inv": 2
+ },
+ "swCached": [
+  "pixi-8.5.2.min.js?h=1341e0cc3a8e91ff"
+ ],
+ "offline": {
+  "pixi": true,
+  "overlay": true,
+  "parts": 0,
+  "stage": true
+ },
+ "offlineErrs": []
+}
