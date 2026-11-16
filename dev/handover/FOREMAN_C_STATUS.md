@@ -14,7 +14,8 @@ Base main at start: 900ace7fb.
 | D53 opt-pics leftovers (option cards on act placeholder, 62–68 per life; meaning-group choices e.g. 'Ngắt hoa dâng Thái hậu', 'Hẹn hôm khác', 'Cáo bận việc cung'; list in dev/art/MISSING_PICS.md on placeholder-pics2) | review/opt-pics2 | sonnet | RUNNING (art worker; check review/opt-pics (session 8) first) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | PASS 6452171fc — CONDITIONAL on kit keeper sign-off (K5) |
 | D45 small art | review/small-art @7aa5bc832 (art on CDN: earrings, shoes, per-rank pendants/bangles/sachets, 3 maid robes, guard 4 indigo, c02-t1-a18 skin, 2 Emperor Qing-hat pictures redrawn) → review/small-art-wire (code wiring + rebuild, on top of promo-rules-r1) | sonnet | RUNNING (wiring worker) |
-| A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
+| A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
+| D23 whole-game mole audit + D24 consort-c12-ty5-a51 eye patch | review/mole-audit | sonnet | RUNNING (art worker) |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | PASS fa02fc656 |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | PASS bc0a1ba24 |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
@@ -27,7 +28,7 @@ Base main at start: 900ace7fb.
 | D1 result-sfx | review/result-sfx @58982a4f9 → review/result-sfx-r1 | sonnet | REVIEWING (worker SẴN SÀNG KIỂM; central kitResultSfx, kg82ShowRes ok-arg 7/7, iOS WebAudio unlock + GainNode; SND_DEFAULT still false pending Q1) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D6, D9, D11–D20, D22–D27, D44, D48–D52) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D6, D9, D11–D20, D22, D25–D27, D44, D48–D52) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -38,6 +39,7 @@ PASS review/cal-plus-r1 a151b4939fe4713fe10c80f09a3333dd4be5f25b (A8; descends f
 PASS review/promo-rules-r1 0d425b5a8665d3891981e4de246c590c1bc2feb3 (A9; descends from main 2afdafc39; CONDITIONAL: kit keeper signs off K4 first; promo-rules 29/29 at 5 viewports, effects now real §68 painted sprites — the branch's calls had wrong signatures so nothing painted ever played; promo-exam 17/18 old-save step fails on main too)
 PASS review/cardflip-r1 6452171fce1da8d0cf7f8acca2bee99ed80dff75 (A11; descends from main c36a06321; CONDITIONAL: kit keeper signs off K5; reviewer replaced CSS gold glow with §68 glow-gold; dev/test/cardflip.js timed out (CPU-starved box) → reduced real-browser test at 5 viewports, no errors/overflow; final merge not re-run in browser)
 PASS review/placeholder-pics2-r1 81af8e41264c4012c9f3744534db3fa3f0b28341 (D46; descends from main a523531da; e68 flowerBloom picture drawn + CDN + KIT_DLGMAP; 0/304 events and 0/98 acts on placeholder; missing_pics.js now lists 64 option cards → D53)
+PASS review/recipes-r2 9eafa355bb294aab0d61c7c0966576e44dcebc7c (A13; descends from main a523531da; jrcp.js stays LAST in assemble; recipes.js 5 viewports, month-cal, item-events 86 ok, ts-oldsave ok, coop-e2e ok on first merge only; fixed clipped shop book line at 755)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 PASS review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
@@ -60,6 +62,7 @@ PASS review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from
 - KIT REQUEST K6 (A7 cycle-r1, made 15/11 before the rule): j19.js shared colour rule KRED 'nguy' → 'nguy(?!ệt)' so names with 'Nguyệt' stop turning red. One-word bug fix; kit keeper please approve.
 - Q4 (owner, A7): Kính sự phòng book now costs ~1/4 of monthly bổng vs a risky free peek (Năm ăn năm thua). Right weight, or heavier?
 - NOTE for session 8 (D45 Emperor audit): 2 Qing-hat Emperor pictures fixed (ev-hoang-de-gian, ev-hoang-de-vui). The remaining act pictures still to be drawn on review/act-pics2 (session 8, C4) must follow the same rule: gold hair crown / Ming gauze hat, crossed round collar, never a knobbed Qing cap or queue.
+- Design notes (A13 recipes, not blocking): consort-favour teacher (thiện cảm −4) much cheaper than nữ quan fee at high rank; NPC sub-style knowledge is a hash of art level, not learnt; Tứ đức teacher fee flat 5+5×bậc → Foreman C will fold these into D16 (Tứ đức sub-styles, opus econ).
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
