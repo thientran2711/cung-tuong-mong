@@ -15460,7 +15460,7 @@ Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
 const TD_RULES={
  cong:[["1","Xem chỉ mẫu ở trên, chạm sợi chỉ cùng màu."],["2","Đặt ngón tay lên chấm xanh, kéo kim men theo nét chấm tới cờ đỏ."],["3","Lệch khỏi nét thì mũi chỉ không bám; kéo lại gần nét là thêu tiếp được."]],
- dung:[["1","Bước chân nào cũng làm bát nghiêng một chút. Dấu trên sàn có mũi tên chỉ bên nghiêng."],["2","Giữ nửa trái hoặc nửa phải của khung để đỡ bát về phía ngược lại."],["3","Giữ cây kim chỉ ở vùng sáng giữa thanh là được điểm; bát đổ thì đứng lại một nhịp."]],
+ dung:[["1","Bước chân nào cũng làm bát nghiêng một chút. Dấu trên sàn có mũi tên chỉ bên nghiêng."],["2","Giữ nửa trái hoặc nửa phải của khung để đỡ bát về phía ngược lại."],["3","Giữ mũi tên xanh ở vùng sáng giữa thanh là được điểm; bát đổ thì đứng lại một nhịp."]],
  ngon:[["1","Xem người nói là bề trên, ngang hàng hay kẻ dưới, và sắc mặt người ấy."],["2","Dòng Phép ứng đối ghi sẵn nên nói giọng nào."],["3","Chọn lời có nhãn giọng ấy. Giọng thẳng thắn dễ làm mất lòng, đừng chọn."]],
  hanh:[["1","Mỗi người chờ ghi rõ cần mấy phần."],["2","Bấm + để thêm một phần cho người ấy, bấm − để bớt lại."],["3","Chia cho ai cũng đủ, đừng thừa cho người này mà thiếu người kia, rồi bấm Phát xong."]]};
 const TD_GOAL={cong:"Đường kim đều và đúng màu chỉ",dung:"Bát giữ thẳng trọn buổi",ngon:"Lời nói vừa lòng người nghe",hanh:"Ai cũng được đủ phần cần"};
@@ -15528,9 +15528,9 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEa
   if(Math.abs(x)>=1){spill++;x=0;v=0;stag=1;kg82Pluck(0,false);kg82Pop(pops,W/2,H*.5,"Bát nghiêng quá, đứng lại một nhịp",red)}
   if(stag>0)stag-=dt;else if(Math.abs(x)<BAND)inB+=dt}
  /* real-time clock: a slow frame (down to ~4 fps) is run as several small steps, so a laggy phone gets the same 20 s as everyone, never a clock that crawls past the shared 97 s guard */
- function frame(now){if(stop)return;const dl=Math.min(.25,Math.max(0,(now-last)/1000));last=now;const n=Math.max(1,Math.ceil(dl/.034));for(let q=0;q<n&&t<DUR+1;q++)step(dl/n);pend=0;
-  env.hud({score:`${Math.round(inB/DUR*10)}/10`,round:`Bước ${Math.min(ki+1,KN)}/${KN}`,time:`${Math.max(0,Math.ceil(DUR+1-t))} giây`});
-  draw(now);if(t>=DUR+1){stop=true;return setTimeout(()=>env.end(Math.round(inB/DUR*10)),300)}raf=requestAnimationFrame(frame)}
+ function frame(now){if(stop)return;const dl=Math.min(.6,Math.max(0,(now-last)/1000));last=now;const n=Math.max(1,Math.ceil(dl/.034));for(let q=0;q<n&&t<DUR+1;q++)step(dl/n);pend=0;
+  env.hud({score:`${Math.min(10,Math.round(inB/DUR*10))}/10`,round:`Bước ${Math.min(ki+1,KN)}/${KN}`,time:`${Math.max(0,Math.ceil(DUR+1-t))} giây`});
+  draw(now);if(t>=DUR+1){stop=true;return setTimeout(()=>env.end(Math.min(10,Math.round(inB/DUR*10))),300)}raf=requestAnimationFrame(frame)}
  const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);dir=Math.max(-1,Math.min(1,d))};
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [px]=C.at(e);ptr.set(e.pointerId,px<W/2?-1:1);pend=px<W/2?-1:1;try{C.cv.setPointerCapture(e.pointerId)}catch(_){}setDir()});
  const up=e=>{ptr.delete(e.pointerId);setDir()};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
@@ -29291,7 +29291,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1a8118e6cd4e";window.CTM_BUILD=BUILD;
+const BUILD="3ee36d2670c5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

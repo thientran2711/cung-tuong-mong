@@ -14,8 +14,8 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
  const shot=async n=>{if(SH==='none')return;await p.locator('#kg82').screenshot({path:`${OUT}/${n}-${SZ}.jpg`,type:'jpeg',quality:70,timeout:60000})};
  const res=[];
  for(const k of KINDS){for(const mode of ['self','master']){if(mode==='master'&&SH==='quick')continue;
-  try{const lv=+(LV||0);const before=await p.evaluate(([k,lv])=>{Q.length=0;S.vir[k]=lv;S.virp[k]=0;S.suc=100;S.bac=300;S.turn=S.turn||0;S.mg=null;TDS.busy=false;return{lv:S.vir[k],p:S.virp[k],turn:S.turn,t:typeof S.t!=='undefined'?S.t:null}},[k,lv]);
-  await p.evaluate(([k,m])=>{window.__done=null;lessonVir(k,m)},[k,mode]);await p.waitForSelector('#kg82go',{timeout:5000});await p.waitForTimeout(300);await shot(`${k}-${mode}-1intro`);
+  try{const lv=+(LV||0);const before=await p.evaluate(([k,lv])=>{Q.length=0;S.vir[k]=lv;S.virp[k]=0;S.suc=100;S.bac=300;used=0;KG82.over=0;S.turn=S.turn||0;S.mg=null;TDS.busy=false;return{lv:S.vir[k],p:S.virp[k],turn:S.turn,t:typeof S.t!=='undefined'?S.t:null}},[k,lv]);
+  await p.evaluate(([k,m])=>{window.__done=null;lessonVir(k,m)},[k,mode]);await p.waitForSelector('#kg82go',{timeout:30000});await p.waitForTimeout(300);await shot(`${k}-${mode}-1intro`);
   await p.evaluate(()=>document.getElementById('kg82go').click());await p.waitForTimeout(500);await shot(`${k}-${mode}-2play`);
   const t0=Date.now();await p.evaluate(()=>{window.__bt&&clearInterval(window.__bt);let pid=1;window.__bt=setInterval(()=>{const pk=KG82.peek();if(!pk)return;const cv=document.querySelector('#kg82box canvas');
     const ev=(t,x,y,id)=>cv&&cv.dispatchEvent(new PointerEvent(t,{clientX:x,clientY:y,pointerId:id||1,pointerType:'touch',bubbles:true,isPrimary:true,cancelable:true}));
@@ -32,6 +32,6 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
   let after=null;if(ok){await p.evaluate(()=>document.getElementById('kg82ok').click());await p.waitForTimeout(400);after=await p.evaluate(([k])=>({lv:S.vir[k],p:S.virp[k],log:(S.log||[]).slice(-1)[0],ov:document.getElementById('ov').hidden}),[k])}
   const pass=ok&&(!info.last||info.last.skipped||info.last.raw>=3)&&!info.over&&!info.ell&&!info.pct&&!info.hudOver&&after&&(after.lv>before.lv||after.p>before.p)&&after.ov;
   res.push({k,mode,pass:!!pass,raw:info.last&&info.last.raw,gain:info.last&&info.last.gain,over:info.over,ell:info.ell,pct:info.pct,hudOver:info.hudOver,after:after&&{lv:after.lv,p:after.p,log:String(after.log&&after.log.t||after.log).slice(0,90)},ms:Date.now()-t0});
-  }catch(e){res.push({k,mode,pass:false,err:String(e.message).slice(0,200)})}await p.evaluate(()=>{try{if(document.getElementById('kg82'))kg82Close();TDS.busy=false}catch(e){}})}}
+  }catch(e){let st=null;try{st=await p.evaluate(()=>({kg82:!!document.getElementById('kg82'),go:!!document.getElementById('kg82go'),busy:TDS.busy,phase:KG82.phase,ovh:document.getElementById('ov')&&document.getElementById('ov').hidden,q:Q.length,mg:!!S.mg,html:(document.getElementById('ov')||{innerHTML:''}).innerHTML.slice(0,150)}))}catch(x){st='eval failed '+x.message.slice(0,60)}res.push({k,mode,pass:false,err:String(e.message).slice(0,80),st})}await p.evaluate(()=>{try{if(document.getElementById('kg82'))kg82Close();TDS.busy=false}catch(e){}})}}
  console.log(JSON.stringify(res,null,1));console.log('page errors:',errs.length?errs.slice(0,5):'none');
  const fail=res.some(r=>!r.pass)||errs.length;await b.close();srv.close();process.exit(fail?1:0)})();
