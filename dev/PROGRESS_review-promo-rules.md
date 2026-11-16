@@ -38,3 +38,18 @@ Base: origin/main 23a8e80e. Worker: promo-rules (coordinator s7).
 - Co-op: `node dev/test/coop-e2e.js <outdir>` 59/59 (run with a local copy raising p.setDefaultTimeout to 240000: machine load 40 made the
   first page load exceed 30 s). NPC rewards run on the co-op host only; NPC servant exams are seeded (same on both clients).
 - Next: when review/fxkit (KIT §68) lands, check kitFxLight/kitFxSprite signatures match the calls in j93 kitEdict / kitGloom and jpromo kitPersonReveal.
+
+## Review r1 (review/promo-rules-r1, reviewer for Foreman C, 16/11)
+- Merged 53b0084d onto origin/main 900ace7f. Conflicts: j93 kitReward (main's tappable rows §70 + branch km-long), jexam (main's round counter
+  args + branch exRun), assemble.py (jpromo after jitd), generated files rebuilt.
+- REQUIRED FX change (fxkit §68 live): the branch called `kitFxLight(el,{kind:"gold"})` and `kitFxSprite(el,{name:"crack"})` — wrong signatures /
+  no such sprite, so nothing painted played, and the old CSS sweep + code-drawn dots stayed. Now (whole j93 family):
+  rank-up = painted glowburst + glow-gold light on the new frame; crack = painted jade shards (kitFxBurst "jade"); kmSpark (edict, tablet, chest)
+  = painted spark + gold-leaf petals; chest .kmlight, bloom .kmglow, incense ember/smoke = painted orb / ember / smoke atlases (CSS only scales,
+  fades, warms). kitPersonReveal: painted orb light BEHIND the figure (a screen clip on top would wash the face). CSS sweep + dot CSS removed.
+- Kit page §66.2 sample crashed with no game (#kit, S undefined) → guarded.
+- Tests: promo-rules 29/29 (5 sizes, old save), painted-FX run (log glowburst, glow-gold, spark, petal-gold, jade; 0 .kmfx dots, 0 errors),
+  promo-exam 17/18 (old-save step fails on main too), reward-box PASS, item-gain no fails, stipend errs [], kit-page 37 samples 0 bad (755, 1366),
+  390x844 rotate prompt, no overflow.
+- Follow-ups (art, not blocking): per-rank Đeo eo pendants, middle-rank Đeo tay bangles (now vongngoc r0–4 repeats each rank), per-rank Túi thơm,
+  maid robes per maid rank; servant-road edict animation.
