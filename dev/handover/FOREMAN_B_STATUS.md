@@ -16,9 +16,9 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
 | C33 weekbook-entries | review/weekbook-entries | sonnet | RUNNING (resumed) |
 | C34 contest-ui | review/contest-ui | sonnet | RUNNING (art) |
-| C35 pcard-fill | review/pcard-fill @85c2c933 | sonnet | REVIEWING (review/pcard-fill-r1, sonnet; renumber its KIT part §71→§73) |
+| C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
-| C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
+| C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
 | D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
 | D38 lost-items-port | review/lost-items-port | opus | RUNNING |
@@ -28,7 +28,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
 | D39 appearance-port | review/appearance-port @00ff5a35 | sonnet | REVIEWING (review/appearance-port-r1, sonnet) |
-| D40 weather-risk-port | review/weather-port | sonnet | QUEUED |
+| D40 weather-risk-port | review/weather-port | sonnet | RUNNING |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
 | D42 places-leftovers | review/places-port | sonnet | QUEUED (after D30) |
 
@@ -39,6 +39,7 @@ PASS review/mg-easy-r1 94644c1e6342eb7ea1003aae090cd5310a9597e5 (C23; knowledge 
 PASS review/buoi-transition-r1 c91bfdc4629fbf4ebf84307f543d44a394ff138b (C27; ink-wash buổi transition, KIT §71 jbuoi.js; 4 images already on CDN)
 PASS review/room-btn-r1 c80e5df978eaffb29ce218b4431e17b415232750 (C28; KIT §72 kitBackBtnHtml, painted room/map icons already on CDN; 'Bản đồ'→'Dư đồ' per VANPHONG)
 PASS review/rel-picker-r1 ce7c076a38d55c95901d19002832983f91560052 (C29; compact Giao tình pickers, kitNameRank face labels, pager arrows only on overflow game-wide; KIT §49.2c + sample)
+PASS review/pcard-fill-r1 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (C35; person card right side filled from kit parts, KIT §73; includes review/actcard-small-r1)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
