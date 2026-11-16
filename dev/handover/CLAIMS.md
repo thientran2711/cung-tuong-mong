@@ -340,3 +340,4 @@
 | PL COURTYARDS paint (sonnet art; OD:L1415 + 19:25Z; MISSING TSV in origin/review/pl-courtyards-r1:dev/handover/reports/pl-courtyards-r1.md, 6 multi-hall dirs incl. tang; 1 sample first → owner, then batch, CDN img/pl2 + pl2_sync.py) | review/pl-courtyards-art | C | session_011xDdVPpLX6EsrLyakadqwQ | RUNNING | 16/11 18:55Z |
 | DƯ ĐỒ MAP FRAME painted (sonnet art; FOREMAN_C 18:45Z s21; 3 style samples, 9-slice, mocked on iPad 1180x820 + Fold 755x1000 → owner; chosen one → KIT READY to main) | review/map-frame-art | C | session_011xDdVQTc7r6hnCLcZWWdgm | RUNNING | 16/11 18:55Z |
 | mg-tune review r1 (opus, BIG): review/mg-tune 96131b41 (mgPace time part, BAL.mgTier.pace) | review/mg-tune-r1 | B | session_01N1tNP6N19V74jBmPimyvBU | RUNNING | 16/11 19:03Z |
+| img-cleanup (owner OD 18:40Z/18:50Z): images out of git, check, briefs | review/img-cleanup | B | (B opens) | INBOX | 16/11 19:05Z |
