@@ -267,7 +267,7 @@
 | mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | session_01N1tNP2d8sR5Vo1a5Lh9UV9 | RUNNING | 16/11 16:44Z |
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
 | kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | session_01UV1Szjj42P74XsFm4trr8J | RUNNING | 16/11 16:50Z |
-| road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | session_01N1tNP4jWtq6Qf3eWpQ7krw | RUNNING | 16/11 16:47Z |
+| road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | session_01N1tNP4jWtq6Qf3eWpQ7krw | DONE FAIL 5 (archived) | 16/11 16:47Z |
 | road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | RUNNING | 16/11 16:47Z |
 | road B2 chapters nc(+bd)+td+ch .5–.11 (opus helper) | review/road-b2 | B | session_01N1tNP4zDh6M8kQNxdcYKvM | RUNNING | 16/11 16:47Z |
 | road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | RUNNING | 16/11 16:47Z |
@@ -276,3 +276,4 @@
 | ORIGIN INTROS successor (sonnet: final re-runs + coop tests + SẴN SÀNG KIỂM) from review/origin-intros @ef815769 | review/origin-intros | C | session_011xDdVSzL8F7w8e9XVKKjR4 | RUNNING | 16/11 16:55Z |
 | ORIGIN INTRO ART (sonnet art; 51 panels img/intro/<k>-<n>.webp 1280x720 + 7 gate pictures; ART LIST in origin-intros report; sample = one origin set first) | review/intro-art | C | session_011xDdVP2RGQi9JdcYahCJxx | RUNNING | 16/11 16:55Z |
 | flip-hand (sonnet; OD 17:40Z): live 2D card-flip hand like the PlayCanvas demo hand — bigger, sleeve from the edge, not cut, natural reach/pick motion; whole group (every place the Emperor's hand appears) | review/flip-hand | main s20 | session_01UV1SzieCnk4JS2TaGbUqL2 | RUNNING | 16/11 17:40Z |
+| road-history expert (sonnet; OD:L1327): history/drama/game check of the story-road chapters flagged HISTORY CHECK by ROAD_MAP + reviewers + B1–B3 → report | (report only) | B | (opening) | RUNNING | 16/11 17:02Z |
