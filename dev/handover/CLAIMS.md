@@ -136,7 +136,7 @@
 | scene-end button SWEEP, whole game (KIT §81; main s14 09:10Z) | review/scene-end-sweep | D | session_01DgYSWmAiQTHkmu8eoKhvWT | DONE SẴN SÀNG KIỂM 67db47f6 | 16/11 09:31Z |
 | servant-mline-r2 review (opus) | review/servant-mline-r3 | D | session_01DgYSWkVHL3tGcMAWshbEUA | DONE PASS b82d3bf3 | 16/11 09:32Z |
 | scene-end-sweep review (sonnet) | review/scene-end-sweep-r1 | D | session_01DgYSWog54ZBN61ZaY8nZCH | DONE PASS 67db47f6 | 16/11 09:41Z |
-| unmet-name leak family residue (bare-name log lines, palName, per-person ??? rows) | review/name-mask | D | session_01DgYSWoDkH3BjgWkcd7Y4Cg | RUNNING | 16/11 09:44Z |
+| unmet-name leak family residue (bare-name log lines, palName, per-person ??? rows) | review/name-mask | D | session_01DgYSWoDkH3BjgWkcd7Y4Cg | DONE SẴN SÀNG KIỂM 8b911c73 | 16/11 09:44Z |
 | design-scale phase 2/3 + maptab tab-mode reset bug (opus) | review/design-scale-p2 | main s14 | session_01UV1Szh2HXLUxv3oHmnezMy (opus) | RUNNING | 16/11 09:44Z |
 | co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | DONE SẴN SÀNG KIỂM 66a55b06 | 16/11 10:05Z |
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
@@ -169,3 +169,4 @@
 | cardflip-glow2 REVIEW (sonnet; owner-bug fast lane) | review/cardflip-glow2-r1 | main s16 | session_01UV1Szk2fgA2KyKg3zrmLgn | RUNNING | 16/11 12:19Z |
 | kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | RUNNING | 16/11 12:20Z |
 | weather-fx2 | review/weather-fx2 | main s16 | session_01UV1SzhWSw7EETVzp3xX5hi→worker weather-fx2 (this session) | RUNNING | 16/11 12:26Z |
+| name-mask review (sonnet) | review/name-mask-r1 | D | session_01DgYSWmyLaHvXUgNsFAkrBH | RUNNING | 16/11 12:40Z |

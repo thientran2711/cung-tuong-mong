@@ -41,7 +41,7 @@ main at start = eba64ead4.
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
 | D21 full review r2 → fix | review/coop-b1b5-r2 @d5879537 FAIL 1 BLOCKING (guest's jcycle answer ignored by host) → review/coop-b1b5-fix | opus | worker session_01DgYSWnyGPZR3V86DPDjc32 RUNNING (11:16Z); r2 reviewer archived |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
-| unmet-name leak residue (log lines, palName, ??? rows) | review/name-mask | sonnet | worker session_01DgYSWoDkH3BjgWkcd7Y4Cg RUNNING |
+| unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | SẴN SÀNG KIỂM (worker archived) → reviewer name-mask-r1 session_01DgYSWmyLaHvXUgNsFAkrBH RUNNING |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
@@ -143,6 +143,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 12:40Z: name-mask SẴN SÀNG KIỂM 8b911c73 → sonnet reviewer; worker archived.
 - 12:20Z: kc-roads-cn-nc-fix SẴN SÀNG KIỂM de331af6 (Chờ gap cnv +47→−7, nc +94→+17) → opus reviewer, tests it merged with entry-exam-r1; worker archived.
 - 12:18Z: emperor-visit SẴN SÀNG KIỂM 16a2d41e → opus reviewer (also: fix j8 nx() shown ≠ applied night numbers; morning card → KIT §81 end button). ART NEEDED (for main/C): 'Sáng hôm sau' morning banner for the visit night.
 - 11:53Z (hourly): no new D inbox orders. 5 D sessions alive: kc-roads fix (running, 8/8 home-route tests), coop-b1b5 fix, emperor-visit (visit half, bot run), name-mask (final scans), seatcap (sim lives 9–20). jmort.js still not on main 695934d1 → D4 + D57 keep waiting. No free real D items → no new spawns.
