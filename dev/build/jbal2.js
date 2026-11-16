@@ -183,6 +183,11 @@ BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* CO-OP (review/coop-b1b5, D21 B3): years a NEW Emperor (after a death in co-op) reigns before the month death roll can fire again (j3 uses 12 game years for the first one) */
+Object.assign(BAL,{coopEmpY:12});
+/* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
+   tin = her Chủ tin gain when she refuses and tells her mistress */
+Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;

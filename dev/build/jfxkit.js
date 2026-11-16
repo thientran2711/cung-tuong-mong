@@ -78,9 +78,33 @@ function kfkMove(name,p,i,n,o){const m=o.motion||KFK_MOVE[name]||"burst",W=inner
  if(m==="bloom")return{x:p.x+kR(-50,50),y:p.y+kR(-40,40),v:{life:o.life||kR(70,95),grow:kR(.006,.012),a0:kR(.55,.8),fade:"inout",vy:name==="smoke"?-kR(.5,1.1):0}};
  const a=o.up?kR(-Math.PI*.95,-Math.PI*.05):kR(0,Math.PI*2),v=kR(3,8)*sp;return{x:p.x,y:p.y,v:{vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,g:.08,drag:.95,life:o.life||kR(60,100),spin:kR(-.12,.12),sway:.4,fade:"out"},rot:name==="streak"?a:null}}
 function kitFxBurst(name,at,n,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())return Promise.resolve(0);kfkLog("burst:"+name);
+ if(KFK_LSP[name]){/* light sprites: KIT §68.7 — over a person the burst becomes a rim light on that person */const p0=kfkAt(at),d0=(KFK_SP[name].d||100)*(o.scale||1),gb={x:p0.x-d0/2,y:p0.y-d0/2,w:d0,h:d0};if(p0.r){gb.x=Math.min(gb.x,p0.r.left);gb.y=Math.min(gb.y,p0.r.top);gb.w=Math.max(gb.x+gb.w,p0.r.right)-gb.x;gb.h=Math.max(gb.y+gb.h,p0.r.bottom)-gb.y}
+  const rim=kfkRimFor(gb,name,{opacity:(o.a0!=null?o.a0:.8)-.3,dur:(o.life||60)*30,r:Math.max(8,Math.min(22,d0/12))});if(rim)return Promise.resolve(1)}
  return kfkLoad([name]).then(()=>{const p=kfkAt(at),N=kfBudget(n||12);let k=0;
   for(let i=0;i<N;i++){const m=kfkMove(name,p,i,N,o);const s=kfkSp(name,m.x,m.y,m.v,o.tint,(o.scale||1)*kR(.75,1.25),o.blend);if(s){k++;if(m.rot!=null)s.rotation=m.rot;if(m.v.coin)s.v.coin=1}}
   kfWake();return k}).catch(()=>0)}
+/* ---------- 1b. PERSON-SAFE LIGHT (owner 16/11 21:25Z, KIT §68.7) ----------
+   Light / glow NEVER lies over a person or a face. Wherever a light, a glow sprite or a light sheet would reach a person (stage figure, her figure,
+   portrait, avatar, makeup zoom, reveal figure) the kit draws a RIM light instead: a soft glow that starts at the person's own outline and radiates
+   OUTWARD (drop-shadow on the picture = the true silhouette). ONE guard for the whole game: kitFxLight / kitFxSheet(light) / kitFxBurst(glowburst, orb,
+   lotuslight) call it; a caller never decides. Particles (petals, sparks, coins) are objects, not light, and are not touched. */
+const KFK_PERSON="img.figimg,#mefig,img.kpor,.kfzoom,.ktrv-fw>img,span.md.kmini,.kpod-fig>img";
+const KFK_LSP={glowburst:1,lotuslight:1,orb:1};
+const KFK_TONE={"glow-gold":"255,214,120",candle:"255,196,110",moonlight:"205,222,255","lantern-red":"255,130,100",divine:"255,244,214",fireworks:"255,226,150",glowburst:"255,214,120",orb:"255,236,190",lotuslight:"255,206,226"};
+/* the visible persons whose picture meets the box {x,y,w,h} (viewport px); covered pictures (under a dialog) do not count */
+function kfkPersons(box){if(!box)return[];const out=[];try{for(const e of document.querySelectorAll(KFK_PERSON)){const r=e.getBoundingClientRect();if(r.width<8||r.height<8)continue;
+  if(r.right<=box.x||r.left>=box.x+box.w||r.bottom<=box.y||r.top>=box.y+box.h)continue;const cs=getComputedStyle(e);if(cs.visibility==="hidden"||cs.display==="none"||+cs.opacity<.05)continue;
+  const top=document.elementFromPoint(Math.min(innerWidth-1,Math.max(0,r.left+r.width/2)),Math.min(innerHeight-1,Math.max(0,r.top+r.height*.4)));if(top&&!(e===top||e.contains(top)||top.contains(e)))continue;out.push(e)}}catch(x){}return out}
+const kfkRectBox=t=>{try{const r=t.getBoundingClientRect();return r.width?{x:r.left,y:r.top,w:r.width,h:r.height}:null}catch(e){return null}};
+const kfkCBox=(b)=>b?{x:b.x-b.w/2,y:b.y-b.h/2,w:b.w,h:b.h}:null;
+/* kitFxRim(els, o) — rim light on the pictures in els: o {tone: a KFK_TONE name | rgb "r,g,b", a: strength 0..1, r: reach px, dur: ms}. Returns {stop(), alive}. */
+function kitFxRim(els,o){o=o||{};els=[].concat(els||[]).filter(e=>e&&e.animate);if(!els.length||!kfOn())return null;kfkLog("rim:"+(o.tone||"rgb"));
+ const c=o.rgb||KFK_TONE[o.tone]||"255,214,120",a=Math.max(.35,Math.min(1,o.a!=null?o.a:.85)),r=o.r||14,dur=o.dur||2200;const A=[];
+ const z=`drop-shadow(0 0 0 rgba(${c},0)) drop-shadow(0 0 0 rgba(${c},0))`,on=`drop-shadow(0 0 1px rgba(${c},${a})) drop-shadow(0 0 ${r}px rgba(${c},${(a*.85).toFixed(2)}))`;
+ for(const e of els){try{A.push(e.animate([{filter:z},{filter:on,offset:.22},{filter:on,offset:.72},{filter:z}],{duration:dur,easing:"ease-in-out",composite:"add"}))}catch(x){}}
+ return A.length?{rim:true,els,stop(){A.forEach(an=>{try{an.cancel()}catch(x){}})},get alive(){return A.some(an=>an.playState==="running")}}:null}
+/* the guard: persons under a light box → rim handle (the caller returns it instead of drawing the overlay), else null */
+function kfkRimFor(box,name,o){const P=kfkPersons(box);return P.length?kitFxRim(P,{tone:name,a:o&&o.opacity!=null?o.opacity+.3:.85,dur:o&&o.dur,r:o&&o.r}):null}
 /* ---------- 2. lights + 3. sheets (DOM, screen blend for lights) ---------- */
 const KFK_VPOOL={};
 function kfkBox(target,o,ar){let x,y,w;const r=target&&target.getBoundingClientRect?target.getBoundingClientRect():null;
@@ -100,6 +124,7 @@ function kfkSheetRun(d,src,cols,rows,n,fps,loop,onEnd){d.style.backgroundImage=`
  const step=()=>{const c=i%cols,r=Math.floor(i/cols);d.style.backgroundPosition=`${cols>1?c*100/(cols-1):0}% ${rows>1?r*100/(rows-1):0}%`};step();
  const iv=setInterval(()=>{i++;if(i>=n){if(loop)i=0;else{clearInterval(iv);onEnd&&onEnd();return}}step()},1000/fps);return iv}
 function kitFxLight(name,target,o){o=Object.assign({},o||{});const L=KFK_LIGHT[name];if(!L||!kfOn())return null;kfkLog("light:"+name);
+ {const gb=o.inside&&target?kfkRectBox(target):kfkCBox(kfkBox(target,o,L.w/L.h));const rim=gb&&kfkRimFor(gb,name,o);if(rim)return rim}/* KIT §68.7: never over a person */
  if(KFK.lights>=4){const old=[...KFK.live].find(d=>d.classList.contains("kfxk-l"));old&&old.__h&&old.__h.stop(150)}
  o.ar=L.w/L.h;const d=kfkLayer(o,"kfxk-l"),still=kfStill(),low=!still&&(o.low||kfkLow());let v=null,iv=0;
  if(still){d.classList.add("kfxk-still");d.style.backgroundImage=`url("${kfkU(name+".webp")}")`}
@@ -113,6 +138,7 @@ function kitFxLight(name,target,o){o=Object.assign({},o||{});const L=KFK_LIGHT[n
  const h=kfkHandle(d,target,o,"lights",()=>{clearInterval(iv);if(v){v.pause();v.remove();const p=KFK_VPOOL[name];if(p.length<2)p.push(v);else{v.removeAttribute("src");v.innerHTML="";v.load()}}});d.__h=h;return h}
 function kitFxSheet(name,target,o){o=Object.assign({},o||{});const Sd=KFK_SHEET[name],Ld=!Sd&&KFK_LIGHT[name];if(!Sd&&!Ld||!kfOn())return null;kfkLog("sheet:"+name);
  const D=Sd||{w:Ld.w,h:Ld.h,cols:6,rows:4,n:24,fps:5,blend:"screen",src:name+"-sheet.webp",poster:name+".webp",loop:1};o.ar=D.w/D.h;
+ if(Ld){const gb=o.inside&&target?kfkRectBox(target):kfkCBox(kfkBox(target,o,o.ar));const rim=gb&&kfkRimFor(gb,name,o);if(rim)return rim}/* KIT §68.7 */
  const d=kfkLayer(o,"kfxk-s"+(D.blend==="screen"?" kfxk-scr":""));let iv=0,h;
  if(o.inside&&target&&target.appendChild){d.classList.add("kfxk-in");target.appendChild(d)}else{kfkPlace(d,kfkBox(target,o,o.ar));document.body.appendChild(d)}
  const loop=o.loop!=null?o.loop:!!D.loop;
@@ -187,7 +213,7 @@ function kfkAuto(){try{if(typeof OPT==="undefined"||OPT.fxpick)return;if(kfkLow(
 kfkAuto();KFK.slowHits=0;
 setInterval(()=>{try{if(typeof OPT==="undefined"||OPT.fxpick||OPT.fxon===false||!KFX.app||document.hidden)return;
  if(KFX.q<=.31&&KFX.parts.length>8){if(++KFK.slowHits>=3){OPT.fxon=false;OPT.fxauto=1;KFK.auto="slow";kitFxClear()}}else KFK.slowHits=Math.max(0,KFK.slowHits-1)}catch(e){}},2000);
-Object.assign(window,{kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxGiftCarry,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
+Object.assign(window,{kitFxRim,kfkPersons,KFK_PERSON,kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxGiftCarry,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
 (function(){const st=document.createElement("style");st.textContent=`
 .kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
 .kfxk.on{opacity:var(--kfo,1)}
@@ -206,4 +232,5 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"paint
   `<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_EDGE).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxEdge('${n}')">edge ${n}</button>`).join("")}`+
   `<button type="button" class="kbtn alt" onclick="kitFxGift('give',this,{kind:'silk'})">gift give</button><button type="button" class="kbtn alt" onclick="kitFxGift('open',this)">gift open</button>`+
   `<button type="button" class="kbtn alt" onclick="kitFxGift('refuse',this)">gift refuse</button><button type="button" class="kbtn alt" onclick="kitFxLetter(this)">letter</button></div>`+
+  `<div class="kitpg-row kfxk-pgr">${["petal","wind","snow","snowh","frost","drizzle","storm","mist","fly","sun","bolt"].map(k=>`<button type="button" class="kbtn alt" onclick="kfWxPreview('${k}')">weather ${k}</button>`).join("")}</div>`+
   `<div class="kitpg-row kfxk-pgr">${Object.keys(FX).filter(k=>k!=="lock").map(k=>`<button type="button" class="kbtn alt" onclick="kitFx('${k}',{el:this})">kitFx ${k}</button>`).join("")}</div>`})}catch(e){}

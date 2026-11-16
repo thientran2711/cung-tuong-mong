@@ -364,7 +364,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .dlg.kpanel::before{display:none}
 /* ONE FRAME SIZE (owner 15/11 "kích thước khung khác nhau", KIT §8.1): every pop-up has the same width and the same height at a given viewport; only the
    seal word and the content differ. The header and the button stay fixed; the text / option area scrolls inside (rule L191). */
-:root{--kpw:min(560px,calc(100vw - 28px));--kph:min(calc(100dvh - 32px),max(420px,70dvh),720px)}
+:root{--kpw:min(560px,calc(100vw - 28px));--kph:min(calc(100dvh - 32px),max(420px,calc(70*var(--kvh,1dvh))),720px)}
 
 html body #modal:not(.pcm) .dlg.kpanel{box-sizing:border-box;width:var(--kpw)!important;min-width:0!important;max-width:var(--kpw)!important;height:var(--kph)!important;min-height:var(--kph)!important;max-height:var(--kph)!important;display:flex!important;flex-direction:column;overflow:hidden!important}
 html body #modal:not(.pcm) .dlg.kpanel>.kph{position:relative;flex:0 0 auto}
@@ -821,25 +821,35 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
 const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
- const phone=W<600&&H>W;if(phone){["left","top","width","height","bottom","-webkit-mask-image","mask-image"].forEach(k=>im.style.removeProperty(k));d.style.removeProperty("width");d.style.removeProperty("max-width");
-  const r=d.getBoundingClientRect();M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px");return}
- M.style.removeProperty("--kidh");
+ /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
+    one page (html.kv1, portrait): the screen top and the panel's top edge (figure ABOVE the panel); spread: the screen top and bottom
+    (figure in the column left of the panel). Gap above the painted head = gap under the feet, each ≥ KIT_DP_GAP (5 % of that height,
+    ≥ 14 px); a figure the column width keeps shorter is centred between the lines (equal larger gaps), never left on the floor. */
+ const one=typeof kitView==="function"?kitView().pages===1:(W<600&&H>W);
+ d.style.removeProperty("width");d.style.removeProperty("max-width");
  /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
     left of it (its left edge minus 8 px), so a tab with more cells can never widen it over her */
- d.style.removeProperty("width");d.style.removeProperty("max-width");
- const port=H>W;const mr=M.getBoundingClientRect(),dr=d.getBoundingClientRect();const colR=Math.round(dr.left-mr.left)-8,colL=port?0:Math.round(W*.01);const colW=colR-colL;
+ const port=H>W;const mr=M.getBoundingClientRect(),dr=d.getBoundingClientRect();
+ const colR=one?W:Math.round(dr.left-mr.left)-8,colL=one?0:port?0:Math.round(W*.01);const colW=colR-colL;
+ const lt=0,lb=one?Math.max(120,Math.round(dr.top-mr.top)):H;M.style.setProperty("--kidh",Math.max(120,Math.round(dr.top-mr.top-10))+"px");
  const want=M.__kidWant||im.getAttribute("src")||"";const s1=kitTn(want)||want;/* measured on the small copy (same fractions, tiny canvas) */
  const fb0=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
  /* not measured yet: the whole picture stands in (no hidden flash), re-laid when the measure arrives */
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
- const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
+ const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
+ let Hs=Math.min((A-2*G)*bf/pf,H*(port?.80:.84));/* the standard body height: same for every face on this screen */
  /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
     game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
-    column whole; every face, consort and maid, gets that same body height and floor — no robe cut, no spill, no per-face shrink */
- const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);Hs=Math.min(Hs,colW*.98/KPID_WR);let ih=Hs/bf,iw=ih*ar;
- const pw=(fb.r-fb.l)*iw;let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
+    column whole; every face, consort and maid, gets that same body height — no robe cut, no spill, no per-face shrink */
+ Hs=Math.max(40,Math.min(Hs,colW*.98/KPID_WR));let ih=Hs/bf,iw=ih*ar;
+ const floor=lb-(A-ih*pf)/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
+ let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
+ /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
+    width left from an earlier layout keeps the 900 px file and the browser upscales her face */
+ try{if(typeof kitFigHD==="function")kitFigHD(im)}catch(e){}
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
@@ -912,18 +922,18 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 /* kv3:.kv1 */:where(.kv1) .modal.kpscene{align-items:flex-end!important;padding:12px 4vw 16px!important}:where(.kv1) .modal.kpscene .dlg.kpsc{max-width:min(680px,100%)!important}
 /* kv3:.kv1 */:where(.kv1) .dlg.kpsc .kpb.kpid{grid-template-columns:104px minmax(0,1fr)!important;gap:10px!important}:where(.kv1) .dlg.kpsc .kpid .kpidn{font-size:1.02rem}:where(.kv1) .dlg.kpsc .kpid .kpidt{font-size:.84rem}:where(.kv1) .dlg.kpsc .kpid .kstgrid{grid-template-columns:1fr 1fr}:where(.kv1) .dlg.kpsc .kpid .kst-tile{padding:2px 6px}:where(.kv1) .dlg.kpsc .kpid .kst-tile>.kstv{font-size:.84rem}
 /* 3b · identity with her standing figure */
-.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:94dvh;filter:url(#kfa) drop-shadow(0 6px 18px #0006)}
+.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:calc(94*var(--kvh,1dvh));filter:url(#kfa) drop-shadow(0 6px 18px #0006)}
 .modal.kpscene.kpfig>.dlg{position:relative;z-index:1}
 .modal.kpscene.kpfig{justify-content:flex-end!important;align-items:center!important;padding:12px 2.5vw!important}
 .modal.kpscene.kpfig .dlg.kpsc{max-width:min(560px,54vw)!important}
 .dlg.kpsc .kpid.kpidf{grid-template-columns:1fr!important}.dlg.kpsc .kpid.kpidf>.kpsubj{display:none}
 
 /* kv3:.kv1 */:where(.kv1) .modal.kpscene.kpfig{justify-content:center!important;align-items:flex-end!important;padding:8px!important}:where(.kv1) .modal.kpscene.kpfig .dlg.kpsc{max-width:100%!important}
- :where(.kv1) .modal.kpscene.kpfig>img.kidfig2{top:6px;bottom:auto;left:0;width:100vw;height:var(--kidh,40dvh)}
+ :where(.kv1) .modal.kpscene.kpfig>img.kidfig2{top:6px;bottom:auto;left:0;width:100vw;height:var(--kidh,calc(40*var(--kvh,1dvh)))}
  :where(.kv1) .dlg.kpsc .kpid.kpidf .kstgrid{grid-template-columns:repeat(4,minmax(0,1fr))}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile>.kstv{text-align:left}
 /* 4 · status grouped by purpose */
 #hud2.kgrp{flex-wrap:wrap}
-#hud2 .khg{position:fixed;z-index:40;left:var(--shL,8px);top:var(--shT,40vh);width:var(--shW,calc(100vw - 16px));max-height:var(--shH,50vh);overflow:auto;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:6px 10px;padding:8px;background:var(--k-card,#fffaf0);border:1px solid var(--gold);border-radius:10px;box-shadow:0 8px 28px #3a201055}
+#hud2 .khg{position:fixed;z-index:40;left:var(--shL,8px);top:var(--shT,calc(40*var(--kvh,1vh)));width:var(--shW,calc(100vw - 16px));max-height:var(--shH,calc(50*var(--kvh,1vh)));overflow:auto;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:6px 10px;padding:8px;background:var(--k-card,#fffaf0);border:1px solid var(--gold);border-radius:10px;box-shadow:0 8px 28px #3a201055}
 #hud2 .khsh{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;font-family:var(--display);color:var(--gold);border-bottom:1px solid var(--k-hair);padding-bottom:4px}
 #hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
 #hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
@@ -1187,8 +1197,9 @@ function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapT
 window.kitRankText=kitRankText;
 function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
  if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP))return NodeFilter.FILTER_REJECT;
-  re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: the cheap name test first; the ancestor walk (closest) only for the few text nodes that hold a name */
+  re.lastIndex=0;if(!re.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;
+  return !p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
  for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
   while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
@@ -1220,7 +1231,7 @@ window.kitMarkPaint=kitMarkPaint;
 function kitNameTone(root){try{if(!root||root.nodeType!==1)return;const L=root.matches&&root.matches(".kname")?[root]:[];root.querySelectorAll&&L.push(...root.querySelectorAll(".kname"));
  for(const n of L){if(n.style.getPropertyValue("--rtn")||n.classList.contains("kmy")||n.classList.contains("kme"))continue;const t=n.querySelector(":scope>.kti");const v=t&&t.style.getPropertyValue("--rt");if(v)n.style.setProperty("--rtn",v)}}catch(e){}}
 window.kitNameTone=kitNameTone;
-(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R].filter(n=>n&&n.isConnected);R.clear();/* review/lag-play-2: a root inside another queued root is walked once */for(const r of L)if(!L.some(m=>m!==r&&m.contains(r))){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
  const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
   if(!q&&R.size)q=requestAnimationFrame(run)});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body);kitNameTone(document.body);kitMarkPaint(document.body)};
