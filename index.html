@@ -17233,7 +17233,7 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
    aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
    lev[kind][name] = [at ease 0, at ease 5] board levers read by mgLev (mg-balance-2: Nấu ăn fire lag s / gusts heat-per-s / gust gap s; Cờ time ms / full-speed ms / extra stones;
    wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds, cong = [Công level that adds +1 tier, highest tier that lift can reach (2 Tinh xảo: Tuyệt phẩm needs the score)] (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
-Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
+Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:0,theu:0,co:-1,banh:-.1,dauho:1.2,td_hanh:-1.4,td_dung:-1.2,td_ngon:-.9},
  lev:{banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[1800,7000],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
   td_hanh:{lim:[8000,20000],short:[2,0]},dauho:{aid:[.14,.6],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
@@ -17328,7 +17328,8 @@ BAL.slap={nm:["","nhẹ","vừa","nặng"],def:1,sac:[0,2,3,5],wk:[0,2,4,7],wkX:
 /* slap occasions in the ONE tier table (jmgt mgTier): tat = her slap, stakes by HER rank; ne = dodging, rank = the attacker's rank */
 Object.assign(BAL.mgTier.occ,{tat:[.5,.5],ne:[.5,.5]});
 /* reviewer entry-exam-r1 (OD 07:25Z "mức vừa"): mgTier occ tuyen 1.5 → 1, so a new girl (art level 0) reads "Vừa", not "Khó", at her
-   entry exam (ease 1.2 between the measured 0.8 / 1.6 boards; skilled marks 9.0–10 at both, so the rank table is unchanged). Applied to the mg-balance-2 block above on merge (review/origin-intros-r1). */
+   entry exam (ease 1.2 between the measured 0.8 / 1.6 boards; skilled marks 9.0–10 at both, so the rank table is unchanged). */
+Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
 /* ENTRY SELECTION EXAM (review/entry-exam, owner OD:L1244 / L1250 / 07:20Z no word games / 07:25Z medium; read by jentry entScore, jkc2):
    ONE score rule for every entry road (dir = "Vào cung ngay", dan = cung nữ home road, nc = hòa thân home road):
    score = Σ w[stat]·stat + w.raw·(mini-game 0..10) + w.art·(her level in that art) + road extras + base + noise (−noise..+noise, even).
@@ -42078,7 +42079,8 @@ function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.
 /* ---------- UI: the jkc panels with this road's people and words ---------- */
 (function(){const f0=kcFamList;kcFamList=function(w){if(!S||!S.kc||!S.kc.kd)return f0.apply(this,arguments);return S.kc.fam.filter(m=>m.alive&&!(m.hide&&!S.kc.sx)&&(w==="ban"?!!m.out:!m.out))}})();
 (function(){const c0=kcFamCard;kcFamCard=function(m){if(!S||!S.kc||!S.kc.kd)return c0.apply(this,arguments);const acts=kcFamActs(m);
- const rel=kitRelRow({kind:"quy",a:m.t,b:"ta",v:m.af})+kitRelRow({kind:"quy",a:"Ta",b:kc2Lt(m),v:m.me})+(m.oan?kitRelRow({kind:"oan",a:m.t,b:"ta",v:m.oan}):"");
+ /* main retired kitRelRow: the same kitRel2 table (KIT §52) as jkc kcFamCard */
+ const rel=kitRel2([{head:`${m.t} → ta`,dir:"them",rows:[{w:"Thiện cảm",now:m.af==null?null:Math.round(m.af),kind:"good"}].concat(m.oan?[{w:"Oán",now:Math.round(m.oan),kind:"bad"}]:[]).map(r=>r.now==null?{w:r.w,unk:"chưa rõ"}:r)},{head:`Ta → ${kc2Lt(m)}`,dir:"me",rows:[m.me==null?{w:"Thiện cảm",unk:"chưa rõ"}:{w:"Thiện cảm",now:Math.round(m.me),kind:"good"}]}]);
  const f=kcFace(m);return pcard({f,col:f.col,name:m.name,rank:m.t,lines:[`${m.age} tuổi`,`Tính ${m.tr.toLowerCase()}`,`Đang ở ${kcAt(m).toLowerCase()}`],note:rel,tabKey:"kcfam",
   groups:[["Việc",acts.map(([a,i])=>cardH(a,i))]],empty:"Lúc này chưa có việc nào làm được với người này."})}})();
 (function(){const h0=kcFamHTML;kcFamHTML=function(){if(!S||!S.kc||!S.kc.kd)return h0.apply(this,arguments);const dan=S.kc.kd==="dan";const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=deck.map((a,i)=>[a,i]).filter(([a])=>a.g==="fam"&&!a.who);
@@ -43641,7 +43643,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5b2d21cc1286";window.CTM_BUILD=BUILD;
+const BUILD="f58f80c590bb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

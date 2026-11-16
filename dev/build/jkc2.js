@@ -415,7 +415,8 @@ function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.
 /* ---------- UI: the jkc panels with this road's people and words ---------- */
 (function(){const f0=kcFamList;kcFamList=function(w){if(!S||!S.kc||!S.kc.kd)return f0.apply(this,arguments);return S.kc.fam.filter(m=>m.alive&&!(m.hide&&!S.kc.sx)&&(w==="ban"?!!m.out:!m.out))}})();
 (function(){const c0=kcFamCard;kcFamCard=function(m){if(!S||!S.kc||!S.kc.kd)return c0.apply(this,arguments);const acts=kcFamActs(m);
- const rel=kitRelRow({kind:"quy",a:m.t,b:"ta",v:m.af})+kitRelRow({kind:"quy",a:"Ta",b:kc2Lt(m),v:m.me})+(m.oan?kitRelRow({kind:"oan",a:m.t,b:"ta",v:m.oan}):"");
+ /* main retired kitRelRow: the same kitRel2 table (KIT §52) as jkc kcFamCard */
+ const rel=kitRel2([{head:`${m.t} → ta`,dir:"them",rows:[{w:"Thiện cảm",now:m.af==null?null:Math.round(m.af),kind:"good"}].concat(m.oan?[{w:"Oán",now:Math.round(m.oan),kind:"bad"}]:[]).map(r=>r.now==null?{w:r.w,unk:"chưa rõ"}:r)},{head:`Ta → ${kc2Lt(m)}`,dir:"me",rows:[m.me==null?{w:"Thiện cảm",unk:"chưa rõ"}:{w:"Thiện cảm",now:Math.round(m.me),kind:"good"}]}]);
  const f=kcFace(m);return pcard({f,col:f.col,name:m.name,rank:m.t,lines:[`${m.age} tuổi`,`Tính ${m.tr.toLowerCase()}`,`Đang ở ${kcAt(m).toLowerCase()}`],note:rel,tabKey:"kcfam",
   groups:[["Việc",acts.map(([a,i])=>cardH(a,i))]],empty:"Lúc này chưa có việc nào làm được với người này."})}})();
 (function(){const h0=kcFamHTML;kcFamHTML=function(){if(!S||!S.kc||!S.kc.kd)return h0.apply(this,arguments);const dan=S.kc.kd==="dan";const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=deck.map((a,i)=>[a,i]).filter(([a])=>a.g==="fam"&&!a.who);
