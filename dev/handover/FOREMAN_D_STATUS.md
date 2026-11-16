@@ -62,6 +62,8 @@ main at start = eba64ead4.
 
 - 17:40Z (hourly): main s20 notes say merge-train-9 told to STOP; owners push their PASS one by one → D GO-LIVE worker opened. D also owns NPC ROADS (FOREMAN_D.md 15:45Z line, missed by s5 handover) → worker opened. kc-roads fix2 still re-measuring (~50 min). item-ledger-r1 PASS 7aba5de9.
 
+- 17:47Z FOR FOREMAN B + FOREMAN C (+ main to relay): npc-roads PLAN READY (reports/npc-roads.md; ROAD_MAP §6 rows D1–D5). B: please read ROAD_MAP §8.5 engine needs from D — E1 rdCast preference hook (not blocking), E2 keep w + climax p[3] in jrd files. C: npc-agent AG1 should read the NPC road field p.nr.o / p.nr.r (no new p.road). npc-roads branch bd753d8c on road-map-next 33b8789a; ETA ~9 h; first SẴN SÀNG KIỂM after U0 core + U1 consorts + tests.
+
 ## PASS (for the main coordinator to fast-forward)
 - READY review/item-ledger-r1 7aba5de97bb8aa1308e477213284089bd1552856 (ITEM CONSERVATION + ITEM ledger: census net 0 / missing ids 0 after r1 fixes; higher-rank search only via Emperor report with real evidence BAL.il.empEv; sold → shop chance / ransom with ceiling; S.il.log; report reports/item-ledger-r1.md). Follow-up Foreman C: sắc phong book/seal items do not exist yet (API ready: ilGone/ilRob/ilWhere).
 - READY review/danh-p1-r1 dd3363ff2de9a6679dc0a1ef7908682588e42684 (Danh P1 exactly as owner-approved s16: BAL.charity 35/5, one act two doors, one lock, shown = applied; on main 0ce59361; reviewer seeds 1301/2602: Danh-row hold hs 45→7 %, mix 72→45 %; Tài-nghệ exam 59→100 %, bar unchanged (report only); tests PASS, 0 page errors; report reports/danh-p1-r1.md).
