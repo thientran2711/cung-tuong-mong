@@ -136,7 +136,7 @@ function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
 /* ONE hook for every long-road promotion reward (owner 16/11 06:45Z + 07:15Z). PROMO_SRC = the switch per source: "direct" rank, "grace" =
    an exam at once with the conditions waived, "none" = no rank. son1 = that mother's FIRST prince; later sons and every princess = grace.
    Faction road: every winning side = direct (07:15Z). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat becomes
-   «Ân chỉ chờ phong» (promoFullSeat). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
+   a large one-off compensation (promoFullSeat, owner 07:20Z). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
 const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct"};
 const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử"};
 function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
@@ -157,21 +157,20 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
  else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
   t=`Thiên hạ chê ngươi dựa thế nhà quyền thần (Danh −${B.quyen.danh}); bệ hạ lớn lên rồi, e có ngày tính sổ. `}}
  }catch(e){console.error("promoCost",e)}return t}
-/* «Ân chỉ chờ phong» (owner 07:15Z): the seat is full → the next rank's stipend now, first claim on the next free seat with no exam, a bonus if
-   the wait lasts BAL.psk.wait.bonusAt months; loss: the consorts waiting for that seat resent her. */
-function promoFullSeat(p,src,o){const B=BAL.psk.wait,me=p===S,to=rkOf(p)+1;if(p.anChi&&p.anChi.to===to)return"";
- p.anChi={to,t:S.turn,src};let n=0;for(const v of consorts())if(v!==p&&!v.out&&rkOf(v)===rkOf(p)){oanAdd(v,p,B.oan);n++}
- const rk=RANKS[to].n;if(!me){try{newsAdd(p,"promo",`${p.name} được ân chỉ chờ phong ${rk}.`,true)}catch(e){}return `${p.name} được ân chỉ chờ phong ${rk}. `}
- try{feedback("promote",{t:"Ân chỉ"})}catch(e){}
- return `<b class="g">Ân chỉ chờ phong ${rk}</b>: ghế ${rk} đã đủ người. Từ nay ngươi hưởng bổng lộc bậc ${rk}; ghế ${rk} trống ra trước tiên thuộc về ngươi, không qua khảo hạch${B.bonusAt?`; chờ quá ${B.bonusAt} tháng thì được ban thêm`:""}. ${n?`${n} vị cùng bậc đang chờ ghế ấy oán ngươi (oán +${B.oan}). `:""}`}
-/* monthly: the ân chỉ (stipend gap, the seat when it frees) and the quyền thần strike-back; runs before the seat fill of the month */
-function promoClaim(pay){let ev="";const B=BAL.psk;for(const p of [S].concat(liveRivals(true))){const a=p&&p.anChi;if(!a)continue;
-  if(p.out||rkOf(p)!==a.to-1){p.anChi=null;continue}
-  if(typeof seatFree==="function"&&seatFree(a.to)){const late=S.turn-a.t>=B.wait.bonusAt;p.anChi=null;let x=exDirectUp(p,"ân chỉ chờ phong đã đến ngày",{fx:1});
-   if(late){ap(p,{danh:B.wait.bonusDanh,bac:B.wait.bonusBac});if(p===S)x+=`Chờ lâu không oán, bệ hạ ban thêm: Danh +${B.wait.bonusDanh}, Bạc +${B.wait.bonusBac}. `}
-   if(p===S)log(x);else{try{newsAdd(p,"promo",x,true)}catch(e){}ev+=x}continue}
-  if(pay){const d=(BAL.pay[Math.min(7,a.to)]||0)-(BAL.pay[Math.min(7,a.to-1)]||0);if(d>0)p.bonusPay=(p.bonusPay||0)+d}}return ev}
-function promoMonth(){let ev="";try{const B=BAL.psk;ev+=promoClaim(true);
+/* full seat (owner 07:20Z, replaces «Ân chỉ chờ phong»): a LARGE one-off compensation instead of the rank — big silver, rare gifts (Hoàng
+   thượng's bestow), an honorific name character (phong hiệu, no rank change; silver instead if she already has one), an office / favour for her
+   family (house power). Loss: the other consorts' jealousy. Her rank stays; the next one goes through the normal exam. Numbers BAL.psk.seat. */
+function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RANKS[to].n;const parts=[];
+ let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=(typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used.includes(x));if(f.length){hieu=pick(f);p.hieu=hieu}}
+ if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
+ for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
+ try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
+ let cost="";if(me){ghenAll(B.ghen);cost=`Lục cung ghen với ngươi (ghen +${B.ghen}). `}else{for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan)}
+ const t=me?`<b class="g">Ghế ${rk} đã đủ người</b>: Hoàng thượng ban hậu thưởng thay cho tấn phong: ${parts.join(", ")}. Muốn lên ${rk} vẫn phải qua khảo hạch như mọi người. ${cost}`
+  :`${p.name} được hậu thưởng (ghế ${rk} đã đủ người). `;
+ if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
+/* monthly: the Thái hậu errands and the quyền thần strike-back (BAL.psk) */
+function promoMonth(){let ev="";try{const B=BAL.psk;
  const E=S.psErr;if(E&&!S.dead&&!S.out&&!S.thDead&&wk()>=E.at&&typeof q72CanOffer==="function"&&q72CanOffer()&&!(typeof evBusy==="function"&&evBusy())){
   /* a Thái hậu errand (j72 việc nhờ, requester Thái hậu): the first template of hers that can be built now */
   const A=typeof q72A==="function"?q72A("th"):null;const L=(typeof T72!=="undefined"?T72:[]).filter(T=>T.r==="th"&&!T.fu);let x=null;
@@ -181,8 +180,6 @@ function promoMonth(){let ev="";try{const B=BAL.psk;ev+=promoClaim(true);
   apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: Sủng −${B.quyen.hitSung}, Danh −${B.quyen.hitDanh}.`)}}
  }catch(e){console.error("promoMonth",e)}return ev}
 (function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
-/* the ân chỉ holder claims a freed seat before the seat fill picks anyone (j30 fillSeats after endTurn) */
-(function(){if(typeof fillSeats!=="function")return;const f0=fillSeats;fillSeats=function(){let a="";try{a=promoClaim(false)}catch(e){console.error(e)}return a+(f0.apply(this,arguments)||"")}})();
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
 function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}

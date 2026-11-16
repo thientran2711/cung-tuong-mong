@@ -1,5 +1,5 @@
 /* review/promo-skip (owner 16/11 06:20Z + 06:45Z + 07:15Z): long-road rewards through jexam promoReward; every reward has a gain AND a loss
-   (BAL.psk); full seat → «Ân chỉ chờ phong». usage: node dev/test/promo-skip.js <page.html> */
+   (BAL.psk); full seat → large one-off compensation (owner 07:20Z). usage: node dev/test/promo-skip.js <page.html> */
 const {chromium}=require('playwright');const path=require('path');(async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.goto('file://'+path.resolve(process.argv[2]));await p.waitForFunction(()=>typeof start==='function',null,{timeout:120000});await p.waitForTimeout(1500);
 const r=await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;for(let i=0;i<200;i++){start();if(!isSrv()&&S.rank<=1)break}Q.length=0;
@@ -16,9 +16,9 @@ const r=await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getEle
  // full seat: Tần(3) → Phi(4) cap 4
  S.rank=3;S.ex={to:4};for(const v of L){if(holders(4).length>=4)break;if(v.rank!==4&&v!==mom)v.rank=4}
  const peer=L.find(v=>v.rank===3&&!v.out);if(!peer&&L.length){const v=L.find(v=>v.rank<3);if(v)v.rank=3}const pr=L.find(v=>v.rank===3&&!v.out);const po0=pr?pr.oan||0:0;
- o.free=seatFree(4);r0=S.rank;o.full=strip(promoReward(S,"emp",{fx:1}));o.fulld=S.rank-r0;o.anChi=JSON.stringify(S.anChi);o.peerUp=pr?(pr.oan||0)-po0:-1;
- S.bonusPay=0;promoMonth();o.pay=S.bonusPay;o.payWant=BAL.pay[4]-BAL.pay[3];
- S.anChi.t=S.turn-B.wait.bonusAt;const d0=S.danh;for(const v of L)if(v.rank===4){v.rank=3;break}o.free2=seatFree(4);fillSeats();o.claimd=S.rank-r0;o.bonus=S.danh-d0;o.anChi2=S.anChi;
+ o.free=seatFree(4);r0=S.rank;const bac0=S.bac,inv0=(S.inv||[]).length,g0=L.map(v=>v.ghen||0);S.hieu=null;S.ex={to:4};const dad0=S.dad||40;
+ o.payN=BAL.pay[4];o.full=strip(promoReward(S,"emp",{fx:1}));o.fulld=S.rank-r0;o.bacUp=S.bac-bac0;o.gifts=(S.inv||[]).length-inv0;o.hieu=S.hieu;o.dadUp=(S.dad||0)-dad0;
+ o.ghenUp=L.some((v,i)=>(v.ghen||0)>g0[i]);o.exTo=S.ex.to;o.exGrace=S.ex.grace;Q.length=0;
  // grace passed + full seat waits
  S.rank=3;for(const v of L){if(holders(4).length>=4)break;if(v.rank!==4)v.rank=4}S.ex={to:4,grace:4,gw:"m",pass:true};r0=S.rank;promoteP(S);o.gfull=S.rank-r0;
  for(const v of L)if(v.rank===4){v.rank=3;break}promoteP(S);o.gfree=S.rank-r0;
@@ -29,7 +29,7 @@ ok(r.son1d===1&&/không qua khảo hạch/.test(r.son1)&&r.momUp>0,'first prince
 ok(r.son2d===0&&r.son2g,'later prince → exam at once, conditions waived');ok(r.daud===0&&r.daug,'princess → exam at once, conditions waived');
 ok(r.empd===1&&r.empTh>0,'Hoàng thượng side → direct rank; loss: Thái hậu cold');ok(r.thd===1&&r.thS>0&&r.err>0,'Thái hậu side → direct rank; loss: Sủng down + errands');
 ok(r.qud===1&&r.quD>0&&r.strike,'quyền thần side → direct rank; loss: Danh down + strike-back armed');
-ok(!r.free&&r.fulld===0&&/Ân chỉ chờ phong/.test(r.full)&&r.anChi&&r.peerUp>0,'full seat → «Ân chỉ chờ phong»; loss: same-rank consorts oán');
-ok(r.pay===r.payWant,'ân chỉ: next rank stipend gap paid monthly');ok(r.free2&&r.claimd===1&&r.bonus>0&&!r.anChi2,'freed seat → claimed first, no exam, bonus after the long wait');
+ok(!r.free&&r.fulld===0&&r.bacUp>=4*r.payN&&r.gifts>=1&&!!r.hieu&&r.dadUp>0&&/khảo hạch như mọi người/.test(r.full),'full seat → large compensation (Bạc, gifts, phong hiệu, family), no rank');
+ok(r.ghenUp&&r.exTo===4&&r.exGrace!==4,'compensation loss: jealousy; the next rank still needs the normal exam');
 ok(r.gfull===0&&r.gfree===1,'passed grace exam waits for a free seat, then the decree');ok(r.hit>0,'strike-back hits once when due');
 ok(!errs.length,'no page errors '+errs.slice(0,2));console.log(F.length?'FAIL':'PASS');await b.close();process.exit(F.length?1:0)})();
