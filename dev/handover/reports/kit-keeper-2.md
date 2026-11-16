@@ -44,3 +44,10 @@ Every kmStage scene (card flip km-tablet, edict, gloom, bloom, ink) now ends wit
 
 ## 8. D3 item-big (OD:L686, review/item-big@adda320 KIT REQUEST) — KIT 28.13b — KIT READY
 `kitItem` sizes lg (150 px) / xl (min(260px,36dvh)) are FRAMELESS (no border / ground / shadow / ::after frame; soft drop shadow; `frame:true` opts back in) and HI-RES: `kitItemBigSrc` maps `img/item-X.webp` → `img/item512/item-X.webp` with one onerror fallback to the small file. One place: the ~20 call sites that passed the small src follow without being touched. NOT covered: pet / veil / mark pictures (own src functions), the 22 items without item512 (ART REQUEST in reports/item-big.md). Test `dev/test/item-big.js` 5 sizes PASS (xl/lg frameless, 512 src, xl 260 px / lg 150 px, md and frame:true still framed, real item pop-up frameless). Kit page sample §28.13b. In this sandbox the CDN paintings do not load, so the real item pop-up picture size could not be looked at: coordinator please eyeball one item pop-up on the live build.
+
+## 9. r1 FAIL list (kit-keeper-2-r1 on 5837359e) — fixed
+- Real pop-ups, not only item-big.js: the "Mất đồ" notice (kitLose, kind:"notice" + itemPic) was dressed as the compact bag card (`kitSlotDress`) → 64/71 px. Now (main s14 decision, OD:L686): notices with an item picture are the CENTRE display = item alone, big (picture column `min(150px,38%)`), frameless; the bag / Tư trang pop-up and every kind:"info" item panel stay compact WITH frame (28.13f; `kitSlotDress` marks `kitem-fr`). jinv `kpBuild` skips `kitSlotDress` for notices.
+- Found while fixing: the reused `.dlg` kept a stale `.kitslot` class after a bag pop-up, so the NEXT notice came out compact. `kpBuild` now removes it first.
+- KIT 28.13b/f split written in KIT.md 28.13b. `dev/test/item-big.js` now measures the real "Mất đồ" notice (kitb 150 px, frameless) and the real bag pop-up (still framed): 5 sizes PASS.
+- Merged r1's jflip kitSceneEnd (card flip scene ends with the scene-end button) into this branch; conflicts only in built index.html / sw.js (rebuilt).
+- 512 files for items that lack them = ART REQUEST (Foreman C), the 256 px picture stays soft until then.

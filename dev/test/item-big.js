@@ -17,10 +17,15 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,SIZES
   const frameless=t=>t.border==='0px'&&/^none\|rgba\(0, 0, 0, 0\)$/.test(t.bg)&&t.shadow==='none'&&t.after.startsWith('none');
   const checks={xlFrameless:frameless(xl),lgFrameless:frameless(lg),xlSrc:/item512/.test(xl.src||'')||(xl.nat>0),xlBig:xl.w>=(W>=1000?170:120),lgBig:lg.w>=120,mdFramed:!frameless(md),optInFrame:!frameless(fr)};
   await p.evaluate(()=>{document.getElementById('ibtest').remove();kinvOpen(kinvItems()[0])});await sleep(900);
-  const real=await p.evaluate(()=>{const e=document.querySelector('#modal .kitem-lg,#modal .kitem-xl');if(!e)return null;const k=e.querySelector('.kitb'),cs=getComputedStyle(k),im=k.querySelector('img');return{border:cs.borderTopWidth,shadow:cs.boxShadow,w:im?Math.round(im.getBoundingClientRect().width):0,src:im?(im.currentSrc||'').replace(/^.*\/img\//,'img/'):null}});
-  checks.popup=!!real&&real.border==='0px'&&real.shadow==='none'; /* picture size is not checked here: the CDN paintings may not load in a sandbox (the synthetic tiles above check size) */
+  const real=await p.evaluate(()=>{const e=document.querySelector('#modal .kitem-lg,#modal .kitem-xl');if(!e)return null;const k=e.querySelector('.kitb'),cs=getComputedStyle(k),im=k.querySelector('img');return{fr:e.classList.contains('kitem-fr'),after:getComputedStyle(k,'::after').display,w:Math.round(k.getBoundingClientRect().width),src:im?(im.currentSrc||'').replace(/^.*\/img\//,'img/'):null}});
+  /* the real "Mất đồ" notice (kitLose -> kitPanel notice with itemPic): the picture column is the big-item width (box >= 120 px; the picture itself may not load in a sandbox) */
+  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;kitLose({k:'tramngoc'})});await sleep(1200);
+  const lose=await p.evaluate(()=>{const e=document.querySelector('#modal .kitem-lg>.kitb');if(!e)return null;const r=e.getBoundingClientRect(),cs=getComputedStyle(e);return{w:Math.round(r.width),border:cs.borderTopWidth,shadow:cs.boxShadow,dlg:document.querySelector('#modal .dlg').className.replace(/\s+/g,'.').slice(0,60),item:e.parentElement.className,isz:getComputedStyle(e.parentElement).getPropertyValue('--isz')}});
+  checks.loseNotice=!!lose&&lose.w>=(W<500?72:120)&&lose.border==='0px'&&lose.shadow==='none';
+  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;kinvOpen(kinvItems()[0])});await sleep(700);
+  checks.bagPopupKeepsFrame=!!real&&real.fr&&real.after!=='none'; /* KIT 28.13f: the compact bag / slot card keeps its grade frame (main s14 split) */ /* picture size is not checked here: the CDN paintings may not load in a sandbox (the synthetic tiles above check size) */
   const ok=Object.values(checks).every(Boolean);if(!ok)bad++;
-  console.log(wh,ok?'PASS':'FAIL',JSON.stringify(checks),'xl:',xl.src,xl.w+'px','lg:',lg.w+'px','popup:',real&&real.src,real&&real.w+'px');
+  console.log(wh,ok?'PASS':'FAIL',JSON.stringify(checks),'xl:',xl.src,xl.w+'px','lg:',lg.w+'px','popup:',real&&real.src,real&&real.w+'px','lose notice box:',lose&&JSON.stringify(lose));
   if(OUT)await p.screenshot({path:`${OUT}/${wh}-popup.png`});
   if(errs.length){bad++;console.log(wh,'PAGE ERRORS',errs)}
   await ctx.close()}
