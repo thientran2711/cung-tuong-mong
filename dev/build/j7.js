@@ -46,10 +46,10 @@ ev("eunuch",()=>S.mat<10,()=>({o:od(50+S.tamco/3)}),p=>({
  {n:"Thử lòng hắn trước",fx:{},x:`${word(p.o)} · thành: Tai mắt +1 · hỏng: hắn là gián điệp`,go:()=>{if(roll(p.o))apply({mat:1});else{apply({danh:-3});log('<span class="r">Tiểu Đức Tử mang chuyện cung ngươi đi bán.</span>')}}},
  {n:"Đuổi đi",fx:{duc:1}}]}));
 /* the Emperor */
-ev("empnight",()=>!S.preg&&S.sung>=20,()=>({o:od(40+bestArt().w*8+mm())}),p=>({who:pEmp(),
+ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o+bestArt().w*BAL.visit.show.w+mm())}),p=>({who:pEmp(),
  t:"Đêm khuya, không đèn lồng, không thái giám báo trước. Hoàng thượng đứng ngoài rèm cửa cung ngươi.<br>“Trẫm không ngủ được.”",o:[
  {n:"Thắp đèn hầu rượu",fx:{},x:"được thị tẩm",go:()=>{S.tonight="me";nightScene()}},
- {n:`Phô tài: ${bestArt().n}`,fx:{suc:-5},x:`${word(p.o)} · thành: Sủng +6, Danh +2`,go:()=>{if(roll(p.o))apply({sung:6,danh:2})}},
+ {n:`Phô tài: ${bestArt().n}`,fx:{suc:-BAL.visit.show.suc},x:`${word(p.o)} · thành: Sủng +${BAL.visit.show.sung}, Danh +${BAL.visit.show.danh}`,go:()=>{if(roll(p.o))apply({sung:BAL.visit.show.sung,danh:BAL.visit.show.danh})}},
  {n:"Khuyên ngài giữ long thể",fx:{duc:3,sung:-1}}]}));
 ev("minister",()=>S.rank>=2,()=>({o:od(40+S.tai/3+(has("chamchinh")?15:0))}),p=>({who:pEmp(),
  t:"Hoàng thượng đặt bản tấu xuống: “Thượng thư Hộ bộ xin tăng thuế muối. Ái phi nghĩ sao?”",o:[
@@ -105,7 +105,7 @@ ev("comet",()=>S.year>=2,()=>{const me=roll(40)||!liveRivals(false).length;retur
 ev("phoenix",()=>S.rank>=3&&S.rank<7,null,()=>({
  t:"Thầy tướng ở chùa Bảo Hoa phán: trong hậu cung có một người mệnh phượng hoàng, và chỉ vào cung ngươi.",o:[
  {n:"Khiêm nhường chối từ",fx:{duc:3,hh:5}},
- {n:"Để lời đồn lan xa",fx:{danh:8,hh:-15},x:"cả hậu cung ghen +12",go:()=>ghenAll(12)},
+ {n:"Để lời đồn lan xa",fx:{danh:8,hh:-15},x:`cả hậu cung ghen +${ghenN(BAL.ghen.rumor)}`,go:()=>ghenAll(BAL.ghen.rumor)},
  {n:"Bịt miệng thầy tướng",fx:{bac:-30,tamco:1}}]}));
 /* festivals */
 ev("doanngo",()=>mon(5),null,()=>({
@@ -154,7 +154,7 @@ ev("taster",()=>S.rank>=2&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.malic
  t:"Tiểu thái giám nếm canh ngự ban cho ngươi bỗng ôm bụng ngã gục, môi tím tái.",o:[
  {n:"Truy đến cùng Ngự thiện phòng",fx:{suc:-10},x:`${word(p.o)} · thành: chứng cứ ${v.name} +2`,go:()=>{if(roll(p.o)){evStory(v,2,"sai người bỏ thuốc vào đồ ăn của ngươi");log(`Đầu bếp khai ra người của ${v.name}.`)}else v.rel-=10}},
  {n:"Đổi người nấu, giấu chuyện",fx:{bac:-30},x:"2 tháng phi tần khó hại ngươi",go:()=>{S.shield=Math.max(S.shield,2)}},
- {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:"cả hậu cung bị tra, ai cũng ghen +5",go:()=>ghenAll(5)}]}});
+ {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:`cả hậu cung bị tra, ai cũng ghen +${ghenN(BAL.ghen.cry)}`,go:()=>ghenAll(BAL.ghen.cry)}]}});
 ev("letterhome",()=>S.turn>=3,()=>({o:od(30+S.sung/3)}),p=>({
  t:`Thư nhà giấu trong giỏ trái cây: ${S.origin.k==="td"?"vú nuôi năm xưa":S.kc&&S.kc.fam&&!S.kc.fam.some(m=>m.r==="me")?"tổ mẫu":"mẹ già"} lâm bệnh nặng, chỉ mong gặp mặt ngươi lần cuối.`,o:[
  {n:"Gửi 50 lượng chữa bệnh",fx:{bac:-50,duc:3}},
