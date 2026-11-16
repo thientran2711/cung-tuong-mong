@@ -51,6 +51,8 @@ window.petcStageN=function(P){try{if(P&&P.old)return L.oldN}catch(e){}return BAL
 try{IT.petkv={n:"Túi kỷ vật",kd:"Kỷ vật",d:"Túi thơm nhỏ giữ chút lông, vảy của thú nuôi đã khuất · không bán, không tặng",pr:0,keep:1,tg:[]};
  if(typeof ITIMG==="object"&&ITIMG)ITIMG.petkv=ITIMG.tuithom||"tuithom";
  const n0=iname;iname=function(e){const r=n0.apply(this,arguments);return e&&e.k==="petkv"&&e.of?`${r} (${e.of})`:r}}catch(e){console.error("petkv",e)}
+/* the Thái hậu gift line names what still costs her favour: neglect / harm / loss, never old age */
+try{for(const k of ["hac","kylan"])if(PET[k]&&PET[k].bad)PET[k].bad=PET[k].bad.replace(/để chết hay bị hại|để mất/,"để chết vì bỏ bê, bị hại hay để mất (chết già thì không)")}catch(e){}
 /* death ledger for audits / bots: S.petDl = [{k species, a age years, x care years, who me|npc, y year}] (last 300) */
 function note(p,P){try{(S.petDl=S.petDl||[]).push({k:petK(P.t),a:ageY(P),x:P.lifeX||0,who:p===S?"me":"npc",y:S.year});if(S.petDl.length>300)S.petDl.shift()}catch(e){}}
 function farewell(P,T,y){const facts=[`${T.n} đã ở bên ngươi ${y} năm, đêm qua nằm yên trong ổ, ra đi thanh thản.`,
