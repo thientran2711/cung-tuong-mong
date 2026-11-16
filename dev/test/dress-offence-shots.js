@@ -10,7 +10,7 @@ const [,,U,OUT,SIZES]=process.argv;const URL=/^(https?|file):/.test(U)?U:'file:/
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
   const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));console.error('loading',wh);
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await p.waitForTimeout(1500);
-  const info=await p.evaluate(()=>{SLOT=3;save=()=>{};document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv()))break}
+  const info=await p.evaluate(()=>{SLOT=3;save=()=>{};document.getElementById('title').hidden=true;for(let i=0;i<80;i++){start();if(typeof isSrv==='function'&&isSrv())continue;try{tab='rv';render();try{k3Shell()}catch(e){}}catch(e){}if(/Phi tần/.test(document.body.innerText))break}
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kroul,#kroul,#kroul2').forEach(e=>e.remove());
    const L=rivals.map((v,i)=>[v,i]).filter(([v])=>v.alive&&!v.out&&!v.queen&&rkOf(v)<5);const [v,i]=L[0];npcLearnAll&&0;
    /* she owns and wears: wrist + waist + scent of her rank (lavish), one wrist piece above her rank is swapped in, a follow pet */
