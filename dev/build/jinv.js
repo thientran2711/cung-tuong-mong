@@ -128,10 +128,10 @@ function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=IT[
   html:`<div class="kinvrows">${kitItemRows(g.k,{ownTaint:g.t,worn:g.w,e:S.inv[i]})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
 /* kit panel: `itemPic` = the panel's subject picture is an ITEM (KIT 8: "picture only if it depicts the subject … or a specific item");
    it takes the left subject column, so no info/category art is added; act cards inside the body get the kit act-card frame. */
-(function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const sp=m&&m.kit;if(!sp||!sp.itemPic)return r;
+(function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const sp=m&&m.kit;{const dl=M.querySelector(".dlg");if(dl)dl.classList.remove("kitslot")}/* the .dlg element is reused: a stale .kitslot from an earlier bag pop-up made the next notice compact */if(!sp||!sp.itemPic)return r;
  const body=M.querySelector("#mb > .kpb");if(!body)return r;const old=body.querySelector(":scope > .kpsubj");if(old)old.remove();
  body.classList.add("kphas");body.classList.remove("kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpitem">${sp.itemPic}</div>`);
- kitSlotDress(M,body);
+ if(sp.kind!=="notice")kitSlotDress(M,body);/* KIT 28.13b/f split (main s14): a NOTICE with an item picture (kitLose "Mất đồ", receive / reward) is a centre display = the item alone, big, frameless (28.13b); info panels (bag item pop-up, slot cards) are the compact card (28.13f) */
  if(typeof kitFix==="function")kitFix(body)}catch(e){console.error("itemPic",e)}return r}})();
 /* ---------- KIT 28.13f ITEM / EQUIPMENT-SLOT CARD — compact (owner 11/15 "ĐIỀU · Ô cài tóc" far too big) ----------
    Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every equipment-slot panel (Bên mình: cài tóc, đeo tay, đeo eo,
@@ -145,6 +145,8 @@ function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=IT[
       (Cần / Tốn / Được / Kèm, odds) is a full-width row (short cells pack together first: grid-auto-flow dense); every card keeps all its lines, tight (content height, no stretched cells).
    4. No "Lui": the header ✕ (32.10), a tap outside, Esc. */
 function kitSlotDress(M,body){const dlg=M.querySelector(".dlg");if(!dlg)return;dlg.classList.add("kitslot");const subj=body.querySelector(":scope > .kpsubj.kpitem"),main=body.querySelector(":scope > .kpmain");if(!subj||!main)return;
+ /* KIT 28.13b/f split (main s14): the compact bag / slot card keeps the grade FRAME + ground (kitem-fr switches the frameless big mode off); only the centre notices (kitLose, reward, receive) show the item alone */
+ subj.querySelectorAll(".kitem-lg,.kitem-xl").forEach(e=>e.classList.add("kitem-fr"));
  const head=document.createElement("div");head.className="kslhead";const info=document.createElement("div");info.className="kslinfo";
  const rows=main.querySelector(":scope > .kinvrows");if(rows)info.appendChild(rows);
  /* a chip line right after the rows ("Đã biết: Đúng phẩm") belongs to the item */
