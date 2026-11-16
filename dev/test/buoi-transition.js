@@ -8,8 +8,8 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;docu
  const m=document.getElementById('modal');if(m)m.hidden=true;['kroul','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 const CLEAR=()=>{document.querySelectorAll('body > *').forEach(e=>{const s=getComputedStyle(e);if(s.position==='fixed'&&+s.zIndex>100)e.remove()});Q.length=0;render()};
 (async()=>{const b=await chromium.launch();let fail=0;const R={};
- for(const [W,H,D,tag] of VP.filter(v=>!process.env.VPS||process.env.VPS.split(',').includes(v[3]))){const c=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100});const p=await c.newPage();const errs=[],net=[];
-  await p.route(/img\/fx\/buoi-.*\.webp/,r=>{const f=path.join(FX,r.request().url().split('/').pop().split('?')[0]);r.fulfill({body:fs.readFileSync(f),contentType:'image/webp'})});
+ for(const [W,H,D,tag] of VP.filter(v=>!process.env.VPS||process.env.VPS.split(',').includes(v[3]))){const c=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100});const p=await c.newPage();const errs=[],net=[];
+  if(!process.env.REAL)await p.route(/img\/fx\/buoi-.*\.webp/,r=>{const f=path.join(FX,r.request().url().split('/').pop().split('?')[0]);process.env.MISS?r.fulfill({status:404,body:''}):r.fulfill({body:fs.readFileSync(f),contentType:'image/webp'})});
   p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
   p.on('response',q=>{if(/buoi-/.test(q.url()))net.push(q.status()+' '+q.url().split('/').pop()+' '+(q.headers()['content-length']||''))});
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof buoiShift==='function'&&(typeof nlFigsReady!=='function'||nlFigsReady()),null,{timeout:180000});await sleep(1500);
