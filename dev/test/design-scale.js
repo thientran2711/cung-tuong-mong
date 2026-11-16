@@ -30,7 +30,7 @@ const settle=async f=>{for(let i=0;i<8;i++){await sleep(1200);const had=await f.
 const openTab=k=>{CLEAN();const b=document.querySelector(`#tabs [data-kg="${k}"]`)||document.querySelector(`#tabs [data-tab="${k}"]`);b&&b.click()};
 (async()=>{const b=await chromium.launch();const R={layout:{},devices:{}};const BASE=BASE0.replace(/\/?$/,'/')+'index.html';
  /* A. layout */
- const M={};for(const [W,H,tag] of [[1180,820,'spread'],[590,820,'page']]){L('A',tag);const {c,p,errs}=await game(b,W,H,BASE+'?khost=0');await ready(p);await p.evaluate(LIFE);await settle(p);if(tag==='spread')M.state=await p.evaluate(()=>JSON.stringify(S));else{await p.evaluate(j=>{const o=JSON.parse(j);for(const k in S)if(!(k in o))delete S[k];Object.assign(S,o);CLEAN()},M.state);await settle(p)}
+ const M={};for(const [W,H,tag] of [[1180,820,'spread'],[590,820,'page']]){L('A',tag);const {c,p,errs}=await game(b,W,H,BASE+'?khost=0');await ready(p);await p.evaluate(LIFE);await settle(p);/* the whole save (ser/deser: S + rivals + kids …), not only S — rivals are a global, and the two viewports draw a different number of randoms */if(tag==='spread')M.state=await p.evaluate(()=>JSON.stringify(ser()));else{await p.evaluate(j=>{quiet=true;deser(JSON.parse(j));quiet=false;tab='act';CLEAN()},M.state);await settle(p)}
   M[tag]={pages:await p.evaluate(()=>kitView().pages),stage:await p.evaluate(RECTS,'#stage')};
   if(SHOTS)await p.screenshot({path:`${OUT}/A-${tag}-home.jpg`,type:'jpeg',quality:55});
   await p.evaluate(openTab,'rv');await sleep(1500);await settle(p);M[tag].panel=await p.evaluate(RECTS,'#panel');M[tag].who=await p.evaluate(()=>S.name);

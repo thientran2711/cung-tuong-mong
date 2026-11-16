@@ -11,3 +11,10 @@ Worker session_01UV1SzjmR9rHoafmnuNS1KA. Plan: dev/handover/reports/design-scale
   ~82 % full (3 px height: kv1 top bar 132 vs 129 — the time block wraps to 3 lines).
 - next (phase 2): kv1 time block 2 lines (page box 623 exactly); screens (title, roulette, map, scene panel, mini-games, podium, toilet) review per mode;
   phase 3: rewrite remaining chrome width queries as :where(.kv1/.kv2), delete 37 DEAD, unwrap 6 ALWAYS, build check.
+- 16/11 phase 2+3 (review/design-scale-p2, worker session_01UV1Szh2HXLUxv3oHmnezMy): kv1 time block = one wrapping row of whole items + kitTcFit
+  (zoom ≤ 20 %) → top bar = spread height, page box 582x623 both modes, layout test right 100 % / left 100 %. Phase 3: dev/measure/kv-phase3.js
+  rewrote every remaining width @media (31 DEAD deleted, 3 ALWAYS unwrapped, 34 → :where(.kv1), 12 → :where(.kv2)); JS breakpoints by hand →
+  kitView().pages (incl. innerWidth vs innerHeight orientation compares); build check dev/measure/media-check.js in build_site.sh (0 left;
+  media-audit lists ENV only). Tab-mode bug: KIT_TABMODE reset in j6 renderPanel; dev/test/tab-pairs.js 56 pairs x 2 sizes 0 mismatches
+  (old code: 17). design-scale.js copies the whole save (ser/deser) — S-only copy gave a different rivals list (flaky 14–98 %).
+- open: toilette (jtoil) on the one page drops the mirror column (spread dialog ~920 px spans both pages) → KIT REQUEST, see report.
