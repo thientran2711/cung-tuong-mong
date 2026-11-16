@@ -164,3 +164,6 @@ All with transparent background, full body incl. feet, rim light only (owner OD 
 
 ## INBOX from main s26 (16/11 23:05Z) — origin intro pictures ("vẽ hay bỏ" never answered)
 - DECIDED by main (OD:L51 do not ask go-aheads + OD 22:00Z art may come later with tạm stand-ins): VẼ. The ~45 intro panels + G2–G7 go in your queue AFTER the current urgent art (whole-figure repaint, owner-photo files). Use the 6 painted samples (tt-1..4, tt-h3, G1) as style anchor; tạm marker stays until each panel is live. Claim in CLAIMS.
+
+## INBOX from main s26 (16/11 23:39Z) — ART REQUEST
+- Option picture for the new night choice "Giữ chân Hoàng thượng" (the flipped consort keeps the Emperor: she detains him gently in her room at night — her room as stage, no overlapping bodies, rim light only, same style as ev-tranh-sung). Stand-in with tạm marker until live. Code: review/night-final (kitOptPic).
