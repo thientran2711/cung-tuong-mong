@@ -66,3 +66,10 @@ Chosen: Đáp ứng Xm4f7SQBfo, Tần 1lewT0ur4r, Phi ovNEOPO829 (alts 8a6uy7PIr
 Pixel-read heads: NC home 14.1-14.2% (c01 13.5; BD Tần 12.8), chin>sole aligned. Poses copy BD Tần's 3/4 stance with the NC prop (handkerchief/fan/blossom).
 Credits: 12 x 40 = 480 (v8-v14 total 2,200).
 STATUS: WAIT for the owner's verdict on v14; then STEP 2.
+
+## v14 HELD by Foreman C (NC skirts flared into wide bells, hem much wider than BD Tần; owner: no proportion numbers). v14 sheet deleted.
+## v15 SAMPLE READY (names only, no numbers on the sheet)
+File: `foreign-princess-art/sample-v15.jpg` = approved BD Tần | NC Đáp ứng | NC Tần | NC Phi | NC Quý phi (approved B).
+Same method as v14 (base = approved BD Tần figure fHGK6TrCDY, ref N2FUFwO6D9), prompt adds: skirt falls straight and close to the legs, hem no wider than the base image's hem, layers flat, no bell flare, same head size as the base. gpt-2-6, 2:3, 3 tries per rank (9). Chosen: Đáp ứng LwoydrhswO, Tần vQ2b3vFa47, Phi LwoyXSuswO (alts: SymN8sdUb8 gOt9oLLSXO 0eSos0KTfW Xm4fOXRBfo VXwISeLMMU 8a6u9vaIrU). Home ranks aligned on crown + soles; Quý phi aligned so her body below the chin matches the Phi.
+Credits: 9 x 40 = 360 (v8-v15 total 2,560). v14 ids rejected: Xm4f7SQBfo 1lewT0ur4r ovNEOPO829 (flared hems).
+STATUS: WAIT for the owner's verdict on v15; then STEP 2.
