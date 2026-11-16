@@ -1,4 +1,4 @@
-# merge-hot-2 — review/merge-hot-2 @ 9fed4864d7efe60df6923f6f4b86cc2de6e3bfe0 (descends from main 02a0d3f1; includes facefx-all-r2 @ 2cc69dfaf4)
+# merge-hot-2 — review/merge-hot-2 @ ba07c65e6071583b1f47af9fa67de7b817d310cb (descends from main c4e89f89; includes facefx-all-r2 @ 2cc69dfaf4)
 Changed: (1) merged review/facefx-all-r2 (one face-mark rule), generated index.html/sw.js/assets.json rebuilt with dev/site/build_site.sh (never hand-merged); re-merged newer main 02a0d3f1 and rebuilt again. (2) Root fix of the main bug: jbook.js defined a second global kitPortrait() (orientation, boolean) that shadowed the kit's j60 kitPortrait(p,{size}); renamed to kitIsPortrait(). KIT.md note: ONE kitPortrait (j60).
 
 ## kitPortrait callers (dev/build, grep of every call)
@@ -18,3 +18,4 @@ Docs only: KIT.md §4, PROGRESS_page-curl2.md.
 - Boot/smoke + #kit sample page: loads, renders, no page errors, no overflow at all 5 sizes. After the last main merge: load + kitPortrait/kitIsPortrait re-checked.
 - Not run: dev/test/podium.js (stale harness, times out on #kg82skip also unrelated to this change); portrait page-slide animation not exercised by hand (caller is identical, only the name changed).
 SẴN SÀNG KIỂM
+Update: re-merged main c4e89f89, rebuilt; podium 5 sizes, appearance-port (3 sizes), facefx-scan re-run: all OK.
