@@ -27,7 +27,7 @@ function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.
 function mbW(){try{return wk()}catch(e){return 0}}
 const cl2=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* push the bar; merge pushes of the same cause kind in the same tuần ("Việc thành ×3: Đánh đàn, Làm thơ") */
-function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(.2,1-same/B().sat));if(!d)return 0;const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
+function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(B().satMin,1-same/B().sat));if(!d)return 0;const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
  const W=mbW();kind=kind||why;MOOD_N.pushes[kind]=(MOOD_N.pushes[kind]||0)+real;
  const x=M.log.find(e=>e.w===W&&e.k===kind);if(x){x.d+=real;x.n=(x.n||1)+1;if(why&&x.why.indexOf(why)<0&&x.why.length<70)x.why+=", "+why}else M.log.unshift({w:W,k:kind,d:real,why:String(why||"").slice(0,80),n:1});
  M.log=M.log.filter(e=>W-e.w<=B().keep).slice(0,B().logMax);return real}
@@ -111,11 +111,11 @@ function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();const bi=mbBand().i;if(
  const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return sk("nobody");M.cw=W;MOOD_N.comfort++;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;
- const o1={n:`Giãi bày tâm sự với ${nm}`,x:`tâm trạng +${big}, ${nm} thiện cảm +${C.affUp} · kèm: mất ${C.k} khắc buổi này`,fx:{},
+ const o1={n:`Giãi bày tâm sự với ${nm}`,risk:"an toàn",hint:`lòng nhẹ đi nhiều, được lòng ${nm}; nhưng mất một khắc buổi này`,x:`tâm trạng +${big}, ${nm} thiện cảm +${C.affUp} · kèm: mất ${C.k} khắc buổi này`,fx:{},
   go:()=>{mbAdd(big,`${nm} đến an ủi`,"comfort");try{if(v)affAdd(v,S,C.affUp);else maid.loyal=cl2((maid.loyal||0)+C.affUp,0,100)}catch(e){}try{spend(C.k)}catch(e){}log(`${nm} ngồi nghe ngươi giãi bày tâm sự; lòng ngươi nhẹ đi nhiều.`)}};
- const o2={n:"Gượng cười, cảm tạ",x:`tâm trạng +${small}${v?" (giữ thể diện)":""} · kèm: ${nm} thiện cảm −${C.affDown} (thấy ngươi giữ khoảng cách)`,fx:v?{danh:1}:{},
+ const o2={n:"Gượng cười, cảm tạ",risk:"an toàn",hint:`lòng nhẹ đi chút ít${v?", giữ được thể diện":""}; nhưng ${nm} thấy ngươi giữ khoảng cách`,x:`tâm trạng +${small}${v?" (giữ thể diện)":""} · kèm: ${nm} thiện cảm −${C.affDown} (thấy ngươi giữ khoảng cách)`,fx:v?{danh:C.danh}:{},
   go:()=>{mbAdd(small,`${nm} đến thăm`,"comfort");try{if(v)affAdd(v,S,-C.affDown);else maid.loyal=cl2((maid.loyal||0)-C.affDown,0,100)}catch(e){}log(`Ngươi gượng cười cảm tạ ${nm}, không nói ra nỗi lòng.`)}};
- Q.push({t:"Có người đến an ủi",who,art:"img/act-sang-tham-hoi.webp",h:`<p>Mấy hôm nay ngươi ${band}, ${nm} biết chuyện, mang chút quà sang thăm, hỏi han ân cần.</p><p>Ngươi có muốn nói thật lòng với ${them}?</p>`,opts:[o1,o2]})}
+ Q.push({ev:1,t:"Có người đến an ủi",who,art:"img/act-sang-tham-hoi.webp",h:`<p>Mấy hôm nay ngươi ${band}, ${nm} biết chuyện, mang chút quà sang thăm, hỏi han ân cần.</p><p>Ngươi có muốn nói thật lòng với ${them}?</p>`,opts:[o1,o2]})}
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=mbW();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&mbW()!==w0)mbWeek()}catch(e){console.error(e)}return r}})();
 /* ---------- UI ---------- */
 function mbAgo(w){const d=mbW()-w;return d<=0?"tuần này":`${d} tuần trước`}
