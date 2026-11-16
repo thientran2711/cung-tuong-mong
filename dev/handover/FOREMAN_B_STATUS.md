@@ -28,7 +28,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
-| D40 weather-risk-port | review/weather-port | sonnet | RUNNING |
+| D40 weather-risk-port | review/weather-port @15c6ba39 | sonnet | REVIEWING (review/weather-port-r1, sonnet) |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
 | D42 places-leftovers | review/places-port | sonnet | QUEUED (after D30) |
 
@@ -73,3 +73,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q11 (D39 appearance-port): her own ingredient-specific allergy in recipes (PM:L326) was not built — rash causes already include son phấn and bad-luck food. Owner wants a per-ingredient allergy in recipes (new feature), or is the current cause list enough?
 - Q12 (D32 succession-port): the 12 dedicated epilogue pictures in SUCCESSION_PLAN §7 were never approved; chapters reuse approved event art. Owner wants dedicated pictures? And ending cards show ev-quoc-tang (from main's code) — the right picture for succession endings?
 - Q13 (C33 weekbook): week-book entry wording is generic per person and direction ("Hoàng thượng để tâm đến ta hơn", "nàng bớt ghen"); per-act sentences would need act data — owner want that later? Also many "Mấy việc vặt…" lines until review/log-sync lands on main (missing log lines; honest, not a bug).
+- Q14 (D40 weather): rain gear (dù/áo tơi/giày) is a one-time purchase that halves one risk; the kiệu costs Bạc −6 per outing. Should gear wear out?
