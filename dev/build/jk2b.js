@@ -626,7 +626,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
 .dlg.kpsc .kpid>.kpidart>.ksart>img{object-position:center 45%}
 /* the two choices never leave the screen (owner 11/14: "Đổi thân phận (−100…" was cut at 686x880): the body scrolls under them */
 .modal.kpscene .dlg.kpsc.kfpon>#mb{overflow-y:auto!important;overscroll-behavior:contain}
-.dlg.kpsc>#mb>.kpscopts{position:sticky;bottom:0;z-index:3;margin:4px 0 0!important;padding:6px 0 8px;background:linear-gradient(rgba(255,250,240,0),rgba(255,250,240,.97) 8px);box-shadow:0 -1px 0 #e6d3ac}
+.dlg.kpsc>#mb>.kpscopts{position:sticky;bottom:0;z-index:9;margin:4px 0 0!important;padding:6px 0 8px;background:linear-gradient(rgba(255,250,240,0),rgba(255,250,240,.97) 8px);box-shadow:0 -1px 0 #e6d3ac}
 .dlg.kpsc>#mb>.kpscopts .kan{white-space:normal}
 `;document.head.appendChild(st)})();
 
@@ -884,7 +884,11 @@ document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closes
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
- let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");
+ /* KIT 6.3b (review/kit-keeper-2, main s11 item 4): SHORT LANDSCAPE (phone sideways, 844x390: the card's room is ~180 px high) — the two-column card whatever
+    the width: picture + name + info LEFT (narrow column, sticky), acts RIGHT, so the first act is on the first screen instead of 500 px down the page */
+ if(pc&&innerHeight<=520&&innerWidth>innerHeight){pc.style.setProperty("--kpcw","92px");return true}
+ return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
