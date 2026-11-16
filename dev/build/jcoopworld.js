@@ -21,7 +21,7 @@
    the real save). */
 (function(){try{
 if(typeof COOP!=="object")return;
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed"];
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","tn"];  /* tn: B2 the Emperor's night (host) */
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
 const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot"];
@@ -58,6 +58,9 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     ledger here made every piece on the friend a rumour each week, and NPC spies could never find a guilty friend); read-only copy */
  for(const k of ["wrongs","dw","dws","dkeys","schemes"])if(s[k]!=null)v[k]=J(s[k]);
  for(const k of PETK2)if(s[k]!=null)v[k]=J(s[k]);  /* her pets: shown on her entry, acts on them go through `res` (pet ops), never the week write-back */
+ /* B1 (review/coop-b1b5): her bag and her children on her entry, so the item / child acts are offered on her exactly as on an NPC.
+    Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
+ v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}
  mapMe(v,false,mp);v.id=fp();
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank}));
  return v}
@@ -192,13 +195,21 @@ const LIVE=["sung","danh","suc","sac","tai","tamco","duc","rank","age"];
 /* her pets, live (co-op pets, owner 15/11 20:05Z): compact list, so the friend's acts aim at the pets she really has now */
 const PETF=["t","at","full","clean","joy","aff","stg","care","src","from"];
 function petLive(){return {L:(S.pets||[]).map(P=>{const o={};for(const k of PETF)if(P[k]!=null)o[k]=typeof P[k]==="number"?Math.round(P[k]):P[k];return o}),on:S.petOn==null?-1:S.petOn,b:S.petB||null,bn:S.petBn||0}}
+/* B1: her bag (every entry with its index `ci`, so an act's op names the very item) and her living children, live */
+function bagOf(L){return (L||[]).map((e,i)=>e&&typeof e==="object"?Object.assign(J(e),{ci:i}):null).filter(Boolean)}
+const KIDX=["mom","v","by"];
+function kidsCopy(L){return (L||[]).filter(k=>k&&k.alive!==false).map(k=>{const o={};for(const x in k){const y=k[x];if(KIDX.includes(x))continue;if(y==null||typeof y!=="object")o[x]=y}o.alive=true;return o})}
+function famLive(){return {bag:bagOf(S.inv),kids:kidsCopy(S.kids),preg:S.preg&&!S.hidden?S.preg:0,fake:S.preg&&!S.hidden&&S.fake?1:0}}
 function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
- const pl=petLive();const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,JSON.stringify(pl)].join(":");if(k===CW.posKey)return;CW.posKey=k;
- COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,pets:pl,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
+ const pl=petLive(),fm=famLive();const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,JSON.stringify(pl),JSON.stringify(fm)].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,pets:pl,fam:fm,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
  if(f.__b)f.__b.rank=f.rank;
+ if(m.fam&&Array.isArray(m.fam.bag)){const fm=m.fam;if(JSON.stringify(fm.bag)!==JSON.stringify(f.inv||[])){f.inv=fm.bag.map(o=>Object.assign({},o));ch=true}
+  if(JSON.stringify(fm.kids||[])!==JSON.stringify(f.kids||[])){f.kids=(fm.kids||[]).map(o=>Object.assign({},o));ch=true}
+  if((fm.preg||0)!==(f.preg||0)){f.preg=fm.preg||0;f.fake=fm.fake||0;ch=true}}
  if(m.pets&&Array.isArray(m.pets.L)){const L=m.pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=m.pets.on;f.petB=m.pets.b;f.petBn=m.pets.bn;ch=true}}
  return ch}
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(m.place);const f=friendEntry();if(!f)return;
@@ -239,16 +250,16 @@ const PUB=["petcare","accuse","vp","gift","ally","steal","road","takeaway","toca
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
-function sendRes(v,k,b0,txt,id,pet,items){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+function sendRes(v,k,b0,txt,id,pet,items,fam){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
  const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
  const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
- const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold||(pet&&pet.length)||(items&&items.length);if(!any&&!PUB.includes(k))return;
+ const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold||(pet&&pet.length)||(items&&items.length)||(fam&&fam.length);if(!any&&!PUB.includes(k))return;
  /* she notices what an NPC's act would show her: open acts and caught schemes name me, a hidden harm only shows its effect */
  const seen=PUB.includes(k)||caught?"named":any?"effect":"";
  if(v.__b){for(const x of STAT)v.__b[x]=v[x];v.__b.rel=v.rel;v.__b.oan=v.oan;v.__b.em=(v.evm&&v.evm.me)||0;v.__b.out=v.out;v.__b.rank=v.rank}
  if(flags.dead)v.alive=true;if(flags.cold)v.out=false;   /* her death / lãnh cung happen on her side; her entry follows from her `me` / week */
  const rid=id||newId();CW.rpend[rid]=Date.now();  /* her week's end waits for her ack, so a res that lands after she ended is re-sent in her end */
- COOP.send(Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{}))}
+ COOP.send(Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{},fam&&fam.length?{fam}:{}))}
 /* ---------- co-op pets (owner 15/11 20:05Z): help / harm / steal the friend's pet (petcare / thaopet / petsteal, jpet + jpetcare) ----------
    The act runs on her entry (which carries her live pets, petLive/pos); what happened to each of her pets goes out as `res.pet` ops
    ({op:"d",t,at,d:{full,clean,joy,aff}} | {op:"lose",t,at}); her client applies them to her OWN pets (petLose there gives her the
@@ -278,11 +289,62 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
  if(ASK.includes(k)&&!CW.inv){if(sameHouse(a,t))return f.apply(this,arguments);const id=newId();CW.acts[id]={k,extra,v:t.id};
   COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item:extra!=null&&S.inv&&S.inv[extra]?iname(S.inv[extra]):""});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
  const pa=PETACT.includes(k);let L0=null;if(pa){petLoseHook();L0=tsbPets(t).map(P=>[P,Object.assign({},P)]);CW.petV=t;CW.petAdj={}}
- const inv0=(t.inv||[]).slice();const b0=fsnap(t);let r;try{r=f.apply(this,arguments)}finally{CW.petV=null}
+ const inv0=(t.inv||[]).slice();const K0=famSnap(t);const b0=fsnap(t);let r;try{r=f.apply(this,arguments)}finally{CW.petV=null}
  /* things that landed in her entry's bag (Tặng quà, a handmade work, a gift with something in it) go to HER: she gets the normal
-    "Quà tặng" dialog (keep / have it checked), exactly as from an NPC (review/coop-pets: before, the item left me and never reached her) */
- const items=(t.inv||[]).filter(e=>!inv0.includes(e)).map(e=>J(e));
- try{let pet=null;if(pa){pet=petDiff(t,L0);for(const x in CW.petAdj)b0[x]=(b0[x]||0)+CW.petAdj[x]}sendRes(t,k,b0,r,CW.inv,pet,items)}catch(e){console.error(e)}return r}})();
+    "Quà tặng" dialog (keep / have it checked), exactly as from an NPC (review/coop-pets: before, the item left me and never reached her).
+    B1: a hidden thing slipped into her chest (Cài đồ vào rương, Giá họa: e.h) lands there silently, as from an NPC. */
+ const add=(t.inv||[]).filter(e=>!inv0.includes(e));const back=k==="plant"?add.filter(e=>!e.h):[];/* a stolen thing slipped back to its owner (jlost "Lén trả lại" through Cài đồ) is not a gift */
+ const items=add.filter(e=>!e.h&&!back.includes(e)).map(e=>J(e));
+ try{let pet=null;if(pa){pet=petDiff(t,L0);for(const x in CW.petAdj)b0[x]=(b0[x]||0)+CW.petAdj[x]}
+  const fam=famDiff(t,k,inv0,K0,add.filter(e=>e.h));for(const e of back)fam.push({op:"ret",k:e.k});sendRes(t,k,b0,r,CW.inv,pet,items,fam)}catch(e){console.error(e)}return r}})();
+/* ---------- B1 (review/coop-b1b5): steal / burn / extort her ITEMS, harm / take her CHILDREN, miscarriage ----------
+   The act runs on her entry (bag + children from buildFriend / pos). The loss reaches her as `res.fam` ops, applied to her OWN S:
+     {op:"rm", ci, k, how}  an item left her chest (how: "lost" = thất lạc case, as an NPC thief; "burn"; "taken" = named; "gone")
+     {op:"plant", e}        a hidden thing was slipped into her chest (silent; it works on her like an NPC's plant)
+     {op:"kd", n, d:{hp,tal,fond}, heir0}  a child hurt / slandered (heir0: lost the Đông cung)
+     {op:"kdie", n, why}    a child died (kidDie on her side: her grief Sức, the heir seat empties)
+     {op:"ktake", n}        a child was taken to be raised by me (takeaway; the child is already in my S.kids)
+     {op:"preg0"}           she lost the pregnancy (musk; the Sức loss is in fx)
+   My gain stays on my side as the act already gives it (the item in my chest, the child in my house). */
+const kidId=k=>String(k.name||"")+"#"+(k.bt==null?"":k.bt);
+function famSnap(t){return {kids:(t.kids||[]).map(k=>[k,Object.assign({},k)]),preg:t.preg||0}}
+const RMHOW={laydo:"lost",laydol:"lost",phonghoa:"burn",batnat:"taken",uyhiep:"taken",tieuhuy:"taken"};
+function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
+ for(const e of inv0)if(!L1.includes(e)&&e.ci!=null)ops.push({op:"rm",ci:e.ci,k:e.k,how:RMHOW[k]||"gone"});
+ for(const e of plants){const x=J(e);if(x.by==="me")x.by=me();ops.push({op:"plant",e:x})}
+ for(const [kd,c] of K0.kids){const n=kidId(c);if(!(t.kids||[]).includes(kd)){ops.push({op:"ktake",n});continue}
+  if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:k==="pond"?"chết đuối ở hồ sen":k==="kpoison"?"trúng độc mà chết":"mất sớm"});continue}
+  const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
+  if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
+ if(K0.preg&&!t.preg)ops.push({op:"preg0"});
+ return ops}
+/* her side: returns the lines for her note; `quiet` lines are told by their own dialog (Đồ thất lạc) */
+function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
+ const itemAt=o=>{let e=S.inv[o.ci];if(!e||e.k!==o.k)e=S.inv.find(x=>x&&x.k===o.k&&!x.h);return e||null};
+ const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
+ const rm=ops.filter(o=>o.op==="rm").map(o=>[o,itemAt(o)]).filter(x=>x[1]);
+ for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;
+  if(o.how==="lost"&&typeof loLose==="function"){/* the NPC thief's road: a "thất lạc" case in her Tư trang › Việc, the item held by the friend */
+   const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:f?key(f):fp(),keep:1})}finally{S.inv=all.filter(x=>x!==e)}if(c)continue}
+  S.inv.splice(S.inv.indexOf(e),1);loud=1;
+  if(o.how==="burn"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"cháy",cause:"có kẻ phóng hỏa (chưa rõ là ai)"})}catch(x){}out.push(`<span class="r">Kho đồ của ngươi bốc cháy: mất ${esc(nm)}.</span>`)}
+  else if(o.how==="taken"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"bị lấy",who:fp(),by:friendName()})}catch(x){}out.push(`<span class="r">Ngươi phải nộp ${esc(nm)} cho ${esc(friendName())}.</span>`)}
+  else out.push(`<span class="r">${esc(nm)} trong rương ngươi không còn nữa.</span>`)}
+ for(const o of ops)if(o.op==="plant"&&o.e&&o.e.k){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x)}
+ for(const o of ops)if(o.op==="ret"){/* her thất lạc case closes: the thing is back in her chest, quietly (as when an NPC returns it) */
+  const c=(S.lost||[]).find(c=>c.k===o.k&&c.st!=="done"&&(c.by===fp()||c.at===fp()));const e=c&&c.e?Object.assign({},c.e):{k:o.k};delete e.lo;delete e.by;delete e.gh;
+  S.inv.push(e);if(c){c.st="done";c.end=wk();c.how="nha"}out.push(`${esc(typeof iname==="function"?iname(e):e.k)} thất lạc hôm trước nay lại thấy nằm trong rương.`);loud=1}
+ for(const o of ops){if(o.op==="preg0"){if(S.preg){S.preg=0;S.hidden=false;loud=1;out.push(`<span class="r">Ngươi sảy thai.</span> Thái y nói trong thuốc có xạ hương.`)}continue}
+  const kd=o.n&&kidBy(o.n);if(!kd)continue;loud=1;
+  if(o.op==="kdie"){try{out.push(kidDie(kd,o.why||"mất sớm",true))}catch(x){kd.alive=false}continue}
+  if(o.op==="ktake"){S.kids.splice(S.kids.indexOf(kd),1);if(f){f.kids=f.kids||[];f.kids.push(kd)}
+   if(S.heir&&S.heir.k===kd)S.heir.v=f||null;out.push(`<span class="r">${esc(kd.name)} bị bế sang cung ${esc(friendName())} nuôi, vì phẩm vị ngươi còn thấp.</span>`);continue}
+  if(o.op==="kd"){const d=o.d||{},L=[];for(const x of ["hp","tal","fond"])if(typeof d[x]==="number"){kd[x]=x==="hp"?Math.max(1,(kd[x]||0)+d[x]):cl((kd[x]||0)+d[x],0,100)}
+   if(d.hp)L.push(`Sức khỏe ${d.hp>0?"+":""}${d.hp}`);if(d.tal)L.push(`Tài ${d.tal>0?"+":""}${d.tal}`);if(d.fond)L.push(`Hoàng thượng thương nó ${d.fond>0?"+":""}${d.fond}`);
+   if(o.heir0&&kd.heir){kd.heir=false;if(S.heir&&S.heir.k===kd)S.heir=null;L.push("bị phế ngôi Thái tử")}
+   out.push(`<span class="r">${esc(kd.name)} gặp chuyện</span>${L.length?` (${L.join(", ")})`:""}.`)}}
+ return {out,loud}}
+
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
@@ -300,7 +362,9 @@ function resApply(m){if(S.dead)return;
  if(g.rel)S.rl[fpid]=cl((S.rl[fpid]||0)+g.rel,-100,100);if(g.oan)S.ro[fpid]=cl((S.ro[fpid]||0)+g.oan,0,100);
  if(g.em)S.cev[fpid]=Math.max(0,(S.cev[fpid]||0)+g.em);if(g.conf)S.confined=Math.max(0,(S.confined||0)+g.conf);
  const f=friendEntry();if(f&&g.rel){f.rel=cl((f.rel||0)+g.rel,-100,100);if(f.__b)f.__b.rel=f.rel}
- const pl=petApply(m.pet,m.k);
+ const pl=petApply(m.pet,m.k);const fa=famApply(m.fam);pl.push(...fa.out);
+ /* a hidden theft that only left a "thất lạc" case: her Đồ thất lạc dialog is all she learns (as from an NPC thief) */
+ if(m.seen==="effect"&&Array.isArray(m.fam)&&m.fam.length&&!fa.loud&&!Object.keys(fx).length&&!(m.pet||[]).length&&!g.dead&&!g.cold){showModal();render();return}
  let gotItem=false;if(Array.isArray(m.items))for(const e of m.items){if(!e||!e.k||typeof IT!=="object"||!IT[e.k])continue;const ent=J(e);ent.from=fpid;if(ent.by==="me")ent.by=fpid;try{pushDil(mkP("giftin",{f:fpid,e:ent}),"Quà tặng");gotItem=true}catch(x){console.error(x)}}
  const who=m.seen==="named"?`<b>${esc(m.who)}</b>: ${esc(m.n)}.`:"Có kẻ ngấm ngầm ra tay với ngươi.";
  const note=m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${pl.map(x=>`<p>${x}</p>`).join("")}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"";
@@ -340,6 +404,9 @@ function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;i
  if(S.coopCold){S.coopCold=0;if(!S.out)try{cold("Bị đày vào lãnh cung")}catch(e){console.error(e)}}
  /* jkc: the friend passed the tuyển tú this week and entered the palace */
  const fP=C.P[fs()];if(fP&&!fP.dead){const home=friendHome(fP);if(CW.fWasHome&&!home&&fP.S&&fP.S.kc&&fP.S.kc.inPal)pushModal({t:"Hảo hữu nhập cung",h:`<p>Hảo hữu ngươi qua kỳ tuyển tú, nay vào cung, phong ${esc(RANKS[fP.rank]?RANKS[fP.rank].n:"")}. Mặt mũi, tên tuổi ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});CW.fWasHome=home}
+ try{if(CW.empWeek()){showModal();render();lockNext();return}}catch(e){console.error(e)}
+ try{if(host())CW.tnLast=JSON.stringify([wk(),tnWho()]);else CW.tnWeek()}catch(e){console.error(e)}
+ try{CW.seatWeek()}catch(e){console.error(e)}
  const h=newsHTML()+(worldNews(C)?`<p>${worldNews(C)}</p>`:"");CW.mine=null;
  if(h)pushModal({t:"Tuần mới",h:`<p class="past">${when()}</p>${h}`});
  CW.bend=false;CW.posKey="";if(CW.p2&&S&&(S.buoi||0)!==0){S.buoi=0;used=0}/* every week starts at buổi sáng for both */
@@ -414,12 +481,78 @@ function nResync(){if(!CW.on||!S)return;if(!host()&&CW.nrdy===wk()&&CW.ngoW!==wk
 COOP.on("room",()=>setTimeout(nResync,350));COOP.on("peer",on=>{if(on)setTimeout(nResync,350)});
 COOP.on("presence",()=>{if(CW.on){nCheck();lockNext()}});
 
+/* ---------- B2 (review/coop-b1b5): ONE night for the whole harem, host-authoritative ----------
+   Before: S.tonight was personal and each client flipped its own tablet in endTurn: the Emperor could spend the same night with both
+   players, or with an NPC on one screen and her on the other.
+   Now: the HOST's flip runs with the friend's entry in the deck (both players + NPCs) and writes the world key S.tn = {w, who}
+   (who = 901 / 902 = a player, an NPC id, or null). The guest's flip does not draw (only its personal side, pregFind, runs) and her
+   night is set from tn when the merged week arrives (her Kính sự phòng card when it is her). In the week, any change of the night
+   (Tranh sủng, Chặn ngự giá, Thắp đèn, cáo bệnh…) is relayed at once over the act channel (k "ctm-tn"), so both always agree.
+   A night is resolved once: an NPC's night on the host only; a player's night by that player's own client. */
+const TK="ctm-tn";
+const tnWho=()=>{const t=S&&S.tonight;if(!t)return null;if(t==="me")return me();return t.id!=null?t.id:null};
+function tnSet(who){if(!S)return;if(who==null){S.tonight=null}else if(who===me()){S.tonight="me"}else{const v=who===fp()?friendEntry():RV(who);S.tonight=v&&v.alive&&!v.out?v:null}
+ try{if(S.tonight&&typeof ntTake==="function")ntTake(S.tonight==="me"?S:S.tonight)}catch(e){}CW.tnLast=JSON.stringify([wk(),tnWho()])}
+function tnRelay(){if(!CW.on||!S||S.dead||CW.inTurn||!CW.base||CW.pend||CW.sent===wk())return;/* the week's own draw (endTurn) goes with the merge, never as a relay */const k=JSON.stringify([wk(),tnWho()]);if(CW.tnLast===undefined){CW.tnLast=k;return}if(k===CW.tnLast)return;
+ CW.tnLast=k;COOP.send({t:"act",k:TK,mode:"tn",week:wk(),who:tnWho()==null?null:(tnWho()===me()?"p":tnWho()===fp()?"f":tnWho()),id:TK+wk()+":"+newId()})}
+COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||m.from===CW.seat||!S||S.dead||m.week!==wk())return;
+ const who=m.who==null?null:m.who==="p"?fp():m.who==="f"?me():m.who;const had=S.tonight==="me";tnSet(who);
+ if(had&&S.tonight!=="me"){const v=S.tonight&&S.tonight!=="me"?S.tonight:null;pushModal({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng đêm nay Hoàng thượng ${v?`ngự ở cung ${esc(v===friendEntry()?friendName():v.name)}`:"không vời ai"}.</p>`});showModal()}
+ else if(!had&&S.tonight==="me"){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}showModal()}
+ render()});
+(function(){if(typeof flip!=="function")return;const f=flip;flip=function(){if(!CW.on)return f.apply(this,arguments);
+ if(!host()){/* the guest draws nothing: her night comes from the host's tn with the merged week */const r0=S.tonight;
+  if(CW.inTurn){S.tonight=null;try{if(typeof pregFind==="function")pregFind()}catch(e){}return}return r0}
+ /* host: the friend's entry is in the deck (endTurn took her out) */const L=CW.pulled;if(L&&L.length)pushFriend(L.slice());let r;
+ try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}
+ S.tn={w:wk()+(CW.inTurn?1:0),who:tnWho()};CW.tnLast=JSON.stringify([wk()+(CW.inTurn?1:0),tnWho()]);return r}})();
+(function(){if(typeof resolveTonight!=="function")return;const f=resolveTonight;resolveTonight=function(){if(!CW.on)return f.apply(this,arguments);const t=S.tonight;
+ /* her friend's night is played on her friend's client; an NPC's night only on the host (its gains are world numbers) */
+ if(t&&t!=="me"&&(isF(t)||!host())){S.tonight=null;return""}return f.apply(this,arguments)}})();
+/* the guest takes the host's night when the merged week is in (onWeek → CW.tnWeek) */
+CW.tnWeek=function(){if(!CW.on||!S||S.dead||host())return;const tn=S.tn;if(!tn||tn.w!==wk()){CW.tnLast=JSON.stringify([wk(),tnWho()]);return}
+ const who=tn.who===fp()?fp():tn.who;const was=S.tonight==="me";tnSet(who);
+ if(S.tonight==="me"&&!was){try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){}}};
+(function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on)tnRelay()}catch(e){}return r}})();
+
+/* ---------- B5 (review/coop-b1b5): seat caps count BOTH players ----------
+   (1) the week's promotions (monthTick → promote / fillSeats) run while endTurn has taken the friend out of the harem: the seat count
+       (holders, j30 SEATCAP) now counts her entry too, so a full seat is full on both screens.
+   (2) both promoted into the same last seat in the same week (neither could see the other's decree): the host keeps it; on the guest's
+       merged week she is put back one rank (the seat is full) and told why, on the kit dialog. */
+(function(){if(typeof holders!=="function")return;const f=holders;holders=function(r){const L=f.apply(this,arguments);if(!CW.on||!S)return L;
+ for(const x of CW.pulled||[]){const v=x[1];if(x[0]>=0&&v&&v.alive&&!v.out&&!L.includes(v)&&rkOf(v)===r)L.push(v)}return L}})();
+CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"||!CW.mine)return;const r=S.rank||0,r0=CW.mine.rank||0;
+ const f=friendEntry();if(r<=r0||!f||rkOf(f)!==r||SEATCAP[r]==null)return;if(holders(r).length<=SEATCAP[r])return;
+ const nr=Math.max(r0,r-1);S.rank=nr;if(S.justCrowned)S.justCrowned=0;
+ pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p><p>Hoàng thượng giữ ngươi ở phẩm ${esc(RANKS[nr].n)}, đợi khi có ghế trống.</p>`})};
+
 /* ---------- hooks ---------- */
 const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(CW.on&&!host())return "";return f.apply(this,arguments)}};
 ["rivalsTurn","rivalsMonth","festival"].forEach(mute);
 /* host: keep the world news text of the week for the guest */
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){const r=f.apply(this,arguments);if(CW.on&&host()&&typeof r==="string")CW.news+=r;return r}});
-(function(){const f=emperorDies;emperorDies=function(){if(CW.on){try{if(arguments[0])log(arguments[0])}catch(e){}return}return f.apply(this,arguments)}})();
+/* B4 (review/coop-b1b5): the week's NPC schemes (rivalsTurn), the month's NPC moves (rivalsMonth) and the festival contests roll on the
+   HOST only, as before, but now WITH the friend's entry in the harem (endTurn had taken her out): NPCs can aim at her, she competes at
+   Yến xuân / Thất tịch with her real numbers. What they do to her entry (Sủng, Danh, Thiện cảm, Oán, lãnh cung, death) is written back
+   into her blob by toCanon, so the merge lands it on HER own S; the lines about her reach her in the week's news (cnews). */
+["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!CW.on||!host())return f.apply(this,arguments);
+ const L=CW.pulled;if(!L||!L.length)return f.apply(this,arguments);pushFriend(L.slice());(CW.b4=CW.b4||[]).push(n);if(CW.b4.length>20)CW.b4.shift();try{return f.apply(this,arguments)}finally{pullFriend()}}});
+/* B3 (review/coop-b1b5): the Emperor's death in co-op, host-authoritative. The month roll only counts on the HOST and only for the
+   reigning Emperor's own years (emp.y0 = the year he came to the throne); it writes emp.dead = {w} into the world (emp is a world key)
+   and the week goes on. When the merged week w arrives, BOTH clients run the normal ending of the reign (heir → Thái hậu / Thái phi /
+   tuẫn táng…, from her own heir and rank) at the same moment; the new lives (Luân hồi) join the same world under a NEW Emperor, made
+   once by the host (mkEmp) and carried by its next week. The guest's own roll never fires. */
+(function(){const f=emperorDies;emperorDies=function(){if(!CW.on)return f.apply(this,arguments);try{if(arguments[0])log(arguments[0])}catch(e){}
+ if(!host()||!S||!S.emp||S.emp.dead)return;if(typeof S.emp.y0==="number"&&(S.year||0)-S.emp.y0<=(BAL.coopEmpY||12))return;
+ S.emp.dead={w:wk()+(CW.inTurn?1:0),y:S.year,age:S.emp.age}};
+ CW.empWeek=function(){if(!CW.on||!S||S.dead)return false;const d=S.emp&&S.emp.dead;if(!d||d.w!==wk()||CW.empDone===d.w)return false;CW.empDone=d.w;
+  let ne=null;if(host()){try{ne=mkEmp();ne.y0=S.year||0}catch(e){console.error(e)}}
+  try{f.apply(this,[""])}catch(e){console.error(e)}
+  (CW.empLog=CW.empLog||[]).push({w:d.w,dead:!!(S&&S.dead),end:Q[0]&&Q[0].t||"",bh:/băng hà/.test(Q[0]&&Q[0].h||"")});
+  /* the world the new lives join: the new Emperor (host), the old one gone */
+  if(ne){const C=CW.dying||CW.base;if(C&&C.W&&C.W.S)C.W.S.emp=Object.assign(J(ne),{known:undefined});if(S&&!S.dead){S.emp=Object.assign(ne,{known:{}})}}
+  return true}})();
 /* guest: an NPC's buổi act only lands when it is aimed at her (NPC vs NPC rolls on the host) */
 (function(){const f=pickTarget;pickTarget=function(v){if(CW.on&&isF(v))return null;const t=f.apply(this,arguments);if(CW.on&&!host()&&t!==S)return null;return t}})();
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
