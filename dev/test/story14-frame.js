@@ -19,7 +19,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   const m0=msStart67;msStart67=function(id){const r=m0.apply(this,arguments);rec('ms',id);return r};
   const s0=start;start=function(){S&&(S.__uid14=0);const r=s0.apply(this,arguments);return r};
   const i0=a67init;a67init=function(k){window.__L.push({uid:(window.__uid14=(window.__uid14||0)+1),k,ch:[]});S.__uid14=window.__uid14;const r=i0.apply(this,arguments);try{window.__L[window.__L.length-1].road=S.st.f14&&S.st.f14.road;window.__L[window.__L.length-1].plan=S.st.ch.plan.slice()}catch(e){}return r};
-  start()});
+  /* r3: the first life is not left to the roulette: a bd (Bắc Địch) life has no j67 chapter frame at all (jorigins defines STORY.bd after j67 wraps STORY; same on main), so the bot saw no chapter in about half the runs */window.__forceOrigin='tt';start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:0});await p.evaluate(()=>{document.querySelectorAll('.kroul').forEach(e=>e.remove());window.__startPre=start});await p.evaluate(INP);
  await p.evaluate(()=>{const n0=nextBuoi;nextBuoi=function(){if(S&&S.mg){S.mg=null;try{if(typeof kg82Close==='function')kg82Close(true)}catch(e){}}return n0.apply(this,arguments)};for(const f of ['act','lesson','talk']){const o=window[f];if(typeof o!=='function')continue;window[f]=function(){const r=o.apply(this,arguments);if(S&&S.mg){S.mg=null;try{kg82Close(true)}catch(e){}const ov=document.getElementById('ov');if(ov)ov.hidden=true}return r}}});
  const t0=Date.now();for(let i=0;i<N;i++){await p.evaluate(()=>window.__bot.step('sens',300));if(i%10===9)console.error('step',i+1,Math.round((Date.now()-t0)/1000)+'s')}
