@@ -40,3 +40,6 @@ Looked at: hand frame, final (hers) 755/844/1180, 22-card arrangement 755/1180, 
 1. Run test: bash dev/site/build_site.sh; serve repo root on a free port; `node dev/test/cardflip.js http://127.0.0.1:PORT/index.html <out> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few`.
 2. Look at frames; tune hand position, centre size, caption overlap at 844x390.
 3. KIT.md §67 section + register; commit site build; report.
+
+## review/cardflip-smooth (16/11)
+Jank + too-fast fix, see KIT.md §67 "SMOOTHNESS + CALM". Measures in dev/measure/cardflip-smooth.md. Timing lives in BAL.cardFlip.turn.
