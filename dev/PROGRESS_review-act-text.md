@@ -36,15 +36,27 @@ word1/sp2/glue/sign/twice/long. Serve the build wrapped with `<meta charset=utf-
 brk 18→0 · dots 8→0 · word1 3→0 · sign 3→0 · frag/pct/sp2/glue/twice 0→0 · long 39→28. Full 6-state before run (main):
 3339 cards, brk 39, dots 8, word1 3, sign 4, long 95. The 6-state AFTER run was stopped (slot handed back) — LEFT TO DO.
 
-## Left (for whoever resumes)
-1. Run the full after scan: serve repo root (python3 -m http.server on a free port), wrap dev/index.html with
-   `<meta charset=utf-8>` (dev/test/bt.sh style), run `node dev/test/act-text-scan.js <url> out-<sc>.json 755x1000 <sc>` ONE PROCESS
-   PER STATE (dau,toi,cao,con,hau,hh; a single long run crashes Chromium), then `--sum out-*.json [-v]`.
-2. Phone portrait (755x1000): the panel is hidden by the jk3 phone shell (K3SH lives inside an IIFE, not reachable; people on the room
-   stage set .k3pop) so panel-card "long" rows are NOT measured there; landscape sizes are. Fix the scan's AT.panel() (e.g. click the
-   active bottom tab like a player) to measure them.
-3. "long" rows (>2 lines at 755) remain, mostly pre-existing person-card/dialog lines (Đề bạt, Sai đi dò la, Thỉnh an…); not shortened yet.
-4. Screens checked (Tự học Thi card): 1000x755, 1180x820, 1366x1024 rows ≤2 lines; 844x390 Được 2.1 / Ghi chú 3 lines (narrow column);
-   755x1000 not shot (panel hidden, see 2). 0 page errors.
-5. Picture note for picture workers: Tứ đức Dung and Ngôn "Tự học" cards show Công's embroidery picture (owner screenshot) — not painted here.
-6. Root index.html / sw.js not rebuilt (dev/site/build_site.sh) — coordinator rebuilds on merge.
+## Session 2 (16/11): merge + after-scan + Foreman extras
+- Merged origin/main (conflicts j2 stealX, j78 banphe: kept main's "thiện cảm"/stealKem + our "đến" ranges / split "nắm … chứng cứ" item).
+- Scan (dev/test/act-text-scan.js) now: forces the phone-shell panel visible (item 2 done: row heights measured at 755, ~60% of rows measured vs 45%),
+  new flags `kemgain` (pure gain in a KÈM row, or a "kèm:/tốn:/thành:" label left inside another row) and `titlewrap` (card title with a portrait that wraps to 2+ text lines; text-node measure, portrait box excluded).
+- Source fixes (text/data only, kit untouched): "Chủ tin với X +3" appended as its own " · " item (was glued into a red Kèm clause, jaudit); Liếc mắt đưa tình "kèm: bị người thấy" -> "có thể bị người thấy, một phi tần nắm 1 chứng cứ: …" (j22, j42);
+  Nhờ giúp đỡ x no longer starts with "cần thiện cảm 30 (…) · thành:" (the need is already the CẦN row; label left inside Được) (jaudit);
+  shortened: Phạt vô cớ Kèm, Đề bạt (name dropped from Được, "Phẩm đủ đến X", note), Điểm trang x, stealX, Chào hỏi, Sai đi dò la, Nghe ngóng chung, chợ đen fail line (j24, jaudit, jtoil, j79, j61, jwhy, j83).
+- Titlewrap: scan finds 0 titles that wrap with a portrait at 755x1000 (the earlier 2.6-line reading was the portrait box counted as text height; fixed in the scan). The §6.2 sample option "Thưa rằng do Hoàng thượng định" is 0.9 lines at 755/844/1180.
+
+## Scan results (755x1000, 6 states dau,toi,cao,con,hau,hh)
+After: 3280 cards, brk 0 dots 0 pct 0 frag 0 word1 0 sp2 0 glue 0 sign 0 kemgain 0 titlewrap 0 twice 2 long 41.
+Before (main f53bdade, earlier session, 6 states): 3339 cards, brk 39 dots 8 word1 3 sign 4 long 95 (old scan, panel mostly unmeasured at 755).
+Before on the merged code with the NEW scan (dau+toi only): kemgain 4, long 29 -> after 0 / 28. Full 6-state before with the new scan not run (about 15 min per state).
+`twice` 2 = same khắc text in CẦN and TỐN (pre-existing, by design of the khắc chip).
+
+## KIT REQUEST (for the single kit keeper; not done here)
+1. kit act card parser (j63 kaModel/kaRows): when an `.ef` item holds tags AND starts with a label ("kèm: …", "thành: …") the label is not stripped (push() only parses labels when the html has no tags) so the item lands in Được. Net wanted: strip/parse the label from the plain text. Used by every act card whose x string reaches kaModel with coloured spans (place pop cards, Giao tình, Hành sự).
+2. kaRows add(): a pure-gain clause inside a Kèm item ("a, Chủ tin với X +3") should go to Được; a generic split-at-top-level-comma + route-gain net would stop the whole class at the kit (done now by source fixes only).
+3. "long" rows: person-card/dialog rows are long because the 2-col/3.3rem label grid leaves ~190 px for the value at 755; a taller-row or label-above layout for rows with >2 lines is a kit decision.
+
+## Left
+- 41 long rows remain at 755 (>2.3 lines): mostly Kèm/Mất lists of many numbers (Tung tin đồn, Khiêu khích, Thỉnh an, Vu oan, Bỏ độc…) — need design (split into sub-rows) = kit.
+- Picture note: Tứ đức Dung and Ngôn "Tự học" cards show Công's embroidery picture (picture workers).
+- Root index.html / sw.js not rebuilt (coordinator rebuilds on merge).
