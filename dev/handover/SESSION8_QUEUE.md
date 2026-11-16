@@ -107,9 +107,9 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C44 | review/cloud-save (owner s8: same character on phone + iPad, solo + co-op; sync code, auto upload, conflict pick, 10 versions) | QUEUED-NEXT |
 | C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
-| C47 | review/stage-side @ 3441d4618 (one column always expanded, fixed slots i/(k+1), header fixed per viewport, crossOrigin root cause) | REVIEWING (stage-side-r1, sonnet) — owner OK: 2 rows |
+| C47 | review/stage-side → r1 PASS 6298d2f55 | LIVE (note: 755x1000 3 people shows 2 + page chip) |
 | C48 review/save-slots @ 0bfc455c6 (jslots.js) | REVIEWING (save-slots-r1, opus) |
 | C49 | review/palace-start (owner s8: ~4 small kids 1–4 y mixed, no đích tử, birth order not decisive, faction road Emperor/Thái hậu/quyền thần, princesses everywhere) | RUNNING (opus, session 8) |
 ## Ownership marks (16/11): items in dev/handover/FOREMAN_C.md Slice C are [→ FOREMAN C]; items in FOREMAN_B.md are [→ FOREMAN B]; everything else = session 8.
 | D53 | opt-pics leftovers: 25 options still on placeholder (dev/test/opt-pics-table.md r1) | QUEUED [→ FOREMAN C] |
-| C50 | review/hc-portrait-revert (owner s8: revert wide frame; keep gap fix + roster labels) | RUNNING (sonnet) |
+| C50 | review/hc-portrait-revert @ 1735afbf8 | REVIEWING (sonnet) |
