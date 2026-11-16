@@ -1,7 +1,8 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 20:38Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
+last wake: 16/11 21:40Z (FOREMAN D session 7 = session_01DgYSWo6WxULHyNN9yjfAPm — owner-opened fresh session, lineage depth 0/8; replaces s6 session_01DgYSWkUCM7ZUmRkGFwQvQu; send result lines here)
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
+- 21:40Z (hourly): OWNER RULE 21:34Z: go-live = hourly batch by MAIN; D no longer pushes main (send_message to main s24 not reachable from this account → this STATUS). Golive prep worker told to stop + write final table. OWNER PRIORITY 21:38Z: ch1–4 first, features complete, UI unified, art later — D queue checked: no D item is a later-chapter item except npc-roads (NPC side roads; keep, low). D LIVE today: coop-chat b7c5d787, coop-b1b5-fix 392fff60, coop-name-mask c1e1bbd1.
 - 21:27Z: LIVE coop-name-mask-r1 = c1e1bbd1 (s7 re-merged main 9c49f13c itself, built, golive.sh PASS 212 s, diff = j61/jcoopchat/jcooptimer/coop-chat test/CHANGE + built; pushed FF). npc-death-r1 HOLD: on main 594415aa test 8/12 — main's j95 place-people record bypasses jnpcd/jly (Lý not in Trường Môn viện = OD:L641 lost; dead still listed; Thái y 'ty' missing) → opus re-wire worker. seatcap 627f9b92 withdrawn by golive worker (jseat.js must be LAST) → new READY coming.
 - 20:58Z: go-live: coop-name-mask-r1 READY 06d0cb13 tests 55/55 ×2 + .kv1 chip no clipping, but main moved (1aa0edb2) → re-merge asked (co-op first). mem-upgrade-r1 READY 60fb873f (suites green with __j95off test fix; fix to be included) waits behind it. item-ledger-r1 HOLD: double gift delivery vs live coop-b1b5 transport → opus integration worker session_01DgYSWqCyhf3pLAzBVv4WqP (review/item-ledger-coop), then BIG re-review.
 - 20:41Z: rev2 miss on live 392fff60 classified HARNESS/timing (2 runs: 38/38 and 36/38 start-up flake; fpos from old B arrives, Sủng matches) → no rollback. Note: place half of that check is vacuous in the harness (old B stays 'home'); harmless.
@@ -251,3 +252,11 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - (20:37Z) NPC ROADS (D) depends on story14-p1-r2 (Foreman C) and road-map-next (Foreman B) — neither is on main. Who ships them, and when? D cannot go live with npc-roads before them.
 | P5 STORY BOT balance | review/story-bot | opus | worker session_01DgYSWknF3zCGUsx9BmG3ub RUNNING 20:40Z |
 | 10-night ledger (main s22 19:41Z) | — | — | MOVED to main's night-final successor (main s23 20:10Z, OD:L1229) |
+
+## PASS FOR MAIN BATCH (D, 21:40Z; main merges, D does not push)
+- review/seatcap-r1 PASS 7d463838 — golive merge review/seatcap-r1-golive ce1538ba (on c1e1bbd1, golive.sh PASS 184 s; jseat.js must stay LAST in assemble.py).
+- review/mem-upgrade-r1 PASS 64b40270 — golive 60fb873f (on 1aa0edb2); test fix needed: window.__j95off around forced NPC acts in dev/test/mem-upgrade.js + memories.js (j95 motive gate), else 1 harness FAIL each.
+- review/preg-rate-r1 PASS 1c31bd79 — golive 3f2a92d8 (on c1e1bbd1, golive PASS). NOTE: doubles per-tryst odds; with suc-khoe (+50 % births) measure D57 births after both.
+- review/ghen-shown-r1 PASS 81f86655 (includes emperor-visit-r1).
+- review/danh-p1-r1 PASS dd3363ff.
+- HOLD, not for batch: item-ledger-r1 7aba5de9 (double gift delivery vs live coop-b1b5 → review/item-ledger-coop worker), npc-death-r1 5f58a715 (j95 place record → review/npc-death-wire worker), npc-roads-r1 83d84225 (needs story14-p1-r2 f5305341 + road-map-next d69d6d24 first; U2–U4 on review/npc-roads-fx), entry-exam-r1 (after kc-roads-cn-nc-fix-r1).
