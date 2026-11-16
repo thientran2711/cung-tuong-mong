@@ -42,3 +42,9 @@ Combined failing set (consort scan + helper-scan.md):
 | TOTAL | 2,686 | | ~174,600 (account has ~1.28M) |
 Local free rim-fix tested (local-rim-fix-test-c05-ty3.jpg: left original, right fixed, dark+light): removes the halo but notches hair strands and cheek edge -> NOT acceptable at face level. Recommendation: regenerate transparent (same recipe as the sample) for all 2,686; cut cost by doing ONE age (a18) per look first, then a26/a36/a51 as separate edits only if the owner wants the age differences kept (ages differ in face; cannot copy a18). Alternative to test (not yet): 1k resolution to roughly halve cost — display height <=900px so 1k (1536 tall) suffices; verify face sharpness first.
 Batch waits for the owner's verdict on luanhoi-sample-c20-c02-ty3-*.jpg.
+
+## SAMPLE v2 (16/11 ~21:50Z) after owner verdict on v1
+- v1 fault (mine): skirt cut IN THE FILE (672 px canvas, alpha on L/R edge) + skin tone differed between c20 and c02 (no skin reference).
+- v2: canvas 1024x2048 (hem + wide sleeves inside, margin L/R/bottom), 2 references per generation: [old figure to redraw] + [c01-ty3-a18 as SKIN-TONE ONLY reference], prompt "same fair porcelain skin as image 2, copy nothing else". Painted, no code tint.
+- Sheet (full width, no cell crop): c20 | c02 | c08 | c14 (new) | c01 (skin reference, old). Files luanhoi-sample-v2-c20-c02-c08-c14-{dark,light}.jpg. QA edge check on the 4 files: alpha>20 on L/R/top/bottom edge = 0 px each.
+- NEW BATCH QA RULE: alpha touching any canvas edge = FAIL (regenerate wider). Cost 65 each, 4 files = 260 credits. Not uploaded to CDN.
