@@ -13162,6 +13162,8 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
    /* a line that is only a name ("Hoàng hậu Chu Thục Nghi.") says nothing (owner 15:30Z) */
    {let r=tp;for(const [n] of people)r=r.split(n).join(" ");r=r.replace(/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô)/g," ");if(!/[\p{L}\d]/u.test(r))continue}
    if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");last={t,world:true};U.push(last);continue}
+   /* a festival prize "X đoạt giải … (Sủng +2, Danh +2)" belongs to the winner X (a rival), not to her or to Hoàng thượng: drop the bracket (r1 review) */
+   if(/đoạt giải/.test(tp)&&!/^(Ngươi|Ta)\b/.test(tp.replace(/^[^:]*:\s*/,"")))t=t.replace(/(đoạt giải(?:[^(<]|<[^>]*>)*?)\s*\((?=(?:<[^>]*>)*\s*(?:Sủng|Danh|Đức))[^)]*\)/,"$1");
    const hm=homeOf(t);
    /* a result / reaction / bare number joins the unit before it, but only when it is about the same person (no more "last" glued across people) */
    if(last&&(KBK_DELTA_ONLY.test(tp)||!/[\p{L}\d]/u.test(tp.replace(WKE_TOK,"").replace(/[+\-−→>]|\d/g,""))||(!kbkMeaning(tp)&&(!hm||hm===last.home||(last.home==null&&hm===S))))){last.t+=" "+t;continue}
@@ -29574,7 +29576,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3286833120d7";window.CTM_BUILD=BUILD;
+const BUILD="e017cdd317a1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

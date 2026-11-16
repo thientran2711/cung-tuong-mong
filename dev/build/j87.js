@@ -271,6 +271,8 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
    /* a line that is only a name ("Hoàng hậu Chu Thục Nghi.") says nothing (owner 15:30Z) */
    {let r=tp;for(const [n] of people)r=r.split(n).join(" ");r=r.replace(/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô)/g," ");if(!/[\p{L}\d]/u.test(r))continue}
    if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");last={t,world:true};U.push(last);continue}
+   /* a festival prize "X đoạt giải … (Sủng +2, Danh +2)" belongs to the winner X (a rival), not to her or to Hoàng thượng: drop the bracket (r1 review) */
+   if(/đoạt giải/.test(tp)&&!/^(Ngươi|Ta)\b/.test(tp.replace(/^[^:]*:\s*/,"")))t=t.replace(/(đoạt giải(?:[^(<]|<[^>]*>)*?)\s*\((?=(?:<[^>]*>)*\s*(?:Sủng|Danh|Đức))[^)]*\)/,"$1");
    const hm=homeOf(t);
    /* a result / reaction / bare number joins the unit before it, but only when it is about the same person (no more "last" glued across people) */
    if(last&&(KBK_DELTA_ONLY.test(tp)||!/[\p{L}\d]/u.test(tp.replace(WKE_TOK,"").replace(/[+\-−→>]|\d/g,""))||(!kbkMeaning(tp)&&(!hm||hm===last.home||(last.home==null&&hm===S))))){last.t+=" "+t;continue}
