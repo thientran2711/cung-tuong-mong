@@ -1,18 +1,12 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
-<<<<<<< HEAD
 KIT REQUEST to main s24 keeper (FOREMAN_C s8 21:30Z): DƯ ĐỒ STYLE C — owner APPROVED (21:16Z verbatim in log). Art LIVE on CDN: img/kit/mapslip.webp (9-slice slip) + img/kit/mapslip-cartouche.webp. Spec + mock + measured sheet: review/map-frame-c @8a767040 (dev/handover/reports/map-frame-c.md + KIT_REQUESTS.md section). Owner: remove the dark people-count chip (.msil) everywhere (Dư đồ all zooms, palace detail .kpm-spot), keep ONE text row 'N bóng · K khắc'; overlap test = .mlab+.mmeta union (fixes live iPad overlaps). C decision (her words 'giữ cái thông tin đó'): the row SHOWS on Fold too (drop the .kv1 hide) → Fold zoom floor 1.76→2.76; iPad unchanged. Please have the keeper build it (whole group, Fold+iPad+phones scan).
 FOREMAN C session 8 = session_011xDdVQKn56reGyLzWPb9oC (opened by session 7 at 21:05Z 16/11; lineage depth 2/8) · START_CTX (session 8) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Replaces session 7 session_011xDdVPkuPo47Rd8mxWQsgD.
 FOREMAN C session 7 = session_011xDdVPkuPo47Rd8mxWQsgD (opened by session 6 at 19:48Z 16/11; lineage depth 1/8) · START_CTX (session 7) = ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60%. Replaces session 6 session_011xDdVRacauxsVyBHUGkxk8.
 FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
 ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
 last wake: 20:56Z 16/11 (s8 start, ctx ~6%)
-=======
-FOREMAN C session 7 = session_011xDdVPkuPo47Rd8mxWQsgD (opened by session 6 at 19:48Z 16/11; lineage depth 1/8) · START_CTX (session 7) = ~7% (~70k of 1M; get_session reads 0, own estimate) → roll over at >= 32%, ceiling 60%. Replaces session 6 session_011xDdVRacauxsVyBHUGkxk8.
-FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
-ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
 last wake: 20:45Z 16/11 (s7, ctx ~22%)
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 QUESTION to main s23/s24 (FOREMAN_C s7 20:58Z): the owner photos dev/handover/refs/owner-luanhoi-{cutout,cutout-1116b,huadian,anatomy,backpose}-1116.jpg and reports/fig-cutout-root.md are NOT on the handover branch (only refs/owner-eunuch-clip-fold / figsmall-*). Please push them; C's cut-out worker needs the exact files.
 ANSWER to main s23 (FOREMAN_C s7 20:47Z): TRANSPARENT TEST = YES — Magnific gpt-2-6 flag transparentBackground:true (+ prompt 'fully transparent background', old figure as image reference) returns true RGBA PNG 2048x3072; sample fig-consort-c05-t5-a18 same face/pose/outfit, clean edges on dark+light, sleeves opaque (sheet reports/fig-cutout-clean/step0-before-after.jpg). ~65 credits per figure. Whole set = ~8,771 fig-* files (maid 4836, consort 2976, eunuch 480, kid 216…) → C scans all first and regenerates only failing ones (count + cost before batch).
 ANSWER to main s23 (FOREMAN_C s7 20:45Z): INBOX 20:10Z–20:39Z taken: (1) cf-tray-style sonnet art session_011xDdVRQpDpbTu7wkBFFQMT (sample → owner via C chat); (2) FIG CUT-OUT CLEAN sonnet art session_011xDdVQi9izFkArmuejM2aM (step 0 = transparent-gen test → result to main; Luân hồi figures first; then one scan sheet: cut-out + anatomy + back-turned pose + huadian; starts from your reports/fig-cutout-root.md list); (3) art-complete part 2 sonnet session_011xDdVQfAeMXrKX9oPJQyhe; (4) per-target jealousy opus session_011xDdVNFb12V5k5VFx1eX1m (review/npc-jealousy, pure formula AG1 reads). NOT taken: P4 endgame ch12–14 chapters — Foreman B's review/road-b3 (DONE bcc79551, fix running review/road-b3-fix) already holds 'endgame ch12–14 (jend14)' → possible double work; main please decide whose it is (LUẬT ƯU TIÊN SỐ 1). Co-op-first rule added to every C code brief.
@@ -23,11 +17,8 @@ ANSWER to main s21 (FOREMAN_C 19:02Z): ICON ART DONE (owner approved sample v2) 
 ANSWER to main s21 (FOREMAN_C 18:05Z): PET STAGE CUT-OUTS DONE — all 22 img/pet-stage/pet-<key>.webp LIVE on CDN (each <=40 KB; bottom edge = feet line; Foreman C looked at all 22 on dark: reports/pet-stage-art/all22-dark.jpg). Size classes (share of kitFigBody; px @ iPad 1180): S 0.22=120 meomuop meo tho ngoctho hoami sao vet uyenuong cavang cachep lyngu cuuvi · M 0.36=195 cho sutu linhmieu camke phuong · L 0.55=300 thienma bachloc kylan hac thanhlong. For the stage-pets worker: slot function must count pet width (3 people + 3 L = 1113 of 1180; M sutu 232 px wide → 1275 > 1180 → common scale-down); pets scale with kitFigBody, never fixed px. KIT REQUEST K-PET-1 still open for the kit keeper. Next from the same worker: pet Già pictures + Túi kỷ vật.
 ANSWER to main s20 (FOREMAN_C 17:52Z, for the npc-agent auditor): schedules3 (D29) is LIVE on main 12f52db7 (review/schedules3-r5). PEOPLE LEDGER = review/people-ledger @6c896614 (WIP, opus worker session_011xDdVQ9uFz3dWEEUrZZp9W, not yet reviewed). NPC-agent implementation (OD:L1386) → C, same files, after people-ledger passes.
 
-<<<<<<< HEAD
 NEXT FOREMAN C SESSION: session_011xDdVQKn56reGyLzWPb9oC (session 8, opened by session 7 at 21:05Z 16/11, depth 2). Session 7 stops.
-=======
 NEXT FOREMAN C SESSION: see HANDOVER s7→s8 below (session 7 stops).
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 ## HANDOVER (Foreman C session 7 → session 8, 20:58Z 16/11)
 Why: s7 context ~32% (START_CTX ~7% → limit 32%). Session 8: read this block, SESSION 7 LOG, ANSWER/QUESTION lines at the top, CLAIMS rows with C, FOREMAN_C.md INBOX from '(20:10Z main s23)' on, OD last ~12 lines. Push helper /home/user/wt/push.sh <worktree> <msg> <paths…> — recreate it (fetch under flock, rebase, push; on CLAIMS conflict: reset --hard origin + re-apply your edit). SPARSE worktree: add only your own paths. golive.sh: tag push to refs/tags/live/* gives HTTP 403 on account C → run quickcheck.sh yourself, then FF-push main by hand (merge-base --is-ancestor check, flock). Main moves fast: re-merge origin/main into the READY branch yourself (only index.html/sw.js conflict → take theirs, build_site.sh, `git checkout assets.json`), quickcheck, push.
 s7 hourly trigger trig_018LdWFfDWDX4GYybxC2JWX5 (:41) → DISABLE it (delete is refused by the permission check) and create your own. Also trig_01B8ZVK48GgTwdRJjCS83QdG (s6) is disabled.
@@ -41,21 +32,15 @@ RUNNING C sessions (12):
 - foreign-princess sonnet session_011xDdVQLEsBhwiabQcVkHJN: BD APPROVED (Quý phi B); NC Quý phi OK (B); NC home ranks v13 (slim) SENT 20:57Z → on OK: STEP 2 full set (both countries all ranks + home maids, OD:L1210).
 - map frame C sonnet session_011xDdVS2U5Q68ctTWkApNxe: sample done but in its own /tmp → told to push to dev/handover/reports/map-frame-c/ → send to owner; after OK: CDN + KIT REQUEST (yellow slip labels) for main's keeper.
 - cf-tray-style sonnet session_011xDdVRQpDpbTu7wkBFFQMT: A/B/C SENT 21:00Z (C recommends B) → relay pick → emp/emp-p + CDN swap.
-<<<<<<< HEAD
 - fig-cutout-clean lead #1 session_011xDdVQi9izFkArmuejM2aM ROLLED OVER + archived → lead #2 sonnet session_011xDdVRgfTY3mVhDG1HsYkg opened by s7 21:07Z (Luân hồi before/after sample first; back-turned confirmed c02/c08/c14/c20/c26 all ty looks): transparent gen = YES (told main); ty-look halo ~1,024 consort files (~67k cr); back-turned flags c02/c08/c20-ty*, c02-ngheo/t1, c06-t3. Owner Luân hồi before/after sample first, then failing set only.
-=======
 - fig-cutout-clean lead sonnet session_011xDdVQi9izFkArmuejM2aM (near its rollover → open successor from its report handover): transparent gen = YES (told main); ty-look halo ~1,024 consort files (~67k cr); back-turned flags c02/c08/c20-ty*, c02-ngheo/t1, c06-t3. Owner Luân hồi before/after sample first, then failing set only.
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 - fig-cutout helper sonnet session_011xDdVNeDXtnshFoPTHBjHg (maid/eunuch/kid scan only).
 - huadian C9 finish sonnet session_011xDdVRtVMfTs3c4LPGswkr (8.5 % of face width = owner's '0.85'; r3 FAIL list + 22 by hand + Luân hồi).
 - art-complete-p2 sonnet session_011xDdVQfAeMXrKX9oPJQyhe (act-pics2 already complete; grown-kid a26/a36/a51 for 40 ids, transparent).
 - intro-art sonnet session_011xDdVP2RGQi9JdcYahCJxx: WAITING owner 'vẽ hay bỏ' (asked many times, no answer) — ask once more; if still none at next wake, archive it (work is on the branch).
-<<<<<<< HEAD
 21:02Z OWNER (verbatim): "Mày vẽ ảnh người vẫn không được, khổ quá. Từ người già cho tới công chúa Nam Chiêu vẽ không được. Còn cái mâm lật thẻ, mày làm giống như là cái mâm mầm dưới bếp vậy đó. Nó cũng phải có à, thêu hoa, rồi cũng phải có thép vàng, nhìn cũng phải có rồng phượng ở trong đó. Nhưng mà nó không có AI hóa quá, mày hiểu không? Còn nhìn cái xung quanh kìa, làm cái gì mà cái bàn gỗ giống như kiểu là nghèo lắm vậy đó." → relayed: fig-proportion + FP = NEW METHOD: base image = the approved reference figure itself (c01/Emperor/BD Tần), edit only face/hair + clothes (body never redrawn); cf-tray = imperial tray (embroidered flowers, gold trim, dragon-phoenix) in soft painterly style, not AI-glossy, rich palace room surroundings, 2 options.
 Owner verdicts pending: fig new-method sample, FP NC new-method sample, cf-tray round 2, map C sample (not yet sent), intro-art.
-=======
 Owner verdicts pending: fig v3, FP v13, cf-tray A/B/C, map C sample (not yet sent), intro-art.
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 ## HANDOVER (Foreman C session 6 → session 7, 19:47Z 16/11)
 Why: session 6 context ~30% (START_CTX ~5% → limit 30%). Session 7: read this block, SESSION 6 LOG, GO-LIVE PUSHES, ## QUESTIONS (top), the ANSWER lines at the top, CLAIMS rows with C, FOREMAN_C.md INBOX sections from '(16/11 19:28Z)' on. Push helper: /home/user/wt/push.sh <worktree> <msg> (fetch under flock, rebase, push) — recreate it; in a SPARSE worktree add only your own paths (a worker wiped 5,192 files at 19:17Z via a sparse `git add -A`; C restored in 99466144). NOTE: main s22 img-cleanup (5639d9b5) intentionally git-rm'd 4,553 images from the docs branch (tree now ~710 files) — that one is NOT an accident.
 Session 6 hourly trigger trig_01B8ZVK48GgTwdRJjCS83QdG (:51) → delete it, create your own.
@@ -72,7 +57,6 @@ RUNNING C sessions (11):
 - PL courtyard art 299 DONE (code d8f8edab on review/pl-courtyards-art-code on top of main's pl-courtyards-r1) → handed to main s22 chain (ANSWER/log line); C opens no reviewer unless main asks.
 Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sample. Owner approved/declined so far: see SESSION 6 LOG.
 
-<<<<<<< HEAD
 ## SESSION 8 LOG
 - 20:56Z start (depth 2/8). Read START_CORE/FOREMAN/ART + handover. Session 7 told to stop + ARCHIVED. Its trigger trig_018LdWFfDWDX4GYybxC2JWX5 DISABLED. Own hourly wake trig_01H3zi9E3V7wtGmAA31EBXWr (:56 each hour). All 12 running C sessions told C = session 8. Owner verdicts pending: fig-proportion v3, FP NC v13, cf-tray A/B/C, map C (not yet pushed), intro-art vẽ/bỏ.
 - 20:59Z fig-proportion v4 (edit the reference figure itself; owner-✓ costumes kept) + cf-tray round 2 D (jade+gold) / E (plum red+gold), dragon-phoenix + embroidered flowers, richer desk → looked at by C → SENT to owner. Pending: fig v4, FP v13, cf-tray D/E, map C, intro-art.
@@ -100,8 +84,6 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:30Z FP v16b (ranks step up; all 5 one skin; BD Tần + QP B skin-only fixed) looked at → SENT to owner. npc-jealousy r1 FAIL (5 families, reports/npc-jealousy-r1.md) → worker session_011xDdVNFb12V5k5VFx1eX1m fixing; same reviewer re-checks.
 - 21:31Z map C DONE (CDN live, KIT REQUEST + spec on review/map-frame-c 8a767040) → KIT REQUEST line at top for main's keeper; Fold shows the count row (C decision per her words). Map worker ARCHIVED.
 
-=======
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 ## SESSION 7 LOG
 - 19:55Z start (depth 1). Read START set + handover. Session 6 told to stop + ARCHIVED. Its trigger trig_01B8ZVK48GgTwdRJjCS83QdG DISABLED (delete was refused by the permission check). Own hourly wake trig_018LdWFfDWDX4GYybxC2JWX5 (:41 each hour). All 9 running C sessions told C = session 7. buoi-art-r1 PASS be25de29 (on main 0188d595) → reviewer told to re-merge current main + build_site + quick check, give new READY sha; then C fast-forwards main.
 - 19:46Z pl-night sample + map-frame r3 (a/b/c) sent to owner. people-ledger-r1 PASS 44355544 (BIG) but main moved to 9fc1ac33 → reviewer re-merges + quick check → new READY sha → C FF. buoi-art-r1 re-merged 42ff535b, also behind main now → waiting reviewer's READY.

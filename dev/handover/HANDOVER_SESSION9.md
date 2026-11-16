@@ -491,7 +491,6 @@ OWNER WAITING: flip hand 1/2 (s22 Lượt 15) · r7 Fold shots · palace-voice s
 NEXT MAIN: first actions = load check (OD 20:12Z), ship PASSes in order co-op first, answer the owner on each report. Hourly wake: send_later trig_0132uWUqQ4iFwq44MKdVdGgB was for 20:32Z (already fired into s23) → schedule your own.
 - (16/11 ~21:00Z real) MAIN SESSION 24 = session_01UV1SzkhGPnXNHGPcZCx6Lj; START_CTX ≈ 6 % of 1M window (est.; get_session reads 0) → rollover at ≥ 31 %, ceiling 60 %.
 - (16/11 ~21:10Z) s24: page-scale-r1 LIVE 1aa0edb2 (quickcheck PASS). Opened stage-pets r7 reviewer session_01UV1SzkfxGgQXRVrF7Dt2ii + pl-courtyards r3 fix session_01UV1SzmAYDhJDdaZQtVZTYu. Archived 19 finished s21/s22 sessions. Ship tool: /home/user/wt/s24-ship.sh <branch> "<VN line>" (s24 container).
-<<<<<<< HEAD
 - (16/11 ~21:40Z) s24: weather-fx3 LIVE 594415aa. coop-one-world 912ca80b → BIG reviewer session_01UV1SzjwwR8MVK2MWpikBAb. fig-cutout-code 04ec6425 → reviewer session_01UV1SzmJWhZHz6G55tgfdnH. stage-figsize hotfix (owner bug: tiny people + iPad header/tab bar after page-scale) session_01UV1SziFt6yExRxFGSGFA24 (owner: no rollback). flip-entry hotfix session_01UV1SzgZumVkkN1moZ9qiiW (repro: shots.js home = flip screen). palace-voice successor session_01UV1Szkk4oz7w3HZvDnHJf1.
 - (16/11 ~21:58Z) s24: kit-fit 2b LIVE b53ba8b9.
 - (16/11 ~22:22Z) s24: fig-cutout-code #kfa LIVE 9c49f13c; feet delta b01caedb → reviewer session_01UV1SzjarPt7SUW9fAa9GFn.
@@ -518,5 +517,4 @@ RUNNING (all report to main; CLAIMS rows 'main s24'):
 OWNER WAITING: Điểm trang 1/2/3 · weather lag re-check on Fold (live 594415aa) · cut-out on her iPad (WebKit filter risk) · TIN before/after (after kit-size #7 fix) · mini-game samples · names samples shown (s24 Lượt 17).
 Foremen B/C/D: not load-checked by s24 beyond CLAIMS (B ~7 running, C ~15, D ~5) — do the load check first. Hourly wake: s24's send_later trig_01PwpSU6he2pjFRUzUfevzXv deleted → schedule your own (minute 32).
 - (16/11 ~22:42Z) s24 opened MAIN SESSION 25 = session_01UV1SziKxSHwSbnqfZWF5mM and stopped.
-=======
->>>>>>> a1438803 (Foreman C s7: handover to s8)
+- (16/11 ~22:55Z) MAIN SESSION 25 = session_01UV1SziKxSHwSbnqfZWF5mM; START_CTX ~8 % (estimate, get_session reads 0) → roll over at 33 %, ceiling 60 %. s25 removed stray merge-conflict markers committed in 51da7a12 (foreign-princess-art, Foreman C) from the handover files (kept HEAD side + unique other-side lines).

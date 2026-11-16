@@ -12,7 +12,6 @@
 - Back-turned / looking-over-shoulder visual flags (a18 contact sheets, low res, still to confirm at 100%): c20-ty1..ty8 (body in profile, head to camera), c02-ty1..ty8 (same), c08-ty1..ty8, c02-ngheo, c02-t1, c06-t3; c03-ty1..8 + c09-ty1..8 have a hand at the brow (check anatomy). Sheets: sheet-c20-backpose.png. Remaining sheets c11–c32 + maids/eunuchs/kids not yet looked at.
 - Other: c12-tm0 has a ragged left skirt edge (cut-out artefact); c10-t8 train very wide.
 - Scan still running locally (4 procs, ~1.2k/15min is slow, scipy-bound); tools/scan1.py + allfigs.txt are here so a helper can split the list. NEXT: finish scan, look at c11–c32 sheets + maid/eunuch sheets, then credit estimate for failing set only (ty family alone = 32x8x4 = 1,024 files; regenerating at a18 only + reuse for ages is NOT possible: ages differ, so ~65 credits x failing files).
-<<<<<<< HEAD
 
 ## HANDOVER (worker -> successor; opened by Foreman C) — 16/11 ~21:00Z
 START_CTX not recorded; rolled over for context. Read: CLAUDE.md, START_CORE/WORKER/ART, this file, Foreman C's messages below.
@@ -49,5 +48,3 @@ Batch waits for the owner's verdict on luanhoi-sample-c20-c02-ty3-*.jpg.
 - v2: canvas 1024x2048 (hem + wide sleeves inside, margin L/R/bottom), 2 references per generation: [old figure to redraw] + [c01-ty3-a18 as SKIN-TONE ONLY reference], prompt "same fair porcelain skin as image 2, copy nothing else". Painted, no code tint.
 - Sheet (full width, no cell crop): c20 | c02 | c08 | c14 (new) | c01 (skin reference, old). Files luanhoi-sample-v2-c20-c02-c08-c14-{dark,light}.jpg. QA edge check on the 4 files: alpha>20 on L/R/top/bottom edge = 0 px each.
 - NEW BATCH QA RULE: alpha touching any canvas edge = FAIL (regenerate wider). Cost 65 each, 4 files = 260 credits. Not uploaded to CDN.
-=======
->>>>>>> a1438803 (Foreman C s7: handover to s8)

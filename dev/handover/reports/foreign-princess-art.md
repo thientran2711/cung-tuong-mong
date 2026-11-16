@@ -57,7 +57,6 @@ File: `foreign-princess-art/sample-v13.jpg` = approved BD Tần | NC Đáp ứng
 Prompt (gpt-2-6, no numbers): draw the girls of image 1 in the same outfits/hair/faces with exactly the body of the Tần of image 2 (approved BD lineup 9ZFGOzzNYZ), skirt falling naturally, not puffed; image 3 = slim original N2FUFwO6D9. Chosen DoJmkmVpcl (alts jUBOny6LD0, fHGKOkMCDY). Quý phi on the sheet = approved NC B xSX7K4MjfW (the DoJm lineup re-drew her slightly, not used). Heads pixel-read 13.2% (home), chin>sole aligned (x0.99-1.00).
 Credits: 3 x 40 = 120 (v8-v13 total 1,720).
 STATUS: WAIT for the owner's verdict on v13; then STEP 2 (full set).
-<<<<<<< HEAD
 
 ## OWNER on v13 (via Foreman C): NC v13 REJECTED. New method (her words): "draw this person wearing this outfit, give the reference image". BASE = the approved BD Tần figure itself; only face/hair/clothes (+prop) replaced; body never redrawn by me.
 ## v14 SAMPLE READY (v13 sheet deleted)
@@ -74,8 +73,6 @@ File: `foreign-princess-art/sample-v15.jpg` = approved BD Tần | NC Đáp ứng
 Same method as v14 (base = approved BD Tần figure fHGK6TrCDY, ref N2FUFwO6D9), prompt adds: skirt falls straight and close to the legs, hem no wider than the base image's hem, layers flat, no bell flare, same head size as the base. gpt-2-6, 2:3, 3 tries per rank (9). Chosen: Đáp ứng LwoydrhswO, Tần vQ2b3vFa47, Phi LwoyXSuswO (alts: SymN8sdUb8 gOt9oLLSXO 0eSos0KTfW Xm4fOXRBfo VXwISeLMMU 8a6u9vaIrU). Home ranks aligned on crown + soles; Quý phi aligned so her body below the chin matches the Phi.
 Credits: 9 x 40 = 360 (v8-v15 total 2,560). v14 ids rejected: Xm4f7SQBfo 1lewT0ur4r ovNEOPO829 (flared hems).
 STATUS: WAIT for the owner's verdict on v15; then STEP 2.
-=======
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 
 ## OWNER on v15 (via Foreman C s8, 21:2xZ): body/proportion OK (kept). Skin differs per figure (wants one fair porcelain tone, c01 face as skin ref). NC costumes: Tần = Phi, Đáp ứng looks like a maid -> rising richness per rank. v15 sheet deleted.
 ## v16 SAMPLE READY (names only)

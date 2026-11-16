@@ -14,12 +14,9 @@ Honest: heads now ~5-10% LARGER than the reference (safe side; could be toned to
 
 ## SAMPLE v3 (owner verdict on v2: heads too big, bodies too small; NO numbers in prompts)
 Method (owner's words): gpt-2-6, image 1 = approved reference figure (c01 / Emperor) = body/height/proportions to copy; image 2 = previous-round figure (face + checked costume); prompt: "draw this person wearing this outfit with exactly the same body, height and proportions as the reference figure". No numbers anywhere. Sheet: sample-sheet-v3.jpg (reference | previous | new, no numbers). Cost 6x40+3x3 = 249.
-<<<<<<< HEAD
 
 ## SAMPLE v4 (owner rejected v3; method = her words: base image IS the approved reference figure)
 gpt-2-6 edit: image 1 = approved reference (c01 / Emperor) = the body, never redrawn; image 2 = previous-round figure (face + checked costume). Prompt: keep image 1's body/height/head size/shoulders/stance; replace only face+hair and clothes with image 2's. Sheet: sample-sheet-v4.jpg (reference | previous | new, no numbers). Cost 249. Note: women inherit c01's arm pose (beads at chest).
 
 ## OWNER RULE relayed 16/11 21:24Z (applies to the v4 batch once she OKs it)
 ONE skin tone for everyone (STYLE_ANCHOR fair porcelain), PAINTED never code-tinted; use the approved c01 face as the fixed skin reference in every generation (v4 already uses c01/Emperor as the base image; in the batch also pass the c01 face as a skin reference and check skin next to c01). Status: WAITING for owner verdict on v4; no batch started.
-=======
->>>>>>> a1438803 (Foreman C s7: handover to s8)

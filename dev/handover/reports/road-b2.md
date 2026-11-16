@@ -1,5 +1,4 @@
 # road-b2 — helper B2 (nc + bd branch, td, ch roads .5–.11)
-<<<<<<< HEAD
 START_CTX ~4 % of a 1M window (session_01N1tNP4zDh6M8kQNxdcYKvM). Branch `review/road-b2`. Coordinator: Foreman B s8 (session_01N1tNP4LoQPgWaFJWtCiVsJ).
 Engine: fix A (session_01N1tNP2G4bsFxWrsbzomkzU, review/road-b1-fixa b1999905 + 1926db20 merged).
 
@@ -101,10 +100,8 @@ phụ»). New BAL key BAL.road.ncConf (cấm túc months). Merged engine road-ma
 
 
 ## ROUND 1 (kept below)
-=======
 START_CTX ~4 % of a 1M window (session_01N1tNP4zDh6M8kQNxdcYKvM). Branch `review/road-b2` (off review/road-map @240c68a7, merged review/road-map-next a85f3321).
 Coordinator: Foreman B s7 (session_01N1tNP6YA61ntHf4XBa4y1f). Engine owner: session_01N1tNP2sDgtu4GovRB3yT4X.
->>>>>>> a1438803 (Foreman C s7: handover to s8)
 
 ## Done — SẴN SÀNG KIỂM b62c96d8a13f6313325e271cb117bff62c31d33a
 - dev/build/jrd_nc.js (nc_gian, nc_su, nc_tuc, nc_vuong), jrd_td.js (td_an, td_ke, td_song, td_tha), jrd_ch.js (ch_co, ch_benh, ch_ho, ch_bi):
