@@ -300,3 +300,5 @@
 | spread-events LIVE prep (sonnet): merge origin/main 8f476f6f into READY review/spread-events-r3 1c4ea581, re-test, READY sha → B fast-forwards | review/spread-events-live | B | session_01N1tNP69fjejDfHnC3a2Zmt | RUNNING | 16/11 17:58Z |
 | two-way-acts (opus; law HANDOVER:L46 + OD:L1386, owner 18:00Z): audit both ways, NPC pay same costs, player gets NPC-only acts | review/two-way-acts | main s21 | session_01UV1SzmD2Yq9WV4t1YpXjQ6 | RUNNING | 16/11 17:54Z |
 | night-steal review r1 (opus, BIG) of 4b5919af | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | RUNNING | 16/11 18:01Z |
+| lag-play review r1 (opus, BIG perf) of 7200e7d2 | review/lag-play-r1 | main s21 | session_01UV1Szh3qnjMBBhwLSJrxVX | RUNNING | 16/11 18:02Z |
+| lag-play-2 (opus): render chain split, co-op seat delta, leak, Pixi preload | review/lag-play-2 | main s21 | session_01UV1Szkd2Q5KusFL1heLce8 | RUNNING | 16/11 18:02Z |
