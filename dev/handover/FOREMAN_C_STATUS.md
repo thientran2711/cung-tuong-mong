@@ -37,7 +37,7 @@ Base main at start: 900ace7fb.
 | C7 balance-pass | review/balance-pass-r1 | opus | PASS 89ea80f78 (jbac.js reprice; reviewer fixed negative fair target that over-priced 25/48 'dearer' rows) |
 | D53b material-choice dialog pictures (Tứ đức/arts material pickers show the generic Tài nghệ picture) + any new option-card placeholders | review/opt-pics3 | sonnet | RUNNING (art worker) |
 | C8 fig-bg step 2 | review/fig-bg @acc254846 | sonnet | BUILT, BLOCKED on KIT KEEPER (K1): 14 painted scrolls on CDN, jfigbg.js, KIT §61; tests 6 viewports (390x844 rival dialog img height 0 not investigated; 2-person dialog shows one scroll) |
-| C9 huadian-size + motif fix | review/huadian-size-r1 @a53c81330 (FAIL list in dev/art/huadian-size/R1_REVIEW.md) → review/huadian-size-r2 | sonnet | FAIL → worker #3 RUNNING: ~13 more non-flower motif styles (c23 berry dots!, c24, c28, c25 t1, m12, m14, m15, m22, m24, m26, m40, m49, c09 t6–7), m28-t8-a18 damaged, ~20 oversize skipped por + c08-t8-a26 |
+| C9 huadian-size + motif fix | review/huadian-size-r2 @4011dc151 (805 more files on CDN) → review/huadian-size-r3 | sonnet | REVIEWING (separate session) |
 | D1 result-sfx | review/result-sfx-r1 | sonnet | PASS 18926abcc |
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
 | D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
