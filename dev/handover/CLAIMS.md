@@ -435,7 +435,7 @@
 | opt-greyed + pl-courtyards-r3 review r1 (sonnet, SMALL, one reviewer, in order) of 68acf6d1 then 5425e4c1 | review/opt-greyed-r1, review/pl-courtyards-r3-r1 | main s25 | session_01UV1SziEeCRZLBrZtUTMGPw | RUNNING | 16/11 21:54Z |
 | DƯ ĐỒ STYLE C kit wiring (Foreman C KIT REQUEST 21:30Z: mapslip 9-slice + cartouche, remove .msil chip everywhere, one row 'N bóng · K khắc', .mlab+.mmeta overlap test; spec review/map-frame-c @8a767040) | review/map-frame-kit | main s25 | session_01UV1SzjgvGrBcSGqJv7jQTH (opt-greyed keeper, free while its review runs) | RUNNING | 16/11 21:55Z |
 | WHOLE FIGURE REPAINT lead #3 (sonnet art; owner 21:16Z–21:53Z; incl. main s25 5 urgent files + C9 ty huadian) | review/fig-cutout-clean | C | session_011xDdVSheHFnhXPEAMEEfZT | RUNNING | 16/11 21:58Z |
-| makeup-reveal desat + courtyard cac/home paintings (sonnet art; main s23 21:02Z + pl-courtyards r3 21:45Z) | review/pl-courtyards-cac | C | session_011xDdVQYXHozUcGDzx2ZoV3 | RUNNING | 16/11 21:58Z |
+| makeup-reveal desat + dressing room per rank (courtyard cac/home STOPPED by owner 22:15Z) (sonnet art; main s23 21:02Z + pl-courtyards r3 21:45Z) | review/pl-courtyards-cac | C | session_011xDdVQYXHozUcGDzx2ZoV3 | RUNNING | 16/11 21:58Z |
 | one-core-land r1 + time-spill r1 review (opus, BIG, in order) of 29e3738f + 98526684 | review/one-core-land-r1, review/time-spill-r1 | main s25 | session_01UV1SzgywPJmuPJ3vdnbjos | RUNNING | 16/11 21:58Z |
 | palace-voice review r1 (opus, BIG wording + co-op + IT[e.k] family) of cc6a8f55 | review/palace-voice-r1 | main s25 | session_01UV1Szj7NudgmrctCjo4bZ5 | RUNNING | 16/11 21:58Z |
 | diemtrang-fx + minigame-frame + kit-size #7 review (sonnet, SMALL, stacked) of f7097061, bd223466, c4e35f53 | review/diemtrang-fx-r1, minigame-frame-r1, kit-size-r7 | main s25 | session_01UV1SziCaS3brcnePACCS56 | RUNNING | 16/11 21:58Z |
@@ -454,3 +454,4 @@
 | map-frame-kit r1 review (task 3 of the opt-greyed/pl-courtyards SMALL reviewer) of 036c5dd5; pl-courtyards-r3 now f42dd31c | review/map-frame-kit-r1 | main s25 | session_01UV1SziEeCRZLBrZtUTMGPw | RUNNING | 16/11 22:07Z |
 | WAITING NEXT BATCH (add): fig-cutout-code-r2 PASS 8fb59e05 (feet never cut in person dialogs; CHANGE "Hình người trong khung báo không còn mất chân; viền tách nền sạch hơn.") — reviewer + root-cause worker archived | — | main s25 | — | QUEUED | 16/11 22:09Z |
 | co-op test stability + coop-chat shared-world root cause (opus, co-op TOP) | review/coop-stable | main s25 | session_01UV1SzgdVKpJMBjxefGgfEo | RUNNING | 16/11 22:09Z |
+| npc-agent AG1+AG1b review r1 (opus, BIG; incl. npc-mind 7fd289cd merged inside) of 33170548 | review/npc-agent-r1 | C | session_011xDdVSu5Mec6qvjHhWrgco | RUNNING | 16/11 22:13Z |
