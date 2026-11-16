@@ -194,7 +194,7 @@
 | MEMORY UPGRADE + CAUSE ledger (s17 13:50Z/13:55Z; OD 13:25Z (A) + 13:40Z (b)) | review/mem-upgrade | D | session_01DgYSWnbZAx5XWMeN9VzwiE | RUNNING | 16/11 13:45Z |
 | ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | session_01DgYSWoSdvBQtzpXxCDVUPh | RUNNING | 16/11 13:45Z |
 | merge-train-8 successor c (sonnet) | review/merge-train-8 | main s17 | session_01UV1SzhTCE7SXbum6V4ghBh | RUNNING | 16/11 13:39Z |
-| D4 npc-death review | review/npc-death-r1 | D | session_01DgYSWocL5CmLHseB9i8sEn | RUNNING | 16/11 13:42Z |
+| D4 npc-death review | review/npc-death-r1 | D | session_01DgYSWocL5CmLHseB9i8sEn | PASS 5f58a715 | 16/11 14:03Z |
 | D4 npc-death review | review/npc-death-r1 | D | (reviewer opening) | RUNNING | 16/11 13:42Z |
 | story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
 | A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | (opening) | RUNNING | 16/11 13:45Z |

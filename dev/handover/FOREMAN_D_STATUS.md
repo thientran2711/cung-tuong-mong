@@ -43,7 +43,7 @@ main at start = eba64ead4.
 | D21 full review r2 → fix | review/coop-b1b5-fix @7c7fcc45 | opus | SẴN SÀNG KIỂM (worker archived) → final reviewer coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ RUNNING |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
-| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | SẴN SÀNG KIỂM (worker archived) → reviewer npc-death-r1 session_01DgYSWocL5CmLHseB9i8sEn RUNNING 13:42Z |
+| D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | PASS 5f58a715 (review/npc-death-r1; reviewer archived) |
 | D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | PASS 1c31bd79 (review/preg-rate-r1; reviewer archived) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
 | C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
@@ -54,6 +54,7 @@ main at start = eba64ead4.
 | ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger | opus | worker session_01DgYSWoSdvBQtzpXxCDVUPh RUNNING 13:45Z |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/npc-death-r1 5f58a7156533afda959e0c591d9e64e66cbea142 (D4 / orphan #18: dead NPCs replaced by new persons with new faces+names, never reused; Phế phi Lý stays in Lãnh cung beside fallen rivals until death (OD:L641); reviewer fixed faces of men killed outside jmort, 'Lý Đáp ứng ???' name clash + old-save repair, Lý age from BAL; ancestor main 0ee35a63; report reports/npc-death-r1.md). ART NEEDED (Foreman C): portrait pools short (~8–10/30 NPCs without own portrait in long games).
 - READY review/preg-rate-r1 1c31bd7957367b7f27c550e60f7668d3a09cefc5 (D57: conception ×2 + fertile-window peak; reviewer unified tryst/NPC-affair/Tư thông rolls into trystCh (BAL.trystC); sims NPC births/consort-yr .06→.10, palace kids 10y 6.2→9.5, peak kept; ancestor main e9c6021d; report reports/preg-rate-r1.md). Follow-ups (non-blocking): j42 servant-mode tryst typed roll(10); VANPHONG doc gap for side-chance ladder Rất thấp…Rất cao (OD:L221) → kit keeper.
 - READY review/name-mask-r1 571dc15e5855bf529449086c03ee7b840784ff7a (unmet-name leak family residue; report reports/review-name-mask-r1.md; ancestor = origin/main at review time). Follow-up (not blocking, wording): "Một vị Thường tại chưa quen biết là người quen cũ" reads oddly.
 READY review/entry-exam-r1 d7364cb2e21d6d19451bae2f98458e1a8e170bb6 (entry selection exam + origin intros; SHIP ORDER: after review/kc-roads-cn-nc-fix (D, running) and B's mg-balance; BAL.mgTier.occ.tuyen 1.5→1; tests entry-exam 9/9+5/5+3/3, kc-roads direct 9/9, coop-together 26/26, coop-e2e 59/59; report reports/review-entry-exam-r1.md)
