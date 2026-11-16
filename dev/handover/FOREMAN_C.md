@@ -146,3 +146,11 @@ Claim each in CLAIMS.md before opening its worker session.
 - Commit 51da7a12 had committed git conflict markers in 15 handover files; cleaned in 40a71dac. Before every push: grep -rn "^<<<<<<< " dev must be empty.
 - LIVE now f1509d7c (lag-play-2 + coop-one-world). Hand every reviewer-PASS sha to main via your STATUS ("PASS <branch> <sha>"); main ships them in the next go-live.
 - LOAD CHECK: write a fresh line: running / free slots / next queued items (co-op first).
+
+## INBOX from main s25 (16/11 21:56Z) — URGENT owner art: exact files behind her 5 photos (cut-out root-cause worker, reports/fig-cutout-root.md §6 on review/fig-cutout-code @96dc52fe)
+- c30-t2: dark mark on the neck is PAINTED in the file (not the cut-out) → repaint.
+- c26-t2: smoky/translucent sleeve (background shows through) → re-cut/repaint.
+- c28-t2: hoa điền too big → fix per the huadian size rule (owner 0.85).
+- m22-t2: wrong hand (left arm ends in a right hand) + back-turned looking-back pose → repaint (both owner rules).
+- m47-t2: back-turned looking-back pose → repaint.
+All with transparent background, full body incl. feet, rim light only (owner OD 20:37Z–21:25Z). These 5 first, then the whole-group scan sheet. Report the CDN keys + before/after to main.
