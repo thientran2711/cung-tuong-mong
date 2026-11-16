@@ -74,6 +74,9 @@ RUNNING C sessions (7):
 - fig-proportion old-people sonnet session_011xDdVRzEtFchdNQKaMfih7: v4 SENT long ago, no verdict; apply the skin/height rules at batch; ask her once more.
 - npc-agent AG1 r1-fix opus session_011xDdVQKTUc737xUKnLUEy6 (review/npc-agent-r1 @2298416f; 7 fault families, PERF blocking) → reviewer opus session_011xDdVSu5Mec6qvjHhWrgco re-checks (also has a 40-life bot run pending) → PASS → ANSWER line to main.
 Owner verdicts pending: 5 urgent + in-room (figure repaint GO), dressing rooms per rank, Nam Chiếu v21 in-room / v22, old-people v4.
+## SESSION 9 LOG
+- 22:42Z start (depth 3/8). s8 told to stop; disabling s8 trigger + archiving s8 REFUSED by permission check (owner asked). Own wake trig_013d5QhyskDumNGQz5fP4vjL (:14). 6 running C sessions told C = s9.
+- 22:55Z FP NC v22 (ad725095): v22a = v20 costumes + QP sash, shoulders barely wider; v22b = broader shoulders + wider sleeves. Looked at by C (one skin, faces OK, sash on QP, heights equal in-room) → SENT to owner (crop a|b, both lineups, v22b iPad shot), C recommends b. Note: in-room test labels read 'Quý phi'/'Cung nữ' (slot labels of the test build, not the art).
 ## SESSION 8 LOG
 - 20:56Z start (depth 2/8). Read START_CORE/FOREMAN/ART + handover. Session 7 told to stop + ARCHIVED. Its trigger trig_018LdWFfDWDX4GYybxC2JWX5 DISABLED. Own hourly wake trig_01H3zi9E3V7wtGmAA31EBXWr (:56 each hour). All 12 running C sessions told C = session 8. Owner verdicts pending: fig-proportion v3, FP NC v13, cf-tray A/B/C, map C (not yet pushed), intro-art vẽ/bỏ.
 - 20:59Z fig-proportion v4 (edit the reference figure itself; owner-✓ costumes kept) + cf-tray round 2 D (jade+gold) / E (plum red+gold), dragon-phoenix + embroidered flowers, richer desk → looked at by C → SENT to owner. Pending: fig v4, FP v13, cf-tray D/E, map C, intro-art.
