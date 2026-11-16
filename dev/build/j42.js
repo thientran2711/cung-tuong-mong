@@ -98,8 +98,9 @@ function srvGoTo(k){if(!S||S.dead||Q.length)return false;popIdx=null;popMsg="";c
  if(S.srv.lau>0||k==="tgk"){S.place="tgk";S.visit=srvVisitOf("tgk");if(k!=="tgk")srvToast("Đang chịu phạt ở Tân Giả khố");render();return k==="tgk"}
  if(k==="home"){S.place="home";S.visit=srvVisitOf("home");render();return true}
  const h=window.placeEnterHook(S,k);if(h&&!h.ok){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(`${placeOf(k).n}: ${h.why}`);render();return false}
- const from=S.place==="home"&&m?palaceOf(m):S.place;const tc=travel(from,k);if(!walkOk(tc)){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(walkWhy(tc));render();return false}
- spend(tc);S.place=k;S.visit=srvVisitOf(k);log(`Đến ${placeOf(k).n}.`);render();return true}
+ const from=S.place==="home"&&m?palaceOf(m):S.place;const tc=travel(from,k);if(!walkOk(tc)&&!(typeof dayFit==="function"&&dayFit(tc))){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast((typeof dayWhy==="function"&&dayWhy(tc))||walkWhy(tc));render();return false}
+ /* a walk longer than this buổi runs on into the next one (time-spill sweep 16/11: j76 carry); she is there when the buổi turns */
+ const late=!walkOk(tc);spend(tc);S.place=k;S.visit=srvVisitOf(k);log(late?`Đi đường xa, đến ${placeOf(k).n} thì đã sang ${String(BUOI[Math.min(B4L,(S.buoi||0)+1)]).toLowerCase()}.`:`Đến ${placeOf(k).n}.`);render();return true}
 (function(){const g0=goTo;goTo=function(k){if(!isSrv())return g0.apply(this,arguments);const wasMap=tab==="go";const ok=srvGoTo(k);if(ok&&wasMap&&!S.dead&&S.place!=="home"){window.__fromMap=1;tab="act";render()}return ok}})();
 
 /* ---------- talking to people as a maid ---------- */

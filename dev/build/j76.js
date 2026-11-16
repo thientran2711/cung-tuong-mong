@@ -32,6 +32,12 @@ function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:tru
  if(w)return{t:`không kịp xong trong ${BUOI[b].toLowerCase()} (cần ${c} khắc)`,ok:false};
  if(c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false};
  return{t:`${c} khắc (sang ${j76arrive(c)})`,ok:true}}
+/* ===== ONE DAY-TIME GATE (time-spill sweep 16/11, owner OD L852 + L886 + 21:42Z) =====
+   dayFit(n): n khắc can be started now: they fit this buổi, or they spill into the next buổi (j76spills: the day still has them and
+   nothing ties the act to this buổi). dayWhy(n): the reason in words when not ("hết khắc trong ngày (cần N, còn M)" …), same words as the
+   kit Cần chip (j76need). Every khắc gate outside the deck (walk-ins, greetings, asks, servant walks, court acts) asks these, never used+n<=4. */
+function dayFit(n){return !!S&&!S.dead&&(used+n<=4||j76spills(n))}
+function dayWhy(n){if(dayFit(n))return"";const r=j76need(n);return r.ok?"":r.t}
 /* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
    Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
    Exempt: 1-khắc acts, acts that restore Sức and cost none (rest), and walking (map, visits). */
@@ -43,7 +49,7 @@ can=function(c){if(window.__j76paid)c=Math.max(0,c-window.__j76paid);if(!S||S.de
  if(used+c<=BAL.time.khac)return true;return j76spills(c)};
 
 (function(){const s0=spend;spend=function(c){if(window.__j76paid){window.__j76paid=0;return}const before=used;const r=s0.apply(this,arguments);
- try{if(S&&!S.dead&&used>BAL.time.khac&&before<BAL.time.khac&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-BAL.time.khac);S.j76ck=j76key();used=BAL.time.khac}}catch(e){}return r}})();
+ try{if(S&&!S.dead&&used>BAL.time.khac&&before<=BAL.time.khac&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-BAL.time.khac);S.j76ck=j76key();used=BAL.time.khac}}catch(e){}return r}})();
 /* the clock turns: carry the spilled khắc into the new buổi; a new day drops nothing because tối never spills */
 function j76key(){try{return wkKey()+"/"+(S.buoi||0)}catch(e){return String(S&&S.buoi)}}
 /* co-op safety: a carry belongs to the buổi it was spent in. If the buổi changed without this wrapper (co-op re-sync sets S.buoi and
