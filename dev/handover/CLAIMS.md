@@ -236,7 +236,7 @@
 | TITLE SYSTEM phase 1 review (opus) | review/title-sys-r1 | C | session_011xDdVPyukDTYtkKKSrnDY8 | PASS ced2edc6 | 16/11 15:12Z |
 | kit-size (opus, kit keeper; OD 15:00Z s17 kit review): 4-size system for frames / figures / pictures / action buttons, button layouts (square pic left + info), VIỆC DÀI layout, empty space, catalogue WHERE+SIZE; sample sheet first | review/kit-size | main s18 | session_01UV1Szk9smUkxoioTZMD7KJ | RUNNING | 16/11 15:25Z |
 | kit-marks (sonnet; OD 15:00Z): gold Emperor/Thái hậu, text-line rank+name one colour, bare ink ✓/✗, relations two columns no bars, no ± boxes, KẾT QUẢ seal orange, place icon above name, fix empty samples 2.2/3.6, one 'Tinh phẩm' chip; sample sheet first | review/kit-marks | main s18 | session_01UV1SzjfpYasXCkBCSB3ais | RUNNING | 16/11 15:25Z |
-| figure-proportion audit + backs-only night/transition art (OD 15:00Z 1.1/1.7) | (Foreman C) | C | — | INBOX 15:25Z | 16/11 15:25Z |
+| figure-proportion audit + backs-only night/transition art (OD 15:00Z 1.1/1.7) | split → review/fig-proportion + review/night-backs | C | see rows 16:00Z | RUNNING | 16/11 15:25Z |
 | tham-flip-ui review (sonnet; a27f525b2; merge main 5682ce6f; reviewer may fix) | review/tham-flip-ui-r1 | main s18 | session_01UV1SzhgZtmqQ7d2jmf5wDs | RUNNING | 16/11 15:28Z |
 
 | danh-p1 review (opus) | review/danh-p1-r1 | D | session_01DgYSWna77N83b6631fN1Li | RUNNING | 16/11 15:24Z |
@@ -245,3 +245,8 @@
 | anim-pace review (sonnet; 8af1b09a) | review/anim-pace-r1 | main s19 | session_01UV1SzkpNmk47yjGsLxZsSv | RUNNING | 16/11 15:40Z |
 | tool-trial-anim (sonnet): audit-suite skills (web-animation-design, make-interfaces-feel-better) → audit our animations + redo ONE sample moment, before/after video (owner 15:50Z) | review/tool-trial-anim | main s18→s19 | session_01UV1SzjdE2FPW61JVTBx6be | RUNNING | 16/11 15:50Z |
 | tool-trial-3d (sonnet): PlayCanvas → isolated demo scene (card-flip tray with depth + candle light), weight measured, video (owner 15:50Z) | review/tool-trial-3d | main s18→s19 | session_01UV1SzkpLYZ7tqeXCs1oPSn | RUNNING | 16/11 15:50Z |
+| (a) FIGURE-PROPORTION AUDIT every full-body figure (OD 15:00Z 1.1/1.4/2.1; list + 3 samples to owner first) (sonnet art) | review/fig-proportion | C | (opening) | RUNNING | 16/11 16:00Z |
+| (b) transition/night pictures BACKS ONLY, 3 'Gối đầu' repaint (OD 15:00Z 1.7; 1 sample first) (sonnet art) | review/night-backs | C | (opening) | RUNNING | 16/11 16:00Z |
+| (c) buổi-transition band art: 3 seasons + 9 festivals (anim-pace list) + 4 buổi icons sáng/trưa/chiều/tối (OD 15:10Z 7.5) (sonnet art) | review/buoi-art | C | (opening) | RUNNING | 16/11 16:00Z |
+| (d) calendar icon cổ trang + square-icons art + placeholder picture sets per orientation/size (OD 15:10Z 7.3 / group 8) (sonnet art) | review/icon-art | C | (opening) | RUNNING | 16/11 16:00Z |
+| ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | (opening) | RUNNING | 16/11 16:00Z |
