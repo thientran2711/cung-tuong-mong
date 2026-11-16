@@ -26,6 +26,7 @@ const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
 const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot"];
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
+const PETK2=["pets","petOn","petB","petBn"];
 const CW=window.COOPW={tr:[],on:false,seat:"",base:null,pend:false,sent:-1,dying:null,attachC:null,news:"",life:0};
 const me=()=>CW.seat==="a"?901:902, fp=()=>CW.seat==="a"?902:901, fs=()=>CW.seat==="a"?"b":"a";
 const T=x=>{try{CW.tr.push(x+" f="+(rivals||[]).some(v=>v&&v.coop));if(CW.tr.length>80)CW.tr.shift()}catch(e){}};
@@ -56,6 +57,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  /* jtruth (reviewer r1): her own wrongs ledger travels with her, so true evidence on her is capped by what SHE really did (an empty
     ledger here made every piece on the friend a rumour each week, and NPC spies could never find a guilty friend); read-only copy */
  for(const k of ["wrongs","dw","dws","dkeys","schemes"])if(s[k]!=null)v[k]=J(s[k]);
+ for(const k of PETK2)if(s[k]!=null)v[k]=J(s[k]);  /* her pets: shown on her entry, acts on them go through `res` (pet ops), never the week write-back */
  mapMe(v,false,mp);v.id=fp();
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank}));
  return v}
@@ -166,7 +168,7 @@ function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||nRe
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
  else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=CW.on?"Sẵn sàng":S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
-Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{}});
+Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{},rpend:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
 function needWhere(){return CW.on&&CW.p2&&!host()&&CW.whereKey!==bkey()}
 /* her place as I see it: her "home" is her own palace; my palace in her eyes ("r"+my pid) is my "home" */
@@ -187,13 +189,18 @@ function refreshHere(){if(!S||!S.visit||S.dead)return;const k=S.place||"home",W=
  else if(W.emp===k&&ei<0&&["vuon","thu"].includes(k))L.unshift({kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});
  S.visit.people=L}
 const LIVE=["sung","danh","suc","sac","tai","tamco","duc","rank","age"];
+/* her pets, live (co-op pets, owner 15/11 20:05Z): compact list, so the friend's acts aim at the pets she really has now */
+const PETF=["t","at","full","clean","joy","aff","stg","care","src","from"];
+function petLive(){return {L:(S.pets||[]).map(P=>{const o={};for(const k of PETF)if(P[k]!=null)o[k]=typeof P[k]==="number"?Math.round(P[k]):P[k];return o}),on:S.petOn==null?-1:S.petOn,b:S.petB||null,bn:S.petBn||0}}
 function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
- const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name].join(":");if(k===CW.posKey)return;CW.posKey=k;
- COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
+ const pl=petLive();const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,JSON.stringify(pl)].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,pets:pl,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0})}
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
- if(f.__b)f.__b.rank=f.rank;return ch}
+ if(f.__b)f.__b.rank=f.rank;
+ if(m.pets&&Array.isArray(m.pets.L)){const L=m.pets.L.map(o=>Object.assign({},o));if(JSON.stringify(L)!==JSON.stringify(f.pets||[])){f.pets=L;f.petOn=m.pets.on;f.petB=m.pets.b;f.petBn=m.pets.bn;ch=true}}
+ return ch}
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(m.place);const f=friendEntry();if(!f)return;
  const sc=liveStats(m);S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
 function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;const pl=CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
@@ -228,47 +235,88 @@ COOP.on("error",m=>{T("err "+m.code+" "+m.msg);if(CW.on&&m.code==="badbuoi"){CW.
    (death → rebirth, lãnh cung → cold) and sees a note only when she would notice it. The week write-back baseline of her entry is
    moved so the merge does not count it twice.  mode "invite" (Kết giao, Tặng quà): she gets a choice card first; Nhận → I run it. */
 const ASK=["ally","gift"];
-const PUB=["accuse","vp","gift","ally","steal","road","takeaway","tocao","trinhth","trinhhh","xinhh","uyhiep","judge"];
+const PUB=["petcare","accuse","vp","gift","ally","steal","road","takeaway","tocao","trinhth","trinhhh","xinhh","uyhiep","judge"];
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
-function sendRes(v,k,b0,txt,id){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+function sendRes(v,k,b0,txt,id,pet,items){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
  const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
  const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
- const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold;if(!any&&!PUB.includes(k))return;
+ const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold||(pet&&pet.length)||(items&&items.length);if(!any&&!PUB.includes(k))return;
  /* she notices what an NPC's act would show her: open acts and caught schemes name me, a hidden harm only shows its effect */
  const seen=PUB.includes(k)||caught?"named":any?"effect":"";
  if(v.__b){for(const x of STAT)v.__b[x]=v[x];v.__b.rel=v.rel;v.__b.oan=v.oan;v.__b.em=(v.evm&&v.evm.me)||0;v.__b.out=v.out;v.__b.rank=v.rank}
  if(flags.dead)v.alive=true;if(flags.cold)v.out=false;   /* her death / lãnh cung happen on her side; her entry follows from her `me` / week */
- COOP.send({t:"res",id:id||newId(),k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)})}
+ const rid=id||newId();CW.rpend[rid]=Date.now();  /* her week's end waits for her ack, so a res that lands after she ended is re-sent in her end */
+ COOP.send(Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{}))}
+/* ---------- co-op pets (owner 15/11 20:05Z): help / harm / steal the friend's pet (petcare / thaopet / petsteal, jpet + jpetcare) ----------
+   The act runs on her entry (which carries her live pets, petLive/pos); what happened to each of her pets goes out as `res.pet` ops
+   ({op:"d",t,at,d:{full,clean,joy,aff}} | {op:"lose",t,at}); her client applies them to her OWN pets (petLose there gives her the
+   follow-bonus / Thái hậu side effects, so those are taken out of fx here). The stolen pet is already mine (petAdd on my S). */
+const PETACT=["petcare","thaopet","petsteal"];
+function petFind(L,o){let i=L.findIndex(P=>P.t===o.t&&(P.at||0)===(o.at||0));if(i<0)i=L.findIndex(P=>P.t===o.t);return i}
+function petLoseHook(){if(typeof petLose!=="function"||petLose.__cw)return;const f0=petLose;
+ petLose=function(p){if(!CW.petV||p!==CW.petV)return f0.apply(this,arguments);const b=fsnap(p);const r=f0.apply(this,arguments);const a=fsnap(p);
+  for(const x of DK)if(a[x]!==b[x])CW.petAdj[x]=(CW.petAdj[x]||0)+(a[x]-b[x]);return r};petLose.__cw=1}
+function petDiff(v,L0){const L1=tsbPets(v);const ops=[];
+ for(const [P,c] of L0){const o={t:P.t,at:P.at||0};if(!L1.includes(P)){ops.push(Object.assign(o,{op:"lose"}));continue}
+  const d={};for(const x of ["full","clean","joy","aff"]){const n=Math.round((P[x]||0)-(c[x]||0));if(n)d[x]=n}if(Object.keys(d).length)ops.push(Object.assign(o,{op:"d",d}))}
+ return ops}
+const PETFLY=/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|bachloc|kylan|cuuvi|hac|thienma/;
+/* her side: apply the ops to her own pets; returns the lines for her note */
+function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
+ for(const o of ops){const L=tsbPets(S);const i=petFind(L,o);if(i<0)continue;const P=L[i];const T=petT(P);const nm=T.n.replace(/^./,c=>c.toLowerCase());
+  if(o.op==="lose"){const fly=PETFLY.test(P.t);petLose(S,i,k==="petsteal"?"bị trộm mất":fly?"bị thả đi (chưa rõ ai làm)":"bị hại (chưa rõ ai làm)");
+   out.push(k==="petsteal"?`<span class="r">Không thấy ${nm} đâu nữa; cửa lồng mở, có dấu người lạ.</span>`:`<span class="r">${T.n} của ngươi ${fly?"sổ lồng bay mất, tìm không thấy":"bỗng lăn ra bỏ ăn rồi chết, không rõ vì sao"}.</span>`);continue}
+  if(o.op==="d"&&o.d){try{if(typeof petcInit==="function")petcInit(P)}catch(e){}const d=o.d,L2=[];
+   for(const x of ["full","clean","joy","aff"])if(typeof d[x]==="number"){P[x]=cl((P[x]||0)+d[x],0,100)}
+   if(d.full)L2.push(`No ${d.full>0?"+":""}${d.full}`);if(d.clean)L2.push(`Sạch ${d.clean>0?"+":""}${d.clean}`);if(d.joy)L2.push(`Vui ${d.joy>0?"+":""}${d.joy}`);if(d.aff)L2.push(`Tình cảm ${d.aff>0?"+":""}${d.aff}`);
+   try{if(typeof petcSync==="function")petcSync(P)}catch(e){}if((d.full||0)+(d.clean||0)+(d.joy||0)>0)P.bad=0;
+   out.push(`${T.n} của ngươi được chăm (${L2.join(", ")}).`)}}
+ return out}
 (function(){const f=runAct;runAct=function(a,t,k,extra){if(!CW.on||a!==S||!isF(t))return f.apply(this,arguments);
  if(ASK.includes(k)&&!CW.inv){if(sameHouse(a,t))return f.apply(this,arguments);const id=newId();CW.acts[id]={k,extra,v:t.id};
   COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item:extra!=null&&S.inv&&S.inv[extra]?iname(S.inv[extra]):""});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
- const b0=fsnap(t);const r=f.apply(this,arguments);try{sendRes(t,k,b0,r,CW.inv)}catch(e){console.error(e)}return r}})();
+ const pa=PETACT.includes(k);let L0=null;if(pa){petLoseHook();L0=tsbPets(t).map(P=>[P,Object.assign({},P)]);CW.petV=t;CW.petAdj={}}
+ const inv0=(t.inv||[]).slice();const b0=fsnap(t);let r;try{r=f.apply(this,arguments)}finally{CW.petV=null}
+ /* things that landed in her entry's bag (Tặng quà, a handmade work, a gift with something in it) go to HER: she gets the normal
+    "Quà tặng" dialog (keep / have it checked), exactly as from an NPC (review/coop-pets: before, the item left me and never reached her) */
+ const items=(t.inv||[]).filter(e=>!inv0.includes(e)).map(e=>J(e));
+ try{let pet=null;if(pa){pet=petDiff(t,L0);for(const x in CW.petAdj)b0[x]=(b0[x]||0)+CW.petAdj[x]}sendRes(t,k,b0,r,CW.inv,pet,items)}catch(e){console.error(e)}return r}})();
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
  pushModal({act:1,t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
-function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;
+function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);
+ try{resApply(m)}catch(e){console.error(e)}
+ /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
+ try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
+ COOP.send({t:"actr",id:m.id,ok:true,ack:1})}
+function resApply(m){if(S.dead)return;
  const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
  if(Object.keys(fx).length)apply(fx);S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
  if(g.rel)S.rl[fpid]=cl((S.rl[fpid]||0)+g.rel,-100,100);if(g.oan)S.ro[fpid]=cl((S.ro[fpid]||0)+g.oan,0,100);
  if(g.em)S.cev[fpid]=Math.max(0,(S.cev[fpid]||0)+g.em);if(g.conf)S.confined=Math.max(0,(S.confined||0)+g.conf);
  const f=friendEntry();if(f&&g.rel){f.rel=cl((f.rel||0)+g.rel,-100,100);if(f.__b)f.__b.rel=f.rel}
+ const pl=petApply(m.pet,m.k);
+ let gotItem=false;if(Array.isArray(m.items))for(const e of m.items){if(!e||!e.k||typeof IT!=="object"||!IT[e.k])continue;const ent=J(e);ent.from=fpid;if(ent.by==="me")ent.by=fpid;try{pushDil(mkP("giftin",{f:fpid,e:ent}),"Quà tặng");gotItem=true}catch(x){console.error(x)}}
  const who=m.seen==="named"?`<b>${esc(m.who)}</b>: ${esc(m.n)}.`:"Có kẻ ngấm ngầm ra tay với ngươi.";
- const note=m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"";
+ const note=m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${pl.map(x=>`<p>${x}</p>`).join("")}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"";
  if(g.dead){if(note)pushModal({t:"Biến cố",h:note});try{die(m.seen==="named"?`Bị ${m.who} hại`:"Bị kẻ gian hãm hại")}catch(e){console.error(e)}return}
  if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
- if(note){pushModal({t:m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
-function onActr(m){if(!CW.on||m.from===CW.seat||m.ack)return;const a=CW.acts[m.id];delete CW.acts[m.id];if(!a)return;const v=RV(a.v);
+ if(note&&gotItem&&m.k==="gift"&&!g.dead&&!g.cold){showModal();render();return}  /* the Quà tặng dialog is her note */
+ if(note){pushModal({t:m.k==="petcare"?"Hảo hữu sang giúp":m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
+function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];soonEnd();return}const a=CW.acts[m.id];delete CW.acts[m.id];if(!a)return;const v=RV(a.v);
  if(!m.ok||!v||!v.alive){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
  CW.inv=m.id;let r="";try{r=runAct(S,v,a.k,a.extra)}finally{CW.inv=false}if(r)log(r);
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`});showModal();render()}
 COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
-let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
+/* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
+function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
+let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
@@ -285,7 +333,7 @@ function worldNews(C){if(host())return"";const n=C.W&&C.W.S&&C.W.S.cnews;if(!n||
    week so far (buổi sáng → tối) was thrown back to buổi sáng while the server stayed at buổi tối (`badbuoi`), and the two seats split
    (one ended the week alone, the other could never end it). CW.wkIn = the last merged week applied here; a week is applied once. */
 function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;if(typeof m.week==="number"&&CW.wkIn===m.week){T("week dup");return}
- const C=m.state;CW.base=J(C);CW.pend=false;if(typeof m.week==="number")CW.wkIn=m.week;
+ const C=m.state;CW.base=J(C);CW.pend=false;CW.rpend={};if(typeof m.week==="number")CW.wkIn=m.week;
  const wasDead=S&&S.dead;const ok=fromCanon(C,{keepQ:true});if(!ok)return;
  const P=C.P[CW.seat];
  if(!wasDead&&S.dead){S.dead=false;try{die(P.S.coopWhy||"Bị hại trong cung")}catch(e){console.error(e)}return}
