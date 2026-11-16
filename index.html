@@ -17963,7 +17963,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
  return{hint:parts.join("; "),risk}}
 /* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
 function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
- const odd=((b.querySelector(":scope > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
+ const odd=((b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
  const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
@@ -17973,13 +17973,13 @@ function kitRisk(word){const r=KIT_RISK[word]||KIT_RISK["có rủi ro"];return `
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint + risk chip, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
- const od=b.querySelector(":scope > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
+ const od=b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
  if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
-  const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
+  const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
    (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
@@ -18553,11 +18553,16 @@ addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
  const sub=P.querySelector(".ksub");const subOn=!!(sub&&sub.offsetParent);
+ /* KIT 45.2 (owner 16/11 "Mất chữ", review/hc-portrait-r1): since KIT §45 the sub-tabs sit INSIDE the pane bar (.kpbar: + its bottom padding,
+    hair line and the kit gap under it), so the sticky edge is the BAR's bottom + its gap, not the .ksub row's bottom — measuring the row
+    scrolled the face strip 17 px under the bar (palace labels cut in half under Chí tôn / Phi tần / Nam nhân / Cung nhân) */
+ const kbar=P.querySelector(":scope>.kpbar"),kbarOn=!!(kbar&&kbar.offsetParent);const kbarGap=()=>kbarOn?parseFloat(getComputedStyle(kbar).marginBottom)||0:0;
+ const subH=kbarOn?kbar.offsetHeight+kbarGap():subOn?sub.offsetHeight:0;
  P.querySelectorAll(".pc[data-k2]").forEach(pc=>{const pr=P.getBoundingClientRect();const bt=parseFloat(cs.borderTopWidth||0),bb=parseFloat(cs.borderBottomWidth||0);
   /* the sub-tab bar is sticky at the same place it rests (first child): the card's room is from its bottom to the panel's inner bottom */
   /* T = whatever follows the card inside the panel (wrapper padding): the card's room shrinks by it so the card can sit flush under the bar */
   let T=0;{let e=pc;while(e&&e!==P){let n=e.nextElementSibling;while(n){if(n.offsetParent)T+=n.getBoundingClientRect().height;n=n.nextElementSibling}const ps=e.parentElement;if(ps&&ps!==P){const c2=getComputedStyle(ps);T+=parseFloat(c2.paddingBottom||0)+parseFloat(c2.borderBottomWidth||0)}e=ps}}
-  const full=Math.floor((pr.bottom-bb)-(subOn?(pr.top+bt+pt+sub.offsetHeight):(pr.top+bt+pt))-T);
+  const full=Math.floor((pr.bottom-bb)-(pr.top+bt+pt+subH)-T);
   /* portrait screens under 1000 px (Fold, phones): the card takes the WHOLE panel under the sticky sub-tabs and the panel scrolls the
      face strip up out of the way, so the header + at least one whole act card are in view; wide screens keep strip + card together */
   const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;
@@ -18567,7 +18572,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
   pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);
   const nm=(pc.querySelector(".pcname")||{}).textContent||"";if(P.__kpcN!==nm||narrow||!P.__kpcUser){const fresh=P.__kpcN!==nm;P.__kpcN=nm;if(!fresh&&P.__kpcUser)return;const fit=()=>{try{const q=P.querySelector(".pc[data-k2]");if(!q)return;const a=P.getBoundingClientRect(),c=q.getBoundingClientRect();const sub2=P.querySelector(".ksub");
-   const sb=sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
+   const kb2=P.querySelector(":scope>.kpbar");const sb=kb2&&kb2.offsetParent?kb2.getBoundingClientRect().bottom+(parseFloat(getComputedStyle(kb2).marginBottom)||0):sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
    if(narrow){const st2=P.querySelector(".pstrip");const tgt=st2&&st2.offsetParent?st2.getBoundingClientRect().top:c.top;const d=tgt-sb;if(Math.abs(d)>1)P.scrollTop+=d}
    else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb;
    /* KIT 45.1 (review/small-bugs-3): a face strip is never left HALF under the pane bar (its palace labels clipped, frames cut): when the scroll
@@ -21476,33 +21481,41 @@ window.kitActCompactOn=kitActCompactOn;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
   const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+/* KIT §43 + §6.2 (review/opt-pics): the compact card rules are ONE string (kitCompactCSS(B)) used twice: inside a narrow kpane, and ALWAYS for a
+   dialog option card (B = button.ka.kart.kopt, jopic) — the one compact act-card form game-wide. w × h = picture box: owner override 15/11 — the small card's picture is a 3:4 PORTRAIT RECTANGLE (84x112;
+   72x96 in a pane under 420 px), the act art's own aspect, never a square crop; the big Hành sự card is untouched. */
+function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
+ ${B}{--kaw:${w}px!important;--kah:${h}px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+ ${B}>.kaart>.ksart>:not(img){display:none!important}
+ ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
+ ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
+ ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ ${B} .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
+ /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
+    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
+ ${B} small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+ ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+ ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+
+`}
+window.kitCompactCSS=kitCompactCSS;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
  .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
- button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
- button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
- button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
- button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
- button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
- button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
- button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
- button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
- /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
-    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
- button.ka.kart small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
- button.ka.kart small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
- button.ka.kart small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
- button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
+${kitCompactCSS("button.ka.kart",84,112)}
 }
 @container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:72px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+ button.ka.kart{--kaw:72px!important;--kah:96px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
 /* ================= jseal: kitSeal · ẤN TRÂN NỮ (owner 11/15, review/brand; KIT §39) =================
@@ -28730,6 +28743,90 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
  return r}})();
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const R=r0.apply(this,arguments);
  try{if(who&&S&&who!==S.maid&&who.role==="maid"&&R[0]==="mama")return["maid","mama"]}catch(e){}return R}})();
+/* ================= jhcpor: KIT §36.5 person-card portrait cell — WIDE frame, no empty headroom (owner 15/11, review/hc-portrait) =================
+   Owner: "Ảnh 1 phía trên này còn dư chỗ nhiều nè, ảnh 2, 2 bên trái phải còn dư kìa, kéo giãn cạnh trái và phải cho khung avatar to bề ngang xíu đi."
+   ONE rule for the framed portrait in every person card (pcard: Hậu cung Chí tôn / Phi tần / Nam nhân / Cung nhân, the stage pop-up card,
+   every other pcard), known people and "Người lạ" alike:
+   1. WIDTH: the card cell shows the frame's wide variant img/kit/frame-<x>-w.webp (dev/tools/frame_wide.py: content-aware seams through the plain
+      parts of the top/bottom bars; corners, side bars, crest and pendant untouched, nothing stretched) so every frame spans ~536 of the 550
+      canvas units = the full column. Its opening is 2s units wider (s per frame, KIT_FRW); the opening's top/bottom do not move.
+      The picture is NOT zoomed for it (KIT_POR face size unchanged): the window ground (.kbg, cover) widens with the opening, the portrait's
+      clip widens to the new opening and its own left/right edges fade out (no hard vertical cut where a garment meets the picture border).
+   2. HEADROOM: the cell starts where THIS frame's art starts (its first opaque row, KIT_FRW) and ends under its tassel, a fixed 4 px from the
+      name block above — no empty band between the name and the crest. Numbers are constants per frame file (no measuring), so the first frame
+      is the settled frame; a person switch still cross-fades (jhc).
+   Small frames (mdH avatars, strips, stage, week book) keep the narrow frame. If a -w picture fails to load the cell falls back to the
+   normal frame (class kfw removed). KIT_FRW: {frame name: [s, opaque top, opaque bottom]} in canvas units (550x1037). ========== */
+window.KIT_FRW={"frame-cold":[44,95,987],"frame-consort-0":[47,184,974],"frame-consort-1":[44,182,974],"frame-consort-2":[36,176,975],"frame-consort-3":[30,174,977],"frame-consort-4":[25,159,973],"frame-consort-5":[17,150,993],"frame-consort-6":[5,104,984],"frame-consort-7":[10,20,991],"frame-emp":[0,8,1035],"frame-eunuch-0":[36,134,986],"frame-eunuch-1":[36,134,986],"frame-eunuch-2":[36,134,986],"frame-eunuch-3":[46,107,988],"frame-guard":[30,100,984],"frame-heir":[24,52,992],"frame-maid-0":[35,144,986],"frame-maid-1":[35,144,986],"frame-maid-2":[35,144,986],"frame-maid-3":[35,144,986],"frame-maid-4":[35,144,986],"frame-mama-0":[34,130,994],"frame-mama-1":[34,130,994],"frame-mama-2":[34,130,994],"frame-mama-3":[34,130,994],"frame-mama-4":[34,130,994],"frame-man":[28,108,995],"frame-official":[34,101,1002],"frame-physician":[24,146,973],"frame-prince":[32,85,987],"frame-princess":[36,118,977],"frame-royal":[36,95,997],"frame-thaihau":[0,2,1016],"frame-unknown":[46,164,988]};
+function kitFrw(src){const m=/(frame-[a-z0-9-]+?)(?:-w)?\.webp/.exec(src||"");return m&&KIT_FRW[m[1]]?[m[1],KIT_FRW[m[1]]]:null}
+/* the card's own portrait cell = the first .pcp right after <div class="pcl"> */
+function kitFrwCell(h){const i=h.indexOf('<div class="pcl">');if(i<0)return h;const j=i+17;if(h.slice(j,j+19)!=='<div class="pcp kit')return h;
+ const k=h.indexOf('<span class="kin">',j);if(k<0)return h;const fm=/<img class="kfr" src="([^"]*)"/.exec(h.slice(k,k+4000));if(!fm)return h;
+ const F=kitFrw(fm[1]);if(!F||KFRW_BAD.has(F[0]))return h;let [s,t,b]=F[1];
+ /* the rank crest (KIT_CREST, jk2b §9) stands on the top bar and may reach higher than the frame art: the cell starts at whichever is higher */
+ try{const C=window.KIT_CREST,ck=C&&C.key(fm[1]);if(ck){const w=C.w[ck]||C.W,hh=w*C.ar[ck],by=C.bar[ck]!=null?C.bar[ck]:C.bar[ck.replace(/-\d$/,"")]!=null?C.bar[ck.replace(/-\d$/,"")]:C.BAR;t=Math.min(t,Math.max(0,Math.floor(by-C.base[ck]*hh)))}}catch(e){}
+ let head=h.slice(j,k);head=head.replace('class="pcp kit',`class="pcp kit kfw${s>0?" kfx":""}`);
+ head=/style="/.test(head)?head.replace('style="',`style="--kfs:${s};--kft:${t};--kfb:${b};`):head.replace(/^<div /,`<div style="--kfs:${s};--kft:${t};--kfb:${b}" `);
+ let rest=h.slice(k);if(s>0)rest=rest.replace(fm[0],`<img class="kfr" src="${fm[1].replace(/\.webp$/,"-w.webp")}" data-kfn="${fm[1]}"`).replace(/(<img class="kfr"[^>]*?)onerror="this\.remove\(\)"/,'$1onerror="kitFrwErr(this)"');
+ return h.slice(0,j)+head+rest}
+/* a -w file that failed once is not asked for again (the cell keeps the normal frame and its old layout) */
+const KFRW_BAD=new Set();
+function kitFrwErr(im){try{const F=kitFrw(im.getAttribute("src"));if(F)KFRW_BAD.add(F[0]);const n=im.dataset.kfn;const p=im.closest(".pcp");if(p)p.classList.remove("kfw","kfx");if(n&&im.getAttribute("src")!==n){im.onerror=()=>im.remove();im.src=n}else im.remove()}catch(e){}}
+window.kitFrwErr=kitFrwErr;
+(function(){if(typeof pcard!=="function")return;const c0=pcard;pcard=function(){const h=c0.apply(this,arguments);try{return kitFrwCell(h)}catch(e){return h}}})();
+/* the portrait's clip (kpor: inset() of the old opening) widens by s units each side inside a wide cell */
+(function(){if(typeof kporApply!=="function")return;const a0=kporApply;
+ function widen(img){try{const p=img.closest&&img.closest(".pcp.kfx");if(!p)return;const s=+getComputedStyle(p).getPropertyValue("--kfs")||0;const c=img.style.getPropertyValue("--kpc");if(!c||c===img.__kpcW)return;/* already widened (our own write) */
+  const m=/inset\(([-\d.]+)% ([-\d.]+)% ([-\d.]+)% ([-\d.]+)%\)/.exec(c);if(!m||!s)return;const z=+img.dataset.kpz||1;const e=s/(z*388.8)*100;/* box width = z × 70.691 % of 550 */
+  const v=`inset(${m[1]}% ${(+m[2]-e).toFixed(3)}% ${m[3]}% ${(+m[4]-e).toFixed(3)}%)`;img.__kpcW=v;img.style.setProperty("--kpc",v)}catch(e){}}
+ kporApply=function(img){const r=a0.apply(this,arguments);widen(img);return r};
+ /* kpor re-sets --kpc when its measurement arrives: re-widen on every style change of a portrait in a wide cell */
+ try{new MutationObserver(ms=>{for(const m of ms){const t=m.target;if(t.classList&&t.classList.contains("kpor"))widen(t)}})
+  .observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:["style"]})}catch(e){}})();
+(function(){const st=document.createElement("style");st.id="kit-frw";st.textContent=`
+/* 2. headroom: the cell's top = the frame's first opaque row, 4 px under the name; bottom = under the tassel */
+html body .pc[class][class]>.pcl>.pcp.kit.kfw.kfw{margin-top:calc(4px - var(--kft) * 100% / 550)!important;margin-bottom:calc(4px - (1037 - var(--kfb)) * 100% / 550)!important}
+/* the name block above takes only its own lines (jhc kept 2.4em so the old fixed box started level; the cell now starts at its own art) */
+html body .pc[class][class]>.pcl:has(>.pcp.kfw)>.pcname{min-height:auto!important;flex-shrink:0!important}
+/* 1. wide opening: ground, badge and origin emblem move with the widened frame */
+html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>.kbg{left:calc(14.655% - var(--kfs) * 100% / 550);width:calc(70.691% + var(--kfs) * 200% / 550)}
+html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kgem{left:calc(73.564% + var(--kfs) * 100% / 550)!important}
+html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kemb{left:calc(62.218% + var(--kfs) * 100% / 550)!important}
+html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kpor:not(.kporz):not([src*="face-"]):not([src*="unknown"]){clip-path:inset(5% calc(6.14% - var(--kfs) * 100% / 443.2) 7.28% calc(6.14% - var(--kfs) * 100% / 443.2))!important}
+html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+`;document.head.appendChild(st)})();
+/* kit page sample (#kit): the card cell for a stranger, a maid and the Emperor (s = 0: frame already full width) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pcard · ô chân dung khung rộng (khung -w, sát tên)",html:()=>{
+ const P=[rivals&&rivals[0],S&&S.maid,S&&S.emp].filter(Boolean);
+ return `<div class="kitpg-row" style="align-items:flex-start">${P.map(p=>`<div style="width:240px">${pcard({f:kitFace(p),name:p.name||"",col:"var(--gold)",groups:[]})}</div>`).join("")}</div>`}})}catch(e){}
+/* review/hc-portrait-r1 (reviewer): the person switch stays smooth with per-frame box tops.
+   (a) the strip's frames are the NARROW files, so the card's -w file was fetched only on the click: the new portrait showed without its frame
+       for 150-500 ms on a first visit. Every frame shown in the panel now warms its -w file (once per file).
+   (b) the cell's top differs per frame (up to ~35 px at 1180 between consort frames): the new cell and everything under it in the left
+       column slide from the old place to the new one in 180 ms (FLIP; the old portrait fading out on top moves with it). None with reduced
+       motion / Cảnh động off. */
+const KFRW_WARM=new Set();
+function kitFrwWarm(root){try{(root||document).querySelectorAll('img.kfr,img[src*="/kit/frame-"]').forEach(i=>{const F=kitFrw(i.getAttribute("src"));if(!F||!F[1][0])return;
+ const u=i.getAttribute("src").replace(/frame-[a-z0-9-]+?(?:-w)?\.webp/,F[0]+"-w.webp");if(KFRW_WARM.has(u))return;KFRW_WARM.add(u);const im=new Image();im.decoding="async";im.onerror=()=>KFRW_BAD.add(F[0]);im.src=u})}catch(e){}}
+window.kitFrwWarm=kitFrwWarm;
+(function(){if(typeof renderPanel!=="function")return;const r0=renderPanel;
+ const cell=P=>P&&P.querySelector(".pc>.pcl>.pcp.kit");
+ /* the cell's place inside its column, measured on the laid-out page (the wide-card classes land after the render, so the new place is read
+    in the next animation frame, before it is painted) */
+ const rel=c=>{const L=c.parentElement;return c.getBoundingClientRect().top-L.getBoundingClientRect().top+L.scrollTop};
+ renderPanel=function(){const P=document.getElementById("panel");const t0=P&&P.dataset.tab;const o=cell(P);let y0=null;
+  try{if(o)y0=rel(o)}catch(e){y0=null}
+  const r=r0.apply(this,arguments);
+  try{kitFrwWarm(P)}catch(e){}
+  /* a -w picture already known broken (from the cache, its error event came before this element existed) falls back at once */
+  try{P&&P.querySelectorAll(".pcp.kfw img.kfr[data-kfn]").forEach(i=>{if(i.complete&&!i.naturalWidth)kitFrwErr(i)})}catch(e){}
+  try{const rm=(typeof reducedMotion==="function"&&reducedMotion())||(typeof kitCurlOff==="function"&&kitCurlOff());
+   if(!rm&&y0!=null&&P.dataset.tab===t0)requestAnimationFrame(()=>{try{const n=cell(P);if(!n)return;const y1=rel(n),d=y0-y1;if(Math.abs(d)<=0.5||Math.abs(d)>=120)return;
+    /* the cell and whatever sits under it in the left column (the name above stays put) */
+    const L=n.parentElement,top=n.getBoundingClientRect().top-1;
+    [...L.children].filter(x=>x===n||(x.offsetParent&&!x.classList.contains("pcname")&&x.getBoundingClientRect().top>=top))
+     .forEach(x=>{const a=x.animate([{transform:`translateY(${d}px)`},{transform:"translateY(0)"}],{duration:180,easing:"ease-out"});a.id="kfwSlide"})}catch(e){}})}catch(e){}
+  return r}})();
 /* ================= jph: PLACEHOLDER PICTURES — KIT §59 (owner 15/11 ~18:45Z, review/placeholder-pics) =================
    Four generic palace still-lifes (gpt-2-6, no people) stand in for every EVENT or ACT that has no picture of its own, so the owner sees at
    a glance "this one still lacks its picture" and reports it:
@@ -28788,6 +28885,173 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh
  `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+
  `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
+/* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
+   Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
+   Markup dev/handover/refs/owner-option-picture-left.jpg (docs branch). Coordinator: ONE act-card form = the COMPACT card of Hậu cung (KIT §43):
+   small picture left (~1/4), title + Cần/Tốn/Được/Mất/Gợi ý rows right, height = content; tap the picture = enlarge.
+   Owner ruling: one picture per MEANING GROUP (all "nhận lỗi / cúi đầu" share one, all "dâng lễ vật" share one …), reused everywhere.
+   ONE place: every dialog option (`#modal .opts` button.ka, kit choice panel `.kpscopts`), after the j63 frame (kaNorm1) built it:
+     kpOptArt(b) → `.kaart` slot (kitArtFrame, the act-card picture frame) + `.kabody` (the rows) + classes `kart kopt` → compact CSS (jk4 KIT §43,
+     shared rule set kitCompactCSS). The tiny portrait icon in the title (.md, j25 / pickers) leaves the title.
+   Picture of an option (kitOptPic(title, b)), first hit wins:
+     1. kitActKey(title) — the option IS an act, or ACTS.json already has its own choice picture (act-pics2 "-h" keys);
+     2. ACTS.json "log" meaning rules (kbkRules, j87: the Tuần lục picture of that same choice line), key "-" = none;
+     3. KIT_OPT_RULES — the meaning groups below (regex on the plain option title) → shared group picture img/act-opt-<group>.webp;
+     4. a picture the option already carries (a person's portrait .md img, an item picture) — pickers of people / items;
+     5. the KIT §59 act placeholder (light / dark by kitPhTone), recorded once in CTM_MISSING_PICS as kind "opt".
+   A key whose file is not on the CDN (https://ctm-img.victoria-tntt.workers.dev/img/_index.json) is skipped (next rule).
+   Tap / click on the picture = kitPicZoom(src) (does not choose the option). ============================================================ */
+const KIT_OPT_RULES=[
+ /* (meaning group → picture key; "opt-*" = painted for this group by review/opt-pics, every other key = an existing act / choice picture reused) */
+ /* — leave it / not now — */
+ [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|cảm ơn, không cần)/i,"opt-thoi"],
+ /* r1: "Đi / Vẫn đi" = going, "Ở lại" = staying put — not the turning-away picture */
+ [/^(vẫn đi|đi$|đi \()/i,"den-ngay-h"],[/^ở lại/i,"o-yen-nghi-h"],
+ [/(che phần lớn)/i,"giau-trong-ruong-h"],
+ [/^(im lặng|làm thinh|lặng thinh|nín lặng|cười trừ|giả vờ không hiểu|nghe và giữ kín)/i,"im-lang-h"],
+ [/^(không dự|không đến|không dâng lễ|không phát|không bày tiệc|cáo mệt|khéo cáo mệt|bỏ thi|đóng cửa giữ mình|ở yên|ở cung|sống thật thanh tĩnh|để mặc, giữ mình|bình thản chờ|đứng ngoài|mặc kệ|làm ngơ|bỏ mặc|bỏ ngoài tai|mặc họ|không dính vào)/i,"o-yen-nghi-h"],
+ [/(ngồi xem|chỉ xem|đứng xem|đứng nhìn|cổ vũ)/i,"dung-xem-h"],
+ [/^(không cho|không giao|không bán|khéo từ chối|từ chối|cự tuyệt|không nhận|không chịu|khiêm nhường)/i,"tu-choi-h"],
+ [/(trả lại|gửi trả)/i,"tra-lai-qua"],
+ /* — named small groups (reused act pictures) — */
+ [/(hạ độc|bỏ độc|hạc đỉnh hồng|thạch tín|thuốc độc)/i,"ha-doc"],
+ [/(dự thi|ghi tên)/i,"ghi-ten-du-thi-h"],
+ [/^(mạng |kết bằng|tìm mạng)/i,"tu-tay-ket-h"],
+ [/(nhờ vẽ|cho vẽ|nét bút)/i,"ve-tranh"],
+ [/(về phe|kết thân|kết nghĩa|đồng minh)/i,"ket-minh-g-h"],
+ [/(tìm lỗi|lật lại chuyện)/i,"do-la-h"],
+ [/(sớ)/i,"dang-so"],
+ [/(trả nợ|đòi bằng được)/i,"uy-hiep-doi-bac-h"],
+ [/(khen)/i,"khen-mot-cau-h"],
+ [/(lấy lại lòng hoàng thượng)/i,"tro-chuyen-hoang-thuong"],
+ [/(trang sức|phối đồ|điểm trang)/i,"diem-trang-h"],
+ [/(hàn lâm|tiến sĩ|mời thầy)/i,"moi-thay-day-nghe-h"],
+ /* — humble / apologise / beg — */
+ [/(nhận lỗi|nhận tội|tạ lỗi|tạ tội|xin lỗi|cúi đầu đi qua|nhún nhường|hạ mình|^nhịn)/i,"cui-dau-nhan-loi-h"],
+ [/(quỳ xin|khóc lóc xin|xin tha|van xin|dập đầu|xin bà cứu)/i,"quy-xin-tha-h"],
+ [/^(thưa|bẩm|kể thật|giải thích|phân trần|thanh minh|biện bạch|tự thú)/i,"opt-thua-trinh"],
+ [/^(vâng|vâng chỉ|tuân|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
+ /* — gifts / silver — */
+ [/(lì xì)/i,"li-xi-h"],
+ [/(đút bạc|đưa bạc|bỏ bạc mua|lo lót|hối lộ|mua chuộc|bịt miệng|im miệng)/i,"dut-bac-rut-loi-h"],
+ [/(dâng lễ|lễ vật|lễ mọn|mang lễ|gửi lễ|biếu|dâng ngọc|đáp lễ|tặng)/i,"bieu-qua-h"],
+ [/(gửi bạc|góp bạc|quyên|cho vay|xóa nợ|cứu lụt|lều cháo|dâng thóc|kèm bạc)/i,"gui-bac-chua-benh-h"],
+ [/(cược|ván nhỏ|ván lớn|chơi ván)/i,"cuoc-thien-xa-h"],
+ /* — answer back / warn / cold — */
+ [/(lạnh nhạt|lạnh lùng|ngoảnh mặt)/i,"lanh-lung-h"],
+ [/(cảnh cáo|dọa)/i,"canh-bao-h"],
+ [/(đáp|cãi|phản đòn|mắng|vặn lại|khiêu khích|khéo lời hóa giải|đối chất)/i,"dap-tra-mia-h"],
+ /* — report / evidence / spy — */
+ [/(chứng cứ|kẽ hở|lời khai|nắm lại thóp)/i,"trinh-chung-cu-hh-h"],
+ [/(ghi nhớ|ghi lại|trả thù)/i,"ghi-nho-chung-cu-h"],
+ [/^(tố\s|mách|báo|kể với|mật báo|tâu|dâng thư|dâng sớ)/i,"to-giac"],
+ [/(theo dõi|canh chừng|người canh)/i,"sai-theo-doi"],
+ [/(dò|thăm dò|hỏi thẳng|hỏi thăm|hỏi ma ma|gợi chuyện|lục tìm|hỏi cho ra lẽ)/i,"do-la-h"],
+ [/^(sai|nhờ|giao cho|đổi .* sang việc khác|đổi hắn)/i,"sai-nguoi-tang-h"],
+ [/(xin cung chính ti tra|tra xét)/i,"xin-ht-tra-xet-h"],
+ /* — hide / burn / secret love — */
+ [/(đốt|xóa mọi dấu|xóa dấu|tiêu hủy)/i,"dot-tho-h"],
+ [/(giấu|giữ kín|giữ lại|giữ thư|giữ tín vật|ép cành hoa|cất)/i,"giau-trong-ruong-h"],
+ [/(buông tay|quên ta|quên mình|đừng tìm ta|đừng chờ ta|cắt hẳn|ngừng mọi liên lạc|tránh hẳn|giữ khoảng cách|ta còn gia tộc)/i,"opt-buong-tay"],
+ [/(lời hẹn|nắm tay|như năm ấy|giả sơn)/i,"hen-gap"],
+ /* — harm / timing — */
+ [/(thử bằng kim bạc|thử trước|nếm trước|kim bạc)/i,"nghiem-doc-h"],
+ [/(vu oan|vu cho|phao tin|tung tin|đồn)/i,"vu-oan-h"],
+ [/^(ngày hội đông người|lúc nàng|khi nàng|sau cơn mưa|một đêm vắng)/i,"opt-rinh-cho"],
+ [/(phạt|trách|đánh(?! lạc hướng)|quở|đuổi)/i,"phat-vi-h"],
+ /* — guard the palace — */
+ [/(canh giữ|soát|chuyển đồ quý|đồ quý|giữ đèn nến|che chắn|sửa gấp|thuê thợ|cho người sửa|chắp lại)/i,"opt-canh-giu"],
+ [/(hoảng sợ|hô thị vệ|lao vào cứu)/i,"opt-hoang-so"],
+ /* — kindness / help / talk — */
+ [/(an ủi|vỗ về|khuyên|làm lành)/i,"khuyen-giu-long-the-h"],
+ [/(giúp|đỡ lời|nói giúp|che chở|bênh|cứu|tận tâm)/i,"giup-do-nang-h"],
+ [/(tiệc|pha trà|mời khách|pha .* mời)/i,"bay-o-yen-tiec-h"],
+ [/(chúc mừng|bái kiến|thỉnh an|chào)/i,"bai-kien-h"],
+ [/(xin hoàng thượng|xin ngài|xin thái hậu|xin hoàng hậu|ân điển|ban hôn|ban mạng|xin nội vụ|^xin )/i,"xin-an-dien-h"],
+ /* — prayer / medicine / children — */
+ [/(chép|kinh)/i,"chep-kinh-h"],
+ [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
+ [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
+ [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
+ /* r1: "chàng" alone (any line about him) is the LAST resort — petitions / help for him hit their own group first */
+ [/(chàng)/i,"hen-gap"],
+];
+const kitOptPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/[\s ]+/g," ").trim();
+/* r1 (LUẬT SỬA CẢ NHÓM): a meaning-group hit must be whole words — JS \b does not know Vietnamese letters, so "dò" hit "Viết một dòng",
+   "sớ" hit "sớm", "đồn" hit "đồng minh". A match counts only when no letter touches it on either side. */
+function kitOptHit(re,t){try{const g=new RegExp(re.source,re.flags.replace("g","")+"g");let m;while((m=g.exec(t))){const a=t[m.index-1]||"",z=t[m.index+m[0].length]||"";
+  const L=c=>/\p{L}/u.test(c),s=m[0];if(!(L(a)&&L(s[0]||""))&&!(L(z)&&L(s[s.length-1]||"")))return true;if(!m[0].length)g.lastIndex++}return false}catch(e){return re.test(t)}}
+function kitOptOnCdn(src){try{return typeof kitPhOnCdn!=="function"||kitPhOnCdn(src)}catch(e){return true}}
+/* the picture of an option title: {src, key, how} — how = rule | act | log | own | ph */
+function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if(!k||k==="-")return null;
+  let src="";if(String(k).startsWith("ev:")||String(k).startsWith("scene:")){try{src=(kbkKeySrc(k,"",t,"")||[])[0]||""}catch(e){}}else src=`https://ctm-img.victoria-tntt.workers.dev/img/act-${k}.webp`;
+  return src&&kitOptOnCdn(src)?{src,key:k,how}:null};
+ let r=null;
+ if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
+  try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
+  for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
+ /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
+ if(t){try{const v=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name&&t.startsWith(r.name)):null;
+   const f=v&&typeof pv==="function"?pv(v):/^Hoàng thượng$/.test(t)&&typeof pEmp==="function"?pEmp():/^Thái hậu$/.test(t)&&typeof pTH==="function"?pTH():null;
+   if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}catch(e){}
+  try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&IT[k].n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
+   const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
+ /* a picture the option already carries: that picture, in the slot */
+ if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-act-/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
+ if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())){const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
+  try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
+ return{src:"",key:"",how:"none"}}
+/* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
+/* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
+const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
+function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
+ const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
+ const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
+ const p=kitOptPic(name,b);
+ /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
+ kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());
+ if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
+ let cat="";try{cat=typeof kitActCat==="function"?kitActCat(name):""}catch(e){}const col=(typeof KIT_CAT!=="undefined"&&KIT_CAT[cat]||[])[1]||"";
+ let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+ let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
+ if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
+window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;
+(function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.matches&&b.classList.contains("ka")&&b.matches(KIT_OPT_SEL))kpOptArt(b)}catch(e){}return r}})();
+try{if(typeof kaNorm==="function"&&document.getElementById("modal"))kaNorm(document.getElementById("modal"))}catch(e){}
+
+/* ---- kitPicZoom(src): the picture enlarged over everything; tap anywhere closes (KIT §6.2) ---- */
+function kitPicZoom(src){try{if(!src)return;let z=document.getElementById("kpzoom");if(!z){z=document.createElement("div");z.id="kpzoom";z.setAttribute("role","dialog");
+  z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
+ z.innerHTML=`<div class="kpzf">${kitSceneArt(src,"",{shape:"tall"})}</div>`;z.hidden=false}catch(e){}}
+window.kitPicZoom=kitPicZoom;
+/* capture phase: a tap on an option's picture enlarges it and does NOT choose the option */
+document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kaart[data-kzoom]");if(!a)return;
+ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitPicZoom(a.dataset.kzoom)}catch(x){}},true);
+(function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
+#kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
+#kpzoom[hidden]{display:none!important}
+#kpzoom .kpzf{width:min(78vw,calc(82vh * 3 / 4),506px)}
+button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
+button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
+${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):""}
+/* one option card per row, full width (owner L109: horizontal option cards, no 2-col gaps; with the picture a half-width cell left the
+   rows a thin column). Overrides jk3 31.16 k3grid and the person-dialog 2-column rules (jk4 32.7 / KIT 50 kdpo2, jplace): :is(#mb,*) +
+   the repeated class only lift the specificity above theirs (2 ids, 5 classes). */
+html body #modal :is(#mb,*)>.opts.opts.opts>button.ka.kopt.kart{grid-column:1/-1!important;order:0!important}
+html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body #modal :is(#mb,*)>.kpscopts.kpscopts.kpscopts:has(> button.ka.kopt.kart),.kitpg-opts:has(> button.ka.kopt.kart){display:grid!important;flex-direction:unset!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;align-items:stretch!important;align-content:start!important}
+/* equal sizes: a row is never lower than the picture + padding (the options area scrolls, KIT 32.5: a "1fr" row would be squeezed into
+   its height), so cards with the usual rows are all the same height; a card with more text grows, never clips */
+html body button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important;box-sizing:border-box}
+/* review/opt-pics r1: the person dialog (jk4 32.7 .kdper) sets min-height:max-content on every option (2 ids, 3 classes); in its short
+   scrolling grid at 844x390 that let the rows shrink to 41 px and the 130 px cards OVERLAPPED. The picture floor must win there too. */
+html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
+`;document.head.appendChild(st)})();
+/* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
+ `<div class="opts kitpg-opts">`+
+ [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
+  .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 /* ================= jbuoi: BUỔI TRANSITION (KIT §71, owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) =================
    Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain, j11 / j18 / j93) with a painted time-of-day transition:
    the scene (already holding the next buổi's light, §56) is veiled by a tinted ink wash that thins out; a small painted sky band slides the sun / moon
@@ -28884,7 +29148,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"buổ
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2ddd729e0a12";window.CTM_BUILD=BUILD;
+const BUILD="e1f1553e514c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
