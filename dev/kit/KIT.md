@@ -2480,9 +2480,9 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
   `kitActKey(name)` (ACTS.json lookup) — every name lookup threw, so acts matched by prefix / wildcard lost their own picture across the game
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
 
-### 43.1 SMALL ACT CARD: PORTRAIT PICTURE, TAP = DETAIL, "!" MARK (owner 16/11, review/actcard-small; `dev/build/jk4.js`)
+### 43.1 SMALL ACT CARD: PORTRAIT PICTURE, TAP = DETAIL, ⓘ MARK (owner 16/11, review/actcard-small; `dev/build/jk4.js`)
 The big Hành sự card is unchanged. The small card (§43 compact form) shows the act picture as a 3:4 PORTRAIT rectangle (84x112 px; 72x96 under 420 px), no longer a square.
-Tapping the picture, or the "!" mark (`span.kainfo`, shown only on a small card WITHOUT an odds label `.kodm`), calls `kitActZoom(btn)` = ONE kit pop-up
+Tapping the picture, or the info mark ⓘ (`span.kainfo.ktinfo` = the §46 kit info glyph, no private style; a gold "!" means warning in the kit; shown only on a small card WITHOUT an odds label `.kodm`), calls `kitActZoom(btn)` = ONE kit pop-up
 `kitModal({kind:"info"})` (section 8 frame, `.kbtn` "Đã rõ"): the act picture in `kitArtFrame` (the 3:4 kit picture frame, 28.19), the odds label, the full description,
 the Cần/Tốn/Được rows, and the "why" text of `kitWhyHtml` when there is an odds label. Tapping the odds label itself still opens the why popover (jwhy). No private overlay frame.
 Option cards (`.kopt`) and the big Hành sự card are not touched. Sample: kit page §43.1.
@@ -2528,7 +2528,7 @@ error, no horizontal overflow, 0 page errors).
 _(Numbers: review/kit-fig2 used 37-40, then 42-45; main took 37-43 and tabs-kit 45-47, so kitNameRank = §48, Ân oán = §49, kitEventDp = §50; kitActCompact is main's §43 (one copy, the tabs-kit superset).)_
 ## 48. NAME + RANK ABOVE THE PICTURE · `kitNameRank` (owner 11/15: "people read top to bottom") — `dev/build/jk4.js`
 ONE rule for every person label: the rank on one small line (rank colour), the name under it, THEN the portrait / figure — never under it.
-`kitNameRank(rank, name, col)` → `.knr` (`.knr-r` small rank line, `.knr-n` name). Used by:
+`kitNameRank(rank, name, col, me, small)` → `.knr` (`.knr-r` small rank line, `.knr-n` name); `small` = true adds `.knr-s` (rank .66rem / name .72rem, the smallest kit sizes; compact picker strips, §49.2c) — never a per-place font override. Used by:
 - every person dialog (32.5 / 32.7, the shop seller too): the chip `.kpsn.knr` stands at the TOP of the figure column, centred over its
   person; two chips that touch → the second goes to a second line, still above the heads (kitDpFit lays the people out again under it);
 - Ân oán (§49): both side blocks;
@@ -2656,7 +2656,7 @@ Markup: each picker = `.kpinline.krelpk` (label + kitSubTabs row + strip) — th
 ### 49.2c COMPACT PICKER (owner 15/11 "Khung này choáng space quá" · review/rel-picker) — CSS in jhc `kit-hc`, fit in j79 `kitStripFit`
 Each Ân oán picker is ONE flex row `.kpinline.krelpk`: label (`.krelst`) + kitSubTabs group chips (no band behind them) + the face strip
 (`.pstrip`, flex basis 300 px). The strip sits beside the chips when the width allows, else wraps directly under them. Faces and labels are small:
-a face label is `kitNameRank(rank, shortName, rankColour, me)` — the rank in its rank colour over the short name (owner 11/15 ~793); Ta keeps her
+a face label is `kitNameRank(rank, shortName, rankColour, me, true)` (5th arg = the small size `.knr.knr-s`: rank .66rem over name .72rem, §48) — the rank in its rank colour over the short name (owner 11/15 ~793); Ta keeps her
 glow. The pager ‹ › and the N/M count are shown ONLY when the faces do not all fit: `kitStripFit` measures first with them hidden (`.pstrip.kpall`),
 keeps that when every face is whole, else drops `.kpall` and measures again with the arrows. This applies to EVERY `pager()` strip in the game
 (Hậu cung, Chí tôn, staff, kid, qt, rel...). Never write a custom picker/strip row: use `.krelpk` + `kitSubTabs` + `pager`.
