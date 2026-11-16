@@ -24,7 +24,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
 | D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
 | D31 difficulty-port | review/difficulty-port | opus | RUNNING (port only; numbers within spec; bot table for C7 re-measure) |
-| D33 routes-port | review/routes-port | opus | RUNNING (route numbers within spec; bot table for C7) |
+| D33 routes-port | review/routes-port @d0d22f92 | opus | REVIEWING (review/routes-port-r1, sonnet); bowl art on CDN; bot table in PROGRESS_routes-port.md for C7 |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port @123195a1 (base main 2afdafc3) | sonnet | BLOCKED (KIT REQUEST: podium rework + person dialog chips; then merge main, rebuild, re-run rank-e2e at all viewports) |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
@@ -80,6 +80,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - KIT REQUEST (D36 rank-port, blocks it): (1) podium j90 per owner 08:55Z — characters big/most prominent, podium shrunk to the name-plate under the feet, medal at the plate's top-right, "Ta" tag, optional entry fields fig/face/nameH/you; used by Bảng vàng and other podium users; must match C34 contest-ui podium + KIT_FIG (old implementation: origin/review/rank-ui 895c898ef j90 diff); (2) person dialog jk4: her own chip shows rank+name via kitName(q,{cap:true,named:q===S}) in kitStageFig; figure column sticky for dialogs without options so the full figure shows at 844x390 (895c898ef jk4 + CSS `#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))`); (3) KIT.md text podium §26 and 32.7b from that commit.
 - places-port-r1 (PASS): KIT §76 kitPalaceMap number to confirm; KIT_FLOOR .62 for the new rooms; new shared art thuong-thu-phong-*, a-ca-so-*, dong-cung-* (16 season/buổi + fallback each, gpt-2-6 edits of approved scenes); no kit parts changed.
 - KIT REQUEST (C24 chapter-detail, optional): kitGoalDetail/kitModal head art can't show the chapter's own cover or each hồi's picture (head = tutorial-r2 art(); hồi pictures are in kitSkillCard cards) — add if the owner wants the chapter cover in the head.
+- KIT REQUEST (D33 routes-port): (1) register category loi-rieng «Lối riêng» #2c6e5a in the §6.1 legend (jroute adds it at runtime, as on the owner-approved branch); (2) «MƯU» seal for the shared mini-game frame (blood-test tampering game shows «TÀI NGHỆ»; also needed by D34 scheme games). New shared art img/kit/mg-nghiem-bowl.webp. Pre-existing main bug: Mệnh truyện sub-tab row .ktsub.kcattabs (z-index 6) draws over the «Kiếp này» end-of-life dialog (same family as the .kpbar kcattabs note above).
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -121,3 +122,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q21: owner APPROVED the 3 place paintings (16/11); they go live with merge-train-3.
 - C26b KIT REQUEST (stat-fx number colour, jk4 specificity): APPROVED by the kit keeper. Raise the .ksf- gain/loss rule's specificity inside jstatfx (kit-owned), and do not touch jk4's ink rule for other uses.
 - C41 hint ring KIT REQUEST: APPROVED as a kit part §76 "kitHintRing". D36 podium requests: APPROVED as listed (owner 08:55Z).
+- C7 NOTE (D33 routes, for Foreman C's balance pass): escape 14% per attempt (spec 10–25%); xuất gia 4% (plan 5–20%, small sample; old branch 6%); tư tình exposed 5/5 lives; ẩn dật 8/8 reach «Một đời an nhiên» after 76–208 months. Table: dev/PROGRESS_routes-port.md on review/routes-port.
