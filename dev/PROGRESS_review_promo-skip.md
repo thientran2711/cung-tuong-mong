@@ -86,4 +86,16 @@ Harness: dev/measure/reign.js (full inpage6 "sens" bot, side policy, 80 months, 
 Reading: 0 page errors in 160 lives. The court outcome (who wins) is the same rule before/after; its spread between runs is sample noise
 (n 20 → ±11 points per share). Hoàng thượng side (n 40): winners end ≈ +0.45 rank higher, the Hoàng hậu rate is unchanged (20 %), Thái hậu
 favour −7 on average (the loss works). Thái hậu / quyền thần sides: n 20 is too small to separate a +1 rank from noise; no sign of a jump to
-Hoàng hậu (rankCap 6; the seat keeps its own rules). Per-origin Hoàng hậu rate (run5b, 9-origin rotation, HHSTOP, 30 lives each): below.
+Hoàng hậu (rankCap 6; the seat keeps its own rules). 
+Per-origin Hoàng hậu rate — the original origin harness (dev/measure/run5b.sh: runb.js sens + inpage6 + inx/inpz, 9-origin rotation, HHSTOP,
+5 shards × 6 = 30 lives per build; summary anx.py):
+| build | n | Hoàng hậu | early death | median years to HH | per origin n/HH/died |
+|---|---|---|---|---|---|
+| before (main) | 30 | **43 %** (13) | 30 % | 7.6 | ch 3/1/1 · cn 4/3/1 · cnv 2/1/0 · dtq 5/3/1 · muoi 2/0/2 · nc 3/1/1 · td 1/0/0 · thd 5/3/2 · tt 5/1/1 |
+| after (branch) | 30 | **47 %** (14) | 30 % | 7.1 | ch 4/2/1 · cn 3/1/1 · cnv 3/0/2 · dtq 4/3/1 · muoi 4/2/2 · nc 3/1/0 · td 2/2/0 · thd 3/1/0 · tt 4/2/2 |
+At n = 30 one life = 3 points and the 95 % band is about ±17 points: +4 points (one life) is NOT a measurable change. Note: the BASE build is
+already at 43 %, above the owner band 20–40 % (BALANCE_REPORT final was 33 %); that drift comes from main before this branch, not from it.
+Per-origin cells hold 1–5 lives and cannot be read on their own.
+PROPOSAL (not applied, rule unchanged): if the coordinator wants the overall rate back inside the band, the lever is on main's base balance
+(e.g. BAL.hz / outQ, as in BALANCE_REPORT), not the long-road rewards. If a promo-skip-specific cap is wanted later: (a) BAL.rg.rankCap 6 → 5
+(faction road never makes Hoàng quý phi), or (b) son1 direct only up to Phi (rank ≤ 4) and a waived exam above. Both are one-number changes.
