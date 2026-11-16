@@ -1,7 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
-last wake: 15:50Z 16/11 (start)
+last wake: 16:58Z 16/11
 Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 · Magnific Pro 1,327,514 credits · disk 24 GB free, .git 4.3 GB (no repack).
 
 ## SESSION 4 LOG
@@ -13,6 +13,8 @@ Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 ·
 - 16:05Z D29 r4 SẴN SÀNG KIỂM f388b4de (report on branch review/schedules3-r4) → opus reviewer session_011xDdVPgkrf4Nx6Fu4w3gr5 (review/schedules3-r5); PEOPLE LEDGER opus successor session_011xDdVQ9uFz3dWEEUrZZp9W (review/people-ledger @afcac6cb, continue from handover); old worker session_011xDdVNZkQ6SnAs8Rttsbwj ARCHIVED. Running C: 9.
 - 16:22Z story14-p1-r2 SẴN SÀNG KIỂM f5305341 (8 r1 items fixed; story14-frame 27/27, host, coop 59/59) → opus reviewer session_011xDdVSfRLPar78kg13jMBC (review/story14-p1-r3); worker ARCHIVED. Running C: 9.
 - 16:34Z title-sys2 SẴN SÀNG KIỂM 21b9df01 → opus reviewer session_011xDdVNMjqyAEQPc7T7HLVd (review/title-sys2-r1); worker ARCHIVED. Art owed: item-sacphong, item-ngocan (item art batch once owner OKs the item-art sample). KIT REQUEST (optional): 'Hiệu ban' equip slot → main kit keeper. Running C: 9.
+- 16:58Z WAKE: new inbox (FOREMAN_C.md 16:05Z/16:30Z/16:50Z s20: redraw ALL Thái hậu pictures, less bulky robes, head ≈1/8 → sent to fig-proportion worker; 16:58Z download + 'Có bản mới' glyph → icon-art worker). fig-proportion SAMPLE (Thái hậu + 2 worst; ~100 figures to redraw ≈4,000 cr) looked at → SENT to the owner. GO-LIVE OD:L1370: C fast-forwards its own PASS branches. merge-train-9 IN list has art-complete-r2 only; "every older PASS line" already on main. NOT on main and NOT in train-9: title-sys-r1 ced2edc6 + b-answers-art-r1 82756a80 → C goes live with them itself (main s20: do NOT push these twice) — sonnet go-live prep worker session_011xDdVSCv8mDYUgLi7Fk1U6 re-merges onto latest main + quick check → READY shas → Foreman C FF. origin-intros worker at ~33% ctx → told to finish or write HANDOVER. Reviewers running: schedules3-r5, story14-p1-r3, title-sys2-r1. Running C: 11.
+GO-LIVE PUSHES (sha, branch, what changed): (none yet)
 - PENDING for next wake: owner verdicts on the 15:45Z samples (title plates, item art audit, cắm hoa) → mass-production workers.
 
 ## HANDOVER (Foreman C session 3 → session 4, 15:50Z 16/11)
