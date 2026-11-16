@@ -1433,7 +1433,7 @@ Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái
   is centred in the column; train / hem / outer sleeve wider than the column is cut at the column edge with a 24 px soft fade. The old
   "train runs behind the text on a paper panel" (.kbk-figover) is retired. Test: `dev/test/book-figwide.js` (+ overText = figure px under the text, faceIn).
 - INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) keep the small 3:4 portrait (§8 .kpsubj); the stage column is for
-  EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) — kitEventStage returns early on those kinds.
+  EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) — kitEventStage returns early on those kinds unless the panel names its stage itself (`stage:[…]`: the Nội vụ phủ shop, pet care).
 - MAIN ACTOR: the column shows the first person who is not the player (stage / who); the player stands there only when the event is about her
   alone (then as rank + name, never "Ngươi" — owner rule: rank and name always together).
 - TRUE PROPORTIONS (owner 15/11 "figure squashed"): a person picture is never scaled differently in X and Y. kitDpFit takes the aspect from

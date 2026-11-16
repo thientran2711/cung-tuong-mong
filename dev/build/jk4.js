@@ -154,7 +154,7 @@ function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.query
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
  /* KIT §8 / 32.2 (coordinator 15/11, kit-sample audit): an INFO panel about a person (ĐIỀU · info / LUẬT · rule / NGƯỜI · person report)
     keeps the small 3:4 portrait (.kpsubj); the full-body stage column is for EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) */
- if(/^(info|rule|person)$/.test(dlg.dataset.kind||""))return false;
+ if(/^(info|rule|person)$/.test(dlg.dataset.kind||"")&&!Array.isArray(m&&(m.stage||(m.kit&&m.kit.stage))))return false;/* a panel that names its stage itself (the Nội vụ phủ shop, pet care) keeps it */
  const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
@@ -444,7 +444,7 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
    changes (first list, then the merged one) and the open dialog names a person but has no stage column, the dialog is drawn again (same Q[0], showModal). */
 (function(){let n=0,last=null;const t=setInterval(()=>{try{if(++n>200){clearInterval(t);return}if(typeof FIGS==="undefined"||!FIGS.length||FIGS===last)return;last=FIGS;/* j28 sets a first list (FIGURES.json), j39 loadFigs replaces it with the merged one (Thái hậu, officials …): retry on each */
  const M=document.getElementById("modal");const m=typeof Q!=="undefined"&&Q[0];if(!M||M.hidden||!m)return;const d=M.querySelector(".dlg.kpanel");
- if(!d||/^(info|rule|person)$/.test(d.dataset.kind||"")||M.querySelector("#mb .kpsubj.kes")||!kitStagePeople(m).length)return;showModal()}catch(e){}},300)})();
+ if(!d||(/^(info|rule|person)$/.test(d.dataset.kind||"")&&!Array.isArray(m.stage||(m.kit&&m.kit.stage)))||M.querySelector("#mb .kpsubj.kes")||!kitStagePeople(m).length)return;showModal()}catch(e){}},300)})();
 /* kitEsFit (33.6) sizes figures in the old side column; a 32.7 column is sized by kitDpFit instead */
 (function(){const e0=kitEsFit;kitEsFit=function(row){if(row&&row.closest&&row.closest(".dlg.kdper"))return kitDpFit();return e0.apply(this,arguments)};window.kitEsFit=kitEsFit})();
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDpApply();requestAnimationFrame(kitDpFit)}catch(e){}return r};
