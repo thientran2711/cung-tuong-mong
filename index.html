@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt","b":"e0453471964d","h":[{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"}]};
+window.CTM_BI={"s":"b1aaacea","t":"2026-11-16T22:21Z","c":"coop-contest-r1: coop-contest.js counts only host-made items on the friend entry (main B1 mirrors her real bag, items with ci)","b":"1bd7f01f7ef2","h":[{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -2101,8 +2101,8 @@ function rivalsMonth(){let ev="";
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artW2(p,"vu")*6:(artW2(p,"cam")+artW2(p,"thi"))*3;
  const sc=C.map(p=>(k==="sac"?effSac(p):p[k])+art(p)+R(wet()?40:30)+(wet()&&k==="sac"?-artW2(p,"vu")*3:0));const wi=sc.indexOf(Math.max(...sc)),w=C[wi];
- ap(w,{sung:8,danh:3});if(roll(50))bestow(w,"contest");
- if(w===S){ghenAll(8);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
+ ap(w,BAL.fest.fxWin);if(roll(BAL.fest.fxBestow))bestow(w,"contest");
+ if(w===S){ghenAll(BAL.fest.fxGhen);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}. `}
  apply({danh:-2});return `<span class="r">${title}: ${w.name} chiếm hết phong quang, ngươi lu mờ.</span> Danh -2. `}
 function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}
 
@@ -4008,17 +4008,19 @@ function myBetween(){if(quiet)return;const c=ct();const R2=c.c.map(byKey).filter
 function scoreTable(){const c=ct();if(!c)return"";return kitRows(c.c.map(byKey).filter(Boolean).map(p=>{const s=c.sc[key(p)]||[];const tot=s.reduce((a,b,i)=>a+b*crW(i),0);return [`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}${c.dq.includes(key(p))?' <span class="ef r">bị loại</span>':""}`,`${s.map((x,i)=>`${CR[i][0]}${x}`).join(" · ")||"-"}${s.length?` = ${Math.round(tot*10)/10}`:""}`,"t"]}))}
 function runRound(){const c=ct();const i=c.round;const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!c.dq.includes(key(p)));
  for(const p of C){if(p===S)continue;const s=c.sc[key(p)]=c.sc[key(p)]||[];s[i]=i===0?tScore(p,bestArtOf(p)):i===1?dScore(p,roll(40+(p.tamco||0)/2)?judgeVirtue():pick(["nhan","le","tri"])):fScore(p)}
- if(C.includes(S)){const s=c.sc.me=c.sc.me||[];
+ if(C.includes(S))myRound(i);
+ c.round++}
+/* her own part of round i (split out for co-op: the guest plays her rounds on the host's shared contest, jcoopcontest.js) */
+function myRound(i){const c=ct();const s=c.sc.me=c.sc.me||[];
   if(i===0){const arts=["cam","ky","thi","hoa","vu"].sort((a,b)=>(S.arts[b]||0)-(S.arts[a]||0));if(quiet){s[0]=tScore(S,arts[0]);}else Q.push({ev:1,t:"Vòng 1: Tài nghệ",who:pEmp(),h:`<p>Trước Hoàng thượng, ngươi trình diễn môn nào?</p>`,opts:arts.map(a=>({n:(ARTS.find(x=>x.k===a)||{n:a}).n,fx:{},x:`bậc ${S.arts[a]||0} · phần = bậc + màn diễn${(c.pr.me||0)?` + luyện tập ${c.pr.me}`:""}`,go:()=>{const done=g=>{s[0]=tScore(S,a,Math.min(3,g));log(`Vòng Tài nghệ: ngươi được ${s[0]}/10.`);};if(window.__bot||typeof openMG!=="function")done(R(4));else openMG(a,S.arts[a]||0,g=>done(g))}}))});}
   else if(i===1){const D=pick(DILEMMAS);const hint=c.hint?`<p class="past">Ngươi đoán người xét trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.</p>`:`<p class="past">Chưa rõ người xét trọng điều gì (chuyện trò với Hoàng thượng hoặc Thái hậu trước để đoán).</p>`;
    if(quiet)s[1]=dScore(S,pick(["nhan","le","tri"]));else Q.push({ev:1,t:"Vòng 2: Đức hạnh",who:pTH(),h:`<p>${D[0]}</p>${hint}`,opts:D[1].map(([v,n])=>({n,fx:{},x:`phần theo ý người xét + Đức ${S.duc}, Tâm cơ ${S.tamco}`,go:()=>{s[1]=dScore(S,v);log(`Vòng Đức hạnh: ngươi được ${s[1]}/10.`)}}))})}
   else{s[2]=fScore(S);log(`Vòng Thế lực: ${backers(S).join(", ")||"không ai"} đứng sau ngươi: ${s[2]}/10.`)}}
- c.round++}
 function contestEnd(){const c=ct();const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!p.out&&!c.dq.includes(key(p))&&rkOf(p)===c.r-1);S.contest=null;if(!C.length)return"";
  const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));const w=C[0];
- let res;if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(10)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){if(w===S){S.rank++;S.lastPromo=S.turn}else{w.rank++;w.lastPromo=S.turn}}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
- for(const p of C.slice(1)){oanAdd(p,w,10);if(p!==S&&w===S)p.ghen=cl(p.ghen+10,0,100)}
- const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (+10)${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
+ let res;if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.fest.ctGhen)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){if(w===S){S.rank++;S.lastPromo=S.turn}else{w.rank++;w.lastPromo=S.turn}}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
+ for(const p of C.slice(1)){oanAdd(p,w,BAL.fest.ctOan);if(p!==S&&w===S)p.ghen=cl(p.ghen+BAL.fest.ctGhen,0,100)}
+ const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (+${BAL.fest.ctOan})${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
 /* weekly driver: one round per tuần (Hoàng hậu seat: one per month), acts between */
 function contestWeek(){const c=ct();if(!c)return;if(!c.c.map(byKey).some(p=>p&&(p===S||p.alive)))return void(S.contest=null);const gap=c.len;if((wk()-c.t0)%gap!==0||wk()===c.t0)return;
  if(c.round<3){for(const k of c.c){const p=byKey(k);if(p&&p!==S&&p.alive&&!c.dq.includes(k))npcContestAct(p)}runRound();if(c.round<3&&c.c.includes("me")&&!c.dq.includes("me"))myBetween();if(c.round>=3)contestEnd()}else contestEnd()}
@@ -4362,6 +4364,15 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
+/* ONE CORE for festival contests (review/coop-contest-r1): read by j71 (solo), j8 festival(), j34 Tranh ghế and jcoopcontest (co-op), never typed twice.
+   gift (Dâng lễ, P): an NPC gift weighs rich (bạc >= richBac: richV, she pays cost) else max(min, Tài*kTai + Họa*kHoa + người hầu*kHelp);
+   her three gifts = [richV (ngọc quý, cost bạc), her own weight, plain]; every gift + luck*rand. praise/small to the best gift, miss if she gives none.
+   fxWin = the feast-contest winner (Yến tiệc đầu xuân / Thất tịch, j8 festival); fxGhen / winGhen = rivals' jealousy when she wins a feast /
+   a festival contest; giftGhen = when her gift wins; fxBestow / winBestow = odds (word ladder) of the Emperor's gift to the winner.
+   ctOan / ctGhen = Tranh ghế: Oán of each loser toward the winner; jealousy when she is crowned. */
+Object.assign(BAL,{fest:{gift:{richBac:100,richV:55,cost:60,min:15,plain:15,luck:25,kTai:.3,kHoa:8,kHelp:.8,
+  praise:{th:{th:4,danh:1},emp:{sung:3,danh:1}},small:{th:{th:1},emp:{sung:1}},miss:{th:{th:-2},emp:{sung:-2}}},
+ fxWin:{sung:8,danh:3},fxGhen:8,winGhen:4,giftGhen:3,fxBestow:50,winBestow:30,ctOan:10,ctGhen:10}});
 /* ================= KIT 33 · ONE FIGURE SCALE — KIT_FIG (owner 11/15 "people on the stage are too small") =================
    The single source of truth for how big full-body people are drawn: h = figure (visible body, head to feet) / stage-or-picture height;
    man = men's height factor; kid(age) = children's factor by age; fac(src,age) = the factor of one figure file for one person.
@@ -9588,6 +9599,12 @@ const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ng�
 function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
+/* ONE CORE (BAL.fest): the gift weights and the feast prize, read by solo (here, j8) and co-op (jcoopcontest) alike */
+function giftW7(v){const g=BAL.fest.gift;return Math.max(g.min,(v.tai||0)*g.kTai+aw7(v,"hoa")*g.kHoa+help7(v)*g.kHelp)}
+function gift7(v){const g=BAL.fest.gift;return (v.bac||0)>=g.richBac?g.richV:giftW7(v)}
+function myGifts7(){const g=BAL.fest.gift;return [g.richV,Math.round((S.tai||0)*g.kTai+aw7(S,"hoa")*g.kHoa+help7(S)*g.kHelp),g.plain]}
+function giftPay7(v){const g=BAL.fest.gift;if((v.bac||0)>=g.richBac)ap(v,{bac:-g.cost})}
+function pzd7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(" · ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */
 function fvPick(k,noC){const j=j7s(),L=FV7[k]||[];const ok=i=>{const t=L[i][0];if(noC&&t==="C")return false;if(S.thDead&&(L[i][1]==="th"||/Thái hậu/.test(L[i][2])))return false;if(t==="G"&&!liveRivals(true).some(v=>present7(v)&&(v.bac||0)>=25))return false;return true};
  let idx=[...L.keys()].filter(ok);const used=j.vu["f:"+k]||[];let pool=idx.filter(i=>!used.includes(i));if(!pool.length){j.vu["f:"+k]=[];pool=idx}
@@ -9610,8 +9627,8 @@ function det7(kind,p){return SC7[kind].by.split(", ").map(n=>ST7[n]?`${n} ${Math
 function cScore7(E,kindOf,prep,meB,her){return E.map(p=>{const kind=kindOf(p);if(p===S&&her&&her.score!=null)return{p,kind,t:Math.round(her.score),pr:0,lk:0,s:Math.round(her.score),mg:1};const t=Math.round(SC7[kind].f(p));let pr=0;if(p===S)pr=meB;else if(prep.includes(p.id)&&(p.bac||0)>=20){ap(p,{bac:-20});pr=J71.prep}const lk=Math.round(Math.random()*J71.luck);return{p,kind,t,pr,lk,s:t+pr+lk}}).sort((a,b)=>b.s-a.s)}
 function rowsH7(L,title){return `<p class="past">${title}</p>`+L.map((x,i)=>x.mg?`<p><b>${i+1}. Ngươi — ${SC7[x.kind].n}: ${x.s} phần tự chơi (đã cộng tài nghệ: ${det7(x.kind,x.p)}, và chuẩn bị)</b></p>`:`<p>${x.p===S?"<b>":""}${i+1}. ${x.p===S?"Ngươi":x.p.name} — ${SC7[x.kind].n}: ${x.s} phần = ${x.t} tài nghệ (${det7(x.kind,x.p)})${x.pr?` + ${x.pr} chuẩn bị`:""} + ${x.lk} may rủi${x.p===S?"</b>":""}</p>`).join("")+`<p class="past">Phần tài nghệ tính theo tài sắc thật của mỗi người vào ngày hội; may rủi từ 0 đến ${J71.luck}, như nhau cho mọi người.</p>`}
 function cRun7(k,kind,E,prep,meB,meIn,her){const L=cScore7(E.filter(p=>meIn||p!==S),()=>kind,prep,meB,her);
- if(!L.length)return"";const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}
- const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(roll(30))bestow(S,"contest")}catch(e){}}
+ if(!L.length)return"";const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}
+ const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
  const top=L.slice(0,3).map((x,i)=>`${["Nhất","Nhì","Ba"][i]} ${gn7(x.p)} (${x.s})`).join(", ");const mi=L.findIndex(x=>x.p===S);
  let me="";if(mi>=0){me=mi<3?"":` · ngươi hạng ${mi+1}/${L.length}`;if(mi===1||mi===2){apply({danh:1});me+=` · ngươi hạng ${mi+1}: Danh +1`}if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=", đứng chót: Danh -1"}}
  const head=w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${meIn?R7("Không thành:")+" ":""}${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`;
@@ -9622,7 +9639,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
  const fill=s=>s.replace(/\{A\}/g,A?A.name:"một phi tần");let o=[];let who=pEmp();let h=`<p class="past">${fn}</p><p>${fill(txt)}</p>`;
  if(t==="C"){const E=[S].concat(ents7(pp)),c=SC7[sub],pz=prize7(k);const p1=cOdds7(sub,E,pp.pr||[],0,pp.sd),p2=cOdds7(sub,E,pp.pr||[],J71.prep,pp.sd+7);
   h+=`<p>Chấm theo ${c.by}. Dự thi: ngươi và ${E.length-1} phi tần${(pp.pr||[]).length?`; ${(pp.pr||[]).length} người đã bỏ bạc chuẩn bị trước`:""}.</p>`;
-  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,kem=`kèm: thắng thì các phi tần ghen +4`,lose=`hỏng: đứng chót thì Danh -1`;
+  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,kem=`kèm: thắng thì các phi tần ghen +${BAL.fest.winGhen}`,lose=`hỏng: đứng chót thì Danh -1`;
   const run=(b)=>()=>{log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],b,true)}`)};
   o.push({n:`Dự thi ${c.n}`,fx:{suc:-J71.cost},x:`${word(p1)} · ${gain} · ${lose} · ${kem}`,go:run(0)});
   o.push({n:`Chuẩn bị kỹ rồi dự thi`,fx:{suc:-J71.cost,bac:-20},x:`${word(p2)} · ${gain} · ${lose} · ${kem}`,go:run(J71.prep)});
@@ -9631,8 +9648,8 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
   else o.push({n:"Không dự, đứng xem",fx:{},x:"không được không mất",go:()=>log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)}`)})}
  else if(t==="W"){const N=WT7[sub]||WT7.thuyen,s=pp.s||[50,50,50,50],sum=s.reduce((a,b)=>a+b,0);const P=s.map(x=>x/sum);const hi=s.indexOf(Math.max(...s)),lo=s.indexOf(Math.min(...s));
   h+=`<p>${N.map((n,i)=>`${i?n:n[0].toUpperCase()+n.slice(1)}: ${form7(s[i])}`).join(" · ")}.</p>`;const pay=i=>Math.round(20/P[i]*.9);
-  const bet=i=>({n:`Cược ${N[i]}`,fx:{bac:-20},x:`${word(P[i]*100)} · thành: Bạc +${pay(i)} · hỏng: mất tiền cược`,go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}if(wi===i){apply({bac:pay(i)});log(`${fn}: ${N[wi]} về nhất; ngươi thắng cược, Bạc +${pay(i)}.`)}else log(`${R7("Không thành:")} ${fn}: ${N[wi]} về nhất; ngươi cược ${N[i]}, mất 20 bạc.`)}});
-  o.push(bet(hi));if(lo!==hi)o.push(bet(lo));o.push({n:"Không cược, chỉ xem",fx:{},x:"không được không mất",go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}log(`${fn}: ${N[wi]} về nhất.`)}})}
+  const bet=i=>({n:`Cược ${N[i]}`,fx:{bac:-20},x:`${word(P[i]*100)} · thành: Bạc +${pay(i)} · hỏng: mất tiền cược`,go:()=>{let r=(pp.sd?rng7(pp.sd+3)():Math.random())*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}if(wi===i){apply({bac:pay(i)});log(`${fn}: ${N[wi]} về nhất; ngươi thắng cược, Bạc +${pay(i)}.`)}else log(`${R7("Không thành:")} ${fn}: ${N[wi]} về nhất; ngươi cược ${N[i]}, mất 20 bạc.`)}});
+  o.push(bet(hi));if(lo!==hi)o.push(bet(lo));o.push({n:"Không cược, chỉ xem",fx:{},x:"không được không mất",go:()=>{let r=(pp.sd?rng7(pp.sd+3)():Math.random())*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}log(`${fn}: ${N[wi]} về nhất.`)}})}
  else if(t==="G"){if(!A)return null;who=pv(A);const st=Math.min(50,Math.floor((A.bac||0)/2));const g=n=>({n:`Chơi ván ${n>=40?"lớn":"nhỏ"} (${n} bạc)`,fx:{bac:-n},x:`${word(50)} · thành: Bạc +${n*2} (lấy lại tiền cược và ${n} của ${A.name}), ${A.name} thiện cảm +2 · hỏng: mất tiền cược, ${A.name} thiện cảm +2`,
    go:()=>{relAdd(S,A,2);if(roll(50)){apply({bac:n*2});ap(A,{bac:-n});log(`${fn}: ngươi thắng ${A.name} ván ${n} bạc.`)}else{ap(A,{bac:n});log(`${R7("Không thành:")} ${fn}: ${A.name} thắng ngươi ván ${n} bạc.`)}}});
   o.push(g(20));if(st>=40)o.push(g(40));o.push({n:"Từ chối khéo",fx:{},x:"không được không mất",go:()=>log(`${fn}: ngươi từ chối khéo lời rủ của ${A.name}.`)})}
@@ -9644,17 +9661,17 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh +4, Sủng +2${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh -2`,go:()=>{if(roll(po)){apply({danh:4,sung:2});G.forEach(v=>relAdd(S,v,6));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
    if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm +4`)}, Danh +1`,go:()=>{relAdd(S,G[0],4);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
    o.push({n:"Không bày tiệc, nghỉ ngơi",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi nghỉ trong cung.`)}})}}
- else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const gift=v=>(v.bac||0)>=100?55:Math.max(15,(v.tai||0)*.3+aw7(v,"hoa")*8+help7(v)*.8);
-  const mine=[55,Math.round((S.tai||0)*.3+aw7(S,"hoa")*8+help7(S)*.8),15];const rv=R2.map(gift);
-  const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*25;if(rv.every(x=>x+r()*25<m))w++}return cl(Math.round(w/5),3,97)};
-  const praise=th?{th:4,danh:1}:{sung:3,danh:1},small=th?{th:1}:{sung:1};const tg=th?"Thái hậu":"Hoàng thượng";
-  const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25}));L.push({p:S,s:mine[i]+Math.random()*25});L.sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});const w=L[0].p;
-   if(w===S){apply(praise);ghenAll(3);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
+ else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const GL=BAL.fest.gift.luck;
+  const mine=myGifts7();const rv=R2.map(gift7);
+  const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*GL;if(rv.every(x=>x+r()*GL<m))w++}return cl(Math.round(w/5),3,97)};
+  const GF=BAL.fest.gift,praise=GF.praise[th?"th":"emp"],small=GF.small[th?"th":"emp"];const tg=th?"Thái hậu":"Hoàng thượng";
+  const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*GL}));L.push({p:S,s:mine[i]+Math.random()*GL});L.sort((a,b)=>b.s-a.s);R2.forEach(giftPay7);const w=L[0].p;
+   if(w===S){apply(praise);ghenAll(BAL.fest.giftGhen);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
   h+=`<p>${R2.length} phi tần khác cũng dâng lễ.</p>`;
-  o.push({n:"Dâng ngọc quý",fx:{bac:-60},x:`${word(odds(mine[0]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +3`,go:run(0)});
-  o.push({n:"Tự tay làm lễ vật (theo Họa, Tài, người hầu)",fx:{suc:-10},x:`${word(odds(mine[1]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +3`,go:run(1)});
+  o.push({n:"Dâng ngọc quý",fx:{bac:-GF.cost},x:`${word(odds(mine[0]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +${BAL.fest.giftGhen}`,go:run(0)});
+  o.push({n:"Tự tay làm lễ vật (theo Họa, Tài, người hầu)",fx:{suc:-10},x:`${word(odds(mine[1]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +${BAL.fest.giftGhen}`,go:run(1)});
   o.push({n:"Lễ mọn cho phải phép",fx:{bac:-10},x:`${word(odds(mine[2]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: không được gì`,go:run(2)});
-  const miss=th?{th:-2}:{sung:-2};o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25})).sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
+  const miss=GF.miss[th?"th":"emp"];o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*GL})).sort((a,b)=>b.s-a.s);R2.forEach(giftPay7);if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
  else if(t==="R"){const lead=S.rank>=4;const po=cl(Math.round((lead?50:35)+(S.duc||0)/3),10,92);who=S.thDead?pEmp():pTH();
   o.push({n:lead?"Đứng hàng đầu dâng hương":"Xin đứng hầu gần hương án",fx:{suc:-5},x:`${word(po)} · thành: Danh +3, ${S.thDead?"Sủng +2":"Thái hậu với ngươi +3"} · hỏng: sơ suất nghi lễ, Danh -2`,go:()=>{if(roll(po)){apply(S.thDead?{danh:3,sung:2}:{danh:3,th:3});log(`${fn}: ngươi hành lễ chu đáo, được khen.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: ngươi sơ suất trong lúc hành lễ, bị chê.`)}}});
   o.push({n:"Cúng dường bạc dầu đèn",fx:{bac:-15},x:"Đức +2, Lòng cung nữ +3",go:()=>{apply({duc:2,maid:3});log(`${fn}: ngươi cúng dường dầu đèn.`)}});
@@ -9858,7 +9875,7 @@ function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
   if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +4`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
+   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +${BAL.fest.winGhen}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),BAL.fest.winBestow),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0);if(L.length)cFin7(k,V[1],L)}}]};
   if(meIn)apply({suc:-J71.cost});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
@@ -9874,13 +9891,13 @@ function mgRun7(o){/* o: {title, art, E (incl. S), kindOf, pr, meB, done(L)} */c
  const fin=res=>{try{const sc=res&&typeof res.score==="number"?res.score:null;const her=sc!=null?{p:S,kind:o.art,t:Math.round(sc),pr:0,lk:0,s:Math.round(sc),mg:1}:cScore7([S],()=>o.art,[],o.meB)[0];const L=L0.concat([her]).sort((a,b)=>b.s-a.s);o.done(L,!!(res&&res.shown));showModal();render()}catch(e){console.error(e)}};
  try{startContest({art:o.art,artName:SC7[o.art].n,title:o.title,rivals:L0.map(x=>({id:x.p.id,name:x.p.name,face:pv(x.p),score:x.s,talent:x.t,prep:x.pr,luck:x.lk})),prep:o.meB,talent:Math.round(SC7[o.art].f(S)),talentBy:det7(o.art,S),luck:J71.luck,stakes:o.stakes,big:o.big,fk:o.fk,onDone:fin})}catch(e){console.error(e);fin(null)}}
 /* apply a finished contest (any source): prize to the winner, her rank effects, rows */
-function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(!cu&&roll(30))bestow(S,"contest")}catch(e){}}
+function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(!cu&&roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
  const mi=L.findIndex(x=>x.p===S);let me="";if(mi>0){if(mi<=2){apply({danh:1});me=` Ngươi hạng ${mi+1}: Danh +1.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=" Đứng chót: Danh -1."}}
  log(`${fName7(k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${R7("Không thành:")} ${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
  if(!shown)Q.push({t:`${fShort7(k)} · Hội thi ${SC7[kind].n}: kết quả`,h:rowsH7(L,`${fName7(k)} · bảng phần thi`),who:pEmp(),must:1})}
-function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,{sung:8,danh:3});const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&roll(50))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
- if(w===S){ghenAll(8);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3.`)}
- else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
+function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,BAL.fest.fxWin);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
+ if(w===S){ghenAll(BAL.fest.fxGhen);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}.`)}
+ else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(BAL.fest.fxWin)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
  if(mi>=0&&!shown)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1})}
 /* ---------- the old automatic feast contests (Yến tiệc đầu xuân, Thi tài ngày Thất tịch): now an invitation a month before, her talent of choice ---------- */
 const FX7={sac:{f:"xuan",n:"Yến tiệc đầu xuân",m:1,arts:["mua","hat","dan"]},tai:{f:"tt",n:"Thi tài ngày Thất tịch",m:7,arts:["dan","tho","kim"]}};
@@ -9888,7 +9905,7 @@ function fxBest7(p,A){let b=A[0],v=-1;for(const a of A){const x=SC7[a].f(p);if(x
 function fxOdds7(F,art,meB,seed){const E=[S].concat(liveRivals(true).filter(present7));const r=rng7(seed);let w=0;const N=500;const base=E.map(p=>p===S?SC7[art].f(S)+meB:SC7[fxBest7(p,F.arts)].f(p));
  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+r()*J71.luck;if(x>b){b=x;bi=i}}if(bi===0)w++}return cl(Math.round(100*w/N),3,97)}
 PEND.j71x=pp=>{if(!S)return null;const F=FX7[pp.kk];if(!F)return null;const n=liveRivals(true).filter(present7).length;const best=fxBest7(S,F.arts);
- const gain="thành: đứng đầu, Sủng +8, Danh +3, có thể được ban thưởng",lose="hỏng: đứng chót thì Danh -1",kem="kèm: ngày hội tốn Sức -6, đứng đầu thì các phi tần ghen +8";
+ const gain=`thành: đứng đầu, ${pz7(BAL.fest.fxWin)}, có thể được ban thưởng`,lose="hỏng: đứng chót thì Danh -1",kem=`kèm: ngày hội tốn Sức -${J71.cost}, đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`;
  const set=(a,pr)=>()=>{const j=j7s();j.fx=j.fx||{};j.fx[F.f]={y:pp.y,a,pr};log(a?`${F.n}: ngươi ghi tên dâng ${SC7[a].n}${pr?", bỏ bạc mời thầy kèm":""}.`:`${F.n}: ngươi không ghi tên.`)};
  const o=F.arts.map(a=>({n:`Ghi tên dâng ${SC7[a].n} (theo ${SC7[a].by})`,fx:{},od:fxOdds7(F,a,0,pp.sd),x:`${word(fxOdds7(F,a,0,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(a,0)}));
  o.push({n:`Dâng ${SC7[best].n}, bỏ bạc mời thầy kèm trước`,fx:{bac:-30},od:fxOdds7(F,best,J71.prep,pp.sd),x:`${word(fxOdds7(F,best,J71.prep,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(best,1)});
@@ -9901,13 +9918,13 @@ function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0
   const E=liveRivals(true).filter(present7);if(me)E.unshift(S);if(E.length<2)return "";if(me)me.done=1;
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
   if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:"đứng đầu, Sủng +8, Danh +3, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +8",go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:8,danh:3},50),done:(L,sh)=>fxFin7(title,L,sh)})},
+    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, ${pz7(BAL.fest.fxWin)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7(BAL.fest.fxWin,BAL.fest.fxBestow),done:(L,sh)=>fxFin7(title,L,sh)})},
      {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0))}]});return ""}
   if(me)apply({suc:-J71.cost});
-  const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,{sung:8,danh:3});if(roll(50))try{bestow(w,"contest")}catch(e){}
+  const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,BAL.fest.fxWin);if(roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);
-  if(w===S){ghenAll(8);r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
-  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+="Ngươi đứng chót: Danh -1. "}}
+  if(w===S){ghenAll(BAL.fest.fxGhen);r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}. `}
+  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(BAL.fest.fxWin)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+="Ngươi đứng chót: Danh -1. "}}
   if(me)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1});
   /* j54: married daughters come back, princesses perform (same as before) */
   try{const V=[];h54Daus().forEach(([k,p])=>{if(k.hW&&k.hW.kind!=="hoa"&&h54Live(p)){k.hM=cl(k.hM+2,0,100);if((k.hW.joy||50)>=40){ap(p,{sung:1});if(p===S)V.push(h54Name(k))}}});
@@ -15510,17 +15527,18 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   all.push({who:S,p:S,me:1,id:"me",name:S.name,score,sub:`màn thi ${raw}/10 (${skill}) + tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""}`});
   const ord=all.filter(x=>!x.me).sort((a,b)=>b.score-a.score);ord.splice(place-1,0,all[all.length-1]);
   /* real prizes by place (jcui, BAL.cp): themed item + bạc + chest + title + Emperor's gift; NPC winners are paid the same */
-  let cup=null;try{if(typeof cuAward==="function")cup=cuAward(o,ord,place,of,kind)}catch(e){console.error(e)}
-  const st=o.stakes||null;let gains=[],losses=[];if(st){if(place===1)gains=kg82Norm(st.win);else if(place<=3)gains=kg82Norm(st.top3);if(place===of&&of>2)losses=kg82Norm(st.last);losses=losses.concat(kg82Norm(st.paid));
+  /* co-op shared board (jcoopcontest.js, o.hold): the host ranks both players + NPCs once; no prize and no place here until that one list comes */
+  let cup=null;if(!o.hold)try{if(typeof cuAward==="function")cup=cuAward(o,ord,place,of,kind)}catch(e){console.error(e)}
+  const st=o.hold?null:(o.stakes||null);let gains=[],losses=[];if(st){if(place===1)gains=kg82Norm(st.win);else if(place<=3)gains=kg82Norm(st.top3);if(place===of&&of>2)losses=kg82Norm(st.last);losses=losses.concat(kg82Norm(st.paid));
    const neg=gains.filter(x=>x[1]<0);gains=gains.filter(x=>x[1]>0);losses=losses.concat(neg);
    if(o.applyStakes){const ob={};const add=s=>{if(s&&!Array.isArray(s))for(const k in s)ob[k]=(ob[k]||0)+s[k]};if(place===1)add(st.win);else if(place<=3)add(st.top3);if(place===of&&of>2)add(st.last);try{apply(ob)}catch(e){}}}
   if(cup&&cup.mine&&cup.mine.bac)gains.push(["Bạc",cup.mine.bac]);
-  const pw=["Nhất","Nhì","Ba"][place-1]||`Hạng ${place}`;
+  const pw=o.hold?`Tạm đứng thứ ${place}`:(["Nhất","Nhì","Ba"][place-1]||`Hạng ${place}`);
   const sRows=[["Màn thi",skipped?`${raw}/10 (để tài nghệ quyết định) → ${kg82Plain(kg82Chip("cộng",skill,"g"))}`:`${raw}/10 · ${kg82Word(raw)} → cộng ${skill}`,"t"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[],[["Tổng",`<b>${score}</b> phần`,"t"]]);
   const stand=kg82Facts(ord.map((x,i)=>({who:x.who,auto:false,text:`<span class="kgrow"><span><b class="kgpl">${i+1}.</b> ${kg82Name(x.p,x.name)}</span><b>${x.score}</b></span><small>${x.sub}</small>`})));
   const tail=typeof kitGameResult==="function"?kitGameResult({place:pw,of,gains,losses,note:st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"")}):
    kg82Rows([["Hạng",`${pw} / ${of}`,"t"],["Được",gains.map(x=>kg82Chip(x[0],x[1],"g"))],["Mất",losses.map(x=>kg82Chip(x[0],x[1],"r"))]]);
-  const note=st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"");
+  const note=o.hold?(o.holdNote||"Bảng định thứ chung và thưởng phạt báo ở bảng kế tiếp."):st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"");
   const tParts=partsOk?me.parts:[[`Tài nghệ${o.talentBy?` (${o.talentBy})`:""}`,talent]];
   const kitRes=typeof kitGameResult==="function"?kitGameResult({parts:[["Màn thi",skipped?`Để tài nghệ quyết định, ${raw}/10 → +${skill}`:`${kg82Word(raw)} ${raw}/10 → +${skill}`]].concat(tParts.map(([l,v])=>[l,`+${v}`]),prep?[["Chuẩn bị",`+${prep}`]]:[]),
    total:`${score} phần`,place:pw,of,rivals:ord.map(x=>({who:x.p||x.who,score:x.score,sub:x.sub})),gains,losses,note,extra:cup&&cup.html}):null;
@@ -27198,9 +27216,11 @@ window.worldOn=function(){const c=window.COOPW;return !(c&&c.on&&c.seat!=="a")};
 (function(){try{
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
-   ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2"];  /* tn: B2 the Emperor's night (host) */
-const HOST_ONLY=["tn","thIll","cm","men","menG2"];  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+   ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY).
+   coop-contest (jcoopcontest.js): the host's shared contest records — festival plans cfp, boards + results cfb, the friend's answers cfa,
+   the Tranh ghế mirror ctc + result ctcRes — all written by the host only (one world). */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","cfp","cfb","cfa","ctc","ctcRes"];  /* tn: B2 the Emperor's night (host) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2","cfp","cfb","cfa","ctc","ctcRes"];   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
@@ -27242,7 +27262,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
  v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}v.fx7=J((s.j71&&s.j71.fx)||null);
  mapMe(v,false,mp);v.id=fp();
- v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null}));
+ v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,queen:!!v.queen,ill:v.ill||null}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,tr:"trung",loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
@@ -27273,7 +27293,7 @@ function joinP(sS,Pm){const c=Pm.cmP;if(sS.cm&&c)Object.assign(sS.cm,J(c));
 function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:!!S.dead,srv:!!(S.srv&&!S.srv.risen),life:CW.life,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);
  if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */return P}
-function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
+function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{(CW.preCanon||[]).forEach(f=>f())}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
  const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
  if(!host()){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
  if(host())WS.cnews={w:wk(),h:CW.news||""};else if(CW.base&&CW.base.W&&CW.base.W.S)WS.cnews=J(CW.base.W.S.cnews);
@@ -27292,7 +27312,9 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=
    for(const id in v.ro||{})if(v.ro[id]!==(b.ro||{})[id]&&id!=="me")s.ro[id]=v.ro[id];
    if(!v.alive||(v.out&&!b.out)){if(!v.alive){fP.dead=true;s.dead=true;s.coopWhy="Mất trong cung"}else{s.coopCold=1}}
    if(v.rank!==b.rank&&!v.out){s.rank=v.rank}
-   if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
+   if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */
+   /* coop-contest: crowned by the host (Tranh ghế, NPC-style entry rank 6 + queen) = her rank 7 */
+   if(v.queen&&!b.queen&&!v.out&&(b.rank||0)<7)s.rank=7}
   P[fs()]=fP}
  return {v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P}}
 
@@ -27335,6 +27357,11 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
+/* coop-contest helpers: who pays a shared prize — her own client pays her; NPCs are paid by the host only; the friend entry never (her client pays her) */
+CW.isHost=()=>host();CW.pidMe=()=>me();CW.pidF=()=>fp();CW.isF=isF;CW.fEntry=()=>friendEntry();CW.wk=()=>wk();
+CW.pay=p=>!CW.on||p===S||(host()&&!isF(p));
+/* run f with the friend entry back in rivals while endTurn has her pulled out (the host's Tranh ghế: she is a real candidate) */
+CW.withFriend=f=>{const L=CW.pulled;if(!CW.on||!L||!L.length)return f();const back=L.filter(x=>x[0]>=0);pushFriend(back.slice());try{return f()}finally{for(const x of back){const i=rivals.indexOf(x[1]);if(i>=0)rivals.splice(i,1)}}};
 
 /* ---------- sending ---------- */
 /* ONE WORLD safety net (guest only): whatever world change her endTurn still rolled (a loop the guard table missed, an inline tick)
@@ -27652,6 +27679,7 @@ function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;i
  try{CW.seatWeek()}catch(e){console.error(e)}
  const h=newsHTML()+(worldNews(C)?`<p>${worldNews(C)}</p>`:"");CW.mine=null;
  if(h)pushModal({t:"Tuần mới",h:`<p class="past">${when()}</p>${h}`});
+ try{(CW.onBuilt||[]).forEach(f=>f(C))}catch(e){console.error(e)}  /* coop-contest: shared invitations / contest boards / results */
  CW.bend=false;CW.posKey="";if(CW.p2&&S&&(S.buoi||0)!==0){S.buoi=0;used=0}/* every week starts at buổi sáng for both */
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);keepFriendPos();refreshHere();
  showModal();render();lockNext()}
@@ -27706,7 +27734,7 @@ function nAtNight(){return !!(S&&!S.dead&&(S.buoi||0)>=LASTB())}
 function nReady(){return CW.on&&CW.nrdy===wk()&&nAtNight()&&CW.sent!==wk()&&!CW.pend}
 function nOtherEnded(){const e=COOP.state.ended||{};return !!e[fs()]}
 function nOtherGone(){const s=COOP.state.seats;return !!(s&&typeof s==="object"&&(fs() in s)&&!s[fs()])}
-function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}
+function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());try{(CW.beforeReady||[]).forEach(f=>f())}catch(e){console.error(e)}if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}
 function nGoNow(){if(!host()||CW.ngo===wk())return;CW.ngo=wk();T("ngo "+wk());nsay("go");CW.ngoW=wk()}
 /* host: commit when both are ready (or forced); every seat: run the committed night once free */
 function nCheck(){if(!CW.on||!S)return;const w=wk();
@@ -27801,6 +27829,10 @@ CW.seatWeek=function(){if(!CW.on||!S||S.dead||host()||typeof SEATCAP!=="object"|
  pushModal({t:"Ghế đã có người",h:`<p>Cùng tuần ấy, ${esc(friendName())} được tấn phong ${esc(RANKS[r].n)} trước. Ghế ${esc(RANKS[r].n)} chỉ có ${SEATCAP[r]}, nay đã đủ người.</p>${t?`<p>${t}</p>`:""}`})};
 
 /* ---------- hooks ---------- */
+/* coop-contest-fix (plan a–c, reports/coop-contest-r1.md): the ONE shared feast board (jcoopcontest CW.festBoard) is the BOTTOM layer of
+   festival(): under the guest mute, the host's news line, B4's friend-in-harem and b4Wrap. So the host builds it with her entry in the
+   harem (her own registration fx7 = her entry on the board), and b4Wrap still sends what the NPCs did to her items. No second scoring. */
+(function(){const f=window.festival;if(typeof f!=="function")return;window.festival=function(){if(CW.on&&host()&&typeof CW.festBoard==="function"){const r=CW.festBoard.apply(this,arguments);if(r!==undefined)return r}return f.apply(this,arguments)}})();
 const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(CW.on&&!host())return "";return f.apply(this,arguments)}};
 ["rivalsTurn","rivalsMonth","festival"].forEach(mute);
 /* host: keep the world news text of the week for the guest */
@@ -28029,19 +28061,13 @@ function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId()
 /* r1 fix 2: an NPC's pet act on her entry (jpetcare mindMenu petsteal / thaopet) → the same res.pet ops as mine: she loses it, not a copy */
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
-/* the festival being scored with her entry (also when the host's own minigame defers the scoring to fxFin7) */
-function f7Done(L){const c=CW.f7;if(!c||!L)return;CW.f7=null;const i=L.findIndex(x=>isF(x.p));const ops=b4Ops(c.b,c.title);if(i<0){b4Send(ops,{tt:c.title});return}
- const x=L[i],an=SC7[x.kind]?SC7[x.kind].n:"tài nghệ";const top=i===0;CW.f7last={i,n:L.length,kind:x.kind,reg:!!c.reg};
- const hd=top?`${c.title}: ${an} của ngươi đứng đầu, Hoàng thượng ban thưởng (Sủng, Danh tăng; về cùng tuần mới).`:`${c.title}: ngươi dâng ${an}, đứng hạng ${i+1} trong ${L.length} người dự thi${i>=L.length-1?"; lu mờ trước hậu cung":""}.`;
- b4Send(ops,{force:1,tt:c.title,hd,fx:c.reg&&typeof J71==="object"?{suc:-J71.cost}:{},fest:c.reg?{f:c.reg.F.f,y:S.year}:null})}
-if(typeof cScore7==="function"){const f=cScore7;cScore7=function(){const L=f.apply(this,arguments);try{const c=CW.on&&host()&&CW.f7;if(c&&Array.isArray(L)){
- if(c.reg){const pr=(c.reg.X.pr&&typeof J71==="object"?J71.prep:0)+(c.reg.X.pb||0);for(const x of L)if(isF(x.p)){x.pr=(x.pr||0)+pr;x.s+=pr}L.sort((a,b)=>b.s-a.s)}CW.f7.L=L}}catch(e){console.error(e)}return L}}
-if(typeof fxBest7==="function"){const f=fxBest7;fxBest7=function(p){const c=CW.on&&host()&&CW.f7;if(c&&c.reg&&isF(p))return c.reg.X.a;return f.apply(this,arguments)}}
-if(typeof fxFin7==="function"){const f=fxFin7;fxFin7=function(t,L){const r=f.apply(this,arguments);try{if(CW.on&&host()&&CW.f7&&CW.f7.title===t)f7Done(L)}catch(e){console.error(e)}return r}}
+CW.f7reg=f7reg;
+/* coop-contest-fix: the B4 festival scoring (CW.f7 / f7Done / the cScore7, fxBest7, fxFin7 hooks) is retired — her feast entry is scored
+   ONCE on the shared board (jcoopcontest), which also closes her registration and takes her Sức once. b4Wrap keeps only the item ops. */
 function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulled.length)return f.apply(this,arguments);
- const b=b4Snap();if(!b)return f.apply(this,arguments);const fest=n==="festival";if(fest){CW.f7={b,title:arguments[0]||"Hội thi",reg:f7reg(b.v,arguments[1]),L:null}}
+ const b=b4Snap();if(!b)return f.apply(this,arguments);const fest=n==="festival";
  CW.b4in=true;let r;try{r=f.apply(this,arguments)}finally{CW.b4in=false}
- try{if(fest){if(CW.f7&&CW.f7.L)f7Done(CW.f7.L);else if(CW.f7&&!Q.some(q=>q&&q.t===CW.f7.title)){const c=CW.f7;CW.f7=null;b4Send(b4Ops(c.b,c.title),{tt:c.title})}}
+ try{if(fest){const tt=arguments[0]||"Hội thi";b4Send(b4Ops(b,tt),{tt})}
   else{const pet=b4Pet(b);b4Send(b4Ops(b,""),{pet,force:pet.length})}}catch(e){console.error(e)}return r}}
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=b4Wrap(n,f)});
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
@@ -28056,8 +28082,6 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
 /* test hooks (dev/test/coop-p2.js): run fn as an NPC turn of the host's week (friend out of the harem as in endTurn, back in for fn) */
 CW.b4Run=fn=>{const L=pullFriend();CW.pulled=L;try{return b4Wrap("rivalsTurn",()=>{pushFriend(L.slice());try{return fn()}finally{pullFriend()}})()}finally{CW.pulled=null;pushFriend(L)}};
 CW.b4Fest=(t,kk)=>{const L=pullFriend();CW.pulled=L;try{return festival(t,kk)}finally{CW.pulled=null;pushFriend(L)}};
-/* her side: the festival she was entered in is over (her j71 card would otherwise wait for it) */
-COOP.on("res",m=>{try{if(!m||!m.fest||m.from===CW.seat||!CW.on||!S)return;const j=S.j71&&S.j71.fx&&S.j71.fx[m.fest.f];if(j&&j.y===m.fest.y)j.done=1}catch(e){}});
 
 CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base||CW.inLife)return null;let d;try{d=ser()}catch(e){return null}
  return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{nrdy:CW.nrdy,sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||""}}};
@@ -39411,11 +39435,13 @@ function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,h
  const title=o.title||"Hội thi";
  ord.slice(0,3).forEach((x,i)=>{const p=x.p||null;if(!p||typeof p!=="object"){res.places.push({prize:[]});return}
   const z=cuPrize(kind,i,p,big);const chips=[];
-  if(z.k){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"});chips.push(cuItemChip(z.k))}
-  if(z.bac){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac});chips.push(["Bạc",z.bac])}
+  /* co-op (jcoopcontest.js): each prize is paid once — her client pays her, the host pays NPCs, nobody pays the friend entry */
+  const pay=!(window.COOPW&&COOPW.on)||COOPW.pay(p);
+  if(z.k){if(pay){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"})}chips.push(cuItemChip(z.k))}
+  if(z.bac){if(pay){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac})}chips.push(["Bạc",z.bac])}
   const ent={prize:chips,k:z.k,bac:z.bac,place:i+1};
   if(i===0){/* the Emperor's own gift: guaranteed at the big festivals and the feasts he attends */
-   if(big&&typeof bestow==="function"){ent.emp=true;try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
+   if(big&&typeof bestow==="function"){ent.emp=true;if(pay)try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&pay&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
   if(p===S){S.honors=S.honors||[];const hn=(i===0&&CU_KHOI[kind]?CU_KHOI[kind]+" · ":CU_PLACE[i]+" · ")+title;S.honors.unshift({d:`T${S.month}/${S.year}`,t:hn,p:i+1});if(S.honors.length>40)S.honors.length=40;ent.title=hn;res.mine=ent}
   res.places.push(ent)});
  const m=res.mine;if(m){const rows=[];const ch=[];if(m.k)ch.push(cuItemChip(m.k));if(m.bac)ch.push(kitChip("Bạc",m.bac,"g"));rows.push(["Phần thưởng",ch,"t"]);
@@ -44857,6 +44883,241 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
+/* jcoopcontest: CO-OP SHARED CONTESTS (review/coop-contest, owner 16/11: "những cái sự kiện chung như thi thố ... khi mà chơi hai người là
+   cả hai đều được báo dự thi hay như thế nào?"). Facts: dev/handover/reports/coop-contest-check.md. Rules: dev/coop/PROTOCOL.md §11.
+   Single-player never runs any of this (every hook checks COOPW.on).
+   ONE contest for the room, host-authoritative:
+   - The host rolls ONE festival plan (variant, NPC entrants, seed) in its endTurn and publishes it in the shared world (S.cfp, a W key).
+     The guest rolls none (fPlan7 muted); after the week merge she gets the SAME invitation (same text, same entrants, same seed) plus
+     the line that her friend is invited too. Each answers Enter / Skip; the answer is relayed to the other (act k "ctm-cc", mode "ans").
+   - Contest day: the host scores the NPC entrants once (one formula, one luck roll) into a board (S.cfb, W key). Each player who entered
+     plays her own mini-game against those same NPC rows and sends her score to the host (mode "sc"). The host ranks everyone (both
+     players + NPCs) and publishes ONE result list (mode "res" + S.cfb[...].res). Each client applies the result once: her own place
+     effects; NPC prizes only on the host; the friend's prize only on the friend's own client (COOPW.pay). Nobody is simulated: a player
+     who entered but never played by the host's next week end gets the formula score ("Để tài nghệ quyết định" rule, same as NPCs).
+   - Same pipeline for the feast contests (Yến tiệc đầu xuân / Thi tài Thất tịch, FX7; was muted on the guest) and the gift contest
+     (Dâng lễ, P variant: one "best gift" for the whole room).
+   - Tranh ghế (S.contest): host only (contestOpen / contestWeek / fillSeats muted on the guest). The host mirrors its contest into
+     S.ctc (W key); a guest candidate plays her own rounds and between-round choices on the mirror and sends them before her night
+     "Sẵn sàng" (mode "tg"); the host's rounds use them instead of the NPC-style auto score. One winner, crowned by the host
+     (S.ctcRes); a crowned guest takes rank 7 from it. */
+(function(){try{
+if(typeof COOPW!=="object"||typeof FV7==="undefined")return;
+const CW=COOPW,CK="ctm-cc";
+const on=()=>!!(CW.on&&typeof S!=="undefined"&&S&&!S.dead);
+const host=()=>typeof worldOn==="function"?worldOn():CW.isHost();/* ONE WORLD: host-only decisions read worldOn() (true solo / host seat) */
+const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+let seq=0;const seen=new Set();
+function say(o){try{COOP.send(Object.assign({t:"act",k:CK,id:CW.pidMe()+":"+Date.now().toString(36)+":"+(seq++),week:CW.wk()},o))}catch(e){}}
+function sw(m){if(typeof $==="function"&&$("modal")&&$("modal").hidden)try{showModal()}catch(e){}if(m)try{render()}catch(e){}}
+function fName(){const f=CW.fEntry();return (f&&f.name)||"Hảo hữu"}
+/* a row's person on this client: me, the friend entry, an NPC, or a stand-in when that NPC is gone */
+function who(r){const id=+r.id;if(id===CW.pidMe())return S;if(id===CW.pidF())return CW.fEntry()||{id,name:r.nm||"Hảo hữu",alive:true,coop:true};return RV(id)||{id,name:r.nm||"",alive:false}}
+/* the friend's entry, also while the host's endTurn has her pulled out of the harem */
+function fEnt(){return CW.withFriend?CW.withFriend(()=>CW.fEntry()):CW.fEntry()}
+function fPresent(){const f=fEnt();return !!(f&&present7(f))}
+/* her feast entry on the host: her live registration (fx7 on her entry: same year, not done, a valid art; main's f7reg rule) or her answer
+   to the j71x invitation (S.cfa) — ANY registration path puts her on the ONE board, with her chosen art and her preparation */
+function fxEntF(F,y){const v=fEnt();if(!v||!present7(v))return 0;const r=CW.f7reg?CW.f7reg(v,F.kk):null;
+ if(r&&r.X)return{a:r.X.a,mb:(r.X.pr?J71.prep:0)+(r.X.pb||0)};const g=gEnt("x:"+F.f,y);return g&&g.a&&SC7[g.a]?{a:g.a,mb:g.pr?J71.prep:0}:0}
+function boards(){S.cfb=S.cfb||{};return S.cfb}
+function pruneB(){const B=boards();for(const id in B){const b=B[id];if((b.y||0)<S.year-1||(b.res&&(CW.wk()-(b.w||0))>8))delete B[id]}
+ const A=S.cfa||{};for(const id in A)if((A[id].y||0)<S.year-1)delete A[id]}
+function rowOf(x,kind){return{id:x.p===S?CW.pidMe():x.p.id,nm:x.p===S?S.name:x.p.name,kind:x.kind||kind,t:x.t,pr:x.pr||0,lk:x.lk||0,s:x.s,mg:x.mg?1:0}}
+
+/* ---------- answers (both ways; the host keeps the friend's in S.cfa) ---------- */
+function ans(id,y,o){if(!on())return;say(Object.assign({mode:"ans",b:id,y},o))}
+function onAns(m){if(host()){S.cfa=S.cfa||{};S.cfa[m.b]={y:m.y,me:m.me||0,a:m.a||null,pr:m.pr||0}}
+ const yes=m.me>0||!!m.a;try{log(`Hảo hữu ${yes?"đã ghi tên dự":"không ghi tên dự"} ${esc(m.n||"hội thi")}.`)}catch(e){}}
+
+/* ---------- invitations: one plan for the room ---------- */
+(function(){const p0=fPlan7;fPlan7=function(){if(!on())return p0.apply(this,arguments);if(!host())return null;/* the guest gets the host's plan after the merge */
+ const r=p0.apply(this,arguments);try{const j=j7s();S.cfp=S.cfp||{};for(const k in (j.plans||{})){const P=j.plans[k];if(P.y>=S.year&&P.pp)S.cfp[k]={y:P.y,pp:J(P.pp)}}
+  for(const k in S.cfp)if(S.cfp[k].y<S.year)delete S.cfp[k]}catch(e){console.error(e)}return r}})();
+(function(){const i0=fInv7;fInv7=function(k,pp,view){const m=i0.apply(this,arguments);if(!m||!on())return m;
+ const line=`<p class="past">Hảo hữu của ngươi cũng nhận được lời mời này; hai người thi chung một bảng với các phi tần, Hoàng thượng chấm một lần.</p>`;
+ if(view)m.h=(m.h||"")+line;else m.t=(m.t||"")+line;
+ const L=view?m.opts:m.o;const c=SC7[FV7[k][pp.vi][1]];
+ (L||[]).forEach(o=>{const g=o.go;o.go=function(){const r=g&&g.apply(this,arguments);try{const P=(j7s().plans||{})[k];ans("f:"+k,pp.y||S.year,{me:P?P.me:0,n:`thi ${c?c.n:""}`})}catch(e){}return r}});
+ return m}})();
+/* feast invitations (FX7): each client gets them from the shared calendar; the answer goes to the host */
+(function(){const x0=PEND.j71x;PEND.j71x=pp=>{if(on()&&pp&&FX7[pp.kk]){let h=7;for(const c of FX7[pp.kk].f+":"+pp.y)h=(h*31+c.charCodeAt(0))%999983;pp.sd=1+h}/* one seed for the room */const d=x0(pp);if(!d||!on())return d;const F=FX7[pp.kk];
+ d.t+=`<p class="past">Hảo hữu của ngươi cũng được mời; hai người thi chung một bảng, Hoàng thượng chấm một lần.</p>`;
+ d.o.forEach(o=>{const g=o.go;o.go=function(){const r=g&&g.apply(this,arguments);try{const e=(j7s().fx||{})[F.f]||{};ans("x:"+F.f,pp.y,{a:e.a||null,pr:e.pr||0,n:F.n})}catch(e){}return r}});return d}})();
+
+/* ---------- boards (host) ---------- */
+function gEnt(id,y){const a=(S.cfa||{})[id];return a&&a.y===y?a:null}
+function mkBoard(o){const B=boards();o.sc={};o.res=null;o.w=CW.wk();B[o.id]=o;pruneB();return o}
+function hostScore(id,pid,row){const B=boards()[id];if(!B||B.res)return;B.sc[pid]=row||0;tryFin(B,false)}
+function need(B){return Object.keys(B.ent).filter(p=>B.ent[p])}
+function tryFin(B,force){if(!host()||B.res)return;const N=need(B);
+ if(!force&&N.some(p=>B.sc[p]===undefined))return;
+ for(const p of N)if(B.sc[p]===undefined){/* entered but never played: the formula score, same rule as an NPC */
+  const pr=+p===CW.pidMe()?S:CW.fEntry();if(!pr||!present7(pr)){B.sc[p]=0;continue}
+  if(B.ty==="p"){const GF=BAL.fest.gift;B.sc[p]={id:+p,nm:pr.name,kind:"gift",t:Math.round(giftW7(pr)),pr:0,lk:0,s:Math.round(GF.plain+Math.random()*GF.luck),gi:2};continue}
+  const en=B.ent[p],kind=B.ty==="x"?(en.a||fxBest7(pr,FX7[B.kk].arts)):B.kind,mb=B.ty==="x"?(en.mb||0):(en===2?J71.prep:0);
+  const x=cScore7([pr],()=>kind,[],pr===S?mb:0)[0];if(x){if(pr!==S){x.pr=(x.pr||0)+mb;x.s+=mb}B.sc[p]=rowOf(x,kind)}}
+ const L=B.rows.concat(N.map(p=>B.sc[p]).filter(Boolean)).sort((a,b)=>b.s-a.s);
+ B.res=L;say({mode:"res",b:B.id,B:J(B)});applyRes(B)}
+/* test hook (dev/test/coop-p2.js B4): rank a board now, as the host's next week end would */
+CW.ccFin=id=>{const B=boards()[id];if(B)tryFin(B,true);return B?J(B):null};
+/* host's next week end: nobody waits forever */
+(function(){const e0=endTurn;endTurn=function(){try{if(on()&&host()){const B=boards();for(const id in B)if(!B[id].res&&(B[id].w||0)<CW.wk())tryFin(B[id],true)}}catch(e){console.error(e)}return e0.apply(this,arguments)}})();
+
+/* ---------- the day ---------- */
+function headArt(m,k){if(m&&!m.headArt){m.headArt={src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${k}-b.webp`,label:fName7(k)};m.evId=m.evId||("fest:"+k)}return m}
+(function(){const d0=fDay7;fDay7=function(k){if(!on())return d0.apply(this,arguments);
+ const j=j7s();const P=j.plans&&j.plans[k];const V=P&&P.y===S.year&&FV7[k][P.pp.vi];
+ if(!V||(V[0]!=="C"&&V[0]!=="P"))return d0.apply(this,arguments);
+ P.y=-1;if(!host())return null;/* the guest plays this day from the host's board after the merge */
+ const pp=P.pp,y=S.year;
+ if(V[0]==="C"){const kind=V[1];const E=ents7(pp).filter(v=>!CW.isF(v));const rows=cScore7(E,()=>kind,pp.pr||[],0).map(x=>rowOf(x,kind));
+  const g=gEnt("f:"+k,y);const ent={};ent[CW.pidMe()]=P.me>0&&present7(S)?P.me:0;ent[CW.pidF()]=g&&g.me>0&&fPresent()?g.me:0;
+  const B=mkBoard({id:`f:${k}:${y}`,ty:"f",k,vi:pp.vi,y,kind,title:fName7(k),big:FBIG7.includes(k),rows,ent});
+  if(ent[CW.pidMe()])return headArt(playMsg(B),k);
+  tryFin(B,false);if(!B.res)log(`${fName7(k)}: ngươi không ghi tên; hội thi chờ hảo hữu thi xong mới định thứ.`);return null}
+ /* P: every NPC gift is weighed once, here */
+ const R2=ents7(pp).filter(v=>!CW.isF(v));const rows=R2.map(v=>{const g=gift7(v);return{id:v.id,nm:v.name,kind:"gift",t:Math.round(g),pr:0,lk:0,s:Math.round(g+Math.random()*BAL.fest.gift.luck)}});
+ R2.forEach(giftPay7);
+ const ent={};ent[CW.pidMe()]=present7(S)?1:0;ent[CW.pidF()]=fPresent()?1:0;
+ mkBoard({id:`p:${k}:${y}`,ty:"p",k,vi:pp.vi,y,kind:"gift",title:fName7(k),sub:V[1],rows,ent,pp:J(pp)});
+ if(!ent[CW.pidMe()])return null;
+ const d=mkP("j71f",Object.assign(J(pp),{y}));if(!d)return null;return headArt({t:fShort7(k)+" · Dâng lễ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1},k)}})();
+/* the gift modal in co-op: her gift is weighed on her client, the host ranks the room once */
+(function(){const f0=PEND.j71f;PEND.j71f=pp=>{const d=f0(pp);if(!d||!on())return d;const V=(FV7[pp.k]||[])[pp.vi];if(!V||V[0]!=="P")return d;
+ const id=`p:${pp.k}:${pp.y||S.year}`;if(!boards()[id])return d;const th=V[1]==="th"&&!S.thDead;const GF=BAL.fest.gift,miss=GF.miss[th?"th":"emp"];
+ const mine=myGifts7();
+ d.t+=`<p class="past">Hảo hữu của ngươi cũng dâng lễ; ${th?"Thái hậu":"Hoàng thượng"} chọn một lễ hay nhất cho cả hậu cung.</p>`;
+ d.o.forEach((o,i)=>{o.go=i<3?()=>{submit(boards()[id],{t:mine[i],pr:0,lk:0,s:Math.round(mine[i]+Math.random()*GF.luck),gi:i,kind:"gift"})}:()=>{apply(miss);submit(boards()[id],null);log(`${fName7(pp.k)}: ngươi không dâng lễ.`)}});return d}})();
+/* the feast contest day (FX7): the host builds the ONE board as the bottom layer of festival() (jcoopworld: under the guest mute, the news
+   line, B4's friend-in-harem and b4Wrap). undefined = not a shared feast here, festival() runs on as before. */
+CW.festBoard=function(title,kk){if(!on()||!host()||!FX7[kk]||!j7On()||window.__j71off)return undefined;
+ try{const F=Object.assign({kk},FX7[kk]),j=j7s(),y=S.year;const e=j.fx&&j.fx[F.f]&&j.fx[F.f].y===y&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;if(e)e.done=1;
+  const E=liveRivals(true).filter(present7).filter(v=>!CW.isF(v));const ent={};ent[CW.pidMe()]=e?{a:e.a,mb:(e.pr?J71.prep:0)+(e.pb||0)}:0;ent[CW.pidF()]=fxEntF(F,y);
+  if(E.length+(ent[CW.pidMe()]?1:0)+(ent[CW.pidF()]?1:0)<2)return "";
+  const rows=cScore7(E,p=>fxBest7(p,F.arts),[],0).map(x=>rowOf(x));
+  const B=mkBoard({id:`x:${F.f}:${y}`,ty:"x",k:F.f,kk,y,title,big:true,rows,ent});
+  if(e){Q.push(playMsg(B));sw()}else tryFin(B,false);
+  return `${title}: cả hậu cung thi chung một bảng${ent[CW.pidF()]?", có cả hảo hữu":""}. `}catch(e){console.error(e);return ""}};
+
+/* ---------- playing (both clients) ---------- */
+function myEnt(B){const j=j7s();if(!B.ent||!B.ent[CW.pidMe()])return null;if(B.ty==="f"){const P=(j.plans||{})[B.k];return P&&P.me>0?{kind:B.kind,meB:(P.me===2?J71.prep:0)+(P.pb||0)}:null}
+ if(B.ty==="x"){const e=(j.fx||{})[B.k];return e&&e.a&&e.y===B.y?{kind:e.a,meB:(e.pr?J71.prep:0)+(e.pb||0)}:null}return null}
+function playMsg(B){const d=mkP("ccplay",{b:B.id});return d?{t:B.ty==="x"?B.title:`${fShort7(B.k)} · ${fTitle7(B.k,B.vi)}`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}:null}
+PEND.ccplay=pp=>{if(!S)return null;const B=boards()[pp.b];if(!B||B.res)return null;const me=myEnt(B);if(!me)return null;const kind=me.kind;
+ const other=B.ent[CW.pidF()];const txt=B.ty==="f"?FV7[B.k][B.vi][2]:`Ngày ${B.title}.`;
+ const h=`<p>${txt}</p><p>Ngươi đã ghi tên${B.ty==="x"?` dâng ${SC7[kind].n}`:""}. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(kind,S)}) và chuẩn bị +${me.meB}.</p><p class="past">${other?"Hảo hữu của ngươi cũng dự thi; ":""}cả bảng chấm một lần, xong thì báo kết quả.</p>`;
+ const win=B.ty==="x"?`đứng đầu, ${pz7(BAL.fest.fxWin)}`:`đoạt giải, ${pz7(prize7(B.k))}`;
+ const play=()=>{const jj=j7s();jj.cpay=jj.cpay||{};jj.cpay[B.id]=1;/* "Vào thi" took her Sức (option fx) */if(mgOn7()){const R0=B.rows.map(x=>{const p=RV(x.id);return{id:x.id,name:x.nm,face:p?pv(p):null,score:x.s,talent:x.t,prep:x.pr,luck:x.lk}});
+   const fr=B.sc&&B.sc[CW.pidF()];if(fr)R0.push({id:fr.id,name:fName(),face:CW.fEntry()?pv(CW.fEntry()):null,score:fr.s,talent:fr.t,prep:fr.pr,luck:fr.lk});
+   const wait=other&&!fr;
+   try{startContest({art:kind,artName:SC7[kind].n,title:B.title,rivals:R0,prep:me.meB,talent:Math.round(SC7[kind].f(S)),talentBy:det7(kind,S),luck:J71.luck,big:B.big,fk:B.k,hold:true,
+    holdNote:wait?"Hảo hữu chưa thi xong; bảng định thứ chung và thưởng phạt sẽ báo khi mọi người dự thi xong.":"Bảng định thứ chung và thưởng phạt báo ở bảng kế tiếp.",
+    onDone:res=>{const sc=res&&typeof res.score==="number"?Math.round(res.score):null;const r=sc!=null?{t:sc,pr:0,lk:0,s:sc,mg:1}:rowOf(cScore7([S],()=>kind,[],me.meB)[0],kind);submit(B,Object.assign(r,{kind}));sw(1)}})}
+   catch(e){console.error(e);submit(B,Object.assign(rowOf(cScore7([S],()=>kind,[],me.meB)[0],kind),{kind}))}}
+  else submit(B,Object.assign(rowOf(cScore7([S],()=>kind,[],me.meB)[0],kind),{kind}))};
+ return{who:pEmp(),t:h,o:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`${win}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +${B.ty==="x"?BAL.fest.fxGhen:BAL.fest.winGhen}`,go:play},
+  {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{submit(B,null);log(`${B.title}: ngươi bỏ thi.`)}}]}};
+function submit(B,row){if(!B)return;const j=j7s();const r=row?Object.assign({id:CW.pidMe(),nm:S.name},row,{id:CW.pidMe(),nm:S.name}):null;
+ j.cpl=j.cpl||{};j.cpl[B.id]={row:r,w:CW.wk()};if(r&&B.ty!=="p")log(`${B.title}: phần thi của ngươi ${r.s} phần, đã nộp; đợi định thứ.`);
+ if(host())hostScore(B.id,CW.pidMe(),r);else say({mode:"sc",b:B.id,row:r})}
+
+/* ---------- results (both clients, once each) ---------- */
+function applyRes(B){if(!on()||!B||!B.res)return;const j=j7s();j.cdone=j.cdone||{};if(j.cdone[B.id])return;j.cdone[B.id]=1;
+ const L=B.res.map(r=>({p:who(r),kind:r.kind||B.kind,t:r.t,pr:r.pr||0,lk:r.lk||0,s:r.s,mg:r.mg&&+r.id===CW.pidMe()?1:0,gi:r.gi}));if(!L.length)return;
+ const w=L[0].p,mi=L.findIndex(x=>x.p===S),pay=p=>CW.pay(p);
+ /* plan b — ONE rule, same as solo: her feast registration closes once the board is ranked; an entrant on the list pays the contest Sức
+    exactly once (on "Vào thi", or here when she was scored by formula because she never played — solo's no-minigame road) */
+ if(B.ty==="x"&&B.ent&&B.ent[CW.pidMe()]){const e=(j.fx||{})[B.k];if(e&&e.y===B.y)e.done=1}
+ if(B.ty!=="p"&&mi>=0){j.cpay=j.cpay||{};if(!j.cpay[B.id]){j.cpay[B.id]=1;apply({suc:-J71.cost})}}
+ let cup="";const cu0=()=>{if(B.ty==="p"||!mgOn7()||typeof cuAward!=="function")return false;try{const r=cuAward({title:B.title,big:B.big},L.map(x=>({p:x.p,score:x.s})),mi+1,L.length,L[0].kind);cup=(r&&r.mine&&r.html)||"";}catch(e){console.error(e)}if(window.CU)CU.did=false;return true};
+ if(B.ty==="f"){const kind=B.kind,pz=prize7(B.k);if(pay(w))ap(w,pz);const cu=cu0();if(!cu&&w!==S&&pay(w)&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}
+  j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(!cu&&roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
+  let me="";if(mi>0){if(mi<=2){apply({danh:1});me=` Ngươi hạng ${mi+1}: Danh +1.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=" Đứng chót: Danh -1."}}
+  log(`${fName7(B.k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${mi>=0?R7("Không thành:")+" ":""}${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
+  Q.push(headArt({t:`${fShort7(B.k)} · Hội thi ${SC7[kind].n}: kết quả`,h:`${mi<0?"<p>Ngươi không dự, chỉ đứng xem.</p>":""}${rowsH7(L,`${fName7(B.k)} · bảng phần thi (cả hậu cung, chấm một lần)`)}${cup}`,who:pEmp(),must:1},B.k))}
+ else if(B.ty==="x"){const FW=BAL.fest.fxWin;if(pay(w))ap(w,FW);const cu=cu0();if(!cu&&pay(w)&&roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}
+  if(w===S){ghenAll(BAL.fest.fxGhen);log(`<span class="g">${B.title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(FW)}.`)}
+  else{let r=`${mi>=0?R7("Không thành:")+" ":""}${B.title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(FW)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=1&&mi<=2&&cu)apply({danh:1});if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
+  if(mi>=0)Q.push({t:`${B.title}: kết quả`,h:rowsH7(L,`${B.title}: bảng phần thi (cả hậu cung, chấm một lần)`)+cup,who:pEmp(),must:1})}
+ else if(B.ty==="p"){const th=B.sub==="th"&&!S.thDead,tg=th?"Thái hậu":"Hoàng thượng";const GF=BAL.fest.gift,praise=GF.praise[th?"th":"emp"],small=GF.small[th?"th":"emp"];const fn=fName7(B.k);
+  if(w===S){apply(praise);ghenAll(BAL.fest.giftGhen);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}
+  else{if(pay(w))ap(w,praise);const mine=mi>=0?L[mi]:null;const sm=mine&&mine.gi!=null&&mine.gi<2;if(sm)apply(small);
+   if(mine)log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${sm?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`);else log(`${fn}: ${tg} khen lễ của ${w.name} nhất.`)}
+  if(mi>=0)Q.push(headArt({t:`${fShort7(B.k)} · Dâng lễ: kết quả`,h:`<p>${tg} xem lễ của cả hậu cung một lượt, khen lễ của ${w===S?"ngươi":esc(w.name)} nhất.</p>`+kitRows(L.map((x,i)=>[`${i+1}. ${x.p===S?"Ngươi":esc(x.p.name)}`,`${x.s} phần`,"t"])),who:th?pTH():pEmp(),must:1},B.k))}
+ sw(1)}
+
+/* ---------- after every week merge (both): plans → invitations, boards → play / results ---------- */
+function built(){if(!on())return;const j=j7s();
+ if(!host()&&S.cfp){j.plans=j.plans||{};for(const k in S.cfp){const c=S.cfp[k];if(!c||c.y<S.year||!FV7[k]||!FV7[k][c.pp.vi])continue;const P=j.plans[k];if(P&&P.pp&&P.pp.sd===c.pp.sd)continue;
+  j.plans[k]={y:c.y,pp:J(c.pp),me:0,co:1};try{fMark7(k,c.pp.vi)}catch(e){}
+  if(FV7[k][c.pp.vi][0]==="C"&&!S.confined&&j7On()){const m=fInv7(k,j.plans[k].pp,true);if(m)Q.push(m)}}}
+ const B=boards();j.cpl=j.cpl||{};
+ for(const id in B){const b=B[id];if(b.res){applyRes(b);continue}if(host())continue;
+  if(j.cpl[id]){if(j.cpl[id].row!==undefined&&j.cpl[id].w!==undefined&&!j.cpl[id].q)say({mode:"sc",b:id,row:j.cpl[id].row});continue}
+  if(b.ty==="p"){if(present7(S)&&b.pp){const d=mkP("j71f",Object.assign(J(b.pp),{y:b.y}));if(d){Q.push(headArt({t:fShort7(b.k)+" · Dâng lễ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1},b.k));j.cpl[id]={q:1}}}continue}
+  if(myEnt(b)&&present7(S)){const m=playMsg(b);if(m){Q.push(b.ty==="f"?headArt(m,b.k):m);j.cpl[id]={q:1}}}}
+ try{tgBuilt()}catch(e){console.error(e)}}
+(CW.onBuilt=CW.onBuilt||[]).push(built);
+/* reconnect: the guest re-sends a score the host may have missed */
+COOP.on("room",()=>setTimeout(()=>{try{if(!on()||host())return;const j=j7s(),B=boards();for(const id in (j.cpl||{})){const c=j.cpl[id];if(B[id]&&!B[id].res&&c&&!c.q)say({mode:"sc",b:id,row:c.row})}tgSend()}catch(e){}},600));
+
+/* ---------- the relay ---------- */
+COOP.on("act",m=>{if(!m||m.k!==CK||!CW.on||m.from===CW.seat||!S||seen.has(m.id))return;seen.add(m.id);
+ try{if(m.mode==="ans")onAns(m);
+  else if(m.mode==="sc"&&host())hostScore(m.b,CW.pidF(),m.row);
+  else if(m.mode==="res"&&!host()&&m.B){boards()[m.b]=m.B;applyRes(m.B)}
+  else if(m.mode==="tg"&&host())tgHost(m);
+  render()}catch(e){console.error(e)}});
+
+/* ================= TRANH GHẾ: one contest, host-run ================= */
+const ckey=(x,mp)=>x==="me"?String(mp):String(x);
+function rnK(o,f){const r={};for(const k in (o||{}))r[f(k)]=J(o[k]);return r}
+function toC(c){const mp=CW.pidMe(),f=x=>ckey(x,mp);return{id:c.r+":"+c.t0,r:c.r,c:c.c.map(f),t0:c.t0,len:c.len,round:c.round,sc:rnK(c.sc,f),bk:rnK(c.bk,f),pr:rnK(c.pr,f),sab:rnK(c.sab,f),dq:(c.dq||[]).map(f)}}
+function toL(cc){const mp=String(CW.pidMe()),f=x=>String(x)===mp?"me":(isNaN(+x)?x:+x),g=x=>String(x)===mp?"me":String(x);
+ return{co:1,id:cc.id,r:cc.r,c:cc.c.map(f),t0:cc.t0,len:cc.len,round:cc.round,sc:rnK(cc.sc,g),bk:rnK(cc.bk,g),pr:rnK(cc.pr,g),sab:rnK(cc.sab,g),dq:(cc.dq||[]).map(f),hint:0}}
+/* host: publish the mirror; the friend never acts by AI in a contest (she plays her own part) */
+(CW.preCanon=CW.preCanon||[]).push(()=>{if(!CW.on||!host()||!S)return;S.ctc=S.contest?toC(S.contest):null});
+(function(){const n0=npcContestAct;npcContestAct=function(p){if(CW.on&&CW.isF(p))return;return n0.apply(this,arguments)}})();
+(function(){const e0=contestEnd;contestEnd=function(){if(!on()||!host()||!S.contest)return e0.apply(this,arguments);
+ const c=S.contest,cc=toC(c);const before=c.c.map(k=>{const p=byKey(k);return[k,p,p?rkOf(p):-1,!!(p&&p.queen)]});
+ const r=e0.apply(this,arguments);let win=null;for(const [k,p,rk,q] of before){if(!p)continue;if(rkOf(p)>rk||(!q&&p.queen)||(p===S&&S.rank===7&&rk<7)){win=ckey(k,CW.pidMe());break}}
+ S.ctcRes={id:cc.id,r:c.r,win,c:cc.c,tbl:cc,txt:String(r||"").replace(/<[^>]+>/g,"")};return r}})();
+function tgHost(m){const c=S.contest;if(!c||(c.r+":"+c.t0)!==m.cid)return;const fk=CW.pidF(),sk=String(fk);
+ c.sc[sk]=c.sc[sk]||[];for(const i in (m.sc||{})){const v=m.sc[i];if(v!=null&&+i<c.round)c.sc[sk][i]=v}
+ c.pr[sk]=Math.max(c.pr[sk]||0,m.pr||0);if(Array.isArray(m.bk))c.bk[sk]=m.bk.slice(0,6);
+ for(const t in (m.sab||{})){const lk=t===String(CW.pidMe())?"me":t;c.sab[lk]=(c.sab[lk]||0)+(+m.sab[t]||0)}
+ if(m.dq&&!c.dq.includes(fk))c.dq.push(fk)}
+/* host: the week's rounds run inside endTurn, where the friend entry is pulled out: put her back so she is scored and can win */
+(function(){const w0=contestWeek;contestWeek=function(){if(on()&&host()&&S.contest)return CW.withFriend(()=>w0.apply(this,arguments));return w0.apply(this,arguments)}})();
+/* guest: no contest of her own (the host's is the room's) */
+["contestOpen","contestWeek","fillSeats"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(on()&&!host())return "";return f.apply(this,arguments)}});
+function tgBuilt(){if(host())return;const cc=S.ctc;
+ if(!cc){if(S.contest&&S.contest.co)S.contest=null}
+ else{const old=S.contest&&S.contest.co&&S.contest.id===cc.id?S.contest:null;const c=toL(cc);c.hint=old?old.hint:0;
+  const mine=S.ctcMine&&S.ctcMine.id===cc.id?S.ctcMine:null;if(mine){c.sc.me=c.sc.me||[];for(const i in (mine.sc||{}))if(mine.sc[i]!=null)c.sc.me[i]=mine.sc[i];if(mine.pr)c.pr.me=Math.max(c.pr.me||0,mine.pr);if(mine.bk)c.bk.me=mine.bk.slice()}
+  S.contest=c;S.ctcBase=J(c);
+  const cand=c.c.includes("me")&&!c.dq.includes("me");const sn=S.ctcSeen&&S.ctcSeen.id===cc.id?S.ctcSeen:{id:cc.id,round:0,open:0};
+  if(cand&&!sn.open){sn.open=1;Q.push({t:"Tranh ghế",who:pEmp(),h:`<p>Khuyết ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n}; ngươi có tên trong danh sách ứng viên. Ba vòng: <b>Tài nghệ</b> trước Hoàng thượng, <b>Đức hạnh</b> trước Thái hậu, <b>Thế lực</b> (ai đứng sau ngươi).</p>${scoreTable()}<p class="past">Cả hậu cung một cuộc tranh ghế; hảo hữu và các phi tần chấm cùng một luật, chỉ một người được ghế.</p>`})}
+  if(cand)for(let i=sn.round;i<c.round;i++){if(i<2)myRound(i)}
+  if(cand&&c.round>sn.round&&c.round<3)myBetween();
+  sn.round=c.round;S.ctcSeen=sn}
+ const R2=S.ctcRes;if(R2&&S.ctcResSeen!==R2.id){S.ctcResSeen=R2.id;const mp=String(CW.pidMe());
+  if(R2.win===mp&&R2.r===7&&S.rank<7){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.fest.ctGhen)}
+  if((R2.c||[]).includes(mp)){const keep=S.contest;S.contest=toL(R2.tbl);const tbl=scoreTable();S.contest=keep&&keep.co&&keep.id!==R2.id?keep:null;
+   const wn=R2.win===mp?"Ngươi":R2.win?(who({id:R2.win}).name||""):"";
+   Q.push({t:"Kết quả tranh ghế",who:R2.win===mp?pMe():pEmp(),h:`<p>${esc(R2.txt||"Tranh ghế xong.")}</p>${tbl}<p class="past">${wn?`${wn===`Ngươi`?"Ngươi":esc(wn)} được ghế; `:""}người thua thêm Oán với người thắng (+${BAL.fest.ctOan}).</p>`})}
+  if(S.contest&&S.contest.co&&S.contest.id===R2.id)S.contest=null}}
+function tgSend(){if(!on()||host())return;const c=S.contest;if(!c||!c.co)return;const b=S.ctcBase||{};const mp=String(CW.pidF());
+ const sab={};for(const k in (c.sab||{})){const d=(c.sab[k]||0)-((b.sab||{})[k]||0);if(d>0)sab[k==="me"?String(CW.pidMe()):k]=d}
+ const dq=c.dq.includes("me")&&!(b.dq||[]).includes("me");
+ S.ctcMine={id:c.id,sc:J(c.sc.me||[]),pr:c.pr.me||0,bk:J(c.bk.me||[])};
+ say({mode:"tg",cid:c.id,sc:J(c.sc.me||[]),pr:c.pr.me||0,bk:J(c.bk.me||[]),sab,dq});S.ctcBase=J(c);void mp}
+(CW.beforeReady=CW.beforeReady||[]).push(tgSend);
+
+window.CCO={boards,tryFin,applyRes,built,toC,toL};
+}catch(e){console.error(e)}})();
 /* ================= jcoopone: ONE WORLD — the co-op guard table (review/coop-one-world) =================
    Owner co-op rule OD:L96 (one shared world, one truth) + one-core law OD:L1267; audit dev/handover/reports/coop-one-world.md.
    Every shared world fact is computed ONCE, on the host. worldOn() (jcoopworld.js) is false only on the co-op guest seat; there each world
@@ -44953,7 +45214,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e0453471964d";window.CTM_BUILD=BUILD;
+const BUILD="1bd7f01f7ef2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

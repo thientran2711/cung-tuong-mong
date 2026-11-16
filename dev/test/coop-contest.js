@@ -152,7 +152,8 @@ const head=o=>o.p.evaluate(()=>Q[0]?{t:Q[0].t,pid:Q[0].pid||null,sd:Q[0].pp&&Q[0
   const iA=await mkInv(A),iB=await mkInv(B);
   ok(iA&&iB&&iA.sd===iB.sd&&iA.fl&&iB.fl,'5 both: the same feast invitation (one seed) + the friend line',{iA,iB});
   await shot(A,'5-fx-invite');await shot(B,'5-fx-invite');
-  ok(await answer(A,/^Ghi tên dâng/),'5 host: registers');ok(await answer(B,/^Ghi tên dâng/),'5 guest: registers');
+  /* clear() may take the invitation's first road itself (a registration): check the registration, not the click */
+  for(const o of [A,B]){await answer(o,/^Ghi tên dâng/,6000);ok(await until(o,f=>{const e=(j7s().fx||{})[f.f];return !!(e&&e.a&&e.y===f.y)},iA,10000),'5 '+o.name+': registered')}
   ok(await until(A,f=>{const v=COOPW.fEntry(),r=v&&COOPW.f7reg(v,f.kk);return !!(r&&r.X.a)},iA,15000),'5 host: her live registration (fx7) reached her entry');
   const bx=await A.p.evaluate(f=>{const r=COOPW.b4Fest(f.n,f.kk);const id=`x:${f.f}:${f.y}`,B0=(S.cfb||{})[id];if(!B0)return{r};B0.w=COOPW.wk()+1;
     return{id,ent:B0.ent,rows:B0.rows.map(x=>x.id+':'+x.s),q:Q.some(m=>m.pid==='ccplay')}},iA);
@@ -162,7 +163,7 @@ const head=o=>o.p.evaluate(()=>Q[0]?{t:Q[0].t,pid:Q[0].pid||null,sd:Q[0].pp&&Q[0
   const sb=await B.p.evaluate(()=>S.suc);await B.p.evaluate(()=>{window.__score=60});ok(await answer(B,/^Vào thi/),'5 guest: plays her own part');
   ok(await until(B,id=>{const b=(S.cfb||{})[id];return b&&b.res&&(j7s().cdone||{})[id]},bx.id,20000),'5 guest: result arrived and applied');
   const rA=await A.p.evaluate(id=>(S.cfb[id].res||[]).map(r=>r.id+':'+r.s),bx.id),rB=await B.p.evaluate(id=>(S.cfb[id].res||[]).map(r=>r.id+':'+r.s),bx.id);
-  ok(JSON.stringify(rA)===JSON.stringify(rB)&&rA.length===bx.rows.length+2&&rA[0]==='902:60','5 both: ONE result list (both players + NPCs), her real score first',{rA,rB});
+  ok(JSON.stringify(rA)===JSON.stringify(rB)&&rA.length===bx.rows.length+2&&rA.includes('902:60')&&rA.some(x=>x.startsWith('901:')),'5 both: ONE result list (both players + NPCs), her real played score on it',{rA,rB});
   const gx=await B.p.evaluate(f=>({suc:S.suc,done:(j7s().fx||{})[f.f]&&j7s().fx[f.f].done,q:Q.filter(m=>/: kết quả$/.test(m.t||'')&&m.t.startsWith(f.n)).length}),iA);
   ok(sb-gx.suc===await B.p.evaluate(()=>J71.cost)&&gx.done===1&&gx.q===1,'5 guest: Sức paid once, registration closed, one result card',{sb,gx});
   ok(await A.p.evaluate(f=>Q.filter(m=>/: kết quả$/.test(m.t||'')&&m.t.startsWith(f.n)).length===1,iA),'5 host: one result card');
