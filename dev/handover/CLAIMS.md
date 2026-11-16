@@ -335,7 +335,7 @@
 | road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | DONE FAIL 9+coop (archived) | 16/11 18:42Z |
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
-| emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | RUNNING | 16/11 18:50Z |
+| emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | DONE FAIL 2 (archived) | 16/11 18:50Z |
 | npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | RUNNING | 16/11 18:50Z |
 | NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | RUNNING | 16/11 18:50Z |
 | road-b1 FAIL fix A (opus): engine item 1 (RD97L/E.r97) + all items in jrd_tt + jrd_dtq; merges fix B at the end → SẴN SÀNG | review/road-b1-fixa | B | session_01N1tNP2G4bsFxWrsbzomkzU | RUNNING | 16/11 18:55Z |
@@ -373,3 +373,4 @@
 | coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | DONE (reports/coop-contest-check.md) | 16/11 19:46Z |
 | mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | session_01N1tNP4ZB3MEyANJVvpH6Ba | RUNNING | 16/11 19:52Z |
 | coop-contest-fix (opus, BIG co-op; owner Q 19:52Z; plan = reports/coop-contest-check.md Recommendation) | review/coop-contest | main s23 | session_01UV1SzhQgRNCuk7EHMhqYPi | RUNNING | 16/11 19:54Z |
+| emotion-acts-3 (opus): fix emotion-acts-2-r1 FAIL 2 (Tuần lục NPC line grammar/page filing; bots ON early death 66 % vs OFF 39 % + tuẫn táng cause) | review/emotion-acts-3 | B | (opening) | RUNNING | 16/11 19:59Z |
