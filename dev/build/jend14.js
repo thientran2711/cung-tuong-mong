@@ -67,7 +67,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
   lose:{k:-1,tag:"Cung vắng tiếng trẻ",t:"Lời bàn tán thắng. Ngươi bị coi là người không có phúc, Hoàng thượng thưa đến.",fx:{sung:-5,danh:-3}}}};
 
 /* ---------- ch13 · hau14 · Tranh ngôi Trung cung ---------- */
-ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi Trung cung",cast(A){return egSeatRv(A)},
+ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi Trung cung",cast(A){try{if(S.st.f14&&S.st.f14.tienloi)A.sc=(A.sc||0)+BAL.road.tienSc}catch(e){}return egSeatRv(A)},
  g:A=>egQueen()?"Ngươi đã ngồi ngôi Trung cung, nhưng ngôi ấy chưa vững: kẻ muốn kéo ngươi xuống vẫn còn. Giữ được ngôi, lục cung mới thật sự phục.":"Ngôi Trung cung là đích cuối của mọi phi tần. Từng bậc phải đủ Sủng, Danh, Đức; lúc bàn lập hậu, Hoàng thượng nhìn hoàng tử, lòng Thái hậu và tiếng của nhà ngươi. Chương này đưa ngươi một bước thật về phía ngôi ấy.",
  p:[["s1","s2","s3","s4"],["c1","c2","G.th","G.emp","G.hh"],["t1"],["x1"]],
  B:{s1:{h:"Ngôi chưa ấm chỗ",w:"v",if:()=>egQueen(),need:["v"],t:"Ngươi ngồi ngôi Trung cung chưa lâu, {v} đã kết bè với mấy nhà quyền thần, rỉ tai rằng ngươi không đủ đức làm mẫu nghi.",o:[

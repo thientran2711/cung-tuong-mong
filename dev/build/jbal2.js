@@ -285,5 +285,8 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  /* cnv_ma .11 (jrd_cnv.js): the SRK.maid index of the chưởng sự seat a maid wins when she takes Lưu ma ma's place */
  cnvMaRk:3,
  end:{fertM:4,prayM:3,hauTh:10,hauDanh:6,hauShield:6,keShield:6,keFond:60,keHeir:12,keDanh:6},
+ /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
+    read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */
+ tienSc:2,
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
