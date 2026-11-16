@@ -24,7 +24,13 @@ window.ntTaken=ntTaken;window.ntReason=ntReason;window.ntCan=ntCan;
 
 /* --- stealing: one try each, nothing after the visit is taken (her and NPCs alike) --- */
 const sn0=stealNight;stealNight=function(a,t,mode){if(!ntCan(a))return "";ntTry(a);return sn0.apply(this,arguments)};
-const sw0=stealWin;stealWin=function(a,t,mode){const n=ntTaken();if(n)return `${ntReason(a)}. `;const r=sw0.apply(this,arguments);if(a!==S)ntTake(a);return r};
+const sw0=stealWin;stealWin=function(a,t,mode){const n=ntTaken();if(n)return `${ntReason(a)}. `;
+ /* owner 11/15 16:58Z: the log says what REALLY happened to the one she took the night from (no card range "+3 đến +23") */
+ const me=a===S&&t&&t!==S;const b=me?{f:aff(t,S),o:Math.round(oan(t,S)),g:t.ghen||0}:null;
+ let r=sw0.apply(this,arguments);if(a!==S)ntTake(a);
+ if(me)try{const sg=x=>(x>0?"+":"−")+Math.abs(x);const d=[];const g=(t.ghen||0)-b.g,f=aff(t,S)-b.f,o=Math.round(oan(t,S))-b.o;
+  if(g)d.push(`nàng ghen ${sg(g)}`);if(f)d.push(`Nàng → ta: thiện cảm ${sg(f)}`);if(o)d.push(`Nàng oán ta ${sg(o)}`);if(d.length)r=r.replace(/\s*$/,"")+" "+d.join(", ")+". "}catch(e){}
+ return r};
 for(const k of ["steal","road"]){const A0=ACT[k];if(!A0)continue;const ok0=A0.ok;A0.ok=function(a,t){return ntCan(a)&&ok0.apply(this,arguments)}}
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(v){const w=ntReason(S);return w||(l0?l0.apply(this,arguments):"")}}
 /* the NPC social "steal" used to report a stolen night without moving it; now it is the real act or nothing */
@@ -37,7 +43,7 @@ const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||!Array
  deck=deck.filter(a=>!(S.pregUnk&&a&&a.n==="Báo tin có thai"));
  for(const a of deck){if(!a||a.__steal||!(a.n==="Tranh sủng"||a.n==="Chặn ngự giá")||a.b!==2)continue;const road=a.n==="Chặn ngự giá";const desc=a.t;const v=tonightOf();if(!v||v===S)continue;
   a.__steal=1;Object.defineProperty(a,"lock",{get:()=>!ntCan(S),set:()=>{},enumerable:true,configurable:true});Object.defineProperty(a,"t",{get:()=>ntCan(S)?desc:ntReason(S),set:()=>{},enumerable:true,configurable:true});
-  a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${v.name} ghen +25, thù -15 · mỗi đêm chỉ thử một lần`;
+  a.x=`thành: đêm nay Hoàng thượng sang cung ngươi (Sủng, Ân tình tính theo đêm) · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"} · mỗi đêm chỉ thử một lần`;
   a.go=()=>{ntTry(S);const n=ntTaken();if(n){log(`${ntReason(S)}.`);return}const t=tonightOf();if(!t||t===S)return;log(`${stealWin(S,t,road?"road":"feign")}Đêm thị tẩm đang chờ; Sủng, Ân tình tính sau đêm.`)};
   a.fail=()=>{ntTry(S);log("Đêm nay ngươi không còn dịp giành lại.")}}}catch(e){console.error(e)}return r};
 /* results never echo the pre-act line of a steal card (that line was the source of '+3..8', 'có thể') */
@@ -53,6 +59,11 @@ const cm0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts
  window.__ntDone=0;const r=cm0.apply(this,arguments);
  try{if(window.__ntDone&&window.__nsnap&&S&&!S.dead){const b=window.__nsnap;b.seq=window.__ntSeq!=null?window.__ntSeq:b.seq;window.__nsnap=null;window.__ntDone=0;resultShow("Đêm thị tẩm",b,"sure")}}catch(e){}return r};
 
+/* owner 13:30Z "Bạc −5 phải truy nguồn": the night card's "Mất: Bạc 300→295 (−5)" was the price of the PREP choice (Điểm trang lộng lẫy
+   Bạc −5; Tắm cánh hoa Bạc −15; Tập trước Sức −5), already paid and shown as that choice's Tốn — the night snapshot is taken at nightScene,
+   BEFORE prep. Re-base Bạc / Sức when the night itself begins (night1 is built, after the prep cost was applied by chooseM), so the night
+   card shows only what the night did. (Bạc won IN the night — "Xin ân cho gia đình" — still shows.) */
+{const n1=PEND.night1;PEND.night1=function(){try{const b=window.__nsnap;if(b&&S){b.bac=S.bac||0;b.suc=S.suc||0}}catch(e){}return n1.apply(this,arguments)}}
 /* --- the night's true line --- */
 const nf0=nightFx;nightFx=function(s){const b={sung:S.sung,an:S.an||0,inv:S.inv.length,g:{}};for(const v of liveRivals(true))b.g[v.id]=v.ghen||0;
  const L0=log;log=function(h){if(/^Thị tẩm\. Sủng/.test(String(h)))return;return L0.apply(this,arguments)};let r;
@@ -72,7 +83,7 @@ const ng0=night;night=function(p){p=p||S;if(p!==S)return ng0.apply(this,argument
 function pregFind(){if(!S||S.dead)return;if(!S.preg){S.pregUnk=0;return}if(!S.pregUnk)return;if(wk()<(S.pregDisc||0)&&S.preg<4)return;
  S.pregUnk=0;const m=S.preg;const canHide=S.hidden&&S.preg<=3;
  const h=`<p>Mấy hôm nay ${S.maid?`cung nữ ${S.maid.name}`:"cung nữ"} thấy ngươi biếng ăn, hay buồn nôn, liền mời thái y.</p><p><b class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</b></p>${canHide?`<p class="past">Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.</p>`:""}`;
- const card={t:"Thái y bắt mạch",who:pDoc(),h};
+ const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
  if(canHide)card.opts=[{n:"Giữ kín, dặn thái y không nói",fx:{},x:"giấu thai đến hết tháng thứ 3 · phi tần chưa biết để nhắm vào thai",go:()=>{S.hidden=true;log("Ngươi giữ kín tin có thai.")}},
   {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:"các phi tần ghen +6 · kẻ ác có thể nhắm vào thai",go:()=>{S.hidden=false;ghenAll(6);log("Ngươi báo tin có thai.")}}];
  else card.btn="Đã hiểu";
@@ -128,7 +139,7 @@ rivalNight=function(v){v.nights++;v.nightLog.push(wk());
  const grade=sc>=6?"đêm vui":sc>=3?"đêm êm":"đêm nhạt";
  let r=`Đêm qua thẻ bài của ${v.name} được lật${S.mat>=2?` (tai mắt nói: ${grade})`:""}. `;
  if(giuBlocked(v)){if(v.bac>=40&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-40});night(v)}}else night(v);
- if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});if(S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi. Sủng ${b} → ${S.sung}. `}else if(DG()){ap(v,{sung:-6})}}
+ if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});if(S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${b!==S.sung?` Sủng của ta ${b} → ${S.sung}.`:""} `}else if(DG()){ap(v,{sung:-6})}}
  if(roll(3)){r+=sendMaid(v)}
  if(roll(10+sc*4))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
@@ -162,7 +173,7 @@ function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"
  for(const v of liveRivals(true)){if(v===p||!v.alive||v.out)continue;if(me)v.ghen=cl((v.ghen||0)+2,0,100);else if((v.malice||0)>=40)oanAdd(v,p,2)}
  if(!(p.admonWk!=null&&wk()-p.admonWk<6)&&roll(30)){const q=queenP();const who=q&&q!==p&&q!==S?`Hoàng hậu ${q.name}`:q===S&&!me?"ngươi (Hoàng hậu)":(!S.thDead?"Thái hậu":null);
   if(who&&!(q===S&&!me)){const b=p.sung;ap(p,{sung:-5});p.admonWk=wk();
-   const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). Sủng ${me?"ngươi":"nàng"} ${b} → ${p.sung}; hai tuần tới ngài để ý đến người khác.`;
+   const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}; h`:"H"}ai tuần tới ngài để ý đến người khác.`;/* owner 11/15: name whose Sủng; no "30 → 30" */
    if(me)Q.push({t:"Mưa móc đều khắp",who:q&&q!==S?pv(q):pTH(),h:`<p>${t}</p>`});ev+=t+" "}}
  if(roll(25)){const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const x=pick(L);if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
  return ev}

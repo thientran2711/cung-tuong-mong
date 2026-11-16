@@ -12,7 +12,7 @@ EV6("gossipTea","day",{a:["rv"],pp:()=>{const a=rv6(fr6,v=>5+aff(v,S)/5);return 
   c6("Gợi chuyện để dò tin",{p:od(40+S.tamco/3),w:{mat:1},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>`${X.A.n} buột miệng kể vài chuyện có ích. Tai mắt +1.`}),
   c6("Khéo cáo mệt",{w:{suc:4},r:[[X.A,-3]]})]});
 EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==null?null:{a0:a}},w:C=>1.6,
- v:["Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.","{A} sai người gửi tặng một xấp lụa Tô Châu, kèm lời nhắn 'chút lòng thành'.","Một hộp điểm tâm hoa quế đề tên {A} được đưa tới, còn ấm.","{A} gửi sang một chậu lan quý, nói hoa nở đúng lúc nhớ đến ngươi."],
+ v:["Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.","{A} sai người gửi tặng một xấp lụa Hàng Châu, kèm lời nhắn 'chút lòng thành'.","Một hộp điểm tâm hoa quế đề tên {A} được đưa tới, còn ấm.","{A} gửi sang một chậu lan quý, nói hoa nở đúng lúc nhớ đến ngươi."],
  o:X=>[c6("Nhận, đáp lễ hậu hĩnh",{c:{bac:-20},r:[[X.A,8]],w:{danh:1}}),
   c6("Nhận, cho người thử trước",{c:{suc:-2},w:{tamco:1},r:[[X.A,2]],k:[R6(`nếu ${X.A.n} biết, có thể phật ý`)],ok:()=>`Đồ của ${X.A.n} sạch sẽ, không có gì lạ.`}),
   c6("Khéo trả lại",{w:{duc:1},r:[[X.A,-6]]})]});

@@ -163,7 +163,7 @@ const IT={
  botngua:{n:"Bột ngứa",kd:"Độc dược",d:"Dùng với phi tần: nàng Danh -5 · bị khám ra là có tội",pr:30,il:1,tg:[]},
  tranhco:{n:"Tranh cổ",kd:"Lễ vật",d:"Tặng Hoàng thượng, Thái hậu: rất hợp ý",pr:90,gv:10,tg:["emp","th"]},
  nghien:{n:"Nghiên mực Đoan Khê",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý",pr:60,gv:8,tg:["emp"]},
- dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:100,gv:10,tg:["emp","rv"]},
+ dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:100,gv:12,tg:["emp","rv"]},
  demgam:{n:"Đệm gấm",kd:"Lễ vật",d:"Tặng: êm ấm, ai cũng nhận",pr:20,gv:4,tg:["th","rv","hh"]},
  ngocboi:{n:"Ngọc bội ngự ban",kd:"Kỷ vật",d:"Còn giữ: Sủng không dưới 15 · mất là đại họa",pr:0,keep:1,tg:[]},
  thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức +10, Đức +2",pr:0,use:{suc:10,duc:2},tg:[]},
@@ -201,7 +201,7 @@ function taintItem(p,ix,tk){const e=p.inv[ix],T=TAINT[tk];if(!e||!T||!T.on.inclu
  const e2=p.inv.find(x=>x===e);if(!e2)return"";if(T.c)ap(p,{bac:-T.c,duc:-3});else ap(p,{duc:-3});e2.t=tk;e2.by=key(p);p.schemes=(p.schemes||0)+1;return `${NMc(p)} lén ${T.n} vào ${iname(e2)}. `}
 /* receiving: people's tastes */
 function giftVal(it,r){const base=it.gv||Math.round(it.pr/12)+2;const like=r==="emp"?(it.tg.includes("emp")||((it.k==="nghien"||it.k==="dancoc")&&(has("trongtai")||has("chamchinh")))):r==="th"?it.tg.includes("th"):r&&r.queen?it.tg.includes("hh"):it.tg.includes("rv");return like?base:Math.round(base/3)}
-function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";const it=IT[e.k];a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
+function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=IT[e.k];a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
  if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2)}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. Sủng +${Math.max(1,Math.round(g/2))}. `}
  if(r==="th"){ap(a,{th:g});return `${NMc(a)} dâng ${it.n} lên Thái hậu. Thái hậu +${g}. `}
  relAdd(a,r,g+3);if(r.queen||(r===S&&S.rank>=7))ap(a,{hh:g});
@@ -209,7 +209,7 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";const it=IT[e.k];a
  if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
  r.inv.push(ent);if(e.t&&roll(oSee(r,true))){r.inv.pop();evA(r,a,2);relAdd(a,r,-25);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm 2 chứng cứ. `}
  if(IT[e.k].sl&&IT[e.k].rk>rkOf(r)&&(r.trait==="Kiêu ngạo"||r.trait==="Tham vọng"||roll(25)))wear(r,r.inv.length-1);
- return `${NMc(a)} tặng ${it.n} cho ${r.name}: thân +${g+3}. `}
+ return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
 function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
  if(!roll(oPlant(a,t))){evA(t,a,2);relAdd(a,t,-20);return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm 2 chứng cứ. `}
  t.inv.push({k:e.k,t:e.t,by:key(a),h:1});return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
@@ -261,10 +261,10 @@ PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mo
   if(p.vp&&roll(40)){const n=vpItems(S).map(e=>IT[e.k].n).join(", ");S.inv=S.inv.filter(e=>!(e.w&&IT[e.k].rk>S.rank));if(vpItems(S).length)S.dress=null;apply({danh:-4});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh -4.`;log(ex)}
   pushFront(mkP("night2",{s,ex}),"Đêm thị tẩm")};
  return{who:pEmp(),t:`<p>Canh một, thái giám Kính sự phòng cởi xiêm ngoài, cuộn ngươi trong tấm chăn gấm thêu phượng, khiêng vào Dưỡng Hòa điện theo lệ cũ.</p><p>Màn vàng rủ thấp. Hoàng thượng đặt quyển sách xuống${E.mood>=2?", vẻ mệt mỏi":""}, nhìn ngươi.</p>`,o:[
- {n:"Bàn thơ văn, cầm kỳ",fx:{},x:nx(has("trongtai")?3:S.tai>=60?1:0,has("trongtai")?"ngài trọng tài, rất hợp":""),go:go(has("trongtai")?3:S.tai>=60?1:0)},
- {n:"Bàn chuyện thiên hạ",fx:{},x:nx(has("chamchinh")?3:-1,has("chamchinh")?"ngài chăm chính sự, rất hợp":"ngài không thích phi tần bàn việc nước"),go:go(has("chamchinh")?3:-1)},
- {n:"Rót rượu, nũng nịu",fx:{},x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":""),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
- {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
+ {n:"Bàn thơ văn, cầm kỳ",fx:{},od:(has("trongtai")?3:S.tai>=60?1:0),x:nx(has("trongtai")?3:S.tai>=60?1:0,has("trongtai")?"ngài trọng tài, rất hợp":""),go:go(has("trongtai")?3:S.tai>=60?1:0)},
+ {n:"Bàn chuyện thiên hạ",fx:{},od:(has("chamchinh")?3:-1),x:nx(has("chamchinh")?3:-1,has("chamchinh")?"ngài chăm chính sự, rất hợp":"ngài không thích phi tần bàn việc nước"),go:go(has("chamchinh")?3:-1)},
+ {n:"Rót rượu, nũng nịu",fx:{},od:(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0),x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":""),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
+ {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},od:(E.mood>=2?2:1),x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
 function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
 function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=3+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+2+Math.max(0,s),0,100);ghenAll(8);
@@ -280,9 +280,9 @@ PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)
  O.push({n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:go(()=>{S.an=cl(S.an+2,0,100)})});
  return{cls:"night",who:pEmp(),t:`${p.ex?`<p class="past">${p.ex}</p>`:""}<p>${txt}</p><p class="past">Gối đầu, nửa đêm. Ngươi muốn nói gì?</p>`,o:O}};
 PEND.giu=()=>{const o1=od(45+S.tamco/3),o2=od(30+S.an/2);return{who:pTH(),t:"<p>Sáng sớm, tổng quản Kính sự phòng quỳ ngoài điện hỏi theo lệ: “Giữ hay không giữ?”</p><p>Lời Thái hậu truyền xuống: phẩm vị thấp, không được giữ long thai.</p>",o:[
- {n:"Cúi đầu tuân lệnh",fx:{th:5},x:"không thể có thai lần này"},
- {n:"Đút bạc xin giữ",fx:{bac:-40},x:`${word(o1)} · hỏng: Thái hậu -10`,go:()=>{if(roll(o1))night(S);else apply({th:-10})}},
- {n:"Cầu xin Hoàng thượng",fx:{},x:`${word(o2)} · hỏng: Sủng -3`,go:()=>{if(roll(o2))night(S);else apply({sung:-3})}}]}};
+ {n:"Cúi đầu tuân lệnh",fx:{th:5},x:"lần này không thể có thai"},
+ {n:"Đút bạc xin giữ",fx:{bac:-40},x:`${word(o1)} · thành: được giữ long thai (nếu có) · hỏng: Thái hậu -10`,go:()=>{if(roll(o1))night(S);else apply({th:-10})}},
+ {n:"Cầu xin Hoàng thượng",fx:{},x:`${word(o2)} · thành: được giữ long thai (nếu có) · hỏng: Sủng -3`,go:()=>{if(roll(o2))night(S);else apply({sung:-3})}}]}};
 /* a rival's night: same formula, no modal */
 function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSac(v)/20+Math.max(...Object.values(v.arts))+R(4)-1);ap(v,{sung:2+Math.round(q/2),an:2+Math.max(0,q)});v.pg=cl(v.pg+6,0,100);v.tablet=0;
  let r=`Đêm qua thẻ bài của ${v.name} được lật. `;
@@ -316,7 +316,7 @@ function birthP(p,fake){const me=p===S;
    else{ap(p,{danh:-10,sung:-10});punish(p,"bị đồn sinh ra yêu vật",2);return ev+(me?`<span class="r">Ngươi tỉnh lại thì bên cạnh là một con mèo chết lột da. Cả cung đồn ngươi sinh ra yêu vật.</span> Danh -10 · Sủng -10. Đứa trẻ không rõ tung tích. `:`<span class="r">${p.name} lâm bồn, bên cạnh chỉ có một con mèo chết lột da; cả cung đồn nàng sinh yêu vật.</span> `)}}}
  const n=!fake&&roll(4)?2:1;if(n===2)ev+=me?`<b class="g">Song thai!</b> `:`${p.name} sinh đôi. `;let up=false;
  for(let i=0;i<n;i++){const k=mkKid(R(2)?"m":"f",0);p.kids.push(k);
-  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;up=true;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
+  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){up=true;if(typeof exGrace==="function")ev+=exGrace(p);else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
   else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(8);ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
  return ev}
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
@@ -364,7 +364,12 @@ function npcAct(v,t){const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&a.ok(v,t)
  if(v.inv.some(e=>e.t||IT[e.k].il))add("plant",3);
  if(!O.length)return"";const w=O.map(x=>x[1]);let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const k=O[i][0];
  if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||IT[e.k].il));return runAct(v,t,k)}
-function seenNPC(v,t,txt){if(!txt)return"";if(t===S||v===S)return txt;if(roll(15+S.mat*6)){evA(S,v,1);return `Tai mắt thấy: ${txt}(Chứng cứ ${v.name} +1.) `}return""}
+/* what her spies see between two other people (owner 11/15 16:55Z "why is a hairpin gift evidence?"): only a MISDEED is evidence
+   (poison, musk, charms, framing, bribes, planting, rumours, a tainted gift…); a plain gift, a visit, a quarrel is news only.
+   Evidence gets its own line from j78 with its source ("nguồn: tai mắt của ngươi thấy tận mắt"); nothing is glued to the next event. */
+const SEEN_BAD=/(?<![\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\p{L}])/iu;
+function seenBad(txt){return SEEN_BAD.test(String(txt||"").replace(/<[^>]+>/g,""))||(/tặng|dâng/.test(String(txt||""))&&!!window.__giftTaint)}
+function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(15+S.mat*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,1);return""}return""}
 function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
  if(roll(30)){const k=pick(Object.keys(v.arts));if(v.arts[k]<5&&(v.bac>=cost(k)||v.suc>=40)){if(v.bac>=cost(k)){ap(v,{bac:-cost(k),suc:-10});v.artp[k]+=1+R(3)}else{ap(v,{suc:-15});v.artp[k]+=1};while(v.arts[k]<5&&v.artp[k]>=v.arts[k]+2){v.artp[k]-=v.arts[k]+2;v.arts[k]++}}}
  if(roll(25)&&S.shop.length){const k=pick(S.shop);if(IT[k]&&v.bac>=IT[k].pr+20&&(!IT[k].il||v.malice>60))buy(v,k)}

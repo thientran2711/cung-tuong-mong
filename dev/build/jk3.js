@@ -26,17 +26,23 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
  if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
- k3TopRow();if(typeof kitStatSet!=="function")return;const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd,dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
- [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})})}catch(e){}}
+ k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* the Đức "!" (lập Hoàng hậu) is a consort goal: never on the cung nữ road or in lãnh cung */const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd&&!(window.kitRoad&&kitRoad()),dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
+ [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})});
+ /* Danh · Sủng · Bạc · Sức: tooltip = name + value + "chạm để xem đủ" (the label line's own text, so the servant road's "Chủ tin" reads right) */
+ ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,v,{title:`${l} ${v} · chạm để xem đủ`})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);
- const g=$$("kstg-tc");if(g){const o=e=>{e.stopPropagation();const c=e.target.closest&&e.target.closest('[id^="hud-"]');if(c)k3Explain(c.id.slice(4))};g.addEventListener("click",o);g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")o(e)})}}return tc}
+ /* every top-bar cell explains itself on tap (owner 15/11 ~17:50Z moved Danh · Sủng into the left group: both groups behave the same) */
+ document.querySelectorAll("#kstrow>.kstg").forEach(g=>{const o=e=>{e.stopPropagation();const c=e.target.closest&&e.target.closest('[id^="hud-"]');if(c)k3Explain(k3CellKey(c.id.slice(4)))};g.addEventListener("click",o);g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")o(e)})})}return tc}
+/* the cell's key -> the explanation key (servant road: the Sủng cell is "Chủ tin") */
+function k3CellKey(k){return k==="sung"&&typeof isSrv==="function"&&isSrv()?"tin":k}
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);k3Hud();return r}}
 
 /* ---------- stage HUD ---------- */
-const K3_TIME=["buoi","lot"],K3_STAT=["sac","tai","tamco","duc"],K3_STATE=["preg","ill","fake","out","block","doc","conf","shield","birth"];
+const K3_TIME=["buoi","lot"],K3_STAT=["sac","tai","tamco","duc"],K3_STATE=["preg","ill","fake","out","block","doc","conf","shield","birth"];window.K3_STATE=K3_STATE;/* other modules add their own state key (e.g. jstory "pl67" = hạn lo liệu) */
 const K3_RIGHT=["srk","nt","chu","wage","merit"];/* "tin" (Chủ tin) is in the top bar on the servant road */
+window.K3_RIGHT=K3_RIGHT;/* jts adds its status chips here (stage right column) */
 const K3_ICO={sac:"sac",tai:"tai",tamco:"tam-co",duc:"duc"};
 function k3hc(k){const h=$$("hud2");return h&&h.querySelector(`.hc[data-hx="${k}"]`)}
 function k3val(b){const x=b&&b.querySelector("b");return x?T(x.textContent):""}
@@ -51,24 +57,28 @@ function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function
  const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=60?"g":n<45?"r":"n"}">${esc(v)}</span></span></span></button>`}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
-function k3AsRows(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
+function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
  L.push(["mat","Tai mắt",S.mat|0]);
  let c="",n="";try{c=chanceLvl(conceiveCh())}catch(e){}try{n=chanceLvl(nightCh())}catch(e){}
  if(c)L.push(["con","Có thai",c]);if(n)L.push(["dem","Lật thẻ",n]);
  L.push(["an","Ân tình (đêm)",S.an|0]);const aw=hv("aw");if(aw!=="")L.push(["aw","Số lần ân thưởng",aw]);
  const bl=k3hc("bl");if(bl)L.push(["bl",k3lab(bl).replace(/\s*sau$/,"")||"Bổng lộc","sau "+k3val(bl)]);return L}
-function k3AnSung(one){const L=k3AsRows();if(!L.length)return"";
- if(one)return `<div class="k3p kas kas1"><button type="button" class="k3r kas-one" data-kasall="1" title="Ân sủng · chạm để xem"><span class="k3l">Ân sủng</span><b>›</b></button></div>`;
- return `<div class="k3p kas"><span class="k3h">Ân sủng</span>`+L.map(([k,l,v])=>`<button type="button" class="k3r kasr" data-kas="${k}" title="${esc(l)}: ${esc(String(v))} · chạm để xem"><span class="k3l">${esc(l)}</span><b>${esc(String(v))}</b></button>`).join("")+`</div>`}
+function k3AnSung(one,open){const L=k3AsRows();if(!L.length)return"";
+ if(one)return `<div class="k3p kas kas1"><button type="button" class="k3r kas-one" data-kasall="1" title="Ân sủng · chạm để mở"><span class="k3l">Ân sủng</span><b>›</b></button></div>`;
+ return `<div class="k3p kas${open?" kasopen":""}">`+(open?`<button type="button" class="k3h kasfold" data-kasfold="1" title="Ân sủng · chạm để thu lại"><span>Ân sủng</span><b>‹</b></button>`:`<span class="k3h">Ân sủng</span>`)+L.map(([k,l,v])=>`<button type="button" class="k3r kasr" data-kas="${k}" title="${esc(l)}: ${esc(String(v))} · chạm để xem"><span class="k3l">${esc(l)}</span><b>${esc(String(v))}</b></button>`).join("")+`</div>`}
 /* the column is crowded when it runs past the stage floor or touches a figure / name tag (KIT_FIG: chips never cover people) */
 function k3AsCrowded(st,R){try{const s=st.getBoundingClientRect(),r=R.getBoundingClientRect();if(r.bottom>s.bottom-8)return true;
  const hit=q=>Math.min(q.right,r.right)-Math.max(q.left,r.left)>1&&Math.min(q.bottom,r.bottom)-Math.max(q.top,r.top)>1;
  const figs=typeof kitFigRects==="function"?kitFigRects():[];if(figs.some(hit))return true;
  return [...st.querySelectorAll(".tok .nm, .tok .tag, .ftag")].some(e=>e.offsetParent&&!R.contains(e)&&hit(e.getBoundingClientRect()))}catch(e){return false}}
-document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kas], #kshR [data-kasall]");if(!a)return;e.stopPropagation();
+/* "Ân sủng ›" opens IN PLACE (owner 11/15 17:40Z + reference shot): the folded chip becomes the full Ân sủng card in the right column,
+   column width, label left / value right — never a floating popover; its title "Ân sủng ‹" folds it again */
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kas], #kshR [data-kasall], #kshR [data-kasfold]");if(!a)return;e.stopPropagation();
  if(a.dataset.kas){k3Explain(a.dataset.kas);return}
- if(typeof kpPop==="function")kpPop(a,`<div class="kascard"><div class="kpopt">Ân sủng</div>`+k3AsRows().map(([k,l,v])=>`<div class="kasrow"><span>${esc(l)}</span><b>${esc(String(v))}</b></div>`).join("")+`</div>`)},true);
-function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
+ window.__kasOpen=!a.dataset.kasfold;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();
+ /* short stages (844x390): the opened card is scrolled into view inside the column */
+ const R2=$$("kshR");if(R2&&window.__kasOpen)R2.scrollTop=R2.scrollHeight},true);
+function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||"")+"|"+(S.buoi|0)+"|"+(S.month|0):"";if(window.__kasKey!==pk){window.__kasKey=pk;if(window.__kasOpen){window.__kasOpen=false;const kr=$$("kshR");if(kr)kr.dataset.full=""}}}const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
  let L=$$("kshL"),R=$$("kshR");const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab"));
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
  if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L);
@@ -89,10 +99,16 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySel
  const hR0=`<div class="k3cs">${k3court()}${k3maid()}</div>`,hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
- if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
-  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(true)+hY;R.innerHTML=one;R.dataset.h=one}}
+ if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
+  R.classList.remove("k3c2");
+  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(!window.__kasOpen,true)+hY;R.innerHTML=one;R.dataset.h=one}
+  /* tassel-fix (owner 15/11 06:35Z): the plaque frames show the whole pendant + tassel (KIT 28.0), so a short stage (phone landscape)
+     may still be crowded with Ân sủng folded: the court plaques then stand in TWO aligned columns (same frame size, never smaller) */
+  if(k3AsCrowded(st,R))R.classList.add("k3c2")}
+ /* a tapped-open Ân sủng card stays inside the stage: the column scrolls instead of running past the floor */
+ R.classList.toggle("kasx",!!R.querySelector(".kasopen"));
  k3Gut()}catch(e){console.error("k3Stage",e)}}
-window.k3Stage=k3Stage;
+window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
    would touch drop to the second tag row (j59 crowd rule) */
 function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},250)}
@@ -115,9 +131,9 @@ document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest
  k3Explain(k)},true);
 /* owner 11/15 04:05Z: the "Tư chất · trạng thái" sheet is GONE — every fact lives in the top bar, the stage plaques or the court / Ân sủng
    chips. A tap on a fact opens its own explanation (the j19 status-cell card: HX text, Bổng lộc card, Ân thưởng card), never a sheet. */
-function k3Explain(k){try{if(!S||S.dead||Q.length)return;const b=k3hc(k);
+function k3Explain(k){try{if(!S||S.dead||Q.length)return;try{window.kitHxRoad&&kitHxRoad()}catch(e){}const b=k3hc(k);
  if(b&&!b.classList.contains("keep")){b.click();return}
- const t=typeof HX==="object"&&HX[k];if(t){Q.unshift({t:b?k3lab(b)||T(b.textContent):k,h:`<p>${t}</p>`});showModal()}}catch(e){}}
+ const t=typeof HX==="object"&&HX[k];if(t){const hc=$$("hud-"+k),hl=hc&&hc.querySelector(".kstl");Q.unshift({t:b?k3lab(b)||T(b.textContent):hl?T(hl.textContent):k,h:`<p>${t}</p>`});showModal()}}catch(e){}}
 window.k3Explain=k3Explain;
 function k3Sheet(open){const h=$$("hud2");if(!h)return;if(open)return;/* the sheet never opens (owner 04:05Z) */
  const isOpen=!h.classList.contains("col");if(open===isOpen)return;const t=h.querySelector(".h2t");if(t)t.click()}
@@ -192,6 +208,7 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh .k3wx{padding-left:0!important;font-size:.75rem!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
 .ksh .k3wx img{width:18px!important;height:18px!important;border-radius:50%}
 .ksh .k3cs{display:flex;flex-direction:column;gap:4px}
+.kshR.k3c2{max-width:52%}.kshR.k3c2 .k3cs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;align-items:stretch}.kshR.k3c2 .k3c .k3ct>b{white-space:normal}
 .ksh .k3c{display:flex;align-items:center;gap:5px;padding:2px 6px 2px 3px;font:inherit;text-align:left;cursor:pointer;min-height:0;color:var(--ink);width:100%}
 .ksh .k3c .md{flex:0 0 auto}
 .ksh .k3c .k3ct{display:flex;flex-direction:column;line-height:1.2;min-width:0}
@@ -206,9 +223,9 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .stage.k3n .ksh .k3c .k3v small{font-size:.58rem}
 /* Ân sủng plaque under the court chips (owner 11/15 04:05Z) */
 .ksh .kas .k3r{column-gap:8px}.ksh .kas .k3r>b{color:var(--ink)}
+.ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
+.kshR.kasx{max-height:calc(100% - 16px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .ksh .kas1{padding:2px 6px}.ksh .kas-one .k3l{font-weight:700;color:var(--gold)}.ksh .kas-one>b{color:var(--gold)}
-.kascard .kasrow{display:flex;justify-content:space-between;gap:12px;padding:3px 0;border-bottom:1px dotted var(--k-hair,#e6d3ac);font-size:.82rem}
-.kascard .kasrow:last-child{border-bottom:0}.kascard .kasrow b{white-space:nowrap}
 `;document.head.appendChild(css);
 
 /* ---------- 6. kitPhoneShell (KIT 31.7, owner 11/14): portrait screens under 1000 px wide (Fold, phones) work as TWO views.
@@ -302,13 +319,13 @@ function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollH
 addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
- const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=G.previousElementSibling;if(o&&o.classList.contains("kcattabs"))o.remove();return}
+ const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(o&&o.classList.contains("kcattabs")&&!o.classList.contains("kinvtabs"))o.remove();return}
  const key="hclh-kcat-"+(typeof tab!=="undefined"?tab:"")+"-"+gi;let cur=null;try{cur=localStorage.getItem(key)}catch(e){}if(cur&&cur!=="all"&&!cats.includes(cur))cur="all";cur=cur||"all";
  const name=c=>(typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c);
  const cnt=c=>{const L=c==="all"?cards:cards.filter(b=>(b.dataset.kart||"khac")===c);return [L.filter(b=>!b.disabled&&!b.classList.contains("kdis")).length,L.length]};
- let row=G.previousElementSibling;if(!row||!row.classList.contains("kcattabs")){row=document.createElement("div");row.className="pctabs kcattabs";row.setAttribute("role","tablist");G.before(row)}
+ let row=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(!row||!row.classList.contains("kcattabs")||row.classList.contains("kinvtabs")){row=document.createElement("div");row.className="pctabs kcattabs";row.setAttribute("role","tablist");G.before(row)}
  const h=kitTabRowHTML(["all"].concat(cats).map(c=>{const [n,t]=cnt(c);return{k:c,label:c==="all"?"Tất cả":name(c),n:`${n}/${t}`,tip:`làm được ${n} trên ${t} việc`}}),cur,"data-kcat");
- if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;
+ if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;row.dataset.g=gi;
  cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur)})});kitTabStick()}catch(e){console.error("k3CatTabs",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcattabs [data-kcat]");if(!b)return;e.stopPropagation();const row=b.closest(".kcattabs");
  try{localStorage.setItem(row.dataset.key,b.dataset.kcat)}catch(x){}k3CatTabs()},true);
@@ -387,13 +404,16 @@ function k3Tags(){try{const st=document.getElementById("stage");if(!st)return;co
    news / intel / result kit panels (.kfacts paragraphs) — every generator benefits without changing its text. ---------- */
 function kitBulletsHTML(h){h=String(h||"").trim();if(!h)return h;const txt=h.replace(/<[^>]+>/g,"");if(txt.length<70)return null;
  /* split outside tags only */
- const parts=[];let cur="",depth=0,tag=false;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">"){tag=false;
+ const parts=[];let cur="",depth=0,tag=false,qd=0;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">"){tag=false;
   /* a lone gain/cost chip ("<span class=r>Lòng -5</span> Ngọc Lan …") is its own fact */
   if(/^<span class="(ef )?[rg]">[^<]*<\/span>$/.test(cur.trim())&&/^\s+\S/.test(h.slice(i+1))){const f=h.slice(i+1).trim().charAt(0);if(f===f.toUpperCase()&&f!==f.toLowerCase()){parts.push(cur);cur="";continue}}}if(tag)continue;
   if(c==="(")depth++;else if(c===")")depth=Math.max(0,depth-1);
-  const endP=depth===0&&((/[.!…]/.test(c)||(c==="?"&&h[i-1]!=="?"&&h[i+1]!=="?"))||(c===")"&&cur.trim().replace(/^(<[^>]+>)+/,"").startsWith("(")));
+  /* a quoted speech “…” is ONE fact (review/toilette: "“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”" was cut in two):
+     no split inside the quotes; after the closing ” when the speech ended a sentence */
+  if(c==="“"&&h.indexOf("”",i)>0)qd++;else if(c==="”")qd=Math.max(0,qd-1);
+  const endP=depth===0&&qd===0&&((/[.!…]/.test(c)||(c==="?"&&h[i-1]!=="?"&&h[i+1]!=="?"))||(c==="”"&&/[.!?…]/.test(h[i-1]||""))||(c===")"&&cur.trim().replace(/^(<[^>]+>)+/,"").startsWith("(")));
   if(endP&&/^\s+/.test(h.slice(i+1))){const rest=h.slice(i+1).replace(/^\s+/,"").replace(/^(<[^>]+>)+/,"");const f=rest.charAt(0);if(/[("“]/.test(f)||(f&&f===f.toUpperCase()&&f!==f.toLowerCase())){parts.push(cur);cur=""}}
-  else if(depth===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZĐÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
+  else if(depth===0&&qd===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZĐÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
  if(cur.trim())parts.push(cur);const P=parts.map(s=>s.trim().replace(/^(<\/[^>]+>)+/,"").trim()).filter(s=>/[\p{L}\d]/u.test(s.replace(/<[^>]+>/g,"")));/* act audit 08:35Z: a bullet that is only "." (left after a chip) is dropped */
  if(P.length<2)return null;const foot=[],li=[];
  P.forEach(s=>{const t=s.replace(/<[^>]+>/g,"").trim();if(/^\(.*\)\.?$/.test(t)){foot.push(t.replace(/^\(|\)\.?$/g,""));return}
@@ -445,7 +465,7 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
   const sh=B.filter((x,i)=>!L[i]);const cols=g.classList.contains("k3g3")?3:2;B.forEach(x=>x.classList.remove("k3odd"));if(sh.length%cols)sh[sh.length-1].classList.add("k3odd")})}catch(e){}}
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
  try{const mb=document.getElementById("mb");const ha=m&&(m.headArt||(m.kit&&m.kit.headArt));if(mb&&ha&&!mb.querySelector(":scope > .kdlgart")){const src=typeof ha==="string"?ha:ha.src,lab=typeof ha==="string"?"":(ha.label||"");
-  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab});mb.prepend(d)}}catch(e){}
+  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab,mark:typeof ha==="string"?"":ha.mark||"",markAlt:typeof ha==="string"?"":ha.markAlt||""});mb.prepend(d)}}catch(e){}
  requestAnimationFrame(k3OptCols);setTimeout(k3OptCols,300);return r}
  addEventListener("resize",()=>setTimeout(k3OptCols,60));
  const st=document.createElement("style");st.id="k3-opts";st.textContent=`
@@ -536,12 +556,14 @@ const KAS_ORD=new Map(),KAS_TRY=new WeakMap();const kasT=s=>String(s||"").replac
 function kitActGroup(b){if(!b.disabled&&!b.classList.contains("kdis"))return 0;
  const x=[...b.querySelectorAll(".kr-why .kchip, .kr-why .kwhy")].map(e=>kasT(e.textContent)).filter(t=>/^✗/.test(t));
  if(x.length&&x.every(t=>/buổi|khắc/i.test(t)&&!/chưa làm|đã làm/i.test(t)))return 1;return 2}
-function kitActKey(b){const h=b.querySelector("h4, .kan");return (b.dataset.i||b.dataset.a||"")+"|"+kasT((h||b).textContent).slice(0,60)}
+/* (tabs-kit r7) was named kitActKey: in the one concatenated script it shadowed j79 kitActKey(name) (ACTS.json lookup), so every
+   name lookup threw and acts lost their own pictures (j79 kitActArt wrapper, j87, kit-fig2 kitActCompactOn). */
+function kitActSortKey(b){const h=b.querySelector("h4, .kan");return (b.dataset.i||b.dataset.a||"")+"|"+kasT((h||b).textContent).slice(0,60)}
 function kitActSort(root){try{if(!S)return;const when=[S.year,S.month,S.tuan,S.buoi||0].join(".");
  (root||document).querySelectorAll(".cards, .rbtn").forEach(G=>{const kids=[...G.children];if(kids.length<2||!kids.every(e=>e.matches("button.ka")))return;
   /* wait until every greyed card has its Cần row (j63 fills it a frame later): classifying before would freeze a wrong order */
   if(kids.some(b=>(b.disabled||b.classList.contains("kdis"))&&!b.querySelector(".kr-why"))){const n=(KAS_TRY.get(G)||0)+1;KAS_TRY.set(G,n);if(n<4)return}
-  const seen={};const keys=kids.map(b=>{const k=kitActKey(b);seen[k]=(seen[k]||0)+1;return k+"#"+seen[k]});
+  const seen={};const keys=kids.map(b=>{const k=kitActSortKey(b);seen[k]=(seen[k]||0)+1;return k+"#"+seen[k]});
   const id=when+"|"+keys.slice().sort().join("¦");let ord=KAS_ORD.get(id);
   if(!ord){const g=kids.map(kitActGroup);ord=kids.map((b,i)=>i).sort((a,c)=>g[a]-g[c]||a-c).map(i=>keys[i]);KAS_ORD.set(id,ord);if(KAS_ORD.size>200)KAS_ORD.delete(KAS_ORD.keys().next().value)}
   const by=new Map(keys.map((k,i)=>[k,kids[i]]));const want=ord.map(k=>by.get(k)).filter(Boolean);

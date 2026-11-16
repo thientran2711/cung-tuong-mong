@@ -25,7 +25,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Chép kiếp ra ngoài | Chép sổ · "chép kiếp này thành bản chép" | Xuất ván, mã |
 | Nạp kiếp từ ngoài | Nạp sổ · "dán bản chép vào để nạp" | Nhập ván, dán mã |
 | Bảng tùy chỉnh | Thiết lập | Cài đặt, Tùy chọn, Settings |
-| Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Cảnh động; nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
+| Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Hiệu ứng: Đầy đủ / Gọn (owner 22:35Z; was Cảnh động); nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
 | Tab việc làm | Hành sự | Hành động |
 | Tab bản đồ | Dư đồ (nút quay lại: "‹ Dư đồ") | Bản đồ, map |
 | Tab quan hệ (nút dưới) | Giao tình; mục con: Ân oán · Phe phái (lời chỉ: "Giao tình › Ân oán") | Quan hệ |
@@ -52,6 +52,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Ngôi thứ ba (người khác) (owner 11/15) | nữ: **nàng ta** ("Khen tài nghệ nàng ta", "nàng ta nắm 1 chứng cứ của ta"); nam: **y** (trung tính, lễ độ), **hắn** chỉ khi thù địch; Hoàng thượng: **bệ hạ**; Thái hậu: **Thái hậu**; chưa rõ: **vị ấy**. Hàm `kitThey(p)` (jaudit); VP đổi "nàng" trơn thành "nàng ta" trên màn hình | "nàng" trơn khi nói người khác |
 | Y phục dưới phẩm ở lễ (owner 11/15) | **thiếu lễ** ("thiếu lễ (y phục dưới phẩm): Danh −2 …"); khác **vượt phẩm** (mặc quá phẩm) | ăn mặc sai, không hợp |
 | Món đang mang (Tư trang, mọi ô) | **Đang mặc** (một chữ cho trâm, áo, vòng…) | Đang cài, Đang đeo, Đang dùng |
+| Tên món đồ trong câu (review/small-bugs-3) | danh từ chung: giữa câu viết thường ("Khương Lạc Anh tặng trâm gỗ đào cho …", "Phần thưởng: vòng ngọc Hòa Điền vào rương."); đứng một mình (ô đồ, tên thẻ, chip, đầu câu / đầu dòng) viết hoa chữ đầu; tên riêng trong tên món giữ hoa (Hòa Điền, Hàng Châu). VP làm trên màn hình: `VP.itemLow` (j84, tên từ IT + WD_ITEMS) | "tặng Trâm gỗ đào cho" |
+| Thay đổi thiện cảm (review/small-bugs-3) | "thiện cảm +20", "<tên> thiện cảm +25" | "thân +20", "nàng thân +20" (VP đổi cả dòng sổ cũ) |
 | Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
@@ -59,8 +61,13 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Khả năng của một điều kèm theo (có thai, được ban thưởng, lật thẻ, bị lộ, bị phạt, chết… trong Được / Mất / Kèm, thẻ kết quả, Sổ ghi, lời dặn, ô trạng thái) | Rất thấp / Thấp / Vừa / Cao / Rất cao (không có thì "Không có"); trong dòng: "có thai: khả năng thấp · được ban thưởng: khả năng vừa"; ô: "Có thai: Thấp"; sổ ghi: "(khả năng: vừa)". Hàm `chanceW` / `chanceLvl` (j1) | "có thai: Liều", "được ban thưởng: Khó", "cơ may: …" cho điều kèm theo |
 | Chạm màn hình (lời dặn) | chạm | bấm, click, nhấn |
 | Mở một tab (lời dặn) | Vào mục Phe phái | Mở tab Phe phái |
-| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi |
+| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi | (thẻ người, sổ tuần, kết quả việc vẫn dùng lối này)
 | Mức "quý" | Ghét (≤ -30) · Không ưa (-29…-11) · Bình thường (-10…10) · Có cảm tình (11…29) · Quý mến (30…59) · Thân thiết (≥ 60) | Lạnh nhạt, Thân |
+| Hàng quan hệ kitRelRow (Giao tình › Ân oán, owner 11/15) | dòng 1: "<A> → <B>: thiện cảm" / "<A> → <B>: oán" (người chơi = "ta": "Hoàng hậu → ta: oán", "Ta → Hoàng hậu: thiện cảm"); dòng 2: "<mức> · <số>" rồi thanh | "Nàng quý ngươi" trong Ân oán, "thù" |
+| Hai chỉ số quan hệ (giữ riêng, không gộp; owner 11/15) | chạm nhãn: **Thiện cảm**: "có chịu giúp, kết giao với ta không" · **Oán**: "mối hận vì việc ta đã làm, có muốn trả đũa ta không; nguôi dần mỗi tháng" | thù, thù hận |
+| Mức "oán" (0…100, BAL.oanLv) | Không oán (< 5) · Chút oán (5…19) · Oán (20…44) · Oán sâu (45…74) · Oán hận (≥ 75) | Thù, Thù hận |
+| Người chưa gặp (Ân oán) | "Ta chưa gặp <tên>, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt." | Ngươi chưa gặp …, Gặp nàng |
+| Tiền của người chơi (cửa hàng) | "Ta có N bạc" | Ngươi có N bạc |
 | Kẻ hầu được sai đi làm việc | Người chạy việc: <tên> (chạm: "Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi; chọn theo Lòng và tài"); nút "Đổi ›" | Sai đi: <tên> |
 | Ngày đầu cuộc | Thân phận kiếp này · Nhận thân phận · Nhập cung | — |
 | Chơi chung (sếp 15/11) | Cùng hảo hữu · Mời hảo hữu · hảo hữu (người chơi cùng) · Ám hiệu · Nhập ám hiệu | Chơi cùng bạn, Mời bạn, bạn, tri kỷ, Mã phòng |

@@ -34,7 +34,7 @@ TOPS = ("img",)  # audio/ (4.6 MB, rarely changes) stays in git
 INDEX = "img/_index.json"
 TYPES = {"webp": "image/webp", "png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "gif": "image/gif", "svg": "image/svg+xml",
          "avif": "image/avif", "json": "application/json", "txt": "text/plain; charset=utf-8", "mp3": "audio/mpeg", "ogg": "audio/ogg",
-         "m4a": "audio/mp4", "woff2": "font/woff2"}
+         "m4a": "audio/mp4", "woff2": "font/woff2", "mp4": "video/mp4", "webm": "video/webm"}
 SKIP = (".DS_Store", "Thumbs.db")
 
 
@@ -198,7 +198,7 @@ def pull(globs):
     def get(k):
         for i in range(6):
             try:
-                with urllib.request.urlopen(urllib.request.Request(PUBLIC + keyurl(k), headers={"Cache-Control": "no-cache"}), timeout=120) as r:
+                with urllib.request.urlopen(urllib.request.Request(PUBLIC + keyurl(k), headers={"Cache-Control": "no-cache", "User-Agent": "ctm-cdn-sync"}), timeout=120) as r:
                     b = r.read()
                 if md5(b) == remote[k][0]:
                     break

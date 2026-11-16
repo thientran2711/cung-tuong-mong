@@ -118,7 +118,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const keep={};for(const k in S)if(!W_KEYS.includes(k))keep[k]=S[k];
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
- keep.rl={};keep.ro={};keep.tonight=null;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
+ keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
  S=keep;const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];P.S.empKnown={};
@@ -192,6 +192,15 @@ function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q
  if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
 function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend)return;CW.bend=true;COOP.send({t:"bend",week:wk(),buoi:S.buoi||0});lockNext()}
+/* a night with the Emperor spends the rest of her day (jnight). In co-op the day only moves through the sync path above:
+   sáng / chiều → `bend` (the server's `buoi` then runs the real step for both), tối → endTurn → `end` → the merged week.
+   CW.nightEnd() ends THIS seat's current buổi once: nothing while her buổi is already ended (bend sent, week pending / sent), while
+   the room is frozen, while a dialog or a room step is pending, or while her buổi is not the room's buổi (never ahead of the friend).
+   Returns the buổi key it ended ("week:buổi") or "" (nothing done: jnight asks again on the next render). */
+CW.nightEnd=function(){if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";
+ const b=S.buoi||0;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return"";
+ const k=bkey();used=4;nextBuoi();return (CW.bend||CW.pend||(S.buoi||0)!==b)?k:""};
+CW.bkey=bkey;
 COOP.on("buoi",onBuoi);
 /* the room's current buổi (for a reborn life that joins mid-week) */
 const rb=m=>{if(m&&typeof m.buoi==="number"){CW.rbuoi=m.buoi;CW.rweek=m.week!=null?m.week:wk()}};
@@ -226,7 +235,7 @@ function sendRes(v,k,b0,txt,id){const b1=fsnap(v);const fx={};for(const x of DK)
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
- pushModal({t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
+ pushModal({act:1,t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
 function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;
@@ -257,7 +266,13 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","
 function friendName(){const P=CW.base&&CW.base.P&&CW.base.P[fs()];return P?(P.name||(P.S&&P.S.name)||"hảo hữu"):"hảo hữu"}
 function worldNews(C){if(host())return"";const n=C.W&&C.W.S&&C.W.S.cnews;if(!n||!n.h)return"";
  return String(n.h).split(/(?<=\.\s|<\/span>\s?|<\/b>\s?)/).filter(x=>x.trim()&&!/gươi/.test(x)).join(" ")}
-function onWeek(m){T("week");if(!CW.on||!m.state)return;const C=m.state;CW.base=J(C);CW.pend=false;
+/* review r7 (coop-e2e "week after rebirth advances" / "after week 3 same date"): a socket that drops under load reconnects and gets a
+   `room` snapshot; the room handler took "room week > my sent week" as "the merge happened while I was away" and rebuilt the week from
+   the room's base even when that merge had ALREADY been applied here (sent = w, merged week w+1 received, then the reconnect): her whole
+   week so far (buổi sáng → tối) was thrown back to buổi sáng while the server stayed at buổi tối (`badbuoi`), and the two seats split
+   (one ended the week alone, the other could never end it). CW.wkIn = the last merged week applied here; a week is applied once. */
+function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;if(typeof m.week==="number"&&CW.wkIn===m.week){T("week dup");return}
+ const C=m.state;CW.base=J(C);CW.pend=false;if(typeof m.week==="number")CW.wkIn=m.week;
  const wasDead=S&&S.dead;const ok=fromCanon(C,{keepQ:true});if(!ok)return;
  const P=C.P[CW.seat];
  if(!wasDead&&S.dead){S.dead=false;try{die(P.S.coopWhy||"Bị hại trong cung")}catch(e){console.error(e)}return}
@@ -275,7 +290,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
   const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
-function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
+function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
  if(!C&&!host()){CW.waitWorld=true;/* the lobby keeps the title backdrop up with a kit panel "Đợi bạn chọn thân phận" (no empty game frame) */try{COOP_LOBBY.hostPick(true)}catch(e){console.error(e)}return}
@@ -287,11 +302,16 @@ COOP.on("week",onWeek);
 COOP.on("state",onState);
 /* room snapshot (connect / reconnect): buổi, last where, last pos of both */
 function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.where)CW.lastWhere=m.where;if(m.pos&&m.pos[o])onPos(Object.assign({from:o},m.pos[o]))}catch(e){}
+ /* a `bend` / `end` sent while the socket was down (COOP.send drops it when the socket is not open) is lost: the seat waits for a
+    friend who waits for it. The room snapshot after the reconnect says what the server holds; send it again. */
+ try{if(!S.dead&&m.week===wk()){const me=CW.seat;
+  if(CW.bend&&m.buoi===(S.buoi||0)&&m.bended&&!m.bended[me]){T("rebend "+m.week+"."+m.buoi);CW.bend=false;bend()}
+  if(CW.sent===wk()&&m.ended&&!m.ended[me]){T("re-end "+m.week);CW.sent=-1;CW.pend=true;soonEnd()}}}catch(e){console.error(e)}
  if(CW.p2&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi&&!Q.length&&!S.mg){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
-COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;if(!CW.on||!m.state)return;const C=m.state;
+COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
  /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week */
- if(CW.sent>=0&&m.week>CW.sent){onWeek({state:C,week:m.week});return}
+ if(CW.sent>=0&&m.week>CW.sent&&m.week!==CW.wkIn){onWeek({state:C,week:m.week});return}
  if(!CW.base)CW.base=J(C);else{CW.base.P=J(C.P);CW.base.W=J(C.W)}syncRoom(m)});
 
 /* ---------- hooks ---------- */

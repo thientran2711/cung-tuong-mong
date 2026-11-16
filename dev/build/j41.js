@@ -43,7 +43,7 @@ function accMini(k,st,risk){const L=[];
  return L.length?`<span class="macts">${L.join("")}</span>`:""}
 /* full kit buttons (Danh sách, cards) */
 function accBtns(k,st){const L=[];
- if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":""));
+ if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.askWhy||(st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":"")));
  if(st.ask==="bk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin bái kiến",accAskLine(k),!can(1)?"hết khắc":""));
  if(st.kind)L.push(pbtn(`class="btn" data-acsneak="${k}"`,"Lẻn vào",accSneakLine(k,st.tc),st.sneakOk?"":"không đủ khắc"));
  return L.join("")}
@@ -66,7 +66,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
   if(!window.__accSilent&&!S.dead&&!Q.length&&!S.out&&!S.confined){const st=accState(k);const opts=[];
    if(st.ask&&!st.empAway)opts.push({n:st.ask==="yk"?"Xin yết kiến":"Xin bái kiến",fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)});
    if(st.kind&&st.sneakOk)opts.push({n:"Lẻn vào",fx:{},x:accSneakLine(k,st.tc),go:()=>setTimeout(()=>accSneak(k),0)});
-   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: không đủ khắc (cần ${st.tc+2}, còn ${4-used}).</p>`:""}`,opts});showModal()}
+   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: ${typeof j77Bound==="function"?j77Bound(st.tc+2):`không đủ khắc (cần ${st.tc+2})`}.</p>`:""}`,opts});showModal()}
   return}
  const prev=S.place;const r=g0.apply(this,arguments);
  try{if(k==="lc"&&S.place==="lc"&&prev!=="lc"&&!S.out){apply({danh:-2});log("Bị thấy lui tới Trường Môn viện: Danh -2.");if(S.visit)S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+"Có người thấy ngươi ở lãnh cung: Danh -2."}}catch(e){}

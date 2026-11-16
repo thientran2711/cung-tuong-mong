@@ -72,7 +72,7 @@ function spyPick(refund){const m=whyMaidInit(S.maid),L=spyList();const cur=spyTa
  /* (2) "Nghe ngóng chung": no target, 1 khắc, one true piece of palace news; who it is about is weighted by real causes */
  A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${m.name} quen bên ấy)${(S.mat||0)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
   run:()=>{const r=spyNews(m);return r}});return A}})();
-function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id])?0:.5)}
+function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id]!=null)?0:.5)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
  const v=L[i];const n=(S.mat||0)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
  const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=30?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
@@ -98,7 +98,7 @@ function whyOfBtn(b){if(!b||!S)return null;const d=b.dataset||{};
  try{if(d.r!=null&&d.a){const k=d.a,v=rivals[+d.r],A=ACT[k];if(!A||!v||!A.o)return null;const F=A.why?A.why(S,v):whyDiff(()=>A.o(S,v),[[S,S],[v,v]]);return{F,dom:ACTDOM[k],base:k==="spy"?BAL.spyBase:null,o:A.o(S,v)}}
   if(d.o!=null&&b.classList.contains("opt")&&typeof popIdx!=="undefined"&&popIdx!=null){const p=curPeople()[popIdx];const opts=talkOpts(p);const a=opts[+d.o];if(!a||a.o==null||a.o>=100)return null;
    const F=a.why?a.why():whyDiff(()=>{const x=talkOpts(p).find(y=>y.n===a.n);return x?x.o:null},[[S,S],[p.ref||null,p.ref||null]]);return{F,dom:a.dom,base:a.why?BAL.spyBase:null,o:a.o}}
-  if(d.m!=null&&Q[0]&&Q[0].opts){const a=Q[0].opts[+d.m];if(a&&a.why)return{F:a.why(),dom:a.dom,base:BAL.spyBase,o:a.o}}
+  if(d.m!=null&&Q[0]&&Q[0].opts){const a=Q[0].opts[+d.m];if(a&&a.why)return{F:a.why(),dom:a.dom,base:a.base!==undefined?a.base:BAL.spyBase,o:a.o}}
   if(d.i!=null&&typeof deck!=="undefined"){const a=deck[+d.i];if(!a||a.o==null||a.o>=100)return null;return{F:a.why?a.why():[],dom:a.dom,o:a.o,deck:1}}}catch(e){console.error(e)}return null}
 function kitWhyHtml(b,lv){const W=whyOfBtn(b);if(!W)return"";const q=lotB(S,W.dom);const word=KIT_ODDS[lv]||"";
  const F=W.F.filter(x=>Math.abs(x[1])>=1||/Tự tay/.test(x[0])).sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]));

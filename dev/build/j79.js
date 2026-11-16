@@ -11,11 +11,22 @@ const kpN=n=>(n>0?"+":n<0?"−":"")+Math.abs(Math.round(n*100)/100);
 /* ---------- people: title (rank word) + name coloured by rank, face ---------- */
 function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";
  const f=kitFace(p);let rw=String(f&&f.rw||"").split("·")[0].trim();if(/^(Hoàng tử|Công chúa|Thái tử)/.test(p.name||""))return"";return rw}catch(e){return""}}
+/* KIT 48.1: the rank-title colour of a title (kitRankTone lives in jk4, later in the build; until then the CSS falls back to --rc) */
+function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
-function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname" style="--rc:${kitPersonCol(S)}">${srv?"":`<span class="kti">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
- const t=o.noTitle?"":kitTitle(p);const nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");
- return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
+function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
+ const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
+ return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
+/* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Lý Liên Anh"): ONE rule for every title + name builder —
+   some names carry their own title ("Tổng quản Lý Liên Anh"); the words of the name's start that the title already says are dropped.
+   kitTitledName(t,n) → the name part to print after t; kitTitled(t,n) → "t n" without a repeat (case ignored). */
+/* only words that are titles, never a surname that is also a rank word (Tần Khinh Vũ, rank Tần) */
+const KIT_NAME_TITLE_RX=/^(tổng quản|thái giám|cung nữ|cung nữ thân tín|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|thợ \S+|tể tướng|thượng thư|thị lang|tướng quân|công tử|quan)$/;
+function kitTitledName(t,n){t=String(t||"").trim();n=String(n||"").trim();if(!t||!n)return n;const tl=t.toLowerCase(),w=n.split(" ");
+ for(let k=Math.min(4,w.length-1);k>=1;k--){const pre=w.slice(0,k).join(" ").toLowerCase();if(!KIT_NAME_TITLE_RX.test(pre))continue;if(tl===pre||tl.startsWith(pre+" ")||tl.endsWith(" "+pre)||tl.includes(" "+pre+" "))return w.slice(k).join(" ")}return n}
+function kitTitled(t,n){const m=kitTitledName(t,n);return t?(m?`${t} ${m}`:t):m}
+window.kitTitled=kitTitled;window.kitTitledName=kitTitledName;
 function kitFaceH(p,size){try{if(!p)return"";if(p.src!==undefined||p.ini!==undefined)return mdH(p,size||"sm");return mdH(kitFace(p),size||"sm")}catch(e){return""}}
 /* one person line: face + title/name + sub line (chips allowed) */
 function kitPersonLine(p,o){o=o||{};return `<div class="kpl">${kitFaceH(p,o.size||"sm")}<span class="kplt">${kitName(p,{cap:true})}${o.sub?`<small>${o.sub}</small>`:""}</span>${o.chips?`<span class="kplc">${o.chips}</span>`:""}</div>`}
@@ -38,28 +49,61 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 function kitRows(rows){return `<span class="kb kpkb">`+(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).map(([l,v,c])=>{const vals=Array.isArray(v)?v:[v];
  return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join('<span class="ksep">·</span>')}</span></span>`}).join("")+`</span>`}
+/* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
+   are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
+function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
+/* KIT §51 kitReqRows([[ok, "Sủng 8 (cần 15)"], ...]) -> a requirement list as ONE kit table: label = what is needed, value = ✓/✗ + the
+   numbers (green met / red unmet). "Sủng 8 (cần 15)" -> Sủng | ✗ 8 (cần 15); "Ghế Phi: còn chỗ" -> Ghế Phi | ✓ còn chỗ;
+   "Hoàng hậu không chặn (Hoàng hậu -5, …)" -> Hoàng hậu không chặn | ✗ Hoàng hậu -5, …; a bare sentence -> sentence | ✓ đủ / ✗ chưa đủ. */
+function kitReqSplit(t){t=String(t||"").trim();let m=t.match(/^([^(\d:]+?)(?::\s*|\s+)(-?\d[\s\S]*)$/);if(m)return [m[1],m[2]];
+ m=t.match(/^([^:(]+?):\s+([\s\S]+)$/);if(m)return [m[1],m[2]];m=t.match(/^([^(]+?)\s*\(([\s\S]+)\)$/);if(m)return [m[1],m[2]];return [t,""]}
+function kitReqRows(list){return kitRows((list||[]).filter(Boolean).map(([ok,t])=>{const [l,v]=kitReqSplit(t);return [l,`${ok?"✓":"✗"} ${v||(ok?"đủ":"chưa đủ")}`,ok?"g":"r"]}))}
 /* tiers / ladders: [{k:"30–59", n:"hại nhỏ", d:"Tung tin đồn, Dò la", on:true, c:"r"}] */
 function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
 
 /* ---------- facts: one fact per row (never a run-on paragraph) ---------- */
 /* split an HTML run into sentences, keeping inline tags balanced across the cut */
-function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const out=[];let cur="",stack=[];
+const KP_UP="A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9";
+const KP_ENDS=/[.!?]["”)]?\s+$/,KP_ENDS0=/[.!?]["”)]?\s*$/,KP_STARTS=new RegExp(`^\\s+["“(]?[${KP_UP}]`);
+function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const out=[];let cur="",stack=[],qd=0;const qOn=(String(html).match(/“/g)||[]).length===(String(html).match(/”/g)||[]).length;
+ /* a quoted speech “…” stays ONE row (review/toilette, KIT 31.14): no cut while inside the quotes (qd>0) */
+ const qc=s=>{if(qOn)for(const c of s){if(c==="“")qd++;else if(c==="”")qd=Math.max(0,qd-1)}};
  const cut=()=>{const close=stack.slice().reverse().map(t=>`</${t.n}>`).join("");if(kpPlain(cur))out.push(cur+close);cur=stack.map(t=>t.o).join("")};
  for(const tk of toks){if(!tk)continue;if(tk[0]==="<"){const m=tk.match(/^<\s*(\/)?\s*([a-z0-9]+)/i);if(m){const n=m[2].toLowerCase();if(/^(br|img|hr)$/.test(n)){if(n==="br"){cut();continue}cur+=tk;continue}
+    /* owner 11/15 ("chứng cứ dính vào dòng tấn phong"): a sentence that ends right before an opening tag ("… 42. <b>Thánh chỉ …") is a row of its own */
+    if(!m[1]&&qd===0&&KP_ENDS0.test(kpPlain(cur))&&/\s$/.test(cur.replace(/<[^>]*>/g,"")))cut();
     if(m[1]){const i=stack.map(x=>x.n).lastIndexOf(n);if(i>=0)stack.splice(i,1)}else if(!/\/>$/.test(tk))stack.push({n,o:tk})}cur+=tk;continue}
-  const parts=tk.split(/(?<=[.!?])\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/);
-  parts.forEach((p,i)=>{cur+=p;if(i<parts.length-1)cut()})}
- if(kpPlain(cur))out.push(cur);return out.map(s=>s.trim()).filter(s=>kpPlain(s)&&kpPlain(s)!==".")}
+  /* … and one that ends inside a tag, the next text starting a new sentence ("…nặng.</span> Hoàng hậu …") */
+  if(qd===0&&KP_ENDS0.test(kpPlain(cur))&&KP_STARTS.test(tk))cut();
+  const parts=tk.split(/(?<=[.!?]["”)]?)\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/);
+  parts.forEach((p,i)=>{cur+=p;qc(p);if(i<parts.length-1){if(qd===0)cut();else cur+=" "}})}
+ if(kpPlain(cur))out.push(cur);const R=out.map(s=>s.trim()).filter(s=>kpPlain(s)&&kpPlain(s)!==".");
+ /* the reason of a fact ("Lý do: …", "Vì …:") stays on the fact's row */
+ /* … and so does a note in brackets right after it ("(Chứng cứ X +1.)" = what that act gave); a reason said twice is kept once */
+ for(let i=R.length-1;i>0;i--){const pl=kpPlain(R[i]);/* review r6: a sentence that is ONLY stat changes ("Danh -1.", "Kho lúa -8, nhà X thế lực -6.") is the result of the fact before it: same row */const onlyD=!/[:“"]/.test(pl)&&pl.replace(/\.\s*$/,"").split(/\s*[,;·]\s*/).every(x=>/^[A-Za-zÀ-ỹĐđ][^.!?]{0,40} [+\-−]\d+(?:[.,]\d+)?$/.test(x.trim()));if(onlyD){R.splice(i-1,2,R[i-1]+" "+R[i]);continue}if(/^(Lý do|Vì)\b/.test(pl)||/^\(/.test(pl)){if(kpPlain(R[i-1]).includes(pl))R.splice(i,1);else R.splice(i-1,2,R[i-1]+" "+R[i])}}return R}
 /* text segments only (never inside a tag) */
 function kpMapText(html,fn){return String(html).split(/(<[^>]+>)/).map(s=>s&&s[0]==="<"?s:fn(s)).join("")}
 const KP_DELTA=/((?:[A-Za-zÀ-ỹĐđ]+ ){0,2}[A-Za-zÀ-ỹĐđ]+) ([+\-−])(\d+(?:[.,]\d+)?)(?![\d.,]*\d)(?!\s*[–-]\s*\d)/g;
 function kpChipify(html){return kpMapText(html,s=>s.replace(KP_DELTA,(m,l,sg,n)=>{if(/^(năm|tháng|tuần|ngày|tuổi|lần|khắc)$/i.test(l.split(" ").pop()))return m;const v=(sg==="+"?1:-1)*parseFloat(n.replace(",","."));return kitChip(l,v)}))}
 /* decorate the first mention of each person: rank title + name in rank colour (title not doubled) */
 /* the text already names a (different) title right before the name, e.g. "Thái tử" + a Hoàng tử: keep the text's title, never "Thái tử Hoàng tử X" */
-const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô) $/;
+const KP_CONS_RX=/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) $/;
+/* owner 11/15 ("Cung nữ Cung nữ thân tín Tiểu Đào"): ANY title the text already puts before the name keeps the text's words — court ranks,
+   servants, officials, artisans, family words — and so does the start of the person's own title ("Cung nữ" before a "Cung nữ thân tín") */
+const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô|[Cc]ung nữ(?: thân tín)?|[Tt]hái giám|[Tt]ổng quản|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]hợ [^ ]+|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử|[Tt]iểu chủ|[Cc]hủ tử|[Nn]ương nương|[Tt]ú nữ) $/;
+/* the text ends with the first word(s) of t (her own title, shortened) */
+function kpTitleTail(pre,t){const w=String(t||"").split(" ").filter(Boolean);for(let k=w.length;k>=1;k--){const x=w.slice(0,k).join(" ")+" ";if(pre.endsWith(x)||pre.toLowerCase().endsWith(x.toLowerCase()))return true}return false}
 function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
  for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
-  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));const own=t&&KP_TITLE_RX.test(pre);return pre+kitName(p,{named:p===S,noTitle:own})+s.slice(i+n.length)})}
+  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));
+   /* owner 11/15 16:55Z (fix-float): an older line still carries her rank of that day ("Đáp ứng X" after she became Thường tại): a consort is
+      always drawn with her CURRENT title, the old one is dropped */
+   else if(t&&KP_CONS_RX.test(pre)&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p))))pre=pre.replace(KP_CONS_RX,"");
+   const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":RANKS[S.rank].n):t;/* her own rank is drawn by kitName(named) */
+   const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);return pre+kitName(p,{named:p===S,noTitle:own,pre:own||KP_TITLE_RX.test(pre)?pre:""})/* review r6: a name that carries its own title (kitTitle "") after a title in the text: "Tổng quản thái giám Tổng quản X" */+s.slice(i+n.length)})}
+ /* owner 11/15 (news rows showed the wrong person): the row's face = the person named FIRST in the sentence (the subject), not the one
+    with the longest name — names are matched longest-first (no partial overlaps), then ordered by where they stand in the text */
+ if(who.length>1){const at=p=>{const e=people.find(x=>x[1]===p);const i=e?plain.indexOf(e[0]):-1;return i<0?1e9:i};who.sort((a,b)=>at(a)-at(b))}
  const lead=plain.replace(/^[^A-Za-zÀ-ỹĐđ]+/,"");
  if(/^(Hoàng thượng|Thánh thượng)/.test(lead)&&S&&S.emp&&!who.length)who.push(S.emp);
  if(/^Thái hậu/.test(lead)&&S&&!who.length)who.push(S.thO||{kind:"th"});
@@ -68,8 +112,20 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
  if(!who.length&&/Thái hậu/.test(plain)&&S)who.push(S.thO||{kind:"th"});
  return [h,who]}
 /* one fact object -> row.  fact = "html" | {who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"} */
-function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=f.text||"",who=f.who?[].concat(f.who):null;
- if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(text)}
+/* KIT 9: a title said twice in a row in stored text (old saves / old logs): "Tổng quản thái giám Tổng quản X" → "Tổng quản thái giám X",
+   "Cung nữ Cung nữ thân tín X" → "Cung nữ thân tín X" */
+const KIT_DUP_T=/(^|[\s>(:,])(Tổng quản|Thái giám|thái giám|Cung nữ|cung nữ|Thái y|thái y|Ma ma|ma ma|Cô cô|cô cô|Thị vệ|thị vệ)((?: (?:thái giám|thân tín))?) ((?:<[^>]+>)*)\2(?=[\s<])/g;
+function kitDedupTitle(h){return String(h||"").replace(KIT_DUP_T,(m,a,t,suf,tags)=>suf?`${a}${t}${suf}${tags?" "+tags:""}`:`${a}${tags}${t}`)}
+window.kitDedupTitle=kitDedupTitle;
+/* owner 11/15 ("Sủng nàng ta 30 → 30"): a number that did not move says nothing — every "label N → N" clause is dropped from a fact row
+   (all producers, old logs too); a row left with no words is not drawn (kitFacts) */
+const KIT_NOCH=/(^|[.;·,:]\s*|\s)((?:[^\s.;·,:<>]+ ){0,5}?)(−?-?\d+(?:[.,]\d+)?)\s*→\s*\3(?=\s*(?:[.;·,]|$))\s*[;·,]?\s*/g;
+function kitNoChange(h){try{return kpMapText(String(h||""),s=>s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1"))}catch(e){return h}}
+window.kitNoChange=kitNoChange;
+/* a row that starts in lower case after a clause was dropped gets a capital first letter */
+function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
+function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitCapFirst(kitNoChange(kitDedupTitle(f.text||""))),who=f.who?[].concat(f.who):null;
+ if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(text).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1").replace(/(<b>[^<]*<\/b><\/span>)\s*[,;·]\s*(?=<span class="kchip)/g,"$1 ")/* review r6: no lone "." after a row-end chip */}
  const p=who&&who[0];const world=f.kind==="world"||!p;const face=p&&p!==SKIP?kitFaceH(p,"sm"):`<span class="kfdot" aria-hidden="true"></span>`;
  const chips=f.chips&&f.chips.length?kitChips(f.chips):"";
  return `<div class="kfact${world?" kfworld":""}${p===S?" kfme":""}">${face}<span class="kft">${f.when?`<small class="kfwhen">${f.when}</small>`:""}${text}${f.why?`<small class="kfwhy">Vì: ${f.why}</small>`:""}${chips}</span></div>`}
@@ -79,6 +135,7 @@ function kitFacts(facts,o){o=o||{};const people=kpPeople();let F=[];
  F=F.map(f=>{let t=f.text||"";const pl=kpPlain(t);let kind=f.kind;
   const mm=pl.match(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/);if(mm){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");kind=kind||"world"}
   return Object.assign({},f,{text:t,kind})});
+ F=F.filter(f=>{const t=kpPlain(kitNoChange(f.text||""));return !(f.text&&!/[A-Za-zÀ-ỹĐđ]{2}/.test(t))&&!/^[\s.;·,:]*$/.test(t)||(f.chips&&f.chips.length)});
  const rows=F.map(f=>{const [h,w]=f.who?[f.text,[].concat(f.who)]:kpPeopleIn(f.text,people);const k=f.kind||(w[0]===S?"me":w.length?"person":"world");return{k,html:kpFactRow(Object.assign({},f,{text:h,who:w.length?w:null}),[])}});
  const kinds=[...new Set(rows.map(r=>r.k))];
  if(o.group!==false&&rows.length>=4&&kinds.length>=2){const G=[["me","Ngươi"],["person","Người trong cung"],["world","Triều đình · thiên hạ"]];
@@ -128,7 +185,7 @@ const KIT_GLOSS={
  "Ghen":"Người ấy ghen với ngươi bao nhiêu. Ghen cao thì dễ ra tay hại ngươi.",
  "Oán":"Người ấy oán hận ngươi bao nhiêu (vì ngươi từng hại họ). Oán cao thì dễ trả thù.",
  "Thù":"Như Oán: người ấy thù ghét ngươi bao nhiêu. Cao thì dễ trả thù.",
- "Thiện cảm":"Người ấy quý ngươi bao nhiêu (âm là ghét). Cao thì giúp đỡ, che chở ngươi.",
+ "Thiện cảm":"Thiện cảm của người ấy với ngươi (âm là ghét). Cao thì giúp đỡ, che chở ngươi.",
  "Chứng cứ":"Số bằng chứng ngươi đang giữ về lỗi của người ấy. Đủ thì tố giác được, khó bị cho là vu cáo.",
  "Nguy hiểm":"Mức một người muốn hại người khác: lấy Ghen, Oán hoặc ghét cao nhất, cộng tính nết.",
  "Quẻ":"Quẻ đầu tuần: vận may tuần này. Cát thì việc dễ thành hơn, Hung thì khó hơn. Gieo lại tốn 10 bạc và 1 khắc.",
@@ -154,14 +211,40 @@ const KP_GLRE=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.leng
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
 function kitGloss(term,label){const t=String(term||"").trim();const k=Object.keys(KIT_GLOSS).find(x=>x.toLowerCase()===t.toLowerCase());return k?`<span class="kgl" data-kgl="${kpEsc(k)}">${label||t}</span>`:(label||t)}
 /* HUD help texts read the glossary too (one source) */
-(function(){try{if(typeof HX==="object"){const map={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài"};for(const k in map)HX[k]=`${map[k]}: ${KIT_GLOSS[map[k]].charAt(0).toLowerCase()+KIT_GLOSS[map[k]].slice(1)}`;HX.lot=KIT_GLOSS["Quẻ"]}}catch(e){}})();
+(function(){try{if(typeof HX==="object"){const map={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};for(const k in map)HX[k]=`${map[k]}: ${KIT_GLOSS[map[k]].charAt(0).toLowerCase()+KIT_GLOSS[map[k]].slice(1)}`;HX.lot=KIT_GLOSS["Quẻ"]}}catch(e){}})();
 
+/* ---------- ROAD-AWARE GLOSSES (review/small-bugs-2, LUẬT SỬA CẢ NHÓM): a stat's meaning follows her road. On the cung nữ road
+   (isSrv) and in lãnh cung (S.out) the consort-only goals (lập Hoàng hậu, thăng bậc phi tần, thị tẩm, bổng lộc) mean nothing, so every
+   header cell, tap explanation (HX) and glossary popover reads the road's own text. kitGlossText(term) = the one lookup; kitRoad() = the road. */
+function kitRoad(){try{if(typeof isSrv==="function"&&isSrv())return"srv";if(S&&S.out)return"cold"}catch(e){}return""}
+const KIT_GLOSS_ROAD={
+ srv:{"Sủng":"Hoàng thượng thương một phi tần bao nhiêu (0–100). Phận cung nữ chưa có Sủng; điều ngươi có là Hoàng thượng để ý.",
+  "Đức":"Tiếng hiền đức. Đức cao thì chủ nhân và người trong cung dễ tin, việc nhờ cậy dễ thành. Làm việc ác bị lộ thì mất Đức.",
+  "Danh":"Tiếng tăm của ngươi trong đám cung nhân. Danh cao thì được tin cậy, có người để ý xin cưới; mất khi bị bắt quả tang hay bị chê cười.",
+  "Sắc":"Nhan sắc. Giúp được người khác quý, được Hoàng thượng để ý.",
+  "Tài":"Tài học: đàn, thơ, chữ. Giúp làm tròn việc chủ giao, được Hoàng thượng để ý.",
+  "Bạc":"Tiền riêng của ngươi: lương tháng, tiền thưởng. Dùng để mua đồ, đút lót, nhờ người.",
+  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và một phi tần. Phận cung nữ chưa có Ân tình; được Hoàng thượng để ý, nâng làm phi tần rồi mới có."},
+ cold:{"Sủng":"Hoàng thượng còn thương ngươi bao nhiêu (0–100). Còn sủng thì dễ được nhớ đến, được ân xá ra khỏi lãnh cung.",
+  "Đức":"Tiếng hiền đức. Giữ được Đức thì dễ được minh oan, được ân xá. Làm việc ác bị lộ thì mất Đức.",
+  "Danh":"Tiếng tăm của ngươi trong cung. Ở lãnh cung Danh mòn dần; còn Danh thì người ngoài còn nhớ đến mà nói giúp.",
+  "Sắc":"Nhan sắc. Giúp Hoàng thượng còn nhớ đến ngươi.",
+  "Tài":"Tài học: đàn, thơ, chữ. Thơ văn gửi ra ngoài có thể làm Hoàng thượng động lòng.",
+  "Bạc":"Tiền riêng của ngươi. Ở lãnh cung không còn tiền phát hằng tháng; dùng để đút lót, nhờ người đưa tin.",
+  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, còn lại từ những ngày được gần ngài. Còn Ân tình thì thư từ lãnh cung được ngài đọc, xin tha tội dễ thành. Ở đây không gặp được ngài nên Ân tình phai dần."}};
+function kitGlossText(term){const r=kitRoad();const R=r&&KIT_GLOSS_ROAD[r];return R&&R[term]!=null?R[term]:(KIT_GLOSS[term]||"")}
+window.kitRoad=kitRoad;window.kitGlossText=kitGlossText;
+/* HX (header tap texts) follows the road: rebuilt from kitGlossText when the road changes; the consort texts are kept as they were */
+const KIT_HXMAP={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};let KIT_HX0=null,KIT_HXR="";
+function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r===KIT_HXR&&KIT_HX0)return;if(!KIT_HX0){KIT_HX0={};for(const k in KIT_HXMAP)KIT_HX0[k]=HX[k]}KIT_HXR=r;
+ for(const k in KIT_HXMAP){const R=r&&KIT_GLOSS_ROAD[r],t=KIT_HXMAP[k];HX[k]=R&&R[t]!=null?`${t}: ${R[t].charAt(0).toLowerCase()+R[t].slice(1)}`:KIT_HX0[k]}}catch(e){}}
+window.kitHxRoad=kitHxRoad;
 /* ---------- popover (odds ladder, glossary): never a modal, never covers the scene for long; any tap closes ---------- */
 function kpPop(anchor,html){let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
  p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();const W=Math.min(300,innerWidth-24);p.style.width=W+"px";
  let x=Math.max(12,Math.min(innerWidth-W-12,r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
 document.addEventListener("click",e=>{const p=document.getElementById("kpop");const od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");
- if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${KIT_GLOSS[gl.dataset.kgl]||""}</div>`);return}
+ if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
  if(p&&!p.hidden)p.hidden=true},true);
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
 
@@ -249,7 +332,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .kname.kme{color:var(--ink)}
 .kchips{display:inline-flex;flex-wrap:wrap;gap:4px}
 .kchip{display:inline-flex;flex-wrap:nowrap;align-items:baseline;gap:3px;font-size:.76rem;line-height:1.25;padding:1px 7px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--dim);white-space:normal;overflow-wrap:anywhere;margin:1px 2px;vertical-align:baseline}
-.kchip b{font-weight:700;white-space:nowrap;flex:0 0 auto}.kchip.g{color:var(--good);border-color:#8fbf9f;background:#eef7f0}.kchip.r{color:var(--bad);border-color:#e3a497;background:#fcefeb}.kchip.n{color:var(--ink)}
+.kchip b{font-weight:700;white-space:nowrap;flex:0 0 auto}.kchip.g{color:var(--good);border-color:#8fbf9f;background:#eef7f0}.kchip.r{color:var(--bad);border-color:#e3a497;background:#fcefeb}.kchip.n{color:var(--ink)}.kchip.w{color:var(--gold);border-color:var(--trim);background:#fbf3df}/* KIT 28.6 kitRisk "có rủi ro" (amber), with g = an toàn, r = liều */.kat>.kchip.krisk{flex:0 0 auto;margin-left:auto;font-weight:700;white-space:nowrap}
 .kpl{display:flex;align-items:center;gap:8px}.kplt{display:flex;flex-direction:column;min-width:0}.kplt small{color:var(--dim);font-size:.74rem}
 /* facts */
 .kfacts{display:flex;flex-direction:column}
@@ -257,12 +340,20 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .kfact:last-child{border-bottom:0}
 .kfact>.md{width:34px!important;height:34px!important;margin:0!important;position:static!important}
 .kfdot{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,#c9a46a 0 4px,transparent 5px),url(img/kit/bg-default.webp) center/80px;border:1px solid var(--line);box-sizing:border-box}
+/* KIT §51 (owner 11/15 17:27Z): a fact with no person shows NO blank dot (an empty round icon means nothing); the text takes the row.
+   The week book keeps its small diamond bullet (j87 .kbk-pg .kfdot). */
+.kfact>.kfdot{display:none}.kfact:has(>.kfdot){grid-template-columns:minmax(0,1fr)}.kbk-pg .kfact>.kfdot{display:block}
 .kft{font-size:.88rem;color:var(--ink);overflow-wrap:anywhere;align-self:center}.kft p{margin:0}
 .kfwhen{display:block;color:var(--dim);font-size:.7rem}.kfwhy{display:block;color:var(--dim);font-size:.74rem}
 .kintel{display:flex;flex-direction:column}.kint{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:5px 0;border-bottom:1px dotted var(--k-hair)}.kint>.md{width:34px!important;height:34px!important;margin:0!important}
 .kisrc{display:block;color:var(--dim);font-size:.72rem}
-/* rows inside panels: same grid as the act card */
-.kpkb{font-size:.84rem}.kpkb .krl{padding-top:.18rem}
+/* rows inside panels: same grid as the act card. KIT §51 KIT TABLE (owner 11/15 17:27Z): every label|value list is ONE kitRows grid;
+   the label column is fixed per table = its longest label, capped at --kt-lab (34% of the table, never under 7rem so a label is never
+   one word per line); labels wrap inside that column, every value starts at the same x. */
+.kpkb{font-size:.84rem;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)}
+.kpkb .krl{padding-top:.18rem;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none;line-height:1.25}
+/* a person label: small face, name beside it (wraps beside the face) */
+.kpkb .krl:has(>.md){display:flex;align-items:center;gap:5px}.kpkb .krl>.md{flex:none;margin:0}
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
@@ -391,7 +482,7 @@ function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||/^Nhập
 function kpIdentity(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb");const o=S.origin,srv=typeof isSrv==="function"&&isSrv();
  const pos=srv||o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;const pts=typeof pdGet==="function"?pdGet():0;
  const opts=mb.querySelector(".nlopts");if(opts)opts.remove();
- const name=`<b class="kname" style="--rc:${srv?kitServCol("maid",1):RCOL[cl(S.rank||0,0,7)]}"><span class="kti">${pos}</span> ${S.name}</b>`;
+ const name=`<b class="kname kmy" style="--rc:${srv?kitServCol("maid",1):RCOL[cl(S.rank||0,0,7)]}"><span class="kti" style="--rt:${kitRtOf(pos)}">${pos}</span> ${S.name}</b>`;
  const tiles=[["Tài",S.tai],["Sắc",S.sac],["Tâm cơ",S.tamco],["Đức",S.duc],["Danh",S.danh],["Thái hậu ưa",S.th],["Bạc",S.bac],["Hoàng thượng",`${S.emp.era} · ${S.emp.age} tuổi`]];
  mb.innerHTML=`<div class="kpb kphas kpid"><div class="kpsubj">${pframe(pMe())}</div><div class="kpmain"><div class="kpidn">${name}<small>${o.n} · ${S.age} tuổi</small></div><div class="kpidt">${o.t||""}</div></div></div>${kitTiles(tiles)}<div class="kpnote">Thân phận đã định: nạp lại sổ, đổi sổ hay bắt đầu kiếp mới vẫn ra đúng thân phận này.</div>`;
  if(opts){opts.classList.add("kpopts","kpscopts");mb.appendChild(opts)}
@@ -434,7 +525,7 @@ function kpDeathP(k,v){try{const inv=x=>(x.inv||[]).some(e=>e.k===x.__k&&!e.h);c
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m)return h;const p=kpDeathP(m[1],v);if(p==null)return h;
   return String(h).replace(/,\s*có thể chết( đuối)?/g,(x,d)=>` · ${kpDeathWord(p,m[1]==="poison"?"nàng":"con nàng")}`)})}catch(e){}return G}})();
 /* Cần: the Sức rule follows the live game rule (j80 SUC_FLOOR; one source, never a hard-coded 20) */
-if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=4-used;L.push({t:`${c} khắc (còn ${left})`,ok:used+c<=4});
+if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));
  const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:20;if(c>1)L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}}
 /* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
@@ -502,6 +593,9 @@ header.hud>.hud2.khud .hc[data-hx="date"]{display:none!important}
 header.hud>.hud2.khud .h2t{top:3px;right:0}
 .stop .scene-t{flex:0 1 auto!important;max-width:60%}
 .stop .scene-t .rmsg{font-size:.7rem}
+/* KIT 15.1 (review/small-bugs-3): the place subtitle ("· Ở đây còn 1 người.") never shrinks under its longest word (390x844 showed one letter per
+   line); when the title row is too narrow it drops under the place name */
+.stop .scene-t{flex-wrap:wrap}.stop .scene-t .rmsg{min-width:min-content;flex:1 1 auto}
 /* no truncation anywhere: names, date line, stage tags wrap */
 .me b,#me-d,.dt,.emp b,.pface span,.tok .tag,.stop .scene-t .rmsg{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;display:block}
 .tok .tag{max-width:140px}
@@ -524,11 +618,11 @@ if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year
 function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
  const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
  const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
- const m=kitPanel({kind:"evidence",title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
+ const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
 function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
  const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
  old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});
- const m=kitPanel({kind:"intel",title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
+ const m=kitPanel({kind:"intel",look:1,title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
 /* person card: the evidence chip and the "Đã biết" line open the kit panels */
 (function(){if(typeof rvCard!=="function")return;const r0=rvCard;rvCard=function(v,i){let h=r0.apply(this,arguments);try{
   h=h.replace(/<span class="chip hot">((?:<img[^>]*>)?Chứng cứ \d+)<\/span>/,`<button class="chip hot kchipb" data-kev="${v.id}" title="Xem chứng cứ">$1 ›</button>`);
@@ -544,7 +638,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
 if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
 (function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
-if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `được thị tẩm đêm nay: ít nhất Sủng +3, Ân tình +2 (thêm nếu đêm vui)${S.preg?"":` · có thai: ${chanceW(c)}`} · được ban thưởng: ${chanceW(22)} · kèm: ${v.name} ghen +25, thù -15`}}
+if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `được thị tẩm đêm nay: ít nhất Sủng +3, Ân tình +2 (thêm nếu đêm vui)${S.preg?"":` · có thai: ${chanceW(c)}`} · được ban thưởng: ${chanceW(22)} · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}}
 /* wording guide fixes in merged copies */
 (function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
@@ -593,6 +687,7 @@ function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kp
   else if(n!==kpSlug(n)&&(name.startsWith(n+" ")||name.startsWith(n+":")||name.startsWith(n+",")))take(n,A[n])}
  if(key)return key;
  if(name.length>=6)for(const n in A)if(!n.includes("*")&&n.startsWith(name+" "))return A[n];
+ try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(name)||re.test(name+".")){if(k&&k!=="-"&&!k.includes(":"))return k;break}}catch(e){}
  return""}
 (function(){const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=kitActKey(name);if(key)r.src=`img/act-${key}.webp`}catch(e){}return r}})();
 kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;const name=kpActName(kan);const a=kitActArt(name);b.dataset.kart=a.cat;
@@ -671,7 +766,7 @@ span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.
 /* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
 :root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
 .kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
-.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(max(440px,31%),1fr))!important}
+.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(min(100%,max(440px,31%)),1fr))!important}
 @media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
 button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
 button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
@@ -748,7 +843,7 @@ function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
   if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
   else b.classList.add("kghide")})}}
-function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub");if(!g||!kgOn()){if(nav)nav.remove();return}
+function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
  const html=kgKeys(g).map(k=>`<button class="ksubb${k===tab?" on":""}" role="tab" aria-selected="${k===tab}" data-ksub="${k}">${kgLabel(k)}</button>`).join("");
  if(!nav){nav=document.createElement("nav");nav.className="ksub";nav.setAttribute("role","tablist");P.prepend(nav)}nav.innerHTML=html}
@@ -764,40 +859,43 @@ html body #tabs.tabs button.kghide{display:none!important}
 .ksubb:last-child{border-right:0}.ksubb.on{background:var(--k-card,#fffaf0);color:var(--gold);box-shadow:inset 0 -3px 0 var(--gold)}
 @media (max-width:599px){.ksubb{font-size:.78rem;min-height:34px;padding:4px 4px}}
 `;document.head.appendChild(st)})();
-/* ---- SKILL CARD (owner 11/14): every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…) and every Tứ đức course is ONE card of the same structure:
-   picture LEFT in the shared portrait frame (img/art-<k>.webp | img/vir-<k>.webp when listed in img/INFO.json have:["art-cam",…]; else act-category art),
-   info RIGHT (level, progress bar with numbers, what EACH level gives: reached ✓ / next / locked), act buttons BELOW (pbtn → act-card frame).
-   kitSkillCard({kind:"art"|"vir", k, name, level, max, prog:[cur,need], desc, levels:["Bậc 1 gives…",…], acts:[pbtn html], note}) */
+/* ---- KIT §21 · SKILL CARD = THE ONE HEAD CARD (owner 11/14; one form since tabs-kit r7, owner 11/15 "tab như trang chữ"):
+   every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…), every Tứ đức course, every Tác phẩm line, the Mệnh truyện chapter / Sắc phong head and
+   an empty state are ONE card: small painted picture LEFT (kitSceneArt size "thumb", §28.19), RIGHT: kicker, name + kitSteps (segments + "Bậc l/max";
+   tap = the levels when stepsAttr is given), one desc line, tiến bộ bar (or "Đã tinh thông"), "Bậc n mở" chip + what it gives; act cards BELOW in a
+   grid of act cells, each cell a kpanec (§43 compact acts under 640 px). levels:[text per level] still works: the next level's text becomes the "Bậc n mở" line.
+   kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels, acts:[pbtn…], img, stepsAttr, can}) */
 function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM.have||[]);const ah=(KIT_ACTS.have||[]);
  return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
-function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max||(o.levels||[]).length||5;const [cur,need]=o.prog||[0,0];
- const lv=(o.levels||[]).map((t,i)=>{const st=i<l?"ok":i===l?"nx":"lock";return `<li class="ksl ${st}"><b>Bậc ${i+1}</b><span>${t}</span><em>${st==="ok"?"✓ đã có":st==="nx"?"bậc kế":"chưa mở"}</em></li>`}).join("");
- const bar=l<max&&need?`<div class="kskp"><span>Tiến bộ</span><span class="kskb"><u style="width:${Math.min(100,Math.round(cur/need*100))}%"></u></span><b>${cur}/${need}</b></div>`:l>=max?`<div class="kskp done"><b>Đã tinh thông</b></div>`:"";
- return `<div class="kskill" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskart">${kitArtFrame(kitSkillArt(o.kind||"art",o.k,o.name),o.name,"kcat-hoc-tap",KIT_CAT["hoc-tap"][1])}</div>`+
-  `<div class="kskinfo"><div class="kskh"><b>${o.name||""}</b><span class="ksklv">Bậc ${l}/${max}</span></div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}<ol class="ksls">${lv}</ol>${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`+
-  `<div class="kskacts pcb">${(o.acts||[]).join("")}</div></div>`}
-/* Tài nghệ tab through the skill card (same structure for every art; no ranges: progress = what the lesson game scores, self-study 6 parts in 10) */
-if(typeof artTabHTML==="function"){artTabHTML=function(){let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Ba cách học, giá trị ngang nhau, tốn thứ khác nhau.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div><div class="kskills">`;
- h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5,ms=(typeof ARTMS==="object"&&ARTMS[a.k])||[];const t2=whyTime(2);const stn=a.st==="sac"?"Sắc":"Tài";
-  const levels=[0,1,2,3,4].map(i=>ms[i]||`${stn} +2`);
-  const acts=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: Sức -15 · thành: tiến bộ bằng 6 phần 10 số phần đạt trong trò học (ít nhất +1)`,t2||(S.suc<25?"Sức dưới 25":"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: Bạc -${cost}, Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, thầy kể một sở thích của Hoàng thượng hoặc chuyện của một phi tần (chứng cứ +1): ${chanceW(30)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, Thái hậu quý ngươi +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
-  return kitSkillCard({kind:"art",k:a.k,name:a.n,level:l,max:5,prog:[S.artp[a.k],need],desc:(typeof ARTDO==="object"&&ARTDO[a.k]||"")+` · mỗi bậc: ${stn} +2`,levels,acts})}).join("")+`</div>`;return h}}
+function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
+ return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
+function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
+ const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
+ const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
+ const next=o.next!=null?o.next:((o.levels||[])[l]||"");
+ const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">Đã tinh thông</span>`;
+ const acts=(o.acts||[]).filter(Boolean);
+ return `<div class="kskill${o.can===false?" kdone":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",{shape:"tall",size:"thumb",cap:false}):""}`+
+  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
+  `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}</div></div>`+
+  `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
+/* kitEmpty(title,line): an empty state = the same card with no steps: the topic's painted picture (kitInfoArt) + one short line */
+function kitEmpty(title,line){const a=typeof kitInfoArt==="function"?kitInfoArt(title):{src:""};return kitSkillCard({kind:"empty",name:"",max:0,img:a&&a.src||"",desc:line})}
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
-.kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:10px}
-.kskill{display:grid;grid-template-columns:var(--kaw) minmax(0,1fr);grid-template-areas:"art info" "acts acts";gap:8px 12px;padding:10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);border-left:4px solid ${"#3f62a8"}}
-.kskart{grid-area:art;height:var(--kah)}.kskinfo{grid-area:info;display:flex;flex-direction:column;gap:5px;min-width:0}.kskacts{grid-area:acts}
-.kskh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid var(--k-hair);padding-bottom:3px}.kskh b{font-family:var(--display);font-size:1.05rem;color:var(--gold)}
-.ksklv{font-weight:700;font-size:.86rem;color:var(--ink)}.kskdo{font-size:.8rem;color:var(--dim)}
-.kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}.kskp.done{display:block;color:var(--good)}
+.kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
+.kskill{display:flex;flex-direction:column;gap:8px;padding:10px;margin:0 0 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
+.kskills>.kskill{margin:0}.kskill.kdone{opacity:.92}
+.kskh2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}.kskh2:not(:has(>.ksart)){grid-template-columns:minmax(0,1fr)}
+.kskinfo{display:flex;flex-direction:column;gap:5px;min-width:0}.kskk{color:var(--dim);font-size:.78rem}
+.kskh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}.kskh:has(>b:empty){justify-content:flex-end}.kskh b{font-family:var(--display);font-size:1.05rem;color:var(--gold)}
+.kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
+.kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
-.ksls{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
-.ksl{display:grid;grid-template-columns:3.6rem minmax(0,1fr) auto;gap:6px;align-items:baseline;font-size:.8rem;padding:2px 0;border-top:1px dotted var(--k-hair)}
-.ksl b{font-size:.72rem;color:var(--k-lab);text-transform:uppercase}.ksl em{font-style:normal;font-size:.68rem;white-space:nowrap}
-.ksl.ok span{color:var(--good);font-weight:600}.ksl.ok em{color:var(--good)}.ksl.nx span{color:var(--ink);font-weight:600}.ksl.nx em{color:var(--gold);font-weight:700}.ksl.lock span,.ksl.lock em{color:#9a8a78}
-.kskacts.pcb{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important;gap:6px}
-@media (max-width:599px){.kskill{grid-template-columns:96px minmax(0,1fr)}.kskart{height:142px}.ksl{grid-template-columns:3rem minmax(0,1fr)}.ksl em{grid-column:2}.kskacts.pcb{grid-template-columns:1fr!important}}
+.ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
+.kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
+.ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
+.kskacts.pcb{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important;gap:6px}
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.

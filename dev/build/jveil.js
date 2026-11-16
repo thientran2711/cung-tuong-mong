@@ -14,7 +14,7 @@
    Old saves: p.scar.veil = 1 without an item → she is given the matching Thường veil of her own phẩm (worn, phẩm known).
    Knobs: VL below. Balance notes in dev/ITEMS_EARNED.md. ================= */
 const VL={base:[6,10,15,22,35,50,75,110,160],gMul:[1,1.5,2.2,3.2],cover:[2/3,.6,.53,.47,.4],
- mat:[0,12,45],              /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
+ mat:[0,6,45],               /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
  outX:.8,outRisk:12,outDanh:3, /* mua lén: price factor, % the errand leaks, Danh lost */
  askHH:15,askTH:10,askFail:2, /* xin ban: odds = base + favour/2; favour lost on refusal */
  craftSuc:10,                /* Sức spent on a crafting session (2 khắc) */
@@ -89,7 +89,12 @@ function vlLv(p){const a=vlArt();try{return typeof wkLv==="function"?wkLv(p,a):(
 function vlQ(p,m,raw){let c=0;try{if(typeof wkCongPh==="function")c=wkCongPh(p)}catch(e){}return raw+vlLv(p)+m+c}
 function vlCraftOut(p,m,raw){const q=vlQ(p,m,raw);const i=q>=14?3:q>=10?2:q>=6?1:0;const [P,g]=VL_CRAFT[m][i];return vlKey(P,g)}
 function vlCraft(p,m,raw){const k=vlCraftOut(p,m,raw);if(VL.mat[m])ap(p,{bac:-VL.mat[m]});vlGain(p,k,{from:"tay",giver:""});return k}
-function vlGradeOdds(p,m){const lo=vlG({k:vlCraftOut(p,m,5)}),hi=vlG({k:vlCraftOut(p,m,10)});const G=WD_GRADE;return `chơi được 5 phần: ${G[lo]}${hi>lo?` · chơi giỏi: tới ${G[hi]}`:""}`}
+/* (owner 14:50Z, paid tiers) the card shows the same concrete facts as every j83 material card: what 5 phần makes, its worth in bạc,
+   the play score each better band needs, and what this material can never reach */
+function vlGradeOdds(p,m){const G=WD_GRADE,k5=vlCraftOut(p,m,5),lo=vlG({k:k5});const N=[];let last=k5;
+ for(let r=6;r<=10;r++){const k=vlCraftOut(p,m,r);if(k!==last){N.push(`${G[vlG({k})]} (${IT[k].pr} bạc): cần chơi ${r} phần`);last=k}}
+ const top=VL_CRAFT[m][3],cap=vlG({k:vlKey(top[0],top[1])});
+ return `chơi 5 phần: ${G[lo]}, đáng ${IT[k5].pr} bạc${N.length?" · "+N.join(" · "):""}${cap<3?` · cao nhất ${G[cap]}`:""}`}
 /* buy at Nội vụ phủ: her own phẩm (and plain sa), phẩm known */
 function vlNvpList(p){const P=Math.min(8,wdPOf(p));const L=[vlKey(P,0),vlKey(P,1),vlKey(P,2)];if(P>0)L.unshift(vlKey(0,0));return L}
 function vlBuyNvp(p,k){const pr=IT[k].pr;if((p.bac||0)<pr)return"";ap(p,{bac:-pr});vlGain(p,k,{from:"nvp",giver:"Nội vụ phủ",known:"Nội vụ phủ cấp theo phẩm"});return `${NMc(p)} đặt ở Nội vụ phủ ${IT[k].n}: Bạc -${pr}. `}
@@ -153,13 +158,14 @@ function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!S.scar&&!L.le
  const B0=[];if(S.vl)B0.push(pbtn(`data-vl="off"`,"Tháo mạng",`tốn: không tốn gì · thành: cất vào rương · kèm: Sắc mất trở lại ${S.scar?S.scar.d:0}`,""));
  B0.push(pbtn(`data-vl="get"`,"Tìm mạng che mặt",`thành: tự tay kết, đặt ở Nội vụ phủ, mua lén ngoài cung hay xin ban`,Q.length?"đang có việc chờ":""));
  h+=`<div class="rbtn">${B0.join("")}</div>`;
- if(L.length){h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:vlSrc(x.e.k),name:IT[x.e.k].n,grade:vlG(x.e),size:"lg",on:x.ix===pick,label:vlKnows(S,x.e)?["đồ phẩm "+wdPName(vlP(x.e,S)),"n"]:null,data:`data-vlpick="${x.ix}" role="button" tabindex="0"`,tip:IT[x.e.k].d})).join("")+`</div>`;
+ if(L.length){h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:vlSrc(x.e.k),name:IT[x.e.k].n,grade:vlG(x.e),size:"lg",sel:x.ix===pick,label:vlKnows(S,x.e)?["đồ phẩm "+wdPName(vlP(x.e,S)),"n"]:null,data:`data-vlpick="${x.ix}" role="button" tabindex="0"`,tip:IT[x.e.k].d})).join("")+`</div>`;
   const x=L.find(y=>y.ix===pick);if(x){const e=x.e,it=IT[e.k],g=vlG(e);const B=[];
    B.push(pbtn(`data-vl="wear" data-ix="${x.ix}"`,"Đeo mạng",`tốn: không tốn gì · thành: ${S.scar?`Sắc mất còn ${Math.round(S.scar.d*VL.cover[g])}`:"che vết thương"}${vlKnows(S,e)?"":" · kèm: chưa rõ phẩm, có thể vượt phẩm"}`,S.scar?"":"mặt lành, chưa cần đeo"));
    B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,e.k==="mcnt"?"đồ ngự tứ: không được đem tặng":whyTime(2)));
    B.push(pbtn(`data-it="sell" data-ix="${x.ix}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,e.k==="mcnt"?"đồ ngự tứ: bán là bất kính":""));
-   h+=`<div class="kwdsel">${kitItem({src:vlSrc(e.k),name:it.n,grade:g,size:"md"})}<div>${kitFacts([`Mạng che mặt · ${WD_GRADE[g]} · ${VL_COVER[g]}`,typeof wdSrcTxt==="function"?vlSrcTxt(e):"",vlKnows(S,e)?`Đồ phẩm ${wdPName(vlP(e,S))}`:"Chưa rõ phẩm"].filter(Boolean))}</div></div><div class="rbtn">${B.join("")}</div>`}
-  else h+=`<p class="past">Chạm một chiếc mạng để đeo, tặng hay bán.</p>`}
+   /* KIT §70: the picked veil = the shared item detail (picture, name, grade, Được, Lai lịch, Ghi chú) with its acts */
+   h+=typeof kitItemDetail==="function"?kitItemDetail({e},{cls:"kidet-strip",acts:B}):`<div class="kwdsel">${kitItem({src:vlSrc(e.k),name:it.n,grade:g,size:"md"})}<div>${kitFacts([`Mạng che mặt · ${WD_GRADE[g]} · ${VL_COVER[g]}`,typeof wdSrcTxt==="function"?vlSrcTxt(e):"",vlKnows(S,e)?`Đồ phẩm ${wdPName(vlP(e,S))}`:"Chưa rõ phẩm"].filter(Boolean))}</div></div><div class="rbtn">${B.join("")}</div>`}
+  else h+=`<p class="past">Chạm một chiếc mạng để xem; đeo, tặng hay bán bằng nút dưới thông tin.</p>`}
  return h+`</div></div>`}
 function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||e0.from});if(e.from&&!VL_OWN[e.from]&&!e.giver&&e.from!=="emp"&&e.from!=="hh"&&e.from!=="th"){const v=typeof byKey==="function"?byKey(e.from):null;if(v&&v.name)return `${v.name} tặng`}if(e.from==="tay")return`tự tay kết${e.d?", "+e.d:""}`;if(e.from==="nvp")return`đặt ở Nội vụ phủ${e.d?", "+e.d:""}`;if(e.from==="ngoai")return`mua lén ngoài cung${e.d?", "+e.d:""}`;if(e.from==="cu")return"mạng đang đeo từ trước";if(e.giver)return`${e.giver} ban${e.d?", "+e.d:""}`;
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}

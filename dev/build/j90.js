@@ -16,7 +16,7 @@
    Tranh ghế result (j34), hoàng tự exams (j53 .ktlist), công chúa dâng nghệ (j54 .h54list). */
 KP_SEAL.honor="VINH DANH";
 const KPOD_WORD=["Nhất","Nhì","Tam"];
-function kitFigOf(p){try{if(!p)return"";if(!kitIsKnown(p)){const r=personRoleRank(p);return KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}
+function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){const r=personRoleRank(p);return KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}
  if(typeof allKids==="function"&&allKids().some(([k])=>k===p))return typeof kidFigSrc==="function"?kidFigSrc(p):"";
  if(typeof figFor!=="function")return"";return figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||""}catch(e){return""}}
 function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.assign({},x));

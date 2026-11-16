@@ -65,12 +65,12 @@ CRIME.forEach(k=>{const A2=ACT[k];if(!A2)return;const o=A2.ok;A2.ok=(a,t)=>!a.co
 /* ===== EVERY CHOICE SHOWS: an odds word ('Chắc chắn' when nothing is rolled), 'thành: …', 'hỏng: …' for rolled ones, and known risks ===== */
 const ODDW=/(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/;
 const CAUGHT="có thể bị người của nàng phát giác: nàng nắm 2 chứng cứ";
-const AOUT={spy:["chứng cứ +1, Tâm cơ +2","bị lộ, nàng thù -8"],ally:["thân +25, nàng bớt ghen 10","bị lạnh nhạt, thân -5"],rumor:["Danh nàng -8","không ai tin; nàng nắm 1 chứng cứ, thù -5"],
+const AOUT={spy:["chứng cứ +1, Tâm cơ +2","bị lộ, nàng thù -8"],ally:["thiện cảm +25, nàng bớt ghen 10","bị lạnh nhạt, thiện cảm -5"],rumor:["Danh nàng -8","không ai tin; nàng nắm 1 chứng cứ, thù -5"],
  frame:["nàng mất Danh và Sủng -10; Danh +3","bị lộ: Danh -15, Sủng -8, thù -30, bị phạt"],poison:["nàng trúng độc, có thể chết","bị tra ra: ban chết"],accuse:["nàng bị phế hoặc giáng; Danh +6","Danh -8, thù -20, chứng cứ bị hủy"],
  bribe:["moi được mưu kế (chứng cứ +2) hoặc trộm bạc của nàng","cung nữ báo chủ: nàng nắm 1 chứng cứ"],block:["2 tuần nàng không được lật thẻ","tổng quản kể lại: nàng nắm 1 chứng cứ"],
  musk:["nàng sảy thai","—"],catswap:["tráo hài nhi khi nàng sinh","—"],ksab:["con nàng Tài -15; Tâm cơ +2","bị lộ: Danh -10, thù -20, bị phạt"],kpoison:["con nàng trúng độc, có thể chết","bị tra ra: ban chết"],
  pond:["con nàng rơi xuống hồ, có thể chết đuối","bị bắt: Danh -10, bị phạt"],kframe:["con nàng mất sủng, có thể bị phế Thái tử","bị lần ra: ban chết"],takeaway:["bế con nàng về nuôi; nàng thù -30","chưa được chuẩn; nàng thù -10"],
- vp:["đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt","Danh -3, nàng thù -10"],plant:["món đồ nằm trong rương nàng","kẻ cài bị bắt: nàng nắm 2 chứng cứ, thù -20"],steal:["đoạt đêm nay · kèm: nàng ghen +25, thù -15","Sủng -3"],road:["đoạt đêm nay · kèm: nàng ghen +25, thù -15","Sủng -3"],gift:["thân thêm theo món quà",""]};
+ vp:["đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt","Danh -3, nàng thù -10"],plant:["món đồ nằm trong rương nàng","kẻ cài bị bắt: nàng nắm 2 chứng cứ, thù -20"],steal:["đoạt đêm nay · kèm: nàng ghen +25, quý ngươi -15, oán ngươi +9","Sủng -3"],road:["đoạt đêm nay · kèm: nàng ghen +25, quý ngươi -15, oán ngươi +9","Sủng -3"],gift:["thiện cảm thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
 function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=oddsWord!=="Chắc chắn";const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(w[1]&&w[1]!=="—"?w[1]:"không mất gì"):"",ACAUGHT.includes(k)?CAUGHT:""];return L.filter(Boolean).join(" · ")}
@@ -81,6 +81,7 @@ function optLine(a){const o=a.o==null?100:a.o;const rolled=o<100&&!a.lock;const 
 function dilLine(c){const fx=fmt(c.fx||{}),x=c.x||"";const src=String(c.go||"")+String(c.fail||"");let s=x;
  if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"Chắc chắn · không được mất gì":c.go||c.open?"Chắc chắn · chọn, xem kết quả ở bước sau":"Chắc chắn · không được mất gì";return ["Chắc chắn",fx?"ngay: "+fx:"",x?"thành: "+x:""].filter(Boolean).join(" · ")}}
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
+const dilLineRaw=dilLine;/* the raw kit line of a dialog option (before kitParse), read by the kit hint (jk2b kitHint) */
 /* the real speaker of an event: a named eunuch of that palace or of the court, a spy of hers; no speaker -> the place art */
 function pEunOf(p){const e=(p&&p.staff||[]).find(s=>s.role!=="maid");return e?Object.assign(pServ(e),{nm:e.name}):pEunCourt("ksp")}
 function pEunCourt(k){const c=S.court&&S.court[k];return{rk:k==="tq"?"eu3":"eu2",rw:k==="tq"?"Tổng quản thái giám":"Thái giám",src:courtSrc(k,c),hue:0,ini:"Hoạn",col:"#8a8aa0",nm:c?c.name:""}}
