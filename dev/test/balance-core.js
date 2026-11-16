@@ -25,7 +25,7 @@ const {chromium}=require('playwright');const path=require('path');
   S.emp.ea=null;empArtMonth();const ea=empArt();ok("Emperor's month art: one favoured, one disfavoured, different",ea&&ea.f!==ea.d&&ARTS.some(a=>a.k===ea.f),ea);
   S.mat=BAL.steal.ea.mat;S.eaK=-1;eaLearn(true);ok("Tai mắt ≥ ea.mat knows it at the month start",eaKnows(S));
   for(const k of ARTS.map(a=>a.k)){S.arts[k]=0;S.artp[k]=0}S.arts[ea.f]=3;const fav=oSteal(S,"road");S.arts[ea.f]=0;S.arts[ea.d]=3;const dis=oSteal(S,"road");S.arts[ea.d]=0;const none=oSteal(S,"road");
-  ok("favoured art up, disfavoured art down",fav>none&&dis<none,[fav,none,dis]);
+  ok("favoured art up, disfavoured art down",fav>none&&dis<none,[fav,none,dis,ea,empArt(),S.turn]);
   const s0=S.sung,d0=S.danh;stealFail(S,w,"road");ok("Chặn ngự giá failure = BAL.steal.m.road.lose",Math.abs((S.sung-s0)-BAL.steal.m.road.lose.sung)<=2/* sg(): the Emperor's trait scales Sủng */&&S.danh===Math.max(0,d0+(BAL.steal.m.road.lose.danh||0)),[S.sung-s0,S.danh-d0]);
   ok("word() reads BAL.lad",word(BAL.lad[2])==="Khá chắc"&&word(BAL.lad[2]-1)==="Năm ăn năm thua");
   ok("ARTFX texts print BAL.art.stUp",ARTFX.cam[0].startsWith(`Tài +${BAL.art.stUp}`),ARTFX.cam[0]);
