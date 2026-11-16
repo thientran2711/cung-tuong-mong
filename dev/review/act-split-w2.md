@@ -58,6 +58,10 @@ Thất tịch and Vạn thọ have only the j71 dialog (+ the Hành sự lantern
 | Thánh thọ Thái hậu | Đức Thọ cung | 2 → 1 (+1 when she goes) | 13 | 3 → 0 | Dâng ngọc Như Ý, Lễ mọn cho phải phép, Tự thêu trăm chữ Thọ |
 Result: duplicate acts after = **0** (before 31); festival dialogs at day start 2 → 1 for 12 festivals; 0 page errors.
 
+## Tests
+`act-split-w2.js` 0 FAIL · `act-split-scan.js` dup 31 → 0 · `act-split-vp.js` 6 viewports ok (390x844 rotate prompt) · `panel-size.js` exit 0 · `coop-e2e.js` 59/59 · 0 page errors.
+Stroll over 300 buổi (same states, old vs new roll): before 8–11, after 33–37 (Emperor in the garden 42–49), always the first slot, ≤2 per buổi.
+
 ## Not done here (proposals, need the owner / art)
 - Outer outing places (Ngự uyển ngoài, chùa Hộ Quốc) from the wave-1 notes: NOT added. They need a Dư đồ picture of the outer city, which
   must be TAKEN from Phượng Lệnh (never painted), and a stage picture (art paused tonight). The outings that exist today are all festival acts

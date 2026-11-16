@@ -20,3 +20,11 @@ Build: `python3 dev/build/assemble.py`; serve dev/ with a page that starts with 
 
 ## Not done (needs owner / art)
 - Outer outing places (Ngự uyển ngoài, chùa Hộ Quốc): Dư đồ outer picture must come from Phượng Lệnh + a stage picture (art paused). ART NEEDED.
+
+## Results (final build)
+- act-split-w2.js 0 FAIL (stroll over 300 buổi: Emperor in the garden 42–49 buổi; stroll "!" before 8–11 → after 33–37, always slot 1, max 2 per buổi;
+  all "!" marks 220–248 → 291–315).
+- act-split-scan.js: duplicate acts 31 → 0; festival dialogs at day start 2 → 1 for 12 festivals.
+- act-split-vp.js (site index.html): 755x1000@2, 1000x755@1, 1180x820@2, 1366x1024@2, 844x390@2 all ok; 390x844@3 rotate prompt ok. 0 page errors. Shots looked at.
+- panel-size.js 5 viewports: exit 0. coop-e2e.js: 59/59.
+- Site rebuilt (index.html, sw.js, assets.json) with dev/site/build_site.sh.

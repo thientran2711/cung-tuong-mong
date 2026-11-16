@@ -16526,6 +16526,11 @@ if(typeof BUK!=="undefined"&&BUK.length===3)BUK.splice(1,0,window.B4_TRUA_IMG?"t
  return r}})();
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
+   hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
+   Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
+   Night (the last buổi): nightSneak = odds added to "Lẻn vào" (fewer guards), nightCaught = extra Danh lost when caught (a gain and a loss). */
+Object.assign(BAL,{ad:{hapP:65,hap2:35,strollP:80,rareMinGrade:3,nightSneak:10,nightCaught:-4}});
 /* KHẢO HẠCH TẤN PHONG (jexam, owner 15/11 17:20Z): win = tuần she has to sit it once eligible; cd[to] = months before a retry after a fail or a
    missed window, by the target rank (1 Thường tại … 7 Hoàng hậu); bar[tier] = pass mark out of ~90 (tier 0 low = to 1–3, 1 middle = to 4–5,
    2 high = to 6–7); score = mean round (0–10) × wPlay + two Tứ đức courses × wVir + one art level (high: Đức/20) × wArt; the examiner's
@@ -35377,7 +35382,7 @@ html body #modal:not(.pcm) .dlg.kpanel.kpcompact .kpb.kpshort{margin:0}
       j7 rvquarrel, j72 việc nhờ, j78 intelLearn, the Emperor in the garden). Nội vụ phủ is a place (shop = jinv kitShopNvp + a
       weekly rare item). Faces never on place names (silhouettes only; unchanged).
    Co-op: everything here is her personal state (S.adDoor, S.adHap, S.adRare); no world agency; old saves fill lazily. */
-const AD={hapP:65,hap2:35,rareMinGrade:3};
+const AD=BAL.ad; /* numbers in BAL (jbal2.js): hapP, hap2, strollP, rareMinGrade */
 /* ---------- 1. shared doors ---------- */
 const AD_DOOR={/* deck name → [pop-up kind, pop-up option name, scope] */
  "Thỉnh an Thái hậu":["th","Thỉnh an, chép kinh","day"],
@@ -35479,26 +35484,33 @@ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){
 /* ---------- 7. "!" happenings: ≤2 places per buổi, re-rolled each buổi, fired on arrival (existing events) ---------- */
 function adPresent(k){try{return liveRivals(true).filter(v=>whereOf(v)===k&&!v.confined)}catch(e){return[]}}
 function adOpenOk(k){try{if(typeof accessOf==="function"&&!accessOf(S,k).ok)return false}catch(e){}return k!==S.place}
-function adHapRoll(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x)=>{if(!k||used.has(k)||!adOpenOk(k))return false;used.add(k);L.push({k,id,x:x||null,done:0});return true};
+/* first slots (fix of the wave-1 report, flag 2): the Emperor's stroll takes the FIRST slot when he is in the garden (BAL.ad.strollP),
+   then the fixed happenings of the day (AD_HAP_FIX: a festival at its place, night happenings; jact2), then the random ones up to the
+   buổi's roll. Never more than 2 per buổi. A fixed happening may share a place with the stroll (both fire on arrival). */
+const AD_HAP_FIX=[];
+function adHapRoll(){const L=[],W=S.where||{};const used=new Set();const add=(k,id,x,share)=>{if(!k||(!share&&used.has(k))||!adOpenOk(k))return false;used.add(k);L.push({k,id,x:x||null,done:0});return true};
+ if(W.emp==="vuon"&&roll(AD.strollP))add("vuon","emp");
+ for(const f of AD_HAP_FIX){if(L.length>=2)break;try{const h=f();if(h)add(h.k,h.id,h.x,1)}catch(e){console.error("jact fix",e)}}
  const C=[];
- if(W.emp==="vuon")C.push(()=>add("vuon","emp"));
  if(liveRivals(true).filter(v=>!v.confined).length>=2)C.push(()=>add("vuon","quarrel"));
  for(const p of places()){if(p.k==="home")continue;if(adPresent(p.k).length>=2){C.push(()=>add(p.k,"gossip"));break}}
  try{if(typeof q72CanOffer==="function"&&q72CanOffer()){const P=shuf(places().filter(p=>p.k!=="home"&&p.k!=="nvp").map(p=>p.k)).slice(0,4);
   for(const k of P){const x=q72Choose(q72Cands(k),k);if(x){C.push(()=>add(k,"favour",x));break}}}}catch(e){}
  const n=roll(AD.hapP)?(roll(AD.hap2)?2:1):0;const S2=shuf(C);for(const f of S2){if(L.length>=n)break;f()}
- return L}
+ return L.slice(0,2)}
 function adHapNow(){if(!S||S.dead||adSrv()||S.out)return[];let b="";try{b=bkey()}catch(e){return[]}if(!S.adHap||S.adHap.b!==b){let L=[];try{L=adHapRoll()}catch(e){console.error("jact hap",e)}S.adHap={b,L}}return S.adHap.L}
 function adHapAt(k){return adHapNow().find(h=>h.k===k&&!h.done)||null}
 const AD_HAP_T={emp:"Hoàng thượng dạo vườn",quarrel:"Hai phi tần cãi nhau",gossip:"Nghe lỏm chuyện",favour:"Có người nhờ việc"};
-function adHapArrive(k){if(S.place!==k||S.dead)return;const h=adHapAt(k);if(!h)return;h.done=1;let fired=false;
+const AD_HAP_FIRE={};/* id → (h,k) => fired (jact2 adds fest, cold) */
+function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;for(let i=0;i<2;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true}if(any){try{showModal()}catch(e){}}}
+function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fired=!!AD_HAP_FIRE[h.id](h,k)}catch(e){console.error("jact fire",e)}return fired}
  if(h.id==="emp"&&(S.where||{}).emp==="vuon"){const d=mkP("adStroll",{});if(d){pushDil(d,AD_HAP_T.emp);fired=true}}
  else if(h.id==="quarrel"){const R=liveRivals(true).filter(v=>!v.confined);const here=adPresent(k);const a=here[0]||pick(R);const b=here.find(v=>v!==a)||pick(R.filter(v=>v!==a));
   if(a&&b){const d=mkP("rvquarrel",{a:a.id,b:b.id});if(d){pushDil(d,AD_HAP_T.quarrel);fired=true}}}
  else if(h.id==="gossip"){const here=adPresent(k);const v=here.length?pick(here):null;if(v){let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}
   if(!f){try{f=overhear(k)}catch(e){}}pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe ${v.name} to nhỏ với người bên cạnh.</p><p>${f||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});fired=true}}
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
- if(fired){try{showModal()}catch(e){}}}
+ return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
 PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(35+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
@@ -35513,6 +35525,80 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;cons
 .mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
 /* kit page samples */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mlab" style="display:inline-block;margin:4px 8px;padding:2px 6px;background:#3a2a1ee6;color:#ffe7b0;border-radius:8px">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:k}${k==="vuon"?'<i class="khap">!</i>':""}</span>`).join("")})}catch(e){}
+/* ================= jact2: ACT SPLIT waves 2 + 3 (owner-approved split 16/11: Hành sự = VIỆC, Hậu cung = AI, Dư đồ = ĐI ĐÂU; review/act-split-w2) =================
+   Loaded right after jact.js. Wraps only. Before/after table: dev/review/act-split-w2.md. Numbers: BAL.ad (jbal2.js).
+   WAVE 2 (festivals, outings). A festival day used to bring up to THREE dialogs for one festival: the j71 festival dialog (contests, wagers,
+   feast, offering, rite; fixed day), the j31 FESTEV "light event" (7 festivals, pushed at the start of the day) and the j7 random month event
+   (5 festivals, any tuần of that month). ONE HOME each:
+   - the j71 festival dialog stays THE festival dialog of the day (unchanged);
+   - the light acts of a festival (j31 FESTEV + the j7 festival events, same options, same numbers) live at the festival's PLACE on Dư đồ:
+     on the festival day that place carries the "!" (kitHapMark) and is open to her for the day (the court gathers there); arriving there opens
+     the light acts, once per festival per year. The outings with the Emperor (Xin theo hầu lễ tế, Theo ngài lên núi, Xin về tảo mộ,
+     Xin thử một mũi tên) are among these acts, so they move with them;
+   - an option that is the same act as this year's j71 festival dialog (câu đối, đố đèn, đàn, bắn cung, cược, cháo, thơ, thêu, bánh, dâng lễ)
+     is left out of the light acts that day (the contest is its home);
+   - "Thả đèn cầu con" (FESTEV Nguyên tiêu) is the same act as the Hành sự card "Thả đèn hoa đăng" → it becomes that card's wish "Cầu con"
+     (same cost Bạc -10, same effect).
+   WAVE 3 (night = the last buổi).
+   - "Lẻn vào" (the locked-place card, j41/j77) is the one home of sneaking; at night it uses the same odds + BAL.ad.nightSneak (fewer guards)
+     and, if caught, the same penalty + BAL.ad.nightCaught Danh (a gain and a loss). Same rule for anyone who sneaks.
+   - Night-only happening "Tiếng khóc ở Trường Môn viện": the fallen consort's call (j7 coldvisit, whose text happens AT the cold palace)
+     leaves the random event pool and fires when she goes to Trường Môn viện at night (same options, same numbers, same 12-month rest).
+   - "Nghe lén câu chuyện" was on EVERY consort's pop-up at a place (one copy per person) and is the same act as the "!" Nghe lỏm chuyện:
+     one door per place per buổi (doing one greys the others).
+   Co-op: S.adFest / S.adDoor are her personal state; S.festDone (world key) is set exactly as before; no world agency. Old saves fill lazily. */
+const AD2=BAL.ad;
+function as2Night(){try{return S&&(S.buoi||0)>=BUOI.length-1}catch(e){return false}}
+/* ---------- WAVE 2: festivals ---------- */
+const AS_FPLACE={newyear:"thu",giaothua:"thu",trungcuu:"thu",dongchi:"thu",nguyentieu:"vuon",trungthu:"vuon",phoenix:"vuon",doanngo:"vuon",
+ thanhminh:"tn",thanhtho:"tn",lapbat:"cnh",vulan:"cnh"};
+const AS_J7F={doanngo:"doanngo",trungcuu:"trungcuu",vulan:"vulan",dongchi:"dongchi",thanhtho:"thbirthday"};
+/* the j31 light events leave the day-start queue: kept here, fired at the place */
+const AS_LIGHT={};try{if(typeof FESTEV==="object")for(const k of Object.keys(FESTEV)){AS_LIGHT[k]=FESTEV[k];delete FESTEV[k]}}catch(e){}
+/* the j7 festival events (and the cold-palace call, wave 3) leave the random weekly pool; PEND keeps them so a pending one in an old save loads */
+const AS_J7OUT=new Set([...Object.values(AS_J7F),"coldvisit"]);
+if(typeof freshEvents==="function"){const f0=freshEvents;freshEvents=function(){const L=f0.apply(this,arguments);try{if(!adSrv())return L.filter(e=>!AS_J7OUT.has(e.id))}catch(e){}return L}}
+/* S.festDone (j52 Phúc duyên "dự lễ", co-op world key) is still set at the start of the festival day, as j31 did */
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead&&!S.out){const f=festToday();const key=f&&`${S.year}-${f.k}`;if(f&&AS_LIGHT[f.k]&&S.festDone!==key){S.festDone=key;log(`${f.name}.`)}}}catch(e){console.error("jact2 fest",e)}return r}})();
+/* this year's j71 festival dialog (its title tells which act it is) */
+if(typeof fDay7==="function"){const d0=fDay7;fDay7=function(k){const m=d0.apply(this,arguments);try{if(m&&S)S.adF71={y:S.year,k,t:String(m.t||"")}}catch(e){}return m}}
+const AS_SAME=[[/câu đối/i,/câu đối/i],[/đố đèn/i,/đố đèn/i],[/khúc đàn/i,/Thi đàn/i],[/mũi tên/i,/bắn/i],[/Đặt cược/i,/Đặt cược/i],[/nấu cháo/i,/cháo/i],
+ [/Làm thơ/i,/Thi thơ/i],[/thêu/i,/thêu/i],[/^(Dâng bánh|Gói bánh)/i,/bánh/i],[/^(Dâng ngọc|Lễ mọn)/i,/Dâng lễ/i]];
+function asSameAsJ71(k,name){const F=S.adF71;if(!F||F.y!==S.year||F.k!==k)return false;return AS_SAME.some(([a,b])=>a.test(name)&&b.test(F.t))}
+function asFestToday(){try{const f=festToday();return f&&AS_FPLACE[f.k]&&(AS_LIGHT[f.k]||AS_J7F[f.k])?f:null}catch(e){return null}}
+function asFestDone(k){return !!(S.adFest&&S.adFest[k]===S.year)}
+/* the festival place is open to her on the festival day until she has been (the court gathers there) */
+if(typeof ACC_ROLE!=="undefined"&&Array.isArray(ACC_ROLE))ACC_ROLE.unshift((p,k)=>{if(p!==S||adSrv())return null;const f=asFestToday();return f&&AS_FPLACE[f.k]===k&&!asFestDone(f.k)?{ok:true,fest:1}:null});
+AD_HAP_FIX.push(()=>{const f=asFestToday();if(!f||asFestDone(f.k)||S.confined)return null;return{k:AS_FPLACE[f.k],id:"fest",x:f.k}});
+AD_HAP_T.fest="Ngày hội";
+/* a light event keeps at least 2 options: when the left-out acts leave one, the plain "watch and go back" (no gain, no loss) is added */
+const AS_WATCH={n:"Đứng xem rồi về",fx:{},x:"không được không mất"};
+function asLightOpts(k,O){const O2=(O||[]).filter(o=>o&&!asSameAsJ71(k,o.n));if(O2.length<2&&!O2.some(o=>o.n===AS_WATCH.n))O2.push(Object.assign({},AS_WATCH));return O2}
+AD_HAP_FIRE.fest=(h)=>{const k=h.x,f=festToday();if(!f||f.k!==k||asFestDone(k))return false;S.adFest=S.adFest||{};S.adFest[k]=S.year;let fired=false;
+ if(AS_LIGHT[k]){const m=Object.assign({who:pEmp(),ev:"fest",evId:"fest:"+k,headArt:{src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${k}-b.webp`,label:f.name}},AS_LIGHT[k]());
+  m.opts=asLightOpts(k,(m.opts||[]).filter(o=>!(k==="nguyentieu"&&o.n==="Thả đèn cầu con")));Q.push(m);fired=true}
+ const j=AS_J7F[k];if(j&&EVI[j]){try{if(EVI[j].ok()){const d=mkEv(j);if(d){d.o=asLightOpts(k,d.o);pushDil(d,f.name);fired=true}}}catch(e){console.error(e)}}
+ return fired};
+/* "Thả đèn cầu con" → the Hành sự card "Thả đèn hoa đăng" (jts), wish "Cầu con" on the Nguyên tiêu night (the card already costs Bạc -10) */
+if(typeof tsPanel==="function"&&typeof tsOpt==="function"){const p0=tsPanel;tsPanel=function(o){try{const f=festToday();if(o&&Array.isArray(o.opts)&&f&&f.k==="nguyentieu"&&/: thả đèn$/.test(o.t||"")&&!o.opts.some(x=>x&&x.n==="Cầu con"))
+  o.opts.splice(Math.max(0,o.opts.length-1),0,tsOpt({n:"Cầu con",duoc:["dễ có thai thêm một tháng"],go:()=>{S.fert=Math.max(S.fert||0,1);log(`Đêm ${f.name}, ngươi thả đèn cầu con.`)}}))}catch(e){console.error("jact2 den",e)}return p0.apply(this,arguments)}}
+/* ---------- WAVE 3: the night ---------- */
+/* sneaking at night: fewer guards (odds + nightSneak), heavier if caught (Danh + nightCaught) */
+if(typeof accSneakO==="function"){const o0=accSneakO;accSneakO=function(k,a){const o=o0.apply(this,arguments);try{if(as2Night())return cl(o+AD2.nightSneak,5,95)}catch(e){}return o}}
+if(typeof accSneakPen==="function"){const p0=accSneakPen;accSneakPen=function(k){const P=p0.apply(this,arguments);try{if(as2Night()&&P){const d=P.danh+AD2.nightCaught;return Object.assign({},P,{danh:d,txt:String(P.txt||"").replace(/Danh -\d+/,`Danh ${d}`)+" (bắt giữa đêm, tội nặng thêm)"})}}catch(e){}return P}}
+if(typeof accSneakLine==="function"){const l0=accSneakLine;accSneakLine=function(){const t=l0.apply(this,arguments);return as2Night()?t+" · (đêm vắng người: dễ lọt hơn, bị bắt thì tội nặng hơn)":t}}
+/* the fallen consort's call: a night happening at Trường Môn viện (j7 coldvisit, same options; its 12-month rest via S.seen) */
+AD_HAP_FIX.push(()=>{if(!as2Night()||S.confined)return null;const e=typeof EVI!=="undefined"&&EVI.coldvisit;try{if(!e||!evFresh(e)||!e.ok())return null}catch(x){return null}return{k:"lc",id:"cold"}});
+AD_HAP_T.cold="Tiếng khóc ở Trường Môn viện";
+AD_HAP_FIRE.cold=()=>{if(!as2Night())return false;const d=mkEv("coldvisit");if(!d)return false;pushDil(d,AD_HAP_T.cold);return true};
+/* one door per place per buổi for "Nghe lén câu chuyện" (every pop-up at the place + the "!" Nghe lỏm chuyện) */
+function as2NgheKey(){try{return "nghe:"+S.place+":"+bkey()}catch(e){return ""}}
+function as2NgheUsed(){return !!(S&&S.adDoor&&S.adDoor.__nghe===as2NgheKey())}
+function as2NgheMark(){if(!S)return;S.adDoor=S.adDoor||{};S.adDoor.__nghe=as2NgheKey()}
+(function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(Array.isArray(A)&&as2NgheUsed())A=A.map(a=>a&&a.n==="Nghe lén câu chuyện"?Object.assign({},a,{lock:true,t:"đã nghe lén ở đây buổi này"}):a)}catch(e){}return A}})();
+(function(){const t0=talk;talk=function(oi){let a=null;try{const p=S&&curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}if(a&&a.n==="Nghe lén câu chuyện"&&a.lock)return;
+ const r=t0.apply(this,arguments);try{if(a&&a.n==="Nghe lén câu chuyện")as2NgheMark()}catch(e){}return r}})();
+(function(){const a0=adHapFire1;adHapFire1=function(h,k){const r=a0.apply(this,arguments);try{if(h&&h.id==="gossip"&&r)as2NgheMark()}catch(e){}return r}})();
 /* ================= jkc: TIỂU THƯ NGOÀI CUNG (owner 11/14 20:15Z; plan dev/OUTSIDE_PLAN.md, approved) =================
    A second road into the same life: on the identity card (and at every rebirth) she picks "Vào cung ngay" or
    "Ở nhà chờ tuyển tú". The home road: she is 18, at home in her father's house, from the first month of the game until the
@@ -36275,7 +36361,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b6f29305696c";window.CTM_BUILD=BUILD;
+const BUILD="698ec510b391";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
