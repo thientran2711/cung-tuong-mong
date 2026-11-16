@@ -105,10 +105,12 @@ window.KIT_PICFALL=window.KIT_PICFALL||{};
 `;document.head.appendChild(st)})();
 /* ---------- the item someone else wears / holds (person card slots, K1): the kit ITEM dialog, not an info picture ----------
    item picture in its grade frame, name + grade, the owner (small portrait + name), the item's kit rows, ✕ close (no "Đã hiểu"). */
-function kitOtherItem(v,x,sl){try{const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x.k];const g=x.grade|0,gr=KIT_GRADE[g]||KIT_GRADE[0];
+function kitOtherItem(v,x,sl){try{/* KIT §70: the shared item detail card (who = the wearer; Lai lịch = who gave it) */
+ if(typeof kitItemCard==="function"&&kitItemCard({wdSlot:sl,who:v},{note:[`${sl==="tram"?"cài":"mặc"} trên người ${v.name}`,x.label?`ta đã biết: ${x.label}`:"đúng phẩm hay không: chưa rõ",
+  "hặc ăn mặc sai phẩm: thẻ người của nàng ta, nhóm Hại nặng"]}))return;const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x.k];const g=x.grade|0,gr=KIT_GRADE[g]||KIT_GRADE[0];
  const src=typeof kitItemSrc==="function"?kitItemSrc(x.k,x.icon):(x.icon||"");
  let rows="";try{rows=W&&typeof wdItemRowsE==="function"?wdItemRowsE({k:x.k},{}):typeof kitItemRows==="function"?kitItemRows(x.k,{}):""}catch(e){rows=""}
- const own=`<div class="kgiftown">${typeof mdH==="function"?mdH(pv(v),"sm"):""}<span>${sl==="tram"?"Đang cài":"Đang mặc"}: ${typeof kitName==="function"?kitName(v):giftE(v.name)}</span></div>`;
+ const own=`<div class="kgiftown">${typeof mdH==="function"?mdH(pv(v),"sm"):""}<span>Đang mặc: ${typeof kitName==="function"?kitName(v):giftE(v.name)}</span></div>`;
  const F=[x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).",x.giver?`${x.giver} ban.`:"","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."].filter(Boolean);
  kitModal({kind:"info",title:x.name,sub:`${sl==="tram"?"Trâm cài":"Y phục"} · ${gr.n}`,kx:1,
   itemPic:kitItem({src,name:"",grade:g,size:"lg"}).replace('<span class="kitn"></span>',''),
@@ -141,7 +143,7 @@ function giftBagFor(t){return S.inv.map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&(e.
 PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rương trống: chưa có món nào để dâng.</p>",o:[{n:"Thôi",fx:{},kgx:1}]};
  L.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const who=t==="emp"?"Hoàng thượng":"Thái hậu";
  return{t:`<p>Dâng món gì lên ${who}? Mỗi món ghi đúng điều được, theo tâm trạng và sở thích của ${t==="emp"?"ngài":"người"}.</p>`,
-  o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
+  o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
    go:()=>{if(!x.ok)return;spend(2);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
 function courtMeet(t){const B=[];try{
  if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=3;

@@ -13,7 +13,7 @@ function mon(m){m=+m;return MON[m-1]||String(m)}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 function date(m,y,tuan,buoi){let s=`Tháng ${mon(m)}, năm thứ ${ord(y)}`;if(tuan!=null&&typeof TUAN!=="undefined")s+=", "+TUAN[tuan];if(buoi!=null&&typeof BUOI!=="undefined")s+=", "+String(BUOI[buoi]).toLowerCase();return s}
 const B="(?<![\\p{L}\\d])",E="(?![\\p{L}\\d])";
-const R=(src,f="g")=>new RegExp(src,f+"u");
+const R=(src,f="g")=>kRx(src,f+"u");/* kRx: lookbehind that also runs on Safari < 16.4 (j0) */
 const srvMode=()=>{try{return typeof isSrv==="function"&&!!S&&isSrv()}catch(e){return false}};/* servant start: "Chủ tin" is the mistress's trust in HER — keep the word */
 /* ordered phrase rules: [regex, replacement|function] */
 const RULES=[
@@ -58,25 +58,27 @@ const RULES=[
  /* review 11/15 (sub-odds): relation lines in old event cards "Thái hậu với ngươi -3" read as the one relation word "quý" (KIT §36.3) */
  /* owner 09:55Z (supersedes "quý"): one relation word, "thiện cảm" (KIT_REL): "X với/quý ngươi|ta ±N" → "X → ta: thiện cảm ±N", a bare "nàng quý ngươi" → "thiện cảm" */
  /* review ts-a r6 (same class as j84 "với ngươi"): "X quý ngươi hơn" is a sentence, not a label: "Họ thiện cảm hơn" → "Họ có thiện cảm với ta hơn" */
- [/(?<![\p{L}])quý (?:ngươi|ta) hơn(?![\p{L}])/gu,"có thiện cảm với ta hơn"],
+ [kRx("(?<![\\p{L}])quý (?:ngươi|ta) hơn(?![\\p{L}])","gu"),"có thiện cảm với ta hơn"],
  [/(Thái hậu|Hoàng hậu|Hoàng thượng|Hắn|hắn) (?:với|quý) (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())/g,"$1 → ta: thiện cảm"],
  /* owner 15:30Z ("thiện cảm" trơn): with its subject the label keeps it — "Nàng quý ngươi" → "Nàng → ta: thiện cảm"; "Ngươi quý nàng" → "Ta → nàng: thiện cảm"
     (review fix-float r9: same label-only lookaheads as ts-a 11/15 below — "với ngươi" only before a number or ":") */
- [/(?<![\p{L}])([Nn])àng(?: ta)? (?:quý (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với (?:ngươi|ta)(?=\s*(?:[-+−]?\d|:)))/gu,"$1àng → ta: thiện cảm"],
- [/(?<![\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với nàng(?: ta)?(?=\s*(?:[-+−]?\d|:)))/gu,"Ta → nàng: thiện cảm"],
+ [kRx("(?<![\\p{L}])([Nn])àng(?: ta)? (?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"$1àng → ta: thiện cảm"],
+ [kRx("(?<![\\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|:)))","gu"),"Ta → nàng: thiện cảm"],
  /* ts-a 11/15: "với ngươi" is a relation label only before a number or ":" — "ra tay với ngươi, …", "hẹn ước với ngươi, …",
     "thân với ngươi hơn" are sentences (they became "ra tay thiện cảm," before) and only get "ngươi" → "ta" below */
- [/(?<![\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với (?:ngươi|ta)(?=\s*(?:[-+−]?\d|:)))/gu,"thiện cảm"],
+ [kRx("(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"thiện cảm"],
  /* NPC ↔ NPC "thân +7" (j8 giveTo, old logs): the one relation word */
- [/(?<![\p{L}])thân ([+\-−]\s?\d)/gu,"thiện cảm $1"],
- [/^[^“”]*”|“[^”]*(?:”|$)|(?<![\p{L}\p{M}])([Nn])gươi(?![\p{L}\p{M}])/gu,(m,n)=>n?(n==="N"?"Ta":"ta"):m],
+ [kRx("(?<![\\p{L}])thân ([+\\-−]\\s?\\d)","gu"),"thiện cảm $1"],
+ [kRx("^[^“”]*”|“[^”]*(?:”|$)|(?<![\\p{L}\\p{M}])([Nn])gươi(?![\\p{L}\\p{M}])","gu"),(m,n)=>n?(n==="N"?"Ta":"ta"):m],
  /* servant words (owner 11/15 10:10Z, VANPHONG §1; KIT_REL): one word for the servant's attitude to her, one for her trust in him */
  /* another person is "nàng ta", never a bare "nàng" (owner 11/15: a bare "nàng" reads as the player) — kitThey(p) in jaudit */
  [R("(?<!(?:→|oán|quý|với|ghen) )"+B+"([Nn])àng"+E+"(?! ta"+E+")(?! ấy"+E+")(?! (?:oán|ghen|→|quý|thương)"+E+")"),"$1àng ta"],/* "Nàng oán ta", "Nàng → ta", "Ta → nàng" stay (owner 15:30Z: never "Nàng ta oán ta") */
- [/(?<![\p{L}])([Nn])àng ta (?=(?:oán ta|→ ta|ghen)(?![\p{L}]))/gu,"$1àng "],
+ [kRx("(?<![\\p{L}])([Nn])àng ta (?=(?:oán ta|→ ta|ghen)(?![\\p{L}]))","gu"),"$1àng "],
  [R(B+"cần Chủ tin"),m=>srvMode()?m:"cần tin cậy"],[R(B+"Chủ tin với "),m=>srvMode()?m:"tin cậy "],[R(B+"Chủ tin"+E),m=>srvMode()?m:"Ta tin cậy"],[R(B+"chủ tin"+E),m=>srvMode()?m:"tin cậy"],
  ["Lòng cung nữ","Thiện cảm của cung nữ"],[R(B+"Lòng(?= [+\\-−]?\\d)"),"Thiện cảm"],[R(B+"Lòng(?= \\p{Lu}[\\p{L}]*( \\p{Lu}[\\p{L}]*)? [+\\-−]?\\d)"),"Thiện cảm"],
- [R(B+"lòng(?= [+\\-−]\\d)"),"thiện cảm"],[R(B+"lòng (còn )?dưới (?=\\d)"),"thiện cảm $1dưới "],[R(B+"Lòng"+E+"(?=\\s*$)"),"Thiện cảm"]
+ [R(B+"lòng(?= [+\\-−]\\d)"),"thiện cảm"],
+ /* review/small-bugs-3: the old relation word "thân ±N" (old saves' Sổ ghi / Tuần lục lines) reads as "thiện cảm ±N" */
+ [R("(?<!(?:[Xx]uất|[Bb]ản|[Pp]hụ|[Mm]ẫu|[Kk]ết) )"+B+"(?:[Nn]àng )?thân(?= [+\\-−]\\d)"),"thiện cảm"],[R(B+"lòng (còn )?dưới (?=\\d)"),"thiện cảm $1dưới "],[R(B+"Lòng"+E+"(?=\\s*$)"),"Thiện cảm"]
 ];
 /* whole-text exact labels (trimmed) */
 const FULL={"Cung ngươi":"Cung ta","Lòng":"Thiện cảm","lòng":"thiện cảm","Đang cài":"Đang mặc","Đang đeo":"Đang mặc","Đang dùng":"Đang mặc","Đã rõ":"Đã hiểu","Đóng":"Lui","✕ Đóng":"✕ Lui","Hành động":"Hành sự","Quan hệ":"Giao tình","Chỉ số":"Tư chất"};
@@ -97,7 +99,22 @@ function fix(s,el){if(s==null)return s;s=String(s);if(!QUICK.test(s))return s;
 const SKIP=/^(SCRIPT|STYLE|TEXTAREA|INPUT|NOSCRIPT|SELECT|OPTION)$/;
 const ATTR=["title","aria-label","placeholder","data-s","data-l0","data-s0"];
 let busy=false,changed=0;
-function fixText(n){const p=n.parentElement;if(!p||SKIP.test(p.tagName)||p.closest("[data-vp-skip]"))return;const v=n.nodeValue;const t=fix(v,p);if(t!==v){n.nodeValue=t;changed++}}
+/* review/small-bugs-3: an item name is a common noun — mid-sentence it is written in lower case ("tặng trâm gỗ đào cho …"; VANPHONG §1
+   "Tên món đồ"). Standing alone (item cell, card title, chip, start of a sentence or line) it keeps its capital. Proper names inside the
+   name keep theirs ("vòng ngọc Hòa Điền"). One rule for every log / news / Tuần lục / card line (old saves too): names from IT + WD_ITEMS. */
+let ITRX=null,ITN=-1,ITT=0;
+function itRx(){const now=Date.now();if(ITRX!==null&&now-ITT<4000)return ITRX;ITT=now;const L=[];
+  try{for(const k in IT){const n=IT[k]&&IT[k].n;if(n)L.push(n)}}catch(e){}
+  try{if(typeof WD_ITEMS==="object")for(const k in WD_ITEMS){const n=WD_ITEMS[k]&&WD_ITEMS[k].n;if(n)L.push(n)}}catch(e){}
+  if(L.length===ITN&&ITRX)return ITRX;ITN=L.length;const U=[...new Set(L.filter(n=>n.length>=3&&/^\p{Lu}\p{Ll}/u.test(n)&&/ /.test(n)||/^(A giao|Xạ hương|Yến sào)$/.test(n)))].sort((a,b)=>b.length-a.length);
+  ITRX=U.length?new RegExp("(?<![\\p{L}\\p{M}\\d])(?:"+U.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}\\p{M}\\d])","gu"):false;return ITRX}
+const ITMID=/[\p{L}\p{M}\d,:)]\s+$/u;
+function itemLow(s,before){if(!s||!/\p{Lu}/u.test(s))return s;const rx=itRx();if(!rx)return s;rx.lastIndex=0;
+  return s.replace(rx,(m,i)=>ITMID.test((before||"")+s.slice(0,i))?m.charAt(0).toLowerCase()+m.slice(1):m)}
+const INL=/^(B|I|SPAN|EM|STRONG|SMALL|A|U|MARK)$/;
+function prevText(n){let x=n;for(let d=0;d<3&&x;d++){let p=x.previousSibling;while(p&&p.nodeType===8)p=p.previousSibling;if(p)return (p.textContent||"").slice(-40);
+  x=x.parentElement;if(!x||!INL.test(x.tagName))return""}return""}
+function fixText(n){const p=n.parentElement;if(!p||SKIP.test(p.tagName)||p.closest("[data-vp-skip]"))return;const v=n.nodeValue;let t=fix(v,p);try{t=itemLow(t,prevText(n))}catch(e){}if(t!==v){n.nodeValue=t;changed++}}
 function fixAttr(el,a){const v=el.getAttribute(a);if(!v)return;const t=fix(v,el);if(t!==v){el.setAttribute(a,t);changed++}}
 function fixEl(el){if(el.nodeType===3)return fixText(el);if(el.nodeType!==1||SKIP.test(el.tagName))return;
   for(const a of ATTR)if(el.hasAttribute(a))fixAttr(el,a);
@@ -116,5 +133,5 @@ const mo=new MutationObserver(ms=>{if(busy)return;busy=true;try{for(const m of m
 function boot(){fixEl(document.body);mo.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:ATTR})}
 if(document.body)boot();else document.addEventListener("DOMContentLoaded",boot);
 document.title=fix(document.title);
-window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{patchTabs();fixEl(document.body)},get changed(){return changed}};
+window.VP={fix,itemLow,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{patchTabs();fixEl(document.body)},get changed(){return changed}};
 })();
