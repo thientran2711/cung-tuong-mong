@@ -160,8 +160,8 @@ function petWeek(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(
   const winter=S.month>=10;
   for(let i=L.length-1;i>=0;i--){const P=L[i],T=petT(P);let dc=T.dc||8;if(T.pond&&rkOf(p)<3)dc+=5;if(T.weak&&winter)dc+=6;
    if(me){P.care=(P.care||0)-(tsbMaid(S)?Math.ceil(dc/2):dc)}else{P.care=cl((P.care||0)-dc+((p.bac||0)>=(T.up||0)?dc+2:0)-(roll(4)?30:0),0,100)}
-   if(petOk(P)){if(T.suc){if(me)S.suc=cl(S.suc+T.suc,0,100);else p.suc=cl((p.suc||0)+T.suc,0,100)}}
-   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,100);else p.suc=cl((p.suc||0)-2,0,100)}
+   if(petOk(P)){if(T.suc){if(me)S.suc=cl(S.suc+T.suc,0,sucCap(S));else p.suc=cl((p.suc||0)+T.suc,0,sucCap(p))}}
+   if(T.al&&p.asthma){if(me)S.suc=cl(S.suc-2,0,sucCap(S));else p.suc=cl((p.suc||0)-2,0,sucCap(p))}
    if(me&&P.care<30&&!P.warn){P.warn=1;if(tsbOn()&&!petCardQ("tsbPetW"))petCard("tsbPetW",{i},"Thú nuôi biếng ăn")}
    if(P.care<=0){const n=petLose(p,i,/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|hac|thienma/.test(P.t)?"bỏ đi mất vì bỏ bê":"yếu dần vì bỏ bê");if(me&&n)log(`<span class="r">${tsbCap(n)} của ngươi bị bỏ bê lâu ngày, không còn nữa.</span>`)}}}}
 function tsbPetWeek(){return petWeek()}function tsbPetMonth(){return petMonth()}

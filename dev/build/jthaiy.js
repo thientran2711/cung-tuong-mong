@@ -48,7 +48,7 @@ const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễ
 const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm"};
 const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
 function sucWord(s){return s>=70?"khí huyết dồi dào":s>=50?"khí huyết điều hòa":s>=30?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
-function verdict(lie){const i=illOf(S);const s=S.suc||0;if(i&&!lie)return["Có bệnh","r"];if(s<40||(i&&lie))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
+function verdict(lie){const i=illOf(S);const s=S.suc||0;if(i&&!lie)return["Có bệnh","r"];if(s<40||(i&&lie)||(typeof khB==="function"&&khB()&&khOf(S)<khB().thyLo))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
 function wksPreg(){return S.preg&&S.pregUnk&&S.pregWk!=null?wk()-S.pregWk:-1}
 function lateHint(){try{return typeof cycleLate==="function"&&cycleLate(S)}catch(e){return false}}
 /* the j75 card finds it (j75 owns the card): bring its day to now */

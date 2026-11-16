@@ -61,7 +61,7 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
- if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<6?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
+ if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<6?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(pick(MAIDS.filter(x=>x!==o)),M.maidLoy);return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
  for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
@@ -136,7 +136,7 @@ function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p
 (function(){const p0=illMonthP;illMonthP=function(p){const had=!!illOf(p);const ev=p0.apply(this,arguments);
  try{if(M.on&&M.life.care&&!had&&p&&p.alive!==false&&!(p===S&&S.dead)){const i=illOf(p);if(i&&!i.mort&&roll(M.life.careIll*careN(p))){p.ill=null;return p===S?"Nhờ giữ gìn sức khỏe, ngươi chỉ cảm mệt mấy hôm rồi khỏi. ":""}}}catch(e){}return ev}})();
 /* older → more tired */
-(function(){if(typeof j76sleep!=="function")return;const s0=j76sleep;j76sleep=function(p){const r=s0.apply(this,arguments);if(!M.on||!p)return r;const a=ageOf(p)||20;return a>M.tired.from?Math.max(M.tired.min,r-Math.floor((a-M.tired.from)/M.tired.per)):r}})();
+(function(){if(typeof j76sleep!=="function")return;const s0=j76sleep;j76sleep=function(p){const r=s0.apply(this,arguments);if(!M.on||!p||(typeof khB==="function"&&khB()))return r;/* folded into the Sức khỏe ceiling (jkh, owner 16/11 18:05Z: age acts through Sức max only) */const a=ageOf(p)||20;return a>M.tired.from?Math.max(M.tired.min,r-Math.floor((a-M.tired.from)/M.tired.per)):r}})();
 /* grief: losing her child weighs on her health (illness easier for griefMo months) */
 (function(){const k0=kidDie;kidDie=function(k,why,mine){if(mine&&S)S.mortGrief=M.griefMo;return k0.apply(this,arguments)}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(p===S&&S.mortGrief>0){S.mortGrief--;if(!illOf(S)&&roll(M.griefIll))return catchIll(S,"tambenh")+p0.apply(this,arguments)}return p0.apply(this,arguments)}})();
