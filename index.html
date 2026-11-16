@@ -28326,7 +28326,7 @@ window.intAll=intAll;
    - kitCoach(spec): spotlight (the step's target stays bright inside a gold ring, the rest is dimmed) + a small coach card placed beside the
      target, never over it when the step asks for a tap. Re-measured on every resize / rotation / scroll and while the target moves.
    - kitTip(spec): a small lời dặn card above the tab bar, 1–3 sentences + "Đã hiểu"; never blocks (only the card takes taps), once each.
-   The guide = Quế ma ma (a ma ma portrait already drawn, img/FIGURES-servants.json role mama; never a new drawing, never a face used by
+   The guide = staffGuide() of review/elder-staff (a real named palace elder: name, title, the same face); fallback Quế ma ma (a ma ma portrait already drawn, img/FIGURES-servants.json role mama; never a new drawing, never a face used by
    someone in this kiếp). She says "nô tỳ" and calls the player "tiểu chủ" (Tần and up: "nương nương"; cung nữ road: "ta" / "ngươi").
    Lượt dẫn đầu kiếp (KTUT_STEPS, ≤12 steps): first kiếp on this device, or "Xem lại lời dặn" in ☰. It starts after the Nhập cung card and the
    "Mệnh truyện kiếp này" goal card (jgoal), and one step shows the goal strip (kitGoalStrip). Old players (an older sổ or a Sổ luân hồi
@@ -28337,7 +28337,11 @@ window.intAll=intAll;
    so measure bots and screenshot scripts are never blocked. Co-op: everything here is local to each machine; nothing waits for it. */
 (function(){try{
 const TK="hclh-tut";
-const MM_NAME="Quế ma ma";
+/* the guide is a REAL palace NPC (owner 16/11): review/elder-staff exports staffGuide() → {id,name,title,office,face,kr}; name, title and
+   the face the game shows for her elsewhere come from it. The fallback below is used only while that module is not in the build. */
+function GD(){try{if(typeof staffGuide==="function"){const g=staffGuide();if(g&&g.name)return g}}catch(e){}return null}
+function MMN(){const g=GD();return g?g.name:"Quế ma ma"}
+function MMT(){const g=GD();return g?[g.name,g.title||g.office].filter(Boolean).join(", "):"Quế ma ma"}
 function rd(){try{return JSON.parse(localStorage.getItem(TK)||"null")||{}}catch(e){return{}}}
 function wr(o){try{localStorage.setItem(TK,JSON.stringify(o))}catch(e){}}
 let REC=rd();REC.seen=REC.seen||{};
@@ -28371,13 +28375,15 @@ function busy(){try{
 T.busy=busy;
 
 /* ---------- the guide's portrait: a ma ma identity nobody in this kiếp wears (one face per person, owner rule) ---------- */
-function mmFace(){let src="https://ctm-img.victoria-tntt.workers.dev/img/por-mama-k03-a51.webp";
+function mmFace(){const g=GD();if(g&&g.face){try{const f=g.face;if(typeof f==="object"&&(f.src!==undefined||f.ini))return Object.assign({},f,{rw:f.rw||MMN(),__kr:g.kr||f.__kr});
+  if(typeof f==="string")return{src:f,ini:MMN().split(" ")[0],col:(typeof kitServCol==="function"?kitServCol("maid",3):"#a0584a"),rw:MMN(),__kr:g.kr||{role:"mama",rank:3,origin:null,sex:"f",kid:false}}}catch(e){}}
+ let src="https://ctm-img.victoria-tntt.workers.dev/img/por-mama-k03-a51.webp";
  try{const M=(typeof FIGIX!=="undefined"&&FIGIX&&FIGIX.mama)||null;
   if(M&&S){let k=S.tutFid&&M[S.tutFid]?S.tutFid:null;
    if(!k){const used=new Set(typeof figUsed==="function"?figUsed():[]);const ks=Object.keys(M).sort();k=ks.find(x=>!used.has(x))||ks[0];
     if(k&&!coop()){S.tutFid=k;try{if(!used.has(k))figUsed().push(k)}catch(e){}}}
    const L=M[k]||[];const f=L.find(x=>x.ageBand==="a51")||L.find(x=>x.ageBand==="a36")||L[0];if(f&&f.por)src=figPath(f.por)}}catch(e){}
- return{src,ini:"Quế",col:(typeof kitServCol==="function"?kitServCol("maid",3):"#a0584a"),rw:MM_NAME,__kr:{role:"mama",rank:3,origin:null,sex:"f",kid:false}}}
+ return{src,ini:"Quế",col:(typeof kitServCol==="function"?kitServCol("maid",3):"#a0584a"),rw:MMN(),__kr:{role:"mama",rank:3,origin:null,sex:"f",kid:false}}}
 function mmPort(){try{return `<div class="ktut-mm">${pcPort(mmFace())}</div>`}catch(e){return ""}}
 
 /* ---------- kit CSS (one look; tokens of KIT.md §1 / §8) ---------- */
@@ -28430,7 +28436,7 @@ function clip(r,pad){const vw=innerWidth,vh=innerHeight;const L=Math.max(4,r.lef
 function kitCoach(spec){const R0=root();CUR=spec;R0.hidden=false;R0.classList.toggle("ktut-mv",!rm());
  const btns=(spec.btns||[]).map(b=>`<button type="button" class="kbtn${b.alt?" alt":""}" data-ktut="${b.k}">${b.t}</button>`).join("");
  R0.innerHTML=`${spec.target?"":`<div class="ktut-dim"></div>`}<div class="ktut-hole"${spec.target?"":" hidden"}></div><div class="ktut-blks"></div><div class="ktut-marks"></div>
-  <div class="dlg kpanel ktut-card${spec.big?" ktut-big":""}" data-kind="guide" aria-live="polite">${kpHeader("guide",spec.title||MM_NAME,spec.sub||"")}
+  <div class="dlg kpanel ktut-card${spec.big?" ktut-big":""}" data-kind="guide" aria-live="polite">${kpHeader("guide",spec.title||MMN(),spec.sub||"")}
   <div class="kpb">${mmPort()}<div class="ktut-say">${spec.html||""}</div></div>${btns?`<div class="kpopts">${btns}</div>`:""}</div>`;
  R0.querySelectorAll("[data-ktut]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}const k=b.dataset.ktut;if(spec.on)spec.on(k)}));
  place(true);
@@ -28484,7 +28490,7 @@ let TIPEL=null;
 function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next,.kloadchip").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
- el.innerHTML=`<div class="dlg kpanel" data-kind="guide">${kpHeader("guide",spec.title,MM_NAME+" dặn")}<div class="kpb">${mmPort()}<div class="ktut-say">${spec.html}</div></div><div class="kpopts"><button type="button" class="kbtn" data-ktip="1">Đã hiểu</button></div></div>`;
+ el.innerHTML=`<div class="dlg kpanel" data-kind="guide">${kpHeader("guide",spec.title,MMN()+" dặn")}<div class="kpb">${mmPort()}<div class="ktut-say">${spec.html}</div></div><div class="kpopts"><button type="button" class="kbtn" data-ktip="1">Đã hiểu</button></div></div>`;
  document.body.appendChild(el);TIPEL=el;T.tip=spec.id;tipPlace();
  el.querySelector("[data-ktip]").addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}tipOff();T.tipGap=Date.now()+1500})}
 function tipOff(){if(TIPEL){TIPEL.remove();TIPEL=null}T.tip=null}
@@ -28540,7 +28546,7 @@ function ia(k){try{const a=kitInfoArt(k);return a&&a.src||""}catch(e){return""}}
 function owide(){try{return typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k)}catch(e){return""}}
 const rows=L=>kitRows(L.map(x=>[x[0],say(x[1]),x[2]||""]));
 const INTRO=[
- {t:"Game này là gì",h:()=>pic(owide(),"")+say(`<p>{M} là ${MM_NAME}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
+ {t:"Game này là gì",h:()=>pic(owide(),"")+say(`<p>{M} là ${MMT()}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
   rows([["Đây là","một kiếp người trong hậu cung: {x} là một cô gái vừa vào cung, mỗi ngày tự chọn việc mà làm để sống sót và đi lên"],
    ["Mỗi kiếp","một thân phận khác (con nhà quyền thế, nhà buôn, cung nữ…), một Hoàng thượng khác, một hậu cung khác"],
    ["Lựa chọn","không có đường định sẵn; việc nào cũng ghi rõ cái được và cái giá"]])},
@@ -28615,7 +28621,7 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
   const np=s.pages?s.pages():0,pg=T.page||0;
-  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MM_NAME} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
+  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
    on(k){if(k==="skip")return tourEnd("skip");if(k==="next"){if(np&&pg<np-1){T.page=pg+1;show(false);return}T.page=0;next()}}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
@@ -28673,7 +28679,7 @@ function veteran(){try{if(lifeLog&&lifeLog().length)return true}catch(e){}
 /* a sổ past its 2nd week (owner task 16/11): no tour, no ask, no tips; Thiết lập or "Xem lại lời dặn" turn them back on */
 function oldSave(){try{return !T.fresh&&S&&((S.turn||0)*3+(S.tuan||0))>=2}catch(e){return false}}
 function askOnce(){T.ask=true;tipOff();
- kitCoach({title:"Lời dặn tân thủ",sub:MM_NAME,big:true,html:say(`<p>{M} là ${MM_NAME}, dạy lễ cho người mới vào cung. {X} đã quen lối trong cung, có muốn nghe {m} dặn lại từ đầu?</p><p>Muốn nghe lúc khác: ☰ rồi chọn <b>Xem lại lời dặn</b>. Lời dặn bật tắt trong Thiết lập.</p>`),
+ kitCoach({title:"Lời dặn tân thủ",sub:MMN(),big:true,html:say(`<p>{M} là ${MMN()}, dạy lễ cho người mới vào cung. {X} đã quen lối trong cung, có muốn nghe {m} dặn lại từ đầu?</p><p>Muốn nghe lúc khác: ☰ rồi chọn <b>Xem lại lời dặn</b>. Lời dặn bật tắt trong Thiết lập.</p>`),
   btns:[{k:"no",t:"Không cần",alt:true},{k:"yes",t:"Nghe ma ma dặn"}],
   on(k){T.ask=false;REC.asked=1;coachOff();if(k==="yes"){saveRec();tourStart()}else{REC.tour="skip";saveRec();try{OPT.tut=false;saveOpt()}catch(e){}try{if(S&&!coop())S.tutTour=1}catch(e){}}}})}
 
@@ -28708,7 +28714,7 @@ try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not 
 /* ---------- Thiết lập: "Lời dặn tân thủ" switch (kit toggle) ---------- */
 try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
   const tg=kitToggle({id:"o-tut",label:"Lời dặn tân thủ",sub:"ma ma chỉ lối, dặn khi gặp việc mới",on:optOn()});
-  const rb=(typeof S!=="undefined"&&S&&!S.dead)?`<button type="button" class="kbtn alt ktutb" data-ktut-replay="1">Xem lại lời dặn<small>Game này chơi gì · ${MM_NAME} chỉ lối</small></button>`:"";
+  const rb=(typeof S!=="undefined"&&S&&!S.dead)?`<button type="button" class="kbtn alt ktutb" data-ktut-replay="1">Xem lại lời dặn<small>Game này chơi gì · ${MMN()} chỉ lối</small></button>`:"";
   return h.replace(/<\/div>\s*$/,tg+rb+"</div>")};
  const ow=wireOpt;wireOpt=function(){const r=ow.apply(this,arguments);try{const t=document.getElementById("o-tut");if(t)t.onchange=e=>{OPT.tut=!!e.target.checked;saveOpt();try{if(OPT.tut&&S)S.tutOld=0}catch(x){}if(!OPT.tut){tipOff();T.pend={}}}}catch(e){}return r};
  window.optHTML=optHTML;window.wireOpt=wireOpt}catch(e){console.error(e)}
@@ -28716,7 +28722,7 @@ try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
 /* ---------- ☰ menu: "Xem lại lời dặn" (only with a kiếp in play) ---------- */
 function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".ktutb"))return;
  const cont=m.querySelector('[data-tgo="cont"]');if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
- const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MM_NAME} chỉ lối</small>`;m.appendChild(b)}
+ const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MMN()} chỉ lối</small>`;m.appendChild(b)}
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
@@ -29307,7 +29313,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="91efe0329dbe";window.CTM_BUILD=BUILD;
+const BUILD="2621732fa21a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

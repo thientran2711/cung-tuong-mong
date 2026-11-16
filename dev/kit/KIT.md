@@ -2922,7 +2922,8 @@ Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §7
 ONE look for every teaching moment: the kit panel (`.dlg.kpanel[data-kind=guide]`, `kpHeader("guide",…)`, seal **LỜI DẶN** `.kp-guide` in the
 ma ma token colour `#a0584a`), the guide's portrait in the kit frame (`pcPort`, role mama rank 3), body `.ktut-say` (kit text, `kitRows` for
 legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
-- **Guide** = Quế ma ma: an existing ma ma painting (`img/FIGURES-servants.json` role mama, age band a51 → a36), the first mama identity nobody
+- **Guide** = a REAL palace elder (owner 16/11): name, title and face from `staffGuide()` of review/elder-staff ({id,name,title,office,face,kr};
+  intro line "<Tên> ma ma, <title>"; the same face as elsewhere). No hard-coded name in player text. Fallback while that module is absent = Quế ma ma: an existing ma ma painting (`img/FIGURES-servants.json` role mama, age band a51 → a36), the first mama identity nobody
   in this kiếp wears (`S.fidUsed`, reserved as `S.tutFid`; one face per person). Speech per VANPHONG §2: "nô tỳ" + "tiểu chủ" (Tần and up
   "nương nương"; cung nữ road "ta" + "ngươi"); "chạm", "mục"; no %, no chữ Hán, no foreign words.
 - `kitCoach({title, sub, html, target, pad, interact, marks:[el|fn], side, big, btns:[{k,t,alt}], on(k)})` → `#ktut` (fixed, z 9300):

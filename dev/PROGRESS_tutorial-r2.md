@@ -3,7 +3,7 @@
 Replaces review/tutorial (WIP 2/3, ~770 behind): its 3 files were re-ported onto today's main, not merged.
 
 ## What is in
-- `dev/build/jtut.js` (KIT §72.1, was §36 on the old branch): Quế ma ma guide, kitCoach spotlight + kitTip first-time tips, tour ≤12 steps
+- `dev/build/jtut.js` (KIT §72.1, was §36 on the old branch): guide = staffGuide() of review/elder-staff when present (name, title, face; fallback Quế ma ma), kitCoach spotlight + kitTip first-time tips, tour ≤12 steps
   (step 1 = "Game này chơi gì": 4 pages with pictures — what the game is, the goal, how a day works, win/lose + Phúc duyên + co-op · thanh trên · buổi/khắc/quẻ · đọc thẻ · làm thử (+thẻ kết quả) · Dư đồ · Hậu cung group · Giao tình group · Tư trang · Mục tiêu chương
   (goal strip) · ☰ ghi/nạp sổ · Sang buổi). Group steps read the live tab layout (`#tabs [data-tab]`, `KG`, `.ksub [data-ksub]`).
   Thiết lập switch "Lời dặn tân thủ" + "Xem lại lời dặn" button there and in ☰. Sổ in its first 2 weeks: asked once; past week 2: no tour, no ask, no tips (S.tutOld).
