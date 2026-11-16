@@ -1,3 +1,5 @@
+PALETTE GUIDE v3 READY (2026-11-16 07:54Z) - supersedes v2: the TARGET IS THE KÍNH SỰ PHÒNG 16-set (owner circled it 16/11 07:42Z), see section 'NVP v4' below. Foreman C: use v3 numbers and tone_match.py with prefix kinh-su-phong.
+
 PALETTE GUIDE v2 READY (2026-11-16 07:27Z)
 
 # place-glyphs — SẴN SÀNG KIỂM 4ddddde3 (review/place-glyphs, includes origin/main ba07c65e). Glyphs owner-approved; Nội vụ phủ scene NOT wired (owner approves art first).
@@ -89,3 +91,14 @@ Credits total this session so far: ~1,890 (glyph v1 + v1 scene) + 120 (glyph v2 
 2. Always edit from an approved-style base and pass the approved same-buổi scene as a "colour and light reference only".
 3. Finish every picture with dev/art/tone_match.py (target contrast ~41 day / ~35 night, value .66/.72/.63/.44 for sáng/trưa/chiều/tối). Check with the same measures (sat, value, contrast, warm, vivid px) and a side-by-side against an approved row before reporting.
 4. Floors: matte painted (owner rule); the approved sets themselves are glossy, do not copy that.
+
+## NVP v4 (owner verdict on v2: "màu nhạt nhòa quá", target = the circled Kính sự phòng rows) — SẴN SÀNG XEM, NOT wired
+Owner's markup (dev/handover/refs/owner-nvp2-markup.jpg): she circled the approved KSP rows and kept them as the target; the new NVP rows (v2) were washed out. v1 was too vivid, v2/v3 too flat: v4 aims exactly at KSP.
+Route: (1) matte+deep-colour base = edit of the v1 spring-morning base (lJ8bS37gv9) with KSP xuan-sang as colour reference only (creation 6AHwfCliJO); (2) 15 edits of that base, each with the KSP tile of the SAME season+buổi as colour reference ("take the colour depth, warmth, contrast, light and lantern glow from the SECOND reference ... do not copy its room"); (3) tone pass with dev/art/tone_match.py targets measured on KSP only (contrast/luma, saturation, warmth).
+Credits: 16 x 65 = 1,040 (under 1,200). Session total ~4,350.
+Measured on the 4 seasons per buổi, new (after tone pass) vs KSP: sáng sat .34/.35 val .58/.59 contrast 44.0/44.3 warm 45/43 vivid .3/2.1 | trưa .39/.39 .64/.65 44.7/45.2 58/57 .8/1.8 | chiều .51/.51 .56/.56 43.3/43.5 69/69 4.6/2.0 | tối .46/.48 .37/.40 34.4/34.6 40/38 .9/1.0. Before the tone pass the raw edits were redder/more saturated than KSP (sat +.1, vivid px 10-17 % vs 2 %).
+Looked at all 16 tiles against the KSP row of the same season+buổi (sheet): crimson carpet and pillars, warm brown wood, amber chiều wash with lattice light shafts, tối = dusky blue room with warm lantern pools: the depth/warmth/contrast/glow read as the same family as the circled rows.
+Floor: warm deep-brown wood with a MATTE painted finish (owner wants no gloss on the new pictures); KSP's own floor is polished, so the floor is the one deliberate difference.
+Sheet (1560 wide, KSP row over the new row, same season+buổi): https://ctm-img.victoria-tntt.workers.dev/img/nvp-scene-v4-vs-ksp-sheet.jpg (also reports/place-glyphs-nvp-v4-vs-ksp.jpg).
+Mapping (season-buổi -> Magnific creation; raw edits before the tone pass): xuan-sang 6AHwfCliJO, xuan-trua bxTaYhL5Y2, xuan-chieu aF2XiBMfSh, xuan-toi CqGoRv8EEy, ha-sang eIOYwBUdqL, ha-trua lJ85XO3gv9, ha-chieu XmPcJC4Bfo, ha-toi 1lpuV9yr4r, thu-sang 8aNVPLCIrU, thu-trua s7obdLnl8e, thu-chieu UPm1I4ywny, thu-toi Bh40yQroQR, dong-sang mE3p6LQhJQ, dong-trua s7obXTHl8e, dong-chieu JNajh8ROq4, dong-toi XmPcONIBfo. v2/v3 sets are superseded.
+Final tone-passed PNGs are only in this worker's scratchpad (nothing wired yet); upload as game files after the owner approves.
