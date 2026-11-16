@@ -110,3 +110,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C47 | review/stage-side @ 3441d4618 (one column always expanded, fixed slots i/(k+1), header fixed per viewport, crossOrigin root cause) | REVIEWING (stage-side-r1, sonnet) — owner OK: 2 rows |
 | C48 review/save-slots @ 0bfc455c6 (jslots.js) | REVIEWING (save-slots-r1, opus) |
 | C49 | review/palace-start (owner s8: ~4 small kids 1–4 y mixed, no đích tử, birth order not decisive, faction road Emperor/Thái hậu/quyền thần, princesses everywhere) | RUNNING (opus, session 8) |
+## Ownership marks (16/11): items in dev/handover/FOREMAN_C.md Slice C are [→ FOREMAN C]; items in FOREMAN_B.md are [→ FOREMAN B]; everything else = session 8.
