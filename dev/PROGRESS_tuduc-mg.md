@@ -27,3 +27,7 @@ See header comment of dev/build/jtd.js (course / game / control / score / level 
 ## KIT REQUEST
 - Hint marker for canvas games: currently a `.ksel` ring div (kit outline) positioned over the target; a kit-owned "hint ring" part would be cleaner.
 - Owner rule "LEFT picture / RIGHT info" for the mini-game frame: frame-level, not done.
+
+## Tests (16/11, shared box load avg ~35-40, timings unreliable)
+`node dev/test/tuduc-mg.js . 1000x755@1 <out> <kind> quick`: cong, dung, ngon, hanh all PASS (result reached, progress applied, no overflow/ellipsis/"%", no page errors). Also ran dung 1180x820, hanh 844x390, ngon 755x1000: result reached. The result button `#kg82ok` is hidden by the kit (kitOvSync -> kit ✕); the test now waits for `.kit-x[data-kitx=ov]` and clicks the button via script.
+Open: Dung bot scores raw 0 under this load (also with the Gợi ý wrapper bypassed) — game time is dt-clamped so a loaded box slows it; re-run on a quiet box (and 1366x1024, 390x844 not run).

@@ -23,9 +23,9 @@ const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/jso
     else if(pk.hold){ev('pointerdown',pk.x,pk.y,++pid);setTimeout(()=>ev('pointerup',pk.x,pk.y,pid),45)}
     else if(pk.sel){const e=document.querySelector(pk.sel);if(e&&!e.disabled)e.click()}
     else if(pk.x!=null){ev('pointerdown',pk.x,pk.y);ev('pointerup',pk.x,pk.y)}},50)});
-  while(Date.now()-t0<200000){if(await p.evaluate(()=>{const e=document.getElementById('kg82ok');return !!e&&!e.closest('[hidden]')}))break;await p.waitForTimeout(250)}
+  while(Date.now()-t0<200000){if(await p.evaluate(()=>{const e=document.getElementById('kg82ok');return !!e&&KG82.phase==='result'&&!!document.querySelector('#kg82 .kit-x[data-kitx=ov]')}))break;await p.waitForTimeout(250)}
   await p.evaluate(()=>clearInterval(window.__bt));
-  const ok=await p.evaluate(()=>{const e=document.getElementById('kg82ok');return e&&!e.closest('[hidden]')?1:0});await shot(`${k}-${mode}-3result`);
+  const ok=await p.evaluate(()=>{const e=document.getElementById('kg82ok');return e&&KG82.phase==='result'?1:0});await shot(`${k}-${mode}-3result`);
   const info=await p.evaluate(()=>{const d=document.getElementById('kg82');const o=document.documentElement.scrollWidth>innerWidth+1||(d&&d.scrollWidth>d.clientWidth+1);
    const ell=d?[...d.querySelectorAll('*')].some(e=>e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).textOverflow==='ellipsis'):false;const txt=d?d.innerText:'';
    return{over:o,ell,pct:/%/.test(txt),txt:txt.slice(0,300).replace(/\n+/g,' | '),last:KG82.last,hudOver:KG82.over||0}});
