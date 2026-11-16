@@ -1188,3 +1188,4 @@ All must work in co-op.
 - (16/11) LIVE bug: nearly every Sổ ghi act line shows a false 'Ân tình 0→1' → review/log-sync (worker on log number mismatch).
 - (16/11) LIVE co-op bug: when she leaves and rejoins, she can continue, but the friend's still-connected client stays stuck/laggy until it reloads → added to review/coop-night-sync.
 - (16/11) LIVE main 63cf7b12a (merge-train-3): weather risks, succession choice (Hoàng thái hậu / nhiếp chính / Nữ đế), palace detail map, lost items, readable week book, map labels, contest prizes, makeup colours + reveal, option pictures, placeholder pictures, recipes, update notes, page curl 2, stat glow 2, 3 new places (owner-approved art), outside art, item art, small-bugs-4.
+- (16/11) LIVE co-op bug: on rejoin, her khắc and acts done in the current buổi are reset and she must redo them → added to review/coop-night-sync (with the timer freeze, the friend stuck, the friend jumping to the next day).
