@@ -35,3 +35,9 @@ Method: read each branch diff against its merge-base with main (KIT.md, build JS
 ## Kit keeper (main session) 16/11 — act-dedupe wave 1
 - kitPlaceIcon + kitHapMark: SIGNED as §76 (replace the provisional §71 label; record it in KIT_NUMBERS.md). The "!" look (light-gold disc, dark "!") is APPROVED (the owner approved the gold "!").
 - Missing glyphs (Kính sự phòng card tablets, Lãnh cung, palace roof for her and the consort palaces, a garden glyph for Ngự hoa viên) and a Nội vụ phủ scene (4 buổi): ART REQUEST → Foreman D (D56).
+
+## KIT REQUEST — cloud-del worker (UI, Foreman D) 16/11
+Task C44 follow-up "Xóa sổ trên mây" needs two kit parts that KIT.md (main, review/cloud-save-r1, handover) does not contain (grep danger|destructive|kitConfirm|confirm dialog = no hit; no review/* kit branch has one either):
+1. **DANGER button** — a kit button variant for irreversible actions (suggest `.kbtn.kdanger`, same size/shape as `.kbtn`, one clearly different tone, never red-on-red with the lacquer `.kbtn`). Today only `.kbtn` (lacquer) and `.kbtn.alt` exist.
+2. **Confirm dialog** — a kit `kitConfirm({title, lines, yes, no})` (centre pop-up on `kitModal`, `.kbtn.kdanger` yes + `.kbtn.alt` no, optional "type the code to confirm" field via `kitInput`). Today the only confirm is the inline two-tap "Chắc chắn?" on a `.kbtn.alt` (KIT §1288 Kiếp mới, jcloud Thôi nối / Lấy lại), which is too light for deleting the cloud sổ.
+Needed by: review/cloud-del (jcloud.js, Sổ mây › Ám hiệu page). Waiting on the kit keeper ("KIT READY: danger button + kitConfirm"); then the worker resumes.
