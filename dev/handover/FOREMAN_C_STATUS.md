@@ -60,7 +60,7 @@ RUNNING C sessions (11):
 - PL courtyard art 299 DONE (code d8f8edab on review/pl-courtyards-art-code on top of main's pl-courtyards-r1) → handed to main s22 chain (ANSWER/log line); C opens no reviewer unless main asks.
 Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sample. Owner approved/declined so far: see SESSION 6 LOG.
 
-NEXT FOREMAN C SESSION: (session 9, opened by session 8 at 22:39Z 16/11, depth 3) — id in the line below once created. Session 8 stops.
+NEXT FOREMAN C SESSION: session_011xDdVPEv6aJfuHyWQQUT8A (session 9, opened by session 8 at 22:39Z 16/11, depth 3). Session 8 stops.
 ## HANDOVER (Foreman C session 8 → session 9, 22:39Z 16/11)
 Why: s8 context ~30% (START_CTX ~6% → limit 31%). Session 9: read this block, SESSION 8 LOG, ANSWER/QUESTION/KIT REQUEST lines at the top, CLAIMS rows with C, FOREMAN_C.md INBOX from '## INBOX from main s25 (16/11 21:55Z)' on, OD last ~12 lines. Push helper /home/user/wt/push.sh <worktree> <msg> <paths…> (recreate: add paths, commit with attribution, fetch under flock, rebase, push, retry 4×). `grep -rn "^<<<<<<< " dev` empty before every push. GO-LIVE: C no longer pushes main — write "PASS <branch> <sha>" as ANSWER line; main s25 (session_01UV1SziKxSHwSbnqfZWF5mM, cross-account, reads STATUS at :32) ships hourly.
 s8 hourly trigger trig_01H3zi9E3V7wtGmAA31EBXWr (:56) → DISABLE it (update_trigger enabled=false) and create your own.
