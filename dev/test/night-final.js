@@ -1,4 +1,4 @@
-/* night-final (owner OD 16/11 19:45Z): the flip at the start of buổi tối names only the intended consort; the real night is committed
+/* night-final (owner OD 16/11 22:25Z canon, refines 19:45Z): the flip at the start of buổi tối names only the intended consort; a won try takes the night at once; else the night is committed
    ONCE at "Sang ngày mới" for exactly ONE woman (whoever holds it then); the loser gets no night record.
    usage: node dev/test/night-final.js <url>   (exit 0 = all pass) */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function',null,{timeout:0});await p.waitForTimeout(2000);
  await p.evaluate(()=>{window.T={};
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc()))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
+   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
    const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
   /* answer every open dialog with its first option that is not a way out (Cáo bệnh / Tiến cử) */
   T.drain=(max=80)=>{const seen=[];for(let n=0;n<max&&Q.length;n++){const m=Q[0];seen.push(m.t);const o=m.opts||m.o;
@@ -33,16 +33,17 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   stealWin(B,A,"feign");T.endDay();const e=T.recs(L);const logs=S.logs.slice(0,(S.logSeq||0)-s0).join(" ");
   return{A:e.r0-b.r0,B:e.r1-b.r1,me:e.me-b.me,line:/được mời sang cung/.test(logs),wrong:new RegExp("thẻ bài của "+B.name+" được lật").test(logs)}});
  ok("3 NPC↔NPC steal: B only, true line",r.A===0&&r.B===1&&r.me===0&&!r.wrong,r);
- /* 4. HER card turned and accepted; at the day end an NPC's last try wins: she gets no night, the thief does */
+ /* 4. HER card turned and accepted (held); in an evening khắc, after she had it, NPC B's try wins: she gets no night, the thief does (OD 22:25Z) */
  r=await p.evaluate(()=>{const L=T.fresh();const B=L[1];const un=T.only(S);T.toEvening();un();T.drain();const held=S.tonight==="me";const b=T.recs(L);
-  const sp=window.stealPass;let calls=0;/* the NPCs' last tries run at the commit; B's try wins (jsteal's own notice to her) */
-  window.stealPass=function(t,o){calls++;const s=stealWin(B,t,"feign");if(t===S&&tonightOf()===B)Q.push({t:"Kính sự phòng",h:`<p>Thẻ bài của ngươi đã được lật, nhưng ${s}</p>`});return{holder:tonightOf()}};
-  T.endDay();window.stealPass=sp;const e=T.recs(L);return{held,calls,me:e.me-b.me,B:e.r1-b.r1,tot:Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0)}});
- ok("4 NPC takes her held night at the day end",r.held&&r.calls===1&&r.me===0&&r.B===1&&r.tot===1,r);
- /* 5. the Emperor's own visit (event) during the day: she holds a settled night; no flip, no steal; spent at day end */
- r=await p.evaluate(()=>{const L=T.fresh();const b=T.recs(L);S.buoi=1;Q.push({t:"x",pid:"empnight",h:""});nightScene();Q.shift();const a={held:S.tonight==="me",settled:!!(S.ntk&&S.ntk.who==="me"),early:(S.nights||0)-b.me};
-  T.toEvening();a.still=S.tonight==="me";a.stealOpen=typeof ntCan==="function"?ntCan(L[0]):null;T.endDay();const e=T.recs(L);a.me=e.me-b.me;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);return a});
- ok("5 his own visit: settled, spent once at day end",r.held&&r.settled&&r.early===0&&r.still&&r.stealOpen===false&&r.me===1&&r.tot===1,r);
+  const sw=window.stealWant;window.stealWant=v=>v===B?{u:1,p:.999,mode:"feign",o:95}:{u:0,p:0,mode:null};B.duc=80;B.suc=80;B.confined=0;
+  const mr=Math.random;Math.random=()=>.01;try{used=0;spend(1);render()}finally{Math.random=mr}const lost=S.tonight===B&&Q.some(m=>m.t==="Kính sự phòng");
+  T.endDay();window.stealWant=sw;const e=T.recs(L);return{held,lost,me:e.me-b.me,B:e.r1-b.r1,tot:Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0)}});
+ ok("4 NPC takes her held night in an evening khắc",r.held&&r.lost&&r.me===0&&r.B===1&&r.tot===1,r);
+ /* 5. the Emperor's own visit (event) during the day: the night is hers and decided at once; it plays now (one record), the day ends */
+ r=await p.evaluate(()=>{const L=T.fresh();const b=T.recs(L);S.buoi=1;used=0;Q.length=0;Q.push({t:"x",pid:"empnight",h:""});const x=Q[0];nightScene();Q.splice(Q.indexOf(x),1);
+  const a={held:S.tonight==="me",settled:!!(S.ntk&&S.ntk.who==="me"),prep:Q.some(m=>m.pid==="prep")};a.stealOpen=typeof ntCan==="function"?ntCan(L[0]):null;
+  T.drain();a.early=(S.nights||0)-b.me;T.endDay();const e=T.recs(L);a.me=e.me-b.me;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);return a});
+ ok("5 his own visit: decided and played at once, spent once",r.held&&r.settled&&r.prep&&r.stealOpen===false&&r.early===1&&r.me===1&&r.tot===1,r);
  /* 6. invariant over 40 played days (no stubs): never more than ONE night record per day across all women */
  r=await p.evaluate(()=>{const L=T.fresh();const bad=[];let nights=0;for(let d=0;d<40&&!S.dead;d++){const w=wk();T.toEvening();if(Math.random()<.4&&S.tonight&&S.tonight!=="me")try{stealWin(S,S.tonight,"feign")}catch(e){}T.endDay();
    const all=[S].concat(typeof rivals!=="undefined"?rivals:[]);const n=all.reduce((s,x)=>s+((x.nightLog||[]).filter(z=>z===w).length),0);nights+=n;if(n>1)bad.push({w,n})}return{bad,nights,days:40}});
