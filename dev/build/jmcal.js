@@ -109,7 +109,6 @@ window.kitDeskCal=kitDeskCal;
 addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTimeout(kdcPlace,150)});
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`
 .kmc{display:grid;gap:8px;min-width:0}
-#modal.kmc-modal .dlg.kpanel{max-width:min(780px,calc(100vw - 24px))!important;width:100%}
 .kmc-tabs{display:flex!important;flex-wrap:wrap!important;gap:5px;overflow:visible!important}
 .kmc-head{font-family:var(--display);color:var(--ink);font-size:.95rem}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
 .kmc-grid{display:grid;grid-template-columns:auto repeat(10,minmax(0,1fr));gap:3px;min-width:0}
