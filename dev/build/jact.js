@@ -146,10 +146,13 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;cons
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
-.ic.kplic{vertical-align:-2px;margin-right:3px;flex:none}
+/* KIT 78 (owner 11/16 15:00Z 5.6): the place icon sits ABOVE the name, centred, never left of it — map chips, map tiles, the stage title, the kit sample */
+.ic.kplic{display:block;margin:0 auto 1px;flex:none}
+.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic),#sc-t h2:has(>.kplic){display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
+#sc-t h2:has(>.kplic){align-items:flex-start;text-align:left}#sc-t h2>.kplic{margin:0 0 1px}
 /* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
-.mspot .mlab:has(>.kplic){max-width:max(100%,calc(4.4em + 17px))}
+.mspot .mlab:has(>.kplic){max-width:max(100%,4.4em)}
 .khap{display:inline-block;font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:var(--ink);background:var(--trim);border-radius:50%;width:13px;height:13px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fff8e6,0 0 6px var(--trim)}
 .mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
 /* kit page samples */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mlab" style="display:inline-block;margin:4px 8px;padding:2px 6px;background:#3a2a1ee6;color:#ffe7b0;border-radius:8px">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:k}${k==="vuon"?'<i class="khap">!</i>':""}</span>`).join("")})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mlab" style="display:inline-flex;flex-direction:column;align-items:center;margin:4px 8px;padding:2px 6px;background:#3a2a1ee6;color:#ffe7b0;border-radius:8px">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:k}${k==="vuon"?'<i class="khap">!</i>':""}</span>`).join("")})}catch(e){}

@@ -8,7 +8,7 @@ const KIT_SAMPLES=[];window.KIT_SAMPLES=KIT_SAMPLES;
 function kitSamplePage(){try{let pg=document.getElementById("kitpage");if(!pg){pg=document.createElement("div");pg.id="kitpage";pg.setAttribute("role","dialog");pg.setAttribute("aria-label","Trang mẫu kit");document.body.appendChild(pg)}
  pg.innerHTML=`<div class="kitpg-h"><b>Trang mẫu kit</b><small>${KIT_SAMPLES.length} thành phần · dev/kit/KIT.md</small><button type="button" class="kitpg-x" aria-label="Đóng">✕</button></div>`+
   KIT_SAMPLES.map(x=>{let h="";try{h=x.html()}catch(e){h=`<em class="r">lỗi: ${String(e.message||e).slice(0,80)}</em>`}
-   return `<section class="kitpg-s" data-kit="${x.id}"><h4 class="kpst">${x.id} · ${x.title}</h4><div class="kitpg-b">${h}</div></section>`}).join("");
+   return `<section class="kitpg-s" data-kit="${x.id}"><h4 class="kpst">${x.id} · ${x.title}</h4>${x.where?`<p class="kitpg-w">${x.where}</p>`:""}<div class="kitpg-b">${h}</div></section>`}).join("");
  pg.hidden=false;pg.querySelector(".kitpg-x").onclick=()=>{pg.hidden=true;if(location.hash==="#kit")history.replaceState(null,"",location.pathname+location.search)};
  try{if(typeof kitFix==="function")kitFix(pg);if(typeof kaNorm==="function")kaNorm(pg.querySelector(".kitpg-ev")||pg);if(typeof kitActCompactOn==="function")kitActCompactOn(pg)}catch(e){}return pg}catch(e){console.error("kitSamplePage",e)}}
 window.kitSamplePage=kitSamplePage;
@@ -48,7 +48,7 @@ KIT_SAMPLES.push(
   const nm=([t,n,c])=>`<b class="kname" style="--rc:${c}"><span class="kti" style="--rt:${kitRankTone(t,c)}">${t}</span> ${n}</b>`;
   const box=(cls,bg)=>`<div class="${cls}" style="padding:10px;border-radius:8px;background:${bg}">${P.slice(0,3).map(x=>`<div style="padding:6px 8px;margin:4px 0;border:1px solid #c9a46a66;border-radius:6px">${nm(x)}</div>`).join("")}<p style="margin:6px 0 0">${nm(P[4])} nghe lén được chuyện của ${nm(P[1])}; ${nm(P[3])} được ban thưởng.</p></div>`;
   return box("","#fbf3e2")+`<div class="modal night" style="position:static;display:block;background:none;margin-top:8px">${box("","#140b08;color:#f3e6cf")}</div>`}},
- {id:"§49.1",title:"kitRelRow: thiện cảm · oán · sủng · chưa rõ",html:()=>`<div style="max-width:320px">${kitRelRow({kind:"quy",a:"Hoàng hậu",b:"ta",v:-24})}${kitRelRow({kind:"oan",a:"Ta",b:"Hoàng hậu",v:12})}${kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:41})}${kitRelRow({kind:"quy",a:"Tô Lan Chi",b:"Ôn Ngưng Sương",v:null})}</div>`});
+ {id:"§49.1",title:"kitRel2 · quan hệ hai cột (Ân oán: hai người · Hoàng thượng · chưa rõ)",where:"<b>Ân oán</b> (pair view), Gia tộc card, every place that shows how two people stand. LEFT box = that person → me, RIGHT box = me → that person. Short words, number in its colour, no bars.",html:()=>`<div style="max-width:360px">${kitRel2([{head:"Hoàng hậu → ta",dir:"them",rows:[{w:"Thiện cảm",now:-24,kind:"good"},{w:"Oán",now:12,kind:"bad"}]},{head:"Ta → Hoàng hậu",dir:"me",rows:[{w:"Thiện cảm",now:41,kind:"good"},{w:"Oán",unk:"chưa rõ"}]}])}${kitRel2([{head:"Hoàng thượng → ta",dir:"them",rows:[{w:"Sủng",now:42,kind:"pos"},{w:"Ân tình",now:5,kind:"pos"}]}])}${kitRel2([{head:"Tô Lan Chi → Ôn Ngưng Sương",dir:"x",rows:[{w:"Thiện cảm",unk:"chưa rõ"}]}])}</div>`});/* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so hint + risk come from the real kitHint. */
 function kitPgEvOpts(){const W=o=>typeof word==="function"?word(o):"Khó lường";const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
@@ -73,6 +73,7 @@ KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên n
 .kitpg-h b{font-family:var(--display,serif);color:var(--gold);font-size:1.1rem}.kitpg-h small{color:var(--dim);flex:1}
 .kitpg-x{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);font-size:1.1rem;cursor:pointer}
 .kitpg-s{margin:14px 0}.kitpg-b{padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px)}
+.kitpg-w{margin:2px 0 6px;font-size:.78rem;color:var(--k-lab,#8a7350)}.kitpg-w b{color:var(--ink)}
 .kitpg-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
 .kitpg-seal .rtoast.karesult{position:static;transform:none;opacity:1;display:inline-flex;padding:4px 8px}
 /* review/small-bugs-3: every sample is its own stacking layer under the sticky page header (z 2) — a sample built from a floating part (the

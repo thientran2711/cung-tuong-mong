@@ -595,7 +595,11 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
-function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
+const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh thượng|hoàng đế|hoàng hậu)$/i;
+function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);
+ /* KIT 48.1i (owner 11/16 15:00Z 2.4): a person whose NAME is the title (Hoàng thượng, Thái hậu) is painted as a rank title (imperial gold), never black ink */
+ if(!rank&&name&&KIT_TITLE_ONLY.test(String(name).replace(/<[^>]*>/g,"").trim()))return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}"><b class="knr-r krt knr-only" style="--rt:${kitRankTone(name,col)}">${name}</b></div>`;
+ return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
 window.kitNameRank=kitNameRank;
 /* ================= KIT 48.1 · RANK TITLE (owner, ref. shot "a title floating above the character's name") ==========
    The rank / role line above every name is a TITLE: serif (var(--display)), bold, in the rank's OWN colour = the colour family of that rank's
