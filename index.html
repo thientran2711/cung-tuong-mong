@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"68067fe1+","t":"2026-11-16T20:24Z","c":"road-saves: phase-1 case on origin td (thd road is full on this branch); site rebuilt","b":"24f965848e52","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
+window.CTM_BI={"s":"4aab6682","t":"2026-11-16T20:41Z","c":"review road-b3-fix-r1: free sure-mid x-beat options with a gain cost Danh in cnv (11) and jend14 (2), same rule as the thd fix; hau14 intro…","b":"6461a44c5cf4","h":[{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"},{"s":"6b18fef5+","t":"2026-11-16T19:39Z","c":"Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới."},{"s":"f89c5635+","t":"2026-11-16T19:39Z","c":"Game nhẹ hơn: chuyển thẻ nhanh gần gấp đôi, hết đứng hình lâu khi đang chơi."},{"s":"9523200b+","t":"2026-11-16T19:32Z","c":"Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ."},{"s":"b6d05b2d+","t":"2026-11-16T19:25Z","c":"Hiệu ứng lễ hội đúng buổi: pháo hoa chỉ tối Tết và Giao thừa; buổi tối thường không có pháo hoa."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -14007,7 +14007,7 @@ rdDef("cnv_chu",6,{t:"Kẻ dò hỏi",w:"v",sj:"kẻ dò hỏi chuyện cung {mi
  x1:{h:"Bắt kẻ dò hỏi",w:"maid",t:"Đêm nay cung nữ áo xanh hẹn gặp người mua tin ở góc sân sau. Bắt tận tay, cho nàng mang tin giả về, hay để yên?",o:[
   {n:"Bắt tận tay kẻ dò hỏi",c:{suc:-5},o:A=>40+S.mat*4,e:["win","lose"],rt:"Cung nữ áo xanh bị bắt cùng mẩu giấy ghi giờ trực của cả cung.",rf:"Nàng chạy thoát, chỉ còn lời ngươi nói."},
   {n:"Cho nàng mang tin giả về",c:{bac:-15},lx:"tốn bạc mua người dựng tin giả; kẻ dò hỏi vẫn ở lại trong cung, vụ chỉ dừng ở giữa",o:A=>40+(A.f.own?15:0)+S.tamco/4,e:["win","mid"],rt:"Cung {v} tin rằng gói thuốc đã bị đốt.",rf:"Tin giả bị nghi, nhưng nàng không moi thêm được gì."},
-  {n:"Để yên, khép kín cửa",c:{},w:{duc:2},e:"mid",lx:"kẻ dò hỏi vẫn ở đó, vụ chỉ dừng ở giữa",rt:"Ngươi khóa cửa sân sau, đi ngủ sớm."}]}},
+  {n:"Để yên, khép kín cửa",c:{danh:-2},w:{duc:2},e:"mid",lx:"kẻ dò hỏi vẫn ở đó, vụ chỉ dừng ở giữa",rt:"Ngươi khóa cửa sân sau, đi ngủ sớm."}]}},
  E:{win:{k:1,tag:"Kẻ dò hỏi bị bắt",w:"mis",t:"Người của {v} bị bắt hoặc bị lừa. {mis} biết, trong lúc cả cung chao đảo, ngươi là người đứng giữ cửa.",fx:{danh:4},go:A=>{rdOan(A,"v",8);CHU_MIS(8);return e67merit(4)}},
   mid:{k:0,tag:"Cửa đã khép",t:"Tin không lọt thêm, nhưng kẻ dò hỏi vẫn còn đó, và {v} vẫn chưa thôi tìm.",fx:{mat:1}},
   lose:{k:-1,tag:"Tin đã lọt",w:"v",t:"{v} biết đêm ấy ai trực ở cung {mis}. Từ nay ánh mắt nàng dừng trên ngươi mỗi khi gặp.",fx:{danh:-3},go:A=>{rdOan(A,"v",6)}}}});
@@ -14258,7 +14258,7 @@ rdDef("cnv_ban",6,{t:"Kẻ vu",w:"v",sj:"kẻ đứng sau Thu Cúc",cast(A){retu
  x1:{h:"Đêm Thu Cúc đến cung {v}",w:"v",t:"Đêm nay Thu Cúc lẻn đến cung {v} lần cuối, mang theo bạc. Chặn đường nàng, theo đến tận cửa, hay để nàng đi?",o:[
   {n:"Chặn Thu Cúc giữa đường, ép nàng khai",c:{suc:-4},o:A=>40+(A.f.turn?10:0)+S.tamco/5,e:["win","lose"],rt:"Thu Cúc quỳ xuống: “Là {v} sai. Ta khai.”",rf:"Thu Cúc la lên. Thị vệ cung {v} chạy ra."},
   {n:"Theo đến cửa cung {v}, nhìn tận mắt",c:{bac:-20},o:A=>35+S.mat*5+(A.f.fence?10:0),lx:"bạc lo đường mất trắng, thấy mà chưa bắt được, vụ chỉ dừng ở giữa",e:["win","mid"],rt:"Ngươi thấy cung nữ của {v} nhận bạc, và cả {v} đứng sau song cửa.",rf:"Cửa đóng trước khi ngươi kịp nhìn."},
-  {n:"Để nàng đi, ghi lại giờ giấc",c:{},w:{mat:1},e:"mid",lx:"cung {v} chưa bị chạm đến, vụ chỉ dừng ở giữa",rt:"Ngươi ghi: canh hai, cửa Tây, mang bọc lụa."}]}},
+  {n:"Để nàng đi, ghi lại giờ giấc",c:{danh:-2},w:{mat:1},e:"mid",lx:"cung {v} chưa bị chạm đến, vụ chỉ dừng ở giữa",rt:"Ngươi ghi: canh hai, cửa Tây, mang bọc lụa."}]}},
  E:{win:{k:1,tag:"Lộ mặt kẻ đứng sau",w:"v",t:"Kẻ hứa che Thu Cúc là {v}. Ngươi biết, và {v} biết ngươi biết. Từ nay giữa ngươi và cung {v} là thù thật.",fx:{danh:3,mat:1},go:A=>{rdOan(A,"v",10);rdRel(A,"v",-10)}},
   mid:{k:0,tag:"Biết mà chưa có chứng",t:"Ngươi biết đường đi của chiếc vòng và của bạc. Nhưng biết thì chưa đủ để ai bị xử.",fx:{tamco:1}},
   lose:{k:-1,tag:"Bị {v} phát hiện",w:"v",t:"Người của {v} thấy ngươi rình. Từ đêm ấy, cung {v} tìm cách dập cả ngươi lẫn Xuân Đào.",fx:{danh:-3},go:A=>{rdOan(A,"v",8)}}}});
@@ -14539,7 +14539,7 @@ rdDef("cnv_mat",6,{t:"Tránh hay gặp",w:"emp",sj:"những lần Hoàng thượ
  x1:{h:"Đêm hội đèn",w:"emp",t:"Đêm hội đèn Nguyên tiêu, cả hậu cung ra Ngự hoa viên. Hoàng thượng đi giữa đám đèn, mắt tìm một người.",o:[
   {n:"Đứng chỗ đèn sáng nhất",c:{suc:-3},o:A=>35+(A.f.meet?15:0)+S.sac/5,e:["win","lose"],rt:"Ngài dừng trước mặt ngươi, chọn một chiếc đèn cá chép, đặt vào tay ngươi.",rf:"Ngài thấy ngươi cùng lúc với {mis}. Nàng kéo ngài đi."},
   {n:"Đứng sau, để ngài tự tìm",c:{danh:-2},o:A=>40+(A.f.hide?15:0)+S.duc/5,e:["win","mid"],lx:"đứng khuất sau đám đông, người ta bảo ngươi làm cao, tiếng sút; có thể ngài không tìm thấy, chuyện chỉ dừng ở giữa",rt:"Ngài vòng qua ba dãy đèn để đến chỗ ngươi.",rf:"Ngài nhìn quanh, rồi thôi."},
-  {n:"Cáo ốm ở lại",c:{},w:{duc:2},e:"mid",lx:"lỡ một đêm hội, chuyện chỉ dừng ở giữa",rt:"Ngươi ngồi bên cửa sổ nhìn đèn trôi."}]}},
+  {n:"Cáo ốm ở lại",c:{danh:-2},w:{duc:2},e:"mid",lx:"lỡ một đêm hội, chuyện chỉ dừng ở giữa",rt:"Ngươi ngồi bên cửa sổ nhìn đèn trôi."}]}},
  E:{win:{k:1,tag:"Gặp nhau dưới đèn",w:"emp",t:MATT("Chiếc đèn cá chép treo trên đầu giường ngươi. Cả cung biết: Hoàng thượng không còn nhìn trộm nữa, ngài nhìn thẳng.",
    "Chiếc đèn cá chép treo trước cửa cung ngươi. Cả hậu cung biết: ngài đã tìm đến người ngài phong."),fx:{danh:3},go:()=>{matMis(0,4);return [matSrv({nt:12}),matCon({sung:4})].join(" ")}},
   mid:{k:0,tag:"Lỡ một lần",t:"Ngài vẫn nhớ, ngươi vẫn giữ mình. Giữa hai người chỉ còn một khoảng hành lang.",fx:{duc:2},go:()=>matSrv({nt:3})},
@@ -14577,7 +14577,7 @@ rdDef("cnv_mat",7,{t:"Kính sự phòng ghi tên",w:"eun",sj:"tên ngươi trong
  x1:{h:"Đêm lật thẻ",w:"emp",t:"Khay thẻ dâng lên Dưỡng Tâm điện. Hoàng thượng đưa tay lướt qua hàng thẻ xanh.",o:[
   {n:"Tin vào lời ngài đã nói",c:{suc:-2},o:A=>40+(A.f.clean?15:0)+S.sac/6+S.duc/6,e:["win","mid"],lx:"thấp thỏm chờ suốt đêm lật thẻ, ngươi mệt rã; hỏng thì chuyện chỉ dừng ở giữa",rt:"Ngài lật thẻ ngươi, không do dự.",rf:"Ngài lật thẻ người khác. Thẻ ngươi vẫn ở đó."},
   {n:"Để người đã mua đặt thẻ lên trên",c:{bac:-10},o:A=>40+(A.f.buy?20:0)+(A.f.know?10:0),e:["win","lose"],rt:"Thẻ ngươi nằm trên cùng. Ngài lật.",rf:"Tổng quản bắt quả tang tiểu thái giám đổi khay."},
-  {n:"Xin rút thẻ một kỳ",c:{},w:{duc:3},e:"mid",lx:"chờ thêm, chuyện chỉ dừng ở giữa",go:()=>matMis(3),rt:"Ngươi xin nghỉ một kỳ, {mis} yên lòng."}]}},
+  {n:"Xin rút thẻ một kỳ",c:{danh:-2},w:{duc:3},e:"mid",lx:"chờ thêm, chuyện chỉ dừng ở giữa",go:()=>matMis(3),rt:"Ngươi xin nghỉ một kỳ, {mis} yên lòng."}]}},
  E:{win:{k:1,tag:"Thẻ được lật",w:"emp",t:MATT("Thánh dụ truyền xuống: ngày mai cung nữ ở cung {mis} hầu giá. Cả cung chạy tới chạy lui. Lần đầu tiên, tên ngươi đứng trên một tờ giấy vàng.",
    "Thẻ xanh mang tên ngươi được lật. Đêm mai, kiệu Kính sự phòng sẽ đến cửa cung ngươi."),fx:{danh:3},go:A=>{rdOan(A,"v",4);return [matSrv({nt:10}),matCon({sung:3})].join(" ")}},
   mid:{k:0,tag:"Tên còn chờ",t:"Tên ngươi vẫn ở đó, không lên không xuống. Kỳ sau, hay kỳ sau nữa.",fx:{duc:2},go:()=>matSrv({nt:3})},
@@ -14663,7 +14663,7 @@ rdDef("cnv_mat",9,{t:"Từ tớ thành chủ",w:"mis",sj:"ngươi và {mis}",cas
    ()=>({hh:"Hoàng hậu hỏi {mis} trước mặt cả điện: “Người hầu cũ của muội, nay là tiểu chủ. Muội thấy thế nào?”",th:"Thái hậu hỏi {mis} trước mặt cả điện: “Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy thế nào?”",emp:"Hoàng thượng hỏi {mis} trước mặt cả điện: “Người hầu cũ của ái phi, nay là tiểu chủ. Ái phi thấy thế nào?”"})[CNV_QM()]),o:[
   {n:"Nhìn {mis}, không nói gì",c:{danh:-2},o:A=>40+(A.f.low?20:0)+S.duc/6,e:["win","mid"],lx:"phó mặc cho người cũ, người ta bảo ngươi vẫn nép sau chủ cũ, tiếng sút; hỏng thì chỉ dừng ở giữa",rt:"{mis} nói: “Là người tốt.” Câu ấy, cả cung nghe.",rf:MATT("{mis} chỉ nói: “Tùy bệ hạ.”","{mis} chỉ nói: “Thiếp không dám nói.”")},
   {n:"Tự trả lời trước",c:{suc:-2},o:A=>35+(A.f.high?15:0)+S.tai/5,e:["win","lose"],rt:"Ngươi nói: “Nếu không có tỷ, không có hôm nay.” {mis} ngẩn ra.",rf:"Ngươi nói hớ một câu, {mis} cười lạnh."},
-  {n:"Cúi đầu lui",c:{},w:{duc:2},e:"mid",lx:"không ai biết lòng ngươi, chuyện chỉ dừng ở giữa",rt:"Ngươi lui ra. Câu hỏi treo lơ lửng."}]}},
+  {n:"Cúi đầu lui",c:{danh:-2},w:{duc:2},e:"mid",lx:"không ai biết lòng ngươi, chuyện chỉ dừng ở giữa",rt:"Ngươi lui ra. Câu hỏi treo lơ lửng."}]}},
  E:{win:{k:1,tag:"Ngang hàng mà còn nghĩa",w:"mis",t:MATT("{mis} xin Hoàng thượng cho ngươi thôi hầu nàng, “để nó chờ chỉ dụ cho đàng hoàng”. Ngươi vẫn ở cung nàng, nhưng không còn là nô tỳ của ai.",
    "{mis} gọi ngươi là “muội” trước mặt cả điện. Từ đó không ai còn dám nhắc ngươi từng hầu nàng."),fx:{danh:4,duc:2},go:()=>{matMis(10);return [matSrv({tin:8,nt:6}),matCon({sung:2})].join(" ")}},
   mid:{k:0,tag:"Không thân không thù",t:"Ngươi và {mis} gặp nhau thì chào, xong thì thôi. Giữa hai người còn một tờ giấy chưa đốt.",fx:{duc:2}},
@@ -14733,7 +14733,7 @@ rdDef("cnv_mat",11,{t:"Ánh mắt ấy",w:"emp",sj:"điều ánh mắt ấy tr�
  x1:{h:"Dưới mái hiên",w:"emp",t:"Chiều mưa. Cùng mái hiên năm ấy. Hoàng thượng đứng đó, như đang chờ ngươi nói câu cuối cùng.",o:[
   {n:"Bước đến che ô cho ngài",c:{suc:-3},o:A=>35+(A.f.love?15:0)+S.sac/6,e:["win","lose"],rt:"Ngài nắm tay ngươi dưới ô: “Năm ấy trẫm cũng muốn làm thế này.”",rf:"Ngài nhận ô, nhưng mắt nhìn đi nơi khác."},
   {n:"Đứng yên, để ngài bước đến",c:{duc:-1},o:A=>40+(A.f.calm?15:0)+S.duc/6,e:["win","mid"],lx:"để ngài phải bước trước, lòng ngươi áy náy; có thể ngài không bước, chuyện chỉ dừng ở giữa",rt:"Ngài bước đến, đứng cạnh ngươi đến khi tạnh mưa.",rf:"Ngài đứng đó, ngươi đứng đây. Mưa tạnh."},
-  {n:"Cúi đầu, lui vào trong",c:{},w:{duc:3},e:"mid",lx:"khép lại một ánh nhìn, chuyện chỉ dừng ở giữa",rt:"Ngươi lui. Ngài không gọi."}]}},
+  {n:"Cúi đầu, lui vào trong",c:{danh:-2},w:{duc:3},e:"mid",lx:"khép lại một ánh nhìn, chuyện chỉ dừng ở giữa",rt:"Ngươi lui. Ngài không gọi."}]}},
  E:{win:{k:1,tag:"Ánh mắt thành ân tình",w:"emp",t:MATT("Hoàng thượng nói với Kính sự phòng: “Người này, đừng ai làm khó.” Ngươi vẫn chưa có phẩm vị, nhưng cả hậu cung biết ngài đã chọn. Ngày sắc phong chỉ còn là chuyện thời gian.",
    "Ngài ban cho cung ngươi một tấm biển tự tay đề chữ “Niệm”. Cả hậu cung hiểu: ngươi được phong vì một ánh mắt, và được giữ vì một tấm lòng."),fx:{danh:8,duc:2},go:()=>[matSrv({nt:20,tin:5}),matCon({sung:6})].join(" ")},
   mid:{k:0,tag:"Được nhìn mà bị ghét",t:MATT("Hoàng thượng vẫn nhìn ngươi, nhưng ánh nhìn ấy kéo theo bao cặp mắt ghen. Ngươi vẫn là cung nữ, chờ một ngày ngài nhớ lại.",
@@ -14816,11 +14816,11 @@ rdDef("cnv_ma",5,{t:"Bài học thứ nhất",w:"maid",sj:"việc đầu tiên L
  x1:{h:"Ngày sương giá",w:"maid",need:["srv"],t:"Sương xuống. Sáu cung chờ áo rét và than. Phùng cô cô đứng ở cửa kho, tay cầm sổ.",o:[
   {n:"Giao đủ sáu cung, ghi thiếu đúng chỗ thiếu",c:{suc:-4},o:A=>40+(A.f.honest?15:0)+(A.f.hard?10:0)+S.duc/6,e:["win","lose"],rt:"Sáu cung đủ áo. Trong sổ, dòng thiếu ghi rõ: “chờ Nội vụ phủ tra.”",rf:"Phùng cô cô tâu lên rằng ngươi làm mất gấm."},
   {n:"Giao đủ, lặng lẽ khép sổ",c:{duc:-2},o:A=>45+(A.f.lead?15:0)+S.tamco/6,e:["win","mid"],lx:"che chỗ thiếu trong sổ, lòng ngươi áy náy; hỏng thì chỉ dừng ở giữa",rt:"Sáu cung đủ áo, không ai kêu.",rf:"Có một cung kêu, nhưng nhỏ."},
-  {n:"Xin ma ma đứng ra giao",c:{},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi đứng sau."}]},
+  {n:"Xin ma ma đứng ra giao",c:{danh:-2},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi đứng sau."}]},
  x2:{h:"Ngày sương giá",w:"maid",need:["nsrv"],t:"Sương xuống. Than cung ngươi vẫn thiếu ba phần. Phùng cô cô đến thỉnh an, tay cầm sổ lệ mới, chờ ngươi nói một lời.",o:[
   {n:"Đòi đủ phần than theo sổ cũ, chỉ rõ chỗ thiếu",c:{suc:-4},o:A=>40+(A.f.honest?15:0)+(A.f.hard?10:0)+S.duc/6,e:["win","lose"],rt:"Phùng cô cô cúi đầu. Than về đủ trước tối; dòng thiếu trong sổ ghi: “chờ Nội vụ phủ tra.”",rf:"Phùng cô cô tâu lên rằng cung ngươi đòi quá lệ."},
   {n:"Nhận than lệ mới, lặng lẽ cho người mua thêm",c:{bac:-20},o:A=>45+(A.f.lead?15:0)+S.tamco/6,e:["win","mid"],lx:"tốn bạc bù chỗ thiếu, chỗ hở trong sổ vẫn bị che; hỏng thì chỉ dừng ở giữa",rt:"Cung ngươi đủ ấm, không ai kêu.",rf:"Than mua ngoài ít hơn ngươi tưởng."},
-  {n:"Mời ma ma đứng ra nói",c:{},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi ngồi sau."}]}},
+  {n:"Mời ma ma đứng ra nói",c:{danh:-2},w:{duc:2},e:"mid",lx:"việc đầu không phải của ngươi, chuyện chỉ dừng ở giữa",rt:"Ma ma đứng ra, ngươi ngồi sau."}]}},
  E:{win:{k:1,tag:"Việc đầu trót lọt",w:"maid",t:LMMT("Sáu cung đủ áo rét trước sương giá. Lưu ma ma vỗ vai ngươi: “Được.” Cả Nội vụ phủ biết bà có một học trò làm được việc.",
    "Than về đủ, không ai bị mắng. Lưu ma ma cúi chào ngươi theo phép tiểu chủ, nhưng khi lui ra, bà khẽ nói: “Học trò của ta.”"),fx:{danh:4},go:()=>[lmmSrv({tin:6}),e67merit(5),lmmCon({tamco:2})].join(" ")},
   mid:{k:0,tag:"Xong việc, còn nợ một câu hỏi",t:"Việc xong, nhưng hai mươi tấm gấm vẫn chưa ai trả lời. Ma ma không nhắc, ngươi cũng không quên.",fx:{duc:2},go:()=>e67merit(2)},
@@ -14857,7 +14857,7 @@ rdDef("cnv_ma",6,{t:"Sổ sách Nội vụ phủ",w:"eun",sj:"khoản thiếu tr
  x1:{h:"Đêm khóa sổ",w:"eun",t:"Đêm khóa sổ, Nội vụ phủ đèn đuốc sáng trưng. Ai có chứng cứ thì đưa ra đêm nay, mai sổ đã niêm.",o:[
   {n:"Dâng chứng cứ lên Tổng quản",c:{suc:-4},o:A=>35+(A.f.proof?15:0),e:["win","lose"],rt:"{eun} lật từng trang, rồi cho giữ Phùng cô cô lại.",rf:"{eun} bảo: “Chứng cứ mỏng quá.” Phùng cô cô nhìn ngươi."},
   {n:"Đưa chứng cứ cho ma ma tự xử",c:{mat:-1},o:A=>45+(A.f.safe?10:0)+(A.f.two?10:0),e:["win","mid"],lx:"chứng cứ rời tay ngươi, mất một đầu mối; hỏng thì chỉ dừng ở giữa",rt:"Ma ma cầm sổ đến thẳng Tổng quản, đòi tra.",rf:"Ma ma cất sổ đi: “Chưa phải lúc.”"},
-  {n:"Đốt bản chép, giữ mình",c:{},w:{duc:1},e:"mid",lx:"đầu mối mất, chuyện chỉ dừng ở giữa",rt:"Ngọn lửa nhỏ trong lò, ngươi nhìn đến khi tắt."}]}},
+  {n:"Đốt bản chép, giữ mình",c:{danh:-2},w:{duc:1},e:"mid",lx:"đầu mối mất, chuyện chỉ dừng ở giữa",rt:"Ngọn lửa nhỏ trong lò, ngươi nhìn đến khi tắt."}]}},
  E:{win:{k:1,tag:"Sổ gốc đã ra ánh sáng",w:"eun",t:"Kho Nội vụ phủ bị niêm, Phùng cô cô bị giữ lại hỏi. Nhưng ngươi biết: người như bà ta không ngã một lần là xong.",fx:{danh:5,mat:1},go:A=>{rdOan(A,"v",6);return [lmmSrv({tin:5}),e67merit(4),lmmCon({tamco:2})].join(" ")}},
   mid:{k:0,tag:"Sổ đã niêm",t:"Sổ niêm phong. Chứng cứ còn trong tay ai đó, chưa ai dùng. Phùng cô cô bình yên, nhưng đã biết có người lật sổ.",fx:{duc:2}},
   lose:{k:-1,tag:"Chứng cứ mỏng",t:"Tổng quản gác lại. Phùng cô cô bình yên, và đã biết ai lật sổ. Lưu ma ma bảo ngươi: “Từ giờ, ngủ đừng sâu.”",fx:{danh:-3},go:()=>lmmSrv({tin:-4})}}});
@@ -14965,7 +14965,7 @@ rdDef("cnv_ma",9,{t:"Kỳ sát hạch",w:"eun",sj:"kỳ sát hạch của Nội 
    "Danh sách tuyển công bố. Người về cung nào là người của cung ấy cả đời."),o:[
   {n:"Đứng thẳng chờ",c:{danh:-2},o:A=>40+(A.f.hard?15:0)+S.duc/6,e:["win","mid"],lx:"phó mặc cho người chấm, người ta bảo ngươi không dám nói, tiếng sút; hỏng thì chỉ dừng ở giữa",rt:LMMT("Tên ngươi được đọc đầu tiên.","Người ngươi chọn được đọc tên đầu tiên."),rf:LMMT("Tên ngươi được đọc, nhưng ở cuối.","Người ngươi chọn được đọc tên, nhưng kèm một tai mắt.")},
   {n:"Nhắc Tổng quản những gì đã thấy",c:{suc:-3},o:A=>35+(A.f.know?15:0)+S.danh/5,e:["win","lose"],rt:LMMT("{eun} gạch một cái tên của Phùng cô cô, ghi tên ngươi vào.","{eun} gạch ba cái tên Phùng cô cô cài vào, đưa người ngươi chọn về cung ngươi."),rf:"{eun} cho là ngươi tranh."},
-  {n:"Nhường chỗ cho học trò khác của ma ma",c:{},w:{duc:3},e:"mid",lx:"chờ thêm một kỳ, chuyện chỉ dừng ở giữa",rt:LMMT("Ngươi lùi một bước. Một người khác của ma ma được đọc tên.","Ngươi nhường người giỏi nhất cho một cung khác. Một học trò của ma ma được đọc tên ở đó.")}]}},
+  {n:"Nhường chỗ cho học trò khác của ma ma",c:{danh:-2},w:{duc:3},e:"mid",lx:"chờ thêm một kỳ, chuyện chỉ dừng ở giữa",rt:LMMT("Ngươi lùi một bước. Một người khác của ma ma được đọc tên.","Ngươi nhường người giỏi nhất cho một cung khác. Một học trò của ma ma được đọc tên ở đó.")}]}},
  E:{win:{k:1,tag:"Qua kỳ sát hạch",w:"eun",t:LMMT("Ngươi qua cả ba bài. Tên ngươi vào danh sách chờ ghế chưởng sự. Phùng cô cô ghi tên ngươi bằng nét bút rất mạnh.",
    "Cung ngươi nhận đúng những người ngươi muốn. Bảy học trò của Lưu ma ma về các cung, và cả bảy đều biết ai đã đứng ra."),fx:{danh:5},go:A=>{rdOan(A,"v",4);return [lmmSrv({tin:4}),e67merit(6),lmmCon({mat:2})].join(" ")}},
   mid:{k:0,tag:"Qua mà chưa có ghế",t:LMMT("Ngươi qua, nhưng xếp cuối. Năm nay chưa có ghế cho ngươi.","Ngươi nhận được người, nhưng cũng nhận một tai mắt. Phùng cô cô vẫn giữ danh sách."),fx:{duc:2},go:()=>e67merit(3)},
@@ -15035,7 +15035,7 @@ rdDef("cnv_ma",11,{t:"Chưởng sự",w:"maid",sj:"ghế của Lưu ma ma",cast(
    "Tổng quản đến cung ngươi: “Hoàng hậu giao việc chọn người cho nô tài. Nô tài muốn nghe một lời của tiểu chủ.”"),o:[
   {n:"Nói: ghế ấy phải về người của Lưu ma ma",c:{suc:-4},o:A=>35+(A.f.seat?15:0)+S.danh/6,e:["win","lose"],rt:"{eun} gật đầu chậm: “Người của bà Lưu, thì sổ sẽ sạch.”",rf:"{eun} lắc đầu: “Ai cũng nói thế.”"},
   {n:"Nói: ai ngồi cũng được, miễn sổ sạch",c:{mat:-1},o:A=>45+(A.f.give?15:0)+S.duc/6,e:["win","mid"],lx:"không đòi ghế cho người của ma ma, mạng lưới lỏng ra; hỏng thì chỉ dừng ở giữa",rt:"{eun} cười: “Câu ấy, bà Lưu cũng nói.”",rf:"{eun} chọn người già nhất."},
-  {n:"Không nói gì",c:{},w:{duc:2},e:"mid",lx:"để ghế cho người khác quyết, chuyện chỉ dừng ở giữa",rt:"Ngươi chỉ cúi đầu."}]}},
+  {n:"Không nói gì",c:{danh:-2},w:{duc:2},e:"mid",lx:"để ghế cho người khác quyết, chuyện chỉ dừng ở giữa",rt:"Ngươi chỉ cúi đầu."}]}},
  E:{win:{k:1,tag:"Người nối nghiệp Lưu ma ma",w:"maid",t:LMMT(`Ngươi ngồi ghế của Lưu ma ma. Ngày nhận chức, ngươi bưng khay trà đầy đi qua sân sỏi Nội vụ phủ, không sóng một giọt. Cả lớp cung nữ mới đứng nhìn.`,
    "Ghế của Lưu ma ma về tay học trò bà, người do ngươi chọn. Than, gấm và người của Nội vụ phủ, từ nay đi qua tay người của ngươi. Ma ma gửi về một lá thư: “Giữ lấy họ.”"),fx:{danh:8},go:A=>{rdOan(A,"v",4);return [lmmRk(BAL.road.cnvMaRk),lmmCon({mat:2,tamco:2})].join(" ")}},
   mid:{k:0,tag:"Ghế về tay người khác",t:LMMT("Ghế về tay một ma ma già, không phe ai. Ngươi được ghi tên chờ kỳ sau. Lưu ma ma về quê, mang theo nụ cười yên lòng.",
@@ -15129,7 +15129,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
 
 /* ---------- ch13 · hau14 · Tranh ngôi Trung cung ---------- */
 ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi Trung cung",cast(A){try{if(S.st.f14&&S.st.f14.tienloi)A.sc=(A.sc||0)+BAL.road.tienSc}catch(e){}return egSeatRv(A)},
- g:A=>egQueen()?"Ngươi đã ngồi ngôi Trung cung, nhưng ngôi ấy chưa vững: kẻ muốn kéo ngươi xuống vẫn còn. Giữ được ngôi, lục cung mới thật sự phục.":"Ngôi Trung cung là đích cuối của mọi phi tần. Từng bậc phải đủ Sủng, Danh, Đức; lúc bàn lập hậu, Hoàng thượng nhìn hoàng tử, lòng Thái hậu và tiếng của nhà ngươi. Chương này đưa ngươi một bước thật về phía ngôi ấy.",
+ g:A=>egQueen()?"Ngươi đã ngồi ngôi Trung cung, nhưng ngôi ấy chưa vững: kẻ muốn kéo ngươi xuống vẫn còn. Giữ được ngôi, lục cung mới thật sự phục.":`Ngôi Trung cung là đích cuối của mọi phi tần. Từng bậc phải đủ Sủng, Danh, Đức; lúc bàn lập hậu, Hoàng thượng nhìn hoàng tử, ${egThGone()?"lòng triều thần":"lòng Thái hậu"} và tiếng của nhà ngươi. Chương này đưa ngươi một bước thật về phía ngôi ấy.`,
  p:[["s1","s2","s3","s4"],["c1","c2","G.th","G.emp","G.hh"],["t1"],["x1"]],
  B:{s1:{h:"Ngôi chưa ấm chỗ",w:"v",if:()=>egQueen(),need:["v"],t:"Ngươi ngồi ngôi Trung cung chưa lâu, {v} đã kết bè với mấy nhà quyền thần, rỉ tai rằng ngươi không đủ đức làm mẫu nghi.",o:[
   {n:"Mở tiệc ban thưởng lục cung",c:{bac:-60},w:{danh:4},wx:"lục cung biết ơn",lx:"tốn bạc, {v} chê ngươi mua lòng",rt:"Cả lục cung nhận quà, khen ngươi rộng tay."},
@@ -15162,7 +15162,7 @@ ARC67.hau14={o:"eg",ok:()=>nsrv67(),t:"Tranh ngôi Trung cung",w:"emp",sj:"ngôi
  x1:{h:"Thánh ý",w:"emp",t:A=>egQueen()&&rv67(A,"v")?"Hoàng thượng triệu ngươi và {v} cùng đến điện. Ngài hỏi: lục cung loạn đã lâu, lỗi tại ai?":"Hoàng thượng triệu ngươi đến điện, hỏi: “Nếu trẫm giao lục cung cho nàng, nàng lấy gì giữ nó yên?”",o:[
   {n:"Thưa: lấy đức mà giữ",c:{suc:-5},o:()=>35+S.duc/3+S.th/6,e:["win","mid"],rt:"Hoàng thượng gật đầu thật lâu.",rf:"Hoàng thượng nói: đức thì ai cũng tự xưng."},
   {n:"Thưa: lấy phép mà giữ",c:{suc:-5},o:()=>45+S.tamco/3+S.danh/6,e:["win","lose"],rt:"Hoàng thượng thấy ngươi cứng rắn, đủ sức trị lục cung.",rf:"Hoàng thượng lắc đầu: nàng quá cứng."},
-  {n:"Thưa: thiếp không dám nhận",c:{},w:{duc:3},e:"mid",lx:"bỏ lỡ một lần thánh ý",rt:"Hoàng thượng cười: “Nàng khiêm nhường quá.”"}]}},
+  {n:"Thưa: thiếp không dám nhận",c:{danh:-2},w:{duc:3},e:"mid",lx:"bỏ lỡ một lần thánh ý",rt:"Hoàng thượng cười: “Nàng khiêm nhường quá.”"}]}},
  E:{win:{k:1,tag:"Một bước gần ngôi Trung cung",w:"emp",t:A=>egQueen()&&rv67(A,"v")?"Hoàng thượng phạt {v}, tuyên trước lục cung rằng Trung cung là ngươi. Từ nay không ai dám nhắc chuyện thay ngôi.":"Hoàng thượng ghi tên ngươi trong lòng. Lục cung biết: ngày bàn lập hậu, ngươi là người phải nhắc đến.",fx:{danh:5,sung:3},go:A=>{if(rv67(A,"v"))rdOan(A,"v",8);return egHauWin()}},
   mid:{k:0,tag:"Thánh ý còn để ngỏ",t:"Hoàng thượng chưa định. Ngươi giữ được chỗ đứng, nhưng ngôi Trung cung vẫn còn xa một bước.",fx:{danh:2}},
   lose:{k:-1,tag:"Người khác được thế",t:A=>(rv67(A,"v")?"Hoàng thượng nghiêng về {v}.":"Hoàng thượng chưa thấy ngươi đủ sức giữ lục cung.")+" Ngươi lùi một bước, nhưng đường lên ngôi Trung cung vẫn còn mở.",fx:{sung:-4,danh:-3},go:A=>{rdRel(A,"v",-6)}}}};
@@ -15203,7 +15203,7 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
  x1:{h:"Đại lễ đầu xuân",w:"emp",t:"Đại lễ đầu xuân. Hoàng thượng đứng trước Thái miếu, các hoàng tự đứng sau. Ai đứng gần ngài nhất, cả triều sẽ nhìn.",o:[
   {n:"Lo trọn lễ, không tranh chỗ",c:{suc:-5},o:()=>35+S.duc/3+S.danh/6,e:["win","mid"],rt:"Hoàng thượng thấy ngươi đứng đúng chỗ của bậc mẫu nghi.",rf:"Lễ trọn, nhưng không ai nhắc tên ngươi."},
   {n:"Đưa con đứng gần Hoàng thượng",c:{suc:-5},o:()=>45+S.sung/3+S.tamco/6,e:["win","lose"],need:["kid"],rt:"Hoàng thượng đặt tay lên vai {k}.",rf:"Triều thần xì xào ngươi tranh ngôi cho con."},
-  {n:"Lùi lại, nhường bậc",c:{},w:{duc:3},e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi lùi sau một bước."}]}},
+  {n:"Lùi lại, nhường bậc",c:{danh:-2},w:{duc:3},e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi lùi sau một bước."}]}},
  E:{win:{k:1,tag:"Mẫu nghi thiên hạ",w:"emp",t:()=>mySons().length?"Cả triều nhìn mẹ con ngươi. Con ngươi đứng gần ngôi Đông cung hơn ai hết; ngày ngươi thành Hoàng thái hậu chỉ còn chờ trời định.":"Lục cung gọi ngươi là mẹ. Không có hoàng tử của riêng mình, ngươi vẫn là bậc mẫu nghi mà ai cũng phục.",get fx(){return egThGone()?{danh:8}:{danh:6,th:4}},go:A=>egKeWin()},
   mid:{k:0,tag:"Lục cung nể đức",t:"Lễ trọn, lòng người yên. Ngôi Đông cung vẫn để Hoàng thượng định, nhưng tên ngươi được nhắc với lòng kính trọng.",fx:{danh:3,duc:2},go:()=>mySons().length?e67heir(BAL.road.end.keHeir>>1):""},
   lose:{k:-1,tag:"Bị cho là tranh ngôi",t:"Triều thần cho là ngươi tranh ngôi cho con. Hoàng thượng lạnh nhạt một mùa; đường của con ngươi vẫn còn, nhưng dài hơn.",fx:{sung:-5,danh:-4},go:A=>{const s=son67();if(s)s.fond=cl((s.fond||0)-BAL.road.end.keHeir,0,100);return s?`Hoàng thượng bớt thương ${s.name}.`:""}}}};
@@ -50622,7 +50622,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="24f965848e52";window.CTM_BUILD=BUILD;
+const BUILD="6461a44c5cf4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
