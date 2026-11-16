@@ -79,7 +79,7 @@
 | percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | DONE (xong ~42% / choi duoc ~66%, reports/percent-measure.md) | 16/11 07:20Z |
 | balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
 | one-core: every rule number from BAL + guard test (owner ONE CORE) | review/one-core | main s11→s12 | session_01UV1Szm1iPxyYyr6JpCfpnd (opus) | RUNNING | 16/11 07:21Z |
-| D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | RUNNING | 07:23Z 16/11 |
+| D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | PASS d2221602f | 07:23Z 16/11 |
 | servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | session_01DgYSWnPWsFwg4R6LHZTKjr | DONE FAIL → r2 | 16/11 07:27Z |
 | slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | DONE FAIL → r2 | 16/11 07:27Z |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | DONE SẴN SÀNG KIỂM 30c0931d | 16/11 07:27Z |
@@ -116,7 +116,7 @@
 | test-drift-roulette (6+ tests vs #kroul) + tutorial first-run check | review/test-drift-roulette | main s14 | session_01UV1SzkFT88BKzJLdb7NFY6 (sonnet) | RUNNING | 16/11 08:20Z |
 | kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
 | D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | RUNNING | 16/11 08:26Z |
-| story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | RUNNING | 16/11 08:26Z |
+| story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | FAIL → fix list in reports/story14-p1-r1.md | 16/11 08:26Z |
 | act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | RUNNING | 16/11 08:40Z |
 | servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
 | slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | DONE SẴN SÀNG KIỂM dd0b618f | 16/11 08:40Z |
@@ -130,3 +130,4 @@
 | D21 co-op B1–B5 review (covers unreviewed review/coop-pets A10 merged in) | review/coop-b1b5-r1 | D | session_01DgYSWmoCsGpJbQckATgPpk | RUNNING | 16/11 09:08Z |
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
 | slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | RUNNING | 16/11 09:19Z |
+| item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | (opening, C s2) | RUNNING | 16/11 09:27Z |
