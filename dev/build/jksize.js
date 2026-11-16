@@ -111,7 +111,7 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
  const st=document.createElement("style");st.id="k-size";st.textContent=css.join("\n");document.head.appendChild(st)})();
 
 /* ---- markup builders (data only; used by the sample sheet now, by kpBuild after the owner's OK) ---- */
-function kszImg(p){return typeof IMG_BASE!=="undefined"&&/^img\//.test(p)?IMG_BASE+p:p}
+function kszImg(p){p=String(p||"");if(p.indexOf("://")>0)return p;return typeof IMG_BASE!=="undefined"&&p.slice(0,4)==="img/"?IMG_BASE+p:p}
 /* THE button: {t, pic, rows:[[label,value]…], size?}. "Gợi ý" rows go to the full-width box under the picture + info row. */
 function kszBtn(o){const R=o.rows||[],hint=R.filter(r=>/^gợi ý$/i.test(r[0])),main=R.filter(r=>!/^gợi ý$/i.test(r[0]));
  const rows=main.map(([l,v])=>`<span class="kszr"><i>${l}</i><span>${v}</span></span>`).join("");
@@ -305,7 +305,7 @@ function kszWho3(sp){if(sp.who)return sp.who;const N=(typeof BAL!=="undefined"&&
   if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}if(st)return st}return S.maid}catch(e){return null}}
 /* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
 function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
-function kszPic3(src,cls){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",{shape:"wide",cap:false})}</div>`}
+function kszPic3(src,cls){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",{shape:"wide",cap:false}).replace(/ loading="lazy"/g,"")}</div>`/* a frame picture is on screen: never lazy */}
 function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}
  if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
  const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
@@ -465,3 +465,80 @@ function kszItemsSheet3Show(){const old=document.getElementById("kszsheet");if(o
 Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3});
 /* kit page hook: kitSizeSheet("v3:<kind>") = one kind at S / M / L / XL; kitSizeSheet("items3") = the v3 items sheet */
 (function(){const k0=window.kitSizeSheet;window.kitSizeSheet=function(area){if(/^v3:/.test(area||""))return kszSheet3(area.slice(3));if(area==="items3")return kszItemsSheet3Show();return k0(area)}})();
+/* ================= PHASE 2 · THE LIVE FRAME (owner 16/11 19:22Z s22: approval of #3/#4 → apply game-wide) =================
+   kitFrameLive3(m) = the LAST step of showModal (outermost wrapper): every #modal kit panel (kpBuild) of a KP_SEAL kind is re-laid as the v3 frame,
+   KEEPING the nodes the game made (its info blocks .kpmain, its option buttons .opts with their handlers, the header .kph with its ✕):
+   #mb > .k3body(left + .k3right[event picture .k3ev · .kpmain · (M/L/XL) .opts.k3btns]) + (S) .opts.k3btns.
+   left = the event's own person (kitStagePeople) or the NARRATOR of the kind (kszWho3, BAL.staff.narrator), full figure at M/L/XL, portrait pendant
+   at S (person-centred kinds) or the event picture (event-centred kinds). Event picture = the dialog's own band / tall slot, else kitEvArt / kszEvSrc3.
+   Size = the smallest of S/M/L/XL whose presentation holds the content (kitFrameFitsLive3); XL: more text scrolls inside the info column.
+   NOT converted (pages, not event frames): identity card .kpid, person card (pcm), scene panels without a kind, and bodies holding a page part
+   (KSZ_LIVE_SKIP: calendars, pickers, inventories, shops, relation tables, stat grids, tables, exam / card-flip pages). */
+const KSZ_LIVE_SKIP=".kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
+KIT_SIZE.v3.office={ksp:"Kính sự phòng"};/* (s22) the ĐÊM narrator's tag names his office, not the bare "Thái giám" */
+(function(){const r0=kszRankName;kszRankName=function(p){const R=r0(p);try{if(p&&S&&S.court&&p===S.court.ksp&&KIT_SIZE.v3.office.ksp)R[0]=KIT_SIZE.v3.office.ksp}catch(e){}return R};window.kszRankName=kszRankName})();
+function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .kdlgart img, :scope > .kpb > .kpsubj.kpev img, :scope > .kpb > .kpsubj.kpiart img");if(im)src=im.getAttribute("src")||"";
+ if(!src&&m&&m.kit&&m.kit.pic)src=m.kit.pic;if(!src&&m&&m.headArt&&m.headArt.src)src=m.headArt.src;
+ if(!src){try{const a=typeof kitEvArt==="function"?kitEvArt(m):null;if(a&&a.src)src=a.src}catch(e){}}
+ return src?kszImg(src):kszEvSrc3({kind,title:m&&m.t})}
+/* the option buttons of the game (.opt / .ka cards, §6.2) in the v3 grid: short ones one cell, long ones the cells for ≥ cellLong */
+function kszBtnGridLive3(g){const B=KIT_SIZE.v3.btn,w=g.clientWidth;if(!w)return;const bs=[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length);
+ bs.forEach(b=>{b.dataset.kbs=kitBtnSize({rows:b.querySelectorAll(".kar,.kl,.kr-why,.kab>*").length,chars:((b.querySelector(".kabody")||b).textContent||"").replace(/\s+/g," ").trim().length})});
+ g.classList.add("k3meas");let need=B.cellS;bs.filter(b=>b.dataset.kbs==="S").forEach(b=>{b.style.setProperty("width","min-content","important");b.style.setProperty("min-width","0","important");need=Math.max(need,Math.ceil(b.getBoundingClientRect().width));b.style.removeProperty("width");b.style.removeProperty("min-width")});g.classList.remove("k3meas");
+ const cols=Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
+ bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))}
+/* the height the info column may take: the modal box minus the frame's header, button row and body padding */
+function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return 9999;let ch=24+22+4;[...dlg.children].forEach(c=>{if(c.id!=="mb"&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")ch+=c.offsetHeight});
+ const mb=document.getElementById("mb");if(mb)[...mb.children].forEach(c=>{if(!c.classList.contains("k3body")&&c.getClientRects().length)ch+=c.offsetHeight});return M.clientHeight-ch}
+function kitFrameApplyLive3(dlg){try{kszFigFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
+ const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
+ if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
+  R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}
+ kszPicFit3(dlg);kszPicFit3(dlg);return dlg.dataset.ksz}
+function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
+ const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
+ const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
+ /* the frame must also stay inside the screen (modal box): Fold / iPad */
+ const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
+ if(dlg.dataset.pres==="fig")return need<=lh+2&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
+ const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
+function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person";
+ Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});
+ const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
+ let left="",ev=true;if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
+ if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
+ if(X.opts){if(pres==="one")X.mb.appendChild(X.opts);else right.appendChild(X.opts)}
+ body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
+ right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
+ kitFrameApplyLive3(dlg)}
+function kszLivePick3(dlg){for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg))return K}return"XL"}
+let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
+function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
+ if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
+ const kind=dlg.dataset.kind;if(!KIT_SIZE.v3.focus[kind])return false;const body=mb.querySelector(":scope > .kpb");if(!body||body.matches(".kpid"))return false;
+ const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=P[0]||kszWho3({kind});const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
+ /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
+ dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
+ const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
+ if(opts){opts.classList.add("k3btns");opts.classList.remove("k3grid","kdpo2")}
+ [...mb.children].forEach(c=>{if(c!==opts)c.remove()});mb.prepend(B);
+ dlg.__ksz3={kind,who,src,mb,body:B,right:R,opts,m};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
+Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFitsLive3,kszBtnGridLive3});
+(function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
+html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
+#modal .dlg.kszlive>#mb{padding:0;margin:0;display:block;max-height:none;overflow:visible;flex:none}
+#modal .dlg.kszlive>#mr:not(:has(button:not([hidden]))){display:none}
+#modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
+#modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
+html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{display:grid!important;flex-direction:row!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;align-content:start!important;gap:${KIT_SIZE.v3.btn.gap}px;margin:0;flex:none;max-height:none;overflow:visible;position:static}
+#modal .dlg.kszlive>#mb>.opts.k3btns{padding:0 12px 12px;box-sizing:border-box}
+html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns>button{grid-column:span var(--k3s,1)!important;order:0!important;width:auto;min-width:0;max-width:none;margin:0}
+#modal .dlg.kszlive .opts.k3meas>button{grid-column:auto}
+html body #modal .dlg.kszlive #mb .opts.k3btns>button .kabody{min-width:6.5em}html body #modal .dlg.kszlive #mb .opts.k3btns>button :is(.kan,.kat){word-break:normal;overflow-wrap:normal;hyphens:none}`;document.head.appendChild(st)})();
+/* the #modal .dlg element is reused by every pop-up: the live frame is undone before the next render */
+function kszLiveReset3(){const d=document.querySelector("#modal .dlg");if(!d||!d.__ksz3)return;d.__ksz3=null;d.classList.remove("kszf","ksz3","kszlive");["ksz","pres","focus","lay"].forEach(k=>delete d.dataset[k])}
+setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const d=document.querySelector("#modal .dlg");if(d&&d.__ksz3&&(d.__ksz3.m!==m||!d.__ksz3.body.isConnected))kszLiveReset3();const r=s0.apply(this,arguments);try{kitFrameLive3(m)}catch(e){}return r};window.showModal=showModal},5);
+addEventListener("resize",()=>{const d=document.querySelector("#modal .dlg.kszlive");if(d)kszLiveRepick3(d)});
+/* the older fit passes (rAF / resize) leave a live v3 frame alone: one layout owner per frame */
+["kitDlgFit","kitDpFit","kitDpApply","kitCompactFit","kitOnePic","kitSlotFit"].forEach(n=>{try{const f=window[n];if(typeof f!=="function")return;const g=function(){const d=document.querySelector("#modal .dlg");if(d&&d.__ksz3)return;return f.apply(this,arguments)};window[n]=g;eval(n+"=g")}catch(e){}});
