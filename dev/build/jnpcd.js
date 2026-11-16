@@ -33,7 +33,7 @@ window.npcRoleGone=function(k){try{if(!S||!k)return;if(S.rgL&&S.rgL[k])delete S.
   try{log(`Việc nhờ "${T[x.tid]?plain(T[x.tid].t).replace(/\{[AB]\}/g,"người ấy"):""}" dừng lại: người nhờ đã qua đời.`)}catch(e){}}
  q.ch=q.ch.filter(f=>f.rk!==k);if(q.d&&k in q.d)delete q.d[k]}catch(e){}};
 /* retired portraits count as present: drawF (both passes) never draws them for anyone */
-(function(){const f0=facesPresent;facesPresent=function(){const U=f0.apply(this,arguments);try{(S&&S.fdead||[]).forEach(f=>U.add(f))}catch(e){}return U}})();
+(function(){const f0=facesPresent;facesPresent=function(){const U=f0.apply(this,arguments);try{(S&&S.fdead||[]).forEach(f=>U.add(f));/* r1: men killed outside jmort (xử trảm, đày, j22/j24/j42/j96) and dead men in old saves keep their face */(S&&S.men||[]).forEach(m=>{if(m&&m.alive===false&&m.fc)U.add(m.fc)})}catch(e){}return U}})();
 /* retired figures stay in figUsed even if a transfer frees them */
 (function(){if(typeof figPick!=="function")return;const p0=figPick;figPick=function(who){try{if(S&&S.fidDead&&S.fidDead.length&&!(who&&who.fid)){const U=figUsed();for(const k of S.fidDead)if(!U.includes(k))U.push(k)}}catch(e){}return p0.apply(this,arguments)}})();
 /* children: a new child's figure variant avoids dead same-sex children's variants while one is free */
@@ -57,6 +57,13 @@ if(typeof monthTick==="function")window.monthTick=monthTick=watched(monthTick);
 /* a person with no portrait left whose fallback picture is a retired face shows the kit silhouette (img/kit/unknown-f|m), never the dead's face */
 (function(){const f0=fsrc;fsrc=function(fc,fb){const r=f0.apply(this,arguments);try{if(!fc&&fb&&S&&S.fdead&&S.fdead.length){const m=/^img\/(face-[^/]+)\.webp$/.exec(fb);
  if(m&&S.fdead.includes(m[1]))return (typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+(/maid|woman|mama|consort|th/.test(m[1])?"unknown-f":"unknown-m")+".webp"}}catch(e){}return r}})();
+/* r1 (whole family, names): new consorts (freshName → namesInUse) also avoid the j59 personal names of Phế phi họ Lý and the court officers and the
+   names of the dead, so no two people share a given name (j61 masks a stranger's given name inside the other's: "Lý Đáp ứng ???") */
+(function(){if(typeof namesInUse!=="function")return;const n0=namesInUse;namesInUse=function(){const a=n0.apply(this,arguments);try{if(S){if(S.lcfPn)a.push(S.lcfPn);
+ const C=S.court||{};for(const k in C)if(C[k]&&C[k].pn)a.push(C[k].pn);(S.dnames||[]).forEach(n=>{if(n&&String(n).split(" ").length>=3)a.push(n)})}}catch(e){}return a}})();
+/* old saves (and any start where Lý was named before the rivals): if her given name is a living consort's, she gets a fresh j59 name */
+window.lyNameFix=function(){try{if(!S||!S.lcfPn||typeof window.j59gen!=="function")return;const g=S.lcfPn.split(" ").slice(-2).join(" ");
+ if((rivals||[]).some(v=>v&&v.name&&v.name!==S.lcfPn&&v.name.split(" ").length>=3&&v.name.endsWith(" "+g))){const o=S.lcfPn;delete S.lcfPn;S.lcfPn=window.j59gen(["Lý"],(window.J59N&&J59N.FAL)||[]);if(!S.lcfPn)S.lcfPn=o}}catch(e){}}
 /* ---------- Phế phi họ Lý ---------- */
 window.lyDie=function(p,why){if(!p||p.dead)return "";p.dead=1;p.dY=S.year;const L=S.rgL&&S.rgL.ly;const cleared=p.cleared||(L&&L.done);
  /* a cold-palace death (the jmort accident texts — Nam Uyển, yến tiệc — do not fit a prisoner) */
@@ -65,7 +72,7 @@ window.lyDie=function(p,why){if(!p||p.dead)return "";p.dead=1;p.dY=S.year;const 
  try{if(L&&!L.done)delete S.rgL.ly}catch(e){}
  return `<span class="r">${t}</span> `};
 /* she exists from the first day (so she ages and rolls a lifespan), on new games and old saves alike */
-(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&typeof lyFallen==="function")lyFallen()}catch(e){}return r}})();
-(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&typeof lyFallen==="function")lyFallen()}catch(e){}return r}})();
-(function(){const a0=ageYear;ageYear=function(){const r=a0.apply(this,arguments);try{const y=S&&S.lyF;if(y&&!y.dead&&!y.freed&&(!window.COOPW||!COOPW.on||COOPW.seat==="a"))y.age=(y.age||34)+1}catch(e){}return r}})();
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&typeof lyFallen==="function")lyFallen();if(typeof j59CourtNames==="function")j59CourtNames();lyNameFix()}catch(e){}return r}})();
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&typeof lyFallen==="function")lyFallen();lyNameFix()}catch(e){}return r}})();
+(function(){const a0=ageYear;ageYear=function(){const r=a0.apply(this,arguments);try{const y=S&&S.lyF;if(y&&!y.dead&&!y.freed&&(!window.COOPW||!COOPW.on||COOPW.seat==="a"))y.age=(y.age||M.ly.age)+1}catch(e){}return r}})();
 })();

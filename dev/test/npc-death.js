@@ -65,6 +65,17 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
  /* 6 co-op world keys */
  const r6=await ev(()=>{const src=[...document.scripts].map(s=>s.textContent).join("\n");const m=src.match(/const W_KEYS=\[([^\]]*)\]/);return m?m[1]:""});
  ok(["lyF","fdead","fidDead","dnames"].every(k=>r6.includes(`"${k}"`)),'co-op: Lý + retired faces/names are world keys');
+ /* r1: a man killed outside jmort (xử trảm: alive=false only) keeps his face; a living man entering a new band never draws it */
+ const r7=await ev(()=>{const M=(S.men||[]).filter(m=>m.alive);if(M.length<2)return{skip:1};M.forEach(m=>pMan(m));const d=M[0];d.alive=false;const f=d.fc;let hit=0;
+  for(let i=0;i<60;i++){const o=M[1];o.fc=null;o.fk=null;faceFor(o,"man",o.age);if(f&&o.fc===f)hit++}return{f,hit}});
+ ok(r7.skip||(r7.f&&r7.hit===0),'man executed outside jmort: his face never drawn again (60 draws)',r7);
+ /* r1: Lý's personal name never shares a given name with a consort (j61 masked it: "Lý Đáp ứng ???"); old saves repaired */
+ const r8=await ev(()=>{j59CourtNames();const v=rivals.find(x=>x.alive&&x.name.split(" ").length>=3);const g0=S.lcfPn.split(" ").slice(-2).join(" ");const o=v.name;v.name=v.name.split(" ")[0]+" "+g0;
+  lyNameFix();const g1=S.lcfPn.split(" ").slice(-2).join(" ");const rep=g1!==g0;v.name=o;
+  const gg=S.lcfPn.split(" ").slice(-2).join(" ");let clash=0;for(let i=0;i<300;i++){const n=freshName();if(n.endsWith(" "+gg))clash++}
+  let jc=0;const sv=S.lcfPn;for(let i=0;i<50;i++){const n=j59gen(["Lý"],J59N.FAL);if(rivals.some(x=>x.name.split(" ").length>=3&&x.name.endsWith(" "+n.split(" ").slice(-2).join(" "))))jc++}
+  return{g0,g1,rep,clash,jc}});
+ ok(r8.rep&&r8.clash===0&&r8.jc===0,'Lý never shares a given name with a consort (repair on load, freshName, j59gen)',r8);
  ok(errs.length===0,'no page errors',errs.slice(0,5));
  await ctx.close();
  /* 7 screenshots */
