@@ -152,7 +152,7 @@ function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=has("nongnay")?
  if(k==="trinhth")return[`${W} Sủng -10 · Thái hậu quý ngươi +2`,"Thái hậu quý ngươi -4"];
  if(k==="trinhhh")return[`${W} bị cấm túc ${m} tháng`,"Hoàng hậu thân -5"];
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${W} oán ngươi +10`,`Danh -3 · ${W} oán ngươi +15`];
- if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} thân +8 và nắm ${n} chứng cứ về ${W} · kèm: ${W} oán ngươi +5`,""]}
+ if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} thân +8 · ${b?j78who(b):"người mua"} nắm ${n>0?n+" ":""}chứng cứ về ${W} · kèm: ${W} oán ngươi +5`,""]}
  if(k==="tieuhuy")return[`${W} quý ngươi +${Math.min(30,8*n)} · ${W} oán ngươi -${Math.min(30,10*n)} · Đức +2`,""];
  return null}
 ["trinhth","trinhhh","uyhiep","banphe","tieuhuy"].forEach(k=>{try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=J78.cardV;const o=j78out(k,S,t);return o}})}catch(e){}});

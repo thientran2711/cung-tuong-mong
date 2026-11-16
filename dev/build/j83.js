@@ -36,7 +36,7 @@ function wkNeedRaw(p,kind,mat,t){for(let r=0;r<=10;r++)if(wkTierP(p,wkScore(p,ki
 function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw} + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLv(p,K.a)}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${c.lv>=3?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
 /* act-text (owner 15/11): the quality tiers in ONE clear line, no code-like signs: "chơi 5 phần ra Khá, 9 phần ra Tinh xảo, Tuyệt phẩm cần vật liệu quý" */
 function wkTierTxt(p,kind,mat){const lo=wkTierP(p,wkScore(p,kind,mat,WAVG),mat),N=[1,2,3].filter(t=>t>lo).map(t=>{const r=wkNeedRaw(p,kind,mat,t);return r<0?(t===3&&BAL.wk.cap[mat]<3?`${WTIER[t]} cần vật liệu quý`:`${WTIER[t]} chưa với tới`):`${r} phần ra ${WTIER[t]}`});
- return [`chơi ${WAVG} phần ra ${WTIER[lo]}`].concat(N).join(", ")}
+ const L=(lo>0?[`${WAVG} phần đã ra ${WTIER[lo]}`]:[]).concat(N);return L.length?(/^\d/.test(L[0])?"chơi ":"")+L.join(", "):`chơi ${WAVG} phần đã ra ${WTIER[lo]}`}
 /* for act cards / options: the tier line as one Ghi chú "(…)", the gains of the better material as Được items */
 function wkOddsTxt(p,kind,mat){const g=[];if(BAL.wk.val[mat])g.push(`quà giá trị +${BAL.wk.val[mat]}`);if(BAL.wk.sell[mat]&&WK[kind].mat[mat])g.push(`bán ra thêm Bạc +${Math.round(WK[kind].mat[mat]*BAL.wk.sell[mat])}`);
  return [`(${wkTierTxt(p,kind,mat)})`].concat(g).join(" · ")}
@@ -152,7 +152,7 @@ function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=
  const t=k==="mon"?(S.emp.known.dish?`Tự tay nấu ${s}, món ngài thích.`:`Tự tay nấu ${s}; chưa biết ngài thích món gì.`):k==="bhoa"?(S.emp.known.flower?`Cắm một bình ${s}, loài hoa ngài yêu.`:`Cắm một bình ${s}; chưa biết ngài thích hoa gì.`):k==="tho"?"Mài mực, viết một bài thơ.":"Thêu một chiếc khăn lụa.";
  const an=ARTS.find(x=>x.k===a).n;
  return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-10:-15},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<25,
-  x:`${prac?"":`tiến bộ ${an} ${kStepW(1,2)} · `}tự tay chơi thì ra thành phẩm ${k==="theu"?"để bán hay tặng":"để dâng tặng"} · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
+  x:`${prac?"":`tiến bộ ${an} ${kStepW(1,2)} · `}tự tay chơi thì ra thành phẩm · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.srv||(typeof isSrv==="function"&&isSrv())||!Array.isArray(deck))return;deck.push(wkDeckCard())}catch(e){}}})();
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
 function wkTargets(a){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,`${rkName(v)} ${v.name}`]));if(a.maid)L.push(["maid",`${a.maid.name} (cung nữ thân tín)`]);return L}
