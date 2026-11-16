@@ -19,7 +19,7 @@ Base main at start: 900ace7fb.
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
 | D46b new placeholders + Tứ đức/arts self-study pictures | review/placeholder-pics3-r1 | sonnet | PASS 696127b32 (contains opt-pics2-r1 + placeholder-pics2-r1) |
 | D50 consort full-body placeholders | — | sonnet | DONE — NO ART NEEDED: audit of 8744 manifest entries vs CDN = 0 missing; 400-turn soak 0 empty figFor. Cause is code (see NOTE) |
-| D52 skin-match audit | review/skin-audit @704b8f669 (240 fixed + uploaded) → review/skin-audit-r1 | sonnet | REVIEWING (separate session) |
+| D52 skin-match audit | review/skin-audit @704b8f669 (240 fixed + uploaded) → review/skin-audit-r1 | sonnet | REVIEWING (session session_011xDdVQAh8KF6j8akV71fAj) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
 | D45 small art + wiring | review/small-art-wire-r1 | sonnet | PASS 6bce72fa6 — CONDITIONAL on kit keeper (K10: kitReward CSS for >6-row chest lists) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
