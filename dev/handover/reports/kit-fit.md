@@ -192,3 +192,7 @@ Round 2 / 2b DONE: SẴN SÀNG KIỂM 7865ed13a (sent to MAIN s23). ROUND 3 NOT 
 Recipe (what worked here): sparse worktree /home/user/wt/<name>; merge latest origin/main (built files conflict → `git checkout --theirs index.html sw.js assets.json`, then
 `bash dev/site/build_site.sh` and commit them); `python3 -m http.server <random port> --bind 127.0.0.1` (kill by PID); new life + skip Luân hồi in tests:
 `start()` then click `#kroul .krskip` (see dev/test/kit-fit2.js case id / newgame-ui.js). Keep dev/test/kit-fit.js + kit-fit2.js at 0 after the change.
+- ROUND 3 item 2 (s23 relay 20:29Z): face picker in "Thân phận kiếp này" (DUNG MẠO · CHẠM ĐỂ CHỌN). Owner verbatim: "bỏ cái tab đấy luôn, chỉ hiện ra
+  những cái khung avatar cho mình chọn thôi" → remove the "Phi tần 32 | Cung nữ 52" tabs and the counts; ONE list of avatar frames (all faces, paged /
+  scrolling as now). Whole group = every face/avatar picker (Kiếp mới, co-op, new life) — j86 / kitPickerGo (j79). CO-OP FIRST: the change must work the
+  same in co-op; include the co-op origin / face pick in the shots.
