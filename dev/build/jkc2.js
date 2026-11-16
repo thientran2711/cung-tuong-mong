@@ -334,10 +334,12 @@ const KC2CH={
 for(const k in KC2CH)KCE[k]={get t(){try{return kc2ChT()}catch(x){return""}},b:KC2CH[k]};
 
 /* ---------- the sending event (kit event card) and the selection (OD:L1250: ceiling earned by the result) ---------- */
-/* EXAM HOOK: a dedicated selection mini-game (OD:L1244 "minigame exam") can replace the j82/j91 round: window.kcEntryExam(kind, done(raw 0..10)).
+/* EXAM HOOK: a dedicated selection mini-game (OD:L1244 "minigame exam") can replace the j82/j91 round: window.kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}).
+   kind = "dan" (cnv home), "nc" (nc/bd home) or the origin key (direct "Vào cung ngay"); info.art = the round she chose (kim / le / mua / an art key);
+   done must be called exactly once with 0..10; the "wait" choice never reaches the hook (it scores 5); bots (window.__bot) skip it. (reviewer r1)
    TODO(selection-minigame): when that worker ships, it sets window.kcEntryExam; until then the round is playArt (the same engine as Phúc tuyển). */
 function kc2Play(art,title,note,fin){if(window.__bot||typeof playArt!=="function"){fin(cl(3+R(6),0,10));return}
- if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam((S.kc&&S.kc.kd)||S.origin.k,fin);return}catch(e){console.error(e)}}
+ if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam((S.kc&&S.kc.kd)||S.origin.k,fin,{art,origin:S.origin&&S.origin.k,title,note});return}catch(e){console.error(e)}}
  try{playArt({art,title,note,onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
 Object.assign(KCE,{
  d_tuyen:{t:"Ngày tuyển cung nữ",b:()=>{const K=S.kc;const ly=kcR("ly");if(K.gach)return{who:kcFace(ly||K.fam[0]),t:`<p>Thái giám Nội vụ phủ về huyện đường; con gái các xã xếp hàng trước cổng. Tên ngươi đã bị gạch khỏi sổ. Xuân Đào đứng trong hàng, ngoái lại nhìn ngươi.</p>`,o:[
