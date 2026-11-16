@@ -39,7 +39,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L460] - (13:35Z) Trung y batch 1 (c01–c12, 8 tiers) passes; keep, push to CDN when the branch passes review.
 [OD:L472] - (14:35Z) Makeup: "đẹp" slightly less blush; "diêm dúa" = the current "đẹp" blush a bit stronger (deeper lips, glossier powder), still pretty, NOT clownish.
 [OD:L473] - (14:40Z) Reactions to outfit/makeup (strict host punishing a bare face, jealous people, the Emperor liking/disliking, consorts teasing gaudiness…) must SHOW AN EVENT FRAME, not silently in the log. Max 1–2 frames per occasion, the rest merged.
-[OD:L475] - (15:00Z) APPROVED: new makeup version (đẹp + diêm dúa, a820a52ab). APPROVED rosy-skin sample → fix 807 portraits. Male mood cells: only male/female needed, but the middle-aged male set already made is used anyway.
+[OD:L475] - (15:00Z) APPROVED: new makeup version (đẹp + diêm dúa, a820a52ab). Male mood cells: only male/female needed, but the middle-aged male set already made is used anyway.
 [OD:L476] - [ ] (15:00Z) Huadian on face c05 in outfits t5, t8 still big → shrink + audit every consort portrait.
 ### OD:L552 15/11 ~19:05Z — Portrait scale per group + makeup colours (owner)
 [OD:L555] - Makeup mini-game, "diêm dúa" side: like modern fashion/makeup games, the colours she picks (eyeshadow, blush, lipstick; eyebrow if any) must show in THOSE EXACT COLOURS on her own character picture (portrait + figure). Today only blush shows; add lips and eyes without making the picture look off. The "đẹp" look already approved stays as is.

@@ -14,7 +14,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 ### OD:L552 15/11 ~19:05Z — Portrait scale per group + makeup colours (owner)
 [OD:L554] - Not every person in the game needs the same scale, but within EACH GROUP of people (boys, girls, consorts, maids, eunuchs, men...) portraits must share one face scale, so switching person to person never jumps big/small. Fix the whole class (scan all groups).
 ### OD:L618 15/11 ~20:15Z — Calendar ideas, Trân nữ seal on event frames, rosy skin mismatch (owner)
-[OD:L622] - Rosy skin: some consorts' faces are now rosier than their hands (mismatch) → hands/neck/arms must match the face tone (whole class audit). Player look 1 (fig-player-look1) still does not look rosy → fix. Owner marked Ngọc Lan (maid) as the liked reference.
 ### OD:L829 15/11 (session 8) — Event dialog figure column far too big; cropping the skirt is OK (owner screenshot)
 [OD:L831] - Screenshot dev/handover/refs/owner-stage-fig-huge.jpg (VIỆC "Thái hậu chê dung nhan", tablet portrait): the left figure column takes ~60 % of the dialog with a huge full-body Thái hậu; KIT §32.2 says figure column 36 % (Fold) / ~170 px of a 470 px dialog (iPad), figure ≤ 40 dvh → the kit cap is not enforced on this dialog.
 [OD:L833] - Decision: enforce §32.2 on EVERY event dialog: figure column capped (36 % / ~170 px), and when height is short CROP the figure (owner: cutting the skirt is fine — show head to knees/waist, face always fully in view) instead of growing the column or shrinking the face. Whole family scan of all dialogs with a stage figure at all viewports. → worker review/stage-fig-size.
@@ -66,7 +65,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L408] - [ ] (11:10Z) Unmet people still show their faces in news cards and Tuần lục pages → kit-fig2 audits every place that draws person images.
 [OD:L409] - [ ] (11:20Z) News card: Tịch Nhan/Ngọc Hành pictures show the wrong person, cell backgrounds same colour despite different tiers → kit-fig2 shares images with Hậu cung + frame colour by current tier.
 [OD:L412] - (11:30Z) Portrait in frame: NO zoom; keep the old ratio (chest up), only MOVE the image up to the frame's top edge → shows more down toward the waist.
-[OD:L415] - (11:30Z) Facial skin: besides cleaning, faces must look rosy and healthy (light blush, not heavy); fix pale/wan faces.
+[OD:L1305] - (16/11 12:45Z, s15 chat) OWNER (verbatim): "Thôi tất cả các hình về bỏ cái lớp dòng đi, về cái B á." → choice B for ALL pictures: remove the rosy-skin layer from every figure/portrait (back to the un-rosied skin, test image B in reports/skin-light/owner-test-ngocthanh.jpg). Not kitFigLight v1 (C).
 [OD:L416] - (11:35Z) Portrait in frame: the BODY must be horizontally centred in the frame (many images lean left, gap at right edge); the head may be slightly off. Keep ratio, only shift.
 [OD:L439] - (12:45Z) Children's portraits (Hoàng tự) each zoomed differently → normalise by head size for EVERY portrait family (children, công tử, servants, Emperor…).
 [OD:L441] - (12:50Z) Hoàng tự trong cung (other consorts' children): must show what the whole palace knows (mother, age, birth order, title, who raises them). Unmet children: grey child silhouette everywhere.
