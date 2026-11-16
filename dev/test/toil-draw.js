@@ -37,6 +37,16 @@ const res=[];const ok=(c,msg,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' 
  await p.evaluate(()=>{try{kg82Close()}catch(e){}TOIL.st=null;document.querySelectorAll('.ktrv,.kmov').forEach(e=>e.remove())});await p.waitForTimeout(500);
  const bad=await sitOnce('sloppy',{off:[0,-22],j:10,cheek:[0,-40],rub:22,lip:9,n:12});console.log('sloppy',JSON.stringify(bad));
  ok(bad.t&&bad.t.mk==='vung'&&bad.t.slip,'sloppy hand (brows on the forehead, powder off the cheek): vụng with the part named',bad);
+ /* no face points (late file / failed fetch): the board holds ("Đang soi gương…", brush off), then plays her hand from skill — never a guessed face */
+ for(let i=0;i<6;i++){const c=await p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&/^(Tiếp theo|Đã hiểu|Chạm để đóng)$/.test(x.textContent.trim()));if(b){b.click();return 1}return 0});if(!c)break;await p.waitForTimeout(700)}
+ await p.evaluate(()=>{try{kg82Close()}catch(e){}TOIL.st=null;document.querySelectorAll('.ktrv,.kmov').forEach(e=>e.remove())});
+ const hold=await p.evaluate(async()=>{Q.length=0;S.toilette=null;used=0;toilOpen();const g0=MK_FIT.get,mw=BAL.toil.meshWait;MK_FIT.get=()=>null;BAL.toil.meshWait=1500;TOIL.st.col=toilColFix({});toilMakeup();
+   await new Promise(r=>setTimeout(r,500));const held=!TOIL.geo.ready()&&!TOIL.geo.lip()&&!(TOIL.test.I);await new Promise(r=>setTimeout(r,2200));MK_FIT.get=g0;BAL.toil.meshWait=mw;
+   return{held,auto:!!(TOIL.st&&TOIL.st.auto),t:S.toilette&&{score:S.toilette.score,look:S.toilette.look,mk:toilMk(S.toilette)}}});
+ ok(hold.held&&hold.auto&&hold.t,'no face points: board holds, then her hand is played from skill (no guessed targets)',hold);
  const npc=await p.evaluate(()=>{const c={};for(const v of liveRivals(false)){const r=toilNpc(v);const k=toilMk(r);c[k]=(c[k]||0)+1}return c});ok(Object.keys(npc).length>0,'NPC looks from the same table',npc);
+ /* co-op: an NPC's look reads world facts only — this seat being Hoàng hậu / in cold palace / summoned tonight changes nothing */
+ const seat=await p.evaluate(()=>{const f=()=>JSON.stringify(liveRivals(false).map(v=>toilNpc(v)));const a=f();const k={rank:S.rank,tonight:S.tonight,out:S.out};S.rank=7;S.tonight="me";S.out=true;const b=f();Object.assign(S,k);return a===b});
+ ok(seat,'NPC look independent of this seat (rank / tonight / cold palace)');
  ok(!errs.length,'no page errors',errs.slice(0,4));
  console.log(res.every(x=>x)?`PASS ${res.length}`:`FAIL ${res.filter(x=>!x).length}/${res.length}`);await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});

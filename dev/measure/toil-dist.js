@@ -41,7 +41,7 @@ module.exports={ctx,geom,FACES,MK,HAND,sit};
 if(require.main===module){const SK=[.12,.4,.75,1];const PRE=(()=>{const m=SRC.match(/const TOIL_PRE=\[([\s\S]*?)\]\];/);const L=eval('['+m[1]+']]');return{dep:L.filter(x=>x[2]==='dep').map(x=>x[4]),diem:L.filter(x=>x[2]==='diem').map(x=>x[4])}})();const OCC=[["th",.4],["thuong",.4],["night",.1],["fest",.1]];
  const n=+process.argv[2]||600;console.log('faces',FACES.length);const tab=[];
  for(const hn of ["kheo","thuong","voi"])for(const ch of ["nha","tu","diem"])for(const sk of SK){const c={vung:0,vua:0,dep:0,tuyet:0,diem:0},sl={brow:0,powder:0,son:0};let ms=0,pb=0,pp=0,ps=0;
-  for(let i=0;i<n;i++){const f=FACES[i%FACES.length];const g=geom(f);const I=ctx.toilIdeal(MK[f],g.img,g.T,g.fws);const r=sit(g,I,HAND[hn],sk);
+  for(let i=0;i<n;i++){const f=FACES[i%FACES.length];const g=geom(f);const I=ctx.toilIdeal(MK[f],g.img,g.fws);const r=sit(g,I,HAND[hn],sk);
    const pre=ch==="nha"?PRE.dep[Math.floor(R()*8)]:ch==="diem"?PRE.diem[Math.floor(R()*8)]:Object.fromEntries(["mat","ma","son","may"].map(k=>{const L=PRE.dep.concat(PRE.diem).map(p=>p[k]);return[k,L[Math.floor(R()*L.length)]]}));
    let o=R(),occ="thuong";for(const [k,p] of OCC){if(o<p){occ=k;break}o-=p}
    const H=ctx.toilHeavy(pre,ch==="diem"?"diem":"",R()<.15?"showy":"fit",r.over);const L=ctx.toilLookOf(r.P,r.score,H,ctx.toilAllow([occ]),Math.floor(R()*1e9));
