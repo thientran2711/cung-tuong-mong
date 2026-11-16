@@ -227,3 +227,4 @@ Follow-ups: canon overwrite OD:L1141 → L1151 (mortality); "plead beforehand" a
 - (11:33Z real s15) merge-train-7 green ef3dcbd5 (5 D branches) on 92668096, waits GO after merge-train-6. FOLLOW-UP (kit keeper): kit-table 3 fails pre-existing on main 92668096 (Mệnh truyện / Triều cục kit-adjacent spread 47.9 px); re-check after design-scale-r1 lands before opening a kit worker.
 - (11:39Z real s15) OWNER AWAKE (asked Q6 = C7 balance-pass-r1 HH 45 % vs 32 %; s15 asked with 3 options, rec 1 = merge + ex.bar[2] 28→30 + re-measure n≥30). LIVE: main = 802fe821 (design-scale-r1: one page 590x820, uniform scale). Smoke asked. GO → kit-keeper-2-r2. Pre-existing: scene-end 'bloom' early=true FAIL.
 - (11:41Z real s15) OWNER Q6 = 2 → balance-pass-r1 added to merge-train-6 as is; HH tuning → B (D31 re-measure after live).
+- (11:50Z real s15) LIVE: main = 695934d1 (kit-keeper-2-r2 item-big; scene-end bloom FAIL = test timing, fixed in test). Smoke asked. GO → mortality-r1.
