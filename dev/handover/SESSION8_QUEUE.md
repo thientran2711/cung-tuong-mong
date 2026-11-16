@@ -119,3 +119,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C54 | review/mortality (owner s8: age-based death/illness for all incl. Emperor/Thái hậu; poison/assassination; Emperor death → her fate) | RUNNING (opus) |
 | C55 | review/elder-staff (owner s8: real named elderly staff in offices; tutorial guide = real NPC via staffGuide()) | RUNNING (opus) |
 | watch 16/11 | panel-size-r1 a523531da → main. merge-train-1 (6) running, then merge-train-2 (13 PASSes). Kit keeper review/kit-keeper-1 for K1–K5 + KIT number collisions §71/§72. tutorial-r2 10a37960b reviewer running. Act split + lifespan: waiting for the owner. |
+| C56 | review/facefx-all (face marks for every person; from appearance-port-r1) | RUNNING (sonnet) |
