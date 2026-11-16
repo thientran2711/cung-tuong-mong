@@ -15,8 +15,8 @@ function load(ref){const J=rd(ref,'jroad.js');const src=J.slice(J.indexOf('const
   relAdd(){},oanAdd(){},log(){},PEND:{},e67dad:()=>0});
  Object.defineProperty(ctx,'S',{get:()=>T.S});ctx.window=ctx;
  vm.runInContext(fs.readFileSync('dev/build/jbalroad.js','utf8'),ctx);/* BAL.road keys (bars the odds read); the OLD rdDef ignores .fx */
- vm.runInContext(src+'\n'+FILES.map(f=>rd(ref,f)).join('\n')+'\n;this.__A=ARC67',ctx);return ctx.__A}
-const OLD=load(REF),NEW=load(null);
+ vm.runInContext(src+'\n'+FILES.map(f=>rd(ref,f)).join('\n')+'\n;this.__A=ARC67;this.__R=RD97L',ctx);return [ctx.__A,ctx.__R]}
+const [OLD,ROLD]=load(REF),[NEW,RNEW]=load(null);
 const ST=['th','duc','sung','danh','bac','suc','tamco','tai','mat','hh','sac','an','loy','rel','ghen','tam','tin','age'];
 let rnd=12345;const R=()=>(rnd=(rnd*1103515245+12345)%2147483648)/2147483648;
 function life(){const S={rank:Math.floor(R()*10),arts:R()<.5?{y:Math.floor(R()*6)}:null,st:{f14:{fb:{}}}};for(const k of ST)S[k]=Math.floor(R()*130)-15;
@@ -35,6 +35,12 @@ for(const id of ids){const a=OLD[id],b=NEW[id];
     const f={};for(const g of FL)if(R()<.5)f[g]=1;const AA={f,sc:0,act:{v:1}};const p=x.o(AA),q=y.o(AA);row[id.split('_')[0]].oTrials++;
     if(!Object.is(p,q)){bad.push(`${id}.${bk}[${i}].o ${x.o} : ${p} → ${q}`);break}}});}
  for(const ek of Object.keys(a.E||{})){const x=a.E[ek].fx,y=(b.E[ek]||{}).fx;if(x===undefined&&y===undefined)continue;add(id,'fx');if(!same(x,y))bad.push(`${id}.E.${ek}.fx ${JSON.stringify(x)} → ${JSON.stringify(y)}`)}}
+/* the rare finale choices (RD97L): numbers, condition text and the condition's answer on random lives */
+let rareN=0;if(ROLD.length!==RNEW.length)bad.push('RD97L count');
+ROLD.forEach((x,i)=>{const y=RNEW[i]||{};rareN++;for(const k of ['a','p','np','sc','c','fx'])if(!same(x[k],y[k]))bad.push(`RD97L ${x.a}.${k} ${JSON.stringify(x[k])} → ${JSON.stringify(y[k])}`);
+ if(!x.x||!y.x||x.x[1]!==y.x[1])bad.push(`RD97L ${x.a}.x text «${x.x&&x.x[1]}» → «${y.x&&y.x[1]}»`);
+ else for(let t=0;t<400;t++){T.S=life();const AA={f:{},sc:0,act:{v:1}};let p,q;try{p=x.x[0](AA)}catch(e){p='E'}try{q=y.x[0](AA)}catch(e){q='E'}if(p!==q){bad.push(`RD97L ${x.a}.x answer ${p} → ${q}`);break}}});
+console.log('RD97L rare finale choices compared:',rareN);
 console.log('| origin | chapters | c (cost) | w (gain) | l (loss) | o (odds fn) | odds trials | E fx | differences |');console.log('|---|---|---|---|---|---|---|---|---|');
 for(const f in row){const r=row[f];console.log(`| ${f} | ${r.chapters.size} | ${r.c} | ${r.w} | ${r.l} | ${r.o} | ${r.oTrials} | ${r.fx} | ${bad.filter(x=>x.startsWith(f+'_')).length} |`)}
 console.log(bad.length?'DIFFERENT:\n  '+bad.slice(0,40).join('\n  '):'SAME: every value before = after (deep-equal c/w/l/fx, odds === on every trial)');process.exit(bad.length?1:0);

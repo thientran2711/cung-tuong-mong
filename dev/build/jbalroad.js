@@ -34,6 +34,25 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  tienSc:2,
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10],
+ /* the rare finale choice of every road (RD97L «Cơ duyên hiếm», filled by rdRare in jroad.js): p = chance it shows, np = path options needed,
+    sc = Lợi thế it gives, c = cost, fx = ending change, bar = the stat floor of its condition (the condition text prints it; stat named after the comment) */
+ rare:{
+ tt_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:40}, /* x: duc ≥ bar */
+ tt_oan_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45}, /* x: duc ≥ bar */
+ tt_tranh_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:3},bar:40}, /* x: duc ≥ bar */
+ tt_mat_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:8,hh:10},bar:40}, /* x: hh ≥ bar */
+ cn_chu_11:{p:.1,np:2,sc:2,c:{suc:-3},fx:{danh:10,duc:5},bar:45}, /* x: duc ≥ bar */
+ cn_tinh_11:{p:.1,np:3,sc:2,c:{sung:-4},fx:{danh:6,sung:4,mat:2},bar:45}, /* x: sung ≥ bar */
+ cn_ban_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:10,hh:10,th:6},bar:40}, /* x: duc ≥ bar */
+ cn_than_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:12,duc:4,mat:2},bar:45}, /* x: danh ≥ bar */
+ muoi_tuoc_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:12,bac:80},bar:45}, /* x: danh ≥ bar */
+ muoi_lau_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:12,bac:100},bar:45}, /* x: tamco ≥ bar */
+ muoi_doi_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45}, /* x: duc ≥ bar */
+ muoi_no_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:4},bar:40}, /* x: duc ≥ bar */
+ dtq_bien_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:5},bar:40}, /* x: tamco ≥ bar */
+ dtq_vu_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:4},bar:40}, /* x: tamco ≥ bar */
+ dtq_binh_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{sung:8,danh:10},bar:50}, /* x: sung ≥ bar */
+ dtq_huynh_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:12,sung:5},bar:45}, /* x: tamco ≥ bar */},
  /* every chapter .5–.11 of every full road: option / ending numbers (see the header) */
  fx:{
  tt_co_5:{s1:[{c:{duc:-3},w:{bac:60}},{c:{mat:-1},w:{duc:3,danh:2}},{c:{suc:-3},o:[40,["d","tamco",3]],w:{tamco:2},l:{danh:-2}}],s2:[{c:{suc:-2},o:[40,["f","own",0,10],["d","danh",5]],w:{danh:2}},{c:{bac:-40},o:[40,["d","tamco",3]],w:{tamco:2},l:{sung:-3}},{c:{danh:-2},w:{duc:2}}],c1:[{c:{danh:-3},w:{duc:4}},{c:{bac:-60,duc:-3},o:[45,["m","mat",5]],l:{danh:-5}},{c:{suc:-4},o:[40,["d","tamco",3]],w:{tamco:3},l:{sung:-3}}],c2:[{c:{bac:-20},w:{mat:1}},{c:{suc:-3},o:[45,["d","tamco",3]],w:{tamco:3},l:{danh:-3}},{c:{},o:[35,["d","danh",4]],w:{duc:2},l:{sung:-2}}],t1:[{c:{bac:-30},o:[45,["m","mat",4]],w:{mat:1},l:{danh:-2}},{c:{hh:-3},w:{danh:2}},{c:{danh:-2},w:{danh:2}},{c:{mat:-1},w:{tamco:2}}],x1:[{c:{suc:-5},o:[35,["f","own",15,0],["d","tamco",5]]},{c:{hh:-5},o:[40,["f","obey",15,0],["d","sung",6]],w:{danh:2}},{c:{danh:-2},w:{duc:4}}],E:{win:{danh:6,tamco:2},mid:{danh:2},lose:{sung:-5,danh:-3}}},

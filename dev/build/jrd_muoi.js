@@ -235,10 +235,9 @@ rdDef("muoi_tuoc",11,{t:"Tước vị của nhà",w:"emp",sj:"tước vị của
  E:{win:{k:1,tag:"Tước truyền đời",w:"emp",t:"Hoàng thượng phá lệ: nhà buôn muối có tước truyền đời, điều xưa nay hiếm nhà buôn nào có. Tấm biển trước cửa được sơn lại, và cháu chắt sau này sẽ không ai phải nghe câu “mùi muối” nữa."},
   mid:{k:0,tag:"Tước vì công, một đời",t:"Phụ thân giữ tước đến cuối đời, tước không truyền. Nhưng sổ triều ghi rõ: tước ấy vì công, không vì bạc."},
   lose:{k:-1,tag:"Biển bị gỡ, nhà mang tiếng",t:"Tờ chiếu không đóng ấn. Tấm biển trước cửa nhà bị gỡ xuống. Nhà ngươi vẫn giàu, vẫn bán muối, và vẫn bị gọi là nhà buôn."}}});
-RD97L.push({a:"muoi_tuoc_11",tag:"Hoàng thương ngự phong",w:"emp",p:.1,n:"Xin cho nhà dâng muối vào Ngự thiện phòng",c:{suc:-4},
- path:["Khuyên cha mở trường","Khuyên cha giữ mình","Viết thư: nhà ta không cần tước","Ngăn huynh lại","Đốt bức thư cũ","Dâng muối hoa đầu mùa","Dâng sổ thuế muối"],np:2,bad:["Lo cho huynh một chức nhỏ","Dâng vàng bạc","Gửi bạc lo lần cuối"],sc:2,x:[()=>S.danh>=45,"Danh từ 45"],
- t:"Ngươi không xin tước, chỉ xin cho muối nhà được vào bếp vua. Hoàng thượng nếm muối nhà ngươi một năm, rồi hạ chỉ: nhà buôn muối Giang Nam là Hoàng thương, muối ngự thiện lấy từ ruộng nhà ấy, đời đời. Tấm biển mới khắc hai chữ ngự bút, và không ai trong triều còn dám nói chữ “con buôn” như một lời chê.",
- fx:{danh:12,bac:80},rw:"ngocboi",ti:"Con gái nhà Hoàng thương"});
+RD97L.push(rdRare({a:"muoi_tuoc_11",tag:"Hoàng thương ngự phong",w:"emp",n:"Xin cho nhà dâng muối vào Ngự thiện phòng",
+ path:["Khuyên cha mở trường","Khuyên cha giữ mình","Viết thư: nhà ta không cần tước","Ngăn huynh lại","Đốt bức thư cũ","Dâng muối hoa đầu mùa","Dâng sổ thuế muối"],bad:["Lo cho huynh một chức nhỏ","Dâng vàng bạc","Gửi bạc lo lần cuối"],x:[()=>S.danh>=RR("muoi_tuoc_11").bar,"Danh từ "+RR("muoi_tuoc_11").bar],
+ t:"Ngươi không xin tước, chỉ xin cho muối nhà được vào bếp vua. Hoàng thượng nếm muối nhà ngươi một năm, rồi hạ chỉ: nhà buôn muối Giang Nam là Hoàng thương, muối ngự thiện lấy từ ruộng nhà ấy, đời đời. Tấm biển mới khắc hai chữ ngự bút, và không ai trong triều còn dám nói chữ “con buôn” như một lời chê.",rw:"ngocboi",ti:"Con gái nhà Hoàng thương"}));
 
 /* ---------- muoi_lau · Thuyền muối đêm ---------- */
 /* ROAD_MAP §4.3. .4 = ARC67.muoi_lau (win: house cleared, made a salt-office agent; mid: father lives, half the fortune lost;
@@ -464,10 +463,9 @@ rdDef("muoi_lau",11,{t:"Trắng án",w:"emp",sj:"án muối của nhà ngươi",
  E:{win:{k:1,tag:"Trắng án, nhà kẻ hãm hại đổ",w:"emp",t:"Nhà ngươi trắng án, tên được xóa khỏi sổ nợ. Nhà kẻ hãm hại mất bến, mất mối. Ở Giang Khẩu, người ta lại gọi nhà ngươi là nhà buôn muối sạch nhất bến."},
   mid:{k:0,tag:"Trắng án, mất diêm dẫn",t:"Nhà ngươi trắng án, nhưng diêm dẫn bị thu. Nhà không còn làm muối, chỉ còn cái tên sạch."},
   lose:{k:-1,tag:"Nộp phạt, mang tiếng",t:"Án khép bằng một khoản phạt. Nhà ngươi giữ được người, mất tiếng. Trong cung, người ta vẫn nhắc chuyện thuyền muối đêm."}}});
-RD97L.push({a:"muoi_lau_11",tag:"Sổ muối dâng ngự án",w:"emp",p:.1,n:"Tự tay dâng sổ Diêm vận ty, xin cải lệ muối",c:{suc:-4},
- path:["Khuyên cha giữ nghề","Xin huynh giữ bến","Tha cho họ","Để luật xử","Trả lại một phần","Dâng lên Hoàng thượng","xin giữ ngạch cũ"],np:2,bad:["Đốt đi cho yên","xin thêm ngạch muối dư","Đòi họ bồi thường"],sc:2,x:[()=>S.tamco>=45,"Tâm cơ từ 45"],
- t:"Ngươi đặt bộ sổ thật của Diêm vận ty lên ngự án, xin không phải cho nhà mình mà cho cả Giang Nam. Hoàng thượng đọc suốt đêm. Sáng ra, ngài hạ chỉ cải lệ muối: muối dư phải vào kho, diêm dẫn phải có số riêng, và nhà ngươi được giao giữ sổ đối chiếu cho triều. Từ đó, thuyền muối đêm không còn ai dám chở.",
- fx:{danh:12,bac:100},rw:"nt_dongchau",ti:"Người dâng sổ muối"});
+RD97L.push(rdRare({a:"muoi_lau_11",tag:"Sổ muối dâng ngự án",w:"emp",n:"Tự tay dâng sổ Diêm vận ty, xin cải lệ muối",
+ path:["Khuyên cha giữ nghề","Xin huynh giữ bến","Tha cho họ","Để luật xử","Trả lại một phần","Dâng lên Hoàng thượng","xin giữ ngạch cũ"],bad:["Đốt đi cho yên","xin thêm ngạch muối dư","Đòi họ bồi thường"],x:[()=>S.tamco>=RR("muoi_lau_11").bar,"Tâm cơ từ "+RR("muoi_lau_11").bar],
+ t:"Ngươi đặt bộ sổ thật của Diêm vận ty lên ngự án, xin không phải cho nhà mình mà cho cả Giang Nam. Hoàng thượng đọc suốt đêm. Sáng ra, ngài hạ chỉ cải lệ muối: muối dư phải vào kho, diêm dẫn phải có số riêng, và nhà ngươi được giao giữ sổ đối chiếu cho triều. Từ đó, thuyền muối đêm không còn ai dám chở.",rw:"nt_dongchau",ti:"Người dâng sổ muối"}));
 
 /* ---------- muoi_doi · Năm đói ở Giang Nam ---------- */
 /* .4 = ARC67.muoi_doi (win «Biển vàng Nghĩa thương» / mid «Qua năm đói» / lose «Mang tiếng đầu cơ»). The road follows the years after the
@@ -689,10 +687,9 @@ rdDef("muoi_doi",11,{t:"Ơn hay oán",w:"emp",sj:"tiếng nhà ngươi ở Giang
  E:{win:{k:1,tag:"Giang Nam nhớ ơn nhà ngươi",w:"emp",t:"Từ năm đói đến năm hạn, Giang Nam nhớ một nhà buôn muối mở kho đúng lúc. Ở bến Giang Khẩu, tên nhà ngươi được nhắc cùng với mùa gặt.",go:()=>e67kho(4)},
   mid:{k:0,tag:"Giữ được của, nhạt tiếng nhà",t:"Nhà ngươi vẫn giàu, kho vẫn đầy. Giang Nam không oán, nhưng cũng chẳng ai nhắc tên nhà ngươi khi nói chuyện năm đói."},
   lose:{k:-1,tag:"Mất của, mất cả tiếng",t:"Chiếu nhắc năm đầu cơ, Hộ bộ phạt bạc. Ở Giang Nam người ta vẫn gọi nhà ngươi là nhà đầu cơ; trong cung, ngươi là ‘nương nương gạo’."}}});
-RD97L.push({a:"muoi_doi_11",tag:"Ngự bút ban hai chữ Thục đức",w:"emp",p:.1,n:"Xin Hoàng thượng cho khắc tên dân góp sức lên bia",c:{suc:-4},
- path:["Nhận bia, cho khắc cả tên dân","Xin cha lập kho nghĩa","Bỏ qua chuyện cũ","Xin cha dâng nguyên rương sổ","Tâu thật cả việc tốt"],np:2,bad:["Chép riêng phần tốt","Bảo cha cứ làm ăn","Xin ngài ban cho cha"],sc:2,x:[()=>S.duc>=45,"Đức từ 45"],
- t:"Hoàng thượng tự tay viết hai chữ ‘Thục đức’ ban cho ngươi, sai khắc lên đầu tấm bia ở bến Giang Khẩu, dưới đó là tên mấy trăm người dân đã chèo thuyền, gánh gạo năm đói. Từ đó cả hậu cung không ai còn gọi ngươi là ‘nương nương gạo’.",
- fx:{danh:12,duc:4},go:()=>e67kho(5),rw:"nt_nhuy",ti:"Người có đức của Giang Nam"});
+RD97L.push(rdRare({a:"muoi_doi_11",tag:"Ngự bút ban hai chữ Thục đức",w:"emp",n:"Xin Hoàng thượng cho khắc tên dân góp sức lên bia",
+ path:["Nhận bia, cho khắc cả tên dân","Xin cha lập kho nghĩa","Bỏ qua chuyện cũ","Xin cha dâng nguyên rương sổ","Tâu thật cả việc tốt"],bad:["Chép riêng phần tốt","Bảo cha cứ làm ăn","Xin ngài ban cho cha"],x:[()=>S.duc>=RR("muoi_doi_11").bar,"Đức từ "+RR("muoi_doi_11").bar],
+ t:"Hoàng thượng tự tay viết hai chữ ‘Thục đức’ ban cho ngươi, sai khắc lên đầu tấm bia ở bến Giang Khẩu, dưới đó là tên mấy trăm người dân đã chèo thuyền, gánh gạo năm đói. Từ đó cả hậu cung không ai còn gọi ngươi là ‘nương nương gạo’.",go:()=>e67kho(5),rw:"nt_nhuy",ti:"Người có đức của Giang Nam"}));
 
 /* ---------- muoi_no · Món nợ trong cung ---------- */
 /* .4 = ARC67.muoi_no (win «Món nợ thành tình chị em» / win2 «Nắm thóp {v}» / mid «Nợ xong, người xa» / lose «Bị tố cho vay nặng lãi»).
@@ -918,8 +915,7 @@ rdDef("muoi_no",11,{t:"Sợi chỉ đỏ",w:"v",sj:"sợi chỉ giữa ngươi v
  E:{win:{k:1,tag:"Món nợ thành sợi chỉ đỏ",w:"v",t:"Món nợ bắt đầu bằng một tờ giấy điểm chỉ, kết thúc bằng một sợi chỉ đỏ. {v} đứng cạnh ngươi đến hết đời trong cung.",go:A=>e67ally(rv67(A,"v"),35)},
   mid:{k:0,tag:"{v} lui khỏi đời ngươi",t:"{v} lui về một góc cung, đóng cửa tụng kinh. Nợ đã xóa, người đã xa. Tay ngươi sạch, nhưng mất một người biết chuyện cũ.",go:A=>e67drop(rv67(A,"v"),"xin lui về tụng kinh")},
   lose:{k:-1,tag:"Kẻ thù cả đời",w:"v",t:"{v} không quên những năm làm con nợ. Từ nay, nơi nào ngươi đến, nàng đến sau với một lời đàm tiếu.",go:A=>e67foe(rv67(A,"v"),20)}}});
-RD97L.push({a:"muoi_no_11",tag:"Sổ riêng của Kính sự phòng",w:"emp",p:.1,n:"Dâng giấy biên nhận năm ấy lên Hoàng thượng",c:{suc:-4},
- path:["Buộc chỉ đỏ","Hỏi nàng về giấy biên nhận","Đến gặp nàng","Đốt sổ","Trả sổ cho","Không đáp, giữ chứng","Nói thật"],np:2,bad:["Giữ sổ, phòng","Nhận lời hắn"],sc:2,x:[()=>S.duc>=40,"Đức từ 40"],
- t:"Tờ biên nhận năm ấy dẫn đến một cuốn sổ riêng của Kính sự phòng: bao năm, ai muốn được ghi tên thị tẩm đều phải nộp bạc, và bao phi tần đã vay nợ khắp nơi vì nó. Hoàng thượng thay cả Kính sự phòng. {v} quỳ cạnh ngươi trước ngự án; món nợ của nàng hóa ra là chìa khóa mở cả một ổ nợ.",
- fx:{danh:12,sung:4},go:A=>e67ally(rv67(A,"v"),30),rw:"ngocboi",ti:"Người gỡ sổ nợ hậu cung"});
+RD97L.push(rdRare({a:"muoi_no_11",tag:"Sổ riêng của Kính sự phòng",w:"emp",n:"Dâng giấy biên nhận năm ấy lên Hoàng thượng",
+ path:["Buộc chỉ đỏ","Hỏi nàng về giấy biên nhận","Đến gặp nàng","Đốt sổ","Trả sổ cho","Không đáp, giữ chứng","Nói thật"],bad:["Giữ sổ, phòng","Nhận lời hắn"],x:[()=>S.duc>=RR("muoi_no_11").bar,"Đức từ "+RR("muoi_no_11").bar],
+ t:"Tờ biên nhận năm ấy dẫn đến một cuốn sổ riêng của Kính sự phòng: bao năm, ai muốn được ghi tên thị tẩm đều phải nộp bạc, và bao phi tần đã vay nợ khắp nơi vì nó. Hoàng thượng thay cả Kính sự phòng. {v} quỳ cạnh ngươi trước ngự án; món nợ của nàng hóa ra là chìa khóa mở cả một ổ nợ.",go:A=>e67ally(rv67(A,"v"),30),rw:"ngocboi",ti:"Người gỡ sổ nợ hậu cung"}));
 

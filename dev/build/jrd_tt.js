@@ -225,10 +225,9 @@ rdDef("tt_co",11,{t:"Kết ván cờ",w:"dad",sj:"ván cờ của phủ Tể tư
  E:{win:{k:1,tag:"Người cầm quân cờ",w:"dad",t:"Cha về quê vinh hiển. Ghế Tể tướng về tay người của ngươi, và nửa triều nghe theo ngươi. Ván cờ của cha thành ván cờ của ngươi.",go:()=>e67dad(6)},
   mid:{k:0,tag:"Cha về quê, nhà yên",t:"Cha về quê dưỡng già. Phủ Tể tướng không còn quyền như xưa, nhưng cũng không còn ai nhắm vào. Ngươi tự đi đường mình."},
   lose:{k:-1,tag:"Phủ Tể tướng sa sút",t:"Ghế Tể tướng về tay nhà đối đầu. Môn sinh của cha tan mỗi người một ngả. Ngươi vẫn là phi tần của Hoàng thượng, nhưng sau lưng không còn ai.",go:()=>e67dad(-10)}}});
-RD97L.push({a:"tt_co_11",tag:"Cha truyền sổ môn sinh",w:"emp",p:.12,n:"Xin Hoàng thượng cho cha truyền sổ môn sinh vào tay ngài",c:{suc:-4},
- path:["Đáp: con đi đường con","Làm người đánh cờ","Khuyên cha đốt sổ","Xin cha giao sổ","Tâu thật"],np:2,bad:["Mở xem, báo cha","Bỏ bạc lo cho hắn thoát"],sc:2,x:[()=>S.duc>=40,"Đức từ 40"],
- t:"Ngươi dâng cuốn sổ môn sinh lên Hoàng thượng. Ngài lật từng trang, rồi trả lại: “Trẫm không cần sổ. Trẫm cần người giữ sổ mà không dùng nó để hại trẫm.” Từ đó cả triều biết: lời ngươi là lời có ngài đứng sau.",
- fx:{danh:12,sung:6},go:()=>e67dad(4),rw:"nt_dongchau",ti:"Người giữ sổ môn sinh"});
+RD97L.push(rdRare({a:"tt_co_11",tag:"Cha truyền sổ môn sinh",w:"emp",n:"Xin Hoàng thượng cho cha truyền sổ môn sinh vào tay ngài",
+ path:["Đáp: con đi đường con","Làm người đánh cờ","Khuyên cha đốt sổ","Xin cha giao sổ","Tâu thật"],bad:["Mở xem, báo cha","Bỏ bạc lo cho hắn thoát"],x:[()=>S.duc>=RR("tt_co_11").bar,"Đức từ "+RR("tt_co_11").bar],
+ t:"Ngươi dâng cuốn sổ môn sinh lên Hoàng thượng. Ngài lật từng trang, rồi trả lại: “Trẫm không cần sổ. Trẫm cần người giữ sổ mà không dùng nó để hại trẫm.” Từ đó cả triều biết: lời ngươi là lời có ngài đứng sau.",go:()=>e67dad(4),rw:"nt_dongchau",ti:"Người giữ sổ môn sinh"}));
 
 /* ---------- tt_oan · Phủ Tể tướng mắc oan ---------- */
 rdDef("tt_oan",5,{t:"Sau cơn oan",w:"dad",sj:"kẻ làm sổ sách giả",cast(A){return rdCast(A,["v"])},
@@ -451,10 +450,9 @@ rdDef("tt_oan",11,{t:"Rửa sạch tiếng nhà",w:"dad",sj:"tiếng tăm của 
  E:{win:{k:1,tag:"Tiếng nhà trong sạch",w:"dad",t:"Phủ Tể tướng đứng lại, sạch hơn trước. Cả triều nhớ: con gái Tể tướng đã giữ nhà bằng chứng cứ, không bằng bạc.",go:()=>e67dad(6)},
   mid:{k:0,tag:"Nhà yên, quyền mất",t:"Nhà ngươi yên ổn nhưng không còn quyền như xưa. Ngươi tự đi đường mình trong cung."},
   lose:{k:-1,tag:"Nhà tan",t:"Cha mang tiếng đến cuối đời. Nhà ngươi tan mỗi người một ngả. Ngươi vẫn là phi tần, nhưng sau lưng không còn ai.",go:()=>e67dad(-10)}}});
-RD97L.push({a:"tt_oan_11",tag:"Ngự bút đề biển Thanh liêm",w:"emp",p:.12,n:"Xin Hoàng thượng ban cho phủ một tấm biển",c:{suc:-4},
- path:["Đưa vợ con hắn","Không ép, chỉ ghi lời","Trình lên Hoàng thượng","Đưa văn tự và nhân chứng","Xin chiếu nói rõ","Xin chiếu ban thưởng"],np:2,bad:["Biếu Ngự sử","Lặng lẽ dàn xếp","Rải tin ngược"],sc:2,x:[()=>S.duc>=45,"Đức từ 45"],
- t:"Hoàng thượng tự tay viết bốn chữ “Thanh liêm chính trực”, sai treo trước cổng phủ Tể tướng. Kẻ từng vu cha ngươi phải đi qua tấm biển ấy mỗi ngày lên triều.",
- fx:{danh:12,duc:4},go:()=>e67dad(8),rw:"nt_haiduong",ti:"Con gái nhà thanh liêm"});
+RD97L.push(rdRare({a:"tt_oan_11",tag:"Ngự bút đề biển Thanh liêm",w:"emp",n:"Xin Hoàng thượng ban cho phủ một tấm biển",
+ path:["Đưa vợ con hắn","Không ép, chỉ ghi lời","Trình lên Hoàng thượng","Đưa văn tự và nhân chứng","Xin chiếu nói rõ","Xin chiếu ban thưởng"],bad:["Biếu Ngự sử","Lặng lẽ dàn xếp","Rải tin ngược"],x:[()=>S.duc>=RR("tt_oan_11").bar,"Đức từ "+RR("tt_oan_11").bar],
+ t:"Hoàng thượng tự tay viết bốn chữ “Thanh liêm chính trực”, sai treo trước cổng phủ Tể tướng. Kẻ từng vu cha ngươi phải đi qua tấm biển ấy mỗi ngày lên triều.",go:()=>e67dad(8),rw:"nt_haiduong",ti:"Con gái nhà thanh liêm"}));
 
 /* ---------- tt_tranh · Phủ Tể tướng chia đôi ---------- */
 rdDef("tt_tranh",5,{t:"Người huynh trưởng chọn",w:"dad",sj:"vì sao huynh trưởng ngả về phía {v}",cast(A){return rdCast(A,["v"])},
@@ -682,10 +680,9 @@ rdDef("tt_tranh",11,{t:"Một nhà một lòng",w:"dad",sj:"phủ Tể tướng 
  E:{win:{k:1,tag:"Một nhà một lòng",w:"dad",t:"Phủ Tể tướng một lòng đứng sau ngươi. Huynh trưởng giữ phủ, ngươi giữ lòng nhà.",go:()=>e67dad(6)},
   mid:{k:0,tag:"Mỗi người một ngả",t:"Phủ không còn chia phe, nhưng cũng không còn là chỗ dựa lớn. Ngươi tự đi đường mình."},
   lose:{k:-1,tag:"Phủ đứng sau {v}",t:"Huynh trưởng nối phủ và đứng sau {v}. Phủ Tể tướng từ nay là đối thủ của ngươi.",go:A=>{rdOan(A,"v",8);return e67dad(-6)}}}});
-RD97L.push({a:"tt_tranh_11",tag:"Huynh muội đồng lòng, phủ dâng cả phe cánh",w:"dad",p:.12,n:"Mời huynh cùng quỳ dâng sổ phủ lên Hoàng thượng",c:{suc:-4},
- path:["Hỏi thẳng huynh","Trả ơn thay huynh","Cho huynh thấy cái giá","Xin cha trao cho huynh","Tin huynh, nhường","Đứng cạnh huynh"],np:2,bad:["Cắt đứt","Không nhường","Cáo bệnh không dự"],sc:2,x:[()=>S.duc>=40,"Đức từ 40"],
- t:"Hai huynh muội cùng quỳ trước Hoàng thượng, dâng sổ người của phủ. Ngài cười: “Một nhà như thế, trẫm dùng cả.” Huynh trưởng được bổ chức lớn, và mọi người của phe {v} trong phủ quay về theo hai người.",
- fx:{danh:12,duc:3},go:A=>{rdOan(A,"v",8);return e67dad(8)},rw:"nt_haiduong",ti:"Huynh muội đồng tâm"});
+RD97L.push(rdRare({a:"tt_tranh_11",tag:"Huynh muội đồng lòng, phủ dâng cả phe cánh",w:"dad",n:"Mời huynh cùng quỳ dâng sổ phủ lên Hoàng thượng",
+ path:["Hỏi thẳng huynh","Trả ơn thay huynh","Cho huynh thấy cái giá","Xin cha trao cho huynh","Tin huynh, nhường","Đứng cạnh huynh"],bad:["Cắt đứt","Không nhường","Cáo bệnh không dự"],x:[()=>S.duc>=RR("tt_tranh_11").bar,"Đức từ "+RR("tt_tranh_11").bar],
+ t:"Hai huynh muội cùng quỳ trước Hoàng thượng, dâng sổ người của phủ. Ngài cười: “Một nhà như thế, trẫm dùng cả.” Huynh trưởng được bổ chức lớn, và mọi người của phe {v} trong phủ quay về theo hai người.",go:A=>{rdOan(A,"v",8);return e67dad(8)},rw:"nt_haiduong",ti:"Huynh muội đồng tâm"}));
 
 /* ---------- tt_mat · Mật ước với Hoàng hậu ---------- */
 /* ONE CORE (review road-b1-r1 item 8): every RANKS index clamped */
@@ -1014,8 +1011,7 @@ rdDef("tt_mat",11,{t:"Kết mật ước",w:"hh",sj:"mật ước sau cùng",cas
 /* rare finale (road-history item 3): the Hoàng hậu, ill or without a child, RECOMMENDS; the Emperor only remembers it. Reward = hh bond + the
    flag S.st.f14.tienloi (Trung cung tiến lời) for ch13 «Tranh ngôi Trung cung" — never the seat itself (OD:L1250 rank earned).
    The text reads which of the two (ill / childless) is true in this life (review road-b1-r1 item 1c). */
-RD97L.push({a:"tt_mat_11",tag:"Hoàng hậu tiến lời, Hoàng thượng ghi nhớ",w:"hh",p:.1,n:"Xin Hoàng hậu cùng dâng sớ xóa mật ước trước Hoàng thượng",c:{suc:-4},
- path:["Giữ ước","Tạ ơn, không hỏi","Lo trọn, để Hoàng hậu nổi bật","Giữ ước, cứu Hoàng hậu","Là tri kỷ","Đề nghị ba bên"],np:2,bad:["Phá ước","Đẩy thêm","Cho người lẻn vào"],sc:2,
- x:[()=>S.hh>=40&&TT_HHWEAK(),"Hoàng hậu quý ngươi từ 40, và Trung cung đang bệnh hoặc không có con"],
- t:()=>TT_HHILL()?"Hoàng hậu bệnh đã lâu, ho khan suốt mùa đông. Nàng cùng ngươi quỳ trước Hoàng thượng, dâng mật ước làm chứng lòng trung và xin xóa. Ngài đọc rồi cười: “Hai nàng giấu trẫm lâu thế.” Hoàng hậu tâu: nếu một ngày nàng không còn, người nên ngồi ghế ấy là ngươi. Hoàng thượng chỉ nói: “Trẫm nhớ lời nàng.”":"Hoàng hậu không có con nối dõi, lễ Phật cầu tự bao năm không thành. Nàng cùng ngươi quỳ trước Hoàng thượng, dâng mật ước làm chứng lòng trung và xin xóa. Ngài đọc rồi cười: “Hai nàng giấu trẫm lâu thế.” Hoàng hậu tâu: nếu một ngày Trung cung phải nhường ghế, người nên ngồi ghế ấy là ngươi. Hoàng thượng chỉ nói: “Trẫm nhớ lời nàng.”",
- fx:{danh:8,hh:10},go:()=>{try{S.st.f14.tienloi=1}catch(e){}return e67dad(4)},rw:"nt_dongchau",ti:"Người được Trung cung tiến lời"});
+RD97L.push(rdRare({a:"tt_mat_11",tag:"Hoàng hậu tiến lời, Hoàng thượng ghi nhớ",w:"hh",n:"Xin Hoàng hậu cùng dâng sớ xóa mật ước trước Hoàng thượng",
+ path:["Giữ ước","Tạ ơn, không hỏi","Lo trọn, để Hoàng hậu nổi bật","Giữ ước, cứu Hoàng hậu","Là tri kỷ","Đề nghị ba bên"],bad:["Phá ước","Đẩy thêm","Cho người lẻn vào"],
+ x:[()=>S.hh>=RR("tt_mat_11").bar&&TT_HHWEAK(),"Hoàng hậu quý ngươi từ "+RR("tt_mat_11").bar+", và Trung cung đang bệnh hoặc không có con"],
+ t:()=>TT_HHILL()?"Hoàng hậu bệnh đã lâu, ho khan suốt mùa đông. Nàng cùng ngươi quỳ trước Hoàng thượng, dâng mật ước làm chứng lòng trung và xin xóa. Ngài đọc rồi cười: “Hai nàng giấu trẫm lâu thế.” Hoàng hậu tâu: nếu một ngày nàng không còn, người nên ngồi ghế ấy là ngươi. Hoàng thượng chỉ nói: “Trẫm nhớ lời nàng.”":"Hoàng hậu không có con nối dõi, lễ Phật cầu tự bao năm không thành. Nàng cùng ngươi quỳ trước Hoàng thượng, dâng mật ước làm chứng lòng trung và xin xóa. Ngài đọc rồi cười: “Hai nàng giấu trẫm lâu thế.” Hoàng hậu tâu: nếu một ngày Trung cung phải nhường ghế, người nên ngồi ghế ấy là ngươi. Hoàng thượng chỉ nói: “Trẫm nhớ lời nàng.”",go:()=>{try{S.st.f14.tienloi=1}catch(e){}return e67dad(4)},rw:"nt_dongchau",ti:"Người được Trung cung tiến lời"}));

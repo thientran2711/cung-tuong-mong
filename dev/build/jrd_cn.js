@@ -261,10 +261,9 @@ rdDef("cn_chu",11,{t:"Chủ tớ năm xưa",w:"v",sj:"mối chủ tớ giữa ng
   win2:{k:1,tag:"Chủ cũ sa cơ",t:"{v} bị giáng một bậc, đứng cuối hàng trong mọi lễ. Không ai còn dám nhắc ngươi từng là tớ của ai. Nhưng trong cung có người nói nhỏ: đừng làm mất lòng nương nương ấy.",go:A=>{const v=rv67(A,"v");return v?[e67pun(v,8),e67drop(v,"vì lỗi cũ"),CN_PAY(v,BAL.road.cn_chu.phat,CN_Q())].filter(Boolean).join(" "):""}},
   mid:{k:0,tag:"Mỗi người một vết sẹo",t:"Chuyện chủ tớ khép lại trên giấy. Ngươi và {v} gặp nhau vẫn chào, nhưng cả hai đều mang một vết sẹo không ai thấy."},
   lose:{k:-1,tag:"Mang tiếng vong ân",t:()=>`Người ta nhớ ngươi là kẻ hầu lên cao rồi quay lại hại chủ. ${CN_QK()==="hh"&&!S.thDead?"Thái hậu và Hoàng hậu":CN_Q()} đều nhạt với ngươi. {v} được thương như người bị hại.`,go:A=>{const v=rv67(A,"v");if(v)v.sung=(v.sung||0)+4;return v?`${v.name} được Hoàng thượng thương xót.`:""}}}});
-RD97L.push({a:"cn_chu_11",tag:"Chủ cũ tạ lỗi trước Hoàng hậu",w:"v",p:.1,n:"Mời {v} cùng nói chuyện năm xưa trước Hoàng hậu",c:{suc:-3},
- path:["mời {v} sang dùng trà","Kể chuyện {v} từng che chở","Đền bạc, xin nàng về hầu","Lặng lẽ gửi than sang","Tha, tự đền đồ vỡ","Đưa tay ra","Đỡ {v} dậy"],np:2,bad:["Đứng xem","Để phép cung xử","Đòi nàng quỳ"],sc:2,x:[()=>qOn()&&S.duc>=45,"Hoàng hậu còn tại vị, Đức từ 45"],
- t:()=>`Trước mặt ${CN_Q()} và cả cung, {v} tự nói ra: năm ấy chính nàng làm vỡ chén ngọc, để kẻ hầu nhỏ chịu đòn thay. Nàng cúi đầu xin ngươi tha thứ. Ngươi đỡ nàng dậy, và từ đó cả cung gọi hai người là tỷ muội.`,
- fx:{danh:10,duc:5},go:A=>e67ally(rv67(A,"v"),35),rw:"nt_nhuy",ti:"Người hầu trà được chủ cũ tạ lỗi"});
+RD97L.push(rdRare({a:"cn_chu_11",tag:"Chủ cũ tạ lỗi trước Hoàng hậu",w:"v",n:"Mời {v} cùng nói chuyện năm xưa trước Hoàng hậu",
+ path:["mời {v} sang dùng trà","Kể chuyện {v} từng che chở","Đền bạc, xin nàng về hầu","Lặng lẽ gửi than sang","Tha, tự đền đồ vỡ","Đưa tay ra","Đỡ {v} dậy"],bad:["Đứng xem","Để phép cung xử","Đòi nàng quỳ"],x:[()=>qOn()&&S.duc>=RR("cn_chu_11").bar,"Hoàng hậu còn tại vị, Đức từ "+RR("cn_chu_11").bar],
+ t:()=>`Trước mặt ${CN_Q()} và cả cung, {v} tự nói ra: năm ấy chính nàng làm vỡ chén ngọc, để kẻ hầu nhỏ chịu đòn thay. Nàng cúi đầu xin ngươi tha thứ. Ngươi đỡ nàng dậy, và từ đó cả cung gọi hai người là tỷ muội.`,go:A=>e67ally(rv67(A,"v"),35),rw:"nt_nhuy",ti:"Người hầu trà được chủ cũ tạ lỗi"}));
 
 /* ---------- cn_tinh · Mối tình thuở hầu trà ---------- */
 /* {n1} = the guard of .4 (ARC67.cn_tinh cast A.n1). jroad carries only A.act, so the name is kept once in S.st.f14.cnG and read back
@@ -490,10 +489,9 @@ rdDef("cn_tinh",11,{t:"Chôn quá khứ",w:"emp",sj:"chuyện cũ giữa ngươi
  E:{win:{k:1,tag:"Chôn sạch quá khứ",w:"emp",t:"Thư, khăn, tờ án đều thành tro. Hoàng thượng không bao giờ nhắc lại. {n1} được về quê phụng dưỡng mẹ già, và cả cung chỉ nhớ ngươi là người được Hoàng thượng tin trọn.",go:A=>{rdOan(A,"v",6);return ""}},
   mid:{k:0,tag:"Hắn gánh tội thay",t:"{n1} nhận hết lỗi, bị đày ra biên ải xa hơn. Ngươi bình yên, Hoàng thượng không trách. Chỉ là mỗi mùa tuyết, ngươi lại nhớ đến một người."},
   lose:{k:-1,tag:"Lộ chuyện cũ, bị phạt",w:"emp",t:"Chuyện cũ lộ ra trước triều. Hoàng thượng không giết ai: ngươi bị khất bổng, cấm túc, mang tiếng một thời. {n1} bị đuổi khỏi cung. Ngươi vẫn là phi tần, và đường còn dài.",go:A=>{rdOan(A,"v",2);return [CN_CAM(S,BAL.road.cn_tinh.cam),CN_PAY(S,BAL.road.cn_tinh.phat,"Hoàng thượng")].join(" ")}}}});
-RD97L.push({a:"cn_tinh_11",tag:"Hộ vệ thề trọn đời",w:"emp",p:.1,n:"Xin Hoàng thượng để {n1} chuộc lỗi bằng cả đời canh cửa",c:{sung:-4},
- path:["Giao thư cho {n1} tự đốt","Gửi bạc nuôi mẹ hắn","Gửi áo rét theo đoàn","Nhận chuyện cũ","Bảo nàng cứ nói thật","Kể hết chuyện năm xưa","Cứ nói thật","Lo cho mẹ hắn trước","Thưa thật mọi điều"],np:3,bad:["Bảo nàng cứ trình lên","Im lặng, để {n1} nhận lỗi","Đóng cửa cung chép kinh"],sc:2,x:[()=>S.sung>=45,"Sủng từ 45"],
- t:"Hoàng thượng nhìn người thị vệ quỳ dưới thềm, rồi nhìn ngươi. Ngài bảo: “Kẻ đã giữ kín lời suốt bao năm, trẫm tin hắn giữ được cửa.” {n1} quỳ thề trước Dưỡng Tâm điện: trọn đời canh cửa cung ngươi, không bao giờ ngẩng nhìn chủ. Từ đó không kẻ gian nào lọt qua cổng cung ngươi.",
- fx:{danh:6,sung:4,mat:2},rw:"ngocboi",ti:"Người gác cửa thề trọn đời"});
+RD97L.push(rdRare({a:"cn_tinh_11",tag:"Hộ vệ thề trọn đời",w:"emp",n:"Xin Hoàng thượng để {n1} chuộc lỗi bằng cả đời canh cửa",
+ path:["Giao thư cho {n1} tự đốt","Gửi bạc nuôi mẹ hắn","Gửi áo rét theo đoàn","Nhận chuyện cũ","Bảo nàng cứ nói thật","Kể hết chuyện năm xưa","Cứ nói thật","Lo cho mẹ hắn trước","Thưa thật mọi điều"],bad:["Bảo nàng cứ trình lên","Im lặng, để {n1} nhận lỗi","Đóng cửa cung chép kinh"],x:[()=>S.sung>=RR("cn_tinh_11").bar,"Sủng từ "+RR("cn_tinh_11").bar],
+ t:"Hoàng thượng nhìn người thị vệ quỳ dưới thềm, rồi nhìn ngươi. Ngài bảo: “Kẻ đã giữ kín lời suốt bao năm, trẫm tin hắn giữ được cửa.” {n1} quỳ thề trước Dưỡng Tâm điện: trọn đời canh cửa cung ngươi, không bao giờ ngẩng nhìn chủ. Từ đó không kẻ gian nào lọt qua cổng cung ngươi.",rw:"ngocboi",ti:"Người gác cửa thề trọn đời"}));
 
 /* ---------- cn_ban · Tri kỷ ở Tân Giả khố ---------- */
 /* Road of «Cung nữ được sủng hạnh»: Tố Nga (story-only NPC, ROAD_MAP §5.4) knows the truth of the poisoned well (.4). From .5 the hand
@@ -722,11 +720,10 @@ rdDef("cn_ban",11,{t:"Tình chị em",w:"maid",sj:"số phận của Tố Nga",c
  E:{win:{k:1,tag:"Tố Nga ở lại bên ngươi",w:"maid",t:"Tố Nga thành chưởng sự cung ngươi. Người từng chung phòng thuở hàn vi nay đứng sau lưng ngươi, biết từng hơi thở của hậu cung."},
   mid:{k:0,tag:"Tố Nga về quê",t:"Tố Nga ra cung, về với mẹ già. Mỗi năm một đôi hài vải gửi vào cung, đường khâu vẫn như thuở xưa."},
   lose:{k:-1,tag:"Tố Nga không qua khỏi",t:"Tố Nga mất. Không ai trách ngươi; nàng ra đi với cái tên đã sạch. Chỉ là từ đó, trong cung không còn ai gọi ngươi là tỷ tỷ."}}});
-RD97L.push({a:"cn_ban_11",tag:"Bí mật cái giếng hạ bệ kẻ vu",w:"maid",p:.1,n:"Để Tố Nga kể chuyện cái giếng trước Thái hậu",c:{suc:-4},
- path:["Cho thái y nghiệm bát cháo","Mua hắn lại","Đưa Tố Nga đi nơi khác","Mua người chép sổ","Nhờ thái y quen chép","Lén gặp nàng ta","Đưa bạc, xin hắn viết","Bắt người sắc thuốc khai","Ngồi chép lời nàng","Giữ con dao làm chứng","Hỏi vặn từng người","Chép lại lần cuối"],np:3,
- bad:["Đốt hết","Nhận lời, đổi lấy tự do","Thôi, để nó chìm","Gửi lời giảng hòa"],sc:2,x:[A=>!S.thDead&&qOn()&&!!rv67(A,"v")&&S.duc>=40,"Thái hậu còn sống, Hoàng hậu còn tại vị, Đức từ 40"],
- t:()=>`Tố Nga quỳ trước Thái hậu, kể từng chữ chuyện cái giếng: đôi hài hoa mai, dòng lĩnh thuốc mượn tên ${CN_QP()}, cây trâm đặt vào chăn. Thái hậu cho mở sổ Châm công cục và Thái y viện. Kẻ mượn danh Trung cung bị giáng xuống hàng thấp nhất; ${CN_Q()}, được rửa tiếng, sai người mang đến cung ngươi một đôi như ý.`,
- fx:{danh:10,hh:10,th:6},go:A=>{const v=rdOan(A,"v",15);let r="";if(v&&(typeof rvOk67!=="function"||rvOk67(v))&&!v.queen&&v.rank>0){v.rank=0;r=`${v.name} bị giáng xuống ${RANKS[0].n}.`}return [r,CN_HHCLEAR()].filter(Boolean).join(" ")},rw:"nt_dongchau",ti:"Người rửa oan cho giếng cũ"});
+RD97L.push(rdRare({a:"cn_ban_11",tag:"Bí mật cái giếng hạ bệ kẻ vu",w:"maid",n:"Để Tố Nga kể chuyện cái giếng trước Thái hậu",
+ path:["Cho thái y nghiệm bát cháo","Mua hắn lại","Đưa Tố Nga đi nơi khác","Mua người chép sổ","Nhờ thái y quen chép","Lén gặp nàng ta","Đưa bạc, xin hắn viết","Bắt người sắc thuốc khai","Ngồi chép lời nàng","Giữ con dao làm chứng","Hỏi vặn từng người","Chép lại lần cuối"],
+ bad:["Đốt hết","Nhận lời, đổi lấy tự do","Thôi, để nó chìm","Gửi lời giảng hòa"],x:[A=>!S.thDead&&qOn()&&!!rv67(A,"v")&&S.duc>=RR("cn_ban_11").bar,"Thái hậu còn sống, Hoàng hậu còn tại vị, Đức từ "+RR("cn_ban_11").bar],
+ t:()=>`Tố Nga quỳ trước Thái hậu, kể từng chữ chuyện cái giếng: đôi hài hoa mai, dòng lĩnh thuốc mượn tên ${CN_QP()}, cây trâm đặt vào chăn. Thái hậu cho mở sổ Châm công cục và Thái y viện. Kẻ mượn danh Trung cung bị giáng xuống hàng thấp nhất; ${CN_Q()}, được rửa tiếng, sai người mang đến cung ngươi một đôi như ý.`,go:A=>{const v=rdOan(A,"v",15);let r="";if(v&&(typeof rvOk67!=="function"||rvOk67(v))&&!v.queen&&v.rank>0){v.rank=0;r=`${v.name} bị giáng xuống ${RANKS[0].n}.`}return [r,CN_HHCLEAR()].filter(Boolean).join(" ")},rw:"nt_dongchau",ti:"Người rửa oan cho giếng cũ"}));
 
 /* ---------- cn_than · Thân thế thật ---------- */
 /* Road of «Cung nữ được sủng hạnh»: the dying mama of .4 told her she is the daughter of Thẩm Thị lang, demoted under the late emperor.
@@ -941,9 +938,8 @@ rdDef("cn_than",11,{t:"Họ thật",w:"emp",sj:"họ Thẩm sau cùng",cast(A){r
  E:{win:{k:1,tag:"Họ Thẩm trở lại",w:"emp",t:"Thẩm Thị lang được truy phong, họ Thẩm có lại tên trong sổ quan. Người từng bưng trà nay là con gái một nhà trung thần, và cả cung biết điều ấy."},
   mid:{k:0,tag:"Lặng lẽ mang họ Thẩm",t:"Không có tước mới, không có tiệc. Chỉ có một từ đường nhỏ, ba nén hương mỗi năm, và ngươi biết mình là ai."},
   lose:{k:-1,tag:"Họ Thẩm không được nhận",t:"Triều đình gác lại. Họ Thẩm vẫn chỉ là cái tên trong lòng ngươi; người ta lại gọi ngươi là cung nữ được sủng hạnh."}}});
-RD97L.push({a:"cn_than_11",tag:"Cố nhân của cha thành chỗ dựa",w:"emp",p:.1,n:"Mời lão Ngự sử đồng khoa của cha đến dự lễ tế",c:{suc:-4},
- path:["Đọc kỹ, tìm chữ giấu","Đem so dấu triện","Bày bẫy","Nhờ người trong Hộ bộ","Gửi thuốc, không để tên","Chép phương","Xin lão viết lại","Thưa: tiên đế bị kẻ dưới lừa","Lén gửi lời cảm tạ ông","Nhờ lão Ngự sử đồng khoa thúc","Tìm bản sao","Xin Thái hậu một lời"],np:3,
- bad:["Bán cả bọc","Nhận lời, đổi lấy miếu thờ","Xin nhận lỗi, thôi dò án","Rút đơn"],sc:2,x:[()=>S.danh>=45,"Danh từ 45"],
- t:"Lão Ngự sử tóc bạc, người đồng khoa với cha ngươi, quỳ trước bài vị Thẩm Thị lang mà khóc: “Hai mươi năm ta không dám nói một lời.” Từ hôm ấy, ông nhận ngươi làm cháu, đem cả nhóm môn sinh cũ của cha ngươi đứng sau lưng ngươi. Ngoài triều, mỗi khi có kẻ nhắc đến xuất thân của ngươi, đều có người đứng dậy đáp thay.",
- fx:{danh:12,duc:4,mat:2},rw:"ngocboi",ti:"Con gái nhà trung thần"});
+RD97L.push(rdRare({a:"cn_than_11",tag:"Cố nhân của cha thành chỗ dựa",w:"emp",n:"Mời lão Ngự sử đồng khoa của cha đến dự lễ tế",
+ path:["Đọc kỹ, tìm chữ giấu","Đem so dấu triện","Bày bẫy","Nhờ người trong Hộ bộ","Gửi thuốc, không để tên","Chép phương","Xin lão viết lại","Thưa: tiên đế bị kẻ dưới lừa","Lén gửi lời cảm tạ ông","Nhờ lão Ngự sử đồng khoa thúc","Tìm bản sao","Xin Thái hậu một lời"],
+ bad:["Bán cả bọc","Nhận lời, đổi lấy miếu thờ","Xin nhận lỗi, thôi dò án","Rút đơn"],x:[()=>S.danh>=RR("cn_than_11").bar,"Danh từ "+RR("cn_than_11").bar],
+ t:"Lão Ngự sử tóc bạc, người đồng khoa với cha ngươi, quỳ trước bài vị Thẩm Thị lang mà khóc: “Hai mươi năm ta không dám nói một lời.” Từ hôm ấy, ông nhận ngươi làm cháu, đem cả nhóm môn sinh cũ của cha ngươi đứng sau lưng ngươi. Ngoài triều, mỗi khi có kẻ nhắc đến xuất thân của ngươi, đều có người đứng dậy đáp thay.",rw:"ngocboi",ti:"Con gái nhà trung thần"}));
 

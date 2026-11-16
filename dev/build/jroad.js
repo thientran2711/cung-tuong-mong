@@ -32,6 +32,10 @@ function rdFx(id,def){const F=BAL.road.fx&&BAL.road.fx[id];if(!F)return;
  for(const bk in F){if(bk==="E"){for(const ek in F.E)if(def.E&&def.E[ek])def.E[ek].fx=F.E[ek];continue}
   const O=def.B&&def.B[bk]&&def.B[bk].o;if(!Array.isArray(O))continue;
   F[bk].forEach((x,i)=>{const o=O[i];if(!x||!o)return;for(const k of ["c","w","l"])if(x[k])o[k]=x[k];if(x.o){const q=x.o;o.o=A=>rdOdds(q,A)}})}}
+/* the rare finale choice of a road (RD97L): its numbers live in BAL.road.rare[a] (p, np, sc, c, fx; bar = the floor its x condition reads
+   and its x text prints through RR(a).bar) */
+const RR=a=>BAL.road.rare[a];
+function rdRare(d){const R=RR(d.a);if(R)for(const k of ["p","np","sc","c","fx"])if(R[k]!=null)d[k]=R[k];return d}
 /* register one chapter: n = 5..11 */
 function rdDef(road,n,def){const id=road+"_"+n;rdFx(id,def);ARC67[id]=Object.assign({o:"rd",road,rn:n},def);(ROAD14[road]=ROAD14[road]||{})[n]=id;
  try{if(typeof RTHEME67==="object"&&!RTHEME67[id])RTHEME67[id]=def.rth||RTHEME67[road]||"court"}catch(e){}return id}
