@@ -312,3 +312,4 @@
 | pl-courtyards (sonnet; import only): every Dư đồ place × all PL nhất states (season×buổi + every festival PL has), CDN, hotspots, missing list | review/pl-courtyards | main s21 | session_01UV1SzgpcJ5djqV62duegkJ | RUNNING | 16/11 18:16Z |
 | dudo-lock review r1 (sonnet, BIG) of 2cd2eb91 | review/dudo-lock-r1 | main s21 | session_01UV1SzifEntpsUEBQt52nco | RUNNING | 16/11 18:17Z |
 | ios-install-first review r1 (sonnet) of 1bd8eef95 | review/ios-install-first-r1 | main s21 | session_01UV1SzgyEy92gymRnB3jn9M | RUNNING | 16/11 18:22Z |
+| dress-offence review r1 (sonnet, BIG) of f47c7fd3 (allowance must stay hidden, OD L187) | review/dress-offence-r1 | main s21 | session_01UV1Szi3HKYg7eh4LPkWhsT | RUNNING | 16/11 18:23Z |
