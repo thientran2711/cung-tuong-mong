@@ -47,7 +47,7 @@ const dlgCheck=p=>p.evaluate(()=>{const M=document.getElementById('modal');const
   /* 4. robe lost → wait by rank; Tư trang → Việc button → dialog; maid road succeeds (forced roll) */
   const r4=await p.evaluate(()=>{const out={};S.place="home";const w=wdOf(S);out.had=!!w.y;w.y=null;S.rank=0;S.sung=5;tyLost(S,"cuop");out.waitWk=S.tyNvp-wk();S.rank=6;S.sung=60;tyLost(S,"cuop");out.waitWkHigh=S.tyNvp-wk();S.rank=1;
    tab="inv";try{KINV_SUB="viec"}catch(e){}render();const btn=document.querySelector('[data-eitre]');out.btn=!!btn;if(btn)btn.click();return out});
-  await sleep(900);const d4=await dlgCheck(p);await p.screenshot({path:`${OUT}/reissue-${wh}.jpg`,type:'jpeg',quality:55});
+  await clean(p);await sleep(900);await clean(p);const d4=await dlgCheck(p);await p.screenshot({path:`${OUT}/reissue-${wh}.jpg`,type:'jpeg',quality:55});
   if(!r4.btn)F(sz,'no Xin cấp lại button in Tư trang Việc');if(!d4.shown||d4.t!=="Xin cấp lại y phục")F(sz,`re-issue dialog ${JSON.stringify(d4)}`);
   else{if(!d4.inView||d4.ovf||d4.pageOvf)F(sz,`re-issue layout ${JSON.stringify(d4)}`);if(d4.opts.length<3)F(sz,`re-issue roads ${d4.opts.length}`);
    r4.after=await p.evaluate(()=>{const r0=Math.random;Math.random=()=>0;const i=Q[0].opts.findIndex(o=>/^Sai /.test(o.n));const s0=S.suc;chooseM(i>=0?i:0);Math.random=r0;KMQ.length=0;return{y:!!wdOf(S).y,ty:tyOn(S),suc:S.suc-s0,nvp:S.tyNvp}});
