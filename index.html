@@ -1531,10 +1531,10 @@ ev("eunuch",()=>S.mat<10,()=>({o:od(50+S.tamco/3)}),p=>({
  {n:"Thử lòng hắn trước",fx:{},x:`${word(p.o)} · thành: Tai mắt +1 · hỏng: hắn là gián điệp`,go:()=>{if(roll(p.o))apply({mat:1});else{apply({danh:-3});log('<span class="r">Tiểu Đức Tử mang chuyện cung ngươi đi bán.</span>')}}},
  {n:"Đuổi đi",fx:{duc:1}}]}));
 /* the Emperor */
-ev("empnight",()=>!S.preg&&S.sung>=20,()=>({o:od(40+bestArt().w*8+mm())}),p=>({who:pEmp(),
+ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o+bestArt().w*BAL.visit.show.w+mm())}),p=>({who:pEmp(),
  t:"Đêm khuya, không đèn lồng, không thái giám báo trước. Hoàng thượng đứng ngoài rèm cửa cung ngươi.<br>“Trẫm không ngủ được.”",o:[
  {n:"Thắp đèn hầu rượu",fx:{},x:"được thị tẩm",go:()=>{S.tonight="me";nightScene()}},
- {n:`Phô tài: ${bestArt().n}`,fx:{suc:-5},x:`${word(p.o)} · thành: Sủng +6, Danh +2`,go:()=>{if(roll(p.o))apply({sung:6,danh:2})}},
+ {n:`Phô tài: ${bestArt().n}`,fx:{suc:-BAL.visit.show.suc},x:`${word(p.o)} · thành: Sủng +${BAL.visit.show.sung}, Danh +${BAL.visit.show.danh}`,go:()=>{if(roll(p.o))apply({sung:BAL.visit.show.sung,danh:BAL.visit.show.danh})}},
  {n:"Khuyên ngài giữ long thể",fx:{duc:3,sung:-1}}]}));
 ev("minister",()=>S.rank>=2,()=>({o:od(40+S.tai/3+(has("chamchinh")?15:0))}),p=>({who:pEmp(),
  t:"Hoàng thượng đặt bản tấu xuống: “Thượng thư Hộ bộ xin tăng thuế muối. Ái phi nghĩ sao?”",o:[
@@ -1942,9 +1942,9 @@ PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mo
  {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},od:(E.mood>=2?2:1),x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
 function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
-function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=3+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+2+Math.max(0,s),0,100);ghenAll(8);
+function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const g=BN.sung+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+BN.an+Math.max(0,s),0,100);ghenAll(BN.ghen);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
- if(roll(10+s*4))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${2+Math.max(0,s)}.`)}
+ if(roll(BN.bestow+s*BN.bestowS))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${BN.an+Math.max(0,s)}.`)}
 PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)[0],son=mySons()[0],o1=od(30+S.an/2+s*4),o2=od(30+S.an/2+s*3-(DG()?10:0)),o3=od(40+S.an/2+s*3);
  const txt=s>=6?"Ngài khẽ cười, kéo ngươi lại gần. Tấm rèm thêu uyên ương buông xuống; ngọn nến đỏ chập chờn rồi lụi, chỉ còn tiếng mưa xuân trên mái ngói.":s>=3?"Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu, rồi màn the khép lại.":"Ngài có vẻ xa cách. Đêm trôi qua lặng lẽ sau tấm màn vàng.";
  const go=f=>()=>{nightFx(s);f()};
@@ -3319,7 +3319,7 @@ function approachOne(){const T=[];const fr=liveRivals(true).filter(v=>aff(v,S)>=
   const k=pick(["tuithom","sonphan","luahang","huongtram"]);S.inv.push({k,from:v.id});relAdd(S,v,3);return{ev:1,t:"Có người đến",who:pv(v),h:`<p>${v.name} mang sang tặng ngươi <b>${IT[k].n}</b>.</p><p>${kitParse(`Chắc chắn · thành: ${IT[k].n}, thiện cảm +3 · đồ người khác tặng nên xét nghiệm trước khi dùng`)}</p>`}});
  if(hos.length)T.push(()=>{const v=pick(hos);return{ev:1,t:"Có người đến",who:pv(v),h:`<p>${v.name} đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`,opts:[{n:"Nhịn",fx:{duc:2},x:"nàng ghen +3",go:()=>{v.ghen=cl(v.ghen+3,0,100)}},{n:"Đáp trả sắc sảo",fx:{danh:1},x:"nàng oán +10",go:()=>relAdd(S,v,-10)}]}});
  const sorry=liveRivals(true).filter(v=>oan(v,S)>=20&&v.trait!=="Hiểm độc");if(sorry.length)T.push(()=>{const v=pick(sorry);return{ev:1,t:"Có người đến",who:pv(v),h:`<p>${v.name} sang xin lỗi chuyện cũ.</p>`,opts:[{n:"Nhận lời xin lỗi",fx:{},x:"nàng bớt oán 15, thiện cảm +5",go:()=>{oanAdd(v,S,-15);relAdd(S,v,5)}},{n:"Lạnh lùng",fx:{},x:"thiện cảm -3",go:()=>relAdd(S,v,-3)}]}});
- if(S.sung>=60&&!S.out&&roll(50))T.push(()=>{apply({sung:2});S.an=cl((S.an||0)+2,0,100);log("Hoàng thượng ghé cung ngươi uống chén trà: Sủng +2, Ân tình +2.")/* log-sync r1: the card alone left it out of the Sổ ghi */;return{ev:1,t:"Hoàng thượng đến",who:pEmp(),h:`<p>Không báo trước, Hoàng thượng ghé cung ngươi uống chén trà.</p><p>${kitParse("Chắc chắn · thành: Sủng +2, Ân tình +2")}</p>`}});
+ {const VT=BAL.visit.tea;if(S.sung>=VT.minSung&&!S.out&&roll(VT.p))T.push(()=>{apply({sung:VT.sung});S.an=cl((S.an||0)+VT.an,0,100);log(`Hoàng thượng ghé cung ngươi uống chén trà: Sủng +${VT.sung}, Ân tình +${VT.an}.`)/* log-sync r1: the card alone left it out of the Sổ ghi */;return{ev:1,t:"Hoàng thượng đến",who:pEmp(),h:`<p>Không báo trước, Hoàng thượng ghé cung ngươi uống chén trà.</p><p>${kitParse(`thành: Sủng +${VT.sung}, Ân tình +${VT.an}`)}</p>`}})}
  if(!S.thDead&&S.th>=10)T.push(()=>({ev:1,t:"Thái hậu triệu",who:pTH(),h:"<p>Đức Thọ cung cho người sang mời ngươi qua hầu chuyện.</p>",opts:[{n:"Đến ngay",fx:{th:3,suc:-5}},{n:"Cáo bệnh",fx:{th:-5}}]}));
  const sv=(S.staff||[]).length?pick(S.staff):null;if(sv)T.push(()=>({ev:1,t:"Kẻ hầu xin",who:pServ(sv),h:`<p>${sv.name} quỳ xin: mẹ ở quê ốm nặng, xin chút bạc thuốc thang.</p>`,opts:[{n:"Cho 10 lượng",fx:{bac:-10},x:"lòng +15",go:()=>{sv.loyal=cl(sv.loyal+15,0,100)}},{n:"Từ chối",fx:{},x:"lòng -10",go:()=>{sv.loyal=cl(sv.loyal-10,0,100)}}]}));
  const bad=liveRivals(true).filter(v=>bandOf(danger(v,S))>=2);if(bad.length&&S.maid&&S.maid.loyal>=55)T.push(()=>{const v=pick(bad);kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`${S.maid.name} báo: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);return{ev:1,t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} thì thầm: “Người bên cung ${v.name} dò hỏi giờ giấc của nương nương. E là có ý không lành.”</p><p>${kitParse(`Chắc chắn · thành: biết ${v.name} có ý hại ngươi, mức ${BANDS[bandOf(danger(v,S))][1]}`)}</p>`}});
@@ -16995,6 +16995,19 @@ BAL.mort={on:1,playerFloorYears:0,
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
+   visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
+   capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
+   (BAL.night): Sủng + sung, Danh + danh, every consort ghen + ghen, the consort whose tablet was flipped ghen + lostGhen and quý ngươi − lostRel,
+   the Hoàng hậu − hh; Thái hậu displeased at thP + neg × thNeg % (neg = her archetype, jtrong TH_ARCH), Thái hậu quý ngươi − thLoss × her trọng.
+   show: "Phô tài" on the visit card (odds o + w × her best art's level, Sức − suc, Sủng / Danh on success).
+   Advising him to rest: Đức + adviseDuc, Sủng − adviseSung, Thái hậu + adviseTh. q = the night's prep quality (no bath, no wrapping: he came).
+   tea: the short visit "Hoàng thượng ghé cung uống chén trà" (j24 Có người đến pool): gate Sủng ≥ minSung, p %, Sủng / Ân tình gains.
+   night: the one night rule (j8 nightFx) for every road into a night (tablet, Tranh sủng, Chặn ngự giá, the visit). */
+Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
+ sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
+ show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4}});
 /* ================= jmort: THỌ SỐ + SINH TỬ — one mortality model for every person (owner 16/11, review/mortality) =================
    Numbers: BAL.mort (jbal2.js). Pure core between CORE markers (dev/measure/mort-sim.js reuses it in node).
    1. LIFESPAN (owner 16/11 "thọ số"): every person rolls ONE lifespan (p.tho = age at death, p.thoM = month) the first time the model
@@ -37285,6 +37298,89 @@ function hsvActs(s){const A=[];if(!s||!(S.staff||[]).includes(s))return A;const 
 /* family (LUẬT SỬA CẢ NHÓM): in lãnh cung the one servant who stayed with her (j14 cold: S.staff keeps one loyal servant) stands on
    that stage too, with the same card and acts; before, the stage held only the other fallen consorts */
 (function(){if(typeof coldVisit!=="function")return;const c0=coldVisit;coldVisit=function(){const r=c0.apply(this,arguments);try{if(S&&S.out&&S.visit&&S.visit.k==="lc"&&Array.isArray(S.visit.people)&&!S.visit.people.some(p=>p&&p.kind==="serv"))S.visit.people.push(...hsvList().map(hsvPerson))}catch(e){console.error(e)}return r}})();
+/* ================= jvisit: NGỰ GIÁ LÂM CUNG — the Emperor comes to HER palace and stays the night (owner OD:L603, review/emperor-visit) =================
+   PRIORITY RULE #1: this is the existing event "empnight" (j7: "Hoàng thượng đứng ngoài rèm cửa cung ngươi … Thắp đèn hầu rượu"), not a second event.
+   Before: empnight sat in the generic event pool (Sủng ≥ 20, at most once a year, the same weight whatever her favour), and its night went through
+   the Kính sự phòng prep (bath, wrapped in the quilt, carried to Dưỡng Hòa điện) and gave a normal night only.
+   Now:
+   1. The visit is its own daily roll after the tablet flip: visCh(p) = BAL.visit (base + slope × (Sủng − minSung) + anK × Ân tình) × his nature
+      (đa tình / lạnh lùng), capped; rare at low favour, more often at high favour; none within BAL.visit.gap days of the last one, none while she
+      is pregnant, in lãnh cung, already has tonight, or he is gravely ill; one night per day (j75 ntTake through nightScene). empnight leaves the pool.
+   2. "Thắp đèn hầu rượu": he stays in HER palace — the night cards are the normal night (j8 night1 → night2 → nightFx, BAL.night) with the visit's
+      own opening (no bath, no quilt); then on top: Sủng / Danh, every consort's jealousy, the consort whose tablet he left (ghen, quý ngươi −),
+      the Hoàng hậu displeased, and the Thái hậu displeased by chance (her archetype, jtrong TH_ARCH.neg) for breaking the Kính sự phòng custom,
+      scaled by her trọng (DEED.empvisit offends Lễ). The result card shows the true numbers and ends with a button (OD:L1261).
+      "Khuyên ngài giữ long thể" is the safe road: Đức, the Thái hậu pleased, a little Sủng lost. "Phô tài" stays as it was.
+   3. Co-op: the Emperor is a world person, so ONLY the host rolls (jmort host()), for both seats (her and the friend entry), one visit a day.
+      The result is written into the world (S.emp.visit = {w day, pid}); the visited seat plays the card (the guest after the merged week arrives),
+      the other seat gets a news line. Numbers: BAL.visit (jbal2). Kit: the existing event card / night cards / modal button only (no new part). */
+(function(){if(typeof PEND!=="object"||!EVI||!EVI.empnight)return;const B=()=>BAL.visit;
+const cw=()=>!!(window.COOPW&&COOPW.on),host=()=>!cw()||COOPW.seat==="a",myPid=()=>cw()?(COOPW.seat==="a"?901:902):0;
+const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
+try{DEED.empvisit={"Lễ":-1}}catch(e){}
+/* the generic pool no longer draws it: the daily roll below decides */
+EVI.empnight.ok=()=>false;
+/* the daily % for one person (her S or the co-op friend entry) */
+function visCh(p){const V=B();if(!p||p.dead||p.alive===false||p.out||p.preg||(p.sung||0)<V.minSung)return 0;
+ const an=p===S?(S.an||0):(p.an||0);let c=V.base+V.slope*((p.sung||0)-V.minSung)+V.anK*an;
+ try{if(has("datinh"))c*=V.datinh;else if(has("lanhlung"))c*=V.lanhlung}catch(e){}return Math.max(0,Math.min(V.cap,c))}
+function empOk(){const V=B();if(!S||S.dead||S.mg)return false;const i=S.emp&&S.emp.ill;if(i&&(i.st||0)>=V.illSt)return false;
+ const L=S.emp&&S.emp.visit;if(L&&day()-L.w<V.gap)return false;if(S.visW!=null&&day()-S.visW<V.gap)return false;return true}
+/* the night already taken today blocks a visit, unless it is only the tablet's pick: the Emperor leaves the tablet for her (that consort loses it) */
+function ntOther(){const n=typeof ntTaken==="function"?ntTaken():null;if(!n)return null;const t=S.tonight&&S.tonight!=="me"?S.tonight:null;return t&&n.who===t.id?null:n}
+/* her own tablet tonight does not stop him: he comes himself instead of the sedan (the Kính sự phòng card goes) */
+function meOk(){return !S.out&&!S.preg&&!ntOther()}
+function showFor(now){const t=S.tonight&&S.tonight!=="me"?S.tonight:null,mine=S.tonight==="me";S.visW=day();
+ if(mine)for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].pid==="ksp")Q.splice(i,1);
+ const d=mkP("empnight",{v:t&&t.id!=null?t.id:null,mine:mine?1:0});if(d){pushDil(d,"Ngự giá lâm cung");/* he is at her door tonight: never held / dropped by the event pacing gate (j68 evGate) */const m=Q.find(x=>x&&x.pid==="empnight"&&!x.must);if(m)m.must=1;if(now)try{if($("modal").hidden)showModal()}catch(e){}}}
+window.visCh=visCh;
+window.visRoll=function(){if(!host()||!empOk())return"";const L=[];if(meOk())L.push(S);
+ if(cw()){const f=(rivals||[]).find(v=>v&&v.coop&&v.alive!==false&&!v.out);if(f)L.push(f)}
+ L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(visCh(p)))continue;const w=day();
+  if(S.emp)S.emp.visit={w,pid:p===S?(myPid()||"me"):p.id,nm:p===S?(S.name||""):(p.name||"")};
+  S.visN=(S.visN||0)+1;if(p===S){showFor();return"me"}S.visW=w;log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"friend"}return""};
+/* after the tablet flip of each day (j8 flip, wrapped by j55 / j75) */
+(function(){const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead)visRoll()}catch(e){console.error("visit",e)}return r}})();
+/* co-op: the seat the host chose plays its card when the merged world arrives; the other seat reads the news */
+function coopSeen(){if(!cw()||host()||!S||S.dead||Q.length||S.mg)return;const v=S.emp&&S.emp.visit;if(!v||S.visSeen===v.w)return;S.visSeen=v.w;
+ if(v.pid===myPid()){if(meOk())showFor(1)}else log(`Đêm qua Hoàng thượng ngự giá đến cung ${v.nm||"hảo hữu"}, nghỉ lại đến sáng.`)}
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{coopSeen()}catch(e){}return r}})();
+/* the card: same event, same words; the night road now really is a visit */
+const p0=PEND.empnight;
+function thDispl(){const V=B();if(S.thDead||!S.thO)return{p:0,loss:0};let neg=0;try{neg=thArch().neg||0}catch(e){}
+ let m=1;try{m=trongMul("th",DEED.empvisit)}catch(e){}return{p:Math.max(0,Math.min(95,V.thP+neg*V.thNeg)),loss:Math.max(1,Math.round(V.thLoss*(2-m)))}}
+PEND.empnight=function(p){p=p||{};const V=B(),d=p0.call(this,Object.assign({o:od(V.show.o+bestArt().w*V.show.w+mm())},p));if(!d||!d.o)return d;
+ const lost=p.v!=null?(rivals||[]).find(x=>x&&x.id===p.v&&x.alive):null,T=thDispl(),q=typeof queenP==="function"?queenP():null;
+ if(lost)d.t+=`<br>Thẻ bài đêm nay lật tên ${lost.name}, vậy mà ngài lại đến đây.`;
+ const mine=!!p.mine&&S.tonight==="me";if(mine)d.t+="<br>Thẻ bài đêm nay lật tên ngươi; chưa đợi kiệu đến đón, ngài đã tự tìm đến.";
+ /* the roads that send him away give up her tablet night too (said on the card) */
+ if(mine)for(const o of d.o){if(/^Thắp đèn hầu rượu/.test(o.n||""))continue;o.x=(o.x?o.x+" · ":"")+"kèm: nhường đêm thẻ bài hôm nay";const g0=o.go;o.go=function(){S.tonight=null;return g0?g0.apply(this,arguments):undefined}}
+ const a=d.o.find(o=>/^Thắp đèn hầu rượu/.test(o.n||""));
+ if(a){a.x=`ngài nghỉ lại cung ngươi đến sáng · thành: đêm thị tẩm, thêm Sủng +${V.sung}, Danh +${V.danh} · kèm: phi tần ghen +${V.ghen}${lost?`, ${lost.name} ghen +${V.lostGhen}, quý ngươi -${V.lostRel}`:""}${q&&q!==S?`, Hoàng hậu quý ngươi -${V.hh}`:""}${T.p?` · kèm: Thái hậu phật ý vì ngài bỏ lệ Kính sự phòng, Thái hậu quý ngươi -${T.loss}: ${chanceW(T.p)}`:""}`;
+  a.hint=lv=>`ngài nghỉ lại cung ta, được sủng ái và danh tiếng hơn đêm thường; nhưng phi tần ghen${lv>=1?(lost?`, ${lost.name} mất đêm mà oán`:"")+(T.p?", Thái hậu có thể phật ý":""):""}`;a.risk="có rủi ro";
+  a.lk=()=>{const n=ntOther();return n?`Đêm nay Hoàng thượng đã ở cung ${n.who==="me"?"ngươi":n.nm}`:""};
+  a.go=()=>{if(lost&&S.ntk&&S.ntk.who===lost.id)S.ntk=null;S.visNight=day();S.visLost=lost?lost.id:null;S.visQ=q&&q!==S?1:0;nightScene();
+   if(Q[0]&&Q[0].pid==="prep"&&S.tonight==="me"){const n=mkP("vnight",{q:V.q});if(n)Q[0]={t:"Ngự giá lâm cung",h:n.t,opts:n.o,who:n.who,pid:n.pid,pp:n.pp}}else S.visNight=null}}
+ const c=d.o.find(o=>/^Khuyên ngài giữ long thể/.test(o.n||""));
+ if(c){c.fx={duc:V.adviseDuc,sung:-V.adviseSung};if(!S.thDead)c.fx.th=V.adviseTh;c.x=`ngài về Dưỡng Hòa điện nghỉ${S.thDead?"":" · Thái hậu nghe tin, khen ngươi biết giữ lễ"}`;
+  c.hint=lv=>`giữ lễ, được tiếng hiền${lv>=1&&!S.thDead?", Thái hậu hài lòng":""}; nhưng bệ hạ hơi cụt hứng`;c.risk="an toàn"}
+ return d};
+/* the visit's night: the normal night cards (BAL.night), its own opening — no bath, no quilt */
+PEND.vnight=function(p){const d=PEND.night1({q:(p&&p.q)||B().q,vp:0});if(!d)return d;const E=S.emp;
+ d.t=`<p>Cung nhân lui cả ra ngoài. Hoàng thượng cởi áo choàng, tự tay khép cửa, ngồi xuống bên án của ngươi.</p><p>Ngọn đèn ngươi vừa thắp soi chén rượu ấm${E&&E.mood>=2?"; ngài có vẻ mệt mỏi":""}. Đêm nay ngài nghỉ lại nơi này.</p>`;return d};
+/* the visit's extras, once, right after the night itself (nightFx) */
+(function(){const n0=nightFx;nightFx=function(s){const vis=S&&S.visNight!=null&&day()-S.visNight<=1;const r=n0.apply(this,arguments);
+ if(vis)try{S.visNight=null;visAfter()}catch(e){console.error("visit after",e)}return r}})();
+function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen);const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${V.ghen}.`];
+ const lost=S.visLost!=null?(rivals||[]).find(x=>x&&x.id===S.visLost&&x.alive):null;S.visLost=null;
+ if(lost){lost.ghen=cl((lost.ghen||0)+V.lostGhen,0,100);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
+ if(S.visQ){S.visQ=0;apply({hh:-V.hh});P.push(`Hoàng hậu phật ý: quý ngươi -${V.hh}.`)}
+ const T=thDispl();if(T.p&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe tin, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
+ else if(T.p)P.push("Thái hậu nghe tin, không nói gì.");
+ log(`Ngự giá lâm cung: ${L.join(" · ")}. ${P.join(" ")}`);
+ Q.push({t:"Sáng hôm sau",who:pEmp(),h:`<p>Trời vừa sáng, Hoàng thượng mới rời cung ngươi lên triều.</p><p>${kitParse(`thành: ${L.join(", ")}`)}</p><p class="past">${P.join("<br>")}</p>`,btn:"Đã hiểu"})}
+window.visAfter=visAfter;
+})();
 
 window.__ctmBuilt=1;
 </script>
@@ -37313,7 +37409,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1501a43a409f";window.CTM_BUILD=BUILD;
+const BUILD="ec25e3ed39c2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
