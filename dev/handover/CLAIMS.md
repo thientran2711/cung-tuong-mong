@@ -297,5 +297,5 @@
 | care-overlap (sonnet, UI bug on live): Chăm screen act picture covers top bars — whole group via kit | review/care-overlap | main s21 | session_01UV1SzhZKa3YaPKzy8XgdPe | RUNNING | 16/11 17:44Z |
 | go-live-kit fix r1 (opus): rollback previous blocker, perf gate, tier dev/tools BIG | review/go-live-kit | main s21 | session_01UV1SzkxXfGxNEF3Kw47KCq | RUNNING | 16/11 17:45Z |
 | PET 'Già' pictures pet-<key>-gia all 22 species + keepsake painting 'Túi kỷ vật' (FOREMAN_C 17:36Z s21; OD 16/11 18:50Z; same worker as pet-stage cut-outs, OD:L1229) (sonnet art) | review/pet-stage-art | C | session_011xDdVQmHkEoHRLjnTR3KPB | RUNNING | 16/11 17:55Z |
-| spread-events LIVE prep (sonnet): merge origin/main 8f476f6f into READY review/spread-events-r3 1c4ea581, re-test, READY sha → B fast-forwards | review/spread-events-live | B | (opening) | RUNNING | 16/11 17:58Z |
+| spread-events LIVE prep (sonnet): merge origin/main 8f476f6f into READY review/spread-events-r3 1c4ea581, re-test, READY sha → B fast-forwards | review/spread-events-live | B | session_01N1tNP69fjejDfHnC3a2Zmt | RUNNING | 16/11 17:58Z |
 | two-way-acts (opus; law HANDOVER:L46 + OD:L1386, owner 18:00Z): audit both ways, NPC pay same costs, player gets NPC-only acts | review/two-way-acts | main s21 | session_01UV1SzmD2Yq9WV4t1YpXjQ6 | RUNNING | 16/11 17:54Z |
