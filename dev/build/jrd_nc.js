@@ -608,7 +608,7 @@ rdDef("nc_tuc",8,{t:"Tờ sớ người ngoại tộc",w:"emp",sj:"tờ sớ xin
   {n:"Làm như chưa nghe",c:{danh:-2},w:{duc:2},wx:"không tỏ ra nóng ruột",lx:"để người khác nói thay mình",rt:"Ngươi vẫn chép kinh, vẫn tưới hoa."},
   {n:"Gửi lễ tạ ơn Hoàng thượng đúng lúc này",c:{bac:-30},w:{sung:3},wx:"ngài nhớ ơn chưa trả là ơn của ai",lx:"có kẻ bảo ngươi khéo nịnh",rt:"Hoàng thượng nhận lễ, cười: “Nàng chọn ngày khéo thật.”"}]},
  s2:{h:"Sớ đến khi ngươi đã yếu thế",w:"emp",if:RDW(0),t:"Tiếng tà thuật chưa nguôi thì tờ sớ đến. Triều thần không ai lên tiếng cho ngươi; có người còn thêm tên ký vào.",o:[
-  {n:"Viết biểu tự trình bày",c:{suc:-3},o:()=>35+S.tai/4,w:{danh:3},sc:1,f:"plead",wx:"triều thần nghe được lời ngươi",l:{danh:-3},lx:"phi tần dâng biểu là trái lệ",rt:"Tờ biểu của ngươi được đọc trong triều, giọng không run.",rf:"Lễ bộ trả biểu về: hậu cung không được dâng lời lên triều."},
+  {n:"Viết biểu tự trình bày",c:{suc:-3},o:()=>35+S.tai/4,w:{danh:3},sc:1,f:"plead",wx:"triều thần nghe được lời ngươi",l:{danh:-3},lx:"phi tần dâng biểu là trái lệ",rt:"Hoàng thượng đọc tờ biểu, đem từng ý ra hỏi Ngự sử trước triều.",rf:"Lễ bộ trả biểu về: hậu cung không được dâng lời lên triều."},
   {n:"Nhờ sứ quán cố hương lên tiếng",c:{bac:-40},o:()=>40+S.mat*4,w:{danh:2},sc:1,wx:"triều đình nhớ ngươi là tờ hòa ước",l:{sung:-3},lx:"Đại Hy không thích người ngoài xen vào",rt:"Sứ quán gửi lời hỏi: “Đại Hy đối đãi công chúa nước ta thế nào?”",rf:"Hoàng thượng cau mày: “Nàng gọi người nước nàng đến dạy trẫm?”"},
   {n:"Lặng im chờ",c:{danh:-2},w:{duc:2},wx:"không thêm cớ",lx:"tờ sớ đi một mình",rt:"Ngươi đóng cửa cung."}]},
  c1:{h:"Ngự sử là ai",w:"v",need:["v"],t:"Vị Ngự sử dâng sớ là họ ngoại của {v}. Năm ngoái hắn mua một tòa nhà ở kinh thành bằng số bạc không ai rõ từ đâu.",o:[
@@ -623,11 +623,11 @@ rdDef("nc_tuc",8,{t:"Tờ sớ người ngoại tộc",w:"emp",sj:"tờ sớ xin
   {n:"Đến xin Thái hậu che chở",c:{},o:()=>35+S.th/3,w:{th:2},sc:2,f:"th",wx:"Thái hậu đứng sau ngươi",l:{th:-4},lx:"Thái hậu thấy ngươi chỉ biết dựa",rt:"Thái hậu nói: “Ai gia già rồi, nhưng chưa điếc.”",rf:"Thái hậu bảo: “Tự mình đứng trước đã.”"},
   {n:"Đến thỉnh an, không nhắc tờ sớ",c:{suc:-2},w:{th:4},sc:1,wx:"Thái hậu quý sự biết điều",lx:"bà không biết ngươi cần",rt:"Thái hậu giữ ngươi lại ăn cơm chay."},
   {n:"Không đến, tự lo",c:{suc:-2},w:{tamco:2},wx:"không nợ ai",lx:"Thái hậu cho là ngươi cứng đầu",rt:"Đức Thọ cung im lặng."}]},
- x1:{h:"Triều nghị tờ sớ",w:"emp",t:"Triều nghị bàn tờ sớ. Hoàng thượng cho truyền ngươi đứng sau bình phong điện Văn Hoa: “Trẫm muốn nàng nghe họ nói gì.”",o:[
-  {n:"Xin bước ra, tự đáp từng điều",c:{suc:-5},o:A=>35+(A.f.know?10:0)+(A.f.plead?5:0)+S.tai/6,e:["win","lose"],rt:"Ngươi bước ra, đáp đủ ba điều. Cả điện im phăng phắc, rồi Hoàng thượng phê: “Bác.”",rf:"Lễ quan quỳ tâu: phi tần lộ mặt giữa triều là trái lệ."},
+ x1:{h:"Đêm trước ngày phê sớ",w:"emp",t:"Triều thần ở tiền triều đã bàn tờ sớ suốt ba buổi. Đêm ấy Hoàng thượng đến cung ngươi, đặt bản chép tờ sớ lên án: “Mai trẫm phê. Nàng có gì muốn nói?”",o:[
+  {n:"Đáp từng điều, xin ngài mang lời ấy ra triều",c:{suc:-5},o:A=>35+(A.f.know?10:0)+(A.f.plead?5:0)+S.tai/6,e:["win","lose"],rt:"Sáng hôm sau, Hoàng thượng đem từng lời ngươi đáp ra hỏi lại triều thần. Không ai đáp được, và ngài phê: “Bác.”",rf:"Hoàng thượng nghe xong, chỉ nói: “Lời của hậu cung, trẫm không đem ra triều được.”"},
   {n:"Đưa ra nguồn bạc của vị Ngự sử",c:{},o:A=>40+(A.f.dirt?20:0)+S.mat*3,e:["win","mid"],rt:"Vị Ngự sử bị tra. Tờ sớ của kẻ ăn bạc lậu không ai còn nhắc.",rf:"Ngự sử bị tra, nhưng tờ sớ vẫn nằm lại trên án."},
-  {n:"Đứng yên sau bình phong",c:{},o:A=>45+(A.f.th?15:0)+S.sung/6,e:["mid","lose"],rt:"Hoàng thượng gác tờ sớ lại, nói chuyện sau.",rf:"Một nửa triều thần tán thành tờ sớ."}]}},
- E:{win:{k:1,tag:"Tờ sớ bị bác",w:"emp",t:"Tờ sớ bị bác giữa triều. Từ nay trong cung, “người ngoại tộc” không còn là một lời buộc tội.",fx:{danh:7,sung:3},go:A=>{rdOan(A,"v",8);return ""}},
+  {n:"Không nói, để ngài tự phê",c:{},o:A=>45+(A.f.th?15:0)+S.sung/6,e:["mid","lose"],rt:"Hoàng thượng gác tờ sớ lại, nói chuyện sau.",rf:"Một nửa triều thần tán thành tờ sớ."}]}},
+ E:{win:{k:1,tag:"Tờ sớ bị bác",w:"emp",t:"Hoàng thượng bác tờ sớ trước triều. Từ nay trong cung, “người ngoại tộc” không còn là một lời buộc tội.",fx:{danh:7,sung:3},go:A=>{rdOan(A,"v",8);return ""}},
   mid:{k:0,tag:"Tờ sớ bị gác",t:"Tờ sớ không ai phê, cũng không ai bác. Nó nằm đó, chờ một ngày có người lấy ra.",fx:{danh:1}},
   lose:{k:-1,tag:"Triều thần nghi người ngoại tộc",t:"Tờ sớ không được chuẩn, nhưng nửa triều đã ký. Từ nay mỗi lần ngươi được thăng, sẽ có người nhắc lại nó.",fx:{danh:-5,sung:-3}}}});
 
@@ -677,10 +677,10 @@ rdDef("nc_tuc",10,{t:"Nghĩa nữ nhà ai",w:"th",sj:"việc nhập ngươi vào
   {n:"Tìm hiểu nhà ấy muốn gì",c:{bac:-20},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"biết cái giá của ân điển",l:{danh:-1},lx:"tỏ ra nghi ngờ",rt:"Nhà Hầu tước muốn một con gái trong cung làm chỗ dựa.",rf:"Người được hỏi chỉ đáp chung chung."},
   {n:"Nói thẳng: ta không bỏ họ",c:{suc:-2},w:{tamco:2},f:"home",wx:"lòng rõ ràng",lx:"cửa lên ngôi cao hẹp lại",rt:"Người đưa lời lặng lẽ lui ra."},
   {n:"Gật đầu, xin được biết thêm",c:{suc:-2},w:{danh:2},f:"yes",wx:"có thêm đường lên",lx:"lời gật đầu bay nhanh hơn ngươi nghĩ",rt:"Ngay hôm sau, cả cung đã biết."}]},
- c1:{h:"Sứ quán cố hương phản đối",w:"maid",t:"Sứ giả {land} ở kinh xin vào gặp ngươi: “Công chúa của {pv} thành con gái nhà người ta, thì hòa ước kia là hòa ước với ai?”",o:[
+ c1:{h:"Sứ quán cố hương phản đối",w:"maid",t:"Sứ giả {land} ở kinh, một người họ hàng bên mẹ, được Hoàng thượng cho vào cung thăm ngươi như người nhà, và nói ngay: “Công chúa của {pv} thành con gái nhà người ta, thì hòa ước kia là hòa ước với ai?”",o:[
   {n:"Hứa với sứ giả sẽ giữ họ",c:{danh:-2},w:{duc:2},f:"home",wx:"cố quốc yên lòng",lx:"lời hứa thành dây buộc",rt:"Sứ giả cúi đầu, mắt đỏ hoe."},
   {n:"Giảng cho sứ giả lợi của việc này",c:{suc:-2},o:()=>40+S.tai/4,w:{tamco:2},sc:1,f:"yes",wx:"sứ giả hiểu ngươi lên cao thì cố quốc cũng lợi",l:{danh:-2},lx:"sứ giả viết thư về nước trách ngươi",rt:"Sứ giả nghĩ lâu, rồi nói: “Thần sẽ tâu lại như thế.”",rf:"Sứ giả đứng dậy không chào."},
-  {n:"Không tiếp sứ giả",c:{suc:-2},w:{mat:1},wx:"không để ai nắm lời",lx:"cố quốc cho là ngươi quên gốc",rt:"Sứ giả đứng ngoài cửa đến tối rồi về."}]},
+  {n:"Cáo bệnh, không tiếp người họ hàng",c:{suc:-2},w:{mat:1},wx:"không để ai nắm lời",lx:"cố quốc cho là ngươi quên gốc",rt:"Sứ giả đứng ngoài cửa đến tối rồi về."}]},
  c2:{h:"{v} cũng muốn ân điển ấy",w:"v",need:["v"],t:"{v} biết chuyện, cho người nhà đến nhà Hầu tước trước: nhà nàng cũng có con gái trong cung, và không mang họ ngoại tộc.",o:[
   {n:"Để mặc nàng tranh",c:{danh:-2},w:{duc:2},wx:"không giành giật",lx:"có thể mất ân điển",rt:"Ngươi chỉ cười."},
   {n:"Tặng nhà Hầu tước lễ hậu",c:{bac:-50},o:()=>45+S.danh/5,w:{danh:2},sc:1,f:"yes",wx:"nhà Hầu tước giữ lời với ngươi",l:{danh:-2},lx:"tốn bạc mà vẫn thua",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Nhà Hầu tước trả lời {v}: đã có người.",rf:"Nhà Hầu tước nhận lễ của cả hai."},
@@ -702,21 +702,21 @@ rdDef("nc_tuc",10,{t:"Nghĩa nữ nhà ai",w:"th",sj:"việc nhập ngươi vào
   lose:{k:-1,tag:"Ân điển hóa dây buộc",t:"Ân điển hỏng giữa chừng: Đại Hy cho là ngươi cứng đầu, cố quốc cho là ngươi dao động. Hai bên đều nhìn ngươi bằng nửa con mắt.",fx:{danh:-5,th:-6}}}});
 
 rdDef("nc_tuc",11,{t:"Hai nửa một người",w:"th",sj:"việc ngươi là ai trong mắt Đại Hy",cast(A){return rdCast(A,["v"])},
- g:"Yến Vạn thọ năm nay có sứ thần bốn phương, có cả sứ đoàn {land}. Ngươi được xếp ngồi giữa hai hàng: một bên là hậu cung Đại Hy, một bên là người cố quốc. Đây là kết cục truyện xuất thân của ngươi.",
+ g:"Tiết Vạn thọ năm nay, Hoàng thượng tiếp sứ thần bốn phương ở tiền triều, có cả sứ đoàn {land}. Sau đó Đức Thọ cung mở gia yến cho hậu cung, và quà của sứ đoàn được đưa vào. Ngươi đứng giữa: hậu cung Đại Hy nhìn ngươi, cố quốc cũng nhìn ngươi. Đây là kết cục truyện xuất thân của ngươi.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1","x2"]],
- B:{s1:{h:"Ghế ngồi giữa hai hàng",w:"th",if:RDW(1),t:"Sau việc tông phả, Đức Thọ cung xếp ghế ngươi ngay dưới hàng phi tần cao phẩm, đối diện sứ đoàn cố quốc. Ai nhìn cũng hiểu: ngươi là cầu nối.",o:[
-  {n:"Sang chào sứ đoàn trước yến",c:{suc:-2},o:()=>40+S.danh/4,w:{danh:3},sc:1,f:"home",wx:"sứ đoàn vui mừng",l:{danh:-2},lx:"có kẻ bảo ngươi chưa vào yến đã chạy về phe nhà",rt:"Sứ thần già quỳ xuống, gọi ngươi bằng tên thuở nhỏ.",rf:"Lễ quan nhắc khéo: phi tần không được tự ý gặp sứ."},
-  {n:"Ngồi yên chỗ mình, gật đầu chào từ xa",c:{danh:-2},w:{duc:2},f:"dh",wx:"giữ đúng lễ",lx:"sứ đoàn thấy ngươi xa cách",rt:"Sứ đoàn cúi chào theo ngươi."},
-  {n:"Chuẩn bị một món quà cho hai bên",c:{bac:-40},w:{danh:3},sc:1,f:"both",wx:"quà vừa lòng cả hai hàng ghế",lx:"tốn bạc",rt:"Hộp trà Đại Hy cho sứ đoàn, khăn thêu cố hương cho các phi tần."}]},
- s2:{h:"Ghế ngồi cuối hàng",w:"maid",if:RDW(0),t:"Ghế của ngươi bị xếp cuối hàng, cạnh cửa gió. Sứ đoàn cố quốc ngồi đối diện, nhìn sang mà không dám chào.",o:[
+ B:{s1:{h:"Ghế trong gia yến",w:"th",if:RDW(1),t:"Sau việc tông phả, Đức Thọ cung xếp ghế ngươi ngay dưới hàng phi tần cao phẩm trong gia yến. Hoàng thượng còn cho sứ thần già của {land}, họ hàng bên mẹ ngươi, vào cung thăm ngươi một buổi trước yến.",o:[
+  {n:"Tiếp sứ thần già ở cung mình như người nhà",c:{suc:-2},o:()=>40+S.danh/4,w:{danh:3},sc:1,f:"home",wx:"sứ đoàn vui mừng",l:{danh:-2},lx:"có kẻ bảo ngươi chưa vào yến đã chạy về phe nhà",rt:"Sứ thần già quỳ xuống, gọi ngươi bằng tên thuở nhỏ.",rf:"Thái giám Nội vụ phủ ngồi suốt buổi, ghi từng lời."},
+  {n:"Chỉ gửi lời hỏi thăm qua thái giám",c:{danh:-2},w:{duc:2},f:"dh",wx:"giữ đúng lễ",lx:"sứ đoàn thấy ngươi xa cách",rt:"Sứ thần già nhận lời hỏi thăm, gửi lại một câu chúc."},
+  {n:"Chuẩn bị một món quà cho hai bên",c:{bac:-40},w:{danh:3},sc:1,f:"both",wx:"quà vừa lòng cả hai bên",lx:"tốn bạc",rt:"Hộp trà Đại Hy gửi ra sứ quán, khăn thêu cố hương cho các phi tần."}]},
+ s2:{h:"Ghế ngồi cuối hàng",w:"maid",if:RDW(0),t:"Ghế của ngươi trong gia yến bị xếp cuối hàng, cạnh cửa gió. Tin ấy lọt ra sứ quán, và sứ đoàn cố quốc hỏi nhau công chúa nước mình ở Đại Hy được đối đãi ra sao.",o:[
   {n:"Xin Nội vụ phủ đổi chỗ",c:{bac:-30},o:()=>40+S.mat*4,sc:1,wx:"được ngồi đúng phẩm",l:{danh:-2},lx:"bị cho là đòi hỏi",rt:"Ghế ngươi được dời lên ba bậc.",rf:"Nội vụ phủ nói chỗ đã định."},
-  {n:"Ngồi yên, giữ mặt tươi",c:{danh:-2},w:{duc:3},f:"dh",wx:"không ai bắt lỗi được",lx:"sứ đoàn thấy công chúa mình bị coi nhẹ",rt:"Ngươi ngồi thẳng lưng suốt yến."},
-  {n:"Sai cung nữ mang trà sang sứ đoàn",c:{},o:()=>40+S.tamco/3,w:{danh:2},sc:1,f:"home",wx:"sứ đoàn biết ngươi vẫn nhớ",l:{danh:-2},lx:"có người tâu ngươi đưa tin cho sứ",rt:"Sứ thần nâng chén trà về phía ngươi.",rf:"Thái giám chặn cung nữ lại hỏi."}]},
+  {n:"Ngồi yên, giữ mặt tươi",c:{danh:-2},w:{duc:3},f:"dh",wx:"không ai bắt lỗi được",lx:"sứ đoàn nghe tin công chúa mình bị coi nhẹ",rt:"Ngươi ngồi thẳng lưng suốt yến."},
+  {n:"Sai thái giám mang trà ra sứ quán",c:{},o:()=>40+S.tamco/3,w:{danh:2},sc:1,f:"home",wx:"sứ đoàn biết ngươi vẫn nhớ",l:{danh:-2},lx:"có người tâu ngươi đưa tin cho sứ",rt:"Sứ thần nhận trà, nhắn lại: “Thần đã yên lòng.”",rf:"Thái giám bị chặn ở cửa cung hỏi."}]},
  c1:{h:"{v} đặt một câu hỏi",w:"v",need:["v"],t:"Giữa yến, {v} cười hỏi to: “Tỷ tỷ nói xem, nếu Đại Hy với nước tỷ có chiến sự, tỷ cầu cho bên nào thắng?”",o:[
-  {n:"Đáp: cầu cho không có chiến sự",c:{},o:()=>40+S.tai/4,w:{danh:4},sc:2,wx:"cả yến gật gù",l:{danh:-3},lx:"lời đáp nghe như né",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Một vị sứ thần nước khác vỗ tay trước.",rf:"{v} cười: “Tỷ khéo né thật.”"},
+  {n:"Đáp: cầu cho không có chiến sự",c:{},o:()=>40+S.tai/4,w:{danh:4},sc:2,wx:"cả yến gật gù",l:{danh:-3},lx:"lời đáp nghe như né",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Thái hậu khẽ gật đầu trước tiên.",rf:"{v} cười: “Tỷ khéo né thật.”"},
   {n:"Đáp: thiếp là người của Hoàng thượng",c:{danh:-2},w:{sung:3},f:"dh",wx:"Hoàng thượng nghe vừa lòng",lx:"sứ đoàn cố quốc cúi mặt",rt:"Hoàng thượng nâng chén về phía ngươi."},
   {n:"Hỏi lại {v}: muội cầu cho nhà muội hay cho Hoàng thượng",c:{},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,wx:"{v} cứng họng",l:{danh:-2},lx:"thành ra cãi nhau giữa yến",go:A=>{rdOan(A,"v",8)},rt:"{v} đỏ mặt, cúi xuống chén rượu.",rf:"Lễ quan phải ho lên một tiếng."}]},
- c2:{h:"Sứ đoàn mang quà của {mh}",w:"maid",t:"Sứ đoàn mang đến một rương quà của {mh}: áo cố hương, hạt giống hoa quê nhà, và một bức thư xin cho ngươi về thăm mẹ một lần.",o:[
+ c2:{h:"Sứ đoàn mang quà của {mh}",w:"maid",t:"Quà của sứ đoàn được đưa vào cung ngươi, trong đó có một rương của {mh}: áo cố hương, hạt giống hoa quê nhà, và một bức thư xin cho ngươi về thăm mẹ một lần.",o:[
   {n:"Dâng thư lên Hoàng thượng xin về thăm",c:{},o:()=>35+S.sung/4,w:{duc:3},sc:1,f:"home",wx:"Hoàng thượng thấy lòng hiếu",l:{sung:-3},lx:"Hoàng thượng sợ ngươi đi không về",rt:"Hoàng thượng nói: “Đợi xuân sang, trẫm cho người hộ tống.”",rf:"Hoàng thượng im lặng, gấp thư lại."},
   {n:"Gieo hạt giống ở vườn cung",c:{danh:-2},w:{duc:2},f:"both",wx:"một góc quê nở hoa trong cung",lx:"hoa lạ, có kẻ bảo xấu điềm",rt:"Mùa sau, vườn cung có một khóm hoa không ai biết tên."},
   {n:"Gửi lại quà, thư rằng con ở yên",c:{suc:-2},w:{tamco:1},f:"dh",wx:"Đại Hy yên lòng",lx:"mẹ buồn",rt:"Rương quà theo sứ đoàn quay về."}]},
@@ -724,11 +724,11 @@ rdDef("nc_tuc",11,{t:"Hai nửa một người",w:"th",sj:"việc ngươi là ai
   {n:"Thưa: là con dâu Đại Hy, con gái {land}",c:{},o:()=>40+S.th/4,w:{th:5},sc:2,f:"both",wx:"Thái hậu hiểu ngươi là cả hai",l:{th:-3},lx:"Thái hậu chê ngươi tham",rt:"Thái hậu cười, lần đầu tiên gọi tên ngươi.",rf:"Thái hậu bảo: “Một người chỉ đứng được một chỗ.”"},
   {n:"Thưa: là người Đại Hy",c:{danh:-2},w:{th:4},f:"dh",wx:"Thái hậu vừa lòng",lx:"trong lòng có tiếng gì vỡ",rt:"Thái hậu gật đầu."},
   {n:"Thưa: là con gái của {mh}",c:{},o:()=>35+S.duc/4,w:{duc:3},sc:1,f:"home",wx:"Thái hậu nể sự thật lòng",l:{th:-5},lx:"Thái hậu cho là ngươi chưa chịu thuộc về đâu",rt:"Thái hậu nhìn ngươi rất lâu: “Ai gia cũng từng là con gái của một người mẹ.”",rf:"Thái hậu quay mặt đi."}]},
- x1:{h:"Lời phán của Đức Thọ cung",w:"th",need:["th"],t:"Trước khi yến tan, Thái hậu cho đánh chuông, nói trước hai hàng ghế: bà sẽ nói một lời về người ngoại tộc trong cung, và lời ấy thành lệ.",o:[
+ x1:{h:"Lời phán của Đức Thọ cung",w:"th",need:["th"],t:"Trước khi gia yến tan, Thái hậu cho đánh chuông, nói trước cả hậu cung: bà sẽ nói một lời về người ngoại tộc trong cung, và lời ấy thành lệ.",o:[
   {n:"Quỳ xin Thái hậu cho giữ phong tục cố hương trong cung mình",c:{suc:-5},o:A=>35+(A.f.both?10:0)+(A.f.home?5:0)+S.th/8,e:["win","lose"],rt:"Thái hậu phán: “Người đến từ xa, giữ được gốc mà vẫn thờ Đại Hy, là phúc của Đại Hy.”",rf:"Thái hậu phán: “Vào nhà ai thì theo lệ nhà ấy.”"},
   {n:"Quỳ tạ, nguyện theo lệ Đại Hy trọn đời",c:{},o:A=>50+(A.f.dh?15:0),e:["mid","lose"],rt:"Thái hậu phán: “Từ nay trong cung không ai được gọi nó là người ngoài.”",rf:"Thái hậu chỉ gật đầu, không phán gì."},
   {n:"Mời sứ đoàn cố hương cùng quỳ tạ ơn",c:{suc:-3},o:A=>40+(A.f.home?10:0)+S.danh/6,e:["win","lose"],rt:"Sứ đoàn quỳ theo ngươi. Thái hậu cười: “Hai nước cùng quỳ một lời, ai gia nhận.”",rf:"Lễ quan tâu: sứ thần quỳ theo phi tần là loạn ngôi thứ."}]},
- x2:{h:"Lời phán của Hoàng thượng",w:"emp",if:()=>S.thDead,t:"Thái hậu đã khuất. Trước khi yến tan, Hoàng thượng nâng chén nói trước hai hàng ghế: ngài sẽ nói một lời về người ngoại tộc trong cung, và lời ấy thành lệ.",o:[
+ x2:{h:"Lời phán của Hoàng thượng",w:"emp",if:()=>S.thDead,t:"Thái hậu đã khuất. Trước khi gia yến tan, Hoàng thượng nâng chén nói trước cả hậu cung: ngài sẽ nói một lời về người ngoại tộc trong cung, và lời ấy thành lệ.",o:[
   {n:"Quỳ xin Hoàng thượng cho giữ phong tục cố hương trong cung mình",c:{suc:-5},o:A=>35+(A.f.both?10:0)+(A.f.home?5:0)+S.sung/8,e:["win","lose"],rt:"Hoàng thượng phán: “Hậu cung của trẫm rộng đủ cho hai phong tục.”",rf:"Hoàng thượng phán: “Vào nhà ai thì theo lệ nhà ấy.”"},
   {n:"Quỳ tạ, nguyện theo lệ Đại Hy trọn đời",c:{},o:A=>50+(A.f.dh?15:0),e:["mid","lose"],rt:"Hoàng thượng phán: “Từ nay trong cung không ai được gọi nàng là người ngoài.”",rf:"Hoàng thượng chỉ gật đầu, không phán gì."},
   {n:"Mời sứ đoàn cố hương cùng quỳ tạ ơn",c:{suc:-3},o:A=>40+(A.f.home?10:0)+S.danh/6,e:["win","lose"],rt:"Hoàng thượng cười: “Hai nước cùng quỳ một lời, trẫm nhận.”",rf:"Lễ quan tâu: sứ thần quỳ theo phi tần là loạn ngôi thứ."}]}},
@@ -754,7 +754,7 @@ rdDef("nc_vuong",5,{t:"Ấn sách phong",w:"emp",sj:"ấn sách phong cho tân {
   {n:"Chờ Lễ bộ tự xét",c:{danh:-2},w:{duc:2},wx:"không ai nói ngươi xen việc nước",lx:"cố quốc chờ mòn mỏi",rt:"Ngươi gấp quốc thư cất vào hộp."}]},
  s2:{h:"Quốc thư không nhắc tên ngươi",w:"maid",if:NCW(0),t:"Ngôi đã có chủ, nhưng không nhờ lời ngươi. Quốc thư của tân {quan} gửi Đại Hy không nhắc một chữ đến ngươi, và sứ giả đi ngang cửa cung ngươi không ghé.",o:[
   {n:"Gửi thư mừng tân {quan}",c:{bac:-30},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"mercy",wx:"cố quốc nhớ ra còn ngươi",l:{danh:-2},lx:"thư mừng bị gửi trả",rt:"Sứ giả quay lại, cúi đầu nhận thư.",rf:"Thư mừng nằm lại ở sứ quán, không ai mở."},
-  {n:"Mời sứ giả vào cung hỏi chuyện",c:{suc:-2},o:()=>40+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"biết tân {quan} nghĩ gì về ngươi",l:{danh:-2},lx:"sứ giả từ chối",rt:"Sứ giả nói thật: tân {quan} chưa biết nên tin ngươi hay sợ ngươi.",rf:"Sứ giả cáo bận."},
+  {n:"Sai thái giám ra sứ quán hỏi chuyện",c:{suc:-2},o:()=>40+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"biết tân {quan} nghĩ gì về ngươi",l:{danh:-2},lx:"sứ giả từ chối",rt:"Thái giám về kể, sứ giả nói thật: tân {quan} chưa biết nên tin ngươi hay sợ ngươi.",rf:"Sứ giả cáo bận."},
   {n:"Để mặc cố quốc",c:{suc:-2},w:{tamco:1},wx:"không cầu cạnh ai",lx:"cố quốc quên ngươi thêm một chút",rt:"Ngươi không hỏi đến."}]},
  s3:{h:"Mười con ngựa quý",w:"emp",if:BDW(1),t:"Như lời ngươi tâu, trướng vàng {land} đã có chủ và Đại Hy đứng sau. Tân {quan} gửi tặng mười con ngựa quý, xin Đại Hy sớm ban ấn sách phong để các bộ lạc thôi xì xào.",o:[
   {n:"Dâng cả mười con ngựa lên Hoàng thượng",c:{danh:-2},w:{sung:3},f:"loyal",wx:"ngài thấy ngươi không giữ riêng",lx:"tân {quan} hỏi sao quà của mình lại vào chuồng ngựa vua",rt:"Hoàng thượng chọn một con, cưỡi thử quanh Ngự uyển."},
@@ -764,10 +764,10 @@ rdDef("nc_vuong",5,{t:"Ấn sách phong",w:"emp",sj:"ấn sách phong cho tân {
   {n:"Sai người mang trà sữa ra sứ quán",c:{bac:-20},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"mercy",wx:"sứ giả nhớ ra còn ngươi",l:{danh:-2},lx:"trà bị trả về",rt:"Sứ giả uống cạn, nhờ người nhắn lời cảm tạ.",rf:"Trà nguội trên bàn sứ quán."},
   {n:"Dò xem tân {quan} cần gì ở Đại Hy",c:{suc:-2},o:()=>40+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"biết lá bài trong tay mình",l:{danh:-2},lx:"người đi dò bị đuổi",rt:"Tân {quan} cần ấn sách phong trước mùa hội các bộ lạc.",rf:"Không ai chịu nói."},
   {n:"Không hỏi đến",c:{suc:-2},w:{tamco:1},wx:"không cầu cạnh ai",lx:"cố quốc quên ngươi thêm một chút",rt:"Ngươi đóng cửa cung."}]},
- c1:{h:"Sứ phe thua ngôi",w:"maid",t:"Một người khoác áo thương nhân lén tìm đến cung ngươi. Hắn là người của phe thua ngôi, mang theo một rương vàng và lời xin Đại Hy hoãn ấn sách phong.",o:[
+ c1:{h:"Sứ phe thua ngôi",w:"maid",t:"Một thái giám lo việc mua bán ngoài cung lén mang vào cung ngươi một rương vàng và lá thư của phe thua ngôi, xin Đại Hy hoãn ấn sách phong.",o:[
   {n:"Nhận vàng, hứa nói giúp",c:{duc:-3},w:{bac:80},f:"loser",wx:"giàu thêm",lx:"lộ ra thì cả hai nước đều trách",rt:"Rương vàng được khiêng vào kho trong đêm."},
-  {n:"Bắt hắn nộp Hoàng thượng",c:{suc:-2},o:()=>45+S.mat*4,w:{sung:3},sc:1,f:"loyal",wx:"ngài thấy ngươi một lòng",l:{danh:-2},lx:"phe thua ngôi coi ngươi là kẻ thù",rt:"Hắn bị trói giải đến Càn Ninh cung.",rf:"Hắn chạy thoát, kể khắp nơi rằng ngươi bán đứng người cùng nước."},
-  {n:"Trả vàng, nghe hắn nói hết",c:{suc:-2},w:{mat:1},f:"know",wx:"biết phe thua còn bao nhiêu sức",lx:"hắn đi rồi kể rằng đã gặp ngươi",rt:"Phe thua ngôi còn ba vạn quân ở biên, và không định buông."}]},
+  {n:"Bắt hắn nộp Hoàng thượng",c:{suc:-2},o:()=>45+S.mat*4,w:{sung:3},sc:1,f:"loyal",wx:"ngài thấy ngươi một lòng",l:{danh:-2},lx:"phe thua ngôi coi ngươi là kẻ thù",rt:"Thái giám bị trói giải đến Càn Ninh cung, khai ra kẻ gửi vàng.",rf:"Hắn kịp nhắn ra ngoài; phe thua ngôi kể khắp nơi rằng ngươi bán đứng người cùng nước."},
+  {n:"Trả vàng, đọc hết lá thư",c:{suc:-2},w:{mat:1},f:"know",wx:"biết phe thua còn bao nhiêu sức",lx:"phe thua kể khắp nơi rằng ngươi đã đọc thư",rt:"Thư viết rõ: phe thua ngôi còn ba vạn quân ở biên, và không định buông."}]},
  c2:{h:"Lễ bộ chần chừ",w:"v",need:["v"],t:"Thị lang Lễ bộ giữ việc sách phong là anh họ của {v}. Hắn để hồ sơ nằm yên, chờ xem cung ngươi trả giá gì.",o:[
   {n:"Biếu Thị lang một phần lễ",c:{bac:-50},o:()=>50+S.mat*3,sc:1,f:"fast",wx:"hồ sơ chạy",l:{danh:-3},lx:"lộ ra thì tiếng ngươi đút lót",rt:"Ba ngày sau, hồ sơ đã lên đến Hoàng thượng.",rf:"Hắn nhận lễ, hồ sơ vẫn nằm im."},
   {n:"Nhờ Hoàng thượng hỏi đến",c:{sung:-3},o:()=>35+S.sung/4,w:{danh:2},sc:1,f:"fast",wx:"Lễ bộ phải làm",l:{sung:-2},lx:"ngài phiền vì việc nhỏ",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Hoàng thượng hỏi một câu, Thị lang toát mồ hôi.",rf:"Hoàng thượng bảo: “Để họ làm.”"},
@@ -776,7 +776,7 @@ rdDef("nc_vuong",5,{t:"Ấn sách phong",w:"emp",sj:"ấn sách phong cho tân {
   {n:"Hứa với mẹ sẽ giục cho sớm",c:{danh:-2},w:{duc:2},f:"fast",wx:"mẹ yên lòng",lx:"lời hứa thành gánh",rt:"Ngươi viết thư hứa, tay run."},
   {n:"Xin mẹ khuyên tân {quan} tha phe thua",c:{},o:()=>40+S.tai/4,w:{tamco:2},sc:1,f:"mercy",wx:"mở một đường hòa",l:{danh:-2},lx:"mẹ sợ, không dám nói",rt:"Mẹ hồi âm: “Mẹ sẽ nói. Nghe hay không là việc của người ta.”",rf:"Thư không có hồi âm."},
   {n:"Thưa mẹ: việc Đại Hy, con không xen",c:{danh:-2},w:{sung:2},wx:"Hoàng thượng biết ngươi giữ phận",lx:"mẹ buồn",rt:"Ngươi gấp thư mẹ lại."}]},
- x1:{h:"Ngày bàn sách phong",w:"emp",t:"Hoàng thượng gọi ngươi sang Ngự thư phòng. Ấn sách phong đặt trên án, cạnh tờ sớ Lễ bộ xin hoãn: “Nàng là người {land}. Trẫm phong hay chưa?”",o:[
+ x1:{h:"Ngày bàn sách phong",w:"emp",t:"Đêm ấy Hoàng thượng đến cung ngươi, mang theo tờ sớ Lễ bộ xin hoãn ấn sách phong: “Nàng là người {land}. Trẫm phong hay chưa?”",o:[
   {n:"Khuyên phong ngay, kèm lệ cống mới",c:{suc:-4},o:A=>35+(A.f.fast?10:0)+(A.f.loyal?5:0),e:["win","lose"],rt:"Hoàng thượng đóng dấu. Ấn sách phong lên đường cùng lệ cống mới, và tân {quan} gửi thư tạ cả Đại Hy lẫn ngươi.",rf:"Lễ bộ tâu ngươi thiên vị; Hoàng thượng gác lại ấn."},
   {n:"Khuyên phong, buộc tân {quan} tha phe thua",c:{},o:A=>40+(A.f.mercy?15:0)+(A.f.know?5:0)+S.tai/6,e:["win","mid"],rt:"Hoàng thượng viết thêm một dòng vào sắc: phong, và không được giết người cùng tông.",rf:"Hoàng thượng chưa quyết, bảo đợi xem phe thua có buông không."},
   {n:"Thưa: việc nước, thiếp không dám nói",c:{},w:{duc:2},e:"mid",lx:"cố quốc chờ thêm",rt:"Hoàng thượng gật đầu, tự xét."}]}},
@@ -790,11 +790,11 @@ rdDef("nc_vuong",6,{t:"Triều đình chia phe",w:"emp",sj:"việc Đại Hy đ�
  B:{s1:{h:"Binh bộ đòi giá",w:"emp",if:RDW(1),t:"Ấn sách phong vừa trao, Binh bộ đã dâng sớ: Đại Hy đã giúp {land} yên ngôi, nay {land} phải trả bằng hai trấn biên.",o:[
   {n:"Nhắc Hoàng thượng lời hứa trong sắc phong",c:{suc:-2},o:()=>40+S.sung/4,w:{sung:2},sc:1,f:"peace",wx:"ngài nhớ chữ tín",l:{sung:-3},lx:"ngài không thích bị nhắc",rt:"Hoàng thượng nói: “Trẫm chưa quên.”",rf:"Hoàng thượng phẩy tay."},
   {n:"Viết thư báo tân {quan} chuẩn bị",c:{suc:-2},w:{mat:1},f:"warn",wx:"cố quốc không bị bất ngờ",lx:"lộ ra thì thành đưa tin cho nước ngoài",rt:"Thư đi theo đường thương nhân."},
-  {n:"Im lặng chờ triều nghị",c:{danh:-2},w:{duc:2},wx:"không bị bắt lỗi",lx:"Binh bộ nói một mình",rt:"Ngươi không nói gì."}]},
+  {n:"Im lặng chờ ngài phán",c:{danh:-2},w:{duc:2},wx:"không bị bắt lỗi",lx:"Binh bộ nói một mình",rt:"Ngươi không nói gì."}]},
  s2:{h:"Binh bộ thấy cơ hội",w:"emp",if:RDW(0),t:"Đại Hy còn chưa trao ấn, Binh bộ đã dâng sớ: {land} đang rối, đây là lúc lấy lại hai trấn biên mà tiền triều đánh mất.",o:[
   {n:"Xin Hoàng thượng trao ấn trước, bàn đất sau",c:{sung:-3},o:()=>35+S.sung/4,w:{danh:2},sc:1,f:"peace",wx:"cố quốc có chỗ dựa",l:{sung:-2},lx:"ngài thấy ngươi nóng ruột",rt:"Hoàng thượng cho trao ấn, giữ việc đất lại bàn sau.",rf:"Hoàng thượng bảo hai việc là một."},
   {n:"Viết thư báo tân {quan} chuẩn bị",c:{suc:-2},w:{mat:1},f:"warn",wx:"cố quốc không bị bất ngờ",lx:"lộ ra thì thành đưa tin cho nước ngoài",rt:"Thư đi theo đường thương nhân."},
-  {n:"Xin gặp Thượng thư Lễ bộ",c:{bac:-30},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"peace",wx:"Lễ bộ có thêm lý lẽ",l:{danh:-2},lx:"phi tần gặp quan triều, dễ bị nói",rt:"Thượng thư Lễ bộ nhận lời nói thay ngươi trong triều.",rf:"Thượng thư cáo bệnh."}]},
+  {n:"Nhờ phu nhân Thượng thư Lễ bộ chuyển lời",c:{bac:-30},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"peace",wx:"Lễ bộ có thêm lý lẽ",l:{danh:-2},lx:"phi tần nhắn lời ra triều, dễ bị nói",rt:"Phu nhân vào thỉnh an, về nhà kể lại; Thượng thư Lễ bộ nói thay ngươi trong triều.",rf:"Phu nhân cáo bệnh không vào."}]},
  c1:{h:"Thượng thư Binh bộ",w:"v",need:["v"],t:"Thượng thư Binh bộ là thông gia của nhà {v}. Nếu Đại Hy động binh, một người anh họ của {v} sẽ cầm quân lấy công, và nhà {v} sẽ lên một bậc.",o:[
   {n:"Chỉ ra Binh bộ cầu công riêng",c:{suc:-3},o:()=>40+S.tamco/3,w:{danh:3},sc:1,f:"peace",wx:"triều thần thấy rõ",l:{danh:-3},lx:"thành ra ngươi đối đầu một Thượng thư",go:(A,ok)=>{rdOan(A,"v",ok?10:6)},rt:"Một vị Ngự sử nhắc chuyện ấy trong triều.",rf:"Người ta bảo ngươi vu cho trọng thần."},
   {n:"Gặp {v}, đề nghị một con đường khác cho nhà nàng",c:{},o:()=>35+S.duc/4,w:{duc:2},sc:1,wx:"nhà {v} bớt hăng",l:{danh:-2},lx:"{v} cho là ngươi sợ",go:(A,ok)=>{rdRel(A,"v",ok?10:-5)},rt:"{v} nghe đến chức tuần biên không đổ máu, mắt sáng lên.",rf:"{v} cười: “Nhà ta không cần ngươi lo.”"},
@@ -807,8 +807,8 @@ rdDef("nc_vuong",6,{t:"Triều đình chia phe",w:"emp",sj:"việc Đại Hy đ�
   {n:"Thưa: thiếp oán người làm ngài thất tín",c:{},o:()=>40+S.sung/4,w:{sung:3},sc:1,f:"peace",wx:"ngài nghe ra ý",l:{sung:-3},lx:"ngài cho là ngươi dạy ngài",rt:"Hoàng thượng cười: “Nàng mắng khéo thật.”",rf:"Hoàng thượng quay mặt đi."},
   {n:"Thưa: thiếp là người của Đại Hy",c:{danh:-2},w:{sung:2},wx:"ngài yên lòng",lx:"ngài nghĩ ngươi sẽ không cản",rt:"Hoàng thượng kéo chăn đắp cho ngươi."},
   {n:"Thưa: nếu đổi được chợ biên thì không ai phải oán",c:{},o:()=>40+S.tai/4,w:{tamco:2},sc:1,f:"trade",wx:"ngài nghĩ lại",l:{danh:-2},lx:"ngài chưa tin",rt:"Hoàng thượng ngồi dậy, bảo ngươi nói tiếp.",rf:"Hoàng thượng bảo: “Đàn bà biết gì chợ biên.”"}]},
- x1:{h:"Triều nghị",w:"emp",t:"Triều nghị chia hai phe rõ rệt. Hoàng thượng chưa phê, chỉ sai thái giám mang đến cung ngươi một tờ giấy trắng: “Nàng viết đi.”",o:[
-  {n:"Viết kế đổi đất lấy chợ biên",c:{suc:-4},o:A=>35+(A.f.trade?15:0)+S.tai/6,e:["win","lose"],rt:"Hoàng thượng đọc kế trước triều. Binh bộ không còn lời, Hộ bộ gật gù, và {land} nhận chợ biên thay vì mất đất.",rf:"Binh bộ cười: “Kế của người {land}, lợi cho {land}.”"},
+ x1:{h:"Tờ giấy trắng",w:"emp",t:"Ở tiền triều, triều thần chia hai phe rõ rệt. Hoàng thượng chưa phê, chỉ sai thái giám mang đến cung ngươi một tờ giấy trắng: “Nàng viết đi.”",o:[
+  {n:"Viết kế đổi đất lấy chợ biên",c:{suc:-4},o:A=>35+(A.f.trade?15:0)+S.tai/6,e:["win","lose"],rt:"Hoàng thượng chép lại kế ấy bằng tay mình, đọc trước triều. Binh bộ không còn lời, Hộ bộ gật gù, và {land} nhận chợ biên thay vì mất đất.",rf:"Binh bộ cười: “Kế của người {land}, lợi cho {land}.”"},
   {n:"Viết hai chữ: giữ tín",c:{},o:A=>45+(A.f.peace?15:0)+S.sung/6,e:["win","mid"],rt:"Hoàng thượng phê: giữ hòa ước như cũ.",rf:"Hoàng thượng hoãn việc đất, nhưng không bác hẳn."},
   {n:"Trả tờ giấy trắng",c:{},o:A=>45+S.duc/6,e:["mid","lose"],rt:"Hoàng thượng hiểu ngươi không muốn xen, tự gác việc lại.",rf:"Binh bộ được thế, sớ đòi đất được chuẩn."}]}},
  E:{win:{k:1,tag:"Hòa ước được giữ",w:"emp",t:"Biên ải yên. Binh bộ mất một dịp lập công, và nhà {v} nhớ điều đó. Ở {land}, người ta kể lại rằng công chúa bên Đại Hy đã giữ đất cho nước.",fx:{danh:5,sung:2},go:A=>{e67bien(3);rdOan(A,"v",6);return ""}},
@@ -869,11 +869,11 @@ rdDef("nc_vuong",8,{t:"Binh Đại Hy xuất ải",w:"emp",sj:"việc Đại Hy 
   {n:"Giữ mật thư, dùng khi cần",c:{suc:-2},w:{tamco:2},sc:1,f:"split",wx:"cầm một lá bài lớn",lx:"giữ thư của giặc là chuyện nguy",rt:"Ngươi khâu mật thư vào lót áo."},
   {n:"Trình mật thư lên Hoàng thượng",c:{},o:()=>45+S.sung/5,w:{sung:3},sc:1,f:"split",wx:"ngài có thêm đường",l:{sung:-2},lx:"ngài hỏi sao thư lại đến tay ngươi",rt:"Hoàng thượng đọc xong, gõ nhẹ lên án: “Hay.”",rf:"Hoàng thượng nghi ngươi có đường dây với giặc."},
   {n:"Đốt đi",c:{danh:-2},w:{duc:1},wx:"không dính gì",lx:"mất một đường hòa",rt:"Mật thư cháy trong lò."}]},
- x1:{h:"Hoàng thượng quyết",w:"emp",t:"Hoàng thượng triệu ngươi đến trước bản đồ biên ải: “Đánh, không đánh, hay đánh cách nào. Nàng nói.”",o:[
-  {n:"Khuyên xuất quân giúp tân {quan} lấy lại ba thành",c:{suc:-4},o:A=>35+(A.f.old?10:0)+(A.f.map?10:0),e:["win","lose"],rt:"Quân Đại Hy theo đường núi ngươi vẽ, lấy lại ba thành trong một tháng.",rf:"Quân Đại Hy đi vội, bị kẹt ở hẻm núi."},
+ x1:{h:"Hoàng thượng quyết",w:"emp",t:"Hoàng thượng mang bản đồ biên ải sang cung ngươi, trải lên án: “Đánh, không đánh, hay đánh cách nào. Nàng nói.”",o:[
+  {n:"Khuyên xuất quân giúp tân {quan} lấy lại ba thành",c:{suc:-4},o:A=>35+(A.f.old?10:0)+(A.f.map?10:0),e:["win","lose"],rt:"Hoàng thượng hạ chỉ xuất quân. Quân Đại Hy theo đường núi ngươi vẽ, lấy lại ba thành trong một tháng.",rf:"Quân Đại Hy đi vội, bị kẹt ở hẻm núi."},
   {n:"Khuyên chiêu hàng trước, đánh sau",c:{},o:A=>40+(A.f.split?20:0)+S.tai/6,e:["win","mid"],rt:"Hai viên tướng giặc mở cổng thành hàng. Quân Đại Hy vào thành không mất một mũi tên.",rf:"Chiêu hàng không thành, quân Đại Hy dừng ở ải."},
   {n:"Khuyên giữ ải, không vượt",c:{},w:{duc:2},e:"mid",lx:"tân {quan} tự đánh một mình",rt:"Quân Đại Hy đóng ở ải, chờ."}]}},
- E:{win:{k:1,tag:"Viện binh đúng lúc",w:"emp",t:"Ba thành biên về lại tay tân {quan}. Đại Hy được tiếng giữ chữ tín, và lời ngươi trước bản đồ được truyền khắp Binh bộ.",fx:{danh:6,sung:3},go:()=>e67bien(5)},
+ E:{win:{k:1,tag:"Viện binh đúng lúc",w:"emp",t:"Ba thành biên về lại tay tân {quan}. Đại Hy được tiếng giữ chữ tín, và lời ngươi nói với Hoàng thượng đêm ấy được truyền khắp Binh bộ.",fx:{danh:6,sung:3},go:()=>e67bien(5)},
   mid:{k:0,tag:"Đại Hy giữ ải",t:"Quân Đại Hy đứng ở ải. Không mất người, không được công. Chiến sự ở {land} còn kéo dài.",fx:{danh:1}},
   lose:{k:-1,tag:"Xuất quân vội vàng",t:"Quân Đại Hy sa vào hẻm núi, mất nhiều người. Ở kinh, người ta bắt đầu hỏi ai đã khuyên xuất quân.",fx:{danh:-4,sung:-3},go:()=>e67bien(-3)}}});
 
@@ -889,8 +889,8 @@ rdDef("nc_vuong",9,{t:"Tin bại trận",w:"emp",sj:"trận thua ở hẻm núi 
   {n:"Tự đến Càn Ninh cung quỳ chờ",c:{suc:-4},o:()=>35+S.sung/4,w:{sung:3},sc:1,wx:"ngài thấy ngươi không trốn",l:{sung:-3},lx:"quỳ cả ngày mà không được gặp",rt:"Hoàng thượng cho gọi vào.",rf:"Ngươi quỳ đến tối."},
   {n:"Im lặng",c:{danh:-2},w:{duc:1},wx:"không thêm lời",lx:"lời đồn tự lớn",rt:"Ngươi không nói gì."}]},
  c1:{h:"Ngự sử hặc ngươi",w:"emp",t:"Ngự sử dâng sớ: phi tần người {land} can dự binh sự, khiến quân Đại Hy chết oan. Xin xét tội.",o:[
-  {n:"Dâng biểu tự trình",c:{suc:-3},o:()=>35+S.tai/4,w:{danh:3},sc:1,f:"plead",wx:"triều nghe lời ngươi",l:{danh:-3},lx:"phi tần dâng biểu lên triều là trái lệ",rt:"Tờ biểu đọc trong triều, nhiều người lặng đi.",rf:"Lễ bộ trả biểu về."},
-  {n:"Nhờ Thượng thư Lễ bộ nói giúp",c:{bac:-40},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"có tiếng nói trong triều",l:{danh:-2},lx:"người ta bảo ngươi kết bè ngoài triều",rt:"Thượng thư Lễ bộ nói: việc binh là của Binh bộ.",rf:"Thượng thư cáo bệnh."},
+  {n:"Dâng biểu tự trình",c:{suc:-3},o:()=>35+S.tai/4,w:{danh:3},sc:1,f:"plead",wx:"triều nghe lời ngươi",l:{danh:-3},lx:"phi tần dâng biểu lên triều là trái lệ",rt:"Hoàng thượng đọc tờ biểu, đem từng ý ra hỏi Ngự sử trước triều.",rf:"Lễ bộ trả biểu về."},
+  {n:"Nhờ phu nhân Thượng thư Lễ bộ chuyển lời",c:{bac:-40},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"có tiếng nói trong triều",l:{danh:-2},lx:"người ta bảo ngươi kết bè ngoài triều",rt:"Thượng thư Lễ bộ nói trong triều: việc binh là của Binh bộ.",rf:"Phu nhân cáo bệnh không vào."},
   {n:"Chịu tiếng, không đáp",c:{danh:-2},w:{duc:2},wx:"không thêm sóng",lx:"tờ sớ đi một mình",rt:"Ngươi không đáp."}]},
  c2:{h:"{v} nói ngươi là gian tế",w:"v",need:["v"],t:"{v} khóc trước Hoàng thượng: “Kẻ dẫn đường cho giặc biết hẻm núi ấy. Trong cung này, ai biết đường núi {land} rõ hơn nàng ta?”",o:[
   {n:"Hỏi lại: ai cầm cánh quân ấy",c:{},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,f:"wit",wx:"câu hỏi chạm đúng chỗ đau",l:{danh:-3},lx:"thành ra hai cung đấu nhau trước vua",go:A=>{rdOan(A,"v",10)},rt:"{v} tái mặt. Hoàng thượng nhíu mày nhìn nàng.",rf:"{v} khóc to hơn."},
@@ -900,7 +900,7 @@ rdDef("nc_vuong",9,{t:"Tin bại trận",w:"emp",sj:"trận thua ở hẻm núi 
   {n:"Cho người ghi lời hắn, có người làm chứng",c:{bac:-30},w:{mat:1},sc:2,f:"wit",wx:"có lời khai",lx:"tốn bạc, lời lính thường nhẹ",rt:"Lời khai có chữ điểm chỉ của hắn và hai người cùng trại."},
   {n:"Đưa hắn đến Binh bộ khai",c:{},o:()=>40+S.danh/4,sc:1,wx:"lời khai thành công văn",l:{danh:-2},lx:"Binh bộ là nhà của người bị khai",rt:"Một viên Lang trung ngay thẳng ghi lời.",rf:"Người lính bị đưa đi chỗ khác."},
   {n:"Để yên cho hắn dưỡng thương",c:{danh:-2},w:{duc:2},wx:"không đẩy người vào chỗ nguy",lx:"mất một lời chứng",rt:"Ngươi gửi cho hắn một gói thuốc."}]},
- x1:{h:"Hoàng thượng triệu ngươi",w:"emp",t:"Hoàng thượng triệu ngươi đến Càn Ninh cung. Tờ sớ hặc và quân báo đặt cạnh nhau. Ngài hỏi: “Nàng có gì để nói?”",o:[
+ x1:{h:"Hoàng thượng triệu ngươi",w:"emp",t:"Hoàng thượng triệu ngươi đến Càn Ninh cung. Tờ sớ hặc và quân báo đặt cạnh nhau trên án. Ngài hỏi: “Nàng có gì để nói?”",o:[
   {n:"Trình lời khai của người lính",c:{suc:-4},o:A=>35+(A.f.wit?15:0),e:["win","lose"],rt:"Hoàng thượng đọc xong, sai tra Phó tướng trái lệnh. Tờ sớ hặc ngươi bị trả về.",rf:"Lời một tên lính không địch được tờ sớ của Ngự sử."},
   {n:"Xin tự cấm túc chờ tra xét",c:{},o:A=>45+(A.f.plead?10:0)+S.duc/6,e:["win","mid"],rt:"Hoàng thượng không cho cấm túc: “Người có tội không tự đóng cửa như thế.”",rf:"Ngươi cấm túc một tháng, tra xong không ra tội, nhưng cũng không ai xin lỗi."},
   {n:"Quỳ nhận lỗi đã khuyên việc binh",c:{},w:{duc:2},e:"mid",lx:"mang tiếng nhận tội thay",rt:"Hoàng thượng thở dài, cho lui."}]}},
@@ -911,12 +911,12 @@ rdDef("nc_vuong",9,{t:"Tin bại trận",w:"emp",sj:"trận thua ở hẻm núi 
 rdDef("nc_vuong",10,{t:"Lời quyết",w:"emp",sj:"lời quyết của ngươi về cố quốc",cast(A){return rdCast(A,["v"])},
  g:"Phe thua ngôi sai sứ xin giảng hòa: chia đôi {land}, mỗi bên một nửa. Tân {quan} xin Đại Hy giúp dẹp hẳn. Hoàng thượng nói: lần này trẫm nghe nàng, và chỉ nghe một lần.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Kẻ thù xin gặp",w:"maid",if:RDW(1),t:"Tiếng ngươi đã sạch, ai cũng biết lời ngươi là lời thật. Sứ phe thua ngôi xin gặp ngươi trước khi vào gặp Hoàng thượng.",o:[
+ B:{s1:{h:"Kẻ thù xin gặp",w:"maid",if:RDW(1),t:"Tiếng ngươi đã sạch, ai cũng biết lời ngươi là lời thật. Sứ phe thua ngôi là một người họ hàng của ngươi; hắn xin Hoàng thượng cho vào cung thăm ngươi như người nhà.",o:[
   {n:"Tiếp sứ có thái giám Nội vụ phủ đứng bên",c:{suc:-2},w:{danh:2},f:"know",wx:"nghe được mà không bị nghi",lx:"sứ nói ít hơn khi có người lạ",rt:"Sứ trình điều kiện, thái giám ghi từng chữ."},
   {n:"Từ chối gặp",c:{danh:-2},w:{sung:2},wx:"Hoàng thượng thấy ngươi giữ phận",lx:"không biết phe thua thật muốn gì",rt:"Sứ đứng ngoài cửa cung một lúc rồi đi."},
-  {n:"Gặp riêng, nghe hết",c:{},o:()=>40+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"biết điều sứ không nói trước triều",l:{danh:-3},lx:"lộ ra thì lại tiếng gian tế",rt:"Sứ thú thật: phe thua đã cạn lương, chỉ cần một lối lui có thể diện.",rf:"Có kẻ thấy sứ ra từ cửa cung ngươi."}]},
+  {n:"Nhận thư riêng hắn gửi qua thái giám",c:{},o:()=>40+S.mat*4,w:{mat:1},sc:1,f:"know",wx:"biết điều sứ không nói trước triều",l:{danh:-3},lx:"lộ ra thì lại tiếng gian tế",rt:"Sứ thú thật: phe thua đã cạn lương, chỉ cần một lối lui có thể diện.",rf:"Có kẻ thấy thái giám mang thư vào cung ngươi."}]},
  s2:{h:"Lời ngươi nhẹ đi",w:"emp",if:RDW(0),t:"Tiếng gian tế chưa sạch, lời ngươi nhẹ đi trong triều. Nhưng Hoàng thượng vẫn cho gọi, vì không ai hiểu {land} hơn ngươi.",o:[
-  {n:"Xin Hoàng thượng cho nghe sứ hai bên cùng lúc",c:{suc:-2},o:()=>40+S.sung/4,w:{mat:1},sc:1,f:"know",wx:"nghe công khai, không ai nghi",l:{sung:-2},lx:"ngài bảo ngươi đòi nhiều",rt:"Hoàng thượng cho ngươi ngồi sau bình phong khi tiếp sứ.",rf:"Hoàng thượng bảo: “Trẫm nghe, rồi kể nàng.”"},
+  {n:"Xin Hoàng thượng kể lại lời sứ hai bên",c:{suc:-2},o:()=>40+S.sung/4,w:{mat:1},sc:1,f:"know",wx:"nghe công khai, không ai nghi",l:{sung:-2},lx:"ngài bảo ngươi đòi nhiều",rt:"Đêm ấy Hoàng thượng kể lại từng lời sứ hai bên, không sót.",rf:"Hoàng thượng bảo: “Việc tiếp sứ, nàng chớ bận lòng.”"},
   {n:"Thưa: thiếp chỉ nói khi ngài hỏi",c:{danh:-2},w:{duc:2},wx:"không ai bắt lỗi",lx:"biết ít hơn",rt:"Ngươi cúi đầu."},
   {n:"Gửi thư hỏi {mh}",c:{bac:-20},w:{tamco:1},f:"peace",wx:"nghe lời người trong cuộc",lx:"thư qua tay Nội vụ phủ",rt:"Thư đi, mất nửa tháng mới về."}]},
  c1:{h:"Điều kiện của phe thua ngôi",w:"maid",t:"Sứ phe thua ngôi đưa thêm một điều riêng cho ngươi: nếu ngươi nói giúp, họ thả hết người thân của ngươi đang bị giữ, và dâng ngươi một trang ấp ở biên.",o:[
@@ -931,48 +931,48 @@ rdDef("nc_vuong",10,{t:"Lời quyết",w:"emp",sj:"lời quyết của ngươi v
   {n:"Nghe lời mẹ",c:{danh:-2},w:{duc:3},sc:1,f:"peace",wx:"lòng định về phía hòa",lx:"tân {quan} sẽ cho là ngươi phản",rt:"Ngươi đọc thư mẹ ba lần."},
   {n:"Thưa mẹ: chia rồi thì không bao giờ ghép lại",c:{suc:-2},w:{tamco:2},sc:1,f:"hard",wx:"lòng định về phía một ngai",lx:"mẹ buồn",rt:"Ngươi viết thư đáp mẹ, không khóc."},
   {n:"Không đáp",c:{suc:-2},w:{mat:1},wx:"giữ ý kín",lx:"mẹ chờ",rt:"Ngươi gấp thư lại."}]},
- x1:{h:"Lời quyết",w:"emp",t:"Sứ hai bên quỳ trước điện. Hoàng thượng quay về phía bình phong: “Nàng nói. Trẫm theo.”",o:[
+ x1:{h:"Lời quyết",w:"emp",t:"Sứ hai bên đã về sứ quán chờ. Đêm ấy Hoàng thượng đến cung ngươi: “Mai trẫm trả lời họ. Nàng nói. Trẫm nghe.”",o:[
   {n:"Khuyên giúp tân {quan} dẹp hẳn phe thua",c:{suc:-4},o:A=>35+(A.f.hard?15:0),e:["win","lose"],rt:"Đại Hy xuất quân lần cuối. Phe thua ngôi tan, tân {quan} ngồi vững.",rf:"Quân Đại Hy đánh mãi không xong, phe thua rút vào rừng núi."},
   {n:"Khuyên mở hội thề ở biên ải, Đại Hy làm chứng",c:{},o:A=>40+(A.f.know?10:0)+(A.f.peace?10:0)+S.tai/6,e:["win","mid"],rt:"Hoàng thượng chuẩn. Ngày hội thề định vào đầu xuân, hai bên đều gật đầu.",rf:"Hai bên gật đầu, nhưng không bên nào tin bên nào."},
-  {n:"Khuyên để {land} tự định",c:{},w:{duc:2},e:"mid",lx:"Đại Hy rút tay, cố quốc tự lo",rt:"Hoàng thượng phẩy tay cho sứ lui."}]}},
- E:{win:{k:1,tag:"Lời quyết được nghe",w:"emp",t:"Một lời của ngươi định hướng cho cả hai nước. Sứ hai bên ra về đều nhớ mặt người ngồi sau bình phong.",fx:{danh:6,sung:4},go:()=>e67bien(4)},
+  {n:"Khuyên để {land} tự định",c:{},w:{duc:2},e:"mid",lx:"Đại Hy rút tay, cố quốc tự lo",rt:"Sáng hôm sau, Hoàng thượng cho sứ hai bên về nước tự định."}]}},
+ E:{win:{k:1,tag:"Lời quyết được nghe",w:"emp",t:"Lời quyết là của Hoàng thượng, nhưng sứ hai bên ra về đều biết trong lời ấy có lời của ngươi.",fx:{danh:6,sung:4},go:()=>e67bien(4)},
   mid:{k:0,tag:"Cố quốc tự định",t:"Đại Hy lùi một bước. {land} còn chia hai phe, chưa bên nào thắng hẳn.",fx:{danh:1}},
   lose:{k:-1,tag:"Lời quyết sai",t:"Lời ngươi đưa Đại Hy vào một cuộc chiến không dứt. Triều thần bắt đầu tính xem ai sẽ chịu tội.",fx:{danh:-5,sung:-4},go:()=>e67bien(-4)}}});
 
 rdDef("nc_vuong",11,{t:"Ngai vàng sau cùng",w:"emp",sj:"ngai vàng {land}",cast(A){return rdCast(A,["v"])},
  g:"Đầu xuân, sứ của tân {quan} và của phe thua ngôi cùng vào kinh, hội ở Hồng Lô tự. Chiến hay hòa, một ngai hay hai, đều quyết ở đây. Đây là kết cục truyện xuất thân của ngươi.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Hai đoàn sứ vào kinh",w:"emp",if:RDW(1),t:"Sứ hai bên vào kinh cùng một ngày. Cả hai đoàn đều xin vào thỉnh an ngươi trước khi đến Hồng Lô tự.",o:[
+ B:{s1:{h:"Hai đoàn sứ vào kinh",w:"emp",if:RDW(1),t:"Sứ hai bên vào kinh cùng một ngày. Cả hai đoàn đều có người họ hàng của ngươi, và đều xin Hoàng thượng cho vào cung thăm ngươi như người nhà trước khi đến Hồng Lô tự.",o:[
   {n:"Tiếp cả hai đoàn cùng lúc",c:{suc:-3},o:()=>40+S.danh/4,w:{danh:3},sc:1,f:"both",wx:"hai bên thấy ngươi không thiên vị",l:{danh:-2},lx:"hai đoàn cãi nhau ngay trong cung ngươi",rt:"Hai đoàn ngồi hai bên, uống cùng một ấm trà.",rf:"Hai đoàn không ai chịu ngồi dưới ai."},
   {n:"Chỉ tiếp sứ của tân {quan}",c:{danh:-2},w:{sung:2},f:"crown",wx:"giữ lễ với ngai chính",lx:"phe thua thấy ngươi đã chọn",rt:"Sứ của tân {quan} dâng quà, cảm tạ."},
   {n:"Không tiếp ai",c:{danh:-2},w:{duc:2},wx:"không bị nói thiên vị",lx:"cả hai bên không biết ý ngươi",rt:"Ngươi đóng cửa cung."}]},
  s2:{h:"Hội thề trong nghi kỵ",w:"emp",if:RDW(0),t:"Cuộc chiến ở {land} vẫn kéo. Hai đoàn sứ vào kinh, mỗi bên mang theo một tờ sớ tố cáo bên kia. Lời ngươi lúc này vừa nặng vừa nguy.",o:[
-  {n:"Xin Hoàng thượng cho ngồi sau bình phong ở Hồng Lô tự",c:{sung:-3},o:()=>35+S.sung/4,w:{mat:1},sc:1,f:"both",wx:"nghe tận tai",l:{sung:-2},lx:"ngài bảo phi tần không ra khỏi cung",rt:"Hoàng thượng chuẩn, cho thái giám đi kèm.",rf:"Hoàng thượng không chuẩn."},
+  {n:"Xin Hoàng thượng mỗi tối kể lại việc hội",c:{sung:-3},o:()=>35+S.sung/4,w:{mat:1},sc:1,f:"both",wx:"nghe tận tai",l:{sung:-2},lx:"ngài thấy ngươi để tâm việc triều quá",rt:"Hoàng thượng gật đầu; tối nào ngài cũng ghé cung ngươi kể chuyện hội.",rf:"Hoàng thượng bảo: “Việc ngoài triều, nàng chớ bận lòng.”"},
   {n:"Gửi quà cho cả hai đoàn",c:{bac:-40},w:{danh:2},sc:1,f:"both",wx:"hai bên bớt gai",lx:"tốn bạc",rt:"Hai đoàn nhận quà, sứ già hai bên cùng gửi lời tạ."},
   {n:"Đứng ngoài",c:{danh:-2},w:{duc:2},wx:"không mang tiếng",lx:"hội thề không có người hiểu cả hai bên",rt:"Ngươi ở trong cung."}]},
  c1:{h:"Người thân bị giữ",w:"maid",t:"Một thư lén gửi đến: trong đoàn sứ phe thua ngôi có người giữ danh sách những người thân của ngươi còn bị họ giữ ở biên, kể cả người hầu cũ của {mh}.",o:[
   {n:"Đòi trả người làm điều kiện trước hội",c:{suc:-3},o:()=>40+S.tamco/3,w:{tamco:2},sc:1,f:"hard",wx:"người thân về",l:{danh:-2},lx:"hội thề chưa bắt đầu đã căng",rt:"Phe thua trả người trước ngày hội.",rf:"Phe thua bảo: người là để đổi, không để cho."},
   {n:"Bỏ bạc chuộc người",c:{bac:-80},w:{duc:2},sc:1,wx:"người thân về yên",lx:"phe thua biết ngươi chịu trả",rt:"Danh sách người thân được trao lại, kèm văn tự thả."},
   {n:"Gác chuyện riêng, chờ hội xong",c:{danh:-2},w:{duc:3},f:"both",wx:"lời ngươi trong hội sạch",lx:"người thân còn chờ",rt:"Ngươi cất thư."}]},
- c2:{h:"Chén rượu có độc",w:"v",need:["v"],t:"Cung nữ của ngươi bắt gặp người nhà {v} lén đổi bình rượu hội thề ở Hồng Lô tự. Nếu một sứ thần ngã xuống, hội tan, và Binh bộ lại có trận để đánh.",o:[
-  {n:"Bắt tận tay, nộp Hoàng thượng",c:{suc:-4},o:()=>40+S.mat*5,w:{danh:3},sc:2,f:"guard",wx:"cứu được hội thề",l:{danh:-3},lx:"ầm ĩ trước ngày hội",go:(A,ok)=>{rdOan(A,"v",ok?14:6)},rt:"Người nhà {v} bị bắt cùng bình rượu.",rf:"Kẻ đổi rượu chạy thoát, bình rượu bị đập vỡ."},
-  {n:"Lặng lẽ đổi bình lại",c:{suc:-2},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"guard",wx:"hội an toàn mà không ai biết",l:{danh:-2},lx:"kẻ đứng sau còn yên",rt:"Bình rượu thật trở về chỗ cũ.",rf:"Ngươi không tìm ra bình nào bị đổi."},
+ c2:{h:"Chén rượu có độc",w:"v",need:["v"],t:"Rượu hội thề do Ngự thiện phòng cất, sắp đưa ra Hồng Lô tự. Cung nữ của ngươi bắt gặp một thái giám cung {v} lén đổi một vò. Nếu một sứ thần ngã xuống, hội tan, và Binh bộ lại có trận để đánh.",o:[
+  {n:"Bắt tận tay, nộp Hoàng thượng",c:{suc:-4},o:()=>40+S.mat*5,w:{danh:3},sc:2,f:"guard",wx:"cứu được hội thề",l:{danh:-3},lx:"ầm ĩ trước ngày hội",go:(A,ok)=>{rdOan(A,"v",ok?14:6)},rt:"Thái giám cung {v} bị bắt cùng vò rượu, khai người nhà {v} sai khiến.",rf:"Kẻ đổi rượu chạy thoát, vò rượu bị đập vỡ."},
+  {n:"Lặng lẽ đổi vò lại",c:{suc:-2},o:()=>45+S.mat*4,w:{mat:1},sc:1,f:"guard",wx:"hội an toàn mà không ai biết",l:{danh:-2},lx:"kẻ đứng sau còn yên",rt:"Vò rượu thật trở về chỗ cũ.",rf:"Ngươi không tìm ra vò nào bị đổi."},
   {n:"Tìm {v} nói thẳng",c:{},o:()=>35+S.duc/4,w:{duc:2},sc:1,wx:"{v} cho người dừng tay",l:{danh:-2},lx:"{v} biết ngươi đã biết",go:(A,ok)=>{rdRel(A,"v",ok?12:-8)},rt:"{v} tái mặt: “Ta không biết nhà ta làm đến thế.”",rf:"{v} nói: “Ngươi có chứng gì?”"}]},
  t1:{h:"Hoàng thượng hỏi ngươi muốn gì",w:"emp",t:"Đêm trước hội, Hoàng thượng hỏi: “Xong việc này, nàng muốn gì cho mình?”",o:[
   {n:"Thưa: không muốn gì, chỉ muốn cố quốc yên",c:{danh:-2},w:{duc:3},sc:1,f:"both",wx:"ngài nhớ lời này",lx:"không xin thì không có",rt:"Hoàng thượng nắm tay ngươi rất lâu."},
   {n:"Xin được về thăm mẹ một lần",c:{},o:()=>40+S.sung/4,w:{sung:2},sc:1,wx:"ngài hứa",l:{sung:-2},lx:"ngài sợ ngươi đi không về",rt:"Hoàng thượng nói: “Xong hội, trẫm cho người hộ tống.”",rf:"Hoàng thượng im lặng."},
   {n:"Xin một phong hiệu cho mình",c:{},o:()=>35+S.danh/4,w:{danh:2},sc:1,f:"crown",wx:"có danh phận rõ ở cả hai nước",l:{sung:-3},lx:"ngài thấy ngươi đòi công",rt:"Hoàng thượng gật đầu: “Để xem hội ra sao.”",rf:"Hoàng thượng cau mày."}]},
- x1:{h:"Hội thề ở Hồng Lô tự",w:"emp",t:"Hai đoàn sứ đứng hai bên án hương. Hoàng thượng ngồi trên, ngươi ngồi sau bình phong bên cạnh. Lời thề còn chưa ai đọc.",o:[
-  {n:"Xin ra đọc lời thề bằng tiếng hai nước",c:{suc:-5},o:A=>35+(A.f.both?10:0)+(A.f.guard?10:0),e:["win","lose"],rt:"Ngươi đọc từng câu, bằng tiếng Đại Hy rồi tiếng {land}. Sứ hai bên cùng quỳ, cùng uống chén rượu thề.",rf:"Giữa lời thề, sứ phe thua đứng dậy bỏ ra: “Người của bên kia, đọc lời của bên kia.”"},
+ x1:{h:"Ngày hội thề",w:"emp",t:"Hội thề ở Hồng Lô tự đã đến ngày cuối, mà lời thề chưa bên nào chịu đọc trước. Hoàng thượng sai thái giám về cung hỏi ngươi một câu, và đứng chờ đem lời ngươi đi.",o:[
+  {n:"Viết lời thề bằng chữ hai nước gửi đi",c:{suc:-5},o:A=>35+(A.f.both?10:0)+(A.f.guard?10:0),e:["win","lose"],rt:"Thái giám mang tờ lời thề ngươi viết bằng chữ Đại Hy và chữ {land} về Hồng Lô tự. Hoàng thượng cho đọc; sứ hai bên cùng quỳ, cùng uống chén rượu thề.",rf:"Sứ phe thua đọc xong đứng dậy bỏ ra: “Lời của người bên kia viết.”"},
   {n:"Khuyên Hoàng thượng buộc phe thua quy thuận",c:{},o:A=>40+(A.f.hard?15:0)+(A.f.crown?5:0)+S.sung/6,e:["win","lose"],rt:"Phe thua ngôi quỳ nhận phong làm Thân vương, một ngai cho cả {land}.",rf:"Phe thua ngôi không chịu quỳ. Chiến sự lại nổ ra ở biên."},
   {n:"Khuyên chia đôi cho yên",c:{},o:A=>50+S.duc/6,e:["mid","lose"],rt:"Hai bên ký chia đất. {land} thành hai, mỗi bên một ngai.",rf:"Hai bên ký rồi lại xé, ngay trong năm."}]}},
  E:{win:{k:1,tag:"Cố quốc một lòng",w:"emp",t:"{land} có một ngai, một lời thề, và Đại Hy đứng làm chứng. Sứ hai nước, từ nay, vào kinh là ghé thỉnh an ngươi trước tiên.",fx:{danh:10,sung:5},go:()=>e67bien(6)},
   mid:{k:0,tag:"Cố quốc chia đôi",t:"{land} chia hai, mỗi bên một ngai, cả hai đều gọi ngươi là người nhà mà không bên nào nghe ngươi trọn. Biên ải yên, lòng ngươi không yên.",fx:{danh:2},go:()=>e67bien(1)},
   lose:{k:-1,tag:"Cố quốc thành nước thù",t:"Hội thề tan, chiến sự lại nổ, và {land} quay lưng với Đại Hy. Ngươi vẫn là phi tần của Hoàng thượng, nhưng trong mắt cả hai nước, ngươi như một con tin chưa ai đòi.",fx:{danh:-6,sung:-4},go:()=>e67bien(-6)}}});
-RD97L.push({a:"nc_vuong_11",tag:"Hai nhà thề hòa trước mặt ngươi",w:"emp",p:.1,n:"Xin tự tay rót chén rượu thề cho cả hai bên",c:{suc:-4},
- path:["Khuyên phong, buộc tân","Xin mẹ khuyên tân","Trả vàng, nghe hắn nói hết","Viết kế đổi đất lấy chợ biên","Khuyên chiêu hàng trước","Trình lời khai của người lính","Khuyên mở hội thề","Từ chối mọi điều riêng","Tiếp cả hai đoàn cùng lúc","Bắt tận tay, nộp Hoàng thượng"],np:2,
+RD97L.push({a:"nc_vuong_11",tag:"Hai nhà thề hòa bằng rượu của ngươi",w:"emp",p:.1,n:"Xin Hoàng thượng dùng rượu thề cất ở cung mình",c:{suc:-4},
+ path:["Khuyên phong, buộc tân","Xin mẹ khuyên tân","Trả vàng, đọc hết lá thư","Viết kế đổi đất lấy chợ biên","Khuyên chiêu hàng trước","Trình lời khai của người lính","Khuyên mở hội thề","Từ chối mọi điều riêng","Tiếp cả hai đoàn cùng lúc","Bắt tận tay, nộp Hoàng thượng"],np:2,
  bad:["Nhận vàng, hứa nói giúp","Nhận trang ấp","Khuyên chia đôi"],sc:2,x:[()=>S.danh>=50,"Danh từ 50"],
- t:"Ngươi bước ra khỏi bình phong, tự tay rót hai chén rượu. Tân {quan} và người đứng đầu phe thua ngôi, hai kẻ từng muốn giết nhau, cùng nâng chén trước mặt ngươi. Hoàng thượng ban biển ngự bút «Trung hiếu lưỡng toàn»: trung với Đại Hy, hiếu với {land}. Ở cố quốc, người ta lập một tấm bia ghi tên ngươi bên cạnh lời thề.",
+ t:"Rượu hội thề được cất ở cung ngươi theo cách {mh} dạy, niêm ấn cung ngươi đưa ra Hồng Lô tự. Sứ của tân {quan} và sứ phe thua ngôi, hai bên từng muốn giết nhau, cùng nâng chén; Hoàng thượng về kể: “Họ uống rượu của nàng, nên không bên nào dám bội.” Hoàng thượng ban biển ngự bút «Trung hiếu lưỡng toàn»: trung với Đại Hy, hiếu với {land}. Ở cố quốc, người ta lập một tấm bia ghi tên ngươi bên cạnh lời thề.",
  fx:{danh:12,sung:5},go:()=>e67bien(8),rw:"bienngu",ti:"Người giữ lời thề hai nhà"});
 /* Bắc Địch branch: the same chapters under the bd premise ids (road key = the premise rolled for this life).
    Runs at load, before jbal2.js: it walks the registered chapters (ROAD14), not BAL.road. */

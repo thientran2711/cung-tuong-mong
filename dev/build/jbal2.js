@@ -277,5 +277,8 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
  /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
  cap:{tt_mat:4},
+ /* B2 roads (jrd_td.js, jrd_ch.js): td_an rank = the rank index (RANKS[i]) from which her own petition is read; ch_co trust = Thái hậu favour (S.th) from which she treats her as a partner; ch_benh heir = S.th from which the dying
+    Thái hậu hands her people to her; ch_bi shield = months of shelter (S.shield) won by the .11 win */
+ td_an:{rank:3},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3},
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
