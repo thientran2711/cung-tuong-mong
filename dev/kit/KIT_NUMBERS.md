@@ -55,3 +55,6 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 | §46 | kit tabs (main)  ×  stale copy in tabs-kit-r6 | none, stale |
 | §20 / §28 / §31 / §33 / §36 / §37 / §40 / §41 / §42 | stale copies on unmerged old branches (kit-podium, title-screen, emotion, kit-j95, palace-map, tutorial, person-acts, rank0-ivory, close-bugs, kit-table, tabs-kit) | not on main; renumber to §76+ at merge time (see KIT_REQUESTS.md) |
 | §60–§70, §73 | no collision | — |
+
+## Coordinator update 16/11 (kit keeper)
+- §76 = kitPalaceMap (merge-train-3, LIVE). §77 = kitStageRail (review/goal-strip-fix). §78 = kitPlaceIcon + kitHapMark (review/act-dedupe). §79 = slap minigame engine/marks (review/slap-mg). Next free: §80.
