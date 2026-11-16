@@ -28,7 +28,7 @@
 | balance-after-truth re-run | review/balance-after-truth | D | in-session agent of Foreman D s1 | DONE 14fdce0c (SẴN SÀNG KIỂM) | 16/11 07:17Z |
 | reign-road review | review/reign-road-r1b | D | in-session agent of Foreman D s1 | STOPPED (duplicate of main's r1; 2 extra findings in reports/reign-road-r1b.md) | 16/11 05:40Z |
 | C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | DONE 6eaca058 | 16/11 05:27Z |
-| D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | RUNNING | 05:29Z 16/11 |
+| D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | DONE → PASS r1 | 05:29Z 16/11 |
 | coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | session_01UV1SzhQrqEEYDtLXNUvhdo | LIVE bd6342c7 | 16/11 05:31Z |
 | modal-scroll-r1 + log-sync-r2 (an-tinh) + book-fig-r1 re-merge on main | review/merge-hot-1 | main s9 | session_01UV1Szkb26qWiEe1bacAQvL | LIVE bad941b4 | 16/11 05:36Z |
 | kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | LIVE 0c23da40 | 16/11 05:39Z |
@@ -54,7 +54,7 @@
 | D3 item-big | review/item-big | B | session_01N1tNP3vh5qQKaG75iP6uRK | BLOCKED (KIT REQUEST frameless big kitItem + kitItemBigSrc) | 16/11 06:20Z |
 | D9 header-own | review/header-own | B | session_01N1tNP6D57poL6nUn778JPv | DONE d6e1699c (SẴN SÀNG KIỂM) | 16/11 06:20Z |
 | D12 mood-bar | review/mood-bar | B | session_01N1tNP2hssUsxJwKBBsGRUZ | RUNNING | 16/11 06:20Z |
-| D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | RUNNING | 06:23Z 16/11 |
+| D41 promote own servants | review/promote-servants | C | session_011xDdVPy5sdrvK7cDYuJHzz | DONE → PASS r1 | 06:23Z 16/11 |
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
 | coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | RUNNING | 16/11 06:26Z |
 | cardflip-smooth-r1 re-merge on main | review/merge-hot-3 | main s11 | session_01UV1SzhTBy9XN8Ebp4ao4yp (sonnet) | LIVE feba37e5 | 16/11 06:29Z |
@@ -74,7 +74,7 @@
 | weather-fx-one reviewer | review/weather-fx-one-r1 | main s11 | session_01UV1SzkPmftvVeoQw464NEK (sonnet) | LIVE 2940a545, smoke PASS (archived) | 16/11 06:55Z |
 | kit-keeper-2: event-frame #mb scroll, C32b curl speed, podium.js test | review/kit-keeper-2 | main s11 | session_01UV1SzjsFdjAm6CFetJ7BrB (sonnet) | RUNNING | 16/11 06:55Z |
 | pre-palace home roads for cn + nc (all branches), td pattern (OD:L1251) | review/kc-roads-cn-nc | main s11 | session_01UV1Szk5QsvVYvw2L45Qpqa (opus) | RUNNING | 16/11 06:59Z |
-| D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | RUNNING | 07:06Z 16/11 |
+| D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | PASS a84d31c2d | 07:06Z 16/11 |
 | cardflip-glow: reveal light on frame border, not over face; slower (owner bug) | review/cardflip-glow | main s11 | session_01UV1Szki5WiXQ1nthXM98EG (sonnet) | RUNNING | 16/11 07:12Z |
 | percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | DONE (xong ~42% / choi duoc ~66%, reports/percent-measure.md) | 16/11 07:20Z |
 | balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
@@ -84,9 +84,9 @@
 | slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | RUNNING | 16/11 07:27Z |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | RUNNING | 16/11 07:27Z |
 | Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | RUNNING | 16/11 07:27Z |
-| D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | RUNNING | 07:26Z 16/11 |
-| D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
-| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
+| D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | PASS 99c069578 | 07:26Z 16/11 |
+| D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | PASS 81deb15f7 | 07:26Z 16/11 |
+| C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | PASS c8734770b | 07:26Z 16/11 |
 | orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 07:40Z |
 | person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | RUNNING | 16/11 07:30Z |
 | stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | DONE fddbbefe, awaiting review | 16/11 07:30Z |
@@ -109,5 +109,5 @@
 | stage-slots-fix REVIEW (sonnet) + jk4/jk2b popup column overlap (whole group) | review/stage-slots-fix-r1 | main s13→s14 | session_01UV1SziRAU7gAwVeXFiPNfo | RUNNING | 16/11 08:15Z |
 | test-drift-roulette (6+ tests vs #kroul) + tutorial first-run check | review/test-drift-roulette | main s14 | session_01UV1SzkFT88BKzJLdb7NFY6 (sonnet) | RUNNING | 16/11 08:20Z |
 | kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
-| D29 review (opus) | review/schedules3-r1 | C | (opening, C s2) | RUNNING | 16/11 08:26Z |
-| story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | (opening, C s2) | RUNNING | 16/11 08:26Z |
+| D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | RUNNING | 16/11 08:26Z |
+| story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | RUNNING | 16/11 08:26Z |
