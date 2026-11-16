@@ -1,7 +1,7 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
 ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
-last wake: 17:22Z 16/11
+last wake: 17:28Z 16/11
 ANSWER to main s20 (FOREMAN_C 17:52Z, for the npc-agent auditor): schedules3 (D29) is LIVE on main 12f52db7 (review/schedules3-r5). PEOPLE LEDGER = review/people-ledger @6c896614 (WIP, opus worker session_011xDdVQ9uFz3dWEEUrZZp9W, not yet reviewed). NPC-agent implementation (OD:L1386) → C, same files, after people-ledger passes.
 
 ## SESSION 5 LOG
@@ -11,6 +11,7 @@ NEXT FOREMAN C SESSION: session_011xDdVNMkb9wzTw7JN7or14 opened by session 4 at 
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
 last wake: 16:58Z 16/11
 Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 · Magnific Pro 1,327,514 credits · disk 24 GB free, .git 4.3 GB (no repack).
+- 17:28Z pet-stage-art SAMPLE READY (mèo mướp S / chó nhỏ M / thiên mã L; 129 cr) → looked at (clean alpha, 3/4 front, matches pet512) → SENT to owner. C decision: all 22 pet512 are already transparent; reuse the 15 already posed 3/4, redraw only the 7 profile/action ones (cho, thienma, kylan, thanhlong, phuong, camke, bachloc). KIT REQUEST K-PET-1 (below).
 
 ## HANDOVER (Foreman C session 4 → session 5, 17:20Z 16/11)
 Why: session 4 context ~30% (START_CTX ~6% → limit 31%). Session 5: read this block, SESSION 4 LOG, ## PASS, GO-LIVE PUSHES, ## QUESTIONS, CLAIMS rows with C, FOREMAN_C.md lines from '(16:05Z s19)' on, OWNER_DECISIONS from 16/11 16:00Z on. Push helper /home/user/wt/push.sh (fetch under flock, rebase, union-resolve conflict markers, push) — recreate it in your container. Session 4 hourly trigger trig_01YWimJSgcwaQLpxfqnn6MkV is DISABLED — create your own.
@@ -236,6 +237,8 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 (none yet)
 
 ## QUESTIONS
+
+- KIT REQUEST K-PET-1 (C s5 17:28Z, to main kit keeper; from reports/pet-stage-art.md): pet size classes S/M/L do not exist in KIT.md. Proposed height = 0.22 / 0.36 / 0.55 of the kit adult-woman body (iPad 1180: ~120/195/300 px); table of pets per class in the report. Also: 3 people + 3 L pets need ~1230 px > 1180 stage strip → the stage slot function (stage-pets worker) must count pet width or limit L pets.
 - KIT REQUEST K-OI-1 (origin-intros, review/origin-intros @ef815769, details in its report): kitEntryGate — the palace-gate → selection-hall entry animation part (§67/§68 FX). Kit keeper please build/sign; the branch uses a fallback meanwhile.
 - KIT REQUEST (title-sys2, optional): an equip slot 'Hiệu ban' for the Sắc phong book / Ngọc ấn seal in Tư trang (today shown in the chest only). Kit keeper please decide.
 - To main s19 (16:05Z, PEOPLE LEDGER rule conflict): main's dev/test/stage-counts.js counts people by ARRIVAL khắc; the owner's 13:50Z one-ledger law needs ONE-MOMENT counts (who is there at the current khắc). Which does stage-counts follow? The people-ledger worker builds to the owner's 13:50Z wording with one switch in BAL meanwhile; its report will give both readings + recommendation.
