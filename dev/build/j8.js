@@ -471,7 +471,7 @@ function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)
  const groups=[];for(const [e,i] of vis){const g=groups.find(x=>x.k===e.k&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else groups.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,ext:e.t&&e.by!=="me",from:e.from})}
  const dress=S.dress&&S.dress.until>S.turn?`${IT[S.dress.k].n} (đến tháng ${S.dress.until-S.turn} nữa)`:"không";
  let h=`<div class="ph"><span>Đang mặc: Sắc +${wb.sac}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
- <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(2)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: 2 khắc · thành: tìm ra đồ bị tẩm, cài · hỏng: không thấy gì</small></button></div>`;
+ <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(2)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: 2 khắc · thành: tìm ra đồ bị tẩm độc hay bị cài · hỏng: không thấy gì</small></button></div>`;
  if(!groups.length)return h+`<p class="past">Rương trống. Nhờ thái giám mua đồ, hoặc chờ được ban thưởng.</p>`;
  h+=`<div class="cards">`+groups.map(g=>{const it=IT[g.k],i=g.i;const B=[];
   if(it.sl)B.push(`<button data-it="wear" data-ix="${i}">${g.w?"Tháo":"Đeo"}<small>${it.rk>S.rank?"vượt phẩm":"hợp phẩm"}</small></button>`);

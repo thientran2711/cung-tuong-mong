@@ -34,7 +34,7 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 let TFS_CV=null;
 function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
  T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
- const n=B.length,cols=matchMedia("(max-width:700px)").matches&&n>6?Math.ceil(n/2):n;T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ const n=B.length,cols=n;/* KIT §0: one row of tabs on the spread AND the one page (the page = the spread page; was 2 rows under 700 px) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
