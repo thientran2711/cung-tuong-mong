@@ -589,7 +589,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kph:has(>.kit-x){padding-right:56px!important}
 .kit-x:hover{background:#fff;border-color:var(--gold,#c9a46a)}
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
-.modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
+
 `;document.head.appendChild(st)})();
 /* ================= KIT 48 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") ==========   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.

@@ -103,6 +103,9 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
    /* owner 11/15 16:55Z (fix-float): an older line still carries her rank of that day ("Đáp ứng X" after she became Thường tại): a consort is
       always drawn with her CURRENT title, the old one is dropped */
    else if(t&&KP_CONS_RX.test(pre)&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p))))pre=pre.replace(KP_CONS_RX,"");
+   /* review night-end-r2: HER name (kitTitle "") after a rank in the text ("Thánh chỉ: Thường tại X …", "Đêm qua Đáp ứng X hầu giá") — kitName(named)
+      draws her current rank itself, so the rank in the text is dropped (it doubled: "Thường tại Thường tại X") */
+   else if(p===S&&/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/.test(pre))pre=pre.replace(/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/,"");
    const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":RANKS[S.rank].n):t;/* her own rank is drawn by kitName(named) */
    const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);/* KIT 48.3 (owner 15/11 s8): the text's own title before the name goes INSIDE the name block, in its rank tone (it stayed plain ink) */
    const tm=KP_TITLE_RX.exec(pre);if(tm&&p!==S){const k=kitName(p,{noTitle:true,pre});const j=k.indexOf(">");if(j>0&&/^<b class="kname/.test(k)){const tt=tm[1];const col=typeof kitPersonCol==="function"?kitPersonCol(p):"";
@@ -425,10 +428,7 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 .kbtn,.dlg.kpanel #mr .main{font-family:var(--display);font-weight:700;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a;border-radius:8px;min-height:42px;padding:8px 22px;cursor:pointer;white-space:normal}
 .kbtn:hover{filter:brightness(1.06)}
 .kbtn.alt{background:var(--k-card);color:var(--ink);border-color:var(--line);box-shadow:none}
-/* night / end keep their mood, same structure */
-.modal.night .dlg.kpanel{background:#140b08;color:#f3e6cf;border-color:#6a3a28;box-shadow:0 0 0 3px #2a1610,0 0 30px #ff9a3c33}
-.modal.night .dlg.kpanel .kph{background:linear-gradient(#2a1610f0,#140b08f0);border-color:#4a2a20;box-shadow:none}.modal.night .kptitle{color:#e9c07a}.modal.night .kpsub,.modal.night .kfwhen{color:#c8b89c}
-.modal.night .kft{color:#f3e6cf}.modal.night .kfact{border-color:#4a2a20}.modal.night .kname{color:color-mix(in srgb,var(--rc) 55%,#fff)}
+/* night: same light paper panel as every pop-up (owner s8 "Tại sao khung này màu tối"); the night feel comes from the backdrop + seal */
 .modal.end .dlg.kpanel{text-align:left}
 /* odds meter */
 .kodm{display:inline-flex;align-items:center;gap:5px;cursor:pointer;vertical-align:middle;line-height:1;white-space:nowrap}
