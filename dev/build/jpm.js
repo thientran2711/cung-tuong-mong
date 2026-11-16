@@ -139,5 +139,5 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 /* phone shell (kitPhoneShell §31.7): arriving in a hall shows the ROOM, not the act page */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(window.__kpmArrive){const h=kpmHall();
   if(h&&tab==="act"){window.__kpmArrive=0;window.__k3quiet=1;setTimeout(()=>{try{const rb=document.getElementById("k3room");if(rb&&!rb.hidden)rb.click()}catch(e){}setTimeout(()=>{window.__k3quiet=0},450)},0)}else if(!Q.length&&tab!=="go")window.__kpmArrive=0}}catch(e){}return r}})();
-/* kit sample page (KIT §71): the palace detail map of palace 0, opened empty (needs only the game state) */
-try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§71",title:"kitPalaceMap",html:()=>kitPalaceMap({slot:0,k:null})})}catch(e){}
+/* kit sample page (KIT §76): the palace detail map of palace 0, opened empty (needs only the game state) */
+try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§76",title:"kitPalaceMap",html:()=>kitPalaceMap({slot:0,k:null})})}catch(e){}

@@ -25,6 +25,6 @@ document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [da
 /* tapping a place opens the place screen; the floating 'Bản đồ' button there goes back to the full map */
 (function(){const g=goTo;goTo=function(k){const wasMap=typeof tab!=="undefined"&&tab==="go";const r=g.apply(this,arguments);try{if(wasMap&&S&&!S.dead&&S.place===k){window.__fromMap=1;tab="act";render()}}catch(e){}return r}})();
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const st=$("stage");let b=document.getElementById("tomap");const show=window.__fromMap&&tab!=="go"&&!S.out;if(!show){if(b)b.remove();return r}
- if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap";b.innerHTML="‹ Bản đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
+ if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap kbackb";b.innerHTML=typeof kitBackBtnHtml==="function"?kitBackBtnHtml("map","Dư đồ"):"‹ Dư đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
  if(b.parentNode!==st)st.appendChild(b)}catch(e){}return r}})();
 document.addEventListener("click",e=>{const t=e.target.closest("button[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
