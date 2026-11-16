@@ -13,7 +13,7 @@ Base main at start: 900ace7fb.
 | D47 small-bugs-4 (jaudit 'Vì sao' trung y wording; 'Phi ???' greet/arc tab; VP 'theo lòng nàng'; one kit sample page; 'Đang cài' leftover; servant-road header '!') | review/small-bugs-4 | sonnet | RUNNING (worker) |
 | D53 opt-pics leftovers (option cards on act placeholder, 62–68 per life; meaning-group choices e.g. 'Ngắt hoa dâng Thái hậu', 'Hẹn hôm khác', 'Cáo bận việc cung'; list in dev/art/MISSING_PICS.md on placeholder-pics2) | review/opt-pics2 | sonnet | RUNNING (art worker; check review/opt-pics (session 8) first) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | PASS 6452171fc — CONDITIONAL on kit keeper sign-off (K5) |
-| D45 small art (earrings + embroidered shoes, guard 4 indigo, c02-t1-a18 grey skin, Emperor costume audit no Qing hat; + A9 follow-ups: per-rank Đeo eo pendants, mid-rank bangles, per-rank Túi thơm, maid robes per maid rank) | review/small-art | sonnet | RUNNING (art worker) |
+| D45 small art | review/small-art @7aa5bc832 (art on CDN: earrings, shoes, per-rank pendants/bangles/sachets, 3 maid robes, guard 4 indigo, c02-t1-a18 skin, 2 Emperor Qing-hat pictures redrawn) → review/small-art-wire (code wiring + rebuild, on top of promo-rules-r1) | sonnet | RUNNING (wiring worker) |
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | PASS fa02fc656 |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | PASS bc0a1ba24 |
@@ -59,6 +59,7 @@ PASS review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from
 - KIT REQUEST K5 (A11 cardflip-r1, built before the rule): new KIT §67 kitCardFlip (jflip.js: kitCardFlip, cfDemo, cfGrid, BAL.cardFlip, .kcf* CSS, kit-page sample) + shared art img/kit/cf-plate-ksp/emp(+ -p).webp, cf-hand-emp.webp, cf-seal-thitam.webp (on CDN; emp plates 254/268 KB, slightly over budget). Kit keeper please sign off.
 - KIT REQUEST K6 (A7 cycle-r1, made 15/11 before the rule): j19.js shared colour rule KRED 'nguy' → 'nguy(?!ệt)' so names with 'Nguyệt' stop turning red. One-word bug fix; kit keeper please approve.
 - Q4 (owner, A7): Kính sự phòng book now costs ~1/4 of monthly bổng vs a risky free peek (Năm ăn năm thua). Right weight, or heavier?
+- NOTE for session 8 (D45 Emperor audit): 2 Qing-hat Emperor pictures fixed (ev-hoang-de-gian, ev-hoang-de-vui). The remaining act pictures still to be drawn on review/act-pics2 (session 8, C4) must follow the same rule: gold hair crown / Ming gauze hat, crossed round collar, never a knobbed Qing cap or queue.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
