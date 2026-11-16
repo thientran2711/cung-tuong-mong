@@ -179,7 +179,7 @@ setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,60
 window.kitNightEnd=kitNightEnd;window.kitNewDay=kitNewDay;window.kneTierOf=tierOf;
 
 /* ---------- kit sample page (§62) ---------- */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§62",title:"kitNightEnd · kitNewDay (night-end + new-day pictures)",html:()=>`<div class="kne-sample">${["warm","normal","cold"].map(k=>`<figure><img src="${DIR}${TIER[k].pic}.webp" alt=""><figcaption>${TIER[k].t}</figcaption></figure>`).join("")}${["xuan","ha","thu","dong"].map(k=>`<figure><img src="${DIR}ne-night-lonely-${k}.webp" alt=""><figcaption>Đêm không được triệu · ${SEAN[k]}</figcaption></figure>`).join("")}${["warm","normal"].map(k=>`<figure><img src="img/ev-night2-${k}.webp" alt=""><figcaption>Gối đầu · ${TIER[k].t}</figcaption></figure>`).join("")}<figure><img src="img/ev-night2.webp" alt=""><figcaption>Gối đầu · Đêm lạnh nhạt</figcaption></figure>${["xuan","ha","thu","dong"].map(k=>`<figure><img src="${DIR}ne-dawn-${k}.webp" alt=""><figcaption>Bình minh ${SEAN[k]}</figcaption></figure>`).join("")}<figure><img src="img/ev-fest-newyear-b.webp" alt=""><figcaption>Sáng Tết Nguyên đán</figcaption></figure></div><button class="kbtn" type="button" onclick="event.stopPropagation();if(typeof S!=='undefined'&&S)kitNightEnd({tier:'warm',m0:1,m1:0,before:rsnap(),items:[],line:'Mẫu'})">Xem thẻ đêm</button>`})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§62",title:"kitNightEnd · kitNewDay (night-end + new-day pictures)",html:()=>`<div class="kne-sample">${["warm","normal","cold"].map(k=>`<figure><img src="${DIR}${TIER[k].pic}.webp" alt=""><figcaption>${TIER[k].t}</figcaption></figure>`).join("")}${["xuan","ha","thu","dong"].map(k=>`<figure><img src="${DIR}ne-night-lonely-${k}.webp" alt=""><figcaption>Đêm không được triệu · ${SEAN[k]}</figcaption></figure>`).join("")}${["warm","normal"].map(k=>`<figure><img src="img/${NT_PIC[k]}.webp" alt=""><figcaption>Gối đầu · ${TIER[k].t}</figcaption></figure>`).join("")}<figure><img src="img/ev-night2.webp" alt=""><figcaption>Gối đầu · Đêm lạnh nhạt</figcaption></figure>${["xuan","ha","thu","dong"].map(k=>`<figure><img src="${DIR}ne-dawn-${k}.webp" alt=""><figcaption>Bình minh ${SEAN[k]}</figcaption></figure>`).join("")}<figure><img src="img/ev-fest-newyear-b.webp" alt=""><figcaption>Sáng Tết Nguyên đán</figcaption></figure></div><button class="kbtn" type="button" onclick="event.stopPropagation();if(typeof S!=='undefined'&&S)kitNightEnd({tier:'warm',m0:1,m1:0,before:rsnap(),items:[],line:'Mẫu'})">Xem thẻ đêm</button>`})}catch(e){}
 
 /* ---------- (4) the morning after (owner 15/11 21:10Z, L666–667) ----------
    S.neMorn = {d: the night's day (wk), tier} is set by the night card for a mặn nồng (warm) or lạnh nhạt (cold) night. When the day has
@@ -200,7 +200,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
    opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return}
  if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();const v=m&&m.v;const named=v&&m.known;
   const nm=named?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
-  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>Lúc thỉnh an, ${nm} che miệng cười: “Nghe nói đêm qua muội muội hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
+  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua muội muội hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:-1},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:-2},hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
@@ -213,13 +213,16 @@ window.kneMorningAfter=morningAfter;
      ksp   "Tối nay Hoàng thượng lật thẻ bài…"  → ev-ksp (summons; neutral, before the night)
      prep  bath / toilette                      → ev-prep (neutral)
      night1 carried in the phoenix quilt        → ev-night1 (being redrawn by review/pic-dupes; not touched here)
-     night2 pillow talk, text by the night score s (j8): s ≥ 6 "Ngài khẽ cười, kéo ngươi lại gần…" → ev-night2-warm (close, tender);
-            s ≥ 3 "Ngài nắm tay ngươi rất lâu…" → ev-night2-normal (side by side, hand in hand); else "Ngài có vẻ xa cách" → ev-night2 (apart)
+     night2 pillow talk, text by the night score s (j8): s ≥ 6 "Ngài khẽ cười, kéo ngươi lại gần…" → ev-night2-warm (close);
+            s ≥ 3 "Ngài nắm tay ngươi rất lâu…" → ev-night2-tender (hand in hand); else "Ngài có vẻ xa cách" → ev-night2 (apart).
+            Both warm/tender pictures were drawn by review/pic-dupes (night_gens.txt ksDhGD716B / jUXCWBYLD0).
      night-end card (this file)                 → ne-night-<warm|normal|cold> by the card tier.
    Same thresholds as the j8 text (6 / 3), so picture and words always agree. */
 const NT_TONE=s=>s>=6?"warm":s>=3?"normal":"cold";
+/* pictures drawn by review/pic-dupes (reuse first): warm = he draws her close (ev-night2-warm), normal = hand in hand (ev-night2-tender) */
+const NT_PIC={warm:"ev-night2-warm",normal:"ev-night2-tender"};
 if(typeof kitEvBanner==="function"){const eb0=kitEvBanner;kitEvBanner=function(m){try{if(m&&m.pid==="night2"&&m.pp&&typeof m.pp.s==="number"){const tn=NT_TONE(m.pp.s);
-  if(tn!=="cold")return{src:`img/ev-night2-${tn}.webp`,lab:"",key:"night2-"+tn,own:true}}}catch(e){}return eb0.apply(this,arguments)};window.kitEvBanner=kitEvBanner}
+  if(NT_PIC[tn])return{src:`img/${NT_PIC[tn]}.webp`,lab:"",key:NT_PIC[tn].slice(3),own:true}}}catch(e){}return eb0.apply(this,arguments)};window.kitEvBanner=kitEvBanner}
 window.kneNightTone=NT_TONE;
 
 /* ---------- CSS ---------- */

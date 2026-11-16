@@ -28,7 +28,7 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;docu
   /* close everything, then a night */
   await p.evaluate(()=>{const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}document.querySelectorAll('.kmov').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render()});
   await sleep(500);
-  const n=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));S.ntk=null;S.ntTry=null;S.preg=0;S.tonight="me";pushDil(mkP("ksp"),"Kính sự phòng báo tin");showModal();const seen=[];
+  const n=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));S.ntk=null;S.ntTry=null;S.preg=0;S.bac=Math.max(S.bac||0,300);S.suc=Math.max(S.suc||0,60);S.tonight="me";pushDil(mkP("ksp"),"Kính sự phòng báo tin");showModal();const seen=[];
    for(let i=0;i<8;i++){await W(300);const m=Q[0];if(!m)break;seen.push(m.pid||m.t);if(document.getElementById('modal').hidden)showModal();chooseM(0);}
    await W(400);return {seen,last:window.kneLast,ov:[...document.querySelectorAll('.kmov')].map(e=>e.className),toast:document.getElementById('rtoast')&&document.getElementById('rtoast').className+' | '+document.getElementById('rtoast').textContent.slice(0,200)}});
   await sleep(1500);await SHOT(p,{path:`${OUT}/d-night-${v}.jpg`,type:'jpeg',quality:60});

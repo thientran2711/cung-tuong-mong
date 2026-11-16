@@ -10,8 +10,7 @@ ne-dawn-xuan bxTIMkg5Y2
 ne-dawn-ha huRT2CKvqL
 ne-dawn-thu nVjysTtYQD
 ne-dawn-dong Bh4zNvvoQR
-ev-night2-warm rgeaXzCxtc
-ev-night2-normal cpl9S5x0eP
+# (unused alternatives, NOT on the game path: rgeaXzCxtc warm, cpl9S5x0eP normal — pic-dupes' ev-night2-warm/-tender are used)
 ne-night-ram-warm lJ8QkDNgv9
 ne-night-ram-normal XmPGTUwBfo
 ne-night-fest-warm LwBE5DQswO
