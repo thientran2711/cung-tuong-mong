@@ -30782,6 +30782,8 @@ const LUX_TH={thanh:{col:["xanh","trang","lam"],re:/ngọc|lụa|lan|trúc|bạc
  huong:{col:["hong","tim"],re:/son|phấn|hương|thơm|hồng|mẫu đơn/i},
  xuan:{col:["hong"],re:/hoa|đào|mai|hải đường|xuân|điệp|lụa/i},
  co:{col:["nau"],re:/gỗ|đồng|cổ|vân|hạc|điền|chồn|bông|lam/i}};
+/* whole words only ("thạch" is not "hạc", "Hòa Điền" stays a place): letters on either side break the match */
+for(const t in LUX_TH)LUX_TH[t].re=new RegExp(`(?<!\\p{L})(?:${LUX_TH[t].re.source})(?!\\p{L})`,"iu");
 function luxThemesOf(k){const L=[];try{const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null,it=IT[k];const nm=(w&&w.n)||(it&&it.n)||"",col=w?w.col:"";
  for(const t in LUX_TH){const D=LUX_TH[t];if((col&&D.col.includes(col))||D.re.test(nm))L.push(t)}}catch(e){}return L}
 window.luxThemesOf=luxThemesOf;
@@ -36218,7 +36220,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d75f4cd70e5c";window.CTM_BUILD=BUILD;
+const BUILD="9919ce91351e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
