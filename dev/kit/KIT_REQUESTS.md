@@ -46,3 +46,25 @@ Needed by: review/cloud-del (jcloud.js, Sổ mây › Ám hiệu page). Waiting 
 1. **Toilette one-page** (≤574 px) on BOTH modes: mirror band on top with her portrait, "Hôm nay" as chips, slots + scrolling bag, sticky buttons (matches every other kg82 page = spread). Reviewer: gain > loss.
 2. **Per-mode modal rules**: kit modals still carry :where(.kv1/.kv2) rules (kpdlg, dawn kpanel, kpsc, kitReward kmtabs/kmbox, kpm-list, kipd2, .art .pcb, toilette, coop timer chip) — breaks KIT §0.0; fold into one rule + dialog rect-compare test.
 Start AFTER design-scale-p2-r1 is live (it owns those files).
+
+## KIT REQUEST — art worker (Foreman C) 16/11 ~23:10Z — dressing room background per rank (owner-approved)
+Owner (verbatim, via Foreman C): "Cung nữ mỗi một bậc mà sẽ có một cái ảnh nền riêng. Rồi phi tần mỗi bậc có một ảnh nền riêng. Cho đúng cái bậc của nó." Ladder approved ("Vậy thì quyết định vậy đi nha"). Branch for the code: review/toil-room-rank (by the foreman, not by the art worker).
+Today: the makeup reveal plate is the single `img/toil-mirror-room.webp` (jtoil.js ~l.605, `ktrv-plate`). Needed: choose the plate by the viewer's rank at reveal time.
+All 13 files are LIVE on the CDN (md5-checked), 1200x800 webp ~200 KB, same angle/layout/mirror position so the figure placement vars (--ktpx/--ktpy) stay valid:
+| rank (RANKS index in j1.js) | key |
+|---|---|
+| Đáp ứng (0) | img/toil-room-c1-dapung.webp |
+| Thường tại (1) | img/toil-room-c2-thuongtai.webp |
+| Quý nhân (2) | img/toil-room-c3-quynhan.webp |
+| Tần (3) | img/toil-room-c4-tan.webp |
+| Phi (4) | img/toil-room-c5-phi.webp (= the approved toil-mirror-room, same picture) |
+| Quý phi (5) | img/toil-room-c6-quyphi.webp |
+| Hoàng quý phi (6) | img/toil-room-c7-hoangquyphi.webp |
+| Hoàng hậu (7) | img/toil-room-c8-hoanghau.webp |
+| maid 1 thô sử | img/toil-room-maid1-thosu.webp |
+| maid 2 cung nữ | img/toil-room-maid2-cungnu.webp |
+| maid 3 đại cung nữ | img/toil-room-maid3-daicungnu.webp |
+| maid 4 chưởng sự cô cô | img/toil-room-maid4-chuongsu.webp |
+| maid 5 nữ quan | img/toil-room-maid5-nuquan.webp |
+Spec: (1) one helper `kitRoomPlate(rankIdx|maidIdx)` returning the key; fallback = `img/toil-mirror-room.webp` for unknown/Lãnh cung/Phế phi. (2) Load on demand only (perf rule OD:L714), only the plate of the current rank. (3) Same for any other place that shows this dressing-room plate. (4) No tint/overlay in code (owner rule). (5) Whether the player can ever be a maid rank: ask main; the 5 maid plates are for maid/NPC reveal scenes if any. Keep `toil-mirror-room.webp` (still used as fallback; it equals c5-phi).
+If the owner later wants Hoàng quý phi to differ more, only `toil-room-c7-hoangquyphi.webp` is repainted in place.
