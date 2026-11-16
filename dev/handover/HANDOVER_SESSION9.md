@@ -314,3 +314,4 @@ Owner open question: fp v7 Bắc Địch hair 1/2 per rank (Đáp ứng / Phi / 
 Kit catalogue for the owner: scratch script approach (8 groups, numbered) — she found the raw kit-page scroll useless; groups were accepted silently.
 FOREMEN: B (≈10 running; must claim emotion actions + forced outbursts), C (7 running → told to open people-ledger), D (≈11). Inbox lines dated 13:30Z–14:45Z s17 in FOREMAN_B/C/D.md.
 Self-wake: s17 trigger trig_01BRGhrPtrU9hJda11i33Cts DELETED at handover → s18 creates its own hourly create_trigger.
+- (14:30Z) MAIN SESSION 18 = session_01UV1SzhRRojptjZWR5RnAy3 · START_CTX ≈ 6 % of window (est.; get_session reads 0) → rollover at ≈ 31 %, ceiling 60 %.
