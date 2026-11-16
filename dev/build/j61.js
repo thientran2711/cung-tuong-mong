@@ -49,7 +49,9 @@ function k61Named(e){return k61St(e)>=2||k61Pub(e)}
    the word the header friend chip (jcooptimer) and the chat panel already print, "Hảo hữu" (no rank, no "???"); met -> her real name (k61Named) */
 const K61FR="Hảo hữu";
 function k61Coop(e){try{return !!(e&&e.coop&&!k61Named(e))}catch(x){return false}}
-window.k61Coop=k61Coop;window.K61FR=K61FR;
+/* the friend can sit in rivals OR in a consort's staff (guest maid): look in the whole world, not only rivals */
+function k61CoopEnt(){try{return k61All().find(e=>e&&e.coop)||null}catch(x){return null}}
+window.k61Coop=k61Coop;window.k61CoopEnt=k61CoopEnt;window.K61FR=K61FR;
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
 /* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -

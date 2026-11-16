@@ -41,7 +41,7 @@ const BU=b=>{try{const n=(typeof BUOI!=="undefined"&&BUOI[b])||"";return n}catch
 /* game-style time: "hạ tuần, tháng 3 · Buổi chiều" */
 function kitChatWhen(g){g=g||{};try{const t=typeof TUAN!=="undefined"&&TUAN[g.t]||"";return `${t?t+", ":""}tháng ${g.m||1}${BU(g.b)?" · "+BU(g.b):""}`}catch(e){return""}}
 /* the friend's signature: her real name once she has met the friend, else the ONE label of the header chip ("Hảo hữu", j61 k61Coop; OD:L165) */
-function frUnmet(){try{const W=window.COOPW;if(!W||!W.on||typeof k61Coop!=="function")return false;const f=W.friend&&W.friend();return !f||k61Coop(f)}catch(e){return false}}
+function frUnmet(){try{const W=window.COOPW;if(!W||!W.on||typeof k61Coop!=="function")return false;const f=k61CoopEnt();return !f||k61Coop(f)}catch(e){return false}}
 function frSign(n){return frUnmet()?"Hảo hữu":(n||"Hảo hữu")}
 function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(mine?(m.n||"Ta"):frSign(m.n))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
 function kitChatList(msgs,seat){return (msgs&&msgs.length)?msgs.map(m=>kitChatBubble(m,m.s===seat)).join(""):`<p class="kpnote kchat-empty">Chưa có thư nào. Viết đôi dòng gửi hảo hữu.</p>`}
