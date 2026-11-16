@@ -1,8 +1,8 @@
-# coop-one-world review r1 — VERDICT: PASS a6956875
+# coop-one-world review r1 — VERDICT: PASS cb84d1ba
 
 Reviewer session_01UV1SzjwwR8MVK2MWpikBAb (opus), coordinator MAIN s24. Date 11/16/2026. START_CTX ≈ 7 % of 1M (rollover ≈ 32 %, ceiling 60 %).
 Reviewed: review/coop-one-world @ 008ed0b9 (worker report reports/coop-one-world-fix.md, audit reports/coop-one-world.md).
-Result branch: **review/coop-one-world-r1 @ a6956875** = latest origin/main 9c49f13c + the worker branch + 3 reviewer fixes, site rebuilt, fast-forwardable (origin/main is an ancestor).
+Result branch: **review/coop-one-world-r1 @ cb84d1ba** = latest origin/main c1e1bbd1 + the worker branch + 3 reviewer fixes, site rebuilt, fast-forwardable (origin/main is an ancestor).
 Rules read: START_CORE, START_WORKER, START_REVIEWER; OD "(16/11 ~19:57Z … OWNER (co-op, verbatim)" and "(16/11 ~20:32Z … CO-OP FIRST" (one world, both read the same number).
 
 ## Merge with main (conflicts resolved)
@@ -28,7 +28,7 @@ Rules read: START_CORE, START_WORKER, START_REVIEWER; OD "(16/11 ~19:57Z … OWN
 | 4 | co-op tests | coop-e2e.js (LIVE) 59/59 (twice; last on a6956875) · coop-one-world.js PASS (seeds 3,5,7,9,11) · coop-one-world-play.js 20/20 (1st run 19/20: "week 3 host: guest sees the wait" timing flake, rerun clean) · coop-rejoin-stats.js 83/83 on rerun (1st run 81/83: guest's random thân phận was a cung nữ → no friend entry to read stats from; main 1aa0edb2 also fails 1 row of this test on its run = random-identity flake). |
 | 4b | mid-week | info only: between merges the host's buổi-time NPC rolls (e.g. kmEmp) reach the guest at the week merge (latency, never a double count); at every merged week both seats are identical. If the owner wants NPC day events live on both screens, relay them like main's `ctm-tn` (follow-up, design). |
 | 5 | live Worker | no change under coop/ or dev/coop/ (diff vs main empty); merge3 unchanged. Worker's decision (client net, not server host-wins) accepted: server host-wins would drop her real acts every week. |
-| 6 | quickcheck a6956875 | PASS · 197 s · open 1132 ms · old save ok · perf new/live render 305/341, tab 375/366, buổi 1024/1004 ms, tasks>200ms 14/15. |
+| 6 | quickcheck cb84d1ba | PASS · 166 s · open 1020 ms · old save ok · perf new/live render 337/293, tab 337/351, buổi 1193/1136 ms, tasks>200ms 14/13 (a6956875 before the last main merge: render 305/341, buổi 1024/1004). coop-e2e on cb84d1ba 59/59; coop-one-world SEED 7 PASS. |
 | UI | kit / VANPHONG | no UI change in this branch (no new player-visible text except the existing epidemic line now relayed). |
 
 ## Follow-ups (not blocking)
