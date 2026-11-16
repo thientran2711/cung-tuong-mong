@@ -64,7 +64,7 @@ if(typeof pcard==="function"){const p0=pcard;pcard=function(o){let e=null;try{if
   const h=p0.apply(this,arguments);const at=h.lastIndexOf("</div></div>");
   return at<0?h:h.slice(0,at)+`<div class="pcf">${body}</div>`+h.slice(at)}catch(x){console.error("pcf",x);return p0.apply(this,arguments)}}}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-emo-open]");if(!t||e.target.closest("button,a"))return;const k=t.dataset.emoOpen;if(k&&typeof emoBox==="function"){e.stopPropagation();try{emoBox(k)}catch(x){console.error(x)}}},true);
-/* kit sample (KIT §71) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
+/* kit sample (KIT §73) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
  try{if(!S)return"";const v=(typeof rivals!=="undefined"&&rivals[0])||null;if(!v)return"";return `<div class="kitpg-row" style="width:min(100%,520px)">${pcfBlocks(v,{},true)}</div>`}catch(e){return""}}})}catch(e){}
 })();

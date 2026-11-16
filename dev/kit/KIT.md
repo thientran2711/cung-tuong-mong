@@ -2983,7 +2983,7 @@ Bên mình pick tiles (card + act) · shop picture card (price row + detail) · 
 Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · veil picker (jveil) · other people's worn slots (jk2b kitWearSlots → card with who).
 Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.
 
-## 71. PERSON CARD FILL · pcfBlocks (owner 15/11 "khung bên phải nó đang bị trống", review/pcard-fill) — `dev/build/jpcf.js` (last module, after jopic)
+## 73. PERSON CARD FILL · pcfBlocks (owner 15/11 "khung bên phải nó đang bị trống", review/pcard-fill) — `dev/build/jpcf.js` (last module, after jopic)
 Composition only: NO new component or CSS. The right side of every person card (`pcard`) now carries the person's useful info, built from existing kit parts:
 1. **Tâm trạng** `kitSkillCard({max:0})` — picture of the event that caused the mood (`emoBoxArt`, KIT §38 / mood-dialog) + "Tâm trạng: <mood>" + cause line; tap opens `emoBox`. Unknown mood = "chưa rõ" card.
 2. **Lòng người với ta** `kitRelTable(kitRelRows(p),{head:false})` (§52): thiện cảm / oán / ghen / ta → nàng; Hoàng thượng sủng; Thái hậu thiện cảm; servants thiện cảm + ta tin cậy.
@@ -2992,4 +2992,4 @@ Composition only: NO new component or CSS. The right side of every person card (
 5. **Dạo này** `kitRows` (week | line): this month's log lines that name the person; empty = one `.kpnote` line.
 6. **Việc nhanh** act cards (`pbtn` in `.kskacts`): Sai tai mắt dò nơi ở / Đến cung nàng / Kết giao / Tặng quà — the same buttons and costs as the Hậu cung card — shown only when the card has no live act of its own (the stage pop-up after the visit's one talk).
 Placement: a card with 2+ act groups gets one more kit tab "Lòng người" (count chip dropped); a card with one group or none (stage pop-up, Thái hậu) shows the blocks under its acts. Not filled: her own card, children, "Người lạ".
-`pcfBlocks(person, o, quick)` returns the HTML (kit sample §71). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
+`pcfBlocks(person, o, quick)` returns the HTML (kit sample §73). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
