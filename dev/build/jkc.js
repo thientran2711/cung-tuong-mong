@@ -559,7 +559,7 @@ function kcHud(){const r=$("me-r");if(r)r.textContent=kcTitle();const e=$("hud-s
 /* #hud2 = the state cells the k3 top bar reads (rule glosses on tap): her home numbers instead of the palace ones */
 function kcHud2(){const el=$("hud2");if(!el)return;const col=el.classList.contains("col");
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
- el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${4-used} khắc`)
+ el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${BAL.time.khac-used} khắc`)
   +c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)+c("kgt","Gia thanh",S.kgt,S.kgt<25?"hot":"")+c("kap","Áp lực hôn sự",S.kap,S.kap>=60?"hot":"")+c("khm","Hồi môn",S.khm)
   +(S.kc.ldSeen?c("kld","Lời đồn",S.kld,S.kld>=50?"hot":""):"")+c("kty","Kỳ tuyển tú",`còn ${Math.max(0,kcMonthsLeft())} tháng`)+c("age","Tuổi",S.age)}
 (function(){const h0=hudTween;hudTween=function(){if(!isKc())return h0.apply(this,arguments);const s=S.sung;S.sung=S.kgt;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();

@@ -146,33 +146,35 @@ function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=
 /* ================= ITEMS ================= */
 const IT={
  tramngoc:{n:"Trâm ngọc bích",kd:"Trang sức",d:"Cài tóc: Sắc +2",pr:30,rk:0,sl:"hair",w:{sac:2},tg:["hh","rv"]},
- boodieu:{n:"Bộ diêu vàng",kd:"Trang sức",d:"Cài tóc: Sắc +5, Danh +2 · từ bậc Phi",pr:90,rk:4,sl:"hair",w:{sac:5,danh:2},tg:["hh","rv"]},
- tramphuong:{n:"Trâm phượng cửu vĩ",kd:"Trang sức",d:"Cài tóc: Sắc +8, Danh +4 · chỉ Hoàng hậu",pr:200,rk:7,sl:"hair",w:{sac:8,danh:4},tg:["rv"]},
+ boodieu:{n:"Bộ diêu vàng",kd:"Trang sức",d:"Cài tóc: Sắc +5, Danh +2 · từ bậc Phi",pr:140,rk:4,sl:"hair",w:{sac:5,danh:2},tg:["hh","rv"]},
+ tramphuong:{n:"Trâm phượng cửu vĩ",kd:"Trang sức",d:"Cài tóc: Sắc +8, Danh +4 · chỉ Hoàng hậu",pr:360,rk:7,sl:"hair",w:{sac:8,danh:4},tg:["rv"]},
  vongngoc:{n:"Vòng ngọc Hòa Điền",kd:"Trang sức",d:"Đeo tay: Sắc +2, Danh +1",pr:50,rk:0,sl:"wrist",w:{sac:2,danh:1},tg:["th","hh","rv"]},
- vongvang:{n:"Vòng vàng chạm phượng",kd:"Trang sức",d:"Đeo tay: Sắc +4, Danh +3 · từ Quý phi",pr:120,rk:5,sl:"wrist",w:{sac:4,danh:3},tg:["rv"]},
- sonphan:{n:"Son phấn Dương Châu",kd:"Trang sức",d:"Dùng: Sắc +2",pr:20,use:{sac:2},tg:["rv"]},
+ vongvang:{n:"Vòng vàng chạm phượng",kd:"Trang sức",d:"Đeo tay: Sắc +4, Danh +3 · từ Quý phi",pr:180,rk:5,sl:"wrist",w:{sac:4,danh:3},tg:["rv"]},
+ sonphan:{n:"Son phấn Dương Châu",kd:"Trang sức",d:"Dùng: Sắc +2",pr:8,use:{sac:2},tg:["rv"]},
  luahang:{n:"Lụa Hàng Châu",kd:"Vải vóc",d:"May áo: Sắc +3 trong 3 tháng",pr:30,rk:0,dr:3,tg:["th","rv"]},
- gamto:{n:"Gấm Tô Châu",kd:"Vải vóc",d:"May áo: Sắc +6 trong 3 tháng · từ Quý phi",pr:80,rk:5,dr:6,tg:["th","hh","rv"]},
- gamvang:{n:"Gấm minh hoàng",kd:"Vải vóc",d:"Áo vàng: Sắc +9 trong 3 tháng · chỉ Hoàng hậu",pr:160,rk:7,dr:9,tg:[]},
+ gamto:{n:"Gấm Tô Châu",kd:"Vải vóc",d:"May áo: Sắc +6 trong 3 tháng · từ Quý phi",pr:120,rk:5,dr:6,tg:["th","hh","rv"]},
+ gamvang:{n:"Gấm minh hoàng",kd:"Vải vóc",d:"Áo vàng: Sắc +9 trong 3 tháng · chỉ Hoàng hậu",pr:300,rk:7,dr:9,tg:[]},
  nhansam:{n:"Nhân sâm trăm năm",kd:"Thuốc bổ",d:"Dùng: Sức +25; có thai thì an thai",pr:60,use:{suc:25},ant:1,tg:["th"]},
- yensao:{n:"Yến sào",kd:"Thuốc bổ",d:"Dùng: Sức +15, Sắc +1",pr:35,use:{suc:15,sac:1},tg:["th","rv"]},
- agiao:{n:"A giao",kd:"Thuốc bổ",d:"Dùng: Sức +10; 2 tháng dễ thụ thai",pr:40,use:{suc:10},fert:2,tg:["rv"]},
- giaidoc:{n:"Thuốc giải độc",kd:"Thuốc",d:"Để trong rương: cứu một lần trúng độc",pr:70,anti:1,tg:[]},
- thuocanthai:{n:"Thuốc an thai",kd:"Thuốc",d:"Dùng khi có thai: nguy cơ sảy giảm nửa",pr:25,ant:1,tg:["rv"]},
- huongtram:{n:"Hương trầm",kd:"Hương liệu",d:"Dùng: Đức +1, Sức +5",pr:20,use:{duc:1,suc:5},tg:["th","emp"]},
- tuithom:{n:"Túi thơm thêu",kd:"Hương liệu",d:"Dùng: Sức +3",pr:15,use:{suc:3},tg:["rv","hh"]},
+ yensao:{n:"Yến sào",kd:"Thuốc bổ",d:"Dùng: Sức +15, Sắc +1",pr:25,use:{suc:15,sac:1},tg:["th","rv"]},
+ agiao:{n:"A giao",kd:"Thuốc bổ",d:"Dùng: Sức +10; 2 tháng dễ thụ thai",pr:35,use:{suc:10},fert:2,tg:["rv"]},
+ giaidoc:{n:"Thuốc giải độc",kd:"Thuốc",d:"Để trong rương: cứu một lần trúng độc",pr:60,anti:1,tg:[]},
+ thuocanthai:{n:"Thuốc an thai",kd:"Thuốc",d:"Dùng khi có thai: nguy cơ sảy giảm nửa",pr:15,ant:1,tg:["rv"]},
+ huongtram:{n:"Hương trầm",kd:"Hương liệu",d:"Dùng: Đức +1, Sức +5",pr:10,use:{duc:1,suc:5},tg:["th","emp"]},
+ tuithom:{n:"Túi thơm thêu",kd:"Hương liệu",d:"Dùng: Sức +3",pr:6,use:{suc:3},tg:["rv","hh"]},
  xahuong:{n:"Xạ hương",kd:"Hương liệu",d:"Trộn vào túi thơm, hương trầm: hại thai",pr:50,mat:"xa",tg:[]},
- hacdinh:{n:"Hạc đỉnh hồng",kd:"Độc dược",d:"Hạ độc chắc chết · bị khám ra là có tội",pr:120,il:1,tg:[]},
+ hacdinh:{n:"Hạc đỉnh hồng",kd:"Độc dược",d:"Hạ độc chắc chết · bị khám ra là có tội",pr:150,il:1,tg:[]},
  botngua:{n:"Bột ngứa",kd:"Độc dược",d:"Dùng với phi tần: nàng Danh -5 · bị khám ra là có tội",pr:30,il:1,tg:[]},
- tranhco:{n:"Tranh cổ",kd:"Lễ vật",d:"Tặng Hoàng thượng, Thái hậu: rất hợp ý",pr:90,gv:10,tg:["emp","th"]},
+ tranhco:{n:"Tranh cổ",kd:"Lễ vật",d:"Tặng Hoàng thượng, Thái hậu: rất hợp ý",pr:150,gv:10,tg:["emp","th"]},
  nghien:{n:"Nghiên mực Đoan Khê",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý",pr:60,gv:8,tg:["emp"]},
- dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:100,gv:12,tg:["emp","rv"]},
- demgam:{n:"Đệm gấm",kd:"Lễ vật",d:"Tặng: êm ấm, ai cũng nhận",pr:20,gv:4,tg:["th","rv","hh"]},
+ dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:200,gv:12,tg:["emp","rv"]},
+ demgam:{n:"Đệm gấm",kd:"Lễ vật",d:"Tặng: êm ấm, ai cũng nhận",pr:12,gv:4,tg:["th","rv","hh"]},
  ngocboi:{n:"Ngọc bội ngự ban",kd:"Kỷ vật",d:"Còn giữ: Sủng không dưới 15 · mất là đại họa",pr:0,keep:1,tg:[]},
- sacphong:{n:"Sắc phong",kd:"Kỷ vật",d:"Chiếu sắc phong hiệu của Hoàng thượng · không bán, không tặng · mất là bị trách",pr:0,keep:1,nt:1,tg:[]},
- ngocan:{n:"Ngọc ấn",kd:"Kỷ vật",d:"Ấn ngọc khắc hiệu được ban · không bán, không tặng · mất là bị trách",pr:0,keep:1,nt:1,tg:[]},
+ sacphong:{n:"Sắc phong",kd:"Kỷ vật",d:"Chiếu sắc phong hiệu của Hoàng thượng · không bán, không tặng · mất là bị trách",pr:0,keep:1,tg:[]},
+ ngocan:{n:"Ngọc ấn",kd:"Kỷ vật",d:"Ấn ngọc khắc hiệu được ban · không bán, không tặng · mất là bị trách",pr:0,keep:1,tg:[]},
  thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức +10, Đức +2",pr:0,use:{suc:10,duc:2},tg:[]},
  chungcu:{n:"Tập chứng cứ",kd:"Thư từ",d:"Dùng với một phi tần: chứng cứ +2",pr:0,evi:2,tg:[]}};
+/* ngự tứ mark of the two title keepsakes (a yes/no flag, not the "Hoàng thượng để ý" stat nt; j92/j97 set it the same way for ngocboi/bienngu) */
+for(const k of ["sacphong","ngocan"])IT[k].nt=1;
 /* hidden taints on innocent items (two-way scheme tools) */
 const TAINT={xa:{n:"trộn xạ hương",on:["tuithom","huongtram"],need:"xahuong",c:0,hurt:"hại thai"},
  bua:{n:"giấu bùa chú",on:["tuithom","demgam"],c:30,il:1,hurt:"người giữ hao sức; khám ra là tội bùa ngải"},
@@ -272,8 +274,11 @@ PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mo
  {n:"Rót rượu, nũng nịu",fx:{},od:(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0),x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":""),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
  {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},od:(E.mood>=2?2:1),x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
-function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
-function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=3+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+2+Math.max(0,s),0,100);ghenAll(8);
+function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +${nightG(3)}, Ân tình +${nightA(3)} · hỏng: đêm nhạt, Sủng +${nightG(0)}, Ân tình +${nightA(0)}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
+/* a night's gains by its score s (one rule for her and every NPC, j75 rivalNight): base BAL.night (one-core) */
+function nightG(s){return BAL.night.sung+Math.max(0,Math.round(s/2))}
+function nightA(s){return BAL.night.an+Math.max(0,s)}
+function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=nightG(s);apply({sung:g});S.an=cl(S.an+nightA(s),0,100);ghenAll(8);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(roll(10+s*4))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${2+Math.max(0,s)}.`)}
 PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)[0],son=mySons()[0],o1=od(30+S.an/2+s*4),o2=od(30+S.an/2+s*3-(DG()?10:0)),o3=od(40+S.an/2+s*3);

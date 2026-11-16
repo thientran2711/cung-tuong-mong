@@ -6,7 +6,8 @@
    "Làm thơ dâng lên" into the study sessions. ================= */
 const WTIER=["Thường","Khá","Tinh xảo","Tuyệt phẩm"],WAVG=5/* tier thresholds: BAL.mgTier.wk.th (wkTier) */;
 /* gift value per tier; a bought gift's value is IT.gv or pr/12+2 (Đệm gấm 4, Vòng ngọc 6, Nghiên mực 8, Tranh cổ / Đàn cổ 10) */
-const WVAL=[2,3,5,7],WCAP=8,WSELL=[6,10,16,24],WSHOW=[1,2,3,5];
+/* WVAL = gift value by grade: BAL.craftGift (jecon fills this mirror); the sale price is BAL.craftSell (jecon wkSellVal; one-core: j83's own 6/10/16/24 was a second, unused table) */
+const WVAL=[],WCAP=8,WSHOW=[1,2,3,5];
 const WK={
  tranh:{a:"hoa",n:"Vẽ tranh thủy mặc",w:"Bức tranh",need:6,mat:[0,6,25],mn:["giấy thường","giấy Tuyên, màu khoáng","lụa trắng, màu ngọc"],sub:["Mai","Lan","Trúc","Cúc","Sơn thủy","Song hạc","Sen hồ"]},
  theu:{a:"hoa",n:"Thêu khăn",w:"Khăn thêu",need:2,mat:[0,4,15],mn:["vải thường","lụa, chỉ màu","lụa Hàng Châu, chỉ kim tuyến"],sub:["uyên ương","hoa mẫu đơn","cánh én","hoa sen"]},
@@ -107,7 +108,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
  return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm +${ev.rel}. `}
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&e.wk)return wkGive(a,r,ix)||"";return g0.apply(this,arguments)}})();
 /* sell outside the palace: silver, risk of Danh if found out (same odds for every consort) */
-function wkSellVal(w){return Math.round(WSELL[w.ti]*Math.sqrt(WK[w.kind].need/2)+(WK[w.kind].mat[w.m||0]||0)*BAL.wk.sell[w.m||0])}
+function wkSellVal(w){return 0}/* replaced by jecon (BAL.craftSell) */
 function wkSellO(p){return cl(75+((p.mat||0)*3),5,95)}
 function wkSell(p,ix){const e=p.inv[ix];if(!e||!e.wk)return"";const w=e.wk;p.inv.splice(ix,1);const nm=p===S?"Ngươi":`${rkName(p)} ${p.name}`;
  if(roll(wkSellO(p))){ap(p,{bac:wkSellVal(w)});return `${nm} nhờ người mang ${w.n} ra cửa Thần Vũ bán. Bạc +${wkSellVal(w)}. `}

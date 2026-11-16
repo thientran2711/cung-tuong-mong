@@ -7,7 +7,7 @@ function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span 
   h=h.replace(/<span class="mfaces">[\s\S]*?<\/span><\/button>/g,"</button>");
   h=h.replace(/ · ở: [^"]*"/g,'"');
   h=h.replace(/(<button class="mspot[^"]*" data-go="([^"]+)"[^>]*>)/g,(all,open,k)=>{const n=countAt(k);return open+(n?silChip(n):"")});
-  h=h.replace(/<span class="mleg">[^<]*<\/span>/,'<span class="mleg">đi gần 1 khắc, xa 2 · bóng: người khác đang ở đó, không tính ta</span>');}catch(e){}
+  h=h.replace(/<span class="mleg">[^<]*<\/span>/,'<span class="mleg">đi gần '+(BAL.walk.near)+' khắc, xa '+(walkFarK())+' · bóng: người khác đang ở đó, không tính ta</span>');}catch(e){}
  return h}})();
 /* the layout switch */
 (function(){const r0=renderPanel0;renderPanel0=function(){const r=r0.apply(this,arguments);try{const gm=document.querySelector(".game");if(gm)gm.classList.toggle("maptab",tab==="go"&&!window.__mapList)}catch(e){}return r}})();

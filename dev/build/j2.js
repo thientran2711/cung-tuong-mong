@@ -24,7 +24,7 @@ function start(){
    h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung.</p>
    ${kitRows([["Phong",RANKS[S.rank].n,"t"],["Theo hầu",typeof cmRow==="function"?cmRow():`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`${empName()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
     ...(S.ps?[["Hậu cung",psOpenText(),"t"]]:[]),["Tuyến truyện",`${s.t}. ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}`,"t"]])}
-   <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi 4 khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
+   <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi ${BAL.time.khac} khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
 }
 function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}${typeof cmInfo==="function"?cmInfo(S.maid):""}`}];
@@ -180,5 +180,5 @@ function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);op
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
-function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3 đến +8 · Ân tình +2 đến +7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}
+function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +${nightG(0)} đến +${nightG(10)} · Ân tình +${nightA(0)} đến +${nightA(5)}${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v)}`}
 function stealKem(v){const B=BAL.steal;const h=BAL.relOan.hurt;let o=Math.round(B.rel*h);try{o=Math.round(B.rel*h*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${B.ghen}, quý ngươi -${B.rel}, oán ngươi +${o}`}

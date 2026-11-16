@@ -64,7 +64,7 @@ const store={get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch
 let S,rivals,used=0,deck=[],tab="act",Q=[],rid=0,quiet=true,popIdx=null,popMsg="";
 /* time: 3 buổi a tuần, 4 khắc a buổi; 'used' = khắc spent this buổi */
 const BUOI=["Buổi sáng","Buổi chiều","Buổi tối"];let advLock=false;
-function can(c){return !!S&&!S.dead&&used+c<=4&&(c<=1||S.suc>=20)}
+function can(c){return !!S&&!S.dead&&used+c<=BAL.time.khac&&(c<=1||S.suc>=BAL.time.sucMin)}
 function spend(c){used=Math.max(0,used+c)}
 function pips(n){n=Math.max(0,Math.min(4,n));return `<span class="pip">${"●".repeat(n)}${"○".repeat(4-n)}</span>`}
 

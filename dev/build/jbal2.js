@@ -54,9 +54,8 @@ Object.assign(BAL,{accCdT:36});
  A.ok=function(a,t){if(cd(t))return false;return ok0.apply(this,arguments)};
  A.f=function(a,t){if(a!==S&&cd(t))return "";try{if(t)t.accT=wk()}catch(e){}return f0.apply(this,arguments)}}catch(e){}})();
 /* measured knobs of other modules (balance pass 11/14, see dev/measure/BALANCE_REPORT.md): scheme motive x3 and a prepared blow +10 (j70),
-   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort. */
-try{Object.assign(J70CFG,{mot:3,prep:10})}catch(e){}
-try{Object.assign(FAIRN,{sat:.2,satO:8})}catch(e){}
+   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort.
+   One-core: those values now sit once in J70CFG (j70) and FAIRN (j75); nothing sets them a second time here. */
 /* 8 bottom tabs (owner's choice): j72's "Việc nhờ" tab (data-tab q72) is a sub-tab of Mệnh truyện, not a 9th tab */
 try{if(typeof KG==="object"&&KG.mt&&!KG.mt.keys.includes("q72"))KG.mt.keys.splice(1,0,"q72");if(typeof kgBar==="function")kgBar()}catch(e){}
 /* balance 11/14 (late): death stays a real risk for a careful player too. Same rules for every woman in the palace, her and every NPC.
@@ -64,8 +63,7 @@ try{if(typeof KG==="object"&&KG.mt&&!KG.mt.keys.includes("q72"))KG.mt.keys.splic
    - seeMaxP: spotting a poisoned bowl or medicine (the "ps" check of caught(): physician, Y thuật, eyes) is capped at BAL.seeMaxP %. Guards lower the odds, never to near-zero.
    - poisonX: a poison that lands takes poisonX x the Sức it took before (for her and for an NPC alike). */
 Object.assign(BAL,{birthMin:8,seeMaxP:70,poisonX:1});
-/* v12 (worker 2, measured n=30): an empty Hoàng hậu seat goes to an outsider girl 60% of the time (was 85; jbal outQ) */
-Object.assign(BAL,{outQ:60});
+/* v12 (worker 2, measured n=30): an empty Hoàng hậu seat goes to an outsider girl 60% of the time: BAL.outQ (jbal, one value since review/one-core) */
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);return Math.max(r,BAL.birthMin||0)}})();
 (function(){const o0=oSee;oSee=function(t,p){const r=o0.apply(this,arguments);return p&&BAL.seeMaxP?Math.min(r,BAL.seeMaxP):r}})();
 (function(){try{const P=ACT.poison,f0=P.f;P.f=function(){window.__pz70=1;try{return f0.apply(this,arguments)}finally{window.__pz70=0}};
@@ -240,7 +238,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
 Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:20,duc:3,danh:1},/* Tài nghệ · Tứ đức "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; jtabs/j85 card text) */
- succN:{bAge:16,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
+ succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
    arrival by source; pickN candidates, the picked one's talent works after pickAlone months, pickKeep % a month her decay is undone;
    kinSave % a "kín miệng" maid refuses a buyer; talents: talBac bạc, talSuc Sức, talSpy % a true fact, while her loyalty ≥ talLoy;

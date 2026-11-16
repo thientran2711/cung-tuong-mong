@@ -78,7 +78,7 @@ ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k
  {n:"Bỏ yến, thức trắng bên con",fx:{suc:-20,sung:-3},x:`Sức khỏe ${k.name} +20`,go:()=>{k.hp=Math.min(100,k.hp+20)}},
  {n:"Mời thái y, vẫn dự yến",fx:{bac:-30,sung:3},x:`Sức khỏe ${k.name} +8`,go:()=>{k.hp=Math.min(100,k.hp+8)}},
  {n:"Tự bốc thuốc",fx:{},x:`${word(p.o)} · thành: Sức khỏe +30 · hỏng: Sức khỏe -25`,go:()=>{if(roll(p.o))k.hp=Math.min(100,k.hp+30);else kidHurt(k,25)}}]}});
-ev("foreignwed",()=>myDaus().some(k=>k.age>=18),()=>{const d=myDaus().filter(k=>k.age>=18)[0];return d?{k:d.name,o:od(30+S.sung/3+mm())}:null},p=>{const k=KID(p.k);if(!k)return null;return{who:pEmp(),
+ev("foreignwed",()=>myDaus().some(k=>k.age>=BAL.age.wed),()=>{const d=myDaus().filter(k=>k.age>=BAL.age.wed)[0];return d?{k:d.name,o:od(30+S.sung/3+mm())}:null},p=>{const k=KID(p.k);if(!k)return null;return{who:pEmp(),
  t:`Sứ thần Bắc Địch dâng ngựa quý, cầu hôn ${k.name}. Triều thần đều nói: một nàng công chúa đổi mười năm yên biên ải.`,o:[
  {n:"Thuận theo đại cục",fx:{danh:10,th:5,suc:-15},x:`${k.name} xuất giá phương bắc`,go:()=>{k.alive=false;k.wed=1;log(`${k.name} khóc từ biệt mẫu thân, theo đoàn sứ lên phương bắc.`)}},
  {n:"Quỳ xin giữ con lại",fx:{},x:`${word(p.o)} · thành: giữ được con, gả một tông nữ thay · hỏng: Sủng -10`,go:()=>{if(roll(p.o))log("Hoàng thượng động lòng, gả một tông nữ thay.");else apply({sung:-10,danh:-3})}},
