@@ -37,4 +37,13 @@ await msg(B, { t: "seat", sv: 0, o: snap("b", 31, 1) }); assert(last(B, "seatok"
   const rb = await R.seatCopy("b"); assert(rb && rb.d.pad.length === 2990000 && rb.d.S.tai === 40, "big copy read back whole from its chunks");
   const over = snap("b", 41, 1); over.d.pad = "x".repeat(3000001); B.got = []; await msg(B, { t: "seat", sv: 2, o: over });
   assert(last(B, "error").code === "seatbig" && !last(B, "seatok") && (await R.seatCopy("b")).d.S.tai === 40, "over 3 M refused, older copy kept"); }
+/* seat DELTA (review/lag-play-2): {t:"seatd"} applies only on top of exactly the stored version, else "seatresync" */
+{ B.got = [];
+  await msg(B, { t: "seat", sv: 2, o: snap("b", 50, 1) }); const v = last(B, "seatok").sv; assert(v === 3, "full copy v3");
+  await msg(B, { t: "seatd", sv: 3, set: { "d.S.tai": 51, "used": 3, "d.S.newk": [1, 2] }, del: [], dev: "db" }); assert(last(B, "seatok").sv === 4, "delta on v3 -> v4");
+  let c = await R.seatCopy("b"); assert(c.d.S.tai === 51 && c.used === 3 && c.d.S.newk[1] === 2 && c.d.S.name === "Nb" && c.sv === 4, "delta merged into the stored copy, other keys kept");
+  await msg(B, { t: "seatd", sv: 4, set: {}, del: ["d.S.newk"] }); c = await R.seatCopy("b"); assert(!("newk" in c.d.S) && c.sv === 5, "delta delete");
+  B.got = []; await msg(B, { t: "seatd", sv: 3, set: { "d.S.tai": 1 } }); assert(last(B, "error").code === "seatresync" && (await R.seatCopy("b")).d.S.tai === 51, "stale base -> seatresync, copy unchanged");
+  B.got = []; await msg(B, { t: "seatd", sv: 5, set: { "d.__proto__": 1 } }); assert(last(B, "error").code === "seatresync", "bad path refused");
+  B.got = []; await msg(A, { t: "seatd", sv: 0, set: { "used": 1 } }); assert(last(A, "error").code === "seatresync", "no stored copy -> seatresync (send full)"); }
 console.log("seat ALL OK");
