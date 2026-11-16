@@ -181,7 +181,7 @@ function goRoom(){try{if($q(".game.k3ph")&&!$q(".game.k3home")&&typeof k3Home===
 function shown(k){const b=tabBtn(k);return !!b&&vis(b)}
 /* the group button that holds a hidden member tab (Sổ ghi is inside Mệnh truyện) */
 function groupBtn(k){const b=tabBtn(k);if(b&&vis(b))return b;try{for(const g in KG)if(KG[g].keys.includes(k)){const gb=KG[g].keys.map(tabBtn).find(x=>x&&vis(x));if(gb)return gb}}catch(e){}return null}
-function goalEl(){const L=[...document.querySelectorAll("#kgoalst .kgoal, #panel .kgoal")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>40&&r.height>20&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
+function goalEl(){const L=[...document.querySelectorAll("#krail [data-rail=goal], #panel .kgoal")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>40&&r.height>20&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
 function panelBox(){const p=$q("#panel");return p&&vis(p)?p:null}
 /* the act card for the "đọc thẻ / làm thử" steps: a quiet act she can do now (no harm, no scheme) */
 let PICK=null;
@@ -276,7 +276,7 @@ const STEPS=[
  {id:"tutrang",title:"Tư trang",when:()=>!!groupBtn("inv"),target:()=>panelBox(),pad:0,prep(){goTab("inv")},marks:[()=>groupBtn("inv")],
   html:()=>say(`<p>Tư trang là rương đồ của {x}: trâm cài, y phục, quà được ban.</p><p>Mặc hợp phẩm thì yên; vượt phẩm hay quá giản dị đều có người để ý. Đồ ngự tứ không được bán.</p>`)},
  {id:"muctieu",title:"Mục tiêu chương",when:()=>typeof kitGoalNow==="function"&&!!kitGoalNow(),target:()=>goalEl(),pad:4,prep(){goRoom();if(!goalEl())goTab("act")},marks:[()=>groupBtn("story")],
-  html:()=>say(`<p>Dải này là mục tiêu của chương đang đi: việc phải làm và tiến độ. {X} chạm vào dải để xem chi tiết chương và những việc nên làm, có lối "Đi làm" dẫn thẳng tới chỗ.</p><p>Truyện riêng của thân phận {x} nằm ở mục <b>${grpLabel("story")}</b>; Sổ ghi chép mọi việc đã qua cũng ở đó.</p>`)},
+  html:()=>say(`<p>Cuộn chiếu này là mục tiêu của chương đang đi: việc phải làm và tiến độ. {X} chạm vào để xem chi tiết chương và những việc nên làm, có lối "Đi làm" dẫn thẳng tới chỗ.</p><p>Truyện riêng của thân phận {x} nằm ở mục <b>${grpLabel("story")}</b>; Sổ ghi chép mọi việc đã qua cũng ở đó.</p>`)},
  {id:"so",title:"Ghi sổ · Nạp sổ",target:"#menu",pad:4,prep(){goRoom()},
   html:()=>say(`<p>Sổ tự ghi sau mỗi việc. Chạm ☰ để về màn đầu: chọn sổ, nạp lại kiếp đang chơi, xem Sổ luân hồi.</p><p>Chép sổ và Nạp sổ nằm trong Thiết lập; muốn nghe {m} dặn lại thì chọn <b>Xem lại lời dặn</b>.</p>`)},
  {id:"quabuoi",title:"Sang buổi",target:"#next",pad:4,side:"above",prep(){goRoom()},last:true,
