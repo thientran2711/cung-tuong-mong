@@ -12,7 +12,11 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:vp[3]?'reduce':'no-preference'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);/* socket log for failure dumps (same as coop-e2e) */
+  await ctx.addInitScript(()=>{const W0=window.WebSocket,t0=Date.now();window.__wsLog=[];window.WebSocket=function(u,p){const w=p===undefined?new W0(u):new W0(u,p);const L=window.__wsLog,i=L.length,tag=String(u).replace(/^.*\/room\//,'').replace(/&name=.*$/,'');
+    L.push([Date.now()-t0,'new',tag]);w.addEventListener('open',()=>L.push([Date.now()-t0,'open',i]));w.addEventListener('close',e=>L.push([Date.now()-t0,'close',i,e.code]));return w};
+   window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
+  await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -63,7 +67,8 @@ async function inRoomWorld(A,B,code){const t0=Date.now();while(Date.now()-t0<150
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code');const code=(await C(A)).code;await clear(A);
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined, both online');
-await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rstep(B);await clear(A,3);await clear(B,3);if(ra==='gone'&&rb==='gone')break;await sleep(600)}await A.p.emulateMedia({reducedMotion:'no-preference'});/* A: motion ON from here (the roulette / world entry runs reduced, like coop-e2e) */ok(await until(A,()=>__co().world,null,60000)&&await until(B,()=>__co().world,null,60000),'both players are in the shared world');for(const o of[A,B])for(let i=0;i<12;i++){const m=await o.p.evaluate(()=>{const b=document.querySelector('#modal:not([hidden]) [data-nl="ok"]');if(b){b.click();return 1}return 0});if(!m)break;await sleep(700)}
+await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rstep(B);await clear(A,3);await clear(B,3);if(ra==='gone'&&rb==='gone')break;await sleep(600)}await A.p.emulateMedia({reducedMotion:'no-preference'});/* A: motion ON from here (the roulette / world entry runs reduced, like coop-e2e) */{const wa=await until(A,()=>__co().world,null,60000)&&await until(B,()=>__co().world,null,60000);const wd=o=>o.p.evaluate(()=>{const m=document.getElementById('modal'),t=document.getElementById('title'),k=document.getElementById('kroul');return{S:typeof S!=='undefined'&&!!S,n:typeof S!=='undefined'&&S&&S.name,base:!!(window.COOPW&&COOPW.base),inLife:COOPW.inLife,ww:COOPW.waitWorld,st:COOP.state.status,you:COOP.state.you,C:!!COOP.state.C,title:t&&!t.hidden,kroul:k?k.textContent.slice(0,80):null,modal:m&&!m.hidden?m.textContent.slice(0,120):'',ws:window.__wsLog,tr:COOPW.tr.slice(-16)}}).catch(e=>e.message);
+ ok(wa,'both players are in the shared world',wa?undefined:{A:await wd(A),B:await wd(B)})}for(const o of[A,B])for(let i=0;i<12;i++){const m=await o.p.evaluate(()=>{const b=document.querySelector('#modal:not([hidden]) [data-nl="ok"]');if(b){b.click();return 1}return 0});if(!m)break;await sleep(700)}
  await clear(A);await clear(B);await home(A);await home(B);
  ok(await until(A,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000)&&await until(B,()=>!!document.querySelector('#krail [data-rail="chat"]'),null,8000),'both rooms show the chat icon');
  for(const o of[A,B]){const i=await ICON(o);ok(i&&i.left&&i.vis&&i.badge==='','icon on the LEFT of the room scene, no badge yet ('+o.name+')',i)}
