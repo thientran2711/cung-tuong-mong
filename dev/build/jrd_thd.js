@@ -728,17 +728,24 @@ RD97L.push({a:"thd_tro_11",tag:"Học trò thành Ngự sử, một lòng với 
  fx:{danh:12,sung:4},go:A=>{rdOan(A,"v",4);return""},rw:"nt_haiduong",ti:"Ân nhân của khoa trường"});
 
 /* ---------- thd_hoc · Thầy giáo trong cung ---------- */
-/* BAL.road keys needed: none. School age = BAL.tc.hienAge (j53: the age a teacher starts reporting on a child; review road-b3-r1 item 7).
-   Condition copied from ARC67.thd_hoc .4: {v} = a live consort WITH a live child; from .5 the road needs that child to be of school age
+/* BAL.road keys: thd_hoc.vlAge (the vỡ lòng age, jbal2.js). Pupils = children of vỡ lòng age (review road-b3-fix-r1 item 1: a life starts
+   with the oldest child at BAL.ps.kidAge[1] = 4 at most and the 14 chapters span only one or two years, so a school-age gate
+   (BAL.tc.hienAge = 6) closed the road; the class is the vỡ lòng morning class, road-history pass 2). Beats that need a school-age child
+   (court exam before the Lục bộ, horse and bow, attending court) switch on thdHocBig = {n1} at BAL.tc.hienAge or more (vỡ lòng twins).
+   The premise ARC67.thd_hoc (.4) is rolled only when a royal child of vỡ lòng age with a living mother exists (ok), and casts that
+   mother first, so the road can run .5 on with the same {v}.
+   Condition copied from ARC67.thd_hoc .4: {v} = a live consort WITH a live child; from .5 the road needs that child to be of vỡ lòng age
    (castRv67 filter); the road keeps the same {v}; a chapter whose {v} has no child in class any more recasts (told) or cannot run (cast → false).
-   Children are REAL children of this life (allKids), never an infant: {n1} = {v}'s child of school age (a son first; the engine carries the
-   name in S.st.f14.n1); {n2} = another live royal child of school age (prefers a rival's child, else hers; engine-carried S.st.f14.n2), or ""
+   Children are REAL children of this life (allKids), never an infant: {n1} = {v}'s child of vỡ lòng age (a son first; the engine carries the
+   name in S.st.f14.n1); {n2} = another live royal child of vỡ lòng age (prefers a rival's child, else hers; engine-carried S.st.f14.n2), or ""
    when there is none: then every beat runs its one-pupil wording (the class's other pupils are the unnamed thư đồng, the officials' sons who
    study beside the princes at Thượng thư phòng). Texts on Đông cung / court duty switch on the sex of {n1} (thdHocSon). */
-const thdHocAge=()=>BAL.tc.hienAge;
+const thdHocAge=()=>BAL.road.thd_hoc.vlAge;
 const thdHocIn=k=>!!k&&k.alive&&(k.age||0)>=thdHocAge();
 function thdHocKids(){try{return allKids().filter(([k])=>thdHocIn(k))}catch(e){return[]}}
 function thdHocKid(nm){try{const p=allKids().find(([k])=>k&&k.name===nm);return p?p[0]:null}catch(e){return null}}
+/* {n1} is of school age (BAL.tc.hienAge): the school-age wording; else the vỡ lòng twin */
+const thdHocBig=A=>{const k=thdHocKid(A&&A.n1);return !!k&&(k.age||0)>=BAL.tc.hienAge};
 const thdHocSon=A=>{const k=thdHocKid(A&&A.n1);return !!k&&k.sex==="m"};
 /* {n2} as a token when a second pupil exists, else the given one-pupil wording */
 const thdN2=(A,alt)=>A&&A.n2?"{n2}":alt;
@@ -756,6 +763,10 @@ function thdHocCast(A){const vf=v=>(v.kids||[]).some(thdHocIn);
   A.n1=a;A.n2=b}catch(e){return false}
  return true}
 const thdHocOk=()=>thdHocKids().length>0;
+/* the premise (.4, j67) is rolled only when a pupil exists for .5: a royal child of vỡ lòng age whose mother lives (review road-b3-fix-r1
+   item 1); its {v} is that mother first (else any consort with a live child, as j67) */
+if(ARC67.thd_hoc)try{const P=ARC67.thd_hoc;P.ok=()=>thdHocKids().some(([k,m])=>m&&liveRivals(false).includes(m));
+ P.cast=function(A){castRv67(A,"v",v=>(v.kids||[]).some(thdHocIn))||castRv67(A,"v",v=>(v.kids||[]).some(k=>k.alive));return true}}catch(e){console.error(e)}
 
 rdDef("thd_hoc",5,{t:"Học trò nhỏ",w:"emp",sj:"hai học trò nhỏ ở Thượng thư phòng",ok:thdHocOk,cast:thdHocCast,
  g:A=>"Theo chỉ của Hoàng thượng, ngươi làm giáo tập buổi sáng nhỏ ở Thượng thư phòng: dạy vỡ lòng các hoàng tự chưa vào học chính; kinh sử vẫn do các sư phó Hàn lâm giảng. "+(thdHocTwo(A)?"Có hai đứa trẻ khiến ngươi mất ngủ: {n1}, con của {v}, sáng dạ mà lười; và {n2}, chăm đến mức các anh em ganh. Dạy được một đứa đã khó; dạy cả hai mà không ai oán còn khó hơn.":"Trong lớp, ngoài mấy thư đồng con nhà quan, chỉ có {n1}, con của {v}, là hoàng tự: sáng dạ mà lười. Dạy một đứa trẻ nên người đã khó; dạy mà mẹ nó không oán còn khó hơn."),
@@ -772,7 +783,7 @@ rdDef("thd_hoc",5,{t:"Học trò nhỏ",w:"emp",sj:"hai học trò nhỏ ở Th�
   {n:"Nhận lời, dạy ở cung mình",c:{suc:-3},w:{duc:2},f:"gentle",wx:"còn một lần thử",lx:"kèm riêng mỗi tối, hao sức; thất bại lần nữa thì hết",rt:"{n1} ngồi bên bàn ngươi, lần đầu cầm bút mà không khóc."},
   {n:"Xin dạy ngay tại Thượng thư phòng",c:{},o:()=>40+S.danh/4,w:{danh:2},sc:1,f:"strict",wx:"lấy lại chỗ đứng",l:{sung:-2},lx:"thầy mới ghét ngươi, tâu ngươi giành việc, Hoàng thượng phật ý",rt:"Hoàng thượng chuẩn. Thầy mới đành nhường một góc lớp.",rf:"Ngài bảo: “Dạy được một đứa đã rồi hẵng nói.”"},
   {n:"Từ chối khéo",c:{sung:-2},w:{tamco:1},wx:"khỏi gánh việc khó",lx:"ngài thấy ngươi giận dỗi, phật ý",rt:"Hoàng thượng cau mày, rồi tự giao cho người khác."}]},
- c1:{h:"Bút nghiên bị giấu",w:"emp",if:thdHocTwo,t:"{n2} đọc thuộc cả thiên Đại học. Các anh em ganh, giấu bút nghiên của nó, và {n1} cũng góp tay.",o:[
+ c1:{h:"Bút nghiên bị giấu",w:"emp",if:thdHocTwo,t:"{n2} đọc thuộc cả quyển Tam tự kinh. Các anh em ganh, giấu bút nghiên của nó, và {n1} cũng góp tay.",o:[
   {n:"Phạt cả lớp chép phạt",c:{sung:-1},w:{danh:2},f:"strict",wx:"phép lớp nghiêm",lx:"bọn trẻ đều về mách mẹ, các mẹ kêu lên Hoàng thượng, ân sủng nhạt đi",go:A=>{rdOan(A,"v",2)},rt:"Cả lớp chép bài đến trưa, không ai dám giấu đồ ai nữa."},
   {n:"Cho {n1} và {n2} ngồi chung một bàn",c:{suc:-2},o:()=>40+S.duc/4,w:{duc:3},sc:1,f:"gentle",wx:"hai đứa thân nhau",l:{danh:-1},lx:"hai đứa cãi nhau suốt buổi, người ta bảo thầy không giữ được lớp, tiếng tăm sứt mẻ",rt:"Đến chiều, {n1} đã mượn bút của {n2}.",rf:"Hai đứa giật nhau cái nghiên vỡ đôi."},
   {n:"Làm như không biết",c:{duc:-2},w:{tamco:1},wx:"không động mẹ nào",lx:"làm ngơ cho trẻ bị bắt nạt, tổn đức; {n2} tủi thân",rt:"{n2} lặng lẽ viết bằng que tre."}]},
@@ -831,10 +842,10 @@ rdDef("thd_hoc",6,{t:"Mẹ của học trò",w:"v",sj:"lòng nghi của {v}",ok:
   mid:{k:0,tag:"Nghi ngờ còn đó",t:"{v} không làm gì thêm, nhưng cũng không tin ngươi hơn.",fx:{duc:1}},
   lose:{k:-1,tag:"{v} coi ngươi là kẻ thù",t:"{v} bỏ về, từ đó gặp ngươi là quay mặt. Nàng bắt đầu kể với các cung khác rằng thầy dạy chữ có lòng riêng.",fx:{danh:-3},go:A=>{rdOan(A,"v",10);return""}}}});
 
-rdDef("thd_hoc",7,{t:"Kỳ khảo hạch",w:"emp",sj:"kỳ khảo hạch hoàng tự trước triều thần",ok:thdHocOk,cast:thdHocCast,
- g:"Cuối xuân, Hoàng thượng khảo hạch các hoàng tự trước triều thần. Ai cũng biết: đứa nào đối đáp giỏi, đứa ấy được nhìn như người gánh được việc lớn. Mẹ nào cũng muốn con mình đứng đầu; thầy thì chỉ có một.",
+rdDef("thd_hoc",7,{t:"Kỳ khảo hạch",w:"emp",sj:"kỳ khảo hạch các hoàng tự",ok:thdHocOk,cast:thdHocCast,
+ g:A=>(thdHocBig(A)?"Cuối xuân, Hoàng thượng khảo hạch các hoàng tự trước triều thần.":"Cuối xuân, Hoàng thượng ngự đến Thượng thư phòng khảo bài vỡ lòng của các hoàng tự nhỏ, có mấy vị Đại học sĩ ngồi nghe.")+" Ai cũng biết: đứa nào đối đáp giỏi, đứa ấy được nhìn như người gánh được việc lớn. Mẹ nào cũng muốn con mình đứng đầu; thầy thì chỉ có một.",
  p:[["s1","s2"],["c1","c2"],["t1","t2"],["x1"]],
- B:{s1:{h:"Chiếu khảo hạch",w:"emp",if:RDW(1),t:"Hoàng thượng báo trước ba tháng: kỳ khảo năm nay có cả Lục bộ Thượng thư ngồi nghe. Ngài nói riêng với ngươi: “Trẫm muốn xem đứa nào biết nghĩ, không phải đứa nào thuộc lòng.”",o:[
+ B:{s1:{h:"Chiếu khảo hạch",w:"emp",if:RDW(1),t:A=>"Hoàng thượng báo trước ba tháng: kỳ khảo năm nay "+(thdHocBig(A)?"có cả Lục bộ Thượng thư ngồi nghe":"có Đại học sĩ ngồi nghe")+". Ngài nói riêng với ngươi: “Trẫm muốn xem đứa nào biết nghĩ, không phải đứa nào thuộc lòng.”",o:[
   {n:"Dạy bọn trẻ tự đặt câu hỏi",c:{suc:-3},w:{duc:2},f:"think",wx:"bọn trẻ biết nghĩ",lx:"dạy chậm từng câu, tốn công, hao sức",rt:"Ba tháng, {n1} hỏi ngươi nhiều câu hơn cả năm trước."},
   {n:"Ra đề luyện mỗi ngày",c:{sung:-2},w:{danh:2},f:"drill",wx:"bài nào cũng thuộc",lx:"bọn trẻ mệt, mách phụ hoàng, ngài phật ý",rt:"Bàn của bọn trẻ cao chồng giấy."},
   {n:"Hỏi Hoàng thượng ngài muốn nghe gì",c:{},o:()=>40+S.sung/4,w:{sung:2},sc:1,wx:"biết ý vua",l:{sung:-2},lx:"ngài thấy ngươi dò đề, Hoàng thượng phật ý",rt:"Ngài cười: “Nghe chúng nói thật.”",rf:"Ngài nhíu mày: “Thầy mà cũng đi hỏi đề?”"}]},
@@ -853,19 +864,19 @@ rdDef("thd_hoc",7,{t:"Kỳ khảo hạch",w:"emp",sj:"kỳ khảo hạch hoàng 
  t1:{h:"{n2} sẽ vượt mặt",w:"emp",if:thdHocTwo,t:"{n2} giỏi hơn {n1} thấy rõ. Ngày khảo, nếu {n2} đứng đầu, {v} sẽ cho là ngươi cố ý.",o:[
   {n:"Để {n2} cứ tỏa sáng",c:{sung:-1},w:{danh:2},f:"fair",wx:"công bằng",lx:"các mẹ kêu thầy để một đứa lấn hết, Hoàng thượng phật ý; {v} sẽ oán",go:A=>{rdOan(A,"v",4)},rt:"Ngươi giao {n2} bài khó nhất."},
   {n:"Bảo {n2} nhường một chút",c:{duc:-3},w:{tamco:1},wx:"{v} không bị bẽ mặt",lx:"dạy trò giấu tài, tổn đức",go:A=>{rdRel(A,"v",4)},rt:"{n2} gật đầu, mắt buồn."},
-  {n:"Mỗi đứa giữ một môn",c:{suc:-2},o:()=>45+S.tai/5,w:{duc:2},sc:1,f:"fair",wx:"đứa nào cũng có chỗ đứng",l:{danh:-1},lx:"chia môn mà không khéo thì lộ, tiếng tăm sứt mẻ",rt:A=>thdHocSon(A)?"{n2} giữ phần kinh nghĩa, {n1} giữ phần cưỡi ngựa bắn cung.":"{n2} giữ phần kinh nghĩa, {n1} giữ phần thư pháp.",rf:"Bọn trẻ tranh nhau môn của đứa khác."}]},
+  {n:"Mỗi đứa giữ một môn",c:{suc:-2},o:()=>45+S.tai/5,w:{duc:2},sc:1,f:"fair",wx:"đứa nào cũng có chỗ đứng",l:{danh:-1},lx:"chia môn mà không khéo thì lộ, tiếng tăm sứt mẻ",rt:A=>thdHocSon(A)&&thdHocBig(A)?"{n2} giữ phần kinh nghĩa, {n1} giữ phần cưỡi ngựa bắn cung.":thdHocBig(A)?"{n2} giữ phần kinh nghĩa, {n1} giữ phần thư pháp.":"{n2} giữ phần đọc bài, {n1} giữ phần đọc thơ.",rf:"Bọn trẻ tranh nhau môn của đứa khác."}]},
  /* one-pupil variant of t1: {n1} is the only royal child of school age in the khảo */
  t2:{h:"Một mình trước điện",w:"emp",if:A=>!thdHocTwo(A),t:"{n1} là hoàng tự duy nhất trong lớp đủ tuổi vào khảo. Cả điện sẽ chỉ nhìn một mình nó, và nếu nó vấp, {v} sẽ đổ mọi lời chê lên thầy.",o:[
   {n:"Kèm riêng nó mỗi tối",c:{suc:-3},w:{duc:2},wx:"nó bớt sợ",lx:"kèm đến khuya, hao sức; mấy thư đồng bị bỏ lại sau",rt:"Đến tối thứ mười, {n1} tự đứng đọc trước gương."},
   {n:"Khuyên {v} đừng hứa gì với nó",c:{},o:()=>40+S.duc/4,w:{duc:2},sc:1,wx:"đứa trẻ thôi sợ thua",l:{danh:-1},lx:"{v} cho là ngươi xen chuyện nhà, kể khắp cung, tiếng tăm sứt mẻ",go:(A,ok)=>{rdRel(A,"v",ok?4:-4)},rt:"{v} gật đầu: “Thi được đến đâu, ta nhận đến đó.”",rf:"{v} đáp: “Con ta phải đứng đầu.”"},
   {n:"Để nó tự lo",c:{duc:-2},w:{tamco:1},wx:"nó học cách tự đứng",lx:"bỏ một đứa trẻ một mình với nỗi sợ, tổn đức",rt:"{n1} ôm sách ngồi một mình đến khuya."}]},
- x1:{h:"Ngày khảo hạch",w:"emp",t:"Điện Văn Hoa. Lục bộ Thượng thư ngồi hai bên, Hoàng thượng ngồi trên, bọn trẻ quỳ thành hàng. Phi tần không được bước vào điện; ngươi chỉ kịp dặn bọn trẻ một lời ở cửa Thượng thư phòng, rồi ngồi chờ thái giám chạy tin.",o:[
-  {n:"Để bọn trẻ đối đáp tự do",c:{suc:-4},o:A=>45+(A.f.think?15:0)+S.tai/6,e:["win","lose"],rt:"{n1} trả lời một câu về đê điều làm cả triều ngẩn người. Hoàng thượng gõ bàn khen.",rf:"Bọn trẻ nói lan man, một Thượng thư bật cười."},
-  {n:"Cho bọn trẻ đọc bài đã luyện",c:{suc:-4},o:A=>40+(A.f.drill?15:0)+(A.f.cheat?10:0),e:["win","mid"],rt:"Không đứa nào sai một chữ. Triều thần gật gù.",rf:"Thuộc làu mà không đứa nào nói được ý mình."},
+ x1:{h:"Ngày khảo hạch",w:"emp",t:A=>thdHocBig(A)?"Điện Văn Hoa. Lục bộ Thượng thư ngồi hai bên, Hoàng thượng ngồi trên, bọn trẻ quỳ thành hàng. Phi tần không được bước vào điện; ngươi chỉ kịp dặn bọn trẻ một lời ở cửa Thượng thư phòng, rồi ngồi chờ thái giám chạy tin.":"Thượng thư phòng. Hoàng thượng ngồi trên, mấy vị Đại học sĩ ngồi hai bên, bọn trẻ đứng thành hàng, đứa nhỏ nhất còn phải kiễng chân. Ngươi đứng cuối phòng, chỉ kịp dặn bọn trẻ một lời trước khi ngài đến.",o:[
+  {n:"Để bọn trẻ đối đáp tự do",c:{suc:-4},o:A=>45+(A.f.think?15:0)+S.tai/6,e:["win","lose"],rt:A=>thdHocBig(A)?"{n1} trả lời một câu về đê điều làm cả triều ngẩn người. Hoàng thượng gõ bàn khen.":"{n1} giảng chữ “Hiếu” bằng chuyện mẹ nó ốm, cả phòng lặng đi. Hoàng thượng gõ bàn khen.",rf:A=>thdHocBig(A)?"Bọn trẻ nói lan man, một Thượng thư bật cười.":"Bọn trẻ nói lan man, một vị Đại học sĩ bật cười."},
+  {n:"Cho bọn trẻ đọc bài đã luyện",c:{suc:-4},o:A=>40+(A.f.drill?15:0)+(A.f.cheat?10:0),e:["win","mid"],rt:A=>"Không đứa nào sai một chữ. "+(thdHocBig(A)?"Triều thần":"Các vị Đại học sĩ")+" gật gù.",rf:"Thuộc làu mà không đứa nào nói được ý mình."},
   {n:"Xin Hoàng thượng chấm cả lớp như một",c:{danh:-2},w:{duc:3},e:"mid",lx:"không đứa nào được khen riêng, các mẹ bảo thầy né, tiếng tăm sứt mẻ",rt:"Hoàng thượng ban cả lớp mỗi đứa một cây bút."}]}},
- E:{win:{k:1,tag:"Cả lớp đối đáp lưu loát",w:"emp",t:"Triều thần ra về bàn tán về Thượng thư phòng. {n1} được Hoàng thượng xoa đầu trước điện. Tối ấy {v} sang Thượng thư phòng, lần đầu cúi chào ngươi.",fx:{danh:6,sung:3},go:A=>{rdRel(A,"v",8);return""}},
+ E:{win:{k:1,tag:"Cả lớp đối đáp lưu loát",w:"emp",t:A=>(thdHocBig(A)?"Triều thần ra về bàn tán về Thượng thư phòng. {n1} được Hoàng thượng xoa đầu trước điện.":"Các vị Đại học sĩ ra về bàn tán về lớp vỡ lòng. {n1} được Hoàng thượng xoa đầu trước mặt cả lớp.")+" Tối ấy {v} sang Thượng thư phòng, lần đầu cúi chào ngươi.",fx:{danh:6,sung:3},go:A=>{rdRel(A,"v",8);return""}},
   mid:{k:0,tag:"Khảo hạch qua êm",t:"Không đứa nào nổi bật, không đứa nào hỏng. Hoàng thượng gật đầu, rồi quên.",fx:{danh:1}},
-  lose:{k:-1,tag:"Khảo hạch rối loạn",t:"Một Thượng thư bật cười giữa điện. {v} đổ lỗi cho ngươi, và lần này các mẹ khác cũng gật đầu theo.",fx:{danh:-4,sung:-2},go:A=>{rdOan(A,"v",8);return""}}}});
+  lose:{k:-1,tag:"Khảo hạch rối loạn",t:A=>(thdHocBig(A)?"Một Thượng thư bật cười giữa điện.":"Một vị Đại học sĩ bật cười giữa lớp.")+" {v} đổ lỗi cho ngươi, và lần này các mẹ khác cũng gật đầu theo.",fx:{danh:-4,sung:-2},go:A=>{rdOan(A,"v",8);return""}}}});
 
 rdDef("thd_hoc",8,{t:"Đứa trẻ bị phạt",w:"v",sj:"đứa trẻ bị phạt trong giờ ngươi dạy",ok:thdHocOk,cast:thdHocCast,
  g:"Một đứa trẻ bị phạt trong giờ ngươi dạy. Ở Thượng thư phòng, phép phạt của thầy là phép; ra khỏi cửa lớp, phép phạt ấy là chuyện của mẹ nó.",
@@ -955,7 +966,7 @@ rdDef("thd_hoc",10,{t:"Kết khóa",w:"emp",sj:"lời nhận xét của người
   {n:"Dạy nó biết chia tay",c:{sung:-2},w:{danh:1},wx:"đứa trẻ lớn thêm",lx:"nó khóc cả đêm, mách phụ hoàng, ngài phật ý",rt:"Ngươi viết cho nó một chữ “Biệt”, giảng nghĩa đến khi nó thôi khóc."},
   {n:"Gửi nó về cho {v}",c:{duc:-2},w:{tamco:1},wx:"không để {v} nói ngươi giữ con nàng",lx:"đứa trẻ thấy bị bỏ, tổn đức",rt:"{n1} đi, ngoái lại ba lần."}]},
  x1:{h:"Câu hỏi của Hoàng thượng",w:"emp",t:"Đêm cuối khóa, Hoàng thượng hỏi khẽ: “Nàng dạy chúng cả năm. Đứa nào có thể gánh việc lớn?”",o:[
-  {n:"Tâu tên {n1}",c:{suc:-4},o:A=>46+(A.f.bond?10:0)+(A.f.promise?5:0),e:["win","lose"],lx:"các mẹ khác biết thầy chọn phe",rt:A=>thdHocSon(A)?"Hoàng thượng gật đầu: “Trẫm cũng thấy thế.” Hôm sau ngài cho {n1} theo hầu buổi chầu.":"Hoàng thượng gật đầu: “Trẫm cũng thấy thế.” Hôm sau ngài cho {n1} được ngồi nghe sư phó Hàn lâm giảng cùng các hoàng tử.",rf:"Hoàng thượng nhíu mày: “Thầy mà cũng chọn phe?”"},
+  {n:"Tâu tên {n1}",c:{suc:-4},o:A=>46+(A.f.bond?10:0)+(A.f.promise?5:0),e:["win","lose"],lx:"các mẹ khác biết thầy chọn phe",rt:A=>thdHocSon(A)?(thdHocBig(A)?"Hoàng thượng gật đầu: “Trẫm cũng thấy thế.” Hôm sau ngài cho {n1} theo hầu buổi chầu.":"Hoàng thượng gật đầu: “Trẫm cũng thấy thế.” Hôm sau, ở yến gia đình, ngài cho {n1} ngồi cạnh mình, ai cũng thấy."):"Hoàng thượng gật đầu: “Trẫm cũng thấy thế.” Hôm sau ngài cho {n1} được ngồi nghe sư phó Hàn lâm giảng cùng các hoàng tử.",rf:"Hoàng thượng nhíu mày: “Thầy mà cũng chọn phe?”"},
   /* the resentment the hint names is applied (review road-b3-r1 item 3) */
   {n:"Tâu: mỗi đứa một tài, xin ngài xem từng đứa",c:{suc:-2},o:A=>40+(A.f.fair?15:0)+(A.f.truth?5:0),e:["win","mid"],lx:"{v} không được câu nàng muốn, thêm oán",go:(A,ok)=>{if(!ok)rdOan(A,"v",3)},rt:"Ngươi kể tài từng đứa. Hoàng thượng nghe đến khuya, rồi nói: “Thầy này biết người.”",rf:"Hoàng thượng nghe, nhưng không nhớ được gì."},
   /* only a son of school age; the Emperor's notice the text names is applied (j67 e67heir) */

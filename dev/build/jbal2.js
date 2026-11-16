@@ -297,6 +297,10 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
  /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
  cap:{tt_mat:4},
+ /* thd_hoc (jrd_thd.js): vlAge = the vỡ lòng age, the youngest pupil of the morning class at Thượng thư phòng (road-history pass 2: «vỡ lòng /
+    young boys», princes enter school proper at about BAL.tc.hienAge); a life's children start at BAL.ps.kidAge 1–4 and the road spans
+    one or two years, so pupils come from this age (review road-b3-fix-r1 item 1) */
+ thd_hoc:{vlAge:3},
  /* Phần cuối in hồi form (jend14.js, B3): fertM / prayM = months of easier conception (S.fert / S.pray, j8 conceiveCh) from «Người nối dõi»;
     hauTh / hauDanh = Thái hậu / Danh weight for the lập hậu choice when ch13 is won at the top seat below Hoàng hậu; hauShield / keShield =
     months of che chở (S.shield) for a sitting Hoàng hậu / a Thái tử son; keFond = how dear (kid.fond) her son must be for a won ch14 to set

@@ -21,6 +21,9 @@ function egMomRv(A){try{const mine=new Set(mySons());const L=liveRivals(true).fi
 /* cast guards (review road-b3-r1: beat text must match the cast person): v has a living child / a living son */
 /* the Thái hậu is gone (S.thDead): effects/texts that name her switch (getters below; safe before S exists, e.g. in the option scan) */
 const egThGone=()=>typeof S!=="undefined"&&!!S&&!!S.thDead;
+/* her son {k} (son67) is of school age (BAL.tc.hienAge): school / hunt / talk beats; else their small-child twins (review road-b3-fix2 family
+   scan: the 14 chapters span one or two years, so a son born in this life is still a baby at ch14) */
+const egKidBig=()=>{try{const s=son67();return !!s&&(s.age||0)>=BAL.tc.hienAge}catch(e){return false}};
 const egKid=v=>!!(v&&(v.kids||[]).some(k=>k.alive)),egSon=v=>!!(v&&(v.kids||[]).some(k=>k.alive&&k.sex==="m"));
 /* ONE CORE (OD:L1267): rank indexes from RANKS itself — the Hoàng hậu seat is the last rank, the top seat below it the one before */
 const EG_HH=()=>RANKS.length-1,EG_TOP=()=>RANKS.length-2,egRankN=i=>RANKS[Math.max(0,Math.min(i|0,RANKS.length-1))].n;
@@ -127,9 +130,13 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
   {n:"Lần theo món điểm tâm",c:{suc:-4},o:()=>45+S.mat*5,if:A=>!!rv67(A,"v"),w:{danh:3},sc:1,wx:"tìm ra kẻ ra tay",l:{danh:-3},lx:"đánh động mà không bắt được ai",go:(A,ok)=>{if(ok)rdOan(A,"v",10)},rt:"Dấu vết dẫn về cung {v}.",rf:"Kẻ đưa điểm tâm đã bị diệt khẩu."},
   {n:"Tâu Hoàng thượng xin thêm thị vệ",c:{sung:-2},w:{},wx:"Thái tử được canh gác",lx:"ngài nghĩ ngươi lo xa",go:()=>{S.shield=Math.max(S.shield||0,BAL.road.end.keShield)},rt:"Hoàng thượng sai thêm thị vệ canh Đông cung."}]},
  s2:{h:"Ngôi Đông cung còn ngỏ",w:"emp",if:()=>!egHeirMine()&&mySons().length>0,t:A=>egSon(rv67(A,"v"))?"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, cũng nhắc đến con của {v}.":"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, nhưng Hoàng thượng chưa phê.",o:[
-  {n:"Mời thầy giỏi dạy {k}",c:{bac:-50},w:{},wx:"con tiến bộ, Hoàng thượng để ý",lx:"tốn bạc",go:()=>e67heir(6),rt:"Thầy mới khen {k} sáng dạ."},
-  {n:"Cho {k} theo Hoàng thượng đi săn",c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:2},wx:"con được ngài để mắt",l:{sung:-3},lx:"con ngã ngựa thì ngươi mang tiếng",go:(A,ok)=>ok?e67heir(8):"",rt:"{k} bắn trúng một con nai, Hoàng thượng cười lớn.",rf:"{k} sợ ngựa, Hoàng thượng nhíu mày."},
-  {n:"Dặn con giữ mình, chưa tranh",c:{danh:-2},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"{k} gật đầu, lặng lẽ học bài."}]},
+  {n:"Mời thầy giỏi dạy {k}",if:egKidBig,c:{bac:-50},w:{},wx:"con tiến bộ, Hoàng thượng để ý",lx:"tốn bạc",go:()=>e67heir(6),rt:"Thầy mới khen {k} sáng dạ."},
+  {n:"Cho {k} theo Hoàng thượng đi săn",if:egKidBig,c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:2},wx:"con được ngài để mắt",l:{sung:-3},lx:"con ngã ngựa thì ngươi mang tiếng",go:(A,ok)=>ok?e67heir(8):"",rt:"{k} bắn trúng một con nai, Hoàng thượng cười lớn.",rf:"{k} sợ ngựa, Hoàng thượng nhíu mày."},
+  {n:"Dặn con giữ mình, chưa tranh",if:egKidBig,c:{danh:-2},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"{k} gật đầu, lặng lẽ học bài."},
+  /* small-child twins (same costs and odds): {k} is not of school age yet */
+  {n:"Chọn nhũ mẫu biết chữ cho {k}",if:()=>!egKidBig(),c:{bac:-50},w:{},wx:"con được dạy sớm, Hoàng thượng để ý",lx:"tốn bạc",go:()=>e67heir(6),rt:"Nhũ mẫu mới dạy {k} những tiếng nói đầu tiên."},
+  {n:"Bế {k} sang thỉnh an Hoàng thượng mỗi sáng",if:()=>!egKidBig(),c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:2},wx:"con được ngài để mắt",l:{sung:-3},lx:"con quấy khóc thì ngươi mang tiếng",go:(A,ok)=>ok?e67heir(8):"",rt:"{k} nắm ngón tay Hoàng thượng không buông, ngài cười lớn.",rf:"{k} khóc ré, Hoàng thượng nhíu mày."},
+  {n:"Giữ con trong cung, chưa tranh",if:()=>!egKidBig(),c:{danh:-2},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"Ngươi giữ {k} trong cung, không cho ai bế ra ngoài."}]},
  s3:{h:"Mẹ của lục cung",w:"th",if:()=>!mySons().length&&allKids().some(([k,v])=>v&&k.alive),t:()=>"Mùa đông năm ấy rét đậm, mấy hoàng tự nhỏ ốm liền. "+(S.thDead?"Mẹ chúng lo không xuể; trong lục cung chưa ai đứng ra lo cho bọn trẻ.":"Thái hậu hỏi: ai trong lục cung đứng ra lo cho bọn trẻ?"),o:[
   {n:"Đứng ra lo cho các hoàng tự",c:{suc:-5,bac:-30},get w(){return egThGone()?{danh:5}:{th:5,danh:3}},wx:"lục cung gọi ngươi là mẹ hiền",lx:"mệt và tốn",rt:"Bọn trẻ khỏi bệnh, mẹ chúng tạ ơn ngươi."},
   {n:"Mời thái y giỏi nhất",c:{bac:-50},w:{danh:3},wx:"việc chu toàn",lx:"tốn bạc",rt:"Thái y túc trực, không đứa nào nặng thêm."},
@@ -147,13 +154,14 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
   {n:"Cắt bớt bổng lộc cung mình",c:{bac:-60},w:{danh:5,duc:3},wx:"dân và triều khen ngươi",lx:"cung ngươi thiếu thốn một mùa",rt:"Tiếng ngươi ra tận ngoài kinh."},
   {n:"Dẫn lục cung may áo bông cho dân",c:{suc:-5},o:()=>40+S.danh/4,w:{danh:4},sc:1,wx:"lục cung theo ngươi",l:{danh:-2},lx:"phi tần khác than mệt",rt:"Ba nghìn áo bông đưa ra khỏi cung.",rf:"Việc làm nửa chừng thì bỏ."},
   {n:"Giữ lệ cũ",c:{sung:-2},w:{bac:20},wx:"giữ bổng lộc",lx:"Hoàng thượng thấy ngươi không chia lo",rt:"Cung ngươi vẫn như cũ."}]},
- t1:{h:"Lời dạy cho con",w:"kid",t:A=>mySons().length?"Đêm khuya, {k} hỏi ngươi: “Mẫu thân, làm vua thì phải giỏi nhất, hay phải hiền nhất?”":"Một hoàng tự nhỏ ngươi từng trông nom hỏi: “Nương nương, sao người lại thương cả con của người khác?”",o:[
-  {n:"Dạy: phải biết người",c:{suc:-2},w:{tamco:2},wx:"đứa trẻ khôn hơn",lx:"lời ấy đến tai người khác thì thành mưu",go:()=>mySons().length?e67heir(4):"",rt:"Đứa trẻ nhớ lời ngươi."},
+ t1:{h:"Lời dạy cho con",w:"kid",t:A=>mySons().length?(egKidBig()?"Đêm khuya, {k} hỏi ngươi: “Mẫu thân, làm vua thì phải giỏi nhất, hay phải hiền nhất?”":"Đêm khuya, ngươi ru {k} ngủ và tự hỏi: mai này nó lớn, làm vua thì phải giỏi nhất, hay phải hiền nhất?"):"Một hoàng tự nhỏ ngươi từng trông nom hỏi: “Nương nương, sao người lại thương cả con của người khác?”",o:[
+  {n:"Dạy: phải biết người",c:{suc:-2},w:{tamco:2},wx:"đứa trẻ khôn hơn",lx:"lời ấy đến tai người khác thì thành mưu",go:()=>mySons().length?e67heir(4):"",rt:()=>mySons().length&&!egKidBig()?"Ngươi chép lời ấy vào sổ, đợi ngày con biết chữ.":"Đứa trẻ nhớ lời ngươi."},
   {n:"Dạy: phải thương dân",c:{suc:-2},w:{duc:3},wx:"lời hay truyền ra ngoài",lx:"có kẻ cho là mềm yếu",go:()=>mySons().length?e67heir(4):"",rt:"Thầy dạy nghe lại, chép vào sách."},
-  {n:"Bảo nó tự nghĩ",c:{suc:-1},w:{danh:1},wx:"đứa trẻ tự lập",lx:"thức khuya, mất sức",rt:"Đứa trẻ ngồi nghĩ rất lâu."}]},
+  {n:"Bảo nó tự nghĩ",if:()=>!mySons().length||egKidBig(),c:{suc:-1},w:{danh:1},wx:"đứa trẻ tự lập",lx:"thức khuya, mất sức",rt:"Đứa trẻ ngồi nghĩ rất lâu."},
+  {n:"Để con lớn rồi tự nghĩ",if:()=>mySons().length>0&&!egKidBig(),c:{suc:-1},w:{danh:1},wx:"đứa trẻ tự lập",lx:"thức khuya, mất sức",rt:"Ngươi thổi tắt đèn, để câu hỏi ấy cho ngày con lớn."}]},
  x1:{h:"Đại lễ đầu xuân",w:"emp",t:"Đại lễ đầu xuân. Hoàng thượng đứng trước Thái miếu, các hoàng tự đứng sau. Ai đứng gần ngài nhất, cả triều sẽ nhìn.",o:[
   {n:"Lo trọn lễ, không tranh chỗ",c:{suc:-5},o:()=>35+S.duc/3+S.danh/6,e:["win","mid"],rt:"Hoàng thượng thấy ngươi đứng đúng chỗ của bậc mẫu nghi.",rf:"Lễ trọn, nhưng không ai nhắc tên ngươi."},
-  {n:"Đưa con đứng gần Hoàng thượng",c:{suc:-5},o:()=>45+S.sung/3+S.tamco/6,e:["win","lose"],need:["kid"],rt:"Hoàng thượng đặt tay lên vai {k}.",rf:"Triều thần xì xào ngươi tranh ngôi cho con."},
+  {n:"Đưa con đứng gần Hoàng thượng",c:{suc:-5},o:()=>45+S.sung/3+S.tamco/6,e:["win","lose"],need:["kid"],rt:()=>egKidBig()?"Hoàng thượng đặt tay lên vai {k}.":"Hoàng thượng bế {k} lên tay trước Thái miếu.",rf:"Triều thần xì xào ngươi tranh ngôi cho con."},
   {n:"Lùi lại, nhường bậc",c:{danh:-2},w:{duc:3},e:"mid",lx:"bỏ lỡ dịp",rt:"Ngươi lùi sau một bước."}]}},
  E:{win:{k:1,tag:"Mẫu nghi thiên hạ",w:"emp",t:()=>mySons().length?"Cả triều nhìn mẹ con ngươi. Con ngươi đứng gần ngôi Đông cung hơn ai hết; ngày ngươi thành Hoàng thái hậu chỉ còn chờ trời định.":"Lục cung gọi ngươi là mẹ. Không có hoàng tử của riêng mình, ngươi vẫn là bậc mẫu nghi mà ai cũng phục.",get fx(){return egThGone()?{danh:8}:{danh:6,th:4}},go:A=>egKeWin()},
   mid:{k:0,tag:"Lục cung nể đức",t:"Lễ trọn, lòng người yên. Ngôi Đông cung vẫn để Hoàng thượng định, nhưng tên ngươi được nhắc với lòng kính trọng.",fx:{danh:3,duc:2},go:()=>mySons().length?e67heir(BAL.road.end.keHeir>>1):""},
