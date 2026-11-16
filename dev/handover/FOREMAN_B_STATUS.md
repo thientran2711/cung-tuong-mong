@@ -10,7 +10,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition @7e80679c | sonnet | REVIEWING (review/buoi-transition-r1, sonnet) — images on CDN |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
-| C40 actcard-small | review/actcard-small @884e8846 | sonnet | REVIEWING (review/actcard-small-r1, sonnet) |
+| C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn @11afc011 | sonnet | REVIEWING (review/room-btn-r1, sonnet) — icons on CDN |
 | C29 rel-picker | review/rel-picker | sonnet | RUNNING |
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
@@ -23,6 +23,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
+PASS review/actcard-small-r1 e3664469fbeddf8e7c9fafb851bd1fda73b6354d (C40; descends from main 900ace7f; reviewer turned the zoom into kitModal kind info = KIT §8 frame, KIT §43.1 + sample)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
