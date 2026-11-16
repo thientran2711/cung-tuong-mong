@@ -11,3 +11,6 @@ const E=L.filter(l=>l.months>=120);console.log(`end (${E.length} full 10-yr live
 for(const f of process.argv.slice(2)){const L=JSON.parse(require('fs').readFileSync(f,'utf8')).lives.filter(l=>l.t);if(!L.some(l=>'son1' in l))continue;
  const by=m=>{const at=L.filter(l=>l.months>=m||(l.son1!=null&&l.son1<=m));return at.length?(100*at.filter(l=>l.son1!=null&&l.son1<=m).length/at.length).toFixed(0)+"% (n"+at.length+")":"-"};
  console.log(`${f}: her first son by year 3 ${by(36)} · by year 5 ${by(60)} · by year 10 ${by(120)}`)}
+for(const f of process.argv.slice(2)){const L=JSON.parse(require('fs').readFileSync(f,'utf8')).lives.filter(l=>l.t);const yrs=L.reduce((a,l)=>a+Math.min(l.months,120)/12,0);const s=k=>L.reduce((a,l)=>a+(l.t[k]||0),0);
+ const m=k=>{const a=L.filter(l=>l.t[k]!=null);return a.length?(a.reduce((x,l)=>x+l.t[k],0)/a.length).toFixed(1):"-"};
+ console.log(`${f}: V3 played tối hers ${(s("mePlayed")/yrs).toFixed(2)}/yr extra ${(s("meExtra")/yrs).toFixed(2)}/yr | blank nights ${s("blank")} nobody ${s("nobody")} custom-days ${s("custom")} npcNights ${s("npcNight")} | NPC mean Sủng y5 ${m("sung5")} y10 ${m("sung10")} · Ân y5 ${m("an5")} y10 ${m("an10")}`)}

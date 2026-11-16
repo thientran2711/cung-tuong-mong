@@ -5,6 +5,68 @@ Owner ask: OD 16/11 14:20Z ("hậu cung tới 12 người … một tháng chỉ
 Base measured: review/preg-rate-r1 @1c31bd79 (= what ships next: BAL.conc .5 + fertile window D57) built page, real weekly loop.
 Bot: `dev/handover/reports/night-time-bot.js` (copy of the scratch bot; usage in its header). Summary script: `night-time-sum.js`.
 
+# >>> V3 (current) — the owner's 10-night ledger, measured. V3 SUPERSEDES the older parts below where they differ <<<
+Owner rulings applied: OD 16/11 17:15Z, L1386 (agents), 18:10Z (10 nights, keep 90 %/65 % per night), 18:40Z (played tối = her first night, extras = notice + own roll), 19:00Z (cycle by day; Empress day 1/15 by custom, never on the tray), 19:05Z (period 5/6/7 days rolled per woman per month).
+Superseded below: §12 "drop the flat 90 %" (owner keeps 90/65 %), §13 "BAL.cyc.block .5" (now by day, 5/6/7), §14 maid nights (removed from this scope: npc-agent audit, OD:L1386), §4–§9 K=5 numbers (owner chose K=10). §10, §11, §12 self-interest steal model (as a hook) and §15 method stay valid.
+[M] = measured by `night-time-bot3.js` (env V3=1, 100 lives × 10 years each, base review/preg-rate-r1 @1c31bd79, her stats floored as §2); [I] = input to re-measure after the build.
+
+## V3-A. Measured: today vs 10-night ledger
+| measure [M] | today, Sủng 25 | today, Sủng 60 | **10 nights, Sủng 25** | **10 nights, Sủng 60** |
+|---|---|---|---|---|
+| her nights / year | 1.2 | 1.6 | **29.7** | **38.2** |
+| of which played tối (her first night of a tuần) | 1.2 | 1.6 | 14.5 | 15.7 |
+| of which extra nights (notice + own roll) | — | — | 13.4 | 20.1 |
+| months with ≥ 1 night of hers | 10 % | 13 % | **78 %** | **77 %** |
+| her conceptions / year | 0.09 | 0.15 | 0.15 | 0.24 |
+| her births / year | 0.05 | 0.08 | 0.08 | 0.15 |
+| her first son by year 5 (alive then) | 21 % | 25 % | 26 % | 38 % |
+| her first son by year 10 | 29 % | 37 % | 50 % | 67 % |
+| NPC births / consort-year (D57 target ≈ 0.10) | 0.10 | 0.10 | **0.10** | 0.09 |
+| NPC mean Sủng at year 5 / 10 | 55 / 69 | — | 70 / 82 | 67 / 80 |
+| NPC mean Ân at year 10 | 4 | — | 44 | 41 |
+| heir = an NPC son (full 10-year lives) | 92–95 % | 93 % | 96 % | 87 % |
+(± about 8–10 points on the son rows at n ≈ 75. The "today" rows are the same seeds; v1/v2 runs agree.)
+Settings that produced the 10-night columns: 90 %/65 % summon per night, Empress custom on day 1/15 and off the tray, cycle by day 5/6/7, **per-night conception = today's conceiveCh × 0.065 applied as a float at the roll** (BAL.nt.concF = .065 [M]), extra NPC nights give Sủng +1 with 50 % and Ân +1 (BAL.nt.extraFx [M]); the played NPC night keeps the full rivalNight.
+
+### What the numbers say
+1. She is chosen in ~4 of 5 months instead of 1 in 10, and her played tối comes about every 2.5 tuần (14.5 a year). The owner's complaint is fixed.
+2. Births: with NPC births held at 0.10 her conceptions still rise ×1.6–1.7 (rivals pregnant more, her cycle blocks only real days, the Empress no longer takes a tray share). First son by year 10: 29 % → 50 % (Sủng 25), 37 % → 67 % (Sủng 60). By year 5 the gain is small at Sủng 25 (21 → 26 %).
+3. **Conception precision is a must-fix**: conceiveCh() rounds to whole % in several wrappers. Lowering BAL.conc instead (×.045) rounded her per-night chance to 0 % at Sủng 25 [M: mean 0.04 %, 0.01 conceptions/yr, first son by year 5 = 3 %]. The factor must be applied as a float at the roll (spec 7).
+4. Sủng/Ân inflation: full night gains on every extra NPC night push NPC mean Sủng to 94.5 and Ân to 91 by year 10 [M] (everyone capped, her nights fall). With +1 Sủng at 50 % and +1 Ân it is 82 / 44 [M] (today 69 / 4). Ân inflation is the bigger change: check every rule that reads NPC Ân (seat contests, pillow talk) in the balance pass.
+5. Difficulty: her card pull ×1.2 / ×1.5 (her-side knob) adds nights (31 / 38 a year) but almost no sons [M: first son by year 5 = 24 % / 25 % vs 26 %, noise] — she is already chosen most months; pregnancy, not nights, is now her bottleneck. So the difficulty knob for the son squeeze should be her-side **conception** (Dễ ×1.6 / Vừa ×1.25 / Khó ×1.0 on her own roll [I]), tuned by the balance-pass HH bot to Dễ ~50 % / Vừa ~32 % / Khó 15–20 % HH. Not measured here (this bot cannot promote her).
+6. Steals (hook only, review/night-steal builds it): her played tối ≈ 14.5 a year. With the §12 self-interest model using the player's own Tranh sủng / Chặn ngự giá odds: ≈ 5.5 contested and ≈ 2.5 lost a year [I: §12 rates × measured played tối]; she has ≈ 21 NPC played tối a year to contest herself.
+7. Blank nights: 90 %/65 % per night gives ~1 blank night in 7 (35.9k blank of ~256k nights [M]); "nobody eligible" is rare (0.1 %).
+
+## V3-C. Gain vs risk (owner format)
+- Gain: chosen in most months, a played night every ~2.5 tuần, more sons over 10 years, D57 births held, history-true Empress days and cycle.
+- Risk 1 — rounding: without the float roll, low-Sủng women can never conceive. Likelihood: dễ (if the worker just lowers BAL.conc). Severity: lớn. Detect: preg-rate.js + this bot (her conceptions per year). Fix: spec 7.
+- Risk 2 — Ân/Sủng inflation. Likelihood: dễ. Severity: vừa. Detect: NPC mean Sủng/Ân at years 5/10 (this bot prints them). Fix: BAL.nt.extraFx (Ân +1 at 50 % too if seat contests skew).
+- Risk 3 — notice spam: ~13–20 extra-night notices a year (about one every 2–3 tuần). Likelihood: có thể. Severity: nhỏ. Fix: one combined Sổ ghi line per tuần + one toast.
+- Risk 4 — son squeeze not solved by nights (first son by year 5 only 26 % at Sủng 25). Likelihood: dễ. Severity: vừa. Detect: HH bot. Fix: her-side conception knob by difficulty [I].
+- Risk 5 — co-op: two players both drawn in the same tuần; only one played tối scene is shared. Likelihood: có thể. Severity: nhỏ. Fix: each player's played tối is her own first day; the guest's scene plays on her screen only (night scenes are personal already); host rolls the ledger.
+Kết luận: **Được lớn hơn** — the 10-night ledger fixes the core complaint with D57 held. It is safe only with the float conception roll and the reduced extra-night gains; the son squeeze needs one more her-side knob.
+
+## V3-B. BUILD SPEC for the worker (10-night ledger) — owner OD 18:10Z, 18:40Z, 19:00Z, 19:05Z, L1386
+Base: origin/main after preg-rate-r1 (D57) and the tham-flip-ui work are on main. Report-only analyst; numbers marked [M] measured by night-time-bot3.js, [I] input to be re-measured after build.
+1. ONE file `dev/build/jledger.js`, loaded after j75, jcycle, jflip, jemo, jgift (it wraps flip). No second copy of any weight: every pick uses `nightCh(p)` (the Emperor's preference, see 3), every conception uses `night(p)` → `conceiveCh(p)`.
+2. When: at the START of tối (OD 14:00Z #4), host only (co-op guest receives the result in the week merge like nightWhy). `ledgerRoll()` fills `S.ledger = {wk, days:[{d:1..10, day:1..30, who:"me"|id|null, why:"custom"|"pick"|"blank"|"none"}]}`.
+3. Per day d (day of month = tuần×10 + d):
+   - day 1 and day 15 → custom: the Emperor goes to the Empress's palace (queenP()); if she is barred that day (her period day, pregnant shown, ill, confined) → the visit is "ngự giá thăm" (no night) — reuse the j75 custom texts. If she is the player: her night.
+   - other days → the existing summon odds per night: 90 %, 65 % when busy (has("chamchinh")) or the Emperor is ill (OD 18:10Z keeps these). Blank → "Hoàng thượng nghỉ một mình".
+   - who: weighted draw over `consorts()` minus the Empress (her card is NEVER on the tray, OD 19:00Z), minus anyone whose period covers that day (4), weights `nightCh(p)`. nightCh is the Emperor's preference function (agent model, OD:L1386): his mood (mm), his traits (Mê sắc, Đa tình, Chăm chính), what each woman did to win him (Sủng, arts, Sắc, gifts/walks, tablet bribe), her state (ill, pregnant, admonished). No other flat roll is added. Flat rolls that stay, with why: the 90/65 % summon (owner keeps it, OD 18:10Z), the j55 troubled-court skip (court rule; owner not asked — list it to her as a question, recommend folding it into "busy" 65 %).
+   - same person may be drawn on several days (each day is its own draw).
+4. Cycle by day (OD 19:00Z, 19:05Z): each month EACH woman (player + NPC) rolls her period length from BAL.cyc.len = [5,6,7] (equal weight [I]); start day = her cycle tuần (cyBase t) × 10 + cyBase o (existing hash, so the same tuần as today). Only those days block her (`cyDay(p, day)`); `cyTray` stops blocking the whole tuần (keep it for the tray's grey "đang kỳ nguyệt sự" mark on the played tối only). The maid's lie (cyLie) hides only those days. Fertility factor BAL.cyc.fert stays by tuần (D57).
+5. Played tối (OD 18:40Z): if she has ≥ 1 day → the cardflip scene shows HER card for her FIRST day (S.tonight="me"), the existing night scene plays. Else the scene shows the first NPC day (or the Empress custom if that is the only night). Every OTHER day of hers = notice: Sổ ghi line "Kính sự phòng ghi: ngày {day}, ngươi được lật thẻ thêm một đêm." + the kit's bottom toast (kit keeper names the part; if none fits → KIT REQ, no private toast) + gains BAL.nt.extraFx + its own conception roll via night(S). Every other NPC day = a Tuần lục/Sổ ghi line only if she has tai mắt (S.mat ≥ 2), else silent; gains BAL.nt.extraFx + night(v). The played NPC night keeps the full rivalNight.
+6. BAL (jbal, ONE CORE): BAL.nt = {days:10, summon:90, summonBusy:65, extraFx:{sungP:50, sung:1, an:1}}; BAL.cyc.len=[5,6,7]; BAL.nt.concF = .065 [M: keeps NPC births 0.10 per consort-year], applied as a FLOAT at the roll (see 7).
+7. Conception precision (MUST): conceiveCh() rounds to whole % in several wrappers (jbal ×BAL.conc, j35 ×.7, j24, jcycle). With 10 nights the per-night chance is below 1 %, so lowering BAL.conc makes low-Sủng women round to 0 % [M: her mean chance 0.04 % at Sủng 25, conceptions 0.01/yr]. Keep BAL.conc as is and multiply by BAL.nt.concF only at the roll inside night(): `roll(conceiveCh(p)*BAL.nt.concF)` (float). Displays (chanceLvl) show the per-TUẦN chance = 1−Π(1−per-night) over her ledger days, on the same ladder.
+8. Stealing = hook only (review/night-steal builds it): `ledgerTonight()` returns the played tối {who, day}; a successful Tranh sủng / Chặn ngự giá (player or NPC, same acts and odds) moves ONLY that day's `who`; ntTake keeps "first success wins". Extra days are not stealable (already past by the notice).
+9. Maid nights: out of scope (npc-agent audit, OD:L1386); the ledger draw must accept a maid entry later (who can be a staff id) — keep `who` generic.
+10. Save: S.ledger optional (missing → roll on the next tối); old saves load. Co-op: host rolls, ledger sent in COOPW.pend with nightWhy; guest shows lines by her own knowledge.
+11. Tests: preg-rate.js (update for float roll), cycle.js (day block, 5/6/7 per month per woman), night-day.js, coop-e2e (host-only ledger), palace-oldsave, a new dev/test/ledger.js (Empress never on tray; day 1/15 custom; her extra days → notice + conception roll; seeded counts). Re-measure with dev/handover/reports/night-time-bot3.js (env V3=1 NF=… LFX=.5) and preg-bots; balance-pass HH bot after landing.
+
+---
+# (older v1/v2 text follows)
+
 ## 0. Answer in five lines
 1. Today she gets **1.2 nights a year at Sủng 25** and **1.6 at Sủng 60** (500 / 200 lives × 10 years). Only **1 month in 10** (1 in 8 at Sủng 60) has any night of hers.
 2. The cause is not only "3 flips a month": each flip has ~6.8 cards on the tray, her share is **9 %** (13 % at Sủng 60), she is off the tray **41 %** of tuần (cycle tuần, pregnancy, illness), and ~1 tuần in 4 no card is turned at all.
