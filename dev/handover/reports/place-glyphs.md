@@ -1,3 +1,5 @@
+PALETTE GUIDE v2 READY (2026-11-16 07:27Z)
+
 # place-glyphs — SẴN SÀNG KIỂM 4ddddde3 (review/place-glyphs, includes origin/main ba07c65e). Glyphs owner-approved; Nội vụ phủ scene NOT wired (owner approves art first).
 Branch review/place-glyphs (commit pushed; code only). Session session_01UV1SzmEsuu42GCFecC9HGf. No new generation after the pause order.
 
