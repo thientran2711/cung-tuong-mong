@@ -485,3 +485,4 @@
 | road-b3 one-core successor (opus): jroad/jrd_thd/jrd_cnv/jend14 typed numbers → BAL (gate 0), from 83641f2a; then SẴN SÀNG | review/road-b3-fix2 | B | session_01N1tNP3P9XTBMP5HeZATrcL | RUNNING | 16/11 23:36Z |
 | WHOLE FIGURE REPAINT lead #5 (sonnet art; replaces #4 session_011xDdVSWqu69NuYMoAK4SaC which had no repo; pilots HOLD for owner GO + 2k/4k) | review/fig-cutout-clean | C | session_011xDdVRBW26agruDT2Bm65K | RUNNING | 16/11 23:40Z |
 | balance-core r1 review (opus BIG numbers) of 10fa43d4 — owner proposal §7 shown to sếp in parallel | review/balance-core-r1 | main s26 | (opening) | RUNNING | 16/11 23:36Z |
+| coop-contest-fix review r1 (opus, BIG co-op) of 00b76227 | review/coop-contest-fix-r1 | main s26 | session_01UV1SziJoyYJ3o5iLXG8BuP | FAIL a3b5e963 (2 items: other seat's played row shown as formula/false; friend portrait blank on host) | 16/11 23:37Z |
