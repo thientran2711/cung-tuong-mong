@@ -50,3 +50,17 @@ Merged origin/main d34b5116 then 2d038139 (jkc stays last, after jph). jk3 = mai
    (worn without need = gossip, covers the face on every portrait); filling it needs an owner ruling.
 Art gap (not in this task): house/city scenes reuse palace rooms (Khuê phòng = phi-tần cung room etc.), Huynh trưởng uses the guard figure,
 Dư đồ at home has no house/city map painting (pbtn list).
+
+## Re-review r2 (review/outside-r2-r2, reviewer, 16/11)
+Merged origin/main 2afdafc39 (coop-timer live). Conflicts: built files + assemble.py order → main's list with jkc.js appended LAST (after jopic).
+jcoopworld/jcoop auto-merged: main's coop-timer (forceBend, wake/ping, syncRoom catch-up loop) + the branch's friendHome / weekEnd / altTurn / holdMe.
+Reviewer fixes:
+- Coordinator ruling on the 6th chest slot: Khăn che mặt stays EMPTY (veil = hủy dung cover); the chest adds an UN-WORN Khăn tay lụa
+  (existing jitev story item IT.khantay, art item-khantay.webp) to her bag. Chest now shows 6 things (5 worn + handkerchief).
+- Family fix of the test-bot identity-card regex (the worker fixed coop-e2e/bot/play; main's new coop-timer.js, coop-sleep.js, coop-timer-lag.js
+  still matched the road button "Vào cung ngay" and looped on the card): "^Nhận thân phận" first, [data-kcp] road buttons never tapped.
+Results: route.js 755x1000@2 + 844x390@2 PASS · kc-end.js PASS · oldsave.js PASS · coop-home.js 51/51 · coop-e2e.js 59/59 · coop-timer.js 43/43
+(after the bot regex fix; before it 2 FAIL = bot stuck on the identity card).
+Verified: Gia tộc pager below the kpinline sub-tabs (755: sub 159–203, strip 208–282; 844: sub 0–43, strip 48–144 in the pane; the pane at 844
+opens scrolled to the detail, same as palace Hậu cung — shared behaviour). Phúc tuyển card not over the first palace screen. New art
+item-vongbackc / item-ngocboikc looked at: clean, on style.
