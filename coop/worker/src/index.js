@@ -1,6 +1,8 @@
 /* Cung Tường Mộng · Chơi cùng bạn — co-op backend (Cloudflare Worker + Durable Object).
    Protocol: dev/coop/PROTOCOL.md. One Durable Object per room code holds the canonical shared state C + both seats. */
 import { merge3 } from "./merge.js";
+import { vaultRoute, Vault } from "./vault.js";
+export { Vault };
 
 const V = "coop-1";
 const ALPH = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
@@ -17,6 +19,7 @@ const okCode = c => typeof c === "string" && c.length === 4 && [...c].every(ch =
 export default {
   async fetch(req, env) {
     const u = new URL(req.url);
+    if (u.pathname.startsWith("/api/vault")) return vaultRoute(req, env);   // Sổ mây (vault.js): own CORS, game origin only
     if (req.method === "OPTIONS") return new Response(null, { headers: CORS });
     const p = u.pathname.replace(/\/+$/, "");
     if (p === "/api/health" || p === "" || p === "/") return json({ ok: true, v: V });
