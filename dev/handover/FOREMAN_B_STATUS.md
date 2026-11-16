@@ -126,3 +126,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - C41 hint ring KIT REQUEST: APPROVED as a kit part §76 "kitHintRing". D36 podium requests: APPROVED as listed (owner 08:55Z).
 - C7 NOTE (D33 routes, for Foreman C's balance pass): escape 14% per attempt (spec 10–25%); xuất gia 4% (plan 5–20%, small sample; old branch 6%); tư tình exposed 5/5 lives; ẩn dật 8/8 reach «Một đời an nhiên» after 76–208 months. Table: dev/PROGRESS_routes-port.md on review/routes-port.
 - Q22 (D34 scheme games): servant bribery and "Nghe lén" now also ask "Tự ra tay / Giao cho người làm / Thôi" with a minigame — does the owner's scheme-minigame rule cover these two? Thời cơ has no auto-hint (waiting is the point), only the Gợi ý button — OK?
+- (16/11 watch 3) PASSes C32 page-curl2, C26b stat-fx-2, D42 places-port → merge-train-3 (main session). The owner APPROVED the 3 new place paintings. Q22: YES, the scheme-minigame rule covers servant bribery and Nghe lén too (Tự ra tay = minigame; Giao cho người làm = odds only; Thôi). Keep it.
+- DISK on the main box is tight: keep worktrees depth 5 and delete screenshots after looking.

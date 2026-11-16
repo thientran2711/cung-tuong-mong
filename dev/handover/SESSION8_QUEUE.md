@@ -135,3 +135,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C59 | elder-staff-r1 a3dbdc19f | LIVE |
 | MOVED TO FOREMAN D (16/11) | newgame-ui-r2 review, row-align re-review, C43, C44, C3, D50, D51, D52; act waves 2–3 on GO |
 | watch 16/11 #2 | merge-train-3 (12 PASSes: D40, D32, D30, D38, C33, C46, C34, mk-colour, opt-pics2, placeholder-pics2, recipes-r2, update-notes) RUNNING. Foreman B Q16–Q20 answered; Q21 sheets sent to the owner. newgame-ui-r2 reviewer still waiting for a slot. |
+| watch 16/11 #3 | main 7f20b751b. Train 3 += page-curl2, stat-fx-2, places-port, outside-art, item-art-r5, small-bugs-4. Running urgent: modal-scroll, coop-night-sync, kit-sweep (+ stage rail/goal icon), kpanel-compact reviewer, pcard-actrow (+ person pickers, gift Chí tôn), cardflip-smooth, book-fig. Disk cleaned to 1.5 GB (old worktrees, tmp packs, git prune). |
