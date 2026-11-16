@@ -13,8 +13,8 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
   p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto('file://'+path.resolve(PAGE),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   if(process.env.CONC)await p.evaluate(`BAL.conc=BAL.conc*${+process.env.CONC}`);
-  const part=await p.evaluate(([n,Y,K,EMPX,NOCY])=>{const out=[];try{document.getElementById('title').hidden=true}catch(e){}window.__nlInner=1;
-   window.render=function(){};if(NOCY&&typeof cyAsk==="function")cyAsk=function(){return false};
+  const part=await p.evaluate(([n,Y,K,EMPX,NOCY,HERX])=>{const out=[];try{document.getElementById('title').hidden=true}catch(e){}window.__nlInner=1;
+   window.render=function(){};if(HERX!==1){const nh0=nightCh;nightCh=function(q){const c=nh0.apply(this,arguments);return (q||S)===S?Math.round(c*HERX):c}}if(NOCY&&typeof cyAsk==="function")cyAsk=function(){return false};
    let L=null;const T=(k,v=1)=>L[k]=(L[k]||0)+v;
    const ng0=night;night=function(q){q=q||S;if(!q.preg){const me=q===S?"me":"npc";T(me+"N");T(me+"C",conceiveCh(q));const r=ng0.apply(this,arguments);if(q.preg)T(me+"P");return r}return ng0.apply(this,arguments)};
    const pickW=()=>{const C=consorts().filter(p=>nightCh(p)>0);if(!C.length)return null;const w=C.map(p=>nightCh(p));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return C[i]};
@@ -28,17 +28,17 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
     }catch(e){T("botErr")}return r};
    for(let l=0;l<n;l++){L={tuan:0,mo:{}};try{localStorage.clear()}catch(e){}
     for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}Q.length=0;S.mg=0;
-    const seen=new Set(allKids().map(([k])=>k));let npcB=0,meB=0,consY=0,hh=0;
+    const seen=new Set(allKids().map(([k])=>k));let npcB=0,meB=0,consY=0,hh=0,son1=null;
     for(let w=0;w<Y*36&&!S.dead;w++){
      S.sung=Math.max(S.sung,+(window.__sung||25));S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,60);S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
      if(S.tonight==="me"){S.tonight=null;try{night(S)}catch(e){}}
      Q.length=0;S.mg=0;
      try{endTurn()}catch(e){out.push({err:String(e).slice(0,160)});break}Q.length=0;S.mg=0;
      if(S.tuan===0)consY+=liveRivals(true).length/12;if(S.rank>=7)hh=1;
-     allKids().forEach(([k,v])=>{if(!seen.has(k)){seen.add(k);if(v)npcB++;else meB++}})}
+     allKids().forEach(([k,v])=>{if(!seen.has(k)){seen.add(k);if(v)npcB++;else{meB++;if(k.sex==="m"&&son1==null)son1=S.turn||0}}})}
     const ks=allKids().filter(([k])=>k.alive);
-    out.push({months:S.turn||0,dead:!!S.dead,npcB,meB,consY,hh,kids:ks.length,npcSons:ks.filter(([k,v])=>v&&k.sex==="m").length,meSons:ks.filter(([k,v])=>!v&&k.sex==="m").length,
+    out.push({son1,months:S.turn||0,dead:!!S.dead,npcB,meB,consY,hh,kids:ks.length,npcSons:ks.filter(([k,v])=>v&&k.sex==="m").length,meSons:ks.filter(([k,v])=>!v&&k.sex==="m").length,
      heirNpc:!!(S.heir&&S.heir.v),heirMe:!!(S.heir&&!S.heir.v&&S.heir.k),moWith:Object.keys(L.mo).length,t:Object.assign({},L,{mo:0})})}
-   return out},[Math.min(CH,LIVES-done),YEARS,+process.env.K||1,+process.env.EMPX||0,+process.env.NOCY||0]);
+   return out},[Math.min(CH,LIVES-done),YEARS,+process.env.K||1,+process.env.EMPX||0,+process.env.NOCY||0,+process.env.HERX||1]);
   lives.push(...part);await ctx.close();console.error("lives",lives.length)}
- await b.close();fs.writeFileSync(OUT,JSON.stringify({env:{NOCY:process.env.NOCY,K:process.env.K,CONC:process.env.CONC,SUNG:process.env.SUNG,EMPX:process.env.EMPX},lives,errs:errs.slice(0,10)}))})().catch(e=>{console.error(e);process.exit(1)});
+ await b.close();fs.writeFileSync(OUT,JSON.stringify({env:{NOCY:process.env.NOCY,K:process.env.K,CONC:process.env.CONC,SUNG:process.env.SUNG,EMPX:process.env.EMPX,HERX:process.env.HERX},lives,errs:errs.slice(0,10)}))})().catch(e=>{console.error(e);process.exit(1)});

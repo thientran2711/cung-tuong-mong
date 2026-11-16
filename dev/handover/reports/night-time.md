@@ -1,6 +1,6 @@
 # NIGHT-TIME — how often is she flipped, and how to fix "3 flips a month"
 
-Analyst: s17 child (opus), report only, no game code changed. START_CTX ≈ 4 % (get_session 118k / 1M at the first read, most of it the start brief); end ≈ 17 %. No rollover.
+Analyst: s17 child (opus), report only, no game code changed. v2 adds §10–§16 (flip-chance table, Empress proportional, stealing, cycle, maid nights, player squeeze).
 Owner ask: OD 16/11 14:20Z ("hậu cung tới 12 người … một tháng chỉ lật thẻ được 3 lần … tỷ lệ được lật thẻ rất là thấp").
 Base measured: review/preg-rate-r1 @1c31bd79 (= what ships next: BAL.conc .5 + fertile window D57) built page, real weekly loop.
 Bot: `dev/handover/reports/night-time-bot.js` (copy of the scratch bot; usage in its header). Summary script: `night-time-sum.js`.
@@ -128,3 +128,104 @@ Kết luận: **Được lớn hơn** with option D — every risk is one BAL nu
 ## 9. Question for the owner (one at a time, numbered at the END of the coordinator's reply)
 Q1 (night structure): 1 = option D, 5 nights per tuần, her night always played (recommended) · 2 = option D with 3 nights per tuần (cautious) · 3 = option A (ledger lines only) · 4 = option B (3 cards per evening) · 5 = keep today, only raise Sủng's weight (option E).
 After Q1, D1 (1st/15th) is answered by the ledger itself (Empress takes the 1st and 15th as ledger nights, no card flip, the evening flip still runs) — confirm only if she wants it different.
+
+---
+# v2 ADD-ONS (coordinator asks after v1: s17 14:25Z, 14:45Z, 14:50Z; s18 15:05Z maid nights; s19 15:35Z cycle). ONE recommendation kept: option D.
+New runs: same bot (+ env HERX = her nightCh multiplier, + first-son timing), base preg-rate-r1 @1c31bd79, 100 lives × 10 y each; the v1 numbers re-ran within noise (Sủng 25: 1.18 nights/yr today, 11.7 with D).
+
+## 10. What the flip chance depends on (nightCh, j8.js:39 + wrappers), plain words
+Card weight = (4 + Sủng/4 + Sắc/12 + dance level×2 + music level×1.5 + bribed Kính sự phòng +20 + Emperor's mood (+10 happy … −15 angry, /2) + rank Hoàng hậu/Hoàng quý phi +5 + court-faction favour/10 + lucky-charm Sủng bonus/2 + a senior eunuch on her staff +4) ÷ 1.4, kept between 1 and 70; then:
+| factor | effect | code |
+|---|---|---|
+| pregnant (known), card hidden by a rival, confined, in lãnh cung | weight 0 (off the tray) | j8:39 |
+| her cycle tuần (Kỳ nguyệt sự) | 0 for the whole tuần (unless her maid lies for her) | jcycle cyTray |
+| the tuần after a "late" cycle report | ×0.5 | jcycle luiNext |
+| ill | ×0.7 (light) / ×0.3 (heavy) / 0 (contagious); faked illness ×1.2 | j13 illNightF |
+| Emperor trait Mê sắc | Sắc and dance count ×2; age ≤ 25 ×1.15, > 35 ×0.8 | j8, j35 |
+| Emperor trait Chăm chính / Đa tình | ×0.6 / ×1.2 (and Chăm chính turns a card only 65 % of evenings) | j8 |
+| Emperor ill | ×0.6 | j8 |
+| admonished "mưa móc đều khắp" in the last 3 tuần | ÷2 | j75 |
+| walked with him that week (gift road) | + BAL.empDay.walkNight | jgift |
+| on the "ad" story road | 0 | jroute |
+| mood (jemo) | ×1 for every mood today (table exists, all 1) | jemo EMO_NIGHT |
+| Sủng | only Sủng/4 → Sủng 25→60 adds ~6 points of ~60–160 on the tray | — |
+Maids (cung nữ) are never on the tray today; they reach a night only through rivalNight's 3 % "hầu thay" (no pregnancy).
+
+### Current chance per person (probe: 40 lives, snapshots every 9 tuần; "per tối" = share × 0.9 turn chance; "1 in N months" also counts the 41 % of tuần she is off the tray)
+| her Sủng | year 1 | year 3 | year 6 | year 10 |
+|---|---|---|---|---|
+| 10 | 11.1 % · 1 in 5.1 mo | 6.9 % · 1 in 8.2 mo | 4.9 % · 1 in 11.4 mo | 4.0 % · 1 in 14.2 mo |
+| 25 | 12.7 % · 1 in 4.4 mo | 8.3 % · 1 in 6.8 mo | 6.0 % · 1 in 9.4 mo | 4.8 % · 1 in 11.7 mo |
+| 45 | 15.4 % · 1 in 3.7 mo | 10.3 % · 1 in 5.5 mo | 7.5 % · 1 in 7.5 mo | 6.0 % · 1 in 9.4 mo |
+| 60 | 17.3 % · 1 in 3.3 mo | 11.7 % · 1 in 4.8 mo | 8.5 % · 1 in 6.7 mo | 6.8 % · 1 in 8.3 mo |
+| 80 | 19.5 % · 1 in 2.9 mo | 13.6 % · 1 in 4.2 mo | 9.9 % · 1 in 5.7 mo | 7.9 % · 1 in 7.2 mo |
+Her chance FALLS over the life because NPC Sủng creeps up (rivalsTurn +R(3)−1 per tuần, +3…+8 per night): mean NPC Sủng by rank in the same probe —
+| NPC rank | mean Sủng | off the tray (pregnant etc.) | share of the tray when on it |
+|---|---|---|---|
+| Hoàng hậu | 97 | 25 % | 24 % |
+| Hoàng quý phi | 95 | 63 % | 10 % |
+| Quý phi | 89 | 74 % | 7 % |
+| Phi | 84 | 65 % | 10 % |
+| Tần | 67 | 64 % | 10 % |
+| Quý nhân | 56 | 64 % | 9 % |
+| Thường tại | 37 | 66 % | 6 % |
+| Đáp ứng | 43 | 71 % | 5 % |
+Maids: 0 % (not on the tray). Harem ≈ 11.9 consorts, ≈ 4–7 cards actually on the tray per evening.
+
+## 11. Owner's proposal: keep 1 day = 1 tuần, Empress night proportional to real time
+- Math check: real custom = 2 nights of ~30 = 6.7 % of nights. Game = 3 tối a month, each standing for ~10 real nights → 3 × 2/30 = **0.2 custom tối per month = one every 5 months**. Her arithmetic is right.
+- But the Empress is ALSO on the tray with the biggest share (24 %, Sủng ~97, rank +5), so she already gets ~0.65 tối a month by the cards — 10× her historical share before any custom. The proportional custom alone changes little; it makes 1st/15th almost invisible (2–3 times a year).
+- With today's model the clean way: a fixed custom on mùng 1 of months 1, 5, 9 (3 a year ≈ 0.25/month), no card flip that evening; or 6.7 % per tối at random (owner dislikes random).
+- With option D it needs no conversion: the ledger holds the real calendar days, mùng 1 and rằm are literally ledger nights 1 and 15 of the month (2 of ~15 consort nights), and the tối flip still runs for another night. **Recommendation: D; the proportional rule is only the fallback if she keeps today's 1 night per tuần.**
+
+## 12. Night stealing (owner 14:45Z): self-interest, much more often, and the 90 % flip
+Replaces "hostility ≥ 50 AND 6 %" (j8 flip) and the j75 R5 draft. Per tối, after the flip at tối start, each NPC on the tray-eligible list (not the holder, not pregnant/cycle/confined, has Đức ≥ 10 for feign or Sức ≥ 20 for road) rolls ONCE:
+try % = BAL.steal.try[trait] × ambition × mood × relation × fear, cap 2 attempts per tối, one attempt per NPC per 3 tuần.
+| part | values |
+|---|---|
+| trait base (ambition first) | Tham vọng 14 · Kiêu ngạo 10 · Hiểm độc 8 · Đa nghi 6 · Nhu mì 3 · Hiền lành 2 |
+| ambition (self-interest) | no son ×1.3 · no night in last 6 tuần ×1.4 · holder is her rank or lower ×1.2 · she is on a rank/seat contest ×1.3 |
+| mood (jemo) | ghen ×1.5 · giận ×1.2 · buồn ×1.2 · lo ×1.1 · bình ×1 · vui ×0.8 · sợ ×0.5 |
+| relation to the holder | ally (rel ≥ 40) ×0.25 · friendly (15–39) ×0.6 · neutral ×1 · enemy (rel ≤ −30) ×1.2 (hatred adds little; it drives framing instead) |
+| fear | holder 3+ ranks above ×0.6 · Empress on her custom night ×0.3 · Emperor angry ×0.5 |
+Expected (trait mix from the probe: TV 20 %, KN 18, HĐ 19, ĐN 19, NM 13, HL 12 → mean base 7.8 %, mean multiplier ≈ 1.15 → ≈ 9 % per NPC per tối; ~5 eligible rivals):
+- an attempt on **≈ 38 % of evenings** (today ≈ 2 %: 607 stolen of 36k flips), success ≈ 45 % (oSteal unchanged) → **the night changes hands on ≈ 17 % of evenings** (today 1.7 %).
+- HER night: with D she holds ≈ 12 played tối a year → ≈ 4.5 contested, ≈ 2 lost a year. With today's model: ≈ 0.45 contested a year (she rarely holds a night).
+- She SEES it: if tai mắt ≥ 2 or an oSee roll succeeds, a warning card at once ("Tai mắt báo: người của X đang chạy sang Dưỡng Tâm điện báo bệnh") with 3 answers (existing dilemma card, no new kit part): Sai cung nữ canh đường (1 khắc, thief −15) · Đến Dưỡng Tâm điện trước (2 khắc, Sức −5, thief −25) · Mặc kệ. Unseen attempts become next-morning news (who, if she has tai mắt; else "có người").
+- The 90 % flip: measured blank evenings are ~24 % of tuần (10 % roll + troubled court j55 30 % + nobody eligible), more than the 10 % she was told. History has "撂牌子" (no tablet turned), so blanks are fair, but not one in four. With D: drop the flat 10 % roll; blanks come from the ledger itself (5 of 10 nights used); Chăm chính = 4 nights per tuần instead of a 35 % blank; troubled court = −1 night. Keeping today's model: keep 90 %, cut j55 to 15 %.
+- Gain: drama every few evenings, motive = interest. Risk: her nights stolen too often (có thể / vừa / count per year in the bot, target ≤ 1 lost per 6 of her nights; fix BAL.steal.try ×0.7). Được lớn hơn.
+
+## 13. Kỳ nguyệt sự re-fit (owner 15:35Z)
+- Real: cycle ~28 days, bleeding 4–7 days ≈ 18 % of days. Game: month = 3 tuần, the cycle tuần blocks the whole tuần = 33 % of her evenings → twice too much.
+- Re-fit (one rule for every option): the period covers **5 of the 10 days** of her cycle tuần (BAL.cyc.block = .5). Today's model: her card is off that tuần with 50 % (the sampled night falls in the period or not). Option D: ledger nights dated on her period days are blocked, the rest of that tuần stay open. Either way blocked share ≈ 1/6 ≈ 17 % ≈ real.
+- Numbers: among non-pregnant tuần her open time goes 2/3 → 5/6 (+25 %); overall her nights ≈ +15 % (pregnancy months already block). D at Sủng 25: ~11.7 → ~13.5 nights a year.
+- Fertility: keep BAL.cyc.fert.cyc .1 on the open half (D57 decided it; days next to a period are low) → births barely move. The maid's lie (cyLie) still works but only hides the 5 period days.
+- Gain: matches real life, fixes "one third of my month is gone". Risk: tiny (hiếm / nhỏ / preg-rate.js + this bot). Được lớn hơn.
+
+## 14. Maid nights (owner 15:05Z #3, history-maid-nights.md @ed5bbd11)
+- Rule from the history expert kept (one system replacing sendMaid 3 %, srvRise and staff rise; who = Emperor's own maids 40 / consorts' maids 45 / Thái hậu's 15; seat free → 50 % raised to rank 0; seats full → unranked "cung nữ có ơn", stays a maid, child low-born, heir weight ×0.5, considered when a seat frees).
+- How often: expert says ~0.3 a month. With D: **2 % of ledger nights** (15 a month) = 0.3 a month ≈ 3.6 a year; in today's model 10 % of flip evenings = the same 0.3.
+- Effect on her: −2 % of nights (D: 11.7 → 11.5 a year). Her own maid may be the one called (news + loyalty swing); on the servant road she is in the pool, with the consent choice the expert wrote.
+- Pregnancy: the expert's flat 12 % per night is out of scale — consorts' per-night chance is 1.4 % in D (7.9 % today). 3.6 nights × 12 % = 0.43 maid births a year = +40 % palace births, breaks D57. Use ONE CORE: maid conception = conceiveCh(maid) × BAL.conc × BAL.maid.concX with **concX = 2** → ≈ 0.10 maid births a year in D (one low-born child per ~10 years); count them in the D57 target (trim BAL.conc ≈ 5 %). In today's model concX = 1 gives ≈ 0.25 a year (too many) → 0.5 there.
+- Co-op: rolled by the host inside the ledger; a friend's maid can be called like any consort's.
+- Gain: owner's wish, real-court flavour, small cost. Risk: unranked state is new code (dễ / vừa: the expert's blind spot #1; keep them as staff with a flag); births drift (có thể / nhỏ / preg bot). Được lớn hơn.
+
+## 15. Player squeeze (owner 14:50Z): nights, pregnancies, first son, per difficulty
+Difficulty (jdiff) does NOT touch nights or conception: it changes dangers (childbirth, illness, poison, how hard the palace aims at her, seat gate). So nights/pregnancies are the same on Dễ/Vừa/Khó today; the HH gap comes from survival and from nights.
+| her Sủng 25 / 60 (100 lives each) | today | D (K=5) | D + her pull ×1.2 | D + her pull ×1.5 |
+|---|---|---|---|---|
+| her nights / year | 1.2 / 1.6 | 11.7 / 15.8 | 13.8 / 18.3 | 16.5 / 21.3 |
+| months with ≥ 1 night | 10 % / 13 % | 55 % / 64 % | 60 % / 67 % | 65 % / 70 % |
+| her conceptions / year | 0.09 / 0.15 | 0.17 / 0.23 | 0.21 / 0.28 | 0.23 / 0.26 |
+| first son by year 3 (alive then) | 6 % / 16 % | 14 % / 31 % | 22 % / 18 % | 26 % / 25 % |
+| first son by year 5 | 18 % / 25 % | 27 % / 43 % | 36 % / 37 % | 43 % / 42 % |
+| first son by year 10 | 29 % / 37 % | 56 % / 59 % | 57 % / 68 % | 64 % / 63 % |
+| NPC births / consort-year | 0.10 | 0.12 | 0.12 | 0.10–0.12 |
+(lives alive at that year; ±8–10 points of noise at n≈70; the bot player dies in ~half of the lives — see §2.)
+Today's HH: Vừa 20 % (n 45, review-balance-after-truth-r1) vs target ~32 %; D31 smoke Dễ 40 % / Khó 0 %; HH median 295 tuần (8.2 years) vs ~188 (5.2 years). Today only ~1 in 5 lives has a son by year 5 — the son gate alone explains the slow HH.
+Recommendation (her-side knob, allowed by jdiff's rule like BAL.hz): **D for everyone + "card pull" on her own nightCh by difficulty: Dễ ×1.5 · Vừa ×1.2 · Khó ×1.0**. Expected: first son by year 5 ≈ 43 % (Dễ) / 36 % (Vừa) / 27 % (Khó), against 18–25 % today. This bot cannot promote her, so the HH % itself must be re-measured by the balance-pass HH bot (inpage6) after D lands; tune the three multipliers (and nothing world-side) until Dễ ~50 %, Vừa ~32 %, Khó 15–20 %.
+Risk: Dễ too easy (có thể / nhỏ / HH bot / lower ×1.5 → ×1.35). Được lớn hơn.
+
+## 16. Updated one-line recommendation
+Option D (ledger of the 10 days, 5 nights per tuần, her night always the played one) + cycle blocks only the 5 period days + 1st/15th as ledger nights + maid nights 2 % of ledger nights (concX 2) + self-interest stealing (≈ 38 % of evenings see an attempt) + her card pull by difficulty (×1.5 / ×1.2 / ×1.0). All numbers in BAL (BAL.nt, BAL.steal, BAL.cyc.block, BAL.maid, DIFF). Verdict: **Được lớn hơn** — the player is chosen in most months instead of one month in ten, every risk is one BAL number checked by an existing bot.
+Questions for the owner (one at a time, numbered at the end of the coordinator's reply): Q1 night structure (§9); Q2 stealing frequency: 1 = ≈ 38 % of evenings (recommended) · 2 = ≈ 20 % · 3 = keep rare; Q3 maid children: 1 = about one per 10 years (recommended) · 2 = more often (one per ~4 years) · 3 = maids never conceive.
