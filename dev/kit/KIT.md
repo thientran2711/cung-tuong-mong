@@ -1069,6 +1069,33 @@ so stage blocks may stand beside a head or between figures, never over the paint
   frame left, facts right; portrait/Fold: frame on top, facts below. Her full-body figure still stands on the background.
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
+#### 28.11a IDENTITY CARD — one figure tier, fixed column, fast face picker (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … quá lag"; review/newgame-ui) — `kpIdFig` / `kpIdLay` / `kitTn` / `kitPickerGo` (j79), j86
+- ONE COMMON FIGURE TIER (coordinator 16/11, review/newgame-ui-r2): her standing figure is drawn with the same BODY height (head top → feet,
+  `kitFigBody` .ht → .b, as 33.6; crowns / hairpins above the head not counted) on the same floor line (1.2 % above the bottom) for EVERY
+  face, consort and maid, at every age. Body height per screen = min(portrait 80 % / landscape 84 % of the screen height,
+  column width x .98 / `KPID_WR`), `KPID_WR = .5` = the widest painted figure over the 420 faces a new game can show
+  (widest painted width / body height, measured .496 on consort-c05-t4-a18). So every face fits the column WHOLE: no robe cut, no mask / fade,
+  no per-face shrink, no spill past the column (755x1000: column 164 px, body 321 px for all; 1180x820: 689; 844x390: 328).
+  Never object-fit:contain in a box. Phones (< 600 px portrait) keep the figure-on-top layout (--kidh).
+- FIXED COLUMN: the panel is the ONE frame size of KIT 8.1 (`--kpw` / `--kph`; kpIdLay never sets its width); the figure column is the
+  space left of the panel (its left edge minus 8 px). The figure is centred in the column. The panel never covers her.
+- PINNED CHOICES (r2): "Nhận / Đổi thân phận" sit BELOW the card's scroll area (`#mb.kpmbw` = flex column: `.kpscroll` scrolls, `.kpscopts` is a
+  plain row under it), never over the body, so the picker, its "Dung mạo chỉ để nhìn…" note and the last picker row are never covered.
+- `kitTn(src)` = the small pre-sized copy `img/tn/por-…webp` (128 px wide, ~7 KB; was the 384x506 portrait, 30–55 KB) / `img/tn/fig-…webp`
+  (240 px tall, ~7 KB) when `img/TN.json` lists it (`dev/art/tn_make.py`, list from `dev/test/newgame-ui-enum.js`: every face the picker can
+  show at a new game = 420). The picker cells use it; a pick shows the low-res figure AT ONCE (prefetched for the page in view) and swaps in
+  the crisp one when decoded (`decode()`); body measured on the small copy.
+- PICKER (kitPicker, every picker): page turns never re-measure the layout (`root.__kpc`), the next page's pictures are decoded before the
+  swap (≤ 80 ms wait), the pages either side decoded in idle time; `onPage(cells)` hook. A pick changes the selected cell IN PLACE (no rebuild),
+  the small portrait and the figure; no game `render()` while the identity card covers the screen (it renders once when the card closes).
+- Under any full-screen scene panel (.modal.kpscene with its painted backdrop) or the Luân hồi deck the stage Pixi layer and the FX layer stop
+  (`kitStagePause`), restart when the stage shows again.
+- CORS (all pixel reads): every `new Image()` whose pixels are read on a canvas sets `crossOrigin="anonymous"` (CDN pictures; without it the
+  canvas is tainted and every measure silently fell back to the whole picture — kitFigBody, jk3 topOf were affected; jsl headX, jkpor, jmark, jk2b already had it).
+- Opening card "Nhập cung" / "Nhập cung làm cung nữ": EVENT frame (32.2) — `stage:[S]` + headArt `img/ev-nhap-cung.webp` (consort road) /
+  `img/ev-nhap-cung-cn.webp` (palace-maid road), gpt-2-6 1280x716 (181 / 206 KB); facts as kit rows (kitRows); no portrait strip.
+  `kpIsScene` treats a "Nhập cung" card that names its stage as an event panel.
+- Test: `node dev/test/newgame-ui.js <url> <WxH> [shot]` (tier/column/timings/Nhập cung), THR=4 / TRACE=page|pick for traces.
 ### 28.12 kitRoulette — LUÂN HỒI, face-down pick (owner 11/14 item 6b approved; owner 11/15 04:00Z face-down idea + exact flow) — KIT READY
 `kitRoulette({items:[{k,src,wide,name,rare}], target, toEl, done})` on the reincarnation background (`kitBackdrop(ov,"roulette")`), at a new game
 AND at rebirth (hooked on `nlCard`, once per rolled life). The origin is pre-rolled (j52 seed + j69 weights): the cards only SHOW it, odds unchanged.
@@ -1857,8 +1884,27 @@ kitBookSpread.wantsPic(host)              // false on phones: skip building the 
 ### 34.3 kitBookPic — the picture page (illustration only)
 `kitBookPic({scene, ax, feet, figs:[{src,h,x,dim}], cap, slots:[{label,n,img}], plate})` → HTML: a printed plate inside a thin red double
 rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 31.4), full-body figures (`kitFigOf(p)`) standing on the
-`feet` line, `h` = height fraction (default KIT_FIG.h, §33 — never a private size); `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
+`feet` line, sized by their BODY (§34.6; `h` ignored); `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
 "Thử y phục" — a caption, never the right page's facts); `slots` = try-on slots beside her figure (Tư trang).
+
+### 34.6 BOOK FIGURE SCALE — one body rule on every book page (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn", Tuần lục p.7–8, iPad 1180) — `kitBookFig` (jkit) · `kitBookPicFit` (jbook) · `kitBookFigClamp` (jsl)
+Fault: the book sized the whole PICTURE BOX (person page: `.kesfi` = 100 % × `--kfr` of the column; kitBookPic: `--fh` × plate), not the BODY. The
+"unknown" silhouette (`unknown-fig-*.webp`) is painted to its box edges (no margin, hair bun at the very top), a real figure carries margins
+and a crown, so the silhouette stood 10–15 % taller, with another head height and foot line than Thái hậu beside it. The ground shadow
+(`drop-shadow`) of `.kbp-fig` also lacked the kit alpha-clean `url(#kfa)`.
+Rule (measured like the stage `kitEsOvFit` §33.6 and the dialog `kitDpFit` §32.2a/32.7b — one body height per viewport):
+- `kitBookFig(b, fac, H, o)` → `{ih, iw, dy, body}`: body = head top (`ht`, else painted top) .. feet (`b`) of `kitFigBody`; `fac = KIT_FIG.fac(src, age)` (woman 1, man 1.07,
+  child by age). Person page column (default, = dialog rule 32.7b, the tallest person fills the column): body = `H × fac / KIT_FIG.man` (woman .935 H, man ≈ H).
+  Picture plate (`o.stage`, = stage rule §33): body = `min(KIT_FIG.h × H, KIT_FIG.maxPx) × fac`. `ih` = picture box height, `iw = ih × true aspect` (never stretched),
+  `dy` = how far the box hangs below the foot line (painted feet < 1 stand ON the line, the same line for every figure of the page).
+- Silhouettes use the SAME path, box and scale as real figures (a silhouette is a figure whose file is `unknown-fig-f|m|k`; `fac` from the same table).
+- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): `kitBookFigCol` (column width, while paginating) and `kitBookFigClamp` (live, jsl)
+  both call `kitBookFig`. A figure is NEVER scaled to fit (the old "not below 85 %" shrink made a wide Thái hậu smaller than the silhouette beside her): the column widens as before
+  (≤ 74 % of the page) and what is still wider is cut at the column edge (32.2a, soft 24 px fade). An unmeasured figure is hidden, never shown at its raw box.
+- `kitBookPic` figures: `h` is ignored (kept so old callers do not break); `age` = child factor; sized by `kitBookPicFit` (on load / resize / DOM insert), feet on `--feet`.
+  `filter:url(#kfa) … drop-shadow` on every `.kbp-fig` (like `.kesimg`), so the ground shadow shows no faint rectangle.
+- Test: `SHOTS=1 node dev/test/book-fig-scale.js <page.html|url> <outdir>` — per viewport (755×1000, 1000×755, 1180×820, 1366×1024, 844×390): body px, body/column, foot gap, aspect error for
+  Thái hậu, a normal consort, the silhouette f / m and a kitBookPic with 1 real + 2 silhouettes; FAIL if women's bodies differ > 3 % or an aspect is off > 1 %.
 
 ### 34.4 Page mapping (owner-approved; iPad left page · right page)
 | tab | LEFT (picture, iPad only) | RIGHT (text, iPad + phone) |
@@ -3051,7 +3097,7 @@ One module owns how light/colour is applied to scene paintings and to characters
 buổi ∈ sang|trua|chieu|toi) gets `.stage.kown`:
 - `.stage.kown .scimg{filter:none}` — the old stacked filters (p1 `.sc-home.day` brightness 1.35 + sepia .12, j25 room tiers rp1 sepia .25,
   rp2/rp3 saturate) are NOT applied on top of graded paintings (owner 17:24Z: "her room at trưa all brown"). rp2/rp3 keep a tiny lift.
-- j12's per-buổi colour wash `b4Light()` returns transparent for graded paintings (`KIT_SCENE_TINT=0`; 1 restores ~¼ of the old wash).
+- j12 lightTick draws NO per-buổi wash on any scene (owner 16/11: every scene has 4-buổi paintings; `KIT_SCENE_TINT` and the b4Light override are gone). Only the weather washes (rain / snow / frost) remain.
 - `.stage.kown.kwet` = wet weather (`wet()`: drizzle, storm, heavy snow) on a graded painting: **warm, soft light** (owner 12:35Z: spring rainy
   afternoon must not look like the cold palace) — painting grade + `.light` layer (z-index 0, **below** characters) a faint warm ivory gradient. Rain streaks come from j11 particles.
   Characters are never overlaid. Lãnh cung (`.sc-lc`) is excluded and keeps its bleak painting.
@@ -3479,9 +3525,11 @@ Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sam
 ## 78. PLACE ICON · kitPlaceIcon + HAPPENING MARK · kitHapMark (owner 16/11 Dư đồ split, review/act-dedupe) — `dev/build/jact.js`
 - `kitPlaceIcon(k, size=14)` → the kit icon set glyph (`ic()`, img/<n>.webp) that says what a place is FOR, class `.ic.kplic`, placed BEFORE
   the place name on every place-name site: Dư đồ map label (`.mspot .mlab`), Danh sách tile (`.mtile b`), stage place title (`#sc-t h2`).
-  Map `KIT_PLACE_IC`: Nội vụ phủ `bac` (mua sắm) · Thái y viện `y-thuat` · Ngự hoa viên `hoa` · Cần Chính điện / Dưỡng Hòa điện `sung` (gặp Hoàng thượng)
-  · Đức Thọ cung `duc` (thỉnh an, chép kinh) · Càn Ninh cung `danh` (phượng ấn). Missing glyphs (KIT REQUEST 16/11): Kính sự phòng (thẻ bài),
-  Lãnh cung, tẩm cung / cung phi tần — those names show no icon until the kit keeper draws them. Faces never go on place names.
+  Map `KIT_PLACE_IC`: Nội vụ phủ `bac` (mua sắm) · Thái y viện `y-thuat` · Ngự hoa viên `place-vuon` (garden moon-gate) · Cần Chính điện / Dưỡng Hòa điện `sung`
+  (gặp Hoàng thượng) · Đức Thọ cung `duc` (thỉnh an, chép kinh) · Càn Ninh cung `danh` (phượng ấn) · Kính sự phòng `place-ksp` (thẻ bài) · Lãnh cung `place-lc`
+  (closed gate) · own palace `home` and every consort palace `r<N>` `place-cung` (palace roof) · Dãy nhà cung nhân `place-cnh` · Tân Giả khố `place-tgk` (wash tub) ·
+  Thượng thư phòng `place-ttp` (books, scroll, ink) · A ca sở `place-acs` (toy horse, bow) · Đông cung `place-dc` (crown prince's crown). All painted (gpt-2-6) in the
+  same style as the older glyphs, 128 px webp on the CDN. A place without a glyph shows no icon. Faces never go on place names.
 - `kitHapMark(k)` → `<i class="khap">!</i>` when place k has a happening this buổi (`adHapAt`): a 13 px light-gold disc (`--trim`) with an
   ink "!" and a cream ring, after the place name (map label and list tile). Max 2 places per buổi, re-rolled every buổi, gone after she arrives.
 - Kit page sample `§78`.
@@ -3638,6 +3686,9 @@ gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = 
 - The chapter detail closes like every kit modal: ✕ in the header, tap outside, Esc (a "Đóng" close option → 32.10 kit ✕).
 - Sample: kit page §77. Test: `node dev/test/stage-rail.js <url> <outdir> [WxH,...]` (rail inside the stage, no button over a face box,
   no goal strip, no desk calendar, goal → detail with ✕ / Esc / outside close, calendar → LỊCH panel).
+
+### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
+The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
 
 ## 81. SCENE-END BUTTON — every animation scene ends with ONE short button (owner OD:L1261, 16/11 07:20Z; review/kit-keeper-2) — `dev/build/j93.js` (`kitSceneEnd`, `kitSceneEndLabel`, `kmStage`)
 RULE: no animation / scene closes by itself, and no scene closes by a tap anywhere. The scene plays (a tap during it = skip to its final frame, hint "Chạm để bỏ qua"); at the final frame the hint

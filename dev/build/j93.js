@@ -29,8 +29,17 @@ const KMQ=[];let kmBusy=false;
 function kmFree(){const d=document.getElementById("dawn");if(d&&!d.hidden&&d.classList.contains("on"))return false;
  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return false;if(document.getElementById("kmrew"))return false;return true}
 function kmPush(fn){KMQ.push(fn);kmPump()}
+/* kmReset (FIX-THE-WHOLE-GROUP, review/flip-newlife): everything that belongs to ONE life must not outlive it. A new life / a loaded slot / the title
+   screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
+   podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
+let kmGen=0;const KMR=[];function kmOnReset(f){KMR.push(f)}
+function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
+ KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+ try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
+ try{if(typeof btrKill==="function")btrKill()}catch(e){}
+ try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
 function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
- kmBusy=true;const fn=KMQ.shift();let done=false;const fin=()=>{if(done)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
+ kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
 
 /* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
@@ -267,7 +276,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
    if(box&&S.lot){const sec=[...box.querySelectorAll(".kpsec")].find(s=>/Quẻ/.test(s.textContent));if(sec){sec.classList.add("kmlotsec");kitXamPlay(sec,S.lot)}}
    const sky=w;w.querySelectorAll(":scope > .kmcal").forEach(e=>e.remove());w.classList.toggle("km-nocal",kmReduced());if(!kmReduced()){const T=TUAN[S.tuan]||"";kitCalendar(sky,{to:T?T[0].toUpperCase()+T.slice(1):"",toSub:`Tháng ${S.month} · năm ${S.year}`,from:(()=>{const P=TUAN[(S.tuan+TUAN.length-1)%TUAN.length]||"";return P?P[0].toUpperCase()+P.slice(1):"Tuần qua"})(),fromSub:"đã qua"});w.classList.add("kmcal-on");sky.lastElementChild.addEventListener("click",e=>{e.stopPropagation();w.classList.remove("kmcal-on")},{once:true});setTimeout(()=>w.classList.remove("kmcal-on"),1350)}}catch(e){console.error(e)}return r})})();
 window.kitFlipTablet=kitFlipTablet;window.kitXamPlay=kitXamPlay;window.kitResultFx=kitResultFx;window.kitEdict=kitEdict;window.kitGloom=kitGloom;window.kitBloom=kitBloom;window.kitInk=kitInk;
-window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm;window.kitDayShift=kitDayShift;window.kitCalendar=kitCalendar;window.kitWxEffects=kitWxEffects;window.kmPush=kmPush;window.kmStage=kmStage;
+window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm;window.kitDayShift=kitDayShift;window.kitCalendar=kitCalendar;window.kitWxEffects=kitWxEffects;window.kmPush=kmPush;window.kmReset=kmReset;window.kmOnReset=kmOnReset;window.kmStage=kmStage;
 
 /* ================= kit CSS (motion tokens; art img/kit/mo-*.webp) ================= */
 (function(){const st=document.createElement("style");st.id="kit93";st.textContent=`
