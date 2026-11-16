@@ -1,6 +1,6 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
 
-NEXT FOREMAN C SESSION: see handover block below (session 5).
+NEXT FOREMAN C SESSION: session_011xDdVNMkb9wzTw7JN7or14 opened by session 4 at 17:18Z 16/11. Session 4 stops; its hourly trigger trig_01YWimJSgcwaQLpxfqnn6MkV is DISABLED.
 ORDER 16/11 applied (session 4): session_011xDdVNWDpoU5SKvfbXsdVc · START_CTX (session 4) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01YWimJSgcwaQLpxfqnn6MkV (fires :45 each hour into this session).
 last wake: 16:58Z 16/11
 Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 · Magnific Pro 1,327,514 credits · disk 24 GB free, .git 4.3 GB (no repack).
