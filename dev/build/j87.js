@@ -131,7 +131,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
  /* the turn: the WHOLE sheet swings around the spine (kitCurl = kitSheetTurn, jbook / KIT §34.1, owner 11/15 10:00Z); content printed on the sheet */
  /* portrait (one page, no book): the page SLIDES instead of curling (kitSlideSheet, KIT §34); landscape (spread or a wide single page) curls */
- function slideMode(){return mode==="single"&&typeof kitPortrait==="function"&&kitPortrait()}
+ function slideMode(){return mode==="single"&&typeof kitIsPortrait==="function"&&kitIsPortrait()}
  function turnMs(){return slideMode()?KIT_SLIDE_MS:KIT_TURN_MS}
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
  function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
