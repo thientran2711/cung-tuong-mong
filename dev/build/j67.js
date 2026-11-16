@@ -1014,35 +1014,35 @@ ARC67.td_tha={o:"td",t:"Thù hay tha",w:"foe",sj:"mối thù với nhà {foe}",g
   mid:{k:0,tag:"Buông bỏ thù xưa",t:"Ngươi chọn buông bỏ. Lòng nhẹ đi, nhưng nhà ngươi vẫn mang tiếng tội thần.",fx:{duc:5}},
   lose:{k:-1,tag:"Mang tiếng thù dai",t:"Ngươi tố mà không thành, cả cung cho rằng ngươi thù dai, Hoàng thượng lạnh nhạt.",fx:{sung:-8,danh:-8},go:()=>e67foe(foe67(),15)}}};
 /* ================= CHÁU GÁI THÁI HẬU ================= */
-ARC67.ch_co={o:"ch",t:"Quân cờ của cô tổ",w:"th",sj:"những việc Thái hậu giao",g:"Thái hậu đưa ngươi vào cung để đối trọng với Hoàng hậu. Mệnh lệnh của bà ngày một nặng. Làm con cờ ngoan, hay thành người đánh cờ cùng bà.",
+ARC67.ch_co={o:"ch",t:"Quân cờ của cô mẫu",w:"th",sj:"những việc Thái hậu giao",g:"Thái hậu đưa ngươi vào cung để đối trọng với Hoàng hậu. Mệnh lệnh của bà ngày một nặng. Làm con cờ ngoan, hay thành người đánh cờ cùng bà.",
  p:[["s1","s2"],["c1","c2","c3","G.hh","G.emp"],["t1"],["x1"]],
  B:{
  s1:{h:"Việc đầu tiên",w:"th",t:"Thái hậu gọi ngươi vào Đức Thọ cung: “Dò xem Càn Ninh cung dạo này qua lại với ai.”",o:[
-  {n:"Vâng mệnh",c:{suc:-3},o:()=>45+S.mat*5,w:{th:8},sc:1,f:"obey",wx:"cô tổ hài lòng",l:{hh:-8},lx:"Hoàng hậu biết bị dò",rt:"Ngươi biết Hoàng hậu hay mời nhà ngoại vào cung.",rf:"Người của Hoàng hậu bắt gặp ngươi."},
+  {n:"Vâng mệnh",c:{suc:-3},o:()=>45+S.mat*5,w:{th:8},sc:1,f:"obey",wx:"cô mẫu hài lòng",l:{hh:-8},lx:"Hoàng hậu biết bị dò",rt:"Ngươi biết Hoàng hậu hay mời nhà ngoại vào cung.",rf:"Người của Hoàng hậu bắt gặp ngươi."},
   {n:"Thưa khéo: con còn non, sợ hỏng việc",c:{th:-6},w:{duc:3},f:"own",wx:"không dính vào",rt:"Thái hậu nhìn ngươi lạnh lùng."}]},
- s2:{h:"Cô tổ chọn người hầu cho ngươi",w:"th",t:"Thái hậu ban cho ngươi một ma ma, nói là để dạy lễ. Ai cũng biết bà ta báo hết về Đức Thọ cung.",o:[
-  {n:"Kính trọng ma ma",c:{},w:{th:5},f:"obey",wx:"cô tổ yên tâm",lx:"mọi việc đến tai bà",rt:"Ma ma khen ngươi với Thái hậu."},
+ s2:{h:"Cô mẫu chọn người hầu cho ngươi",w:"th",t:"Thái hậu ban cho ngươi một ma ma, nói là để dạy lễ. Ai cũng biết bà ta báo hết về Đức Thọ cung.",o:[
+  {n:"Kính trọng ma ma",c:{},w:{th:5},f:"obey",wx:"cô mẫu yên tâm",lx:"mọi việc đến tai bà",rt:"Ma ma khen ngươi với Thái hậu."},
   {n:"Lấy lòng ma ma, kéo về phe mình",c:{bac:-40},o:45,sc:1,f:"own",wx:"tin gửi về là tin ngươi chọn",l:{th:-5},rt:"Ma ma thành người của ngươi.",rf:"Ma ma báo với Thái hậu."}]},
  c1:{h:"Gói thuốc",w:"th",t:"Thái hậu dúi vào tay ngươi một gói thuốc: “Hoàng hậu đang uống thuốc cầu tự. Thêm cái này vào, nàng sẽ hiếm muộn thêm vài năm.”",need:["hh"],o:[
   {n:"Từ chối thẳng",c:{th:-12},w:{duc:6},f:"own",wx:"tay sạch",rt:"Thái hậu đập bàn, nhưng không ép."},
-  {n:"Nhận thuốc rồi lén đổ đi",c:{},o:()=>50+S.tamco/4,w:{th:5,duc:3},sc:1,wx:"cô tổ tưởng ngươi đã làm",l:{th:-10},lx:"Thái hậu biết ngươi lừa",rt:"Không ai biết.",rf:"Thái hậu biết gói thuốc nằm dưới gốc mai."}]},
- c2:{h:"Cô tổ muốn ngươi có con",w:"th",t:"Thái hậu sốt ruột: ngươi phải sinh hoàng tử. Bà sai thái y bắt mạch, ban thuốc bổ.",o:[
-  {n:"Uống thuốc của cô tổ",c:{suc:-3},w:{th:5},wx:"cô tổ vui",lx:"thuốc mạnh, mệt người",rt:"Thái hậu gật đầu."},
+  {n:"Nhận thuốc rồi lén đổ đi",c:{},o:()=>50+S.tamco/4,w:{th:5,duc:3},sc:1,wx:"cô mẫu tưởng ngươi đã làm",l:{th:-10},lx:"Thái hậu biết ngươi lừa",rt:"Không ai biết.",rf:"Thái hậu biết gói thuốc nằm dưới gốc mai."}]},
+ c2:{h:"Cô mẫu muốn ngươi có con",w:"th",t:"Thái hậu sốt ruột: ngươi phải sinh hoàng tử. Bà sai thái y bắt mạch, ban thuốc bổ.",o:[
+  {n:"Uống thuốc của cô mẫu",c:{suc:-3},w:{th:5},wx:"cô mẫu vui",lx:"thuốc mạnh, mệt người",rt:"Thái hậu gật đầu."},
   {n:"Khéo xin tự lo",c:{},o:50,w:{tamco:2},sc:1,f:"own",wx:"tự chủ",l:{th:-5},rt:"Thái hậu chiều ngươi.",rf:"Thái hậu phật lòng."}]},
  c3:{h:"Hoàng hậu cầu hòa",w:"hh",need:["hh"],t:"Hoàng hậu {hh} mời riêng ngươi: “Thái hậu già rồi. Sau này muội dựa vào ai?”",o:[
   {n:"Ngầm bắt tay Hoàng hậu",c:{th:-5},o:45,w:{hh:15},sc:1,f:"own",wx:"có đường lui",l:{hh:-6},lx:"Thái hậu biết",rt:"Hoàng hậu cười, rót trà mời ngươi.",rf:"Thái hậu biết chuyện, giận lắm."},
-  {n:"Báo lại với Thái hậu",c:{hh:-10},w:{th:8},f:"obey",wx:"cô tổ tin ngươi hơn",rt:"Thái hậu cười nhạt về phía Càn Ninh cung."}]},
- t1:{h:"Cô tổ hỏi lòng ngươi",w:"th",t:"Thái hậu cầm tay ngươi: “Ai gia không sống mãi. Ngươi là cháu ai gia, hay là người của chính ngươi?”",o:[
-  {n:"Thưa: cháu của cô tổ",c:{},w:{th:6},f:"obey",wx:"bà yên lòng",lx:"ràng buộc thêm",rt:"Thái hậu gật đầu."},
-  {n:"Thưa: con muốn tự đứng được để báo đáp cô tổ",c:{},o:45,sc:2,f:"own",wx:"bà nể ngươi",l:{th:-6},rt:"Thái hậu cười lần đầu tiên: ‘Giống ai gia hồi trẻ.’",rf:"Thái hậu cho là ngươi lớn gan."}]},
- x1:{h:"Ván cờ cuối của cô tổ",w:"th",t:"Thái hậu muốn ngươi dâng sớ hặc họ ngoại Hoàng hậu trong buổi yến lớn.",o:[
+  {n:"Báo lại với Thái hậu",c:{hh:-10},w:{th:8},f:"obey",wx:"cô mẫu tin ngươi hơn",rt:"Thái hậu cười nhạt về phía Càn Ninh cung."}]},
+ t1:{h:"Cô mẫu hỏi lòng ngươi",w:"th",t:"Thái hậu cầm tay ngươi: “Ai gia không sống mãi. Ngươi là cháu ai gia, hay là người của chính ngươi?”",o:[
+  {n:"Thưa: cháu của cô mẫu",c:{},w:{th:6},f:"obey",wx:"bà yên lòng",lx:"ràng buộc thêm",rt:"Thái hậu gật đầu."},
+  {n:"Thưa: con muốn tự đứng được để báo đáp cô mẫu",c:{},o:45,sc:2,f:"own",wx:"bà nể ngươi",l:{th:-6},rt:"Thái hậu cười lần đầu tiên: ‘Giống ai gia hồi trẻ.’",rf:"Thái hậu cho là ngươi lớn gan."}]},
+ x1:{h:"Ván cờ cuối của cô mẫu",w:"th",t:"Thái hậu muốn ngươi dâng sớ hặc họ ngoại Hoàng hậu trong buổi yến lớn.",o:[
   {n:"Đánh cờ theo cách của mình: gom chứng cứ rồi mới dâng",c:{suc:-4},o:A=>35+(A.f.own?20:0)+S.tamco/6,e:["win","mid"],rt:"Chứng cứ vững, họ ngoại Hoàng hậu bị phạt, Thái hậu khen ngươi cao tay.",rf:"Chứng cứ chưa đủ, ngươi xin hoãn."},
-  {n:"Làm đúng như cô tổ dặn",c:{hh:-12},o:A=>40+(A.f.obey?20:0),e:["win2","lose"],rt:"Sớ hặc thành công, Thái hậu ban thưởng.",rf:"Sớ hặc thất bại, Thái hậu phủi tay."},
-  {n:"Từ chối, đứng ngoài",c:{th:-10},w:{duc:4},e:"mid",lx:"cô tổ thất vọng",rt:"Ngươi cáo bệnh không dự yến."}]}},
+  {n:"Làm đúng như cô mẫu dặn",c:{hh:-12},o:A=>40+(A.f.obey?20:0),e:["win2","lose"],rt:"Sớ hặc thành công, Thái hậu ban thưởng.",rf:"Sớ hặc thất bại, Thái hậu phủi tay."},
+  {n:"Từ chối, đứng ngoài",c:{th:-10},w:{duc:4},e:"mid",lx:"cô mẫu thất vọng",rt:"Ngươi cáo bệnh không dự yến."}]}},
  E:{win:{k:1,tag:"Người đánh cờ cùng Thái hậu",w:"th",t:"Thái hậu coi ngươi là người kế thừa thế lực của bà. Bà dạy ngươi những ván cờ của cả đời mình.",fx:{th:15,danh:8,tamco:3}},
   win2:{k:1,tag:"Quân cờ đắc lực",w:"th",t:"Thái hậu hài lòng, che chở ngươi hết mức. Nhưng Hoàng hậu hận ngươi.",fx:{th:12,hh:-10,danh:4}},
   mid:{k:0,tag:"Cô cháu giữ lễ",t:"Thái hậu vẫn thương, nhưng không còn giao việc lớn. Ngươi tự đi đường mình.",fx:{duc:3}},
-  lose:{k:-1,tag:"Bị cô tổ phủi tay",w:"th",t:"Thái hậu phủi tay, nói ngươi vô dụng. Hoàng hậu biết ngươi mất chỗ dựa.",fx:{th:-15,hh:-10,danh:-5}}}};
+  lose:{k:-1,tag:"Bị cô mẫu phủi tay",w:"th",t:"Thái hậu phủi tay, nói ngươi vô dụng. Hoàng hậu biết ngươi mất chỗ dựa.",fx:{th:-15,hh:-10,danh:-5}}}};
 ARC67.ch_benh={o:"ch",t:"Thái hậu lâm bệnh",w:"th",sj:"bệnh tình của Thái hậu",g:"Thái hậu ngã bệnh. Cả hậu cung rục rịch: ai cũng muốn biết Đức Thọ cung còn đứng được bao lâu. Ngươi là cháu bà, chỗ dựa của ngươi đang lung lay.",
  ok:()=>!S.thDead,
  p:[["s1","s2"],["c1","c2","c3","G.hh","G.rumor"],["t1"],["x1"]],
@@ -1067,9 +1067,9 @@ ARC67.ch_benh={o:"ch",t:"Thái hậu lâm bệnh",w:"th",sj:"bệnh tình của 
   {n:"Quỳ ngoài điện suốt đêm",c:{suc:-8},w:{th:5,duc:3},sc:1,wx:"ai cũng thấy lòng hiếu của ngươi",rt:"Ngươi quỳ đến sáng."}]},
  x1:{h:"Thái hậu tỉnh dậy",w:"th",t:"Thái hậu qua được cơn nguy. Bà hỏi ngươi: “Lúc ai gia nằm, những ai trung, những ai không?”",o:[
   {n:"Tâu rõ chuyện thuốc và kẻ hai lòng",c:{},o:A=>35+(A.f.poison?25:0)+S.th/6,e:["win","lose"],rt:"Thái hậu nổi giận, cho tra Thái y viện, ghi ơn ngươi.",rf:"Thái hậu cho là ngươi nói quá, còn trách ngươi gây chia rẽ."},
-  {n:"Chỉ nói: con đã ở bên cô tổ",c:{},w:{th:6},e:"mid",lx:"kẻ hại bà còn đó",rt:"Thái hậu xoa đầu ngươi."},
+  {n:"Chỉ nói: con đã ở bên cô mẫu",c:{},w:{th:6},e:"mid",lx:"kẻ hại bà còn đó",rt:"Thái hậu xoa đầu ngươi."},
   {n:"Xin bà nghỉ ngơi, đừng lo việc cung",c:{},o:55,e:["win2","mid"],rt:"Thái hậu giao một phần việc lục cung cho ngươi.",rf:"Thái hậu không muốn buông quyền."}]}},
- E:{win:{k:1,tag:"Cứu cô tổ, vạch kẻ gian",w:"th",t:"Thái hậu khỏe lại, Thái y viện bị tra, kẻ hai lòng bị bà ghi nhớ. Bà thương ngươi hơn hết thảy.",fx:{th:20,danh:6}},
+ E:{win:{k:1,tag:"Cứu cô mẫu, vạch kẻ gian",w:"th",t:"Thái hậu khỏe lại, Thái y viện bị tra, kẻ hai lòng bị bà ghi nhớ. Bà thương ngươi hơn hết thảy.",fx:{th:20,danh:6}},
   win2:{k:1,tag:"Được giao việc lục cung",t:"Thái hậu giao cho ngươi phụ việc lục cung. Ngươi có tiếng nói trong hậu cung.",fx:{th:10,danh:8}},
   mid:{k:0,tag:"Bà khỏe lại",t:"Thái hậu khỏe lại. Mọi chuyện như cũ.",fx:{th:4}},
   lose:{k:-1,tag:"Bị trách gây chia rẽ",t:"Thái hậu trách ngươi gieo nghi kỵ lúc bà bệnh. Bà lạnh nhạt, Hoàng hậu đắc ý.",fx:{th:-12,danh:-5}}}};
@@ -1128,7 +1128,7 @@ ARC67.ch_bi={o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật năm xưa của
   {n:"Đưa nhân chứng nói rõ sự thật",c:{suc:-4},o:A=>30+(A.f.wit?25:0)+(A.f.tell?10:0),e:["win","lose"],rt:"Sự thật sáng tỏ: Thái hậu bị hại trước. Kẻ trình thư bị phạt.",rf:"Không ai tin lời lão cung nữ. Thái hậu bị Hoàng thượng xa lánh, ngươi liên lụy."},
   {n:"Nhận là thư giả, xin tra nét chữ",c:{},o:A=>45+(A.f.burn?10:0),e:["mid","lose"],rt:"Thư bị coi là giả, chuyện chìm xuống.",rf:"Nét chữ là thật."},
   {n:"Dùng bản gốc mặc cả với Thái hậu",if:A=>A.f.hold,c:{duc:-4},o:55,e:["win2","lose"],rt:"Thái hậu dẹp chuyện, và từ nay phải nghe ngươi một phần.",rf:"Thái hậu giận dữ cắt đứt với ngươi."}]}},
- E:{win:{k:1,tag:"Minh oan cho cô tổ",w:"th",t:"Thái hậu được minh oan, nhìn ngươi như con ruột. Bà dồn hết thế lực cho ngươi.",fx:{th:20,danh:8}},
+ E:{win:{k:1,tag:"Minh oan cho cô mẫu",w:"th",t:"Thái hậu được minh oan, nhìn ngươi như con ruột. Bà dồn hết thế lực cho ngươi.",fx:{th:20,danh:8}},
   win2:{k:1,tag:"Nắm thóp Đức Thọ cung",w:"th",t:"Thái hậu phải nể ngươi. Bà không thương ngươi hơn, nhưng không dám bỏ ngươi.",fx:{th:8,tamco:4,danh:4}},
   mid:{k:0,tag:"Bí mật chìm xuống",t:"Chuyện cũ chìm xuống đáy giếng. Không ai được, không ai mất.",fx:{duc:2}},
   lose:{k:-1,tag:"Liên lụy chuyện cũ",t:"Hoàng thượng xa lánh Thái hậu, kéo theo cả ngươi. Đức Thọ cung không còn đủ sức che chở.",fx:{th:-10,sung:-6,danh:-6}}}};
