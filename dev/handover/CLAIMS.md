@@ -241,7 +241,7 @@
 
 | danh-p1 review (opus) | review/danh-p1-r1 | D | session_01DgYSWna77N83b6631fN1Li | RUNNING | 16/11 15:24Z |
 | merge-train-9 (sonnet): every PASS/READY branch in FOREMAN_B/C/D_STATUS + CLAIMS not on main 5682ce6f (D: coop-guest-maid, danh-balance, close-maid, entry-exam, preg-rate, npc-death, seatcap, mem-upgrade, emperor-visit, coop-chat, coop-b1b5-fix…; B/C PASS ones not held by B's mg-train) | review/merge-train-9 | main s18 | session_01UV1SzhR7Tb1NFJYg1HjaXd | RUNNING | 16/11 15:30Z |
-| square-icons review (sonnet; aeaadf7d) | review/square-icons-r1 | main s19 | session_01UV1SzjLYBcXLgxb5tUAqWZ | RUNNING | 16/11 15:38Z |
+| square-icons review (sonnet; aeaadf7d) | review/square-icons-r1 | main s19 | session_01UV1SzjLYBcXLgxb5tUAqWZ | PASS → LIVE main 50299942 (archived) | 16/11 15:38Z |
 | anim-pace review (sonnet; 8af1b09a) | review/anim-pace-r1 | main s19 | session_01UV1SzkpNmk47yjGsLxZsSv | RUNNING | 16/11 15:40Z |
 | tool-trial-anim (sonnet): audit-suite skills (web-animation-design, make-interfaces-feel-better) → audit our animations + redo ONE sample moment, before/after video (owner 15:50Z) | review/tool-trial-anim | main s18→s19 | session_01UV1SzjdE2FPW61JVTBx6be | RUNNING | 16/11 15:50Z |
 | tool-trial-3d (sonnet): PlayCanvas → isolated demo scene (card-flip tray with depth + candle light), weight measured, video (owner 15:50Z) | review/tool-trial-3d | main s18→s19 | session_01UV1SzkpLYZ7tqeXCs1oPSn | RUNNING | 16/11 15:50Z |
