@@ -28,3 +28,9 @@ jbal2.js BAL.psk.ghen; jexam.js promoRuleTxt + gloss + ghen; j6.js, jtabs.js hel
 - dev/test/reign.js 755x1000 PASS, 1180x820 PASS.
 - dev/test/promo-rules.js 755x1000@2 + 1180x820@2: 0 FAIL. promo-next-rank.js: errors none. promo-exam.js 755x1000@2: 0 FAIL.
 - Boot 755x1000@2 and 1180x820@2: title + Kính sự phòng intro render, 0 page errors, no horizontal overflow (screens looked at).
+
+## Update 16/11 ~08:50Z (asked by main s12/s14)
+- Worker final sha 7f655c55 (PROGRESS doc only: per-origin Hoàng hậu rate + cap proposal; no code) merged → review/promo-skip-r1 **c53abdec6**. HH-rate cap proposal: report only, NOT applied (balance → Foreman B).
+- Full suite: every dev/test/*.js (252, non-coop) run on the branch AND on origin/main 5e5c412 with the same args (150 s each). Exit codes equal except 6; re-run singly: shop-fix and thieu-le are flaky on both builds (branch now 0/0, main thieu-le 1); cloud-save, log-sync, opt-render, rel-row pass on the branch and fail/time out only on main's run. No branch-only failure. (~200 tests exit non-zero on BOTH builds because they need other args — symmetric, not this branch.)
+- coop-e2e (live Worker): main 59/59; branch run 1 59/60 («fold #next enabled» while «Chờ hảo hữu…», next step passed = sync timing), run 2 59/59. PASS.
+- Waiting for s14 GO → re-merge main → "READY <sha>".
