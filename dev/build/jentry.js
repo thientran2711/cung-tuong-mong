@@ -50,8 +50,8 @@ function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(
 function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entWordy(k)){art=entBest();k=entKind(art)}
  const K=KG82_KIND[k];const lv=entArtLv(k);let t=null;try{t=mgSet(k,{occ:"tuyen",lv})}catch(e){KG82.lv=lv}KG82.ctx="thi";try{kg82Preload(k)}catch(e){}
  const SK=Math.round(kg82NpcMean(lv));let over=false;const end=raw=>{if(over)return;over=true;try{fin(raw,{art,kind:k})}catch(e){console.error(e)}};
- const X=entCtx(o);
- const d=kg82Open({art:"Tuyển chọn",title:`Môn thi · ${K.n}`,how:K.how,round:"Vòng",roundV:"1/1",pic:kg82Pic(k)});if(!d){end(SK);return}
+ const X=entCtx(o);/* review/origin-intros: the frame names the selection of this road (Lễ ra mắt, Xét phong danh phận, Tuyển cung nữ…) */
+ const d=kg82Open({art:String(X.head||"Tuyển chọn").replace(/ trước ngày phong$/,""),title:`Môn thi · ${K.n}`,how:K.how,round:"Vòng",roundV:"1/1",pic:kg82Pic(k)});if(!d){end(SK);return}
  const rows=[["Giám khảo",X.judge,"t"],["Môn thi",`${K.n} · ${K.t}`,"t"],["Độ khó",t?mgDiffTxt(t,k):`bậc ${lv}`,"n"],["Xét thêm",X.also,"n"]];
  if(X.road&&X.topN){const G=(BAL.mgTier&&BAL.mgTier.word||[3,5,7,9])[3];const pS=entOdds(X.road,SK,art,2),pG=entOdds(X.road,G,art,2);
   rows.push([X.flat?"Được để mắt":X.srv?"Về hầu phi tần bậc cao":`Lên tới ${X.topN}`,`để tài nghệ quyết định: ${entWord(pS)} · chơi xuất sắc: ${entWord(pG)}`,"n"])}

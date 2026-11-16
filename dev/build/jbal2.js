@@ -287,3 +287,10 @@ Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
   nc:{sac:.15,tai:.15,duc:.1,raw:3,art:2,th:1/5,le:2.5,kgt:1/6,sx:3,base:0}},
  fx:[{danh:-3,sung:-2},{},{danh:3,sung:4}]}});
+/* review/origin-intros (OD:L1244 "reason on the result card", OD:L1267 ONE CORE):
+   w.kc = the tiểu thư Điện tuyển score (jkc kcScore) — the same numbers jkc typed by hand, moved here unchanged (danhCap: Danh counted up to;
+   raw0 / pow0: the value used when the card has none).
+   why.ref = what an ordinary new girl brings (Sắc 40+R55 ≈ 65, Tài 30+R50 ≈ 55, Đức 30, mini-game mark 5, art level 1, Thái hậu 0, Danh 20):
+   the reason line names the part of HER score that sits furthest above (or below) these, weighted by the road's own w. Text only, never a rule. */
+Object.assign(BAL.entry.w,{kc:{sac:.28,tai:.16,duc:.12,danh:.45,danhCap:40,arts:3,raw:1.6,raw0:5,le:2,pow:1/8,pow0:40,th:1/6,ld:-1/3}});
+Object.assign(BAL.entry,{why:{ref:{sac:65,tai:55,duc:30,raw:5,art:1,th:0,danh:20,home:0}}});
