@@ -38,5 +38,5 @@
 | D53b review | review/opt-pics3-r1 | C | session_011xDdVPyoY1HQLa11JfUnXa | RUNNING | 05:45Z 16/11 |
 | D29 finish re-runs | review/schedules3 | C | session_011xDdVRcAbEJXh2PekTYPF4 | RUNNING | 05:50Z 16/11 |
 | servant-system A reviewer (LIVE BUG: household on her room stage) | review/servant-system-r1 | main s10 | (opening) | RUNNING | 16/11 06:00Z |
-| weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | (opening) | RUNNING | 16/11 06:00Z |
+| weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | RUNNING | 16/11 06:00Z |
 | scheme-games-port-r1 kit sign-off (jopic grid-auto-rows:max-content) | review/scheme-games-port-r1 | main s10 | — | KIT OK → merge-train-4 | 16/11 06:00Z |
