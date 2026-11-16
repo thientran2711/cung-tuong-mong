@@ -1,6 +1,6 @@
 /* ================= jtruth: TRUE EVIDENCE (owner 15/11: "Chứng cứ thu thập này là chứng cứ gì? Tôi có làm gì sai đâu …") =================
    Rule: evidence is proof of something the person REALLY did. Same rule for the player and every consort (NPC-vs-NPC too).
-   1. DEEDS LEDGER, per person: p.deeds=[{k,t,w,at,x}] (last 30 shown) + p.dw (total weight, never trimmed) + p.dkeys (derived facts
+   1. DEEDS LEDGER, per person: p.wrongs=[{k,t,w,at,x}] (last 30 shown) + p.dw (total weight, never trimmed) + p.dkeys (derived facts
       already written). deedAdd(p,k,t) records a wrong when it is done: every harmful act through runAct (DEEDW), a plot begun (j40 / j70),
       bribing or threatening a servant, buying contraband, flirting with / taking gifts from a man. deedSync(p) writes the wrongs the world
       already shows: hidden trysts / affair, her own contraband, over-rank dress, a pregnancy that does not match Kính sự phòng.
@@ -20,8 +20,8 @@ const DEEDW={poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pus
 const DEEDX={plot:"bày mưu hại người",sbribe:"mua chuộc người hầu của người khác",sthreat:"dọa người hầu của người khác",illbuy:"lén mua đồ cấm",
  flirt:"liếc mắt đưa tình với nam nhân",mangift:"lén nhận quà của nam nhân",story:"việc xấu trong quá khứ",old:"từng bày mưu hại người"};
 function deedTxt(k,t){try{if(ACT[k]&&t)return j78act(k,t)}catch(e){}return DEEDX[k]||(ACT[k]?ACT[k].n.toLowerCase():"việc sai trái")}
-function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.deeds=p.deeds||[];p.deeds.push(d);if(p.deeds.length>30)p.deeds.shift();p.dw=(p.dw||0)+d.w;return d}
-function deedUndo(p,d){if(!p||!d)return;const i=(p.deeds||[]).indexOf(d);if(i>=0){p.deeds.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
+function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
+function deedUndo(p,d){if(!p||!d)return;const i=(p.wrongs||[]).indexOf(d);if(i>=0){p.wrongs.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
 function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return;p.dkeys.push(id);if(p.dkeys.length>60)p.dkeys.shift();deedAdd(p,k,null,w,x)}
 /* the wrongs the world already shows, written into the ledger once (so the cap never drops when the thing is hidden again) */
 function deedSync(p){if(!p||!S)return;try{
@@ -34,7 +34,7 @@ function deedSync(p){if(!p||!S)return;try{
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
 function deedCap(p){if(!p)return 0;deedSync(p);const s=(p.dws||0);return (p.dw||0)+Math.max(0,(p.schemes||0)-s)*2}
-function deedsOf(p){if(!p)return[];deedSync(p);const L=(p.deeds||[]).slice();const old=Math.max(0,(p.schemes||0)-(p.dws||0));for(let i=0;i<old;i++)L.unshift({k:"old",w:2,x:DEEDX.old,at:null});return L}
+function deedsOf(p){if(!p)return[];deedSync(p);const L=(p.wrongs||[]).slice();const old=Math.max(0,(p.schemes||0)-(p.dws||0));for(let i=0;i<old;i++)L.unshift({k:"old",w:2,x:DEEDX.old,at:null});return L}
 /* evidence that was asked for but had no deed behind it (test counters only; never saved) */
 function evMiss(h,t,n){try{window.__evMiss=(window.__evMiss||0)+n;if(t===S)window.__evMissMe=(window.__evMissMe||0)+n}catch(e){}}
 /* rumours: weak, never proof */
@@ -126,4 +126,4 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
 /* an event's own story makes the deed true (the event text says she did it): written in her ledger, then the evidence */
 function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.story);return evA(S,t,n)}
 /* caught in the act (j8 caught): the attempt itself is the wrong; written once if the act did not already write it this week */
-(function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.deeds||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,2,desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();
+(function(){if(typeof caught!=="function")return;const c0=caught;caught=function(a,t,ps,desc){try{if(a&&t&&a!==t){const L=a.wrongs||[];const d=L[L.length-1];if(!(d&&d.at===wk()&&d.t===key(t)))deedAdd(a,"caught",t,2,desc||"mưu hại người")}}catch(e){}return c0.apply(this,arguments)}})();

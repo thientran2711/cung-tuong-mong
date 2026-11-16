@@ -33,6 +33,8 @@ for(const h of ['function scoreAct(a,N,cost){','function talkScore(t,N){const{p,
   window.__cleanBad=a=>!!a&&(WRONG.test(a.n||'')||(a.c&&a.c.duc<0)||(a.w&&a.w.duc<0));
   /* event choices: drop the options that cost Đức or name a wrong (the rest go to the sensible chooser) */
   const pm=pushModal;pushModal=function(m){try{if(m&&m.opts&&m.opts.length>1){const ok=m.opts.filter(o=>!((o.fx&&o.fx.duc<0)||WRONG.test(o.n||"")));if(ok.length&&ok.length<m.opts.length){m.__all=m.opts;m.opts=ok}}}catch(e){}return pm.apply(this,arguments)};
+  /* the sensible bot can loop on a place whose entry dialog it keeps refusing (e.g. "Ra ngoài khi mặc trung y?"): 3 tries per place per buổi */
+  {const g0=goTo;goTo=function(k){const bk=S.turn+"_"+S.tuan+"_"+S.buoi+"_"+k;window.__goN=window.__goN||{};if((window.__goN[bk]=(window.__goN[bk]||0)+1)>3)return;return g0.apply(this,arguments)}}
   window.__T={lives:[]};
   window.__lifeStats=function(){const me=S;const L=liveRivals(true);let evOn=0,rumOn=0,npcBad=0;
    for(const v of L){evOn+=evG(v,S);rumOn+=rumG(v,S);for(const t of L){if(t!==v&&evG(v,t)>deedCap(t))npcBad++}if(evG(S,v)>deedCap(v))npcBad++}

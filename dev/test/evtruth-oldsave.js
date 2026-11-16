@@ -11,8 +11,8 @@ const [,,URL,OUT,VS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sizes
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.origin);await p.waitForTimeout(800);await p.evaluate(()=>document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove()));
   const r=await p.evaluate(()=>{Q.length=0;closeModal&&closeModal();const out={};const [a,c]=liveRivals(true);
    /* 1. old save: a consort holds 3 on the clean player, the player holds 2 on a clean consort */
-   for(const v of [a,c]){v.schemes=0;v.deeds=[];v.dw=0;v.dkeys=[];v.plan=null;v.affair=null;v.scandal=0;v.inv=(v.inv||[]).filter(e=>!IT[e.k]||!IT[e.k].il)}
-   S.schemes=0;S.deeds=[];S.dw=0;a.evm={me:3};c.ev=2;delete S.truthV;const d=JSON.parse(JSON.stringify(ser()));deser(d);
+   for(const v of [a,c]){v.schemes=0;v.wrongs=[];v.dw=0;v.dkeys=[];v.plan=null;v.affair=null;v.scandal=0;v.inv=(v.inv||[]).filter(e=>!IT[e.k]||!IT[e.k].il)}
+   S.schemes=0;S.wrongs=[];S.dw=0;a.evm={me:3};c.ev=2;delete S.truthV;const d=JSON.parse(JSON.stringify(ser()));deser(d);
    const a2=RV(a.id),c2=RV(c.id);out.old={evOnMe:evG(a2,S),rumOnMe:rumG(a2,S),myEv:evG(S,c2),myRum:rumG(S,c2),intel:(j78facts(a2).find(f=>f.k==="rumme")||{}).txt||""};
    /* 2. a spy on the clean player */
    const R0=Math.random;Math.random=()=>0.01;let txt="";try{txt=ACT.spy.f(a2,S)}finally{Math.random=R0}out.spyMe=txt;out.evAfterSpy=evG(a2,S);

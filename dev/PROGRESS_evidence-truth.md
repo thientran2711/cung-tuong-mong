@@ -4,7 +4,7 @@ Owner 15/11 (OWNER_DECISIONS "Evidence against a clean player; news text run tog
 evidence collected against her; fake evidence only through a frame scheme that can be cleared; news one fact per line.
 
 ## Design (code: dev/build/jtruth.js, assembled last)
-- Deeds ledger per person (player and every consort): `p.deeds` [{k,t,w,at,x}] + `p.dw` (total weight, never trimmed) + `p.dkeys`.
+- Deeds ledger per person (player and every consort): `p.wrongs` (S.deeds stays the j78 world log) [{k,t,w,at,x}] + `p.dw` (total weight, never trimmed) + `p.dkeys`.
   Written where the wrong is done: every harmful act through runAct (DEEDW table; spy/ally/gift/accuse/report acts are NOT wrongs),
   plots begun (j40 plan, j70 newPlot70, jtsb plan), servant bribe/plant/threat, contraband purchase (illBuy), flirting / taking a man's
   gift, caught() attempts, j42 servant-mode bribes. `deedSync` writes what the world shows (trysts, affair, own contraband, over-rank
