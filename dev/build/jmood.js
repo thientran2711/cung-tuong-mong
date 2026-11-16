@@ -104,9 +104,10 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
  MOOD_N.wk++;const bk=Math.round(M.v/20)*20;MOOD_N.hist[bk]=(MOOD_N.hist[bk]||0)+1;if(Math.abs(M.v)>=b.band[3])MOOD_N.ext++;if(M.v>=b.band[3])MOOD_N.hi++;if(M.v<=b.band[0])MOOD_N.lo++;
  mbComfort()}
 /* someone who loves her comes to comfort a sad / frightened her (not an angry one: people keep away from anger) */
-function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();if(mbBand().i>-2||mbFlav()==="gian"||(M.cw!=null&&W-M.cw<C.cd)||!roll(C.ch))return;
+function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();if(mbBand().i>-2)return;const sk=k=>{MOOD_N.cskip=MOOD_N.cskip||{};MOOD_N.cskip[k]=(MOOD_N.cskip[k]||0)+1};
+ if(mbFlav()==="gian")return sk("angry");if(M.cw!=null&&W-M.cw<C.cd)return sk("cooldown");if(!roll(C.ch))return sk("roll");
  let v=null;try{v=liveRivals(true).filter(x=>!x.coop&&!x.queen&&aff(x,S)>=C.aff&&(typeof kitIsKnown!=="function"||kitIsKnown(x))).sort((a,b)=>aff(b,S)-aff(a,S))[0]||null}catch(e){}
- const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return;M.cw=W;MOOD_N.comfort++;
+ const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return sk("nobody");M.cw=W;MOOD_N.comfort++;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;
  const o1={n:`Giãi bày tâm sự với ${nm}`,x:`tâm trạng +${big}, ${nm} thiện cảm +${C.affUp} · kèm: mất ${C.k} khắc buổi này`,fx:{},

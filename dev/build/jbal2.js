@@ -122,7 +122,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    jealousy ×(1+ghen) at Hân hoan; lock = acts locked at the lowest band; comfort = the visit of someone who loves her (ch % a tuần at the
    lowest band, cooldown cd tuần, thiện cảm ≥ aff or her maid ≥ maid; answers: big / small mood, affUp / affDown, k khắc). */
 Object.assign(BAL,{mood:{band:[-60,-25,25,60],emo:{vui:.3,buon:-.3,gian:-.25,so:-.3,ghen:-.25,lo:-.25,dau:-.4,muu:0},ok:3,fail:-4,rest:5,restDs:8,restCap:25,
- decay:.2,keep:6,logMax:12,need:{sucLo:30,sucLoD:-6,sucHi:80,sucHiD:1,ill:-4,bacLo:15,bacD:-2,conf:-4,out:-6},fr:{aff:40,d:1,cap:3},foe:{oan:45,d:1,cap:3},maidHi:70,maidD:1,
+ decay:.2,keep:6,logMax:12,need:{sucLo:30,sucLoD:-6,sucHi:80,sucHiD:1,ill:-4,bacLo:15,bacD:-1,conf:-3,out:-5},fr:{aff:30,d:1,cap:3},foe:{oan:45,d:1,cap:2},maidHi:70,maidD:1,
  wx:{nice:["hoa đào bay","trăng rằm","mai nở trong tuyết","nắng vàng","đom đóm","lá phong rơi"],niceD:2,harshD:-3,wetD:-1},
  od:6,odFrom:30,aff:.15,affAngry:.25,affFrom:25,ghen:.2,lock:["Múa trong yến tiệc","Kinh hồng vũ","Đánh đàn ở ngự hoa viên","Đàn khúc Phượng cầu hoàng"],
  comfort:{ch:35,cd:4,aff:40,maid:60,big:22,small:8,affUp:4,affDown:2,k:1}}});
