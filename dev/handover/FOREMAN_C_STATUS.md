@@ -10,7 +10,8 @@ Base main at start: 900ace7fb.
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
-| D47 small-bugs-4 | review/small-bugs-4 @74e2d3730 → review/small-bugs-4-r1 | sonnet | REVIEWING (4 fixed: thiếu lễ 'Vì sao', stranger greet/arc reveal, 'theo lòng nàng', 'Đang cài'→'Đang mặc' 10→0; 2 already done on main; canonical kit page = #kit) |
+| D47 small-bugs-4 | review/small-bugs-4-r1 | sonnet | PASS 42e4038f7 (reviewer ruled arcReveal67 correct: stage-2 name only, same text she reads) |
+| D18 foreign princess origin visible + one more origin | review/origins | sonnet | RUNNING (worker) |
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
 | D46b new placeholders + Tứ đức/arts self-study pictures | review/placeholder-pics3-r1 | sonnet | PASS 696127b32 (contains opt-pics2-r1 + placeholder-pics2-r1) |
 | D50 consort full-body placeholders | — | sonnet | DONE — NO ART NEEDED: audit of 8744 manifest entries vs CDN = 0 missing; 400-turn soak 0 empty figFor. Cause is code (see NOTE) |
@@ -35,7 +36,7 @@ Base main at start: 900ace7fb.
 | D49 collection milestones (Sổ luân hồi titles at 20/50/100/200 items + Phúc duyên once per life; replace jearn stand-in) | review/collect-ms | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D6, D9, D11–D15, D17–D20, D22, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D6, D9, D11–D15, D17, D19, D20, D22, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -54,6 +55,7 @@ PASS review/placeholder-pics3-r1 696127b324f704c5473e498d2308dd85bb0d709d (D46b;
 PASS review/small-art-wire-r1 6bce72fa60b747a398cbd66776889c3622da282a (D45; descends from 4f5e5f3b3, main moved to 9b4f1697a → one more merge; CONDITIONAL K10; promo-rules 28/28 at 5 viewports after reviewer's chest-fit CSS fix; item-pics.js PASS on both; inv-grade.js fails identically on main (stale test); small-art-wire.js 'servant pouch' check flaky 1/3 at 755 — harden later; suggestion: ngocboi_r7 grade 4 → 3 (reads Ngự tứ though Nội vụ phủ issues it))
 PASS review/outside-art-r1 9b4a257d0db38bbaa0d649391e51d0269667d0da (D48; notes-only commit, art is CDN-only; descends from a3dbdc19f — main moved, trivial merge; all 13 scenes, 2 maps + hotspots, Huynh trưởng 2×4 ages checked by eye; cutcheck clean)
 PASS review/item-art-r5 aedcca1ed5cad2061a594a69f913c52f44da728a (D2; descends from main 9b4f1697a; art already live on CDN; site rebuilt so assets.json/sw.js hashes match the 338+21+15 replaced item pictures)
+PASS review/small-bugs-4-r1 42e4038f7104e451f4a940e7c536e3bf5deb8ebe (D47; descends from current main; jveil.js conflict: main's vlNeed(S) + 'Đang mặc' anchor; small-bugs-4.js 6 viewports on first merge, scan on final; KIT.md line ~1024 still says onText 'Đang đeo' → kit keeper wording)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 (ON HOLD — do not merge yet, owner fixes pending on cycle-r2) review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
