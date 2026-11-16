@@ -13,7 +13,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C40 actcard-small | review/actcard-small-r1 | sonnet | PASS e3664469fbeddf8e7c9fafb851bd1fda73b6354d |
 | C28 room-btn | review/room-btn-r1 | sonnet | PASS c80e5df978eaffb29ce218b4431e17b415232750 (icons on CDN) |
 | C29 rel-picker | review/rel-picker-r1 | sonnet | PASS ce7c076a38d55c95901d19002832983f91560052 |
-| C32 page-curl2 | review/page-curl2 | sonnet | RUNNING |
+| C32 page-curl2 | review/page-curl2 @3b7e5ea0 | sonnet | REVIEWING (review/page-curl2-r1, sonnet) |
 | C33 weekbook-entries | review/weekbook-entries-r1 | sonnet | PASS 1badc13c817d0d67971439fd6d2cbd944e47ad89 |
 | C34 contest-ui | review/contest-ui-r2 @c881ae6b (r1 FAIL fixed) | sonnet | REVIEWING (review/contest-ui-r3, sonnet) |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
@@ -70,6 +70,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - §72 CLASH: review/room-btn-r1 (PASS c80e5df9) used KIT §72 for kitBackBtnHtml, and review/tutorial-r2's kitGoalDetail (jgoal.js) is also §72 — keeper please assign one of them a new number.
 - map-labels-r1 (PASS): re-skins existing kit §34.1d .mspot .mlab (paper chip 13px, wrap, no opacity cuts) + mapFit floor zoom (no touching labels); when D30 lands, drop its own .kpm-spot .mlab font/padding (12.5px nowrap) so it inherits the chip; mapFit floor-zoom rule is a new kit behaviour to document; at 1180x820 neighbouring .mmeta rows ("N bóng · K khắc") overlap — including them in the floor rule zooms the iPad map to ×2.75, so keeper/owner decide; .mspot .mwhy and .acb in j41 still use the old tiny dark style (probably unused).
 - KIT REQUEST (C26b stat-fx-2): in §57.1 jstatfx.js the glowing number never takes the gain/loss colour because jk4's `.kst:not(.kst-tile):not(.kst-chip)>.kstv{color:var(--ink)}` (0,4,0) beats `.ksf-g>.kstv`/`.ksf-r>.kstv` (0,2,0). Proposed: `.kst.ksf-g:not(.kst-tile):not(.kst-chip)>.kstv{color:#1f6b2f}`, `.kst.ksf-r:not(.kst-tile):not(.kst-chip)>.kstv{color:#a3291c}`, plus `.krt-v.ksf-g` / `.krt-v.ksf-r` for relation-table numbers (verified live by the worker; not applied).
+- page-curl2 (reviewing): portrait paper slide kitSlideSheet = new variant of the page-turn kit part (§34, reuses .ksht*); global swipe-to-change-tab removed; keeper may add a line to KIT.md §34.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -96,3 +97,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q16 (C34 contest prizes, for owner/C7): prize pool = her rank's stipend × 1 month (small) / 2 months (big) × place share; winning all ~12 contests a year ≈ 17 months of stipend on top of Sủng/Danh/Emperor gift, entry costs only Sức −6 → entering is the obvious pick at the top (BALANCE rule). NPC pay follows HER rank, so a low-rank NPC winning at a high-rank player's contest gets too much bạc. Reviewer suggests: NPC pay by min(her rank, their rank), and trim months or count the item inside the bạc. Owner/C7 decide.
 - Q17 (C46 map-labels): to keep 13px labels from touching, the default map zoom on a portrait phone (390 wide) is now ~×3.8 (was ×2.5); Fold ×2. Owner OK, or prefer a smaller map with fewer labels shown? (Reviewer: at 390 wide only ~5 palace slots are visible at once; at 844x390 the +/−/Ra vào/Danh sách buttons cover a label, as before.)
 - (16/11) LIVE on main 4f5e5f3b3: C23, C26, C27, C28, C29, C35, C37, C39, C40, D39. Rebase any open work on main.
+- Q18 (C32 page-curl2): in landscape the ‹ › buttons keep the slow 1.3 s curl (unchanged) — keep or speed up? Portrait slide is 300 ms.
