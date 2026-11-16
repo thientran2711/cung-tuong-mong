@@ -10,9 +10,9 @@ const [,,BASE,SZ,OUT,TAG,FULL]=process.argv;const [WH,DPR]=SZ.split('@');const [
  await p.waitForTimeout(1500);
  await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.pal=null;S.place='home';used=0;tab='go';window.__mapZ=1;render();setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50)});
 
- const R=await p.evaluate(()=>{const out=[];const slot="p:thu";const dir="nhat-can-chinh";const H=KPM_DATA.have[dir];
+ const R=await p.evaluate(()=>{const out=[];const slot="p:home";const dir="nhat-cac";const H=KPM_DATA.have[dir];
   const set=(m,t,bu)=>{S.month=m;S.tuan=t;S.buoi=bu};const st=()=>{const A=kpmArt(slot);return A&&A.src.replace(/^.*img\/pl2\//,'')};
-  set(7,1,3);out.push(["vulan toi before",st()]);H.push("vulan-toi");out.push(["vulan toi after (expect nhat-can-chinh-vulan-toi.webp)",st()]);
+  set(7,1,3);out.push(["vulan toi before",st()]);H.push("vulan-toi");out.push(["vulan toi after (expect nhat-cac-vulan-toi.webp)",st()]);
   set(3,0,1);out.push(["thanhminh trua before",st()]);H.push("thanhminh-trua");out.push(["thanhminh trua after",st()]);
   set(2,1,0);const old=S.wdTang,t0=S.turn;out.push(["plain day",st()]);S.wdTang=(S.turn||0)+3;out.push(["mourning, no tang file (expect season)",st()]);H.push("tang-sang");out.push(["mourning, tang-sang painted (expect tang-sang)",st()]);
   set(1,0,0);out.push(["mourning wins over newyear sang",st()]);S.wdTang=old;out.push(["mourning off, newyear sang",st()]);return out});
