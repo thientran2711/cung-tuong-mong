@@ -58,14 +58,14 @@
 | verbatim rule files: dev/art/OWNER_ART_RULES.md + dev/PRIORITY_RULES.md | claude/cung-tuong-mong-handover-hj0h8w | main s10 | session_01UV1SzghGXF2QE55VX7SGi6 (sonnet; opus one stopped) | DONE | 16/11 07:45Z |
 | coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | RUNNING | 16/11 06:26Z |
 | cardflip-smooth-r1 re-merge on main | review/merge-hot-3 | main s11 | session_01UV1SzhTBy9XN8Ebp4ao4yp (sonnet) | LIVE feba37e5 | 16/11 06:29Z |
-| canon-pairs: decide 57 old→new rule pairs in PRIORITY/ART rule files | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus, rules) | RUNNING | 16/11 06:29Z |
+| canon-pairs: decide 57 old→new rule pairs in PRIORITY/ART rule files | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus, rules) | DONE | 16/11 06:29Z |
 | kc-lore: td home road vs "cả nhà bị xử trảm" (+ scan all 6 home-road origins) | review/kc-lore | main s11 | session_01UV1SzifvyTS1XcBknF7tFA (sonnet) | RUNNING | 16/11 06:30Z |
 | flip-newlife reviewer (+ .ksub overlap fix on identity card) | review/flip-newlife-r1 | main s11 | session_01UV1SzhzxBjcTWbAts1faFn (sonnet) | RUNNING | 16/11 06:35Z |
 | place-glyphs reviewer (glyphs only; NVP scene stays unwired) | review/place-glyphs-r1 | main s11 | session_01UV1SzknxC4i1bfnzo28AyP (sonnet) | LIVE 11100a99 | 16/11 06:41Z |
 | postmerge-fix-1 reviewer (buổi tint removal + kpshort test) | review/postmerge-fix-1-r1 | main s11 | session_01UV1Szgd8jzCKaWt4HRS5Am sonnet | LIVE a942395b | 16/11 06:44Z |
 | story-roads 14 chapters: plan + phase 1 (frame + j67 port) | review/story14-p1 | main s11 | session_01UV1SzkHMTxeSLrXW9U3BdC (opus, structure) | RUNNING | 16/11 06:46Z |
 | card-flip videos for owner (me picked / other picked) | (handover reports only) | main s11 | session_01UV1SzhNCLWgwR9ozmc9zcD (sonnet) | DONE (sent) | 16/11 06:46Z |
-| low-context canon split (OD:L1241) — same worker as canon-pairs | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus) | RUNNING | 16/11 06:46Z |
+| low-context canon split (OD:L1241) — same worker as canon-pairs | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus) | DONE (dev/rules, make_index.py) | 16/11 06:46Z |
 | D6 review | review/econ-items-r1 | C | session_011xDdVQ5xcrYDf3N1snQ5L1 | RUNNING | 06:46Z 16/11 |
 | C44 cloud-save-r1 re-merge on main (auto-deploys coop Worker) | review/merge-hot-4 | main s11 | session_01UV1SzhS3WeMXFgk8CgeevX (sonnet) | LIVE a96b3464 (post-deploy smoke PASS: run 43820129878, coop-e2e 59/59 live) | 16/11 06:47Z |
 | kc-lore reviewer | review/kc-lore-r1 | main s11 | session_01UV1SzhPB8Tmqmw8DBzHGe3 (sonnet) | RUNNING | 16/11 06:53Z |
