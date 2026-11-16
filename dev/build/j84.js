@@ -13,7 +13,7 @@ function mon(m){m=+m;return MON[m-1]||String(m)}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 function date(m,y,tuan,buoi){let s=`Tháng ${mon(m)}, năm thứ ${ord(y)}`;if(tuan!=null&&typeof TUAN!=="undefined")s+=", "+TUAN[tuan];if(buoi!=null&&typeof BUOI!=="undefined")s+=", "+String(BUOI[buoi]).toLowerCase();return s}
 const B="(?<![\\p{L}\\d])",E="(?![\\p{L}\\d])";
-const R=(src,f="g")=>new RegExp(src,f+"u");
+const R=(src,f="g")=>kRx(src,f+"u");/* kRx: lookbehind that also runs on Safari < 16.4 (j0) */
 const srvMode=()=>{try{return typeof isSrv==="function"&&!!S&&isSrv()}catch(e){return false}};/* servant start: "Chủ tin" is the mistress's trust in HER — keep the word */
 /* ordered phrase rules: [regex, replacement|function] */
 const RULES=[
@@ -58,22 +58,22 @@ const RULES=[
  /* review 11/15 (sub-odds): relation lines in old event cards "Thái hậu với ngươi -3" read as the one relation word "quý" (KIT §36.3) */
  /* owner 09:55Z (supersedes "quý"): one relation word, "thiện cảm" (KIT_REL): "X với/quý ngươi|ta ±N" → "X → ta: thiện cảm ±N", a bare "nàng quý ngươi" → "thiện cảm" */
  /* review ts-a r6 (same class as j84 "với ngươi"): "X quý ngươi hơn" is a sentence, not a label: "Họ thiện cảm hơn" → "Họ có thiện cảm với ta hơn" */
- [/(?<![\p{L}])quý (?:ngươi|ta) hơn(?![\p{L}])/gu,"có thiện cảm với ta hơn"],
+ [kRx("(?<![\\p{L}])quý (?:ngươi|ta) hơn(?![\\p{L}])","gu"),"có thiện cảm với ta hơn"],
  [/(Thái hậu|Hoàng hậu|Hoàng thượng|Hắn|hắn) (?:với|quý) (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())/g,"$1 → ta: thiện cảm"],
  /* owner 15:30Z ("thiện cảm" trơn): with its subject the label keeps it — "Nàng quý ngươi" → "Nàng → ta: thiện cảm"; "Ngươi quý nàng" → "Ta → nàng: thiện cảm"
     (review fix-float r9: same label-only lookaheads as ts-a 11/15 below — "với ngươi" only before a number or ":") */
- [/(?<![\p{L}])([Nn])àng(?: ta)? (?:quý (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với (?:ngươi|ta)(?=\s*(?:[-+−]?\d|:)))/gu,"$1àng → ta: thiện cảm"],
- [/(?<![\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với nàng(?: ta)?(?=\s*(?:[-+−]?\d|:)))/gu,"Ta → nàng: thiện cảm"],
+ [kRx("(?<![\\p{L}])([Nn])àng(?: ta)? (?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"$1àng → ta: thiện cảm"],
+ [kRx("(?<![\\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|:)))","gu"),"Ta → nàng: thiện cảm"],
  /* ts-a 11/15: "với ngươi" is a relation label only before a number or ":" — "ra tay với ngươi, …", "hẹn ước với ngươi, …",
     "thân với ngươi hơn" are sentences (they became "ra tay thiện cảm," before) and only get "ngươi" → "ta" below */
- [/(?<![\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với (?:ngươi|ta)(?=\s*(?:[-+−]?\d|:)))/gu,"thiện cảm"],
+ [kRx("(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"thiện cảm"],
  /* NPC ↔ NPC "thân +7" (j8 giveTo, old logs): the one relation word */
- [/(?<![\p{L}])thân ([+\-−]\s?\d)/gu,"thiện cảm $1"],
- [/^[^“”]*”|“[^”]*(?:”|$)|(?<![\p{L}\p{M}])([Nn])gươi(?![\p{L}\p{M}])/gu,(m,n)=>n?(n==="N"?"Ta":"ta"):m],
+ [kRx("(?<![\\p{L}])thân ([+\\-−]\\s?\\d)","gu"),"thiện cảm $1"],
+ [kRx("^[^“”]*”|“[^”]*(?:”|$)|(?<![\\p{L}\\p{M}])([Nn])gươi(?![\\p{L}\\p{M}])","gu"),(m,n)=>n?(n==="N"?"Ta":"ta"):m],
  /* servant words (owner 11/15 10:10Z, VANPHONG §1; KIT_REL): one word for the servant's attitude to her, one for her trust in him */
  /* another person is "nàng ta", never a bare "nàng" (owner 11/15: a bare "nàng" reads as the player) — kitThey(p) in jaudit */
  [R("(?<!(?:→|oán|quý|với|ghen) )"+B+"([Nn])àng"+E+"(?! ta"+E+")(?! ấy"+E+")(?! (?:oán|ghen|→|quý|thương)"+E+")"),"$1àng ta"],/* "Nàng oán ta", "Nàng → ta", "Ta → nàng" stay (owner 15:30Z: never "Nàng ta oán ta") */
- [/(?<![\p{L}])([Nn])àng ta (?=(?:oán ta|→ ta|ghen)(?![\p{L}]))/gu,"$1àng "],
+ [kRx("(?<![\\p{L}])([Nn])àng ta (?=(?:oán ta|→ ta|ghen)(?![\\p{L}]))","gu"),"$1àng "],
  [R(B+"cần Chủ tin"),m=>srvMode()?m:"cần tin cậy"],[R(B+"Chủ tin với "),m=>srvMode()?m:"tin cậy "],[R(B+"Chủ tin"+E),m=>srvMode()?m:"Ta tin cậy"],[R(B+"chủ tin"+E),m=>srvMode()?m:"tin cậy"],
  ["Lòng cung nữ","Thiện cảm của cung nữ"],[R(B+"Lòng(?= [+\\-−]?\\d)"),"Thiện cảm"],[R(B+"Lòng(?= \\p{Lu}[\\p{L}]*( \\p{Lu}[\\p{L}]*)? [+\\-−]?\\d)"),"Thiện cảm"],
  [R(B+"lòng(?= [+\\-−]\\d)"),"thiện cảm"],
