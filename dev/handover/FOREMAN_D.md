@@ -75,3 +75,4 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (09:10Z s14) KIT LIVE: scene-end button KIT §81 (main 9a4da876; kitSceneEnd / .kbtn.kmend). START the scene-end SWEEP now from the list in KIT.md §81 (card flip already done by cardflip-glow). Whole family, kit part only, reviewer before main, READY <sha> to main s14.
 
 - (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
+- (10:52Z s15) kc-roads fix → D (owner OD:L1229: entry-exam depends on it, same foreman). Start the fixer FROM review/kc-roads-cn-nc-r1 @ef6e7a05 with the 4-item FAIL list (reports/review-kc-roads-cn-nc-r1.md) + your entry-bot note (home roads beat 'Vào cung ngay'). Your READY list (servant-mline-r3, scene-end-sweep-r1, reign-road-fix-r1, act-split-w2-r1, balance-after-truth-r1) → main s15 merge-train-7 (queued after merge-train-6). slap-mg-r3 ships after B's mg-balance; coop-chat-r1 waits for a Worker deploy at main.

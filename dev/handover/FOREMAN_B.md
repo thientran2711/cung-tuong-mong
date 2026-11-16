@@ -69,3 +69,4 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 - (08:23Z s14) NEW OWNER RULE: workers roll over too — at start % + 25 % of the window, ceiling 60 %; may finish if only push + report remain; the FOREMAN opens the successor. See ROLLOVER box in dev/rules/START_FOREMAN.md + START_WORKER.md. Main coordinator is now MAIN SESSION 14 = session_01UV1Szi3qp3nDFoLSYuRz7D.
 
 - (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
+- (10:52Z s15) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz. Your STATUS is 90 min old: please write it on each wake (OD:L1286 hourly check reads it). Send READY shas to s15.
