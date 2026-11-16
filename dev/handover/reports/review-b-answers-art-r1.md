@@ -1,6 +1,6 @@
-PASS f182f2b478ec9f65cd2ce45416a34f1496c3b5a6
+PASS 82756a8010e59bcbdcda035e176fd89cf7d583e4
 
-Branch review/b-answers-art-r1 = origin/main 73c06812 + review/b-answers-art f46f826e (only index.html/sw.js/assets.json conflicted: took main's, rebuilt with assemble.py + build_site.sh).
+Branch review/b-answers-art-r1 = origin/main 2232ea32 (re-merged after 73c06812; rebuilt twice, spot-rechecked Ly+tutor figs, 0 page errors) + review/b-answers-art f46f826e (only index.html/sw.js/assets.json conflicted: took main's, rebuilt with assemble.py + build_site.sh).
 
 Checked (scope 2): fallen/ly1, steward/tgk1, tutor/ttp1, 4 age bands, fig+por, all on CDN, manifest entries 92-103 in FIGURES-others.json match the format of existing rows. Looked at every fig and por: same painted style as maid/mama/eunuch figures, Ming/Han dress (linen hanfu / grey-teal embroidered / navy-ivory scholar), faces consistent across ages, feet at bottom (tight alpha bbox like existing figs), no rosy layer, fig 46-82 KB, por 33-44 KB. In place at 755x1000 and 1180x820: Ly (Truong Mon vien), Quan su Tan Gia kho: correct figs, 0 page errors. Tutor: figFor/por return tutor-ttp1-a36, npcFix persisted. Old save: saved consort fid is replaced by fallen:ly1; with FIGIX.fallen absent falls back to the old consort art. Only existing hooks (figWho/figRoles/pFaceOf), no new kit part.
 Tests: npc-art-audit 81/81 with figure, 0 missing; fig-fill 755x1000 + 1180x820 all kinds OK (feetGap 2, chip above head); missing_pics: acts 0/116 placeholder, events 10/328 (unchanged class), 0 page errors.
