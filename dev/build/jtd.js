@@ -197,7 +197,7 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped)=>{KG82.phase="result";const gain=tdPoints(mode,raw),q=k==="cong"?Math.round(raw/10*2):0;
-  kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"],["Mục đích",TD_GOAL[k],"n"],["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]].concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
+  kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"],["Mục đích",TD_GOAL[k],"n"],["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]].concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
  KG82.phase="intro";const first=!tdSeen(k),HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];

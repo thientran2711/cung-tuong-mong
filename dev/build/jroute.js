@@ -401,7 +401,7 @@ function rtNgSleight(kind,n,cb){const o=rtMgO(n);if(!rtMgOn()){cb(roll(o));retur
  kg82Set("score","0/2");kg82Set("round","1/3");kg82Set("time","–");const box=kg82Box();
  box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để Tâm cơ quyết định<small>${word(o)}</small></button></div>`;
  const done=ok=>{const res=typeof kitGameResult==="function"?kitGameResult({parts:[["Ra tay",ok?"không ai thấy":"bị nhìn thấy"],["Người canh",`${n} người`]],note:ok?"Bát nước đã như ý ngươi.":"Có người đã thấy tay ngươi động vào bát."}):"";
-  kg82ShowRes(res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);$("kg82ok").onclick=()=>{kg82Close();cb(ok)}};
+  kg82ShowRes(res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,!!ok);$("kg82ok").onclick=()=>{kg82Close();cb(ok)}};/* merge-train-4: result sound (result-sfx) */
  $("kg82skip").onclick=()=>{rtStat("mg_skip");done(roll(o))};
  $("kg82go").onclick=()=>{box.innerHTML="";const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
   const sp=(.75+n*.18-S.tamco/220)*(1+rtDf().h-1),wd=(.2+n*.02-(S.mat||0)*.012);
