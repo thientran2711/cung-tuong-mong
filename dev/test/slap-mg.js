@@ -30,7 +30,7 @@ const endBtn=async()=>{await p.waitForSelector('#kg82ok',{timeout:12000,state:'a
  R.pic=await p.evaluate(()=>{const i=document.querySelector('#kg82 .kgpic img');return i?{src:i.getAttribute('src').replace(/^.*img\//,'img/'),ok:i.complete&&i.naturalWidth>0}:'slot removed (file not painted yet)'});
  R.introOverflow=await ov();C.introNoOverflow=!R.introOverflow.length;
  /* 2. first play: demo card, then the bar; idle → glow */
- await p.click('#kg82go');await p.waitForTimeout(900);C.demoShown=await p.evaluate(()=>!!document.getElementById('k91demo')&&KG82.slapDemo===true);await shot('2-demo');
+ await p.click('#kg82go');await p.waitForSelector('#k91demo',{timeout:6000,state:'attached'}).catch(()=>{});await p.waitForTimeout(300);C.demoShown=await p.evaluate(()=>!!document.getElementById('k91demo')&&KG82.slapDemo===true);await shot('2-demo');
  C.demoBlocksTap=await p.evaluate(()=>{window.__slapTap&&window.__slapTap();return !KG82.slapEnd});
  await p.click('#k91demo');await p.waitForTimeout(400);await shot('3-bar');
  R.barOverflow=await ov();C.barNoOverflow=!R.barOverflow.length;
@@ -52,7 +52,7 @@ const endBtn=async()=>{await p.waitForSelector('#kg82ok',{timeout:12000,state:'a
  R.costs=await p.evaluate(()=>{const v=window.__v,o=[];for(const s of [1,2,3]){v.slap=null;SLAP.next=s;const d0=S.duc;const rel0=aff(v,S);const r=runAct(S,v,'tat');o.push({s,duc:S.duc-d0,wks:v.slap?v.slap.until-wk():0,sev:v.slap&&v.slap.sev,rel:aff(v,S)-rel0});v.slap=null}return o});
  C.costs=R.costs.every(c=>c.sev===c.s);
  /* 7. Gọn: no pops, the result is a still line */
- await p.evaluate(i=>{OPT.fxon=false;used=0;Q.length=0;document.getElementById('modal').hidden=true;window.__v.slap=null;SLAPG.busy=0;doAct(i,'tat')},idx);await p.waitForSelector('#kg82go');await p.click('#kg82go');await p.waitForTimeout(700);
+ await p.evaluate(i=>{OPT.fxon=false;used=0;Q.length=0;document.getElementById('modal').hidden=true;window.__v.slap=null;SLAPG.busy=0;doAct(i,'tat')},idx);await p.waitForSelector('#kg82go');await p.click('#kg82go');await p.waitForFunction(()=>!!window.__slapTap,null,{timeout:6000}).catch(()=>{});await p.waitForTimeout(700);R.gonDemo=await p.evaluate(()=>!!document.getElementById('k91demo'));
  await p.evaluate(()=>{window.__slapTap&&window.__slapTap()});C.gonStill=await p.evaluate(()=>!!KG82.slapEnd&&KG82.slapEnd.still===true);await p.waitForTimeout(200);await shot('6-gon');
  await endBtn();await p.evaluate(()=>{OPT.fxon=true});
  /* 8. NPC dodge: card odds by tier, demo for "ne", game, result */
@@ -60,7 +60,7 @@ const endBtn=async()=>{await p.waitForSelector('#kg82ok',{timeout:12000,state:'a
  await p.waitForTimeout(500);await shot('7-dodge-card');R.dodgeCard=await p.evaluate(()=>document.getElementById('modal').innerText.slice(0,300));C.dodgeNoPercent=!/%/.test(R.dodgeCard);
  R.dodgeTier=await p.evaluate(()=>{const t=slapMg(true,window.__v);return{word:t.word,ease:t.ease,odds:BAL.slap.dodgeOdds[t.tier]}});
  await p.evaluate(()=>document.querySelector('#modal .opt[data-m="0"]').click());await p.waitForSelector('#kg82go',{timeout:30000,state:'attached'});await shot('8-dodge-intro');await p.click('#kg82go');await p.waitForTimeout(700);
- C.dodgeDemo=await p.evaluate(()=>!!document.getElementById('k91demo'));if(C.dodgeDemo)await p.click('#k91demo');await p.waitForTimeout(600);await shot('9-dodge-bar');
+ /* the demo card waits for the board paintings (kg82Preload, up to 2.5 s on the CDN): wait for it, never tap too early (mg-train-r1) */await p.waitForSelector('#k91demo',{timeout:6000,state:'attached'}).catch(()=>{});C.dodgeDemo=await p.evaluate(()=>!!document.getElementById('k91demo'));if(C.dodgeDemo)await p.click('#k91demo');await p.waitForTimeout(600);await shot('9-dodge-bar');
  await p.waitForSelector('#kg82ok',{timeout:12000,state:'attached'});await p.waitForTimeout(300);await shot('9b-dodge-end');await endBtn();await p.waitForTimeout(400);R.dodgeFig=await p.evaluate(()=>!!document.querySelector('#modal .kevfig, #modal .kevstage, #modal [class*=kevf]'));R.dodgeEnd={slap:await p.evaluate(()=>S.slap?S.slap.sev:0),modal:await p.evaluate(()=>document.getElementById('modal').innerText.slice(0,200))};await shot('10-dodge-result');
  R.npc=await p.evaluate(()=>{const v=window.__v,o={};for(const g of [1,2,3]){window.__rkS=1;v.rank=1+g;const c=[0,0,0,0];for(let i=0;i<2000;i++)c[slapNpcTier(v)]++;o['gap'+g]=c.slice(1).map(x=>Math.round(x/20))}return o});
  if(N){await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__rkS=6;window.__v.rank=1;window.__v.slap=null;S.slap=null});const c={skip:[0,0,0,0],tap:[0,0,0,0]};
