@@ -38,7 +38,7 @@ mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key
 (function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}}}catch(e){}return r}})();
 /* her own hidden blows are guessed by the victim the same way */
 const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
-(function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
+(function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="xx"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
 /* wit: every head can slip; acts on a belief she holds wrongly are counted */
 (function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=60?12:tc>=30?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
   mindLog(v,"_act");const b=v.bel&&t&&v.bel[key(t)];if(b&&(b.w||b.r))mindLog(v,"_actBelief");if(b&&b.w>0&&b.w>=b.r)mindLog(v,"_actWrong")}catch(e){}

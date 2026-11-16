@@ -155,7 +155,7 @@ PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rư�
   o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
    go:()=>{if(!x.ok)return;spend(2);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
 function courtMeet(t){const B=[];try{
- if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=3;
+ if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=B4L;
   if(k&&!night&&S.place!==k){const st=accState(k);const nm=accName(k);
    if(st.ask==="yk")B.push(pbtn(`data-acask="${k}"`,`Xin yết kiến ở ${nm}`,accAskLine(k),st.askWhy||(!can(1)?"hết khắc":"")));
    else if(!st.why)B.push(pbtn(`data-kgmgo="${k}"`,`Đến ${nm} gặp ngài`,`Nắm chắc · tốn: ${st.tc||0} khắc · thành: đến nơi ngài đang ngự, gặp được ngài`,!can(st.tc||0)?"hết khắc":""));
@@ -185,7 +185,7 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
    ladder word); hỏng: ngài từ chối khéo; consorts already in the garden see it (ghen +3).
    All need ngài rảnh (daytime, not at Cần Chính điện, not in another palace) and one such act per day per consort (S.kmEmpDay = wk()). */
 window.BAL=window.BAL||{};BAL.empDay=Object.assign({p:.06,suc:5,walkNight:15},BAL.empDay||{});
-function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=3)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
+function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=B4L)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
  if(k==="thu")return{ok:false,why:"ngài đang phê tấu ở Cần Chính điện"};if(/^r\d/.test(k)||k==="kn")return{ok:false,why:"ngài đang ở cung phi tần khác"};return{ok:true,k}}
 function kmStorm(){const f=S.wx&&S.wx.f;return f===3||f===4}  /* j12 weather flags: 3 giông tố, 4 tuyết dày */
 function kmEmpO(a,kind){const sung=a.sung||0;
