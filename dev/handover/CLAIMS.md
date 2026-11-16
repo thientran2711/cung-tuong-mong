@@ -263,7 +263,7 @@
 | story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | session_011xDdVSfRLPar78kg13jMBC | RUNNING | 16/11 16:22Z |
 | go-live-kit (opus; OD:L1370): tier classifier script, 5–10 min pre-push quick check, build number + 'what changed' line in game menu, one-step rollback, nightly full suite | review/go-live-kit | main s20 | session_01UV1SziX5AtFSgrnkfGWXgw | RUNNING | 16/11 16:36Z |
 | TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd (archived) | PASS 5f710161 | 16/11 16:34Z |
-| emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | RUNNING | 16/11 16:41Z |
+| emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | DONE SẴN SÀNG 7b959216 (archived) | 16/11 16:41Z |
 | mg-train review (opus; 7e52cb1c) | review/mg-train-r1 | B | session_01N1tNP2d8sR5Vo1a5Lh9UV9 | DONE PASS 8f476f6f (archived) | 16/11 16:44Z |
 | mg-tune (opus): nw-* engines + co skilled Tuyệt phẩm 57–100 % → 20–30 % (time part in scoring), base review/mg-train 7e52cb1c | review/mg-tune | B | session_01N1tNP5frubyLS6QCq2WKX8 | RUNNING | 16/11 16:44Z |
 | kit-size #3 (opus, kit keeper; OD 16/11 16:45Z (1)(2)(3)(5)(6)): every frame kind × S/M/L/XL with person + event picture, VIỆC banner aligned to frame edge, button grid per frame layout, Xa xỉ off the picture → sample sheets to owner | review/kit-size | main s20 | session_01UV1Szjj42P74XsFm4trr8J | RUNNING | 16/11 16:50Z |
@@ -332,3 +332,4 @@
 | road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | RUNNING | 16/11 18:42Z |
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | RUNNING | 16/11 18:48Z |
+| emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | (opening) | RUNNING | 16/11 18:50Z |
