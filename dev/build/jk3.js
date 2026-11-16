@@ -287,7 +287,11 @@ html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;
 .kbackb:active .kbi{transform:scale(.94)}
 /* phones < 600 px: icon only (label = tooltip / aria-label, same as the stat cells), sits under the menu button */
 @media (max-width:599px){html body header.hud>#k3room.kbackb{padding:0!important;min-height:0;justify-self:center;align-self:center}
- html body header.hud>#k3room.kbackb .kbl{display:none}}
+ html body header.hud>#k3room.kbackb .kbl{display:none}
+ /* icon missing (CDN 404, img removed by onerror): show the label so the button never becomes invisible */
+ html body header.hud>#k3room.kbackb:not(:has(.kbi)) .kbl{display:inline!important}
+ html body header.hud>#k3room.kbackb:not(:has(.kbi)){padding:0 8px!important;min-height:34px}
+ html body header.hud:has(#k3room.kbackb:not(:has(.kbi))):not(:has(#k3room[hidden]))>#menu{justify-self:start}}
 html body .stage>#tomap.kbackb,html body #tomap.kbackb{background:#fffaf0e6!important;border:1px solid var(--line,#d9c49a)!important;border-radius:18px!important;padding:2px 12px 2px 6px!important;color:var(--ink,#3a2a1a);box-shadow:0 2px 8px #0004!important;min-height:38px;font-family:var(--display)}
 html body header.hud>#k3room.kbackb{justify-self:end;min-height:36px;max-width:100%}
 html body header.hud>#k3room[hidden]{display:none!important}
