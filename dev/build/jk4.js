@@ -425,7 +425,11 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
  /* reviewer popup-fullbody-r1 / evidence panel: a person panel WITHOUT an options group scrolls as a whole (#mb); the figure column must be the visible height of #mb (sticky at the top), never the whole scroll height (figure 1100 px below the fold) */
  if(!narrow&&!mb.querySelector(":scope > .opts")){col.style.removeProperty("height");col.style.removeProperty("align-self");if(mb.scrollHeight>mb.clientHeight+2){col.style.alignSelf="start";col.style.height=Math.max(200,mb.clientHeight-20)+"px"}}
- const H=col.clientHeight;if(H<80)return;const floor=H-2;
+ /* review/fig-cutout-code (owner 16/11 21:05Z, BÁO Nhập cung: hem / feet / shoes cut at the bottom): when the dialog is held shorter
+    than its content (CSS max-height), the column (grid rows 1/-1) runs past the visible bottom of #mb (overflow hidden) and the feet
+    placed on the column floor were cut. The floor is the VISIBLE column bottom (inside #mb's padding), for every person dialog. */
+ let H=col.clientHeight;try{const mr=mb.getBoundingClientRect(),cr=col.getBoundingClientRect(),vis=Math.floor(mr.bottom-(parseFloat(getComputedStyle(mb).paddingBottom)||0)-cr.top);if(vis>0&&vis<H)H=vis}catch(e){}
+ if(H<80)return;const floor=H-2;
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
  /* KIT 32.2 CAP + CROP (owner 15/11 "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà", review/stage-fig-size):
     the column is never wider than KIT_DP_COL (36 % of the dialog, ≤ 264 px) — the people are fitted INTO it, it never grows for them.
@@ -540,7 +544,12 @@ html body #modal .dlg.kdper.kdpall>#mb>.opts{grid-row:2!important;overflow:visib
 (function(){const e0=kitEsFit;kitEsFit=function(row){if(row&&row.closest&&row.closest(".dlg.kdper"))return kitDpFit();return e0.apply(this,arguments)};window.kitEsFit=kitEsFit})();
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDpApply();requestAnimationFrame(kitDpFit)}catch(e){}return r};
  const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitDpFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
- let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)})})();
+ let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)});
+ /* review/fig-cutout-code (owner 16/11 21:05Z, BÁO Nhập cung: feet / shoes cut): the panel can change height AFTER the last fit (a late
+    banner / row / font, CSS max-height), leaving the figure column taller than the visible #mb and the feet cut. Re-fit whenever #mb
+    changes size (capped: at most 8 re-fits per second, so a fit that changes the size itself can never loop). */
+ try{if(typeof ResizeObserver==="function"){const mb=document.getElementById("mb");let n=0,t0=0,raf=0;if(mb)new ResizeObserver(()=>{const now=Date.now();if(now-t0>1000){t0=now;n=0}
+  if(++n>8||raf)return;raf=requestAnimationFrame(()=>{raf=0;try{kitDpFit()}catch(e){}})}).observe(mb)}}catch(e){}})();
 (function(){const st=document.createElement("style");st.id="kit-dlgperson";st.textContent=`
 #modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important}
 #modal .dlg.kpanel.kdper>*{flex:none}
