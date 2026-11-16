@@ -31,7 +31,12 @@ Numbers: `BAL.coopEmpY` (jbal2.js). No new UI parts: every card is the standard 
 - `dev/test/coop-b1.js` (2 browsers, 755x1000@2 host + 1180x820@2 guest, live Worker)
 - `dev/test/coop-b2b5.js` (same)
 - `dev/test/coop-e2e.js` must stay green.
-Results: see dev/handover/reports/coop-b1b5.md.
+Results @49c95738: coop-b1 41/41, coop-b2b5 30/30, coop-e2e 59/59.
 
-## Not done (next worker)
-see report.
+## NOT done (list for a second worker)
+1. **B1 servant entry maid act set** (friend on the cung nữ road: consort/maid acts on her as a servant) — not started.
+2. **B2 shared heir** (S.heir → world key, host-authoritative heirMonth; today each client keeps its own heir view; kframe/kidDie heir loss already reaches her via res.fam).
+3. **B3 succession choices** (j99succ Ba đường / Nữ đế) stay off in co-op (its epilogue stops the world); co-op uses the base endings. NPC consorts are not retired at the new reign (same harem continues).
+4. **B4 gaps**: NPC acts on her ITEMS/KIDS inside host rivalsTurn do not reach her (only stats/rel/oan/cold/death write back); her festival entry has no own choice (she competes with her numbers like an NPC); lines about her arrive only in the week news.
+5. coop-pets.js harness update.
+
