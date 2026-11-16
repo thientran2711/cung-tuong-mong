@@ -138,8 +138,9 @@
 | scene-end-sweep review (sonnet) | review/scene-end-sweep-r1 | D | session_01DgYSWog54ZBN61ZaY8nZCH | DONE PASS 67db47f6 | 16/11 09:41Z |
 | unmet-name leak family residue (bare-name log lines, palName, per-person ??? rows) | review/name-mask | D | session_01DgYSWoDkH3BjgWkcd7Y4Cg | RUNNING | 16/11 09:44Z |
 | design-scale phase 2/3 + maptab tab-mode reset bug (opus) | review/design-scale-p2 | main s14 | session_01UV1Szh2HXLUxv3oHmnezMy (opus) | RUNNING | 16/11 09:44Z |
-| co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | RUNNING | 16/11 10:05Z |
+| co-op guest's own maid cannot rise (guest→host request; servant note C, HIGH) | review/coop-guest-maid | D | session_01DgYSWoeRakcsjerKcBESWQ | DONE SẴN SÀNG KIỂM 66a55b06 | 16/11 10:05Z |
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
 | D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | session_011xDdVRRJzACvMmmuEuVbJq | RUNNING | 16/11 10:26Z |
 | item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | PASS f9d10956 | 16/11 10:26Z |
 | D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | RUNNING | 16/11 10:32Z |
+| coop-guest-maid review (opus) | review/coop-guest-maid-r1 | D | (opening, s3) | RUNNING | 16/11 10:34Z |
