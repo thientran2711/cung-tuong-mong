@@ -55,4 +55,4 @@ D51 fxkit (`review/fxkit-r1`, §68) is on main; I only call its API. D51 call-si
 1. Music: does she accept the interim mapping (romance → night track) until new tracks exist?
 2. Should fx also play on routine group cards (court/giao thiệp), or only on dramatic groups? Currently light on routine ones.
 
-SẴN SÀNG KIỂM 96dc8e83b5b33a4647fd7646e9acb69bfedc8829
+SẴN SÀNG KIỂM ddb4d1ffcb2a0949bdfade543e542b141f695417
