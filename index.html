@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"50d7c7eb+","t":"2026-11-16T19:19Z","c":"review r1: one core — both sides read BAL.tw.g for accusation failure, dance/chess side effects, admonition (Sủng + cooldown), HH confiscat…","b":"8a4e8e358a95","h":[{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
+window.CTM_BI={"s":"7e2ed179+","t":"2026-11-16T19:23Z","c":"Luật hai chiều: NPC làm được gì thì nàng cũng làm được, cùng một giá; thêm các lựa chọn mới cho nàng.","b":"93c42af79b2b","h":[{"s":"40903f4a+","t":"2026-11-16T18:57Z","c":"Thêm hai việc tố: Tố vượt phẩm và Tố xa xỉ; thẻ người hiện đủ đồ đang mặc."},{"s":"a7029a88+","t":"2026-11-16T18:34Z","c":"Thiết lập có mục Thông tin cập nhật: mã bản đang chơi và điều mới của bản này."},{"s":"c053ee92","t":"2026-11-16T19:14Z","c":"review map-labels-2-b-r1: KIT.md awalk grey state; review report"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -2201,7 +2201,7 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
-function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","xx","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
  const sv=sent?bestSent(a):null;ACTX={a,t,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
@@ -2235,7 +2235,7 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
  if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
  H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,x:v.preg&&!v.hidden?"nàng đang có thai":"nàng bẽ mặt",run:()=>trip(S,v)});
- act("frame","Vu oan");act("vp","Tố vượt phẩm");
+ act("frame","Vu oan");act("vp","Tố vượt phẩm");act("xx","Tố xa xỉ");
  return H}
 function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
  if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,-10);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức -25${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
@@ -4203,7 +4203,7 @@ function wpick(O){let r=Math.random()*O.reduce((a,b)=>a+b[1],0),i=0;while(r>O[i]
 const FAILRX=/bị lộ|bị bắt|phát giác|bị phát hiện|không thành|không ai tin|từ chối|chưa chuẩn|bị thử ra|lần ra|tra ra|báo cho chủ|đem chuyện kể/;
 function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]&&IT[e.k].il))):runAct(v,t,k)}finally{v.__err=0}
  v.fails=v.fails||{};const failed=FAILRX.test(r);if(failed)v.fails[k]=(v.fails[k]||0)+1;else if(r)v.fails[k]=0;
- if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp")mindBelief(t,v,k);
+ if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp"&&k!=="xx")mindBelief(t,v,k);
  /* Hiểm độc over-plots: a success may leave a clue behind */
  if(r&&!failed&&traitsOf(v).includes("Hiểm độc")&&BIG.includes(k)&&roll(20)){/*evok: after a BIG act (runAct deed)*/evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
  return r}
@@ -4225,7 +4225,7 @@ npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v
   const rash=rashOf(v);if(rash){err+=10;mindLog(v,"_rash");mindLog(v,"_mistake")}
   /* low wit: clumsy */
   if(!rash&&tc<30&&roll(15)){err+=10;mindLog(v,"_mistake")}
-  const O=mindMenu(v,t);if(!O.length)return"";let k;if(rash){const ov=O.filter(x=>["accuse","rumor","trip","vp","frame"].includes(x[0]));k=wpick(ov.length?ov:O)}else k=wpick(O);persCount(v,k);
+  const O=mindMenu(v,t);if(!O.length)return"";let k;if(rash){const ov=O.filter(x=>["accuse","rumor","trip","vp","xx","frame"].includes(x[0]));k=wpick(ov.length?ov:O)}else k=wpick(O);persCount(v,k);
   /* a big scheme is prepared first: it leaves a tell her people may catch */
   if(BIG.includes(k)&&!v.plan){const pat=tc>=60?2:tc>=35?1:0;v.plan={k,t:key(t),due:bq()+1+R(2)+pat,err};mindTell(v,t,k);return""}
   return mindRun(v,t,k,err)}catch(e){return""}};
@@ -4606,7 +4606,7 @@ mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key
 (function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}}}catch(e){}return r}})();
 /* her own hidden blows are guessed by the victim the same way */
 const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
-(function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
+(function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="xx"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
 /* wit: every head can slip; acts on a belief she holds wrongly are counted */
 (function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=60?12:tc>=30?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
   mindLog(v,"_act");const b=v.bel&&t&&v.bel[key(t)];if(b&&(b.w||b.r))mindLog(v,"_actBelief");if(b&&b.w>0&&b.w>=b.r)mindLog(v,"_actWrong")}catch(e){}
@@ -23328,9 +23328,9 @@ function luxWorn(p){const L=(p.inv||[]).filter(e=>e.w&&!e.h&&IT[e.k]&&IT[e.k].sl
 function luxGrade(k){const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}
 const LUX_V=[8,16,28,44,64];
 function luxVal(k){const it=IT[k];if(!it)return 0;return LUX_V[luxGrade(k)]+Math.round((it.pr||0)/10)}
-function luxAllow(p){return 36+16*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>=60?10:0)}
+function luxAllow(p){const A=BAL.lux.allow;return A.base+A.perRank*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>=A.sungAt?A.sungAdd:0)}
 function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);const bud=luxAllow(p);
- const lv=sc===0?0:sc<=bud?1:sc<=bud*1.5?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
+ const lv=sc===0?0:sc<=bud?1:sc<=bud*BAL.lux.lv3?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
 /* kit chip: total worn luxury vs allowance; over the allowance = red */
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
@@ -27062,7 +27062,7 @@ COOP.on("error",m=>{T("err "+m.code+" "+m.msg);if(CW.on&&m.code==="badbuoi"){CW.
    (death → rebirth, lãnh cung → cold) and sees a note only when she would notice it. The week write-back baseline of her entry is
    moved so the merge does not count it twice.  mode "invite" (Kết giao, Tặng quà): she gets a choice card first; Nhận → I run it. */
 const ASK=["ally","gift"];
-const PUB=["accuse","vp","gift","ally","steal","road","takeaway","tocao","trinhth","trinhhh","xinhh","uyhiep","judge"];
+const PUB=["accuse","vp","xx","gift","ally","steal","road","takeaway","tocao","trinhth","trinhhh","xinhh","uyhiep","judge"];
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
@@ -29784,7 +29784,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
    and 3 times in 10 he is beaten to death in Thận Hình ti (servCaught) — her servant is lost. The card never said so. Now the
    card names him and that risk in Kèm (same formula as the roll). */
 (function(){if(typeof actLineRaw!=="function")return;const a0=actLineRaw;actLineRaw=function(k,w,c){let h=a0.apply(this,arguments);try{
- const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
+ const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","xx","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
  const tin=s=>s?String(h).replace(/thành: ([^·]+)/,(m,x)=>`thành: ${x.trim()} · Chủ tin với ${s.name} +3 `):h;/* runAct → servMerit(sv,2) → tinAdd 1.5×2 */
  if(["ally","spy"].includes(k))return tin(sv);
  h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${typeof chanceW==="function"?chanceW(r):word(r)}`}catch(e){}return h}})();
@@ -33863,6 +33863,8 @@ window.toilRxOpts=toilRxOpts;window.toilGrudgeOf=toilGrudgeOf;window.toilTipOn=t
    reputation p.luxRep is per person. Display only through existing parts: act-card Kèm/risk line + "Vì sao" (jtoil/jaudit), event cards
    (Q), Hội phối đồ rows (kitRows via tsRows), result card / log. ================= */
 Object.assign(BAL,{lux:{
+ /* rank allowance (jinv luxAllow): base + perRank × rank (+ sungAdd from Sủng sungAt), + jwdinv wdBaseLux; above lv3 × allowance = jinv level 3 (Quá xa xỉ) */
+ allow:{base:36,perRank:16,sungAt:60,sungAdd:10},lv3:1.5,
  /* occasion ranges, as fractions r = worn luxury / her allowance: below lo = quá giản dị, [fit0,fit1] = hợp dịp, above hi = quá phô trương
     (above 1 = beyond her rank's allowance: always phô trương, jinv lv 2+). F = formality used by jtoil reactions (0 thường, 1 thỉnh an, 2 yến/lễ). */
  occ:{thuong:{n:"ngày thường",F:0,lo:0,fit:[0,.62],hi:.9},
@@ -43906,7 +43908,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8a4e8e358a95";window.CTM_BUILD=BUILD;
+const BUILD="93c42af79b2b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
