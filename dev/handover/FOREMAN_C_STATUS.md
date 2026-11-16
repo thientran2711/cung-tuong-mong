@@ -30,7 +30,7 @@ Base main at start: 900ace7fb.
 | D2 item-art | review/item-art-r5 | sonnet | PASS aedcca1ed (all 44 poems read word by word; r08-b2/b3/b4 'triêu' + r02-b1, r07-b1 redone) |
 | D27 extra toilette reaction buttons | review/toil-react-r1 | sonnet | PASS 75bd0eb78 |
 | C20 act-text resume | review/act-text-r1 | sonnet | PASS fe15a6d54 — CONDITIONAL on kit keeper (K8 kit-helper list); reviewer fixed 2 costs shown green in ĐƯỢC (Điểm trang, Liếc mắt) |
-| D6 econ-items | review/econ-items @467fe2193 (jeitem.js last; ice, skim by standing, servant pocketing, robe re-issue roads, girlhood chest) → review/econ-items-r1 | opus | REVIEWING (separate session) |
+| D6 econ-items | review/econ-items @467fe2193 (jeitem.js last; ice, skim by standing, servant pocketing, robe re-issue roads, girlhood chest) → review/econ-items-r1 | opus | REVIEWING (session session_011xDdVQ5xcrYDf3N1snQ5L1) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
 | D16 Tứ đức sub-styles + CDNH works | review/tuduc-sub-r1 | opus | PASS adeb7de66 (reviewer capped Đức from handmade works at 1/month shared with Chép kinh — BAL.wkFinCap) |
 | D17 luxury / xa xỉ system + dress-contest themes + luxury RANGE per occasion | review/luxury | opus | RUNNING (worker; D19 waits) |
