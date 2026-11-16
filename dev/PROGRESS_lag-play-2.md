@@ -13,5 +13,9 @@ START_CTX ~6 % (estimate). Branch review/lag-play-2. Report: dev/handover/report
   seat.test.mjs +7 checks (ALL OK). PROTOCOL.md updated. Live Worker NOT deployed (coordinator decision); staging worker for tests.
 - (4) j11 pxPreload(): kitPixi + stage layer + FX overlay app at idle ~2.5 s after a life is in play.
 
-## Next
-- measure baseline / after; profile render chain; leak.
+- (1) render chain repeat work cut: j65 nrDOM once per render + fixTitles next frame; jlag2 kaNorm1 memo + __rendN/__rdep; j57 tabsFit
+  memo; jk4 kitHdFit not mid-render; jpane observer per frame; j79/jaudit rank painters cheaper. Tab tap script −23 %, layout −20 %.
+- Dropped: tab-only stage/HUD skip (DOM differs, see report).
+- Tests: worker tests OK; coop-e2e 59/59; play-perf PASS fold + iPad.
+## Next (successor) — see report HANDOVER: staging Worker + coop-lag, leak, Sang buổi, structural render plan.
+SẴN SÀNG KIỂM: see last commit of the branch (report).
