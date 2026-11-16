@@ -30,6 +30,7 @@ IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
 - TOP BAR on the one page (jk4, design-scale p2): the time block flows as ONE wrapping row of whole items (18 px lines) and `kitTcFit` scales it
   down together (zoom 5 % steps, min 80 %) when it would be taller than her name block — so the bar has the spread's height and the page box
   under it is the spread's (582x623 both modes).
+- BOTTOM BAR on the one page (owner 16/11 13:25Z (C), review/phone-bars; sample §0b): the 8 tabs are TWO ROWS OF 4 big buttons (36 px rows, label .86 rem via j57 `--tfs`; `tabsFit` sets `cols = ceil(n/2)` when `kitView().pages===1`, the spread keeps ONE row) and Sang buổi is ONE tall 84 px button spanning both rows at the right (p1 `:where(.kv1) .bar .main`). One rule in the kit bar, no per-screen CSS. The page box under the bars is ~25 px shorter than the spread's — the price of the bigger buttons (see the phone-bars report).
 - TAB MODE (j6 `KIT_TABMODE` = maptab, cardtab): every tab-dependent class of `.game` is reset before EVERY panel render; the open tab's renderer
   sets its own. Test: `dev/test/tab-pairs.js` (every tab→tab pair, real taps, 1180x820 + 755x1000).
 - OPEN (design-scale-p2 review, phase 4): kit modals / page content still carry per-mode `:where(.kv1/.kv2)` rules carried over by the phase-3 codemod, which this RULE forbids: jpdlg `.kpdlg` grid, j79 dawn `.kpanel` paddings + `.kpsc` scene-person card (kpid grid, kstgrid, kpfaces, modal placement), j93 kitReward `.kmtabs/.kmbloom/.kmbox`, jpm `.kpm-list`, jgpick `.kipd2` two-column, p1 `.art .pcb` (kv2), jtoil `.toilw` (KIT REQUEST: one-page toilette), jcooptimer chip. Each must become ONE rule for both modes (the spread's); `grep -n 'kv3:.kv' dev/build` lists them.
@@ -3104,7 +3105,7 @@ Every rank-up, on every road, gives the new rank's FULL SET as real items (conso
 ## 66. RANK-CHANGE FX (owner 15/11 20:05Z #13) — `dev/build/j93.js` kitEdict / kitGloom
 - **66.1 rank up** = `kitEdict` (edict, frame swap, chip old → new); the light gold glow on the new frame is PAINTED (KIT §68):
   `kitFxBurst("glowburst", frame)` + `kitFxLight("glow-gold", frame)` (screen blend on the dark stage); the sparks at the new chip are painted
-  `spark` + `petal-gold` (j93 `kmSpark` now calls kitFxBurst for every caller: edict, tablet, reward chest). The old CSS gradient sweep and the
+  `spark` + `petal-peach` (j93 `kmSpark` now calls kitFxBurst for every caller: edict, tablet, reward chest). The old CSS gradient sweep and the
   code-drawn dots are removed (reviewer r1: owner rule "effects painted, code only animates"). The chest's inner light (`.kmlight`), the bloom
   glow (`.kmglow`) and the incense ember / smoke of the day shift are the painted `orb` / `ember` / `smoke` atlases (CSS only scales / fades / warms them).
 - **66.2 rank down / cold palace** = `kitGloom({title, sub, who, from, to})` (to = -2 → cold palace): `kmRankDownHTML(p,from,to)` adds her portrait
@@ -3413,9 +3414,7 @@ mood (liked / did not like) and the rewards; sound + light by mood; a new-day pi
 ## 67. LẬT THẺ BÀI · kitCardFlip — the end-of-day card-flip scene (owner 15/11 20:50Z, review/cardflip) — `dev/build/jflip.js` (after jsfx, before j84)
 Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). Played once per week after the tablet is decided
 (j8 `flip` → j75 `S.nightWhy` → j93), through the kit motion queue `kmPush`, after the week panel / Tuần lục book / title (never over them).
-- Painted art only (gpt-2-6, folder ba4aecfe, CDN `img/kit/`): `cf-plate-ksp` (Kính sự phòng, empty lacquer tray, lamplight) → `cf-plate-emp`
-  (same tray on the Emperor's desk), each as a landscape 1600x1200 and a portrait 1200x1600 picture (`-p`, used when screen w/h < .95);
-  `cf-hand-emp` (his hand, yellow dragon sleeve, no face, cut out); `cf-seal-thitam` (cinnabar seal THỊ TẨM). Code only moves / fades / filters them.
+- Painted art only (gpt-2-6, folder ba4aecfe, CDN `img/kit/`): `cf-gplate-ksp` (Kính sự phòng, the Emperor's tray: vermilion lacquer rim with gilded gold peonies, pale champagne-gold silk floor, soft lamplight; owner 16/11 15:05Z: gold is allowed but natural lacquer + gilt in the game's painting style, never flat yellow) → `cf-gplate-emp` (same tray on the Emperor's desk), each as a landscape 1600x1200 and a portrait 1200x1600 picture (`-p`, used when screen w/h < .95; the portrait tray is taller so 20+ cards plus name tags fit); `cf-hand-emp` (his hand, yellow dragon sleeve, no face, cut out); `cf-seal-thitam` (cinnabar seal THỊ TẨM). The older yellow `cf-plate-*` files stay on the CDN only for builds that predate review/tham-flip-ui. Code only moves / fades / filters them.
 - Geometry: `BAL.cardFlip.plates.{l,p}` = per picture the tray FLOOR (measured from the pixels) + the tray RIM (safe zone). The plate box is
   fitted so the rim stays on screen; card slots are computed in the same box → cards sit on the floor at every aspect (2..20+ cards: the
   biggest card that fits in 1–5 rows). The plate's own picture lies over the cards in soft-light (painted lamplight on them) + a soft shadow.
@@ -3445,6 +3444,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
   before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
 - REVEAL LIGHT = THE WHOLE FRAME GLOWS + SLOWER (owner 16/11 12:00Z, review/cardflip-glow2; replaces the running ring light of cardflip-glow): the old reveal sat on the portrait and hid the face, the next one ran painted glows round the ring ("như chơi casino"). Now `edgeLight()` (only caller: `showRes`) adds ONE `.kcf-halo` div hugging the frame ring's rectangle (`BAL.cardFlip.edge.path`, fractions of the card; `rad` corner, `blur`/`spread` glow size, `op` / `lo` opacity range): a soft warm gold box-shadow glow + thin bright rim around the WHOLE frame at once, nothing moving along it, no sparks. It breathes slowly (`edge.breath` 3600 ms ×`slow`, opacity only, until the scene closes). Nothing is drawn over the portrait window. Gọn / reduced motion: the same glow stands still. RULE for the whole game: a frame light is always the whole frame glowing, never a light that runs / chases / orbits a frame. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
+- NAME UNDER EVERY CARD + HER CARD'S WHITE GLOW (owner 16/11 14:00Z + 14:05Z, review/tham-flip-ui): under every card the kit name tag `kitNameRank(rank, name, rankColour, me, small)` (KIT §48: rank in its jewel tone over the name, no title, plain vivid text, no glow: the tray floor is a pale silk surface = the paper rule 48.1h; HER name = bold black `.kmy`; unknown = rank + "???"). The tag is `.kcf-tag` inside the card box (`.kcf-c`, container `cqw`), outside the filter part (`.kcf-f`) so it never gets the card's dark drop-shadow; the picked card shows the larger kit size right under its frame. (review/tham-flip-ui-r1: top 79 % of its box, below the frame; `coverTags()` in jflip hides the tag of any other card that the picked tag / tassel column would cross, because the result chip already names the pick.) `grid()` reserves `TAGH` px under every card and never makes a column narrower than `TAGW` (so two names never overlap). One card per person: `cfDemo` caps n at the roster. HER card on the tray (`.kcf-mine`, from the very start, static, whole frame, never over the portrait, hidden when it becomes the gold reveal halo): a soft WHITE glow so she knows it at a glance; co-op: each player's own card (`c.p===S`).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
@@ -3494,7 +3494,7 @@ content the first time it plays). Sources + recipes: `dev/fxwork/` (gens.txt = e
 ### 68.2 Registry (sizes = one download each)
 | kind | name | source / alpha | size |
 |---|---|---|---|
-| sprite | petal-plum, petal-peach, petal-lotus, osmanthus, leaf, ash, paper, coin, lantern, jade, petal-gold, gift (4: box closed/open, silk bundle, ribbon), letter (4), gift-hands (3, 288 px, 37.7 KB: hands holding the ribboned box / untied box / silk bundle; gpt-2-6 YMLPpsoWeC→O6fk3CMynm, Bh4zaXUoQR, iGqlYRY3uK, bg removed) | gpt-2-6 sheet on slate → images_remove_background | 10–22 KB |
+| sprite | petal-plum, petal-peach, petal-lotus, osmanthus, leaf, ash, paper, coin, lantern, jade, gift (4: box closed/open, silk bundle, ribbon), letter (4), gift-hands (3, 288 px, 37.7 KB: hands holding the ribboned box / untied box / silk bundle; gpt-2-6 YMLPpsoWeC→O6fk3CMynm, Bh4zaXUoQR, iGqlYRY3uK, bg removed) | gpt-2-6 sheet on slate → images_remove_background | 10–22 KB |
 | sprite | snow, spark, ember, orb, streak, smoke, incense, glowburst, lotuslight | painted on black → luma alpha (slice.py) | 4–16 KB |
 | sprite | ink, brush | painted on white → ink alpha | 34–42 KB |
 | light | candle, glow-gold, moonlight, lantern-red, divine, fireworks | gpt-2-6 still on black → Kling 2.5 loop (start = end frame) → light.sh | 6–45 KB per clip (fireworks 180 KB) |
@@ -3551,6 +3551,9 @@ Dress pick (jtoil Hồi 1: tap = select + strip, buttons Cài / Mặc / Đeo / T
 Bên mình pick tiles (card + act) · shop picture card (price row + detail) · reward box rows / shelf (j93) · event item tag (§64) · bully demand tile (jtsb) ·
 Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · veil picker (jveil) · other people's worn slots (jk2b kitWearSlots → card with who).
 Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.
+## 83. ONE ANIMATION PACE · BAL.pace (owner 16/11 15:05Z "mấy cái animation là tôi muốn nó chậm thôi"; review/anim-pace)
+`BAL.pace` (jbal2.js, = 1.75) is the ONLY speed knob for key-moment animations (OD:L1267 one core). JS: `kitPace(ms)` (Gọn / reduced motion keep the old ms); CSS: `var(--pace)` on :root (set from BAL.pace). Scaled: the whole j93 motion kit (`animation` durations/delays >= 0.3 s, `kmStage.later`, scene timers), BAL.reveal (box/chest/item reveals), BAL.cardFlip.slow, night-end beats (BAL.nightEnd), kpromo preview, podium j90, week dawn (p1 .dsky/.lan/.sun/.dbox + bell + calendar), gloom/bloom/alarm fx, kfx red/night/dark, srvToast, jbuoi. NOT scaled: micro feedback (< 0.3 s: taps, dialog open/close, hover, ripples), infinite loops, stat-fx (already 2.7 s), map unroll (KIT_MAP_MS), result toasts (already 7-9 s). New animations: write the old-speed number and multiply by BAL.pace / var(--pace); never hard-code a second speed.
+
 ## 74. BUỔI TRANSITION · buoiShift (owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) — `dev/build/jbuoi.js` (last module)
 Registry: §74 (KIT_NUMBERS.md; was "§71 to confirm"). Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain). Page turn now exists ONLY in Tuần lục (review/page-curl2).
 `curtain()` → `buoiShift()` (called after the state changed, never awaited, never in sync): one fixed overlay `#buoitr` (z 36, pointer-events none), ~1.7 s (dawn 2 s):
@@ -3558,6 +3561,7 @@ tinted ink-wash veil thins out over the scene that already holds the next buổi
 to the new buổi position) · brush-calligraphy title "Buổi trưa" on an ink-wash plate + kit seal (§39 kitSeal) · night→morning = dawn variant (painted mist + first light + glowburst).
 Tap anywhere = skip (listener only; the tap still reaches the game). Gọn / reduced motion / weak device (`kfStill`) = one quick tint fade (260 ms), bots / quiet = nothing. The buổi bell / night-watch sfx stays.
 Art (Magnific gpt-2-6, recipes `dev/fxwork/buoi/slice_buoi.py`, CDN `img/fx/`, on demand, group fx): `buoi-wash` (ink alpha, used as CSS mask so one file serves all colours, 38 KB), `buoi-mist` (luma alpha, 42 KB), `buoi-hills` (ink alpha, 35 KB), `buoi-orb` (sun | moon, 15 KB) = 130 KB, downloaded the first time a buổi changes.
+UPDATE 16/11 (anim-pace): FULL SCREEN at every size (tint + ink wash + vignette cover the viewport; sky band + title centred, sized by vmin), clearer, pace x BAL.pace (~3 s, dawn ~3.5 s). SEASON variants (SEAK: xuan petals / ha lotus + warm haze / thu maple leaves / dong snow + cold haze) and FESTIVAL variants (the game's own FEST table: newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, trungthu, trungcuu, dongchi, giaothua; name shown under the title) use the kit particle layer's painted sprites + a tint; optional painted band skin `img/fx/buoi-band-<key>.webp` (BTR_ART lists existing: thu, trungthu); missing = today's per-buổi look. Test hook `window.__btrVar={sea,fest}`.
 Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §74 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
 
 
@@ -3768,9 +3772,10 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
 
 
 ## 77. kitStageRail · THE stage icon rail (owner 16/11, shot 1b571e3a; review/goal-strip-fix) — `dev/build/jrail.js` (after jgoal, before j84)
-ONE vertical column of small round kit icon buttons at the LEFT edge of every stage (her room, every place, co-op), under the scene title
-(`#sc-t`), never over a face (left gutter only: 40 px buttons, 34 px when the screen is ≤ 430 px high, 6 px apart). Kit look: card paper,
-gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = something new.
+ONE vertical column of small SQUARE kit icon buttons (rounded corners 8 px, the same corner as the kit ✕ `.kit-x`) at the LEFT edge of every stage (her room, every place, co-op), under the scene title
+(`#sc-t`), never over a face (left gutter only: 44 px buttons = the minimum tap target, on every screen height, 6 px apart). Kit look: card paper,
+gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot (the only round part: it is a dot, not a button) = something new.
+SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình vuông hoặc chữ nhật … đừng làm hình tròn"): NO icon button in the game is round. Every icon button is a rounded-corner square (radius 8 px, like `.kit-x`) or a rectangle; `border-radius:50%` is only for dots, avatars/medallions, seals, sliders' thumbs and decoration, never for something you tap. New round tap target = FAIL.
 - Order: (1) **Lịch tháng** `img/kit/mo-calendar.webp` → `kitMonthCalOpen()` (§58; the desk calendar in her room's corner is retired: one place).
   (2) **Chat** (co-op only) — added by review/coop-chat through the API, `order:20`, icon `img/kit/ico-chat.webp`.
   (3) **Mục tiêu chương** `img/kit/mo-edict-closed.webp` → `kitGoalDetail()` (§72.3); dot while the chapter goal / step changed since she

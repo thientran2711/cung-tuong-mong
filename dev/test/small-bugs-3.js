@@ -10,7 +10,7 @@
    wrap    no stage / top-bar text set one letter per line (place subtitle), the state row stays inside the bar
    bl      Bổng lộc rule card = one kit table (.kpkb), no legacy .pcrow rows
    Prints JSON {vp, checks:{name:[problems]}, info, errs}; exit 1 when any check has problems. */
-const {chromium}=require('playwright');const fs=require('fs');const crypto=require('crypto');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const crypto=require('crypto');
 const [,,URL,VP,SHOTS]=process.argv;const m=/^(\d+)x(\d+)@?([\d.]*)$/.exec(VP);const W=+m[1],H=+m[2],DPR=+(m[3]||1);
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function cache(ctx){const CD=process.env.CACHE;if(!CD)return;fs.mkdirSync(CD,{recursive:true});

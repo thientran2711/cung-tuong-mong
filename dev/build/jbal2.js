@@ -99,7 +99,14 @@ Object.assign(BAL,{srvSpyHit:25});
    shake = box rattles · pause = box open, nothing yet · rise = one item rises out of the box into the spotlight · hold = it stays, glowing in
    its grade colour, name + grade chip readable · shelf = it shrinks onto the row under the box · list = gap before the list + Nhận.
    gainMin = a single kitGain reveal cannot be tapped away before this. Lose (KIT §54.2): fall = the lost item fades and falls; coins = silver fly. */
-Object.assign(BAL,{reveal:{shake:420,pause:700,rise:550,hold:1300,shelf:380,list:350,gainMin:900,fall:1300,coins:900}});
+/* ONE ANIMATION PACE (KIT §83, owner 16/11 15:05Z "mấy cái animation là tôi muốn nó chậm thôi, để mắt tôi nhìn còn kịp", rule OD:L1267 one core):
+   BAL.pace is the ONLY speed knob for key-moment animations (buổi transition, card flip, reveals, promotion / demotion, week dawn, stat fx, toasts…).
+   1 = the old speed; 1.75 = every key moment lasts 1.75x as long. JS: kitPace(ms) (Gọn / reduced motion keep the old fast ms); CSS: var(--pace) on :root.
+   Micro feedback (< 0.3 s: taps, dialog open/close, hover) is NOT scaled. Never used for sync: animations run after the state is applied. */
+Object.assign(BAL,{pace:1.75});
+function kitPace(ms){try{return typeof kfStill==="function"&&kfStill()?ms:Math.round(ms*(BAL.pace||1))}catch(e){return ms}}
+try{document.documentElement.style.setProperty("--pace",String(BAL.pace))}catch(e){}
+Object.assign(BAL,{reveal:{shake:Math.round(420*BAL.pace),pause:Math.round(700*BAL.pace),rise:Math.round(550*BAL.pace),hold:Math.round(1300*BAL.pace),shelf:Math.round(380*BAL.pace),list:Math.round(350*BAL.pace),gainMin:900,fall:Math.round(1300*BAL.pace),coins:Math.round(900*BAL.pace)}});
 /* TRUE EVIDENCE (jtruth, owner 15/11): a spy who finds no wrong learns her habits instead: +spyKnowB on the next scheme against her for
    spyKnowW weeks. Frame defence (the framed one clears herself): clearBase + Tai mắt × clearMat, + ksB with a Kính sự phòng night in the
    last ksW weeks, + wB a loyal (≥60) maid as witness, + tyB Thái y (own doctor or Y thuật ≥3), + evB per evidence (max 2) on the framer;
