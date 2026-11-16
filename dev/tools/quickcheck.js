@@ -85,9 +85,10 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
   /* tab ms = median over the tabs of each tab's faster of its 2 visits (noise on a shared box only ever adds time) */
   const per={};for(const t of tabs.filter(Boolean))per[t.tab]=Math.min(per[t.tab]??1e9,t.ms);
   await g.evaluate(()=>{const t=document.querySelector('#tabs [data-tab="act"]');if(t)t.click()});await sl(300);
-  const rend=await g.evaluate(async n=>{const o=[];for(let i=0;i<n;i++){const t0=performance.now();render();o.push(Math.round(performance.now()-t0));await new Promise(r=>setTimeout(r,60))}return o},PG.renderReps);
   const bu=await within(60e3,g.evaluate(BUOI),'buổi');await sl(500);
-  const lt=await g.evaluate(()=>window.__lt.slice());const e=await errsOf(g,errs);
+  const lt=await g.evaluate(()=>window.__lt.slice());   /* long tasks counted up to here: the render() repeats below are not part of play */
+  const rend=await g.evaluate(async n=>{const o=[];for(let i=0;i<n;i++){const t0=performance.now();render();o.push(Math.round(performance.now()-t0));await new Promise(r=>setTimeout(r,60))}return o},PG.renderReps);
+  const e=await errsOf(g,errs);
   return {openMs,playableMs:playable,tabs,tabMs:med(Object.values(per)),render:rend,renderMs:Math.min(...rend),buoi:bu,buoiMs:bu.ms,longTasks200:lt.filter(x=>x>200).length,longTaskMaxMs:lt.length?Math.max(...lt):0,longTasks50:lt.length,errors:e.slice(0,5)}}finally{await ctx.close()}}
  try{const NR=[],OR=[];const haveOld=OLD&&fs.existsSync(OLD);
   for(let i=0;i<PG.runs;i++){NR.push(await perf('new'));if(haveOld)OR.push(await perf('old').catch(e=>({err:e.message})))}
