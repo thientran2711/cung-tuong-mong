@@ -22,24 +22,24 @@
   "#kboot[data-o=l]{background:linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18)),url("+T+"-l.webp) left 25%/cover no-repeat,#f3e6d6}"+
   "#kboot[data-o=m]{background:linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18)),url("+T+"-m.webp) left center/cover no-repeat,#f3e6d6}"+
   "#kboot.out{opacity:0;pointer-events:none}"+
-  "#kboot .kbp{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:min(440px,86%);box-sizing:border-box;padding:14px 18px 16px;"+
+  "#kboot .kbtp{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:min(440px,86%);box-sizing:border-box;padding:14px 18px 16px;"+
   "background:rgba(255,250,240,.90);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid #c9a46a;border-radius:14px;box-shadow:0 10px 32px rgba(60,25,10,.28)}"+
-  "#kboot:not([data-o=p]) .kbp{left:auto;right:4%;bottom:auto;top:50%;transform:translateY(-50%);width:min(440px,44%)}"+
-  "#kboot b{display:block;font:700 22px/1.25 'Noto Serif',Georgia,serif;color:#8f5f0c}"+
-  "#kboot small{display:block;margin-top:2px;font-size:13px;color:#6b5643}"+
-  "#kboot i{display:block;position:relative;margin-top:10px;height:8px;border-radius:6px;border:1px solid #d2b071;background:#f6ead6;overflow:hidden;box-shadow:inset 0 1px 2px #3a210f22}"+
-  "#kboot i:after{content:'';position:absolute;top:0;bottom:0;left:0;width:35%;border-radius:6px;background:linear-gradient(90deg,#b0402c,#c98a2a);transform:translateX(-100%);will-change:transform;animation:kbootRun 1.6s ease-in-out infinite}"+
+  "#kboot:not([data-o=p]) .kbtp{left:auto;right:4%;bottom:auto;top:50%;transform:translateY(-50%);width:min(440px,44%)}"+
+  "#kboot .kbtp b{display:block;font:700 22px/1.25 'Noto Serif',Georgia,serif;color:#8f5f0c}"+
+  "#kboot .kbtp small{display:block;margin-top:2px;font-size:13px;color:#6b5643}"+
+  "#kboot .kbtp i{display:block;position:relative;margin-top:10px;height:8px;border-radius:6px;border:1px solid #d2b071;background:#f6ead6;overflow:hidden;box-shadow:inset 0 1px 2px #3a210f22}"+
+  "#kboot .kbtp i:after{content:'';position:absolute;top:0;bottom:0;left:0;width:35%;border-radius:6px;background:linear-gradient(90deg,#b0402c,#c98a2a);transform:translateX(-100%);will-change:transform;animation:kbootRun 1.6s ease-in-out infinite}"+
   /* transform only: runs on the compositor, never makes the busy parser re-layout */
   /* failure card (watchdog): the kit button look (.kbtn / .kbtn.alt, j79) mirrored, since the kit may never have loaded */
-  "#kboot .kbx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}#kboot .kbx button{flex:1 1 150px;min-height:42px;padding:8px 14px;border-radius:8px;cursor:pointer;"+
+  "#kboot .kbtx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}#kboot .kbtx button{flex:1 1 150px;min-height:42px;padding:8px 14px;border-radius:8px;cursor:pointer;"+
   "font:700 15px/1.2 'Noto Serif',Georgia,serif;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a}"+
-  "#kboot .kbx button.alt{background:#fffaf0;color:#2a1a12;border-color:#d2b071;box-shadow:none}"+
-  "#kboot .kbe{margin-top:8px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail i{display:none}"+
-  "@keyframes kbootRun{to{transform:translateX(286%)}}@media (prefers-reduced-motion:reduce){#kboot i:after{animation:none;transform:none;width:30%}#kboot{transition:none}}";
+  "#kboot .kbtx button.alt{background:#fffaf0;color:#2a1a12;border-color:#d2b071;box-shadow:none}"+
+  "#kboot .kbte{margin-top:8px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail .kbtp i{display:none}"+
+  "@keyframes kbootRun{to{transform:translateX(286%)}}@media (prefers-reduced-motion:reduce){#kboot .kbtp i:after{animation:none;transform:none;width:30%}#kboot{transition:none}}";
  function shape(w,h){return w<h?"p":w/h<=1.4?"m":"l"}
  function make(w,h){if(!d.getElementById("kboot-css")){var s=d.createElement("style");s.id="kboot-css";s.textContent=css;(d.head||d.documentElement).appendChild(s)}
   var c=d.createElement("div");c.id="kboot";c.setAttribute("aria-busy","true");c.setAttribute("data-o",shape(w,h));
-  c.innerHTML='<div class="kbp" role="status"><b>Cung Tường Mộng</b><small>Cửa cung đang mở</small><i></i></div>';return c}
+  c.innerHTML='<div class="kbtp" role="status"><b>Cung Tường Mộng</b><small>Cửa cung đang mở</small><i></i></div>';return c}
  /* HOST (rot.js calls this with the design box it fits like the frame) */
  window.__kbootHost=function(box,w,h){var c=make(w,h);box.appendChild(c);window.__kbootHostDrop=function(){if(c.parentNode)c.parentNode.removeChild(c);window.__kbootHostDrop=null}};
  var q=location.search||"";
@@ -53,9 +53,9 @@
  window.addEventListener("unhandledrejection",function(e){if(!window.__kbootDone){var r=e.reason;keep("promise: "+(r&&(r.message||r.name)||r))}});
  /* WATCHDOG: never leave the player on the cover (or the bare skeleton): the game script did not finish, or 15 s passed → a failure card */
  function fail(why){if(window.__kbootDone||c.classList.contains("fail"))return;c.classList.add("fail");c.setAttribute("aria-busy","false");
-  var p=c.querySelector(".kbp");p.innerHTML='<b>Cửa cung chưa mở được</b><small>'+(why==="slow"?"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc tải lại.":"Máy này chưa mở được bản game. Xin tải lại; nếu vẫn vậy, xóa bộ nhớ đệm rồi tải lại (sổ đã ghi vẫn giữ nguyên).")+'</small>'+
-   '<div class="kbx"><button type="button" data-kb="re">Tải lại</button><button type="button" class="alt" data-kb="clr">Xóa bộ nhớ đệm rồi tải lại</button></div>'+
-   (ERR.length?'<div class="kbe"></div>':"");var e=p.querySelector(".kbe");if(e)e.textContent=ERR.slice(-2).join(" · ");
+  var p=c.querySelector(".kbtp");p.innerHTML='<b>Cửa cung chưa mở được</b><small>'+(why==="slow"?"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc tải lại.":"Máy này chưa mở được bản game. Xin tải lại; nếu vẫn vậy, xóa bộ nhớ đệm rồi tải lại (sổ đã ghi vẫn giữ nguyên).")+'</small>'+
+   '<div class="kbtx"><button type="button" data-kb="re">Tải lại</button><button type="button" class="alt" data-kb="clr">Xóa bộ nhớ đệm rồi tải lại</button></div>'+
+   (ERR.length?'<div class="kbte"></div>':"");var e=p.querySelector(".kbte");if(e)e.textContent=ERR.slice(-2).join(" · ");
   p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;b.disabled=true;
    if(b.getAttribute("data-kb")==="re")return location.reload();
    /* the stale-shell risk: drop the app-shell caches and the service worker; pictures (ctm-assets, content-keyed) and saves stay */
@@ -64,7 +64,9 @@
    Promise.all(jobs).then(null,function(){}).then(function(){var u=location.href.replace(/([?&])kfresh=\d+&?/,"$1").replace(/[?&]$/,"");location.replace(u+(u.indexOf("?")<0?"?":"&")+"kfresh="+Date.now())})})}
  var dog=setTimeout(function(){fail("slow")},15000);
  /* the host may drop its copy once this one has painted */
- if(inFrame)requestAnimationFrame(function(){requestAnimationFrame(function(){try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}})});
+ /* ...after its backdrop picture is decoded here too (else the swap shows a bare paper for a moment); at most 3 s */
+ if(inFrame){var o=c.getAttribute("data-o"),pic=new Image(),hd=false,hdrop=function(){if(hd)return;hd=true;requestAnimationFrame(function(){requestAnimationFrame(function(){try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}})})};
+  pic.onload=pic.onerror=hdrop;pic.src=T+(o==="p"?"":"-"+o)+".webp";if(pic.complete)hdrop();setTimeout(hdrop,3000)}
  var done=false;
  window.kbootDone=function(){if(done)return;done=true;
   /* the game script stopped before its end (a parse error on an older browser, or a throw): fail now, never show the half-built page */
