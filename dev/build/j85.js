@@ -16,7 +16,7 @@ const VIRB={cong:{5:{danh:4}},dung:{1:{sac:2},3:{sac:2},5:{sac:2,danh:4}},ngon:{
 const ARTB85={ky:{1:{tamco:1},2:{tamco:1},4:{tamco:2},5:{tamco:2}},hoa:{2:{th:3},4:{th:5},5:{th:5}},vu:{4:{sac:2}},theu:{2:{th:2},4:{th:3}}};
 /* ---- the effect table, level by level; every line is applied by code in this file or the module named ---- */
 const ARTFX={
- cam:["Tài +2 · mỗi tháng tự đàn: Sức +1","Tài +2 · Đánh đàn ở Ngự hoa viên dễ thành hơn (mỗi bậc +4)","Tài +2, Danh +3 · mở «Đàn khúc Phượng cầu hoàng»: Sủng +12 khi thành","Tài +2 · dạy con đàn: mỗi tháng các con Tài +1","Tài +2, Danh +6 · mỗi tháng có Sủng từ 40: tiếng đàn làm Hoàng thượng vui lên một mức (một tháng trong hai)"],
+ cam:["Tài +2 · mỗi tháng tự đàn: Sức +1","Tài +2 · Đánh đàn ở Ngự hoa viên dễ thành hơn (mỗi bậc +4)","Tài +2, Danh +3 · mở «Đàn khúc Phượng cầu hoàng»: Sủng +12 khi thành","Tài +2 · dạy con đàn: mỗi tháng các con Tài +1",`Tài +2, Danh +6 · mỗi tháng có Sủng từ ${BAL.virx.camSung}: tiếng đàn làm Hoàng thượng vui lên một mức (một tháng trong hai)`],
  ky:["Tài +2, Tâm cơ +1 · dò la, mưu kế dễ thành hơn (mỗi bậc +2)","Tài +2, Tâm cơ +1","Tài +2, Danh +3 · mở «Đánh cờ với Hoàng thượng»: Sủng +5, Danh +2, Tâm cơ +1","Tài +2, Tâm cơ +2","Tài +2, Tâm cơ +2, Danh +6"],
  thi:["Tài +2 · Làm thơ dâng lên dễ thành hơn (mỗi bậc +4)","Tài +2 · đầu mỗi mùa thơ truyền ra ngoài: Danh +1","Tài +2, Danh +3 · mỗi tháng thơ đến tay Hoàng thượng: Sủng +1","Tài +2 · Bàn chuyện triều chính dễ thành hơn (mỗi bậc +3)","Tài +2, Danh +6 · mỗi tháng Sủng +2 (thay +1)"],
  hoa:["Tài +2 · thọ yến Thái hậu tháng mười dễ thành hơn (mỗi bậc +8)","Tài +2, Thái hậu +3 · đầu mỗi mùa tranh được truyền xem: Danh +1","Tài +2, Danh +3 · mở «Vẽ chân dung tặng Thái hậu»: Thái hậu +10","Tài +2, Thái hậu +5 · đầu mỗi mùa Danh +2 (thay +1)","Tài +2, Danh +6, Thái hậu +5"],
@@ -28,7 +28,7 @@ const VIRFX={
  cong:["đồ thêu, món nấu tự làm: phẩm +4","phẩm +8 · học Thêu, Nấu: thêm 1 tiến bộ mỗi buổi","phẩm +12 · thành phẩm lên thêm 1 bậc (tới Tinh xảo)","phẩm +16","phẩm +20 · thành phẩm lên thêm 2 bậc · Danh +4"],
  dung:["Sắc +2 · yến tiệc, lễ nghi, thỉnh an dễ thành hơn (+3)","yến tiệc, lễ nghi, thỉnh an +6","Sắc +2 · yến tiệc, lễ nghi, thỉnh an +9","yến tiệc, lễ nghi, thỉnh an +12","Sắc +2, Danh +4 · yến tiệc, lễ nghi, thỉnh an +15"],
  ngon:["trò chuyện, kết giao, tố giác dễ thành hơn (+3)","trò chuyện, kết giao, tố giác +6 · lỡ lời: mỗi thiệt hại bớt 1","Tâm cơ +1 · trò chuyện, kết giao, tố giác +9","trò chuyện, kết giao, tố giác +12 · lỡ lời: mỗi thiệt hại bớt 2","Danh +4 · trò chuyện, kết giao, tố giác +15"],
- hanh:["Đức +3","Đức +3, Thái hậu +3","Đức +3 · mỗi tháng Đức +1 (đến 80)","Đức +3, Thái hậu +3, Hoàng hậu +5","Đức +3, Danh +4"]};
+ hanh:["Đức +3","Đức +3, Thái hậu +3",`Đức +3 · mỗi tháng Đức +1 (đến ${BAL.virx.hanhCap})`,"Đức +3, Thái hậu +3, Hoàng hậu +5","Đức +3, Danh +4"]};
 /* ---- new arts: Thêu thùa, Nấu nướng ---- */
 (function(){if(!ARTS.find(a=>a.k==="theu"))ARTS.push({k:"theu",n:"Thêu thùa",st:"tai",u:"Bậc 3: bán đồ thêu, Bạc +5 mỗi tháng"},{k:"nau",n:"Nấu nướng",st:"tai",u:"Bậc 3: canh bổ dâng Hoàng thượng, Ân tình +1 mỗi tháng"});
  ARTDO.theu="Tài: thêu thùa, may vá; đồ thêu làm quà, bán lấy bạc";ARTDO.nau="Tài: nấu canh, làm bánh; giữ Sức, dâng món được Ân tình";
@@ -111,7 +111,7 @@ function addVir(p,k,g){vNorm(p);const V=VIR.find(x=>x.k===k);if(!V)return;p.virp
   if(p===S)log(`<span class="g">${V.n} (${V.full}) lên bậc ${l}.</span> ${VIRFX[k][l-1]}`)}
  if(p.vir[k]>=5)p.virp[k]=0}
 function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
- if(mode==="self"){if(!can(2)||S.suc<25)return;apply({suc:-15});spend(2);addVir(S,k,1);log(`Tự học ${V.n}. Tiến bộ +1.`)}
+ if(mode==="self"){if(!can(2)||S.suc<BAL.sucNeed.self)return;apply({suc:-15});spend(2);addVir(S,k,1);log(`Tự học ${V.n}. Tiến bộ +1.`)}
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
  save();render()}
 window.lessonVir=lessonVir;
@@ -139,10 +139,10 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   if(A.theu>=3)add("bac",A.theu>=5?10:5);if(A.nau>=2)add("suc",A.nau>=4?4:2);if(A.nau>=3)add("an",A.nau>=5?2:1);
   if(season){if(A.thi>=2)add("danh",1);if(A.hoa>=2)add("danh",A.hoa>=4?2:1)}
   if(A.y>=5)kidsOf(p).forEach(k=>{if(k.hp!=null)k.hp=Math.min(100,k.hp+BAL.eff.j85.hpV85Month)});
-  if(A.cam>=5&&(p.sung||0)>=40&&S.emp&&S.emp.mood>0&&roll(50))S.emp.mood--;
+  if(A.cam>=5&&(p.sung||0)>=BAL.virx.camSung&&S.emp&&S.emp.mood>0&&roll(50))S.emp.mood--;
   if(Object.keys(f).length){if(me){apply(f);ev+=`Tài nghệ trong tháng: ${fmt(f)}. `}else ap(p,f)}
   /* Đức: Hạnh bậc 3 keeps it rising; it moves Thái hậu / Hoàng hậu and the servants' Lòng */
-  if(virtueBonus(p,"hanh").month&&ducOf(p)<80)withDeed("giữ đức hạnh (Hạnh bậc 3)",()=>me?apply({duc:1}):ap(p,{duc:1}));
+  if(virtueBonus(p,"hanh").month&&ducOf(p)<BAL.virx.hanhCap)withDeed("giữ đức hạnh (Hạnh bậc 3)",()=>me?apply({duc:1}):ap(p,{duc:1}));
   const d=ducOf(p),q=queenP(),tf=d>=BAL.ducLv.up?1:d<BAL.ducLv.down?-1:0;
   if(tf){if(me){S.th=cl(S.th+tf,-100,100);if(q&&q!==S)S.hh=cl(S.hh+tf,-100,100)}else if(q&&q!==p)p.hh=cl((p.hh||0)+tf,-100,100)}
   const lf=d>=BAL.ducLv.staffUp?1:d<BAL.ducLv.staffDown?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
@@ -171,13 +171,13 @@ artTabHTML=function(){vNormAll();const t2=whyTime(2);
  let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Học với thầy tốn bạc, tiến nhanh; tự học không tốn bạc, tiến chậm. Phi tần khác cũng học theo cùng luật.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
  h+=`<div class="ph"><span><b>Tứ đức</b> · bốn môn của nữ nhi trong cung, không phải thanh số: mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.</span><span>Đức ngươi: <b>${S.duc}</b> <button class="lnk ladi" data-v85tab="duc" title="Luật Đức" aria-label="Xem luật Đức">ⓘ luật Đức</button></span></div><div>`;
  h+=VIR.map(V=>{const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"`,"Phát bạc cứu giúp cung nhân nghèo",`Chắc chắn · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   return card(`${V.n} · ${V.full}`,"",l,S.virp[V.k],l+2,V.d,VIRFX[V.k],B,V.k)}).join("")+`</div>`;
  h+=`<div class="ph"><span><b>Tài nghệ</b> · cầm, kỳ, thi, họa, vũ, y, thêu, nấu.</span></div><div>`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5;
-  const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+  const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
    S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   const extra=(a.k==="theu"||a.k==="nau")?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100, bậc phẩm ${artBonus(S,a.k).tier}`:"";

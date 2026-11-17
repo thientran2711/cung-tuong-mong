@@ -9,7 +9,7 @@
    Display (no new kit part): the result card gets one more row of the SAME kit .kb grid (§7), label "Vì sao", markup of the
    existing "Ghi chú" row (.kr.kr-note > .krv > .kitem > .ef.n); the Sổ ghi line that shows the number gets the same sentence
    appended (<span class="past kwl">Vì sao: …</span>). Old saves: nothing new is stored except log text. */
-const WHYL=[];let WHYN=0;let WHY_TICK=0;const WHY_CTX=new Map();
+const WHYL=[];let WHYN=0;let WHY_TICK=0;const WHY_CTX=new Map();lifeStore("WHYL why-notes (people of that life)",()=>{WHYL.length=0;WHY_CTX.clear()});
 let WHYN_T=0;/* tick id: one per task, so the notes of one act merge; cleared on the next microtask */
 function whyT(){if(!WHY_TICK){WHY_TICK=1;WHYN_T++;Promise.resolve().then(()=>{WHY_TICK=0;try{whyFlushLate()}catch(e){}WHY_CTX.clear()})}return WHYN_T}
 function whyKey(p){return p==="th"||p==="emp"?p:p&&p===S?"me":p&&p.id!=null?"r"+p.id:p&&p.sid!=null?"s"+p.sid:p&&p.name||"?"}

@@ -20,7 +20,7 @@
    5. ÂN TÌNH: gloss (how it is earned, what it does, the existing monthly fade j8 anMonth); the Emperor card shows Sủng and Ân tình as kit
       person-card chips (Ân tình with its bar). The top bar stays the header-danh layout (owner ≈17:50Z: left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng,
       right Bạc·Sức): no extra cell; Ân tình also shows in the stage "Ân sủng" panel (owner-approved 17:55Z). */
-Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,duc:6,hhEv:1},gift:{an:30,rel:40,th:40,askW:2}});
+Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,duc:6,hhEv:1,weakSuc:30/* review/one-core-jkc: Sức below this = she is weak (the odds line names the cut) */},gift:{an:30,rel:40,th:40,askW:2}});
 /* ---------- poisons ---------- */
 IT.docngam=IT.docngam||{n:"Độc ngấm dần",kd:"Độc dược",d:"Bỏ vào đồ ăn: Sức -25, ốm ba tháng · bị khám ra là có tội",pr:60,il:1,tg:[]};
 IT.phanhuy=IT.phanhuy||{n:"Phấn hủy nhan",kd:"Độc dược",d:"Trộn vào đồ ăn, phấn sáp: Sắc -8 · bị khám ra là có tội",pr:45,il:1,tg:[]};
@@ -48,7 +48,7 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/3);L.push([`${pgN
 function pgOdds(a,t,e){const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/4),tc=Math.round((a.tamco||0)/4),gr=pgGrade(e)*BAL.pg.grade;
  const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),3,92);
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
-  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<30)F.push([`Sức ${pgNm(a)} dưới 30`,-15]);
+  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<BAL.pg.weakSuc)F.push([`Sức ${pgNm(a)} dưới ${BAL.pg.weakSuc}`,-15]);
  const cp=cl(oSee(t,true)-4*(facN(a)-1),5,95);return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:-120});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
