@@ -827,3 +827,4 @@ LESSONS s36: owner wants ONE complete reviewed proposal, never item-by-item ques
 - (17/11 20:30Z) s37: painted-cabinet kit re-map (OD 21:55Z) given to kit-display-room worker session_01UV1SzisVVpBnxyKZsxjCfY in review/kit-display-room-r2 (with xa xỉ→words); waits on C display-bg.md.
 - (17/11 20:27Z) s37 WITHDREW the xa xỉ→words order (wrong: per-item numbers are owner-ruled OD L1365/L1382/17/11 15:45Z); r2 = painted-cabinet re-map + kit lux parts only. Lesson: run prio1.sh before every order, even small ones.
 - (17/11 22:00Z) OWNER: no code-drawn picture anywhere (OD 22:00Z) — C audit + paint for care minigames ordered; main kit swaps art in when URLs arrive.
+- (17/11 22:05Z) OWNER: up to 5 items per display group (OD 22:05Z) → C-AG shelf + C cabinet + main kit display-room slots (5 per compartment).
