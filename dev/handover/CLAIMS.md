@@ -504,3 +504,4 @@
 | it-key-guard (opus bug): npcMonthly j8.js:399 IT[e.k].tg undefined crash on live + 25-file family | review/it-key-guard | main s27 | session_01UV1SzhtmrVzHNMoDZ13Wac | RUNNING | 17/11 01:08Z |
 | road-b2-fix review r2 (opus, BIG) of db5c49f4 (incl. road-onecore 6a1112d1) | review/road-b2-fix-r2 | B | session_01N1tNP5i7LqTvSFFBdZwQiG | RUNNING | 17/11 01:10Z |
 | coop-thin-guest AUDIT (opus, read-only + plan; owner OK 17/11 01:15Z): list every place the guest computes game state locally, propose part-by-part migration order to host-authoritative thin guest; report to owner before building | — (reports/coop-thin-guest-audit.md) | main s27 | session_01UV1Szm3WZRYzKoRi6wvQZD | RUNNING | 17/11 01:16Z |
+| kit-size #10 timed-choice clock chip off screen (sonnet keeper; night-final KIT REQUEST) | review/kit-size-10 | main s27 | session_01UV1SziEvZm2cX5xAAQe8Yq | SẴN SÀNG KIỂM 8ab00ede (report reports/kit-size-10.md) | 17/11 |
