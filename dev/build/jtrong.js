@@ -80,7 +80,7 @@ function trGreet(who,host,opt){opt=opt||{};const B=BAL.trong,th=host==="th",A=th
  const n=opt.noRep?0:trGreetN(who,host),repF=Math.max(B.repMin,1-(th?A.rep:B.hhRep)*n);
  const reg=th?(who===S?S.th:(who.th||0)):(who===S?S.hh:aff(host,who)),cap=th?A.cap:B.hhCap,capF=reg>cap?Math.max(0,1-(reg-cap)/B.capSpan):1;
  const shift=eh==="gian"?-2:0;const raw=base*vm*rkF*mH*mW*repF*capF+shift;const gain=cl(Math.round(raw),-4,20);
- const o=cl((th?A.o:B.hhO)+Math.round((vm-1)*10)+(eh==="gian"?-10:eh==="vui"?5:0),20,95);const scold=(th?A.scold:B.hhScold)+(eh==="gian"?2:0)+(vm<1?1:0);
+ const o=cl((th?A.o:B.hhO)+Math.round((vm-1)*10)+(eh==="gian"?-10:eh==="vui"?5:0),20,BAL.odds.hi);const scold=(th?A.scold:B.hhScold)+(eh==="gian"?2:0)+(vm<1?1:0);
  const H=th?"Thái hậu":"Hoàng hậu",X=[];
  if(th&&S.thO.archK)X.push(`${H} ${A.n.toLowerCase()}`);
  if(trongKnown(th?"th":host)){const hit=trongHit(th?"th":host,tags);if(hit.length)X.push(`${H} trọng ${hit.join(", ")}: ${vm>=1?"quý lễ này hơn":"không ưa"}`)}

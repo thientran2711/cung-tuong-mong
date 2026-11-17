@@ -46,7 +46,7 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/3);L.push([`${pgN
  if(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust)L.push([`Cung nữ trung thành của ${pgNm(t)} nếm trước`,-BAL.pg.maid]);return L}
 /* the one formula (her card, the roll, every NPC): {o, F: kit "Vì sao" factors, cp: chance that a failed try is traced back (caught())} */
 function pgOdds(a,t,e){const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/4),tc=Math.round((a.tamco||0)/4),gr=pgGrade(e)*BAL.pg.grade;
- const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),3,92);
+ const raw=BAL.pg.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=oddsCl(Math.min(Math.round(odA(a,raw)),92));
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
   [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<BAL.pg.weakSuc)F.push([`Sức ${pgNm(a)} dưới ${BAL.pg.weakSuc}`,-15]);
  const cp=oddsCl(oSee(t,true)-4*(facN(a)-1));return{o,F,cp}}

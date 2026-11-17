@@ -127,7 +127,7 @@ function ktDom(k,E){ktSync(k);return Object.entries(E.f).reduce((s,[f,w])=>s+k[f
 function ktEl(k,E){return k.alive&&k.age>=E.a&&(E.f.tw?(k.sex==="m"||k.vt):true)}
 function ktEdge(k,E,prep){return ktDom(k,E)-ktExp(k.age)+(prep?KT.prep:0)+(E.f.tw||ktD(k).n>0?ktD(k).n:0)}
 function ktPEx(d){return cl(Math.round((21-KT.exc+d)/41*100),0,100)}function ktPPoor(d){return cl(Math.round((21+KT.poor-d)/41*100),0,100)}
-function ktOdds(k,E,prep){return cl(ktPEx(ktEdge(k,E,prep)),3,97)}
+function ktOdds(k,E,prep){return oddsCl(ktPEx(ktEdge(k,E,prep)))}
 function ktList(E){return allKids().filter(([k])=>ktEl(k,E))}
 const KTG={ex:{fond:6,sung:3,danh:2},top:{fond:3,sung:2,danh:2},ok:{fond:1},poor:{fond:-3,danh:-1},skip:{fond:-2}};
 function ktGain(){return `con xuất sắc: Hoàng thượng thương con +${KTG.ex.fond}, Sủng +${KTG.ex.sung}, Danh +${KTG.ex.danh} (đứng đầu thêm thương +${KTG.top.fond}, Sủng +${KTG.top.sung}, Danh +${KTG.top.danh})`}
@@ -146,7 +146,8 @@ function ktRun(e,ch){const E=KTE[e];if(!E||!S)return;S.kt53t=S.turn;const L=ktLi
  for(const [k,v] of L){if(!v)continue;if(npcPrep[v.id]==null)npcPrep[v.id]=ktLive(v)&&(v.bac||0)>=KT.prepC&&roll(ktPT(v)[2]*100)?(ap(v,{bac:-KT.prepC}),1):0;
   if(ktPEx(ktEdge(k,E,npcPrep[v.id]))<20&&ktPPoor(ktEdge(k,E,npcPrep[v.id]))>40&&!hasT(v,"Kiêu ngạo")&&roll(30))npcSkip[k.name]=1}
  for(const [k,v] of L){const prep=v?npcPrep[v.id]:ch===1;const skip=v?npcSkip[k.name]:ch===2;
-  if(skip){res.push({k,v,r:"skip",s:-99});continue}const s=ktEdge(k,E,prep)+R(41)-20;res.push({k,v,s,r:s>=KT.exc?"ex":s<=KT.poor?"poor":"ok"})}
+  if(skip){res.push({k,v,r:"skip",s:-99});continue}const d=ktEdge(k,E,prep);let s=d+R(41)-20;
+  /* ODDS CAP: the noise draw keeps its result inside the one cap (capRes) */const ex=capRes(s>=KT.exc,ktPEx(d)),po=!ex&&capRes(s<=KT.poor,ktPPoor(d));if(ex)s=Math.max(s,KT.exc);else if(po)s=Math.min(s,KT.poor);else s=cl(s,KT.poor+1,KT.exc-1);res.push({k,v,s,r:ex?"ex":po?"poor":"ok"})}
  const top=res.filter(x=>x.r==="ex").sort((a,b)=>b.s-a.s)[0];let rev="";
  for(const x of res){const p=x.v||S,g=Object.assign({},KTG[x.r]);if(x===top)for(const kk in KTG.top)g[kk]=(g[kk]||0)+KTG.top[kk];ktApply(x.k,p,g);x.g=g;
   x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&roll(50))rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}

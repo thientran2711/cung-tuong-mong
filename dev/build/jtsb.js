@@ -45,8 +45,8 @@ function tsbSev(){const x=Math.random();return x<TSB_THU_W[0]?1:x<TSB_THU_W[0]+T
 
 /* ---------------- defences shared by every planned harm (one rule for everyone) ---------------- */
 function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;g+=petGuard(t);if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust))g+=8;return g}
-function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)-tsbGuard(t)),5,90)}
-function tsbFireO(a,t){return cl(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),5,90)}
+function tsbThuO(a,t){return oddsCl(Math.min(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)-tsbGuard(t)),90))}
+function tsbFireO(a,t){return oddsCl(Math.min(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),90))}
 
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */
 A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:"Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm",
@@ -86,7 +86,7 @@ function tsbWant(a,t){/* the most valuable thing t really owns that a would want
  const L=(t.inv||[]).map((e,i)=>[e,i]).filter(([e])=>{if(!e||e.h||e.wk&&!e.wk.n)return false;const it=IT[e.k];if(!it&&!e.wk)return false;if(it&&(it.keep||it.il||it.evi||it.pr<30))return false;if(e.nt||e.g===4)return false;return true})
   .map(([e,i])=>{const it=IT[e.k];let v=e.wk?[20,30,45,70][e.wk.ti||0]:it.pr;if(it&&it.rk>rkOf(a)+1)v*=.4;if(vain&&it&&it.kd==="Trang sức")v*=1.4;if(e.w)v*=1.1;return [e,i,v]}).sort((x,y)=>y[2]-x[2]);return L[0]||null}
 function tsbBulPay(a,t){return Math.min(50,Math.max(0,Math.floor((t===S?S.bac:(t.bac||0))*.4)))}
-function tsbBulO(a,t,ev){return cl(Math.round(odA(a,42+(rkOf(a)-rkOf(t))*7+(a.tamco||0)/6+(a.danh||0)/10+(ev?evG(a,t)*6:0)-(typeof witOf==="function"?witOf(t)/6:0)-(t===S&&S.shield?12:0))),5,92)}
+function tsbBulO(a,t,ev){return oddsCl(Math.min(Math.round(odA(a,42+(rkOf(a)-rkOf(t))*7+(a.tamco||0)/6+(a.danh||0)/10+(ev?evG(a,t)*6:0)-(typeof witOf==="function"?witOf(t)/6:0)-(t===S&&S.shield?12:0))),92))}
 function tsbBulOK(a,t){return rkOf(a)>rkOf(t)&&!t.out&&(tsbBulPay(a,t)>=10||!!tsbWant(a,t))}
 A("batnat","Ép nộp của",{c:{},ok:(a,t)=>tsbBulOK(a,t),o:(a,t)=>tsbBulO(a,t),x:"cậy phẩm cao đòi bạc hoặc một món quý nàng đang có",
  f:(a,t)=>tsbBulNpc(a,t,"batnat")});
