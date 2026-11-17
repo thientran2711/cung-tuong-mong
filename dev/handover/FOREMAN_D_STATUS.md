@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 17/11 18:57Z — FOREMAN D is now #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3/8; opened by #10 at rollover; send result lines to #11)
+last wake: 17/11 19:00Z — FOREMAN D #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3/8) — PICKUP; see end of file
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -425,3 +425,4 @@ HOUSEKEEPING: other sessions' bad rebases left conflict markers twice today → 
 LINEAGE: state 'depth N/8' in every wake/handover line (START_FOREMAN line 14). #11 = depth 3.
 Hourly wake: #10's trig_01NQj22RN3xNZEJVdRUpcnUz is deleted at handover → #11 creates its own.
 - (17/11 18:57Z) #10 STOPPED (depth 2/8): successor Foreman D #11 = session_01964izFTp8oV5DHeadkPMRn (depth 3) opened with the repo attached (a first try session_01964izDdor9bBzQv6NbJLc5 had no repo → archived); #10 hourly trigger trig_01NQj22RN3xNZEJVdRUpcnUz deleted. Workers report to #11.
+- (17/11 19:00Z) PICKUP by FOREMAN D #11 = session_01964izFTp8oV5DHeadkPMRn, depth 3/8 (parent #10 session_01964izDpDf5BCzpbaaQ1Sxq). START_CTX ≈ 6 % of 1M (get_session reads 0; own estimate ~60k after start reading) → rollover at 31 %, ceiling 60 %. RUNNING 4 (balance-2-r1 session_01964izCu8Je1GMvrc1moQH6, face-w404-r1 r2 session_01964izEvirrwGUKDneEGtXa, day-khac-r1 r2 session_01964izEHVzU6h14EnvhUm8C, odds-cap session_01964izGRJM7BJPNcVuaqdcU), free 8; each told ONCE "Foreman D is now #11; report there". Hourly wake trig_015npxn6vwM7g2hkMqoJUSD5 (:52). Markers in dev 0. No new ORDER from MAIN since 17:35Z; OD tail 18:33Z–19:10Z (mood bar, Chạnh lòng, 18-feeling set, Vụng lip) = not D's. D PASSes for main unchanged (residence-seats-r1 a6e0fbc2 + kc2val-home-r1, cycle-roll-r1, ch14-goals-r1, night-ledger-r1).
