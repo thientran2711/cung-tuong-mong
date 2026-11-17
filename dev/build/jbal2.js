@@ -465,7 +465,21 @@ Object.assign(BAL,{ag:{on:1,
     seat    a vacant Hoàng hậu seat: % per tuần that he decides = b + m × (months vacant − mourn), [lo, hi], × duty, × th when Thái hậu lives
             (was the flat j8 roll 12) */
  emp:{summon:[90,65],custom:[40,20],duty:{chamchinh:1.25,hieuthao:1.25,datinh:.75,mesac:.75},want:[.5,2],
-  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}}}});
+  met:{w:.15,miss:.5,keep:2,cap:3,n:4},seat:{b:6,m:3,lo:6,hi:40,mourn:3,th:1.2}},
+ /* AG3 maids reach the Emperor by their own deeds (jagmaid.js; design reports/npc-agent.md §3.3 / §3.4, §5 AG3; owner OD 16/11 17:15Z):
+    st      a staff maid's looks / letters drawn once (data, like every person's Sắc / Tài; the player maid has her own) [lo, hi]
+    tea     "Quỳ dâng trà" where he passes (the player's card j42 and an NPC maid's deed, ONE rule): odds = b + Sắc / sac + Tài / tai + his mood;
+            "Hầu trà khi ngự giá" on her master's night adds her regard / nt (her "Hoàng thượng để ý" IS her sung, §3.4);
+            g = his regard gained on success (+ Sắc / gs, srvNotice), fail = master's trust (Chủ tin / lòng) lost on a spilt cup
+    jeal    the master sees him look at her: % = b + master's malice / d; trust lost = BAL.net.n.misJealTin by the master's nết (one table with show-why)
+    decay   his regard for a maid fades per month (was S.nt − 2 / month, j42)
+    ch      her weight in his night pool (the same terms as a consort's nightCh: regard / sung + Sắc / sac, cap); only maids he MET (S.emp.met)
+    night   a maid's night: his regard + b + q / 2 (q = Sắc / 20 + luck, rivalNight's own formula); rise = her Sủng as a consort = b + regard / d
+            (srvRise's own conversion: was 15 + nt / 5)
+    send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill / wants an ally) against keeping it (BAL.ag.routine)
+    decline the player maid begs off his summons: his regard lost */
+ maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:4,sac:12,cap:70},
+  night:{b:2},rise:{b:15,d:5},send:.15,decline:10}}});
 
 /* BAL.mind — jmind (one mind for every person, review/npc-mind; moved here from jmind.js, r1 fault 3 ONE CORE)
    like      regard gained on top when a gift is one the receiver likes (jdis BAL.dis.aff is the one dislike penalty)
