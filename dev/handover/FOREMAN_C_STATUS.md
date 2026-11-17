@@ -1,5 +1,23 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
+NEXT FOREMAN C SESSION: ROOT-5 = (id in the line below once opened) (opened by ROOT-4 ~10:25Z 17/11, depth 4). ROOT-4 stops; its trigger trig_01Tgrv9ofbb5dfhkqZNjzAdk disabled.
+## HANDOVER (Foreman C ROOT-4 session_011xDdVSQC3Gf8WhM6WW38QF → ROOT-5, ~10:25Z 17/11)
+Why: context 31.6% (used_tokens 316k; START_CTX ~6% → limit 31%). Depth 3 → successor depth 4 (allowed). Read: this block + the ROOT-4 log lines below it (08:38Z–10:22Z); CLAIMS rows 'C ROOT-4' + W4e/W5d/W6f rows.
+OWNER: silent all ROOT-4. Do ONLY what she says. Art goes live after C LOOKS at the OLD|NEW sheet (no owner review). All maid workers HOLD uploads until C OKs (ordered 08:52Z).
+RUNNING C art (maid consort-tier redraw, ONE table rank-sample/maid-consort-tier-design-table.md; m22 pinned hexes ty1 #B9C1F0 ty2 #7C88DC ty3 #4C58B8):
+- Lead #6 session_011xDdVS87fDNLJMJGzeiVWL (opens successors; tell it you are its foreman).
+- W4e session_011xDdVPcfZBTUBL5um1QC4E (~25%+, rolling soon → lead opens successor): a18 m01–m26 ty1–3 DONE+LIVE (m22 ×3 periwinkle redo OK'd CT11); a36 ty1 m01–m26 live (m22, m12 redos OK'd CT11); a36 ty2 m01–m12 OK'd CT11 except REDO m02-ty2-a36 (orange ≈ m04 → saffron marigold-gold) in CT12; CT12 = a36 ty2 m13–m26 + ty3 → then a51 m01–m26.
+- W5d session_011xDdVS67MZHvG6dfdxn9we: a18 m27–m52 DONE; a36 m27–m49 OK'd (E1–E9; all uploaded or uploading); E10 = a36 m50–m52 (last) → a36 m27–m52 complete.
+- W6f session_011xDdVRXvrX6q3VqFCVAtDF: a51 m27–m29(ty1/ty2) live (W6e); a51 m30–m36 OK'd 19 → upload; REDO m32-ty3 (teal → ivory gold) + m35-ty1 (purple → mustard) (same old a26 errors: use current a26 refs); owed sheet: a51 m29-ty3; continues a51 m37–m52.
+- a26 maid consort-tier = COMPLETE + LIVE (m01–m52 ×3).
+- Watch every sheet: same maid = same colour every tier/age; m±2 distinct; prop in hand; mature beautiful faces at a36/a51.
+DONE by ROOT-4: SHOW-WHY LIVE main 9391f9a (08:55Z; CDN review wiped; worker+reviewer archived). AG3 maids LIVE main 7e264081 (10:22Z; reviewer QWAu + worker Nfbt archived).
+NEXT non-art (main s30 orders, each own worker + reviewer; GATE ZERO prio1.sh first): greeting name rule (history check) → AG-MEET → voice by tính tình. AG3 reviewer follow-ups for main (REQUEST below): (A) AG3b NPC-maid deeds in the ledger, (B) maid-life NPC consort illness audit, (D) "lòng 45" typed number.
+Still with main: KIT REQUEST register 'Vì sao' row; wire jlevel scene-thanhtai-<k>. Idle waiting owner: FP #5 QLLo, tiers ShLv. WAITING: item-list-ration art (Foreman B report).
+Push helper /home/user/wt/push.sh (commits dev/handover in /home/user/wt/c4).
+REQUEST to main (FOREMAN C ROOT-4 10:24Z): AG3 LIVE 7e264081. Reviewer follow-ups (not blocking, report review-npc-agent-ag3-r1.md): (A) AG3b — NPC maid tea/errand/feast deeds not in the ledger at place/khắc (owner's own OD 18:20Z example) → recommend as next AG item; (B) maid-life NPC consorts ill 15–18% of nights vs ~5% → audit srvMonth/srvEndTurn vs monthTick/endTurn; (D) "lòng 45" typed number → BAL. Say which C takes (C can run them after the s30 queue).
+
 FOREMAN C SESSION ROOT-4 = session_011xDdVSQC3Gf8WhM6WW38QF (opened by ROOT-3 ~08:30Z 17/11) · START_CTX ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60% · lineage depth 3/8 · own hourly wake (:32) below.
+- 10:22Z AG3 PASS 7e264081 (review-npc-agent-ag3-r1.md: jealousy one table BAL.net.n.misJealTin; BAL.ag.maid.send .15→.05; srvIllWorld fix) → C fast-forwarded main 9391f9a9..7e264081. Reviewer + AG3 worker ARCHIVED. ROOT-4 at 31.6% → rollover.
 - 10:15Z C LOOKED W6f a51 m30–m36 (21): 19 OK upload; REDO m32-ty3 (teal → ivory gold) + m35-ty1 (purple → mustard) — same as old a26 errors, W6f told to use current a26 refs; m29-ty3 still owed on a sheet.
 - 10:12Z C LOOKED W5d E9 a36 (m44-ty2/ty3 redo, m48 ×3, m49 ×3): all OK → upload. E10 = m50–m52 last.
 - 10:05Z C LOOKED W4e CT11 (17): 16 OK upload (m22 a18 ×3 + a36 ty1 periwinkle on pinned hex; m12-ty1-a36 jade; a36 ty2 m01 m03–m12); REDO m02-ty2-a36 (orange ≈ m04 → saffron marigold-gold). CT10 14 live.
