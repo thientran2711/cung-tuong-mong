@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8e6dcb7e","t":"2026-11-17T01:16Z","c":"Món đồ cũ không rõ lai lịch trong rương không còn làm kẹt tháng (bản lưu cũ, chơi chung).","b":"9fb4e0b6473b","h":[{"s":"f53bdade","t":"2026-11-15T21:22Z","c":"PROGRESS place-colour-r1: final review state"}]};
+window.CTM_BI={"s":"7662ae56","t":"2026-11-17T01:24Z","c":"Món đồ cũ không rõ lai lịch trong rương không còn làm kẹt tháng (bản lưu cũ, chơi chung).","b":"d4fd43d4e567","h":[{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1870,6 +1870,8 @@ function itCleanL(L){if(!Array.isArray(L))return L;let n=0;for(let i=L.length-1;
   if(!e||typeof e!=="object"||e.k==null||e.k===""){L.splice(i,1);n++;continue}if(typeof e.k!=="string")e.k=String(e.k);if(IT_ALIAS[e.k]){e.k=IT_ALIAS[e.k];n++}}return n}
 function itClean(){let n=0;try{const P=[S].concat(typeof rivals!=="undefined"&&Array.isArray(rivals)?rivals:[]);
   for(const p of P){if(!p||typeof p!=="object")continue;if(p.inv!=null&&!Array.isArray(p.inv))p.inv=[];n+=itCleanL(p.inv);
+   /* p.vl is the worn veil (jveil, a piece with a key); jvoice kept its line memory in S.vl until this fix: move it out, never wear/chest it */
+   if(p.vl!=null&&(typeof p.vl!=="object"||typeof p.vl.k!=="string")){if(p===S&&typeof p.vl==="object"&&!Array.isArray(p.vl))S.vmem=Object.assign({},p.vl,S.vmem||{});p.vl=null;n++}
    if(Array.isArray(p.wdPawn))for(const x of p.wdPawn)if(x&&x.e&&IT_ALIAS[x.e.k])x.e.k=IT_ALIAS[x.e.k];
    if(p.dress&&p.dress.k&&IT_ALIAS[p.dress.k])p.dress.k=IT_ALIAS[p.dress.k]}
   if(S&&Array.isArray(S.shop))S.shop=S.shop.map(k=>IT_ALIAS[k]||k).filter(k=>Object.prototype.hasOwnProperty.call(IT,k))}catch(e){console.error("itClean",e)}return n}
@@ -2214,7 +2216,7 @@ function resolveTonight(){const t=S.tonight;S.tonight=null;if(!t||t==="me"||!t.a
    kSay(sp, ls, s, o): fills {goi} {Goi} {xung} {Xung} {ten} (listener's title) {Ten} in s.
    kLine(key, pool, o): picks a line from a pool without repeating any line used for that key in the last BAL.voice.noRepeat tuần
      (least-recently-used when the pool is exhausted). pool = array of strings, or an object {warm:[…], cool:[…], cold:[…], any:[…]}
-     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vl (personal, old saves
+     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vmem (was S.vl until review/it-key-guard: S.vl is the worn veil of jveil, the clash put this memory in the chest; j8 itClean moves an old one) (personal, old saves
      start empty, co-op safe). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
 (function(){
 const V=()=>BAL.voice;
@@ -2299,7 +2301,7 @@ function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m|
      it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
   if(o.shared!=null){let h=0;const sd=key+"|"+o.shared;for(let i=0;i<sd.length;i++)h=(h*31+sd.charCodeAt(i))|0;let t3=0;try{t3=now()*3+(S.buoi|0)}catch(e){}
     const line=untag(L[((Math.abs(h)+t3)%L.length+L.length)%L.length]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
-  let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
+  let mem={};try{S.vmem=S.vmem||{};mem=S.vmem[key]=S.vmem[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
   /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
      → the same line, so a rebuild does not use up the pool */
@@ -46337,7 +46339,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9fb4e0b6473b";window.CTM_BUILD=BUILD;
+const BUILD="d4fd43d4e567";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
