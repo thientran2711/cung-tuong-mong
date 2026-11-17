@@ -135,7 +135,7 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
 /* ---------- the help hồi templates (j72 follow-ups, fu:1: never dealt at random; one task = one hồi, OD:L1243) ----------
    Every option has a cost AND a loss; the bạc road and the Sức road weigh the same (OD:L582: bạc priced by her rank, BAL.nroad.bac). */
 (function(){if(typeof T7!=="function")return;const C=q72C,O=q72O,B=()=>BAL.nroad;
- const bac=()=>{const R0=B().bacRk;let i=0;for(const r of R0)if(S.rank>=r)i++;return -B().bac[Math.min(i,B().bac.length-1)]};
+ const bac=()=>{if(typeof S==="undefined"||!S)return 0;/* load time (batch-d8: jreg regEach visits these late T72 entries before a game exists; 0 = not a bạc step, as before jreg) */const R0=B().bacRk;let i=0;for(const r of R0)if(S.rank>=r)i++;return -B().bac[Math.min(i,B().bac.length-1)]};
  const nr=X=>{const v=X.A&&X.A.o;return v&&v.nr?v.nr:null};
  const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n}${A&&A.t?` «${nrFill(plain(nrS(A.t,A)),X.A&&X.A.o)}»`:""}`:X.A.n};
  head.toString=()=>"Tuyến truyện riêng của một người trong cung";/* j72 logs plain(T.t) when the asker is gone */
