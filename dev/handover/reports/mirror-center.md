@@ -1,43 +1,34 @@
-PRIORITY #1 CHECK: OD 13 (mirror view approved 17:53Z; no centring rule before) | main 16 sites (jtoil) | review/* 0 | claims s35 row only (this one) -> new owner bug, nothing to reuse.
+PRIORITY #1 CHECK: OD 13 | main 16 sites (jtoil) | review/* mirror-center only | claims s35 row (this one) -> r2 of own branch.
 
-# mirror-center (worker, sonnet) - SẴN SÀNG KIỂM
+# mirror-center r2 (worker, sonnet) - SẴN SÀNG KIỂM ea709be7
 
-Branch `review/mirror-center` = origin/main d5ea786d + **ad226ed0** (site rebuilt, pushed). Owner bug (OD ~18:00Z): the face in the makeup mirror sits far LEFT of the mirror centre.
+Branch `review/mirror-center` = origin/main d5ea786d + ad226ed0 (r1) + **ea709be7** (r2). Answers reviewer FAIL r1 point by point.
 
-## Root cause (two stacked errors, both fixed in jtoil.js, no new kit part)
-1. The close-up camera (`toilReveal`) put the figure in the middle of the SCREEN, but the bronze mirror of the plate (img/toil-mirror-room.webp) is not in the middle of the screen: glass centre vs face differed by 60-290 css px depending on viewport. Fix: glass centre is computed from the plate's own cover + background-position maths (`TOIL_PLATE`, glass centre x = 628/1200 measured on the painting); the standing figure is slid sideways (`--ktdx` on `.ktrv-fig`) so the face axis lands on it, camera then zooms about that point -> face = glass = screen centre.
-2. The face centre used everywhere was toil-fit's MOUTH point (face-box centre in the makeup board). Measured against the face-mesh (img/mk-fit eye rings), the mouth sits on average 1.2 % of the portrait width right of the true axis (up to 5.8 %); the face-box centre 2.5 % (up to 7.1 %), over 6480 portraits. Fix: ONE helper `toilAxisX(file)` = eye midpoint of the mesh (0..1 of picture width; null while the mesh is not loaded -> old fallback). Used by the camera, `toilGeom` (makeup board glass; re-anchors if the mesh arrives after the board opened) and `kitFaceZoom`.
-Makeup look untouched (colours, layers, scoring); small avatar frames untouched (toil-looks5 / kit-fx-register owns them).
+## Root cause (reviewer was right, my r1 test was circular)
+1. **The fit files lie.** I overlaid mk-fit eye rings and the toil-fit mouth on the portraits themselves: for c25-t1 they sit ~9 % of the picture width right of the painted face (eyes/mouth visibly outside the face). Across 229 portraits the skin-pixel face centre is on average **3.0 % of the picture width LEFT of the mesh eye midpoint (sd 2.0 %, up to 10.4 %)**; at Fold zoom ~24 px mean, ~80 px worst. r1 centred that wrong axis, so the face still looked left (the owner's and reviewer's symptom). My r1 "eye pixel check" searched only inside windows around the mesh, so it could not see it.
+2. Glass axis: re-measured by left/right symmetry of the frame on the painting (rows 60-470): x = 629.5-631 of 1200 (r1 had 628). Now 630/1200 (`TOIL_PLATE.gx`).
+3. Dark-pixel eye detection was tried and rejected (picks hair/earrings, -8 % bias).
 
-## Scan: face axis vs frame centre, css px (+ = face right of centre). Test `node dev/test/mirror-center.js <url> <WxH@dpr>` (live DOM, close-up result, 'dep' look)
-| viewport | close-up BEFORE (face - glass) | close-up AFTER |
+## Fix (jtoil.js only; kit text KIT.md §60 'FACE AXIS')
+- `toilEyePx(file)` (async, once per picture, cached): face centre = centroid of the skin pixels (colour test) in the face band (eyes-6 % .. mouth+2 % of the height, x window from the fit) of the HEAVIEST run of skin columns (a hand/sleeve beside the face is dropped; c01-t1 had a hand). Needs CDN CORS (present). Fit data only chooses rows/x window.
+- `toilAxisX(file)` = that pixel centre; until it is read: mesh eye midpoint + `TOIL_AXIS_BIAS` -0.03 (measured mean). Used by the close-up camera (`toilReveal`, figure slid by `--ktdx` onto the glass axis, camera re-aims when the pixels arrive), the makeup board `toilGeom` (re-anchors if the data arrives late; `toilMkPre` preloads at the dress step) and `kitFaceZoom`.
+- Makeup look, colours, scoring, small avatar frames untouched. Vertical placement unchanged.
+
+## Test (rewritten, pixel based): `node dev/test/mirror-center.js <url> <WxH@dpr> <shotdir|->`
+Glass axis measured IN THE TEST from the painting (symmetry) and mapped through the real plate rect; face measured from the portrait picture pixels and mapped through the real portrait rect; 6 portraits (c09-t2, c28-t2, c01-t1, c25-t1, c14-t3, c10-t1), real makeup reveal, look 'dep'. dc = game's centroid vs glass, d = a second estimator (cheek-to-cheek extent; ears/neck skew it on turned heads, informative only, bound 30).
+| viewport | |dc| per portrait (css px) | mean |
 |---|---|---|
-| Fold 755x1000 | +66.1 (25.8 % of face width) | -0.1 |
-| iPad 1180x820 | -58.6 (22.9 %) | 0.0 |
-| iPad Pro 1366x1024 | -19.1 (5.9 %) | 0.0 |
-| 412x1058 | +27.5 (19.7 %) | +1.0 |
-| 390x844 | +34.4 (25.9 %) | -0.1 |
-(before differs in sign by viewport because the plate crop moves; after: all <= 1 px, 'diem' look identical. Screen-centre offset after = glass offset.)
+| Fold 755x1000 | 0.1 0.1 1.4 1.8 2.1 3.9 | 1.6 |
+| iPad 1180x820 | 2.2 4.4 2.9 -0.1 2.0 2.1 | 2.3 |
+| iPad Pro 1366x1024 | 2.9 2.3 1.7 2.2 2.6 2.4 | 2.4 |
+| 412x1058 | 0.9 1.2 0.2 1.0 1.2 1.1 | 0.9 |
+| 390x844 | -0.1 2.2 0.7 1.0 0.1 2.0 | 1.0 |
+FAIL rule: any |dc| > 6, mean > 4. Honest limit: 'centre of a turned head' is ambiguous by ~1 % of the picture width (~8 px on the Fold) between estimators; the reviewer should eyeball the shots. I looked at c09, c10, c14 (iPad): the line through the forehead mark/nose bridge splits the face evenly in the glass; c01 (hand beside the face) and c25 (frontal) fine.
+- Before (r1/main) in the same pixel terms: c25-t1 ~59 px left on iPad (seen), c28/c09 ~12-37 px left on the Fold as the reviewer found.
+- quickcheck --runs 3: **PASS** 186 s, old save ok, core gates PASS, perf render 218/225, tab 309/396, buổi 989/1118, tasks>200ms 14/17 (new/live). toil-draw 755x1000: PASS 10.
+- Shots on CDN (wipe after verdict): img/_review/mirror-center/r2-{755x1000,1180x820}-{c25-t1,c09-t2,c01-t1}.jpg under https://ctm-img.victoria-tntt.workers.dev/ . r1 shots were wiped.
+- Reviewer point 5 (blush smear right of the mouth): not touched (colour layer follows the toil-fit mouth, which is itself right-shifted on some portraits; separate family 'fit files off', worth a ticket: re-fit toil-fit/mk-fit from pixels).
 
-| frame (all 6480 portraits, offsets are systematic, face LEFT of centre) | BEFORE mean / p90 / max px | AFTER |
-|---|---|---|
-| makeup board glass 755x1000 (rx 189) | 23.5 / 38.7 / 63.6 | 0 (face axis = glass centre by construction) |
-| board 1180x820 + 1366x1024 (rx 169) | 21.0 / 34.6 / 56.9 | 0 |
-| board 412x1058 (rx 94) | 11.6 / 19.2 / 31.6 | 0 |
-| board 390x844 (rx 88) | 10.9 / 17.9 / 29.5 | 0 |
-| kitFaceZoom 200 px (sample only, no live caller) | 6.4 / 12.4 / 23.7 | 0 |
-Other round frames found: small avatars (.kpor/md round crops, owned by toil-looks5) - not touched.
-
-## Tests
-- `node dev/test/mirror-center.js` (new, FAILs when |face - glass| > max(8 px, 3 % face width)): 5 viewports x looks dep+diem, bad 0, page errors 0.
-- `bash dev/tools/quickcheck.sh HEAD --runs 3`: **QUICKCHECK PASS** 170 s, open 1704 ms, old save ok, core gates PASS, perf render 191/174, tab 401/349, buổi 1044/1030, tasks>200ms 17/15 (new/live).
-- `node dev/test/toil-draw.js 755x1000@1`: PASS 10 (board still anchors on mk-fit, careful/sloppy hands, no mesh fallback, no page errors).
-- Shots (CDN, delete after verdict): img/_review/mirror-center/after-755x1000.jpg, after-1180x820.jpg, after-1366x1024.jpg, after-412x1058.jpg (https://ctm-img.victoria-tntt.workers.dev/img/_review/mirror-center/after-755x1000.jpg etc.). I looked at 755 and 1180: face centred between the symmetric ring.
-- KIT.md §60: FACE AXIS rule added.
-
-## Caveats for the reviewer
-- Glass centre x = 628/1200 is measured by eye on the painting (ring symmetric in the shots); if the plate is repainted, update `TOIL_PLATE`.
-- Vertical placement is unchanged (the owner only reported left/right).
-- The makeup board is shifted by up to ~20 px at iPad size toward the true axis; this is the same centring the owner asked for, but the reviewer may want to eyeball one board shot (my toil-draw shots had no CDN pictures, so the board itself was verified by number, not by eye).
-
-START_CTX ~ 12 %, now ~ 30 % of window; no rollover needed.
+## Open for MAIN
+The fit files being off by up to 10 % probably also hurts every other place that uses toil-fit/mk-fit (makeup colour layers, veil, scar). Not changed here.
+START_CTX ~12 %, now ~55 %: no more work needed, stop after this report.
