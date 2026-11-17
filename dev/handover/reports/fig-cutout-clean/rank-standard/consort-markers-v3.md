@@ -12,3 +12,4 @@ v3 gens: t2 P3uWeNn42C, t3 s78inUcl8e, t5 P3uWe3c42C, t7 79aGVNDJAL. Kept: t1 rg
 | t8 Hoàng hậu | ceremonial robe, stiff round shoulder collar, square phoenix chest badge | phoenix crown, jade-pendant sash |
 | t9 Hoàng thái hậu (a51) | column dragon-brocade long coat, high stand collar, narrow sleeves | jade forehead band, low chignon with gold crown-comb, mature face, silver strands |
 | t10 Nữ đế | golden-yellow robe, layered sheer wide sleeves, dragon-and-phoenix embroidery | tall pearl-beaded crown, jade belt |
+t2 ALT (richer than t1, same one-layer cut): gen N2HToeP6D9 -> rank-standard/t2-alt.jpg (prepared, not published).
