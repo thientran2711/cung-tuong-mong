@@ -551,3 +551,4 @@
 | scenes-3 (sonnet): demotion-scene S3-82 + level-up-scene D14 + biếu quà làm lành D19 (owner-bug-sweep) | review/scenes-3 | main s28 | session_01UV1SzjdXNvKV2hkH4Y9s2y | RUNNING | 17/11 02:40Z |
 | presentation-wiring (sonnet): remaining jpres animations S3-151/182/205, entrance edict S3-152 (owner-bug-sweep) | review/presentation-wiring | main s28 | session_01UV1SziPP4d9141LvjeJ4wM | RUNNING | 17/11 02:40Z |
 | save-dlg-fix (sonnet kit keeper; OWNER BUG 02:47Z 'Lỗi tùm lum' Chọn sổ: squeezed column, letter-by-letter buttons, '???' life title, cut picture; whole family: picture+info dialogs, no word breaks in any button) | review/save-dlg-fix | main s28 | session_01UV1SzhRZF6zDmg7pUydbUm | RUNNING | 17/11 02:44Z |
+| wx-fx-size (sonnet; OWNER BUG 03:08Z petals too big + over text; whole family of weather particles/bursts, inside the stage only) | review/wx-fx-size | main s28 | session_01UV1SzjkM9jo2gPxyFWVcaP | RUNNING | 17/11 02:53Z |
