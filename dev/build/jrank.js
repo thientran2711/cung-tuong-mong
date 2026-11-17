@@ -47,7 +47,7 @@ function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Mat
   alive:alive||/Thái hậu|Thái phi/.test(endk),rare:!!(S.rareEnd||S.rare||/Cơ duyên hiếm/.test(String(fate||""))),y,age:S.age|0,age0:Math.max(12,Math.min(40,(S.age|0)-y)),
   sons:kids.filter(x=>x&&x.sex==="m").length,daus:kids.filter(x=>x&&x.sex!=="m").length,tz:Math.min(kids.filter(x=>x&&x.sex==="m").length,(S.pdw&&S.pdw.tz||[]).length),
   danh:Math.round(S.danh||0),duc:Math.round(S.duc||0),tg:(S.pdN&&S.pdN.tg)|0,fig:cut(fig),por:cut(por),
-  mode:typeof CW!=="undefined"&&CW&&CW.on?"coop":"solo",seed:(S.rkSeed>>>0)||0,ver:RK_VER,t0:S.rkT0||0,trail:(k.t||[]).slice(0,80)}}
+  mode:rkCoop()?"coop":"solo",seed:(S.rkSeed>>>0)||0,ver:RK_VER,t0:S.rkT0||0,trail:(k.t||[]).slice(0,80)}}
 /* ---------- queue (offline: kept until sent) ---------- */
 function rkQ(){const q=store.get(RK_Q);return Array.isArray(q)?q:[]}
 function rkRes(lid){const r=store.get(RK_RES)||{};return lid?r[lid]:r}
@@ -66,6 +66,10 @@ async function rkFlush(){if(RK_FL){RK_FL=2;return}const q0=rkQ();if(!q0.length)r
  if(document.getElementById("krkov"))rkLoad(RK.tab,true)}
 function rkPush(sum){const lid=rkRand(16);const q=rkQ();q.push({lid,life:sum,at:Date.now()});store.set(RK_Q,q.slice(-50));return lid}
 /* ---------- end card: "Kiếp này đứng hạng N" ---------- */
+/* co-op room (jcoopworld COOPW.on; NOT the bare name CW, which is j25's face-name helper in this scope): a dead player reincarnates at once
+   into the same world (owner OD:L94), so the co-op end card keeps the score / place rows but has NO "Xem Bảng vàng" button in front of
+   "Chuyển kiếp" (review kit-ico-rank-r2); the board stays one tap away from the title menu (☰) later. Solo: unchanged. */
+function rkCoop(){try{const c=window.COOPW;return!!(c&&c.on)}catch(e){return false}}
 function rkEndInner(lid){const it=rkQ().find(x=>x.lid===lid),res=rkRes(lid);let sc=null;try{const L=it?it.life:(RK.ends[lid]||null);if(L)sc=CTM_RANK.score(L).score}catch(e){}
  const s=res&&res.score!=null?res.score:sc;
  const line=res&&res.rank?`Kiếp này đứng hạng <b>${res.rank}</b> trên ${res.of} kiếp.`
@@ -73,9 +77,9 @@ function rkEndInner(lid){const it=rkQ().find(x=>x.lid===lid),res=rkRes(lid);let 
   :navigator.onLine===false?`Mạng đứt: kiếp này đã ghi lại, có mạng sẽ gửi lên ${RK_T.screen}.`
   :`Đang ghi lên ${RK_T.screen}.`;
  /* kit section header + kit rows (KIT 9), the same as the rows above it on the end card */
- return `<h4 class="kpst">${RK_T.screen}</h4>${kitRows([[`${RK_T.unit} kiếp này`,s!=null?`<b>${s}</b>`:"",""],["Thứ hạng",line,"t"]])}<button class="kbtn alt krk-eb" data-krk-open="lives" data-lid="${lid}">${RK_T.open}</button>`}
+ return `<h4 class="kpst">${RK_T.screen}</h4>${kitRows([[`${RK_T.unit} kiếp này`,s!=null?`<b>${s}</b>`:"",""],["Thứ hạng",line,"t"]])}${rkCoop()?"":`<button class="kbtn alt krk-eb" data-krk-open="lives" data-lid="${lid}">${RK_T.open}</button>`}<!--krk-e-->`}
 function rkEndPaint(lid){document.querySelectorAll(`.krk-end[data-lid="${lid}"]`).forEach(e=>e.innerHTML=rkEndInner(lid));
- try{const m=Q.find(x=>x&&x.cls==="end"&&x.rkLid===lid);if(m)m.h=m.h.replace(/<div class="krk-end kpsec"[\s\S]*?<\/button><\/div>/,`<div class="krk-end kpsec" data-lid="${lid}">${rkEndInner(lid)}</div>`)}catch(e){}}
+ try{const m=Q.find(x=>x&&x.cls==="end"&&x.rkLid===lid);if(m)m.h=m.h.replace(/<div class="krk-end kpsec"[\s\S]*?<!--krk-e--><\/div>/,`<div class="krk-end kpsec" data-lid="${lid}">${rkEndInner(lid)}</div>`)}catch(e){}}
 /* ---------- hooks into the game ---------- */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{rkTrack()}catch(e){}return r}})();
 if(typeof nlAccept==="function")(function(){const a0=nlAccept;nlAccept=function(){const sd=typeof NLP!=="undefined"&&NLP?NLP.seed:0;const r=a0.apply(this,arguments);

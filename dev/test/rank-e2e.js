@@ -110,6 +110,15 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  await openBoard(A.p,'lives');bd=await board(A.p);ok(bd.rows.length===5&&sorted(bd.rows)&&bd.rows.filter(r=>r.mine).length===2,'A: 5 lives, own two marked');
  /* own row shown when outside the top (n=2 board) */
  const outside=await C.p.evaluate(async u=>{const r=await fetch(u+'/top/lives?n=1&gid='+rkIdGet().gid).then(r=>r.json());return r.rows.length===1&&r.mine&&r.mine.r>1},RURL);ok(outside,'own best life returned even outside the top');
+ /* co-op (review kit-ico-rank-r2, owner OD:L94 rebirth at once): the co-op end card has the score / place rows but NO "Xem Bảng vàng" in front of
+    "Chuyển kiếp"; nothing of the board opens over it; the life goes up as mode "coop" (COOPW.on, not j25's CW helper) */
+ await A.p.evaluate(()=>rkClose());await newLife(A.p);await A.p.evaluate(()=>{window.COOPW.on=true});await endLife(A.p,{rank:1,years:1});
+ const co=await A.p.evaluate(()=>{const m=document.querySelector('#modal:not([hidden])');const bs=m?[...m.querySelectorAll('button')].filter(b=>b.offsetParent!==null).map(b=>b.textContent.trim()):[];
+   const lid=(document.querySelector('.krk-end')||{dataset:{}}).dataset.lid;return{rows:!!(m&&m.querySelector('.krk-end .kpst')),eb:!!document.querySelector('.krk-eb'),bs,ov:!!document.getElementById('krkov'),krkp:!!document.querySelector('#modal.krkp:not([hidden])'),mode:(RK.ends[lid]||{}).mode}});
+ ok(co.rows&&!co.eb&&!co.ov&&!co.krkp&&co.bs.includes('Chuyển kiếp')&&!co.bs.some(x=>/Bảng vàng/.test(x))&&co.mode==='coop','co-op end card: rows kept, no Xem Bảng vàng, nothing over it, mode coop '+JSON.stringify(co));
+ await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal:not([hidden]) button')].find(x=>x.textContent.trim()==='Chuyển kiếp');if(b)b.click()});
+ await A.p.waitForFunction(()=>(typeof NLP!=='undefined'&&NLP)||(S&&!S.dead)||!document.getElementById('title').hidden,null,{timeout:20000}).then(()=>ok(true,'co-op: Chuyển kiếp goes on to the next life'),()=>ok(false,'co-op: Chuyển kiếp goes on to the next life'));
+ await A.p.evaluate(()=>{window.COOPW.on=false;Q.length=0;$('modal').hidden=true});
  /* recovery code (owner Q20): first open shows it once, copyable; a second device restores the same guest with it */
  const R1=await mk('R1',true);const gA=await A.p.evaluate(()=>rkIdGet());await R1.p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});
  await R1.p.evaluate(()=>rkOpen('lives'));await R1.p.waitForSelector('#modal #krk-code');
