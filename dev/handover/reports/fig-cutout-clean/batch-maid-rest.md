@@ -211,3 +211,12 @@ maid-m09-tm3-a18	fHGjrjHCDY	redo ok U
 maid-m09-tm4-a18	DoJCaCHpcl	redo ok U
 maid-m10-a18	Ifi5q5JtvE	redo ok U
 - W5c REPAINT of the 56 plain-prompt maids DONE (R1-R7, own original look, in place, fig+hd+tn+por, fragments W5c-redo-R1..R7.json). Before|after sheet: rank-sample/maid-rest-A-redo.jpg. Drift: m08-t7, m08-t8, m09-t7, m09-t8 (originals already alike). New maids PAUSED; resume at maid-m10-cold-a18. Total this session: 48 original-prompt/plain new + 8 + 56 repaints.
+maid-m10-cold-a18	dtPFsNNXSL	ok HELD(not uploaded; wait C OK)
+maid-m10-kc-a18	Xm4Hl34Bfo	ok HELD
+maid-m10-ngheo-a18	79azdFgJAL	ok HELD
+maid-m10-t1-a18	aFAjPTHfSh	ok HELD
+maid-m10-t2-a18	DoJEx3Jpcl	ok HELD
+maid-m10-t3-a18	rgd9Yfwxtc	ok HELD
+maid-m10-t4-a18	3z5paUMREY	ok HELD
+maid-m10-t5-a18	Bh9qgWSoQR	ok HELD
+- W5c resumed 06:22Z: A8 (m10-cold..t5) generated+finished, HELD in /tmp/claude-0/w/A8/out (scratch) pending Foreman C OK of first-16 sheet; fragment W5c-A8.json in main checkout hd-entries (untracked, copy at upload).
