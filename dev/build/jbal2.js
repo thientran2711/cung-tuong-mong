@@ -834,7 +834,7 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  /* ---- batch 2 (jworld2, dev/research/world-events-2.md §3; Địa chấn #9 PARKED: no repair-debt state) ----
     day đầy tháng (a real birth; opens `delay` tuần after it) · lap lập Thái tử (S.heir set) · hau lập / phế hậu (the queen seat changes) ·
     thb Thái hậu bệnh nặng (S.thIll stage >= st) · thi khoa thi (every `every` years, off = year mod) · vuong phiên vương (a living Vương gia) ·
-    ret đại hàn (heavy snow `run` tuần in a row) · trung châu chấu (a failed flood/drought relief that left Kho lúa between dis.kho and kho) ·
+    ret đại hàn (heavy snow in `run` of the last run+1 tuần) · trung châu chấu (a failed flood/drought relief that left Kho lúa between dis.kho and kho) ·
     vuco vu cổ (a real bùa frame found while someone of the Emperor's house is ill) · cam giới nghiêm (after a vu cổ / ngoại thích verdict,
     or Biên cương < bien after a lost battle) · trom trộm ngự khố (year-end audit + a real greedy servant) · phong phóng cung nhân (maids at
     BAL.srvAge.out, at least `min` in the palace) · hon công chúa xuất giá (a real daughter's wedding) · ngoai ngoại thích (a house >= pow
@@ -850,7 +850,7 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
  trung:{kho:50,months:[5,6,7,8,9],len:3,cd:36,khoCut:6,payCut:.1,mood:1,give:20,giveDanh:2,giveTh:2,thrift:{duc:1},place:{cnh:1.4},act:{help:1.3,bribe:1.2}},
  vuco:{len:2,cd:72,kidHp:40,spyFind:50,catch:25,schemeK:4,accuseK:30,innocent:30,payCut:.15,toCam:50,open:{duc:2},clean:{bac:30,mul:.3},accuse:{danh:3,miss:-4},act:{scheme:.6,frame:.5,warn:1.6,spy:1.4},place:{vuon:.5}},
  cam:{len:2,cd:36,bien:25,closed:["vuon","cnh","thu"],place:{vuon:0,cnh:0,thu:0},act:{scheme:1.3,spy:.7,social:.6},srvAct:{work:.8}},
- trom:{month:12,t:1,p:40,len:2,cd:72,catch:40,payCut:.1,scape:30,scapeDanh:-5,bribe:{bac:40,duc:-2},self:{duc:2},phongP:40,act:{spy:1.3,bribe:1.4,frame:1.2}},
+ trom:{month:12,t:1,p:25,len:2,cd:72,catch:40,payCut:.1,scape:30,scapeDanh:-5,bribe:{bac:40,duc:-2},self:{duc:2},phongP:40,act:{spy:1.3,bribe:1.4,frame:1.2}},
  phong:{month:2,min:3,len:1,cd:24,afterP:40,gift:{bac:10,duc:1},keep:{bac:40},npcKeep:40,act:{social:1.1}},
  hon:{len:1,kho:4,mDanh:3,gift:25,giftAff:10,npcGift:.06,place:{tn:1.4},act:{social:1.3,greet:1.2}},
  ngoai:{pow:85,young:30,cd:72,len:2,purge:[50,25],fall:-30,rise:5,sung:-8,danh:-5,mood:3,toCam:60,advise:{o:[40,5],pow:-10},act:{ally:1.4,scheme:1.3,warn:1.3,social:.8}},

@@ -51,7 +51,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* châu chấu: failed flood relief, Kho lúa between the two marks, summer */
   clr();S.month=6;S.tuan=0;T.kho=Math.round((BAL.world.dis.kho+BAL.world.trung.kho)/2);S.wMM={k:"lut",fail:1,kho:T.kho,bien:T.bien,y:S.year,m:6};tick();R.trung=!!worldWin("trung");
   /* đại hàn */
-  clr();S.month=12;S.tuan=1;S.wwin.snowR=BAL.world.ret.run-1;S.wx={n:"tuyết dày",k:"snowh",f:4};tick();R.ret=!!worldWin("ret");S.wwin.snowR=0;S.wx={n:"trời quang",k:"dust",f:0};
+  clr();S.month=12;S.tuan=1;S.wwin.snowL=Array(BAL.world.ret.run-1).fill(1);S.wx={n:"tuyết dày",k:"snowh",f:4};tick();R.ret=!!worldWin("ret");S.wwin.snowL=[];S.wx={n:"trời quang",k:"dust",f:0};
   /* ngoại thích */
   clr();S.month=5;S.tuan=0;const age0=S.emp.age;S.emp.age=BAL.world.ngoai.young-2;T.H["Lễ bộ"].pow=BAL.world.ngoai.pow+2;S.wMM=null;tick();R.ngoai=(worldWin("ngoai")||{x:{}}).x.c||null;S.emp.age=age0;T.H["Lễ bộ"].pow=50;
   /* wedding */
