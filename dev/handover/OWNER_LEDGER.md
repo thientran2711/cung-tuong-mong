@@ -56,27 +56,27 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 9 | Event choices show costs only; acts full numbers | OD:L16 (final L469, L477) | LIVE | opt-render, KIT §28.6 |
 | 10 | Wardrobe 2 slots, grades, hidden fit, Tự chọn đồ, Chải chuốt, sell/pawn, frame-ups | OD:L17 | LIVE | merged into Tư trang (balance-unified) |
 | 11 | Rewards from real item pool, chest reveal | OD:L18 | LIVE | |
-| 12 | Origin odds; cnv winnable | OD:L19, L43 | LIVE (j69) / BRANCH | spread measure = Q C7 balance-pass |
-| 13 | Balance targets (early death ~40–45%, HH ~32%, birth death 8–12%) | OD:L20 | BRANCH review/balance-pass (Q C7) | bots HH 0% on main (promo-exam gate) |
+| 12 | Origin odds; cnv winnable | OD:L19, L43 | LIVE (balance-pass); per-origin spread unmeasured (17/11 sweep) | spread measure = Q C7 balance-pass |
+| 13 | Balance targets (early death ~40–45%, HH ~32%, birth death 8–12%) | OD:L20 | LIVE; measured on target (balance-after-truth) (17/11 sweep) | bots HH 0% on main (promo-exam gate) |
 | 14 | Portrait cards 3:4, same inner size, ornaments visible, no round avatars | OD:L21, L23, L40, L42 | LIVE | |
 | 15 | Stage scale / floor line | OD:L22, L58 | LIVE | |
 | 16 | Identity screen + origin roulette | OD:L25, L66, L79 | LIVE | |
-| 17 | Game-feel animations for key moments | OD:L26 | LIVE partly | rest: A9 promo-rules, A11 cardflip, B1 night-end, Q D11 |
+| 17 | Game-feel animations for key moments | OD:L26 | LIVE; promo, card-flip, night-end, jpres all merged (17/11 sweep) | rest: A9 promo-rules, A11 cardflip, B1 night-end, Q D11 |
 | 18 | Weather visible + chip (already built) | OD:L27 | LIVE | |
-| 19 | Scenes 4 seasons × buổi; fill missing variants | OD:L28, L30, L149 | LIVE (verify) | place-colour/place-art graded all; review/place-seasons (1 ahead) only an inventory |
+| 19 | Scenes 4 seasons × buổi; fill missing variants | OD:L28, L30, L149 | LIVE; 4 seasons x 4 buoi on all places (17/11 sweep) | place-colour/place-art graded all; review/place-seasons (1 ahead) only an inventory |
 | 20 | 4 buổi × 4 khắc | OD:L31 | LIVE | |
-| 21 | Who-is-where habits + intentions + surprises; NPCs learn her habits | OD:L32 | NOT DONE (new D29) | review/schedules2 (27 ahead, 1163 behind; independent PASS 14/11, never merged) |
-| 22 | Catching secrets / trysts at hidden spots | OD:L33 | NOT DONE (new D29) | same branch (j95) |
-| 23 | ONE location ledger S.roster + roster.js dev tool + Chép sổ | OD:L34 | NOT DONE (new D29) | rosterWhere not on main (jmen/j96 guard it) |
-| 24 | Motive gate for every NPC decision (0 contradictions) | OD:L35 | NOT DONE (new D29) | |
-| 25 | Bot audit of the ledger before release (ROSTER_AUDIT.md) | OD:L36 | NOT DONE (new D29) | |
-| 26 | Painted backgrounds for every minigame | OD:L37 | LIVE (verify) | |
+| 21 | Who-is-where habits + intentions + surprises; NPCs learn her habits | OD:L32 | LIVE (j95 schedules/roster) (17/11 sweep) | review/schedules2 (27 ahead, 1163 behind; independent PASS 14/11, never merged) |
+| 22 | Catching secrets / trysts at hidden spots | OD:L33 | LIVE (j95 + jroute) (17/11 sweep) | same branch (j95) |
+| 23 | ONE location ledger S.roster + roster.js dev tool + Chép sổ | OD:L34 | LIVE (S.roster, j95c rosterWhere) (17/11 sweep) | rosterWhere not on main (jmen/j96 guard it) |
+| 24 | Motive gate for every NPC decision (0 contradictions) | OD:L35 | LIVE (motiveOK gate, j95c) (17/11 sweep) | |
+| 25 | Bot audit of the ledger before release (ROSTER_AUDIT.md) | OD:L36 | LIVE (roster_audit + ROSTER_AUDIT.md) (17/11 sweep) | |
+| 26 | Painted backgrounds for every minigame | OD:L37 | LIVE (24 painted minigame backgrounds) (17/11 sweep) | |
 | 27 | Thanh mai trúc mã love arc | OD:L38 | LIVE (j96) | |
 | 28 | Rare endings + Sổ luân hồi count | OD:L39 | LIVE (j97) | |
 | 29 | Housing rules; own palace at Tần | OD:L41, L252 | LIVE | court-rules |
 | 30 | Anti reroll-by-death (trọn kiếp / dở dang) | OD:L44 | LIVE (jkiep) | |
 | 31 | Wardrobe items redo from game outfits (260) | OD:L45 | LIVE | |
-| 32 | Collection milestones: Sổ luân hồi titles + Phúc duyên +5/+10/+20/+35 at 20/50/100/200 items | OD:L45, L46 | NOT DONE (new D49) | jearn has only a stand-in counter "until j92cat lands"; j92cat never landed |
+| 32 | Collection milestones: Sổ luân hồi titles + Phúc duyên +5/+10/+20/+35 at 20/50/100/200 items | OD:L45, L46 | LIVE (jcol, +5/+10/+20/+35) (17/11 sweep) | jearn has only a stand-in counter "until j92cat lands"; j92cat never landed |
 | 33 | Every item painted, kitItem grade frame | OD:L47 | LIVE | |
 | 34 | Fold unplayable batch (top bar, stage height, sticky card, chip rows) | OD:L49, L53–63, L67–74 | LIVE | fold-layout + book UI |
 | 35 | Every backdrop in portrait AND landscape | OD:L50 | LIVE | landscape-art |
@@ -84,51 +84,51 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 37 | Phone-specific room paintings | OD:L64, L75, L77 | CLOSED | cancelled by owner |
 | 38 | Act pictures: show the act; keep originals; night Chặn ngự giá; time of day | OD:L76, L78, L84 | LIVE | |
 | 39 | Selected state = gold glow, no check badge | OD:L80, L81 | LIVE | |
-| 40 | New places (Dãy nhà cung nhân, Ngự thiện phòng, Nội vụ phủ, Hoán y cục, Phật đường, học đường); edits of approved scenes | OD:L82, L86 | PARTIAL → NOT DONE (new D42) | Ngự thiện phòng/Phật đường/Nội vụ phủ + maid room + Tân Giả khố live; Dãy nhà cung nhân redo on review/places (2 ahead, unmerged); học đường / Hoán y cục reachability unverified |
-| 41 | Princes' residences (nhũ mẫu, A ca sở, Đông cung, orphans) | OD:L87 | PARTIAL → NOT DONE (new D42) | "A ca sở" not in main code |
+| 40 | New places (Dãy nhà cung nhân, Ngự thiện phòng, Nội vụ phủ, Hoán y cục, Phật đường, học đường); edits of approved scenes | OD:L82, L86 | LIVE (jplx: 5 places, places-d42 test) (17/11 sweep) | Ngự thiện phòng/Phật đường/Nội vụ phủ + maid room + Tân Giả khố live; Dãy nhà cung nhân redo on review/places (2 ahead, unmerged); học đường / Hoán y cục reachability unverified |
+| 41 | Princes' residences (nhũ mẫu, A ca sở, Đông cung, orphans) | OD:L87 | LIVE (jplx: A ca so, Dong cung, study hall) (17/11 sweep) | "A ca sở" not in main code |
 | 42 | Result texts as bullet lists | OD:L83 | LIVE | |
-| 43 | Difficulty Dễ / Vừa / Khó per life, in Sổ luân hồi | OD:L85 | NOT DONE (new D31) | review/difficulty v8 (21 ahead, 997 behind) never merged; jdiff not on main |
-| 44 | Succession choice: Hoàng thái hậu / nhiếp chính / Nữ đế, each with conditions + epilogue; card shows full odds | OD:L85, L88, L106 | NOT DONE (new D32) | review/succession2 SẴN SÀNG KIỂM 14/11 (12 ahead), never merged; main has only the old HTH ending |
+| 43 | Difficulty Dễ / Vừa / Khó per life, in Sổ luân hồi | OD:L85 | LIVE (jdiff, identity-card choice) (17/11 sweep) | review/difficulty v8 (21 ahead, 997 behind) never merged; jdiff not on main |
+| 44 | Succession choice: Hoàng thái hậu / nhiếp chính / Nữ đế, each with conditions + epilogue; card shows full odds | OD:L85, L88, L106 | LIVE (j99succ, 3 roads) (17/11 sweep) | review/succession2 SẴN SÀNG KIỂM 14/11 (12 ahead), never merged; main has only the old HTH ending |
 | 45 | Her own age in the top bar | OD:L89 | LIVE | |
 | 46 | Items never free; audit free grants | OD:L91 | LIVE (jearn) | |
 | 47 | CO-OP 2 players, shared world, invites, Sẵn sàng, rebirth choices, Cloudflare | OD:L94–96, L99, L105, L138, L153, L154, L157, L165 | LIVE | co-op gaps → Q D21; rebirth as tiểu thư → B2 |
-| 48 | Tiểu thư / life outside the palace route (single + co-op); tuyenTu ages 18+ | OD:L95, L104 | BRANCH review/outside-r2-r1 FAIL (Q B2) | |
-| 49 | Allergy (dị ứng) rash overlay, two-way, heals | OD:L107, L117, L124 | NOT DONE (new D39) | review/items-earned (jrash, 3 ahead) + review/appearance unmerged |
-| 50 | Item rivalry: extort, bribed servants steal, plant to frame (pure game rules, approved) | OD:L108, L117 | NOT DONE (new D38) | review/lost-items (jlost) SẴN SÀNG KIỂM 14/11 (12 ahead), never merged |
+| 48 | Tiểu thư / life outside the palace route (single + co-op); tuyenTu ages 18+ | OD:L95, L104 | LIVE (jkc home road; outside-r2-r2 merged) (17/11 sweep) | |
+| 49 | Allergy (dị ứng) rash overlay, two-way, heals | OD:L107, L117, L124 | LIVE (jrash, jface face fx) (17/11 sweep) | review/items-earned (jrash, 3 ahead) + review/appearance unmerged |
+| 50 | Item rivalry: extort, bribed servants steal, plant to frame (pure game rules, approved) | OD:L108, L117 | LIVE (jlost + jsteal) (17/11 sweep) | review/lost-items (jlost) SẴN SÀNG KIỂM 14/11 (12 ahead), never merged |
 | 51 | Dialog option layout per screen; big events with painted header | OD:L109, L113 | LIVE | |
 | 52 | Fold person card = iPad layout | OD:L59, L60, L62, L110 | LIVE | |
 | 53 | Act/event frames per category, no tassel | OD:L70, L111 | LIVE | |
 | 54 | kitEventStage full-body figures in events/week book | OD:L114 | LIVE | |
 | 55 | Book UI (two-page spread, page curl like paper) | OD:L116, L119, L120, L132 | LIVE | |
-| 56 | Event art muted / st-* style; Tiên đế băng hà | OD:L117, L124, L125, L131 | BRANCH review/succession2 (art on CDN) | ships with D32 |
-| 57 | 'Vào cung ngay' vs 'Ở nhà chờ tuyển tú' real dilemma | OD:L118 | BRANCH outside-r2-r1 (Q B2) | |
-| 58 | Appearance: illness, poisoning, slap/punishment overlays | OD:L121, L126, L130 | NOT DONE (new D39) | review/appearance (9 ahead, 1045 behind) never merged; no kitFaceFx on main |
-| 59 | Postponed appearance art: pregnancy figures (6 & 9 months), nun figure, dưỡng nhan glow, grey strands, smallpox | OD:L121, L122 | NOT DONE (new D43) | postponed "save credits"; reason lifted by OD:L751 |
+| 56 | Event art muted / st-* style; Tiên đế băng hà | OD:L117, L124, L125, L131 | LIVE; art on CDN with succession (17/11 sweep) | ships with D32 |
+| 57 | 'Vào cung ngay' vs 'Ở nhà chờ tuyển tú' real dilemma | OD:L118 | LIVE (jkc two-road choice) (17/11 sweep) | |
+| 58 | Appearance: illness, poisoning, slap/punishment overlays | OD:L121, L126, L130 | LIVE (jface kitFaceFx, facefx-all) (17/11 sweep) | review/appearance (9 ahead, 1045 behind) never merged; no kitFaceFx on main |
+| 59 | Postponed appearance art: pregnancy figures (6 & 9 months), nun figure, dưỡng nhan glow, grey strands, smallpox | OD:L121, L122 | NOT DONE: art for 5 appearance conditions not drawn (17/11 sweep) | postponed "save credits"; reason lifted by OD:L751 |
 | 60 | Code facial expressions | OD:L126, L139 | CLOSED | removed by owner |
 | 61 | Emotion system + human-face palace-lady icons | OD:L127, L129, L145, L148, L151, L156 | LIVE (jemo) | 15/11 refinements below |
 | 62 | Research trungsinhgame | OD:L127 | LIVE (done) | TRUNGSINH_COMPARE.md |
-| 63 | Độ khó row overlap on identity card | OD:L128 | BRANCH review/difficulty (new D31) | |
+| 63 | Độ khó row overlap on identity card | OD:L128 | LIVE (jdiff row; idcard-bar-overlap test) (17/11 sweep) | |
 | 64 | Servant start shown in maid outfit (figure follows role) | OD:L128 | LIVE | player-dress |
 | 65 | Dư đồ leather map; Tư trang inventory grid; roulette approved; face-down cards flow | OD:L133, L135 | LIVE | inventory-origin |
-| 66 | Residence paintings per person (8 palaces + side halls, 16 variants each, shared rooms) | OD:L134, L136, L137, L140, L142, L147, L155, L163 | NOT DONE (new D30) | 400 paintings done on review/residence-art, merged into review/palace-map (13 ahead, 1128 behind), never merged; jres.js not on main |
+| 66 | Residence paintings per person (8 palaces + side halls, 16 variants each, shared rooms) | OD:L134, L136, L137, L140, L142, L147, L155, L163 | LIVE (jres, 25 rooms) (17/11 sweep) | 400 paintings done on review/residence-art, merged into review/palace-map (13 ahead, 1128 behind), never merged; jres.js not on main |
 | 67 | Seasons redraw of old place backdrops | OD:L139, L144 | CLOSED | rejected; L147 correction = residence rooms (row 66) |
 | 68 | Loading screen + device cache | OD:L141 | LIVE | size → Q D15 |
 | 69 | Book UI first, then go live at once | OD:L148, L150 | LIVE | |
-| 70 | Palace detail map (Dư đồ → courtyard by chủ vị rank, Phượng Lệnh 'nhat' art → rooms with real counts) | OD:L158–160, L166 | NOT DONE (new D30) | review/palace-map (kitPalaceMap/jpm) never merged |
+| 70 | Palace detail map (Dư đồ → courtyard by chủ vị rank, Phượng Lệnh 'nhat' art → rooms with real counts) | OD:L158–160, L166 | LIVE (jpm kitPalaceMap, KIT 33) (17/11 sweep) | review/palace-map (kitPalaceMap/jpm) never merged |
 | 71 | Tư trang fixes: card border, grade backgrounds reuse frames, equipment slots, garment art, inline info, wear slots, luxury numbers, no allowance shown | OD:L161, L162, L169–175, L181, L187 | LIVE | luxury depth → Q D17 |
 | 72 | KIT_FIG one figure scale; men ×1.07; iPad 3 / phone 2 people | OD:L164, L167, L176, L177, L185, L189, L197 | LIVE | |
 | 73 | Men on walks, zones, choices; plan-driven intrusions; 4 guard looks | OD:L168, L183, L188 | LIVE (jmen) | |
 | 74 | Stage name labels rank over name, rank colour | OD:L171 | LIVE | |
 | 75 | 'Nhờ thái giám mua đồ' rename | OD:L172 | LIVE | |
 | 76 | Category tab row centred | OD:L173 | LIVE | |
-| 77 | Dư đồ locked places: no grey boxes, lock mark, tap card | OD:L178 | LIVE (verify) | |
+| 77 | Dư đồ locked places: no grey boxes, lock mark, tap card | OD:L178 | LIVE (j41 lock mark, dudo-lock test) (17/11 sweep) | |
 | 78 | Page curl shows next page underneath, content on back, sheet swing | OD:L179, L186, L198 | LIVE | |
 | 79 | No Chinese characters; 'Ngự' seal | OD:L180 | LIVE | |
 | 80 | Choice cards (Nam nhân nơi cấm địa) full Tốn/Được/Mất | OD:L182 | LIVE | |
-| 81 | Alternative routes: tư tình, escape, leave legally, follow another man | OD:L184 | NOT DONE (new D33) | review/routes (33 ahead, 735 behind) paused 15/11 04:02Z (disk); escape too easy, bot fix |
-| 82 | Tư tình child → trích huyết nghiệm thân blood test (+ animation/minigame) | OD:L190, L192 | NOT DONE (new D33) | in review/routes |
+| 81 | Alternative routes: tư tình, escape, leave legally, follow another man | OD:L184 | LIVE (jroute: 4 private roads) (17/11 sweep) | review/routes (33 ahead, 735 behind) paused 15/11 04:02Z (disk); escape too easy, bot fix |
+| 82 | Tư tình child → trích huyết nghiệm thân blood test (+ animation/minigame) | OD:L190, L192 | LIVE (jroute blood test, card only) (17/11 sweep) | in review/routes |
 | 83 | Dialogs: only the option list scrolls | OD:L191 | LIVE | |
-| 84 | Scheme acts get abstract minigames (Nghe ngóng, Truyền lời, Mặc cả, Thời cơ), skip option, NPCs plain odds | OD:L192, L195, L199 | NOT DONE (new D34) | review/scheme-games SẴN SÀNG KIỂM 15/11 02:45Z, never reviewed (4 ahead, 852 behind) |
+| 84 | Scheme acts get abstract minigames (Nghe ngóng, Truyền lời, Mặc cả, Thời cơ), skip option, NPCs plain odds | OD:L192, L195, L199 | LIVE (jsgame: 4 scheme minigames) (17/11 sweep) | review/scheme-games SẴN SÀNG KIỂM 15/11 02:45Z, never reviewed (4 ahead, 852 behind) |
 | 85 | Event dialogs: people standing on the scene picture | OD:L194 | LIVE | |
 | 86 | Player figure drawn at every place | OD:L196 | LIVE | |
 
@@ -139,7 +139,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 2 | Purple book cover band removed everywhere | OD:L202, L218 | LIVE | |
 | 3 | All images on Cloudflare, not git | OD:L203 | LIVE | |
 | 4 | Dư đồ unroll slower; reachable if walk ≤ remaining khắc | OD:L204, L205 | LIVE | |
-| 5 | Khuê các dresses (84 faces) + poor-girl dresses (thd/td) | OD:L206, L209–211, L214 | LIVE (art on CDN) / BRANCH | wiring via outside-r2 (Q B2) |
+| 5 | Khuê các dresses (84 faces) + poor-girl dresses (thd/td) | OD:L206, L209–211, L214 | LIVE (jkc wiring; art on CDN) (17/11 sweep) | wiring via outside-r2 (Q B2) |
 | 6 | Maid fix batches | OD:L207 | CLOSED | already on main |
 | 7 | Page turn ~2× slower; opaque sheet | OD:L208, L219 | LIVE | |
 | 8 | Huadian motif changes (m05 cherry blossom, objects → flowers) | OD:L212, L216 | LIVE (CDN) | |
@@ -151,7 +151,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 14 | Coordinator may push images to CDN itself | OD:L223 | RULE | |
 | 15 | Fix play-with-friend UI urgently | OD:L225, L272 | LIVE (coop-ui) | |
 | 16 | Thỉnh an pictures (vạn phúc, wide sleeves, TH vs HH different) | OD:L226, L237, L280, L417, L423, L427 | LIVE (CDN) | |
-| 17 | New-player tutorial (guide mama, ≤12 steps, tips, on/off, replay) | OD:L227 | NOT DONE (new D35) | review/tutorial WIP 2/3 (3 ahead, 773 behind), paused 15/11 07:00Z |
+| 17 | New-player tutorial (guide mama, ≤12 steps, tips, on/off, replay) | OD:L227 | LIVE (jtut: guide, goal card, replay) (17/11 sweep) | review/tutorial WIP 2/3 (3 ahead, 773 behind), paused 15/11 07:00Z |
 | 18 | Giao tình 3 columns; errand runner wording; Thỉnh tranh chip | OD:L229, L230 | LIVE (hau-cung-ui) | |
 | 19 | Frame ornament attached; switch fades; straight columns; Sổ tuần full-page figure; next pages | OD:L232–235, L251, L277 | LIVE | |
 | 20 | Person dialogs left full-body figure (KIT §32.7) | OD:L236 | LIVE (dialog-person) | |
@@ -167,16 +167,16 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 30 | Rules one source; shown numbers = rule constants; 'Đức 33 → 28' only | OD:L253, L257, L258, L261, L265 | LIVE | |
 | 31 | Out of khắc on arrival: stay at place, new buổi there; tap current place | OD:L259, L260, L262 | LIVE (court-rules) | |
 | 32 | Stage: she appears once; '+N'; one count; slot template; NPC proper names; no small extra portraits | OD:L264, L269, L273 | LIVE (stage-slots) | |
-| 33 | Repo history slimming (needs owner consent) | OD:L267 | OPEN QUESTION | see §6 |
+| 33 | Repo history slimming (needs owner consent) | OD:L267 | OPEN: needs owner consent; images already on CDN (17/11 sweep) | see §6 |
 | 34 | Kính sự phòng evening too garish | OD:L268, L283 | LIVE (graded) | |
 | 35 | Main session may draw missing art | OD:L270 | RULE | |
 | 36 | Pets 18–24, grades, uses, divine beast saves a life, downsides | OD:L271 | LIVE (pets-fix) | |
 | 37 | Strangers as silhouettes; image-quality audit | OD:L274 | LIVE (img-quality) | |
 | 38 | Archaic renaming (Tuần lục, Sang buổi, Cùng hảo hữu, ngươi→ta …) | OD:L275, L284, L307, L311, L312, L332 | LIVE | |
-| 39 | Page turn bends with the finger (press-drag, spring back, flick), ‹ › also curl, cover stiffer | OD:L276 | NOT DONE (new D37) | review/drag-curl (2 ahead, 661 behind) never merged |
-| 40 | Tuần lục act pictures distinct per meaning; 'Đến <place>'; context | OD:L279, L341, L468 | LIVE / BRANCH | act-pics2 r7 live; rest Q C4 |
-| 41 | Online leaderboard (life + player ranking, guest code, Công danh) | OD:L281 | NOT DONE (new D36) | review/rank (Worker ctm-rank + DO, 5 ahead, 741 behind) never merged |
-| 42 | Announce every event that changes her stats immediately; Sổ tuần only a summary | OD:L282 | LIVE (verify) | act-audit |
+| 39 | Page turn bends with the finger (press-drag, spring back, flick), ‹ › also curl, cover stiffer | OD:L276 | LIVE (kitCurl drag, page-curl2) (17/11 sweep) | review/drag-curl (2 ahead, 661 behind) never merged |
+| 40 | Tuần lục act pictures distinct per meaning; 'Đến <place>'; context | OD:L279, L341, L468 | LIVE (act-pics2 on CDN; 803/804) (17/11 sweep) | act-pics2 r7 live; rest Q C4 |
+| 41 | Online leaderboard (life + player ranking, guest code, Công danh) | OD:L281 | ON BRANCH rank-port-r2; blocked on kit parts kitRankList (17/11 sweep) | review/rank (Worker ctm-rank + DO, 5 ahead, 741 behind) never merged |
+| 42 | Announce every event that changes her stats immediately; Sổ tuần only a summary | OD:L282 | LIVE (act-audit, kitStatFx, log-sync) (17/11 sweep) | act-audit |
 | 43 | She chooses the target of every act (kit picker); NPC targets by motive | OD:L286 | LIVE | picker visible in owner s8 shots |
 | 44 | Place card layout (picture top, info, buttons); 'Đi (đến nơi vào buổi sau)' | OD:L287, L288, L290 | LIVE (place-card) | |
 | 45 | Targeted 'Sai đi dò la' + cheaper 'Nghe ngóng chung' | OD:L289 | LIVE (jwhy) | |
@@ -187,44 +187,44 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 50 | face-thaihau-3 redraw gentle | OD:L297 | LIVE (CDN) | |
 | 51 | Colour-grade garish buổi backgrounds; per-buổi light layer → none | OD:L300, L328, L330, L342 | LIVE (scene-light) | |
 | 52 | Dư đồ midday buổi (from PL) ; Dư đồ not graded | OD:L301, L329 | LIVE | map-*-trua on main |
-| 53 | She can promote her own maids/eunuchs (Chưởng sự cô cô, Nữ quan, Thủ lĩnh, Tổng quản), limited by rank; NPCs same | OD:L302 | NOT DONE (new D41) | no promotion act found in main code |
+| 53 | She can promote her own maids/eunuchs (Chưởng sự cô cô, Nữ quan, Thủ lĩnh, Tổng quản), limited by rank; NPCs same | OD:L302 | LIVE (jpromsv: de bat own servants) (17/11 sweep) | no promotion act found in main code |
 | 54 | Pet grades use the equipment grade ladder/frames | OD:L303 | LIVE | |
 | 55 | Item cut-outs re-cut (not redraw) | OD:L304 | LIVE (CDN 200 items) | |
 | 56 | Everyone beautiful/serene; Thái hậu 2/3/5 redrawn | OD:L305 | LIVE | |
 | 57 | 'Chí tôn' tab | OD:L306 | LIVE | |
 | 58 | Person card: name+rank at top, portrait up, acts in small kit tabs | OD:L316, L318 | LIVE | s8 widening → Q C12 |
 | 59 | Monthly stipend card; stipend balance vs prices | OD:L321 | LIVE (econ-stipend) | |
-| 60 | Economy by rank (HH surplus ~3–4× Đáp ứng, low-rank income roads, tiered prices) | OD:L325 | BRANCH review/balance-pass (Q C7) | econ part live; ratio not re-measured |
+| 60 | Economy by rank (HH surplus ~3–4× Đáp ứng, low-rank income roads, tiered prices) | OD:L325 | LIVE (jecon, jstip, jbac reprice) (17/11 sweep) | econ part live; ratio not re-measured |
 | 61 | Remove every Thôi/Lui/Đóng → one ✕; tap outside closes | OD:L331, L340 | LIVE (kit-close) | |
 | 62 | Handmade redraws (dance dress, Điệu múa, chess problem); no Chinese in calligraphy | OD:L333 | LIVE (CDN) | |
-| 63 | Supported screens + rotate prompt | OD:L339 | LIVE / BRANCH | rotate prompt fix in small-bugs-3 (Q A3) |
+| 63 | Supported screens + rotate prompt | OD:L339 | LIVE (rotate prompt in small-bugs-3) (17/11 sweep) | rotate prompt fix in small-bugs-3 (Q A3) |
 | 64 | Cheeks black on dark backgrounds (alpha) | OD:L343 | LIVE | |
 | 65 | Landscape = iPad frame scaled | OD:L345, L346 | LIVE (rot.js) | |
-| 66 | Bad weather: cold/slipping as Mất of OUTDOOR acts (no extra walk khắc), umbrella/cape/sedan reduce, NPCs same | OD:L348, L351 | NOT DONE (new D40) | review/weather (jweather, 3 ahead, 671 behind; reviewer: "needs fixes") never merged |
-| 67 | Tap stage character → exact kit person dialog | OD:L349 | LIVE (verify) | |
+| 66 | Bad weather: cold/slipping as Mất of OUTDOOR acts (no extra walk khắc), umbrella/cape/sedan reduce, NPCs same | OD:L348, L351 | LIVE (jweather outdoor-act risks) (17/11 sweep) | review/weather (jweather, 3 ahead, 671 behind; reviewer: "needs fixes") never merged |
+| 67 | Tap stage character → exact kit person dialog | OD:L349 | LIVE (person dialog; dialog-person test) (17/11 sweep) | |
 | 68 | Portrait frame shows full jade pendant + tassel | OD:L350 | LIVE (tassel-fix) | |
-| 69 | One word "Thiện cảm"; names without numbers | OD:L352, L394 | LIVE / BRANCH | leftover "thân ±N" sweep in small-bugs-3 (Q A3) |
-| 70 | Relation lines one kit component; two stats thiện cảm + oán | OD:L360, L362 | LIVE / BRANCH | §52 relation table in fix-float r8 (Q A4) |
+| 69 | One word "Thiện cảm"; names without numbers | OD:L352, L394 | LIVE (j84 rewrite; rel-words-scan 0) (17/11 sweep) | leftover "thân ±N" sweep in small-bugs-3 (Q A3) |
+| 70 | Relation lines one kit component; two stats thiện cảm + oán | OD:L360, L362 | LIVE (jkrel; fix-float r9 merged) (17/11 sweep) | §52 relation table in fix-float r8 (Q A4) |
 | 71 | People strip names only; third-person words; Ân oán tabs; figure ≥95% | OD:L355–358 | LIVE | |
 | 72 | kitNameRank: name + rank above every figure | OD:L361 | LIVE | |
 | 73 | Đáp ứng frame (ivory, frame A) | OD:L363, L365, L375, L380, L386, L410 | LIVE | |
-| 74 | ~613 more act pictures; Emperor costume original style (no Qing hat, no cheongsam collar) | OD:L364 | BRANCH review/act-pics2 (Q C4) / NOT DONE | Emperor costume audit → new D45 |
-| 75 | Her court emblem above her head (8 tiers, bob, item in chest, Dùng to switch; HH/HQP swap) | OD:L366, L390, L411 | LIVE / BRANCH | emblem in the promotion chest → promo-rules (Q A9) |
+| 74 | ~613 more act pictures; Emperor costume original style (no Qing hat, no cheongsam collar) | OD:L364 | LIVE art on CDN; Emperor Qing-hat pics fixed (17/11 sweep) | Emperor costume audit → new D45 |
+| 75 | Her court emblem above her head (8 tiers, bob, item in chest, Dùng to switch; HH/HQP swap) | OD:L366, L390, L411 | LIVE (jmark emblem; promo chest) (17/11 sweep) | emblem in the promotion chest → promo-rules (Q A9) |
 | 76 | Emotion icons: game painting style, no text, tap shows name + reason, clear Vui/Giận, Sợ fix | OD:L367, L368, L381, L393 | LIVE | |
-| 77 | "Đang mặc" one word for every worn item | OD:L369 | LIVE (verify) | one "Đang cài" string still in main → new D47 check |
-| 78 | Gifts at game start from the brocade box; rank outfit set via chest on entry and every promotion | OD:L370 | LIVE / BRANCH | promotion set → Q A9 |
-| 79 | Equipment slot panel = standard dialog size, no Lui | OD:L371 | LIVE (verify) | |
+| 77 | "Đang mặc" one word for every worn item | OD:L369 | LIVE (j84 maps Dang cai to Dang mac) (17/11 sweep) | one "Đang cài" string still in main → new D47 check |
+| 78 | Gifts at game start from the brocade box; rank outfit set via chest on entry and every promotion | OD:L370 | LIVE (jpromo set; jeitem start chest) (17/11 sweep) | promotion set → Q A9 |
+| 79 | Equipment slot panel = standard dialog size, no Lui | OD:L371 | LIVE (jinv equip slots; test item-info) (17/11 sweep) | |
 | 80 | kitGain/kitLose animation every time items/silver arrive or leave | OD:L372, L376 | LIVE (game-feel) | |
 | 81 | Top bar option A | OD:L373 | LIVE | |
-| 82 | Demotion/cold palace: above-rank items confiscated in a scene (eunuch + tray) | OD:L374 | BRANCH promo-rules (Q A9) (verify) | demotion FX §66 there; confiscation scene not confirmed on main |
+| 82 | Demotion/cold palace: above-rank items confiscated in a scene (eunuch + tray) | OD:L374 | NOT DONE: no eunuch-tray scene for demotion confiscation (17/11 sweep) | demotion FX §66 there; confiscation scene not confirmed on main |
 | 83 | Sound for every game moment | OD:L377 | LIVE (sfx) | win/fail on every result → Q D1 |
-| 84 | Bảng vàng / contest podium: big characters, podium = name plate, medals, frame by highest rank, one title | OD:L378 | NOT DONE (new D36) | review/rank-ui WIP (8 ahead, 658 behind) |
+| 84 | Bảng vàng / contest podium: big characters, podium = name plate, medals, frame by highest rank, one title | OD:L378 | PARTLY LIVE: j90 podium live; ranking list on rank-port-r2 (17/11 sweep) | review/rank-ui WIP (8 ahead, 658 behind) |
 | 85 | Breach-of-etiquette rule | OD:L379 | LIVE (trung-y) | |
 | 86 | Trung y by tier when the outfit slot is empty; robbed of clothes event | OD:L382, L385, L391, L392 | LIVE (trung-y) | re-issue rules → Q D6 |
-| 87 | Act pictures anatomy re-audit | OD:L383 | BRANCH act-pics2 (Q C4) | |
+| 87 | Act pictures anatomy re-audit | OD:L383 | LIVE art on CDN; hand audit done (17/11 sweep) | |
 | 88 | Morning Điểm trang (outfit + makeup minigames, reactions) | OD:L384 | LIVE (toilette) | |
 | 89 | Pets: painting style, legendary higher grades, 4 stages, care screen, others' pets, no tortoise, markings, Linh thú painted aura, cat redraw | OD:L387, L388, L395, L397–403, L407, L413 | LIVE (88 images) | thiếu niên chubby redraw → Q D2 |
-| 90 | One odds function odA for every act | OD:L394 | LIVE (partial) | |
+| 90 | One odds function odA for every act | OD:L394 | LIVE (odA used in 26 modules) (17/11 sweep) | |
 | 91 | Top-bar portrait cell as large as the name block | OD:L396 | LIVE (header-danh) | |
 | 92 | Tư trang 2 tabs Việc / Túi đồ | OD:L404 | LIVE | |
 | 93 | 'Tin trong cung' card kept + renamed; remove → reversed | OD:L405, L414 | LIVE | |
@@ -237,7 +237,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 100 | Every item glows in grade colour, tap to receive, flies to Tư trang; slow reveals; real grades | OD:L422, L497 | LIVE (game-feel) | |
 | 101 | Gift dialog: item picture, info, recipient tabs; item in use shows item | OD:L424, L433 | LIVE (gift-ui) | s8 picture grid → Q C13 |
 | 102 | Handmade: 10 per kind × 4 grades, dish-specific minigames | OD:L425, L429, L457 | LIVE (j83) | |
-| 103 | Every image used by 2+ events gets its own picture | OD:L428, L451, L458 | LIVE (73 banners) / BRANCH C4 | leftovers → new D46 |
+| 103 | Every image used by 2+ events gets its own picture | OD:L428, L451, L458 | LIVE; leftovers show 'tam' placeholder marker (17/11 sweep) | leftovers → new D46 |
 | 104 | 'Bỏ độc vào' in gifts; Thử độc | OD:L430 | LIVE (poison-gift) | Emperor/Thái hậu poisoning → Q D8 |
 | 105 | App logo; Trân nữ seal top right | OD:L431, L432 | LIVE (brand) | |
 | 106 | kitActCompact | OD:L434 | LIVE | |
@@ -248,7 +248,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 111 | Newborn tư chất hidden; Văn/Võ/Đức grow; hiền tài from 6; Hoàng tự trong cung info | OD:L440, L441 | LIVE (hoangtu-tuchat) | |
 | 112 | Edge-cut figures / Thái hậu robe | OD:L442, L463 | LIVE (scene-light) | |
 | 113 | Person event dialog standard size, name above | OD:L443 | LIVE | |
-| 114 | Đoan ngọ invitation own picture, labels not over heads | OD:L444 | LIVE (verify) | festival banners live; check in D46 |
+| 114 | Đoan ngọ invitation own picture, labels not over heads | OD:L444 | LIVE (festival banners; fest-art test) (17/11 sweep) | festival banners live; check in D46 |
 | 115 | kitEventDp shared template | OD:L448 | LIVE (kit-fig2 r8) | |
 | 116 | Emperor daytime acts (audience, soup, gift, chess, zither, garden walk); Thái hậu similar | OD:L449, L459 | LIVE (gift-ui) | |
 | 117 | Chân tình real cause; Ân tình explanation/number | OD:L450, L467 | LIVE (poison-gift) | |
@@ -256,113 +256,113 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 119 | Event sound by meaning; crying fixed | OD:L454, L467 | LIVE (sfx) | |
 | 120 | Choice renderer drops Được/Mất (bug) | OD:L455 | LIVE (opt-render) | |
 | 121 | THÀNH/BẠI stamp follows real outcome; Kèm merged; Bạc −5 source | OD:L456 | LIVE | |
-| 122 | Decimals rounded at write + old saves; 'thù' → 'oán'; log the real outcome | OD:L461, L493 | BRANCH review/fix-float r8 (Q A4) | jint.js not on main |
-| 123 | Tuần lục: text overflow, card instruction text copied, chips never wrap | OD:L462 | BRANCH fix-float r8 (Q A4) | |
+| 122 | Decimals rounded at write + old saves; 'thù' → 'oán'; log the real outcome | OD:L461, L493 | LIVE (fix-float on main: jint.js whole numbers) (17/11 sweep) | jint.js not on main |
+| 123 | Tuần lục: text overflow, card instruction text copied, chips never wrap | OD:L462 | LIVE (fix-float on main, jkrel.js) (17/11 sweep) | |
 | 124 | Story witness quest: gains/losses, silver-free path, postpone; story labels + deadlines | OD:L464, L499 | LIVE (event-balance) | |
-| 125 | Night notes: male mood cells, act button pictures, sub-tabs, mood+face after events, proper flower game, real gift for 'trả quà', new day after tranh sủng + bath, crying sound, visible Ân tình, expensive materials worth it | OD:L467 | LIVE except one | new day after tranh sủng = jnight in fix-float (Q A4) |
-| 126 | Event choices: price + Cần + one honest hint + risk label; outcomes by context; skilled play beats random | OD:L466, L469, L477, L478 | LIVE / BRANCH | bot proof (hint bot ≫ random) → Q C7 |
+| 125 | Night notes: male mood cells, act button pictures, sub-tabs, mood+face after events, proper flower game, real gift for 'trả quà', new day after tranh sủng + bath, crying sound, visible Ân tình, expensive materials worth it | OD:L467 | LIVE (jnight.js on main) (17/11 sweep) | new day after tranh sủng = jnight in fix-float (Q A4) |
+| 126 | Event choices: price + Cần + one honest hint + risk label; outcomes by context; skilled play beats random | OD:L466, L469, L477, L478 | LIVE except bot proof hint>random unmet (balance lever) (17/11 sweep) | bot proof (hint bot ≫ random) → Q C7 |
 | 127 | Act-button pictures drawn, no group pictures | OD:L470 | LIVE | |
 | 128 | Mood cells show current causes | OD:L471 | LIVE | |
 | 129 | Makeup đẹp/diêm dúa levels approved | OD:L472, L475 | LIVE | |
-| 130 | Outfit/makeup reactions as event frames (max 1–2) | OD:L473 | LIVE (toilette) | extra reaction buttons → Q D27 |
-| 131 | Huadian size (c05, per tier, 0.07 too small, 8.5% chosen) | OD:L476, L490, L512, L529, L592 | BRANCH review/huadian-size (Q C9) | batch at 8.5% |
-| 132 | Tuần lục person page fixed template; flash on page turn; small avatar square border; name colours | OD:L479, L481, L503 | BRANCH fix-float r8 (Q A4) | KR rows 2, 4 |
+| 130 | Outfit/makeup reactions as event frames (max 1–2) | OD:L473 | LIVE (jtoilr.js incl. extra reaction buttons) (17/11 sweep) | extra reaction buttons → Q D27 |
+| 131 | Huadian size (c05, per tier, 0.07 too small, 8.5% chosen) | OD:L476, L490, L512, L529, L592 | PARTIAL: 72 por fixed on CDN; r3 FAIL list + Luan hoi still open (17/11 sweep) | batch at 8.5% |
+| 132 | Tuần lục person page fixed template; flash on page turn; small avatar square border; name colours | OD:L479, L481, L503 | LIVE (fix-float on main) (17/11 sweep) | KR rows 2, 4 |
 | 133 | VIỆC · <cung> palace visit box | OD:L482 | LIVE (kit-fig2 r8) | |
 | 134 | Evening Bái kiến; Phế phi Lý figure; weather × buổi; blue tap box; 'Qua ngày'; update chip | OD:L484–488 | LIVE (close-bugs, jly) | |
-| 135 | Pictures: action pictures with few people; story pictures may have people | OD:L492 | BRANCH act-pics2 (Q C4) / RULE | |
-| 136 | Evidence lines with real source; ranks; decimals; '..' marks | OD:L494, L495 | BRANCH fix-float r8 (Q A4) | |
-| 137 | Tuần lục every page has a full-body figure (no page packing) | OD:L496, L511 | BRANCH fix-float r8 (Q A4) | |
+| 135 | Pictures: action pictures with few people; story pictures may have people | OD:L492 | LIVE (act pictures complete on CDN; rule kept) (17/11 sweep) | |
+| 136 | Evidence lines with real source; ranks; decimals; '..' marks | OD:L494, L495 | LIVE (fix-float + evidence-truth on main) (17/11 sweep) | |
+| 137 | Tuần lục every page has a full-body figure (no page packing) | OD:L496, L511 | LIVE (fix-float on main) (17/11 sweep) | |
 | 138 | Festival × contest pairs match | OD:L500 | LIVE (close-bugs) | |
 | 139 | Ân sủng panel per reference shot; duplicate Sức condition | OD:L501, L510, L516 | LIVE (stage-slots, close-bugs) | |
 | 140 | Tuần lục cover title: vertical old calligraphy d4 + Trân nữ seal | OD:L502, L517, L530 | LIVE (book-title) | |
 | 141 | Promotion requires an exam; NPCs too | OD:L504 | LIVE (promo-exam) | |
-| 142 | Son = direct promotion; daughter = exam; servant/mama roads = exams | OD:L525, L590 | BRANCH review/promo-rules (Q A9) | |
+| 142 | Son = direct promotion; daughter = exam; servant/mama roads = exams | OD:L525, L590 | LIVE (promo-rules + promo-skip on main) (17/11 sweep) | |
 | 143 | Midday room brown; fireflies at midday; Emperor painting reward without chest | OD:L505 | LIVE | |
-| 144 | One kit label/value table everywhere | OD:L506 | LIVE (kit-table) | s8 row alignment → Q C14 |
-| 145 | Stipend items real + chest; stipend skimming event | OD:L507, L508 | LIVE (econ-stipend) | item skimming → Q D6 |
+| 144 | One kit label/value table everywhere | OD:L506 | LIVE (kit-table + row-align on main) (17/11 sweep) | s8 row alignment → Q C14 |
+| 145 | Stipend items real + chest; stipend skimming event | OD:L507, L508 | LIVE (econ-stipend + econ-items on main) (17/11 sweep) | item skimming → Q D6 |
 | 146 | Header groups: left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng, right Bạc·Sức | OD:L509, L515 | LIVE (header-danh) | |
 | 147 | Neck black mark on figures | OD:L510 | LIVE (scene-light) | |
 | 148 | ChatGPT audit setup | OD:L520–524 | LIVE (AGENTS.md) / RULE | |
-| 149 | Figure background (silk hanging scroll A, rods, same size inside, crop wide robes, per-status motif) | OD:L526, L646, L649 | BRANCH review/fig-bg step 2 (Q C8) | |
+| 149 | Figure background (silk hanging scroll A, rods, same size inside, crop wide robes, per-status motif) | OD:L526, L646, L649 | CLOSED: owner dropped painted scroll behind figures (OD:L1314) (17/11 sweep) | |
 | 150 | Item events: item icon in dialog, fly to Tư trang / burn animation | OD:L527 | LIVE (item-events §64) | |
-| 151 | People animations proposals (13-item list approved) | OD:L527, L610 | BRANCH promo-rules (Q A9) / NOT DONE (Q D11) | |
-| 152 | Event entrance animations (edict scroll); main-story frames by ORIGIN (9 styles); side-story frame ideas | OD:L528 | NOT DONE (Q D11) | make sure D11 includes the 9 origin frame styles |
+| 151 | People animations proposals (13-item list approved) | OD:L527, L610 | PARTIAL: promotion/demotion live; other 11 animations unwired (17/11 sweep) | |
+| 152 | Event entrance animations (edict scroll); main-story frames by ORIGIN (9 styles); side-story frame ideas | OD:L528 | NOT DONE: origin frames + entrance animation (kit part + art needed) (17/11 sweep) | make sure D11 includes the 9 origin frame styles |
 | 153 | Brown/sepia wash audit of every place | OD:L531 | LIVE (place-colour) | |
 | 154 | Rank-title look (rank colour, glow on paintings only, vivid) | OD:L532, L702, L703 | LIVE (rank-title) | |
 | 155 | Month calendar (3×10, fixed festivals, desk icon) | OD:L535–539 | LIVE (month-calendar) | |
-| 156 | Act pictures: no faces; dark = gloomy mood for scheming, light = normal | OD:L542–545, L638 | BRANCH act-pics2 (Q C4) | |
-| 157 | 4 placeholder pictures + missing list | OD:L548–551 | LIVE (placeholder-pics) | drawing the missing ones → new D46 |
-| 158 | Makeup: picked colours show exactly on her picture (lips, eyes, blush) | OD:L555 | BRANCH review/mk-colour (Q C6) | |
-| 159 | Thái y: monthly pulse, 'Mời thái y bắt mạch', early pregnancy, bribed physician | OD:L558, L625–629 | BRANCH review/thaiy (Q A6) | |
-| 160 | Night-end pictures by mood, sound, new-day picture by season/festival | OD:L561–564 | BRANCH review/night-end-r1 FAIL (Q B1) | |
-| 161 | Art completeness: 4 age bands × every rank for every character | OD:L567 | BRANCH review/art-complete (Q C3, A12) | |
-| 162 | Recipes learnt/bought; repeat fatigue; tastes; allergies; cheap teacher; 4 sub-styles; level-up grants a recipe | OD:L568–572, L575, L576, L675, L695 | BRANCH review/recipes-r1 (Q A13) | |
+| 156 | Act pictures: no faces; dark = gloomy mood for scheming, light = normal | OD:L542–545, L638 | LIVE (act pictures redrawn, on CDN) (17/11 sweep) | |
+| 157 | 4 placeholder pictures + missing list | OD:L548–551 | LIVE (placeholders drawn; stand-ins marked "tam") (17/11 sweep) | drawing the missing ones → new D46 |
+| 158 | Makeup: picked colours show exactly on her picture (lips, eyes, blush) | OD:L555 | LIVE (mk-colour on main; fits for 12960 pictures) (17/11 sweep) | |
+| 159 | Thái y: monthly pulse, 'Mời thái y bắt mạch', early pregnancy, bribed physician | OD:L558, L625–629 | LIVE (thaiy on main) (17/11 sweep) | |
+| 160 | Night-end pictures by mood, sound, new-day picture by season/festival | OD:L561–564 | LIVE (night-end on main, jne.js) (17/11 sweep) | |
+| 161 | Art completeness: 4 age bands × every rank for every character | OD:L567 | LIVE (jartc.js; groups A, eunuch ranks, grown kids drawn) (17/11 sweep) | |
+| 162 | Recipes learnt/bought; repeat fatigue; tastes; allergies; cheap teacher; 4 sub-styles; level-up grants a recipe | OD:L568–572, L575, L576, L675, L695 | LIVE (recipes on main, jrcp.js) (17/11 sweep) | |
 | 163 | Story chapter labels 'Chương N · Hồi M' | OD:L581 | LIVE (chap-label) | |
-| 164 | bạc road ⇒ equal-value other road (balance rule) | OD:L582 | BRANCH balance-pass (Q C7) / RULE | outside-r2 added 13 twins |
-| 165 | Pre-palace route (re-port onto main) | OD:L585 | BRANCH outside-r2-r1 FAIL (Q B2) | |
+| 164 | bạc road ⇒ equal-value other road (balance rule) | OD:L582 | LIVE (balance-pass on main; rule stays) (17/11 sweep) | outside-r2 added 13 twins |
+| 165 | Pre-palace route (re-port onto main) | OD:L585 | LIVE (outside-r2-r2 on main, jkc.js) (17/11 sweep) | |
 | 166 | Face reveal whenever the person appears in an event dialog | OD:L586 | LIVE (face-reveal) | |
 | 167 | doat-giai pictures with the Emperor: keep | OD:L591 | CLOSED (keep) | |
-| 168 | Pet decisions: life-save at Linh thú; label "No" | OD:L593, L613, L707, L708 | RULE / BRANCH coop-pets (Q A10) | |
-| 169 | Co-op pet help/harm/steal now | OD:L594 | BRANCH review/coop-pets (Q A10) | |
-| 170 | Thái hậu thỉnh an not flat +8; lowering events; personality-dependent | OD:L598 | NOT DONE (Q D7) | |
-| 171 | Personality groups + trọng (13 virtues) for everyone incl. player | OD:L599 | NOT DONE (Q D7) | |
-| 172 | Sims-like mood bar affecting odds/choices/how others see her | OD:L600 | NOT DONE (Q D12) | |
-| 173 | Stipend skimming also items | OD:L601 | NOT DONE (Q D6) | |
-| 174 | Poisoning the Emperor / Thái hậu possible with risk | OD:L602 | NOT DONE (Q D8) | |
-| 175 | Emperor visits her palace and stays the night | OD:L603 | NOT DONE (Q D8) | |
-| 176 | Stolen clothes target worn/wardrobe outfit; re-issue; show odds | OD:L604 | NOT DONE (Q D6) | |
-| 177 | Girlhood belongings chest filling 6 slots | OD:L605 | NOT DONE (Q D6) + B2 item #5 | |
-| 178 | Promotion rewards (full set) + new servant reveal screen | OD:L606 | BRANCH promo-rules (Q A9) | missing art: per-rank pendants/bangles/sachets, maid robes per maid rank |
-| 179 | Header keeps only her info; others in room tabs | OD:L607 | NOT DONE (Q D9) | |
-| 180 | Sound by event group + voices | OD:L608 | NOT DONE (Q D11) | |
-| 181 | Event frames by group / main / side story | OD:L609 | NOT DONE (Q D11) | |
-| 182 | 13 approved animations (slide in/out, promotion, demotion, dragged away, slap, death, pregnancy, birth, favoured, poisoned, alliance/betrayal) | OD:L610 | BRANCH promo-rules (promotion/demotion) + NOT DONE rest (Q D11) | |
-| 183 | Update notes popup + Settings "Thông tin cập nhật" | OD:L611 | NOT DONE (Q D10) | |
-| 184 | History + game-design expert workers → ideas, then build | OD:L612 | LIVE (docs done) / NOT DONE build (Q D26) | docs only on review/idea-history aa1714ed, review/idea-design 17b2ba71 (not on main) |
+| 168 | Pet decisions: life-save at Linh thú; label "No" | OD:L593, L613, L707, L708 | LIVE (pets on main) (17/11 sweep) | |
+| 169 | Co-op pet help/harm/steal now | OD:L594 | LIVE (coop-pets on main); co-op rebuild = coop-thin (17/11 sweep) | |
+| 170 | Thái hậu thỉnh an not flat +8; lowering events; personality-dependent | OD:L598 | LIVE (jtrong.js on main) (17/11 sweep) | |
+| 171 | Personality groups + trọng (13 virtues) for everyone incl. player | OD:L599 | LIVE (jtrong.js on main) (17/11 sweep) | |
+| 172 | Sims-like mood bar affecting odds/choices/how others see her | OD:L600 | LIVE (jmood.js on main) (17/11 sweep) | |
+| 173 | Stipend skimming also items | OD:L601 | LIVE (econ-items on main) (17/11 sweep) | |
+| 174 | Poisoning the Emperor / Thái hậu possible with risk | OD:L602 | NOT DONE: no player road to poison Emperor / Thai hau (rules only) (17/11 sweep) | |
+| 175 | Emperor visits her palace and stays the night | OD:L603 | LIVE (jvisit.js on main) (17/11 sweep) | |
+| 176 | Stolen clothes target worn/wardrobe outfit; re-issue; show odds | OD:L604 | LIVE (econ-items on main) (17/11 sweep) | |
+| 177 | Girlhood belongings chest filling 6 slots | OD:L605 | LIVE (econ-items girlChest on main) (17/11 sweep) | |
+| 178 | Promotion rewards (full set) + new servant reveal screen | OD:L606 | LIVE (promo-rules + small-art-wire on main) (17/11 sweep) | missing art: per-rank pendants/bangles/sachets, maid robes per maid rank |
+| 179 | Header keeps only her info; others in room tabs | OD:L607 | LIVE (header shows only her info) (17/11 sweep) | |
+| 180 | Sound by event group + voices | OD:L608 | PARTIAL: sound/music by group live; group voices not done (17/11 sweep) | |
+| 181 | Event frames by group / main / side story | OD:L609 | PARTIAL: group hooks live; frame art per group/origin missing (17/11 sweep) | |
+| 182 | 13 approved animations (slide in/out, promotion, demotion, dragged away, slap, death, pregnancy, birth, favoured, poisoned, alliance/betrayal) | OD:L610 | PARTIAL: 2 of 13 animations live (17/11 sweep) | |
+| 183 | Update notes popup + Settings "Thông tin cập nhật" | OD:L611 | LIVE (update notes on main) (17/11 sweep) | |
+| 184 | History + game-design expert workers → ideas, then build | OD:L612 | PARTIAL: memories live; remaining ideas parked (freeze OD:L1402) (17/11 sweep) | docs only on review/idea-history aa1714ed, review/idea-design 17b2ba71 (not on main) |
 | 185 | Her own name black + gold glow on paintings, plain in UI | OD:L616, L704 | LIVE (rank-title) | |
-| 186 | Calendar ideas (a)–(j); Trân nữ seal on every event frame | OD:L620, L621, L711 | BRANCH review/cal-plus (Q A8) | |
-| 187 | Hands/neck match face tone; player look1 rosy (ref Ngọc Lan) | OD:L622 | BRANCH review/skin-match (Q C5) | |
-| 188 | Monthly cycle; Kính sự phòng book; forge/read; calendar; co-op | OD:L632–635 | BRANCH review/cycle (Q A7) | |
-| 189 | Phế phi Lý stays when a rival is sent to Lãnh cung | OD:L641 | NOT DONE (Q D4) | |
-| 190 | All NPCs can die; replacements with NEW faces; some posts empty | OD:L642 | NOT DONE (Q D4) | |
-| 191 | Phế phi Lý side story | OD:L643 | NOT DONE (Q D4) | |
-| 192 | Real side stories from NPC life goals | OD:L644 | NOT DONE (Q D5) | |
+| 186 | Calendar ideas (a)–(j); Trân nữ seal on every event frame | OD:L620, L621, L711 | LIVE (cal-plus on main, jmcal.js) (17/11 sweep) | |
+| 187 | Hands/neck match face tone; player look1 rosy (ref Ngọc Lan) | OD:L622 | CLOSED: rosy skin removed by owner OD:L1305; tone match done (17/11 sweep) | |
+| 188 | Monthly cycle; Kính sự phòng book; forge/read; calendar; co-op | OD:L632–635 | LIVE (cycle on main, jcycle.js) (17/11 sweep) | |
+| 189 | Phế phi Lý stays when a rival is sent to Lãnh cung | OD:L641 | ON BRANCH npc-death-r1 PASS 5f58a715, held for j95 place record (17/11 sweep) | |
+| 190 | All NPCs can die; replacements with NEW faces; some posts empty | OD:L642 | ON BRANCH npc-death-r1 PASS 5f58a715, held for j95 place record (17/11 sweep) | |
+| 191 | Phế phi Lý side story | OD:L643 | LIVE (Ly side story in jreign.js) (17/11 sweep) | |
+| 192 | Real side stories from NPC life goals | OD:L644 | ON BRANCH npc-roads-fx RUNNING (Foreman D); needs story14 first (17/11 sweep) | |
 | 193 | No box around rank+name caption in person dialogs | OD:L645 | LIVE (rank-title §48.1c) | |
-| 194 | End-of-day card-flip scene (tray, cycle greys out, carried to Emperor, pick, her extra animation); her knowledge only | OD:L651–656, L672 | BRANCH review/cardflip (Q A11) | co-op pick still local (needs D21 B2) |
-| 195 | Painted effects (sprites, black-bg screen-blend videos, alpha sheets) | OD:L662, L663 | BRANCH review/fxkit (Q A2) | |
-| 196 | Night follow-ups: Kính sự phòng records, lạnh nhạt mockery, music from another palace, rằm/festival variants | OD:L666–669 | NOT DONE (Q B1 after pass) | |
-| 197 | Co-op buổi timer (5 min default, 3/5/8, Tạm dừng both, generic waiting line, lag-safe deadline, pauses only for minigames) | OD:L678–680, L741–744, L757, L765 | BRANCH review/coop-timer (Q A5) | |
-| 198 | Poem items as calligraphy; incense distinct colours; dress items without rack; chubby thiếu niên pets | OD:L682, L684, L685, L688 | NOT DONE (Q D2) | |
-| 199 | Big centre item display hi-res, transparent, no tile | OD:L686 | NOT DONE (Q D3) | |
-| 200 | Makeup presets 8+8 (4 cool/4 warm), lighter đẹp lips, orange/coral; lips anchored per face | OD:L687, L747 | BRANCH review/mk-colour (Q C6) | |
-| 201 | Scene pictures for landscape AND portrait (≥1536 px, focal point) | OD:L691 | BRANCH night-end-r1 (Q B1), cardflip (Q A11) / RULE | |
-| 202 | Every art/work kind exactly 4 sub-styles; Công Dung Ngôn Hạnh 4 sub-styles too | OD:L695, L696 | BRANCH recipes-r1 (Q A13) / NOT DONE (Q D16) | |
-| 203 | 'Học thành tài' painted level-up scene | OD:L712 | NOT DONE (Q D14) | |
-| 204 | Perf budget: 129 MB first load first; Hiệu ứng Đầy đủ/Gọn + auto-Gọn; perf test in CI | OD:L713–719 | BRANCH fxkit (Settings, Q A2) / NOT DONE (Q D15) | |
-| 205 | Painted animations for all moments (15-item list) | OD:L722–738 | BRANCH fxkit library (Q A2) / NOT DONE wiring (Q D11) | |
-| 206 | CDNH works: 10 items per kind × 4 tiers with art, giftable | OD:L748, L760 | NOT DONE (Q D16) | |
-| 207 | Draw 128 old-save player looks + add look1–4 as new faces; draw 56 promoted old-love men | OD:L749, L751 | BRANCH review/art-complete (Q C3) | |
-| 208 | Foreign princess origin visible + ≥1 more with own story | OD:L750 | NOT DONE (Q D18) | |
-| 209 | 'Biếu quà làm lành' also accepts a work/item | OD:L752 | NOT DONE (Q D19) | |
-| 210 | Dress contest theme tags + visible luxury; luxury RANGE per occasion; deep xa xỉ system | OD:L753, L761, L762 | NOT DONE (Q D17) | |
-| 211 | Weather redone with painted effects | OD:L754 | NOT DONE (Q D20) | |
-| 212 | Spread events across buổi, cap per buổi, histogram | OD:L766 | NOT DONE (Q D13) | |
-| 213 | Makeup final-look reveal scene | OD:L769–775 | NOT DONE (Q D28, inside C6) | |
-| 214 | 8 vụng looks | OD:L778 | BRANCH review/mk-colour (Q C6) | latest commit "vụng look = deliberate clumsy makeup" |
+| 194 | End-of-day card-flip scene (tray, cycle greys out, carried to Emperor, pick, her extra animation); her knowledge only | OD:L651–656, L672 | LIVE (cardflip + flip-entry); co-op pick = coop-thin (17/11 sweep) | co-op pick still local (needs D21 B2) |
+| 195 | Painted effects (sprites, black-bg screen-blend videos, alpha sheets) | OD:L662, L663 | LIVE (fxkit on main, jfxkit.js) (17/11 sweep) | |
+| 196 | Night follow-ups: Kính sự phòng records, lạnh nhạt mockery, music from another palace, rằm/festival variants | OD:L666–669 | LIVE (night-end follow-ups in jne.js) (17/11 sweep) | |
+| 197 | Co-op buổi timer (5 min default, 3/5/8, Tạm dừng both, generic waiting line, lag-safe deadline, pauses only for minigames) | OD:L678–680, L741–744, L757, L765 | LIVE (coop-timer on main); further co-op = coop-thin (17/11 sweep) | |
+| 198 | Poem items as calligraphy; incense distinct colours; dress items without rack; chubby thiếu niên pets | OD:L682, L684, L685, L688 | LIVE (item-art r5 on CDN) (17/11 sweep) | |
+| 199 | Big centre item display hi-res, transparent, no tile | OD:L686 | LIVE (item-big on main, kitItemBigSrc) (17/11 sweep) | |
+| 200 | Makeup presets 8+8 (4 cool/4 warm), lighter đẹp lips, orange/coral; lips anchored per face | OD:L687, L747 | LIVE (mk-colour presets on main) (17/11 sweep) | |
+| 201 | Scene pictures for landscape AND portrait (≥1536 px, focal point) | OD:L691 | RULE (applied; keep for new scenes) (17/11 sweep) | |
+| 202 | Every art/work kind exactly 4 sub-styles; Công Dung Ngôn Hạnh 4 sub-styles too | OD:L695, L696 | LIVE (tuduc-sub + recipes on main) (17/11 sweep) | |
+| 203 | 'Học thành tài' painted level-up scene | OD:L712 | NOT DONE: painted hoc thanh tai scene (needs art + fxkit wiring) (17/11 sweep) | |
+| 204 | Perf budget: 129 MB first load first; Hiệu ứng Đầy đủ/Gọn + auto-Gọn; perf test in CI | OD:L713–719 | LIVE (first load 43 MB; perf test on main) (17/11 sweep) | |
+| 205 | Painted animations for all moments (15-item list) | OD:L722–738 | PARTIAL: effect library live; many events not wired yet (17/11 sweep) | |
+| 206 | CDNH works: 10 items per kind × 4 tiers with art, giftable | OD:L748, L760 | LIVE (tuduc-sub + tuduc-pic on main) (17/11 sweep) | |
+| 207 | Draw 128 old-save player looks + add look1–4 as new faces; draw 56 promoted old-love men | OD:L749, L751 | NOT DONE: 108 player-look figures + 56 men still undrawn (CDN) (17/11 sweep) | |
+| 208 | Foreign princess origin visible + ≥1 more with own story | OD:L750 | LIVE origin+story (jorigins.js); costume art WIP (17/11 sweep) | |
+| 209 | 'Biếu quà làm lành' also accepts a work/item | OD:L752 | NOT DONE: Bieu qua lam lanh with item/work (jlux.luxGift ready) (17/11 sweep) | |
+| 210 | Dress contest theme tags + visible luxury; luxury RANGE per occasion; deep xa xỉ system | OD:L753, L761, L762 | LIVE (luxury on main, jlux.js) (17/11 sweep) | |
+| 211 | Weather redone with painted effects | OD:L754 | LIVE (weather-fx-one + fx3 on main) (17/11 sweep) | |
+| 212 | Spread events across buổi, cap per buổi, histogram | OD:L766 | LIVE (spread-events on main) (17/11 sweep) | |
+| 213 | Makeup final-look reveal scene | OD:L769–775 | LIVE (makeup reveal on main) (17/11 sweep) | |
+| 214 | 8 vụng looks | OD:L778 | LIVE (vung looks on main) (17/11 sweep) | latest commit "vụng look = deliberate clumsy makeup" |
 | 215 | Move to new account; re-open every worker | OD:L781 | LIVE (done by s8) | |
 | 216 | Which account reset usage | OD:L782 | CLOSED (answered: no tool sees usage, H8 §8) | |
-| 217 | Her figure's face hazy on stage | OD:L785 | BRANCH review/face-sharp (Q C1, running) | |
-| 218 | Rank colour in picker rows and every name+rank place | OD:L795, L821 | BRANCH review/rank-colour (Q C2, running) | |
-| 219 | Odds explanation line one clear sentence | OD:L799 | BRANCH review/pick-hint (Q C11, running) | |
+| 217 | Her figure's face hazy on stage | OD:L785 | LIVE (animation blur fixed); HD upscale rides on fig-cutout-clean (17/11 sweep) | |
+| 218 | Rank colour in picker rows and every name+rank place | OD:L795, L821 | LIVE (rank-colour on main) (17/11 sweep) | |
+| 219 | Odds explanation line one clear sentence | OD:L799 | LIVE (pick-hint on main) (17/11 sweep) | |
 | 220 | Cloudflare token saved, CDN unblocked | OD:L800 | LIVE | |
-| 221 | Hậu cung portrait: close top gap, widen frame | OD:L802–805 | BRANCH review/hc-portrait (Q C12, running) | |
-| 222 | Gift picker as Tư trang picture grid + painted gift animation | OD:L807–810 | BRANCH review/gift-pick (Q C13, running) | animation needs A2 |
-| 223 | Label/value rows in one block share one label column | OD:L812–815 | BRANCH review/row-align (Q C14, running) | |
-| 224 | Mood dialog picture per mood + icon corner; title with rank | OD:L817–821 | BRANCH review/mood-dialog (Q C15, running) | |
-| 225 | Tap any item cell → kit item-detail; wear via button | OD:L823–826 | BRANCH review/item-info (Q C16, running) | |
-| 226 | Correction: mood dialog picture = the CAUSE event's picture (e.g. tấn phong), per-mood pictures only as fallback; icon in a corner | OD:L827 | BRANCH review/mood-dialog (Q C15, running) | |
-| 227 | Event dialog figure column capped per KIT §32.2 on every dialog; crop the figure (skirt OK, face always whole) instead of growing | OD:L829–833 | BRANCH review/stage-fig-size (Q C17, running) | |
-| 228 | Redraw Thỉnh an Hoàng hậu act picture (bad hands) + audit every act/event picture for malformed hands | OD:L835–838 | BRANCH review/act-pics2 (Q C4) | |
+| 221 | Hậu cung portrait: close top gap, widen frame | OD:L802–805 | LIVE (hc-portrait on main) (17/11 sweep) | |
+| 222 | Gift picker as Tư trang picture grid + painted gift animation | OD:L807–810 | LIVE (gift-pick on main, gift animation) (17/11 sweep) | animation needs A2 |
+| 223 | Label/value rows in one block share one label column | OD:L812–815 | LIVE (row-align on main) (17/11 sweep) | |
+| 224 | Mood dialog picture per mood + icon corner; title with rank | OD:L817–821 | LIVE (mood-dialog on main) (17/11 sweep) | |
+| 225 | Tap any item cell → kit item-detail; wear via button | OD:L823–826 | LIVE (item-info on main, jitd.js) (17/11 sweep) | |
+| 226 | Correction: mood dialog picture = the CAUSE event's picture (e.g. tấn phong), per-mood pictures only as fallback; icon in a corner | OD:L827 | LIVE (mood-dialog cause picture on main) (17/11 sweep) | |
+| 227 | Event dialog figure column capped per KIT §32.2 on every dialog; crop the figure (skirt OK, face always whole) instead of growing | OD:L829–833 | LIVE cap; feet-crop fix on review/fig-feet-crop-2 c269e2fc9 waiting review (17/11 sweep) | |
+| 228 | Redraw Thỉnh an Hoàng hậu act picture (bad hands) + audit every act/event picture for malformed hands | OD:L835–838 | LIVE (thinh an art + hands audit on CDN) (17/11 sweep) | |
 
 ## 4. Older / handover-only items still open
 | Ask | Src | Status | Where |
@@ -406,53 +406,75 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 
 ## 7. UNASSIGNED / NOT DONE (one line each: short spec · source)
 Already in SESSION8_QUEUE §D (D1–D28):
-- D1 result-sfx: one distinct win/fail sound on every result surface, sound on by default, iPhone Safari unlock · H7:L87
-- D2 item-art: poems as calligraphy scroll/sheet/fan (all subjects × 4), incense distinct colours, equipment dresses flowing no rack, chubby thiếu niên for 8 pets, 1024 masters · OD:L682–688
-- D3 item-big: centre-screen item display hi-res, transparent, no frame/tile; frame only in Tư trang · OD:L686
-- D4 NPC death + replacement with new faces (some posts empty), Phế phi Lý stays in Lãnh cung until death, Lý side story · OD:L641–643
-- D5 real side stories: NPC life goals → side quests with rewards · OD:L644
-- D6 econ-items: stipend item skimming (fewer/lower grade; charcoal/ice by rank), stolen clothes re-issue + odds, girlhood chest 6 slots · OD:L601, L604, L605
-- D7 personality groups + trọng (13 virtues) for everyone incl. player; Thái hậu archetypes; thỉnh an not flat +8; lowering events · OD:L598, L599
-- D8 emperor: poison Emperor/Thái hậu roads (taster/two-pot/touch checks); Emperor visits her palace · OD:L602, L603
-- D9 header only her info; others' info in room tabs · OD:L607
-- D10 update notes popup + Settings "Thông tin cập nhật" · OD:L611
-- D11 presentation: sound by event group + voices; event frames by group/main/side (incl. 9 origin frame styles for main story, entrance animations e.g. edict scroll); remaining approved animations; §68 into every event · OD:L528, L608–610, L722–738
-- D12 Sims-like mood bar · OD:L600
-- D13 spread events across buổi, cap per buổi, before/after histogram · OD:L766
-- D14 painted 'học thành tài' level-up scene · OD:L712
-- D15 download-size (129 MB first load) + perf test in CI · OD:L714–719, PM:L223
-- D16 Tứ đức (CDNH) 4 sub-styles + CDNH works 10 × 4 tiers with art · OD:L696, L748, L760
-- D17 luxury/xa xỉ system + dress-contest themes + luxury range per occasion · OD:L753, L761, L762
-- D18 foreign princess origin visible + one more with story · OD:L750
-- D19 'Biếu quà làm lành' accepts works/items of equal value · OD:L752
-- D20 weather redo with §68 painted effects · OD:L754
-- D21 co-op B1–B5 · H7:L80
-- D22 real-phone UA test mode · H7:L105
-- D23 whole-game mole audit · PM:L335
-- D24 consort-c12-ty5-a51 eye patch redraw · PM:L337
-- D25 veil/scar box follows jkpor zoom · PM:L337
-- D26 idea builds from DESIGN_IDEAS_1115 (30) + HISTORY_IDEAS_1115 (33): memories + hook ledger first · OD:L612, H7:L101
-- D27 extra toilette reaction buttons · H7:L41
-- D28 makeup final-look reveal scene (inside C6) · OD:L769–775
+- D1 result-sfx: one distinct win/fail sound on every result surface, sound on by default, iPhone Safari unlock · H7:L87 — 17/11 sweep: LIVE; sound-on default = open owner question
+- D2 item-art: poems as calligraphy scroll/sheet/fan (all subjects × 4), incense distinct colours, equipment dresses flowing no rack, chubby thiếu niên for 8 pets, 1024 masters · OD:L682–688 — 17/11 sweep: LIVE (item-art r5 on CDN)
+- D3 item-big: centre-screen item display hi-res, transparent, no frame/tile; frame only in Tư trang · OD:L686 — 17/11 sweep: LIVE (item-big on main)
+- D4 NPC death + replacement with new faces (some posts empty), Phế phi Lý stays in Lãnh cung until death, Lý side story · OD:L641–643 — 17/11 sweep: ON BRANCH npc-death-r1 PASS 5f58a715, held for j95 place record
+- D5 real side stories: NPC life goals → side quests with rewards · OD:L644 — 17/11 sweep: ON BRANCH npc-roads-fx RUNNING (replaces D5)
+- D6 econ-items: stipend item skimming (fewer/lower grade; charcoal/ice by rank), stolen clothes re-issue + odds, girlhood chest 6 slots · OD:L601, L604, L605 — 17/11 sweep: LIVE (econ-items on main)
+- D7 personality groups + trọng (13 virtues) for everyone incl. player; Thái hậu archetypes; thỉnh an not flat +8; lowering events · OD:L598, L599 — 17/11 sweep: LIVE (jtrong.js on main)
+- D8 emperor: poison Emperor/Thái hậu roads (taster/two-pot/touch checks); Emperor visits her palace · OD:L602, L603 — 17/11 sweep: PARTIAL: Emperor visit live; poison-the-Emperor road not built
+- D9 header only her info; others' info in room tabs · OD:L607 — 17/11 sweep: LIVE (header-own on main)
+- D10 update notes popup + Settings "Thông tin cập nhật" · OD:L611 — 17/11 sweep: LIVE (update notes on main)
+- D11 presentation: sound by event group + voices; event frames by group/main/side (incl. 9 origin frame styles for main story, entrance animations e.g. edict scroll); remaining approved animations; §68 into every event · OD:L528, L608–610, L722–738 — 17/11 sweep: PARTIAL: jpres.js live; origin frames/voices/animation wiring open
+- D12 Sims-like mood bar · OD:L600 — 17/11 sweep: LIVE (jmood.js on main)
+- D13 spread events across buổi, cap per buổi, before/after histogram · OD:L766 — 17/11 sweep: LIVE (spread-events on main)
+- D14 painted 'học thành tài' level-up scene · OD:L712 — 17/11 sweep: NOT DONE: painted hoc thanh tai scene
+- D15 download-size (129 MB first load) + perf test in CI · OD:L714–719, PM:L223 — 17/11 sweep: LIVE (43 MB first load; perf test on main)
+- D16 Tứ đức (CDNH) 4 sub-styles + CDNH works 10 × 4 tiers with art · OD:L696, L748, L760 — 17/11 sweep: LIVE (tuduc-sub on main)
+- D17 luxury/xa xỉ system + dress-contest themes + luxury range per occasion · OD:L753, L761, L762 — 17/11 sweep: LIVE (luxury on main)
+- D18 foreign princess origin visible + one more with story · OD:L750 — 17/11 sweep: LIVE origin+story; own-costume art WIP
+- D19 'Biếu quà làm lành' accepts works/items of equal value · OD:L752 — 17/11 sweep: NOT DONE: Bieu qua lam lanh with item/work
+- D20 weather redo with §68 painted effects · OD:L754 — 17/11 sweep: LIVE (weather-fx on main)
+- D21 co-op B1–B5 · H7:L80 — 17/11 sweep: LIVE (coop-b1b5-fix); further co-op = coop-thin
+- D22 real-phone UA test mode · H7:L105 — 17/11 sweep: LIVE (ua-test on main)
+- D23 whole-game mole audit · PM:L335 — 17/11 sweep: PAUSED: review/mole-audit-r2; redo on top of repaint
+- D24 consort-c12-ty5-a51 eye patch redraw · PM:L337 — 17/11 sweep: LIVE (redrawn on CDN)
+- D25 veil/scar box follows jkpor zoom · PM:L337 — 17/11 sweep: ON BRANCH veil-zoom-r3 PASS d236f309
+- D26 idea builds from DESIGN_IDEAS_1115 (30) + HISTORY_IDEAS_1115 (33): memories + hook ledger first · OD:L612, H7:L101 — 17/11 sweep: PARTIAL: memories live; remaining ideas parked (freeze)
+- D27 extra toilette reaction buttons · H7:L41 — 17/11 sweep: LIVE (toil-react on main)
+- D28 makeup final-look reveal scene (inside C6) · OD:L769–775 — 17/11 sweep: LIVE (makeup reveal on main)
 Added by this sweep (D29–D49, appended to SESSION8_QUEUE §D):
-- D29 schedules + ONE location ledger (j95): habits/intentions/surprises, trysts at hidden spots, S.roster + roster.js + Chép sổ, motive gate, ROSTER bot audit 30+ lives; re-port review/schedules2 (independent PASS 14/11) + wip/kit-j95 onto main · OD:L32–36, AM:L32
-- D30 palace detail map + residence paintings: Dư đồ → PL 'nhat' courtyard by chủ vị rank → rooms with real people; 25 rooms × 16 variants per person; re-port review/palace-map (incl. residence-art 400 paintings) · OD:L134–140, L155, L158–166
-- D31 difficulty modes Dễ/Vừa/Khó per life (Sổ luân hồi), identity-card row; re-port review/difficulty v8, re-measure with C7 · OD:L85, L128
-- D32 succession choice card (Hoàng thái hậu / nhiếp chính / Nữ đế, conditions, full odds, epilogues) + Tiên đế băng hà art; re-port review/succession2 · OD:L88, L106, L124–131
-- D33 Lối riêng routes (tư tình, trốn cung, rời cung hợp lệ, ẩn dật) + trích huyết nghiệm thân + water-bowl picture; re-port review/routes, fix bot, escape 10–25%, vows harder · OD:L184, L190, L192, AM:L48
-- D34 scheme minigames Nghe ngóng/Truyền lời/Mặc cả/Thời cơ (abstract, skip, NPC plain odds); re-port review/scheme-games, wire j78/j9/bribe · OD:L192, L195, L199
-- D35 new-player tutorial (guide mama, ≤12 steps, tips, on/off, replay; co-op separate); finish review/tutorial (2/3) on the current tab layout · OD:L227
-- D36 online leaderboard (review/rank: life + player ranking, guest code, Công danh, Worker+DO) + Bảng vàng/contest podium per 08:55Z + end-of-life card (review/rank-ui WIP) · OD:L281, L378
-- D37 finger-drag page curl (bend with finger, spring back, flick, buttons curl, stiffer cover); re-port review/drag-curl · OD:L276
-- D38 lost items + item rivalry: extortion, bribed servants steal, plant to frame, Đồ thất lạc, tra xét; re-port review/lost-items (jlost) · OD:L108, L117
-- D39 appearance overlays: illness light/heavy, poisoning, slap/punishment, allergy rash (two-way, heals, veil), her own allergy in recipes; re-port review/appearance + review/items-earned (jrash) · OD:L107, L121, L124, L126, L130, PM:L326
-- D40 bad-weather outdoor-act risks (cold, slipping, pregnancy risk; umbrella/cape/sedan; on the act card; NPCs same); re-port review/weather with reviewer fixes (wxRiskWord via chanceW, '−') · OD:L348, L351, PM:L160
-- D41 her own servant promotions (Chưởng sự cô cô, Nữ quan, Thủ lĩnh, Tổng quản), capped by her rank, NPCs same · OD:L302
-- D42 places plan leftovers: Dãy nhà cung nhân via edit of an approved scene (review/places), Hoán y cục / học đường reachable, A ca sở + Đông cung residences for princes · OD:L82, L86, L87
-- D43 postponed appearance art: pregnancy figures 6 & 9 months, nun figure (xuất gia) 4 ages, dưỡng nhan glow, early grey strands, smallpox overlay (plan on review/pregnancy-art) — confirm with owner first since she postponed it · OD:L121, L122, L751
-- D44 fig export ≥1100 px so Fold stage stops upscaling figures · PM:L223, H7:L102
-- D45 small art: earrings + embroidered shoes item art, guard 4 indigo outfit, c02-t1-a18 grey skin, Emperor costume audit (no Qing feathered hat / cheongsam collar) · AM:L34, OD:L364
-- D46 draw own pictures for every act/event still on placeholder (MISSING_PICS.md: acts 18/95, event e68 flowerBloom) + check Đoan ngọ banner/labels · OD:L444, L550, H7:L113
-- D47 small-bugs-4: jaudit 'Vì sao' trung y wording at Thỉnh an; 'Phi ???' in greet text + arc tab Mục tiêu; VP 'theo lòng nàng'; one kit sample page (?kit vs #kit); "Đang cài" leftover; servant-road header Đức '!' check · PM:L224, L226, L245, L270, L302, L308, OD:L369
-- D48 outside-route art: house/city paintings, Huynh trưởng civilian figure, house map · PM:L330, H8 §3
-- D49 collection milestones: per-life item count → Sổ luân hồi titles at 20/50/100/200 + Phúc duyên +5/+10/+20/+35 once per life, lost if kiếp dở dang (replace jearn stand-in counter) · OD:L45, L46
+- D29 schedules + ONE location ledger (j95): habits/intentions/surprises, trysts at hidden spots, S.roster + roster.js + Chép sổ, motive gate, ROSTER bot audit 30+ lives; re-port review/schedules2 (independent PASS 14/11) + wip/kit-j95 onto main · OD:L32–36, AM:L32 — 17/11 sweep: LIVE (j95 on main)
+- D30 palace detail map + residence paintings: Dư đồ → PL 'nhat' courtyard by chủ vị rank → rooms with real people; 25 rooms × 16 variants per person; re-port review/palace-map (incl. residence-art 400 paintings) · OD:L134–140, L155, L158–166 — 17/11 sweep: PARTIAL: palace map live; residence bedroom+hall paintings per rank not drawn
+- D31 difficulty modes Dễ/Vừa/Khó per life (Sổ luân hồi), identity-card row; re-port review/difficulty v8, re-measure with C7 · OD:L85, L128 — 17/11 sweep: LIVE (difficulty on main, jdiff.js)
+- D32 succession choice card (Hoàng thái hậu / nhiếp chính / Nữ đế, conditions, full odds, epilogues) + Tiên đế băng hà art; re-port review/succession2 · OD:L88, L106, L124–131 — 17/11 sweep: LIVE (succession on main)
+- D33 Lối riêng routes (tư tình, trốn cung, rời cung hợp lệ, ẩn dật) + trích huyết nghiệm thân + water-bowl picture; re-port review/routes, fix bot, escape 10–25%, vows harder · OD:L184, L190, L192, AM:L48 — 17/11 sweep: LIVE (routes on main)
+- D34 scheme minigames Nghe ngóng/Truyền lời/Mặc cả/Thời cơ (abstract, skip, NPC plain odds); re-port review/scheme-games, wire j78/j9/bribe · OD:L192, L195, L199 — 17/11 sweep: LIVE (scheme-games on main)
+- D35 new-player tutorial (guide mama, ≤12 steps, tips, on/off, replay; co-op separate); finish review/tutorial (2/3) on the current tab layout · OD:L227 — 17/11 sweep: LIVE (tutorial + tut-quests on main)
+- D36 online leaderboard (review/rank: life + player ranking, guest code, Công danh, Worker+DO) + Bảng vàng/contest podium per 08:55Z + end-of-life card (review/rank-ui WIP) · OD:L281, L378 — 17/11 sweep: ON BRANCH rank-port-r2 blocked on kit parts; not on main
+- D37 finger-drag page curl (bend with finger, spring back, flick, buttons curl, stiffer cover); re-port review/drag-curl · OD:L276 — 17/11 sweep: LIVE (finger-drag curl in kitBook)
+- D38 lost items + item rivalry: extortion, bribed servants steal, plant to frame, Đồ thất lạc, tra xét; re-port review/lost-items (jlost) · OD:L108, L117 — 17/11 sweep: LIVE (lost-items on main)
+- D39 appearance overlays: illness light/heavy, poisoning, slap/punishment, allergy rash (two-way, heals, veil), her own allergy in recipes; re-port review/appearance + review/items-earned (jrash) · OD:L107, L121, L124, L126, L130, PM:L326 — 17/11 sweep: PARTIAL: overlays live; her own recipe allergy not modelled
+- D40 bad-weather outdoor-act risks (cold, slipping, pregnancy risk; umbrella/cape/sedan; on the act card; NPCs same); re-port review/weather with reviewer fixes (wxRiskWord via chanceW, '−') · OD:L348, L351, PM:L160 — 17/11 sweep: LIVE (weather-port on main)
+- D41 her own servant promotions (Chưởng sự cô cô, Nữ quan, Thủ lĩnh, Tổng quản), capped by her rank, NPCs same · OD:L302 — 17/11 sweep: LIVE (promote-servants on main)
+- D42 places plan leftovers: Dãy nhà cung nhân via edit of an approved scene (review/places), Hoán y cục / học đường reachable, A ca sở + Đông cung residences for princes · OD:L82, L86, L87 — 17/11 sweep: LIVE (places-port on main)
+- D43 postponed appearance art: pregnancy figures 6 & 9 months, nun figure (xuất gia) 4 ages, dưỡng nhan glow, early grey strands, smallpox overlay (plan on review/pregnancy-art) — confirm with owner first since she postponed it · OD:L121, L122, L751 — 17/11 sweep: NOT DONE: postponed appearance art; owner must re-confirm
+- D44 fig export ≥1100 px so Fold stage stops upscaling figures · PM:L223, H7:L102 — 17/11 sweep: NOT DONE: figures <=900 px; rides on fig-cutout-clean
+- D45 small art: earrings + embroidered shoes item art, guard 4 indigo outfit, c02-t1-a18 grey skin, Emperor costume audit (no Qing feathered hat / cheongsam collar) · AM:L34, OD:L364 — 17/11 sweep: LIVE (small-art on main/CDN)
+- D46 draw own pictures for every act/event still on placeholder (MISSING_PICS.md: acts 18/95, event e68 flowerBloom) + check Đoan ngọ banner/labels · OD:L444, L550, H7:L113 — 17/11 sweep: LIVE (placeholders drawn)
+- D47 small-bugs-4: jaudit 'Vì sao' trung y wording at Thỉnh an; 'Phi ???' in greet text + arc tab Mục tiêu; VP 'theo lòng nàng'; one kit sample page (?kit vs #kit); "Đang cài" leftover; servant-road header Đức '!' check · PM:L224, L226, L245, L270, L302, L308, OD:L369 — 17/11 sweep: LIVE (small-bugs-4 on main)
+- D48 outside-route art: house/city paintings, Huynh trưởng civilian figure, house map · PM:L330, H8 §3 — 17/11 sweep: LIVE (outside-art on main/CDN)
+- D49 collection milestones: per-life item count → Sổ luân hồi titles at 20/50/100/200 + Phúc duyên +5/+10/+20/+35 once per life, lost if kiếp dở dang (replace jearn stand-in counter) · OD:L45, L46 — 17/11 sweep: LIVE (collect-ms on main, jcol.js)
+
+
+## 8. 17/11 sweep (owner-bug-sweep, origin/main 7abaf07ac) — rows not editable in place above
+Full verdict tables: dev/handover/reports/owner-bug-sweep.md. Ledger rows S2/S3 and §7 D-items were rewritten in place (status text ends "(17/11 sweep)").
+- S4-resultsfx: LIVE (result-sfx); sound-on default is an OPEN owner question
+- S4-844x390: LIVE (j59-fix on main)
+- S4-coopB1B5: LIVE (coop-b1b5-fix); further co-op = coop-thin
+- S4-uatest: LIVE (ua-test on main)
+- S4-mole: PAUSED: mole audit on review/mole-audit-r2; redo on top of repaint
+- S4-c12a51: LIVE (c12-ty5-a51 redrawn on CDN)
+- S4-veilzoom: ON BRANCH veil-zoom-r3 PASS d236f309, needs kit sign-off + batch
+- S4-toilbtn: LIVE (toil-react on main)
+- S4-figexport: NOT DONE: figures still <=900 px; rides on fig-cutout-clean repaint
+- S4-outsideart: LIVE (outside-art on main/CDN)
+- S4-leftovers: LIVE (small-bugs-4 on main)
+- S4-smallart: LIVE (small-art + small-art-wire on main)
+- S4-schedules: LIVE (j95 schedules on main)
+- S4-waterbowl: LIVE (water-bowl picture + routes on main)
+- S4-allergy: NOT DONE: her own food/gift allergy to recipe allergens
+- S4-kitreltable: LIVE (kitRelTable on main)
+- S4-k3wrap: LIVE (small-bugs-3 on main; close KR row)
+- S4-ideasopen: NOT DONE: move IDEAS_OPEN items 1-9 to Closed (coordinator)
