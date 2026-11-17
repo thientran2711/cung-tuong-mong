@@ -240,3 +240,22 @@ Sheet LIVE | NEW with lum: dev/handover/reports/event-art-dark-fix/sample2-LIVE-
 | ev-toil-hh-scold | 6AqIXYziJO | 36 | 69 |
 | ev-plantpick | TdUbQagVNR | 34 | 62 |
 Self-check: figures/props identical to LIVE, only lit; no faces (backs/far), no text. plantpick 62 slightly under 65 (can re-roll). Waiting for C OK.
+
+## STEP 2 (C ROOT-6 12:30Z): LAB lift of the 12 remaining dark keys — NOT uploaded; Magnific repaint dropped (sample1/sample2 superseded)
+Method = dev/handover/reports/event-art-dark-fix/lift.py: same live painted file, LAB lightness gamma solved so mean luma = 72, gentle S-curve, chroma x1.3, webp q86 (135-219 KB).
+Sheet LIVE | LIFTED with lum: dev/handover/reports/event-art-dark-fix/lift-sheet-LIVE-LIFTED.jpg
+| key | LIVE | LIFTED |
+|---|---|---|
+| ev-toil-rival-tease | 41 | 72 |
+| ev-toil-hh-scold | 36 | 72 |
+| ev-toil-rival-jealous | 42 | 72 |
+| ev-toil-th-scold | 43 | 72 |
+| ev-taintpick | 36 | 72 |
+| ev-plantpick | 34 | 72 |
+| ev-tt3 | 37 | 72 |
+| opt-giu-chan-hoang-thuong | 47 | 72 |
+| ev-td1 | 37 | 72 |
+| ev-news-tin-trong-cung | 43 | 72 |
+| intro/td-2 | 60 | 72 |
+| ev-nc1 | 45 | 72 |
+Self-check: compositions identical, deep red/indigo shadows kept, moon/candle/lantern glow still read, details readable, no haze/clipping seen at sheet size. ev-toil-crowd-jealous (99) skipped as told.
