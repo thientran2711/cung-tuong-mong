@@ -176,7 +176,7 @@ const KA_RANKRE=new RegExp("("+RANKS.map(r=>r.n).join("|")+")\\s*$","i");
 function kaWho(v){const r=v&&RANKS[v.rank];return (r&&v!==S?r.n+" ":"")+(v&&v.name||"")}
 function kaTitled(s){for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||!v.name||!s.includes(v.name)||!RANKS[v.rank])continue;const rn=RANKS[v.rank].n;s=s.split(v.name).map((x,i,a)=>i<a.length-1&&!KA_RANKRE.test(x)?x+rn+" ":x).join(v.name)}return s}
 const kaN=n=>(n>0?"+":"−")+Math.abs(n);
-function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,"")));
+function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain((typeof kShort==="function"?kShort(h):String(h)).replace(/<span class="ld">[^<]*<\/span>/,"")));/* the result card = the SHORT form (jvoice kShort, owner 16/11 ~21:05Z) */
  const ok=L.filter(t=>t&&!/→/.test(t)&&!/(thành|hỏng|kèm|tốn|được ngay)\s*:/i.test(t)&&!/\+\d+\.\.\d/.test(t)&&!/^\[/.test(t)&&!/\b(Thành|Hỏng)\.\s*·/.test(t)&&!/(^|\s)có thể\s/.test(t));
  if(!ok.length)return"";const P=ok[0].split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""));let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
@@ -254,7 +254,7 @@ function kaCaughtTxt(v,k){try{const n=cl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1)
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m||!String(h).includes(CAUGHT))return h;const t=kaCaughtTxt(v,m[1]);return t?String(h).split(CAUGHT).join(t):h})}catch(e){}return G}})();
 /* ---------- "Cần" row: every condition an act needs, with its current status, from the real checks (can/whyTime/cardWhy/ok/LACK/evG) ---------- */
 function kaNeedAttr(L){return L&&L.length?` data-kneed="${encodeURIComponent(JSON.stringify(L))}"`:""}
-function kaTimeNeeds(c,bacCost){const L=[];const left=4-used;L.push(j76need(c,window.__cbCard));if(c>1)L.push({t:`Sức ≥20 (có ${S.suc})`,ok:S.suc>=20});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}
+function kaTimeNeeds(c,bacCost){const L=[];const left=BAL.time.khac-used;L.push(j76need(c,window.__cbCard));if(c>1)L.push({t:`Sức ≥${BAL.time.sucMin} (có ${S.suc})`,ok:S.suc>=BAL.time.sucMin});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}
 (function(){const ch=cardH;cardH=function(a,i){let h=ch.apply(this,arguments);try{if(!S||S.dead)return h;const c=cardCost(a);const L=kaTimeNeeds(c,a.c&&a.c.bac<0?-a.c.bac:0);
   if(a.b!=null)L.push({t:`${BUOI[a.b]} (đang ${BUOI[S.buoi||0].toLowerCase()})`,ok:(S.buoi||0)===a.b});
   if(a.done)L.push({t:"chưa làm trong buổi này",ok:false});

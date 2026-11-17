@@ -291,7 +291,7 @@ function paint(force){if(!live()||S.dead){hideChip();return}try{paintF()}catch(e
  if(EL){EL.remove();EL=null;lastH=""}
  const me=myRd();
  /* she can still press "Sẵn sàng" and her khắc are spent: the kit selected look (.ksel) on the button */
- const go=!me&&!nx.disabled&&typeof used==="number"&&used>=4;if(nx.classList.contains("ksel")!==go)nx.classList.toggle("ksel",go)}
+ const go=!me&&!nx.disabled&&typeof used==="number"&&used>=BAL.time.khac;if(nx.classList.contains("ksel")!==go)nx.classList.toggle("ksel",go)}
 /* #next in co-op = "Sẵn sàng" (the room's lock words "Đợi hảo hữu…" stay as jcoopworld writes them) */
 function word(){const n=$("next");if(!n||!CW.on||n.dataset.coopWait)return;if(n.textContent!=="Sẵn sàng")n.textContent="Sẵn sàng"}
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{word();sendSt(false)}catch(e){}return r}})();

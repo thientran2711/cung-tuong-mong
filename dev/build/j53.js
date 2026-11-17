@@ -150,7 +150,7 @@ function ktRun(e,ch){const E=KTE[e];if(!E||!S)return;S.kt53t=S.turn;const L=ktLi
  const top=res.filter(x=>x.r==="ex").sort((a,b)=>b.s-a.s)[0];let rev="";
  for(const x of res){const p=x.v||S,g=Object.assign({},KTG[x.r]);if(x===top)for(const kk in KTG.top)g[kk]=(g[kk]||0)+KTG.top[kk];ktApply(x.k,p,g);x.g=g;
   x.k.lt={n:E.n,y:S.year,r:x.r,top:x===top?1:0};if(!x.v&&x.r!=="skip"&&roll(50))rev+=ktReveal(x.k,"Thầy dạy tâu riêng:")}
- if(top&&!top.v)ghenAll(2);
+ if(top&&!top.v)ghenAll(BAL.ghen.kidTop);
  const RW={ex:"Xuất sắc",ok:"Khá",poor:"Kém",skip:"Ở nhà"};
  const eff=x=>{const g=x.g,o=[];if(g.fond)o.push(`<span class="${g.fond>0?"g":"r"}">Hoàng thượng thương con ${g.fond>0?"+":""}${g.fond}</span>`);if(!x.v&&g.sung)o.push(`<span class="g">Sủng +${g.sung}</span>`);if(!x.v&&g.danh)o.push(`<span class="${g.danh>0?"g":"r"}">Danh ${g.danh>0?"+":""}${g.danh}</span>`);return o.join(" · ")};
  res.sort((a,b)=>b.s-a.s);const shown=res.filter(x=>!x.v||x===top||(x.r==="ex"&&res.indexOf(x)<4));const hid=res.filter(x=>!shown.includes(x));
