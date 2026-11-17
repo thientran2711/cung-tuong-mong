@@ -37,7 +37,8 @@ function disInitOne(p){if(!p||!S)return[];const o=obj(p);if(Array.isArray(o.dis)
  const n=BAL.dis.n[0]+hs(seed+"|disn|"+id)%(BAL.dis.n[1]-BAL.dis.n[0]+1);o.dis=P.slice(0,n).map(x=>x.k);return o.dis}
 function disOf(p){return disInitOne(p)}
 function disInit(){try{if(!S)return;S.disK=S.disK||{};disInitOne("emp");disInitOne("th");for(const v of rivals)disInitOne(v)}catch(e){console.error("jdis",e)}}
-function known(p){S.disK=S.disK||{};return S.disK[pid(p)]||(S.disK[pid(p)]=[])}
+/* kc-roads-cn-nc-fix2 (review r1 item 3 family: her own people are never strangers): her own people (j61 k61Own: maid, staff, kids, home family) are known whole */
+function known(p){if(!isEmp(p)&&typeof k61Own==="function"&&k61Own(p))return disOf(p).slice();S.disK=S.disK||{};return S.disK[pid(p)]||(S.disK[pid(p)]=[])}
 function unk(p){const K=known(p);return disOf(p).filter(k=>!K.includes(k))}
 function learn(p,k,why){const K=known(p);if(!k)k=unk(p)[0];if(!k||K.includes(k)||!disOf(p).includes(k))return null;K.push(k);const e=entry(k);
  try{if(isEmp(p))log(`<span class="g">Ngươi biết được: Hoàng thượng không ưa ${e.n}.</span>`);else if(isTh(p))log(`<span class="g">Ngươi biết được: Thái hậu không ưa ${e.n}.</span>`);else if(typeof noteAdd==="function")noteAdd(p.id,`${why||"Dò được"}: nàng không ưa ${e.n}`)}catch(x){}return e}

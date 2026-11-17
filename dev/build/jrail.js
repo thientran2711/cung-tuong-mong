@@ -37,8 +37,10 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  if(!paint.__t){paint.__t=setTimeout(()=>{paint.__t=0;const s2=document.getElementById("stage"),on=!!s2&&s2.getBoundingClientRect().height>40;if(on!==stOn)paint()},450)}}catch(e){console.error("kitStageRail",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#krail [data-rail]");if(!b)return;e.stopPropagation();e.preventDefault();
  const x=byId(b.dataset.rail);if(!x||typeof x.onTap!=="function")return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(y){}try{x.onTap()}catch(y){console.error("rail tap",y)}paint()},true);
-try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);paint();return r}}}catch(e){}
-try{const r1=render;render=function(){const r=r1.apply(this,arguments);paint();return r};window.render=render}catch(e){}
+/* oi-render: paint reads the stage box — it ran 2x per render (renderStage + render); inside a render it now runs once at its end (jlag2 renderAfter) */
+const paintR=()=>(window.renderAfter||((k,g)=>g()))("krail",paint);
+try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);paintR();return r}}}catch(e){}
+try{const r1=render;render=function(){const r=r1.apply(this,arguments);paintR();return r};window.render=render}catch(e){}
 let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(paint,80)});
 window.kitStageRail={add,remove,paint,items:()=>R.slice()};
 /* (1) Lịch tháng — §58 kitMonthCalOpen; the desk calendar in the room corner is retired (one place: the rail) */
