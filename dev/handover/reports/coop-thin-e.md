@@ -61,7 +61,8 @@ Built (level 5 = E, CAP 4 → 5, everything behind TH.on(5); levels 0–4 + solo
   off, nsay (ctm-nr) muted, nextBuoi wrapper → CW.eNext, forceBend → CW.eForce, lockNext waits on CW.eWait; keepFriendPos in her context =
   the host's own place; sendPos / sendFam never from inside her context. Exports CW.nCheck / nightReady / mapPlace / refreshHere.
 - Tests: **dev/test/coop-thin-e.js** (E1–E8) **19/19** L5 (host Fold, guest iPad) on 2fa0acf1; dev/test/coop-thin-e-perf.js (step 0 c).
-  Regression on 2fa0acf1: coop-e2e (level 0) 63/63; coop-thin-c L4 16/16; (thin-e L5 swap, thin-d L4: see ## #1 runs below).
+  Regression on 2fa0acf1: coop-e2e (level 0) 63/63; coop-thin-c L4 16/16; coop-thin-e L5 swap (iPad hosts) 19/19; coop-thin-d L4 48/52 = the 4 kit
+  sameDom data-kfsp FAILs that review-coop-thin-c.md records as SAME on main (kit-fx-register), not E.
   Seen in the run: her step's world writes put back each buổi (host E.stat wrR 39 NPC fields, wrW 2: `emp`, `tn`), 0 persons added/removed.
 
 ## ROLLOVER HANDOVER #1 → #2 (11/17/2026; context ≈ START_CTX 3 % + 25 %) — Foreman B opens the successor
