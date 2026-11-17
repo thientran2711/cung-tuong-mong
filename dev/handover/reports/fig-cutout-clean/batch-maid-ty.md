@@ -16,3 +16,8 @@ START_CTX ~8 % (estimate). Rolled over early at ~25 % of window because the setu
 ## LEAD #5 UPDATES (received after the handover push; sent by session_011xDdVRBW26agruDT2Bm65K)
 - OWNER CORRECTION: 2k only from now. images_generate gpt-2-6 width 1024 height 2048 resolution 2k (65 cr). Nothing new at 4k; the 5 finished 4k files stay. Pipeline cost becomes 65 (+3 if images_remove_background is still needed).
 - TRANSPARENCY: lead says use extraSettings {"transparentBackground": true} + prompt "FULLY TRANSPARENT BACKGROUND (real alpha channel, cut-out PNG, no backdrop, no checkerboard, no ground shadow)", drop 'plain light parchment background' from the style prefix, and verify alpha extrema (0 and 255) on every master before finish_fig. NOTE: images_models_settings(gpt-2-6) returned extraSettings {} (none) in my session, so test that param once; if rejected, keep my fallback (images_remove_background, +3 cr, verified clean).
+## SUCCESSOR W4b (17/11) START_CTX ~6 % (estimate)
+- 2k pipeline PROVEN: images_generate gpt-2-6 1024x2048 2k + extraSettings {"transparentBackground": true} + prompt line "FULLY TRANSPARENT BACKGROUND (...)" => real alpha (0..254), NO remove_background needed. 65 cr/file. Uploader: git show origin/main:dev/site/cdn_sync.py (do not commit); copy out/img/fig-*, out/img/hd/fig-*, out/img/por-* to <repo>/img/...; cdn_sync + --check OK (9 files = 27 objects uploaded 17/11).
+- Done 9/1664: m01 ty1-ty8, m02 ty1 (all a18). ty1-5 are 4k (65->83 cr), ty6-8 + m02-ty1 are 2k. All on CDN (fig + hd + por; maids have no tn).
+- Gestures used 2k: ty6 handkerchief, ty7 scroll, ty8 lantern+sleeve, m02-ty1 teacup.
+- Next: m02-ty2.. in lists/shards/maid-ty.txt a18 order. Ids in batch-maid-ty.tsv.
