@@ -34,9 +34,12 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 - IMPORTANT finding: the CDN img/mk-fit/consort-c11.json differs from the repo's dev/art/mkfit/consort-c11.json (fig lip points ~1 % of width left / 0.4 % up). With the CDN table the colour layer's lips (the makeup itself, level 0) are off the mouth on this face; with the repo table (what the tuyet-glow sampler injected from dev/art) they fit. Samples were shot with LOCALFIT=1 (repo table) on a scratch merge of main + review/toil-looks5 (toil-looks5's lip handling is not on main yet). Someone should compare/push dev/art/mkfit to the CDN (owner's lips complaint = that mismatch).
 - lip zone is now allowed through the skin mask (lips are not skin-coloured) so the soft lip halo + corner drag show; tears/blush stay clipped to skin.
 
+## r5 (owner on r4: nhẹ ok; vừa one side short / one long; nặng fewer details)
+- vừa: BAL.looks.smuFx.tear.pair[2] = [.5, 1.5] u — one eye's lash-run short, the other long (which eye is seeded per face). nặng: one clean run per eye (n 1), softer blush blot / drag, smaller lip smear (BAL smuFx values), still heavier than vừa. nhẹ untouched. smudge-2 / smudge-3 re-uploaded.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 66b1cda (pushed). Waiting for verdict.
+branch review/smudge-code 2e22ce6 (pushed). Waiting for verdict.
