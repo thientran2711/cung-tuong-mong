@@ -34,3 +34,12 @@ FAIL items (all in the adapter, jtinbao.js):
 4. ONE CORE: LOYW hard-codes 70 / 40 → BAL.loy.trust / BAL.loy.low (ag-all-2 alone PASS).
 5. Still open from r3b: iPad "Để ta tới xem" wraps to 2 lines; re-shoot Fold Tai mắt card after images load (3rd row showed the placeholder frame). Drop the stub branch once the real API is used (taiMatList exists now) or keep it only when typeof taiMatList!=="function".
 Worker CDN shots wiped.
+
+# r5 review (worker 30bb1851) — FAIL (2 small items left); helper base origin/review/tinbao-ui-r5r c7214b04 = r5 on NEWEST ag-all-2 f4a065dc + built
+Real 2f API now used: Tai mắt card LOOKED at (Fold): "Cung nữ ??? · đặt ở Càn Ninh cung (người của Hoàng hậu Lâm Tú Uyển) · chưa rõ" = correct place, unknown lòng = "chưa rõ", unknown name = the kit's standard ??? silhouette (so the "placeholder" of r3b was this standard unknown form: OK). iPad "Để ta tới xem" now one line: OK. Test 22/22 (one geometry check 390x844 failed once with hit:1, passed on 2 reruns: flaky, watch).
+Your 4 r3b items: placeholder OK; button wrap OK; invented names when API absent: STILL FAIL (below); one-core loyalty ladder: STILL FAIL (below).
+FAIL items:
+1. ONE CORE: jtinbao.js line 60 const LOYW=n=>n>=70?...:n>=40?... -> one-core-guard "NEW inline rule number jtinbao.js [ladder] (0 -> 1)"; use BAL.loy.trust / BAL.loy.low (ag-all-2 alone PASS).
+2. NO INVENTED NAMES: tbTaiMat() still keeps a fallback that lists her own servants by lòng as "Tai mắt" with placedAt = her own palace and reads the hidden s.loyal when taiMatList is absent. Make it return [] (the card then prints "Chưa có ai chịu làm tai mắt cho ta." or the tap is not intercepted); no stub list.
+3. Minor: Tin báo row prints "Thái giám Tiểu Quý Tử (Người hầu Tiểu Quý Tử)": the API label (knInfUi: KN_INFL[code]+" "+name) repeats the name next to kitName(p). Print KL[code] ("người hầu của ta" / "tai mắt của ta" …) when a person frame is shown, or strip the name from label.
+Worker CDN shots wiped.
