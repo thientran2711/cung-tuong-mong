@@ -127,8 +127,8 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[d
 function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x=>x.k===k);if(!a)return;if((k==="theu"||k==="nau")&&virtueBonus(p,"cong").prog)g+=1;
 /* the one course ladder (jbalcore crsPush): same points, same bậc effects as hers (j2 addArt + j23/j85 extras) */
  crsPush(p.arts,p.artp,k,g,l=>{const f={[a.st]:BAL.art.stUp};if(BAL.art.danh[l])f.danh=BAL.art.danh[l];const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)})}
-function npcStudy(v){if(!v||!v.alive||v.out||!roll(BAL.start.npc.study))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
- const w=k=>{let x=1;if(/Hiền lành|Nhu mì/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Hiểm độc"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
+function npcStudy(v){if(!v||!v.alive||v.out||!roll(BAL.start.npc.study*(1+BAL.net.k.study*netQ(v,"study"))))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
+ const w=k=>{let x=1;if(/Ân cần|Khiêm nhường/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Xảo quyệt"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
  const bk=(typeof stBestArt==="function"&&stBestArt(v)||{}).k;/* like a player she keeps at her best art (BAL.start.npc.focus) */ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)*(a.k===bk?BAL.start.npc.focus:1)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
  let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):artFee(l)):virCost(l,v);
  let g=1;if((v.bac||0)>=cost+40&&roll(50)){ap(v,{bac:-cost});g=2+R(2)}if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}

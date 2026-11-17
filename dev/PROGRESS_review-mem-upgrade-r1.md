@@ -8,7 +8,7 @@ Owner words checked line by line: OD 16/11 13:25Z (A) and 13:40Z ONE LEDGER (fee
 ## Owner line → branch
 | owner words | result |
 |---|---|
-| "có người thì ký ức phai nhanh, có người thì ký ức phai lâu" | OK — BAL.mem.fadeT per nết (good/bad separately) × fixed per-person spread; measured 12-month rumour left 0 (Hiền lành) … 13 (Hiểm độc+Thẳng thắn); same nết still differ |
+| "có người thì ký ức phai nhanh, có người thì ký ức phai lâu" | OK — BAL.mem.fadeT per nết (good/bad separately) × fixed per-person spread; measured 12-month rumour left 0 (Hiền lành) … 13 (Xảo quyệt+Thẳng thắn); same nết still differ |
 | "có những cái sự kiện là sẽ nhớ cả đời" | OK — m.L lifelong (BAL.mem.life deeds, weight ≥ lifeMin, event swing ≥ lifeRel), no fade, own cap; poison remembered 70 after 24 months (main: 25) |
 | "ảnh hưởng tới cái cách hành xử của một nhân vật đối với một nhân vật" | OK — danger, revenge in kind, everyday dealings, servants' loyalty. Bot before/after on current main: M3 rumour share .165/.165 → .215/.353; M4 helps to her after a pardon 102 → 406; M6 harm band at Oán 70 pardoned 2 → 0; M2 band month 24 1 → 2 |
 | "every action (scolding, quarrel) must have a recorded REASON … hidden from her" | OK for the 10 wired families (runAct all schemes, giveTo, empAct, talk, q72End, event swings, SOC everyday acts, punish, servAct, bribe/threatServ); 0 records without a reason; hidden (console causeLog only) |

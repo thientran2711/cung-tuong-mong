@@ -237,7 +237,7 @@ function A96has(f){const t=T96();return !!(t&&t.f&&t.f[f])}
 /* two-way, month by month: his heart follows hers; a man in love reaches out by himself (true news, real evidence) */
 function tm96Month(){const t=T96(),m=man96();if(!t||!m||!m.alive||S.dead||t.endC)return"";let ev="";
  if((t.h||0)<35&&m.tinh>20&&roll(30))m.tinh=cl(m.tinh-1,0,100);
- if(m.trait==="tham vọng"&&m.tinh>30&&roll(8))m.tinh=cl(m.tinh-2,0,100);
+ if(hasT(m,"Tham vọng")&&m.tinh>30&&roll(8))m.tinh=cl(m.tinh-2,0,100);
  if(m.tinh>=72&&(t.h||0)>=50&&roll(4)){adj96({lt:1});ev+=`Có người lén đưa đến cho ngươi một mảnh giấy của ${m.name}: chàng vẫn nhớ. `}
  if(t.sus>0&&roll(25))t.sus=Math.max(0,t.sus-1);
  return ev}

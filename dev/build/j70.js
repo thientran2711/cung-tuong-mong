@@ -124,15 +124,15 @@ function canNew70(aKey,tKey){if(aKey!=="me"&&cnt70(p=>p.a===aKey))return false;i
 function methFor70(k){const L=Object.keys(M70).filter(m=>M70[m].k===k);return L.length?pick(L):null}
 /* an NPC picks a route by price, wit (the clever avoid loud routes) and who can be bought */
 function pickRoute70(a,t,M){const tc=tc70(a);const L=M.R.filter(r=>{if(a!==S&&r.bac&&(a.bac||0)<r.bac)return false;if(r.acc==="tsv"&&!((t.staff||[]).length))return false;return true});if(!L.length)return null;
- const w=L.map(r=>[r,Math.max(.2,(tc>=60?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Hiểm độc")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
+ const w=L.map(r=>[r,Math.max(.2,(tc>=60?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Xảo quyệt")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
 function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return null;const r=rid?M.R.find(x=>x.id===rid):pickRoute70(a,t,M);if(!r)return null;
  const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=60?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
  if(opt&&opt.fac)p.fac=1;if(M.k==="kpoison"||M.k==="pond"||M.k==="kframe"||M.k==="ksab"){const k=tKid70(p);if(k)p.kid=k.name}
  if(a!==S&&r.bac)ap(a,{bac:-r.bac});
  z.pl.push(p);z.types[m+":"+r.id]=(z.types[m+":"+r.id]||0)+1;try{if(typeof evHistMark==="function")evHistMark("j70:"+m+":"+r.id)}catch(e){}
  /* the accomplice: a servant of the target is approached; the loyal refuse and tell their mistress, the rest betray */
- if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+(x.tr==="trung"?30:0))-(y.loyal+(y.tr==="trung"?30:0)))[0];
-  if(s){p.acc=s.sid;const firm=s.loyal+(s.tr==="trung"?30:0)+(s.tr==="tham"?-20:0);if(firm>=60&&roll(75)){p.end="refused";p.sv=s.sid;evA(t,a,1);s.loyal=cl(s.loyal+5,0,100);try{mindLog(a,"_abandon")}catch(e){}
+ if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+nq(x,"loyal",30))-(y.loyal+nq(y,"loyal",30)))[0];
+  if(s){p.acc=s.sid;const firm=s.loyal+nq(s,"loyal",30)+nq(s,"greed",-20);if(firm>=60&&roll(75)){p.end="refused";p.sv=s.sid;evA(t,a,1);s.loyal=cl(s.loyal+5,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}
    s.spyFor=s.spyFor||p.a;p.bonus=(p.bonus||0)+8}}
@@ -146,7 +146,7 @@ function motives70(v){const out=[];const z=j70();const sh=z.sh;const rise=sh.len
  return out}
 function motiveTick70(){const z=j70();for(const v of liveRivals(true)){if(v.confined||v.plan||cnt70(p=>p.a===v.id))continue;const M=motives70(v);if(!M.length)continue;
   const [t,mo]=pick(M);if(!alive70(t)||(typeof sameHouse==="function"&&sameHouse(v,t)))continue;const b=bandOf(danger(v,t));if(!b)continue;
-  const T=traitsOf(v);let c=J70CFG.mot*(T.includes("Hiểm độc")?1.6:1)*(T.includes("Hiền lành")?.3:1)*(T.includes("Nhu mì")?.5:1)*(b>=2?1.2:1);if(t===S&&typeof BAL==="object"&&BAL.hz)c*=Math.min(1.2,BAL.hz);
+  const T=traitsOf(v);let c=J70CFG.mot*(T.includes("Xảo quyệt")?1.6:1)*(T.includes("Ân cần")?.3:1)*(T.includes("Khiêm nhường")?.5:1)*(b>=2?1.2:1);if(t===S&&typeof BAL==="object"&&BAL.hz)c*=Math.min(1.2,BAL.hz);
   if(!roll(c)||!canNew70(v.id,key(t)))continue;
   let O=[];try{O=mindMenu(v,t)}catch(e){O=[]}O=O.filter(x=>methFor70(x[0])&&M70[methFor70(x[0])].band<=b);if(!O.length)continue;const k=wpick(O);const m=methFor70(k);if(!m||!okAct70(v,t,k))continue;
   const p=newPlot70(v,t,m,null,mo);if(p&&!p.end){v.plan={k:M70[m].k,t:key(t),due:1e9,err:0,j70:p.id};try{mindLog(v,"_tell")}catch(e){}}}}
@@ -162,7 +162,7 @@ let jointScheme0=null;
 /* ---------- detection (same shape for everyone) ---------- */
 function spyIn70(watcher,a){if(a===S)return(S.staff||[]).some(s=>s.spyFor===key(watcher));return(a.staff||[]).some(s=>s.spyFor===(watcher===S?"me":key(watcher)))}
 function seeP70(p,step){const a=pa70(p),t=pt70(p),r=pr70(p);const tc=tc70(a);let c;
- if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+(S.mat||0)*6+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*6+(tc<35?12:0)-(tc>=70?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0);
+ if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+(S.mat||0)*6+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*6+(tc<35?12:0)-(tc>=70?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0)-nq(a,"hide",BAL.net.k.hide);
   if(t===S)c+=(S.maid&&S.maid.loyal>=70?10:0);else c*=J70CFG.npcSeen}
  return cl(Math.round(c),3,85)}
 /* an NPC target (also when she is the plotter) notices with its own people */
@@ -326,7 +326,7 @@ function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle===
   r=cl(Math.round(r),5,95)}}catch(e){}return r}})();
 (function(){const c0=caught;caught=function(a){const p0=window.__j70A;window.__j70A=a;try{return c0.apply(this,arguments)}finally{window.__j70A=p0}}})();
 /* her ordered servants are busy: she cannot send them on her own errands */
-(function(){const b0=bestSent;bestSent=function(p){if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+(b.tr==="lanh"?15:0))-(a.loyal+(a.tr==="lanh"?15:0)))[0]}return b0.apply(this,arguments)}})();
+(function(){const b0=bestSent;bestSent=function(p){if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",15))-(a.loyal+nq(a,"sharp",15)))[0]}return b0.apply(this,arguments)}})();
 /* plots by someone she has a watcher on, or with a guard posted, are seen earlier; a traitor watcher feeds the plotter instead */
 (function(){const s0=seeP70;seeP70=function(p,step){let c=s0.apply(this,arguments);try{const a=pa70(p);if(a&&a!==S){if(S.maid&&S.maid.loyal>=70&&p.t==="me"){c-=10;if(roll(selfP70maid()))c+=10}for(const o of ords70()){if(o.k==="theodoi"&&o.tgt===a.id&&!traitor70(sv70(o.sid)))c+=30;if(o.k==="canh"&&p.t==="me")c+=canhB70(o)}
   const z=j70();if(z.allyW&&z.allyW.until>=wk()&&p.t==="me"&&z.allyW.id!==a.id)c+=15}}catch(e){}return cl(Math.round(c),3,90)}})();
@@ -343,7 +343,7 @@ function ordMonth70(){const L=ords70();for(const o of L.slice()){const O=ORD70[o
 function selfP70maid(){return S.maid?cl(Math.round((S.maid.loyal-50)*4),0,95):0}
 function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
  if(S.maid&&!busy.includes("maid")&&roll(selfP70maid()))out.push({n:S.maid.name,b:10,t:`${S.maid.name} tự canh chừng cho ngươi (lòng ${S.maid.loyal})`});
- for(const s of S.staff||[]){if(busy.includes(s.sid)||traitor70(s)||s.tr==="nhat")continue;const p=s.tr==="trung"?(s.loyal-50)*2:(s.loyal-80)*3;if(p>0&&roll(cl(p,0,85)))out.push({n:s.name,b:8,t:`${s.name} tự để mắt cho ngươi (lòng ${s.loyal}${s.kn?`, tính ${STR[s.tr]}`:""})`})}
+ for(const s of S.staff||[]){if(busy.includes(s.sid)||traitor70(s)||netIs(s,"timid"))continue;const p=netIs(s,"loyal")?(s.loyal-50)*2:(s.loyal-80)*3;if(p>0&&roll(cl(p,0,85)))out.push({n:s.name,b:8,t:`${s.name} tự để mắt cho ngươi (lòng ${s.loyal}${s.kn?`, tính ${netTxt(s)}`:""})`})}
  for(const v of liveRivals(true)){if(v===a||v.confined)continue;const f=aff(v,S);if(f>=50&&roll(cl((f-40)/2,0,25)))out.push({n:v.name,b:8,t:`${title70(v)} thân với ngươi (thiện cảm ${f}), cho người báo tin`})}
  if((S.sung||0)>=70&&roll(10))out.push({n:"Hoàng thượng",b:10,t:`Hoàng thượng thương ngươi (Sủng ${S.sung}), cho thị vệ để mắt`});
  if(!S.thDead&&(S.th||0)>=60&&roll(8))out.push({n:"Thái hậu",b:8,t:`Thái hậu quý ngươi (${S.th}), sai người trông chừng`});

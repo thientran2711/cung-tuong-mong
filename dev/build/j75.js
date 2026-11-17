@@ -152,8 +152,8 @@ const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="
  let r;try{r=nm0.apply(this,arguments)}finally{ap=a0;odA=od0}return (r||"")+seen};
 /* (c) the same weekly decay for everyone (her rule from endTurn: -1, none for Hoàng hậu after the first tuần, none in tuần 2 if he is lạnh lùng) */
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
-const EFF={"Tham vọng":.35,"Ghen tuông":.25,"Kiêu ngạo":.25,"Hiền lành":.1,"Nhu mì":.1};
-function npcEffort(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(Math.random()>pt*FAIRN.eff)return "";
+const EFF={"Tham vọng":.35,"Nóng nảy":.25,"Kiêu ngạo":.25,"Ân cần":.1,"Khiêm nhường":.1};
+function npcEffort(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return "";const pt=tv(EFF,v)!=null?tv(EFF,v):.18;if(Math.random()>pt*FAIRN.eff)return "";
  const A=v.arts||{};let n,c,o,w,lose=2;
  let kd="";if((A.vu||0)>=3&&v.suc>=40){kd="vu";n="múa Kinh hồng vũ trong yến tiệc";c={suc:-20};o=odA(v,40+A.vu*8+effSac(v)/5+mm());w={sung:15,danh:3}}
  else if((A.cam||0)>=3&&v.suc>=30){n="đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện";c={suc:-10};o=odA(v,40+A.cam*8+(v.tai||0)/5+mm());w={sung:12}}

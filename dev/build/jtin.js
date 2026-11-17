@@ -4,7 +4,7 @@ function tinAdd(s,n){if(!s)return;s.tin=cl(Math.round(tinOf(s)+n),0,100)}
 function sbar(lbl,v,cls){v=Math.round(v||0);return `<span class="sbar ${cls||""}"><span class="sbl">${lbl}</span><span class="sbt"><u style="width:${cl(v,0,100)}%"></u></span><b>${v}</b></span>`}
 function bondBars(s){return sbar("Lòng",s.loyal,"lo")+sbar("Chủ tin",tinOf(s),"ti")}
 /* entrusting: a scheme order needs Chủ tin 40, guarding a tryst 60 (same for every mistress) */
-(function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+tinOf(b)/2+(b.tr==="lanh"?15:0))-(a.loyal+tinOf(a)/2+(a.tr==="lanh"?15:0)))[0]}})();
+(function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+tinOf(b)/2+nq(b,"sharp",15))-(a.loyal+tinOf(a)/2+nq(a,"sharp",15)))[0]}})();
 watcher=function(){const s=(S.staff||[]).filter(x=>x.loyal>=60&&tinOf(x)>=60).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=60&&tinOf(S.maid)>=60)return{name:S.maid.name,loyal:S.maid.loyal};return null};
 /* trust moves: a task done well raises it, a servant caught lowers it; being trusted slowly warms the servant's heart */
 (function(){const m0=servMerit;servMerit=function(s,n){const r=m0.apply(this,arguments);tinAdd(s,(n||1)*1.5);return r}})();
