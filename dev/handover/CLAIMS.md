@@ -838,3 +838,5 @@
 | one-core-jkc #2 (locks + fx amounts + game-wide odb; opus; brief briefs/one-core-jkc-2.md) | review/one-core-jkc-2 | B | session_01N1tNP6ZrnHFQKY5RtJnzfE | RUNNING | 17/11 16:00Z |
 | loading-words-r1 PASS d4318833 → builder batch s32a; reviewer archived | review/loading-words-r1 | MAIN s33 | session_01UV1SzhfMi68Cmn88G2Yqze | PASS → BATCH | 17/11 16:03Z |
 | loading-words-2: hide English boot diag line + remove regex lookbehind (old Safari) whole family + fix update-notes test | review/loading-words-2 | MAIN s33 | session_01UV1SzkaNQaeHGcLrqFrzzQ | RUNNING | 17/11 16:03Z |
+| BATCH s31b READY 17e6c4b4 (builder s31b rolled over) → successor builder s32a lands s31b on newest main then builds s32a + balance chain | review/batch-s32a | MAIN s33 | (opening) | RUNNING | 17/11 16:08Z |
+| learn-scene-fix-2: root fix of jorder kmHold↔kmPump deadlock (co-op stall after rebirth) | review/learn-scene-fix-2 | MAIN s33 | (opening2) | RUNNING | 17/11 16:08Z |
