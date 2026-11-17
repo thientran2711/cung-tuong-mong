@@ -18,6 +18,8 @@ js=open(d+'site/kwait.js',encoding='utf-8').read()+'\n'+open(d+'site/kvfallback.
 js+='\n'+cdn('jcoopthin.js',open(d+'build/jcoopthin.js',encoding='utf-8').read())
 # thin guest part B (review/coop-thin-b): life creation + rebirth on the host; after jcoopthin (uses COOPW.thin)
 js+='\n'+cdn('jcoopthinb.js',open(d+'build/jcoopthinb.js',encoding='utf-8').read())
+# thin guest part C (review/coop-thin-c): the world is read-only on the guest; after jcoopthinb (wraps its life intent) — the outermost engine wrappers
+js+='\n'+cdn('jcoopthinc.js',open(d+'build/jcoopthinc.js',encoding='utf-8').read())
 # jreg (review/story-frame): every registry pass also covers the entries later modules added (regEach); sweep at the script end + after load timers
 js+='\ntry{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}\n'
 open(d+'build/all.js','w',encoding='utf-8').write(js)

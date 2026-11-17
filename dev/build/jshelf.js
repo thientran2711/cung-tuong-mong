@@ -1,4 +1,4 @@
-/* ================= jshelf: NƠI TRƯNG BÀY — a display shelf per person + DWELLING xa xỉ + plant care (owner OD 17/11 ~18:30Z (A) + ~18:00Z s35 Lượt 26) =================
+/* ================= jshelf: ĐA BẢO CÁC — a display shelf per person + DWELLING xa xỉ + plant care (owner OD 17/11 ~18:30Z (A) + ~18:00Z s35 Lượt 26) =================
    Brief: dev/handover/briefs/display-shelf-build.md (handover branch). Numbers: BAL.shelf (this file, one table). Reuses, never rebuilds:
    · UP TO BAL.shelf.per pieces per group (owner OD 17/11 ~22:05Z); a group's luxury = best piece full + falling shares BAL.shelf.wt.
    · items = ONE table BAL.shelf.it (12 groups / 70 pieces, dev/research/display-shelf-items.md): existing IT pieces + new décor (IT kd "Bày biện") + her own
@@ -135,7 +135,7 @@ Object.assign(BAL,{shelf:{
  ngocdich:["Sáo ngọc","Sáo chạm bằng ngọc, hiếm có"],
  tranchi:["Chặn giấy ngọc","Chặn giấy bằng ngọc trên bàn viết"],thaiho:["Đá Thái Hồ nhỏ","Hòn đá Thái Hồ dáng lạ, kẻ sĩ ưa chuộng"],
  cungdang:["Cung đăng lụa","Đèn lụa treo trong điện"],daminh:["Dạ minh châu","Ngọc châu sáng trong đêm"]};
- const P=BAL.shelf.it;for(const k in D){if(IT[k])continue;const s=P[k];IT[k]={n:D[k][0],kd:"Bày biện",d:`${D[k][1]} · bày ở Nơi trưng bày`,pr:s.imp?0:s.pr|0,/* imperial: no price, so no shop / weekly rare item can ever offer it */rk:0,tg:s.dead||s.imp?[]:["rv","th","hh"],gv:3}}})();
+ const P=BAL.shelf.it;for(const k in D){if(IT[k])continue;const s=P[k];IT[k]={n:D[k][0],kd:"Bày biện",d:`${D[k][1]} · bày ở Đa Bảo Các`,pr:s.imp?0:s.pr|0,/* imperial: no price, so no shop / weekly rare item can ever offer it */rk:0,tg:s.dead||s.imp?[]:["rv","th","hh"],gv:3}}})();
 /* the Nội vụ phủ tray offers only décor within her rank (reviewer r1 fix (1), kept by builder #2): a BUYING rule — OD 17/11 ~19:50Z lifts only the DISPLAY block (an over-rank piece she owns, from a gift or bought before a demotion, may still stand) */
 /* Nội vụ phủ tray + ngự ban: décor joins without changing the old lists' balance */
 (function(){const P=BAL.shelf.it,has=(k,c)=>!!(P[k]&&!P[k].imp&&!P[k].dead&&(P[k].src||"").includes(c)&&IT[k]);window.SHELF_SRC=c=>Object.keys(P).filter(k=>has(k,c));
@@ -392,13 +392,13 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   if(g){const sl=shelfSlotFor(S,g),cur=shelfOf(S).g[sl];const card=pbtn(`data-shelfput="${i}"`,"Trưng bày",`thành: bày lên kệ nhóm ${shelfGName(g)}${cur?` (đã đủ ${BAL.shelf.per} món) thay ${shelfNm(cur)}`:""} · kèm: còn bày thì không tặng hay bán được${shelfOver(S,e)?", quá phẩm mình: dễ bị tố vượt phẩm":""}`,shelfWhyNot(S,e));
    const acts=document.querySelector("#modal .kinvacts"),body=document.querySelector("#modal .kpb");if(acts)acts.insertAdjacentHTML("beforeend",card);else if(body)body.insertAdjacentHTML("beforeend",`<div class="rbtn kinvacts">${card}</div>`)}}catch(e){console.error("shelf kinvOpen",e)}return r}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shelfput],[data-shelftake]");if(!b||b.disabled)return;ev.stopPropagation();
- if(b.dataset.shelfput!=null){const R=shelfPut(S,+b.dataset.shelfput);try{closeModal()}catch(x){}if(R.ok)log(`Ngươi bày ${R.n} ở Nơi trưng bày${R.old?`, cất ${R.old} vào rương`:""}.`);try{render()}catch(x){}return}
+ if(b.dataset.shelfput!=null){const R=shelfPut(S,+b.dataset.shelfput);try{closeModal()}catch(x){}if(R.ok)log(`Ngươi bày ${R.n} ở Đa Bảo Các${R.old?`, cất ${R.old} vào rương`:""}.`);try{render()}catch(x){}return}
  const n=shelfTake(S,b.dataset.shelftake);try{closeModal()}catch(x){}if(n)log(`Ngươi cất ${n} vào rương.`);try{render()}catch(x){}},true);
 /* interim shelf dialog (kit parts only: kitModal + kitRows + pbtn) until the painted shelf part lands: what stands in each group + take down / care */
 function shelfOpen(p){p=p||S;const V=shelfView(p),me=p===S;const rows=[],acts=[];
  for(const x of V.groups)for(const it of x.items){rows.push([x.n,[it.name+(it.plant&&it.plant.wither?` (${it.plant.bad})`:"")+(it.over?" · quá phẩm":"")],it.plant&&it.plant.wither?"r":"n"]);
   if(me)acts.push(pbtn(it.take,`Cất ${it.name.toLowerCase()}`,"thành: về rương · tặng, bán, dùng được lại","")+(it.plant?pbtn(`data-shc="plant" data-g="${it.slot}"`,`Chăm ${it.name.toLowerCase()}`,`tốn: ${BAL.shelf.plant.khacSelf} khắc · thành: ${it.plant.fresh}`,whyTime(BAL.shelf.plant.khacSelf)):""))}
- kitModal({kind:"info",title:me?"Nơi trưng bày":`Nơi trưng bày của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
+ kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
 window.shelfOpen=shelfOpen;
 /* the data the kit shelf part draws (KIT REQUEST 17/11 display-shelf): per group UP TO BAL.shelf.per cut-out pieces side by side (owner OD 17/11 ~22:05Z), no frame.
    groups[i] = {g, n, per, items:[{slot, k, name, src, plant, over, from, take}] (best first), item: items[0] (kept for the old one-piece shape)} */
