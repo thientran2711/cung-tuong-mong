@@ -1,5 +1,5 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
+const BAL={allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
  /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
@@ -30,7 +30,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
   askAf:30,askBase:40,               /* Hỏi chuyện with the physician: thiện cảm needed for him to tell a rival's mạch án / base odds (+ thiện cảm/2) */
   nausea:45},                        /* weekly % of a nausea hint from the 2nd week of an unfound pregnancy */
  /* PALACE START (owner 16/11 "game starts right after the accession" + amendment "about 4 small children"; review/palace-start; NEW games only, flag S.ps):
-    j1 psSeedKids / psOpenText, j2 start, j51 kvW. harem = [rank, queen] of the consorts at the start (young and small: 10, was 12);
+    j1 psSeedKids / psOpenText, j51 kvW (j2 start = BAL.allyRel). harem = [rank, queen] of the consorts at the start (young and small: 10, was 12);
     consAge = [min, spread, +years for the queen and Phi+]; kidN = weights for 0,1,2,3,4,5 children in the whole palace; kidAge = [min,max] age;
     sonP = chance a seeded child is a prince; sonMom / dauMom = mother's rank range (7 = the Hoàng hậu: daughters only, never a son = no đích tử);
     empAge = [min, spread]; power0 = the throne's grip on the court (0–100, hook for the Emperor's side story and the side road, D5);
@@ -344,6 +344,23 @@ Object.assign(BAL,{
                            (j23 / j85 / jtabs / j83 deck card); wk = «Tự học, làm tác phẩm» (j83 / jtabs Tác phẩm tab); rcp = master / teacher lessons (jrcp);
                            kid = teaching a child chữ / lễ nghi / nghệ (j53 / j54); yKid = Y thuật care of a sick child (jact) */
  facJoinAff:30,             /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
+});
+/* review/one-core-jkc-2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, the «thiếu bạc (cần N)» lock family; scan dev/measure/one-core-bac-lock.js): each action's
+   price is ONE key that its cost text («Bạc -N»), its lock (S.bac<N), its lock word («cần N bạc») and its handler (apply({bac:-N}), the NPC mirror
+   included) all read. Servant acts with a key already read BAL.house (thuongBac / lookBac / upBac / swapBac); the scheme bribe reads BAL.net.n.bribeCost;
+   Ban thưởng reads BAL.tw.reward; the tiểu thư dialog reads BAL.kc2.st.kc. */
+Object.assign(BAL.house,{hireBac:20,plantBac:40}); /* Nội vụ phủ: thêm cung nữ / thái giám (her and every NPC); «Cài người vào cung khác» */
+Object.assign(BAL,{
+ bacFee:{court:20,kidCare:10,kidGuard:20,cnvGift:5,h54Thu:15,h54Noi:10,h54Hoa:50,tdProbe:30,tdLeak:20,tdGift:40,itTest:10,htAsk:5,master:60,
+   lend:30,lendAff:30,ksp:30,midwife:40,backer:30,npcMat:15,giu:40},
+   /* court = «Biếu» a court person (j10 / j15; the NPC Tổng quản gift too) · kidCare / kidGuard = «Chăm sóc» / «Canh giữ các con» (j25) · cnvGift =
+      cung nữ road «Biếu quà» a colleague (j42) · h54Thu / h54Noi / h54Hoa = a married daughter: letter, «Nhờ con vào cung nói giúp», a tông nữ's dowry (j54) ·
+      tdProbe / tdLeak / tdGift = triều đình acts (j55, her and NPCs) · itTest = «Nghiệm độc» an item (j8 / jinv) · htAsk = «Dò hỏi gia thế» (jht) ·
+      master = hiring a danh sư (j2) · lend / lendAff = a friend lends her lend bạc when she likes her from lendAff (j9 «Trò chuyện») ·
+      NPC-side prices (the check and the charge read one key): ksp = an NPC bribes Kính sự phòng (j28) · midwife = a rival bribes the midwife (j32) ·
+      backer = a court backer (j34) · npcMat = an NPC buys craft material (j75) · giu = an NPC bribes past «giữ» (j8 + j75, one rule in two modules) */
+ actBac:{spy:15,ally:30,bribe:40,block:40,musk:30,catswap:50,lygian:20,slowpoison:40,xinhh:30,huydung:30,giahoa:40,thathu:40,phonghoa:30,thaopet:10},
+   /* base bạc of each scheme act (ACT[k].c, its ok and its f charge); jecon raises it by the target's rank / guards, and the lock words print that real price (actBac(k,a,t)) */
 });
 /* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */
 Object.assign(BAL,{evWipe:-99});
