@@ -135,3 +135,4 @@ Tools: w3e/batch.py (TSV key,genid,url -> download, alpha check, finish_fig FORC
 HELD t1 (gen ids, NOT uploaded): see w3e/held.tsv (c08-t1 bxV7ugA5Y2, c09-t1 9ZF0JWpNYZ, c14-t4 3z5DP9yREY, c15-t1 gOtRrsCSXO, c13-t3 3z5D4FCREY pending look).
 AUDIT t1/t2 vs maid refs (a18, current CDN): rank-sample/consort-rest-A-t1t2-audit.tsv: all 32 OK by eye (no maid-like cut); c14-t1,c16-t1,c16-t2 borderline-plain.
 BLOCK: a subagent's images_generate (c13-t4) was refused by the auto classifier ('Destructive or Unwanted Actions'); not retried/worked around.
+W3e UPLOADED 17/11 ~06:00Z (owner: upload finished files): c13-t3, c14-t4, c08-t1, c09-t1 a18 (16 twins; fragment hd-entries/W3e-F1.json). NOT uploaded: c15-t1 gOtRrsCSXO (facial mole on cheek -> redo). Edge FAIL in qa = fig fills old height (same as live files), accepted.
