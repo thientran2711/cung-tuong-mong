@@ -157,9 +157,12 @@ COOP.on("error",m=>{try{if(gOn()&&m&&m.code==="bado"){C.stat.bado=(C.stat.bado||
 
 /* frames on the guest's engine entries (this module loads last but one: these wrappers are outermost) */
 function wrapF(n,kind,cond){const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!lOn()||(cond&&!cond.apply(this,arguments)))return f.apply(this,arguments);
- /* a world frame never runs inside an act's frame: the act is closed first (her act's ops go out, then the world step) */
- if(kind==="world")C.flushAct();return C.frame(kind,f,this,arguments)}}
+ /* an implicit act frame (writes outside any frame) is closed first: its ops go out, then the world step. An EXPLICIT act (runAct,
+    chooseM) stays open: a render or a buổi step it calls runs as a world frame on top of it (reads see the act's writes, its own writes
+    are dropped) and the act's ops go out whole at its end (before: render inside kpoison / kframe closed the act, the rest went implicit) */
+ if(kind==="world")C.flushImp();return C.frame(kind,f,this,arguments)}}
 C.flushAct=()=>{while(FR.length&&FR[FR.length-1].kind==="act")close(FR[FR.length-1])};
+C.flushImp=()=>{while(FR.length&&FR[FR.length-1].kind==="act"&&FR[FR.length-1].implicit)close(FR[FR.length-1])};
 for(const n of ["endTurn","nextBuoi","monthTick","render"])wrapF(n,"world");
 wrapF("chooseM","act");
 /* her act (she is the actor): its own frame, so the ops go out with that act; an NPC act on the guest: nothing (NPCs act on the host) */
@@ -168,7 +171,7 @@ wrapF("chooseM","act");
 /* G7: on the guest no NPC picks a target (the host rolls NPC buổi acts aimed at her, with her entry in the harem) */
 if(typeof pickTarget==="function"){const f=pickTarget;pickTarget=function(){if(gOn()){C.stat.pickOff++;return null}return f.apply(this,arguments)}}
 /* every server message is a sync step on the guest: a world write made while handling it is the old relay path (the host's world comes as a whole) */
-COOP.rxWrap=function(go,m){if(!lOn())return go();C.flushAct();const F=open("world",false);try{return go()}finally{close(F)}};
+COOP.rxWrap=function(go,m){if(!lOn())return go();C.flushImp();const F=open("world",false);try{return go()}finally{close(F)}};
 
 /* ---------- 3. the host's world in, on the guest (merged week = fromCanon; between weeks = the host's delta) ---------- */
 /* host perspective (rows rel/oan/ghen/ev = the host's; "me" = 901) → canonical (jcoopworld toCanon) → hers (fromCanon) */
@@ -190,7 +193,10 @@ function keepMine(k,nv,ov){if(!plain(ov)||!plain(nv))return nv;
 C.apply=function(o){if(!gOn()||!o||!S||!C.Rraw||CW.inLife)return false;const hs=o.P&&o.P.a;if(!Array.isArray(o.R)||!plain(hs))return false;
  C.flushAct();C.inApply=1;CW.inFC=(CW.inFC||0)+1;/* the sync layer: the host's world in */try{
   const R=C.Rraw,byId=new Map();for(const v of R)if(plain(v)&&!v.coop)byId.set(v.id,v);const seen=new Set();
-  for(const r of o.R){if(!plain(r)||r.coop||r.id==null)continue;const n=npcMine(r);seen.add(n.id);const t=byId.get(n.id);if(t)into(t,n);else{R.push(n);C.stat.addN++}}
+  for(const r of o.R){if(!plain(r)||r.coop||r.id==null)continue;const n=npcMine(r);seen.add(n.id);const t=byId.get(n.id);
+   /* the host serving as a cung nữ in this NPC's palace: his entry in her view is built by fromCanon (placeFriend), not part of the host's
+      world (npcMine drops the host's own coop staff); keep it across the host's delta (coop-thin-d-probe P3 at level 4) */
+   if(t){const keep=Array.isArray(t.staff)?t.staff.filter(s=>plain(s)&&s.coop):[];into(t,n);if(keep.length)t.staff=(Array.isArray(t.staff)?t.staff:[]).concat(keep)}else{R.push(n);C.stat.addN++}}
   for(let i=R.length-1;i>=0;i--){const v=R[i];if(plain(v)&&!v.coop&&!seen.has(v.id))R.splice(i,1)}
   for(const k of X.W_KEYS){if(!WB)break;if(k in hs){WB[k]=keepMine(k,wMine(k,hs[k]),WB[k]);}}lensW(false)
   if(typeof o.rid==="number")rid=Math.max(rid,o.rid);

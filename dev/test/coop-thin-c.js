@@ -17,7 +17,7 @@ const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const L
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const TRIPSRC=process.env.TRIP?fs.readFileSync(path.join(__dirname,'coop-thin-trip.js'),'utf8'):null;
-async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);
+async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
@@ -35,7 +35,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(await A.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0)&&await B.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0))break}
  const okw=await A.p.evaluate(w=>COOP.state.week===w+1,w0)&&await B.p.evaluate(w=>COOP.state.week===w+1,w0);ok(okw,tag+': week merged once',okw?undefined:[await A.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent})),await B.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent,log:COOPW.thin.C.log.slice(-5),modal:(document.getElementById('modal')||{}).hidden,q0:Q[0]&&Object.keys(Q[0]).join(','),q0p:Q[0]&&(Q[0].pid||Q[0].ev||''),mg:!!S.mg,km:document.querySelectorAll('.kmov').length,fr:COOP.frozen,cy:COOPW.cyHold,dead:S.dead}))]);await sleep(1500);return okw}
 (async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
- const FOLD=[686,880],IPAD=[1180,820];
+ const FOLD=process.env.SHOTS?[755,1000]:[686,880],IPAD=[1180,820];/* SHOTS=<dir outside git>: the owner's devices Fold 755x1000@2 + iPad 1180x820@2 */
  const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL),G=await mk(b,'guest',SWAP?FOLD:IPAD,0);
  await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
  await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'level',LVL,'swap',SWAP);
@@ -62,7 +62,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   accuse:{h:'t.ev=9'},tocao:{h:'t.schemes=1;t.ev=3'},expose:{h:'t.scandal=1;t.ev=5'},trinhth:{h:'t.ev=3'},uyhiep:{h:'t.ev=3;t.bac=Math.max(t.bac||0,50)'},banphe:{h:'t.ev=3'},tieuhuy:{h:'t.ev=3'},
   xinhh:{h:'const q=rivals[0];q.queen=true;q.alive=true;q.out=0;q.rel=80;t.rank=Math.max(t.rank||0,1)'},trinhhh:{h:'const q=rivals[0];q.queen=true;q.alive=true;q.out=0;t.ev=4'},
   tat:{h:'t.rank=Math.min(t.rank||0,1);delete t.slap',g:"S.place='vuon';S.where=S.where||{};S.where[t.id]='vuon'"},trip:{g:"S.place='vuon';S.where=S.where||{};S.where[t.id]='vuon'"},pushp:{g:"S.place='vuon';S.where=S.where||{};S.where[t.id]='vuon'"},
-  steal:{g:'S.tonight=t'},road:{g:'S.tonight=t'},
+  steal:{g:'S.tonight=t;delete S.ntTry;delete S.ntk'},road:{g:'S.tonight=t;delete S.ntTry;delete S.ntk'},bribel:{g:'if(!S.maid&&S.staff&&S.staff[0])S.maid=S.staff[0];if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}',h:"if(!t.maid){const o=rivals.find(x=>x&&x.maid&&x!==t&&!x.coop);if(o)t.maid=Object.assign(JSON.parse(JSON.stringify(o.maid)),{sid:800+t.id})}"},
   laydo:{h:"const k=Object.keys(IT).find(k=>{const e={k};return loOk(e)});t.inv=(t.inv||[]).concat([{k}])"},laydol:{h:"const k=Object.keys(IT).find(k=>{const e={k};return loOk(e)});t.inv=(t.inv||[]).concat([{k}])",g:'if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}'},
   blockf:{h:'delete t.block;const v=rivals.find(x=>x&&x!==t&&!x.coop&&x.alive!==false&&!x.out&&x.id<900);if(v)v.rel=95'},phonghoa:{h:"t.out=0;t.inv=(t.inv||[]).concat([{k:'tranhco'}])"},
   thaopet:{h:"t.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk()}]"},petcare:{h:"t.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk()}]"},petsteal:{h:"t.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk()}]"}};
@@ -143,6 +143,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
   ok(LVL>=3?n(ho)+n(go)===0:true,'C8 one switch: no old guest state guard ran in a C room (COOPW.oldRun, both seats)',{host:ho,guest:go})}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
+ if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await clear(o);await o.p.evaluate(()=>{try{closeModal()}catch(e){}try{render()}catch(e){}});await sleep(800);
+   const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`acts-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,220));
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-c L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

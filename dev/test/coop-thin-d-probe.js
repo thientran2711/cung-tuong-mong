@@ -112,7 +112,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ===== P3: guest buys the host who serves as a cung nữ ===== */
  await settle();await H.p.evaluate(()=>{window.__dil=[]});
  const mid=await H.p.evaluate(()=>{const m=liveRivals(true).find(v=>!v.coop&&v.alive&&!v.out&&v.rank>=1);S.srv={mid:m.id,rk:1,mp:0,lau:0,rk0:1,lw:0,af:{},know:{},met:[],sec:0,msch:0,intel:[],spyFor:null,betray:null,sent:null,err:null,once:{},mama:0,risen:0};return m.id});
- await G.p.evaluate(mid=>{const m=RV(mid);m.staff=m.staff||[];m.staff.push({sid:901,coop:true,name:'Hảo hữu',role:'maid',fc:'',fk:'',face:0,hue:0,age:18,tr:'trung',loyal:60,spyFor:null,lover:null,af:{},kn:1,imp:'',org:''});S.bac=Math.max(S.bac||0,200)},mid);
+ /* the host's servant entry on her phone is made by fromCanon (placeFriend): the harness adds it in that sync layer (level >= 3: her world is read-only) */
+ await G.p.evaluate(mid=>{COOPW.inFC=(COOPW.inFC||0)+1;try{const m=RV(mid);m.staff=m.staff||[];m.staff.push({sid:901,coop:true,name:'Hảo hữu',role:'maid',fc:'',fk:'',face:0,hue:0,age:18,tr:'trung',loyal:60,spyFor:null,lover:null,af:{},kn:1,imp:'',org:''})}finally{COOPW.inFC--}S.bac=Math.max(S.bac||0,200)},mid);
  const gb=await G.p.evaluate(()=>S.bac),hb=await H.p.evaluate(()=>S.bac);
  const r3=await G.p.evaluate(()=>String(bribeServ(S,allServ().find(x=>x.coop))));console.log('P3 guest',r3);
  ok(await until(H,()=>Q.some(q=>q.pid==='thBribe'),null,20000),'P3 host: his Bạc lạ card',await H.p.evaluate(()=>Q.map(q=>q.t)));
@@ -143,7 +144,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await sleep(1500);const g51=await rowG(mid5),h51=await rowH(mid5);
  console.log('P5 rows guest',JSON.stringify([g50,g51]),'host',JSON.stringify([h50,h51]));
  ok(g51.ev===g50.ev+1&&g51.rel<g50.rel,'P5 her rows on that NPC (its proof against her +1, its Thiện cảm toward her down) on her phone at once',[g50,g51]);
- ok(h51.ev===h50.ev&&h51.rel===h50.rel,'P5 the host\'s world keeps the old numbers for her rows until the merge (no double count)',[h50,h51]);
+ if(LVL>=3)ok(h51.ev===g51.ev&&h51.rel===g51.rel,'P5 (level >= 3, part C: the host world is the one world) her rows changed there at once, the same as on her phone; counted once after the merge (below)',[h50,h51,g51]);
+ else ok(h51.ev===h50.ev&&h51.rel===h50.rel,'P5 the host\'s world keeps the old numbers for her rows until the merge (no double count)',[h50,h51]);
  await H.p.evaluate(()=>{S.srv=null});await G.p.evaluate(mid=>{const m=RV(mid);m.staff=(m.staff||[]).filter(x=>!x.coop)},mid5);/* back to a consort before the merge */
  await settle();await week(H,G,'P5 week');const g52=await rowG(mid5),h52=await rowH(mid5);
  /* the proof is a plain count (nothing else moves it in a week): counted once on both seats. Thiện cảm also drifts with the week, printed only. */
