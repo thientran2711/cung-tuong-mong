@@ -127,7 +127,7 @@ const LEX95B=[[/ngự hoa viên|vườn ngự|hòn non bộ|thái dịch trì|th
 const NOW95B=/lời đồn|đồn |đồn:|rỉ tai|nghe nói|bóng gió|\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\bsắp |\bmuốn |(?:^|\s)định |\bnếu |\(sai |sai người|\bhứa|mơ thấy|vọng sang|có thể|nghi |\bmời .* ra |ngày rằm/;
 const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|thái giám của|thái giám bên|kẻ hầu của|người hầu của|con của|cung|tặng|cho|của|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\s*$/;
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
-function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(kRx("(?<=[.!?…][)\"”']?)\\s+|\\s*;\\s*",""));
+function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/\s*;\s*/).flatMap(x=>x.split(kRx("(?<=[.!?…][)\"”']?)\\s+","")));
  const L=liveRivals(true).concat(rivals.filter(v=>v.alive&&v.out)).map(v=>[v,v.name]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);
  for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");const lo2=j95bNoTitles(lo);if(NOW95B.test(lo2))continue;const k=j95bLexNow(lo2);if(!k)continue;
   const used=[];for(const [v,nm] of L){let i=s.indexOf(nm);while(i>=0){if(!used.some(u=>i>=u[0]&&i<u[1])){used.push([i,i+nm.length]);const pre=s.slice(Math.max(0,i-18),i).toLowerCase();
