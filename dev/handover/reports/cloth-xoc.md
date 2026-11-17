@@ -48,3 +48,13 @@ Next worker:
 3. Test 3+ figures: fig-consort-c01/c03/c30-t2-a26 (red patterned + cup, green patterned + beads, cream-blue + branch) + one dark robe + one holding a broom/lantern (servant figure). Harness: a static page that loads jcloth.js with `window.BAL={looks:{}}` + `cl()` stub, fetches the figure webp from CDN img/ (save locally, serve with python http.server to avoid canvas taint), face box from CDN img/veil-fit.json, calls clothXocBake; debug view = paint o.field.dk / o.field.lt / o.mask.skin / o.mask.prot (bake now returns field).
 4. Then samples (1200 px, waist-up big + small full figure, label "Áo xốc xếch · 1 nhẹ"), unit tests (node: mask has hands as skin, dk>0 only inside mask and never on protS, lv3 count > lv1), quickcheck + one-core-guard.
 5. TASK 2 stain-decal layer: NOT STARTED (plan in r2 section above).
+
+## r4 (session_01UV1SzjnD2foC6FyKie4bD3, MAIN s39) — ROLLOVER HANDOVER (early, look still NOT ready)
+PRIORITY #1 CHECK ('xốc xếch crease cloth'): brief cloth-xoc-r4 + reports r1-r3 read | review/cloth-xoc 57afd8a reused | claims r3 session_01UV1SzkYmApqhLJ8fozxZi3
+State: review/cloth-xoc HEAD = see push (only dev/build/jcloth.js changed; BAL.looks.xoc.on stays 0). No samples uploaded, no tests, no stain layer yet.
+Changed: lv table (counts up, sg 4.2-4.6, dark .62/.62/.74, lite .16-.24), ridge {off 1.3,w .55,k .8,edge .5}, shadow mix capped (Math.min(.8,a*2), factor .3), drag lines S*.75 / D*.32.
+Findings (my eye, 3 figures c01 red+cup, c03 green+beads, c30 cream-blue+branch, waist-up 2x):
+- Wide bands (sg 5-6, shadow mix a*2.6) read as dirty brown leaf smears on pale robes and fat dark drag lines on red; narrowing + capping fixed that.
+- Now clean but too faint: lv1 is invisible, lv2/lv3 read as soft smudges, not as folds. Busy painted pleats swallow them.
+Next worker ideas: (1) make the fold itself a pair (dark band + clear light ridge on the lit side) at contrast ~25-35 %, ridge sharper (edge .3) so it reads as a crease edge, not a smudge; (2) lengthen strokes (waist fan 1.6x, bunch len 1.4x) and add a few 2-3 px "hard" crease lines inside the bands; (3) lv1 = 4-5 clearly visible bunches, lv3 = 2x lv1; judge on Fold at 1x, not 2x; (4) then samples, unit tests, stain layer.
+Harness (scratch, rebuild in 5 min): node script evals jcloth.js with window=global, BAL={looks:{}}, cl stub; RGBA from PIL (Image.open(webp).convert("RGBA").tobytes()); face box from CDN img/veil-fit.json[<file>.webp] (percent x,y,w,h); figures at https://ctm-img.victoria-tntt.workers.dev/img/fig-consort-c01|c03|c30-t2-a26.webp (299x900). No browser needed. Servant/dark-robe figures not tested yet.
