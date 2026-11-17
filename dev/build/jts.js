@@ -71,8 +71,11 @@ function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);const b=box.querySelector(".ts-guard");if(b)b.remove()}}
 function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv=env.lv||0,dur=20000;const t0=performance.now();let stop=false,raf=0,lx=W/2,tx=W/2,wind=0,good=0,tot=0,hit=0;const pops=[];
  const pads=[];let nextPad=900;const ly=H*.72;
- function chan(tt){return W/2+Math.sin(tt/2100)*W*.22}
- function draw(now){const tt=now-t0;kg82Bg(g,W,H,"den",.04,.55);const cx=chan(tt),cw=W*(.2+lv*.012);
+ /* review/mg-snap: the channel swings wider than the scoring band (BAL.mgTier.lev.den), so a lantern left in the middle drifts out of the light; was a typed swing .22·W
+    against a band .8·(.2+.012·lv)·W that covered it (idle play scored 5.5–8.8) */
+ const SW=mgLev(env,"den","swing"),BD=mgLev(env,"den","band");
+ function chan(tt){return W/2+Math.sin(tt/2100)*W*SW}
+ function draw(now){const tt=now-t0;kg82Bg(g,W,H,"den",.04,.55);const cx=chan(tt),cw=W*BD/.8;
   const gr=g.createLinearGradient(cx-cw,0,cx+cw,0);gr.addColorStop(0,"rgba(255,240,190,0)");gr.addColorStop(.5,"rgba(255,240,190,.32)");gr.addColorStop(1,"rgba(255,240,190,0)");g.fillStyle=gr;g.fillRect(cx-cw,0,cw*2,H);
   for(const p of pads)kg82Spr(g,"hat-lotus",p.x,p.y,p.r*2.1,null,{alpha:.95});
   if(!kg82Spr(g,"doden-lantern",lx,ly,48,null,{glow:hit>now?0:1}))kg82Blossom(g,lx,ly,16,"#e06030",true);
@@ -81,7 +84,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
   lx+=(tx-lx)*.12+wind*1.6;lx=cl(lx,20,W-20);
   if(tt>nextPad){pads.push({x:20+Math.random()*(W-40),y:-30,r:22+Math.random()*10});nextPad=tt+900+Math.random()*700}
   for(const p of pads)p.y+=H/(5200+lv*300)*16;for(let i=pads.length-1;i>=0;i--)if(pads[i].y>H+40)pads.splice(i,1);
-  const cx=chan(tt),cw=W*(.2+lv*.012);tot++;if(Math.abs(lx-cx)<cw*.8)good++;
+  const cx=chan(tt),cw=W*BD/.8;tot++;if(Math.abs(lx-cx)<cw*.8)good++;
   for(const p of pads){if(!p.hit&&Math.hypot(p.x-lx,p.y-ly)<p.r+14){p.hit=1;good=Math.max(0,good-40);hit=now+500;kg82Pop(pops,lx,ly-30,"Chạm hoa sen","#c23b22")}}
   const sc=Math.round(10*good/Math.max(1,tot));env.hud({score:`${sc}/10`,round:`Hồi 1/1`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
   draw(now);if(tt>dur){stop=true;return env.end(10*good/Math.max(1,tot))}raf=requestAnimationFrame(frame)}

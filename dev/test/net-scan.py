@@ -24,7 +24,7 @@ F=files();out=[]
 for name,rx in ROWS:
   n=0;where={}
   for f,s in F:
-    if f.endswith(('all.js','all40.js','all41.js','all42.js','all43.js','all40no.js','all_asm43.js','all_asm_40.js','all_asm_no.js')):continue
+    if f.endswith(('all.js',)):continue  # the stale all40*/all4x/all_asm* snapshots (private capOf copy) were deleted in review/staff-root-r1
     for line in s.split('\n'):
       for m in re.finditer(rx,line):
         seg=line[max(0,m.start()-60):m.end()+40]
