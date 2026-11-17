@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…","b":"dc467b22ef69","h":[{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."}]};
+window.CTM_BI={"s":"7abaf07a+","t":"2026-11-17T01:39Z","c":"batch-0132: CHANGE line + rebuild site","b":"77b8945b666a","h":[{"s":"babc9b4a","t":"2026-11-17T01:39Z","c":"Chơi chung không còn treo máy vì tên bạn lặp chữ; số bóng người trên dư đồ khớp đúng người đang ở đó; việc có hạn giờ hiện đồng hồ ngay dướ…"},{"s":"92685210+","t":"2026-11-17T00:53Z","c":"Khung việc và khung sự kiện bốn cỡ, tranh lấp đầy khung, việc nhắc tên ai hiện chân dung người ấy; phẩm của món đồ nằm ngay trên viền khung…"},{"s":"6f513340","t":"2026-11-16T23:24Z","c":"Vào game mới không còn bật ngay màn lật thẻ, lật thẻ chỉ khi vào buổi tối; dư đồ nhãn giấy mới; việc dài lấn sang buổi sau; lời trong cung …"},{"s":"7a18d957","t":"2026-11-16T22:44Z","c":"review-diemtrang-fx-r1 report"},{"s":"afe2bcbc","t":"2026-11-16T22:25Z","c":"review r1: KIT 84.1a note + report"},{"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt"},{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -17739,10 +17739,18 @@ function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.f
   /* the plain maid art (tier null) is the dress of maid rank 1 (there is no "m1" file for maid faces); m0, m2..m4 are their own ranks */
   let md=1e9;const d=f=>Math.abs((f.tier==null||f.tier===""?1:(parseInt(String(f.tier).replace(/\D/g,""),10)||0))-(mrank||0));
   for(const f of B)md=Math.min(md,d(f));return figBest(B.filter(f=>d(f)===md),null,age)}
- if(!base&&tier!=null&&T.length){let md=1e9;for(const f of T)md=Math.min(md,Math.abs(f88TNum(f)-tier));return figBest(T.filter(f=>Math.abs(f88TNum(f)-tier)===md),tier,age)}
+ /* review/fig-rank-match (owner 17/11: "Hoàng hậu ... chưa đúng phẩm"): dress tier = rank tier EXACTLY. The exact tier if it is drawn,
+    else the nearest tier ABOVE (reported in dev/handover/reports/fig-rank-match.md), NEVER a lower rank's dress, never maid art on a
+    consort. Nothing to show -> null (figFor returns "" and the frame shows its own placeholder). (Old rule: nearest tier either way, so a
+    Hoàng hậu (t8) wore t4 and a promoted maid wore maid clothes.) */
+ if(!base&&tier!=null){return figBestRank(T,tier,age)}
  if(!base&&T.length&&tier==null)return figBest(T,null,age);
  if(B.length){const N=B.filter(f=>f.tier==null||f.tier==="");return figBest(N.length?N:B,null,age)}
  return figBest(L,tier,age)}
+/* strict rank pick inside one identity's consort-dress records T: exact tier, else the nearest tier above, else null (never lower) */
+function figBestRank(T,tier,age){try{if(!T||!T.length)return null;const C=T.filter(f88IsCT);if(tier==null)return C.length?figBest(C,null,age):null;
+ let md=1e9;for(const f of C){const d=f88TNum(f)-tier;if(d>=0&&d<md)md=d}if(md===1e9)return null;
+ return figBest(C.filter(f=>f88TNum(f)-tier===md),tier,age)}catch(e){return null}}
 /* who wears consort dress */
 function f88Wear(who){try{if(who===S)return !(typeof isSrv==="function"&&isSrv());return (rivals||[]).includes(who)}catch(e){return false}}
 /* her maid dress rank on the cung nữ road (review/player-dress): Tân Giả khố = m0, Ma ma = m4 (the highest maid dress; the mama
@@ -17872,7 +17880,7 @@ function stArtOf(arc,beat,ending){try{const A=EVART;if(!A||!A.stories)return"";c
 function fpOn(){if(typeof faceOn==="function"){try{return !!(NLP&&faceOn())}catch(e){}}try{return !!(NLP&&S&&S.pid&&typeof FIGIX!=="undefined"&&FIGIX.consort&&FIGIX.consort[S.pid])}catch(e){return false}}
 function fpKeys(){const M=FIGIX.consort||{};return pidKeys().filter(k=>M[k]&&M[k].length)}
 /* the portrait she would wear with identity k right now (her rank tier or tier 1 as a maid, her age band) */
-function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBest(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
+function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBestRank(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
 function fpFace(k){const f=Object.assign({},pMe());f.src=fpPor(k);f.rw="";return f}
 function fpNum(k){return +String(k).replace(/\D/g,"")||0}
 /* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
@@ -44270,7 +44278,7 @@ function kcTitle(){return `Tiểu thư ${KCDAD[S.origin.k][1]}`}
 (function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(isKc()&&kcLore())f.rw="Tiểu thư"}catch(e){}return f}})();
 
 /* ---------- faces: every family member carries a figure identity (fid) from the existing pools (placeholders; §14 art list) ---------- */
-function kcPor(m,kind){try{const r=m.fid.split(":")[0];const L=(FIGIX[r]||{})[m.fid];if(!L||!L.length)return"";const f=figBest(L,r==="consort"?0:null,m.age);return f?figPath(kind==="fig"?(f.file||f.src):f.por):""}catch(e){return""}}
+function kcPor(m,kind){try{const r=m.fid.split(":")[0];const L=(FIGIX[r]||{})[m.fid];if(!L||!L.length)return"";const L2=r==="consort"?L:(typeof f88IsCT==="function"&&L.filter(f=>!f88IsCT(f)).length?L.filter(f=>!f88IsCT(f)):L);/* maid faces now also list t1–t8 consort-dress records: a khuê các / maid pick never takes one */const f=figBest(L2,r==="consort"?0:null,m.age);return f?figPath(kind==="fig"?(f.file||f.src):f.por):""}catch(e){return""}}
 function kcFace(m){if(m.r==="ty"&&S.maid)return pMaid();const f={src:kcPor(m),ini:(m.name||"?").split(" ").pop()[0],col:m.r==="cha"||m.r==="huynh"||m.r==="tm"?"#6a8aa0":"#b08a8a",rk:"off",rw:m.t};
  f.__kp=m;try{f.__kr=personRoleRank(m)}catch(e){}return f}
 function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys((FIGIX||{})[role]||{});const L=(pref||[]).filter(k=>keys.includes(k)&&!U.has(k)).concat(shuf(keys.filter(k=>!U.has(k))));const k=L[0]||"";if(k)figUsed().push(k);return k}
@@ -47112,7 +47120,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dc467b22ef69";window.CTM_BUILD=BUILD;
+const BUILD="77b8945b666a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
