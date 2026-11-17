@@ -1,4 +1,4 @@
-# it-key-guard — report (worker, opus) — SẴN SÀNG KIỂM ce1eda7b
+# it-key-guard — report (worker, opus) — r2 SẴN SÀNG KIỂM 02561fca (r1: ce1eda7b FAIL, see review-it-key-guard-r1.md)
 Branch `review/it-key-guard` from live main 744b80e7. Commits: 23e53eaa (itm + family), cf6f95b6 (CHANGE line + site), 7662ae56 (S.vl root cause), ce1eda7b (site).
 START_CTX ~5 % of the window; ended ~20 % (no rollover needed).
 
@@ -58,3 +58,22 @@ No shots in git; scratch only /home/user/wt/itkey-scratch.
 - Run: `python3 dev/test/it-key-scan.py`, `python3 dev/build/assemble.py && node dev/test/it-key-guard.js 4 120`, coop-e2e.
 - Check: `itm` never used on the left of `=`; existence checks (`if(IT[k])`, `IT[k]&&`) unchanged; the stub is frozen.
 - Open item (not this task): CW.hold build-skew guard covers only online seats; the stored room world is now made safe by itClean, not blocked.
+
+## r2 (answer to review-it-key-guard-r1 FAIL) — SẴN SÀNG KIỂM 02561fca
+Branch review/it-key-guard = reviewer's trial merge a9e19997 (reused) + 593285a9 (fix) + merge of main 7abaf07a (index/sw from main) + 02561fca (site + assets rebuilt).
+1. **Raw key** — kitItemInfo (jkrev, the one kit item model) now reads `itm(k)` (name/sub = the stub, never the key). Whole family:
+   13 raw-key name fallbacks → `itm(k).n`: j20, j75, j92, j93, jdress, jecon, jgift, jitd, jkrev, jpromo, jstip ×2, jtruth.
+   it-key-scan.py part 3 (raw-key fallbacks: `IT[k]?..n:k`, `(IT[k]||{}).n||k`, `it.n||k`, `it?it.n:k`): a9e19997 **13** → **0**.
+2. **One behaviour for an unknown piece: inert and never shown.** Not listed in Tư trang (as before) AND now never revealed: jfx kmDiff
+   reveal and the bestow chest skip `!itKnown` pieces. (It still counts nowhere: not sold, not gifted, not used.)
+3. **Rebase**: a9e19997 reused; main 7abaf07a merged (only index.html/sw.js conflicted → main's, rebuilt). Scan on the result 0 / 0 / 0.
+4. Non-blocking note done: jvoice memory written ONTO a worn veil is moved from the veil to S.vmem by itClean.
+
+| test (02561fca) | result |
+|---|---|
+| it-key-scan.py | reads 0 · field clashes 0 · raw-key fallbacks 0 (exit 0) |
+| it-key-guard.js 8×200 + new UI part | PASS: 1 464 months, 0 thrown, 0 page errors, 0 keyless; UI: known piece revealed 1, unknown revealed 0, rewards 0, raw key in page 0 |
+| same test on a9e19997 | FAIL (UI: reveal named "zz_gone_item") — the test catches r1's finding |
+| quickcheck.sh | PASS (open 844 ms, old save ok, render 233/233, buổi 1059/1216, core gates PASS) |
+| coop-e2e (LIVE Worker) | 60/60, exit 0 |
+UI test runs at 755x1000 (Fold); no shot taken (logic check on KFX.gains/rewards + page HTML). No kit / CSS change.
