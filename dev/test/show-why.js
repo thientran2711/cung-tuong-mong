@@ -39,6 +39,9 @@ async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>er
   await tick();
   /* 8 a night: Sủng from her preparation and his mood (her own stat in words, never "+N") */
   try{S.emp.mood=0;PEND.night1({q:2,vp:0});const s0=S.sung;nightFx(5);out.nightD=S.sung-s0;await tick();out.night=S.logs.slice(0,6).map(plain).filter(t=>/Vì sao: Đêm thị tẩm/.test(t))}catch(e){out.nightErr=String(e)}
+  /* 9 the nết / trọng words are tappable kit gloss terms (no native title) */
+  try{S.trK[v.id]=traitsOf(v).slice(0,1);const d=document.createElement("div");d.id="swtap";d.innerHTML=trLine(v)+" "+trongLine("th");document.body.appendChild(d);
+   out.tapTitle=d.querySelectorAll("[title]").length;const g=d.querySelector(".kgl");out.tapGl=d.querySelectorAll(".kgl").length;g.click();await tick();const pp=document.getElementById("kpop");out.tapPop=pp?pp.textContent:"";d.remove()}catch(e){out.tapErr=String(e)}
   /* 5 NPC deed toward her (TR_DEED context) — trọng of the judge */
   try{const k=Object.keys(SOC).find(k=>DEED[k]&&k!=="serveTH");out.soc=k}catch(e){}
   return out});
@@ -55,5 +58,6 @@ async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>er
  ok(!r.giftErr&&r.giftNamed&&(!r.giftD||r.gift.some(x=>x.includes('tính '+r.giftT))),'gift: the nết that changed its worth is named',[r.giftErr,r.gift,r.giftT,r.giftD]);
  ok(!r.talkErr&&r.talk.some(x=>/chuyện trò 2 lần/.test(x)),'talk said again: repetition named',[r.talkErr,r.talk]);
  ok(!r.nightErr&&r.night.length&&/sửa soạn chu đáo/.test(r.night[0])&&/Hoàng thượng đang vui/.test(r.night[0])&&/Đêm thị tẩm:/.test(r.night[0])&&/Sủng thêm \d/.test(r.night[0])&&!/Vì sao[^]*Sủng \+/.test(r.night[0]),'night: preparation + his mood, Sủng said in words',[r.nightErr,r.night,r.nightD]);
+ ok(!r.tapErr&&r.tapTitle===0&&r.tapGl>=1&&/Được:.*Mất:/.test(r.tapPop),'nết word = kit gloss term, tap shows gain + cost, no native title',[r.tapErr,r.tapTitle,r.tapGl,r.tapPop]);
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})();

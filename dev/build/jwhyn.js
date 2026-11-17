@@ -97,3 +97,7 @@ function kitWhyRowHTML(T){return T&&T.length?`<span class="kr kr-note kr-vi"><sp
  if(window.kaLastResult&&Array.isArray(window.kaLastResult.rows))window.kaLastResult.rows.push({k:"vi",label:"Vì sao",items:T.slice()})}catch(e){}return r}})();
 /* the result card's sentence never takes the why tail (kaSentence reads the Sổ ghi lines) */
 (function(){if(typeof kaSentence!=="function")return;const k0=kaSentence;kaSentence=function(){const s=k0.apply(this,arguments);return typeof s==="string"?s.replace(/\s*Vì sao:.*$/,""):s}})();
+/* ---------- nết + trọng words are TAPPABLE (owner devices = touch; no native title): the kit glossary term (KIT §12 kitGloss,
+   dotted underline, tap = kpPop) carries each nết's gain + cost (netTip, BAL.net.T) and each virtue's meaning (VIRT_GL) ---------- */
+(function(){try{if(typeof KIT_GLOSS!=="object")return;for(const t in BAL.net.T)if(KIT_GLOSS[t]==null)KIT_GLOSS[t]=netTip(t);
+ if(typeof VIRT_GL==="object")for(const v in VIRT_GL)if(KIT_GLOSS[v]==null){const g=String(VIRT_GL[v]||"");KIT_GLOSS[v]=g.charAt(0).toUpperCase()+g.slice(1)+"."}}catch(e){}})();
