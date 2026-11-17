@@ -23,7 +23,7 @@ Object.assign(BAL.looks,{xoc:{on:0,
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.7,wet:.04},{n:2,sc:.2,op:.78,wet:.09},{n:3,sc:.26,op:.85,wet:.15}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94]},
- kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0},uot:{pos:["hem","sleeve","chest"],blend:"multiply",variants:2,wet:1},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0}},
+ kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0,scm:1.4,dy:0},uot:{pos:["hem","sleeve","chest"],blend:"multiply",variants:2,wet:1,scm:1.5,dy:0},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0,scm:2.8,dy:-.045}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -173,8 +173,8 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
  /* wet cloth: the whole robe a little darker (own hue), more at the heavy level */
  if(K.wet&&L.wet)for(let i=0;i<W*H;i++){const k=mk.m[i]*(1-Math.min(1,mk.protS[i]*1.6));if(k<.02)continue;const f=1-L.wet*k;out[i*4]*=f;out[i*4+1]*=f;out[i*4+2]*=f}
  if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length],
-  ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(R()-.5)*B.jit*2);
-  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(.85+.3*R()),(R()-.5)*2*B.rot,L.op*(.9+.2*R()),K.blend)}
+  ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*B.jit*2);
+  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot,L.op*(.9+.2*R()),K.blend)}
  return{data:out,mask:mk,count}}
 window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
 window.clothXocBake=clothXocBake;window.clothMask=clothMask;

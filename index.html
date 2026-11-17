@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"db5189b9","t":"2026-11-17T23:35Z","c":"cloth-xoc: stain decal layer (drawDecalOnCloth generic + clothStainBake tra/uot/bun, BAL.looks.stain off by default, lkcloth hook, tests)","b":"d58b361ece6e","h":[{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"}]};
+window.CTM_BI={"s":"7aa16b94+","t":"2026-11-17T23:41Z","c":"cloth-xoc: build site (index.html, assets, sw) for db5189b","b":"69ff2f12bc24","h":[{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -65548,7 +65548,7 @@ Object.assign(BAL.looks,{xoc:{on:0,
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.7,wet:.04},{n:2,sc:.2,op:.78,wet:.09},{n:3,sc:.26,op:.85,wet:.15}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94]},
- kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0},uot:{pos:["hem","sleeve","chest"],blend:"multiply",variants:2,wet:1},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0}},
+ kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0,scm:1.4,dy:0},uot:{pos:["hem","sleeve","chest"],blend:"multiply",variants:2,wet:1,scm:1.5,dy:0},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0,scm:2.8,dy:-.045}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -65698,8 +65698,8 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
  /* wet cloth: the whole robe a little darker (own hue), more at the heavy level */
  if(K.wet&&L.wet)for(let i=0;i<W*H;i++){const k=mk.m[i]*(1-Math.min(1,mk.protS[i]*1.6));if(k<.02)continue;const f=1-L.wet*k;out[i*4]*=f;out[i*4+1]*=f;out[i*4+2]*=f}
  if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length],
-  ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(R()-.5)*B.jit*2);
-  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(.85+.3*R()),(R()-.5)*2*B.rot,L.op*(.9+.2*R()),K.blend)}
+  ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*B.jit*2);
+  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot,L.op*(.9+.2*R()),K.blend)}
  return{data:out,mask:mk,count}}
 window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
 window.clothXocBake=clothXocBake;window.clothMask=clothMask;
@@ -66532,7 +66532,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d58b361ece6e";window.CTM_BUILD=BUILD;
+const BUILD="69ff2f12bc24";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
