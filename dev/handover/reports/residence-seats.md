@@ -81,3 +81,86 @@ SẴN SÀNG KIỂM 020890d156548a6417c4c60e6be4a4c33752cc42
 
 ## WIP — successor #2 (17/11 10:05Z, START_CTX ≈ 4 %)
 Bot-page crash fixed (runner served no images → every <img> pending forever kept detached dialog trees alive, 3.5 M nodes); stuck lives fixed (bot tapped a kitOff option forever); fast bot mode. Commits f807c3c7, 7692fac2 on review/residence-seats. Mid-run (85 before / 81 after lives, ≤120 months each): Tần reach 94 → 98 /100 (the old 38/100 was an artefact of stuck short lives), harem max 18 → 20 (= cap), co-residents >2: 11 448 → 0, perf per buổi +1.4 %. Full run to 150/side running; final tables + quickcheck follow.
+
+## FINAL — successor #2 (17/11 14:55Z)
+
+PRIORITY #1 CHECK: grepped OWNER_DECISIONS / HANDOVER / PROGRESS for harem cap, roomFor, sens bot, co-residents; git grep origin/main + origin/review/* for roomFor/liveRivals/newRival/`out=false`. Reused the existing `roomFor("consort")` cap (j27:46, BAL.harem.cap), the existing sens bot (inpage6.js) and the existing kitOff/pbtn locks. Nothing new was built beside them.
+
+### A. Bot-page crashes and stuck lives (fixed; f807c3c7, 7692fac2)
+- Crash: the runner served no images. Every `<img>` stayed "pending" forever and kept detached dialog trees alive (heap snapshot: 3.5 M detached nodes, retainer = Pending activities ← img). Fix: images are answered with a 1×1 png and audio/video are aborted (run_rs.js).
+- Stuck: the bot tapped a locked (kitOff) option forever. Fix: inpage6.js skips `off` options.
+- Fast mode for the measure only (inresseat.js: no-op fit/focus helpers). Life cap 120 months.
+- Result: 306 lives, 0 TIMEOUT, 0 CRASH.
+
+### B. Measure: 153 lives per side, ≤120 months each, live main vs branch, 2 browsers at once (dev/measure/run_rs.js + inresseat.js, analysed by dev/measure/an_rs.py)
+#### Lives
+
+| | lives | ended in game (death/ending) | reached 10 years (cap) | TIMEOUT | CRASH | months played (sum) | months per life (median) |
+|---|---|---|---|---|---|---|---|
+| before | 153 | 76 | 77 | 0 | 0 | 13690 | 119 |
+| after | 153 | 71 | 82 | 0 | 0 | 13985 | 119 |
+
+#### Promotion pace (months from start; median [p25–p75]; reach = lives that got there, per 100 lives)
+
+| | Tần reach | to Tần | Phi reach | to Phi | Quý phi reach | to QP | HQP reach | Hoàng hậu reach | to HH |
+|---|---|---|---|---|---|---|---|---|---|
+| before | 145 (95/100) | 12 [8–21] | 137 (90/100) | 22 [16–33] | 126 (82/100) | 33 [23–41] | 114 (75/100) | 58 (38/100) | 71 [57–100] |
+| after | 148 (97/100) | 12 [7–19] | 138 (90/100) | 24.5 [17–34] | 123 (80/100) | 35 [28–46] | 111 (73/100) | 60 (39/100) | 78 [61–100] |
+
+#### Harem size (living consorts + her), per game year: max over lives / mean of each life's yearly max (lives still playing that year)
+
+| | start (y1 mean) | max ever | y1 | y2 | y3 | y4 | y5 | y6 | y7 | y8 | y9 | y10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| before | 11.6 | 18 | 14 / 11.6 (153) | 16 / 11.8 (147) | 17 / 14.8 (137) | 17 / 13.7 (131) | 17 / 12.9 (122) | 17 / 14.9 (112) | 18 / 13.6 (106) | 17 / 12.8 (98) | 18 / 14.8 (93) | 17 / 13.8 (83) |
+| after | 11.7 | 21 | 16 / 11.7 (153) | 16 / 11.7 (148) | 19 / 14.8 (144) | 20 / 14.2 (132) | 20 / 13.2 (123) | 21 / 15.8 (113) | 20 / 14.6 (103) | 20 / 13.8 (99) | 20 / 16.0 (95) | 20 / 14.7 (90) |
+
+#### Co-residents per chủ vị (monthly samples) and where she lives while below Tần
+
+| | samples | 0 | 1 | 2 | 3+ | over cap (>2) | her months below Tần | in a side hall (Đông/Tây phối điện) | Ngọc Thanh các | other |
+|---|---|---|---|---|---|---|---|---|---|---|
+| before | 53576 | 18244 (34/100) | 7484 (14/100) | 7365 (14/100) | 20483 (38/100) | 20483 | 8832 | 0 (0/100) | 7999 (91/100) | 833 |
+| after | 60902 | 507 (1/100) | 13330 (22/100) | 47065 (77/100) | 0 (0/100) | 0 | 7776 | 5936 (76/100) | 1090 (14/100) | 750 |
+
+#### Perf (ms per buổi = nextBuoi wall time, both builds run at the same time, one browser each)
+
+| | buổi timed | ms per buổi (mean) | per-life mean: median [p25–p75] |
+|---|---|---|---|
+| before | 164854 | 16.0 | 15.5 [14.6–16.3] |
+| after | 168407 | 16.3 | 15.6 [14.7–16.8] |
+
+after vs before: +2.1 % (gate ≤ +5 %)
+
+Reading:
+- Tần is not slower: 97/100 reach at a median of 12 months, against 95/100 at 12 on live. The earlier partial figure "38/100 vs 60/100" came from stuck, short bot lives (fixed in A). **No BAL change is needed.**
+- Phi and Quý phi come about 2 months later (median), and Hoàng hậu reach is the same (39 vs 38 /100).
+- Co-residents: 0 samples over 2 on the branch (live: 20 483). She now lives in a side hall while below Tần (76/100 of her months; live: 0).
+- Perf: +2.1 % ms per buổi (gate ≤ +5 %). The earlier +5.2 % was not confirmed.
+
+### C. Harem cap leak found by the measure (max 21 on 1/153 lives) → fixed as a family
+Scan: every path that adds a living consort (`newRival(`, `rivals.push(`) and every path that brings one back (`.out=false`, `out:false`). Co-op files were scanned but not changed (co-op code is off limits).
+
+| path | before | after |
+|---|---|---|
+| j7 newgirl event (3 options; chosen late, after the harem filled) | adds past cap | `newGirl()` checks roomFor; full → "Hậu cung đã đủ người, tân nhân được đưa về nhà.", paid option refunds its own price (BAL-typed, one-core-guard 0) |
+| j55:121 sớ tuyển tú | adds past cap | `roll(o)&&roomFor("consort")` |
+| j7 coldvisit "Xin Hoàng thượng ân xá" | returns her past cap | kitOff "hậu cung đã đủ người" + check in go |
+| j8:476 empAct pardon | returns her past cap | `if(v.out&&!roomFor("consort"))return` |
+| j15:39 pardon button | open | pbtn why "hậu cung đã đủ người" |
+| j14:24 NPC release petition | returns her past cap | `&&roomFor("consort")` |
+| j72:475 return roll | returns her past cap | `roll(25)&&roomFor("consort")` |
+| j34:53, jbal:201, j8:442/444/446, j3:110, j14:37, j27:43, jkc:541 | already guarded | unchanged |
+| j6 pardon | only lifts cấm túc | unchanged (safe) |
+
+Commits 3f0ae63a (new consorts), f759ba30 (returns from lãnh cung). Tests R9 (newgirl at cap) and R9b (pardon/ân xá at cap) in dev/test/residence-seats.js fail on the commit before each fix and PASS after.
+
+Confirmation run on f759ba30 (80 lives, ≤120 months, with a tracer that logs any over-cap month): **max harem 20, 0 lives over 20, 0 co-residents over 2, 0 TIMEOUT/CRASH.**
+
+| | lives | months | max harem | y3 | y6 | y10 | co 0/1/2/3+ per 100 | her side hall / NTC below Tần |
+|---|---|---|---|---|---|---|---|---|
+| after (f759ba30) | 80 | 7403 | 20 | 20 / 14.9 | 20 / 16.1 | 20 / 15.2 | 1 / 21 / 78 / 0 | 73/100 / 20/100 |
+
+### D. Gates on d88883df (head = f759ba30 + measure tracer only)
+- quickcheck.sh: **PASS** (core gates PASS, build matches, old save ok). Medians of 3: render 318/337 ms, tab 423/424 ms, buổi 1471/1211 ms (new/live). The buổi gap is noise from 3 runs on a busy box: the previous run (5 runs, 3f0ae63a) gave 1022/1019, and the 30 000-buổi sens-bot measure gives +2.1 %.
+- residence-seats.js (R1–R9b): PASS. residence-oldsave: PASS. seatcap-sim: no over-cap. one-core-guard: 0 fails.
+
+SẴN SÀNG KIỂM d88883dfcf9fc29700a4d2e45029a5146eb19801
