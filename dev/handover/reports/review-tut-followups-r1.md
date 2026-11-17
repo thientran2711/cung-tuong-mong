@@ -1,7 +1,7 @@
 # review-tut-followups-r1 (reviewer, opus, BIG review) — review/tut-followups @ aa391edf
 
 Branch reviewed: `review/tut-followups` aa391edf (base review/tut-quests-r1 66f598de, now on main via batch-2300), merged onto origin/main
-744b80e7 on `review/tut-followups-r1` (first onto 08725411 = b2da2009, then re-merged when main moved). Conflicts: assemble.py (main's list,
+0f61ff92 on `review/tut-followups-r1` (onto 08725411 = b2da2009, re-merged as main moved: 744b80e7 = 88245542, f5220eaa = 8c9255a1, 0f61ff92 = e37c9675, 7abaf07a = 92cce50b). Conflicts: assemble.py (main's list,
 already holds jtq14), jroute.js rtStoryHTML (kept the branch's kitChecks ladder line + main's `BAL.route.anDuc` line), generated
 index.html/sw.js/assets.json rebuilt with build_site.sh.
 Rules read: PREAMBLE, REVIEWER, START_CORE/WORKER/REVIEWER, worker report tut-followups.md, review-tut-quests-r1.md.
@@ -17,7 +17,11 @@ Rules read: PREAMBLE, REVIEWER, START_CORE/WORKER/REVIEWER, worker report tut-fo
 | 3 | cung nữ Thân phận tab raw srvRows array | `kitRows(srvRows())`; shots Fold/iPad@2/1366@2/1000x755/844x390: kit rows, no "Thân phận,…,t" text, no h-overflow | OK |
 | 4 | KIT REQUEST j72 Việc nhờ 3-state list | j72.js: 0 lines changed vs main; still hand list `✓ / ▸ / ·` at j72:253, listed as KIT REQUEST in the worker report (generalise §69.3 kitCoopSteps → kitSteps). NOT yet in dev/kit/KIT_REQUESTS.md → coordinator to log it | OK (log pending) |
 
-## Tests (merged build 88245542 unless noted)
+## Tests (merged builds; final 92cce50b on main 7abaf07a)
+Final build 92cce50b (main 7abaf07a, kit-size-10 only): one-core-guard PASS 0 fails; coop-e2e 60/60; tut-origins 10/10; tut-followups 5/5.
+Final build e37c9675: one-core-guard PASS 0 fails; coop-e2e 60/60; tut-origins 10/10; tut-followups 5/5; tut-quests tt 35/35, bd 35/35.
+On 8c9255a1 (main f5220eaa, before coop-main-faults): coop-e2e 53/60 once (host week not ending, «pend»), then 60/60; main alone 60/60 — the next main batch fixed an observer loop that hung the host; not this branch (no co-op code touched). Chapter card re-shot in the new kit-size frame (Fold@2, iPad@2): Mục tiêu row → «Các bước» kitChecks section → Hạn row, OK.
+Earlier builds:
 | test | result |
 |---|---|
 | one-core-guard.js (main's, no --allow-grow) | PASS, fails 0 (inlineNow 6674 / baseline 6691) |
@@ -39,4 +43,4 @@ No horizontal overflow, no cut text, no page errors. Note: chapter card frame pi
 - Flaky tm96c stall (fast bot) needs an owner (story14): it now fails ~4 of 5 runs on this build (main alone 2/2 pass), so the story14-frame gate is noisy; dump S.st.M (cur/nb/due/dl) when the walk stops to find why tm96c gets no next hồi.
 
 ## Verdict
-PASS 88245542 (descends origin/main 744b80e7).
+PASS 92cce50b (descends origin/main 7abaf07a).
