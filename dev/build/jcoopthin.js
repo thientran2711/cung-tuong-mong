@@ -146,7 +146,7 @@ TH.withSeat=function(seat,fn){
  const L=X.pullFriend();const hp=persTake(A.S);const mks=new Map();
  swapView(CW.seat,seat,mks,A.S);persPut(A.S,B.pers);
  const sb=B.S;for(const k of X.W_KEYS){if(k in A.S)sb[k]=A.S[k];else delete sb[k]}
- sb.origin=(typeof ORIGINS!=="undefined"&&ORIGINS.find(o=>o.k===B.ok))||A.S.origin;
+ sb.origin=(typeof originByKey==="function"&&originByKey(B.ok))||A.S.origin;
  CW.ctx=seat;TH.ctxN++;TH.outerS=A.S/* part B: the host's own person, READ-ONLY inside (her names must not repeat the host's own servants: the stand-in has no staff) */;quiet=true;S=sb;for(const r of REG)if(r[0] in B.g)try{r[2](B.g[r[0]])}catch(e){}
  let v=null,p0=null;const dOn=TH.dOn();
  /* B r1 item 2 (ONE life-change path): a part-B life intent (roll / accept) answers with its own person (P), dialogs (q) and rows; part D's
