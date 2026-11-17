@@ -74,7 +74,7 @@ EVD.thb={place:()=>"tn",
  tick(w){if(S.thDead||!S.thIll)w.t1=Math.min(w.t1,now()+1)},
  end(){return S.thDead?"":"Bệnh Thái hậu đã thuyên giảm; Đức Thọ cung thôi chia phiên."},
  card(w){const b=B().thb;if(!meCons())return info(w);const o=od(b.nurse.o[0]+((S.arts&&S.arts.y)||0)*b.nurse.o[1]);
-  return Object.assign(info(w),{who:pTH(),opts:[{n:"Xin vào hầu bệnh",fx:{suc:-b.nurse.suc},x:`${word(o)} · thành: Thái hậu +${b.nurse.th} · hỏng: Thái hậu +${b.nurse.thFail}`,go:()=>apply({th:roll(o)?b.nurse.th:b.nurse.thFail})},
+  return Object.assign(info(w),{who:pTH(),opts:[{n:"Xin vào hầu bệnh",fx:{suc:-b.nurse.suc},x:`${word(o)} · thành: Thái hậu +${b.nurse.th} · hỏng: không được gì`,go:()=>{if(roll(o))apply({th:b.nurse.th})}},
    {n:"Chép kinh cầu an",fx:{suc:-b.pray.suc},x:`thành: Đức +${b.pray.duc}, Thái hậu +${b.pray.th}`,go:()=>apply({duc:b.pray.duc,th:b.pray.th})},
    {n:"Gửi thuốc bổ",fx:{bac:-b.med.bac},x:`thành: Thái hậu +${b.med.th}`,go:()=>apply({th:b.med.th})}]})},
  nightMul(){return B().thb.nightMul},feast:1};
@@ -112,7 +112,7 @@ EVD.ret={place:()=>"home",
   return `Tuyết lớn phủ kín cung cấm; than sưởi chia theo phẩm, cung thấp và lãnh cung rét cóng.${Sh.length?` Chia than cho các cung thấp: ${nmList(Sh)}.`:""}${Su.length?` Chịu rét: ${nmList(Su)}.`:""}`},
  end(){return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
  card(w){const b=B().ret;if(!meCons())return info(w);if(rkOf(S)<=b.rank)return Object.assign(info(w),{opts:[{n:"Bỏ bạc mua thêm than",fx:{bac:-b.buy.bac},x:"thành: qua mùa rét yên ổn"},
-   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:"kèm: dễ nhiễm phong hàn",go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
+   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:"kèm: có thể bị nhiễm phong hàn",go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
   return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:"không được mất gì"}]})},
  night(){return false}};
 /* ---------- 8 NẠN CHÂU CHẤU (row 8): a flood / drought whose relief failed (j55) left Kho lúa low but not yet famine (dis.kho..kho),
