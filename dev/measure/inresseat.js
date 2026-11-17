@@ -1,6 +1,10 @@
 /* review/residence-seats measure add-on (load AFTER inpage6.js): per life, months to first reach Tần / Phi / Quý phi / HQP / Hoàng hậu,
    harem size (living consorts + her) per game year and its max, co-resident counts per chủ vị (sampled monthly), where she lives
    (side hall / Ngọc Thanh các / own palace), and ms per buổi (nextBuoi). Attached to each window.__res row as .rs */
+/* speed (17/11, successor): window.__rsFast (run_rs.js default) turns off the dialog FIT passes only (pure layout: kitFrameLive3 v3 re-lay,
+   feet/fig fit, dlg/dp fit, panel compact, element focus() = ~78 % of the bot page's CPU in a profile). Game state, rules and buttons are untouched; both
+   builds get the same stubs, so the before/after comparison holds. Render/buổi perf vs live is gated by quickcheck.sh, not by this run. */
+if(window.__rsFast){try{HTMLElement.prototype.focus=function(){}}catch(e){}try{kitFrameLive3=()=>false;window.kitFrameLive3=kitFrameLive3}catch(e){}for(const f of ["kszFeetFit","kitDlgFit","kitDpFit"])try{if(typeof window[f]==="function"){window[f]=function(){};eval(f+"=window."+f)}}catch(e){}try{if(typeof kitPanelCompact==="function"){kitPanelCompact=()=>false;window.kitPanelCompact=kitPanelCompact}}catch(e){}}
 (function(){let cur=null;const live=x=>x===S?!S.out&&!S.dead:x.alive&&!x.out;
  function reset(){cur={t0:null,first:{},hmax:0,hy:[],co:[0,0,0,0],coN:0,meSide:0,meNT:0,mePal:0,meN:0,bms:0,bn:0,over:0}}reset();
  function sample(){if(!S||S.dead)return;if(cur.t0==null)cur.t0=S.turn-1;const m=S.turn-cur.t0;const rk=rkOf(S);
