@@ -334,9 +334,13 @@ function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "
 
 /* (b) TRANG ĐIỂM — three hồi on her face in the mirror */
 const TOIL_MIR={cx:527/1024,cy:282/1024,rx:176/1024,ry:194/1024};/* the glass of the bronze mirror in mg-chai-bg (1024²) */
+/* ONE anchor table per face picture (owner 17/11, toil-reveal-fix): the mouth point every toilette placement uses (mirror, reveal close-up) is the centre of the
+   face-mesh lips in img/mk-fit (the same table the brows / cheeks / lips targets and the colour layers use); toil-fit only gives the face width / height / aspect / tilt */
+function toilRow(f){const r=TOIL_FIT.fit&&TOIL_FIT.fit[f];if(!r)return r;let m=null;try{const g=MK_FIT.g[MK_FIT.face(f)];m=g&&g[f]}catch(e){}if(!m||m.length<24)return r;let x=0,y=0;for(let i=0;i<12;i++){x+=m[2*i];y+=m[2*i+1]}const o=r.slice();o[0]=+(x/12/40).toFixed(2);o[1]=+(y/12/40).toFixed(2);/* cheeks from the same points (the blush discs of toilMakeupSvg read o[2..5]) */try{const A=r[8]||1.3,J=toilIdeal(m,{x:0,y:0,w:100,h:100*A},r[6]);if(J&&J.cheeks&&J.cheeks.length===2){o[2]=+J.cheeks[0].x.toFixed(2);o[3]=+(J.cheeks[0].y/A).toFixed(2);o[4]=+J.cheeks[1].x.toFixed(2);o[5]=+(J.cheeks[1].y/A).toFixed(2)}}catch(e){}return o}
+window.toilRow=toilRow;
 function toilFace(src){const n=String(src||"").split("?")[0].split("/").pop();let r=null;
  /* the measured mouth (img/toil-fit.json) defines the face box when there is one: mouth at (.46, .49) of the box, like the veil box */
- try{const v=TOIL_FIT.fit&&TOIL_FIT.fit[n];if(v)return[v[0]-.46*v[6],v[1]-.49*v[7],v[6],v[7],v[9]||0]}catch(e){}try{r=KIT_VEIL.fit&&KIT_VEIL.fit[n]}catch(e){}return r||[32,37,34,22,0]}
+ try{const v=toilRow(n);if(v)return[v[0]-.46*v[6],v[1]-.49*v[7],v[6],v[7],v[9]||0]}catch(e){}try{r=KIT_VEIL.fit&&KIT_VEIL.fit[n]}catch(e){}return r||[32,37,34,22,0]}
 function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(1024*.62));const S0=1024*k;const ox=W/2-TOIL_MIR.cx*S0,oy=H/2-TOIL_MIR.cy*S0;
  const mx=W/2,my=H/2,rx=TOIL_MIR.rx*S0,ry=TOIL_MIR.ry*S0;const f=toilFace(src);const IW=384,IH=506;const fx=f[0]/100*IW,fy=f[1]/100*IH,fw=f[2]/100*IW,fh=f[3]/100*IH,rot=(f[4]||0)*Math.PI/180;
  const s=rx*1.55/fw;const fcx=fx+fw/2,fcy=fy+fh*.3;const cs=Math.cos(rot),sn=Math.sin(rot);
@@ -624,8 +628,8 @@ function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){const r=toilF
 const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
-function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!L||!v)return"";col=col||toilColDef();
- const key=file+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
+function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toilRow(file);if(!L||!v)return"";col=col||toilColDef();
+ const key=file+"|"+(v===TOIL_FIT.fit[file]?0:1)+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
  const A=v[8]||1.3,Y=y=>y*A,[mx,my,lx,ly,rx,ry,fw]=v;const H=100*A;const c=(a)=>`rgb(${a[0]},${a[1]},${a[2]})`;
  const cx=(lx+rx)/2,cy=Y((ly+ry)/2);const d=Math.hypot(rx-lx,Y(ry)-Y(ly))||fw*.5;const ang=Math.atan2(Y(ry)-Y(ly),rx-lx)*180/Math.PI;
  const sk=L.skin,bl=toilColRGB("ma",col.ma).concat(L.blush.slice(3)),lp=toilColRGB("son",col.son).concat(L.lip.slice(3));const br=fw*bl[4]*1.0;
@@ -829,16 +833,16 @@ function toilPreName(col,look){if(!col)return"";const k=toilPreOf(Object.assign(
 function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
 function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
-  const ff=kitFile(fig),pf=kitFile(por.src),v=TOIL_FIT.fit[ff];if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
+  const ff=kitFile(fig),pf=kitFile(por.src),v=toilRow(ff);if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
   /* the close-up is HER PORTRAIT laid exactly over her face in the figure (same mouth point, same face width from img/toil-fit.json): the figure picture is too soft at 5x, the portrait has the pixels */
-  let porH="";try{const pv=TOIL_FIT.fit[pf];if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);
+  let porH="";try{const pv=toilRow(pf);if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);
    porH=`<span class="ktrv-pw" style="left:${(v[0]-pv[0]*wp/100).toFixed(2)}%;top:${(v[1]-pv[1]*hp/100).toFixed(2)}%;width:${wp.toFixed(2)}%;height:${hp.toFixed(2)}%"><img src="${IMG_U("img/"+pf)}" alt=""><span class="kfxf">${pfx}</span></span>`}}catch(e){}
   const fx=(()=>{try{return kitFxLayers(S,ff)}catch(e){return""}})();
   const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}${o.made?` · ${o.score} phần`:""}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Hôm nay",TOIL_HINT[look]]);
   const html=`<div class="ktrv ktrv-${look}" style="--ktpx:${v[0]}%;--ktpy:${(v[1]-v[6]*.25/A).toFixed(2)}%"><div class="ktrv-cam"><i class="ktrv-plate" style="background-image:url(${IMG_U("img/toil-mirror-room.webp")})"></i><i class="ktrv-lt"></i>`+
    `<div class="ktrv-fig"><span class="ktrv-fw"><img src="${IMG_U("img/"+ff)}" alt=""><span class="kfxf">${fx}</span>${porH}</span></div></div>`+
    `<div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;
-  const rt=kmStage("ktrv-ov",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),im=fw.querySelector("img");
+  const rt=kmStage("ktrv-ov km-full",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),im=fw.querySelector("img");
   const hint=document.createElement("div");hint.className="kmhint";hint.textContent="Chạm để bỏ qua";ov.appendChild(hint);
   fw.style.setProperty("--kta",(1/A).toFixed(5));/* the box = the picture box from the fit aspect (no wait for the picture), so the % layers (makeup, portrait) and the camera always sit on the picture */
   let ph=0;const T=[];const later=(ms,f)=>{if(!o.manual)T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
@@ -887,11 +891,11 @@ window.toilReveal=toilReveal;
 .ktrv-fw>img{display:block;height:100%;width:auto;max-width:none;transition:opacity .6s ease}
 .ktrv-fw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s ease}
 .ktrv-pw{position:absolute;opacity:0;transition:opacity .6s ease;pointer-events:none}.ktrv-pw>img{display:block;width:100%;height:100%;max-width:none}.ktrv-pw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.ktrv-zin .ktrv-pw{opacity:1}.ktrv-zin.ktrv-hasp .ktrv-fw>img,.ktrv-zin.ktrv-hasp .ktrv-fw>.kfxf{opacity:0}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
+.ktrv-zin .ktrv-pw{opacity:1}/* owner 17/11: the portrait is only a face patch; its edges FEATHER into the figure picture (never a hard cut line, the figure stays under it) */.ktrv-pw{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
 .ktrv-in .ktrv-fw,.ktrv-zin .ktrv-fw{opacity:1;transform:none}
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}
-.ktrv-card{position:absolute;left:50%;bottom:max(34px,env(safe-area-inset-bottom));transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
+.ktrv-card{position:absolute;left:50%;bottom:calc(var(--kmend-room,68px) + 10px);transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
 .ktrv-zoomed .ktrv-card{opacity:1;transform:translate(-50%,0)}
 
 `;document.head.appendChild(st)})();

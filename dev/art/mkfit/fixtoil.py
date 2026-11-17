@@ -2,13 +2,16 @@
 """Whole-class fix of img/toil-fit.json from the face-mesh anchors (review/mk-colour): a picture whose measured mouth (colour centroid) sits
 more than THR of the face width away from the face-mesh lip centre gets its whole point set moved onto the lips (mouth + both cheeks move
 together, the approved cheek layout kept); a face width off by > 25 % from the median face-width / eye-distance ratio is rescaled about the mouth.
-usage: python3 -I dev/art/mkfit/fixtoil.py [--dry]   (reads img/mk-fit/*.json, writes dev/art/toil-fit.json + img/toil-fit.json)"""
+usage: python3 -I dev/art/mkfit/fixtoil.py [--dry] [--fit F] [--mk DIR] [--out F]   (default: reads img/mk-fit/*.json, writes dev/art/toil-fit.json + img/toil-fit.json;
+       toil-reveal-fix 17/11: --fit toil-fit2.json --mk <corrected mk-fit dir> --out toil-fit2.json re-seats every mouth the corrected face-mesh points moved)"""
 import json, glob, math, os, sys, statistics
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../.."))
 THR = .10
-fit = json.load(open(os.path.join(ROOT, "dev/art/toil-fit.json")))
+_a = sys.argv[1:]; _g = lambda k, d=None: _a[_a.index(k) + 1] if k in _a else d
+FITF = _g("--fit", os.path.join(ROOT, "dev/art/toil-fit.json")); MKD = _g("--mk", os.path.join(ROOT, "img/mk-fit")); OUTF = _g("--out")
+fit = json.load(open(FITF)); fit = fit.get("fit", fit)
 mk = {}
-for f in glob.glob(os.path.join(ROOT, "img/mk-fit/*.json")): mk.update(json.load(open(f)))
+for f in glob.glob(os.path.join(MKD, "*.json")): mk.update(json.load(open(f)))
 def geo(n):
     v, t = mk[n], fit[n]; A = t[8]
     P = [(v[2 * i] / 40, v[2 * i + 1] / 40 * A) for i in range(60)]   # % of width on both axes
@@ -40,5 +43,5 @@ for k in (.08, .10, .12, .18):
     after[k] = c
 print(json.dumps({"pictures": len(rows), "ratio fw/eye": round(ratio, 3), "fixed": fixed, "mouth off > k·face width, before": before, "after": after}))
 if "--dry" not in sys.argv:
-    for p in ("dev/art/toil-fit.json", "img/toil-fit.json"):
-        json.dump(fit, open(os.path.join(ROOT, p), "w"), separators=(",", ":"))
+    for p in ([OUTF] if OUTF else [os.path.join(ROOT, "dev/art/toil-fit.json"), os.path.join(ROOT, "img/toil-fit.json")]):
+        json.dump(fit, open(p, "w"), separators=(",", ":"))

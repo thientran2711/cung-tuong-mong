@@ -50,7 +50,7 @@ function kitSceneEndLabel(cls,o){if(o&&o.end)return String(o.end);for(const k in
 window.kitSceneEndLabel=kitSceneEndLabel;
 /* kitSceneFit(ov): a scene taller than the room left above the button (short landscape, 844x390) is scaled down (CSS zoom on .kmst, never below .55) so nothing
    runs under the button; room = overlay height minus the button row (css .km-endon padding). Runs when the button appears and on resize. */
-function kitSceneFit(ov){try{const st=ov&&ov.querySelector(".kmst");if(!st)return;st.style.zoom="";const cs=getComputedStyle(ov);const avail=ov.clientHeight-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.paddingTop)||0);
+function kitSceneFit(ov){try{const st=ov&&ov.querySelector(".kmst");if(!st||ov.classList.contains("km-full"))return;st.style.zoom="";const cs=getComputedStyle(ov);const avail=ov.clientHeight-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.paddingTop)||0);
  const els=[...st.children].flatMap(c=>[c,...c.children]).filter(e=>!/kmdark|kmleaves|kmglow|kmfls|kmleaf/.test(e.className||"")&&e.getBoundingClientRect().width>0);
  const h=els.length?Math.max(...els.map(e=>e.getBoundingClientRect().bottom))-Math.min(...els.map(e=>e.getBoundingClientRect().top)):st.scrollHeight;if(avail>0&&h>avail+2)st.style.zoom=String(Math.max(.55,Math.floor(avail/h*100)/100))}catch(e){}}
 window.kitSceneFit=kitSceneFit;addEventListener("resize",()=>document.querySelectorAll(".kmov.km-endon").forEach(kitSceneFit));
@@ -292,7 +292,11 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-.kmov.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+.kmov{--kmend-room:calc(68px + env(safe-area-inset-bottom,0px))}
+.kmov.km-endon{box-sizing:border-box;padding-bottom:var(--kmend-room)}
+/* KIT 81b (owner 17/11 toil-reveal bug): a FULL-BLEED scene (its own backdrop fills the screen: .km-full) has NO padding top or bottom, so the backdrop runs edge to edge
+   and the scene-end button sits ON it (no dark band under the button, top and bottom the same). Its own content keeps clear of the button with var(--kmend-room). */
+.kmov.km-full,.kmov.km-full.km-endon{padding:0}
 .kmend{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:9;min-width:140px;animation:kmendin calc(.35s*var(--pace)) ease-out both}
 @keyframes kmendin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
 @media (prefers-reduced-motion:reduce){.kmend{animation:none}}

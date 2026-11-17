@@ -168,7 +168,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-skip .kpod-beam,.kpod-skip .kpod-pool{animation:none!important}.kpod-skip .kpod-motes i{animation-delay:0s}
 .kpod-red .kpod-motes{display:none}
 @keyframes kpodMote{0%{opacity:0;transform:translateY(10px) scale(.6)}30%{opacity:1}70%{opacity:.8}100%{opacity:0;transform:translateY(-26px) scale(1)}}
-.kpod-ft{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 14px;background:linear-gradient(#f5ecdc00,#f5ecdcf0 40%)}
+.kpod-ft{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 14px;background:none}/* owner 17/11: the scene backdrop runs edge to edge and the button sits ON it (no cream band under the dais) */
 .kpod-next{min-width:180px;font-size:1rem;cursor:pointer}
 .kpod-mine{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--ink);background:#fffaf0e8;border:1px solid var(--k-hair);border-radius:var(--k-rad);padding:3px 10px}
 .kpod-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}

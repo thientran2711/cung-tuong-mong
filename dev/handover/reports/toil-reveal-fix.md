@@ -1,0 +1,19 @@
+PRIORITY #1 CHECK: OD 39 (OD:L1482, OD 15/11 23:30Z, OD:L555, OD tail 17/11 03:42Z) | main jtoil.js toilReveal/toilGeom/toilIdeal + dev/art/mkfit (reused, data fixed) | review/* 0 relevant | claims diemtrang-score (live; merged)
+
+# toil-reveal-fix (worker, review/toil-reveal-fix)
+
+## Root cause (anchors)
+Two tables describe one face picture: img/toil-fit2.json (mouth, used to seat the picture in the mirror and the reveal close-up) and img/mk-fit/*.json (face-mesh brows/eyes/lips, used for targets + colour layers). toil-fit2 mouths were seated FROM mk-fit, and mk-fit was measured on a crop around the old toil-fit mouth, so a wrong first guess was confirmed by itself. Independent whole-picture face mesh (new dev/art/mkfit/verify.py) over all 5992 consort/player por-/fig- pictures: 4782 agree, 1210 (20 %, 1073 of them age a18, i.e. the age she starts at) had points displaced off the face (brows beside the eye, lips above the nose / under the chin) = the owner's bug, in scoring targets AND reveal.
+## Fix
+- 1210 anchor sets replaced by the independent mesh points (dev/art/mkfit/consort-*.json, player-look*.json); 982 toil-fit mouths re-seated (dev/art/toil-fit2.json, fixtoil.py now takes --fit/--mk/--out).
+- ONE table in code: jtoil.js `toilRow(file)` = toil-fit row with mouth AND cheeks taken from the mk-fit points; used by the mirror placement (toilFace), the reveal figure/portrait overlay, and the blush SVG (toilMakeupSvg).
+- Full-screen scenes: kit class `km-full` (j93.js, KIT §81b): no padding top/bottom, backdrop edge to edge, button sits on it; `--kmend-room` for content. Applied to reveal (ktrv-ov) and card flip (kcf). Podium footer cream band removed (j90.js). Reveal card now sits above the button.
+- Close-up: portrait patch no longer replaces the figure (it was a hard cut line mid-body): figure stays under it, portrait edges feather; card+figure fit Fold 755x1000, cover 412x1058, iPad 1180x820 / 1366x1024, 390x844 (geometry checked: card bottom < button top < viewport).
+## Tests
+dev/test/anchor-table.py (offline, all 5992 pictures: PASS 0 bad); dev/test/anchor-sheet.js (contact sheet through the game's own transform; 128 identity x age faces looked at: brows/cheeks/lips on the face, 0 misses; 60 random replaced sets looked at old vs new); mk-reveal.js; podium.js; quickcheck (see sha line below). Shots Fold + iPad of the reveal looked at.
+## COORDINATOR MUST, ON PASS (data lives on the CDN, not in git)
+`python3 dev/site/cdn_sync.py img/mk-fit img/toil-fit2.json` from a worktree that has img/mk-fit + img/toil-fit2.json (copy from dev/art/mkfit/*.json and dev/art/toil-fit2.json; the 0-byte-risk files are only the consort-*/player-look* ones). Until pushed, live code reads the old tables (new code + old data still works; old code + new data also fine). Old CDN copies: pull first if a rollback is wanted.
+## CLAIMS row
+| toil-reveal-fix (sonnet): anchors ONE table + 1210 displaced face meshes fixed, km-full scenes, close-up fit | review/toil-reveal-fix | main s29 | worker | READY | 17/11 |
+## Rollover
+No rollover needed. Not covered: maid/mama/thaihau mesh sets (not player faces) were not re-verified; run verify.py --only on them if wanted.
