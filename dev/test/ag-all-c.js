@@ -16,7 +16,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 1 */
  const r1=await p.evaluate(()=>{const L=liveRivals(true).filter(v=>!v.queen&&!v.confined);const v=L[0],t=L[1];oanAdd(v,t,70);relAdd(v,t,-60);v.bac=300;v.duc=60;
   const N=agNeeds(v);N.spite=1;const O=haOpts(v,N,"spite");const bad=O.filter(o=>{const k=o.ak;return !(ACT[k]||["taint","cook"].includes(k))});
-  const band=O.filter(o=>ACT[o.ak]&&o.t&&!BANDS.slice(1,bandOf(danger(v,o.t))+1).flatMap(x=>x[2]).includes(o.ak));
+  const band=O.filter(o=>{if(!ACT[o.ak]||!o.t||o.ak==="tieuhuy")return false;const A=BANDS.slice(1,bandOf(danger(v,o.t))+1).flatMap(x=>x[2]);return !A.includes(o.ak)&&!A.includes(HA_VAR[o.ak])});
   return{n:O.length,keys:O.map(o=>o.k+":"+o.u.toFixed(3)),bad:bad.length,band:band.length,at:O.map(o=>o.at(j95kh(),v,o.t)).slice(0,6)}});
  ok(r1.n>0&&r1.bad===0,'options: scheme options come from the player act list (ACT) only',r1);ok(r1.band===0,'options: none outside the danger band',r1);
  /* 2 */

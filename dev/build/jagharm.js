@@ -166,4 +166,4 @@ AD_HAP_T.deed="Có chuyện";
   S.adHap={b,L};const n=L.filter(h=>!h.done).length;const hk=b;if(HA.hk!==hk){HA.hk=hk;HA.hist.push(n);if(HA.hist.length>2000)HA.hist.shift()}return L};
  const f1=adHapFire1;adHapFire1=function(h,k){if(haOn()&&h){try{const D=S.adHapD;if(D&&h.kk)D.d[h.kk]=1}catch(e){}}return f1.apply(this,arguments)};
 })();
-Object.assign(window,{HA,haOpts,haLand,agHap,haOn});
+Object.assign(window,{HA,HA_VAR,haOpts,haLand,agHap,haOn});
