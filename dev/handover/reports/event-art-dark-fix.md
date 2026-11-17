@@ -270,3 +270,12 @@ lum LIVE0 -> NEW: taintpick 36->69, td1 37->71, tt3 37->77, toil-rival-jealous 4
 ## LIVE (relight method, C OK 12:33-12:40Z): ev-am-muu, ev-e68-poisonedfish, ev-toil-hh-scold, ev-plantpick (sample2) + batch A 11: rumoremplove, rumorfavor, rumorpreg, rumorth, spoiledfood, hhsummons, bordernews, stormnight, leakroof, ev-nc1, ev-news-tin-trong-cung. => all 11 of event-art #2's keys are now the RELIGHT version (LAB-lift interim replaced). LAB-lift versions of my 12 were NEVER uploaded.
 ## Re-classify pass (owner 12:3xZ: dark class = scheming + dangerous + SAD + dark-natured, incl. people pictures). Batch C (7 SAD keys, relight, NOT uploaded): batchC-sad-LIVE-NEW.jpg
 sickservant 140->80, servleave 162->80 (autumn kept), faminedonate 156->74, droughtprayer 154->71, letterhome 155->80, q72-doi-thuoc 135->76 (illness), toil-emp-dislike 158->76 (rejection). creations: VXw560xMMU, xSXzflCjfW, jUBnCONLD0, LwoYE6iswO, huZwTLovqL, KLDZmZZkqp, LwoYEM3swO. Classified by key meaning (event text not read for every key). Not re-classified (look normal/festive by name): fest/j71f festivals incl. Vu Lan, q72 gift/visit, wk minigames, tt1/tt2/vlout/thd1/runner/shop, intro panels other than td-2.
+
+## FINAL (C OK 12:48Z) — everything live is the Magnific RELIGHT version (no LAB-lift file was ever uploaded by this worker; event-art #2's 11 interim lifts were replaced)
+| group | keys | live method | lum |
+|---|---|---|---|
+| sample2 | ev-am-muu, ev-e68-poisonedfish, ev-toil-hh-scold, ev-plantpick | relight | 72/77/69/62 |
+| batch A (11) | ev-e68-{rumoremplove,rumorfavor,rumorpreg,rumorth,spoiledfood,hhsummons,bordernews,stormnight,leakroof}, ev-nc1, ev-news-tin-trong-cung | relight | 68-81 |
+| batch B (9) | ev-taintpick, ev-td1, ev-tt3, ev-toil-{rival-jealous,rival-tease,th-scold,crowd-jealous}, opt-giu-chan-hoang-thuong, intro/td-2 | relight | 69-80 |
+| batch C sad (7) | ev-e68-{sickservant,servleave,faminedonate,droughtprayer,letterhome}, ev-q72-doi-thuoc, ev-toil-emp-dislike | relight | 71-80 |
+Total 31 keys live. Not done (out of this round, credits): sad/dark re-class of festivals, q72 gift/visit, wk, tt1/tt2/vlout/thd1/runner/shop, other intro panels (see re-classify note above). Credits spent: 4 + 11 + 9 + 7 + 4(first full repaints, superseded) = ~35 gens x 40. Review sheets on CDN: none staged by me (sheets live in the handover branch only).
