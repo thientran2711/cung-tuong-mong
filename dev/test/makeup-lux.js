@@ -49,7 +49,7 @@ fs.mkdirSync(DIR,{recursive:true});
   const v=liveRivals(true).find(v=>!v.out&&!v.queen);const t0=traitsOf;let tr=["Kiêu ngạo"];traitsOf=x=>x===v?tr:t0(x);let likeA,nA,likeB,nB,fx;
   try{likeA=toilLvTasteOf(v);nA=toilLvTasteN(S,v);tr=["Khiêm nhường"];likeB=toilLvTasteOf(v);nB=toilLvTasteN(S,v);
   S.mkKnow=S.mkKnow||{p:{},th:{}};S.mkKnow.lv={};S.mkKnow.lv[toilTasteKey(v)]=1;tr=["Kiêu ngạo"];S.toilSeen=null;fx=toilFx(S,v,0,"ok")}finally{traitsOf=t0}
-  const ids=[];for(const h of liveRivals(true).slice(0,10))ids.push(toilLvTasteOf(h));const E=S.emp;delete (E.likes||{}).mkLv;try{discover()}catch(e){}
+  const ids=[];for(const h of liveRivals(true).slice(0,10))ids.push(toilLvTasteOf(h));const E=S.emp;delete (E.likes||{}).mkLv;E.known=E.known||{};delete E.known.mkLv;for(let i=0;i<60&&!E.known.mkLv;i++){try{discover()}catch(e){}}/* whenever "Nói thật lòng" reveals the row, the like exists */
   return{likeA,nA,likeB,nB,fx:fx&&fx.why,ids,emp:E.likes&&E.likes.mkLv,empLv:toilLvTasteOf("emp"),row:LIKEN.mkLv}});
  ck('lvTaste',K.likeA==="tuyet"&&K.nA===BAL_lvReact(0)&&K.likeB==="vua"&&K.nB===BAL_lvReact(1)&&(K.fx||[]).some(w=>/dung nhan Khuynh thành/.test(w[0]))&&!!K.emp&&!!K.empLv&&K.ids.every(x=>x===""||["vua","dep","tuyet"].includes(x)),K);
  function BAL_lvReact(i){return [1,-1][i]}

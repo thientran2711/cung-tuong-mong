@@ -30,9 +30,9 @@ Object.assign(BAL.toil,{
   pts:{toneOk:2,toneBad:-1,boldOk:1,boldBad:-1,moc:-3,needLv:-1},w:1.5,
   /* each person's liked tone: hash share < like[0] → đào cam, < like[1] → hồng tím, else none; react = thiện cảm when the tone is liked / disliked */
   like:[.4,.8],react:[1,-1],
-  /* makeup-lux: each person's liked LEVEL — by nết first (the first trait listed here wins), else hash share < lvLike[i] → TOIL_LVS[i+2]
+  /* makeup-lux: each consort's liked LEVEL — by nết first (the first trait listed here wins), else hash share < lvLike[i] → TOIL_LVS[i+2]
      (Đoan trang / Kiều diễm / Khuynh thành), else none. react: her level = lvReact[0]; two or more steps away (Vụng về counts as below Đoan trang) = lvReact[1] */
-  lvTrait:{"Khiêm nhường":"vua","Ân cần":"vua","Kín đáo":"vua","Kiêu ngạo":"tuyet","Tham vọng":"tuyet"},lvEmp:{mesac:"tuyet",nhantu:"vua",chamchinh:"vua"},
+  lvTrait:{"Khiêm nhường":"vua","Ân cần":"vua","Kín đáo":"vua","Kiêu ngạo":"tuyet","Tham vọng":"tuyet"},
   lvLike:[.25,.5,.75],lvReact:[1,-1],
   /* scouting the want (odds in the kit ladder): ma ma = o0 + Lòng × loyal; Tai mắt = o0 + Tai mắt × kMat +; cost = Bạc; Tâm cơ × tamco; hỏi người = o0 + thiện cảm × aff + Tâm cơ × tamco */
   scout:{mama:{cost:10,o0:55,loyal:.4},spy:{cost:15,o0:30,kMat:6,tamco:.2,need:1},ask:{need:25,o0:40,aff:.4,tamco:.2}},
@@ -55,8 +55,10 @@ function toilTasteOf(host){try{const B=BAL.toil.taste;
   if(host==="emp"){const E=S.emp;E.likes=E.likes||{};if(!E.likes.mk)E.likes.mk=LIKES.mk[mktH((E.name||"")+":mk")%2];return E.likes.mk===LIKES.mk[0]?"w":"c"}
   const nm=host==="th"?"th:"+((typeof pTH==="function"&&pTH()&&pTH().name)||""):host&&host.name?toilTasteKey(host)+":"+host.name:"";if(!nm)return"";
   const r=mktR(nm+":mktone");return r<B.like[0]?"w":r<B.like[1]?"c":""}catch(e){return""}}
-function toilTasteKnown(host){try{if(host==="emp")return !!(S.emp&&S.emp.known&&S.emp.known.mk);const k=toilTasteKey(host);return !!(k&&mktKnow().p[k])}catch(e){return false}}
-function toilTasteLearn(host){try{if(toilTasteKnown(host))return;const t=toilTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mk=true}else mktKnow().p[toilTasteKey(host)]=1;
+/* who = whose knowledge (S, or the co-op friend via her synced mkKnow; makeup-lux parity fix, the same as the liked level) */
+function toilTasteKnown(host,who){try{who=who||S;const K=who.mkKnow||{};const k=host==="emp"?"emp":toilTasteKey(host);if(k&&K.p&&K.p[k])return true;
+  return who===S&&host==="emp"&&!!(S.emp&&S.emp.known&&S.emp.known.mk)}catch(e){return false}}
+function toilTasteLearn(host){try{if(toilTasteKnown(host))return;const t=toilTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mk=true}mktKnow().p[host==="emp"?"emp":toilTasteKey(host)]=1;
   log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa son phấn ${TOIL_TONE[t]}.</span>`)}catch(e){}}
 /* the tone part of one host's judgement of person p's look today (0 = none): only a made face that shows its colours (not vụng / diêm dúa) */
 function toilTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);if(mk==="vung")return 0;
@@ -64,16 +66,18 @@ function toilTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToda
 /* ---------- makeup-lux: the per-person liked LEVEL (the same taste system: key, learn, known, surprise) ---------- */
 try{LIKES.mkLv=TOIL_LVS.slice(2).map(k=>"dung nhan "+TOIL_MK[k]);LIKEN.mkLv="Dung nhan"}catch(e){}
 function toilLvTasteOf(host){try{const B=BAL.toil.taste;
-  if(host==="emp"){const E=S.emp;E.likes=E.likes||{};if(!E.likes.mkLv){const T=E.traits||[];const t=Object.keys(B.lvEmp).find(k=>T.includes(k));
-    E.likes.mkLv=t?"dung nhan "+TOIL_MK[B.lvEmp[t]]:LIKES.mkLv[mktH((E.name||"")+":mklv")%LIKES.mkLv.length]}return TOIL_LVS.slice(2).find(k=>E.likes.mkLv==="dung nhan "+TOIL_MK[k])||""}
-  let T=[];try{T=host==="th"?traitsOf({kind:"th"}):host&&host!=="emp"?traitsOf(host):[]}catch(e){}
+  /* Hoàng thượng / Thái hậu: from the name hash only, like the liked tone — their traits are not one world value on both co-op seats */
+  if(host==="emp"){const E=S.emp;E.likes=E.likes||{};if(!E.likes.mkLv)E.likes.mkLv=LIKES.mkLv[mktH((E.name||"")+":mklv")%LIKES.mkLv.length];return TOIL_LVS.slice(2).find(k=>E.likes.mkLv==="dung nhan "+TOIL_MK[k])||""}
+  let T=[];try{T=host&&host!=="th"&&host!=="emp"?traitsOf(host):[]}catch(e){}
   const t=Object.keys(B.lvTrait).find(k=>T.includes(k));if(t)return B.lvTrait[t];
   const nm=host==="th"?"th:"+((typeof pTH==="function"&&pTH()&&pTH().name)||""):host&&host.name?toilTasteKey(host)+":"+host.name:"";if(!nm)return"";
   const r=mktR(nm+":mklv");for(let i=0;i<B.lvLike.length;i++)if(r<B.lvLike[i])return TOIL_LVS[i+2];return""}catch(e){return""}}
 /* Hoàng thượng's two makeup likes exist before "Nói thật lòng" can reveal them (j1 discover reads E.likes[k]) */
-(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{toilTasteOf("emp");toilLvTasteOf("emp")}catch(e){}return d0.apply(this,arguments)}})();
-function toilLvTasteKnown(host){try{if(host==="emp")return !!(S.emp&&S.emp.known&&S.emp.known.mkLv);const k=toilTasteKey(host);return !!(k&&mktKnow().lv&&mktKnow().lv[k])}catch(e){return false}}
-function toilLvTasteLearn(host){try{if(toilLvTasteKnown(host))return;const t=toilLvTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mkLv=true}else{const K=mktKnow();K.lv=K.lv||{};K.lv[toilTasteKey(host)]=1}
+(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{toilTasteOf("emp");toilLvTasteOf("emp")}catch(e){}const r=d0.apply(this,arguments);try{const K=mktKnow();if(S.emp.known&&S.emp.known.mkLv){K.lv=K.lv||{};K.lv.emp=1}if(S.emp.known&&S.emp.known.mk)K.p.emp=1}catch(e){}return r}})();
+/* who = whose knowledge (S, or the co-op friend: her mkKnow rides jcoopworld LOOK) — both seats then judge her the same way */
+function toilLvTasteKnown(host,who){try{who=who||S;const K=who.mkKnow||{};const k=host==="emp"?"emp":toilTasteKey(host);if(k&&K.lv&&K.lv[k])return true;
+  return who===S&&host==="emp"&&!!(S.emp&&S.emp.known&&S.emp.known.mkLv)}catch(e){return false}}
+function toilLvTasteLearn(host){try{if(toilLvTasteKnown(host))return;const t=toilLvTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mkLv=true}const K=mktKnow();K.lv=K.lv||{};K.lv[host==="emp"?"emp":toilTasteKey(host)]=1;
   log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa dung nhan ${toilMkW(t)}.</span>`)}catch(e){}}
 /* the level part of one host's judgement of p's look today (0 = none): a made face only; Vụng về sits below Đoan trang */
 function toilLvTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);
@@ -89,8 +93,8 @@ function toilTasteNote(){try{const L=[];const h=TOIL.st&&TOIL.st.hoi;if(h){const
 (function(){if(typeof toilFx!=="function")return;const f0=toilFx;toilFx=function(p,host,F,baseState){let r=f0.apply(this,arguments);try{
   if(!toilOn(p)||(p===S&&toilSeen(host)))return r;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);const mk=toilMk(rec);const hk=toilHostKind(host);const add=[];
   const U=BAL.toil.underOcc;if((F|0)>=U.F&&U.lv.includes(mk)&&!U.skip.includes(hk))add.push([`dung nhan ${toilMkW(mk)} (dịp lớn cần ${toilMkW("dep")} trở lên)`,U.n]);
-  const t=toilTasteN(p,host);if(t&&(p!==S||toilTasteKnown(host)))add.push([`son phấn ${TOIL_TONE[toilToneOf(rec.col)]} (${toilWho(host)} ${t>0?"ưa":"không ưa"})`,t]);
-  const tl=toilLvTasteN(p,host);if(tl&&(p!==S||toilLvTasteKnown(host)))add.push([`dung nhan ${toilMkW(mk)} (${toilWho(host)} ${tl>0?"ưa":"không ưa"})`,tl]);
+  const t=toilTasteN(p,host);if(t&&((p!==S&&!p.coop)||toilTasteKnown(host,p)))add.push([`son phấn ${TOIL_TONE[toilToneOf(rec.col)]} (${toilWho(host)} ${t>0?"ưa":"không ưa"})`,t]);
+  const tl=toilLvTasteN(p,host);if(tl&&((p!==S&&!p.coop)||toilLvTasteKnown(host,p)))add.push([`dung nhan ${toilMkW(mk)} (${toilWho(host)} ${tl>0?"ưa":"không ưa"})`,tl]);
   if(!add.length)return r;if(!r)r={aff:0,danh:0,duc:0,why:[],hk,dress:null,mk};const C=BAL.toil.cap;
   r.aff=Math.max(C[0],Math.min(C[1],r.aff+add.reduce((a,x)=>a+x[1],0)));r.why=r.why.concat(add);if(!r.aff&&!r.danh)return null}catch(e){console.error("mkt toilFx",e)}return r};window.toilFx=toilFx})();
 
