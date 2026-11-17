@@ -1,7 +1,7 @@
 PRIORITY #1 CHECK: brief s35-review-kit-figure-mood.md (OD tail 17/11 ~17:40Z) | main KIT 28.8d absent, pcPort seals only | review/kit-figure-mood c7d4b72a (this review) | claims kit-figure-mood MAIN s35.
 
-# review-kit-figure-mood r1 — PASS db262687
-Branch review/kit-figure-mood-r1 = c7d4b72a + merge origin/main b5d109fe (index.html/sw.js conflicts resolved by rebuild) + 1 small reviewer fix.
+# review-kit-figure-mood r1 — PASS dee2e13f
+Branch review/kit-figure-mood-r1 = c7d4b72a + merge origin/main 03a776e4 (earlier b5d109fe) (index.html/sw.js conflicts resolved by rebuild) + 1 small reviewer fix.
 
 ## Checks
 1. Kit only: ONE part kitFigSeal (jfigseal.js), seal = jemo emoBadge element (img.kemo), no per-screen CSS variant. PASS.
