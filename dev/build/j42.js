@@ -320,7 +320,7 @@ function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("s
 function srvHud2(){const el=$("hud2");if(!el)return;const col=el.classList.contains("col");const m=srvM();
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date","srk"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
  el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở rộng":"Thu gọn"}">${col?"▾":"▴"}</button>`+c("date",`T${S.month}/${S.year} · ${TUAN[S.tuan]}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${BAL.time.khac-used} khắc`)+c("srk",srvRkN(),"",S.srv.lau>0?"hot":"")
-  +c("tin","Chủ tin",S.tin,S.tin<30?"hot":S.tin>=60?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=BAL.ntRise.at?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
+  +c("tin","Chủ tin",S.tin,S.tin<BAL.tinLv.lo?"hot":S.tin>=BAL.tinLv.hi?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=BAL.ntRise.at?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
   +c("merit","Công lao",`${Math.floor(S.srv.mp)}/${(S.srv.rk+1)*5}`)+c("wage","Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc`)+c("age","Tuổi",`${S.age} · xuất cung ${S.srv.mama?BAL.srvAge.mama:BAL.srvAge.ask}`)
   +(S.srv.lau>0?c("lau","Tân Giả khố",`${S.srv.lau} tuần`,"hot"):"")+(S.srv.sec?c("sec","Biết chuyện của chủ",S.srv.sec,"hot"):"")+(S.srv.spyFor!=null?c("spy","Tai mắt cho người khác","","hot"):"")+(m?c("mis",`Chủ: ${m.name}`,m.trait):"")}
 (function(){const r0=render;render=function(){if(isSrv()&&!(tab in SRVTABS))tab="act";const r=r0.apply(this,arguments);try{srvTabs();if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
@@ -332,7 +332,7 @@ function srvMapFix(){const m=srvM(),mk=m&&palaceOf(m);document.querySelectorAll(
  const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";el.scrollTop=keep;kitFix(el)}})();
 function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf(m);const sn=S.srv.sent&&!S.srv.sent.done&&S.srv.sent.until>=bid()?S.srv.sent:null;
  if(S.srv.lau>0)return `<div class="srvhead">${mdH(pMe(),"sm")}<span><b>Cung nữ Tân Giả khố</b> · <b class="r">còn ${S.srv.lau} tuần</b> · giặt đủ thì được về sớm; hết hạn, Nội vụ phủ chia về hầu chủ mới.</span></div>`;
- return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<30?"r":S.tin>=60?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
+ return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<BAL.tinLv.lo?"r":S.tin>=BAL.tinLv.hi?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
 function srvRows(){const m=srvM();const need=(S.srv.rk+1)*5,mx=srvMax();const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
   row("Hoàng thượng để ý",`${S.nt}/100 · từ ${BAL.ntRise.at}, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(ntRiseOdds())}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
@@ -375,7 +375,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function srvMen(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&(m.age||0)>=18)}
 function srvAdult(m){return (S.age||0)>=18&&!!m&&(m.age||0)>=18}
 function srvRisk(k){const base={vuon:28,thu:34,tyv:20,tn:40,home:18}[k]||26;const eyes=liveRivals(true).reduce((s,v)=>s+(v.mat||0),0);return cl(Math.round(base+eyes-srvFriendList().length*4-(S.tamco||0)/10),6,92)}
-function srvBond(){const L=srvMen().filter(m=>m.tinh>=50&&m.rw!=="vương gia").sort((a,b)=>(b.tinh+(S.srv.vow===b.id?50:0))-(a.tinh+(S.srv.vow===a.id?50:0)));return L[0]||null}
+function srvBond(){const L=srvMen().filter(m=>m.tinh>=BAL.tinhLv.close&&m.rw!=="vương gia").sort((a,b)=>(b.tinh+(S.srv.vow===b.id?50:0))-(a.tinh+(S.srv.vow===a.id?50:0)));return L[0]||null}
 function srvSeen(m,n){S.srv.rumor=(S.srv.rumor||0)+n;const L=liveRivals(true).filter(v=>v!==srvM());if(L.length&&roll(50)){S.srv.leak=pick(L).id}log(`Có người thấy ngươi với ${m.name}. Lời ra tiếng vào.`)}
 function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme=m&&rivals.some(v=>v.alive&&v.affair===m.id);
  const pre=`${how} Cung nữ thuộc về cung cấm: tư tình là tội.`;
@@ -395,17 +395,17 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
  if(p.sk==="man"){const m=manById(p.mid);if(!m||!srvAdult(m))return A;const risk=srvRisk(S.place);
   T("Chào hỏi đúng lễ",100,"hắn quý ngươi +5",()=>{m.af+=5;return `${m.name} gật đầu đáp lễ.`});
   T("Liếc mắt đưa tình",od(55+S.sac/5),`tình ý của hắn +12 · có thể bị người thấy: ${chanceW(Math.round(risk/3))}`,ok=>{if(ok)m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
-  if(m.tinh>=30)T("Trao khăn tay, thư",od(60+S.tamco/5),"tình ý +15 · khăn thư là tang vật nếu bị lục",ok=>{if(ok){m.tinh+=15;m.letters++}if(roll(risk/4))srvSeen(m,1);return ok?"Hắn giấu vội vào tay áo.":"Hắn chần chừ không nhận."});
-  if(m.tinh>=50){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?cl(100-risk,5,95):0,`cần bạn canh cửa · đêm kín đáo: Sức +8, tình ý +10 · có thai: ${chanceW(10)} · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
+  if(m.tinh>=BAL.tinhLv.warm)T("Trao khăn tay, thư",od(60+S.tamco/5),"tình ý +15 · khăn thư là tang vật nếu bị lục",ok=>{if(ok){m.tinh+=15;m.letters++}if(roll(risk/4))srvSeen(m,1);return ok?"Hắn giấu vội vào tay áo.":"Hắn chần chừ không nhận."});
+  if(m.tinh>=BAL.tinhLv.close){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?cl(100-risk,5,95):0,`cần bạn canh cửa · đêm kín đáo: Sức +8, tình ý +10 · có thai: ${chanceW(10)} · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
     m.trysts++;m.tinh+=10;apply({suc:8});S.srv.lover=m.id;let r=`Đêm ấy rèm buông, đèn tắt; ${fr[0].name} canh ngoài hiên. Trời chưa sáng ngươi đã lẻn về.`;if(!S.srv.preg&&roll(10)){S.srv.preg=1;S.srv.pregM=0;r+=` <b class="r">Mấy hôm sau ngươi biết mình có thai.</b>`}return r},{lock:!fr.length,t:"cần một người bạn (quý ngươi từ 30) canh cửa",act:1});
    if(m.rw!=="vương gia"&&S.srv.vow!==m.id)T("Hẹn ước trăm năm",od(45+m.tinh/3),"hắn hứa chờ ngươi xuất cung · mở đường thành thân",ok=>{if(ok){S.srv.vow=m.id;return `${m.name} thề sẽ chờ ngươi.`}return "Hắn ngập ngừng, chưa dám hứa."})}
-  if(m.tinh>=30)T("Cắt đứt",100,"hắn thôi tơ tưởng; bớt hẳn rủi ro",()=>{m.tinh=0;if(S.srv.lover===m.id)S.srv.lover=null;if(S.srv.vow===m.id)S.srv.vow=null;return "Ngươi trả lại khăn tay."})}
+  if(m.tinh>=BAL.tinhLv.warm)T("Cắt đứt",100,"hắn thôi tơ tưởng; bớt hẳn rủi ro",()=>{m.tinh=0;if(S.srv.lover===m.id)S.srv.lover=null;if(S.srv.vow===m.id)S.srv.vow=null;return "Ngươi trả lại khăn tay."})}
  if((p.sk==="rv"||p.sk==="hh")&&p.ref){const v=RV(p.ref.id);if(v&&v!==mis&&(S.srv.knowAff||[]).includes(v.id)&&v.affair){const lm=manById(v.affair);
   T(`Dọa tố chuyện tư tình`,od(45+S.tamco/3),`Bạc +30 · nàng phải che chở ngươi · hỏng: nàng oán ngươi, tìm cách hại ngươi`,ok=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);if(ok){apply({bac:30});affAdd(v,S,BAL.eff.j42.top);S.srv.hold=v.id;return `${v.name} tái mặt, dúi bạc vào tay ngươi: “Câm miệng.”`}oanAdd(v,S,BAL.eff.j42.top_2);if(roll(35))srvLaundry(`${v.name} ra tay trước, vu cho ngươi ăn cắp.`,8);return `${v.name} cười lạnh.`},{act:1});
   if(mis)T(`Bẩm chủ chuyện của ${v.name}`,100,`Chủ tin +6 · ${mis.name} nắm 2 chứng cứ của ${v.name}`,()=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);/*evok: affair*/evA(mis,v,2);apply({tin:6});return `${mis.name} ghi nhớ.${lm?" Chuyện "+v.name+" với "+lm.name+" thành thanh gươm trong tay chủ.":""}`})}}}catch(e){console.error(e)}return A}})();
 /* the week: talk spreads, rivals use it; a token may be found */
 (function(){const w0=srvWeek;srvWeek=function(){w0.apply(this,arguments);try{if(!isSrv()||S.dead||Q.length)return;const mis=srvM();const lover=S.srv.lover&&manById(S.srv.lover);
- const hot=srvMen().filter(m=>m.tinh>=30);if(!hot.length&&!S.srv.rumor)return;
+ const hot=srvMen().filter(m=>m.tinh>=BAL.tinhLv.warm);if(!hot.length&&!S.srv.rumor)return;
  if(S.srv.leak&&roll(12)){const v=RV(S.srv.leak);if(v&&v.alive&&v!==mis){pushDil(mkP("cnvBlack",{r:v.id}),"Bị nắm thóp");return}}
  const m=lover||hot[0];if(m&&roll(1.5+(S.srv.rumor||0)*1.5+(mis&&mis.trait==="Đa nghi"?3:0)+m.letters*.5)){srvAffairCaught(m,`${mis?mis.name:"Quản sự"} lục rương, thấy khăn thư của ${m.name}.`)}}catch(e){console.error(e)}}})();
 /* the month: the pregnancy clock, grants, a prince's ask, NPC maids, consorts' own affairs */
@@ -415,7 +415,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
  if(!isSrv()||S.dead)return ev;S.srv.rumor=Math.max(0,(S.srv.rumor||0)-1);
  if(S.srv.preg){S.srv.pregM=(S.srv.pregM||0)+1;if(S.srv.pregM>=3){const m=manById(S.srv.lover)||srvBond();srvAffairCaught(m,"Bụng ngươi lộ rõ, cung nhân xì xào.");return ev}}
  if(S.age<18||S.srv.lau>0||Q.length)return ev;const mis=srvM();
- const pr=srvMen().find(m=>m.rw==="vương gia"&&m.tinh>=40);if(pr&&roll(6)){pushDil(mkP("cnvPrince",{m:pr.id}),"Vương gia xin người");return ev}
+ const pr=srvMen().find(m=>m.rw==="vương gia"&&m.tinh>=BAL.tinhLv.prince);if(pr&&roll(6)){pushDil(mkP("cnvPrince",{m:pr.id}),"Vương gia xin người");return ev}
  const thF=S.srv.thf||0;if((S.tin>=55||thF>=3)&&S.srv.rk>=1&&roll(2+(srvBond()?3:0)+thF)){const b=srvBond();pushDil(mkP("cnvGrant",{by:thF>=3&&roll(50)?"th":"mis",m:b&&roll(70)?b.id:null,w:R(WEDW.length)}),"Ban hôn")}}catch(e){console.error(e)}return ev}})();
 /* Đức Thọ cung errands earn the Thái hậu's eye (a grant may come from her) */
 (function(){const e0=srvErrandDone;srvErrandDone=function(){const sn=S.srv.sent;const r=e0.apply(this,arguments);if(sn&&sn.k==="tn"&&!S.thDead)S.srv.thf=(S.srv.thf||0)+1;return r}})();
@@ -432,7 +432,7 @@ PEND.cnvBlack=pp=>{const v=RV(pp.r),mis=srvM();if(!isSrv()||!v||!v.alive)return 
  return{t:`<p>Thái giám của ${v.name} chặn ngươi sau hòn non bộ: “Chuyện ngươi với nam nhân bên ngoài, chủ tử nhà ta biết cả. Muốn giữ mạng thì nghe lời.”</p>`,who:pv(v),o:[
   {n:"Nghe lời, làm tai mắt",fx:{},x:`thành tai mắt của ${v.name} (không bạc) · kèm: ${cnvSpyX(srvM()||{},1)}`,go:()=>{S.srv.spyFor=v.id;S.srv.leak=null}},
   {n:"Đút bạc bịt miệng",fx:{bac:-20},x:"lần này thôi; tin đồn bớt",go:()=>{S.srv.leak=null;S.srv.rumor=0}},
-  {n:"Mặc kệ",fx:{},x:`${word(40)} · thành: nàng không nói · hỏng: nàng mách ${mis?mis.name:"quản sự"}, bị lục rương`,go:()=>{if(!roll(40)){const m=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=30)[0];if(m)srvAffairCaught(m,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null}}]}};
+  {n:"Mặc kệ",fx:{},x:`${word(40)} · thành: nàng không nói · hỏng: nàng mách ${mis?mis.name:"quản sự"}, bị lục rương`,go:()=>{if(!roll(40)){const m=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=BAL.tinhLv.warm)[0];if(m)srvAffairCaught(m,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null}}]}};
 PEND.cnvGrant=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=pp.m&&manById(pp.m);const w=m?m.name:WEDW[pp.w||0];const by=pp.by==="th"&&!S.thDead?"Thái hậu":(srvM()?srvM().name:"Chủ nhân");
  return{t:`<p>${by} khen ngươi hầu hạ chu đáo, muốn ban gả ngươi cho <b>${w}</b>${m?`, người ngươi ${tinhW(m.tinh).replace("ngươi","")}`:""}.</p>`,who:pp.by==="th"?pTH():(srvM()?pv(srvM()):pMe()),o:[
   {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: được ban hôn",go:()=>over("Được ban hôn",`${by} ban gả ${S.name} cho ${w}. Ngươi rời cung có của hồi môn${m?", về với người mình thương":""}.`,`Được ${by} ban hôn cho ${w}`,true)},
@@ -445,7 +445,7 @@ PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return n
 (function(){const a0=PEND.cnvAge;PEND.cnvAge=pp=>{const d=a0(pp);try{const b=srvBond();if(d&&b)d.o.unshift({n:`Xuất cung thành thân với ${b.name}`,fx:{},x:`kết thúc kiếp này · ${b.name} ${tinhW(b.tinh)}`,go:()=>over("Thành thân",`${S.name} ${S.age} tuổi, rời cung theo lệ. Ngoài cửa Thần Vũ, ${b.name} đã đứng chờ. Hai người thành thân, sống nốt đời bên nhau.`,`Xuất cung thành thân với ${b.name}`)})}catch(e){}return d}})();
 (function(){const o0=over;over=function(h,t,fate,alive){if(isSrv()&&h==="Xuất cung"&&/30 tuổi/.test(t)){const b=srvBond();if(b){h="Thành thân";t+=` ${b.name} chờ ngươi ngoài cửa cung; hai người thành thân.`;fate=`Xuất cung thành thân với ${b.name}`}}return o0.call(this,h,t,fate,alive)}})();
 /* her road page shows her bonds */
-(function(){const r0=srvRows;srvRows=function(){const L=r0.apply(this,arguments);try{const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */const H=srvMen().filter(m=>m.tinh>=10||m.af>=10);
+(function(){const r0=srvRows;srvRows=function(){const L=r0.apply(this,arguments);try{const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */const H=srvMen().filter(m=>m.tinh>=BAL.tinhLv.known||m.af>=10);
  L.push(row("Nam nhân",H.length?H.map(m=>`${m.role} ${m.name.split(" ").slice(-2).join(" ")}: ${tinhW(m.tinh)}${S.srv.vow===m.id?" · đã hẹn ước":""}${S.srv.lover===m.id?" · tư tình":""}`).join("; "):"chưa quen ai (gặp ở vườn, điện, Thái y viện)"));
  if(S.srv.rumor||S.srv.leak)L.push(row("Lời đồn",`${S.srv.rumor||0}${S.srv.leak&&RV(S.srv.leak)?" · "+RV(S.srv.leak).name+" biết chuyện":""}`));
  if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · tháng thứ 3 thì lộ: bị đánh chết: ${chanceW(50)}, không thì bị đuổi khỏi cung`));

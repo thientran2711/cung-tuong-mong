@@ -116,7 +116,7 @@ const TS_DW=[[0,"yên"],[10,"có kẻ dòm ngó"],[30,"nhiều kẻ muốn hại
 function tsDWord(n){let w=TS_DW[0][1];for(const [a,b] of TS_DW)if(n>=a)w=b;return w}
 function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const facts=D.top.slice(0,6).map(x=>({who:x.v,text:`${kitName?kitName(x.v):x.v.name}: mức ${BANDS[x.b][1]} · đang ghen ${x.v.ghen||0} · oán ${Math.round(oan(x.v,S)||0)}`}));
- const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=30?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
+ const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=BAL.tsDanger.hot?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
   `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho","mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
  const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
@@ -142,12 +142,12 @@ PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const i
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<35)continue;const care=v.trait==="Đa nghi"?70:v.trait==="Kiêu ngạo"?15:40;if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)continue;const care=v.trait==="Đa nghi"?70:v.trait==="Kiêu ngạo"?15:40;if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
 (function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsOn()&&!S.out){const D=tsDangerOf(S,true);
-  el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=30?"hot":D.n<10?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
+  el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=BAL.tsDanger.hot?"hot":D.n<BAL.tsDanger.calm?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
  const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",TS_WARN,{sp:{srv:"f"},ls:S}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,

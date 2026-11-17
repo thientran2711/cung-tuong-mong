@@ -48,7 +48,7 @@ const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): a
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6}});
 /* ONE CORE r2 (review/one-core-land, 16/11): rule numbers of the modules that landed after review/one-core: story roads (jroute),
    origin arcs (jorigins), family house (jhouse), Tu duc lessons (jtds, jtd), small modules. One table per module; texts print the same key. */
@@ -285,3 +285,14 @@ Object.assign(BAL,{quyLv:[-30,-10,10,30,60],
  ducLv:{up:60,down:20,staffUp:70,staffDown:25,word:[20,40,60,80]},
  sungLv:{emp:[25,45,70],th:[30,55],kinh:[15,35,60],card:[10,30,60],kc:[30,60]}});
 function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3:v<q[4]?4:5}
+/* part 2 (review/one-core-dup2):
+   tinhLv  = a man's tình ý for the player (j22 / j42 / j24 / jmen): known 10 (shows), warm 30 (khăn tay, rumour), prince 40 (vương gia
+             asks for her), close 50 (meets alone, helps), ally 60 (vương gia ally), love 70 (word "si mê"); tinhW words on 10/30/50/70.
+   tinLv   = Chủ tin colour of the cung-nữ road (j42 chip + card): < lo red, ≥ hi green.
+   rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
+   sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
+   oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
+   tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
+   age.adult = the youngest adult in the game (owner OD:L104 18+; jage AGE_MIN lifts every adult below it). */
+Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60},rareLv:[6,9],
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,tsDanger:{hot:30,act:35,calm:10}});BAL.age.adult=18;

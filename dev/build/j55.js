@@ -40,7 +40,7 @@ function pMin(h){try{faceFor(h,"official",h.age||50)}catch(e){}const fb=fsrc(h.f
 
 /* ---------- can chính: the same risk for everyone who meddles ---------- */
 function ccRisk(a){return cl(Math.round(TD.ccBase+(a.cc||0)*TD.ccStep-(a.tamco||0)/10),3,45)}
-function ccWord(a){const r=ccRisk(a);return r>=30?"cao":r>=15?"vừa":"thấp"}
+function ccWord(a){return chanceLo(ccRisk(a))}/* ONE CORE: side chance → the Rất thấp … Rất cao scale (owner OD:L221, j1 chanceLvl); was its own 30/15 cao/vừa/thấp */
 function ccLine(a){return `lộ chuyện can chính (nguy cơ ${ccWord(a)}): cấm túc 1–3 tháng, Thái hậu với ${a===S?"ngươi":"nàng"} -8, Hoàng hậu với ${a===S?"ngươi":"nàng"} -5`}
 function ccStep(a){a.cc=(a.cc||0)+1;a.ccT=S.turn;if(!roll(ccRisk(a)))return"";a.cc=0;window.__tdOk=false;
  const q=queenP();if(a===S){apply({th:-8});if(q&&q!==S)apply({hh:-5})}else{a.th=(a.th||0)-8;if(q&&q!==a&&q!==S)affAdd(q,a,BAL.eff.j55.ccStep);if(q===S)affAdd(S,a,BAL.eff.j55.ccStep_2)}

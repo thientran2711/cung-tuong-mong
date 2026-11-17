@@ -65,7 +65,7 @@ function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BAND
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){if(n>0&&y===S&&x&&x!==S)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
-function oanMonth(){for(const v of rivals){const f=Math.round(2*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
+function oanMonth(){for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade)}
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
 (function(){const g0=giftVal;giftVal=function(it,r){let v=g0.apply(this,arguments);if(r&&typeof r==="object"&&r!==S){let m=persF(r,"gift",1);const lav=persF(r,"lavish",0);if(lav&&(it.pr||0)>=lav)m=Math.max(m,1.5);if(traitsOf(r).includes("Tham vọng")&&(S.rank>=r.rank||S.sung>=r.sung))m*=2;v=Math.max(1,Math.round(v*m))}return v}})();
 /* SOCIAL MENU: once a week each consort may do one non-harm deed, by her traits; the same menu toward her and toward anyone */

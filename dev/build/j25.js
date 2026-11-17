@@ -73,8 +73,8 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 /* her portrait in the death dialog is labelled by her name and rank */
 (function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);f.rw=(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n);return f}})();
 /* older eunuchs are not 'Tiểu': Lão X; servant names unique across all palaces */
-(function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=45&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}return r}})();
-(function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=45&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
+(function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}return r}})();
+(function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
 /* items without their own picture yet use the nearest picture; the proof bundle uses the proof icon */
 Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to-chau",demgam:"lua-hang-chau"});
 (function(){const i0=iic;iic=function(k,s){if(k==="chungcu")return ic("chung-cu",s||22);return i0.apply(this,arguments)}})();

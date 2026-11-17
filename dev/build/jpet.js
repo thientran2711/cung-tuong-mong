@@ -218,7 +218,7 @@ try{ACTDOM.thaopet="Mưu kế"}catch(e){}
 function petTile(P,i,big){const T=petT(P);const h=kitItem({src:petPSrc(P,big),name:big?"":T.n,grade:T.tr,gname:PET_TIER[T.tr],lux:petLux(P.t),size:big?"lg":"slot",on:!big&&S.petOn===i,onText:"Theo hầu",tip:`${T.n} · ${PET_TIER[T.tr]} · Xa xỉ ${petLux(P.t)}`});
  /* same tile as items: grade frame + colour, Ngự seal on Ngự tứ; the chip on the frame reads the pet tier (gname) */
  return h}
-function petCareW(P){const c=P.care||0;return c>=70?["Khỏe","g"]:c>=30?["Cần chăm","n"]:["Biếng ăn","r"]}
+function petCareW(P){const c=P.care||0;return c>=BAL.pet.life.careOk?["Khỏe","g"]:c>=BAL.pet.life.careLow?["Cần chăm","n"]:["Biếng ăn","r"]}
 /* LEFT COLUMN pet box (owner 16/11 16:55Z): directly under Y phục, same column width, slot = wear-slot size; name / age / effect as small lines.
    Shows the pet that follows her (else the first); 0 pets = one empty slot + "Chưa nuôi con nào". Tap = the Thú cưng sub-tab of Tư trang. */
 function petStageTxt(P){return typeof petStage==="function"&&BAL.pet&&BAL.pet.stages?BAL.pet.stages[petStage(P)]:""}

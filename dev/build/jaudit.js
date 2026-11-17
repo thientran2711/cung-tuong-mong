@@ -105,7 +105,7 @@ function aaHealthO(v){return cl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="fu
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||!(p.kind==="rival"||p.kind==="hh"))return A;
  const i=A.findIndex(a=>a&&a.n==="Hỏi han sức khỏe");if(i<0)return A;const n=(S.chat&&S.chat[v.id])?1:2;const ill=illOf(v)&&!illKnown(v);
  A[i]=Object.assign({},A[i],{x:`${pvQuy(v,n)}${ill?` · nàng có thể kể bệnh của mình: ${word(aaHealthO(v))}`:" · biết nàng khỏe hay yếu"}`,run:()=>{chatMark(v);affAdd(v,S,n);
-  let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=60?"tốt":v.suc>=30?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
+  let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=BAL.sucLv.ask[1]?"tốt":v.suc>=BAL.sucLv.ask[0]?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
 
 /* 9. "ban chết" on cards = what deathSentence (j8) really does; the odds word is the real one (it was forced to "Liều") */
 function aaDeathTxt(){if(S.turn<12&&!S.mercy)return"tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10";return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}

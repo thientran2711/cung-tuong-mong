@@ -17,7 +17,7 @@ function favorBook(full){kn();const P=consorts().filter(p=>!p.out).sort((a,b)=>b
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(v){kn();S.met[v.id]=wk();if(k==="spy"){const e0=v.ev;const r=d0.apply(this,arguments);if(v.ev>e0)noteAdd(v.id,`dò la được thêm 1 chứng cứ (nay ${v.ev}); Sủng ${v.sung}`);S.kf[v.id]={s:v.sung,n:(v.nightLog||[]).filter(w=>w>=S.turn*3).length,w:wk()};return r}}return d0.apply(this,arguments)}})();
 /* ladder words for feelings */
 function affW(v){return quyW(v)}/* ONE CORE: the VANPHONG "quý" word (jhc quyW, BAL.quyLv); was its own 7-word ladder with Thù / Lạnh nhạt / Thân */
-function oanW(v){return v<=10?"Không oán":v<30?"Hơi oán":v<60?"Oán":"Thù sâu"}
+/* (ONE CORE: dead second oán ladder 10/30/60 removed; the live one is jhc window.oanW on BAL.oanLv) */
 function fbar(v,lo,hi,good){const pc=cl((v-lo)/(hi-lo)*100,0,100);return `<span class="fbar"><u class="${good?"g":"r"}" style="width:${pc}%"></u></span>`}
 function feel(a,o){return a==null?`<span class="ef n">chưa rõ</span>`:`<span class="ef ${a>BAL.quyLv[2]?"g":a<BAL.quyLv[1]?"r":"n"}">${affW(a)} · ${a>0?"+":""}${a}</span>${fbar(a,-100,100,a>=0)} <span class="ef ${o>=30?"r":o>10?"r":"n"}">${oanW(o)} · ${Math.round(o)}</span>${fbar(o,0,100,false)}`}
 function pron(p){return p==="emp"?"ngài":p==="th"?"người":"nàng"}

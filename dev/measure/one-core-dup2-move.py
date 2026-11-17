@@ -43,6 +43,31 @@ for l in (277,596):rule('jkc.js',l,r'v\.sung>=60\?"rất cao":v\.sung>=30\?','v.
 rule('jne.js',225,r's>=6\?"warm":s>=3\?','s>=BAL.nightEnd.warm?"warm":s>=BAL.nightEnd.normal?',1)
 rule('j8.js',311,r'\bs>=6\?','s>=BAL.nightEnd.warm?',1);rule('j8.js',311,r'\bs>=3\?','s>=BAL.nightEnd.normal?',1)
 rule('j75.js',140,r'sc>=6\?"đêm vui":sc>=3\?','sc>=BAL.nightEnd.warm?"đêm vui":sc>=BAL.nightEnd.normal?',1)
+PART2=[]
+def rule2(f,l,rx,m,n=None):PART2.append((f,l,rx,m,n))
+# --- part 2 (second commit) ---
+TIN={'10':'known','30':'warm','40':'prince','50':'close','60':'ally','70':'love'}
+TRX=r'(\btinh\s*(?:>=|<|>)\s*)(10|30|40|50|60)\b'
+for fl in "j22:23 j22:24 j22:25 j22:48 j42:378 j42:398 j42:399 j42:402 j42:408 j42:418 j42:435 j42:448 j24:43 j24:45 jmen:240".split():
+ f,l=fl.split(':');rule2(f+'.js',int(l),TRX,('tinhLv',TIN))
+rule2('j22.js',13,r'(\bt>=)(70|50|30|10)\b',('tinhLv',TIN),4)
+rule2('j42.js',323,r'S\.tin<30\?"hot":S\.tin>=60\?','S.tin<BAL.tinLv.lo?"hot":S.tin>=BAL.tinLv.hi?',1)
+rule2('j42.js',335,r'S\.tin<30\?"r":S\.tin>=60\?','S.tin<BAL.tinLv.lo?"r":S.tin>=BAL.tinLv.hi?',1)
+rule2('jpet.js',221,r'c>=70\?\["Khỏe","g"\]:c>=30\?','c>=BAL.pet.life.careOk?["Khỏe","g"]:c>=BAL.pet.life.careLow?',1)
+rule2('j69.js',21,r'w<=6\?"Rất hiếm":w<=9\?','w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?',1)
+rule2('jk2b.js',638,r'w<=6\?"Rất hiếm":w<=9\?','w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?',1)
+rule2('jthaiy.js',50,r's>=70\?(.{0,30}?)s>=50\?(.{0,30}?)s>=30\?',r's>=BAL.sucLv.word[2]?\1s>=BAL.sucLv.word[1]?\2s>=BAL.sucLv.word[0]?',1)
+rule2('jaudit.js',108,r'v\.suc>=60\?"tốt":v\.suc>=30\?','v.suc>=BAL.sucLv.ask[1]?"tốt":v.suc>=BAL.sucLv.ask[0]?',1)
+rule2('j25.js',76,r's\.age>=45&&','s.age>=BAL.srvAge.old&&',1)
+rule2('j25.js',77,r's\.age>=45\b','s.age>=BAL.srvAge.old',1)
+rule2('jage.js',4,r'const AGE_MIN=18;','const AGE_MIN=BAL.age.adult;',1)
+rule2('j28.js',68,r'Math\.round\(2\*persF','Math.round(BAL.oanFade*persF',1)
+rule2('j28.js',68,r'S\.ro\[k\]-2\)','S.ro[k]-BAL.oanFade)',1)
+rule2('jts.js',119,r'D\.n>=30\?"r"','D.n>=BAL.tsDanger.hot?"r"',1)
+rule2('jts.js',145,r'D\.n<35\)continue','D.n<BAL.tsDanger.act)continue',1)
+rule2('jts.js',150,r'D\.n>=30\?"hot":D\.n<10\?','D.n>=BAL.tsDanger.hot?"hot":D.n<BAL.tsDanger.calm?',1)
+rule2('j55.js',43,r'function ccWord\(a\)\{const r=ccRisk\(a\);return r>=30\?"cao":r>=15\?"vừa":"thấp"\}','function ccWord(a){return chanceLo(ccRisk(a))}/* ONE CORE: side chance → the Rất thấp … Rất cao scale (owner OD:L221, j1 chanceLvl); was its own 30/15 cao/vừa/thấp */',1)
+rule2('j21.js',20,r'^function oanW\(v\)\{return v<=10\?"Không oán":v<30\?"Hơi oán":v<60\?"Oán":"Thù sâu"\}$','/* (ONE CORE: dead second oán ladder 10/30/60 removed; the live one is jhc window.oanW on BAL.oanLv) */',1)
 def apply():
  files={};tot=0;bad=[]
  for f,l,rx,m,n in R:
@@ -57,4 +82,5 @@ def apply():
  for f,L in files.items():open(os.path.join(D,f),'w',encoding='utf-8').write('\n'.join(L))
  print('replaced',tot,'in',len(files),'files');
  if bad:print('CHECK\n '+'\n '.join(bad));sys.exit(1)
+R[:]=PART2 if '--part2' in sys.argv else R
 apply()

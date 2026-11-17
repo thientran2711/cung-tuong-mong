@@ -635,7 +635,7 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
    kitRoulette({items:[{k,src,wide,name,rare}], target:k, toEl:()=>element, done:fn}). Test state: window.__kroulStep (0 up · 1 shuffling · 2 pick · 3 shown). ---------- */
 const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
 const KIT_CARDBACK="img/kit/card-back.webp";
-function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
+function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
 function kitOriginFace(it){return `<div class="kra">${kitSceneArt(it.wide||it.src,"",{shape:"wide",fb:it.src})}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span>`}
 /* ONE FIT for every origin / identity card grid (owner 16/11 s23: "to ra, trải dài hết cái màn nền"): the cards grow to span the background width
