@@ -64,6 +64,10 @@ function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="st
 /* palace voice: {goi}/{Goi} = how the beat's speaker w calls her, {xung}/{Xung} = the speaker's self word (jvoice kAddr, one core) */
 function sp67(w,A){try{if(w==="emp"||w==="th"||w==="hh")return w;if(w==="v"||w==="v2"){const v=rv67(A,w);if(v)return v}if(w==="eun")return{srv:"m"};if(w==="doc")return{role:"x",rw:"quan"}}catch(e){}return{srv:"f"}}
 function fill67(s,A,w){if(typeof s==="string")arcReveal67(s,A);return String(typeof s==="function"?s(A):s||"").replace(/\{([Gg]oi|[Xx]ung)\}/g,(m,k)=>{const a=kAddr(sp67(w,A),S);const x=k.toLowerCase()==="goi"?a.goi:a.xung;return k[0]===k[0].toUpperCase()?x.charAt(0).toUpperCase()+x.slice(1):x}).replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
+/* VOICE BY TÍNH TÌNH (W-C): after the hand-written beat text, one sentence in the tone of the beat's speaker (a rival v / v2, Hoàng hậu, her maid) waiting for her answer (jtone_c.js beatWait) */
+function wait67(b,A){try{const w=b&&b.w;if(!window.TONE_POOL||!TONE_POOL.beatWait)return"";let p=null,n="";
+ if(w==="v"||w==="v2"){p=rv67(A,w);n=p&&p.name}else if(w==="hh"&&typeof qOn==="function"&&qOn()){p=rivals[0];n="Hoàng hậu"}else if(w==="maid"&&S.maid){p=S.maid;n=S.maid.name}
+ if(!p||!n)return"";const l=kLine("beat67:wait",TONE_POOL.beatWait,{about:p});return l?` <span class="past">${n} ${l}.</span>`:""}catch(e){return""}}
 function who67(w,A){try{switch(w){
  case"v":case"v2":{const v=rv67(A,w);return v?pv(v):null}
  case"th":return S.thDead?null:pTH();case"emp":return pEmp();case"hh":return qOn()?pv(rivals[0]):null;case"maid":return S.maid?pMaid():null;case"me":return pMe();
@@ -115,7 +119,7 @@ function ap67(o){if(!o)return;apply(o);if(S.tin!=null)S.tin=cl(S.tin,0,100);if(S
 function txt67(o){return Object.assign({},o||{})}
 PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==p.b||A.done)return null;const a=ARC67[A.a],b=beatDef67(A,p.b);if(!b)return null;
  const O=opts67(A,b);const step=A.i+1,n=A.seq.length;
- return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A,b.w)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
+ return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A,b.w)}${wait67(b,A)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
   const cm=t=>String(t).replace(/, /g," – "),G=t=>t?`<span class="g">${cm(t)}</span>`:"",Rd=t=>t?`<span class="r">${cm(t)}</span>`:"";const gain=[fmt(o.w||{}),G(fill67(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
   const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;/* an ending no roll decides (sure option, or the same ending either way) can still turn in a 14-chapter life (jst14 f14Hold, OD:L1253).
      VANPHONG: the act ladder (Liều…Nắm chắc) is ONLY the act's own success odds (a sure act carries no word); the chance that the ending turns is a side

@@ -219,6 +219,8 @@ function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
    4 ma ma, 3 cô cô) · age range at the start · names (the first holds the post at the start; successors take the next) · call = how
    the palace addresses her · tr (STR temperament key) · duties (shown on her card) */
 BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
+ /* say = the cuts of the office holder's greeting pool (jstaff): tn = Thái hậu thiện cảm [hi from, mid from]; kn = Hoàng hậu thiện cảm [hi from, mid above] (review/one-core-dup3-land) */
+ say:{tn:[30,0],kn:[10,-10]},
  /* FRAME NARRATOR (owner 16/11 19:23Z s22, kit-size #4): a kit frame without its own person is told by the named palace official whose
     office covers that topic. ONE map (kind of the frame → post id gt / tn / kn, or the Emperor's eunuchs tq / ksp; "maid" = her thân tín
     maid, "me" = the player, where no office fits). Read by jksize kszWho3. */

@@ -171,7 +171,7 @@ function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.le
  if(a.open){a.open();render();return}
  S.visit.tk[popIdx]=1;const s0=S.logSeq||0;const ok=runOpt(a);
  /* two forms from one line (jvoice kGL / kLitLog): the Sổ ghi line and this card note carry the literary sentence, the result card only the facts */
- let lit="";try{lit=kLitLog(s0,kOutcome(p.kind,ok))}catch(e){}
+ let lit="";try{lit=kLitLog(s0,kOutcome(p.kind,ok,p))}catch(e){}
  popMsg=`${a.n}: ${ok?'<span class="g">thành</span>':'<span class="r">hỏng</span>'}. ${lit?kGL("",lit):""}${fmt(ok?a.w:a.l)}`;render()}
 
 /* arts */
