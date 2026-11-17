@@ -907,4 +907,4 @@
 | REVIEW hoa-dien fa483a8ed delta on makeup-lux (opus BIG; brief briefs/review-hoa-dien.md) | review/hoa-dien-r1 | B | session_01N1tNP4LhhQaE7j3FQW5NGV | RUNNING | 17/11 18:40Z |
 | REVIEW ag-all-2 r2 (opus BIG) of 6badc4d4 | review/ag-all-2-r2 | C-AG | session_01UV1SzibgyTxRDxLdJ5yW6t | RUNNING | 17/11 18:36Z |
 | DISPLAY SHELF builder #2 (opus): 70 items + OD L1678 (d) + rebase → SẴN SÀNG KIỂM | review/display-shelf | C-AG | session_01UV1Szj9tDw8PAVnkXJ7CYJ | RUNNING | 17/11 18:41Z |
-| REVIEW kit-fx-register r1 of 893b3f45 (sonnet SMALL; brief briefs/s36-review-kit-fx-register.md) | review/kit-fx-register-r1 | MAIN s36 | (opening) | RUNNING | 17/11 18:44Z |
+| REVIEW kit-fx-register r1 of 893b3f45 (sonnet SMALL; brief briefs/s36-review-kit-fx-register.md) | review/kit-fx-register-r1 | MAIN s36 | session_01UV1SzjbQtX54oMDpW6uSfe | RUNNING | 17/11 18:44Z |
